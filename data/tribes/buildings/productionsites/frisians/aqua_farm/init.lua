@@ -19,16 +19,23 @@ tribes:new_productionsite_type {
       log = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {49, 88},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "idle",
+         hotspot = {40, 71},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
       unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {49, 66},
-      },
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {40, 53}
+      }
    },
 
    aihints = {
@@ -42,15 +49,17 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "fruit", amount = 8 },
-      { name = "water", amount = 8 },
+      { name = "water", amount = 5 },
+      { name = "fruit", amount = 2 },
    },
+
    outputs = {
       "fish"
    },
 
    indicate_workarea_overlaps = {
       frisians_aqua_farm = false,
+      frisians_charcoal_burners_house = false,
       frisians_clay_pit = true,
    },
 

@@ -36,8 +36,7 @@ void NetHostProxy::close(const ConnectionId id) {
 		// Not connected anyway
 		return;
 	}
-	conn_->send(RelayCommand::kDisconnectClient);
-	conn_->send(id);
+	conn_->send(NetPriority::kNormal, RelayCommand::kDisconnectClient, id);
 	if (iter_client->second.received_.empty()) {
 		// No pending messages, remove the client
 		clients_.erase(iter_client);
@@ -86,67 +85,59 @@ std::unique_ptr<RecvPacket> NetHostProxy::try_receive(const ConnectionId id) {
 	return packet;
 }
 
-void NetHostProxy::send(const ConnectionId id, const SendPacket& packet) {
+void NetHostProxy::send(const ConnectionId id, const SendPacket& packet, NetPriority priority) {
 	std::vector<ConnectionId> vec;
 	vec.push_back(id);
-	send(vec, packet);
+	send(vec, packet, priority);
 }
 
-void NetHostProxy::send(const std::vector<ConnectionId>& ids, const SendPacket& packet) {
+void NetHostProxy::send(const std::vector<ConnectionId>& ids,
+                        const SendPacket& packet,
+                        NetPriority priority) {
 	if (ids.empty()) {
 		return;
 	}
 
 	receive_commands();
 
-	bool has_connected_client = false;
+	std::vector<uint8_t> active_ids;
 	for (ConnectionId id : ids) {
 		if (is_connected(id)) {
 			// This should be but is not always the case. It can happen that we receive a client
 			// disconnect
 			// on receive_commands() above and the GameHost did not have the chance to react to it yet.
-			has_connected_client = true;
+			active_ids.push_back(id);
 		}
 	}
-	if (!has_connected_client) {
+	if (active_ids.empty()) {
 		// Oops, no clients left to send to
 		return;
 	}
 
-	conn_->send(RelayCommand::kToClients);
-	for (ConnectionId id : ids) {
-		if (is_connected(id)) {
-			conn_->send(id);
-		}
-	}
-	conn_->send(0);
-	conn_->send(packet);
+	active_ids.push_back(0);
+	conn_->send(priority, RelayCommand::kToClients, active_ids, packet);
 }
 
 NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses,
                            const std::string& name,
                            const std::string& password)
-   : conn_(NetRelayConnection::connect(addresses.first)) {
+   : conn_(BufferedConnection::connect(addresses.first)) {
 
 	if ((conn_ == nullptr || !conn_->is_connected()) && addresses.second.is_valid()) {
-		conn_ = NetRelayConnection::connect(addresses.second);
+		conn_ = BufferedConnection::connect(addresses.second);
 	}
 
 	if (conn_ == nullptr || !conn_->is_connected()) {
 		return;
 	}
 
-	conn_->send(RelayCommand::kHello);
-	conn_->send(kRelayProtocolVersion);
-	conn_->send(name);
-	conn_->send(password);
-	conn_->send(password);
+	conn_->send(NetPriority::kNormal, RelayCommand::kHello, kRelayProtocolVersion, name, password);
 
 	// Wait 10 seconds for an answer
 	time_t endtime = time(nullptr) + 10;
-	while (!NetRelayConnection::Peeker(conn_.get()).cmd()) {
+	while (!BufferedConnection::Peeker(conn_.get()).cmd()) {
 		if (time(nullptr) > endtime) {
-			// No message received in time
+			log("[NetHostProxy] Handshaking error (1): No message from relay server in time\n");
 			conn_->close();
 			conn_.reset();
 			return;
@@ -157,6 +148,9 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses,
 	conn_->receive(&cmd);
 
 	if (cmd != RelayCommand::kWelcome) {
+		log("[NetHostProxy] Handshaking error (2): Received command code %i from relay server "
+		    "instead of Welcome (%i)\n",
+		    static_cast<uint8_t>(cmd), static_cast<uint8_t>(RelayCommand::kWelcome));
 		conn_->close();
 		conn_.reset();
 		return;
@@ -164,9 +158,9 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses,
 
 	// Check version
 	endtime = time(nullptr) + 10;
-	while (!NetRelayConnection::Peeker(conn_.get()).uint8_t()) {
+	while (!BufferedConnection::Peeker(conn_.get()).uint8_t()) {
 		if (time(nullptr) > endtime) {
-			// No message received in time
+			log("[NetHostProxy] Handshaking error (3): No message from relay server in time\n");
 			conn_->close();
 			conn_.reset();
 			return;
@@ -175,6 +169,9 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses,
 	uint8_t relay_proto_version;
 	conn_->receive(&relay_proto_version);
 	if (relay_proto_version != kRelayProtocolVersion) {
+		log("[NetHostProxy] Handshaking error (4): Relay server uses protocol version %i instead of "
+		    "our version %i\n",
+		    static_cast<uint8_t>(relay_proto_version), static_cast<uint8_t>(kRelayProtocolVersion));
 		conn_->close();
 		conn_.reset();
 		return;
@@ -182,9 +179,9 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses,
 
 	// Check game name
 	endtime = time(nullptr) + 10;
-	while (!NetRelayConnection::Peeker(conn_.get()).string()) {
+	while (!BufferedConnection::Peeker(conn_.get()).string()) {
 		if (time(nullptr) > endtime) {
-			// No message received in time
+			log("[NetHostProxy] Handshaking error (5): No message from relay server in time\n");
 			conn_->close();
 			conn_.reset();
 			return;
@@ -193,10 +190,14 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses,
 	std::string game_name;
 	conn_->receive(&game_name);
 	if (game_name != name) {
+		log("[NetHostProxy] Handshaking error (6): Relay wants to connect us to game '%s' instead of "
+		    "our game '%s'\n",
+		    game_name.c_str(), name.c_str());
 		conn_->close();
 		conn_.reset();
 		return;
 	}
+	log("[NetHostProxy] Handshaking with relay server done\n");
 }
 
 void NetHostProxy::receive_commands() {
@@ -217,7 +218,7 @@ void NetHostProxy::receive_commands() {
 
 	// Receive all available commands
 	RelayCommand cmd;
-	NetRelayConnection::Peeker peek(conn_.get());
+	BufferedConnection::Peeker peek(conn_.get());
 	if (!peek.cmd(&cmd)) {
 		// No command to receive
 		return;
@@ -278,8 +279,7 @@ void NetHostProxy::receive_commands() {
 			uint8_t seq;
 			conn_->receive(&seq);
 			// Reply with a pong
-			conn_->send(RelayCommand::kPong);
-			conn_->send(seq);
+			conn_->send(NetPriority::kPing, RelayCommand::kPong, seq);
 		}
 		break;
 	case RelayCommand::kRoundTripTimeResponse:
@@ -288,7 +288,8 @@ void NetHostProxy::receive_commands() {
 	default:
 		// Other commands should not be possible.
 		// Then is either something wrong with the protocol or there is an implementation mistake
-		log("Received command code %i from relay server, do not know what to do with it\n",
+		log("[NetHostProxy] Received command code %i from relay server, do not know what to do with "
+		    "it\n",
 		    static_cast<uint8_t>(cmd));
 		NEVER_HERE();
 	}

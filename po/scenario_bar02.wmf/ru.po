@@ -4,6 +4,7 @@
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Anton Khabarov <2233009@gmail.com>, 2015,2017
+# Viktor S <awsswa59@gmail.com>, 2019
 # Yuriy Sokolov <lention@mail.ru>, 2015
 # Владимир Куряев <istercul@gmail.com>, 2016
 # Олег Шевченко <olegrock@gmail.com>, 2017
@@ -12,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
-"PO-Revision-Date: 2019-08-10 17:15+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2019-09-06 07:24+0000\n"
+"PO-Revision-Date: 2019-09-12 05:29+0000\n"
+"Last-Translator: Viktor S <awsswa59@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -651,12 +652,12 @@ msgstr "Вождь, вспомни о несчастных носильщика�
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgstr ""
+msgstr "Новое задание"
 
 #: ../../data/scripting/richtext_scenarios.lua:93
 msgid "New Objectives"
-msgstr ""
+msgstr "Новые задания"

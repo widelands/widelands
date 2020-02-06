@@ -9,7 +9,7 @@ tribes:new_ware_type {
    icon = dirname .. "menu.png",
    default_target_quantity = {
       atlanteans = 40,
-      empire = 40
+      empire = 20
    },
    preciousness = {
       atlanteans = 10,

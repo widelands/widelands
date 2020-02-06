@@ -108,6 +108,9 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 	if (!load_or_save_.table().empty()) {
 		load_or_save_.table().select(0);
 	}
+
+	load_or_save_.table().cancel.connect(
+	   boost::bind(&FullscreenMenuLoadGame::clicked_back, boost::ref(*this)));
 }
 
 void FullscreenMenuLoadGame::layout() {
@@ -145,9 +148,13 @@ void FullscreenMenuLoadGame::clicked_ok() {
 	}
 
 	std::unique_ptr<SavegameData> gamedata = load_or_save_.entry_selected();
-	if (gamedata && gamedata->errormessage.empty()) {
-		filename_ = gamedata->filename;
-		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
+	if (gamedata->is_directory()) {
+		load_or_save_.change_directory_to(gamedata->filename);
+	} else {
+		if (gamedata && gamedata->errormessage.empty()) {
+			filename_ = gamedata->filename;
+			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
+		}
 	}
 }
 

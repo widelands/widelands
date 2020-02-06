@@ -102,6 +102,7 @@ Window::Window(Panel* const parent,
 	set_top_on_click(true);
 	set_layout_toplevel(true);
 	layout();
+    focus();
 
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 				[this](const GraphicResolutionChanged& note) {
@@ -380,7 +381,8 @@ bool Window::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my) {
 	//  TODO(unknown): This code is erroneous. It checks the current key state. What it
 	//  needs is the key state at the time the mouse was clicked. See the
 	//  usage comment for get_key_state.
-	if ((SDL_GetModState() & KMOD_CTRL && btn == SDL_BUTTON_LEFT) || btn == SDL_BUTTON_MIDDLE)
+	if ((SDL_GetModState() & KMOD_CTRL && btn == SDL_BUTTON_LEFT && my < VT_B_PIXMAP_THICKNESS) ||
+	    btn == SDL_BUTTON_MIDDLE)
 		is_minimal() ? restore() : minimize();
 	else if (btn == SDL_BUTTON_LEFT) {
 		dragging_ = true;
@@ -415,6 +417,25 @@ bool Window::handle_mousewheel(uint32_t, int32_t, int32_t) {
 	// Mouse wheel events should not propagate to objects below us, so we claim
 	// that they have been handled.
 	return true;
+}
+
+bool Window::handle_key(bool down, SDL_Keysym code) {
+	// Handles a key input and event and will close when pressing ESC
+
+	if (down) {
+		switch (code.sym) {
+		case SDLK_ESCAPE: {
+			die();
+			Panel* ch = get_next_sibling();
+			if (ch != nullptr)
+				ch->focus();
+			return true;
+		}
+		default:
+			break;
+		}
+	}
+	return UI::Panel::handle_key(down, code);
 }
 
 /**

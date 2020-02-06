@@ -49,6 +49,7 @@ option(OPTION_GLEW_STATIC "Use static GLEW Library" OFF)
 option(OPTION_BUILD_WEBSITE_TOOLS "Build website-related tools" ON)
 option(OPTION_BUILD_TRANSLATIONS "Build translations" ON)
 option(OPTION_BUILD_TESTS "Build tests" ON)
+option(OPTION_BUILD_CODECHECK "Build codecheck" ON)
 
 option(USE_XDG "Follow XDG-Basedir specification" ON) # Enabled by default
 IF(USE_XDG AND NOT APPLE AND NOT WIN32)
@@ -177,8 +178,8 @@ endif()
 wl_add_flag(WL_GENERIC_CXX_FLAGS "-std=c++11")
 
 if(OPTION_ASAN)
-  message(STATUS "Using AddressSanitizer http://clang.llvm.org/docs/AddressSanitizer.html")
-  # See http://clang.llvm.org/docs/AddressSanitizer.html
+  message(STATUS "Using AddressSanitizer https://clang.llvm.org/docs/AddressSanitizer.html")
+  # See https://clang.llvm.org/docs/AddressSanitizer.html
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-fsanitize=address")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-fno-omit-frame-pointer")
   set (CMAKE_EXE_LINKER_FLAGS "-fsanitize=address" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
@@ -311,7 +312,7 @@ if (OPTION_BUILD_TESTS)
 
   # Run a test after a normal compile. This magic is needed as 'make test' will
   # not rebuild tests:
-  # http://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests
+  # https://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests
   add_custom_target(_run_all_tests ALL
     COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
@@ -396,3 +397,7 @@ install(
   CONFIGURATIONS Debug;Release
   COMPONENT CoreLanguageFiles
 )
+
+if (UNIX AND NOT APPLE)
+  add_subdirectory(xdg)
+endif (UNIX AND NOT APPLE)

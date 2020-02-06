@@ -30,7 +30,7 @@
 
 namespace Widelands {
 
-struct Fleet;
+struct ShipFleet;
 struct RoutingNodeNeighbour;
 struct Ship;
 class Warehouse;
@@ -68,7 +68,7 @@ private:
  * port that is on a land bridge and therefore close to two
  * disconnected bodies of water. Such a port would have to have
  * two PortDock that belong to the same @ref Warehouse, but have
- * separate @ref Fleet instances.
+ * separate @ref ShipFleet instances.
  * However, we expect this to be such a rare case that it is not
  * implemented at the moment.
  */
@@ -82,13 +82,13 @@ public:
 	void add_position(Widelands::Coords where);
 	Warehouse* get_warehouse() const;
 
-	Fleet* get_fleet() const {
+	ShipFleet* get_fleet() const {
 		return fleet_;
 	}
 	PortDock* get_dock(Flag& flag) const;
 	uint32_t get_need_ship() const;
 
-	void set_economy(Economy*) override;
+	void set_economy(Economy*, WareWorker) override;
 
 	int32_t get_size() const override;
 	bool get_passable() const override;
@@ -109,13 +109,13 @@ public:
 
 	void shipping_item_arrived(Game&, ShippingItem&);
 	void shipping_item_returned(Game&, ShippingItem&);
-	void ship_coming(bool affirmative);
+	void ship_coming(Ship&, bool affirmative);
 	void ship_arrived(Game&, Ship&);
 
 	void log_general_info(const EditorGameBase&) const override;
 
 	uint32_t count_waiting(WareWorker waretype, DescriptionIndex wareindex) const;
-	uint32_t count_waiting() const;
+	uint32_t count_waiting(const PortDock* = nullptr) const;
 
 	// Returns true if a expedition is started or ready to be send out.
 	bool expedition_started() const;
@@ -132,22 +132,24 @@ public:
 	void expedition_bootstrap_complete(Game& game);
 
 private:
-	friend struct Fleet;
+	friend struct ShipFleet;
 
 	// Does nothing - we do not show them on the map
-	void draw(uint32_t, TextToDraw, const Vector2f&, const Coords&, float, RenderTarget*) override {
+	void draw(uint32_t, InfoToDraw, const Vector2f&, const Coords&, float, RenderTarget*) override {
 	}
 
 	void init_fleet(EditorGameBase& egbase);
-	void set_fleet(Fleet* fleet);
+	void set_fleet(ShipFleet* fleet);
 	void update_shippingitem(Game&, std::list<ShippingItem>::iterator);
 	void set_need_ship(Game&, bool need);
 
-	Fleet* fleet_;
+	void load_wares(Game&, Ship&);
+
+	ShipFleet* fleet_;
 	Warehouse* warehouse_;
 	PositionList dockpoints_;
 	std::list<ShippingItem> waiting_;
-	uint8_t ships_coming_;
+	std::set<OPtr<Ship>> ships_coming_;
 	bool expedition_ready_;
 
 	std::unique_ptr<ExpeditionBootstrap> expedition_bootstrap_;
@@ -165,6 +167,7 @@ protected:
 	private:
 		uint32_t warehouse_;
 		std::vector<ShippingItem::Loader> waiting_;
+		std::set<Serial> ships_coming_;
 	};
 
 public:

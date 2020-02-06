@@ -170,9 +170,96 @@ conclusion = {
    body = (
       h1(_"Congratulations") ..
       p(_[[You’ve lead the expedition to a successful end and founded a new colony. I’ve sent out some geologists – they already report that they’ve found some iron ore.]]) ..
-      p(_[[In this scenario, you’ve learned everything about seafaring: how to build ports and ships and how to send out an expedition. Remember that expeditions are sometimes the fastest way to reach essential resources – and sometimes the only one.]]) ..
+      p(_[[So far you have learned everything about seafaring: how to build ports and ships and how to send out an expedition. Remember that expeditions are sometimes the fastest way to reach essential resources – and sometimes the only one.]]) ..
       p(_[[But I want to speak a word of warning. Ports are like headquarters: they can be attacked by a nearby enemy. While your headquarters has soldiers to defend it, your newly built port won’t. You should therefore avoid settling next to an enemy.]]) ..
-      p(_[[On this map, there is no enemy to fear. As always, you can continue playing and watch how the ships deliver wares to the island when you construct some buildings there. There is also another island where you can build a port.]])
+      p(_[[On this map, there is no enemy to fear. In other games, you should make building one or two military fortifications around your new colonies a priority.]])
    ),
    h = 450
+}
+
+ferry_1 = {
+   position = "topright",
+   field = waterway_field,
+   title = _"There is more to it…",
+   body = (
+      h1(_"Another gold mountain") ..
+      p(_[[Now that you have learned all about ships, there is another way of water-based transport I would like to teach you.]]) ..
+      p(_[[Ships have the advantage that they can carry large quantities of wares and workers at a time, but unfortunately their destinations are limited to a handful of spaces suited for a port.]]) ..
+      p(_[[Look at this valley here in the far south. We have found a mountain with gold down here and would like to mine ores from it as well. But the streams seperating it from our main colony are too wide to build bridges and too narrow for ships to pass them. Our roads would have to take long curves, which slows down ware transport a lot.]])
+   ),
+   h = 250
+}
+ferry_2 = {
+   position = "topright",
+   title = _"There is more to it…",
+   body = (
+      h1(_"Rowboats") ..
+      p(_[[This is where ferries come in. Ferries are small rowboats that can carry only one ware at a time, and no workers (other than the one who rows it and who never leaves his boat). They can travel between any two flags located on the shore.]]) ..
+      li_image("images/wui/fieldaction/menu_build_water.png", _[[Unlike ships which travel to any port where they’re needed, ferries have fixed transport routes called waterways. A waterway is built just like a road: You click on a flag near the shore, choose ‘Build a waterway’, and select the path for the waterway just as you would do for a road.]]) ..
+      p(_[[Waterways can be built on the open sea as well as close to the shore where the water is too shallow for big ships. The only rule is that the two triangles directly adjacent to each segment of the waterway have to be water, and the entire path needs to be within your territory.]])
+   ),
+   h = 300
+}
+ferry_3 = {
+   position = "topright",
+   title = _"There is more to it…",
+   body = (
+      h1(_"Rowboats") ..
+      p(_[[Also note that waterways, unlike roads, may not be built quite as long as you want them to. Every map has a length restriction for waterways. On this map, this is 5 tiles.]]) ..
+      p(_[[Always keep in mind that ferries do not transport workers. You can use them to speed up ware transport, but they can never entirely replace roads.]])
+   ),
+   h = 200
+}
+ferry_4 = {
+   position = "topright",
+   title = _"There is more to it…",
+   body = (
+      h1(_"Waterways") ..
+      p(_[[Allow me to show you how to build a waterway…]])
+   ),
+   h = 150
+}
+ferry_5 = {
+   position = "topright",
+   title = _"There is more to it…",
+   body = (
+      h1(_"Ferry Yards") ..
+      p(_[[Ferries are built in ferry yards. A ferry yard is a medium-sized building that needs to be built close to the shore. A ferry costs two logs and one piece of cloth and is quickly constructed. When you build a waterway, the closest idle ferry will assign itself to it.]]) ..
+      p(_[[Now it’s your turn: Build a gold mine on the mountain in the south and connect it to the main land by building waterways over the streams.]])
+   ),
+   h = 200,
+   obj_name = "build_ferries",
+   obj_title = _"Build Waterways and Ferries",
+   obj_body = (
+      h1(_"Build waterways") ..
+      p(_[[Build a gold mine on the mountain in the south, and connect it to the mainland by building waterways over the streams.]]) ..
+      li_arrow(_[[A waterway is built just like a road: You click on a flag near the shore, choose ‘Build a waterway’, and select the path for the waterway just as you would do for a road.]]) ..
+      li_arrow(_[[The only rule for waterway placement is that the two triangles directly adjacent to each segment of the waterway have to be water, and the entire path needs to be within your territory.]]) ..
+      h1(_"Build a ferry yard") ..
+      p(_[[Ferries are constructed by a ferry yard.]]) ..
+      li_arrow(_[[You need to build the ferry yard close to the shore, otherwise it won’t be able to build ferries there.]])
+   ),
+}
+ferry_6 = {
+   position = "topright",
+   title = _"Conclusion",
+   body = (
+      h1(_"About Ferries") ..
+      p(_[[Now there are only a few more things I would like you to keep in mind whenever using ferries.]]) ..
+      p(_[[Do remember to stop your ferry yard when you don’t need any new ferries to be produced. As long as a ferry services a waterway, its lifetime is unlimited, but unemployed ferries will rot away and eventually sink.]]) ..
+      p(_[[Never forget that these rowboats are too small to carry workers. You can use them as shortcuts for ware transport within parts of your territory, but not to claim regions you can reach neither by road nor by ship. Never cut all your roads between two places connected by waterways unless you are certain no worker will ever have to walk there.]]) ..
+      p(_[[And if your waterways present a significant shortcut between your road networks, your economy will tend to send many wares over the waterway. As a waterway can hold only one ferry – unlike roads, which receive a second carrier if they are very busy –, and as they often tend to be rather longer than the two or three fields recommended for roads, there is always a risk of waterways becoming severe bottlenecks in your economy. Try to build several of them in parallel to distribute the strain. If this is not possible, it is in some cases even more efficient not to use waterways.]])
+   ),
+   h = 450
+}
+ferry_7 = {
+   position = "topright",
+   title = _"Congratulations",
+   body = (
+      h1(_"Congratulations") ..
+      p(_[[You have learnt all there is to learn about ships and ferries!]]) ..
+      p(_[[There is also another island where you can build a port if you wish to try launching another expedition.]]) ..
+      p(_[[As always, you can continue playing and practice a bit more on this map if you like, or get your captain’s license ready and try out your new skills in a real game…]])
+   ),
+   h = 150
 }

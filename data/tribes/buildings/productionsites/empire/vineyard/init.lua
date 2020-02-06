@@ -29,7 +29,7 @@ tribes:new_productionsite_type {
 
    aihints = {
       space_consumer = true,
-      basic_amount = 1,
+      basic_amount = 2,
       prohibited_till = 490,
       very_weak_ai_limit = 1,
       weak_ai_limit = 3
@@ -65,7 +65,7 @@ tribes:new_productionsite_type {
          descname = _"planting grapevines",
          actions = {
             "callworker=plant",
-            "sleep=13000"
+            "sleep=5000"
          }
       },
       harvest = {

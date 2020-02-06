@@ -15,7 +15,7 @@ return {
          -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
          dl(help_format_hotkey("F1"), _"Help") ..
          -- TRANSLATORS: This is an access key combination.
-         dl(help_format_hotkey("H"), _"Toggle main menu") ..
+         dl(help_format_hotkey(pgettext("hotkey", "Esc")), _"Toggle main menu") ..
          -- TRANSLATORS: This is an access key combination. The hotkey is 't'
          dl(help_format_hotkey("T"), _"Toggle tools menu") ..
          toggle_minimap_hotkey ..

@@ -7,7 +7,7 @@ local objective_to_explain_objectives = add_campaign_objective(obj_initial_close
 local function wait_for_quarry_road_connection(field, cs, objective)
    -- Wait till the construction site is connected to the headquarters
    sleep(10 * wl.Game().desired_speed)
-   while not field.immovable or field.brn.immovable.debug_economy ~= sf.brn.immovable.debug_economy do
+   while not field.immovable or field.brn.immovable.debug_worker_economy ~= sf.brn.immovable.debug_worker_economy do
       if not field.immovable then
          campaign_message_box(quarry_illegally_destroyed)
          scroll_to_field(field)
@@ -308,7 +308,6 @@ function second_quarry()
 
    -- Wait for the constructionsite to be placed
    while not cs do sleep(200) end
-
    wait_for_quarry_road_connection(second_quarry_field, cs, o)
 end
 

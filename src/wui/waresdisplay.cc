@@ -321,7 +321,7 @@ void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y) {
 }
 
 void AbstractWaresDisplay::layout() {
-	curware_.set_pos(Vector2i(0, get_inner_h() - 25));
+	curware_.set_pos(Vector2i(0, get_inner_h() - 22));
 	curware_.set_size(get_inner_w(), 20);
 }
 

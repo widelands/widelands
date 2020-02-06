@@ -14,22 +14,10 @@ return {
       font = "default"
    },
 
-   af_ZA = {
-      name = "Afrikaans",
-      sort_name = "Afrikaans",
-      font = "default"
-   },
-
    ar = {
       name = "العربية",
       sort_name = "Al-ʿArabiyyah",
       font = "arabic"
-   },
-
-   ast = {
-      name = "Asturianu",
-      sort_name = "Asturianu",
-      font = "default"
    },
 
    bg = {
@@ -74,12 +62,6 @@ return {
       font = "default"
    },
 
-   en_CA = {
-      name = "Canadian English",
-      sort_name = "English (Canada)",
-      font = "default"
-   },
-
    en_GB = {
       name = "British English",
       sort_name = "English (Great Britain)",
@@ -101,12 +83,6 @@ return {
    es = {
       name = "Español",
       sort_name = "Espanol",
-      font = "default"
-   },
-
-   et = {
-      name = "Eesti keel",
-      sort_name = "Eesti keel",
       font = "default"
    },
 
@@ -182,12 +158,6 @@ return {
       font = "default"
    },
 
-   ia = {
-      name = "Interlingua",
-      sort_name = "Interlingua",
-      font = "default"
-   },
-
    id = {
       name = "Bahasa Indonesia",
       sort_name = "Indonesia",
@@ -210,12 +180,6 @@ return {
       name = "日本語",
       sort_name = "Nihongo",
       font = "cjk"
-   },
-
-   jv = {
-      name = "Basa jawa",
-      sort_name = "Jawa",
-      font = "default"
    },
 
    ka = {
@@ -248,22 +212,10 @@ return {
       font = "default"
    },
 
-   mr = {
-      name = "मराठी",
-      sort_name = "Marathi",
-      font = "devanagari"
-   },
-
    ms = {
       name = "Bahasa Melayu",
       sort_name = "Melayu",
       font = "default"
-   },
-
-   my = {
-      name = "မြန်မာစ",
-      sort_name = "Myanma",
-      font = "myanmar"
    },
 
    nb = {
@@ -287,12 +239,6 @@ return {
    nn = {
       name = "Nynorsk",
       sort_name = "Norsk (Nynorsk)",
-      font = "default"
-   },
-
-   oc = {
-      name = "Occitan",
-      sort_name = "Occitan",
       font = "default"
    },
 
@@ -324,18 +270,6 @@ return {
       name = "Русский",
       sort_name = "Russky",
       font = "default"
-   },
-
-   rw = {
-      name = "Kinyarwanda",
-      sort_name = "Kinyarwanda",
-      font = "default"
-   },
-
-   si = {
-      name = "සිංහල",
-      sort_name = "Simhala",
-      font = "sinhala"
    },
 
    sk = {
@@ -377,12 +311,6 @@ return {
    uk = {
       name = "українська мова",
       sort_name = "Ukrayinska",
-      font = "default"
-   },
-
-   vi = {
-      name = "Tiếng Việt",
-      sort_name = "Viet",
       font = "default"
    },
 

@@ -189,7 +189,7 @@ public:
 		molog("BUILD_HEROES: %s", build_heroes_ ? "TRUE" : "FALSE");
 	}
 
-	void set_economy(Economy* e) override;
+	void set_economy(Economy* e, WareWorker type) override;
 
 	int32_t get_pri(enum TrainingAttribute atr);
 	void set_pri(enum TrainingAttribute atr, int32_t prio);
