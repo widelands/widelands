@@ -109,7 +109,9 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                      label),
      label_(label),
      type_(type),
-     is_enabled_(true) {
+     is_enabled_(true),
+     button_style_(button_style),
+     autoexpand_display_button_(false) {
 	if (label.empty()) {
 		set_tooltip(pgettext("dropdown", "Select Item"));
 	} else {
@@ -230,16 +232,34 @@ void BaseDropdown::set_desired_size(int nw, int nh) {
 	layout();
 }
 
+void BaseDropdown::set_autoexpand_display_button() {
+	autoexpand_display_button_ = true;
+}
+
 void BaseDropdown::add(const std::string& name,
                        const uint32_t value,
                        const Image* pic,
                        const bool select_this,
                        const std::string& tooltip_text,
-                       const std::string& hotkey = std::string()) {
+                       const std::string& hotkey) {
 	assert(pic != nullptr || type_ != DropdownType::kPictorial);
 	list_->add(name, value, pic, select_this, tooltip_text, hotkey);
 	if (select_this) {
 		set_value();
+	}
+
+	if (autoexpand_display_button_) {
+		/// Fit width of display button to make enough room for the entry's text
+		const std::string fitme =
+		   label_.empty() ? name : (boost::format(_("%1%: %2%")) % label_ % name).str();
+		const int new_width =
+		   text_width(
+		      richtext_escape(fitme), g_gr->styles().button_style(button_style_).enabled().font()) +
+		   8;
+		if (new_width > display_button_.get_w()) {
+			set_desired_size(get_w() + new_width - display_button_.get_w(), get_h());
+			set_size(get_w() + new_width - display_button_.get_w(), get_h());
+		}
 	}
 	layout();
 }
