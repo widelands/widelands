@@ -643,7 +643,7 @@ void Window::on_resolution_changed_note(const GraphicResolutionChanged& note) {
 			set_pos(Vector2i((note.new_width - get_w()) / 2, get_y()));
 		} else if (get_x() + get_w() / 2 > old_center_x) {
 			// The window was in the right half of the screen. Shift to maintain distance to right edge
-			// of the screen. NOCOM fix headquarters + economy window
+			// of the screen.
 			set_pos(Vector2i(note.new_width - note.old_width + get_x(), get_y()));
 		}
 		// Adjust y position
