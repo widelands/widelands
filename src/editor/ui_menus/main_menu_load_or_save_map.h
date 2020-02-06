@@ -47,7 +47,7 @@ protected:
 	void toggle_mapnames();
 	// Sets the current dir and updates labels.
 	virtual void set_current_directory(const std::string& filename) = 0;
-    void layout() override;
+	void layout() override;
 	void fill_table();
 
 	bool compare_players(uint32_t, uint32_t);
@@ -57,21 +57,23 @@ protected:
 	// UI coordinates and spacers
 	int32_t const padding_;  // Common padding between panels
 	int32_t const buth_;     // Button dimensions
-    const int no_of_bottom_rows_;
+	const int no_of_bottom_rows_;
 	int32_t tablex_, tabley_, tablew_, tableh_;
 	int32_t right_column_x_;
-	int32_t butw_;  // Button dimensions
 
-    UI::Box main_box_;
+	UI::Box main_box_;
 
-    UI::Box table_and_details_box_;
+	UI::Box show_mapnames_box_;
+	UI::Button show_mapnames_;
+
+	UI::Box table_and_details_box_;
 	MapTable table_;
 	std::vector<MapData> maps_data_;
 	MapDetails map_details_;
 
 	UI::Textarea directory_info_;
 
-    UI::Box button_box_;
+	UI::Box button_box_;
 	UI::Button ok_, cancel_;
 
 	const std::string basedir_;
@@ -80,7 +82,6 @@ protected:
 	bool has_translated_mapname_;
 	UI::Checkbox* cb_dont_localize_mapnames_;
 	bool showing_mapames_;
-	UI::Button* show_mapnames_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_MAIN_MENU_LOAD_OR_SAVE_MAP_H

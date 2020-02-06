@@ -50,45 +50,30 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
      tablew_(get_inner_w() / 2),
      tableh_(get_inner_h() / 2),
      right_column_x_(tablew_),
-     butw_(50),
 
      main_box_(this, 0, 0, UI::Box::Vertical),
 
-     table_and_details_box_(&main_box_,
-                 0,
-                 0,
-                 UI::Box::Horizontal),
+     show_mapnames_box_(&main_box_, 0, 0, UI::Box::Horizontal),
+     show_mapnames_(&show_mapnames_box_,
+                    "show_mapnames",
+                    0,
+                    0,
+                    0,
+                    0,
+                    UI::ButtonStyle::kWuiSecondary,
+                    _("Show Map Names")),
+
+     table_and_details_box_(&main_box_, 0, 0, UI::Box::Horizontal),
 
      table_(&table_and_details_box_, 0, 0, tablew_, tableh_, UI::PanelStyle::kWui),
-     map_details_(&table_and_details_box_,
-                  0,
-                  0,
-                  100,
-                  100,
-                  UI::PanelStyle::kWui),
-     directory_info_(this, padding_, get_inner_h() - 2 * buth_ - 4 * padding_, 0, 0),
+     map_details_(&table_and_details_box_, 0, 0, 100, 100, UI::PanelStyle::kWui),
+
+     directory_info_(&main_box_, 0, 0, 0, 0),
 
      // Bottom button row
-     button_box_(&main_box_,
-                 0,
-                 0,
-                 UI::Box::Horizontal),
-     ok_(&button_box_,
-         "ok",
-         0,
-         0,
-         butw_,
-         buth_,
-         UI::ButtonStyle::kWuiPrimary,
-         _("OK")),
-     cancel_(&button_box_,
-             "cancel",
-             0,
-             0,
-             butw_,
-             buth_,
-             UI::ButtonStyle::kWuiSecondary,
-             _("Cancel")),
+     button_box_(&main_box_, 0, 0, UI::Box::Horizontal),
+     ok_(&button_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
+     cancel_(&button_box_, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Cancel")),
 
      // Options
      basedir_(basedir),
@@ -98,52 +83,50 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	g_fs->ensure_directory_exists(basedir_);
 	curdir_ = basedir_;
 
-    main_box_.add(&table_and_details_box_, UI::Box::Resizing::kExpandBoth);
-    main_box_.add(&button_box_);
+	main_box_.add(&show_mapnames_box_, UI::Box::Resizing::kFullSize);
+	main_box_.add(&table_and_details_box_, UI::Box::Resizing::kExpandBoth);
+	main_box_.add(&directory_info_, UI::Box::Resizing::kFullSize);
+	main_box_.add(&button_box_, UI::Box::Resizing::kFullSize);
 
-	UI::Box* vbox = new UI::Box(this, tablex_, padding_, UI::Box::Horizontal, padding_, get_w());
-	show_mapnames_ = new UI::Button(vbox, "show_mapnames", 0, 0, 2 * butw_, buth_,
-	                                UI::ButtonStyle::kWuiSecondary, _("Show Map Names"));
-	vbox->add(show_mapnames_, UI::Box::Resizing::kFullSize);
-
+	show_mapnames_box_.add(&show_mapnames_);
 	cb_dont_localize_mapnames_ =
 	   /** TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated. */
-	   new UI::Checkbox(vbox, Vector2i::zero(), _("Show original map names"));
+	   new UI::Checkbox(&show_mapnames_box_, Vector2i::zero(), _("Show original map names"));
 	cb_dont_localize_mapnames_->set_state(false);
-	vbox->add_space(2 * padding_);
-	vbox->add(cb_dont_localize_mapnames_, UI::Box::Resizing::kFullSize);
-	vbox->set_size(get_inner_w(), buth_);
+	show_mapnames_box_.add_space(2 * padding_);
+	show_mapnames_box_.add(cb_dont_localize_mapnames_, UI::Box::Resizing::kFullSize);
+	show_mapnames_box_.add_inf_space();
 
 	table_.set_column_compare(0, boost::bind(&MainMenuLoadOrSaveMap::compare_players, this, _1, _2));
 	table_.set_column_compare(
 	   1, boost::bind(&MainMenuLoadOrSaveMap::compare_mapnames, this, _1, _2));
 	table_.set_column_compare(2, boost::bind(&MainMenuLoadOrSaveMap::compare_size, this, _1, _2));
 
-    table_and_details_box_.add(&table_, UI::Box::Resizing::kExpandBoth);
-    table_and_details_box_.add_space(padding_);
-    table_and_details_box_.add(&map_details_, UI::Box::Resizing::kFullSize);
+	table_and_details_box_.add(&table_, UI::Box::Resizing::kExpandBoth);
+	table_and_details_box_.add_space(padding_);
+	table_and_details_box_.add(&map_details_, UI::Box::Resizing::kFullSize);
 
 	table_.focus();
 	fill_table();
 
-    button_box_.add_inf_space();
-    button_box_.add(UI::g_fh->fontset()->is_rtl() ? &ok_ : &cancel_, UI::Box::Resizing::kExpandBoth);
-    button_box_.add_space(padding_);
-    button_box_.add(UI::g_fh->fontset()->is_rtl() ? &cancel_ : &ok_, UI::Box::Resizing::kExpandBoth);
-    button_box_.add_inf_space();
+	button_box_.add_inf_space();
+	button_box_.add(UI::g_fh->fontset()->is_rtl() ? &ok_ : &cancel_, UI::Box::Resizing::kExpandBoth);
+	button_box_.add_space(padding_);
+	button_box_.add(UI::g_fh->fontset()->is_rtl() ? &cancel_ : &ok_, UI::Box::Resizing::kExpandBoth);
+	button_box_.add_inf_space();
 
 	// We don't need the unlocalizing option if there is nothing to unlocalize.
 	// We know this after the list is filled.
 	cb_dont_localize_mapnames_->set_visible(has_translated_mapname_);
 	cb_dont_localize_mapnames_->changedto.connect(
 	   boost::bind(&MainMenuLoadOrSaveMap::fill_table, boost::ref(*this)));
-	show_mapnames_->sigclicked.connect(
+	show_mapnames_.sigclicked.connect(
 	   boost::bind(&MainMenuLoadOrSaveMap::toggle_mapnames, boost::ref(*this)));
 
-    set_center_panel(&main_box_);
+	set_center_panel(&main_box_);
 	center_to_parent();
 	move_to_top();
-    layout();
+	layout();
 }
 
 bool MainMenuLoadOrSaveMap::compare_players(uint32_t rowa, uint32_t rowb) {
@@ -160,30 +143,25 @@ bool MainMenuLoadOrSaveMap::compare_size(uint32_t rowa, uint32_t rowb) {
 
 void MainMenuLoadOrSaveMap::toggle_mapnames() {
 	if (showing_mapames_) {
-		show_mapnames_->set_title(_("Show Map Names"));
+		show_mapnames_.set_title(_("Show Map Names"));
 	} else {
-		show_mapnames_->set_title(_("Show Filenames"));
+		show_mapnames_.set_title(_("Show Filenames"));
 	}
 	showing_mapames_ = !showing_mapames_;
 	fill_table();
 }
 
 void MainMenuLoadOrSaveMap::layout() {
-    log("NOCOM triggered!!!\n");
-    set_size(get_parent()->get_inner_w() - 40, get_parent()->get_inner_h() - 40);
-    UI::Window::layout();
+	log("NOCOM triggered!!!\n");
+	set_size(get_parent()->get_inner_w(), get_parent()->get_inner_h());
+	UI::Window::layout();
 
-    tablew_ = get_inner_w() * 7 / 12;
-    tableh_ = get_inner_h() - tabley_ - (no_of_bottom_rows_ + 1) * buth_ -
-            no_of_bottom_rows_ * padding_;
-    right_column_x_ = tablew_ + 2 * padding_;
+	tablew_ = get_inner_w() * 7 / 12;
+	tableh_ =
+	   get_inner_h() - tabley_ - (no_of_bottom_rows_ + 1) * buth_ - no_of_bottom_rows_ * padding_;
+	right_column_x_ = tablew_ + 2 * padding_;
 
-    table_and_details_box_.set_size(get_inner_w(), tableh_);
-
-    map_details_.set_size(get_inner_w() - right_column_x_, map_details_.get_h());
-    butw_ = (get_inner_w() - right_column_x_ - 2 * padding_) / 2;
-
-    button_box_.set_size(get_inner_w(), buth_);
+	map_details_.set_size(get_inner_w() - right_column_x_, map_details_.get_h());
 }
 
 /**

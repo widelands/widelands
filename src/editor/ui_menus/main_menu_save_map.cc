@@ -72,7 +72,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
                    buth_,
                    UI::ButtonStyle::kWuiPrimary,
                    _("Map Options")),
-     editbox_label_(this, padding_, tabley_ + tableh_ + 3 * padding_, butw_, buth_, _("Filename:")),
+     editbox_label_(this, padding_, tabley_ + tableh_ + 3 * padding_, 0, 0, _("Filename:")),
      illegal_filename_tooltip_(FileSystem::illegal_filename_tooltip()) {
 	set_current_directory(curdir_);
 
