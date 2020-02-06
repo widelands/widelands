@@ -42,14 +42,15 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
      // Values for alignment and size
      padding_(4),
      buth_(20),
+     no_of_bottom_rows_(no_of_bottom_rows),
      tablex_(padding_),
      tabley_(buth_ + 2 * padding_),
-     tablew_(get_inner_w() * 7 / 12),
-     tableh_(get_inner_h() - tabley_ - (no_of_bottom_rows + 1) * buth_ -
-             no_of_bottom_rows * padding_),
-     right_column_x_(tablew_ + 2 * padding_),
-     butw_((get_inner_w() - right_column_x_ - 2 * padding_) / 2),
 
+     // Arbitrary values to get started. Real values are set in layout().
+     tablew_(100),
+     tableh_(100),
+     right_column_x_(50),
+     butw_(50),
      table_(this, tablex_, tabley_, tablew_, tableh_, UI::PanelStyle::kWui),
      map_details_(this,
                   right_column_x_,
@@ -58,24 +59,30 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
                   tableh_,
                   UI::PanelStyle::kWui),
      directory_info_(this, padding_, get_inner_h() - 2 * buth_ - 4 * padding_, 0, 0),
-     ok_(this,
+
+     // Bottom button row
+     button_box_(this,
+                 padding_,
+                 get_inner_h() - padding_ - buth_,
+                 UI::Box::Horizontal),
+     ok_(&button_box_,
          "ok",
-         UI::g_fh->fontset()->is_rtl() ? get_inner_w() / 2 - butw_ - padding_ :
-                                         get_inner_w() / 2 + padding_,
-         get_inner_h() - padding_ - buth_,
+         0,
+         0,
          butw_,
          buth_,
          UI::ButtonStyle::kWuiPrimary,
          _("OK")),
-     cancel_(this,
+     cancel_(&button_box_,
              "cancel",
-             UI::g_fh->fontset()->is_rtl() ? get_inner_w() / 2 + padding_ :
-                                             get_inner_w() / 2 - butw_ - padding_,
-             get_inner_h() - padding_ - buth_,
+             0,
+             0,
              butw_,
              buth_,
              UI::ButtonStyle::kWuiSecondary,
              _("Cancel")),
+
+     // Options
      basedir_(basedir),
      has_translated_mapname_(false),
      showing_mapames_(false) {
@@ -104,6 +111,12 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	table_.focus();
 	fill_table();
 
+    button_box_.add_inf_space();
+    button_box_.add(UI::g_fh->fontset()->is_rtl() ? &ok_ : &cancel_, UI::Box::Resizing::kExpandBoth);
+    button_box_.add_space(padding_);
+    button_box_.add(UI::g_fh->fontset()->is_rtl() ? &cancel_ : &ok_, UI::Box::Resizing::kExpandBoth);
+    button_box_.add_inf_space();
+
 	// We don't need the unlocalizing option if there is nothing to unlocalize.
 	// We know this after the list is filled.
 	cb_dont_localize_mapnames_->set_visible(has_translated_mapname_);
@@ -114,6 +127,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 
 	center_to_parent();
 	move_to_top();
+    layout();
 }
 
 bool MainMenuLoadOrSaveMap::compare_players(uint32_t rowa, uint32_t rowb) {
@@ -136,6 +150,18 @@ void MainMenuLoadOrSaveMap::toggle_mapnames() {
 	}
 	showing_mapames_ = !showing_mapames_;
 	fill_table();
+}
+
+void MainMenuLoadOrSaveMap::layout() {
+    log("NOCOM triggered!!!\n");
+
+    tablew_ = get_inner_w() * 7 / 12;
+    tableh_ = get_inner_h() - tabley_ - (no_of_bottom_rows_ + 1) * buth_ -
+            no_of_bottom_rows_ * padding_;
+    right_column_x_ = tablew_ + 2 * padding_;
+    butw_ = (get_inner_w() - right_column_x_ - 2 * padding_) / 2;
+
+    button_box_.set_size(get_inner_w(), buth_);
 }
 
 /**

@@ -47,6 +47,7 @@ protected:
 	void toggle_mapnames();
 	// Sets the current dir and updates labels.
 	virtual void set_current_directory(const std::string& filename) = 0;
+    void layout() override;
 	void fill_table();
 
 	bool compare_players(uint32_t, uint32_t);
@@ -56,15 +57,18 @@ protected:
 	// UI coordinates and spacers
 	int32_t const padding_;  // Common padding between panels
 	int32_t const buth_;     // Button dimensions
-	int32_t const tablex_, tabley_, tablew_, tableh_;
-	int32_t const right_column_x_;
-	int32_t const butw_;  // Button dimensions
+    const int no_of_bottom_rows_;
+	int32_t tablex_, tabley_, tablew_, tableh_;
+	int32_t right_column_x_;
+	int32_t butw_;  // Button dimensions
 
 	MapTable table_;
 	std::vector<MapData> maps_data_;
 	MapDetails map_details_;
 
 	UI::Textarea directory_info_;
+
+    UI::Box button_box_;
 	UI::Button ok_, cancel_;
 
 	const std::string basedir_;
