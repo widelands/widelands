@@ -127,12 +127,6 @@ The master branch and open pull requests will be formatted automatically by a Gi
 
 You need to enable *local and third-party actions* in the Actions tab of your fork's settings to enable automatic formatting. If you disable actions, no formatting will take place on your branches.
 
-To reduce the amount of changes introduced by automatic formatting, you can install our githook that will automatically
-format any changed C++ files when you commit:
-
-1. Install `clang-format`
-2. Run `./install-githooks.sh`
-
 We follow the [Google Styleguide](https://google.github.io/styleguide/cppguide.html).
 
 ### Scenarios
