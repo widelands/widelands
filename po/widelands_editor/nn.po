@@ -1,13 +1,13 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-26 13:16+0000\n"
-"PO-Revision-Date: 2018-01-26 13:28+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-10-09 07:57+0000\n"
+"PO-Revision-Date: 2019-10-09 08:04+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Norwegian Nynorsk (http://www.transifex.com/widelands/widelands/language/nn/)\n"
 "MIME-Version: 1.0\n"
@@ -32,6 +32,11 @@ msgid "Help"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination.
+#: ../../data/scripting/editor/editor_controls.lua:18
+msgctxt "hotkey"
+msgid "Esc"
+msgstr ""
+
 #: ../../data/scripting/editor/editor_controls.lua:18
 msgid "Toggle main menu"
 msgstr ""
@@ -187,28 +192,32 @@ msgstr ""
 msgid "Resources"
 msgstr ""
 
-#. TRANSLATORS: A header in the editor help
+#. TRANSLATORS: A header in the editor help if there is 1 valid resource
 #: ../../data/scripting/editor/terrain_help.lua:25
 msgid "Valid Resource:"
-msgid_plural "Valid Resources:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr ""
 
-#: ../../data/scripting/editor/terrain_help.lua:34
+#. TRANSLATORS: A header in the editor help if there is more than 1 valid
+#. resource
+#: ../../data/scripting/editor/terrain_help.lua:28
+msgid "Valid Resources:"
+msgstr ""
+
+#: ../../data/scripting/editor/terrain_help.lua:39
 msgid "Default:"
 msgstr ""
 
 #. TRANSLATORS: e.g. "5x Water"
-#: ../../data/scripting/editor/terrain_help.lua:36
+#: ../../data/scripting/editor/terrain_help.lua:41
 msgid "%1%x %2%"
 msgstr ""
 
 #. TRANSLATORS: A header in the editor help
-#: ../../data/scripting/editor/terrain_help.lua:67
+#: ../../data/scripting/editor/terrain_help.lua:72
 msgid "Probability of trees growing"
 msgstr ""
 
-#: ../../data/scripting/editor/terrain_help.lua:72
+#: ../../data/scripting/editor/terrain_help.lua:77
 msgid "No trees will grow here."
 msgstr ""
 

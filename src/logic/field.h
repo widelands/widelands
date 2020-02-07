@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,9 +23,11 @@
 #include <cassert>
 #include <limits>
 
+#include "base/wexception.h"
 #include "graphic/playercolor.h"
+#include "graphic/road_segments.h"
+#include "logic/map_objects/walkingdir.h"
 #include "logic/nodecaps.h"
-#include "logic/roadtype.h"
 #include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
 
@@ -91,6 +93,9 @@ struct Field {
 	}
 	NodeCaps nodecaps() const {
 		return static_cast<NodeCaps>(caps);
+	}
+	NodeCaps maxcaps() const {
+		return static_cast<NodeCaps>(max_caps);
 	}
 	uint16_t get_caps() const {
 		return caps;
@@ -174,15 +179,32 @@ struct Field {
 		owner_info_and_selections = (owner_info_and_selections & ~Border_Bitmask) | (b << Border_Bit);
 	}
 
-	int32_t get_roads() const {
-		return roads;
+	RoadSegment get_road(uint8_t dir) const {
+		switch (dir) {
+		case WALK_E:
+			return road_east;
+		case WALK_SE:
+			return road_southeast;
+		case WALK_SW:
+			return road_southwest;
+		default:
+			throw wexception("Queried road going in invalid direction %i", dir);
+		}
 	}
-	int32_t get_road(int32_t const dir) const {
-		return (roads >> dir) & RoadType::kMask;
-	}
-	void set_road(int32_t const dir, int32_t const type) {
-		roads &= ~(RoadType::kMask << dir);
-		roads |= type << dir;
+	void set_road(uint8_t dir, RoadSegment type) {
+		switch (dir) {
+		case WALK_E:
+			road_east = type;
+			break;
+		case WALK_SE:
+			road_southeast = type;
+			break;
+		case WALK_SW:
+			road_southwest = type;
+			break;
+		default:
+			throw wexception("Attempt to set road going in invalid direction %i", dir);
+		}
 	}
 
 	// Resources can be set through Map::set_resources()
@@ -237,7 +259,11 @@ private:
 	BaseImmovable* immovable = nullptr;
 
 	uint8_t caps = 0U;
-	uint8_t roads = 0U;
+	uint8_t max_caps = 0U;
+
+	RoadSegment road_east = RoadSegment::kNone;
+	RoadSegment road_southeast = RoadSegment::kNone;
+	RoadSegment road_southwest = RoadSegment::kNone;
 
 	Height height = 0U;
 	int8_t brightness = 0;
@@ -254,10 +280,12 @@ private:
 
 // Check that Field is tightly packed.
 #ifndef WIN32
-static_assert(sizeof(Field) == sizeof(void*) * 2 + 10, "Field is not tightly packed.");
+static_assert(sizeof(Field) == sizeof(void*) * 2 + sizeof(RoadSegment) * 3 + 10,
+              "Field is not tightly packed.");
 #else
-static_assert(sizeof(Field) <= sizeof(void*) * 2 + 11, "Field is not tightly packed.");
+static_assert(sizeof(Field) <= sizeof(void*) * 2 + sizeof(RoadSegment) * 3 + 11,
+              "Field is not tightly packed.");
 #endif
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_FIELD_H

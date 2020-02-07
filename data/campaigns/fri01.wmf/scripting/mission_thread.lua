@@ -16,7 +16,7 @@ function check_materials()
       count("coal") < 20 or
       count("brick") < 40 or
       count("clay") < 10 or
-      count("thatch_reed") < 30
+      count("reed") < 30
    ) do sleep(8731) end
    set_objective_done(o)
    done_gather_materials = true
@@ -59,7 +59,7 @@ function warning_reed()
    local ready = 0
    while show_warning_reed do
       sleep(10000)
-      if count("thatch_reed") < 4 then
+      if count("reed") < 4 then
          if ready > 8 then
             if #p1:get_buildings("frisians_reed_farm") < 3 then
                campaign_message_box(warning_no_reed)
@@ -124,6 +124,12 @@ function count(ware)
       in_warehouses = in_warehouses + wh:get_wares(ware)
    end
    return in_warehouses
+end
+
+function backup_autosave()
+   while backup_mark.owner ~= p1 do sleep(4273) end
+   -- TRANSLATORS: Name of a backup autosave
+   wl.Game():save(_"The Great Stormflood (Backup Autosave)")
 end
 
 function stormflood()
@@ -323,6 +329,7 @@ function mission_thread()
       while expansion_mark.owner == nil do sleep(4273) end
       set_objective_done(o)
    end
+   run(backup_autosave)
 
    -- A friendly chat between neighbours
    p1:reveal_fields(map.player_slots[2].starting_field:region(6))

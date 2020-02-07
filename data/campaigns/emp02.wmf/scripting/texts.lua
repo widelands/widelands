@@ -267,7 +267,7 @@ diary_page_10 = {
       .. paragraphdivider() ..
       -- TRANSLATORS: Lutius - Diary
       _([[There are still a few Barbarians hiding on our island, but I am sure that we will find them soon. Every Barbarian who doesn’t attack us will be put in a boat with the other peaceful ones, and sent back to their country.]]))
-      ..  objective_text(_"Victory",
+      .. objective_text(_"Victory",
       _[[You have established a working economy, trained new soldiers and driven the Barbarians from the island.]])
 }
 

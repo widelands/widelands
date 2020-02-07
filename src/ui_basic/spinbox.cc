@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2018 by the Widelands Development Team
+ * Copyright (C) 2009-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,7 +31,6 @@
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/text/font_set.h"
-#include "graphic/text_constants.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
@@ -321,6 +320,9 @@ const std::string SpinBox::unit_text(int32_t value) const {
 	case (Units::kPixels):
 		/** TRANSLATORS: A spinbox unit */
 		return (boost::format(ngettext("%d pixel", "%d pixels", value)) % value).str();
+	case (Units::kFields):
+		/** TRANSLATORS: A spinbox unit */
+		return (boost::format(ngettext("%d field", "%d fields", value)) % value).str();
 	case (Units::kPercent):
 		/** TRANSLATORS: A spinbox unit */
 		return (boost::format(_("%i %%")) % value).str();

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import make_spritemap
 import numpy as np
 import os
 import sys
@@ -7,7 +8,6 @@ import unittest
 
 sys.path.append(os.path.normpath(
     os.path.dirname(os.path.abspath(__file__)) + '/..'))
-import make_spritemap
 
 
 class TestMinimumAverageCostRectangle(unittest.TestCase):
@@ -160,6 +160,7 @@ class TestComputeRectangleCovering(unittest.TestCase):
         )
         self.assertEqual(cost, 2 * FRAGMENT_COST + 2)
         self.assertItemsEqual(rectangles, [(0, 0, 1, 1), (3, 3, 4, 4)])
+
 
 if __name__ == '__main__':
     unittest.main()

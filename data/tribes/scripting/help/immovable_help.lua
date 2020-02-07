@@ -32,7 +32,7 @@ function immovable_help_string(tribe, immovable_description)
 
    -- TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese script probably want to lose the blank space here.
    local purpose_text = pgettext("sentence_separator", "%s %s"):bformat(immovable_helptext(), immovable_helptext(tribe.name))
-   local result = li_image(immovable_description.representative_image, purpose_text)
+   local result = li_object(immovable_description.name, purpose_text)
 
    -- Build cost
    local buildcost = ""

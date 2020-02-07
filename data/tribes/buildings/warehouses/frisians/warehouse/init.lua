@@ -13,25 +13,32 @@ tribes:new_warehouse_type {
       brick = 5,
       granite = 2,
       log = 2,
-      thatch_reed = 3
+      reed = 3
    },
    return_on_dismantle = {
       brick = 3,
       granite = 1,
       log = 1,
-      thatch_reed = 1
+      reed = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 82},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "idle",
+         hotspot = {50, 69},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
       build = {
-         pictures = path.list_files (dirname .. "build_?.png"),
-         hotspot = {56, 82},
-      },
+         directory = dirname,
+         basename = "build",
+         hotspot = {50, 69}
+      }
    },
 
    aihints = {},

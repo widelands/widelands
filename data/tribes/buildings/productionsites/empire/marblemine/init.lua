@@ -42,6 +42,11 @@ tribes:new_productionsite_type {
       basic_amount = 1
    },
 
+   indicate_workarea_overlaps = {
+      empire_marblemine = false,
+      empire_marblemine_deep = false,
+   },
+
    working_positions = {
       empire_miner = 1
    },
@@ -69,9 +74,9 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
          descname = _"mining granite",
          actions = {
-            "sleep=18000",
             "return=skipped unless economy needs marble or economy needs granite",
             "consume=ration wine",
+            "sleep=18000",
             "call=a_mine_produce_granite",
             "call=a_mine_produce_granite",
             "call=a_mine_produce_marble",
@@ -83,9 +88,9 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
          descname = _"mining marble",
          actions = {
-            "sleep=18000",
             "return=skipped unless economy needs marble or economy needs granite",
             "consume=wine ration",
+            "sleep=18000",
             "call=a_mine_produce_marble",
             "call=a_mine_produce_marble",
             "call=a_mine_produce_granite",

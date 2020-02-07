@@ -3,6 +3,7 @@
 
 """Tool to rename files in all subdirectories in bulk."""
 
+# NOCOM rewrite for git
 
 from subprocess import call
 import os.path

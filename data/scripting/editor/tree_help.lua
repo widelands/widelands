@@ -13,7 +13,7 @@ return {
       set_textdomain("widelands_editor")
       local world = wl.World();
       local tree = wl.Editor():get_immovable_description(tree_name)
-      local result = li_image(tree.representative_image, "")
+      local result = li_object(tree.name, "")
 
       -- TRANSLATORS: A header in the editor help. Terrains preferred by a type of tree.
       result = result .. vspace(3) .. h2(vspace(12) .. _"Preferred terrains") .. vspace(3)

@@ -74,10 +74,14 @@ function worker_help_producers_string(tribe, worker_description)
             for j, program_name in ipairs(producing_programs) do
                result = result .. help_consumed_wares_workers(tribe, building, program_name)
                if (recruited_workers_counters[program_name] > 0) then
-                  result = result
-                     -- TRANSLATORS: Worker Encyclopedia: Workers recruited by a productionsite
-                     .. h3(ngettext("Worker recruited:", "Workers recruited:", recruited_workers_counters[program_name]))
-                     .. recruited_workers_strings[program_name]
+                  if (recruited_workers_counters[program_name] == 1) then
+                     -- TRANSLATORS: Worker Encyclopedia: 1 worker recruited by a productionsite
+                     result = result .. h3(_"Worker recruited:")
+                  else
+                     -- TRANSLATORS: Worker Encyclopedia: More than 1 worker recruited by a productionsite
+                     result = result .. h3(_"Workers recruited:")
+                  end
+                  result = result .. recruited_workers_strings[program_name]
                end
             end
          end
@@ -101,9 +105,16 @@ function worker_help_employers_string(worker_description)
    if (#worker_description.employers > 0) then
       local normal = {}
       local additional = {}
-      -- TRANSLATORS: Worker Encyclopedia: A list of buildings where a worker is needed to work at
-      -- TRANSLATORS: You can also translate this as 'workplace(s)'
-      result = result .. h2(ngettext("Works at", "Works at", #worker_description.employers))
+
+      if (#worker_description.employers == 1) then
+      -- TRANSLATORS: Worker Encyclopedia: Heading for 1 building where a worker can work
+      -- TRANSLATORS: You can also translate this as 'workplace'
+         result = result .. h2(pgettext("workerhelp_one_building", "Works at"))
+      else
+      -- TRANSLATORS: Worker Encyclopedia: A list of more than 1 building where a worker can work
+      -- TRANSLATORS: You can also translate this as 'workplaces'
+         result = result .. h2(pgettext("workerhelp_multiple_buildings", "Works at"))
+      end
       for i, building in ipairs(worker_description.employers) do
          result = result .. dependencies({worker_description, building}, building.descname)
          normal[building.descname] = true
@@ -115,17 +126,15 @@ function worker_help_employers_string(worker_description)
                   table.insert(additional, build)
                end
             end
-            --[[ TODO(GunChleoc): Put this in after Build 20, activate the translators comments and also fix the plural above
             if #additional == 1 then
-               -- #Translators: Worker Encyclopedia: Heading above a list of buildings where a worker may work instead of a less experienced worker
-               -- #TRANSLATORS: You can also translate this as 'additional workplace'
-               result = result .. h3(pgettext("workerhelp_one_building", "Can also work at"))
+               -- Translators: Worker Encyclopedia: Heading above a list 1 building where a worker may work instead of a less experienced worker
+               -- TRANSLATORS: You can also translate this as 'additional workplace'
+               result = result .. h2(pgettext("workerhelp_one_building", "Can also work at"))
             else
-               -- #Translators: Worker Encyclopedia: Heading above a list of buildings where a worker may work instead of a less experienced worker
-                  -- #TRANSLATORS: You can also translate this as 'additional workplaces'
-               result = result .. h3(ngettext("Can also work at", "Can also work at", #additional))
+               -- Translators: Worker Encyclopedia: Heading above a list of buildings where a worker may work instead of a less experienced worker
+               -- TRANSLATORS: You can also translate this as 'additional workplaces'
+               result = result .. h2(pgettext("workerhelp_multiple_buildings", "Can also work at"))
             end
-            ]]
             for i, build in ipairs(additional) do
                result = result .. dependencies({worker_description, build}, build.descname)
             end

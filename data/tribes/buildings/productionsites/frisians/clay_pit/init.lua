@@ -12,34 +12,55 @@ tribes:new_productionsite_type {
    buildcost = {
       brick = 1,
       log = 1,
-      thatch_reed = 1
+      reed = 1
    },
    return_on_dismantle = {
       brick = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {49, 84},
-         fps = 10,
+         directory = dirname,
+         basename = "idle",
+         hotspot = {40, 68},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {49, 84},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "working",
+         hotspot = {40, 68},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
       unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {49, 63},
-      },
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {40, 52}
+      }
+   },
+
+   indicate_workarea_overlaps = {
+      frisians_aqua_farm = true,
+      frisians_charcoal_burners_house = true,
+      frisians_clay_pit = false,
+      frisians_berry_farm = false,
+      frisians_reed_farm = false,
+      frisians_farm = false,
+      frisians_foresters_house = false,
    },
 
    aihints = {
       very_weak_ai_limit = 1,
       weak_ai_limit = 2,
       basic_amount = 1,
-      supports_production_of = { "fish" }
+      supports_production_of = { "fish", "coal", }
    },
 
    working_positions = {
@@ -58,12 +79,13 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start making clay because ...
          descname = _"making clay",
          actions = {
-            "sleep=20000",
-            "return=skipped unless economy needs clay or economy needs fish", -- Fish-producing aqua farms can stop working if the clay pits do so
+
+            "return=skipped unless economy needs clay or economy needs fish or economy needs coal",
+            -- Fish-producing aqua farms and charcoal burners houses can stop working if the clay pits do so
             "return=failed unless site has water",
             "callworker=dig",
             "consume=water",
-            "sleep=2000",
+            "sleep=22000",
             "animate=working 17000",
             "sleep=1000",
             "produce=clay"

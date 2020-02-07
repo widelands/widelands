@@ -13,28 +13,39 @@ tribes:new_productionsite_type {
       brick = 1,
       granite = 2,
       log = 2,
-      thatch_reed = 1
+      reed = 1
    },
    return_on_dismantle_on_enhanced = {
       granite = 1,
       log = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 94},
-         fps = 10,
+         directory = dirname,
+         basename = "idle",
+         hotspot = {50, 82},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 94},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "working",
+         hotspot = {50, 82},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
       unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 83},
-      },
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {50, 72}
+      }
    },
 
    aihints = {
@@ -72,8 +83,8 @@ tribes:new_productionsite_type {
          actions = {
             -- time total: 50 + 3.6
             "return=skipped unless economy needs fur_garment_studded",
-            "sleep=25000",
             "consume=fur_garment iron",
+            "sleep=25000",
             "animate=working 25000",
             "produce=fur_garment_studded"
          },
@@ -84,8 +95,8 @@ tribes:new_productionsite_type {
          actions = {
             -- time total: 50 + 3.6
             "return=skipped unless economy needs fur_garment_golden",
-            "sleep=25000",
             "consume=fur_garment iron gold",
+            "sleep=25000",
             "animate=working 25000",
             "produce=fur_garment_golden"
          },

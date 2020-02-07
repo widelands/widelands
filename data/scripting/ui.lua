@@ -1,12 +1,17 @@
 include "scripting/coroutine.lua"
 
 -- RST
+-- .. _ui.lua:
+--
 -- ui.lua
 -- ---------------
 --
 -- This script contains UI related functions like for moving the mouse or the
 -- view or clicking on fields and UI elements.
 --
+-- .. Note::
+--    Do not use any of these functions for multiplayer scenarios or winconditions,
+--    because a game will likely desync then.
 
 -- Sleep until we are done animating.
 function _await_animation()
@@ -176,8 +181,10 @@ end
 --    Sleeps while player is in roadbuilding mode.
 --
 function wait_for_roadbuilding()
-   _await_animation()
-   while (wl.ui.MapView().is_building_road) do sleep(2000) end
+   if wl.Game().type == "singleplayer" then
+      _await_animation()
+      while (wl.ui.MapView().is_building_road) do sleep(2000) end
+   end
 end
 
 

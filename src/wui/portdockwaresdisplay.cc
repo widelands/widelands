@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2018 by the Widelands Development Team
+ * Copyright (C) 2011-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,9 +26,9 @@
 #include "logic/player.h"
 #include "wui/inputqueuedisplay.h"
 
+using Widelands::InputQueue;
 using Widelands::PortDock;
 using Widelands::Warehouse;
-using Widelands::InputQueue;
 
 namespace {
 

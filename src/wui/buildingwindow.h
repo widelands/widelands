@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -85,7 +85,7 @@ protected:
 	void configure_workarea_button();
 	void act_start_stop();
 	void act_start_or_cancel_expedition();
-	void act_enhance(Widelands::DescriptionIndex);
+	void act_enhance(Widelands::DescriptionIndex, bool is_csite);
 	void clicked_goto();
 
 	void create_input_queue_panel(UI::Box*,
@@ -94,6 +94,10 @@ protected:
 	                              bool = false);
 
 	bool is_dying_;
+
+	void set_building_descr_for_help(const Widelands::BuildingDescr* d) {
+		building_descr_for_help_ = d;
+	}
 
 private:
 	void create_capsbuttons(UI::Box* buttons, Widelands::Building* building);
@@ -110,7 +114,7 @@ private:
 	Widelands::OPtr<Widelands::Building> building_;
 
 	// The building description that will be used for the help button
-	const Widelands::BuildingDescr& building_descr_for_help_;
+	const Widelands::BuildingDescr* building_descr_for_help_;
 
 	// We require this to unregister overlays when we are closed. Since the
 	// building might have been destroyed by then we have to keep a copy of its
@@ -131,8 +135,6 @@ private:
 
 	bool showing_workarea_;
 	bool avoid_fastclick_;
-	// The building is being transformed from a contructionsite to a finished building etc.
-	bool is_warping_;
 
 	UI::Button* expeditionbtn_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteExpeditionCanceled>>

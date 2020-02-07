@@ -9,7 +9,6 @@ You will need to have the Translate Toolkit installed:
 http://toolkit.translatehouse.org/
 
 For Debian-based Linux: sudo apt-get install translate-toolkit
-
 """
 
 from collections import defaultdict
@@ -46,7 +45,7 @@ def generate_translation_stats(po_dir, output_file):
     sys.stdout.write('Fetching translation stats ')
 
     # Regex to extract the locale from the po filenames.
-    regex_po = re.compile(r"/\S+/(\w+)\.po")
+    regex_po = re.compile(r'/\S+/(\w+)\.po')
 
     # We get errors for non-po files in the base po dir, so we have to walk
     # the subdirs.
@@ -146,6 +145,7 @@ def main():
         print('Something went wrong:')
         traceback.print_exc()
         return 1
+
 
 if __name__ == '__main__':
     sys.exit(main())

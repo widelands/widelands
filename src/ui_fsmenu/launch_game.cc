@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,6 @@
 #include "base/i18n.h"
 #include "base/warning.h"
 #include "base/wexception.h"
-#include "graphic/text_constants.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
@@ -45,35 +44,65 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
      buth_(get_h() * 9 / 200),
 
      win_condition_dropdown_(this,
+                             "dropdown_wincondition",
                              get_w() * 7 / 10,
                              get_h() * 4 / 10 + buth_,
                              butw_,
-                             get_h() - get_h() * 4 / 10 - buth_,
+                             10,  // max number of items
                              buth_,
                              "",
                              UI::DropdownType::kTextual,
-                             UI::PanelStyle::kFsMenu),
+                             UI::PanelStyle::kFsMenu,
+                             UI::ButtonStyle::kFsMenuMenu),
+     peaceful_(this, Vector2i(get_w() * 7 / 10, get_h() * 19 / 40 + buth_), _("Peaceful mode")),
      ok_(this, "ok", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuPrimary, _("Start game")),
      back_(this, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
      // Text labels
-     title_(this, get_w() / 2, get_h() / 25, "", UI::Align::kCenter),
+     title_(this,
+            get_w() / 2,
+            get_h() / 25,
+            0,
+            0,
+            "",
+            UI::Align::kCenter,
+            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
      // Variables and objects used in the menu
      settings_(settings),
      ctrl_(ctrl),
+     peaceful_mode_forbidden_(false),
      nr_players_(0) {
 	win_condition_dropdown_.selected.connect(
 	   boost::bind(&FullscreenMenuLaunchGame::win_condition_selected, this));
+	peaceful_.changed.connect(boost::bind(&FullscreenMenuLaunchGame::toggle_peaceful, this));
 	back_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuLaunchGame::clicked_back, boost::ref(*this)));
 	ok_.sigclicked.connect(boost::bind(&FullscreenMenuLaunchGame::clicked_ok, boost::ref(*this)));
 
 	lua_ = new LuaInterface();
 
-	title_.set_fontsize(fs_big());
+	title_.set_font_scale(scale_factor());
 }
 
 FullscreenMenuLaunchGame::~FullscreenMenuLaunchGame() {
 	delete lua_;
+}
+
+void FullscreenMenuLaunchGame::update_peaceful_mode() {
+	bool forbidden =
+	   peaceful_mode_forbidden_ || settings_->settings().scenario || settings_->settings().savegame;
+	peaceful_.set_enabled(!forbidden && settings_->can_change_map());
+	if (forbidden) {
+		peaceful_.set_state(false);
+	}
+	if (settings_->settings().scenario) {
+		peaceful_.set_tooltip(_("The relations between players are set by the scenario"));
+	} else if (settings_->settings().savegame) {
+		peaceful_.set_tooltip(_("The relations between players are set by the saved game"));
+	} else if (peaceful_mode_forbidden_) {
+		peaceful_.set_tooltip(_("The selected win condition does not allow peaceful matches"));
+	} else {
+		peaceful_.set_tooltip(_("Forbid fighting between players"));
+	}
 }
 
 bool FullscreenMenuLaunchGame::init_win_condition_label() {
@@ -186,6 +215,10 @@ FullscreenMenuLaunchGame::win_condition_if_valid(const std::string& win_conditio
 		t.reset(nullptr);
 	}
 	return t;
+}
+
+void FullscreenMenuLaunchGame::toggle_peaceful() {
+	settings_->set_peaceful_mode(peaceful_.get_state());
 }
 
 // Implemented by subclasses

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2018 by the Widelands Development Team
+ * Copyright (C) 2010-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,8 +23,6 @@
 #include <memory>
 
 #include "base/wexception.h"
-#include "io/fileread.h"
-#include "io/filewrite.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/tribes.h"
@@ -53,16 +51,31 @@ Buildcost::Buildcost(std::unique_ptr<LuaTable> table, Tribes& tribes)
 		} catch (const WException& e) {
 			throw GameDataError("[buildcost] \"%s=%d\": %s", warename.c_str(), value, e.what());
 		}
+
+		// Read value
+		value = table->get_int(warename);
+		if (value < 1) {
+			throw GameDataError("Buildcost: Ware count needs to be > 0 in \"%s=%d\".\nEmpty buildcost "
+			                    "tables are allowed if you wish to have an amount of 0.",
+			                    warename.c_str(), value);
+		} else if (value > 255) {
+			throw GameDataError(
+			   "Buildcost: Ware count needs to be <= 255 in \"%s=%d\".", warename.c_str(), value);
+		}
+
+		// Add
+		insert(std::pair<DescriptionIndex, uint8_t>(tribes.safe_ware_index(warename), value));
 	}
 }
 
 /**
  * Compute the total buildcost.
  */
-uint32_t Buildcost::total() const {
-	uint32_t sum = 0;
-	for (const_iterator it = begin(); it != end(); ++it)
+Widelands::Quantity Buildcost::total() const {
+	Widelands::Quantity sum = 0;
+	for (const_iterator it = begin(); it != end(); ++it) {
 		sum += it->second;
+	}
 	return sum;
 }
 
@@ -79,8 +92,9 @@ void Buildcost::load(FileRead& fr, const Widelands::TribeDescr& tribe) {
 
 	for (;;) {
 		std::string name = fr.c_string();
-		if (name.empty())
+		if (name.empty()) {
 			break;
+		}
 
 		DescriptionIndex index = tribe.ware_index(name);
 		if (!tribe.has_ware(index)) {

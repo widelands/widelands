@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
+from lua_xgettext import gettext, Lua_GetText, head
 import unittest
 
 import os
 import sys
 sys.path.append(os.path.dirname(__file__) + os.path.sep + '..')
-
-from lua_xgettext import gettext, Lua_GetText, head
 
 
 class TestXGettext(unittest.TestCase):

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,8 +29,11 @@
 
 #include "base/log.h"
 #include "base/wexception.h"
+#include "graphic/animation/animation_manager.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -42,6 +45,10 @@
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
 
+namespace {
+char const* const animation_direction_names[6] = {"_ne", "_e", "_se", "_sw", "_w", "_nw"};
+}  // namespace
+
 namespace Widelands {
 
 CmdDestroyMapObject::CmdDestroyMapObject(uint32_t const t, MapObject& o)
@@ -49,6 +56,7 @@ CmdDestroyMapObject::CmdDestroyMapObject(uint32_t const t, MapObject& o)
 }
 
 void CmdDestroyMapObject::execute(Game& game) {
+	game.syncstream().unsigned_8(SyncEntry::kDestroyObject);
 	game.syncstream().unsigned_32(obj_serial);
 
 	if (MapObject* obj = game.objects().get_object(obj_serial))
@@ -94,10 +102,15 @@ CmdAct::CmdAct(uint32_t const t, MapObject& o, int32_t const a)
 }
 
 void CmdAct::execute(Game& game) {
+	game.syncstream().unsigned_8(SyncEntry::kCmdAct);
 	game.syncstream().unsigned_32(obj_serial);
 
-	if (MapObject* const obj = game.objects().get_object(obj_serial))
+	if (MapObject* const obj = game.objects().get_object(obj_serial)) {
+		game.syncstream().unsigned_8(static_cast<uint8_t>(obj->descr().type()));
 		obj->act(game, arg);
+	} else {
+		game.syncstream().unsigned_8(static_cast<uint8_t>(MapObjectType::MAPOBJECT));
+	}
 	// the object must queue the next CMD_ACT itself if necessary
 }
 
@@ -230,28 +243,27 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
                     init_name,
                     init_descname,
                     table.has_key("helptext_script") ? table.get_string("helptext_script") : "") {
+	bool has_animations = false;
 	if (table.has_key("animations")) {
-		std::unique_ptr<LuaTable> anims(table.get_table("animations"));
-		for (const std::string& animation : anims->keys<std::string>()) {
-			add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
-		}
+		has_animations = true;
+		add_animations(*table.get_table("animations"), Animation::Type::kFiles);
+	}
+	if (table.has_key("spritesheets")) {
+		has_animations = true;
+		add_animations(*table.get_table("spritesheets"), Animation::Type::kSpritesheet);
+	}
+	if (has_animations) {
 		if (!is_animation_known("idle")) {
 			throw GameDataError(
 			   "Map object %s has animations but no idle animation", init_name.c_str());
 		}
-		representative_image_filename_ =
-		   g_gr->animations().get_animation(get_animation("idle")).representative_image_filename();
+		assert(g_gr->animations().get_representative_image(name())->width() > 0);
 	}
 	if (table.has_key("icon")) {
 		icon_filename_ = table.get_string("icon");
 		if (icon_filename_.empty()) {
 			throw GameDataError("Map object %s has a menu icon, but it is empty", init_name.c_str());
 		}
-	}
-	// TODO(GunChleoc): We can't scale down images in the font renderer yet, so we need an extra
-	// representative image if the animation has high resolution.
-	if (table.has_key("representative_image")) {
-		representative_image_filename_ = table.get_string("representative_image");
 	}
 	check_representative_image();
 }
@@ -267,38 +279,69 @@ bool MapObjectDescr::is_animation_known(const std::string& animname) const {
 }
 
 /**
- * Add this animation for this map object under this name
+ * Add all animations for this map object
  */
-void MapObjectDescr::add_animation(const std::string& animname, uint32_t const anim) {
-	if (is_animation_known(animname)) {
-		throw GameDataError("Tried to add already existing animation \"%s\"", animname.c_str());
-	} else {
-		anims_.insert(std::pair<std::string, uint32_t>(animname, anim));
+void MapObjectDescr::add_animations(const LuaTable& table, Animation::Type anim_type) {
+	for (const std::string& animname : table.keys<std::string>()) {
+		try {
+			std::unique_ptr<LuaTable> anim = table.get_table(animname);
+			// TODO(GunChleoc): Require basename after conversion has been completed
+			const std::string basename =
+			   anim->has_key<std::string>("basename") ? anim->get_string("basename") : "";
+			const bool is_directional =
+			   anim->has_key<std::string>("directional") ? anim->get_bool("directional") : false;
+			if (is_directional) {
+				for (int dir = 1; dir <= 6; ++dir) {
+					const std::string directional_animname =
+					   animname + animation_direction_names[dir - 1];
+					if (is_animation_known(directional_animname)) {
+						throw GameDataError("Tried to add already existing directional animation '%s\'",
+						                    directional_animname.c_str());
+					}
+					const std::string directional_basename =
+					   basename + animation_direction_names[dir - 1];
+					anims_.insert(std::pair<std::string, uint32_t>(
+					   directional_animname,
+					   g_gr->animations().load(*anim, directional_basename, anim_type)));
+				}
+			} else {
+				if (is_animation_known(animname)) {
+					throw GameDataError(
+					   "Tried to add already existing animation '%s'", animname.c_str());
+				}
+				if (animname == "idle") {
+					anims_.insert(std::pair<std::string, uint32_t>(
+					   animname, g_gr->animations().load(name_, *anim, basename, anim_type)));
+				} else {
+					anims_.insert(std::pair<std::string, uint32_t>(
+					   animname, g_gr->animations().load(*anim, basename, anim_type)));
+				}
+			}
+		} catch (const std::exception& e) {
+			throw GameDataError("Error loading animation '%s' for map object '%s': %s",
+			                    animname.c_str(), name().c_str(), e.what());
+		}
 	}
 }
 
-void MapObjectDescr::add_directional_animation(DirAnimations* anims, const std::string& prefix) {
-	static char const* const dirstrings[6] = {"ne", "e", "se", "sw", "w", "nw"};
+void MapObjectDescr::assign_directional_animation(DirAnimations* anims,
+                                                  const std::string& basename) {
 	for (int32_t dir = 1; dir <= 6; ++dir) {
-		const std::string anim_name = prefix + std::string("_") + dirstrings[dir - 1];
+		const std::string anim_name = basename + animation_direction_names[dir - 1];
 		try {
-			anims->set_animation(dir, get_animation(anim_name));
+			anims->set_animation(dir, get_animation(anim_name, nullptr));
 		} catch (const GameDataError& e) {
 			throw GameDataError("MO: Missing directional animation: %s", e.what());
 		}
 	}
 }
 
-uint32_t MapObjectDescr::get_animation(char const* const anim) const {
-	std::map<std::string, uint32_t>::const_iterator it = anims_.find(anim);
+uint32_t MapObjectDescr::get_animation(const std::string& animname, const MapObject*) const {
+	std::map<std::string, uint32_t>::const_iterator it = anims_.find(animname);
 	if (it == anims_.end()) {
-		throw GameDataError("Unknown animation: %s for %s", anim, name().c_str());
+		throw GameDataError("Unknown animation: %s for %s", animname.c_str(), name().c_str());
 	}
 	return it->second;
-}
-
-uint32_t MapObjectDescr::get_animation(const std::string& animname) const {
-	return get_animation(animname.c_str());
 }
 
 uint32_t MapObjectDescr::main_animation() const {
@@ -314,14 +357,18 @@ std::string MapObjectDescr::get_animation_name(uint32_t const anim) const {
 	NEVER_HERE();
 }
 
+void MapObjectDescr::load_graphics() const {
+	for (const auto& temp_anim : anims_) {
+		g_gr->animations().get_animation(temp_anim.second).load_default_scale_and_sounds();
+	}
+}
+
 const Image* MapObjectDescr::representative_image(const RGBColor* player_color) const {
 	if (is_animation_known("idle")) {
-		return g_gr->animations().get_representative_image(get_animation("idle"), player_color);
+		return g_gr->animations().get_representative_image(
+		   get_animation("idle", nullptr), player_color);
 	}
 	return nullptr;
-}
-const std::string& MapObjectDescr::representative_image_filename() const {
-	return representative_image_filename_;
 }
 
 void MapObjectDescr::check_representative_image() {
@@ -468,6 +515,53 @@ void MapObject::cleanup(EditorGameBase& egbase) {
 	egbase.objects().remove(*this);
 }
 
+void MapObject::do_draw_info(const InfoToDraw& info_to_draw,
+                             const std::string& census,
+                             const std::string& statictics,
+                             const Vector2f& field_on_dst,
+                             float scale,
+                             RenderTarget* dst) const {
+	if (!(info_to_draw & (InfoToDraw::kCensus | InfoToDraw::kStatistics))) {
+		return;
+	}
+
+	// Rendering text is expensive, so let's just do it for only a few sizes.
+	const float granularity = 4.f;
+	float text_scale = scale;
+	// The formula is a bit fancy to avoid too much text overlap.
+	text_scale = std::round(granularity *
+	                        (text_scale > 1.f ? std::sqrt(text_scale) : std::pow(text_scale, 2.f))) /
+	             granularity;
+
+	// Skip tiny text for performance reasons
+	if (text_scale < 0.5f) {
+		return;
+	}
+
+	UI::FontStyleInfo census_font(g_gr->styles().building_statistics_style().census_font());
+	census_font.set_size(scale * census_font.size());
+
+	// We always render this so we can have a stable position for the statistics string.
+	std::shared_ptr<const UI::RenderedText> rendered_census =
+	   UI::g_fh->render(as_richtext_paragraph(census, census_font, UI::Align::kCenter), 120 * scale);
+	Vector2i position = field_on_dst.cast<int>() - Vector2i(0, 48) * scale;
+	if (info_to_draw & InfoToDraw::kCensus) {
+		rendered_census->draw(*dst, position, UI::Align::kCenter);
+	}
+
+	// Draw statistics if we want them, they are available and they fill fit
+	if (info_to_draw & InfoToDraw::kStatistics && !statictics.empty() && scale >= 0.5f) {
+		UI::FontStyleInfo statistics_font(
+		   g_gr->styles().building_statistics_style().statistics_font());
+		statistics_font.set_size(scale * statistics_font.size());
+
+		std::shared_ptr<const UI::RenderedText> rendered_statistics =
+		   UI::g_fh->render(as_richtext_paragraph(statictics, statistics_font, UI::Align::kCenter));
+		position.y += rendered_census->height() + text_height(statistics_font) / 4;
+		rendered_statistics->draw(*dst, position, UI::Align::kCenter);
+	}
+}
+
 const Image* MapObject::representative_image() const {
 	return descr().representative_image(get_owner() ? &get_owner()->get_playercolor() : nullptr);
 }
@@ -539,10 +633,6 @@ void MapObject::set_reserved_by_worker(bool reserve) {
 	reserved_by_worker_ = reserve;
 }
 
-std::string MapObject::info_string(const InfoStringType) {
-	return "";
-}
-
 constexpr uint8_t kCurrentPacketVersionMapObject = 2;
 
 /**
@@ -601,8 +691,12 @@ void MapObject::Loader::load_pointers() {
  * configured.
  *
  * Derived functions must call ancestor's function in the appropriate place.
+ *
+ * We also preload some animation graphics here to prevent jitter at game start.
  */
 void MapObject::Loader::load_finish() {
+	MapObject& mo = get<MapObject>();
+	mo.descr().load_graphics();
 }
 
 /**
@@ -616,4 +710,4 @@ void MapObject::save(EditorGameBase&, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_8(reserved_by_worker_);
 }
 
-}
+}  // namespace Widelands

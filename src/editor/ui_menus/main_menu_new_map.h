@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,12 +20,12 @@
 #ifndef WL_EDITOR_UI_MENUS_MAIN_MENU_NEW_MAP_H
 #define WL_EDITOR_UI_MENUS_MAIN_MENU_NEW_MAP_H
 
-#include "logic/description_maintainer.h"
+#include "editor/ui_menus/map_size_box.h"
+#include "logic/map_objects/description_maintainer.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/listselect.h"
-#include "ui_basic/spinbox.h"
-#include "ui_basic/window.h"
+#include "ui_basic/unique_window.h"
 
 class EditorInteractive;
 
@@ -33,9 +33,9 @@ class EditorInteractive;
  * This is the new map selection menu. It offers
  * the user to choose the new world and a few other
  * things like size, world ....
-*/
-struct MainMenuNewMap : public UI::Window {
-	explicit MainMenuNewMap(EditorInteractive&);
+ */
+struct MainMenuNewMap : public UI::UniqueWindow {
+	explicit MainMenuNewMap(EditorInteractive&, UI::UniqueWindow::Registry&);
 
 private:
 	EditorInteractive& eia();
@@ -46,8 +46,7 @@ private:
 	int32_t margin_;
 	int32_t box_width_;
 	UI::Box box_;
-	UI::SpinBox width_;
-	UI::SpinBox height_;
+	MapSizeBox map_size_box_;
 
 	// Terrains list
 	UI::Listselect<Widelands::DescriptionIndex> list_;

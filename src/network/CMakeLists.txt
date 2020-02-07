@@ -1,5 +1,7 @@
 wl_library(network
   SRCS
+    bufferedconnection.cc
+    bufferedconnection.h
     constants.h
     crypto.h
     crypto.cc
@@ -22,8 +24,6 @@ wl_library(network
     nethost.h
     nethostproxy.cc
     nethostproxy.h
-    netrelayconnection.cc
-    netrelayconnection.h
     network.cc
     network.h
     network_gaming_messages.cc
@@ -49,18 +49,18 @@ wl_library(network
     io_filesystem
     io_stream
     logic
-    logic_constants
+    logic_commands
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings
     logic_tribe_basic_info
     map_io_map_loader
-    profile
     random
     scripting_lua_interface
     scripting_lua_table
     ui_basic
     ui_fsmenu_gameloading
     widelands_ball_of_mud
+    widelands_options
     wui
 )

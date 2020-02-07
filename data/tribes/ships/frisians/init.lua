@@ -1,19 +1,5 @@
 dirname = path.dirname (__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files (dirname .. "idle_??.png"),
-      hotspot = {79, 143},
-      fps = 10
-   },
-   sinking = {
-      pictures = path.list_files (dirname .. "sinking_??.png"),
-      hotspot = {88, 141},
-      fps = 7
-   }
-}
-add_walking_animations (animations, "sail", dirname, "sail", {146, 153}, 10)
-
 tribes:new_ship_type {
    msgctxt = "frisians_ship",
    name = "frisians_ship",
@@ -21,5 +7,34 @@ tribes:new_ship_type {
    descname = pgettext("frisians_ship", "Ship"),
    capacity = 30,
    vision_range = 4,
-   animations = animations,
+   spritesheets = {
+      idle = {
+         directory = dirname,
+         basename = "idle",
+         fps = 10,
+         frames = 20,
+         columns = 5,
+         rows = 4,
+         hotspot = {79, 143}
+      },
+      sinking = {
+         directory = dirname,
+         basename = "sinking",
+         fps = 7,
+         frames = 21,
+         columns = 7,
+         rows = 3,
+         hotspot = {88, 141}
+      },
+      sail = {
+         directory = dirname,
+         basename = "sail",
+         fps = 10,
+         frames = 20,
+         columns = 5,
+         rows = 4,
+         directional = true,
+         hotspot = {146, 153}
+      },
+   }
 }

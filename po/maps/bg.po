@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
@@ -8,10 +8,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-26 10:42+0000\n"
-"Last-Translator: Любомир Василев\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-01-21 18:02+0000\n"
+"PO-Revision-Date: 2020-01-21 18:25+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +20,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../data/campaigns/atl01.wmf/elemental:9
-#: ../../data/campaigns/campaigns.conf:118
 msgid "From Nemesis to Genesis"
 msgstr "От края към началото"
 
@@ -31,7 +30,6 @@ msgid ""
 msgstr "След като акостират на тайнствен остров близо до Атлантида, останалите атландци се борят да си създадат нов дом."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
-#: ../../data/campaigns/campaigns.conf:76
 msgid "A Place to Call Home"
 msgstr "Място, което да наречем дом"
 
@@ -42,7 +40,6 @@ msgid ""
 msgstr "В този сценарий ще бъдат представени по-големите производствени сгради, както и мините."
 
 #: ../../data/campaigns/bar02.wmf/elemental:7
-#: ../../data/campaigns/campaigns.conf:81
 msgid "This Land is Our Land"
 msgstr "Това е нашата земя"
 
@@ -52,147 +49,21 @@ msgid ""
 "and will introduce fighting."
 msgstr "Това обучение обяснява управлението на военните и тренировъчните сгради и ще представи битките."
 
-#: ../../data/campaigns/campaigns.conf:27
-msgid "The Second Empire"
-msgstr "Втората империя"
-
-#: ../../data/campaigns/campaigns.conf:29
-msgid "Barbarians"
-msgstr "Варвари"
-
-#: ../../data/campaigns/campaigns.conf:31
-msgid "Easy. Introduces the Barbarians"
-msgstr "Лесно. Представя варварите"
-
-#: ../../data/campaigns/campaigns.conf:32
-msgid ""
-"When Chat’Karuth died, he was an old man, father to three strong and "
-"ambitious sons, and warlord to an army that could match any enemy willing to"
-" rise against the ancient forests. Though at the end of his glorious reign, "
-"Chat’Karuth chose his eldest son, Thron, to succeed him as the tribe’s "
-"warlord – a decision that left his two brothers unsatisfied. The old warlord"
-" knew that. As his father instructed him, Thron left the capital of "
-"Al’thunran, the home of the Throne Among the Trees, and withdrew his forces "
-"to the high hills where he buried the corpse of his father. There he swore "
-"to the gods and his father’s spirit that he’d return to re-established "
-"order. While his brothers have raged blind war against Thron and the few "
-"forces he left to secure the borders of Al’thunran, the young warlord seeks "
-"to reunite his ambitious brothers and force the tribes to march once again "
-"under a common banner."
-msgstr "Когато Чат'Карут умрял, той вече бил стар човек, баща на трима силни и амбициозни синове и военачалник на армия, която може да победи всеки враг, дръзнал да се изправи срещу древните гори. В края на славното си управление, Чат'Карут избрал най-големия си син, Трон, да го наследи като военачалник на племето – решение, от което двамата му братя не останали доволни. Старият водач знаел това. Както заръчал баща му, Трон напуснал столицата Ал'тунран – домът на Трона сред дърветата – и оттеглил войските си към високите полета, където погребал тялото на баща си. Там той се заклел пред боговете и духа на баща си, че ще се върне, за да възстанови реда. Въпреки че братята му повеждат сляпа война срещу Трон и малкото войска, която той оставил да защитава границите на Ал'тунран, младият военачалник търси начин да помири амбициозните си братя и да накара племената отново да застанат на една и съща страна."
-
-#: ../../data/campaigns/campaigns.conf:35
-msgid "The Months of Exile"
-msgstr "Месеците на изгнание"
-
-#: ../../data/campaigns/campaigns.conf:37
-msgid "Empire"
-msgstr "Империя"
-
-#: ../../data/campaigns/campaigns.conf:39
-msgid "Easy. Introduces the Empire"
-msgstr "Лесно. Представя Империята"
-
-#: ../../data/campaigns/campaigns.conf:40
-msgid ""
-"Six months ago, Lutius – a young general of the Empire – was sent with 150 "
-"soldiers to the frontier beyond the northern forests where Barbarian tribes "
-"were crossing onto land held by the Empire. His task was to defend the "
-"Empire’s land. At first, everything was calm. He even talked to a few "
-"Barbarian children and thought about a peaceful life – side by side with "
-"this archaic folk. He began to feel safer and his army began to drop their "
-"attention off the potential enemy. That was their undoing. One night in "
-"March his unprepared army was attacked by 100 Barbarian footmen and was "
-"completely scattered. Only with his bare life he and a handful of his "
-"soldiers survived."
-msgstr "Преди шест месеца Луций – млад генерал от Империята – бил изпратен със 150 войници към границата отвъд северните гори, където варварски племена били навлезли в територия, владение на Империята. Задачата му била да защити земите на Империята. Отначало всичко било спокойно. Той дори поговорил с няколко варварски деца и обмислял спокоен живот – съвместно с този древен народ. Той започнал да се чувства в безопасност, а армията му – по-малко подозрителна спрямо потенциалния враг. Това била грешката им. Една мартенска вечер неподготвената му армия била нападната от 100 пехотинци на варварите и била напълно разпиляна. Само той и няколко от войниците му едва оцелели."
-
-#: ../../data/campaigns/campaigns.conf:43
-msgid "The Run for the Fire"
-msgstr "Надпреварата за огъня"
-
-#: ../../data/campaigns/campaigns.conf:45
-msgid "Atlanteans"
-msgstr "Атландци"
-
-#: ../../data/campaigns/campaigns.conf:47
-msgid "Challenging. Introduces the Atlanteans"
-msgstr "Предизвикателно. Представя атландците"
-
-#: ../../data/campaigns/campaigns.conf:48
-msgid ""
-"When their God lost faith in the Atlanteans and drowned their island, one "
-"woman’s struggle for justice and a second chance for her people would become"
-" the stuff of legends. Leading the remaining Atlanteans into a new future in"
-" a new part of the World, Jundlina became the most powerful human of her "
-"time, but at a high cost: her humanity and soul."
-msgstr "Когато богът на атландците загубил вяра в тях и потопил острова им, борбата на една жена за справедливост и втори шанс за хората ѝ ще стане основа за легенди. Повеждайки атландците към ново бъдеще в нова част на света, Юндлина станала най-силният човек за времето си, но на огромна цена: човечността и душата ѝ."
-
-#: ../../data/campaigns/campaigns.conf:52
-msgid "From Water to Ice"
-msgstr "От вода към лед"
-
-#: ../../data/campaigns/campaigns.conf:54
-msgid "Frisians"
-msgstr "Фризийци"
-
-#: ../../data/campaigns/campaigns.conf:56
-msgid "For advanced players. Introduces the Frisians"
-msgstr "За напреднали играчи. Представя фризийците"
-
-#: ../../data/campaigns/campaigns.conf:57
-msgid ""
-"Living off the ocean is a constant struggle, and even more so for the "
-"inhabitants of the Frisian North Sea shore. Was the last storm flood, the "
-"most devastating one in human memory, really nothing more than yet another "
-"example for the hardships all Frisians have to face – or a sign from the "
-"gods that a tribe that only just settled here must seek out an entirely new "
-"home?"
-msgstr "Животът, зависим от океана, е винаги труден, а още по-труден е той за жителите на брега на фризийската част от Северно море. Последният бурен прилив беше най-унищожителният в историята на човека, но дали това е още един пример за трудностите, с които трябва да се сблъскват фризийците, или знак от боговете, че тъкмо заселилото се племе трябва отново да си търси нов дом?"
-
-#: ../../data/campaigns/campaigns.conf:86
-#: ../../data/campaigns/campaigns.conf:111
-#: ../../data/campaigns/campaigns.conf:123
-#: ../../data/campaigns/campaigns.conf:139
 #: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
 msgstr "Все още не е завършено"
-
-#: ../../data/campaigns/campaigns.conf:91
-#: ../../data/campaigns/emp01.wmf/elemental:7
-msgid "The Strands of Malac’ Mor"
-msgstr "Оковите на Малак' Мор"
-
-#: ../../data/campaigns/campaigns.conf:96
-#: ../../data/campaigns/emp02.wmf/elemental:9
-msgid "An Outpost for Exile"
-msgstr "Преден пост на изгнанието"
-
-#: ../../data/campaigns/campaigns.conf:101
-msgid "Neptune’s Revenge"
-msgstr "Отмъщението на Нептун"
-
-#: ../../data/campaigns/campaigns.conf:106
-#: ../../data/campaigns/emp04.wmf/elemental:8
-msgid "Surprise, Surprise!"
-msgstr "Изненада!"
-
-#: ../../data/campaigns/campaigns.conf:129
-#: ../../data/campaigns/fri01.wmf/elemental:8
-msgid "The Great Stormflood"
-msgstr "Великият бурен прилив"
-
-#: ../../data/campaigns/campaigns.conf:134
-msgid "Colder than Ice"
-msgstr "По-студено от лед"
 
 #: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
 msgstr "Никой"
 
-#: ../../data/campaigns/dummy.wmf/elemental:11
+#: ../../data/campaigns/dummy.wmf/elemental:12
 msgid "Sorry, this map is not yet implemented."
 msgstr "Съжаляваме, но тази карта още не е завършена."
+
+#: ../../data/campaigns/emp01.wmf/elemental:7
+msgid "The Strands of Malac’ Mor"
+msgstr "Оковите на Малак' Мор"
 
 #: ../../data/campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -202,6 +73,10 @@ msgid ""
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
 msgstr "След поражението във важна битка срещу варварите, която довежда до загуба на голяма част от имперската територия, Луций напуска Фремил, за да започне нов живот. Но съдбата запраща кораба му в ужасяваща буря, която едва не го потопява. С огромна доза късмет той успява да достигне с повредения си кораб до непознат пустинен бряг и да спаси хората си. Засега."
+
+#: ../../data/campaigns/emp02.wmf/elemental:9
+msgid "An Outpost for Exile"
+msgstr "Преден пост на изгнанието"
 
 #: ../../data/campaigns/emp02.wmf/elemental:11
 msgid ""
@@ -217,12 +92,20 @@ msgid ""
 "the will of the gods."
 msgstr "Пътувайки към дома, за да защитят империята, екипажът на Луций бил изненадан от волята на боговете."
 
+#: ../../data/campaigns/emp04.wmf/elemental:8
+msgid "Surprise, Surprise!"
+msgstr "Изненада!"
+
 #: ../../data/campaigns/emp04.wmf/elemental:10
 msgid ""
 "After returning home, Lutius and his crew are faced with an economy in "
 "shambles. Resolving the bottlenecks in the economy will be of utmost "
 "importance to reinstate the glory of the empire."
 msgstr "След като се завръщат у дома, Луций и хората му откриват, че икономиката се е сринала. Премахването на ограничаващите фактори в икономиката е най-важната задача за възвръщането на славата на империята."
+
+#: ../../data/campaigns/fri01.wmf/elemental:8
+msgid "The Great Stormflood"
+msgstr "Великият бурен прилив"
 
 #: ../../data/campaigns/fri01.wmf/elemental:10
 msgid ""
@@ -250,7 +133,6 @@ msgid ""
 msgstr "Ребауд и премето му пристигнаха в севера. Но мястото между замръзналите степи и покритите със сняг планини не е гостоприемно…"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:15
 msgid "Basic Control"
 msgstr "Основно управление"
 
@@ -261,7 +143,6 @@ msgid ""
 msgstr "В това обучение ще научите как да се придвижвате в Widelands и как да строите сгради и пътища."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:19
 msgid "Warfare"
 msgstr "Воюване"
 
@@ -272,18 +153,16 @@ msgid ""
 msgstr "В това обучение ще научите тайните на воюването: как да създавате войници, как да ги обучавате и как да ги поведете в битка."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:23
 msgid "Seafaring"
 msgstr "Мореплаване"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
-"ships and ports."
-msgstr "В това обучение ще се запознаете с мореплаването, тоест как да управлявате корабите и пристанищата."
+"ships and ports, and how to use ferries and waterways."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:27
 msgid "Economy"
 msgstr "Икономика"
 

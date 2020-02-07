@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # ks k, 2017
 # ks k, 2017-2018
-# TaeMin An <kavern02@gmail.com>, 2017
+# TaeMin An, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-12 07:46+0000\n"
-"PO-Revision-Date: 2018-10-24 05:52+0000\n"
-"Last-Translator: ks k\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-01-21 18:02+0000\n"
+"PO-Revision-Date: 2020-01-21 18:25+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +20,6 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../../data/campaigns/atl01.wmf/elemental:9
-#: ../../data/campaigns/campaigns.conf:118
 msgid "From Nemesis to Genesis"
 msgstr "천벌에서 신세기까지"
 
@@ -31,7 +30,6 @@ msgid ""
 msgstr "아틀란티스에 가까운 신비로운 섬에 상륙한 후에, 남아있는 아틀란티스인들은 스스로를 위한 새로운 집을 만들려 노력합니다."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
-#: ../../data/campaigns/campaigns.conf:76
 msgid "A Place to Call Home"
 msgstr "고향을 부르는 곳"
 
@@ -42,7 +40,6 @@ msgid ""
 msgstr "이번 시나리오에서는, 채굴을 포함해서 더 높은 생산 건물을 소개할 것입니다."
 
 #: ../../data/campaigns/bar02.wmf/elemental:7
-#: ../../data/campaigns/campaigns.conf:81
 msgid "This Land is Our Land"
 msgstr "이 땅은 우리 땅"
 
@@ -52,147 +49,21 @@ msgid ""
 "and will introduce fighting."
 msgstr "이 자습서는 군사 건물과 훈련 건물을 다루는 법을 설명하고 전투를 소개할 것입니다."
 
-#: ../../data/campaigns/campaigns.conf:27
-msgid "The Second Empire"
-msgstr "두번째 제국"
-
-#: ../../data/campaigns/campaigns.conf:29
-msgid "Barbarians"
-msgstr "야만인"
-
-#: ../../data/campaigns/campaigns.conf:31
-msgid "Easy. Introduces the Barbarians"
-msgstr "쉬움. 야만인 소개"
-
-#: ../../data/campaigns/campaigns.conf:32
-msgid ""
-"When Chat’Karuth died, he was an old man, father to three strong and "
-"ambitious sons, and warlord to an army that could match any enemy willing to"
-" rise against the ancient forests. Though at the end of his glorious reign, "
-"Chat’Karuth chose his eldest son, Thron, to succeed him as the tribe’s "
-"warlord – a decision that left his two brothers unsatisfied. The old warlord"
-" knew that. As his father instructed him, Thron left the capital of "
-"Al’thunran, the home of the Throne Among the Trees, and withdrew his forces "
-"to the high hills where he buried the corpse of his father. There he swore "
-"to the gods and his father’s spirit that he’d return to re-established "
-"order. While his brothers have raged blind war against Thron and the few "
-"forces he left to secure the borders of Al’thunran, the young warlord seeks "
-"to reunite his ambitious brothers and force the tribes to march once again "
-"under a common banner."
-msgstr "찻'카루스가 죽었을 때, 그는 노인이었고, 강하고 야심찬 세 아들들의 아버지 였고, 고대의 숲에 대해 기꺼이 저항을 다짐한 어떤 적들과도 겨룰 수 있는 군대의 사령관이였습니다. 비록 그의 영광스러운 치세의 끝에, 찻'카루스는 그의 맏아들인, 쓰론을, 부족의 사령관을 이어받는 자리에 선택했습니다만 - 그의 두 동생들에게는 만족스럽지 못한 결정이었습니다. 늙은 사령관은 알고 있었습니다. 그의 아버지가 쓰론을 임명했을 때, 그는 나무들 사이의 왕좌의 고향으로 알려진, 알'툰란의 수도에 있었고, 그의 군대를 아버지의 시신을 묻었던 높은 언덕으로 물렸습니다. 거기서 그는 신들과 그의 아버지의 영혼에 대고 그가 질서를 재정립하기 위해 돌아올 것을 맹세했습니다. 그의 동생들이 쓰론과 그가 알'툰란의 경계를 지키기 위해 남긴 소수의 군대들에 대항하는 맹목적인 전쟁에 정신을 쏟을 동안, 젊은 사령관은 야망이 넘치는 동생들을 다시 결속하고 통일된 깃발 아래서 부족이 다시 한번 진군할 수 있게 하는 방법을 찾고 있습니다."
-
-#: ../../data/campaigns/campaigns.conf:35
-msgid "The Months of Exile"
-msgstr "망명의 나날들"
-
-#: ../../data/campaigns/campaigns.conf:37
-msgid "Empire"
-msgstr "제국"
-
-#: ../../data/campaigns/campaigns.conf:39
-msgid "Easy. Introduces the Empire"
-msgstr "쉬움. 제국 소개"
-
-#: ../../data/campaigns/campaigns.conf:40
-msgid ""
-"Six months ago, Lutius – a young general of the Empire – was sent with 150 "
-"soldiers to the frontier beyond the northern forests where Barbarian tribes "
-"were crossing onto land held by the Empire. His task was to defend the "
-"Empire’s land. At first, everything was calm. He even talked to a few "
-"Barbarian children and thought about a peaceful life – side by side with "
-"this archaic folk. He began to feel safer and his army began to drop their "
-"attention off the potential enemy. That was their undoing. One night in "
-"March his unprepared army was attacked by 100 Barbarian footmen and was "
-"completely scattered. Only with his bare life he and a handful of his "
-"soldiers survived."
-msgstr "6개월 전에, 제국의 젊은 장군인 루티우스는 제국이 지배하는 땅으로 야만인 부족들이 가로질러 오고 있는 북부의 숲 지대 너머 국경으로 150명의 군대와 함께 파견되었습니다. 그의 임무는 제국의 땅을 방어하는 것이었습니다. 처음에는, 모든 것이 평화로웠습니다. 그는 심지어 몇몇 야만인 아이들과 이야기를 나우었고 평화로운 삶 - 이 뒤떨어진 사람들과 나란히 있는 - 에 대해 생각했습니다. 그는 더욱 안전해질 거라 믿었고 그의 군대는 잠재적인 적에 대한 관심을 끄기 시작했습니다. 그래서는 안됐습니다. 3월의 어느 밤 그의 준비되지 않은 군대는 100명의 야만인 보병들에게 공격받았고 완전히 전멸했습니다. 간신히 몸만 빠져나와서 그와 한 줌의 군인들만이 살아남았습니다."
-
-#: ../../data/campaigns/campaigns.conf:43
-msgid "The Run for the Fire"
-msgstr "화염을 위한 질주"
-
-#: ../../data/campaigns/campaigns.conf:45
-msgid "Atlanteans"
-msgstr "아틀란티스인"
-
-#: ../../data/campaigns/campaigns.conf:47
-msgid "Challenging. Introduces the Atlanteans"
-msgstr "도전적. 아틀란티스인 소개"
-
-#: ../../data/campaigns/campaigns.conf:48
-msgid ""
-"When their God lost faith in the Atlanteans and drowned their island, one "
-"woman’s struggle for justice and a second chance for her people would become"
-" the stuff of legends. Leading the remaining Atlanteans into a new future in"
-" a new part of the World, Jundlina became the most powerful human of her "
-"time, but at a high cost: her humanity and soul."
-msgstr "그들의 신이 아틀란티스인들에 대한 믿음을 버리고 섬을 가라앉혔을 때, 한 여자의 정의와 그녀의 사람들을 위한 두번째 기회에 대한 몸부림은 전설의 일부가 될 것입니다. 살아남은 아틀란티스인들을 새로운 세계의 일부에 있는 새로운 미래로 이끌면서, 준들리나는 그녀 시대의 가장 강력한 인간이 되었습니다만, 비싼 대가를 치뤘습니다: 그녀의 인간성과 영혼을."
-
-#: ../../data/campaigns/campaigns.conf:52
-msgid "From Water to Ice"
-msgstr "물에서 얼음으로"
-
-#: ../../data/campaigns/campaigns.conf:54
-msgid "Frisians"
-msgstr "프리지아인"
-
-#: ../../data/campaigns/campaigns.conf:56
-msgid "For advanced players. Introduces the Frisians"
-msgstr "고수들을 위해서. 프리지아인을 소개합니다."
-
-#: ../../data/campaigns/campaigns.conf:57
-msgid ""
-"Living off the ocean is a constant struggle, and even more so for the "
-"inhabitants of the Frisian North Sea shore. Was the last storm flood, the "
-"most devastating one in human memory, really nothing more than yet another "
-"example for the hardships all Frisians have to face – or a sign from the "
-"gods that a tribe that only just settled here must seek out an entirely new "
-"home?"
-msgstr "바다를 떠나 사는것은 끊임없는 고통입니다. 심지어 프리스티아 북쪽 해안 주민들에게는 더욱 그렇습니다. 사람들의 기억에서 가장 파괴적인 마지막으로 몰아친 매우 세차게 부는 비바람으로 인한 홍수가 그들이 직면해야 하는 어려움에 대한 잇다르는 본보기에 불과했던 걸까요? 아니면 이제 막 이곳에 정착했던 부족이 완전히 새로운 고향을 찾으라는 신의 뜻이 일까요?"
-
-#: ../../data/campaigns/campaigns.conf:86
-#: ../../data/campaigns/campaigns.conf:111
-#: ../../data/campaigns/campaigns.conf:123
-#: ../../data/campaigns/campaigns.conf:139
 #: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
 msgstr "아직 구현되지 않았음"
-
-#: ../../data/campaigns/campaigns.conf:91
-#: ../../data/campaigns/emp01.wmf/elemental:7
-msgid "The Strands of Malac’ Mor"
-msgstr "마라크'모르에서의 좌초"
-
-#: ../../data/campaigns/campaigns.conf:96
-#: ../../data/campaigns/emp02.wmf/elemental:9
-msgid "An Outpost for Exile"
-msgstr "추방자의 개척지"
-
-#: ../../data/campaigns/campaigns.conf:101
-msgid "Neptune’s Revenge"
-msgstr "해왕성의 앙값음"
-
-#: ../../data/campaigns/campaigns.conf:106
-#: ../../data/campaigns/emp04.wmf/elemental:8
-msgid "Surprise, Surprise!"
-msgstr "놀람, 놀라움!"
-
-#: ../../data/campaigns/campaigns.conf:129
-#: ../../data/campaigns/fri01.wmf/elemental:8
-msgid "The Great Stormflood"
-msgstr "거대한 비바람 홍수"
-
-#: ../../data/campaigns/campaigns.conf:134
-msgid "Colder than Ice"
-msgstr "얼음보다 차가운"
 
 #: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
 msgstr "아무도 없음"
 
-#: ../../data/campaigns/dummy.wmf/elemental:11
+#: ../../data/campaigns/dummy.wmf/elemental:12
 msgid "Sorry, this map is not yet implemented."
 msgstr "죄송하지만, 이 지도는 아직 구현되지 않았습니다."
+
+#: ../../data/campaigns/emp01.wmf/elemental:7
+msgid "The Strands of Malac’ Mor"
+msgstr "마라크'모르에서의 좌초"
 
 #: ../../data/campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -202,6 +73,10 @@ msgid ""
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
 msgstr "제국 영토의 큰 부분을 소실하게 될 야만인들과의 중요한 전투에서 패배한 후, 루티우스는 새로운 삶을 시작하기 위해 프레밀을 떠납니다. 하지만 그의 운명은 그의 선박을 심한 폭풍으로 인도해서, 거의 파괴 직전으로 만듭니다. 매우 운좋게도 그는 손상을 입은 선박을 알 수 없는 메마른 해변에 놓게 되고 그의 사람들을 구합니다. 지금까지는."
+
+#: ../../data/campaigns/emp02.wmf/elemental:9
+msgid "An Outpost for Exile"
+msgstr "추방자의 개척지"
 
 #: ../../data/campaigns/emp02.wmf/elemental:11
 msgid ""
@@ -217,12 +92,20 @@ msgid ""
 "the will of the gods."
 msgstr "제국을 방어하기 위해 고향으로 돌아가는 길에서, 루티우스의 부하들은 신들의 의지에 놀랐습니다."
 
+#: ../../data/campaigns/emp04.wmf/elemental:8
+msgid "Surprise, Surprise!"
+msgstr "놀람, 놀라움!"
+
 #: ../../data/campaigns/emp04.wmf/elemental:10
 msgid ""
 "After returning home, Lutius and his crew are faced with an economy in "
 "shambles. Resolving the bottlenecks in the economy will be of utmost "
 "importance to reinstate the glory of the empire."
 msgstr "고향으로 돌아온 후 루티우스와 선원들은 난장판이 된 경제 상황에 직면한다. 경제의 병목현상을 해결하는 것은 제국의 영광을 되찾는 데 가장 중요한 역할을 할 것이다."
+
+#: ../../data/campaigns/fri01.wmf/elemental:8
+msgid "The Great Stormflood"
+msgstr "거대한 비바람 홍수"
 
 #: ../../data/campaigns/fri01.wmf/elemental:10
 msgid ""
@@ -250,7 +133,6 @@ msgid ""
 msgstr "리바우드와 그의 부족은 북쪽에 도착했다. 하지만 얼어붙은 건조 초원지대와 눈 덮인 산 사이에 도착한 것은 환영할 만한 것이 못됩니다…"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:15
 msgid "Basic Control"
 msgstr "기본 조작"
 
@@ -261,7 +143,6 @@ msgid ""
 msgstr "이번 자습서에서, 당신은 어떻게 와이드랜드를 탐사하고 건물과 도로를 건설하는지 배울 것입니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:19
 msgid "Warfare"
 msgstr "전투"
 
@@ -272,18 +153,16 @@ msgid ""
 msgstr "이번 자습서에서는 전투의 비밀에 대해 배울 것입니다: 어떻게 군인을 만들고, 훈련하고, 전투로 이끌지에 대해서."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:23
 msgid "Seafaring"
 msgstr "항해"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
-"ships and ports."
-msgstr "이번 자습서에서는 당신은 어떻게 선박과 항구를 다룰지에 대한, 항해에 대해 알게 될 것입니다."
+"ships and ports, and how to use ferries and waterways."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:27
 msgid "Economy"
 msgstr "경제"
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
 #ifndef WL_WLAPPLICATION_H
 #define WL_WLAPPLICATION_H
 
-// Workaround for bug http://sourceforge.net/p/mingw/bugs/2152/
+// Workaround for bug https://sourceforge.net/p/mingw/bugs/2152/
 #ifdef __MINGW32__
 #ifndef _WIN64
 #ifndef _USE_32BIT_TIME_T
@@ -213,8 +213,10 @@ private:
 	void setup_homedir();
 
 	void cleanup_replays();
-
 	void cleanup_ai_files();
+	void cleanup_temp_files();
+	void cleanup_temp_backups(std::string dir);
+	void cleanup_temp_backups();
 
 	bool redirect_output(std::string path = "");
 
@@ -257,6 +259,9 @@ private:
 	bool should_die_;
 
 	std::string homedir_;
+#ifdef USE_XDG
+	std::string userconfigdir_;
+#endif
 
 	/// flag indicating if stdout and stderr have been redirected
 	bool redirected_stdio_;

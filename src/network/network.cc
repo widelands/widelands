@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,18 +38,23 @@ bool do_resolve(const boost::asio::ip::tcp& protocol,
 		boost::asio::ip::tcp::resolver::iterator iter = resolver.resolve(query);
 		if (iter == boost::asio::ip::tcp::resolver::iterator()) {
 			// Resolution failed
+			log("Could not resolve network name '%s:%u' to %s-address\n", hostname.c_str(), port,
+			    ((protocol == boost::asio::ip::tcp::v4()) ? "IPv4" : "IPv6"));
 			return false;
 		}
 		addr->ip = iter->endpoint().address();
 		addr->port = port;
+		log("Resolved network name '%s:%u' to %s\n", hostname.c_str(), port,
+		    addr->ip.to_string().c_str());
 		return true;
 	} catch (const boost::system::system_error& ec) {
 		// Resolution failed
-		log("Could not resolve network name: %s\n", ec.what());
+		log("Could not resolve network name '%s:%u' to %s-address: %s\n", hostname.c_str(), port,
+		    ((protocol == boost::asio::ip::tcp::v4()) ? "IPv4" : "IPv6"), ec.what());
 		return false;
 	}
 }
-}
+}  // namespace
 
 bool NetAddress::resolve_to_v4(NetAddress* addr, const std::string& hostname, uint16_t port) {
 	return do_resolve(boost::asio::ip::tcp::v4(), addr, hostname, port);
@@ -213,31 +218,6 @@ size_t RecvPacket::data(void* const packet_data, size_t const bufsize) {
 
 bool RecvPacket::end_of_file() const {
 	return index_ < buffer.size();
-}
-
-void Deserializer::read_data(const uint8_t* data, const int32_t len) {
-
-	queue_.insert(queue_.end(), &data[0], &data[len]);
-}
-
-bool Deserializer::write_packet(RecvPacket* packet) {
-	// No data at all
-	if (queue_.size() < 2)
-		return false;
-
-	uint16_t const size = queue_[0] << 8 | queue_[1];
-	assert(size >= 2);
-
-	// Not enough data for a complete packet
-	if (queue_.size() < static_cast<size_t>(size))
-		return false;
-
-	packet->buffer.clear();
-	packet->buffer.insert(packet->buffer.end(), queue_.begin() + 2, queue_.begin() + size);
-	packet->index_ = 0;
-
-	queue_.erase(queue_.begin(), queue_.begin() + size);
-	return true;
 }
 
 DisconnectException::DisconnectException(const char* fmt, ...) {

@@ -23,7 +23,7 @@ port1:set_wares {
    log = 40,
    brick = 50,
    granite = 40,
-   thatch_reed = 20,
+   reed = 20,
    clay = 10,
    water = 5,
    coal = 30,
@@ -247,7 +247,7 @@ hq3 = p3:place_building("barbarians_headquarters", map.player_slots[3].starting_
 hq3:set_wares {
    log = 100,
    granite = 50,
-   thatch_reed = 50,
+   reed = 50,
    blackwood = 10, -- To delay expansion
    grout = 20,
    coal = 20,

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -111,6 +111,6 @@ struct Supply : public Trackable {
 	 */
 	virtual Worker& launch_worker(Game&, const Request&) = 0;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_SUPPLY_H

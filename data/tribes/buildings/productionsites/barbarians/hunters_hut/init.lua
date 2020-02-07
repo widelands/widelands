@@ -45,6 +45,11 @@ tribes:new_productionsite_type {
       barbarians_hunter = 1
    },
 
+   indicate_workarea_overlaps = {
+      barbarians_hunters_hut = false,
+      barbarians_gamekeepers_hut = true,
+   },
+
    outputs = {
       "meat"
    },
@@ -54,8 +59,8 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...
          descname = _"hunting",
          actions = {
-            "sleep=35000",
-            "callworker=hunt"
+            "callworker=hunt",
+            "sleep=35000"
          }
       },
    },

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,18 +23,16 @@
 #include <vector>
 
 #include "base/macros.h"
-#include "logic/map_objects/immovable.h"
+#include "economy/roadbase.h"
 #include "logic/path.h"
-#include "logic/roadtype.h"
 
 namespace Widelands {
-struct Carrier;
 class Request;
 
-class RoadDescr : public MapObjectDescr {
+class RoadDescr : public RoadBaseDescr {
 public:
-	RoadDescr(char const* const init_name, char const* const init_descname)
-	   : MapObjectDescr(MapObjectType::ROAD, init_name, init_descname, "") {
+	explicit RoadDescr(char const* const init_name, char const* const init_descname)
+	   : RoadBaseDescr(init_name, init_descname, MapObjectType::ROAD) {
 	}
 	~RoadDescr() override {
 	}
@@ -48,72 +46,34 @@ private:
 // https://stackoverflow.com/questions/40690260/undefined-reference-error-for-static-constexpr-member
 constexpr int32_t kRoadAnimalPrice = 600;
 constexpr int32_t kRoadMaxWallet = static_cast<int32_t>(2.5 * kRoadAnimalPrice);
-
 /**
- * Road is a special object which connects two flags.
- * The Road itself is never rendered; however, the appropriate Field::roads are
- * set to represent the road visually.
- * The actual steps involved in a road are stored as a Path from the starting
- * flag to the ending flag. Apart from that, however, the two flags are treated
- * exactly the same, as far as most transactions are concerned. There are minor
- * exceptions: placement of carriers if the path's length is odd, splitting
- * a road when a flag is inserted.
- *
- * Every road has one or more Carriers attached to it. Carriers are attached
+ * Every Road has one or more Carriers attached to it. Carriers are attached
  * when they arrive via the callback function passed to the request. The
  * callback then calls assign_carrier which incorporates this carrier on this
- * road.
+ * Road.
  */
-struct Road : public PlayerImmovable {
+struct Road : public RoadBase {
 	friend class MapRoaddataPacket;  // For saving
 	friend class MapRoadPacket;      // For init()
 
-	const RoadDescr& descr() const;
-
 	static bool is_road_descr(MapObjectDescr const*);
 
-	enum FlagId { FlagStart = 0, FlagEnd = 1 };
+	explicit Road();
+	~Road() override;
 
+	static Road& create(EditorGameBase&, Flag& start, Flag& end, const Path&);
+
+	// A CarrierSlot can store a carrier.
 	struct CarrierSlot {
 		CarrierSlot();
 
 		OPtr<Carrier> carrier;
 		Request* carrier_request;
-		uint8_t carrier_type;
+		bool second_carrier;
 	};
 
-	Road();
-	~Road() override;
+	void postsplit(Game&, Flag&) override;
 
-	static Road& create(EditorGameBase&, Flag& start, Flag& end, const Path&);
-
-	Flag& get_flag(FlagId const flag) const {
-		return *flags_[flag];
-	}
-
-	uint8_t get_roadtype() const {
-		return type_;
-	}
-	int32_t get_size() const override;
-	bool get_passable() const override;
-	PositionList get_positions(const EditorGameBase&) const override;
-
-	Flag& base_flag() override;
-
-	void set_economy(Economy*) override;
-
-	int32_t get_cost(FlagId fromflag);
-	const Path& get_path() const {
-		return path_;
-	}
-	int32_t get_idle_index() const {
-		return idle_index_;
-	}
-
-	void presplit(Game&, Coords split);
-	void postsplit(Game&, Flag&);
-
-	bool notify_ware(Game& game, Flag& flag);
 	void update_wallet_chargetime(Game& game);
 	void charge_wallet(Game& game);
 	int32_t wallet() const;
@@ -121,25 +81,35 @@ struct Road : public PlayerImmovable {
 	void pay_for_road(Game& game, uint8_t wares_count);
 	void pay_for_building();
 
+	void set_economy(Economy*, WareWorker) override;
+
+	bool notify_ware(Game& game, FlagId flag) override;
+
 	void remove_worker(Worker&) override;
-	void assign_carrier(Carrier&, uint8_t);
+	void assign_carrier(Carrier&, uint8_t) override;
 
 	void log_general_info(const EditorGameBase&) const override;
 
-protected:
-	bool init(EditorGameBase&) override;
-	void cleanup(EditorGameBase&) override;
+	bool is_busy() const {
+		return busy_;
+	}
 
-	void
-	draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, RenderTarget* dst) override;
+protected:
+	bool is_bridge(const EditorGameBase&, const FCoords&, uint8_t) const override;
+	RoadSegment road_type_for_drawing() const override;
 
 private:
-	void set_path(EditorGameBase&, const Path&);
+	void cleanup(EditorGameBase&) override;
 
-	void mark_map(EditorGameBase&);
-	void unmark_map(EditorGameBase&);
+	void link_into_flags(EditorGameBase&, bool = false) override;
 
-	void link_into_flags(EditorGameBase&);
+	bool busy_;
+	/// Counter that is incremented when a ware does not get a carrier for this
+	/// road immediately and decremented over time.
+	int32_t wallet_;
+
+	/// holds the gametime when wallet_ was last charged
+	uint32_t last_wallet_charge_;
 
 	void request_carrier(CarrierSlot&);
 	static void
@@ -147,27 +117,9 @@ private:
 
 	uint8_t carriers_count() const;
 
-private:
-	/// Counter that is incremented for every ware served by this road
-	/// according to the delay of service and decremented over time.
-	int32_t wallet_;
-
-	/// holds the gametime when wallet_ was last charged
-	uint32_t last_wallet_charge_;
-
-	uint8_t type_;        ///< RoadType, 2 bits used
-	Flag* flags_[2];      ///< start and end flag
-	int32_t flagidx_[2];  ///< index of this road in the flag's road array
-
-	/// cost for walking this road (0 = from start to end, 1 = from end to start)
-	int32_t cost_[2];
-
-	Path path_;            ///< path goes from start to end
-	uint32_t idle_index_;  ///< index into path where carriers should idle
-
 	using SlotVector = std::vector<CarrierSlot>;
 	SlotVector carrier_slots_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_ROAD_H

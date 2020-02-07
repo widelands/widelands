@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -76,9 +76,10 @@ Player* PlayersManager::add_player(PlayerNumber const player_number,
 		}
 	}
 
-    const DescriptionIndex tribe_index = egbase_.mutable_tribes()->load_tribe(tribe);
+	const DescriptionIndex tribe_index = egbase_.mutable_tribes()->load_tribe(tribe);
 	p = new Player(egbase_, player_number, initialization_index,
 	               *egbase_.tribes().get_tribe_descr(tribe_index), name);
+
 	p->set_team_number(team);
 	if (player_number <= UserSettings::highest_playernum()) {
 		number_of_players_++;

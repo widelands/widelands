@@ -1,18 +1,19 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2015-2016
 # GunChleoc, 2015-2016,2018
 # GunChleoc, 2014-2015
 # GunChleoc, 2014
-# zecas <jjorge@free.fr>, 2016-2017
+# Rui <xymarior@yandex.com>, 2018
+# zecas <jjorge@free.fr>, 2016-2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-24 13:06+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2019-08-10 17:15+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -292,10 +293,10 @@ msgstr "Construa uma quinta do colmo"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:123
 msgid ""
-"The third material necessary for improved buildings is thatch reed, used to "
-"cover roofs. Thatch reed is planted by a gardener around his building, the "
-"reed yard."
-msgstr "O terceiro material necessário para melhorar os edifícios é o colmo que é usado para cobrir os telhados. O colmo é plantado pelo horticultor à volta do seu edifício que se chama quinta do colmo."
+"The third material necessary for improved buildings is reed, used to cover "
+"roofs. Reed fields are planted by a gardener around his building, the reed "
+"yard."
+msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:129
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:131
@@ -324,7 +325,7 @@ msgstr "A história começa"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:144
 msgid "Thron sighs…"
-msgstr "O Thron suspira …"
+msgstr "O Thron suspira…"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:146
@@ -950,7 +951,7 @@ msgstr "As notícias que ele  trouxe mudaram tudo …"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:498
 msgid "Victory"
-msgstr "Victória"
+msgstr "Vitória"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:499
 msgid ""
@@ -1031,13 +1032,15 @@ msgid ""
 "Therefore, they have decided to join us, hoping that we can help each other."
 msgstr "Mas temem que a guerra cerca de Al'thunran vai acabar com esta vida. Portanto, decidiram de juntarse connosco, esperando que nos poderemos ajudar mutualmente."
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "«&nbsp;%s&nbsp;»"
+msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Novo objetivo"
-msgstr[1] "Novos objetivos"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

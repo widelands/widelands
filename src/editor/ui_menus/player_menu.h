@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,7 @@
 #include <string>
 #include <vector>
 
+#include "editor/ui_menus/tool_options_menu.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
@@ -32,11 +33,11 @@
 
 class EditorInteractive;
 
-class EditorPlayerMenu : public UI::UniqueWindow {
+class EditorPlayerMenu : public EditorToolOptionsMenu {
 public:
-	EditorPlayerMenu(EditorInteractive&, UI::UniqueWindow::Registry&);
-	~EditorPlayerMenu() override {
-	}
+	EditorPlayerMenu(EditorInteractive&,
+	                 EditorSetStartingPosTool& tool,
+	                 UI::UniqueWindow::Registry&);
 
 private:
 	// Container with UI elements to set a player slot's properties

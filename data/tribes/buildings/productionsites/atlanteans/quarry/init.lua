@@ -36,6 +36,10 @@ tribes:new_productionsite_type {
       "granite"
    },
 
+   indicate_workarea_overlaps = {
+      atlanteans_quarry = false,
+   },
+
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
@@ -54,7 +58,7 @@ tribes:new_productionsite_type {
            -- This order is on purpose so that the productivity
            -- drops fast once all rocks are gone.
             "callworker=cut_granite",
-            "sleep=25000"
+            "sleep=18500"
          }
       },
    },

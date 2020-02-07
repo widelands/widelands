@@ -12,8 +12,8 @@ animations = {
       fps = 10
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {9, 21}, 10)
-add_walking_animations(animations, "walkload", dirname, "walk", {9, 21}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {9, 21}, 10)
+add_directional_animation(animations, "walkload", dirname, "walk", {9, 21}, 10)
 
 
 tribes:new_worker_type {
@@ -41,7 +41,7 @@ tribes:new_worker_type {
       search = {
          "animate=hacking 5000",
          "animate=idle 2000",
-         "playsound=sound/hammering geologist_hammer 192",
+         "playsound=sound/hammering/geologist_hammer 192",
          "animate=hacking 3000",
          "findresources"
       }

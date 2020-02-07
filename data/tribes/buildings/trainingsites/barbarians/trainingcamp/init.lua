@@ -14,7 +14,7 @@ tribes:new_trainingsite_type {
       granite = 4,
       grout = 6,
       gold = 4,
-      thatch_reed = 3
+      reed = 3
    },
    return_on_dismantle = {
       log = 3,
@@ -101,7 +101,7 @@ tribes:new_trainingsite_type {
          descname = _"sleeping",
          actions = {
             "sleep=5000",
-            "checksoldier=soldier attack 9", -- dummy check to get sleep rated as skipped - else it will change statistics
+            "return=no_stats",
          }
       },
       upgrade_soldier_attack_0 = {
@@ -109,6 +109,9 @@ tribes:new_trainingsite_type {
          descname = pgettext("barbarians_building", "upgrading soldier attack from level 0 to level 1"),
          actions = {
             "checksoldier=soldier attack 0", -- Fails when aren't any soldier of level 0 attack
+            "return=failed unless site has ax_sharp",
+            "return=failed unless site has fish,meat",
+            "return=failed unless site has barbarians_bread",
             "sleep=30000",
             "checksoldier=soldier attack 0", -- Because the soldier can be expelled by the player
             "consume=ax_sharp fish,meat barbarians_bread",
@@ -120,6 +123,9 @@ tribes:new_trainingsite_type {
          descname = pgettext("barbarians_building", "upgrading soldier attack from level 1 to level 2"),
          actions = {
             "checksoldier=soldier attack 1",
+            "return=failed unless site has ax_broad",
+            "return=failed unless site has fish,meat",
+            "return=failed unless site has barbarians_bread",
             "sleep=30000",
             "checksoldier=soldier attack 1",
             "consume=ax_broad fish,meat barbarians_bread",
@@ -131,6 +137,9 @@ tribes:new_trainingsite_type {
          descname = pgettext("barbarians_building", "upgrading soldier attack from level 2 to level 3"),
          actions = {
             "checksoldier=soldier attack 2",
+            "return=failed unless site has ax_bronze",
+            "return=failed unless site has fish,meat",
+            "return=failed unless site has barbarians_bread",
             "sleep=30000",
             "checksoldier=soldier attack 2",
             "consume=ax_bronze fish,meat barbarians_bread",
@@ -142,6 +151,9 @@ tribes:new_trainingsite_type {
          descname = pgettext("barbarians_building", "upgrading soldier attack from level 3 to level 4"),
          actions = {
             "checksoldier=soldier attack 3",
+            "return=failed unless site has ax_battle",
+            "return=failed unless site has fish,meat:2",
+            "return=failed unless site has barbarians_bread",
             "sleep=30000",
             "checksoldier=soldier attack 3",
             "consume=ax_battle fish,meat:2 barbarians_bread",
@@ -153,6 +165,9 @@ tribes:new_trainingsite_type {
          descname = pgettext("barbarians_building", "upgrading soldier attack from level 4 to level 5"),
          actions = {
             "checksoldier=soldier attack 4",
+            "return=failed unless site has ax_warriors",
+            "return=failed unless site has fish,meat",
+            "return=failed unless site has barbarians_bread:2",
             "sleep=30000",
             "checksoldier=soldier attack 4",
             "consume=ax_warriors fish,meat barbarians_bread:2",
@@ -164,6 +179,8 @@ tribes:new_trainingsite_type {
          descname = pgettext("barbarians_building", "upgrading soldier health from level 0 to level 1"),
          actions = {
             "checksoldier=soldier health 0",
+            "return=failed unless site has helmet",
+            "return=failed unless site has barbarians_bread,fish,meat",
             "sleep=30000",
             "checksoldier=soldier health 0",
             "consume=helmet barbarians_bread,fish,meat",
@@ -175,6 +192,9 @@ tribes:new_trainingsite_type {
          descname = pgettext("barbarians_building", "upgrading soldier health from level 1 to level 2"),
          actions = {
             "checksoldier=soldier health 1",
+            "return=failed unless site has helmet_mask",
+            "return=failed unless site has fish,meat",
+            "return=failed unless site has barbarians_bread",
             "sleep=30000",
             "checksoldier=soldier health 1",
             "consume=helmet_mask fish,meat barbarians_bread",
@@ -186,6 +206,9 @@ tribes:new_trainingsite_type {
          descname = pgettext("barbarians_building", "upgrading soldier health from level 2 to level 3"),
          actions = {
             "checksoldier=soldier health 2",
+            "return=failed unless site has helmet_warhelm",
+            "return=failed unless site has fish,meat:2",
+            "return=failed unless site has barbarians_bread",
             "sleep=30000",
             "checksoldier=soldier health 2",
             "consume=helmet_warhelm fish,meat:2 barbarians_bread",

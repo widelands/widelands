@@ -23,7 +23,7 @@ prefilled_buildings(p1,
       grout = 2,
       iron = 2,
       granite = 5,
-      thatch_reed = 4,
+      reed = 4,
       log = 3,
    },
    workers = {
@@ -80,7 +80,7 @@ function check_wares_in_port_are_all_there(args)
    assert_equal(2, wares.grout)
    assert_equal(2, wares.iron)
    assert_equal(5, wares.granite)
-   assert_equal(4, wares.thatch_reed)
+   assert_equal(4, wares.reed)
    -- We do not check for logs here as they might be carried out of the
    -- warehouse already when we check (because they might get requested by the
    -- hardener).
@@ -207,7 +207,7 @@ function test_cancel_started_expedition_on_ship(needs_second_ship)
 
    -- Now cancel the expedition before it even got send out.
    cancel_expedition_in_shipwindow()
-   sleep(100)
+   sleep(40000)
    assert_equal(1, p1:get_workers("barbarians_builder"))
    sleep(8000)  -- ship needs a while to get wares back.
    check_wares_in_port_are_all_there()
@@ -248,7 +248,7 @@ function test_cancel_started_expedition_underway()
    assert_equal(1, p1:get_workers("barbarians_builder"))
 
    cancel_expedition_in_shipwindow(expedition_ship)
-   sleep(20000)
+   sleep(50000)
    assert_equal(1, p1:get_workers("barbarians_builder"))
    check_wares_in_port_are_all_there()
 
@@ -288,7 +288,7 @@ function test_cancel_when_port_space_was_reached()
    assert_equal(1, p1:get_workers("barbarians_builder"))
 
    cancel_expedition_in_shipwindow(first_ship)
-   sleep(20000)
+   sleep(50000)
    assert_equal(1, p1:get_workers("barbarians_builder"))
    check_wares_in_port_are_all_there()
 

@@ -14,31 +14,42 @@ tribes:new_trainingsite_type {
       granite = 3,
       log = 3,
       gold = 1,
-      thatch_reed = 3
+      reed = 3
    },
    return_on_dismantle = {
       brick = 3,
       granite = 1,
       log = 1,
       gold = 1,
-      thatch_reed = 1
+      reed = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 91},
-         fps = 10,
+         directory = dirname,
+         basename = "idle",
+         hotspot = {50, 79},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 91},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "working",
+         hotspot = {50, 79},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
       unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 69},
-      },
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {50, 60}
+      }
    },
 
    aihints = {
@@ -112,7 +123,7 @@ tribes:new_trainingsite_type {
          descname = _"sleeping",
          actions = {
             "sleep=5000",
-            "checksoldier=soldier attack 9", -- dummy check to get sleep rated as skipped - else it will change statistics
+            "return=no_stats",
          }
       },
       upgrade_soldier_attack_0 = {
@@ -120,7 +131,10 @@ tribes:new_trainingsite_type {
          descname = pgettext ("frisians_building", "upgrading soldier attack from level 0 to level 1"),
          actions = {
             "checksoldier=soldier attack 0", -- Fails when aren't any soldier of level 0 attack
-            "animate=working 26400",
+            "return=failed unless site has sword_long",
+            "return=failed unless site has bread_frisians,beer,smoked_fish,smoked_meat",
+            "sleep=12400",
+            "animate=working 14000",
             "checksoldier=soldier attack 0", -- Because the soldier can be expelled by the player
             "consume=sword_long bread_frisians,beer,smoked_fish,smoked_meat",
             "train=soldier attack 0 1",
@@ -132,9 +146,13 @@ tribes:new_trainingsite_type {
          descname = pgettext ("frisians_building", "upgrading soldier attack from level 1 to level 2"),
          actions = {
             "checksoldier=soldier attack 1",
-            "animate=working 22800",
+            "return=failed unless site has sword_broad",
+            "return=failed unless site has bread_frisians",
+            "return=failed unless site has smoked_fish,smoked_meat",
+            "sleep=10800",
+            "animate=working 12000",
             "checksoldier=soldier attack 1",
-            "consume=sword_broad bread_frisians beer smoked_fish,smoked_meat",
+            "consume=sword_broad bread_frisians smoked_fish,smoked_meat",
             "train=soldier attack 1 2",
             "produce=scrap_iron:2"
          }
@@ -144,9 +162,13 @@ tribes:new_trainingsite_type {
          descname = pgettext ("frisians_building", "upgrading soldier attack from level 2 to level 3"),
          actions = {
             "checksoldier=soldier attack 2",
-            "animate=working 22800",
+            "return=failed unless site has sword_double",
+            "return=failed unless site has beer",
+            "return=failed unless site has smoked_fish,smoked_meat",
+            "sleep=10800",
+            "animate=working 12000",
             "checksoldier=soldier attack 2",
-            "consume=sword_double bread_frisians beer smoked_fish,smoked_meat",
+            "consume=sword_double beer smoked_fish,smoked_meat",
             "train=soldier attack 2 3",
             "produce=scrap_iron scrap_metal_mixed"
          }
@@ -156,7 +178,10 @@ tribes:new_trainingsite_type {
          descname = pgettext ("frisians_building", "upgrading soldier health from level 0 to level 1"),
          actions = {
             "checksoldier=soldier health 0",
-            "animate=working 30000",
+            "return=failed unless site has bread_frisians,beer",
+            "return=failed unless site has smoked_fish,smoked_meat",
+            "sleep=15000",
+            "animate=working 15000",
             "checksoldier=soldier health 0",
             "consume=helmet bread_frisians,beer smoked_fish,smoked_meat",
             "train=soldier health 0 1"
@@ -167,7 +192,11 @@ tribes:new_trainingsite_type {
          descname = pgettext ("frisians_building", "upgrading soldier defense from level 0 to level 1"),
          actions = {
             "checksoldier=soldier defense 0",
-            "animate=working 26400",
+            "return=failed unless site has fur_garment_studded",
+            "return=failed unless site has bread_frisians,beer",
+            "return=failed unless site has smoked_fish,smoked_meat",
+            "sleep=12400",
+            "animate=working 14000",
             "checksoldier=soldier defense 0",
             "consume=fur_garment_studded bread_frisians,beer smoked_fish,smoked_meat",
             "train=soldier defense 0 1",

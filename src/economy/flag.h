@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,12 +27,15 @@
 #include "base/macros.h"
 #include "economy/routing_node.h"
 #include "logic/map_objects/immovable.h"
+#include "logic/map_objects/info_to_draw.h"
 #include "logic/map_objects/walkingdir.h"
 
 namespace Widelands {
 class Building;
 class Request;
+struct RoadBase;
 struct Road;
+struct Waterway;
 class WareInstance;
 
 class FlagDescr : public MapObjectDescr {
@@ -47,16 +50,13 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(FlagDescr);
 };
 
-constexpr bool kPendingOnly = true;           // ignore non-pending wares
-constexpr int32_t kNotFoundAppropriate = -1;  // no ware appropiate for carrying
-constexpr int32_t kDenyDrop = -2;             // flag is full and no ware appropiate for swapping
-
 /**
  * Flag represents a flag as you see it on the map.
  *
- * A flag itself doesn't do much. However, it can have up to 6 roads attached
- * to it. Instead of the WALK_NW road, it can also have a building attached to
- * it. Flags also have a store of up to 8 wares.
+ * A flag itself doesn't do much. However, it can have up to 6 roads/waterways
+ * attached to it. Instead of the WALK_NW road, it can also have a building
+ * attached to it. It cannot have more than one waterway.
+ * Flags also have a store of up to 8 wares.
  *
  * You can also assign an arbitrary number of "jobs" for a flag.
  * A job consists of a request for a worker, and the name of a program that the
@@ -83,7 +83,11 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	/// Create a new flag. Only specify an economy during saveloading.
 	/// Otherwise, a new economy will be created automatically if needed.
-	Flag(EditorGameBase&, Player* owner, const Coords&, Economy* economy = nullptr);
+	Flag(EditorGameBase&,
+	     Player* owner,
+	     const Coords&,
+	     Economy* ware_economy = nullptr,
+	     Economy* worker_economy = nullptr);
 	~Flag() override;
 
 	void load_finish(EditorGameBase&) override;
@@ -103,7 +107,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 		return ware_filled_;
 	}
 
-	void set_economy(Economy*) override;
+	void set_economy(Economy*, WareWorker) override;
 
 	Building* get_building() const {
 		return building_;
@@ -111,29 +115,32 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	void attach_building(EditorGameBase&, Building&);
 	void detach_building(EditorGameBase&);
 
-	bool has_road() const {
+	bool has_roadbase() const {
 		return roads_[0] || roads_[1] || roads_[2] || roads_[3] || roads_[4] || roads_[5];
 	}
-	Road* get_road(uint8_t const dir) const {
+	bool has_waterway() const {
+		return nr_of_waterways() > 0;
+	}
+	bool has_road() const {
+		return nr_of_roads() > 0;
+	}
+	RoadBase* get_roadbase(uint8_t dir) const {
 		return roads_[dir - 1];
 	}
+	Road* get_road(uint8_t dir) const;
+	Waterway* get_waterway(uint8_t dir) const;
+	uint8_t nr_of_roadbases() const;
 	uint8_t nr_of_roads() const;
-	void attach_road(int32_t dir, Road*);
+	uint8_t nr_of_waterways() const;
+	void attach_road(int32_t dir, RoadBase*);
 	void detach_road(int32_t dir);
 
+	RoadBase* get_roadbase(Flag&);
 	Road* get_road(Flag&);
 
 	bool is_dead_end() const;
 
-	struct PendingWare {
-		WareInstance* ware;              ///< the ware itself
-		bool pending;                    ///< if the ware is pending
-		int32_t priority;                ///< carrier prefers the ware with highest priority
-		OPtr<PlayerImmovable> nextstep;  ///< next step that this ware is sent to
-	};
-
 	bool has_capacity() const;
-	bool has_capacity_for_ware(WareInstance&) const;
 	uint32_t total_capacity() {
 		return ware_capacity_;
 	}
@@ -143,14 +150,10 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	void wait_for_capacity(Game&, Worker&);
 	void skip_wait_for_capacity(Game&, Worker&);
 	void add_ware(EditorGameBase&, WareInstance&);
-	void init_ware(EditorGameBase&, WareInstance&, PendingWare&);
-	PendingWare* get_ware_for_flag(Flag&, bool pending_only = false);
+	bool has_pending_ware(Game&, Flag& destflag);
+	bool ack_pickup(Game&, Flag& destflag);
 	bool cancel_pickup(Game&, Flag& destflag);
-	void ware_departing(Game&);
-	bool allow_ware_from_flag(WareInstance&, Flag&);
-	int32_t find_swappable_ware(WareInstance&, Flag&);
-	int32_t find_pending_ware(PlayerImmovable&);
-	WareInstance* fetch_pending_ware(Game&, int32_t);
+	WareInstance* fetch_pending_ware(Game&, PlayerImmovable& dest);
 	void propagate_promoted_road(Road* promoted_road);
 	Wares get_wares();
 	uint8_t count_wares_in_queue(PlayerImmovable& dest) const;
@@ -168,8 +171,14 @@ protected:
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 
-	void
-	draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, RenderTarget* dst) override;
+	void draw(uint32_t gametime,
+	          InfoToDraw info_to_draw,
+	          const Vector2f& point_on_dst,
+	          const Coords& coords,
+	          float scale,
+	          RenderTarget* dst) override;
+
+	void wake_up_capacity_queue(Game&);
 
 	static void
 	flag_job_request_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
@@ -177,7 +186,12 @@ protected:
 	void set_flag_position(Coords coords);
 
 private:
-	bool update_ware_from_flag(Game&, PendingWare&, Road&, Flag&);
+	struct PendingWare {
+		WareInstance* ware;              ///< the ware itself
+		bool pending;                    ///< if the ware is pending
+		int32_t priority;                ///< carrier prefers the ware with highest priority
+		OPtr<PlayerImmovable> nextstep;  ///< next step that this ware is sent to
+	};
 
 	struct FlagJob {
 		Request* request;
@@ -188,7 +202,7 @@ private:
 	int32_t animstart_;
 
 	Building* building_;  ///< attached building (replaces road WALK_NW)
-	Road* roads_[WalkingDir::LAST_DIRECTION];
+	RoadBase* roads_[WalkingDir::LAST_DIRECTION];
 
 	int32_t ware_capacity_;  ///< size of wares_ array
 	int32_t ware_filled_;    ///< number of wares currently on the flag
@@ -206,6 +220,6 @@ private:
 };
 
 extern FlagDescr g_flag_descr;
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_FLAG_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,10 +24,8 @@
 #include "graphic/gl/utils.h"
 #include "graphic/texture.h"
 
-// QuickRef:
-// http://www.cs.unh.edu/~cs770/docs/glsl-1.20-quickref.pdf
 // Full specification:
-// http://www.opengl.org/registry/doc/GLSLangSpec.Full.1.20.8.pdf
+// https://www.khronos.org/registry/OpenGL/specs/gl/GLSLangSpec.1.20.pdf
 // We target OpenGL 2.1 for the desktop here.
 TerrainProgram::TerrainProgram() {
 	gl_program_.build("terrain");
@@ -83,10 +81,11 @@ void TerrainProgram::add_vertex(const FieldsToDraw::Field& field, const Vector2f
 	back.texture_offset_y = texture_offset.y;
 }
 
-void TerrainProgram::draw(uint32_t gametime,
-                          const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
-                          const FieldsToDraw& fields_to_draw,
-                          float z_value) {
+void TerrainProgram::draw(
+   uint32_t gametime,
+   const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
+   const FieldsToDraw& fields_to_draw,
+   float z_value) {
 	// This method expects that all terrains have the same dimensions and that
 	// all are packed into the same texture atlas, i.e. all are in the same GL
 	// texture. It does not check for this invariance for speeds sake.

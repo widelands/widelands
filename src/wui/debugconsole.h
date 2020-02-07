@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2018 by the Widelands Development Team
+ * Copyright (C) 2008-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -82,6 +82,6 @@ ChatProvider* get_chat_provider();
  * executes a command, while this function writes to the console.
  */
 void write(const std::string& text);
-}
+}  // namespace DebugConsole
 
 #endif  // end of include guard: WL_WUI_DEBUGCONSOLE_H

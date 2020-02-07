@@ -141,17 +141,17 @@ function test_terrains_resource_descr:test_terrain_editor_category()
 end
 
 function test_terrains_resource_descr:test_terrain_fertility()
-   assert_near(0.7, egbase:get_terrain_description("summer_meadow1").fertility, 0.01)
-   assert_near(0.2, egbase:get_terrain_description("wasteland_beach").fertility, 0.01)
-   assert_near(0.5, egbase:get_terrain_description("desert_forested_mountain2").fertility, 0.01)
-   assert_near(0.001, egbase:get_terrain_description("winter_water").fertility, 0.0001)
+   assert_equal(700, egbase:get_terrain_description("summer_meadow1").fertility)
+   assert_equal(200, egbase:get_terrain_description("wasteland_beach").fertility)
+   assert_equal(500, egbase:get_terrain_description("desert_forested_mountain2").fertility)
+   assert_equal(1, egbase:get_terrain_description("winter_water").fertility)
 end
 
 function test_terrains_resource_descr:test_terrain_humidity()
-   assert_near(0.6, egbase:get_terrain_description("summer_meadow1").humidity, 0.01)
-   assert_near(0.4, egbase:get_terrain_description("wasteland_beach").humidity, 0.01)
-   assert_near(0.5, egbase:get_terrain_description("desert_forested_mountain2").humidity, 0.01)
-   assert_near(0.999, egbase:get_terrain_description("winter_water").humidity, 0.0001)
+   assert_equal(600, egbase:get_terrain_description("summer_meadow1").humidity)
+   assert_equal(400, egbase:get_terrain_description("wasteland_beach").humidity)
+   assert_equal(500, egbase:get_terrain_description("desert_forested_mountain2").humidity)
+   assert_equal(999, egbase:get_terrain_description("winter_water").humidity)
 end
 
 function test_terrains_resource_descr:test_terrain_temperature()

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,8 +33,8 @@ static void instantiate_new_lua_class(lua_State* L) {
 	assert(lua_gettop(L) == 0);  // S:
 
 	std::string module, klass;
-	UNPERS_STRING("module", module);
-	UNPERS_STRING("class", klass);
+	UNPERS_STRING("module", module)
+	UNPERS_STRING("class", klass)
 
 	// get this classes instantiator
 	lua_getglobal(L, "wl");  //  S: wl

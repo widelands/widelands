@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,7 +65,7 @@ Battle::Battle(Game& game, Soldier* first_soldier, Soldier* second_soldier)
 	assert(first_soldier->get_owner() != second_soldier->get_owner());
 	{
 		StreamWrite& ss = game.syncstream();
-		ss.unsigned_32(0x00e111ba);  // appears as ba111e00 in a hexdump
+		ss.unsigned_8(SyncEntry::kBattle);
 		ss.unsigned_32(first_soldier->serial());
 		ss.unsigned_32(second_soldier->serial());
 	}
@@ -137,6 +137,13 @@ Soldier* Battle::opponent(const Soldier& soldier) const {
 	return other_soldier;
 }
 
+unsigned int Battle::get_pending_damage(const Soldier* for_whom) const {
+	if (for_whom == (first_strikes_ ? first_ : second_)) {
+		return damage_;
+	}
+	return 0;
+}
+
 //  TODO(unknown): Couldn't this code be simplified tremendously by doing all scheduling
 //  for one soldier and letting the other sleep until the battle is over?
 //  Could be, but we need to be able change the animations of the soldiers
@@ -167,10 +174,11 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 	// Apply pending damage
 	if (damage_ && oneReadyToFight) {
 		// Current attacker is last defender, so damage goes to current attacker
-		if (first_strikes_)
+		if (first_strikes_) {
 			first_->damage(damage_);
-		else
+		} else {
 			second_->damage(damage_);
+		}
 		damage_ = 0;
 	}
 
@@ -184,8 +192,9 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 		return schedule_destroy(game);
 	}
 
-	if (!first_ || !second_)
+	if (!first_ || !second_) {
 		return soldier.skip_act();
+	}
 
 	// Here is a timeout to prevent battle freezes
 	if (waitingForOpponent && (game.get_gametime() - creationtime_) > 90 * 1000) {
@@ -216,7 +225,7 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 
 		what_anim = this_soldier_is == 1 ? "evade_success_e" : "evade_success_w";
 		return soldier.start_task_idle(
-		   game, soldier.descr().get_rand_anim(game, what_anim.c_str()), 10);
+		   game, soldier.descr().get_rand_anim(game, what_anim, &soldier), 10);
 	}
 	if (bothReadyToFight) {
 		//  Our opponent is waiting for us to fight.
@@ -248,10 +257,12 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 	molog("[battle] (%u) vs (%u) is %d, first strikes %d, last hit %d\n", soldier.serial(),
 	      opponent(soldier)->serial(), this_soldier_is, first_strikes_, last_attack_hits_);
 
+	bool shorten_animation = false;
 	if (this_soldier_is == 1) {
 		if (first_strikes_) {
 			if (last_attack_hits_) {
 				what_anim = "evade_failure_e";
+				shorten_animation = true;
 			} else {
 				what_anim = "evade_success_e";
 			}
@@ -272,13 +283,18 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 		} else {
 			if (last_attack_hits_) {
 				what_anim = "evade_failure_w";
+				shorten_animation = true;
 			} else {
 				what_anim = "evade_success_w";
 			}
 		}
 	}
+	// If the soldier will die as soon as the animation is complete, don't
+	// show it for the full length to prevent overlooping (bug 1817664)
+	shorten_animation &= damage_ >= soldier.get_current_health();
 	molog("[battle] Starting animation %s for soldier %d\n", what_anim.c_str(), soldier.serial());
-	soldier.start_task_idle(game, soldier.descr().get_rand_anim(game, what_anim.c_str()), 1000);
+	soldier.start_task_idle(game, soldier.descr().get_rand_anim(game, what_anim, &soldier),
+	                        shorten_animation ? 850 : 1000);
 }
 
 void Battle::calculate_round(Game& game) {
@@ -392,4 +408,4 @@ MapObject::Loader* Battle::load(EditorGameBase& egbase, MapObjectLoader& mol, Fi
 
 	return loader.release();
 }
-}
+}  // namespace Widelands

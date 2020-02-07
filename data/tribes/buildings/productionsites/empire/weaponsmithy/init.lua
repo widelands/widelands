@@ -7,7 +7,7 @@ tribes:new_productionsite_type {
    descname = pgettext("empire_building", "Weapon Smithy"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   size = "big",
+   size = "medium",
 
    buildcost = {
       log = 2,
@@ -18,8 +18,8 @@ tribes:new_productionsite_type {
    return_on_dismantle = {
       log = 1,
       granite = 1,
-      marble = 2,
-      marble_column = 1
+      marble = 1,
+      marble_column = 2
    },
 
    animations = {
@@ -81,9 +81,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs spear_wooden",
             "consume=planks",
             "sleep=20000",
-            "playsound=sound/smiths smith 192",
+            "playsound=sound/smiths/smith 192",
             "animate=working 21000",
-            "playsound=sound/smiths sharpening 120",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=spear_wooden"
          }
@@ -96,9 +96,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs spear",
             "consume=coal iron planks",
             "sleep=32000",
-            "playsound=sound/smiths smith 192",
+            "playsound=sound/smiths/smith 192",
             "animate=working 36000",
-            "playsound=sound/smiths sharpening 120",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=spear"
          }
@@ -111,9 +111,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs spear_advanced",
             "consume=coal iron:2 planks",
             "sleep=32000",
-            "playsound=sound/smiths smith 192",
+            "playsound=sound/smiths/smith 192",
             "animate=working 36000",
-            "playsound=sound/smiths sharpening 120",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=spear_advanced"
          }
@@ -126,9 +126,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs spear_heavy",
             "consume=coal:2 gold iron planks",
             "sleep=32000",
-            "playsound=sound/smiths smith 192",
+            "playsound=sound/smiths/smith 192",
             "animate=working 36000",
-            "playsound=sound/smiths sharpening 120",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=spear_heavy"
          }
@@ -141,9 +141,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs spear_war",
             "consume=coal:2 gold iron:2 planks",
             "sleep=32000",
-            "playsound=sound/smiths smith 192",
+            "playsound=sound/smiths/smith 192",
             "animate=working 36000",
-            "playsound=sound/smiths sharpening 120",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=spear_war"
          }

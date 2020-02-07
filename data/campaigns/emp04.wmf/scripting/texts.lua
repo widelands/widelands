@@ -226,9 +226,9 @@ diary_page_4 = {
    title=_"The Battle is Won",
    body= lutius(_"Diary of Lutius",
       -- TRANSLATORS: Lutius - Diary
-      _([[Praise the gods, we have succeeded. We managed all the challenges that were imposed on us. We even expelled the Barbarians out of our country. However, our victory is only temporary, as this is still just the beginning of the war. Let’s see what the future still holds for us.]])
-      .. paragraphdivider() ..
-      _([[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]])),
+      _([[Praise the gods, we have succeeded. We managed all the challenges that were imposed on us. We even expelled the Barbarians out of our country. However, our victory is only temporary, as this is still just the beginning of the war. Let’s see what the future still holds for us.]]))
+      .. objective_text(_"Victory",
+      _[[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]]),
    posy=1,
 }
 
@@ -308,10 +308,13 @@ amalea_1 = {
       _([[Lutius, in my opinion this will again be a very difficult challenge. But I’m afraid that we’re doomed to manage this situation. To make things even worse, I was met with a nasty surprise at our warehouses: they’re all empty. You can hardly find a grain of dust left in there: no wares, no tools, no workers and no soldiers either.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[So, first of all we need some building materials to start correcting the mistakes made by the infamous secretary. I think we should try dismantling unproductive small buildings to recover some building materials from them and collect them in our headquarters. As far as I can see now, the fishermen’s houses and the quarries don’t have any resources near them. The lumberjacks’ houses and the wells seem also to be inefficient or worn out.]])
+      _([[So, first of all we need some building materials to start correcting the mistakes made by the infamous secretary. I think we should try dismantling unproductive small buildings to recover some building materials from them and collect them in our headquarters. As far as I can see now, the fishermen’s houses and the quarries don’t have any resources near them. All of the lumberjacks’ houses and the wells seem also to be inefficient or worn out.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[Additionally, we should restrict the input of all buildings which consume any of our building materials to zero. Or maybe we could even pause the production in all bigger buildings and get the workers some rest until we have produced some of their input wares.]]))
+      _([[For the other buildings we can't tell yet, if they are working properly. We need to closely monitor them when we are able to supply them. Until then we shouldn't do anything with them.]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Amalea
+      _([[Except, maybe we should restrict the input of all buildings which consume any of our building materials to zero. Or maybe we could even pause the production in all bigger buildings and get the workers some rest until we have produced some of their input wares.]]))
       .. new_objectives(obj_dismantle_buildings),
    posy=1,
    h=500,
@@ -343,7 +346,7 @@ amalea_3 = {
       _([[Lutius, now we are getting somewhere. As we have gained some construction materials, we can start to rebuild our economy.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[First of all, we need more construction materials. So, we should build at least three lumberjacks’ houses and two quarries.]])
+      _([[First of all, we need more construction materials. So, we should build at least three lumberjacks’ houses and two quarries. Be sure to have dismanteled all of the unproductive buildings though.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[Oh, before I forget, there is another task to accomplish. While our builders are doing their job, somebody should clear up our road network. They are leaving us no space to place the buildings that we need.]]))

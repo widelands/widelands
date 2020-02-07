@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,13 +32,13 @@
 #include "base/wexception.h"
 #include "game_io/game_saver.h"
 #include "io/filesystem/filesystem.h"
+#include "io/filesystem/filesystem_exceptions.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
+#include "logic/generic_save_handler.h"
+#include "wlapplication_options.h"
 #include "wui/interactive_base.h"
-
-// The actual work of saving is done by the GameSaver
-using Widelands::GameSaver;
 
 SaveHandler::SaveHandler()
    : next_save_realtime_(0),
@@ -52,40 +52,67 @@ SaveHandler::SaveHandler()
      number_of_rolls_(5) {
 }
 
-void SaveHandler::roll_save_files(const std::string& filename) {
+bool SaveHandler::roll_save_files(const std::string& filename, std::string* const error) {
+	int32_t rolls = 0;
+	std::string filename_previous;
 
-	int32_t rolls = number_of_rolls_;
-	log("Autosave: Rolling savefiles (count): %d\n", rolls);
-	rolls--;
-	std::string filename_previous =
-	   create_file_name(kSaveDir, (boost::format("%s_%02d") % filename % rolls).str());
-	if (rolls > 0 && g_fs->file_exists(filename_previous)) {
-		g_fs->fs_unlink(filename_previous);  // Delete last of the rolling files
-		log("Autosave: Deleted %s\n", filename_previous.c_str());
+	// Only roll the smallest necessary number of files.
+	while (rolls < number_of_rolls_) {
+		filename_previous =
+		   create_file_name(kSaveDir, (boost::format("%s_%02d") % filename % rolls).str());
+		if (!g_fs->file_exists(filename_previous)) {
+			break;
+		}
+		rolls++;
 	}
+
+	// If there is a file missing in the sequence; no need to delete any file.
+	if (rolls < number_of_rolls_) {
+		log("Autosave: Rolling savefiles (count): %d of %d\n", rolls, number_of_rolls_);
+	} else {
+		log("Autosave: Rolling savefiles (count): %d\n", rolls);
+		rolls--;
+		filename_previous =
+		   create_file_name(kSaveDir, (boost::format("%s_%02d") % filename % rolls).str());
+		if (rolls > 0) {
+			try {
+				g_fs->fs_unlink(filename_previous);  // Delete last of the rolling files
+				log("Autosave: Deleted %s\n", filename_previous.c_str());
+			} catch (const FileError& e) {
+				log("Autosave: Unable to delete file %s: %s\n", filename_previous.c_str(), e.what());
+				if (error) {
+					*error = (boost::format("Autosave: Unable to delete file %s: %s\n") %
+					          filename_previous.c_str() % e.what())
+					            .str();
+				}
+				return false;
+			}
+		}
+	}
+
 	rolls--;
 	while (rolls >= 0) {
 		const std::string filename_next =
 		   create_file_name(kSaveDir, (boost::format("%s_%02d") % filename % rolls).str());
-		if (g_fs->file_exists(filename_next)) {
-			try {
-				g_fs->fs_rename(
-				   filename_next, filename_previous);  // e.g. wl_autosave_08 -> wl_autosave_09
-				log("Autosave: Rolled %s to %s\n", filename_next.c_str(), filename_previous.c_str());
-			} catch (const std::exception& e) {
-				log("Autosave: Unable to rename file %s to %s: %s\n", filename_previous.c_str(),
-				    filename_next.c_str(), e.what());
-			}
+		try {
+			g_fs->fs_rename(
+			   filename_next, filename_previous);  // e.g. wl_autosave_08 -> wl_autosave_09
+			log("Autosave: Rolled %s to %s\n", filename_next.c_str(), filename_previous.c_str());
+		} catch (const FileError& e) {
+			log("Autosave: Unable to roll file %s to %s: %s\n", filename_previous.c_str(),
+			    filename_next.c_str(), e.what());
+			return false;
 		}
 		filename_previous = filename_next;
 		rolls--;
 	}
+	return true;
 }
 
 /**
  * Check if game should be saved at next tick / think.
  *
- * @return true if game should be saved ad next think().
+ * @return true if game should be saved at next think().
  */
 bool SaveHandler::check_next_tick(Widelands::Game& game, uint32_t realtime) {
 	// Perhaps save is due now?
@@ -101,45 +128,7 @@ bool SaveHandler::check_next_tick(Widelands::Game& game, uint32_t realtime) {
 	log("Autosave: %d ms interval elapsed, current gametime: %s, saving...\n",
 	    autosave_interval_in_ms_, gametimestring(game.get_gametime(), true).c_str());
 
-	game.get_ibase()->log_message(_("Saving game…"));
 	return true;
-}
-
-/**
- * If saving fails restore the backup file.
- *
- * @return true when save was a success.
- */
-bool SaveHandler::save_and_handle_error(Widelands::Game& game,
-                                        const std::string& complete_filename,
-                                        const std::string& backup_filename) {
-	std::string error;
-	bool result = save_game(game, complete_filename, &error);
-	if (!result) {
-		log("Autosave: ERROR! - %s\n", error.c_str());
-		game.get_ibase()->log_message(_("Saving failed!"));
-
-		// if backup file was created, move it back
-		if (backup_filename.length() > 0) {
-			if (g_fs->file_exists(complete_filename)) {
-				g_fs->fs_unlink(complete_filename);
-			}
-			g_fs->fs_rename(backup_filename, complete_filename);
-		}
-		// Wait 30 seconds until next save try
-		next_save_realtime_ = SDL_GetTicks() + 30000;
-	} else {
-		// if backup file was created, time to remove it
-		if (backup_filename.length() > 0 && g_fs->file_exists(backup_filename)) {
-			g_fs->fs_unlink(backup_filename);
-		}
-
-		// Count save interval from end of save.
-		// This prevents us from going into endless autosave cycles if the save should take longer
-		// than the autosave interval.
-		next_save_realtime_ = SDL_GetTicks() + autosave_interval_in_ms_;
-	}
-	return result;
 }
 
 /**
@@ -155,6 +144,9 @@ void SaveHandler::think(Widelands::Game& game) {
 
 	// Are we saving now?
 	if (saving_next_tick_ || save_requested_) {
+		saving_next_tick_ = false;
+		bool save_success = true;
+		std::string error;
 		std::string filename = autosave_filename_;
 		if (save_requested_) {
 			// Requested by user
@@ -166,59 +158,34 @@ void SaveHandler::think(Widelands::Game& game) {
 			save_filename_ = "";
 		} else {
 			// Autosave ...
-			roll_save_files(filename);
-			filename = (boost::format("%s_00") % autosave_filename_).str();
-			log("Autosave: saving as %s\n", filename.c_str());
-		}
-
-		// Saving now
-		std::string complete_filename = create_file_name(kSaveDir, filename);
-		std::string backup_filename;
-
-		// always overwrite a file
-		if (g_fs->file_exists(complete_filename)) {
-			filename += "2";
-			backup_filename = create_file_name(kSaveDir, filename);
-			if (g_fs->file_exists(backup_filename)) {
-				g_fs->fs_unlink(backup_filename);
-			}
-			if (save_requested_) {
-				// Exceptions (e.g. no file permissions) will be handled in UI
-				g_fs->fs_rename(complete_filename, backup_filename);
-			} else {
-				// We're autosaving, try to handle file permissions issues
-				try {
-					g_fs->fs_rename(complete_filename, backup_filename);
-				} catch (const std::exception& e) {
-					log("Autosave: Unable to rename file %s to %s: %s\n", complete_filename.c_str(),
-					    backup_filename.c_str(), e.what());
-					// See if we can find a file that doesn't exist and save to that
-					int current_autosave = 0;
-					do {
-						filename = create_file_name(
-						   kSaveDir,
-						   (boost::format("%s_0%d") % autosave_filename_ % (++current_autosave)).str());
-					} while (current_autosave < 9 && g_fs->file_exists(filename));
-					complete_filename = filename;
-					log("Autosave: saving as %s instead\n", complete_filename.c_str());
-					try {
-						g_fs->fs_rename(complete_filename, backup_filename);
-					} catch (const std::exception&) {
-						log("Autosave failed, skipping this interval\n");
-						saving_next_tick_ = check_next_tick(game, realtime);
-						return;
-					}
-				}
+			save_success = roll_save_files(filename, &error);
+			if (save_success) {
+				filename = (boost::format("%s_00") % autosave_filename_).str();
+				log("Autosave: saving as %s\n", filename.c_str());
 			}
 		}
 
-		if (!save_and_handle_error(game, complete_filename, backup_filename)) {
+		if (save_success) {
+			// Saving now (always overwrite file)
+			std::string complete_filename = create_file_name(kSaveDir, filename);
+			save_success = save_game(game, complete_filename, &error);
+		}
+		if (!save_success) {
+			log("Autosave: ERROR! - %s\n", error.c_str());
+			game.get_ibase()->log_message(_("Saving failed!"));
+
+			// Wait 30 seconds until next save try
+			next_save_realtime_ = SDL_GetTicks() + 30000;
 			return;
 		}
 
+		// Count save interval from end of save.
+		// This prevents us from going into endless autosave cycles if the save
+		// should take longer than the autosave interval.
+		next_save_realtime_ = SDL_GetTicks() + autosave_interval_in_ms_;
+
 		log("Autosave: save took %d ms\n", SDL_GetTicks() - realtime);
 		game.get_ibase()->log_message(_("Game saved"));
-		saving_next_tick_ = false;
 	} else {
 		saving_next_tick_ = check_next_tick(game, realtime);
 	}
@@ -231,15 +198,13 @@ void SaveHandler::initialize(uint32_t realtime) {
 	if (initialized_)
 		return;
 
-	Section& global = g_options.pull_section("global");
+	fs_type_ = get_config_bool("nozip", false) ? FileSystem::DIR : FileSystem::ZIP;
 
-	fs_type_ = global.get_bool("nozip", false) ? FileSystem::DIR : FileSystem::ZIP;
-
-	autosave_interval_in_ms_ = global.get_int("autosave", kDefaultAutosaveInterval * 60) * 1000;
+	autosave_interval_in_ms_ = get_config_int("autosave", kDefaultAutosaveInterval * 60) * 1000;
 
 	next_save_realtime_ = realtime + autosave_interval_in_ms_;
 
-	number_of_rolls_ = global.get_int("rolling_autosave", 5);
+	number_of_rolls_ = get_config_int("rolling_autosave", 5);
 
 	initialized_ = true;
 }
@@ -265,31 +230,35 @@ std::string SaveHandler::create_file_name(const std::string& dir,
 /*
  * Save the game using the GameSaver.
  *
- * Will copy text of exceptions to error string.
+ * Overwrites file if it exists.
  *
- * returns true if saved, false in case some error occured.
+ * Will copy text of errors to error string.
+ *
+ * Returns true if saved, false in case some error occured.
  */
 bool SaveHandler::save_game(Widelands::Game& game,
                             const std::string& complete_filename,
-                            std::string* const error) {
+                            std::string* const error_str) {
 	ScopedTimer save_timer("SaveHandler::save_game() took %ums");
 
-	// Make sure that the base directory exists
-	g_fs->ensure_directory_exists(kSaveDir);
+	// save game via the GenericSaveHandler
+	GenericSaveHandler gsh(
+	   [&game](FileSystem& fs) {
+		   Widelands::GameSaver gs(fs, game);
+		   gs.save();
+	   },
+	   complete_filename, fs_type_);
+	gsh.save();
 
-	// Make a filesystem out of this
-	std::unique_ptr<FileSystem> fs;
-	fs.reset(g_fs->create_sub_file_system(complete_filename, fs_type_));
-
-	bool result = true;
-	GameSaver gs(*fs, game);
-	try {
-		gs.save();
-	} catch (const std::exception& e) {
-		if (error)
-			*error = e.what();
-		result = false;
+	// Ignore it if only the temporary backup wasn't deleted
+	// but save was successfull otherwise
+	if (gsh.error() == GenericSaveHandler::Error::kSuccess ||
+	    gsh.error() == GenericSaveHandler::Error::kDeletingBackupFailed) {
+		return true;
 	}
 
-	return result;
+	if (error_str) {
+		*error_str = gsh.error_message();
+	}
+	return false;
 }

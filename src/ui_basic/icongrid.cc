@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2018 by the Widelands Development Team
+ * Copyright (C) 2003-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,7 +63,7 @@ private:
 
 /**
  * Initialize the grid
-*/
+ */
 IconGrid::IconGrid(
    Panel* const parent, int32_t x, int32_t y, int32_t cellw, int32_t cellh, int32_t cols)
    : Panel(parent, x, y, 0, 0), columns_(cols), cell_width_(cellw), cell_height_(cellh) {
@@ -72,7 +72,7 @@ IconGrid::IconGrid(
 /**
  * Add a new icon to the list and resize appropriately.
  * Returns the index of the newly added icon.
-*/
+ */
 int32_t IconGrid::add(const std::string& name,
                       const Image* pic,
                       void* data,
@@ -104,16 +104,16 @@ int32_t IconGrid::add(const std::string& name,
 }
 
 void IconGrid::clicked_button(uint32_t idx) {
-	clicked(idx);
+	icon_clicked(idx);
 	play_click();
 }
 
 /**
  * Returns the user-defined data of the icon with the given index.
-*/
+ */
 void* IconGrid::get_data(int32_t idx) {
 	assert(static_cast<uint32_t>(idx) < items_.size());
 
 	return items_[idx].data;
 }
-}
+}  // namespace UI

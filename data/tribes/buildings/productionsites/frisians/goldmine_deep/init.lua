@@ -13,37 +13,58 @@ tribes:new_productionsite_type {
       brick = 2,
       granite = 1,
       log = 1,
-      thatch_reed = 2
+      reed = 2
    },
    return_on_dismantle_on_enhanced = {
       brick = 1,
       log = 1,
-      thatch_reed = 1
+      reed = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {39, 94},
-         fps = 10,
+         directory = dirname,
+         basename = "idle",
+         hotspot = {28, 74},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {39, 94},
-         fps = 10,
+         directory = dirname,
+         basename = "working",
+         hotspot = {28, 74},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       empty = {
-         pictures = path.list_files (dirname .. "empty_??.png"),
-         hotspot = {39, 94},
-      },
+         directory = dirname,
+         basename = "empty",
+         hotspot = {28, 74},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
       unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {39, 72},
-      },
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {28, 57}
+      }
    },
 
    aihints = {
       mines = "gold",
+   },
+
+   indicate_workarea_overlaps = {
+      frisians_goldmine = false,
+      frisians_goldmine_deep = false,
    },
 
    working_positions = {
@@ -63,10 +84,9 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
          descname = _"mining gold",
          actions = {
-            "sleep=5000",
             "return=skipped unless economy needs gold_ore",
             "consume=meal",
-            "sleep=34800",
+            "sleep=39800",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",

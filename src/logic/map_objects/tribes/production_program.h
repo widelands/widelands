@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,12 +31,13 @@
 
 #include "base/log.h"
 #include "base/macros.h"
-#include "logic/editor_game_base.h"
+#include "logic/map_objects/buildcost.h"
 #include "logic/map_objects/tribes/bill_of_materials.h"
 #include "logic/map_objects/tribes/program_result.h"
 #include "logic/map_objects/tribes/training_attribute.h"
-#include "logic/widelands.h"
+#include "logic/map_objects/tribes/wareworker.h"
 #include "scripting/lua_table.h"
+#include "sound/constants.h"
 
 namespace Widelands {
 
@@ -45,6 +46,7 @@ class ImmovableDescr;
 class ProductionSiteDescr;
 class ProductionSite;
 class TribeDescr;
+class Tribes;
 class Worker;
 class World;
 
@@ -356,7 +358,7 @@ struct ProductionProgram {
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
-		uint32_t id_;
+		std::string animation_name_;
 		Duration duration_;
 	};
 
@@ -503,7 +505,7 @@ struct ProductionProgram {
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
-		std::string name;
+		FxId fx;
 		uint8_t priority;
 	};
 
@@ -538,7 +540,8 @@ struct ProductionProgram {
 	ProductionProgram(const std::string& init_name,
 	                  const std::string& init_descname,
 	                  std::unique_ptr<LuaTable> actions_table,
-	                  EditorGameBase& egbase,
+	                  Tribes& tribes,
+	                  const World& world,
 	                  ProductionSiteDescr* building);
 
 	const std::string& name() const;
@@ -559,6 +562,6 @@ private:
 	Buildcost produced_wares_;
 	Buildcost recruited_workers_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_PRODUCTION_PROGRAM_H

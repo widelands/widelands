@@ -1,16 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016-2018
+# Jukka Pakarinen, 2016-2019
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
+# Teppo Mäenpää <teppo@runbox.com>, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-08-24 06:54+0000\n"
-"PO-Revision-Date: 2018-08-28 17:05+0000\n"
+"POT-Creation-Date: 2019-12-10 17:11+0000\n"
+"PO-Revision-Date: 2019-12-13 18:42+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -69,18 +70,18 @@ msgstr "Laajenna valtakuntaasi itään, ja ala louhia marmoria vuoresta."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:63
 msgid "Build a stonemason’s house and mining infrastructure"
-msgstr "Rakenna kivenhakkaajan talo ja kaivosinfrastukturi"
+msgstr "Rakenna marmoriveistämö ja kaivosinfrastukturi"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:65
 msgid "Stonemason’s house and Mining Infrastructure"
-msgstr "Kivenhakkaajan talo ja Kaivosinfrastukturi"
+msgstr "Marmoriveistämö ja Kaivosinfrastukturi"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:66
 msgid ""
 "Build a stonemason’s house and then a complete mining and production "
 "infrastructure (coal mine and / or charcoal kiln, iron mine, toolsmithy, "
 "weapon smithy, armor smithy and smelting works)."
-msgstr "Rakenna kivenhakkaajan talo ja sitten kokonainen kaivos- ja tuotantoinfrastuktuuri (hiilikaivos ja / tai puuhiilipolttamo, rautakaivos, työkalupaja, asepaja, haarniskapaja ja sulattamo)."
+msgstr "Rakenna marmoriveistämö ja sitten kokonainen kaivos- ja tuotantoinfrastuktuuri (hiilikaivos ja / tai puuhiilipolttamo, rautakaivos, työkalupaja, asepaja, haarniskapaja ja sulattamo)."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:72
 msgid "Provide your miners with food"
@@ -104,7 +105,7 @@ msgstr "Se tietenkin tarkoittaa, että tulet tarvitsemaan lisää resursseja val
 msgid ""
 "To provide these foodstuffs, you can build a fisher’s house, a hunter’s "
 "house, a farm, a mill and a bakery."
-msgstr "Tarjotaksesi näitä ruokia voit rakentaa kalastajanmökin, maatilan, myllyn ja leipomon."
+msgstr "Tarjotaksesi näitä ruokia voit rakentaa kalastajatorpan, maatilan, myllyn ja leipomon."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:78
 msgid ""
@@ -515,13 +516,15 @@ msgid ""
 "otherwise move on to the next mission."
 msgstr "Olet selviytynyt tästä komennuksesta. Voit jatkaa pelaamista halutessasi, tai siirtyä seuraavaan komennukseen."
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "\"%s\""
+msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Uusi Tavoite"
-msgstr[1] "Uudet Tavoitteet"
+msgstr "Uusi Tavoite"
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr "Uudet Tavoitteet"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -74,16 +74,18 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
                /** TRANSLATORS: Button tooltip */
                _("Replace the disconnected player with the selected AI and continue playing")),
      type_dropdown_(&box_h_,
+                    "dropdown_ai",
                     width - 50,  // x
                     0,           // y
                     60,          // width of selection box
-                    800,         // height of selection box, shrinks automatically
-                    35,          // width/height of button
+                    16,  // maximum number of items in the selection box, shrinks automatically
+                    35,  // width/height of button
                     /** TRANSLATORS: Dropdown tooltip to select the AI difficulty when a player has
                        disconnected from a game */
                     _("AI for the disconnected player"),
                     UI::DropdownType::kPictorial,
-                    UI::PanelStyle::kWui),
+                    UI::PanelStyle::kWui,
+                    UI::ButtonStyle::kWuiMenu),
      exit_game_(&box_,
                 "exit_game",
                 0,
@@ -91,7 +93,7 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
                 width,
                 35,
                 UI::ButtonStyle::kWuiMenu,
-                g_gr->images().get("images/wui/menus/menu_exit_game.png"),
+                g_gr->images().get("images/wui/menus/exit.png"),
                 /** TRANSLATORS: Button tooltip */
                 _("Exit Game")) {
 

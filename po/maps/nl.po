@@ -1,14 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
+# Nora Ghaoui, 2016
 # Nora Ghaoui, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-24 18:25+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-01-21 18:02+0000\n"
+"PO-Revision-Date: 2020-01-21 18:25+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +19,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../data/campaigns/atl01.wmf/elemental:9
-#: ../../data/campaigns/campaigns.conf:118
 msgid "From Nemesis to Genesis"
 msgstr "Van Nemesis tot Genesis"
 
@@ -29,7 +29,6 @@ msgid ""
 msgstr "Na te zijn geland op een mysterieus eiland dichtbij Atlantis, worstelen de overgebleven Atlantiërs voor een nieuw thuis voor henzelf."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
-#: ../../data/campaigns/campaigns.conf:76
 msgid "A Place to Call Home"
 msgstr "Een Plaats om Thuis te noemen"
 
@@ -40,7 +39,6 @@ msgid ""
 msgstr "In dit scenario zullen de hogere productiegebouwen en mijnen geïntroduceerd worden."
 
 #: ../../data/campaigns/bar02.wmf/elemental:7
-#: ../../data/campaigns/campaigns.conf:81
 msgid "This Land is Our Land"
 msgstr "Dit Land is ons Land"
 
@@ -50,147 +48,21 @@ msgid ""
 "and will introduce fighting."
 msgstr "Dit scenario legt uit hoe je met militaire- en trainingsgebouwen kunt omgaan en zal het vechten introduceren."
 
-#: ../../data/campaigns/campaigns.conf:27
-msgid "The Second Empire"
-msgstr "Het Tweede Imperium"
-
-#: ../../data/campaigns/campaigns.conf:29
-msgid "Barbarians"
-msgstr "Barbaren"
-
-#: ../../data/campaigns/campaigns.conf:31
-msgid "Easy. Introduces the Barbarians"
-msgstr "Gemakkelijk.  Introduceert de Barbaren"
-
-#: ../../data/campaigns/campaigns.conf:32
-msgid ""
-"When Chat’Karuth died, he was an old man, father to three strong and "
-"ambitious sons, and warlord to an army that could match any enemy willing to"
-" rise against the ancient forests. Though at the end of his glorious reign, "
-"Chat’Karuth chose his eldest son, Thron, to succeed him as the tribe’s "
-"warlord – a decision that left his two brothers unsatisfied. The old warlord"
-" knew that. As his father instructed him, Thron left the capital of "
-"Al’thunran, the home of the Throne Among the Trees, and withdrew his forces "
-"to the high hills where he buried the corpse of his father. There he swore "
-"to the gods and his father’s spirit that he’d return to re-established "
-"order. While his brothers have raged blind war against Thron and the few "
-"forces he left to secure the borders of Al’thunran, the young warlord seeks "
-"to reunite his ambitious brothers and force the tribes to march once again "
-"under a common banner."
-msgstr "Toen Chat’Karuth stierf was hij een oude man, vader van drie sterke, ambitieuze zonen en krijgsheer van een leger dat elke vijand aankon die zich tegen de oeroude bossen had willen keren.  Aan het einde van zijn glorieuze heerschappij duidde Chat’Karuth zijn oudste zoon, Thron, aan als opvolger om de stam te leiden – een besluit waar zijn twee broers geen genoegen mee namen.  De oude krijgsheer wist dat.  Zoals zijn vader hem gebood verliet Thron de hoofdstad Al’thunran en de Troon onder de Bomen, en trok zijn strijdkrachten terug naar de hoge heuvels waar hij het lichaam van zijn vader begroef.  Daar zwoer hij aan de goden en de geest van zijn vader dat hij zou terugkeren om opnieuw orde te brengen.  Terwijl zijn broers een blinde strijd voeren tegen Thron en de weinige soldaten die hij achterliet om de grenzen van Al’thunran te bewaken smeedt de jonge krijgsheer plannen om zijn ambitieuze broers te herenigen en de stammen opnieuw onder hetzelfde vaandel te doen marcheren."
-
-#: ../../data/campaigns/campaigns.conf:35
-msgid "The Months of Exile"
-msgstr "De Maanden in Ballingschap"
-
-#: ../../data/campaigns/campaigns.conf:37
-msgid "Empire"
-msgstr "Imperium"
-
-#: ../../data/campaigns/campaigns.conf:39
-msgid "Easy. Introduces the Empire"
-msgstr "Gemakkelijk. Introduceert het Imperium"
-
-#: ../../data/campaigns/campaigns.conf:40
-msgid ""
-"Six months ago, Lutius – a young general of the Empire – was sent with 150 "
-"soldiers to the frontier beyond the northern forests where Barbarian tribes "
-"were crossing onto land held by the Empire. His task was to defend the "
-"Empire’s land. At first, everything was calm. He even talked to a few "
-"Barbarian children and thought about a peaceful life – side by side with "
-"this archaic folk. He began to feel safer and his army began to drop their "
-"attention off the potential enemy. That was their undoing. One night in "
-"March his unprepared army was attacked by 100 Barbarian footmen and was "
-"completely scattered. Only with his bare life he and a handful of his "
-"soldiers survived."
-msgstr "Zes maanden geleden werd Lutius, een jonge generaal van het Imperium, met honderdvijftig soldaten naar de grens voorbij de noordelijke bossen gezonden, waar de barbaarse stammen Imperiaal land betraden.  Zijn taak was om het grondgebied van het Imperium te verdedigen.  Op het eerste gezicht was alles kalm.  Hij sprak zelfs met een paar barbaarse kinderen en dacht aan een vredig leven – als buren van het archaïsche volk.  Hij begon zich veiliger te voelen en de aandacht van zijn leger voor de potentiële vijand verslapte.  Dit werd hun ondergang.  Op een nacht in maart werd zijn onvoorbereide leger aangevallen door honderd barbaarse voetknechten en werd volledig uiteengedreven.  Met slechts hun leven konden Lutius en een handvol van zijn soldaten ontsnappen."
-
-#: ../../data/campaigns/campaigns.conf:43
-msgid "The Run for the Fire"
-msgstr "De Vlucht voor het Vuur"
-
-#: ../../data/campaigns/campaigns.conf:45
-msgid "Atlanteans"
-msgstr "Atlantiërs"
-
-#: ../../data/campaigns/campaigns.conf:47
-msgid "Challenging. Introduces the Atlanteans"
-msgstr "Uitdagend. Introduceert de Atlantiërs"
-
-#: ../../data/campaigns/campaigns.conf:48
-msgid ""
-"When their God lost faith in the Atlanteans and drowned their island, one "
-"woman’s struggle for justice and a second chance for her people would become"
-" the stuff of legends. Leading the remaining Atlanteans into a new future in"
-" a new part of the World, Jundlina became the most powerful human of her "
-"time, but at a high cost: her humanity and soul."
-msgstr "Toen hun God het vertrouwen verloor in de Atlantiërs en hun eiland verdronk, vocht één vrouw voor rechtvaardigheid en een tweede kans voor haar volk.  Haar verhaal leeft nog voort in de legenden.  Jundlina leidde de overige Atlantiërs naar een nieuwe toekomst in een nieuw deel van de wereld en werd zo de machtigste mens van haar tijd, maar tegen een hoge prijs: haar menselijkheid en haar ziel."
-
-#: ../../data/campaigns/campaigns.conf:52
-msgid "From Water to Ice"
-msgstr ""
-
-#: ../../data/campaigns/campaigns.conf:54
-msgid "Frisians"
-msgstr ""
-
-#: ../../data/campaigns/campaigns.conf:56
-msgid "For advanced players. Introduces the Frisians"
-msgstr ""
-
-#: ../../data/campaigns/campaigns.conf:57
-msgid ""
-"Living off the ocean is a constant struggle, and even more so for the "
-"inhabitants of the Frisian North Sea shore. Was the last storm flood, the "
-"most devastating one in human memory, really nothing more than yet another "
-"example for the hardships all Frisians have to face – or a sign from the "
-"gods that a tribe that only just settled here must seek out an entirely new "
-"home?"
-msgstr ""
-
-#: ../../data/campaigns/campaigns.conf:86
-#: ../../data/campaigns/campaigns.conf:111
-#: ../../data/campaigns/campaigns.conf:123
-#: ../../data/campaigns/campaigns.conf:139
 #: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
 msgstr "Nog niet geïmplementeerd"
-
-#: ../../data/campaigns/campaigns.conf:91
-#: ../../data/campaigns/emp01.wmf/elemental:7
-msgid "The Strands of Malac’ Mor"
-msgstr "De Kusten van Malac’ Mor"
-
-#: ../../data/campaigns/campaigns.conf:96
-#: ../../data/campaigns/emp02.wmf/elemental:9
-msgid "An Outpost for Exile"
-msgstr "Een Voorpost van Ballingschap"
-
-#: ../../data/campaigns/campaigns.conf:101
-msgid "Neptune’s Revenge"
-msgstr ""
-
-#: ../../data/campaigns/campaigns.conf:106
-#: ../../data/campaigns/emp04.wmf/elemental:8
-msgid "Surprise, Surprise!"
-msgstr ""
-
-#: ../../data/campaigns/campaigns.conf:129
-#: ../../data/campaigns/fri01.wmf/elemental:8
-msgid "The Great Stormflood"
-msgstr ""
-
-#: ../../data/campaigns/campaigns.conf:134
-msgid "Colder than Ice"
-msgstr ""
 
 #: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
 msgstr "[niemand]"
 
-#: ../../data/campaigns/dummy.wmf/elemental:11
+#: ../../data/campaigns/dummy.wmf/elemental:12
 msgid "Sorry, this map is not yet implemented."
 msgstr "Sorry, deze kaart is nog niet geïmplementeerd."
+
+#: ../../data/campaigns/emp01.wmf/elemental:7
+msgid "The Strands of Malac’ Mor"
+msgstr "De Kusten van Malac’ Mor"
 
 #: ../../data/campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -200,6 +72,10 @@ msgid ""
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
 msgstr "Na een belangrijke slag te hebben verloren tegen de barbaren, waardoor een groot deel van het Imperiaal territorium verloren ging, verliet Lutius Fremil om een nieuw leven te beginnen.  Maar het lot leidde zijn schip in een zware storm die hen bijna deed vergaan.  Slechts met veel geluk slaagt hij erin om zijn beschadigde schip op een onbekende woestijnkust te doen stranden en zijn mensen te redden. Voorlopig toch."
+
+#: ../../data/campaigns/emp02.wmf/elemental:9
+msgid "An Outpost for Exile"
+msgstr "Een Voorpost van Ballingschap"
 
 #: ../../data/campaigns/emp02.wmf/elemental:11
 msgid ""
@@ -213,13 +89,21 @@ msgstr "Eindelijk was het schip gerepareerd, en Lutius en zijn mensen vervolgden
 msgid ""
 "On their way home to defend the Empire, the crew of Lutius was surprised by "
 "the will of the gods."
-msgstr ""
+msgstr "Op weg naar huis om het Imperium te verdedigen werd Lutius' bemanning verrast door de wil van de goden."
+
+#: ../../data/campaigns/emp04.wmf/elemental:8
+msgid "Surprise, Surprise!"
+msgstr "Wat een Verrassing!"
 
 #: ../../data/campaigns/emp04.wmf/elemental:10
 msgid ""
 "After returning home, Lutius and his crew are faced with an economy in "
 "shambles. Resolving the bottlenecks in the economy will be of utmost "
 "importance to reinstate the glory of the empire."
+msgstr "Na hun thuiskomst worden Lutius en zijn compagnie geconfronteerd met een economie in duigen. De moeilijkheden in de verschillende productiesystemen oplossen zal van het grootste belang zijn om de glorie van het Imperium te herstellen."
+
+#: ../../data/campaigns/fri01.wmf/elemental:8
+msgid "The Great Stormflood"
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/elemental:10
@@ -248,7 +132,6 @@ msgid ""
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:15
 msgid "Basic Control"
 msgstr "Basisbediening"
 
@@ -259,7 +142,6 @@ msgid ""
 msgstr "In deze oefencampagne zal je leren je weg te vinden in Widelands en hoe je gebouwen en wegen bouwt."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:19
 msgid "Warfare"
 msgstr "Oorlog"
 
@@ -270,18 +152,16 @@ msgid ""
 msgstr "Deze oefencampagne zal je de duistere kunst van de oorlog aanleren: soldaten aanmaken, ze trainen en ze ten strijde voeren."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:23
 msgid "Seafaring"
 msgstr "Zeevaart"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
-"ships and ports."
-msgstr "In deze oefencampagne zal je kennismaken met de zeevaart, hoe je schepen en havens inzet."
+"ships and ports, and how to use ferries and waterways."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:27
 msgid "Economy"
 msgstr "Economie"
 

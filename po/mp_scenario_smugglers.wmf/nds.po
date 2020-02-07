@@ -1,14 +1,14 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-06-28 06:01+0000\n"
-"PO-Revision-Date: 2018-07-06 13:01+0000\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"PO-Revision-Date: 2019-05-25 12:36+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -17,29 +17,29 @@ msgstr ""
 "Language: nds\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:109
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:78
 msgid "Wares Smuggled"
 msgstr "Smuggelt Waren"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:132
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:135
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:33
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:57
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:92
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:101
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:104
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:103
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:134
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:195
 #, lua-format
 msgid "%i point"
 msgid_plural "%i points"
 msgstr[0] "%i Punkt"
 msgstr[1] "%i Punkten"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:135
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:104
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:8
 msgid "Rules"
 msgstr "Regels"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:98
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:101
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:104
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:201
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:204
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:207
 msgid "Status"
 msgstr "Tostand"
 
@@ -60,7 +60,7 @@ msgid ""
 "sending/receiving spot while your team mate has to build one on the "
 "corresponding receiving/sending spot. A ware is then transported every 10 "
 "seconds."
-msgstr "Um een Smuggel-Padd intorichten, mutt du up eenem Enn vun eenem Tunnel een Kraamhuus bauen, un dien Partner an de glieke Stee in sienem Gewest ok eens bauen. Dann word all 10 Sekünnen eene Ware smuggelt."
+msgstr "Um een Smuggel-Padd intorichten, mutt du up eenem Enn vun eenem Tunnel een Kraamhuus bauen, un dien Partner an de glieke Stee in sienem Gewest ok eens bauen. Dann word all 10 Sekünnen eene Waar smuggelt."
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:12
@@ -68,7 +68,7 @@ msgstr "Um een Smuggel-Padd intorichten, mutt du up eenem Enn vun eenem Tunnel e
 msgid ""
 "For harder to defend smuggling routes, you get 2 or 3 points per ware "
 "smuggled. The first team to collect %s wins."
-msgstr "För Smuggel-Padden, de swaar to verdedigen sünd, kriggst du 2 oder 3 Punkten för elkeen smuggelt Ware. De eerste Klottje, de %s sammelt, winnt."
+msgstr "För Smuggel-Padden, de swaar to verdedigen sünd, kriggst du 2 of 3 Punkten för elkeen smuggelt Waar. De eerste Klottje, de %s sammelt, winnt."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:13
 msgid "A sending spot"
@@ -101,7 +101,7 @@ msgstr "Du kannst de Tahl vun hannelt Waren alltied im »Tahlen över Allgemeens
 msgid ""
 "A new smuggling route from %1$s to %2$s has been established! Every ware "
 "they smuggle there is worth %3$s."
-msgstr "Een neier Smuggel-Padd vun %1$s na %2$s is klaar! Elkeen Ware, de da smuggelt word, is %3$s weert."
+msgstr "Een nejer Smuggel-Padd vun %1$s na %2$s is klaar! Elkeen Waar, de da smuggelt word, is %3$s weert."
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:26
@@ -109,7 +109,7 @@ msgstr "Een neier Smuggel-Padd vun %1$s na %2$s is klaar! Elkeen Ware, de da smu
 msgid ""
 "Your team has established a new smuggling route. You have the sending "
 "warehouse. Every ware smuggled here is worth %s."
-msgstr "Diene Klottje hett eenen neien Smuggel-Padd klaarmaakt. Du hest dat Kraamhuus, dat Waren schickt. Elkeen Ware, de hier smuggelt word, is %s weert."
+msgstr "Diene Klottje hett eenen nejen Smuggel-Padd klaarmaakt. Du hest dat Kraamhuus, dat Waren schickt. Elkeen Waar, de hier smuggelt word, is %s weert."
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:30
@@ -117,7 +117,7 @@ msgstr "Diene Klottje hett eenen neien Smuggel-Padd klaarmaakt. Du hest dat Kraa
 msgid ""
 "Your team has established a new smuggling route. You have the receiving "
 "warehouse. Every ware smuggled here is worth %s."
-msgstr "Diene Klottje hett eenen neien Smuggel-Padd klaarmaakt. Du hest dat Kraamhuus, dat Waren kriggt. Elkeen Ware, de hier smuggelt word, is %s weert."
+msgstr "Diene Klottje hett eenen nejen Smuggel-Padd klaarmaakt. Du hest dat Kraamhuus, dat Waren kriggt. Elkeen Waar, de hier smuggelt word, is %s weert."
 
 #. TRANSLATORS: the first parameter is '<number> points', the last 2
 #. parameters are player names

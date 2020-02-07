@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,9 +48,7 @@ struct WarehouseSupply;
 
 class WarehouseDescr : public BuildingDescr {
 public:
-	WarehouseDescr(const std::string& init_descname,
-	               const LuaTable& t,
-	               EditorGameBase& egbase);
+	WarehouseDescr(const std::string& init_descname, const LuaTable& t, Tribes& tribes);
 	~WarehouseDescr() override {
 	}
 
@@ -70,6 +68,40 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(WarehouseDescr);
 };
 
+/**
+ * Each ware and worker type has an associated per-warehouse
+ * stock policy that defines whether it will be stocked by this
+ * warehouse.
+ *
+ * \note The values of this enum are written directly into savegames,
+ * so be careful when changing them.
+ */
+enum class StockPolicy {
+	/**
+	 * The default policy allows stocking wares without any special priority.
+	 */
+	kNormal = 0,
+
+	/**
+	 * As long as there are warehouses with this policy for a ware, all
+	 * available unstocked supplies will be transferred to warehouses
+	 * with this policy.
+	 */
+	kPrefer = 1,
+
+	/**
+	 * If a ware has this stock policy, no more of this ware will enter
+	 * the warehouse.
+	 */
+	kDontStock = 2,
+
+	/**
+	 * Like \ref kDontStock, but in addition, existing stock of this ware
+	 * will be transported out of the warehouse over time.
+	 */
+	kRemove = 3,
+};
+
 class Warehouse : public Building {
 	friend class PortDock;
 	friend class MapBuildingdataPacket;
@@ -78,52 +110,18 @@ class Warehouse : public Building {
 
 public:
 	/**
-	 * Each ware and worker type has an associated per-warehouse
-	 * stock policy that defines whether it will be stocked by this
-	 * warehouse.
-	 *
-	 * \note The values of this enum are written directly into savegames,
-	 * so be careful when changing them.
-	 */
-	enum class StockPolicy {
-		/**
-	    * The default policy allows stocking wares without any special priority.
-	    */
-		kNormal = 0,
-
-		/**
-	    * As long as there are warehouses with this policy for a ware, all
-	    * available unstocked supplies will be transferred to warehouses
-	    * with this policy.
-	    */
-		kPrefer = 1,
-
-		/**
-	    * If a ware has this stock policy, no more of this ware will enter
-	    * the warehouse.
-	    */
-		kDontStock = 2,
-
-		/**
-	    * Like \ref kDontStock, but in addition, existing stock of this ware
-	    * will be transported out of the warehouse over time.
-	    */
-		kRemove = 3,
-	};
-
-	/**
 	 * Whether worker indices in count_workers() have to match exactly.
 	 */
 	enum class Match {
 		/**
-	    * Return the number of workers with matching indices.
-	    */
+		 * Return the number of workers with matching indices.
+		 */
 		kExact,
 
 		/**
-	    * Return the number of workers with matching indices or
-	    * which are more experienced workers of the given lower type.
-	    */
+		 * Return the number of workers with matching indices or
+		 * which are more experienced workers of the given lower type.
+		 */
 		kCompatible
 	};
 
@@ -156,7 +154,7 @@ public:
 
 	void act(Game& game, uint32_t data) override;
 
-	void set_economy(Economy*) override;
+	void set_economy(Economy*, WareWorker) override;
 
 	const WareList& get_wares() const;
 	const WareList& get_workers() const;
@@ -209,6 +207,8 @@ public:
 	PortDock* get_portdock() const {
 		return portdock_;
 	}
+
+	const BuildingSettings* create_building_settings() const override;
 
 	// Returns the waresqueue of the expedition if this is a port.
 	// Will throw an exception otherwise.
@@ -303,6 +303,6 @@ private:
 	// try to recreate itself
 	bool cleanup_in_progress_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_WAREHOUSE_H

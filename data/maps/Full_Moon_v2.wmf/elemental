@@ -9,7 +9,7 @@ name=_"Full Moon"
 author="fk"
 descr=_"Whether it is the latest solstice, or lunar illness, something moves these tribes towards their final ordeal."
 hint=
-tags="2teams,ffa,official"
+tags="2teams,balanced,ffa,official"
 
 [teams00]
 team1="0,1"

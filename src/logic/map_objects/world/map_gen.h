@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -120,10 +120,10 @@ private:
 };
 
 /** struct MapGenInfo
-  *
-  * This class holds world specific information for the map generator.
-  * This info is usually read from the file "mapgeninfo" of a world.
-  */
+ *
+ * This class holds world specific information for the map generator.
+ * This info is usually read from the file "mapgeninfo" of a world.
+ */
 struct MapGenInfo {
 	MapGenInfo(const LuaTable& table, const World& world);
 

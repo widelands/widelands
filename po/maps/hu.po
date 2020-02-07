@@ -1,8 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
-# Balázs Meskó <meskobalazs@gmail.com>, 2016-2017
+# Balázs Meskó <meskobalazs@gmail.com>, 2016-2018
 # GunChleoc, 2016
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016
@@ -11,9 +11,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-24 18:25+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-01-21 18:02+0000\n"
+"PO-Revision-Date: 2020-01-21 18:25+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../data/campaigns/atl01.wmf/elemental:9
-#: ../../data/campaigns/campaigns.conf:118
 msgid "From Nemesis to Genesis"
 msgstr "Pusztulásból teremtésbe"
 
@@ -34,7 +33,6 @@ msgid ""
 msgstr "Miután a megmaradt atlantisziak egy rejtélyes szigeten kötnek ki Atlantisz közelében, nagy küzdelmek árán új otthont építenek maguknak."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
-#: ../../data/campaigns/campaigns.conf:76
 msgid "A Place to Call Home"
 msgstr "Egy hely, amit otthonnak hívunk"
 
@@ -42,10 +40,9 @@ msgstr "Egy hely, amit otthonnak hívunk"
 msgid ""
 "In this scenario, the higher production buildings including mining will be "
 "introduced."
-msgstr "Ebben a szcenárióban a magasabb szintű termelő épületek kerülnek bemutatásra."
+msgstr "Ebben a küldetésben a magasabb szintű termelő épületek kerülnek bemutatásra."
 
 #: ../../data/campaigns/bar02.wmf/elemental:7
-#: ../../data/campaigns/campaigns.conf:81
 msgid "This Land is Our Land"
 msgstr "Ez a föld a miénk"
 
@@ -55,147 +52,21 @@ msgid ""
 "and will introduce fighting."
 msgstr "Ez az oktatójáték elmagyarázza a katonai és kiképzőépületek kezelését, és bemutatja a harcot."
 
-#: ../../data/campaigns/campaigns.conf:27
-msgid "The Second Empire"
-msgstr "A második birodalom"
-
-#: ../../data/campaigns/campaigns.conf:29
-msgid "Barbarians"
-msgstr "Barbárok"
-
-#: ../../data/campaigns/campaigns.conf:31
-msgid "Easy. Introduces the Barbarians"
-msgstr "Könnyű. Bemutatja a barbárokat"
-
-#: ../../data/campaigns/campaigns.conf:32
-msgid ""
-"When Chat’Karuth died, he was an old man, father to three strong and "
-"ambitious sons, and warlord to an army that could match any enemy willing to"
-" rise against the ancient forests. Though at the end of his glorious reign, "
-"Chat’Karuth chose his eldest son, Thron, to succeed him as the tribe’s "
-"warlord – a decision that left his two brothers unsatisfied. The old warlord"
-" knew that. As his father instructed him, Thron left the capital of "
-"Al’thunran, the home of the Throne Among the Trees, and withdrew his forces "
-"to the high hills where he buried the corpse of his father. There he swore "
-"to the gods and his father’s spirit that he’d return to re-established "
-"order. While his brothers have raged blind war against Thron and the few "
-"forces he left to secure the borders of Al’thunran, the young warlord seeks "
-"to reunite his ambitious brothers and force the tribes to march once again "
-"under a common banner."
-msgstr "Amikor Chat'Karuth meghalt, nagyon öreg, három erős és törekvő fiú apja és egy erős hadúr volt, olyan hadsereggel, amely bármelyik ellenséget képes legyőzni, amely szembe mer szállni az ősi erdővel. Dicső uralkodása után, Chat'Karuth a legidősebb fiára hagyta a trónt - ezzel magára haragítva másik két fiát. Az öreg hadúr tudta ezt. Ahogy az apja meghagyta neki, Thron elhagyta Al'thunran fővárosát, a korona otthonát a fák között, és visszavonta erőit a magas hegyekbe, ahol eltemette apját és megesküdött az Isteneknek, hogy egy nap visszatér és helyreállítja a rendet. Amíg testvérei vak háborút indítottak Thron és katonái ellen, akiket hátrahagyott, hogy megvédjék Al'thunran határát, a fiatal hadúr igyekezett maga mellé állítani nagyravágyó testvéreit, hogy a törzseket újra egy zászló alatt egyesíthesse."
-
-#: ../../data/campaigns/campaigns.conf:35
-msgid "The Months of Exile"
-msgstr "Hónapok száműzetésben"
-
-#: ../../data/campaigns/campaigns.conf:37
-msgid "Empire"
-msgstr "Birodalom"
-
-#: ../../data/campaigns/campaigns.conf:39
-msgid "Easy. Introduces the Empire"
-msgstr "Könnyű. A birodalom bemutatása"
-
-#: ../../data/campaigns/campaigns.conf:40
-msgid ""
-"Six months ago, Lutius – a young general of the Empire – was sent with 150 "
-"soldiers to the frontier beyond the northern forests where Barbarian tribes "
-"were crossing onto land held by the Empire. His task was to defend the "
-"Empire’s land. At first, everything was calm. He even talked to a few "
-"Barbarian children and thought about a peaceful life – side by side with "
-"this archaic folk. He began to feel safer and his army began to drop their "
-"attention off the potential enemy. That was their undoing. One night in "
-"March his unprepared army was attacked by 100 Barbarian footmen and was "
-"completely scattered. Only with his bare life he and a handful of his "
-"soldiers survived."
-msgstr "Hat hónappal ezelőtt Lutiust – a Birodalom egy ifjú tábornokát – százötven katonával az északi erdőkön túli határvidékre küldték, ahol barbár törzsek léptek a Birodalom földjére. Feladata volt a Birodalom területének védelme. Kezdetben minden nyugodt volt. Még néhány barbár gyermekkel is elbeszélgetett, és egy békés életről álmodozott – egymás mellett élve ezzel az ősi törzzsel. Kezdte magát biztonságban érezni, és katonái egyre inkább figyelmen kívül hagyták a lehetséges ellenséget. Ezt lett a vesztük. Egy márciusi éjszakán száz barbár gyalogos megtámadta a felkészületlen sereget, mire az teljesen szétzilálódott. Csak Lutius és egy maroknyi katonája menekült meg."
-
-#: ../../data/campaigns/campaigns.conf:43
-msgid "The Run for the Fire"
-msgstr "Hajsza a tűz után"
-
-#: ../../data/campaigns/campaigns.conf:45
-msgid "Atlanteans"
-msgstr "Atlantisziak"
-
-#: ../../data/campaigns/campaigns.conf:47
-msgid "Challenging. Introduces the Atlanteans"
-msgstr "Kihívást jelentő. Az atlantisziak bemutatása"
-
-#: ../../data/campaigns/campaigns.conf:48
-msgid ""
-"When their God lost faith in the Atlanteans and drowned their island, one "
-"woman’s struggle for justice and a second chance for her people would become"
-" the stuff of legends. Leading the remaining Atlanteans into a new future in"
-" a new part of the World, Jundlina became the most powerful human of her "
-"time, but at a high cost: her humanity and soul."
-msgstr "Mikor istenük csalódott az atlantisziakban, és szigetüket elsüllyesztette, egy asszony küzdelme az igazságért és egy új esélyért népének, legendává lett. Jundlina, ki a megmaradt atlantisziakat a világ egy új részére, új jövőbe vezette, kora leghatalmasabb embere lett – de ezért nagy árat fizetett: emberségét és lelkét."
-
-#: ../../data/campaigns/campaigns.conf:52
-msgid "From Water to Ice"
-msgstr ""
-
-#: ../../data/campaigns/campaigns.conf:54
-msgid "Frisians"
-msgstr ""
-
-#: ../../data/campaigns/campaigns.conf:56
-msgid "For advanced players. Introduces the Frisians"
-msgstr ""
-
-#: ../../data/campaigns/campaigns.conf:57
-msgid ""
-"Living off the ocean is a constant struggle, and even more so for the "
-"inhabitants of the Frisian North Sea shore. Was the last storm flood, the "
-"most devastating one in human memory, really nothing more than yet another "
-"example for the hardships all Frisians have to face – or a sign from the "
-"gods that a tribe that only just settled here must seek out an entirely new "
-"home?"
-msgstr ""
-
-#: ../../data/campaigns/campaigns.conf:86
-#: ../../data/campaigns/campaigns.conf:111
-#: ../../data/campaigns/campaigns.conf:123
-#: ../../data/campaigns/campaigns.conf:139
 #: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
 msgstr "Még nem készült el"
-
-#: ../../data/campaigns/campaigns.conf:91
-#: ../../data/campaigns/emp01.wmf/elemental:7
-msgid "The Strands of Malac’ Mor"
-msgstr "Malac' Mor partjai"
-
-#: ../../data/campaigns/campaigns.conf:96
-#: ../../data/campaigns/emp02.wmf/elemental:9
-msgid "An Outpost for Exile"
-msgstr "A száműzetés előőrse"
-
-#: ../../data/campaigns/campaigns.conf:101
-msgid "Neptune’s Revenge"
-msgstr "Neptunusz bosszúja"
-
-#: ../../data/campaigns/campaigns.conf:106
-#: ../../data/campaigns/emp04.wmf/elemental:8
-msgid "Surprise, Surprise!"
-msgstr "Meglepetés, meglepetés!"
-
-#: ../../data/campaigns/campaigns.conf:129
-#: ../../data/campaigns/fri01.wmf/elemental:8
-msgid "The Great Stormflood"
-msgstr ""
-
-#: ../../data/campaigns/campaigns.conf:134
-msgid "Colder than Ice"
-msgstr ""
 
 #: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
 msgstr "Senki"
 
-#: ../../data/campaigns/dummy.wmf/elemental:11
+#: ../../data/campaigns/dummy.wmf/elemental:12
 msgid "Sorry, this map is not yet implemented."
 msgstr "Még nem készült el."
+
+#: ../../data/campaigns/emp01.wmf/elemental:7
+msgid "The Strands of Malac’ Mor"
+msgstr "Malac' Mor partjai"
 
 #: ../../data/campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -205,6 +76,10 @@ msgid ""
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
 msgstr "Lutius, miután elveszített egy fontos csatát a barbárok ellen, miáltal a Birodalom egy jelentős része elveszett, elhagyja Fremilt, hogy új életet kezdjen. De sorsa hajóját egy nagy viharba sodorja úgy, hogy az majdnem megsemmisül. Csak nagy szerencsével sikerül a sérült hajót egy ismeretlen, homokos parton kikötnie, és megmentenie embereit. Egyelőre."
+
+#: ../../data/campaigns/emp02.wmf/elemental:9
+msgid "An Outpost for Exile"
+msgstr "A száműzetés előőrse"
 
 #: ../../data/campaigns/emp02.wmf/elemental:11
 msgid ""
@@ -220,12 +95,20 @@ msgid ""
 "the will of the gods."
 msgstr "Úton hazafelé, hogy megvédjék a Birodalmat, Lutiust és legénységét meglepte az istenek akarata."
 
+#: ../../data/campaigns/emp04.wmf/elemental:8
+msgid "Surprise, Surprise!"
+msgstr "Meglepetés, meglepetés!"
+
 #: ../../data/campaigns/emp04.wmf/elemental:10
 msgid ""
 "After returning home, Lutius and his crew are faced with an economy in "
 "shambles. Resolving the bottlenecks in the economy will be of utmost "
 "importance to reinstate the glory of the empire."
 msgstr "Miután hazatértek, Lutius és legénysége egy romokban álló gazdaságot talál. A gazdaság szűk keresztmetszeteinek megszüntetése a legfontosabb lépés a Birodalom dicsőségének helyreállításában."
+
+#: ../../data/campaigns/fri01.wmf/elemental:8
+msgid "The Great Stormflood"
+msgstr "A nagy vihardagály"
 
 #: ../../data/campaigns/fri01.wmf/elemental:10
 msgid ""
@@ -234,26 +117,25 @@ msgid ""
 "Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
 " a sign from the Gods that the Frisian community on the island of Langeness "
 "is not wanted here?"
-msgstr ""
+msgstr "1362-ben, a Északi-Fríz-szigetek lakóinak csendes, békés életét az emberemlékezet legnagyobb vihardagálya zavarta meg: Szent Marcell áradása. Ez valóban csak még egy vihar, vagy jel az istenektől, hogy a fríz közösség már nem kívánatos Langeness szigetén?"
 
 #: ../../data/campaigns/fri01.wmf/elemental:11
 msgid ""
 "This scenario is set in a historical context, but most of the story line is "
 "fiction."
-msgstr ""
+msgstr "Ez a küldetés történelmi helyzetbe van helyezve, de a történet fikció."
 
 #: ../../data/campaigns/fri02.wmf/elemental:8
 msgid "An Icy Welcome"
-msgstr ""
+msgstr "Egy jeges köszöntés"
 
 #: ../../data/campaigns/fri02.wmf/elemental:10
 msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
-msgstr ""
+msgstr "Reebaud és a törzse megérkeztek Északra. De az érkezésük a fagyott sztyeppék és a hóval borított hegyek között minden csak nem biztató…"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:15
 msgid "Basic Control"
 msgstr "Alapvető vezérlés"
 
@@ -264,7 +146,6 @@ msgid ""
 msgstr "Ebben az oktatójátékban megtanulod, hogyan kell navigálni a Widelandsben, illetve, hogy miként lehet épületeket és utakat építeni."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:19
 msgid "Warfare"
 msgstr "Hadviselés"
 
@@ -275,18 +156,16 @@ msgid ""
 msgstr "Ebben az oktatójátékban megismered a hadviselés titkait: hogyan készíthetsz katonákat, miként fejlesztheted őket, és hogyan vezetheted őket a harcban."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:23
 msgid "Seafaring"
 msgstr "Hajózás"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
-"ships and ports."
-msgstr "Ebben az oktatójátékban megismered a hajózást, azon belül a hajók és a kikötők kezelését."
+"ships and ports, and how to use ferries and waterways."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:27
 msgid "Economy"
 msgstr "Gazdaság"
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,9 +31,9 @@
 
 /**
  * Create all the buttons etc...
-*/
-MainMenuLoadMap::MainMenuLoadMap(EditorInteractive& parent)
-   : MainMenuLoadOrSaveMap(parent, 2, "load_map_menu", _("Load Map")) {
+ */
+MainMenuLoadMap::MainMenuLoadMap(EditorInteractive& parent, UI::UniqueWindow::Registry& registry)
+   : MainMenuLoadOrSaveMap(parent, registry, 2, "load_map_menu", _("Load Map")) {
 	set_current_directory(curdir_);
 
 	table_.selected.connect(boost::bind(&MainMenuLoadMap::entry_selected, this));

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,11 +21,11 @@
 
 #include <boost/format.hpp>
 
+#include "io/profile.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "map_io/coords_profile.h"
-#include "profile/profile.h"
 
 namespace Widelands {
 
@@ -80,4 +80,4 @@ void MapPlayerPositionPacket::write(FileSystem& fs, EditorGameBase& egbase, MapO
 
 	prof.write("player_position", false, fs);
 }
-}
+}  // namespace Widelands

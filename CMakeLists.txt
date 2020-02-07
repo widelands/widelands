@@ -25,12 +25,22 @@ if(POLICY CMP0072)
   if (CMAKE_SYSTEM MATCHES "Linux")
     distro_name (DISTRO_NAME)
     # DISTRO_NAME is different on the build-servers.
-    if ((DISTRO_NAME MATCHES "Ubuntu 18.10" OR DISTRO_NAME MATCHES "Cosmic")
+    if ((DISTRO_NAME MATCHES "Ubuntu 18.10" OR DISTRO_NAME MATCHES "Cosmic"
+         OR DISTRO_NAME MATCHES "Ubuntu 19.04" OR DISTRO_NAME MATCHES "Disco"
+         OR DISTRO_NAME MATCHES "Ubuntu 19.10" OR DISTRO_NAME MATCHES "Eoan")
         AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
       cmake_policy(SET CMP0072 OLD)
     endif()
   endif()
 endif(POLICY CMP0072)
+
+# This policy is not known to versions prior 3.12 and would result in errors,
+# if set on such systems. This can be removed when cmake_minimum_required is set
+# to 3.12 or newer  by using:
+# cmake_policy(VERSION 3.12)
+if(POLICY CMP0074)
+  cmake_policy(SET CMP0074 NEW)
+endif(POLICY CMP0074)
 
 include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
 
@@ -38,6 +48,14 @@ option(OPTION_USE_GLBINDING "Use glbinding instead of GLEW" OFF)
 option(OPTION_GLEW_STATIC "Use static GLEW Library" OFF)
 option(OPTION_BUILD_WEBSITE_TOOLS "Build website-related tools" ON)
 option(OPTION_BUILD_TRANSLATIONS "Build translations" ON)
+option(OPTION_BUILD_TESTS "Build tests" ON)
+option(OPTION_BUILD_CODECHECK "Build codecheck" ON)
+
+option(USE_XDG "Follow XDG-Basedir specification" ON) # Enabled by default
+IF(USE_XDG AND NOT APPLE AND NOT WIN32)
+  ADD_DEFINITIONS(-DUSE_XDG)
+  message(STATUS "Building with XDG support")
+ENDIF(USE_XDG AND NOT APPLE AND NOT WIN32)
 
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
   message(FATAL_ERROR "Build directory and source directory must not be the same.")
@@ -71,7 +89,7 @@ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Mod
 
 if (WIN32)
   set (Boost_USE_STATIC_LIBS  ON)
-  link_libraries(wsock32 ws2_32)
+  link_libraries(wsock32 ws2_32 bcrypt)
 else()
   set (Boost_USE_STATIC_LIBS  OFF)
 endif()
@@ -160,8 +178,8 @@ endif()
 wl_add_flag(WL_GENERIC_CXX_FLAGS "-std=c++11")
 
 if(OPTION_ASAN)
-  message(STATUS "Using AddressSanitizer http://clang.llvm.org/docs/AddressSanitizer.html")
-  # See http://clang.llvm.org/docs/AddressSanitizer.html
+  message(STATUS "Using AddressSanitizer https://clang.llvm.org/docs/AddressSanitizer.html")
+  # See https://clang.llvm.org/docs/AddressSanitizer.html
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-fsanitize=address")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-fno-omit-frame-pointer")
   set (CMAKE_EXE_LINKER_FLAGS "-fsanitize=address" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
@@ -171,7 +189,7 @@ endif(OPTION_ASAN)
 
 # This is set to avoid linker errors when using GLVND-libs on Linux
 if("${OpenGL_GL_PREFERENCE}" STREQUAL "GLVND")
-   set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lGL")
+   link_libraries("GL")
    add_compile_definitions(WL_USE_GLVND)
    message(STATUS "Adding linker flags for GLVND.")
 endif()
@@ -283,22 +301,24 @@ if (NOT DEFINED WL_VERSION)
 else (NOT DEFINED WL_VERSION)
   add_custom_target (
     InputRevision ALL
-    COMMAND ${CMAKE_COMMAND -DWL_INSTALL_BASEDIR=${WL_INSTALL_BASEDIR} -DWL_VERSION=${WL_VERSION} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DBINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/InputRevision.cmake
+    COMMAND ${CMAKE_COMMAND} -DWL_INSTALL_BASEDIR=${WL_INSTALL_BASEDIR} -DWL_VERSION=${WL_VERSION} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DBINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/InputRevision.cmake
   )
 endif (NOT DEFINED WL_VERSION)
 
 # Enable testing.
-include(CTest)
-enable_testing()
+if (OPTION_BUILD_TESTS)
+  include(CTest)
+  enable_testing()
 
-# Run a test after a normal compile. This magic is needed as 'make test' will
-# not rebuild tests:
-# http://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests
-add_custom_target(_run_all_tests ALL
-  COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
-  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-  DEPENDS wl_tests
-)
+  # Run a test after a normal compile. This magic is needed as 'make test' will
+  # not rebuild tests:
+  # https://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests
+  add_custom_target(_run_all_tests ALL
+    COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    DEPENDS wl_tests
+  )
+endif (OPTION_BUILD_TESTS)
 
 install (
   FILES ${CMAKE_CURRENT_BINARY_DIR}/VERSION
@@ -377,3 +397,7 @@ install(
   CONFIGURATIONS Debug;Release
   COMPONENT CoreLanguageFiles
 )
+
+if (UNIX AND NOT APPLE)
+  add_subdirectory(xdg)
+endif (UNIX AND NOT APPLE)

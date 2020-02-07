@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # Daniel Nylander <po@danielnylander.se>, 2005
@@ -7,10 +7,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-15 18:56+0000\n"
-"PO-Revision-Date: 2017-09-21 23:33+0000\n"
-"Last-Translator: D M <hunter12@home.se>\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-12-10 17:11+0000\n"
+"PO-Revision-Date: 2019-12-10 17:18+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,15 +38,11 @@ msgstr "Gems"
 msgid "Deer"
 msgstr "Hjort"
 
-#: ../../data/world/critters/duck/init.lua:19
+#: ../../data/world/critters/duck/init.lua:18
 msgid "Duck"
 msgstr "And"
 
-#: ../../data/world/critters/elk/init.lua:20
-msgid "Elk"
-msgstr "Älg"
-
-#: ../../data/world/critters/fox/init.lua:20
+#: ../../data/world/critters/fox/init.lua:19
 msgid "Fox"
 msgstr "Räv"
 
@@ -58,19 +54,23 @@ msgstr "Lodjur"
 msgid "Marten"
 msgstr "Mård"
 
+#: ../../data/world/critters/moose/init.lua:19
+msgid "Moose"
+msgstr ""
+
 #: ../../data/world/critters/reindeer/init.lua:16
 msgid "Reindeer"
 msgstr "Ren"
 
-#: ../../data/world/critters/sheep/init.lua:19
+#: ../../data/world/critters/sheep/init.lua:18
 msgid "Sheep"
 msgstr "Får"
 
-#: ../../data/world/critters/stag/init.lua:20
+#: ../../data/world/critters/stag/init.lua:19
 msgid "Stag"
 msgstr "Hjort"
 
-#: ../../data/world/critters/wildboar/init.lua:19
+#: ../../data/world/critters/wildboar/init.lua:18
 msgid "Wild boar"
 msgstr "Vildsvin"
 
@@ -78,7 +78,7 @@ msgstr "Vildsvin"
 msgid "Wisent"
 msgstr "Visent"
 
-#: ../../data/world/critters/wolf/init.lua:20
+#: ../../data/world/critters/wolf/init.lua:19
 msgid "Wolf"
 msgstr "Varg"
 
@@ -724,377 +724,339 @@ msgstr "Rött paraplyträd (gammalt)"
 msgid "Red Umbrella Tree"
 msgstr "Rött paraplyträd"
 
-#: ../../data/world/init.lua:35
+#: ../../data/world/init.lua:24
+msgid "Loading world: Resources (1/4)"
+msgstr ""
+
+#: ../../data/world/init.lua:29
+msgid "Loading world: Terrains (2/4)"
+msgstr ""
+
+#: ../../data/world/init.lua:39
 msgid "Summer"
 msgstr "Sommar"
 
-#: ../../data/world/init.lua:41
+#: ../../data/world/init.lua:45
 msgid "Wasteland"
 msgstr "Ödemark"
 
-#: ../../data/world/init.lua:47
+#: ../../data/world/init.lua:51
 msgid "Winter"
 msgstr "Vinter"
 
-#: ../../data/world/init.lua:53
+#: ../../data/world/init.lua:57
 msgid "Desert"
 msgstr "Öken"
 
-#: ../../data/world/init.lua:70
+#: ../../data/world/init.lua:66
+msgid "Loading world: Immovables (3/4)"
+msgstr ""
+
+#: ../../data/world/init.lua:75
 msgid "Miscellaneous"
 msgstr "Diverse"
 
-#: ../../data/world/init.lua:105
+#: ../../data/world/init.lua:110
 msgid "Artifacts"
 msgstr "Artefakter"
 
-#: ../../data/world/init.lua:105
+#: ../../data/world/init.lua:110
 msgid "These immovables are used by the win condition “Artifacts”."
 msgstr "Dessa fasta föremål används av vinstförutsättningen 'Artefakter'."
 
-#: ../../data/world/init.lua:118
+#: ../../data/world/init.lua:123
 msgid "Plants"
 msgstr "Växter"
 
-#: ../../data/world/init.lua:139
+#: ../../data/world/init.lua:144
 msgid "Standing Stones"
 msgstr "Resta stenar"
 
-#: ../../data/world/init.lua:170
+#: ../../data/world/init.lua:175
 msgid "Rocks"
 msgstr "Klippor"
 
-#: ../../data/world/init.lua:203
+#: ../../data/world/init.lua:208
 msgid "Dead Trees"
 msgstr "Döda träd"
 
-#: ../../data/world/init.lua:210
+#: ../../data/world/init.lua:215
 msgid "Coniferous Trees"
 msgstr "Barrträd"
 
-#: ../../data/world/init.lua:217
+#: ../../data/world/init.lua:222
 msgid "Deciduous Trees"
 msgstr "Lövträd"
 
-#: ../../data/world/init.lua:224
+#: ../../data/world/init.lua:229
 msgid "Palm Trees"
 msgstr "Palmer"
 
-#: ../../data/world/init.lua:231
+#: ../../data/world/init.lua:236
 msgid "Wasteland Trees"
 msgstr "Ödemarksträd"
 
+#: ../../data/world/init.lua:273
+msgid "Loading world: Animals (4/4)"
+msgstr ""
+
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:278
+#: ../../data/world/init.lua:284
 msgid "Herbivores"
 msgstr "Växtätare"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:297
+#: ../../data/world/init.lua:303
 msgid "Carnivores"
 msgstr "Köttätare"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:313
+#: ../../data/world/init.lua:319
 msgid "Aquatic"
 msgstr "Vattenlevande"
 
-#: ../../data/world/resources/init.lua:72
+#: ../../data/world/resources/init.lua:84
 msgid "Coal"
 msgstr "Kol"
 
-#: ../../data/world/resources/init.lua:86
+#: ../../data/world/resources/init.lua:100
 msgid "Gold"
 msgstr "Guld"
 
-#: ../../data/world/resources/init.lua:100
+#: ../../data/world/resources/init.lua:116
 msgid "Iron"
 msgstr "Järn"
 
-#: ../../data/world/resources/init.lua:114
+#: ../../data/world/resources/init.lua:132
 msgid "Stones"
 msgstr "Sten"
 
-#: ../../data/world/resources/init.lua:128
-#: ../../data/world/terrains/init.lua:451
-#: ../../data/world/terrains/init.lua:760
-#: ../../data/world/terrains/init.lua:1056
-#: ../../data/world/terrains/init.lua:1351
+#: ../../data/world/resources/init.lua:148
+#: ../../data/world/terrains/init.lua:469
+#: ../../data/world/terrains/init.lua:792
+#: ../../data/world/terrains/init.lua:1102
+#: ../../data/world/terrains/init.lua:1413
 msgid "Water"
 msgstr "Vatten"
 
-#: ../../data/world/resources/init.lua:142
+#: ../../data/world/resources/init.lua:164
 msgid "Fish"
 msgstr "Fisk"
 
-#. TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if
-#. possible.
-#. _"likes trees",
-#. },
-#. **valid_resources**
-#. *Mandatory*. The list of mineable resources that can be found on this
-#. terrain.
-#. Leave this empty (``{}``) if you want no resources on this terrain.
-#. Example::
-#. valid_resources = {"water"},
-#. *Note: There is currently some interdependency between ``is`` and
-#. ``valid_resources``, so not all combinations are possible. See*
-#. `Bug #1505345 <https://bugs.launchpad.net/widelands/+bug/1505345/>`_
-#. *for more information.*
-#. **default_resource**
-#. *Mandatory*. A resource type that can always be found on this terrain when
-#. a new game is started, unless the map maker places some resources there via
-#. the editor. Use the empty string
-#. (``""``) if you want no default resource. Example::
-#. default_resource = "water",
-#. **default_resource_amount**
-#. *Mandatory*. The amount of the above default resource that will
-#. automatically be placed on this terrain, e.g.::
-#. default_resource_amount = 10,
-#. **textures**
-#. *Mandatory*. The images used for this terrain. Examples::
-#. textures = { pics_dir .. "summer/meadow1_00.png" }, - A static terrain
-#. textures = path.list_files(pics_dir .. "summer/lava/lava_??.png"), -- An
-#. animated terrain
-#. **dither_layer**
-#. *Mandatory*. Terrains will be blended slightly over each other in order
-#. to hide the harsh edges of the triangles. This describes the
-#. `z layer <https://en.wikipedia.org/wiki/Z-order>`_ of a terrain when
-#. rendered next to another terrain. Terrains with a higher value will be
-#. dithered on top of terrains with a lower value. Example::
-#. dither_layer = 340,
-#. **temperature**
-#. *Mandatory*. A terrain affinity constant. These are used to model how well
-#. trees will grow on this terrain. Temperature is in arbitrary units.
-#. Example::
-#. temperature = 100,
-#. **humidity**
-#. *Mandatory*. A terrain affinity constant. These are used to model how well
-#. trees will grow on this terrain. Humidity is in percent (1 being very wet).
-#. Example::
-#. humidity = 0.6,
-#. **fertility**
-#. *Mandatory*. A terrain affinity constant. These are used to model how well
-#. trees will grow on this terrain. Fertility is in percent (1 being very
-#. fertile). Example::
-#. fertility = 0.7,
-#. ----------------------
-#. Former greenland  --
-#. ----------------------
-#: ../../data/world/terrains/init.lua:153
+#: ../../data/world/terrains/init.lua:158
 msgid "Meadow 1"
 msgstr "Äng 1"
 
 #. TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if
 #. possible.
-#: ../../data/world/terrains/init.lua:158
-#: ../../data/world/terrains/init.lua:182
-#: ../../data/world/terrains/init.lua:203
-#: ../../data/world/terrains/init.lua:223
-#: ../../data/world/terrains/init.lua:291
-#: ../../data/world/terrains/init.lua:311
-#: ../../data/world/terrains/init.lua:477
-#: ../../data/world/terrains/init.lua:497
+#: ../../data/world/terrains/init.lua:163
+#: ../../data/world/terrains/init.lua:187
+#: ../../data/world/terrains/init.lua:207
+#: ../../data/world/terrains/init.lua:227
+#: ../../data/world/terrains/init.lua:301
+#: ../../data/world/terrains/init.lua:321
+#: ../../data/world/terrains/init.lua:495
 #: ../../data/world/terrains/init.lua:517
-#: ../../data/world/terrains/init.lua:537
-#: ../../data/world/terrains/init.lua:557
-#: ../../data/world/terrains/init.lua:577
-#: ../../data/world/terrains/init.lua:613
-#: ../../data/world/terrains/init.lua:632
-#: ../../data/world/terrains/init.lua:787
-#: ../../data/world/terrains/init.lua:807
-#: ../../data/world/terrains/init.lua:827
-#: ../../data/world/terrains/init.lua:895
-#: ../../data/world/terrains/init.lua:914
-#: ../../data/world/terrains/init.lua:1111
-#: ../../data/world/terrains/init.lua:1131
-#: ../../data/world/terrains/init.lua:1151
-#: ../../data/world/terrains/init.lua:1171
-#: ../../data/world/terrains/init.lua:1191
-#: ../../data/world/terrains/init.lua:1210
+#: ../../data/world/terrains/init.lua:539
+#: ../../data/world/terrains/init.lua:559
+#: ../../data/world/terrains/init.lua:579
+#: ../../data/world/terrains/init.lua:599
+#: ../../data/world/terrains/init.lua:637
+#: ../../data/world/terrains/init.lua:656
+#: ../../data/world/terrains/init.lua:819
+#: ../../data/world/terrains/init.lua:839
+#: ../../data/world/terrains/init.lua:859
+#: ../../data/world/terrains/init.lua:933
+#: ../../data/world/terrains/init.lua:952
+#: ../../data/world/terrains/init.lua:1161
+#: ../../data/world/terrains/init.lua:1181
+#: ../../data/world/terrains/init.lua:1201
+#: ../../data/world/terrains/init.lua:1223
+#: ../../data/world/terrains/init.lua:1245
+#: ../../data/world/terrains/init.lua:1264
 msgid "likes trees"
 msgstr "kan beskogas"
 
-#: ../../data/world/terrains/init.lua:177
+#: ../../data/world/terrains/init.lua:182
 msgid "Meadow 2"
 msgstr "Äng 2"
 
-#: ../../data/world/terrains/init.lua:198
+#: ../../data/world/terrains/init.lua:202
 msgid "Meadow 3"
 msgstr "Äng 3"
 
-#: ../../data/world/terrains/init.lua:218
+#: ../../data/world/terrains/init.lua:222
 msgid "Meadow 4"
 msgstr "Äng 4"
 
-#: ../../data/world/terrains/init.lua:238
-#: ../../data/world/terrains/init.lua:1106
+#: ../../data/world/terrains/init.lua:242
+#: ../../data/world/terrains/init.lua:1156
 msgid "Steppe"
 msgstr "Stäpp"
 
-#: ../../data/world/terrains/init.lua:254
+#: ../../data/world/terrains/init.lua:260
 msgid "Barren Steppe"
 msgstr "Karg stäpp"
 
-#: ../../data/world/terrains/init.lua:270
-#: ../../data/world/terrains/init.lua:1146
+#: ../../data/world/terrains/init.lua:278
+#: ../../data/world/terrains/init.lua:1196
 msgid "Mountain Meadow"
 msgstr "Bergsäng"
 
-#: ../../data/world/terrains/init.lua:285
-#: ../../data/world/terrains/init.lua:608
-#: ../../data/world/terrains/init.lua:890
-#: ../../data/world/terrains/init.lua:1186
+#: ../../data/world/terrains/init.lua:295
+#: ../../data/world/terrains/init.lua:632
+#: ../../data/world/terrains/init.lua:928
+#: ../../data/world/terrains/init.lua:1240
 msgid "Forested Mountain 1"
 msgstr "Skogsbeklätt berg 1"
 
-#: ../../data/world/terrains/init.lua:305
-#: ../../data/world/terrains/init.lua:627
-#: ../../data/world/terrains/init.lua:909
-#: ../../data/world/terrains/init.lua:1205
+#: ../../data/world/terrains/init.lua:315
+#: ../../data/world/terrains/init.lua:651
+#: ../../data/world/terrains/init.lua:947
+#: ../../data/world/terrains/init.lua:1259
 msgid "Forested Mountain 2"
 msgstr "Skogsbeklätt berg 2"
 
-#: ../../data/world/terrains/init.lua:325
-#: ../../data/world/terrains/init.lua:646
-#: ../../data/world/terrains/init.lua:928
-#: ../../data/world/terrains/init.lua:1225
+#: ../../data/world/terrains/init.lua:335
+#: ../../data/world/terrains/init.lua:670
+#: ../../data/world/terrains/init.lua:966
+#: ../../data/world/terrains/init.lua:1279
 msgid "Mountain 1"
 msgstr "Berg 1"
 
-#: ../../data/world/terrains/init.lua:341
-#: ../../data/world/terrains/init.lua:662
-#: ../../data/world/terrains/init.lua:944
-#: ../../data/world/terrains/init.lua:1241
+#: ../../data/world/terrains/init.lua:353
+#: ../../data/world/terrains/init.lua:688
+#: ../../data/world/terrains/init.lua:984
+#: ../../data/world/terrains/init.lua:1297
 msgid "Mountain 2"
 msgstr "Berg 2"
 
-#: ../../data/world/terrains/init.lua:357
-#: ../../data/world/terrains/init.lua:678
-#: ../../data/world/terrains/init.lua:960
-#: ../../data/world/terrains/init.lua:1257
+#: ../../data/world/terrains/init.lua:371
+#: ../../data/world/terrains/init.lua:706
+#: ../../data/world/terrains/init.lua:1002
+#: ../../data/world/terrains/init.lua:1315
 msgid "Mountain 3"
 msgstr "Berg 3"
 
-#: ../../data/world/terrains/init.lua:373
-#: ../../data/world/terrains/init.lua:694
-#: ../../data/world/terrains/init.lua:976
-#: ../../data/world/terrains/init.lua:1273
+#: ../../data/world/terrains/init.lua:389
+#: ../../data/world/terrains/init.lua:724
+#: ../../data/world/terrains/init.lua:1020
+#: ../../data/world/terrains/init.lua:1333
 msgid "Mountain 4"
 msgstr "Berg 4"
 
-#: ../../data/world/terrains/init.lua:388
-#: ../../data/world/terrains/init.lua:710
-#: ../../data/world/terrains/init.lua:1006
-#: ../../data/world/terrains/init.lua:1335
+#: ../../data/world/terrains/init.lua:406
+#: ../../data/world/terrains/init.lua:742
+#: ../../data/world/terrains/init.lua:1052
+#: ../../data/world/terrains/init.lua:1397
 msgid "Beach"
 msgstr "Strand"
 
-#: ../../data/world/terrains/init.lua:403
+#: ../../data/world/terrains/init.lua:421
 msgid "Swamp"
 msgstr "Träsk"
 
-#: ../../data/world/terrains/init.lua:418
-#: ../../data/world/terrains/init.lua:874
+#: ../../data/world/terrains/init.lua:436
+#: ../../data/world/terrains/init.lua:910
 msgid "Snow"
 msgstr "Snö"
 
-#: ../../data/world/terrains/init.lua:434
+#: ../../data/world/terrains/init.lua:452
 msgid "Lava"
 msgstr "Lava"
 
-#: ../../data/world/terrains/init.lua:472
+#: ../../data/world/terrains/init.lua:490
 msgid "Ashes 1"
 msgstr "Aska 1"
 
-#: ../../data/world/terrains/init.lua:492
+#: ../../data/world/terrains/init.lua:512
 msgid "Ashes 2"
 msgstr "Aska 2"
 
-#: ../../data/world/terrains/init.lua:512
+#: ../../data/world/terrains/init.lua:534
 msgid "Hard Ground 1"
 msgstr "Hård mark 1"
 
-#: ../../data/world/terrains/init.lua:532
+#: ../../data/world/terrains/init.lua:554
 msgid "Hard Ground 2"
 msgstr "Hård mark 2"
 
-#: ../../data/world/terrains/init.lua:552
+#: ../../data/world/terrains/init.lua:574
 msgid "Hard Ground 3"
 msgstr "Hård mark 3"
 
-#: ../../data/world/terrains/init.lua:572
+#: ../../data/world/terrains/init.lua:594
 msgid "Hard Ground 4"
 msgstr "Hård mark 4"
 
-#: ../../data/world/terrains/init.lua:592
+#: ../../data/world/terrains/init.lua:614
 msgid "Igneous Rocks"
 msgstr "Vulkaniska klippor"
 
-#: ../../data/world/terrains/init.lua:726
+#: ../../data/world/terrains/init.lua:758
 msgid "Lava Rocks 1"
 msgstr "Lavaklippor 1"
 
-#: ../../data/world/terrains/init.lua:743
+#: ../../data/world/terrains/init.lua:775
 msgid "Lava Rocks 2"
 msgstr "Lavaklippor 2"
 
-#: ../../data/world/terrains/init.lua:782
+#: ../../data/world/terrains/init.lua:814
 msgid "Tundra 1"
 msgstr "Tundra 1"
 
-#: ../../data/world/terrains/init.lua:802
+#: ../../data/world/terrains/init.lua:834
 msgid "Tundra 2"
 msgstr "Tundra 2"
 
-#: ../../data/world/terrains/init.lua:822
+#: ../../data/world/terrains/init.lua:854
 msgid "Tundra 3"
 msgstr "Tundra 3"
 
-#: ../../data/world/terrains/init.lua:842
+#: ../../data/world/terrains/init.lua:874
 msgid "Tundra Taiga"
 msgstr "Arktisk tundra"
 
-#: ../../data/world/terrains/init.lua:858
+#: ../../data/world/terrains/init.lua:892
 msgid "Taiga"
 msgstr "Taiga"
 
-#: ../../data/world/terrains/init.lua:990
+#: ../../data/world/terrains/init.lua:1036
 msgid "Ice"
 msgstr "Is"
 
-#: ../../data/world/terrains/init.lua:1022
+#: ../../data/world/terrains/init.lua:1068
 msgid "Ice Floes 1"
 msgstr "Isflak 1"
 
-#: ../../data/world/terrains/init.lua:1039
+#: ../../data/world/terrains/init.lua:1085
 msgid "Ice Floes 2"
 msgstr "Isflak 2"
 
-#: ../../data/world/terrains/init.lua:1077
+#: ../../data/world/terrains/init.lua:1123
 msgid "Desert 4"
 msgstr "Öken 4"
 
-#: ../../data/world/terrains/init.lua:1092
+#: ../../data/world/terrains/init.lua:1140
 msgid "Dry Soil"
 msgstr "Torr jord"
 
-#: ../../data/world/terrains/init.lua:1126
+#: ../../data/world/terrains/init.lua:1176
 msgid "Meadow"
 msgstr "Äng"
 
-#: ../../data/world/terrains/init.lua:1166
+#: ../../data/world/terrains/init.lua:1218
 msgid "High Mountain Meadow"
 msgstr "Högt belägen bergsäng"
 
-#: ../../data/world/terrains/init.lua:1287
+#: ../../data/world/terrains/init.lua:1349
 msgid "Desert 1"
 msgstr "Öken 1"
 
-#: ../../data/world/terrains/init.lua:1303
+#: ../../data/world/terrains/init.lua:1365
 msgid "Desert 2"
 msgstr "Öken 2"
 
-#: ../../data/world/terrains/init.lua:1319
+#: ../../data/world/terrains/init.lua:1381
 msgid "Desert 3"
 msgstr "Öken 3"

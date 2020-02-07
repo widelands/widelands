@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2018 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,12 +48,12 @@ template <typename AreaType = Area<>> struct MapDifferenceRegion {
 			map.neighbour_function(area_, &area_);                                                    \
 		break;
 
-			DIRECTION_CASE(WALK_NW, get_tln);
-			DIRECTION_CASE(WALK_NE, get_trn);
-			DIRECTION_CASE(WALK_E, get_rn);
-			DIRECTION_CASE(WALK_SE, get_brn);
-			DIRECTION_CASE(WALK_SW, get_bln);
-			DIRECTION_CASE(WALK_W, get_ln);
+			DIRECTION_CASE(WALK_NW, get_tln)
+			DIRECTION_CASE(WALK_NE, get_trn)
+			DIRECTION_CASE(WALK_E, get_rn)
+			DIRECTION_CASE(WALK_SE, get_brn)
+			DIRECTION_CASE(WALK_SW, get_bln)
+			DIRECTION_CASE(WALK_W, get_ln)
 #undef DIRECTION_CASE
 		}
 		--direction;
@@ -89,6 +89,6 @@ private:
 	bool passed_corner_;
 	Direction direction_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAPDIFFERENCEREGION_H

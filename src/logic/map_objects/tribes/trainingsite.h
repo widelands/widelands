@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,7 +36,8 @@ public:
 	TrainingSiteDescr(const std::string& init_descname,
 	                  const std::string& msgctxt,
 	                  const LuaTable& table,
-	                  EditorGameBase& egbase);
+	                  Tribes& tribes,
+	                  const World& world);
 	~TrainingSiteDescr() override {
 	}
 
@@ -188,7 +189,7 @@ public:
 		molog("BUILD_HEROES: %s", build_heroes_ ? "TRUE" : "FALSE");
 	}
 
-	void set_economy(Economy* e) override;
+	void set_economy(Economy* e, WareWorker type) override;
 
 	int32_t get_pri(enum TrainingAttribute atr);
 	void set_pri(enum TrainingAttribute atr, int32_t prio);
@@ -197,6 +198,8 @@ public:
 	void training_attempted(TrainingAttribute type, uint32_t level);
 	void training_successful(TrainingAttribute type, uint32_t level);
 	void training_done();
+
+	const BuildingSettings* create_building_settings() const override;
 
 protected:
 	void program_end(Game&, ProgramResult) override;
@@ -285,6 +288,6 @@ struct NoteTrainingSiteSoldierTrained {
 	   : ts(init_ts), player(init_player) {
 	}
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_TRAININGSITE_H

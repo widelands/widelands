@@ -27,7 +27,6 @@ sheep     sheep          Nice, fluffy!       'sheep'
 ax        axe            axes|               'axe', 'axes'
 click     click          clicking|clicked    'click', 'clicking', 'clicked'
 click     click          clicking | clicked  'click', 'clicking', 'clicked'
-
 """
 
 from collections import defaultdict
@@ -49,7 +48,7 @@ class GlossaryEntry:
     """An entry in our parsed glossaries."""
 
     def __init__(self):
-         # Base form of the term, followed by any inflected forms
+        # Base form of the term, followed by any inflected forms
         self.terms = []
         # Base form of the translation, followed by any inflected forms
         self.translations = []
@@ -80,10 +79,11 @@ class HunspellLocale:
     installed."""
 
     def __init__(self, locale):
-         # Specific language/country code for Hunspell, e.g. el_GR
+        # Specific language/country code for Hunspell, e.g. el_GR
         self.locale = locale
         # Whether a dictionary has been found for the locale
         self.is_available = False
+
 
 hunspell_locales = defaultdict(list)
 """ Hunspell needs specific locales"""
@@ -128,7 +128,6 @@ def load_hunspell_locales(locale):
     Maps a list of generic locales to specific locales and checks which
     dictionaries are available. If locale != "all", load only the
     dictionary for the given locale.
-
     """
     hunspell_locales['bg'].append(HunspellLocale('bg_BG'))
     hunspell_locales['br'].append(HunspellLocale('br_FR'))
@@ -175,7 +174,7 @@ def load_hunspell_locales(locale):
     hunspell_locales['ro'].append(HunspellLocale('ro_RO'))
     hunspell_locales['ru'].append(HunspellLocale('ru_RU'))
     hunspell_locales['rw'].append(HunspellLocale('rw_RW'))
-    hunspell_locales['si'].append(HunspellLocale('si'))
+    hunspell_locales['si'].append(HunspellLocale('si_LK'))
     hunspell_locales['sk'].append(HunspellLocale('sk_SK'))
     hunspell_locales['sl'].append(HunspellLocale('sl_SI'))
     hunspell_locales['sr'].append(HunspellLocale('sr_RS'))
@@ -206,7 +205,6 @@ def make_english_plural(word):
     This will create a few nonsense entries for irregular plurals, but
     it's good enough for our purpose. Glossary contains pluralized
     terms, so we don't add any plural forms for strings ending in 's'.
-
     """
     result = ''
     if not word.endswith('s'):
@@ -223,7 +221,6 @@ def make_english_verb_forms(word):
     """Create inflected forms of an English verb: -ed and -ing forms.
 
     Will create nonsense for irregular verbs.
-
     """
     result = []
     if word.endswith('e'):
@@ -323,7 +320,6 @@ def contains_term(string, term):
     """Checks whether 'string' contains 'term' as a whole word.
 
     This check is case-insensitive.
-
     """
     result = False
     # Regex is slow, so we do this preliminary check
@@ -448,7 +444,6 @@ def check_translations_with_glossary(input_path, output_path, glossary_file, onl
     Loads the Transifex and Hunspell glossaries, converts all po files
     for languages that have glossary entries to temporary csv files,
     runs the check and then reports any hits to csv files.
-
     """
     print('Locale: ' + only_locale)
     temp_path = make_path(output_path, 'temp_glossary')
@@ -559,6 +554,7 @@ def main():
         traceback.print_exc()
         delete_path(make_path(output_path, 'temp_glossary'))
         return 1
+
 
 if __name__ == '__main__':
     sys.exit(main())

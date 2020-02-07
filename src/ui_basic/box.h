@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2018 by the Widelands Development Team
+ * Copyright (C) 2003-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,7 +34,7 @@ namespace UI {
  *
  * The Panels you add to the Box must be children of the Box.
  * The Box automatically resizes itself and positions the added children.
-*/
+ */
 struct Box : public Panel {
 	// Determines whether the box' contents are layed out horizontally or vertically.
 	enum {
@@ -115,6 +115,6 @@ private:
 
 	std::vector<Item> items_;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_BOX_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,11 +63,13 @@ public:
 	                    const std::string& msgctxt,
 	                    MapObjectType type,
 	                    const LuaTable& t,
-	                    EditorGameBase& egbase);
+	                    Tribes& tribes,
+	                    const World& world);
 	ProductionSiteDescr(const std::string& init_descname,
 	                    const std::string& msgctxt,
 	                    const LuaTable& t,
-	                    EditorGameBase& egbase);
+	                    Tribes& tribes,
+	                    const World& world);
 
 	Building& create_object() const override;
 
@@ -126,6 +128,20 @@ public:
 		return out_of_resource_productivity_threshold_;
 	}
 
+	bool highlight_overlapping_workarea_for(const std::string& n, bool* positive) const {
+		const auto it = highlight_overlapping_workarea_for_.find(n);
+		if (it == highlight_overlapping_workarea_for_.end()) {
+			return false;
+		} else {
+			*positive = it->second;
+			return true;
+		}
+	}
+
+	const std::map<std::string, bool>& get_highlight_overlapping_workarea_for() const {
+		return highlight_overlapping_workarea_for_;
+	}
+
 private:
 	BillOfMaterials working_positions_;
 	BillOfMaterials input_wares_;
@@ -138,6 +154,7 @@ private:
 	std::string out_of_resource_message_;
 	std::string resource_not_needed_message_;
 	int out_of_resource_productivity_threshold_;
+	std::map<std::string, bool> highlight_overlapping_workarea_for_;
 
 	DISALLOW_COPY_AND_ASSIGN(ProductionSiteDescr);
 };
@@ -186,10 +203,15 @@ public:
 
 	virtual bool has_workers(DescriptionIndex targetSite, Game& game);
 	uint8_t get_statistics_percent() {
-		return last_stat_percent_;
+		return last_stat_percent_ / 10;
 	}
-	uint8_t get_crude_statistics() {
-		return (crude_percent_ + 5000) / 10000;
+
+	// receives the duration of the last period and the result (true if something was produced)
+	// and sets actual_percent_ to new value
+	void update_actual_statistics(uint32_t, bool);
+
+	uint8_t get_actual_statistics() {
+		return actual_percent_ / 10;
 	}
 
 	const std::string& production_result() const {
@@ -215,7 +237,7 @@ public:
 	bool fetch_from_flag(Game&) override;
 	bool get_building_work(Game&, Worker&, bool success) override;
 
-	void set_economy(Economy*) override;
+	void set_economy(Economy*, WareWorker) override;
 
 	using InputQueues = std::vector<InputQueue*>;
 	const InputQueues& inputqueues() const {
@@ -234,6 +256,8 @@ public:
 
 	void set_default_anim(std::string);
 
+	const BuildingSettings* create_building_settings() const override;
+
 protected:
 	void update_statistics_string(std::string* statistics) override;
 
@@ -243,7 +267,7 @@ protected:
 	struct State {
 		const ProductionProgram* program;  ///< currently running program
 		size_t ip;                         ///< instruction pointer
-		uint32_t phase;                    ///< micro-step index (instruction dependent)
+		ProgramResult phase;               ///< micro-step index (instruction dependent)
 		uint32_t flags;                    ///< pfXXX flags
 
 		/**
@@ -254,7 +278,8 @@ protected:
 		Coords coord;
 		/*@}*/
 
-		State() : program(nullptr), ip(0), phase(0), flags(0), coord(Coords::null()) {
+		State()
+		   : program(nullptr), ip(0), phase(ProgramResult::kNone), flags(0), coord(Coords::null()) {
 		}
 	};
 
@@ -282,13 +307,13 @@ protected:
 	/// how long it should take to mine, given the particular circumstances,
 	/// and pass the result to the following animation command, to set the
 	/// duration.
-	void program_step(Game&, uint32_t delay = 10, uint32_t phase = 0);
+	void program_step(Game&, uint32_t delay = 10, ProgramResult phase = ProgramResult::kNone);
 
 	void program_start(Game&, const std::string& program_name);
 	virtual void program_end(Game&, ProgramResult);
 	virtual void train_workers(Game&);
 
-	void calc_statistics();
+	void format_statistics_string();
 	void try_start_working(Game&);
 	void set_post_timer(int32_t const t) {
 		post_timer_ = t;
@@ -299,13 +324,13 @@ protected:  // TrainingSite must have access to this stuff
 
 	int32_t fetchfromflag_;  ///< Number of wares to fetch from flag
 
-	/// If a program has ended with the result Skipped, that program may not
+	/// If a program has ended with the result Failed or Skipped, that program may not
 	/// start again until a certain time has passed. This is a map from program
-	/// name to game time. When a program ends with the result Skipped, its name
+	/// name to game time. When a program ends with the result Failed or Skipped, its name
 	/// is added to this map, with the current game time. (When the program ends
 	/// with any other result, its name is removed from the map.)
-	using SkippedPrograms = std::map<std::string, Time>;
-	SkippedPrograms skipped_programs_;
+	using FailedSkippedPrograms = std::map<std::string, Time>;
+	FailedSkippedPrograms failed_skipped_programs_;
 
 	using Stack = std::vector<State>;
 	Stack stack_;           ///<  program stack
@@ -316,11 +341,11 @@ protected:  // TrainingSite must have access to this stuff
 	BillOfMaterials produced_wares_;
 	BillOfMaterials recruited_workers_;
 	InputQueues input_queues_;  ///< input queues for all inputs
-	std::vector<bool> statistics_;
-	uint8_t last_stat_percent_;
+	uint16_t last_stat_percent_;
 	// integer 0-10000000, to be divided by 10000 to get a percent, to avoid float (target range:
-	// 0-10)
-	uint32_t crude_percent_;
+	// 0-100)
+	uint32_t actual_percent_;  // basically this is percent * 10 to avoid floats
+	uint32_t last_program_end_time;
 	bool is_stopped_;
 	std::string default_anim_;  // normally "idle", "empty", if empty mine.
 
@@ -330,6 +355,8 @@ private:
 	std::string statistics_string_on_changed_statistics_;
 	std::string production_result_;  // hover tooltip text
 
+	int32_t main_worker_;
+
 	DISALLOW_COPY_AND_ASSIGN(ProductionSite);
 };
 
@@ -338,7 +365,7 @@ private:
  *
  * This class will be extended to support ordering of certain wares directly or
  * releasing some wares out of a building
-*/
+ */
 struct Input {
 	Input(const DescriptionIndex& Ware, uint8_t const Max) : ware_(Ware), max_(Max) {
 	}

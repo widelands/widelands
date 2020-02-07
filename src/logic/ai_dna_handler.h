@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2018 by the Widelands Development Team
+ * Copyright (C) 2017-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +20,8 @@
 #ifndef WL_LOGIC_AI_DNA_HANDLER_H
 #define WL_LOGIC_AI_DNA_HANDLER_H
 
-#include <vector>
 #include <stdint.h>
+#include <vector>
 
 #include "logic/player.h"
 
@@ -43,5 +43,5 @@ public:
 	               uint8_t);
 	void dump_output(Widelands::Player::AiPersistentState* pd, uint8_t);
 };
-}
+}  // namespace Widelands
 #endif  // end of include guard: WL_LOGIC_AI_DNA_HANDLER_H

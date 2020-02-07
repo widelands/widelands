@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,10 +20,11 @@
 #include "graphic/rendertarget.h"
 
 #include "base/macros.h"
-#include "graphic/animation.h"
+#include "graphic/align.h"
+#include "graphic/animation/animation.h"
+#include "graphic/animation/animation_manager.h"
 #include "graphic/graphic.h"
 #include "graphic/surface.h"
-#include "graphic/text_layout.h"
 
 /**
  * Build a render target for the given surface.
@@ -286,49 +287,20 @@ void RenderTarget::tile(const Recti& rect,
 }
 
 void RenderTarget::blit_animation(const Vector2f& dst,
+                                  const Widelands::Coords& coords,
                                   const float scale,
-                                  uint32_t animation,
-                                  uint32_t time) {
-	// TODO(unknown): Correctly calculate the stereo position for sound effects
-	// TODO(unknown): The chosen semantics of animation sound effects is problematic:
-	// What if the game runs very slowly or very quickly?
-	const Animation& anim = g_gr->animations().get_animation(animation);
-	do_blit_animation(dst, scale, anim, time, nullptr);
-}
-
-void RenderTarget::blit_animation(const Vector2f& dst,
-                                  const float scale,
-                                  uint32_t animation,
+                                  uint32_t animation_id,
                                   uint32_t time,
-                                  const RGBColor& player_color) {
-	const Animation& anim = g_gr->animations().get_animation(animation);
-	do_blit_animation(dst, scale, anim, time, &player_color);
-}
-
-void RenderTarget::blit_animation(const Vector2f& dst,
-                                  const float scale,
-                                  uint32_t animation,
-                                  uint32_t time,
-                                  const RGBColor& player_color,
+                                  const RGBColor* player_color,
                                   const int percent_from_bottom) {
-	do_blit_animation(dst, scale, g_gr->animations().get_animation(animation), time, &player_color,
-	                  percent_from_bottom);
-}
-
-void RenderTarget::do_blit_animation(const Vector2f& dst,
-                                     const float scale,
-                                     const Animation& animation,
-                                     uint32_t time,
-                                     const RGBColor* player_color,
-                                     const int percent_from_bottom) {
-
+	const Animation& animation = g_gr->animations().get_animation(animation_id);
 	assert(percent_from_bottom <= 100);
 	if (percent_from_bottom > 0) {
 		// Scaling for zoom and animation image size, then fit screen edges.
-		Rectf srcrc = animation.source_rectangle(percent_from_bottom);
+		Rectf srcrc = animation.source_rectangle(percent_from_bottom, scale);
 		Rectf dstrc = animation.destination_rectangle(dst, srcrc, scale);
 		if (to_surface_geometry(&dstrc, &srcrc)) {
-			animation.blit(time, srcrc, dstrc, player_color, surface_);
+			animation.blit(time, coords, srcrc, dstrc, player_color, surface_, scale);
 		}
 	}
 }

@@ -1,23 +1,23 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
-# Elisabeth Jäger, 2016-2018
+# Elisabeth Jäger, 2016-2019
 # wl-zocker, 2014
 # Klaus Halfmann <klaus.halfmann@arcor.de>, 2016
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
-# Stephan Lutz <stephan-lutz@gmx.de>, 2018
+# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2020
 # Elisabeth Jäger, 2015-2016
 # wl-zocker, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-07 10:16+0000\n"
-"PO-Revision-Date: 2018-05-08 10:29+0000\n"
-"Last-Translator: Elisabeth Jäger\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-01-10 12:51+0000\n"
+"PO-Revision-Date: 2020-01-10 21:57+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,56 +41,57 @@ msgstr "Lizenz"
 msgid "Licensing information for Widelands"
 msgstr "Lizenzinformationen für Widelands"
 
-#: ../../data/txts/LICENSE.lua:9
-msgid "Copyright 2002 - 2018 by the Widelands Development Team."
-msgstr "Copyright 2002 - 2018 durch das Widelands-Entwicklungsteam."
+#. TRANSLATORS: Placeholder is copyright end year
+#: ../../data/txts/LICENSE.lua:10
+msgid "Copyright 2002 - %1% by the Widelands Development Team."
+msgstr "Copyright 2002 - %1% durch das Widelands-Entwicklungsteam."
 
-#: ../../data/txts/LICENSE.lua:11
+#: ../../data/txts/LICENSE.lua:12
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
 msgstr "Dieses Spiel ist Freie- und Open-Source-Software (FOSS), lizenziert unter der GNU General Public License (GPL) Version 2.0."
 
-#: ../../data/txts/LICENSE.lua:13
+#: ../../data/txts/LICENSE.lua:14
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
 msgstr "Weitere Informationen zu FOSS und GPL findest du auf folgender Webseite: %s"
 
-#: ../../data/txts/LICENSE.lua:15
+#: ../../data/txts/LICENSE.lua:16
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr "Dort findest du den vollständigen Lizenztext sowie weitere Informationen zur dahinterstehenden Philosophie und der rechtlichen Bedeutung."
 
-#: ../../data/txts/LICENSE.lua:17
+#: ../../data/txts/LICENSE.lua:18
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr "Wir liefern die GPL auch als Textdokument zusammen mit Widelands selbst aus."
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:19
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
 msgstr "Unter Linux befindet sich die Datei COPYING im Stammverzeichnis des Quell- oder Binärpakets oder im Installationsverzeichnis (etwa „%1%“)."
 
-#: ../../data/txts/LICENSE.lua:19
+#: ../../data/txts/LICENSE.lua:20
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr "Unter Windows befindet sich die Datei COPYING.txt im Installationsverzeichnis. Außerdem stellt der Startmenüeintrag für Widelands eine Verknüpfung zu dieser Datei bereit."
 
-#: ../../data/txts/LICENSE.lua:20
+#: ../../data/txts/LICENSE.lua:21
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
 msgstr "Unter MacOS befindet sich die Datei COPYING im Archiv, das du von der Website heruntergeladen hast."
 
-#: ../../data/txts/LICENSE.lua:22
+#: ../../data/txts/LICENSE.lua:23
 msgid "This game comes as-is and without any warranty."
 msgstr "Dieses Spiel wird so, wie es ist, und ohne jegliche Garantie verbreitet."
 
-#: ../../data/txts/LICENSE.lua:23
+#: ../../data/txts/LICENSE.lua:24
 msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
@@ -245,6 +246,10 @@ msgid "Fedora Linux"
 msgstr "Fedora Linux"
 
 #: ../../data/txts/developers.lua:3
+msgid "Flatpak"
+msgstr "Flatpak"
+
+#: ../../data/txts/developers.lua:3
 msgid "Former Elders"
 msgstr "Ehemalige Älteste"
 
@@ -319,6 +324,14 @@ msgstr "Windows"
 #: ../../data/txts/developers.lua:3
 msgid "ZetaOS"
 msgstr "Zeta"
+
+#: ../../data/txts/developers.lua:3
+msgid "and many, many more (thank you for everything you've done)"
+msgstr "und viele, viele andere (vielen Dank für alles, was ihr beigetragen habt)"
+
+#: ../../data/txts/developers.lua:3
+msgid "vacant"
+msgstr "vakant"
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
@@ -403,7 +416,12 @@ msgstr "LEERTASTE"
 msgid "Toggle building spaces"
 msgstr "Schaltet die Bauhilfe ein und aus"
 
-#. TRANSLATORS: This is an access key combination. The hotkey is 'f'
+#. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
+#: ../../data/txts/help/common_helptexts.lua:49
+msgctxt "hotkey"
+msgid "Ctrl + F"
+msgstr "STRG + F"
+
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"
 msgstr "Schaltet die Vollbilddarstellung an/aus (falls dies das Betriebssystem erlaubt)"

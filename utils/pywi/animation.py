@@ -29,7 +29,6 @@ class Animation(object):
 
     Note that all coordinates are in a numpy-friendly format, that is,
     rows come first.
-
     """
 
     def __init__(self):

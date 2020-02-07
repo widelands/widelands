@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,7 +32,7 @@
  * thing. Like more than one texture, more than one map object
  *
  * This is a helper class, no Editor Tool (might be usable in game too)
-*/
+ */
 struct MultiSelect {
 	MultiSelect() : nr_enabled_(0) {
 	}

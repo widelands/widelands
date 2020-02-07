@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,11 +53,13 @@ GameChatMenu* GameChatMenu::create_chat_console(UI::Panel* parent,
 	return new GameChatMenu(parent, registry, chat, _("Chat"));
 }
 
+#ifndef NDEBUG  //  only in debug builds
 GameChatMenu* GameChatMenu::create_script_console(UI::Panel* parent,
                                                   UI::UniqueWindow::Registry& registry,
                                                   ChatProvider& chat) {
-	return new GameChatMenu(parent, registry, chat, _("Script console"));
+	return new GameChatMenu(parent, registry, chat, _("Script Console"));
 }
+#endif
 
 bool GameChatMenu::enter_chat_message(bool close_on_send) {
 	if (is_minimal()) {

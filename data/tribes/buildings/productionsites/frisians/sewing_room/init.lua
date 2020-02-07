@@ -14,28 +14,39 @@ tribes:new_productionsite_type {
       brick = 3,
       granite = 1,
       log = 1,
-      thatch_reed = 1
+      reed = 1
    },
    return_on_dismantle = {
       brick = 2,
       log = 1,
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 94},
-         fps = 10,
+         directory = dirname,
+         basename = "idle",
+         hotspot = {50, 82},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 94},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "working",
+         hotspot = {50, 82},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
       unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 73},
-      },
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {50, 64}
+      }
    },
 
    aihints = {
@@ -59,9 +70,9 @@ tribes:new_productionsite_type {
          descname = _"sewing fur garment",
          actions = {
             -- time total: 40 + 3.6
-            "sleep=20000",
             "return=skipped unless economy needs fur_garment or workers need experience",
             "consume=fur:2",
+            "sleep=20000",
             "animate=working 20000",
             "produce=fur_garment"
          },

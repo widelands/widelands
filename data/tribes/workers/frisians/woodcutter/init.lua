@@ -1,20 +1,5 @@
 dirname = path.dirname (__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files (dirname .. "idle_??.png"),
-      hotspot = {9, 23},
-      fps = 10
-   },
-   hacking = {
-      pictures = path.list_files (dirname .. "hacking_??.png"),
-      hotspot = {19, 33},
-      fps = 10
-   }
-}
-add_walking_animations (animations, "walk", dirname, "walk", {16, 23}, 15)
-add_walking_animations (animations, "walkload", dirname, "walkload", {12, 26}, 15)
-
 tribes:new_worker_type {
    msgctxt = "frisians_worker",
    name = "frisians_woodcutter",
@@ -33,7 +18,9 @@ tribes:new_worker_type {
       harvest = {
          "findobject=attrib:tree radius:10",
          "walk=object",
-         "animate=hacking 10000",
+         "playsound=sound/woodcutting/woodcutting 255",
+         "animate=hacking 20000",
+         "playsound=sound/woodcutting/tree_falling 130",
          "callobject=fall",
          "animate=idle 2000",
          "createware=log",
@@ -41,5 +28,46 @@ tribes:new_worker_type {
       }
    },
 
-   animations = animations,
+   ware_hotspot = {0, 20},
+
+   spritesheets = {
+      walk = {
+         directory = dirname,
+         basename = "walk",
+         fps = 15,
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         directional = true,
+         hotspot = {16, 23}
+      },
+      walkload = {
+         directory = dirname,
+         basename = "walkload",
+         fps = 15,
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         directional = true,
+         hotspot = {12, 26}
+      },
+      idle = {
+         directory = dirname,
+         basename = "idle",
+         fps = 10,
+         frames = 20,
+         columns = 5,
+         rows = 4,
+         hotspot = {9, 23}
+      },
+      hacking = {
+         directory = dirname,
+         basename = "hacking",
+         fps = 10,
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         hotspot = {14, 23}
+      },
+   },
 }

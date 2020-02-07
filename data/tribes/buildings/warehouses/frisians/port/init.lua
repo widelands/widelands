@@ -8,7 +8,7 @@ tribes:new_warehouse_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "port",
-   needs_seafaring = true,
+   map_check = {"seafaring"},
 
    buildcost = {
       brick = 6,
@@ -16,7 +16,7 @@ tribes:new_warehouse_type {
       log = 6,
       cloth = 2,
       gold = 2,
-      thatch_reed = 4
+      reed = 4
    },
    return_on_dismantle = {
       brick = 3,
@@ -24,19 +24,26 @@ tribes:new_warehouse_type {
       log = 3,
       gold = 1,
       cloth = 1,
-      thatch_reed = 2
+      reed = 2
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {95, 178},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "idle",
+         hotspot = {64, 117},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
       build = {
-         pictures = path.list_files (dirname .. "build_?.png"),
-         hotspot = {95, 178},
-      },
+         directory = dirname,
+         basename = "build",
+         hotspot = {64, 117}
+      }
    },
 
    aihints = {

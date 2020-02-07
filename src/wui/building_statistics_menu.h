@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,6 @@
 
 #include "graphic/color.h"
 #include "logic/map_objects/tribes/building.h"
-#include "logic/widelands.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
@@ -74,7 +73,8 @@ private:
 	/// Whether a building that is used by the player's tribe should be added
 	bool own_building_is_valid(const Widelands::Player& player,
 	                           Widelands::DescriptionIndex index,
-	                           bool map_allows_seafaring) const;
+	                           bool map_allows_seafaring,
+	                           bool map_allows_waterways) const;
 	/// Whether a building that isn't used by the player's tribe should be added
 	bool foreign_tribe_building_is_valid(const Widelands::Player& player,
 	                                     Widelands::DescriptionIndex index) const;
@@ -92,7 +92,7 @@ private:
 	/// Jumps to the next / previous appropriate building
 	void jump_building(JumpTarget target, bool reverse);
 
-	/// Sets the label for id type to text in the chosen color with dynamic font size
+	/// Sets the label for the given textarea to text in the chosen color
 	void set_labeltext(UI::Textarea* textarea, const std::string& text, const RGBColor& color);
 
 	/// Sets the current building type for the bottom navigation
@@ -107,6 +107,9 @@ private:
 	int32_t validate_pointer(int32_t*, int32_t);
 
 	InteractivePlayer& iplayer() const;
+
+	/// Style
+	const UI::BuildingStatisticsStyleInfo& style_;
 
 	/// UI tabs
 	UI::TabPanel tab_panel_;

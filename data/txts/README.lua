@@ -22,7 +22,7 @@ return {
 
       h2(_"Reporting Bugs") ..
       p(_"If you encounter a bug, please report it to our bugtracker:") ..
-      p(a("widelands.org/wiki/ReportingBugs]")) ..
+      p(a("widelands.org/wiki/ReportingBugs")) ..
       p(_"Please provide enough background information. Tell us:") ..
       p(
           li(_"Detailed steps on how to trigger the bug, if possible.") ..

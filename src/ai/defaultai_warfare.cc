@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2018 by the Widelands Development Team
+ * Copyright (C) 2009-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,7 +39,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	// Militarysites rotate (see check_militarysites())
 	int32_t i = 0;
 	for (MilitarySiteObserver mso : militarysites) {
-		i += 1;
+		++i;
 		if (i % 4 == 0)
 			continue;
 		if (i > 20)
@@ -53,8 +53,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		static std::vector<ImmovableFound> immovables;
 		immovables.clear();
 		immovables.reserve(40);
-		map.find_immovables(Area<FCoords>(f, (vision + 3 < 13) ? 13 : vision + 3), &immovables,
-		                    FindImmovableAttackTarget());
+		map.find_immovables(game(), Area<FCoords>(f, (vision + 3 < 13) ? 13 : vision + 3),
+		                    &immovables, FindImmovableAttackTarget());
 
 		for (uint32_t j = 0; j < immovables.size(); ++j) {
 			if (upcast(MilitarySite const, bld, immovables.at(j).object)) {
@@ -203,7 +203,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			if (site->second.mines_nearby == ExtendedBool::kUnset) {
 				FindNodeMineable find_mines_spots_nearby(game(), f.field->get_resources());
 				const int32_t minescount =
-				   map.find_fields(Area<FCoords>(f, 6), nullptr, find_mines_spots_nearby);
+				   map.find_fields(game(), Area<FCoords>(f, 6), nullptr, find_mines_spots_nearby);
 				if (minescount > 0) {
 					site->second.mines_nearby = ExtendedBool::kTrue;
 				} else {
@@ -266,7 +266,6 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				inputs[3] = (is_warehouse) ? 2 : 0;
 				inputs[4] = (site->second.attack_soldiers_competency > 15) ? 2 : 0;
 				inputs[5] = (site->second.attack_soldiers_competency > 25) ? 4 : 0;
-				;
 				inputs[6] =
 				   (2 * site->second.defenders_strength > 3 * site->second.attack_soldiers_strength) ?
 				      2 :
@@ -482,7 +481,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	}
 
 	// how many attack soldiers we can send?
-	int32_t attackers = player_->find_attack_soldiers(*flag);
+	std::vector<Soldier*> soldiers;
+	int32_t attackers = player_->find_attack_soldiers(*flag, &soldiers);
 	assert(attackers < 500);
 
 	if (attackers > 5) {
@@ -500,12 +500,17 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	    player_number(), flag->get_position().x, flag->get_position().y, best_score, attackers,
 	    enemy_sites[best_target].attack_counter + 1,
 	    (gametime - enemy_sites[best_target].last_time_attacked) / 1000);
-	game().send_player_enemyflagaction(*flag, player_number(), static_cast<uint16_t>(attackers));
+	std::vector<Serial> attacking_soldiers;
+	for (int a = 0; a < attackers; ++a) {
+		// TODO(Nordfriese): We could now choose the soldiers we want to send
+		attacking_soldiers.push_back(soldiers[a]->serial());
+	}
+	game().send_player_enemyflagaction(*flag, player_number(), attacking_soldiers);
 	assert(1 <
 	       player_->vision(Map::get_index(flag->get_building()->get_position(), map.get_width())));
 	attackers_count_ += attackers;
 	enemy_sites[best_target].last_time_attacked = gametime;
-	enemy_sites[best_target].attack_counter += 1;
+	++enemy_sites[best_target].attack_counter;
 
 	last_attack_time_ = gametime;
 	for (int j = 0; j < attackers; ++j) {
@@ -777,7 +782,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	     site != trainingsites.end(); ++site) {
 
 		if (!site->site->can_start_working()) {
-			ts_without_trainers_ += 1;
+			++ts_without_trainers_;
 		}
 	}
 	return true;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -73,13 +73,35 @@ Panel
 */
 const char LuaPanel::className[] = "Panel";
 const PropertyType<LuaPanel> LuaPanel::Properties[] = {
-   PROP_RO(LuaPanel, buttons),    PROP_RO(LuaPanel, tabs),       PROP_RO(LuaPanel, windows),
-   PROP_RW(LuaPanel, position_x), PROP_RW(LuaPanel, position_y), PROP_RW(LuaPanel, width),
-   PROP_RW(LuaPanel, height),     {nullptr, nullptr, nullptr},
+   PROP_RO(LuaPanel, buttons), PROP_RO(LuaPanel, dropdowns),  PROP_RO(LuaPanel, tabs),
+   PROP_RO(LuaPanel, windows), PROP_RW(LuaPanel, position_x), PROP_RW(LuaPanel, position_y),
+   PROP_RW(LuaPanel, width),   PROP_RW(LuaPanel, height),     {nullptr, nullptr, nullptr},
 };
 const MethodType<LuaPanel> LuaPanel::Methods[] = {
-   METHOD(LuaPanel, get_descendant_position), {nullptr, nullptr},
+   METHOD(LuaPanel, get_descendant_position),
+   {nullptr, nullptr},
 };
+
+// Look for all descendant panels of class P and add the corresponding Lua version to the currently
+// active Lua table. Class P needs to be a NamedPanel.
+template <class P, class LuaP>
+static void put_all_visible_panels_into_table(lua_State* L, UI::Panel* g) {
+	if (g == nullptr) {
+		return;
+	}
+
+	for (UI::Panel* child = g->get_first_child(); child; child = child->get_next_sibling()) {
+		put_all_visible_panels_into_table<P, LuaP>(L, child);
+
+		if (upcast(P, specific_panel, child)) {
+			if (specific_panel->is_visible()) {
+				lua_pushstring(L, specific_panel->get_name());
+				to_lua<LuaP>(L, new LuaP(specific_panel));
+				lua_rawset(L, -3);
+			}
+		}
+	}
+}
 
 /*
  * Properties
@@ -96,26 +118,25 @@ const MethodType<LuaPanel> LuaPanel::Methods[] = {
 
       (RO) An :class:`array` of all visible buttons inside this Panel.
 */
-static void put_all_visible_buttons_into_table(lua_State* L, UI::Panel* g) {
-	if (!g)
-		return;
-
-	for (UI::Panel* f = g->get_first_child(); f; f = f->get_next_sibling()) {
-		put_all_visible_buttons_into_table(L, f);
-
-		if (upcast(UI::Button, b, f))
-			if (b->is_visible()) {
-				lua_pushstring(L, b->get_name());
-				to_lua<LuaButton>(L, new LuaButton(b));
-				lua_rawset(L, -3);
-			}
-	}
-}
 int LuaPanel::get_buttons(lua_State* L) {
 	assert(panel_);
 
 	lua_newtable(L);
-	put_all_visible_buttons_into_table(L, panel_);
+	put_all_visible_panels_into_table<UI::Button, LuaButton>(L, panel_);
+
+	return 1;
+}
+
+/* RST
+   .. attribute:: dropdowns
+
+      (RO) An :class:`array` of all visible dropdowns inside this Panel.
+*/
+int LuaPanel::get_dropdowns(lua_State* L) {
+	assert(panel_);
+
+	lua_newtable(L);
+	put_all_visible_panels_into_table<UI::BaseDropdown, LuaDropdown>(L, panel_);
 
 	return 1;
 }
@@ -155,25 +176,11 @@ int LuaPanel::get_tabs(lua_State* L) {
       (RO) A :class:`array` of all currently open windows that are
          children of this Panel.
 */
-static void put_all_visible_windows_into_table(lua_State* L, UI::Panel* g) {
-	if (!g)
-		return;
-
-	for (UI::Panel* f = g->get_first_child(); f; f = f->get_next_sibling()) {
-		put_all_visible_windows_into_table(L, f);
-
-		if (upcast(UI::Window, win, f)) {
-			lua_pushstring(L, win->get_name());
-			to_lua<LuaWindow>(L, new LuaWindow(win));
-			lua_rawset(L, -3);
-		}
-	}
-}
 int LuaPanel::get_windows(lua_State* L) {
 	assert(panel_);
 
 	lua_newtable(L);
-	put_all_visible_windows_into_table(L, panel_);
+	put_all_visible_panels_into_table<UI::Window, LuaWindow>(L, panel_);
 
 	return 1;
 }
@@ -287,10 +294,13 @@ Button
 */
 const char LuaButton::className[] = "Button";
 const MethodType<LuaButton> LuaButton::Methods[] = {
-   METHOD(LuaButton, press), METHOD(LuaButton, click), {nullptr, nullptr},
+   METHOD(LuaButton, press),
+   METHOD(LuaButton, click),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaButton> LuaButton::Properties[] = {
-   PROP_RO(LuaButton, name), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaButton, name),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -313,6 +323,7 @@ int LuaButton::get_name(lua_State* L) {
       event in tutorials
 */
 int LuaButton::press(lua_State* /* L */) {
+	log("Pressing button '%s'\n", get()->get_name().c_str());
 	get()->handle_mousein(true);
 	get()->handle_mousepress(SDL_BUTTON_LEFT, 1, 1);
 	return 0;
@@ -324,9 +335,118 @@ int LuaButton::press(lua_State* /* L */) {
       it.
 */
 int LuaButton::click(lua_State* /* L */) {
+	log("Clicking button '%s'\n", get()->get_name().c_str());
 	get()->handle_mousein(true);
 	get()->handle_mousepress(SDL_BUTTON_LEFT, 1, 1);
 	get()->handle_mouserelease(SDL_BUTTON_LEFT, 1, 1);
+	return 0;
+}
+
+/*
+ * C Functions
+ */
+
+/* RST
+Dropdown
+--------
+
+.. class:: Dropdown
+
+   Child of: :class:`Panel`
+
+   This represents a dropdown menu.
+*/
+const char LuaDropdown::className[] = "Dropdown";
+const MethodType<LuaDropdown> LuaDropdown::Methods[] = {
+   METHOD(LuaDropdown, open),
+   METHOD(LuaDropdown, highlight_item),
+   METHOD(LuaDropdown, select),
+   {nullptr, nullptr},
+};
+const PropertyType<LuaDropdown> LuaDropdown::Properties[] = {
+   PROP_RO(LuaDropdown, name),
+   PROP_RO(LuaDropdown, no_of_items),
+   {nullptr, nullptr, nullptr},
+};
+
+/*
+ * Properties
+ */
+
+// Documented in parent Class
+int LuaDropdown::get_name(lua_State* L) {
+	lua_pushstring(L, get()->get_name());
+	return 1;
+}
+
+/* RST
+   .. attribute:: no_of_items
+
+      (RO) The number of items his dropdown has.
+*/
+int LuaDropdown::get_no_of_items(lua_State* L) {
+	lua_pushinteger(L, get()->size());
+	return 1;
+}
+
+/*
+ * Lua Functions
+ */
+/* RST
+   .. method:: open
+
+      Open this dropdown menu.
+*/
+int LuaDropdown::open(lua_State* /* L */) {
+	log("Opening dropdown '%s'\n", get()->get_name().c_str());
+	get()->set_list_visibility(true);
+	return 0;
+}
+
+/* RST
+   .. method:: highlight_item(index)
+
+      :arg index: the index of the item to highlight, starting from ``1``
+      :type index: :class:`integer`
+
+      Highlights an item in this dropdown without triggering a selection.
+*/
+int LuaDropdown::highlight_item(lua_State* L) {
+	unsigned int desired_item = luaL_checkuint32(L, -1);
+	if (desired_item < 1 || desired_item > get()->size()) {
+		report_error(L,
+		             "Attempted to highlight item %d on dropdown '%s'. Avaliable range for this "
+		             "dropdown is 1-%d.",
+		             desired_item, get()->get_name().c_str(), get()->size());
+	}
+	log("Highlighting item %d in dropdown '%s'\n", desired_item, get()->get_name().c_str());
+	// Open the dropdown
+	get()->set_list_visibility(true);
+
+	SDL_Keysym code;
+	// Ensure that we're at the top
+	code.sym = SDLK_UP;
+	for (size_t i = 1; i < get()->size(); ++i) {
+		get()->handle_key(true, code);
+	}
+	// Press arrow down until the desired item is highlighted
+	code.sym = SDLK_DOWN;
+	for (size_t i = 1; i < desired_item; ++i) {
+		get()->handle_key(true, code);
+	}
+	return 0;
+}
+
+/* RST
+   .. method:: select()
+
+      Selects the currently highlighted item in this dropdown.
+*/
+int LuaDropdown::select(lua_State* /* L */) {
+	log("Selecting current item in dropdown '%s'\n", get()->get_name().c_str());
+	SDL_Keysym code;
+	code.sym = SDLK_RETURN;
+	get()->handle_key(true, code);
 	return 0;
 }
 
@@ -346,10 +466,13 @@ Tab
 */
 const char LuaTab::className[] = "Tab";
 const MethodType<LuaTab> LuaTab::Methods[] = {
-   METHOD(LuaTab, click), {nullptr, nullptr},
+   METHOD(LuaTab, click),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaTab> LuaTab::Properties[] = {
-   PROP_RO(LuaTab, name), PROP_RO(LuaTab, active), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaTab, name),
+   PROP_RO(LuaTab, active),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -381,6 +504,7 @@ int LuaTab::get_active(lua_State* L) {
       Click this tab making it the active one.
 */
 int LuaTab::click(lua_State* /* L */) {
+	log("Clicking tab '%s'\n", get()->get_name().c_str());
 	get()->activate();
 	return 0;
 }
@@ -401,10 +525,12 @@ Window
 */
 const char LuaWindow::className[] = "Window";
 const MethodType<LuaWindow> LuaWindow::Methods[] = {
-   METHOD(LuaWindow, close), {nullptr, nullptr},
+   METHOD(LuaWindow, close),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaWindow> LuaWindow::Properties[] = {
-   PROP_RO(LuaWindow, name), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaWindow, name),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -428,6 +554,7 @@ int LuaWindow::get_name(lua_State* L) {
       not use it any longer.
 */
 int LuaWindow::close(lua_State* /* L */) {
+	log("Closing window '%s'\n", get()->get_name().c_str());
 	delete panel_;
 	panel_ = nullptr;
 	return 0;
@@ -482,8 +609,8 @@ void LuaMapView::__unpersist(lua_State* L) {
 /* RST
    .. attribute:: center_map_pixel
 
-		(RO) The map position (in pixels) that the center pixel of this map view
-		currently sees. This is a table containing 'x', 'y'.
+      (RO) The map position (in pixels) that the center pixel of this map view
+      currently sees. This is a table containing 'x', 'y'.
 */
 int LuaMapView::get_center_map_pixel(lua_State* L) {
 	const Vector2f center = get()->map_view()->view_area().rect().center();
@@ -555,7 +682,7 @@ int LuaMapView::get_is_building_road(lua_State* L) {
 /* RST
    .. attribute:: is_animating
 
-		(RO) True if this MapView is currently panning or zooming.
+      (RO) True if this MapView is currently panning or zooming.
 */
 int LuaMapView::get_is_animating(lua_State* L) {
 	lua_pushboolean(L, get()->map_view()->is_animating());
@@ -642,9 +769,9 @@ int LuaMapView::close(lua_State* /* l */) {
 /* RST
    .. method:: scroll_to_map_pixel(x, y)
 
-		Starts an animation to center the view on top of the pixel (x, y) in map
-		pixel space. Use `is_animating` to check if the animation is still going
-		on.
+      Starts an animation to center the view on top of the pixel (x, y) in map
+      pixel space. Use `is_animating` to check if the animation is still going
+      on.
 
       :arg x: x coordinate of the pixel
       :type x: number
@@ -666,8 +793,8 @@ int LuaMapView::scroll_to_map_pixel(lua_State* L) {
 /* RST
    .. method:: scroll_to_map_pixel(field)
 
-		Starts an animation to center the view on top of the 'field'. Use
-		`is_animating` to check if the animation is still going on.
+      Starts an animation to center the view on top of the 'field'. Use
+      `is_animating` to check if the animation is still going on.
 
       :arg field: the field to center on
       :type field: :class:`wl.map.Field`
@@ -681,7 +808,7 @@ int LuaMapView::scroll_to_field(lua_State* L) {
 /* RST
    .. method:: is_visible(field)
 
-		Returns `true` if `field` is currently visible in the map view.
+      Returns `true` if `field` is currently visible in the map view.
 
       :arg field: the field
       :type field: :class:`wl.map.Field`
@@ -695,8 +822,8 @@ int LuaMapView::is_visible(lua_State* L) {
 /* RST
    .. method:: mouse_to_pixel(x, y)
 
-		Starts an animation to move the mouse onto the pixel (x, y) of this panel.
-		Use `is_animating` to check if the animation is still going on.
+      Starts an animation to move the mouse onto the pixel (x, y) of this panel.
+      Use `is_animating` to check if the animation is still going on.
 
       :arg x: x coordinate of the pixel
       :type x: number
@@ -713,9 +840,9 @@ int LuaMapView::mouse_to_pixel(lua_State* L) {
 /* RST
    .. method:: mouse_to_field(field)
 
-		Starts an animation to move the mouse onto the 'field'. If 'field' is not
-		visible on the screen currently, does nothing. Use `is_animating` to
-		check if the animation is still going on.
+      Starts an animation to move the mouse onto the 'field'. If 'field' is not
+      visible on the screen currently, does nothing. Use `is_animating` to
+      check if the animation is still going on.
 
       :arg field: the field
       :type field: :class:`wl.map.Field`
@@ -780,6 +907,10 @@ void luaopen_wlui(lua_State* L) {
 	add_parent<LuaButton, LuaPanel>(L);
 	lua_pop(L, 1);  // Pop the meta table
 
+	register_class<LuaDropdown>(L, "ui", true);
+	add_parent<LuaDropdown, LuaPanel>(L);
+	lua_pop(L, 1);  // Pop the meta table
+
 	register_class<LuaTab>(L, "ui", true);
 	add_parent<LuaTab, LuaPanel>(L);
 	lua_pop(L, 1);  // Pop the meta table
@@ -792,4 +923,4 @@ void luaopen_wlui(lua_State* L) {
 	add_parent<LuaMapView, LuaPanel>(L);
 	lua_pop(L, 1);  // Pop the meta table
 }
-}
+}  // namespace LuaUi

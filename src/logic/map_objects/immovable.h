@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,8 +24,8 @@
 #include <unordered_map>
 
 #include "base/macros.h"
-#include "graphic/animation.h"
 #include "logic/map_objects/buildcost.h"
+#include "logic/map_objects/info_to_draw.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/widelands_geometry.h"
 #include "notifications/note_ids.h"
@@ -96,13 +96,17 @@ struct BaseImmovable : public MapObject {
 	virtual PositionList get_positions(const EditorGameBase&) const = 0;
 
 	// Draw this immovable onto 'dst' choosing the frame appropriate for
-	// 'gametime'.
+	// 'gametime'. 'info_to_draw' decides if census and statistics are written too.
 	// The 'coords_to_draw' are passed one to give objects that occupy multiple
 	// fields a way to only draw themselves once. The 'point_on_dst' determines
 	// the point for the hotspot of the animation and 'scale' determines how big
 	// the immovable will be plotted.
-	virtual void
-	draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, RenderTarget* dst) = 0;
+	virtual void draw(uint32_t gametime,
+	                  InfoToDraw info_to_draw,
+	                  const Vector2f& point_on_dst,
+	                  const Coords& coords,
+	                  float scale,
+	                  RenderTarget* dst) = 0;
 
 	static int32_t string_to_size(const std::string& size);
 	static std::string size_to_string(int32_t size);
@@ -223,8 +227,12 @@ public:
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
-	void
-	draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, RenderTarget* dst) override;
+	void draw(uint32_t gametime,
+	          InfoToDraw info_to_draw,
+	          const Vector2f& point_on_dst,
+	          const Coords& coords,
+	          float scale,
+	          RenderTarget* dst) override;
 
 	void switch_program(Game& game, const std::string& programname);
 	bool construct_ware(Game& game, DescriptionIndex index);
@@ -239,8 +247,6 @@ public:
 		set_action_data(nullptr);
 		return nullptr;
 	}
-
-	std::string info_string(MapObject::InfoStringType format) override;
 
 protected:
 	// The building type that created this immovable, if any.
@@ -309,7 +315,9 @@ private:
 
 	void increment_program_pointer();
 	void draw_construction(uint32_t gametime,
+	                       InfoToDraw info_to_draw,
 	                       const Vector2f& point_on_dst,
+	                       const Widelands::Coords& coords,
 	                       float scale,
 	                       RenderTarget* dst);
 };
@@ -326,16 +334,16 @@ struct PlayerImmovable : public BaseImmovable {
 	explicit PlayerImmovable(const MapObjectDescr&);
 	~PlayerImmovable() override;
 
-	Economy* get_economy() const {
-		return economy_;
+	Economy* get_economy(WareWorker type) const {
+		return type == wwWARE ? ware_economy_ : worker_economy_;
 	}
-	Economy& economy() const {
-		return *economy_;
+	Economy& economy(WareWorker type) const {
+		return *(type == wwWARE ? ware_economy_ : worker_economy_);
 	}
 
 	virtual Flag& base_flag() = 0;
 
-	virtual void set_economy(Economy*);
+	virtual void set_economy(Economy*, WareWorker);
 
 	virtual void add_worker(Worker&);
 	virtual void remove_worker(Worker&);
@@ -375,7 +383,8 @@ protected:
 	void cleanup(EditorGameBase&) override;
 
 private:
-	Economy* economy_;
+	Economy* ware_economy_;
+	Economy* worker_economy_;
 
 	Workers workers_;
 
@@ -390,6 +399,6 @@ protected:
 public:
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_IMMOVABLE_H

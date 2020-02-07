@@ -1,15 +1,5 @@
 dirname = path.dirname (__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files (dirname .. "idle_??.png"),
-      hotspot = {23, 22},
-      fps = 10
-   }
-}
-add_walking_animations (animations, "walk", dirname, "walk", {10, 23}, 15)
-add_walking_animations (animations, "walkload", dirname, "walkload", {11, 26}, 15)
-
 tribes:new_worker_type {
    msgctxt = "frisians_worker",
    name = "frisians_hunter",
@@ -35,5 +25,37 @@ tribes:new_worker_type {
       }
    },
 
-   animations = animations,
+   ware_hotspot = {0, 20},
+
+   spritesheets = {
+      walk = {
+         directory = dirname,
+         basename = "walk",
+         fps = 15,
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         directional = true,
+         hotspot = {10, 23}
+      },
+      walkload = {
+         directory = dirname,
+         basename = "walkload",
+         fps = 15,
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         directional = true,
+         hotspot = {11, 26}
+      },
+      idle = {
+         directory = dirname,
+         basename = "idle",
+         fps = 10,
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         hotspot = {23, 22}
+      },
+   },
 }

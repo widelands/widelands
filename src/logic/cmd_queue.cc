@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -113,8 +113,7 @@ void CmdQueue::run_queue(int32_t const interval, uint32_t& game_time_var) {
 
 			if (dynamic_cast<GameLogicCommand*>(&c)) {
 				StreamWrite& ss = game_.syncstream();
-				static uint8_t const tag[] = {0xde, 0xad, 0x00};
-				ss.data(tag, 3);  // provide an easy-to-find pattern as debugging aid
+				ss.unsigned_8(SyncEntry::kRunQueue);
 				ss.unsigned_32(c.duetime());
 				ss.unsigned_32(static_cast<uint32_t>(c.id()));
 			}
@@ -174,4 +173,4 @@ void GameLogicCommand::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoade
 		throw GameDataError("game logic: %s", e.what());
 	}
 }
-}
+}  // namespace Widelands

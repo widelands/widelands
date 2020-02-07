@@ -1,22 +1,22 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # adrien vigneron <adrienvigneron@ml1.net>, 2016
 # GunChleoc, 2014
 # GunChleoc, 2014
-# Samuël Weber <samuel.weber@normalesup.org>, 2017
+# Samuël Weber/GwendalD <samuel.weber@normalesup.org>, 2017
 # Jaypad <ju-ju@nataju.fr>, 2016
 # nicolas jardin <niko472006@sfr.fr>, 2016
 # Renaud Bouchard, 2015
-# Renaud Bouchard, 2015-2017
+# Renaud Bouchard, 2015-2017,2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-10 11:03+0000\n"
-"PO-Revision-Date: 2018-02-10 11:05+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-10-09 07:57+0000\n"
+"PO-Revision-Date: 2019-10-15 07:48+0000\n"
+"Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,11 +26,11 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:31
 msgid "Ensure the supply of building wares"
-msgstr "Assurer l'approvisionnement en matériaux de construction"
+msgstr "Assurer l'approvisionnement de marchandises de construction"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:33
 msgid "Supply Building Wares"
-msgstr "Approvisionement de marchandises de construction"
+msgstr "Approvisionnement de marchandises de construction"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:34
 msgid "Supply basic building material for your economy:"
@@ -54,7 +54,7 @@ msgstr "Construisez une scierie"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:44
 msgid "Expand your territory and explore"
-msgstr "Étendez votre territoire et explorez l'île"
+msgstr "Étendez votre territoire et explorez"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:46
 msgid "Expand and Explore"
@@ -85,7 +85,7 @@ msgid ""
 "well working food environment by building at least one farm, one blackroot "
 "farm and a mill. The two kinds of flour together with water from a well will"
 " be baked into bread in a bakery, so build a bakery and a well, too."
-msgstr "La nourriture est très importante pour les mines et les zones d'entraînement militaire. Établissez un système de production alimentaire fonctionnel en construisant au moins une ferme, une ferme de racines noires et un moulin. Les deux sortes de farines avec de l'eau d'un puits seront transformées en pain dans une boulangerie, alors construisez une boulangerie ainsi qu'un puits."
+msgstr "La nourriture est très importante pour les mines et les zones d'entraînement militaire. Établissez un système de production alimentaire fonctionnel en construisant au moins une ferme, une ferme de racines noires et un moulin. Les deux sortes de farines avec de l'eau d'un puits seront transformées en pain dans une boulangerie, alors construisez une boulangerie ainsi qu'un puits, aussi."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:58
 msgid ""
@@ -95,7 +95,7 @@ msgid ""
 "breeding more. Make sure that there are always fish left, otherwise the fish"
 " breeder won’t be able to breed new ones. The smoking happens in a smokery, "
 "you will need at least two of those."
-msgstr "Les deux autres ressources en nourriture sont le poisson fumé et la viande fumée. La viande crue est fournie par les chasseurs. Un pêcheur attrape les poissons de la mer alors qu'un pisciculteur fait en sorte avec son élevage qu'il n'y ait pas d'extinction en encourageant la reproduction. Faites en sorte qu'il reste toujours du poisson, autrement le pisciculteur ne pourra les faire se reproduire. Le fumage intervient dans un fumoir, vous en aurez besoin d'au moins deux."
+msgstr "Les deux autres ressources en nourriture sont le poisson fumé et la viande fumée. La viande crue est fournie par les chasseurs. Un pêcheur attrape les poissons de la mer alors qu'un pisciculteur fait en sorte qu'il n'y ait pas d'extinction en encourageant la reproduction. Faites en sorte qu'il reste toujours du poisson, autrement le pisciculteur ne pourra les faire se reproduire. Le fumage intervient dans un fumoir, vous en aurez besoin d'au moins deux."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:59
 msgid "Build a farm and a blackroot farm"
@@ -111,21 +111,21 @@ msgstr "Construisez un puits"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
-msgstr "Construisez une boulangerie pour faire du pain à partir de farine de maïs ou de racine noire et d'eau"
+msgstr "Construisez une boulangerie pour cuire du pain à partir de farine de maïs et de racine noire, et d'eau"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:63
 msgid "Build a hunter’s house to get raw meat"
-msgstr "Construisez une cabane de chasseurs pour avoir de la viande crue"
+msgstr "Construisez une maison de chasseur pour avoir de la viande crue"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build a fisher’s house close to water to get raw fish"
-msgstr "Construisez une cabane de pêcheur près de l'eau pour avoir du poisson cru"
+msgstr "Construisez une maison de pêcheur près de l'eau pour avoir du poisson cru"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:65
 msgid ""
 "Build a fish breeder’s house close to the fisher to make sure the fish do "
 "not die out"
-msgstr "Construisez une cabane de pisciculteur près du pêcheur pour être sûr que les poissons ne disparaîtront pas"
+msgstr "Construisez une maison de pisciculteur près du pêcheur pour être sûr que les poissons ne disparaîtront pas"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:66
 msgid "Build two smokeries to smoke raw meat and fish"
@@ -137,7 +137,7 @@ msgstr "Construisez une ferme aracnéïcole et un atelier de tissage"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:74
 msgid "Spidercloth Production"
-msgstr "Production de tissu d'araignée"
+msgstr "Production d'étoffe de soie d'araignée"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:75
 msgid ""
@@ -174,7 +174,7 @@ msgid ""
 "mine will dig for quartz and diamonds – all of them are precious materials "
 "and very rarely found. It will produce a lot of granite while searching for "
 "them."
-msgstr "Le minerai de fer, d'or et le charbon sont extraits de leurs mines respectives. La mine de cristal extrait du cristal, du quartz et du diamant - tous sont des minerais rares et précieux. Lors de leur extraction, beaucoup de granite est extrait."
+msgstr "Le minerai de fer, d'or et le charbon sont extraits de leurs mines respectives. La mine de cristal extrait du quartz et des diamants – tous sont des minerais rares et précieux. Lors de leur extraction, beaucoup de granite est extrait."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:88
 msgid ""
@@ -191,15 +191,15 @@ msgstr "Construisez une mine de chaque sorte. Assurez vous des emplacements en  
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:90
 msgid "Build a smelting works"
-msgstr "Construisez une fonderie."
+msgstr "Construisez une fonderie"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:91
 msgid "Build an armor smithy and a weapon smithy"
-msgstr "Construisez une fabrique d'armures et une d'armes."
+msgstr "Construisez une fabrique d'armures et une d'armes"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:92
 msgid "Build a toolsmithy"
-msgstr "Construisez une fabrique d'outils."
+msgstr "Construisez une fabrique d'outils"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:98
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:102
@@ -275,7 +275,7 @@ msgid ""
 "There is a lake at the top of the island. Build three ships in these waters "
 "and you might be able to rescue your people before the island is swallowed "
 "completely by the ocean."
-msgstr "Il y a un lac en haut de l'île. Bâtissez 3 navires dans ses eaux et vous pourrez peut être sauver votre peuple quand l'île sera complètement engloutie par l'océan."
+msgstr "Il y a un lac en haut de l'île. Bâtissez 3 navires dans ses eaux et vous pourrez peut être sauver votre peuple avant que l'île ne soit complètement engloutie par l'océan."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:133
 msgid "Build a shipyard close to the lake to start building ships"
@@ -297,7 +297,7 @@ msgid ""
 "human to be empowered by the sea god Lutas to breathe above sea level – and "
 "the wise clerics, who provided the link to Lutas – they prospered and became"
 " civilized."
-msgstr "Sur l'île cachée et perdue de l'Atlantide, une fière tribu était établie depuis l'aube du monde. Dirigés par la lignée du Roi Ajanthul, le premier humain à qui Lutas donna le pouvoir de respirer au dessus du niveau des mers, et les sages clercs, qui ont fourni le lien vers Lutas, ils ont prospéré et sont devenus civilisés."
+msgstr "Sur l'île cachée et perdue d'Atlantide, une fière tribu était établie depuis l'aube du monde. Dirigés par la lignée du Roi Ajanthul – le premier humain à qui Lutas donna le pouvoir de respirer au dessus du niveau des mers – et les sages clercs, qui ont fourni le lien vers Lutas – ils ont prospéré et sont devenus civilisés."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:150
@@ -335,7 +335,7 @@ msgid ""
 " of the boldness of their king. He decided to withdraw the rights that were "
 "granted to King Ajanthul and his children. And so, he called them back below"
 " the sea again."
-msgstr "Les clercs entrèrent en méditation et la cause des eaux montantes fut bientôt trouvée : le dieu Lutas avait perdu foi en les Atlantes à cause de l'audace de leur roi. Il décida de retirer tous les privilèges qui avaient été accordés au Roi Ajanthul et ses enfants. Et de ce fait, il les rappela une fois de plus sous la mer."
+msgstr "Les clercs entrèrent en méditation et la cause des eaux montantes fut bientôt trouvée : le dieu Lutas avait perdu foi en les Atlantes à cause de l'audace de leur roi. Il décida de retirer tous les privilèges qui avaient été accordés au Roi Ajanthul et ses enfants. Et de ce fait, il les rappela à nouveau sous la mer."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:164
 msgid "Uproar and Confusion"
@@ -374,7 +374,7 @@ msgid ""
 "she set the temple on fire and stole a ship to flee from the god’s influence"
 " over Atlantis. This small group started praying to Satul, the fire god and "
 "the worst enemy of Lutas."
-msgstr "Mais malgré les évènements, rien ne changea la volonté des dieux. L'eau continuait de monter. Conduite aux frontières de la folie par la culpabilité, la souffrance et le remord, Jundlina devint hérétique. Secrètement, elle regroupa les gens du peuple qui n'étaient pas d'accord avec les décisions du clergé d'accepter la volonté des dieux. Tous ensemble, ils boutèrent le feu au temple et volèrent un navire pour fuir l'influence des dieux de l'Atlantide. Ce petit groupe commença à prier Satul, dieu du feu et pire ennemi de Lutas."
+msgstr "Mais malgré les évènements, rien ne changea la volonté des dieux. L'eau continuait de monter. Conduite aux frontières de la folie par la culpabilité, la souffrance et le remord, Jundlina devint hérétique: Secrètement, elle regroupa les gens du peuple qui n'étaient pas d'accord avec les décisions du clergé d'accepter la volonté des dieux. Tous ensemble, ils boutèrent le feu au temple et volèrent un navire pour fuir l'influence des dieux en Atlantide. Ce petit groupe commença à prier Satul, dieu du feu et pire ennemi de Lutas."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:174
@@ -464,7 +464,7 @@ msgid ""
 " most buildings can’t be made out of logs alone. Stronger buildings also "
 "need granite, but there is plenty to the north-east of here; we just need to"
 " build a quarry, and my stonemasons will go to work promptly."
-msgstr "Que Satul te réchauffe, Jundlina ! Les choses les plus importantes pour construire un camp de base sont les matériaux de construction. Il y a des arbres ici, donc nous devrions construire des maisons pour quelques coupeurs de bois et également le garde forestier, ainsi nous ne manquerons pas d'arbres. Oh, et nous ne devons pas oublier la scierie, la plupart des constructions ont besoin d'autres matériaux que des troncs seuls. Les constructions plus solides nécessitent aussi des pierres, mais il y en a beaucoup au nord-est d'ici; nous devons juste construire une carrière et mes tailleurs de pierre se mettront aussitôt au travail."
+msgstr "Que Satul te réchauffe, Jundlina ! Les choses les plus importantes pour construire un camp de base sont les matériaux de construction. Il y a des arbres ici, donc nous devrions construire des maisons pour quelques bucherons et également un garde forestier, ainsi nous ne manquerons pas d'arbres. Oh, et nous ne devons pas oublier la scierie, la plupart des constructions ne se font pas partir de troncs seuls. Les constructions plus solides nécessitent aussi du granite, mais il y en a beaucoup au nord-est d'ici; nous devons juste construire une carrière et mes tailleurs de pierre se mettront aussitôt au travail."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:206
 msgid "Sidolus Speaks"
@@ -540,7 +540,7 @@ msgid ""
 "food is something deeply ingrained in us Atlanteans – it is a ceremony that "
 "we just need for our well-being. So I guess we cannot take this away from "
 "the individuals completely."
-msgstr "Ahh, mais je pense que ceci est impossible à changer. Préparer et manger la nourriture est quelque chose de profondément ancré en nous Atlantes. C'est semblable à un rituel religieux dont nous avons besoin pour nous sentir bien. Je pense donc que nous ne pouvons pas complètement en écarter les gens."
+msgstr "Ahh, mais je pense que ceci est impossible à changer. Préparer et manger la nourriture est quelque chose de profondément ancré en nous Atlantes. C'est un cérémonial dont nous avons besoin pour nous sentir bien. Je pense donc que nous ne pouvons pas complètement en écarter les gens."
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:240
@@ -550,7 +550,7 @@ msgid ""
 "the bread is tedious and boring; I feel a more industrial approach would be "
 "helpful here. I for one would love to just have fresh bread delivered to my "
 "house every day."
-msgstr "Mais nous pourrions trouver un compromis entre nous deux : pour moi, faire du pain est une tâche rébarbative. Moudre les racines noires et le maïs pour la farine puis faire le pain n'est pas aisé et ennuyeux. Je sens qu'une approche plus industrielle serait la bienvenue. J'aimerais bien pour une fois avoir du pain frais livré à la maison tous les jours."
+msgstr "Mais nous pourrions trouver un compromis entre les deux : pour moi, faire du pain est une tâche rébarbative. Moudre les racines noires et le maïs pour la farine puis faire le pain n'est pas aisé et ennuyeux. Je sens qu'une approche plus industrielle serait la bienvenue. J'aimerais bien pour une fois avoir du pain frais livré à la maison tous les jours."
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:243
@@ -561,7 +561,7 @@ msgid ""
 "building where the side effects do not matter? I think those two things "
 "would be accepted by the people and would reduce the cooking time without "
 "taking away the ritual."
-msgstr "Oohh et encore plus important : le fumage du poisson et de la viande qui les assainit et améliore le goût est terrible. Ma maison est pleine de fumée et pue pendant des semaines après. Ne penses-tu pas que cela ferait un bâtiment spécial où les effets indésirables ne gêneraient pas ? Je pense que ces deux raisons feront que les gens accepterons et cela réduira les temps de cuisson sans enlever le rituel."
+msgstr "Oohh et encore plus important : le fumage du poisson et de la viande qui les assainit et améliore le goût est terrible. Ma maison est pleine de fumée et pue pendant des semaines après. Ne penses-tu pas que cela pourrait être fait un bâtiment spécial où les effets indésirables ne gêneraient pas ? Je pense que ces deux raisons feront que les gens accepterons et cela réduira les temps de cuisson sans enlever le rituel."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:246
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:247
@@ -571,7 +571,7 @@ msgstr "Jundlina approuve"
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:249
 msgid "Your words sound wise to me, Colionder. So be it then."
-msgstr "Tes paroles semblent sages, Colionder. Qu'il en soit donc ainsi."
+msgstr "Tes paroles me semblent sages, Colionder. Qu'il en soit donc ainsi."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:257
 msgid "Jundlina is Reviewing the Reports"
@@ -597,7 +597,7 @@ msgid ""
 "our warehouses. Could you not help the weavers’ guild by arranging the "
 "building of a weaving mill and a spider farm? The spiders deliver the finest"
 " silk and we will produce the finest spidercloth from it."
-msgstr "Puisse Satul te réchauffer, Jundlina. Mon nom est Opol, et je suis le plus grand tisserand de la guilde ayant quitté Atlantide et Lutas avec vous. Je viens avec de triste nouvelles malgré tout: nous n'avons plus de tissus d'araignée. Nous n'en trouvons plus un morceau dans nos entrepôts. Pouvez vous aider la guilde des tisserands à mettre en édifiant un atelier de tisserand et une ferme aracnéïcole ? Les araignées donnent la soie la plus fine dont nous produirions le tissu d'araignée le plus fin."
+msgstr "Puisse Satul te réchauffer, Jundlina. Mon nom est Opol, et je suis le plus grand tisserand de la guilde ayant quitté Atlantide et Lutas avec vous. Je viens avec de triste nouvelles malgré tout: nous n'avons plus de tissus de soie d'araignée. Nous n'en trouvons plus un morceau dans nos entrepôts. Pouvez vous aider la guilde des tisserands en organisant la construction d'un atelier de tisserand et une ferme aracnéïcole ? Les araignées donnent la soie la plus fine dont nous produirons l'étoffe de soie la plus travaillée."
 
 #. TRANSLATORS: Opol
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:271
@@ -649,7 +649,7 @@ msgid ""
 "find an ample supply of those commodities, we could start producing weapons "
 "and tools; this would help enormously. Of course, we would need smelters, a "
 "weapon smithy, an armor smithy and a toolsmithy. And maybe even more."
-msgstr "Que Satul te réchauffe, Jundlina. As-tu pensé à miner dans les montagnes autours de nous ? Nous allons manquer de quartz, de cristal et de diamants pour nos constructions. Nous pourrions aussi utiliser plus de fer, d'or et particulièrement plus de charbon. Si nous trouvions une grande quantité de ces matériaux de base, nous pourrions commencer à produire des armes et des outils; ceci nous aiderait grandement. Bien sûr, nous aurons besoin de fonderies, une fabrique d'armes, une fabrique d'armures et une fabrique d'outils. Et peut être même plus."
+msgstr "Que Satul te réchauffe, Jundlina. As-tu pensé à miner dans les montagnes autours de nous ? Nous allons manquer de quartz et de diamants pour nos constructions. Nous pourrions aussi utiliser plus de fer, d'or et particulièrement plus de charbon. Si nous trouvions une grande quantité de ces matériaux de base, nous pourrions commencer à produire des armes et des outils; ceci nous aiderait grandement. Bien sûr, nous aurons besoin de fonderies, une fabrique d'armes, une fabrique d'armures et une fabrique d'outils. Et peut être même plus."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:307
 msgid "Jundlina Nods"
@@ -660,7 +660,7 @@ msgstr "Jundlina acquiesce"
 msgid ""
 "I have considered this, Sidolus. I think it is about time. We will make this"
 " a priority for now. You shall get your industry soon!"
-msgstr "J'y ai pensé, Sidorus. Je crois qu'il est temps. Nous allons en faire une priorité tout de suite. Vous devriez avoir votre industrie très bientôt !"
+msgstr "J'y ai pensé, Sidolus. Je crois qu'il est temps. Nous allons en faire une priorité tout de suite. Vous devriez avoir votre industrie très bientôt !"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:316
 msgid "Jundlina Writes a Letter"
@@ -679,7 +679,7 @@ msgstr "J'ai reçu des nouvelles disant que notre industrie minière avait comme
 msgid ""
 "Today I saw the first recruits gathering in front of the new barracks. If "
 "everything goes well, they should receive their training soon."
-msgstr "Aujourd'hui, j'ai vu les premières recrues factionner devant les nouvelles casernes. Si tout va bien, ils devraient recevoir leur entraînement bientôt."
+msgstr "Aujourd'hui, j'ai vu les premières recrues factionner devant les nouvelles casernes. Si tout va bien, ils devraient bientôt recevoir leur entraînement."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:335
 msgid "Jundlina Summons Sidolus"
@@ -711,7 +711,7 @@ msgid ""
 "would keep them occupied and focused on their duties. I would need a dungeon"
 " and a labyrinth for them. I have the plans ready, but I guess they won’t "
 "come cheap."
-msgstr "Je suis d'accord avec vous et j'ai sévèrement puni les fauteurs de trouble.  Mais il est difficile de garder mes hommes tranquilles : ils s'ennuient et n'ont rien à faire. Je voudrais améliorer leur entraînement. Je pense que plus de contraintes dans leur vie pourrait les tenir occupés et concentrés sur leurs devoirs. J'aurais donc besoin d'un donjon et d'un labyrinthe pour eux. J'ai déjà préparé les plans, mais je pense que cela ne sera pas bon marché."
+msgstr "Je suis d'accord avec vous et j'ai sévèrement puni les fauteurs de trouble.  Mais il est difficile de garder mes hommes tranquilles : ils s'ennuient et n'ont rien à faire. Je voudrais améliorer leur entraînement. Je pense que plus de contraintes dans leur vie pourrait les tenir occupés et concentrés sur leurs devoirs. J'aurais donc besoin d'un donjon et d'un labyrinthe. J'ai déjà préparé les plans, mais je pense que cela ne sera pas bon marché."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:350
@@ -734,7 +734,7 @@ msgid ""
 "will start its work soon. I am looking forward to tomorrow; I am very "
 "interested in how our soldiers are trained, and I wonder if the additional "
 "workload will keep them from bullying the civilian population."
-msgstr "J'ai reçu une invitation de Sidolus. Demain sera le premier jour d'entraînement au labyrinthe récemment fini. Le donjon est fini aussi et commencera son travail bientôt. Je suis impatient d'être à demain. L'entraînement de nos soldats m'intéresse beaucoup, et je me demande si la charge de travaille additionnelle  les garderas d'ennuyer la population civile."
+msgstr "J'ai reçu une invitation de Sidolus. Demain sera le premier jour d'entraînement au labyrinthe récemment fini. Le donjon est fini aussi et commencera son travail bientôt. Je suis impatient d'être à demain. L'entraînement de nos soldats m'intéresse beaucoup, et je me demande si la charge de travail additionnelle  les gardera d'ennuyer la population civile."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:366
 msgid "Jundlina Considers the Economy"
@@ -824,7 +824,7 @@ msgid ""
 "no trace of this old economy to be found. I am starting to relax, but I will"
 " not let our guard down as we continue to explore this beautiful island. But"
 " without obvious dangers, I am feeling very much at home here already."
-msgstr "Et encore une de ces constructions. Nous savons maintenant que la tribu qui les a construit autrefois avait le contrôle complet de l'île. Mais je n'ai plus si peur d'ennemis potentiels. Nous savons déjà tant sur cette île et il n'y a plus de vestige de cette ancienne économie  à découvrir. Je commence à me détendre, mais je ne laisserai pas notre vigilance retomber  alors que nous continuons à explorer cette île magnifique. Mais sans danger manifeste, je me sens déjà comme à la maison."
+msgstr "Et encore une de ces constructions. Nous savons maintenant que la tribu qui les a construites autrefois avait le contrôle complet de l'île. Mais je n'ai plus si peur d'ennemis potentiels. Nous savons déjà tant sur cette île et il n'y a plus de vestige de cette ancienne économie  à découvrir. Je commence à me détendre, mais je ne laisserai pas notre vigilance retomber  alors que nous continuons à explorer cette île magnifique. Mais sans danger manifeste, je me sens déjà comme à la maison."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:426
 msgid "The Water is Rising!"
@@ -850,7 +850,7 @@ msgid ""
 " invented a new kind of ship: smaller than those we are used to, but much "
 "sturdier. If we build them correctly, I am confident that we can sail a much"
 " longer distance with them and maybe escape from Lutas’ influence."
-msgstr "Que Satul te réchauffe, Jundlina. Mon nom est Ostur et je construis des navires. J'ai inventé un nouveau genre de navire : plus petit que ceux auxquels nous sommes habitués, mais beaucoup plus robuste. Si nous les construisons correctement, je suis persuadé que nous pourrons aller bien plus loin avec eux et peut-être s'échapper de l'influence de Lutas."
+msgstr "Que Satul te réchauffe, Jundlina. Mon nom est Ostur et je construis des navires. J'ai inventé un nouveau genre de navire : plus petit que ceux auxquels nous sommes habitués, mais beaucoup plus robuste. Si nous les construisons correctement, je suis persuadé que nous pourrons aller bien plus loin avec eux et peut-être échapper à l'influence de Lutas."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:441
@@ -887,7 +887,7 @@ msgid ""
 "logs and spidercloth for the construction there. Forget about everything "
 "else, we need those wares on top of the mountain before our warehouses are "
 "all swallowed by the sea."
-msgstr "Par ailleurs, nous avons besoin d'une maison pour Ostur près du lac et nous aurons besoin de planches, de troncs et de tissu d'araignée pour construire là bas. Oubliez tout le reste, nous avons besoin de ces marchandises en haut de la montagne avant que notre entrepôt ne soit englouti par la mer."
+msgstr "Par ailleurs, nous avons besoin d'une maison pour Ostur près du lac et nous aurons besoin de planches, de troncs et d'étoffe de soie d'araignée pour construire là-bas. Oubliez tout le reste, nous avons besoin de ces marchandises en haut de la montagne avant que notre entrepôt ne soit englouti par la mer."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:471
 msgid "Jundlina is Relieved"
@@ -908,7 +908,7 @@ msgstr "Loué soit Satul ! Ostur, le jeune constructeur de bateaux l'a fait. Nou
 msgid ""
 "I expect a long journey, but we will find the land of Satul in the end. This"
 " is what I promised my people. And myself."
-msgstr "Je m'attendais à un long voyage, mais nous avons finalement trouvé l'île de Satul. C'est ce que j'avais promis à mon peuple. Et à moi même."
+msgstr "Je m'attendais à un long voyage, mais nous avons finalement trouvé les terres de Satul. C'est ce que j'avais promis à mon peuple. Et à moi même."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:478
 msgid "Congratulations"
@@ -931,13 +931,15 @@ msgstr "Bâtiment perdu !"
 msgid "We lost a building to the ocean!"
 msgstr "Nous avons perdu un bâtiment dans l'océan !"
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "“%s”"
+msgstr "“%s\""
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Nouvel objectif"
-msgstr[1] "Nouveaux objectifs"
+msgstr "Nouvel objectif"
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr "Nouveaux objectifs"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,5 +44,5 @@ struct IRoute {
 	virtual void init(int32_t) = 0;
 	virtual void insert_as_first(RoutingNode* node) = 0;
 };
-}
+}  // namespace Widelands
 #endif  // end of include guard: WL_ECONOMY_IROUTE_H

@@ -21,8 +21,8 @@ animations = {
       fps = 10
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {13, 24}, 10)
-add_walking_animations(animations, "walkload", dirname, "walk", {13, 24}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {13, 24}, 10)
+add_directional_animation(animations, "walkload", dirname, "walk", {13, 24}, 10)
 
 
 tribes:new_worker_type {
@@ -43,9 +43,9 @@ tribes:new_worker_type {
       plant = {
          "findspace=size:any radius:2",
          "walk=coords",
-         "animate=planting 4000",
+         "animate=planting 9000",
          "plant=attrib:seed_blackroot",
-         "animate=planting 4000",
+         "animate=planting 9000",
          "return"
       },
       harvest = {
@@ -53,7 +53,7 @@ tribes:new_worker_type {
          "walk=object",
          "animate=harvesting 10000",
          "callobject=harvest",
-         "animate=gathering 2000",
+         "animate=gathering 4000",
          "createware=blackroot",
          "return"
       }

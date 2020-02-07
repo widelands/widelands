@@ -18,6 +18,7 @@ local wc_desc = _ "The tribe or team that can defeat all others wins the game!"
 return {
    name = wc_name,
    description = wc_desc,
+   peaceful_mode_allowed = false,
    func = function()
       local plrs = wl.Game().players
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2018 by the Widelands Development Team
+ * Copyright (C) 2011-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -61,15 +61,17 @@ void ShippingItem::get(const EditorGameBase& game, WareInstance** ware, Worker**
 	}
 }
 
-void ShippingItem::set_economy(Game& game, Economy* e) {
+void ShippingItem::set_economy(Game& game, Economy* e, WareWorker type) {
 	WareInstance* ware;
 	Worker* worker;
 	get(game, &ware, &worker);
 
-	if (ware)
+	if (ware && type == wwWARE) {
 		ware->set_economy(e);
-	if (worker)
-		worker->set_economy(e);
+	}
+	if (worker) {
+		worker->set_economy(e, type);
+	}
 }
 
 void ShippingItem::set_location(Game& game, MapObject* obj) {
@@ -105,7 +107,7 @@ void ShippingItem::end_shipping(Game& game) {
 		worker->end_shipping(game);
 }
 
-PortDock* ShippingItem::get_destination(Game& game) {
+const PortDock* ShippingItem::get_destination(Game& game) const {
 	return destination_dock_.get(game);
 }
 
@@ -139,13 +141,21 @@ void ShippingItem::remove(EditorGameBase& egbase) {
 	}
 }
 
-constexpr uint16_t kCurrentPacketVersion = 1;
+constexpr uint16_t kCurrentPacketVersion = 2;
 
 void ShippingItem::Loader::load(FileRead& fr) {
 	try {
 		uint8_t packet_version = fr.unsigned_8();
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version <= kCurrentPacketVersion) {
 			serial_ = fr.unsigned_32();
+			if (packet_version >= 2) {
+				destination_serial_ = fr.unsigned_32();
+			} else {
+				// TODO(Nordfriese): Remove when we break savegame compatibility
+				log("WARNING: Loading shippingitem with possible nullptr destination, which may result "
+				    "in bugs later\n");
+				destination_serial_ = 0;
+			}
 		} else {
 			throw UnhandledVersionError("ShippingItem", packet_version, kCurrentPacketVersion);
 		}
@@ -156,14 +166,18 @@ void ShippingItem::Loader::load(FileRead& fr) {
 
 ShippingItem ShippingItem::Loader::get(MapObjectLoader& mol) {
 	ShippingItem it;
-	if (serial_ != 0)
+	if (serial_ != 0) {
 		it.object_ = &mol.get<MapObject>(serial_);
+		it.destination_dock_ =
+		   destination_serial_ ? &mol.get<PortDock>(destination_serial_) : nullptr;
+	}
 	return it;
 }
 
 void ShippingItem::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_8(kCurrentPacketVersion);
 	fw.unsigned_32(mos.get_object_file_index_or_zero(object_.get(egbase)));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(destination_dock_.get(egbase)));
 }
 
 }  // namespace Widelands

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2018 by the Widelands Development Team
+ * Copyright (C) 2012-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,29 +30,27 @@ void EditorDrawTool::add_action(EditorToolAction ac, EditorActionArgs& args) {
 }
 
 int32_t
-EditorDrawTool::handle_click_impl(const Widelands::World& world,
-                                  const Widelands::NodeAndTriangle<Widelands::Coords>& /* center */,
+EditorDrawTool::handle_click_impl(const Widelands::NodeAndTriangle<Widelands::Coords>& /* center */,
                                   EditorInteractive& /* parent */,
                                   EditorActionArgs* args,
                                   Widelands::Map* /* map */) {
 
 	for (std::list<EditorToolAction*>::iterator i = args->draw_actions.begin();
 	     i != args->draw_actions.end(); ++i) {
-		(*i)->tool.handle_click(static_cast<EditorTool::ToolIndex>((*i)->i), world, (*i)->center,
+		(*i)->tool.handle_click(static_cast<EditorTool::ToolIndex>((*i)->i), (*i)->center,
 		                        (*i)->parent, (*i)->args, &((*i)->map));
 	}
 	return args->draw_actions.size();
 }
 
 int32_t
-EditorDrawTool::handle_undo_impl(const Widelands::World& world,
-                                 const Widelands::NodeAndTriangle<Widelands::Coords>& /* center */,
+EditorDrawTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands::Coords>& /* center */,
                                  EditorInteractive& /* parent */,
                                  EditorActionArgs* args,
                                  Widelands::Map* /* map */) {
 	for (std::list<EditorToolAction*>::reverse_iterator i = args->draw_actions.rbegin();
 	     i != args->draw_actions.rend(); ++i) {
-		(*i)->tool.handle_undo(static_cast<EditorTool::ToolIndex>((*i)->i), world, (*i)->center,
+		(*i)->tool.handle_undo(static_cast<EditorTool::ToolIndex>((*i)->i), (*i)->center,
 		                       (*i)->parent, (*i)->args, &((*i)->map));
 	}
 	return args->draw_actions.size();

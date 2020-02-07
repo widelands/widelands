@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2018 by the Widelands Development Team
+ * Copyright (C) 2016-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,17 +28,29 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/time_string.h"
+#include "graphic/graphic.h"
 #include "graphic/image_io.h"
-#include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
 
-// TODO(GunChleoc): Arabic: line height broken for descriptions for Arabic.
 SavegameData::SavegameData()
    : gametime(""),
      nrplayers("0"),
      savetimestamp(0),
      gametype(GameController::GameType::kSingleplayer) {
+}
+
+SavegameData::SavegameData(const std::string& fname)
+   : SavegameData(fname, SavegameType::kSavegame) {
+}
+SavegameData::SavegameData(const std::string& fname, const SavegameType& type)
+   : filename(fname),
+     gametime(""),
+     nrplayers("0"),
+     savetimestamp(0),
+     gametype(GameController::GameType::kSingleplayer),
+     type_(type) {
 }
 
 void SavegameData::set_gametime(uint32_t input_gametime) {
@@ -50,6 +62,69 @@ void SavegameData::set_nrplayers(Widelands::PlayerNumber input_nrplayers) {
 void SavegameData::set_mapname(const std::string& input_mapname) {
 	i18n::Textdomain td("maps");
 	mapname = _(input_mapname);
+}
+
+bool SavegameData::is_directory() const {
+	return is_sub_directory() || is_parent_directory();
+}
+
+bool SavegameData::is_parent_directory() const {
+	return type_ == SavegameType::kParentDirectory;
+}
+
+bool SavegameData::is_sub_directory() const {
+	return type_ == SavegameType::kSubDirectory;
+}
+
+bool SavegameData::compare_save_time(const SavegameData& other) const {
+	if (is_directory() || other.is_directory()) {
+		return compare_directories(other);
+	}
+	return savetimestamp < other.savetimestamp;
+}
+
+bool SavegameData::compare_map_name(const SavegameData& other) const {
+	if (is_directory() || other.is_directory()) {
+		return compare_directories(other);
+	}
+	return mapname < other.mapname;
+}
+
+bool SavegameData::compare_directories(const SavegameData& other) const {
+	// parent directory always on top
+	if (is_parent_directory()) {
+		return false;
+	}
+	if (other.is_parent_directory()) {
+		return true;
+	}
+	// sub directory before non-sub directory (aka actual savegame)
+	if (is_sub_directory() && !other.is_directory()) {
+		return false;
+	}
+	if (!is_sub_directory() && other.is_sub_directory()) {
+		return true;
+	}
+	// sub directories sort after name
+	if (is_sub_directory() && other.is_sub_directory()) {
+		return filename > other.filename;
+	}
+
+	return false;
+}
+
+// static
+SavegameData SavegameData::create_parent_dir(const std::string& current_dir) {
+	std::string filename = FileSystem::fs_dirname(current_dir);
+	if (!filename.empty()) {
+		// fs_dirname always returns a directory with a separator at the end.
+		filename.pop_back();
+	}
+	return SavegameData(filename, SavegameData::SavegameType::kParentDirectory);
+}
+
+SavegameData SavegameData::create_sub_dir(const std::string& directory) {
+	return SavegameData(directory, SavegameData::SavegameType::kSubDirectory);
 }
 
 GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
@@ -87,7 +162,7 @@ GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
 	add(button_box_, UI::Box::Resizing::kFullSize);
 
 	minimap_icon_.set_visible(false);
-	minimap_icon_.set_frame(UI_FONT_CLR_FG);
+	minimap_icon_.set_frame(g_gr->styles().minimap_icon_frame());
 }
 
 void GameDetails::clear() {
@@ -108,7 +183,7 @@ void GameDetails::update(const SavegameData& gamedata) {
 	}
 
 	if (gamedata.errormessage.empty()) {
-		if (gamedata.filename_list.empty()) {
+		if (gamedata.filename_list.empty() && !gamedata.filename.empty()) {
 			name_label_.set_text(
 			   as_richtext(as_heading_with_content(_("Map Name:"), gamedata.mapname, style_, true)));
 
@@ -158,7 +233,7 @@ void GameDetails::update(const SavegameData& gamedata) {
 					log("Failed to load the minimap image : %s\n", e.what());
 				}
 			}
-		} else {
+		} else if (!gamedata.filename_list.empty()) {
 			std::string filename_list = richtext_escape(gamedata.filename_list);
 			boost::replace_all(filename_list, "\n", "<br> • ");
 			name_label_.set_text(

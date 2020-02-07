@@ -57,7 +57,7 @@ std::string shader_to_string(GLenum type) {
 }  // namespace
 
 const char* gl_error_to_string(const GLenum err) {
-	CLANG_DIAG_OFF("-Wswitch-enum");
+	CLANG_DIAG_OFF("-Wswitch-enum")
 #define LOG(a)                                                                                     \
 	case a:                                                                                         \
 		return #a
@@ -74,7 +74,7 @@ const char* gl_error_to_string(const GLenum err) {
 		break;
 	}
 #undef LOG
-	CLANG_DIAG_ON("-Wswitch-enum");
+	CLANG_DIAG_ON("-Wswitch-enum")
 	return "unknown";
 }
 

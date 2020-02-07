@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,7 @@
 #include "logic/map.h"
 #include "logic/map_objects/bob.h"
 #include "logic/player.h"
-#include "profile/profile.h"
+#include "wlapplication_options.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/interactive_player.h"
 #include "wui/mapviewpixelconstants.h"
@@ -59,12 +59,12 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
      cur_index_(0) {
 	UI::Button* followbtn =
 	   new UI::Button(this, "follow", 0, h - 34, 34, 34, UI::ButtonStyle::kWuiSecondary,
-	                  g_gr->images().get("images/wui/menus/menu_watch_follow.png"), _("Follow"));
+	                  g_gr->images().get("images/wui/menus/watch_follow.png"), _("Follow"));
 	followbtn->sigclicked.connect(boost::bind(&WatchWindow::do_follow, this));
 
 	UI::Button* gotobtn = new UI::Button(
 	   this, "center_mainview_here", 34, h - 34, 34, 34, UI::ButtonStyle::kWuiSecondary,
-	   g_gr->images().get("images/wui/menus/menu_goto.png"), _("Center the main view on this"));
+	   g_gr->images().get("images/wui/menus/goto.png"), _("Center the main view on this"));
 	gotobtn->sigclicked.connect(boost::bind(&WatchWindow::do_goto, this));
 
 	if (init_single_window) {
@@ -83,11 +83,11 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
 	map_view_.field_clicked.connect(
 	   [&parent](const Widelands::NodeAndTriangle<>& node_and_triangle) {
 		   parent.map_view()->field_clicked(node_and_triangle);
-		});
+	   });
 	map_view_.track_selection.connect(
 	   [&parent](const Widelands::NodeAndTriangle<>& node_and_triangle) {
 		   parent.map_view()->track_selection(node_and_triangle);
-		});
+	   });
 	map_view_.changeview.connect([this] { stop_tracking_by_drag(); });
 	warp_mainview.connect([&parent](const Vector2f& map_pixel) {
 		parent.map_view()->scroll_to_map_pixel(map_pixel, MapView::Transition::Smooth);
@@ -240,7 +240,7 @@ void WatchWindow::do_follow() {
 		                           .node),
 		        2);
 		     area.radius <= 32; area.radius *= 2)
-			if (map.find_bobs(area, &bobs))
+			if (map.find_bobs(g, area, &bobs))
 				break;
 		//  Find the bob closest to us
 		float closest_dist = 0;
@@ -305,7 +305,7 @@ Open a watch window.
 ===============
 */
 WatchWindow* show_watch_window(InteractiveGameBase& parent, const Widelands::Coords& coords) {
-	if (g_options.pull_section("global").get_bool("single_watchwin", false)) {
+	if (get_config_bool("single_watchwin", false)) {
 		if (!g_watch_window) {
 			g_watch_window = new WatchWindow(parent, 250, 150, 200, 200, true);
 		}

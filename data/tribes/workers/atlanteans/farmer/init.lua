@@ -21,8 +21,8 @@ animations = {
       fps = 5
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {18, 23}, 10)
-add_walking_animations(animations, "walkload", dirname, "walk", {18, 23}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {18, 23}, 10)
+add_directional_animation(animations, "walkload", dirname, "walk", {18, 23}, 10)
 
 
 tribes:new_worker_type {
@@ -43,15 +43,15 @@ tribes:new_worker_type {
       plant = {
          "findspace=size:any radius:2",
          "walk=coords",
-         "animate=planting 4000",
+         "animate=planting 6000",
          "plant=attrib:seed_corn",
-         "animate=planting 4000",
+         "animate=planting 6000",
          "return"
       },
       harvest = {
          "findobject=attrib:ripe_corn radius:2",
          "walk=object",
-         "playsound=sound/farm scythe 220",
+         "playsound=sound/farm/scythe 220",
          "animate=harvesting 10000",
          "callobject=harvest",
          "animate=gathering 4000",

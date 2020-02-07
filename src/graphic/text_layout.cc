@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,18 +19,14 @@
 
 #include "graphic/text_layout.h"
 
-#include <map>
-
-#include <SDL_ttf.h>
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
-#include "graphic/text/bidi.h"
+#include "graphic/style_manager.h"
 #include "graphic/text/font_set.h"
-#include "graphic/text_constants.h"
 
 namespace {
 bool is_paragraph(const std::string& text) {
@@ -40,71 +36,8 @@ bool is_paragraph(const std::string& text) {
 bool is_div(const std::string& text) {
 	return boost::starts_with(text, "<div");
 }
-}  // namespace
 
-void replace_entities(std::string* text) {
-	boost::replace_all(*text, "&gt;", ">");
-	boost::replace_all(*text, "&lt;", "<");
-	boost::replace_all(*text, "&nbsp;", " ");
-	boost::replace_all(*text, "&amp;", "&");  // Must be performed last
-}
-
-int text_width(const std::string& text, int ptsize) {
-	return UI::g_fh->render(
-	                  as_editorfont(
-	                     text.substr(
-	                        0, g_gr->max_texture_size_for_font_rendering() / text_height() - 1),
-	                     ptsize - UI::g_fh->fontset()->size_offset()))
-	   ->width();
-}
-
-int text_height(int ptsize, UI::FontSet::Face face) {
-	return UI::g_fh->render(as_aligned(UI::g_fh->fontset()->representative_character(),
-	                                   UI::Align::kLeft, ptsize - UI::g_fh->fontset()->size_offset(),
-	                                   RGBColor(0, 0, 0), face))
-	   ->height();
-}
-
-std::string richtext_escape(const std::string& given_text) {
-	std::string text = given_text;
-	boost::replace_all(text, "&", "&amp;");  // Must be performed first
-	boost::replace_all(text, ">", "&gt;");
-	boost::replace_all(text, "<", "&lt;");
-	return text;
-}
-
-std::string as_game_tip(const std::string& txt) {
-	static boost::format f(
-	   "<rt><p align=center><font color=21211b face=serif size=16>%s</font></p></rt>");
-	f % txt;
-	return f.str();
-}
-
-std::string
-as_uifont(const std::string& txt, int size, const RGBColor& clr, UI::FontSet::Face face) {
-	return as_aligned(txt, UI::Align::kLeft, size, clr, face);
-}
-
-std::string
-as_condensed(const std::string& text, UI::Align align, int ptsize, const RGBColor& clr) {
-	return as_aligned(text, align, ptsize, clr, UI::FontSet::Face::kCondensed);
-}
-
-std::string as_editorfont(const std::string& text, int ptsize, const RGBColor& clr) {
-	// UI Text is always bold due to historic reasons
-	static boost::format f(
-	   "<rt keep_spaces=1><p><font face=sans size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>");
-	f % ptsize;
-	f % clr.hex_value();
-	f % richtext_escape(text);
-	return f.str();
-}
-
-std::string as_aligned(const std::string& txt,
-                       UI::Align align,
-                       int ptsize,
-                       const RGBColor& clr,
-                       UI::FontSet::Face face) {
+std::string as_richtext_paragraph(const std::string& text, UI::Align align) {
 	std::string alignment = "left";
 	switch (align) {
 	case UI::Align::kCenter:
@@ -118,38 +51,48 @@ std::string as_aligned(const std::string& txt,
 		break;
 	}
 
-	std::string font_face = "sans";
-
-	switch (face) {
-	case UI::FontSet::Face::kCondensed:
-		font_face = "condensed";
-		break;
-	case UI::FontSet::Face::kSerif:
-		font_face = "serif";
-		break;
-	case UI::FontSet::Face::kSans:
-		font_face = "sans";
-		break;
-	}
-
-	// UI Text is always bold due to historic reasons
-	static boost::format f(
-	   "<rt><p align=%s><font face=%s size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>");
+	static boost::format f("<rt><p align=%s>%s</p></rt>");
 	f % alignment;
-	f % font_face;
-	f % ptsize;
-	f % clr.hex_value();
-	f % txt;
+	f % text;
 	return f.str();
+}
+}  // namespace
+
+int text_width(const std::string& text, const UI::FontStyleInfo& style, float scale) {
+	UI::FontStyleInfo info(style);
+	info.set_size(info.size() * scale - UI::g_fh->fontset()->size_offset());
+	return UI::g_fh->render(as_editor_richtext_paragraph(text, info))->width();
+}
+
+int text_height(const UI::FontStyleInfo& style, float scale) {
+	UI::FontStyleInfo info(style);
+	info.set_size(info.size() * scale - UI::g_fh->fontset()->size_offset());
+	return UI::g_fh
+	   ->render(as_richtext_paragraph(UI::g_fh->fontset()->representative_character(), info))
+	   ->height();
+}
+
+int text_height(UI::FontStyle style, float scale) {
+	return text_height(g_gr->styles().font_style(style), scale);
+}
+
+std::string richtext_escape(const std::string& given_text) {
+	std::string text = given_text;
+	boost::replace_all(text, "&", "&amp;");  // Must be performed first
+	boost::replace_all(text, ">", "&gt;");
+	boost::replace_all(text, "<", "&lt;");
+	return text;
 }
 
 /// Bullet list item
-std::string as_listitem(const std::string& txt, int ptsize, const RGBColor& clr) {
+std::string as_listitem(const std::string& txt, UI::FontStyle style) {
 	static boost::format f("<div width=100%%><div><p><font size=%d "
 	                       "color=%s>•</font></p></div><div><p><space gap=6></p></div><div "
 	                       "width=*><p><font size=%d color=%s>%s<vspace "
 	                       "gap=6></font></p></div></div>");
-	f % ptsize % clr.hex_value() % ptsize % clr.hex_value() % txt;
+	const UI::FontStyleInfo& font_style = g_gr->styles().font_style(style);
+	f % font_style.size() % font_style.color().hex_value() % font_style.size() %
+	   font_style.color().hex_value() % txt;
 	return f.str();
 }
 
@@ -159,31 +102,82 @@ std::string as_richtext(const std::string& txt) {
 	return f.str();
 }
 
-std::string as_tooltip(const std::string& txt) {
-	static boost::format f("<rt><p><font face=sans size=%i bold=1 color=%s>%s</font></p></rt>");
+std::string as_richtext_paragraph(const std::string& text, UI::FontStyle style, UI::Align align) {
+	return as_richtext_paragraph(text, g_gr->styles().font_style(style), align);
+}
 
-	f % UI_FONT_SIZE_SMALL;
-	f % UI_FONT_TOOLTIP_CLR.hex_value();
-	f % txt;
+std::string
+as_richtext_paragraph(const std::string& text, const UI::FontStyleInfo& style, UI::Align align) {
+	return as_richtext_paragraph(style.as_font_tag(text), align);
+}
+
+std::string as_editor_richtext_paragraph(const std::string& text, const UI::FontStyleInfo& style) {
+	static boost::format f("<rt keep_spaces=1><p>%s</p></rt>");
+	f % style.as_font_tag(text);
 	return f.str();
 }
 
-std::string as_waresinfo(const std::string& txt) {
-	static boost::format f("<rt><p><font face=condensed size=10 bold=0 color=%s>%s</font></p></rt>");
-	f % UI_FONT_TOOLTIP_CLR.hex_value();
-	f % txt;
+std::string as_game_tip(const std::string& txt) {
+	static boost::format f("<rt><p align=center>%s</p></rt>");
+	f % g_gr->styles().font_style(UI::FontStyle::kFsMenuGameTip).as_font_tag(txt);
 	return f.str();
+}
+
+std::string as_mapobject_message(const std::string& image,
+                                 int width,
+                                 const std::string& txt,
+                                 const RGBColor* player_color) {
+	assert(!image.empty());
+	assert(!txt.empty());
+	const std::string image_type = g_gr->images().has(image) ? "src" : "object";
+	static boost::format f_color("<div padding_r=10><p><img width=%d %s=%s color=%s></p></div>"
+	                             "<div width=*><p>%s</p></div>");
+	static boost::format f_nocolor("<div padding_r=10><p><img width=%d %s=%s></p></div>"
+	                               "<div width=*><p>%s</p></div>");
+	if (player_color != nullptr) {
+		f_color % width;
+		f_color % image_type;
+		f_color % image;
+		f_color % player_color->hex_value();
+		f_color % g_gr->styles().font_style(UI::FontStyle::kWuiMessageParagraph).as_font_tag(txt);
+		return f_color.str();
+	} else {
+		f_nocolor % width;
+		f_nocolor % image_type;
+		f_nocolor % image;
+		f_nocolor % g_gr->styles().font_style(UI::FontStyle::kWuiMessageParagraph).as_font_tag(txt);
+		return f_nocolor.str();
+	}
 }
 
 std::string as_message(const std::string& heading, const std::string& body) {
-	return (
-	   (boost::format(
-	       "<rt><p><font size=18 bold=1 color=D1D1D1>%s<br></font></p><vspace gap=6>%s</rt>") %
-	    heading %
-	    (is_paragraph(body) || is_div(body) ?
-	        body :
-	        (boost::format("<p><font size=%d>%s</font></p>") % UI_FONT_SIZE_MESSAGE % body).str()))
-	      .str());
+	return ((boost::format("<rt><p>%s<br></p><vspace gap=6>%s</rt>") %
+	         g_gr->styles().font_style(UI::FontStyle::kWuiMessageHeading).as_font_tag(heading) %
+	         (is_paragraph(body) || is_div(body) ?
+	             body :
+	             (boost::format("<p>%s</p>") %
+	              g_gr->styles().font_style(UI::FontStyle::kWuiMessageParagraph).as_font_tag(body))
+	                .str()))
+	           .str());
+}
+
+std::shared_ptr<const UI::RenderedText>
+autofit_text(const std::string& text, const UI::FontStyleInfo& font_info, int width) {
+	std::shared_ptr<const UI::RenderedText> rendered_text =
+	   UI::g_fh->render(as_richtext_paragraph(text, font_info));
+
+	// Autoshrink if it doesn't fit
+	if (width > 0 && rendered_text->width() > width) {
+		const int minimum_size = g_gr->styles().minimum_font_size();
+		// We take a copy, because we are changing values during the autofit.
+		UI::FontStyleInfo temp_font_info(font_info);
+		temp_font_info.make_condensed();
+		while (rendered_text->width() > width && temp_font_info.size() >= minimum_size) {
+			rendered_text = UI::g_fh->render(as_richtext_paragraph(text, temp_font_info));
+			temp_font_info.set_size(temp_font_info.size() - 1);
+		}
+	}
+	return rendered_text;
 }
 
 std::string as_heading_with_content(const std::string& header,
@@ -193,18 +187,22 @@ std::string as_heading_with_content(const std::string& header,
                                     bool noescape) {
 	switch (style) {
 	case UI::PanelStyle::kFsMenu:
-		return (boost::format(
-		           "<p><font size=%i bold=1 shadow=1>%s%s <font color=D1D1D1>%s</font></font></p>") %
-		        UI_FONT_SIZE_SMALL % (is_first ? "" : "<vspace gap=9>") %
-		        (noescape ? header : richtext_escape(header)) %
-		        (noescape ? content : richtext_escape(content)))
+		return (boost::format("<p>%s%s %s</p>") % (is_first ? "" : "<vspace gap=9>") %
+		        g_gr->styles()
+		           .font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
+		           .as_font_tag(noescape ? header : richtext_escape(header)) %
+		        g_gr->styles()
+		           .font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+		           .as_font_tag(noescape ? content : richtext_escape(content)))
 		   .str();
 	case UI::PanelStyle::kWui:
-		return (boost::format(
-		           "<p><font size=%i>%s<font bold=1 color=D1D1D1>%s</font> %s</font></p>") %
-		        UI_FONT_SIZE_SMALL % (is_first ? "" : "<vspace gap=6>") %
-		        (noescape ? header : richtext_escape(header)) %
-		        (noescape ? content : richtext_escape(content)))
+		return (boost::format("<p>%s%s %s</p>") % (is_first ? "" : "<vspace gap=6>") %
+		        g_gr->styles()
+		           .font_style(UI::FontStyle::kWuiInfoPanelHeading)
+		           .as_font_tag(noescape ? header : richtext_escape(header)) %
+		        g_gr->styles()
+		           .font_style(UI::FontStyle::kWuiInfoPanelParagraph)
+		           .as_font_tag(noescape ? content : richtext_escape(content)))
 		   .str();
 	}
 	NEVER_HERE();
@@ -213,91 +211,42 @@ std::string as_heading_with_content(const std::string& header,
 std::string as_heading(const std::string& txt, UI::PanelStyle style, bool is_first) {
 	switch (style) {
 	case UI::PanelStyle::kFsMenu:
-		return (boost::format("<p><font size=%i bold=1 shadow=1>%s%s</font></p>") %
-		        UI_FONT_SIZE_SMALL % (is_first ? "" : "<vspace gap=9>") % richtext_escape(txt))
+		return (boost::format("<p>%s%s</p>") % (is_first ? "" : "<vspace gap=9>") %
+		        g_gr->styles()
+		           .font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
+		           .as_font_tag(richtext_escape(txt)))
 		   .str();
 	case UI::PanelStyle::kWui:
-		return (boost::format("<p><font size=%i bold=1 color=D1D1D1>%s%s</font></p>") %
-		        UI_FONT_SIZE_SMALL % (is_first ? "" : "<vspace gap=6>") % richtext_escape(txt))
+		return (boost::format("<p>%s%s</p>") % (is_first ? "" : "<vspace gap=6>") %
+		        g_gr->styles()
+		           .font_style(UI::FontStyle::kWuiInfoPanelHeading)
+		           .as_font_tag(richtext_escape(txt)))
 		   .str();
 	}
 	NEVER_HERE();
 }
+
 std::string as_content(const std::string& txt, UI::PanelStyle style) {
 	switch (style) {
 	case UI::PanelStyle::kFsMenu:
-		return (boost::format("<p><font size=%i color=D1D1D1 shadow=1><vspace gap=2>%s</font></p>") %
-		        UI_FONT_SIZE_SMALL % richtext_escape(txt))
+		return (boost::format("<p><vspace gap=2>%s</p>") %
+		        g_gr->styles()
+		           .font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+		           .as_font_tag(richtext_escape(txt)))
 		   .str();
 	case UI::PanelStyle::kWui:
-		return (boost::format("<p><font size=%i><vspace gap=2>%s</font></p>") %
-		        (UI_FONT_SIZE_SMALL - 2) % richtext_escape(txt))
+		return (boost::format("<p><vspace gap=2>%s</p>") %
+		        g_gr->styles()
+		           .font_style(UI::FontStyle::kWuiInfoPanelParagraph)
+		           .as_font_tag(richtext_escape(txt)))
 		   .str();
 	}
 	NEVER_HERE();
 }
 
-std::shared_ptr<const UI::RenderedText>
-autofit_ui_text(const std::string& text, int width, RGBColor color, int fontsize) {
-	std::shared_ptr<const UI::RenderedText> result =
-	   UI::g_fh->render(as_uifont(richtext_escape(text), fontsize, color));
-	if (width > 0) {  // Autofit
-		for (; result->width() > width && fontsize >= kMinimumFontSize; --fontsize) {
-			result = UI::g_fh->render(
-			   as_condensed(richtext_escape(text), UI::Align::kLeft, fontsize, color));
-		}
-	}
-	return result;
+std::string as_tooltip_text_with_hotkey(const std::string& text, const std::string& hotkey) {
+	static boost::format f("<rt><p>%s %s</p></rt>");
+	f % g_gr->styles().font_style(UI::FontStyle::kTooltip).as_font_tag(text);
+	f % g_gr->styles().font_style(UI::FontStyle::kTooltipHotkey).as_font_tag("(" + hotkey + ")");
+	return f.str();
 }
-
-namespace UI {
-
-/**
- * This mirrors the horizontal alignment for RTL languages.
- *
- * Do not store this value as it is based on the global font setting.
- *
- * If 'checkme' is not empty, mirror the alignment if the first 20 characters contain an RTL
- * character. Otherwise, mirror if the current fontset is RTL.
- */
-Align mirror_alignment(Align alignment, const std::string& checkme) {
-	bool do_swap_alignment = checkme.empty() ? UI::g_fh->fontset()->is_rtl() :
-	                                           i18n::has_rtl_character(checkme.c_str(), 20);
-	if (do_swap_alignment) {
-		switch (alignment) {
-		case Align::kLeft:
-			alignment = Align::kRight;
-			break;
-		case Align::kRight:
-			alignment = Align::kLeft;
-			break;
-		case Align::kCenter:
-			break;
-		}
-	}
-	return alignment;
-}
-
-/**
- * Align pt horizontally to match align based on width w.
- *
- * When correcting for align, we never move from pixel boundaries to
- * sub-pixels, because this might lead from pixel-perfect rendering to
- * subsampled rendering - this can lead to blurry texts. That is why we
- * never do float divisions in this function.
- */
-void correct_for_align(Align align, uint32_t w, Vector2i* pt) {
-
-	if (align == Align::kCenter)
-		pt->x -= w / 2;
-	else if (align == Align::kRight)
-		pt->x -= w;
-}
-
-/**
- * Adjust the y coordinate in 'point 'pt' to vertically center an element with height 'h'.
- */
-void center_vertically(uint32_t h, Vector2i* pt) {
-	pt->y -= h / 2;
-}
-}  // namespace UI

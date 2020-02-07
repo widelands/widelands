@@ -376,8 +376,7 @@ function mission_complete()
 
    campaign_message_box(story_msg_7)
 
-   p1:reveal_scenario("barbariantut02")
-   p1:reveal_campaign("campsect1")
+   p1:mark_scenario_as_solved("bar02.wmf")
 end
 
 run(initial_message_and_small_food_economy)

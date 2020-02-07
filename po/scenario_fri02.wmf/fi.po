@@ -1,16 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Jukka Pakarinen, 2018
+# Jukka Pakarinen, 2019
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-05 07:05+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Jukka Pakarinen, 2018\n"
+"POT-Creation-Date: 2019-12-10 17:11+0000\n"
+"PO-Revision-Date: 2018-03-24 18:16+0000\n"
+"Last-Translator: Jukka Pakarinen, 2019\n"
 "Language-Team: Finnish (https://www.transifex.com/widelands/teams/35159/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,39 +21,43 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:27
 msgid "Build a basic economy"
-msgstr ""
+msgstr "Rakenna alkeellinen talous"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:29
 msgid "Supply All Basic Materials"
-msgstr ""
+msgstr "Toimita Kaikkia Perusmateriaaleja"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:30
 msgid ""
 "Build a quarry, a reed farm, a clay pit, a well, a charcoal kiln, a brick "
 "kiln, and houses for a woodcutter and a forester."
 msgstr ""
+"Rakenna kivilouhos, ruokofarmi, savikaivanto, kaivo, miilu, tiiliuuni, ja "
+"mökit metsurille ja metsänhoitajalle."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:35
 msgid "Expand to the south"
-msgstr ""
+msgstr "Laajenna kohti etelää"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:37
 msgid "Expand Your Territory to Explore the South"
-msgstr ""
+msgstr "Laajenna Aluettasi Tutkimalla Etelää"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:38
 msgid ""
 "The north looks not very useful to us, but who knows what we might find in "
 "the south?"
 msgstr ""
+"Pohjoinen ei näytä kovin käyttökelpoiselta meille, mutta kuka tietää mitä "
+"löydämmekään etelästä?"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:43
 msgid "Train and recycle"
-msgstr ""
+msgstr "Kouluta ja kierrätä"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:45
 msgid "Recycle Weapons to Regain Metal"
-msgstr ""
+msgstr "Kierrätä Aseet Saadakseen Takaisin Metallia"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:46
 msgid ""
@@ -60,6 +65,9 @@ msgid ""
 "into metal in a recycling center. Use the weapons in the store to train "
 "soldiers and recycle some scrap metal."
 msgstr ""
+"Kun sotilaita koulutetaan, heidän vanhat aseet hylätään. Ne voidaan "
+"palauttaa takaisin metalliksi kierrätyskeskuksessa. Käytä varaston aseita "
+"sotilaiden kouluttamiseen ja kierrätä romurautaa."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:47
 msgid ""
@@ -68,14 +76,18 @@ msgid ""
 "cycle. You need to stop the blacksmithy until at least two iron are stored "
 "in its input queue."
 msgstr ""
+"Seppä ainoastaan tuottaa hakun sen toisessa tuotantokierroksessa. Jos sille "
+"toimitetaan vain yksi rautaharkko kerrallaan, tätä kierrosta ei ehkä koskaan"
+" saavuteta.  Sinun pitää keskeyttää sepän paja kunnes vähintään kaksi rautaa"
+" on varastoitu sen saapuneiden tuotteiden jonoon."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:52
 msgid "Build an aqua farm"
-msgstr ""
+msgstr "Rakenna vesiviljelmä"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:54
 msgid "Build an Aqua Farm to Start Producing Fish"
-msgstr ""
+msgstr "Rakenna Vesiviljelmä Kalatuotannon Aloittamiseksi"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:55
 msgid ""
@@ -83,68 +95,73 @@ msgid ""
 "clay pit nearby to use as ponds to grow fish in. Only a fisher working at an"
 " aqua farm can fish from these ponds."
 msgstr ""
+"Rakenna vesiviljelmä kalojen tuottamiseksi. Vesiviljelmä tarvitsee "
+"savikaivannon lähelle kuoppia, joita käytetään kalojen kasvattamiseen. Vain "
+"vesiviljelmällä työskentelevä kalastaja voi kalastaa niistä kuopista."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:60
 msgid "Decide whether you want to cooperate with the Empire"
-msgstr ""
+msgstr "Päätä haluatko tehdä yhteistyötä Keisarikunnan kanssa"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:62
 msgid "Gather Wares as a Gift or Destroy the Empire’s Warehouse"
-msgstr ""
+msgstr "Kerää Tuotteita Lahjaksi tai Tuhoa Keisarikunnan Varasto"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:63
 msgid ""
 "Decide whether you want to work with Murilius against the Barbarians. If so,"
 " fill his warehouse with these wares:"
 msgstr ""
+"Päätä haluatko tehdä yhteistyötä Muriliuksen kanssa Barbaareja vastaa. Jo "
+"haluat, täytä hänen varasto seuraavilla tuotteilla:"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:64
 msgid "30 × Log"
-msgstr ""
+msgstr "30 × Kaadettu puu"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:65
 msgid "40 × Granite"
-msgstr ""
+msgstr "40 × Graniitti"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:66
 msgid "30 × Fish"
-msgstr ""
+msgstr "30 × Kala"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:67
 msgid "30 × Beer"
-msgstr ""
+msgstr "30 × Olut"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:68
 msgid "150 × Water"
-msgstr ""
+msgstr "150 × Vesi"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:69
 msgid "40 × Ration"
-msgstr ""
+msgstr "40 × Ruoka-annos"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:70
 msgid "10 × Meal"
-msgstr ""
+msgstr "10 × Ateria"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:71
 msgid "30 × Coal"
-msgstr ""
+msgstr "30 × Hiili"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:72
 msgid "40 × Iron Ore"
-msgstr ""
+msgstr "40 × Rautamalmi"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:73
 msgid "20 × Iron"
-msgstr ""
+msgstr "20 × Rauta"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:74
 msgid "30 × Gold Ore"
-msgstr ""
+msgstr "30 × Kultamalmi"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:75
 msgid "10 × Gold"
-msgstr ""
+msgstr "10 × Kulta"
 
 #. TRANSLATORS: Continues from "Decide whether you want to work with Murilius
 #. against the Barbarians. If so, fill his warehouse with these wares: [list
@@ -155,99 +172,110 @@ msgid ""
 "He forbade you to expand your territory until the wares have been handed "
 "over."
 msgstr ""
+"Muussa tapauksessa, tuhot vain varaston ja otat riskin, että saat "
+"Muriliuksesta vihollisen. Hän kielsi sinua laajentamasta aluettasi ennen "
+"kuin tuotteet on luovutettu."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:82
 msgid "Spy on Murilius"
-msgstr ""
+msgstr "Vakoile Muriliusta"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:84
 msgid "Send a Scout to Spy on the Empire"
-msgstr ""
+msgstr "Lähetä Tiedustelija Vakoilemaan Keisarikuntaa"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:85
 msgid ""
 "Build a scout’s house near the border to discover the Empire’s secrets."
 msgstr ""
+"Rakenna tiedustelijan talo lähelle rakaa saadaksesi selville Keisarikunnan "
+"salaisuudet."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:90
 msgid "Decipher the poem"
-msgstr ""
+msgstr "Selvitä runo"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:92
 msgid "Understand the Poem the Scout has Found in the Empire"
-msgstr ""
+msgstr "Ymmärrä Tiedustelijan Keisarikunnasta Löytämä Runo"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:93
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:335
 msgid "How many sites where soldiers stay,"
-msgstr ""
+msgstr "Kuinka monessa paikassa sotilaita on,"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:94
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:338
 msgid "How many sites where thou hold’st sway,"
-msgstr ""
+msgstr "Kuinka monessa paikassa ne keinua voi,"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:95
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:341
 msgid "Though not their whereabouts sees he"
-msgstr ""
+msgstr "Kuitenkaan heidän olotilaa ei ymmärtää hän"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:96
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:344
 msgid "Who’s ordering around here thee!"
-msgstr ""
+msgstr "Kuka on vastuussa tästä paikasta!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:101
 msgid "Defeat the Barbarians!"
-msgstr ""
+msgstr "Kukista Barbaarit!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:103
 msgid "Defeat the Barbarians"
-msgstr ""
+msgstr "Kukista Barbaarit"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:104
 msgid "Defeat the hostile tribe living northwest of the Empire’s outpost!"
 msgstr ""
+"Kukista vihamielinen heimo, joka asuu Keisarikunnan etuvartioaseman "
+"luoteispuolella!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:109
 msgid "Defeat Murilius!"
-msgstr ""
+msgstr "Kukista Murilius!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:111
 msgid "Defeat the Arrogant Outpost of the Empire"
-msgstr ""
+msgstr "Kukista Ylimielinen Keisarikunnan Etuvartioasema"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:112
 msgid ""
 "The only way to put an end to the Empire’s desire to steal our liberty is to"
 " destroy this outpost once and for all. Conquer its entire land."
 msgstr ""
+"Ainoa tapa pistää stoppi Keisarikunnan halulle viedä meidän vapaus on tuhota"
+" tämä etuvartioasema lopullisesti. Valloita sen koko maa."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:113
 msgid "Conquer every single field that still belongs to Murilius."
-msgstr ""
+msgstr "Valloita joka ikinen tanner, joka kuuluu Muriliukselle."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:118
 msgid "Defeat Murilius and the Barbarians!"
-msgstr ""
+msgstr "Kukista Murilius ja Barbaarit!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:120
 msgid "Defeat the Barbarians and the Empire Colony"
-msgstr ""
+msgstr "Kukista Barbaarit ja Keisarikunnan Yhdyskunta"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:121
 msgid ""
 "The Barbarians and the Empire are too dangerous to allow them to live near "
 "us. We must defeat them both."
 msgstr ""
+"Barbaarit ja Keisarikunta ovat aivan liian vaarallisia, jossa voisimme "
+"sallia heidän asia lähellä meitä. Meidän täytyy kukistaa molemmat."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:130
 msgid "Warning"
-msgstr ""
+msgstr "Varoitus"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:131
 msgid ""
@@ -255,18 +283,22 @@ msgid ""
 "this scenario, but you will be at a disadvantage. I recommend that you "
 "complete the previous scenario first and then restart this mission."
 msgstr ""
+"Näyttä siltä ette tole suorittanut loppuun edellistä komennusta. Voit silti "
+"pelata tätä skenaariota, mutta tulet olemaan epäedullisessa asemassa. "
+"Suosittelen sinua suorittamaan ensin edellisen komennuksen ja sen jälkeen "
+"aloitamaan tämän komennuksen."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:137
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:146
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:155
 msgid "Welcome Back!"
-msgstr ""
+msgstr "Tervetuloa Takaisin!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:138
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:147
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:156
 msgid "A new home"
-msgstr ""
+msgstr "Uusi koti"
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:140
@@ -274,6 +306,9 @@ msgid ""
 "I began to believe the journey would never end. I have no idea how long we "
 "were on the sea, tossed about by envious storms… it must have been months."
 msgstr ""
+"Alan uskomaan ettie tämä marka tule koskaan päättymään. Minulla ei ole "
+"mitään tietoa kuinka kauan olimme merellä, myrskyjen riepoteltavana… sen on "
+"täytynyt kestää kuukausia."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:143
@@ -281,6 +316,8 @@ msgid ""
 "But we survived. Finally, we reached the mouth of a calmer fjord. We sailed "
 "upriver, and arrived here."
 msgstr ""
+"Mutta me selvisimme. Viimeinkin saavutimme rauhallisen vuonon suun. "
+"Seilasimme kohti yläjuoksua, ja saavuimme tänne."
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:149
@@ -288,6 +325,9 @@ msgid ""
 "There was a small group of foreigners living here. They welcomed us by "
 "brandishing their axes at us, and shouted in an incoherent language."
 msgstr ""
+"Siellä oli pieni ulkomaalaisten ryhmä asumassa. Hen toivottivat meidät "
+"tervetulleeksi heiluttelemalla meille kirveitä, ja huusivat "
+"käsittämättömällä kielellä."
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:152
@@ -296,6 +336,9 @@ msgid ""
 "took their land. I just hope there aren’t more of them, so we can live in "
 "peace."
 msgstr ""
+"Laivamme ei ollut enää purjehdittavassa kunnossa, joten me surmasimme "
+"paikalliset ja otimme heidän maansa haltuun. Toivon ettei siellä ole enää "
+"lisää heitä, jotta voisimme elää rauhassa."
 
 #. TRANSLATORS: Reebaud – Introduction 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:158
@@ -303,6 +346,8 @@ msgid ""
 "This place looks bleak and barren, my companions say, but I think it looks… "
 "beautiful."
 msgstr ""
+"Tämä paikka näyttää karulta ja hedelmättömältä, kumppanini mukaa, mutta "
+"minusta se näyttää… kauniilta."
 
 #. TRANSLATORS: Reebaud – Introduction 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:161
@@ -310,6 +355,8 @@ msgid ""
 "My scouts no longer report any signs of living creatures nearby. We will "
 "start building our new home here."
 msgstr ""
+"Tiedustelijani eivät enää raportoi merkkejä elävistä olioista lähistöllä. "
+"Voimme aloittaa uuden kodin rakentamisen tänne."
 
 #. TRANSLATORS: Reebaud – Introduction 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:164
@@ -320,14 +367,20 @@ msgid ""
 "wood. Our neighbors used to envy us for this clever technique, which they "
 "couldn’t copy."
 msgstr ""
+"Meidän täytyy aloittaa rakentamalla ensin kaikki perusrakennukset. En näe "
+"lähistöllä vuoria, josta voisimme kaivaa hiiltä. Meidän on parasta rakentaa "
+"miilu puuhiilen tislaamiseksi kaadettuista puista. Laajennamme miiluja "
+"savella, etteivät ne kuluttaisi niin paljon puuta. Naapurimme ovat "
+"kateellisia tästä meidän ovelasta tekniikasta, jota he eivät kykene "
+"kopioimaan."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:169
 msgid "Go South"
-msgstr ""
+msgstr "Mene Etelään"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:170
 msgid "Expand and conquer"
-msgstr ""
+msgstr "Laajenna ja valloita"
 
 #. TRANSLATORS: Reebaud – Expand South
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:172
@@ -335,6 +388,9 @@ msgid ""
 "We have built a home in this wonderful landscape. But as our tribe grows, we"
 " need more space. We should start expanding our territory."
 msgstr ""
+"Olemme rakentaneet tänne hurmaaviin maisemiin kodin. Mutta sen mukaan kun "
+"heimomme kasvaa, me tarvitsemme lisää tilaa. Meidän pitäisi käydä "
+"laajentamaan aluettamme."
 
 #. TRANSLATORS: Reebaud – Expand South
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:175
@@ -343,17 +399,20 @@ msgid ""
 "to behold but not suited for buildings. Let’s find out what we can discover "
 "in the south."
 msgstr ""
+"Tiedustelijat raportoivat, että maat pohjoisessa ovat karuja kukkuloita, "
+"kauniita katsella, mutta eivät sovi rakennuksille. Etsitään mitä voimme "
+"löytää etelästä."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:180
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:189
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:198
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:208
 msgid "Metal Shortage"
-msgstr ""
+msgstr "Metalli Vähissä"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:181
 msgid "We are out of metals"
-msgstr ""
+msgstr "Meillä on metalli lopussa"
 
 #. TRANSLATORS: Hauke – Train and recycle 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:183
@@ -362,6 +421,9 @@ msgid ""
 "where we might be able to start mining coal and iron, but we have no miners,"
 " nor any picks to equip them with."
 msgstr ""
+"Päällikkö Reebaud! Meillä on vakava ongelma. Olemme havainneet vuoren, jossa"
+" saattaisimme voida aloittaa hiilen ja raudan kaivamisen, mutta meillä ei "
+"ole kaivostyöläisiä, eikä yhtään hakkua heille."
 
 #. TRANSLATORS: Hauke – Train and recycle 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:186
@@ -369,11 +431,14 @@ msgid ""
 "And we don’t have any iron left. We must find a way to get some metal for "
 "forging new picks. Unfortunately, I have no idea how to do this."
 msgstr ""
+"Ja meillä ei ole myöskään yhtään rautaa jäljellä. Meidän täytyy saada "
+"jostain metallia uusiin hakkuihin. Valitettavasti minulla ei ole hajuakaan "
+"miten sen tekisin."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:190
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:209
 msgid "Getting new metal"
-msgstr ""
+msgstr "Hankitaan uutta metallia"
 
 #. TRANSLATORS: Reebaud – Train and recycle 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:192
@@ -381,6 +446,9 @@ msgid ""
 "This is terrible news! Without iron or the means to produce any, we are "
 "stuck like this forever! You must come up with a solution."
 msgstr ""
+"Tämä on kauhea uutinen! Ilman rautaa tai keinoa tuottaa sitä me olemme "
+"jumissa tässä tilanteessa ikuisesti! Sinun täytyy tuoda esille joku "
+"ratkaisu."
 
 #. TRANSLATORS: Reebaud – Train and recycle 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:195
@@ -389,10 +457,13 @@ msgid ""
 "possible to smelt them back into metal? But that seems like a waste of the "
 "precious swords…"
 msgstr ""
+"Olen nähnyt joitakin edistyksellisiä aseita meidän varastossa. Ehkä ne voisi"
+" mahdollisesti sulattaa takaisin metalliksi? Mutta se tuntuisi "
+"kallisarvoisien miekkojen tuhlaamiselta…"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:199
 msgid "New metal"
-msgstr ""
+msgstr "Uusi metalli"
 
 #. TRANSLATORS: Hauke – Train and recycle 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:201
@@ -401,6 +472,9 @@ msgid ""
 "new swords and the old weapons are discarded. These are unfit to use in "
 "battle, so it would not be a waste to smelt down those."
 msgstr ""
+"Nyt minulla on ajatus: Sitten kuin sotilaamme ovat kouluttautuneet, he "
+"varustetaan uusilla miekoilla ja vanhan aseet hylätään. Ne eivät sovi "
+"käytettäväksi taistelussa, joten niiden sulattaminen ei olisi tuhlausta."
 
 #. TRANSLATORS: Hauke – Train and recycle 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:204
@@ -409,6 +483,10 @@ msgid ""
 "smelt the scrap metal into iron and gold. And then our blacksmiths can "
 "produce picks to equip miners with. I will see to it at once!"
 msgstr ""
+"Sen on se mitä meidän pitää tehdä. Käytämme aseitamme sotilaiden "
+"kouluttamiseen, ja sitten sulatamme romuraudan raudaksi ja kullaksi. Ja sen "
+"jälkeen seppämme voi tuottaa hakkuja kaivostyöntekijöiden tarpeisiin. Hoidan"
+" sen kerralla!"
 
 #. TRANSLATORS: Reebaud – Train and recycle 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:211
@@ -419,14 +497,19 @@ msgid ""
 "Of course, we will need to move all our wares to a warehouse before we can "
 "dismantle the port."
 msgstr ""
+"Ei niin nopeasti! Rakenna harjoitusleiri, tarvitsemme ensin kultaa, jota "
+"meillä ele yhtään. Meidän täytyy ensin purkaa meidän satama, mikä antaa "
+"meille riittävästi kultaa harjoitusleirille. En pidä tästä, mutta se on "
+"ainoa tapa. Toki, meidän täytyy siirtää kaikki tuotteet varastoon ennen kuin"
+" puramme sataman."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:215
 msgid "Metal Production"
-msgstr ""
+msgstr "Metallituotanto"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:216
 msgid "The mines are working"
-msgstr ""
+msgstr "Kaivokset ovat toiminnassa"
 
 #. TRANSLATORS: Reebaud – Aqua Farms 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:218
@@ -445,15 +528,19 @@ msgid ""
 "garments to equip new soldiers. Who knows whether we will have to fight "
 "eventually?"
 msgstr ""
+"Joko meillä on poronhoitoalue? Jos ei, meidän pitäisi rakentaa sellainen. "
+"Tarvitsemme enemmän poroja vilkkaille teille, ja me voisimme jo aloittaa "
+"omplemaan turkisvaatteita sotilaiden varustamiseksi. Kuka tietää joudummeko "
+"kenties lopulta taistelemaan?"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:224
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:234
 msgid "Fishing"
-msgstr ""
+msgstr "Kalastaa"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:225
 msgid "We need fish"
-msgstr ""
+msgstr "Tarvitsemme kalaa"
 
 #. TRANSLATORS: Hauke – Aqua Farms 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:227
@@ -463,6 +550,11 @@ msgid ""
 "soldier training requires lots of smoked meat or fish. The scraps of meat a "
 "reindeer farm drops out as a by-product when making fur aren’t enough."
 msgstr ""
+"Päällikko Reebaud, minulla on lisää huonoja uutisia. Meidän lähivesissä ei "
+"ole juuri ollenkaan kalaa. Vaikka voimmekin valmistaa ruoka-annoksia "
+"pelkästään hedelmistä tai leivästä, sotilaamme tarvitsevat kouluttauessan "
+"paljon savulihaa ja -kalaa. Poronhoitoaluelta saadaan turkiksien "
+"sivutuotteena lihaa."
 
 #. TRANSLATORS: Hauke – Aqua Farms 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:230
@@ -472,10 +564,14 @@ msgid ""
 "fish in these ponds. He will only need lots of water for the ponds, and "
 "fruit to feed the fish."
 msgstr ""
+"Onneksi eräs meidän kalastajista keksi ratkaisun. Meidän savikaivannoilta "
+"jää maahan suuria kuoppia; kalastaja voisi täyttää ne vedellä ja käydä "
+"kasvattamaan kalaa niissä altaissa. Hän tarvitsee vain paljon vettä "
+"altaisiin, ja hedelmiä kalojen syöttämiseen."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:235
 msgid "We have fish again"
-msgstr ""
+msgstr "Meillä on taas kalaa"
 
 #. TRANSLATORS: Hauke – Aqua Farms 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:237
@@ -484,6 +580,9 @@ msgid ""
 "now. However, the miners tell me that the resources are already low, and the"
 " mines may run completely empty soon."
 msgstr ""
+"Hyvin tehty. Olemme rakentaneet vesiviljelmän, ja meidän kaivostalous on nyt"
+" vakaa. Silti kaivostyöläiset kertoivat minulle, että resurssit ovat jo "
+"vähissä, ja kaivokset saattavat olla kohta täysin tyhjiä."
 
 #. TRANSLATORS: Hauke – Aqua Farms 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:240
@@ -492,6 +591,9 @@ msgid ""
 "times longer – ten times if it is a deep mine – to produce ores or coal. You"
 " probably want to prepare for the increasing demands of time and food."
 msgstr ""
+"Kaivokset pystyvät silti tuottamaan, mutta se kestää kaksikymmentä kertaa "
+"pidempään – kymmenen kertaa, jos se on keskisyvä kaivos – tuottaa malmia tai"
+" hiiltä. Halua luultavasti varautua kasvavaan ajan ja ruuan tarpeeseen."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:243
 msgid "Recruiting"
@@ -499,13 +601,13 @@ msgstr "Palkkaaminen"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:244
 msgid "Our economy is complete"
-msgstr ""
+msgstr "Taloutemme on valmis"
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:246
 msgid ""
-"You are right – we should build more berry farms, collector’s houses and "
-"taverns as well as a drinking hall, and advanced bakeries and breweries."
+"You are right – we should build more berry farms, fruit collector’s houses "
+"and taverns as well as a drinking hall, and advanced bakeries and breweries."
 msgstr ""
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
@@ -516,6 +618,10 @@ msgid ""
 "building armor smithies, a barracks, a training arena and a tailor’s shop "
 "now."
 msgstr ""
+"Silti me voimme jo käydä keskittymään sotilaiden palkkaamiseen ja "
+"kouluttamiseen. Meillä on nyt varaa aseisiin, kypäriin ja vaatteisiin. "
+"Ehdotan nyt haarniskapajojen, parakin, koulutusareenan ja räätälin puodin "
+"rakentamista."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:253
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:260
@@ -527,7 +633,7 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:305
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:315
 msgid "We Are Not Alone"
-msgstr ""
+msgstr "Me Emme Ole Yksin"
 
 #. TRANSLATORS: "Greetings, strangers!". DO NOT TRANSLATE. Reebaud doesn’t
 #. understand Latin. You can transliterate into non-Latin scripts though
@@ -537,7 +643,7 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:291
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:306
 msgid "Salvete peregrini!"
-msgstr ""
+msgstr "Tervehdys peregrini!"
 
 #. TRANSLATORS: "Be greeted, strangers! I am Proconsule Murilius of the
 #. province 'The Northern Lands'. Name yourselves!". DO NOT TRANSLATE. Reebaud
@@ -548,24 +654,26 @@ msgid ""
 "Salvete peregrini! Murilius Proconsul Terrae Septentrionalis provinciae ego "
 "sum. Vos nominate!"
 msgstr ""
+"Tervehdys peregrini! Olen Murilius Prokonsuli Terrae Septentrionalis "
+"provinsista. Vos nominate!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:261
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:276
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:300
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:316
 msgid "Strangers"
-msgstr ""
+msgstr "Vieraat"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:263
 msgid "…does anyone understand what he is saying?"
-msgstr ""
+msgstr "…ymmärtääkö kukaan mitä hän sanoo?"
 
 #. TRANSLATORS: Murilius – Supply Murilius 3. This is a foreign language to
 #. Murilius, so he sounds very formal.
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:269
 msgid "Do they not even speak the noble language of the Empire?"
-msgstr ""
+msgstr "Eivätkö he edes puhu Keisarikunnan jaloa kieltä?"
 
 #. TRANSLATORS: Murilius – Supply Murilius 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:272
@@ -574,14 +682,16 @@ msgid ""
 "Empire, demand to know who you are and what business you have in these "
 "lands!"
 msgstr ""
+"Muukalainen! Minä, Pohjoisen maiden Prokonsuli, Keisarikunnan provinssista, "
+"vaadin tietooni ketä te olette ja millä asialla olette näillä mailla!"
 
-#. TRANSLATORS: Reebaud – Supply Murilius 4
+#. TRANSLATORS: Reebaud – Supply Murilius 4. "Peace" is the traditional
+#. frisian greeting, nothing more.
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:278
 msgid ""
-"Greetings, representative of the Empire! I am Reebaud, the chieftain of this"
-" tribe. All we want is to settle down here, build our home and live our "
-"lives in peace. We do not seek trouble, but we aren’t afraid to fight, "
-"either."
+"Peace, representative of the Empire! I am Reebaud, the chieftain of this "
+"tribe. All we want is to settle down here, build our home and live our lives"
+" in peace. We do not seek trouble, but we aren’t afraid to fight, either."
 msgstr ""
 
 #. TRANSLATORS: Murilius – Supply Murilius 5. "Reebaude" is the Latin vocative
@@ -592,6 +702,9 @@ msgid ""
 "inhospitable, hostile tribe of barbarians in the vicinity of this very "
 "outpost of the Empire."
 msgstr ""
+"Tässä  tapauksessa, Reebaund, minun täytyy ilmoittaa Keisarikunnan "
+"etuvartioaseman lähistöllä olevasta vihamielisestä Barbaariheimosta, joka ei"
+" ole ollenkaan vieraanvarainen."
 
 #. TRANSLATORS: Murilius – Supply Murilius 5
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:287
@@ -600,6 +713,9 @@ msgid ""
 " to allow them to live here – you are required to assist the Empire in "
 "driving them out."
 msgstr ""
+"Jos etsit täältä rauhallista elämää, sinulla ei ole valinnanvaraa haluatko "
+"sallia heille täällä asumisen – sinun täytyy auttaa Keisarikuntaa heidän "
+"häätämisessä."
 
 #. TRANSLATORS: Murilius – Supply Murilius 6
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:293
@@ -609,6 +725,10 @@ msgid ""
 "warehouse. Fill it with the required gifts to hand them over. I permit you "
 "to give us these wares:"
 msgstr ""
+"Lisäksi, hyvä aikomuksen merkiksi, vaadimme lahjaa ystävyyden merkiksi "
+"Keisarikunnalle. Kuten olet jo huomannu, olen kertonut sinulle jo uudesta "
+"varastosta.. Täytä se tarvittavilla lahjoilla luovuttamista varten. Oletan "
+"teidän antavan meille seuraavat tuotteet:"
 
 #. TRANSLATORS: Murilius – Supply Murilius 6. A list of wares.
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:296
@@ -617,6 +737,10 @@ msgid ""
 "water, 40 rations, 10 meals, 30 lumps of coal, 40 lumps of iron ore, 20 iron"
 " ingots, 20 lumps of gold ore, and 10 gold bars."
 msgstr ""
+"30 kaadettua puuta, 40 graaniittilaattaa, 30 kalaa, 30 tuoppia olutta, 150 "
+"ämpärillistä vettä, 40 ruoka-annosta, 10 ateriaa, 30 hiilikimpaletta, 40 "
+"rautamalmikimpaletta, 20 rautaharkkoa, 20 kultamalmikimpaletta ja 10 "
+"kultaharkkoa."
 
 #. TRANSLATORS: Hauke – Supply Murilius 7
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:302
@@ -626,6 +750,11 @@ msgid ""
 "afford to spare that many wares to aid him. I propose that we destroy that "
 "ugly warehouse and let him fight his own battles."
 msgstr ""
+"Päällikkö Reebaund – Keisarikunnan Prokonsulin ylimieliset vaatimukset ovat "
+"yksinkertaisesti törkeitä. Hän kohtelee meitä kuin palvelijoita. Me emme "
+"todellakaan voida tuhlata niin monta tuotetta hänen avustamiseksi. Ehdotan, "
+"että tuhoamme sen ruman varaston ja annamme hänen taistella hänen omat "
+"taistelunsa."
 
 #. TRANSLATORS: Murilius – Supply Murilius 8
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:308
@@ -635,6 +764,11 @@ msgid ""
 "expand your territory from this moment on until you have given us your gift."
 " Fail to obey, and the Empire shall treat you like enemies."
 msgstr ""
+"Jos epäonnistutte näiden tuotteiden toimittamisessa, Keisarikunta tulee "
+"kohtelemaan teitä kuin vihollista. Ja estääksesi tuhlaamasta kallisarvoisia "
+"metallijanne, kiellän teitä laajentamasta aluettanne tästä eteen päin kunnes"
+" olette antaneet meille lahjanne. Noidattamatta jättäminen tekee teistä "
+"Keisarikunnan vihollisen."
 
 #. TRANSLATORS: Murilius – Supply Murilius 8
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:311
@@ -645,6 +779,11 @@ msgid ""
 "though you are, I do believe you will realize the truth of my words after "
 "some consideration."
 msgstr ""
+"Teidän täytyy taistella Barbaareja vastaa, jos aiotte elää tällä alueella; "
+"ymmärräthän, että taisteleminen Keisarikunnan kanssa Barbaareja vastaan on "
+"helpompaa kuin yksin? Te ette varmastikaan halua Keisarikunnasta tulevan "
+"vihollisenne. Uskon että tajuat sanojeni arvon, mitä Barbaareihin tulee, "
+"mietittyänne asiaa."
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:318
@@ -653,6 +792,10 @@ msgid ""
 "our territory when all we want is to build a new home, and threaten us with "
 "war if we refuse to be his slaves?"
 msgstr ""
+"Tämä on tyrmistyttävintä kaikista. Kuinka hän uskaltaakin käskeä meitä "
+"lopettamaan alueemme laajentamisen, kun se mitä ainoastaa haluamme, on "
+"rakentaa uusi koti, ja uhata meitä sodalla, jos emme suostu heidän "
+"orjikseen?"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:321
@@ -662,6 +805,11 @@ msgid ""
 "soldier training while pretending to be gathering his so-called gift. That "
 "would buy us some time."
 msgstr ""
+"Minun tekisi mielia sanoa, että hyökätään heitä vastaan nyt heti, mutta "
+"pelkään ettemme ole riittävän vahvoja heitä vastaan taistelussa. Meidän "
+"pitäisi kiirehtiä sotilaittemme kouluttamisessa, samalla kun esitämme "
+"keräävämme hänelle niin sanottua lahjaa. Se antaisi meille hieman lisää "
+"aikaa."
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:324
@@ -669,14 +817,16 @@ msgid ""
 "As for expansion – I wonder how strictly he can possibly control us. Perhaps"
 " we should send a scout to spy on him…"
 msgstr ""
+"Mitä tulee laajentamiseen – mietin kuinka tiukasta hän voi kontrolloida "
+"meitä. Ehkä meidän pitäisi lähettää tiedustelija vakoilemaan häntä…"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:329
 msgid "The Scout Discovered Something"
-msgstr ""
+msgstr "Tiedustelija Löysi Jotain"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:330
 msgid "Our scout returned"
-msgstr ""
+msgstr "Tiedustelijamme palasi"
 
 #. TRANSLATORS: Hauke – Expansion hint
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:332
@@ -686,6 +836,10 @@ msgid ""
 "translated it into our language. If I did not mistranslate, it runs as "
 "follows:"
 msgstr ""
+"Päällikkö Reebaund! Tiedustelijamme on juuri palannut. Hän on löytänyt "
+"runon, joka on kirjoitettu oudolla kielellä, jota Prokonsuli puhuu. Näin "
+"hieman vaivaa ja käänsin sen meidän kielelle. Jos en aivan täysin kääntänyt "
+"väärin, se menee seuraavasti:"
 
 #. TRANSLATORS: Hauke – Expansion hint
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:347
@@ -693,11 +847,13 @@ msgid ""
 "I don’t know what it means, but I’m sure it’s important. Perhaps you can "
 "make some sense of it."
 msgstr ""
+"En tiedä mitä se tarkoittaa, mutta olen varma, että se on tärkeää. Ehkä sinä"
+" saat siitä jotain järkeä."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:352
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:362
 msgid "The Empire is Angry"
-msgstr ""
+msgstr "Keisarikunta On Vihainen"
 
 #. TRANSLATORS: "You are enemies of the Empire!". DO NOT TRANSLATE. Reebaud
 #. doesn’t understand Latin. You can transliterate into non-Latin scripts
@@ -705,7 +861,7 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:354
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:363
 msgid "Hostes Imperii estis!"
-msgstr ""
+msgstr "Hostes Imperii estis!"
 
 #. TRANSLATORS: Murilius – enemy of the Empire: player destroyed the warehouse
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:356
@@ -713,12 +869,14 @@ msgid ""
 "Barbarians! You have refused my offer of friendship most ungraciously by "
 "destroying the beautiful building we presented you with!"
 msgstr ""
+"Barbaarit! Olette kieltäytyneet tarjoamasta ystävyyttä mitä "
+"epäkiitollisemmin tuhoamalla kauniin rakennuksemme, jonka luovutimme teille!"
 
 #. TRANSLATORS: Murilius – enemy of the Empire
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:359
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:368
 msgid "You are enemies of the Empire, and I shall treat you as such!"
-msgstr ""
+msgstr "Olette Keisarikunnan vihollisia, ja kohtelen teitä sen mukaisesti!"
 
 #. TRANSLATORS: Murilius – enemy of the Empire: player built forbidden
 #. military buildings
@@ -727,14 +885,17 @@ msgid ""
 "Barbarians! You have refused my offer of friendship most ungraciously by "
 "basely wasting your precious resources on expansion!"
 msgstr ""
+"Barbaarit! Olette kieltäytyneet tarjoamasta ystävyyttä mitä "
+"epäkiitollisemmin tuhlaamalla teidän kallisarvoisia resursseja "
+"laajentamiseen!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:371
 msgid "Two Enemies"
-msgstr ""
+msgstr "Kaksi Vihollista"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:372
 msgid "Defeat the enemies!"
-msgstr ""
+msgstr "Kukista viholliset!"
 
 #. TRANSLATORS: Reebaud – defeat both enemies
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:374
@@ -742,6 +903,9 @@ msgid ""
 "Murilius has made it quite clear that he won’t leave us alone. I fear we "
 "must defeat him and destroy his colony if we ever want to have peace here."
 msgstr ""
+"Murilius on tehnyt erittäin selväksi ettei hän jätä meitä yksin. Pelkäämpä, "
+"että meidän pitää kukistaa hänet ja tuhota hänen yhdyskunta, jos haluaame "
+"olla täällä rauhassa."
 
 #. TRANSLATORS: Reebaud – defeat both enemies
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:377
@@ -750,17 +914,20 @@ msgid ""
 "this land with anyone, as sharing only leads to conflicts and battles, as we"
 " saw in our old home. We must defeat the barbarians as well."
 msgstr ""
+"Barbaarien heimo, jonka hän mainitsi on myös uhattuna. En halua jakaa tätä "
+"maata kenenkään kanssa, koska jakaminen johtaa selkkauksiin ja taisteluihin,"
+" kuten näimme entisessä kodissamme. Meidän täytyy kukistaa myös Barbaarit."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:381
 msgid "The Empire is Grateful"
-msgstr ""
+msgstr "Keisarikunta On Kiitollinen"
 
 #. TRANSLATORS: "Greetings, friends of the Empire!". DO NOT TRANSLATE. Reebaud
 #. doesn’t understand Latin. You can transliterate into non-Latin scripts
 #. though
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:383
 msgid "Salvete amici Imperii!"
-msgstr ""
+msgstr "Salvete amici Imperii!"
 
 #. TRANSLATORS: Murilius – Supplied Murilius
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:385
@@ -768,6 +935,8 @@ msgid ""
 "Strangers! I see you have kept your word. The Empire rewards its friends, "
 "therefore I shall reward you with the friendship of the Empire!"
 msgstr ""
+"Muukalaiset! Näen, että olette pitäneet lupauksenne. Keisarikunta palkitsee "
+"ystävät, siksi palkitsen teidät Keisarikunnan ystävyydellä!"
 
 #. TRANSLATORS: Murilius – Supplied Murilius. Murilius’s plan is to use the
 #. player as cannon fodder, while he himself only attacks when he has no
@@ -779,16 +948,21 @@ msgid ""
 "end of the mountains enclosing this outpost; you will find the barbarians "
 "there – attack them! We will fend off attacks launched by the enemy."
 msgstr ""
+"Sallin teidän nyt osallistuvan valloittamaan barbaarit, jotka elävät "
+"suojaisassa laaksossa meistä luoteeseen. Käsken teitä laajentamaan vuoriston"
+" pohjoisen reunan mukaan, mikä sisältää tämän etuvartioaseman; löydät sieltä"
+" barbaarit – hyökkää heitä vastaan! Me torjumme vihollisen aloittamat "
+"hyökkäykset."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:392
 msgid "The Reward For Your Service"
-msgstr ""
+msgstr "Palkkio Palveluksestasi"
 
 #. TRANSLATORS: "Friends of the Empire". DO NOT TRANSLATE. Reebaud doesn’t
 #. understand Latin. You can transliterate into non-Latin scripts though
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:394
 msgid "Amici Imperii"
-msgstr ""
+msgstr "Amici Imperii"
 
 #. TRANSLATORS: Murilius – defeat Murilius 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:396
@@ -796,6 +970,8 @@ msgid ""
 "You have done well, strangers! As I did tell you earlier, you will be "
 "rewarded with the friendship of the Empire!"
 msgstr ""
+"Olette toimineet hyvin, muukalaiset! Kuten aiemmin kerroin teille, teidät "
+"palkitaan Keisarikunnan ystävyydellä!"
 
 #. TRANSLATORS: Murilius – defeat Murilius 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:399
@@ -806,14 +982,19 @@ msgid ""
 " the Capital will demand from you, and of course, who shall be king of your "
 "tribe."
 msgstr ""
+"Oletan teidän aloittavan lähettämällä legaatin pääkaupunkiin, jotta saisitte"
+" selville kaikkein viimeisimmät poliittiset käänteet. Siellä voitte "
+"vastaanottaa heimollenne osoitettuja ohjeistuksia Senaatilta.  Lisäksi "
+"teidän pitää selvittää mitä kunnianosoituksia pääkaupunki teiltä edellyttää,"
+" ja joka toimii myös heimonne kuninkaana."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:402
 msgid "Another Enemy"
-msgstr ""
+msgstr "Toinen Vihollinen"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:403
 msgid "Defeat the Empire!"
-msgstr ""
+msgstr "Kukista Keisarikunta!"
 
 #. TRANSLATORS: Reebaud – defeat Murilius 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:405
@@ -823,6 +1004,10 @@ msgid ""
 "be servants of this Empire, and take away my leadership? And does the "
 "hypocrite dare call this a reward?"
 msgstr ""
+"Ymmärsinkö hänet oikein? Kaiken sen jälkeen mitä olemme tehneet hänelle, ja "
+"kun sotlaitamme on kaatunut hänen vuokseen, hän haluaa meidän palvelevan "
+"tätä Keisarikuntaa, ja vie vielä johtajuutenikin? Vieläkö tämä tekopyhä "
+"kehtaa kutsua tätä palkkioksi?"
 
 #. TRANSLATORS: Reebaud – defeat Murilius 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:408
@@ -831,14 +1016,18 @@ msgid ""
 "burn down his entire colony, and kill every single person in his realm. He "
 "will be very sorry indeed for insulting our tribe thus."
 msgstr ""
+"Rankaisemme tästä yksipuolisesta Prokonsulin julistuksesta "
+"maanpetturuudella! Poltan maan tasalle hänen koko yhdyskunnan, ja tapan joka"
+" ikisen henkilön hänen valtapiiristä. Hän tulee olemaan erittäin pahoillaan "
+"siitä, että loukkais meidän heimoa sillä tavalla."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:412
 msgid "Victory"
-msgstr ""
+msgstr "Voitto"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:413
 msgid "Victory!"
-msgstr ""
+msgstr "Voitto!"
 
 #. TRANSLATORS: Reebaud – victory
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:415
@@ -846,18 +1035,23 @@ msgid ""
 "We have defeated all our enemies! Now no other tribe will ever dare settle "
 "here again. We are safe, and we can finally live our lives in peace."
 msgstr ""
+"Olemme kukistaneet kaikki viholliset! Nyt yksikään heimo ei tule koskaan "
+"uskaltamaan asettumaan tänne uudelleen. Olemme turvassa ja me voimme "
+"viimeinkin elää elämäämme rauhassa."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:416
 msgid "Congratulations"
-msgstr ""
+msgstr "Onnittelut"
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr "Uusi Tavoite"
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr "Uudet Tavoitteet"

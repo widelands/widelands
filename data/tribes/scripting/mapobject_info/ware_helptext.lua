@@ -4,6 +4,6 @@
 return {
    func = function(tribename, helptext_script)
       include(helptext_script)
-      return ware_helptext(tribename)
+      return ware_helptext() .. " " .. ware_helptext(tribename)
    end
 }

@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # erimitis, 2018
@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-06 16:24+0000\n"
-"PO-Revision-Date: 2018-04-08 11:58+0000\n"
-"Last-Translator: erimitis\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2019-08-10 17:15+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Greek (http://www.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -288,10 +288,10 @@ msgstr "Φτιάξτε έναν καλαμόκηπο"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:123
 msgid ""
-"The third material necessary for improved buildings is thatch reed, used to "
-"cover roofs. Thatch reed is planted by a gardener around his building, the "
-"reed yard."
-msgstr "Το τρίτο υλικό που απαιτείται για βελτιωμένα κτίρια, είναι τα αχυροκάλαμα, που χρησιμοποιούνται στις σκεπές. Τα αχυροκάλαμα φυτεύονται από έναν κηπουρό γύρω από το κτίριό του, τον καλαμόκηπο."
+"The third material necessary for improved buildings is reed, used to cover "
+"roofs. Reed fields are planted by a gardener around his building, the reed "
+"yard."
+msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:129
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:131
@@ -1027,13 +1027,15 @@ msgid ""
 "Therefore, they have decided to join us, hoping that we can help each other."
 msgstr "Όμως φοβούνται ότι ο πόλεμος γύρω από την πρωτεύουσα θα βάλει τέλος σε αυτήν τη ζωή. Για αυτό αποφάσισαν να ενωθούν μαζί μας, ελπίζοντας ότι μπορούμε να βοηθήσουμε ο ένας τον άλλον."
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "“%s”"
+msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Νέος Στόχος"
-msgstr[1] "Νέοι Στόχοι"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

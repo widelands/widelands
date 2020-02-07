@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,24 +32,20 @@
  *
  * A Songset encapsulates a number of interchangeable pieces of (background)
  * music, e.g. all songs that might be played while the main menu is being
- * shown. It is possible to access those songs one after another or in
- * random order. The fact that a Songset really contains several different
- * songs is hidden from the outside.
+ * shown.
  * A songset does not contain the audio data itself, to not use huge amounts of
  * memory. Instead, each song is loaded on request and the data is free()d
  * afterwards
  */
 struct Songset {
-	Songset();
+	explicit Songset(const std::string& dir, const std::string& basename);
 	~Songset();
 
-	void add_song(const std::string& filename);
-	Mix_Music* get_song();
-	bool empty() {
-		return songs_.empty();
-	}
+	Mix_Music* get_song(uint32_t random);
 
-protected:
+private:
+	void add_song(const std::string& filename);
+
 	/// The filenames of all configured songs
 	std::vector<std::string> songs_;
 

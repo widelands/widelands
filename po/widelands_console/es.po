@@ -1,17 +1,19 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# G BR <gastbr@gmail.com>, 2016
+# Facundo Gomez <facundogomez15@gmail.com>, 2019
+# Gastón <gastbr@gmail.com>, 2016
 # Gontzal M. Pujana <juchuf@gmail.com>, 2018
 # Madkat Here, 2015
+# Stephan Lutz <stephan-lutz@gmx.de>, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-14 06:11+0000\n"
-"PO-Revision-Date: 2018-09-07 13:05+0000\n"
-"Last-Translator: Gontzal M. Pujana <juchuf@gmail.com>\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-12-30 07:55+0000\n"
+"PO-Revision-Date: 2019-12-30 08:11+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -103,67 +105,55 @@ msgstr " --rolling_autosave=[...]\n                      Utilice esta cantidad d
 msgid ""
 " --metaserver=[...]\n"
 "                      Connect to a different metaserver for internet gaming."
-msgstr ""
+msgstr " --metaserver=[...]\n                      Conectarse a un metaserver diferente para jugar en línea."
 
 #: ../../src/wlapplication_messages.cc:84
 msgid ""
 " --metaserverport=[...]\n"
 "                      Port number of the metaserver for internet gaming."
-msgstr ""
+msgstr " --metaserverport=[...]\n                      Número de puerto del metaserver para juego en linea."
 
-#: ../../src/wlapplication_messages.cc:89
-msgid "Sound options:"
-msgstr "Opciones de sonido:"
-
-#: ../../src/wlapplication_messages.cc:90
+#: ../../src/wlapplication_messages.cc:88
 msgid " --nosound            Starts the game with sound disabled."
 msgstr " --nosound            Inicia el juego con el sonido deshabilidato."
 
-#: ../../src/wlapplication_messages.cc:91
-msgid " --disable_fx         Disable sound effects."
-msgstr " --disable_fx         Deshabilita los efectos de sonido."
-
-#: ../../src/wlapplication_messages.cc:92
-msgid " --disable_music      Disable music."
-msgstr " --disable_music      Deshabilita la música."
-
-#: ../../src/wlapplication_messages.cc:94
+#: ../../src/wlapplication_messages.cc:90
 msgid " --nozip              Do not save files as binary zip archives."
 msgstr " --nozip              No guardar archivos como archivos zip binarios."
 
-#: ../../src/wlapplication_messages.cc:96
+#: ../../src/wlapplication_messages.cc:92
 msgid ""
 " --editor             Directly starts the Widelands editor.\n"
 "                      You can add a =FILENAME to directly load\n"
 "                      the map FILENAME in editor."
 msgstr " --editor             Inicia directamente el editor de Widelands.\n                      Puede agregar =ARCHIVO para cargar directamente\n                      el mapa ARCHIVO en el editor."
 
-#: ../../src/wlapplication_messages.cc:100
+#: ../../src/wlapplication_messages.cc:96
 msgid ""
 " --ai_training        Enables AI training mode. See\n"
-"                      https://wl.widelands.org/wiki/Ai%20Training/\n"
+"                      https://www.widelands.org/wiki/Ai%20Training/\n"
 "                      for a full description of the AI training logic."
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:104
+#: ../../src/wlapplication_messages.cc:100
 msgid ""
 " --auto_speed         In multiplayer games only, this will keep\n"
 "                      adjusting the game speed automatically,\n"
 "                      depending on FPS. Useful in conjunction with\n"
 "                      --ai_training."
-msgstr ""
+msgstr " --auto_speed         En juegos de multijugador solamente, esto seguirá\n                      ajustando la velocidad del juego automáticamente,\n                      dependiendo de los CPS. Útil combinado con\n                      --entrenamiento_IA."
 
-#: ../../src/wlapplication_messages.cc:109
+#: ../../src/wlapplication_messages.cc:105
 msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
 msgstr " --scenario=ARCHIVO  Inicia directamente el mapa ARCHIVO como\n                      mapa del escenario."
 
-#: ../../src/wlapplication_messages.cc:112
+#: ../../src/wlapplication_messages.cc:108
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
 msgstr " --loadgame=ARCHIVO  Carga directamente el juego guardado en ARCHIVO."
 
-#: ../../src/wlapplication_messages.cc:113
+#: ../../src/wlapplication_messages.cc:109
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
@@ -173,7 +163,7 @@ msgstr " --script=ARCHIVO    Ejecuta el script Lua despues de iniciar.\n        
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:119
+#: ../../src/wlapplication_messages.cc:115
 msgid ""
 " --auto_roadbuild_mode=[true|false]\n"
 "                      Whether to enter roadbuilding mode\n"
@@ -181,7 +171,7 @@ msgid ""
 "                      not connected to a road."
 msgstr " --auto_roadbuild_mode=[true|false]\n                      Entra en modo de construcción de caminos\n                      automaticamente despues de colocar una bandera\n                      que no esta conectada a un camino."
 
-#: ../../src/wlapplication_messages.cc:125
+#: ../../src/wlapplication_messages.cc:121
 msgid "Graphic options:"
 msgstr "Opciones de gráficos:"
 
@@ -189,40 +179,40 @@ msgstr "Opciones de gráficos:"
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:129
+#: ../../src/wlapplication_messages.cc:126
 msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
 msgstr " --fullscreen=[true|false]\n                      Indica el uso de la pantalla completa para\n                      mostrar el juego."
 
-#: ../../src/wlapplication_messages.cc:133
+#: ../../src/wlapplication_messages.cc:130
 msgid " --xres=[...]         Width of the window in pixel."
 msgstr " --xres=[...]         Ancho de la ventana en píxeles."
 
-#: ../../src/wlapplication_messages.cc:134
+#: ../../src/wlapplication_messages.cc:131
 msgid " --yres=[...]         Height of the window in pixel."
 msgstr " --yres=[...]         Alto de la ventana en píxeles."
 
-#: ../../src/wlapplication_messages.cc:135
+#: ../../src/wlapplication_messages.cc:132
 msgid " --maxfps=[5 ...]     Maximal optical framerate of the game."
-msgstr ""
+msgstr " --maxcps=[5 ...]     Máxima óptica de cuadros por segundo del juego."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:140
+#: ../../src/wlapplication_messages.cc:137
 msgid "Options for the internal window manager:"
 msgstr "Opciones para el gestor de ventanas internas:"
 
-#: ../../src/wlapplication_messages.cc:141
+#: ../../src/wlapplication_messages.cc:138
 msgid ""
 " --animate_map_panning=[yes|no]\n"
 "                      Should automatic map movements be animated."
-msgstr ""
+msgstr " --animate_map_panning=[yes|no]\n                      Si los movimientos del mapa debieran ser animados."
 
-#: ../../src/wlapplication_messages.cc:144
+#: ../../src/wlapplication_messages.cc:141
 msgid ""
 " --border_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the screen\n"
@@ -234,7 +224,7 @@ msgstr " --border_snap_distance=[0 ...]\n                      Mueve una ventana
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:152
+#: ../../src/wlapplication_messages.cc:149
 msgid ""
 " --dock_windows_to_edges=[true|false]\n"
 "                      Eliminate a window's border towards the\n"
@@ -242,7 +232,7 @@ msgid ""
 "                      window is next to the edge of the screen."
 msgstr " --dock_windows_to_edges=[true|false]\n                      Elimina el borde de la ventana contra el\n                      borde de la pantalla cuando el borde de la\n                      ventana esta cerca del borde de la pantalla."
 
-#: ../../src/wlapplication_messages.cc:157
+#: ../../src/wlapplication_messages.cc:154
 msgid ""
 " --panel_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the panel when\n"
@@ -250,7 +240,7 @@ msgid ""
 "                      distance from the edge of the panel."
 msgstr " --panel_snap_distance=[0 ...]\n                      Mueve una ventana al borde del panel cuando\n                      el borde de la ventana se encuentra dentro\n                      de esta distancia del borde del panel."
 
-#: ../../src/wlapplication_messages.cc:162
+#: ../../src/wlapplication_messages.cc:159
 msgid ""
 " --snap_windows_only_when_overlapping=[yes|no]\n"
 "                      Only move a window to the edge of a panel\n"
@@ -258,18 +248,18 @@ msgid ""
 "                      panel."
 msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                      Solo mueve la ventana al borde del panel\n                      si la ventana se sobrepone con el panel."
 
-#: ../../src/wlapplication_messages.cc:168
+#: ../../src/wlapplication_messages.cc:165
 msgid " --verbose            Enable verbose debug messages"
 msgstr " --verbose            Habilitar mensajes de depuración detallados"
 
-#: ../../src/wlapplication_messages.cc:169
+#: ../../src/wlapplication_messages.cc:166
 msgid " --help               Show this help"
 msgstr " --help               Muestra esta ayuda"
 
-#: ../../src/wlapplication_messages.cc:170
+#: ../../src/wlapplication_messages.cc:167
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
-"        https://wl.widelands.org/\n"
+"        https://www.widelands.org/\n"
 "\n"
 "Hope you enjoy this game!"
 msgstr ""

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +27,10 @@
 
 namespace Widelands {
 
-TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table) : name(table->get_string("name")), icon(table->get_string("icon")), script(table->get_string("script")) {
+TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table)
+   : name(table->get_string("name")),
+     icon(table->get_string("icon")),
+     script(table->get_string("script")) {
 	try {
 		i18n::Textdomain td("tribes");
 		author = _(table->get_string("author"));

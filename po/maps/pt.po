@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2015-2016
@@ -11,10 +11,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-12 07:46+0000\n"
-"PO-Revision-Date: 2018-10-18 20:17+0000\n"
-"Last-Translator: zecas <jjorge@free.fr>\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-01-21 18:02+0000\n"
+"PO-Revision-Date: 2020-01-21 18:25+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +23,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../data/campaigns/atl01.wmf/elemental:9
-#: ../../data/campaigns/campaigns.conf:118
 msgid "From Nemesis to Genesis"
 msgstr "Da Nemésis ao Génesis"
 
@@ -34,7 +33,6 @@ msgid ""
 msgstr "Depois de amararem numa ilha misteriosa perto da Atlântida, o que resta do povo Atlântica luta para tornar o novo lugar a sua nova casa."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
-#: ../../data/campaigns/campaigns.conf:76
 msgid "A Place to Call Home"
 msgstr "Um lugar ao qual chamar de lar"
 
@@ -45,7 +43,6 @@ msgid ""
 msgstr "Neste cenário serão apresentados os edifícios com maiores níveis de produção, incluindo as minas."
 
 #: ../../data/campaigns/bar02.wmf/elemental:7
-#: ../../data/campaigns/campaigns.conf:81
 msgid "This Land is Our Land"
 msgstr "Esta é a nossa terra"
 
@@ -55,147 +52,21 @@ msgid ""
 "and will introduce fighting."
 msgstr "Este tutorial explica a gestão e treino militar e ainda fazer a introdução às batalhas."
 
-#: ../../data/campaigns/campaigns.conf:27
-msgid "The Second Empire"
-msgstr "O segundo império"
-
-#: ../../data/campaigns/campaigns.conf:29
-msgid "Barbarians"
-msgstr "Bárbaros"
-
-#: ../../data/campaigns/campaigns.conf:31
-msgid "Easy. Introduces the Barbarians"
-msgstr "Fácil. Introduz os Bárbaros"
-
-#: ../../data/campaigns/campaigns.conf:32
-msgid ""
-"When Chat’Karuth died, he was an old man, father to three strong and "
-"ambitious sons, and warlord to an army that could match any enemy willing to"
-" rise against the ancient forests. Though at the end of his glorious reign, "
-"Chat’Karuth chose his eldest son, Thron, to succeed him as the tribe’s "
-"warlord – a decision that left his two brothers unsatisfied. The old warlord"
-" knew that. As his father instructed him, Thron left the capital of "
-"Al’thunran, the home of the Throne Among the Trees, and withdrew his forces "
-"to the high hills where he buried the corpse of his father. There he swore "
-"to the gods and his father’s spirit that he’d return to re-established "
-"order. While his brothers have raged blind war against Thron and the few "
-"forces he left to secure the borders of Al’thunran, the young warlord seeks "
-"to reunite his ambitious brothers and force the tribes to march once again "
-"under a common banner."
-msgstr "Quando Chat’Karuth morreu, era já um homem muito velho, pai de três fortes e ambiciosos filhos e senhor de um exercito que podia confrontar qualquer inimigo disposto a marchar contra as florestas antigas. No final do seu glorioso reinado, Chat’Karuth escolheu o seu  filho mais velho Thron para o suceder no trono como soberano da tribo, decisão que deixou os dois irmãos insatisfeitos. Por saber que isso iria acontecer, o antigo soberano deixou instruções para que o novo Rei Thron deixasse a capital Al’thunran, onde estava o Trono-entre-as-árvores, e recuasse com as suas forças para as montanhas. Nelas enterrou o corpo do seu pai e sobre a sua campa jurou aos Deuses que voltaria para restabelecer a ordem. Enquanto os seus irmãos continuaram a guerra cega contra Thron e as pequenas forças que deixara a defender as fronteiras de Al’thunran, o jovem guerreiro procurou reunir os seus ambiciosos irmãos e forçá-los às suas tribos a de novo voltarem a marchar unidos sobre a mesma bandeira."
-
-#: ../../data/campaigns/campaigns.conf:35
-msgid "The Months of Exile"
-msgstr "Os meses de exílio"
-
-#: ../../data/campaigns/campaigns.conf:37
-msgid "Empire"
-msgstr "Império"
-
-#: ../../data/campaigns/campaigns.conf:39
-msgid "Easy. Introduces the Empire"
-msgstr "Fácil. Introduz o Império"
-
-#: ../../data/campaigns/campaigns.conf:40
-msgid ""
-"Six months ago, Lutius – a young general of the Empire – was sent with 150 "
-"soldiers to the frontier beyond the northern forests where Barbarian tribes "
-"were crossing onto land held by the Empire. His task was to defend the "
-"Empire’s land. At first, everything was calm. He even talked to a few "
-"Barbarian children and thought about a peaceful life – side by side with "
-"this archaic folk. He began to feel safer and his army began to drop their "
-"attention off the potential enemy. That was their undoing. One night in "
-"March his unprepared army was attacked by 100 Barbarian footmen and was "
-"completely scattered. Only with his bare life he and a handful of his "
-"soldiers survived."
-msgstr "Seis meses atrás, Lutius - um jovem general do Império - fora enviado com 150 soltados para a fronteira que fica para além das florestas do Norte, onde tribos bárbaras e as terras do Império se cruzam. O sua tarefa era a de defender o território do Império. Primeiro, tudo estava calmo, e até brincou com as crianças bárbaras que os visitavam. Já sonhava com uma vida tranquila lado a lado com esta gente arcaica. Ele e o seu exército começaram a sentir-se seguro demais e a menosprezar o potencial inimigo. Isto fora a sua perdição. Numa noite em Março, o seu exército foi apanhado desprevenido por 100 guerreiros bárbaros que os atacaram e os obrigaram a dispersar. Só ele e uma mão cheia dos seus soldados sobreviveram e por pouco!"
-
-#: ../../data/campaigns/campaigns.conf:43
-msgid "The Run for the Fire"
-msgstr "A corrida ao fogo"
-
-#: ../../data/campaigns/campaigns.conf:45
-msgid "Atlanteans"
-msgstr "Atlantas"
-
-#: ../../data/campaigns/campaigns.conf:47
-msgid "Challenging. Introduces the Atlanteans"
-msgstr "Desafiador. Introduz os Atlantas."
-
-#: ../../data/campaigns/campaigns.conf:48
-msgid ""
-"When their God lost faith in the Atlanteans and drowned their island, one "
-"woman’s struggle for justice and a second chance for her people would become"
-" the stuff of legends. Leading the remaining Atlanteans into a new future in"
-" a new part of the World, Jundlina became the most powerful human of her "
-"time, but at a high cost: her humanity and soul."
-msgstr "Quando o Deus perdeu a fé nos Atlantas e submergiu-lhes a ilha, uma valente mulher que lutava pela justiça e por uma segunda oportunidade para o seu povo, tornou-se numa lenda. Liderando o que restava do povo da Atlântida em direção a um novo futuro numa nova terra, Jundlina tornou-se a mais poderosa humana do seu tempo. Mas pagou um alto preço: entregou a sua humanidade e a sua alma."
-
-#: ../../data/campaigns/campaigns.conf:52
-msgid "From Water to Ice"
-msgstr "Da Água ao Gelo"
-
-#: ../../data/campaigns/campaigns.conf:54
-msgid "Frisians"
-msgstr "Frísios"
-
-#: ../../data/campaigns/campaigns.conf:56
-msgid "For advanced players. Introduces the Frisians"
-msgstr "Para jogadores experientes. Introduz os Frísios."
-
-#: ../../data/campaigns/campaigns.conf:57
-msgid ""
-"Living off the ocean is a constant struggle, and even more so for the "
-"inhabitants of the Frisian North Sea shore. Was the last storm flood, the "
-"most devastating one in human memory, really nothing more than yet another "
-"example for the hardships all Frisians have to face – or a sign from the "
-"gods that a tribe that only just settled here must seek out an entirely new "
-"home?"
-msgstr "Viver no oceano é uma luta constante, e ainda mais para os habitantes da costa norte do mar Frísio. Foi a última tempestade, a mais devastadora da história humana. Nada mais do que mais um exemplo do que os Frísios têm de enfrentar – ou um sinal dos deuses de que a tribo que assentou aqui tem de encontrar outro local?"
-
-#: ../../data/campaigns/campaigns.conf:86
-#: ../../data/campaigns/campaigns.conf:111
-#: ../../data/campaigns/campaigns.conf:123
-#: ../../data/campaigns/campaigns.conf:139
 #: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
 msgstr "Ainda não implementado"
-
-#: ../../data/campaigns/campaigns.conf:91
-#: ../../data/campaigns/emp01.wmf/elemental:7
-msgid "The Strands of Malac’ Mor"
-msgstr "As Praias de Malac’ Mor"
-
-#: ../../data/campaigns/campaigns.conf:96
-#: ../../data/campaigns/emp02.wmf/elemental:9
-msgid "An Outpost for Exile"
-msgstr "Um posto avançado para o exílio"
-
-#: ../../data/campaigns/campaigns.conf:101
-msgid "Neptune’s Revenge"
-msgstr "A Vingança do Netuno"
-
-#: ../../data/campaigns/campaigns.conf:106
-#: ../../data/campaigns/emp04.wmf/elemental:8
-msgid "Surprise, Surprise!"
-msgstr "Surpresa, Surpresa!"
-
-#: ../../data/campaigns/campaigns.conf:129
-#: ../../data/campaigns/fri01.wmf/elemental:8
-msgid "The Great Stormflood"
-msgstr "A Grande Tempestade de Inundação"
-
-#: ../../data/campaigns/campaigns.conf:134
-msgid "Colder than Ice"
-msgstr "Mais frio que o Gelo"
 
 #: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
 msgstr "Ninguém"
 
-#: ../../data/campaigns/dummy.wmf/elemental:11
+#: ../../data/campaigns/dummy.wmf/elemental:12
 msgid "Sorry, this map is not yet implemented."
 msgstr "Desculpe, este mapa ainda não existe."
+
+#: ../../data/campaigns/emp01.wmf/elemental:7
+msgid "The Strands of Malac’ Mor"
+msgstr "As Praias de Malac’ Mor"
 
 #: ../../data/campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -205,6 +76,10 @@ msgid ""
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
 msgstr "Depois de perder uma importante batalha contra os Bárbaros que resultou na perda de grande parte do território do Império, Lutius deixou Fremil para começar uma nova vida. Mas o destino quis que o seu navio entrasse numa forte tempestade que quase o destruiu. Só com muita sorte consegue encalhar o já muito danificado navio uma praia deserta e salvar o seu povo. Por agora!"
+
+#: ../../data/campaigns/emp02.wmf/elemental:9
+msgid "An Outpost for Exile"
+msgstr "Um posto avançado para o exílio"
 
 #: ../../data/campaigns/emp02.wmf/elemental:11
 msgid ""
@@ -220,12 +95,20 @@ msgid ""
 "the will of the gods."
 msgstr "A caminho do regresso para defender o Império, a equipa do Lutius foi surpreendida pelos deuses."
 
+#: ../../data/campaigns/emp04.wmf/elemental:8
+msgid "Surprise, Surprise!"
+msgstr "Surpresa, Surpresa!"
+
 #: ../../data/campaigns/emp04.wmf/elemental:10
 msgid ""
 "After returning home, Lutius and his crew are faced with an economy in "
 "shambles. Resolving the bottlenecks in the economy will be of utmost "
 "importance to reinstate the glory of the empire."
 msgstr "Após regressar a casa, Lutius e a sua equipa são confrontados com uma economia despedaçada. Resolver os problemas da economia será da máxima importância para restabelecer a glória do império."
+
+#: ../../data/campaigns/fri01.wmf/elemental:8
+msgid "The Great Stormflood"
+msgstr "A Grande Tempestade de Inundação"
 
 #: ../../data/campaigns/fri01.wmf/elemental:10
 msgid ""
@@ -253,7 +136,6 @@ msgid ""
 msgstr "Reebaud  e a sua tribo chegaram ao norte. Mas a sua chegada entre as estepes congeladas e as montanhas cobertas de neve é menos do que bem-vinda…"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:15
 msgid "Basic Control"
 msgstr "Controlo Simples"
 
@@ -264,7 +146,6 @@ msgid ""
 msgstr "Neste tutorial, vai aprender como navegar no Widelands e como construir edifícios e estradas."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:19
 msgid "Warfare"
 msgstr "Guerra"
 
@@ -275,18 +156,16 @@ msgid ""
 msgstr "Neste tutorial, vou explicar-lhe os segredos da guerra :  como criar soldados, como treinar-los e como os chefiar na batalha."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:23
 msgid "Seafaring"
 msgstr "Navegação"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
-"ships and ports."
-msgstr "Neste tutorial, vai descobrir a navegação, ou seja como manejar os navios e os portos."
+"ships and ports, and how to use ferries and waterways."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:27
 msgid "Economy"
 msgstr "Economia"
 
@@ -689,7 +568,7 @@ msgid ""
 "building a single ship, players are advised to make ports and shipyards a "
 "priority – expeditions are universally useful and are often the fastest way "
 "to gold deposits."
-msgstr ""
+msgstr "Cada jogador tem um obstáculo diferente para o seu crescimento, e há sempre mais de uma maneira de o ultrapassar. Enquanto a IA pode ser derrotada sem construir nenhum barco, é aconselhado de os considerar prioritários - as expedições são sempre úteis e quase sempre são o meio mais rápido de obter ouro."
 
 #: ../../data/maps/Riverlands.wmf/elemental:8
 msgid "Riverlands"
@@ -880,7 +759,7 @@ msgid ""
 "settlers to start a new life. Deserts and a quickly growing forest wait to "
 "be discovered. But only by becoming a naval power will your tribe be able to"
 " explore enough resources to compete with its opponents."
-msgstr ""
+msgstr "Em redor de três grandes vulcões, seis lindas ilhas convidam os colonos a começar uma nova vida. Há desertos e uma floresta em crescimento rápido para descobrir. Mas só desenvolvendo a navegação vai permitir à sua tribo de competir com as outras."
 
 #: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:8
 msgid "Twin Lagoons"
@@ -893,7 +772,7 @@ msgid ""
 "desperately searching for more resources to support their endlessly ongoing "
 "wars, would end up in this forgotten place at the same time and for the same"
 " well-known reason."
-msgstr ""
+msgstr "Quando o vento assoprou e as primeiras dunas se formaram nestes lagos gémeos abandonados, ninguém imaginava que duas tribos procurando desesperadamente mais recursos para alimentar as suas guerras sem fim, acabariam neste sitio esquecido ao mesmo tempo e pela mesma razão conhecida de todos."
 
 #: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:11
 msgid ""
@@ -929,7 +808,7 @@ msgid ""
 "Suddenly, the sun seemed to be gone and the only light and heat sources left"
 " were those that enforced this dramatic change. Continents, oceans and seas "
 "are frozen now, only the volcanic islands seem to be left as habitable land."
-msgstr ""
+msgstr "No meio do verão, uma série de erupções vulcânicas trouxeram o inverno. De repente, o sol pareceu fugir e as únicas fontes de luz e calor são as que provocaram esta terrível mudança. Continentes, oceanos e mares estão agora gelados, só as ilhas vulcânicas parecem agora ser habitáveis. "
 
 #: ../../data/maps/Wideworld.wmf/elemental:8
 msgid "Wide World"
@@ -960,4 +839,4 @@ msgid ""
 " 4 players’ map, with a black AI to add a complication to the expansion of "
 "the other players, or you can play as a challenge with the black player "
 "against the other 4 (VERY difficult)."
-msgstr ""
+msgstr "O jogador preto está encercado no centro sem recursos, portanto há três maneiras de jogar este mapa : sem o jogador preto para uma partida clássica de 4 jogadores, com uma IA preta para dificultar a expansão dos outros jogadores, ou um desafio com o jogador preto contra os 4 outros (MUITO difícil)."

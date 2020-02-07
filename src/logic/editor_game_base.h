@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,6 +56,7 @@ class Tribes;
 class TribeDescr;
 struct Flag;
 struct AttackController;
+struct BuildingSettings;
 
 struct NoteFieldPossession {
 	CAN_BE_SENT_AS_NOTE(NoteId::FieldPossession)
@@ -113,27 +114,31 @@ public:
 
 	// loading stuff
 	void allocate_player_maps();
-	virtual void cleanup_for_load();
+	// NOCOM void load_graphics();
 
-	void set_road(const FCoords&, uint8_t direction, uint8_t roadtype);
+	virtual void cleanup_for_load();
+	void set_loader_ui(UI::ProgressWindow*);
+	UI::ProgressWindow* get_loader_ui() {
+		return loader_ui_;
+	}
+
+	void set_road(const FCoords&, uint8_t direction, RoadSegment roadtype);
 
 	// warping stuff. instantly creating map_objects
-	Building&
-	warp_building(const Coords&,
-	              PlayerNumber,
-	              DescriptionIndex,
-	              Building::FormerBuildings former_buildings = Building::FormerBuildings());
-	Building&
-	warp_constructionsite(const Coords&,
-	                      PlayerNumber,
-	                      DescriptionIndex,
-	                      bool loading = false,
-	                      Building::FormerBuildings former_buildings = Building::FormerBuildings());
-	Building&
-	warp_dismantlesite(const Coords&,
-	                   PlayerNumber,
-	                   bool loading = false,
-	                   Building::FormerBuildings former_buildings = Building::FormerBuildings());
+	Building& warp_building(const Coords&,
+	                        PlayerNumber,
+	                        DescriptionIndex,
+	                        FormerBuildings former_buildings = FormerBuildings());
+	Building& warp_constructionsite(const Coords&,
+	                                PlayerNumber,
+	                                DescriptionIndex,
+	                                bool loading = false,
+	                                FormerBuildings former_buildings = FormerBuildings(),
+	                                const BuildingSettings* settings = nullptr);
+	Building& warp_dismantlesite(const Coords&,
+	                             PlayerNumber,
+	                             bool loading = false,
+	                             FormerBuildings former_buildings = FormerBuildings());
 	Bob& create_critter(const Coords&, DescriptionIndex bob_type_idx, Player* owner = nullptr);
 	Bob& create_critter(const Coords&, const std::string& name, Player* owner = nullptr);
 	Immovable&
@@ -145,6 +150,7 @@ public:
 	                                      const BuildingDescr* former_building);
 	Bob& create_ship(const Coords&, int ship_type_idx, Player* owner = nullptr);
 	Bob& create_ship(const Coords&, const std::string& name, Player* owner = nullptr);
+	Bob& create_ferry(const Coords&, Player* owner);
 
 	uint32_t get_gametime() const {
 		return gametime_;
@@ -157,6 +163,7 @@ public:
 	void inform_players_about_ownership(MapIndex, PlayerNumber);
 	void inform_players_about_immovable(MapIndex, MapObjectDescr const*);
 	void inform_players_about_road(FCoords, MapObjectDescr const*);
+	void inform_players_about_waterway(FCoords, MapObjectDescr const*);
 
 	void unconquer_area(PlayerArea<Area<FCoords>>, PlayerNumber destroying_player = 0);
 	void conquer_area(PlayerArea<Area<FCoords>>, bool conquer_guarded_location = false);
@@ -195,6 +202,9 @@ public:
 
 	// Returns the mutable tribes. Prefer tribes() whenever possible.
 	Tribes* mutable_tribes();
+
+protected:
+	UI::ProgressWindow* loader_ui_;
 
 private:
 	/// Common function for create_critter and create_ship.
@@ -253,6 +263,15 @@ private:
 	std::unique_ptr<InteractiveBase> ibase_;
 	Map map_;
 
+	/// Even after a map is fully loaded, some static data (images, scripts)
+	/// will still be read from a filesystem whenever a map/game is saved.
+	/// To avoid potential filesystem conflicts when (pre)loading/saving/deleting
+	/// map/game files (and to avoid having to deal with this in many different places)
+	/// a temporary file (in a special dir) is created for such data.
+	std::unique_ptr<FileSystem> tmp_fs_;
+	void delete_tempfile();
+	void create_tempfile_and_save_mapdata(FileSystem::Type type);
+
 	DISALLOW_COPY_AND_ASSIGN(EditorGameBase);
 };
 
@@ -266,6 +285,6 @@ private:
 #define iterate_players_existing_const(p, nr_players, egbase, player)                              \
 	iterate_player_numbers(                                                                         \
 	   p, nr_players) if (Widelands::Player const* const player = (egbase).get_player(p))
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_EDITOR_GAME_BASE_H

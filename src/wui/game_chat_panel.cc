@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2018 by the Widelands Development Team
+ * Copyright (C) 2008-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,7 @@
 #include <limits>
 #include <string>
 
+#include "sound/sound_handler.h"
 #include "wui/chat_msg_layout.h"
 
 /**
@@ -40,13 +41,15 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
              0,
              0,
              w,
-             h - 25,
+             h - 30,
              style,
              "",
              UI::Align::kLeft,
              UI::MultilineTextarea::ScrollMode::kScrollLogForced),
-     editbox(this, 0, h - 20, w, 20, 2, style),
-     chat_message_counter(0) {
+     editbox(this, 0, h - 25, w, style),
+     chat_message_counter(0),
+     chat_sound(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {
+
 	editbox.ok.connect(boost::bind(&GameChatPanel::key_enter, this));
 	editbox.cancel.connect(boost::bind(&GameChatPanel::key_escape, this));
 	editbox.activate_history(true);
@@ -65,7 +68,7 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
 void GameChatPanel::recalculate(bool has_new_message) {
 	const std::vector<ChatMessage> msgs = chat_.get_messages();
 
-	size_t msgs_size = msgs.size();
+	const size_t msgs_size = msgs.size();
 	std::string str = "<rt>";
 	for (uint32_t i = 0; i < msgs_size; ++i) {
 		str += format_as_richtext(msgs[i]);
@@ -79,7 +82,7 @@ void GameChatPanel::recalculate(bool has_new_message) {
 		for (size_t i = chat_message_counter; i < msgs_size; ++i) {
 			if (!msgs[i].sender.empty()) {
 				// Got a message that is no system message. Beep
-				play_new_chat_message();
+				g_sh->play_fx(SoundType::kChat, chat_sound);
 				break;
 			}
 		}
@@ -115,4 +118,16 @@ void GameChatPanel::key_enter() {
 void GameChatPanel::key_escape() {
 	editbox.set_text("");
 	aborted();
+}
+
+/**
+ * The mouse was clicked on this chatbox
+ */
+bool GameChatPanel::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
+	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
+		focus_edit();
+		return true;
+	}
+
+	return false;
 }

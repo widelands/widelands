@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,8 +25,8 @@
 #include <string>
 
 #include "base/wexception.h"
+#include "io/profile.h"
 #include "logic/widelands_geometry.h"
-#include "profile/profile.h"
 
 namespace Widelands {
 

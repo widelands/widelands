@@ -2,9 +2,9 @@ dirname = path.dirname(__file__)
 
 terrain_affinity = {
    preferred_temperature = 110,
-   preferred_humidity = 0.2,
-   preferred_fertility = 0.85,
-   pickiness = 0.8,
+   preferred_humidity = 200,
+   preferred_fertility = 850,
+   pickiness = 80,
 }
 
 world:new_immovable_type{
@@ -85,6 +85,7 @@ world:new_immovable_type{
    descname = _ "Green Umbrella Tree (Old)",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    species = _ "Green Umbrella Tree",
+   icon = dirname .. "old/idle_0.png",
    editor_category = "trees_wasteland",
    size = "small",
    attributes = { "tree" },

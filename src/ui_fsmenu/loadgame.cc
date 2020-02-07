@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
-#include "profile/profile.h"
+#include "wlapplication_options.h"
 #include "wui/gamedetails.h"
 
 FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
@@ -37,8 +37,11 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
      title_(&main_box_,
             0,
             0,
+            0,
+            0,
             is_replay ? _("Choose a replay") : _("Choose a saved game"),
-            UI::Align::kCenter),
+            UI::Align::kCenter,
+            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
 
      load_or_save_(&info_box_,
                    g,
@@ -98,21 +101,23 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 	if (is_replay_) {
 		show_filenames_->changed.connect(
 		   boost::bind(&FullscreenMenuLoadGame::toggle_filenames, boost::ref(*this)));
-		show_filenames_->set_state(
-		   g_options.pull_section("global").get_bool("display_replay_filenames", true));
+		show_filenames_->set_state(get_config_bool("display_replay_filenames", true));
 	}
 
 	fill_table();
 	if (!load_or_save_.table().empty()) {
 		load_or_save_.table().select(0);
 	}
+
+	load_or_save_.table().cancel.connect(
+	   boost::bind(&FullscreenMenuLoadGame::clicked_back, boost::ref(*this)));
 }
 
 void FullscreenMenuLoadGame::layout() {
 	FullscreenMenuLoadMapOrGame::layout();
 	main_box_.set_size(get_w() - 2 * tablex_, tabley_ + tableh_ + padding_);
 	main_box_.set_pos(Vector2i(tablex_, 0));
-	title_.set_fontsize(fs_big());
+	title_.set_font_scale(scale_factor());
 	load_or_save_.delete_button()->set_desired_size(butw_, buth_);
 	button_spacer_->set_desired_size(butw_, buth_ + 2 * padding_);
 	load_or_save_.table().set_desired_size(tablew_, tableh_);
@@ -122,7 +127,7 @@ void FullscreenMenuLoadGame::layout() {
 
 void FullscreenMenuLoadGame::toggle_filenames() {
 	showing_filenames_ = show_filenames_->get_state();
-	g_options.pull_section("global").set_bool("display_replay_filenames", showing_filenames_);
+	set_config_bool("display_replay_filenames", showing_filenames_);
 
 	// Remember selection
 	const std::set<uint32_t> selected = load_or_save_.table().selections();
@@ -143,9 +148,13 @@ void FullscreenMenuLoadGame::clicked_ok() {
 	}
 
 	std::unique_ptr<SavegameData> gamedata = load_or_save_.entry_selected();
-	if (gamedata && gamedata->errormessage.empty()) {
-		filename_ = gamedata->filename;
-		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
+	if (gamedata->is_directory()) {
+		load_or_save_.change_directory_to(gamedata->filename);
+	} else {
+		if (gamedata && gamedata->errormessage.empty()) {
+			filename_ = gamedata->filename;
+			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
+		}
 	}
 }
 
@@ -158,7 +167,8 @@ void FullscreenMenuLoadGame::entry_selected() {
 }
 
 void FullscreenMenuLoadGame::fill_table() {
-	load_or_save_.fill_table(showing_filenames_);
+	load_or_save_.set_show_filenames(showing_filenames_);
+	load_or_save_.fill_table();
 }
 
 const std::string& FullscreenMenuLoadGame::filename() const {

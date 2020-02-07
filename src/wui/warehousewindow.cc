@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -75,19 +75,19 @@ WarehouseWaresDisplay::WarehouseWaresDisplay(UI::Panel* parent,
 void WarehouseWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIndex ware) {
 	WaresDisplay::draw_ware(dst, ware);
 
-	Widelands::Warehouse::StockPolicy policy = warehouse_.get_stock_policy(get_type(), ware);
+	Widelands::StockPolicy policy = warehouse_.get_stock_policy(get_type(), ware);
 	const Image* pic = nullptr;
 	switch (policy) {
-	case Widelands::Warehouse::StockPolicy::kPrefer:
+	case Widelands::StockPolicy::kPrefer:
 		pic = g_gr->images().get(pic_policy_prefer);
 		break;
-	case Widelands::Warehouse::StockPolicy::kDontStock:
+	case Widelands::StockPolicy::kDontStock:
 		pic = g_gr->images().get(pic_policy_dontstock);
 		break;
-	case Widelands::Warehouse::StockPolicy::kRemove:
+	case Widelands::StockPolicy::kRemove:
 		pic = g_gr->images().get(pic_policy_remove);
 		break;
-	case Widelands::Warehouse::StockPolicy::kNormal:
+	case Widelands::StockPolicy::kNormal:
 		// don't draw anything for the normal policy
 		return;
 	}
@@ -106,7 +106,7 @@ struct WarehouseWaresPanel : UI::Box {
 	                    Widelands::Warehouse&,
 	                    Widelands::WareWorker type);
 
-	void set_policy(Widelands::Warehouse::StockPolicy);
+	void set_policy(Widelands::StockPolicy);
 
 private:
 	InteractiveGameBase& gb_;
@@ -132,14 +132,15 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 	if (can_act_) {
 		UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 		UI::Button* b;
-		add(buttons);
+		add(buttons, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+		add_space(15);
 
 #define ADD_POLICY_BUTTON(policy, policyname, tooltip)                                             \
 	b = new UI::Button(                                                                             \
 	   buttons, #policy, 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,                                   \
 	   g_gr->images().get("images/wui/buildings/stock_policy_button_" #policy ".png"), tooltip),    \
-	b->sigclicked.connect(boost::bind(                                                              \
-	   &WarehouseWaresPanel::set_policy, this, Widelands::Warehouse::StockPolicy::k##policyname)),  \
+	b->sigclicked.connect(                                                                          \
+	   boost::bind(&WarehouseWaresPanel::set_policy, this, Widelands::StockPolicy::k##policyname)), \
 	buttons->add(b);
 
 		ADD_POLICY_BUTTON(normal, Normal, _("Normal policy"))
@@ -152,7 +153,7 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 /**
  * Add Buttons policy buttons
  */
-void WarehouseWaresPanel::set_policy(Widelands::Warehouse::StockPolicy newpolicy) {
+void WarehouseWaresPanel::set_policy(Widelands::StockPolicy newpolicy) {
 	if (gb_.can_act(wh_.owner().player_number())) {
 		bool is_workers = type_ == Widelands::wwWORKER;
 		const std::set<Widelands::DescriptionIndex> indices =
@@ -160,7 +161,7 @@ void WarehouseWaresPanel::set_policy(Widelands::Warehouse::StockPolicy newpolicy
 
 		for (const Widelands::DescriptionIndex& index : indices) {
 			if (display_.ware_selected(index)) {
-				gb_.game().send_player_command(*new Widelands::CmdSetStockPolicy(
+				gb_.game().send_player_command(new Widelands::CmdSetStockPolicy(
 				   gb_.game().get_gametime(), wh_.owner().player_number(), wh_, is_workers, index,
 				   newpolicy));
 			}

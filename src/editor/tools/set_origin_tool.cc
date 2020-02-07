@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2018 by the Widelands Development Team
+ * Copyright (C) 2009-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,8 +22,7 @@
 #include "editor/editorinteractive.h"
 #include "wui/mapviewpixelconstants.h"
 
-int32_t EditorSetOriginTool::handle_click_impl(const Widelands::World&,
-                                               const Widelands::NodeAndTriangle<>& center,
+int32_t EditorSetOriginTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
                                                EditorInteractive& eia,
                                                EditorActionArgs* /* args */,
                                                Widelands::Map* map) {
@@ -34,8 +33,7 @@ int32_t EditorSetOriginTool::handle_click_impl(const Widelands::World&,
 }
 
 int32_t
-EditorSetOriginTool::handle_undo_impl(const Widelands::World&,
-                                      const Widelands::NodeAndTriangle<Widelands::Coords>& center,
+EditorSetOriginTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands::Coords>& center,
                                       EditorInteractive& eia,
                                       EditorActionArgs* /* args */,
                                       Widelands::Map* map) {

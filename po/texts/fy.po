@@ -1,14 +1,14 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # Luitzen Hietkamp <luitzenhietkamp@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-06 16:24+0000\n"
-"PO-Revision-Date: 2018-04-06 16:28+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-12-30 07:55+0000\n"
+"PO-Revision-Date: 2019-12-30 08:11+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Western Frisian (http://www.transifex.com/widelands/widelands/language/fy/)\n"
 "MIME-Version: 1.0\n"
@@ -33,56 +33,57 @@ msgstr "Lisinsje"
 msgid "Licensing information for Widelands"
 msgstr "Lisinsjeynformaasje foar Widelands"
 
-#: ../../data/txts/LICENSE.lua:9
-msgid "Copyright 2002 - 2018 by the Widelands Development Team."
+#. TRANSLATORS: Placeholder is copyright end year
+#: ../../data/txts/LICENSE.lua:10
+msgid "Copyright 2002 - %1% by the Widelands Development Team."
 msgstr ""
 
-#: ../../data/txts/LICENSE.lua:11
+#: ../../data/txts/LICENSE.lua:12
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
 msgstr "Dit spultsje is fergees en hat in iepen boarne (FOSS - Free and Open Source), ûnder in GNU General Public License (GPL) V2.0 lisinsje."
 
-#: ../../data/txts/LICENSE.lua:13
+#: ../../data/txts/LICENSE.lua:14
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
 msgstr "Do kinst mear ynformaasje fine oer FOSS en de GPL-lisinsje op de neikommende webside: %s"
 
-#: ../../data/txts/LICENSE.lua:15
+#: ../../data/txts/LICENSE.lua:16
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr ""
 
-#: ../../data/txts/LICENSE.lua:17
+#: ../../data/txts/LICENSE.lua:18
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr ""
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:19
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
 msgstr ""
 
-#: ../../data/txts/LICENSE.lua:19
+#: ../../data/txts/LICENSE.lua:20
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr ""
 
-#: ../../data/txts/LICENSE.lua:20
+#: ../../data/txts/LICENSE.lua:21
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
 msgstr ""
 
-#: ../../data/txts/LICENSE.lua:22
+#: ../../data/txts/LICENSE.lua:23
 msgid "This game comes as-is and without any warranty."
 msgstr ""
 
-#: ../../data/txts/LICENSE.lua:23
+#: ../../data/txts/LICENSE.lua:24
 msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
@@ -197,12 +198,12 @@ msgid "Widelands Translators"
 msgstr "Widelands-oersetters"
 
 #: ../../data/txts/developers.lua:3
-msgid "Atlantean"
-msgstr "Atlanteanen"
+msgid "Atlanteans"
+msgstr ""
 
 #: ../../data/txts/developers.lua:3
-msgid "Barbarian"
-msgstr "Barbaren"
+msgid "Barbarians"
+msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Campaign Story"
@@ -237,6 +238,10 @@ msgid "Fedora Linux"
 msgstr "Fedora Linux"
 
 #: ../../data/txts/developers.lua:3
+msgid "Flatpak"
+msgstr ""
+
+#: ../../data/txts/developers.lua:3
 msgid "Former Elders"
 msgstr ""
 
@@ -245,7 +250,7 @@ msgid "FreeBSD"
 msgstr "Free BSD"
 
 #: ../../data/txts/developers.lua:3
-msgid "Frisian"
+msgid "Frisians"
 msgstr ""
 
 #: ../../data/txts/developers.lua:3
@@ -311,6 +316,14 @@ msgstr "Windows"
 #: ../../data/txts/developers.lua:3
 msgid "ZetaOS"
 msgstr "ZetaOS"
+
+#: ../../data/txts/developers.lua:3
+msgid "and many, many more (thank you for everything you've done)"
+msgstr ""
+
+#: ../../data/txts/developers.lua:3
+msgid "vacant"
+msgstr ""
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
@@ -395,7 +408,12 @@ msgstr "Romte"
 msgid "Toggle building spaces"
 msgstr "Bouromten oan-/útsette"
 
-#. TRANSLATORS: This is an access key combination. The hotkey is 'f'
+#. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
+#: ../../data/txts/help/common_helptexts.lua:49
+msgctxt "hotkey"
+msgid "Ctrl + F"
+msgstr ""
+
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"
 msgstr "Folslein skerm oan-/útsette (wannear ûndersteund troch bestjoeringssysteem)"

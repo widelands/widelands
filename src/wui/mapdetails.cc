@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,8 +27,6 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
-#include "graphic/font_handler.h"
-#include "graphic/text_constants.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
@@ -44,6 +42,7 @@ MapDetails::MapDetails(
      style_(style),
      padding_(4),
      main_box_(this, 0, 0, UI::Box::Vertical, 0, 0, 0),
+     name_(""),
      name_label_(&main_box_,
                  0,
                  0,
@@ -70,7 +69,10 @@ void MapDetails::clear() {
 }
 
 void MapDetails::layout() {
-	name_label_.set_size(get_w() - padding_, text_height() + 2);
+	name_label_.set_size(get_w() - padding_, text_height(style_ == UI::PanelStyle::kFsMenu ?
+	                                                        UI::FontStyle::kFsMenuInfoPanelHeading :
+	                                                        UI::FontStyle::kWuiInfoPanelHeading) +
+	                                            2);
 
 	// Adjust sizes for show / hide suggested teams
 	if (suggested_teams_box_->is_visible()) {
@@ -85,18 +87,19 @@ void MapDetails::layout() {
 
 void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 	clear();
+	name_ = mapdata.name;
 	// Show directory information
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
-		name_label_.set_text((boost::format("<rt>%s%s</rt>") %
-		                      as_heading(_("Directory:"), style_, true) %
-		                      as_content(mapdata.localized_name, style_))
-		                        .str());
+		name_label_.set_text(
+		   (boost::format("<rt>%s%s</rt>") % as_heading(_("Directory"), style_, true) %
+		    as_content(mapdata.localized_name, style_))
+		      .str());
 		main_box_.set_size(main_box_.get_w(), get_h());
 
 	} else {  // Show map information
 		name_label_.set_text(
 		   (boost::format("<rt>%s%s</rt>") %
-		    as_heading(mapdata.maptype == MapData::MapType::kScenario ? _("Scenario:") : _("Map:"),
+		    as_heading(mapdata.maptype == MapData::MapType::kScenario ? _("Scenario") : _("Map"),
 		               style_, true) %
 		    as_content(localize_mapname ? mapdata.localized_name : mapdata.name, style_))
 		      .str());
@@ -122,8 +125,14 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 		}
 
 		// Show map information
-		std::string description =
-		   as_heading(ngettext("Author:", "Authors:", mapdata.authors.get_number()), style_);
+		const std::string authors_heading =
+		   (mapdata.authors.get_number() == 1) ?
+		      /** TRANSLATORS: Label in map details if there is 1 author */
+		      _("Author") :
+		      /** TRANSLATORS: Label in map details if there is more than 1 author. If you need plural
+		         forms here, please let us know. */
+		      _("Authors");
+		std::string description = as_heading(authors_heading, style_);
 		description =
 		   (boost::format("%s%s") % description % as_content(mapdata.authors.get_names(), style_))
 		      .str();
@@ -133,19 +142,19 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 			tags.push_back(localize_tag(tag));
 		}
 		std::sort(tags.begin(), tags.end());
-		description = (boost::format("%s%s") % description % as_heading(_("Tags:"), style_)).str();
+		description = (boost::format("%s%s") % description % as_heading(_("Tags"), style_)).str();
 		description = (boost::format("%s%s") % description %
 		               as_content(i18n::localize_list(tags, i18n::ConcatenateWith::COMMA), style_))
 		                 .str();
 
 		description =
-		   (boost::format("%s%s") % description % as_heading(_("Description:"), style_)).str();
+		   (boost::format("%s%s") % description % as_heading(_("Description"), style_)).str();
 		description =
 		   (boost::format("%s%s") % description % as_content(mapdata.description, style_)).str();
 
 		if (!mapdata.hint.empty()) {
 			/** TRANSLATORS: Map hint header when selecting a map. */
-			description = (boost::format("%s%s") % description % as_heading(_("Hint:"), style_)).str();
+			description = (boost::format("%s%s") % description % as_heading(_("Hint"), style_)).str();
 			description =
 			   (boost::format("%s%s") % description % as_content(mapdata.hint, style_)).str();
 		}

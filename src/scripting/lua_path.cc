@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,6 +30,8 @@
 namespace {
 
 /// A class that makes iteration over filename_?.png templates easy.
+// TODO(GunChleoc): Code duplication with g_fs->get_sequential_files.
+// Get rid of this and list_files when conversion to spritemaps has been done.
 class NumberGlob {
 public:
 	explicit NumberGlob(const std::string& file_template);
@@ -59,7 +61,7 @@ NumberGlob::NumberGlob(const std::string& file_template) : template_(file_templa
 		max_ *= 10;
 		to_replace_ += "?";
 	}
-	max_ -= 1;
+	--max_;
 }
 
 bool NumberGlob::next(std::string* s) {
@@ -132,10 +134,11 @@ static int L_dirname(lua_State* L) {
 /* RST
 .. function:: list_files(filename_template)
 
-   Lists the full path for all files that fit the template pattern.
+   **DEPRECATED**. Lists the full path for all files that fit the template pattern.
    Use ? as placeholders for numbers, e.g. 'directory/idle\_??.png' will list
    'directory/idle_00.png', 'directory/idle_01.png' etc, and
    'directory/idle.png' will just list 'directory/idle.png'.
+   Lua Tables need lots of memory, so only use this when you have to.
 
    :type filename_template: class:`string`
    :arg filename_template: The filename template to use for the listing.
@@ -165,6 +168,7 @@ static int L_list_files(lua_State* L) {
 .. function:: list_directory(filename)
 
    Returns all file names contained in the given directory.
+   Lua Tables need lots of memory, so only use this when you have to.
 
    :type filename: class:`string`
    :arg filename: The directory to read.

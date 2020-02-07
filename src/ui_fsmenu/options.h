@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,6 +34,7 @@
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/base.h"
+#include "wui/sound_options.h"
 
 class FullscreenMenuOptions;
 class Section;
@@ -56,11 +57,6 @@ public:
 		int32_t border_snap_distance;
 		bool animate_map_panning;
 
-		// Sound options
-		bool music;
-		bool fx;
-		bool message_sound;
-
 		// Saving options
 		int32_t autosave;          // autosave interval in minutes
 		int32_t rolling_autosave;  // number of file to use for rolling autosave
@@ -71,6 +67,8 @@ public:
 		bool auto_roadbuild_mode;
 		bool transparent_chat;
 		bool single_watchwin;
+		bool ctrl_zoom;
+		bool game_clock;
 
 		// Language options
 		std::string language;
@@ -107,6 +105,8 @@ private:
 
 	// Saves the options and reloads the active tab
 	void clicked_apply();
+	// Restores old options when canceled
+	void clicked_cancel();
 
 	const uint32_t padding_;
 	uint32_t butw_;
@@ -143,9 +143,7 @@ private:
 	UI::SpinBox sb_dis_border_;
 
 	// Sound options
-	UI::Checkbox music_;
-	UI::Checkbox fx_;
-	UI::Checkbox message_sound_;
+	SoundOptions sound_options_;
 
 	// Saving options
 	UI::SpinBox sb_autosave_;
@@ -157,6 +155,8 @@ private:
 	UI::Checkbox auto_roadbuild_mode_;
 	UI::Checkbox transparent_chat_;
 	UI::Checkbox single_watchwin_;
+	UI::Checkbox ctrl_zoom_;
+	UI::Checkbox game_clock_;
 
 	OptionsCtrl::OptionsStruct os_;
 

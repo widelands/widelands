@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,14 +26,12 @@
 
 /**
  * Deletes the bob at the given location
-*/
+ */
 int32_t EditorDeleteCritterTool::handle_click_impl(
-   const Widelands::World&,
    const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-   EditorInteractive& parent,
+   EditorInteractive& eia,
    EditorActionArgs* args,
    Widelands::Map* map) {
-	Widelands::EditorGameBase& egbase = parent.egbase();
 	const int32_t radius = args->sel_radius;
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), radius));
@@ -41,7 +39,7 @@ int32_t EditorDeleteCritterTool::handle_click_impl(
 	do
 		if (Widelands::Bob* const bob = mr.location().field->get_first_bob()) {
 			args->old_bob_type.push_back(&bob->descr());
-			bob->remove(egbase);
+			bob->remove(eia.egbase());
 		} else {
 			args->old_bob_type.push_back(nullptr);
 		}
@@ -50,13 +48,12 @@ int32_t EditorDeleteCritterTool::handle_click_impl(
 }
 
 int32_t EditorDeleteCritterTool::handle_undo_impl(
-   const Widelands::World& world,
    const Widelands::NodeAndTriangle<Widelands::Coords>& center,
    EditorInteractive& parent,
    EditorActionArgs* args,
    Widelands::Map* map) {
 
-	uint32_t ret = parent.tools()->place_critter.handle_undo_impl(world, center, parent, args, map);
+	uint32_t ret = parent.tools()->place_critter.handle_undo_impl(center, parent, args, map);
 	args->old_bob_type.clear();
 	return ret;
 }

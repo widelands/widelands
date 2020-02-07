@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -101,11 +101,12 @@ Window::Window(Panel* const parent,
 	   VT_B_PIXMAP_THICKNESS, VT_B_PIXMAP_THICKNESS, TP_B_PIXMAP_THICKNESS, BT_B_PIXMAP_THICKNESS);
 	set_top_on_click(true);
 	set_layout_toplevel(true);
+	focus();
 }
 
 /**
  * Replace the current title with a new one
-*/
+ */
 void Window::set_title(const std::string& text) {
 	assert(!is_richtext(text));
 	title_ = text;
@@ -180,7 +181,7 @@ void Window::warp_mouse_to_fastclick_panel() {
 /**
  * Move the window so that it is inside the parent panel.
  * If configured, hang the border off the edge of the panel.
-*/
+ */
 void Window::move_inside_parent() {
 	if (Panel* const parent = get_parent()) {
 		int32_t px = get_x();
@@ -263,9 +264,9 @@ void Window::draw_border(RenderTarget& dst) {
 		//  top bar
 		static_assert(0 <= HZ_B_CORNER_PIXMAP_LEN, "assert(0 <= HZ_B_CORNER_PIXMAP_LEN) failed.");
 		for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN)
-			dst.blitrect(
-			   Vector2i(pos, 0), pic_top_, Recti(Vector2i(HZ_B_CORNER_PIXMAP_LEN, 0),
-			                                     HZ_B_MIDDLE_PIXMAP_LEN, TP_B_PIXMAP_THICKNESS));
+			dst.blitrect(Vector2i(pos, 0), pic_top_,
+			             Recti(Vector2i(HZ_B_CORNER_PIXMAP_LEN, 0), HZ_B_MIDDLE_PIXMAP_LEN,
+			                   TP_B_PIXMAP_THICKNESS));
 
 		// odd pixels of top bar and top right corner
 		const int32_t width = hz_bar_end - pos + HZ_B_CORNER_PIXMAP_LEN;
@@ -278,7 +279,8 @@ void Window::draw_border(RenderTarget& dst) {
 	if (!title_.empty()) {
 		// The title shouldn't be richtext, but we escape it just to make sure.
 		std::shared_ptr<const UI::RenderedText> text =
-		   autofit_ui_text(richtext_escape(title_), get_inner_w(), UI_FONT_CLR_FG, 13);
+		   autofit_text(richtext_escape(title_),
+		                g_gr->styles().font_style(UI::FontStyle::kWuiWindowTitle), get_inner_w());
 
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
 		Vector2i pos(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2);
@@ -373,7 +375,8 @@ bool Window::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my) {
 	//  TODO(unknown): This code is erroneous. It checks the current key state. What it
 	//  needs is the key state at the time the mouse was clicked. See the
 	//  usage comment for get_key_state.
-	if ((SDL_GetModState() & KMOD_CTRL && btn == SDL_BUTTON_LEFT) || btn == SDL_BUTTON_MIDDLE)
+	if ((SDL_GetModState() & KMOD_CTRL && btn == SDL_BUTTON_LEFT && my < VT_B_PIXMAP_THICKNESS) ||
+	    btn == SDL_BUTTON_MIDDLE)
 		is_minimal() ? restore() : minimize();
 	else if (btn == SDL_BUTTON_LEFT) {
 		dragging_ = true;
@@ -410,6 +413,25 @@ bool Window::handle_mousewheel(uint32_t, int32_t, int32_t) {
 	return true;
 }
 
+bool Window::handle_key(bool down, SDL_Keysym code) {
+	// Handles a key input and event and will close when pressing ESC
+
+	if (down) {
+		switch (code.sym) {
+		case SDLK_ESCAPE: {
+			die();
+			Panel* ch = get_next_sibling();
+			if (ch != nullptr)
+				ch->focus();
+			return true;
+		}
+		default:
+			break;
+		}
+	}
+	return UI::Panel::handle_key(down, code);
+}
+
 /**
  * Close the window. Overwrite this virtual method if you want
  * to take some action before the window is destroyed, or to
@@ -430,6 +452,7 @@ void Window::restore() {
 	set_inner_size(get_inner_w(), oldh_);
 	update_desired_size();
 	move_inside_parent();
+	set_handle_keypresses(true);
 }
 void Window::minimize() {
 	assert(!is_minimal_);
@@ -445,6 +468,7 @@ void Window::minimize() {
 	set_border(get_lborder(), get_rborder(), get_tborder(), 0);
 	set_size(get_w(), TP_B_PIXMAP_THICKNESS);
 	set_pos(Vector2i(x, y));  // If on border, this feels more natural
+	set_handle_keypresses(false);
 }
 
 /**
@@ -596,4 +620,4 @@ bool Window::handle_mousemove(const uint8_t, int32_t mx, int32_t my, int32_t, in
 	}
 	return true;
 }
-}
+}  // namespace UI

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2018 by the Widelands Development Team
+ * Copyright (C) 2012-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,8 +39,9 @@
  * 3: Between build 19 and build 20 - Added network relay for internet games
  * 4: Between build 19 and build 20 - Using CHAP for password authentication
  * 5: Build 20 - Removed obsolete TELL_IP, modifications on user and game listing [supported]
+ * 6: Between build 20 and build 21 - Added CHECK_PWD and PWD_OK commands
  */
-constexpr unsigned int kInternetGamingProtocolVersion = 5;
+constexpr unsigned int kInternetGamingProtocolVersion = 6;
 
 /**
  * The default timeout time after which the client tries to resend a package or even finally closes
@@ -93,7 +94,7 @@ static const std::string INTERNET_GAME_RUNNING = "RUNNING";  // Playing
  * metaserver and the clients.
  *
  * The network stream of the internet gaming protocol is split up into
- * packets (see \ref Deserializer, \ref RecvPacket, \ref SendPacket).
+ * packets (see \ref RecvPacket, \ref SendPacket).
  * Every packet starts with a single-byte command code.
  *
  * \note ALL PAYLOADS SHALL BE STRINGS - this is for easier handling and debugging of the
@@ -182,7 +183,29 @@ static const std::string IGPCMD_DISCONNECT = "DISCONNECT";
 static const std::string IGPCMD_LOGIN = "LOGIN";
 
 /**
- * This is sent by the metaserver after a IGPCMD_LOGIN by a registered client.
+ * The client tries to check the password of the user without doing a full login.
+ * Should be sent without logging in before.
+ *
+ * Payload:
+ * \li string:    protocol version (see kInternetGamingProtocolVersion)
+ * \li string:    client name
+ * \li string:    build_id of the client
+ *
+ * A IGPCMD_PWD_CHALLENGE exchange follows before the server replies with a IGPCMD_PWD_OK
+ * or IGPCMD_ERROR message.
+ *
+ * If the password is correct, the metaserver replies with a IGPCMD_PWD_OK command
+ * with the following payload:
+ * \li string:    client name. Will be the same as sent before.
+ * \li string:    clients rights (see client rights section above)
+ *
+ * If the password is wrong or some other error occurred, \ref IGPCMD_ERROR is returned.
+ */
+static const std::string IGPCMD_CHECK_PWD = "CHECK_PWD";
+static const std::string IGPCMD_PWD_OK = "PWD_OK";
+
+/**
+ * This is sent by the metaserver after a IGPCMD_LOGIN or IGPCMD_CHECK_PWD by a registered client.
  * This is the first message of the a protocol similar to the challenge handshake authentication
  * protocol (CHAP) for secure transmission of the users password.
  * The server sends the nonce for hashing:
@@ -274,6 +297,15 @@ static const std::string IGPCMD_PONG = "PONG";
  * (but not relogin) and after the motd got changed) and announcements by superusers.
  */
 static const std::string IGPCMD_CHAT = "CHAT";
+
+/**
+ * Sent by the client to issue a superuser command.
+ *
+ * The client sends this message to the metaserver with the following payload:
+ * \li string:    the command
+ * \li string:    arbitrary parameters.
+ */
+static const std::string IGPCMD_CMD = "CMD";
 
 /**
  * Sent by the metaserver to inform the client, that the list of games was changed. No payload is

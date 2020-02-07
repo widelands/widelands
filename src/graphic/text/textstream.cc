@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -105,7 +105,7 @@ std::string TextStream::till_any(std::string chars) {
 			break;
 
 		// Get rid of control characters
-		// http://en.cppreference.com/w/cpp/language/escape
+		// https://en.cppreference.com/w/cpp/language/escape
 		switch (text_[j]) {
 		case '\a':
 		case '\b':
@@ -164,4 +164,4 @@ std::string TextStream::parse_string() {
 std::string TextStream::remaining_text() {
 	return text_.substr(pos_, end_ - pos_);
 }
-}
+}  // namespace RT

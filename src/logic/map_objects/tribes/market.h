@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,7 @@ namespace Widelands {
 
 class MarketDescr : public BuildingDescr {
 public:
-	MarketDescr(const std::string& init_descname, const LuaTable& t, EditorGameBase& egbase);
+	MarketDescr(const std::string& init_descname, const LuaTable& t, Tribes& tribes);
 	~MarketDescr() override {
 	}
 

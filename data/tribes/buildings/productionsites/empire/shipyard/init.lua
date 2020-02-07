@@ -8,7 +8,7 @@ tribes:new_productionsite_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   needs_seafaring = true,
+   map_check = {"seafaring"},
 
    buildcost = {
       log = 3,
@@ -47,6 +47,10 @@ tribes:new_productionsite_type {
       prohibited_till = 1050
    },
 
+   indicate_workarea_overlaps = {
+      empire_shipyard = false,
+   },
+
    working_positions = {
       empire_shipwright = 1
    },
@@ -72,9 +76,8 @@ tribes:new_productionsite_type {
          descname = _"constructing a ship",
          actions = {
             "checkmap=seafaring",
-            "sleep=10000",
             "construct=empire_shipconstruction buildship 6",
-            "sleep=10000",
+            "sleep=20000",
          }
       },
       ship_preparation = {

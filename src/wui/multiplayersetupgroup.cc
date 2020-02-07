@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2018 by the Widelands Development Team
+ * Copyright (C) 2010-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,12 +32,10 @@
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "graphic/playercolor.h"
-#include "graphic/text_constants.h"
 #include "logic/game.h"
 #include "logic/game_settings.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
-#include "logic/widelands.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/mouse_constants.h"
@@ -56,8 +54,17 @@ struct MultiPlayerClientGroup : public UI::Box {
 	                       PlayerSlot id,
 	                       GameSettingsProvider* const settings)
 	   : UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h, kPadding),
-	     slot_dropdown_(
-	        this, 0, 0, h, 200, h, _("Role"), UI::DropdownType::kPictorial, UI::PanelStyle::kFsMenu),
+	     slot_dropdown_(this,
+	                    (boost::format("dropdown_slot%d") % static_cast<unsigned int>(id)).str(),
+	                    0,
+	                    0,
+	                    h,
+	                    16,
+	                    h,
+	                    _("Role"),
+	                    UI::DropdownType::kPictorial,
+	                    UI::PanelStyle::kFsMenu,
+	                    UI::ButtonStyle::kFsMenuSecondary),
 	     // Name needs to be initialized after the dropdown, otherwise the layout function will
 	     // crash.
 	     name(this, 0, 0, w - h - UI::Scrollbar::kSize * 11 / 5, h),
@@ -93,7 +100,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 			   case NoteGameSettings::Action::kPlayer:
 				   break;
 			   }
-			});
+		   });
 	}
 
 	/// Update dropdown sizes
@@ -189,34 +196,49 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	            (boost::format(_("Player %u")) % static_cast<unsigned int>(id_ + 1)).str(),
 	            UI::Button::VisualState::kFlat),
 	     type_dropdown_(this,
+	                    (boost::format("dropdown_type%d") % static_cast<unsigned int>(id)).str(),
 	                    0,
 	                    0,
 	                    50,
-	                    200,
+	                    16,
 	                    h,
 	                    _("Type"),
 	                    UI::DropdownType::kPictorial,
-	                    UI::PanelStyle::kFsMenu),
+	                    UI::PanelStyle::kFsMenu,
+	                    UI::ButtonStyle::kFsMenuSecondary),
 	     tribes_dropdown_(this,
+	                      (boost::format("dropdown_tribes%d") % static_cast<unsigned int>(id)).str(),
 	                      0,
 	                      0,
 	                      50,
-	                      200,
+	                      16,
 	                      h,
 	                      _("Tribe"),
 	                      UI::DropdownType::kPictorial,
-	                      UI::PanelStyle::kFsMenu),
+	                      UI::PanelStyle::kFsMenu,
+	                      UI::ButtonStyle::kFsMenuSecondary),
 	     init_dropdown_(this,
+	                    (boost::format("dropdown_init%d") % static_cast<unsigned int>(id)).str(),
 	                    0,
 	                    0,
 	                    w - 4 * h - 3 * kPadding,
-	                    200,
+	                    16,
 	                    h,
 	                    "",
 	                    UI::DropdownType::kTextualNarrow,
-	                    UI::PanelStyle::kFsMenu),
-	     team_dropdown_(
-	        this, 0, 0, h, 200, h, _("Team"), UI::DropdownType::kPictorial, UI::PanelStyle::kFsMenu),
+	                    UI::PanelStyle::kFsMenu,
+	                    UI::ButtonStyle::kFsMenuSecondary),
+	     team_dropdown_(this,
+	                    (boost::format("dropdown_team%d") % static_cast<unsigned int>(id)).str(),
+	                    0,
+	                    0,
+	                    h,
+	                    16,
+	                    h,
+	                    _("Team"),
+	                    UI::DropdownType::kPictorial,
+	                    UI::PanelStyle::kFsMenu,
+	                    UI::ButtonStyle::kFsMenuSecondary),
 	     last_state_(PlayerSettings::State::kClosed),
 	     type_selection_locked_(false),
 	     tribe_selection_locked_(false),
@@ -273,7 +295,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					   update();
 				   }
 			   }
-			});
+		   });
 
 		// Init dropdowns
 		update();
@@ -578,7 +600,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			tribes_dropdown_.set_enabled(false);
 			init_dropdown_.set_visible(false);
 			init_dropdown_.set_enabled(false);
-		} else {
+		} else {  // kHuman, kShared, kComputer
 			rebuild_tribes_dropdown(settings);
 			rebuild_init_dropdown(settings);
 			rebuild_team_dropdown(settings);

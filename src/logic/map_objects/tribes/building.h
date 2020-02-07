@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,11 +32,11 @@
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/attack_target.h"
 #include "logic/map_objects/tribes/bill_of_materials.h"
+#include "logic/map_objects/tribes/building_settings.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "logic/map_objects/tribes/workarea_info.h"
 #include "logic/message.h"
-#include "logic/widelands.h"
 #include "notifications/notifications.h"
 #include "scripting/lua_table.h"
 
@@ -52,26 +52,34 @@ class InputQueue;
 
 class Building;
 
-#define LOW_PRIORITY 2
-#define DEFAULT_PRIORITY 4
-#define HIGH_PRIORITY 8
+constexpr int32_t kPriorityLow = 2;
+constexpr int32_t kPriorityNormal = 4;
+constexpr int32_t kPriorityHigh = 8;
+
+/* The value "" means that the DescriptionIndex is a normal building, as happens e.g. when enhancing
+ * a building. The value "tribe"/"world" means that the DescriptionIndex refers to an immovable of
+ * OwnerType kTribe/kWorld, as happens e.g. with amazon treetop sentry. This immovable
+ * should therefore always be painted below the building image.
+ */
+using FormerBuildings = std::vector<std::pair<DescriptionIndex, std::string>>;
 
 /*
  * Common to all buildings!
  */
 class BuildingDescr : public MapObjectDescr {
 public:
-	using FormerBuildings = std::vector<DescriptionIndex>;
-
 	BuildingDescr(const std::string& init_descname,
 	              MapObjectType type,
 	              const LuaTable& t,
-	              EditorGameBase& egbase);
+	              Tribes& tribes);
 	~BuildingDescr() override {
 	}
 
 	bool is_buildable() const {
 		return buildable_;
+	}
+	bool can_be_dismantled() const {
+		return can_be_dismantled_;
 	}
 	bool is_destructible() const {
 		return destructible_;
@@ -120,6 +128,11 @@ public:
 	bool needs_seafaring() const {
 		return needs_seafaring_;
 	}
+	bool needs_waterways() const {
+		return needs_waterways_;
+	}
+
+	bool is_useful_on_map(bool seafaring_allowed, bool waterways_allowed) const;
 
 	// Returns the enhancement this building can become or
 	// INVALID_INDEX if it cannot be enhanced.
@@ -166,14 +179,19 @@ public:
 
 	uint32_t get_unoccupied_animation() const;
 
+	DescriptionIndex get_built_over_immovable() const {
+		return built_over_immovable_;
+	}
+
 protected:
 	virtual Building& create_object() const = 0;
 	Building& create_constructionsite() const;
-	const EditorGameBase& egbase_;
 
 private:
-	bool buildable_;     // the player can build this himself
-	bool destructible_;  // the player can destruct this himself
+	const Tribes& tribes_;
+	const bool buildable_;          // the player can build this himself
+	const bool can_be_dismantled_;  // the player can dismantle this building
+	const bool destructible_;       // the player can destruct this himself
 	Buildcost buildcost_;
 	Buildcost return_dismantle_;  // Returned wares on dismantle
 	Buildcost enhance_cost_;      // cost for enhancing
@@ -182,11 +200,15 @@ private:
 	bool mine_;
 	bool port_;
 	bool needs_seafaring_;  // This building should only be built on seafaring maps.
+	bool needs_waterways_;  // This building should only be built on maps with waterways/ferries
+	                        // enabled
 	DescriptionIndex enhancement_;
 	DescriptionIndex
 	   enhanced_from_;        // The building this building was enhanced from, or INVALID_INDEX
 	bool enhanced_building_;  // if it is one, it is bulldozable
 	BuildingHints hints_;     // hints (knowledge) for computer players
+	DescriptionIndex built_over_immovable_;  // can be built only on nodes where an immovable with
+	                                         // this attribute stands
 
 	// for migration, 0 is the default, meaning get_conquers() + 4
 	uint32_t vision_range_;
@@ -220,9 +242,9 @@ public:
 		PCap_Enhancable = 1 << 2,  // can be enhanced to something
 	};
 
-	using FormerBuildings = std::vector<DescriptionIndex>;
-
 public:
+	enum class InfoStringFormat { kCensus, kStatistics, kTooltip };
+
 	explicit Building(const BuildingDescr&);
 
 	void load_finish(EditorGameBase&) override;
@@ -238,7 +260,7 @@ public:
 	}
 	PositionList get_positions(const EditorGameBase&) const override;
 
-	std::string info_string(MapObject::InfoStringType format) override;
+	std::string info_string(const InfoStringFormat& format);
 
 	// Return the overlay string that is displayed on the map view when enabled
 	// by the player.
@@ -261,8 +283,8 @@ public:
 
 	// Get/Set the priority for this waretype for this building. 'type' defines
 	// if this is for a worker or a ware, 'index' is the type of worker or ware.
-	// If 'adjust' is false, the three possible states HIGH_PRIORITY,
-	// DEFAULT_PRIORITY and LOW_PRIORITY are returned, otherwise numerical
+	// If 'adjust' is false, the three possible states kPriorityHigh,
+	// kPriorityNormal and kPriorityLow are returned, otherwise numerical
 	// values adjusted to the preciousness of the ware in general are returned.
 	virtual int32_t get_priority(WareWorker type, DescriptionIndex, bool adjust = true) const;
 	void set_priority(int32_t type, DescriptionIndex ware_index, int32_t new_priority);
@@ -296,6 +318,10 @@ public:
 	void add_worker(Worker&) override;
 	void remove_worker(Worker&) override;
 
+	virtual const BuildingSettings* create_building_settings() const {
+		return nullptr;
+	}
+
 	// AttackTarget object associated with this building. If the building can
 	// never be attacked (for example productionsites) this will be nullptr.
 	const AttackTarget* attack_target() const {
@@ -321,20 +347,26 @@ public:
 	                  uint32_t throttle_time = 0,
 	                  uint32_t throttle_radius = 0);
 
+	void start_animation(EditorGameBase&, uint32_t anim);
+
 protected:
 	// Updates 'statistics_string' with the string that should be displayed for
 	// this building right now. Overwritten by child classes.
 	virtual void update_statistics_string(std::string*) {
 	}
 
-	void start_animation(EditorGameBase&, uint32_t anim);
-
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 
+	void draw(uint32_t gametime,
+	          InfoToDraw info_to_draw,
+	          const Vector2f& point_on_dst,
+	          const Coords& coords,
+	          float scale,
+	          RenderTarget* dst) override;
 	void
-	draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, RenderTarget* dst) override;
+	draw_info(InfoToDraw info_to_draw, const Vector2f& point_on_dst, float scale, RenderTarget* dst);
 
 	void set_seeing(bool see);
 	void set_attack_target(AttackTarget* new_attack_target);
@@ -361,12 +393,13 @@ protected:
 
 	// The former buildings names, with the current one in last position.
 	FormerBuildings old_buildings_;
+	const MapObjectDescr* was_immovable_;
 
 private:
 	std::string statistics_string_;
 	AttackTarget* attack_target_;      // owned by the base classes, set by 'set_attack_target'.
 	SoldierControl* soldier_control_;  // owned by the base classes, set by 'set_soldier_control'.
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_BUILDING_H

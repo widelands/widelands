@@ -1,19 +1,5 @@
 dirname = path.dirname (__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files (dirname .. "idle_??.png"),
-      hotspot = {8, 23},
-   },
-   hacking = {
-      pictures = path.list_files (dirname .. "hacking_??.png"),
-      hotspot = { 17, 31 },
-      fps = 10
-   }
-}
-add_walking_animations (animations, "walk", dirname, "walk", {11, 24}, 15)
-add_walking_animations (animations, "walkload", dirname, "walkload", {10, 26}, 15)
-
 tribes:new_worker_type {
    msgctxt = "frisians_worker",
    name = "frisians_stonemason",
@@ -32,12 +18,51 @@ tribes:new_worker_type {
       cut_granite = {
          "findobject=attrib:rocks radius:6",
          "walk=object",
-         "animate=hacking 10000",
+         "animate=hacking 17500",
          "callobject=shrink",
          "createware=granite",
          "return"
       }
    },
 
-   animations = animations,
+   ware_hotspot = {0, 20},
+
+   spritesheets = {
+      walk = {
+         directory = dirname,
+         basename = "walk",
+         fps = 15,
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         directional = true,
+         hotspot = {11, 24}
+      },
+      walkload = {
+         directory = dirname,
+         basename = "walkload",
+         fps = 15,
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         directional = true,
+         hotspot = {10, 26}
+      },
+      hacking = {
+         directory = dirname,
+         basename = "hacking",
+         fps = 10,
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         hotspot = {17, 31}
+      },
+   },
+   animations = {
+      idle = {
+         directory = dirname,
+         basename = "idle",
+         hotspot = {8, 23}
+      },
+   },
 }

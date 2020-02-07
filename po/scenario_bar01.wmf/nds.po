@@ -1,15 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-05 07:05+0000\n"
-"PO-Revision-Date: 2018-10-06 14:54+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2019-08-10 17:15+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -70,7 +70,7 @@ msgid ""
 " will search for ores; otherwise, they would search for water. Then build a "
 "mine for both kinds of resources that they will find, choosing the "
 "appropriate mine to be built:"
-msgstr "Daarto mutt du eene Fahn up de Sied vun de Barg im Oosten upstellen (up eener Barg-Landskupp, nich eener Bargmede). Wenn du de neie Fahn anklickst, kannst du daar Schattsökers henschicken. Wenn de Fahn up eenem Barg is, söcht de Schattsöker na Mineraalen, anners Water. Bau dann een Bargwark för elkeen vun de beiden Mineraale, wat se finnen. Um de rechte Aard vun Bargwark uttokören:"
+msgstr "Daarto mutt du eene Fahn up de Sied vun de Barg im Oosten upstellen (up eener Barg-Landskupp, nich eener Bargmede). Wenn du de neje Fahn anklickst, kannst du daar Schattsökers henschicken. Wenn de Fahn up eenem Barg is, söcht de Schattsöker na Mineraalen, anners Water. Bau dann een Bargwark för elkeen vun de beiden Mineraale, wat se finnen. Um de rechte Aard vun Bargwark uttokören:"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:46
 msgid "a bit of coal"
@@ -141,7 +141,7 @@ msgstr "Een Jäger kann Deerten jagen, een Deertentüchter kümmert sük daarum,
 msgid ""
 "This is only the first example of a ware which has to be refined before "
 "being used in a secondary building – others will follow."
-msgstr "Dat is blot een Bispööl för eene Ware, de eerst verarbeidt worden mutt, ehr se in eenem tweeden Huus bruukt worden kann – 't gifft mennig annere Bispölen."
+msgstr "Dat is blot een Bispööl för eene Waar, de eerst verarbeidt worden mutt, ehr se in eenem tweeden Huus bruukt worden kann – 't gifft mennig anner Bispölen."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:70
 msgid "Bake bread"
@@ -157,7 +157,7 @@ msgid ""
 "farms. The wheat of the farms has to be processed with water in a bakery "
 "before it becomes edible. You can obtain water by building a well on a spot "
 "where your geologists have found a water source."
-msgstr "Annere Wege, Spiesen – annere Aarden vun Spiesen – to produzeren, sünd Fiskers un Buurdereen. De Weit vun Buurdereen mutt mit Water in eener Backeree verarbeidt worden, ehr man 't eten kann. Du kriggst Water, indeem du eene Well an eener Stee baust, waar een Schattsöker Water funnen hett."
+msgstr "Anner Wege, Spiesen – anner Aarden vun Spiesen – to produzeren, sünd Fiskers un Buurdereen. De Weit vun Buurdereen mutt mit Water in eener Backeree verarbeidt worden, ehr man 't eten kann. Du kriggst Water, indeem du eene Well an eener Stee baust, waar een Schattsöker Water funnen hett."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:78
 msgid "Refine your mined resources"
@@ -185,7 +185,7 @@ msgstr "Bau een Bargwark und de Kneipe ut un bau eene Lütte Broeree."
 msgid ""
 "Enhance the coal mine or the iron mine to a deep mine, and enhance the "
 "tavern to an inn."
-msgstr "Bau dat Köhle-Bargwark oder dat Iesen-Bargwark to eenem Deepen Bargwark ut un bau de Kneipe to eenem Kroog ut."
+msgstr "Bau dat Köhle-Bargwark of dat Iesen-Bargwark to eenem Deepen Bargwark ut un bau de Kneipe to eenem Kroog ut."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:90
 msgid "Also build a micro brewery."
@@ -213,7 +213,7 @@ msgid ""
 "building – for instance, deep mines need snacks instead of rations. You will"
 " have to enhance your tavern to an inn in order to produce snacks out of "
 "pitta bread AND a second kind of food (meat or fish) AND beer."
-msgstr "Utbaute Husen bruuken meestens mehr Waren as dat normaale Huus – to 'n Bispööl, Deepe Bargwarken bruuken Spiesen un nich Happen. Du mutt diene Kneipe to eenem Kroog utbauen, um Spiesen ut Pitta-Brood UN eener annern Aard vun Eten (Fleesk oder Fiss) UN Beer to produzeren."
+msgstr "Utbaute Husen bruuken meestens mehr Waren as dat normaale Huus – to 'n Bispööl, Deepe Bargwarken bruuken Spiesen un nich Happen. Du mutt diene Kneipe to eenem Kroog utbauen, um Spiesen ut Pitta-Brood UN eener annern Aard vun Eten (Fleesk of Fiss) UN Beer to produzeren."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:94
 msgid ""
@@ -244,14 +244,14 @@ msgstr "Bau eene Kalkbranneree un eene Köhle-Wirtschaft"
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:110
 msgid ""
 "Build a lime kiln fed by a well, and by a charcoal kiln or by a coal mine"
-msgstr "Bau eene Kalkbranneree, de vun eener Well versörgt word, un eene Holtköhl-Branneree oder een Köhle-Bargwark"
+msgstr "Bau eene Kalkbranneree, de vun eener Well versörgt word, un eene Holtköhl-Branneree of een Köhle-Bargwark"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:111
 msgid ""
 "Better buildings may also require other improved materials besides "
 "blackwood. One of these is grout, which is produced out of granite, water "
 "and coal by a lime-burner."
-msgstr "Grotere Husen bruuken noch annere gode Materialien as Haartholt. Eens daarvun is Mörtel, wat vun eenem Kalkbranner ut Flint, Water un Köhle produzeert word."
+msgstr "Grotere Husen bruuken noch anner gode Materialien as Haartholt. Eens daarvun is Mörtel, wat vun eenem Kalkbranner ut Flint, Water un Köhle produzeert word."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:112
 msgid ""
@@ -272,13 +272,13 @@ msgid ""
 "Coal can be obtained by building a charcoal kiln or a coal mine. Burning "
 "charcoal out of logs is slow. You should only build a charcoal kiln when no "
 "coal is available."
-msgstr "Köhle kriggst du, indeem du eene Holtköhl-Branneree oder een Köhle-Bargwark baust. Holtköhl ut Boomstammen to brannen is langsaam; daarum sallst du Holtköhl-Brannereen blot dann bauen, wenn 't keene Köhle in Bargen gifft."
+msgstr "Köhle kriggst du, indeem du eene Holtköhl-Branneree of een Köhle-Bargwark baust. Holtköhl ut Boomstammen to brannen is langsaam; daarum sallst du Holtköhl-Brannereen blot dann bauen, wenn 't keene Köhle in Bargen gifft."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:115
 msgid ""
 "Build a lime kiln and a well. Additionally, build either a charcoal kiln or "
 "a coal mine for coal supply."
-msgstr "Bau eene Kalkbranneree un eene Well. Bau butendeem eene Holtköhl-Branneree oder een Köhle-Bargwark för de Köhle-Versörgung."
+msgstr "Bau eene Kalkbranneree un eene Well. Bau butendeem eene Holtköhl-Branneree of een Köhle-Bargwark för de Köhle-Versörgung."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:120
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:122
@@ -288,10 +288,10 @@ msgstr "Bau eene Reitplanteree"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:123
 msgid ""
-"The third material necessary for improved buildings is thatch reed, used to "
-"cover roofs. Thatch reed is planted by a gardener around his building, the "
-"reed yard."
-msgstr "Dat darde Baumaterial för gode Husen is Reit, wat man för Reitdacken bruukt. Reit word vun eenem Gaardner in de Naberskupp vun sienem Huus, de Reitplanteree, anplant."
+"The third material necessary for improved buildings is reed, used to cover "
+"roofs. Reed fields are planted by a gardener around his building, the reed "
+"yard."
+msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:129
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:131
@@ -309,7 +309,7 @@ msgstr "Wenn Straten lange starken Verkehr hebben, is een Lastendrager mennigtie
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:133
 msgid "Oxen are bred in cattle farms out of wheat and water."
-msgstr "Ossen worden in Buurdereen mit Weit un Water tüchtet."
+msgstr "Ossen worden in Buurdereen mit Weit un Water tücht."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:143
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:155
@@ -372,7 +372,7 @@ msgid ""
 "As father told me, there are times to fight and times to lie and wait, "
 "trying not to fall asleep or die before the right time comes. And so I do "
 "wait."
-msgstr "As Vader mi seggt hett, gifft 't eene Tied tum Kä,pen un eene Tied tum Liggen un Ofwachten; man mutt versöken, nich intoslapen oder to starven ehr de rechte Tied kummt. Un also wacht ick."
+msgstr "As Vader mi seggt hett, gifft 't eene Tied tum Kä,pen un eene Tied tum Liggen un Ofwachten; man mutt versöken, nich intoslapen of to starven ehr de rechte Tied kummt. Un also wacht ick."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:188
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:201
@@ -388,7 +388,7 @@ msgstr "Troon schüddekoppt …"
 msgid ""
 "Yet the war goes on. More and more of our brothers and sisters flee the "
 "brutal war raging in the capital beneath the trees."
-msgstr "Aber de Krieg gaht wieder. Mehr un mehr vun uns' Bröörs un Süsters flüchten vör de grieselken Krieg, wat in de Höövdstadt unner de Bomen umgaht."
+msgstr "Aver de Krieg gaht wieder. Mehr un mehr vun uns' Bröörs un Süsters flüchten vör de grieselken Krieg, wat in de Höövdstadt unner de Bomen umgaht."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:194
@@ -398,7 +398,7 @@ msgid ""
 " Yet whenever I close my eyes, I see the fortress my father built consumed "
 "by flames. The Throne Among the Trees, the symbol of unity and peace among "
 "our kin, became the wedge that drives us apart."
-msgstr "Wat se över de Daden vun uns' Verwandten vertellen, is trürog to hören. Ick hebb völe Nachten verbrocht, waak to liggen, sünner Ruh, doodmöjer as ick jemaals gloovt hebb, dat ick 't wesen kann. Aber alltied wann ick miene Ogen sluut, süch ick de Schanz, de mien Vader baut hett, in Flammen riesen. De Bomen-Throon, Teken vun Eenheid un Free tüsken uns' Anverwandten, is de Kiel, wat uns utnanner drifft."
+msgstr "Wat se över de Daden vun uns' Verwandten vertellen, is trürog to hören. Ick hebb völe Nachten verbrocht, waak to liggen, sünner Ruh, doodmöjer as ick jemaals gloovt hebb, dat ick 't wesen kann. Aver alltied wann ick miene Ogen sluut, süch ick de Schanz, de mien Vader baut hett, in Flammen riesen. De Bomen-Throon, Teken vun Eenheid un Free tüsken uns' Anverwandten, is de Kiel, wat uns utnanner drifft."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:204
@@ -417,7 +417,7 @@ msgstr "Vandaag hebben miene Jägers Mannen, Froen un lütte Kinners vör mi bro
 msgid ""
 "To rise against whoever threatens our very existence, even though it may be "
 "one of your own blood or mind?"
-msgstr "Tegen elkeen uptostahn, wat uns' blotes Leven de Fuusten wiest, ok wenn 't vun eens egenen Blood oder Verstand is?"
+msgstr "Tegen elkeen uptostahn, wat uns' blotes Leven de Fuusten wiest, ok wenn 't vun eens egenen Blood of Verstand is?"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:213
 msgid "Thron is Considering the Future"
@@ -431,7 +431,7 @@ msgid ""
 "more than huts and barracks. I never intended to stay out here in the "
 "wilderness for so long – but I never thought my brothers would engage in "
 "this senseless battle for so long either."
-msgstr "As de Dagen vörbigahn, kummt mi Boldreth mehr un mehr rumrieten vör. Miene Kameraden verlesen hör Mood as de kolle Tied nahder kummt, un wi leven immer noch in nix as Kaaten un Brattsen. Ick harr nooit vörhatt, so lang in de Wildernis to blieven – aber ick hett ok nooit docht, dat se sük so lang mit deesem unnützen Krieg befaten."
+msgstr "As de Dagen vörbigahn, kummt mi Boldreth mehr un mehr rumrieten vör. Miene Kameraden verlesen hör Mood as de kolle Tied nahder kummt, un wi leven immer noch in nix as Kaaten un Brattsen. Ick harr nooit vörhatt, so lang in de Wildernis to blieven – aver ick hett ok nooit docht, dat se sük so lang mit deesem unnützen Krieg befaten."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:219
@@ -495,7 +495,7 @@ msgid ""
 "But never forget – these forests are our heritage, entrusted upon us by our "
 "ancestors. We must always respect and care for them. What we take, we must "
 "give back again."
-msgstr "Aber vergeet nooit – deese Walden sünd uns' Arve, vun uns' Vörollen uns anvertroot. Wi mutten se alltied achten un uns um se kümmern. Wat wi nehmen, mutten wi weer torügg geven."
+msgstr "Aver vergeet nooit – deese Walden sünd uns' Arve, vun uns' Vörollen uns anvertroot. Wi mutten se alltied achten un uns um se kümmern. Wat wi nehmen, mutten wi weer torügg geven."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:245
@@ -506,7 +506,7 @@ msgstr "Also mutten wi, um de vun uns umkappten Bomen uttowesseln, een paar Boom
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:251
 msgid "In the Night"
-msgstr "'s Nachts"
+msgstr "In de Nacht"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:252
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:266
@@ -1027,13 +1027,15 @@ msgid ""
 "Therefore, they have decided to join us, hoping that we can help each other."
 msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "“%s”"
+msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Neie Upgaav"
-msgstr[1] "Neie Upgaven"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

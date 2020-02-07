@@ -21,8 +21,8 @@ animations = {
       fps = 5
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {10, 23}, 10)
-add_walking_animations(animations, "walkload", dirname, "walk", {10, 23}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {10, 23}, 10)
+add_directional_animation(animations, "walkload", dirname, "walk", {10, 23}, 10)
 
 
 tribes:new_worker_type {
@@ -43,10 +43,10 @@ tribes:new_worker_type {
       plant = {
          "findspace=size:any radius:5 avoid:field saplingsearches:12",
          "walk=coords",
-         "animate=dig 2000", -- Play a planting animation
-         "animate=planting 1000", -- Play a planting animation
+         "animate=dig 3000", -- Play a planting animation
+         "animate=planting 2000", -- Play a planting animation
          "plant=attrib:tree_sapling",
-         "animate=water 2000",
+         "animate=water 3000",
          "return"
       }
    },

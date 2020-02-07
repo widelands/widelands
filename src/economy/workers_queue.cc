@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,7 @@ namespace Widelands {
 
 /**
  * Pre-initialize a WorkersQueue
-*/
+ */
 WorkersQueue::WorkersQueue(PlayerImmovable& init_owner,
                            DescriptionIndex const init_ware,
                            uint8_t const init_max_size)
@@ -46,7 +46,7 @@ WorkersQueue::WorkersQueue(PlayerImmovable& init_owner,
 
 /**
  * Clear the queue appropriately.
-*/
+ */
 void WorkersQueue::cleanup() {
 	assert(index_ != INVALID_INDEX);
 
@@ -62,7 +62,7 @@ void WorkersQueue::cleanup() {
 
 /**
  * Called when a worker arrives at the owning building.
-*/
+ */
 void WorkersQueue::entered(
 #ifndef NDEBUG
    DescriptionIndex index,
@@ -210,4 +210,4 @@ void WorkersQueue::read_child(FileRead& fr, Game&, MapObjectLoader& mol) {
 		throw GameDataError("workersqueue: %s", e.what());
 	}
 }
-}
+}  // namespace Widelands

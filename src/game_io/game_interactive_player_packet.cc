@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,8 @@
 #include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 #include "wui/interactive_player.h"
 #include "wui/mapview.h"
 
@@ -32,16 +34,16 @@ namespace Widelands {
 
 namespace {
 
-constexpr uint16_t kCurrentPacketVersion = 4;
+constexpr uint16_t kCurrentPacketVersion = 5;
 
 }  // namespace
 
-void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
+void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoader* mol) {
 	try {
 		FileRead fr;
 		fr.open(fs, "binary/interactive_player");
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version <= kCurrentPacketVersion && packet_version >= 4) {
 			PlayerNumber player_number = fr.unsigned_8();
 			if (!(0 < player_number && player_number <= game.map().get_nrplayers())) {
 				throw GameDataError("Invalid player number: %i.", player_number);
@@ -92,6 +94,17 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 						ibase->set_landmark(i, view);
 					}
 				}
+
+				if (packet_version == kCurrentPacketVersion) {
+					size_t nr_port_spaces = fr.unsigned_32();
+					for (size_t i = 0; i < nr_port_spaces; ++i) {
+						uint32_t serial = fr.unsigned_32();
+						int16_t x = fr.signed_16();
+						int16_t y = fr.signed_16();
+						ibase->get_expedition_port_spaces().emplace(
+						   &mol->get<Widelands::Ship>(serial), Widelands::Coords(x, y));
+					}
+				}
 			}
 		} else {
 			throw UnhandledVersionError(
@@ -105,7 +118,7 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 /*
  * Write Function
  */
-void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const) {
+void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const mos) {
 	FileWrite fw;
 
 	fw.unsigned_16(kCurrentPacketVersion);
@@ -138,8 +151,15 @@ void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSav
 			fw.float_32(landmark.view.viewpoint.y);
 			fw.float_32(landmark.view.zoom);
 		}
+
+		fw.unsigned_32(ibase->get_expedition_port_spaces().size());
+		for (const auto& pair : ibase->get_expedition_port_spaces()) {
+			fw.unsigned_32(mos->get_object_file_index(*pair.first));
+			fw.signed_16(pair.second.x);
+			fw.signed_16(pair.second.y);
+		}
 	}
 
 	fw.write(fs, "binary/interactive_player");
 }
-}
+}  // namespace Widelands

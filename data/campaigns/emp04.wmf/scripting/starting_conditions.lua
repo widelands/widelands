@@ -20,7 +20,7 @@ place_building_in_region(p3, "empire_temple_of_vesta", {field_warehouse}, {worke
    r4 = p3:place_road(field_mill.immovable.flag, "br", "r", true)
 
 p3:forbid_buildings("all")
-field_warehouse.brn.immovable.economy:set_ware_target_quantity("beer", 180)
+field_warehouse.brn.immovable.ware_economy:set_target_quantity("beer", 180)
 
 -- =======================================================================
 --                                 Player 1
@@ -224,7 +224,7 @@ prefilled_buildings(p2,
       scythe = 6,
       shovel = 4,
       snack = 3,
-      thatch_reed = 24,
+      reed = 24,
    },
    workers = {
       barbarians_blacksmith = 2,

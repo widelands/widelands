@@ -43,6 +43,11 @@ tribes:new_productionsite_type {
       empire_miner_master = 1
    },
 
+   indicate_workarea_overlaps = {
+      empire_marblemine = false,
+      empire_marblemine_deep = false,
+   },
+
    inputs = {
       { name = "meal", amount = 6 },
       { name = "wine", amount = 6 }
@@ -57,9 +62,9 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
          descname = _"mining marble",
          actions = {
-            "sleep=40000",
             "return=skipped unless economy needs marble or economy needs granite",
             "consume=meal wine",
+            "sleep=40000",
             "call=mine_produce_marble",
             "call=mine_produce_granite",
             "call=mine_produce_marble",

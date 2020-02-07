@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,8 +21,8 @@
 #define WL_LOGIC_PLAYER_H
 
 #include <memory>
-#include <unordered_set>
 #include <unordered_map>
+#include <unordered_set>
 
 #include "base/macros.h"
 #include "economy/economy.h"
@@ -37,6 +37,7 @@
 #include "logic/message_queue.h"
 #include "logic/see_unsee_node.h"
 #include "logic/widelands.h"
+#include "sound/constants.h"
 
 class Node;
 namespace Widelands {
@@ -47,7 +48,9 @@ class Soldier;
 class TrainingSite;
 struct Flag;
 class TribeDescr;
+struct RoadBase;
 struct Road;
+struct Waterway;
 struct AttackController;
 
 /**
@@ -148,6 +151,11 @@ public:
 
 	bool is_hostile(const Player&) const;
 
+	/**
+	 * Returns whether the player lost the last warehouse.
+	 */
+	bool is_defeated() const;
+
 	// For cheating
 	void set_see_all(bool const t) {
 		see_all_ = t;
@@ -218,7 +226,9 @@ public:
 		Field()
 		   : military_influence(0),
 		     vision(0),
-		     roads(0),
+		     r_e(RoadSegment::kNone),
+		     r_se(RoadSegment::kNone),
+		     r_sw(RoadSegment::kNone),
 		     owner(0),
 		     time_node_last_unseen(0),
 		     map_object_descr(nullptr),
@@ -297,7 +307,14 @@ public:
 		 */
 		Widelands::Field::Terrains terrains;
 
-		uint8_t roads;
+		/**
+		 * The road types of the 3 edges, as far as this player knows.
+		 * Each value is only valid when this player has seen this node
+		 * or the node to the the edge leads up to.
+		 */
+		RoadSegment r_e;
+		RoadSegment r_se;
+		RoadSegment r_sw;
 
 		/**
 		 * The owner of this node, as far as this player knows.
@@ -318,24 +335,24 @@ public:
 		/// east, as far as this player knows.
 		/// Only valid when this player has seen this node or the node to the
 		/// east.
-		uint8_t road_e() const {
-			return roads & RoadType::kMask;
+		RoadSegment road_e() const {
+			return r_e;
 		}
 
 		/// Whether there is a road between this node and the node to the
 		/// southeast, as far as this player knows.
 		/// Only valid when this player has seen this node or the node to the
 		/// southeast.
-		uint8_t road_se() const {
-			return roads >> RoadType::kSouthEast & RoadType::kMask;
+		RoadSegment road_se() const {
+			return r_se;
 		}
 
 		/// Whether there is a road between this node and the node to the
 		/// southwest, as far as this player knows.
 		/// Only valid when this player has seen this node or the node to the
 		/// southwest.
-		uint8_t road_sw() const {
-			return roads >> RoadType::kSouthWest & RoadType::kMask;
+		RoadSegment road_sw() const {
+			return r_sw;
 		}
 
 		/**
@@ -487,7 +504,8 @@ public:
 	bool is_worker_type_allowed(const DescriptionIndex& i) const;
 	void allow_worker_type(DescriptionIndex, bool allow);
 
-	// Allowed buildings. A building is also allowed if it's a militarysite that the player's tribe doesn't have.
+	// Allowed buildings. A building is also allowed if it's a militarysite that the player's tribe
+	// doesn't have.
 	bool is_building_type_allowed(const DescriptionIndex& i) const;
 	void allow_building_type(DescriptionIndex, bool allow);
 
@@ -497,11 +515,11 @@ public:
 	Flag* build_flag(const Coords&);   /// Build a flag if it is allowed.
 	Road& force_road(const Path&);
 	Road* build_road(const Path&);  /// Build a road if it is allowed.
-	Building& force_building(Coords, const Building::FormerBuildings&);
-	Building& force_csite(Coords,
-	                      DescriptionIndex,
-	                      const Building::FormerBuildings& = Building::FormerBuildings());
-	Building* build(Coords, DescriptionIndex, bool, Building::FormerBuildings&);
+	Waterway& force_waterway(const Path&);
+	Waterway* build_waterway(const Path&);  /// Build a waterway if it is allowed.
+	Building& force_building(Coords, const FormerBuildings&);
+	Building& force_csite(Coords, DescriptionIndex, const FormerBuildings& = FormerBuildings());
+	Building* build(Coords, DescriptionIndex, bool, FormerBuildings&);
 	void bulldoze(PlayerImmovable&, bool recurse = false);
 	void flagaction(Flag&);
 	void start_stop_building(PlayerImmovable&);
@@ -511,8 +529,8 @@ public:
 	void enhance_building(Building*, DescriptionIndex index_of_new_building);
 	void dismantle_building(Building*);
 
-	Economy* create_economy();
-	Economy* create_economy(Serial serial);  // For saveloading only
+	Economy* create_economy(WareWorker);
+	Economy* create_economy(Serial serial, WareWorker);  // For saveloading only
 	void remove_economy(Serial serial);
 	const std::map<Serial, std::unique_ptr<Economy>>& economies() const;
 	Economy* get_economy(Widelands::Serial serial) const;
@@ -527,7 +545,7 @@ public:
 	uint32_t find_attack_soldiers(Flag&,
 	                              std::vector<Soldier*>* soldiers = nullptr,
 	                              uint32_t max = std::numeric_limits<uint32_t>::max());
-	void enemyflagaction(Flag&, PlayerNumber attacker, uint32_t count);
+	void enemyflagaction(Flag&, PlayerNumber attacker, const std::vector<Widelands::Soldier*>&);
 
 	uint32_t casualties() const {
 		return casualties_;
@@ -575,8 +593,9 @@ public:
 
 	std::vector<uint32_t> const* get_ware_stock_statistics(DescriptionIndex const) const;
 
-    void init_statistics();
-	void read_statistics(FileRead&, uint16_t packet_version);
+	void init_statistics();
+	void
+	read_statistics(FileRead&, uint16_t packet_version, const TribesLegacyLookupTable& lookup_table);
 	void write_statistics(FileWrite&) const;
 	void read_remaining_shipnames(FileRead&);
 	void write_remaining_shipnames(FileWrite&) const;
@@ -595,13 +614,16 @@ public:
 		further_initializations_.push_back(init);
 	}
 
+	void set_attack_forbidden(PlayerNumber who, bool forbid);
+	bool is_attack_forbidden(PlayerNumber who) const;
+
 	const std::string pick_shipname();
 
 private:
 	BuildingStatsVector* get_mutable_building_statistics(const DescriptionIndex& i);
 	void update_building_statistics(Building&, NoteImmovable::Ownership ownership);
 	void update_team_players();
-	void play_message_sound(const Message::Type& msgtype);
+	void play_message_sound(const Message* message);
 	void enhance_or_dismantle(Building*, DescriptionIndex index_of_new_building);
 
 	// Called when a node becomes seen or has changed.  Discovers the node and
@@ -653,7 +675,7 @@ private:
 	 */
 	std::map<DescriptionIndex, Quantity> current_consumed_statistics_;
 
-    using StatisticsMap = std::map<DescriptionIndex, std::vector<Quantity>>;
+	using StatisticsMap = std::map<DescriptionIndex, std::vector<Quantity>>;
 
 	/**
 	 * Statistics of wares produced over the life of the game, indexed as
@@ -674,14 +696,20 @@ private:
 	 */
 	StatisticsMap ware_stocks_;
 
+	std::set<PlayerNumber> forbid_attack_;
+
 	PlayerBuildingStats building_stats_;
+
+	FxId message_fx_;
+	FxId attack_fx_;
+	FxId occupied_fx_;
 
 	DISALLOW_COPY_AND_ASSIGN(Player);
 };
 
 void find_former_buildings(const Tribes& tribes,
                            const DescriptionIndex bi,
-                           Building::FormerBuildings* former_buildings);
-}
+                           FormerBuildings* former_buildings);
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_PLAYER_H

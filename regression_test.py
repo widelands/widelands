@@ -89,8 +89,7 @@ class WidelandsTestCase(unittest.TestCase):
                     '--datadir={}'.format(datadir()),
                     '--datadir_for_testing={}'.format(datadir_for_testing()),
                     '--homedir={}'.format(self.run_dir),
-                    '--disable_fx=true',
-                    '--disable_music=true',
+                    '--nosound',
                     '--language=en_US' ]
             args += [ "--{}={}".format(key, value) for key, value in iteritems(wlargs) ]
 
@@ -130,15 +129,26 @@ class WidelandsTestCase(unittest.TestCase):
             self.verify_success(stdout, stdout_filename)
 
     def verify_success(self, stdout, stdout_filename):
-        common_msg = "Analyze the files in {} to see why this test case failed. Stdout is\n  {}\n\nstdout:\n{}".format(
-                self.run_dir, stdout_filename, stdout)
-        self.assertTrue(self.widelands_returncode == 0,
-            "Widelands exited abnormally. {}".format(common_msg)
-        )
-        self.assertTrue("All Tests passed" in stdout,
-            "Not all tests pass. {}.".format(common_msg)
-        )
-        out("done.\n")
+        # Catch instabilities with SDL in CI environment
+        if self.widelands_returncode == 2:
+            print("SDL initialization failed. TEST SKIPPED.")
+            with open(stdout_filename, 'r') as stdout_file:
+                for line in stdout_file.readlines():
+                    print(line.strip())
+            out("SKIPPED.\n")
+        else:
+            common_msg = "Analyze the files in {} to see why this test case failed. Stdout is\n  {}\n\nstdout:\n{}".format(
+                    self.run_dir, stdout_filename, stdout)
+            self.assertTrue(self.widelands_returncode == 0,
+                "Widelands exited abnormally. {}".format(common_msg)
+            )
+            self.assertTrue("All Tests passed" in stdout,
+                "Not all tests pass. {}.".format(common_msg)
+            )
+            self.assertFalse("lua_errors.cc" in stdout,
+                "Not all tests pass. {}.".format(common_msg)
+            )
+            out("done.\n")
         if self.keep_output_around:
             out("    stdout: {}\n".format(stdout_filename))
 

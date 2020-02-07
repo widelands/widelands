@@ -1,5 +1,11 @@
 dirname = path.dirname(__file__)
 
+animations = {}
+add_animation(animations, "idle", dirname, "idle", { 62, 48 })
+add_animation(animations, "build", dirname, "build", { 62, 48 })
+add_animation(animations, "unoccupied", dirname, "unoccupied", { 62, 48 })
+add_animation(animations, "working", dirname, "working", { 62, 48 })
+
 tribes:new_productionsite_type {
    msgctxt = "barbarians_building",
    name = "barbarians_shipyard",
@@ -8,7 +14,7 @@ tribes:new_productionsite_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   needs_seafaring = true,
+   map_check = {"seafaring"},
 
    buildcost = {
       log = 3,
@@ -22,24 +28,7 @@ tribes:new_productionsite_type {
       granite = 2
    },
 
-   animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 62, 48 },
-      },
-      build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 62, 48 },
-      },
-      unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
-         hotspot = { 62, 48 },
-      },
-      working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 62, 48 },
-      },
-   },
+   animations = animations,
 
    aihints = {
       needs_water = true,
@@ -57,6 +46,10 @@ tribes:new_productionsite_type {
       { name = "cloth", amount = 4 }
    },
 
+   indicate_workarea_overlaps = {
+      barbarians_shipyard = false,
+   },
+
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
@@ -72,9 +65,8 @@ tribes:new_productionsite_type {
          descname = _"constructing a ship",
          actions = {
             "checkmap=seafaring",
-            "sleep=10000",
             "construct=barbarians_shipconstruction buildship 6",
-            "sleep=10000",
+            "sleep=20000",
          }
       },
       ship_preparation = {

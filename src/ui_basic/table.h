@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,12 +29,12 @@
 
 #include "graphic/align.h"
 #include "graphic/color.h"
+#include "graphic/styles/font_style.h"
 #include "ui_basic/button.h"
 #include "ui_basic/panel.h"
+#include "ui_basic/scrollbar.h"
 
 namespace UI {
-struct Scrollbar;
-struct Button;
 
 enum class TableRows { kSingle, kMulti, kSingleDescending, kMultiDescending };
 enum class TableColumnType { kFixed, kFlexible };
@@ -88,7 +88,7 @@ public:
 	void remove(uint32_t);
 	void remove_entry(Entry);
 
-	EntryRecord& add(void* const entry, const bool select_this = false);
+	EntryRecord& add(void* const entry, bool const select_this = false);
 
 	uint32_t size() const;
 	bool empty() const;
@@ -141,28 +141,32 @@ public:
 		void* entry() const {
 			return entry_;
 		}
-		void set_color(const RGBColor& c) {
-			use_clr = true;
-			clr = c;
+
+		void set_font_style(const UI::FontStyleInfo& style) {
+			font_style_ = &style;
 		}
 
-		bool use_color() const {
-			return use_clr;
+		const UI::FontStyleInfo* font_style() const {
+			return font_style_;
 		}
-		RGBColor get_color() const {
-			return clr;
+
+		bool is_disabled() const {
+			return disabled_;
+		}
+		void set_disabled(bool disable) {
+			disabled_ = disable;
 		}
 
 	private:
 		friend class Table<void*>;
 		void* entry_;
-		bool use_clr;
-		RGBColor clr;
+		const UI::FontStyleInfo* font_style_;
 		struct Data {
 			const Image* d_picture;
 			std::string d_string;
 		};
 		std::vector<Data> data_;
+		bool disabled_;
 	};
 
 	Table(Panel* parent,
@@ -195,6 +199,8 @@ public:
 	void set_column_tooltip(uint8_t col, const std::string& tooltip);
 	void set_column_compare(uint8_t col, const CompareFn& fn);
 
+	size_t number_of_columns() const;
+
 	void clear();
 	void set_sort_column(uint8_t const col) {
 		assert(col < columns_.size());
@@ -214,7 +220,7 @@ public:
 	void remove(uint32_t);
 	void remove_entry(const void* const entry);
 
-	EntryRecord& add(void* entry = nullptr, bool select = false);
+	EntryRecord& add(void* entry = nullptr, bool const select_this = false);
 
 	uint32_t size() const {
 		return entry_records_.size();
@@ -305,9 +311,10 @@ private:
 
 	Columns columns_;
 	int total_width_;
-	const uint32_t headerheight_;
 	int32_t lineheight_;
-	UI::ButtonStyle button_style_;
+	const uint32_t headerheight_;
+	const UI::PanelStyle style_;
+	const UI::ButtonStyle button_style_;
 	Scrollbar* scrollbar_;
 	// A disabled button that will fill the space above the scroll bar
 	UI::Button* scrollbar_filler_button_;
@@ -525,6 +532,6 @@ public:
 	   : Base(parent, x, y, w, h, style, rowtype) {
 	}
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_TABLE_H

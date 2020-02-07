@@ -12,23 +12,30 @@ tribes:new_productionsite_type {
    buildcost = {
       brick = 2,
       log = 1,
-      thatch_reed = 1
+      reed = 1
    },
    return_on_dismantle = {
       brick = 1,
       log = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {49, 88},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "idle",
+         hotspot = {40, 71},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
       unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {49, 66},
-      },
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {40, 53}
+      }
    },
 
    aihints = {
@@ -42,11 +49,18 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "fruit", amount = 8 },
-      { name = "water", amount = 8 },
+      { name = "water", amount = 5 },
+      { name = "fruit", amount = 2 },
    },
+
    outputs = {
       "fish"
+   },
+
+   indicate_workarea_overlaps = {
+      frisians_aqua_farm = false,
+      frisians_charcoal_burners_house = false,
+      frisians_clay_pit = true,
    },
 
    programs = {
@@ -64,11 +78,11 @@ tribes:new_productionsite_type {
          descname = _"breeding fish",
          actions = {
             "return=skipped unless economy needs fish",
-            "sleep=23000",
             "return=failed unless site has water:2",
             "return=failed unless site has fruit",
             "callworker=breed_in_pond",
             "consume=fruit water:2",
+            "sleep=23000",
          },
       },
       fish_pond = {

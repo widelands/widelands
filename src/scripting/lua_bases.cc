@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,7 @@
 
 #include "economy/economy.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "io/profile.h"
 #include "logic/filesystem_constants.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -31,10 +32,10 @@
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/player.h"
-#include "profile/profile.h"
 #include "scripting/factory.h"
 #include "scripting/globals.h"
 #include "scripting/lua_map.h"
+#include "ui_basic/progresswindow.h"
 
 using namespace Widelands;
 
@@ -89,6 +90,7 @@ const MethodType<LuaEditorGameBase> LuaEditorGameBase::Methods[] = {
    METHOD(LuaEditorGameBase, get_terrain_description),
    METHOD(LuaEditorGameBase, save_campaign_data),
    METHOD(LuaEditorGameBase, read_campaign_data),
+   METHOD(LuaEditorGameBase, set_loading_message),
    {nullptr, nullptr},
 };
 const PropertyType<LuaEditorGameBase> LuaEditorGameBase::Properties[] = {
@@ -399,10 +401,10 @@ static void save_table_recursively(lua_State* L,
 
       Saves information that can be read by other scenarios.
 
-      If an array is used, the data will be saved in the correct order. Arrays may not contain nil values.
-      If the table is not an array, all keys have to be strings.
-      Tables may contain subtables of any depth. Cyclic dependencies will cause Widelands to crash.
-      Only tables/arrays, strings, integer numbers and booleans may be used as values.
+      If an array is used, the data will be saved in the correct order. Arrays may not contain nil
+      values. If the table is not an array, all keys have to be strings. Tables may contain
+      subtables of any depth. Cyclic dependencies will cause Widelands to crash. Only tables/arrays,
+      strings, integer numbers and booleans may be used as values.
 */
 int LuaEditorGameBase::save_campaign_data(lua_State* L) {
 
@@ -539,6 +541,19 @@ int LuaEditorGameBase::read_campaign_data(lua_State* L) {
 	return 1;
 }
 
+/* RST
+   .. function:: set_loading_message(text)
+
+      :arg text: the text to display
+
+      Change the progress message on the loading screen.
+      May be used from the init.lua files for tribe/world loading only.
+*/
+int LuaEditorGameBase::set_loading_message(lua_State* L) {
+	get_egbase(L).get_loader_ui()->step(luaL_checkstring(L, 2));
+	return 0;
+}
+
 /*
  ==========================================================
  C METHODS
@@ -563,14 +578,16 @@ const MethodType<LuaPlayerBase> LuaPlayerBase::Methods[] = {
    METHOD(LuaPlayerBase, place_ship),  {nullptr, nullptr},
 };
 const PropertyType<LuaPlayerBase> LuaPlayerBase::Properties[] = {
-   PROP_RO(LuaPlayerBase, number), PROP_RO(LuaPlayerBase, tribe_name), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaPlayerBase, number),
+   PROP_RO(LuaPlayerBase, tribe_name),
+   {nullptr, nullptr, nullptr},
 };
 
 void LuaPlayerBase::__persist(lua_State* L) {
 	PERS_UINT32("player", player_number_);
 }
 void LuaPlayerBase::__unpersist(lua_State* L) {
-	UNPERS_UINT32("player", player_number_);
+	UNPERS_UINT32("player", player_number_)
 }
 
 /*
@@ -777,19 +794,20 @@ int LuaPlayerBase::place_building(lua_State* L) {
 
 	EditorGameBase& egbase = get_egbase(L);
 	const Tribes& tribes = egbase.tribes();
-    Player& player = get(L, egbase);
+	Player& player = get(L, egbase);
 
-    if (!tribes.building_exists(name)) {
+	if (!tribes.building_exists(name)) {
 		report_error(L, "Unknown Building: '%s'", name.c_str());
 	}
 
-    DescriptionIndex building_index = tribes.building_index(name);
+	DescriptionIndex building_index = tribes.building_index(name);
 
 	if (!player.tribe().has_building(building_index)) {
-		report_error(L, "Building: '%s' is not available for Player %d's tribe '%s'", name.c_str(), player.player_number(), player.tribe().name().c_str());
+		report_error(L, "Building: '%s' is not available for Player %d's tribe '%s'", name.c_str(),
+		             player.player_number(), player.tribe().name().c_str());
 	}
 
-	BuildingDescr::FormerBuildings former_buildings;
+	FormerBuildings former_buildings;
 	find_former_buildings(tribes, building_index, &former_buildings);
 	if (constructionsite) {
 		former_buildings.pop_back();
@@ -882,7 +900,9 @@ int LuaPlayerBase::get_workers(lua_State* L) {
 
 	uint32_t nworkers = 0;
 	for (const auto& economy : player.economies()) {
-		nworkers += economy.second->stock_worker(worker);
+		if (economy.second->type() == Widelands::wwWORKER) {
+			nworkers += economy.second->stock_ware_or_worker(worker);
+		}
 	}
 	lua_pushuint32(L, nworkers);
 	return 1;
@@ -908,7 +928,9 @@ int LuaPlayerBase::get_wares(lua_State* L) {
 
 	uint32_t nwares = 0;
 	for (const auto& economy : player.economies()) {
-		nwares += economy.second->stock_ware(ware);
+		if (economy.second->type() == Widelands::wwWARE) {
+			nwares += economy.second->stock_ware_or_worker(ware);
+		}
 	}
 	lua_pushuint32(L, nwares);
 	return 1;
@@ -946,4 +968,4 @@ void luaopen_wlbases(lua_State* const L) {
 	register_class<LuaEditorGameBase>(L, "bases");
 	register_class<LuaPlayerBase>(L, "bases");
 }
-}
+}  // namespace LuaBases

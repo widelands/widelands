@@ -1,14 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
+# ks k, 2019
+# TaeMin An, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-20 07:33+0000\n"
-"PO-Revision-Date: 2018-07-21 14:54+0000\n"
-"Last-Translator: ks k\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2019-08-10 17:15+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,17 +20,17 @@ msgstr ""
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:27
 msgid "Build a blockhouse"
-msgstr "막사를 지으십시오"
+msgstr "사각 요새를 지으십시오"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:29
 msgid "Blockhouse"
-msgstr "막사"
+msgstr "사각 요새"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:30
 msgid ""
 "Build a blockhouse at the red house symbol on the east side of the forests, "
 "to the right of your provisional headquarters."
-msgstr "임시 기지 오른쪽 숲 동쪽에 있는 빨간색 집 모양에 막사를 지으십시오."
+msgstr "임시 기지 오른쪽 숲 동쪽에 있는 빨간색 집 모양에 사각 요새를 지으십시오."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:36
 msgid "Build a lumberjack’s house"
@@ -144,7 +146,7 @@ msgid ""
 "these Barbarians. So, I left Fremil by boat to find a new world and a new "
 "life for myself, somewhere in the south. Now I am sailing on the Gulf of "
 "Perl with my family, some of my friends and a few of my best warriors."
-msgstr ""
+msgstr "여전히, 나는 이 야만족들과 싸우지 않고서는 내 수치심을 지울 수 없다는 것을 알았다.그래서 나는 남쪽 어딘가에 새로운 세계와 나 자신을 위한 새로운 삶을 찾기위해 배를 타고 프레밀을 떠났다. 지금 나는 가족과 몇몇 동료와 최고의 전사들과 함께 페를만을 항해 하고있다. [번역확인: 펄 페를]"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:98
 msgid "The Rough Sea"
@@ -157,14 +159,14 @@ msgid ""
 "Nature was against us and drove us into a dark, wild storm. I really don’t "
 "know how many hours have passed since the waves rose higher than our boat, "
 "but still it would be suicide to go outside."
-msgstr ""
+msgstr "페를만을 항해하는 것이 우리의 가장 큰 실수 중 하나였던 것 같다. 자연은 우리에게 불리했고 우리를 어둡고 사나운 폭풍으로 몰아넣었다. 파도가 우리 배보다 더 높이 올라간 후 몇 시간이 지났는지 모르지만, 그래도 밖으로 나가는 것은 자살행위일 것이다.[번역확인: 펄 페를]"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:104
 msgid ""
 "Our ship is badly damaged and is taking in more and more water. We can thank"
 " the Gods if we survive this black night with our lives."
-msgstr ""
+msgstr "우리 배는 심하게 파손되어 점점 더 많은 물이 들어오고 있다. 만약 우리가 이 칠흙같은 밤에서 살아남게된다면 우리는 신에게 감사할수 있을것같다."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:110
 msgid "Survivors"
@@ -181,7 +183,7 @@ msgid ""
 "We landed on an unknown coast and found peaceful rest under the palm trees "
 "growing at the shore. But that is about as good as it gets. The truth is: "
 "when I woke up this morning, I saw nothing but sand around us."
-msgstr ""
+msgstr "우리는 알려지지 않은 해안에 상륙하여 해안에서 자라는 야자수 아래에서 평화로운 휴식을 찾았다. 그러나 정말 그랬다면 좋을것이다. 진실은: 오늘 아침, 내가 깨어 났을 때는 주위에 모래밖에 보이지 않았다."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:119
@@ -189,7 +191,7 @@ msgid ""
 "It really seems as if we have landed under the only palm trees existing in "
 "this far-away sandy desert. I fear we won’t find the help we need to get our"
 " ship repaired in good time."
-msgstr ""
+msgstr "마치 우리가 멀리 떨어진 모래 사막에있는 유일한 야자수 아래에 상륙 한 것처럼 보인다. 나는 우리 배가 제때 수리받는데 도움을 받지 못할까 봐 걱정이된다."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:125
 msgid "A Foreboding"
@@ -205,7 +207,7 @@ msgid ""
 "Sire, I fear we are not safe in this foreign land. Who knows what terrible "
 "creatures live beyond this forest, in that mighty desert? What if these "
 "creatures enter the woods and await the time to attack us?"
-msgstr ""
+msgstr "폐하, 저는 이 낮선 땅에서 우리가 안전하지 않다는 것이 두렵습니다. 저 거대한 사막에서 이 숲 너머에 어떤 끔찍한 생물이 살고 있는지 누가 알겠습니까? 이 생물들이 숲에 들어가서 우리를 공격 할 시간을 기다리면 어찌 되겠습니까?"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:131
@@ -213,7 +215,7 @@ msgid ""
 "Well, perhaps my fear is misguided, but it can’t be wrong to keep watch in "
 "the forests – so that we can be sure to see any potential enemies before "
 "they can see us."
-msgstr ""
+msgstr "흠, 내 두려움은 잘못 판단된 것일 수도 있지만, 숲 속에서 계속 감시하는 것은 잘못된 것은 아닐것이오. – 그래서 우리는 그들이 우리를 발견하기 전에 잠재적 적들을 확실히 볼 수 있다."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:134
@@ -221,7 +223,7 @@ msgid ""
 "You really should build a blockhouse in the eastern portion of the forest. "
 "Then one of my men can keep watch in the darkness and keep us safe from "
 "these creatures."
-msgstr ""
+msgstr "그대는 정말 숲 동쪽 지역에 사각 요새를 건설을 하시오. 그러면 내 부하들 중 하나가 어둠 속에서 우리를 감시하고 이 생물들로부터 우리를 안전하게 지켜줄 수 있소"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:141
 msgid "Safe For Now"
@@ -229,21 +231,21 @@ msgstr "지금은 안전합니다"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:142
 msgid "Saledus speaks with a sigh of relief…"
-msgstr ""
+msgstr "실데도스는 안도의 한숨을 쉬며 말했다…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:144
 msgid ""
 "Sire, I saw that the construction of the blockhouse was completed, so I have"
 " assigned one of my best soldiers to it to keep watch on the desert."
-msgstr ""
+msgstr "폐하, 사각 요새가 다 지어졌습니다.  가장 유능한 병사 한 명을 그곳에 임명해서 사막을 감시하게 했습니다."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:147
 msgid ""
 "This is a good step forward. Now we can feel a bit safer and can look "
 "forward to repairing our ship."
-msgstr ""
+msgstr "이것으로 한걸음 앞으로 나간것같습니다. 이제 좀 더 안전한상태에서 배의 수리를 기다릴 수 있을것 같군요."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:152
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:167
@@ -265,7 +267,7 @@ msgstr "반가워요, 루티우스! 금방 밖에 사레두스를 만났어요."
 msgid ""
 "He told me about the blockhouse. Well, I don’t think we need more "
 "blockhouses – instead, we might concentrate on other things now."
-msgstr ""
+msgstr "그는 나에게 그 사각 요새에 대해 가르쳐 주었다. 흠, 우리에게 더 이상 사각 요새가 필요하지 않을것같다. – 대신에 지금은 다른 것에 좀 더 집중하는것이 좋을것 같다."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:161
@@ -273,7 +275,7 @@ msgid ""
 "It is absolutely clear that we need wood to repair our ship. So, I walked "
 "through the forest yesterday to look for a nice place for a lumberjack’s "
 "house and found one right south of our provisional headquarters."
-msgstr ""
+msgstr "우리 배를 고치는데 나무는 반드시 필요하다. 그래서 어제 벌목꾼의 집을 위한 좋은 장소를 찾기 위해 숲속을 정찰했었는데, 임시 본부 바로 남쪽에 한 곳을 찾았다."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:168
 msgid "Amalea recommends…"
@@ -286,7 +288,7 @@ msgid ""
 "Perhaps it would be a good idea to wait until he has cleared enough space "
 "for constructing two more lumberjack’s houses, so that we can harvest the "
 "logs faster."
-msgstr ""
+msgstr "오늘부터 나무꾼이 일을 시작했다고 연락이 왔다. 그가 나무를 베고 장소가 생긴다면 2 채 정도 더 나무꾼의 집을 짓는것이 좋을것이다. 그러면 통나무를 더욱 빨리 모울 수 있기 때문이다."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:173
@@ -295,7 +297,7 @@ msgid ""
 "turn them into planks, which are needed by every ship and every bigger "
 "building too. So we should build a sawmill – as soon as we have enough space"
 " for this."
-msgstr ""
+msgstr "그런데 아쉽게도 통나무는 우리 배를 수리하는데 쓸 수 없다. – 모든 배나 더 큰 건물에 사용되는 널판으로 만들어야한다. 그러니까 충분한 빈땅이 확보되면 – 바로 제재소를 만들어야한다."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:180
 msgid "Amalea comes in…"
@@ -304,21 +306,21 @@ msgstr "아마레아가 들어온다…"
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:182
 msgid "I’ve got two important things to talk about… First the good news:"
-msgstr ""
+msgstr "두 가지 중요한 얘기가 있는데…  먼저 좋은 소식은:"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:185
 msgid ""
 "I noticed that the construction of the sawmill is complete, so we can begin "
 "to refine the logs that the lumberjacks are harvesting into planks."
-msgstr ""
+msgstr "제재소가 다 지어졌다. 이젠 나무꾼이 모운 통나무를 널판으로 가공 할수 있겠어."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:188
 msgid ""
 "But the bad news is that our lumberjacks harvest at an incredible speed. "
 "There are almost no trees left on this island."
-msgstr ""
+msgstr "그리고 또 다른 나쁜 소식이지만, 나무꾼이 나무를 모우는 속도가 너무 빠르다는것이다. 이제 이 섬에는 나무가 거의 남아있지 않은것 같다."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:191
@@ -326,12 +328,12 @@ msgid ""
 "These trees provide shelter from the sandstorms that sweep in from the "
 "desert, and shade on the hot days, and they are the home of many gentle "
 "animals. We shouldn’t leave this island a complete desert."
-msgstr ""
+msgstr "이 나무들은 사막에서 휩쓸어 오는 모래폭풍으로부터 피난처를 제공하고, 더운날 그늘을 드리우며, 온순한 짐승들의 집이기도 한다. 이 섬을 완전한 사막으로 남겨놔서는 안될것이다."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:194
 msgid "Lutius, please find someone who will take care of planting new trees."
-msgstr ""
+msgstr "루티우스, 새로운 나무를 심고 잘 가꿔주는 사람을 찾아야합니다."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:200
 msgid "Thinking About the Future"
@@ -346,14 +348,14 @@ msgstr "사레두스가 언급하다…"
 msgid ""
 "Sire, I just thought about the rocks standing on the south shore of this "
 "land. Perhaps we could cut out some useful granite and beautiful marble."
-msgstr ""
+msgstr "폐하, 섬의 남쪽 해안에 있는 바위들에 대해 생각해봤습니다. 아마도 좋은 화강암과 아름다운 대리석을 잘라낼 수 있을것입니다."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:206
 msgid ""
 "The repair of our ship will take a few weeks, anyway, and the resources we "
 "harvest now might be the base of strong and big buildings in another land."
-msgstr ""
+msgstr "어쨌든 우리 배가 수리되는데 몇 주가 걸릴 것이고, 우리가 지금 수확하는 자원들은 어딘가 다른 곳에 강하고 큰 건물을 지을 때를 준비해 미리 모아 두는것이 좋겠습니다."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:212
 msgid "A Step Forward"
@@ -369,7 +371,7 @@ msgid ""
 "Sire, today we got a lot closer to our first castle. The quarry to the south"
 " began its work today and will soon provide us with granite and beautiful "
 "marble."
-msgstr ""
+msgstr "폐하, 우리성이 완성될 날이 머지 않았습니다. 남쪽의 채석장은 오늘부터 그일을 시작했으므로 곧 화강암과 아름다운 대리석을 확보할 수 있을것입니다."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:218
@@ -425,12 +427,15 @@ msgid ""
 "move on!"
 msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "“%s”"
+msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "새로운 임무"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

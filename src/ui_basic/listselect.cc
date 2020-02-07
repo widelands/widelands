@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,13 +30,32 @@
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 #include "graphic/text/bidi.h"
-#include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
 
 constexpr int kMargin = 2;
+constexpr int kHotkeyGap = 16;
 
 namespace UI {
+
+BaseListselect::EntryRecord::EntryRecord(const std::string& init_name,
+                                         uint32_t init_entry,
+                                         const Image* init_pic,
+                                         const std::string& tooltip_text,
+                                         const std::string& hotkey_text,
+                                         const TableStyleInfo& style)
+   : name(init_name),
+     entry_(init_entry),
+     pic(init_pic),
+     tooltip(tooltip_text),
+     name_alignment(i18n::has_rtl_character(init_name.c_str(), 20) ? Align::kRight : Align::kLeft),
+     hotkey_alignment(i18n::has_rtl_character(hotkey_text.c_str(), 20) ? Align::kRight :
+                                                                         Align::kLeft) {
+	rendered_name = UI::g_fh->render(as_richtext_paragraph(richtext_escape(name), style.enabled()));
+	rendered_hotkey =
+	   UI::g_fh->render(as_richtext_paragraph(richtext_escape(hotkey_text), style.hotkey()));
+}
+
 /**
  * Initialize a list select panel
  *
@@ -45,7 +64,7 @@ namespace UI {
  *       y
  *       w       dimensions, in pixels, of the Listselect
  *       h
-*/
+ */
 BaseListselect::BaseListselect(Panel* const parent,
                                const int32_t x,
                                const int32_t y,
@@ -54,16 +73,19 @@ BaseListselect::BaseListselect(Panel* const parent,
                                UI::PanelStyle style,
                                const ListselectLayout selection_mode)
    : Panel(parent, x, y, w, h),
-     lineheight_(text_height() + kMargin),
+     widest_text_(0),
+     widest_hotkey_(0),
      scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style),
      scrollpos_(0),
      selection_(no_selection_index()),
      last_click_time_(-10000),
      last_selection_(no_selection_index()),
      selection_mode_(selection_mode),
+     table_style_(g_gr->styles().table_style(style)),
      background_style_(selection_mode == ListselectLayout::kDropdown ?
                           g_gr->styles().dropdown_style(style) :
-                          nullptr) {
+                          nullptr),
+     lineheight_(text_height(table_style_.enabled()) + kMargin) {
 	set_thinks(false);
 
 	scrollbar_.moved.connect(boost::bind(&BaseListselect::set_scrollpos, this, _1));
@@ -83,14 +105,14 @@ BaseListselect::BaseListselect(Panel* const parent,
 
 /**
  * Free allocated resources
-*/
+ */
 BaseListselect::~BaseListselect() {
 	clear();
 }
 
 /**
  * Remove all entries from the listselect
-*/
+ */
 void BaseListselect::clear() {
 	for (EntryRecord* entry : entry_records_) {
 		delete entry;
@@ -110,18 +132,15 @@ void BaseListselect::clear() {
  * Args: name   name that will be displayed
  * entry  value returned by get_select()
  *       sel    if true, directly select the new entry
-*/
+ */
 void BaseListselect::add(const std::string& name,
                          uint32_t entry,
                          const Image* pic,
                          bool const sel,
-                         const std::string& tooltip_text) {
-	EntryRecord* er = new EntryRecord();
+                         const std::string& tooltip_text,
+                         const std::string& hotkey) {
+	EntryRecord* er = new EntryRecord(name, entry, pic, tooltip_text, hotkey, table_style_);
 
-	er->entry_ = entry;
-	er->pic = pic;
-	er->name = name;
-	er->tooltip = tooltip_text;
 	int entry_height = lineheight_;
 	if (pic) {
 		int w = pic->width();
@@ -140,41 +159,6 @@ void BaseListselect::add(const std::string& name,
 
 	if (sel)
 		select(entry_records_.size() - 1);
-}
-
-void BaseListselect::add_front(const std::string& name,
-                               const Image* pic,
-                               bool const sel,
-                               const std::string& tooltip_text) {
-	EntryRecord* er = new EntryRecord();
-
-	er->entry_ = 0;
-	for (EntryRecord* temp_entry : entry_records_) {
-		++(temp_entry)->entry_;
-	}
-
-	er->pic = pic;
-	er->name = name;
-	er->tooltip = tooltip_text;
-
-	int entry_height = lineheight_;
-	if (pic) {
-		int w = pic->width();
-		int h = pic->height();
-		entry_height = (h >= entry_height) ? h : entry_height;
-		if (max_pic_width_ < w)
-			max_pic_width_ = w;
-	}
-
-	if (entry_height > lineheight_)
-		lineheight_ = entry_height;
-
-	entry_records_.push_front(er);
-
-	layout();
-
-	if (sel)
-		select(0);
 }
 
 /**
@@ -204,7 +188,7 @@ void BaseListselect::sort(const uint32_t Begin, uint32_t End) {
 
 /**
  * Scroll to the given position, in pixels.
-*/
+ */
 void BaseListselect::set_scrollpos(const int32_t i) {
 	if (scrollpos_ == uint32_t(i))
 		return;
@@ -275,11 +259,43 @@ const Image* BaseListselect::get_selected_image() const {
 }
 
 int BaseListselect::get_lineheight() const {
-	return lineheight_ + kMargin;
+	return lineheight_ + (selection_mode_ == ListselectLayout::kDropdown ? 2 * kMargin : kMargin);
 }
 
 uint32_t BaseListselect::get_eff_w() const {
 	return scrollbar_.is_enabled() ? get_w() - scrollbar_.get_w() : get_w();
+}
+
+// Make enough room for all texts + hotkeys in tabular format
+int BaseListselect::calculate_desired_width() {
+	if (entry_records_.empty()) {
+		return 0;
+	}
+
+	// Find the widest entries
+	widest_text_ = 0;
+	widest_hotkey_ = 0;
+	for (const EntryRecord* er : entry_records_) {
+		const int current_text_width = er->rendered_name->width();
+		if (current_text_width > widest_text_) {
+			widest_text_ = current_text_width;
+		}
+		const int current_hotkey_width = er->rendered_hotkey->width();
+		if (current_hotkey_width > widest_hotkey_) {
+			widest_hotkey_ = current_hotkey_width;
+		}
+	}
+
+	// Add up the width
+	int text_width = widest_text_;
+	if (widest_hotkey_ > 0) {
+		text_width += kHotkeyGap;
+		text_width += widest_hotkey_;
+	}
+
+	const int picw = max_pic_width_ ? max_pic_width_ + 10 : 0;
+	const int old_width = get_w();
+	return text_width + picw + 8 + old_width - get_eff_w();
 }
 
 void BaseListselect::layout() {
@@ -294,15 +310,9 @@ void BaseListselect::layout() {
 	}
 	// For dropdowns, autoincrease width
 	if (selection_mode_ == ListselectLayout::kDropdown) {
-		for (size_t i = 0; i < entry_records_.size(); ++i) {
-			const EntryRecord& er = *entry_records_[i];
-			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
-			   as_uifont(richtext_escape(er.name), UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG));
-			int picw = max_pic_width_ ? max_pic_width_ + 10 : 0;
-			int difference = rendered_text->width() + picw + 8 - get_eff_w();
-			if (difference > 0) {
-				set_size(get_w() + difference, get_h());
-			}
+		const int new_width = calculate_desired_width();
+		if (new_width > get_w()) {
+			set_size(new_width, get_h());
 		}
 	}
 }
@@ -341,10 +351,9 @@ void BaseListselect::draw(RenderTarget& dst) {
 		assert(eff_h < std::numeric_limits<int32_t>::max());
 
 		const EntryRecord& er = *entry_records_[idx];
-		std::shared_ptr<const UI::RenderedText> rendered_text =
-		   UI::g_fh->render(as_uifont(richtext_escape(er.name), UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG));
+		const int text_height = std::max(er.rendered_name->height(), er.rendered_hotkey->height());
 
-		int lineheight = std::max(get_lineheight(), rendered_text->height());
+		int lineheight = std::max(get_lineheight(), text_height);
 
 		// Don't draw over the bottom edge
 		lineheight = std::min(eff_h - y, lineheight);
@@ -380,26 +389,15 @@ void BaseListselect::draw(RenderTarget& dst) {
 		// Now draw pictures
 		if (er.pic) {
 			dst.blit(Vector2i(UI::g_fh->fontset()->is_rtl() ? get_eff_w() - er.pic->width() - 1 : 1,
-			                  y + (get_lineheight() - er.pic->height()) / 2),
+			                  y + (lineheight_ - er.pic->height()) / 2),
 			         er.pic);
 		}
 
-		// Position the text according to alignment
-		Align alignment = i18n::has_rtl_character(er.name.c_str(), 20) ? Align::kRight : Align::kLeft;
-		if (alignment == UI::Align::kRight) {
-			point.x += maxw - picw;
-		}
-
-		// Shift for image width
-		if (!UI::g_fh->fontset()->is_rtl()) {
-			point.x += picw;
-		}
-
 		// Fix vertical position for mixed font heights
-		if (get_lineheight() > rendered_text->height()) {
-			point.y += (lineheight_ - rendered_text->height()) / 2;
+		if (get_lineheight() > text_height) {
+			point.y += (lineheight_ - text_height) / 2;
 		} else {
-			point.y -= (rendered_text->height() - lineheight_) / 2;
+			point.y -= (text_height - lineheight_) / 2;
 		}
 
 		// Don't draw over the bottom edge
@@ -407,8 +405,35 @@ void BaseListselect::draw(RenderTarget& dst) {
 		if (lineheight < 0) {
 			break;
 		}
-		rendered_text->draw(
-		   dst, point, Recti(0, 0, maxw, lineheight), alignment, RenderedText::CropMode::kSelf);
+
+		// Tabular layout for hotkeys + shift for image width
+		Vector2i text_point(point);
+		Vector2i hotkey_point(point);
+		if (UI::g_fh->fontset()->is_rtl()) {
+			if (er.name_alignment == UI::Align::kRight) {
+				text_point.x = maxw - widest_text_ - picw;
+			} else if (widest_hotkey_ > 0) {
+				text_point.x += widest_hotkey_ + kHotkeyGap;
+			}
+		} else {
+			hotkey_point.x = maxw - widest_hotkey_;
+			text_point.x += picw;
+		}
+
+		// Position the text and hotkey according to their alignment
+		if (er.name_alignment == UI::Align::kRight) {
+			text_point.x += widest_text_ - er.rendered_name->width();
+		}
+		if (er.hotkey_alignment == UI::Align::kRight) {
+			hotkey_point.x += widest_hotkey_ - er.rendered_hotkey->width();
+		}
+
+		er.rendered_name->draw(dst, text_point, Recti(0, 0, maxw - widest_hotkey_, lineheight),
+		                       UI::Align::kLeft, RenderedText::CropMode::kSelf);
+		if (er.rendered_hotkey->width() > 0) {
+			er.rendered_hotkey->draw(dst, hotkey_point, Recti(0, 0, maxw - widest_text_, lineheight),
+			                         UI::Align::kLeft, RenderedText::CropMode::kSelf);
+		}
 		y += get_lineheight();
 		++idx;
 	}
@@ -442,7 +467,7 @@ bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t, int32_t y) {
 			return false;
 		play_click();
 		select(y);
-		clicked(selection_);
+		clicked();
 
 		if  //  check if doubleclicked
 		   (time - real_last_click_time < DOUBLE_CLICK_INTERVAL && last_selection_ == selection_ &&
@@ -473,11 +498,6 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		uint32_t selected_idx;
 		switch (code.sym) {
-		case SDLK_KP_2:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
 		case SDLK_DOWN:
 			selected_idx = selection_index() + 1;
 			if (selected_idx < size())
@@ -488,11 +508,6 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 				scrollbar_.set_scrollpos(scrollpos_);
 			}
 			return true;
-		case SDLK_KP_8:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
 		case SDLK_UP:
 			selected_idx = selection_index();
 			if (selected_idx > 0)
@@ -537,4 +552,4 @@ void BaseListselect::remove(const char* const str) {
 		}
 	}
 }
-}
+}  // namespace UI

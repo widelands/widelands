@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,6 @@
 
 #include "economy/input_queue.h"
 #include "logic/map_objects/immovable.h"
-#include "logic/widelands.h"
 
 namespace Widelands {
 
@@ -79,6 +78,6 @@ protected:
 	/// The workers currently in the queue
 	std::vector<Worker*> workers_;
 };
-}
+}  // namespace Widelands
 
 #endif  // WL_ECONOMY_WORKERS_QUEUE_H

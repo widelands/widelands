@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,13 +21,23 @@
 
 #include <utility>
 
+#include <boost/algorithm/string/predicate.hpp>
+#include <boost/regex.hpp>
+
 #include "base/log.h"
+#include "helper.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "sound/sound_handler.h"
 
-/// Prepare infrastructure for reading song files from disk
-Songset::Songset() : m_(nullptr), rwops_(nullptr) {
+/// Prepare infrastructure for reading song files from disk and register the matching files
+Songset::Songset(const std::string& dir, const std::string& basename)
+   : m_(nullptr), rwops_(nullptr) {
+	assert(g_fs);
+	std::vector<std::string> files = g_fs->get_sequential_files(dir, basename, "ogg");
+	for (const std::string& filename : files) {
+		assert(!g_fs->is_directory(filename));
+		add_song(filename);
+	}
 }
 
 /// Close and delete all songs to avoid memory leaks.
@@ -54,25 +64,22 @@ void Songset::add_song(const std::string& filename) {
 	current_song_ = 0;
 }
 
-/** Get a song from the songset. Depending on
- * \ref SoundHandler::sound_random_order, the selection will either be random
- * or linear (after last song, will start again with first).
- * \return  a pointer to the chosen song; 0 if none was found, music is disabled
+/**
+ * Uses a 'random' number to select a song and return its audio data.
+ * \param random A random number for picking the song
+ * \return  a pointer to the chosen song; nullptr if none was found
  *          or an error occurred
  */
-Mix_Music* Songset::get_song() {
+Mix_Music* Songset::get_song(uint32_t random) {
 	std::string filename;
 
-	if (g_sound_handler.get_disable_music() || songs_.empty())
+	if (songs_.empty()) {
 		return nullptr;
+	}
 
 	if (songs_.size() > 1) {
-		if (g_sound_handler.random_order_) {
-			// exclude current_song from playing two times in a row
-			current_song_ += 1 + g_sound_handler.rng_.rand() % (songs_.size() - 1);
-		} else {
-			++current_song_;
-		}
+		// Exclude current_song from playing two times in a row
+		current_song_ += 1 + random % (songs_.size() - 1);
 		current_song_ = current_song_ % songs_.size();
 	}
 	filename = songs_.at(current_song_);
@@ -102,10 +109,10 @@ Mix_Music* Songset::get_song() {
 		m_ = Mix_LoadMUS_RW(rwops_, 0);
 
 	if (m_)
-		log("SoundHandler: loaded song \"%s\"\n", filename.c_str());
+		log("Songset: Loaded song \"%s\"\n", filename.c_str());
 	else {
-		log("SoundHandler: loading song \"%s\" failed!\n", filename.c_str());
-		log("SoundHandler: %s\n", Mix_GetError());
+		log("Songset: Loading song \"%s\" failed!\n", filename.c_str());
+		log("Songset: %s\n", Mix_GetError());
 	}
 
 	return m_;

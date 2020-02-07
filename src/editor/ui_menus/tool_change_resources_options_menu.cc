@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,7 +33,6 @@
 #include "logic/map.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
-#include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
 
 constexpr int kMaxValue = 63;
@@ -46,7 +45,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
    EditorInteractive& parent,
    EditorIncreaseResourcesTool& increase_tool,
    UI::UniqueWindow::Registry& registry)
-   : EditorToolOptionsMenu(parent, registry, 370, 120, _("Resources")),
+   : EditorToolOptionsMenu(parent, registry, 370, 120, _("Resources"), increase_tool),
      increase_tool_(increase_tool),
      box_(this, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
      change_by_(&box_,
@@ -74,7 +73,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
              UI::SpinBox::Units::kNone,
              UI::SpinBox::Type::kSmall),
      resources_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, 1),
-     cur_selection_(&box_, 0, 0, "", UI::Align::kCenter) {
+     cur_selection_(&box_, 0, 0, 0, 0, "", UI::Align::kCenter) {
 	// Configure spin boxes
 	change_by_.set_tooltip(
 	   /** TRANSLATORS: Editor change rseources access keys. **/
@@ -159,7 +158,7 @@ void EditorToolChangeResourcesOptionsMenu::change_resource() {
 
 /**
  * Update all the textareas, so that they represent the correct values
-*/
+ */
 void EditorToolChangeResourcesOptionsMenu::update() {
 	cur_selection_.set_text(
 	   (boost::format(_("Current: %s")) %

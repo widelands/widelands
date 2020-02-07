@@ -49,7 +49,7 @@ obj_gather_materials = {
       li(_"10 × Clay") ..
       li(_"40 × Brick") ..
       li(_"20 × Coal") ..
-      li(_"30 × Thatch Reed") ..
+      li(_"30 × Reed") ..
       p(_([[Remember that you can set target quantities for most of these wares in your economy settings.]]))
    ),
 }
@@ -115,7 +115,8 @@ obj_escape = {
    number = 1,
    body = objective_text(_"Flee from the Floods",
       li(_[[Build a port, a weaving mill and a shipyard, then start an expedition to flee before the storm flood drowns the island.]]) ..
-      li_arrow(_[[You can build the port either on the easternmost tip of the island or in the place where the enemy’s headquarters stood.]])
+      li_arrow(_[[You can build the port either on the easternmost tip of the island or in the place where the enemy’s headquarters stood.]]) ..
+      li_arrow(_[[If you did not prepare well enough to master this challenge in time, you can reload the scenario from the backup savegame automatically created for you shortly before you reached the enemy’s headquarters.]])
    ),
 }
 
@@ -129,8 +130,8 @@ intro_1 = {
       -- TRANSLATORS: Reebaud – Introduction 1
       _([[Welcome to the beautiful isle of Langeness! I am Reebaud, the chieftain of this pristine island.]])
       .. paragraphdivider() ..
-      -- TRANSLATORS: Reebaud – Introduction 1
-      _([[My tribe and I have just arrived from the mainland. There were fights with the Danes in the North, the Vikings in the East… So, I decided to lead my tribe away to start a quiet, peaceful life on this untouched island.]])),
+      -- TRANSLATORS: Reebaud – Introduction 1. Schauenburg and Holstein are dukedoms
+      _([[My tribe and I have just arrived from the mainland. There were fights with the Danes in the North, the Schauenburgers and Holsteiners in the East and South… So I decided to lead my tribe away to start a quiet, peaceful life on this untouched island.]])),
 }
 intro_2 = {
    title =_ "Introduction",
@@ -139,13 +140,13 @@ intro_2 = {
       _([[This is as good a place as any to start building our new home. First of all, we must ensure a stable supply of basic building materials.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – Introduction 2
-      _([[I have asked Hauke, one of my advisors to oversee the construction of our settlement.]])),
+      _([[I have asked Hauke, one of my advisors, to oversee the construction of our settlement.]])),
 }
 intro_3 = {
    title =_ "Introduction",
    body=hauke(_"The first buildings",
-      -- TRANSLATORS: Hauke – Introduction 3
-      _([[Greetings, Chieftain Reebaud! I will start with the colonization of the island straight away.]])
+      -- TRANSLATORS: Hauke – Introduction 3. "Peace" is the traditional frisian greeting
+      _([[Peace, Chieftain Reebaud! I will start with the colonization of the island straight away.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – Introduction 3
       _([[Like all Frisians, we build our houses mainly with bricks. We improve them by adding some logs and granite. The roofs are thatched with reed, naturally. Nothing is better suited to keep the rain out.]])
@@ -154,7 +155,7 @@ intro_3 = {
       _([[We should start by taking care of our wood production. Trees don’t seem to grow well on this island; better build at least two houses for foresters and one for a woodcutter.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – Introduction 3
-      _([[Also, we had better build a reed farm soon. Even reed farms need reed to be built, so we must take care not to run short before we can grow our own. Reed is easily cultivated, so the reed farmer doesn’t need anything more to start growing thatch reed.]]))
+      _([[Also, we had better build a reed farm soon. Even reed farms need reed to be built, so we must take care not to run short before we can grow our own. Reed is easily cultivated, so the reed farmer doesn’t need anything more to start growing reed fields.]]))
       .. new_objectives(obj_build_wood_economy),
 }
 intro_4 = {
@@ -186,7 +187,7 @@ warning_no_reed = {
    body=hauke(_"Build another reed farm",
       -- TRANSLATORS: Hauke – no reed
       _([[I noticed we have been short of reed for a while now. Our buildings seem to need quite a lot of it. We should build another reed farm or two. Reed is also used for making fishing nets and other tools; therefore, resolving this shortage should be a priority.]]))
-      .. li_arrow (_([[You should assign the new reed farm the highest priority for thatch reed in the construction site window.]])),
+      .. li_arrow (_([[You should assign the new reed farm the highest priority for reed in the construction site window.]])),
 }
 warning_no_clay = {
    title =_ "Clay Shortages",
@@ -231,7 +232,7 @@ food_2 = {
       _([[Well done. The miners are satisfied and have started working again.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – better food
-      _([[But when the mines will have to be expanded, rations won’t keep the miners happy. Better take precautions – build a second tavern, then consider enhancing one to a drinking hall.]])
+      _([[But when the mines will have to be enhanced, rations won’t keep the miners happy. Better take precautions – build a second tavern, then consider enhancing one to a drinking hall.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – better food
       _([[A drinking hall needs better food. Build a bakery, a brewery, and two or three farms to start growing barley. Keep in mind that barley grows very slowly; therefore, these few farms won’t suffice when we actually need the bread and beer. We should keep expanding quickly to have more space for farming.]])
@@ -409,7 +410,7 @@ rising_water_5 = {
    title =_ "Don’t Forget the Soldiers",
    body=reebaud(_"Soldiers to the port!",
       -- TRANSLATORS: Reebaud – rising water
-      _([[I almost forgot in this haste – whereever we will land, we’ll need soldiers to secure and expand our new colony. There’s space for up to 10 soldiers on our ship, if they don’t mind being all crammed up together. Let’s send some to the port when it’s completed, so they can embark when we set sail!]])),
+      _([[I almost forgot in this haste – whereever we will land, we’ll need soldiers to secure and expand our new colony. There’s space for up to ten soldiers on our ship, if they don’t mind being all crammed together. Let’s send some to the port when it’s completed, so they can embark when we set sail!]])),
 }
 
 victory_1 = {

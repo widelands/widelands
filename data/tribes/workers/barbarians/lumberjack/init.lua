@@ -12,8 +12,8 @@ animations = {
       fps = 10
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {10, 22}, 10)
-add_walking_animations(animations, "walkload", dirname, "walkload", {10, 21}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {10, 22}, 10)
+add_directional_animation(animations, "walkload", dirname, "walkload", {10, 21}, 10)
 
 
 tribes:new_worker_type {
@@ -34,10 +34,9 @@ tribes:new_worker_type {
       harvest = {
          "findobject=attrib:tree radius:10",
          "walk=object",
-         "playsound=sound/woodcutting woodcutting 255",
-         "animate=hacking 10000",
-         -- "playsound=sound/spoken timber 192",
-         "playsound=sound/woodcutting tree-falling 130",
+         "playsound=sound/woodcutting/woodcutting 255",
+         "animate=hacking 15000",
+         "playsound=sound/woodcutting/tree_falling 130",
          "callobject=fall",
          "animate=idle 2000",
          "createware=log",

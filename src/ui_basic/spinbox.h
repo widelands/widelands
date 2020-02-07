@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2018 by the Widelands Development Team
+ * Copyright (C) 2009-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,7 +45,7 @@ public:
 		kValueList  // Uses the values that are set by set_value_list().
 	};
 
-	enum class Units { kNone, kPixels, kMinutes, kPercent };
+	enum class Units { kNone, kPixels, kMinutes, kPercent, kFields };
 
 	/**
 	 * Text conventions: Sentence case for the 'label_text' and for all values
@@ -97,6 +97,6 @@ private:
 	uint32_t padding_;
 	uint32_t number_of_paddings_;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_SPINBOX_H

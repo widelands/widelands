@@ -1,24 +1,24 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # adrien vigneron <adrienvigneron@ml1.net>, 2015
-# balkh mogaehild <balkhmogaehild@protonmail.com>, 2018
+# Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
 # GunChleoc, 2016,2018
-# Samuël Weber <samuel.weber@normalesup.org>, 2017
+# Samuël Weber/GwendalD <samuel.weber@normalesup.org>, 2017
 # Jaypad <ju-ju@nataju.fr>, 2016
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net.TLD>, 2008
-# Renaud Bouchard, 2015-2018
+# Renaud Bouchard, 2015-2019
 # syl_, 2016-2017
 # Tubuntu <tubuntu@testimonium.be>, 2015
 # zecas <jjorge@free.fr>, 2016,2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-22 08:28+0000\n"
-"PO-Revision-Date: 2018-04-23 10:28+0000\n"
-"Last-Translator: balkh mogaehild <balkhmogaehild@protonmail.com>\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-12-30 07:55+0000\n"
+"PO-Revision-Date: 2019-12-30 08:11+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,56 +42,57 @@ msgstr "Licence"
 msgid "Licensing information for Widelands"
 msgstr "Information de licence pour Widelands"
 
-#: ../../data/txts/LICENSE.lua:9
-msgid "Copyright 2002 - 2018 by the Widelands Development Team."
-msgstr "Droits d'auteur 2002 - 2018 par l'équipe de développement Widelands."
+#. TRANSLATORS: Placeholder is copyright end year
+#: ../../data/txts/LICENSE.lua:10
+msgid "Copyright 2002 - %1% by the Widelands Development Team."
+msgstr "Droits d'auteur 2002 - %1% par l'équipe de développement de Widelands."
 
-#: ../../data/txts/LICENSE.lua:11
+#: ../../data/txts/LICENSE.lua:12
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
 msgstr "Ce jeu est libre et open source (FOSS), sous la licence GNU General Public (GPL) V2.0."
 
-#: ../../data/txts/LICENSE.lua:13
+#: ../../data/txts/LICENSE.lua:14
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
 msgstr "Vous pouvez trouver plus d'informations sur les logiciels libres et open source ou sur la licence publique générale GPL en visitant la page suivante : %s"
 
-#: ../../data/txts/LICENSE.lua:15
+#: ../../data/txts/LICENSE.lua:16
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr "Vous pourrez y trouver le texte complet de la licence ainsi que de plus amples informations au sujet de sa philosophie et ses implications juridiques."
 
-#: ../../data/txts/LICENSE.lua:17
+#: ../../data/txts/LICENSE.lua:18
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr "Nous livrons aussi la GPL en tant que document texte avec Widelands."
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:19
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
 msgstr "Sous Linux, vous pouvez trouver le fichier appelé COPYING à la racine du paquet binaire source ou autonome ou dans le répertoire d'installation. (comme ‘%1%’)."
 
-#: ../../data/txts/LICENSE.lua:19
+#: ../../data/txts/LICENSE.lua:20
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr "Dans Windows, vous pouvez trouver ce fichier appelé COPYING.txt dans le dossier de destination, et le menu de démarrage de Widelands contient un lien vers ce fichier."
 
-#: ../../data/txts/LICENSE.lua:20
+#: ../../data/txts/LICENSE.lua:21
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
 msgstr "Sur MacOS, vous pouvez trouver le fichier appelé COPYING dans l'archive que vous avez téléchargé à partir du site Web."
 
-#: ../../data/txts/LICENSE.lua:22
-msgid "This game comes as-is and without any warranty."
-msgstr "Ce jeux vient tel quel et sans aucune garantie."
-
 #: ../../data/txts/LICENSE.lua:23
+msgid "This game comes as-is and without any warranty."
+msgstr "Ce jeux est livré tel-quel et sans aucune garantie."
+
+#: ../../data/txts/LICENSE.lua:24
 msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
@@ -159,7 +160,7 @@ msgstr "Veuillez fournir le contexte du problème. Dites nous :"
 
 #: ../../data/txts/README.lua:28
 msgid "Detailed steps on how to trigger the bug, if possible."
-msgstr "Détails des opérations qui ont déclenché le bug, si possible."
+msgstr "Détails des opérations qui ont déclenché le bogue, si possible."
 
 #: ../../data/txts/README.lua:29
 msgid ""
@@ -206,12 +207,12 @@ msgid "Widelands Translators"
 msgstr "Traducteurs de Widelands"
 
 #: ../../data/txts/developers.lua:3
-msgid "Atlantean"
-msgstr "Atlante"
+msgid "Atlanteans"
+msgstr "Les Atlantes"
 
 #: ../../data/txts/developers.lua:3
-msgid "Barbarian"
-msgstr "Barbare"
+msgid "Barbarians"
+msgstr "Les Barbares"
 
 #: ../../data/txts/developers.lua:3
 msgid "Campaign Story"
@@ -246,6 +247,10 @@ msgid "Fedora Linux"
 msgstr "Fedora Linux"
 
 #: ../../data/txts/developers.lua:3
+msgid "Flatpak"
+msgstr "Flatpak"
+
+#: ../../data/txts/developers.lua:3
 msgid "Former Elders"
 msgstr "Anciens Formateurs"
 
@@ -254,8 +259,8 @@ msgid "FreeBSD"
 msgstr "FreeBSD"
 
 #: ../../data/txts/developers.lua:3
-msgid "Frisian"
-msgstr "Frison"
+msgid "Frisians"
+msgstr "Les Frisons"
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphicians"
@@ -320,6 +325,14 @@ msgstr "Windows"
 #: ../../data/txts/developers.lua:3
 msgid "ZetaOS"
 msgstr "ZetaOS"
+
+#: ../../data/txts/developers.lua:3
+msgid "and many, many more (thank you for everything you've done)"
+msgstr "et beaucoup, beaucoup plus (merci pour tout ce que vous avez fait)"
+
+#: ../../data/txts/developers.lua:3
+msgid "vacant"
+msgstr "vacant"
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
@@ -404,7 +417,12 @@ msgstr "Espace"
 msgid "Toggle building spaces"
 msgstr "Dés/Activer les espaces constructibles"
 
-#. TRANSLATORS: This is an access key combination. The hotkey is 'f'
+#. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
+#: ../../data/txts/help/common_helptexts.lua:49
+msgctxt "hotkey"
+msgid "Ctrl + F"
+msgstr ""
+
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"
 msgstr "Dés/Activer le plein-écran (si supporté par l'OS)"
@@ -446,7 +464,7 @@ msgstr "Le mode spectateur, signifie que vous pouvez voir tout ce qu'il se passe
 
 #: ../../data/txts/help/multiplayer_help.lua:15
 msgid "Player settings"
-msgstr "Options du joueur"
+msgstr "Réglages du joueur"
 
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
@@ -689,7 +707,7 @@ msgstr "1-9"
 #: ../../data/txts/tips/general_game.lua:43
 msgctxt "hotkey"
 msgid "Ctrl+(1-9)"
-msgstr "Ctrl+(1-9)"
+msgstr "Ctrl + (1-9)"
 
 #: ../../data/txts/tips/general_game.lua:43
 msgid "Press %1% to store important locations, then press %2% to recall them."
@@ -732,16 +750,16 @@ msgstr "Quelques constructions comme les fermes on une zone de travail très ré
 #: ../../data/txts/tips/general_game.lua:71
 msgctxt "hotkey"
 msgid "Ctrl+(+/-)"
-msgstr "Ctrl+(+/-)"
+msgstr "Ctrl + (+/-)"
 
 #: ../../data/txts/tips/general_game.lua:71
 msgctxt "hotkey"
 msgid "Ctrl+0"
-msgstr "Ctrl+0"
+msgstr "Ctrl + 0"
 
 #: ../../data/txts/tips/general_game.lua:71
 msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
-msgstr "Zoomez/Dézoomez avez la roulette de la souris ou %1%. Appuyez sur %2% pour revenir à la position de départ."
+msgstr "Zoomez/Dézoomez avec la roulette de la souris ou %1%. Appuyez sur %2% pour revenir à la position de départ."
 
 #: ../../data/txts/tips/general_game.lua:75
 msgid ""
@@ -773,7 +791,7 @@ msgstr "Utilisez « name » au début d'un message de tchat pour l'envoyer seule
 msgid ""
 "If the game should crash, don't worry! The game will be saved automatically "
 "so that you can reload it afterwards."
-msgstr "Si le jeux venait à planter, ne vous inquiétez pas ! Le jeux est automatiquement sauvegardé et vous pourrez le recharger après."
+msgstr "Si le jeux venait à planter, ne vous inquiétez pas ! Le jeux est automatiquement sauvegardé et vous pourrez le recharger ensuite."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/singleplayer.lua:7

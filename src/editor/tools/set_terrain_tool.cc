@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,9 +24,8 @@
 
 using Widelands::TCoords;
 
-int32_t EditorSetTerrainTool::handle_click_impl(const Widelands::World& world,
-                                                const Widelands::NodeAndTriangle<>& center,
-                                                EditorInteractive& /* parent */,
+int32_t EditorSetTerrainTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
+                                                EditorInteractive& eia,
                                                 EditorActionArgs* args,
                                                 Widelands::Map* map) {
 	assert(center.triangle.t == Widelands::TriangleIndex::D ||
@@ -56,7 +55,7 @@ int32_t EditorSetTerrainTool::handle_click_impl(const Widelands::World& world,
 		            radius));
 		std::list<Widelands::DescriptionIndex>::iterator i = args->terrain_type.begin();
 		do {
-			max = std::max(max, map->change_terrain(world, mr.location(), *i));
+			max = std::max(max, map->change_terrain(eia.egbase(), mr.location(), *i));
 			++i;
 		} while (mr.advance(*map));
 	}
@@ -64,9 +63,8 @@ int32_t EditorSetTerrainTool::handle_click_impl(const Widelands::World& world,
 }
 
 int32_t
-EditorSetTerrainTool::handle_undo_impl(const Widelands::World& world,
-                                       const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-                                       EditorInteractive& /* parent */,
+EditorSetTerrainTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands::Coords>& center,
+                                       EditorInteractive& eia,
                                        EditorActionArgs* args,
                                        Widelands::Map* map) {
 	assert(center.triangle.t == Widelands::TriangleIndex::D ||
@@ -82,7 +80,7 @@ EditorSetTerrainTool::handle_undo_impl(const Widelands::World& world,
 
 		std::list<Widelands::DescriptionIndex>::iterator i = args->original_terrain_type.begin();
 		do {
-			max = std::max(max, map->change_terrain(world, mr.location(), *i));
+			max = std::max(max, map->change_terrain(eia.egbase(), mr.location(), *i));
 			++i;
 		} while (mr.advance(*map));
 		return radius + max;

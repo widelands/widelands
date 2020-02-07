@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2018 by the Widelands Development Team
+ * Copyright (C) 2011-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -108,10 +108,10 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Sh
 	               boost::bind(&ShipWindow::act_scout_towards, this, WALK_SW));
 	exp_bot->add(btn_scout_[WALK_SW - 1]);
 
-	btn_explore_island_ccw_ =
-	   make_button(exp_bot, "expccw", _("Explore the island’s coast counter clockwise"),
-	               pic_explore_ccw, boost::bind(&ShipWindow::act_explore_island, this,
-	                                            IslandExploreDirection::kCounterClockwise));
+	btn_explore_island_ccw_ = make_button(
+	   exp_bot, "expccw", _("Explore the island’s coast counter clockwise"), pic_explore_ccw,
+	   boost::bind(
+	      &ShipWindow::act_explore_island, this, IslandExploreDirection::kCounterClockwise));
 	exp_bot->add(btn_explore_island_ccw_);
 
 	btn_scout_[WALK_SE - 1] =
@@ -162,25 +162,25 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Sh
 	   Notifications::subscribe<Widelands::NoteShip>([this](const Widelands::NoteShip& note) {
 		   if (note.ship->serial() == ship_.serial()) {
 			   switch (note.action) {
-			   // Unable to cancel the expedition
+				// Unable to cancel the expedition
 			   case Widelands::NoteShip::Action::kNoPortLeft:
 				   no_port_error_message();
 				   break;
-			   // The ship is no more
+				// The ship is no more
 			   case Widelands::NoteShip::Action::kLost:
 				   // Stop this from thinking to avoid segfaults
 				   set_thinks(false);
 				   die();
 				   break;
-			   // If the ship state has changed, e.g. expedition started or scouting direction changed,
-			   // think() will take care of it.
+				// If the ship state has changed, e.g. expedition started or scouting direction changed,
+				// think() will take care of it.
 			   case Widelands::NoteShip::Action::kDestinationChanged:
 			   case Widelands::NoteShip::Action::kWaitingForCommand:
 			   case Widelands::NoteShip::Action::kGained:
 				   break;
 			   }
 		   }
-		});
+	   });
 
 	// Init button visibility
 	navigation_box_height_ = navigation_box_.get_h();
@@ -216,8 +216,9 @@ void ShipWindow::no_port_error_message() {
 			UI::WLMessageBox messagebox(
 			   get_parent(),
 			   /** TRANSLATORS: Window label when an expedition can't be canceled */
-			   _("Cancel Expedition"), _("This expedition can’t be canceled, because the "
-			                             "ship has no port to return to."),
+			   _("Cancel Expedition"),
+			   _("This expedition can’t be canceled, because the "
+			     "ship has no port to return to."),
 			   UI::WLMessageBox::MBoxType::kOk);
 			messagebox.run<UI::Panel::Returncodes>();
 		}
@@ -232,7 +233,7 @@ void ShipWindow::think() {
 	}
 	bool can_act = igbase_.can_act(ship->owner().player_number());
 
-	btn_destination_->set_enabled(ship->get_destination(igbase_.egbase()));
+	btn_destination_->set_enabled(ship->get_current_destination(igbase_.egbase()));
 	btn_sink_->set_enabled(can_act);
 
 	display_->clear();
@@ -310,7 +311,7 @@ void ShipWindow::act_destination() {
 	if (ship == nullptr) {
 		return;
 	}
-	if (PortDock* destination = ship->get_destination(igbase_.egbase())) {
+	if (PortDock* destination = ship->get_current_destination(igbase_.egbase())) {
 		igbase_.map_view()->scroll_to_field(
 		   destination->get_warehouse()->get_position(), MapView::Transition::Smooth);
 	}

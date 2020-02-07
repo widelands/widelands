@@ -2,9 +2,9 @@ dirname = path.dirname(__file__)
 
 terrain_affinity = {
    preferred_temperature = 100,
-   preferred_humidity = 0.6,
-   preferred_fertility = 0.7,
-   pickiness = 0.8,
+   preferred_humidity = 600,
+   preferred_fertility = 700,
+   pickiness = 80,
 }
 
 world:new_immovable_type{
@@ -83,6 +83,7 @@ world:new_immovable_type{
    name = "aspen_summer_old",
    descname = _ "Aspen (Old)",
    species = _ "Aspen",
+   icon = dirname .. "old/idle_0.png",
    editor_category = "trees_deciduous",
    size = "small",
    attributes = { "tree" },
@@ -104,8 +105,7 @@ world:new_immovable_type{
          hotspot = { 23, 58 },
          fps = 10,
          sound_effect = {
-            directory = "sound/animals",
-            name = "bird1",
+            path = "sound/animals/bird1",
          },
       },
       falling = {

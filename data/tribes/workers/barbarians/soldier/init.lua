@@ -57,8 +57,18 @@ animations = {
       fps = 20
    },
 }
-add_walking_animations(animations, "walk", dirname, "walk", {16, 31}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {16, 31}, 10)
 
+all_levels_bar = {
+   min_health = 0,
+   min_attack = 0,
+   min_defense = 0,
+   min_evade = 0,
+   max_health = 3,
+   max_attack = 5,
+   max_defense = 0,
+   max_evade = 2,
+}
 
 tribes:new_soldier_type {
    msgctxt = "barbarians_worker",
@@ -96,39 +106,59 @@ tribes:new_soldier_type {
    evade = {
       max_level = 2,
       base = 25,
-      increase_per_level = 15,
+      increase_per_level = 16,
       pictures = path.list_files(dirname .. "evade_level?.png"),
+   },
+
+   aihints = {
+      preciousness = {
+         barbarians = 5
+      },
    },
 
    -- Random animations for battle
    attack_success_w = {
-      "atk_ok_w",
+      atk_ok_w = all_levels_bar,
    },
    attack_success_e = {
-      "atk_ok_e",
+      atk_ok_e = all_levels_bar,
    },
    attack_failure_w = {
-      "atk_fail_w",
+      atk_fail_w = all_levels_bar,
    },
    attack_failure_e = {
-      "atk_fail_e",
+      atk_fail_e = all_levels_bar,
    },
    evade_success_w = {
-      "eva_ok_w",
+      eva_ok_w = all_levels_bar,
    },
    evade_success_e = {
-      "eva_ok_e",
+      eva_ok_e = all_levels_bar,
    },
    evade_failure_w = {
-      "eva_fail_w",
+      eva_fail_w = all_levels_bar,
    },
    evade_failure_e = {
-      "eva_fail_e",
+      eva_fail_e = all_levels_bar,
    },
    die_w = {
-      "die_w",
+      die_w = all_levels_bar,
    },
    die_e = {
-      "die_e",
+      die_e = all_levels_bar,
+   },
+   idle = {
+      idle = all_levels_bar,
+   },
+   walk = {
+      {
+         range = all_levels_bar,
+         sw = "walk_sw",
+         se = "walk_se",
+         nw = "walk_nw",
+         ne = "walk_ne",
+         w = "walk_w",
+         e = "walk_e",
+      },
    },
 }

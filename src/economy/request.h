@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,7 @@
 #include "logic/map_objects/tribes/requirements.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "logic/widelands.h"
+#include "map_io/tribes_legacy_lookup_table.h"
 
 class FileRead;
 class FileWrite;
@@ -116,7 +117,8 @@ public:
 
 	void start_transfer(Game&, Supply&);
 
-	void read(FileRead&, Game&, MapObjectLoader&);
+	void
+	read(FileRead&, Game&, MapObjectLoader&, const TribesLegacyLookupTable& tribes_lookup_table);
 	void write(FileWrite&, Game&, MapObjectSaver&) const;
 	Worker* get_transfer_worker();
 
@@ -167,6 +169,6 @@ private:
 
 	Requirements requirements_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_REQUEST_H

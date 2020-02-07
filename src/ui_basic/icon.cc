@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2018 by the Widelands Development Team
+ * Copyright (C) 2010-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,6 +33,10 @@ Icon::Icon(Panel* const parent,
    : Panel(parent, x, y, w, h), pic_(picture_id), draw_frame_(false) {
 	set_handle_mouse(false);
 	set_thinks(false);
+}
+
+Icon::Icon(Panel* const parent, const Image* picture_id)
+   : Icon(parent, 0, 0, picture_id->width(), picture_id->height(), picture_id) {
 }
 
 void Icon::set_icon(const Image* picture_id) {
@@ -69,4 +73,4 @@ void Icon::draw(RenderTarget& dst) {
 		}
 	}
 }
-}
+}  // namespace UI

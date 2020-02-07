@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2018 by the Widelands Development Team
+ * Copyright (C) 2011-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,13 +21,18 @@
 
 #include <memory>
 
+#include <boost/format.hpp>
+
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "chat/chat.h"
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text/rt_errors.h"
-#include "profile/profile.h"
+#include "sound/sound_handler.h"
+#include "wlapplication_options.h"
 #include "wui/chat_msg_layout.h"
 #include "wui/logmessage.h"
 
@@ -44,6 +49,7 @@ struct ChatOverlay::Impl {
 
 	/// Reception time of oldest message
 	time_t oldest_;
+	time_t sound_played_;
 
 	/// Layouted message list
 	std::string all_text_;
@@ -54,18 +60,22 @@ struct ChatOverlay::Impl {
 	std::unique_ptr<Notifications::Subscriber<ChatMessage>> chat_message_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<LogMessage>> log_message_subscriber_;
 
+	FxId new_message_;
+
 	Impl()
 	   : transparent_(false),
 	     chat_(nullptr),
 	     havemessages_(false),
 	     oldest_(0),
+	     sound_played_(time(nullptr)),
 	     chat_message_subscriber_(
 	        Notifications::subscribe<ChatMessage>([this](const ChatMessage&) { recompute(); })),
 	     log_message_subscriber_(
 	        Notifications::subscribe<LogMessage>([this](const LogMessage& note) {
 		        log_messages_.push_back(note);
 		        recompute();
-		     })) {
+	        })),
+	     new_message_(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {
 	}
 
 	void recompute();
@@ -81,8 +91,7 @@ private:
 ChatOverlay::ChatOverlay(
    UI::Panel* const parent, int32_t const x, int32_t const y, int32_t const w, int32_t const h)
    : UI::Panel(parent, x, y, w, h), m(new Impl()) {
-	Section& s = g_options.pull_section("global");
-	m->transparent_ = s.get_bool("transparent_chat", true);
+	m->transparent_ = get_config_bool("transparent_chat", true);
 
 	set_thinks(true);
 }
@@ -130,17 +139,22 @@ void ChatOverlay::Impl::recompute() {
 			oldest_ = log_messages_[log_idx].time;
 			// Do some richtext formatting here
 			if (now - oldest_ < CHAT_DISPLAY_TIME) {
-				richtext = "<p><font face=serif size=14 color=dddddd bold=1>" +
-				           log_messages_[log_idx].msg + "<br></font></p>" + richtext;
+				richtext = (boost::format("<p>%s</p>") % g_gr->styles()
+				                                            .font_style(UI::FontStyle::kChatServer)
+				                                            .as_font_tag(log_messages_[log_idx].msg))
+				              .str();
 			}
 			log_idx--;
-		} else if (log_idx < 0 ||
-		           (chat_idx >= 0 &&
-		            chat_->get_messages()[chat_idx].time >= log_messages_[log_idx].time)) {
+		} else if (log_idx < 0 || (chat_idx >= 0 && chat_->get_messages()[chat_idx].time >=
+		                                               log_messages_[log_idx].time)) {
 			// Chat message is more recent
 			oldest_ = chat_->get_messages()[chat_idx].time;
 			if (now - oldest_ < CHAT_DISPLAY_TIME) {
 				richtext = format_as_richtext(chat_->get_messages()[chat_idx]) + richtext;
+			}
+			if (!chat_->sound_off() && sound_played_ < oldest_) {
+				g_sh->play_fx(SoundType::kChat, new_message_);
+				sound_played_ = oldest_;
 			}
 			chat_idx--;
 		} else {

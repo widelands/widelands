@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,8 +24,8 @@
 
 #include "base/log.h"
 #include "helper.h"
-#include "logic/findnode.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/findnode.h"
 #include "sound/sound_handler.h"
 
 namespace Widelands {
@@ -35,11 +35,11 @@ namespace Widelands {
 Worker Programs
 ===============
 
-Worker programs are defined in the ``programs`` subtable specified in the worker's :ref:`lua_tribes_workers_common`.
-Each worker program is a Lua table in itself and defined as a series of command strings.
-Commands can also have parameters, which are separated from each other by a blank space.
-These parameters can also have values, which are separated from the parameter name by a colon (:). Finally, programs can call other programs.
-The table looks like this::
+Worker programs are defined in the ``programs`` subtable specified in the worker's
+:ref:`lua_tribes_workers_common`. Each worker program is a Lua table in itself and defined as a
+series of command strings. Commands can also have parameters, which are separated from each other by
+a blank space. These parameters can also have values, which are separated from the parameter name by
+a colon (:). Finally, programs can call other programs. The table looks like this::
 
    programs = {
       program_name1 = {
@@ -69,12 +69,14 @@ The available commands are:
 - `callobject`_
 - `plant`_
 - `createbob`_
+- `buildferry`_
 - `removeobject`_
 - `repeatsearch`_
 - `findresources`_
 - `scout`_
 - `playsound`_
 - `construct`_
+- `terraform`_
 */
 
 const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
@@ -89,12 +91,14 @@ const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
    {"callobject", &WorkerProgram::parse_callobject},
    {"plant", &WorkerProgram::parse_plant},
    {"createbob", &WorkerProgram::parse_createbob},
+   {"buildferry", &WorkerProgram::parse_buildferry},
    {"removeobject", &WorkerProgram::parse_removeobject},
    {"repeatsearch", &WorkerProgram::parse_repeatsearch},
    {"findresources", &WorkerProgram::parse_findresources},
    {"scout", &WorkerProgram::parse_scout},
    {"playsound", &WorkerProgram::parse_playsound},
    {"construct", &WorkerProgram::parse_construct},
+   {"terraform", &WorkerProgram::parse_terraform},
 
    {nullptr, nullptr}};
 
@@ -160,7 +164,7 @@ createware
       harvest = {
          "findobject=attrib:ripe_wheat radius:2",
          "walk=object",
-         "playsound=sound/farm scythe 220",
+         "playsound=sound/farm/scythe 220",
          "animate=harvesting 10000",
          "callobject=harvest",
          "animate=gathering 4000",
@@ -194,10 +198,10 @@ mine
       fish = {
          "findspace=size:any radius:7 resource:fish",
          "walk=coords",
-         "playsound=sound/fisher fisher_throw_net 192",
+         "playsound=sound/fisher/fisher_throw_net 192",
          "mine=fish 1", -- Remove a fish in an area of 1
          "animate=fishing 3000",
-         "playsound=sound/fisher fisher_pull_net 192",
+         "playsound=sound/fisher/fisher_pull_net 192",
          "createware=fish",
          "return"
       },
@@ -270,9 +274,10 @@ findobject
    or ``callobject``. Examples::
 
       cut_granite = {
-         "findobject=attrib:rocks radius:6", -- Find rocks on the map within a radius of 6 from your building
+         "findobject=attrib:rocks radius:6", -- Find rocks on the map within a radius of 6 from your
+         building
          "walk=object", -- Now walk to those rocks
-         "playsound=sound/atlanteans/cutting stonecutter 192",
+         "playsound=sound/atlanteans/cutting/stonecutter 192",
          "animate=hacking 12000",
          "callobject=shrink",
          "createware=granite",
@@ -280,7 +285,8 @@ findobject
       },
 
       hunt = {
-         "findobject=type:bob radius:13 attrib:eatable", -- Find an eatable bob (animal) within a radius of 13 from your building
+         "findobject=type:bob radius:13 attrib:eatable", -- Find an eatable bob (animal) within a
+         radius of 13 from your building
          "walk=object", -- Walk to where the animal is
          "animate=idle 1500",
          "removeobject",
@@ -331,7 +337,8 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 /* RST
 findspace
 ^^^^^^^^^
-.. function:: findspace=size:\<plot\> radius:\<distance\> [breed] [resource:\<name\>] [avoid:\<immovable_attribute\>] [saplingsearches:\<number\>] [space]
+.. function:: findspace=size:\<plot\> radius:\<distance\> [breed] [resource:\<name\>]
+   [avoid:\<immovable_attribute\>] [saplingsearches:\<number\>] [space] [terraform]
 
    :arg string size: The size or building plot type of the free space.
       The possible values are:
@@ -343,6 +350,7 @@ findspace
       * ``big``: Big building plots only.
       * ``mine``: Mining plots only.
       * ``port``: Port spaces only.
+      * ``swim``: Anything on the coast.
 
    :arg int radius: Search for map fields within the given radius around the worker.
 
@@ -362,11 +370,15 @@ findspace
       neighbors are also walkable (an exception is made if one of the neighboring
       fields is owned by this worker's location).
 
+   :arg empty terraform: Find only nodes where at least one adjacent triangle has
+      terrain that can be enhanced
+
    Find a map field based on a number of predicates.
    The field can then be used in other commands like ``walk``. Examples::
 
       breed = {
-         "findspace=size:any radius:7 breed resource:fish", -- Find any field that can have fish in it for adding a fish to it below
+         -- Find any field that can have fish in it for adding a fish to it below
+         "findspace=size:any radius:7 breed resource:fish",
          "walk=coords",
          "animate=freeing 3000",
          "breed=fish 1",
@@ -374,7 +386,8 @@ findspace
       },
 
       plant = {
-         "findspace=size:any radius:5 avoid:field saplingsearches:8", -- Don't get in the way of the farmer's crops when planting trees. Retry 8 times.
+         -- Don't get in the way of the farmer's crops when planting trees. Retry 8 times.
+         "findspace=size:any radius:5 avoid:field saplingsearches:8",
          "walk=coords",
          "animate=dig 2000",
          "animate=planting 1000",
@@ -384,8 +397,9 @@ findspace
       },
 
       plant = {
-         "findspace=size:any radius:2 space", -- The farmer will want to walk to this field again later for harvesting his crop
-         "walk coords",
+         -- The farmer will want to walk to this field again later for harvesting his crop
+         "findspace=size:any radius:2 space",
+         "walk=coords",
          "animate=planting 4000",
          "plant=attrib:seed_wheat",
          "animate=planting 4000",
@@ -399,6 +413,7 @@ findspace
  * iparam4 = whether the "breed" flag is set
  * iparam5 = Immovable attribute id
  * iparam6 = Forester retries
+ * iparam7 = whether the "terraform" flag is set
  * sparam1 = Resource
  */
 void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::string>& cmd) {
@@ -411,6 +426,7 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 	act->iparam4 = 0;
 	act->iparam5 = -1;
 	act->iparam6 = 1;
+	act->iparam7 = 0;
 	act->sparam1 = "";
 
 	// Parse predicates
@@ -430,10 +446,15 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 			static const struct {
 				char const* name;
 				int32_t val;
-			} sizenames[] = {{"any", FindNodeSize::sizeAny},     {"build", FindNodeSize::sizeBuild},
-			                 {"small", FindNodeSize::sizeSmall}, {"medium", FindNodeSize::sizeMedium},
-			                 {"big", FindNodeSize::sizeBig},     {"mine", FindNodeSize::sizeMine},
-			                 {"port", FindNodeSize::sizePort},   {nullptr, 0}};
+			} sizenames[] = {{"any", FindNodeSize::sizeAny},
+			                 {"build", FindNodeSize::sizeBuild},
+			                 {"small", FindNodeSize::sizeSmall},
+			                 {"medium", FindNodeSize::sizeMedium},
+			                 {"big", FindNodeSize::sizeBig},
+			                 {"mine", FindNodeSize::sizeMine},
+			                 {"port", FindNodeSize::sizePort},
+			                 {"swim", FindNodeSize::sizeSwim},
+			                 {nullptr, 0}};
 
 			int32_t index;
 
@@ -447,6 +468,8 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 			act->iparam2 = sizenames[index].val;
 		} else if (key == "breed") {
 			act->iparam4 = 1;
+		} else if (key == "terraform") {
+			act->iparam7 = 1;
 		} else if (key == "resource") {
 			act->sparam1 = value;
 		} else if (key == "space") {
@@ -507,8 +530,9 @@ walk
 
       buildship = {
          "walk=object-or-coords", -- Walk to coordinates from 1. or to object from 2.
-         "plant=attrib:shipconstruction unless object", -- 2. This will create an object for us if we don't have one yet
-         "playsound=sound/sawmill sawmill 230",
+         -- 2. This will create an object for us if we don't have one yet
+         "plant=attrib:shipconstruction unless object",
+         "playsound=sound/sawmill/sawmill 230",
          "animate=work 500",
          "construct", -- 1. This will find a space for us if no object has been planted yet
          "animate=work 5000",
@@ -569,7 +593,10 @@ void WorkerProgram::parse_animate(Worker::Action* act, const std::vector<std::st
 	}
 
 	act->function = &Worker::run_animate;
-	act->iparam1 = worker_.get_animation(cmd[1]);
+	// If the second parameter to MapObjectDescr::get_animation is ever used for anything other than
+	// level-dependent soldier animations, or we want to write a worker program for a soldier,
+	// we will need to store the animation name as a string in an iparam
+	act->iparam1 = worker_.get_animation(cmd[1], nullptr);
 
 	act->iparam2 = strtol(cmd[2].c_str(), &endp, 0);
 	if (*endp)
@@ -611,9 +638,9 @@ callobject
       harvest = {
          "findobject=attrib:tree radius:10",
          "walk=object",
-         "playsound=sound/woodcutting fast_woodcutting 250",
+         "playsound=sound/woodcutting/fast_woodcutting 250",
          "animate=hacking 10000",
-         "playsound=sound/woodcutting tree-falling 130",
+         "playsound=sound/woodcutting/tree-falling 130",
          "callobject=fall", -- Cause the tree to fall
          "animate=idle 2000",
          "createware=log",
@@ -659,15 +686,17 @@ plant
          "findspace=size:any radius:2 space",
          "walk=coords",
          "animate=planting 4000",
-         "plant=attrib:seed_wheat", -- Plant the tiny field immovable that the worker's tribe knows about
+         -- Plant the tiny field immovable that the worker's tribe knows about
+         "plant=attrib:seed_wheat",
          "animate=planting 4000",
          "return",
       },
 
       buildship = {
          "walk=object-or-coords",
-         "plant=attrib:shipconstruction unless object", -- Only create a shipconstruction if we don't already have one
-         "playsound=sound/sawmill sawmill 230",
+         -- Only create a shipconstruction if we don't already have one
+         "plant=attrib:shipconstruction unless object",
+         "playsound=sound/sawmill/sawmill 230",
          "animate=work 500",
          "construct",
          "animate=work 5000",
@@ -749,6 +778,52 @@ void WorkerProgram::parse_createbob(Worker::Action* act, const std::vector<std::
 }
 
 /* RST
+buildferry
+^^^^^^^^^^
+.. function:: buildferry
+
+   Adds a new instance of this tribe's ferry to the map at the worker's current location. Example::
+
+      construct = {
+         "findspace=size:swim radius:4",
+         "walk=coords",
+         "animate=work 2000",
+         "buildferry",
+         "animate=work 2000",
+         "return"
+      }
+*/
+void WorkerProgram::parse_buildferry(Worker::Action* act, const std::vector<std::string>& cmd) {
+	if (cmd.size() > 1) {
+		throw wexception("buildferry takes no arguments");
+	}
+	act->function = &Worker::run_buildferry;
+}
+
+/* RST
+terraform
+^^^^^^^^^
+.. function:: terraform
+
+   Turns the terrain of one of the triangles around the current node into its
+   enhancement terrain. Example::
+
+      terraform = {
+         "findspace=size:terraform radius:6",
+         "walk=coords",
+         "animate=dig 2000",
+         "terraform",
+         "return"
+      }
+*/
+void WorkerProgram::parse_terraform(Worker::Action* act, const std::vector<std::string>& cmd) {
+	if (cmd.size() > 1) {
+		throw wexception("terraform takes no arguments");
+	}
+	act->function = &Worker::run_terraform;
+}
+
+/* RST
 removeobject
 ^^^^^^^^^^^^
 .. function:: removeobject
@@ -759,7 +834,8 @@ removeobject
          "findobject=type:bob radius:13 attrib:eatable", -- Select an object to remove
          "walk=object",
          "animate=idle 1000",
-         "removeobject", -- The selected eatable map object has been hunted, so remove it from the map
+         -- The selected eatable map object has been hunted, so remove it from the map
+         "removeobject",
          "createware=meat",
          "return"
       }
@@ -820,9 +896,10 @@ findresources
       search = {
          "animate=hacking 5000",
          "animate=idle 2000",
-         "playsound=sound/hammering geologist_hammer 192",
+         "playsound=sound/hammering/geologist_hammer 192",
          "animate=hacking 3000",
-         "findresources" -- Plant a resource marker at the current location, according to what has been found.
+         -- Plant a resource marker at the current location, according to what has been found.
+         "findresources"
       }
 */
 void WorkerProgram::parse_findresources(Worker::Action* act, const std::vector<std::string>& cmd) {
@@ -864,13 +941,13 @@ void WorkerProgram::parse_scout(Worker::Action* act, const std::vector<std::stri
 /* RST
 playsound
 ^^^^^^^^^^
-.. function:: playsound=\<sound_dir\> \<sound_name\> [priority]
+.. function:: playsound=\<sound_dir/sound_name\> [priority]
 
-   :arg string sound_dir: The directory (folder) that the sound files are in,
-      relative to the data directory.
-   :arg string sound_name: The name of the particular sound to play.
+   :arg string sound_dir/sound_name: The directory (folder) that the sound files are in,
+      relative to the data directory, followed by the name of the particular sound to play.
       There can be multiple sound files to select from at random, e.g.
-      for `scythe`, we can have `scythe_00.ogg`, `scythe_01.ogg` ...
+      for `sound/farm/scythe`, we can have `sound/farm/scythe_00.ogg`, `sound/farm/scythe_01.ogg`
+      ...
 
    :arg int priority: The priority to give this sound. Maximum priority is 255.
 
@@ -879,7 +956,7 @@ playsound
       harvest = {
          "findobject=attrib:ripe_wheat radius:2",
          "walk=object",
-         "playsound=sound/farm scythe 220", -- Almost certainly play a swishy harvesting sound
+         "playsound=sound/farm/scythe 220", -- Almost certainly play a swishy harvesting sound
          "animate=harvesting 10000",
          "callobject=harvest",
          "animate=gathering 4000",
@@ -891,13 +968,14 @@ void WorkerProgram::parse_playsound(Worker::Action* act, const std::vector<std::
 	if (cmd.size() < 3 || cmd.size() > 4)
 		throw wexception("Usage: playsound <sound_dir> <sound_name> [priority]");
 
-	act->sparam1 = cmd[1] + "/" + cmd[2];
-
-	g_sound_handler.load_fx_if_needed(cmd[1], cmd[2], act->sparam1);
+	act->iparam2 = SoundHandler::register_fx(SoundType::kAmbient, cmd[1]);
 
 	act->function = &Worker::run_playsound;
-	act->iparam1 = cmd.size() == 3 ? 64 :  //  50% chance to play, only one instance at a time
-	                  atoi(cmd[3].c_str());
+	act->iparam1 = cmd.size() == 2 ? kFxPriorityMedium : atoi(cmd[2].c_str());
+	if (act->iparam1 < kFxPriorityLowest) {
+		throw GameDataError("Minmum priority for sounds is %d, but only %d was specified for %s",
+		                    kFxPriorityLowest, act->iparam1, cmd[1].c_str());
+	}
 }
 
 /* RST
@@ -910,10 +988,13 @@ construct
 
       buildship = {
          "walk=object-or-coords", -- Walk to coordinates from 1. or to object from 2.
-         "plant=attrib:shipconstruction unless object", -- 2. This will create an object for us if we don't have one yet
-         "playsound=sound/sawmill sawmill 230",
+         -- 2. This will create an object for us if we don't have one yet
+         "plant=attrib:shipconstruction unless object",
+         "playsound=sound/sawmill/sawmill 230",
          "animate=work 500",
-         "construct", -- 1. Add the current ware to the shipconstruction. This will find a space for us if no shipconstruction object has been planted yet
+         -- 1. Add the current ware to the shipconstruction. This will find a space for us if no
+         -- shipconstruction object has been planted yet
+         "construct",
          "animate=work 5000",
          "return"
       },
@@ -930,4 +1011,4 @@ void WorkerProgram::parse_construct(Worker::Action* act, const std::vector<std::
 
 	act->function = &Worker::run_construct;
 }
-}
+}  // namespace Widelands

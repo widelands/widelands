@@ -25,7 +25,7 @@ return {
          wares = {
              log = 30,
              granite = 45,
-             thatch_reed = 35,
+             reed = 35,
              brick = 70,
              clay = 20,
              water = 5,
@@ -99,7 +99,7 @@ return {
          inputs = {
             iron = 7,
             log = 7,
-            thatch_reed = 7,
+            reed = 7,
          }
       })
 

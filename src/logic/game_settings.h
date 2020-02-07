@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2018 by the Widelands Development Team
+ * Copyright (C) 2008-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,6 +58,7 @@ struct PlayerSettings {
 };
 
 struct UserSettings {
+	// TODO(k.halfman): make this some const instead of calculating this every time
 	static uint8_t none() {
 		return std::numeric_limits<uint8_t>::max();
 	}
@@ -111,7 +112,13 @@ struct NoteGameSettings {
  * Think of it as the Model in MVC.
  */
 struct GameSettings {
-	GameSettings() : playernum(0), usernum(0), scenario(false), multiplayer(false), savegame(false) {
+	GameSettings()
+	   : playernum(0),
+	     usernum(0),
+	     scenario(false),
+	     multiplayer(false),
+	     savegame(false),
+	     peaceful(false) {
 		std::unique_ptr<LuaInterface> lua(new LuaInterface);
 		std::unique_ptr<LuaTable> win_conditions(
 		   lua->run_script("scripting/win_conditions/init.lua"));
@@ -155,6 +162,9 @@ struct GameSettings {
 
 	/// Is a savegame selected for loading?
 	bool savegame;
+
+	// Is all fighting forbidden?
+	bool peaceful;
 
 	/// List of tribes that players are allowed to choose
 	std::vector<Widelands::TribeBasicInfo> tribes;
@@ -210,10 +220,16 @@ struct GameSettingsProvider {
 	virtual void set_win_condition_script(const std::string& wc) = 0;
 	virtual std::string get_win_condition_script() = 0;
 
+	virtual void set_peaceful_mode(bool peace) = 0;
+	virtual bool is_peaceful_mode() = 0;
+
+	bool has_players_tribe() {
+		return UserSettings::highest_playernum() >= settings().playernum;
+	}
 	// For retrieving tips texts
 	struct NoTribe {};
 	const std::string& get_players_tribe() {
-		if (UserSettings::highest_playernum() < settings().playernum)
+		if (!has_players_tribe())
 			throw NoTribe();
 		return settings().players[settings().playernum].tribe;
 	}

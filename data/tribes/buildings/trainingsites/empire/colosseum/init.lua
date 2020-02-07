@@ -44,9 +44,9 @@ tribes:new_trainingsite_type {
    },
 
    inputs = {
-      { name = "fish", amount = 6 },
-      { name = "meat", amount = 6 },
-      { name = "empire_bread", amount = 10 }
+      { name = "fish", amount = 8 },
+      { name = "meat", amount = 8 },
+      { name = "empire_bread", amount = 8 }
    },
    outputs = {
       "empire_soldier",
@@ -67,7 +67,7 @@ tribes:new_trainingsite_type {
          descname = _"sleeping",
          actions = {
             "sleep=5000",
-            "checksoldier=soldier attack 9", -- dummy check to get sleep rated as skipped - else it will change statistics
+            "return=no_stats",
          }
       },
       upgrade_soldier_evade_0 = {
@@ -75,9 +75,11 @@ tribes:new_trainingsite_type {
          descname = pgettext("empire_building", "upgrading soldier evade from level 0 to level 1"),
          actions = {
             "checksoldier=soldier evade 0", -- Fails when aren't any soldier of level 0 evade
+            "return=failed unless site has empire_bread",
+            "return=failed unless site has fish,meat",
             "sleep=30000",
             "checksoldier=soldier evade 0", -- Because the soldier can be expelled by the player
-            "consume=empire_bread:2 fish,meat",
+            "consume=empire_bread fish,meat",
             "train=soldier evade 0 1"
          }
       },
@@ -86,9 +88,11 @@ tribes:new_trainingsite_type {
          descname = pgettext("empire_building", "upgrading soldier evade from level 1 to level 2"),
          actions = {
             "checksoldier=soldier evade 1", -- Fails when aren't any soldier of level 1 evade
+            "return=failed unless site has empire_bread",
+            "return=failed unless site has fish,meat:2",
             "sleep=30000",
             "checksoldier=soldier evade 1", -- Because the soldier can be expelled by the player
-            "consume=empire_bread:2 fish,meat:2",
+            "consume=empire_bread fish,meat:2",
             "train=soldier evade 1 2"
          }
       },

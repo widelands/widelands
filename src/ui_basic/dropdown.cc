@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2018 by the Widelands Development Team
+ * Copyright (C) 2016-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,49 +27,63 @@
 #include "base/macros.h"
 #include "graphic/align.h"
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/window.h"
 
 namespace {
-
-int base_height(int button_dimension) {
-	return std::max(
-	   button_dimension,
-	   UI::g_fh->render(as_uifont(UI::g_fh->fontset()->representative_character()))->height() + 2);
+int base_height(int button_dimension, UI::PanelStyle style) {
+	int result =
+	   std::max(button_dimension, text_height(g_gr->styles().table_style(style).enabled()) + 2);
+	return result;
 }
-
 }  // namespace
 
 namespace UI {
 
 int BaseDropdown::next_id_ = 0;
 
+// Dropdowns hook into parent elements to be notified of layouting changes. We need to keep track of
+// whether a dropdown actually still exists when notified to avoid heap-use-after-free's.
+static std::map<int, BaseDropdown*> living_dropdowns_;
+// static
+void BaseDropdown::layout_if_alive(int id) {
+	auto it = living_dropdowns_.find(id);
+	if (it != living_dropdowns_.end()) {
+		it->second->layout();
+	}
+}
+
 BaseDropdown::BaseDropdown(UI::Panel* parent,
+                           const std::string& name,
                            int32_t x,
                            int32_t y,
                            uint32_t w,
-                           uint32_t h,
+                           uint32_t max_list_items,
                            int button_dimension,
                            const std::string& label,
                            const DropdownType type,
-                           UI::PanelStyle style)
-   : UI::Panel(parent,
-               x,
-               y,
-               type == DropdownType::kPictorial ? button_dimension : w,
-               // Height only to fit the button, so we can use this in Box layout.
-               base_height(button_dimension)),
+                           UI::PanelStyle style,
+                           ButtonStyle button_style)
+   : UI::NamedPanel(parent,
+                    name,
+                    x,
+                    y,
+                    (type == DropdownType::kPictorial || type == DropdownType::kPictorialMenu) ?
+                       button_dimension :
+                       w,
+                    // Height only to fit the button, so we can use this in Box layout.
+                    base_height(button_dimension, style)),
      id_(next_id_++),
-     max_list_height_(h - 2 * get_h()),
-     list_width_(w),
+     max_list_items_(max_list_items),
+     max_list_height_(std::numeric_limits<uint32_t>::max()),
      list_offset_x_(0),
      list_offset_y_(0),
-     button_dimension_(button_dimension),
+     base_height_(base_height(button_dimension, style)),
      mouse_tolerance_(50),
-     button_box_(this, 0, 0, UI::Box::Horizontal, w, h),
+     button_box_(this, 0, 0, UI::Box::Horizontal, w, get_h()),
      push_button_(type == DropdownType::kTextual ?
                      new UI::Button(&button_box_,
                                     "dropdown_select",
@@ -77,9 +91,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                                     0,
                                     button_dimension,
                                     get_h(),
-                                    style == UI::PanelStyle::kFsMenu ?
-                                       UI::ButtonStyle::kFsMenuMenu :
-                                       UI::ButtonStyle::kWuiSecondary,
+                                    button_style,
                                     g_gr->images().get("images/ui_basic/scrollbar_down.png")) :
                      nullptr),
      display_button_(&button_box_,
@@ -90,12 +102,16 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                         w - button_dimension :
                         type == DropdownType::kTextualNarrow ? w : button_dimension,
                      get_h(),
-                     style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
-                                                        UI::ButtonStyle::kWuiSecondary,
+                     type == DropdownType::kTextual ?
+                        (style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
+                                                            UI::ButtonStyle::kWuiSecondary) :
+                        button_style,
                      label),
      label_(label),
      type_(type),
-     is_enabled_(true) {
+     is_enabled_(true),
+     button_style_(button_style),
+     autoexpand_display_button_(false) {
 	if (label.empty()) {
 		set_tooltip(pgettext("dropdown", "Select Item"));
 	} else {
@@ -103,26 +119,29 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	}
 
 	// Close whenever another dropdown is opened
-	subscriber_ = Notifications::subscribe<NoteDropdown>([this](const NoteDropdown& note) {
+	dropdown_subscriber_ = Notifications::subscribe<NoteDropdown>([this](const NoteDropdown& note) {
 		if (id_ != note.id) {
 			close();
 		}
 	});
+	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
+	   [this](const GraphicResolutionChanged&) { layout(); });
 
-	assert(max_list_height_ > 0);
+	assert(max_list_items_ > 0);
 	// Hook into highest parent that we can get so that we can drop down outside the panel.
-	// Positioning breaks down with TabPanels, so we exclude them.
-	while (parent->get_parent() && !is_a(UI::TabPanel, parent->get_parent())) {
-		parent = parent->get_parent();
+	UI::Panel* list_parent = &display_button_;
+	while (list_parent->get_parent()) {
+		list_parent = list_parent->get_parent();
 	}
-	list_ = new UI::Listselect<uintptr_t>(parent, 0, 0, w, 0, style, ListselectLayout::kDropdown);
+	list_ =
+	   new UI::Listselect<uintptr_t>(list_parent, 0, 0, w, 0, style, ListselectLayout::kDropdown);
 
 	list_->set_visible(false);
-	button_box_.add(&display_button_);
+	button_box_.add(&display_button_, UI::Box::Resizing::kExpandBoth);
 	display_button_.sigclicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
 	if (push_button_ != nullptr) {
 		display_button_.set_perm_pressed(true);
-		button_box_.add(push_button_);
+		button_box_.add(push_button_, UI::Box::Resizing::kFullSize);
 		push_button_->sigclicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
 	}
 	button_box_.set_size(w, get_h());
@@ -131,54 +150,46 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	set_can_focus(true);
 	set_value();
 
-	// Find parent windows so that we can move the list along with them
-	UI::Panel* parent_window_candidate = get_parent();
-	while (parent_window_candidate) {
-		if (upcast(UI::Window, window, parent_window_candidate)) {
-			window->position_changed.connect(boost::bind(&BaseDropdown::layout, this));
-		}
-		parent_window_candidate = parent_window_candidate->get_parent();
+	const int serial = id_;  // Not a member variable, because when the lambda below is triggered we
+	                         // might no longer exist
+	living_dropdowns_.insert(std::make_pair(serial, this));
+	// Find parent windows, boxes etc. so that we can move the list along with them
+	UI::Panel* ancestor = this;
+	while ((ancestor = ancestor->get_parent()) != nullptr) {
+		ancestor->position_changed.connect([serial] { layout_if_alive(serial); });
 	}
-
 	layout();
 }
 
 BaseDropdown::~BaseDropdown() {
 	// The list needs to be able to drop outside of windows, so it won't close with the window.
-	// Deleting here leads to conflict with who gets to delete it, so we hide it instead.
-	// TODO(GunChleoc): Investigate whether we can find a better solution for this
-	if (list_) {
-		list_->clear();
-		list_->set_visible(false);
-	}
+	// So, we tell it to die.
+	list_->die();
+
+	// Unsubscribe from layouting hooks
+	assert(living_dropdowns_.find(id_) != living_dropdowns_.end());
+	living_dropdowns_.erase(living_dropdowns_.find(id_));
 }
 
 void BaseDropdown::set_height(int height) {
-	max_list_height_ = height - base_height(button_dimension_);
+	max_list_height_ = height - base_height_;
 	layout();
 }
 
-void BaseDropdown::set_max_items(int items) {
-	set_height(list_->get_lineheight() * items + base_height(button_dimension_));
-}
-
 void BaseDropdown::layout() {
-	const int base_h = base_height(button_dimension_);
-	const int w = type_ == DropdownType::kPictorial ? button_dimension_ : get_w();
-	button_box_.set_size(w, base_h);
-	display_button_.set_desired_size(
-	   type_ == DropdownType::kTextual ? w - button_dimension_ : w, base_h);
-	int new_list_height =
-	   std::min(static_cast<int>(list_->size()) * list_->get_lineheight(), max_list_height_);
-	list_->set_size(type_ != DropdownType::kPictorial ? w : list_width_, new_list_height);
-	set_desired_size(w, base_h);
+	int list_width = list_->calculate_desired_width();
+
+	const int new_list_height = std::min(max_list_height_ / list_->get_lineheight(),
+	                                     std::min(list_->size(), max_list_items_)) *
+	                            list_->get_lineheight();
+	list_->set_size(std::max(list_width, button_box_.get_w()), new_list_height);
 
 	// Update list position. The list is hooked into the highest parent that we can get so that we
-	// can drop down outside the panel. Positioning breaks down with TabPanels, so we exclude them.
-	UI::Panel* parent = get_parent();
-	int new_list_x = get_x() + parent->get_x() + parent->get_lborder();
-	int new_list_y = get_y() + parent->get_y() + parent->get_tborder();
-	while (parent->get_parent() && !is_a(UI::TabPanel, parent->get_parent())) {
+	// can drop down outside the panel.
+	UI::Panel* parent = &display_button_;
+	int new_list_x = display_button_.get_x();
+	int new_list_y = display_button_.get_y();
+	while (parent->get_parent()) {
 		parent = parent->get_parent();
 		new_list_x += parent->get_x() + parent->get_lborder();
 		new_list_y += parent->get_y() + parent->get_tborder();
@@ -210,15 +221,45 @@ void BaseDropdown::layout() {
 	}
 }
 
+void BaseDropdown::set_size(int nw, int nh) {
+	button_box_.set_size(nw, nh);
+	Panel::set_size(nw, nh);
+	layout();
+}
+void BaseDropdown::set_desired_size(int nw, int nh) {
+	button_box_.set_desired_size(nw, nh);
+	Panel::set_desired_size(nw, nh);
+	layout();
+}
+
+void BaseDropdown::set_autoexpand_display_button() {
+	autoexpand_display_button_ = true;
+}
+
 void BaseDropdown::add(const std::string& name,
                        const uint32_t value,
                        const Image* pic,
                        const bool select_this,
-                       const std::string& tooltip_text) {
+                       const std::string& tooltip_text,
+                       const std::string& hotkey) {
 	assert(pic != nullptr || type_ != DropdownType::kPictorial);
-	list_->add(name, value, pic, select_this, tooltip_text);
+	list_->add(name, value, pic, select_this, tooltip_text, hotkey);
 	if (select_this) {
 		set_value();
+	}
+
+	if (autoexpand_display_button_) {
+		/// Fit width of display button to make enough room for the entry's text
+		const std::string fitme =
+		   label_.empty() ? name : (boost::format(_("%1%: %2%")) % label_ % name).str();
+		const int new_width =
+		   text_width(
+		      richtext_escape(fitme), g_gr->styles().button_style(button_style_).enabled().font()) +
+		   8;
+		if (new_width > display_button_.get_w()) {
+			set_desired_size(get_w() + new_width - display_button_.get_w(), get_h());
+			set_size(get_w() + new_width - display_button_.get_w(), get_h());
+		}
 	}
 	layout();
 }
@@ -241,7 +282,7 @@ void BaseDropdown::select(uint32_t entry) {
 
 void BaseDropdown::set_label(const std::string& text) {
 	label_ = text;
-	if (type_ != DropdownType::kPictorial) {
+	if (type_ != DropdownType::kPictorial && type_ != DropdownType::kPictorialMenu) {
 		display_button_.set_title(label_);
 	}
 }
@@ -260,7 +301,7 @@ void BaseDropdown::set_tooltip(const std::string& text) {
 
 void BaseDropdown::set_errored(const std::string& error_message) {
 	set_tooltip((boost::format(_("%1%: %2%")) % _("Error") % error_message).str());
-	if (type_ != DropdownType::kPictorial) {
+	if (type_ != DropdownType::kPictorial && type_ != DropdownType::kPictorialMenu) {
 		set_label(_("Error"));
 	} else {
 		set_image(g_gr->images().get("images/ui_basic/different.png"));
@@ -288,7 +329,7 @@ bool BaseDropdown::is_expanded() const {
 
 void BaseDropdown::set_pos(Vector2i point) {
 	UI::Panel::set_pos(point);
-	list_->set_pos(Vector2i(point.x, point.y + get_h()));
+	layout();
 }
 
 void BaseDropdown::clear() {
@@ -314,6 +355,11 @@ uint32_t BaseDropdown::size() const {
 }
 
 void BaseDropdown::update() {
+	if (type_ == DropdownType::kPictorialMenu) {
+		// Menus never change their main image and text
+		return;
+	}
+
 	const std::string name = list_->has_selection() ?
 	                            list_->get_selected_name() :
 	                            /** TRANSLATORS: Selection in Dropdown menus. */
@@ -340,6 +386,32 @@ void BaseDropdown::set_value() {
 	update();
 	selected();
 	current_selection_ = list_->selection_index();
+}
+
+void BaseDropdown::toggle() {
+	set_list_visibility(!list_->is_visible());
+}
+
+void BaseDropdown::set_list_visibility(bool open) {
+	if (!is_enabled_) {
+		list_->set_visible(false);
+		return;
+	}
+	list_->set_visible(open);
+	if (list_->is_visible()) {
+		list_->move_to_top();
+		focus();
+		set_mouse_pos(Vector2i(display_button_.get_x() + (display_button_.get_w() * 3 / 5),
+		                       display_button_.get_y() + (display_button_.get_h() * 2 / 5)));
+		if (type_ == DropdownType::kPictorialMenu && !has_selection() && !list_->empty()) {
+			select(0);
+		}
+	}
+	if (type_ != DropdownType::kTextual) {
+		display_button_.set_perm_pressed(list_->is_visible());
+	}
+	// Make sure that the list covers and deactivates the elements below it
+	set_layout_toplevel(list_->is_visible());
 }
 
 void BaseDropdown::toggle_list() {
@@ -380,17 +452,12 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 		case SDLK_RETURN:
 			if (list_->is_visible()) {
 				set_value();
+				return true;
 			}
 			break;
 		case SDLK_ESCAPE:
 			if (list_->is_visible()) {
 				list_->select(current_selection_);
-				toggle_list();
-				return true;
-			}
-			break;
-		case SDLK_DOWN:
-			if (!list_->is_visible() && !is_mouse_away()) {
 				toggle_list();
 				return true;
 			}

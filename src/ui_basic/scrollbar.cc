@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -68,7 +68,7 @@ Scrollbar::Scrollbar(Panel* const parent,
 
 /**
  * Change the number of steps of the scrollbar.
-*/
+ */
 void Scrollbar::set_steps(int32_t steps) {
 	if (steps < 1)
 		steps = 1;
@@ -104,7 +104,7 @@ void Scrollbar::set_singlestepsize(uint32_t singlestepsize) {
 
 /**
  * Change the number of steps a pageup/down will scroll.
-*/
+ */
 void Scrollbar::set_pagesize(int32_t const pagesize) {
 	pagesize_ = pagesize < 1 ? 1 : pagesize;
 	layout();
@@ -164,7 +164,7 @@ Scrollbar::Area Scrollbar::get_area_for_point(int32_t x, int32_t y) {
 
 /**
  * Return the center of the knob, in pixels, depending on the current position.
-*/
+ */
 uint32_t Scrollbar::get_knob_pos() {
 	assert(0 != steps_);
 	uint32_t result = buttonsize_ + get_knob_size() / 2;
@@ -175,7 +175,7 @@ uint32_t Scrollbar::get_knob_pos() {
 
 /**
  * Change the position according to knob movement.
-*/
+ */
 void Scrollbar::set_knob_pos(int32_t pos) {
 	uint32_t knobsize = get_knob_size();
 	int32_t extent = horizontal_ ? get_w() : get_h();
@@ -305,7 +305,7 @@ void Scrollbar::draw_area(RenderTarget& dst, Area area, const Recti& r) {
 
 /**
  * Draw the scrollbar.
-*/
+ */
 void Scrollbar::draw(RenderTarget& dst) {
 	if (!is_enabled()) {
 		return;  // Don't draw a scrollbar that doesn't do anything
@@ -356,14 +356,15 @@ void Scrollbar::draw(RenderTarget& dst) {
 		draw_area(dst, Area::MinusPage,
 		          Recti(0, buttonsize_, get_w(), knobpos - buttonsize_ - knobsize / 2));
 		assert(knobpos + knobsize / 2 + buttonsize_ <= static_cast<uint32_t>(get_h()));
-		draw_area(dst, Area::PlusPage, Recti(0, knobpos + knobsize / 2, get_w(),
-		                                     get_h() - knobpos - knobsize / 2 - buttonsize_));
+		draw_area(
+		   dst, Area::PlusPage,
+		   Recti(0, knobpos + knobsize / 2, get_w(), get_h() - knobpos - knobsize / 2 - buttonsize_));
 	}
 }
 
 /**
  * Check for possible auto-repeat scrolling.
-*/
+ */
 void Scrollbar::think() {
 	Panel::think();
 
@@ -444,20 +445,9 @@ bool Scrollbar::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		if (horizontal_) {
 			switch (code.sym) {
-			case SDLK_KP_6:
-				if (code.mod & KMOD_NUM) {
-					break;
-				}
-				FALLS_THROUGH;
 			case SDLK_RIGHT:
 				action(Area::Plus);
 				return true;
-
-			case SDLK_KP_4:
-				if (code.mod & KMOD_NUM) {
-					break;
-				}
-				FALLS_THROUGH;
 			case SDLK_LEFT:
 				action(Area::Minus);
 				return true;
@@ -466,38 +456,15 @@ bool Scrollbar::handle_key(bool down, SDL_Keysym code) {
 			}
 		} else {
 			switch (code.sym) {
-			case SDLK_KP_2:
-				if (code.mod & KMOD_NUM) {
-					break;
-				}
-				FALLS_THROUGH;
 			case SDLK_DOWN:
 				action(Area::Plus);
 				return true;
-
-			case SDLK_KP_8:
-				if (code.mod & KMOD_NUM) {
-					break;
-				}
-				FALLS_THROUGH;
 			case SDLK_UP:
 				action(Area::Minus);
 				return true;
-
-			case SDLK_KP_3:
-				if (code.mod & KMOD_NUM) {
-					break;
-				}
-				FALLS_THROUGH;
 			case SDLK_PAGEDOWN:
 				action(Area::PlusPage);
 				return true;
-
-			case SDLK_KP_9:
-				if (code.mod & KMOD_NUM) {
-					break;
-				}
-				FALLS_THROUGH;
 			case SDLK_PAGEUP:
 				action(Area::MinusPage);
 				return true;

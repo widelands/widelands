@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
-# Juanjo, 2015-2018
+# Juanjo, 2015-2019
 # Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-05 17:07+0000\n"
-"PO-Revision-Date: 2018-05-06 10:04+0000\n"
-"Last-Translator: Juanjo\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-12-30 07:55+0000\n"
+"PO-Revision-Date: 2019-12-30 08:11+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,56 +35,57 @@ msgstr "Llicència"
 msgid "Licensing information for Widelands"
 msgstr "Informació de la llicència del Widelands"
 
-#: ../../data/txts/LICENSE.lua:9
-msgid "Copyright 2002 - 2018 by the Widelands Development Team."
-msgstr "Copyright 2002 - 2018 de l'equip de desenvolupament del Widelands."
+#. TRANSLATORS: Placeholder is copyright end year
+#: ../../data/txts/LICENSE.lua:10
+msgid "Copyright 2002 - %1% by the Widelands Development Team."
+msgstr "Copyright 2002 - %1% de l'equip de desenvolupament del Widelands."
 
-#: ../../data/txts/LICENSE.lua:11
+#: ../../data/txts/LICENSE.lua:12
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
 msgstr "Aquest joc és lliure i de codi obert (FOSS, Free and Open Source), distribuït sota llicència pública general (GPL) GNU v2.0."
 
-#: ../../data/txts/LICENSE.lua:13
+#: ../../data/txts/LICENSE.lua:14
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
 msgstr "Podeu trobar més informació de FOSS i de la GPL visitant la següent pàgina web (en anglès): %s"
 
-#: ../../data/txts/LICENSE.lua:15
+#: ../../data/txts/LICENSE.lua:16
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr "Podeu trobar-hi el text complet de la llicència, així com més informació sobre la filosofia i les condicions legals."
 
-#: ../../data/txts/LICENSE.lua:17
+#: ../../data/txts/LICENSE.lua:18
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr "També distribuïm la GPL com a un document de text junt amb el Widelands."
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:19
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
-msgstr "En Linux, podreu trobar un arxiu anomenat «COPYING» en l'arrel del codi o del paquet binari de la instal·lació, o també en el directori de la instal·lació (com ara «%1%»)."
-
-#: ../../data/txts/LICENSE.lua:19
-msgid ""
-"On Windows, you can find the file called COPYING.txt in the installation "
-"folder, and the Widelands Start menu entry provides a link to this file."
-msgstr "En Windows, podreu trobar l'arxiu anomenat «COPYING.txt» en el directori d'instal·lació. El menú d'inici del Widelands també disposa d'un enllaç a aquest arxiu."
+msgstr "En Linux, podreu trobar un document anomenat «COPYING» en l'arrel del codi o del paquet binari de la instal·lació, o també en el directori de la instal·lació (com ara «%1%»)."
 
 #: ../../data/txts/LICENSE.lua:20
 msgid ""
+"On Windows, you can find the file called COPYING.txt in the installation "
+"folder, and the Widelands Start menu entry provides a link to this file."
+msgstr "En Windows, podreu trobar el fitxer anomenat «COPYING.txt» en el directori d'instal·lació. El menú d'inici del Widelands també disposa d'un enllaç a aquest fitxer."
+
+#: ../../data/txts/LICENSE.lua:21
+msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
-msgstr "En MacOS, podreu trobar l'arxiu «COPYING» en l'arxiu que us vau baixar del lloc web."
+msgstr "En MacOS, podreu trobar el document «COPYING» en el fitxer que us vau baixar del lloc web."
 
-#: ../../data/txts/LICENSE.lua:22
+#: ../../data/txts/LICENSE.lua:23
 msgid "This game comes as-is and without any warranty."
 msgstr "El programa s'ofereix tal qual i sense garantia."
 
-#: ../../data/txts/LICENSE.lua:23
+#: ../../data/txts/LICENSE.lua:24
 msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
@@ -107,7 +108,7 @@ msgstr "Visiteu la pàgina principal del Widelands (en anglès):"
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more "
 "information, see the file ‘COPYING’."
-msgstr "El Widelands es distribueix sota la llicència pública general (GPL). Per més informació, llegiu l'arxiu «COPYING»."
+msgstr "El Widelands es distribueix sota la llicència pública general (GPL). Per més informació, llegiu el document «COPYING»."
 
 #: ../../data/txts/README.lua:13
 msgid "Status"
@@ -239,6 +240,10 @@ msgid "Fedora Linux"
 msgstr "Fedora"
 
 #: ../../data/txts/developers.lua:3
+msgid "Flatpak"
+msgstr "Flatpak"
+
+#: ../../data/txts/developers.lua:3
 msgid "Former Elders"
 msgstr "Primers ancians"
 
@@ -314,6 +319,14 @@ msgstr "Windows"
 msgid "ZetaOS"
 msgstr "ZetaOS"
 
+#: ../../data/txts/developers.lua:3
+msgid "and many, many more (thank you for everything you've done)"
+msgstr "i molts, molts més (gràcies a tots per la feina que heu fet)"
+
+#: ../../data/txts/developers.lua:3
+msgid "vacant"
+msgstr "vacant"
+
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
 msgstr "Ajuda en línia"
@@ -358,7 +371,7 @@ msgid ""
 ".wrpl extension and contains all commands that were issued by all players, "
 "such as building a road or attacking an enemy. The rest of the filenames "
 "will tell you the time you started the game."
-msgstr "El Widelands grava totes les partides que jugueu en dos arxius. El que té extensió .wrpl.wgf conté les dades inicials de la partida i el que té extensió .wrpl conté totes les ordres executades pels jugadors, com ara construcció de camins i edificis o atacs a l'enemic. La resta del nom dels arxius us pot ajudar a saber quan es va començar la partida."
+msgstr "El Widelands grava totes les partides que jugueu en dos fitxers. El que té extensió .wrpl.wgf conté les dades inicials de la partida i el que té extensió .wrpl conté totes les ordres executades pels jugadors, com ara construcció de camins i edificis o atacs a l'enemic. La resta del nom dels fitxers us pot ajudar a saber quan es va començar la partida."
 
 #: ../../data/txts/help/common_helptexts.lua:27
 msgid ""
@@ -377,7 +390,7 @@ msgid ""
 "be useful as attachments to bug reports. The replay files are saved in the "
 "%s directory on Linux and Mac OS X. On Windows, they are in the ‘replays’ "
 "subdirectory of your Widelands installation."
-msgstr "Les repeticions són una eina útil per trobar errors del programa, així que pot ser útil adjuntar-les en informes d'errors. En Linux i Mac OS X, els arxius de repetició es desen al directori «%s». En Windows, al directori «replays» on està instal·lat el Widelands."
+msgstr "Les repeticions són una eina útil per trobar errors del programa, així que pot ser útil adjuntar-les en informes d'errors. En Linux i Mac OS X, els fitxers de repetició es desen al directori «%s». En Windows, al directori «replays» on està instal·lat el Widelands."
 
 #. TRANSLATORS: The generic hotkey format
 #: ../../data/txts/help/common_helptexts.lua:35
@@ -397,7 +410,12 @@ msgstr "Espai"
 msgid "Toggle building spaces"
 msgstr "Commuta entre mostrar o ocultar els espais de construcció"
 
-#. TRANSLATORS: This is an access key combination. The hotkey is 'f'
+#. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
+#: ../../data/txts/help/common_helptexts.lua:49
+msgctxt "hotkey"
+msgid "Ctrl + F"
+msgstr ""
+
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"
 msgstr "Commuta el mode pantalla completa (si el sistema operatiu ho permet)"

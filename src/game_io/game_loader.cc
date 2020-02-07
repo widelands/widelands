@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,6 +38,7 @@
 #include "logic/game.h"
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
+#include "ui_basic/progresswindow.h"
 
 namespace Widelands {
 
@@ -65,6 +66,12 @@ int32_t GameLoader::preload_game(GamePreloadPacket& mp) {
 int32_t GameLoader::load_game(bool const multiplayer) {
 	ScopedTimer timer("GameLoader::load() took %ums");
 
+	assert(game_.get_loader_ui());
+	auto set_progress_message = [this](std::string text, unsigned step) {
+		game_.get_loader_ui()->step(
+		   (boost::format(_("Loading game: %1$s (%2$u/%3$d)")) % text % step % 6).str());
+	};
+	set_progress_message(_("Elemental data"), 1);
 	log("Game: Reading Preload Data ... ");
 	{
 		GamePreloadPacket p;
@@ -87,14 +94,16 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	// This has to be loaded after the map packet so that the map's filesystem will exist.
 	// The custom tribe scripts are saved when the map scripting packet is saved, but we need
 	// to load them as early as possible here.
-    FileSystem* map_fs = game_.map().filesystem();
+	FileSystem* map_fs = game_.map().filesystem();
 	if (map_fs->file_exists("scripting/tribes")) {
 		log("Game: Reading Scenario Tribes ... ");
-        game_.mutable_tribes()->register_scenario_tribes(map_fs);
+		game_.mutable_tribes()->register_scenario_tribes(map_fs);
 		log("Game: Reading Scenario Tribes took %ums\n", timer.ms_since_last_query());
- 	}
+	}
 
-	log("Game: Reading Player Info ... ");
+	// This also triggers loading the world and tribes, so we need a newline at the end of the log
+	// output
+	log("Game: Reading Player Info ...\n");
 	{
 		GamePlayerInfoPacket p;
 		p.read(fs_, game_);
@@ -108,6 +117,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	MapObjectLoader* const mol = M.get_map_object_loader();
 
 	log("Game: Reading Player Economies Info ... ");
+	set_progress_message(_("Economies"), 2);
 	{
 		GamePlayerEconomiesPacket p;
 		p.read(fs_, game_, mol);
@@ -115,6 +125,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Reading ai persistent data ... ");
+	set_progress_message(_("AI"), 3);
 	{
 		GamePlayerAiPersistentPacket p;
 		p.read(fs_, game_, mol);
@@ -122,6 +133,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Reading Command Queue Data ... ");
+	set_progress_message(_("Command queue"), 4);
 	{
 		GameCmdQueuePacket p;
 		p.read(fs_, game_, mol);
@@ -130,6 +142,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 
 	//  This must be after the command queue has been read.
 	log("Game: Parsing messages ... ");
+	set_progress_message(_("Messages"), 5);
 	PlayerNumber const nr_players = game_.map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, game_, player) {
 		const MessageQueue& messages = player->messages();
@@ -146,6 +159,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	}
 	log("took %ums\n", timer.ms_since_last_query());
 
+	set_progress_message(_("Finishing"), 6);
 	// For compatibility hacks only
 	mol->load_finish_game(game_);
 
@@ -163,4 +177,4 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 
 	return 0;
 }
-}
+}  // namespace Widelands

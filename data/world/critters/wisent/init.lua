@@ -8,7 +8,7 @@ animations = {
    },
 }
 
-add_walking_animations(animations, "walk", dirname, "walk", {24, 32}, 20)
+add_directional_animation(animations, "walk", dirname, "walk", {24, 32}, 20)
 
 world:new_critter_type{
    name = "wisent",

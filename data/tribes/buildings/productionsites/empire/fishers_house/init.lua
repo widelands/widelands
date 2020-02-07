@@ -39,13 +39,17 @@ tribes:new_productionsite_type {
       "fish"
    },
 
+   indicate_workarea_overlaps = {
+      empire_fishers_house = false,
+   },
+
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start fishing because ...
          descname = _"fishing",
          actions = {
-            "sleep=17000",
-            "callworker=fish"
+            "callworker=fish",
+            "sleep=10000"
          }
       },
    },

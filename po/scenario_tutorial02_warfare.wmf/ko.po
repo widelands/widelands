@@ -1,15 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2018
-# TaeMin An <kavern02@gmail.com>, 2017
+# TaeMin An, 2017,2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-24 13:21+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2019-08-10 17:15+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -322,7 +322,7 @@ msgid ""
 " buttons to decrease or increase the desired number of soldiers. Every "
 "building has a maximum capacity. In case of the barrier, it is five, for "
 "example."
-msgstr "군사 건물의 힘을 제어하는 또다른 방법이 있습니다: 주둔하는 군인들의 수를 이용해서. 원하는 군인의 수를 감소시키거나 증가시키려면 화살표 버튼을 클릭하십시오. 모든 건물들은 최대 주둔 수를 갖습니다. 예를 들어, 방벽의 경우에는, 다섯입니다."
+msgstr "군사 건물의 힘을 제어하는 또다른 방법이 있습니다: 주둔하는 군인들의 수를 이용해서. 원하는 군인의 수를 감소시키거나 증가시키려면 화살표 버튼을 클릭하십시오. 모든 건물들은 최대 주둔 수를 갖습니다. 예를 들어, 장벽의 경우에는, 다섯입니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:147
 msgid ""
@@ -388,7 +388,7 @@ msgstr "하지만, 군사 건물을 파괴하는 것에는 언제나 위험이 �
 msgid ""
 "Have you seen your sentry? Since it cannot contain many soldiers and is next"
 " to a stronger barrier, it is rather useless."
-msgstr "초소를 확인하셨습니까? 많은 군인을 수용할 수 없고 더 강한 방격이 옆에 있기 때문에, 더 이상 쓸모가 없습니다."
+msgstr "초소를 확인하셨습니까? 많은 군인을 수용할 수 없고 더 강한 장벽이 옆에 있기 때문에, 더 이상 쓸모가 없습니다."
 
 #. TRANSLATORS: 'it' refers to the Barbarian sentry
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:164
@@ -415,7 +415,7 @@ msgstr "군사 건물에 주둔하고 있는 군인의 수를 화살표 버튼�
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:170
 msgid "Dismantle your sentry in the north-west, next to the barrier."
-msgstr "방벽 옆에 있는, 북서쪽의 초소를 해체하십시오."
+msgstr "장벽 옆에 있는, 북서쪽의 초소를 해체하십시오."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:176
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:188
@@ -549,12 +549,15 @@ msgid ""
 "tutorials, but they are not crucial for succeeding in the campaigns."
 msgstr "이제 캠페인을 플레이하실 준비가 되셨습니다. 거기서는 부족들의 각각 다른 경제에 대해 알려줄 것입니다. 또한 남은 튜토리얼을 플레이하셔도 되지만, 캠페인에서 승리하는데 꼭 필요한 것은 아닙니다."
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "\"%s\""
+msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "새 목표"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

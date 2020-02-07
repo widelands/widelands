@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2018 by the Widelands Development Team
+ * Copyright (C) 2017-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,8 +24,9 @@
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
 
-#include "economy/fleet.h"
+#include "economy/ship_fleet.h"
 #include "graphic/graphic.h"
+#include "graphic/text_layout.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
@@ -43,7 +44,7 @@ constexpr int kButtonSize = 34;
 
 SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                                                  UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(&plr, "seafaring_statistics", &registry, 355, 375, _("Seafaring Statistics")),
+   : UI::UniqueWindow(&plr, "seafaring_statistics", &registry, 375, 375, _("Seafaring Statistics")),
      main_box_(this, kPadding, kPadding, UI::Box::Vertical, get_inner_w(), get_inner_h(), kPadding),
      filter_box_(
         &main_box_, 0, 0, UI::Box::Horizontal, get_inner_w() - 2 * kPadding, kButtonSize, kPadding),
@@ -97,30 +98,27 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                kButtonSize,
                kButtonSize,
                UI::ButtonStyle::kWuiPrimary,
-               g_gr->images().get("images/wui/menus/menu_watch_follow.png"),
-               (boost::format(_("%1% (Hotkey: %2%)")) %
-                /** TRANSLATORS: Tooltip in the seafaring statistics window */
-                _("Watch the selected ship") %
-                pgettext("hotkey", "W"))
-                  .str()),
-     openwindowbtn_(
-        &navigation_box_,
-        "seafaring_stats_watch_button",
-        0,
-        0,
-        kButtonSize,
-        kButtonSize,
-        UI::ButtonStyle::kWuiPrimary,
-        g_gr->images().get("images/ui_basic/fsel.png"),
-        (boost::format("%s<br>%s") %
-         (boost::format(pgettext("hotkey_description", "%1%: %2%")) % pgettext("hotkey", "O") %
-          /** TRANSLATORS: Tooltip in the seafaring statistics window */
-          _("Open the selected ship’s window")) %
-         (boost::format(pgettext("hotkey_description", "%1%: %2%")) %
-          pgettext("hotkey", "CTRL + O") %
-          /** TRANSLATORS: Tooltip in the seafaring statistics window */
-          _("Go to the selected ship and open its window")))
-           .str()),
+               g_gr->images().get("images/wui/menus/watch_follow.png"),
+               /** TRANSLATORS: Tooltip in the seafaring statistics window */
+               as_tooltip_text_with_hotkey(_("Watch the selected ship"), "w")),
+     openwindowbtn_(&navigation_box_,
+                    "seafaring_stats_watch_button",
+                    0,
+                    0,
+                    kButtonSize,
+                    kButtonSize,
+                    UI::ButtonStyle::kWuiPrimary,
+                    g_gr->images().get("images/ui_basic/fsel.png"),
+                    (boost::format("%s<br>%s") %
+                     as_tooltip_text_with_hotkey(
+                        /** TRANSLATORS: Tooltip in the seafaring statistics window */
+                        _("Open the selected ship’s window"),
+                        "o") %
+                     as_tooltip_text_with_hotkey(
+                        /** TRANSLATORS: Tooltip in the seafaring statistics window */
+                        _("Go to the selected ship and open its window"),
+                        pgettext("hotkey", "CTRL+o")))
+                       .str()),
      centerviewbtn_(&navigation_box_,
                     "seafaring_stats_center_main_mapview_button",
                     0,
@@ -129,18 +127,17 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                     kButtonSize,
                     UI::ButtonStyle::kWuiPrimary,
                     g_gr->images().get("images/wui/ship/menu_ship_goto.png"),
-                    (boost::format(_("%1% (Hotkey: %2%)")) %
-                     /** TRANSLATORS: Tooltip in the seafaring statistics window */
-                     _("Center the map on the selected ship") %
-                     pgettext("hotkey", "G"))
-                       .str()),
+                    as_tooltip_text_with_hotkey(
+                       /** TRANSLATORS: Tooltip in the seafaring statistics window */
+                       _("Center the map on the selected ship"),
+                       "g")),
      table_(&main_box_, 0, 0, get_inner_w() - 2 * kPadding, 100, UI::PanelStyle::kWui) {
 
 	const Widelands::TribeDescr& tribe = iplayer().player().tribe();
 	colony_icon_ = tribe.get_worker_descr(tribe.builder())->icon();
 
 	// Buttons for ship states
-	main_box_.add(&filter_box_, UI::Box::Resizing::kFullSize);
+	main_box_.add(&filter_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	filter_box_.add(&idle_btn_);
 	filter_box_.add(&shipping_btn_);
 	filter_box_.add(&waiting_btn_);
@@ -180,7 +177,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 	table_.double_clicked.connect(boost::bind(&SeafaringStatisticsMenu::double_clicked, this));
 	table_.add_column(
 	   0, pgettext("ship", "Name"), "", UI::Align::kLeft, UI::TableColumnType::kFlexible);
-	table_.add_column(200, pgettext("ship", "Status"));
+	table_.add_column(230, pgettext("ship", "Status"));
 	table_.set_sort_column(ColName);
 	fill_table();
 
@@ -205,7 +202,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 				   NEVER_HERE();
 			   }
 		   }
-		});
+	   });
 }
 
 const std::string
@@ -263,7 +260,7 @@ SeafaringStatisticsMenu::create_shipinfo(const Widelands::Ship& ship) const {
 	ShipFilterStatus status = ShipFilterStatus::kAll;
 	switch (state) {
 	case Widelands::Ship::ShipStates::kTransport:
-		if (ship.get_destination(iplayer().game()) != nullptr) {
+		if (ship.get_current_destination(iplayer().game())) {
 			status = ShipFilterStatus::kShipping;
 		} else {
 			status = ShipFilterStatus::kIdle;
@@ -497,39 +494,30 @@ void SeafaringStatisticsMenu::toggle_filter_ships_button(UI::Button& button,
 		button.set_perm_pressed(true);
 		ship_filter_ = status;
 
-		/** TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey */
-		button.set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
-		                    /** TRANSLATORS: Tooltip in the messages window */
-		                    % _("Show all ships") % pgettext("hotkey", "Alt + 0"))
-		                      .str());
+		button.set_tooltip(as_tooltip_text_with_hotkey(
+		   /** TRANSLATORS: Tooltip in the ship statistics window */
+		   _("Show all ships"), pgettext("hotkey", "Alt+0")));
 	}
 }
 
 void SeafaringStatisticsMenu::set_filter_ships_tooltips() {
 
-	idle_btn_.set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
-	                       /** TRANSLATORS: Tooltip in the messages window */
-	                       % _("Show idle ships") % pgettext("hotkey", "Alt + 1"))
-	                         .str());
-	shipping_btn_.set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
-	                           /** TRANSLATORS: Tooltip in the messages window */
-	                           % _("Show ships shipping wares and workers") %
-	                           pgettext("hotkey", "Alt + 2"))
-	                             .str());
-	waiting_btn_.set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
-	                          /** TRANSLATORS: Tooltip in the messages window */
-	                          % _("Show waiting expeditions") % pgettext("hotkey", "Alt + 3"))
-	                            .str());
-	scouting_btn_.set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
-	                           /** TRANSLATORS: Tooltip in the messages window */
-	                           % _("Show scouting expeditions") % pgettext("hotkey", "Alt + 4"))
-	                             .str());
-	portspace_btn_.set_tooltip(
-	   (boost::format(_("%1% (Hotkey: %2%)"))
-	    /** TRANSLATORS: Tooltip in the messages window */
-	    % _("Show expeditions that have found a port space or are founding a colony") %
-	    pgettext("hotkey", "Alt + 5"))
-	      .str());
+	idle_btn_.set_tooltip(as_tooltip_text_with_hotkey(
+	   /** TRANSLATORS: Tooltip in the ship statistics window */
+	   _("Show idle ships"), pgettext("hotkey", "Alt+1")));
+	shipping_btn_.set_tooltip(as_tooltip_text_with_hotkey(
+	   /** TRANSLATORS: Tooltip in the ship statistics window */
+	   _("Show ships shipping wares and workers"), pgettext("hotkey", "Alt+2")));
+	waiting_btn_.set_tooltip(as_tooltip_text_with_hotkey(
+	   /** TRANSLATORS: Tooltip in the ship statistics window */
+	   _("Show waiting expeditions"), pgettext("hotkey", "Alt+3")));
+	scouting_btn_.set_tooltip(as_tooltip_text_with_hotkey(
+	   /** TRANSLATORS: Tooltip in the ship statistics window */
+	   _("Show scouting expeditions"), pgettext("hotkey", "Alt+4")));
+	portspace_btn_.set_tooltip(as_tooltip_text_with_hotkey(
+	   /** TRANSLATORS: Tooltip in the ship statistics window */
+	   _("Show expeditions that have found a port space or are founding a colony"),
+	   pgettext("hotkey", "Alt+5")));
 }
 
 bool SeafaringStatisticsMenu::satisfies_filter(const ShipInfo& info, ShipFilterStatus filter) {

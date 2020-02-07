@@ -1,13 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# GunChleoc, 2019
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-05 07:05+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2018-03-24 18:16+0000\n"
+"Last-Translator: GunChleoc, 2019\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,39 +21,43 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:27
 msgid "Build a basic economy"
-msgstr ""
+msgstr "Tog eaconamaidh bhunasach"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:29
 msgid "Supply All Basic Materials"
-msgstr ""
+msgstr "Solar na stuthan bunasach uile"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:30
 msgid ""
 "Build a quarry, a reed farm, a clay pit, a well, a charcoal kiln, a brick "
 "kiln, and houses for a woodcutter and a forester."
 msgstr ""
+"Tog cuaraidh, tuathanas-feòir, sùil-chriadha, tobar, sloc guail-fhiodha, àth"
+" bhreigichean ’s taighean do bhuaineadair-fiodha ’s planntair-coille."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:35
 msgid "Expand to the south"
-msgstr ""
+msgstr "Leudaich gu deas"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:37
 msgid "Expand Your Territory to Explore the South"
-msgstr ""
+msgstr "Leudaich an ranntair agad a’ rùrachadh gu deas"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:38
 msgid ""
 "The north looks not very useful to us, but who knows what we might find in "
 "the south?"
 msgstr ""
+"Chan eil coltas glè fheumail air an taobh tuath dhuinn ach cò aige a tha "
+"fios dè lorgas sinn gu deas oirnn?"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:43
 msgid "Train and recycle"
-msgstr ""
+msgstr "Dèan oideachadh ’s ath-chuairteachadh"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:45
 msgid "Recycle Weapons to Regain Metal"
-msgstr ""
+msgstr "Ath-chuairtich na h-airm ach am faigh thu meatailt air ais"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:46
 msgid ""
@@ -57,6 +65,10 @@ msgid ""
 "into metal in a recycling center. Use the weapons in the store to train "
 "soldiers and recycle some scrap metal."
 msgstr ""
+"Nuair a thèid saighdearan oideachadh, thèid na seann-airm aca a chur dhan "
+"dàrna taobh. ’S urrainn dhut meatailt a dhèanamh dhiubh ann an ionad ath-"
+"chuairteachaidh. Cleachd na h-airm san stòras airson saighdearan oideachadh "
+"agus ath-chuairtich cuid dhe na fuighill meatailte."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:47
 msgid ""
@@ -65,14 +77,18 @@ msgid ""
 "cycle. You need to stop the blacksmithy until at least two iron are stored "
 "in its input queue."
 msgstr ""
+"Cha dèan ceàrdach gobhainn piocaid ach san dàrna cuairt saothrachaidh aige. "
+"Mura faigh e ach aon unga iarainn aig an aon àm, ’s dòcha nach ruig e a’ "
+"chuairt sin idir. Feumaidh tu an ceàrdach gobhainn a chur ’na stad gus am bi"
+" co-dhiù dà phìos iarainn san stòras aige."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:52
 msgid "Build an aqua farm"
-msgstr ""
+msgstr "Tog tuathanas-uisge"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:54
 msgid "Build an Aqua Farm to Start Producing Fish"
-msgstr ""
+msgstr "Tog tuathanas-uisge ach am faigh thu iasg"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:55
 msgid ""
@@ -80,68 +96,74 @@ msgid ""
 "clay pit nearby to use as ponds to grow fish in. Only a fisher working at an"
 " aqua farm can fish from these ponds."
 msgstr ""
+"Tog tuathanas-uisge airson iasg a shaothrachadh. Feumaidh an tuathanas-uisge"
+" puill a dh’fhàg sùil-chriadha am fagas ach an tàrmaich e iasg ann. Cha dèan"
+" ach iasgair a tha ag obair aig an tuathanas-uisge iasgach sna puill sin."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:60
 msgid "Decide whether you want to cooperate with the Empire"
-msgstr ""
+msgstr "Cuir romhad an obraich thu còmhla ris an Impireachd gus nach obraich"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:62
 msgid "Gather Wares as a Gift or Destroy the Empire’s Warehouse"
 msgstr ""
+"Cruinnich batharan ’nan tìodhlac no mill taigh-stòrais na h-Impireachd"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:63
 msgid ""
 "Decide whether you want to work with Murilius against the Barbarians. If so,"
 " fill his warehouse with these wares:"
 msgstr ""
+"Roghnaich an obraich thu còmhla ri Murilius an aghaidh nan Tùsanach. Ma "
+"dh’obraicheas, lìon an taigh-stòrais aige leis na batharan seo:"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:64
 msgid "30 × Log"
-msgstr ""
+msgstr "30 × fiodh"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:65
 msgid "40 × Granite"
-msgstr ""
+msgstr "40 × gaireal"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:66
 msgid "30 × Fish"
-msgstr ""
+msgstr "30 × iasg"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:67
 msgid "30 × Beer"
-msgstr ""
+msgstr "30 × leann"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:68
 msgid "150 × Water"
-msgstr ""
+msgstr "150 × uisge"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:69
 msgid "40 × Ration"
-msgstr ""
+msgstr "40 × greimeag"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:70
 msgid "10 × Meal"
-msgstr ""
+msgstr "10 × mias"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:71
 msgid "30 × Coal"
-msgstr ""
+msgstr "30 × gual"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:72
 msgid "40 × Iron Ore"
-msgstr ""
+msgstr "40 × clach-iarainn"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:73
 msgid "20 × Iron"
-msgstr ""
+msgstr "20 × iarann"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:74
 msgid "30 × Gold Ore"
-msgstr ""
+msgstr "30 × clach-òir"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:75
 msgid "10 × Gold"
-msgstr ""
+msgstr "10 × òr"
 
 #. TRANSLATORS: Continues from "Decide whether you want to work with Murilius
 #. against the Barbarians. If so, fill his warehouse with these wares: [list
@@ -152,99 +174,110 @@ msgid ""
 "He forbade you to expand your territory until the wares have been handed "
 "over."
 msgstr ""
+"Mura obraich, thèid Murilius ’nad nàmhaid ma mhilleas tu an taigh-stòrais. "
+"Thoirmisg e dhut do ranntair a leudachadh mus dug thu na batharan dha."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:82
 msgid "Spy on Murilius"
-msgstr ""
+msgstr "Dèan brathadh air Murilius"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:84
 msgid "Send a Scout to Spy on the Empire"
-msgstr ""
+msgstr "Cuir rabhadair a-null a nì brathadh air an Impireachd"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:85
 msgid ""
 "Build a scout’s house near the border to discover the Empire’s secrets."
 msgstr ""
+"Tog taigh-rabhadair faisg air a’ chrìoch ach an lorg thu rùintean-dìomhair "
+"na h-Impireachd."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:90
 msgid "Decipher the poem"
-msgstr ""
+msgstr "Dì-chòdaich an dàn"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:92
 msgid "Understand the Poem the Scout has Found in the Empire"
-msgstr ""
+msgstr "Tuig an dàn a lorg an rabhadair san Impireachd"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:93
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:335
 msgid "How many sites where soldiers stay,"
-msgstr ""
+msgstr "Co mheud saighdearan an làthair?"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:94
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:338
 msgid "How many sites where thou hold’st sway,"
-msgstr ""
+msgstr "Co mheud àite fo ur stiùir?"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:95
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:341
 msgid "Though not their whereabouts sees he"
-msgstr ""
+msgstr "Gun fhiosrachadh air rùn an imeachd"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:96
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:344
 msgid "Who’s ordering around here thee!"
-msgstr ""
+msgstr "Cò riaghladh iadsan ann?"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:101
 msgid "Defeat the Barbarians!"
-msgstr ""
+msgstr "Cuir ruaig air na Tùsanaich!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:103
 msgid "Defeat the Barbarians"
-msgstr ""
+msgstr "Cuir ruaig air na Tùsanaich"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:104
 msgid "Defeat the hostile tribe living northwest of the Empire’s outpost!"
 msgstr ""
+"Cuir ruaig air an treubh nàimhdeil a tha a’ còmhnaidh gu iar-thuath air "
+"gearastan na h-Impireachd!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:109
 msgid "Defeat Murilius!"
-msgstr ""
+msgstr "Cuir ruaig air Murilius!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:111
 msgid "Defeat the Arrogant Outpost of the Empire"
-msgstr ""
+msgstr "Cuir ruaig air gearastan àrdanach na h-Impireachd"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:112
 msgid ""
 "The only way to put an end to the Empire’s desire to steal our liberty is to"
 " destroy this outpost once and for all. Conquer its entire land."
 msgstr ""
+"A chùm ar saorsa a ghlèidheadh, chan eil dol às ann ach gearastan na "
+"h-Impireachd a mhilleadh gu bràth tuilleadh. Ceannsaich an dùthaich gu lèir "
+"a th’ aige."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:113
 msgid "Conquer every single field that still belongs to Murilius."
-msgstr ""
+msgstr "Ceannsaich gach raon a tha le Murilius fhathast."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:118
 msgid "Defeat Murilius and the Barbarians!"
-msgstr ""
+msgstr "Cuir ruaig air Murilius ’s air na Tùsanaich!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:120
 msgid "Defeat the Barbarians and the Empire Colony"
-msgstr ""
+msgstr "Cuir ruaig air na Tùsanaich ’s air tuineachadh na h-Impireachd"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:121
 msgid ""
 "The Barbarians and the Empire are too dangerous to allow them to live near "
 "us. We must defeat them both."
 msgstr ""
+"Tha na Tùsanaich ’s an Impireachd ro chunnartach ach am faod sinn am fulang "
+"faisg oirnn. Feumaidh sinn ruaig a chur air an dà chuid dhiubh."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:130
 msgid "Warning"
-msgstr ""
+msgstr "Rabhadh"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:131
 msgid ""
@@ -252,18 +285,22 @@ msgid ""
 "this scenario, but you will be at a disadvantage. I recommend that you "
 "complete the previous scenario first and then restart this mission."
 msgstr ""
+"Tha coltas nach do choilean thu am misean roimhe. ’S urrainn dhut an cnàmh-"
+"sgeul seo a chluiche fhathast ach bi èis ort. Mholainn-sa gun coilean thu an"
+" cnàmh-sgeul roimhe an toiseach ’s gun tòisich thu air a’ mhisean seo às ùr "
+"an uairsin."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:137
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:146
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:155
 msgid "Welcome Back!"
-msgstr ""
+msgstr "Fàilte air ais!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:138
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:147
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:156
 msgid "A new home"
-msgstr ""
+msgstr "Dachaigh ùr"
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:140
@@ -271,6 +308,9 @@ msgid ""
 "I began to believe the journey would never end. I have no idea how long we "
 "were on the sea, tossed about by envious storms… it must have been months."
 msgstr ""
+"Shaoilinn nach digeadh an triall gu ceann gu bràth tuilleadh. Chan eil sgot "
+"agam dè cho fada ’s a tha sinn air a bhith air a’ mhuir agus na gailleannan "
+"farmadach oirnn… fad iomadh mìos gun teagamh."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:143
@@ -278,6 +318,8 @@ msgid ""
 "But we survived. Finally, we reached the mouth of a calmer fjord. We sailed "
 "upriver, and arrived here."
 msgstr ""
+"Ach mhair sinn beò. Ràinig sinn beul linne tàimh mu dheireadh thall. Sheòil "
+"sinn suas na h-aibhne agus ràinig sinn an t-àite seo."
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:149
@@ -285,6 +327,9 @@ msgid ""
 "There was a small group of foreigners living here. They welcomed us by "
 "brandishing their axes at us, and shouted in an incoherent language."
 msgstr ""
+"Bha buidheann beag de choigrich a’ fuireach ann. ’S dè an fhàilte a fhuair "
+"sinn ach gun do chrath iad an tuaghan ’s gun do dh’eugh iad oirnn ann an "
+"cànan neo-thàthach."
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:152
@@ -293,6 +338,9 @@ msgid ""
 "took their land. I just hope there aren’t more of them, so we can live in "
 "peace."
 msgstr ""
+"Cha robh an long againn comasach air barrachd seòlaidh ’s mar sinn chuir "
+"sinn às dhan t-sluagh ionadail ’s ghabh sinn an tìr uapa. Tha mi a’ guidhe "
+"nach eil barrachd dhiubh ann ach am biodh sìth againn."
 
 #. TRANSLATORS: Reebaud – Introduction 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:158
@@ -300,6 +348,8 @@ msgid ""
 "This place looks bleak and barren, my companions say, but I think it looks… "
 "beautiful."
 msgstr ""
+"Tha coltas fuar seasg air an àite seo a-rèir mo chuideachd ach ar leam tha "
+"e… àlainn."
 
 #. TRANSLATORS: Reebaud – Introduction 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:161
@@ -307,6 +357,8 @@ msgid ""
 "My scouts no longer report any signs of living creatures nearby. We will "
 "start building our new home here."
 msgstr ""
+"Cha do lorg na rabhadairean againn sgeul air creutair beò am fagas. Togaidh "
+"sinn ar dachaigh ùr ann a sheo."
 
 #. TRANSLATORS: Reebaud – Introduction 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:164
@@ -317,14 +369,19 @@ msgid ""
 "wood. Our neighbors used to envy us for this clever technique, which they "
 "couldn’t copy."
 msgstr ""
+"Feumaidh sinn tòiseachadh leis na togalaichean bunasach. Chan fhaic mi beann"
+" far an lorgamaid gual. B’ fheàirrde sinn sloc guail-fhiodha a thogail ach "
+"an loisg sinn gual de dh’fhiodh. Cuiridh sinn piseach air na slocan le "
+"criadh ach nach fheum iad cus a dh’fhiodh. Chuireadh an dòigh seo am farmad "
+"air ar nàbaidhean o nach deach leothasan a cur an cèill."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:169
 msgid "Go South"
-msgstr ""
+msgstr "Rach gu deas"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:170
 msgid "Expand and conquer"
-msgstr ""
+msgstr "Leudaich agus lorg"
 
 #. TRANSLATORS: Reebaud – Expand South
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:172
@@ -332,6 +389,9 @@ msgid ""
 "We have built a home in this wonderful landscape. But as our tribe grows, we"
 " need more space. We should start expanding our territory."
 msgstr ""
+"Tha sinn air dachaigh a thogail san tìr àlainn seo. Ach on a tha ar treubh "
+"a’ fàs, tha sinn feumach air barrachd rùim. Bu chòir dhuinn tòiseachadh air "
+"ar ranntair a leudachadh."
 
 #. TRANSLATORS: Reebaud – Expand South
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:175
@@ -340,17 +400,20 @@ msgid ""
 "to behold but not suited for buildings. Let’s find out what we can discover "
 "in the south."
 msgstr ""
+"Tha na rabhadairean ag aithris nach eil ach cnuic gharbh gu tuath oirnn a "
+"tha brèagha ach nach eil iomchaidh airson togalaichean. Thoireamaid sùil air"
+" dè tha gu deas oirnn."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:180
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:189
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:198
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:208
 msgid "Metal Shortage"
-msgstr ""
+msgstr "Gainnead meatailte"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:181
 msgid "We are out of metals"
-msgstr ""
+msgstr "Tha a’ mheatailt air a ruith oirnn"
 
 #. TRANSLATORS: Hauke – Train and recycle 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:183
@@ -359,6 +422,9 @@ msgid ""
 "where we might be able to start mining coal and iron, but we have no miners,"
 " nor any picks to equip them with."
 msgstr ""
+"A cheannaird Reebauid! Tha duilgheadas mòr againn. Lorg sinn beinn far am b’"
+" urrainn dhuinn mèinnearachd guail is iarainn a dhèanamh ach chan eil "
+"mèinnearan againn no piocaid a thoireamaid mar uidheamachd dhaibh."
 
 #. TRANSLATORS: Hauke – Train and recycle 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:186
@@ -366,11 +432,14 @@ msgid ""
 "And we don’t have any iron left. We must find a way to get some metal for "
 "forging new picks. Unfortunately, I have no idea how to do this."
 msgstr ""
+"A bharrachd air sin, chan eil iarann sam bith air fhàgail againn. Feumaidh "
+"sinn dòigh a lorg san fhaigh sinn beagan meatailte ach an dèan sinn "
+"piocaidean ùra. Gu mì-fhortanach, chan eil sgot agam ciamar a nì sinn seo."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:190
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:209
 msgid "Getting new metal"
-msgstr ""
+msgstr "A’ faighinn meatailt ùr"
 
 #. TRANSLATORS: Reebaud – Train and recycle 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:192
@@ -378,6 +447,8 @@ msgid ""
 "This is terrible news! Without iron or the means to produce any, we are "
 "stuck like this forever! You must come up with a solution."
 msgstr ""
+"Abair naidheachd uabhasach! Gun iarann no dòigh gus barrachd dheth a "
+"dhèanamh, bidh sinn stuicte mar seo gu buan! Feumaidh sinn fhuasgladh."
 
 #. TRANSLATORS: Reebaud – Train and recycle 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:195
@@ -386,10 +457,13 @@ msgid ""
 "possible to smelt them back into metal? But that seems like a waste of the "
 "precious swords…"
 msgstr ""
+"Mhothaich mi do dh’airm adhartach sna taighean-stòrais againn. ’S dòcha gun "
+"gabhadh an leagadh ’nam meatailt? Ach dhomhsa dheth, ’s e call chlaidheamhan"
+" uasail a bhiodh ann…"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:199
 msgid "New metal"
-msgstr ""
+msgstr "Meatailt ùr"
 
 #. TRANSLATORS: Hauke – Train and recycle 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:201
@@ -398,6 +472,10 @@ msgid ""
 "new swords and the old weapons are discarded. These are unfit to use in "
 "battle, so it would not be a waste to smelt down those."
 msgstr ""
+"Saoil dè thàinig a-steach orm: Nuair a gheibh na saighdearan againn "
+"oideachadh, gheibh iad claidheamhan ùra ’s thèid na seann-airm a chur dhan "
+"dàrna taobh. Chan eil iadsan math gu leòr airson an cleachdadh air a’ bhlàr,"
+" mar sinn chan e call a bhiodh ann an leagadh."
 
 #. TRANSLATORS: Hauke – Train and recycle 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:204
@@ -406,6 +484,10 @@ msgid ""
 "smelt the scrap metal into iron and gold. And then our blacksmiths can "
 "produce picks to equip miners with. I will see to it at once!"
 msgstr ""
+"Seo na dh’fheumas sinn dèanamh ma-thà. Cleachdaidh sinn na h-airm againn "
+"airson saighdearan oideachadh is leaghaidh sinn na fuighill meatailte ’nan "
+"iarann ’s òr an uairsin. ’S urrainn dha na goibhnean againn piocaidean a "
+"dhèanamh a uairsin a bheir sinn dha na mèinnearan. Dèiligidh mi ris sa bhad!"
 
 #. TRANSLATORS: Reebaud – Train and recycle 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:211
@@ -416,14 +498,20 @@ msgid ""
 "Of course, we will need to move all our wares to a warehouse before we can "
 "dismantle the port."
 msgstr ""
+"Na cuir an crann ron rèin-fhiadh! Mus tog sinn campa oideachaidh, feumaidh "
+"sinn òr agus chan eil gin dheth againn. Feumaidh sinn am port againn a "
+"thoirt às a chèile an toiseach ach am faigheamaid an t-òr a dh’fheumas sinn "
+"airson campa oideachaidh a thogail. Cha toigh leam seo ach chan eil dòigh "
+"eile ann. Gu nàdarra, feumaidh sinn na batharan uile againn imrich gu taigh-"
+"stòrais mus doir tinn am port às a chèile."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:215
 msgid "Metal Production"
-msgstr ""
+msgstr "Saothrachadh meatailte"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:216
 msgid "The mines are working"
-msgstr ""
+msgstr "Tha na mèinnean ag obair"
 
 #. TRANSLATORS: Reebaud – Aqua Farms 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:218
@@ -431,6 +519,8 @@ msgid ""
 "Our mines have started working. Now, we only need to build a furnace and the"
 " metal production will be running smoothly."
 msgstr ""
+"Thòisich na mèinnean againn air obair. Nise, cha leig sinn leas ach fùirneis"
+" a thogail ach am bi saothrachadh na meatailte a’ dol air adhart."
 
 #. TRANSLATORS: Reebaud – Aqua Farms 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:221
@@ -440,15 +530,20 @@ msgid ""
 "garments to equip new soldiers. Who knows whether we will have to fight "
 "eventually?"
 msgstr ""
+"A bheil tuathanas rèin-fhèidh agad mu thràth? Mur eil, bu chòir dhuinn fear "
+"a thogail a-nis. Feumaidh sinn barrachd rèin-fhèidh airson nan rathaidean "
+"tranga agus b’ urrainn dhuinn tòiseachadh air còtaichean-bèin a dhèanamh dha"
+" na saighdearan ùra. Co aige a tha fios co-dhiù am bi againn ri sabaid "
+"fhathast?"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:224
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:234
 msgid "Fishing"
-msgstr ""
+msgstr "Dol a dh’iasgach"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:225
 msgid "We need fish"
-msgstr ""
+msgstr "Feumaidh sinn iasg"
 
 #. TRANSLATORS: Hauke – Aqua Farms 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:227
@@ -458,6 +553,11 @@ msgid ""
 "soldier training requires lots of smoked meat or fish. The scraps of meat a "
 "reindeer farm drops out as a by-product when making fur aren’t enough."
 msgstr ""
+"A cheannaird Reebauid, tha droch-naidheachd eile agam. ’S gann gu bheil iasg"
+" idir san uisge faisg oirnn. Ged as urrainn dhuinn greimeagan a dhèanamh de "
+"dhearcan no aran a-mhàin, feumaidh na saighdearan tòrr feòil no iasg-rèiste "
+"airson an oideachaidh. Chan fhoghainn am beagan feòla a gheibh sinn o na "
+"tuathanasan rèin-fhèidh nuair a nì sinn bian."
 
 #. TRANSLATORS: Hauke – Aqua Farms 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:230
@@ -467,10 +567,14 @@ msgid ""
 "fish in these ponds. He will only need lots of water for the ponds, and "
 "fruit to feed the fish."
 msgstr ""
+"Gu fortanach, dh’innlich fear de na h-iasgairean fuasgladh dhuinn. Fàgaidh "
+"na sùilean-criadha againn tuill mòra san talamh; b’ urrainn do dh’iasgair an"
+" lìonadh le uisge agus èisg a thogail sna puill ud. Chan fheum e ach tòrr "
+"uisge airson nam poll agus dearcan a bhiadhaicheas na h-èisg."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:235
 msgid "We have fish again"
-msgstr ""
+msgstr "Tha èisg againn a-rithist"
 
 #. TRANSLATORS: Hauke – Aqua Farms 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:237
@@ -479,6 +583,10 @@ msgid ""
 "now. However, the miners tell me that the resources are already low, and the"
 " mines may run completely empty soon."
 msgstr ""
+"Glè mhath. Tha sinn air tuathanas-uisge a thogail agus tha eaconamaidh na "
+"mèinnearachd seasmhach againn aig an àm seo. Gidheadh, dh’innis na "
+"mèinnearan dhomh gu bheil an stòras gann mu thràth ’s nach fhada gus am bi "
+"na mèinnean falamh."
 
 #. TRANSLATORS: Hauke – Aqua Farms 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:240
@@ -487,21 +595,27 @@ msgid ""
 "times longer – ten times if it is a deep mine – to produce ores or coal. You"
 " probably want to prepare for the increasing demands of time and food."
 msgstr ""
+"’S urrainn dha na mèinnean beagan cloich-mhèinnir no guail fhaighinn às an "
+"talamh fhathast ach bheir iad mu fhichead uiread nas fhaide – no deich "
+"uiread mas e mèinn dhomhainn a th’ ann."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:243
 msgid "Recruiting"
-msgstr ""
+msgstr "Trusadh"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:244
 msgid "Our economy is complete"
-msgstr ""
+msgstr "Tha an eaconamaidh againn coileanta"
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:246
 msgid ""
-"You are right – we should build more berry farms, collector’s houses and "
-"taverns as well as a drinking hall, and advanced bakeries and breweries."
+"You are right – we should build more berry farms, fruit collector’s houses "
+"and taverns as well as a drinking hall, and advanced bakeries and breweries."
 msgstr ""
+"Tha thu ceart – bu chòir dhuinn barrachd croitean-dhearc, taighean-"
+"cruinniche ’s taighean-tàirn a thogail agus talla-òil ’s taighean-fuine ’s "
+"taighean-grùide leasaichte cuideachd."
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:249
@@ -511,6 +625,11 @@ msgid ""
 "building armor smithies, a barracks, a training arena and a tailor’s shop "
 "now."
 msgstr ""
+"Co-dhiù no co-dheth, ’s urrainn dhuinn ar n-aire a thoirt air trusadh ’s "
+"oideachadh nan saighdearan mu thràth. ’S urrainn dhuinn ruigsinn air "
+"meatailt airson airm, clogaidean is còtaichean-bèin. Mholainn-sa gun tog "
+"sinn ceàrdaichean armachd, taigh-feachd, raon oideachaidh ’s taigh "
+"tàillearachd a-nis."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:253
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:260
@@ -522,7 +641,7 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:305
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:315
 msgid "We Are Not Alone"
-msgstr ""
+msgstr "Chan eil sinn ’nar n-aonar"
 
 #. TRANSLATORS: "Greetings, strangers!". DO NOT TRANSLATE. Reebaud doesn’t
 #. understand Latin. You can transliterate into non-Latin scripts though
@@ -532,7 +651,7 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:291
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:306
 msgid "Salvete peregrini!"
-msgstr ""
+msgstr "Salvete peregrini!"
 
 #. TRANSLATORS: "Be greeted, strangers! I am Proconsule Murilius of the
 #. province 'The Northern Lands'. Name yourselves!". DO NOT TRANSLATE. Reebaud
@@ -543,24 +662,27 @@ msgid ""
 "Salvete peregrini! Murilius Proconsul Terrae Septentrionalis provinciae ego "
 "sum. Vos nominate!"
 msgstr ""
+"Salvete peregrini! Murilius Proconsul Terrae Septentrionalis provinciae ego "
+"sum. Vos nominate!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:261
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:276
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:300
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:316
 msgid "Strangers"
-msgstr ""
+msgstr "Coigrich"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:263
 msgid "…does anyone understand what he is saying?"
-msgstr ""
+msgstr "…a bheil duine a’ tuigsinn na cainnt aigesan?"
 
 #. TRANSLATORS: Murilius – Supply Murilius 3. This is a foreign language to
 #. Murilius, so he sounds very formal.
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:269
 msgid "Do they not even speak the noble language of the Empire?"
 msgstr ""
+"Nach eil iad fiù comasach air cànan uasal na h-Impireachd a bhruidhinn?"
 
 #. TRANSLATORS: Murilius – Supply Murilius 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:272
@@ -569,15 +691,22 @@ msgid ""
 "Empire, demand to know who you are and what business you have in these "
 "lands!"
 msgstr ""
+"A choigrich! Tha mise, Murilius, Proconsul nan Tìrean Tuathach, mòr-roinn na"
+" h-Impireachd, ag iarraidh oirbh gun innis sibh dhomh cò sibhse is dè tha "
+"sibh ris san dùthaich seo!"
 
-#. TRANSLATORS: Reebaud – Supply Murilius 4
+#. TRANSLATORS: Reebaud – Supply Murilius 4. "Peace" is the traditional
+#. frisian greeting, nothing more.
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:278
 msgid ""
-"Greetings, representative of the Empire! I am Reebaud, the chieftain of this"
-" tribe. All we want is to settle down here, build our home and live our "
-"lives in peace. We do not seek trouble, but we aren’t afraid to fight, "
-"either."
+"Peace, representative of the Empire! I am Reebaud, the chieftain of this "
+"tribe. All we want is to settle down here, build our home and live our lives"
+" in peace. We do not seek trouble, but we aren’t afraid to fight, either."
 msgstr ""
+"Sìth leibh, a riochdaire na h-Impireachd! Is mise Reebaud, ceannard an "
+"treubha seo. Chan eil fainear dhuinn ach tuineachadh an-seo, ar dachaigh a "
+"thogail agus beatha sìtheil a leantainn. Chan eil sinn ag iarraidh trioblaid"
+" ach cha chuir sabaid an t-eagal oirnn nas motha."
 
 #. TRANSLATORS: Murilius – Supply Murilius 5. "Reebaude" is the Latin vocative
 #. case (form of address) of Reebaud.
@@ -587,6 +716,9 @@ msgid ""
 "inhospitable, hostile tribe of barbarians in the vicinity of this very "
 "outpost of the Empire."
 msgstr ""
+"Mas e sin mar a tha cùisean leibh, a Reebauid, feumaidh mi innse dhut gu "
+"bheil treubh mosach nàimhdeil de Thùsanaich a’ fuireach faisg air iomall na "
+"h-Impireachd seo."
 
 #. TRANSLATORS: Murilius – Supply Murilius 5
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:287
@@ -595,6 +727,9 @@ msgid ""
 " to allow them to live here – you are required to assist the Empire in "
 "driving them out."
 msgstr ""
+"Ma tha thu a’ guidhe gu bheil sibh a’ sireadh beatha sìtheil, chan eil "
+"roghainn eile agaibh ach am fuadach-san – tha sibh fo dhleastanas taic a "
+"chur ris an Impireachd ach am faigheamaid cuidhteas dhiubh."
 
 #. TRANSLATORS: Murilius – Supply Murilius 6
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:293
@@ -604,6 +739,10 @@ msgid ""
 "warehouse. Fill it with the required gifts to hand them over. I permit you "
 "to give us these wares:"
 msgstr ""
+"Cuideachd, mar fhianais air ur deagh-rùn, tha sinn ag iarraidh tìodhlac "
+"càirdeis don Impireachd uaibh. Mar a mhothaich thu gun teagamh, thug mi "
+"taigh-stòrais ùr dhuibh. Lìonaibh dhomh e leis na dh’iarras mi oirbh. "
+"Leigidh mi leibh na batharan seo a thoirt dhuinn:"
 
 #. TRANSLATORS: Murilius – Supply Murilius 6. A list of wares.
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:296
@@ -612,6 +751,9 @@ msgid ""
 "water, 40 rations, 10 meals, 30 lumps of coal, 40 lumps of iron ore, 20 iron"
 " ingots, 20 lumps of gold ore, and 10 gold bars."
 msgstr ""
+"30 grunn fhiodha, 40 leac gaireil, 30 iasg, 30 muga de leann, 150 peile de "
+"dh’uisge, 40 greimeag, 10 miasan, 30 cnap guail, 40 cnap cloich-iarainn, 20 "
+"unga iarainn, 20 cnap cloich-òir ’s 10 bàraichean òir."
 
 #. TRANSLATORS: Hauke – Supply Murilius 7
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:302
@@ -621,6 +763,11 @@ msgid ""
 "afford to spare that many wares to aid him. I propose that we destroy that "
 "ugly warehouse and let him fight his own battles."
 msgstr ""
+"A cheannaird Reebauid – tha iarrtasan Proconsul àrdanach na h-Impireachd "
+"tàmailteach. Tha e a’ dèanamh rinn mar shearbhantan. Agus chan eil an uiread"
+" a bhathair againn a tha e ag iarraidh uainn mar cuideachadh. Mholainn gum "
+"mill sinn an taigh-stòrais grànnda ud is gun dèanadh esan an t-sabaid aige "
+"fhèin."
 
 #. TRANSLATORS: Murilius – Supply Murilius 8
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:308
@@ -630,6 +777,11 @@ msgid ""
 "expand your territory from this moment on until you have given us your gift."
 " Fail to obey, and the Empire shall treat you like enemies."
 msgstr ""
+"Mura doir sibh na batharan seo dhuinn, làimhsichidh an Impireachd sibh mar "
+"nàimhdean. Agus a chùm nach dèan sibh caitheamh air a’ mheatailt phrìseil "
+"agaibh, tha mi a’ toirmeasg gun leudaicheadh sibh ur ranntair o seo a-mach "
+"gus am bi sinn air tìodhlac fhaighinn uaibh. Mura doir sibh ùmhlachd dhuinn,"
+" làimhsichidh an Impireachd sibh mar nàimhdean."
 
 #. TRANSLATORS: Murilius – Supply Murilius 8
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:311
@@ -640,6 +792,12 @@ msgid ""
 "though you are, I do believe you will realize the truth of my words after "
 "some consideration."
 msgstr ""
+"Feumaidh sibh sabaid an aghaidh an t-sluaigh bhuirb ud co-dhiù ma tha sibh "
+"airson fuireach san sgìre; bu chòir thu tuigsinn gum biodh e na b’ fhasa "
+"sabaid ’nan aghaidh còmhla ris an Impireachd na ’nur n-aonar. Agus chan eil "
+"thu ag iarraidh an Impireachd ’na nàmhaid dhuibh. Ged nach e ach daoine "
+"borba a th’ annaibh, cha chreid mi nach tuig sibh gu bheil an fhìrinn agam "
+"ma nì sibh cnuasadh air."
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:318
@@ -648,6 +806,9 @@ msgid ""
 "our territory when all we want is to build a new home, and threaten us with "
 "war if we refuse to be his slaves?"
 msgstr ""
+"Abair tàire! Cò esan a’ toirmeasg gun leudaicheamaid ar ranntair fhad ’s "
+"nach eil sinn ag amas ach air dachaigh ùr a thogail ’s esan a’ bagairt an "
+"cogadh oirnn mura dèid sinn ’nar tràillean dha?"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:321
@@ -657,6 +818,11 @@ msgid ""
 "soldier training while pretending to be gathering his so-called gift. That "
 "would buy us some time."
 msgstr ""
+"Bu mhiann leam ionnsaigh a thoirt air sa bhad ach ’s eagal leam nach eil "
+"sinn làidir gu leòr fhathast ach an seasamaid ’na aghaidh air a’ bhlàr. Bu "
+"chòir dhuinn greasadh oirnn le oideachadh nan saighdearan fhad ’s a thèid "
+"sinn an riochd gun cruinnicheadh sinn a’ chìs ris a chanas esan “tìodhlac”. "
+"Bheireadh an cleas sin beagan ùine dhuinn."
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:324
@@ -664,14 +830,17 @@ msgid ""
 "As for expansion – I wonder how strictly he can possibly control us. Perhaps"
 " we should send a scout to spy on him…"
 msgstr ""
+"’S a thaobh an leudachaidh – saoil dè cho teann ’s a b’ urrainn dha ar "
+"cumail fo smachd? ’S dòcha gum bu chòir dhuinn rabhadair a chur a-null feuch"
+" dè tha e ris…"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:329
 msgid "The Scout Discovered Something"
-msgstr ""
+msgstr "Lorg an rabhadair rud"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:330
 msgid "Our scout returned"
-msgstr ""
+msgstr "Thill an rabhadair againn"
 
 #. TRANSLATORS: Hauke – Expansion hint
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:332
@@ -681,6 +850,10 @@ msgid ""
 "translated it into our language. If I did not mistranslate, it runs as "
 "follows:"
 msgstr ""
+"A cheannaird Reebauid! Tha an rabhadair againn air tilleadh. Lorg e dàn sa "
+"chànan neònach a bhruidhinneas am Proconsul ud. Chaidh leam eadar-"
+"theangachadh dhan chànan againn fhèin. Mura rinn mi mearachd eadar-"
+"theangachaidh, seo e:"
 
 #. TRANSLATORS: Hauke – Expansion hint
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:347
@@ -688,11 +861,13 @@ msgid ""
 "I don’t know what it means, but I’m sure it’s important. Perhaps you can "
 "make some sense of it."
 msgstr ""
+"Chan eil fios agam dè as ciall dha ach tha mi cinnteach gu bheil e "
+"cudromach. ’S dòcha gun dèan e ciall dhuibhse."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:352
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:362
 msgid "The Empire is Angry"
-msgstr ""
+msgstr "Tha an Impireachd feargach"
 
 #. TRANSLATORS: "You are enemies of the Empire!". DO NOT TRANSLATE. Reebaud
 #. doesn’t understand Latin. You can transliterate into non-Latin scripts
@@ -700,7 +875,7 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:354
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:363
 msgid "Hostes Imperii estis!"
-msgstr ""
+msgstr "Hostes Imperii estis!"
 
 #. TRANSLATORS: Murilius – enemy of the Empire: player destroyed the warehouse
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:356
@@ -708,12 +883,16 @@ msgid ""
 "Barbarians! You have refused my offer of friendship most ungraciously by "
 "destroying the beautiful building we presented you with!"
 msgstr ""
+"A bhorbairibh! Dhiùlt sibh mo thairgse air càirdeas gu neo-ghràsmhor nuair a"
+" mhill sibh an togalach drùidhteach a thug sinn dhuibh!"
 
 #. TRANSLATORS: Murilius – enemy of the Empire
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:359
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:368
 msgid "You are enemies of the Empire, and I shall treat you as such!"
 msgstr ""
+"’S e nàimhdean na h-Impireachd a th’ annaibh is làimhsichidh sinn dha rèir "
+"sibh!"
 
 #. TRANSLATORS: Murilius – enemy of the Empire: player built forbidden
 #. military buildings
@@ -722,14 +901,16 @@ msgid ""
 "Barbarians! You have refused my offer of friendship most ungraciously by "
 "basely wasting your precious resources on expansion!"
 msgstr ""
+"A bhorbairibh! Dhiùlt sibh mo thairgse air càirdeas gu neo-ghràsmhor le "
+"droch ana-caitheamh nan stòrasan prìseil agaibh air leudachadh ur ranntair!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:371
 msgid "Two Enemies"
-msgstr ""
+msgstr "Dithis nàimhdean"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:372
 msgid "Defeat the enemies!"
-msgstr ""
+msgstr "Cuir ruaig air na nàimhdean!"
 
 #. TRANSLATORS: Reebaud – defeat both enemies
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:374
@@ -737,6 +918,9 @@ msgid ""
 "Murilius has made it quite clear that he won’t leave us alone. I fear we "
 "must defeat him and destroy his colony if we ever want to have peace here."
 msgstr ""
+"Rinn Murilius soilleir nach leig e leinn. ’S eagal leam gum feum sinn ruaig "
+"a chur air ’s an tuineachadh aige a mhilleadh ach am faigh sinn sìth ann a "
+"sheo idir."
 
 #. TRANSLATORS: Reebaud – defeat both enemies
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:377
@@ -745,17 +929,21 @@ msgid ""
 "this land with anyone, as sharing only leads to conflicts and battles, as we"
 " saw in our old home. We must defeat the barbarians as well."
 msgstr ""
+"Tha treubh nan Tùsanach air an do bhruidhinn e ’na bhagairt dhuinn "
+"cuideachd. Chan eil mi airson an tìr seo a cho-roinneadh le sluagh eile idir"
+" o nach digeadh ach còmhstri is sabaid oirnn mar a thigeadh san t-seann-"
+"dhachaigh againn. Feumaidh sinn ruaig a chur air na Tùsanaich cuideachd."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:381
 msgid "The Empire is Grateful"
-msgstr ""
+msgstr "Tha an Impireachd taingeil"
 
 #. TRANSLATORS: "Greetings, friends of the Empire!". DO NOT TRANSLATE. Reebaud
 #. doesn’t understand Latin. You can transliterate into non-Latin scripts
 #. though
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:383
 msgid "Salvete amici Imperii!"
-msgstr ""
+msgstr "Salvete amici Imperii!"
 
 #. TRANSLATORS: Murilius – Supplied Murilius
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:385
@@ -763,6 +951,9 @@ msgid ""
 "Strangers! I see you have kept your word. The Empire rewards its friends, "
 "therefore I shall reward you with the friendship of the Empire!"
 msgstr ""
+"A choigrichibh! Mhothaich mi gum b’ fhiach ur facal. Bheir an Impireachd "
+"duais do a caraidean agus le sin bheir mi càirdeas na h-Impireachd mar "
+"dhuais dhuibh!"
 
 #. TRANSLATORS: Murilius – Supplied Murilius. Murilius’s plan is to use the
 #. player as cannon fodder, while he himself only attacks when he has no
@@ -774,16 +965,21 @@ msgid ""
 "end of the mountains enclosing this outpost; you will find the barbarians "
 "there – attack them! We will fend off attacks launched by the enemy."
 msgstr ""
+"Nise, bheir mi cead dhuibh gun cuidich sibh le ceannsachadh nam borbairean a"
+" tha a’ fuireach ann am fasgadh glinne gu iar-thuath oirnn. Cuiridh mi an "
+"dleastanas oirbh gun leudaich sibh ur ranntair gu taobh tuath nam beann "
+"timcheall air an tuineachadh seo; lorgaidh sibh na borbairean ann a shiud – "
+"thoiribh ionnsaigh orra! Dìonaidh sinne an aghaidh ionnsaighean an nàmhad."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:392
 msgid "The Reward For Your Service"
-msgstr ""
+msgstr "Duais na seirbheise"
 
 #. TRANSLATORS: "Friends of the Empire". DO NOT TRANSLATE. Reebaud doesn’t
 #. understand Latin. You can transliterate into non-Latin scripts though
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:394
 msgid "Amici Imperii"
-msgstr ""
+msgstr "Amici Imperii"
 
 #. TRANSLATORS: Murilius – defeat Murilius 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:396
@@ -791,6 +987,8 @@ msgid ""
 "You have done well, strangers! As I did tell you earlier, you will be "
 "rewarded with the friendship of the Empire!"
 msgstr ""
+"’S ann math a rinn sibh, a choigrichibh! Mar a gheall mi dhuibh cheana, "
+"gheibh sibh càirdeas na h-Impireachd mar dhuais!"
 
 #. TRANSLATORS: Murilius – defeat Murilius 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:399
@@ -801,14 +999,19 @@ msgid ""
 " the Capital will demand from you, and of course, who shall be king of your "
 "tribe."
 msgstr ""
+"Mholainn-sa gun cuir sibh riochdairean don chathair-bhaile ach am fiosraich "
+"sibh na tachartasan poilitigeach as ùire ann. Nuair a bhios sibh air am "
+"baile a ruigsinn, gheibh sibh stiùireadh do ur treubh on Seanadh. Cuideachd,"
+" feumaidh sibh faighinn a-mach dè a’ chìs a dh’iarras an cathair-bhaile "
+"uaibh agus gu nàdarra cò rìgh ur treubha."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:402
 msgid "Another Enemy"
-msgstr ""
+msgstr "Nàmhaid eile"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:403
 msgid "Defeat the Empire!"
-msgstr ""
+msgstr "Cuir ruaig air an Impireachd!"
 
 #. TRANSLATORS: Reebaud – defeat Murilius 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:405
@@ -818,6 +1021,11 @@ msgid ""
 "be servants of this Empire, and take away my leadership? And does the "
 "hypocrite dare call this a reward?"
 msgstr ""
+"B’ àill leibh? Às dèidh a h-uile càil a rinn sinn às a leth agus tuilleadh "
+"’s a chòrr de na saighdearan agam ’nan sìneadh air a’ bhlàr dhasan, ’s ann "
+"gu bheil e ag iarraidh gun rachadh sinn ’nar searbhantan dhan Impireachd a "
+"tha seo ’s esan airson mo rìoghachd a thoirt uam? Agus ghabh an cealgair air"
+" gur e duais a bhiodh ann!"
 
 #. TRANSLATORS: Reebaud – defeat Murilius 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:408
@@ -826,14 +1034,18 @@ msgid ""
 "burn down his entire colony, and kill every single person in his realm. He "
 "will be very sorry indeed for insulting our tribe thus."
 msgstr ""
+"Bheir sinn peanas air a’ Proconsul àrdanach a tha seo airson fhallsachd. "
+"Cuiridh mi an tuineachadh gu lèir aige ’na theine ’s cuiridh mi às dhan a "
+"h-uile duine san rìoghachd aige. Bi e glè dhuilich gun do rinn e tàire dhen "
+"leithid air ar treubh."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:412
 msgid "Victory"
-msgstr ""
+msgstr "Buaidh"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:413
 msgid "Victory!"
-msgstr ""
+msgstr "Buaidh!"
 
 #. TRANSLATORS: Reebaud – victory
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:415
@@ -841,20 +1053,23 @@ msgid ""
 "We have defeated all our enemies! Now no other tribe will ever dare settle "
 "here again. We are safe, and we can finally live our lives in peace."
 msgstr ""
+"Chuir sinn ruaig air na nàimhdean againn uile! Nise, cha duraig treubh sam "
+"bith eile tuineachadh ann a sheo. Tha sinn sàbhailte agus sìth againn mu "
+"dheireadh thall."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:416
 msgid "Congratulations"
-msgstr ""
+msgstr "Meal do naidheachd"
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
 msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

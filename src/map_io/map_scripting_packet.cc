@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,6 @@
 #include <boost/algorithm/string/predicate.hpp>
 
 #include "base/macros.h"
-#include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
@@ -43,9 +42,8 @@ constexpr uint32_t kCurrentPacketVersion = 4;
 void write_lua_dir(FileSystem& target_fs, FileSystem* map_fs, const std::string& path) {
 	assert(map_fs);
 	target_fs.ensure_directory_exists(path);
-	for (const std::string& script : filter(map_fs->list_directory(path), [](const std::string& fn) {
-		     return boost::ends_with(fn, ".lua");
-		  })) {
+	for (const std::string& script : map_fs->filter_directory(
+	        path, [](const std::string& fn) { return boost::ends_with(fn, ".lua"); })) {
 		size_t length;
 		void* input_data = map_fs->load(script, length);
 		target_fs.write(script, input_data, length);
@@ -53,35 +51,38 @@ void write_lua_dir(FileSystem& target_fs, FileSystem* map_fs, const std::string&
 	}
 }
 
-// Write a selection of .lua files and all .png files that exist in the given 'path' in 'map_fs' to the 'target_fs'.
+// Write a selection of .lua files and all .png files that exist in the given 'path' in 'map_fs' to
+// the 'target_fs'.
 void write_tribes_dir(FileSystem& target_fs, FileSystem* map_fs, const std::string& path) {
 	assert(map_fs);
 	target_fs.ensure_directory_exists(path);
-    for (const std::string& file : map_fs->list_directory(path)) {
-        if (map_fs->is_directory(file)) {
-            // Write subdirectories
-            write_tribes_dir(target_fs, map_fs, file);
-        } else {
-            // Write file
-            const std::string filename(map_fs->fs_filename(file.c_str()));
-            if (filename == "init.lua" || filename == "register.lua" || filename == "helptexts.lua" || boost::ends_with(filename, ".png")) {
-                size_t length;
-                void* input_data = map_fs->load(file, length);
-                target_fs.write(file, input_data, length);
-                free(input_data);
-            } else {
-                log("\nWARNING: File name '%s' is not allowed in scenario tribes\n"
-                    "         Expecting 'init.lua', 'register.lua', 'helptexts.lua' or a *.png file\n", file.c_str());
-            }
-        }
-    }
+	for (const std::string& file : map_fs->list_directory(path)) {
+		if (map_fs->is_directory(file)) {
+			// Write subdirectories
+			write_tribes_dir(target_fs, map_fs, file);
+		} else {
+			// Write file
+			const std::string filename(map_fs->fs_filename(file.c_str()));
+			if (filename == "init.lua" || filename == "register.lua" || filename == "helptexts.lua" ||
+			    boost::ends_with(filename, ".png")) {
+				size_t length;
+				void* input_data = map_fs->load(file, length);
+				target_fs.write(file, input_data, length);
+				free(input_data);
+			} else {
+				log("\nWARNING: File name '%s' is not allowed in scenario tribes\n"
+				    "         Expecting 'init.lua', 'register.lua', 'helptexts.lua' or a *.png file\n",
+				    file.c_str());
+			}
+		}
+	}
 }
 }  // namespace
-   /*
-    * ========================================================================
-    *            PUBLIC IMPLEMENTATION
-    * ========================================================================
-    */
+/*
+ * ========================================================================
+ *            PUBLIC IMPLEMENTATION
+ * ========================================================================
+ */
 void MapScriptingPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, MapObjectLoader& mol) {
 	// Always try to load the global State: even in a normal game, some lua
 	// coroutines could run. But make sure that this is really a game, other
@@ -129,4 +130,4 @@ void MapScriptingPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObject
 		fw.write(fs, "scripting/globals.dump");
 	}
 }
-}
+}  // namespace Widelands

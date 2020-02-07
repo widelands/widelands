@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,7 +36,8 @@ void MapBobPacket::read_bob(FileRead& fr,
                             EditorGameBase& egbase,
                             MapObjectLoader&,
                             const Coords& coords,
-                            const WorldLegacyLookupTable& lookup_table) {
+                            const WorldLegacyLookupTable& lookup_table,
+                            uint16_t packet_version) {
 	const std::string owner = fr.c_string();
 	char const* const read_name = fr.c_string();
 	uint8_t subtype = fr.unsigned_8();
@@ -47,7 +48,7 @@ void MapBobPacket::read_bob(FileRead& fr,
 		throw GameDataError("unknown legacy bob %s/%s", owner.c_str(), read_name);
 	}
 
-	const std::string name = lookup_table.lookup_critter(read_name);
+	const std::string name = lookup_table.lookup_critter(read_name, packet_version);
 	try {
 		const World& world = egbase.world();
 		DescriptionIndex const idx = world.get_critter(name.c_str());
@@ -76,7 +77,7 @@ void MapBobPacket::read(FileSystem& fs,
 	fr.open(fs, "binary/bob");
 
 	Map* map = egbase.mutable_map();
-	map->recalc_whole_map(egbase.world());  //  for movecaps checks in ReadBob
+	map->recalc_whole_map(egbase);  //  for movecaps checks in ReadBob
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion)
@@ -84,7 +85,7 @@ void MapBobPacket::read(FileSystem& fs,
 				for (uint16_t x = 0; x < map->get_width(); ++x) {
 					uint32_t const nr_bobs = fr.unsigned_32();
 					for (uint32_t i = 0; i < nr_bobs; ++i)
-						read_bob(fr, egbase, mol, Coords(x, y), lookup_table);
+						read_bob(fr, egbase, mol, Coords(x, y), lookup_table, packet_version);
 				}
 			}
 		else {
@@ -94,4 +95,4 @@ void MapBobPacket::read(FileSystem& fs,
 		throw GameDataError("bobs: %s", e.what());
 	}
 }
-}
+}  // namespace Widelands

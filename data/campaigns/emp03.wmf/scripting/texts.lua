@@ -620,14 +620,15 @@ diary_page_5 = {
    title=_"Time to get Home Again",
    body= lutius(_"Diary of Lutius",
       -- TRANSLATORS: Lutius - Diary
-      _([[Yes my fellow soldiers, we have done it! We have met all the challenges that were put in front of us. But my heart is still with our home. We shall set sail as soon as possible to help defend the Empire from the Barbarian tribe.]])
-      .. paragraphdivider() ..
-      _([[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]])),
+      _([[Yes my fellow soldiers, we have done it! We have met all the challenges that were put in front of us. But my heart is still with our home. We shall set sail as soon as possible to help defend the Empire from the Barbarian tribe.]]))
+      .. objective_text(_"Victory",
+      _[[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]]),
    posy=1,
    w=500,
 }
 
 function diary_page_6(first_message, missing)
+   set_textdomain("scenario_emp03.wmf")
    local text = ""
    if first_message then
    -- TRANSLATORS: Lutius - Diary

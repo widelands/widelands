@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,6 +67,7 @@ class Worker : public Bob {
 		int32_t iparam4;
 		int32_t iparam5;
 		int32_t iparam6;
+		int32_t iparam7;
 		std::string sparam1;
 
 		std::vector<std::string> sparamv;
@@ -82,8 +83,8 @@ public:
 	OPtr<PlayerImmovable> get_location() const {
 		return location_;
 	}
-	Economy* get_economy() const {
-		return economy_;
+	Economy* get_economy(WareWorker type) const {
+		return type == wwWARE ? ware_economy_ : worker_economy_;
 	}
 
 	/// Sets the location of the worker initially. It may not have a previous
@@ -93,13 +94,15 @@ public:
 	void set_location_initially(PlayerImmovable& location) {
 		assert(!location_.is_set());
 		assert(location.serial());
-		assert(economy_);
-		assert(economy_ == location.get_economy());
+		assert(worker_economy_);
+		assert(worker_economy_ == location.get_economy(wwWORKER));
+		assert(ware_economy_);
+		assert(ware_economy_ == location.get_economy(wwWARE));
 		location_ = &location;
 	}
 
 	void set_location(PlayerImmovable*);
-	void set_economy(Economy*);
+	void set_economy(Economy*, WareWorker);
 
 	WareInstance* get_carried_ware(EditorGameBase& egbase) {
 		return carried_ware_.get(egbase);
@@ -163,7 +166,7 @@ public:
 	void start_task_releaserecruit(Game&, Worker&);
 	void start_task_fetchfromflag(Game&);
 
-	void start_task_waitforcapacity(Game&, Flag&);
+	bool start_task_waitforcapacity(Game&, Flag&);
 	void start_task_leavebuilding(Game&, bool changelocation);
 	void start_task_fugitive(Game&);
 
@@ -179,10 +182,13 @@ protected:
 	virtual bool is_evict_allowed();
 	virtual void draw_inner(const EditorGameBase& game,
 	                        const Vector2f& point_on_dst,
+	                        const Widelands::Coords& coords,
 	                        const float scale,
 	                        RenderTarget* dst) const;
 	void draw(const EditorGameBase&,
+	          const InfoToDraw& info_to_draw,
 	          const Vector2f& field_on_dst,
+	          const Widelands::Coords& coords,
 	          float scale,
 	          RenderTarget* dst) const override;
 	void init_auto_task(Game&) override;
@@ -247,12 +253,14 @@ private:
 	bool run_callobject(Game&, State&, const Action&);
 	bool run_plant(Game&, State&, const Action&);
 	bool run_createbob(Game&, State&, const Action&);
+	bool run_buildferry(Game&, State&, const Action&);
 	bool run_removeobject(Game&, State&, const Action&);
 	bool run_repeatsearch(Game&, State&, const Action&);
 	bool run_findresources(Game&, State&, const Action&);
 	bool run_scout(Game&, State&, const Action&);
 	bool run_playsound(Game&, State&, const Action&);
 	bool run_construct(Game&, State&, const Action&);
+	bool run_terraform(Game&, State&, const Action&);
 
 	// Forester considers multiple spaces in findspace, unlike others.
 	int16_t findspace_helper_for_forester(const Coords& pos, const Map& map, Game& game);
@@ -282,7 +290,8 @@ private:
 	bool scout_lurk_around(Game& game, const Map& map, struct Worker::PlaceToScout& scoutat);
 
 	OPtr<PlayerImmovable> location_;   ///< meta location of the worker
-	Economy* economy_;                 ///< economy this worker is registered in
+	Economy* worker_economy_;          ///< economy this worker is registered in
+	Economy* ware_economy_;            ///< economy this worker's wares are registered in
 	OPtr<WareInstance> carried_ware_;  ///< ware we are carrying
 	IdleWorkerSupply* supply_;         ///< supply while gowarehouse and not transfer
 	Transfer* transfer_;               ///< where we are currently being sent
@@ -320,6 +329,6 @@ public:
 	                               const TribesLegacyLookupTable& lookup_table,
 	                               uint8_t packet_version);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_WORKER_H

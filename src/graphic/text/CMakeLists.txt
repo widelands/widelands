@@ -35,13 +35,13 @@ wl_library(graphic_text
     base_macros
     graphic
     graphic_align
+    graphic_animation
     graphic_color
     graphic_image_cache
     graphic_image_io
     graphic_playercolor
     graphic_sdl_utils
     graphic_surface
-    graphic_text_layout
     io_fileread
     io_filesystem
     scripting_lua_interface

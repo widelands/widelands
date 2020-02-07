@@ -37,5 +37,6 @@ def main():
             call(['bzr', 'mv', source_file, destination_file])
     return 0
 
+
 if __name__ == '__main__':
     sys.exit(main())

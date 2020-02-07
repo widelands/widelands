@@ -53,10 +53,10 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start sculpting a marble column because ...
          descname = _"sculpting a marble column",
          actions = {
-            "sleep=50000",
             "return=skipped unless economy needs marble_column",
             "consume=marble:2",
-            "playsound=sound/stonecutting stonemason 192",
+            "sleep=50000",
+            "playsound=sound/stonecutting/stonemason 192",
             "animate=working 32000",
             "produce=marble_column"
          }

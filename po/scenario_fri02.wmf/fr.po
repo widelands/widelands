@@ -1,18 +1,19 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
 # Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
-# Renaud Bouchard, 2018
 # zecas <jjorge@free.fr>, 2018
+# Renaud Bouchard, 2019
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-12 07:46+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: zecas <jjorge@free.fr>, 2018\n"
+"POT-Creation-Date: 2019-10-09 07:57+0000\n"
+"PO-Revision-Date: 2018-03-24 18:16+0000\n"
+"Last-Translator: Renaud Bouchard, 2019\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,7 +44,7 @@ msgstr "Expansion vers le sud"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:37
 msgid "Expand Your Territory to Explore the South"
-msgstr "Expansion de votre territoire pour explorer le Sud"
+msgstr "Étendez votre territoire pour explorer le Sud"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:38
 msgid ""
@@ -85,12 +86,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:52
 msgid "Build an aqua farm"
-msgstr "Construire une aquaferme"
+msgstr "Construire une pisciculture"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:54
 msgid "Build an Aqua Farm to Start Producing Fish"
-msgstr ""
-"Construire une ferme aquatique pour commencer à la production de poissons"
+msgstr "Construire une pisciculture pour commencer la production de poissons"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:55
 msgid ""
@@ -105,7 +105,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:60
 msgid "Decide whether you want to cooperate with the Empire"
-msgstr "Décider si vous voulez coopérer avec l'Empire."
+msgstr "Décider si vous voulez coopérer avec l'Empire"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:62
 msgid "Gather Wares as a Gift or Destroy the Empire’s Warehouse"
@@ -122,19 +122,19 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:64
 msgid "30 × Log"
-msgstr "30 × Tronc"
+msgstr "30 × Troncs"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:65
 msgid "40 × Granite"
-msgstr "40 × Granite"
+msgstr "40 × Granits"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:66
 msgid "30 × Fish"
-msgstr "30 × Poisson"
+msgstr "30 × Poissons"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:67
 msgid "30 × Beer"
-msgstr "30 × Bière"
+msgstr "30 × Bières"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:68
 msgid "150 × Water"
@@ -142,7 +142,7 @@ msgstr "150 × Eau"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:69
 msgid "40 × Ration"
-msgstr "40 × Ration"
+msgstr "40 × Rations"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:70
 msgid "10 × Meal"
@@ -154,7 +154,7 @@ msgstr "30 × Charbon"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:72
 msgid "40 × Iron Ore"
-msgstr "40 × Minerai de fer"
+msgstr "40 × Minerais de fer"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:73
 msgid "20 × Iron"
@@ -162,7 +162,7 @@ msgstr "20 × Fer"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:74
 msgid "30 × Gold Ore"
-msgstr "30 × Minerai d'or"
+msgstr "30 × Minerais d'or"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:75
 msgid "10 × Gold"
@@ -183,11 +183,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:82
 msgid "Spy on Murilius"
-msgstr "Espoin sur Murilius"
+msgstr "Espionnez Murilius"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:84
 msgid "Send a Scout to Spy on the Empire"
-msgstr "Envoie un Éclaireur pour Espionner l'Empire"
+msgstr "Envoie un éclaireur pour espionner l'Empire"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:85
 msgid ""
@@ -214,7 +214,7 @@ msgstr "Combien de lieux où trainent les soldats,"
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:94
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:338
 msgid "How many sites where thou hold’st sway,"
-msgstr "Combien de lieux où ils tiennent bon,"
+msgstr "Combien de lieux où tu as tenu bon,"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:95
@@ -226,11 +226,11 @@ msgstr "Bien que leurs capitaines ne les voient guère"
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:96
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:344
 msgid "Who’s ordering around here thee!"
-msgstr "Qui commande ici alors!"
+msgstr "Qui commande ici alors !"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:101
 msgid "Defeat the Barbarians!"
-msgstr "Défaire les Barbares!"
+msgstr "Défaire les Barbares !"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:103
 msgid "Defeat the Barbarians"
@@ -243,7 +243,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:109
 msgid "Defeat Murilius!"
-msgstr "Défaire Murilius!"
+msgstr "Défaire Murilius !"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:111
 msgid "Defeat the Arrogant Outpost of the Empire"
@@ -264,7 +264,7 @@ msgstr "Conquiers chaque champ qui appartienne encore à Murilius."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:118
 msgid "Defeat Murilius and the Barbarians!"
-msgstr "Défaire Murilius et les Barbares!"
+msgstr "Défaire Murilius et les Barbares !"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:120
 msgid "Defeat the Barbarians and the Empire Colony"
@@ -614,12 +614,12 @@ msgstr "Notre économie est complète"
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:246
 msgid ""
-"You are right – we should build more berry farms, collector’s houses and "
-"taverns as well as a drinking hall, and advanced bakeries and breweries."
+"You are right – we should build more berry farms, fruit collector’s houses "
+"and taverns as well as a drinking hall, and advanced bakeries and breweries."
 msgstr ""
-"Vous avez raison – nous devrions construire plus de fermes de baies, de "
-"maisons de collection et de tavernes, ainsi qu'un bistrot, des boulangeries "
-"et brasseries avancées."
+"Vous avez raison – nous devrions construire plus de fermes arboricoles, de "
+"maisons de cueilleurs de fruits, de tavernes et de bistrots, et des "
+"boulangeries et brasseries avancées."
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:249
@@ -645,7 +645,7 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:305
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:315
 msgid "We Are Not Alone"
-msgstr "Nous Ne Sommes Pas Seul"
+msgstr "Nous ne sommes pas seuls"
 
 #. TRANSLATORS: "Greetings, strangers!". DO NOT TRANSLATE. Reebaud doesn’t
 #. understand Latin. You can transliterate into non-Latin scripts though
@@ -685,7 +685,7 @@ msgstr "...est-ce que quelqu'un comprend ce qu'il dit ?"
 #. Murilius, so he sounds very formal.
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:269
 msgid "Do they not even speak the noble language of the Empire?"
-msgstr "Ne parlent-ils même pas la langue noble de l'Empire ?"
+msgstr "Ne parlent-ils même pas la noble langue de l'Empire ?"
 
 #. TRANSLATORS: Murilius – Supply Murilius 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:272
@@ -698,18 +698,18 @@ msgstr ""
 "l'Empire, demande à savoir qui êtes vous ainsi que vos occupations sur ces "
 "terres !"
 
-#. TRANSLATORS: Reebaud – Supply Murilius 4
+#. TRANSLATORS: Reebaud – Supply Murilius 4. "Peace" is the traditional
+#. frisian greeting, nothing more.
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:278
 msgid ""
-"Greetings, representative of the Empire! I am Reebaud, the chieftain of this"
-" tribe. All we want is to settle down here, build our home and live our "
-"lives in peace. We do not seek trouble, but we aren’t afraid to fight, "
-"either."
+"Peace, representative of the Empire! I am Reebaud, the chieftain of this "
+"tribe. All we want is to settle down here, build our home and live our lives"
+" in peace. We do not seek trouble, but we aren’t afraid to fight, either."
 msgstr ""
-"Salutations, représentant de l'Empire ! Je suis Reebaud, le chef de cette "
-"tribu. Tout ce que nous voulons, c'est nous installer ici, construire notre "
-"maison et vivre en paix. Nous ne cherchons pas les ennuis, mais nous n'avons"
-" pas peur de nous battre non plus."
+"Paix, représentant de l'Empire ! Je suis Reebaud, le chef de cette tribu. "
+"Tout ce que nous voulons est nous établir ici, bâtir nos maisons et vivre "
+"nos vies en paix. Nous ne cherchons pas les ennuis mais n'avons pas peur de "
+"nous battre non plus."
 
 #. TRANSLATORS: Murilius – Supply Murilius 5. "Reebaude" is the Latin vocative
 #. case (form of address) of Reebaud.
@@ -753,9 +753,9 @@ msgid ""
 "water, 40 rations, 10 meals, 30 lumps of coal, 40 lumps of iron ore, 20 iron"
 " ingots, 20 lumps of gold ore, and 10 gold bars."
 msgstr ""
-"30 troncs, 40 dalles de granite, 10 poissons, 30 choppes de bière, 150 "
-"sceaux d'eau, 40 rations, 10 repas, 30 blocs de charbon, 40 pépites de fer, "
-"20 lingots de fer, 20 pépites d'or et 10 lingots d'or."
+"30 troncs, 40 dalles de granit, 10 poissons, 30 choppes de bière, 150 sceaux"
+" d'eau, 40 rations, 10 repas, 30 blocs de charbon, 40 blocs de minerai fer, "
+"20 lingots de fer, 20 blocs de minerai d'or et 10 lingots d'or."
 
 #. TRANSLATORS: Hauke – Supply Murilius 7
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:302
@@ -836,7 +836,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:329
 msgid "The Scout Discovered Something"
-msgstr "L'Éclaireur a Fait une Découverte"
+msgstr "L'éclaireur a fait une découverte"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:330
 msgid "Our scout returned"
@@ -907,7 +907,7 @@ msgstr "Deux Ennemis "
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:372
 msgid "Defeat the enemies!"
-msgstr "Défaire les ennemis!"
+msgstr "Défaire les ennemis !"
 
 #. TRANSLATORS: Reebaud – defeat both enemies
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:374
@@ -933,7 +933,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:381
 msgid "The Empire is Grateful"
-msgstr "L'Empire est Reconnaissant"
+msgstr "L'Empire est reconnaissant"
 
 #. TRANSLATORS: "Greetings, friends of the Empire!". DO NOT TRANSLATE. Reebaud
 #. doesn’t understand Latin. You can transliterate into non-Latin scripts
@@ -1007,7 +1007,7 @@ msgstr "Un Autre Ennemi"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:403
 msgid "Defeat the Empire!"
-msgstr "Défaire l'Empire!"
+msgstr "Défaire l'Empire !"
 
 #. TRANSLATORS: Reebaud – defeat Murilius 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:405
@@ -1055,13 +1055,15 @@ msgstr ""
 msgid "Congratulations"
 msgstr "Félicitations"
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Nouveaux Objectif"
-msgstr[1] "Nouveaux Objectifs"
+msgstr "Nouvel objectif"
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr "Nouveaux objectifs"

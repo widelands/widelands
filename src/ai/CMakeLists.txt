@@ -19,5 +19,9 @@ wl_library(ai
     economy
     logic
     logic_constants
+    logic_commands
+    logic_map
+    logic_map_objects
     scripting_lua_table
 )
+add_subdirectory(test)

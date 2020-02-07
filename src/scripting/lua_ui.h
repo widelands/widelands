@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 #include "scripting/lua.h"
 #include "scripting/luna.h"
 #include "ui_basic/button.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/window.h"
 #include "wui/interactive_base.h"
@@ -57,7 +58,7 @@ public:
 	}
 
 	void __persist(lua_State* L) override {
-		report_error(L, "Trying to persist a User Interface Panel which is no supported!");
+		report_error(L, "Trying to persist a User Interface Panel which is not supported!");
 	}
 	void __unpersist(lua_State* L) override {
 		report_error(L, "Trying to unpersist a User Interface Panel which is "
@@ -68,6 +69,7 @@ public:
 	 * Properties
 	 */
 	int get_buttons(lua_State* L);
+	int get_dropdowns(lua_State* L);
 	int get_tabs(lua_State* L);
 	int get_windows(lua_State* L);
 	int get_width(lua_State* L);
@@ -118,6 +120,40 @@ public:
 	 */
 	UI::Button* get() {
 		return static_cast<UI::Button*>(panel_);
+	}
+};
+
+class LuaDropdown : public LuaPanel {
+public:
+	LUNA_CLASS_HEAD(LuaDropdown);
+
+	LuaDropdown() : LuaPanel() {
+	}
+	explicit LuaDropdown(UI::Panel* p) : LuaPanel(p) {
+	}
+	explicit LuaDropdown(lua_State* L) : LuaPanel(L) {
+	}
+	~LuaDropdown() override {
+	}
+
+	/*
+	 * Properties
+	 */
+	int get_name(lua_State* L);
+	int get_no_of_items(lua_State* L);
+
+	/*
+	 * Lua Methods
+	 */
+	int open(lua_State* L);
+	int highlight_item(lua_State* L);
+	int select(lua_State* L);
+
+	/*
+	 * C Methods
+	 */
+	UI::BaseDropdown* get() {
+		return static_cast<UI::BaseDropdown*>(panel_);
 	}
 };
 
@@ -235,6 +271,6 @@ public:
 };
 
 void luaopen_wlui(lua_State*);
-}
+}  // namespace LuaUi
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_UI_H

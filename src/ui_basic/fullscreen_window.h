@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -71,9 +71,8 @@ public:
 	FullscreenWindow();
 	~FullscreenWindow() override;
 
-	/// \return the size for texts fitting to current resolution
-	int fs_small();
-	int fs_big();
+	/// \return the font size scale factor for fitting texts to current resolution
+	float scale_factor() const;
 
 protected:
 	void draw(RenderTarget&) override;

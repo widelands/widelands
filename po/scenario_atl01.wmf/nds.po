@@ -1,8 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2019
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # GunChleoc, 2014
 # GunChleoc, 2014
@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-05 07:05+0000\n"
-"PO-Revision-Date: 2018-10-05 17:10+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2019-08-10 17:15+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -91,7 +91,7 @@ msgid ""
 "breeding more. Make sure that there are always fish left, otherwise the fish"
 " breeder won’t be able to breed new ones. The smoking happens in a smokery, "
 "you will need at least two of those."
-msgstr "De annern twee wichtigen Spiesen sünd Rökelfiss un Rökelfleesk. Een Jäger levert rauhes Fleesk. Een Fisker hollt Fisse ut de See un een Fisstüchter kümmert sük daarum, dat de Fisse nich all fiskt worden, indeem he welke tüchtet. Pass up, dat immer een paar Fisse övrig sünd, anners kann de Fisstüchter keene mehr tüchten. Fiss un Fleesk worden in eener Rökelkamer rökelt, bau daar tominnst twee vun."
+msgstr "De annern twee wichtigen Spiesen sünd Rökelfiss un Rökelfleesk. Een Jäger levert rauhes Fleesk. Een Fisker hollt Fisse ut de See un een Fisstüchter kümmert sük daarum, dat de Fisse nich all fiskt worden, indeem he welke tücht. Pass up, dat immer een paar Fisse övrig sünd, anners kann de Fisstüchter keene mehr tüchten. Fiss un Fleesk worden in eener Rökelkamer rökelt, bau daar tominnst twee vun."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:59
 msgid "Build a farm and a blackroot farm"
@@ -183,7 +183,7 @@ msgstr "De Kluten mutten eerst in eenem Smeltwark smulten worden, ehr man se bru
 msgid ""
 "Build a mine of each type. Make sure to send geologists to the mountain "
 "first."
-msgstr "Bau vun elkeen Aard een Bargwark. Stüür aber eerst Schattsökers tum Barg."
+msgstr "Bau vun elkeen Aard een Bargwark. Stüür aver eerst Schattsökers tum Barg."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:90
 msgid "Build a smelting works"
@@ -204,7 +204,7 @@ msgstr "Bau eene Kasern"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:100
 msgid "Recruiting new soldiers"
-msgstr "Neie Soldaten anhüren"
+msgstr "Neje Soldaten anhüren"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:101
 msgid ""
@@ -212,7 +212,7 @@ msgid ""
 "we need to deliver light tridents and tabards to the barracks. Recruits will"
 " arrive from the warehouse and receive one of each and some basic training "
 "to become a soldier."
-msgstr "Nu dat wi Wapen smeden könen, könen wi neie Soldaten anhüren. Daarto mutten wi Lütte Dreespitzen un Kluften to de Kasern levern. Lehrwichter komen vun eenem Kraamhuus un kriegen eens vun jede un eene Inföhren tum Fechten, un so worden se Soldaten."
+msgstr "Nu dat wi Wapen smeden könen, könen wi neje Soldaten anhüren. Daarto mutten wi Lütte Dreespitzen un Kluften to de Kasern levern. Lehrwichter komen vun eenem Kraamhuus un kriegen eens vun elkeen daarvun un eene Inföhren tum Fechten, un so worden se Soldaten."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:108
 msgid "Build training sites for soldiers"
@@ -927,13 +927,15 @@ msgstr "Huus verloren!"
 msgid "We lost a building to the ocean!"
 msgstr "Wi hebben een Huus an de See verloren!"
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "“%s”"
+msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Neie Upgaav"
-msgstr[1] "Neie Upgaven"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

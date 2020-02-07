@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 by the Widelands Development Team
+ * Copyright (C) 2018-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,6 @@
 #include "graphic/graphic.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "sound/sound_handler.h"
 
 // Setup the static objects Widelands needs to operate and initializes systems.
 void initialize() {
@@ -39,19 +38,14 @@ void initialize() {
 	g_fs = new LayeredFileSystem();
 	g_fs->add_file_system(&FileSystem::create(INSTALL_DATADIR));
 
-	// We don't really need graphics or sound here, but we will get error messages
+	// We don't really need graphics here, but we will get error messages
 	// when they aren't initialized
 	g_gr = new Graphic();
 	g_gr->initialize(Graphic::TraceGl::kNo, 1, 1, false);
-
-	g_sound_handler.init();
-	g_sound_handler.nosound_ = true;
 }
 
 // Cleanup before program end
 void cleanup() {
-	g_sound_handler.shutdown();
-
 	if (g_gr) {
 		delete g_gr;
 		g_gr = nullptr;

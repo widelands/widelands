@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,6 @@
 #define WL_EDITOR_TOOLS_SET_PORT_SPACE_TOOL_H
 
 #include "editor/tools/tool.h"
-#include "logic/widelands.h"
 
 #define FSEL_ESPS_FILENAME "images/wui/editor/fsel_editor_set_port_space.png"
 #define FSEL_EUPS_FILENAME "images/wui/editor/fsel_editor_unset_port_space.png"
@@ -31,14 +30,12 @@ class EditorUnsetPortSpaceTool : public EditorTool {
 public:
 	explicit EditorUnsetPortSpaceTool();
 
-	int32_t handle_click_impl(const Widelands::World& world,
-	                          const Widelands::NodeAndTriangle<>& center,
+	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
 	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
 	                          Widelands::Map* map) override;
 
-	int32_t handle_undo_impl(const Widelands::World& world,
-	                         const Widelands::NodeAndTriangle<>& center,
+	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
 	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,
 	                         Widelands::Map* map) override;
@@ -55,14 +52,12 @@ class EditorSetPortSpaceTool : public EditorTool {
 public:
 	explicit EditorSetPortSpaceTool(EditorUnsetPortSpaceTool&);
 
-	int32_t handle_click_impl(const Widelands::World& world,
-	                          const Widelands::NodeAndTriangle<>& center,
+	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
 	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
 	                          Widelands::Map* map) override;
 
-	int32_t handle_undo_impl(const Widelands::World& world,
-	                         const Widelands::NodeAndTriangle<>& center,
+	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
 	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,
 	                         Widelands::Map* map) override;

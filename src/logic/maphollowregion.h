@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -55,15 +55,15 @@ template <typename AreaType = Area<>> struct MapHollowRegion {
 	 */
 	bool advance(const Map&);
 
-private:
-	enum Phase {
-		None = 0,    // not initialized or completed
-		Top = 1,     // above the hole
-		Upper = 2,   // upper half
-		Lower = 4,   // lower half
-		Bottom = 8,  // below the hole
+	enum class Phase {
+		kNone = 0,    // not initialized or completed
+		kTop = 1,     // above the hole
+		kUpper = 2,   // upper half
+		kLower = 4,   // lower half
+		kBottom = 8,  // below the hole
 	};
 
+private:
 	HollowArea<AreaType> hollow_area_;
 	Phase phase_;
 	const uint32_t delta_radius_;
@@ -77,6 +77,15 @@ private:
 template <>
 MapHollowRegion<Area<>>::MapHollowRegion(const Map& map, const HollowArea<Area<>>& hollow_area);
 template <> bool MapHollowRegion<Area<>>::advance(const Map& map);
+
+// A bunch of operators that turn MapHollowRegion<Area<>>::Phase into a bitwise combinable class.
+inline MapHollowRegion<Area<>>::Phase operator|(MapHollowRegion<Area<>>::Phase left,
+                                                MapHollowRegion<Area<>>::Phase right) {
+	return MapHollowRegion<Area<>>::Phase(static_cast<int>(left) | static_cast<int>(right));
 }
+inline int operator&(MapHollowRegion<Area<>>::Phase left, MapHollowRegion<Area<>>::Phase right) {
+	return static_cast<int>(left) & static_cast<int>(right);
+}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAPHOLLOWREGION_H

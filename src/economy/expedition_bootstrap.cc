@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,7 +36,9 @@
 namespace Widelands {
 
 ExpeditionBootstrap::ExpeditionBootstrap(PortDock* const portdock)
-   : portdock_(portdock), economy_(portdock->get_economy()) {
+   : portdock_(portdock),
+     ware_economy_(portdock->get_economy(wwWARE)),
+     worker_economy_(portdock->get_economy(wwWORKER)) {
 }
 
 ExpeditionBootstrap::~ExpeditionBootstrap() {
@@ -98,14 +100,16 @@ void ExpeditionBootstrap::cancel(Game& game) {
 	// Put all wares from the WaresQueues back into the warehouse
 	Warehouse* const warehouse = portdock_->get_warehouse();
 	for (std::unique_ptr<InputQueue>& iq : queues_) {
-		if (iq->get_type() == wwWARE) {
+		switch (iq->get_type()) {
+		case wwWARE:
 			warehouse->insert_wares(iq->get_index(), iq->get_filled());
-		} else {
-			assert(iq->get_type() == wwWORKER);
+			break;
+		case wwWORKER:
 			WorkersQueue* wq = dynamic_cast<WorkersQueue*>(iq.get());
 			while (iq->get_filled() > 0) {
 				warehouse->incorporate_worker(game, wq->extract_worker());
 			}
+			break;
 		}
 		iq->cleanup();
 	}
@@ -141,19 +145,24 @@ std::vector<InputQueue*> ExpeditionBootstrap::queues() const {
 	return return_value;
 }
 
-void ExpeditionBootstrap::set_economy(Economy* new_economy) {
-	if (new_economy == economy_)
+void ExpeditionBootstrap::set_economy(Economy* new_economy, WareWorker type) {
+	if (new_economy == (type == wwWARE ? ware_economy_ : worker_economy_))
 		return;
 
 	// Transfer the wares and workers.
 	for (std::unique_ptr<InputQueue>& iq : queues_) {
-		if (economy_)
-			iq->remove_from_economy(*economy_);
-		if (new_economy)
+		if (type != iq->get_type()) {
+			continue;
+		}
+		if (Economy* e = type == wwWARE ? ware_economy_ : worker_economy_) {
+			iq->remove_from_economy(*e);
+		}
+		if (new_economy) {
 			iq->add_to_economy(*new_economy);
+		}
 	}
 
-	economy_ = new_economy;
+	(type == wwWARE ? ware_economy_ : worker_economy_) = new_economy;
 }
 
 void ExpeditionBootstrap::get_waiting_workers_and_wares(Game& game,
@@ -161,7 +170,8 @@ void ExpeditionBootstrap::get_waiting_workers_and_wares(Game& game,
                                                         std::vector<Worker*>* return_workers,
                                                         std::vector<WareInstance*>* return_wares) {
 	for (std::unique_ptr<InputQueue>& iq : queues_) {
-		if (iq->get_type() == wwWARE) {
+		switch (iq->get_type()) {
+		case wwWARE: {
 			const DescriptionIndex ware_index = iq->get_index();
 			for (uint32_t j = 0; j < iq->get_filled(); ++j) {
 				WareInstance* temp = new WareInstance(ware_index, tribe.get_ware_descr(ware_index));
@@ -169,12 +179,15 @@ void ExpeditionBootstrap::get_waiting_workers_and_wares(Game& game,
 				temp->set_location(game, portdock_);
 				return_wares->emplace_back(temp);
 			}
-		} else {
-			assert(iq->get_type() == wwWORKER);
+			break;
+		}
+		case wwWORKER: {
 			WorkersQueue* wq = dynamic_cast<WorkersQueue*>(iq.get());
 			while (iq->get_filled() > 0) {
 				return_workers->emplace_back(wq->extract_worker());
 			}
+			break;
+		}
 		}
 	}
 
@@ -202,8 +215,12 @@ void ExpeditionBootstrap::save(FileWrite& fw, Game& game, MapObjectSaver& mos) {
 	}
 }
 
-void ExpeditionBootstrap::load(
-   Warehouse& warehouse, FileRead& fr, Game& game, MapObjectLoader& mol, uint16_t packet_version) {
+void ExpeditionBootstrap::load(Warehouse& warehouse,
+                               FileRead& fr,
+                               Game& game,
+                               MapObjectLoader& mol,
+                               const TribesLegacyLookupTable& tribes_lookup_table,
+                               uint16_t packet_version) {
 
 	static const uint16_t kCurrentPacketVersion = 7;
 	assert(queues_.empty());
@@ -214,7 +231,7 @@ void ExpeditionBootstrap::load(
 			uint8_t num_queues = fr.unsigned_8();
 			for (uint8_t i = 0; i < num_queues; ++i) {
 				WorkersQueue* wq = new WorkersQueue(warehouse, INVALID_INDEX, 0);
-				wq->read(fr, game, mol);
+				wq->read(fr, game, mol, tribes_lookup_table);
 				wq->set_callback(input_callback, this);
 
 				if (wq->get_index() == INVALID_INDEX) {
@@ -232,7 +249,7 @@ void ExpeditionBootstrap::load(
 		uint8_t num_queues = fr.unsigned_8();
 		for (uint8_t i = 0; i < num_queues; ++i) {
 			WaresQueue* wq = new WaresQueue(warehouse, INVALID_INDEX, 0);
-			wq->read(fr, game, mol);
+			wq->read(fr, game, mol, tribes_lookup_table);
 			wq->set_callback(input_callback, this);
 
 			if (wq->get_index() == INVALID_INDEX) {

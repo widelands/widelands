@@ -1,16 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018
+# Benedikt Straub <benedikt-straub@web.de>, 2019
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-05 07:05+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2018-03-24 18:16+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2019\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -48,7 +49,7 @@ msgid ""
 "The north looks not very useful to us, but who knows what we might find in "
 "the south?"
 msgstr ""
-"De Noorden sücht nich würrelk nützelk för uns ut, aber well weet, wat wi im "
+"De Noorden sücht nich würrelk nützelk för uns ut, aver well weet, wat wi im "
 "Süden finnen könen?"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:43
@@ -105,7 +106,7 @@ msgstr "Entschee di, of du mit de Latiensken Riek tosammenarbeiden willt"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:62
 msgid "Gather Wares as a Gift or Destroy the Empire’s Warehouse"
-msgstr "Sammel Waren as Gaven oder verneel dat Rieks-Kraamhuus"
+msgstr "Sammel Waren as Gaven of verneel dat Rieks-Kraamhuus"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:63
 msgid ""
@@ -172,7 +173,7 @@ msgid ""
 "He forbade you to expand your territory until the wares have been handed "
 "over."
 msgstr ""
-"Anners kannst du dat Kraamhuus eenfach ofbrannen un villivht Murilius as "
+"Anners kannst du dat Kraamhuus eenfach ofbrannen un villicht Murilius as "
 "Feind hebben. He hett di verseggt, dien Gewest to vergrotern, bit he de "
 "Waren kregen hett."
 
@@ -283,7 +284,7 @@ msgid ""
 "complete the previous scenario first and then restart this mission."
 msgstr ""
 "'t sücht so ut, as of du de leste Rutfödderung nich ofsluten hest. Du dürst "
-"deese Rutfödderung doch spölen, hest aber eenen Nadeel. Ick raad an, dat du "
+"deese Rutfödderung doch spölen, hest aver eenen Nadeel. Ick raad an, dat du "
 "eerst de leste Rutfödderung spölst un deese hier dann neei begünnst."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:137
@@ -296,7 +297,7 @@ msgstr "Willkomen torügg!"
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:147
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:156
 msgid "A new home"
-msgstr "Eene neie Heimaad"
+msgstr "Eene neje Heimaad"
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:140
@@ -314,7 +315,7 @@ msgid ""
 "But we survived. Finally, we reached the mouth of a calmer fjord. We sailed "
 "upriver, and arrived here."
 msgstr ""
-"Aber wi hebben överleevt. Uplest hebben wi eenen ruhigen Beek funnen. Wi "
+"Aver wi hebben överleevt. Uplest hebben wi eenen ruhigen Beek funnen. Wi "
 "sünd tum Quell seilt, un hier ankomen."
 
 #. TRANSLATORS: Reebaud – Introduction 2
@@ -343,7 +344,7 @@ msgid ""
 "This place looks bleak and barren, my companions say, but I think it looks… "
 "beautiful."
 msgstr ""
-"Deeser Oort sücht wööst un kahl ut, seggen miene Kameraden, aber ick finn, "
+"Deeser Oort sücht wööst un kahl ut, seggen miene Kameraden, aver ick finn, "
 "'t is … mooi."
 
 #. TRANSLATORS: Reebaud – Introduction 3
@@ -353,7 +354,7 @@ msgid ""
 "start building our new home here."
 msgstr ""
 "Miene Bespejers hebben keene levigen Beesten mehr in de Naberskupp funnen. "
-"Wi fangen hier an, uns' neie Heimaad to bauen."
+"Wi fangen hier an, uns' neje Heimaad to bauen."
 
 #. TRANSLATORS: Reebaud – Introduction 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:164
@@ -384,7 +385,7 @@ msgid ""
 "We have built a home in this wonderful landscape. But as our tribe grows, we"
 " need more space. We should start expanding our territory."
 msgstr ""
-"Wi hebben in deeser ewigsmojen Gegend eene Heimaad baut. Aber as uns' Volk "
+"Wi hebben in deeser ewigsmojen Gegend eene Heimaad baut. Aver as uns' Volk "
 "groter word, bruken wi mehr Rüümte. Wi sallen anfangen, uns' Gewest to "
 "vergrotern."
 
@@ -396,7 +397,7 @@ msgid ""
 "in the south."
 msgstr ""
 "De Bespejers mellen, dat dat Land im Noorden ruge Höchten sünd, mooi tum "
-"Ankieken, aber för Husen nich to bruken. Laat uns rutfinnen, wat wi im Süden"
+"Ankieken, aver för Husen nich to bruken. Laat uns rutfinnen, wat wi im Süden"
 " finnen könen."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:180
@@ -418,7 +419,7 @@ msgid ""
 " nor any picks to equip them with."
 msgstr ""
 "Mienheer Reebaud! Wi hebben een slimmes Probleem. Wi hebben eenen Barg "
-"funnen, waar wi villicht Köhle un Iesen ofboen könen, aber wi hebben keene "
+"funnen, waar wi villicht Köhle un Iesen ofboen könen, aver wi hebben keene "
 "Bargwarkskeerls, un keene Pickhacken, um welke uttostafferen."
 
 #. TRANSLATORS: Hauke – Train and recycle 1
@@ -427,14 +428,14 @@ msgid ""
 "And we don’t have any iron left. We must find a way to get some metal for "
 "forging new picks. Unfortunately, I have no idea how to do this."
 msgstr ""
-"Un wi hebben keen Iesen över. Wi mutten eets wat Iesen kriegen, um neie "
-"Pickhacken to maken. Aber ick hebb leidergotts keene Idee, wo wi dat doon "
+"Un wi hebben keen Iesen över. Wi mutten eets wat Iesen kriegen, um neje "
+"Pickhacken to maken. Aver ick hebb leidergotts keene Idee, wo wi dat doon "
 "könen."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:190
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:209
 msgid "Getting new metal"
-msgstr "Neies Metall kriegen"
+msgstr "Nejes Metall kriegen"
 
 #. TRANSLATORS: Reebaud – Train and recycle 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:192
@@ -453,12 +454,12 @@ msgid ""
 "precious swords…"
 msgstr ""
 "Ick hebb een paar gode Wapen in uns' Kraamhusen sehn. Villicht kann man se "
-"in Metall torüggsmelten? Aber dat is eene lepe Upmakeree vun de goden "
+"in Metall torüggsmelten? Aver dat is eene lepe Upmakeree vun de goden "
 "Sweerten …"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:199
 msgid "New metal"
-msgstr "Neies Metall"
+msgstr "Nejes Metall"
 
 #. TRANSLATORS: Hauke – Train and recycle 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:201
@@ -467,7 +468,7 @@ msgid ""
 "new swords and the old weapons are discarded. These are unfit to use in "
 "battle, so it would not be a waste to smelt down those."
 msgstr ""
-"Nu hebb ick eene Idee: Wenn uns' Soldaten öven, worden se mit neien Sweerten"
+"Nu hebb ick eene Idee: Wenn uns' Soldaten öven, worden se mit nejen Sweerten"
 " utstaffeert un de ollen Wapen wegsmeten. Se könen nich mehr in de Slacht "
 "bruukt worden, 't is also keene Verschwendung, deese to smelten."
 
@@ -494,7 +495,7 @@ msgid ""
 msgstr ""
 "Nich so fix! Um een Övens-Lager to bauen, bruken wi eerst maal Gold, un wi "
 "hebben noch keens. Wi mutten eerst uns' Muu plattrieten; daarmit kriggen wi "
-"jüüst genoog Gold för een Övens-Lager. Ick mag dat nich, aber 't gaht nich "
+"jüüst genoog Gold för een Övens-Lager. Ick mag dat nich, aver 't gaht nich "
 "anners. Natürelk mutten wi all uns' Waren to eenem Kraamhuus brengen, ehr wi"
 " de Muu plattrieten könen."
 
@@ -525,7 +526,7 @@ msgid ""
 msgstr ""
 "Hebben wi al eene Sneeihirsktüchteree? Wenn nich, sallen wi nun eene bauen. "
 "Wi bruken mehr Sneeihirsken för de övervullen Straten, un wi könen ok "
-"anfangen, Fellkluften för neie Soldaten to naihen. Well weet, of wi nich "
+"anfangen, Fellkluften för neje Soldaten to naihen. Well weet, of wi nich "
 "eenmaal kämpen mutten?"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:224
@@ -546,7 +547,7 @@ msgid ""
 "reindeer farm drops out as a by-product when making fur aren’t enough."
 msgstr ""
 "Mienheer Reebaud, ick hebb noch mehr slimme Narichten. 't gifft haast keene "
-"Fisse im Water. Wi könen Happen blot mit Früchten un Brood maken, aber um "
+"Fisse im Water. Wi könen Happen blot mit Früchten un Brood maken, aver um "
 "Soldaten uttobilden, bruken wi bannig  vööl Rökelfleesk un Rökelfiss. Dat "
 "bietje Fleesk, wat eene Sneeihirsktüchteree daarto produzeert, wenn se Fell "
 "maakt, is nich genoog."
@@ -576,7 +577,7 @@ msgid ""
 " mines may run completely empty soon."
 msgstr ""
 "Hunnert. Wi hebben eene Fissbuurderee baut, un uns' Bargwarks-Wirtschaft is "
-"eerst maal klaar. Aber de Bargwarkskeerls seggen mi, dat nich mehr völe "
+"eerst maal klaar. Aver de Bargwarkskeerls seggen mi, dat nich mehr völe "
 "Mineraale im Barg sünd, un de Bargwarken sünd villicht bold heel leeg."
 
 #. TRANSLATORS: Hauke – Aqua Farms 3
@@ -586,8 +587,8 @@ msgid ""
 "times longer – ten times if it is a deep mine – to produce ores or coal. You"
 " probably want to prepare for the increasing demands of time and food."
 msgstr ""
-"De Bargwarken könen dann noch produzeren, aber 't düürt sowat twintig maal "
-"langer – teihn maal, wenn 't een deeps Bargwark is – Kluten oder Köhl to "
+"De Bargwarken könen dann noch produzeren, aver 't düürt sowat twintig maal "
+"langer – teihn maal, wenn 't een deeps Bargwark is – Kluten of Köhl to "
 "produzeren. Du willt wull all daarför klaarmaken, dat 't dann langer düürt "
 "un mehr Spiesen bruukt."
 
@@ -602,8 +603,8 @@ msgstr "Uns' Wirtschaft is kumpleet"
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:246
 msgid ""
-"You are right – we should build more berry farms, collector’s houses and "
-"taverns as well as a drinking hall, and advanced bakeries and breweries."
+"You are right – we should build more berry farms, fruit collector’s houses "
+"and taverns as well as a drinking hall, and advanced bakeries and breweries."
 msgstr ""
 "Du hest recht – wi sallen mehr Buskenplantereen, Früchtenpottjereen un "
 "Kneipen bauen, un daarto eene Weertskupp un betere Backereen un Broereen."
@@ -616,7 +617,7 @@ msgid ""
 "building armor smithies, a barracks, a training arena and a tailor’s shop "
 "now."
 msgstr ""
-"Aber wi könen al begünnen, uns um dat Anhüren un Utbilden vun Soldaten to "
+"Aver wi könen al begünnen, uns um dat Anhüren un Utbilden vun Soldaten to "
 "kümmern. Wi könen uns nu günnen, Metall för Wapen, Helms un Kluften to "
 "bruken. Ick slaa vör, nu Wapensmeden, eene Kasern, eene Övens-Ring un eene "
 "Sniederee to bauen."
@@ -683,17 +684,17 @@ msgstr ""
 "Frömde! Ick, Murilius, Prokonsul vun de Noordlannen, eene Provinz vum "
 "Latiensken Riek, will weten, well ji west un wat ji in deesen Landen doot!"
 
-#. TRANSLATORS: Reebaud – Supply Murilius 4
+#. TRANSLATORS: Reebaud – Supply Murilius 4. "Peace" is the traditional
+#. frisian greeting, nothing more.
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:278
 msgid ""
-"Greetings, representative of the Empire! I am Reebaud, the chieftain of this"
-" tribe. All we want is to settle down here, build our home and live our "
-"lives in peace. We do not seek trouble, but we aren’t afraid to fight, "
-"either."
+"Peace, representative of the Empire! I am Reebaud, the chieftain of this "
+"tribe. All we want is to settle down here, build our home and live our lives"
+" in peace. We do not seek trouble, but we aren’t afraid to fight, either."
 msgstr ""
 "Free, Vertreder vum Riek! Ick bün Reebaud, de Anföhrer vun deesem Volk. Wi "
 "willen nix anners, as uns hier daaltolaten, eene Heimaad to bauen, un in "
-"Free to leven. Wi willen keenen Stried, habben aber ok keene Angst, to "
+"Free to leven. Wi willen keenen Stried, habben aver ok keene Angst, to "
 "kämpen."
 
 #. TRANSLATORS: Murilius – Supply Murilius 5. "Reebaude" is the Latin vocative
@@ -727,7 +728,7 @@ msgid ""
 "to give us these wares:"
 msgstr ""
 "Un as Teken för ji goden Willen verlangen wi eene Gaav vun Fründskupp an dat"
-" Riek. As ji wull wiss worden sünd, hebb ick ji een neies Kraamhuus geven. "
+" Riek. As ji wull wiss worden sünd, hebb ick ji een nejes Kraamhuus geven. "
 "Doot daar de nödigen Gaven in, um se an uns to langen. Ick verloov ji, uns "
 "deese Waren to geven:"
 
@@ -779,8 +780,8 @@ msgid ""
 msgstr ""
 "Ji muttst tegen deese Willen kämpen, wenn ji in deese Kuntrei leven wullt; "
 "ji köönt wiss sehn, dat 't lichter is, tosammen mit de Riek tegen se to "
-"fechten as alleen? Un ji wullt dat Riek würrelk nich as jo Feind. Woll sünd "
-"ji Wille Lüü, aber ick bün wiss, dat ji verstaht, dat ick Klookheid segg, "
+"fechten as alleen? Un ji wullt dat Riek würrelk nich as jo Feind. Wull sünd "
+"ji Wille Lüü, aver ick bün wiss, dat ji verstaht, dat ick Klookheid segg, "
 "nadeem ji daar een bietje över nadacht hebbt."
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
@@ -792,7 +793,7 @@ msgid ""
 msgstr ""
 "Dat is de gröttste Frechheid vun allen. Wo kann he dat wagen, uns to "
 "befehlen, uns' Gewest nich wieder to vergrotern, wenn wi nix wullen as eene "
-"neie Heimaad upbauen, un uns mit Krieg drohen, wenn wi nich siene Sklaven "
+"neje Heimaad upbauen, un uns mit Krieg drohen, wenn wi nich siene Sklaven "
 "wesen wullen?"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
@@ -803,7 +804,7 @@ msgid ""
 "soldier training while pretending to be gathering his so-called gift. That "
 "would buy us some time."
 msgstr ""
-"Am Leevsten will ick seggen, dat wi hüm gliek stracks angriepen, aber ick "
+"Am Leevsten will ick seggen, dat wi hüm gliek stracks angriepen, aver ick "
 "bün bange, dat wi noch nich stark genoog sünd, um hüm in eener Slacht to "
 "begegen. Wi sallen uns' Soldaten fixer utbilden as wi so doon, as of wi "
 "siene sobenöömte Gaav sammeln. Dat gifft uns wat Tied."
@@ -845,7 +846,7 @@ msgid ""
 "I don’t know what it means, but I’m sure it’s important. Perhaps you can "
 "make some sense of it."
 msgstr ""
-"Ick weet nich, wat 't bedüddt, aber ick bün wiss, dat 't wichtig is. "
+"Ick weet nich, wat 't bedüddt, aver ick bün wiss, dat 't wichtig is. "
 "Villicht kannst du 't verstahn."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:352
@@ -1032,7 +1033,7 @@ msgid ""
 "We have defeated all our enemies! Now no other tribe will ever dare settle "
 "here again. We are safe, and we can finally live our lives in peace."
 msgstr ""
-"Wi hebben all uns' Feinde manntjet! Nu kann keen anneres Volk 't jemaals "
+"Wi hebben all uns' Feinde manntjet! Nu kann keen anner Volk 't jemaals "
 "wagen, sük hier daaltolaten. Wi sünd seker un könen uplest uns' Levens in "
 "Ruh un Free leven."
 
@@ -1040,13 +1041,15 @@ msgstr ""
 msgid "Congratulations"
 msgstr "Glückwunsk"
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Neie Upgaav"
-msgstr[1] "Neie Upgaven"
+msgstr "Neje Upgaav"
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr "Neje Upgaven"

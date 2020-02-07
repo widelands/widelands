@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,15 +23,16 @@
 #include "logic/field.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/terrain_description.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 
 using Widelands::TCoords;
 
-int32_t EditorIncreaseResourcesTool::handle_click_impl(const Widelands::World& world,
-                                                       const Widelands::NodeAndTriangle<>& center,
-                                                       EditorInteractive& /* parent */,
+int32_t EditorIncreaseResourcesTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
+                                                       EditorInteractive& eia,
                                                        EditorActionArgs* args,
                                                        Widelands::Map* map) {
+	const Widelands::World& world = eia.egbase().world();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
 	do {
@@ -61,12 +62,11 @@ int32_t EditorIncreaseResourcesTool::handle_click_impl(const Widelands::World& w
 }
 
 int32_t EditorIncreaseResourcesTool::handle_undo_impl(
-   const Widelands::World& world,
    const Widelands::NodeAndTriangle<Widelands::Coords>& center,
    EditorInteractive& parent,
    EditorActionArgs* args,
    Widelands::Map* map) {
-	return set_tool_.handle_undo_impl(world, center, parent, args, map);
+	return set_tool_.handle_undo_impl(center, parent, args, map);
 }
 
 EditorActionArgs EditorIncreaseResourcesTool::format_args_impl(EditorInteractive& parent) {

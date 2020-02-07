@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,8 +25,9 @@
 #include <vector>
 
 #include "base/macros.h"
-#include "graphic/animation.h"
-#include "logic/description_maintainer.h"
+#include "graphic/animation/animation.h"
+#include "graphic/toolbar_imageset.h"
+#include "logic/map_objects/description_maintainer.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/road_textures.h"
@@ -36,6 +37,7 @@
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/map_objects/world/world.h"
+#include "logic/widelands.h"
 
 namespace Widelands {
 
@@ -54,7 +56,7 @@ class BuildingDescr;
  * Special case: The ResourceIndicatorList mapped to "" contains resis that will be used in
  * locations
  * without resources. If it has several entries, result is arbitrary.
-*/
+ */
 using ResourceIndicatorList = std::map<uint32_t, DescriptionIndex>;
 using ResourceIndicatorSet = std::map<std::string, ResourceIndicatorList>;
 
@@ -68,10 +70,11 @@ Two players can choose the same tribe.
 */
 class TribeDescr {
 public:
-    TribeDescr(const Widelands::TribeBasicInfo& info,
-	           Tribes& tribes, const World& world,
-               const LuaTable& table,
-               const LuaTable* scenario_table = nullptr);
+	TribeDescr(const Widelands::TribeBasicInfo& info,
+	           Tribes& tribes,
+	           const World& world,
+	           const LuaTable& table,
+	           const LuaTable* scenario_table = nullptr);
 
 	const std::string& name() const;
 	const std::string& descname() const;
@@ -116,8 +119,8 @@ public:
 	DescriptionIndex geologist() const;
 	DescriptionIndex soldier() const;
 	DescriptionIndex ship() const;
+	DescriptionIndex ferry() const;
 	DescriptionIndex port() const;
-	DescriptionIndex barracks() const;
 	DescriptionIndex ironore() const;
 	DescriptionIndex rawlog() const;
 	DescriptionIndex refinedlog() const;
@@ -128,17 +131,23 @@ public:
 
 	uint32_t frontier_animation() const;
 	uint32_t flag_animation() const;
+	uint32_t bridge_animation(uint8_t dir, bool busy) const;
+
+	// Bridge height in pixels at 1x scale, for drawing bobs walking over a bridge
+	uint32_t bridge_height() const;
 
 	// A vector of all texture images that can be used for drawing a
-	// (normal|busy) road. The images are guaranteed to exist.
+	// (normal|busy) road or a waterway. The images are guaranteed to exist.
 	const std::vector<std::string>& normal_road_paths() const;
 	const std::vector<std::string>& busy_road_paths() const;
+	const std::vector<std::string>& waterway_paths() const;
 
-	// Add the corresponding texture for roads.
+	// Add the corresponding texture for roads/waterways.
 	void add_normal_road_texture(const Image* texture);
 	void add_busy_road_texture(const Image* texture);
+	void add_waterway_texture(const Image* texture);
 
-	// The road textures used for drawing roads.
+	// The road textures used for drawing roads and waterways.
 	const RoadTextures& road_textures() const;
 
 	DescriptionIndex get_resource_indicator(const ResourceDescription* const res,
@@ -150,37 +159,38 @@ public:
 	}
 
 	using WaresOrder = std::vector<std::vector<Widelands::DescriptionIndex>>;
-	using WaresOrderCoords = std::vector<std::pair<uint32_t, uint32_t>>;
 	const WaresOrder& wares_order() const {
 		return wares_order_;
-	}
-	const WaresOrderCoords& wares_order_coords() const {
-		return wares_order_coords_;
 	}
 
 	const WaresOrder& workers_order() const {
 		return workers_order_;
 	}
-	const WaresOrderCoords& workers_order_coords() const {
-		return workers_order_coords_;
-	}
-
-	void resize_ware_orders(size_t max_length);
 
 	const std::vector<std::string>& get_ship_names() const {
 		return ship_names_;
 	}
 
+	/// Registers a building with the tribe
 	void add_building(const std::string& buildingname, Tribes& tribes);
+	/// Registers a worker with the tribe and adds it to the bottom of the last worker column
+	void add_worker(const std::string& workername);
+
+	// The custom toolbar imageset if any. Can be nullptr.
+	ToolbarImageset* toolbar_image_set() const;
 
 private:
-    // Helper functions for loading everything in the constructor
-    void load_frontiers_flags_roads(const LuaTable& table);
-    void load_ships(const LuaTable& table, Tribes& tribes);
-    void load_wares(const LuaTable& table, Tribes& tribes);
-    void load_immovables(const LuaTable& table, Tribes& tribes, const World& world);
-    void load_workers(const LuaTable& table, Tribes& tribes);
-    void load_buildings(const LuaTable& table, Tribes& tribes);
+	// Helper functions for loading everything in the constructor
+	void load_frontiers_flags_roads(const LuaTable& table);
+	void load_ships(const LuaTable& table, Tribes& tribes);
+	void load_wares(const LuaTable& table, Tribes& tribes);
+	void load_immovables(const LuaTable& table, Tribes& tribes, const World& world);
+	void load_workers(const LuaTable& table, Tribes& tribes);
+	void load_buildings(const LuaTable& table, Tribes& tribes);
+
+	/// Registers a worker with the tribe and adds it to the bottom of the given worker column
+	void add_worker(const std::string& workername,
+	                std::vector<DescriptionIndex>& workers_order_column);
 
 	// Helper function for adding a special worker type (carriers etc.)
 	DescriptionIndex add_special_worker(const std::string& workername, Tribes& tribes);
@@ -188,10 +198,10 @@ private:
 	DescriptionIndex add_special_building(const std::string& buildingname, Tribes& tribes);
 	// Helper function to identify special wares across tribes (iron ore etc.)
 	DescriptionIndex add_special_ware(const std::string& warename, Tribes& tribes);
-    // Make sure that everything is there and that dependencies are calculated
-    void finalize_loading(Tribes& tribes);
-    // Helper function to calculate trainingsites proportions for the AI
-    void calculate_trainingsites_proportions(Tribes& tribes);
+	// Make sure that everything is there and that dependencies are calculated
+	void finalize_loading(Tribes& tribes);
+	// Helper function to calculate trainingsites proportions for the AI
+	void calculate_trainingsites_proportions(Tribes& tribes);
 
 	const std::string name_;
 	const std::string descname_;
@@ -199,8 +209,17 @@ private:
 
 	uint32_t frontier_animation_id_;
 	uint32_t flag_animation_id_;
+	struct BridgeAnimationIDs {
+		uint32_t e;
+		uint32_t se;
+		uint32_t sw;
+	};
+	BridgeAnimationIDs bridges_normal_;
+	BridgeAnimationIDs bridges_busy_;
+	uint32_t bridge_height_;
 	std::vector<std::string> normal_road_paths_;
 	std::vector<std::string> busy_road_paths_;
+	std::vector<std::string> waterway_paths_;
 	RoadTextures road_textures_;
 
 	std::vector<DescriptionIndex> buildings_;
@@ -212,14 +231,15 @@ private:
 	// The wares that are used by construction sites
 	std::set<DescriptionIndex> construction_materials_;
 	// Special units. Some of them are used by the engine, some are only used by the AI.
+	DescriptionIndex barracks_;    // The barracks for this tribe NOCOM check if needed
 	DescriptionIndex builder_;     // The builder for this tribe
 	DescriptionIndex carrier_;     // The basic carrier for this tribe
 	DescriptionIndex carrier2_;    // Additional carrier for busy roads
 	DescriptionIndex geologist_;   // This tribe's geologist worker
 	DescriptionIndex soldier_;     // The soldier that this tribe uses
 	DescriptionIndex ship_;        // The ship that this tribe uses
+	DescriptionIndex ferry_;       // The ferry that this tribe uses
 	DescriptionIndex port_;        // The port that this tribe uses
-	DescriptionIndex barracks_;    // The barracks to create soldiers
 	DescriptionIndex ironore_;     // Iron ore
 	DescriptionIndex rawlog_;      // Simple log
 	DescriptionIndex refinedlog_;  // Refined log, e.g. wood or blackwood
@@ -228,14 +248,15 @@ private:
 	std::vector<DescriptionIndex> trainingsites_;
 	// Order and positioning of wares in the warehouse display
 	WaresOrder wares_order_;
-	WaresOrderCoords wares_order_coords_;
 	WaresOrder workers_order_;
-	WaresOrderCoords workers_order_coords_;
+
+	// An optional custom imageset for the in-game menu toolbar
+	std::unique_ptr<ToolbarImageset> toolbar_image_set_;
 
 	std::vector<Widelands::TribeBasicInfo::Initialization> initializations_;
 
 	DISALLOW_COPY_AND_ASSIGN(TribeDescr);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_TRIBE_DESCR_H

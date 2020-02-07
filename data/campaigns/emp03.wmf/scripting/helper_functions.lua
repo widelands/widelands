@@ -26,12 +26,11 @@ function count_buildings_by_name(plr, tbl)
    return amount
 end
 
-function count_buildings(plr, buildings)
+function count_buildings(plr)
    -- return overall amount of buildings:
    -- plr : Player to count for
-   -- tbl : Table consisting of building description objects
    local amount = 0
-   for idx, building in pairs(p1.tribe.buildings) do
+   for idx, building in pairs(plr.tribe.buildings) do
       amount = amount + #plr:get_buildings(building.name)
    end
    return amount

@@ -1,14 +1,14 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-28 05:45+0000\n"
-"PO-Revision-Date: 2018-10-01 08:37+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-12-30 07:55+0000\n"
+"PO-Revision-Date: 2020-01-02 17:11+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -32,7 +32,7 @@ msgid ""
 "burning down, there is an enemy you sometimes have to defeat. Yet warfare is"
 " mainly focused on economics, not on military strategies, and its mechanics "
 "deserve explanation."
-msgstr "In deese Inföhren verklaar ick di Soldaten, hör Utbildung un hör Beruf: Krieg. In Widelands gaht 't um Upbauen, nich Ofbrannen, aber of un an mutt du eenen Feind manntjen. Bi’m Krieg gaht 't in 't Geheel um de Wirtschaft, nich taktiske Dingen, aber Slachten mutten doch verklaart worden."
+msgstr "In deese Inföhren verklaar ick di Soldaten, hör Utbildung un hör Beruf: Krieg. In Widelands gaht 't um Upbauen, nich Ofbrannen, aver of un an mutt du eenen Feind manntjen. Bi’m Krieg gaht 't in 't Geheel um de Wirtschaft, nich taktiske Dingen, aver Slachten mutten doch verklaart worden."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:36
 msgid ""
@@ -51,7 +51,7 @@ msgid ""
 " from a warehouse (or your headquarters) to the barracks where they will "
 "receive some basic training and become soldiers. Basic Barbarian soldiers do"
 " not use armor, they only need an ax."
-msgstr "Neie Soldaten worden nich as annere Arbeiders anhüürt: Lehrwichter gahn vun eenem Kraamhuus (oder dienem Raadhuus) to eener Kasern, waar se de Grundlagen büffeln un Soldaten worden. Neie Soldaten vun de Willen Lüü bruuken keenen Wapenrock, blot eene Ext."
+msgstr "Neje Soldaten worden nich as anner Arbeiders anhüürt: Lehrwichter gahn vun eenem Kraamhuus (of dienem Raadhuus) to eener Kasern, waar se de Grundlagen büffeln un Soldaten worden. Neje Soldaten vun de Willen Lüü bruuken keenen Wapenrock, blot eene Ext."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:46
 msgid ""
@@ -60,7 +60,7 @@ msgid ""
 "head that displays their remaining health, and they have four symbols, which"
 " symbolize the individual soldier’s current levels in the four different "
 "categories: health, attack, defense and evade."
-msgstr "Kiek de Soldaten an, de nu to de Soldateree-Boen gahn. Se sehn anners ut as annere Arbeiders: Se heeben eenen Levendwieser över hör Kopp, wat hör Gesundheid wiest, un se hebben veer Tekens, de de Stand vun deese Soldat in de veer Egenskuppen wiesen: Gesundheid, Angriff, Verteidigung, Utwieken."
+msgstr "Kiek de Soldaten an, de nu to de Soldateree-Boen gahn. Se sehn anners ut as anner Arbeiders: Se hebben eenen Levendwieser över hör Kopp, wat hör Gesundheid wiest, un se hebben veer Tekens, de de Stand vun deese Soldat in de veer Egenskuppen wiesen: Gesundheid, Angriff, Verteidigung, Utwieken."
 
 #. TRANSLATORS: the current stats are: 3 health, 5 attack, 0 defense, 2 evade.
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:48
@@ -79,7 +79,7 @@ msgstr "Gesundheid:"
 msgid ""
 "The total life of a soldier. A Barbarian soldier starts with %1% health, and"
 " he will gain %2% health with each health level."
-msgstr "Dat Leven vun eenem Soldat. Een Willer Soldat hett anfangs %1% Gesundheid-Punkten un kriggt mit jedem Gesundheid-Stand %2% Punkten bito."
+msgstr "Dat Leven vun eenem Soldat. Een Willer Soldat hett anfangs %1% Gesundheid-Punkten un kriggt mit elkeen Gesundheid-Stand %2% Punkten bito."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:52
 msgid "Attack:"
@@ -92,7 +92,7 @@ msgid ""
 "successful. A Barbarian soldier with attack level 0 inflicts ~%1% points of "
 "health damage when he succeeds in hitting an enemy. For each attack level, "
 "he gains %2% damage points."
-msgstr "De Schaa, wat een Soldat de feind dood, wenn een Angriff klappt. Een Willer Soldat mit Angriff-Stand 0 besehrt de Feind um ~%1% Gesundheid-Punkten, wenn he de Feind trefft. Mit jedem Angriff-Stand kriggt he %2% Schaa-Punkten bito."
+msgstr "De Schaa, wat een Soldat de feind dood, wenn een Angriff klappt. Een Willer Soldat mit Angriff-Stand 0 besehrt de Feind um ~%1% Gesundheid-Punkten, wenn he de Feind trefft. Mit elkeen Angriff-Stand kriggt he %2% Schaa-Punkten bito."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:56
 msgid "Defense:"
@@ -120,7 +120,7 @@ msgid ""
 "Evade is the chance that the soldier is able to dodge an attack. A level 0 "
 "Barbarian has a %1%%% chance to evade an attack, and this increases in steps"
 " of %2%%% for each level."
-msgstr "Utwieken is de Kans, dat een Soldat eenem Angriff ut de Mööt gaht. Een Willer Soldat mit Stand 0 hett eene Kans vun %1%%%, eenem Angriff uttowieken, un deese Kans wörd mit jedem Utwieken-Stand um %2%%% beter."
+msgstr "Utwieken is de Kans, dat een Soldat eenem Angriff ut de Mööt gaht. Een Willer Soldat mit Stand 0 hett eene Kans vun %1%%%, eenem Angriff uttowieken, un deese Kans wörd mit elkeen Utwieken-Stand um %2%%% beter."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:68
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:87
@@ -135,7 +135,7 @@ msgstr "Ick hebb över Öven un Standen sproken. Nu mehr daarvun."
 msgid ""
 "A newly created soldier has no experience and is not very good at fighting. "
 "To make him stronger, you can build training sites."
-msgstr "Een neier Soldat hett keene Erfahrung un fecht nich allto düchtig. Um hüm to starken, kannst du Övens-Boen bauen."
+msgstr "Een nejer Soldat hett keene Erfahrung un fecht nich allto düchtig. Um hüm to starken, kannst du Övens-Boen bauen."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:72
 msgid ""
@@ -168,7 +168,7 @@ msgstr "Bau eenen Slachtenring. Dat is een grotes Huus."
 msgid ""
 "Since the construction will take some time, you can change the game speed "
 "using Page Up and Page Down."
-msgstr "Dat Beschicken düürt eenige Tied. Du kannst de Speel-Gauheid mit »Bild rup« un »Bild runner« ännern."
+msgstr "Dat Beschicken düürt eenige Tied. Du kannst de Speel-Gauheid mit »Bill rup« un »Bill runner« ännern."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:89
 msgid "The Battle Arena Has Been Constructed"
@@ -202,7 +202,7 @@ msgstr "Um to sehn, welke Öven-Standen een Soldat hett, kiek di siene Tekens an
 msgid ""
 "No red dots means that the soldier is not trained, so he has level 0. All "
 "your new recruits have this."
-msgstr "Keene roden Punkten bedüddt, dat de Soldat nich utbildt wurr. He hett Stand 0. Alle neien Soldaten hebben dat."
+msgstr "Keene roden Punkten bedüddt, dat de Soldat nich utbildt wurr. He hett Stand 0. Alle nejen Soldaten hebben dat."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:96
 msgid ""
@@ -214,7 +214,7 @@ msgstr "Mit elkeen Öven-Stapp word de Soldat machtiger. Dat word mit eenem rode
 msgid ""
 "When your soldier has reached the highest possible level (in this case level"
 " 2), this is indicated by a white background color."
-msgstr "Wenn dien Soldat de höchste Stand hett (hier 2), word dat mit eenem witten Achtergrund wesen."
+msgstr "Wenn dien Soldat de hoogsten Stand hett (hier 2), word dat mit eenem witten Achtergrund wesen."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:103
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:105
@@ -249,21 +249,21 @@ msgstr "De Slachtenring lehrt de Soldaten nix as Utwieken. Um de starksten Solda
 msgid ""
 "Great, our training camp has now been finished, too. Now nothing will hinder"
 " us from getting the strongest warriors the world has ever seen."
-msgstr "Hunnert, uns Övens-Lager is nu ok beschickt. Nu könen wi de starksten Soldaten kriggen, de de Welt jemaals sehn hett."
+msgstr "Hunnert, uns' Övens-Lager is nu ok beschickt. Nu könen wi de starksten Soldaten kriggen, de de Welt jemaals sehn hett."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:123
 msgid ""
 "To train in the training camp, our soldiers need food like in the battle "
 "arena, but no strong beer. Instead, they need different axes for attack "
 "training and helmets for health training."
-msgstr "Um im Övens-Lager to öven bruuken de Soldaten Spiesen as im Slachtenring, aber keen Deftigs Beer. In Stee daarvun bruuken se verschedene Exten, um Angriff to öven, und Helms, um hör Gesundheid to verbetern."
+msgstr "Um im Övens-Lager to öven bruuken de Soldaten Spiesen as im Slachtenring, aver keen Deftigs Beer. In Stee daarvun bruuken se verschedene Exten, um Angriff to öven, und Helms, um hör Gesundheid to verbetern."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:124
 msgid ""
 "This equipment is produced in smithies out of coal, iron, and sometimes "
 "gold. You will learn more about this in the second scenario of the Barbarian"
 " campaign."
-msgstr "Deese Dingen worden in Smeden ut Köhle, Iesen un bi einigen ok Gold smeedt. De tweede Wille-Lüü-Rutfödderung lehrt di mehr daaröver."
+msgstr "Deese Dingen worden in Smeden ut Köhle, Iesen un bi eenigen ok Gold smeedt. De tweede Wille-Lüü-Rutfödderung lehrt di mehr daaröver."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:125
 msgid ""
@@ -272,7 +272,7 @@ msgid ""
 " ability levels cannot be compared: an Imperial soldier has a base attack of"
 " %1% at level 0, while a Barbarian soldier at the same level only has a base"
 " attack of %2%."
-msgstr "Vergeet nich, dat alle Völker in Widelands anners öven un annere Boen un Waren hebben. De Egenskuppen-Standen könen nich vergleken worden: Een Rieks-Soldat hett een Angriff vun %1% bei Stand 0, een Willer Soldat mit de sülvigen Stand blot %2%."
+msgstr "Vergeet nich, dat alle Völker in Widelands anners öven un anner Boen un Waren hebben. De Egenskuppen-Standen könen nich vergleken worden: Een Rieks-Soldat hett een Angriff vun %1% bei Stand 0, een Willer Soldat mit de sülvigen Stand blot %2%."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:133
@@ -282,7 +282,7 @@ msgstr "Helden un Snöttbaarten"
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:134
 msgid ""
 "While our soldiers are training, let me tell you what we can do with them."
-msgstr "As uns Soldaten öven, laat mi verklaaren, wat wi mit hör doon könen."
+msgstr "As uns' Soldaten öven, laat mi verklaaren, wat wi mit hör doon könen."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:135
 msgid ""
@@ -290,21 +290,21 @@ msgid ""
 "soldiers) or rookies. From time to time, a soldier will walk out of the "
 "building and be replaced by a stronger/weaker one automatically – this is "
 "what you saw earlier."
-msgstr "För elkeen Soldateree-Boo kannst du fastleggen, of Helden (utbildt Suldaten) oder Snöttbaarten vörtrucken worden. Of un an verlaat een Soldat dat Huus un word automatisk mit eenem starkeren/swackeren utwesselt – dat hest du vörhen sehn."
+msgstr "För elkeen Soldateree-Boo kannst du fastleggen, of Helden (utbildt Suldaten) of Snöttbaarten vörtrucken worden. Of un an verlaat een Soldat dat Huus un word automatisk mit eenem starkeren/swackeren utwesselt – dat hest du vörhen sehn."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:136
 msgid ""
 "The initial setting depends on the type of the building. For the Barbarians,"
 " the sentry is the only building that prefers rookies by default. You should"
 " change this setting to fit your current needs."
-msgstr "De normaale Instellung hangt vun de Huus-Aard of. De Willen Lüü hebben blot een Boo, de Wachters-Kamer, wat normaal Snöttbaarten vörtreckt. Du sallst deese Instellung ännern, as 't upstünds good is."
+msgstr "De normaale Instellen hangt vun de Huus-Aard of. De Willen Lüü hebben blot een Boo, de Wachters-Kamer, wat normaal Snöttbaarten vörtreckt. Du sallst deese Instellen ännern, as 't upstünds good is."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:137
 msgid ""
 "When you are expanding into no man’s land, you can make your buildings "
 "prefer rookies. When you are planning to attack, send heroes into that "
 "region. Conquered buildings always prefer heroes."
-msgstr "Wenn du neies Land innimmst, kannst du diene Boen Snöttbaarten vörtrecken laten. Wenn du angriepen willt, treck Helden vör. Innohmen Boen trecken immer Helden vör."
+msgstr "Wenn du nejes Land innimmst, kannst du diene Boen Snöttbaarten vörtrecken laten. Wenn du angriepen willt, treck Helden vör. Innohmen Boen trecken immer Helden vör."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143
 msgid "Soldier capacity"
@@ -321,7 +321,7 @@ msgid ""
 " buttons to decrease or increase the desired number of soldiers. Every "
 "building has a maximum capacity. In case of the barrier, it is five, for "
 "example."
-msgstr "Du kannst de Foss vun eenem Soldateree-Boo ok anners fastsetten: indeem du de Tahl vun Soldaten, de hier wohnen, ännerst. Klick de Piel-Knopen an, um de wiskt Tahl to verhogen oder minnern. Jede Boo hett eene höchste Tahl vun Steden. To 'n Bispööl hett een Uppass fiev."
+msgstr "Du kannst de Foss vun eenem Soldateree-Boo ok anners fastsetten: indeem du de Tahl vun Soldaten, de hier wohnen, ännerst. Klick de Piel-Knopen an, um de wiskt Tahl to verhogen of minnern. Elkeen Boo hett eene hoogste Tahl vun Steden. To 'n Bispööl hett een Uppass fiev."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:147
 msgid ""
@@ -340,21 +340,21 @@ msgid ""
 "The first number describes how many soldiers are currently in this building."
 " In this example, only one soldier is left inside (each military building is"
 " always guarded by at least one soldier)."
-msgstr "De eerste Tahl is de Tahl vun Soldaten, de jüüst in de Huus sünd. In deesem Bispööl is blot een Soldat tohuus (jede Soldateree-Boo word immer vun tominnst eenem Soldat bewaakt)."
+msgstr "De eerste Tahl is de Tahl vun Soldaten, de jüüst in de Huus sünd. In deesem Bispööl is blot een Soldat tohuus (elkeen Soldateree-Boo word alltieden vun tominnst eenem Soldat bewaakt)."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:150
 msgid ""
 "The second number tells you how many additional soldiers reside in this "
 "building, but are currently outside. The five soldiers may be attacking an "
 "enemy. They will return when they have been successful."
-msgstr "De tweede Tahl is de Tahl vun Soldaten, de in deesem Huus wohnen, aber unnerwegens sünd. De fiev Soldaten griepen villicht eenen Feind an. Se komen torügg, wenn se fardig sünd."
+msgstr "De tweede Tahl is de Tahl vun Soldaten, de in deesem Huus wohnen, aver unnerwegens sünd. De fiev Soldaten griepen villicht eenen Feind an. Se komen torügg, wenn se fardig sünd."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:151
 msgid ""
 "The third number indicates the missing soldiers. From the eight soldiers (1 "
 "+ 5 + 2) you wish to have here, two may have died. They will be replaced by "
 "new soldiers from your warehouse, if possible."
-msgstr "De darde Tahl is de Tahl vun Soldaten, de hapern. Vun de acht Soldaten (1 + 5 + 2), de hier wesen sallen, sünd villicht twee dood. Se worden vun neien Soldaten vun eenem Kraamhuus goodmaakt, wenn 't gaht."
+msgstr "De darde Tahl is de Tahl vun Soldaten, de hapern. Vun de acht Soldaten (1 + 5 + 2), de hier wesen sallen, sünd villicht twee dood. Se worden vun nejen Soldaten vun eenem Kraamhuus goodmaakt, wenn 't gaht."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:157
 msgid "Dismantle your sentry"
@@ -370,7 +370,7 @@ msgid ""
 "building will never come out (unless this building is attacked). If you want"
 " to have your soldier elsewhere, you will have to dismantle or burn down the"
 " building."
-msgstr "Du kannst de Tahl vun Soldaten nich up null minnern. De leste Soldat in eenem Huus gaht nich rut (buten wenn dat Huus angrepen word). Wenn du hüm annerswaar hebben willt, mutt du dat Huus plattrieten oder ofbrannen."
+msgstr "Du kannst de Tahl vun Soldaten nich up null minnern. De leste Soldat in eenem Huus gaht nich rut (buten wenn dat Huus angrepen word). Wenn du hüm annerswaar hebben willt, mutt du dat Huus plattrieten of ofbrannen."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:161
 msgid ""
@@ -381,7 +381,7 @@ msgid ""
 " be hidden under the fog of war. You should therefore only dismantle "
 "military buildings deep inside your territory where you are safe from "
 "enemies."
-msgstr "Een Soldateree-Boo oftobrannen is immer riskant: Dat Land höört di noch, is aber nich mehr schütt. Een Feind, de sülvst een Soldateree-Boo baut, kann dat Land sünner Stried innehmen. Diene Husen brannen dann of. Butendeem sünd villicht Parten vun dienem Land dann unner de Kriegsnevel verstoken. Du sallst Soldateree-Boen daarher blot dann plattrieten, wenn se deep in dien Gewest sünd, waar keene Feinde henkomen."
+msgstr "Een Soldateree-Boo oftobrannen is immer riskant: Dat Land höört di noch, is aver nich mehr schütt. Een Feind, de sülvst een Soldateree-Boo baut, kann dat Land sünner Stried innehmen. Diene Husen brannen dann of. Butendeem sünd villicht Parten vun dienem Land dann unner de Kriegsnevel verstoken. Du sallst Soldateree-Boen daarher blot dann plattrieten, wenn se deep in dien Gewest sünd, waar keene Feinde henkomen."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:162
 msgid ""
@@ -398,7 +398,7 @@ msgstr "Riet se platt."
 msgid ""
 "You can also use this opportunity to become familiar with the other options:"
 " the heroes/rookies preference and the capacity."
-msgstr "Du kannst deese Kans bruuken, um de annern Instellungen to kennen to kreigen: Dat Vörtrecken vun Helden oder Snöttbaarten un de Tahl vun Steden."
+msgstr "Du kannst deese Kans bruuken, um de annern Instellens to kennen to kreigen: Dat Vörtrecken vun Helden of Snöttbaarten un de Tahl vun Steden."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:167
 msgid "Dismantle your north-western sentry"
@@ -436,7 +436,7 @@ msgstr "Hunnert. Nu weetst du, wo dat gaht, diene Soldaten vun Steden wegtokrieg
 msgid ""
 "Your fortress is already quite strong and conquers a lot of space. But there"
 " is an even bigger building: the citadel."
-msgstr "Diene Schanz is recht stark un nimmt mennig Rüümte in. Aber 't gifft een noch groteres Huus: dat Kasteel."
+msgstr "Diene Schanz is recht stark un nimmt mennig Rüümte in. Aver 't gifft een noch groteres Huus: dat Kasteel."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:181
 msgid ""
@@ -470,7 +470,7 @@ msgid ""
 "the Barbarians can build. It also costs a lot of resources and takes a long "
 "time to build. It is most suited to guard strategically important points "
 "like constricted points or mountains."
-msgstr "Dat Kasteel hett Steden för 12 Soldaten un is de grootste Soldateree-Boo, wat de Willen Lüü bauen könen. 't köst mennig Materialien un dat Bauen düürt lang. 't is good gadelk, um taktisk dürable Steden as enge Passen oder Bargen to schütten."
+msgstr "Dat Kasteel hett Steden för 12 Soldaten un is de grootste Soldateree-Boo, wat de Willen Lüü bauen könen. 't köst mennig Materialien un dat Bauen düürt lang. 't is good gadelk, um taktisk dürable Steden as enge Passen of Bargen to schütten."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:197
 msgid "Defeat your Enemy"
@@ -487,7 +487,7 @@ msgid ""
 "they took away a part of our land? And our lumberjack has now lost his place"
 " of work. This is what I was talking about. Let’s take our land back and "
 "defeat the enemy!"
-msgstr "Hunnert, de Kasteel is beschickt. Aber wat is dat? Een Feind hett sük tegen uns daallaten as de Kasteel baut wurr! Süchst du, dat se eenen Part vun uns Land ofgrapst hebben? Un uns Boomhauer hett nu keen Huus mehr. Dat hebb ick meent. Laat uns uns Land torügghalen un de Feind manntjen!"
+msgstr "Hunnert, de Kasteel is beschickt. Aver wat is dat? Een Feind hett sük tegen uns daallaten as de Kasteel baut wurr! Süchst du, dat se eenen Part vun uns' Land ofgrapst hebben? Un uns' Boomhauer hett nu keen Huus mehr. Dat hebb ick meent. Laat uns uns' Land torügghalen un de Feind manntjen!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:201
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:210
@@ -539,22 +539,24 @@ msgid ""
 "But a war is expensive, and not always the path leading to the goal. When "
 "setting up a new game, you can also choose peaceful win conditions. You "
 "should definitely try them out, they’re worth it."
-msgstr "Aber Kriege sünd düür, un Slachten sünd nich immer de Weg tum Enn. Wenn du een neies Speel begünnst, kannst du ok friedelke Upgaven tum Winnen utkören. Du sallst se absolut versöken, se sünd beter as Oorlog."
+msgstr "Aver Kriege sünd düür, un Slachten sünd nich immer de Weg tum Enn. Wenn du een nejes Speel begünnst, kannst du ok friedelke Upgaven tum Winnen utkören. Du sallst se absolut versöken, se sünd beter as Oorlog."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:220
 msgid ""
 "You are now ready to play the campaigns. They will teach you about the "
 "different economies of the tribes. You can also play the remaining "
 "tutorials, but they are not crucial for succeeding in the campaigns."
-msgstr "Nu büst du klaar um Spölen vun de Rutfödderungs-Riegen. Se föhren di in de Wirtschaften vun de verschedenen Völkern in. Du kannst ok de annern Inföhrens spölen, aber du bruukst se nich unbedingt, um de Rutfödderungen to spölen."
+msgstr "Nu büst du klaar um Spölen vun de Rutfödderungs-Riegen. Se föhren di in de Wirtschaften vun de verschedenen Völkern in. Du kannst ok de annern Inföhrens spölen, aver du bruukst se nich unbedingt, um de Rutfödderungen to spölen."
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Neie Upgaav"
-msgstr[1] "Neie Upgaven"
+msgstr "Neje Upgaav"
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr "Neje Upgaven"

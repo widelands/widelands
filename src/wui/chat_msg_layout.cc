@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,21 +22,20 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
-#include "chat/chat.h"
+#include "graphic/graphic.h"
 #include "graphic/playercolor.h"
 #include "graphic/text_layout.h"
 
 namespace {
 
-// Returns the hexcolor for the 'player'.
-std::string color(const int16_t playern) {
-	if ((playern >= 0) && playern < kMaxPlayers) {
-		const RGBColor& clr = kPlayerColors[playern];
-		char buf[sizeof("ffffff")];
-		snprintf(buf, sizeof(buf), "%.2x%.2x%.2x", clr.r, clr.g, clr.b);
-		return buf;
-	}
-	return "999999";
+// Returns a player name font tag with player color.
+std::string as_playercolor(const int16_t playern, const std::string& text) {
+	const RGBColor& playercolor = ((playern >= 0) && playern < kMaxPlayers) ?
+	                                 kPlayerColors[playern] :
+	                                 g_gr->styles().font_style(UI::FontStyle::kChatServer).color();
+	return g_gr->styles()
+	   .font_style(UI::FontStyle::kChatPlayername)
+	   .as_font_tag(g_gr->styles().color_tag(text, playercolor));
 }
 
 std::string sanitize_message(const std::string& given_text) {
@@ -50,59 +49,49 @@ std::string sanitize_message(const std::string& given_text) {
 
 // Returns a richtext string that can be displayed to the user.
 std::string format_as_richtext(const ChatMessage& chat_message) {
-	const std::string& font_face = "serif";
-	std::string message = "<p><font color=33ff33 size=9>";
+	std::string message = "";
 
 	const std::string sanitized = sanitize_message(chat_message.msg);
-
-	// time calculation
-	char ts[13];
-	strftime(ts, sizeof(ts), "[%H:%M] ", localtime(&chat_message.time));
-	message += ts;
-
-	message = (boost::format("%s</font><font size=14 face=%s color=%s") % message % font_face %
-	           color(chat_message.playern))
-	             .str();
-
 	const std::string sender_escaped = richtext_escape(chat_message.sender);
 	const std::string recipient_escaped = richtext_escape(chat_message.recipient);
 
 	if (chat_message.recipient.size() && chat_message.sender.size()) {
 		// Personal message handling
 		if (sanitized.compare(0, 3, "/me")) {
-			message = (boost::format(
-			              "%s bold=1>%s @ %s:</font><font size=14 face=%s shadow=1 color=eeeeee> %s") %
-			           message % sender_escaped % recipient_escaped % font_face % sanitized)
-			             .str();
-
-		} else {
 			message =
-			   (boost::format(
-			       "%s>@%s &gt; </font><font size=14 face=%s color=%s italic=1 shadow=1> %s%s") %
-			    message % recipient_escaped % font_face % color(chat_message.playern) %
-			    sender_escaped % sanitized.substr(3))
-			      .str();
+			   as_playercolor(chat_message.playern,
+			                  (boost::format("%s @%s: ") % sender_escaped % recipient_escaped).str()) +
+			   g_gr->styles().font_style(UI::FontStyle::kChatWhisper).as_font_tag(sanitized);
+		} else {
+			message = message =
+			   as_playercolor(
+			      chat_message.playern,
+			      ((boost::format("@%s: %s") % recipient_escaped % sender_escaped).str())) +
+			   g_gr->styles().font_style(UI::FontStyle::kChatWhisper).as_font_tag(sanitized.substr(3));
 		}
 	} else {
 		// Normal messages handling
 		if (!sanitized.compare(0, 3, "/me")) {
-			message += " italic=1>-&gt; ";
-			if (chat_message.sender.size())
-				message += sender_escaped;
-			else
-				message += "***";
-			message += sanitized.substr(3);
+			message = message =
+			   as_playercolor(
+			      chat_message.playern, (chat_message.sender.empty() ? "***" : sender_escaped)) +
+			   g_gr->styles().font_style(UI::FontStyle::kChatMessage).as_font_tag(sanitized.substr(3));
 		} else if (chat_message.sender.size()) {
-			message =
-			   (boost::format("%s bold=1>%s:</font><font size=14 face=%s shadow=1 color=eeeeee> %s") %
-			    message % sender_escaped % font_face % sanitized)
-			      .str();
+			const std::string sender_formatted =
+			   as_playercolor(chat_message.playern, (boost::format("%s:") % sender_escaped).str());
+			message = (boost::format("%s %s") % sender_formatted %
+			           g_gr->styles().font_style(UI::FontStyle::kChatMessage).as_font_tag(sanitized))
+			             .str();
 		} else {
-			message += " bold=1>*** ";
-			message += sanitized;
+			message =
+			   g_gr->styles().font_style(UI::FontStyle::kChatServer).as_font_tag("*** " + sanitized);
 		}
 	}
+	// Time calculation
+	char ts[12];
+	strftime(ts, sizeof(ts), "[%H:%M]", localtime(&chat_message.time));
 
-	// return the formated message
-	return message + "</font><br></p>";
+	return (boost::format("<p>%s %s</p>") %
+	        g_gr->styles().font_style(UI::FontStyle::kChatTimestamp).as_font_tag(ts) % message)
+	   .str();
 }

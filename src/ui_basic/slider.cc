@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -72,13 +72,13 @@ Slider::Slider(Panel* const parent,
      highlighted_(false),
      pressed_(false),
      enabled_(enabled),
-     cursor_style_(g_gr->styles().slider_style(style)),
+     cursor_style_(&g_gr->styles().slider_style(style).background()),
      x_gap_(x_gap),
      y_gap_(y_gap),
      bar_size_(bar_size),
      cursor_size_(cursor_size) {
 	set_thinks(false);
-	set_can_focus(true);
+	assert(!get_can_focus());
 	calculate_cursor_position();
 }
 
@@ -158,7 +158,7 @@ void Slider::draw_cursor(
 		dst.brighten_rect(background_rect, MOUSE_OVER_BRIGHT_FACTOR);
 	}
 
-	if (pressed_) {       //  draw border
+	if (pressed_ || !enabled_) {
 		dst.brighten_rect  //  bottom edge
 		   (Recti(x, y + h - 2, w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		dst.brighten_rect  //  right edge
@@ -205,7 +205,6 @@ void Slider::set_enabled(const bool enabled) {
 	if (enabled_ == enabled)
 		return;
 
-	set_can_focus(enabled);
 	enabled_ = enabled;
 	if (!enabled) {
 		pressed_ = false;
@@ -308,6 +307,7 @@ void Slider::cursor_pressed(int32_t pointer) {
 	highlighted_ = true;
 	relative_move_ = pointer - cursor_pos_;
 
+	clicked();
 	play_click();
 }
 
@@ -402,7 +402,6 @@ bool HorizontalSlider::handle_mousepress(const uint8_t btn, int32_t x, int32_t y
 	if (btn != SDL_BUTTON_LEFT)
 		return false;
 
-	focus();
 	if (x >= cursor_pos_ && x <= cursor_pos_ + cursor_size_) {
 		//  click on cursor
 		cursor_pressed(x);
@@ -469,7 +468,6 @@ bool VerticalSlider::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) 
 	if (btn != SDL_BUTTON_LEFT)
 		return false;
 
-	focus();
 	if (y >= cursor_pos_ && y <= cursor_pos_ + cursor_size_) {
 		//  click on cursor
 		cursor_pressed(y);
@@ -489,22 +487,23 @@ DiscreteSlider::DiscreteSlider(Panel* const parent,
                                const uint32_t w,
                                const uint32_t h,
                                const std::vector<std::string>& labels_in,
-                               uint32_t value_,
-                               SliderStyle style,
+                               uint32_t init_value,
+                               SliderStyle init_style,
                                const std::string& tooltip_text,
                                const uint32_t cursor_size,
                                const bool enabled)
    : Panel(parent, x, y, w, h, tooltip_text),
+     style(g_gr->styles().slider_style(init_style)),
      slider(this,
             // here, we take into account the h_gap introduced by HorizontalSlider
             w / (2 * labels_in.size()) - cursor_size / 2,
             0,
             w - (w / labels_in.size()) + cursor_size,
-            h - text_height(UI_FONT_SIZE_SMALL - 2, UI::FontSet::Face::kCondensed) - 2,
+            h - text_height(style.font()) - 2,
             0,
             labels_in.size() - 1,
-            value_,
-            style,
+            init_value,
+            init_style,
             tooltip_text,
             cursor_size,
             enabled),
@@ -526,7 +525,7 @@ void DiscreteSlider::draw(RenderTarget& dst) {
 
 	for (uint32_t i = 0; i < labels.size(); i++) {
 		std::shared_ptr<const UI::RenderedText> rendered_text =
-		   UI::g_fh->render(as_condensed(labels[i], UI::Align::kCenter, UI_FONT_SIZE_SMALL - 2));
+		   UI::g_fh->render(as_richtext_paragraph(labels[i], style.font()));
 		rendered_text->draw(
 		   dst, Vector2i(gap_1 + i * gap_n, get_h() - rendered_text->height()), UI::Align::kCenter);
 	}
@@ -543,8 +542,8 @@ void DiscreteSlider::layout() {
 	uint32_t h = get_h();
 	assert(labels.size());
 	slider.set_pos(Vector2i(w / (2 * labels.size()) - slider.cursor_size_ / 2, 0));
-	slider.set_size(w - (w / labels.size()) + slider.cursor_size_,
-	                h - text_height(UI_FONT_SIZE_SMALL - 2, UI::FontSet::Face::kCondensed) + 2);
+	slider.set_size(
+	   w - (w / labels.size()) + slider.cursor_size_, h - text_height(style.font()) + 2);
 	Panel::layout();
 }
-}
+}  // namespace UI

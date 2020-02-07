@@ -86,7 +86,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs bread_paddle",
             "consume=iron log",
             "sleep=32000",
-            "playsound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths/toolsmith 192",
             "animate=working 35000",
             "produce=bread_paddle"
          }
@@ -98,7 +98,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs buckets",
             "consume=iron log",
             "sleep=32000",
-            "playsound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths/toolsmith 192",
             "animate=working 35000",
             "produce=buckets"
          }
@@ -110,7 +110,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs fire_tongs",
             "consume=iron log",
             "sleep=32000",
-            "playsound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths/toolsmith 192",
             "animate=working 35000",
             "produce=fire_tongs"
          }
@@ -122,7 +122,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs fishing_net",
             "consume=spidercloth:2",
             "sleep=32000",
-            "playsound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths/toolsmith 192",
             "animate=working 35000",
             "produce=fishing_net"
          }
@@ -134,7 +134,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs hammer",
             "consume=iron log",
             "sleep=32000",
-            "playsound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths/toolsmith 192",
             "animate=working 35000",
             "produce=hammer"
          }
@@ -146,7 +146,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs hook_pole",
             "consume=iron log",
             "sleep=32000",
-            "playsound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths/toolsmith 192",
             "animate=working 35000",
             "produce=hook_pole"
          }
@@ -158,7 +158,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs hunting_bow",
             "consume=log spidercloth",
             "sleep=32000",
-            "playsound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths/toolsmith 192",
             "animate=working 35000",
             "produce=hunting_bow"
          }
@@ -170,7 +170,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs milking_tongs",
             "consume=iron log",
             "sleep=32000",
-            "playsound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths/toolsmith 192",
             "animate=working 35000",
             "produce=milking_tongs"
          }
@@ -182,7 +182,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs pick",
             "consume=iron log",
             "sleep=32000",
-            "playsound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths/toolsmith 192",
             "animate=working 35000",
             "produce=pick"
          }
@@ -194,7 +194,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs saw",
             "consume=iron log",
             "sleep=32000",
-            "playsound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths/toolsmith 192",
             "animate=working 35000",
             "produce=saw"
          }
@@ -206,7 +206,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs scythe",
             "consume=iron log",
             "sleep=32000",
-            "playsound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths/toolsmith 192",
             "animate=working 35000",
             "produce=scythe"
          }
@@ -218,7 +218,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs shovel",
             "consume=iron log",
             "sleep=32000",
-            "playsound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths/toolsmith 192",
             "animate=working 35000",
             "produce=shovel"
          }

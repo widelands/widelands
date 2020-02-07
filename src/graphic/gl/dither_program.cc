@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -86,7 +86,7 @@ void DitherProgram::add_vertex(const FieldsToDraw::Field& field,
 
 void DitherProgram::maybe_add_dithering_triangle(
    const uint32_t gametime,
-   const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
+   const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
    const FieldsToDraw& fields_to_draw,
    const int idx1,
    const int idx2,
@@ -139,10 +139,11 @@ void DitherProgram::gl_draw(int gl_texture, float texture_w, float texture_h, co
 	glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
 }
 
-void DitherProgram::draw(const uint32_t gametime,
-                         const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
-                         const FieldsToDraw& fields_to_draw,
-                         const float z_value) {
+void DitherProgram::draw(
+   const uint32_t gametime,
+   const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
+   const FieldsToDraw& fields_to_draw,
+   const float z_value) {
 	// This method expects that all terrains have the same dimensions and that
 	// all are packed into the same texture atlas, i.e. all are in the same GL
 	// texture. It does not check for this invariance for speeds sake.

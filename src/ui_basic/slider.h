@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 
 #include <boost/signals2.hpp>
 
+#include "graphic/styles/text_panel_style.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
@@ -235,11 +236,16 @@ protected:
 	void draw(RenderTarget& dst) override;
 	void layout() override;
 
+private:
+	// We need the style to initialize the slider, so it has to come first.
+	const UI::TextPanelStyleInfo& style;
+
+protected:
 	HorizontalSlider slider;
 
 private:
 	std::vector<std::string> labels;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_SLIDER_H

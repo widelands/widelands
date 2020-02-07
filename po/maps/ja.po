@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Scorpio <jayneallen13@virginmedia.com>, 2015
-# tamanegi, 2018
+# tamanegi, 2018-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-03 05:41+0000\n"
-"PO-Revision-Date: 2018-05-03 12:54+0000\n"
-"Last-Translator: tamanegi\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-01-21 18:02+0000\n"
+"PO-Revision-Date: 2020-01-21 18:25+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +20,6 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../../data/campaigns/atl01.wmf/elemental:9
-#: ../../data/campaigns/campaigns.conf:118
 msgid "From Nemesis to Genesis"
 msgstr "絶望から創世へ"
 
@@ -31,9 +30,8 @@ msgid ""
 msgstr "アトランティス近くの不思議な島に上陸したアトランティス人達は新たな住処を作るために奮闘する。"
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
-#: ../../data/campaigns/campaigns.conf:76
 msgid "A Place to Call Home"
-msgstr "故郷と呼ぶ場所"
+msgstr "故郷と名付けた場所"
 
 #: ../../data/campaigns/bar01.wmf/elemental:10
 msgid ""
@@ -42,7 +40,6 @@ msgid ""
 msgstr "このシナリオでは、鉱山のように高い生産性を持つ建物の扱いを学ぶことができます。"
 
 #: ../../data/campaigns/bar02.wmf/elemental:7
-#: ../../data/campaigns/campaigns.conf:81
 msgid "This Land is Our Land"
 msgstr "この地は我らのものだ"
 
@@ -52,147 +49,21 @@ msgid ""
 "and will introduce fighting."
 msgstr "このチュートリアルでは軍事や訓練に関わる建物、そして戦闘について学ぶことができます。"
 
-#: ../../data/campaigns/campaigns.conf:27
-msgid "The Second Empire"
-msgstr "第二帝国"
-
-#: ../../data/campaigns/campaigns.conf:29
-msgid "Barbarians"
-msgstr "野蛮人"
-
-#: ../../data/campaigns/campaigns.conf:31
-msgid "Easy. Introduces the Barbarians"
-msgstr "簡単。野蛮人の導入向けです。"
-
-#: ../../data/campaigns/campaigns.conf:32
-msgid ""
-"When Chat’Karuth died, he was an old man, father to three strong and "
-"ambitious sons, and warlord to an army that could match any enemy willing to"
-" rise against the ancient forests. Though at the end of his glorious reign, "
-"Chat’Karuth chose his eldest son, Thron, to succeed him as the tribe’s "
-"warlord – a decision that left his two brothers unsatisfied. The old warlord"
-" knew that. As his father instructed him, Thron left the capital of "
-"Al’thunran, the home of the Throne Among the Trees, and withdrew his forces "
-"to the high hills where he buried the corpse of his father. There he swore "
-"to the gods and his father’s spirit that he’d return to re-established "
-"order. While his brothers have raged blind war against Thron and the few "
-"forces he left to secure the borders of Al’thunran, the young warlord seeks "
-"to reunite his ambitious brothers and force the tribes to march once again "
-"under a common banner."
-msgstr "チャト-カルースは老齢まで生き、そして死んだ。三人の強靭で野心的な息子の父親であり、太古の森を侵すあらゆる敵を寄せ付けなかった大首領であった。その栄光の治世の晩年、チャト-カルースは最年長の息子であるスロンを後継者に指名した ── しかし、その判断は残り二人の息子達には到底満足できるものではなかった。老いた大首領はそれを理解していた。スロンは父の勧めに従い、アル-サンランの都を離れ、玉座の森の本拠地へと向かった。そして彼の軍勢もまた父の遺体を埋葬した丘陵へ向かって退かせた。スロンはそこで神と父の魂に誓いを立てた ── 必ず都に戻り秩序を取り戻すと。彼の兄弟達はスロンの軍勢やスロンが国境警備のために残してきたわずかな軍勢に対して血みどろの戦をしている。そんな中、この若き将軍は野心あふれる兄弟達を屈服させ、再び部族を一つの旗の元にまとめあげようとしている。"
-
-#: ../../data/campaigns/campaigns.conf:35
-msgid "The Months of Exile"
-msgstr "追放者の雌伏"
-
-#: ../../data/campaigns/campaigns.conf:37
-msgid "Empire"
-msgstr "帝国"
-
-#: ../../data/campaigns/campaigns.conf:39
-msgid "Easy. Introduces the Empire"
-msgstr "簡単。帝国の導入向けです。"
-
-#: ../../data/campaigns/campaigns.conf:40
-msgid ""
-"Six months ago, Lutius – a young general of the Empire – was sent with 150 "
-"soldiers to the frontier beyond the northern forests where Barbarian tribes "
-"were crossing onto land held by the Empire. His task was to defend the "
-"Empire’s land. At first, everything was calm. He even talked to a few "
-"Barbarian children and thought about a peaceful life – side by side with "
-"this archaic folk. He began to feel safer and his army began to drop their "
-"attention off the potential enemy. That was their undoing. One night in "
-"March his unprepared army was attacked by 100 Barbarian footmen and was "
-"completely scattered. Only with his bare life he and a handful of his "
-"soldiers survived."
-msgstr "六ヶ月前、帝国の若き将軍であるルティウスは 150 人の兵士とともに北の森の先にある国境地域へと派遣された。そこでは野蛮人の部族達が帝国の領土に手を伸ばしていた。彼の任務は帝国の領土を守ることだった。初めは何の問題もなかった。彼は野蛮人の子供たちと会話ができるほどだった ── この太古から続く部族と共存していけるのではないかとすら思った。彼も徐々に気が緩んでいき、兵士達も潜在的な敵への注意が薄れてきていた。しかし、それがいけなかった。３月のある夜、無警戒だった兵士達に 100 人の野蛮人の歩兵が襲いかかり、帝国兵は完全に蹴散らされてしまった。ルティウスもわずかに生き残った兵士とともに命からがら逃げ延びるのがやっとだった。"
-
-#: ../../data/campaigns/campaigns.conf:43
-msgid "The Run for the Fire"
-msgstr "炎へ向かって"
-
-#: ../../data/campaigns/campaigns.conf:45
-msgid "Atlanteans"
-msgstr "アトランティス"
-
-#: ../../data/campaigns/campaigns.conf:47
-msgid "Challenging. Introduces the Atlanteans"
-msgstr "挑戦的。アトランティスの導入向けです。"
-
-#: ../../data/campaigns/campaigns.conf:48
-msgid ""
-"When their God lost faith in the Atlanteans and drowned their island, one "
-"woman’s struggle for justice and a second chance for her people would become"
-" the stuff of legends. Leading the remaining Atlanteans into a new future in"
-" a new part of the World, Jundlina became the most powerful human of her "
-"time, but at a high cost: her humanity and soul."
-msgstr "神はアトランティス人への信頼を無くし、彼らの島は海に沈んだ。彼らの第二の希望、そしてある女性のその正義のための奮闘はやがて伝説となる。生き残りのアトランティス人を世界の新たな場所へと導き、未来を示せ。ジュンドゥリナはこの時代最も力を持つ人間となる ── 彼女の人間性と魂という大きな代償の元に。"
-
-#: ../../data/campaigns/campaigns.conf:52
-msgid "From Water to Ice"
-msgstr "水から氷へ"
-
-#: ../../data/campaigns/campaigns.conf:54
-msgid "Frisians"
-msgstr "フリジア"
-
-#: ../../data/campaigns/campaigns.conf:56
-msgid "For advanced players. Introduces the Frisians"
-msgstr "熟練プレイヤー向け。フリジアの導入向け。"
-
-#: ../../data/campaigns/campaigns.conf:57
-msgid ""
-"Living off the ocean is a constant struggle, and even more so for the "
-"inhabitants of the Frisian North Sea shore. Was the last storm flood, the "
-"most devastating one in human memory, really nothing more than yet another "
-"example for the hardships all Frisians have to face – or a sign from the "
-"gods that a tribe that only just settled here must seek out an entirely new "
-"home?"
-msgstr "海から離れて暮らすことはただでさえ苦難の道だ。北の海の岸辺に住むフリジアの住民にとっては言語に絶する程の苦難の道だろう。洪水を引き起こした先の嵐は記録に残る中でも最悪のものだった。フリジアの人々にかつてない苦難が待ち受けていることは確実だ ── これは全く新しい土地へ向かえという神の思し召しなのだろうか？"
-
-#: ../../data/campaigns/campaigns.conf:86
-#: ../../data/campaigns/campaigns.conf:111
-#: ../../data/campaigns/campaigns.conf:123
-#: ../../data/campaigns/campaigns.conf:139
 #: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
 msgstr "未実装"
-
-#: ../../data/campaigns/campaigns.conf:91
-#: ../../data/campaigns/emp01.wmf/elemental:7
-msgid "The Strands of Malac’ Mor"
-msgstr "マラク-モールの座礁"
-
-#: ../../data/campaigns/campaigns.conf:96
-#: ../../data/campaigns/emp02.wmf/elemental:9
-msgid "An Outpost for Exile"
-msgstr "追放者の開拓地"
-
-#: ../../data/campaigns/campaigns.conf:101
-msgid "Neptune’s Revenge"
-msgstr "ネプチューンの復讐"
-
-#: ../../data/campaigns/campaigns.conf:106
-#: ../../data/campaigns/emp04.wmf/elemental:8
-msgid "Surprise, Surprise!"
-msgstr "驚くなよ！"
-
-#: ../../data/campaigns/campaigns.conf:129
-#: ../../data/campaigns/fri01.wmf/elemental:8
-msgid "The Great Stormflood"
-msgstr "大いなる嵐、そして洪水"
-
-#: ../../data/campaigns/campaigns.conf:134
-msgid "Colder than Ice"
-msgstr "氷よりも冷たく"
 
 #: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
 msgstr "無し"
 
-#: ../../data/campaigns/dummy.wmf/elemental:11
+#: ../../data/campaigns/dummy.wmf/elemental:12
 msgid "Sorry, this map is not yet implemented."
 msgstr "このマップはまだ用意されていません。"
+
+#: ../../data/campaigns/emp01.wmf/elemental:7
+msgid "The Strands of Malac’ Mor"
+msgstr "マラク-モールの座礁"
 
 #: ../../data/campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -201,7 +72,11 @@ msgid ""
 "a new life. But his destiny takes his ship into a heavy storm, which nearly "
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
-msgstr "野蛮人との重要な戦に負け、帝国の領土を大きく失した後、ルティウスはフレミルを離れ、新たな人生に乗り出した。しかし、運命は気まぐれにも彼の乗る船を大嵐に巻き込ませ、船は沈没寸前の状況となった。それでもなんとか船は岸へとたどりつき、見知らぬ砂漠へと座礁した。彼らは助かったのだ ── とりあえず今のところは。"
+msgstr "野蛮人との重要な戦に負け、帝国の領土を大きく失した後、ルティウスはフレミルを離れ、新たな人生に乗り出した。しかし、運命は気まぐれにも彼の乗る船を大嵐に巻き込ませ、船は沈没寸前の状況となった。それでもなんとか船は岸へとたどりつき、見知らぬ不毛の地へと座礁した。彼らは助かったのだ…… とりあえず今のところは。"
+
+#: ../../data/campaigns/emp02.wmf/elemental:9
+msgid "An Outpost for Exile"
+msgstr "追放者の開拓地"
 
 #: ../../data/campaigns/emp02.wmf/elemental:11
 msgid ""
@@ -217,12 +92,20 @@ msgid ""
 "the will of the gods."
 msgstr "帝国防衛のための移動途上、ルティウスらの船の船員が神の意志を目にして驚きの声を上げた。"
 
+#: ../../data/campaigns/emp04.wmf/elemental:8
+msgid "Surprise, Surprise!"
+msgstr "驚くなよ！"
+
 #: ../../data/campaigns/emp04.wmf/elemental:10
 msgid ""
 "After returning home, Lutius and his crew are faced with an economy in "
 "shambles. Resolving the bottlenecks in the economy will be of utmost "
 "importance to reinstate the glory of the empire."
 msgstr "故郷に帰ったルティウスと乗組員達が目にしたものは、見るも無残にぐちゃぐちゃになった経済だった。経済の問題の解決は帝国の栄光を取り戻すための緊急課題だ。"
+
+#: ../../data/campaigns/fri01.wmf/elemental:8
+msgid "The Great Stormflood"
+msgstr "大いなる嵐、そして洪水"
 
 #: ../../data/campaigns/fri01.wmf/elemental:10
 msgid ""
@@ -231,7 +114,7 @@ msgid ""
 "Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
 " a sign from the Gods that the Frisian community on the island of Langeness "
 "is not wanted here?"
-msgstr "1362 年、静かで平和な暮らしをしていた北フリジア諸島の住民の生活は人類史最大の嵐とそれに伴う洪水、聖マーセラスの洪水によって一変した。あれだけの嵐があったのだからもうこれ以上嵐は来ないのか、それともあの大嵐は神はフリジア人がランゲネス島から離れることを望んでいるという知らせなのだろうか？"
+msgstr "1362 年、静かで平和な暮らしをしていた北フリジア諸島の住民の生活は人類史最大の嵐とそれに伴う洪水、聖マーセラスの洪水によって一変した。あれだけの嵐があったのだからもうこれ以上嵐は来ないのか、それともあの大嵐は神はフリジア人がランゲネス島から離れることを望んでいる、という知らせなのだろうか？"
 
 #: ../../data/campaigns/fri01.wmf/elemental:11
 msgid ""
@@ -250,7 +133,6 @@ msgid ""
 msgstr "リーボードと彼の率いる一団は北の地に着いた。しかし、凍てついた草原と雪山の間の地に到着した彼らはどうやら全く歓迎されていないようで……"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:15
 msgid "Basic Control"
 msgstr "基本操作"
 
@@ -261,7 +143,6 @@ msgid ""
 msgstr "このチュートリアルでは、Widelandsでの最も基本的な操作、建物と道の建設のやり方を学べます。"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:19
 msgid "Warfare"
 msgstr "軍事"
 
@@ -272,18 +153,16 @@ msgid ""
 msgstr "このチュートリアルでは、どのように兵士を作り、どのように訓練し、そしてどのように戦場へと導くのか、といった軍事行動の秘密について学ぶことができます"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:23
 msgid "Seafaring"
 msgstr "航海"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
-"ships and ports."
-msgstr "このチュートリアルでは、どのように船や港を取り扱うのか、という航海に関する基本を学べます。"
+"ships and ports, and how to use ferries and waterways."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:27
 msgid "Economy"
 msgstr "経済"
 

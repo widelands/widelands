@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -85,12 +85,14 @@ private:
 	void parse_callobject(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_plant(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_createbob(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_buildferry(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_removeobject(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_repeatsearch(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_findresources(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_scout(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_playsound(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_construct(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_terraform(Worker::Action* act, const std::vector<std::string>& cmd);
 
 	const std::string name_;
 	const WorkerDescr& worker_;
@@ -99,6 +101,6 @@ private:
 	static ParseMap const parsemap_[];
 	DISALLOW_COPY_AND_ASSIGN(WorkerProgram);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_WORKER_PROGRAM_H

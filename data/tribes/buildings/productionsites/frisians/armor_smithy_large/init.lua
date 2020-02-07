@@ -10,31 +10,42 @@ tribes:new_productionsite_type {
    size = "medium",
 
    enhancement_cost = {
-      brick = 4,
-      granite = 2,
+      brick = 2,
+      granite = 1,
       log = 1,
-      thatch_reed = 1
+      reed = 1
    },
    return_on_dismantle_on_enhanced = {
       brick = 2,
       granite = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 94},
-         fps = 10,
+         directory = dirname,
+         basename = "idle",
+         hotspot = {50, 82},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 94},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "working",
+         hotspot = {50, 82},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
       unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 82},
-      },
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {50, 71}
+      }
    },
 
    aihints = {
@@ -78,9 +89,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs sword_broad",
             "consume=coal iron:2 gold",
             "sleep=24000",
-            "playsound=sound/smiths smith 192",
+            "playsound=sound/smiths/smith 192",
             "animate=working 24000",
-            "playsound=sound/smiths sharpening 120",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=sword_broad"
          },
@@ -93,9 +104,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs sword_double",
             "consume=coal:2 iron:2 gold",
             "sleep=24000",
-            "playsound=sound/smiths smith 192",
+            "playsound=sound/smiths/smith 192",
             "animate=working 24000",
-            "playsound=sound/smiths sharpening 120",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=sword_double"
          },

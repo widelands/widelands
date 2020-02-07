@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,6 @@
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
-#include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
 
@@ -58,22 +57,24 @@ Button::Button  //  Common constructor
      time_nextact_(0),
      title_(title_text),
      title_image_(title_image),
-     background_style_(g_gr->styles().button_style(init_style)) {
+     style_(&g_gr->styles().button_style(init_style)) {
 	set_thinks(false);
-	set_can_focus(true);
+	// Don't allow focus
+	assert(!get_can_focus());
 }
 
-Button::Button  //  for textual buttons. If h = 0, h will resize according to the font's height.
-   (Panel* const parent,
-    const std::string& name,
-    int32_t const x,
-    int32_t const y,
-    uint32_t const w,
-    uint32_t const h,
-    UI::ButtonStyle init_style,
-    const std::string& title_text,
-    const std::string& tooltip_text,
-    UI::Button::VisualState init_state)
+/// For textual buttons. If h = 0, h will resize according to the font's height. If both h = 0 and w
+/// = 0, will resize for text width as well.
+Button::Button(Panel* const parent,
+               const std::string& name,
+               int32_t const x,
+               int32_t const y,
+               uint32_t const w,
+               uint32_t const h,
+               UI::ButtonStyle init_style,
+               const std::string& title_text,
+               const std::string& tooltip_text,
+               UI::Button::VisualState init_state)
    : Button(parent,
             name,
             x,
@@ -86,11 +87,21 @@ Button::Button  //  for textual buttons. If h = 0, h will resize according to th
             tooltip_text,
             init_state,
             UI::Button::ImageMode::kShrink) {
-	// Automatically resize for font height and give it a margin.
-	if (h < 1) {
-		int new_height = text_height() + 4;
-		set_desired_size(w, new_height);
-		set_size(w, new_height);
+	if (h == 0) {
+		// Automatically resize for font height and give it a margin.
+		int new_width = get_w();
+		const int new_height =
+		   std::max(text_height(g_gr->styles().button_style(init_style).enabled().font()),
+		            text_height(g_gr->styles().button_style(init_style).disabled().font())) +
+		   4 * kButtonImageMargin;
+		if (w == 0) {
+			// Automatically resize for text width too.
+			new_width = std::max(text_width(richtext_escape(title_), style_->enabled().font()),
+			                     text_width(richtext_escape(title_), style_->disabled().font())) +
+			            8 * kButtonImageMargin;
+		}
+		set_desired_size(new_width, new_height);
+		set_size(new_width, new_height);
 	}
 }
 
@@ -114,7 +125,7 @@ Button::~Button() {
 
 /**
  * Sets a new picture for the Button.
-*/
+ */
 void Button::set_pic(const Image* pic) {
 	title_.clear();
 
@@ -126,7 +137,7 @@ void Button::set_pic(const Image* pic) {
 
 /**
  * Set a text title for the Button
-*/
+ */
 void Button::set_title(const std::string& title) {
 	if (title_ == title)
 		return;
@@ -138,12 +149,10 @@ void Button::set_title(const std::string& title) {
 /**
  * Enable/Disable the button (disabled buttons can't be clicked).
  * Buttons are enabled by default
-*/
+ */
 void Button::set_enabled(bool const on) {
 	if (enabled_ == on)
 		return;
-
-	set_can_focus(on);
 
 	// disabled buttons should look different...
 	if (on)
@@ -161,7 +170,7 @@ void Button::set_enabled(bool const on) {
 
 /**
  * Redraw the button
-*/
+ */
 void Button::draw(RenderTarget& dst) {
 	const bool is_flat = (enabled_ && visual_state_ == VisualState::kFlat) ||
 	                     (!enabled_ && static_cast<int>(disable_style_ & ButtonDisableStyle::kFlat));
@@ -171,8 +180,11 @@ void Button::draw(RenderTarget& dst) {
 	const bool is_monochrome =
 	   !enabled_ && static_cast<int>(disable_style_ & ButtonDisableStyle::kMonochrome);
 
+	const UI::TextPanelStyleInfo& style_to_use =
+	   is_monochrome ? style_->disabled() : style_->enabled();
+
 	// Draw the background
-	draw_background(dst, *background_style_);
+	draw_background(dst, style_to_use.background());
 
 	if (is_flat && highlighted_)
 		dst.brighten_rect(Recti(0, 0, get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
@@ -214,11 +226,11 @@ void Button::draw(RenderTarget& dst) {
 			}
 		}
 
-	} else if (title_.length()) {
+	} else if (!title_.empty()) {
 		//  Otherwise draw title string centered
-		std::shared_ptr<const UI::RenderedText> rendered_text =
-		   autofit_ui_text(title_, get_inner_w() - 2 * kButtonImageMargin,
-		                   is_monochrome ? UI_FONT_CLR_DISABLED : UI_FONT_CLR_FG);
+		std::shared_ptr<const UI::RenderedText> rendered_text = autofit_text(
+		   richtext_escape(title_), style_to_use.font(), get_inner_w() - 2 * kButtonImageMargin);
+
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
 		rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2,
 		                                  (get_h() - rendered_text->height()) / 2));
@@ -283,7 +295,6 @@ void Button::think() {
 				time_nextact_ = time;
 			play_click();
 			sigclicked();
-			clicked();
 			//  The button may not exist at this point (for example if the button
 			//  closed the dialog that it is part of). So member variables may no
 			//  longer be accessed.
@@ -293,7 +304,7 @@ void Button::think() {
 
 /**
  * Update highlighted status
-*/
+ */
 void Button::handle_mousein(bool const inside) {
 	bool oldhl = highlighted_;
 
@@ -310,13 +321,12 @@ void Button::handle_mousein(bool const inside) {
 
 /**
  * Update the pressed status of the button
-*/
+ */
 bool Button::handle_mousepress(uint8_t const btn, int32_t, int32_t) {
 	if (btn != SDL_BUTTON_LEFT)
 		return false;
 
 	if (enabled_) {
-		focus();
 		grab_mouse(true);
 		pressed_ = true;
 		if (repeating_) {
@@ -338,7 +348,6 @@ bool Button::handle_mouserelease(uint8_t const btn, int32_t, int32_t) {
 		if (highlighted_ && enabled_) {
 			play_click();
 			sigclicked();
-			clicked();
 			//  The button may not exist at this point (for example if the button
 			//  closed the dialog that it is part of). So member variables may no
 			//  longer be accessed.
@@ -365,8 +374,8 @@ void Button::set_perm_pressed(bool pressed) {
 	                           UI::Button::VisualState::kRaised);
 }
 
-void Button::set_background_style(UI::ButtonStyle bstyle) {
-	background_style_ = g_gr->styles().button_style(bstyle);
+void Button::set_style(UI::ButtonStyle bstyle) {
+	style_ = &g_gr->styles().button_style(bstyle);
 }
 
 void Button::toggle() {
@@ -381,4 +390,4 @@ void Button::toggle() {
 		break;  // Do nothing for flat buttons
 	}
 }
-}
+}  // namespace UI

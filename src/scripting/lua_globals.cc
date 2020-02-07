@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -197,15 +197,15 @@ static int L_ngettext(lua_State* L) {
 /* RST
 .. function:: pgettext(msgctxt, msgid)
 
-   A wrapper for the pgettext() function, needed for allowing multiple translations of the same string
-   according to context.
+   A wrapper for the pgettext() function, needed for allowing multiple translations of the same
+   string according to context.
 
    :arg msgctxt: a named context for this string for disambiguation
    :type msgctxt: :class:`string`
    :arg msgid: text to translate
    :type msgid: :class:`string`
 
-	:returns: The translated string.
+   :returns: The translated string.
 */
 // UNTESTED
 static int L_pgettext(lua_State* L) {
@@ -252,7 +252,8 @@ static int L_include(lua_State* L) {
 /* RST
 .. function:: ticks()
 
-	Returns an integer value representing the number of milliseconds since the SDL library initialized.
+   Returns an integer value representing the number of milliseconds since the SDL library
+   initialized.
 */
 static int L_ticks(lua_State* L) {
 	lua_pushinteger(L, SDL_GetTicks());

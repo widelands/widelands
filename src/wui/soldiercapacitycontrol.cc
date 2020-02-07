@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -69,7 +69,7 @@ SoldierCapacityControl::SoldierCapacityControl(UI::Panel* parent,
                32,
                UI::ButtonStyle::kWuiMenu,
                g_gr->images().get("images/wui/buildings/menu_down_train.png"),
-               _("Decrease capacity")),
+               _("Decrease capacity. Hold down Ctrl to set the capacity to the lowest value")),
      increase_(this,
                "increase",
                0,
@@ -78,7 +78,7 @@ SoldierCapacityControl::SoldierCapacityControl(UI::Panel* parent,
                32,
                UI::ButtonStyle::kWuiMenu,
                g_gr->images().get("images/wui/buildings/menu_up_train.png"),
-               _("Increase capacity")),
+               _("Increase capacity. Hold down Ctrl to set the capacity to the highest value")),
      value_(this, "199", UI::Align::kCenter) {
 	decrease_.sigclicked.connect(
 	   boost::bind(&SoldierCapacityControl::click_decrease, boost::ref(*this)));
@@ -112,11 +112,19 @@ void SoldierCapacityControl::change_soldier_capacity(int delta) {
 }
 
 void SoldierCapacityControl::click_decrease() {
-	change_soldier_capacity(-1);
+	const SoldierControl* soldiers = building_.soldier_control();
+	assert(soldiers);
+	change_soldier_capacity((SDL_GetModState() & KMOD_CTRL) ?
+	                           soldiers->min_soldier_capacity() - soldiers->soldier_capacity() :
+	                           -1);
 }
 
 void SoldierCapacityControl::click_increase() {
-	change_soldier_capacity(1);
+	const SoldierControl* soldiers = building_.soldier_control();
+	assert(soldiers);
+	change_soldier_capacity((SDL_GetModState() & KMOD_CTRL) ?
+	                           soldiers->max_soldier_capacity() - soldiers->soldier_capacity() :
+	                           1);
 }
 
 UI::Panel* create_soldier_capacity_control(UI::Panel& parent,

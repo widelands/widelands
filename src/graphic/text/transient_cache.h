@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -130,8 +130,8 @@ std::shared_ptr<const T> TransientCache<T>::insert(const std::string& hash,
 	// Record hash as most-recently-used.
 	AccessHistory::iterator it = access_history_.insert(access_history_.end(), hash);
 	size_in_size_unit_ += entry_size_in_size_unit;
-	return entries_.insert(make_pair(hash, Entry{std::move(entry), entry_size_in_size_unit,
-	                                             SDL_GetTicks(), it}))
+	return entries_
+	   .insert(make_pair(hash, Entry{std::move(entry), entry_size_in_size_unit, SDL_GetTicks(), it}))
 	   .first->second.entry;
 }
 

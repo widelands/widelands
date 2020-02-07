@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,7 +33,8 @@ struct MapObjectSaver;
 
 class EconomyDataPacket {
 public:
-	explicit EconomyDataPacket(Economy* e) : eco_(e) {
+	explicit EconomyDataPacket(Economy* e, const MapObjectLoader* for_savegame_compatibility_only)
+	   : eco_(e), mol_(for_savegame_compatibility_only) {
 		assert(eco_);
 	}
 
@@ -42,7 +43,9 @@ public:
 
 private:
 	Economy* eco_;
+	// TODO(Nordfriese): Savegame compatibility
+	const MapObjectLoader* mol_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_ECONOMY_DATA_PACKET_H

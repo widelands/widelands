@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,7 +42,7 @@
 
 using namespace Widelands;
 
-#define PLOT_HEIGHT 130
+#define PLOT_HEIGHT 145
 #define NR_BASE_DATASETS 11
 
 GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,

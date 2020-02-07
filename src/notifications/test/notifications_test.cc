@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,6 +29,7 @@
 
 // Triggered by BOOST_AUTO_TEST_CASE
 CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
+CLANG_DIAG_OFF("-Wused-but-marked-unused")
 
 struct SimpleNote {
 	CAN_BE_SENT_AS_NOTE(100)

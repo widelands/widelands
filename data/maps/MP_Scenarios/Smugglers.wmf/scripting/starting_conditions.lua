@@ -27,7 +27,7 @@ function set_starting_conditions_barbarians(player, sf)
          scythe = 6,
          shovel = 4,
          snack = 3,
-         thatch_reed = 24,
+         reed = 24,
          log = 80,
       },
       workers = {
@@ -184,7 +184,7 @@ function set_starting_conditions_frisians(player, sf)
       wares = {
          log = 40,
          granite = 50,
-         thatch_reed = 50,
+         reed = 50,
          brick = 80,
          clay = 30,
          water = 10,

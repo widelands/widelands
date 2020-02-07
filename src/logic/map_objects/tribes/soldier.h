@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,11 +37,38 @@ namespace Widelands {
 class EditorGameBase;
 class Battle;
 
+struct SoldierLevelRange {
+	SoldierLevelRange();
+	SoldierLevelRange(const LuaTable&);
+	SoldierLevelRange(const SoldierLevelRange&) = default;
+	SoldierLevelRange& operator=(const SoldierLevelRange& other) = default;
+
+	bool matches(const Soldier* soldier) const;
+	bool matches(int32_t health, int32_t attack, int32_t defense, int32_t evade) const;
+
+	bool operator==(const SoldierLevelRange& other) const {
+		return min_health == other.min_health && min_attack == other.min_attack &&
+		       min_defense == other.min_defense && min_evade == other.min_evade &&
+		       max_health == other.max_health && max_attack == other.max_attack &&
+		       max_defense == other.max_defense && max_evade == other.max_evade;
+	}
+
+	int32_t min_health;
+	int32_t min_attack;
+	int32_t min_defense;
+	int32_t min_evade;
+	int32_t max_health;
+	int32_t max_attack;
+	int32_t max_defense;
+	int32_t max_evade;
+};
+using SoldierAnimationsList = std::map<std::string, SoldierLevelRange>;
+
 class SoldierDescr : public WorkerDescr {
 public:
 	friend class Economy;
 
-	SoldierDescr(const std::string& init_descname, const LuaTable& t, EditorGameBase& egbase);
+	SoldierDescr(const std::string& init_descname, const LuaTable& t, Tribes& tribes);
 	~SoldierDescr() override {
 	}
 
@@ -104,7 +131,10 @@ public:
 		return evade_.images[level];
 	}
 
-	uint32_t get_rand_anim(Game& game, const char* const name) const;
+	uint32_t get_rand_anim(Game& game, const std::string& name, const Soldier* soldier) const;
+
+	const DirAnimations& get_right_walk_anims(bool const ware, Worker* w) const override;
+	uint32_t get_animation(const std::string& anim, const MapObject* mo = nullptr) const override;
 
 protected:
 	Bob& create_object() const override;
@@ -127,20 +157,27 @@ private:
 	BattleAttribute evade_;
 
 	// Battle animation names
-	std::vector<std::string> attack_success_w_name_;
-	std::vector<std::string> attack_failure_w_name_;
-	std::vector<std::string> evade_success_w_name_;
-	std::vector<std::string> evade_failure_w_name_;
-	std::vector<std::string> die_w_name_;
+	SoldierAnimationsList attack_success_w_name_;
+	SoldierAnimationsList attack_failure_w_name_;
+	SoldierAnimationsList evade_success_w_name_;
+	SoldierAnimationsList evade_failure_w_name_;
+	SoldierAnimationsList die_w_name_;
 
-	std::vector<std::string> attack_success_e_name_;
-	std::vector<std::string> attack_failure_e_name_;
-	std::vector<std::string> evade_success_e_name_;
-	std::vector<std::string> evade_failure_e_name_;
-	std::vector<std::string> die_e_name_;
+	SoldierAnimationsList attack_success_e_name_;
+	SoldierAnimationsList attack_failure_e_name_;
+	SoldierAnimationsList evade_success_e_name_;
+	SoldierAnimationsList evade_failure_e_name_;
+	SoldierAnimationsList die_e_name_;
+
+	// We can have per-level walking and idle anims
+	// NOTE: I expect no soldier will ever agree to carry a ware, so we don't provide animations for
+	// that. NOTE: All walking animations are expected to have the same set of ranges.
+	SoldierAnimationsList idle_name_;
+	std::unordered_map<std::unique_ptr<SoldierLevelRange>, std::map<uint8_t, std::string>>
+	   walk_name_;
 
 	// Reads list of animation names from the table and pushes them into result.
-	void add_battle_animation(std::unique_ptr<LuaTable> table, std::vector<std::string>* result);
+	void add_battle_animation(std::unique_ptr<LuaTable> table, SoldierAnimationsList* result);
 
 	DISALLOW_COPY_AND_ASSIGN(SoldierDescr);
 };
@@ -173,6 +210,8 @@ class Soldier : public Worker {
 	MO_DESCR(SoldierDescr)
 
 public:
+	enum class InfoMode { kWalkingAround, kInBuilding };
+
 	explicit Soldier(const SoldierDescr&);
 
 	bool init(EditorGameBase&) override;
@@ -209,18 +248,21 @@ public:
 
 	/// Draw this soldier
 	void draw(const EditorGameBase&,
+	          const InfoToDraw& info_to_draw,
 	          const Vector2f& point_on_dst,
+	          const Widelands::Coords& coords,
 	          float scale,
 	          RenderTarget* dst) const override;
 
-	static void calc_info_icon_size(const TribeDescr&, uint32_t& w, uint32_t& h);
+	static void calc_info_icon_size(const TribeDescr&, int& w, int& h);
 
 	// Draw the info icon containing health bar and levels. If 'anchor_below' is
 	// true, the icon is drawn horizontally centered above Otherwise, the icon
 	// is drawn below and right of 'draw_position'.
 	void draw_info_icon(Vector2i draw_position,
 	                    const float scale,
-	                    const bool anchor_below,
+	                    const InfoMode draw_mode,
+	                    const InfoToDraw info_to_draw,
 	                    RenderTarget*) const;
 
 	uint32_t get_current_health() const {
@@ -251,7 +293,7 @@ public:
 	int32_t get_training_attribute(TrainingAttribute attr) const override;
 
 	/// Sets a random animation of desired type and start playing it.
-	void start_animation(EditorGameBase&, char const* animname, uint32_t time);
+	void start_animation(EditorGameBase&, const std::string& animname, uint32_t time);
 
 	/// Heal quantity of health points instantly
 	void heal(uint32_t);
@@ -272,6 +314,11 @@ public:
 	void start_task_battle(Game&);
 	void start_task_move_in_battle(Game&, CombatWalkingDir);
 	void start_task_die(Game&);
+
+	std::pair<std::unique_ptr<SoldierLevelRange>, std::unique_ptr<DirAnimations>>&
+	get_walking_animations_cache() {
+		return walking_animations_cache_;
+	}
 
 private:
 	void attack_update(Game&, State&);
@@ -324,7 +371,8 @@ private:
 	 */
 	Battle* battle_;
 
-	static constexpr uint8_t kSoldierHealthBarWidth = 13;
+	std::pair<std::unique_ptr<SoldierLevelRange>, std::unique_ptr<DirAnimations>>
+	   walking_animations_cache_;
 
 	/// Number of consecutive blocked signals until the soldiers are considered permanently stuck
 	static constexpr uint8_t kBockCountIsStuck = 10;
@@ -350,6 +398,6 @@ protected:
 public:
 	void do_save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_SOLDIER_H

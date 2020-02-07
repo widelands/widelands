@@ -1,18 +1,18 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # Erik Soe Sorensen <eriksoe@daimi.au.dk>, 2007
 # Jacob Rasmussen <jacobvrasmussen@gmail.com>, 2018
-# Joe Hansen <joedalton2@yahoo.dk>, 2015-2017
+# Joe Hansen <joedalton2@yahoo.dk>, 2015-2017,2019
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-17 09:23+0000\n"
-"PO-Revision-Date: 2018-09-26 06:14+0000\n"
-"Last-Translator: Jacob Rasmussen <jacobvrasmussen@gmail.com>\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-12-30 07:55+0000\n"
+"PO-Revision-Date: 2019-12-30 08:11+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,61 +36,62 @@ msgstr "Licens"
 msgid "Licensing information for Widelands"
 msgstr "Licensinformation for Widelands"
 
-#: ../../data/txts/LICENSE.lua:9
-msgid "Copyright 2002 - 2018 by the Widelands Development Team."
-msgstr ""
+#. TRANSLATORS: Placeholder is copyright end year
+#: ../../data/txts/LICENSE.lua:10
+msgid "Copyright 2002 - %1% by the Widelands Development Team."
+msgstr "Ophavsret 2002 - %1% Widelands-udviklingsholdet."
 
-#: ../../data/txts/LICENSE.lua:11
+#: ../../data/txts/LICENSE.lua:12
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
 msgstr "Dette spil er Free and Open Source (FOSS), licenseret under GNU General Public License (GPL) V2.0."
 
-#: ../../data/txts/LICENSE.lua:13
+#: ../../data/txts/LICENSE.lua:14
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
 msgstr "Du kan finde yderligere information om FOSS og GPL'en ved at besøge den følgende hjemmeside: %s"
 
-#: ../../data/txts/LICENSE.lua:15
+#: ../../data/txts/LICENSE.lua:16
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr "Du kan også finde den fulde licenstekst der samt yderligere information om filosofien og de juridiske implikationer."
 
-#: ../../data/txts/LICENSE.lua:17
+#: ../../data/txts/LICENSE.lua:18
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr "Vi medsender også GPL'en som et tekstdokument sammen med Widelands."
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:19
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
 msgstr "På Linux kan du finde filen COPYING i roden af kildeteksten eller den uafhængige binære pakke, eller i installationsmappen (f.eks. »%1%«)."
 
-#: ../../data/txts/LICENSE.lua:19
+#: ../../data/txts/LICENSE.lua:20
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr "På Windows kan du finde filen kaldt COPYING.txt i installationsmappen og Widelands' startmenupunkt tilbyder en henvisning til denne fil."
 
-#: ../../data/txts/LICENSE.lua:20
+#: ../../data/txts/LICENSE.lua:21
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
 msgstr "På MacOS kan du finde filen kaldt COPYING i arkivet du hentede fra hjemmesiden."
 
-#: ../../data/txts/LICENSE.lua:22
-msgid "This game comes as-is and without any warranty."
-msgstr ""
-
 #: ../../data/txts/LICENSE.lua:23
+msgid "This game comes as-is and without any warranty."
+msgstr "Dette spil bruges på eget ansvar uden garanti."
+
+#: ../../data/txts/LICENSE.lua:24
 msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
 "(Translations)."
-msgstr ""
+msgstr "For yderligere information og hjælp kan du finde os på %1% (hjemmeside, wiki, forum til spørgsmål eller generel hjælp), %2% (fejlregistrering) og %3% (oversættelser)."
 
 #: ../../data/txts/README.lua:6
 msgid "Readme"
@@ -201,11 +202,11 @@ msgstr "Widelands-oversættere"
 
 #: ../../data/txts/developers.lua:3
 msgid "Atlanteans"
-msgstr ""
+msgstr "Altantere"
 
 #: ../../data/txts/developers.lua:3
 msgid "Barbarians"
-msgstr ""
+msgstr "Barbarer"
 
 #: ../../data/txts/developers.lua:3
 msgid "Campaign Story"
@@ -240,6 +241,10 @@ msgid "Fedora Linux"
 msgstr "Fedora Linux"
 
 #: ../../data/txts/developers.lua:3
+msgid "Flatpak"
+msgstr "Flatpak"
+
+#: ../../data/txts/developers.lua:3
 msgid "Former Elders"
 msgstr "Tidligere ældre"
 
@@ -249,7 +254,7 @@ msgstr "FreeBSD"
 
 #: ../../data/txts/developers.lua:3
 msgid "Frisians"
-msgstr ""
+msgstr "Friserne"
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphicians"
@@ -314,6 +319,14 @@ msgstr "Vinduer"
 #: ../../data/txts/developers.lua:3
 msgid "ZetaOS"
 msgstr "ZetaOS"
+
+#: ../../data/txts/developers.lua:3
+msgid "and many, many more (thank you for everything you've done)"
+msgstr "og mange, mange flere (tak for alt du har udført)"
+
+#: ../../data/txts/developers.lua:3
+msgid "vacant"
+msgstr "ledig"
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
@@ -398,7 +411,12 @@ msgstr "Mellemrum"
 msgid "Toggle building spaces"
 msgstr "Vis/skjul byggepladser"
 
-#. TRANSLATORS: This is an access key combination. The hotkey is 'f'
+#. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
+#: ../../data/txts/help/common_helptexts.lua:49
+msgctxt "hotkey"
+msgid "Ctrl + F"
+msgstr ""
+
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"
 msgstr "Skift fuldskærm (hvis understøttet af styresystemet)"
@@ -436,7 +454,7 @@ msgstr "Spilleren med flagets farve. Hvis mere end én klient valgte den samme f
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr ""
+msgstr "Tilskuertilstand, hvilket betyder, at du kan se alt men ikke kan kontrollere en spiller"
 
 #: ../../data/txts/help/multiplayer_help.lua:15
 msgid "Player settings"
@@ -537,7 +555,7 @@ msgstr "De fleste udvidede bygninger kræver erfarne arbejdere. Udvid ikke en by
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at %s."
-msgstr ""
+msgstr "Du kan finde generel hjælp for redigeringsprogrammet samt en kort introduktion på vores wiki: %s."
 
 #: ../../data/txts/tips/editor.lua:11
 msgid ""
@@ -599,7 +617,7 @@ msgid ""
 "You can place a big building on any node where you could place a medium "
 "building if there is no obstacle or non-arable terrain towards the west, "
 "northwest and northeast."
-msgstr ""
+msgstr "Du kan placere en større bygning på enhver knude, hvor du kan placere en mellembygning, hvis der ikke er en forhindring eller ikke-dyrkbar terræn mod vest, nordvest og nordøst."
 
 #: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
@@ -614,11 +632,11 @@ msgid ""
 "To produce bricks, you need granite; to produce granite, you need a quarry "
 "or rock mine; to build those, you need bricks. Take care not to get "
 "deadlocked!"
-msgstr ""
+msgstr "For at fremstille mursten, skal du bruge granit; for at fremstille granit skal du have et stenbrud eller en stenmine; for at bygge disse skal du bruge mursten. Vær opmærksom på ikke at blive låst fast."
 
 #: ../../data/txts/tips/frisians.lua:8
 msgid "Always build a forester’s house, so you will not run out of logs."
-msgstr ""
+msgstr "Byg altid et skovfogedhus, så du ikke løber tør for træstammer."
 
 #: ../../data/txts/tips/general_game.lua:6
 msgid ""
@@ -654,13 +672,13 @@ msgstr "Del dine veje op i kortere bidder ved at sætte flag. Så vil dine varer
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found online at %s."
-msgstr ""
+msgstr "Har du flere spørgsmål? Vores OSS, wikien og selvfølgelig vores fællesskabsfora kan findes på %s."
 
 #: ../../data/txts/tips/general_game.lua:31
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
 "specific ware. Pressing Ctrl while clicking will adjust all wares at once."
-msgstr ""
+msgstr "Brug prioritetsknapperne i byggevinduerne til at justere levering af en specifik vare. Et tryk på Ctrl mens der bliver klikket vil justere alle varer på en gang."
 
 #: ../../data/txts/tips/general_game.lua:35
 msgid ""
@@ -775,4 +793,4 @@ msgstr "Hvis spillet skulle bryde ned, så tag det roligt! Spillet vil blive gem
 msgid ""
 "Our computer players are too boring? Visit our website at %s and meet other "
 "players to play online."
-msgstr ""
+msgstr "Er vores computerspillere for kedelige? Besøg vores hjemmeside  %s og mød andre spillere på nettet."

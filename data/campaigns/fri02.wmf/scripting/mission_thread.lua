@@ -33,6 +33,7 @@ end
 
 function check_empire()
    while true do
+      sleep(1000)
       for idx,field in ipairs(all_fields) do
          sleep(5)
          local p1c = false
@@ -272,18 +273,20 @@ function supply_murilius()
    while not p3.defeated do sleep(4513) end
    set_objective_done(o)
 
-   -- If the barbarians already defeated Murilius – well done
+   -- If the barbarians already defeated Murilius – well done.
    -- Otherwise, Murilius provokes Reebaud into ordering the player to conquer his entire colony
-   -- (merely defeating the Empire isn’t enough)
+   -- (merely defeating the Empire isn’t enough).
    -- We don't bother to check water, walkable-only and other useless terrains.
    -- That would be really too much to ask from our poor player, now wouldn't it?
    if not p2.defeated then
       campaign_message_box(defeat_murilius_1)
       campaign_message_box(defeat_murilius_2)
-      p2.team = 2
+      p1:set_attack_forbidden(2, false)
+      p2:set_attack_forbidden(1, false)
       o = add_campaign_objective(obj_defeat_murilius)
       local def = false
       while not def do
+         sleep(1000)
          def = true
          for idx,field in ipairs(useful_fields) do
             if field.owner == p2 then
@@ -299,7 +302,8 @@ function supply_murilius()
 end
 
 function defeat_murilius()
-   p2.team = 2
+   p1:set_attack_forbidden(2, false)
+   p2:set_attack_forbidden(1, false)
    campaign_message_box(defeat_both)
    local o = add_campaign_objective(obj_defeat_both)
    while not (p2.defeated and p3.defeated) do sleep(4829) end
@@ -333,13 +337,28 @@ function mission_thread()
    include "map:scripting/starting_conditions.lua"
    sleep(5000)
 
-   p1.team = 1
-   p2.team = 1
-   p3.team = 2
--- TODO: instead of alliances, just forbid certain players to attack each other:
---     · Beginning:          forbid 1>2, 2>1, 2>3
---     · Refusing alliance:  forbid only 2>3
---     · Accepting alliance: first unchanged, after p3 defeated: allow all
+   p1:set_attack_forbidden(2, true)
+   p2:set_attack_forbidden(1, true)
+   p2:set_attack_forbidden(3, true)
+   run(function()
+      repeat
+         local conquered = (#p3:get_buildings("empire_sentry") +
+                            #p3:get_buildings("empire_blockhouse") +
+                            #p3:get_buildings("empire_outpost") +
+                            #p3:get_buildings("empire_barrier") +
+                            #p3:get_buildings("empire_tower") +
+                            #p3:get_buildings("empire_fortress") +
+                            #p3:get_buildings("empire_castle") -
+                            #p2:get_buildings("barbarians_sentry") -
+                            #p2:get_buildings("barbarians_barrier") -
+                            #p2:get_buildings("barbarians_tower") -
+                            #p2:get_buildings("barbarians_fortress") -
+                            #p2:get_buildings("barbarians_citadel"))
+         p2:set_attack_forbidden(3, conquered <= 0)
+         sleep(6913)
+      until p3.defeated or p2.defeated
+      p2:set_attack_forbidden(3, false)
+   end)
 
    campaign_message_box(intro_3)
    local o = add_campaign_objective(obj_new_home)

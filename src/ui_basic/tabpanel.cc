@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2018 by the Widelands Development Team
+ * Copyright (C) 2003-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,7 +62,7 @@ Tab::Tab(TabPanel* const tab_parent,
      tooltip(tooltip_text),
      panel(contents) {
 	if (!init_title.empty()) {
-		rendered_title = UI::g_fh->render(as_uifont(init_title));
+		rendered_title = UI::g_fh->render(as_richtext_paragraph(init_title, UI::FontStyle::kLabel));
 		set_size(std::max(kTabPanelButtonHeight, rendered_title->width() + 2 * kTabPanelTextMargin),
 		         kTabPanelButtonHeight);
 	}
@@ -91,7 +91,7 @@ bool Tab::handle_mousepress(uint8_t, int32_t, int32_t) {
 /**
  * Initialize an empty TabPanel. We use width == 0 as an indicator that the size hasn't been set
  * yet.
-*/
+ */
 TabPanel::TabPanel(Panel* const parent, UI::TabPanelStyle style)
    : Panel(parent, 0, 0, 0, 0),
      style_(style),
@@ -152,7 +152,7 @@ void TabPanel::update_desired_size() {
 
 /**
  * Add a new textual tab
-*/
+ */
 uint32_t TabPanel::add(const std::string& name,
                        const std::string& title,
                        Panel* const panel,
@@ -162,7 +162,7 @@ uint32_t TabPanel::add(const std::string& name,
 
 /**
  * Add a new pictorial tab
-*/
+ */
 uint32_t TabPanel::add(const std::string& name,
                        const Image* pic,
                        Panel* const panel,
@@ -200,7 +200,7 @@ uint32_t TabPanel::add_tab(const std::string& name,
 
 /**
  * Make a different tab the currently active tab.
-*/
+ */
 void TabPanel::activate(uint32_t idx) {
 	if (active_ < tabs_.size())
 		tabs_[active_]->panel->set_visible(false);
@@ -243,7 +243,7 @@ bool TabPanel::remove_last_tab(const std::string& tabname) {
 
 /**
  * Draw the buttons and the tab
-*/
+ */
 void TabPanel::draw(RenderTarget& dst) {
 	if (get_w() == 0) {
 		// The size hasn't been set yet
@@ -337,7 +337,7 @@ void TabPanel::draw(RenderTarget& dst) {
 
 /**
  * Cancel all highlights and the tooltip when the mouse leaves the panel
-*/
+ */
 void TabPanel::handle_mousein(bool inside) {
 	if (!inside && highlight_ != kNotFound) {
 		highlight_ = kNotFound;
@@ -347,7 +347,7 @@ void TabPanel::handle_mousein(bool inside) {
 
 /**
  * Update highlighting
-*/
+ */
 bool TabPanel::handle_mousemove(uint8_t, int32_t const x, int32_t const y, int32_t, int32_t) {
 	size_t hl = find_tab(x, y);
 
@@ -360,7 +360,7 @@ bool TabPanel::handle_mousemove(uint8_t, int32_t const x, int32_t const y, int32
 
 /**
  * Change the active tab if a tab button has been clicked
-*/
+ */
 bool TabPanel::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
 		size_t id = find_tab(x, y);
@@ -390,4 +390,4 @@ size_t TabPanel::find_tab(int32_t x, int32_t y) const {
 	}
 	return kNotFound;
 }
-}
+}  // namespace UI

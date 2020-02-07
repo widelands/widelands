@@ -117,8 +117,6 @@ function do_smuggling()
 
       for idx, route_descr in ipairs(route_descrs) do
          if (route_descr.sending_warehouse ~= nil and route_descr.receiving_warehouse ~= nil) then
-            print("NOCOM do smuggling for route " .. idx)
-
             local send_plr = route_descr.sending_warehouse.owner
             local recv_plr = route_descr.receiving_warehouse.owner
             local send_whf = route_descr.sending_warehouse.fields[1]
@@ -151,7 +149,6 @@ function do_smuggling()
                   -- Index shift, because Lua tables start counting at 1
                   local ware_to_warp = wares[warp_index + 1]
                   if send_whf.immovable:get_wares(ware_to_warp) > 0 then
-                     print("NOCOM Route " .. idx .. " (" .. send_whf.x .. ", " .. send_whf.y .. ") warping ware " .. ware_to_warp ..  ": " .. send_plr.name .. " -> " .. recv_plr.name)
                      send_whf.immovable:set_wares(ware_to_warp, send_whf.immovable:get_wares(ware_to_warp) - 1)
                      recv_whf.immovable:set_wares(
                         ware_to_warp, recv_whf.immovable:get_wares(ware_to_warp) + 1

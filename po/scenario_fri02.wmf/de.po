@@ -1,19 +1,21 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
+# Thomas Ho <tomohnetom@web.de>, 2018
 # Wuzzy <almikes@aol.com>, 2018
 # Elisabeth Jäger, 2018
-# Stephan Lutz <stephan-lutz@gmx.de>, 2018
-# Thomas Ho <tomohnetom@web.de>, 2018
+# Simon S. <sim.sta@icloud.com>, 2019
+# Stephan Lutz <stephan-lutz@gmx.de>, 2019
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-05 07:05+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Thomas Ho <tomohnetom@web.de>, 2018\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2018-03-24 18:16+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2019\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -184,11 +186,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:82
 msgid "Spy on Murilius"
-msgstr "Spioniere bei Murilius"
+msgstr "Spioniere Murilius aus"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:84
 msgid "Send a Scout to Spy on the Empire"
-msgstr "Sende einen Kundschafter, um beim Imperium zu spionieren"
+msgstr "Sende einen Kundschafter, um das Imperium auszuspionieren"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:85
 msgid ""
@@ -211,19 +213,19 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:93
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:335
 msgid "How many sites where soldiers stay,"
-msgstr "Wieviele Orte wo ein Krieger wacht,"
+msgstr "Wieviele Orte, wo ein Krieger wacht,"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:94
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:338
 msgid "How many sites where thou hold’st sway,"
-msgstr "Wieviele Orte wo du hältst die Macht,"
+msgstr "Wieviele Orte, wo du hältst die Macht,"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:95
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:341
 msgid "Though not their whereabouts sees he"
-msgstr "Doch ihren Standort sieht er nich',"
+msgstr "Doch ihren Standort sieht er nicht,"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:96
@@ -616,11 +618,11 @@ msgstr "Unsere Wirtschaft ist vollständig"
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:246
 msgid ""
-"You are right – we should build more berry farms, collector’s houses and "
-"taverns as well as a drinking hall, and advanced bakeries and breweries."
+"You are right – we should build more berry farms, fruit collector’s houses "
+"and taverns as well as a drinking hall, and advanced bakeries and breweries."
 msgstr ""
-"Du hast recht – wir sollten mehr Beerenzuchten, Sammlerhäuser und Tavernen "
-"sowie eine Trinkhalle und verbesserte Bäckereien und Brauereien bauen."
+"Du hast recht – wir sollten mehr Beerenzuchten, Beerensammlerhäuser und "
+"Tavernen sowie eine Trinkhalle, verbesserte Bäckereien und Brauereien bauen."
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:249
@@ -699,15 +701,15 @@ msgstr ""
 "Imperiums, fordere euch auf, mir mitzuteilen wer ihr seid und was ihr in "
 "diesen Landen zu schaffen habt! "
 
-#. TRANSLATORS: Reebaud – Supply Murilius 4
+#. TRANSLATORS: Reebaud – Supply Murilius 4. "Peace" is the traditional
+#. frisian greeting, nothing more.
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:278
 msgid ""
-"Greetings, representative of the Empire! I am Reebaud, the chieftain of this"
-" tribe. All we want is to settle down here, build our home and live our "
-"lives in peace. We do not seek trouble, but we aren’t afraid to fight, "
-"either."
+"Peace, representative of the Empire! I am Reebaud, the chieftain of this "
+"tribe. All we want is to settle down here, build our home and live our lives"
+" in peace. We do not seek trouble, but we aren’t afraid to fight, either."
 msgstr ""
-"Grüße, Abgesandter des Imperiums! Ich bin Reebaud, der Häuptling dieses "
+"Frieden, Abgesandter des Imperiums! Ich bin Reebaud, der Häuptling dieses "
 "Stammes. Alles, was wir wollen, ist uns hier anzusiedeln, uns heimisch "
 "einzurichten und unser Leben in Frieden zu leben. Wir suchen keinen Streit, "
 "jedoch fürchten wir auch keine Auseinandersetzung."
@@ -836,7 +838,7 @@ msgid ""
 msgstr ""
 "Und wegen der Gebietserweiterung – ich frage mich, wie penibel er überhaupt "
 "unser Gebiet kontrollieren kann. Vielleicht sollten wir einen Kundschafter "
-"aussenden, um ein wenig bei ihm zu spionieren…"
+"aussenden, um ihn ein wenig auszuspionieren…"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:329
 msgid "The Scout Discovered Something"
@@ -1063,13 +1065,15 @@ msgstr ""
 msgid "Congratulations"
 msgstr "Glückwunsch"
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
 msgstr "„%s“"
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Neues Ziel"
-msgstr[1] "Neue Ziele"
+msgstr "Neue Aufgabe"
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr "Neue Aufgaben"

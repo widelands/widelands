@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -130,7 +130,10 @@ uint32_t InputQueue::get_missing() const {
 
 constexpr uint16_t kCurrentPacketVersion = 3;
 
-void InputQueue::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
+void InputQueue::read(FileRead& fr,
+                      Game& game,
+                      MapObjectLoader& mol,
+                      const TribesLegacyLookupTable& tribes_lookup_table) {
 
 	uint16_t const packet_version = fr.unsigned_16();
 	try {
@@ -140,25 +143,26 @@ void InputQueue::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
 		if (packet_version == 1 || packet_version == kCurrentPacketVersion) {
 			if (fr.unsigned_8() == 0) {
 				assert(type_ == wwWARE);
-				index_ = owner().tribe().ware_index(fr.c_string());
+				index_ = owner().tribe().ware_index(tribes_lookup_table.lookup_ware(fr.c_string()));
 			} else {
 				assert(type_ == wwWORKER);
-				index_ = owner().tribe().worker_index(fr.c_string());
+				index_ = owner().tribe().worker_index(tribes_lookup_table.lookup_worker(fr.c_string()));
 			}
 			max_size_ = fr.unsigned_32();
 			max_fill_ = fr.signed_32();
 			consume_interval_ = fr.unsigned_32();
 			if (fr.unsigned_8()) {
 				request_.reset(new Request(owner_, 0, InputQueue::request_callback, type_));
-				request_->read(fr, game, mol);
+				request_->read(fr, game, mol, tribes_lookup_table);
 			} else {
 				request_.reset();
 			}
 
 			read_child(fr, game, mol);
 		} else if (packet_version == 2) {
+			// TODO(GunChleoc): Savegame compatibility, get rid after Build 21
 			assert(type_ == wwWARE);
-			index_ = owner().tribe().ware_index(fr.c_string());
+			index_ = owner().tribe().ware_index(tribes_lookup_table.lookup_ware(fr.c_string()));
 			max_size_ = fr.unsigned_32();
 			max_fill_ = fr.signed_32();
 			// No read_child() call here, doing it manually since there is no child-version number
@@ -166,7 +170,7 @@ void InputQueue::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
 			consume_interval_ = fr.unsigned_32();
 			if (fr.unsigned_8()) {
 				request_.reset(new Request(owner_, 0, InputQueue::request_callback, type_));
-				request_->read(fr, game, mol);
+				request_->read(fr, game, mol, tribes_lookup_table);
 			} else {
 				request_.reset();
 			}
@@ -175,8 +179,9 @@ void InputQueue::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
 			throw UnhandledVersionError("InputQueue", packet_version, kCurrentPacketVersion);
 		}
 		//  Now Economy stuff. We have to add our filled items to the economy.
-		if (owner_.get_economy())
-			add_to_economy(*owner_.get_economy());
+		if (owner_.get_economy(type_)) {
+			add_to_economy(*owner_.get_economy(type_));
+		}
 	} catch (const GameDataError& e) {
 		throw GameDataError("inputqueue: %s", e.what());
 	}
@@ -186,12 +191,15 @@ void InputQueue::write(FileWrite& fw, Game& game, MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersion);
 
 	//  Owner and callback is not saved, but this should be obvious on load.
-	if (type_ == wwWARE) {
+	switch (type_) {
+	case wwWARE:
 		fw.unsigned_8(0);
 		fw.c_string(owner().tribe().get_ware_descr(index_)->name().c_str());
-	} else {
+		break;
+	case wwWORKER:
 		fw.unsigned_8(1);
 		fw.c_string(owner().tribe().get_worker_descr(index_)->name().c_str());
+		break;
 	}
 	fw.signed_32(max_size_);
 	fw.signed_32(max_fill_);
@@ -205,4 +213,4 @@ void InputQueue::write(FileWrite& fw, Game& game, MapObjectSaver& mos) {
 
 	write_child(fw, game, mos);
 }
-}
+}  // namespace Widelands

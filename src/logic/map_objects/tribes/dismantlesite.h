@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,15 +45,17 @@ class DismantleSite;
 
 class DismantleSiteDescr : public BuildingDescr {
 public:
-	DismantleSiteDescr(const std::string& init_descname,
-	                   const LuaTable& t,
-	                   EditorGameBase& egbase);
+	DismantleSiteDescr(const std::string& init_descname, const LuaTable& t, Tribes& tribes);
 	~DismantleSiteDescr() override {
 	}
 
 	Building& create_object() const override;
 
+	FxId creation_fx() const;
+
 private:
+	const FxId creation_fx_;
+
 	DISALLOW_COPY_AND_ASSIGN(DismantleSiteDescr);
 };
 
@@ -71,7 +73,7 @@ public:
 	                       const Coords&,
 	                       Player*,
 	                       bool,
-	                       Building::FormerBuildings& former_buildings);
+	                       FormerBuildings& former_buildings);
 
 	bool burn_on_destroy() override;
 	bool init(EditorGameBase&) override;
@@ -83,13 +85,19 @@ public:
 protected:
 	void update_statistics_string(std::string*) override;
 
+	void cleanup(EditorGameBase&) override;
+
 	uint32_t build_step_time() const override {
 		return DISMANTLESITE_STEP_TIME;
 	}
 
-	void
-	draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, RenderTarget* dst) override;
+	void draw(uint32_t gametime,
+	          InfoToDraw info_to_draw,
+	          const Vector2f& point_on_dst,
+	          const Widelands::Coords& coords,
+	          float scale,
+	          RenderTarget* dst) override;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_DISMANTLESITE_H

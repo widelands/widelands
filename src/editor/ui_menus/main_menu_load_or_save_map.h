@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,15 +27,16 @@
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/textarea.h"
-#include "ui_basic/window.h"
+#include "ui_basic/unique_window.h"
 #include "wui/mapdetails.h"
 #include "wui/maptable.h"
 
 /**
  * Choose a filename and save your brand new created map
-*/
-struct MainMenuLoadOrSaveMap : public UI::Window {
+ */
+struct MainMenuLoadOrSaveMap : public UI::UniqueWindow {
 	MainMenuLoadOrSaveMap(EditorInteractive& parent,
+	                      UI::UniqueWindow::Registry& registry,
 	                      int no_of_bottom_rows,
 	                      const std::string& name,
 	                      const std::string& title,

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,7 +50,7 @@ class WareDescr;
 class WorkerDescr;
 class TerrainDescription;
 class TribeDescr;
-}
+}  // namespace Widelands
 
 namespace LuaMaps {
 
@@ -88,18 +88,24 @@ public:
 	 */
 	int get_allows_seafaring(lua_State*);
 	int get_number_of_port_spaces(lua_State*);
+	int get_port_spaces(lua_State*);
 	int get_width(lua_State*);
 	int get_height(lua_State*);
 	int get_player_slots(lua_State*);
+	int get_waterway_max_length(lua_State*);
 
 	/*
 	 * Lua methods
 	 */
+	int count_conquerable_fields(lua_State*);
+	int count_terrestrial_fields(lua_State*);
+	int count_owned_valuable_fields(lua_State*);
 	int place_immovable(lua_State*);
 	int get_field(lua_State*);
 	int recalculate(lua_State*);
 	int recalculate_seafaring(lua_State*);
 	int set_port_space(lua_State*);
+	int set_waterway_max_length(lua_State*);
 
 	/*
 	 * C methods
@@ -132,6 +138,7 @@ public:
 	int get_buildings(lua_State*);
 	int get_carrier(lua_State*);
 	int get_carrier2(lua_State*);
+	int get_ferry(lua_State*);
 	int get_descname(lua_State*);
 	int get_immovables(lua_State*);
 	int get_resource_indicators(lua_State*);
@@ -194,7 +201,6 @@ public:
 	int get_helptext_script(lua_State*);
 	int get_name(lua_State*);
 	int get_type_name(lua_State*);
-	int get_representative_image(lua_State*);
 
 	/*
 	 * Lua methods
@@ -560,13 +566,13 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_consumers(lua_State*);
-	int get_producers(lua_State*);
 
 	/*
 	 * Lua methods
 	 */
+	int consumers(lua_State*);
 	int is_construction_material(lua_State*);
+	int producers(lua_State*);
 
 	/*
 	 * C methods
@@ -792,10 +798,8 @@ public:
 	/*
 	 * Lua methods
 	 */
-	int ware_target_quantity(lua_State*);
-	int worker_target_quantity(lua_State*);
-	int set_ware_target_quantity(lua_State*);
-	int set_worker_target_quantity(lua_State*);
+	int target_quantity(lua_State*);
+	int set_target_quantity(lua_State*);
 
 	/*
 	 * C methods
@@ -907,7 +911,8 @@ public:
 	 * Properties
 	 */
 	int get_owner(lua_State* L);
-	int get_debug_economy(lua_State* L);
+	int get_debug_ware_economy(lua_State* L);
+	int get_debug_worker_economy(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -990,7 +995,8 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_economy(lua_State* L);
+	int get_ware_economy(lua_State* L);
+	int get_worker_economy(lua_State* L);
 	int get_roads(lua_State* L);
 	int get_building(lua_State* L);
 	/*
@@ -1011,7 +1017,7 @@ public:
 
 	LuaRoad() {
 	}
-	explicit LuaRoad(Widelands::Road& mo) : LuaPlayerImmovable(mo) {
+	explicit LuaRoad(Widelands::RoadBase& mo) : LuaPlayerImmovable(mo) {
 	}
 	explicit LuaRoad(lua_State* L) : LuaPlayerImmovable(L) {
 	}
@@ -1036,7 +1042,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(Road)
+	CASTED_GET(RoadBase)
 	static int create_new_worker(Widelands::PlayerImmovable&,
 	                             Widelands::EditorGameBase&,
 	                             const Widelands::WorkerDescr*);
@@ -1155,6 +1161,7 @@ public:
 	 */
 	int get_valid_inputs(lua_State* L);
 	int get_valid_workers(lua_State* L);
+	int get_is_stopped(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -1163,6 +1170,7 @@ public:
 	int get_workers(lua_State* L);
 	int set_inputs(lua_State* L);
 	int set_workers(lua_State* L);
+	int toggle_start_stop(lua_State* L);
 
 	/*
 	 * C Methods
@@ -1338,7 +1346,8 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_debug_economy(lua_State* L);
+	int get_debug_ware_economy(lua_State* L);
+	int get_debug_worker_economy(lua_State* L);
 	int get_last_portdock(lua_State* L);
 	int get_destination(lua_State* L);
 	int get_state(lua_State* L);
@@ -1422,6 +1431,7 @@ public:
 	int __eq(lua_State* L);
 	int region(lua_State* L);
 	int has_caps(lua_State*);
+	int has_max_caps(lua_State*);
 
 	/*
 	 * C methods
@@ -1487,6 +1497,6 @@ RequestedWareWorker parse_wares_workers_counted(lua_State*,
                                                 bool is_ware);
 void luaopen_wlmap(lua_State*);
 
-}  // namespace LuaMap
+}  // namespace LuaMaps
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_MAP_H

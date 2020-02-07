@@ -1,16 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # D M <hunter12@home.se>, 2017
 # GunChleoc, 2018
+# Jonatan Nyberg, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-06 16:24+0000\n"
-"PO-Revision-Date: 2018-04-06 16:28+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-01-10 12:51+0000\n"
+"PO-Revision-Date: 2020-01-18 14:02+0000\n"
+"Last-Translator: Jonatan Nyberg\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,56 +35,57 @@ msgstr "Licens"
 msgid "Licensing information for Widelands"
 msgstr "Licensinformation för Widelands"
 
-#: ../../data/txts/LICENSE.lua:9
-msgid "Copyright 2002 - 2018 by the Widelands Development Team."
+#. TRANSLATORS: Placeholder is copyright end year
+#: ../../data/txts/LICENSE.lua:10
+msgid "Copyright 2002 - %1% by the Widelands Development Team."
 msgstr ""
 
-#: ../../data/txts/LICENSE.lua:11
+#: ../../data/txts/LICENSE.lua:12
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
 msgstr "Detta spel är fritt med öppen källkod (Free and Open Source, FOSS), licensierat under GNU General Public License (GPL) V2.0."
 
-#: ../../data/txts/LICENSE.lua:13
+#: ../../data/txts/LICENSE.lua:14
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
 msgstr "Du kan hitta mer information om FOSS och GPL genom att besöka följande webbsida: %s"
 
-#: ../../data/txts/LICENSE.lua:15
+#: ../../data/txts/LICENSE.lua:16
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr "Du kan hitta hela licenstexten där, samt mer information om dess filosofi och den lagliga innebörden."
 
-#: ../../data/txts/LICENSE.lua:17
+#: ../../data/txts/LICENSE.lua:18
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr "Vi skickar också med GPL som ett textdokument tillsammans med Widelands."
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:19
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
 msgstr "I Linux kan du hitta filen kallad COPYING i källans rot eller i fristående binärpaket, eller i installationsfoldern (som ‘%1%’)."
 
-#: ../../data/txts/LICENSE.lua:19
+#: ../../data/txts/LICENSE.lua:20
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr "I Windows kan du hitta filen kallad COPYING.txt i installationsfoldern och Widelands startmeny innehåller en länk till filen."
 
-#: ../../data/txts/LICENSE.lua:20
+#: ../../data/txts/LICENSE.lua:21
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
 msgstr "I MacOS kan du hitta filen kallad COPYING i arkivet du laddade ner från webbsidan."
 
-#: ../../data/txts/LICENSE.lua:22
+#: ../../data/txts/LICENSE.lua:23
 msgid "This game comes as-is and without any warranty."
 msgstr ""
 
-#: ../../data/txts/LICENSE.lua:23
+#: ../../data/txts/LICENSE.lua:24
 msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
@@ -92,7 +94,7 @@ msgstr ""
 
 #: ../../data/txts/README.lua:6
 msgid "Readme"
-msgstr "Läs mig"
+msgstr "Viktigt"
 
 #: ../../data/txts/README.lua:9
 msgid "an open source strategy game"
@@ -100,7 +102,7 @@ msgstr "ett strategispel med öppen källkod"
 
 #: ../../data/txts/README.lua:11
 msgid "Check out the Widelands project homepage:"
-msgstr "Besök Widelandsprojektets hemsida:"
+msgstr "Besök Widelandsprojektets webbplats:"
 
 #: ../../data/txts/README.lua:12
 msgid ""
@@ -119,7 +121,7 @@ msgid ""
 " in all areas. If you are interested in contributing – be it by making "
 "graphics, fixing bugs or adding new features, translating the game into your"
 " language or creating new maps – get in touch on our homepage."
-msgstr "Widelands är mer eller mindre funktionellt färdigt och är mycket roligt att spela själv och ännu roligare i flerspelarläge med andra. Ändå finns det alltid mer jobb att göra i alla områden. Om du är intresserad av att bidra – bidraget kan vara att göra grafik, rätta buggar eller lägga till nya funktioner, översätta spelet till ditt språk eller skapa nya kartor – kontakta oss på vår hemsida."
+msgstr "Widelands är mer eller mindre funktionellt färdigt och är mycket roligt att spela själv och ännu roligare i flerspelarläge med andra. Ändå finns det alltid mer jobb att göra i alla områden. Om du är intresserad av att bidra – bidraget kan vara att göra grafik, rätta buggar eller lägga till nya funktioner, översätta spelet till ditt språk eller skapa nya kartor – kontakta oss på vår webbplats."
 
 #: ../../data/txts/README.lua:16
 msgid "Widelands Help"
@@ -198,12 +200,12 @@ msgid "Widelands Translators"
 msgstr "Widelands översättare"
 
 #: ../../data/txts/developers.lua:3
-msgid "Atlantean"
-msgstr "Atlanter"
+msgid "Atlanteans"
+msgstr ""
 
 #: ../../data/txts/developers.lua:3
-msgid "Barbarian"
-msgstr "Barbarer"
+msgid "Barbarians"
+msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Campaign Story"
@@ -238,6 +240,10 @@ msgid "Fedora Linux"
 msgstr "Fedora Linux"
 
 #: ../../data/txts/developers.lua:3
+msgid "Flatpak"
+msgstr ""
+
+#: ../../data/txts/developers.lua:3
 msgid "Former Elders"
 msgstr "Tidigare åldermän"
 
@@ -246,7 +252,7 @@ msgid "FreeBSD"
 msgstr "FreeBSD"
 
 #: ../../data/txts/developers.lua:3
-msgid "Frisian"
+msgid "Frisians"
 msgstr ""
 
 #: ../../data/txts/developers.lua:3
@@ -259,11 +265,11 @@ msgstr "Grafik"
 
 #: ../../data/txts/developers.lua:3
 msgid "Homepage"
-msgstr "Hemsida"
+msgstr "Webbplats"
 
 #: ../../data/txts/developers.lua:3
 msgid "Homepage Coders"
-msgstr "Hemsidans kodare"
+msgstr "Webbplatens kodare"
 
 #: ../../data/txts/developers.lua:3
 msgid "Mac OS X"
@@ -313,6 +319,14 @@ msgstr "Windows"
 msgid "ZetaOS"
 msgstr "ZetaOS"
 
+#: ../../data/txts/developers.lua:3
+msgid "and many, many more (thank you for everything you've done)"
+msgstr ""
+
+#: ../../data/txts/developers.lua:3
+msgid "vacant"
+msgstr ""
+
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
 msgstr "Hjälp på nätet"
@@ -323,7 +337,7 @@ msgid ""
 "If you need more documentation or help for Widelands or the Widelands "
 "Editor, be sure to visit our homepage at %s. You can find online help in our"
 " wiki there."
-msgstr "Om du behöver mer dokumentation eller hjälp med Widelands eller Widelands kartredigerare, besök vår hemsida på %s. Du kan hitta hjälp i vår sökbara webbplats, wiki, som finns där."
+msgstr "Om du behöver mer dokumentation eller hjälp med Widelands eller Widelands kartredigerare, besök vår webbplats på %s. Du kan hitta hjälp i vår sökbara webbplats wiki, som finns där."
 
 #: ../../data/txts/help/common_helptexts.lua:17
 msgid "Introduction"
@@ -396,7 +410,12 @@ msgstr "Mellanslag"
 msgid "Toggle building spaces"
 msgstr "Växla visning av byggnadsytor"
 
-#. TRANSLATORS: This is an access key combination. The hotkey is 'f'
+#. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
+#: ../../data/txts/help/common_helptexts.lua:49
+msgctxt "hotkey"
+msgid "Ctrl + F"
+msgstr ""
+
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"
 msgstr "Växla fullskärmsläge (om operativsystemet stöder det)"

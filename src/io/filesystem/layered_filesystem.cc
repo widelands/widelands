@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,9 +22,7 @@
 #include <cstdio>
 #include <memory>
 
-#include "base/log.h"
 #include "base/wexception.h"
-#include "io/fileread.h"
 #include "io/streamread.h"
 
 LayeredFileSystem* g_fs;
@@ -61,7 +59,7 @@ void LayeredFileSystem::set_home_file_system(FileSystem* fs) {
  *
  * Returns the number of files found.
  */
-std::set<std::string> LayeredFileSystem::list_directory(const std::string& path) {
+FilenameSet LayeredFileSystem::list_directory(const std::string& path) const {
 	std::set<std::string> results;
 	FilenameSet files;
 	// Check home system first
@@ -83,7 +81,7 @@ std::set<std::string> LayeredFileSystem::list_directory(const std::string& path)
 /**
  * Returns true if the file can be found in at least one of the sub-filesystems
  */
-bool LayeredFileSystem::file_exists(const std::string& path) {
+bool LayeredFileSystem::file_exists(const std::string& path) const {
 	if (home_ && home_->file_exists(path))
 		return true;
 	for (auto it = filesystems_.rbegin(); it != filesystems_.rend(); ++it)

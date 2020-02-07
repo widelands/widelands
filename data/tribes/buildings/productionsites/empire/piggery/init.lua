@@ -53,11 +53,11 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start raising pigs because ...
          descname = _"raising pigs",
          actions = {
-            "sleep=25000",
             "return=skipped unless economy needs meat",
             "consume=water wheat",
-            "playsound=sound/farm farm_animal 180",
-            "animate=working 30000",
+            "sleep=10000",
+            "playsound=sound/farm/farm_animal 180",
+            "animate=working 20000",
             "produce=meat"
          }
       },

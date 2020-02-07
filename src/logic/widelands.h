@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2018 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,7 +63,7 @@ using TeamNumber = uint8_t;
  */
 using DescriptionIndex = uint8_t;
 
-constexpr uint8_t INVALID_INDEX = std::numeric_limits<uint8_t>::max();
+constexpr DescriptionIndex INVALID_INDEX = std::numeric_limits<uint8_t>::max();
 constexpr DescriptionIndex kInvalidWare = INVALID_INDEX - 1;
 constexpr DescriptionIndex kNoResource = INVALID_INDEX - 1;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,13 +33,15 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 	switch (id) {
 	case QueueCommandTypes::kBuild:
 		return *new CmdBuild();
-	case QueueCommandTypes::kFlag:
+	case QueueCommandTypes::kBuildFlag:
 		return *new CmdBuildFlag();
 	case QueueCommandTypes::kBuildRoad:
 		return *new CmdBuildRoad();
+	case QueueCommandTypes::kBuildWaterway:
+		return *new CmdBuildWaterway();
 	case QueueCommandTypes::kFlagAction:
 		return *new CmdFlagAction();
-	case QueueCommandTypes::kStopBuilding:
+	case QueueCommandTypes::kStartStopBuilding:
 		return *new CmdStartStopBuilding();
 	case QueueCommandTypes::kEnhanceBuilding:
 		return *new CmdEnhanceBuilding();
@@ -79,17 +81,17 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 		return *new CmdMilitarySiteSetSoldierPreference();
 	case QueueCommandTypes::kProposeTrade:
 		return *new CmdProposeTrade();
-	case QueueCommandTypes::kSinkShip:
+	case QueueCommandTypes::kShipSink:
 		return *new CmdShipSink();
 	case QueueCommandTypes::kShipCancelExpedition:
 		return *new CmdShipCancelExpedition();
-	case QueueCommandTypes::kPortStartExpedition:
+	case QueueCommandTypes::kStartOrCancelExpedition:
 		return *new CmdStartOrCancelExpedition();
 	case QueueCommandTypes::kShipConstructPort:
 		return *new CmdShipConstructPort();
-	case QueueCommandTypes::kShipScout:
+	case QueueCommandTypes::kShipScoutDirection:
 		return *new CmdShipScoutDirection();
-	case QueueCommandTypes::kShipExplore:
+	case QueueCommandTypes::kShipExploreIsland:
 		return *new CmdShipExploreIsland();
 	case QueueCommandTypes::kDestroyMapObject:
 		return *new CmdDestroyMapObject();
@@ -115,4 +117,4 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 	}
 	NEVER_HERE();
 }
-}
+}  // namespace Widelands

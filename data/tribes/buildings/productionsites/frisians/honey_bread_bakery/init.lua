@@ -13,30 +13,41 @@ tribes:new_productionsite_type {
       brick = 3,
       log = 3,
       granite = 1,
-      thatch_reed = 1
+      reed = 1
    },
    return_on_dismantle_on_enhanced = {
       brick = 2,
       granite = 1,
       log = 1,
-      thatch_reed = 2
+      reed = 2
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 94},
-         fps = 10,
+         directory = dirname,
+         basename = "idle",
+         hotspot = {50, 82},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 94},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "working",
+         hotspot = {50, 82},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
       unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 80},
-      },
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {50, 70}
+      }
    },
 
    aihints = {},
@@ -63,18 +74,30 @@ tribes:new_productionsite_type {
          actions = {
             "call=bake_honey",
             "call=bake_normal",
-            "call=bake_honey",
+            "call=bake_honey_2",
             "return=no_stats"
          }
       },
+      -- 2 identical programs for honey bread to prevent unnecessary skipping penalty
       bake_honey = {
          -- TRANSLATORS: Completed/Skipped/Did not start baking honey bread because ...
          descname = _"baking honey bread",
          actions = {
             "return=skipped unless economy needs honey_bread or workers need experience",
             "consume=barley water honey",
-            "sleep=35000",
-            "animate=working 35000",
+            "sleep=20000",
+            "animate=working 25000",
+            "produce=honey_bread"
+         }
+      },
+      bake_honey_2 = {
+         -- TRANSLATORS: Completed/Skipped/Did not start baking honey bread because ...
+         descname = _"baking honey bread",
+         actions = {
+            "return=skipped unless economy needs honey_bread or workers need experience",
+            "consume=barley water honey",
+            "sleep=20000",
+            "animate=working 25000",
             "produce=honey_bread"
          }
       },

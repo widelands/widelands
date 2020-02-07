@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,9 +31,6 @@
 #include "random/random.h"
 #include "scripting/logic.h"
 
-namespace UI {
-struct ProgressWindow;
-}
 struct ComputerPlayer;
 class InteractivePlayer;
 struct GameSettings;
@@ -46,6 +43,7 @@ constexpr uint32_t kStatisticsSampleTime = 30000;
 // See forester_cache_
 constexpr int16_t kInvalidForesterEntry = -1;
 
+class ConstructionSite;
 struct Flag;
 struct Path;
 struct PlayerImmovable;
@@ -56,11 +54,61 @@ struct Ship;
 struct PlayerEndStatus;
 class TrainingSite;
 class MilitarySite;
+enum class StockPolicy;
 
 enum {
 	gs_notrunning = 0,  // game is being prepared
 	gs_running,         // game was fully prepared at some point and is now in-game
 	gs_ending
+};
+
+// The entry types that are written to the syncstream
+// The IDs are a number in the higher 4 bits and the length in bytes in the lower 4 bits
+// Keep this synchronized with utils/syncstream/syncexcerpt-to-text.py
+enum SyncEntry : uint8_t {
+	// Used in:
+	// game.cc Game::report_desync()
+	// Parameters:
+	// s32 id of desynced user, -1 when written on client
+	kDesync = 0x14,
+	// map_object.cc CmdDestroyMapObject::execute()
+	// u32 object serial
+	kDestroyObject = 0x24,
+	// economy.cc Economy::process_requests()
+	// u8 request type
+	// u8 request index
+	// u32 target serial
+	kProcessRequests = 0x36,
+	// economy.cc Economy::handle_active_supplies()
+	// u32 assignments size
+	kHandleActiveSupplies = 0x44,
+	// request.cc Request::start_transfer()
+	// u32 target serial
+	// u32 source(?) serial
+	kStartTransfer = 0x58,
+	// cmd_queue.cc CmdQueue::run_queue()
+	// u32 duetime
+	// u32 command id
+	kRunQueue = 0x68,
+	// game.h Game::logic_rand_seed()
+	// u32 random seed
+	kRandomSeed = 0x74,
+	// game.cc Game::logic_rand()
+	// u32 random value
+	kRandom = 0x84,
+	// map_object.cc CmdAct::execute()
+	// u32 object serial
+	// u8 object type (see map_object.h MapObjectType)
+	kCmdAct = 0x95,
+	// battle.cc Battle::Battle()
+	// u32 first soldier serial
+	// u32 second soldier serial
+	kBattle = 0xA8,
+	// bob.cc Bob::set_position()
+	// u32 bob serial
+	// s16 position x
+	// s16 position y
+	kBobSetPosition = 0xB8
 };
 
 class Player;
@@ -125,12 +173,12 @@ public:
 	void set_write_replay(bool wr);
 	void set_write_syncstream(bool wr);
 	void save_syncstream(bool save);
-	void init_newgame(UI::ProgressWindow* loader_ui, const GameSettings&);
-	void init_savegame(UI::ProgressWindow* loader_ui, const GameSettings&);
+	void init_newgame(const GameSettings&);
+	void init_savegame(const GameSettings&);
+
 	enum StartGameType { NewSPScenario, NewNonScenario, Loaded, NewMPScenario };
 
-	bool run(UI::ProgressWindow* loader_ui,
-	         StartGameType,
+	bool run(StartGameType,
 	         const std::string& script_to_run,
 	         bool replay,
 	         const std::string& prefix_for_replays);
@@ -187,20 +235,25 @@ public:
 
 	void logic_rand_seed(uint32_t const seed) {
 		rng().seed(seed);
+		syncstream().unsigned_8(SyncEntry::kRandomSeed);
+		syncstream().unsigned_32(seed);
 	}
 
 	StreamWrite& syncstream();
+	void report_sync_request();
+	void report_desync(int32_t playernumber);
 	Md5Checksum get_sync_hash() const;
 
 	void enqueue_command(Command* const);
 
-	void send_player_command(Widelands::PlayerCommand&);
+	void send_player_command(Widelands::PlayerCommand*);
 
 	void send_player_bulldoze(PlayerImmovable&, bool recurse = false);
 	void send_player_dismantle(PlayerImmovable&);
 	void send_player_build(int32_t, const Coords&, DescriptionIndex);
 	void send_player_build_flag(int32_t, const Coords&);
 	void send_player_build_road(int32_t, Path&);
+	void send_player_build_waterway(int32_t, Path&);
 	void send_player_flagaction(Flag&);
 	void send_player_start_stop_building(Building&);
 	void send_player_militarysite_set_soldier_preference(Building&, SoldierPreference preference);
@@ -208,18 +261,15 @@ public:
 
 	void send_player_enhance_building(Building&, DescriptionIndex);
 	void send_player_evict_worker(Worker&);
-	void send_player_set_ware_priority(PlayerImmovable&,
-	                                   int32_t type,
-	                                   DescriptionIndex index,
-	                                   int32_t prio);
-	void send_player_set_input_max_fill(PlayerImmovable&,
-	                                    DescriptionIndex index,
-	                                    WareWorker type,
-	                                    uint32_t);
+	void send_player_set_stock_policy(Building&, WareWorker, DescriptionIndex, StockPolicy);
+	void send_player_set_ware_priority(
+	   PlayerImmovable&, int32_t type, DescriptionIndex index, int32_t prio, bool is_cs = false);
+	void send_player_set_input_max_fill(
+	   PlayerImmovable&, DescriptionIndex index, WareWorker type, uint32_t, bool is_cs = false);
 	void send_player_change_training_options(TrainingSite&, TrainingAttribute, int32_t);
 	void send_player_drop_soldier(Building&, int32_t);
 	void send_player_change_soldier_capacity(Building&, int32_t);
-	void send_player_enemyflagaction(const Flag&, PlayerNumber, uint32_t count);
+	void send_player_enemyflagaction(const Flag&, PlayerNumber, const std::vector<Serial>&);
 
 	void send_player_ship_scouting_direction(Ship&, WalkingDir);
 	void send_player_ship_construct_port(Ship&, Coords);
@@ -279,7 +329,8 @@ private:
 		     target_(target),
 		     counter_(0),
 		     next_diskspacecheck_(0),
-		     syncstreamsave_(false) {
+		     syncstreamsave_(false),
+		     current_excerpt_id_(0) {
 		}
 
 		~SyncWrapper() override;
@@ -304,6 +355,17 @@ private:
 		std::unique_ptr<StreamWrite> dump_;
 		std::string dumpfname_;
 		bool syncstreamsave_;
+		// Use a cyclic buffer for storing parts of the syncstream
+		// Currently used buffer
+		size_t current_excerpt_id_;
+		// (Arbitrary) count of buffers
+		// Syncreports seem to be requested from the network clients every game second so this
+		// buffer should be big enough to store the last 32 seconds of the game actions leading
+		// up to the desync
+		static constexpr size_t kExcerptSize = 32;
+		// Array of byte buffers
+		// std::string is used as a binary buffer here
+		std::string excerpts_buffer_[kExcerptSize];
 	} syncwrapper_;
 
 	GameController* ctrl_;
@@ -347,9 +409,6 @@ inline Coords Game::random_location(Coords location, uint8_t radius) {
 	location.y += logic_rand() % s - radius;
 	return location;
 }
-
-// Returns a value between [0., 1].
-double logic_rand_as_double(Game* game);
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_GAME_H

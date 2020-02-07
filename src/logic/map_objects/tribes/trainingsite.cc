@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,14 +42,15 @@ namespace Widelands {
 const uint32_t TrainingSite::training_state_multiplier_ = 12;
 
 /**
-  * The contents of 'table' are documented in
-  * /data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua
-  */
+ * The contents of 'table' are documented in
+ * /data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua
+ */
 TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
                                      const std::string& msgctxt,
                                      const LuaTable& table,
-                                     EditorGameBase& egbase)
-   : ProductionSiteDescr(init_descname, msgctxt, MapObjectType::TRAININGSITE, table, egbase),
+                                     Tribes& tribes,
+                                     const World& world)
+   : ProductionSiteDescr(init_descname, msgctxt, MapObjectType::TRAININGSITE, table, tribes, world),
      num_soldiers_(table.get_int("soldier_capacity")),
      max_stall_(table.get_int("trainer_patience")),
 
@@ -270,7 +271,7 @@ TrainingSite::TrainingSite(const TrainingSiteDescr& d)
      soldier_request_(nullptr),
      capacity_(descr().get_max_number_of_soldiers()),
      build_heroes_(false),
-     result_(Failed) {
+     result_(ProgramResult::kFailed) {
 	set_soldier_control(&soldier_control_);
 
 	// Initialize this in the constructor so that loading code may
@@ -322,10 +323,10 @@ bool TrainingSite::init(EditorGameBase& egbase) {
  * \note the worker (but not the soldiers) is dealt with in the
  * PlayerImmovable code.
  */
-void TrainingSite::set_economy(Economy* e) {
-	ProductionSite::set_economy(e);
+void TrainingSite::set_economy(Economy* e, WareWorker type) {
+	ProductionSite::set_economy(e, type);
 
-	if (soldier_request_)
+	if (soldier_request_ && type == soldier_request_->get_type())
 		soldier_request_->set_economy(e);
 }
 
@@ -524,6 +525,14 @@ void TrainingSite::drop_stalled_soldiers(Game&) {
 	}
 }
 
+const BuildingSettings* TrainingSite::create_building_settings() const {
+	TrainingsiteSettings* settings = new TrainingsiteSettings(descr());
+	settings->apply(*ProductionSite::create_building_settings());
+	settings->desired_capacity =
+	   std::min(settings->max_capacity, soldier_control_.soldier_capacity());
+	return settings;
+}
+
 /**
  * In addition to advancing the program, update soldier status.
  */
@@ -543,7 +552,7 @@ void TrainingSite::program_end(Game& game, ProgramResult const result) {
 	bool leftover_soldiers_check = true;
 
 	if (current_upgrade_) {
-		if (result_ == Completed) {
+		if (result_ == ProgramResult::kCompleted) {
 			drop_unupgradable_soldiers(game);
 			leftover_soldiers_check = false;
 			current_upgrade_->lastsuccess = true;
@@ -752,4 +761,4 @@ void TrainingSite::training_done() {
 		}
 	}
 }
-}
+}  // namespace Widelands

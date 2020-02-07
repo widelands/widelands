@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -90,7 +90,7 @@ void MapBuildingPacket::read(FileSystem& fs,
 							if (building_type == kTypeConstructionSite) {
 								building = &egbase.warp_constructionsite(c, p, index, true);
 							} else if (building_type == kTypeDismantleSite) {
-								Building::FormerBuildings formers = {index};
+								FormerBuildings formers = {{index, ""}};
 								building = &egbase.warp_dismantlesite(c, p, true, formers);
 							} else {
 								building = &egbase.warp_building(c, p, index);
@@ -219,4 +219,4 @@ void MapBuildingPacket::read_priorities(Building& building, FileRead& fr) {
 		}
 	}
 }
-}
+}  // namespace Widelands

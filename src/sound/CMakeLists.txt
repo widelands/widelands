@@ -5,8 +5,14 @@ wl_library(note_sound
   DEPENDS
     logic_widelands_geometry
     notifications
+    sound_constants
 )
 
+wl_library(sound_constants
+  SRCS
+    constants.cc
+    constants.h
+)
 
 wl_library(sound
   SRCS
@@ -25,6 +31,8 @@ wl_library(sound
     helper
     io_fileread
     io_filesystem
-    profile
+    logic_exceptions
     random
+    sound_constants
+    widelands_options
 )

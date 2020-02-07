@@ -18,7 +18,6 @@ wl_library(io_filesystem
     base_log
     base_macros
     graphic_text_layout
-    io_fileread
     io_stream
     third_party_minizip
 )

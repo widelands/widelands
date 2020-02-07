@@ -50,9 +50,9 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start producing coal because ...
          descname = _"producing coal",
          actions = {
-            "sleep=30000",
             "return=skipped unless economy needs coal",
             "consume=log:6",
+            "sleep=30000",
             "animate=working 90000", -- Charcoal fires will burn for some days in real life
             "produce=coal"
          }

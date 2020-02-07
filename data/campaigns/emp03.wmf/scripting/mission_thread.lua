@@ -20,14 +20,12 @@ function explore_sea()
    end
 
    campaign_message_box(amalea_12)
-   run(artifacts)
 end
 
 -- Check for control of all pieces of Neptune's shrine (artifacts)
 function artifacts()
    -- Objective will be triggered if 50+ buildings are built
-   local all_building_types = p1.tribe.buildings
-   while count_buildings(p1, all_building_types) < 50 do
+   while count_buildings(p1) < 50 do
       sleep(4000)
    end
    campaign_message_box(saledus_8)
@@ -99,7 +97,7 @@ function stonemason_and_marble_columns()
    local objective = add_campaign_objective(obj_lower_marble_column_demand)
 
    --- Check the headquarters' flag's economy
-   while sf.brn.immovable.economy:ware_target_quantity("marble_column") ~= 4 do
+   while sf.brn.immovable.ware_economy:target_quantity("marble_column") ~= 4 do
       sleep(2434)
    end
    sleep(4000)
@@ -251,6 +249,7 @@ function expedition()
    objective = add_campaign_objective(obj_conquer_all)
    run(explore_sea)
    run(soldiers)
+   run(artifacts)
 
    while not p2.defeated do sleep(2342) end
    objective.done = true
@@ -265,7 +264,7 @@ function expedition()
    sleep(25000)
    campaign_message_box(diary_page_5)
 
-   p1:reveal_scenario("empiretut03")
+   p1:mark_scenario_as_solved("emp03.wmf")
 end
 
 -- After discovery of Barbarian ruins, we should hurry to build a full training capability
@@ -281,12 +280,6 @@ function soldiers()
    campaign_message_box(saledus_12)
 
    -- If we don't have enough training sites yet, add a message and objective to complete them.
-   local training = p1:get_buildings {
-      "empire_trainingcamp",
-      "empire_barracks",
-      "empire_arena",
-      "empire_colosseum"
-   }
    if not check_trainingsites() then
       campaign_message_box(saledus_11, 3000)
       local objective = add_campaign_objective(obj_training)
