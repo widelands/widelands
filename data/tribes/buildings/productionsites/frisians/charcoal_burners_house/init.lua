@@ -78,7 +78,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start making a charcoal stack because ...
          descname = _"making a charcoal stack",
          actions = {
-            "return=skipped unless economy needs coal",
+            "return=skipped when economy needs log",
             "return=failed unless site has log:3",
             "callworker=find_pond",
             "consume=log:3",
