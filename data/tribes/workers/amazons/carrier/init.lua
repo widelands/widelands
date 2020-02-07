@@ -3,7 +3,6 @@ dirname = path.dirname (__file__)
 animations = {}
 add_animation(animations, "idle", dirname, "idle", {17, 18}, 10)
 add_animation(animations, "fetch_water", dirname, "idle", {17, 18}, 10)
-add_directional_animation(animations, "walk", dirname, "walk", {10, 23}, 15)
 
 tribes:new_carrier_type {
    msgctxt = "amazons_worker",
@@ -26,15 +25,25 @@ tribes:new_carrier_type {
       }
    },
 
-   ware_hotspot = {-1, 25},
+   ware_hotspot = {0, 31},
    animations = animations,
    spritesheets = {
+      walk = {
+         directory = dirname,
+         basename = "walk",
+         directional = true,
+         hotspot = {18, 31},
+         fps = 15,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      },
       walkload = {
          directory = dirname,
          basename = "walkload",
          directional = true,
-         hotspot = {21, 27},
-         fps = 10,
+         hotspot = {19, 33},
+         fps = 15,
          frames = 30,
          columns = 6,
          rows = 5
