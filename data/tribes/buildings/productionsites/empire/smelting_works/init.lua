@@ -60,14 +60,14 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=smelt_iron_1",
+            "call=smelt_iron",
             "call=smelt_gold",
             "call=smelt_iron_2",
             "return=no_stats"
          }
       },
       -- 2 identical programs for iron to prevent unnecessary skipping penalty
-      smelt_iron_1 = {
+      smelt_iron = {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
          descname = _"smelting iron",
          actions = {
