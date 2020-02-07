@@ -72,14 +72,14 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=bake_honey_1",
+            "call=bake_honey",
             "call=bake_normal",
             "call=bake_honey_2",
             "return=no_stats"
          }
       },
       -- 2 identical programs for honey bread to prevent unnecessary skipping penalty
-      bake_honey_1 = {
+      bake_honey = {
          -- TRANSLATORS: Completed/Skipped/Did not start baking honey bread because ...
          descname = _"baking honey bread",
          actions = {
