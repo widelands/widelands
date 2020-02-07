@@ -57,7 +57,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=smoke_fish_1",
+            "call=smoke_fish",
             "call=smoke_meat",
             "call=smoke_fish_2",
             "return=no_stats"
@@ -76,7 +76,7 @@ tribes:new_productionsite_type {
          }
       },
       -- 2 identical programs for fish to prevent unnecessary skipping penalty
-      smoke_fish_1 = {
+      smoke_fish = {
          -- TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
          descname = _"smoking fish",
          actions = {
