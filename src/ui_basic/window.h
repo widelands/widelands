@@ -131,7 +131,7 @@ private:
 	Panel* fastclick_panel_;
 
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
-		graphic_resolution_changed_subscriber_;
+	   graphic_resolution_changed_subscriber_;
 };
 }  // namespace UI
 
