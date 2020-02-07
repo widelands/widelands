@@ -44,6 +44,9 @@ public:
 	/// Looks up the new name for the 'ship'.
 	const std::string& lookup_ship(const std::string& ship) const;
 
+	/// Looks up the new name for the 'program'.
+	const std::string& lookup_program(const std::string& program) const;
+
 private:
 	const std::string& lookup_entry(const std::string& entry,
 	                                const std::map<std::string, std::string>& table) const;
@@ -54,6 +57,7 @@ private:
 	const std::map<std::string, std::string> immovables_;
 	const std::map<std::string, std::string> buildings_;
 	const std::map<std::string, std::string> ships_;
+	const std::map<std::string, std::string> programs_;
 
 	DISALLOW_COPY_AND_ASSIGN(TribesLegacyLookupTable);
 };
