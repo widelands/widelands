@@ -61,7 +61,7 @@ private:
 	// Main vertical container for the UI elements
 	UI::Box main_box_;
 
-	// Top row with button for toggling map names/ filenames
+	// Top row with button for toggling map names/filenames
 	UI::Box show_mapnames_box_;
 	UI::Button show_mapnames_;
 
