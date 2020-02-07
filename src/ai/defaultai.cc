@@ -734,7 +734,6 @@ void DefaultAI::late_initialization() {
 				}
 				// Identify iron mines based on output
 				if (bo.ware_outputs[0] == tribe_->ironore()) {
-					bo.set_is(BuildingAttribute::kIronMine);
 					mines_per_type[bo.mines].is_critical = true;
 					mine_fields_stat.add_critical_ore(bo.mines);
 				}
@@ -745,10 +744,6 @@ void DefaultAI::late_initialization() {
 			}
 			if (bh.supports_seafaring()) {
 				bo.set_is(BuildingAttribute::kSupportsSeafaring);
-			}
-			// Identify refined log producer
-			if (bo.ware_outputs.size() == 1 && bo.ware_outputs[0] == tribe_->refinedlog()) {
-				bo.set_is(BuildingAttribute::kLogRefiner);
 			}
 
 			// now we find out if the upgrade of the building is a full substitution
@@ -901,11 +896,6 @@ void DefaultAI::late_initialization() {
 		                 "This is the building that produces the tribe's 'soldier' worker.",
 		                 tribe_->name().c_str());
 	}
-	if (count_buildings_with_attribute(BuildingAttribute::kLogRefiner) != 1) {
-		throw wexception("The AI needs the tribe '%s' to define 1 type of log refiner's building. "
-		                 "This is the building that produces the tribe's 'refinedlog' ware.",
-		                 tribe_->name().c_str());
-	}
 	if (count_buildings_with_attribute(BuildingAttribute::kRanger) != 1) {
 		throw wexception(
 		   "The AI needs the tribe '%s' to define 1 type of ranger's building. "
@@ -939,13 +929,6 @@ void DefaultAI::late_initialization() {
 		   "This is the building that has 'collects_ware_from_map = \"fish\"' in its AI hints "
 		   "and doesn't have any ware inputs.",
 		   tribe_->name().c_str());
-	}
-	// If there will be a tribe with more than 3 mines of the same type, just increase the number
-	if (count_buildings_with_attribute(BuildingAttribute::kIronMine) < 1 ||
-	    count_buildings_with_attribute(BuildingAttribute::kIronMine) > 3) {
-		throw wexception("The AI needs the tribe '%s' to define 1-3 types of iron mines. "
-		                 "These are the buildings that produces the tribe's 'ironore' ware.",
-		                 tribe_->name().c_str());
 	}
 
 	// atlanteans they consider water as a resource
