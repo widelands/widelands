@@ -193,7 +193,7 @@ void TribeDescr::load_wares(const LuaTable& table, Tribes& tribes) {
 		   items_table->get_table(key)->array_entries<std::string>();
 		for (size_t rowindex = 0; rowindex < warenames.size(); ++rowindex) {
 			try {
-				DescriptionIndex wareindex = tribes_.safe_ware_index(warenames[rowindex]);
+				DescriptionIndex wareindex = tribes.load_ware(warenames[rowindex]);
 				if (has_ware(wareindex)) {
 					throw GameDataError(
 					   "Duplicate definition of ware '%s'", warenames[rowindex].c_str());
@@ -273,7 +273,7 @@ void TribeDescr::load_workers(const LuaTable& table, Tribes& tribes) {
 		std::vector<DescriptionIndex> column;
 		for (const std::string& workername :
 		     items_table->get_table(key)->array_entries<std::string>()) {
-			add_worker(workername, column);
+			add_worker(workername, column, tribes);
 		}
 		if (!column.empty()) {
 			workers_order_.push_back(column);
@@ -574,9 +574,9 @@ void TribeDescr::add_building(const std::string& buildingname, Tribes& tribes) {
 }
 
 void TribeDescr::add_worker(const std::string& workername,
-                            std::vector<DescriptionIndex>& workers_order_column) {
+                            std::vector<DescriptionIndex>& workers_order_column, Tribes& tribes) {
 	try {
-		DescriptionIndex workerindex = tribes_.safe_worker_index(workername);
+		DescriptionIndex workerindex = tribes.load_worker(workername);
 		if (has_worker(workerindex)) {
 			throw GameDataError("Duplicate definition of worker '%s'", workername.c_str());
 		}
@@ -592,8 +592,8 @@ void TribeDescr::add_worker(const std::string& workername,
 	}
 }
 
-void TribeDescr::add_worker(const std::string& workername) {
-	add_worker(workername, workers_order_.back());
+void TribeDescr::add_worker(const std::string& workername, Tribes& tribes) {
+	add_worker(workername, workers_order_.back(), tribes);
 }
 
 ToolbarImageset* TribeDescr::toolbar_image_set() const {
