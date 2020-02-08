@@ -3,8 +3,6 @@
 
 """Tool to rename files in all subdirectories in bulk."""
 
-# NOCOM rewrite for git
-
 from subprocess import call
 import os.path
 import subprocess
@@ -13,7 +11,7 @@ import sys
 
 def main():
     """Finds all files with the given old_name in basedir and
-    bzr moves all files that match the old_name to new_name."""
+    git moves all files that match the old_name to new_name."""
 
     print('Tool to rename all files for a widelands animation in bulk')
 
@@ -32,7 +30,7 @@ def main():
             if filename == source_name:
                 source_path = os.path.join(dirpath, source_name)
                 destination_path = os.path.join(dirpath, destination_name)
-                call(['bzr', 'mv', source_path, destination_path])
+                call(['git', 'mv', source_path, destination_path])
     return 0
 
 if __name__ == '__main__':
