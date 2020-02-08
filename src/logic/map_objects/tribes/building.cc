@@ -122,7 +122,7 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 		if (enh == name()) {
 			throw wexception("enhancement to same type");
 		}
-		DescriptionIndex const en_i = tribes_.building_index(enh);
+		DescriptionIndex const en_i = tribes.load_building(enh);
 		if (tribes_.building_exists(en_i)) {
 			enhancement_ = en_i;
 
