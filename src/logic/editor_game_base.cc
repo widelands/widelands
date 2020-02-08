@@ -270,20 +270,6 @@ void EditorGameBase::allocate_player_maps() {
 	}
 }
 
-/**
- * Load all graphics.
- * This function needs to be called once at startup when the graphics system is ready.
- * If the graphics system is to be replaced at runtime, the function must be called after that has
- * happened.
- */
-/* NOCOM
-void EditorGameBase::load_graphics() {
-   assert(tribes_);
-   assert(loader_ui_);
-   loader_ui_->step(_("Loading graphics"));
-   tribes_->load_graphics();
-} */
-
 UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::string& background) {
     assert(loader_ui_ == nullptr);
     loader_ui_.reset(new UI::ProgressWindow(background));

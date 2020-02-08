@@ -112,8 +112,6 @@ void MainMenuNewMap::clicked_create_map() {
 	                      list_.get_selected(), _("No Name"),
 	                      get_config_string("realname", pgettext("author_name", "Unknown")));
 
-	// NOCOM egbase.load_graphics();
-
 	map->recalc_whole_map(egbase);
 	parent.map_changed(EditorInteractive::MapWas::kReplaced);
 	egbase.remove_loader_ui();

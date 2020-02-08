@@ -553,7 +553,6 @@ bool Game::run(StartGameType const start_game_type,
 	}
 
 	sync_reset();
-	// NOCOM load_graphics();
 
 #ifdef _WIN32
 	//  Clear the event queue before starting game because we don't want

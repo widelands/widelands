@@ -128,9 +128,24 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 			throw GameDataError("Tribe has no %s roads.", road_type.c_str());
 		}
 	};
-	load_roads("normal", &normal_road_paths_);
-	load_roads("busy", &busy_road_paths_);
-	load_roads("waterway", &waterway_paths_);
+
+    // Add textures for roads/waterways.
+    std::vector<std::string> road_images;
+
+    load_roads("normal", &road_images);
+    for (const std::string& texture_path : road_images) {
+       road_textures_.add_normal_road_texture(g_gr->images().get(texture_path));
+    }
+
+    load_roads("busy", &road_images);
+    for (const std::string& texture_path : road_images) {
+       road_textures_.add_busy_road_texture(g_gr->images().get(texture_path));
+    }
+
+    load_roads("waterway", &road_images);
+    for (const std::string& texture_path : road_images) {
+       road_textures_.add_waterway_texture(g_gr->images().get(texture_path));
+    }
 
 	const auto load_bridge_if_present = [this](const LuaTable& animations_table,
 	                                           Animation::Type animation_type, std::string s_dir,
@@ -467,30 +482,6 @@ uint32_t TribeDescr::bridge_animation(uint8_t dir, bool busy) const {
 
 uint32_t TribeDescr::bridge_height() const {
 	return bridge_height_;
-}
-
-const std::vector<std::string>& TribeDescr::normal_road_paths() const {
-	return normal_road_paths_;
-}
-
-const std::vector<std::string>& TribeDescr::busy_road_paths() const {
-	return busy_road_paths_;
-}
-
-const std::vector<std::string>& TribeDescr::waterway_paths() const {
-	return waterway_paths_;
-}
-
-void TribeDescr::add_normal_road_texture(const Image* texture) {
-	road_textures_.add_normal_road_texture(texture);
-}
-
-void TribeDescr::add_busy_road_texture(const Image* texture) {
-	road_textures_.add_busy_road_texture(texture);
-}
-
-void TribeDescr::add_waterway_texture(const Image* texture) {
-	road_textures_.add_waterway_texture(texture);
 }
 
 const RoadTextures& TribeDescr::road_textures() const {

@@ -517,7 +517,6 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	log("\n");
 
 	gen.create_random_map();
-	// NOCOM egbase.load_graphics();
 
 	map->recalc_whole_map(egbase);
 	eia.map_changed(EditorInteractive::MapWas::kReplaced);

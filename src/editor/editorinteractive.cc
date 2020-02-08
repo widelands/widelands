@@ -467,8 +467,6 @@ void EditorInteractive::load(const std::string& filename) {
 	}
 
 	ml->load_map_complete(egbase(), Widelands::MapLoader::LoadType::kEditor);
-	// NOCOM egbase().postload();
-	// NOCOM egbase().load_graphics();
 	map_changed(MapWas::kReplaced);
 	if (!had_loader_id) {
 		// We created it, so we have to unset and delete it
@@ -905,7 +903,6 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 
 				loader_ui.step(_("Loading tribes"));
 				egbase.tribes();
-				// NOCOM egbase.load_graphics();
 				loader_ui.step(std::string());
 			} else {
 				loader_ui.step((boost::format(_("Loading map “%s”…")) % filename).str());

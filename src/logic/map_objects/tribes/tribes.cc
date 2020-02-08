@@ -397,22 +397,6 @@ void Tribes::add_tribe(const LuaTable& table, const World& world) {
 	tribe_objects_being_loaded_.erase(tribe_objects_being_loaded_.find(name));
 }
 
-/* NOCOM
-void Tribes::load_graphics() {
-   for (size_t tribeindex = 0; tribeindex < nrtribes(); ++tribeindex) {
-      TribeDescr* tribe = tribes_->get_mutable(tribeindex);
-      for (const std::string& texture_path : tribe->normal_road_paths()) {
-         tribe->add_normal_road_texture(g_gr->images().get(texture_path));
-      }
-      for (const std::string& texture_path : tribe->busy_road_paths()) {
-         tribe->add_busy_road_texture(g_gr->images().get(texture_path));
-      }
-      for (const std::string& texture_path : tribe->waterway_paths()) {
-         tribe->add_waterway_texture(g_gr->images().get(texture_path));
-      }
-   }
-} */
-
 void Tribes::load_object(const std::string& object_name) {
 	// Nothing to do if it's already loaded
 	if (loaded_tribe_objects_.count(object_name) == 1) {

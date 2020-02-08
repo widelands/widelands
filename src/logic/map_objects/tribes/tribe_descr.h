@@ -136,17 +136,6 @@ public:
 	// Bridge height in pixels at 1x scale, for drawing bobs walking over a bridge
 	uint32_t bridge_height() const;
 
-	// A vector of all texture images that can be used for drawing a
-	// (normal|busy) road or a waterway. The images are guaranteed to exist.
-	const std::vector<std::string>& normal_road_paths() const;
-	const std::vector<std::string>& busy_road_paths() const;
-	const std::vector<std::string>& waterway_paths() const;
-
-	// Add the corresponding texture for roads/waterways.
-	void add_normal_road_texture(const Image* texture);
-	void add_busy_road_texture(const Image* texture);
-	void add_waterway_texture(const Image* texture);
-
 	// The road textures used for drawing roads and waterways.
 	const RoadTextures& road_textures() const;
 
@@ -217,9 +206,9 @@ private:
 	BridgeAnimationIDs bridges_normal_;
 	BridgeAnimationIDs bridges_busy_;
 	uint32_t bridge_height_;
-	std::vector<std::string> normal_road_paths_;
-	std::vector<std::string> busy_road_paths_;
-	std::vector<std::string> waterway_paths_;
+
+    // A container of all texture images that can be used for drawing a
+	// (normal|busy) road or a waterway. The images are guaranteed to exist.
 	RoadTextures road_textures_;
 
 	std::vector<DescriptionIndex> buildings_;

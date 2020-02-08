@@ -100,9 +100,6 @@ public:
 	                                    const std::string& tribename) const;
 	void set_worker_type_has_demand_check(DescriptionIndex worker_index) const;
 
-	/// Load tribes' graphics
-	void load_graphics();
-
 	// ************************ Loading *************************
 
 	/// Define a scenario tribe directory, search it for 'register.lua' files and register their

@@ -114,7 +114,6 @@ public:
 
 	// loading stuff
 	void allocate_player_maps();
-	// NOCOM void load_graphics();
 
 	virtual void cleanup_for_load();
 
