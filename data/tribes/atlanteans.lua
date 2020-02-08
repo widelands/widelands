@@ -403,7 +403,6 @@ tribes:new_tribe {
    port = "atlanteans_port",
    ironore = "iron_ore",
    rawlog = "log",
-   refinedlog = "planks",
    granite = "granite",
 
    toolbar = {

@@ -377,6 +377,5 @@ tribes:new_tribe {
    port = "frisians_port",
    ironore = "iron_ore",
    rawlog = "log",
-   refinedlog = "brick",
    granite = "granite",
 }

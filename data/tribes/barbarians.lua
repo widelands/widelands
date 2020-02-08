@@ -329,6 +329,5 @@ tribes:new_tribe {
    port = "barbarians_port",
    ironore = "iron_ore",
    rawlog = "log",
-   refinedlog = "blackwood",
    granite = "granite",
 }
