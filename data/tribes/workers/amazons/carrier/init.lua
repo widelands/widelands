@@ -1,9 +1,5 @@
 dirname = path.dirname (__file__)
 
-animations = {}
-add_animation(animations, "idle", dirname, "idle", {17, 18}, 10)
-add_animation(animations, "fetch_water", dirname, "idle", {17, 18}, 10)
-
 tribes:new_carrier_type {
    msgctxt = "amazons_worker",
    name = "amazons_carrier",
@@ -26,13 +22,30 @@ tribes:new_carrier_type {
    },
 
    ware_hotspot = {0, 31},
-   animations = animations,
    spritesheets = {
+      idle = {
+         directory = dirname,
+         basename = "idle",
+         hotspot = {11, 29},
+         fps = 10,
+         frames = 80,
+         columns = 10,
+         rows = 8
+      },
+      fetch_water = {
+         directory = dirname,
+         basename = "fetch_water",
+         hotspot = {10, 22},
+         fps = 10,
+         frames = 10,
+         columns = 5,
+         rows = 2
+      },
       walk = {
          directory = dirname,
          basename = "walk",
          directional = true,
-         hotspot = {18, 31},
+         hotspot = {17, 28},
          fps = 15,
          frames = 30,
          columns = 6,
@@ -42,7 +55,7 @@ tribes:new_carrier_type {
          directory = dirname,
          basename = "walkload",
          directional = true,
-         hotspot = {19, 33},
+         hotspot = {17, 31},
          fps = 15,
          frames = 30,
          columns = 6,
