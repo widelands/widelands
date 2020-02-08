@@ -658,8 +658,7 @@ void GameHost::run() {
 	game.set_write_syncstream(get_config_bool("write_syncstreams", true));
 
 	try {
-		std::unique_ptr<UI::ProgressWindow> loader_ui;
-		loader_ui.reset(new UI::ProgressWindow());
+		UI::ProgressWindow& loader_ui = game.create_loader_ui();
 
 		std::vector<std::string> tipstext;
 		tipstext.push_back("general_game");
@@ -667,13 +666,12 @@ void GameHost::run() {
 		if (d->hp.has_players_tribe()) {
 			tipstext.push_back(d->hp.get_players_tribe());
 		}
-		std::unique_ptr<GameTips> tips(new GameTips(*loader_ui, tipstext));
+		std::unique_ptr<GameTips> tips(new GameTips(loader_ui, tipstext));
 
-		loader_ui->step(_("Preparing game"));
+		loader_ui.step(_("Preparing game"));
 
 		d->game = &game;
 		game.set_game_controller(this);
-		game.set_loader_ui(loader_ui.get());
 		InteractiveGameBase* igb;
 		uint8_t pn = d->settings.playernum + 1;
 		game.save_handler().set_autosave_filename(
@@ -720,7 +718,6 @@ void GameHost::run() {
 		                                                       Widelands::Game::NewNonScenario,
 		         "", false, "nethost");
 
-		game.set_loader_ui(nullptr);
 		// if this is an internet game, tell the metaserver that the game is done.
 		if (internet_) {
 			InternetGaming::ref().set_game_done();

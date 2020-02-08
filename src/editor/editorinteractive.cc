@@ -447,11 +447,10 @@ void EditorInteractive::load(const std::string& filename) {
 
 	UI::ProgressWindow* loader_ui = egbase().get_loader_ui();
 	// We already have a loader window if Widelands was started with --editor=mapname
-	const bool create_loader_ui = !loader_ui;
-	if (create_loader_ui) {
-		loader_ui = new UI::ProgressWindow("images/loadscreens/editor.jpg");
+    const bool had_loader_id = loader_ui != nullptr;
+	if (!had_loader_id) {
+		loader_ui = &egbase().create_loader_ui("images/loadscreens/editor.jpg");
 		GameTips editortips(*loader_ui, {"editor"});
-		egbase().set_loader_ui(loader_ui);
 	}
 
 	// Create the players. TODO(SirVer): this must be managed better
@@ -471,10 +470,9 @@ void EditorInteractive::load(const std::string& filename) {
 	// NOCOM egbase().postload();
 	// NOCOM egbase().load_graphics();
 	map_changed(MapWas::kReplaced);
-	if (create_loader_ui) {
+	if (!had_loader_id) {
 		// We created it, so we have to unset and delete it
-		egbase().set_loader_ui(nullptr);
-		delete loader_ui;
+		egbase().remove_loader_ui();
 	}
 }
 
@@ -891,9 +889,8 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	EditorInteractive& eia = *new EditorInteractive(egbase);
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
 	{
-		UI::ProgressWindow loader_ui("images/loadscreens/editor.jpg");
+        UI::ProgressWindow& loader_ui = egbase.create_loader_ui("images/loadscreens/editor.jpg");
 		GameTips editortips(loader_ui, {"editor"});
-		egbase.set_loader_ui(&loader_ui);
 
 		{
 			if (filename.empty()) {
@@ -915,8 +912,6 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 				eia.load(filename);
 			}
 		}
-
-		egbase.set_loader_ui(nullptr);
 
 		eia.start();
 

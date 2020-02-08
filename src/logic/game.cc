@@ -212,7 +212,7 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	if (!maploader)
 		throw wexception("could not load \"%s\"", mapname.c_str());
 	assert(!loader_ui_);
-	loader_ui_ = new UI::ProgressWindow();
+	create_loader_ui();
 
 	loader_ui_->step(_("Preloading map…"));
 	maploader->preload_map(true);
@@ -254,14 +254,12 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	set_game_controller(new SinglePlayerGameController(*this, true, 1));
 	try {
 		bool const result = run(NewSPScenario, script_to_run, false, "single_player");
-		delete loader_ui_;
-		loader_ui_ = nullptr;
+		remove_loader_ui();
 		delete ctrl_;
 		ctrl_ = nullptr;
 		return result;
 	} catch (...) {
-		delete loader_ui_;
-		loader_ui_ = nullptr;
+		remove_loader_ui();
 		delete ctrl_;
 		ctrl_ = nullptr;
 		throw;
@@ -392,7 +390,7 @@ void Game::init_savegame(const GameSettings& settings) {
 
 bool Game::run_load_game(const std::string& filename, const std::string& script_to_run) {
 	assert(!loader_ui_);
-	loader_ui_ = new UI::ProgressWindow();
+	create_loader_ui();
 	std::vector<std::string> tipstext;
 	tipstext.push_back("general_game");
 	tipstext.push_back("singleplayer");
@@ -426,14 +424,12 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 	set_game_controller(new SinglePlayerGameController(*this, true, player_nr));
 	try {
 		bool const result = run(Loaded, script_to_run, false, "single_player");
-		delete loader_ui_;
-		loader_ui_ = nullptr;
+		remove_loader_ui();
 		delete ctrl_;
 		ctrl_ = nullptr;
 		return result;
 	} catch (...) {
-		delete loader_ui_;
-		loader_ui_ = nullptr;
+		remove_loader_ui();
 		delete ctrl_;
 		ctrl_ = nullptr;
 		throw;

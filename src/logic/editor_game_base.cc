@@ -85,9 +85,6 @@ EditorGameBase::~EditorGameBase() {
 	if (g_sh != nullptr) {
 		g_sh->remove_fx_set(SoundType::kAmbient);
 	}
-	if (loader_ui_) {
-		delete loader_ui_;  // NOCOM crash
-	}
 }
 
 /**
@@ -287,10 +284,19 @@ void EditorGameBase::load_graphics() {
    tribes_->load_graphics();
 } */
 
-void EditorGameBase::set_loader_ui(UI::ProgressWindow* w) {
-	assert((w == nullptr) ^ (loader_ui_ == nullptr));
-	loader_ui_ = w;
+UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::string& background) {
+    assert(loader_ui_ == nullptr);
+    loader_ui_.reset(new UI::ProgressWindow(background));
+    return *loader_ui_.get();
 }
+void EditorGameBase::remove_loader_ui() {
+    assert(loader_ui_ != nullptr);
+    loader_ui_.reset(nullptr);
+}
+UI::ProgressWindow* EditorGameBase::get_loader_ui() {
+    return loader_ui_.get();
+}
+// NOCOM test all usages of loader_ui
 
 /**
  * Instantly create a building at the given x/y location. There is no build time.
@@ -482,8 +488,9 @@ Player* EditorGameBase::get_safe_player(PlayerNumber const n) {
  */
 void EditorGameBase::cleanup_for_load() {
 	auto set_progress_message = [this](std::string s) {
-		if (loader_ui_)
+        if (loader_ui_ != nullptr) {
 			loader_ui_->step(s);
+        }
 	};
 	set_progress_message(_("Cleaning up for loading: Map objects (1/3)"));
 	cleanup_objects();  /// Clean all the stuff up, so we can load.

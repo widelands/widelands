@@ -1353,8 +1353,7 @@ bool WLApplication::new_game() {
 			// the chat
 			game.set_ibase(new InteractivePlayer(game, get_config_section(), pn, false));
 			std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(game, true, pn));
-			UI::ProgressWindow loader_ui;
-			game.set_loader_ui(&loader_ui);
+			UI::ProgressWindow& loader_ui = game.create_loader_ui();
 			std::vector<std::string> tipstext;
 			tipstext.push_back("general_game");
 			tipstext.push_back("singleplayer");
@@ -1368,7 +1367,6 @@ bool WLApplication::new_game() {
 			game.set_game_controller(ctrl.get());
 			game.init_newgame(sp.settings());
 			game.run(Widelands::Game::NewNonScenario, "", false, "single_player");
-			game.set_loader_ui(nullptr);
 		} catch (const std::exception& e) {
 			log("Fatal exception: %s\n", e.what());
 			emergency_save(game);
@@ -1469,8 +1467,7 @@ void WLApplication::replay() {
 	}
 
 	try {
-		UI::ProgressWindow loader_ui;
-		game.set_loader_ui(&loader_ui);
+        UI::ProgressWindow& loader_ui = game.create_loader_ui();
 		std::vector<std::string> tipstext;
 		tipstext.push_back("general_game");
 		GameTips tips(loader_ui, tipstext);
@@ -1484,7 +1481,6 @@ void WLApplication::replay() {
 		game.save_handler().set_allow_saving(false);
 
 		game.run(Widelands::Game::Loaded, "", true, "replay");
-		game.set_loader_ui(nullptr);
 	} catch (const std::exception& e) {
 		log("Fatal Exception: %s\n", e.what());
 		emergency_save(game);
