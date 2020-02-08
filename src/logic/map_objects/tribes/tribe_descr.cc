@@ -221,7 +221,6 @@ TribeDescr::TribeDescr(const LuaTable& table,
 
 		ironore_ = add_special_ware(table.get_string("ironore"));
 		rawlog_ = add_special_ware(table.get_string("rawlog"));
-		refinedlog_ = add_special_ware(table.get_string("refinedlog"));
 		granite_ = add_special_ware(table.get_string("granite"));
 
 		if (table.has_key<std::string>("toolbar")) {
@@ -360,10 +359,6 @@ DescriptionIndex TribeDescr::ironore() const {
 DescriptionIndex TribeDescr::rawlog() const {
 	assert(tribes_.ware_exists(rawlog_));
 	return rawlog_;
-}
-DescriptionIndex TribeDescr::refinedlog() const {
-	assert(tribes_.ware_exists(refinedlog_));
-	return refinedlog_;
 }
 DescriptionIndex TribeDescr::granite() const {
 	assert(tribes_.ware_exists(granite_));

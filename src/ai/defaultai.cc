@@ -839,10 +839,10 @@ void DefaultAI::late_initialization() {
 			const MilitarySiteDescr& milit = dynamic_cast<const MilitarySiteDescr&>(bld);
 			for (const auto& temp_buildcosts : milit.buildcost()) {
 				// Below are non-critical wares (well, various types of wood)
-				if (temp_buildcosts.first == tribe_->rawlog() ||
-				    temp_buildcosts.first == tribe_->refinedlog())
-					continue;
-				bo.critical_building_material.push_back(temp_buildcosts.first);
+				if (!(temp_buildcosts.first == tribe_->rawlog() ||
+				      temp_buildcosts.first == tribe_->granite())) {
+					bo.critical_building_material.push_back(temp_buildcosts.first);
+				}
 			}
 			continue;
 		}
@@ -867,16 +867,14 @@ void DefaultAI::late_initialization() {
 				    tribe_->ware_index("smoked_fish") == temp_input.first) {
 					bo.substitute_inputs.insert(temp_input.first);
 				}
-
-				// Creating vector with critical material, to be used to discourage
-				// building of new sites if ware is lacking
-				for (const auto& temp_buildcosts : train.buildcost()) {
-					// building material except for trivial material
-					if (!(temp_buildcosts.first == tribe_->rawlog() ||
-					      temp_buildcosts.first == tribe_->refinedlog() ||
-					      temp_buildcosts.first == tribe_->granite())) {
-						bo.critical_building_material.push_back(temp_buildcosts.first);
-					}
+			}
+			// Creating vector with critical material, to be used to discourage
+			// building of new sites if ware is lacking
+			for (const auto& temp_buildcosts : train.buildcost()) {
+				// building material except for trivial material
+				if (!(temp_buildcosts.first == tribe_->rawlog() ||
+				      temp_buildcosts.first == tribe_->granite())) {
+					bo.critical_building_material.push_back(temp_buildcosts.first);
 				}
 			}
 			continue;
