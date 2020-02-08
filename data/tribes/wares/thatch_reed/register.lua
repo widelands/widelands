@@ -1,3 +1,0 @@
-return {
-   "thatch_reed"
-}
