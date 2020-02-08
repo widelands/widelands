@@ -37,7 +37,6 @@
 struct MainMenuLoadOrSaveMap : public UI::UniqueWindow {
 	MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	                      UI::UniqueWindow::Registry& registry,
-	                      int no_of_bottom_rows,
 	                      const std::string& name,
 	                      const std::string& title,
 	                      const std::string& basedir = kMapsDir);
@@ -47,33 +46,54 @@ protected:
 	void toggle_mapnames();
 	// Sets the current dir and updates labels.
 	virtual void set_current_directory(const std::string& filename) = 0;
+	void layout() override;
 	void fill_table();
 
 	bool compare_players(uint32_t, uint32_t);
 	bool compare_mapnames(uint32_t, uint32_t);
 	bool compare_size(uint32_t, uint32_t);
 
-	// UI coordinates and spacers
-	int32_t const padding_;  // Common padding between panels
-	int32_t const buth_;     // Button dimensions
-	int32_t const tablex_, tabley_, tablew_, tableh_;
-	int32_t const right_column_x_;
-	int32_t const butw_;  // Button dimensions
+	// Private variables first, because compiler would complain about initialization order otherwise
+private:
+	// Common padding between panels
+	int32_t const padding_;
 
+	// Main vertical container for the UI elements
+	UI::Box main_box_;
+
+	// Top row with button for toggling map names/filenames
+	UI::Box show_mapnames_box_;
+	UI::Button show_mapnames_;
+
+	// Big flexible panel in the middle for the table and map details
+	UI::Box table_and_details_box_;
+
+protected:
+	// Table of maps and its data
 	MapTable table_;
 	std::vector<MapData> maps_data_;
+
+	// Side panel with details about the currently selected map
+	UI::Box map_details_box_;
 	MapDetails map_details_;
 
+	// UI row below the table that can be filled by subclasses
+	UI::Box table_footer_box_;
+
+	// Shows name of current directory
 	UI::Textarea directory_info_;
+
+	// Bottom row with OK/Cancel buttons
+	UI::Box button_box_;
 	UI::Button ok_, cancel_;
 
+	// Settings data
 	const std::string basedir_;
 	std::string curdir_;
 
 	bool has_translated_mapname_;
 	UI::Checkbox* cb_dont_localize_mapnames_;
-	bool showing_mapames_;
-	UI::Button* show_mapnames_;
+	bool showing_mapnames_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_MAIN_MENU_LOAD_OR_SAVE_MAP_H
