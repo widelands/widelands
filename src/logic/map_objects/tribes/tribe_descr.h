@@ -231,7 +231,6 @@ private:
 	// The wares that are used by construction sites
 	std::set<DescriptionIndex> construction_materials_;
 	// Special units. Some of them are used by the engine, some are only used by the AI.
-	DescriptionIndex barracks_;    // The barracks for this tribe NOCOM check if needed
 	DescriptionIndex builder_;     // The builder for this tribe
 	DescriptionIndex carrier_;     // The basic carrier for this tribe
 	DescriptionIndex carrier2_;    // Additional carrier for busy roads

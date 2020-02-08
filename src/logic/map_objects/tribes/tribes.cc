@@ -52,15 +52,6 @@ Tribes::Tribes(LuaInterface* lua)
 	register_directory("tribes", g_fs, false);
 }
 
-/* NOCOM replace
-void Tribes::add_ferry_type(const LuaTable& table) {
-i18n::Textdomain td("tribes");
-workers_->add(new FerryDescr(
- pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
- table, *this));
-}
-*/
-
 Tribes::~Tribes() {
 }
 
@@ -315,9 +306,7 @@ void Tribes::register_scenario_object(FileSystem* filesystem,
 	registered_scenario_objects_.insert(std::make_pair(name, "map:" + script_path));
 }
 
-void Tribes::add_tribe_object_type(const LuaTable& table,
-                                   EditorGameBase& egbase,
-                                   MapObjectType type) {
+void Tribes::add_tribe_object_type(const LuaTable& table, const World& world, MapObjectType type) {
 	i18n::Textdomain td("tribes");
 	const std::string& object_name = table.get_string("name");
 	const std::string& msgctxt = table.get_string("msgctxt");
@@ -338,7 +327,9 @@ void Tribes::add_tribe_object_type(const LuaTable& table,
 	case MapObjectType::DISMANTLESITE:
 		buildings_->add(new DismantleSiteDescr(object_descname, table, *this));
 		break;
-		// NOCOM ferry
+	case MapObjectType::FERRY:
+		workers_->add(new FerryDescr(object_descname, table, *this));
+		break;
 	case MapObjectType::IMMOVABLE:
 		immovables_->add(new ImmovableDescr(object_descname, table, *this));
 		break;
@@ -349,8 +340,7 @@ void Tribes::add_tribe_object_type(const LuaTable& table,
 		buildings_->add(new MilitarySiteDescr(object_descname, table, *this));
 		break;
 	case MapObjectType::PRODUCTIONSITE:
-		buildings_->add(
-		   new ProductionSiteDescr(object_descname, msgctxt, table, *this, egbase.world()));
+		buildings_->add(new ProductionSiteDescr(object_descname, msgctxt, table, *this, world));
 		break;
 	case MapObjectType::SHIP:
 		ships_->add(new ShipDescr(object_descname, table));
@@ -359,8 +349,7 @@ void Tribes::add_tribe_object_type(const LuaTable& table,
 		workers_->add(new SoldierDescr(object_descname, table, *this));
 		break;
 	case MapObjectType::TRAININGSITE:
-		buildings_->add(
-		   new TrainingSiteDescr(object_descname, msgctxt, table, *this, egbase.world()));
+		buildings_->add(new TrainingSiteDescr(object_descname, msgctxt, table, *this, world));
 		break;
 	case MapObjectType::WARE:
 		wares_->add(new WareDescr(object_descname, table));

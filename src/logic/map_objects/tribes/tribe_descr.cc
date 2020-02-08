@@ -74,8 +74,6 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 		load_frontiers_flags_roads(table);
 		log("%ums\n", timer.ms_since_last_query());
 
-		// NOCOM load_roads("waterway", &waterway_paths_);
-
 		log("┃    Ships: ");
 		load_ships(table, tribes);
 		log("%ums\n", timer.ms_since_last_query());
@@ -103,60 +101,6 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 		finalize_loading(tribes);
 		log("%ums\n", timer.ms_since_last_query());
 
-		/* NOCOM
-
-		        const auto load_bridge_if_present = [this](const LuaTable& animations_table,
-		                                                   Animation::Type animation_type, std::string
-		 s_dir, std::string s_type, uint32_t* id) { if (animations_table.has_key("bridge_" + s_type +
-		 "_" + s_dir)) { std::unique_ptr<LuaTable> animation_table =
-		                   animations_table.get_table("bridge_" + s_type + "_" + s_dir);
-		                *id = g_gr->animations().load(name_ + std::string("_bridge_" + s_type + "_" +
-		 s_dir), *animation_table, animation_table->get_string("basename"), animation_type);
-		            }
-		        };
-		        // Frontier and flag animations can be a mix of file and spritesheet animations
-		        const auto load_animations = [this, load_bridge_if_present](const LuaTable&
-		 animations_table, Animation::Type animation_type) { if (animations_table.has_key("frontier"))
-		 { std::unique_ptr<LuaTable> animation_table = animations_table.get_table("frontier");
-		                frontier_animation_id_ =
-		                   g_gr->animations().load(name_ + std::string("_frontier"), *animation_table,
-		                                           animation_table->get_string("basename"),
-		 animation_type);
-		            }
-		            if (animations_table.has_key("flag")) {
-		                std::unique_ptr<LuaTable> animation_table =
-		 animations_table.get_table("flag"); flag_animation_id_ = g_gr->animations().load(name_ +
-		 std::string("_flag"), *animation_table, animation_table->get_string("basename"),
-		 animation_type);
-		            }
-		            load_bridge_if_present(
-		               animations_table, animation_type, "e", "normal", &bridges_normal_.e);
-		            load_bridge_if_present(
-		               animations_table, animation_type, "se", "normal", &bridges_normal_.se);
-		            load_bridge_if_present(
-		               animations_table, animation_type, "sw", "normal", &bridges_normal_.sw);
-		            load_bridge_if_present(animations_table, animation_type, "e", "busy",
-		 &bridges_busy_.e); load_bridge_if_present(animations_table, animation_type, "se", "busy",
-		 &bridges_busy_.se); load_bridge_if_present(animations_table, animation_type, "sw", "busy",
-		 &bridges_busy_.sw);
-		        };
-
-		        if (table.has_key("animations")) {
-		            load_animations(*table.get_table("animations"), Animation::Type::kFiles);
-		        }
-		        if (table.has_key("spritesheets")) {
-		            load_animations(*table.get_table("spritesheets"), Animation::Type::kSpritesheet);
-		        }
-
-		      port_ = add_special_building(table.get_string("port"), tribes);
-
-		    ironore_ = add_special_ware(table.get_string("ironore"), tribes);
-		    rawlog_ = add_special_ware(table.get_string("rawlog"), tribes);
-		    refinedlog_ = add_special_ware(table.get_string("refinedlog"), tribes);
-		    granite_ = add_special_ware(table.get_string("granite"), tribes);
-
-		 * */
-
 		if (table.has_key<std::string>("toolbar")) {
 			toolbar_image_set_.reset(new ToolbarImageset(*table.get_table("toolbar")));
 		}
@@ -166,11 +110,8 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 }
 
 void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
-	std::unique_ptr<LuaTable> items_table = table.get_table("animations");
-	// NOCOM frontier_animation_id_ = g_gr->animations().load(*items_table->get_table("frontier"));
-	// NOCOM flag_animation_id_ = g_gr->animations().load(*items_table->get_table("flag"));
 
-	items_table = table.get_table("roads");
+	std::unique_ptr<LuaTable> items_table = table.get_table("roads");
 	const auto load_roads = [&items_table](
 	                           const std::string& road_type, std::vector<std::string>* images) {
 		std::vector<std::string> roads =
@@ -189,12 +130,47 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 	};
 	load_roads("normal", &normal_road_paths_);
 	load_roads("busy", &busy_road_paths_);
+	load_roads("waterway", &waterway_paths_);
 
-	for (const std::string& texture_path : normal_road_paths()) {
-		add_normal_road_texture(g_gr->images().get(texture_path));
+	const auto load_bridge_if_present = [this](const LuaTable& animations_table,
+	                                           Animation::Type animation_type, std::string s_dir,
+	                                           std::string s_type, uint32_t* id) {
+		if (animations_table.has_key("bridge_" + s_type + "_" + s_dir)) {
+			std::unique_ptr<LuaTable> animation_table =
+			   animations_table.get_table("bridge_" + s_type + "_" + s_dir);
+			*id = g_gr->animations().load(name_ + std::string("_bridge_" + s_type + "_" + s_dir),
+			                              *animation_table, animation_table->get_string("basename"),
+			                              animation_type);
+		}
+	};
+	// Frontier and flag animations can be a mix of file and spritesheet animations
+	const auto load_animations = [this, load_bridge_if_present](const LuaTable& animations_table,
+	                                                            Animation::Type animation_type) {
+		if (animations_table.has_key("frontier")) {
+			std::unique_ptr<LuaTable> animation_table = animations_table.get_table("frontier");
+			frontier_animation_id_ =
+			   g_gr->animations().load(name_ + std::string("_frontier"), *animation_table,
+			                           animation_table->get_string("basename"), animation_type);
+		}
+		if (animations_table.has_key("flag")) {
+			std::unique_ptr<LuaTable> animation_table = animations_table.get_table("flag");
+			flag_animation_id_ =
+			   g_gr->animations().load(name_ + std::string("_flag"), *animation_table,
+			                           animation_table->get_string("basename"), animation_type);
+		}
+		load_bridge_if_present(animations_table, animation_type, "e", "normal", &bridges_normal_.e);
+		load_bridge_if_present(animations_table, animation_type, "se", "normal", &bridges_normal_.se);
+		load_bridge_if_present(animations_table, animation_type, "sw", "normal", &bridges_normal_.sw);
+		load_bridge_if_present(animations_table, animation_type, "e", "busy", &bridges_busy_.e);
+		load_bridge_if_present(animations_table, animation_type, "se", "busy", &bridges_busy_.se);
+		load_bridge_if_present(animations_table, animation_type, "sw", "busy", &bridges_busy_.sw);
+	};
+
+	if (table.has_key("animations")) {
+		load_animations(*table.get_table("animations"), Animation::Type::kFiles);
 	}
-	for (const std::string& texture_path : busy_road_paths()) {
-		add_busy_road_texture(g_gr->images().get(texture_path));
+	if (table.has_key("spritesheets")) {
+		load_animations(*table.get_table("spritesheets"), Animation::Type::kSpritesheet);
 	}
 }
 
@@ -211,54 +187,41 @@ void TribeDescr::load_ships(const LuaTable& table, Tribes& tribes) {
 void TribeDescr::load_wares(const LuaTable& table, Tribes& tribes) {
 	std::unique_ptr<LuaTable> items_table = table.get_table("wares_order");
 
-	/* NOCOM get code from master
-
-	int columnindex = 0;
 	for (const int key : items_table->keys<int>()) {
-	    std::vector<DescriptionIndex> column;
-	    std::vector<std::string> warenames =
-	       items_table->get_table(key)->array_entries<std::string>();
-	    for (size_t rowindex = 0; rowindex < warenames.size(); ++rowindex) {
-	        try {
-	            DescriptionIndex wareindex = tribes.load_ware(warenames[rowindex]);
-	            if (has_ware(wareindex)) {
-	                throw GameDataError(
-	                   "Duplicate definition of ware '%s'", warenames[rowindex].c_str());
-	            }
-	            wares_.insert(wareindex);
-	            column.push_back(wareindex);
-	            if (wares_order_coords_.size() < wareindex + 1U) {
-	                wares_order_coords_.resize(wareindex + 1U);
-	            }
-	            wares_order_coords_[wareindex] = std::make_pair(columnindex, rowindex);
-	        } catch (const WException& e) {
-	            throw GameDataError(
-	               "Failed adding ware '%s: %s", warenames[rowindex].c_str(), e.what());
-	        }
-	    }
-	    if (!column.empty()) {
-	        wares_order_.push_back(column);
-	        ++columnindex;
-	    }
+		std::vector<DescriptionIndex> column;
+		std::vector<std::string> warenames =
+		   items_table->get_table(key)->array_entries<std::string>();
+		for (size_t rowindex = 0; rowindex < warenames.size(); ++rowindex) {
+			try {
+				DescriptionIndex wareindex = tribes_.safe_ware_index(warenames[rowindex]);
+				if (has_ware(wareindex)) {
+					throw GameDataError(
+					   "Duplicate definition of ware '%s'", warenames[rowindex].c_str());
+				}
+				wares_.insert(wareindex);
+				column.push_back(wareindex);
+			} catch (const WException& e) {
+				throw GameDataError(
+				   "Failed adding ware '%s: %s", warenames[rowindex].c_str(), e.what());
+			}
+		}
+		if (!column.empty()) {
+			wares_order_.push_back(column);
+		}
 	}
-	*/
 
 	ironore_ = add_special_ware(table.get_string("ironore"), tribes);
 	rawlog_ = add_special_ware(table.get_string("rawlog"), tribes);
 	refinedlog_ = add_special_ware(table.get_string("refinedlog"), tribes);
 	granite_ = add_special_ware(table.get_string("granite"), tribes);
 
-	/* NOCOM
-
 	// Verify that the preciousness has been set for all of the tribe's wares
 	for (const DescriptionIndex wi : wares()) {
-	    if (get_ware_descr(wi)->preciousness(name()) == kInvalidWare) {
-	        throw GameDataError("The ware '%s' needs to define a preciousness for tribe '%s'",
-	                            get_ware_descr(wi)->name().c_str(),
-	                            name().c_str());
-	    }
+		if (get_ware_descr(wi)->ai_hints().preciousness(name()) == kInvalidWare) {
+			throw GameDataError("The ware '%s' needs to define a preciousness for tribe '%s'",
+			                    get_ware_descr(wi)->name().c_str(), name().c_str());
+		}
 	}
-	*/
 }
 
 void TribeDescr::load_immovables(const LuaTable& table, Tribes& tribes, const World& world) {
@@ -305,43 +268,17 @@ void TribeDescr::load_immovables(const LuaTable& table, Tribes& tribes, const Wo
 
 void TribeDescr::load_workers(const LuaTable& table, Tribes& tribes) {
 	std::unique_ptr<LuaTable> items_table = table.get_table("workers_order");
-	int columnindex = 0;
 
-	/* NOCOM get code from master
 	for (const int key : items_table->keys<int>()) {
-	    std::vector<DescriptionIndex> column;
-	    std::vector<std::string> workernames =
-	       items_table->get_table(key)->array_entries<std::string>();
-	    for (size_t rowindex = 0; rowindex < workernames.size(); ++rowindex) {
-	        try {
-	            DescriptionIndex workerindex = tribes.load_worker(workernames[rowindex]);
-	            if (has_worker(workerindex)) {
-	                throw GameDataError(
-	                   "Duplicate definition of worker '%s'", workernames[rowindex].c_str());
-	            }
-	            workers_.insert(workerindex);
-	            column.push_back(workerindex);
-	            if (workers_order_coords_.size() < workerindex + 1U) {
-	                workers_order_coords_.resize(workerindex + 1U);
-	            }
-	            workers_order_coords_[workerindex] = std::make_pair(columnindex, rowindex);
-
-	            const WorkerDescr& worker_descr = *tribes_.get_worker_descr(workerindex);
-	            if (worker_descr.is_buildable() && worker_descr.buildcost().empty()) {
-	                worker_types_without_cost_.push_back(workerindex);
-	            }
-	        } catch (const WException& e) {
-	            throw GameDataError(
-	               "Failed adding worker '%s: %s", workernames[rowindex].c_str(), e.what());
-	        }
-	    }
-	    if (!column.empty()) {
-	        workers_order_.push_back(column);
-	        ++columnindex;
-	    }
+		std::vector<DescriptionIndex> column;
+		for (const std::string& workername :
+		     items_table->get_table(key)->array_entries<std::string>()) {
+			add_worker(workername, column);
+		}
+		if (!column.empty()) {
+			workers_order_.push_back(column);
+		}
 	}
-
-	*/
 
 	builder_ = add_special_worker(table.get_string("builder"), tribes);
 	carrier_ = add_special_worker(table.get_string("carrier"), tribes);
@@ -359,9 +296,6 @@ void TribeDescr::load_buildings(const LuaTable& table, Tribes& tribes) {
 
 	if (table.has_key("port")) {
 		port_ = add_special_building(table.get_string("port"), tribes);
-	}
-	if (table.has_key("barracks")) {
-		barracks_ = add_special_building(table.get_string("barracks"), tribes);
 	}
 }
 
@@ -709,9 +643,6 @@ DescriptionIndex TribeDescr::add_special_ware(const std::string& warename, Tribe
 void TribeDescr::finalize_loading(Tribes& tribes) {
 	if (!has_building(port_)) {
 		throw GameDataError("no special 'port' building");
-	}
-	if (!has_building(barracks_)) {
-		throw GameDataError("no special 'barracks' building");
 	}
 
 	// Calculate building properties that have circular dependencies

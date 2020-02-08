@@ -86,7 +86,7 @@ EditorGameBase::~EditorGameBase() {
 		g_sh->remove_fx_set(SoundType::kAmbient);
 	}
 	if (loader_ui_) {
-		delete loader_ui_;
+		delete loader_ui_;  // NOCOM crash
 	}
 }
 

@@ -590,7 +590,7 @@ int LuaTribes::new_constructionsite_type(lua_State* L) {
 		LuaTable table(L);  // Will pop the table eventually.
 		EditorGameBase& egbase = get_egbase(L);
 		egbase.mutable_tribes()->add_tribe_object_type(
-		   table, egbase, MapObjectType::CONSTRUCTIONSITE);
+		   table, egbase.world(), MapObjectType::CONSTRUCTIONSITE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -614,7 +614,8 @@ int LuaTribes::new_dismantlesite_type(lua_State* L) {
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
 		EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_tribe_object_type(table, egbase, MapObjectType::DISMANTLESITE);
+		egbase.mutable_tribes()->add_tribe_object_type(
+		   table, egbase.world(), MapObjectType::DISMANTLESITE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -638,7 +639,8 @@ int LuaTribes::new_militarysite_type(lua_State* L) {
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
 		EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_tribe_object_type(table, egbase, MapObjectType::MILITARYSITE);
+		egbase.mutable_tribes()->add_tribe_object_type(
+		   table, egbase.world(), MapObjectType::MILITARYSITE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -662,7 +664,8 @@ int LuaTribes::new_productionsite_type(lua_State* L) {
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
 		EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_tribe_object_type(table, egbase, MapObjectType::PRODUCTIONSITE);
+		egbase.mutable_tribes()->add_tribe_object_type(
+		   table, egbase.world(), MapObjectType::PRODUCTIONSITE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -686,7 +689,8 @@ int LuaTribes::new_trainingsite_type(lua_State* L) {
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
 		EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_tribe_object_type(table, egbase, MapObjectType::TRAININGSITE);
+		egbase.mutable_tribes()->add_tribe_object_type(
+		   table, egbase.world(), MapObjectType::TRAININGSITE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -710,7 +714,8 @@ int LuaTribes::new_warehouse_type(lua_State* L) {
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
 		EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_tribe_object_type(table, egbase, MapObjectType::WAREHOUSE);
+		egbase.mutable_tribes()->add_tribe_object_type(
+		   table, egbase.world(), MapObjectType::WAREHOUSE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -735,7 +740,7 @@ int LuaTribes::new_market_type(lua_State* L) {
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
 		EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_tribe_object_type(table, egbase, MapObjectType::MARKET);
+		egbase.mutable_tribes()->add_tribe_object_type(table, egbase.world(), MapObjectType::MARKET);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -759,7 +764,8 @@ int LuaTribes::new_immovable_type(lua_State* L) {
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
 		EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_tribe_object_type(table, egbase, MapObjectType::IMMOVABLE);
+		egbase.mutable_tribes()->add_tribe_object_type(
+		   table, egbase.world(), MapObjectType::IMMOVABLE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -783,7 +789,7 @@ int LuaTribes::new_ship_type(lua_State* L) {
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
 		EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_tribe_object_type(table, egbase, MapObjectType::SHIP);
+		egbase.mutable_tribes()->add_tribe_object_type(table, egbase.world(), MapObjectType::SHIP);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -807,7 +813,7 @@ int LuaTribes::new_ware_type(lua_State* L) {
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
 		EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_tribe_object_type(table, egbase, MapObjectType::WARE);
+		egbase.mutable_tribes()->add_tribe_object_type(table, egbase.world(), MapObjectType::WARE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -830,7 +836,7 @@ int LuaTribes::new_carrier_type(lua_State* L) {
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
 		EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_tribe_object_type(table, egbase, MapObjectType::CARRIER);
+		egbase.mutable_tribes()->add_tribe_object_type(table, egbase.world(), MapObjectType::CARRIER);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -852,9 +858,8 @@ int LuaTribes::new_ferry_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		                    // NOCOM this replaces add_ferry_type - implement!
 		EditorGameBase& egbase = get_egbase(L);
-		// egbase.mutable_tribes()->add_tribe_object_type(table, egbase, MapObjectType::FERRY);
+		egbase.mutable_tribes()->add_tribe_object_type(table, egbase.world(), MapObjectType::FERRY);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -877,7 +882,7 @@ int LuaTribes::new_soldier_type(lua_State* L) {
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
 		EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_tribe_object_type(table, egbase, MapObjectType::SOLDIER);
+		egbase.mutable_tribes()->add_tribe_object_type(table, egbase.world(), MapObjectType::SOLDIER);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -900,7 +905,7 @@ int LuaTribes::new_worker_type(lua_State* L) {
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
 		EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_tribe_object_type(table, egbase, MapObjectType::WORKER);
+		egbase.mutable_tribes()->add_tribe_object_type(table, egbase.world(), MapObjectType::WORKER);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
