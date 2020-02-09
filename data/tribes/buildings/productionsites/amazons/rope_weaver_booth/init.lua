@@ -12,7 +12,6 @@ tribes:new_productionsite_type {
    buildcost = {
       log = 5,
       granite = 2,
-      rope = 1,
       rubber =1
    },
    return_on_dismantle = {
@@ -58,8 +57,8 @@ tribes:new_productionsite_type {
          descname = _"making a rope",
          actions = {
             "consume=liana:2",
-            "sleep=32000",
-            "animate=working 40000",
+            "sleep=20000",
+            "animate=working 35000",
             "produce=rope"
          },
       },
