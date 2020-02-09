@@ -177,7 +177,7 @@ FilenameSet ZipFilesystem::list_directory(const std::string& path_in) const {
 		                      sizeof(filename_inzip), nullptr, 0, nullptr, 0);
 
 		std::string complete_filename = zip_file_->strip_basename(filename_inzip);
-		// NOCOM still some problems here
+
 		// Ensure that subdirectories will be listed - fs_filename can't handle trailing slashes.
 		if (complete_filename.size() > 1 && strcmp(&complete_filename.back(), "/") == 0) {
 			complete_filename.pop_back();

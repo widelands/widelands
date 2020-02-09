@@ -54,9 +54,6 @@ public:
 	Tribes(LuaInterface* lua);
 	~Tribes();
 
-	// NOCOM replacement for this
-	// void add_custom_worker(const LuaTable& table);
-
 	size_t nrbuildings() const;
 	size_t nrtribes() const;
 	size_t nrwares() const;

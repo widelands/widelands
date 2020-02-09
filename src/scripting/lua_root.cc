@@ -540,8 +540,6 @@ const MethodType<LuaTribes> LuaTribes::Methods[] = {
    METHOD(LuaTribes, new_ware_type),
    METHOD(LuaTribes, new_warehouse_type),
    METHOD(LuaTribes, new_worker_type),
-   // NOCOM Get rid of add_custom_x
-   METHOD(LuaTribes, add_custom_worker),
    {0, 0},
 };
 const PropertyType<LuaTribes> LuaTribes::Properties[] = {
@@ -930,41 +928,6 @@ int LuaTribes::new_tribe(lua_State* L) {
 		LuaTable table(L);  // Will pop the table eventually.
 		EditorGameBase& egbase = get_egbase(L);
 		egbase.mutable_tribes()->add_tribe(table, egbase.world());
-	} catch (std::exception& e) {
-		report_error(L, "%s", e.what());
-	}
-	return 0;
-}
-
-// NOCOM get rid
-/* RST
-   .. method:: add_custom_worker{table}
-
-      Adds a worker building to a tribe, e.g. for use in a scenario.
-      The worker must already be known to the tribes and should be defined in
-      the ``map:scripting/tribes/`` directory.
-
-      **Note:** This function *has* to be called from ``map:scripting/tribes/init.lua``.
-
-      The table has the following entries:
-
-      **tribename**
-         *Mandatory*. The name of the tribe that this worker will be added to.
-
-      **workername**
-         *Mandatory*. The name of the worker to be added to the tribe.
-
-      :returns: :const:`0`
-*/
-int LuaTribes::add_custom_worker(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
-
-	try {
-		LuaTable table(L);  // Will pop the table eventually.
-		EditorGameBase& egbase = get_egbase(L);
-		// NOCOM replace egbase.mutable_tribes()->add_custom_worker(table);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}

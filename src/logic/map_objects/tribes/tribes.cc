@@ -55,17 +55,6 @@ Tribes::Tribes(LuaInterface* lua)
 Tribes::~Tribes() {
 }
 
-/* NOCOM replacement
-void Tribes::add_custom_worker(const LuaTable& table) {
-   const std::string tribename = table.get_string("tribename");
-   if (Widelands::tribe_exists(tribename)) {
-      TribeDescr* descr = tribes_->get_mutable(tribe_index(tribename));
-      descr->add_worker(table.get_string("workername"));
-   } else {
-      throw GameDataError("The tribe '%s'' has no preload file.", tribename.c_str());
-   }
-} */
-
 size_t Tribes::nrbuildings() const {
 	return buildings_->size();
 }
