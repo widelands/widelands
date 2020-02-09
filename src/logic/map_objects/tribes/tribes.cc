@@ -359,7 +359,7 @@ void Tribes::add_tribe_object_type(const LuaTable& table, const World& world, Ma
 	// Mark as done
 	tribe_objects_being_loaded_.erase(tribe_objects_being_loaded_.find(object_name));
 }
-// NOCOM ERROR: Unused key "return_on_dismantle" in LuaTable. Please report as a bug.
+
 void Tribes::add_tribe(const LuaTable& table, const World& world) {
 	const std::string name = table.get_string("name");
 	// Register as in progress

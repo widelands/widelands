@@ -437,8 +437,6 @@ void EditorInteractive::load(const std::string& filename, UI::ProgressWindow& lo
 
 	cleanup_for_load();
 
-    GameTips editortips(loader_ui, {"editor"});
-
 	std::unique_ptr<Widelands::MapLoader> ml(map->get_correct_loader(filename));
 	if (!ml.get())
 		throw WLWarning(
@@ -447,7 +445,7 @@ void EditorInteractive::load(const std::string& filename, UI::ProgressWindow& lo
 		   filename.c_str());
 	ml->preload_map(true);
 
-	// NOCOM GameTips editortips(loader_ui, {"editor"});
+	GameTips editortips(loader_ui, {"editor"});
 
 	// Create the players. TODO(SirVer): this must be managed better
 	// TODO(GunChleoc): Ugly - we only need this for the test suite right now. We can also get rid of
