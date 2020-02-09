@@ -70,7 +70,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start producing coal because ...
          descname = _"producing coal",
          actions = {
-            "return=skipped when economy needs log",
+            "return=skipped unless economy needs coal",
             "consume=log:3 clay",
             "sleep=30000",
             "animate=working 30000",
