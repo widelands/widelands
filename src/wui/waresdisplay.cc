@@ -121,6 +121,8 @@ void AbstractWaresDisplay::recalc_desired_size(bool relayout) {
 	if (relayout) {
 		// Since we are usually stacked deep within other panels, we need to tell our highest parent
 		// window to relayout
+		// TODO(GunChleoc): Window::on_resolution_changed_note can't shift these properly due to the
+		// changing dimensions.
 		UI::Panel* p = this;
 		while (p->get_parent()) {
 			p = p->get_parent();

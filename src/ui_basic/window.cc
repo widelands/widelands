@@ -101,7 +101,11 @@ Window::Window(Panel* const parent,
 	   VT_B_PIXMAP_THICKNESS, VT_B_PIXMAP_THICKNESS, TP_B_PIXMAP_THICKNESS, BT_B_PIXMAP_THICKNESS);
 	set_top_on_click(true);
 	set_layout_toplevel(true);
+	layout();
 	focus();
+
+	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
+	   [this](const GraphicResolutionChanged& note) { on_resolution_changed_note(note); });
 }
 
 /**
@@ -619,5 +623,38 @@ bool Window::handle_mousemove(const uint8_t, int32_t mx, int32_t my, int32_t, in
 		set_pos(Vector2i(new_left, new_top));
 	}
 	return true;
+}
+
+void Window::on_resolution_changed_note(const GraphicResolutionChanged& note) {
+	const int old_center_x = note.old_width / 2;
+	const int old_center_y = note.old_height / 2;
+	constexpr int kEdgeTolerance = 50;
+	constexpr int kCenterTolerance = 10;
+	if (std::abs(get_w() - note.old_width) < kEdgeTolerance &&
+	    std::abs(get_h() - note.old_height) < kEdgeTolerance) {
+		// The window is sort-of fullscreen, e.g. help. So, we resize it.
+		set_size(note.new_width, note.new_height);
+		center_to_parent();
+		layout();
+	} else {
+		// Adjust x position
+		if (std::abs(old_center_x - get_x() - get_w() / 2) < kCenterTolerance) {
+			// The window was centered horizontally. Keep it that way.
+			set_pos(Vector2i((note.new_width - get_w()) / 2, get_y()));
+		} else if (get_x() + get_w() / 2 > old_center_x) {
+			// The window was in the right half of the screen. Shift to maintain distance to right edge
+			// of the screen.
+			set_pos(Vector2i(note.new_width - note.old_width + get_x(), get_y()));
+		}
+		// Adjust y position
+		if (std::abs(old_center_y - get_y() - get_h() / 2) < kCenterTolerance) {
+			// The window was centered vertically. Keep it that way.
+			set_pos(Vector2i(get_x(), (note.new_height - get_h()) / 2));
+		} else if (get_y() + get_h() / 2 > old_center_y) {
+			// The window was in the bottom half of the screen. Shift to maintain distance to bottom
+			// edge of the screen.
+			set_pos(Vector2i(get_x(), note.new_height - note.old_height + get_y()));
+		}
+	}
 }
 }  // namespace UI
