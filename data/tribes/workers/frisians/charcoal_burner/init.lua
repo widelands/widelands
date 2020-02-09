@@ -32,7 +32,6 @@ tribes:new_worker_type {
       },
       find_pond = {
          "findobject=attrib:pond_dry radius:8",
-         "return"
       }
    },
 
