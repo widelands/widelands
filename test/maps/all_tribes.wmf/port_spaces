@@ -1,0 +1,10 @@
+# Automatically created by Widelands r24448[7b43008@tribes-filtering] (Debug)
+
+[global]
+packet_version="1"
+waterway_max_length="6"
+number_of_port_spaces="2"
+
+[port_spaces]
+0="2 11"
+1="11 11"
