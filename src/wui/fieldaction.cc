@@ -398,7 +398,7 @@ void FieldActionWindow::add_buttons_auto() {
 	} else if (player_) {
 		if (upcast(Building, building, map_.get_immovable(node_))) {
 			if (1 < player_->vision(Widelands::Map::get_index(
-								building->get_position(), ibase().egbase().map().get_width()))) {
+			           building->get_position(), ibase().egbase().map().get_width()))) {
 				add_buttons_attack();
 			}
 		}
