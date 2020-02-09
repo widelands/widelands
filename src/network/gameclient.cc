@@ -729,33 +729,36 @@ void GameClient::handle_file_part(RecvPacket& packet) {
 	// Only go on, if we are waiting for a file part at the moment. It can happen, that an
 	// "unrequested" part is send by the server if the map was changed just a moment ago
 	// and there was an outstanding request from the client.
-	if (!d->file_)
+	if (!d->file_) {
 		return;  // silently ignore
+	}
 
 	uint32_t part = packet.unsigned_32();
 	uint32_t size = packet.unsigned_32();
-
-	// Send an answer
-	SendPacket s;
-	s.unsigned_8(NETCMD_FILE_PART);
-	s.unsigned_32(part);
-	s.string(d->file_->md5sum);
-	d->net->send(s);
 
 	FilePart fp;
 
 	char buf[NETFILEPARTSIZE];
 	assert(size <= NETFILEPARTSIZE);
 
-	// TODO(Klaus Halfmann): read directcly into FilePart?
-	if (packet.data(buf, size) != size)
+	// TODO(Klaus Halfmann): read directly into FilePart?
+	if (packet.data(buf, size) != size) {
 		log("Readproblem. Will try to go on anyways\n");
+	}
 	memcpy(fp.part, &buf[0], size);
 	d->file_->parts.push_back(fp);
 
 	// Write file to disk as soon as all parts arrived
 	uint32_t left = (d->file_->bytes - NETFILEPARTSIZE * part);
 	if (left <= NETFILEPARTSIZE) {
+
+		// Send an answer. We got everything
+		SendPacket s;
+		s.unsigned_8(NETCMD_FILE_PART);
+		s.unsigned_32(part);
+		s.string(d->file_->md5sum);
+		d->net->send(s);
+
 		FileWrite fw;
 		left = d->file_->bytes;
 		uint32_t i = 0;

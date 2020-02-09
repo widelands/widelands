@@ -40,7 +40,9 @@
 #include "map_io/map_saver.h"
 #include "map_io/widelands_map_loader.h"
 #include "ui_basic/messagebox.h"
+#include "ui_basic/progresswindow.h"
 #include "wlapplication_options.h"
+#include "wui/game_tips.h"
 #include "wui/mapdetails.h"
 #include "wui/maptable.h"
 
@@ -52,30 +54,34 @@ inline EditorInteractive& MainMenuSaveMap::eia() {
 MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
                                  UI::UniqueWindow::Registry& registry,
                                  Registry& map_options_registry)
-   : MainMenuLoadOrSaveMap(parent, registry, 3, "save_map_menu", _("Save Map"), "maps/My_Maps"),
+   : MainMenuLoadOrSaveMap(parent, registry, "save_map_menu", _("Save Map"), "maps/My_Maps"),
      map_options_registry_(map_options_registry),
-     make_directory_(this,
-                     "make_directory",
-                     right_column_x_,
-                     tabley_ + tableh_ + 3 * padding_ - 1,
-                     get_inner_w() - right_column_x_ - padding_,
-                     buth_,
-                     UI::ButtonStyle::kWuiSecondary,
-                     _("Make Directory")),
-     edit_options_(this,
+     edit_options_(&map_details_box_,
                    "edit_options",
-                   right_column_x_,
-                   tabley_ + tableh_ - buth_,
-                   get_inner_w() - right_column_x_ - padding_,
-                   buth_,
+                   0,
+                   0,
+                   0,
+                   0,
                    UI::ButtonStyle::kWuiPrimary,
                    _("Map Options")),
-     editbox_label_(this, padding_, tabley_ + tableh_ + 3 * padding_, butw_, buth_, _("Filename:")),
+     editbox_label_(&table_footer_box_, 0, 0, 0, 0, _("Filename:")),
+     editbox_(&table_footer_box_, 0, 0, 0, UI::PanelStyle::kWui),
+     make_directory_(&table_footer_box_,
+                     "make_directory",
+                     0,
+                     0,
+                     0,
+                     0,
+                     UI::ButtonStyle::kWuiSecondary,
+                     _("Make Directory")),
      illegal_filename_tooltip_(FileSystem::illegal_filename_tooltip()) {
 	set_current_directory(curdir_);
 
-	// Make room for edit_options_ button
-	map_details_.set_size(map_details_.get_w(), map_details_.get_h() - buth_ - padding_);
+	map_details_box_.add(&edit_options_, UI::Box::Resizing::kFullSize);
+	table_footer_box_.add(&editbox_label_);
+	table_footer_box_.add(&editbox_, UI::Box::Resizing::kExpandBoth);
+	table_footer_box_.add_space(0);
+	table_footer_box_.add(&make_directory_);
 
 	table_.selected.connect(boost::bind(&MainMenuSaveMap::clicked_item, boost::ref(*this)));
 	table_.double_clicked.connect(
@@ -83,15 +89,12 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
 	table_.cancel.connect(boost::bind(&MainMenuSaveMap::die, this));
 	table_.set_can_focus(true);
 
-	editbox_ = new UI::EditBox(
-	   this, editbox_label_.get_x() + editbox_label_.get_w() + padding_, editbox_label_.get_y(),
-	   tablew_ - editbox_label_.get_w() - padding_ + 1, UI::PanelStyle::kWui);
-	editbox_->set_text(parent.egbase().map().get_name());
+	editbox_.set_text(parent.egbase().map().get_name());
 
-	editbox_->changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));
+	editbox_.changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));
 	edit_box_changed();
-	editbox_->ok.connect(boost::bind(&MainMenuSaveMap::clicked_ok, boost::ref(*this)));
-	editbox_->cancel.connect(boost::bind(
+	editbox_.ok.connect(boost::bind(&MainMenuSaveMap::clicked_ok, boost::ref(*this)));
+	editbox_.cancel.connect(boost::bind(
 	   &MainMenuSaveMap::reset_editbox_or_die, boost::ref(*this), parent.egbase().map().get_name()));
 
 	ok_.sigclicked.connect(boost::bind(&MainMenuSaveMap::clicked_ok, boost::ref(*this)));
@@ -119,6 +122,8 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
 
 	subscriber_ = Notifications::subscribe<NoteMapOptions>(
 	   [this](const NoteMapOptions&) { update_map_options(); });
+
+	layout();
 }
 
 /**
@@ -128,7 +133,7 @@ void MainMenuSaveMap::clicked_ok() {
 	if (!ok_.enabled()) {
 		return;
 	}
-	std::string filename = editbox_->text();
+	std::string filename = editbox_.text();
 	std::string complete_filename;
 
 	if (filename == "" && table_.has_selection()) {  //  Maybe a directory is selected.
@@ -217,11 +222,11 @@ void MainMenuSaveMap::update_map_options() {
 		maptype = MapData::MapType::kNormal;
 	}
 
-	MapData mapdata(map, editbox_->text(), maptype, MapData::DisplayType::kMapnames);
+	MapData mapdata(map, editbox_.text(), maptype, MapData::DisplayType::kMapnames);
 
 	map_details_.update(mapdata, false);
-	if (old_name == editbox_->text()) {
-		editbox_->set_text(map_details_.name());
+	if (old_name == editbox_.text()) {
+		editbox_.set_text(map_details_.name());
 		edit_box_changed();
 	}
 }
@@ -233,7 +238,7 @@ void MainMenuSaveMap::clicked_item() {
 	if (table_.has_selection()) {
 		const MapData& mapdata = maps_data_[table_.get_selected()];
 		if (mapdata.maptype != MapData::MapType::kDirectory) {
-			editbox_->set_text(
+			editbox_.set_text(
 			   FileSystem::fs_filename(maps_data_[table_.get_selected()].filename.c_str()));
 			edit_box_changed();
 		}
@@ -260,16 +265,16 @@ void MainMenuSaveMap::double_clicked_item() {
  */
 void MainMenuSaveMap::edit_box_changed() {
 	// Prevent the user from creating nonsense file names, like e.g. ".." or "...".
-	const bool is_legal_filename = FileSystem::is_legal_filename(editbox_->text());
+	const bool is_legal_filename = FileSystem::is_legal_filename(editbox_.text());
 	ok_.set_enabled(is_legal_filename);
-	editbox_->set_tooltip(is_legal_filename ? "" : illegal_filename_tooltip_);
+	editbox_.set_tooltip(is_legal_filename ? "" : illegal_filename_tooltip_);
 }
 
 void MainMenuSaveMap::reset_editbox_or_die(const std::string& current_filename) {
-	if (editbox_->text() == current_filename) {
+	if (editbox_.text() == current_filename) {
 		die();
 	} else {
-		editbox_->set_text(current_filename);
+		editbox_.set_text(current_filename);
 	}
 }
 
@@ -279,6 +284,11 @@ void MainMenuSaveMap::set_current_directory(const std::string& filename) {
 	   /** TRANSLATORS: The folder that a file will be saved to. */
 	   (boost::format(_("Current directory: %s")) % (_("My Maps") + curdir_.substr(basedir_.size())))
 	      .str());
+}
+
+void MainMenuSaveMap::layout() {
+	MainMenuLoadOrSaveMap::layout();
+	make_directory_.set_desired_size(edit_options_.get_w(), edit_options_.get_h());
 }
 
 /**
@@ -334,6 +344,11 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		map->delete_tag("artifacts");
 	}
 
+	UI::ProgressWindow* loader_ui = new UI::ProgressWindow("images/loadscreens/editor.jpg");
+	GameTips tips(*loader_ui, {"editor"});
+	loader_ui->step("Saving the map…");
+	egbase.set_loader_ui(loader_ui);
+
 	// Try saving the map.
 	GenericSaveHandler gsh(
 	   [&egbase](FileSystem& fs) {
@@ -342,6 +357,9 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	   },
 	   complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR);
 	GenericSaveHandler::Error error = gsh.save();
+
+	egbase.set_loader_ui(nullptr);
+	delete loader_ui;
 
 	// If only the temporary backup couldn't be deleted, we still treat it as
 	// success. Automatic cleanup will deal with later. No need to bother the

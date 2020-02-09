@@ -89,7 +89,7 @@ else
 fi
 
 # Fix formatting for C++, Lua & Python
-python utils/fix_formatting.py
+# python utils/fix_formatting.py
 
 # Stage changes
 # - Translations
