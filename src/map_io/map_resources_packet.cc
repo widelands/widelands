@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -66,28 +66,11 @@ void MapResourcesPacket::read(FileSystem& fs,
 			for (uint16_t y = 0; y < map->get_height(); ++y) {
 				for (uint16_t x = 0; x < map->get_width(); ++x) {
 					DescriptionIndex const id = fr.unsigned_8();
-					ResourceAmount const found_amount = fr.unsigned_8();
-					ResourceAmount const amount = found_amount;
+					ResourceAmount const amount = fr.unsigned_8();
 					ResourceAmount const start_amount = fr.unsigned_8();
-
-					DescriptionIndex set_id;
-					ResourceAmount set_amount, set_start_amount;
-					//  if amount is zero, theres nothing here
-					if (!amount) {
-						set_id = 0;
-						set_amount = 0;
-						set_start_amount = 0;
-					} else {
-						set_id = smap[id];
-						set_amount = amount;
-						set_start_amount = start_amount;
-					}
-
-					if (0xa < set_id)
-						throw "Unknown resource in map file. It is not in world!\n";
 					const auto fcoords = map->get_fcoords(Coords(x, y));
-					map->initialize_resources(fcoords, set_id, set_start_amount);
-					map->set_resources(fcoords, set_amount);
+					map->initialize_resources(fcoords, smap[id], start_amount);
+					map->set_resources(fcoords, amount);
 				}
 			}
 		} else {
@@ -135,8 +118,6 @@ void MapResourcesPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 			DescriptionIndex res = f.get_resources();
 			ResourceAmount const amount = f.get_resources_amount();
 			ResourceAmount const start_amount = f.get_initial_res_amount();
-			if (!amount)
-				res = 0;
 			fw.unsigned_8(res);
 			fw.unsigned_8(amount);
 			fw.unsigned_8(start_amount);
@@ -145,4 +126,4 @@ void MapResourcesPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 
 	fw.write(fs, "binary/resource");
 }
-}
+}  // namespace Widelands

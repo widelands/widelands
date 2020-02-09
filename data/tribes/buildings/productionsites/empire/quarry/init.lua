@@ -25,11 +25,15 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      graniteproducer = true
+      collects_ware_from_map = "granite"
    },
 
    working_positions = {
       empire_stonemason = 1
+   },
+
+   indicate_workarea_overlaps = {
+      empire_quarry = false,
    },
 
    outputs = {
@@ -49,7 +53,7 @@ tribes:new_productionsite_type {
             "call=mine_granite",
             "call=mine_granite",
             "call=mine_marble", -- This will find marble 2 out of 7 times
-            "return=skipped"
+            "return=no_stats"
          }
       },
       mine_granite = {
@@ -58,8 +62,8 @@ tribes:new_productionsite_type {
          actions = {
            -- This order is on purpose so that the productivity
            -- drops fast once all rocks are gone.
-            "worker=cut_granite",
-            "sleep=25000"
+            "callworker=cut_granite",
+            "sleep=17500"
          }
       },
       mine_marble = {
@@ -68,8 +72,8 @@ tribes:new_productionsite_type {
          actions = {
            -- This order is on purpose so that the productivity
            -- drops fast once all rocks are gone.
-            "worker=cut_marble",
-            "sleep=25000"
+            "callworker=cut_marble",
+            "sleep=17500"
          }
       },
    },

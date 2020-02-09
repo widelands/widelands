@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,7 +41,7 @@ Route::Route() : totalcost_(0) {
 /**
  * Completely clear the route and initialize it
  * to its totalcost
-*/
+ */
 void Route::init(int32_t totalcost) {
 	totalcost_ = totalcost;
 	route_.clear();
@@ -51,7 +51,7 @@ void Route::init(int32_t totalcost) {
  * Return the flag with the given number.
  * idx == 0 is the start flag, idx == get_nrsteps() is the end flag.
  * Every route has at least one flag.
-*/
+ */
 Flag& Route::get_flag(EditorGameBase& egbase, std::vector<Flag*>::size_type const idx) {
 	assert(idx < route_.size());
 	return *route_[idx].get(egbase);
@@ -59,7 +59,7 @@ Flag& Route::get_flag(EditorGameBase& egbase, std::vector<Flag*>::size_type cons
 
 /**
  * Remove the first count steps from the route.
-*/
+ */
 void Route::trim_start(int32_t count) {
 	assert(count < static_cast<int32_t>(route_.size()));
 
@@ -68,7 +68,7 @@ void Route::trim_start(int32_t count) {
 
 /**
  * Keep the first count steps, truncate the rest.
-*/
+ */
 void Route::truncate(int32_t const count) {
 	assert(count < static_cast<int32_t>(route_.size()));
 
@@ -127,4 +127,4 @@ void Route::insert_as_first(RoutingNode* node) {
 	// That's why we can make this cast
 	route_.insert(route_.begin(), static_cast<Flag*>(node));
 }
-}
+}  // namespace Widelands

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,9 +20,26 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_PROGRAM_RESULT_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_PROGRAM_RESULT_H
 
+#include "base/macros.h"
+
 namespace Widelands {
-enum ProgramResult { None = 0, Failed = 1, Completed = 2, Skipped = 3 };
-enum ProgramResultHandlingMethod { Fail, Complete, Skip, Continue, Repeat };
+// Don't change these values, they are used as hardcoded array indices
+enum class ProgramResult { kNone = 0, kFailed = 1, kCompleted = 2, kSkipped = 3 };
+inline int program_result_index(ProgramResult result) {
+	switch (result) {
+	case ProgramResult::kFailed:
+		return 0;
+	case ProgramResult::kCompleted:
+		return 1;
+	case ProgramResult::kSkipped:
+		return 2;
+	case ProgramResult::kNone:
+		NEVER_HERE();
+	}
+	return 0;
 }
+
+enum class ProgramResultHandlingMethod { kFail, kComplete, kSkip, kContinue, kRepeat };
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_PROGRAM_RESULT_H

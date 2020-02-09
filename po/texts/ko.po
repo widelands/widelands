@@ -1,13 +1,19 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2018
+# GunChleoc, 2018
+# ks k, 2017
+# ks k, 2017-2019
+# Moon Yeonki <backnii@gmail.com>, 2017
+# TaeMin An, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-05 10:46+0000\n"
-"PO-Revision-Date: 2017-03-05 10:48+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-12-30 07:55+0000\n"
+"PO-Revision-Date: 2019-12-30 08:11+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -18,294 +24,315 @@ msgstr ""
 
 #: ../../data/txts/AUTHORS.lua:27
 msgid "Developers"
-msgstr ""
+msgstr "개발자"
 
 #: ../../data/txts/AUTHORS.lua:29
 msgid "Widelands Development Team"
-msgstr ""
+msgstr "Widelands 개발팀"
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:6
 msgid "License"
-msgstr ""
+msgstr "허가서"
 
-#: ../../data/txts/LICENSE.lua:20
+#: ../../data/txts/LICENSE.lua:8
 msgid "Licensing information for Widelands"
+msgstr "Widelands 허가서 정보"
+
+#. TRANSLATORS: Placeholder is copyright end year
+#: ../../data/txts/LICENSE.lua:10
+msgid "Copyright 2002 - %1% by the Widelands Development Team."
 msgstr ""
 
-#: ../../data/txts/LICENSE.lua:23
-msgid "Copyright 2002 - 2016 by the Widelands Development Team."
-msgstr ""
-
-#: ../../data/txts/LICENSE.lua:24
+#: ../../data/txts/LICENSE.lua:12
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
-msgstr ""
+msgstr "이 게임은 무료 및 오픈 소스 (FOSS)이며, GNU 일반 공중 사용 허가서 (GPL) V2.0의 허가서 아래에 있습니다."
 
-#: ../../data/txts/LICENSE.lua:26
+#: ../../data/txts/LICENSE.lua:14
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
-msgstr ""
+msgstr "자유-오픈소스 소프트웨어 및 GPL에 대한 자세한 내용은 다음 웹 페이지를 참조하십시오:%s"
 
-#: ../../data/txts/LICENSE.lua:27
+#: ../../data/txts/LICENSE.lua:16
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
-msgstr ""
+msgstr "이 허가서의 전체 내용과 그 철학 및 법적 의미에 대한 자세한 정보를 찾을 수 있습니다."
 
-#: ../../data/txts/LICENSE.lua:29
+#: ../../data/txts/LICENSE.lua:18
 msgid "We are also shipping the GPL as a text document with Widelands itself."
-msgstr ""
+msgstr "또한 우리는 GPL을 Widelands에 텍스트 문서로 포함하고 있습니다."
 
-#: ../../data/txts/LICENSE.lua:30
+#: ../../data/txts/LICENSE.lua:19
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
-msgstr ""
+msgstr "리눅스에서는 소스 또는 독립 실행형 바이너리 패키지의 루트 또는 설치 디렉토리 (예 : '%1%')에서 COPYING이라는 파일을 찾을 수 있습니다."
 
-#: ../../data/txts/LICENSE.lua:31
+#: ../../data/txts/LICENSE.lua:20
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
-msgstr ""
+msgstr "윈도우즈에서는 설치 폴더에 COPYING.txt라는 파일을 찾을 수 있으며 와이드랜드 시작 메뉴 항목은 이 파일에 대한 링크를 제공합니다."
 
-#: ../../data/txts/LICENSE.lua:32
+#: ../../data/txts/LICENSE.lua:21
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
-msgstr ""
+msgstr "맥오에스에서는 웹 사이트에서 다운로드 한 압축파일에서 COPYING이라는 파일을 찾을 수 있습니다."
 
-#: ../../data/txts/LICENSE.lua:34
+#: ../../data/txts/LICENSE.lua:23
+msgid "This game comes as-is and without any warranty."
+msgstr "이 게임은 어떠한 보증도 제공하지 않습니다."
+
+#: ../../data/txts/LICENSE.lua:24
 msgid ""
-"This game comes as-is and without any warranty. For more information and "
-"support you can find us at %1% (Website, Wiki, Forum for questions or "
-"general support), %2% (Bugtracker), and %3% (Translations)."
-msgstr ""
+"For more information and support you can find us at %1% (Website, Wiki, "
+"Forum for questions or general support), %2% (Bugtracker), and %3% "
+"(Translations)."
+msgstr "더 자세한 정보와 지원을 원하시면 %1% (웹 사이트, 위키, 질문, 일반적인 지원용 게시판), %2% (버그추적기), %3% (번역)에서 찾으실 수 있습니다."
 
-#: ../../data/txts/README.lua:7
+#: ../../data/txts/README.lua:6
 msgid "Readme"
-msgstr ""
+msgstr "읽어보기"
+
+#: ../../data/txts/README.lua:9
+msgid "an open source strategy game"
+msgstr "오픈 소스 전략 게임"
+
+#: ../../data/txts/README.lua:11
+msgid "Check out the Widelands project homepage:"
+msgstr "Widelands 프로젝트 홈페이지를 확인하십시오:"
 
 #: ../../data/txts/README.lua:12
-msgid "an open source strategy game"
-msgstr ""
-
-#: ../../data/txts/README.lua:15
-msgid "Check out the Widelands project homepage:"
-msgstr ""
-
-#: ../../data/txts/README.lua:17
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more "
 "information, see the file ‘COPYING’."
-msgstr ""
+msgstr "Widelands는 GNU 일반 공중 사용 허가서 (GPL) 라이센스가 부여됩니다. 자세한 정보는 'COPYING' 파일을 참조하십시오."
 
-#: ../../data/txts/README.lua:18
+#: ../../data/txts/README.lua:13
 msgid "Status"
-msgstr ""
+msgstr "상태"
 
-#: ../../data/txts/README.lua:19
+#: ../../data/txts/README.lua:14
 msgid ""
 "Widelands is nearly feature complete and is much fun to play alone and even "
 "more in multiplayer with others. Still, there is always more work to be done"
 " in all areas. If you are interested in contributing – be it by making "
 "graphics, fixing bugs or adding new features, translating the game into your"
 " language or creating new maps – get in touch on our homepage."
-msgstr ""
+msgstr "와이드랜드는 거의 완벽한 기능을 제공하며, 다른 사람들과 함께 함께 놀기를 하면 훨씬 더 재미있게 즐길 수 있습니다. 여전히 모든 분야에서 더 많은 작업이 이루어져야합니다. 그래픽을 만들거나 버그를 수정하거나 새로운 기능을 추가하거나 게임을 자신의 언어로 번역하거나 새로운 지도를 만드는 등의 기여에 관심이 있다면 저희 홈페이지에 문의하십시오."
 
-#: ../../data/txts/README.lua:21
+#: ../../data/txts/README.lua:16
 msgid "Widelands Help"
-msgstr ""
+msgstr "와이드랜드 도움말"
 
 #. TRANSLATORS: %1% is a key on the keyboard
-#: ../../data/txts/README.lua:23
+#: ../../data/txts/README.lua:18
 msgid ""
 "You can find help about gameplay or the editor by using the help button on "
 "the bottom menu, or by pressing %1%."
-msgstr ""
+msgstr "하단 메뉴의 도움말 단추를 사용하거나 %1%을(를) 눌러 게임 플레이 또는 편집기에 대한 도움말을 찾을 수 있습니다."
 
 #. TRANSLATORS: This is a key on the keyboard
-#: ../../data/txts/README.lua:25
+#: ../../data/txts/README.lua:20
 msgid "F1"
-msgstr ""
+msgstr "F1"
+
+#: ../../data/txts/README.lua:23
+msgid "Reporting Bugs"
+msgstr "버그 보고"
+
+#: ../../data/txts/README.lua:24
+msgid "If you encounter a bug, please report it to our bugtracker:"
+msgstr "버그가 발생했을 경우, 버그 트래커에 보고하십시오:"
+
+#: ../../data/txts/README.lua:26
+msgid "Please provide enough background information. Tell us:"
+msgstr "여하튼 충분한 배경 정보를 제공해주십시오. 내용은:"
 
 #: ../../data/txts/README.lua:28
-msgid "Reporting Bugs"
-msgstr ""
+msgid "Detailed steps on how to trigger the bug, if possible."
+msgstr "가능한 경우 버그를 작동시키는 방법에 대한 자세한 단계."
 
 #: ../../data/txts/README.lua:29
-msgid "If you encounter a bug, please report it to our bugtracker:"
-msgstr ""
-
-#: ../../data/txts/README.lua:31
-msgid "Please provide enough background information. Tell us:"
-msgstr ""
-
-#: ../../data/txts/README.lua:33
-msgid "Detailed steps on how to trigger the bug, if possible."
-msgstr ""
-
-#: ../../data/txts/README.lua:34
 msgid ""
 "What you expected to happen when performing the steps and what actually "
 "happened."
-msgstr ""
+msgstr "단계를 수행 할 때 예상했던 것과 실제로 일어난 일."
 
-#: ../../data/txts/README.lua:35
+#: ../../data/txts/README.lua:30
 msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
 "build.)"
-msgstr ""
+msgstr "실행중인 와이드랜드 버전 (예를들면, 개발 버전 또는 일일 구축버전을 실행중인 경우 구축 번호 또는 수정 번호)"
 
-#: ../../data/txts/README.lua:36
+#: ../../data/txts/README.lua:31
 msgid ""
 "Please also include which operating system you are running Widelands on as "
 "some bugs can be platform specific."
-msgstr ""
+msgstr "특정 버그가 플랫폼에 따라 다를 수 있으므로 와이드랜드를 실행중인 운영체제도 포함하여 주십시오."
 
-#: ../../data/txts/README.lua:37
+#: ../../data/txts/README.lua:32
 msgid "Which map you were playing when the bug occurred."
-msgstr ""
+msgstr "버그가 발생했을 때 플레이 중이었던 지도."
 
-#: ../../data/txts/README.lua:38
+#: ../../data/txts/README.lua:33
 msgid ""
 "If the bug concerns something not being displayed correctly or if it helps "
 "demonstrate the issue, please include one or more screenshots."
-msgstr ""
+msgstr "버그가 올바르게 표시되지 않거나 문제를 설명하는데 도움이 된다면 하나 이상의 스크린 샷을 포함하여 주십시오."
 
-#: ../../data/txts/README.lua:39
+#: ../../data/txts/README.lua:34
 msgid ""
 "If you have a save game or replay demonstrating the issue (for instance "
 "crashes where it can be hard to tell exactly what is triggering it), please "
 "include that too. For more information, see the section on Replays below."
-msgstr ""
+msgstr "게임을 저장하거나 문제를 시연하는 경우 (예를 들어, 무엇이 문제를 일으키는지 정확하게 알 수없는 경우 충돌이 발생하는 경우),이를 포함하여 주십시오. 자세한 내용은 아래의 재생 섹션을 참조하십시오."
 
-#: ../../data/txts/TRANSLATORS.lua:25
+#: ../../data/txts/TRANSLATORS.lua:24
 msgid "Translators"
-msgstr ""
+msgstr "번역자"
 
-#: ../../data/txts/TRANSLATORS.lua:27
+#: ../../data/txts/TRANSLATORS.lua:26
 msgid "Widelands Translators"
-msgstr ""
+msgstr "와이드랜드 번역자"
 
 #: ../../data/txts/developers.lua:3
-msgid "Atlantean"
-msgstr ""
+msgid "Atlanteans"
+msgstr "아틀란티스인"
 
 #: ../../data/txts/developers.lua:3
-msgid "Barbarian"
-msgstr ""
+msgid "Barbarians"
+msgstr "야만족"
 
 #: ../../data/txts/developers.lua:3
 msgid "Campaign Story"
-msgstr ""
+msgstr "캠패인 이야기"
 
 #: ../../data/txts/developers.lua:3
 msgid "Chieftains"
-msgstr ""
+msgstr "족장"
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"
-msgstr ""
+msgstr "코더"
 
 #: ../../data/txts/developers.lua:3
 msgid "Debian Linux"
-msgstr ""
+msgstr "데비안 리눅스"
 
 #: ../../data/txts/developers.lua:3
 msgid "Documentation, Help and Wiki"
-msgstr ""
+msgstr "문서, 도움말 및 위키"
 
 #: ../../data/txts/developers.lua:3
 msgid "Elders"
-msgstr ""
+msgstr "장로"
 
 #: ../../data/txts/developers.lua:3
 msgid "Empire"
-msgstr ""
+msgstr "제국"
 
 #: ../../data/txts/developers.lua:3
 msgid "Fedora Linux"
+msgstr "페도라 리눅스"
+
+#: ../../data/txts/developers.lua:3
+msgid "Flatpak"
 msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Former Elders"
-msgstr ""
+msgstr "전직 장로"
 
 #: ../../data/txts/developers.lua:3
 msgid "FreeBSD"
-msgstr ""
+msgstr "프리BSD"
+
+#: ../../data/txts/developers.lua:3
+msgid "Frisians"
+msgstr "프리지아인"
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphicians"
-msgstr ""
+msgstr "그래픽 디자이너"
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphics"
-msgstr ""
+msgstr "그래픽"
 
 #: ../../data/txts/developers.lua:3
 msgid "Homepage"
-msgstr ""
+msgstr "홈페이지"
 
 #: ../../data/txts/developers.lua:3
 msgid "Homepage Coders"
-msgstr ""
+msgstr "홈페이지 코더"
 
 #: ../../data/txts/developers.lua:3
 msgid "Mac OS X"
-msgstr ""
+msgstr "맥오에스 엑스"
 
 #: ../../data/txts/developers.lua:3
 msgid "Mandriva Linux"
-msgstr ""
+msgstr "맨드리바 리눅스"
 
 #: ../../data/txts/developers.lua:3
 msgid "Maps and Missions"
-msgstr ""
+msgstr "지도 및 임무"
 
 #: ../../data/txts/developers.lua:3
 msgid "Musicians"
-msgstr ""
+msgstr "음악 제작자"
 
 #: ../../data/txts/developers.lua:3
 msgid "Other"
-msgstr ""
+msgstr "기타"
 
 #: ../../data/txts/developers.lua:3
 msgid "Packagers"
-msgstr ""
+msgstr "포장업"
 
 #: ../../data/txts/developers.lua:3
 msgid "Sound"
-msgstr ""
+msgstr "소리"
 
 #: ../../data/txts/developers.lua:3
 msgid "Sound Effects"
-msgstr ""
+msgstr "효과음"
 
 #: ../../data/txts/developers.lua:3
 msgid "Tongues"
-msgstr ""
+msgstr "언어"
 
 #: ../../data/txts/developers.lua:3
 msgid "Translation"
-msgstr ""
+msgstr "번역"
 
 #: ../../data/txts/developers.lua:3
 msgid "Windows"
-msgstr ""
+msgstr "윈도우즈"
 
 #: ../../data/txts/developers.lua:3
 msgid "ZetaOS"
+msgstr "제타OS"
+
+#: ../../data/txts/developers.lua:3
+msgid "and many, many more (thank you for everything you've done)"
+msgstr ""
+
+#: ../../data/txts/developers.lua:3
+msgid "vacant"
 msgstr ""
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
-msgstr ""
+msgstr "온라인 도움말"
 
 #: ../../data/txts/help/common_helptexts.lua:11
 #, lua-format
@@ -313,11 +340,11 @@ msgid ""
 "If you need more documentation or help for Widelands or the Widelands "
 "Editor, be sure to visit our homepage at %s. You can find online help in our"
 " wiki there."
-msgstr ""
+msgstr "와이드랜드 또는 와이드랜드 편집자를 위해 더 많은 문서 또는 도움말이 필요하면 홈페이지 %s 를 방문하십시오. 우리의 위키에서 온라인 도움말을 찾을 수 있습니다."
 
 #: ../../data/txts/help/common_helptexts.lua:17
 msgid "Introduction"
-msgstr ""
+msgstr "소개"
 
 #: ../../data/txts/help/common_helptexts.lua:18
 msgid ""
@@ -325,7 +352,7 @@ msgid ""
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
 "has significantly more variety and depth to it. Still, it is easy to get "
 "started through playable tutorials."
-msgstr ""
+msgstr "와이드랜드는 혼자놀기 캠페인과 여럿놀기 모드를 갖춘 무료 오픈 소스 실시간 전략 게임입니다. 이 게임은 세틀러 2에 의해 영감을 받았지만 훨씬 더 다양하고 깊이 있습니다. 그러나 놀기 가능한 자습서를 통해 쉽게 시작할수 있습니다."
 
 #: ../../data/txts/help/common_helptexts.lua:19
 msgid ""
@@ -334,11 +361,11 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an "
 "economic infrastructure, explore the land around you and face rivaling "
 "tribes."
-msgstr ""
+msgstr "이 게임은 작은 땅에서 약간의 자원이 게임을 시작합니다. 이것들을 이용하여 수천 명의 주민이 있는 제국을 만들게됩니다. 이 목표를 향해 나아가는 길에 경제 기반 시설을 구축하고, 주위의 땅을 탐험하고, 경쟁 부족과 맞서야 할 것입니다."
 
 #: ../../data/txts/help/common_helptexts.lua:25
 msgid "Replays"
-msgstr ""
+msgstr "다시보기"
 
 #: ../../data/txts/help/common_helptexts.lua:26
 msgid ""
@@ -347,7 +374,7 @@ msgid ""
 ".wrpl extension and contains all commands that were issued by all players, "
 "such as building a road or attacking an enemy. The rest of the filenames "
 "will tell you the time you started the game."
-msgstr ""
+msgstr "와이드랜드는 당신이 하는 모든 게임을 두 개의 파일로 기록합니다. 하나는 확장자가 .wrpl.wgf이고 초기 상태를 저장 합니다. 다른 파일에는 .wrpl 확장자가 있으며, 도로를 건설하거나 적을 공격하는 등 모든 플레이어가 실행한 모든 명령이 포함되어 있습니다. 파일 이름의 앞부분은 당신이 게임을 시작한 시간을 나타냅니다."
 
 #: ../../data/txts/help/common_helptexts.lua:27
 msgid ""
@@ -357,7 +384,7 @@ msgid ""
 " replay to become incompatible and to ‘go out of sync’. This is similar to "
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
-msgstr ""
+msgstr "메인 메뉴의 게임 다시보기 옵션을 사용하면 이전에 재생한 게임을 정확하게 재구성하여 볼 수 있습니다. 그러나 게임 데이터 파일이나 와이드랜드 실행 파일의 작은 변경으로 인해 재생이 호환되지 않아 '동기화되지 않음'이 발생할 수 있습니다. 이는 플레이어 중 한 명이 다른 버전의 게임을 사용하는 경우 네트워크 게임이 동기화 해제 문제를 겪는 것과 유사합니다."
 
 #: ../../data/txts/help/common_helptexts.lua:28
 #, lua-format
@@ -366,383 +393,406 @@ msgid ""
 "be useful as attachments to bug reports. The replay files are saved in the "
 "%s directory on Linux and Mac OS X. On Windows, they are in the ‘replays’ "
 "subdirectory of your Widelands installation."
-msgstr ""
+msgstr "다시보기는 게임 논리에서 버그를 찾는 데 매우 유용한 도구이므로 버그 보고서에 첨부 파일로 유용 할 수 있습니다. 재생 파일은 리눅스 및 Mac OS X의 %s 디렉토리에 저장됩니다. 윈도우즈에서는 와이드랜드 설치의 'replays'하위 디렉토리에 있습니다."
 
 #. TRANSLATORS: The generic hotkey format
 #: ../../data/txts/help/common_helptexts.lua:35
 #, lua-format
 msgctxt "hotkey"
 msgid "%s:"
-msgstr ""
+msgstr "%s:"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/txts/help/common_helptexts.lua:42
 msgctxt "hotkey"
 msgid "Space"
-msgstr ""
+msgstr "스페이스"
 
 #: ../../data/txts/help/common_helptexts.lua:42
 msgid "Toggle building spaces"
+msgstr "건물공간 켜기/끄기"
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
+#: ../../data/txts/help/common_helptexts.lua:49
+msgctxt "hotkey"
+msgid "Ctrl + F"
 msgstr ""
 
-#. TRANSLATORS: This is an access key combination. The hotkey is 'f'
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"
-msgstr ""
+msgstr "전체화면 켜기/끄기 (운영체제가 지원하는 경우)"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
 #: ../../data/txts/help/common_helptexts.lua:56
 msgid "Toggle minimap"
-msgstr ""
+msgstr "약도 켜기/끄기"
+
+#: ../../data/txts/help/multiplayer_help.lua:7
+msgid "Multiplayer Game Setup"
+msgstr "여럿이하기 게임 설정"
+
+#: ../../data/txts/help/multiplayer_help.lua:8
+msgid "You are in the multiplayer launch game menu."
+msgstr "여럿이 하기 시작 게임 메뉴에 있습니다."
 
 #: ../../data/txts/help/multiplayer_help.lua:10
-msgid "Multiplayer Game Setup"
-msgstr ""
+msgid "Client settings"
+msgstr "클라이언트 설정"
 
 #: ../../data/txts/help/multiplayer_help.lua:11
-msgid "You are in the multiplayer launch game menu."
-msgstr ""
-
-#: ../../data/txts/help/multiplayer_help.lua:13
-msgid "Client settings"
-msgstr ""
-
-#: ../../data/txts/help/multiplayer_help.lua:14
 msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role with the button following your nickname. Available roles are:"
-msgstr ""
+msgstr "왼쪽에 당신을 포함한 모든 클라이언트 목록이 있습니다. 대화명에 따라 단추를 사용하여 역할을 설정할 수 있습니다. 사용 가능한 역할은 다음과 같습니다:"
 
-#: ../../data/txts/help/multiplayer_help.lua:15
+#: ../../data/txts/help/multiplayer_help.lua:12
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
-msgstr ""
+msgstr "깃발의 색깔을 가진 선수. 둘 이상의 클라이언트가 동일한 색상을 선택한 경우, 플레이어에 대한 제어권을 공유합니다 ( '공유된 왕국 모드')."
+
+#: ../../data/txts/help/multiplayer_help.lua:13
+msgid ""
+"Spectator mode, meaning you can see everything, but cannot control any "
+"player"
+msgstr "관전자 모드, 모든 것을 볼 수 있지만 플레이어를 제어 할 수 없음을 의미합니다."
+
+#: ../../data/txts/help/multiplayer_help.lua:15
+msgid "Player settings"
+msgstr "놀사람 설정"
 
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
-"Spectator mode, meaning you can see everything, but cannot control any "
-"player."
-msgstr ""
-
-#: ../../data/txts/help/multiplayer_help.lua:18
-msgid "Player settings"
-msgstr ""
-
-#: ../../data/txts/help/multiplayer_help.lua:19
-msgid ""
 "In the middle are the settings for the players. To start a game, each player"
 " must be one of the following:"
-msgstr ""
+msgstr "가운데에는 플레이어의 설정이 있습니다. 게임을 시작하려면 각 플레이어는 다음 중 하나 여야합니다.:"
 
-#: ../../data/txts/help/multiplayer_help.lua:20
+#: ../../data/txts/help/multiplayer_help.lua:17
 msgid "Connected to one or more clients (see ‘Client settings’)."
-msgstr ""
+msgstr "하나 이상의 클라이언트에 연결되었습니다('클라이언트 설정'참조)."
 
-#: ../../data/txts/help/multiplayer_help.lua:21
+#: ../../data/txts/help/multiplayer_help.lua:18
 msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse"
 " hover texts indicate the strength of the currently selected computer "
 "player)."
-msgstr ""
+msgstr "컴퓨터 플레이어에 연결됨(그림의 얼굴 뿐만 아니라 마우스를 가리키면 현재 선택된 컴퓨터 플레이어의 힘을 나타냅니다.)"
 
-#: ../../data/txts/help/multiplayer_help.lua:22
+#: ../../data/txts/help/multiplayer_help.lua:19
 msgid "Set as shared in starting position for another player."
-msgstr ""
+msgstr "다른 플레이어의 시작 위치를 공유로 설정합니다."
 
-#: ../../data/txts/help/multiplayer_help.lua:23
+#: ../../data/txts/help/multiplayer_help.lua:20
 msgid "Closed."
-msgstr ""
+msgstr "닫혀짐."
 
-#: ../../data/txts/help/multiplayer_help.lua:24
+#: ../../data/txts/help/multiplayer_help.lua:21
 msgid ""
 "The latter three can only be set by the hosting client by left-clicking the "
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players."
-msgstr ""
+msgstr "뒤의 세 개는 선수의 ‘유형’ 버튼을 마우스 왼쪽 버튼으로 클릭해야만 호스팅 손님에서 설정할 수 있습니다. 방장 선수는 또한 각 선수(선수가 시작하는 건물, 창고 및 작업자 설정)와 컴퓨터 선수 부족 및 팀의 초기화를 설정할 수 있습니다."
 
-#: ../../data/txts/help/multiplayer_help.lua:25
+#: ../../data/txts/help/multiplayer_help.lua:22
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
 " and the team for that player."
-msgstr ""
+msgstr "(관객이 아닌) 선수와 연결된 모든 손님들은 해당 선수에 대한 부족과 팀을 설정할 수 있습니다."
 
-#: ../../data/txts/help/multiplayer_help.lua:27
+#: ../../data/txts/help/multiplayer_help.lua:24
 msgid "Map details"
-msgstr ""
+msgstr "지도 세부 정보"
 
-#: ../../data/txts/help/multiplayer_help.lua:28
+#: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "You can see information about the selected map or savegame on the right-hand"
 " side. A button next to the map name allows the host to change to a "
 "different map. Furthermore, the host is able to set a specific win "
 "condition, and finally can start the game as soon as all players are set up."
-msgstr ""
+msgstr "오른쪽에서 선택한 지도 또는 저장 게임에 대한 정보를 볼 수 있습니다. 지도 이름 옆에있는 버튼을 사용하면 방장이 다른 지도로 변경할 수 있습니다. 또한, 방장은 특정 우승 조건을 설정할 수 있으며, 마지막으로 모든 선수가 설정되는 즉시 놀이를 시작할 수 있습니다."
 
 #: ../../data/txts/tips/atlanteans.lua:4
 msgid ""
 "Keep an eye on your fishers and build a fish breeder’s house. After fish "
 "resources are exhausted in their work area, the fish supply cannot be "
 "regenerated."
-msgstr ""
+msgstr "낚시꾼들을 잘 감시하고 어장 집을 지으십시오. 물고기 자원은 일터에서 고갈되면 다시 살릴 수 없습니다."
 
 #: ../../data/txts/tips/atlanteans.lua:8
 msgid ""
 "Always build a forester’s and a woodcutter’s house, so you will not run out "
 "of logs."
-msgstr ""
+msgstr "항상 통나무가 고갈되지 않도록 숲지기와 벌목꾼의 집을 지으십시오."
 
 #: ../../data/txts/tips/atlanteans.lua:12
 msgid ""
 "Atlanteans need spidercloth for many buildings. Build the needed "
 "infrastructure early before you run out."
-msgstr ""
+msgstr "아틀란티스족은 많은 건물에 거미줄이 필요합니다. 예산이 소진되기 전에 필요한 기반 시설을 초반에 구축하십시오."
 
 #: ../../data/txts/tips/barbarians.lua:4 ../../data/txts/tips/empire.lua:4
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "work area, they will stop fishing."
-msgstr ""
+msgstr "낚시꾼을 잘 보십시오. 물고기 자원이 작업 영역에서 고갈되면 낚시를 멈춥니다."
 
 #: ../../data/txts/tips/barbarians.lua:8
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
 "logs or game."
-msgstr ""
+msgstr "항상 숲지기와 짐승 키움이의 오두막을 지어서 통나무나 짐승들이 부족하지 않도록 하십시오."
 
 #: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
+#: ../../data/txts/tips/frisians.lua:12
 msgid ""
 "Most enhanced buildings need experienced workers. Do not enhance a building "
 "unless you have the necessary workers available."
-msgstr ""
+msgstr "대부분의 고급 건물에는 숙련된 근로자가 필요합니다. 필요한 근로자가 없는 한 건물을 개선하지 마십시오."
 
-#: ../../data/txts/tips/editor.lua:4
+#. TRANSLATORS: %s = URL to the Widelands website
+#: ../../data/txts/tips/editor.lua:7
+#, lua-format
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
-"wiki at www.widelands.org"
-msgstr ""
+"wiki at %s."
+msgstr "%s에 있는 위키에서 편집자를 위한 일반 도움말과 간단한 자습서를 찾을 수 있습니다."
 
-#: ../../data/txts/tips/editor.lua:8
+#: ../../data/txts/tips/editor.lua:11
 msgid ""
 "You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
-msgstr ""
+msgstr "Ctrl 키를 누르면서 클릭하면 여러 동물 유형을 선택할 수 있습니다. 그런 다음 지도를 클릭하면 선택한 동물 유형 중 하나의 것이 배치됩니다."
 
-#: ../../data/txts/tips/editor.lua:12
+#: ../../data/txts/tips/editor.lua:15
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
 "textures with Ctrl + mouse click."
-msgstr ""
+msgstr "동물과 마찬가지로 Ctrl + 마우스 클릭으로 여러개의 움직이지 않는 벽이나 텍스처를 선택할 수 있습니다."
 
-#: ../../data/txts/tips/editor.lua:16
+#: ../../data/txts/tips/editor.lua:19
 msgid ""
 "Holding down Shift switches the first alternative tool on. This tool is in "
 "most cases the complete opposite of the normal tool (for example deletion of"
 " an object instead of placing one)."
-msgstr ""
+msgstr "쉬프트키를 계속 누르면 첫 번째 대체 도구가 켜집니다. 이 도구는 대부분의 경우 일반 도구와 완전히 반대입니다 (예: 개체를 배치하는 대신 개체를 삭제하는 경우)."
 
-#: ../../data/txts/tips/editor.lua:20
+#: ../../data/txts/tips/editor.lua:23
 msgid ""
 "Holding down Alt switches the second alternative tool on (if it exists)."
-msgstr ""
+msgstr "알트키를 누르면 두 번째 대체 도구가 켜집니다 (있는 경우)."
 
-#: ../../data/txts/tips/editor.lua:24
+#: ../../data/txts/tips/editor.lua:27
 msgid ""
 "The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr ""
+msgstr "숫자 키 (0 - 9)를 사용하여 마우스 커서 주변의 선택된 영역의 크기를 직접 설정할 수 있습니다."
 
-#: ../../data/txts/tips/editor.lua:28
+#: ../../data/txts/tips/editor.lua:31
 msgid ""
 "Space key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
-msgstr ""
+msgstr "스페이스키는 정상적인 게임에서처럼 작동합니다. 건물 공간이 켜져 있거나 꺼져있는 경우 전환됩니다."
 
-#: ../../data/txts/tips/editor.lua:32
+#: ../../data/txts/tips/editor.lua:35
 msgid ""
 "When placing trees, use the help button to see which trees are more likely "
 "to survive on which terrain."
-msgstr ""
+msgstr "나무를 심어 놓으려면 도움말 버튼을 사용하여 어느 지형에서 어떤 나무가 생존 할 가능성이 더 높은지 확인하십시오."
 
-#: ../../data/txts/tips/editor.lua:36
+#: ../../data/txts/tips/editor.lua:39
 msgid ""
 "If you do not set water and fish resources, a default amount will be used."
-msgstr ""
+msgstr "물이나 물고기 자원을 설정하지 않으면 기본량으로 설정되어 사용됩니다."
 
-#: ../../data/txts/tips/editor.lua:40
+#: ../../data/txts/tips/editor.lua:43
 msgid ""
 "You can place a medium building on any node where there is a slope no "
 "greater than 1 in the south-east direction and its height difference to all "
 "nodes in a radius of 2 is no greater than 2."
-msgstr ""
+msgstr "남동쪽 방향에서 1 이하의 경사가 있고 반지름 2의 모든 노드에 대한 높이 차이가 2 이하인 노드에 중간 건물을 배치할 수 있습니다."
 
-#: ../../data/txts/tips/editor.lua:44
+#: ../../data/txts/tips/editor.lua:47
 msgid ""
-"You can place a large building on any node where you could place a medium "
+"You can place a big building on any node where you could place a medium "
 "building if there is no obstacle or non-arable terrain towards the west, "
 "northwest and northeast."
-msgstr ""
+msgstr "당신은 서쪽, 북서쪽, 북동쪽을 향해 장애물이나 생존할 수 없는 지형지물이 없는 경우 중간 건물을 배치할 수 있는 어떤 노드에도 큰 건물을 세울 수 있습니다."
 
 #: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
-msgstr ""
+msgstr "항상 통나무가 고갈되지 않도록 숲지기의 집을 지으십시오."
 
 #: ../../data/txts/tips/empire.lua:16
 msgid "Empire needs a lot of marble. Keep looking for marble resources."
-msgstr ""
+msgstr "제국은 많은 대리석이 필요로합니다. 대리석 자원을 계속 찾으십시오."
 
-#: ../../data/txts/tips/general_game.lua:4
+#: ../../data/txts/tips/frisians.lua:4
+msgid ""
+"To produce bricks, you need granite; to produce granite, you need a quarry "
+"or rock mine; to build those, you need bricks. Take care not to get "
+"deadlocked!"
+msgstr "벽돌을 생산하려면 화강암이 필요합니다. 화강암을 생산하려면 채석장이나 암석이 필요합니다. 그것을 짓기위해서는 벽돌이 필요합니다. 교착 상태에 빠지지 않도록 주의하십시오!"
+
+#: ../../data/txts/tips/frisians.lua:8
+msgid "Always build a forester’s house, so you will not run out of logs."
+msgstr "항상 통나무가 고갈되지 않도록 숲지기의 집을 지으십시오."
+
+#: ../../data/txts/tips/general_game.lua:6
 msgid ""
 "The building process will only start after a road is built to the "
 "construction site."
-msgstr ""
+msgstr "건설 과정은 건설 현장까지 도로가 건설된 후 시작됩니다."
 
-#: ../../data/txts/tips/general_game.lua:8
+#: ../../data/txts/tips/general_game.lua:10
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a "
 "mine."
-msgstr ""
+msgstr "우물이나 광산을 짓기 전에 지질학자를 보내 사이트를 조사하십시오."
 
-#: ../../data/txts/tips/general_game.lua:12
+#: ../../data/txts/tips/general_game.lua:14
 msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Blockhouse, etc."
-msgstr ""
+msgstr "초소, 큰 요새, 사각 요새 등 다양한 군사 건물을 건설하여 영토를 확장 할 수 있습니다."
 
-#: ../../data/txts/tips/general_game.lua:16
+#: ../../data/txts/tips/general_game.lua:18
 msgid "Miners will work only if supplied with food."
-msgstr ""
+msgstr "광부는 식량이 공급 될 때만 일합니다."
 
-#: ../../data/txts/tips/general_game.lua:20
+#: ../../data/txts/tips/general_game.lua:22
 msgid ""
 "Split your roads into shorter sections by planting some flags. This will "
 "speed up transportation of your wares."
-msgstr ""
+msgstr "몇개의 깃발을 세움으로서 짧은 구역으로 길을 나누십시오. 이렇게 하면 물건을 빠르게 운송 할 수 있습니다."
 
-#: ../../data/txts/tips/general_game.lua:24
+#. TRANSLATORS: %s = URL to the Widelands website
+#: ../../data/txts/tips/general_game.lua:27
+#, lua-format
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
-"can be found at www.widelands.org."
-msgstr ""
+"can be found online at %s."
+msgstr "더 궁금한 점이 있습니까? FAQ, 위키 및 커뮤니티 포럼은 %s 에서 찾을 수 있습니다."
 
-#: ../../data/txts/tips/general_game.lua:28
+#: ../../data/txts/tips/general_game.lua:31
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
-"specific ware."
-msgstr ""
+"specific ware. Pressing Ctrl while clicking will adjust all wares at once."
+msgstr "특정 물건의 배달을 조정하려면 건물 창에서 우선 순위 버튼을 사용하십시오. Ctrl키를 누른 상태에서 클릭하면 모든 제품이 한번에 조정됩니다."
 
-#: ../../data/txts/tips/general_game.lua:32
+#: ../../data/txts/tips/general_game.lua:35
 msgid ""
 "Use the ‘configure economy’ menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
-msgstr ""
+msgstr "'경제 구성'메뉴를 사용하여 목표 수량을 조정하십시오. 깃발 메뉴를 통해 접근 할 수 있습니다."
 
-#: ../../data/txts/tips/general_game.lua:36
+#: ../../data/txts/tips/general_game.lua:39
 msgid ""
 "Manage your messages more efficiently: press ‘N’ for News to access the "
 "messages window, then use ‘G’ for Go To, and the Delete key to archive "
 "messages."
-msgstr ""
+msgstr "메시지를 보다 효율적으로 관리하십시오: 메시지 창에 접근하려면 새소식의 ‘N’ 을 누르고, 이동을 위해 ‘G’ 를 누르고, 메시지를 보관하려면 딜리트키를 누르십시오."
 
-#: ../../data/txts/tips/general_game.lua:40
+#: ../../data/txts/tips/general_game.lua:43
 msgctxt "hotkey"
 msgid "1-9"
-msgstr ""
+msgstr "1-9"
 
-#: ../../data/txts/tips/general_game.lua:40
+#: ../../data/txts/tips/general_game.lua:43
 msgctxt "hotkey"
 msgid "Ctrl+(1-9)"
-msgstr ""
+msgstr "Ctrl+(1-9)"
 
-#: ../../data/txts/tips/general_game.lua:40
+#: ../../data/txts/tips/general_game.lua:43
 msgid "Press %1% to store important locations, then press %2% to recall them."
-msgstr ""
+msgstr "%1% 를 눌러 중요한 위치를 저장 한 다음 %2% 를 눌러 불러올 수 있습니다."
 
-#: ../../data/txts/tips/general_game.lua:44
+#: ../../data/txts/tips/general_game.lua:47
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first"
 " junction."
-msgstr ""
+msgstr "컨트롤 키를 누른 상태에서 길을 제거하면 첫 번째 교차점까지의 모든 깃발을 제거할 수 있습니다."
 
-#: ../../data/txts/tips/general_game.lua:48
+#: ../../data/txts/tips/general_game.lua:51
 msgid ""
 "New soldiers are recruited in a barracks. Their abilities can then be "
 "improved in training sites."
-msgstr ""
+msgstr "신병들이 병영에 모집되었습니다. 그들의 능력은 훈련소에서 향상 될 수 있습니다.\n신병들이 막사에 채용되었다. 그들의 능력은 훈련 현장에서 향상될 수 있다."
 
-#: ../../data/txts/tips/general_game.lua:52
+#: ../../data/txts/tips/general_game.lua:55
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
-msgstr ""
+msgstr "위험하게 살고 싶다면, 컨트롤 키를 누른 상태에서 건물 강화나 건물 해체나 파괴 버튼을 클릭하면 확인을 건너 뜁니다."
 
-#: ../../data/txts/tips/general_game.lua:56
+#: ../../data/txts/tips/general_game.lua:59
 msgid "Press I to quickly toggle the display of your stock inventory."
-msgstr ""
+msgstr "재고 목록을 빨리 전환하려면  ‘I’ 를 누르십시오."
 
-#: ../../data/txts/tips/general_game.lua:60
+#: ../../data/txts/tips/general_game.lua:63
 msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."
-msgstr ""
+msgstr "경제는 길로 연결된 모든 건물과 깃발로 이루어져 있습니다. 건물의 공급과 수요는 경제에서 처리됩니다.[쉬운번역으로수정바람 내용어려움]"
 
-#: ../../data/txts/tips/general_game.lua:64
+#: ../../data/txts/tips/general_game.lua:67
 msgid ""
 "Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
-msgstr ""
+msgstr "농장과 같은 몇몇 건물은 작업 공간이 매우 작습니다. 만약 그 건물이 나무나 도로로 둘러싸버리면, 생산은 중단될 것입니다."
 
-#: ../../data/txts/tips/general_game.lua:68
+#: ../../data/txts/tips/general_game.lua:71
 msgctxt "hotkey"
 msgid "Ctrl+(+/-)"
-msgstr ""
+msgstr "Ctrl+(+/-)"
 
-#: ../../data/txts/tips/general_game.lua:68
+#: ../../data/txts/tips/general_game.lua:71
 msgctxt "hotkey"
 msgid "Ctrl+0"
-msgstr ""
+msgstr "Ctrl+0"
 
-#: ../../data/txts/tips/general_game.lua:68
+#: ../../data/txts/tips/general_game.lua:71
 msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
-msgstr ""
+msgstr "마우스 휠 또는 %1% (으)로 확대/축소합니다. %2% (을)를 눌러 확대/축소를 다시 설정하십시오."
 
-#: ../../data/txts/tips/general_game.lua:72
+#: ../../data/txts/tips/general_game.lua:75
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"
 " no such flags in the vicinity, they will keep wandering around and "
 "eventually die."
-msgstr ""
+msgstr "건물이 파괴되면, 노동자들은 도로 근처의 연결된 창고로 이동할 수 있는 가까운 깃발을 찾기 시작할 것입니다. 주변에 그런 깃발이 없다면 주변을 방황하다가 결국 죽게될 것입니다."
 
 #: ../../data/txts/tips/multiplayer.lua:4
 msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
 "– the real speed is then democratically set."
-msgstr ""
+msgstr "’페이지 업’ 과 ‘페이지 다운’ 키를 사용하여 원하는 속도를 조정할 수 있습니다. – 이때 실제 속도는 민주적으로 설정됩니다."
 
 #: ../../data/txts/tips/multiplayer.lua:8
 msgid ""
 "You can use ‘/me’ at the beginning of a chatmessage: ‘/me is tired’ will be "
 "printed as ‘-> Nickname is tired’."
-msgstr ""
+msgstr "채팅메시지를 시작할 때 '/me는 피곤하다'를 사용할 수 있다. '-> 닉네임은 피곤하다'로 출력된다.\n채팅 메시지 시작 부분에서 '/me'를 사용할 수 있습니다 : '/ me is tired'는 '-> Nickname is tired'로 인쇄됩니다.\n\n채팅 메시지의 시작부분에 ‘/me’  를 사용할수있습니다:  ‘/me 는 지쳤습니다.' 로입력하면 ‘->대화명님은 지쳤습니다.' 로 표시됩니다."
 
 #: ../../data/txts/tips/multiplayer.lua:12
 msgid ""
 "Use ‘@name’ at the beginning of a chat message to send it to only one "
 "player."
-msgstr ""
+msgstr "채팅 메시지가 시작될 때 '@name'을 사용하여 한 명에게만 메시지를 보냅니다."
 
 #: ../../data/txts/tips/multiplayer.lua:16
 msgid ""
 "If the game should crash, don't worry! The game will be saved automatically "
 "so that you can reload it afterwards."
-msgstr ""
+msgstr "만약 게임이 중단되어도, 걱정하지 마십시오! 게임은 자동으로 저장되므로 나중에 다시 불러올 수 있습니다."
 
-#: ../../data/txts/tips/singleplayer.lua:4
+#. TRANSLATORS: %s = URL to the Widelands website
+#: ../../data/txts/tips/singleplayer.lua:7
+#, lua-format
 msgid ""
-"Our computer players are too boring? Visit our website at www.widelands.org "
-"and meet other players to play online."
-msgstr ""
+"Our computer players are too boring? Visit our website at %s and meet other "
+"players to play online."
+msgstr "우리 컴퓨터 플레이어가 너무 지루합니까? 저희 웹 사이트 %s 에 방문하여 다른 사람들과 만나 온라인 게임을 즐기십시오."

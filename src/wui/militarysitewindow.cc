@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,6 @@
 #include "wui/militarysitewindow.h"
 
 #include "graphic/graphic.h"
-#include "ui_basic/tabpanel.h"
 #include "wui/soldiercapacitycontrol.h"
 #include "wui/soldierlist.h"
 
@@ -29,18 +28,17 @@ static char const* pic_tab_military = "images/wui/buildings/menu_tab_military.pn
 MilitarySiteWindow::MilitarySiteWindow(InteractiveGameBase& parent,
                                        UI::UniqueWindow::Registry& reg,
                                        Widelands::MilitarySite& ms,
-                                       bool avoid_fastclick)
-   : BuildingWindow(parent, reg, ms, avoid_fastclick) {
-	init(avoid_fastclick);
+                                       bool avoid_fastclick,
+                                       bool workarea_preview_wanted)
+   : BuildingWindow(parent, reg, ms, avoid_fastclick), military_site_(&ms) {
+	init(avoid_fastclick, workarea_preview_wanted);
 }
 
-void MilitarySiteWindow::create_capsbuttons(UI::Box* buttons) {
-	BuildingWindow::create_capsbuttons(buttons);
-}
-
-void MilitarySiteWindow::init(bool avoid_fastclick) {
-	BuildingWindow::init(avoid_fastclick);
+void MilitarySiteWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
+	Widelands::MilitarySite* military_site = military_site_.get(igbase()->egbase());
+	assert(military_site != nullptr);
+	BuildingWindow::init(avoid_fastclick, workarea_preview_wanted);
 	get_tabs()->add("soldiers", g_gr->images().get(pic_tab_military),
-	                create_soldier_list(*get_tabs(), *igbase(), militarysite()), _("Soldiers"));
+	                create_soldier_list(*get_tabs(), *igbase(), *military_site), _("Soldiers"));
 	think();
 }

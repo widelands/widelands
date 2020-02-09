@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,7 @@
 #include <SDL.h>
 
 #include "graphic/image_cache.h"
+#include "graphic/style_manager.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
 
@@ -41,9 +42,13 @@ constexpr int kMinimumSizeForTextures = 2048;
 struct GraphicResolutionChanged {
 	CAN_BE_SENT_AS_NOTE(NoteId::GraphicResolutionChanged)
 
+	// Old width and height in pixels.
+	int old_width;
+	int old_height;
+
 	// New width and height in pixels.
-	int width;
-	int height;
+	int new_width;
+	int new_height;
 };
 
 /**
@@ -80,9 +85,7 @@ public:
 		return sdl_window_;
 	}
 
-	int max_texture_size() const {
-		return max_texture_size_;
-	}
+	int max_texture_size_for_font_rendering() const;
 
 	ImageCache& images() const {
 		return *image_cache_.get();
@@ -90,13 +93,16 @@ public:
 	AnimationManager& animations() const {
 		return *animation_manager_.get();
 	}
+	StyleManager& styles() const {
+		return *style_manager_.get();
+	}
 
 	// Requests a screenshot being taken on the next frame.
 	void screenshot(const std::string& fname);
 
 private:
 	// Called when the resolution (might) have changed.
-	void resolution_changed();
+	void resolution_changed(int old_w = 0, int old_h = 0);
 
 	// The height & width of the window should we be in window mode.
 	int window_mode_width_ = 0;
@@ -123,6 +129,9 @@ private:
 
 	/// This holds all animations.
 	std::unique_ptr<AnimationManager> animation_manager_;
+
+	/// This holds all GUI styles.
+	std::unique_ptr<StyleManager> style_manager_;
 
 	/// Screenshot filename. If a screenshot is requested, this will be set to
 	/// the requested filename. On the next frame the screenshot will be written

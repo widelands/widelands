@@ -16,10 +16,10 @@ run(function()
    sleep(12000)
 
    -- remove the ship while the ware is in transit.
-   stable_save("0_before_removing_ship")
+   stable_save(game, "0_before_removing_ship")
    ship:remove()
    sleep(1000)
-   stable_save("1_no_more_ship")
+   stable_save(game, "1_no_more_ship")
 
    assert_equal(1, p1:get_wares("blackwood"))
    -- It is not in the port (still in the dock)

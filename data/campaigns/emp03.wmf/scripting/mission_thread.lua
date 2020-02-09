@@ -1,5 +1,7 @@
 include "scripting/messages.lua"
 include "map:scripting/helper_functions.lua"
+include "scripting/field_animations.lua"
+
 
 -- Some objectives need to be waited for in separate threads
 local obj_build_port_and_shipyard_done = false
@@ -18,14 +20,12 @@ function explore_sea()
    end
 
    campaign_message_box(amalea_12)
-   run(artifacts)
 end
 
 -- Check for control of all pieces of Neptune's shrine (artifacts)
 function artifacts()
    -- Objective will be triggered if 50+ buildings are built
-   local all_building_types = p1.tribe.buildings
-   while count_buildings(p1, all_building_types) < 50 do
+   while count_buildings(p1) < 50 do
       sleep(4000)
    end
    campaign_message_box(saledus_8)
@@ -97,8 +97,7 @@ function stonemason_and_marble_columns()
    local objective = add_campaign_objective(obj_lower_marble_column_demand)
 
    --- Check the headquarters' flag's economy
-   local eco = sf.brn.immovable.economy
-   while eco:ware_target_quantity("marble_column") ~= 4 do
+   while sf.brn.immovable.ware_economy:target_quantity("marble_column") ~= 4 do
       sleep(2434)
    end
    sleep(4000)
@@ -131,10 +130,11 @@ end
 function ship_industry()
    local objective = add_campaign_objective(obj_build_port_and_shipyard)
 
-   -- Check for port built to realize we need gold
-   while not check_for_buildings(p1, {empire_port = 1}) do sleep(2434) end
+   -- Wait a minute to realize we need more gold to build expeditions
+   sleep(60000)
    campaign_message_box(amalea_6)
    p1:allow_buildings{
+      "empire_well",
       "empire_brewery",
       "empire_coalmine",
       "empire_coalmine_deep",
@@ -193,7 +193,6 @@ function wheat()
    -- We need to turn the wheat into cloth for building ships
    objective = add_campaign_objective(obj_produce_cloth)
    p1:allow_buildings{
-      "empire_well",
       "empire_sheepfarm",
       "empire_weaving_mill",
       "empire_charcoal_kiln",
@@ -250,6 +249,7 @@ function expedition()
    objective = add_campaign_objective(obj_conquer_all)
    run(explore_sea)
    run(soldiers)
+   run(artifacts)
 
    while not p2.defeated do sleep(2342) end
    objective.done = true
@@ -264,8 +264,7 @@ function expedition()
    sleep(25000)
    campaign_message_box(diary_page_5)
 
-   p1:reveal_campaign("campsect2")
-   p1:reveal_scenario("empiretut03")
+   p1:mark_scenario_as_solved("emp03.wmf")
 end
 
 -- After discovery of Barbarian ruins, we should hurry to build a full training capability
@@ -276,17 +275,11 @@ function soldiers()
    while not p1:sees_field(ruins) do sleep(3000) end
    scroll_to_field(ruin_fortress,5)
    sleep(500)
-   random_reveal(p1, ruin_fortress:region(5), 1000)
+   p1:reveal_fields(ruin_fortress:region(5))
    sleep(500)
    campaign_message_box(saledus_12)
 
    -- If we don't have enough training sites yet, add a message and objective to complete them.
-   local training = p1:get_buildings {
-      "empire_trainingcamp",
-      "empire_barracks",
-      "empire_arena",
-      "empire_colosseum"
-   }
    if not check_trainingsites() then
       campaign_message_box(saledus_11, 3000)
       local objective = add_campaign_objective(obj_training)
@@ -307,7 +300,7 @@ function mission_thread()
    campaign_message_box(diary_page_1)
 
    -- Show the sea
-   random_reveal(p1, sea:region(5), 1000)
+   reveal_randomly(p1, sea:region(5), 1000)
    sleep(100)
    local ship = p1:place_ship(sea)
    sleep(2500)
@@ -317,15 +310,14 @@ function mission_thread()
    sleep(400)
    ship:remove()
    sleep(300)
-   random_hide(p1, sea:region(6), 1000)
+   hide_randomly(p1, sea:region(6), 1000)
    sleep(300)
 
    -- Scroll to the place where the ship is finally stranded
    scroll_to_field(sf)
    -- Now we place the shipwreck headquarters and fill it with workers and wares
    include "map:scripting/starting_conditions.lua"
-   p1:hide_fields(sf:region(13), true)
-   concentric_reveal(p1, sf, 13, 100)
+   reveal_concentric(p1, sf, 13, 100)
    campaign_message_box(diary_page_3)
    sleep(400)
    campaign_message_box(saledus)
@@ -370,6 +362,7 @@ function mission_thread()
 
    local port = map:get_field(17, 17)
    while port.owner ~= p1 do sleep(3000) end
+   p1:conquer(port,4)
 
    sleep(3213)
    objective.done = true

@@ -20,7 +20,7 @@ run(function()
 
    southern_port():remove()
    sleep(100)
-   stable_save("port1_just_removed")
+   stable_save(game, "port1_just_removed")
 
    -- Wait till the worker runs to the warehouse.
    while wh:get_workers("barbarians_builder") == 0 do

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,66 +30,20 @@
 #include "logic/map.h"
 #include "logic/map_objects/bob.h"
 #include "logic/player.h"
-#include "profile/profile.h"
-#include "ui_basic/button.h"
-#include "ui_basic/window.h"
+#include "wlapplication_options.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/interactive_player.h"
-#include "wui/mapview.h"
 #include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
 
-#define NUM_VIEWS 5
 #define REFRESH_TIME 5000
 
 // Holds information for a view
-struct WatchWindowView {
-	MapView::View view;
-	Widelands::ObjectPointer tracking;  //  if non-null, we're tracking a Bob
-};
-
-struct WatchWindow : public UI::Window {
-	WatchWindow(InteractiveGameBase& parent,
-	            int32_t x,
-	            int32_t y,
-	            uint32_t w,
-	            uint32_t h,
-	            bool single_window_ = false);
-	~WatchWindow();
-
-	Widelands::Game& game() const {
-		return parent_.game();
-	}
-
-	boost::signals2::signal<void(Vector2f)> warp_mainview;
-
-	void add_view(Widelands::Coords);
-	void next_view();
-	void save_coords();
-	void close_cur_view();
-	void toggle_buttons();
-
-protected:
-	void think() override;
-	void stop_tracking_by_drag();
-	void draw(RenderTarget&) override;
-
-private:
-	void do_follow();
-	void do_goto();
-	void view_button_clicked(uint8_t index);
-	void set_current_view(uint8_t idx, bool save_previous = true);
-
-	InteractiveGameBase& parent_;
-	MapView map_view_;
-	uint32_t last_visit_;
-	bool single_window_;
-	uint8_t cur_index_;
-	UI::Button* view_btns_[NUM_VIEWS];
-	std::vector<WatchWindowView> views_;
-};
-
 static WatchWindow* g_watch_window = nullptr;
+
+Widelands::Game& WatchWindow::game() const {
+	return parent_.game();
+}
 
 WatchWindow::WatchWindow(InteractiveGameBase& parent,
                          int32_t const x,
@@ -103,38 +57,37 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
      last_visit_(game().get_gametime()),
      single_window_(init_single_window),
      cur_index_(0) {
-	UI::Button* followbtn = new UI::Button(
-	   this, "follow", 0, h - 34, 34, 34, g_gr->images().get("images/ui_basic/but0.png"),
-	   g_gr->images().get("images/wui/menus/menu_watch_follow.png"), _("Follow"));
+	UI::Button* followbtn =
+	   new UI::Button(this, "follow", 0, h - 34, 34, 34, UI::ButtonStyle::kWuiSecondary,
+	                  g_gr->images().get("images/wui/menus/watch_follow.png"), _("Follow"));
 	followbtn->sigclicked.connect(boost::bind(&WatchWindow::do_follow, this));
 
-	UI::Button* gotobtn = new UI::Button(this, "center_mainview_here", 34, h - 34, 34, 34,
-	                                     g_gr->images().get("images/ui_basic/but0.png"),
-	                                     g_gr->images().get("images/wui/menus/menu_goto.png"),
-	                                     _("Center the main view on this"));
+	UI::Button* gotobtn = new UI::Button(
+	   this, "center_mainview_here", 34, h - 34, 34, 34, UI::ButtonStyle::kWuiSecondary,
+	   g_gr->images().get("images/wui/menus/goto.png"), _("Center the main view on this"));
 	gotobtn->sigclicked.connect(boost::bind(&WatchWindow::do_goto, this));
 
 	if (init_single_window) {
-		for (uint8_t i = 0; i < NUM_VIEWS; ++i) {
-			view_btns_[i] = new UI::Button(this, "view", 74 + (17 * i), 200 - 34, 17, 34,
-			                               g_gr->images().get("images/ui_basic/but0.png"), "-");
+		for (uint8_t i = 0; i < kViews; ++i) {
+			view_btns_[i] = new UI::Button(
+			   this, "view", 74 + (17 * i), 200 - 34, 17, 34, UI::ButtonStyle::kWuiSecondary, "-");
 			view_btns_[i]->sigclicked.connect(boost::bind(&WatchWindow::view_button_clicked, this, i));
 		}
 
-		UI::Button* closebtn = new UI::Button(
-		   this, "close", w - 34, h - 34, 34, 34, g_gr->images().get("images/ui_basic/but0.png"),
-		   g_gr->images().get("images/wui/menu_abort.png"), _("Close"));
+		UI::Button* closebtn =
+		   new UI::Button(this, "close", w - 34, h - 34, 34, 34, UI::ButtonStyle::kWuiSecondary,
+		                  g_gr->images().get("images/wui/menu_abort.png"), _("Close"));
 		closebtn->sigclicked.connect(boost::bind(&WatchWindow::close_cur_view, this));
 	}
 
 	map_view_.field_clicked.connect(
 	   [&parent](const Widelands::NodeAndTriangle<>& node_and_triangle) {
 		   parent.map_view()->field_clicked(node_and_triangle);
-		});
+	   });
 	map_view_.track_selection.connect(
 	   [&parent](const Widelands::NodeAndTriangle<>& node_and_triangle) {
 		   parent.map_view()->track_selection(node_and_triangle);
-		});
+	   });
 	map_view_.changeview.connect([this] { stop_tracking_by_drag(); });
 	warp_mainview.connect([&parent](const Vector2f& map_pixel) {
 		parent.map_view()->scroll_to_map_pixel(map_pixel, MapView::Transition::Smooth);
@@ -154,9 +107,9 @@ void WatchWindow::draw(RenderTarget& dst) {
  * This also resets the view cycling timer.
  */
 void WatchWindow::add_view(Widelands::Coords const coords) {
-	if (views_.size() >= NUM_VIEWS)
+	if (views_.size() >= kViews)
 		return;
-	WatchWindowView view;
+	WatchWindow::View view;
 
 	map_view_.scroll_to_field(coords, MapView::Transition::Jump);
 
@@ -183,7 +136,7 @@ void WatchWindow::save_coords() {
 
 // Enables/Disables buttons for views_
 void WatchWindow::toggle_buttons() {
-	for (uint32_t i = 0; i < NUM_VIEWS; ++i) {
+	for (uint32_t i = 0; i < kViews; ++i) {
 		if (i < views_.size()) {
 			view_btns_[i]->set_title(std::to_string(i + 1));
 			view_btns_[i]->set_enabled(true);
@@ -256,6 +209,13 @@ void WatchWindow::stop_tracking_by_drag() {
 }
 
 /**
+ * Track the specified bob.
+ */
+void WatchWindow::follow(Widelands::Bob* bob) {
+	views_[cur_index_].tracking = bob;
+}
+
+/**
  * Called when the user clicks the "follow" button.
  *
  * If we are currently tracking a bob, stop tracking.
@@ -280,7 +240,7 @@ void WatchWindow::do_follow() {
 		                           .node),
 		        2);
 		     area.radius <= 32; area.radius *= 2)
-			if (map.find_bobs(area, &bobs))
+			if (map.find_bobs(g, area, &bobs))
 				break;
 		//  Find the bob closest to us
 		float closest_dist = 0;
@@ -299,14 +259,14 @@ void WatchWindow::do_follow() {
 				closest_dist = dist;
 			}
 		}
-		views_[cur_index_].tracking = closest;
+		follow(closest);
 	}
 }
 
 /**
  * Called when the "go to" button is clicked.
  *
- * Cause the main map_view_ to jump to our current position.
+ * Cause the main mapview_ to jump to our current position.
  */
 void WatchWindow::do_goto() {
 	warp_mainview(map_view_.view_area().rect().center());
@@ -344,14 +304,16 @@ show_watch_window
 Open a watch window.
 ===============
 */
-void show_watch_window(InteractiveGameBase& parent, const Widelands::Coords& coords) {
-	if (g_options.pull_section("global").get_bool("single_watchwin", false)) {
+WatchWindow* show_watch_window(InteractiveGameBase& parent, const Widelands::Coords& coords) {
+	if (get_config_bool("single_watchwin", false)) {
 		if (!g_watch_window) {
 			g_watch_window = new WatchWindow(parent, 250, 150, 200, 200, true);
 		}
 		g_watch_window->add_view(coords);
+		return g_watch_window;
 	} else {
 		auto* window = new WatchWindow(parent, 250, 150, 200, 200, false);
 		window->add_view(coords);
+		return window;
 	}
 }

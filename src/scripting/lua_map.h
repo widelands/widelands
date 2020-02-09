@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,6 +29,7 @@
 #include "logic/game.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/ship.h"
@@ -49,7 +50,7 @@ class WareDescr;
 class WorkerDescr;
 class TerrainDescription;
 class TribeDescr;
-}
+}  // namespace Widelands
 
 namespace LuaMaps {
 
@@ -70,7 +71,7 @@ class LuaMap : public LuaMapModuleClass {
 public:
 	LUNA_CLASS_HEAD(LuaMap);
 
-	virtual ~LuaMap() {
+	~LuaMap() override {
 	}
 
 	LuaMap() {
@@ -85,16 +86,26 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_allows_seafaring(lua_State*);
+	int get_number_of_port_spaces(lua_State*);
+	int get_port_spaces(lua_State*);
 	int get_width(lua_State*);
 	int get_height(lua_State*);
 	int get_player_slots(lua_State*);
+	int get_waterway_max_length(lua_State*);
 
 	/*
 	 * Lua methods
 	 */
+	int count_conquerable_fields(lua_State*);
+	int count_terrestrial_fields(lua_State*);
+	int count_owned_valuable_fields(lua_State*);
 	int place_immovable(lua_State*);
 	int get_field(lua_State*);
 	int recalculate(lua_State*);
+	int recalculate_seafaring(lua_State*);
+	int set_port_space(lua_State*);
+	int set_waterway_max_length(lua_State*);
 
 	/*
 	 * C methods
@@ -106,7 +117,7 @@ class LuaTribeDescription : public LuaMapModuleClass {
 public:
 	LUNA_CLASS_HEAD(LuaTribeDescription);
 
-	virtual ~LuaTribeDescription() {
+	~LuaTribeDescription() override {
 	}
 
 	LuaTribeDescription() : tribedescr_(nullptr) {
@@ -127,8 +138,10 @@ public:
 	int get_buildings(lua_State*);
 	int get_carrier(lua_State*);
 	int get_carrier2(lua_State*);
+	int get_ferry(lua_State*);
 	int get_descname(lua_State*);
-	int get_headquarters(lua_State*);
+	int get_immovables(lua_State*);
+	int get_resource_indicators(lua_State*);
 	int get_geologist(lua_State*);
 	int get_name(lua_State*);
 	int get_port(lua_State*);
@@ -165,7 +178,7 @@ class LuaMapObjectDescription : public LuaMapModuleClass {
 public:
 	LUNA_CLASS_HEAD(LuaMapObjectDescription);
 
-	virtual ~LuaMapObjectDescription() {
+	~LuaMapObjectDescription() override {
 	}
 
 	LuaMapObjectDescription() : mapobjectdescr_(nullptr) {
@@ -185,9 +198,9 @@ public:
 	 */
 	int get_descname(lua_State*);
 	int get_icon_name(lua_State*);
+	int get_helptext_script(lua_State*);
 	int get_name(lua_State*);
 	int get_type_name(lua_State*);
-	int get_representative_image(lua_State*);
 
 	/*
 	 * Lua methods
@@ -219,7 +232,7 @@ class LuaImmovableDescription : public LuaMapObjectDescription {
 public:
 	LUNA_CLASS_HEAD(LuaImmovableDescription);
 
-	virtual ~LuaImmovableDescription() {
+	~LuaImmovableDescription() override {
 	}
 
 	LuaImmovableDescription() {
@@ -237,7 +250,7 @@ public:
 	 * Properties
 	 */
 	int get_species(lua_State*);
-	int get_build_cost(lua_State*);
+	int get_buildcost(lua_State*);
 	int get_editor_category(lua_State*);
 	int get_terrain_affinity(lua_State*);
 	int get_owner_type(lua_State*);
@@ -261,7 +274,7 @@ class LuaBuildingDescription : public LuaMapObjectDescription {
 public:
 	LUNA_CLASS_HEAD(LuaBuildingDescription);
 
-	virtual ~LuaBuildingDescription() {
+	~LuaBuildingDescription() override {
 	}
 
 	LuaBuildingDescription() {
@@ -278,11 +291,10 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_build_cost(lua_State*);
+	int get_buildcost(lua_State*);
 	int get_buildable(lua_State*);
 	int get_conquers(lua_State*);
 	int get_destructible(lua_State*);
-	int get_helptext_script(lua_State*);
 	int get_enhanced(lua_State*);
 	int get_enhanced_from(lua_State*);
 	int get_enhancement_cost(lua_State*);
@@ -312,7 +324,7 @@ class LuaConstructionSiteDescription : public LuaBuildingDescription {
 public:
 	LUNA_CLASS_HEAD(LuaConstructionSiteDescription);
 
-	virtual ~LuaConstructionSiteDescription() {
+	~LuaConstructionSiteDescription() override {
 	}
 
 	LuaConstructionSiteDescription() {
@@ -332,7 +344,7 @@ class LuaDismantleSiteDescription : public LuaBuildingDescription {
 public:
 	LUNA_CLASS_HEAD(LuaDismantleSiteDescription);
 
-	virtual ~LuaDismantleSiteDescription() {
+	~LuaDismantleSiteDescription() override {
 	}
 
 	LuaDismantleSiteDescription() {
@@ -352,7 +364,7 @@ class LuaProductionSiteDescription : public LuaBuildingDescription {
 public:
 	LUNA_CLASS_HEAD(LuaProductionSiteDescription);
 
-	virtual ~LuaProductionSiteDescription() {
+	~LuaProductionSiteDescription() override {
 	}
 
 	LuaProductionSiteDescription() {
@@ -393,7 +405,7 @@ class LuaMilitarySiteDescription : public LuaBuildingDescription {
 public:
 	LUNA_CLASS_HEAD(LuaMilitarySiteDescription);
 
-	virtual ~LuaMilitarySiteDescription() {
+	~LuaMilitarySiteDescription() override {
 	}
 
 	LuaMilitarySiteDescription() {
@@ -426,7 +438,7 @@ class LuaTrainingSiteDescription : public LuaProductionSiteDescription {
 public:
 	LUNA_CLASS_HEAD(LuaTrainingSiteDescription);
 
-	virtual ~LuaTrainingSiteDescription() {
+	~LuaTrainingSiteDescription() override {
 	}
 
 	LuaTrainingSiteDescription() {
@@ -474,7 +486,7 @@ class LuaWarehouseDescription : public LuaBuildingDescription {
 public:
 	LUNA_CLASS_HEAD(LuaWarehouseDescription);
 
-	virtual ~LuaWarehouseDescription() {
+	~LuaWarehouseDescription() override {
 	}
 
 	LuaWarehouseDescription() {
@@ -502,11 +514,42 @@ private:
 	CASTED_GET_DESCRIPTION(WarehouseDescr)
 };
 
+class LuaMarketDescription : public LuaBuildingDescription {
+public:
+	LUNA_CLASS_HEAD(LuaMarketDescription);
+
+	~LuaMarketDescription() override {
+	}
+
+	LuaMarketDescription() {
+	}
+	explicit LuaMarketDescription(const Widelands::MarketDescr* const warehousedescr)
+	   : LuaBuildingDescription(warehousedescr) {
+	}
+	explicit LuaMarketDescription(lua_State* L) : LuaBuildingDescription(L) {
+	}
+
+	/*
+	 * Properties
+	 */
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+
+private:
+	CASTED_GET_DESCRIPTION(MarketDescr)
+};
+
 class LuaWareDescription : public LuaMapObjectDescription {
 public:
 	LUNA_CLASS_HEAD(LuaWareDescription);
 
-	virtual ~LuaWareDescription() {
+	~LuaWareDescription() override {
 	}
 
 	LuaWareDescription() {
@@ -523,14 +566,13 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_consumers(lua_State*);
-	int get_helptext_script(lua_State*);
-	int get_producers(lua_State*);
 
 	/*
 	 * Lua methods
 	 */
+	int consumers(lua_State*);
 	int is_construction_material(lua_State*);
+	int producers(lua_State*);
 
 	/*
 	 * C methods
@@ -544,7 +586,7 @@ class LuaWorkerDescription : public LuaMapObjectDescription {
 public:
 	LUNA_CLASS_HEAD(LuaWorkerDescription);
 
-	virtual ~LuaWorkerDescription() {
+	~LuaWorkerDescription() override {
 	}
 
 	LuaWorkerDescription() {
@@ -564,8 +606,7 @@ public:
 	int get_becomes(lua_State*);
 	int get_buildcost(lua_State*);
 	int get_employers(lua_State*);
-	int get_helptext_script(lua_State*);
-	int get_is_buildable(lua_State*);
+	int get_buildable(lua_State*);
 	int get_needed_experience(lua_State*);
 
 	/*
@@ -584,7 +625,7 @@ class LuaSoldierDescription : public LuaWorkerDescription {
 public:
 	LUNA_CLASS_HEAD(LuaSoldierDescription);
 
-	virtual ~LuaSoldierDescription() {
+	~LuaSoldierDescription() override {
 	}
 
 	LuaSoldierDescription() {
@@ -630,7 +671,7 @@ class LuaResourceDescription : public LuaMapModuleClass {
 public:
 	LUNA_CLASS_HEAD(LuaResourceDescription);
 
-	virtual ~LuaResourceDescription() {
+	~LuaResourceDescription() override {
 	}
 
 	LuaResourceDescription() : resourcedescr_(nullptr) {
@@ -681,7 +722,7 @@ class LuaTerrainDescription : public LuaMapModuleClass {
 public:
 	LUNA_CLASS_HEAD(LuaTerrainDescription);
 
-	virtual ~LuaTerrainDescription() {
+	~LuaTerrainDescription() override {
 	}
 
 	LuaTerrainDescription() : terraindescr_(nullptr) {
@@ -736,7 +777,7 @@ class LuaEconomy : public LuaMapModuleClass {
 public:
 	LUNA_CLASS_HEAD(LuaEconomy);
 
-	virtual ~LuaEconomy() {
+	~LuaEconomy() override {
 	}
 
 	LuaEconomy() : economy_(nullptr) {
@@ -757,10 +798,8 @@ public:
 	/*
 	 * Lua methods
 	 */
-	int ware_target_quantity(lua_State*);
-	int worker_target_quantity(lua_State*);
-	int set_ware_target_quantity(lua_State*);
-	int set_worker_target_quantity(lua_State*);
+	int target_quantity(lua_State*);
+	int set_target_quantity(lua_State*);
 
 	/*
 	 * C methods
@@ -793,13 +832,12 @@ public:
 
 	LuaMapObject() : ptr_(nullptr) {
 	}
-	explicit LuaMapObject(Widelands::MapObject& mo) {
-		ptr_ = &mo;
+	explicit LuaMapObject(Widelands::MapObject& mo) : ptr_(&mo) {
 	}
 	explicit LuaMapObject(lua_State* L) : ptr_(nullptr) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
-	virtual ~LuaMapObject() {
+	~LuaMapObject() override {
 		ptr_ = nullptr;
 	}
 
@@ -838,7 +876,7 @@ public:
 	}
 	explicit LuaBaseImmovable(lua_State* L) : LuaMapObject(L) {
 	}
-	virtual ~LuaBaseImmovable() {
+	~LuaBaseImmovable() override {
 	}
 
 	/*
@@ -866,14 +904,15 @@ public:
 	}
 	explicit LuaPlayerImmovable(lua_State* L) : LuaBaseImmovable(L) {
 	}
-	virtual ~LuaPlayerImmovable() {
+	~LuaPlayerImmovable() override {
 	}
 
 	/*
 	 * Properties
 	 */
 	int get_owner(lua_State* L);
-	int get_debug_economy(lua_State* L);
+	int get_debug_ware_economy(lua_State* L);
+	int get_debug_worker_economy(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -895,7 +934,7 @@ public:
 	}
 	explicit LuaPortDock(lua_State* L) : LuaPlayerImmovable(L) {
 	}
-	virtual ~LuaPortDock() {
+	~LuaPortDock() override {
 	}
 
 	/*
@@ -922,7 +961,7 @@ public:
 	}
 	explicit LuaBuilding(lua_State* L) : LuaPlayerImmovable(L) {
 	}
-	virtual ~LuaBuilding() {
+	~LuaBuilding() override {
 	}
 
 	/*
@@ -950,13 +989,14 @@ public:
 	}
 	explicit LuaFlag(lua_State* L) : LuaPlayerImmovable(L) {
 	}
-	virtual ~LuaFlag() {
+	~LuaFlag() override {
 	}
 
 	/*
 	 * Properties
 	 */
-	int get_economy(lua_State* L);
+	int get_ware_economy(lua_State* L);
+	int get_worker_economy(lua_State* L);
 	int get_roads(lua_State* L);
 	int get_building(lua_State* L);
 	/*
@@ -977,11 +1017,11 @@ public:
 
 	LuaRoad() {
 	}
-	explicit LuaRoad(Widelands::Road& mo) : LuaPlayerImmovable(mo) {
+	explicit LuaRoad(Widelands::RoadBase& mo) : LuaPlayerImmovable(mo) {
 	}
 	explicit LuaRoad(lua_State* L) : LuaPlayerImmovable(L) {
 	}
-	virtual ~LuaRoad() {
+	~LuaRoad() override {
 	}
 
 	/*
@@ -1002,7 +1042,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(Road)
+	CASTED_GET(RoadBase)
 	static int create_new_worker(Widelands::PlayerImmovable&,
 	                             Widelands::EditorGameBase&,
 	                             const Widelands::WorkerDescr*);
@@ -1018,7 +1058,7 @@ public:
 	}
 	explicit LuaConstructionSite(lua_State* L) : LuaBuilding(L) {
 	}
-	virtual ~LuaConstructionSite() {
+	~LuaConstructionSite() override {
 	}
 
 	/*
@@ -1046,7 +1086,7 @@ public:
 	}
 	explicit LuaWarehouse(lua_State* L) : LuaBuilding(L) {
 	}
-	virtual ~LuaWarehouse() {
+	~LuaWarehouse() override {
 	}
 
 	/*
@@ -1075,6 +1115,34 @@ public:
 	CASTED_GET(Warehouse)
 };
 
+class LuaMarket : public LuaBuilding {
+public:
+	LUNA_CLASS_HEAD(LuaMarket);
+
+	LuaMarket() {
+	}
+	explicit LuaMarket(Widelands::Market& mo) : LuaBuilding(mo) {
+	}
+	explicit LuaMarket(lua_State* L) : LuaBuilding(L) {
+	}
+	~LuaMarket() override {
+	}
+
+	/*
+	 * Properties
+	 */
+
+	/*
+	 * Lua Methods
+	 */
+	int propose_trade(lua_State* L);
+
+	/*
+	 * C Methods
+	 */
+	CASTED_GET(Market)
+};
+
 class LuaProductionSite : public LuaBuilding {
 public:
 	LUNA_CLASS_HEAD(LuaProductionSite);
@@ -1085,7 +1153,7 @@ public:
 	}
 	explicit LuaProductionSite(lua_State* L) : LuaBuilding(L) {
 	}
-	virtual ~LuaProductionSite() {
+	~LuaProductionSite() override {
 	}
 
 	/*
@@ -1093,6 +1161,7 @@ public:
 	 */
 	int get_valid_inputs(lua_State* L);
 	int get_valid_workers(lua_State* L);
+	int get_is_stopped(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -1101,6 +1170,7 @@ public:
 	int get_workers(lua_State* L);
 	int set_inputs(lua_State* L);
 	int set_workers(lua_State* L);
+	int toggle_start_stop(lua_State* L);
 
 	/*
 	 * C Methods
@@ -1121,7 +1191,7 @@ public:
 	}
 	explicit LuaMilitarySite(lua_State* L) : LuaBuilding(L) {
 	}
-	virtual ~LuaMilitarySite() {
+	~LuaMilitarySite() override {
 	}
 
 	/*
@@ -1151,7 +1221,7 @@ public:
 	}
 	explicit LuaTrainingSite(lua_State* L) : LuaProductionSite(L) {
 	}
-	virtual ~LuaTrainingSite() {
+	~LuaTrainingSite() override {
 	}
 
 	/*
@@ -1181,7 +1251,7 @@ public:
 	}
 	explicit LuaBob(lua_State* L) : LuaMapObject(L) {
 	}
-	virtual ~LuaBob() {
+	~LuaBob() override {
 	}
 
 	/*
@@ -1210,7 +1280,7 @@ public:
 	}
 	explicit LuaWorker(lua_State* L) : LuaBob(L) {
 	}
-	virtual ~LuaWorker() {
+	~LuaWorker() override {
 	}
 
 	/*
@@ -1239,7 +1309,7 @@ public:
 	}
 	explicit LuaSoldier(lua_State* L) : LuaWorker(L) {
 	}
-	virtual ~LuaSoldier() {
+	~LuaSoldier() override {
 	}
 
 	/*
@@ -1270,13 +1340,14 @@ public:
 	}
 	explicit LuaShip(lua_State* L) : LuaBob(L) {
 	}
-	virtual ~LuaShip() {
+	~LuaShip() override {
 	}
 
 	/*
 	 * Properties
 	 */
-	int get_debug_economy(lua_State* L);
+	int get_debug_ware_economy(lua_State* L);
+	int get_debug_worker_economy(lua_State* L);
 	int get_last_portdock(lua_State* L);
 	int get_destination(lua_State* L);
 	int get_state(lua_State* L);
@@ -1314,7 +1385,7 @@ public:
 	explicit LuaField(lua_State* L) {
 		report_error(L, "Cannot instantiate a 'Field' directly!");
 	}
-	virtual ~LuaField() {
+	~LuaField() override {
 	}
 
 	void __persist(lua_State* L) override;
@@ -1351,6 +1422,7 @@ public:
 	int get_initial_resource_amount(lua_State*);
 	int get_claimers(lua_State*);
 	int get_owner(lua_State*);
+	int get_buildable(lua_State*);
 
 	/*
 	 * Lua methods
@@ -1359,6 +1431,7 @@ public:
 	int __eq(lua_State* L);
 	int region(lua_State* L);
 	int has_caps(lua_State*);
+	int has_max_caps(lua_State*);
 
 	/*
 	 * C methods
@@ -1386,7 +1459,7 @@ public:
 	explicit LuaPlayerSlot(lua_State* L) : player_number_(0) {
 		report_error(L, "Cannot instantiate a 'PlayerSlot' directly!");
 	}
-	virtual ~LuaPlayerSlot() {
+	~LuaPlayerSlot() override {
 	}
 
 	void __persist(lua_State* L) override;
@@ -1424,6 +1497,6 @@ RequestedWareWorker parse_wares_workers_counted(lua_State*,
                                                 bool is_ware);
 void luaopen_wlmap(lua_State*);
 
-}  // namespace LuaMap
+}  // namespace LuaMaps
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_MAP_H

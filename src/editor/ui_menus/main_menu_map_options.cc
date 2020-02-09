@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,13 +26,14 @@
 
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
+#include "graphic/text_layout.h"
 #include "logic/map.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilineeditbox.h"
-#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
+#include "wlapplication_options.h"
 #include "wui/map_tags.h"
 
 inline EditorInteractive& MainMenuMapOptions::eia() {
@@ -41,51 +42,56 @@ inline EditorInteractive& MainMenuMapOptions::eia() {
 
 /**
  * Create all the buttons etc...
-*/
-MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
-   : UI::Window(&parent, "map_options", 0, 0, 350, parent.get_inner_h() - 80, _("Map Options")),
+ */
+MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& registry)
+   : UI::UniqueWindow(
+        &parent, "map_options", &registry, 350, parent.get_inner_h() - 80, _("Map Options")),
      padding_(4),
      indent_(10),
-     labelh_(text_height() + 4),
+     labelh_(text_height(UI::FontStyle::kLabel) + 4),
      checkbox_space_(25),
      butw_((get_inner_w() - 3 * padding_) / 2),
      max_w_(get_inner_w() - 2 * padding_),
      ok_(this,
          "ok",
-         UI::g_fh1->fontset()->is_rtl() ? padding_ : butw_ + 2 * padding_,
+         UI::g_fh->fontset()->is_rtl() ? padding_ : butw_ + 2 * padding_,
          get_inner_h() - padding_ - labelh_,
          butw_,
          labelh_,
-         g_gr->images().get("images/ui_basic/but5.png"),
+         UI::ButtonStyle::kWuiPrimary,
          _("OK")),
      cancel_(this,
              "cancel",
-             UI::g_fh1->fontset()->is_rtl() ? butw_ + 2 * padding_ : padding_,
+             UI::g_fh->fontset()->is_rtl() ? butw_ + 2 * padding_ : padding_,
              get_inner_h() - padding_ - labelh_,
              butw_,
              labelh_,
-             g_gr->images().get("images/ui_basic/but1.png"),
+             UI::ButtonStyle::kWuiSecondary,
              _("Cancel")),
      tab_box_(this, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
-     tabs_(&tab_box_, nullptr),
+     tabs_(&tab_box_, UI::TabPanelStyle::kWuiLight),
 
      main_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
      tags_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
      teams_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
 
-     name_(&main_box_, 0, 0, max_w_, 0, 2, g_gr->images().get("images/ui_basic/but1.png")),
-     author_(&main_box_, 0, 0, max_w_, 0, 2, g_gr->images().get("images/ui_basic/but1.png")),
+     name_(&main_box_, 0, 0, max_w_, UI::PanelStyle::kWui),
+     author_(&main_box_, 0, 0, max_w_, UI::PanelStyle::kWui),
      size_(&main_box_, 0, 0, max_w_ - indent_, labelh_, ""),
-
-     teams_list_(&teams_box_,
-                 0,
-                 0,
-                 max_w_,
-                 60,
-                 g_gr->images().get("images/ui_basic/but1.png"),
-                 UI::ListselectLayout::kShowCheck),
-
-     modal_(modal) {
+     balancing_dropdown_(&tags_box_,
+                         "dropdown_balancing",
+                         0,
+                         0,
+                         200,
+                         50,
+                         24,
+                         "",
+                         UI::DropdownType::kTextual,
+                         UI::PanelStyle::kWui,
+                         UI::ButtonStyle::kWuiSecondary),
+     teams_list_(
+        &teams_box_, 0, 0, max_w_, 60, UI::PanelStyle::kWui, UI::ListselectLayout::kShowCheck),
+     registry_(registry) {
 
 	tab_box_.set_size(max_w_, get_inner_h() - labelh_ - 2 * padding_);
 	tabs_.set_size(max_w_, tab_box_.get_inner_h());
@@ -98,15 +104,12 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
 
 	// We need less space for the hint and the description, but it should at least have 1 line
 	// height.
-	hint_ =
-	   new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, std::max(labelh_, remaining_space * 1 / 3),
-	                            "", g_gr->images().get("images/ui_basic/but1.png"),
-	                            g_gr->images().get("images/ui_basic/but1.png"));
-	descr_ = new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, remaining_space - hint_->get_h(), "",
-	                                  g_gr->images().get("images/ui_basic/but1.png"),
-	                                  g_gr->images().get("images/ui_basic/but1.png"));
+	hint_ = new UI::MultilineEditbox(
+	   &main_box_, 0, 0, max_w_, std::max(labelh_, remaining_space * 1 / 3), UI::PanelStyle::kWui);
+	descr_ = new UI::MultilineEditbox(
+	   &main_box_, 0, 0, max_w_, remaining_space - hint_->get_h(), UI::PanelStyle::kWui);
 
-	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Map Name:")));
+	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Map name:")));
 	main_box_.add(&name_);
 	main_box_.add_space(indent_);
 
@@ -126,18 +129,37 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
 	main_box_.add_space(indent_);
 
 	tags_box_.add(new UI::Textarea(&tags_box_, 0, 0, max_w_, labelh_, _("Tags:")));
-	add_tag_checkbox(&tags_box_, "unbalanced", localize_tag("unbalanced"));
 	add_tag_checkbox(&tags_box_, "ffa", localize_tag("ffa"));
 	add_tag_checkbox(&tags_box_, "1v1", localize_tag("1v1"));
 	add_tag_checkbox(&tags_box_, "2teams", localize_tag("2teams"));
 	add_tag_checkbox(&tags_box_, "3teams", localize_tag("3teams"));
 	add_tag_checkbox(&tags_box_, "4teams", localize_tag("4teams"));
 
+	balancing_dropdown_.set_autoexpand_display_button();
+	balancing_dropdown_.add(localize_tag("balanced"), "balanced");
+	balancing_dropdown_.add(localize_tag("unbalanced"), "unbalanced");
+	tags_box_.add(&balancing_dropdown_);
+
+	tags_box_.add_space(labelh_);
+
+	tags_box_.add(new UI::Textarea(&tags_box_, 0, 0, max_w_, labelh_, _("Waterway length limit:")));
+	UI::Box* ww_box = new UI::Box(&tags_box_, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
+	waterway_length_box_ =
+	   new UI::SpinBox(ww_box, 0, 0, max_w_, max_w_ / 2, 1, 1, std::numeric_limits<int32_t>::max(),
+	                   UI::PanelStyle::kWui, std::string(), UI::SpinBox::Units::kFields);
+	/** TRANSLATORS: Map Options: Waterways are disabled */
+	waterway_length_box_->add_replacement(1, _("Disabled"));
+	ww_box->add(waterway_length_box_, UI::Box::Resizing::kFullSize);
+	ww_box->add_space(checkbox_space_);
+	tags_box_.add(ww_box);
+	tags_box_.add_space(padding_);
+
 	teams_box_.add(new UI::Textarea(&teams_box_, 0, 0, max_w_, labelh_, _("Suggested Teams:")));
 	teams_box_.add(&teams_list_);
 	// TODO(GunChleoc): We need team images in the listselect here,
 	// so map editors will be able to delete entries.
 	// This is waiting for the new RT renderer.
+	// TODO(Notabilis): Add onChanged-code below after this is added
 	teams_list_.add("Not implemented yet.", "", nullptr, false);
 
 	unsigned int nr_players = static_cast<unsigned int>(eia().egbase().map().get_nrplayers());
@@ -146,22 +168,30 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
 	teams_box_.add(new UI::Textarea(&teams_box_, 0, 0, max_w_, labelh_, players));
 
 	tab_box_.add(&tabs_, UI::Box::Resizing::kFullSize);
-	tabs_.add("main_map_options", g_gr->images().get("images/wui/menus/menu_toggle_minimap.png"),
+	tabs_.add("main_map_options", g_gr->images().get("images/wui/menus/toggle_minimap.png"),
 	          &main_box_, _("Main Options"));
 	tabs_.add("map_tags", g_gr->images().get("images/ui_basic/checkbox_checked.png"), &tags_box_,
 	          _("Tags"));
-	tabs_.add("map_teams", g_gr->images().get("images/wui/editor/editor_menu_player_menu.png"),
-	          &teams_box_, _("Teams"));
+	tabs_.add("map_teams", g_gr->images().get("images/wui/editor/tools/players.png"), &teams_box_,
+	          _("Teams"));
 
 	name_.changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
 	author_.changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
 	descr_->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
+	hint_->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
+	waterway_length_box_->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
+	for (const auto& tag : tags_checkboxes_) {
+		tag.second->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
+	}
+
+	balancing_dropdown_.selected.connect([this] { changed(); });
 
 	ok_.sigclicked.connect(boost::bind(&MainMenuMapOptions::clicked_ok, boost::ref(*this)));
-	ok_.set_enabled(false);
 	cancel_.sigclicked.connect(boost::bind(&MainMenuMapOptions::clicked_cancel, boost::ref(*this)));
 
 	update();
+	ok_.set_enabled(true);
+
 	name_.focus();
 	center_to_parent();
 	move_to_top();
@@ -170,7 +200,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
 /**
  * Updates all UI::Textareas in the UI::Window to represent currently
  * set values
-*/
+ */
 void MainMenuMapOptions::update() {
 	const Widelands::Map& map = eia().egbase().map();
 	author_.set_text(map.get_author());
@@ -178,16 +208,20 @@ void MainMenuMapOptions::update() {
 	size_.set_text((boost::format(_("Size: %1% x %2%")) % map.get_width() % map.get_height()).str());
 	descr_->set_text(map.get_description());
 	hint_->set_text(map.get_hint());
+	// map.get_waterway_max_length() defaults to 0 for older maps
+	waterway_length_box_->set_value(std::max<uint32_t>(1, map.get_waterway_max_length()));
 
 	std::set<std::string> tags = map.get_tags();
 	for (auto tag : tags_checkboxes_) {
 		tag.second->set_state(tags.count(tag.first) > 0);
 	}
+
+	balancing_dropdown_.select(tags.count("balanced") ? "balanced" : "unbalanced");
 }
 
 /**
  * Called when one of the editboxes are changed
-*/
+ */
 void MainMenuMapOptions::changed() {
 	ok_.set_enabled(true);
 }
@@ -195,9 +229,10 @@ void MainMenuMapOptions::changed() {
 void MainMenuMapOptions::clicked_ok() {
 	eia().egbase().mutable_map()->set_name(name_.text());
 	eia().egbase().mutable_map()->set_author(author_.text());
-	g_options.pull_section("global").set_string("realname", author_.text());
+	set_config_string("realname", author_.text());
 	eia().egbase().mutable_map()->set_description(descr_->get_text());
 	eia().egbase().mutable_map()->set_hint(hint_->get_text());
+	eia().egbase().mutable_map()->set_waterway_max_length(waterway_length_box_->get_value());
 
 	eia().egbase().mutable_map()->clear_tags();
 	for (const auto& tag : tags_checkboxes_) {
@@ -205,20 +240,13 @@ void MainMenuMapOptions::clicked_ok() {
 			eia().egbase().mutable_map()->add_tag(tag.first);
 		}
 	}
-
-	if (modal_) {
-		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
-	} else {
-		die();
-	}
+	eia().egbase().mutable_map()->add_tag(balancing_dropdown_.get_selected());
+	Notifications::publish(NoteMapOptions());
+	registry_.destroy();
 }
 
 void MainMenuMapOptions::clicked_cancel() {
-	if (modal_) {
-		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
-	} else {
-		die();
-	}
+	registry_.destroy();
 }
 
 /*

@@ -8,12 +8,12 @@ tribes:new_productionsite_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
-   needs_seafaring = true,
+   map_check = {"seafaring", "waterways"},
 
    buildcost = {
       log = 5,
       granite = 2,
-      thatch_reed = 2
+      reed = 2
    },
    return_on_dismantle = {
       log = 2,
@@ -36,7 +36,8 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      prohibited_till = 990
+      prohibited_till = 990,
+      supports_seafaring = true
    },
 
    working_positions = {
@@ -44,7 +45,7 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "thatch_reed", amount = 8 }
+      { name = "reed", amount = 8 }
    },
    outputs = {
       "cloth"
@@ -56,10 +57,10 @@ tribes:new_productionsite_type {
          descname = _"weaving",
          actions = {
             "sleep=25000",
-            "check_map=seafaring",
+            "checkmap=seafaring",
             "return=skipped unless economy needs cloth",
-            "consume=thatch_reed",
-            "play_sound=sound/barbarians weaver 120",
+            "consume=reed",
+            "playsound=sound/barbarians/weaver 120",
             "animate=working 20000",
             "produce=cloth"
          }

@@ -40,6 +40,12 @@ function worker_entries(tribename)
    return map_object_entries(tribename, "tribes/scripting/help/worker_help.lua", tribe.workers)
 end
 
+-- Returns help entries for all the immovables that the tribe can use
+function immovable_entries(tribename)
+   local tribe = wl.Game():get_tribe_description(tribename)
+   return map_object_entries(tribename, "tribes/scripting/help/immovable_help.lua", tribe.immovables)
+end
+
 -- Main function
 return {
    func = function(tribename, game_type)
@@ -93,6 +99,13 @@ return {
                title = _"Buildings",
                icon = "images/wui/stats/genstats_nrbuildings.png",
                entries = building_entries(tribename)
+            },
+            {
+               name = "immovables",
+               -- TRANSLATORS Tab title: immovable help
+               title = _"Immovables",
+               icon = "tribes/immovables/wheatfield/ripe/idle_00.png",
+               entries = immovable_entries(tribename)
             },
          }
       }

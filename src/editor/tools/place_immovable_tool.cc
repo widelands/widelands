@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,16 +31,15 @@
 /**
  * Choses an object to place randomly from all enabled
  * and places this on the current field
-*/
-int32_t EditorPlaceImmovableTool::handle_click_impl(const Widelands::World&,
-                                                    const Widelands::NodeAndTriangle<>& center,
-                                                    EditorInteractive& parent,
+ */
+int32_t EditorPlaceImmovableTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
+                                                    EditorInteractive& eia,
                                                     EditorActionArgs* args,
                                                     Widelands::Map* map) {
 	const int32_t radius = args->sel_radius;
 	if (!get_nr_enabled())
 		return radius;
-	Widelands::EditorGameBase& egbase = parent.egbase();
+	Widelands::EditorGameBase& egbase = eia.egbase();
 	if (args->old_immovable_types.empty()) {
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 		   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), radius));
@@ -67,16 +66,15 @@ int32_t EditorPlaceImmovableTool::handle_click_impl(const Widelands::World&,
 }
 
 int32_t EditorPlaceImmovableTool::handle_undo_impl(
-   const Widelands::World&,
    const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-   EditorInteractive& parent,
+   EditorInteractive& eia,
    EditorActionArgs* args,
    Widelands::Map* map) {
 	const int32_t radius = args->sel_radius;
 	if (args->old_immovable_types.empty())
 		return radius;
 
-	Widelands::EditorGameBase& egbase = parent.egbase();
+	Widelands::EditorGameBase& egbase = eia.egbase();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), radius));
 	std::list<std::string>::iterator i = args->old_immovable_types.begin();

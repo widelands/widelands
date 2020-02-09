@@ -24,7 +24,7 @@ run(function()
 
    sleep(100)
    assert_equal(p1:get_wares("blackwood"), 0)
-   stable_save("port1_just_removed")
+   stable_save(game, "port1_just_removed")
 
    sleep(5000)
 

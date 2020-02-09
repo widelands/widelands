@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,21 +23,33 @@
 #include <vector>
 
 #include "logic/widelands.h"
-#include "ui_basic/slider.h"
 #include "ui_basic/unique_window.h"
 #include "wui/plot_area.h"
 
 struct DifferentialPlotArea;
 class InteractivePlayer;
 struct WuiPlotArea;
+struct StatisticWaresDisplay;
+struct WuiPlotAreaSlider;
+namespace UI {
+struct Box;
+struct TabPanel;
+}  // namespace UI
 
 struct WareStatisticsMenu : public UI::UniqueWindow {
 public:
 	WareStatisticsMenu(InteractivePlayer&, UI::UniqueWindow::Registry&);
 	void set_time(int32_t);
 
+protected:
+	void layout() override;
+
 private:
-	InteractivePlayer* parent_;
+	UI::Box* main_box_;
+	UI::TabPanel* tab_panel_;
+	StatisticWaresDisplay* display_;
+	WuiPlotAreaSlider* slider_;
+
 	WuiPlotArea* plot_production_;
 	WuiPlotArea* plot_consumption_;
 	WuiPlotArea* plot_stock_;
@@ -45,7 +57,6 @@ private:
 	std::vector<uint8_t> color_map_;  // Maps ware index to colors
 	std::vector<bool> active_colors_;
 
-	void clicked_help();
 	void cb_changed_to(Widelands::DescriptionIndex, bool);
 };
 

@@ -1,14 +1,12 @@
--- This include can be removed when all help texts have been defined.
-include "tribes/scripting/help/global_helptexts.lua"
-
 function building_helptext_lore()
-   -- TRANSLATORS#: Lore helptext for a building
-   return no_lore_text_yet()
+   -- TRANSLATORS: Lore helptext for a building
+   return pgettext("barbarians_building", [[‘The Citadel of Adlen surely is the finest masterpiece of Barbarian craftsmanship. ]] ..
+            [[Nothing as strong and big and beautiful has ever been built in such a short time.’]])
 end
 
 function building_helptext_lore_author()
-   -- TRANSLATORS#: Lore author helptext for a building
-   return no_lore_author_text_yet()
+   -- TRANSLATORS: Lore author helptext for a building
+   return pgettext("barbarians_building", "Colintan, chief planner of the Citadel of Adlen,<br>at its opening ceremony")
 end
 
 function building_helptext_purpose()

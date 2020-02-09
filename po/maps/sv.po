@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # D M <hunter12@home.se>, 2017
@@ -7,9 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-18 21:30+0000\n"
-"PO-Revision-Date: 2017-05-18 21:32+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-01-21 18:02+0000\n"
+"PO-Revision-Date: 2020-01-21 18:25+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../data/campaigns/atl01.wmf/elemental:9
-#: ../../data/campaigns/campaigns.conf:100
 msgid "From Nemesis to Genesis"
 msgstr "Från Nemesis till Genesis"
 
@@ -30,7 +29,6 @@ msgid ""
 msgstr "Efter att ha landat på en märklig ö nära Atlantis försöker de resterande Atlanterna bygga ett nytt hem."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
-#: ../../data/campaigns/campaigns.conf:67
 msgid "A Place to Call Home"
 msgstr "En plats att kalla hemma"
 
@@ -41,7 +39,6 @@ msgid ""
 msgstr "I detta scenario kommer högre produktionsbyggnader, inklusive gruvor, att introduceras."
 
 #: ../../data/campaigns/bar02.wmf/elemental:7
-#: ../../data/campaigns/campaigns.conf:72
 msgid "This Land is Our Land"
 msgstr "Detta land är vårt"
 
@@ -51,109 +48,21 @@ msgid ""
 "and will introduce fighting."
 msgstr "Den här guiden förklarar hur du hanterar militära byggnader och träningsläger och den kommer att visa hur strid går till."
 
-#: ../../data/campaigns/campaigns.conf:27
-msgid "The Second Empire"
-msgstr "Det andra imperiet"
-
-#: ../../data/campaigns/campaigns.conf:29
-msgid "Barbarians"
-msgstr "Barbarerna"
-
-#: ../../data/campaigns/campaigns.conf:31
-msgid "Easy. Introduces the Barbarians"
-msgstr "Lätt. Introducerar Barbarerna"
-
-#: ../../data/campaigns/campaigns.conf:32
-msgid ""
-"When Chat’Karuth died, he was an old man, father to three strong and "
-"ambitious sons, and warlord to an army that could match any enemy willing to"
-" rise against the ancient forests. Though at the end of his glorious reign, "
-"Chat’Karuth chose his eldest son, Thron, to succeed him as the tribe’s "
-"warlord – a decision that left his two brothers unsatisfied. The old warlord"
-" knew that. As his father instructed him, Thron left the capital of "
-"Al’thunran, the home of the Throne Among the Trees, and withdrew his forces "
-"to the high hills where he buried the corpse of his father. There he swore "
-"to the gods and his father’s spirit that he’d return to re-established "
-"order. While his brothers have raged blind war against Thron and the few "
-"forces he left to secure the borders of Al’thunran, the young warlord seeks "
-"to reunite his ambitious brothers and force the tribes to march once again "
-"under a common banner."
-msgstr "När Chat'Karuth dog var han en gammal man, far till tre starka och ambitiösa söner och krigsherre över en arme som kunde matcha vilken fiende som helst som ville starta en strid mot de uråldriga skogarna. I slutet av sitt ärorika styre valde Chat'Karuth sin äldste son, Thron, att efterträda honom som stammens krigsherre – ett beslut som gjorde hans två bröder missnöjda. Den gamla krigsherren visste detta. Precis som hans far instruerade honom så lämnade Thron huvudstaden i Al’thunran, hemmet för Tronen mellan träden och drog tillbaka sina trupper till de höga kullarna där han begravde sin fars kropp. Där svor han till gudarna och sin faders ande att han skulle återvända för att återställa ordningen. Medan hans bröder krigar i raseri mot Thron och de få trupper han lämnade kvar för att säkra Al’thunrans gränser försöker den unga krigsherren återförena sina ambitiösa bröder och tvinga stammarna att åter igen förenas under en gemensam flagga."
-
-#: ../../data/campaigns/campaigns.conf:35
-msgid "The Months of Exile"
-msgstr "Månaderna i exil"
-
-#: ../../data/campaigns/campaigns.conf:37
-msgid "Empire"
-msgstr "Imperiet"
-
-#: ../../data/campaigns/campaigns.conf:39
-msgid "Easy. Introduces the Empire"
-msgstr "Lätt. Introducerar Imperiet"
-
-#: ../../data/campaigns/campaigns.conf:40
-msgid ""
-"Six months ago, Lutius – a young general of the Empire – was sent with 150 "
-"soldiers to the frontier beyond the northern forests where Barbarian tribes "
-"were crossing onto land held by the Empire. His task was to defend the "
-"Empire’s land. At first, everything was calm. He even talked to a few "
-"Barbarian children and thought about a peaceful life – side by side with "
-"this archaic folk. He began to feel safer and his army began to drop their "
-"attention off the potential enemy. That was their undoing. One night in "
-"March his unprepared army was attacked by 100 Barbarian footmen and was "
-"completely scattered. Only with his bare life he and a handful of his "
-"soldiers survived."
-msgstr "För sex månader sedan skickades Lutius – en ung general i Imperiet – med 150 soldater till gränsen bakom de norra skogarna där Barbarstammar passerade över land som hölls av Imperiet. Hans uppgift var att försvara Imperiets land. Först var allt lugnt. Han pratade till och med med några av Barbarernas barn och trodde på ett fredfullt liv – sida vid sida med detta ålderdomliga folk. Han började känna sig säkrare och hans arme började tappa fokus på den möjliga fienden. Det var deras fall. En natt i mars attackerades hans oförberedda arme av 100 av Barbarernas infanterister och blev helt krossade. Bara Lutius och en handfull av hans soldater undkom med livet i behåll."
-
-#: ../../data/campaigns/campaigns.conf:43
-msgid "The Run for the Fire"
-msgstr "Flykten mot elden"
-
-#: ../../data/campaigns/campaigns.conf:45
-msgid "Atlanteans"
-msgstr "Atlanterna"
-
-#: ../../data/campaigns/campaigns.conf:47
-msgid "Challenging. Introduces the Atlanteans"
-msgstr "Utmanande. Introducerar Atlanterna"
-
-#: ../../data/campaigns/campaigns.conf:48
-msgid ""
-"When their God lost faith in the Atlanteans and drowned their island, one "
-"woman’s struggle for justice and a second chance for her people would become"
-" the stuff of legends. Leading the remaining Atlanteans into a new future in"
-" a new part of the World, Jundlina became the most powerful human of her "
-"time, but at a high cost: her humanity and soul."
-msgstr "När deras gud förlorade tron på Atlanterna och dränkte deras ö blev en kvinnas kamp för rättvisa och en andra chans för hennes folk underlag för legender. När hon ledde de återstående Atlanterna in i en ny framtid i en ny del av världen blev Jundlina den mäktigaste människan i sin tid, men till ett högt pris: hennes mänsklighet och själ."
-
-#: ../../data/campaigns/campaigns.conf:78
-#: ../../data/campaigns/emp01.wmf/elemental:7
-msgid "The Strands of Malac’ Mor"
-msgstr "Strandningen på Malac’ Mor"
-
-#: ../../data/campaigns/campaigns.conf:83
-#: ../../data/campaigns/emp02.wmf/elemental:9
-msgid "An Outpost for Exile"
-msgstr "En utpost för exil"
-
-#: ../../data/campaigns/campaigns.conf:88
-msgid "Neptune’s Revenge"
-msgstr ""
-
-#: ../../data/campaigns/campaigns.conf:93
-#: ../../data/campaigns/campaigns.conf:105
-#: ../../data/campaigns/dummy.wmf/elemental:7
+#: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
 msgstr "Inte implementerad ännu"
 
-#: ../../data/campaigns/dummy.wmf/elemental:9
+#: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
 msgstr "Ingen"
 
-#: ../../data/campaigns/dummy.wmf/elemental:10
+#: ../../data/campaigns/dummy.wmf/elemental:12
 msgid "Sorry, this map is not yet implemented."
 msgstr "Tyvärr, denna karta är inte implementerad än."
+
+#: ../../data/campaigns/emp01.wmf/elemental:7
+msgid "The Strands of Malac’ Mor"
+msgstr "Strandningen på Malac’ Mor"
 
 #: ../../data/campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -163,6 +72,10 @@ msgid ""
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
 msgstr "Efter att ha förlorat en viktig strid mot barbarerna, vilket ledde till att en stor del av Imperiets territorium gick förlorat, lämnade Lutius Fremil för att börja ett nytt liv. Men hans öde för hans skepp in i en kraftig storm, som nästan sänker honom. Endast turen gör att han kan stranda sitt skadade skepp på en okänd öde strand och rädda sitt folk. För stunden."
+
+#: ../../data/campaigns/emp02.wmf/elemental:9
+msgid "An Outpost for Exile"
+msgstr "En utpost för exil"
 
 #: ../../data/campaigns/emp02.wmf/elemental:11
 msgid ""
@@ -178,8 +91,47 @@ msgid ""
 "the will of the gods."
 msgstr ""
 
+#: ../../data/campaigns/emp04.wmf/elemental:8
+msgid "Surprise, Surprise!"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/elemental:10
+msgid ""
+"After returning home, Lutius and his crew are faced with an economy in "
+"shambles. Resolving the bottlenecks in the economy will be of utmost "
+"importance to reinstate the glory of the empire."
+msgstr ""
+
+#: ../../data/campaigns/fri01.wmf/elemental:8
+msgid "The Great Stormflood"
+msgstr ""
+
+#: ../../data/campaigns/fri01.wmf/elemental:10
+msgid ""
+"In 1362, the quiet, peaceful life of the inhabitants of the Northern Frisian"
+" Islands was disrupted by one of the greatest storm floods in human memory: "
+"Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
+" a sign from the Gods that the Frisian community on the island of Langeness "
+"is not wanted here?"
+msgstr ""
+
+#: ../../data/campaigns/fri01.wmf/elemental:11
+msgid ""
+"This scenario is set in a historical context, but most of the story line is "
+"fiction."
+msgstr ""
+
+#: ../../data/campaigns/fri02.wmf/elemental:8
+msgid "An Icy Welcome"
+msgstr ""
+
+#: ../../data/campaigns/fri02.wmf/elemental:10
+msgid ""
+"Reebaud and his tribe have arrived in the North. But their arrival between "
+"the frozen steppes and the snow-covered mountains is less than welcome…"
+msgstr ""
+
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:15
 msgid "Basic Control"
 msgstr "Grundläggande kontroll"
 
@@ -190,7 +142,6 @@ msgid ""
 msgstr "I denna handledning kommer du att lära dig att navigera i Widelands och hur man bygger byggnader och vägar."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:19
 msgid "Warfare"
 msgstr "Krig"
 
@@ -201,18 +152,16 @@ msgid ""
 msgstr "I denna handledning kommer du att få lära dig krigandets hemligheter: hur du framställer soldater, hur du tränar dem och hur du skickar ut dem i krig."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:23
 msgid "Seafaring"
 msgstr "Sjöfart"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
-"ships and ports."
-msgstr "I denna handledning kommer du att få lära dig sjöfart, det vill säga hur skepp och hamnar hanteras."
+"ships and ports, and how to use ferries and waterways."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:27
 msgid "Economy"
 msgstr "Ekonomi"
 
@@ -310,11 +259,11 @@ msgid ""
 " crater. Two tribes are now fighting for the rich resources."
 msgstr "Långt efter att en meteor kraschat in i ett par berg, blommar det av liv i kratern. Två stammar kämpar nu om de rika resurserna."
 
-#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:8
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:8
 msgid "Crossing the Horizon"
 msgstr "Korsa horisonten"
 
-#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
 msgstr "Bemanna fartygen och segla mot horisonten."
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,8 @@
 #include "logic/game_data_error.h"
 #include "scripting/lua_interface.h"
 
+namespace Widelands {
+
 TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table) {
 	try {
 		i18n::Textdomain td("tribes");
@@ -47,3 +49,47 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table) {
 		   "reading basic info for tribe \"%s\": %s", name.c_str(), e.what());
 	}
 }
+
+std::vector<std::string> get_all_tribenames() {
+	std::vector<std::string> tribenames;
+	LuaInterface lua;
+	std::unique_ptr<LuaTable> table(lua.run_script("tribes/preload.lua"));
+	for (const int key : table->keys<int>()) {
+		std::unique_ptr<LuaTable> info = table->get_table(key);
+		info->do_not_warn_about_unaccessed_keys();
+		tribenames.push_back(info->get_string("name"));
+	}
+	return tribenames;
+}
+
+std::vector<TribeBasicInfo> get_all_tribeinfos() {
+	std::vector<TribeBasicInfo> tribeinfos;
+	LuaInterface lua;
+	std::unique_ptr<LuaTable> table(lua.run_script("tribes/preload.lua"));
+	for (const int key : table->keys<int>()) {
+		tribeinfos.push_back(TribeBasicInfo(table->get_table(key)));
+	}
+	return tribeinfos;
+}
+
+TribeBasicInfo get_tribeinfo(const std::string& tribename) {
+	if (Widelands::tribe_exists(tribename)) {
+		for (const TribeBasicInfo& info : Widelands::get_all_tribeinfos()) {
+			if (info.name == tribename) {
+				return info;
+			}
+		}
+	}
+	throw GameDataError("The tribe '%s'' does not exist.", tribename.c_str());
+}
+
+bool tribe_exists(const std::string& tribename) {
+	for (const std::string& name : get_all_tribenames()) {
+		if (name == tribename) {
+			return true;
+		}
+	}
+	return false;
+}
+
+}  // namespace Widelands

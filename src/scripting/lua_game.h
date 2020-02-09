@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,7 @@ namespace Widelands {
 class TribeDescr;
 class Objective;
 struct Message;
-}
+}  // namespace Widelands
 
 namespace LuaGame {
 
@@ -71,6 +71,7 @@ public:
 	int get_defeated(lua_State* L);
 	int get_messages(lua_State* L);
 	int get_inbox(lua_State* L);
+	int get_color(lua_State* L);
 	int get_team(lua_State* L);
 	int get_tribe(lua_State* L);
 	int set_team(lua_State* L);
@@ -89,14 +90,15 @@ public:
 	int add_objective(lua_State* L);
 	int reveal_fields(lua_State* L);
 	int hide_fields(lua_State* L);
-	int reveal_scenario(lua_State* L);
-	int reveal_campaign(lua_State* L);
+	int mark_scenario_as_solved(lua_State* L);
 	int get_ships(lua_State* L);
 	int get_buildings(lua_State* L);
 	int get_suitability(lua_State* L);
 	int allow_workers(lua_State* L);
 	int switchplayer(lua_State* L);
 	int get_produced_wares_count(lua_State* L);
+	int set_attack_forbidden(lua_State* L);
+	int is_attack_forbidden(lua_State* L);
 
 	/*
 	 * C methods
@@ -114,7 +116,7 @@ class LuaObjective : public LuaGameModuleClass {
 public:
 	LUNA_CLASS_HEAD(LuaObjective);
 
-	virtual ~LuaObjective() {
+	~LuaObjective() override {
 	}
 
 	explicit LuaObjective(const Widelands::Objective& n);
@@ -157,7 +159,7 @@ class LuaMessage : public LuaGameModuleClass {
 
 public:
 	LUNA_CLASS_HEAD(LuaMessage);
-	virtual ~LuaMessage() {
+	~LuaMessage() override {
 	}
 
 	explicit LuaMessage(uint8_t, Widelands::MessageId);

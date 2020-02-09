@@ -21,8 +21,8 @@ animations = {
       fps = 10
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {8, 23}, 10)
-add_walking_animations(animations, "walkload", dirname, "walkload", {8, 24}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {8, 23}, 10)
+add_directional_animation(animations, "walkload", dirname, "walkload", {8, 24}, 10)
 
 
 tribes:new_worker_type {
@@ -41,21 +41,21 @@ tribes:new_worker_type {
    },
 
    programs = {
-      plantvine = {
-         "findspace size:any radius:1",
-         "walk coords",
-         "animation dig 2000",
-         "plant tribe:grapevine_tiny",
-         "animation planting 3000",
+      plant = {
+         "findspace=size:any radius:1",
+         "walk=coords",
+         "animate=dig 5000",
+         "plant=attrib:seed_grapes",
+         "animate=planting 5000",
          "return"
       },
-      harvestvine = {
-         "findobject attrib:ripe_grapes radius:1",
-         "walk object",
-         "animation gathering 10000",
-         "object harvest",
-         "animation gathering 2000",
-         "createware grape",
+      harvest = {
+         "findobject=attrib:ripe_grapes radius:1",
+         "walk=object",
+         "animate=gathering 8000",
+         "callobject=harvest",
+         "animate=gathering 2000",
+         "createware=grape",
          "return"
       }
    },

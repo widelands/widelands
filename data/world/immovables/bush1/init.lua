@@ -83,15 +83,15 @@ dirname = path.dirname(__file__)
 --             -- Temperature is in arbitrary units.
 --             preferred_temperature = 125,
 --
---             -- In percent (1 being very wet).
---             preferred_humidity = 0.65,
+--             -- The preferred humibity. This is a value between 0 and 1000, with 1000 being very wet.
+--             preferred_humidity = 650,
 --
---             -- In percent (1 being very fertile).
---             preferred_fertility = 0.6,
+--             -- The preferred fertility. This is a value between 0 and 1000, with 1000 being very fertile.
+--             preferred_fertility = 600,
 --
---             -- A value in [0, 1] that defines how well this immovable can deal with non-ideal terrain.
+--             -- A value in [0, 99] that defines how well this immovable can deal with non-ideal terrain.
 --             -- A lower value means that it is less picky, i.e. it can deal better with it.
---             pickiness = 0.6,
+--             pickiness = 60,
 --          }
 --
 --    **animations**

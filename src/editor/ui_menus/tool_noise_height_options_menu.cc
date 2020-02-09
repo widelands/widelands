@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,6 @@
 #include "editor/tools/decrease_height_tool.h"
 #include "editor/tools/increase_height_tool.h"
 #include "editor/tools/noise_height_tool.h"
-#include "graphic/graphic.h"
 #include "logic/widelands_geometry.h"
 #include "ui_basic/textarea.h"
 
@@ -36,7 +35,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
    EditorInteractive& parent,
    EditorNoiseHeightTool& noise_tool,
    UI::UniqueWindow::Registry& registry)
-   : EditorToolOptionsMenu(parent, registry, 300, 120, _("Random Height Options")),
+   : EditorToolOptionsMenu(parent, registry, 300, 120, _("Random Height Options"), noise_tool),
      noise_tool_(noise_tool),
      box_(this, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
      lower_(&box_,
@@ -47,9 +46,9 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
             noise_tool_.get_interval().min,
             1,
             MAX_FIELD_HEIGHT,
-            _("Minimum Height:"),
+            UI::PanelStyle::kWui,
+            _("Minimum height:"),
             UI::SpinBox::Units::kNone,
-            g_gr->images().get("images/ui_basic/but1.png"),
             UI::SpinBox::Type::kSmall),
      upper_(&box_,
             0,
@@ -59,9 +58,9 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
             noise_tool_.get_interval().max,
             0,
             MAX_FIELD_HEIGHT,
-            _("Maximum Height:"),
+            UI::PanelStyle::kWui,
+            _("Maximum height:"),
             UI::SpinBox::Units::kNone,
-            g_gr->images().get("images/ui_basic/but1.png"),
             UI::SpinBox::Type::kSmall),
      set_to_(&box_,
              0,
@@ -71,9 +70,9 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
              noise_tool_.set_tool().get_interval().min,
              0,
              MAX_FIELD_HEIGHT,
-             _("Set Value:"),
+             UI::PanelStyle::kWui,
+             _("Set height to:"),
              UI::SpinBox::Units::kNone,
-             g_gr->images().get("images/ui_basic/but1.png"),
              UI::SpinBox::Type::kSmall) {
 	lower_.set_tooltip(
 	   /** TRANSLATORS: Editor random height access key. **/
@@ -93,14 +92,14 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
 	   boost::bind(&EditorToolNoiseHeightOptionsMenu::update_set_to, boost::ref(*this)));
 
 	UI::Textarea* label =
-	   new UI::Textarea(&box_, 0, 0, 0, 0, _("Random Height"), UI::Align::kCenter);
+	   new UI::Textarea(&box_, 0, 0, 0, 0, _("Random height"), UI::Align::kCenter);
 	label->set_fixed_width(get_inner_w() - 2 * hmargin());
 	box_.add(label);
 	box_.add(&upper_);
 	box_.add(&lower_);
 
 	box_.add_space(2 * vspacing());
-	label = new UI::Textarea(&box_, 0, 0, 0, 0, _("Fixed Height"), UI::Align::kCenter);
+	label = new UI::Textarea(&box_, 0, 0, 0, 0, _("Fixed height"), UI::Align::kCenter);
 	label->set_fixed_width(get_inner_w() - 2 * hmargin());
 	box_.add(label);
 	box_.add(&set_to_);

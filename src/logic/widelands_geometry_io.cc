@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -76,12 +76,6 @@ Coords read_coords_32_allow_null(StreamRead* fr, const Extent& extent) {
 	return result;
 }
 
-Area<Coords, uint16_t> read_area_48(StreamRead* fr, const Extent& extent) {
-	Coords const c = read_coords_32(fr, extent);
-	uint16_t const r = fr->unsigned_16();
-	return Area<Coords, uint16_t>(c, r);
-}
-
 void write_direction_8(StreamWrite* wr, Direction const d) {
 	assert(0 < d);
 	assert(d <= 6);
@@ -98,11 +92,6 @@ void write_coords_32(StreamWrite* wr, const Coords& c) {
 	assert(static_cast<uint16_t>(c.y) < 0x8000 || c.y == -1);
 	wr->unsigned_16(c.x);
 	wr->unsigned_16(c.y);
-}
-
-void write_area_48(StreamWrite* wr, const Area<Coords, uint16_t>& area) {
-	write_coords_32(wr, area);
-	wr->unsigned_16(area.radius);
 }
 
 }  // namespace Widelands

@@ -66,7 +66,7 @@ A program's actions consist of a sequence of commands. A command is written as `
          "return=skipped unless economy needs snack",
          "sleep=5000",
          "consume=barbarians_bread fish,meat beer",
-         "play_sound=sound/barbarians/taverns inn 100",
+         "playsound=sound/barbarians/taverns/inn 100",
          "animate=working 22000",
          "sleep=10000",
          "produce=snack"
@@ -82,15 +82,16 @@ Command Types
 ^^^^^^^^^^^^^
 - `return`_
 - `call`_
-- `worker`_
+- `callworker`_
 - `sleep`_
 - `animate`_
 - `consume`_
 - `produce`_
 - `mine`_
-- `check_soldier`_
+- `checksoldier`_
+- `checkmap`_
 - `train`_
-- `play_sound`_
+- `playsound`_
 
 
 return
@@ -149,10 +150,10 @@ Parameter syntax::
 
   parameters                 ::= program [failure_handling_directive]
   failure_handling_directive ::= on failure failure_handling_method
-  failure_handling_method    ::= Fail | Repeat | Ignore
+  failure_handling_method    ::= Fail | Repeat | Skip
   Fail                       ::= fail
   Repeat                     ::= repeat
-  Ignore                     ::= ignore
+  Skip                       ::= skip
 
 Parameter semantics:
 
@@ -163,13 +164,13 @@ Parameter semantics:
 
     - If ``failure_handling_method`` is ``fail``, the command fails (with the same effect as executing ``return=failed``).
     - If ``failure_handling_method`` is ``repeat``, the command is repeated.
-    - If ``failure_handling_method`` is ``ignore``, the failure is ignored (the program is continued).
+    - If ``failure_handling_method`` is ``skip``, the failure is ignored (the program is continued).
 
 ``failure_handling_directive``
-    If omitted, the value ``Ignore`` is used for ``failure_handling_method``.
+    If omitted, the value ``Skip`` is used for ``failure_handling_method``.
 
-worker
-------
+callworker
+----------
 Calls a program of the productionsite's main worker.
 
 Parameter syntax::
@@ -271,17 +272,25 @@ is the percentage chance that a worker is gaining experience on failure - this
 is to guarantee that you can eventually extend a mine, even though it was
 exhausted for a while already.
 
-check_soldier
--------------
+checksoldier
+------------
 Returns failure unless there are a specified amount of soldiers with specified level of specified properties. This command type is subject to change.
+
+checkmap
+--------
+Checks the map for properties. At the moment, only 'seafaring' is available as parameter.
+
+Parameter syntax::
+
+  parameters ::= seafaring
 
 train
 -----
 Increases the level of a specified property of a soldier. No further documentation available.
 
-play_sound
-----------
-Plays a soundFX.
+playsound
+---------
+Plays a sound effect.
 
 Parameter syntax::
 
@@ -289,8 +298,8 @@ Parameter syntax::
 
 Parameter semantics:
 
-``soundFX``
-    The filename of a soundFX (relative to the productionsite's directory).
+``filepath``
+    The path/base_filename of a soundFX (relative to the data directory).
 ``priority``
     An integer. If omitted, 127 is used.
 

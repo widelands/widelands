@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -72,7 +72,7 @@ std::shared_ptr<const Image> SdlTtfFont::render(const std::string& txt,
 	    static_cast<int>(clr.r) % static_cast<int>(clr.g) % static_cast<int>(clr.b) % style)
 	      .str();
 	std::shared_ptr<const Image> rv = texture_cache->get(hash);
-	if (rv.get() != nullptr) {
+	if (rv != nullptr) {
 		return rv;
 	}
 
@@ -85,8 +85,12 @@ std::shared_ptr<const Image> SdlTtfFont::render(const std::string& txt,
 		SDL_Surface* tsurf = TTF_RenderUTF8_Blended(font_, txt.c_str(), sdlclr);
 		SDL_Surface* shadow = TTF_RenderUTF8_Blended(font_, txt.c_str(), SHADOW_CLR);
 		text_surface = empty_sdl_surface(shadow->w + SHADOW_OFFSET, shadow->h + SHADOW_OFFSET);
+		CLANG_DIAG_OFF("-Wunknown-pragmas")
+		CLANG_DIAG_OFF("-Wzero-as-null-pointer-constant")
 		SDL_FillRect(text_surface, NULL,
 		             SDL_MapRGBA(text_surface->format, 255, 255, 255, SDL_ALPHA_TRANSPARENT));
+		CLANG_DIAG_ON("-Wzero-as-null-pointer-constant")
+		CLANG_DIAG_ON("-Wunknown-pragmas")
 
 		if (text_surface->format->BitsPerPixel != 32)
 			throw RenderError("SDL_TTF did not return a 32 bit surface for shadow text. Giving up!");

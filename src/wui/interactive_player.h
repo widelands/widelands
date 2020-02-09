@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,20 +20,16 @@
 #ifndef WL_WUI_INTERACTIVE_PLAYER_H
 #define WL_WUI_INTERACTIVE_PLAYER_H
 
+#include <memory>
 #include <vector>
 
 #include <SDL_keyboard.h>
 
+#include "io/profile.h"
 #include "logic/message_id.h"
-#include "profile/profile.h"
+#include "logic/note_map_options.h"
 #include "ui_basic/button.h"
-#include "ui_basic/textarea.h"
 #include "wui/interactive_gamebase.h"
-
-namespace UI {
-struct MultilineTextarea;
-struct Textarea;
-}
 
 /**
  * This is the interactive player. this one is
@@ -46,7 +42,8 @@ public:
 	InteractivePlayer(Widelands::Game&,
 	                  Section& global_s,
 	                  Widelands::PlayerNumber,
-	                  bool multiplayer);
+	                  bool multiplayer,
+	                  ChatProvider* chat_provider = nullptr);
 
 	bool can_see(Widelands::PlayerNumber) const override;
 	bool can_act(Widelands::PlayerNumber) const override;
@@ -57,7 +54,7 @@ public:
 
 	bool handle_key(bool down, SDL_Keysym) override;
 
-	Widelands::Player& player() const {
+	const Widelands::Player& player() const {
 		return game().player(player_number_);
 	}
 	Widelands::Player* get_player() const override {
@@ -70,6 +67,7 @@ public:
 
 	// For load
 	void cleanup_for_load() override;
+	void postload() override;
 	void think() override;
 	void draw(RenderTarget& dst) override;
 
@@ -80,21 +78,36 @@ public:
 	void popup_message(Widelands::MessageId, const Widelands::Message&);
 
 private:
+	// For referencing the items in statisticsmenu_
+	enum class StatisticsMenuEntry { kGeneral, kWare, kBuildings, kStock, kSeafaring };
+
+	// Adds the statisticsmenu_ to the toolbar
+	void add_statistics_menu();
+	// Rebuilds the statisticsmenu_ according to current map settings
+	void rebuild_statistics_menu();
+	// Takes the appropriate action when an item in the statisticsmenu_ is selected
+	void statistics_menu_selected(StatisticsMenuEntry entry);
+	void rebuild_showhide_menu() override;
+
+	bool player_hears_field(const Widelands::Coords& coords) const override;
+
 	void cmdSwitchPlayer(const std::vector<std::string>& args);
 
 	Widelands::PlayerNumber player_number_;
 	bool auto_roadbuild_mode_;
 	Widelands::Coords flag_to_connect_;
 
-	UI::Button* toggle_chat_;
 	UI::Button* toggle_message_menu_;
 
-	UI::UniqueWindow::Registry chat_;
-	UI::UniqueWindow::Registry options_;
-	UI::UniqueWindow::Registry statisticsmenu_;
+	// Statistics menu on the toolbar
+	UI::Dropdown<StatisticsMenuEntry> statisticsmenu_;
 	UI::UniqueWindow::Registry objectives_;
 	UI::UniqueWindow::Registry encyclopedia_;
 	UI::UniqueWindow::Registry message_menu_;
+
+	const Image* grid_marker_pic_;
+
+	std::unique_ptr<Notifications::Subscriber<NoteMapOptions>> map_options_subscriber_;
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_PLAYER_H

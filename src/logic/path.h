@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -112,7 +112,7 @@ struct CoordPath {
 		return path_;
 	}
 
-	int32_t get_index(Coords field) const;
+	int32_t get_index(const Coords& field) const;
 
 	void reverse();
 	void truncate(const std::vector<char>::size_type after);
@@ -124,6 +124,6 @@ private:
 	StepVector path_;             //  directions
 	std::vector<Coords> coords_;  //  coords_.size() == path_.size() + 1
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_PATH_H

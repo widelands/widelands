@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,113 +22,54 @@
 
 #include "ui_fsmenu/base.h"
 
-#include <memory>
-
-#include "graphic/image.h"
-#include "logic/game_controller.h"
+#include "logic/game.h"
+#include "logic/game_settings.h"
+#include "ui_basic/box.h"
 #include "ui_basic/button.h"
-#include "ui_basic/icon.h"
-#include "ui_basic/multilinetextarea.h"
-#include "ui_basic/table.h"
+#include "ui_basic/checkbox.h"
+#include "ui_basic/panel.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/load_map_or_game.h"
-
-namespace Widelands {
-class EditorGameBase;
-class Game;
-class Map;
-class MapLoader;
-}
-class Image;
-class RenderTarget;
-class GameController;
-struct GameSettingsProvider;
-
-/**
- * Data about a savegame/replay that we're interested in.
- */
-struct SavegameData {
-	std::string filename;
-	std::string mapname;
-	std::string wincondition;
-	std::string minimap_path;
-	std::string savedatestring;
-	std::string errormessage;
-
-	uint32_t gametime;
-	uint32_t nrplayers;
-	std::string version;
-	time_t savetimestamp;
-	GameController::GameType gametype;
-
-	SavegameData()
-	   : gametime(0),
-	     nrplayers(0),
-	     savetimestamp(0),
-	     gametype(GameController::GameType::kSingleplayer) {
-	}
-};
+#include "wui/load_or_save_game.h"
 
 /// Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu.
 class FullscreenMenuLoadGame : public FullscreenMenuLoadMapOrGame {
 public:
-	FullscreenMenuLoadGame(Widelands::Game&,
-	                       GameSettingsProvider* gsp,
-	                       GameController* gc = nullptr,
-	                       bool is_replay = false);
+	FullscreenMenuLoadGame(Widelands::Game&, GameSettingsProvider* gsp, bool is_replay = false);
 
-	const std::string& filename() {
-		return filename_;
-	}
-
-	void think() override;
+	/// The currently selected filename
+	const std::string& filename() const;
 
 	bool handle_key(bool down, SDL_Keysym code) override;
 
 protected:
+	/// Sets the current selected filename and ends the modal screen with 'Ok' status.
 	void clicked_ok() override;
+
+	/// Update button status and game details
 	void entry_selected() override;
+
+	/// Fill load_or_save_'s table
 	void fill_table() override;
 
 private:
 	void layout() override;
+	void toggle_filenames();
 
-	/// Updates buttons and text labels and returns whether a table entry is selected.
-	bool set_has_selection();
-	bool compare_date_descending(uint32_t, uint32_t);
-	void clicked_delete();
-	std::string filename_list_string();
+	UI::Box main_box_;
+	UI::Box info_box_;
+	UI::Textarea title_;
 
-	UI::Table<uintptr_t const> table_;
+	LoadOrSaveGame load_or_save_;
+
+	// TODO(GunChleoc): Get rid of this hack once everything is 100% box layout
+	UI::Panel* button_spacer_;
+	std::string filename_;
 
 	bool is_replay_;
 
-	UI::Textarea title_;
-	UI::Textarea label_mapname_;
-	UI::MultilineTextarea ta_mapname_;  // Multiline for long names
-	UI::Textarea label_gametime_;
-	UI::MultilineTextarea ta_gametime_;  // Multiline because we want tooltips
-	UI::Textarea label_players_;
-	UI::MultilineTextarea ta_players_;
-	UI::Textarea label_version_;
-	UI::Textarea ta_version_;
-	UI::Textarea label_win_condition_;
-	UI::MultilineTextarea ta_win_condition_;
-
-	UI::Button delete_;
-
-	UI::MultilineTextarea ta_long_generic_message_;
-
-	int32_t const minimap_y_, minimap_w_, minimap_h_;
-	UI::Icon minimap_icon_;
-	std::unique_ptr<const Image> minimap_image_;
-
-	std::vector<SavegameData> games_data_;
-	std::string filename_;
-
-	Widelands::Game& game_;
-	GameSettingsProvider* settings_;
-	GameController* ctrl_;
+	UI::Checkbox* show_filenames_;
+	bool showing_filenames_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_LOADGAME_H

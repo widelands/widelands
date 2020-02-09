@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,10 +42,11 @@ struct S2MapLoader : public Widelands::MapLoader {
 private:
 	const std::string filename_;
 	WorldType worldtype_;
+	std::set<Widelands::Coords> port_spaces_to_set_;
 
 	void load_s2mf_header(FileRead&);
 	void load_s2mf(Widelands::EditorGameBase&);
-	void postload_fix_conversion(Widelands::EditorGameBase&);
+	void postload_set_port_spaces(const Widelands::EditorGameBase& world);
 };
 
 #endif  // end of include guard: WL_MAP_IO_S2MAP_H

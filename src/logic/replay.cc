@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,9 +23,11 @@
 #include "base/md5.h"
 #include "base/wexception.h"
 #include "game_io/game_loader.h"
+#include "game_io/game_preload_packet.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
+#include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_data_error.h"
@@ -36,8 +38,9 @@
 namespace Widelands {
 
 // File format definitions
+constexpr uint32_t kReplayKnownToDesync = 0x2E21A100;
 constexpr uint32_t kReplayMagic = 0x2E21A101;
-constexpr uint8_t kCurrentPacketVersion = 2;
+constexpr uint8_t kCurrentPacketVersion = 3;
 constexpr uint32_t kSyncInterval = 200;
 
 enum { pkt_end = 2, pkt_playercommand = 3, pkt_syncreport = 4 };
@@ -80,7 +83,10 @@ ReplayReader::ReplayReader(Game& game, const std::string& filename) {
 	replaytime_ = 0;
 
 	{
-		GameLoader gl(filename + WLGF_SUFFIX, game);
+		GameLoader gl(filename + kSavegameExtension, game);
+		Widelands::GamePreloadPacket gpdp;
+		gl.preload_game(gpdp);
+		game.set_win_condition_displayname(gpdp.get_win_condition());
 		gl.load_game();
 	}
 
@@ -88,13 +94,15 @@ ReplayReader::ReplayReader(Game& game, const std::string& filename) {
 
 	try {
 		const uint32_t magic = cmdlog_->unsigned_32();
-		if (magic == 0x2E21A100)
+		if (magic == kReplayKnownToDesync) {
 			// Note: This was never released as part of a build
 			throw wexception("%s is a replay from a version that is known to have desync "
 			                 "problems",
 			                 filename.c_str());
-		if (magic != kReplayMagic)
+		}
+		if (magic != kReplayMagic) {
 			throw wexception("%s apparently not a valid replay file", filename.c_str());
+		}
 
 		const uint8_t packet_version = cmdlog_->unsigned_8();
 		if (packet_version != kCurrentPacketVersion) {
@@ -210,21 +218,20 @@ public:
  */
 ReplayWriter::ReplayWriter(Game& game, const std::string& filename)
    : game_(game), filename_(filename) {
-	g_fs->ensure_directory_exists(REPLAY_DIR);
+	g_fs->ensure_directory_exists(kReplayDir);
 
 	SaveHandler& save_handler = game_.save_handler();
 
 	std::string error;
-	if (!save_handler.save_game(game_, filename_ + WLGF_SUFFIX, &error))
+	if (!save_handler.save_game(game_, filename_ + kSavegameExtension, &error))
 		throw wexception("Failed to save game for replay: %s", error.c_str());
 
 	log("Reloading the game from replay\n");
 	game.cleanup_for_load();
 	{
-		GameLoader gl(filename_ + WLGF_SUFFIX, game);
+		GameLoader gl(filename_ + kSavegameExtension, game);
 		gl.load_game();
 	}
-	game.postload();
 	log("Done reloading the game from replay\n");
 
 	game.enqueue_command(new CmdReplaySyncWrite(game.get_gametime() + kSyncInterval));
@@ -271,4 +278,4 @@ void ReplayWriter::send_sync(const Md5Checksum& hash) {
 	cmdlog_->data(hash.data, sizeof(hash.data));
 	cmdlog_->flush();
 }
-}
+}  // namespace Widelands

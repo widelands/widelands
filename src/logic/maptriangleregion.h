@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -114,13 +114,21 @@ template <typename CoordsType> struct MapTriangleRegion<TCoords<CoordsType>> {
 
 private:
 	const bool radius_is_odd_ = false;
-	enum { Top, Upper, Lower, Bottom } phase_ = Top;
+	enum class Phase { kTop, kUpper, kLower, kBottom } phase_ = Phase::kTop;
 	uint16_t remaining_rows_in_upper_phase_ = 0U;
 	uint16_t remaining_rows_in_lower_phase_ = 0U;
 	uint16_t row_length_, remaining_in_row_ = 0U;
 	CoordsType left_;
 	TCoords<CoordsType> location_;
 };
-}
+
+// Forward declarations of template instantiations
+template <> MapTriangleRegion<>::MapTriangleRegion(const Map& map, Area<TCoords<>> area);
+template <> bool MapTriangleRegion<>::advance(const Map& map);
+
+template <>
+MapTriangleRegion<TCoords<FCoords>>::MapTriangleRegion(const Map& map, Area<TCoords<FCoords>> area);
+template <> bool MapTriangleRegion<TCoords<FCoords>>::advance(const Map& map);
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAPTRIANGLEREGION_H

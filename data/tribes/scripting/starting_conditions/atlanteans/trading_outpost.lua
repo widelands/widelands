@@ -71,6 +71,7 @@ return {
             atlanteans_sawyer = 1,
             atlanteans_stonecutter = 2,
             atlanteans_toolsmith = 2,
+            atlanteans_trainer = 4,
             atlanteans_weaponsmith = 1,
             atlanteans_woodcutter = 3,
             atlanteans_horse = 5,

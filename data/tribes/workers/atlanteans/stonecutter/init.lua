@@ -11,8 +11,8 @@ animations = {
       fps = 10
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {10, 21}, 10)
-add_walking_animations(animations, "walkload", dirname, "walkload", {10, 23}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {10, 21}, 10)
+add_directional_animation(animations, "walkload", dirname, "walkload", {10, 23}, 10)
 
 
 tribes:new_worker_type {
@@ -31,12 +31,12 @@ tribes:new_worker_type {
 
    programs = {
       cut_granite = {
-         "findobject attrib:rocks radius:6",
-         "walk object",
-         "play_sound sound/atlanteans/cutting stonecutter 192",
-         "animation hacking 12000",
-         "object shrink",
-         "createware granite",
+         "findobject=attrib:rocks radius:6",
+         "walk=object",
+         "playsound=sound/atlanteans/cutting/stonecutter 192",
+         "animate=hacking 18500",
+         "callobject=shrink",
+         "createware=granite",
          "return"
       }
    },

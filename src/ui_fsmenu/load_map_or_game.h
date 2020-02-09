@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,10 +27,8 @@
 #include <boost/algorithm/string.hpp>
 
 #include "base/i18n.h"
-#include "graphic/graphic.h"
 #include "io/filesystem/filesystem.h"
 #include "ui_basic/button.h"
-#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
 #include "wui/maptable.h"
@@ -40,7 +38,7 @@ class EditorGameBase;
 class Game;
 class Map;
 class MapLoader;
-}
+}  // namespace Widelands
 class Image;
 class RenderTarget;
 class GameController;
@@ -73,7 +71,7 @@ protected:
 	const int32_t padding_ = 4;  // Common padding between panels
 	const int32_t indent_ = 10;  // Indent for elements below labels
 	const int32_t label_height_ = 20;
-	const int32_t right_column_margin_ = 15;  // X margins of the right column
+	const int32_t right_column_margin_ = 16;  // X margins of the right column
 	// These are set by the layout() function.
 	int32_t tablex_, tabley_, tablew_, tableh_ = 0;
 	int32_t right_column_x_ = 0;

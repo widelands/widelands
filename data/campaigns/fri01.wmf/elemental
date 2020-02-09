@@ -1,0 +1,13 @@
+# Automatically created by Widelands bzr8766[widelands] (Release)
+
+[global]
+packet_version="1"
+map_w="224"
+map_h="128"
+nr_players="2"
+name=_"The Great Stormflood"
+author="Nordfriese"
+descr=_"In 1362, the quiet, peaceful life of the inhabitants of the Northern Frisian Islands was disrupted by one of the greatest storm floods in human memory: Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or a sign from the Gods that the Frisian community on the island of Langeness is not wanted here?"
+hint=_"This scenario is set in a historical context, but most of the story line is fiction."
+background="campaigns/fri01.wmf/pics/background.jpg"
+tags="seafaring"

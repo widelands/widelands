@@ -112,6 +112,7 @@ tribes:new_trainingsite_type {
    },
 
    aihints = {
+      trainingsites_max_percent = 40,
       prohibited_till = 1500,
       very_weak_ai_limit = 0,
       weak_ai_limit = 1
@@ -155,16 +156,19 @@ tribes:new_trainingsite_type {
          descname = _"sleeping",
          actions = {
             "sleep=5000",
-            "check_soldier=soldier attack 9", -- dummy check to get sleep rated as skipped - else it will change statistics
+            "return=no_stats",
          }
       },
       upgrade_soldier_attack_0 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("atlanteans_building", "upgrading soldier attack from level 0 to level 1"),
          actions = {
-            "check_soldier=soldier attack 0",
+            "checksoldier=soldier attack 0",
+            "return=failed unless site has trident_long",
+            "return=failed unless site has atlanteans_bread",
+            "return=failed unless site has smoked_fish,smoked_meat",
             "sleep=30000",
-            "check_soldier=soldier attack 0",
+            "checksoldier=soldier attack 0",
             "consume=atlanteans_bread smoked_fish,smoked_meat trident_long",
             "train=soldier attack 0 1"
          }
@@ -173,9 +177,12 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("atlanteans_building", "upgrading soldier attack from level 1 to level 2"),
          actions = {
-            "check_soldier=soldier attack 1",
+            "checksoldier=soldier attack 1",
+            "return=failed unless site has trident_steel",
+            "return=failed unless site has atlanteans_bread",
+            "return=failed unless site has smoked_fish,smoked_meat",
             "sleep=30000",
-            "check_soldier=soldier attack 1",
+            "checksoldier=soldier attack 1",
             "consume=atlanteans_bread smoked_fish,smoked_meat trident_steel",
             "train=soldier attack 1 2"
          }
@@ -184,9 +191,12 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("atlanteans_building", "upgrading soldier attack from level 2 to level 3"),
          actions = {
-            "check_soldier=soldier attack 2",
+            "checksoldier=soldier attack 2",
+            "return=failed unless site has trident_double",
+            "return=failed unless site has atlanteans_bread",
+            "return=failed unless site has smoked_fish,smoked_meat",
             "sleep=30000",
-            "check_soldier=soldier attack 2",
+            "checksoldier=soldier attack 2",
             "consume=atlanteans_bread smoked_fish,smoked_meat trident_double",
             "train=soldier attack 2 3"
          }
@@ -195,9 +205,12 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("atlanteans_building", "upgrading soldier attack from level 3 to level 4"),
          actions = {
-            "check_soldier=soldier attack 3",
+            "checksoldier=soldier attack 3",
+            "return=failed unless site has trident_heavy_double",
+            "return=failed unless site has atlanteans_bread",
+            "return=failed unless site has smoked_fish,smoked_meat",
             "sleep=30000",
-            "check_soldier=soldier attack 3",
+            "checksoldier=soldier attack 3",
             "consume=atlanteans_bread smoked_fish,smoked_meat trident_heavy_double",
             "train=soldier attack 3 4"
          }

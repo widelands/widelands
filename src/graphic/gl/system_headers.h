@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,7 +29,7 @@
 // are stuck with it. Before making any changes here, see:
 // https://www.opengl.org/wiki/OpenGL_Loading_Library
 // and
-// http://stackoverflow.com/questions/13558073/program-crash-on-glgenvertexarrays-call.
+// https://stackoverflow.com/questions/13558073/program-crash-on-glgenvertexarrays-call.
 //
 // TODO(sirver): glbinding seems to be a sane solution to the GL
 // loading problem. Switch to it everywhere. (https://github.com/hpicgs/glbinding).
@@ -37,6 +37,17 @@
 #ifdef USE_GLBINDING
 #include <glbinding/Binding.h>
 #include <glbinding/gl/gl.h>
+
+// testing for the presence of glbinding.h to determine whether we have a glbinding version newer
+// then 2.1.4
+#ifdef __has_include
+#if __has_include("glbinding/glbinding.h")
+#include <glbinding/ProcAddress.h>
+#include <glbinding/glbinding.h>
+#define GLBINDING3
+#endif
+#endif
+
 // This fakes that most other gl bindings define gl functions in the public namespace.
 CLANG_DIAG_OFF("-Wheader-hygiene")
 using namespace gl;

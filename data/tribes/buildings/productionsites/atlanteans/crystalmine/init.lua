@@ -55,6 +55,10 @@ tribes:new_productionsite_type {
       "granite"
    },
 
+   indicate_workarea_overlaps = {
+      atlanteans_crystalmine = false,
+   },
+
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
@@ -63,64 +67,100 @@ tribes:new_productionsite_type {
             "call=mine_granite",
             "call=mine_quartz",
             "call=mine_diamond",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       mine_granite = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
          descname = _"mining granite",
          actions = {
-            "return=skipped unless economy needs granite or economy needs quartz",
-            "sleep=45000",
+            "return=skipped unless economy needs granite",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "animate=working 20000",
-            "mine=stones 4 100 5 2",
-            "produce=granite:2",
-            "animate=working 20000",
-            "mine=stones 4 100 5 2",
-            "produce=granite:2",
-            "animate=working 20000",
-            "mine=stones 4 100 5 2",
-            "produce=granite",
-            "animate=working 20000",
-            "mine=stones 4 100 5 2",
-            "produce=quartz"
+            "sleep=40000",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_quartz",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_granite",
+            "return=no_stats"
          }
       },
       mine_quartz = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining quartz because ...
          descname = _"mining quartz",
          actions = {
-            "return=skipped unless economy needs granite or economy needs quartz",
-            "sleep=45000",
+            "return=skipped unless economy needs quartz",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "animate=working 20000",
-            "mine=stones 4 100 5 2",
-            "produce=granite:2",
-            "animate=working 20000",
-            "mine=stones 4 100 5 2",
-            "produce=granite quartz",
-            "animate=working 20000",
-            "mine=stones 4 100 5 2",
-            "produce=quartz:2"
+            "sleep=30000",
+            "call=a_mine_produce_quartz",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_quartz",
+            "call=a_mine_produce_quartz",
+            "return=no_stats"
          }
       },
       mine_diamond = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining diamonds because ...
          descname = _"mining diamonds",
          actions = {
-            "return=skipped unless economy needs granite or economy needs diamond",
-            "sleep=45000",
+            "return=skipped unless economy needs diamond",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "animate=working 20000",
+            "sleep=40000",
+            "call=a_mine_produce_diamond",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_diamond",
+            "return=no_stats"
+         }
+      },
+      a_mine_produce_granite = {
+         descname = _"mining granite",
+         actions = {
+            "animate=working 15000",
+            "mine=stones 4 100 5 2",
+            "produce=granite",
+         }
+      },
+      a_mine_produce_quartz = {
+         descname = _"mining quartz",
+         actions = {
+            "animate=working 10000",
+            "mine=stones 4 100 5 2",
+            "produce=quartz",
+         }
+      },
+      a_mine_produce_diamond = {
+         descname = _"mining diamonds",
+         actions = {
+            "animate=working 25000",
             "mine=stones 4 100 5 2",
             "produce=diamond",
-            "animate=working 20000",
-            "mine=stones 4 100 5 2",
-            "produce=diamond",
-            "animate=working 20000",
-            "mine=stones 4 100 5 2",
-            "produce=granite"
+         }
+      },
+      encyclopedia_granite = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
+            "produce=granite:5 quartz",
+         }
+      },
+      encyclopedia_quartz = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
+            "produce=quartz:3 granite:3",
+         }
+      },
+      encyclopedia_diamond = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
+            "produce=diamond:2 granite",
          }
       },
    },

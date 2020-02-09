@@ -54,12 +54,12 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mixing grout because ...
          descname = _"mixing grout",
          actions = {
-            "sleep=50000",
             "return=skipped unless economy needs grout",
             "consume=coal granite:2 water:2",
-            "play_sound=sound/barbarians stonegrind 100",
+            "sleep=50000",
+            "playsound=sound/barbarians/stonegrind 100",
             "animate=working 29000",
-            "play_sound=sound/barbarians mortar 80",
+            "playsound=sound/barbarians/mortar 80",
             "sleep=3000",
             "produce=grout:2"
          }

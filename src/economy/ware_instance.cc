@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,9 +25,9 @@
 #include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
-#include "economy/fleet.h"
 #include "economy/portdock.h"
 #include "economy/request.h"
+#include "economy/ship_fleet.h"
 #include "economy/transfer.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -47,7 +47,7 @@ namespace Widelands {
 // TODO(unknown): This maybe shouldn't be here.
 struct IdleWareSupply : public Supply {
 	explicit IdleWareSupply(WareInstance&);
-	virtual ~IdleWareSupply();
+	~IdleWareSupply() override;
 
 	void set_economy(Economy*);
 
@@ -70,21 +70,21 @@ private:
 
 /**
  * Initialize the Supply and update the economy.
-*/
+ */
 IdleWareSupply::IdleWareSupply(WareInstance& ware) : ware_(ware), economy_(nullptr) {
 	set_economy(ware.get_economy());
 }
 
 /**
  * Cleanup.
-*/
+ */
 IdleWareSupply::~IdleWareSupply() {
 	set_economy(nullptr);
 }
 
 /**
  * Add/remove self from economies as necessary.
-*/
+ */
 void IdleWareSupply::set_economy(Economy* const e) {
 	if (economy_ != e) {
 		if (economy_)
@@ -107,7 +107,7 @@ PlayerImmovable* IdleWareSupply::get_position(Game& game) {
 		return worker->get_location(game);
 
 	if (upcast(Ship, ship, loc)) {
-		if (PortDock* pd = ship->get_destination(game))
+		if (PortDock* pd = ship->get_current_destination(game))
 			return pd;
 
 		return ship->get_fleet()->get_arbitrary_dock();
@@ -151,7 +151,7 @@ uint32_t IdleWareSupply::nr_supplies(const Game&, const Request& req) const {
 
 /**
  * The ware is already "launched", so we only need to return it.
-*/
+ */
 WareInstance& IdleWareSupply::launch_ware(Game&, const Request& req) {
 	if (req.get_type() != wwWARE)
 		throw wexception("IdleWareSupply::launch_ware : called for non-ware request");
@@ -187,9 +187,9 @@ WareInstance::WareInstance(DescriptionIndex const i, const WareDescr* const ware
 
 WareInstance::~WareInstance() {
 	if (supply_) {
-		FORMAT_WARNINGS_OFF;
+		FORMAT_WARNINGS_OFF
 		molog("Ware %u still has supply %p\n", descr_index_, supply_);
-		FORMAT_WARNINGS_ON;
+		FORMAT_WARNINGS_ON
 		delete supply_;
 	}
 }
@@ -214,27 +214,28 @@ void WareInstance::cleanup(EditorGameBase& egbase) {
 
 /**
  * Ware accounting
-*/
+ */
 void WareInstance::set_economy(Economy* const e) {
+	assert(!e || e->type() == wwWARE);
 	if (descr_index_ == INVALID_INDEX || economy_ == e)
 		return;
 
 	if (economy_)
-		economy_->remove_wares(descr_index_, 1);
+		economy_->remove_wares_or_workers(descr_index_, 1);
 
 	economy_ = e;
 	if (supply_)
 		supply_->set_economy(e);
 
 	if (economy_)
-		economy_->add_wares(descr_index_, 1);
+		economy_->add_wares_or_workers(descr_index_, 1);
 }
 
 /**
  * Change the current location.
  * Once you've assigned a ware to its new location, you usually have to call
  * \ref update() as well.
-*/
+ */
 void WareInstance::set_location(EditorGameBase& egbase, MapObject* const location) {
 	MapObject* const oldlocation = location_.get(egbase);
 
@@ -247,13 +248,13 @@ void WareInstance::set_location(EditorGameBase& egbase, MapObject* const locatio
 		Economy* eco = nullptr;
 
 		if (upcast(Flag const, flag, location))
-			eco = flag->get_economy();
+			eco = flag->get_economy(wwWARE);
 		else if (upcast(Worker const, worker, location))
-			eco = worker->get_economy();
+			eco = worker->get_economy(wwWARE);
 		else if (upcast(PortDock const, portdock, location))
-			eco = portdock->get_economy();
+			eco = portdock->get_economy(wwWARE);
 		else if (upcast(Ship const, ship, location))
-			eco = ship->get_economy();
+			eco = ship->get_economy(wwWARE);
 		else
 			throw wexception("WareInstance delivered to bad location %u", location->serial());
 
@@ -309,8 +310,9 @@ void WareInstance::update(Game& game) {
 
 	// Update whether we have a Supply or not
 	if (!transfer_ || !transfer_->get_request()) {
-		if (!supply_)
+		if (!supply_) {
 			supply_ = new IdleWareSupply(*this);
+		}
 	} else {
 		delete supply_;
 		supply_ = nullptr;
@@ -350,10 +352,11 @@ void WareInstance::update(Game& game) {
 		}
 
 		if (upcast(Flag, flag, location)) {
-			flag->call_carrier(game, *this, dynamic_cast<Building const*>(nextstep) &&
-			                                      &nextstep->base_flag() != location ?
-			                                   &nextstep->base_flag() :
-			                                   nextstep);
+			flag->call_carrier(
+			   game, *this,
+			   dynamic_cast<Building const*>(nextstep) && &nextstep->base_flag() != location ?
+			      &nextstep->base_flag() :
+			      nextstep);
 		} else if (upcast(PortDock, pd, location)) {
 			pd->update_shippingitem(game, *this);
 		} else {
@@ -464,7 +467,7 @@ void WareInstance::set_transfer(Game& game, Transfer& t) {
 
 /**
  * The transfer has been cancelled, just stop moving.
-*/
+ */
 void WareInstance::cancel_transfer(Game& game) {
 	transfer_ = nullptr;
 	transfer_nextstep_ = nullptr;
@@ -474,7 +477,7 @@ void WareInstance::cancel_transfer(Game& game) {
 
 /**
  * We are moving when there's a transfer, it's that simple.
-*/
+ */
 bool WareInstance::is_moving() const {
 	return transfer_;
 }
@@ -482,7 +485,7 @@ bool WareInstance::is_moving() const {
 /**
  * Call this function if movement + potential request need to be cancelled for
  * whatever reason.
-*/
+ */
 void WareInstance::cancel_moving() {
 	molog("cancel_moving\n");
 
@@ -496,12 +499,12 @@ void WareInstance::cancel_moving() {
 /**
  * Return the next flag we should be moving to, or the final target if the route
  * has been completed successfully.
-*/
+ */
 PlayerImmovable* WareInstance::get_next_move_step(Game& game) {
 	return transfer_ ? dynamic_cast<PlayerImmovable*>(transfer_nextstep_.get(game)) : nullptr;
 }
 
-void WareInstance::log_general_info(const EditorGameBase& egbase) {
+void WareInstance::log_general_info(const EditorGameBase& egbase) const {
 	MapObject::log_general_info(egbase);
 
 	molog("Ware: %s\n", descr().name().c_str());
@@ -582,10 +585,10 @@ MapObject::Loader* WareInstance::load(EditorGameBase& egbase,
 
 		// Some maps may contain ware info, so we need compatibility here.
 		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
-			std::string warename = fr.c_string();
 			if (packet_version == 1) {
-				warename = lookup_table.lookup_ware(warename, fr.c_string());
+				fr.c_string();  // Consume tribe name
 			}
+			const std::string warename = lookup_table.lookup_ware(fr.c_string());
 
 			DescriptionIndex wareindex = egbase.tribes().ware_index(warename);
 			const WareDescr* descr = egbase.tribes().get_ware_descr(wareindex);
@@ -603,4 +606,4 @@ MapObject::Loader* WareInstance::load(EditorGameBase& egbase,
 	}
 	NEVER_HERE();
 }
-}
+}  // namespace Widelands

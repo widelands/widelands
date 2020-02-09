@@ -70,19 +70,20 @@ tribes:new_productionsite_type {
             "call=produce_armor_helmet",
             "call=produce_armor",
             "call=produce_armor_chain",
+            "call=produce_armor_helmet",
             "call=produce_armor_gilded",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       produce_armor_helmet = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
          descname = _"forging a helmet",
          actions = {
-            -- time total: 80
+            -- time total: 67 + 3.6
             "return=skipped unless economy needs armor_helmet",
-            "sleep=40000",  -- +8 enlarge
             "consume=iron coal",
-            "animate=working 40000",  -- +5 enlarge
+            "sleep=47000",
+            "animate=working 20000",
             "produce=armor_helmet"
          }
       },
@@ -90,11 +91,11 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a suit of armor because ...
          descname = _"forging a suit of armor",
          actions = {
-            -- time total: 90
+            -- time total: 77 + 3.6
             "return=skipped unless economy needs armor",
             "consume=iron coal cloth",
-            "sleep=40000",  -- +8 enlarge
-            "animate=working 50000",  -- +5 enlarge
+            "sleep=32000",
+            "animate=working 45000",
             "produce=armor"
          }
       },
@@ -102,11 +103,11 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a suit of chain armor because ...
          descname = _"forging a suit of chain armor",
          actions = {
-            -- time total: 108
+            -- time total: 77 + 3.6
             "return=skipped unless economy needs armor_chain",
             "consume=iron:2 coal cloth",
-            "sleep=47000",  -- +15 enlarge
-            "animate=working 61000",  -- +16 enlarge
+            "sleep=32000",
+            "animate=working 45000",
             "produce=armor_chain"
          }
       },
@@ -114,11 +115,11 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a suit of gilded armor because ...
          descname = _"forging a suit of gilded armor",
          actions = {
-            -- time total: 115
+            -- time total: 77 + 3.6
             "return=skipped unless economy needs armor_gilded",
             "consume=iron:2 coal:2 cloth gold",
-            "sleep=51000",  -- +19 enlarge
-            "animate=working 64000",  -- +19 enlarge
+            "sleep=32000",
+            "animate=working 45000",
             "produce=armor_gilded"
          }
       },

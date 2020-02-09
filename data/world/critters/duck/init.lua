@@ -4,15 +4,14 @@ animations = {
    idle = {
       pictures = path.list_files(dirname .. "idle_??.png"),
       sound_effect = {
-         directory = dirname,
-         name = "duck",
+         path = dirname .. "duck",
       },
       hotspot = { 5, 7 },
       fps = 4,
    },
 }
 
-add_walking_animations(animations, "walk", dirname, "walk", {5, 10})
+add_directional_animation(animations, "walk", dirname, "walk", {5, 10})
 
 world:new_critter_type{
    name = "duck",

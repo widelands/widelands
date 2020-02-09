@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,6 +37,8 @@
 struct MainMenuSaveMapMakeDirectory : public UI::Window {
 	MainMenuSaveMapMakeDirectory(UI::Panel*, char const*);
 
+	void start() override;
+
 	char const* get_dirname() {
 		return dirname_.c_str();
 	}
@@ -50,7 +52,9 @@ private:
 	UI::EditBox edit_;
 	UI::Button ok_button_;
 	UI::Button cancel_button_;
+	const std::string illegal_filename_tooltip_;
 	void edit_changed();
+	void clicked_ok();
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,7 +28,7 @@ class Economy;
 
 struct IdleWorkerSupply : public Supply {
 	explicit IdleWorkerSupply(Worker&);
-	~IdleWorkerSupply();
+	~IdleWorkerSupply() override;
 
 	void set_economy(Economy*);
 	PlayerImmovable* get_position(Game&) override;
@@ -47,6 +47,6 @@ private:
 	Worker& worker_;
 	Economy* economy_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_IDLEWORKERSUPPLY_H

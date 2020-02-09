@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,11 +22,10 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
+#include "io/profile.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
-#include "logic/widelands.h"
-#include "profile/profile.h"
 
 namespace Widelands {
 
@@ -73,14 +72,14 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 			while (Section* teamsection = prof.get_section(teamsection_key.c_str())) {
 
 				// A lineup is made up of teams
-				Map::SuggestedTeamLineup lineup;
+				SuggestedTeamLineup lineup;
 
 				uint16_t team_number = 1;
 				std::string team_key = (boost::format("team%i") % team_number).str().c_str();
 				std::string team_string = teamsection->get_string(team_key.c_str(), "");
 				while (!team_string.empty()) {
 					// A team is made up of players
-					Map::SuggestedTeam team;
+					SuggestedTeam team;
 
 					std::vector<std::string> players_string;
 					boost::split(players_string, team_string, boost::is_any_of(","));
@@ -142,11 +141,11 @@ void MapElementalPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObject
 	global_section.set_string("tags", boost::algorithm::join(map.get_tags(), ","));
 
 	int counter = 0;
-	for (Widelands::Map::SuggestedTeamLineup lineup : map.get_suggested_teams()) {
+	for (Widelands::SuggestedTeamLineup lineup : map.get_suggested_teams()) {
 		Section& teams_section =
 		   prof.create_section((boost::format("teams%02d") % counter++).str().c_str());
 		int lineup_counter = 0;
-		for (Widelands::Map::SuggestedTeam team : lineup) {
+		for (Widelands::SuggestedTeam team : lineup) {
 			std::string section_contents;
 			for (std::vector<PlayerNumber>::const_iterator it = team.begin(); it != team.end(); ++it) {
 				if (it == team.begin()) {
@@ -164,4 +163,4 @@ void MapElementalPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObject
 
 	prof.write("elemental", false, fs);
 }
-}
+}  // namespace Widelands

@@ -46,7 +46,7 @@ return {
             scythe = 6,
             shovel = 4,
             snack = 3,
-            thatch_reed = 24,
+            reed = 24,
             log = 79,
          },
          workers = {
@@ -58,8 +58,10 @@ return {
             barbarians_geologist = 4,
             barbarians_lumberjack = 2,
             barbarians_miner = 4,
+            barbarians_miner_master = 4,
             barbarians_ranger = 1,
             barbarians_stonemason = 2,
+            barbarians_trainer = 3,
             barbarians_ox = 5,
          },
          soldiers = {

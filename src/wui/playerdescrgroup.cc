@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,10 +26,8 @@
 #include "ai/computer_player.h"
 #include "base/i18n.h"
 #include "base/wexception.h"
-#include "graphic/graphic.h"
-#include "graphic/text_constants.h"
 #include "logic/game_settings.h"
-#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
@@ -69,25 +67,25 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UI::Panel* const parent,
 	   boost::bind(&PlayerDescriptionGroup::enable_player, this, _1));
 	d->btnPlayerType =
 	   new UI::Button(this, "player_type", xplayertype, 0, xplayertribe - xplayertype - 2, h / 2,
-	                  g_gr->images().get("images/ui_basic/but1.png"), "");
+	                  UI::ButtonStyle::kFsMenuSecondary, "");
 	d->btnPlayerType->sigclicked.connect(
 	   boost::bind(&PlayerDescriptionGroup::toggle_playertype, boost::ref(*this)));
 	d->btnPlayerTeam =
 	   new UI::Button(this, "player_team", xplayerteam, h / 2, xplayerinit - xplayerteam - 2, h / 2,
-	                  g_gr->images().get("images/ui_basic/but1.png"), "");
+	                  UI::ButtonStyle::kFsMenuSecondary, "");
 	d->btnPlayerTeam->sigclicked.connect(
 	   boost::bind(&PlayerDescriptionGroup::toggle_playerteam, boost::ref(*this)));
 	d->btnPlayerTribe = new UI::Button(this, "player_tribe", xplayertribe, 0, w - xplayertribe,
-	                                   h / 2, g_gr->images().get("images/ui_basic/but1.png"), "");
+	                                   h / 2, UI::ButtonStyle::kFsMenuSecondary, "");
 	d->btnPlayerTribe->sigclicked.connect(
 	   boost::bind(&PlayerDescriptionGroup::toggle_playertribe, boost::ref(*this)));
 	d->btnPlayerInit =
 	   new UI::Button(this, "player_initialization", xplayerinit, h / 2, w - xplayerinit, h / 2,
-	                  g_gr->images().get("images/ui_basic/but1.png"), "", _("Initialization"));
+	                  UI::ButtonStyle::kFsMenuSecondary, "", _("Initialization"));
 	d->btnPlayerInit->sigclicked.connect(
 	   boost::bind(&PlayerDescriptionGroup::toggle_playerinit, boost::ref(*this)));
 
-	refresh();
+	update();
 }
 
 PlayerDescriptionGroup::~PlayerDescriptionGroup() {
@@ -98,7 +96,7 @@ PlayerDescriptionGroup::~PlayerDescriptionGroup() {
 /**
  * Update display and enabled buttons based on current settings.
  */
-void PlayerDescriptionGroup::refresh() {
+void PlayerDescriptionGroup::update() {
 	const GameSettings& settings = d->settings->settings();
 
 	if (d->plnum >= settings.players.size()) {
@@ -161,7 +159,7 @@ void PlayerDescriptionGroup::refresh() {
 			}
 			d->btnPlayerType->set_title(title);
 
-			TribeBasicInfo info = Widelands::get_tribeinfo(player.tribe);
+			Widelands::TribeBasicInfo info = Widelands::get_tribeinfo(player.tribe);
 			if (!tribenames_[player.tribe].size()) {
 				// Tribe's localized name
 				tribenames_[player.tribe] = info.descname;
@@ -175,9 +173,12 @@ void PlayerDescriptionGroup::refresh() {
 				d->btnPlayerTribe->set_tooltip(info.tooltip);
 			}
 
-			{
+			if (settings.scenario) {
+				d->btnPlayerInit->set_title(_("Scenario"));
+				d->btnPlayerInit->set_tooltip(_("Start type is set via the scenario"));
+			} else {
 				i18n::Textdomain td("tribes");  // for translated initialisation
-				for (const TribeBasicInfo& tribeinfo : settings.tribes) {
+				for (const Widelands::TribeBasicInfo& tribeinfo : settings.tribes) {
 					if (tribeinfo.name == player.tribe) {
 						d->btnPlayerInit->set_title(
 						   _(tribeinfo.initializations.at(player.initialization_index).descname));
@@ -215,16 +216,20 @@ void PlayerDescriptionGroup::enable_player(bool on) {
 		return;
 
 	if (on) {
-		if (settings.players[d->plnum].state == PlayerSettings::State::kClosed)
-			d->settings->next_player_state(d->plnum);
+		if (settings.players[d->plnum].state == PlayerSettings::State::kClosed) {
+			d->settings->set_player_state(d->plnum, PlayerSettings::State::kComputer);
+		}
 	} else {
-		if (settings.players[d->plnum].state != PlayerSettings::State::kClosed)
+		if (settings.players[d->plnum].state != PlayerSettings::State::kClosed) {
 			d->settings->set_player_state(d->plnum, PlayerSettings::State::kClosed);
+		}
 	}
+	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer, d->plnum));
 }
 
 void PlayerDescriptionGroup::toggle_playertype() {
 	d->settings->next_player_state(d->plnum);
+	update();
 }
 
 /**
@@ -257,6 +262,7 @@ void PlayerDescriptionGroup::toggle_playertribe() {
 	}
 
 	d->settings->set_player_tribe(d->plnum, nexttribe, random_tribe);
+	update();
 }
 
 /**
@@ -282,6 +288,7 @@ void PlayerDescriptionGroup::toggle_playerteam() {
 		newteam = currentteam + 1;
 
 	d->settings->set_player_team(d->plnum, newteam);
+	update();
 }
 
 /// Cycle through available initializations for the player's tribe.
@@ -293,10 +300,12 @@ void PlayerDescriptionGroup::toggle_playerinit() {
 
 	const PlayerSettings& player = settings.players[d->plnum];
 
-	for (const TribeBasicInfo& tribeinfo : settings.tribes) {
+	for (const Widelands::TribeBasicInfo& tribeinfo : settings.tribes) {
 		if (tribeinfo.name == player.tribe) {
-			return d->settings->set_player_init(
+			d->settings->set_player_init(
 			   d->plnum, (player.initialization_index + 1) % tribeinfo.initializations.size());
+			update();
+			return;
 		}
 	}
 	NEVER_HERE();

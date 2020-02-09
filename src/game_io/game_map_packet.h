@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,7 +33,7 @@ struct WidelandsMapLoader;
 struct GameMapPacket : public GameDataPacket {
 	GameMapPacket() : mos_(nullptr), mol_(nullptr), wms_(nullptr), wml_(nullptr) {
 	}
-	virtual ~GameMapPacket();
+	~GameMapPacket() override;
 
 	/// Ensures that the world gets loaded but does not much more.
 	void read(FileSystem&, Game&, MapObjectLoader* = nullptr) override;
@@ -55,6 +55,6 @@ private:
 	MapSaver* wms_;
 	WidelandsMapLoader* wml_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_GAME_IO_GAME_MAP_PACKET_H

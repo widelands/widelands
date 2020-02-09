@@ -7,7 +7,6 @@ class Packer(object):
 
     The best description of the algorithm I found is here
     http://codeincomplete.com/posts/2011/5/7/bin_packing/.
-
     """
 
     def fit(self, blocks):
@@ -100,7 +99,6 @@ def pack(rectangles):
 
     Returns a tuple (w, h, offsets), where offsets is a list of (x, y)
     tuples describing where to put the given rectangles.
-
     """
     p = Packer()
     p.fit([Block(r[0], r[1]) for r in rectangles])

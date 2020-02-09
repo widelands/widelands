@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2017 by the Widelands Development Team
+ * Copyright (C) 2010-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,6 +35,10 @@ Icon::Icon(Panel* const parent,
 	set_thinks(false);
 }
 
+Icon::Icon(Panel* const parent, const Image* picture_id)
+   : Icon(parent, 0, 0, picture_id->width(), picture_id->height(), picture_id) {
+}
+
 void Icon::set_icon(const Image* picture_id) {
 	pic_ = picture_id;
 }
@@ -52,18 +56,21 @@ void Icon::set_no_frame() {
 
 void Icon::draw(RenderTarget& dst) {
 	if (pic_) {
-		const float scale = std::min(1.f, std::min(static_cast<float>(get_w()) / pic_->width(),
-		                                           static_cast<float>(get_h()) / pic_->height()));
-
-		const float width = scale * get_w();
-		const float height = scale * get_h();
-		const float x = (get_w() - width) / 2.f;
-		const float y = (get_h() - height) / 2.f;
-		dst.blitrect_scale(Rectf(x, y, width, height), pic_,
-		                   Recti(0, 0, pic_->width(), pic_->height()), 1., BlendMode::UseAlpha);
-	}
-	if (draw_frame_) {
-		dst.draw_rect(Recti(0, 0, get_w(), get_h()), framecolor_);
+		const int available_width = draw_frame_ ? get_w() - 2 : get_w();
+		const int available_height = draw_frame_ ? get_h() - 2 : get_h();
+		const float scale =
+		   std::min(1.f, std::min(static_cast<float>(available_width) / pic_->width(),
+		                          static_cast<float>(available_height) / pic_->height()));
+		// We need to be pixel perfect, so we use ints.
+		const int width = scale * available_width;
+		const int height = scale * available_height;
+		const int x = (available_width - width) / 2;
+		const int y = (available_height - height) / 2;
+		dst.blitrect_scale(Rectf(draw_frame_ ? x + 1 : x, draw_frame_ ? y + 1 : y, width, height),
+		                   pic_, Recti(0, 0, pic_->width(), pic_->height()), 1., BlendMode::UseAlpha);
+		if (draw_frame_) {
+			dst.draw_rect(Recti(x, y, width + 2, height + 2), framecolor_);
+		}
 	}
 }
-}
+}  // namespace UI

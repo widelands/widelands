@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -93,5 +93,5 @@ void LuaInterface::interpret_string(const std::string& cmd) {
 }
 
 std::unique_ptr<LuaTable> LuaInterface::run_script(const std::string& path) {
-	return ::run_script(lua_state_, path, g_fs);
+	return ::run_script(lua_state_, g_fs->fix_cross_file(path), g_fs);
 }

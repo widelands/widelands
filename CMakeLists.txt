@@ -1,6 +1,46 @@
 project (widelands)
 
 cmake_minimum_required (VERSION 2.8.7)
+cmake_policy(VERSION 2.8.7)
+
+include("${CMAKE_SOURCE_DIR}/cmake/UseSystemInfo.cmake")
+
+# This policy is not known to versions prior 3.1 and would result in errors,
+# if set on such systems. This can be removed when cmake_minimum_required is set
+# to 3.1 or newer by using:
+# cmake_policy(VERSION 3.1)
+if(POLICY CMP0054)
+   cmake_policy(SET CMP0054 NEW)
+endif(POLICY CMP0054)
+
+# This policy is not known to versions prior 3.11 and would result in errors,
+# if set on such systems. This can be removed when cmake_minimum_required is set
+# to 3.11 or newer  by using:
+# cmake_policy(VERSION 3.11)
+if(POLICY CMP0072)
+  cmake_policy(SET CMP0072 NEW)
+
+  # TODO(stonerl): Check on later Ubuntu releases whether this workaround is
+  # still needed or not.
+  if (CMAKE_SYSTEM MATCHES "Linux")
+    distro_name (DISTRO_NAME)
+    # DISTRO_NAME is different on the build-servers.
+    if ((DISTRO_NAME MATCHES "Ubuntu 18.10" OR DISTRO_NAME MATCHES "Cosmic"
+         OR DISTRO_NAME MATCHES "Ubuntu 19.04" OR DISTRO_NAME MATCHES "Disco"
+         OR DISTRO_NAME MATCHES "Ubuntu 19.10" OR DISTRO_NAME MATCHES "Eoan")
+        AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+      cmake_policy(SET CMP0072 OLD)
+    endif()
+  endif()
+endif(POLICY CMP0072)
+
+# This policy is not known to versions prior 3.12 and would result in errors,
+# if set on such systems. This can be removed when cmake_minimum_required is set
+# to 3.12 or newer  by using:
+# cmake_policy(VERSION 3.12)
+if(POLICY CMP0074)
+  cmake_policy(SET CMP0074 NEW)
+endif(POLICY CMP0074)
 
 include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
 
@@ -8,6 +48,14 @@ option(OPTION_USE_GLBINDING "Use glbinding instead of GLEW" OFF)
 option(OPTION_GLEW_STATIC "Use static GLEW Library" OFF)
 option(OPTION_BUILD_WEBSITE_TOOLS "Build website-related tools" ON)
 option(OPTION_BUILD_TRANSLATIONS "Build translations" ON)
+option(OPTION_BUILD_TESTS "Build tests" ON)
+option(OPTION_BUILD_CODECHECK "Build codecheck" ON)
+
+option(USE_XDG "Follow XDG-Basedir specification" ON) # Enabled by default
+IF(USE_XDG AND NOT APPLE AND NOT WIN32)
+  ADD_DEFINITIONS(-DUSE_XDG)
+  message(STATUS "Building with XDG support")
+ENDIF(USE_XDG AND NOT APPLE AND NOT WIN32)
 
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
   message(FATAL_ERROR "Build directory and source directory must not be the same.")
@@ -41,7 +89,7 @@ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Mod
 
 if (WIN32)
   set (Boost_USE_STATIC_LIBS  ON)
-  link_libraries(wsock32 ws2_32)
+  link_libraries(wsock32 ws2_32 bcrypt)
 else()
   set (Boost_USE_STATIC_LIBS  OFF)
 endif()
@@ -79,6 +127,17 @@ if (APPLE OR WIN32 OR
   endif()
 endif()
 
+# Disable no symbols warning on macOS, but only on versions where this is
+# supported. It is not supported on OS X 10.7 (DARWIN_MAJOR_VERSION == 11).
+if (APPLE)
+    if (${DARWIN_MAJOR_VERSION} GREATER 11)
+        SET(CMAKE_C_ARCHIVE_CREATE   "<CMAKE_AR> Scr <TARGET> <LINK_FLAGS> <OBJECTS>")
+        SET(CMAKE_CXX_ARCHIVE_CREATE "<CMAKE_AR> Scr <TARGET> <LINK_FLAGS> <OBJECTS>")
+        SET(CMAKE_C_ARCHIVE_FINISH   "<CMAKE_RANLIB> -no_warning_for_no_symbols -c <TARGET>")
+        SET(CMAKE_CXX_ARCHIVE_FINISH "<CMAKE_RANLIB> -no_warning_for_no_symbols -c <TARGET>")
+    endif()
+endif()
+
 # TODO(sirver): One day, this should be enabled. Then we have no more cycles in our dependencies....
 # set_property(GLOBAL PROPERTY GLOBAL_DEPENDS_NO_CYCLES ON)
 
@@ -93,27 +152,47 @@ endif (NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   set(WL_DEBUG_FLAGS "-g -DDEBUG")
+  option(OPTION_ASAN "Build with AddressSanitizer" ON)
 elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
-  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_EQUAL 6.3))
-    message(STATUS "GCC 6.3.0 breaks -03, setting -02")
+  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 6.2))
+    message(STATUS "GCC >6.2.0 breaks -03, setting -02")
     set(WL_OPTIMIZE_FLAGS "-O2")
   else()
     set(WL_OPTIMIZE_FLAGS "-O3")
   endif ()
   set(WL_DEBUG_FLAGS "-DNDEBUG -DNOPARACHUTE")
+  option(OPTION_ASAN "Build with AddressSanitizer" OFF)
 elseif(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
-  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_EQUAL 6.3))
-    message(STATUS "GCC 6.3.0 breaks -03, setting -02")
+  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 6.2))
+    message(STATUS "GCC >6.2.0 breaks -03, setting -02")
     set(WL_OPTIMIZE_FLAGS "-O2")
   else()
     set(WL_OPTIMIZE_FLAGS "-O3")
   endif ()
   set(WL_DEBUG_FLAGS "-DNDEBUG -DNOPARACHUTE")
+  option(OPTION_ASAN "Build with AddressSanitizer" ON)
 else()
   message(FATAL_ERROR "Unknown CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 endif()
 
 wl_add_flag(WL_GENERIC_CXX_FLAGS "-std=c++11")
+
+if(OPTION_ASAN)
+  message(STATUS "Using AddressSanitizer https://clang.llvm.org/docs/AddressSanitizer.html")
+  # See https://clang.llvm.org/docs/AddressSanitizer.html
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-fsanitize=address")
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-fno-omit-frame-pointer")
+  set (CMAKE_EXE_LINKER_FLAGS "-fsanitize=address" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+else()
+  message(STATUS "Not using AddressSanitizer.")
+endif(OPTION_ASAN)
+
+# This is set to avoid linker errors when using GLVND-libs on Linux
+if("${OpenGL_GL_PREFERENCE}" STREQUAL "GLVND")
+   link_libraries("GL")
+   add_compile_definitions(WL_USE_GLVND)
+   message(STATUS "Adding linker flags for GLVND.")
+endif()
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Weverything")
@@ -143,6 +222,11 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=non-pod-varargs")
 
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Qunused-arguments")
+
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wint-to-void-pointer-cast")
+  if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 3.8)
+      wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Winconsistent-missing-override")
+  endif()
 else()
   # Assuming GCC 4.8 or higher.
   if(WIN32)
@@ -213,40 +297,28 @@ if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
 endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
 
 if (NOT DEFINED WL_VERSION)
-  add_custom_target (
-    BzrRevision ALL
-    COMMAND ${CMAKE_COMMAND} -DWL_INSTALL_BASEDIR=${WL_INSTALL_BASEDIR} -DWL_INSTALL_DATADIR=${WL_INSTALL_DATADIR} -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DBINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/BzrRevision.cmake
-  )
-
-  # Detect version now
-  execute_process (
-    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/utils/detect_revision.py
-    OUTPUT_VARIABLE WL_VERSION
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    OUTPUT_STRIP_TRAILING_WHITESPACE
-  )
-  file (WRITE ${CMAKE_CURRENT_BINARY_DIR}/VERSION "${WL_VERSION}")
-  configure_file (${CMAKE_CURRENT_SOURCE_DIR}/src/build_info.cc.cmake ${CMAKE_CURRENT_BINARY_DIR}/src/build_info.cc)
-  message (STATUS "Version of Widelands Build is ${WL_VERSION}(${CMAKE_BUILD_TYPE})")
+  include (${CMAKE_SOURCE_DIR}/cmake/BzrRevision.cmake)
 else (NOT DEFINED WL_VERSION)
   add_custom_target (
     InputRevision ALL
-    COMMAND ${CMAKE_COMMAND -DWL_INSTALL_BASEDIR=${WL_INSTALL_BASEDIR} -DWL_VERSION=${WL_VERSION} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DBINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/InputRevision.cmake
+    COMMAND ${CMAKE_COMMAND} -DWL_INSTALL_BASEDIR=${WL_INSTALL_BASEDIR} -DWL_VERSION=${WL_VERSION} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DBINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/InputRevision.cmake
   )
 endif (NOT DEFINED WL_VERSION)
 
 # Enable testing.
-include(CTest)
-enable_testing()
+if (OPTION_BUILD_TESTS)
+  include(CTest)
+  enable_testing()
 
-# Run a test after a normal compile. This magic is needed as 'make test' will
-# not rebuild tests:
-# http://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests
-add_custom_target(_run_all_tests ALL
-  COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
-  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-  DEPENDS wl_tests
-)
+  # Run a test after a normal compile. This magic is needed as 'make test' will
+  # not rebuild tests:
+  # https://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests
+  add_custom_target(_run_all_tests ALL
+    COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    DEPENDS wl_tests
+  )
+endif (OPTION_BUILD_TESTS)
 
 install (
   FILES ${CMAKE_CURRENT_BINARY_DIR}/VERSION
@@ -271,6 +343,7 @@ install(
     data/images
     data/scripting
     data/shaders
+    data/templates
     data/tribes
     data/txts
     data/world
@@ -324,3 +397,7 @@ install(
   CONFIGURATIONS Debug;Release
   COMPONENT CoreLanguageFiles
 )
+
+if (UNIX AND NOT APPLE)
+  add_subdirectory(xdg)
+endif (UNIX AND NOT APPLE)

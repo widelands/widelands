@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,11 +30,10 @@ class RealFSImpl : public FileSystem {
 public:
 	explicit RealFSImpl(const std::string& Directory);
 
-	std::set<std::string> list_directory(const std::string& path) override;
+	FilenameSet list_directory(const std::string& path) const override;
 
 	bool is_writable() const override;
-	bool file_is_writeable(const std::string& path);
-	bool file_exists(const std::string& path) override;
+	bool file_exists(const std::string& path) const override;
 	bool is_directory(const std::string& path) override;
 	void ensure_directory_exists(const std::string& fs_dirname) override;
 	void make_directory(const std::string& fs_dirname) override;

@@ -1,0 +1,1185 @@
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2019 Widelands Development Team
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# GunChleoc, 2019
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands svnVERSION\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-11-30 12:38+0000\n"
+"PO-Revision-Date: 2018-03-24 18:15+0000\n"
+"Last-Translator: GunChleoc, 2019\n"
+"Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: gd\n"
+"Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : (n > 2 && n < 20) ? 2 : 3;\n"
+
+#. TRANSLATORS: Name of a backup autosave
+#: ../../data/campaigns/fri01.wmf/scripting/mission_thread.lua:132
+msgid "The Great Stormflood (Backup Autosave)"
+msgstr ""
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:27
+msgid "Build a wood economy and a reed farm"
+msgstr "Tog eaconamaidh fiodha agus tuathanas-feòir"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:29
+msgid "Wood Economy"
+msgstr "Eaconamaidh fiodha"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:30
+msgid ""
+"Build at least one woodcutter’s house and two forester’s houses to start "
+"producing logs, and a reed farm to start growing reed."
+msgstr ""
+"Tog co-dhiù aon taigh buaineadair-fhiodha agus dà thaigh planntair-choille "
+"ach an tòisich thu air fiodh a shaothrachadh agus tuathanas-feòir ach am fàs"
+" thu achaidhean feòir."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:35
+msgid "Start producing bricks"
+msgstr "Tòisich air breigichean a shaothrachadh"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:37
+msgid "Brick Economy"
+msgstr "Eaconamaidh breige"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:38
+msgid ""
+"Build a brick kiln, a coal mine, a rock mine, a clay pit and a well to start"
+" producing bricks."
+msgstr ""
+"Tog àth bhreigichean, mèinn guail, mèinn cloiche, sùil-chriadha agus tobar "
+"ach an tòisich thu air breigichean a shaothrachadh."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:43
+msgid "Gather building materials"
+msgstr "Cruinnich stuthan-togail"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:45
+msgid "Stockpile Building Materials"
+msgstr "Cruinnich stòras de stuthan-togail"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:46
+msgid ""
+"Stockpile some building materials in your headquarters. Gather at least:"
+msgstr ""
+"Cruinnich stòras de stuthan-togail sa phrìomh-àras agad. Cruinnich co-dhiù:"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:47
+msgid "30 × Log"
+msgstr "30 × fiodh"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:48
+msgid "30 × Granite"
+msgstr "30 × gaireal"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:49
+msgid "10 × Clay"
+msgstr "10 × criadh"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:50
+msgid "40 × Brick"
+msgstr "40 × breige"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:51
+msgid "20 × Coal"
+msgstr "20 × gual"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:52
+msgid "30 × Reed"
+msgstr "30 × feur"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:53
+msgid ""
+"Remember that you can set target quantities for most of these wares in your "
+"economy settings."
+msgstr ""
+"Thoir an aire gur urrainn dhut uiread-amais a shuidheachadh airson a’ "
+"mhòrchuid dhe na batharan seo ann an roghainnean na h-eaconamaidh agad."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:58
+msgid "Produce food for the miners"
+msgstr "Saothraich biadh dha na mèinnearan"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:60
+msgid "Food Economy"
+msgstr "Eaconamaidh bìdh"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:61
+msgid ""
+"Build a tavern, a fisher’s house, a smokery, a berry farm and a fruit "
+"collector’s house."
+msgstr ""
+"Tog taigh-tàirn, taigh-iasgair, taigh-toitidh, croit-dhearc agus taigh-"
+"cruinniche."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:66
+msgid "Enhance your food economy"
+msgstr "Leasaich an eaconamaidh bìdh agad"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:68
+msgid "Enhance Food Economy"
+msgstr "Leasaich an eaconamaidh bìdh"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:69
+msgid ""
+"Build at least two farms, a beekeeper’s house (next to the berry farm), a "
+"bakery, a brewery, and another tavern."
+msgstr ""
+"Tog co-dhiù dà thuathanas, beachlann (ri taobh na croit-dhearc), taigh-"
+"fuine, taigh-grùide agus taigh-tàirn eile."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:74
+msgid "Build an iron mine and a mining infrastructure"
+msgstr "Tog mèinn iarainn agus bun-structar mèinnearachd"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:76
+msgid "Build Mines and Mining Infrastructure"
+msgstr "Tog mèinnean agus bun-structar mèinnearachd"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:77
+msgid "Build an iron mine, a furnace, a blacksmithy and a small armor smithy."
+msgstr ""
+"Tog mèinn iarainn, fùirneis, ceàrdach gobhainn agus ceàrdach armachd bheag."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:82
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:257
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:266
+msgid "Start recruiting soldiers"
+msgstr "Tòisich air saighdearan a thrusadh"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:84
+msgid "Recruiting Soldiers"
+msgstr "Trusadh shaighdearan"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:85
+msgid "Build a barracks, a reindeer farm and a sewing room."
+msgstr "Tog taigh-feachd, tuathanas rèin-fhèidh agus bùth banalachd."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:90
+msgid "Discover more of the island"
+msgstr "Rùraich an eilean"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:92
+msgid "Expand and Discover"
+msgstr "Leudaich agus lorg"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:93
+msgid "Expand further and discover more of the island."
+msgstr "Leudaich do ranntair is lorg barrachd dhen eilean."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:98
+msgid "Train your soldiers"
+msgstr "Oidichidh na saighdearan agad"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:100
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:311
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:320
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:332
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:348
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:354
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:360
+msgid "Training Soldiers"
+msgstr "Oideachadh nan saighdearan"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:101
+msgid ""
+"Train a soldier to the highest possible level. Soldiers are trained in "
+"training camps and training arenas. We will need a gold mine, a tailor’s "
+"shop to sew sturdier garments, and a large armor smithy for better weapons "
+"and helmets."
+msgstr ""
+"Oidich saighdear ach an ruig e an rang as àirde. Thèid saighdearan "
+"oideachadh ann an campaichean oideachaidh agus raointean oideachaidh. "
+"Feumaidh sinn mèinn òir ’s taigh tàillearachd ach am fuigheall sinn "
+"còtaichean nas seasmhaiche ’s ceàrdach armachd mhòr ach am faigh sinn airm "
+"is clogaidean nas fheàrr."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:106
+msgid "Defeat the enemy!"
+msgstr "Cuir ruaig air an nàmhaid!"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:108
+msgid "Defeat the Enemy!"
+msgstr "Cuir ruaig air an nàmhaid!"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:109
+msgid "Destroy the enemy tribe’s headquarters."
+msgstr "Mill prìomh-àras an treubha nàimhdeil."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:114
+msgid "Escape from the floods"
+msgstr "Teàrn o na tuiltean"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:116
+msgid "Flee from the Floods"
+msgstr "Teich o na tuiltean"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:117
+msgid ""
+"Build a port, a weaving mill and a shipyard, then start an expedition to "
+"flee before the storm flood drowns the island."
+msgstr ""
+"Tog port, taigh nam beart ’s doca agus tòisich air triall an uairsin ach an "
+"teich thu on eilean mus dèid e fon tuil-ruadh."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:118
+msgid ""
+"You can build the port either on the easternmost tip of the island or in the"
+" place where the enemy’s headquarters stood."
+msgstr ""
+"’S urrainn dhut am port a thogail air ceann ear an eilein no san ionad far "
+"an robh prìomh-àras an nàmhad."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:119
+msgid ""
+"If you did not prepare well enough to master this challenge in time, you can"
+" reload the scenario from the backup savegame automatically created for you "
+"shortly before you reached the enemy’s headquarters."
+msgstr ""
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:128
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:137
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:146
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:162
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:178
+msgid "Introduction"
+msgstr "Ro-ràdh"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:129
+msgid "Welcome!"
+msgstr "Fàilte!"
+
+#. TRANSLATORS: Reebaud – Introduction 1
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:131
+msgid ""
+"Welcome to the beautiful isle of Langeness! I am Reebaud, the chieftain of "
+"this pristine island."
+msgstr ""
+"Fàilte gu eilean Langeness àlainn! Is mise Reebaud, ceann-cinnidh an eilein "
+"ùir seo."
+
+#. TRANSLATORS: Reebaud – Introduction 1. Schauenburg and Holstein are
+#. dukedoms
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:134
+msgid ""
+"My tribe and I have just arrived from the mainland. There were fights with "
+"the Danes in the North, the Schauenburgers and Holsteiners in the East and "
+"South… So I decided to lead my tribe away to start a quiet, peaceful life on"
+" this untouched island."
+msgstr ""
+"Tha mi fhìn ’s mo cuideachd dìreach air tighinn on tìr-mhòr. Bha còmhstri an"
+" aghaidh nan Dànach gu tuath is muinntir Schauenburg ’s Holstein gu ear is "
+"deas… Mar sin, chuir mi romham an treubh agam a stiùireadh air falbh ach am "
+"buannaicheamaid beatha shìtheil shàmhach san eilean ùr seo."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:138
+msgid "A new home"
+msgstr "Dachaigh ùr"
+
+#. TRANSLATORS: Reebaud – Introduction 2
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:140
+msgid ""
+"This is as good a place as any to start building our new home. First of all,"
+" we must ensure a stable supply of basic building materials."
+msgstr ""
+"Tha an t-àite seo a cheart cho math ri àite sam bith eile airson dachaigh ùr"
+" a thogail. Feumaidh sinn saothrachadh seasmhach nan stuthan-togail a "
+"shocrachadh an toiseach."
+
+#. TRANSLATORS: Reebaud – Introduction 2
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:143
+msgid ""
+"I have asked Hauke, one of my advisors, to oversee the construction of our "
+"settlement."
+msgstr ""
+"Dh’iarr mi air an fhear-chomhairle Hauke ach an stiùirich e togail an "
+"tuineachaidh againn."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:147
+msgid "The first buildings"
+msgstr "Na ciad togalaichean"
+
+#. TRANSLATORS: Hauke – Introduction 3. "Peace" is the traditional frisian
+#. greeting
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:149
+msgid ""
+"Peace, Chieftain Reebaud! I will start with the colonization of the island "
+"straight away."
+msgstr ""
+"Sìth leibh, a cheannaird Reebauid! Tòisichidh mi le tuineachadh an eilein sa"
+" bhad."
+
+#. TRANSLATORS: Hauke – Introduction 3
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:152
+msgid ""
+"Like all Frisians, we build our houses mainly with bricks. We improve them "
+"by adding some logs and granite. The roofs are thatched with reed, "
+"naturally. Nothing is better suited to keep the rain out."
+msgstr ""
+"Mar a nì Frìoslannach sam bith eile, cleachdaidh sinn grunn breigichean ann "
+"an togail ’nar taighean. Leasaichidh sinn iad le cuid a dh’fhiodh is "
+"gaireal. Gu nàdarra, tughaidh sinn na mullaich le feur. Chan eil dad nas "
+"fheàrr ann gus ar dìon on uisge."
+
+#. TRANSLATORS: Hauke – Introduction 3
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:155
+msgid ""
+"We should start by taking care of our wood production. Trees don’t seem to "
+"grow well on this island; better build at least two houses for foresters and"
+" one for a woodcutter."
+msgstr ""
+"Bu chòir dhuinn tòiseachadh le saothrachadh fiodha. Tha coltas nach fhàs "
+"craobhan glè mhath san eilean seo; b’ fheàirrde sinn co-dhiù dà thaigh a "
+"thogail dha na planntairean-coille agus fear dhan bhuaineadair-fhiodha."
+
+#. TRANSLATORS: Hauke – Introduction 3
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:158
+msgid ""
+"Also, we had better build a reed farm soon. Even reed farms need reed to be "
+"built, so we must take care not to run short before we can grow our own. "
+"Reed is easily cultivated, so the reed farmer doesn’t need anything more to "
+"start growing reed fields."
+msgstr ""
+"A bharrachd air sin, bu chòir dhuinn tuathanas-feòir a thogail a "
+"dh’aithghearr. Tha fiù tuathanasan-feòir feumach air feur, mar sin feumaidh "
+"sinn a bhith faiceallach nach ruith e oirnn mus fhàs sinn feur ùr. Chan eil "
+"e doirbh feur a thogail, mar sin chan eil an tuathanach-feòir feumach air "
+"dad sam bith eile airson achaidhean feòir a chur."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:163
+msgid "Building our new home"
+msgstr "A’ togail ar dachaigh ùir"
+
+#. TRANSLATORS: Hauke – Introduction 4
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:165
+msgid ""
+"Our wood and reed supplies are ensured. Now, we must take care of our brick "
+"supply. Bricks are burned in a brick kiln out of granite and clay, so we "
+"first need to produce those. On the mainland, we used to cut granite out of "
+"rocks, but I don’t see any here. Perhaps these hills contain enough stones "
+"to mine some granite."
+msgstr ""
+"Tha sinn air dèanamh cinnteach gun dèid fiodh is feur a shaothrachadh. Nise,"
+" feumaidh sinn dèiligeadh ri stòras nam breigichean againn. Thèid "
+"breigichean a losgadh ann an àth bhreigichean à gaireal is criadh, mar sin "
+"feumaidh sinn an dà dhiubh a shaothrachadh an toiseach. Air an tìr-mhòr, b’ "
+"àbhaist dhuinn an gaireal a ghearradh à carraigean ach chan fhaic mi gin ann"
+" a sheo. ’S dòcha gum bi clach gu leòr sna cnuic seo ach an tochail sinn "
+"cuid a ghaireil."
+
+#. TRANSLATORS: Hauke – Introduction 4
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:168
+msgid ""
+"Clay is easy to make: A clay digger working at a clay pit will simply dig up"
+" some earth and mix it with water. Just make sure that he has plenty of "
+"space for digging around his clay pit. It might be a good idea to build some"
+" sentinels to expand."
+msgstr ""
+"Tha criadh furasta ri dhèanamh: Gearraidh digear-criadha a tha ag obair aig "
+"sùil-chriadha beagan ùire is measgaichidh e le uisge i. Cha leig sibh leas "
+"ach dèanamh cinnteach gum bi pailteas rùim timcheall air an t-sùil-chriadha "
+"aige. Nach tog sinn taigh-caithris no dhà a leudachadh ar ranntair?"
+
+#. TRANSLATORS: Hauke – Introduction 4
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:171
+msgid ""
+"To burn bricks, the brick kiln needs a fire. We need to use coal as fuel. "
+"Build a coal mine to make sure we don’t run out. No coal means no bricks, no"
+" bricks means no mines, no mines mean no coal… you can see the problem."
+msgstr ""
+"Feumaidh an àth bhreigichean na breigichean a losgadh ann an teine. Feumaidh"
+" sinn gual a chleachdadh mar chonnadh. Tog mèinn guail a dhèanamh cinnteach "
+"nach ruith i oirnn. Mur eil gual againn chan fhaigh sinn breige ’s mur eil "
+"breige againn chan fhaigh sinn mèinn ’s mur eil mèin againn chan fhaigh sinn"
+" gual… tuigidh sibh an duilgheadas."
+
+#. TRANSLATORS: Hauke – Introduction 4
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:174
+msgid ""
+"Also, build a well – nobody likes to drink salt water, and it is no good for"
+" making clay."
+msgstr ""
+"A bharrachd air sin, togaibh tobar – cha toigh le duine beò sàl a ghabhail "
+"agus chan fhiach e airson criadh a dhèanamh."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:179
+msgid "Our first settlement"
+msgstr "Ar ciad tuineachadh"
+
+#. TRANSLATORS: Reebaud – Introduction 5
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:181
+msgid ""
+"You did well. Our entire building material production is working now. Let’s "
+"wait until we have gathered some more materials. We could expand our "
+"territory some more, to see what else can be found on this island."
+msgstr ""
+"’S math a rinn sibh. Tha saothrachadh nan stuthan-togail uile ag obair "
+"a-nis. Fuiricheamaid gus an cruinnich sinn barrachd stòrais dhiubh. B’ "
+"urrainn dhuinn ar ranntair a leudachadh ach an lorg sinn dè eile a tha san "
+"eilean seo."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:186
+msgid "Reed Shortages"
+msgstr "Gainnead fheòir"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:187
+msgid "Build another reed farm"
+msgstr "Tog tuathanas-feòir eile"
+
+#. TRANSLATORS: Hauke – no reed
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:189
+msgid ""
+"I noticed we have been short of reed for a while now. Our buildings seem to "
+"need quite a lot of it. We should build another reed farm or two. Reed is "
+"also used for making fishing nets and other tools; therefore, resolving this"
+" shortage should be a priority."
+msgstr ""
+"Mhothaich mi gu bheil am feur gann oirnn greis mhath a-nis. Tha coltas gu "
+"bheil na togalaichean againn feumach air tòrr dheth. Bu chòir dhuinn "
+"tuathanas-feòir no dhà eile a thogail. Thèid feur ’ga chleachdadh cuideachd "
+"airson lìontan-èisg is acainnean eile a dhèanamh; mar sin, tha e cudromach "
+"gum fuasgail sinn an gainnead seo."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:190
+msgid ""
+"You should assign the new reed farm the highest priority for reed in the "
+"construction site window."
+msgstr ""
+"Bu chòir dhut am prìomhachas as àirde a chur air an fheur ann an uinneag "
+"làrach togail an tuathanais-fheòir ùir."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:193
+msgid "Clay Shortages"
+msgstr "Gainnead criadha"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:194
+msgid "Build another clay pit"
+msgstr "Tog sùil-chriadha eile"
+
+#. TRANSLATORS: Hauke – no clay
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:196
+msgid ""
+"Our brickmakers have been complaining about a shortage of clay for a while "
+"now. No clay means no bricks can be produced, so this shortage is slowing us"
+" down a lot. It would be better to build one or two more clay pits, and "
+"wells to supply them with water."
+msgstr ""
+"Tha fir nam breigichean a’ gearan mu ghainnead criadha greis mhath a-nis. "
+"Chan fhaigh sinn breige às aonais criadha, mar sin tha an gainnead seo a’ "
+"cur maille mhòr oirnn. Bhiodh e na b’ fheàrr nan togamaid sùil-chriadha no "
+"dhà eile agus tobraichean a shaothraicheas uisge dhaibh."
+
+#. TRANSLATORS: Hauke – no clay
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:199
+msgid ""
+"Clay is also used in shipbuilding and to improve charcoal kilns. If we ever "
+"need to build a ship, or the mines cannot provide us with enough coal, we "
+"will need more clay, so the shortage must be resolved."
+msgstr ""
+"Thèid criadh a chleachdadh ann an togail luinge cuideachd agus airson "
+"piseach a thoirt air slocan guail-fhiodha. Ma thig an t-àm a dh’fheumas sinn"
+" long a thogail no mura faigh sinn gual gu leòr às na mèinnean, feumaidh "
+"sinn barrachd criadha is mar sin feumaidh sinn an gainnead fhuasgladh."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:202
+msgid "Brick Shortages"
+msgstr "Gainnead breige"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:203
+msgid "Build another brick kiln"
+msgstr "Tog àth bhreigichean eile"
+
+#. TRANSLATORS: Hauke – no bricks
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:205
+msgid ""
+"I noticed we are running out of bricks. This slows down construction of our "
+"buildings a lot, since we need so many bricks. We should really start to "
+"construct another brick kiln, and assign it the highest priority for bricks "
+"in the construction site window so as to resolve the shortage as soon as "
+"possible."
+msgstr ""
+"Mhothaich mi gu bheil na breigichean gu bhith ruith oirnn. Cuiridh seo "
+"maille mhòr air togail nan taighean againn on a bhios sinn feumach air grunn"
+" dhiubh. Bu chòir dhuinn tòiseachadh air àth bhreigichean eile a thogail "
+"agus am prìomhachas as àirde a thoirt dha na breigichean ann an uinneag a "
+"làraich togail ach am fuasgail sinn an gainnead cho luath ’s a ghabhas."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:206
+msgid ""
+"You should assign the new brick kiln the highest priority for bricks in the "
+"construction site window."
+msgstr ""
+"Bu chòir dhuibh am prìomhachas as àirde a chur air na breigichean ann an "
+"uinneag làrach togail an àtha bhreigichean ùir."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:209
+msgid "Warehouses"
+msgstr "Taighean-stòrais"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:210
+msgid "Build a warehouse in the east"
+msgstr "Tog taigh-stòrais taobh an ear"
+
+#. TRANSLATORS: Hauke – build a warehouse
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:212
+msgid ""
+"We are expanding our territory further and further to the east, and wares "
+"need to be transported over longer distances. We should build warehouses "
+"near our eastern border in certain distances and preferably store "
+"construction materials in the easternmost one. Our headquarters is too far "
+"in the west to be useful for long-time ware storage."
+msgstr ""
+"Tha sinn a’ leudachadh ar ranntair nas fhaide ear agus feumaidh sinn na "
+"batharan a ghiùlan tuilleadh is fada. Bu chòir dhuinn taighean-stòrais a "
+"thogail faisg air crìoch an ear aig astar ciallach o chàch a chèile agus na "
+"stuthan-togail a ghlèidheadh san fhear as fhaide ear mar phrìomhachas. Tha "
+"am prìomh-àras againn ro fhada gu siar ach am biodh e feumail do stòras "
+"bhatharan rè ùine fhada."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:216
+msgid "Hungry Miners"
+msgstr "Mèinnearan acrach"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:217
+msgid "The miners are protesting…"
+msgstr "Tha na mèinnearan ri stailc…"
+
+#. TRANSLATORS: Hauke – no rations left
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:219
+msgid ""
+"Chieftain Reebaud! I bring bad news. The miners are working so hard that "
+"they have no time to prepare their own food. They demand to be supplied with"
+" it."
+msgstr ""
+"A cheannaird Reebauid! Tha droch-naidheachd agam. Tha na mèinnearan againn "
+"ag obair cho cruaidh ’s nach eil ùine aca airson biadh a dhèanamh dhaibh "
+"fhèin. Tha iad ag iarraidh gun doir sinne dha e."
+
+#. TRANSLATORS: Hauke – no rations left
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:222
+msgid ""
+"We need to build a tavern for preparing rations. To get the raw food, we "
+"have to build a fisher’s house, and as nobody likes raw fish, a smokery to "
+"smoke it. Furthermore, build a berry farm which will plant berry bushes, and"
+" a fruit collector’s house so the bushes will be harvested."
+msgstr ""
+"Feumaidh sinn taigh-tàirn a thogail ach an dèan sinn greimeagan dhaibh. "
+"Airson am biadh bunasach fhaighinn, feumaidh sinn taigh-iasgair a thogail "
+"agus o nach eil duine beò measail air iasg amh, taigh-toitidh airson iasg-"
+"rèiste a dhèanamh dheth. A bharrachd air sin, togaibh croit-dhearc a "
+"chuireas preasan agus taigh-cruinniche ach an dèid na dearcan a bhuain."
+
+#. TRANSLATORS: Hauke – no rations left
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:225
+msgid ""
+"We should start expanding our territory faster in order to have enough space"
+" for many berry farms, and a longer coastline for fishing."
+msgstr ""
+"Bu chòir dhuinn ar ranntair a leudachadh nas luaithe ach am bi rùm gu leòr "
+"againn airson iomadh croit-dhearc agus barrachd oirthire airson an iasgaich."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:229
+msgid "Enhancing the Food Economy"
+msgstr "Leasachadh na h-eaconamaidh bìdh"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:230
+msgid "Feeding the soldiers"
+msgstr "Cur bìdh dha na saighdearan"
+
+#. TRANSLATORS: Hauke – better food
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:232
+msgid "Well done. The miners are satisfied and have started working again."
+msgstr ""
+"Glè mhath. Tha na mèinnearan sàsaichte agus thòisich iad air obair "
+"a-rithist."
+
+#. TRANSLATORS: Hauke – better food
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:235
+msgid ""
+"But when the mines will have to be enhanced, rations won’t keep the miners "
+"happy. Better take precautions – build a second tavern, then consider "
+"enhancing one to a drinking hall."
+msgstr ""
+"Gidheadh, nuair a dh’fheumas sinn na mèinnean a leasachadh, cha chùm na "
+"greimeagan na mèinnearan toilichte. ’S fheàirrde a bhith cùramach – togaibh "
+"taigh-tàirn eile agus beachdaichibh air a leasachadh ’na talla-òil."
+
+#. TRANSLATORS: Hauke – better food
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:238
+msgid ""
+"A drinking hall needs better food. Build a bakery, a brewery, and two or "
+"three farms to start growing barley. Keep in mind that barley grows very "
+"slowly; therefore, these few farms won’t suffice when we actually need the "
+"bread and beer. We should keep expanding quickly to have more space for "
+"farming."
+msgstr ""
+"Tha an talla-òil feumach air stuthan-bìdh nas fheàrr. Togaibh taigh-fuine, "
+"taigh-grùide ’s dà no trì tuathanasan airson eòrna a thogail. Thoiribh an "
+"aire gum fàs eòrna glè shlaodach; mar sin chan fhoghainn na tuathanasan seo "
+"an àm a dh’fheumas sinn an t-aran is leann. Bu chòir dhuinn ar ranntair a "
+"leudachadh gu luath ach am bi barrachd rùim againn dha thuathanasan."
+
+#. TRANSLATORS: Hauke – better food
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:241
+msgid ""
+"The bakery and brewery should be enhanced as soon as the workers have enough"
+" experience. They can then produce mead, and bread sweetened with honey. "
+"Build a beekeeper’s house next to the berry farm to produce some honey, "
+"which we can store until we need it."
+msgstr ""
+"Bu chòir dhuibh an taigh-fuine ’s an taigh-grùide a leasachadh cho luath ’s "
+"a bhios eòlas gu leòr aig an luchd-obrach. ’S urrainn dhaibh mil-dheoch agus"
+" aran-meala a shaothrachadh an uairsin. Togaibh beachlann ri taobh na croit-"
+"dhearc airson mil a shaothrachadh as urrainn dhuinn cur dhan stòras gus am "
+"bi feum againn air."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:246
+msgid "Build a Mining Economy"
+msgstr "Tog eaconamaidh mèinnearachd"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:247
+msgid "Mining economy"
+msgstr "Eaconamaidh mèinnearachd"
+
+#. TRANSLATORS: Reebaud – mining economy
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:249
+msgid ""
+"We can now produce all the kinds of food that we are used to. I wonder what "
+"treasures these hills might contain? We should find out."
+msgstr ""
+"’S urrainn dhuinn a h-uile biadh ris a bheil sinn cleachdte a shaothrachadh "
+"a-nis. Saoil dè an stòras a bhios sna cnuic seo? Bu chòir dhuinn fhaighinn "
+"a-mach."
+
+#. TRANSLATORS: Reebaud – mining economy
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:252
+msgid ""
+"Build an iron mine and perhaps a gold mine. As they produce only ores, we "
+"will need a furnace to smelt them. Also build a blacksmithy to ensure we "
+"won’t run out of tools – and yes, a small armor smithy as well. It produces "
+"helmets as well as swords. I hope we won’t meet enemies here, but it’s "
+"better to be prepared."
+msgstr ""
+"Togaibh mèinn iarainn agus ’s dòcha mèinn òir. O nach saothraich iad ach "
+"clach-mhèinneir, feumaidh sinn fùirneis a thogail gus a leaghadh. Togaibh "
+"ceàrdach gobhainn cuideachd a dhèanamh cinnteach nach ruith na h-acainnean "
+"oirnn – agus ceàrdach armachd bheag cuideachd. Nì e clogaidean agus "
+"claidheamhan. Tha mi ’n dòchas nach tachair sinn ri nàimhdean ann a sheo ach"
+" cò aig’ a tha fios."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:256
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:265
+msgid "Be Prepared"
+msgstr "Ullaich"
+
+#. TRANSLATORS: Reebaud – recruit 1
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:259
+msgid ""
+"Our mines are working well. We can now produce all the tools we need, and "
+"some weapons as well."
+msgstr ""
+"Tha na mèinnearan againn ag obair gu math. ’S urrainn dhuinn na h-acainnean "
+"uile air a bhios sinn feumach a shaothrachadh a-nis agus cuid a dh’airm "
+"cuideachd."
+
+#. TRANSLATORS: Reebaud – recruit 1
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:262
+msgid ""
+"We could use these weapons to equip some new soldiers. I hope we won’t find "
+"enemies here, but it is always better to be prepared. New soldiers are "
+"equipped in a barracks with a short sword and a fur garment, the uniform of "
+"all honorable warriors."
+msgstr ""
+"B’ urrainn dhuinn na h-airm sin a chleachdadh airson saighdearan ùra "
+"uidheamachadh. Tha mi ’n dòchas nach tachair sinn ri nàimhdean ann a sheo "
+"ach b’ fheàirrde sinn ullachadh. Thèid saighdearan ùra uidheamachadh ann an "
+"taigh-feachd le claidheamh-beag ’s còta-bèin, siud an deise aig gach "
+"gaisgeach onarach."
+
+#. TRANSLATORS: Hauke – recruit 2
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:268
+msgid ""
+"We will need a barracks, of course; a reindeer farm to produce fur, and a "
+"sewing room to sew the fur into garments. The reindeer farm produces some "
+"meat as a by-product of fur, and it also trains reindeer to help our "
+"carriers on busy roads."
+msgstr ""
+"Feumaidh sinn taigh-feachd gu nàdarra; tuathanas rèin-fhèidh a "
+"shaothraicheas bian agus bùth banalachd an nì còtaichean dhen bhian. Gheibh "
+"sinn beagan feòla às an tuathanas rèin-fhèidh cuide ris a’ bhian agus "
+"trusaidh e rèin-fhiadh cuideachd a chuidicheas na giùlanairean air na "
+"rathaidean tranga."
+
+#. TRANSLATORS: Hauke – recruit 2
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:271
+msgid ""
+"I advise to build all those buildings within a short distance of each other,"
+" and to construct two warehouses nearby: One should be set to store only "
+"weapons, armor, ores, metal and coal; the other to store building materials."
+msgstr ""
+"Mholainn gun tog sibh na togalaichean sin uile faisg air càch a chèile agus "
+"gun tog sibh dà thaigh-stòrais am fagas: Suidhichibh aonan dhiubh gus nach "
+"glèidh e ach airm, armachd, clach-mhèinneir is gual agus am fear eile ach an"
+" glèidh e stuthan-togail."
+
+#. TRANSLATORS: Hauke – recruit 2
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:274
+msgid ""
+"We should also build other related buildings nearby, such as a furnace, and "
+"some wells and farms to supply the reindeer farm. This design will make our "
+"military economy more efficient, because it reduces the waiting time for "
+"wares in the processing buildings."
+msgstr ""
+"Bu chòir dhuinn togalaichean co-cheangailte eile a thogail am fagas, can "
+"fùirneis agus tobraichean is tuathanasan a bheir batharan dhan tuathanas "
+"rèin-fhèidh. Nì an dealbhachadh seo an eaconamaidh againn nas èifeachdaiche "
+"dhan arm againn o nach fheum na togalaichean feitheamh airson batharan ro "
+"fhada."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:278
+msgid "Explore the Island"
+msgstr "Rùraich an eilean"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:279
+msgid "Expanding"
+msgstr "Leudachadh"
+
+#. TRANSLATORS: Reebaud – expand
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:281
+msgid ""
+"Our barracks has started working, and we are recruiting new soldiers now."
+msgstr ""
+"Thòisich an taigh-feachd againn air obair agus tha sinn a’ trusadh "
+"saighdearan ùra a-nis."
+
+#. TRANSLATORS: Reebaud – expand
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:284
+msgid ""
+"But we can’t be sure we’re safe here yet. It would be better to expand "
+"further to the east to find out whether we really are alone here."
+msgstr ""
+"Ach chan urrainn dhuinn a bhith cinnteach gu bheil sinn sàbhailte ann a sheo"
+" fhathast. B’ fheàirrde sinn ar ranntair a leudachadh nas fhaide ear feuch a"
+" bheil sinn ’nar n-aonar dha-rìribh."
+
+#. TRANSLATORS: Reebaud – expand
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:287
+msgid ""
+"Expanding would also provide more space for farming. We could use some extra"
+" barley to recruit more reindeer, as our roads are quite busy."
+msgstr ""
+"Bheireadh leudachadh barrachd rùim dhuinn airson àiteachas cuideachd. Bhiodh"
+" barrachd eòrna ’na buannachd dhuinn ach an trusamaid barrachd rèin-fhèidh "
+"on a tha na rathaidean againn caran trang."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:292
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:298
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:304
+msgid "Enemies!"
+msgstr "Nàimhdean!"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:293
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:299
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:305
+msgid "Enemy sighted!"
+msgstr "Nàmhaid air faire!"
+
+#. TRANSLATORS: Reebaud – enemy sighted
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:295
+msgid "Another tribe! On OUR island! What are you doing here, invaders?"
+msgstr ""
+"Siud treubh eile! San eilean againne! Dè tha sibhse ris ann a sheo, a "
+"ionnsaighichibh?"
+
+#. TRANSLATORS: Maukor – enemy sighted. The great storm flood of 1362 was
+#. supposed to be a sign of the victory of the Christian God over the old
+#. northern gods
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:301
+msgid ""
+"This is MY island! YOU are the intruder here! I pray to the one and solely "
+"true God that we will kill you all, and your souls shall be tormented in "
+"hell for ever!"
+msgstr ""
+"’S ann leamsa a tha an t-eilean seo! Is sibhse an ionnsaigheach! Nì mi "
+"ùrnaigh dhan aon fhìor-dhia gun cuireamaid gu bàs sibh uile agus gum "
+"fulaingeadh ur n-anman san ifrinn gu sìorraidh bràth!"
+
+#. TRANSLATORS: Reebaud – enemy sighted
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:307
+msgid ""
+"Unbelievers! I pray to OUR gods that this faithless tribe shall be utterly "
+"shattered! War upon them!"
+msgstr ""
+"Ana-creidmhich! Nì mi ùrnaigh dha ’r diathan-ne gun dèid an treubh eas-"
+"ionraic seo a mhilleadh! An cogadh orra!"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:312
+msgid "Stronger in battle"
+msgstr "Nas trèine air a’ bhlàr"
+
+#. TRANSLATORS: Reebaud – train soldiers 1
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:314
+msgid ""
+"We are recruiting soldiers easily enough, but they are fairly weak. We must "
+"train our soldiers if they are to beat the enemy."
+msgstr ""
+"Tha sinn a’ trusadh shaighdearan gun trioblaid ach tha iad caran lag. "
+"Feumaidh sinn na saighdearan againn oideachadh ach an dèid leotha cur às "
+"dhan nàmhaid."
+
+#. TRANSLATORS: Reebaud – train soldiers 1
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:317
+msgid ""
+"Soldiers are trained in basic attack, health and defense by a training camp."
+" They can learn the finer points in a training arena."
+msgstr ""
+"Thèid saighdearan oideachadh ann an ionnsaigh, slàinte is dìon bunasach le "
+"campa oideachaidh. Ionnsaichidh iad sgilean adhartach ann an raon "
+"oideachaidh."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:321
+msgid "Frisian fighting"
+msgstr "Sabaid nam Frìoslannach"
+
+#. TRANSLATORS: Reebaud – train soldiers 2
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:323
+msgid ""
+"Soldiers are trained in two steps in defense and health. They get fur "
+"garments studded with iron and also gold to cushion blows; and helmets "
+"forged from iron, and gold as well, to lengthen their life in battle."
+msgstr ""
+"Thèid dìon is slàinte nan saighdearan oideachadh ann an dà cheum. Gheibh iad"
+" còtaichean-bèin reulagaichte le iarann is òr airson an dìon agus clogaidean"
+" dèanta le iarann is òr cuideachd ach am mair iad beò nas fhaide air a’ "
+"bhlàr."
+
+#. TRANSLATORS: Reebaud – train soldiers 2
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:326
+msgid ""
+"They learn to attack with three different swords: The long sword, broadsword"
+" and double-edged sword. The latter two contain gold, and all of them iron. "
+"The advanced soldiers are taught to use two swords at once: They keep their "
+"first double-edged sword, and are given various other swords to wield in "
+"their other hand. This makes six steps of attack training."
+msgstr ""
+"Ionnsaichidh iad an ionnsaigh le trì seòrsaichean de chlaidheamh: An "
+"claidheamh-mòr, an claidheamh-leathann ’s an claidheamh dà-fhaobharach. Tha "
+"òr ris an dà chuid mu dheireadh agus iarann sa h-uile gin dhiubh. "
+"Ionnsaichidh na saighdearan nas eòlaiche mar a chleachdas iad dà chlaidheamh"
+" aig an aon àm: Cumaidh iad a’ chiad chlaidheamh dà-fhaobharach agus "
+"cleachdaidh iad caochladh chlaidheamhan san làmh eile. Seo sia ceuman de "
+"dh’oideachadh ionnsaighe gu h-iomlan."
+
+#. TRANSLATORS: Reebaud – train soldiers 2
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:329
+msgid ""
+"We do not train soldiers to evade attacks; a true warrior can block his "
+"opponent’s blows with a skillful twist of the sword instead of jumping away "
+"like a coward."
+msgstr ""
+"Chan ionnsaich sinn teàrnadh o ionnsaighean dha na saighdearan againn; "
+"bacaidh fìor-ghaisgeach ionnsaigh an nàmhad le cleas a’ chlaidheimh seach "
+"leum às an rathad coltach ri gealtair."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:333
+msgid "Planning a training center"
+msgstr "A’ planadh ionad oideachaidh"
+
+#. TRANSLATORS: Hauke – train soldiers 3
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:335
+msgid ""
+"We will need a tailor’s shop to sew more protective garments, and another "
+"sewing room to keep producing normal fur garments. Also, you should enhance "
+"the small armor smithy to produce better weapons and helmets, and build a "
+"new small one so we will still get basic weapons. We need at least one gold "
+"mine now, because the best weapons and armor use gold."
+msgstr ""
+"Feumaidh sinn taigh tàillearachd airson còtaichean a dhèanamh a dhìonas nas "
+"fheàrr agus bùth banalachd eile a nì còtaichean-bèin àbhaisteach fhathast. A"
+" bharrachd air sin, bu chòir dhuibh a’ cheàrdach armachd bheag a leasachadh "
+"ach an dèan i airm is clogaidean nas fheàrr agus tè bheag eile a thogail ach"
+" am faigh sinn airm bhunasach fhathast. Feumaidh sinn mèinn òir no dhà a-nis"
+" on a chleachdas na h-airm is armachd as fheàrr òr."
+
+#. TRANSLATORS: Hauke – train soldiers 3
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:338
+msgid ""
+"We should build these buildings close to the barracks, since it is, as I "
+"already mentioned earlier, much more efficient to centralize all our "
+"military facilities in one recruiting and training center, than if they were"
+" strewn out over a long distance. Build a third warehouse there which will "
+"store only the food needed for training."
+msgstr ""
+"Bu chòir dhuinn na togalaichean sin a thogail faisg air an taigh-fheachd on "
+"a bhios e mòran nas èifeachdaiche, mar an do mhìnich mi roimhe, ma chuireas "
+"sinn togalaichean an airm uile còmhla na a bhith ’gan sgapadh air feadh "
+"astair fhada. Togaibh treas taigh-stòrais an-siud far nach glèidh sinn ach "
+"am biadh a dh’fheumas sinn airson an oideachadh."
+
+#. TRANSLATORS: Hauke – train soldiers 3
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:341
+msgid ""
+"When soldiers train to use new weapons, their old equipment is discarded. "
+"Take into account that the useless scraps will clutter up your roads until "
+"they are stored in a warehouse somewhere."
+msgstr ""
+"Nuair a gheibh saighdearan oideachadh ach an cleachd iad airm ùra, thèid an "
+"t-seann-uidheamachd aca a chur ris an dàrna taobh. Thoiribh an aire on a "
+"bhios na fuighill gun fheum sin a’ lìonadh nan rathaidean agad gus an dèid "
+"an glèidheadh ann an taigh-stòrais."
+
+#. TRANSLATORS: Hauke – train soldiers 3
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:344
+msgid ""
+"I recommend to train at least one soldier to the highest level in health, "
+"defense and attack. Until then, the enemy is just too strong for us."
+msgstr ""
+"Mholainn gun oidich sibh co-dhiù aon shaighdear dhan leibheil as àirde ann "
+"an slàinte, dìon is ionnsaigh. Bidh an nàmhaid ro làidir dhuinn mus dèid seo"
+" leinn."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:349
+msgid "Our soldiers are strong"
+msgstr "Tha na saighdearan againn làidir"
+
+#. TRANSLATORS: Reebaud – attack enemy 1
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:351
+msgid "We finally have our first fully trained soldier. Let’s attack!"
+msgstr "Tha sinn air ar ciad saighdear oideachadh gu slàn. Gabhamaid orra!"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:355
+msgid "Are our soldiers strong enough?"
+msgstr "A bheil na saighdearan againn làidir gu leòr?"
+
+#. TRANSLATORS: Hauke – attack enemy 2
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:357
+msgid ""
+"With respect, Chieftain, please be not so hasty! The enemies are very "
+"strong, and I’m still not convinced we can defeat them. I’d prefer not to "
+"send any soldiers into a battle they will likely lose. I’d prefer to wait a "
+"bit longer until we can certainly beat the enemy without losing soldiers."
+msgstr ""
+"Leis gach urram, a cheannaird, na biodh an greas oirbh! Tha na nàimhdean glè"
+" làidir agus cha chreid mi gun dèan sinn a’ chùis orra fhathast. B’ fheàrr "
+"leam nach cuireamaid saighdearan gu cogadh a chailleas iad. B’ fheàrr leam "
+"feitheamh greis eile gus am bi sinn cinnteach gun cuir sinn às dhan nàmhaid "
+"gun saighdear a chall."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:361
+msgid "Our soldiers are strong enough"
+msgstr "Tha na saighdearan againn làidir gu leòr"
+
+#. TRANSLATORS: Reebaud – attack enemy 3
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:363
+msgid ""
+"Of course I also prefer to keep our soldiers alive, but we can’t save every "
+"life. Soldiers die in battle, that’s just the way things are. You may decide"
+" how long to wait until attacking, but don’t take too long, or the enemies "
+"will exploit our weakness."
+msgstr ""
+"’S cinnteach gum b’ fheàrr leam fhìn na saighdearan againn a chumail beò ach"
+" chan urrainn dhuinn gach uile beatha a shàbhaladh. Gheibh saighdearan bàs "
+"air a’ bhlàr, seo mar a thachras. Tha e an urra ribh fhèin dè cho fada ’s a "
+"dh’fhanas sinn mus doir sinn ionnsaigh orra ach na fanaibh ro fhada air neo "
+"gabhaidh an nàmhaid brath air ar laigse."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:367
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:373
+msgid "Beware!"
+msgstr "Bi faiceallach!"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:368
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:374
+msgid "Not strong enough"
+msgstr "Chan eil sinn làidir gu leòr"
+
+#. TRANSLATORS: Hauke – beware of early attacks 1
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:370
+msgid ""
+"Chieftain Reebaud! Our scouts report that the enemy is advancing fast. I "
+"fear we are not strong enough yet to defend ourselves if he attacks first. "
+"You must devise something to hold him off."
+msgstr ""
+"A cheannaird Reebauid! Tha na rabhadairean againn ag aithris gu bheil an "
+"nàmhaid a’ tighinn oirnn gu luath. ’S eagal leam nach eil sinn làidir gu "
+"leòr gus ar dìon ma bheir iadsan ionnsaigh oirnn an toiseach. Feumaidh sibh "
+"rudeigin a dhèanamh ach an cùm sinn air falbh iad."
+
+#. TRANSLATORS: Reebaud – beware of early attacks 2
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:376
+msgid ""
+"The scouts informed me that the enemy can’t build towers. We could build a "
+"fortress, which is the building that will push the border as far east as "
+"possible in one go. The enemy will only be able to see it if they build a "
+"fortress right at the border."
+msgstr ""
+"Dh’innis na rabhadairean dhomh nach eil an nàmhaid comasach air tùir a "
+"thogail. B’ urrainn dhuinn dùn a thogail agus ’s e seo an togalach a "
+"chuireas a’ chrìoch as fhaide ear sa bhad. Chan fhaic an nàmhaid e ach ma "
+"thogas iad dùn aca fhèin aig a’ chrìoch fhèin."
+
+#. TRANSLATORS: Reebaud – beware of early attacks 2
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:379
+msgid ""
+"We can prevent this, or at least make it harder to do, by ordering some "
+"foresters to plant trees at the border. The enemy will have to cut down many"
+" of them to make room for it, so we may be safe until we open the battle at "
+"a time of our choosing."
+msgstr ""
+"’S urrainn dhuinn sin a dhèanamh nas dorra dha ma chuireas sinn òrdugh do "
+"chuid a phlanntairean-coille ach an cuir iad craobhan faisg air a’ chrìoch. "
+"Feumaidh an nàmhaid tòrr chraobhan a leigeil an uairsin ach am bi rùm aige "
+"agus dh’fhaoidte gum bi sinn sàbhailte gus an cuir sinne romhainn ionnsaigh "
+"a thoirt."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:382
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:388
+msgid "Enemy Defeated"
+msgstr "Chuir sinn ruaig air an nàmhaid"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:383
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:389
+msgid "Enemy defeated!"
+msgstr "Chuir sinn ruaig air an nàmhaid!"
+
+#. TRANSLATORS: Reebaud – enemy defeated 1
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:385
+msgid ""
+"They are defeated! I thank you, all my gods, for granting us victory over "
+"the unbelievers!"
+msgstr ""
+"Chuir sinn ruaig orra! Taing dha na diathan uile gun d’ fhuair sinn buaidh "
+"air na h-ana-creidmhich!"
+
+#. TRANSLATORS: Maukor – enemy defeated 2
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:391
+msgid ""
+"I pray to God to hear my last words. Let not the false fiend triumph! Punish"
+" them for this ignoble feat!"
+msgstr ""
+"Tha mi ag ùrnaigh do Dhia ach an cluinn e m’ fhaclan deireannach. Na biodh "
+"buaidh aig an deamhan fhallsa! Gun digeadh am peanas orra airson an gnìomha "
+"neo-uasail!"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:394
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:400
+msgid "Storm Flood"
+msgstr "Tuil-ruadh"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:395
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:401
+msgid "The island is flooding!"
+msgstr "Tha tuil a’ tighinn air an eilean!"
+
+#. TRANSLATORS: Reebaud – enemy defeated 3
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:397
+msgid ""
+"His God has granted his wish! The ocean is rising! The island is almost flat"
+" – we will all drown!"
+msgstr ""
+"Fhuair e èisteachd on dia aige! Tha an cuan ag èirigh! Tha an t-eilean glè "
+"rèidh – thèid ar bàthadh uile!"
+
+#. TRANSLATORS: Hauke – rising water
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:403
+msgid ""
+"Despair not, I did espy some hope! The easternmost tip of the island, as "
+"well as the space where the fiends’ headquarters stood, seems well suited to"
+" build a port on. If we manage to construct a ship, and fill it with all we "
+"need to build a new settlement, we may be able to escape."
+msgstr ""
+"Misnichibh on a mhothaich mi gu bheil dòchas againn fhathast! Tha coltas gu "
+"bheil ceann an ear an eilein iomchaidh airson port a thogail ann mar bhiodh "
+"an àite far an robh prìomh-àras an deamhain. Ma thèid leinn long a thogail "
+"’s ma chuireas sinn innte na dh’fheumas sinn airson tuineachadh ùr a "
+"thogail, dh’fhaoidte gun dèid leinn teicheadh."
+
+#. TRANSLATORS: Hauke – rising water
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:406
+msgid ""
+"The storm flood seems to be coming from the west. If we hurry, we will just "
+"make it! We only need to build a port and a shipyard – oh, and a weaving "
+"mill to weave the durable cloth, which is made from reed and fur, for the "
+"sails. Then we can launch an expedition from the port. Pray to the gods and "
+"make haste!"
+msgstr ""
+"Tha an tuil a’ tighinn on iar. Ma bheir sinn ar casan leinn, tha teans gun "
+"dèan sin às! Cha leig sinn leas ach port is doca a thogail – thà, agus taigh"
+" nam beart ach an dèanamaid clò treun dha na siùil de dh’fheur is bian. ’S "
+"urrainn dhuinn dol air triall on phort an uairsin. Dèanamaid ùrnaigh dha na "
+"diathan is cuireamaid cabhag oirnn!"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:410
+msgid "Don’t Forget the Soldiers"
+msgstr "Na dìochuimhnich na saighdearan"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:411
+msgid "Soldiers to the port!"
+msgstr "A shaighdearaibh, dhan phort!"
+
+#. TRANSLATORS: Reebaud – rising water
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:413
+msgid ""
+"I almost forgot in this haste – whereever we will land, we’ll need soldiers "
+"to secure and expand our new colony. There’s space for up to ten soldiers on"
+" our ship, if they don’t mind being all crammed together. Let’s send some to"
+" the port when it’s completed, so they can embark when we set sail!"
+msgstr ""
+"Cha mhòr gun do dhìochuimhnich mi leis a’ chabhag a tha oirnn – ge b’ e "
+"càite an dèid sinn, feumaidh sinn saighdearan ach an gabh sinn greim air "
+"tuineachadh ùr ’s gun leudaich sinn e. Tha rùm dha suas ri deich saighdearan"
+" air an long againn ma tha iad coma gum bi e dùmhail ann. Cuireamaid cuid "
+"dhiubh dhan phort nuair a bhios e deiseil ach an dig iad leinn dhan mhuir!"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:417
+msgid "Victory"
+msgstr "Buaidh"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:418
+msgid "We escaped!"
+msgstr "Theich sinn!"
+
+#. TRANSLATORS: Reebaud – victory
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:420
+msgid ""
+"The gods have answered our prayers. We will escape the island’s drowning, "
+"and I am confident we will be able to build a new home again in a more "
+"peaceful corner of this world!"
+msgstr ""
+"Dh’èist na diathan ri ’r n-ùrnaighean. Theich sinn on bhàthadh san eilean "
+"agus tha misneachd orm gun lorg sinn dachaigh ùr a-rithist am badeigin "
+"sìtheil!"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:421
+msgid "Congratulations"
+msgstr "Meal do naidheachd"
+
+#. TRANSLATORS: Reebaud – victory
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:423
+msgid ""
+"You have completed this mission. You may move on to the next scenario now to"
+" help us build a new home, far from the false God’s vengeful reach…"
+msgstr ""
+"Tha thu air am misean seo a choileanadh. Faodaidh tu gluasad air adhart dhan"
+" ath-chnàmh-sgeul a-nis ach an cuir thu taic dhuinn le togail na dachaighe "
+"ùire, fad air falbh on dia dìoghaltach…"
+
+#: ../../data/scripting/richtext_scenarios.lua:36
+#, lua-format
+msgid "“%s”"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:91
+msgid "New Objective"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

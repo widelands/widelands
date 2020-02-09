@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,7 +53,7 @@ public:
 		Pos operator++() {
 			return ++pos;
 		}
-		Pos operator+=(Pos const other) {
+		Pos operator+=(const Pos& other) {
 			return pos += other.pos;
 		}
 
@@ -76,11 +76,7 @@ public:
 	/// Write the file out to disk. If successful, this clears the buffers.
 	/// Otherwise, an exception is thrown but the buffer remains intact (don't
 	/// worry, it will be cleared by the destructor).
-	void write(FileSystem& fs, char const* const filename);
-
-	/// Same as above, just that the data is appended to the file
-	/// NOTE RealFSImpl is used by purpose - zip filesystems do not support appending
-	void write_append(RealFSImpl& fs, char const* const filename);
+	void write(FileSystem& fs, const std::string& filename);
 
 	/// Get the position that will be written to in the next write operation that
 	/// does not specify a position.

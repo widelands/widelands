@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 by the Widelands Development Team
+ * Copyright (C) 2017-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,19 +20,17 @@
 #include "logic/ai_dna_handler.h"
 
 #include <cstring>
-#include <memory>
 
-#include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
-
-#include "base/macros.h"
+#include "base/time_string.h"
 #include "base/wexception.h"
-#include "wui/interactive_base.h"
+#include "io/filesystem/layered_filesystem.h"
+#include "io/profile.h"
+#include "logic/filesystem_constants.h"
 
 namespace Widelands {
 
 AiDnaHandler::AiDnaHandler() {
-	g_fs->ensure_directory_exists(get_ai_dir());
+	g_fs->ensure_directory_exists(kAiDir);
 }
 
 // This reads the AI file for a particular slot (position) and populates numbers into passed
@@ -47,8 +45,8 @@ void AiDnaHandler::fetch_dna(std::vector<int16_t>& military_numbers,
 	// AI files are in range 1-4
 	assert(slot > 0 && slot < 5);
 
-	std::string full_filename = get_ai_dir() + g_fs->file_separator() + "ai_input_" +
-	                            std::to_string(static_cast<int16_t>(slot)) + "." + get_ai_suffix();
+	const std::string full_filename = kAiDir + g_fs->file_separator() + std::string("ai_input_") +
+	                                  std::to_string(static_cast<int>(slot)) + kAiExtension;
 
 	Profile prof;
 	prof.read(full_filename.c_str(), nullptr, *g_fs);
@@ -91,40 +89,40 @@ void AiDnaHandler::fetch_dna(std::vector<int16_t>& military_numbers,
 // This generates a new file with AI data in '.widelands/ai'
 void AiDnaHandler::dump_output(Widelands::Player::AiPersistentState* pd, uint8_t pn) {
 
-	std::string full_filename = get_ai_dir() + g_fs->file_separator() + timestring() +
-	                            "_ai_player_" + std::to_string(static_cast<int16_t>(pn)) + "." +
-	                            get_ai_suffix();
+	const std::string full_filename = kAiDir + g_fs->file_separator() + std::string(timestring()) +
+	                                  std::string("_ai_player_") +
+	                                  std::to_string(static_cast<int>(pn)) + kAiExtension;
 
 	log(" %d: AI to be dumped to %s\n", pn, full_filename.c_str());
 
 	Profile prof;
 
 	Section& mn = prof.create_section("magic_numbers");
-	assert(pd->magic_numbers_size == pd->magic_numbers.size());
-	for (size_t i = 0; i < pd->magic_numbers_size; ++i) {
-		mn.set_int(std::to_string(static_cast<int32_t>(i)).c_str(), pd->magic_numbers[i]);
+	assert(pd->magic_numbers.size() == Widelands::Player::AiPersistentState::kMagicNumbersSize);
+	for (size_t i = 0; i < pd->magic_numbers.size(); ++i) {
+		mn.set_int(std::to_string(static_cast<int32_t>(i)).c_str(), pd->magic_numbers.at(i));
 	}
 
 	Section& nv = prof.create_section("neuron_values");
-	assert(pd->neuron_pool_size == pd->neuron_weights.size());
-	for (size_t i = 0; i < pd->neuron_pool_size; ++i) {
-		nv.set_int(std::to_string(static_cast<int32_t>(i)).c_str(), pd->neuron_weights[i]);
+	assert(pd->neuron_weights.size() == Widelands::Player::AiPersistentState::kNeuronPoolSize);
+	for (size_t i = 0; i < pd->neuron_weights.size(); ++i) {
+		nv.set_int(std::to_string(static_cast<int32_t>(i)).c_str(), pd->neuron_weights.at(i));
 	}
 
 	Section& nf = prof.create_section("neuron_functions");
-	assert(pd->neuron_pool_size == pd->neuron_functs.size());
-	for (size_t i = 0; i < pd->neuron_pool_size; ++i) {
-		nf.set_int(std::to_string(static_cast<int32_t>(i)).c_str(), pd->neuron_functs[i]);
+	assert(pd->neuron_functs.size() == Widelands::Player::AiPersistentState::kNeuronPoolSize);
+	for (size_t i = 0; i < pd->neuron_functs.size(); ++i) {
+		nf.set_int(std::to_string(static_cast<int32_t>(i)).c_str(), pd->neuron_functs.at(i));
 	}
 
 	Section& fn = prof.create_section("fneurons");
-	assert(pd->f_neuron_pool_size == pd->f_neurons.size());
-	for (size_t i = 0; i < pd->f_neuron_pool_size; ++i) {
-		fn.set_natural(std::to_string(static_cast<int64_t>(i)).c_str(), pd->f_neurons[i]);
+	assert(pd->f_neurons.size() == Widelands::Player::AiPersistentState::kFNeuronPoolSize);
+	for (size_t i = 0; i < pd->f_neurons.size(); ++i) {
+		fn.set_natural(std::to_string(static_cast<int64_t>(i)).c_str(), pd->f_neurons.at(i));
 	}
 
-	std::string comment = "See wiki for more info: https://wl.widelands.org/wiki/Ai%20Training/";
+	std::string comment = "See wiki for more info: https://www.widelands.org/wiki/Ai%20Training/";
 
 	prof.write(full_filename.c_str(), false, *g_fs, comment.c_str());
 }
-}
+}  // namespace Widelands

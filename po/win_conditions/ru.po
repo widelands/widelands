@@ -1,20 +1,23 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
-# Anton Khabarov <2233009@gmail.com>, 2015-2016
+# Anton Khabarov <2233009@gmail.com>, 2015-2016,2018
+# CupIvan <mail@cupivan.ru>, 2019
 # Максим Дронь <dronmax@gmail.com>, 2015
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# Viktor S <awsswa59@gmail.com>, 2018-2019
 # Yuriy Sokolov <lention@mail.ru>, 2015
 # Олег Шевченко <olegrock@gmail.com>, 2017
+# Олег Шевченко <olegrock@gmail.com>, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-19 19:34+0000\n"
-"PO-Revision-Date: 2017-02-20 08:46+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-06-23 11:24+0000\n"
+"PO-Revision-Date: 2019-06-26 06:34+0000\n"
 "Last-Translator: Олег Шевченко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -23,67 +26,66 @@ msgstr ""
 "Language: ru\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:16
+#: ../../data/scripting/win_conditions/artifacts.lua:15
 msgid "Artifacts"
 msgstr "Артефакты"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:18
+#: ../../data/scripting/win_conditions/artifacts.lua:17
 msgid ""
 "Search for ancient artifacts. Once all of them are found, the team who owns "
 "most of them will win the game."
 msgstr "Ищите древние артефакты. После того, как все они будут найдены, команда, которая завладеет большинством из них - победит."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:56
+#: ../../data/scripting/win_conditions/artifacts.lua:18
+msgid "Artifacts owned"
+msgstr "Артефакт завоёван"
+
+#: ../../data/scripting/win_conditions/artifacts.lua:73
 msgid "No Artifacts"
 msgstr "Нет артефактов"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:56
+#: ../../data/scripting/win_conditions/artifacts.lua:73
+#, lua-format
 msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
-"bug report on https://launchpad.net/widelands and specify your Widelands "
-"version and the map you tried to load."
-msgstr "На этой карте нет артефактов. Так не должно быть, это ошибка. Пожалуйста, отправьте сообщение о ней на https://launchpad.net/widelands и укажите версию Widelands и карту, которую вы пытались загрузить."
+"bug report on %s and specify your Widelands version and the map you tried to"
+" load."
+msgstr "На этой карте нет артефактов. Этого не должно было произойти. Просьба представить отчет об ошибке %s и указать версию Widelands и карту, которую вы пытались загрузить."
 
 #. TRANSLATORS: Keep this as short as possible. You can also translate this as
 #. "New artifact"
-#: ../../data/scripting/win_conditions/artifacts.lua:63
+#: ../../data/scripting/win_conditions/artifacts.lua:80
 msgid "Artifact Found"
 msgstr "Найден артефакт"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:64
+#: ../../data/scripting/win_conditions/artifacts.lua:81
 msgid "Your team found a new artifact."
 msgstr "Ваша команда нашла новый артефакт."
 
 #. TRANSLATORS: Keep this as short as possible.
-#: ../../data/scripting/win_conditions/artifacts.lua:68
+#: ../../data/scripting/win_conditions/artifacts.lua:85
 msgid "Artifact Lost"
 msgstr "Артефакт потерян"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:69
+#: ../../data/scripting/win_conditions/artifacts.lua:86
 msgid "One of your team’s artifacts was stolen by an enemy."
 msgstr "Один из артефактов вашей команды был похищен врагом."
 
 #. TRANSLATORS: Keep this as short as possible.
-#: ../../data/scripting/win_conditions/artifacts.lua:73
+#: ../../data/scripting/win_conditions/artifacts.lua:90
 msgid "Artifact Conquered"
 msgstr "Артефакт захвачен"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:74
+#: ../../data/scripting/win_conditions/artifacts.lua:91
 msgid "Your team stole an artifact from an enemy."
 msgstr "Ваша команда похитила артефакт у врага."
 
-#. TRANSLATORS: This is used to seperate players’ names in a list, e.g.
-#. "Steve, Robert, David"
-#: ../../data/scripting/win_conditions/artifacts.lua:144
-msgid ", "
-msgstr ", "
-
-#: ../../data/scripting/win_conditions/artifacts.lua:151
+#: ../../data/scripting/win_conditions/artifacts.lua:174
 msgid "Overview:"
 msgstr "Обзор:"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:154
-#: ../../data/scripting/win_conditions/artifacts.lua:167
+#: ../../data/scripting/win_conditions/artifacts.lua:177
+#: ../../data/scripting/win_conditions/artifacts.lua:190
 #, lua-format
 msgid "%i artifact"
 msgid_plural "%i artifacts"
@@ -93,41 +95,41 @@ msgstr[2] "%i артефактов"
 msgstr[3] "%i артефактов"
 
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
-#: ../../data/scripting/win_conditions/artifacts.lua:156
+#: ../../data/scripting/win_conditions/artifacts.lua:179
 msgid "%1$s owns %2$s."
 msgstr "%1$s владеет %2$s."
 
 #. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members
 #. (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
-#: ../../data/scripting/win_conditions/artifacts.lua:169
+#: ../../data/scripting/win_conditions/artifacts.lua:192
 msgid "Team %1$i (%2$s) owns %3$s."
 msgstr "Команде %1$i (%2$s) принадлежит %3$s."
 
-#: ../../data/scripting/win_conditions/collectors.lua:19
+#: ../../data/scripting/win_conditions/collectors.lua:17
 msgid "Collectors"
 msgstr "Коллекционер"
 
-#: ../../data/scripting/win_conditions/collectors.lua:22
+#: ../../data/scripting/win_conditions/collectors.lua:20
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest number of wares at the end of 4 hours wins the game."
 msgstr "Вы получаете очки за ценные товары, находящиеся на ваших складах. Игрок, набравший наибольшее количество товаров, по прошествии 4 часов, побеждает."
 
-#: ../../data/scripting/win_conditions/collectors.lua:25
+#: ../../data/scripting/win_conditions/collectors.lua:23
 msgid "Points"
 msgstr "Очки"
 
-#: ../../data/scripting/win_conditions/collectors.lua:111
+#: ../../data/scripting/win_conditions/collectors.lua:131
 #, lua-format
 msgid "Status for %s"
 msgstr "Статус для %s"
 
 #. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
-#: ../../data/scripting/win_conditions/collectors.lua:124
+#: ../../data/scripting/win_conditions/collectors.lua:144
 msgid "%1$s (%2$i P) x %3$i = %4$i P"
 msgstr "%1$s (%2$i оч.) x %3$i = %4$i оч."
 
-#: ../../data/scripting/win_conditions/collectors.lua:128
+#: ../../data/scripting/win_conditions/collectors.lua:148
 #, lua-format
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
@@ -136,50 +138,12 @@ msgstr[1] "Всего: %i очка"
 msgstr[2] "Всего очков: %i"
 msgstr[3] "Всего очков: %i"
 
-#: ../../data/scripting/win_conditions/collectors.lua:141
-msgid "The game has ended."
-msgstr "Игра закончилась."
-
-#. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-#: ../../data/scripting/win_conditions/collectors.lua:148
-#, lua-format
-msgid "%i minute"
-msgid_plural "%i minutes"
-msgstr[0] "%i минута"
-msgstr[1] "%i минуты"
-msgstr[2] "%i минут"
-msgstr[3] "%i минут"
-
-#. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../data/scripting/win_conditions/collectors.lua:153
-msgid "%1% hour and %2%"
-msgid_plural "%1% hours and %2%"
-msgstr[0] "%1% час и %2%"
-msgstr[1] "%1% часов и %2%"
-msgstr[2] "%1% часов и %2%"
-msgstr[3] "%1% часов и %2%"
-
-#. TRANSLATORS: Context: 'The game will end in 2 hours.'
-#: ../../data/scripting/win_conditions/collectors.lua:156
-msgid "%1% hour"
-msgid_plural "%1% hours"
-msgstr[0] "%1% час"
-msgstr[1] "%1% часов"
-msgstr[2] "%1% часов"
-msgstr[3] "%1% часов"
-
-#. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../data/scripting/win_conditions/collectors.lua:160
-#, lua-format
-msgid "The game will end in %s."
-msgstr "Игра закончится через %s."
-
-#: ../../data/scripting/win_conditions/collectors.lua:173
+#: ../../data/scripting/win_conditions/collectors.lua:169
 #, lua-format
 msgid "Status for Team %d"
 msgstr "Статус для команды %d"
 
-#: ../../data/scripting/win_conditions/collectors.lua:175
+#: ../../data/scripting/win_conditions/collectors.lua:171
 #, lua-format
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"
@@ -212,6 +176,52 @@ msgstr "Свободная игра (без тумана)"
 msgid "This is an endless game without rules. Fog of war is disabled."
 msgstr "Это бесконечная игра без правил и ограничений. Туман войны отключен."
 
+#: ../../data/scripting/win_conditions/territorial_functions.lua:13
+#, lua-format
+msgid "Team %i"
+msgstr "Команда %i"
+
+#: ../../data/scripting/win_conditions/territorial_functions.lua:14
+msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
+msgstr "%1$s контролирует %2$3.0f%% территории (%3$i из %4$i)."
+
+#: ../../data/scripting/win_conditions/territorial_functions.lua:15
+msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
+msgstr "%1$s контролирует %2$3.0f%% территории (%3$i из %4$i)."
+
+#. TRANSLATORS: subtext of the territorial statistics hook. Keep it short and
+#. consistent with the translation of the Win condition.
+#: ../../data/scripting/win_conditions/territorial_functions.lua:60
+msgid "Territory percentage"
+msgstr "Процент территории"
+
+#: ../../data/scripting/win_conditions/territorial_functions.lua:195
+msgid "You own more than half of the map’s area."
+msgstr "Под вашим контролем находится более половины карты."
+
+#: ../../data/scripting/win_conditions/territorial_functions.lua:196
+#, lua-format
+msgid "Keep it for %i more minute to win the game."
+msgid_plural "Keep it for %i more minutes to win the game."
+msgstr[0] "Удерживайте территорию ещё в течение %i минуты, чтобы победить."
+msgstr[1] "Удерживайте территорию ещё в течение %i минут, чтобы победить."
+msgstr[2] "Удерживайте территорию ещё в течение %i минут, чтобы победить."
+msgstr[3] "Удерживайте территорию ещё в течение %i минут, чтобы победить."
+
+#: ../../data/scripting/win_conditions/territorial_functions.lua:222
+#, lua-format
+msgid "%s owns more than half of the map’s area."
+msgstr "%s контролирует более половины карты."
+
+#: ../../data/scripting/win_conditions/territorial_functions.lua:223
+#, lua-format
+msgid "You’ve still got %i minute to prevent a victory."
+msgid_plural "You’ve still got %i minutes to prevent a victory."
+msgstr[0] "У вас всё ещё есть %i минута, чтобы предотвратить победу."
+msgstr[1] "У вас всё ещё есть %i минуты, чтобы предотвратить победу."
+msgstr[2] "У вас всё ещё есть %i минут, чтобы предотвратить победу."
+msgstr[3] "У вас всё ещё есть %i минут, чтобы предотвратить победу."
+
 #: ../../data/scripting/win_conditions/territorial_lord.lua:18
 msgid "Territorial Lord"
 msgstr "Владыка земель"
@@ -223,42 +233,9 @@ msgid ""
 "least 20 minutes."
 msgstr "Каждый игрок или команда пытается захватить более половины карты. Победителем станет тот, кому удастся удержать большую часть карты в течение 20 минут."
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:156
-#: ../../data/scripting/win_conditions/territorial_time.lua:31
-#, lua-format
-msgid "Team %i"
-msgstr "Команда %i"
-
-#: ../../data/scripting/win_conditions/territorial_lord.lua:158
-#: ../../data/scripting/win_conditions/territorial_time.lua:207
-#, lua-format
-msgid "%s owns more than half of the map’s area."
-msgstr "%s контролирует более половины карты."
-
-#: ../../data/scripting/win_conditions/territorial_lord.lua:160
-#: ../../data/scripting/win_conditions/territorial_time.lua:209
-#, lua-format
-msgid "You’ve still got %i minute to prevent a victory."
-msgid_plural "You’ve still got %i minutes to prevent a victory."
-msgstr[0] "У вас всё ещё есть %i минута, чтобы предотвратить победу."
-msgstr[1] "У вас всё ещё есть %i минуты, чтобы предотвратить победу."
-msgstr[2] "У вас всё ещё есть %i минут, чтобы предотвратить победу."
-msgstr[3] "У вас всё ещё есть %i минут, чтобы предотвратить победу."
-
-#: ../../data/scripting/win_conditions/territorial_lord.lua:165
-#: ../../data/scripting/win_conditions/territorial_time.lua:215
-msgid "You own more than half of the map’s area."
-msgstr "Под вашим контролем находится более половины карты."
-
-#: ../../data/scripting/win_conditions/territorial_lord.lua:167
-#: ../../data/scripting/win_conditions/territorial_time.lua:217
-#, lua-format
-msgid "Keep it for %i more minute to win the game."
-msgid_plural "Keep it for %i more minutes to win the game."
-msgstr[0] "Удерживайте территорию ещё в течение %i минуты, чтобы победить."
-msgstr[1] "Удерживайте территорию ещё в течение %i минут, чтобы победить."
-msgstr[2] "Удерживайте территорию ещё в течение %i минут, чтобы победить."
-msgstr[3] "Удерживайте территорию ещё в течение %i минут, чтобы победить."
+#: ../../data/scripting/win_conditions/territorial_lord.lua:56
+msgid "Currently no faction owns more than half of the map’s area."
+msgstr "На данный момент ещё ни одна сторона не завладела более половины карты."
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:21
 msgid "Territorial Time"
@@ -272,34 +249,41 @@ msgid ""
 "whichever comes first."
 msgstr "Каждый игрок или команда пытается захватить более половины карты. Победителем станет тот, кому удастся удержать большую часть карты в течение 20 минут, или тот кто владеет наибольшей территорией по истечении 4-х часов игры."
 
-#: ../../data/scripting/win_conditions/territorial_time.lua:29
-msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr "%1$s контролирует %2$3.0f%% территории (%3$i из %4$i)."
-
-#: ../../data/scripting/win_conditions/territorial_time.lua:30
-msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr "%1$s контролирует %2$3.0f%% территории (%3$i из %4$i)."
-
-#. TRANSLATORS: Refers to "You own more than half of the map’s area. Keep it
-#. for x more minute(s) to win the game."
-#: ../../data/scripting/win_conditions/territorial_time.lua:233
+#. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
+#. TRANSLATORS: Context: 'The game will end in 30 minutes.'
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:293
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:298
 #, lua-format
-msgid "Otherwise the game will end in %i minute."
-msgid_plural "Otherwise the game will end in %i minutes."
-msgstr[0] "В противном случае игра окончится через %i минуту."
-msgstr[1] "В противном случае игра окончится через %i минуты."
-msgstr[2] "В противном случае игра окончится через %i минут."
-msgstr[3] "В противном случае игра окончится через %i минут."
+msgid "%i minute"
+msgid_plural "%i minutes"
+msgstr[0] "%i минуту"
+msgstr[1] "%i минут"
+msgstr[2] "%i минут"
+msgstr[3] "%i минут"
 
-#: ../../data/scripting/win_conditions/territorial_time.lua:238
-#: ../../data/scripting/win_conditions/wood_gnome.lua:93
+#. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:295
+msgid "%1% hour and %2%"
+msgid_plural "%1% hours and %2%"
+msgstr[0] "%1% час %2%"
+msgstr[1] "%1% часа %2%"
+msgstr[2] "%1% часов %2%"
+msgstr[3] "%1%часов%2%"
+
+#. TRANSLATORS: Context: 'The game will end in 2 hours.'
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:301
+msgid "%1% hour"
+msgid_plural "%1% hours"
+msgstr[0] "%1% час"
+msgstr[1] "%1% часа"
+msgstr[2] "%1% часов"
+msgstr[3] "%1% часов"
+
+#. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:304
 #, lua-format
-msgid "The game will end in %i minute."
-msgid_plural "The game will end in %i minutes."
-msgstr[0] "Игра окончится через %i минуту."
-msgstr[1] "Игра окончится через %i минуты."
-msgstr[2] "Игра окончится через %i минут."
-msgstr[3] "Игра окончится через %i минут."
+msgid "The game will end in %s."
+msgstr "Игра закончится через %s."
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:4
 msgid "Congratulations!"
@@ -344,24 +328,24 @@ msgstr "Статус"
 msgid "Player overview:"
 msgstr "Достижения игроков:"
 
-#: ../../data/scripting/win_conditions/wood_gnome.lua:17
+#: ../../data/scripting/win_conditions/wood_gnome.lua:16
 msgid "Wood Gnome"
 msgstr "Лесной гном"
 
-#: ../../data/scripting/win_conditions/wood_gnome.lua:20
+#: ../../data/scripting/win_conditions/wood_gnome.lua:19
 msgid ""
 "As wood gnome you like big forests, so your task is to have more trees on "
 "your territory than any other player. The game will end after 4 hours of "
 "playing. The one with the most trees at that point will win the game."
 msgstr "Вы, как лесной гном — обожаете большие леса, поэтому ваша задача — иметь количество деревьев на вашей земле, больше чем у вашего соперника. Игра закончится через 4 часа. Побеждает игрок, набравший к этому моменту наибольшее количество деревьев."
 
-#: ../../data/scripting/win_conditions/wood_gnome.lua:23
+#: ../../data/scripting/win_conditions/wood_gnome.lua:22
 msgid "Trees owned"
 msgstr "Принадлежит деревьев"
 
-#: ../../data/scripting/win_conditions/wood_gnome.lua:97
-#: ../../data/scripting/win_conditions/wood_gnome.lua:149
-#: ../../data/scripting/win_conditions/wood_gnome.lua:154
+#: ../../data/scripting/win_conditions/wood_gnome.lua:60
+#: ../../data/scripting/win_conditions/wood_gnome.lua:80
+#: ../../data/scripting/win_conditions/wood_gnome.lua:85
 #, lua-format
 msgid "%i tree"
 msgid_plural "%i trees"
@@ -371,16 +355,16 @@ msgstr[2] "%i деревьев"
 msgstr[3] "%i деревьев"
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:100
+#: ../../data/scripting/win_conditions/wood_gnome.lua:63
 msgid "%1$s has %2$s at the moment."
 msgstr "На данный момент %1$s имеет %2$s."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:151
+#: ../../data/scripting/win_conditions/wood_gnome.lua:82
 msgid "%1$s had %2$s."
 msgstr "%1$s имеет %2$s."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:157
+#: ../../data/scripting/win_conditions/wood_gnome.lua:88
 msgid "The winner is %1$s with %2$s."
 msgstr "Победил игрок %1$s, набрав %2$s."

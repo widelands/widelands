@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,24 +32,25 @@
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "graphic/animation/animation.h"
+#include "graphic/animation/diranimations.h"
 #include "graphic/color.h"
 #include "graphic/image.h"
 #include "logic/cmd_queue.h"
-#include "logic/map_objects/draw_text.h"
+#include "logic/map_objects/info_to_draw.h"
 #include "logic/map_objects/tribes/training_attribute.h"
+#include "logic/map_objects/tribes/wareworker.h"
 #include "logic/widelands.h"
 #include "scripting/lua_table.h"
+#include "ui_basic/tabpanel.h"
 
 class FileRead;
 class RenderTarget;
-struct DirAnimations;
-namespace UI {
-struct TabPanel;
-}
 
 namespace Widelands {
 
 class EditorCategory;
+class MapObject;
 class MapObjectLoader;
 class Player;
 struct Path;
@@ -60,7 +61,8 @@ enum class MapObjectType : uint8_t {
 
 	WARE,  //  class WareInstance
 	BATTLE,
-	FLEET,
+	SHIP_FLEET,
+	FERRY_FLEET,
 
 	BOB = 10,  // Bob
 	CRITTER,   // Bob -- Critter
@@ -68,20 +70,24 @@ enum class MapObjectType : uint8_t {
 	WORKER,    // Bob -- Worker
 	CARRIER,   // Bob -- Worker -- Carrier
 	SOLDIER,   // Bob -- Worker -- Soldier
+	FERRY,     // Bob -- Worker -- Ferry
 
 	// everything below is at least a BaseImmovable
 	IMMOVABLE = 30,
 
 	// everything below is at least a PlayerImmovable
-	FLAG = 40,
-	ROAD,
-	PORTDOCK,
+	FLAG = 40,  // Flag
+	PORTDOCK,   // Portdock
+	ROADBASE,   // Roadbase
+	ROAD,       // Roadbase -- Road
+	WATERWAY,   // Roadbase -- Waterway
 
 	// everything below is at least a Building
 	BUILDING = 100,    // Building
 	CONSTRUCTIONSITE,  // Building -- Constructionsite
 	DISMANTLESITE,     // Building -- Dismantlesite
 	WAREHOUSE,         // Building -- Warehouse
+	MARKET,            // Building -- Market
 	PRODUCTIONSITE,    // Building -- Productionsite
 	MILITARYSITE,      // Building -- Productionsite -- Militarysite
 	TRAININGSITE       // Building -- Productionsite -- Trainingsite
@@ -100,7 +106,8 @@ struct MapObjectDescr {
 
 	MapObjectDescr(const MapObjectType init_type,
 	               const std::string& init_name,
-	               const std::string& init_descname);
+	               const std::string& init_descname,
+	               const std::string& init_helptext_script);
 	MapObjectDescr(const MapObjectType init_type,
 	               const std::string& init_name,
 	               const std::string& init_descname,
@@ -114,49 +121,35 @@ struct MapObjectDescr {
 		return descname_;
 	}
 
+	const std::string& helptext_script() const {
+		return helptext_script_;
+	}
+
 	// Type of the MapObjectDescr.
 	MapObjectType type() const {
 		return type_;
 	}
 
-	struct AnimationNonexistent {};
-	uint32_t get_animation(char const* const anim) const {
-		std::map<std::string, uint32_t>::const_iterator it = anims_.find(anim);
-		if (it == anims_.end())
-			throw AnimationNonexistent();
-		return it->second;
-	}
-	uint32_t get_animation(const std::string& animname) const {
-		return get_animation(animname.c_str());
-	}
-
-	uint32_t main_animation() const {
-		return !anims_.empty() ? anims_.begin()->second : 0;
-	}
-
+	virtual uint32_t get_animation(const std::string& animname, const MapObject* mo) const;
+	uint32_t main_animation() const;
 	std::string get_animation_name(uint32_t) const;  ///< needed for save, debug
-	bool has_attribute(uint32_t) const;
-	static uint32_t get_attribute_id(const std::string& name, bool add_if_not_exists = false);
 
 	bool is_animation_known(const std::string& name) const;
-	void add_animation(const std::string& name, uint32_t anim);
 
-	/// Sets the directional animations in 'anims' with the animations
-	/// '&lt;prefix&gt;_(ne|e|se|sw|w|nw)'.
-	void add_directional_animation(DirAnimations* anims, const std::string& prefix);
+	/// Preload animation graphics at default scale
+	void load_graphics() const;
 
 	/// Returns the image for the first frame of the idle animation if the MapObject has animations,
 	/// nullptr otherwise
 	const Image* representative_image(const RGBColor* player_color = nullptr) const;
-	/// Returns the image fileneme for first frame of the idle animation if the MapObject has
-	/// animations,
-	/// is empty otherwise
-	const std::string& representative_image_filename() const;
 
 	/// Returns the menu image if the MapObject has one, nullptr otherwise
 	const Image* icon() const;
 	/// Returns the image fileneme for the menu image if the MapObject has one, is empty otherwise
 	const std::string& icon_filename() const;
+
+	bool has_attribute(uint32_t) const;
+	static uint32_t get_attribute_id(const std::string& name, bool add_if_not_exists = false);
 
 protected:
 	// Add all the special attributes to the attribute list. Only the 'allowed_special'
@@ -165,7 +158,16 @@ protected:
 	                    const std::set<uint32_t>& allowed_special);
 	void add_attribute(uint32_t attr);
 
+	/// Sets the directional animations in 'anims' with the animations
+	/// '&lt;basename&gt;_(ne|e|se|sw|w|nw)'.
+	void assign_directional_animation(DirAnimations* anims, const std::string& basename);
+
 private:
+	void add_animations(const LuaTable& table, Animation::Type anim_type);
+
+	/// Throws an exception if the MapObjectDescr has no representative image
+	void check_representative_image();
+
 	using Anims = std::map<std::string, uint32_t>;
 	using AttribMap = std::map<std::string, uint32_t>;
 	using Attributes = std::vector<uint32_t>;
@@ -173,12 +175,14 @@ private:
 	const MapObjectType type_;    /// Subclasses pick from the enum above
 	std::string const name_;      /// The name for internal reference
 	std::string const descname_;  /// A localized Descriptive name
+	/// The path and filename to the helptext script. Can be empty, but some subtypes like buildings,
+	/// wares and workers require it.
+	const std::string helptext_script_;
 	Attributes attributes_;
 	Anims anims_;
 	static uint32_t dyn_attribhigh_;  ///< highest attribute ID used
 	static AttribMap dyn_attribs_;
-	std::string representative_image_filename_;  // Image for big represenations, e.g. on buttons
-	std::string icon_filename_;                  // Filename for the menu icon
+	std::string icon_filename_;  // Filename for the menu icon
 
 	DISALLOW_COPY_AND_ASSIGN(MapObjectDescr);
 };
@@ -208,10 +212,10 @@ private:
  *
  * When you do create a new object yourself (i.e. when you're implementing one
  * of the create() functions), you need to allocate the object using new,
- * potentially set it up by calling basic functions like set_position(),
- * set_owner(), etc. and then call init(). After that, the object is supposed to
+ * potentially set it up by calling basic functions like set_position(), etc.
+ * and then call init(). After that, the object is supposed to
  * be fully created.
-*/
+ */
 
 /// If you find a better way to do this that doesn't cost a virtual function
 /// or additional member variable, go ahead
@@ -263,7 +267,7 @@ public:
 
 	/**
 	 * Is called right before the object will be removed from
-	 * the game. No conncetion is handled in this class.
+	 * the game. No connection is handled in this class.
 	 *
 	 * param serial : the object serial (cannot use param comment as this is a callback)
 	 */
@@ -304,10 +308,15 @@ public:
 	void set_logsink(LogSink*);
 
 	/// Called when a new logsink is set. Used to give general information.
-	virtual void log_general_info(const EditorGameBase&);
+	virtual void log_general_info(const EditorGameBase&) const;
 
 	Player* get_owner() const {
 		return owner_;
+	}
+
+	const Player& owner() const {
+		assert(get_owner());
+		return *owner_;
 	}
 
 	// Header bytes to distinguish between data packages for the different
@@ -324,10 +333,10 @@ public:
 		HeaderWareInstance = 8,
 		HeaderShip = 9,
 		HeaderPortDock = 10,
-		HeaderFleet = 11,
+		HeaderShipFleet = 11,
+		HeaderFerryFleet = 12,
 	};
 
-public:
 	/**
 	 * Returns whether this immovable was reserved by a worker.
 	 */
@@ -405,7 +414,7 @@ protected:
 	virtual void cleanup(EditorGameBase&);
 
 	/// Draws census and statistics on screen
-	void do_draw_info(const TextToDraw& draw_text,
+	void do_draw_info(const InfoToDraw& info_to_draw,
 	                  const std::string& census,
 	                  const std::string& statictics,
 	                  const Vector2f& field_on_dst,
@@ -532,7 +541,7 @@ private:
 };
 
 template <class T> struct OPtr {
-	OPtr(T* const obj = 0) : m(obj) {
+	OPtr(T* const obj = nullptr) : m(obj) {
 	}
 
 	OPtr& operator=(T* const obj) {
@@ -604,6 +613,6 @@ private:
 	Serial obj_serial;
 	int32_t arg;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_MAP_OBJECT_H

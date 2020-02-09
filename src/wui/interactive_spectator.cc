@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,18 +22,13 @@
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "chat/chat.h"
-#include "graphic/graphic.h"
 #include "logic/game_controller.h"
 #include "logic/player.h"
-#include "profile/profile.h"
-#include "ui_basic/editbox.h"
-#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "wui/fieldaction.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_main_menu_save_game.h"
-#include "wui/game_options_menu.h"
 #include "wui/general_statistics_menu.h"
 
 /**
@@ -41,58 +36,30 @@
  */
 InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
                                            Section& global_s,
-                                           bool const multiplayer)
-   : InteractiveGameBase(g, global_s, OBSERVER, multiplayer) {
-	if (is_multiplayer()) {
-		add_toolbar_button(
-		   "wui/menus/menu_options_menu", "options_menu", _("Main Menu"), &options_, true);
-		options_.open_window = [this] { new GameOptionsMenu(*this, options_, main_windows_); };
+                                           bool const multiplayer,
+                                           ChatProvider* chat_provider)
+   : InteractiveGameBase(g, global_s, OBSERVER, multiplayer, chat_provider) {
+	add_main_menu();
 
-	} else {
-		UI::Button* button =
-		   add_toolbar_button("wui/menus/menu_exit_game", "exit_replay", _("Exit Replay"));
-		button->sigclicked.connect(boost::bind(&InteractiveSpectator::exit_btn, this));
-
-		add_toolbar_button(
-		   "wui/menus/menu_save_game", "save_game", _("Save Game"), &main_windows_.savegame, true);
-		main_windows_.savegame.open_window = [this] {
-			new GameMainMenuSaveGame(*this, main_windows_.savegame);
-		};
-	}
-	add_toolbar_button("wui/menus/menu_general_stats", "general_stats", _("Statistics"),
-	                   &main_windows_.general_stats, true);
-	main_windows_.general_stats.open_window = [this] {
-		new GeneralStatisticsMenu(*this, main_windows_.general_stats);
+	add_toolbar_button("wui/menus/statistics_general", "general_stats", _("Statistics"),
+	                   &menu_windows_.stats_general, true);
+	menu_windows_.stats_general.open_window = [this] {
+		new GeneralStatisticsMenu(*this, menu_windows_.stats_general);
 	};
 
 	toolbar()->add_space(15);
 
-	add_toolbar_button(
-	   "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry(), true);
-	minimap_registry().open_window = [this] { toggle_minimap(); };
-
-	toggle_buildhelp_ = add_toolbar_button(
-	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"));
-	toggle_buildhelp_->sigclicked.connect(boost::bind(&InteractiveBase::toggle_buildhelp, this));
-
-	reset_zoom_ = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
-	reset_zoom_->sigclicked.connect([this] {
-		map_view()->zoom_around(
-		   1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), MapView::Transition::Smooth);
-	});
+	add_mapview_menu(MiniMapType::kStaticViewWindow);
+	add_showhide_menu();
+	add_gamespeed_menu();
 
 	toolbar()->add_space(15);
 
 	if (is_multiplayer()) {
-		add_toolbar_button("wui/menus/menu_chat", "chat", _("Chat"), &chat_, true);
-		chat_.open_window = [this] {
-			if (chat_provider_) {
-				GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
-			}
-		};
+		add_chat_ui();
 	}
 
-	adjust_toolbar_position();
+	finalize_toolbar();
 
 	// Setup all screen elements
 	map_view()->field_clicked.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle) {
@@ -112,6 +79,8 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 	// A spectator cannot build roads.
 	assert(road_building_overlays().steepness_indicators.empty());
 	assert(road_building_overlays().road_previews.empty());
+	assert(waterway_building_overlays().steepness_indicators.empty());
+	assert(waterway_building_overlays().road_previews.empty());
 
 	// In-game, selection can never be on triangles or have a radius.
 	assert(get_sel_radius() == 0);
@@ -119,39 +88,26 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 
 	const Widelands::Game& the_game = game();
 	const Widelands::Map& map = the_game.map();
-	auto* fields_to_draw = given_map_view->draw_terrain(the_game, dst);
+	auto* fields_to_draw =
+	   given_map_view->draw_terrain(the_game, get_workarea_overlays(map), false, dst);
 	const float scale = 1.f / given_map_view->view().zoom;
 	const uint32_t gametime = the_game.get_gametime();
 
-	const auto text_to_draw = get_text_to_draw();
-	const std::map<Widelands::Coords, const Image*> work_area_overlays = get_work_area_overlays(map);
+	const auto info_to_draw = get_info_to_draw(!given_map_view->is_animating());
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
 
+		draw_bridges(dst, &field, gametime, scale);
 		draw_border_markers(field, scale, *fields_to_draw, dst);
 
 		Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
 		if (imm != nullptr && imm->get_positions(the_game).front() == field.fcoords) {
-			imm->draw(gametime, text_to_draw, field.rendertarget_pixel, scale, dst);
+			imm->draw(gametime, info_to_draw, field.rendertarget_pixel, field.fcoords, scale, dst);
 		}
 
 		for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
 		     bob = bob->get_next_bob()) {
-			bob->draw(the_game, text_to_draw, field.rendertarget_pixel, scale, dst);
-		}
-
-		const auto blit_overlay = [dst, &field, scale](const Image* pic, const Vector2i& hotspot) {
-			dst->blitrect_scale(Rectf(field.rendertarget_pixel - hotspot.cast<float>() * scale,
-			                          pic->width() * scale, pic->height() * scale),
-			                    pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
-			                    BlendMode::UseAlpha);
-		};
-
-		// Draw work area previews.
-		const auto it = work_area_overlays.find(field.fcoords);
-		if (it != work_area_overlays.end()) {
-			const Image* pic = it->second;
-			blit_overlay(pic, Vector2i(pic->width() / 2, pic->height() / 2));
+			bob->draw(the_game, info_to_draw, field.rendertarget_pixel, field.fcoords, scale, dst);
 		}
 
 		// Draw build help.
@@ -167,14 +123,14 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 			}
 			const auto* overlay = get_buildhelp_overlay(caps);
 			if (overlay != nullptr) {
-				blit_overlay(overlay->pic, overlay->hotspot);
+				blit_field_overlay(dst, field, overlay->pic, overlay->hotspot, scale);
 			}
 		}
 
 		// Blit the selection marker.
 		if (field.fcoords == get_sel_pos().node) {
 			const Image* pic = get_sel_picture();
-			blit_overlay(pic, Vector2i(pic->width() / 2, pic->height() / 2));
+			blit_field_overlay(dst, field, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
 		}
 	}
 }
@@ -187,6 +143,10 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
  */
 Widelands::Player* InteractiveSpectator::get_player() const {
 	return nullptr;
+}
+
+bool InteractiveSpectator::player_hears_field(const Widelands::Coords&) const {
+	return true;
 }
 
 // Toolbar button callback functions.
@@ -213,7 +173,7 @@ Widelands::PlayerNumber InteractiveSpectator::player_number() const {
 void InteractiveSpectator::node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) {
 	// Special case for buildings
 	if (is_a(Widelands::Building, egbase().map().get_immovable(node_and_triangle.node))) {
-		show_building_window(node_and_triangle.node, false);
+		show_building_window(node_and_triangle.node, false, false);
 		return;
 	}
 
@@ -229,39 +189,5 @@ void InteractiveSpectator::node_action(const Widelands::NodeAndTriangle<>& node_
  * Global in-game keypresses:
  */
 bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code) {
-	if (down)
-		switch (code.sym) {
-		case SDLK_SPACE:
-			toggle_buildhelp();
-			return true;
-
-		case SDLK_m:
-			minimap_registry().toggle();
-			return true;
-
-		case SDLK_c:
-			set_display_flag(dfShowCensus, !get_display_flag(dfShowCensus));
-			return true;
-
-		case SDLK_s:
-			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
-				new GameMainMenuSaveGame(*this, main_windows_.savegame);
-			} else
-				set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
-			return true;
-
-		case SDLK_RETURN:
-		case SDLK_KP_ENTER:
-			if (chat_provider_) {
-				if (!chat_.window) {
-					GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
-				}
-				dynamic_cast<GameChatMenu*>(chat_.window)->enter_chat_message();
-			}
-			return true;
-		default:
-			break;
-		}
-
 	return InteractiveGameBase::handle_key(down, code);
 }

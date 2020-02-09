@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,4 +65,4 @@ void GameMapPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const) {
 	wms_->save();
 	mos_ = wms_->get_map_object_saver();
 }
-}
+}  // namespace Widelands

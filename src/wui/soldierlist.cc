@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,9 +23,10 @@
 #include <boost/format.hpp>
 
 #include "base/macros.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_layout.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/soldier.h"
@@ -43,7 +44,7 @@ namespace {
 
 constexpr uint32_t kMaxColumns = 6;
 constexpr uint32_t kAnimateSpeed = 300;  ///< in pixels per second
-constexpr uint32_t kIconBorder = 2;
+constexpr int kIconBorder = 2;
 
 }  // namespace
 
@@ -104,8 +105,8 @@ private:
 	uint32_t rows_;
 	uint32_t cols_;
 
-	uint32_t icon_width_;
-	uint32_t icon_height_;
+	int icon_width_;
+	int icon_height_;
 
 	int32_t last_animate_time_;
 };
@@ -295,7 +296,8 @@ void SoldierPanel::draw(RenderTarget& dst) {
 			continue;
 
 		constexpr float kNoZoom = 1.f;
-		soldier->draw_info_icon(icon.pos + Vector2i(kIconBorder, kIconBorder), kNoZoom, false, &dst);
+		soldier->draw_info_icon(icon.pos + Vector2i(kIconBorder, kIconBorder), kNoZoom,
+		                        Soldier::InfoMode::kInBuilding, InfoToDraw::kSoldierLevels, &dst);
 	}
 }
 
@@ -357,6 +359,7 @@ private:
 
 	InteractiveGameBase& igbase_;
 	Widelands::Building& building_;
+	const UI::FontStyle font_style_;
 	SoldierPanel soldierpanel_;
 	UI::Radiogroup soldier_preference_;
 	UI::Textarea infotext_;
@@ -367,6 +370,7 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
 
      igbase_(igb),
      building_(building),
+     font_style_(UI::FontStyle::kLabel),
      soldierpanel_(*this, igb.egbase(), building),
      infotext_(this, _("Click soldier to send away")) {
 	add(&soldierpanel_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -379,17 +383,19 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
 	soldierpanel_.set_click(boost::bind(&SoldierList::eject, this, _1));
 
 	// We don't want translators to translate this twice, so it's a bit involved.
-	int w =
-	   UI::g_fh1->render(
-	               as_uifont((boost::format("%s ")  // We need some extra space to fix bug 724169
-	                          /** TRANSLATORS: Health, Attack, Defense, Evade */
-	                          % (boost::format(_(
-	                                "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u")) %
-	                             8 % 8 % 8 % 8 % 8 % 8 % 8 % 8))
-	                            .str()))
-	      ->width();
-	uint32_t maxtextwidth =
-	   std::max(w, UI::g_fh1->render(as_uifont(_("Click soldier to send away")))->width());
+	int w = UI::g_fh
+	           ->render(as_richtext_paragraph(
+	              (boost::format("%s ")  // We need some extra space to fix bug 724169
+	               % (boost::format(
+	                     /** TRANSLATORS: Health, Attack, Defense, Evade */
+	                     _("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u")) %
+	                  8 % 8 % 8 % 8 % 8 % 8 % 8 % 8))
+	                 .str(),
+	              font_style_))
+	           ->width();
+	uint32_t maxtextwidth = std::max(
+	   w, UI::g_fh->render(as_richtext_paragraph(_("Click soldier to send away"), font_style_))
+	         ->width());
 	set_min_desired_breadth(maxtextwidth + 4);
 
 	UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
@@ -398,10 +404,10 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
 	if (upcast(Widelands::MilitarySite, ms, &building)) {
 		soldier_preference_.add_button(buttons, Vector2i::zero(),
 		                               g_gr->images().get("images/wui/buildings/prefer_rookies.png"),
-		                               _("Prefer Rookies"));
+		                               _("Prefer rookies"));
 		soldier_preference_.add_button(buttons, Vector2i(32, 0),
 		                               g_gr->images().get("images/wui/buildings/prefer_heroes.png"),
-		                               _("Prefer Heroes"));
+		                               _("Prefer heroes"));
 		UI::Radiobutton* button = soldier_preference_.get_first_button();
 		while (button) {
 			buttons->add(button);
@@ -436,8 +442,6 @@ void SoldierList::think() {
 	if (upcast(Widelands::MilitarySite, ms, &building_)) {
 		switch (ms->get_soldier_preference()) {
 		case Widelands::SoldierPreference::kRookies:
-			FALLS_THROUGH;
-		case Widelands::SoldierPreference::kNotSet:
 			soldier_preference_.set_state(0);
 			break;
 		case Widelands::SoldierPreference::kHeroes:

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -86,8 +86,9 @@ void FieldsToDraw::reset(const Widelands::EditorGameBase& egbase,
 	// value of 'offset' to the actual dimension of the 'rect' to get to desired
 	// dimension of the 'rect'
 	const Vector2f br_map = MapviewPixelFunctions::panel_to_map(
-	   viewpoint, zoom, Vector2f(dst->get_rect().w + std::abs(dst->get_offset().x),
-	                             dst->get_rect().h + std::abs(dst->get_offset().y)));
+	   viewpoint, zoom,
+	   Vector2f(dst->get_rect().w + std::abs(dst->get_offset().x),
+	            dst->get_rect().h + std::abs(dst->get_offset().y)));
 	max_fx_ = std::ceil(br_map.x / kTriangleWidth);
 	max_fy_ = std::ceil(br_map.y / kTriangleHeight);
 
@@ -105,7 +106,18 @@ void FieldsToDraw::reset(const Widelands::EditorGameBase& egbase,
 
 	w_ = max_fx_ - min_fx_ + 1;
 	h_ = max_fy_ - min_fy_ + 1;
-	const size_t dimension = w_ * h_;
+	assert(w_ > 0);
+	assert(h_ > 0);
+
+	// Ensure that there is enough memory for the resize operation
+	size_t dimension = w_ * h_;
+	const size_t max_dimension = fields_.max_size();
+	if (dimension > max_dimension) {
+		log("WARNING: Not enough memory allocated to redraw the whole map!\nWe recommend that you "
+		    "restart Widelands\n");
+		dimension = max_dimension;
+	}
+	// Now resize the vector
 	if (fields_.size() != dimension) {
 		fields_.resize(dimension);
 	}
@@ -146,11 +158,13 @@ void FieldsToDraw::reset(const Widelands::EditorGameBase& egbase,
 
 			f.brightness = field_brightness(f.fcoords);
 
-			Widelands::PlayerNumber owned_by = f.fcoords.field->get_owned_by();
-			f.owner = owned_by != 0 ? &egbase.player(owned_by) : nullptr;
+			const Widelands::PlayerNumber owned_by = f.fcoords.field->get_owned_by();
+			f.owner = owned_by != 0 ? egbase.get_player(owned_by) : nullptr;
 			f.is_border = f.fcoords.field->is_border();
 			f.vision = 2;
-			f.roads = f.fcoords.field->get_roads();
+			f.road_e = f.fcoords.field->get_road(Widelands::WALK_E);
+			f.road_se = f.fcoords.field->get_road(Widelands::WALK_SE);
+			f.road_sw = f.fcoords.field->get_road(Widelands::WALK_SW);
 		}
 	}
 }

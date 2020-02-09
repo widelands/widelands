@@ -15,7 +15,7 @@ tribes:new_productionsite_type {
       blackwood = 1,
       granite = 2,
       grout = 1,
-      thatch_reed = 1
+      reed = 1
    },
    return_on_dismantle_on_enhanced = {
       blackwood = 1,
@@ -69,20 +69,20 @@ tribes:new_productionsite_type {
             "call=produce_ax",
             "call=produce_ax_sharp",
             "call=produce_ax_broad",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       produce_ax = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging an ax because ...
          descname = _"forging an ax",
          actions = {
-            -- time total: 73
+            -- time total: 57 + 3.6
             "return=skipped unless economy needs ax",
-            "sleep=36000", -- +10 enlarge
             "consume=coal iron",
-            "play_sound=sound/smiths smith 192",
-            "animate=working 28000",  -- +6 enlarge
-            "play_sound=sound/smiths sharpening 120",
+            "sleep=26000",
+            "playsound=sound/smiths/smith 192",
+            "animate=working 22000",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=ax"
          }
@@ -91,13 +91,13 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a sharp ax because ...
          descname = _"forging a sharp ax",
          actions = {
-            -- time total: 76
+            -- time total: 57 + 3.6
             "return=skipped unless economy needs ax_sharp",
             "consume=coal iron:2",
-            "sleep=37000", -- +11 enlarge
-            "play_sound=sound/smiths smith 192",
-            "animate=working 30000", -- +8 enlarge
-            "play_sound=sound/smiths sharpening 120",
+            "sleep=26000",
+            "playsound=sound/smiths/smith 192",
+            "animate=working 22000",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=ax_sharp"
          }
@@ -106,13 +106,13 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a broad ax because ...
          descname = _"forging a broad ax",
          actions = {
-            -- time total: 79
+            -- time total: 57 + 3.6
             "return=skipped unless economy needs ax_broad",
             "consume=coal:2 iron:2",
-            "sleep=38000", -- +12 enlarge
-            "play_sound=sound/smiths smith 192",
-            "animate=working 32000", -- +10 enlarge
-            "play_sound=sound/smiths sharpening 120",
+            "sleep=26000",
+            "playsound=sound/smiths/smith 192",
+            "animate=working 22000",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=ax_broad"
          }

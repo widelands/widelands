@@ -1,23 +1,14 @@
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "waiting_???.png"),
-      hotspot = { 11, 22 },
-      fps = 10
-   },
-   work = {
-      pictures = path.list_files(dirname .. "work_??.png"),
-      sound_effect = {
-            directory = "sound/hammering",
-            name = "hammering",
-      },
-      hotspot = { 10, 22 },
-      fps = 10
-   }
+animations = {}
+add_animation(animations, "idle", dirname, "waiting", {11, 22}, 10)
+add_animation(animations, "work", dirname, "work", {10, 22}, 10)
+animations["work"]["sound_effect"] = {
+   path = "sound/hammering/hammering",
+   priority = 64
 }
-add_walking_animations(animations, "walk", dirname, "walk", {7, 22}, 10)
-add_walking_animations(animations, "walkload", dirname, "walk", {7, 22}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {7, 22}, 10)
+add_directional_animation(animations, "walkload", dirname, "walk", {7, 22}, 10)
 
 
 tribes:new_worker_type {

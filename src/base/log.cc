@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,10 +19,12 @@
 
 #include "base/log.h"
 
+#include <cassert>
 #include <cstdarg>
 #include <cstdio>
 #include <fstream>
 #include <iostream>
+#include <memory>
 
 #include <SDL.h>
 #ifdef _WIN32
@@ -31,6 +33,9 @@
 
 #include "base/macros.h"
 #include "base/wexception.h"
+#ifdef _WIN32
+#include "build_info.h"
+#endif
 
 namespace {
 
@@ -38,7 +43,6 @@ namespace {
 void sdl_logging_func(void* userdata, int, SDL_LogPriority, const char* message);
 
 #ifdef _WIN32
-
 std::string get_output_directory() {
 // This took inspiration from SDL 1.2 logger code.
 #ifdef _WIN32_WCE
@@ -57,12 +61,19 @@ std::string get_output_directory() {
 // This Logger emulates the SDL1.2 behavior of writing a stdout.txt.
 class WindowsLogger {
 public:
-	WindowsLogger() : stdout_filename_(get_output_directory() + "\\stdout.txt") {
+	WindowsLogger(const std::string& dir) : stdout_filename_(dir + "\\stdout.txt") {
 		stdout_.open(stdout_filename_);
 		if (!stdout_.good()) {
-			throw wexception("Unable to initialize logging to stdout.txt");
+			throw wexception(
+			   "Unable to initialize stdout logging destination: %s", stdout_filename_.c_str());
 		}
 		SDL_LogSetOutputFunction(sdl_logging_func, this);
+		std::cout << "Log output will be written to: " << stdout_filename_ << std::endl;
+
+		// Repeat version info so that we'll have it available in the log file too
+		stdout_ << "This is Widelands Version " << build_id() << " (" << build_type() << ")"
+		        << std::endl;
+		stdout_.flush();
 	}
 
 	void log_cstring(const char* buffer) {
@@ -107,23 +118,42 @@ void sdl_logging_func(void* userdata,
 	static_cast<Logger*>(userdata)->log_cstring(message);
 }
 #endif
-
 }  // namespace
 
 // Default to stdout for logging.
 bool g_verbose = false;
 
-void log(const char* const fmt, ...) {
 #ifdef _WIN32
-	static WindowsLogger logger;
+// Start with nullptr so that we won't initialize an empty file in the program's directory
+std::unique_ptr<WindowsLogger> logger(nullptr);
+
+// Set the logging dir to the given homedir
+bool set_logging_dir(const std::string& homedir) {
+	try {
+		logger.reset(new WindowsLogger(homedir));
+	} catch (const std::exception& e) {
+		std::cout << e.what() << std::endl;
+		return false;
+	}
+	return true;
+}
+
+// Set the logging dir to the program's dir. For running test cases where we don't have a homedir.
+void set_logging_dir() {
+	logger.reset(new WindowsLogger(get_output_directory()));
+}
+
 #else
-	static Logger logger;
+std::unique_ptr<Logger> logger(new Logger());
 #endif
+
+void log(const char* const fmt, ...) {
+	assert(logger != nullptr);
+
 	char buffer[2048];
 	va_list va;
-
 	va_start(va, fmt);
 	vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
-	logger.log_cstring(buffer);
+	logger->log_cstring(buffer);
 }

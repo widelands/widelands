@@ -2,13 +2,14 @@
 include "tribes/scripting/help/global_helptexts.lua"
 
 function building_helptext_lore()
-   -- TRANSLATORS#: Lore helptext for a building
-   return no_lore_text_yet()
+   -- TRANSLATORS: Lore helptext for a building
+   return pgettext("barbarians_building", [[‘Behind the next hill there might be wealth and happiness but also hostility and doom.<br>]] ..
+         [[He who will not explore it commits the crime of stupidity.’]])
 end
 
 function building_helptext_lore_author()
-   -- TRANSLATORS#: Lore author helptext for a building
-   return no_lore_author_text_yet()
+   -- TRANSLATORS: Lore author helptext for a building
+   return pgettext("barbarians_building", "Chat’Karuth<br>at the oath taking ceremony of the first scout troupe")
 end
 
 function building_helptext_purpose()

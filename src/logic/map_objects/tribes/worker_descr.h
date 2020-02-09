@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,8 +22,9 @@
 
 #include <memory>
 
+#include "ai/ai_hints.h"
 #include "base/macros.h"
-#include "graphic/diranimations.h"
+#include "graphic/animation/diranimations.h"
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/immovable.h"
 #include "scripting/lua_table.h"
@@ -48,8 +49,8 @@ public:
 	WorkerDescr(const std::string& init_descname,
 	            MapObjectType type,
 	            const LuaTable& table,
-	            const EditorGameBase& egbase);
-	WorkerDescr(const std::string& init_descname, const LuaTable& t, const EditorGameBase& egbase);
+	            const Tribes& tribes);
+	WorkerDescr(const std::string& init_descname, const LuaTable& t, const Tribes& tribes);
 	~WorkerDescr() override;
 
 	Bob& create_object() const override;
@@ -60,6 +61,10 @@ public:
 	const Buildcost& buildcost() const {
 		assert(is_buildable());
 		return buildcost_;
+	}
+
+	const Vector2i& ware_hotspot() const {
+		return ware_hotspot_;
 	}
 
 	/// How much of the worker type that an economy should store in warehouses.
@@ -82,14 +87,7 @@ public:
 			default_target_quantity_ = 1;
 	}
 
-	std::string helptext_script() const {
-		return helptext_script_;
-	}
-
-	const DirAnimations& get_walk_anims() const {
-		return walk_anims_;
-	}
-	const DirAnimations& get_right_walk_anims(bool const carries_ware) const {
+	virtual const DirAnimations& get_right_walk_anims(bool const carries_ware, Worker*) const {
 		return carries_ware ? walkload_anims_ : walk_anims_;
 	}
 	WorkerProgram const* get_program(const std::string&) const;
@@ -110,7 +108,7 @@ public:
 	// The buildings where this worker can work
 	const std::set<DescriptionIndex>& employers() const;
 
-	Worker& create(EditorGameBase&, Player&, PlayerImmovable*, Coords) const;
+	Worker& create(EditorGameBase&, Player*, PlayerImmovable*, Coords) const;
 
 	uint32_t movecaps() const override;
 
@@ -119,30 +117,46 @@ public:
 		return programs_;
 	}
 
+	/// AI hints for this worker type. Can be nullptr.
+	const WorkerHints* ai_hints() const {
+		return ai_hints_.get();
+	}
+
 protected:
-	Quantity default_target_quantity_;
-	std::string helptext_script_;  // The path and filename to the worker's helptext script
+	Programs programs_;
+
+private:
+	const Vector2i ware_hotspot_;
+
 	DirAnimations walk_anims_;
 	DirAnimations walkload_anims_;
-	bool buildable_;
+
+	Quantity default_target_quantity_;
+	const bool buildable_;
 	Buildcost buildcost_;
+
+	/**
+	 * Type that this worker can become, i.e. level up to, or INVALID_INDEX if the worker cannot
+	 * level up.
+	 */
+	const DescriptionIndex becomes_;
 
 	/**
 	 * Number of experience points required for leveling up,
 	 * or INVALID_INDEX if the worker cannot level up.
 	 */
-	int32_t needed_experience_;
+	const int32_t needed_experience_;
 
-	/**
-	 * Type that this worker can become, i.e. level up to (or null).
-	 */
-	DescriptionIndex becomes_;
-	Programs programs_;
-	std::set<DescriptionIndex> employers_;  // Buildings where ths worker can work
+	/// Buildings where this worker can work
+	std::set<DescriptionIndex> employers_;
+
 private:
-	const EditorGameBase& egbase_;
+	// Hints for the AI
+	std::unique_ptr<WorkerHints> ai_hints_;
+
+	const Tribes& tribes_;
 	DISALLOW_COPY_AND_ASSIGN(WorkerDescr);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_WORKER_DESCR_H

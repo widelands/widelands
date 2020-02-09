@@ -1,0 +1,12 @@
+# Automatically created by Widelands bzr8483[bug-1718745-allows-seafaring] (Release)
+
+[global]
+packet_version="1"
+map_w="64"
+map_h="64"
+nr_players="1"
+name="Two Ponds"
+author="Unknown"
+descr="Test map with 2 bodies of water, with 1 port space each."
+hint=
+tags=

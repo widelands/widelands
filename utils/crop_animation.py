@@ -39,7 +39,6 @@ def crop_images(basepath, section):
     The first parameter basepath is the directory in which the conf file
     was.  The second parameter section is a dictionary with contains the
     important contents of the section from the conf file
-
     """
     # two empty lists. The first for the animation pictures
     list = []
@@ -61,9 +60,9 @@ def crop_images(basepath, section):
         use_playercolor = True
 
     # replace the placeholders ?? and !! by a .
-    filepattern = filepattern.replace(r".", r"\.")
-    filepattern = filepattern.replace(r"??", r"[0-9][0-9]")
-    filepattern = filepattern.replace(r"!!", r"(e|w|sw|se|nw|ne)")
+    filepattern = filepattern.replace(r'.', r'\.')
+    filepattern = filepattern.replace(r'??', r'[0-9][0-9]')
+    filepattern = filepattern.replace(r'!!', r'(e|w|sw|se|nw|ne)')
     # The end of the pattern is the end of the filename
     filepattern += '$'
 
@@ -195,13 +194,13 @@ def read_conffile(filename):
     for line in lines:
         line = line.split('#')
         line = line[0].strip(' \r\n\t')
-        if re.match(r"\[[a-zA-Z0-9]*\]", line):
+        if re.match(r'\[[a-zA-Z0-9]*\]', line):
             # print "*** section begin"
             if 'pics' in section or 'dirpics' in section:
                 sections.append((section_begin, i - 1, section))
             section_begin = i
             section = {'name': 'test'}
-        if re.match(r"(pics=|dirpics=|hotspot=|playercolor=)", line):
+        if re.match(r'(pics=|dirpics=|hotspot=|playercolor=)', line):
             keyval = line.split('=')
             section[keyval[0]] = keyval[1]
         i += 1
@@ -237,7 +236,7 @@ def read_conffile(filename):
                         for i in range(sec[0], sec[1] + 1):
                             # print i,
                             # print lines[i],
-                            if re.match(r"hotspot=", lines[i]):
+                            if re.match(r'hotspot=', lines[i]):
                                 lines[i] = 'hotspot=%u %u\n' % (
                                     newhs[0], newhs[1])
                                 # print i, lines[i],
@@ -252,7 +251,6 @@ def main():
     """This is the main function.
 
     It calls read_conffile() for every file given to this program
-
     """
     if len(sys.argv) <= 1:
         print 'Usage: ' + sys.argv[0] + ' conf-files'
@@ -263,6 +261,7 @@ def main():
             read_conffile(file)
         else:
             print '*** WARNING ***: ' + file + ' is not a file'
+
 
 if __name__ == '__main__':
     main()

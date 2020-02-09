@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -156,14 +156,13 @@ private:
 	uint32_t counts_[3];
 
 	void assert_counts() const {
-		assert(messages_.size() ==
-		       counts_[static_cast<int>(Message::Status::kNew)] +
-		          counts_[static_cast<int>(Message::Status::kRead)] +
-		          counts_[static_cast<int>(Message::Status::kArchived)]);
+		assert(messages_.size() == counts_[static_cast<int>(Message::Status::kNew)] +
+		                              counts_[static_cast<int>(Message::Status::kRead)] +
+		                              counts_[static_cast<int>(Message::Status::kArchived)]);
 	}
 
 	DISALLOW_COPY_AND_ASSIGN(MessageQueue);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MESSAGE_QUEUE_H

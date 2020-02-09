@@ -1,11 +1,22 @@
+wl_library(wui_sound_options
+  SRCS
+    sound_options.cc
+    sound_options.h
+  DEPENDS
+    base_i18n
+    graphic_styles
+    sound
+    ui_basic
+)
+
 wl_library(wui_chat_ui
   SRCS
-    chatoverlay.cc
-    chatoverlay.h
+    chat_overlay.cc
+    chat_overlay.h
     game_chat_menu.cc
     game_chat_menu.h
-    gamechatpanel.cc
-    gamechatpanel.h
+    game_chat_panel.cc
+    game_chat_panel.h
     chat_msg_layout.h
     chat_msg_layout.cc
   DEPENDS
@@ -16,11 +27,13 @@ wl_library(wui_chat_ui
     graphic
     graphic_color
     graphic_fonthandler
+    graphic_playercolor
     graphic_text
     graphic_text_layout
     logic
-    profile
+    sound
     ui_basic
+    widelands_options
     wui
 )
 
@@ -32,7 +45,11 @@ wl_library(wui_economy_options
     economy
     graphic
     logic
+    logic_commands
+    logic_filesystem_constants
+    logic_map_objects
     notifications
+    io_profile
     ui_basic
     wui_waresdisplay
 )
@@ -45,12 +62,52 @@ wl_library(wui_mapview_pixelfunctions
     mapviewpixelfunctions.h
   DEPENDS
     base_geometry
-    logic
+    logic_map
     logic_widelands_geometry
 )
 
-wl_library(wui_common
+wl_library(wui_common_suggested_teams
   SRCS
+    suggested_teams_box.cc
+    suggested_teams_box.h
+  DEPENDS
+    base_i18n
+    graphic
+    graphic_playercolor
+    logic_constants
+    ui_basic
+)
+
+wl_library(wui_common_gamedetails
+  SRCS
+    gamedetails.cc
+    gamedetails.h
+    load_or_save_game.cc
+    load_or_save_game.h
+    savegametable.cc
+    savegametable.h
+  DEPENDS
+    base_i18n
+    base_log
+    base_time_string
+    helper
+    game_io
+    graphic
+    graphic_image_io
+    graphic_surface
+    graphic_text_layout
+    io_filesystem
+    logic
+    logic_constants
+    logic_filesystem_constants
+    logic_game_controller
+    logic_game_settings
+    ui_basic
+)
+
+wl_library(wui_common_mapdetails
+  SRCS
+    mapauthordata.h
     mapdetails.cc
     mapdetails.h
     mapdata.cc
@@ -59,22 +116,19 @@ wl_library(wui_common
     maptable.h
     map_tags.cc
     map_tags.h
-    suggested_teams_box.cc
-    suggested_teams_box.h
   DEPENDS
     base_exceptions
     base_i18n
     base_log
     graphic
-    graphic_fonthandler
-    graphic_playercolor
-    graphic_text_constants
+    graphic_text_layout
     io_filesystem
-    logic
     logic_game_controller
     logic_game_settings
+    logic_map
     map_io_map_loader
     ui_basic
+    wui_common_suggested_teams
 )
 
 wl_library(wui_quicknavigation
@@ -97,11 +151,11 @@ wl_library(wui_mapview
     graphic
     graphic_fields_to_draw
     graphic_game_renderer
-    logic
+    logic_map
     logic_widelands_geometry
-    profile
     ui_basic
     widelands_ball_of_mud
+    widelands_options
     wui_mapview_pixelfunctions
 )
 
@@ -116,6 +170,7 @@ wl_library(wui_waresdisplay
     graphic_fonthandler
     graphic_text_layout
     logic
+    logic_map_objects
     ui_basic
 )
 
@@ -140,18 +195,18 @@ wl_library(wui
     encyclopedia_window.h
     fieldaction.cc
     fieldaction.h
+    game_client_disconnected.cc
+    game_client_disconnected.h
     game_debug_ui.cc
     game_debug_ui.h
-    game_statistics_menu.cc
-    game_statistics_menu.h
+    game_exit_confirm_box.cc
+    game_exit_confirm_box.h
     game_main_menu_save_game.cc
     game_main_menu_save_game.h
     game_message_menu.cc
     game_message_menu.h
     game_objectives_menu.cc
     game_objectives_menu.h
-    game_options_menu.cc
-    game_options_menu.h
     game_options_sound_menu.cc
     game_options_sound_menu.h
     game_summary.cc
@@ -191,6 +246,8 @@ wl_library(wui
     portdockwaresdisplay.h
     productionsitewindow.cc
     productionsitewindow.h
+    seafaring_statistics_menu.cc
+    seafaring_statistics_menu.h
     shipwindow.cc
     shipwindow.h
     soldiercapacitycontrol.cc
@@ -203,7 +260,6 @@ wl_library(wui
     story_message_box.h
     trainingsitewindow.cc
     trainingsitewindow.h
-    transport_draw.cc
     tribal_encyclopedia.cc
     tribal_encyclopedia.h
     unique_window_handler.cc
@@ -222,6 +278,7 @@ wl_library(wui
     base_i18n
     base_log
     base_macros
+    base_math
     base_time_string
     chat
     economy
@@ -234,28 +291,38 @@ wl_library(wui
     graphic_playercolor
     graphic_surface
     graphic_text
-    graphic_text_constants
     graphic_text_layout
+    graphic_toolbar_imageset
     io_fileread
     io_filesystem
+    io_profile
     logic
     logic_constants
+    logic_commands
+    logic_filesystem_constants
     logic_game_controller
     logic_game_settings
+    logic_generic_save_handler
+    logic_map
+    logic_map_objects
+    logic_objectives
+    logic_tribe_basic_info
     logic_widelands_geometry
     network
     note_sound
     notifications
-    profile
     scripting_coroutine
     scripting_lua_interface
     scripting_lua_table
     sound
     ui_basic
+    widelands_options
     wui_chat_ui
+    wui_common_gamedetails
     wui_economy_options
     wui_mapview
     wui_mapview_pixelfunctions
     wui_quicknavigation
+    wui_sound_options
     wui_waresdisplay
 )

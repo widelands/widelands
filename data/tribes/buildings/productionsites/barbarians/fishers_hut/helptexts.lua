@@ -4,8 +4,8 @@ function building_helptext_lore()
 end
 
 function building_helptext_lore_author()
-   -- TRANSLATORS#: Lore author helptext for a building
-   return ""
+   -- TRANSLATORS: Lore author helptext for a building
+   return pgettext("barbarians_building", "Frequent response of a barbarian fisherman,<br>often followed by an enjoyable brawl")
 end
 
 function building_helptext_purpose()

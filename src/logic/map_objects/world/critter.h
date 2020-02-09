@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,7 @@
 #define WL_LOGIC_MAP_OBJECTS_WORLD_CRITTER_H
 
 #include "base/macros.h"
-#include "graphic/diranimations.h"
+#include "graphic/animation/diranimations.h"
 #include "logic/map_objects/bob.h"
 
 class LuaTable;
@@ -95,6 +95,6 @@ private:
 	static Task const taskRoam;
 	static Task const taskProgram;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_WORLD_CRITTER_H

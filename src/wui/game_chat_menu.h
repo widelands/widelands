@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,7 @@
 #define WL_WUI_GAME_CHAT_MENU_H
 
 #include "ui_basic/unique_window.h"
-#include "wui/gamechatpanel.h"
+#include "wui/game_chat_panel.h"
 
 /**
  * Provides a window with chat message scrollback and the possibility to
@@ -31,24 +31,29 @@ struct GameChatMenu : public UI::UniqueWindow {
 
 	/**
 	 * Creates a default chat window for multiplayer games
-	*/
+	 */
 	static GameChatMenu* create_chat_console(UI::Panel*, UI::UniqueWindow::Registry&, ChatProvider&);
 
+#ifndef NDEBUG  //  only in debug builds
 	/**
 	 * Creates a chat window only for scripting in debug mode
-	*/
+	 */
 	static GameChatMenu*
 	create_script_console(UI::Panel*, UI::UniqueWindow::Registry&, ChatProvider&);
+#endif
 
 	/**
 	 * Configure the menu so that it is useful for writing chat messages.
 	 * Put the focus on the message entry field, close the menu automatically
 	 * when return is pressed, etc.
 	 */
-	void enter_chat_message(bool close_on_send = true);
+	bool enter_chat_message(bool close_on_send = true);
 
 private:
 	GameChatMenu(UI::Panel*, UI::UniqueWindow::Registry&, ChatProvider&, const std::string& title);
+
+	void restore() override;
+	void minimize() override;
 	void acknowledge();
 	GameChatPanel chat_;
 	bool close_on_send_;

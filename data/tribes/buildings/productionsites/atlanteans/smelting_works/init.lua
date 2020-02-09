@@ -57,21 +57,34 @@ tribes:new_productionsite_type {
          actions = {
             "call=smelt_iron",
             "call=smelt_gold",
-            "call=smelt_iron",
-            "return=skipped"
+            "call=smelt_iron_2",
+            "return=no_stats"
          }
       },
+      -- 2 identical programs for iron to prevent unnecessary skipping penalty
       smelt_iron = {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
          descname = _"smelting iron",
          actions = {
             "return=skipped unless economy needs iron",
-            "sleep=5000",  -- penalty for unavailable iron_ore (2x)
             "consume=iron_ore coal",
-            "sleep=20000",
-            "play_sound=sound/metal fizzle 150",
+            "sleep=25000",
+            "playsound=sound/metal/fizzle 150",
             "animate=working 35000",
-            "play_sound=sound/metal ironping 80",
+            "playsound=sound/metal/ironping 80",
+            "produce=iron"
+         }
+      },
+      smelt_iron_2 = {
+         -- TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
+         descname = _"smelting iron",
+         actions = {
+            "return=skipped unless economy needs iron",
+            "consume=iron_ore coal",
+            "sleep=25000",
+            "playsound=sound/metal/fizzle 150",
+            "animate=working 35000",
+            "playsound=sound/metal/ironping 80",
             "produce=iron"
          }
       },
@@ -80,12 +93,11 @@ tribes:new_productionsite_type {
          descname = _"smelting gold",
          actions = {
             "return=skipped unless economy needs gold",
-            "sleep=10000",  -- penalty for unavailable gold_ore
             "consume=gold_ore coal",
-            "sleep=15000",
-            "play_sound=sound/metal fizzle 150",
+            "sleep=25000",
+            "playsound=sound/metal/fizzle 150",
             "animate=working 35000",
-            "play_sound=sound/metal goldping 80",
+            "playsound=sound/metal/goldping 80",
             "produce=gold"
          }
       },

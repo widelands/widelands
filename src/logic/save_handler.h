@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,6 @@
 #include <stdint.h>
 
 #include "io/filesystem/filesystem.h"
-#include "logic/constants.h"
 
 namespace Widelands {
 class Game;
@@ -43,11 +42,10 @@ public:
 
 	void think(Widelands::Game&);
 	std::string create_file_name(const std::string& dir, const std::string& filename) const;
-	bool save_game(Widelands::Game&, const std::string& filename, std::string* error = nullptr);
 
-	static std::string get_base_dir() {
-		return "save";
-	}
+	// Saves the game, overwrites file, handles errors
+	bool save_game(Widelands::Game&, const std::string& filename, std::string* error_str = nullptr);
+
 	const std::string get_cur_filename() {
 		return current_filename_;
 	}
@@ -86,11 +84,8 @@ private:
 	int32_t number_of_rolls_;  // For rolling file update
 
 	void initialize(uint32_t gametime);
-	void roll_save_files(const std::string& filename);
+	bool roll_save_files(const std::string& filename, std::string* error);
 	bool check_next_tick(Widelands::Game& game, uint32_t realtime);
-	bool save_and_handle_error(Widelands::Game& game,
-	                           const std::string& complete_filename,
-	                           const std::string& backup_filename);
 };
 
 #endif  // end of include guard: WL_LOGIC_SAVE_HANDLER_H

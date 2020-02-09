@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,17 +25,18 @@
 
 #include <SDL_keycode.h>
 
-#include "graphic/graphic.h"
+#include "graphic/road_segments.h"
+#include "graphic/toolbar_imageset.h"
+#include "io/profile.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "notifications/notifications.h"
-#include "profile/profile.h"
 #include "sound/note_sound.h"
-#include "sound/sound_handler.h"
 #include "ui_basic/box.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
-#include "wui/chatoverlay.h"
+#include "wui/chat_overlay.h"
 #include "wui/debugconsole.h"
 #include "wui/mapview.h"
 #include "wui/minimap.h"
@@ -48,27 +49,25 @@ struct CoordPath;
 class EdgeOverlayManager;
 class UniqueWindowHandler;
 
+struct WorkareaPreview {
+	Widelands::Coords coords;
+	const WorkareaInfo* info;
+	std::map<Widelands::TCoords<>, uint32_t> data;
+};
+
 /**
  * This is used to represent the code that InteractivePlayer and
  * EditorInteractive share.
  */
 class InteractiveBase : public UI::Panel, public DebugConsole::Handler {
 public:
-	friend class SoundHandler;
-
 	enum {
-		dfShowCensus = 1,      ///< show census report on buildings
-		dfShowStatistics = 2,  ///< show statistics report on buildings
-		dfDebug = 4,           ///< general debugging info
-	};
-
-	// Overlays displayed while a road is under construction.
-	struct RoadBuildingOverlays {
-		// The roads that are displayed while a road is being built. They are not
-		// yet logically in the game, but need to be displayed for the user as
-		// visual guide. The data type is the same as for Field::road.
-		std::map<Widelands::Coords, uint8_t> road_previews;
-		std::map<Widelands::Coords, const Image*> steepness_indicators;
+		dfShowCensus = 1,         ///< show census report on buildings
+		dfShowStatistics = 2,     ///< show statistics report on buildings
+		dfShowSoldierLevels = 4,  ///< show level information above soldiers
+		dfShowWorkareaOverlap =
+		   8,         ///< highlight overlapping workareas when placing a constructionsite
+		dfDebug = 16  ///< general debugging info
 	};
 
 	/// A build help overlay, i.e. small, big, mine, port ...
@@ -81,16 +80,22 @@ public:
 	UniqueWindowHandler& unique_windows();
 
 	InteractiveBase(Widelands::EditorGameBase&, Section& global_s);
-	virtual ~InteractiveBase();
+	~InteractiveBase() override;
 
 	Widelands::EditorGameBase& egbase() const {
 		return egbase_;
 	}
 
-	// TODO(sirver): This should be private.
-	bool show_workarea_preview_;
-	void show_work_area(const WorkareaInfo& workarea_info, Widelands::Coords coords);
-	void hide_work_area(const Widelands::Coords& coords);
+	void show_workarea(const WorkareaInfo& workarea_info, Widelands::Coords coords);
+	void show_workarea(const WorkareaInfo& workarea_info,
+	                   Widelands::Coords coords,
+	                   std::map<Widelands::TCoords<>, uint32_t>& extra_data);
+	void hide_workarea(const Widelands::Coords& coords, bool is_additional);
+
+	bool has_expedition_port_space(const Widelands::Coords&) const;
+	std::map<Widelands::Ship*, Widelands::Coords>& get_expedition_port_spaces() {
+		return expedition_port_spaces_;
+	}
 
 	//  point of view for drawing
 	virtual Widelands::Player* get_player() const = 0;
@@ -106,7 +111,7 @@ public:
 	// Returns true if the buildhelp is currently displayed.
 	bool buildhelp() const;
 
-	// Sets if the buildhelp should be displayed. Will also call on_buildhelp_changed().
+	// Sets if the buildhelp should be displayed and then calls rebuild_showhide_menu
 	void show_buildhelp(bool t);
 
 	/**
@@ -137,10 +142,7 @@ public:
 
 	//  road building
 	bool is_building_road() const {
-		return buildroad_;
-	}
-	Widelands::CoordPath* get_build_road() {
-		return buildroad_;
+		return buildroad_ != nullptr;
 	}
 	void start_build_road(Widelands::Coords start, Widelands::PlayerNumber player);
 	void abort_build_road();
@@ -148,6 +150,16 @@ public:
 	bool append_build_road(Widelands::Coords field);
 	Widelands::Coords get_build_road_start() const;
 	Widelands::Coords get_build_road_end() const;
+
+	bool is_building_waterway() const {
+		return buildwaterway_ != nullptr;
+	}
+	void start_build_waterway(Widelands::Coords start, Widelands::PlayerNumber player);
+	void abort_build_waterway();
+	void finish_build_waterway();
+	bool append_build_waterway(Widelands::Coords field);
+	Widelands::Coords get_build_waterway_start() const;
+	Widelands::Coords get_build_waterway_end() const;
 
 	virtual void cleanup_for_load() {
 	}
@@ -161,6 +173,7 @@ public:
 	}
 
 	void toggle_minimap();
+	// Toggles the buildhelp and calls rebuild_showhide_menu
 	void toggle_buildhelp();
 
 	// Returns the list of landmarks that have been mapped to the keys 0-9
@@ -174,6 +187,16 @@ public:
 	}
 
 protected:
+	// For referencing the items in mapviewmenu_
+	enum class MapviewMenuEntry { kMinimap, kIncreaseZoom, kDecreaseZoom, kResetZoom };
+
+	// Adds the mapviewmenu_ to the toolbar
+	void add_mapview_menu(MiniMapType minimap_type);
+	// Rebuilds the mapviewmenu_ according to current view settings
+	void rebuild_mapview_menu();
+	// Takes the appropriate action when an item in the mapviewmenu_ is selected
+	void mapview_menu_selected(MapviewMenuEntry entry);
+
 	/// Adds a toolbar button to the toolbar
 	/// \param image_basename:      File path for button image starting from 'images' and without
 	///                             file extension
@@ -187,56 +210,105 @@ protected:
 	                               UI::UniqueWindow::Registry* window = nullptr,
 	                               bool bind_default_toggle = false);
 
-	// Will be called whenever the buildhelp is changed with the new 'value'.
-	virtual void on_buildhelp_changed(bool value);
-
 	void hide_minimap();
-
-	MiniMap::Registry& minimap_registry();
 
 	void mainview_move();
 
 	void draw_overlay(RenderTarget&) override;
+	/**
+	 * Will blit the 'image' on the given 'pos', offset by 'hotspot' and scaled according to the
+	 * given zoom 'scale'.
+	 * */
+	void blit_overlay(RenderTarget* dst,
+	                  const Vector2i& pos,
+	                  const Image* image,
+	                  const Vector2i& hotspot,
+	                  float scale);
+	/**
+	 * Will blit the 'image' on the given 'field', offset by 'hotspot' and scaled according to the
+	 * given zoom 'scale'.
+	 * */
+	void blit_field_overlay(RenderTarget* dst,
+	                        const FieldsToDraw::Field& field,
+	                        const Image* image,
+	                        const Vector2i& hotspot,
+	                        float scale);
+
+	void draw_bridges(RenderTarget* dst,
+	                  const FieldsToDraw::Field* f,
+	                  uint32_t gametime,
+	                  float scale) const;
 
 	void unset_sel_picture();
 	void set_sel_picture(const Image* image);
 	const Image* get_sel_picture() {
 		return sel_.pic;
 	}
-	void adjust_toolbar_position() {
-		toolbar_.set_pos(Vector2i((get_inner_w() - toolbar_.get_w()) >> 1, get_inner_h() - 34));
-	}
+
+	// Sets the toolbar's position to the bottom middle and configures its background images
+	void finalize_toolbar();
 
 	ChatOverlay* chat_overlay() {
 		return chat_overlay_;
 	}
 
 	UI::Box* toolbar() {
-		return &toolbar_;
+		return &toolbar_.box;
 	}
 
 	// Returns the information which overlay text should currently be drawn.
-	TextToDraw get_text_to_draw() const;
+	// Returns InfoToDraw::kNone if not 'show'
+	InfoToDraw get_info_to_draw(bool show) const;
 
 	// Returns the current overlays for the work area previews.
-	std::map<Widelands::Coords, const Image*>
-	get_work_area_overlays(const Widelands::Map& map) const;
+	Workareas get_workarea_overlays(const Widelands::Map& map);
+	static WorkareasEntry get_workarea_overlay(const Widelands::Map&, const WorkareaPreview&);
 
 	// Returns the 'BuildhelpOverlay' for 'caps' or nullptr if there is no help
 	// to be displayed on this field.
 	const BuildhelpOverlay* get_buildhelp_overlay(Widelands::NodeCaps caps) const;
 
+	// Overlays displayed while a road or waterway is under construction.
+	struct RoadBuildingOverlays {
+		std::map<Widelands::Coords, std::vector<uint8_t>> road_previews;
+		std::map<Widelands::Coords, const Image*> steepness_indicators;
+	};
+
 	const RoadBuildingOverlays& road_building_overlays() const {
 		return road_building_overlays_;
 	}
 
+	const RoadBuildingOverlays& waterway_building_overlays() const {
+		return waterway_building_overlays_;
+	}
+
+	/// Returns true if there is a workarea preview being shown at the given coordinates.
+	/// If 'map' is 0, checks only if the given coords are the center of a workarea;
+	/// otherwise checks if the coords are within any workarea.
+	bool has_workarea_preview(const Widelands::Coords& coords,
+	                          const Widelands::Map* map = nullptr) const;
+
+	/// Returns true if the current player is allowed to hear sounds from map objects on this field
+	virtual bool player_hears_field(const Widelands::Coords& coords) const = 0;
+
+	void set_toolbar_imageset(const ToolbarImageset& imageset);
+
+#ifndef NDEBUG  //  only in debug builds
+	UI::UniqueWindow::Registry debugconsole_;
+#endif
+
 private:
-	int32_t stereo_position(Widelands::Coords position_map);
+	void play_sound_effect(const NoteSound& note) const;
 	void resize_chat_overlay();
-	void roadb_add_overlay();
-	void roadb_remove_overlay();
+	void road_building_add_overlay();
+	void road_building_remove_overlay();
+	void waterway_building_add_overlay();
+	void waterway_building_remove_overlay();
 	void cmd_map_object(const std::vector<std::string>& args);
 	void cmd_lua(const std::vector<std::string>& args);
+
+	// Rebuilds the subclass' showhidemenu_ according to current map settings
+	virtual void rebuild_showhide_menu() = 0;
 
 	struct SelData {
 		SelData(const bool Freeze = false,
@@ -260,38 +332,60 @@ private:
 	MapView map_view_;
 	ChatOverlay* chat_overlay_;
 
-	// These get collected by add_toolbar_button
-	// so we can call unassign_toggle_button on them in the destructor.
-	std::vector<UI::UniqueWindow::Registry> registries_;
+	/// A horizontal menu bar embellished with background graphics
+	struct Toolbar : UI::Panel {
+		Toolbar(UI::Panel* parent);
 
-	UI::Box toolbar_;
+		/// Sets the actual size and position of the toolbar
+		void finalize();
+		void draw(RenderTarget& dst) override;
+		void change_imageset(const ToolbarImageset& images);
+
+		/// A row of buttons and dropdown menus
+		UI::Box box;
+
+	private:
+		/// The set of background images
+		ToolbarImageset imageset;
+		/// How often the left and right images get repeated, calculated from the width of the box
+		int repeat;
+	} toolbar_;
+
+	// Map View menu on the toolbar
+	UI::Dropdown<MapviewMenuEntry> mapviewmenu_;
 	// No unique_ptr on purpose: 'minimap_' is a UniqueWindow, its parent will
 	// delete it.
 	MiniMap* minimap_;
 	MiniMap::Registry minimap_registry_;
 	QuickNavigation quick_navigation_;
 
-	// The currently enabled work area previews. They are keyed by the
-	// coordinate that the building that shows the work area is positioned.
-	std::map<Widelands::Coords, const WorkareaInfo*> work_area_previews_;
+	// The currently enabled work area previews
+	std::unordered_set<std::unique_ptr<WorkareaPreview>> workarea_previews_;
+	std::unique_ptr<Workareas> workareas_cache_;
+
+	std::map<Widelands::Ship*, Widelands::Coords> expedition_port_spaces_;
 
 	RoadBuildingOverlays road_building_overlays_;
+	RoadBuildingOverlays waterway_building_overlays_;
 
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
 	   graphic_resolution_changed_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<NoteSound>> sound_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShip>> shipnotes_subscriber_;
 	Widelands::EditorGameBase& egbase_;
 	uint32_t display_flags_;
 	uint32_t lastframe_;        //  system time (milliseconds)
 	uint32_t frametime_;        //  in millseconds
 	uint32_t avg_usframetime_;  //  in microseconds!
 
-	Widelands::CoordPath* buildroad_;  //  path for the new road
+	std::unique_ptr<Widelands::CoordPath> buildroad_;  //  path for the new road
 	Widelands::PlayerNumber road_build_player_;
 
-	UI::UniqueWindow::Registry debugconsole_;
+	std::unique_ptr<Widelands::CoordPath> buildwaterway_;
+	Widelands::PlayerNumber waterway_build_player_;
+	std::unique_ptr<WorkareaInfo> waterway_work_area_;
+
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
-	std::vector<const Image*> workarea_pics_;
 	BuildhelpOverlay buildhelp_overlays_[Widelands::Field::Buildhelp_None];
 };
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,7 +18,7 @@
 
 /*
  * The original version of the word wrapping algorithm was taken
- * from Wesnoth -- http://www.wesnoth.org
+ * from Wesnoth -- https://www.wesnoth.org
  */
 
 #include "graphic/wordwrap.h"
@@ -29,12 +29,38 @@
 
 #include "base/log.h"
 #include "graphic/color.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_io.h"
 #include "graphic/text_layout.h"
+
+namespace {
+std::string as_editorfont(const std::string& text, int ptsize, const RGBColor& clr) {
+	// UI Text is always bold due to historic reasons
+	static boost::format f(
+	   "<rt keep_spaces=1><p><font face=sans size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>");
+	f % ptsize;
+	f % clr.hex_value();
+	f % richtext_escape(text);
+	return f.str();
+}
+
+int text_width(const std::string& text, int ptsize) {
+	RGBColor color(0, 0, 0);
+	return UI::g_fh->render(as_editorfont(text, ptsize - UI::g_fh->fontset()->size_offset(), color))
+	   ->width();
+}
+
+int text_height(int ptsize) {
+	RGBColor font_color(0, 0, 0);
+	const UI::FontStyleInfo font_info("sans", font_color, ptsize, false, false, false, false);
+	return UI::g_fh
+	   ->render(as_richtext_paragraph(UI::g_fh->fontset()->representative_character(), font_info))
+	   ->height();
+}
+}  // namespace
 
 namespace UI {
 
@@ -42,7 +68,7 @@ WordWrap::WordWrap(int fontsize, const RGBColor& color, uint32_t gwrapwidth)
    : draw_caret_(false),
      fontsize_(fontsize),
      color_(color),
-     font_(RT::load_font(UI::g_fh1->fontset()->sans_bold(), fontsize_)) {
+     font_(RT::load_font(UI::g_fh->fontset()->sans_bold(), fontsize_)) {
 	wrapwidth_ = gwrapwidth;
 
 	if (wrapwidth_ < std::numeric_limits<uint32_t>::max()) {
@@ -299,7 +325,7 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t car
 
 	++where.y;
 
-	Align alignment = mirror_alignment(align);
+	Align alignment = mirror_alignment(align, g_fh->fontset()->is_rtl());
 
 	const int fontheight = text_height(fontsize_);
 	for (uint32_t line = 0; line < lines_.size(); ++line, where.y += fontheight) {
@@ -312,8 +338,8 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t car
 			point.x += wrapwidth_ - kLineMargin;
 		}
 
-		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(
-		   as_editorfont(lines_[line].text, fontsize_ - UI::g_fh1->fontset()->size_offset(), color_));
+		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
+		   as_editorfont(lines_[line].text, fontsize_ - UI::g_fh->fontset()->size_offset(), color_));
 		UI::correct_for_align(alignment, rendered_text->width(), &point);
 		rendered_text->draw(dst, point);
 

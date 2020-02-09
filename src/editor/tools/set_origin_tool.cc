@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2017 by the Widelands Development Team
+ * Copyright (C) 2009-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,11 +20,9 @@
 #include "editor/tools/set_origin_tool.h"
 
 #include "editor/editorinteractive.h"
-#include "logic/map.h"
 #include "wui/mapviewpixelconstants.h"
 
-int32_t EditorSetOriginTool::handle_click_impl(const Widelands::World&,
-                                               const Widelands::NodeAndTriangle<>& center,
+int32_t EditorSetOriginTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
                                                EditorInteractive& eia,
                                                EditorActionArgs* /* args */,
                                                Widelands::Map* map) {
@@ -35,13 +33,19 @@ int32_t EditorSetOriginTool::handle_click_impl(const Widelands::World&,
 }
 
 int32_t
-EditorSetOriginTool::handle_undo_impl(const Widelands::World&,
-                                      const Widelands::NodeAndTriangle<Widelands::Coords>& center,
+EditorSetOriginTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands::Coords>& center,
                                       EditorInteractive& eia,
                                       EditorActionArgs* /* args */,
                                       Widelands::Map* map) {
-	Widelands::Coords nc(
-	   map->get_width() - 1 - center.node.x, map->get_height() - 1 - center.node.y);
+	Widelands::Coords nc(map->get_width() - center.node.x, map->get_height() - center.node.y);
+
+	// Because of the triangle design of map, y is changed by an odd number.
+	// The x must be syncronized with the y when coordinate pair is applied
+	// and also when undoing an action like here.
+	if ((nc.y % 2) != 0) {
+		nc.x = nc.x - 1;
+	}
+	map->normalize_coords(nc);
 	map->set_origin(nc);
 	eia.map_changed(EditorInteractive::MapWas::kGloballyMutated);
 	eia.map_view()->scroll_to_field(Widelands::Coords(0, 0), MapView::Transition::Jump);

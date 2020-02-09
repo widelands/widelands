@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,13 +22,37 @@
 #include <cassert>
 
 #include <SDL.h>
+#include <boost/regex.hpp>
 
-#include "sound/sound_handler.h"
+#include "base/log.h"
+#include "helper.h"
+#include "io/fileread.h"
+#include "io/filesystem/layered_filesystem.h"
+#include "logic/game_data_error.h"
 
-/** Create an FXset and set it's \ref priority_
- * \param[in] prio  The desired priority (optional)
+/**
+ * Create an FXset
+ * \param path The directory the sound files are in, followed by the filename base
+ * \param random: Randomize the time last played a bit to prevent sound onslaught at game start
  */
-FXset::FXset(uint8_t const priority) : last_used_(0), priority_(priority) {
+FXset::FXset(const std::string& path, uint32_t random) : last_used_(random % 2000) {
+	const std::string dirname = FileSystem::fs_dirname(path.c_str());
+	const std::string basename = FileSystem::fs_filename(path.c_str());
+	paths_ = g_fs->get_sequential_files(dirname, basename, "ogg");
+
+	// Ensure that we have at least 1 file
+	if (paths_.empty()) {
+		throw Widelands::GameDataError(
+		   "FXset: No files matching the pattern '%s_<numbers>.ogg' found in directory %s\n",
+		   basename.c_str(), dirname.c_str());
+	}
+
+#ifndef NDEBUG
+	// Ensure that we haven't found any directories by mistake
+	for (const std::string& p : paths_) {
+		assert(!g_fs->is_directory(p));
+	}
+#endif
 }
 
 /// Delete all fxs to avoid memory leaks. This also frees the audio data.
@@ -43,27 +67,50 @@ FXset::~FXset() {
 	fxs_.clear();
 }
 
-/** Append a sound effect to the end of the fxset
- * \param[in] fx    The sound fx to append
- * \param[in] prio  Set previous \ref priority_ to new value (optional)
- */
-void FXset::add_fx(Mix_Chunk* const fx, uint8_t const prio) {
-	assert(fx);
-
-	priority_ = prio;
-	fxs_.push_back(fx);
+uint32_t FXset::ticks_since_last_play() const {
+	return SDL_GetTicks() - last_used_;
 }
 
-/** Get a sound effect from the fxset. \e Which variant of the fx is actually
- * given out is determined at random
- * \return  a pointer to the chosen effect; 0 if sound effects are
- * disabled or no fx is registered
- */
-Mix_Chunk* FXset::get_fx() {
-	if (g_sound_handler.get_disable_fx() || fxs_.empty())
+void FXset::load_sound_files() {
+	if (!paths_.empty()) {
+		// Load sounds from paths if this FX hasn't been played yet
+		for (const std::string& path : paths_) {
+			load_sound_file(path);
+		}
+		assert(fxs_.size() == paths_.size());
+		// We don't need the paths any more
+		paths_.clear();
+	}
+	assert(paths_.empty());
+}
+
+Mix_Chunk* FXset::get_fx(uint32_t random) {
+	load_sound_files();
+
+	if (fxs_.empty()) {
 		return nullptr;
+	}
+
+	assert(!fxs_.empty());
 
 	last_used_ = SDL_GetTicks();
 
-	return fxs_.at(g_sound_handler.rng_.rand() % fxs_.size());
+	return fxs_.at(random % fxs_.size());
+}
+
+void FXset::load_sound_file(const std::string& path) {
+	FileRead fr;
+	if (!fr.try_open(*g_fs, path)) {
+		log("WARNING: Could not open %s for reading!\n", path.c_str());
+		return;
+	}
+
+	if (Mix_Chunk* const m =
+	       Mix_LoadWAV_RW(SDL_RWFromMem(fr.data(fr.get_size(), 0), fr.get_size()), 1)) {
+		// Append a sound effect to the end of the fxset
+		assert(m);
+		fxs_.push_back(m);
+	} else {
+		log("FXset: loading sound effect file \"%s\" failed: %s\n", path.c_str(), Mix_GetError());
+	}
 }

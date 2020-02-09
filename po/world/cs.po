@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # Markus7cz <markus7cz@gmail.com>, 2008
@@ -8,18 +8,18 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-04-13 13:07+0000\n"
-"PO-Revision-Date: 2017-04-02 08:22+0000\n"
-"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-12-10 17:11+0000\n"
+"PO-Revision-Date: 2019-12-10 17:18+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 
-#: ../../data/world/critters/badger/init.lua:15
+#: ../../data/world/critters/badger/init.lua:64
 msgid "Badger"
 msgstr "Jezevec"
 
@@ -39,15 +39,11 @@ msgstr "Kamzík"
 msgid "Deer"
 msgstr "Jelen"
 
-#: ../../data/world/critters/duck/init.lua:19
+#: ../../data/world/critters/duck/init.lua:18
 msgid "Duck"
 msgstr "Kachna"
 
-#: ../../data/world/critters/elk/init.lua:20
-msgid "Elk"
-msgstr "Los"
-
-#: ../../data/world/critters/fox/init.lua:20
+#: ../../data/world/critters/fox/init.lua:19
 msgid "Fox"
 msgstr "Liška"
 
@@ -59,19 +55,23 @@ msgstr "Rys"
 msgid "Marten"
 msgstr "Kuna"
 
+#: ../../data/world/critters/moose/init.lua:19
+msgid "Moose"
+msgstr ""
+
 #: ../../data/world/critters/reindeer/init.lua:16
 msgid "Reindeer"
 msgstr "Sob"
 
-#: ../../data/world/critters/sheep/init.lua:19
+#: ../../data/world/critters/sheep/init.lua:18
 msgid "Sheep"
 msgstr "Ovce"
 
-#: ../../data/world/critters/stag/init.lua:20
+#: ../../data/world/critters/stag/init.lua:19
 msgid "Stag"
 msgstr "Srnec"
 
-#: ../../data/world/critters/wildboar/init.lua:19
+#: ../../data/world/critters/wildboar/init.lua:18
 msgid "Wild boar"
 msgstr "Kanec"
 
@@ -79,11 +79,11 @@ msgstr "Kanec"
 msgid "Wisent"
 msgstr "Zubr"
 
-#: ../../data/world/critters/wolf/init.lua:20
+#: ../../data/world/critters/wolf/init.lua:19
 msgid "Wolf"
 msgstr "Vlk"
 
-#: ../../data/world/immovables/bush1/init.lua:5
+#: ../../data/world/immovables/bush1/init.lua:103
 #: ../../data/world/immovables/bush2/init.lua:5
 #: ../../data/world/immovables/bush3/init.lua:5
 #: ../../data/world/immovables/bush4/init.lua:5
@@ -725,322 +725,339 @@ msgstr "Červený deštníkový strom (starý)"
 msgid "Red Umbrella Tree"
 msgstr "Červený deštníkový strom"
 
-#: ../../data/world/init.lua:19
+#: ../../data/world/init.lua:24
+msgid "Loading world: Resources (1/4)"
+msgstr ""
+
+#: ../../data/world/init.lua:29
+msgid "Loading world: Terrains (2/4)"
+msgstr ""
+
+#: ../../data/world/init.lua:39
+msgid "Summer"
+msgstr "Léto"
+
+#: ../../data/world/init.lua:45
+msgid "Wasteland"
+msgstr "Pustina"
+
+#: ../../data/world/init.lua:51
+msgid "Winter"
+msgstr "Zima"
+
+#: ../../data/world/init.lua:57
+msgid "Desert"
+msgstr "Poušť"
+
+#: ../../data/world/init.lua:66
+msgid "Loading world: Immovables (3/4)"
+msgstr ""
+
+#: ../../data/world/init.lua:75
 msgid "Miscellaneous"
 msgstr "Různé"
 
-#: ../../data/world/init.lua:26
+#: ../../data/world/init.lua:110
 msgid "Artifacts"
 msgstr "Artefakty"
 
-#: ../../data/world/init.lua:26
+#: ../../data/world/init.lua:110
 msgid "These immovables are used by the win condition “Artifacts”."
 msgstr "Tyto nemovitosti jsou použity pro typ vítězství \"Artefakty\"."
 
-#: ../../data/world/init.lua:33
+#: ../../data/world/init.lua:123
 msgid "Plants"
 msgstr "Rostliny"
 
-#: ../../data/world/init.lua:40
+#: ../../data/world/init.lua:144
 msgid "Standing Stones"
 msgstr "Menhiry"
 
-#: ../../data/world/init.lua:47
+#: ../../data/world/init.lua:175
 msgid "Rocks"
 msgstr "Skály"
 
-#: ../../data/world/init.lua:54
+#: ../../data/world/init.lua:208
 msgid "Dead Trees"
 msgstr "Suché stromy"
 
-#: ../../data/world/init.lua:61
+#: ../../data/world/init.lua:215
 msgid "Coniferous Trees"
 msgstr "Jehličnany"
 
-#: ../../data/world/init.lua:68
+#: ../../data/world/init.lua:222
 msgid "Deciduous Trees"
 msgstr "Listnaté stromy"
 
-#: ../../data/world/init.lua:75
+#: ../../data/world/init.lua:229
 msgid "Palm Trees"
 msgstr "Palmy"
 
-#: ../../data/world/init.lua:82
+#: ../../data/world/init.lua:236
 msgid "Wasteland Trees"
 msgstr "Pustinné stromy"
 
+#: ../../data/world/init.lua:273
+msgid "Loading world: Animals (4/4)"
+msgstr ""
+
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:90
+#: ../../data/world/init.lua:284
 msgid "Herbivores"
 msgstr "Býložravci"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:98
+#: ../../data/world/init.lua:303
 msgid "Carnivores"
 msgstr "Masožravci"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:106
+#: ../../data/world/init.lua:319
 msgid "Aquatic"
 msgstr "Vodní"
 
-#: ../../data/world/resources/init.lua:7
+#: ../../data/world/resources/init.lua:84
 msgid "Coal"
 msgstr "Uhlí"
 
-#: ../../data/world/resources/init.lua:27
+#: ../../data/world/resources/init.lua:100
 msgid "Gold"
 msgstr "Zlato"
 
-#: ../../data/world/resources/init.lua:41
+#: ../../data/world/resources/init.lua:116
 msgid "Iron"
 msgstr "Železo"
 
-#: ../../data/world/resources/init.lua:55
+#: ../../data/world/resources/init.lua:132
 msgid "Stones"
 msgstr "Kameny"
 
-#: ../../data/world/resources/init.lua:69
-#: ../../data/world/terrains/init.lua:364
-#: ../../data/world/terrains/init.lua:673
-#: ../../data/world/terrains/init.lua:969
-#: ../../data/world/terrains/init.lua:1264
+#: ../../data/world/resources/init.lua:148
+#: ../../data/world/terrains/init.lua:469
+#: ../../data/world/terrains/init.lua:792
+#: ../../data/world/terrains/init.lua:1102
+#: ../../data/world/terrains/init.lua:1413
 msgid "Water"
 msgstr "Voda"
 
-#: ../../data/world/resources/init.lua:83
+#: ../../data/world/resources/init.lua:164
 msgid "Fish"
 msgstr "Ryba"
 
-#: ../../data/world/terrains/init.lua:4
-msgid "Summer"
-msgstr "Léto"
-
-#: ../../data/world/terrains/init.lua:10
-msgid "Wasteland"
-msgstr "Pustina"
-
-#: ../../data/world/terrains/init.lua:16
-msgid "Winter"
-msgstr "Zima"
-
-#: ../../data/world/terrains/init.lua:22
-msgid "Desert"
-msgstr "Poušť"
-
-#: ../../data/world/terrains/init.lua:37
+#: ../../data/world/terrains/init.lua:158
 msgid "Meadow 1"
 msgstr "Louka 1"
 
 #. TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if
 #. possible.
-#: ../../data/world/terrains/init.lua:58 ../../data/world/terrains/init.lua:95
-#: ../../data/world/terrains/init.lua:116
-#: ../../data/world/terrains/init.lua:136
-#: ../../data/world/terrains/init.lua:204
-#: ../../data/world/terrains/init.lua:224
-#: ../../data/world/terrains/init.lua:390
-#: ../../data/world/terrains/init.lua:410
-#: ../../data/world/terrains/init.lua:430
-#: ../../data/world/terrains/init.lua:450
-#: ../../data/world/terrains/init.lua:470
-#: ../../data/world/terrains/init.lua:490
-#: ../../data/world/terrains/init.lua:526
-#: ../../data/world/terrains/init.lua:545
-#: ../../data/world/terrains/init.lua:700
-#: ../../data/world/terrains/init.lua:720
-#: ../../data/world/terrains/init.lua:740
-#: ../../data/world/terrains/init.lua:808
-#: ../../data/world/terrains/init.lua:827
-#: ../../data/world/terrains/init.lua:1024
-#: ../../data/world/terrains/init.lua:1044
-#: ../../data/world/terrains/init.lua:1064
-#: ../../data/world/terrains/init.lua:1084
-#: ../../data/world/terrains/init.lua:1104
-#: ../../data/world/terrains/init.lua:1123
+#: ../../data/world/terrains/init.lua:163
+#: ../../data/world/terrains/init.lua:187
+#: ../../data/world/terrains/init.lua:207
+#: ../../data/world/terrains/init.lua:227
+#: ../../data/world/terrains/init.lua:301
+#: ../../data/world/terrains/init.lua:321
+#: ../../data/world/terrains/init.lua:495
+#: ../../data/world/terrains/init.lua:517
+#: ../../data/world/terrains/init.lua:539
+#: ../../data/world/terrains/init.lua:559
+#: ../../data/world/terrains/init.lua:579
+#: ../../data/world/terrains/init.lua:599
+#: ../../data/world/terrains/init.lua:637
+#: ../../data/world/terrains/init.lua:656
+#: ../../data/world/terrains/init.lua:819
+#: ../../data/world/terrains/init.lua:839
+#: ../../data/world/terrains/init.lua:859
+#: ../../data/world/terrains/init.lua:933
+#: ../../data/world/terrains/init.lua:952
+#: ../../data/world/terrains/init.lua:1161
+#: ../../data/world/terrains/init.lua:1181
+#: ../../data/world/terrains/init.lua:1201
+#: ../../data/world/terrains/init.lua:1223
+#: ../../data/world/terrains/init.lua:1245
+#: ../../data/world/terrains/init.lua:1264
 msgid "likes trees"
 msgstr "má rád stromy"
 
-#: ../../data/world/terrains/init.lua:90
+#: ../../data/world/terrains/init.lua:182
 msgid "Meadow 2"
 msgstr "Louka 2"
 
-#: ../../data/world/terrains/init.lua:111
+#: ../../data/world/terrains/init.lua:202
 msgid "Meadow 3"
 msgstr "Louka 3"
 
-#: ../../data/world/terrains/init.lua:131
+#: ../../data/world/terrains/init.lua:222
 msgid "Meadow 4"
 msgstr "Louka 4"
 
-#: ../../data/world/terrains/init.lua:151
-#: ../../data/world/terrains/init.lua:1019
+#: ../../data/world/terrains/init.lua:242
+#: ../../data/world/terrains/init.lua:1156
 msgid "Steppe"
 msgstr "Step"
 
-#: ../../data/world/terrains/init.lua:167
+#: ../../data/world/terrains/init.lua:260
 msgid "Barren Steppe"
 msgstr "Holá step"
 
-#: ../../data/world/terrains/init.lua:183
-#: ../../data/world/terrains/init.lua:1059
+#: ../../data/world/terrains/init.lua:278
+#: ../../data/world/terrains/init.lua:1196
 msgid "Mountain Meadow"
 msgstr "Horská louka"
 
-#: ../../data/world/terrains/init.lua:198
-#: ../../data/world/terrains/init.lua:521
-#: ../../data/world/terrains/init.lua:803
-#: ../../data/world/terrains/init.lua:1099
+#: ../../data/world/terrains/init.lua:295
+#: ../../data/world/terrains/init.lua:632
+#: ../../data/world/terrains/init.lua:928
+#: ../../data/world/terrains/init.lua:1240
 msgid "Forested Mountain 1"
 msgstr "Zalesněná hora 1"
 
-#: ../../data/world/terrains/init.lua:218
-#: ../../data/world/terrains/init.lua:540
-#: ../../data/world/terrains/init.lua:822
-#: ../../data/world/terrains/init.lua:1118
+#: ../../data/world/terrains/init.lua:315
+#: ../../data/world/terrains/init.lua:651
+#: ../../data/world/terrains/init.lua:947
+#: ../../data/world/terrains/init.lua:1259
 msgid "Forested Mountain 2"
 msgstr "Zalesněná hora 2"
 
-#: ../../data/world/terrains/init.lua:238
-#: ../../data/world/terrains/init.lua:559
-#: ../../data/world/terrains/init.lua:841
-#: ../../data/world/terrains/init.lua:1138
+#: ../../data/world/terrains/init.lua:335
+#: ../../data/world/terrains/init.lua:670
+#: ../../data/world/terrains/init.lua:966
+#: ../../data/world/terrains/init.lua:1279
 msgid "Mountain 1"
 msgstr "Hora 1"
 
-#: ../../data/world/terrains/init.lua:254
-#: ../../data/world/terrains/init.lua:575
-#: ../../data/world/terrains/init.lua:857
-#: ../../data/world/terrains/init.lua:1154
+#: ../../data/world/terrains/init.lua:353
+#: ../../data/world/terrains/init.lua:688
+#: ../../data/world/terrains/init.lua:984
+#: ../../data/world/terrains/init.lua:1297
 msgid "Mountain 2"
 msgstr "Hora 2"
 
-#: ../../data/world/terrains/init.lua:270
-#: ../../data/world/terrains/init.lua:591
-#: ../../data/world/terrains/init.lua:873
-#: ../../data/world/terrains/init.lua:1170
+#: ../../data/world/terrains/init.lua:371
+#: ../../data/world/terrains/init.lua:706
+#: ../../data/world/terrains/init.lua:1002
+#: ../../data/world/terrains/init.lua:1315
 msgid "Mountain 3"
 msgstr "Hora 3"
 
-#: ../../data/world/terrains/init.lua:286
-#: ../../data/world/terrains/init.lua:607
-#: ../../data/world/terrains/init.lua:889
-#: ../../data/world/terrains/init.lua:1186
+#: ../../data/world/terrains/init.lua:389
+#: ../../data/world/terrains/init.lua:724
+#: ../../data/world/terrains/init.lua:1020
+#: ../../data/world/terrains/init.lua:1333
 msgid "Mountain 4"
 msgstr "Hora 4"
 
-#: ../../data/world/terrains/init.lua:301
-#: ../../data/world/terrains/init.lua:623
-#: ../../data/world/terrains/init.lua:919
-#: ../../data/world/terrains/init.lua:1248
+#: ../../data/world/terrains/init.lua:406
+#: ../../data/world/terrains/init.lua:742
+#: ../../data/world/terrains/init.lua:1052
+#: ../../data/world/terrains/init.lua:1397
 msgid "Beach"
 msgstr "Pláž"
 
-#: ../../data/world/terrains/init.lua:316
+#: ../../data/world/terrains/init.lua:421
 msgid "Swamp"
 msgstr "Bažina"
 
-#: ../../data/world/terrains/init.lua:331
-#: ../../data/world/terrains/init.lua:787
+#: ../../data/world/terrains/init.lua:436
+#: ../../data/world/terrains/init.lua:910
 msgid "Snow"
 msgstr "Sníh"
 
-#: ../../data/world/terrains/init.lua:347
+#: ../../data/world/terrains/init.lua:452
 msgid "Lava"
 msgstr "Láva"
 
-#: ../../data/world/terrains/init.lua:385
+#: ../../data/world/terrains/init.lua:490
 msgid "Ashes 1"
 msgstr "Popel 1"
 
-#: ../../data/world/terrains/init.lua:405
+#: ../../data/world/terrains/init.lua:512
 msgid "Ashes 2"
 msgstr "Popel 2"
 
-#: ../../data/world/terrains/init.lua:425
+#: ../../data/world/terrains/init.lua:534
 msgid "Hard Ground 1"
 msgstr "Tvrdá zem 1"
 
-#: ../../data/world/terrains/init.lua:445
+#: ../../data/world/terrains/init.lua:554
 msgid "Hard Ground 2"
 msgstr "Tvrdá zem 2"
 
-#: ../../data/world/terrains/init.lua:465
+#: ../../data/world/terrains/init.lua:574
 msgid "Hard Ground 3"
 msgstr "Tvrdá zem 3"
 
-#: ../../data/world/terrains/init.lua:485
+#: ../../data/world/terrains/init.lua:594
 msgid "Hard Ground 4"
 msgstr "Tvrdá zem 4"
 
-#: ../../data/world/terrains/init.lua:505
+#: ../../data/world/terrains/init.lua:614
 msgid "Igneous Rocks"
 msgstr "Lávové skály"
 
-#: ../../data/world/terrains/init.lua:639
+#: ../../data/world/terrains/init.lua:758
 msgid "Lava Rocks 1"
 msgstr "Lávové kameny 1"
 
-#: ../../data/world/terrains/init.lua:656
+#: ../../data/world/terrains/init.lua:775
 msgid "Lava Rocks 2"
 msgstr "Lávové kameny 2"
 
-#: ../../data/world/terrains/init.lua:695
+#: ../../data/world/terrains/init.lua:814
 msgid "Tundra 1"
 msgstr "Tundra 1"
 
-#: ../../data/world/terrains/init.lua:715
+#: ../../data/world/terrains/init.lua:834
 msgid "Tundra 2"
 msgstr "Tundra 2"
 
-#: ../../data/world/terrains/init.lua:735
+#: ../../data/world/terrains/init.lua:854
 msgid "Tundra 3"
 msgstr "Tundra 3"
 
-#: ../../data/world/terrains/init.lua:755
+#: ../../data/world/terrains/init.lua:874
 msgid "Tundra Taiga"
 msgstr "Tundra Tajga"
 
-#: ../../data/world/terrains/init.lua:771
+#: ../../data/world/terrains/init.lua:892
 msgid "Taiga"
 msgstr "Tajga"
 
-#: ../../data/world/terrains/init.lua:903
+#: ../../data/world/terrains/init.lua:1036
 msgid "Ice"
 msgstr "Led"
 
-#: ../../data/world/terrains/init.lua:935
+#: ../../data/world/terrains/init.lua:1068
 msgid "Ice Floes 1"
 msgstr "Kry 1"
 
-#: ../../data/world/terrains/init.lua:952
+#: ../../data/world/terrains/init.lua:1085
 msgid "Ice Floes 2"
 msgstr "Kry 2"
 
-#: ../../data/world/terrains/init.lua:990
+#: ../../data/world/terrains/init.lua:1123
 msgid "Desert 4"
 msgstr "Poušť 4"
 
-#: ../../data/world/terrains/init.lua:1005
+#: ../../data/world/terrains/init.lua:1140
 msgid "Dry Soil"
 msgstr "Vysušená země"
 
-#: ../../data/world/terrains/init.lua:1039
+#: ../../data/world/terrains/init.lua:1176
 msgid "Meadow"
 msgstr "Louka"
 
-#: ../../data/world/terrains/init.lua:1079
+#: ../../data/world/terrains/init.lua:1218
 msgid "High Mountain Meadow"
 msgstr "Vysokohorská louka"
 
-#: ../../data/world/terrains/init.lua:1200
+#: ../../data/world/terrains/init.lua:1349
 msgid "Desert 1"
 msgstr "Poušť 1"
 
-#: ../../data/world/terrains/init.lua:1216
+#: ../../data/world/terrains/init.lua:1365
 msgid "Desert 2"
 msgstr "Poušť 2"
 
-#: ../../data/world/terrains/init.lua:1232
+#: ../../data/world/terrains/init.lua:1381
 msgid "Desert 3"
 msgstr "Poušť 3"

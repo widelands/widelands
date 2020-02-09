@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,7 +32,7 @@
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/base.h"
-#include "wui/gamechatpanel.h"
+#include "wui/game_chat_panel.h"
 
 class FullscreenMenuInternetLobby : public FullscreenMenuBase {
 public:
@@ -50,8 +50,8 @@ private:
 	uint32_t butw_;
 	uint32_t buth_;
 	uint32_t lisw_;
-	uint32_t fs_;
 	uint32_t prev_clientlist_len_;
+	FxId new_client_fx_;
 	UI::Textarea title, clients_, opengames_;
 	UI::Textarea servername_;
 	UI::Button joingame_, hostgame_, back_;
@@ -75,6 +75,7 @@ private:
 	void server_doubleclicked();
 
 	void change_servername();
+	bool wait_for_ip();
 	void clicked_joingame();
 	void clicked_hostgame();
 

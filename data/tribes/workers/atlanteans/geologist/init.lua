@@ -12,8 +12,8 @@ animations = {
       fps = 10
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {11, 23}, 10)
-add_walking_animations(animations, "walkload", dirname, "walk", {11, 23}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {11, 23}, 10)
+add_directional_animation(animations, "walkload", dirname, "walk", {11, 23}, 10)
 
 
 tribes:new_worker_type {
@@ -35,15 +35,15 @@ tribes:new_worker_type {
       -- The specialized geologist command walks the geologist around his starting
       -- location, executing the search program from time to time.
       expedition = {
-         "geologist 15 5 search"
+         "repeatsearch=15 5 search"
       },
       -- Search program, executed when we have found a place to hack on
       search = {
-         "animation hacking 5000",
-         "animation idle 2000",
-         "play_sound sound/hammering geologist_hammer 192",
-         "animation hacking 3000",
-         "geologist_find"
+         "animate=hacking 5000",
+         "animate=idle 2000",
+         "playsound=sound/hammering/geologist_hammer 192",
+         "animate=hacking 3000",
+         "findresources"
       }
    },
 

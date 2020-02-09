@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,10 +23,16 @@
 #include <memory>
 #include <stdint.h>
 #include <string>
+#include <unordered_map>
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "logic/widelands.h"
 #include "scripting/lua_table.h"
+
+namespace Widelands {
+enum class AiType : uint8_t { kVeryWeak, kWeak, kNormal };
+}
 
 /// This struct is used to read out the data given in [aihints] section of a
 /// buildings conf file. It is used to tell the computer player about the
@@ -48,24 +54,8 @@ struct BuildingHints {
 		return mines_.c_str();
 	}
 
-	bool is_logproducer() const {
-		return log_producer_;
-	}
-
-	bool is_graniteproducer() const {
-		return granite_producer_;
-	}
-
-	bool mines_water() const {
-		return mines_water_;
-	}
-
 	bool get_needs_water() const {
 		return needs_water_;
-	}
-
-	bool for_recruitment() const {
-		return recruitment_;
 	}
 
 	bool is_space_consumer() const {
@@ -81,8 +71,20 @@ struct BuildingHints {
 		return mountain_conqueror_;
 	}
 
+	bool requires_supporters() const {
+		return requires_supporters_;
+	}
+
 	bool is_shipyard() const {
 		return shipyard_;
+	}
+
+	bool supports_seafaring() const {
+		return supports_seafaring_;
+	}
+
+	const std::string& collects_ware_from_map() const {
+		return collects_ware_from_map_;
 	}
 
 	uint32_t get_prohibited_till() const {
@@ -101,40 +103,60 @@ struct BuildingHints {
 		return mines_percent_;
 	}
 
-	int16_t get_very_weak_ai_limit() const {
-		return very_weak_ai_limit_;
-	}
-
-	int16_t get_weak_ai_limit() const {
-		return weak_ai_limit_;
-	}
+	int16_t get_ai_limit(Widelands::AiType) const;
 
 	void set_trainingsites_max_percent(int percent);
 
 	uint8_t trainingsites_max_percent() const;
 
 private:
-	std::string mines_;
-	bool log_producer_;
-	bool granite_producer_;
-	bool needs_water_;
-	bool mines_water_;
-	bool recruitment_;
-	bool space_consumer_;
-	bool expansion_;
-	bool fighting_;
-	bool mountain_conqueror_;
-	bool shipyard_;
-	int32_t prohibited_till_;
-	uint32_t basic_amount_;
-	int32_t forced_after_;
-	int8_t mines_percent_;
-	int16_t very_weak_ai_limit_;
-	int16_t weak_ai_limit_;
+	const std::string mines_;
+	const bool needs_water_;
+	const bool space_consumer_;
+	const bool expansion_;
+	const bool fighting_;
+	const bool mountain_conqueror_;
+	const bool shipyard_;
+	const bool supports_seafaring_;
+	const std::string collects_ware_from_map_;
+	const int32_t prohibited_till_;
+	const uint32_t basic_amount_;
+	const int32_t forced_after_;
+	const int8_t mines_percent_;
+	const int16_t very_weak_ai_limit_;
+	const int16_t weak_ai_limit_;
+	const int16_t normal_ai_limit_;
+	const bool requires_supporters_;
 	int trainingsites_max_percent_;
 	std::set<std::string> supported_production_;
 
 	DISALLOW_COPY_AND_ASSIGN(BuildingHints);
+};
+
+/// Hints common to wares and workers
+struct WareWorkerHints {
+	WareWorkerHints() = default;
+
+	/// Returns the preciousness of the ware/worker, or kInvalidWare if the tribe doesn't use the
+	/// ware/worker or the worker has no preciousness defined for the tribe.
+	int preciousness(const std::string& tribename) const;
+
+protected:
+	void read_preciousness(const std::string& name, const LuaTable& table);
+
+private:
+	// tribename, preciousness. No default.
+	std::unordered_map<std::string, int> preciousnesses_;
+};
+
+/// Hints for wares
+struct WareHints : WareWorkerHints {
+	explicit WareHints(const std::string& ware_name, const LuaTable& table);
+};
+
+/// Hints for workers
+struct WorkerHints : WareWorkerHints {
+	explicit WorkerHints(const std::string& worker_name, const LuaTable& table);
 };
 
 #endif  // end of include guard: WL_AI_AI_HINTS_H

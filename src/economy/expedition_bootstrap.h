@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -71,7 +71,7 @@ public:
 	                                   std::vector<WareInstance*>* return_wares);
 
 	// Changes the economy for the wares that are already in store.
-	void set_economy(Economy* economy);
+	void set_economy(Economy* economy, WareWorker);
 
 	// Returns the wares and workers currently waiting for the expedition.
 	std::vector<InputQueue*> queues() const;
@@ -87,8 +87,12 @@ public:
 	 * The actual data is stored in the buildingdata
 	 * packet, and there in the warehouse data packet.
 	 */
-	void
-	load(Warehouse& warehouse, FileRead& fr, Game& game, MapObjectLoader& mol, uint16_t version);
+	void load(Warehouse& warehouse,
+	          FileRead& fr,
+	          Game& game,
+	          MapObjectLoader& mol,
+	          const TribesLegacyLookupTable& tribes_lookup_table,
+	          uint16_t version);
 
 	/** Save this into a file.
 	 *
@@ -106,7 +110,8 @@ private:
 
 	/** The Expedition is bootstapped here. */
 	PortDock* const portdock_;  // not owned
-	Economy* economy_;
+	Economy* ware_economy_;
+	Economy* worker_economy_;
 
 	std::vector<std::unique_ptr<InputQueue>> queues_;
 

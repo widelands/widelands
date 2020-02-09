@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,34 +37,64 @@ struct InternetClient {
 	std::string build_id;
 	std::string game;
 	std::string type;
-	std::string points;  // Currently unused
 };
 
 /// A simple network game struct
 struct InternetGame {
 	std::string name;
 	std::string build_id;
-	bool connectable;
+	std::string connectable;
 };
 
 /**
  * The InternetGaming struct.
  */
 struct InternetGaming : public ChatProvider {
+
 	/// The only instance of InternetGaming -> the constructor is private by purpose!
 	static InternetGaming& ref();
 
 	void reset();
 
 	// Login and logout
+
 	void initialize_connection();
+
+	/**
+	 * Try to login on the metaserver.
+	 * @param nick The preferred username. Another username might be chosen by the metaserver if
+	 *             the requested one is already in use.
+	 * @param authenticator If \c registered is \c true, this is the password. Otherwise, it is some
+	 * unique
+	 *             id the server can use to identify the user.
+	 * @param metaserver The hostname of the metaserver.
+	 * @param port The port number of the metaserver.
+	 * @return Whether the login was successful.
+	 */
 	bool login(const std::string& nick,
-	           const std::string& pwd,
+	           const std::string& authenticator,
 	           bool registered,
 	           const std::string& metaserver,
 	           uint32_t port);
 	bool relogin();
 	void logout(const std::string& msgcode = "CONNECTION_CLOSED");
+
+	/**
+	 * Connects to the metaserver and checks the password without logging in.
+	 *
+	 * Note that the user might be logged in with another username and as unregistered
+	 * if the user account is already in use by another client.
+	 * @warning Resets the current connection.
+	 * @param nick The username.
+	 * @param pwd The password.
+	 * @param metaserver The hostname of the metaserver.
+	 * @param port The port number of the metaserver.
+	 * @return Whether the password was valid.
+	 */
+	bool check_password(const std::string& nick,
+	                    const std::string& pwd,
+	                    const std::string& metaserver,
+	                    uint32_t port);
 
 	/// \returns whether the client is logged in
 	bool logged_in() {
@@ -79,7 +109,7 @@ struct InternetGaming : public ChatProvider {
 		clientupdate_ = true;
 	}
 
-	void handle_metaserver_communication();
+	void handle_metaserver_communication(bool relogin_on_error = true);
 
 	// Game specific functions
 	/**
@@ -87,10 +117,24 @@ struct InternetGaming : public ChatProvider {
 	 * Contains two addresses when the host supports IPv4 and IPv6, one address when the host
 	 * only supports one of the protocols, no addresses when no join-request was sent to
 	 * the metaserver. "No address" means a default constructed address.
+	 * Also returns the IPs of the relay server when trying to host a game.
 	 * Use NetAddress::is_valid() to check whether a NetAddress has been default constructed.
 	 * @return The addresses.
 	 */
 	const std::pair<NetAddress, NetAddress>& ips();
+
+	/**
+	 * Blocks for some time until either the ips() method is able to return the IPs of the relay
+	 * or an error occurred or the timeout is met.
+	 * @return \c True iff ips() can return something.
+	 */
+	bool wait_for_ips();
+
+	/**
+	 * Returns the password required to connect to the relay server as host.
+	 */
+	const std::string relay_password();
+
 	void join_game(const std::string& gamename);
 	void open_game();
 	void set_game_playing();
@@ -151,6 +195,13 @@ struct InternetGaming : public ChatProvider {
 		return true;
 	}
 
+	void format_and_add_chat(const std::string& from,
+	                         const std::string& to,
+	                         bool system,
+	                         const std::string& msg);
+
+	bool valid_username(std::string);
+
 private:
 	InternetGaming();
 
@@ -168,17 +219,19 @@ private:
 	 */
 	void create_second_connection();
 
-	void handle_packet(RecvPacket& packet);
+	void handle_packet(RecvPacket& packet, bool relogin_on_error = true);
 	void handle_failed_read();
 
 	// conversion functions
 	bool str2bool(std::string);
 	std::string bool2str(bool);
 
-	void format_and_add_chat(const std::string& from,
-	                         const std::string& to,
-	                         bool system,
-	                         const std::string& msg);
+	/**
+	 * Does the real work of the login.
+	 * \param relogin Whether this is a relogin. Only difference is that
+	 *                on first login a greeting is shown.
+	 */
+	bool do_login(bool relogin = false);
 
 	/// The connection to the metaserver
 	std::unique_ptr<NetClient> net;
@@ -187,8 +240,12 @@ private:
 	enum { OFFLINE, CONNECTING, LOBBY, IN_GAME, COMMUNICATION_ERROR } state_;
 
 	/// data saved for possible relogin
-	std::string pwd_;
+	std::string authenticator_;
 	bool reg_;
+
+	/// Password for connecting as host to a game on the relay server
+	std::string relay_password_;
+
 	std::string meta_;
 	uint16_t port_;
 

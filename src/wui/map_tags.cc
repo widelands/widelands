@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2017 by the Widelands Development Team
+ * Copyright (C) 2016-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,9 +27,15 @@ const std::map<std::string, std::string> kMapTags = {
    /** TRANSLATORS: This is a map tag */
    {"official", _("Official")},
    /** TRANSLATORS: This is a map tag */
+   {"unofficial", _("Unofficial")},
+   /** TRANSLATORS: This is a map tag */
+   {"balanced", _("Balanced")},
+   /** TRANSLATORS: This is a map tag */
    {"unbalanced", _("Unbalanced")},
    /** TRANSLATORS: This is a map tag */
    {"seafaring", _("Seafaring")},
+   /** TRANSLATORS: This is a map tag */
+   {"ferries", _("Ferries")},
    /** TRANSLATORS: This is a map tag */
    {"artifacts", _("Artifacts")},
    /** TRANSLATORS: This is a map tag */

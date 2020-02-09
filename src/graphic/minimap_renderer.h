@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2017 by the Widelands Development Team
+ * Copyright (C) 2010-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -77,5 +77,8 @@ std::unique_ptr<Texture> draw_minimap(const Widelands::EditorGameBase& egbase,
                                       const Rectf& view_area,
                                       const MiniMapType& map_draw_type,
                                       MiniMapLayer layers);
+
+// Find an even multiplier to fit the map into 300px
+int scale_map(const Widelands::Map& map, bool zoom);
 
 #endif  // end of include guard: WL_GRAPHIC_MINIMAP_RENDERER_H

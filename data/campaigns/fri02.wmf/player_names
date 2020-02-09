@@ -1,0 +1,22 @@
+# Automatically created by Widelands bzr8439[frisians] (Release)
+
+[global]
+packet_version="2"
+
+[player_1]
+name="Reebaud"
+tribe="frisians"
+ai=
+closeable="false"
+
+[player_2]
+name="Murilius"
+tribe="empire"
+ai=
+closeable="false"
+
+[player_3]
+name="Kru-Gu´Lhar"
+tribe="barbarians"
+ai=
+closeable="false"

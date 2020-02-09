@@ -12,5 +12,5 @@ closeable="false"
 [player_2]
 name="Sparring Partner"
 tribe="empire"
-ai=
+ai="empty"
 closeable="false"

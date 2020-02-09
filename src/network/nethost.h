@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,19 +22,18 @@
 
 #include <map>
 #include <memory>
+#include <thread>
 
-#include "network/network.h"
+#include "network/bufferedconnection.h"
+#include "network/nethost_interface.h"
 
 /**
  * NetHost manages the client connections of a network game in which this computer
  * participates as a server.
- * This class tries to create sockets for IPv4 and IPv6.
+ * This class tries to create sockets for IPv4 and IPv6 for gaming in the local network.
  */
-class NetHost {
+class NetHost : public NetHostInterface {
 public:
-	/// IDs used to enumerate the clients.
-	using ConnectionId = uint32_t;
-
 	/**
 	 * Tries to listen on the given port.
 	 * \param port The port to listen on.
@@ -45,61 +44,47 @@ public:
 	/**
 	 * Closes the server.
 	 */
-	~NetHost();
+	~NetHost() override;
 
-	/**
-	 * Returns whether the server is started and is listening.
-	 * \return \c true if the server is listening, \c false otherwise.
-	 */
-	bool is_listening() const;
-
-	/**
-	 * Returns whether the given client is connected.
-	 * \param The id of the client to check.
-	 * \return \c true if the connection is open, \c false otherwise.
-	 */
-	bool is_connected(ConnectionId id) const;
+	// Inherited from NetHostInterface
+	bool is_connected(ConnectionId id) const override;
+	void close(ConnectionId id) override;
+	bool try_accept(ConnectionId* new_id) override;
+	std::unique_ptr<RecvPacket> try_receive(ConnectionId id) override;
+	void send(ConnectionId id,
+	          const SendPacket& packet,
+	          NetPriority priority = NetPriority::kNormal) override;
+	void send(const std::vector<ConnectionId>& ids,
+	          const SendPacket& packet,
+	          NetPriority priority = NetPriority::kNormal) override;
 
 	/**
 	 * Stops listening for connections.
 	 */
 	void stop_listening();
 
-	/**
-	 * Closes the connection to the given client.
-	 * \param id The id of the client to close the connection to.
-	 */
-	void close(ConnectionId id);
-
-	/**
-	 * Tries to accept a new client.
-	 * \param new_id The connection id of the new client will be stored here.
-	 * \return \c true if a client has connected, \c false otherwise.
-	 *   The given id is only modified when \c true is returned.
-	 *   Calling this on a closed server will return false.
-	 *   The returned id is always greater than 0.
-	 */
-	bool try_accept(ConnectionId* new_id);
-
-	/**
-	 * Tries to receive a packet.
-	 * \param id The connection id of the client that should be received.
-	 * \param packet A packet that should be overwritten with the received data.
-	 * \return \c true if a packet is available, \c false otherwise.
-	 *   The given packet is only modified when \c true is returned.
-	 *   Calling this on a closed connection will return false.
-	 */
-	bool try_receive(ConnectionId id, RecvPacket* packet);
-
-	/**
-	 * Sends a packet.
-	 * Calling this on a closed connection will silently fail.
-	 * \param id The connection id of the client that should be sent to.
-	 * \param packet The packet to send.
-	 */
-	void send(ConnectionId id, const SendPacket& packet);
-
 private:
+	/**
+	 * Returns whether the server is started and is listening.
+	 * \return \c true if the server is listening, \c false otherwise.
+	 */
+	// Feel free to make this method public if you need it
+	bool is_listening() const;
+
+	/**
+	 * Starts an asynchronous accept on the given acceptor.
+	 * If someone wants to connect, establish a connection
+	 * and add the connection to accept_queue_ and continue waiting.
+	 * @param acceptor The acceptor we should be listening on.
+	 */
+#if BOOST_VERSION >= 106600
+	void start_accepting(boost::asio::ip::tcp::acceptor& acceptor);
+#else
+	void start_accepting(
+	   boost::asio::ip::tcp::acceptor& acceptor,
+	   std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*>& pair);
+#endif
+
 	/**
 	 * Tries to listen on the given port.
 	 * If it fails, is_listening() will return \c false.
@@ -107,37 +92,42 @@ private:
 	 */
 	explicit NetHost(uint16_t port);
 
+	/**
+	 * Prepare the given acceptor for accepting connections for the given
+	 * network protocol and port.
+	 * @param acceptor The acceptor to prepare.
+	 * @param endpoint The IP version, transport protocol and port number we should listen on.
+	 * @return \c True iff the acceptor is listening now.
+	 */
 	bool open_acceptor(boost::asio::ip::tcp::acceptor* acceptor,
 	                   const boost::asio::ip::tcp::endpoint& endpoint);
 
-	/**
-	 * Helper structure to store variables about a connected client.
-	 */
-	struct Client {
-		/**
-		 * Initializes the structure with the given socket.
-		 * \param sock The socket to listen on. The socket is moved by this
-		 *             constructor so the given socket is no longer valid.
-		 */
-		explicit Client(boost::asio::ip::tcp::socket&& sock);
-
-		/// The socket to send/receive with.
-		boost::asio::ip::tcp::socket socket;
-		/// The deserializer to feed the received data to. It will transform it into data packets.
-		Deserializer deserializer;
-	};
-
-	/// A map linking client ids to the respective data about the clients.
+	/// A map linking client ids to the respective network connections.
 	/// Client ids not in this map should be considered invalid.
-	std::map<NetHost::ConnectionId, Client> clients_;
+	std::map<NetHostInterface::ConnectionId, std::unique_ptr<BufferedConnection>> clients_;
 	/// The next client id that will be used
-	NetHost::ConnectionId next_id_;
+	NetHostInterface::ConnectionId next_id_;
 	/// An io_service needed by boost.asio. Primary needed for async operations.
 	boost::asio::io_service io_service_;
 	/// The acceptor we get IPv4 connection requests to.
 	boost::asio::ip::tcp::acceptor acceptor_v4_;
 	/// The acceptor we get IPv6 connection requests to.
 	boost::asio::ip::tcp::acceptor acceptor_v6_;
+
+#if BOOST_VERSION < 106600
+	/// Socket and unconnected BuffereConnection that will be used for accepting IPv4 connections
+	std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*> accept_pair_v4_;
+	/// Socket and unconnected BuffereConnection that will be used for accepting IPv6 connections
+	std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*> accept_pair_v6_;
+#endif
+
+	/// A thread used to wait for connections on the acceptor.
+	std::thread asio_thread_;
+	/// The new connections the acceptor accepted. Will be moved to clients_
+	/// when try_accept() is called by the using class.
+	std::queue<std::unique_ptr<BufferedConnection>> accept_queue_;
+	/// A mutex avoiding concurrent access to accept_queue_.
+	std::mutex mutex_accept_;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETHOST_H

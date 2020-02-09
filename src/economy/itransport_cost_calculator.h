@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,6 +43,6 @@ public:
 private:
 	DISALLOW_COPY_AND_ASSIGN(ITransportCostCalculator);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_ITRANSPORT_COST_CALCULATOR_H

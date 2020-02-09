@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -94,8 +94,6 @@ Coords read_coords_32(StreamRead* stream_read, const Extent& extent);
 /// invalidity, as defined by Coords::null.
 Coords read_coords_32_allow_null(StreamRead* fr, const Extent& extent);
 
-Area<Coords, uint16_t> read_area_48(StreamRead* fr, const Extent& extent);
-
 // Writes 'd' to 'wr'.
 void write_direction_8(StreamWrite* wr, Direction d);
 
@@ -104,9 +102,6 @@ void write_direction_8_allow_null(StreamWrite* wr, Direction d);
 
 // Writes 'c' to 'wr'.
 void write_coords_32(StreamWrite* wr, const Coords& c);
-
-// Writes 'area' to 'wr'.
-void write_area_48(StreamWrite* wr, const Area<Coords, uint16_t>& area);
 
 }  // namespace Widelands
 

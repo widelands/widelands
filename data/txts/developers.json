@@ -18,8 +18,8 @@
 			"entries":[
 				{
 					"subheading": "Graphics",
-					"members":[
-						"Chuck Wilder (chuckw)"
+					"translate":[
+						"vacant"
 					]
 				},
 				{
@@ -109,7 +109,17 @@
 						"Janosch Peters",
 						"Klaus Halfmann (Hasi50)",
 						"Philipp Klaus Krause (PkK)",
-						"Notabilis"
+						"Notabilis",
+						"Jukka Pakarinen",
+						"Evgeny Kapun",
+						"ypopezios",
+						"Toni Förster (stonerl)",
+						"Arty",
+						"Benedikt Straub (Nordfriese)",
+						"Lucki from Holarse.de",
+						"Tomasz Turowski (Niektóry)",
+						"Antonino Siena (nifker)",
+						"Jonas Mörschbach (jmoerschbach)"
 					]
 				}
 			]
@@ -145,14 +155,15 @@
 						"Astuur",
 						"Gerrit Familiegrosskopf (kingcreole)",
 						"Florian Angermeier (fraang)",
-						"DragonAtma"
+						"DragonAtma",
+						"Benedikt Straub (Nordfriese)"
 					]
 				}
 			]
 		},
 		{
 			"heading": "Musicians",
-			"image": "images/wui/overlays/workarea123.png",
+			"image": "images/wui/buildings/toggle_workarea.png",
 			"entries":[
 				{
 					"members":[
@@ -171,7 +182,7 @@
 		},
 		{
 			"heading": "Sound Effects",
-			"image": "images/wui/overlays/workarea123.png",
+			"image": "images/wui/buildings/toggle_workarea.png",
 			"entries":[
 				{
 					"members":[
@@ -179,7 +190,8 @@
 						"Peter Schwanemann (Nasenbaer)",
 						"Stephan",
 						"Adam Piggott (_aD)",
-						"Stanisław Gackowski (Soeb)"
+						"Stanisław Gackowski (Soeb)",
+						"Tada"
 					]
 				}
 			]
@@ -207,7 +219,9 @@
 						"Robnick",
 						"wl-zocker",
 						"king of nowhere",
-						"kaputtnik"
+						"kaputtnik",
+						"Stephan Lutz (hessenfarmer)",
+						"Benedikt Straub (Nordfriese)"
 					]
 				}
 			]
@@ -217,7 +231,7 @@
 			"image": "images/ui_basic/ls_wlmap.png",
 			"entries":[
 				{
-					"subheading": "Barbarian",
+					"subheading": "Barbarians",
 					"members":[
 						"Bastian Rapp",
 						"Alexander Kahl (wolfpac)",
@@ -227,14 +241,21 @@
 				{
 					"subheading": "Empire",
 					"members":[
+						"Peter Schwanemann (Nasenbaer)",
+						"Stephan Lutz (hessenfarmer)"
+					]
+				},
+				{
+					"subheading": "Atlanteans",
+					"members":[
+						"Holger Rapp (SirVer)",
 						"Peter Schwanemann (Nasenbaer)"
 					]
 				},
 				{
-					"subheading": "Atlantean",
+					"subheading": "Frisians",
 					"members":[
-						"Holger Rapp (SirVer)",
-						"Peter Schwanemann (Nasenbaer)"
+						"Benedikt Straub (Nordfriese)"
 					]
 				}
 			]
@@ -258,7 +279,8 @@
 					"subheading": "Fedora Linux",
 					"members":[
 						"Karol Trzcionka",
-						"Jochen Wiedmann"
+						"Jochen Wiedmann",
+						"Hans de Goede"
 					]
 				},
 				{
@@ -274,12 +296,21 @@
 					]
 				},
 				{
+					"subheading": "Flatpak",
+					"members":[
+						"scx"
+					]
+				},
+				{
 					"subheading": "Mac OS X",
 					"members":[
+						"Holger Rapp (SirVer)",
 						"Philipp Engelhard",
 						"Pierre Salagnac (Tarou)",
 						"Wolf St. Kappesser",
-						"David Allwicher (aber)"
+						"David Allwicher (aber)",
+						"Toni Förster (stonerl)",
+						"Ken Cunningham"
 					]
 				},
 				{
@@ -373,6 +404,9 @@
 					"members":[
 						"Matt Howe (mdhowe)",
 						"Samuel Tilly (eldamar)",
+						"WorldSavior"
+					],
+					"translate":[
 						"and many, many more (thank you for everything you've done)"
 					]
 				}

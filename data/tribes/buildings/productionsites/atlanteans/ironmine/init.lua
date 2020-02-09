@@ -19,6 +19,10 @@ tribes:new_productionsite_type {
       planks = 2
    },
 
+   indicate_workarea_overlaps = {
+      atlanteans_ironmine = false,
+   },
+
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
@@ -57,21 +61,36 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
          descname = _"mining iron",
          actions = {
-            "sleep=45000",
+            -- time total: 105 + 5 x 3.6
             "return=skipped unless economy needs iron_ore",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "animate=working 20000",
+            "sleep=35000",
+            "call=mine_produce",
+            "call=mine_produce",
+            "call=mine_produce",
+            "call=mine_produce",
+            "call=mine_produce",
+            "return=no_stats"
+         },
+      },
+      mine_produce = {
+         descname = _"mining iron",
+         actions = {
+            "animate=working 14000",
             "mine=iron 4 100 5 2",
             "produce=iron_ore",
-            "animate=working 20000",
-            "mine=iron 4 100 5 2",
-            "produce=iron_ore:2",
-            "animate=working 20000",
-            "mine=iron 4 100 5 2",
-            "produce=iron_ore:2"
+         }
+      },
+      encyclopedia = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
+            "produce=iron_ore:5",
          }
       },
    },
+
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
       title = _"No Iron",

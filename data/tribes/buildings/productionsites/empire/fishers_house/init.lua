@@ -26,6 +26,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
+      collects_ware_from_map = "fish",
       needs_water = true,
       prohibited_till = 410
    },
@@ -38,13 +39,17 @@ tribes:new_productionsite_type {
       "fish"
    },
 
+   indicate_workarea_overlaps = {
+      empire_fishers_house = false,
+   },
+
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start fishing because ...
          descname = _"fishing",
          actions = {
-            "sleep=17000",
-            "worker=fish"
+            "callworker=fish",
+            "sleep=10000"
          }
       },
    },

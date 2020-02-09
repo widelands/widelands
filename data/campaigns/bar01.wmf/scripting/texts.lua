@@ -2,8 +2,7 @@
 -- Some formating functions
 -- =========================
 
-include "scripting/formatting.lua"
-include "scripting/format_scenario.lua"
+include "scripting/richtext_scenarios.lua"
 
 function thron(title, text)
    return speech("map:chieftain.png", "2F9131", title, text)
@@ -23,8 +22,8 @@ obj_build_rangers = {
    title = _"Build two ranger’s huts",
    number = 1,
    body = objective_text(_"Build two ranger’s huts",
-      listitem_bullet(_"Build a ranger’s hut next to each lumberjack’s hut.") ..
-      listitem_arrow(_"Naturally, trees only grow at a slow rate. To make sure you have enough logs, you have to build rangers.")
+      li(_"Build a ranger’s hut next to each lumberjack’s hut.") ..
+      li_arrow(_"Naturally, trees only grow at a slow rate. To make sure you have enough logs, you have to build rangers.")
    )
 }
 
@@ -33,8 +32,8 @@ obj_claim_northeastern_rocks = {
    title = _"Expand north-east and build a quarry",
    number = 1,
    body = objective_text(_"Expand north-east to the rocks",
-      listitem_bullet(_"Build military buildings (like sentries or barriers) to expand your territory.") ..
-      listitem_bullet(_"Get to the rocks north-east from you and build a quarry there."))
+      li(_"Build military buildings (like sentries or barriers) to expand your territory.") ..
+      li(_"Get to the rocks north-east from you and build a quarry there."))
 }
 
 obj_build_mines = {
@@ -42,21 +41,19 @@ obj_build_mines = {
    title = _"Start building mines on the mountain",
    number = 2,
    body = objective_text(_"Build coal and iron mines",
-      listitem_bullet(_"Build a coal mine and an iron mine.") ..
-      listitem_arrow(_"To do so, place a flag up on the mountain’s flank to the east (on mountain terrain though, not mountain meadow). When you click on the new flag, you can send geologists there. Because the flag is on a mountain, the geologists will search for ores; otherwise, they would search for water. Then build a mine for both kinds of resources that they will find, choosing the appropriate mine to be built:") ..
-      "</rt>" ..
-      rt("image=tribes/immovables/resi_coal1/idle_00.png", p(_"a bit of coal")) ..
-      rt("image=tribes/immovables/resi_coal2/idle_00.png", p(_"a lot of coal")) ..
-      rt("image=tribes/immovables/resi_iron1/idle_00.png", p(_"a bit of iron")) ..
-      rt("image=tribes/immovables/resi_iron2/idle_00.png", p(_"a lot of iron")) ..
-      rt("image=tribes/immovables/resi_gold1/idle_00.png", p(_"a bit of gold")) ..
-      rt("image=tribes/immovables/resi_gold2/idle_00.png", p(_"a lot of gold")) ..
-      rt("image=tribes/immovables/resi_stones1/idle_00.png", p(_"a bit of granite")) ..
-      rt("image=tribes/immovables/resi_stones2/idle_00.png", p(_"a lot of granite")) ..
-      rt("image=tribes/immovables/resi_water1/idle_00.png", p(_"water")) ..
-      rt("image=tribes/immovables/resi_none/idle_00.png", p(_"nothing was found here")) ..
-      "<rt>" ..
-         p(_[[Mines can only be built on mountain terrain. Suitable places for mines are displayed as orange mine symbols.]]))
+      li(_"Build a coal mine and an iron mine.") ..
+      li_arrow(_"To do so, place a flag up on the mountain’s flank to the east (on mountain terrain though, not mountain meadow). When you click on the new flag, you can send geologists there. Because the flag is on a mountain, the geologists will search for ores; otherwise, they would search for water. Then build a mine for both kinds of resources that they will find, choosing the appropriate mine to be built:") ..
+      li_object("barbarians_resi_coal_1", _"a bit of coal") ..
+      li_object("barbarians_resi_coal_2", _"a lot of coal") ..
+      li_object("barbarians_resi_iron_1", _"a bit of iron") ..
+      li_object("barbarians_resi_iron_2", _"a lot of iron") ..
+      li_object("barbarians_resi_gold_1", _"a bit of gold") ..
+      li_object("barbarians_resi_gold_2", _"a lot of gold") ..
+      li_object("barbarians_resi_stones_1", _"a bit of granite") ..
+      li_object("barbarians_resi_stones_2", _"a lot of granite") ..
+      li_object("barbarians_resi_water", _"water") ..
+      li_object("barbarians_resi_none", _"nothing was found here") ..
+      p(_[[Mines can only be built on mountain terrain. Suitable places for mines are displayed as orange mine symbols.]]))
 }
 
 obj_basic_food = {
@@ -64,9 +61,8 @@ obj_basic_food = {
    title = _"Provide your miners with food",
    number = 3,
    body = objective_text(_"Build a hunter’s hut, a gamekeeper’s hut and a tavern",
-      listitem_bullet(_"In order to work, your miners need food.") ..
-      listitem_arrow(_"A hunter can hunt down animals, while a gamekeeper prevents them from becoming extinct. The meat is then processed in a tavern into lunches for your miners.") .. " " ..
-      _([[This is only the first example of a ware which has to be refined before being used in a secondary building – others will follow.]]))
+      li(_"In order to work, your miners need food.") ..
+      li_arrow(join_sentences(_([[A hunter can hunt down animals, while a gamekeeper prevents them from becoming extinct. The meat is then processed in a tavern into lunches for your miners.]]), _([[This is only the first example of a ware which has to be refined before being used in a secondary building – others will follow.]]))))
 }
 
 obj_begin_farming = {
@@ -90,11 +86,11 @@ obj_enhance_buildings = {
    title = _"Enhance buildings and build a micro brewery",
    number = 3,
    body = objective_text(_[[Enhance a mine and the tavern, and build a micro brewery.]],
-      listitem_bullet(_"Enhance the coal mine or the iron mine to a deep mine, and enhance the tavern to an inn.") ..
-      listitem_bullet(_"Also build a micro brewery.") ..
-      listitem_arrow(_"A normal mine can only dig up about one third of all the resources that lie beneath it; then it must be enhanced to a deep mine in order to keep it working properly. To enhance a building, choose it and then click the appropriate button in the appearing window.")  ..
-      listitem_arrow(_"Workers gain experience by successful work. With enough experience, they become more advanced workers, who are necessary to operate the enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building!") ..
-      listitem_arrow(_"Such buildings usually have greater demands than the basic kind of that building – for instance, deep mines need snacks instead of rations. You will have to enhance your tavern to an inn in order to produce snacks out of pitta bread AND a second kind of food (meat or fish) AND beer.") ..
+      li(_"Enhance the coal mine or the iron mine to a deep mine, and enhance the tavern to an inn.") ..
+      li(_"Also build a micro brewery.") ..
+      li_arrow(_"A normal mine can only dig up about one third of all the resources that lie beneath it; then it must be enhanced to a deep mine in order to keep it working properly. To enhance a building, choose it and then click the appropriate button in the appearing window.")  ..
+      li_arrow(_"Workers gain experience by successful work. With enough experience, they become more advanced workers, who are necessary to operate the enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building!") ..
+      li_arrow(_"Such buildings usually have greater demands than the basic kind of that building – for instance, deep mines need snacks instead of rations. You will have to enhance your tavern to an inn in order to produce snacks out of pitta bread AND a second kind of food (meat or fish) AND beer.") ..
       _"You may of course enhance all mines to deep mines instantly given you have the workers – bigger mines work a bit faster, smaller mines need cheaper food. It’s up to you which strategy you prefer.")
 }
 
@@ -103,9 +99,8 @@ obj_better_material_1 = {
    title = _"Build a wood hardener",
    number = 1,
    body = objective_text(_"Build a wood hardener",
-      _([[Bigger and better buildings – including all military ones – require better building materials. They cannot be built out of simple logs – the logs have to be refined to blackwood by a wood hardener first. Always remember to build a wood hardener before you run out of blackwood, as without it you cannot expand.]])
-      .. paragraphdivider() ..
-      listitem_bullet(_"Build a wood hardener"))
+      p(_([[Bigger and better buildings – including all military ones – require better building materials. They cannot be built out of simple logs – the logs have to be refined to blackwood by a wood hardener first. Always remember to build a wood hardener before you run out of blackwood, as without it you cannot expand.]])) ..
+      li(_"Build a wood hardener"))
 }
 
 obj_better_material_2 = {
@@ -113,16 +108,11 @@ obj_better_material_2 = {
    title = _"Build a lime kiln and coal economy",
    number = 3,
    body = objective_text(_"Build a lime kiln fed by a well, and by a charcoal kiln or by a coal mine",
-      _([[Better buildings may also require other improved materials besides blackwood. One of these is grout, which is produced out of granite, water and coal by a lime-burner.]])
-      .. paragraphdivider() ..
-      _([[You can obtain water by building a well upon a water source, which your geologists can discover when you send them to any flag that is not on a mountain.]])
-      ..paragraphdivider() ..
-      "</p></rt>" ..
-      rt("image=images/wui/fieldaction/menu_geologist.png", p(_"In order to call a geologist to search for water, click on a flag in the area that you want him to search and then on the button labeled ‘Send geologist to explore site’.")
-      .. paragraphdivider() ..
-      _([[Coal can be obtained by building a charcoal kiln or a coal mine. Burning charcoal out of logs is slow. You should only build a charcoal kiln when no coal is available.]])
-      .. paragraphdivider() ..
-      listitem_bullet(_"Build a lime kiln and a well. Additionally, build either a charcoal kiln or a coal mine for coal supply.")))
+      p(_([[Better buildings may also require other improved materials besides blackwood. One of these is grout, which is produced out of granite, water and coal by a lime-burner.]])) ..
+      p(_([[You can obtain water by building a well upon a water source, which your geologists can discover when you send them to any flag that is not on a mountain.]])) ..
+      li_image("images/wui/fieldaction/menu_geologist.png", _"In order to call a geologist to search for water, click on a flag in the area that you want him to search and then on the button labeled ‘Send geologist to explore site’.") ..
+      p(_([[Coal can be obtained by building a charcoal kiln or a coal mine. Burning charcoal out of logs is slow. You should only build a charcoal kiln when no coal is available.]])) ..
+      li(_"Build a lime kiln and a well. Additionally, build either a charcoal kiln or a coal mine for coal supply."))
 }
 
 obj_better_material_3 = {
@@ -130,9 +120,8 @@ obj_better_material_3 = {
    title = _"Build a reed yard",
    number = 1,
    body = objective_text(_"Build a reed yard",
-      _([[The third material necessary for improved buildings is thatch reed, used to cover roofs. Thatch reed is planted by a gardener around his building, the reed yard.]])
-      .. paragraphdivider() ..
-      listitem_bullet(_"Build a reed yard"))
+      p(_([[The third material necessary for improved buildings is reed, used to cover roofs. Reed fields are planted by a gardener around his building, the reed yard.]])) ..
+      li(_"Build a reed yard"))
 }
 
 obj_build_cattlefarm = {
@@ -140,11 +129,9 @@ obj_build_cattlefarm = {
    title = _"Build a cattle farm",
    number = 1,
    body = objective_text(_"Build a cattle farm",
-      _([[When roads are under heavy load for a long time, one carrier is usually not enough to transport goods swiftly. Traffic jams are the consequence. Such roads therefore employ a second carrier: an ox that helps to carry the wares. This doubles the transport capacity.]])
-      .. paragraphdivider() ..
-      _([[Oxen are bred in cattle farms out of wheat and water.]])
-      .. paragraphdivider() ..
-      listitem_bullet(_"Build a cattle farm"))
+      p(_([[When roads are under heavy load for a long time, one carrier is usually not enough to transport goods swiftly. Traffic jams are the consequence. Such roads therefore employ a second carrier: an ox that helps to carry the wares. This doubles the transport capacity.]])) ..
+      li_arrow(_([[Oxen are bred in cattle farms out of wheat and water.]])) ..
+      li(_"Build a cattle farm"))
 }
 
 
@@ -166,34 +153,31 @@ briefing_msg_01 = {
 
 briefing_msg_02 = {
    title = _"The Story Begins",
-   body = thron(
+   body = thron("",
       -- TRANSLATORS: Thron
       _[[We can see the raging flames that swallow Al’thunran from here, miles away.]]
       .. paragraphdivider() ..
       -- TRANSLATORS: Thron
       _[[The red lights flash in the darkness and dance to the rhythm of the war drums that haunt me even in my nightmares.]]),
-   field = al_thunran,
    position = "topleft",
-   scroll_back = true
 }
 
 
 briefing_msg_03 = {
    title = _"The Story Begins",
-   body = thron(
+   body = thron("",
       -- TRANSLATORS: Thron
       _[[My father’s bones rest peacefully in the ground on which he once ended the senseless spilling of blood that had arisen amongst us. It pains me that his peace only endured for one generation.]]
       .. paragraphdivider() ..
       -- TRANSLATORS: Thron
       _[[Boldreth, my loyal companion and friend is a source of peace and comfort to me in these dark times. He keeps my spirits high and those of my warriors awake, preventing greed or despair from destroying the bonds between us as well.]]),
-   field = grave,
    position = "topleft",
 }
 
 
 briefing_msg_04 = {
    title = _"The Story Begins",
-   body = thron(
+   body = thron("",
       -- TRANSLATORS: Thron
       _[[As father told me, there are times to fight and times to lie and wait, trying not to fall asleep or die before the right time comes. And so I do wait.]]),
    position = "topleft",
@@ -215,7 +199,7 @@ briefing_msg_05 = {
 
 briefing_msg_06 = {
    title = _"Thron is Contemplating the War",
-   body = thron(
+   body = thron("",
       -- TRANSLATORS: Thron
       _([[Today my hunters brought men, women and little children before me who had hidden out in the forests, trying to escape the war, hate and revenge that rage among the tribes fighting each other like in olden times, when we were no more but wild beasts driven and controlled by instincts. None of my brothers will ever gain and hold control over the wooden throne, none of the tribes will be strong enough to subdue the other. There will be no end to this slaughter, unless… is this it? As father told me?]])
       .. paragraphdivider() ..
@@ -227,7 +211,7 @@ briefing_msg_06 = {
 
 briefing_msg_07 = {
    title = _"Thron is Considering the Future",
-   body = thron(
+   body = thron("",
       -- TRANSLATORS: Thron
       _([[Boldreth seems more and more torn as the days go by. The spirits of my fellows sink as the cold season approaches, and we are still living in no more than huts and barracks. I never intended to stay out here in the wilderness for so long – but I never thought my brothers would engage in this senseless battle for so long either.]])
       .. paragraphdivider() ..

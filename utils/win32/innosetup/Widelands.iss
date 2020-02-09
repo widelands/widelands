@@ -22,15 +22,12 @@
 
 ;Version String
 #define Name "Widelands"
-#define VerName "Widelands Build19"
-#define VerNumber "0.19.0.1"
-#define Copyright "Widelands Development Team 2001-2017"
-#define SetupFileName "Widelands-Build19-win64"
+#define Copyright "Widelands Development Team 2001-2019"
 
 ;General String
 #define Publisher "Widelands Development Team"
-#define URL "http://www.widelands.org"
-#define HelpURL "http://wl.widelands.org/wiki/MainPage/"
+#define URL "widelands.org"
+#define HelpURL "widelands.org/wiki/MainPage/"
 #define ExeName "widelands.exe"
 #define UrlName "Widelands.url"
 #define HelpName "Widelands-Onlinehelp.url"
@@ -44,32 +41,28 @@
 
 [Setup]
 AppName={#Name}
-AppVerName={#VerName}
-AppVersion={#VerNumber}
+AppVersion={#Version}
 AppPublisher={#Publisher}
 AppPublisherURL={#URL}
 AppSupportURL={#URL}
 AppUpdatesURL={#URL}
-DefaultDirName={sd}\bin\{#Name}
+DefaultDirName={localappdata}\{#Name}
 DefaultGroupName={#Name}
 AllowNoIcons=true
 LicenseFile=..\..\..\COPYING
 InfoAfterFile=..\..\..\ChangeLog
 OutputDir=..\..\..\..\
-OutputBaseFilename={#SetupFileName}
 SetupIconFile=..\WL.ico
 Compression=lzma/ultra
 SolidCompression=true
 VersionInfoCompany={#Publisher}
-VersionInfoDescription={#VerName} Setup
 ShowLanguageDialog=yes
 WizardImageFile=.\WL.bmp
 WizardSmallImageFile=.\WLsmall.bmp
 UninstallDisplayIcon={app}\unins000.exe
-UninstallDisplayName={#VerName}
 VersionInfoCopyright={#Publisher}
 InternalCompressLevel=max
-AppID={#Version}
+AppId=WIDELANDS-{#Version}
 AppCopyright={#Copyright}
 ChangesAssociations=yes
 PrivilegesRequired=lowest
@@ -101,14 +94,19 @@ Source: {#BuildFolder}\data\maps\*;                                    DestDir: 
 Source: {#BuildFolder}\data\music\*;                                   DestDir: {app}\data\music\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ;                  Components: "Music"
 Source: {#BuildFolder}\data\images\*;                                  DestDir: {app}\data\images\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
 Source: {#BuildFolder}\data\sound\*;                                   DestDir: {app}\data\sound\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
+Source: {#BuildFolder}\data\templates\*;                               DestDir: {app}\data\templates\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
 Source: {#BuildFolder}\data\tribes\*;                                  DestDir: {app}\data\tribes\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
 Source: {#BuildFolder}\data\txts\*;                                    DestDir: {app}\data\txts\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
 Source: {#BuildFolder}\data\world\*;                                   DestDir: {app}\data\world\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
 Source: {#BuildFolder}\data\scripting\*;                               DestDir: {app}\data\scripting\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
 Source: {#BuildFolder}\data\shaders\*;                                 DestDir: {app}\data\shaders\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
 Source: {#BuildFolder}\data\ai\*;                                 DestDir: {app}\data\ai\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
-Source: {#DLLFolder}\libglbinding.dll;                        DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
-Source: {#DLLFolder}\libicuuc57.dll;                    DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
+Source: {#DLLFolder}\libopusfile-0.dll;                 DestDir: {app};            Flags: ignoreversion;                                                        Components: "Widelands"
+Source: {#DLLFolder}\libopus-0.dll;                     DestDir: {app};            Flags: ignoreversion;                                                        Components: "Widelands"
+Source: {#DLLFolder}\libtermcap-0.dll;                 DestDir: {app};            Flags: ignoreversion;                                                        Components: "Widelands"
+Source: {#DLLFolder}\libgmodule-2.0-0.dll;                        DestDir: {app};            Flags: ignoreversion;                                             Components: "Widelands"
+Source: {#DLLFolder}\libreadline8.dll;                        DestDir: {app};            Flags: ignoreversion;                                                 Components: "Widelands"
+Source: {#DLLFolder}\libicuuc65.dll;                    DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libbz2-1.dll;                      DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libfreetype-6.dll;                 DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 #if GetEnv("PLATFORM") == "x64"
@@ -116,9 +114,10 @@ Source: {#DLLFolder}\libgcc_s_seh-1.dll;                DestDir: {app};         
 #else
 Source: {#DLLFolder}\libgcc_s_dw2-1.dll;                DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 #endif
+Source: {#DLLFolder}\libglbinding.dll;                        DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libglib-2.0-0.dll;                 DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libharfbuzz-0.dll;                 DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
-Source: {#DLLFolder}\libicudt57.dll;                    DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
+Source: {#DLLFolder}\libicudt65.dll;                    DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libjpeg-8.dll;                     DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\liblzma-5.dll;                     DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libogg-0.dll;                      DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
@@ -127,25 +126,26 @@ Source: {#DLLFolder}\libstdc++-6.dll;              DestDir: {app};            Fl
 Source: {#DLLFolder}\libtiff-5.dll;                DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libvorbis-0.dll;              DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libvorbisfile-3.dll;          DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
-Source: {#DLLFolder}\libwebp-6.dll;                DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
+Source: {#DLLFolder}\libwebp-7.dll;                DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libwinpthread-1.dll;          DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\SDL2.dll;                     DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\SDL2_image.dll;               DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
-Source: {#DLLFolder}\libSDL2_mixer-2-0-0.dll;      DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
+Source: {#DLLFolder}\SDL2_mixer.dll;               DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\SDL2_ttf.dll;                 DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\zlib1.dll;                    DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libFLAC-8.dll;                DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
-Source: {#DLLFolder}\libfluidsynth-1.dll;          DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
+Source: {#DLLFolder}\libfluidsynth-2.dll;          DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libportaudio-2.dll;           DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libsndfile-1.dll;             DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libspeex-1.dll;               DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libvorbisenc-2.dll;           DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libmodplug-1.dll;             DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
-Source: {#DLLFolder}\libmad-0.dll;                 DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
+Source: {#DLLFolder}\libmpg123-0.dll;                 DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libintl-8.dll;                         DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libiconv-2.dll;                        DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libgraphite2.dll;                      DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libpcre-1.dll;                         DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
+Source: {#DLLFolder}\libzstd.dll;                         DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#BuildFolder}\build\src\widelands.exe;   DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#BuildFolder}\ChangeLog;                                 DestDir: {app};            Flags: ignoreversion; DestName: ChangeLog.txt;                              Components: "Widelands"
 Source: {#BuildFolder}\COPYING;                                   DestDir: {app};            Flags: ignoreversion; DestName: COPYING.txt;                                Components: "Widelands"

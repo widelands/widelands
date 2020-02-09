@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,7 +38,8 @@ public:
 	virtual std::string lookup_terrain(const std::string& terrain) const = 0;
 
 	/// Looks up the new name for the 'critter'.
-	virtual std::string lookup_critter(const std::string& critter) const = 0;
+	virtual std::string lookup_critter(const std::string& critter,
+	                                   uint16_t packet_version) const = 0;
 
 	/// Looks up the new name for the 'immovable'.
 	virtual std::string lookup_immovable(const std::string& immovable) const = 0;

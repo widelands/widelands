@@ -1,5 +1,9 @@
 dirname = path.dirname(__file__)
 
+animations = {}
+add_animation(animations, "idle", dirname, "idle", { 60, 78 })
+add_animation(animations, "build", dirname, "build", { 60, 78 })
+
 tribes:new_warehouse_type {
    msgctxt = "barbarians_building",
    name = "barbarians_warehouse",
@@ -7,7 +11,6 @@ tribes:new_warehouse_type {
    descname = pgettext("barbarians_building", "Warehouse"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   representative_image = dirname .. "representative_image.png",
    size = "medium",
 
    buildcost = {
@@ -15,7 +18,7 @@ tribes:new_warehouse_type {
       blackwood = 2,
       granite = 2,
       grout = 3,
-      thatch_reed = 1
+      reed = 1
    },
    return_on_dismantle = {
       log = 1,
@@ -24,17 +27,7 @@ tribes:new_warehouse_type {
       grout = 1
    },
 
-   animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 60, 78 },
-         scale = 3.62
-      },
-      build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 60, 78 },
-      }
-   },
+   animations = animations,
 
    aihints = {},
 

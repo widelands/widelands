@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,6 @@
 
 #include "logic/game_settings.h"
 #include "ui_basic/button.h"
-#include "ui_basic/dropdown.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/helpwindow.h"
@@ -47,10 +46,11 @@ class LuaInterface;
 class FullscreenMenuLaunchMPG : public FullscreenMenuLaunchGame {
 public:
 	FullscreenMenuLaunchMPG(GameSettingsProvider*, GameController*);
-	~FullscreenMenuLaunchMPG();
+	~FullscreenMenuLaunchMPG() override;
 
 	void set_chat_provider(ChatProvider&);
-	void refresh() override;
+	void think() override;
+	void refresh();
 
 protected:
 	void clicked_ok() override;
@@ -69,8 +69,6 @@ private:
 	void load_map_info();
 	void help_clicked();
 
-	uint32_t fs_;
-
 	// TODO(GunChleoc): We still need to use these consistently. Just getting them in for now
 	// so we can have the SuggestedTeamsBox
 	int32_t const padding_;  // Common padding between panels
@@ -80,8 +78,8 @@ private:
 
 	UI::Button change_map_or_save_;
 	UI::Button help_button_;
-	UI::Textarea mapname_, clients_, players_, map_, wincondition_type_;
-	UI::MultilineTextarea map_info_, client_info_;
+	UI::Textarea clients_, players_, map_, wincondition_type_;
+	UI::MultilineTextarea map_info_;
 	std::unique_ptr<UI::FullscreenHelpWindow> help_;
 	GameChatPanel* chat_;
 	MultiPlayerSetupGroup* mpsg_;

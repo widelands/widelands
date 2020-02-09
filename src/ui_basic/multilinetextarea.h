@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,14 +23,12 @@
 #include <memory>
 
 #include "graphic/align.h"
-#include "graphic/color.h"
-#include "graphic/richtext.h"
+#include "graphic/styles/panel_styles.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/scrollbar.h"
 
 namespace UI {
-struct Scrollbar;
 
 /**
  * This defines an area, where a text can easily be printed.
@@ -51,9 +49,9 @@ struct MultilineTextarea : public Panel {
 	   const int32_t y,
 	   const uint32_t w,
 	   const uint32_t h,
+	   UI::PanelStyle style,
 	   const std::string& text = std::string(),
 	   const Align = UI::Align::kLeft,
-	   const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
 	   MultilineTextarea::ScrollMode scroll_mode = MultilineTextarea::ScrollMode::kScrollNormal);
 
 	const std::string& get_text() const {
@@ -61,32 +59,22 @@ struct MultilineTextarea : public Panel {
 	}
 
 	void set_text(const std::string&);
-	uint32_t get_eff_w() const {
+	// int instead of uint because of overflow situations
+	int32_t get_eff_w() const {
 		return scrollbar_.is_enabled() ? get_w() - Scrollbar::kSize : get_w();
 	}
 
-	void set_color(RGBColor fg) {
-		color_ = fg;
-	}
-
-	// Most MultilineTextareas that contain richtext markup still use the old
-	// font renderer, but some are already switched over the the new font
-	// renderer. The markup is incompatible, so we need to be able to tell the
-	// MultilineTextarea which one to use. MultilineTextareas without markup
-	// automatically use the new font renderer.
-	// TODO(GunChleoc): Remove this function once the switchover to the new font
-	// renderer is complete.
-	void force_new_renderer(bool force = true) {
-		force_new_renderer_ = force;
-	}
+	void set_style(const FontStyleInfo& style);
+	void set_font_scale(float scale);
 
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
 
 	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 	void scroll_to_top();
 
-	void set_background(const Image* background);
+	void set_scrollmode(MultilineTextarea::ScrollMode scroll_mode);
 
 protected:
 	void layout() override;
@@ -100,20 +88,18 @@ private:
 	 * turns '\\n' into '<br>' tags as needed, then creates the richtext style wrappers.
 	 */
 	std::string make_richtext();
-
 	std::string text_;
-	RGBColor color_;
-	const Align align_;
 
-	bool force_new_renderer_;
-	bool use_old_renderer_;
-	RichText rt;
+	std::shared_ptr<const UI::RenderedText> rendered_text_;
+
+	const FontStyleInfo* style_;
+	float font_scale_;
+
+	const Align align_;
 
 	Scrollbar scrollbar_;
 	ScrollMode scrollmode_;
-
-	const Image* pic_background_;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_MULTILINETEXTAREA_H

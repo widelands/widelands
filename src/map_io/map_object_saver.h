@@ -1,5 +1,5 @@
 /*
-//  * Copyright (C) 2002-2017 by the Widelands Development Team
+//  * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -54,6 +54,9 @@ struct MapObjectSaver {
 	uint32_t get_nr_roads() const {
 		return nr_roads_;
 	}
+	uint32_t get_nr_waterways() const {
+		return nr_waterways_;
+	}
 	uint32_t get_nr_flags() const {
 		return nr_flags_;
 	}
@@ -93,16 +96,18 @@ private:
 
 	MapObjectRecordMap objects_;
 	uint32_t nr_roads_;
+	uint32_t nr_waterways_;
 	uint32_t nr_flags_;
 	uint32_t nr_buildings_;
 	uint32_t nr_bobs_;
 	uint32_t nr_wares_;
 	uint32_t nr_immovables_;
 	uint32_t nr_battles_;
-	uint32_t nr_fleets_;
+	uint32_t nr_ship_fleets_;
+	uint32_t nr_ferry_fleets_;
 	uint32_t nr_portdocks_;
 	uint32_t lastserial_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_MAP_IO_MAP_OBJECT_SAVER_H

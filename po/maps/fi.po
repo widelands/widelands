@@ -1,19 +1,19 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2016
+# GunChleoc, 2016,2018
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016-2017
+# Jukka Pakarinen, 2016-2018
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
 # Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-19 07:45+0000\n"
-"PO-Revision-Date: 2017-05-21 05:51+0000\n"
-"Last-Translator: Jukka Pakarinen\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-01-21 18:02+0000\n"
+"PO-Revision-Date: 2020-01-21 18:25+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +22,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../data/campaigns/atl01.wmf/elemental:9
-#: ../../data/campaigns/campaigns.conf:100
 msgid "From Nemesis to Genesis"
 msgstr "Nemesiksestä Geneesiin"
 
@@ -33,7 +32,6 @@ msgid ""
 msgstr "Rantauduttuaan salaperäiselle saarelle, joka muistutti Atlantista, atlantislaiset tekivät kaikkensa tehdäkseen siitä heille uuden kodin."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
-#: ../../data/campaigns/campaigns.conf:67
 msgid "A Place to Call Home"
 msgstr "Paikka Jota Kutsua Kodiksi"
 
@@ -44,7 +42,6 @@ msgid ""
 msgstr "Tässä skenaariossa esitellään korkean tuottavuuden rakennuksia mukaan lukien kaivostoiminta."
 
 #: ../../data/campaigns/bar02.wmf/elemental:7
-#: ../../data/campaigns/campaigns.conf:72
 msgid "This Land is Our Land"
 msgstr "Tämä Maa on Meidän Maa"
 
@@ -54,109 +51,21 @@ msgid ""
 "and will introduce fighting."
 msgstr "Tämä opetuspeli opettaa käsittelemään sota- ja harjoittelupaikkarakennuksia ja esittelee taistelemista."
 
-#: ../../data/campaigns/campaigns.conf:27
-msgid "The Second Empire"
-msgstr "Toinen Keisarikunta"
-
-#: ../../data/campaigns/campaigns.conf:29
-msgid "Barbarians"
-msgstr "Barbaarit"
-
-#: ../../data/campaigns/campaigns.conf:31
-msgid "Easy. Introduces the Barbarians"
-msgstr "Helppo. Tutustuminen Barbaareihin"
-
-#: ../../data/campaigns/campaigns.conf:32
-msgid ""
-"When Chat’Karuth died, he was an old man, father to three strong and "
-"ambitious sons, and warlord to an army that could match any enemy willing to"
-" rise against the ancient forests. Though at the end of his glorious reign, "
-"Chat’Karuth chose his eldest son, Thron, to succeed him as the tribe’s "
-"warlord – a decision that left his two brothers unsatisfied. The old warlord"
-" knew that. As his father instructed him, Thron left the capital of "
-"Al’thunran, the home of the Throne Among the Trees, and withdrew his forces "
-"to the high hills where he buried the corpse of his father. There he swore "
-"to the gods and his father’s spirit that he’d return to re-established "
-"order. While his brothers have raged blind war against Thron and the few "
-"forces he left to secure the borders of Al’thunran, the young warlord seeks "
-"to reunite his ambitious brothers and force the tribes to march once again "
-"under a common banner."
-msgstr "Chat’Karuthin kuollessa hän oli jo vanha mies, kolmen vahvan ja kunnianhimoisen pojan isä sekä sotaherra armeijalle, joka voisi peitota minkä tahansa viholisen, joka haluaisi tulla muinaisiin metsiin. Vaikka hänen mahtavan valtakauden lopussa Chat’Karuth valitsi vanhimman poikansa, Thornin, seuraavaksi heimon sotaherraksi – päätös jätti hänen muut poikaansa pettyneiksi. Ja vanha sotaherra tiesi sen. Kuten hänen isänsä opasti häntä, Thorn jätti Al’thunran pääkaupungin, Thronen kodin metsän keskellä ja vetäyty joukkoineen kukkuloille, missä hän hautasi isänsä ruumiin. Siellä hän vannoi jumalan nimeen ja hänen isän henkeen, että hän tulisi palauttamaan järjestyksen. Sillä aikaa hähen veljensää ovat raivonneet sokeasti Thornia ja muutamia Al’thunran rajoja turvaamaan jätettyjä joukkoja vastaan, nuori sotaherra etsi tapaa koota jälleen hänen kunnianhimoiset veljensä ja pakottaa heimot marssimaan yhteisen lipun alla."
-
-#: ../../data/campaigns/campaigns.conf:35
-msgid "The Months of Exile"
-msgstr "Maanpaon kuukaudet"
-
-#: ../../data/campaigns/campaigns.conf:37
-msgid "Empire"
-msgstr "Keisarikunta"
-
-#: ../../data/campaigns/campaigns.conf:39
-msgid "Easy. Introduces the Empire"
-msgstr "Helppo. Tutustuminen Keisarikuntaan"
-
-#: ../../data/campaigns/campaigns.conf:40
-msgid ""
-"Six months ago, Lutius – a young general of the Empire – was sent with 150 "
-"soldiers to the frontier beyond the northern forests where Barbarian tribes "
-"were crossing onto land held by the Empire. His task was to defend the "
-"Empire’s land. At first, everything was calm. He even talked to a few "
-"Barbarian children and thought about a peaceful life – side by side with "
-"this archaic folk. He began to feel safer and his army began to drop their "
-"attention off the potential enemy. That was their undoing. One night in "
-"March his unprepared army was attacked by 100 Barbarian footmen and was "
-"completely scattered. Only with his bare life he and a handful of his "
-"soldiers survived."
-msgstr "Kuusi vuotta sitten, Lutius – nuori Keisarikunnan kenraali – lähetettiin etulinjaan pohjoisten metsien taakse 150 sotilaan vahvuisena, missä Barbaariheimot olivat ylittämässä Keisarikunnan maita. Hänen tehtävänä oli puolustaa Keisarikunnan maita. Aluksi kaikkialla oli rauhallista. Hän jopa jutteli muutamien Barbaarilasten kanssa ja ajatteli rauhallisesta elämästä – rintarinnan muinaisten ihmisen kanssa. Hän alkoi tuntea olonsa turvalliseksi ja hänen armeijan tarkkaavaisuus alkoi horjua, pois mahdollisesta vihollisesta. Se oli heidän virheensä. Eräänä maaliskuisena yönä, hänen valmistautumatonta armeijaansa vastaan hyökkää 100 Barbaarin vahvuinen jalkaväki, täysin hajaantuneesti. Vain hän ja kourallinen hänen sotilaistaan selvytyi."
-
-#: ../../data/campaigns/campaigns.conf:43
-msgid "The Run for the Fire"
-msgstr "Pakeneminen Pelossa"
-
-#: ../../data/campaigns/campaigns.conf:45
-msgid "Atlanteans"
-msgstr "Atlantislaiset"
-
-#: ../../data/campaigns/campaigns.conf:47
-msgid "Challenging. Introduces the Atlanteans"
-msgstr "Haastava. Tutustuminen Atlanstislaisiin"
-
-#: ../../data/campaigns/campaigns.conf:48
-msgid ""
-"When their God lost faith in the Atlanteans and drowned their island, one "
-"woman’s struggle for justice and a second chance for her people would become"
-" the stuff of legends. Leading the remaining Atlanteans into a new future in"
-" a new part of the World, Jundlina became the most powerful human of her "
-"time, but at a high cost: her humanity and soul."
-msgstr "Kun heidän Jumalansa menetti uskonsa Atlantislaisiin ja upotti heidän saarensa, eräs nainen kamppaili oikeuden puolesta ja hänen kansan saamasta toisesta mahdollisuudesta, mistä tulisi legendojen aihe. Johtaen jäljelle pääneet Atlantislaiset uuteen tulevaisuuteen, maailman toiseen osaan, Jundlinasta tuli hänen aikansa kaikkein mahtavin ihminen, mutta kalliilla hinnalla: hänen inhimillisyydellä ja sielulla."
-
-#: ../../data/campaigns/campaigns.conf:78
-#: ../../data/campaigns/emp01.wmf/elemental:7
-msgid "The Strands of Malac’ Mor"
-msgstr "Malac’ Morin rannat"
-
-#: ../../data/campaigns/campaigns.conf:83
-#: ../../data/campaigns/emp02.wmf/elemental:9
-msgid "An Outpost for Exile"
-msgstr "Etuvartio Maanpakoon"
-
-#: ../../data/campaigns/campaigns.conf:88
-msgid "Neptune’s Revenge"
-msgstr "Neptunuksen Kosto"
-
-#: ../../data/campaigns/campaigns.conf:93
-#: ../../data/campaigns/campaigns.conf:105
-#: ../../data/campaigns/dummy.wmf/elemental:7
+#: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
 msgstr "Ei vielä toteutettu"
 
-#: ../../data/campaigns/dummy.wmf/elemental:9
+#: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
 msgstr "Ei kukaan"
 
-#: ../../data/campaigns/dummy.wmf/elemental:10
+#: ../../data/campaigns/dummy.wmf/elemental:12
 msgid "Sorry, this map is not yet implemented."
 msgstr "Anteeksi, tätä karttaa ei ole vielä toteutettu."
+
+#: ../../data/campaigns/emp01.wmf/elemental:7
+msgid "The Strands of Malac’ Mor"
+msgstr "Malac’ Morin rannat"
 
 #: ../../data/campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -166,6 +75,10 @@ msgid ""
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
 msgstr "Hävittyään tärkeän taistelun barbaareja vastaan, mikä johti suuren osan Keisarikunnan maiden menettämiseen,  Lutius jättää Fremilin aloittaakseen uuden elämän. Mutta hänen kohtalokseen, hänen laivansa joutuu kovaan myrskyyn, joka lähes tuhoaa sen. Vain hyvällä onnella hän pystyy rantautumaan vaurioituneella laivallaan asuttamattomalle rannalle ja pelastamaan hänen kansansa. Toistaiseksi."
+
+#: ../../data/campaigns/emp02.wmf/elemental:9
+msgid "An Outpost for Exile"
+msgstr "Etuvartio Maanpakoon"
 
 #: ../../data/campaigns/emp02.wmf/elemental:11
 msgid ""
@@ -181,8 +94,47 @@ msgid ""
 "the will of the gods."
 msgstr "Matkalla kotiin puolustamaan Keisarikuntaa, Lutiuksen miehistö yllättyi jumalien tahdosta."
 
+#: ../../data/campaigns/emp04.wmf/elemental:8
+msgid "Surprise, Surprise!"
+msgstr "Yllätys, Yllätys!"
+
+#: ../../data/campaigns/emp04.wmf/elemental:10
+msgid ""
+"After returning home, Lutius and his crew are faced with an economy in "
+"shambles. Resolving the bottlenecks in the economy will be of utmost "
+"importance to reinstate the glory of the empire."
+msgstr "Kotiin palattua, Lutiuksella ja hänen miehistöllä on vastassa rapakuntoinen talous. Talouden pullonkaulojen selvittäminen tulee olemaan äärimmäisen tärkeässä osassa Keisarikunnan loistokkuuden palauttamiseksi."
+
+#: ../../data/campaigns/fri01.wmf/elemental:8
+msgid "The Great Stormflood"
+msgstr "Suuri Myrskytulva"
+
+#: ../../data/campaigns/fri01.wmf/elemental:10
+msgid ""
+"In 1362, the quiet, peaceful life of the inhabitants of the Northern Frisian"
+" Islands was disrupted by one of the greatest storm floods in human memory: "
+"Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
+" a sign from the Gods that the Frisian community on the island of Langeness "
+"is not wanted here?"
+msgstr "Vuonna 1362, Pohjioisen Vapaamielistensaarien asukkaiden hiljainen ja rauhantahtoinen elämä häiriintyy yhdestä suurimmasta myrskytulvasta miesmuistiin: Saint Marcelluksen Tulvasta. Onko se mitään muuta kuin taas yksi myrsky lisää, vai onko se merkki jumalilta, että Langenessin saaren Vapaamielisten yhteisöä ei haluta tänne?"
+
+#: ../../data/campaigns/fri01.wmf/elemental:11
+msgid ""
+"This scenario is set in a historical context, but most of the story line is "
+"fiction."
+msgstr "Tämä skenaario on asetettu historialliseen kontekstiin, mutta suurin osa juonesta on sepitettyä."
+
+#: ../../data/campaigns/fri02.wmf/elemental:8
+msgid "An Icy Welcome"
+msgstr "Jäinen Tervehdys"
+
+#: ../../data/campaigns/fri02.wmf/elemental:10
+msgid ""
+"Reebaud and his tribe have arrived in the North. But their arrival between "
+"the frozen steppes and the snow-covered mountains is less than welcome…"
+msgstr "Reebaud ja hänen heimonsa on saapunut pohjoiseen. Mutta heidän saapuminen jäisen aron ja lumen peittämien vuorien väliin on vähemmän mieluinen…"
+
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:15
 msgid "Basic Control"
 msgstr "Perusteiden hallinta"
 
@@ -193,7 +145,6 @@ msgid ""
 msgstr "Tässä opetuspelissä sinulle opetaan kuinka navikoida Widelandsissa, rakentaa rakennuksia ja teitä."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:19
 msgid "Warfare"
 msgstr "Sodankäynti"
 
@@ -204,18 +155,16 @@ msgid ""
 msgstr "Tässä opetuspelissä sinulle opetaan sodankäynnin salaisuudet: kuinka luoda sotilaita, kouluttaa ja johtaa heitä taistelussa."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:23
 msgid "Seafaring"
 msgstr "Merenkäynti"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
-"ships and ports."
-msgstr "Tässä opetuspelissä opit merenkäynnistä, mikä tarkoittaa kuinka käsitellä laivoja ja satamia."
+"ships and ports, and how to use ferries and waterways."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:27
 msgid "Economy"
 msgstr "Talous"
 
@@ -313,11 +262,11 @@ msgid ""
 " crater. Two tribes are now fighting for the rich resources."
 msgstr "Kauan sen jälkeen, kun meteori iskeytyi kahteen vuoreen, elämä kukoistaa kraaterissa. Nyt kaksi heimoa taistelevat sen rikkaista resursseista."
 
-#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:8
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:8
 msgid "Crossing the Horizon"
 msgstr "Taivaanrannan ylittäminen"
 
-#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
 msgstr "Miehitä laivasi ja purjehdi taivaanrantaan."
 
@@ -541,7 +490,7 @@ msgid ""
 "range where the amount of gold and the space to live merely suffice for one "
 "tribe – only two opposite paths lead. But remember, be careful… this last "
 "living space is also a hard and small place to live."
-msgstr "Oikuttelevat Jumalat eivät vastanneet rukouksiimme. Sen sijaan, voimistuva auringonvalo lämmitti maata tuhatkertaisesti ja sulatti jäätiköt sekä syöksi ihmiset turmioon. Mutta nyt – korkealla majesteettisilla vuorilla, viimeisellä maatilkulla – kaksi jäljelle jäänyttä heimoa ovat suojautuneena. Jumalien osoittaman armon myötä ilmasto tuli viileämmäksi, mutta veden pinta silti jatkoi nousuaan. Viimeisellä turvallisella paikalla – korkeimmalla vuorijonolla, jossa riittää kultaa ja tilaa tyydyttävästi yhden heimon tarpeisiin – on vain kaksi vastakkaista suuntausta vallalla. Muista olla varovainen… tämä viimeinen elinkelpoinen tila on kova ja pieni paikka elää. "
+msgstr "Oikuttelevat Jumalat eivät vastanneet rukouksiimme. Sen sijaan, voimistuva auringonvalo lämmitti maata tuhatkertaisesti ja sulatti jäätiköt sekä syöksi ihmiset turmioon. Mutta nyt – korkealla majesteettisilla vuorilla, viimeisellä maatilkulla – kaksi jäljelle jäänyttä heimoa ovat suojautuneena. Jumalien osoittaman armon myötä ilmasto tuli viileämmäksi, mutta veden pinta silti jatkoi nousuaan. Viimeisellä turvallisella paikalla – korkeimmalla vuorijonolla, jossa riittää kultaa ja tilaa tyydyttävästi yhden heimon tarpeisiin – on vain kaksi vastakkaista suuntausta vallalla. Muista olla varovainen… tämä viimeinen elinkelpoinen tila on kova ja pieni paikka elää."
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:11
 msgid "Don’t forget to take care of your timber supplies, you’ll need them."
@@ -578,7 +527,7 @@ msgid ""
 "Your well established smuggling routes suddenly got busy: two other tribes "
 "have appeared and now a rivalry among smugglers has started. Which team will"
 " be the first to smuggle a certain number of wares?"
-msgstr "Sinun hyvin vakiintuneet salakuljetusreittisi vilkastuvat yllättäin: kaksi muuta heimoa ovat ilmestyneet apajille ja kilpailu on nyt alkanut olemaan kovaa. Mikä ryhmä tulee olemaan ensimmäinen, joka salakuljettaa tietyn määrän varusteita?"
+msgstr "Sinun hyvin vakiintuneet salakuljetusreittisi vilkastuvat yllättäin: kaksi muuta heimoa ovat ilmestyneet apajille ja kilpailu on nyt alkanut olemaan kovaa. Mikä ryhmä tulee olemaan ensimmäinen, joka salakuljettaa tietyn määrän tuotteita?"
 
 #: ../../data/maps/Mystical_Maze.wmf/elemental:8
 msgid "Mystical Maze"

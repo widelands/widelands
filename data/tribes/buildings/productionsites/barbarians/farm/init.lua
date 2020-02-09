@@ -41,7 +41,9 @@ tribes:new_productionsite_type {
 
    aihints = {
       space_consumer = true,
-      prohibited_till = 400
+      prohibited_till = 400,
+      very_weak_ai_limit = 1,
+      weak_ai_limit = 3
    },
 
    working_positions = {
@@ -52,31 +54,38 @@ tribes:new_productionsite_type {
       "wheat"
    },
 
+   indicate_workarea_overlaps = {
+      barbarians_rangers_hut = false,
+      barbarians_farm = false,
+      barbarians_reed_yard = false,
+   },
+
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=plant_wheat",
-            "call=harvest_wheat",
-            "return=skipped"
+            "call=plant",
+            "call=harvest",
+            "return=no_stats"
          }
       },
-      plant_wheat = {
+      plant = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
          descname = _"planting wheat",
          actions = {
-            "sleep=14000",
-            "worker=plant"
+            "callworker=plant",
+            "animate=working 7000",
+            "sleep=3000"
          }
       },
-      harvest_wheat = {
+      harvest = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
          descname = _"harvesting wheat",
          actions = {
-            "sleep=4000",
-            "worker=harvest",
-            "animate=working 30000"
+            "callworker=harvest",
+            "animate=working 3000",
+            "sleep=1000"
          }
       },
    },

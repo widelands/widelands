@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,6 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/player.h"
-#include "sound/note_sound.h"
 
 namespace Widelands {
 
@@ -69,10 +68,10 @@ void PartiallyFinishedBuilding::cleanup(EditorGameBase& egbase) {
 bool PartiallyFinishedBuilding::init(EditorGameBase& egbase) {
 	Building::init(egbase);
 
-	if (upcast(Game, game, &egbase))
+	if (upcast(Game, game, &egbase)) {
 		request_builder(*game);
+	}
 
-	Notifications::publish(NoteSound("create_construction_site", position_, 255));
 	return true;
 }
 
@@ -82,20 +81,23 @@ Change the economy for the wares queues.
 Note that the workers are dealt with in the PlayerImmovable code.
 ===============
 */
-void PartiallyFinishedBuilding::set_economy(Economy* const e) {
-	if (Economy* const old = get_economy()) {
-		for (WaresQueue* temp_ware : wares_) {
-			temp_ware->remove_from_economy(*old);
+void PartiallyFinishedBuilding::set_economy(Economy* const e, WareWorker type) {
+	if (type == wwWARE) {
+		if (Economy* const old = get_economy(type)) {
+			for (WaresQueue* temp_ware : wares_) {
+				temp_ware->remove_from_economy(*old);
+			}
 		}
 	}
-	Building::set_economy(e);
-	if (builder_request_)
+	Building::set_economy(e, type);
+	if (builder_request_ && type == builder_request_->get_type())
 		builder_request_->set_economy(e);
 
-	if (e)
+	if (e && type == wwWARE) {
 		for (WaresQueue* temp_ware : wares_) {
 			temp_ware->add_to_economy(*e);
 		}
+	}
 }
 
 /*
@@ -194,4 +196,4 @@ void PartiallyFinishedBuilding::request_builder_callback(
 	w->start_task_buildingwork(game);
 	b.set_seeing(true);
 }
-}
+}  // namespace Widelands

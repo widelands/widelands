@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,10 +23,11 @@
 
 #include "base/i18n.h"
 #include "build_info.h"
-#include "graphic/graphic.h"
 
 FullscreenMenuMain::FullscreenMenuMain()
    : FullscreenMenuMainMenu(),
+
+     logo_icon_(this, g_gr->images().get("images/ui_fsmenu/main_title.png")),
 
      // Buttons
      playtutorial(&vbox_,
@@ -35,7 +36,7 @@ FullscreenMenuMain::FullscreenMenuMain()
                   0,
                   butw_,
                   buth_,
-                  g_gr->images().get(button_background_),
+                  UI::ButtonStyle::kFsMenuMenu,
                   _("Play Tutorial")),
      singleplayer(&vbox_,
                   "single_player",
@@ -43,54 +44,21 @@ FullscreenMenuMain::FullscreenMenuMain()
                   0,
                   butw_,
                   buth_,
-                  g_gr->images().get(button_background_),
+                  UI::ButtonStyle::kFsMenuMenu,
                   _("Single Player")),
-     multiplayer(&vbox_,
-                 "multi_player",
-                 0,
-                 0,
-                 butw_,
-                 buth_,
-                 g_gr->images().get(button_background_),
-                 _("Multiplayer")),
-     replay(&vbox_,
-            "replay",
-            0,
-            0,
-            butw_,
-            buth_,
-            g_gr->images().get(button_background_),
-            _("Watch Replay")),
-     editor(
-        &vbox_, "editor", 0, 0, butw_, buth_, g_gr->images().get(button_background_), _("Editor")),
-     options(&vbox_,
-             "options",
-             0,
-             0,
-             butw_,
-             buth_,
-             g_gr->images().get(button_background_),
-             _("Options")),
-     about(&vbox_,
-           "about",
-           0,
-           0,
-           butw_,
-           buth_,
-           g_gr->images().get(button_background_),
-           _("About Widelands")),
-     exit(&vbox_,
-          "exit",
-          0,
-          0,
-          butw_,
-          buth_,
-          g_gr->images().get(button_background_),
-          _("Exit Widelands")),
+     multiplayer(
+        &vbox_, "multi_player", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Multiplayer")),
+     replay(&vbox_, "replay", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Watch Replay")),
+     editor(&vbox_, "editor", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Editor")),
+     options(&vbox_, "options", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Options")),
+     about(&vbox_, "about", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("About Widelands")),
+     exit(&vbox_, "exit", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Exit Widelands")),
 
      // Textlabels
      version(
         this,
+        0,
+        0,
         0,
         0,
         /** TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release" */
@@ -99,11 +67,13 @@ FullscreenMenuMain::FullscreenMenuMain()
      copyright(this,
                0,
                0,
+               0,
+               0,
                /** TRANSLATORS: Placeholders are the copyright years */
                (boost::format(_("(C) %1%-%2% by the Widelands Development Team")) %
                 kWidelandsCopyrightStart % kWidelandsCopyrightEnd)
                   .str()),
-     gpl(this, 0, 0, _("Licensed under the GNU General Public License V2.0")) {
+     gpl(this, 0, 0, 0, 0, _("Licensed under the GNU General Public License V2.0")) {
 	playtutorial.sigclicked.connect(
 	   boost::bind(&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
 	               FullscreenMenuBase::MenuTarget::kTutorial));
@@ -143,18 +113,19 @@ FullscreenMenuMain::FullscreenMenuMain()
 	vbox_.add_inf_space();
 	vbox_.add(&exit, UI::Box::Resizing::kFullSize);
 
-	add_overlay_image("images/ui_fsmenu/main_title.png",
-	                  FullscreenWindow::Alignment(UI::Align::kCenter, UI::Align::kTop));
-
 	layout();
 }
 
 void FullscreenMenuMain::clicked_ok() {
-	;  // do nothing
+	// do nothing
 }
 
 void FullscreenMenuMain::layout() {
 	FullscreenMenuMainMenu::layout();
+
+	logo_icon_.set_pos(
+	   Vector2i((get_w() - logo_icon_.get_w()) / 2, title_y_ + logo_icon_.get_h() / 4));
+
 	const int text_height = 0.5 * version.get_h() + padding_;
 	version.set_pos(Vector2i(get_w() - version.get_w(), get_h() - text_height));
 	copyright.set_pos(Vector2i(0, get_h() - 2 * text_height));
@@ -169,9 +140,7 @@ void FullscreenMenuMain::layout() {
 	about.set_desired_size(butw_, buth_);
 	exit.set_desired_size(butw_, buth_);
 
-	// This box needs to be positioned a bit higher than in the other menus, because we have a lot of
-	// buttons
-	vbox_.set_pos(Vector2i(box_x_, box_y_ - buth_));
+	vbox_.set_pos(Vector2i(box_x_, box_y_));
 	vbox_.set_inner_spacing(padding_);
 	vbox_.set_size(butw_, get_h() - vbox_.get_y() - 5 * padding_);
 }

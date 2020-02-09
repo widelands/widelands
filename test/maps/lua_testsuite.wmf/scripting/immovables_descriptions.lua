@@ -35,13 +35,13 @@ function test_descr:test_immovable_species()
    assert_equal("Alder", egbase:get_immovable_description("alder_summer_old").species)
 end
 
-function test_descr:test_immovable_build_cost()
-   local build_cost = egbase:get_immovable_description(
-      "atlanteans_shipconstruction").build_cost
-   assert_equal(10, build_cost["planks"])
-   assert_equal(2, build_cost["log"])
-   assert_equal(4, build_cost["spidercloth"])
-   assert_equal(nil, build_cost["wine"])
+function test_descr:test_immovable_buildcost()
+   local buildcost = egbase:get_immovable_description(
+      "atlanteans_shipconstruction").buildcost
+   assert_equal(10, buildcost["planks"])
+   assert_equal(2, buildcost["log"])
+   assert_equal(4, buildcost["spidercloth"])
+   assert_equal(nil, buildcost["wine"])
 
    local total_cost = function(t)
       local cost = 0
@@ -50,7 +50,7 @@ function test_descr:test_immovable_build_cost()
       end
       return cost
    end
-   assert_equal(16, total_cost(build_cost))
+   assert_equal(16, total_cost(buildcost))
 end
 
 function test_descr:test_immovable_editor_category()
@@ -75,22 +75,22 @@ function test_descr:test_immovable_terrain_affinity()
    local aff_umbrella_green_mature = egbase:get_immovable_description("umbrella_green_wasteland_mature").terrain_affinity
 
    -- Pickiness
-   assert_near(0.6, aff_alder_sapling["pickiness"], 0.01)
+   assert_equal(60, aff_alder_sapling["pickiness"])
    assert_equal(aff_alder_sapling["pickiness"], aff_alder_old["pickiness"])
-   assert_near(0.6, aff_mushroom_red_pole["pickiness"], 0.01)
-   assert_near(0.8, aff_umbrella_green_mature["pickiness"], 0.01)
+   assert_equal(60, aff_mushroom_red_pole["pickiness"])
+   assert_equal(80, aff_umbrella_green_mature["pickiness"])
 
    -- preferred_fertility
-   assert_near(0.6, aff_alder_sapling["preferred_fertility"], 0.01)
+   assert_equal(600, aff_alder_sapling["preferred_fertility"])
    assert_equal(aff_alder_sapling["preferred_fertility"], aff_alder_old["preferred_fertility"])
-   assert_near(0.85, aff_mushroom_red_pole["preferred_fertility"], 0.01)
-   assert_near(0.85, aff_umbrella_green_mature["preferred_fertility"], 0.01)
+   assert_equal(850, aff_mushroom_red_pole["preferred_fertility"])
+   assert_equal(850, aff_umbrella_green_mature["preferred_fertility"])
 
    -- preferred_humidity
-   assert_near(0.65, aff_alder_sapling["preferred_humidity"], 0.01)
+   assert_equal(650, aff_alder_sapling["preferred_humidity"])
    assert_equal(aff_alder_sapling["preferred_humidity"], aff_alder_old["preferred_humidity"])
-   assert_near(0.35, aff_mushroom_red_pole["preferred_humidity"], 0.01)
-   assert_near(0.2, aff_umbrella_green_mature["preferred_humidity"], 0.01)
+   assert_equal(350, aff_mushroom_red_pole["preferred_humidity"])
+   assert_equal(200, aff_umbrella_green_mature["preferred_humidity"])
 
    -- preferred_temperature
    assert_equal(125, aff_alder_sapling["preferred_temperature"])
@@ -164,7 +164,7 @@ function test_descr:test_name()
    assert_equal("barbarians_coalmine", egbase:get_building_description("barbarians_coalmine").name)
 end
 
-function test_descr:test_build_cost()
+function test_descr:test_buildcost()
    local total_cost = function(t)
       local cost = 0
       for name, count in pairs(t) do
@@ -172,9 +172,9 @@ function test_descr:test_build_cost()
       end
       return cost
    end
-   assert_equal(2, total_cost(egbase:get_building_description("barbarians_sentry").build_cost))
-   assert_equal(20, total_cost(egbase:get_building_description("barbarians_fortress").build_cost))
-   assert_equal(0, total_cost(egbase:get_building_description("barbarians_citadel").build_cost))
+   assert_equal(2, total_cost(egbase:get_building_description("barbarians_sentry").buildcost))
+   assert_equal(20, total_cost(egbase:get_building_description("barbarians_fortress").buildcost))
+   assert_equal(0, total_cost(egbase:get_building_description("barbarians_citadel").buildcost))
 end
 
 function test_descr:test_buildable()
@@ -452,12 +452,12 @@ end
 
 -- This is actually a property of MapOjectDescription
 function test_descr:test_descname()
-   assert_equal("Thatch Reed", egbase:get_ware_description("thatch_reed").descname)
+   assert_equal("Thatch Reed", egbase:get_ware_description("reed").descname)
 end
 
 -- This is actually a property of MapOjectDescription
 function test_descr:test_name()
-   assert_equal("thatch_reed", egbase:get_ware_description("thatch_reed").name)
+   assert_equal("reed", egbase:get_ware_description("reed").name)
 end
 
 function test_descr:test_consumers()
@@ -472,13 +472,23 @@ function test_descr:test_consumers()
    end
 
    local ware_description = egbase:get_ware_description("coal")
-   assert_equal(true, find_building("barbarians_lime_kiln", ware_description.consumers))
-   assert_equal(true, find_building("empire_smelting_works", ware_description.consumers))
-   assert_equal(true, find_building("atlanteans_smelting_works", ware_description.consumers))
-   assert_equal(true, find_building("barbarians_warmill", ware_description.consumers))
-   assert_equal(true, find_building("barbarians_ax_workshop", ware_description.consumers))
-   assert_equal(true, find_building("barbarians_helmsmithy", ware_description.consumers))
-   assert_equal(false, find_building("atlanteans_crystalmine", ware_description.producers))
+   assert_equal(true, find_building("barbarians_lime_kiln", ware_description:consumers("barbarians")))
+   assert_equal(true, find_building("empire_smelting_works", ware_description:consumers("empire")))
+   assert_equal(true, find_building("atlanteans_smelting_works", ware_description:consumers("atlanteans")))
+   assert_equal(true, find_building("barbarians_warmill", ware_description:consumers("barbarians")))
+   assert_equal(true, find_building("barbarians_ax_workshop", ware_description:consumers("barbarians")))
+   assert_equal(true, find_building("barbarians_helmsmithy", ware_description:consumers("barbarians")))
+   -- Building does not consume this
+   assert_equal(false, find_building("barbarians_helmsmithy", ware_description:consumers("atlanteans")))
+   -- Wrong tribe
+   assert_equal(false, find_building("atlanteans_crystalmine", ware_description:consumers("atlanteans")))
+
+   -- Test when multiple tribes use the same ware
+   ware_description = egbase:get_ware_description("helmet")
+   assert_equal(true, find_building("barbarians_trainingcamp", ware_description:consumers("barbarians")))
+   assert_equal(true, find_building("frisians_training_camp", ware_description:consumers("frisians")))
+   assert_equal(1, #ware_description:consumers("barbarians"))
+   assert_equal(1, #ware_description:consumers("frisians"))
 end
 
 function test_descr:test_icon_name()
@@ -497,11 +507,21 @@ function test_descr:test_producers()
    end
 
    local ware_description = egbase:get_ware_description("coal")
-   assert_equal(true, find_building("empire_charcoal_kiln", ware_description.producers))
-   assert_equal(true, find_building("barbarians_coalmine_deeper", ware_description.producers))
-   assert_equal(true, find_building("barbarians_coalmine_deep", ware_description.producers))
-   assert_equal(true, find_building("atlanteans_coalmine", ware_description.producers))
-   assert_equal(false, find_building("atlanteans_crystalmine", ware_description.producers))
+   assert_equal(true, find_building("empire_charcoal_kiln", ware_description:producers("empire")))
+   assert_equal(true, find_building("barbarians_coalmine_deeper", ware_description:producers("barbarians")))
+   assert_equal(true, find_building("barbarians_coalmine_deep", ware_description:producers("barbarians")))
+   assert_equal(true, find_building("atlanteans_coalmine", ware_description:producers("atlanteans")))
+   -- Building does not produce this
+   assert_equal(false, find_building("atlanteans_crystalmine", ware_description:producers("atlanteans")))
+   -- Wrong tribe
+   assert_equal(false, find_building("atlanteans_coalmine", ware_description:producers("barbarians")))
+
+     -- Test when multiple tribes use the same ware
+   ware_description = egbase:get_ware_description("helmet")
+   assert_equal(true, find_building("barbarians_helmsmithy", ware_description:producers("barbarians")))
+   assert_equal(true, find_building("frisians_armor_smithy_small", ware_description:producers("frisians")))
+   assert_equal(1, #ware_description:producers("barbarians"))
+   assert_equal(1, #ware_description:producers("frisians"))
 end
 
 function test_descr:is_construction_material()
@@ -550,4 +570,11 @@ end
 function test_descr:test_needed_experience()
    assert_equal(19, egbase:get_worker_description("barbarians_miner").needed_experience)
    assert_equal(28, egbase:get_worker_description("barbarians_miner_chief").needed_experience)
+end
+
+
+function test_descr:test_worker_buildable()
+   assert_equal(true, egbase:get_worker_description("barbarians_carrier").buildable)
+   assert_equal(true, egbase:get_worker_description("barbarians_miner").buildable)
+   assert_equal(false, egbase:get_worker_description("barbarians_miner_chief").buildable)
 end

@@ -45,7 +45,6 @@ class Tool(object):
         overwrites the input file.
 
         Otherwise, returns false and does nothing
-
         """
         log('%s:' % (self._name))
         fd, temp_in = tempfile.mkstemp(self._name, 'png')
@@ -126,6 +125,7 @@ def main():
         for t in tools:
             t(p)
         log('\n')
+
 
 if __name__ == '__main__':
     main()

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,8 +42,9 @@ private:
 	              EditorGameBase&,
 	              MapObjectLoader&,
 	              const Coords&,
-	              const WorldLegacyLookupTable& lookup_table);
+	              const WorldLegacyLookupTable& lookup_table,
+	              uint16_t packet_version);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_MAP_IO_MAP_BOB_PACKET_H

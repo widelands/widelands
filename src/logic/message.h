@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,11 +36,6 @@ struct Message {
 		kAllMessages,
 		kGameLogic,
 		kGeologists,
-		kGeologistsCoal,
-		kGeologistsGold,
-		kGeologistsStones,
-		kGeologistsIron,
-		kGeologistsWater,
 		kScenario,
 		kSeafaring,
 		kEconomy,              // economy
@@ -48,7 +43,8 @@ struct Message {
 		kWarfare,              // everything starting from here is warfare
 		kWarfareSiteDefeated,
 		kWarfareSiteLost,
-		kWarfareUnderAttack
+		kWarfareUnderAttack,
+		kTradeOfferReceived,
 	};
 
 	/**
@@ -62,6 +58,8 @@ struct Message {
 	 * \param ser        A MapObject serial. If non null, the message will be deleted once
 	 *                   the object is removed from the game. Defaults to 0
 	 * \param s          The message status. Defaults to Status::New
+	 * \param subt       The extended message type, used for comparisons in
+	 *                   Player::add_message_with_timeout(). Defaults to ""
 	 */
 	Message(Message::Type msgtype,
 	        uint32_t sent_time,
@@ -71,8 +69,10 @@ struct Message {
 	        const std::string& init_body,
 	        const Widelands::Coords& c = Coords::null(),
 	        Widelands::Serial ser = 0,
+	        const std::string& subt = "",
 	        Status s = Status::kNew)
 	   : type_(msgtype),
+	     sub_type_(subt),
 	     title_(init_title),
 	     icon_filename_(init_icon_filename),
 	     icon_(g_gr->images().get(init_icon_filename)),
@@ -86,6 +86,9 @@ struct Message {
 
 	Message::Type type() const {
 		return type_;
+	}
+	const std::string& sub_type() const {
+		return sub_type_;
 	}
 	uint32_t sent() const {
 		return sent_;
@@ -105,7 +108,7 @@ struct Message {
 	const std::string& body() const {
 		return body_;
 	}
-	Widelands::Coords position() const {
+	const Widelands::Coords& position() const {
 		return position_;
 	}
 	Widelands::Serial serial() const {
@@ -128,15 +131,13 @@ struct Message {
 		} else if (type_ >= Widelands::Message::Type::kEconomy &&
 		           type_ <= Widelands::Message::Type::kEconomySiteOccupied) {
 			return Widelands::Message::Type::kEconomy;
-		} else if (type_ >= Widelands::Message::Type::kGeologists &&
-		           type_ <= Widelands::Message::Type::kGeologistsWater) {
-			return Widelands::Message::Type::kGeologists;
 		}
 		return type_;
 	}
 
 private:
 	Message::Type type_;
+	const std::string sub_type_;
 	const std::string title_;
 	const std::string icon_filename_;
 	const Image* icon_;  // Pointer to icon into picture stack
@@ -147,6 +148,6 @@ private:
 	Widelands::Serial serial_;  // serial to map object
 	Status status_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MESSAGE_H

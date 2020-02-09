@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,68 +19,70 @@
 
 #include "wui/story_message_box.h"
 
-#include "graphic/graphic.h"
+#include "logic/game_controller.h"
+#include "logic/save_handler.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
+#include "wui/interactive_player.h"
 
-/**
- * The message box itself
- */
-StoryMessageBox::StoryMessageBox(UI::Panel* const parent,
-                                 const std::string& title,
-                                 const std::string& body,
-                                 const std::string& button_text,
-                                 int32_t const gposx,
-                                 int32_t const gposy,
-                                 uint32_t const w,
-                                 uint32_t const h)
-   : UI::Window(parent, "story_message_box", 0, 0, 600, 400, title.c_str()) {
-	UI::MultilineTextarea* message_text = nullptr;
-	int32_t const spacing = 5;
-	int32_t offsy = 5;
-	int32_t offsx = spacing;
-	int32_t posx = offsx;
-	int32_t posy = offsy;
-
-	set_inner_size(w, h);
-	message_text = new UI::MultilineTextarea(
-	   this, posx, posy, get_inner_w() - posx - spacing, get_inner_h() - posy - 2 * spacing - 50);
-
-	if (message_text)
-		message_text->set_text(body);
-
-	int32_t const but_width = 120;
-	int32_t space = get_inner_w() - 2 * spacing;
-	space -= but_width;
-	space /= 2;  // center button
-	posx = spacing;
-	posy = get_inner_h() - 30;
-	posx += space;
-	UI::Button* okbtn = new UI::Button(this, "ok", posx, posy, but_width, 20,
-	                                   g_gr->images().get("images/ui_basic/but5.png"), button_text);
-	okbtn->sigclicked.connect(boost::bind(&StoryMessageBox::clicked_ok, boost::ref(*this)));
-
-	center_to_parent();
-
-	if (gposx != -1)
-		set_pos(Vector2i(gposx, get_y()));
-	if (gposy != -1)
-		set_pos(Vector2i(get_x(), gposy));
-
-	move_inside_parent();
+namespace {
+constexpr int kPadding = 4;
 }
 
-/**
- * Clicked
- */
+StoryMessageBox::StoryMessageBox(Widelands::Game* game,
+                                 const Widelands::Coords coords,
+                                 const std::string& title,
+                                 const std::string& body,
+                                 int32_t const x,
+                                 int32_t const y,
+                                 uint32_t const w,
+                                 uint32_t const h)
+   : UI::Window(game->get_ipl(), "story_message_box", x, y, w, h, title.c_str()),
+     main_box_(this, kPadding, kPadding, UI::Box::Vertical, 0, 0, kPadding),
+     button_box_(&main_box_, kPadding, kPadding, UI::Box::Horizontal, 0, 0, kPadding),
+     textarea_(&main_box_, 0, 0, 100, 100, UI::PanelStyle::kWui, body),
+     ok_(&button_box_, "ok", 0, 0, 120, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
+     desired_speed_(game->game_controller()->desired_speed()),
+     game_(game) {
+
+	// Pause the game
+	game_->game_controller()->set_desired_speed(0);
+	game_->save_handler().set_allow_saving(false);
+
+	// Adjust map view
+	if (coords != Widelands::Coords::null()) {
+		game_->get_ipl()->map_view()->scroll_to_field(coords, MapView::Transition::Jump);
+	}
+
+	// Add and configure the panels
+	main_box_.set_size(get_inner_w() - 3 * kPadding, get_inner_h() - 2 * kPadding);
+
+	main_box_.add(&textarea_, UI::Box::Resizing::kExpandBoth);
+	main_box_.add(&button_box_, UI::Box::Resizing::kFullSize);
+	button_box_.add_inf_space();
+	button_box_.add(&ok_);
+	button_box_.add_inf_space();
+
+	ok_.sigclicked.connect(boost::bind(&StoryMessageBox::clicked_ok, boost::ref(*this)));
+
+	if (x == -1 && y == -1) {
+		center_to_parent();
+	}
+	move_inside_parent();
+	textarea_.focus();
+}
+
 void StoryMessageBox::clicked_ok() {
+	// Manually force the game to reevaluate its current state, especially time information.
+	game_->game_controller()->think();
+	// Now get the game running again.
+	game_->game_controller()->set_desired_speed(desired_speed_);
+	game_->save_handler().set_allow_saving(true);
+
 	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 }
 
-/*
- * Avoid being closed by right click
- */
 bool StoryMessageBox::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my) {
 	if (btn == SDL_BUTTON_RIGHT)
 		return true;
@@ -95,6 +97,9 @@ bool StoryMessageBox::handle_key(bool down, SDL_Keysym code) {
 		case SDLK_RETURN:
 			clicked_ok();
 			return true;
+		case SDLK_ESCAPE:
+			clicked_ok();
+			return UI::Window::handle_key(down, code);
 		default:
 			break;  // not handled
 		}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,11 +22,11 @@
 #include <boost/format.hpp>
 
 #include "base/macros.h"
+#include "io/profile.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
-#include "profile/profile.h"
 
 namespace Widelands {
 
@@ -78,29 +78,13 @@ void MapAllowedBuildingTypesPacket::read(FileSystem& fs,
 						if (tribe.has_building(index)) {
 							player->allow_building_type(index, allowed);
 						} else {
-							throw GameDataError("tribe %s does not define building type \"%s\"",
-							                    tribe.name().c_str(), name);
+							log("WARNING: MapAllowedBuildingTypesPacket - tribe %s does not define "
+							    "building type \"%s\"\n",
+							    tribe.name().c_str(), name);
 						}
 					}
 				} catch (const WException& e) {
 					throw GameDataError("player %u (%s): %s", p, tribe.name().c_str(), e.what());
-				}
-
-				// Savegame compatibility: If all buildings except for the barracks are allowed, allow
-				// it too. This will make games playable again except for scenarios that restrict the
-				// number of buildings and need soldier creation.
-				// TODO(Notabilis): Remove this when we break save game compatibility anyway
-				if (!player->is_building_type_allowed(player->tribe().barracks())) {
-					size_t allowed_buildings = 0;
-					for (const Widelands::DescriptionIndex& index : player->tribe().buildings()) {
-						if (player->is_building_type_allowed(index)) {
-							++allowed_buildings;
-						}
-					}
-					if (player->tribe().buildings().size() - 1 == allowed_buildings) {
-						log("WARNING: Enabling barracks for player %u.\n", player->player_number());
-						player->allow_building_type(player->tribe().barracks(), true);
-					}
 				}
 			}
 		} else {
@@ -135,4 +119,4 @@ void MapAllowedBuildingTypesPacket::write(FileSystem& fs, EditorGameBase& egbase
 
 	prof.write("allowed_building_types", false, fs);
 }
-}
+}  // namespace Widelands

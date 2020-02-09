@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +27,7 @@
 #include "graphic/texture.h"
 
 // A 2d bin packer based on the blog post
-// http://codeincomplete.com/posts/2011/5/7/bin_packing/.
+// https://codeincomplete.com/posts/bin-packing/.
 class TextureAtlas {
 public:
 	struct PackedTexture {

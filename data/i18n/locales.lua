@@ -20,12 +20,6 @@ return {
       font = "arabic"
    },
 
-   ast = {
-      name = "Asturianu",
-      sort_name = "Asturianu",
-      font = "default"
-   },
-
    bg = {
       name = "Български",
       sort_name = "Balgarski",
@@ -68,12 +62,6 @@ return {
       font = "default"
    },
 
-   en_CA = {
-      name = "Canadian English",
-      sort_name = "English (Canada)",
-      font = "default"
-   },
-
    en_GB = {
       name = "British English",
       sort_name = "English (Great Britain)",
@@ -98,12 +86,6 @@ return {
       font = "default"
    },
 
-   et = {
-      name = "Eesti keel",
-      sort_name = "Eesti keel",
-      font = "default"
-   },
-
    eu = {
       name = "Euskara",
       sort_name = "Euskara",
@@ -125,6 +107,12 @@ return {
    fr = {
       name = "Français",
       sort_name = "Francais",
+      font = "default"
+   },
+
+   fy = {
+      name = "Frysk",
+      sort_name = "Frysk",
       font = "default"
    },
 
@@ -170,15 +158,15 @@ return {
       font = "default"
    },
 
-   ia = {
-      name = "Interlingua",
-      sort_name = "Interlingua",
-      font = "default"
-   },
-
    id = {
       name = "Bahasa Indonesia",
       sort_name = "Indonesia",
+      font = "default"
+   },
+
+   ig = {
+      name = "Igbo",
+      sort_name = "Igbo",
       font = "default"
    },
 
@@ -192,12 +180,6 @@ return {
       name = "日本語",
       sort_name = "Nihongo",
       font = "cjk"
-   },
-
-   jv = {
-      name = "Basa jawa",
-      sort_name = "Jawa",
-      font = "default"
    },
 
    ka = {
@@ -230,22 +212,10 @@ return {
       font = "default"
    },
 
-   mr = {
-      name = "मराठी",
-      sort_name = "Marathi",
-      font = "devanagari"
-   },
-
    ms = {
-      name = "بهاس ملايو",
+      name = "Bahasa Melayu",
       sort_name = "Melayu",
-      font = "arabic"
-   },
-
-   my = {
-      name = "မြန်မာစ",
-      sort_name = "Myanma",
-      font = "myanmar"
+      font = "default"
    },
 
    nb = {
@@ -255,8 +225,8 @@ return {
    },
 
    nds = {
-      name = "Plattdütsch",
-      sort_name = "Plattdutsch",
+      name = "Plattdüütsch",
+      sort_name = "Plattduutsch",
       font = "default"
    },
 
@@ -269,12 +239,6 @@ return {
    nn = {
       name = "Nynorsk",
       sort_name = "Norsk (Nynorsk)",
-      font = "default"
-   },
-
-   oc = {
-      name = "Occitan",
-      sort_name = "Occitan",
       font = "default"
    },
 
@@ -308,18 +272,6 @@ return {
       font = "default"
    },
 
-   rw = {
-      name = "Kinyarwanda",
-      sort_name = "Kinyarwanda",
-      font = "default"
-   },
-
-   si = {
-      name = "සිංහල",
-      sort_name = "Simhala",
-      font = "sinhala"
-   },
-
    sk = {
       name = "Slovenčina",
       sort_name = "Slovencina",
@@ -333,7 +285,13 @@ return {
    },
 
    sr = {
-      name = "српски",
+      name = "Srpski",
+      sort_name = "Srpski",
+      font = "default"
+   },
+
+   sr_RS = {
+      name = "Српски",
       sort_name = "Srpski",
       font = "default"
    },
@@ -353,12 +311,6 @@ return {
    uk = {
       name = "українська мова",
       sort_name = "Ukrayinska",
-      font = "default"
-   },
-
-   vi = {
-      name = "Tiếng Việt",
-      sort_name = "Viet",
       font = "default"
    },
 

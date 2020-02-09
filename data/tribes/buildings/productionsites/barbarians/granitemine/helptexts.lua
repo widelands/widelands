@@ -4,8 +4,13 @@ function building_helptext_lore()
 end
 
 function building_helptext_lore_author()
-   -- TRANSLATORS: Lore author helptext for a building
-   return pgettext("barbarians_building", [[This phrase was the reply Rimbert the miner – later known as Rimbert the loner – gave, when he was asked to remain seated on an emergency meeting at Stonford in the year of the great flood. <br> The same man had all the 244 granite blocks ready only a week later, and they still fortify the city’s levee.]])
+
+   return {
+      -- TRANSLATORS: Lore author helptext for a granite mine building, part 1
+      pgettext("barbarians_building", "This phrase was the reply Rimbert the miner – later known as Rimbert the loner – gave, when he was asked to remain seated on an emergency meeting at Stonford in the year of the great flood."),
+      -- TRANSLATORS: Lore author helptext for a granite mine building, part 2
+      pgettext("barbarians_building", "The same man had all the 244 granite blocks ready only a week later, and they still fortify the city’s levee.")
+   }
 end
 
 function building_helptext_purpose()

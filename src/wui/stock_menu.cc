@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,7 +34,7 @@ static const char pic_tab_workers_warehouse[] = "images/wui/stats/menu_tab_worke
 
 StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(&plr, "stock_menu", &registry, 480, 640, _("Stock")), player_(plr) {
-	UI::TabPanel* tabs = new UI::TabPanel(this, g_gr->images().get("images/ui_basic/but1.png"));
+	UI::TabPanel* tabs = new UI::TabPanel(this, UI::TabPanelStyle::kWuiDark);
 	set_center_panel(tabs);
 
 	all_wares_ = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWARE, false);
@@ -75,11 +75,11 @@ void StockMenu::think() {
 void StockMenu::fill_total_waresdisplay(WaresDisplay* waresdisplay, Widelands::WareWorker type) {
 	waresdisplay->remove_all_warelists();
 	const Widelands::Player& player = *player_.get_player();
-	const uint32_t nrecos = player.get_nr_economies();
-	for (uint32_t i = 0; i < nrecos; ++i)
-		waresdisplay->add_warelist(type == Widelands::wwWARE ?
-		                              player.get_economy_by_number(i)->get_wares() :
-		                              player.get_economy_by_number(i)->get_workers());
+	for (const auto& economy : player.economies()) {
+		if (economy.second->type() == type) {
+			waresdisplay->add_warelist(economy.second->get_wares_or_workers());
+		}
+	}
 }
 
 /**
@@ -89,16 +89,12 @@ void StockMenu::fill_total_waresdisplay(WaresDisplay* waresdisplay, Widelands::W
 void StockMenu::fill_warehouse_waresdisplay(WaresDisplay* waresdisplay,
                                             Widelands::WareWorker type) {
 	waresdisplay->remove_all_warelists();
-	const Widelands::Player& player = *player_.get_player();
-	const uint32_t nrecos = player.get_nr_economies();
-	for (uint32_t i = 0; i < nrecos; ++i) {
-		const std::vector<Widelands::Warehouse*>& warehouses =
-		   player.get_economy_by_number(i)->warehouses();
-
-		for (std::vector<Widelands::Warehouse*>::const_iterator it = warehouses.begin();
-		     it != warehouses.end(); ++it) {
-			waresdisplay->add_warelist(type == Widelands::wwWARE ? (*it)->get_wares() :
-			                                                       (*it)->get_workers());
+	for (const auto& economy : player_.player().economies()) {
+		if (economy.second->type() == type) {
+			for (const auto* warehouse : economy.second->warehouses()) {
+				waresdisplay->add_warelist(type == Widelands::wwWARE ? warehouse->get_wares() :
+				                                                       warehouse->get_workers());
+			}
 		}
 	}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2017 by the Widelands Development Team
+ * Copyright (C) 2015-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,7 +60,7 @@ void ReplayGameController::think() {
 	}
 }
 
-void ReplayGameController::send_player_command(Widelands::PlayerCommand&) {
+void ReplayGameController::send_player_command(Widelands::PlayerCommand*) {
 	throw wexception("Trying to send a player command during replay");
 }
 
@@ -94,7 +94,7 @@ void ReplayGameController::set_paused(bool const paused) {
 
 void ReplayGameController::CmdReplayEnd::execute(Widelands::Game& game) {
 	game.game_controller()->set_desired_speed(0);
-	UI::WLMessageBox mmb(game.get_ibase(), _("End of replay"),
+	UI::WLMessageBox mmb(game.get_ibase(), _("End of Replay"),
 	                     _("The end of the replay has been reached and the game has "
 	                       "been paused. You may unpause the game and continue watching "
 	                       "if you want to."),

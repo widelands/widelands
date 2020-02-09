@@ -68,6 +68,18 @@ function click_on_panel(panel)
    blocker:lift_blocks()
 end
 
+
+function select_item_from_dropdown(name, item)
+   local blocker = UserInputDisabler:new()
+
+   wl.ui.MapView().dropdowns[name]:highlight_item(item)
+   sleep(5000)
+   wl.ui.MapView().dropdowns[name]:select()
+   sleep(3000)
+
+   blocker:lift_blocks()
+end
+
 -- Make sure the user is in road building mode starting from the given flag
 function enter_road_building_mode(flag)
    local mv = wl.ui.MapView()

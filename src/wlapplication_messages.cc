@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2017 by the Widelands Development Team
+ * Copyright (C) 2012-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,6 +43,7 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	std::cout << _("Usage: widelands <option0>=<value0> ... <optionN>=<valueN>") << endl << endl;
 	std::cout << _("Options:") << endl << endl;
 	std::cout << _(" --<config-entry-name>=value overwrites any config file setting") << endl
+	          << _("                      Note: New value will be written to config file") << endl
 	          << endl
 	          << _(" --datadir=DIRNAME    Use specified directory for the widelands\n"
 	               "                      data files")
@@ -77,12 +78,14 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	          << _(" --rolling_autosave=[...]\n"
 	               "                      Use this many files for rolling autosaves")
 	          << endl
+	          << _(" --metaserver=[...]\n"
+	               "                      Connect to a different metaserver for internet gaming.")
 	          << endl
-
-	          << _("Sound options:") << endl
+	          << _(" --metaserverport=[...]\n"
+	               "                      Port number of the metaserver for internet gaming.")
+	          << endl
+	          << endl
 	          << _(" --nosound            Starts the game with sound disabled.") << endl
-	          << _(" --disable_fx         Disable sound effects.") << endl
-	          << _(" --disable_music      Disable music.") << endl
 	          << endl
 	          << _(" --nozip              Do not save files as binary zip archives.") << endl
 	          << endl
@@ -91,7 +94,7 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	               "                      the map FILENAME in editor.")
 	          << endl
 	          << _(" --ai_training        Enables AI training mode. See\n"
-	               "                      https://wl.widelands.org/wiki/Ai%20Training/\n"
+	               "                      https://www.widelands.org/wiki/Ai%20Training/\n"
 	               "                      for a full description of the AI training logic.")
 	          << endl
 	          << _(" --auto_speed         In multiplayer games only, this will keep\n"
@@ -115,7 +118,8 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	               "                      not connected to a road.")
 	          << endl
 	          << endl
-	          << _("Graphic options:") << endl
+	          << _("Graphic options:")
+	          << endl
 	          /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
 	          /** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands
 	             textdomain */
@@ -125,10 +129,11 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	          << endl
 	          << _(" --xres=[...]         Width of the window in pixel.") << endl
 	          << _(" --yres=[...]         Height of the window in pixel.") << endl
+	          << _(" --maxfps=[5 ...]     Maximal optical framerate of the game.") << endl
+	          << endl
 	          /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
 	          /** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands
 	             textdomain */
-	          << endl
 	          << _("Options for the internal window manager:") << endl
 	          << _(" --animate_map_panning=[yes|no]\n"
 	               "                      Should automatic map movements be animated.")
@@ -160,7 +165,7 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	std::cout << _(" --verbose            Enable verbose debug messages") << endl << endl;
 	std::cout << _(" --help               Show this help") << endl << endl;
 	std::cout << _("Bug reports? Suggestions? Check out the project website:\n"
-	               "        https://launchpad.net/widelands\n\n"
+	               "        https://www.widelands.org/\n\n"
 	               "Hope you enjoy this game!")
 	          << endl;
 }

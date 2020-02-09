@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 by the Widelands Development Team
+ * Copyright (C) 2017-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,5 +34,6 @@ bool GameSettings::is_shared_usable(PlayerSlot slot, Widelands::PlayerNumber sha
 }
 
 bool GameSettings::uncloseable(PlayerSlot slot) const {
-	return (scenario && !players.at(slot).closeable) || savegame;
+	return (scenario && !players.at(slot).closeable) ||
+	       (savegame && players.at(slot).state != PlayerSettings::State::kClosed);
 }

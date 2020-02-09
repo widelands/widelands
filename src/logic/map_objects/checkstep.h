@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,6 +29,7 @@
 
 namespace Widelands {
 
+class EditorGameBase;
 class Map;
 class Player;
 
@@ -134,6 +135,23 @@ private:
 };
 
 /**
+ * Implements the step checking behaviour for ferries.
+ *
+ * A ferry can travel on an edge if and only if both adjacent triangles are water.
+ */
+struct CheckStepFerry {
+	CheckStepFerry(const EditorGameBase& egbase) : egbase_(egbase) {
+	}
+
+	bool allowed(
+	   const Map&, const FCoords& start, const FCoords& end, int32_t dir, CheckStep::StepId) const;
+	bool reachable_dest(const Map&, const FCoords& dest) const;
+
+private:
+	const EditorGameBase& egbase_;
+};
+
+/**
  * Implements the default step checking behaviours with one exception: we can
  * move from a walkable field onto an unwalkable one.
  * If onlyend is true, we can only do this on the final step.
@@ -191,6 +209,6 @@ private:
 	// The only thing that matters is whether a location is in the set.
 	std::set<Coords> allowed_locations_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_CHECKSTEP_H

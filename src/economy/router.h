@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,5 +52,5 @@ private:
 	ResetCycleFn reset_;
 	uint32_t mpf_cycle;  ///< pathfinding cycle, see Flag::mpf_cycle
 };
-}
+}  // namespace Widelands
 #endif  // end of include guard: WL_ECONOMY_ROUTER_H

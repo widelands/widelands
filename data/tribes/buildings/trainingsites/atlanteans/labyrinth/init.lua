@@ -92,16 +92,19 @@ tribes:new_trainingsite_type {
          descname = _"sleeping",
          actions = {
             "sleep=5000",
-            "check_soldier=soldier attack 9" -- dummy check to get sleep rated as skipped - else it will change statistics
+            "return=no_stats",
          }
       },
       upgrade_soldier_defense_0 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("atlanteans_building", "upgrading soldier defense from level 0 to level 1"),
          actions = {
-            "check_soldier=soldier defense 0", -- Fails when aren't any soldier of level 0 defense
+            "checksoldier=soldier defense 0", -- Fails when aren't any soldier of level 0 defense
+            "return=failed unless site has shield_steel",
+            "return=failed unless site has atlanteans_bread",
+            "return=failed unless site has smoked_fish,smoked_meat",
             "sleep=30000",
-            "check_soldier=soldier defense 0", -- Because the soldier can be expulsed by the player
+            "checksoldier=soldier defense 0", -- Because the soldier can be expulsed by the player
             "consume=atlanteans_bread smoked_fish,smoked_meat shield_steel",
             "train=soldier defense 0 1"
          }
@@ -110,9 +113,12 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("atlanteans_building", "upgrading soldier defense from level 1 to level 2"),
          actions = {
-            "check_soldier=soldier defense 1", -- Fails when aren't any soldier of level 1 defense
+            "checksoldier=soldier defense 1", -- Fails when aren't any soldier of level 1 defense
+            "return=failed unless site has shield_advanced",
+            "return=failed unless site has atlanteans_bread",
+            "return=failed unless site has smoked_fish,smoked_meat",
             "sleep=30000",
-            "check_soldier=soldier defense 1", -- Because the soldier can be expelled by the player
+            "checksoldier=soldier defense 1", -- Because the soldier can be expelled by the player
             "consume=atlanteans_bread smoked_fish,smoked_meat shield_advanced",
             "train=soldier defense 1 2"
          }
@@ -121,9 +127,11 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("atlanteans_building", "upgrading soldier health from level 0 to level 1"),
          actions = {
-            "check_soldier=soldier health 0", -- Fails when aren't any soldier of level 0 health
+            "checksoldier=soldier health 0", -- Fails when aren't any soldier of level 0 health
+            "return=failed unless site has tabard_golden",
+            "return=failed unless site has smoked_fish,smoked_meat:2",
             "sleep=30000",
-            "check_soldier=soldier health 0", -- Because the soldier can be expelled by the player
+            "checksoldier=soldier health 0", -- Because the soldier can be expelled by the player
             "consume=smoked_fish,smoked_meat:2 tabard_golden",
             "train=soldier health 0 1"
          }
@@ -132,9 +140,11 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("atlanteans_building", "upgrading soldier evade from level 0 to level 1"),
          actions = {
-            "check_soldier=soldier evade 0", -- Fails when aren't any soldier of level 0 evade
+            "checksoldier=soldier evade 0", -- Fails when aren't any soldier of level 0 evade
+            "return=failed unless site has atlanteans_bread",
+            "return=failed unless site has smoked_fish,smoked_meat:2",
             "sleep=30000",
-            "check_soldier=soldier evade 0", -- Because the soldier can be expelled by the player
+            "checksoldier=soldier evade 0", -- Because the soldier can be expelled by the player
             "consume=atlanteans_bread smoked_fish,smoked_meat:2",
             "train=soldier evade 0 1"
          }
@@ -143,9 +153,11 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("atlanteans_building", "upgrading soldier evade from level 1 to level 2"),
          actions = {
-            "check_soldier=soldier evade 1", -- Fails when aren't any soldier of level 1 evade
+            "checksoldier=soldier evade 1", -- Fails when aren't any soldier of level 1 evade
+            "return=failed unless site has atlanteans_bread:2",
+            "return=failed unless site has smoked_fish,smoked_meat:2",
             "sleep=30000",
-            "check_soldier=soldier evade 1", -- Because the soldier can be expelled by the player
+            "checksoldier=soldier evade 1", -- Because the soldier can be expelled by the player
             "consume=atlanteans_bread:2 smoked_fish,smoked_meat:2",
             "train=soldier evade 1 2"
          }

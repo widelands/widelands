@@ -1,8 +1,8 @@
 -- RST
 -- .. _lua_tribes_immovables:
 --
--- Tribe Immovables
--- ----------------
+-- Immovables
+-- ==========
 --
 -- Immovables are entities not connected to a road that a tribe can own,
 -- for example a corn field or a ship under construction.
@@ -28,6 +28,8 @@ dirname = path.dirname(__file__)
 --    **descname**: The translatable display name. Use ``pgettext`` with the
 --    ``msgctxt`` above to fetch the string.
 --
+--    **helptext_script**:  The full path to the ``helptexts.lua`` script for this immovable.
+--
 --    **programs**: A table with the programs that this immovable will perform,
 --    e.g. ``{ animate=idle 4500,  remove= }``
 --
@@ -38,6 +40,9 @@ tribes:new_immovable_type {
    name = "ashes",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = pgettext("immovable", "Ashes"),
+   helptext_script = dirname .. "helptexts.lua",
+   icon = dirname .. "menu.png",
+   size = "small",
    programs = {
       program = {
          "animate=idle 45000",
@@ -52,3 +57,22 @@ tribes:new_immovable_type {
       },
    }
 }
+
+
+-- RST
+--
+-- Help Texts
+-- ----------
+--
+-- Each tribe immovable has a ``helptexts.lua`` script, which is located in the same directory as its ``init.lua`` script.
+-- The function in this file returns texts that are used for the immovable by the Tribal Encyclopedia.
+--
+-- .. function:: immovable_helptext([tribe])
+--
+--    Returns a localized string with a helptext for this immovable type.
+--
+--    :arg tribe: the name of the tribe to fetch this helptext for.
+--    :type tribe: :class:`string`
+--
+--    This function works exactly the same as :any:`ware_helptext`.
+--

@@ -1,13 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
+# ks k, 2018
+# ks k, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-08-17 14:06+0000\n"
-"PO-Revision-Date: 2017-08-17 14:11+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-10-09 07:57+0000\n"
+"PO-Revision-Date: 2019-10-09 08:04+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -19,229 +21,210 @@ msgstr ""
 #: ../../data/scripting/editor/editor_controls.lua:11
 #: ../../data/scripting/editor/editor_help.lua:65
 msgid "Controls"
-msgstr ""
+msgstr "제어"
 
-#: ../../data/scripting/editor/editor_controls.lua:14
+#: ../../data/scripting/editor/editor_controls.lua:13
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "키보드 단축키"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:17
+#: ../../data/scripting/editor/editor_controls.lua:16
 msgid "Help"
-msgstr ""
+msgstr "도움말"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/scripting/editor/editor_controls.lua:19
-msgid "Toggle main menu"
+#: ../../data/scripting/editor/editor_controls.lua:18
+msgctxt "hotkey"
+msgid "Esc"
 msgstr ""
+
+#: ../../data/scripting/editor/editor_controls.lua:18
+msgid "Toggle main menu"
+msgstr "주 차림표 켜기/끄기"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 't'
-#: ../../data/scripting/editor/editor_controls.lua:21
+#: ../../data/scripting/editor/editor_controls.lua:20
 msgid "Toggle tools menu"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:25
-msgid "Toggle building spaces"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:27
-msgid "Toggle immovables display"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:29
-msgid "Toggle animals display"
-msgstr ""
+msgstr "도구 차림표 켜기/끄기"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'p'
-#: ../../data/scripting/editor/editor_controls.lua:31
-msgid "Toggle resources display"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:33
+#: ../../data/scripting/editor/editor_controls.lua:24
 msgid "Toggle player menu"
-msgstr ""
+msgstr "플레이어 차림표 켜기/끄기"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:35
+#: ../../data/scripting/editor/editor_controls.lua:26
 msgid "Undo"
-msgstr ""
+msgstr "실행 취소"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:37
+#: ../../data/scripting/editor/editor_controls.lua:28
 msgid "Redo"
-msgstr ""
+msgstr "되살리기"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'i'
-#: ../../data/scripting/editor/editor_controls.lua:39
+#: ../../data/scripting/editor/editor_controls.lua:30
 msgid "Activate information tool"
-msgstr ""
+msgstr "정보 도구 활성화"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:41
+#: ../../data/scripting/editor/editor_controls.lua:32
 msgctxt "hotkey"
 msgid "Ctrl + L"
-msgstr ""
+msgstr "Ctrl + L"
 
-#: ../../data/scripting/editor/editor_controls.lua:41
+#: ../../data/scripting/editor/editor_controls.lua:32
 msgid "Load map"
-msgstr ""
+msgstr "지도 불러오기"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:43
+#: ../../data/scripting/editor/editor_controls.lua:34
 msgctxt "hotkey"
 msgid "Ctrl + S"
-msgstr ""
+msgstr "Ctrl + S"
 
-#: ../../data/scripting/editor/editor_controls.lua:43
+#: ../../data/scripting/editor/editor_controls.lua:34
 msgid "Save map"
-msgstr ""
+msgstr "지도 저장"
 
-#: ../../data/scripting/editor/editor_controls.lua:47
+#: ../../data/scripting/editor/editor_controls.lua:38
 msgid "Tools"
-msgstr ""
+msgstr "도구"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:50
+#: ../../data/scripting/editor/editor_controls.lua:41
 msgctxt "hotkey"
 msgid "0-9"
-msgstr ""
+msgstr "0-9"
 
-#: ../../data/scripting/editor/editor_controls.lua:50
+#: ../../data/scripting/editor/editor_controls.lua:41
 msgid "Change tool size"
-msgstr ""
+msgstr "도구 크기 변경"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:52
+#: ../../data/scripting/editor/editor_controls.lua:43
 msgctxt "hotkey"
 msgid "Click"
-msgstr ""
+msgstr "클릭"
 
-#: ../../data/scripting/editor/editor_controls.lua:52
+#: ../../data/scripting/editor/editor_controls.lua:43
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
-msgstr ""
+msgstr "지도에 새 요소를 배치하거나 ‘값 증가/감소’로 선택한 값을 기준으로 지도 요소를 늘립니다."
 
-#: ../../data/scripting/editor/editor_controls.lua:54
+#: ../../data/scripting/editor/editor_controls.lua:45
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
-msgstr ""
+msgstr "[플레이해 보고 번역수정할것]지도에서 요소를 제거하거나 ‘값 증가/감소’로 선택한 값을 기준으로 지도 요소를 줄입니다."
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:54
+#: ../../data/scripting/editor/editor_controls.lua:45
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "쉬프트 + 클릭"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:56
+#: ../../data/scripting/editor/editor_controls.lua:47
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr ""
+msgstr "컨트롤 + 클릭"
 
-#: ../../data/scripting/editor/editor_controls.lua:56
+#: ../../data/scripting/editor/editor_controls.lua:47
 msgid "Set map elements to the value selected by ‘Set Value’"
-msgstr ""
+msgstr "지도 요소를 ‘값 설정’으로 선택된 값으로 합니다."
 
 #: ../../data/scripting/editor/editor_help.lua:49
 msgid "Editor Help"
-msgstr ""
+msgstr "편집기 도움말"
 
 #: ../../data/scripting/editor/editor_help.lua:54
 msgid "General"
-msgstr ""
+msgstr "개요"
 
 #: ../../data/scripting/editor/editor_help.lua:59
-#: ../../data/scripting/editor/editor_introduction.lua:12
+#: ../../data/scripting/editor/editor_introduction.lua:11
 msgid "Introduction"
-msgstr ""
+msgstr "소개"
 
 #: ../../data/scripting/editor/editor_help.lua:71
-#: ../../data/scripting/editor/tips.lua:16
+#: ../../data/scripting/editor/tips.lua:15
 msgid "Tips"
-msgstr ""
+msgstr "도움말"
 
 #: ../../data/scripting/editor/editor_help.lua:81
 msgid "Terrains"
-msgstr ""
+msgstr "지형"
 
 #: ../../data/scripting/editor/editor_help.lua:88
 msgid "Trees"
-msgstr ""
+msgstr "나무"
 
 #: ../../data/scripting/editor/editor_introduction.lua:9
 msgid "The Widelands Editor"
-msgstr ""
+msgstr "와이드랜드 편집기"
 
-#: ../../data/scripting/editor/editor_introduction.lua:14
+#: ../../data/scripting/editor/editor_introduction.lua:13
 msgid ""
 "This editor is intended for players who would like to design their own maps "
 "to use with Widelands."
-msgstr ""
+msgstr "이 편집기는 와이드랜드에서 사용할 자신만의 지도를 설계하려는 사람을 위한것입니다."
 
-#: ../../data/scripting/editor/editor_introduction.lua:15
+#: ../../data/scripting/editor/editor_introduction.lua:14
 msgid ""
 "As you can see, this editor is heavy work in progress and as the editor "
 "becomes better and better, this text will also get longer and more complete."
-msgstr ""
+msgstr "[번역확인]보다시피, 편집기는 점점 나아지고 있지만 아직 개발이 필요합니다. 글자도 더 길게 하면서 여러 요소를 제대로 설명해야 합니다"
 
-#: ../../data/scripting/editor/editor_introduction.lua:18
+#: ../../data/scripting/editor/editor_introduction.lua:17
 msgid "The wiki also includes a short tutorial on how to build a map."
-msgstr ""
+msgstr "위키에는 맵을 만드는 방법에대한 간단한 자습서도 포함되어 있습니다."
 
 #: ../../data/scripting/editor/terrain_help.lua:21
 msgid "Resources"
-msgstr ""
+msgstr "자원"
 
-#. TRANSLATORS: A header in the editor help
+#. TRANSLATORS: A header in the editor help if there is 1 valid resource
 #: ../../data/scripting/editor/terrain_help.lua:25
 msgid "Valid Resource:"
-msgid_plural "Valid Resources:"
-msgstr[0] ""
-
-#: ../../data/scripting/editor/terrain_help.lua:34
-msgid "Default:"
 msgstr ""
+
+#. TRANSLATORS: A header in the editor help if there is more than 1 valid
+#. resource
+#: ../../data/scripting/editor/terrain_help.lua:28
+msgid "Valid Resources:"
+msgstr ""
+
+#: ../../data/scripting/editor/terrain_help.lua:39
+msgid "Default:"
+msgstr "기본:"
 
 #. TRANSLATORS: e.g. "5x Water"
-#: ../../data/scripting/editor/terrain_help.lua:36
+#: ../../data/scripting/editor/terrain_help.lua:41
 msgid "%1%x %2%"
-msgstr ""
+msgstr "[플레이해보고 수정할것]%1%x %2%"
 
 #. TRANSLATORS: A header in the editor help
-#: ../../data/scripting/editor/terrain_help.lua:67
-msgid "Probability of trees growing"
-msgstr ""
-
 #: ../../data/scripting/editor/terrain_help.lua:72
+msgid "Probability of trees growing"
+msgstr "나무가 자랄 확률"
+
+#: ../../data/scripting/editor/terrain_help.lua:77
 msgid "No trees will grow here."
-msgstr ""
+msgstr "여기는 나무가 자랄 수 없습니다."
 
 #. TRANSLATORS: A header in the editor help. Terrains preferred by a type of
 #. tree.
-#: ../../data/scripting/editor/tree_help.lua:18
+#: ../../data/scripting/editor/tree_help.lua:19
 msgid "Preferred terrains"
-msgstr ""
-
-#. TRANSLATORS: Terrain name (Climate)
-#: ../../data/scripting/editor/tree_help.lua:39
-msgid "%1% (%2%)"
-msgstr ""
+msgstr "좋아하는 지형"

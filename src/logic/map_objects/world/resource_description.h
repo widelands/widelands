@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,6 +48,12 @@ public:
 	/// Returns if this resource is detectable by a geologist.
 	bool detectable() const;
 
+	/// Returns the time for which nearby geologist messages for this resource are muted
+	uint32_t timeout_ms() const;
+
+	/// Returns the radius within which geologist messages for this resource are temporarily muted
+	uint32_t timeout_radius() const;
+
 	/// Returns the maximum amount that can be in a field for this resource.
 	ResourceAmount max_amount() const;
 
@@ -64,6 +70,8 @@ private:
 	const std::string name_;
 	const std::string descname_;
 	const bool detectable_;
+	const uint32_t timeout_ms_;
+	const uint32_t timeout_radius_;
 	const ResourceAmount max_amount_;
 	const std::string representative_image_;
 	std::vector<EditorPicture> editor_pictures_;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,9 +27,8 @@
 #include "boost/format.hpp"
 
 #include "base/i18n.h"
-#include "graphic/graphic.h"
 #include "graphic/image.h"
-#include "logic/description_maintainer.h"
+#include "logic/map_objects/description_maintainer.h"
 #include "logic/map_objects/world/editor_category.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
@@ -48,8 +47,8 @@ public:
 	// not take ownership.
 	CategorizedItemSelectionMenu(
 	   UI::Panel* parent,
-	   const DescriptionMaintainer<Widelands::EditorCategory>& categories,
-	   const DescriptionMaintainer<DescriptionType>& descriptions,
+	   const Widelands::DescriptionMaintainer<Widelands::EditorCategory>& categories,
+	   const Widelands::DescriptionMaintainer<DescriptionType>& descriptions,
 	   std::function<UI::Checkbox*(UI::Panel* parent, const DescriptionType& descr)> create_checkbox,
 	   const std::function<void()> select_correct_tool,
 	   ToolType* const tool);
@@ -61,7 +60,7 @@ private:
 	// Update the label with the currently selected object names.
 	void update_label();
 
-	const DescriptionMaintainer<DescriptionType>& descriptions_;
+	const Widelands::DescriptionMaintainer<DescriptionType>& descriptions_;
 	std::function<void()> select_correct_tool_;
 	bool protect_against_recursive_select_;
 	UI::TabPanel tab_panel_;
@@ -73,8 +72,8 @@ private:
 template <typename DescriptionType, typename ToolType>
 CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectionMenu(
    UI::Panel* parent,
-   const DescriptionMaintainer<Widelands::EditorCategory>& categories,
-   const DescriptionMaintainer<DescriptionType>& descriptions,
+   const Widelands::DescriptionMaintainer<Widelands::EditorCategory>& categories,
+   const Widelands::DescriptionMaintainer<DescriptionType>& descriptions,
    const std::function<UI::Checkbox*(UI::Panel* parent, const DescriptionType& descr)>
       create_checkbox,
    const std::function<void()> select_correct_tool,
@@ -83,19 +82,17 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
      descriptions_(descriptions),
      select_correct_tool_(select_correct_tool),
      protect_against_recursive_select_(false),
-     tab_panel_(this, g_gr->images().get("images/wui/window_background_dark.png")),
+     tab_panel_(this, UI::TabPanelStyle::kWuiLight),
      current_selection_names_(this,
                               0,
                               0,
                               20,
                               20,
+                              UI::PanelStyle::kWui,
                               "",
                               UI::Align::kCenter,
-                              g_gr->images().get("images/ui_basic/but1.png"),
                               UI::MultilineTextarea::ScrollMode::kNoScrolling),
      tool_(tool) {
-	current_selection_names_.set_background(
-	   g_gr->images().get("images/wui/window_background_dark.png"));
 	add(&tab_panel_);
 
 	for (uint32_t category_index = 0; category_index < categories.size(); ++category_index) {

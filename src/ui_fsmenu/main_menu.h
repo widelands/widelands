@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,7 +40,6 @@ protected:
 	uint32_t title_y_;
 	uint32_t padding_;
 
-	const std::string button_background_;
 	UI::Box vbox_;
 };
 

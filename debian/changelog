@@ -1,3 +1,66 @@
+widelands (1:19+repack-6widelands1) UNRELEASED; urgency=medium
+
+  * Changed build dependencies:
+      - New build dependencies required:
+        libboost-system-dev
+      - No longer needed:
+        libsdl2-net-dev
+      - Also dropped version-specific glew alternative.
+        1.6 doesn't seem to be around anymore and the versionless one
+        seems to work across the different distro releases we build for
+  * Build with ASAN disabled since parts of the code atm breaks
+  * Various minor typo and whitespace fixes
+  * Removed deprecated Applications category from desktop file
+  * Updated appdata: enable content_rating
+  * Updated appdata: added icon
+  * Additional translations for appdata and desktop file.
+  * Update copyright year from 2013 to 2018.
+  * Merged Debian packaging of Widelands 1:19+repack-6. Remaining changes:
+    - Revert debhelper/compat level to 9. (Ubuntu 14.04 doesn't have debhelper 10.)
+    - Disabled all Debian-patches since applying them might cause conflicts as
+      development moves along in latest trunk. They mostly concern
+      architectures which we don't have access to build/test with normally, so
+      they would be hard to maintain.
+    - Dropped patches:
+        gcc7 
+          (Already applied in trunk)
+        system-wide_minizip
+          (Should be included in trunk once we iron out the remaining bugs)
+        widelands_ICU_63.1
+          (Already applied in trunk)
+    - Build using embedded minizip since we support older Ubuntu releases where
+      the package is not available.
+    - .stub-files to make widelands.desktop and appdata localizable.
+    - Re-added font entries to copyright file, since we will most likely be using
+      the embedded fonts.
+    - Modified rules to use our embedded fonts and install all binaries.
+    - Comment out get-orig-source. We just want to build current trunk
+
+ -- Widelands <widelands-dev@lists.launchpad.net>  Sun, 25 Nov 2018 12:06:04 +0100
+
+widelands (1:19+repack-6) unstable; urgency=medium
+
+  * Team upload.
+  * Fix FTBFS with ICU 63.1.
+    Thanks to László Böszörményi (GCS) for the report and patch.
+    (Closes: #913513)
+
+ -- Markus Koschany <apo@debian.org>  Sat, 17 Nov 2018 18:35:44 +0100
+
+widelands (1:19+repack-5) unstable; urgency=medium
+
+  [ Jeremy Bicha ]
+  * Team upload.
+  * Use hicolor theme icon for .desktop (Closes: #857644) (LP: #1789023)
+  * Add minimal debian/gbp.conf
+
+  [ Markus Koschany ]
+  * Switch to compat level 11.
+  * Declare compliance with Debian Policy 4.2.1.
+  * d/control: Change priority from extra to optional.
+
+ -- Markus Koschany <apo@debian.org>  Sun, 09 Sep 2018 22:10:46 +0200
+
 widelands (1:19+repack-4widelands1) UNRELEASED; urgency=medium
 
   * Changed build dependencies:
@@ -8,6 +71,7 @@ widelands (1:19+repack-4widelands1) UNRELEASED; urgency=medium
       - Also dropped version-specific glew alternative.
         1.6 doesn't seem to be around anymore and the versionless one
         seems to work across the different distro releases we build for
+  * Build with ASAN disabled since parts of the code atm breaks
   * Merged Debian packaging of Widelands 1:19+repack-4. Remaining changes:
     - Revert debhelper/compat level to 9. (Ubuntu 14.04 doesn't have debhelper 10.)
     - Disabled all Debian-patches since applying them might cause conflicts as

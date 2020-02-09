@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2017 by the Widelands Development Team
+ * Copyright (C) 2015-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
 #include <set>
 #include <string>
 
-#include "logic/map.h"
+#include "logic/widelands.h"
 #include "ui_basic/box.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/textarea.h"
@@ -43,7 +43,7 @@ struct SuggestedTeamsBox : public UI::Box {
 	~SuggestedTeamsBox();
 
 	void hide();
-	void show(const std::vector<Widelands::Map::SuggestedTeamLineup>& suggested_teams);
+	void show(const std::vector<Widelands::SuggestedTeamLineup>& suggested_teams);
 
 private:
 	int32_t const padding_;
@@ -53,8 +53,8 @@ private:
 	UI::Box* lineup_box_;
 	std::vector<UI::Icon*> player_icons_;
 	std::vector<UI::Textarea*> vs_labels_;
-	std::vector<Widelands::Map::SuggestedTeamLineup> suggested_teams_;
+	std::vector<Widelands::SuggestedTeamLineup> suggested_teams_;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_WUI_SUGGESTED_TEAMS_BOX_H

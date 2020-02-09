@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -98,6 +98,11 @@ void GameCmdQueuePacket::write(FileSystem& fs, Game& game, MapObjectSaver* const
 
 		while (!p.empty()) {
 			const CmdQueue::CmdItem& it = p.top();
+			if (it.cmd->duetime() > time) {
+				// Time is the primary sorting key, so we can't have any additional commands in this
+				// queue for this time
+				break;
+			}
 			if (it.cmd->duetime() == time) {
 				if (upcast(GameLogicCommand, cmd, it.cmd)) {
 					// The id (aka command type)
@@ -123,4 +128,4 @@ void GameCmdQueuePacket::write(FileSystem& fs, Game& game, MapObjectSaver* const
 
 	fw.write(fs, "binary/cmd_queue");
 }
-}
+}  // namespace Widelands

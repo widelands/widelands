@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,17 +22,16 @@
 #include "editor/editorinteractive.h"
 #include "editor/tools/decrease_resources_tool.h"
 #include "editor/tools/increase_resources_tool.h"
-#include "graphic/graphic.h"
 #include "logic/field.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 
-int32_t EditorSetResourcesTool::handle_click_impl(const Widelands::World& world,
-                                                  const Widelands::NodeAndTriangle<>& center,
-                                                  EditorInteractive& /* parent */,
+int32_t EditorSetResourcesTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
+                                                  EditorInteractive& eia,
                                                   EditorActionArgs* args,
                                                   Widelands::Map* map) {
+	const Widelands::World& world = eia.egbase().world();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
 	do {
@@ -45,8 +44,7 @@ int32_t EditorSetResourcesTool::handle_click_impl(const Widelands::World& world,
 		if (amount > max_amount)
 			amount = max_amount;
 
-		if (map->is_resource_valid(world, mr.location(), args->current_resource) &&
-		    mr.location().field->get_resources_amount() != amount) {
+		if (map->is_resource_valid(world, mr.location(), args->current_resource)) {
 
 			args->original_resource.push_back(
 			   EditorActionArgs::ResourceState{mr.location(), mr.location().field->get_resources(),
@@ -59,15 +57,14 @@ int32_t EditorSetResourcesTool::handle_click_impl(const Widelands::World& world,
 }
 
 int32_t EditorSetResourcesTool::handle_undo_impl(
-   const Widelands::World& world,
    const Widelands::NodeAndTriangle<Widelands::Coords>& /* center */,
-   EditorInteractive& /* parent */,
+   EditorInteractive& eia,
    EditorActionArgs* args,
    Widelands::Map* map) {
 	for (const auto& res : args->original_resource) {
 		Widelands::ResourceAmount amount = res.amount;
 		Widelands::ResourceAmount max_amount =
-		   world.get_resource(args->current_resource)->max_amount();
+		   eia.egbase().world().get_resource(args->current_resource)->max_amount();
 
 		if (amount > max_amount)
 			amount = max_amount;

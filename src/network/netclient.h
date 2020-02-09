@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,8 @@
 
 #include <memory>
 
+#include "network/bufferedconnection.h"
+#include "network/netclient_interface.h"
 #include "network/network.h"
 
 /**
@@ -30,7 +32,8 @@
  * This class only tries to create a single socket, either for IPv4 and IPv6.
  * Which is used depends on what kind of address is given on call to connect().
  */
-class NetClient {
+// This class is currently only an interface wrapper for BufferedConnection
+class NetClient : public NetClientInterface {
 public:
 	/**
 	 * Tries to establish a connection to the given host.
@@ -39,47 +42,13 @@ public:
 	 */
 	static std::unique_ptr<NetClient> connect(const NetAddress& host);
 
-	/**
-	 * Closes the connection.
-	 * If you want to send a goodbye-message to the host, do so before freeing the object.
-	 */
-	~NetClient();
+	~NetClient() override;
 
-	/**
-	 * Returns the ip and port of the remote host we are connected to.
-	 * \param addr A pointer to a NetAddress structure to write the address to.
-	 * \return Returns \c false when addr could not be filled in.
-	 *  This should only happen when the client is not connected.
-	 */
-	bool get_remote_address(NetAddress* addr) const;
-
-	/**
-	 * Returns whether the client is connected.
-	 * \return \c true if the connection is open, \c false otherwise.
-	 */
-	bool is_connected() const;
-
-	/**
-	 * Closes the connection.
-	 * If you want to send a goodbye-message to the host, do so before calling this.
-	 */
-	void close();
-
-	/**
-	 * Tries to receive a packet.
-	 * \param packet A packet that should be overwritten with the received data.
-	 * \return \c true if a packet is available, \c false otherwise.
-	 *   The given packet is only modified when \c true is returned.
-	 *   Calling this on a closed connection will return false.
-	 */
-	bool try_receive(RecvPacket* packet);
-
-	/**
-	 * Sends a packet.
-	 * Calling this on a closed connection will silently fail.
-	 * \param packet The packet to send.
-	 */
-	void send(const SendPacket& packet);
+	// Inherited from NetClientInterface
+	bool is_connected() const override;
+	void close() override;
+	std::unique_ptr<RecvPacket> try_receive() override;
+	void send(const SendPacket& packet, NetPriority priority = NetPriority::kNormal) override;
 
 private:
 	/**
@@ -89,14 +58,7 @@ private:
 	 */
 	explicit NetClient(const NetAddress& host);
 
-	/// An io_service needed by boost.asio. Primarily needed for asynchronous operations.
-	boost::asio::io_service io_service_;
-
-	/// The socket that connects us to the host.
-	boost::asio::ip::tcp::socket socket_;
-
-	/// Deserializer acts as a buffer for packets (splitting stream to packets)
-	Deserializer deserializer_;
+	std::unique_ptr<BufferedConnection> conn_;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETCLIENT_H

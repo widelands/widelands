@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,6 @@
 
 #include "economy/input_queue.h"
 #include "logic/map_objects/immovable.h"
-#include "logic/widelands.h"
 
 namespace Widelands {
 
@@ -70,14 +69,6 @@ public:
 	 */
 	Worker* extract_worker();
 
-	/**
-	 * Loads the state of this WorkersQueue.
-	 * This method should only be used by ExpeditionBootstrap as compatibility helper when loading
-	 * save games for build 19.
-	 * If we ever drop support for them, remove this method and rework ExpeditionBootstrap::load().
-	 */
-	void load_for_expedition(FileRead&, Game&, MapObjectLoader&, uint8_t);
-
 protected:
 	void read_child(FileRead&, Game&, MapObjectLoader&) override;
 	void write_child(FileWrite&, Game&, MapObjectSaver&) override;
@@ -87,6 +78,6 @@ protected:
 	/// The workers currently in the queue
 	std::vector<Worker*> workers_;
 };
-}
+}  // namespace Widelands
 
 #endif  // WL_ECONOMY_WORKERS_QUEUE_H

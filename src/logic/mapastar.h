@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2017 by the Widelands Development Team
+ * Copyright (C) 2011-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,12 +22,14 @@
 
 #include "base/log.h"
 #include "logic/map.h"
+#include "logic/map_objects/tribes/wareworker.h"
 #include "logic/pathfield.h"
 
 namespace Widelands {
 
 struct MapAStarBase {
-	explicit MapAStarBase(Map& m) : map(m), pathfields(m.pathfieldmgr_->allocate()) {
+	explicit MapAStarBase(Map& m, WareWorker type)
+	   : map(m), pathfields(m.pathfieldmgr_->allocate()), queue(type) {
 	}
 
 	bool empty() const {
@@ -108,7 +110,8 @@ struct StepEvalAStar {
  * @endcode
  */
 template <typename StepEval> struct MapAStar : MapAStarBase {
-	MapAStar(Map& map_, const StepEval& eval_) : MapAStarBase(map_), eval(eval_) {
+	MapAStar(Map& map_, const StepEval& eval_, WareWorker type)
+	   : MapAStarBase(map_, type), eval(eval_) {
 	}
 
 	void push(Coords pos, int32_t cost = 0);
@@ -131,7 +134,7 @@ template <typename StepEval> void MapAStar<StepEval>::push(Coords pos, int32_t c
 		pf.real_cost = cost;
 		pf.estim_cost = eval.estimate(map, map.get_fcoords(pos));
 		queue.push(&pf);
-	} else if (pf.cookie().is_active() && cost <= pf.real_cost) {
+	} else if (pf.cookie(queue.type()).is_active() && cost <= pf.real_cost) {
 		pf.backlink = IDLE;
 		pf.real_cost = cost;
 		queue.decrease_key(&pf);
@@ -158,7 +161,7 @@ template <typename StepEval> bool MapAStar<StepEval>::step(FCoords& cur, int32_t
 	// avoid bias by using different orders when pathfinding
 	static const int8_t order1[] = {WALK_NW, WALK_NE, WALK_E, WALK_SE, WALK_SW, WALK_W};
 	static const int8_t order2[] = {WALK_NW, WALK_W, WALK_SW, WALK_SE, WALK_E, WALK_NE};
-	int8_t const* direction = (cur.x + cur.y) & 1 ? order1 : order2;
+	int8_t const* direction = ((cur.x + cur.y) & 1) ? order1 : order2;
 
 	// Check all the 6 neighbours
 	for (uint32_t i = 6; i; i--, direction++) {

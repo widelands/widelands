@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,12 +23,11 @@
 #include <string>
 
 #include "logic/player_end_result.h"
-#include "logic/widelands.h"
 
 namespace Widelands {
 class Game;
 class PlayerCommand;
-}
+}  // namespace Widelands
 
 /**
  * A game controller implements the policies surrounding the actual
@@ -47,7 +46,9 @@ public:
 	}
 
 	virtual void think() = 0;
-	virtual void send_player_command(Widelands::PlayerCommand&) = 0;
+
+	// TODO(Klaus Halfmann): Command must be deleted once it was handled.
+	virtual void send_player_command(Widelands::PlayerCommand*) = 0;
 	virtual int32_t get_frametime() = 0;
 	virtual GameType get_game_type() = 0;
 

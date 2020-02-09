@@ -2,13 +2,13 @@
 -- e.g. for the readme and general in-game help
 -- This cuts down on string maintenance.
 
-include "scripting/formatting.lua"
+include "scripting/richtext.lua"
 
 function help_online_help()
    set_textdomain("texts")
    return
       h2(_[[Online Help]]) ..
-      p(_[[If you need more documentation or help for Widelands or the Widelands Editor, be sure to visit our homepage at %s. You can find online help in our wiki there.]]):bformat(a("https://wl.widelands.org/"))
+      p(_[[If you need more documentation or help for Widelands or the Widelands Editor, be sure to visit our homepage at %s. You can find online help in our wiki there.]]):bformat(a("widelands.org"))
 end
 
 function help_introduction()
@@ -45,8 +45,8 @@ end
 function help_toggle_fullscreen_hotkey()
    set_textdomain("texts")
    return
-      -- TRANSLATORS: This is an access key combination. The hotkey is 'f'
-      dl(help_format_hotkey("F"), _"Toggle fullscreen (if supported by the OS)")
+      -- TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
+      dl(help_format_hotkey(pgettext("hotkey", "Ctrl + F")), _"Toggle fullscreen (if supported by the OS)")
 end
 
 function help_toggle_minimap_hotkey()

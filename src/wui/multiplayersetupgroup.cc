@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2017 by the Widelands Development Team
+ * Copyright (C) 2010-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,13 +32,10 @@
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "graphic/playercolor.h"
-#include "graphic/text_constants.h"
 #include "logic/game.h"
 #include "logic/game_settings.h"
-#include "logic/map_objects/tribes/tribe_descr.h"
-#include "logic/map_objects/tribes/tribes.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
-#include "logic/widelands.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/mouse_constants.h"
@@ -57,15 +54,24 @@ struct MultiPlayerClientGroup : public UI::Box {
 	                       PlayerSlot id,
 	                       GameSettingsProvider* const settings)
 	   : UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h, kPadding),
-	     slot_dropdown_(this, 0, 0, h, 200, h, _("Role"), UI::DropdownType::kPictorial),
+	     slot_dropdown_(this,
+	                    (boost::format("dropdown_slot%d") % static_cast<unsigned int>(id)).str(),
+	                    0,
+	                    0,
+	                    h,
+	                    16,
+	                    h,
+	                    _("Role"),
+	                    UI::DropdownType::kPictorial,
+	                    UI::PanelStyle::kFsMenu,
+	                    UI::ButtonStyle::kFsMenuSecondary),
 	     // Name needs to be initialized after the dropdown, otherwise the layout function will
 	     // crash.
 	     name(this, 0, 0, w - h - UI::Scrollbar::kSize * 11 / 5, h),
-	     s(settings),
+	     settings_(settings),
 	     id_(id),
 	     slot_selection_locked_(false) {
 		set_size(w, h);
-
 		add(&slot_dropdown_);
 		add(&name, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
@@ -94,7 +100,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 			   case NoteGameSettings::Action::kPlayer:
 				   break;
 			   }
-			});
+		   });
 	}
 
 	/// Update dropdown sizes
@@ -106,7 +112,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 	/// This will update the client's player slot with the value currently selected in the slot
 	/// dropdown.
 	void set_slot() {
-		const GameSettings& settings = s->settings();
+		const GameSettings& settings = settings_->settings();
 		if (id_ != settings.usernum) {
 			return;
 		}
@@ -114,7 +120,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 		if (slot_dropdown_.has_selection()) {
 			const uint8_t new_slot = slot_dropdown_.get_selected();
 			if (new_slot != settings.users.at(id_).position) {
-				s->set_player_number(slot_dropdown_.get_selected());
+				settings_->set_player_number(slot_dropdown_.get_selected());
 			}
 		}
 		slot_selection_locked_ = false;
@@ -147,7 +153,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 
 	/// Take care of visibility and current values
 	void update() {
-		const GameSettings& settings = s->settings();
+		const GameSettings& settings = settings_->settings();
 		const UserSettings& user_setting = settings.users.at(id_);
 
 		if (user_setting.position == UserSettings::not_connected()) {
@@ -161,7 +167,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 
 	UI::Dropdown<uintptr_t> slot_dropdown_;  /// Select the player slot.
 	UI::Textarea name;                       /// Client nick name
-	GameSettingsProvider* const s;
+	GameSettingsProvider* const settings_;
 	uint8_t const id_;            /// User number
 	bool slot_selection_locked_;  // Ensure that dropdowns will close on selection.
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
@@ -176,7 +182,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	                       GameSettingsProvider* const settings,
 	                       NetworkPlayerSettingsBackend* const npsb)
 	   : UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h, kPadding / 2),
-	     s(settings),
+	     settings_(settings),
 	     n(npsb),
 	     id_(id),
 	     player(this,
@@ -185,15 +191,54 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	            0,
 	            h,
 	            h,
-	            g_gr->images().get("images/ui_basic/but1.png"),
+	            UI::ButtonStyle::kFsMenuSecondary,
 	            playercolor_image(id, "images/players/player_position_menu.png"),
 	            (boost::format(_("Player %u")) % static_cast<unsigned int>(id_ + 1)).str(),
-	            UI::Button::Style::kFlat),
-	     type_dropdown_(this, 0, 0, 50, 200, h, _("Type"), UI::DropdownType::kPictorial),
-	     tribes_dropdown_(this, 0, 0, 50, 200, h, _("Tribe"), UI::DropdownType::kPictorial),
-	     init_dropdown_(
-	        this, 0, 0, w - 4 * h - 3 * kPadding, 200, h, "", UI::DropdownType::kTextualNarrow),
-	     team_dropdown_(this, 0, 0, h, 200, h, _("Team"), UI::DropdownType::kPictorial),
+	            UI::Button::VisualState::kFlat),
+	     type_dropdown_(this,
+	                    (boost::format("dropdown_type%d") % static_cast<unsigned int>(id)).str(),
+	                    0,
+	                    0,
+	                    50,
+	                    16,
+	                    h,
+	                    _("Type"),
+	                    UI::DropdownType::kPictorial,
+	                    UI::PanelStyle::kFsMenu,
+	                    UI::ButtonStyle::kFsMenuSecondary),
+	     tribes_dropdown_(this,
+	                      (boost::format("dropdown_tribes%d") % static_cast<unsigned int>(id)).str(),
+	                      0,
+	                      0,
+	                      50,
+	                      16,
+	                      h,
+	                      _("Tribe"),
+	                      UI::DropdownType::kPictorial,
+	                      UI::PanelStyle::kFsMenu,
+	                      UI::ButtonStyle::kFsMenuSecondary),
+	     init_dropdown_(this,
+	                    (boost::format("dropdown_init%d") % static_cast<unsigned int>(id)).str(),
+	                    0,
+	                    0,
+	                    w - 4 * h - 3 * kPadding,
+	                    16,
+	                    h,
+	                    "",
+	                    UI::DropdownType::kTextualNarrow,
+	                    UI::PanelStyle::kFsMenu,
+	                    UI::ButtonStyle::kFsMenuSecondary),
+	     team_dropdown_(this,
+	                    (boost::format("dropdown_team%d") % static_cast<unsigned int>(id)).str(),
+	                    0,
+	                    0,
+	                    h,
+	                    16,
+	                    h,
+	                    _("Team"),
+	                    UI::DropdownType::kPictorial,
+	                    UI::PanelStyle::kFsMenu,
+	                    UI::ButtonStyle::kFsMenuSecondary),
 	     last_state_(PlayerSettings::State::kClosed),
 	     type_selection_locked_(false),
 	     tribe_selection_locked_(false),
@@ -228,22 +273,29 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 		subscriber_ =
 		   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& note) {
+			   if (settings_->settings().players.empty()) {
+				   // No map/savegame yet
+				   return;
+			   }
+
 			   switch (note.action) {
 			   case NoteGameSettings::Action::kMap:
 				   // We don't care about map updates, since we receive enough notifications for the
 				   // slots.
 				   break;
+			   case NoteGameSettings::Action::kUser:
+				   // We might have moved away from a slot, so we need to update the previous slot too.
+				   // Since we can't track the slots here, we just update everything.
+				   update();
+				   break;
 			   default:
-				   if (s->settings().players.empty()) {
-					   // No map/savegame yet
-					   return;
-				   }
-				   if (id_ == note.position ||
-				       s->settings().players[id_].state == PlayerSettings::State::kShared) {
+				   if (id_ == note.position || (id_ < settings_->settings().players.size() &&
+				                                settings_->settings().players.at(id_).state ==
+				                                   PlayerSettings::State::kShared)) {
 					   update();
 				   }
 			   }
-			});
+		   });
 
 		// Init dropdowns
 		update();
@@ -263,7 +315,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// This will update the game settings for the type with the value
 	/// currently selected in the type dropdown.
 	void set_type() {
-		if (!s->can_change_player_state(id_)) {
+		if (!settings_->can_change_player_state(id_)) {
 			return;
 		}
 		type_selection_locked_ = true;
@@ -328,7 +380,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		type_dropdown_.add(
 		   _("Open"), "open", g_gr->images().get("images/ui_basic/continue.png"), false, _("Open"));
 
-		type_dropdown_.set_enabled(s->can_change_player_state(id_));
+		type_dropdown_.set_enabled(settings_->can_change_player_state(id_));
 
 		// Now select the entry according to server settings
 		const PlayerSettings& player_setting = settings.players[id_];
@@ -360,9 +412,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 	/// Whether the client who is running the UI is allowed to change the tribe for this player slot.
 	bool has_tribe_access() {
-		return s->settings().players[id_].state == PlayerSettings::State::kShared ?
-		          s->can_change_player_init(id_) :
-		          s->can_change_player_tribe(id_);
+		return settings_->settings().players[id_].state == PlayerSettings::State::kShared ?
+		          settings_->can_change_player_init(id_) :
+		          settings_->can_change_player_tribe(id_);
 	}
 
 	/// This will update the game settings for the tribe or shared_in with the value
@@ -371,7 +423,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		if (!has_tribe_access()) {
 			return;
 		}
-		const PlayerSettings& player_settings = s->settings().players[id_];
+		const PlayerSettings& player_settings = settings_->settings().players[id_];
 		tribe_selection_locked_ = true;
 		tribes_dropdown_.set_disable_style(player_settings.state == PlayerSettings::State::kShared ?
 		                                      UI::ButtonDisableStyle::kPermpressed :
@@ -421,7 +473,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		} else {
 			{
 				i18n::Textdomain td("tribes");
-				for (const TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
+				for (const Widelands::TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
 					tribes_dropdown_.add(_(tribeinfo.descname), tribeinfo.name,
 					                     g_gr->images().get(tribeinfo.icon), false, tribeinfo.tooltip);
 				}
@@ -451,7 +503,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// This will update the game settings for the initialization with the value
 	/// currently selected in the initialization dropdown.
 	void set_init() {
-		if (!s->can_change_player_init(id_)) {
+		if (!settings_->can_change_player_init(id_)) {
 			return;
 		}
 		init_selection_locked_ = true;
@@ -472,22 +524,23 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		const PlayerSettings& player_setting = settings.players[id_];
 		if (settings.scenario) {
 			init_dropdown_.set_label(_("Scenario"));
+			init_dropdown_.set_tooltip(_("Start type is set via the scenario"));
 		} else if (settings.savegame) {
 			/** Translators: This is a game type */
 			init_dropdown_.set_label(_("Saved Game"));
 		} else {
 			init_dropdown_.set_label("");
 			i18n::Textdomain td("tribes");  // for translated initialisation
-			const TribeBasicInfo tribeinfo = Widelands::get_tribeinfo(player_setting.tribe);
+			const Widelands::TribeBasicInfo tribeinfo = Widelands::get_tribeinfo(player_setting.tribe);
 			for (size_t i = 0; i < tribeinfo.initializations.size(); ++i) {
-				const TribeBasicInfo::Initialization& addme = tribeinfo.initializations[i];
+				const Widelands::TribeBasicInfo::Initialization& addme = tribeinfo.initializations[i];
 				init_dropdown_.add(_(addme.descname), i, nullptr,
 				                   i == player_setting.initialization_index, _(addme.tooltip));
 			}
 		}
 
 		init_dropdown_.set_visible(true);
-		init_dropdown_.set_enabled(s->can_change_player_init(id_));
+		init_dropdown_.set_enabled(settings_->can_change_player_init(id_));
 	}
 
 	/// This will update the team settings with the value currently selected in the teams dropdown.
@@ -524,12 +577,12 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		}
 		team_dropdown_.select(player_setting.team);
 		team_dropdown_.set_visible(true);
-		team_dropdown_.set_enabled(s->can_change_player_team(id_));
+		team_dropdown_.set_enabled(settings_->can_change_player_team(id_));
 	}
 
 	/// Refresh all user interfaces
 	void update() {
-		const GameSettings& settings = s->settings();
+		const GameSettings& settings = settings_->settings();
 		if (id_ >= settings.players.size()) {
 			set_visible(false);
 			return;
@@ -547,7 +600,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			tribes_dropdown_.set_enabled(false);
 			init_dropdown_.set_visible(false);
 			init_dropdown_.set_enabled(false);
-		} else {
+		} else {  // kHuman, kShared, kComputer
 			rebuild_tribes_dropdown(settings);
 			rebuild_init_dropdown(settings);
 			rebuild_team_dropdown(settings);
@@ -556,7 +609,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		// Trigger update for the other players for shared_in mode when slots open and close
 		if (last_state_ != player_setting.state) {
 			last_state_ = player_setting.state;
-			for (PlayerSlot slot = 0; slot < s->settings().players.size(); ++slot) {
+			for (PlayerSlot slot = 0; slot < settings_->settings().players.size(); ++slot) {
 				if (slot != id_) {
 					n->set_player_state(slot, settings.players[slot].state);
 				}
@@ -564,7 +617,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		}
 	}
 
-	GameSettingsProvider* const s;
+	GameSettingsProvider* const settings_;
 	NetworkPlayerSettingsBackend* const n;
 	PlayerSlot const id_;
 
@@ -594,24 +647,24 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
                                              GameSettingsProvider* const settings,
                                              uint32_t buth)
    : UI::Box(parent, x, y, UI::Box::Horizontal, w, h, 8 * kPadding),
-     s(settings),
-     npsb(new NetworkPlayerSettingsBackend(s)),
+     settings_(settings),
+     npsb(new NetworkPlayerSettingsBackend(settings_)),
      clientbox(this, 0, 0, UI::Box::Vertical),
-     playerbox(this, 0, 0, UI::Box::Vertical, w * 9 / 15, h, kPadding),
+     playerbox(this, 0, 0, UI::Box::Vertical, w * 36 / 53, h, kPadding),
      buth_(buth) {
-	clientbox.set_size(w / 3, h);
+	clientbox.set_size(w * 16 / 53, h);
 	clientbox.set_scrolling(true);
 
 	add(&clientbox, UI::Box::Resizing::kExpandBoth);
 	add(&playerbox);
 
 	// Playerbox
-	playerbox.set_size(w * 9 / 15, h);
+	playerbox.set_size(w * 36 / 53, h);
 	playerbox.add_space(0);
 	multi_player_player_groups.resize(kMaxPlayers);
 	for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
 		multi_player_player_groups.at(i) =
-		   new MultiPlayerPlayerGroup(&playerbox, playerbox.get_w(), buth_, i, s, npsb.get());
+		   new MultiPlayerPlayerGroup(&playerbox, playerbox.get_w(), buth_, i, settings, npsb.get());
 		playerbox.add(multi_player_player_groups.at(i));
 	}
 	playerbox.add_space(0);
@@ -627,7 +680,7 @@ MultiPlayerSetupGroup::~MultiPlayerSetupGroup() {
 
 /// Update which slots are available based on current settings.
 void MultiPlayerSetupGroup::update() {
-	const GameSettings& settings = s->settings();
+	const GameSettings& settings = settings_->settings();
 
 	// Update / initialize client groups
 	if (multi_player_client_groups.size() < settings.users.size()) {
@@ -636,7 +689,7 @@ void MultiPlayerSetupGroup::update() {
 	for (uint32_t i = 0; i < settings.users.size(); ++i) {
 		if (!multi_player_client_groups.at(i)) {
 			multi_player_client_groups.at(i) =
-			   new MultiPlayerClientGroup(&clientbox, clientbox.get_w(), buth_, i, s);
+			   new MultiPlayerClientGroup(&clientbox, clientbox.get_w(), buth_, i, settings_);
 			clientbox.add(multi_player_client_groups.at(i), UI::Box::Resizing::kFullSize);
 			multi_player_client_groups.at(i)->layout();
 		}

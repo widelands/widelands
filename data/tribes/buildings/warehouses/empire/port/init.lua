@@ -8,6 +8,7 @@ tribes:new_warehouse_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "port",
+   map_check = {"seafaring"},
 
    buildcost = {
       log = 3,

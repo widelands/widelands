@@ -143,7 +143,7 @@ local int32_t unzlocal_getByte(zlib_filefunc_def const* const pzlib_filefunc_def
 	unsigned char c;
 	const int32_t err = static_cast<int32_t>(ZREAD(*pzlib_filefunc_def, filestream, &c, 1));
 	if (err == 1) {
-		*pi = static_cast<int32_t>(c);
+		*pi = static_cast<int32_t>(c); // NOLINT
 		return UNZ_OK;
 	} else
 		return ZERROR(*pzlib_filefunc_def, filestream) ? UNZ_ERRNO : UNZ_EOF;
@@ -254,7 +254,7 @@ local uLong unzlocal_SearchCentralDir(zlib_filefunc_def const* pzlib_filefunc_de
 			break;
 
 		for (i = static_cast<int32_t>(uReadSize) - 3; i-- > 0;)
-			if (*(buf + i) == 0x50 and *(buf + i + 1) == 0x4b and *(buf + i + 2) == 0x05 and
+			if (*(buf + i) == 0x50 and *(buf + i + 1) == 0x4b and *(buf + i + 2) == 0x05 and // NOLINT
 			    *(buf + i + 3) == 0x06) {
 				uPosFound = uReadPos + i;
 				break;
@@ -545,9 +545,9 @@ local int32_t unzlocal_GetCurrentFileInfoInternal(unzFile file,
 		if (file_info.size_file_comment > 0 && commentBufferSize > 0)
 			if (ZREAD(s->z_filefunc, s->filestream, szComment, uSizeRead) != uSizeRead)
 				err = UNZ_ERRNO;
-		lSeek += file_info.size_file_comment - uSizeRead;
+		lSeek += file_info.size_file_comment - uSizeRead; // NOLINT
 	} else
-		lSeek += file_info.size_file_comment;
+		lSeek += file_info.size_file_comment; // NOLINT
 
 	if (err == UNZ_OK && pfile_info)
 		*pfile_info = file_info;
@@ -783,7 +783,7 @@ extern int32_t ZEXPORT unzOpenCurrentFile3(unzFile file,
 
 	if (s->cur_file_info.compression_method != 0 and
 	    s->cur_file_info.compression_method != Z_DEFLATED)
-		err = UNZ_BADZIPFILE;
+		err = UNZ_BADZIPFILE; // NOLINT
 
 	pfile_in_zip_read_info->crc32_wait = s->cur_file_info.crc;
 	pfile_in_zip_read_info->crc32 = 0;
@@ -1229,7 +1229,7 @@ local int32_t ziplocal_getByte(zlib_filefunc_def const* const pzlib_filefunc_def
 	unsigned char c;
 	const int32_t err = static_cast<int32_t>(ZREAD(*pzlib_filefunc_def, filestream, &c, 1));
 	if (err == 1) {
-		*pi = static_cast<int32_t>(c);
+		*pi = static_cast<int32_t>(c); // NOLINT
 		return ZIP_OK;
 	} else
 		return ZERROR(*pzlib_filefunc_def, filestream) ? ZIP_ERRNO : ZIP_EOF;
@@ -1339,7 +1339,7 @@ local uLong ziplocal_SearchCentralDir(zlib_filefunc_def const* const pzlib_filef
 			break;
 
 		for (i = static_cast<int32_t>(uReadSize) - 3; i-- > 0;)
-			if (*(buf + i) == 0x50 and *(buf + i + 1) == 0x4b and *(buf + i + 2) == 0x05 and
+			if (*(buf + i) == 0x50 and *(buf + i + 1) == 0x4b and *(buf + i + 2) == 0x05 and // NOLINT
 			    *(buf + i + 3) == 0x06) {
 				uPosFound = uReadPos + i;
 				break;
@@ -1776,7 +1776,7 @@ extern int32_t ZEXPORT zipCloseFileInZipRaw(zipFile file, uLong uncompressed_siz
 			uLong uTotalOutBefore;
 			if (zi->ci.stream.avail_out == 0) {
 				if (zipFlushWriteBuffer(zi) == ZIP_ERRNO)
-					err = ZIP_ERRNO;
+					err = ZIP_ERRNO; // NOLINT
 				zi->ci.stream.avail_out = static_cast<uInt>(Z_BUFSIZE);
 				zi->ci.stream.next_out = zi->ci.buffered_data;
 			}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2017 by the Widelands Development Team
+ * Copyright (C) 2009-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,9 +28,9 @@
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
+#include "graphic/graphic.h"
 #include "graphic/text/font_set.h"
-#include "graphic/text_constants.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
@@ -52,7 +52,7 @@ struct SpinBoxImpl {
 	UI::SpinBox::Units unit;
 
 	/// Background tile style of buttons.
-	const Image* background;
+	UI::ButtonStyle button_style;
 
 	/// Special names for specific values
 	std::map<int32_t, std::string> value_replacements;
@@ -83,9 +83,9 @@ SpinBox::SpinBox(Panel* const parent,
                  int32_t const startval,
                  int32_t const minval,
                  int32_t const maxval,
+                 UI::PanelStyle style,
                  const std::string& label_text,
                  const SpinBox::Units& unit,
-                 const Image* button_background,
                  SpinBox::Type type,
                  int32_t step_size,
                  int32_t big_step_size)
@@ -105,13 +105,13 @@ SpinBox::SpinBox(Panel* const parent,
 	}
 	sbi_->value = startval;
 	sbi_->unit = unit;
-	sbi_->background = button_background;
+	sbi_->button_style = style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
+	                                                        UI::ButtonStyle::kWuiSecondary;
 
 	box_ = new UI::Box(this, 0, 0, UI::Box::Horizontal, 0, 0, padding_);
 
-	sbi_->label =
-	   new UI::MultilineTextarea(box_, 0, 0, 0, 0, label_text, UI::Align::kLeft, button_background,
-	                             UI::MultilineTextarea::ScrollMode::kNoScrolling);
+	sbi_->label = new UI::MultilineTextarea(box_, 0, 0, 0, 0, style, label_text, UI::Align::kLeft,
+	                                        UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	box_->add(sbi_->label);
 
 	sbi_->text = new UI::Textarea(box_, "", UI::Align::kCenter);
@@ -119,23 +119,23 @@ SpinBox::SpinBox(Panel* const parent,
 	bool is_big = type_ == SpinBox::Type::kBig;
 
 	sbi_->button_minus =
-	   new Button(box_, "-", 0, 0, button_height_, button_height_, sbi_->background,
+	   new Button(box_, "-", 0, 0, button_height_, button_height_, sbi_->button_style,
 	              g_gr->images().get(is_big ? "images/ui_basic/scrollbar_left.png" :
 	                                          "images/ui_basic/scrollbar_down.png"),
 	              _("Decrease the value"));
 	sbi_->button_plus =
-	   new Button(box_, "+", 0, 0, button_height_, button_height_, sbi_->background,
+	   new Button(box_, "+", 0, 0, button_height_, button_height_, sbi_->button_style,
 	              g_gr->images().get(is_big ? "images/ui_basic/scrollbar_right.png" :
 	                                          "images/ui_basic/scrollbar_up.png"),
 	              _("Increase the value"));
 
 	if (is_big) {
 		sbi_->button_ten_minus =
-		   new Button(box_, "--", 0, 0, 2 * button_height_, button_height_, sbi_->background,
+		   new Button(box_, "--", 0, 0, 2 * button_height_, button_height_, sbi_->button_style,
 		              g_gr->images().get("images/ui_basic/scrollbar_left_fast.png"),
 		              _("Decrease the value by 10"));
 		sbi_->button_ten_plus =
-		   new Button(box_, "++", 0, 0, 2 * button_height_, button_height_, sbi_->background,
+		   new Button(box_, "++", 0, 0, 2 * button_height_, button_height_, sbi_->button_style,
 		              g_gr->images().get("images/ui_basic/scrollbar_right_fast.png"),
 		              _("Increase the value by 10"));
 
@@ -320,6 +320,9 @@ const std::string SpinBox::unit_text(int32_t value) const {
 	case (Units::kPixels):
 		/** TRANSLATORS: A spinbox unit */
 		return (boost::format(ngettext("%d pixel", "%d pixels", value)) % value).str();
+	case (Units::kFields):
+		/** TRANSLATORS: A spinbox unit */
+		return (boost::format(ngettext("%d field", "%d fields", value)) % value).str();
 	case (Units::kPercent):
 		/** TRANSLATORS: A spinbox unit */
 		return (boost::format(_("%i %%")) % value).str();

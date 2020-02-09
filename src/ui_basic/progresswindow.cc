@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,18 +24,14 @@
 #endif
 
 #include "base/i18n.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/font_set.h"
-#include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "io/filesystem/layered_filesystem.h"
 
 namespace {
-
-#define PROGRESS_FONT_COLOR_FG RGBColor(128, 128, 255)
-#define PROGRESS_FONT_COLOR_BG RGBColor(64, 64, 0)
 #define PROGRESS_STATUS_RECT_PADDING 2
 #define PROGRESS_STATUS_BORDER_X 2
 #define PROGRESS_STATUS_BORDER_Y 2
@@ -46,7 +42,9 @@ namespace {
 namespace UI {
 
 ProgressWindow::ProgressWindow(const std::string& background)
-   : UI::FullscreenWindow(), label_center_(Vector2i::zero()) {
+   : UI::FullscreenWindow(),
+     label_center_(Vector2i::zero()),
+     style_(g_gr->styles().progressbar_style(UI::PanelStyle::kFsMenu)) {
 	set_background(background);
 	step(_("Loading…"));
 }
@@ -63,10 +61,10 @@ void ProgressWindow::draw(RenderTarget& rt) {
 	label_center_.x = get_w() / 2;
 	label_center_.y = get_h() * PROGRESS_LABEL_POSITION_Y / 100;
 
-	const uint32_t h = text_height();
+	const uint32_t h = text_height(style_.font());
 
-	label_rectangle_.x = get_w() / 4;
-	label_rectangle_.w = get_w() / 2;
+	label_rectangle_.x = get_w() / 6;
+	label_rectangle_.w = get_w() * 2 / 3;
 	label_rectangle_.y = label_center_.y - h / 2 - PROGRESS_STATUS_RECT_PADDING;
 	label_rectangle_.h = h + 2 * PROGRESS_STATUS_RECT_PADDING;
 
@@ -76,7 +74,10 @@ void ProgressWindow::draw(RenderTarget& rt) {
 	border_rect.w += 2 * PROGRESS_STATUS_BORDER_X;
 	border_rect.h += 2 * PROGRESS_STATUS_BORDER_Y;
 
-	rt.draw_rect(border_rect, PROGRESS_FONT_COLOR_FG);
+	rt.draw_rect(border_rect, style_.font().color());
+	// TODO(GunChleoc): this should depend on actual progress. Add a total steps variable and reuse
+	// the Progressbar class.
+	rt.fill_rect(label_rectangle_, style_.medium_color());
 }
 
 /// Set a picture to render in the background
@@ -97,16 +98,13 @@ void ProgressWindow::step(const std::string& description) {
 	// always repaint the background first
 	draw(rt);
 
-	rt.fill_rect(label_rectangle_, PROGRESS_FONT_COLOR_BG);
 	std::shared_ptr<const UI::RenderedText> rendered_text =
-	   UI::g_fh1->render(as_uifont(description, UI_FONT_SIZE_SMALL, PROGRESS_FONT_COLOR_FG));
+	   UI::g_fh->render(as_richtext_paragraph(description, style_.font()));
 	UI::center_vertically(rendered_text->height(), &label_center_);
 	rendered_text->draw(rt, label_center_, UI::Align::kCenter);
 
-#ifdef _WIN32
-	// Pump events to prevent "not responding" on windows
+	// Pump events to prevent "not responding" on windows & "beach ball" on macOS
 	SDL_PumpEvents();
-#endif
 	update(true);
 }
 
@@ -135,4 +133,4 @@ void ProgressWindow::remove_visualization(IProgressVisualization* instance) {
 		}
 	}
 }
-}
+}  // namespace UI

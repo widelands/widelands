@@ -59,8 +59,8 @@ tribes:new_productionsite_type {
          actions = {
             "call=smoke_fish",
             "call=smoke_meat",
-            "call=smoke_fish",
-            "return=skipped"
+            "call=smoke_fish_2",
+            "return=no_stats"
          }
       },
       smoke_meat = {
@@ -68,26 +68,35 @@ tribes:new_productionsite_type {
          descname = _"smoking meat",
          actions = {
             -- time total: 60
-            "return=skipped when site has fish and economy needs smoked_fish and not economy needs smoked_meat",
             "return=skipped unless economy needs smoked_meat",
-            "sleep=10000",
             "consume=meat:2 log",
             "animate=working 30000",
-            "sleep=20000",
+            "sleep=30000",
             "produce=smoked_meat:2"
          }
       },
+      -- 2 identical programs for fish to prevent unnecessary skipping penalty
       smoke_fish = {
          -- TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
          descname = _"smoking fish",
          actions = {
             -- time total: 60
-            "return=skipped when site has meat and economy needs smoked_meat and not economy needs smoked_fish",
             "return=skipped unless economy needs smoked_fish",
-            "sleep=10000",
             "consume=fish:2 log",
             "animate=working 30000",
-            "sleep=20000",
+            "sleep=30000",
+            "produce=smoked_fish:2"
+         }
+      },
+      smoke_fish_2 = {
+         -- TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
+         descname = _"smoking fish",
+         actions = {
+            -- time total: 60
+            "return=skipped unless economy needs smoked_fish",
+            "consume=fish:2 log",
+            "animate=working 30000",
+            "sleep=30000",
             "produce=smoked_fish:2"
          }
       },

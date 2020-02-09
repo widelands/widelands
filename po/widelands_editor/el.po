@@ -1,13 +1,14 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
+# erimitis, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-08-17 14:06+0000\n"
-"PO-Revision-Date: 2017-08-17 14:11+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-10-09 07:57+0000\n"
+"PO-Revision-Date: 2019-10-09 08:04+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Greek (http://www.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
@@ -19,125 +20,106 @@ msgstr ""
 #: ../../data/scripting/editor/editor_controls.lua:11
 #: ../../data/scripting/editor/editor_help.lua:65
 msgid "Controls"
-msgstr ""
+msgstr "Χειριστήρια"
 
-#: ../../data/scripting/editor/editor_controls.lua:14
+#: ../../data/scripting/editor/editor_controls.lua:13
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Συντομεύσεις Πληκτρολογίου"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:17
+#: ../../data/scripting/editor/editor_controls.lua:16
 msgid "Help"
-msgstr ""
+msgstr "Βοήθεια"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/scripting/editor/editor_controls.lua:19
-msgid "Toggle main menu"
+#: ../../data/scripting/editor/editor_controls.lua:18
+msgctxt "hotkey"
+msgid "Esc"
 msgstr ""
+
+#: ../../data/scripting/editor/editor_controls.lua:18
+msgid "Toggle main menu"
+msgstr "Εναλλαγή κυρίως μενού"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 't'
-#: ../../data/scripting/editor/editor_controls.lua:21
+#: ../../data/scripting/editor/editor_controls.lua:20
 msgid "Toggle tools menu"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:25
-msgid "Toggle building spaces"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:27
-msgid "Toggle immovables display"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:29
-msgid "Toggle animals display"
-msgstr ""
+msgstr "Εναλλαγή μενού εργαλείων"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'p'
-#: ../../data/scripting/editor/editor_controls.lua:31
-msgid "Toggle resources display"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:33
+#: ../../data/scripting/editor/editor_controls.lua:24
 msgid "Toggle player menu"
-msgstr ""
+msgstr "Εναλλαγή μενού παίκτη"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:35
+#: ../../data/scripting/editor/editor_controls.lua:26
 msgid "Undo"
-msgstr ""
+msgstr "Αναίρεση"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:37
+#: ../../data/scripting/editor/editor_controls.lua:28
 msgid "Redo"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'i'
-#: ../../data/scripting/editor/editor_controls.lua:39
+#: ../../data/scripting/editor/editor_controls.lua:30
 msgid "Activate information tool"
-msgstr ""
+msgstr "Ενεργοποίηση εργαλείου πληροφόρησης"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:41
+#: ../../data/scripting/editor/editor_controls.lua:32
 msgctxt "hotkey"
 msgid "Ctrl + L"
-msgstr ""
+msgstr "Ctrl + L"
 
-#: ../../data/scripting/editor/editor_controls.lua:41
+#: ../../data/scripting/editor/editor_controls.lua:32
 msgid "Load map"
-msgstr ""
+msgstr "Φόρτωση χάρτη"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:43
+#: ../../data/scripting/editor/editor_controls.lua:34
 msgctxt "hotkey"
 msgid "Ctrl + S"
-msgstr ""
+msgstr "Ctrl + S"
 
-#: ../../data/scripting/editor/editor_controls.lua:43
+#: ../../data/scripting/editor/editor_controls.lua:34
 msgid "Save map"
-msgstr ""
+msgstr "Αποθήκευση χάρτη"
 
-#: ../../data/scripting/editor/editor_controls.lua:47
+#: ../../data/scripting/editor/editor_controls.lua:38
 msgid "Tools"
-msgstr ""
+msgstr "Εργαλεία"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:50
+#: ../../data/scripting/editor/editor_controls.lua:41
 msgctxt "hotkey"
 msgid "0-9"
-msgstr ""
+msgstr "0-9"
 
-#: ../../data/scripting/editor/editor_controls.lua:50
+#: ../../data/scripting/editor/editor_controls.lua:41
 msgid "Change tool size"
-msgstr ""
+msgstr "Αλλαγή μεγέθους εργαλείου"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:52
+#: ../../data/scripting/editor/editor_controls.lua:43
 msgctxt "hotkey"
 msgid "Click"
-msgstr ""
+msgstr "Κλικ"
 
-#: ../../data/scripting/editor/editor_controls.lua:52
+#: ../../data/scripting/editor/editor_controls.lua:43
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
 msgstr ""
 
-#: ../../data/scripting/editor/editor_controls.lua:54
+#: ../../data/scripting/editor/editor_controls.lua:45
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
@@ -145,104 +127,103 @@ msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:54
+#: ../../data/scripting/editor/editor_controls.lua:45
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "Shift + Κλικ"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:56
+#: ../../data/scripting/editor/editor_controls.lua:47
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr ""
+msgstr "Ctrl + Κλικ"
 
-#: ../../data/scripting/editor/editor_controls.lua:56
+#: ../../data/scripting/editor/editor_controls.lua:47
 msgid "Set map elements to the value selected by ‘Set Value’"
 msgstr ""
 
 #: ../../data/scripting/editor/editor_help.lua:49
 msgid "Editor Help"
-msgstr ""
+msgstr "Βοήθεια Συντάκτη"
 
 #: ../../data/scripting/editor/editor_help.lua:54
 msgid "General"
-msgstr ""
+msgstr "Γενικά"
 
 #: ../../data/scripting/editor/editor_help.lua:59
-#: ../../data/scripting/editor/editor_introduction.lua:12
+#: ../../data/scripting/editor/editor_introduction.lua:11
 msgid "Introduction"
-msgstr ""
+msgstr "Εισαγωγή"
 
 #: ../../data/scripting/editor/editor_help.lua:71
-#: ../../data/scripting/editor/tips.lua:16
+#: ../../data/scripting/editor/tips.lua:15
 msgid "Tips"
 msgstr ""
 
 #: ../../data/scripting/editor/editor_help.lua:81
 msgid "Terrains"
-msgstr ""
+msgstr "Εδάφη"
 
 #: ../../data/scripting/editor/editor_help.lua:88
 msgid "Trees"
-msgstr ""
+msgstr "Δέντρα"
 
 #: ../../data/scripting/editor/editor_introduction.lua:9
 msgid "The Widelands Editor"
-msgstr ""
+msgstr "Ο Συντάκτης του Widelands"
 
-#: ../../data/scripting/editor/editor_introduction.lua:14
+#: ../../data/scripting/editor/editor_introduction.lua:13
 msgid ""
 "This editor is intended for players who would like to design their own maps "
 "to use with Widelands."
-msgstr ""
+msgstr "Αυτός ο συντάκτης δημιουργήθηκε για παίκτες που επιθυμούν να σχεδιάσουν τους δικούς τους χάρτες για χρήση στο Widelands."
 
-#: ../../data/scripting/editor/editor_introduction.lua:15
+#: ../../data/scripting/editor/editor_introduction.lua:14
 msgid ""
 "As you can see, this editor is heavy work in progress and as the editor "
 "becomes better and better, this text will also get longer and more complete."
-msgstr ""
+msgstr "Όπως μπορείτε να δείτε, αυτός ο συντάκτης αποτελεί βαριά εργασία σε εξέλιξη, και καθώς γίνεται όλο και καλύτερος, αυτό το κείμενο θα γίνεται μακρύτερο και πληρέστερο."
 
-#: ../../data/scripting/editor/editor_introduction.lua:18
+#: ../../data/scripting/editor/editor_introduction.lua:17
 msgid "The wiki also includes a short tutorial on how to build a map."
 msgstr ""
 
 #: ../../data/scripting/editor/terrain_help.lua:21
 msgid "Resources"
-msgstr ""
+msgstr "Πόροι"
 
-#. TRANSLATORS: A header in the editor help
+#. TRANSLATORS: A header in the editor help if there is 1 valid resource
 #: ../../data/scripting/editor/terrain_help.lua:25
 msgid "Valid Resource:"
-msgid_plural "Valid Resources:"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../../data/scripting/editor/terrain_help.lua:34
-msgid "Default:"
 msgstr ""
+
+#. TRANSLATORS: A header in the editor help if there is more than 1 valid
+#. resource
+#: ../../data/scripting/editor/terrain_help.lua:28
+msgid "Valid Resources:"
+msgstr ""
+
+#: ../../data/scripting/editor/terrain_help.lua:39
+msgid "Default:"
+msgstr "Προεπιλογή:"
 
 #. TRANSLATORS: e.g. "5x Water"
-#: ../../data/scripting/editor/terrain_help.lua:36
+#: ../../data/scripting/editor/terrain_help.lua:41
 msgid "%1%x %2%"
-msgstr ""
+msgstr "%1%x %2%"
 
 #. TRANSLATORS: A header in the editor help
-#: ../../data/scripting/editor/terrain_help.lua:67
-msgid "Probability of trees growing"
-msgstr ""
-
 #: ../../data/scripting/editor/terrain_help.lua:72
+msgid "Probability of trees growing"
+msgstr "Πιθανότητα ανάπτυξης δέντρων"
+
+#: ../../data/scripting/editor/terrain_help.lua:77
 msgid "No trees will grow here."
-msgstr ""
+msgstr "Μη ανάπτυξη δέντρων εδώ."
 
 #. TRANSLATORS: A header in the editor help. Terrains preferred by a type of
 #. tree.
-#: ../../data/scripting/editor/tree_help.lua:18
+#: ../../data/scripting/editor/tree_help.lua:19
 msgid "Preferred terrains"
-msgstr ""
-
-#. TRANSLATORS: Terrain name (Climate)
-#: ../../data/scripting/editor/tree_help.lua:39
-msgid "%1% (%2%)"
-msgstr ""
+msgstr "Προτιμητέα εδάφη"

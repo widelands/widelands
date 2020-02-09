@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -90,7 +90,7 @@ Vector2f MapviewPixelFunctions::calc_pix_difference(const Map& map, Vector2f a, 
 /**
  * Calculate the pixel (currently Manhattan) distance between the two points,
  * taking wrap-arounds into account.
-*/
+ */
 float MapviewPixelFunctions::calc_pix_distance(const Map& map, Vector2f a, Vector2f b) {
 	normalize_pix(map, &a);
 	normalize_pix(map, &b);
@@ -265,7 +265,7 @@ MapviewPixelFunctions::calc_node_and_triangle(const Map& map, uint32_t x, uint32
 
 /**
  * Normalize pixel points of the map.
-*/
+ */
 void MapviewPixelFunctions::normalize_pix(const Map& map, Vector2f* p) {
 	const float map_end_screen_x = get_map_end_screen_x(map);
 	while (p->x >= map_end_screen_x) {

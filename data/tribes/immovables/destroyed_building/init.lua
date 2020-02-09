@@ -5,6 +5,8 @@ tribes:new_immovable_type {
    name = "destroyed_building",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = pgettext("immovable", "Destroyed building"),
+   helptext_script = dirname .. "helptexts.lua",
+   icon = dirname .. "menu.png",
    size = "big",
    programs = {
       program = {

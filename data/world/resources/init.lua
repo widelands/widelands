@@ -14,9 +14,6 @@
 --
 -- Which resource can be placed where on the map is defined in each terrain's
 -- ``valid_resources`` table.
---
--- The resource names are currently hard-coded in the ``geologist`` worker program
--- (`bug #1713706 <https://bugs.launchpad.net/widelands/+bug/1713706>`_), so we can't add any detectable resources at the moment.
 
 pics_dir = path.dirname(__file__) .. "pics/"
 
@@ -50,6 +47,18 @@ pics_dir = path.dirname(__file__) .. "pics/"
 --
 --            detectable = true,
 --
+--    **timeout_ms**
+--        *Mandatory*. Defines the time for which geologists messages for this
+--        resource will be muted within this area after a find, e.g.::
+--
+--            timeout_ms = 300000,
+--
+--    **timeout_radius**
+--        *Mandatory*. Defines the radius within which geologists messages for this
+--        resource will be muted after a find, e.g.::
+--
+--            timeout_radius = 8,
+--
 --    **representative_image**
 --        *Mandatory*. Path to an image file that will represent the resource in menus
 --        etc., e.g.::
@@ -72,6 +81,8 @@ world:new_resource_type{
    descname = _ "Coal",
    max_amount = 20,
    detectable = true,
+   timeout_ms = 300000,
+   timeout_radius = 8,
    representative_image = pics_dir .. "coal4.png",
    editor_pictures = {
       [5] = pics_dir .. "coal1.png",
@@ -86,6 +97,8 @@ world:new_resource_type{
    descname = _ "Gold",
    max_amount = 20,
    detectable = true,
+   timeout_ms = 300000,
+   timeout_radius = 8,
    representative_image = pics_dir .. "gold4.png",
    editor_pictures = {
       [5] = pics_dir .. "gold1.png",
@@ -100,6 +113,8 @@ world:new_resource_type{
    descname = _ "Iron",
    max_amount = 20,
    detectable = true,
+   timeout_ms = 300000,
+   timeout_radius = 8,
    representative_image = pics_dir .. "iron4.png",
    editor_pictures = {
       [5] = pics_dir .. "iron1.png",
@@ -114,6 +129,8 @@ world:new_resource_type{
    descname = _ "Stones",
    max_amount = 20,
    detectable = true,
+   timeout_ms = 300000,
+   timeout_radius = 8,
    representative_image = pics_dir .. "stones4.png",
    editor_pictures = {
       [5] = pics_dir .. "stones1.png",
@@ -128,6 +145,8 @@ world:new_resource_type{
    descname = _ "Water",
    max_amount = 50,
    detectable = true,
+   timeout_ms = 300000,
+   timeout_radius = 8,
    representative_image = pics_dir .. "water4.png",
    editor_pictures = {
       [10] = pics_dir .."water1.png",
@@ -142,6 +161,8 @@ world:new_resource_type{
    descname = _ "Fish",
    max_amount = 20,
    detectable = false,
+   timeout_ms = 0,
+   timeout_radius = 0,
    representative_image = pics_dir .. "fish.png",
    editor_pictures = {
       [5] = pics_dir .. "fish1.png",

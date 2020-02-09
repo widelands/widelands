@@ -13,7 +13,7 @@ tribes:new_productionsite_type {
       log = 2,
       blackwood = 2,
       granite = 2,
-      thatch_reed = 2
+      reed = 2
    },
    return_on_dismantle = {
       log = 1,
@@ -57,9 +57,9 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
          descname = pgettext("barbarians_building", "baking pitta bread"),
          actions = {
-            "sleep=20000",
             "return=skipped unless economy needs barbarians_bread",
             "consume=water:3 wheat:3",
+            "sleep=20000",
             "animate=working 20000",
             "produce=barbarians_bread",
             "animate=working 20000",

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,7 @@
 #define WL_UI_BASIC_TEXTAREA_H
 
 #include "graphic/align.h"
-#include "graphic/text_layout.h"
+#include "graphic/graphic.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
@@ -49,21 +49,19 @@ namespace UI {
  * the latter provides scrollbars.
  */
 struct Textarea : public Panel {
-	Textarea(Panel* parent,
-	         int32_t x,
-	         int32_t y,
-	         const std::string& text = std::string(),
-	         Align align = UI::Align::kLeft);
-	Textarea(
-	   Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, Align align = UI::Align::kLeft);
-	Textarea(Panel* const parent,
-	         int32_t x,
-	         int32_t y,
-	         uint32_t w,
-	         uint32_t h,
-	         const std::string& text,
-	         Align align = UI::Align::kLeft);
-	Textarea(Panel* parent, const std::string& text = std::string(), Align align = UI::Align::kLeft);
+public:
+	explicit Textarea(Panel* const parent,
+	                  int32_t x,
+	                  int32_t y,
+	                  uint32_t w,
+	                  uint32_t h,
+	                  const std::string& text = std::string(),
+	                  Align align = UI::Align::kLeft,
+	                  const UI::FontStyleInfo& style = g_gr->styles().font_style(FontStyle::kLabel));
+	explicit Textarea(Panel* parent,
+	                  const std::string& text = std::string(),
+	                  Align align = UI::Align::kLeft,
+	                  const UI::FontStyleInfo& style = g_gr->styles().font_style(FontStyle::kLabel));
 
 	/**
 	 * If fixed_width > 0, the Textarea will not change its width.
@@ -78,29 +76,39 @@ struct Textarea : public Panel {
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
 
-	void set_color(RGBColor color);
-	void set_fontsize(int fontsize);
+	void set_style(const UI::FontStyleInfo& style);
+	void set_font_scale(float scale);
 
 protected:
 	void update_desired_size() override;
 
 private:
-	enum LayoutMode { AutoMove, Layouted, Static };
+	enum class LayoutMode { AutoMove, Layouted };
 
-	void init();
+	Textarea(Panel* const parent,
+	         int32_t x,
+	         int32_t y,
+	         uint32_t w,
+	         uint32_t h,
+	         const std::string& text,
+	         Align align,
+	         const UI::FontStyleInfo& style,
+	         LayoutMode layout_mode);
+
 	void collapse();
 	void expand();
 	void update();
 
-	LayoutMode layoutmode_;
+	const LayoutMode layoutmode_;
+	const Align align_;
+
 	std::string text_;
 	std::shared_ptr<const UI::RenderedText> rendered_text_;
-	Align align_;
-	RGBColor color_;
-	int fontsize_;
 
+	const FontStyleInfo* style_;
+	float font_scale_;
 	int fixed_width_;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_TEXTAREA_H

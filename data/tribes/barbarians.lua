@@ -1,28 +1,67 @@
-dirname = path.dirname(__file__)
+image_dirname = path.dirname(__file__) .. "images/barbarians/"
+
+animations = {}
+add_animation(animations, "frontier", image_dirname, "frontier", {1, 19})
+add_animation(animations, "bridge_normal_e", image_dirname, "bridge_normal_e", {-1, 13})
+add_animation(animations, "bridge_busy_e", image_dirname, "bridge_busy_e", {-1, 13})
+add_animation(animations, "bridge_normal_se", image_dirname, "bridge_normal_se", {8, 3})
+add_animation(animations, "bridge_busy_se", image_dirname, "bridge_busy_se", {8, 3})
+add_animation(animations, "bridge_normal_sw", image_dirname, "bridge_normal_sw", {41, 3})
+add_animation(animations, "bridge_busy_sw", image_dirname, "bridge_busy_sw", {41, 3})
 
 tribes:new_tribe {
    name = "barbarians",
-
-   animations = {
-      frontier = {
-         pictures = path.list_files(dirname .. "images/barbarians/frontier_??.png"),
-         hotspot = { 1, 19 },
-      },
+   animations = animations,
+   spritesheets = {
       flag = {
-         pictures = path.list_files(dirname .. "images/barbarians/flag_??.png"),
-         hotspot = { 10, 38 },
-         fps = 5
+         directory = image_dirname,
+         basename = "flag",
+         fps = 5,
+         frames = 16,
+         columns = 4,
+         rows = 4,
+         hotspot = { 11, 39 }
       }
    },
 
-   -- Image file paths for this tribe's road textures
+   bridge_height = 8,
+
+   -- Image file paths for this tribe's road and waterway textures
    roads = {
       busy = {
-         "tribes/images/barbarians/roadt_busy.png",
+         image_dirname .. "roadt_busy.png",
       },
       normal = {
-         "tribes/images/barbarians/roadt_normal_00.png",
-         "tribes/images/barbarians/roadt_normal_01.png",
+         image_dirname .. "roadt_normal_00.png",
+         image_dirname .. "roadt_normal_01.png",
+      },
+      waterway = {
+         "tribes/images/barbarians/waterway_0.png",
+      },
+   },
+
+   resource_indicators = {
+      [""] = {
+         [0] = "barbarians_resi_none",
+      },
+      coal = {
+         [10] = "barbarians_resi_coal_1",
+         [20] = "barbarians_resi_coal_2",
+      },
+      iron = {
+         [10] = "barbarians_resi_iron_1",
+         [20] = "barbarians_resi_iron_2",
+      },
+      gold = {
+         [10] = "barbarians_resi_gold_1",
+         [20] = "barbarians_resi_gold_2",
+      },
+      stones = {
+         [10] = "barbarians_resi_stones_1",
+         [20] = "barbarians_resi_stones_2",
+      },
+      water = {
+         [100] = "barbarians_resi_water",
       },
    },
 
@@ -36,7 +75,7 @@ tribes:new_tribe {
          "log",
          "blackwood",
          "grout",
-         "thatch_reed",
+         "reed",
          "cloth"
       },
       {
@@ -94,6 +133,7 @@ tribes:new_tribe {
       {
          -- Carriers
          "barbarians_carrier",
+         "barbarians_ferry",
          "barbarians_ox",
          "barbarians_cattlebreeder"
       },
@@ -146,25 +186,25 @@ tribes:new_tribe {
    immovables = {
       "ashes",
       "destroyed_building",
-      "field_tiny",
-      "field_small",
-      "field_medium",
-      "field_ripe",
-      "field_harvested",
-      "reed_tiny",
-      "reed_small",
-      "reed_medium",
-      "reed_ripe",
-      "resi_coal1",
-      "resi_coal2",
-      "resi_gold1",
-      "resi_gold2",
-      "resi_iron1",
-      "resi_iron2",
-      "resi_none",
-      "resi_water1",
-      "resi_stones1",
-      "resi_stones2",
+      "wheatfield_tiny",
+      "wheatfield_small",
+      "wheatfield_medium",
+      "wheatfield_ripe",
+      "wheatfield_harvested",
+      "reedfield_tiny",
+      "reedfield_small",
+      "reedfield_medium",
+      "reedfield_ripe",
+      "barbarians_resi_none",
+      "barbarians_resi_water",
+      "barbarians_resi_coal_1",
+      "barbarians_resi_iron_1",
+      "barbarians_resi_gold_1",
+      "barbarians_resi_stones_1",
+      "barbarians_resi_coal_2",
+      "barbarians_resi_iron_2",
+      "barbarians_resi_gold_2",
+      "barbarians_resi_stones_2",
       "barbarians_shipconstruction",
    },
 
@@ -201,13 +241,11 @@ tribes:new_tribe {
       "barbarians_metal_workshop",
       "barbarians_warmill",
       "barbarians_ax_workshop",
-      "barbarians_shipyard",
       "barbarians_barracks",
 
       -- Big
       "barbarians_cattlefarm",
       "barbarians_farm",
-      "barbarians_weaving_mill",
       "barbarians_helmsmithy",
 
       -- Mines
@@ -232,6 +270,11 @@ tribes:new_tribe {
       "barbarians_tower",
       "barbarians_fortress",
       "barbarians_citadel",
+
+      -- Seafaring/Ferry Sites - these are only displayed on seafaring/ferry maps
+      "barbarians_ferry_yard",
+      "barbarians_shipyard",
+      "barbarians_weaving_mill",
 
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",
@@ -282,9 +325,8 @@ tribes:new_tribe {
    geologist = "barbarians_geologist",
    soldier = "barbarians_soldier",
    ship = "barbarians_ship",
-   headquarters = "barbarians_headquarters",
+   ferry = "barbarians_ferry",
    port = "barbarians_port",
-   barracks = "barbarians_barracks",
    ironore = "iron_ore",
    rawlog = "log",
    refinedlog = "blackwood",

@@ -6,8 +6,8 @@ animations = {
       hotspot = { 7, 22 },
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {12, 23}, 10)
-add_walking_animations(animations, "walkload", dirname, "walkload", {11, 24}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {12, 23}, 10)
+add_directional_animation(animations, "walkload", dirname, "walkload", {11, 24}, 10)
 
 
 tribes:new_worker_type {
@@ -23,7 +23,7 @@ tribes:new_worker_type {
       barbarians_carrier = 1
    },
 
-   experience = 19,
+   experience = 10,
    becomes = "barbarians_brewer_master",
 
    animations = animations,

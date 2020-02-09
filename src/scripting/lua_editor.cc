@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -94,4 +94,4 @@ void luaopen_wleditor(lua_State* const L) {
 	add_parent<LuaPlayer, LuaBases::LuaPlayerBase>(L);
 	lua_pop(L, 1);  // Pop the meta table
 }
-}
+}  // namespace LuaEditor

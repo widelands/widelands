@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,7 @@ namespace Widelands {
 
 /**
  * Pre-initialize a WorkersQueue
-*/
+ */
 WorkersQueue::WorkersQueue(PlayerImmovable& init_owner,
                            DescriptionIndex const init_ware,
                            uint8_t const init_max_size)
@@ -46,7 +46,7 @@ WorkersQueue::WorkersQueue(PlayerImmovable& init_owner,
 
 /**
  * Clear the queue appropriately.
-*/
+ */
 void WorkersQueue::cleanup() {
 	assert(index_ != INVALID_INDEX);
 
@@ -62,7 +62,7 @@ void WorkersQueue::cleanup() {
 
 /**
  * Called when a worker arrives at the owning building.
-*/
+ */
 void WorkersQueue::entered(
 #ifndef NDEBUG
    DescriptionIndex index,
@@ -75,7 +75,7 @@ void WorkersQueue::entered(
 	assert(get_filled() < max_size_);
 	assert(index_ == index);
 
-	EditorGameBase& egbase = owner().egbase();
+	EditorGameBase& egbase = get_owner()->egbase();
 	if (worker->get_location(egbase) != &(owner_)) {
 		worker->set_location(&(owner_));
 	}
@@ -121,7 +121,7 @@ void WorkersQueue::set_filled(Quantity filled) {
 	// Now adjust them
 	const TribeDescr& tribe = owner().tribe();
 	const WorkerDescr* worker_descr = tribe.get_worker_descr(index_);
-	EditorGameBase& egbase = owner().egbase();
+	EditorGameBase& egbase = get_owner()->egbase();
 	upcast(Game, game, &egbase);
 	assert(game != nullptr);
 
@@ -129,7 +129,7 @@ void WorkersQueue::set_filled(Quantity filled) {
 	while (get_filled() < filled) {
 		// Create new worker
 		Worker& w =
-		   worker_descr->create(egbase, owner(), &owner_, owner_.get_positions(egbase).front());
+		   worker_descr->create(egbase, get_owner(), &owner_, owner_.get_positions(egbase).front());
 		assert(w.get_location(egbase) == &owner_);
 		w.start_task_idle(*game, 0, -1);
 		workers_.push_back(&w);
@@ -157,7 +157,7 @@ void WorkersQueue::set_max_fill(Quantity q) {
 	InputQueue::set_max_fill(q);
 
 	// If requested, kick out workers
-	upcast(Game, game, &owner().egbase());
+	upcast(Game, game, &get_owner()->egbase());
 	while (workers_.size() > max_fill_) {
 		workers_.back()->reset_tasks(*game);
 		workers_.back()->start_task_leavebuilding(*game, true);
@@ -174,23 +174,6 @@ Worker* WorkersQueue::extract_worker() {
 	// Remove reference from list
 	workers_.erase(workers_.begin());
 	return w;
-}
-
-void WorkersQueue::load_for_expedition(FileRead& fr,
-                                       Game& game,
-                                       MapObjectLoader& mol,
-                                       uint8_t num_workers) {
-	assert(type_ == wwWORKER);
-	assert(index_ != INVALID_INDEX);
-	for (uint8_t i = 0; i < num_workers; ++i) {
-		if (fr.unsigned_8() == 1) {
-			request_.reset(new Request(owner_, 0, InputQueue::request_callback, wwWORKER));
-			request_->read(fr, game, mol);
-		} else {
-			workers_.push_back(&mol.get<Worker>(fr.unsigned_32()));
-		}
-	}
-	// All other values have hopefully be set by the constructor or the caller
 }
 
 /**
@@ -227,4 +210,4 @@ void WorkersQueue::read_child(FileRead& fr, Game&, MapObjectLoader& mol) {
 		throw GameDataError("workersqueue: %s", e.what());
 	}
 }
-}
+}  // namespace Widelands

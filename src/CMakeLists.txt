@@ -13,7 +13,7 @@ add_dependencies(codecheck run_build_deps)
 
 # A target that depends on all unit tests as 'make test' will not rebuild
 # tests:
-# http://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests
+# https://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests
 add_custom_target(wl_tests)
 
 #include the cmake version dependend macro _include_directories
@@ -45,7 +45,6 @@ if (WIN32)
       ${WIN32_ICON_O}
     USES_SDL2
     DEPENDS
-      base_log
       base_exceptions
       widelands_ball_of_mud
       build_info
@@ -56,7 +55,6 @@ else()
       main.cc
     USES_SDL2
     DEPENDS
-      base_log
       base_exceptions
       widelands_ball_of_mud
       build_info
@@ -75,7 +73,6 @@ add_subdirectory(logic)
 add_subdirectory(map_io)
 add_subdirectory(network)
 add_subdirectory(notifications)
-add_subdirectory(profile)
 add_subdirectory(random)
 add_subdirectory(scripting)
 add_subdirectory(sound)
@@ -108,24 +105,45 @@ wl_library(widelands_ball_of_mud
     editor
     graphic
     graphic_fonthandler
-    graphic_fonthandler_legacy
     graphic_text
-    graphic_text_constants
-    helper
     io_filesystem
     logic
+    logic_exceptions
+    logic_filesystem_constants
     logic_game_controller
     logic_game_settings
+    logic_map
     logic_single_player_game_settings
     map_io_map_loader
     network
-    profile
+    random
     sound
     ui_basic
-    ui_fsmenu
+    ui_fsmenu_gameloading
+    ui_fsmenu_loading_common
+    ui_fsmenu_main
+    ui_fsmenu_maploading
+    ui_fsmenu_misc
+    ui_fsmenu_network
     ui_fsmenu_options
+    widelands_options
     wui
 )
+
+wl_library(widelands_options
+  SRCS
+    wlapplication_options.cc
+    wlapplication_options.h
+  USES_SDL2
+  USES_SDL2_IMAGE
+  USES_SDL2_TTF
+  DEPENDS
+    base_log
+    io_filesystem
+    io_profile
+    logic_filesystem_constants
+)
+
 
 # TODO(sirver): Split into libs with useful names.
 wl_library(helper

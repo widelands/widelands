@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,14 +34,14 @@
 class ZipFilesystem : public FileSystem {
 public:
 	explicit ZipFilesystem(const std::string&);
-	virtual ~ZipFilesystem();
+	~ZipFilesystem() override;
 
 	bool is_writable() const override;
 
-	std::set<std::string> list_directory(const std::string& path) override;
+	FilenameSet list_directory(const std::string& path) const override;
 
 	bool is_directory(const std::string& path) override;
-	bool file_exists(const std::string& path) override;
+	bool file_exists(const std::string& path) const override;
 
 	void* load(const std::string& fname, size_t& length) override;
 
@@ -122,7 +122,7 @@ private:
 
 	struct ZipStreamRead : StreamRead {
 		explicit ZipStreamRead(const std::shared_ptr<ZipFile>& shared_data);
-		virtual ~ZipStreamRead();
+		~ZipStreamRead() override;
 		size_t data(void* data, size_t bufsize) override;
 		bool end_of_file() const override;
 
@@ -132,7 +132,7 @@ private:
 
 	struct ZipStreamWrite : StreamWrite {
 		explicit ZipStreamWrite(const std::shared_ptr<ZipFile>& shared_data);
-		virtual ~ZipStreamWrite();
+		~ZipStreamWrite() override;
 		void data(const void* const data, size_t size) override;
 
 	private:

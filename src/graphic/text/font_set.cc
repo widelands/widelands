@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "graphic/text/bidi.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
@@ -171,11 +172,11 @@ void FontSet::set_font_group(const LuaTable& table,
 
 FontSets::FontSets() {
 	std::map<std::string, FontSets::Selector> fontset_selectors = {
-	   {"default", FontSets::Selector::kDefault}, {"arabic", FontSets::Selector::kArabic},
-	   {"cjk", FontSets::Selector::kCJK},         {"devanagari", FontSets::Selector::kDevanagari},
-	   {"hebrew", FontSets::Selector::kHebrew},   {"myanmar", FontSets::Selector::kMyanmar},
-	   {"sinhala", FontSets::Selector::kSinhala},
-	};
+	   {"default", FontSets::Selector::kDefault},
+	   {"arabic", FontSets::Selector::kArabic},
+	   {"cjk", FontSets::Selector::kCJK},
+	   {"devanagari", FontSets::Selector::kDevanagari},
+	   {"hebrew", FontSets::Selector::kHebrew}};
 
 	LuaInterface lua;
 
@@ -251,4 +252,4 @@ FontSet const* FontSets::get_fontset(const std::string& locale) const {
 	assert(fontsets.count(selector) == 1);
 	return fontsets.at(selector).get();
 }
-}
+}  // namespace UI

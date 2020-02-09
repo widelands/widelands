@@ -15,7 +15,7 @@ ai="very_weak"
 [player_3]
 name="First Brother"
 tribe="barbarians"
-ai="normal"
+ai="empty"
 
 [player_4]
 name="Second Brother"

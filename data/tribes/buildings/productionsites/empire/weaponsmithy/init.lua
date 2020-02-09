@@ -7,7 +7,7 @@ tribes:new_productionsite_type {
    descname = pgettext("empire_building", "Weapon Smithy"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   size = "big",
+   size = "medium",
 
    buildcost = {
       log = 2,
@@ -18,8 +18,8 @@ tribes:new_productionsite_type {
    return_on_dismantle = {
       log = 1,
       granite = 1,
-      marble = 2,
-      marble_column = 1
+      marble = 1,
+      marble_column = 2
    },
 
    animations = {
@@ -70,20 +70,20 @@ tribes:new_productionsite_type {
             "call=produce_spear_advanced",
             "call=produce_spear_heavy",
             "call=produce_spear_war",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       produce_spear_wooden = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a wooden spear because ...
          descname = _"forging a wooden spear",
          actions = {
-            -- time total: 64
+            -- time total: 50 + 3.6
             "return=skipped unless economy needs spear_wooden",
-            "sleep=27000",  -- +7 enlarge
             "consume=planks",
-            "play_sound=sound/smiths smith 192",
-            "animate=working 28000",  -- +7 enlarge
-            "play_sound=sound/smiths sharpening 120",
+            "sleep=20000",
+            "playsound=sound/smiths/smith 192",
+            "animate=working 21000",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=spear_wooden"
          }
@@ -92,13 +92,13 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a spear because ...
          descname = _"forging a spear",
          actions = {
-            -- time total: 102
+            -- time total: 77 + 3.6
             "return=skipped unless economy needs spear",
             "consume=coal iron planks",
-            "sleep=47000",  -- +15 enlarge
-            "play_sound=sound/smiths smith 192",
-            "animate=working 46000",  -- +10 enlarge
-            "play_sound=sound/smiths sharpening 120",
+            "sleep=32000",
+            "playsound=sound/smiths/smith 192",
+            "animate=working 36000",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=spear"
          }
@@ -107,13 +107,13 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging an advanced spear because ...
          descname = _"forging an advanced spear",
          actions = {
-            -- time total: 110
+            -- time total: 77 + 3.6
             "return=skipped unless economy needs spear_advanced",
             "consume=coal iron:2 planks",
-            "sleep=50000",  -- +18 enlarge
-            "play_sound=sound/smiths smith 192",
-            "animate=working 51000",  -- +15 enlarge
-            "play_sound=sound/smiths sharpening 120",
+            "sleep=32000",
+            "playsound=sound/smiths/smith 192",
+            "animate=working 36000",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=spear_advanced"
          }
@@ -122,13 +122,13 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a heavy spear because ...
          descname = _"forging a heavy spear",
          actions = {
-            -- time total: 115
+            -- time total: 77 + 3.6
             "return=skipped unless economy needs spear_heavy",
             "consume=coal:2 gold iron planks",
-            "sleep=55000",  -- +23 enlarge
-            "play_sound=sound/smiths smith 192",
-            "animate=working 51000",  -- +15 enlarge
-            "play_sound=sound/smiths sharpening 120",
+            "sleep=32000",
+            "playsound=sound/smiths/smith 192",
+            "animate=working 36000",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=spear_heavy"
          }
@@ -137,13 +137,13 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a war spear because ...
          descname = _"forging a war spear",
          actions = {
-            -- time total: 120
+            -- time total: 77 + 3.6
             "return=skipped unless economy needs spear_war",
             "consume=coal:2 gold iron:2 planks",
-            "sleep=55000",  -- +23 enlarge
-            "play_sound=sound/smiths smith 192",
-            "animate=working 56000",  -- +20 enlarge
-            "play_sound=sound/smiths sharpening 120",
+            "sleep=32000",
+            "playsound=sound/smiths/smith 192",
+            "animate=working 36000",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=spear_war"
          }

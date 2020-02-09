@@ -16,8 +16,8 @@ animations = {
       fps = 5
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {15, 22}, 10)
-add_walking_animations(animations, "walkload", dirname, "walkload", {15, 22})
+add_directional_animation(animations, "walk", dirname, "walk", {15, 22}, 10)
+add_directional_animation(animations, "walkload", dirname, "walkload", {15, 22})
 
 
 tribes:new_worker_type {
@@ -35,12 +35,11 @@ tribes:new_worker_type {
 
    programs = {
       release = {
-         "setbobdescription wildboar stag sheep",
-         "findspace size:any radius:3",
-         "walk coords",
-         "animation releasein 2000",
-         "create_bob",
-         "animation releaseout 2000",
+         "findspace=size:any radius:3",
+         "walk=coords",
+         "animate=releasein 2000",
+         "createbob=bunny chamois deer elk reindeer sheep stag wildboar wisent",
+         "animate=releaseout 2000",
          "return"
       }
    },

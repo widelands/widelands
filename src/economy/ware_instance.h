@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,6 @@
 #include "economy/transfer.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/ware_descr.h"
-#include "logic/widelands.h"
 #include "map_io/tribes_legacy_lookup_table.h"
 
 namespace Widelands {
@@ -60,7 +59,7 @@ class WareInstance : public MapObject {
 
 public:
 	WareInstance(DescriptionIndex, const WareDescr* const);
-	~WareInstance();
+	~WareInstance() override;
 
 	MapObject* get_location(EditorGameBase& egbase) {
 		return location_.get(egbase);
@@ -93,7 +92,7 @@ public:
 		return transfer_;
 	}
 
-	void log_general_info(const EditorGameBase& egbase) override;
+	void log_general_info(const EditorGameBase& egbase) const override;
 
 private:
 	ObjectPointer location_;
@@ -128,6 +127,6 @@ public:
 	static MapObject::Loader*
 	load(EditorGameBase&, MapObjectLoader&, FileRead&, const TribesLegacyLookupTable& lookup_table);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_WARE_INSTANCE_H

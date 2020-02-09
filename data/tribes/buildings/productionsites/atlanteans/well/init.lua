@@ -31,7 +31,8 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      mines_water = true
+      basic_amount = 1,
+      collects_ware_from_map = "water"
    },
 
    working_positions = {
@@ -40,6 +41,10 @@ tribes:new_productionsite_type {
 
    outputs = {
       "water"
+   },
+
+   indicate_workarea_overlaps = {
+      atlanteans_well = false,
    },
 
    programs = {

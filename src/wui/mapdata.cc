@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,16 +41,16 @@ MapData::MapData(const Widelands::Map& map,
                  const std::string& init_filename,
                  const MapData::MapType& init_maptype,
                  const MapData::DisplayType& init_displaytype)
-   : MapData(init_filename, _("No Name"), _("No Author"), init_maptype, init_displaytype) {
+   : MapData(init_filename,
+             _("No Name"),
+             map.get_author().empty() ? _("No Author") : map.get_author(),
+             init_maptype,
+             init_displaytype) {
 
 	i18n::Textdomain td("maps");
 	if (!map.get_name().empty()) {
 		name = map.get_name();
-	}
-	localized_name = _(name);
-	// Localizing this, because some author fields now have "edited by" text.
-	if (!map.get_author().empty()) {
-		authors = map.get_author();
+		localized_name = _(name);
 	}
 	description = map.get_description().empty() ? "" : _(map.get_description());
 	hint = map.get_hint().empty() ? "" : _(map.get_hint());
@@ -68,7 +68,7 @@ MapData::MapData(const Widelands::Map& map,
 MapData::MapData(const std::string& init_filename, const std::string& init_localized_name)
    : MapData(init_filename,
              init_localized_name,
-             "",
+             _("No Author"),
              MapData::MapType::kDirectory,
              MapData::DisplayType::kMapnamesLocalized) {
 }

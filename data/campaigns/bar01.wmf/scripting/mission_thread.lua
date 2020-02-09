@@ -15,15 +15,20 @@ cattle_farm_done = false
 -- =====================================================
 
 function introduction_thread()
+   reveal_concentric(plr, sf, 13)
    sleep(2000)
 
    message_box_objective(plr, briefing_msg_01)
    -- these buildings are still burning, but only for a while
    map:place_immovable("destroyed_building",map:get_field(7,41),"tribes")
    map:place_immovable("destroyed_building",map:get_field(5,52),"tribes")
-   plr:reveal_fields(al_thunran:region(8))
+   scroll_to_field(al_thunran)
+   reveal_concentric(plr, al_thunran, 8, true, 50)
    message_box_objective(plr, briefing_msg_02) -- Al'thunran
-   plr:reveal_fields(grave:region(4))
+   scroll_to_field(sf)
+   sleep(1000)
+   scroll_to_field(grave)
+   reveal_concentric(plr, grave, 4)
    message_box_objective(plr, briefing_msg_03) -- grave, Boldreth
    message_box_objective(plr, briefing_msg_04) -- wait
    -- introduction of Khantrukh
@@ -52,8 +57,8 @@ function introduction_thread()
 
    -- Reveal the rocks
    local rocks = wl.Game().map:get_field(27, 48)
-   plr:reveal_fields(rocks:region(6))
    local prior_center = scroll_to_field(rocks)
+   reveal_concentric(plr, rocks, 5)
    message_box_objective(plr, order_msg_3)
    obj = add_campaign_objective(obj_claim_northeastern_rocks)
    message_box_objective(plr, order_msg_4)
@@ -322,7 +327,7 @@ function mission_complete_thread()
    end
 
    message_box_objective(plr, msg_mission_complete)
-   plr:reveal_scenario("barbariantut01")
+   plr:mark_scenario_as_solved("bar01.wmf")
 end
 
 

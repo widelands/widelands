@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,6 @@
 #include "wui/dismantlesitewindow.h"
 
 #include "graphic/graphic.h"
-#include "ui_basic/tabpanel.h"
 
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 
@@ -28,13 +27,15 @@ DismantleSiteWindow::DismantleSiteWindow(InteractiveGameBase& parent,
                                          UI::UniqueWindow::Registry& reg,
                                          Widelands::DismantleSite& ds,
                                          bool avoid_fastclick)
-   : BuildingWindow(parent, reg, ds, avoid_fastclick), progress_(nullptr) {
-	init(avoid_fastclick);
+   : BuildingWindow(parent, reg, ds, avoid_fastclick), dismantle_site_(&ds), progress_(nullptr) {
+	init(avoid_fastclick, false);
 }
 
-void DismantleSiteWindow::init(bool avoid_fastclick) {
-	BuildingWindow::init(avoid_fastclick);
-	Widelands::DismantleSite& ds = dynamic_cast<Widelands::DismantleSite&>(building());
+void DismantleSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
+	Widelands::DismantleSite* dismantle_site = dismantle_site_.get(igbase()->egbase());
+	assert(dismantle_site != nullptr);
+
+	BuildingWindow::init(avoid_fastclick, workarea_preview_wanted);
 	UI::Box& box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
 
 	// Add the progress bar
@@ -46,8 +47,9 @@ void DismantleSiteWindow::init(bool avoid_fastclick) {
 	box.add_space(8);
 
 	// Add the wares queue
-	for (uint32_t i = 0; i < ds.get_nrwaresqueues(); ++i)
-		BuildingWindow::create_input_queue_panel(&box, ds, ds.get_waresqueue(i), true);
+	for (uint32_t i = 0; i < dismantle_site->get_nrwaresqueues(); ++i)
+		BuildingWindow::create_input_queue_panel(
+		   &box, *dismantle_site, *dismantle_site->get_waresqueue(i), true);
 
 	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
 	think();
@@ -59,9 +61,13 @@ Make sure the window is redrawn when necessary.
 ===============
 */
 void DismantleSiteWindow::think() {
+	// BuildingWindow::think() will call die in case we are no longer in
+	// existance.
 	BuildingWindow::think();
 
-	const Widelands::DismantleSite& ds = dynamic_cast<Widelands::DismantleSite&>(building());
-
-	progress_->set_state(ds.get_built_per64k());
+	Widelands::DismantleSite* dismantle_site = dismantle_site_.get(igbase()->egbase());
+	if (dismantle_site == nullptr) {
+		return;
+	}
+	progress_->set_state(dismantle_site->get_built_per64k());
 }

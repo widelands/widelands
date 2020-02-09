@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,37 +20,33 @@
 #include "ui_fsmenu/multiplayer.h"
 
 #include "base/i18n.h"
-#include "graphic/text_constants.h"
+#include "graphic/graphic.h"
 #include "network/internet_gaming.h"
-#include "profile/profile.h"
+#include "random/random.h"
 #include "ui_basic/messagebox.h"
+#include "wlapplication_options.h"
 #include "wui/login_box.h"
 
 FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
    : FullscreenMenuMainMenu(),
 
      // Title
-     title(this, 0, 0, _("Choose game type"), UI::Align::kCenter),
+     title(this,
+           0,
+           0,
+           0,
+           0,
+           _("Choose game type"),
+           UI::Align::kCenter,
+           g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
 
      // Buttons
-     metaserver(&vbox_,
-                "metaserver",
-                0,
-                0,
-                butw_,
-                buth_,
-                g_gr->images().get(button_background_),
-                _("Internet game")),
-     showloginbox(nullptr),
-     lan(&vbox_,
-         "lan",
-         0,
-         0,
-         butw_,
-         buth_,
-         g_gr->images().get(button_background_),
-         _("LAN / Direct IP")),
-     back(&vbox_, "back", 0, 0, butw_, buth_, g_gr->images().get(button_background_), _("Back")) {
+     metaserver(
+        &vbox_, "metaserver", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Online Game")),
+     lan(&vbox_, "lan", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("LAN / Direct IP")),
+     showloginbox(
+        &vbox_, "lan", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Online Game Settings")),
+     back(&vbox_, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Back")) {
 	metaserver.sigclicked.connect(
 	   boost::bind(&FullscreenMenuMultiPlayer::internet_login, boost::ref(*this)));
 
@@ -58,71 +54,66 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
 	   boost::bind(&FullscreenMenuMultiPlayer::end_modal<FullscreenMenuBase::MenuTarget>,
 	               boost::ref(*this), FullscreenMenuBase::MenuTarget::kLan));
 
+	showloginbox.sigclicked.connect(
+	   boost::bind(&FullscreenMenuMultiPlayer::show_internet_login, boost::ref(*this)));
+
 	back.sigclicked.connect(
 	   boost::bind(&FullscreenMenuMultiPlayer::end_modal<FullscreenMenuBase::MenuTarget>,
 	               boost::ref(*this), FullscreenMenuBase::MenuTarget::kBack));
 
-	title.set_fontsize(fs_big());
+	title.set_font_scale(scale_factor());
 
 	vbox_.add(&metaserver, UI::Box::Resizing::kFullSize);
+	vbox_.add(&showloginbox, UI::Box::Resizing::kFullSize);
+	vbox_.add_inf_space();
 	vbox_.add(&lan, UI::Box::Resizing::kFullSize);
+	vbox_.add_inf_space();
+	vbox_.add_inf_space();
 	vbox_.add_inf_space();
 	vbox_.add(&back, UI::Box::Resizing::kFullSize);
 
-	Section& s = g_options.pull_section("global");
-	auto_log_ = s.get_bool("auto_log", false);
-	if (auto_log_) {
-		showloginbox = new UI::Button(
-		   this, "login_dialog", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but1.png"),
-		   g_gr->images().get("images/ui_basic/continue.png"), _("Show login dialog"));
-		showloginbox->sigclicked.connect(
-		   boost::bind(&FullscreenMenuMultiPlayer::show_internet_login, boost::ref(*this)));
-	}
+	auto_log_ = false;
 	layout();
 }
 
-/// called if the showloginbox button was pressed
+/// called if the user is not registered
 void FullscreenMenuMultiPlayer::show_internet_login() {
-	auto_log_ = false;
-	internet_login();
+	LoginBox lb(*this);
+	if (lb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk && auto_log_) {
+		auto_log_ = false;
+		internet_login();
+	}
 }
 
 /**
- * Called if "Internet" button was pressed.
+ * Called if "Online Game" button was pressed.
  *
- * IF autologin is not set, a LoginBox is shown and, if the user clicks on
- * 'login' in it's menu, the data is read from the LoginBox and saved in 'this'
- * so wlapplication can read it.
+ * IF no nickname or a nickname with invalid characters is set, the Online Game Settings
+ * are opened.
  *
- * IF autologin is set, all data is read from the config file and saved.
- * That data will be used for login to the metaserver.
+ * IF at least a name is set, all data is read from the config file
  *
- * In both cases this fullscreen menu ends it's modality.
+ * This fullscreen menu ends it's modality.
  */
 void FullscreenMenuMultiPlayer::internet_login() {
-	Section& s = g_options.pull_section("global");
-	if (auto_log_) {
-		nickname_ = s.get_string("nickname", _("nobody"));
-		password_ = s.get_string("password", "nobody");
-		register_ = s.get_bool("registered", false);
-	} else {
-		LoginBox lb(*this);
-		if (lb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
-			nickname_ = lb.get_nickname();
-			password_ = lb.get_password();
-			register_ = lb.registered();
+	nickname_ = get_config_string("nickname", "");
+	password_ = get_config_string("password_sha1", "no_password_set");
+	register_ = get_config_bool("registered", false);
 
-			s.set_bool("registered", lb.registered());
-			s.set_bool("auto_log", lb.set_automaticlog());
-		} else {
-			return;
-		}
+	// Checks can be done directly in editbox' by using valid_username().
+	// This is just to be on the safe side, in case the user changed the password in the config file.
+	if (!InternetGaming::ref().valid_username(nickname_)) {
+		auto_log_ = true;
+		show_internet_login();
+		return;
 	}
 
 	// Try to connect to the metaserver
-	const std::string& meta = s.get_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
-	uint32_t port = s.get_natural("metaserverport", INTERNET_GAMING_PORT);
-	InternetGaming::ref().login(nickname_, password_, register_, meta, port);
+	const std::string& meta = get_config_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
+	uint32_t port = get_config_natural("metaserverport", kInternetGamingPort);
+	const std::string& auth = register_ ? password_ : get_config_string("uuid", "");
+	assert(!auth.empty() || !register_);
+	InternetGaming::ref().login(nickname_, auth, register_, meta, port);
 
 	// Check whether metaserver send some data
 	if (InternetGaming::ref().logged_in())
@@ -135,7 +126,8 @@ void FullscreenMenuMultiPlayer::internet_login() {
 
 		// Reset InternetGaming and passwort and show internet login again
 		InternetGaming::ref().reset();
-		s.set_string("password", "");
+		set_config_string("password_sha1", "no_password_set");
+		auto_log_ = true;
 		show_internet_login();
 	}
 }
@@ -150,12 +142,8 @@ void FullscreenMenuMultiPlayer::layout() {
 
 	title.set_pos(Vector2i(0, title_y_));
 
-	metaserver.set_size(butw_, buth_);
-	if (showloginbox) {
-		showloginbox->set_pos(Vector2i(box_x_ + butw_ + padding_ / 2, box_y_));
-		showloginbox->set_size(buth_, buth_);
-	}
 	metaserver.set_desired_size(butw_, buth_);
+	showloginbox.set_desired_size(butw_, buth_);
 	lan.set_desired_size(butw_, buth_);
 	back.set_desired_size(butw_, buth_);
 

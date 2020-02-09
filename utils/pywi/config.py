@@ -76,7 +76,6 @@ class File(object):
 
     This class stores the original source of the file, thus preserving
     comments and formatting where possible.
-
     """
 
     def __init__(self):

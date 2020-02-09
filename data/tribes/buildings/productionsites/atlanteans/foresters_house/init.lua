@@ -28,11 +28,20 @@ tribes:new_productionsite_type {
 
    aihints = {
       space_consumer = true,
-      supports_production_of = { "log" }
+      supports_production_of = { "log" },
+      very_weak_ai_limit = 2,
+      weak_ai_limit = 4
    },
 
    working_positions = {
       atlanteans_forester = 1
+   },
+
+   indicate_workarea_overlaps = {
+      atlanteans_blackroot_farm = false,
+      atlanteans_farm = false,
+      atlanteans_foresters_house = false,
+      atlanteans_woodcutters_house = true,
    },
 
    programs = {
@@ -40,8 +49,8 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
          descname = _"planting trees",
          actions = {
-            "sleep=11000",
-            "worker=plant"
+            "callworker=plant",
+            "sleep=8000"
          }
       },
    },

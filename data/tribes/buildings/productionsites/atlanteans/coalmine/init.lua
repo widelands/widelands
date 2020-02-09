@@ -43,6 +43,10 @@ tribes:new_productionsite_type {
       atlanteans_miner = 3
    },
 
+   indicate_workarea_overlaps = {
+      atlanteans_coalmine = false,
+   },
+
    inputs = {
       { name = "smoked_fish", amount = 10 },
       { name = "smoked_meat", amount = 6 },
@@ -57,21 +61,44 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
          descname = _"mining coal",
          actions = {
-            "sleep=45000",
+            -- time total: 105 + 7 x 3.6
             "return=skipped unless economy needs coal",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "animate=working 20000",
+            "sleep=35000",
+            -- after having the food the miners are working 7 times
+            -- each cycle lasts 10 seconds for mining and producing coal
+            -- and 3.6 seconds to deliver the coal to the flag
+            -- calling the subroutine "mine_produce" has the effect
+            -- that even when depleted the mine has 7 working cycles
+            -- as no call cycle is skipped due to a failed mine command
+            "call=mine_produce",
+            "call=mine_produce",
+            "call=mine_produce",
+            "call=mine_produce",
+            "call=mine_produce",
+            "call=mine_produce",
+            "call=mine_produce",
+            "return=no_stats"
+         },
+      },
+      mine_produce = {
+         descname = _"mining coal",
+         actions = {
+            "animate=working 10000",
             "mine=coal 4 100 5 2",
-            "produce=coal:2",
-            "animate=working 20000",
-            "mine=coal 4 100 5 2",
-            "produce=coal:2",
-            "animate=working 20000",
-            "mine=coal 4 100 5 2",
-            "produce=coal:3"
+            "produce=coal",
+         }
+      },
+      encyclopedia = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
+            "produce=coal:7",
          }
       },
    },
+
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
       title = _"No Coal",

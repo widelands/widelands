@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 
 #include <boost/signals2.hpp>
 
+#include "graphic/styles/text_panel_style.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
@@ -37,6 +38,9 @@ class Slider : public Panel {
 	friend struct DiscreteSlider;
 
 protected:
+	/**
+	 * Text conventions: Sentence case for the 'tooltip_text'
+	 */
 	Slider(Panel* parent,
 	       int32_t x,
 	       int32_t y,
@@ -45,7 +49,7 @@ protected:
 	       int32_t min_value,
 	       int32_t max_value,
 	       int32_t value,
-	       const Image* background_picture_id,
+	       UI::SliderStyle style,
 	       const std::string& tooltip_text,
 	       uint32_t cursor_size,
 	       bool enabled,
@@ -115,7 +119,7 @@ private:
 	bool pressed_;      //  the cursor is pressed
 	bool enabled_;      //  enabled widget
 
-	const Image* pic_background_;  //  background texture (picture ID)
+	const UI::PanelStyleInfo* cursor_style_;  // Cursor color and texture. Not owned.
 
 protected:
 	int32_t x_gap_;  //  draw positions
@@ -138,7 +142,7 @@ struct HorizontalSlider : public Slider {
 	                 const int32_t min_value,
 	                 const int32_t max_value,
 	                 const int32_t value,
-	                 const Image* background_picture_id,
+	                 UI::SliderStyle style,
 	                 const std::string& tooltip_text = std::string(),
 	                 const uint32_t cursor_size = 20,
 	                 const bool enabled = true)
@@ -150,7 +154,7 @@ struct HorizontalSlider : public Slider {
 	            min_value,
 	            max_value,
 	            value,
-	            background_picture_id,
+	            style,
 	            tooltip_text,
 	            cursor_size,
 	            enabled,
@@ -178,7 +182,7 @@ struct VerticalSlider : public Slider {
 	               const int32_t min_value,
 	               const int32_t max_value,
 	               const int32_t value,
-	               const Image* background_picture_id,
+	               UI::SliderStyle style,
 	               const uint32_t cursor_size = 20,
 	               const std::string& tooltip_text = std::string(),
 	               const bool enabled = true)
@@ -190,7 +194,7 @@ struct VerticalSlider : public Slider {
 	            min_value,
 	            max_value,
 	            value,
-	            background_picture_id,
+	            style,
 	            tooltip_text,
 	            cursor_size,
 	            enabled,
@@ -218,7 +222,7 @@ struct DiscreteSlider : public Panel {
 	               const uint32_t h,
 	               const std::vector<std::string>& labels_in,
 	               uint32_t value_,
-	               const Image* background_picture_id,
+	               UI::SliderStyle style,
 	               const std::string& tooltip_text = std::string(),
 	               const uint32_t cursor_size = 20,
 	               const bool enabled = true);
@@ -232,11 +236,16 @@ protected:
 	void draw(RenderTarget& dst) override;
 	void layout() override;
 
+private:
+	// We need the style to initialize the slider, so it has to come first.
+	const UI::TextPanelStyleInfo& style;
+
+protected:
 	HorizontalSlider slider;
 
 private:
 	std::vector<std::string> labels;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_SLIDER_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +20,9 @@
 #include "map_io/map_object_packet.h"
 
 #include "base/wexception.h"
-#include "economy/fleet.h"
+#include "economy/ferry_fleet.h"
 #include "economy/portdock.h"
+#include "economy/ship_fleet.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
@@ -49,7 +50,7 @@ void MapObjectPacket::read(FileSystem& fs,
                            EditorGameBase& egbase,
                            MapObjectLoader& mol,
                            const WorldLegacyLookupTable& world_lookup_table,
-                           const TribesLegacyLookupTable& tribe_lookup_table) {
+                           const TribesLegacyLookupTable& tribes_lookup_table) {
 	try {
 		FileRead fr;
 		fr.open(fs, "binary/mapobjects");
@@ -66,7 +67,7 @@ void MapObjectPacket::read(FileSystem& fs,
 					return;
 				case MapObject::HeaderImmovable:
 					loaders.insert(
-					   Immovable::load(egbase, mol, fr, world_lookup_table, tribe_lookup_table));
+					   Immovable::load(egbase, mol, fr, world_lookup_table, tribes_lookup_table));
 					break;
 
 				case MapObject::HeaderBattle:
@@ -81,11 +82,11 @@ void MapObjectPacket::read(FileSystem& fs,
 					// We can't use the worker's savegame version, because some stuff is loaded before
 					// that
 					// packet version, and we removed the tribe name.
-					loaders.insert(Worker::load(egbase, mol, fr, tribe_lookup_table, packet_version));
+					loaders.insert(Worker::load(egbase, mol, fr, tribes_lookup_table, packet_version));
 					break;
 
 				case MapObject::HeaderWareInstance:
-					loaders.insert(WareInstance::load(egbase, mol, fr, tribe_lookup_table));
+					loaders.insert(WareInstance::load(egbase, mol, fr, tribes_lookup_table));
 					break;
 
 				case MapObject::HeaderShip:
@@ -96,8 +97,12 @@ void MapObjectPacket::read(FileSystem& fs,
 					loaders.insert(PortDock::load(egbase, mol, fr));
 					break;
 
-				case MapObject::HeaderFleet:
-					loaders.insert(Fleet::load(egbase, mol, fr));
+				case MapObject::HeaderShipFleet:
+					loaders.insert(ShipFleet::load(egbase, mol, fr));
+					break;
+
+				case MapObject::HeaderFerryFleet:
+					loaders.insert(FerryFleet::load(egbase, mol, fr));
 					break;
 
 				default:
@@ -153,7 +158,7 @@ void MapObjectPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSav
 		if (!obj.has_new_save_support())
 			throw GameDataError("MO(%u of type %s) without new style save support not saved "
 			                    "explicitly",
-			                    obj.serial(), obj.descr().descname().c_str());
+			                    obj.serial(), obj.descr().name().c_str());
 
 		mos.register_object(obj);
 		obj.save(egbase, mos, fw);
@@ -164,4 +169,4 @@ void MapObjectPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSav
 
 	fw.write(fs, "binary/mapobjects");
 }
-}
+}  // namespace Widelands

@@ -6,7 +6,7 @@ animations = {
       hotspot = { 4, 22 },
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {9, 25}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {9, 25}, 10)
 
 tribes:new_worker_type {
    msgctxt = "atlanteans_worker",
@@ -15,7 +15,7 @@ tribes:new_worker_type {
    descname = pgettext("atlanteans_worker", "Scout"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   vision_range = 2,
+   vision_range = 3,
 
    buildcost = {
       atlanteans_carrier = 1
@@ -23,7 +23,7 @@ tribes:new_worker_type {
 
    programs = {
       scout = {
-         "scout 15 75000", -- radius 15, 75 seconds until return
+         "scout=15 75000", -- radius 15, 75 seconds until return
          "return"
       }
    },

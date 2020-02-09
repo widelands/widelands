@@ -18,7 +18,7 @@
 --        \ /     \ /
 --         *-------*
 --
--- Terrain tiles have a triangular shape, and 6 of them will be combined to form a hexagon. Each vertex between the terrains (* in the figure) will form a node that is influenced by the 6 terrains surrounding it, and where other map entities can be placed. You can find more information on the terrains' shape and on how to create textures on the `wiki <https://wl.widelands.org/wiki/HelpTerrains/>`_.
+-- Terrain tiles have a triangular shape, and 6 of them will be combined to form a hexagon. Each vertex between the terrains (* in the figure) will form a node that is influenced by the 6 terrains surrounding it, and where other map entities can be placed. You can find more information on the terrains' shape and on how to create textures on the `wiki <https://www.widelands.org/wiki/HelpTerrains/>`_.
 --
 -- Each terrain tile will also influence some properties for the map entities that are placed on its 3 vertices, like:
 --
@@ -72,14 +72,13 @@ pics_dir = path.dirname(__file__) .. "pics/"
 --
 --        *Note: There is currently some interdependency between ``is`` and
 --        ``valid_resources``, so not all combinations are possible. See*
---        `Bug 1505345 <https://bugs.launchpad.net/widelands/+bug/1505345>`_
+--        `Issue #2038 <https://github.com/widelands/widelands/issues/2038>`_
 --        *for more information.*
 --
 --    **tooltips**
 --        *Optional*. Additional custom tooltip entries, e.g.::
 --
 --            tooltips = {
---               -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
 --               _"likes trees",
 --            },
 --
@@ -91,7 +90,7 @@ pics_dir = path.dirname(__file__) .. "pics/"
 --
 --        *Note: There is currently some interdependency between ``is`` and
 --        ``valid_resources``, so not all combinations are possible. See*
---        `Bug #1505345 <https://bugs.launchpad.net/widelands/+bug/1505345/>`_
+--        `Issue #2038 <https://github.com/widelands/widelands/issues/2038>`_
 --        *for more information.*
 --
 --    **default_resource**
@@ -131,17 +130,23 @@ pics_dir = path.dirname(__file__) .. "pics/"
 --
 --    **humidity**
 --        *Mandatory*. A terrain affinity constant. These are used to model how well
---        trees will grow on this terrain. Humidity is in percent (1 being very wet).
+--        trees will grow on this terrain. Values range from 1 - 1000 (1000 being very wet).
 --        Example::
 --
---            humidity = 0.6,
+--            humidity = 600,
 --
 --    **fertility**
 --        *Mandatory*. A terrain affinity constant. These are used to model how well
---        trees will grow on this terrain. Fertility is in percent (1 being very
+--        trees will grow on this terrain. Values range from 1 - 1000 (1000 being very
 --        fertile). Example::
 --
---            fertility = 0.7,
+--            fertility = 700,
+--
+--    **enhancement**
+--        *Optional*. The terrain this terrain can be turned into by buildings like
+--        the amazon gardening center. Example::
+--
+--            enhancement = "summer_meadow3",
 --
 
 ------------------------
@@ -167,8 +172,8 @@ world:new_terrain_type{
    dither_layer = 340,
 
    temperature = 100,
-   humidity = 0.6,
-   fertility = 0.7,
+   humidity = 600,
+   fertility = 700,
 }
 
 
@@ -187,9 +192,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "summer/meadow2_00.png" },
    dither_layer = 350,
    temperature = 100,
-   humidity = 0.6,
-   fertility = 0.65,
-
+   humidity = 600,
+   fertility = 650,
 }
 
 
@@ -208,8 +212,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "summer/meadow3_00.png" },
    dither_layer = 350,
    temperature = 105,
-   humidity = 0.55,
-   fertility = 0.8,
+   humidity = 550,
+   fertility = 800,
 }
 
 
@@ -228,8 +232,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "summer/meadow4_00.png" },
    dither_layer = 350,
    temperature = 110,
-   humidity = 0.65,
-   fertility = 0.75,
+   humidity = 650,
+   fertility = 750,
 }
 
 
@@ -244,8 +248,10 @@ world:new_terrain_type{
    textures = { pics_dir .. "summer/steppe_00.png" },
    dither_layer = 330,
    temperature = 100,
-   humidity = 0.4,
-   fertility = 0.4,
+   humidity = 400,
+   fertility = 400,
+
+   enhancement = "summer_mountain_meadow"
 }
 
 
@@ -260,8 +266,10 @@ world:new_terrain_type{
    textures = { pics_dir .. "summer/steppe_barren_00.png" },
    dither_layer = 320,
    temperature = 100,
-   humidity = 0.15,
-   fertility = 0.15,
+   humidity = 150,
+   fertility = 150,
+
+   enhancement = "summer_steppe"
 }
 
 
@@ -276,8 +284,10 @@ world:new_terrain_type{
    textures = { pics_dir .. "summer/mountain_meadow_00.png" },
    dither_layer = 160,
    temperature = 75,
-   humidity = 0.8,
-   fertility = 0.45,
+   humidity = 800,
+   fertility = 450,
+
+   enhancement = "summer_meadow1"
 }
 
 world:new_terrain_type{
@@ -296,8 +306,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "summer/forested_mountain1_00.png" },
    dither_layer = 71,
    temperature = 50,
-   humidity = 0.75,
-   fertility = 0.5,
+   humidity = 750,
+   fertility = 500,
 }
 
 world:new_terrain_type{
@@ -316,8 +326,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "summer/forested_mountain2_00.png" },
    dither_layer = 71,
    temperature = 50,
-   humidity = 0.75,
-   fertility = 0.5,
+   humidity = 750,
+   fertility = 500,
 }
 
 world:new_terrain_type{
@@ -331,8 +341,10 @@ world:new_terrain_type{
    textures = { pics_dir .. "summer/mountain1_00.png" },
    dither_layer = 70,
    temperature = 80,
-   humidity = 0.1,
-   fertility = 0.1,
+   humidity = 100,
+   fertility = 100,
+
+   enhancement = "summer_forested_mountain1"
 }
 
 
@@ -347,8 +359,10 @@ world:new_terrain_type{
    textures = { pics_dir .. "summer/mountain2_00.png" },
    dither_layer = 70,
    temperature = 80,
-   humidity = 0.1,
-   fertility = 0.1,
+   humidity = 100,
+   fertility = 100,
+
+   enhancement = "summer_forested_mountain1"
 }
 
 
@@ -363,8 +377,10 @@ world:new_terrain_type{
    textures = { pics_dir .. "summer/mountain3_00.png" },
    dither_layer = 70,
    temperature = 80,
-   humidity = 0.1,
-   fertility = 0.1,
+   humidity = 100,
+   fertility = 100,
+
+   enhancement = "summer_forested_mountain2"
 }
 
 
@@ -379,8 +395,10 @@ world:new_terrain_type{
    textures = { pics_dir .. "summer/mountain4_00.png" },
    dither_layer = 70,
    temperature = 80,
-   humidity = 0.1,
-   fertility = 0.1,
+   humidity = 100,
+   fertility = 100,
+
+   enhancement = "summer_forested_mountain2"
 }
 
 world:new_terrain_type{
@@ -394,8 +412,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "summer/beach_00.png" },
    dither_layer = 60,
    temperature = 120,
-   humidity = 0.6,
-   fertility = 0.2,
+   humidity = 600,
+   fertility = 200,
 }
 
 world:new_terrain_type{
@@ -410,8 +428,8 @@ world:new_terrain_type{
    dither_layer = 370,
    fps = 14,
    temperature = 105,
-   humidity = 0.999,
-   fertility = 0.1,
+   humidity = 999,
+   fertility = 100,
 }
 world:new_terrain_type{
    name = "summer_snow",
@@ -424,8 +442,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "summer/snow_00.png" },
    dither_layer = 220,
    temperature = 50,
-   humidity = 0.999,
-   fertility = 0.001,
+   humidity = 999,
+   fertility = 1,
 }
 
 
@@ -440,9 +458,9 @@ world:new_terrain_type{
    textures = path.list_files(pics_dir .. "summer/lava/lava_??.png"),
    dither_layer = 30,
    fps = 4,
-   temperature = 1273.0,
-   humidity = 0.001,
-   fertility = 0.001,
+   temperature = 1273,
+   humidity = 1,
+   fertility = 1,
 }
 
 
@@ -458,8 +476,8 @@ world:new_terrain_type{
    dither_layer = 180,
    fps = 14,
    temperature = 100,
-   humidity = 0.999,
-   fertility = 0.001,
+   humidity = 999,
+   fertility = 1,
 }
 
 ------------------------
@@ -482,8 +500,10 @@ world:new_terrain_type{
    textures = { pics_dir .. "wasteland/ashes_00.png" },
    dither_layer = 400,
    temperature = 120,
-   humidity = 0.15,
-   fertility = 0.9,
+   humidity = 150,
+   fertility = 900,
+
+   enhancement = "hardground3"
 }
 
 
@@ -502,8 +522,10 @@ world:new_terrain_type{
    textures = { pics_dir .. "wasteland/ashes2_00.png" },
    dither_layer = 410,
    temperature = 118,
-   humidity = 0.13,
-   fertility = 0.999,
+   humidity = 130,
+   fertility = 999,
+
+   enhancement = "hardground1"
 }
 
 
@@ -522,8 +544,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "wasteland/hardground1_00.png" },
    dither_layer = 420,
    temperature = 100,
-   humidity = 0.25,
-   fertility = 0.8,
+   humidity = 250,
+   fertility = 800,
 }
 
 
@@ -542,8 +564,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "wasteland/hardground2_00.png" },
    dither_layer = 370,
    temperature = 95,
-   humidity = 0.15,
-   fertility = 0.85,
+   humidity = 150,
+   fertility = 850,
 }
 
 
@@ -562,8 +584,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "wasteland/hardground3_00.png" },
    dither_layer = 380,
    temperature = 105,
-   humidity = 0.2,
-   fertility = 0.9,
+   humidity = 200,
+   fertility = 900,
 }
 
 
@@ -582,8 +604,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "wasteland/hardground4_00.png" },
    dither_layer = 390,
    temperature = 90,
-   humidity = 0.2,
-   fertility = 0.8,
+   humidity = 200,
+   fertility = 800,
 }
 
 
@@ -598,8 +620,10 @@ world:new_terrain_type{
    textures = { pics_dir .. "wasteland/hardlava_00.png" },
    dither_layer = 360,
    temperature = 120,
-   humidity = 0.1,
-   fertility = 0.2,
+   humidity = 100,
+   fertility = 200,
+
+   enhancement = "drysoil"
 }
 
 
@@ -618,8 +642,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "wasteland/forested_mountain1_00.png" },
    dither_layer = 81,
    temperature = 110,
-   humidity = 0.15,
-   fertility = 0.95,
+   humidity = 150,
+   fertility = 950,
 }
 
 world:new_terrain_type{
@@ -637,8 +661,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "wasteland/forested_mountain2_00.png" },
    dither_layer = 81,
    temperature = 95,
-   humidity = 0.2,
-   fertility = 0.4,
+   humidity = 200,
+   fertility = 400,
 }
 
 world:new_terrain_type{
@@ -652,8 +676,10 @@ world:new_terrain_type{
    textures = { pics_dir .. "wasteland/mountain1_00.png" },
    dither_layer = 90,
    temperature = 80,
-   humidity = 0.05,
-   fertility = 0.2,
+   humidity = 50,
+   fertility = 200,
+
+   enhancement = "wasteland_forested_mountain1"
 }
 
 
@@ -668,8 +694,10 @@ world:new_terrain_type{
    textures = { pics_dir .. "wasteland/mountain2_00.png" },
    dither_layer = 90,
    temperature = 80,
-   humidity = 0.05,
-   fertility = 0.2,
+   humidity = 50,
+   fertility = 200,
+
+   enhancement = "wasteland_forested_mountain1"
 }
 
 
@@ -684,8 +712,10 @@ world:new_terrain_type{
    textures = { pics_dir .. "wasteland/mountain3_00.png" },
    dither_layer = 90,
    temperature = 80,
-   humidity = 0.05,
-   fertility = 0.2,
+   humidity = 50,
+   fertility = 200,
+
+   enhancement = "wasteland_forested_mountain2"
 }
 
 
@@ -700,8 +730,10 @@ world:new_terrain_type{
    textures = { pics_dir .. "wasteland/mountain4_00.png" },
    dither_layer = 80,
    temperature = 80,
-   humidity = 0.05,
-   fertility = 0.2,
+   humidity = 50,
+   fertility = 200,
+
+   enhancement = "wasteland_forested_mountain2"
 }
 
 
@@ -716,8 +748,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "wasteland/beach_00.png" },
    dither_layer = 50,
    temperature = 60,
-   humidity = 0.4,
-   fertility = 0.2,
+   humidity = 400,
+   fertility = 200,
 }
 
 
@@ -732,9 +764,9 @@ world:new_terrain_type{
    textures = path.list_files(pics_dir .. "wasteland/lava_stone1/lava-stone1_??.png"),
    dither_layer = 20,
    fps = 7,
-   temperature = 1273.0,
-   humidity = 0.001,
-   fertility = 0.001,
+   temperature = 1273,
+   humidity = 1,
+   fertility = 1,
 }
 
 
@@ -749,9 +781,9 @@ world:new_terrain_type{
    textures = path.list_files(pics_dir .. "wasteland/lava_stone2/lava-stone2_??.png"),
    dither_layer = 10,
    fps = 7,
-   temperature = 1273.0,
-   humidity = 0.001,
-   fertility = 0.001,
+   temperature = 1273,
+   humidity = 1,
+   fertility = 1,
 }
 
 
@@ -767,8 +799,8 @@ world:new_terrain_type{
    dither_layer = 170,
    fps = 14,
    temperature = 100,
-   humidity = 0.999,
-   fertility = 0.001,
+   humidity = 999,
+   fertility = 1,
 }
 
 
@@ -792,8 +824,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "winter/tundra_00.png" },
    dither_layer = 230,
    temperature = 50,
-   humidity = 0.85,
-   fertility = 0.45,
+   humidity = 850,
+   fertility = 450,
 }
 
 
@@ -812,8 +844,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "winter/tundra2_00.png" },
    dither_layer = 240,
    temperature = 55,
-   humidity = 0.75,
-   fertility = 0.45,
+   humidity = 750,
+   fertility = 450,
 }
 
 
@@ -832,8 +864,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "winter/tundra3_00.png" },
    dither_layer = 240,
    temperature = 50,
-   humidity = 0.8,
-   fertility = 0.4,
+   humidity = 800,
+   fertility = 400,
 }
 
 
@@ -848,8 +880,10 @@ world:new_terrain_type{
    textures = { pics_dir .. "winter/tundra_taiga_00.png" },
    dither_layer = 230,
    temperature = 40,
-   humidity = 0.75,
-   fertility = 0.4,
+   humidity = 750,
+   fertility = 400,
+
+   enhancement = "tundra2"
 }
 
 
@@ -864,8 +898,10 @@ world:new_terrain_type{
    textures = { pics_dir .. "winter/taiga_00.png" },
    dither_layer = 250,
    temperature = 35,
-   humidity = 0.75,
-   fertility = 0.3,
+   humidity = 750,
+   fertility = 300,
+
+   enhancement = "tundra_taiga"
 }
 
 
@@ -880,8 +916,10 @@ world:new_terrain_type{
    textures = { pics_dir .. "winter/snow_00.png" },
    dither_layer = 250,
    temperature = 25,
-   humidity = 0.8,
-   fertility = 0.1,
+   humidity = 800,
+   fertility = 100,
+
+   enhancement = "taiga"
 }
 
 
@@ -900,8 +938,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "winter/forested_mountain1_00.png" },
    dither_layer = 101,
    temperature = 35,
-   humidity = 0.7,
-   fertility = 0.4,
+   humidity = 700,
+   fertility = 400,
 }
 
 world:new_terrain_type{
@@ -919,8 +957,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "winter/forested_mountain2_00.png" },
    dither_layer = 101,
    temperature = 35,
-   humidity = 0.7,
-   fertility = 0.4,
+   humidity = 700,
+   fertility = 400,
 }
 
 world:new_terrain_type{
@@ -934,8 +972,10 @@ world:new_terrain_type{
    textures = { pics_dir .. "winter/mountain1_00.png" },
    dither_layer = 110,
    temperature = 20,
-   humidity = 0.3,
-   fertility = 0.05,
+   humidity = 300,
+   fertility = 50,
+
+   enhancement = "winter_forested_mountain1"
 }
 
 
@@ -950,8 +990,10 @@ world:new_terrain_type{
    textures = { pics_dir .. "winter/mountain2_00.png" },
    dither_layer = 110,
    temperature = 20,
-   humidity = 0.3,
-   fertility = 0.05,
+   humidity = 300,
+   fertility = 50,
+
+   enhancement = "winter_forested_mountain1"
 }
 
 
@@ -966,8 +1008,10 @@ world:new_terrain_type{
    textures = { pics_dir .. "winter/mountain3_00.png" },
    dither_layer = 100,
    temperature = 20,
-   humidity = 0.3,
-   fertility = 0.05,
+   humidity = 300,
+   fertility = 50,
+
+   enhancement = "winter_forested_mountain2"
 }
 
 
@@ -982,8 +1026,10 @@ world:new_terrain_type{
    textures = { pics_dir .. "winter/mountain4_00.png" },
    dither_layer = 100,
    temperature = 20,
-   humidity = 0.3,
-   fertility = 0.05,
+   humidity = 300,
+   fertility = 50,
+
+   enhancement = "winter_forested_mountain2"
 }
 world:new_terrain_type{
    name = "ice",
@@ -996,8 +1042,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "winter/ice_00.png" },
    dither_layer = 260,
    temperature = 25,
-   humidity = 0.5,
-   fertility = 0.1,
+   humidity = 500,
+   fertility = 100,
 }
 
 
@@ -1012,8 +1058,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "winter/beach_00.png" },
    dither_layer = 40,
    temperature = 60,
-   humidity = 0.5,
-   fertility = 0.1,
+   humidity = 500,
+   fertility = 100,
 }
 
 
@@ -1029,8 +1075,8 @@ world:new_terrain_type{
    dither_layer = 210,
    fps = 5,
    temperature = 50,
-   humidity = 0.999,
-   fertility = 0.001,
+   humidity = 999,
+   fertility = 1,
 }
 
 
@@ -1046,8 +1092,8 @@ world:new_terrain_type{
    dither_layer = 210,
    fps = 5,
    temperature = 50,
-   humidity = 0.999,
-   fertility = 0.001,
+   humidity = 999,
+   fertility = 1,
 }
 
 
@@ -1063,8 +1109,8 @@ world:new_terrain_type{
    dither_layer = 190,
    fps = 8,
    temperature = 50,
-   humidity = 0.999,
-   fertility = 0.001,
+   humidity = 999,
+   fertility = 1,
 }
 
 
@@ -1083,8 +1129,10 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/desert4_00.png" },
    dither_layer = 270,
    temperature = 168,
-   humidity = 0.001,
-   fertility = 0.1,
+   humidity = 1,
+   fertility = 100,
+
+   enhancement = "drysoil"
 }
 
 world:new_terrain_type{
@@ -1098,8 +1146,10 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/drysoil_00.png" },
    dither_layer = 300,
    temperature = 172,
-   humidity = 0.2,
-   fertility = 0.2,
+   humidity = 200,
+   fertility = 200,
+
+   enhancement = "highmountainmeadow"
 }
 world:new_terrain_type{
    name = "desert_steppe",
@@ -1116,8 +1166,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/steppe_00.png" },
    dither_layer = 360,
    temperature = 155,
-   humidity = 0.5,
-   fertility = 0.5,
+   humidity = 500,
+   fertility = 500,
 }
 
 
@@ -1136,8 +1186,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/meadow_00.png" },
    dither_layer = 310,
    temperature = 160,
-   humidity = 0.6,
-   fertility = 0.6,
+   humidity = 600,
+   fertility = 600,
 }
 
 
@@ -1156,8 +1206,10 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/mountainmeadow_00.png" },
    dither_layer = 150,
    temperature = 145,
-   humidity = 0.5,
-   fertility = 0.5,
+   humidity = 500,
+   fertility = 500,
+
+   enhancement = "desert_steppe"
 }
 
 
@@ -1176,8 +1228,10 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/highmountainmeadow_00.png" },
    dither_layer = 150,
    temperature = 140,
-   humidity = 0.4,
-   fertility = 0.4,
+   humidity = 400,
+   fertility = 400,
+
+   enhancement = "mountainmeadow"
 }
 
 
@@ -1196,8 +1250,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/forested_mountain1_00.png" },
    dither_layer = 71,
    temperature = 141,
-   humidity = 0.5,
-   fertility = 0.5,
+   humidity = 500,
+   fertility = 500,
 }
 
 world:new_terrain_type{
@@ -1215,8 +1269,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/forested_mountain2_00.png" },
    dither_layer = 141,
    temperature = 120,
-   humidity = 0.5,
-   fertility = 0.5,
+   humidity = 500,
+   fertility = 500,
 }
 
 
@@ -1231,8 +1285,10 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/mountain1_00.png" },
    dither_layer = 120,
    temperature = 130,
-   humidity = 0.05,
-   fertility = 0.05,
+   humidity = 50,
+   fertility = 50,
+
+   enhancement = "desert_forested_mountain1"
 }
 
 
@@ -1247,8 +1303,10 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/mountain2_00.png" },
    dither_layer = 120,
    temperature = 130,
-   humidity = 0.05,
-   fertility = 0.05,
+   humidity = 50,
+   fertility = 50,
+
+   enhancement = "desert_forested_mountain1"
 }
 
 
@@ -1263,8 +1321,10 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/mountain3_00.png" },
    dither_layer = 130,
    temperature = 130,
-   humidity = 0.05,
-   fertility = 0.05,
+   humidity = 50,
+   fertility = 50,
+
+   enhancement = "desert_forested_mountain2"
 }
 
 
@@ -1279,8 +1339,10 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/mountain4_00.png" },
    dither_layer = 140,
    temperature = 130,
-   humidity = 0.05,
-   fertility = 0.05,
+   humidity = 50,
+   fertility = 50,
+
+   enhancement = "desert_forested_mountain2"
 }
 world:new_terrain_type{
    name = "desert1",
@@ -1293,8 +1355,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/desert1_00.png" },
    dither_layer = 290,
    temperature = 167,
-   humidity = 0.001,
-   fertility = 0.001,
+   humidity = 1,
+   fertility = 1,
 }
 
 
@@ -1309,8 +1371,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/desert2_00.png" },
    dither_layer = 280,
    temperature = 168,
-   humidity = 0.001,
-   fertility = 0.001,
+   humidity = 1,
+   fertility = 1,
 }
 
 
@@ -1325,8 +1387,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/desert3_00.png" },
    dither_layer = 280,
    temperature = 178,
-   humidity = 0.001,
-   fertility = 0.001,
+   humidity = 1,
+   fertility = 1,
 }
 
 
@@ -1341,8 +1403,8 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/beach_00.png" },
    dither_layer = 60,
    temperature = 179,
-   humidity = 0.5,
-   fertility = 0.1,
+   humidity = 500,
+   fertility = 100,
 }
 
 
@@ -1358,6 +1420,6 @@ world:new_terrain_type{
    dither_layer = 200,
    fps = 5,
    temperature = 150,
-   humidity = 0.999,
-   fertility = 0.001,
+   humidity = 999,
+   fertility = 1,
 }

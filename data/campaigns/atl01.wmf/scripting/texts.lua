@@ -2,8 +2,7 @@
 --                 Texts for the Atlantean tutorial mission
 -- =======================================================================
 
-include "scripting/formatting.lua"
-include "scripting/format_scenario.lua"
+include "scripting/richtext_scenarios.lua"
 
 function jundlina(title, text)
    return speech("map:princess.png", "2F9131", title, text)
@@ -31,12 +30,12 @@ obj_ensure_build_wares_production = {
    name = "obj_ensure_build_wares_production",
    title = _"Ensure the supply of building wares",
    number = 6,
-   body = objective_text(_"Supply Building Wares", _
-[[Supply basic building material for your economy:]] .. paragraphdivider() ..
-      listitem_bullet(_[[Build a quarry]]) ..
-      listitem_bullet(_[[Build two woodcutter’s houses]]) ..
-      listitem_bullet(_[[Build two forester’s houses]]) ..
-      listitem_bullet(_[[Build a sawmill]])
+   body = objective_text(_"Supply Building Wares",
+      p(_[[Supply basic building material for your economy:]]) ..
+      li(_[[Build a quarry]]) ..
+      li(_[[Build two woodcutter’s houses]]) ..
+      li(_[[Build two forester’s houses]]) ..
+      li(_[[Build a sawmill]])
    ),
 }
 
@@ -45,8 +44,8 @@ obj_expand = {
    title = _"Expand your territory and explore",
    number = 1,
    body = objective_text(_"Expand and Explore",
-      _([[The island is huge and as long as we are not sure that we are alone here, we cannot relax. Explore and conquer it, this is the only way to protect us from threats on the island and from Atlantis.]]) .. paragraphdivider() ..
-      listitem_bullet(_[[Build military sites to expand your territory]])
+      p(_([[The island is huge and as long as we are not sure that we are alone here, we cannot relax. Explore and conquer it, this is the only way to protect us from threats on the island and from Atlantis.]])) ..
+      li(_[[Build military sites to expand your territory]])
    ),
 }
 
@@ -55,16 +54,16 @@ obj_make_food_infrastructure = {
    title = _"Establish a solid food production",
    number = 10,
    body = objective_text(_"Food Production",
-      _[[Food is very important for mines and military training areas. Establish a well working food environment by building at least one farm, one blackroot farm and a mill. The two kinds of flour together with water from a well will be baked into bread in a bakery, so build a bakery and a well, too.]] .. paragraphdivider() ..
-      _[[The other two important food wares are smoked fish and smoked meat. Raw meat is delivered from a hunter. A fisher gets the fish out of the sea while a fish breeder makes sure that a school of fish does not go extinct by breeding more. Make sure that there are always fish left, otherwise the fish breeder won’t be able to breed new ones. The smoking happens in a smokery, you will need at least two of those.]] .. paragraphdivider() ..
-      listitem_bullet(_[[Build a farm and a blackroot farm]]) ..
-      listitem_bullet(_[[Build a mill to make cornmeal and blackroot flour]]) ..
-      listitem_bullet(_[[Build a well]]) ..
-      listitem_bullet(_[[Build a bakery to bake bread from cornmeal, blackroot flour and water]]) ..
-      listitem_bullet(_[[Build a hunter’s house to get raw meat]]) ..
-      listitem_bullet(_[[Build a fisher’s house close to water to get raw fish]]) ..
-      listitem_bullet(_[[Build a fish breeder’s house close to the fisher to make sure the fish do not die out]]) ..
-      listitem_bullet(_[[Build two smokeries to smoke raw meat and fish]])
+      p(_[[Food is very important for mines and military training areas. Establish a well working food environment by building at least one farm, one blackroot farm and a mill. The two kinds of flour together with water from a well will be baked into bread in a bakery, so build a bakery and a well, too.]]) ..
+      p(_[[The other two important food wares are smoked fish and smoked meat. Raw meat is delivered from a hunter. A fisher gets the fish out of the sea while a fish breeder makes sure that a school of fish does not go extinct by breeding more. Make sure that there are always fish left, otherwise the fish breeder won’t be able to breed new ones. The smoking happens in a smokery, you will need at least two of those.]]) ..
+      li(_[[Build a farm and a blackroot farm]]) ..
+      li(_[[Build a mill to make cornmeal and blackroot flour]]) ..
+      li(_[[Build a well]]) ..
+      li(_[[Build a bakery to bake bread from cornmeal, blackroot flour and water]]) ..
+      li(_[[Build a hunter’s house to get raw meat]]) ..
+      li(_[[Build a fisher’s house close to water to get raw fish]]) ..
+      li(_[[Build a fish breeder’s house close to the fisher to make sure the fish do not die out]]) ..
+      li(_[[Build two smokeries to smoke raw meat and fish]])
    )
 }
 
@@ -73,11 +72,11 @@ obj_spidercloth_production = {
    title = _"Build a spider farm and a weaving mill",
    number = 3,
    body = objective_text(_"Spidercloth Production",
-      _[[The weavers produce spidercloth and tabards in the weaving mill. Spidercloth is needed for the construction of some buildings and clothing, while tabards are the uniforms of soldiers. The weaving mill needs gold thread and spider silk as raw material. Spider silk is produced by the spider farm, while gold thread is produced by the gold spinning mill out of gold.]] .. paragraphdivider() ..
-      listitem_bullet(_[[Build a weaving mill]]) ..
-      listitem_bullet(_[[Build a spider farm]]) ..
-      listitem_bullet(_[[Build a gold spinning mill]])
- )
+      p(_[[The weavers produce spidercloth and tabards in the weaving mill. Spidercloth is needed for the construction of some buildings and clothing, while tabards are the uniforms of soldiers. The weaving mill needs gold thread and spider silk as raw material. Spider silk is produced by the spider farm, while gold thread is produced by the gold spinning mill out of gold.]]) ..
+      li(_[[Build a weaving mill]]) ..
+      li(_[[Build a spider farm]]) ..
+      li(_[[Build a gold spinning mill]])
+   )
 }
 
 obj_make_heavy_industry_and_mining = {
@@ -85,12 +84,12 @@ obj_make_heavy_industry_and_mining = {
    title = _"Build industry and mines",
    number = 5,
    body = objective_text(_"Industry and Mines",
-      _[[Iron ore, gold ore and coal are mined in the respective mines. The crystal mine will dig for quartz and diamonds – all of them are precious materials and very rarely found. It will produce a lot of granite while searching for them.]] .. paragraphdivider() ..
-      listitem_bullet(_[[The ores have to be smelted at a smelting works before they can be used. The refined materials are then used in the weapon smithy, the armor smithy and the toolsmithy.]]) .. paragraphdivider() ..
-      listitem_bullet(_[[Build a mine of each type. Make sure to send geologists to the mountain first.]]) ..
-      listitem_bullet(_[[Build a smelting works]]) ..
-      listitem_bullet(_[[Build an armor smithy and a weapon smithy]]) ..
-      listitem_bullet(_[[Build a toolsmithy]])
+      p(_[[Iron ore, gold ore and coal are mined in the respective mines. The crystal mine will dig for quartz and diamonds – all of them are precious materials and very rarely found. It will produce a lot of granite while searching for them.]]) ..
+      li_arrow(_[[The ores have to be smelted at a smelting works before they can be used. The refined materials are then used in the weapon smithy, the armor smithy and the toolsmithy.]]) ..
+      li(_[[Build a mine of each type. Make sure to send geologists to the mountain first.]]) ..
+      li(_[[Build a smelting works]]) ..
+      li(_[[Build an armor smithy and a weapon smithy]]) ..
+      li(_[[Build a toolsmithy]])
    )
 }
 
@@ -99,8 +98,8 @@ obj_build_barracks = {
    title = _"Build a barracks",
    number = 1,
    body = objective_text(_"Recruiting new soldiers",
-      _[[Now that weapons are being forged, new soldiers can be recruited. For this, we need to deliver light tridents and tabards to the barracks. Recruits will arrive from the warehouse and receive one of each and some basic training to become a soldier.]] .. paragraphdivider() ..
-      listitem_bullet(_[[Build a barracks]])
+      p(_[[Now that weapons are being forged, new soldiers can be recruited. For this, we need to deliver light tridents and tabards to the barracks. Recruits will arrive from the warehouse and receive one of each and some basic training to become a soldier.]]) ..
+      li(_[[Build a barracks]])
    )
 }
 
@@ -109,8 +108,8 @@ obj_make_training_buildings = {
    title = _"Build training sites for soldiers",
    number = 2,
    body = objective_text(_"Soldier Training Sites",
-      _[[Like all other tribes, the Atlanteans are also able to train soldiers: the dungeon trains attack – the major attribute of the Atlanteans – and the labyrinth trains evasion, health and defense. The items produced by the industry are used to train better soldiers in the two training sites.]] .. paragraphdivider() ..
-      listitem_bullet(_[[Build a dungeon and a labyrinth]])
+      p(_[[Like all other tribes, the Atlanteans are also able to train soldiers: the dungeon trains attack – the major attribute of the Atlanteans – and the labyrinth trains evasion, health and defense. The items produced by the industry are used to train better soldiers in the two training sites.]]) ..
+      li(_[[Build a dungeon and a labyrinth]])
  )
 }
 
@@ -119,9 +118,9 @@ obj_horsefarm_and_warehouse = {
    title = _"Build a warehouse and a horse farm",
    number = 2,
    body = objective_text(_"Warehouse and Horse Farm",
-      _[[As your road network gets longer and more complicated, you should employ horses to help out your carriers. Horses are bred at horse farms using water and corn. A warehouse will also help to ensure that your transportation system does not collapse.]] .. paragraphdivider() ..
-      listitem_bullet(_[[Build a warehouse]]) ..
-      listitem_bullet(_[[Build a horse farm]])
+      p(_[[As your road network gets longer and more complicated, you should employ horses to help out your carriers. Horses are bred at horse farms using water and corn. A warehouse will also help to ensure that your transportation system does not collapse.]]) ..
+      li(_[[Build a warehouse]]) ..
+      li(_[[Build a horse farm]])
   )
 }
 
@@ -130,8 +129,8 @@ obj_build_ships = {
    title = _"Build 3 ships to escape from the island",
    number = 1,
    body = objective_text(_"Escape From the Island",
-      _[[There is a lake at the top of the island. Build three ships in these waters and you might be able to rescue your people before the island is swallowed completely by the ocean.]]  .. paragraphdivider() ..
-      listitem_bullet(_[[Build a shipyard close to the lake to start building ships]])
+      p(_[[There is a lake at the top of the island. Build three ships in these waters and you might be able to rescue your people before the island is swallowed completely by the ocean.]]) ..
+      li(_[[Build a shipyard close to the lake to start building ships]])
    )
 }
 
@@ -143,7 +142,7 @@ obj_build_ships = {
 initial_messages = {
    {
       title = _"Proud to the Death",
-      body = rt(
+      body = (
          h1(_"Favored by the God") ..
          -- TRANSLATORS: Foreword
          p(_([[On the hidden and lost island of Atlantis, a proud tribe settled since the world was very young. Ruled by the bloodline of King Ajanthul – the first human to be empowered by the sea god Lutas to breathe above sea level – and the wise clerics, who provided the link to Lutas – they prospered and became civilized.]])) ..
@@ -153,7 +152,7 @@ initial_messages = {
    },
    {
       title = _"Disgraced Before the God",
-      body = rt(
+      body = (
          h1(_"The God’s Punishment") ..
          -- TRANSLATORS: Foreword
          p(_([[But all seemed well. Only the horses seemed to feel something was wrong. During the nights, they went crazy and were full of fear. It was not long before the horse breeder Xydra figured out what was wrong with them: the sea level in front of their stable was rising with ever increasing speed.]])) ..
@@ -163,7 +162,7 @@ initial_messages = {
    },
    {
       title = _"Uproar and Confusion",
-      body = rt(
+      body = (
          h1(_"Emerging Chaos…") ..
          -- TRANSLATORS: Foreword
          p(_([[Guilt-ridden, the king committed suicide. Without a monarch, the people turned to the clerics, but they had no substantial help to offer. Most accepted their fate while others tried to change the god’s mind by offering animals in his temple. But to no avail…]])) ..
@@ -476,7 +475,16 @@ scenario_won = {
          .. paragraphdivider() ..
          -- TRANSLATORS: Jundlina
          _([[I expect a long journey, but we will find the land of Satul in the end. This is what I promised my people. And myself.]]))
-         .. rt("<p font-size=10> <br></p>" .. h1(_ "Congratulations") ..
-         p(_[[You have won this mission. Continue with the next one or keep playing for as long as you like.]]))
+         .. objective_text(_"Congratulations",
+      _[[You have won this mission. Continue with the next one or keep playing for as long as you like.]])
    }
 }
+
+function building_lost(buildingname)
+   set_textdomain("scenario_atl01.wmf")
+   return {
+      -- TRANSLATORS: Short message title. Translate as "Lost!" if you don't have enough space.
+      title = pgettext("message_short_title", "Building lost!"),
+      text = li_object(buildingname, _"We lost a building to the ocean!")
+   }
+end

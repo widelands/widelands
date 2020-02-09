@@ -1,22 +1,14 @@
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 11, 23 },
-   },
-   work = {
-      pictures = path.list_files(dirname .. "work_??.png"),
-      sound_effect = {
-            directory = "sound/hammering",
-            name = "hammering",
-      },
-      hotspot = { 11, 26 },
-      fps = 10
-   }
+animations = {}
+add_animation(animations, "idle", dirname, "idle", {11, 23})
+add_animation(animations, "work", dirname, "work", {11, 26}, 10)
+animations["work"]["sound_effect"] = {
+   path = "sound/hammering/hammering",
+   priority = 64
 }
-add_walking_animations(animations, "walk", dirname, "walk", {9, 24}, 10)
-add_walking_animations(animations, "walkload", dirname, "walkload", {11, 22}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {9, 24}, 10)
+add_directional_animation(animations, "walkload", dirname, "walkload", {11, 22}, 10)
 
 
 tribes:new_worker_type {
@@ -35,14 +27,24 @@ tribes:new_worker_type {
 
    programs = {
       buildship = {
-         "walk object-or-coords",
-         "plant tribe:barbarians_shipconstruction unless object",
-         "play_sound sound/sawmill sawmill 230",
-         "animation work 500",
+         "walk=object-or-coords",
+         "plant=attrib:shipconstruction unless object",
+         "playsound=sound/sawmill/sawmill 230",
+         "animate=work 500",
          "construct",
-         "animation work 5000",
+         "animate=work 5000",
          "return"
-      }
+      },
+      buildferry_1 = {
+         "findspace=size:swim radius:5",
+      },
+      buildferry_2 = {
+         "findspace=size:swim radius:5",
+         "walk=coords",
+         "animate=work 10000",
+         "buildferry",
+         "return"
+      },
    },
 
    animations = animations,

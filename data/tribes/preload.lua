@@ -24,6 +24,7 @@ return {
          dirname .. "scripting/starting_conditions/barbarians/trading_outpost.lua";
          dirname .. "scripting/starting_conditions/barbarians/hardcore.lua";
          dirname .. "scripting/starting_conditions/barbarians/minimum.lua";
+         dirname .. "scripting/starting_conditions/barbarians/village.lua";
       }
    },
 
@@ -42,6 +43,7 @@ return {
          dirname .. "scripting/starting_conditions/empire/trading_outpost.lua";
          dirname .. "scripting/starting_conditions/empire/hardcore.lua";
          dirname .. "scripting/starting_conditions/empire/minimum.lua";
+         dirname .. "scripting/starting_conditions/empire/village.lua";
       }
    },
 
@@ -60,6 +62,24 @@ return {
          dirname .. "scripting/starting_conditions/atlanteans/trading_outpost.lua";
          dirname .. "scripting/starting_conditions/atlanteans/hardcore.lua";
          dirname .. "scripting/starting_conditions/atlanteans/minimum.lua";
+         dirname .. "scripting/starting_conditions/atlanteans/village.lua";
+      }
+   },
+
+      -- Basic information for the Frisian tribe
+   {
+      name = "frisians",
+      author = _"The Widelands Development Team",
+      -- TRANSLATORS: This is a tribe name
+      descname = _"Frisians (experimental)",
+      tooltip = _("The inhabitants of the rough North Sea shore. This tribe is still under development."),
+      icon = dirname .. "images/frisians/icon.png",
+
+      starting_conditions = {
+         dirname .. "scripting/starting_conditions/frisians/headquarters.lua";
+         dirname .. "scripting/starting_conditions/frisians/fortified_village.lua";
+         dirname .. "scripting/starting_conditions/frisians/trading_outpost.lua";
+         dirname .. "scripting/starting_conditions/frisians/village.lua";
       }
    }
 }

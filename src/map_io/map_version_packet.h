@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2017 by the Widelands Development Team
+ * Copyright (C) 2013-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,11 +20,26 @@
 #ifndef WL_MAP_IO_MAP_VERSION_PACKET_H
 #define WL_MAP_IO_MAP_VERSION_PACKET_H
 
-#include "map_io/map_data_packet.h"
+class FileSystem;
+
+namespace Widelands {
+
+class EditorGameBase;
+class Map;
+class MapObjectLoader;
+struct MapObjectSaver;
 
 /*
  * This packet contains the version information of the map.
  */
-MAP_DATA_PACKET(MapVersionPacket)
+class MapVersionPacket {
+public:
+	void read(FileSystem&, EditorGameBase&, bool skip, bool is_post_one_world);
+	void write(FileSystem&, EditorGameBase&);
+
+	void pre_read(FileSystem&, Map*, bool skip, bool is_post_one_world);
+};
+
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_MAP_IO_MAP_VERSION_PACKET_H

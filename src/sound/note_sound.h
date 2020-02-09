@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 by the Widelands Development Team
+ * Copyright (C) 2017-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,25 +25,20 @@
 #include "logic/widelands_geometry.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
+#include "sound/constants.h"
 
 struct NoteSound {
 	CAN_BE_SENT_AS_NOTE(NoteId::Sound)
-	const std::string fx;
+	const SoundType type;
+	const FxId fx;
 	const Widelands::Coords coords;
 	const uint8_t priority;
-	const uint32_t stereo_position;
 
-	NoteSound(const std::string& init_fx, Widelands::Coords init_coords, uint8_t init_priority)
-	   : fx(init_fx),
-	     coords(init_coords),
-	     priority(init_priority),
-	     stereo_position(std::numeric_limits<uint32_t>::max()) {
-	}
-	NoteSound(const std::string& init_fx, uint32_t init_stereo_position, uint8_t init_priority)
-	   : fx(init_fx),
-	     coords(Widelands::Coords(-1, -1)),
-	     priority(init_priority),
-	     stereo_position(init_stereo_position) {
+	NoteSound(SoundType init_type,
+	          FxId init_fx,
+	          Widelands::Coords init_coords,
+	          uint8_t init_priority)
+	   : type(init_type), fx(init_fx), coords(init_coords), priority(init_priority) {
 	}
 };
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,6 @@
 
 #include "graphic/color.h"
 #include "logic/map_objects/tribes/building.h"
-#include "logic/widelands.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
@@ -43,9 +42,11 @@ constexpr int kNoOfBuildingTabs = 5;
 /// It also allows to jump through buildings on the map.
 struct BuildingStatisticsMenu : public UI::UniqueWindow {
 	BuildingStatisticsMenu(InteractivePlayer&, UI::UniqueWindow::Registry&);
-	~BuildingStatisticsMenu();
+	~BuildingStatisticsMenu() override;
 
 	void think() override;
+
+	/// Update state of current building buttons
 	void update();
 
 private:
@@ -65,18 +66,33 @@ private:
 		NextUnproductive
 	};
 
+	/// Initialize the buttons
+	void reset();
+	void init(int last_selected_tab = 0);
+
+	/// Whether a building that is used by the player's tribe should be added
+	bool own_building_is_valid(const Widelands::Player& player,
+	                           Widelands::DescriptionIndex index,
+	                           bool map_allows_seafaring,
+	                           bool map_allows_waterways) const;
+	/// Whether a building that isn't used by the player's tribe should be added
+	bool foreign_tribe_building_is_valid(const Widelands::Player& player,
+	                                     Widelands::DescriptionIndex index) const;
+	/// Determine which tab a building button should end up on, according to building size etc.
+	int find_tab_for_building(const Widelands::BuildingDescr& descr) const;
+
+	/// If the buildings that should be shown have changes, update the list and reinitialize
+	void update_building_list();
+
 	/// Adds a button for the building type belonging to the id and descr to the tab.
 	/// Returns true when a new row needs to be created.
-	bool add_button(Widelands::DescriptionIndex id,
-	                const Widelands::BuildingDescr& descr,
-	                int tab_index,
-	                UI::Box& row,
-	                int* column);
+	void
+	add_button(Widelands::DescriptionIndex id, const Widelands::BuildingDescr& descr, UI::Box* row);
 
 	/// Jumps to the next / previous appropriate building
 	void jump_building(JumpTarget target, bool reverse);
 
-	/// Sets the label for id type to text in the chosen color with dynamic font size
+	/// Sets the label for the given textarea to text in the chosen color
 	void set_labeltext(UI::Textarea* textarea, const std::string& text, const RGBColor& color);
 
 	/// Sets the current building type for the bottom navigation
@@ -92,10 +108,17 @@ private:
 
 	InteractivePlayer& iplayer() const;
 
+	/// Style
+	const UI::BuildingStatisticsStyleInfo& style_;
+
 	/// UI tabs
 	UI::TabPanel tab_panel_;
 	UI::Box* tabs_[kNoOfBuildingTabs];
+	/// How many button rows each tab has
 	int row_counters_[kNoOfBuildingTabs];
+	/// We can have gaps in the tab sequence, so we need to map the indices for remembering the last
+	/// selected tab
+	int tab_assignments_[kNoOfBuildingTabs];
 
 	/// Button with building icon
 	std::vector<UI::Button*> building_buttons_;
@@ -134,6 +157,9 @@ private:
 
 	/// Whether a building has been selected
 	bool has_selection_;
+
+	/// The total number of building types available for all the tribes
+	const Widelands::DescriptionIndex nr_building_types_;
 };
 
 #endif  // end of include guard: WL_WUI_BUILDING_STATISTICS_MENU_H

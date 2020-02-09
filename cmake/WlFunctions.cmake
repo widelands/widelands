@@ -40,7 +40,7 @@ endfunction(wl_include_directories TARGET DIR)
 # it works is different. SYSTEM includes silence warnings for included headers etc.
 function(wl_include_system_directories TARGET DIR)
   _include_directories_internal(${TARGET} ${DIR} TRUE)
-endfunction(wl_include_system_directories TARGET_DIR)
+endfunction(wl_include_system_directories TARGET DIR)
 
 # Add common compile tasks, like includes and libraries to link against for third party
 # libraries, and codecheck hook for sources.
@@ -178,6 +178,12 @@ endfunction()
 
 # Common test target definition.
 function(wl_test NAME)
+
+  if (NOT OPTION_BUILD_TESTS)
+    return()
+  endif()
+
+
   _parse_common_args("${ARGN}")
 
   add_executable(${NAME} ${ARG_SRCS})
@@ -237,7 +243,9 @@ function(wl_run_codecheck NAME SRC)
     add_dependencies(codecheck see_if_codecheck_needs_to_run_${CHECKSUM})
 
     if(CMAKE_BUILD_TYPE STREQUAL Debug)
-      add_dependencies(${NAME} see_if_codecheck_needs_to_run_${CHECKSUM})
+      if (OPTION_BUILD_CODECHECK)
+        add_dependencies(${NAME} see_if_codecheck_needs_to_run_${CHECKSUM})
+      endif (OPTION_BUILD_CODECHECK)
     endif(CMAKE_BUILD_TYPE STREQUAL Debug)
   endif(EXISTS ${ABSOLUTE_SRC})
 endfunction(wl_run_codecheck)

@@ -1,0 +1,10 @@
+# Automatically created by Widelands bzr8483[bug-1718745-allows-seafaring] (Release)
+
+[global]
+packet_version="2"
+
+[player_1]
+name="Cluicheadair 1"
+tribe="barbarians"
+ai=
+closeable="false"

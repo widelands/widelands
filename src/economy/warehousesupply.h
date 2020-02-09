@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,11 +31,12 @@ WarehouseSupply is the implementation of Supply that is used by Warehouses.
 It also manages the list of wares in the warehouse.
 */
 struct WarehouseSupply : public Supply {
-	explicit WarehouseSupply(Warehouse* const wh) : economy_(nullptr), warehouse_(wh) {
+	explicit WarehouseSupply(Warehouse* const wh)
+	   : ware_economy_(nullptr), worker_economy_(nullptr), warehouse_(wh) {
 	}
-	virtual ~WarehouseSupply();
+	~WarehouseSupply() override;
 
-	void set_economy(Economy*);
+	void set_economy(Economy*, WareWorker);
 
 	void set_nrworkers(DescriptionIndex);
 	void set_nrwares(DescriptionIndex);
@@ -70,11 +71,12 @@ struct WarehouseSupply : public Supply {
 	Worker& launch_worker(Game&, const Request&) override;
 
 private:
-	Economy* economy_;
+	Economy* ware_economy_;
+	Economy* worker_economy_;
 	WareList wares_;
 	WareList workers_;  //  we use this to keep the soldiers
 	Warehouse* warehouse_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_WAREHOUSESUPPLY_H

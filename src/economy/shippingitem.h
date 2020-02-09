@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2017 by the Widelands Development Team
+ * Copyright (C) 2011-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,11 +50,10 @@ struct ShippingItem {
 	// Unboxes the item that is shipped which might be either a ware or a
 	// worker. It is safe to pass nullptr for 'ware' or 'worker' in case you are
 	// only interested in the ware if it is the one or the other.
-	void get(EditorGameBase& game, WareInstance** ware, Worker** worker) const;
+	void get(const EditorGameBase& game, WareInstance** ware, Worker** worker) const;
 
-	void set_economy(Game&, Economy* e);
-	PortDock* get_destination(Game&);
-	void schedule_update(Game&, int32_t delay);
+	void set_economy(Game&, Economy* e, WareWorker);
+	const PortDock* get_destination(Game&) const;
 
 	void remove(EditorGameBase&);
 
@@ -64,6 +63,7 @@ struct ShippingItem {
 
 	private:
 		uint32_t serial_ = 0U;
+		uint32_t destination_serial_ = 0U;
 	};
 
 	void save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw);
@@ -71,6 +71,7 @@ struct ShippingItem {
 private:
 	friend class PortDock;
 	friend struct Ship;
+	friend struct ShipFleet;
 
 	// Called when a port is reached. The item will act again on its own.
 	void end_shipping(Game&);

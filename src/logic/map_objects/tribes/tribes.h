@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,11 +24,12 @@
 
 #include "base/macros.h"
 #include "graphic/texture.h"
-#include "logic/description_maintainer.h"
+#include "logic/map_objects/description_maintainer.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
+#include "logic/map_objects/tribes/ferry.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/ship.h"
@@ -46,18 +47,6 @@ namespace Widelands {
 class WareDescr;
 class WorkerDescr;
 
-/// Returns a string vector with the names of all tribes.
-std::vector<std::string> get_all_tribenames();
-
-/// Returns a vector with the basic info for all tribes.
-std::vector<TribeBasicInfo> get_all_tribeinfos();
-
-/// Returns the basic preload info for a tribe.
-TribeBasicInfo get_tribeinfo(const std::string& tribename);
-
-/// Returns whether this tribe is listed in tribes/preload.lua.
-bool tribe_exists(const std::string& tribename);
-
 class Tribes {
 public:
 	Tribes();
@@ -65,22 +54,25 @@ public:
 	}
 
 	/// Adds this building type to the tribe description.
-	void add_constructionsite_type(const LuaTable& table, const EditorGameBase& egbase);
+	void add_constructionsite_type(const LuaTable& table);
 
 	/// Adds this building type to the tribe description.
-	void add_dismantlesite_type(const LuaTable& table, const EditorGameBase& egbase);
+	void add_dismantlesite_type(const LuaTable& table);
 
 	/// Adds this building type to the tribe description.
-	void add_militarysite_type(const LuaTable& table, const EditorGameBase& egbase);
+	void add_militarysite_type(const LuaTable& table);
 
 	/// Adds this building type to the tribe description.
-	void add_productionsite_type(const LuaTable& table, const EditorGameBase& egbase);
+	void add_productionsite_type(const LuaTable& table, const World& world);
 
 	/// Adds this building type to the tribe description.
-	void add_trainingsite_type(const LuaTable& table, const EditorGameBase& egbase);
+	void add_trainingsite_type(const LuaTable& table, const World& world);
 
 	/// Adds this building type to the tribe description.
-	void add_warehouse_type(const LuaTable& table, const EditorGameBase& egbase);
+	void add_warehouse_type(const LuaTable& table);
+
+	/// Adds this building type to the tribe description.
+	void add_market_type(const LuaTable& table);
 
 	/// Adds this immovable type to the tribe description.
 	void add_immovable_type(const LuaTable& table);
@@ -92,23 +84,33 @@ public:
 	void add_ware_type(const LuaTable& table);
 
 	/// Adds this worker type to the tribe description.
-	void add_carrier_type(const LuaTable& table, const EditorGameBase& egbase);
+	void add_carrier_type(const LuaTable& table);
 
 	/// Adds this worker type to the tribe description.
-	void add_soldier_type(const LuaTable& table, const EditorGameBase& egbase);
+	void add_soldier_type(const LuaTable& table);
 
 	/// Adds this worker type to the tribe description.
-	void add_worker_type(const LuaTable& table, const EditorGameBase& egbase);
+	void add_ferry_type(const LuaTable& table);
+
+	/// Adds this worker type to the tribe description.
+	void add_worker_type(const LuaTable& table);
 
 	/// Adds a specific tribe's configuration.
-	void add_tribe(const LuaTable& table, const EditorGameBase& egbase);
+	void add_tribe(const LuaTable& table);
+
+	/// Registers a custom scenario building with the tribes
+	void add_custom_building(const LuaTable& table);
+	/// Registers a custom scenario worker with the tribes
+	void add_custom_worker(const LuaTable& table);
 
 	size_t nrbuildings() const;
 	size_t nrtribes() const;
 	size_t nrwares() const;
 	size_t nrworkers() const;
 
+	bool ware_exists(const std::string& warename) const;
 	bool ware_exists(const DescriptionIndex& index) const;
+	bool worker_exists(const std::string& workername) const;
 	bool worker_exists(const DescriptionIndex& index) const;
 	bool building_exists(const std::string& buildingname) const;
 	bool building_exists(const DescriptionIndex& index) const;
@@ -148,13 +150,20 @@ public:
 	/// Complete the Description objects' information with data from other Description objects.
 	void postload();
 
+	uint32_t get_largest_workarea() const;
+
 private:
+	void postload_calculate_trainingsites_proportions();
+
 	std::unique_ptr<DescriptionMaintainer<BuildingDescr>> buildings_;
 	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> immovables_;
 	std::unique_ptr<DescriptionMaintainer<ShipDescr>> ships_;
 	std::unique_ptr<DescriptionMaintainer<WareDescr>> wares_;
 	std::unique_ptr<DescriptionMaintainer<WorkerDescr>> workers_;
 	std::unique_ptr<DescriptionMaintainer<TribeDescr>> tribes_;
+	std::unique_ptr<TribesLegacyLookupTable> legacy_lookup_table_;
+
+	uint32_t largest_workarea_;
 
 	DISALLOW_COPY_AND_ASSIGN(Tribes);
 };

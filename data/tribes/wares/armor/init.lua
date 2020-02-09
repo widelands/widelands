@@ -2,7 +2,7 @@
 -- .. _lua_tribes_wares:
 --
 -- Wares
--- -----
+-- =====
 --
 -- Wares are used to build buildings, produce other wares and recruit units.
 --
@@ -41,7 +41,7 @@ dirname = path.dirname(__file__)
 --    for each tribe's economy. For example, ``{ atlanteans = 3, empire = 1 }``
 --
 --    **preciousness**: How precious this ware is to each tribe. For example,
---    ``{ atlanteans = 0, empire = 1 }``
+--    ``{ atlanteans = 0, empire = 1 }``. We recommend not going higher than ``25``.
 --
 --    **animations**: A table containing all animations for this ware.
 --    Wares have an "idle" animation.
@@ -66,3 +66,29 @@ tribes:new_ware_type {
       },
    }
 }
+
+-- RST
+--
+-- Help Texts
+-- ----------
+--
+-- Each ware has a ``helptexts.lua`` script, which is located in the same directory as its ``init.lua`` script.
+-- The function in this file returns texts that are used for the ware by the Tribal Encyclopedia.
+--
+-- .. function:: ware_helptext([tribe])
+--
+--    Returns a localized string with a helptext for this ware type.
+--
+--    :arg tribe: the name of the tribe to fetch this helptext for.
+--    :type tribe: :class:`string`
+--
+--    If you call this function without a tribe name, it will deliver a default
+--    help text, if present. Both a default and a tribe helptext can be defined
+--    at the same time, and they are designed in such a way that they are supposed
+--    to be concatenated. Example call of this function::
+--
+--        pgettext("sentence_separator", "%s %s"):bformat(ware_helptext(), ware_helptext(tribename))
+--
+--    If you wish to define helptexts of your own, best copy over this function
+--    from another ware and then fill in the data.
+--

@@ -25,8 +25,8 @@ A ICON MOVEABLE PURE LOADONCALL DISCARDABLE "@CMAKE_CURRENT_SOURCE_DIR@/../utils
 // TO CHANGE VERSION INFORMATION, EDIT  OPTIONS BELOW...
 //
 1 VERSIONINFO
-FILEVERSION 0,19,0,1
-PRODUCTVERSION 0,19,0,1
+FILEVERSION 0,20,0,1
+PRODUCTVERSION 0,20,0,1
 FILETYPE VFT_APP
 {
   BLOCK "StringFileInfo"
@@ -38,7 +38,7 @@ FILETYPE VFT_APP
 			 VALUE "FileDescription", "Widelands - realtime strategy game"
 			 VALUE "InternalName", "WL"
 			 VALUE "LegalCopyright", "GPL v2"
-			 VALUE "WWW", "http://www.widelands.org"
+			 VALUE "WWW", "https://www.widelands.org"
 			 VALUE "License", "Gnu GPL v2"
 			 VALUE "OriginalFilename", "widelands"
 			 VALUE "ProductName", "Widelands - an Open-Source realtime strategy game"

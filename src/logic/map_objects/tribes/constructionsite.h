@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,25 +20,45 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_CONSTRUCTIONSITE_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_CONSTRUCTIONSITE_H
 
+#include <memory>
 #include <vector>
 
 #include "base/macros.h"
+#include "logic/map_objects/tribes/building_settings.h"
 #include "logic/map_objects/tribes/partially_finished_building.h"
 #include "scripting/lua_table.h"
+
+class FileRead;
+class FileWrite;
 
 namespace Widelands {
 
 class Building;
+class MilitarySiteDescr;
+class ProductionSiteDescr;
 class Request;
+enum class StockPolicy;
+class TrainingSiteDescr;
+class WarehouseDescr;
 class WaresQueue;
 
 /// Per-player and per-field constructionsite information
 struct ConstructionsiteInformation {
 	ConstructionsiteInformation() : becomes(nullptr), was(nullptr), totaltime(0), completedtime(0) {
 	}
+
+	/// Draw the partly finished constructionsite
+	void draw(const Vector2f& point_on_dst,
+	          const Coords& coords,
+	          float scale,
+	          const RGBColor& player_color,
+	          RenderTarget* dst) const;
+
 	const BuildingDescr*
 	   becomes;  // Also works as a marker telling whether there is a construction site.
 	const BuildingDescr* was;  // only valid if "becomes" is an enhanced building.
+	std::vector<const BuildingDescr*>
+	   intermediates;  // If we enhance a building while it's still under construction
 	uint32_t totaltime;
 	uint32_t completedtime;
 };
@@ -63,15 +83,17 @@ The ConstructionSite's idling animation is the basic construction site marker.
 */
 class ConstructionSiteDescr : public BuildingDescr {
 public:
-	ConstructionSiteDescr(const std::string& init_descname,
-	                      const LuaTable& t,
-	                      const EditorGameBase& egbase);
+	ConstructionSiteDescr(const std::string& init_descname, const LuaTable& t, const Tribes& tribes);
 	~ConstructionSiteDescr() override {
 	}
 
 	Building& create_object() const override;
 
+	FxId creation_fx() const;
+
 private:
+	const FxId creation_fx_;
+
 	DISALLOW_COPY_AND_ASSIGN(ConstructionSiteDescr);
 };
 
@@ -104,6 +126,13 @@ public:
 	bool fetch_from_flag(Game&) override;
 	bool get_building_work(Game&, Worker&, bool success) override;
 
+	BuildingSettings* get_settings() const {
+		return settings_.get();
+	}
+	void apply_settings(const BuildingSettings&);
+
+	void enhance(Game&);
+
 protected:
 	void update_statistics_string(std::string* statistics_string) override;
 
@@ -114,8 +143,9 @@ protected:
 	static void wares_queue_callback(Game&, InputQueue*, DescriptionIndex, Worker*, void* data);
 
 	void draw(uint32_t gametime,
-	          TextToDraw draw_text,
+	          InfoToDraw info_to_draw,
 	          const Vector2f& point_on_dst,
+	          const Coords& coords,
 	          float scale,
 	          RenderTarget* dst) override;
 
@@ -124,7 +154,10 @@ private:
 
 	bool builder_idle_;                 // used to determine whether the builder is idle
 	ConstructionsiteInformation info_;  // asked for by player point of view for the gameview
+
+	std::unique_ptr<BuildingSettings> settings_;
+	void init_settings();
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_CONSTRUCTIONSITE_H

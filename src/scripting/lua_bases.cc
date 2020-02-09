@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,9 +19,13 @@
 
 #include "scripting/lua_bases.h"
 
+#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "economy/economy.h"
+#include "io/filesystem/layered_filesystem.h"
+#include "io/profile.h"
+#include "logic/filesystem_constants.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/tribes.h"
@@ -31,6 +35,7 @@
 #include "scripting/factory.h"
 #include "scripting/globals.h"
 #include "scripting/lua_map.h"
+#include "ui_basic/progresswindow.h"
 
 using namespace Widelands;
 
@@ -83,6 +88,9 @@ const MethodType<LuaEditorGameBase> LuaEditorGameBase::Methods[] = {
    METHOD(LuaEditorGameBase, get_worker_description),
    METHOD(LuaEditorGameBase, get_resource_description),
    METHOD(LuaEditorGameBase, get_terrain_description),
+   METHOD(LuaEditorGameBase, save_campaign_data),
+   METHOD(LuaEditorGameBase, read_campaign_data),
+   METHOD(LuaEditorGameBase, set_loading_message),
    {nullptr, nullptr},
 };
 const PropertyType<LuaEditorGameBase> LuaEditorGameBase::Properties[] = {
@@ -319,6 +327,233 @@ int LuaEditorGameBase::get_terrain_description(lua_State* L) {
 	return to_lua<LuaMaps::LuaTerrainDescription>(L, new LuaMaps::LuaTerrainDescription(descr));
 }
 
+/* Helper function for save_campaign_data()
+
+   This function reads the lua table from the stack and saves information about its
+   keys, values and data types and its size to the provided maps.
+   This function is recursive so subtables to any depth can be saved.
+   Each value in the table (including all subtables) is uniquely identified by a key_key.
+   The key_key is used as key in all the map.
+   For the topmost table of size x, the key_keys are called '_0' through '_x-1'.
+   For a subtable of size z at key_key '_y', the subtable's key_keys are called '_y_0' through
+   '_y_z-1'.
+   If a table is an array, the map 'keys' will contain no mappings for the array's key_keys.
+*/
+static void save_table_recursively(lua_State* L,
+                                   const std::string& depth,
+                                   std::map<std::string, const char*>* data,
+                                   std::map<std::string, const char*>* keys,
+                                   std::map<std::string, const char*>* type,
+                                   std::map<std::string, uint32_t>* size) {
+	lua_pushnil(L);
+	uint32_t i = 0;
+	while (lua_next(L, -2) != 0) {
+		const std::string key_key = depth + "_" + std::to_string(i);
+
+		// check the value's type
+		const char* type_name = lua_typename(L, lua_type(L, -1));
+		const std::string t = std::string(type_name);
+
+		(*type)[key_key] = type_name;
+
+		if (t == "number" || t == "string") {
+			// numbers may be treated like strings here
+			(*data)[key_key] = luaL_checkstring(L, -1);
+		} else if (t == "boolean") {
+			(*data)[key_key] = luaL_checkboolean(L, -1) ? "true" : "false";
+		} else if (t == "table") {
+			save_table_recursively(L, depth + "_" + std::to_string(i), data, keys, type, size);
+		} else {
+			report_error(
+			   L, "A campaign data value may be a string, integer, boolean, or table; but not a %s!",
+			   type_name);
+		}
+
+		++i;
+
+		// put the key on the stack top
+		lua_pop(L, 1);
+		if (lua_type(L, -1) == LUA_TSTRING) {
+			// this is a table
+			(*keys)[key_key] = luaL_checkstring(L, -1);
+		} else if (lua_type(L, -1) == LUA_TNUMBER) {
+			// this is an array
+			if (i != luaL_checkuint32(L, -1)) {
+				// If we get here, the scripter must have set some array values to nil.
+				// This is forbidden because it causes problems when trying to read the data later.
+				report_error(L, "A campaign data array entry must not be nil!");
+			}
+			// otherwise, this is a normal array, so all is well
+		} else {
+			report_error(L, "A campaign data key may be a string or integer; but not a %s!",
+			             lua_typename(L, lua_type(L, -1)));
+		}
+	}
+	(*size)[depth] = i;
+}
+
+/* RST
+   .. function:: save_campaign_data(campaign_name, scenario_name, data)
+
+      :arg campaign_name: the name of the current campaign, e.g. "empiretut" or "frisians"
+      :arg scenario_name: the name of the current scenario, e.g. "emp04" or "fri03"
+      :arg data: a table of key-value pairs to save
+
+      Saves information that can be read by other scenarios.
+
+      If an array is used, the data will be saved in the correct order. Arrays may not contain nil
+      values. If the table is not an array, all keys have to be strings. Tables may contain
+      subtables of any depth. Cyclic dependencies will cause Widelands to crash. Only tables/arrays,
+      strings, integer numbers and booleans may be used as values.
+*/
+int LuaEditorGameBase::save_campaign_data(lua_State* L) {
+
+	const std::string campaign_name = luaL_checkstring(L, 2);
+	const std::string scenario_name = luaL_checkstring(L, 3);
+	luaL_checktype(L, 4, LUA_TTABLE);
+
+	std::string dir = kCampaignDataDir + g_fs->file_separator() + campaign_name;
+	boost::trim(dir);
+	g_fs->ensure_directory_exists(dir);
+
+	std::string complete_filename =
+	   dir + g_fs->file_separator() + scenario_name + kCampaignDataExtension;
+	boost::trim(complete_filename);
+
+	std::map<std::string, const char*> data;
+	std::map<std::string, const char*> keys;
+	std::map<std::string, const char*> type;
+	std::map<std::string, uint32_t> size;
+
+	save_table_recursively(L, "", &data, &keys, &type, &size);
+
+	Profile profile;
+	Section& data_section = profile.create_section("data");
+	for (const auto& p : data) {
+		data_section.set_string(p.first.c_str(), p.second);
+	}
+	Section& keys_section = profile.create_section("keys");
+	for (const auto& p : keys) {
+		keys_section.set_string(p.first.c_str(), p.second);
+	}
+	Section& type_section = profile.create_section("type");
+	for (const auto& p : type) {
+		type_section.set_string(p.first.c_str(), p.second);
+	}
+	Section& size_section = profile.create_section("size");
+	for (const auto& p : size) {
+		size_section.set_natural(p.first.c_str(), p.second);
+	}
+
+	profile.write(complete_filename.c_str(), false);
+
+	return 0;
+}
+
+/* Helper function for read_campaign_data()
+
+   This function reads the campaign data file and re-creates the table the data was created from.
+   This function is recursive so subtables to any depth can be created.
+   For information on section structure and key_keys, see the comment for save_table_recursively().
+   This function first newly creates the table to write data to, and the number of items in the
+   table is read.
+   For each item, the unique key_key is created. If the 'keys' section doesn't contain an entry for
+   that key_key,
+   it must be because this table is supposed to be an array. Then the data type is checked
+   and the key-value pair is written to the table as the correct type.
+*/
+static void push_table_recursively(lua_State* L,
+                                   const std::string& depth,
+                                   Section* data_section,
+                                   Section* keys_section,
+                                   Section* type_section,
+                                   Section* size_section) {
+	const uint32_t size = size_section->get_natural(depth.c_str());
+	lua_newtable(L);
+	for (uint32_t i = 0; i < size; i++) {
+		const std::string key_key_str(depth + '_' + std::to_string(i));
+		const char* key_key = key_key_str.c_str();
+		if (keys_section->has_val(key_key)) {
+			// This is a table
+			lua_pushstring(L, keys_section->get_string(key_key));
+		} else {
+			// This must be an array
+			lua_pushinteger(L, i + 1);
+		}
+
+		// check the data type and push the value
+		const std::string type = type_section->get_string(key_key);
+
+		if (type == "boolean") {
+			lua_pushboolean(L, data_section->get_bool(key_key));
+		} else if (type == "number") {
+			lua_pushinteger(L, data_section->get_int(key_key));
+		} else if (type == "string") {
+			lua_pushstring(L, data_section->get_string(key_key));
+		} else if (type == "table") {
+			// creates a new (sub-)table at the stacktop, populated with its own key-value-pairs
+			push_table_recursively(L, depth + "_" + std::to_string(i), data_section, keys_section,
+			                       type_section, size_section);
+		} else {
+			// this code should not be reached unless the user manually edited the .wcd file
+			log("Illegal data type %s in campaign data file, setting key %s to nil\n", type.c_str(),
+			    luaL_checkstring(L, -1));
+			lua_pushnil(L);
+		}
+		lua_settable(L, -3);
+	}
+}
+
+/* RST
+   .. function:: read_campaign_data(campaign_name, scenario_name)
+
+      :arg campaign_name: the name of the campaign, e.g. "empiretut" or "frisians"
+      :arg scenario_name: the name of the scenario that saved the data, e.g. "emp04" or "fri03"
+
+      Reads information that was saved by another scenario.
+      The data is returned as a table of key-value pairs.
+      The table is not guaranteed to be in any particular order, unless it is an array,
+      in which case it will be returned in the same order as it was saved.
+      This function returns :const:`nil` if the file cannot be opened for reading.
+*/
+int LuaEditorGameBase::read_campaign_data(lua_State* L) {
+	const std::string campaign_name = luaL_checkstring(L, 2);
+	const std::string scenario_name = luaL_checkstring(L, 3);
+
+	std::string complete_filename = kCampaignDataDir + g_fs->file_separator() + campaign_name +
+	                                g_fs->file_separator() + scenario_name + kCampaignDataExtension;
+	boost::trim(complete_filename);
+
+	Profile profile;
+	profile.read(complete_filename.c_str());
+	Section* data_section = profile.get_section("data");
+	Section* keys_section = profile.get_section("keys");
+	Section* type_section = profile.get_section("type");
+	Section* size_section = profile.get_section("size");
+	if (data_section == nullptr || keys_section == nullptr || type_section == nullptr ||
+	    size_section == nullptr) {
+		log("Unable to read campaign data file, returning nil\n");
+		lua_pushnil(L);
+	} else {
+		push_table_recursively(L, "", data_section, keys_section, type_section, size_section);
+	}
+
+	return 1;
+}
+
+/* RST
+   .. function:: set_loading_message(text)
+
+      :arg text: the text to display
+
+      Change the progress message on the loading screen.
+      May be used from the init.lua files for tribe/world loading only.
+*/
+int LuaEditorGameBase::set_loading_message(lua_State* L) {
+	get_egbase(L).get_loader_ui()->step(luaL_checkstring(L, 2));
+	return 0;
+}
+
 /*
  ==========================================================
  C METHODS
@@ -343,14 +578,16 @@ const MethodType<LuaPlayerBase> LuaPlayerBase::Methods[] = {
    METHOD(LuaPlayerBase, place_ship),  {nullptr, nullptr},
 };
 const PropertyType<LuaPlayerBase> LuaPlayerBase::Properties[] = {
-   PROP_RO(LuaPlayerBase, number), PROP_RO(LuaPlayerBase, tribe_name), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaPlayerBase, number),
+   PROP_RO(LuaPlayerBase, tribe_name),
+   {nullptr, nullptr, nullptr},
 };
 
 void LuaPlayerBase::__persist(lua_State* L) {
 	PERS_UINT32("player", player_number_);
 }
 void LuaPlayerBase::__unpersist(lua_State* L) {
-	UNPERS_UINT32("player", player_number_);
+	UNPERS_UINT32("player", player_number_)
 }
 
 /*
@@ -563,7 +800,7 @@ int LuaPlayerBase::place_building(lua_State* L) {
 	}
 	DescriptionIndex building_index = tribes.building_index(name);
 
-	BuildingDescr::FormerBuildings former_buildings;
+	FormerBuildings former_buildings;
 	find_former_buildings(tribes, building_index, &former_buildings);
 	if (constructionsite) {
 		former_buildings.pop_back();
@@ -655,8 +892,10 @@ int LuaPlayerBase::get_workers(lua_State* L) {
 	const DescriptionIndex worker = player.tribe().worker_index(workername);
 
 	uint32_t nworkers = 0;
-	for (uint32_t i = 0; i < player.get_nr_economies(); ++i) {
-		nworkers += player.get_economy_by_number(i)->stock_worker(worker);
+	for (const auto& economy : player.economies()) {
+		if (economy.second->type() == Widelands::wwWORKER) {
+			nworkers += economy.second->stock_ware_or_worker(worker);
+		}
 	}
 	lua_pushuint32(L, nworkers);
 	return 1;
@@ -681,8 +920,10 @@ int LuaPlayerBase::get_wares(lua_State* L) {
 	const DescriptionIndex ware = egbase.tribes().ware_index(warename);
 
 	uint32_t nwares = 0;
-	for (uint32_t i = 0; i < player.get_nr_economies(); ++i) {
-		nwares += player.get_economy_by_number(i)->stock_ware(ware);
+	for (const auto& economy : player.economies()) {
+		if (economy.second->type() == Widelands::wwWARE) {
+			nwares += economy.second->stock_ware_or_worker(ware);
+		}
 	}
 	lua_pushuint32(L, nwares);
 	return 1;
@@ -720,4 +961,4 @@ void luaopen_wlbases(lua_State* const L) {
 	register_class<LuaEditorGameBase>(L, "bases");
 	register_class<LuaPlayerBase>(L, "bases");
 }
-}
+}  // namespace LuaBases

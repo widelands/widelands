@@ -2,9 +2,9 @@ dirname = path.dirname(__file__)
 
 terrain_affinity = {
    preferred_temperature = 120,
-   preferred_humidity = 0.2,
-   preferred_fertility = 0.7,
-   pickiness = 0.6,
+   preferred_humidity = 200,
+   preferred_fertility = 700,
+   pickiness = 60,
 }
 
 world:new_immovable_type{
@@ -88,6 +88,7 @@ world:new_immovable_type{
    descname = _ "Liana Tree (Old)",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    species = _ "Liana Tree",
+   icon = dirname .. "old/idle_0.png",
    editor_category = "trees_wasteland",
    size = "small",
    attributes = { "tree" },

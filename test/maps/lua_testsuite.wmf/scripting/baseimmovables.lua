@@ -21,7 +21,7 @@ function immovable_creation_tests:test_create()
    imm2:remove()
 end
 function immovable_creation_tests:test_create_tribe_immovables()
-   imm = map:place_immovable("field_harvested", map:get_field(10,10), "tribes")
+   imm = map:place_immovable("wheatfield_harvested", map:get_field(10,10), "tribes")
    imm:remove()
 end
 function immovable_creation_tests:test_create_world_immovables()
@@ -35,7 +35,7 @@ function immovable_creation_tests:test_create_immovables_type_is_nil()
 end
 function immovable_creation_tests:test_create_tribe_immovables_ill_tribe()
    assert_error("Immovables are for world or tribes!", function()
-      imm = map:place_immovable("field_harvested", map:get_field(10,10), "blablub")
+      imm = map:place_immovable("wheatfield_harvested", map:get_field(10,10), "blablub")
    end)
 end
 function immovable_creation_tests:test_create_tribe_immovables_ill_immovable()

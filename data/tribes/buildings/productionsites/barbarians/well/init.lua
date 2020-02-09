@@ -32,7 +32,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      mines_water = true,
+      collects_ware_from_map = "water",
       basic_amount = 1
    },
 
@@ -42,6 +42,10 @@ tribes:new_productionsite_type {
 
    outputs = {
       "water"
+   },
+
+   indicate_workarea_overlaps = {
+      barbarians_well = false,
    },
 
    programs = {

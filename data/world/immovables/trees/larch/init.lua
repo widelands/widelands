@@ -2,9 +2,9 @@ dirname = path.dirname(__file__)
 
 terrain_affinity = {
    preferred_temperature = 50,
-   preferred_humidity = 0.8,
-   preferred_fertility = 0.45,
-   pickiness = 0.8,
+   preferred_humidity = 800,
+   preferred_fertility = 450,
+   pickiness = 80,
 }
 
 world:new_immovable_type{
@@ -80,6 +80,7 @@ world:new_immovable_type{
    name = "larch_summer_old",
    descname = _ "Larch (Old)",
    species = _ "Larch",
+   icon = dirname .. "old/idle_0.png",
    editor_category = "trees_coniferous",
    size = "small",
    attributes = { "tree" },
@@ -100,8 +101,7 @@ world:new_immovable_type{
          hotspot = { 15, 59 },
          fps = 10,
          sound_effect = {
-            directory = "sound/animals",
-            name = "bird6",
+            path = "sound/animals/bird6",
          },
       },
    },

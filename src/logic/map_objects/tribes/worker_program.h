@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,7 +43,7 @@ struct WorkerProgram : public BobProgramBase {
 	WorkerProgram(const std::string& name, const WorkerDescr& worker, const Tribes& tribes)
 	   : name_(name), worker_(worker), tribes_(tribes) {
 	}
-	virtual ~WorkerProgram() {
+	~WorkerProgram() override {
 	}
 
 	std::string get_name() const override {
@@ -77,21 +77,22 @@ private:
 	void parse_mine(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_breed(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_createware(Worker::Action* act, const std::vector<std::string>& cmd);
-	void parse_setbobdescription(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_findobject(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_findspace(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_walk(Worker::Action* act, const std::vector<std::string>& cmd);
-	void parse_animation(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_animate(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_return(Worker::Action* act, const std::vector<std::string>& cmd);
-	void parse_object(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_callobject(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_plant(Worker::Action* act, const std::vector<std::string>& cmd);
-	void parse_create_bob(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_createbob(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_buildferry(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_removeobject(Worker::Action* act, const std::vector<std::string>& cmd);
-	void parse_geologist(Worker::Action* act, const std::vector<std::string>& cmd);
-	void parse_geologist_find(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_repeatsearch(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_findresources(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_scout(Worker::Action* act, const std::vector<std::string>& cmd);
-	void parse_play_sound(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_playsound(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_construct(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_terraform(Worker::Action* act, const std::vector<std::string>& cmd);
 
 	const std::string name_;
 	const WorkerDescr& worker_;
@@ -100,6 +101,6 @@ private:
 	static ParseMap const parsemap_[];
 	DISALLOW_COPY_AND_ASSIGN(WorkerProgram);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_WORKER_PROGRAM_H

@@ -32,7 +32,7 @@ tribes:new_productionsite_type {
 
    aihints = {
       basic_amount = 2,
-      very_weak_ai_limit = 1,
+      very_weak_ai_limit = 2,
       weak_ai_limit = 2
    },
 
@@ -52,10 +52,10 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start sawing logs because ...
          descname = _"sawing logs",
          actions = {
-            "sleep=16500", -- Much faster than barbarians' wood hardener
             "return=skipped unless economy needs planks",
             "consume=log:2",
-            "play_sound=sound/atlanteans/saw benchsaw 192",
+            "sleep=16500", -- Much faster than barbarians' wood hardener
+            "playsound=sound/atlanteans/saw/benchsaw 192",
             "animate=working 20000", -- Much faster than barbarians' wood hardener
             "produce=planks"
          }

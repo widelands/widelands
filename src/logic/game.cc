@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,32 +37,36 @@
 #include "base/macros.h"
 #include "base/time_string.h"
 #include "base/warning.h"
+#include "build_info.h"
 #include "economy/economy.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
-#include "graphic/graphic.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
 #include "logic/cmd_calculate_statistics.h"
 #include "logic/cmd_luacoroutine.h"
 #include "logic/cmd_luascript.h"
+#include "logic/filesystem_constants.h"
 #include "logic/game_settings.h"
 #include "logic/map_objects/tribes/carrier.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/warehouse.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/replay.h"
 #include "logic/single_player_game_controller.h"
 #include "map_io/widelands_map_loader.h"
-#include "network/network.h"
 #include "scripting/logic.h"
 #include "scripting/lua_table.h"
+#include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
+#include "wlapplication_options.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 
@@ -74,16 +78,21 @@ namespace Widelands {
 Game::SyncWrapper::~SyncWrapper() {
 	if (dump_ != nullptr) {
 		if (!syncstreamsave_)
-			g_fs->fs_unlink(dumpfname_);
+			try {
+				g_fs->fs_unlink(dumpfname_);
+			} catch (const FileError& e) {
+				// not really a problem if deletion fails, but we'll log it
+				log("Deleting synchstream file %s failed: %s\n", dumpfname_.c_str(), e.what());
+			}
 	}
 }
 
 void Game::SyncWrapper::start_dump(const std::string& fname) {
-	dumpfname_ = fname + ".wss";
+	dumpfname_ = fname + kSyncstreamExtension;
 	dump_.reset(g_fs->open_stream_write(dumpfname_));
+	current_excerpt_id_ = 0;
+	excerpts_buffer_[current_excerpt_id_].clear();
 }
-
-static const unsigned long long MINIMUM_DISK_SPACE = 256 * 1024 * 1024;
 
 void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 #ifdef SYNC_DEBUG
@@ -97,7 +106,7 @@ void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 	if (dump_ != nullptr && static_cast<int32_t>(counter_ - next_diskspacecheck_) >= 0) {
 		next_diskspacecheck_ = counter_ + 16 * 1024 * 1024;
 
-		if (g_fs->disk_space() < MINIMUM_DISK_SPACE) {
+		if (g_fs->disk_space() < kMinimumDiskSpace) {
 			log("Stop writing to syncstream file: disk is getting full.\n");
 			dump_.reset();
 		}
@@ -110,6 +119,8 @@ void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 			log("Writing to syncstream file %s failed. Stop synctream dump.\n", dumpfname_.c_str());
 			dump_.reset();
 		}
+		assert(current_excerpt_id_ < kExcerptSize);
+		excerpts_buffer_[current_excerpt_id_].append(static_cast<const char*>(sync_data), size);
 	}
 
 	target_.data(sync_data, size);
@@ -118,6 +129,7 @@ void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 
 Game::Game()
    : EditorGameBase(new LuaGameInterface(this)),
+     forester_cache_(),
      syncwrapper_(*this, synchash_),
      ctrl_(nullptr),
      writereplay_(true),
@@ -129,6 +141,7 @@ Game::Game()
      /** TRANSLATORS: Win condition for this game has not been set. */
      win_condition_displayname_(_("Not set")),
      replay_(false) {
+	Economy::initialize_serial();
 }
 
 Game::~Game() {
@@ -198,41 +211,59 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	std::unique_ptr<MapLoader> maploader(mutable_map()->get_correct_loader(mapname));
 	if (!maploader)
 		throw wexception("could not load \"%s\"", mapname.c_str());
-	UI::ProgressWindow loader_ui;
+	assert(!loader_ui_);
+	loader_ui_ = new UI::ProgressWindow();
 
-	loader_ui.step(_("Preloading map"));
+	loader_ui_->step(_("Preloading map…"));
 	maploader->preload_map(true);
 	std::string const background = map().get_background();
 	if (!background.empty()) {
-		loader_ui.set_background(background);
+		loader_ui_->set_background(background);
 	}
-	loader_ui.step(_("Loading world"));
+	loader_ui_->step(_("Loading world…"));
 	world();
-	loader_ui.step(_("Loading tribes"));
+	loader_ui_->step(_("Loading tribes…"));
 	tribes();
 
+	// If the scenario has custrom tribe entites, load them.
+	const std::string custom_tribe_script = mapname + "/scripting/tribes/init.lua";
+	if (g_fs->file_exists(custom_tribe_script)) {
+		lua().run_script(custom_tribe_script);
+	}
+
 	// We have to create the players here.
-	loader_ui.step(_("Creating players"));
+	loader_ui_->step(_("Creating players…"));
 	PlayerNumber const nr_players = map().get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
-		add_player(p, 0, map().get_scenario_player_tribe(p), map().get_scenario_player_name(p));
+		// If tribe name is empty, pick a random tribe
+		std::string tribe = map().get_scenario_player_tribe(p);
+		if (tribe.empty()) {
+			log("Setting random tribe for Player %d\n", static_cast<unsigned int>(p));
+			const DescriptionIndex random = std::rand() % tribes().nrtribes();
+			tribe = tribes().get_tribe_descr(random)->name();
+		}
+		add_player(p, 0, tribe, map().get_scenario_player_name(p));
 		get_player(p)->set_ai(map().get_scenario_player_ai(p));
 	}
 	win_condition_displayname_ = "Scenario";
 
-	set_ibase(new InteractivePlayer(*this, g_options.pull_section("global"), 1, false));
+	set_ibase(new InteractivePlayer(*this, get_config_section(), 1, false));
 
-	loader_ui.step(_("Loading map…"));
+	loader_ui_->step(_("Loading map…"));
 	maploader->load_map_complete(*this, Widelands::MapLoader::LoadType::kScenario);
 	maploader.reset();
 
 	set_game_controller(new SinglePlayerGameController(*this, true, 1));
 	try {
-		bool const result = run(&loader_ui, NewSPScenario, script_to_run, false, "single_player");
+		bool const result = run(NewSPScenario, script_to_run, false, "single_player");
+		delete loader_ui_;
+		loader_ui_ = nullptr;
 		delete ctrl_;
 		ctrl_ = nullptr;
 		return result;
 	} catch (...) {
+		delete loader_ui_;
+		loader_ui_ = nullptr;
 		delete ctrl_;
 		ctrl_ = nullptr;
 		throw;
@@ -243,26 +274,26 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
  * Initialize the game based on the given settings.
  *
  */
-void Game::init_newgame(UI::ProgressWindow* loader_ui, const GameSettings& settings) {
-	assert(loader_ui != nullptr);
+void Game::init_newgame(const GameSettings& settings) {
+	assert(loader_ui_);
 
-	loader_ui->step(_("Preloading map"));
+	loader_ui_->step(_("Preloading map…"));
 
 	std::unique_ptr<MapLoader> maploader(mutable_map()->get_correct_loader(settings.mapfilename));
 	assert(maploader != nullptr);
 	maploader->preload_map(settings.scenario);
 
-	loader_ui->step(_("Loading world"));
+	loader_ui_->step(_("Loading world…"));
 	world();
 
-	loader_ui->step(_("Loading tribes"));
+	loader_ui_->step(_("Loading tribes…"));
 	tribes();
 
 	std::string const background = map().get_background();
 	if (!background.empty()) {
-		loader_ui->set_background(background);
+		loader_ui_->set_background(background);
 	}
-	loader_ui->step(_("Creating players"));
+	loader_ui_->step(_("Creating players…"));
 
 	std::vector<PlayerSettings> shared;
 	std::vector<uint8_t> shared_num;
@@ -290,16 +321,34 @@ void Game::init_newgame(UI::ProgressWindow* loader_ui, const GameSettings& setti
 		   ->add_further_starting_position(shared_num.at(n), shared.at(n).initialization_index);
 	}
 
-	loader_ui->step(_("Loading map…"));
+	loader_ui_->step(_("Loading map…"));
 	maploader->load_map_complete(*this, settings.scenario ?
 	                                       Widelands::MapLoader::LoadType::kScenario :
 	                                       Widelands::MapLoader::LoadType::kGame);
 
 	// Check for win_conditions
 	if (!settings.scenario) {
+		loader_ui_->step(_("Initializing game…"));
+		if (settings.peaceful) {
+			for (uint32_t i = 1; i < settings.players.size(); ++i) {
+				if (Player* p1 = get_player(i)) {
+					for (uint32_t j = i + 1; j <= settings.players.size(); ++j) {
+						if (Player* p2 = get_player(j)) {
+							p1->set_attack_forbidden(j, true);
+							p2->set_attack_forbidden(i, true);
+						}
+					}
+				}
+			}
+		}
+
 		std::unique_ptr<LuaTable> table(lua().run_script(settings.win_condition_script));
 		table->do_not_warn_about_unaccessed_keys();
 		win_condition_displayname_ = table->get_string("name");
+		if (table->has_key<std::string>("init")) {
+			std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("init");
+			cr->resume();
+		}
 		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
 		enqueue_command(new CmdLuaCoroutine(get_gametime() + 100, std::move(cr)));
 	} else {
@@ -313,10 +362,10 @@ void Game::init_newgame(UI::ProgressWindow* loader_ui, const GameSettings& setti
  * Only difference is, that players are already initialized.
  * run<Returncode>() takes care about this difference.
  */
-void Game::init_savegame(UI::ProgressWindow* loader_ui, const GameSettings& settings) {
-	assert(loader_ui != nullptr);
+void Game::init_savegame(const GameSettings& settings) {
+	assert(loader_ui_);
 
-	loader_ui->step(_("Preloading map"));
+	loader_ui_->step(_("Preloading map…"));
 
 	try {
 		GameLoader gl(settings.mapfilename, *this);
@@ -328,23 +377,31 @@ void Game::init_savegame(UI::ProgressWindow* loader_ui, const GameSettings& sett
 			set_write_replay(false);
 		}
 		std::string background(gpdp.get_background());
-		loader_ui->set_background(background);
-		loader_ui->step(_("Loading…"));
+		loader_ui_->set_background(background);
+		loader_ui_->step(_("Loading…"));
 		gl.load_game(settings.multiplayer);
+		// Players might have selected a different AI type
+		for (uint8_t i = 0; i < settings.players.size(); ++i) {
+			const PlayerSettings& playersettings = settings.players[i];
+			if (playersettings.state == PlayerSettings::State::kComputer) {
+				get_player(i + 1)->set_ai(playersettings.ai);
+			}
+		}
 	} catch (...) {
 		throw;
 	}
 }
 
 bool Game::run_load_game(const std::string& filename, const std::string& script_to_run) {
-	UI::ProgressWindow loader_ui;
+	assert(!loader_ui_);
+	loader_ui_ = new UI::ProgressWindow();
 	std::vector<std::string> tipstext;
 	tipstext.push_back("general_game");
 	tipstext.push_back("singleplayer");
-	GameTips tips(loader_ui, tipstext);
+	GameTips tips(*loader_ui_, tipstext);
 	int8_t player_nr;
 
-	loader_ui.step(_("Preloading map"));
+	loader_ui_->step(_("Preloading map…"));
 
 	{
 		GameLoader gl(filename, *this);
@@ -357,11 +414,11 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 			// Replays can't handle scenarios
 			set_write_replay(false);
 		}
-		loader_ui.set_background(background);
+		loader_ui_->set_background(background);
 		player_nr = gpdp.get_player_nr();
-		set_ibase(new InteractivePlayer(*this, g_options.pull_section("global"), player_nr, false));
+		set_ibase(new InteractivePlayer(*this, get_config_section(), player_nr, false));
 
-		loader_ui.step(_("Loading…"));
+		loader_ui_->step(_("Loading…"));
 		gl.load_game();
 	}
 
@@ -370,11 +427,15 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 
 	set_game_controller(new SinglePlayerGameController(*this, true, player_nr));
 	try {
-		bool const result = run(&loader_ui, Loaded, script_to_run, false, "single_player");
+		bool const result = run(Loaded, script_to_run, false, "single_player");
+		delete loader_ui_;
+		loader_ui_ = nullptr;
 		delete ctrl_;
 		ctrl_ = nullptr;
 		return result;
 	} catch (...) {
+		delete loader_ui_;
+		loader_ui_ = nullptr;
 		delete ctrl_;
 		ctrl_ = nullptr;
 		throw;
@@ -410,12 +471,11 @@ void Game::postload() {
  *
  * \return true if a game actually took place, false otherwise
  */
-bool Game::run(UI::ProgressWindow* loader_ui,
-               StartGameType const start_game_type,
+bool Game::run(StartGameType const start_game_type,
                const std::string& script_to_run,
                bool replay,
                const std::string& prefix_for_replays) {
-	assert(loader_ui != nullptr);
+	assert(loader_ui_);
 
 	replay_ = replay;
 	postload();
@@ -423,9 +483,7 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 	if (start_game_type != Loaded) {
 		PlayerNumber const nr_players = map().get_nrplayers();
 		if (start_game_type == NewNonScenario) {
-			if (loader_ui) {
-				loader_ui->step(_("Creating player infrastructure"));
-			}
+			loader_ui_->step(_("Creating player infrastructure…"));
 			iterate_players_existing(p, nr_players, *this, plr) {
 				plr->create_default_infrastructure();
 			}
@@ -445,6 +503,9 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 		}
 
 		if (get_ipl()) {
+			// Scroll map to starting position for new games.
+			// Loaded games are handled in GameInteractivePlayerPacket for single player, and in
+			// InteractiveGameBase::start() for multiplayer.
 			get_ipl()->map_view()->scroll_to_field(
 			   map().get_starting_pos(get_ipl()->player_number()), MapView::Transition::Jump);
 		}
@@ -482,9 +543,8 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 
 	if (writereplay_ || writesyncstream_) {
 		// Derive a replay filename from the current time
-		const std::string fname = (boost::format("%s/%s_%s%s") % REPLAY_DIR % timestring() %
-		                           prefix_for_replays % REPLAY_SUFFIX)
-		                             .str();
+		const std::string fname = kReplayDir + g_fs->file_separator() + std::string(timestring()) +
+		                          std::string("_") + prefix_for_replays + kReplayExtension;
 		if (writereplay_) {
 			log("Starting replay writer\n");
 
@@ -500,7 +560,7 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 
 	sync_reset();
 
-	load_graphics(*loader_ui);
+	load_graphics();
 
 #ifdef _WIN32
 	//  Clear the event queue before starting game because we don't want
@@ -510,7 +570,7 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 		;
 #endif
 
-	g_sound_handler.change_music("ingame", 1000, 0);
+	g_sh->change_music("ingame", 1000);
 
 	state_ = gs_running;
 
@@ -518,7 +578,7 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 
 	state_ = gs_ending;
 
-	g_sound_handler.change_music("menu", 1000, 0);
+	g_sh->change_music("menu", 1000);
 
 	cleanup_objects();
 	set_ibase(nullptr);
@@ -583,6 +643,52 @@ StreamWrite& Game::syncstream() {
 }
 
 /**
+ * Switches to the next part of the syncstream excerpt.
+ */
+void Game::report_sync_request() {
+	syncwrapper_.current_excerpt_id_ =
+	   (syncwrapper_.current_excerpt_id_ + 1) % SyncWrapper::kExcerptSize;
+	syncwrapper_.excerpts_buffer_[syncwrapper_.current_excerpt_id_].clear();
+}
+
+/**
+ * Triggers writing of syncstream excerpt and adds the playernumber of the desynced player
+ * to the stream.
+ * Playernumber should be negative when called by network clients
+ */
+void Game::report_desync(int32_t playernumber) {
+	if (syncwrapper_.dumpfname_.empty()) {
+		log("Error: A desync occurred but no filename for the syncstream has been set.");
+		return;
+	}
+	// Replace .wss extension of syncstream file with .wse extension for syncstream extract
+	std::string filename = syncwrapper_.dumpfname_;
+	assert(syncwrapper_.dumpfname_.length() > kSyncstreamExtension.length());
+	filename.replace(filename.length() - kSyncstreamExtension.length(),
+	                 kSyncstreamExtension.length(), kSyncstreamExcerptExtension);
+	std::unique_ptr<StreamWrite> file(g_fs->open_stream_write(filename));
+	assert(file != nullptr);
+	// Write revision, branch and build type of this build to the file
+	file->unsigned_32(build_id().length());
+	file->text(build_id());
+	file->unsigned_32(build_type().length());
+	file->text(build_type());
+	file->signed_32(playernumber);
+	// Write our buffers to the file. Start with the oldest one
+	const size_t i2 = (syncwrapper_.current_excerpt_id_ + 1) % SyncWrapper::kExcerptSize;
+	size_t i = i2;
+	do {
+		file->text(syncwrapper_.excerpts_buffer_[i]);
+		syncwrapper_.excerpts_buffer_[i].clear();
+		i = (i + 1) % SyncWrapper::kExcerptSize;
+	} while (i != i2);
+	file->unsigned_8(SyncEntry::kDesync);
+	file->signed_32(playernumber);
+	// Restart buffers
+	syncwrapper_.current_excerpt_id_ = 0;
+}
+
+/**
  * Calculate the current synchronization checksum and copy
  * it into the given array, without affecting the subsequent
  * checksumming process.
@@ -604,6 +710,7 @@ Md5Checksum Game::get_sync_hash() const {
  */
 uint32_t Game::logic_rand() {
 	uint32_t const result = rng().rand();
+	syncstream().unsigned_8(SyncEntry::kRandom);
 	syncstream().unsigned_32(result);
 	return result;
 }
@@ -613,7 +720,7 @@ uint32_t Game::logic_rand() {
  * It takes the appropriate action, i.e. either add to the cmd_queue or send
  * across the network.
  */
-void Game::send_player_command(PlayerCommand& pc) {
+void Game::send_player_command(PlayerCommand* pc) {
 	ctrl_->send_player_command(pc);
 }
 
@@ -636,125 +743,225 @@ void Game::enqueue_command(Command* const cmd) {
 
 // we might want to make these inlines:
 void Game::send_player_bulldoze(PlayerImmovable& pi, bool const recurse) {
-	send_player_command(*new CmdBulldoze(get_gametime(), pi.owner().player_number(), pi, recurse));
+	send_player_command(new CmdBulldoze(get_gametime(), pi.owner().player_number(), pi, recurse));
 }
 
 void Game::send_player_dismantle(PlayerImmovable& pi) {
-	send_player_command(*new CmdDismantleBuilding(get_gametime(), pi.owner().player_number(), pi));
+	send_player_command(new CmdDismantleBuilding(get_gametime(), pi.owner().player_number(), pi));
 }
 
 void Game::send_player_build(int32_t const pid, const Coords& coords, DescriptionIndex const id) {
 	assert(tribes().building_exists(id));
-	send_player_command(*new CmdBuild(get_gametime(), pid, coords, id));
+	send_player_command(new CmdBuild(get_gametime(), pid, coords, id));
 }
 
 void Game::send_player_build_flag(int32_t const pid, const Coords& coords) {
-	send_player_command(*new CmdBuildFlag(get_gametime(), pid, coords));
+	send_player_command(new CmdBuildFlag(get_gametime(), pid, coords));
 }
 
 void Game::send_player_build_road(int32_t pid, Path& path) {
-	send_player_command(*new CmdBuildRoad(get_gametime(), pid, path));
+	send_player_command(new CmdBuildRoad(get_gametime(), pid, path));
+}
+
+void Game::send_player_build_waterway(int32_t pid, Path& path) {
+	send_player_command(new CmdBuildWaterway(get_gametime(), pid, path));
 }
 
 void Game::send_player_flagaction(Flag& flag) {
-	send_player_command(*new CmdFlagAction(get_gametime(), flag.owner().player_number(), flag));
+	send_player_command(new CmdFlagAction(get_gametime(), flag.owner().player_number(), flag));
 }
 
 void Game::send_player_start_stop_building(Building& building) {
 	send_player_command(
-	   *new CmdStartStopBuilding(get_gametime(), building.owner().player_number(), building));
+	   new CmdStartStopBuilding(get_gametime(), building.owner().player_number(), building));
 }
 
 void Game::send_player_militarysite_set_soldier_preference(Building& building,
                                                            SoldierPreference my_preference) {
-	send_player_command(*new CmdMilitarySiteSetSoldierPreference(
+	send_player_command(new CmdMilitarySiteSetSoldierPreference(
 	   get_gametime(), building.owner().player_number(), building, my_preference));
 }
 
 void Game::send_player_start_or_cancel_expedition(Building& building) {
 	send_player_command(
-	   *new CmdStartOrCancelExpedition(get_gametime(), building.owner().player_number(), building));
+	   new CmdStartOrCancelExpedition(get_gametime(), building.owner().player_number(), building));
 }
 
 void Game::send_player_enhance_building(Building& building, DescriptionIndex const id) {
-	assert(building.owner().tribe().has_building(id));
-
+	assert(building.descr().type() == MapObjectType::CONSTRUCTIONSITE ||
+	       building.owner().tribe().has_building(id));
 	send_player_command(
-	   *new CmdEnhanceBuilding(get_gametime(), building.owner().player_number(), building, id));
+	   new CmdEnhanceBuilding(get_gametime(), building.owner().player_number(), building, id));
 }
 
 void Game::send_player_evict_worker(Worker& worker) {
-	send_player_command(*new CmdEvictWorker(get_gametime(), worker.owner().player_number(), worker));
+	send_player_command(new CmdEvictWorker(get_gametime(), worker.owner().player_number(), worker));
 }
 
 void Game::send_player_set_ware_priority(PlayerImmovable& imm,
                                          int32_t const type,
                                          DescriptionIndex const index,
-                                         int32_t const prio) {
-	send_player_command(
-	   *new CmdSetWarePriority(get_gametime(), imm.owner().player_number(), imm, type, index, prio));
+                                         int32_t const prio,
+                                         bool cs) {
+	send_player_command(new CmdSetWarePriority(
+	   get_gametime(), imm.owner().player_number(), imm, type, index, prio, cs));
 }
 
 void Game::send_player_set_input_max_fill(PlayerImmovable& imm,
                                           DescriptionIndex const index,
                                           WareWorker type,
-                                          uint32_t const max_fill) {
-	send_player_command(*new CmdSetInputMaxFill(
-	   get_gametime(), imm.owner().player_number(), imm, index, type, max_fill));
+                                          uint32_t const max_fill,
+                                          bool cs) {
+	send_player_command(new CmdSetInputMaxFill(
+	   get_gametime(), imm.owner().player_number(), imm, index, type, max_fill, cs));
 }
 
 void Game::send_player_change_training_options(TrainingSite& ts,
                                                TrainingAttribute attr,
                                                int32_t const val) {
 	send_player_command(
-	   *new CmdChangeTrainingOptions(get_gametime(), ts.owner().player_number(), ts, attr, val));
+	   new CmdChangeTrainingOptions(get_gametime(), ts.owner().player_number(), ts, attr, val));
 }
 
 void Game::send_player_drop_soldier(Building& b, int32_t const ser) {
 	assert(ser != -1);
-	send_player_command(*new CmdDropSoldier(get_gametime(), b.owner().player_number(), b, ser));
+	send_player_command(new CmdDropSoldier(get_gametime(), b.owner().player_number(), b, ser));
 }
 
 void Game::send_player_change_soldier_capacity(Building& b, int32_t const val) {
 	send_player_command(
-	   *new CmdChangeSoldierCapacity(get_gametime(), b.owner().player_number(), b, val));
+	   new CmdChangeSoldierCapacity(get_gametime(), b.owner().player_number(), b, val));
 }
 
 void Game::send_player_enemyflagaction(const Flag& flag,
                                        PlayerNumber const who_attacks,
-                                       uint32_t const num_soldiers) {
+                                       const std::vector<Serial>& soldiers) {
 	if (1 < player(who_attacks)
 	           .vision(Map::get_index(flag.get_building()->get_position(), map().get_width())))
-		send_player_command(*new CmdEnemyFlagAction(get_gametime(), who_attacks, flag, num_soldiers));
+		send_player_command(new CmdEnemyFlagAction(get_gametime(), who_attacks, flag, soldiers));
 }
 
 void Game::send_player_ship_scouting_direction(Ship& ship, WalkingDir direction) {
-	send_player_command(*new CmdShipScoutDirection(
+	send_player_command(new CmdShipScoutDirection(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), direction));
 }
 
 void Game::send_player_ship_construct_port(Ship& ship, Coords coords) {
-	send_player_command(*new CmdShipConstructPort(
+	send_player_command(new CmdShipConstructPort(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), coords));
 }
 
 void Game::send_player_ship_explore_island(Ship& ship, IslandExploreDirection direction) {
-	send_player_command(*new CmdShipExploreIsland(
+	send_player_command(new CmdShipExploreIsland(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), direction));
 }
 
 void Game::send_player_sink_ship(Ship& ship) {
 	send_player_command(
-	   *new CmdShipSink(get_gametime(), ship.get_owner()->player_number(), ship.serial()));
+	   new CmdShipSink(get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }
 
 void Game::send_player_cancel_expedition_ship(Ship& ship) {
-	send_player_command(*new CmdShipCancelExpedition(
+	send_player_command(new CmdShipCancelExpedition(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial()));
+}
+
+void Game::send_player_propose_trade(const Trade& trade) {
+	auto* object = objects().get_object(trade.initiator);
+	assert(object != nullptr);
+	send_player_command(
+	   new CmdProposeTrade(get_gametime(), object->get_owner()->player_number(), trade));
+}
+
+void Game::send_player_set_stock_policy(Building& imm,
+                                        WareWorker ww,
+                                        DescriptionIndex di,
+                                        StockPolicy sp) {
+	send_player_command(new CmdSetStockPolicy(
+	   get_gametime(), imm.get_owner()->player_number(), imm, ww == wwWORKER, di, sp));
+}
+
+int Game::propose_trade(const Trade& trade) {
+	// TODO(sirver,trading): Check if a trade is possible (i.e. if there is a
+	// path between the two markets);
+	const int id = next_trade_agreement_id_;
+	++next_trade_agreement_id_;
+
+	auto* initiator = dynamic_cast<Market*>(objects().get_object(trade.initiator));
+	auto* receiver = dynamic_cast<Market*>(objects().get_object(trade.receiver));
+	// This is only ever called through a PlayerCommand and that already made
+	// sure that the objects still exist. Since no time has passed, they should
+	// not have vanished under us.
+	assert(initiator != nullptr);
+	assert(receiver != nullptr);
+
+	receiver->removed.connect([this, id](const uint32_t /* serial */) { cancel_trade(id); });
+	initiator->removed.connect([this, id](const uint32_t /* serial */) { cancel_trade(id); });
+
+	receiver->send_message(*this, Message::Type::kTradeOfferReceived, _("Trade Offer"),
+	                       receiver->descr().icon_filename(), receiver->descr().descname(),
+	                       _("This market has received a new trade offer."), true);
+	trade_agreements_[id] = TradeAgreement{TradeAgreement::State::kProposed, trade};
+
+	// TODO(sirver,trading): this should be done through another player_command, but I
+	// want to get to the trade logic implementation now.
+	accept_trade(id);
+	return id;
+}
+
+void Game::accept_trade(const int trade_id) {
+	auto it = trade_agreements_.find(trade_id);
+	if (it == trade_agreements_.end()) {
+		log("Game::accept_trade: Trade %d has vanished. Ignoring.\n", trade_id);
+		return;
+	}
+	const Trade& trade = it->second.trade;
+	auto* initiator = dynamic_cast<Market*>(objects().get_object(trade.initiator));
+	auto* receiver = dynamic_cast<Market*>(objects().get_object(trade.receiver));
+	if (initiator == nullptr || receiver == nullptr) {
+		cancel_trade(trade_id);
+		return;
+	}
+
+	initiator->new_trade(trade_id, trade.items_to_send, trade.num_batches, trade.receiver);
+	receiver->new_trade(trade_id, trade.items_to_receive, trade.num_batches, trade.initiator);
+
+	// TODO(sirver,trading): Message the users that the trade has been accepted.
+}
+
+void Game::cancel_trade(int trade_id) {
+	// The trade id might be long gone - since we never disconnect from the
+	// 'removed' signal of the two buildings, we might be invoked long after the
+	// trade was deleted for other reasons.
+	const auto it = trade_agreements_.find(trade_id);
+	if (it == trade_agreements_.end()) {
+		return;
+	}
+	const auto& trade = it->second.trade;
+
+	auto* initiator = dynamic_cast<Market*>(objects().get_object(trade.initiator));
+	if (initiator != nullptr) {
+		initiator->cancel_trade(trade_id);
+		// TODO(sirver,trading): Send message to owner that the trade has been canceled.
+	}
+
+	auto* receiver = dynamic_cast<Market*>(objects().get_object(trade.receiver));
+	if (receiver != nullptr) {
+		receiver->cancel_trade(trade_id);
+		// TODO(sirver,trading): Send message to owner that the trade has been canceled.
+	}
+	trade_agreements_.erase(trade_id);
 }
 
 LuaGameInterface& Game::lua() {
 	return static_cast<LuaGameInterface&>(EditorGameBase::lua());
+}
+
+const std::string& Game::get_win_condition_displayname() const {
+	return win_condition_displayname_;
+}
+void Game::set_win_condition_displayname(const std::string& name) {
+	win_condition_displayname_ = name;
 }
 
 /**
@@ -824,18 +1031,22 @@ void Game::sample_statistics() {
 		uint32_t wostock = 0;
 		uint32_t wastock = 0;
 
-		for (uint32_t j = 0; j < plr->get_nr_economies(); ++j) {
-			Economy* const eco = plr->get_economy_by_number(j);
+		for (const auto& economy : plr->economies()) {
 			const TribeDescr& tribe = plr->tribe();
 
-			for (const DescriptionIndex& ware_index : tribe.wares()) {
-				wastock += eco->stock_ware(ware_index);
-			}
-
-			for (const DescriptionIndex& worker_index : tribe.workers()) {
-				if (tribe.get_worker_descr(worker_index)->type() != MapObjectType::CARRIER) {
-					wostock += eco->stock_worker(worker_index);
+			switch (economy.second->type()) {
+			case wwWARE:
+				for (const DescriptionIndex& ware_index : tribe.wares()) {
+					wastock += economy.second->stock_ware_or_worker(ware_index);
 				}
+				break;
+			case wwWORKER:
+				for (const DescriptionIndex& worker_index : tribe.workers()) {
+					if (tribe.get_worker_descr(worker_index)->type() != MapObjectType::CARRIER) {
+						wostock += economy.second->stock_ware_or_worker(worker_index);
+					}
+				}
+				break;
 			}
 		}
 		nr_wares[p - 1] = wastock;
@@ -971,8 +1182,4 @@ void Game::write_statistics(FileWrite& fw) {
 		fw.unsigned_32(general_stats_[p - 1].custom_statistic[j]);
 	}
 }
-
-double logic_rand_as_double(Game* game) {
-	return static_cast<double>(game->logic_rand()) / std::numeric_limits<uint32_t>::max();
-}
-}
+}  // namespace Widelands

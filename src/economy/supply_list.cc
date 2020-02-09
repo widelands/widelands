@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,14 +27,14 @@ namespace Widelands {
 
 /**
  * Add a supply to the list.
-*/
+ */
 void SupplyList::add_supply(Supply& supp) {
 	supplies_.push_back(&supp);
 }
 
 /**
  * Remove a supply from the list.
-*/
+ */
 void SupplyList::remove_supply(Supply& supp) {
 	for (Supplies::iterator item_iter = supplies_.begin(); item_iter != supplies_.end();
 	     ++item_iter) {
@@ -58,4 +58,4 @@ bool SupplyList::have_supplies(Game& game, const Request& req) {
 
 	return false;
 }
-}
+}  // namespace Widelands

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,7 +29,6 @@ FullscreenMenuMainMenu::FullscreenMenuMainMenu()
      buth_(get_h() * 9 / 200),
      title_y_(get_h() * 3 / 40),
      padding_(buth_ / 3),
-     button_background_("images/ui_basic//but3.png"),
      vbox_(this, 0, 0, UI::Box::Vertical, 0, 0, padding_) {
 }
 

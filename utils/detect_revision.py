@@ -23,6 +23,15 @@ except ImportError:
 base_path = p.abspath(p.join(p.dirname(__file__), p.pardir))
 
 
+def _communicate_utf8(cmd, **kwargs):
+    """Runs the 'cmd' with 'kwargs' and returns its output which is assumed to
+    be utf-8."""
+    if sys.version_info >= (3, 0):
+        output = subprocess.check_output(cmd, **kwargs)
+        return output.decode('utf-8')
+    return subprocess.check_output(cmd, **kwargs)
+
+
 def detect_debian_version():
     """Parse bzr revision and branch information from debian/changelog."""
     if sys.platform.startswith('win'):
@@ -42,20 +51,21 @@ def detect_debian_version():
 
 
 def detect_git_revision():
-    if not sys.platform.startswith('linux') and \
-       not sys.platform.startswith('darwin'):
-        git_revnum = os.popen(
-            'git show --pretty=format:%h | head -n 1').read().rstrip()
-        if git_revnum:
-            return 'unofficial-git-%s' % (git_revnum,)
-        else:
-            return None
-
-    is_git_workdir = os.system('git show >/dev/null 2>&1') == 0
-    if is_git_workdir:
-        git_revnum = os.popen(
-            'git show --pretty=format:%h | head -n 1').read().rstrip()
-        return 'unofficial-git-%s' % (git_revnum,)
+    try:
+        stdout = _communicate_utf8(
+            ['git', 'rev-list', '--count', 'HEAD'], cwd=base_path)
+        git_count = stdout.rstrip()
+        stdout = _communicate_utf8(
+            ['git', 'rev-parse', '--short=7', 'HEAD'], cwd=base_path)
+        git_revnum = stdout.rstrip()
+        stdout = _communicate_utf8(
+            ['git', 'rev-parse', '--abbrev-ref', 'HEAD'], cwd=base_path)
+        git_abbrev = stdout.rstrip()
+        if git_count and git_revnum and git_abbrev:
+            return 'r%s[%s@%s]' % (git_count, git_revnum, git_abbrev)
+    except Exception as e:
+        pass
+    return None
 
 
 def check_for_explicit_version():
@@ -63,7 +73,6 @@ def check_for_explicit_version():
 
     It then defaults to this version without further trying to find
     which revision we're on
-
     """
     fname = p.join(base_path, 'WL_RELEASE')
     if os.path.exists(fname):
@@ -72,20 +81,24 @@ def check_for_explicit_version():
 
 def detect_bzr_revision():
     if __has_bzrlib:
-        b = BzrDir.open(base_path).open_branch()
-        revno, nick = b.revno(), b.nick
+        try:
+            b = BzrDir.open(base_path).open_branch()
+            revno, nick = b.revno(), b.nick
+            return 'bzr%s[%s]' % (revno, nick)
+        except:
+            return None
     else:
         # Windows stand alone installer do not come with bzrlib. We try to
         # parse the output of bzr then directly
         try:
-            run_bzr = lambda subcmd: subprocess.Popen(
-                ['bzr', subcmd], stdout=subprocess.PIPE, cwd=base_path
-            ).stdout.read().strip().decode('utf-8')
+            def run_bzr(subcmd):
+                return _communicate_utf8(['bzr', subcmd], cwd=base_path).strip()
             revno = run_bzr('revno')
             nick = run_bzr('nick')
+            return 'bzr%s[%s]' % (revno, nick)
         except OSError:
             return None
-    return 'bzr%s[%s] ' % (revno, nick)
+    return None
 
 
 def detect_revision():
@@ -99,6 +112,7 @@ def detect_revision():
             return rv
 
     return 'REVDETECT-BROKEN-PLEASE-REPORT-THIS'
+
 
 if __name__ == '__main__':
     print(detect_revision())

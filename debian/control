@@ -1,6 +1,6 @@
 Source: widelands
 Section: games
-Priority: extra
+Priority: optional
 Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
 Uploaders:
   Martin Quinson <mquinson@debian.org>,
@@ -27,7 +27,7 @@ Build-Depends: debhelper (>= 9),
 Vcs-Git: https://anonscm.debian.org/git/pkg-games/widelands.git
 Vcs-Browser: https://anonscm.debian.org/git/pkg-games/widelands.git
 #Vcs-Svn: svn://svn.debian.org/svn/collab-maint/deb-maint/widelands/ <-- Location of old packaging
-Homepage: http://www.widelands.org/
+Homepage: https://www.widelands.org/
 
 Package: widelands
 Architecture: any
@@ -51,7 +51,6 @@ Depends: fonts-freefont-ttf,
   fonts-dejavu-core,
   fonts-dejavu-extra,
   fonts-hosny-amiri,
-  fonts-lklug-sinhala,
   fonts-nakula,
   fonts-wqy-microhei,
   ${misc:Depends}

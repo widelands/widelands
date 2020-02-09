@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/tribes.h"
@@ -38,20 +38,11 @@ constexpr int kColumns = 5;
 constexpr int kButtonHeight = 20;
 constexpr int kButtonRowHeight = kButtonHeight + kMargin;
 constexpr int kLabelHeight = 18;
-constexpr int kLabelFontSize = 12;
-constexpr int kTabHeight = 35 + 5 * (kBuildGridCellHeight + kLabelHeight + kLabelHeight);
 constexpr int32_t kWindowWidth = kColumns * kBuildGridCellWidth;
-constexpr int32_t kWindowHeight = kTabHeight + kMargin + 4 * kButtonRowHeight;
 
 constexpr int32_t kUpdateTimeInGametimeMs = 1000;  //  1 second, gametime
 
 using namespace Widelands;
-
-namespace {
-void set_label_font(UI::Textarea* label) {
-	label->set_fontsize(kLabelFontSize);
-}
-}  // namespace
 
 inline InteractivePlayer& BuildingStatisticsMenu::iplayer() const {
 	return dynamic_cast<InteractivePlayer&>(*get_parent());
@@ -59,186 +50,83 @@ inline InteractivePlayer& BuildingStatisticsMenu::iplayer() const {
 
 BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                                                UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(&parent,
-                      "building_statistics",
-                      &registry,
-                      kWindowWidth,
-                      kWindowHeight,
-                      _("Building Statistics")),
-     tab_panel_(this, g_gr->images().get("images/ui_basic/but1.png")),
+   : UI::UniqueWindow(
+        &parent, "building_statistics", &registry, kWindowWidth, 100, _("Building Statistics")),
+     style_(g_gr->styles().building_statistics_style()),
+     tab_panel_(this, UI::TabPanelStyle::kWuiDark),
      navigation_panel_(this, 0, 0, kWindowWidth, 4 * kButtonRowHeight),
      building_name_(
         &navigation_panel_, get_inner_w() / 2, 0, 0, kButtonHeight, "", UI::Align::kCenter),
-     owned_label_(&navigation_panel_, kMargin, kButtonRowHeight, 0, kButtonHeight, _("Owned:")),
+     owned_label_(&navigation_panel_,
+                  kMargin,
+                  kButtonRowHeight,
+                  0,
+                  kButtonHeight,
+                  _("Owned:"),
+                  UI::Align::kLeft,
+                  style_.building_statistics_details_font()),
      construction_label_(&navigation_panel_,
                          kMargin,
                          2 * kButtonRowHeight,
                          0,
                          kButtonHeight,
-                         _("Under Construction:")),
+                         _("Under Construction:"),
+                         UI::Align::kLeft,
+                         style_.building_statistics_details_font()),
      unproductive_box_(&navigation_panel_, kMargin, 3 * kButtonRowHeight + 3, UI::Box::Horizontal),
      unproductive_label_(
         &unproductive_box_,
         /** TRANSLATORS: This is the first part of productivity with input field */
         /** TRANSLATORS: Building statistics window - 'Low Productivity <input>%:' */
         _("Low Productivity")),
-     unproductive_percent_(
-        &unproductive_box_,
-        0,
-        0,
-        35,
-        0,
-        1,
-        g_gr->images().get("images/ui_basic/but1.png"),
-        kLabelFontSize - UI::g_fh1->fontset()->size_offset()),  // We need consistent height here
+     // We need consistent height here - test
+     unproductive_percent_(&unproductive_box_, 0, 0, 35, UI::PanelStyle::kWui),
      unproductive_label2_(
         &unproductive_box_,
         /** TRANSLATORS: This is the second part of productivity with input field */
         /** TRANSLATORS: Building statistics window -  'Low Productivity <input>%:' */
-        _("%:")),
+        _("%:"),
+        UI::Align::kLeft,
+        style_.building_statistics_details_font()),
      no_owned_label_(&navigation_panel_,
                      get_inner_w() - 2 * kButtonRowHeight - kMargin,
                      kButtonRowHeight,
                      0,
                      kButtonHeight,
                      "",
-                     UI::Align::kRight),
+                     UI::Align::kRight,
+                     style_.building_statistics_details_font()),
      no_construction_label_(&navigation_panel_,
                             get_inner_w() - 2 * kButtonRowHeight - kMargin,
                             2 * kButtonRowHeight,
                             0,
                             kButtonHeight,
                             "",
-                            UI::Align::kRight),
+                            UI::Align::kRight,
+                            style_.building_statistics_details_font()),
      no_unproductive_label_(&navigation_panel_,
                             get_inner_w() - 2 * kButtonRowHeight - kMargin,
                             3 * kButtonRowHeight,
                             0,
                             kButtonHeight,
                             "",
-                            UI::Align::kRight),
+                            UI::Align::kRight,
+                            style_.building_statistics_details_font()),
+     current_building_type_(INVALID_INDEX),
+     last_building_index_(0),
+     last_building_type_(INVALID_INDEX),
+     lastupdate_(0),
+     was_minimized_(false),
      low_production_(33),
-     has_selection_(false) {
+     has_selection_(false),
+     nr_building_types_(parent.egbase().tribes().nrbuildings()) {
 
-	for (int i = 0; i < kNoOfBuildingTabs; ++i) {
-		row_counters_[i] = 0;
-		tabs_[i] = new UI::Box(&tab_panel_, 0, 0, UI::Box::Vertical);
-	}
+	building_buttons_ = std::vector<UI::Button*>(nr_building_types_);
+	owned_labels_ = std::vector<UI::Textarea*>(nr_building_types_);
+	productivity_labels_ = std::vector<UI::Textarea*>(nr_building_types_);
 
-	tab_panel_.add("building_stats_small",
-	               g_gr->images().get("images/wui/fieldaction/menu_tab_buildsmall.png"),
-	               tabs_[BuildingTab::Small], _("Small Buildings"));
-	tab_panel_.add("building_stats_medium",
-	               g_gr->images().get("images/wui/fieldaction/menu_tab_buildmedium.png"),
-	               tabs_[BuildingTab::Medium], _("Medium Buildings"));
-	tab_panel_.add("building_stats_big",
-	               g_gr->images().get("images/wui/fieldaction/menu_tab_buildbig.png"),
-	               tabs_[BuildingTab::Big], _("Big Buildings"));
-	tab_panel_.add("building_stats_mines",
-	               g_gr->images().get("images/wui/fieldaction/menu_tab_buildmine.png"),
-	               tabs_[BuildingTab::Mines], _("Mines"));
-
-	// Hide the ports tab for non-seafaring maps
-	if (iplayer().game().map().get_port_spaces().size() > 1) {
-		tab_panel_.add("building_stats_ports",
-		               g_gr->images().get("images/wui/fieldaction/menu_tab_buildport.png"),
-		               tabs_[BuildingTab::Ports], _("Ports"));
-	}
-
-	const DescriptionIndex nr_buildings = parent.egbase().tribes().nrbuildings();
-	building_buttons_ = std::vector<UI::Button*>(nr_buildings);
-	owned_labels_ = std::vector<UI::Textarea*>(nr_buildings);
-	productivity_labels_ = std::vector<UI::Textarea*>(nr_buildings);
-
-	// Column counters
-	int columns[kNoOfBuildingTabs] = {0, 0, 0, 0, 0};
-
-	// Row containers
-	UI::Box* rows[kNoOfBuildingTabs];
-	for (int i = 0; i < kNoOfBuildingTabs; ++i) {
-		rows[i] = new UI::Box(tabs_[i], 0, 0, UI::Box::Horizontal);
-	}
-
-	// We want to add player tribe's buildings in correct order
-	const TribeDescr& tribe = iplayer().player().tribe();
-	std::vector<DescriptionIndex> buildings_to_add;
-	for (DescriptionIndex index : tribe.buildings()) {
-		// Only add headquarter types that are owned by player.
-		const BuildingDescr& descr = *tribe.get_building_descr(index);
-		const Widelands::Player& player = iplayer().player();
-		if (descr.is_buildable() || descr.is_enhanced() ||
-		    !player.get_building_statistics(index).empty()) {
-			buildings_to_add.push_back(index);
-		}
-	}
-
-	// We want to add other tribes' militarysites on the bottom
-	for (DescriptionIndex index = 0; index < nr_buildings; ++index) {
-		const BuildingDescr& descr = *parent.egbase().tribes().get_building_descr(index);
-		if (descr.type() == MapObjectType::MILITARYSITE && !tribe.has_building(index)) {
-			buildings_to_add.push_back(index);
-		}
-	}
-
-	for (DescriptionIndex id : buildings_to_add) {
-		const BuildingDescr& descr = *tribe.get_building_descr(id);
-
-		if (descr.type() != MapObjectType::CONSTRUCTIONSITE &&
-		    descr.type() != MapObjectType::DISMANTLESITE) {
-			if (descr.get_ismine()) {
-				if (add_button(id, descr, BuildingTab::Mines, *rows[BuildingTab::Mines],
-				               &columns[BuildingTab::Mines])) {
-					rows[BuildingTab::Mines] =
-					   new UI::Box(tabs_[BuildingTab::Mines], 0, 0, UI::Box::Horizontal);
-				}
-			} else if (descr.get_isport()) {
-				if (add_button(id, descr, BuildingTab::Ports, *rows[BuildingTab::Ports],
-				               &columns[BuildingTab::Ports])) {
-					rows[BuildingTab::Ports] =
-					   new UI::Box(tabs_[BuildingTab::Ports], 0, 0, UI::Box::Horizontal);
-				}
-			} else {
-				switch (descr.get_size()) {
-				case BaseImmovable::SMALL:
-					if (add_button(id, descr, BuildingTab::Small, *rows[BuildingTab::Small],
-					               &columns[BuildingTab::Small])) {
-						rows[BuildingTab::Small] =
-						   new UI::Box(tabs_[BuildingTab::Small], 0, 0, UI::Box::Horizontal);
-					}
-					break;
-				case BaseImmovable::MEDIUM:
-					if (add_button(id, descr, BuildingTab::Medium, *rows[BuildingTab::Medium],
-					               &columns[BuildingTab::Medium])) {
-						rows[BuildingTab::Medium] =
-						   new UI::Box(tabs_[BuildingTab::Medium], 0, 0, UI::Box::Horizontal);
-					}
-					break;
-				case BaseImmovable::BIG:
-					if (add_button(id, descr, BuildingTab::Big, *rows[BuildingTab::Big],
-					               &columns[BuildingTab::Big])) {
-						rows[BuildingTab::Big] =
-						   new UI::Box(tabs_[BuildingTab::Big], 0, 0, UI::Box::Horizontal);
-					}
-					break;
-				default:
-					throw wexception(
-					   "Building statictics: Found building without a size: %s", descr.name().c_str());
-				}
-			}
-		}
-	}
-
-	for (int i = 0; i < kNoOfBuildingTabs; ++i) {
-		tabs_[i]->add(rows[i]);
-	}
-
-	set_label_font(&owned_label_);
-	set_label_font(&construction_label_);
-	set_label_font(&unproductive_label_);
-	set_label_font(&unproductive_label2_);
-	set_label_font(&no_owned_label_);
-	set_label_font(&no_construction_label_);
-	set_label_font(&no_unproductive_label_);
+	unproductive_percent_.set_font_style_and_margin(
+	   style_.building_statistics_details_font(), style_.editbox_margin());
 
 	unproductive_label_.set_size(unproductive_label_.get_w(), kButtonRowHeight);
 	unproductive_percent_.set_text(std::to_string(low_production_));
@@ -254,36 +142,32 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 
 	navigation_buttons_[NavigationButton::PrevOwned] = new UI::Button(
 	   &navigation_panel_, "previous_owned", get_inner_w() - 2 * kButtonRowHeight, kButtonRowHeight,
-	   kButtonHeight, kButtonHeight, g_gr->images().get("images/ui_basic/but4.png"),
+	   kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
 	   g_gr->images().get("images/ui_basic/scrollbar_left.png"), _("Show previous building"));
 
 	navigation_buttons_[NavigationButton::NextOwned] = new UI::Button(
 	   &navigation_panel_, "next_owned", get_inner_w() - kButtonRowHeight, kButtonRowHeight,
-	   kButtonHeight, kButtonHeight, g_gr->images().get("images/ui_basic/but4.png"),
+	   kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
 	   g_gr->images().get("images/ui_basic/scrollbar_right.png"), _("Show next building"));
 
 	navigation_buttons_[NavigationButton::PrevConstruction] = new UI::Button(
 	   &navigation_panel_, "previous_constructed", get_inner_w() - 2 * kButtonRowHeight,
-	   2 * kButtonRowHeight, kButtonHeight, kButtonHeight,
-	   g_gr->images().get("images/ui_basic/but4.png"),
+	   2 * kButtonRowHeight, kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
 	   g_gr->images().get("images/ui_basic/scrollbar_left.png"), _("Show previous building"));
 
 	navigation_buttons_[NavigationButton::NextConstruction] = new UI::Button(
 	   &navigation_panel_, "next_constructed", get_inner_w() - kButtonRowHeight,
-	   2 * kButtonRowHeight, kButtonHeight, kButtonHeight,
-	   g_gr->images().get("images/ui_basic/but4.png"),
+	   2 * kButtonRowHeight, kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
 	   g_gr->images().get("images/ui_basic/scrollbar_right.png"), _("Show next building"));
 
 	navigation_buttons_[NavigationButton::PrevUnproductive] = new UI::Button(
 	   &navigation_panel_, "previous_unproductive", get_inner_w() - 2 * kButtonRowHeight,
-	   3 * kButtonRowHeight, kButtonHeight, kButtonHeight,
-	   g_gr->images().get("images/ui_basic/but4.png"),
+	   3 * kButtonRowHeight, kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
 	   g_gr->images().get("images/ui_basic/scrollbar_left.png"), _("Show previous building"));
 
 	navigation_buttons_[NavigationButton::NextUnproductive] = new UI::Button(
 	   &navigation_panel_, "next_unproductive", get_inner_w() - kButtonRowHeight,
-	   3 * kButtonRowHeight, kButtonHeight, kButtonHeight,
-	   g_gr->images().get("images/ui_basic/but4.png"),
+	   3 * kButtonRowHeight, kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
 	   g_gr->images().get("images/ui_basic/scrollbar_right.png"), _("Show next building"));
 
 	navigation_buttons_[NavigationButton::PrevOwned]->sigclicked.connect(boost::bind(
@@ -306,13 +190,203 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	unproductive_percent_.cancel.connect(
 	   boost::bind(&BuildingStatisticsMenu::low_production_reset_focus, boost::ref(*this)));
 
-	update();
+	init();
 }
 
 BuildingStatisticsMenu::~BuildingStatisticsMenu() {
 	building_buttons_.clear();
 	owned_labels_.clear();
 	productivity_labels_.clear();
+}
+
+void BuildingStatisticsMenu::reset() {
+	update();  // In case a building got removed, make sure to deselect it first
+
+	const int last_selected_tab = tab_assignments_[tab_panel_.active()];
+
+	tab_panel_.remove_last_tab("building_stats_ports");
+	tab_panel_.remove_last_tab("building_stats_mines");
+	tab_panel_.remove_last_tab("building_stats_big");
+	tab_panel_.remove_last_tab("building_stats_medium");
+	tab_panel_.remove_last_tab("building_stats_small");
+
+	// Clean state if buildings disappear from list
+	building_buttons_.clear();
+	building_buttons_.resize(nr_building_types_);
+	owned_labels_.clear();
+	owned_labels_.resize(nr_building_types_);
+	productivity_labels_.clear();
+	productivity_labels_.resize(nr_building_types_);
+
+	// Ensure that defunct buttons disappear
+	for (int tab_index = 0; tab_index < kNoOfBuildingTabs; ++tab_index) {
+		if (tabs_[tab_index] != nullptr) {
+			tabs_[tab_index]->die();
+		}
+	}
+
+	init(last_selected_tab);
+
+	// Reset navigator
+	building_name_.set_text("");
+	if (has_selection_) {
+		if (building_buttons_[current_building_type_] != nullptr) {
+			set_current_building_type(current_building_type_);
+		} else {
+			has_selection_ = false;
+		}
+	}
+}
+
+void BuildingStatisticsMenu::init(int last_selected_tab) {
+	// We want to add player tribe's buildings in correct order
+	const Widelands::Player& player = iplayer().player();
+	const TribeDescr& tribe = player.tribe();
+	const bool map_allows_seafaring = iplayer().game().map().allows_seafaring();
+	const bool map_allows_waterways = iplayer().game().map().get_waterway_max_length() >= 2;
+	std::vector<DescriptionIndex> buildings_to_add[kNoOfBuildingTabs];
+	// Add the player's own tribe's buildings.
+	for (DescriptionIndex index : tribe.buildings()) {
+		if (own_building_is_valid(player, index, map_allows_seafaring, map_allows_waterways)) {
+			buildings_to_add[find_tab_for_building(*tribe.get_building_descr(index))].push_back(index);
+		}
+	}
+
+	// We want to add other tribes' buildings on the bottom. Only add the ones that the player owns.
+	for (DescriptionIndex index = 0; index < nr_building_types_; ++index) {
+		if (foreign_tribe_building_is_valid(player, index)) {
+			buildings_to_add[find_tab_for_building(*tribe.get_building_descr(index))].push_back(index);
+		}
+	}
+
+	// Now create the tab contents and add the building buttons
+	int row_counters[kNoOfBuildingTabs];
+	for (int tab_index = 0; tab_index < kNoOfBuildingTabs; ++tab_index) {
+		int current_column = 0;
+		tabs_[tab_index] = new UI::Box(&tab_panel_, 0, 0, UI::Box::Vertical);
+		UI::Box* row = new UI::Box(tabs_[tab_index], 0, 0, UI::Box::Horizontal);
+		row_counters[tab_index] = 0;
+
+		for (const Widelands::DescriptionIndex id : buildings_to_add[tab_index]) {
+			const BuildingDescr& descr = *iplayer().egbase().tribes().get_building_descr(id);
+			add_button(id, descr, row);
+			++current_column;
+			if (current_column == 1) {
+				++row_counters[tab_index];
+			} else if (current_column == kColumns) {
+				tabs_[tab_index]->add(row, UI::Box::Resizing::kFullSize);
+				tabs_[tab_index]->add_space(6);
+				row = new UI::Box(tabs_[tab_index], 0, 0, UI::Box::Horizontal);
+				current_column = 0;
+			}
+		}
+		// Add final row
+		if (current_column != 0) {
+			tabs_[tab_index]->add(row, UI::Box::Resizing::kFullSize);
+		}
+	}
+
+	// Show the tabs that have buttons on them
+	int tab_counter = 0;
+	auto add_tab = [this, row_counters, &tab_counter, last_selected_tab](
+	                  int tab_index, const std::string& name, const std::string& image,
+	                  const std::string& descr) {
+		if (row_counters[tab_index] > 0) {
+			tab_panel_.add(name, g_gr->images().get(image), tabs_[tab_index], descr);
+			if (last_selected_tab == tab_index) {
+				tab_panel_.activate(tab_counter);
+			}
+			tab_assignments_[tab_counter] = tab_index;
+			row_counters_[tab_counter] = row_counters[tab_index];
+			++tab_counter;
+		}
+	};
+	add_tab(BuildingTab::Small, "building_stats_small",
+	        "images/wui/fieldaction/menu_tab_buildsmall.png", _("Small buildings"));
+	add_tab(BuildingTab::Medium, "building_stats_medium",
+	        "images/wui/fieldaction/menu_tab_buildmedium.png", _("Medium buildings"));
+	add_tab(BuildingTab::Big, "building_stats_big", "images/wui/fieldaction/menu_tab_buildbig.png",
+	        _("Big buildings"));
+	add_tab(BuildingTab::Mines, "building_stats_mines",
+	        "images/wui/fieldaction/menu_tab_buildmine.png", _("Mines"));
+	add_tab(BuildingTab::Ports, "building_stats_ports",
+	        "images/wui/fieldaction/menu_tab_buildport.png", _("Ports"));
+
+	update();
+}
+
+bool BuildingStatisticsMenu::own_building_is_valid(const Widelands::Player& player,
+                                                   Widelands::DescriptionIndex index,
+                                                   bool map_allows_seafaring,
+                                                   bool map_allows_waterways) const {
+	const BuildingDescr& descr = *player.tribe().get_building_descr(index);
+
+	if (!descr.is_useful_on_map(map_allows_seafaring, map_allows_waterways) &&
+	    player.get_building_statistics(index).empty()) {
+		return false;
+	}
+	if (descr.type() == MapObjectType::CONSTRUCTIONSITE ||
+	    descr.type() == MapObjectType::DISMANTLESITE) {
+		return false;
+	}
+	// Only add allowed buildings or buildings that are owned by the player.
+	if ((player.is_building_type_allowed(index) && (descr.is_buildable() || descr.is_enhanced())) ||
+	    !player.get_building_statistics(index).empty()) {
+		return true;
+	}
+	return false;
+}
+
+bool BuildingStatisticsMenu::foreign_tribe_building_is_valid(
+   const Widelands::Player& player, Widelands::DescriptionIndex index) const {
+	if (!player.tribe().has_building(index) && !player.get_building_statistics(index).empty()) {
+		const BuildingDescr& descr = *iplayer().egbase().tribes().get_building_descr(index);
+		if (descr.type() == MapObjectType::CONSTRUCTIONSITE ||
+		    descr.type() == MapObjectType::DISMANTLESITE) {
+			return false;
+		}
+		return true;
+	}
+	return false;
+}
+
+int BuildingStatisticsMenu::find_tab_for_building(const Widelands::BuildingDescr& descr) const {
+	assert(descr.type() != MapObjectType::CONSTRUCTIONSITE);
+	assert(descr.type() != MapObjectType::DISMANTLESITE);
+	if (descr.get_ismine()) {
+		return BuildingTab::Mines;
+	} else if (descr.get_isport()) {
+		return BuildingTab::Ports;
+	} else {
+		switch (descr.get_size()) {
+		case BaseImmovable::SMALL:
+			return BuildingTab::Small;
+		case BaseImmovable::MEDIUM:
+			return BuildingTab::Medium;
+		case BaseImmovable::BIG:
+			return BuildingTab::Big;
+		default:
+			throw wexception(
+			   "Building statictics: Found building without a size: %s", descr.name().c_str());
+		}
+	}
+	NEVER_HERE();
+}
+
+void BuildingStatisticsMenu::update_building_list() {
+	const Widelands::Player& player = iplayer().player();
+	const bool map_allows_seafaring = iplayer().game().map().allows_seafaring();
+	const bool map_allows_waterways = iplayer().game().map().get_waterway_max_length() >= 2;
+	for (DescriptionIndex index = 0; index < nr_building_types_; ++index) {
+		const bool should_have_this_building =
+		   own_building_is_valid(player, index, map_allows_seafaring, map_allows_waterways) ||
+		   foreign_tribe_building_is_valid(player, index);
+		const bool has_this_building = building_buttons_[index] != nullptr;
+		if (should_have_this_building != has_this_building) {
+			reset();
+			return;
+		}
+	}
 }
 
 /**
@@ -322,50 +396,35 @@ BuildingStatisticsMenu::~BuildingStatisticsMenu() {
  * - Buildings owned, steps through constructionsites
  * - Productivity, steps though buildings with low productivity and stopped buildings
  */
-bool BuildingStatisticsMenu::add_button(
-   DescriptionIndex id, const BuildingDescr& descr, int tab_index, UI::Box& row, int* column) {
-
-	UI::Box* button_box = new UI::Box(&row, 0, 0, UI::Box::Vertical);
-	building_buttons_[id] = new UI::Button(
-	   button_box, (boost::format("building_button%s") % id).str(), 0, 0, kBuildGridCellWidth,
-	   kBuildGridCellHeight, g_gr->images().get("images/ui_basic/but1.png"),
-	   descr.representative_image(&iplayer().get_player()->get_playercolor()), "",
-	   UI::Button::Style::kFlat);
+void BuildingStatisticsMenu::add_button(DescriptionIndex id,
+                                        const BuildingDescr& descr,
+                                        UI::Box* row) {
+	UI::Box* button_box = new UI::Box(row, 0, 0, UI::Box::Vertical);
+	building_buttons_[id] =
+	   new UI::Button(button_box, (boost::format("building_button%s") % id).str(), 0, 0,
+	                  kBuildGridCellWidth, kBuildGridCellHeight, UI::ButtonStyle::kWuiBuildingStats,
+	                  descr.representative_image(&iplayer().get_player()->get_playercolor()), "",
+	                  UI::Button::VisualState::kFlat);
 	building_buttons_[id]->set_disable_style(UI::ButtonDisableStyle::kMonochrome |
 	                                         UI::ButtonDisableStyle::kFlat);
 	button_box->add(building_buttons_[id]);
 
 	owned_labels_[id] =
-	   new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, UI::Align::kCenter);
-	owned_labels_[id]->set_fontsize(kLabelFontSize);
+	   new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, "", UI::Align::kCenter,
+	                    style_.building_statistics_button_font());
 	owned_labels_[id]->set_fixed_width(kBuildGridCellWidth);
 	button_box->add(owned_labels_[id]);
 
 	productivity_labels_[id] =
-	   new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, UI::Align::kCenter);
-	productivity_labels_[id]->set_fontsize(kLabelFontSize);
+	   new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, "", UI::Align::kCenter,
+	                    style_.building_statistics_button_font());
 	productivity_labels_[id]->set_fixed_width(kBuildGridCellWidth);
 	button_box->add(productivity_labels_[id]);
 
-	row.add(button_box);
+	row->add(button_box);
 
 	building_buttons_[id]->sigclicked.connect(
 	   boost::bind(&BuildingStatisticsMenu::set_current_building_type, boost::ref(*this), id));
-
-	// For dynamic window height
-	if (*column == 0) {
-		++row_counters_[tab_index];
-	}
-
-	// Check if the row is full
-	++*column;
-	if (*column == kColumns) {
-		tabs_[tab_index]->add(&row);
-		tabs_[tab_index]->add_space(6);
-		*column = 0;
-		return true;
-	}
-	return false;
 }
 
 void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
@@ -496,28 +555,30 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
  * Update this statistic
  */
 void BuildingStatisticsMenu::think() {
-	// Adjust height to current tab
-	if (is_minimal()) {
-		tab_panel_.set_size(0, 0);
-	} else {
-		int tab_height =
-		   35 +
-		   row_counters_[tab_panel_.active()] * (kBuildGridCellHeight + kLabelHeight + kLabelHeight);
-		tab_panel_.set_size(kWindowWidth, tab_height);
-		set_size(
-		   get_w(), tab_height + kMargin + 4 * kButtonRowHeight + get_tborder() + get_bborder());
-		navigation_panel_.set_pos(Vector2i(0, tab_height + kMargin));
-	}
-
 	// Update statistics
 	const int32_t gametime = iplayer().game().get_gametime();
 
 	if (was_minimized_ || (gametime - lastupdate_) > kUpdateTimeInGametimeMs) {
+		update_building_list();
 		update();
 		lastupdate_ = gametime;
 	}
 	// Make sure we don't have a delay with displaying labels when we restore the window.
 	was_minimized_ = is_minimal();
+
+	// Adjust height to current tab
+	if (is_minimal()) {
+		tab_panel_.set_size(0, 0);
+	} else {
+		const int tab_height =
+		   35 +
+		   row_counters_[tab_panel_.active()] * (kBuildGridCellHeight + kLabelHeight + kLabelHeight) +
+		   kMargin;
+		tab_panel_.set_size(kWindowWidth, tab_height);
+		set_size(
+		   get_w(), tab_height + kMargin + navigation_panel_.get_h() + get_tborder() + get_bborder());
+		navigation_panel_.set_pos(Vector2i(0, tab_height + kMargin));
+	}
 }
 
 /*
@@ -540,7 +601,6 @@ int32_t BuildingStatisticsMenu::validate_pointer(int32_t* const id, int32_t cons
 void BuildingStatisticsMenu::update() {
 	const Player& player = iplayer().player();
 	const TribeDescr& tribe = player.tribe();
-	const DescriptionIndex nr_buildings = iplayer().egbase().tribes().nrbuildings();
 
 	owned_label_.set_visible(false);
 	no_owned_label_.set_visible(false);
@@ -558,7 +618,7 @@ void BuildingStatisticsMenu::update() {
 	navigation_buttons_[NavigationButton::NextUnproductive]->set_visible(false);
 	navigation_buttons_[NavigationButton::PrevUnproductive]->set_visible(false);
 
-	for (DescriptionIndex id = 0; id < nr_buildings; ++id) {
+	for (DescriptionIndex id = 0; id < nr_building_types_; ++id) {
 		const BuildingDescr& building = *tribe.get_building_descr(id);
 		if (building_buttons_[id] == nullptr) {
 			continue;
@@ -576,9 +636,9 @@ void BuildingStatisticsMenu::update() {
 		uint32_t nr_unproductive = 0;
 
 		for (uint32_t l = 0; l < stats_vector.size(); ++l) {
-			if (stats_vector[l].is_constructionsite)
+			if (stats_vector[l].is_constructionsite) {
 				++nr_build;
-			else {
+			} else {
 				++nr_owned;
 				BaseImmovable& immovable = *iplayer().game().map()[stats_vector[l].pos].get_immovable();
 				if (building.type() == MapObjectType::PRODUCTIONSITE ||
@@ -603,7 +663,6 @@ void BuildingStatisticsMenu::update() {
 			}
 		}
 
-		productivity_labels_[id]->set_text(" ");
 		productivity_labels_[id]->set_visible(false);
 
 		if (building.type() == MapObjectType::PRODUCTIONSITE ||
@@ -612,16 +671,15 @@ void BuildingStatisticsMenu::update() {
 				int const percent =
 				   static_cast<int>(static_cast<float>(total_prod) / static_cast<float>(nr_owned));
 
-				RGBColor color;
-				if (percent < low_production_) {
-					color = UI_FONT_CLR_BAD;
-				} else if (percent < ((low_production_ < 50) ?
-				                         2 * low_production_ :
-				                         low_production_ + ((100 - low_production_) / 2))) {
-					color = UI_FONT_CLR_OK;
-				} else {
-					color = UI_FONT_CLR_GOOD;
-				}
+				const RGBColor& color =
+				   (percent < low_production_) ?
+				      style_.low_color() :
+				      (percent < ((low_production_ < 50) ?
+				                     2 * low_production_ :
+				                     low_production_ + ((100 - low_production_) / 2))) ?
+				      style_.medium_color() :
+				      style_.high_color();
+
 				/** TRANSLATORS: Percent in building statistics window, e.g. 85% */
 				/** TRANSLATORS: If you wish to add a space, translate as '%i %%' */
 				const std::string perc_str = (boost::format(_("%i%%")) % percent).str();
@@ -645,14 +703,11 @@ void BuildingStatisticsMenu::update() {
 			}
 		} else if (building.type() == MapObjectType::MILITARYSITE) {
 			if (nr_owned) {
-				RGBColor color;
-				if (total_stationed_soldiers < total_soldier_capacity / 2) {
-					color = UI_FONT_CLR_BAD;
-				} else if (total_stationed_soldiers < total_soldier_capacity) {
-					color = UI_FONT_CLR_OK;
-				} else {
-					color = UI_FONT_CLR_GOOD;
-				}
+				const RGBColor& color = (total_stationed_soldiers < total_soldier_capacity / 2) ?
+				                           style_.low_color() :
+				                           (total_stationed_soldiers < total_soldier_capacity) ?
+				                           style_.medium_color() :
+				                           style_.high_color();
 				const std::string perc_str =
 				   (boost::format(_("%1%/%2%")) % total_stationed_soldiers % total_soldier_capacity)
 				      .str();
@@ -667,7 +722,7 @@ void BuildingStatisticsMenu::update() {
 				   total_soldier_capacity > total_stationed_soldiers);
 				navigation_buttons_[NavigationButton::NextUnproductive]->set_visible(true);
 				navigation_buttons_[NavigationButton::PrevUnproductive]->set_visible(true);
-				/** TRANSLATORS Label for number of buildings that are waiting for soldiers */
+				/** TRANSLATORS: Label for number of buildings that are waiting for soldiers */
 				unproductive_label_.set_text(_("Lacking Soldiers:"));
 				unproductive_box_.set_visible(true);
 				unproductive_label_.set_visible(true);
@@ -676,13 +731,16 @@ void BuildingStatisticsMenu::update() {
 		}
 
 		std::string owned_text;
-		if (player.tribe().has_building(id) && (building.is_buildable() || building.is_enhanced())) {
-			/** TRANSLATORS Buildings: owned / under construction */
+		const bool can_construct_this_building =
+		   player.tribe().has_building(id) && (building.is_buildable() || building.is_enhanced());
+		if (can_construct_this_building) {
+			/** TRANSLATORS: Buildings: owned / under construction */
 			owned_text = (boost::format(_("%1%/%2%")) % nr_owned % nr_build).str();
 		} else {
 			owned_text = (boost::format(_("%1%/%2%")) % nr_owned % "–").str();
 		}
-		set_labeltext(owned_labels_[id], owned_text, UI_FONT_CLR_FG);
+		set_labeltext(
+		   owned_labels_[id], owned_text, style_.building_statistics_details_font().color());
 		owned_labels_[id]->set_visible((nr_owned + nr_build) > 0);
 
 		building_buttons_[id]->set_enabled((nr_owned + nr_build) > 0);
@@ -694,7 +752,7 @@ void BuildingStatisticsMenu::update() {
 			no_owned_label_.set_visible(true);
 			navigation_buttons_[NavigationButton::NextOwned]->set_visible(true);
 			navigation_buttons_[NavigationButton::PrevOwned]->set_visible(true);
-			if (player.tribe().has_building(id) && building.is_buildable()) {
+			if (can_construct_this_building) {
 				no_construction_label_.set_text(nr_build > 0 ? std::to_string(nr_build) : "");
 				navigation_buttons_[NavigationButton::NextConstruction]->set_enabled(nr_build > 0);
 				navigation_buttons_[NavigationButton::PrevConstruction]->set_enabled(nr_build > 0);
@@ -711,7 +769,9 @@ void BuildingStatisticsMenu::update() {
 void BuildingStatisticsMenu::set_labeltext(UI::Textarea* textarea,
                                            const std::string& text,
                                            const RGBColor& color) {
-	textarea->set_color(color);
+	UI::FontStyleInfo style(style_.building_statistics_button_font());
+	style.set_color(color);
+	textarea->set_style(style);
 	textarea->set_text(text);
 	textarea->set_visible(true);
 }
@@ -724,7 +784,7 @@ void BuildingStatisticsMenu::set_current_building_type(DescriptionIndex id) {
 		if (building_button == nullptr) {
 			continue;
 		}
-		building_button->set_style(UI::Button::Style::kFlat);
+		building_button->set_visual_state(UI::Button::VisualState::kFlat);
 	}
 
 	// Update for current button

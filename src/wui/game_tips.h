@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,7 +29,7 @@
 /// Displays game tips in progress window
 struct GameTips : public UI::IProgressVisualization {
 	GameTips(UI::ProgressWindow& progressWindow, const std::vector<std::string>&);
-	virtual ~GameTips();
+	~GameTips() override;
 
 	void update(bool repaint) override;
 	void stop() override;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,7 +32,7 @@
 struct ChatMessage {
 	CAN_BE_SENT_AS_NOTE(NoteId::ChatMessage)
 
-	ChatMessage(const std::string& message) : msg(message) {
+	explicit ChatMessage(const std::string& message) : msg(message) {
 	}
 
 	// The (real-)time at which the message was received.

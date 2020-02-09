@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,13 +29,6 @@ namespace Widelands {
 /// constructor takes a Direction parameter, which is the walking direction
 /// when going from a to b.
 ///
-/// It first iterates over the set of nodes that are in A but not in B. When
-/// that iteration is completed (advance has returned false),
-/// move_to_other_side can be called to prepare the region for iterating over
-/// the set of nodes in B but not in A. (Because of symmetry, it is after that
-/// iteration again possible to call move_to_other_side to iterate over the
-/// nodes that are in A but not in B again, and so on.)
-///
 /// \note The order in which nodes are returned is not guarantueed.
 template <typename AreaType = Area<>> struct MapDifferenceRegion {
 	MapDifferenceRegion(const Map& map, AreaType area, Direction direction)
@@ -55,12 +48,12 @@ template <typename AreaType = Area<>> struct MapDifferenceRegion {
 			map.neighbour_function(area_, &area_);                                                    \
 		break;
 
-			DIRECTION_CASE(WALK_NW, get_tln);
-			DIRECTION_CASE(WALK_NE, get_trn);
-			DIRECTION_CASE(WALK_E, get_rn);
-			DIRECTION_CASE(WALK_SE, get_brn);
-			DIRECTION_CASE(WALK_SW, get_bln);
-			DIRECTION_CASE(WALK_W, get_ln);
+			DIRECTION_CASE(WALK_NW, get_tln)
+			DIRECTION_CASE(WALK_NE, get_trn)
+			DIRECTION_CASE(WALK_E, get_rn)
+			DIRECTION_CASE(WALK_SE, get_brn)
+			DIRECTION_CASE(WALK_SW, get_bln)
+			DIRECTION_CASE(WALK_W, get_ln)
 #undef DIRECTION_CASE
 		}
 		--direction;
@@ -86,8 +79,6 @@ template <typename AreaType = Area<>> struct MapDifferenceRegion {
 	 */
 	bool advance(const Map& map);
 
-	void move_to_other_side(const Map& map);
-
 	typename AreaType::RadiusType radius() const {
 		return area_.radius;
 	}
@@ -98,6 +89,6 @@ private:
 	bool passed_corner_;
 	Direction direction_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAPDIFFERENCEREGION_H

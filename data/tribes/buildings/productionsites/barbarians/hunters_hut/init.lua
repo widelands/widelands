@@ -34,12 +34,20 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
+      collects_ware_from_map = "meat",
       prohibited_till = 480,
-      basic_amount = 1
+      basic_amount = 1,
+      very_weak_ai_limit = 1,
+      weak_ai_limit = 2
    },
 
    working_positions = {
       barbarians_hunter = 1
+   },
+
+   indicate_workarea_overlaps = {
+      barbarians_hunters_hut = false,
+      barbarians_gamekeepers_hut = true,
    },
 
    outputs = {
@@ -51,8 +59,8 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...
          descname = _"hunting",
          actions = {
-            "sleep=35000",
-            "worker=hunt"
+            "callworker=hunt",
+            "sleep=35000"
          }
       },
    },

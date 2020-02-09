@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2017 by the Widelands Development Team
+ * Copyright (C) 2010-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,45 +25,33 @@
 
 #include "base/macros.h"
 #include "economy/shippingitem.h"
-#include "graphic/diranimations.h"
+#include "graphic/animation/diranimations.h"
 #include "logic/map_objects/bob.h"
 
 namespace Widelands {
 
 class Economy;
-struct Fleet;
+struct ShipFleet;
 class PortDock;
 
 // This can't be part of the Ship class because of forward declaration in game.h
+// Keep the order of entries for savegame compatibility.
 enum class IslandExploreDirection {
-	kCounterClockwise = 0,  // This comes first for savegame compatibility (used to be = 0)
-	kClockwise = 1,
-	kNotSet
+	kNotSet,
+	kCounterClockwise,
+	kClockwise,
 };
 
-struct NoteShipMessage {
-	CAN_BE_SENT_AS_NOTE(NoteId::ShipMessage)
+struct NoteShip {
+	CAN_BE_SENT_AS_NOTE(NoteId::Ship)
 
 	Ship* ship;
 
-	enum class Message { kLost, kGained, kWaitingForCommand };
-	Message message;
+	enum class Action { kDestinationChanged, kWaitingForCommand, kNoPortLeft, kLost, kGained };
+	Action action;
 
-	NoteShipMessage(Ship* const init_ship, const Message& init_message)
-	   : ship(init_ship), message(init_message) {
-	}
-};
-
-struct NoteShipWindow {
-	CAN_BE_SENT_AS_NOTE(NoteId::ShipWindow)
-
-	Serial serial;
-
-	enum class Action { kClose, kNoPortLeft };
-	const Action action;
-
-	NoteShipWindow(Serial init_serial, const Action& init_action)
-	   : serial(init_serial), action(init_action) {
+	NoteShip(Ship* const init_ship, const Action& init_action)
+	   : ship(init_ship), action(init_action) {
 	}
 };
 
@@ -90,6 +78,10 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(ShipDescr);
 };
 
+constexpr int32_t kShipInterval = 1500;
+
+constexpr uint32_t kInvalidDestination = std::numeric_limits<uint32_t>::max();
+
 /**
  * Ships belong to a player and to an economy. The usually are in a (unique)
  * fleet for a player, but only if they are on standard duty. Exploration ships
@@ -99,24 +91,33 @@ struct Ship : Bob {
 	MO_DESCR(ShipDescr)
 
 	explicit Ship(const ShipDescr& descr);
-	virtual ~Ship();
+	~Ship() override;
 
 	// Returns the fleet the ship is a part of.
-	Fleet* get_fleet() const;
+	ShipFleet* get_fleet() const;
 
 	// Returns the current destination or nullptr if there is no current
 	// destination.
-	PortDock* get_destination(EditorGameBase& egbase) const;
+	PortDock* get_current_destination(EditorGameBase& egbase) const;
+	bool has_destination(EditorGameBase&, const PortDock&) const;
 
 	// Returns the last visited portdock of this ship or nullptr if there is none or
 	// the last visited was removed.
 	PortDock* get_lastdock(EditorGameBase& egbase) const;
 
-	Economy* get_economy() const {
-		return economy_;
+	Economy* get_economy(WareWorker type) const {
+		return type == wwWARE ? ware_economy_ : worker_economy_;
 	}
-	void set_economy(Game&, Economy* e);
-	void set_destination(Game&, PortDock&);
+	void set_economy(Game&, Economy* e, WareWorker);
+	void push_destination(Game&, PortDock&);
+	void pop_destination(Game&, PortDock&);
+	void clear_destinations(Game&);
+	uint32_t estimated_arrival_time(Game&,
+	                                const PortDock& dest,
+	                                const PortDock* intermediate = nullptr) const;
+	size_t count_destinations() const {
+		return destinations_.size();
+	}
 
 	void init_auto_task(Game&) override;
 
@@ -129,7 +130,7 @@ struct Ship : Bob {
 
 	uint32_t calculate_sea_route(Game& game, PortDock& pd, Path* finalpath = nullptr) const;
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	uint32_t get_nritems() const {
 		return items_.size();
@@ -138,8 +139,8 @@ struct Ship : Bob {
 		return items_[idx];
 	}
 
-	void withdraw_items(Game& game, PortDock& pd, std::vector<ShippingItem>& items);
-	void add_item(Game&, const ShippingItem& item);
+	void add_item(Game&, const ShippingItem&);
+	bool withdraw_item(Game&, PortDock&);
 
 	// A ship with task expedition can be in four states: kExpeditionWaiting, kExpeditionScouting,
 	// kExpeditionPortspaceFound or kExpeditionColonizing in the first states, the owning player of
@@ -208,7 +209,7 @@ struct Ship : Bob {
 	}
 
 	// whether the ship's expedition is in state "island-exploration" (circular movement)
-	bool is_exploring_island() {
+	bool is_exploring_island() const {
 		return expedition_->island_exploration;
 	}
 
@@ -245,13 +246,14 @@ struct Ship : Bob {
 
 protected:
 	void draw(const EditorGameBase&,
-	          const TextToDraw& draw_text,
-	          const Vector2f& field_on_dst,
+	          const InfoToDraw& info_to_draw,
+	          const Vector2f& point_on_dst,
+	          const Coords& coords,
 	          float scale,
 	          RenderTarget* dst) const override;
 
 private:
-	friend struct Fleet;
+	friend struct ShipFleet;
 
 	void wakeup_neighbours(Game&);
 
@@ -263,9 +265,11 @@ private:
 	bool ship_update_transport(Game&, State&);
 	void ship_update_expedition(Game&, State&);
 	void ship_update_idle(Game&, State&);
+	/// Set the ship's state to 'state' and if the ship state has changed, publish a notification.
+	void set_ship_state_and_notify(ShipStates state, NoteShip::Action action);
 
 	bool init_fleet(EditorGameBase&);
-	void set_fleet(Fleet* fleet);
+	void set_fleet(ShipFleet* fleet);
 
 	void send_message(Game& game,
 	                  const std::string& title,
@@ -273,22 +277,32 @@ private:
 	                  const std::string& description,
 	                  const std::string& picture);
 
-	Fleet* fleet_;
-	Economy* economy_;
+	ShipFleet* fleet_;
+	Economy* ware_economy_;
+	Economy* worker_economy_;
 	OPtr<PortDock> lastdock_;
-	OPtr<PortDock> destination_;
 	std::vector<ShippingItem> items_;
 	ShipStates ship_state_;
 	std::string shipname_;
 
+	// Our destinations in the order on which we are planning to visit them.
+	// When destinations are added or removed, the whole list will be reordered under
+	// the aspect of efficiency. Every time an entry is postponed, its priority will
+	// be increased to make it less likely that it will never be visited.
+	std::vector<std::pair<OPtr<PortDock>, uint32_t>> destinations_;
+	void reorder_destinations(Game&);
+
 	struct Expedition {
+		~Expedition();
+
 		std::vector<Coords> seen_port_buildspaces;
 		bool swimmable[LAST_DIRECTION];
 		bool island_exploration;
 		WalkingDir scouting_direction;
 		Coords exploration_start;
 		IslandExploreDirection island_explore_direction;
-		std::unique_ptr<Economy> economy;
+		Economy* ware_economy;  // Owned by Player
+		Economy* worker_economy;
 	};
 	std::unique_ptr<Expedition> expedition_;
 
@@ -298,18 +312,21 @@ protected:
 
 		const Task* get_task(const std::string& name) override;
 
-		void load(FileRead& fr);
+		void load(FileRead& fr, uint8_t);
 		void load_pointers() override;
 		void load_finish() override;
 
 	private:
 		// Initialize everything to make cppcheck happy.
 		uint32_t lastdock_ = 0U;
-		uint32_t destination_ = 0U;
+		Serial ware_economy_serial_;
+		Serial worker_economy_serial_;
+		std::vector<std::pair<uint32_t, uint32_t>> destinations_;
 		ShipStates ship_state_ = ShipStates::kTransport;
 		std::string shipname_;
 		std::unique_ptr<Expedition> expedition_;
 		std::vector<ShippingItem::Loader> items_;
+		uint8_t packet_version_ = 0;
 	};
 
 public:

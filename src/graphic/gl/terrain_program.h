@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,7 @@
 #include "base/vector.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
-#include "logic/description_maintainer.h"
+#include "logic/map_objects/description_maintainer.h"
 #include "logic/map_objects/world/terrain_description.h"
 
 class TerrainProgram {
@@ -35,7 +35,7 @@ public:
 
 	// Draws the terrain.
 	void draw(uint32_t gametime,
-	          const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
+	          const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
 	          const FieldsToDraw& fields_to_draw,
 	          float z_value);
 

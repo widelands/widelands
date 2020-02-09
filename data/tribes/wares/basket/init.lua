@@ -8,10 +8,12 @@ tribes:new_ware_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    default_target_quantity = {
-      empire = 1
+      empire = 1,
+      frisians = 1
    },
    preciousness = {
-      empire = 0
+      empire = 0,
+      frisians = 0
    },
    animations = {
       idle = {

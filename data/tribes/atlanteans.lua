@@ -5,10 +5,7 @@
 -- ---------------------
 --
 -- This file contains all the units for a tribe.
-
-dirname = path.dirname(__file__)
-
--- RST
+--
 -- .. function:: new_tribe{table}
 --
 --    This function adds all units to a tribe.
@@ -20,7 +17,13 @@ dirname = path.dirname(__file__)
 --
 --    **animations**: Global animations. Contains subtables for ``frontier`` and ``flag``. Each animation needs the parameters ``pictures`` (table of filenames) and ``hotspot`` (2 integer coordinates), and may also define ``fps`` (integer frames per second).
 --
---    **roads**: The file paths for the tribes' road textures in 2 subtables ``busy`` and ``normal``
+--    **bridges**: Contains animations for ``normal_e``, ``normal_se``, ``normal_sw``, ``busy_e``, ``busy_se`` and ``busy_sw``.
+--
+--    **bridge_height**: The height in pixels of each bridge at it's summit at 1x scale.
+--
+--    **roads**: The file paths for the tribe's road textures in 3 subtables ``busy``, ``normal`` and ``waterway``.
+--
+--    **resource_indicators**: The names for the resource indicators. This table contains a subtable for each resource name plus a subtable named "" for no resources. Each subtable is an array, in which the index of each entry is the highest amount of resources the indicator may indicate.
 --
 --    **wares_order**: This defines all the wares that this tribe uses and their display order in the user interface. Each subtable defines a column in the user interface.
 --
@@ -44,34 +47,77 @@ dirname = path.dirname(__file__)
 --
 --    **ship**: The internal name of the tribe's ship.
 --
---    **headquarters**: The internal name of the tribe's headquarters building. This unit needs to be defined in the ``buildings`` table too.
+--    **ferry**: The internal name of the tribe's ferry.
 --
 --    **port**: The internal name of the tribe's port building. This unit needs to be defined in the ``buildings`` table too.
+--
+--    **toolbar**: *Optional*. Replace the default toolbar images with these custom images. Example:
+--
+--    .. code-block:: lua
+--
+--       toolbar = {
+--          left_corner = dirname .. "images/atlanteans/toolbar_left_corner.png",
+--          left = dirname .. "images/atlanteans/toolbar_left.png", -- Will be tiled
+--          center = dirname .. "images/atlanteans/toolbar_center.png",
+--          right = dirname .. "images/atlanteans/toolbar_right.png", -- Will be tiled
+--          right_corner = dirname .. "images/atlanteans/toolbar_right_corner.png"
+--       }
+--
+
+image_dirname = path.dirname(__file__) .. "images/atlanteans/"
+
+animations = {}
+add_animation(animations, "frontier", image_dirname, "frontier", {3, 12})
+add_animation(animations, "flag", image_dirname, "flag", {15, 35}, 10)
+add_animation(animations, "bridge_normal_e", image_dirname, "bridge_normal_e", {-2, 11})
+add_animation(animations, "bridge_busy_e", image_dirname, "bridge_busy_e", {-2, 11})
+add_animation(animations, "bridge_normal_se", image_dirname, "bridge_normal_se", {5, 2})
+add_animation(animations, "bridge_busy_se", image_dirname, "bridge_busy_se", {5, 2})
+add_animation(animations, "bridge_normal_sw", image_dirname, "bridge_normal_sw", {36, 6})
+add_animation(animations, "bridge_busy_sw", image_dirname, "bridge_busy_sw", {36, 3})
+
 tribes:new_tribe {
    name = "atlanteans",
+   animations = animations,
 
-   animations = {
-      -- Some blue fires would be fine, but just an idea
-      frontier = {
-         pictures = path.list_files(dirname .. "images/atlanteans/frontier_??.png"),
-         hotspot = { 3, 12 },
-      },
-      flag = {
-         -- Not just a plain color, maybe a cross or some stripes
-         pictures = path.list_files(dirname .. "images/atlanteans/flag_??.png"),
-         hotspot = { 15, 35 },
-         fps = 10
-      }
-   },
+   bridge_height = 8,
 
-   -- Image file paths for this tribe's road textures
+   -- Image file paths for this tribe's road and waterway textures
    roads = {
       busy = {
-         "tribes/images/atlanteans/roadt_busy.png",
+         image_dirname .. "roadt_busy.png",
       },
       normal = {
-         "tribes/images/atlanteans/roadt_normal_00.png",
-         "tribes/images/atlanteans/roadt_normal_01.png",
+         image_dirname .. "roadt_normal_00.png",
+         image_dirname .. "roadt_normal_01.png",
+      },
+      waterway = {
+         "tribes/images/atlanteans/waterway_0.png",
+      },
+   },
+
+   resource_indicators = {
+      [""] = {
+         [0] = "atlanteans_resi_none",
+      },
+      coal = {
+         [10] = "atlanteans_resi_coal_1",
+         [20] = "atlanteans_resi_coal_2",
+      },
+      iron = {
+         [10] = "atlanteans_resi_iron_1",
+         [20] = "atlanteans_resi_iron_2",
+      },
+      gold = {
+         [10] = "atlanteans_resi_gold_1",
+         [20] = "atlanteans_resi_gold_2",
+      },
+      stones = {
+         [10] = "atlanteans_resi_stones_1",
+         [20] = "atlanteans_resi_stones_2",
+      },
+      water = {
+         [100] = "atlanteans_resi_water",
       },
    },
 
@@ -147,6 +193,7 @@ tribes:new_tribe {
       {
          -- Carriers
          "atlanteans_carrier",
+         "atlanteans_ferry",
          "atlanteans_horse",
          "atlanteans_horsebreeder"
       },
@@ -207,16 +254,16 @@ tribes:new_tribe {
       "cornfield_ripe",
       "cornfield_harvested",
       "destroyed_building",
-      "resi_coal1",
-      "resi_coal2",
-      "resi_gold1",
-      "resi_gold2",
-      "resi_iron1",
-      "resi_iron2",
-      "resi_none",
-      "resi_water1",
-      "resi_stones1",
-      "resi_stones2",
+      "atlanteans_resi_none",
+      "atlanteans_resi_water",
+      "atlanteans_resi_coal_1",
+      "atlanteans_resi_iron_1",
+      "atlanteans_resi_gold_1",
+      "atlanteans_resi_stones_1",
+      "atlanteans_resi_coal_2",
+      "atlanteans_resi_iron_2",
+      "atlanteans_resi_gold_2",
+      "atlanteans_resi_stones_2",
       "atlanteans_shipconstruction",
    },
 
@@ -248,7 +295,6 @@ tribes:new_tribe {
       "atlanteans_toolsmithy",
       "atlanteans_weaponsmithy",
       "atlanteans_armorsmithy",
-      "atlanteans_shipyard",
       "atlanteans_barracks",
 
       -- Big
@@ -275,6 +321,10 @@ tribes:new_tribe {
       "atlanteans_tower",
       "atlanteans_tower_high",
       "atlanteans_castle",
+
+      -- Seafaring/Ferry Sites - these are only displayed on seafaring/ferry maps
+      "atlanteans_ferry_yard",
+      "atlanteans_shipyard",
 
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",
@@ -349,11 +399,18 @@ tribes:new_tribe {
    geologist = "atlanteans_geologist",
    soldier = "atlanteans_soldier",
    ship = "atlanteans_ship",
-   headquarters = "atlanteans_headquarters",
+   ferry = "atlanteans_ferry",
    port = "atlanteans_port",
-   barracks = "atlanteans_barracks",
    ironore = "iron_ore",
    rawlog = "log",
    refinedlog = "planks",
    granite = "granite",
+
+   toolbar = {
+      left_corner = image_dirname .. "toolbar_left_corner.png",
+      left = image_dirname .. "toolbar_left.png",
+      center = image_dirname .. "toolbar_center.png",
+      right = image_dirname .. "toolbar_right.png",
+      right_corner = image_dirname .. "toolbar_right_corner.png"
+   }
 }

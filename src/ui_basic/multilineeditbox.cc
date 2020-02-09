@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,9 +22,10 @@
 #include <boost/bind.hpp>
 
 #include "base/utf8.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "graphic/wordwrap.h"
 #include "ui_basic/mouse_constants.h"
@@ -40,18 +41,18 @@ struct MultilineEditbox::Data {
 	/// The text in the edit box
 	std::string text;
 
-	/// Background tile style.
-	const Image* background;
+	/// Background color and texture + font style
+	const UI::TextPanelStyleInfo& style;
 
 	/// Position of the cursor inside the text.
 	/// 0 indicates that the cursor is before the first character,
 	/// text.size() inidicates that the cursor is after the last character.
 	uint32_t cursor_pos;
 
-	int lineheight;
+	const int lineheight;
 
 	/// Maximum length of the text string, in bytes
-	uint32_t maxbytes;
+	const uint32_t maxbytes;
 
 	/// Cached wrapping info; see @ref refresh_ww and @ref update
 	/*@{*/
@@ -59,7 +60,7 @@ struct MultilineEditbox::Data {
 	WordWrap ww;
 	/*@}*/
 
-	Data(MultilineEditbox&, const Image* init_background, const Image* button_background);
+	Data(MultilineEditbox&, const TextPanelStyleInfo& style);
 	void refresh_ww();
 
 	void update();
@@ -80,33 +81,28 @@ private:
 
 /**
  * Initialize an editbox that supports multiline strings.
-*/
-MultilineEditbox::MultilineEditbox(Panel* parent,
-                                   int32_t x,
-                                   int32_t y,
-                                   uint32_t w,
-                                   uint32_t h,
-                                   const std::string& text,
-                                   const Image* background,
-                                   const Image* button_background)
-   : Panel(parent, x, y, w, h), d_(new Data(*this, background, button_background)) {
-	d_->lineheight = text_height();
+ */
+MultilineEditbox::MultilineEditbox(
+   Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style)
+   : Panel(parent, x, y, w, h), d_(new Data(*this, g_gr->styles().editbox_style(style))) {
 	set_handle_mouse(true);
 	set_can_focus(true);
 	set_thinks(false);
 	set_handle_textinput();
-
-	set_text(text);
 }
 
-MultilineEditbox::Data::Data(MultilineEditbox& o,
-                             const Image* init_background,
-                             const Image* button_background)
-   : scrollbar(&o, o.get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, o.get_h(), button_background),
-     background(init_background),
+MultilineEditbox::Data::Data(MultilineEditbox& o, const UI::TextPanelStyleInfo& init_style)
+   : scrollbar(
+        &o, o.get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, o.get_h(), UI::PanelStyle::kWui),
+     style(init_style),
      cursor_pos(0),
-     maxbytes(std::min(g_gr->max_texture_size() / UI_FONT_SIZE_SMALL, 0xffff)),
+     lineheight(text_height(style.font())),
+     maxbytes(std::min(g_gr->max_texture_size_for_font_rendering() *
+                          g_gr->max_texture_size_for_font_rendering() /
+                          (text_height(style.font()) * text_height(style.font())),
+                       std::numeric_limits<int32_t>::max())),
      ww_valid(false),
+     ww(style.font().size(), style.font().color(), o.get_w()),
      owner(o) {
 	scrollbar.moved.connect(boost::bind(&MultilineEditbox::scrollpos_changed, &o, _1));
 
@@ -141,26 +137,11 @@ void MultilineEditbox::set_text(const std::string& text) {
 		d_->erase_bytes(d_->prev_char(d_->text.size()), d_->text.size());
 	}
 
-	d_->set_cursor_pos(d_->text.size());
-
+	d_->set_cursor_pos(0);
 	d_->update();
 	d_->scroll_cursor_into_view();
 
 	changed();
-}
-
-/**
- * Set the maximum number of bytes in the scrollbar text.
- *
- * This will shorten the currently stored text when necessary.
- */
-void MultilineEditbox::set_maximum_bytes(const uint32_t n) {
-	while (n < d_->text.size())
-		d_->erase_bytes(d_->prev_char(d_->text.size()), d_->text.size());
-	d_->maxbytes = n;
-
-	// do not need to update here, because erase() will
-	// update when necessary
 }
 
 /**
@@ -191,7 +172,7 @@ uint32_t MultilineEditbox::Data::prev_char(uint32_t cursor) {
 
 	do {
 		--cursor;
-		// TODO(GunChleoc): When switchover to g_fh1 is complete, see if we can go full ICU here.
+		// TODO(GunChleoc): See if we can go full ICU here.
 	} while (cursor > 0 && Utf8::is_utf8_extended(text[cursor]));
 
 	return cursor;
@@ -223,6 +204,17 @@ uint32_t MultilineEditbox::Data::snap_to_char(uint32_t cursor) {
 }
 
 /**
+ * The mouse was clicked on this editbox
+ */
+bool MultilineEditbox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
+	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
+		focus();
+		return true;
+	}
+	return false;
+}
+
+/**
  * This is called by the UI code whenever a key press or release arrives
  */
 bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
@@ -250,11 +242,6 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			break;
 
-		case SDLK_KP_4:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
 		case SDLK_LEFT: {
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				uint32_t newpos = d_->prev_char(d_->cursor_pos);
@@ -273,11 +260,6 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			break;
 		}
 
-		case SDLK_KP_6:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
 		case SDLK_RIGHT:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				uint32_t newpos = d_->next_char(d_->cursor_pos);
@@ -291,11 +273,6 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			break;
 
-		case SDLK_KP_2:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
 		case SDLK_DOWN:
 			if (d_->cursor_pos < d_->text.size()) {
 				d_->refresh_ww();
@@ -320,11 +297,6 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			break;
 
-		case SDLK_KP_8:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
 		case SDLK_UP:
 			if (d_->cursor_pos > 0) {
 				d_->refresh_ww();
@@ -347,11 +319,6 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			break;
 
-		case SDLK_KP_7:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
 		case SDLK_HOME:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				d_->set_cursor_pos(0);
@@ -365,11 +332,6 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			break;
 
-		case SDLK_KP_1:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
 		case SDLK_END:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				d_->set_cursor_pos(d_->text.size());
@@ -389,6 +351,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 			d_->insert(d_->cursor_pos, "\n");
+			d_->update();
 			changed();
 			break;
 
@@ -421,8 +384,7 @@ void MultilineEditbox::focus(bool topcaller) {
  * Redraw the Editbox
  */
 void MultilineEditbox::draw(RenderTarget& dst) {
-	// Draw the background
-	dst.tile(Recti(Vector2i::zero(), get_w(), get_h()), d_->background, Vector2i(get_x(), get_y()));
+	draw_background(dst, d_->style.background());
 
 	// Draw border.
 	if (get_w() >= 4 && get_h() >= 4) {
@@ -446,7 +408,6 @@ void MultilineEditbox::draw(RenderTarget& dst) {
 	d_->refresh_ww();
 
 	d_->ww.set_draw_caret(has_focus());
-
 	d_->ww.draw(dst, Vector2i(0, -int32_t(d_->scrollbar.get_scrollpos())), UI::Align::kLeft,
 	            has_focus() ? d_->cursor_pos : std::numeric_limits<uint32_t>::max());
 }

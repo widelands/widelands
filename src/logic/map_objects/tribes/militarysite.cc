@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,10 +30,9 @@
 #include "base/macros.h"
 #include "economy/flag.h"
 #include "economy/request.h"
-#include "graphic/text_constants.h"
 #include "logic/editor_game_base.h"
-#include "logic/findbob.h"
 #include "logic/game.h"
+#include "logic/map_objects/findbob.h"
 #include "logic/map_objects/tribes/battle.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -88,7 +87,7 @@ void MilitarySite::SoldierControl::set_soldier_capacity(uint32_t const capacity)
 }
 
 void MilitarySite::SoldierControl::drop_soldier(Soldier& soldier) {
-	Game& game = dynamic_cast<Game&>(military_site_->owner().egbase());
+	Game& game = dynamic_cast<Game&>(military_site_->get_owner()->egbase());
 
 	if (!military_site_->is_present(soldier)) {
 		// This can happen when the "drop soldier" player command is delayed
@@ -127,7 +126,8 @@ int MilitarySite::SoldierControl::incorporate_soldier(EditorGameBase& egbase, So
 	if (!military_site_->didconquer_) {
 		military_site_->conquer_area(egbase);
 		// Building is now occupied - idle animation should be played
-		military_site_->start_animation(egbase, military_site_->descr().get_animation("idle"));
+		military_site_->start_animation(
+		   egbase, military_site_->descr().get_animation("idle", military_site_));
 
 		if (upcast(Game, game, &egbase)) {
 			military_site_->send_message(
@@ -154,16 +154,17 @@ bool MilitarySite::AttackTarget::can_be_attacked() const {
 }
 
 void MilitarySite::AttackTarget::enemy_soldier_approaches(const Soldier& enemy) const {
-	auto& owner = military_site_->owner();
-	Game& game = dynamic_cast<Game&>(owner.egbase());
+	Player* owner = military_site_->get_owner();
+	Game& game = dynamic_cast<Game&>(owner->egbase());
 	const Map& map = game.map();
-	if (enemy.get_owner() == &owner || enemy.get_battle() ||
+	if (enemy.get_owner() == owner || enemy.get_battle() ||
 	    military_site_->descr().get_conquers() <=
 	       map.calc_distance(enemy.get_position(), military_site_->get_position()))
 		return;
 
-	if (map.find_bobs(Area<FCoords>(map.get_fcoords(military_site_->base_flag().get_position()), 2),
-	                  nullptr, FindBobEnemySoldier(&owner)))
+	if (map.find_bobs(game,
+	                  Area<FCoords>(map.get_fcoords(military_site_->base_flag().get_position()), 2),
+	                  nullptr, FindBobEnemySoldier(owner)))
 		return;
 
 	// We're dealing with a soldier that we might want to keep busy
@@ -191,7 +192,7 @@ void MilitarySite::AttackTarget::enemy_soldier_approaches(const Soldier& enemy) 
 }
 
 AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) const {
-	Game& game = dynamic_cast<Game&>(military_site_->owner().egbase());
+	Game& game = dynamic_cast<Game&>(military_site_->get_owner()->egbase());
 
 	std::vector<Soldier*> present = military_site_->soldier_control_.present_soldiers();
 	Soldier* defender = nullptr;
@@ -261,7 +262,7 @@ AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) co
 	// In fact we do not conquer it, but place a new building of same type at
 	// the old location.
 
-	Building::FormerBuildings former_buildings = military_site_->old_buildings_;
+	FormerBuildings former_buildings = military_site_->old_buildings_;
 
 	// The enemy conquers the building
 	// In fact we do not conquer it, but place a new building of same type at
@@ -271,7 +272,6 @@ AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) co
 	// Now we destroy the old building before we place the new one.
 	// Waiting for the destroy playercommand causes crashes with the building window, so we need to
 	// close it right away.
-	Notifications::publish(NoteBuilding(military_site_->serial(), NoteBuilding::Action::kDeleted));
 	military_site_->set_defeating_player(enemyplayer->player_number());
 	military_site_->schedule_destroy(game);
 
@@ -291,13 +291,13 @@ AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) co
 }
 
 /**
-  * The contents of 'table' are documented in
-  * /data/tribes/buildings/militarysites/atlanteans/castle/init.lua
-  */
+ * The contents of 'table' are documented in
+ * /data/tribes/buildings/militarysites/atlanteans/castle/init.lua
+ */
 MilitarySiteDescr::MilitarySiteDescr(const std::string& init_descname,
                                      const LuaTable& table,
-                                     const EditorGameBase& egbase)
-   : BuildingDescr(init_descname, MapObjectType::MILITARYSITE, table, egbase),
+                                     const Tribes& tribes)
+   : BuildingDescr(init_descname, MapObjectType::MILITARYSITE, table, tribes),
      conquer_radius_(0),
      num_soldiers_(0),
      heal_per_second_(0) {
@@ -308,7 +308,7 @@ MilitarySiteDescr::MilitarySiteDescr(const std::string& init_descname,
 	heal_per_second_ = table.get_int("heal_per_second");
 
 	if (conquer_radius_ > 0)
-		workarea_info_[conquer_radius_].insert(descname() + " conquer");
+		workarea_info_[conquer_radius_].insert(name() + " conquer");
 	prefers_heroes_at_start_ = table.get_bool("prefer_heroes");
 
 	std::unique_ptr<LuaTable> items_table = table.get_table("messages");
@@ -375,14 +375,16 @@ void MilitarySite::update_statistics_string(std::string* s) {
 			      stationed % (capacity_ - stationed))
 			        .str();
 		} else {
+			/** TRANSLATORS: Number of soldiers stationed at a militarysite. */
 			*s = (boost::format(ngettext("%u soldier", "%u soldiers", stationed)) % stationed).str();
 		}
 	} else {
 		if (capacity_ > stationed) {
-			/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
-			/** TRANSLATORS: %2% are currently open soldier slots in the building */
-			/** TRANSLATORS: %3% is the maximum number of soldier slots in the building */
+
 			*s = (boost::format(
+			         /** TRANSLATORS: %1% is the number of soldiers the plural refers to */
+			         /** TRANSLATORS: %2% are currently open soldier slots in the building */
+			         /** TRANSLATORS: %3% is the maximum number of soldier slots in the building */
 			         ngettext("%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", stationed)) %
 			      present % (stationed - present) % (capacity_ - stationed))
 			        .str();
@@ -394,10 +396,9 @@ void MilitarySite::update_statistics_string(std::string* s) {
 			        .str();
 		}
 	}
-	*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_OK.hex_value() %
-	      // Line break to make Codecheck happy.
-	      *s)
-	        .str();
+	*s = g_gr->styles().color_tag(
+	   // Line break to make Codecheck happy.
+	   *s, g_gr->styles().building_statistics_style().medium_color());
 }
 
 bool MilitarySite::init(EditorGameBase& egbase) {
@@ -428,12 +429,12 @@ Change the economy for the wares queues.
 Note that the workers are dealt with in the PlayerImmovable code.
 ===============
 */
-void MilitarySite::set_economy(Economy* const e) {
-	Building::set_economy(e);
+void MilitarySite::set_economy(Economy* const e, WareWorker type) {
+	Building::set_economy(e, type);
 
-	if (normal_soldier_request_ && e)
+	if (normal_soldier_request_ && e && type == normal_soldier_request_->get_type())
 		normal_soldier_request_->set_economy(e);
-	if (upgrade_soldier_request_ && e)
+	if (upgrade_soldier_request_ && e && type == upgrade_soldier_request_->get_type())
 		upgrade_soldier_request_->set_economy(e);
 }
 
@@ -519,7 +520,7 @@ bool MilitarySite::drop_least_suited_soldier(bool new_soldier_has_arrived, Soldi
 
 		// Now I know that the new guy is worthy.
 		if (nullptr != kickoutCandidate) {
-			Game& game = dynamic_cast<Game&>(owner().egbase());
+			Game& game = dynamic_cast<Game&>(get_owner()->egbase());
 			kickoutCandidate->reset_tasks(game);
 			kickoutCandidate->start_task_leavebuilding(game, true);
 			return true;
@@ -580,7 +581,7 @@ void MilitarySite::update_normal_soldier_request() {
 	}
 
 	if (capacity_ < present.size()) {
-		Game& game = dynamic_cast<Game&>(owner().egbase());
+		Game& game = dynamic_cast<Game&>(get_owner()->egbase());
 		for (uint32_t i = 0; i < present.size() - capacity_; ++i) {
 			Soldier& soldier = *present[i];
 			soldier.reset_tasks(game);
@@ -812,7 +813,7 @@ bool MilitarySite::get_building_work(Game& game, Worker& worker, bool) {
  * \return \c true if the soldier is currently present and idle in the building.
  */
 bool MilitarySite::is_present(Soldier& soldier) const {
-	return soldier.get_location(owner().egbase()) == this &&
+	return soldier.get_location(get_owner()->egbase()) == this &&
 	       soldier.get_state() == soldier.get_state(Worker::taskBuildingwork) &&
 	       soldier.get_position() == get_position();
 }
@@ -830,7 +831,7 @@ void MilitarySite::reinit_after_conqueration(Game& game) {
 	clear_requirements();
 	conquer_area(game);
 	update_soldier_request();
-	start_animation(game, descr().get_animation("idle"));
+	start_animation(game, descr().get_animation("idle", this));
 
 	// feature request 1247384 in launchpad bugs: Conquered buildings tend to
 	// be in a hostile area; typically players want heroes there.
@@ -844,7 +845,7 @@ bool MilitarySite::military_presence_kept(Game& game) {
 
 	// Search in a radius of 3 (needed for big militarysites)
 	FCoords const fc = game.map().get_fcoords(get_position());
-	game.map().find_immovables(Area<FCoords>(fc, 3), &immovables);
+	game.map().find_immovables(game, Area<FCoords>(fc, 3), &immovables);
 
 	for (uint32_t i = 0; i < immovables.size(); ++i)
 		if (upcast(MilitarySite const, militarysite, immovables[i].object))
@@ -883,10 +884,19 @@ void MilitarySite::clear_requirements() {
 }
 
 void MilitarySite::send_attacker(Soldier& soldier, Building& target) {
-	assert(is_present(soldier));
-
-	if (has_soldier_job(soldier))
+	if (!is_present(soldier)) {
+		// The soldier may not be present anymore due to having been kicked out. Most of the time
+		// the function calling us will notice this, but there are cornercase where it might not,
+		// e.g. when a soldier was ordered to leave but did not physically quit the building yet.
+		log("MilitarySite(%3dx%3d)::send_attacker: Not sending soldier %u because he left the "
+		    "building\n",
+		    get_position().x, get_position().y, soldier.serial());
 		return;
+	}
+
+	if (has_soldier_job(soldier)) {
+		return;
+	}
 
 	SoldierJob sj;
 	sj.soldier = &soldier;
@@ -894,7 +904,7 @@ void MilitarySite::send_attacker(Soldier& soldier, Building& target) {
 	sj.stayhome = false;
 	soldierjobs_.push_back(sj);
 
-	soldier.update_task_buildingwork(dynamic_cast<Game&>(owner().egbase()));
+	soldier.update_task_buildingwork(dynamic_cast<Game&>(get_owner()->egbase()));
 }
 
 bool MilitarySite::has_soldier_job(Soldier& soldier) {
@@ -973,10 +983,18 @@ bool MilitarySite::update_upgrade_requirements() {
 	return false;
 }
 
+const BuildingSettings* MilitarySite::create_building_settings() const {
+	MilitarysiteSettings* settings = new MilitarysiteSettings(descr());
+	settings->desired_capacity =
+	   std::min(settings->max_capacity, soldier_control_.soldier_capacity());
+	settings->prefer_heroes = soldier_preference_ == SoldierPreference::kHeroes;
+	return settings;
+}
+
 // setters
 
 void MilitarySite::set_soldier_preference(SoldierPreference p) {
 	soldier_preference_ = p;
 	next_swap_soldiers_time_ = 0;
 }
-}
+}  // namespace Widelands

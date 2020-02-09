@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,6 @@
 
 #include "economy/input_queue.h"
 #include "logic/map_objects/immovable.h"
-#include "logic/widelands.h"
 
 namespace Widelands {
 
@@ -68,6 +67,6 @@ protected:
 	/// Number of items that are currently in the queue
 	Quantity filled_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_WARES_QUEUE_H

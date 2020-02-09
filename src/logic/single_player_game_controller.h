@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2017 by the Widelands Development Team
+ * Copyright (C) 2015-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,10 +27,10 @@
 class SinglePlayerGameController : public GameController {
 public:
 	SinglePlayerGameController(Widelands::Game&, bool useai, Widelands::PlayerNumber local);
-	~SinglePlayerGameController();
+	~SinglePlayerGameController() override;
 
 	void think() override;
-	void send_player_command(Widelands::PlayerCommand&) override;
+	void send_player_command(Widelands::PlayerCommand*) override;
 	int32_t get_frametime() override;
 	GameController::GameType get_game_type() override;
 	uint32_t real_speed() override;

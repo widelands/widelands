@@ -19,22 +19,37 @@ tribes:new_productionsite_type {
    },
 
    animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
+      unoccupied = {
+         directory = dirname,
+         basename = "unoccupied",
          hotspot = { 52, 64 },
+      }
+   },
+   spritesheets = {
+      idle = {
+         directory = dirname,
+         basename = "idle",
+         frames = 20,
+         columns = 4,
+         rows = 5,
+         hotspot = { 50, 65 }
       },
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 52, 64 },
+         directory = dirname,
+         basename = "build",
+         frames = 4,
+         columns = 2,
+         rows = 2,
+         hotspot = { 50, 61 }
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
-         hotspot = { 52, 64 },
-      },
-      unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
-         hotspot = { 52, 64 },
-      },
+         directory = dirname,
+         basename = "working",
+         frames = 20,
+         columns = 4,
+         rows = 5,
+         hotspot = { 53, 65 }
+      }
    },
 
    aihints = {
@@ -59,10 +74,10 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start hardening wood because ...
          descname = _"hardening wood",
          actions = {
-            "sleep=43000",
             "return=skipped unless economy needs blackwood",
             "consume=log:2",
-            "play_sound=sound/barbarians blackwood 80",
+            "sleep=43000",
+            "playsound=sound/barbarians/blackwood 80",
             "animate=working 24000",
             "produce=blackwood"
          }

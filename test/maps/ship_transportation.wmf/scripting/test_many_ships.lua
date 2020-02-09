@@ -22,7 +22,7 @@ run(function()
         sleep(2000)
         end
 
-  stable_save("20_ships")
+  stable_save(game, "20_ships")
 
    i = 0
    while i < 10 do

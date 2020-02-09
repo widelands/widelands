@@ -1,0 +1,10 @@
+# Automatically created by Widelands bzr8766[widelands] (Release)
+
+[global]
+packet_version="1"
+number_of_port_spaces="3"
+
+[port_spaces]
+0="210 10"
+1="203 20"
+2="22 109"

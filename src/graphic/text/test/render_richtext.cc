@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -144,7 +144,7 @@ int main(int argc, char** argv) {
 		std::unique_ptr<Texture> texture(
 		   new Texture(rendered_text->width(), rendered_text->height()));
 		std::unique_ptr<RenderTarget> dst(new RenderTarget(texture.get()));
-		rendered_text->draw(*dst.get(), Vector2i::zero());
+		rendered_text->draw(*dst, Vector2i::zero());
 
 		std::unique_ptr<FileSystem> fs(&FileSystem::create("."));
 		std::unique_ptr<StreamWrite> sw(fs->open_stream_write(outname));

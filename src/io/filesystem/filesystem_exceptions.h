@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -76,16 +76,4 @@ public:
 	}
 };
 
-/**
- * The directory cannot be created
- */
-class DirectoryCannotCreateError : public FileError {
-public:
-	explicit DirectoryCannotCreateError(const std::string& thrower,
-	                                    const std::string& dirname,
-	                                    const std::string& message = "cannot create directory")
-
-	   : FileError(thrower, dirname, message) {
-	}
-};
 #endif  // end of include guard: WL_IO_FILESYSTEM_FILESYSTEM_EXCEPTIONS_H

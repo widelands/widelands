@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2017 by the Widelands Development Team
+ * Copyright (C) 2016-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,34 +45,36 @@ struct NoteDropdown {
 	}
 };
 
-/// The narrow textual dropdown omits the extra push button
-enum class DropdownType { kTextual, kTextualNarrow, kPictorial };
+/// The narrow textual dropdown omits the extra push button.
+/// Use kPictorialMenu if you want to trigger an action without changing the menu button.
+enum class DropdownType { kTextual, kTextualNarrow, kPictorial, kPictorialMenu };
 
 /// Implementation for a dropdown menu that lets the user select a value.
-class BaseDropdown : public Panel {
+class BaseDropdown : public NamedPanel {
 protected:
 	/// \param parent             the parent panel
+	/// \param name               a name so that we can reference the dropdown via Lua
 	/// \param x                  the x-position within 'parent'
 	/// \param y                  the y-position within 'parent'
 	/// \param list_w             the dropdown's width
-	/// \param list_h             the maximum height for the dropdown list
-	/// \param button_dimension   the width of the push button in textual dropdowns. For pictorial
-	/// dropdowns, this is both the width and the height of the button.
+	/// \param max_list_items     the maximum number of items shown in the list before it starts
+	/// using a scrollbar \param button_dimension   the width of the push button in textual
+	/// dropdowns. For pictorial dropdowns, this is both the width and the height of the button.
 	/// \param label              a label to prefix to the selected entry on the display button.
 	/// \param type               whether this is a textual or pictorial dropdown
-	/// \param background         the background image for this dropdown
-	/// \param button_background  the background image all buttons in this dropdown
+	/// \param style              the style used for buttons and background
 	BaseDropdown(Panel* parent,
+	             const std::string& name,
 	             int32_t x,
 	             int32_t y,
 	             uint32_t list_w,
-	             uint32_t list_h,
+	             uint32_t max_list_items,
 	             int button_dimension,
 	             const std::string& label,
 	             const DropdownType type,
-	             const Image* background,
-	             const Image* button_background);
-	~BaseDropdown();
+	             PanelStyle style,
+	             ButtonStyle button_style);
+	~BaseDropdown() override;
 
 public:
 	/// An entry was selected
@@ -123,7 +125,25 @@ public:
 	/// Handle keypresses
 	bool handle_key(bool down, SDL_Keysym code) override;
 
+	/// Set maximum available height in the UI
 	void set_height(int height);
+
+	/// Toggle the list on and off and position the mouse on the button so that the dropdown won't
+	/// close on us. If this is a menu and nothing was selected yet, select the first item for easier
+	/// keyboard navigation.
+	void toggle();
+
+	/// If 'open', show the list and position the mouse on the button so that the dropdown won't
+	/// close on us. If this is a menu and nothing was selected yet, select the first item for easier
+	/// keyboard navigation. If not 'open', close the list.
+	void set_list_visibility(bool open);
+
+	void set_size(int nw, int nh) override;
+	void set_desired_size(int w, int h) override;
+
+	/// Expand display button to make enough room for each entry's text. Call this before adding any
+	/// entries.
+	void set_autoexpand_display_button();
 
 protected:
 	/// Add an element to the list
@@ -132,11 +152,15 @@ protected:
 	/// \param pic          an image to illustrate the entry. Can be nullptr for textual dropdowns.
 	/// \param select_this  whether this element should be selected
 	/// \param tooltip_text a tooltip for this entry
+	/// \param hotkey       a hotkey tip if any
+	///
+	/// Text conventions: Title Case for the 'name', Sentence case for the 'tooltip_text'
 	void add(const std::string& name,
 	         uint32_t value,
-	         const Image* pic = nullptr,
-	         const bool select_this = false,
-	         const std::string& tooltip_text = std::string());
+	         const Image* pic,
+	         const bool select_this,
+	         const std::string& tooltip_text,
+	         const std::string& hotkey);
 
 	/// \return the index of the selected element
 	uint32_t get_selected() const;
@@ -152,6 +176,7 @@ protected:
 	void think() override;
 
 private:
+	static void layout_if_alive(int);
 	void layout() override;
 
 	/// Updates the buttons
@@ -159,7 +184,8 @@ private:
 
 	/// Updates the title and tooltip of the display button and triggers a 'selected' signal.
 	void set_value();
-	/// Toggles the dropdown list on and off.
+	/// Toggles the dropdown list on and off and sends a notification if the list is visible
+	/// afterwards.
 	void toggle_list();
 	/// Toggle the list closed if the dropdown is currently expanded.
 	void close();
@@ -170,14 +196,16 @@ private:
 	/// Give each dropdown a unique ID
 	static int next_id_;
 	const int id_;
-	std::unique_ptr<Notifications::Subscriber<NoteDropdown>> subscriber_;
+	std::unique_ptr<Notifications::Subscriber<NoteDropdown>> dropdown_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
+	   graphic_resolution_changed_subscriber_;
 
 	// Dimensions
-	int max_list_height_;
-	int list_width_;
+	unsigned int max_list_items_;
+	unsigned int max_list_height_;
 	int list_offset_x_;
 	int list_offset_y_;
-	int button_dimension_;
+	const int base_height_;
 	const int mouse_tolerance_;  // Allow mouse outside the panel a bit before autocollapse
 	UI::Box button_box_;
 	UI::Button* push_button_;  // Only used in textual dropdowns
@@ -190,42 +218,47 @@ private:
 	uint32_t current_selection_;
 	DropdownType type_;
 	bool is_enabled_;
+	ButtonStyle button_style_;
+	bool autoexpand_display_button_;
 };
 
 /// A dropdown menu that lets the user select a value of the datatype 'Entry'.
 template <typename Entry> class Dropdown : public BaseDropdown {
 public:
 	/// \param parent             the parent panel
+	/// \param name               a name so that we can reference the dropdown via Lua
 	/// \param x                  the x-position within 'parent'
 	/// \param y                  the y-position within 'parent'
 	/// \param list_w             the dropdown's width
-	/// \param list_h             the maximum height for the dropdown list
-	/// \param button_dimension   the width of the push button in textual dropdowns. For pictorial
-	/// dropdowns, this is both the width and the height of the button.
+	/// \param max_list_items     the maximum number of items shown in the list before it starts
+	/// using a scrollbar \param button_dimension   the width of the push button in textual
+	/// dropdowns. For pictorial dropdowns, this is both the width and the height of the button.
 	/// \param label              a label to prefix to the selected entry on the display button.
 	/// \param type               whether this is a textual or pictorial dropdown
-	/// \param background         the background image for this dropdown
-	/// \param button_background  the background image all buttons in this dropdown
+	/// \param style              the style used for buttons and background
+	/// Text conventions: Title Case for all elements
 	Dropdown(Panel* parent,
+	         const std::string& name,
 	         int32_t x,
 	         int32_t y,
 	         uint32_t list_w,
-	         uint32_t list_h,
+	         uint32_t max_list_items,
 	         int button_dimension,
 	         const std::string& label,
-	         const DropdownType type = DropdownType::kTextual,
-	         const Image* background = g_gr->images().get("images/ui_basic/but1.png"),
-	         const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"))
+	         const DropdownType type,
+	         PanelStyle style,
+	         ButtonStyle button_style)
 	   : BaseDropdown(parent,
+	                  name,
 	                  x,
 	                  y,
 	                  list_w,
-	                  list_h,
+	                  max_list_items,
 	                  button_dimension,
 	                  label,
 	                  type,
-	                  background,
-	                  button_background) {
+	                  style,
+	                  button_style) {
 	}
 	~Dropdown() {
 		entry_cache_.clear();
@@ -238,13 +271,15 @@ public:
 	/// only.
 	/// \param select_this  whether this element should be selected
 	/// \param tooltip_text a tooltip for this entry
+	/// \param hotkey       a hotkey tip if any
 	void add(const std::string& name,
 	         Entry value,
 	         const Image* pic = nullptr,
 	         const bool select_this = false,
-	         const std::string& tooltip_text = std::string()) {
+	         const std::string& tooltip_text = std::string(),
+	         const std::string& hotkey = std::string()) {
 		entry_cache_.push_back(std::unique_ptr<Entry>(new Entry(value)));
-		BaseDropdown::add(name, size(), pic, select_this, tooltip_text);
+		BaseDropdown::add(name, size(), pic, select_this, tooltip_text, hotkey);
 	}
 
 	/// \return the selected element

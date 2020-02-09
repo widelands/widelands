@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,7 @@
 #include <boost/signals2.hpp>
 
 #include "graphic/color.h"
-#include "graphic/text_layout.h"
+#include "graphic/styles/button_style.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
@@ -48,7 +48,7 @@ inline ButtonDisableStyle operator|(ButtonDisableStyle a, ButtonDisableStyle b) 
 /// This is all that is needed in most cases, but if there is a need to give a
 /// callback function to the button, there are some templates for that below.
 struct Button : public NamedPanel {
-	enum class Style {
+	enum class VisualState {
 		kRaised,       // Normal raised Button
 		kPermpressed,  // Button will appear pressed
 		kFlat          // Flat button with simple coloured outline
@@ -59,6 +59,25 @@ struct Button : public NamedPanel {
 		kUnscaled  // Show the foreground image without any scaling
 	};
 
+private:
+	Button  // Common constructor
+	   (Panel* const parent,
+	    const std::string& name,
+	    int32_t const x,
+	    int32_t const y,
+	    uint32_t const w,
+	    uint32_t const h,
+	    UI::ButtonStyle style,
+	    const Image* title_image,
+	    const std::string& title_text,
+	    const std::string& tooltip_text,
+	    UI::Button::VisualState state,
+	    UI::Button::ImageMode mode);
+
+public:
+	/**
+	 * Text conventions: Title Case for the 'title_text', Sentence case for the 'tooltip_text'
+	 */
 	Button  /// for textual buttons
 	   (Panel* const parent,
 	    const std::string& name,
@@ -66,11 +85,14 @@ struct Button : public NamedPanel {
 	    int32_t const y,
 	    uint32_t const w,
 	    uint32_t const h,
-	    const Image* background_picture_id,
+	    UI::ButtonStyle style,
 	    const std::string& title_text,
 	    const std::string& tooltip_text = std::string(),
-	    UI::Button::Style init_style = UI::Button::Style::kRaised);
+	    UI::Button::VisualState state = UI::Button::VisualState::kRaised);
 
+	/**
+	 * Text conventions: Sentence case for the 'tooltip_text'
+	 */
 	Button  /// for pictorial buttons
 	   (Panel* const parent,
 	    const std::string& name,
@@ -78,12 +100,12 @@ struct Button : public NamedPanel {
 	    const int32_t y,
 	    const uint32_t w,
 	    const uint32_t h,
-	    const Image* background_picture_id,
-	    const Image* foreground_picture_id,
+	    UI::ButtonStyle style,
+	    const Image* title_image,
 	    const std::string& tooltip_text = std::string(),
-	    UI::Button::Style init_style = UI::Button::Style::kRaised,
+	    UI::Button::VisualState state = UI::Button::VisualState::kRaised,
 	    UI::Button::ImageMode mode = UI::Button::ImageMode::kShrink);
-	~Button();
+	~Button() override;
 
 	void set_pic(const Image* pic);
 	void set_title(const std::string&);
@@ -112,9 +134,9 @@ struct Button : public NamedPanel {
 	bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override;
 
 	/// Sets the visual style of the button
-	void set_style(UI::Button::Style input_style);
-	UI::Button::Style style() const {
-		return style_;
+	void set_visual_state(UI::Button::VisualState state);
+	UI::Button::VisualState style() const {
+		return visual_state_;
 	}
 
 	/// Sets the visual style of the disabled button
@@ -122,6 +144,9 @@ struct Button : public NamedPanel {
 
 	/// Convenience function. If 'pressed', sets the style to kPermpressed, otherwise to kRaised.
 	void set_perm_pressed(bool pressed);
+
+	/// Change the background style of the button.
+	void set_style(UI::ButtonStyle bstyle);
 
 	/// Convenience function. Toggles between raised and permpressed style
 	void toggle();
@@ -131,25 +156,20 @@ struct Button : public NamedPanel {
 	boost::signals2::signal<void()> sigmouseout;
 
 protected:
-	virtual void clicked() {
-	}  /// Override this to react on the click.
-
 	bool highlighted_;  //  mouse is over the button
 	bool pressed_;      //  mouse is clicked over the button
 	bool enabled_;
-	UI::Button::Style style_;
+	UI::Button::VisualState visual_state_;
 	UI::ButtonDisableStyle disable_style_;
 	bool repeating_;
 	const UI::Button::ImageMode image_mode_;
 
 	uint32_t time_nextact_;
 
-	std::string title_;  //  title string used when pic_custom_ == 0
+	std::string title_;         //  title string used when title_image_ == nullptr
+	const Image* title_image_;  //  custom icon on the button
 
-	const Image* pic_background_;  //  background texture (picture ID)
-	const Image* pic_custom_;      //  custom icon on the button
-
-	RGBColor clr_down_;  //  color of border while a flat button is "down"
+	const UI::ButtonStyleInfo* style_;  // Background color and texture. Not owned.
 };
 
 }  // namespace UI

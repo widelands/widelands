@@ -12,13 +12,13 @@ function building_helptext_lore_author()
 end
 
 function building_helptext_purpose()
- -- TRANSLATORS: Purpose helptext for a building
+   -- TRANSLATORS: Purpose helptext for a building
    return pgettext("atlanteans_building", "Grinds blackroots and corn to produce blackroot flour and cornmeal, respectively.")
 end
 
 function building_helptext_note()
    -- TRANSLATORS#: Note helptext for a building
-   return ""
+   return pgettext("atlanteans_building", "When no cornmeal is required, the mill will try to produce blackroot flour even when there is no demand for it.")
 end
 
 function building_helptext_performance()

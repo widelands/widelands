@@ -2,8 +2,7 @@
 -- Some formating functions
 -- =========================
 
-include "scripting/formatting.lua"
-include "scripting/format_scenario.lua"
+include "scripting/richtext_scenarios.lua"
 
 function lutius(title, text)
    return speech("map:Lutius.png", "2F9131", title, text)
@@ -28,7 +27,7 @@ obj_build_blockhouse = {
    title=_"Build a blockhouse",
    number = 1,
    body = objective_text(_"Blockhouse",
-      listitem_bullet(_[[Build a blockhouse at the red house symbol on the east side of the forests, to the right of your provisional headquarters.]])
+      li(_[[Build a blockhouse at the red house symbol on the east side of the forests, to the right of your provisional headquarters.]])
    ),
 }
 
@@ -37,7 +36,7 @@ obj_build_lumberjack = {
    title=_"Build a lumberjack’s house",
    number = 1,
    body = objective_text(_"Lumberjack’s House",
-      listitem_bullet(_[[Build a lumberjack’s house at the red house symbol, south of your provisional headquarters.]])
+      li(_[[Build a lumberjack’s house at the red house symbol, south of your provisional headquarters.]])
    ),
 }
 
@@ -46,7 +45,7 @@ obj_build_sawmill_and_lumberjacks = {
    title=_"Build 2 lumberjack’s houses and a sawmill",
    number = 3,
    body = objective_text(_"Two Lumberjack’s Houses and a Sawmill",
-      listitem_bullet(_[[Build two more lumberjack’s houses and a sawmill as soon as there is enough space for them.]])
+      li(_[[Build two more lumberjack’s houses and a sawmill as soon as there is enough space for them.]])
    ),
 }
 
@@ -55,7 +54,7 @@ obj_build_forester = {
    title=_"Build a forester’s house",
    number = 1,
    body = objective_text(_"Forester’s House",
-      listitem_bullet(_[[Build a forester’s house to preserve the wood resources of this island.]])
+      li(_[[Build a forester’s house to preserve the wood resources of this island.]])
    ),
 }
 
@@ -64,8 +63,8 @@ obj_build_quarry = {
    title=_"Build a quarry",
    number = 5,
    body = objective_text(_"Quarry",
-      listitem_bullet(_[[Build a quarry in the south to cut some granite and marble out of the rocks.]]) ..
-      listitem_arrow(_[[These might be used for future buildings.]])
+      li(_[[Build a quarry in the south to cut some granite and marble out of the rocks.]]) ..
+      li_arrow(_[[These might be used for future buildings.]])
    ),
 }
 

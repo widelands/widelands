@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,32 +30,7 @@
 #include "base/i18n.h"
 #include "io/filesystem/filesystem.h"
 #include "logic/map.h"
-
-/**
- * Author data for a map or scenario.
- */
-struct MapAuthorData {
-	const std::string& get_names() const {
-		return names_;
-	}
-	size_t get_number() const {
-		return number_;
-	}
-
-	// Parses author list string into localized contatenated list
-	// string. Use , as list separator and no whitespaces between
-	// author names.
-	MapAuthorData(const std::string& author_list) {
-		std::vector<std::string> authors;
-		boost::split(authors, author_list, boost::is_any_of(","));
-		names_ = i18n::localize_list(authors, i18n::ConcatenateWith::AMPERSAND);
-		number_ = authors.size();
-	}
-
-private:
-	std::string names_;
-	size_t number_;
-};
+#include "wui/mapauthordata.h"
 
 /**
  * Data about a map that we're interested in.
@@ -109,7 +84,7 @@ public:
 	uint32_t nrplayers;
 	uint32_t width;
 	uint32_t height;
-	std::vector<Widelands::Map::SuggestedTeamLineup> suggested_teams;
+	std::vector<Widelands::SuggestedTeamLineup> suggested_teams;
 	std::set<std::string> tags;
 	MapData::MapType maptype;
 	MapData::DisplayType displaytype;

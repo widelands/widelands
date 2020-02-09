@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,11 +22,11 @@
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/format.hpp>
 
+#include "io/profile.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "logic/map_objects/world/world.h"
-#include "profile/profile.h"
 
 namespace Widelands {
 
@@ -62,7 +62,14 @@ void MapPlayerNamesAndTribesPacket::pre_read(FileSystem& fs, Map* const map, boo
 			iterate_player_numbers(p, nr_players) {
 				Section& s = prof.get_safe_section(
 				   (boost::format("player_%u") % static_cast<unsigned int>(p)).str());
-				map->set_scenario_player_name(p, s.get_string("name", ""));
+
+				// Replace empty or standard player names with localized standard player name
+				std::string player_name = s.get_string("name", "");
+				if (player_name.empty() ||
+				    player_name == (boost::format("Player %u") % static_cast<unsigned int>(p)).str()) {
+					player_name = (boost::format(_("Player %u")) % static_cast<unsigned int>(p)).str();
+				}
+				map->set_scenario_player_name(p, player_name);
 				map->set_scenario_player_tribe(p, s.get_string("tribe", ""));
 				map->set_scenario_player_ai(p, s.get_string("ai", ""));
 				map->set_scenario_player_closeable(p, s.get_bool("closeable", false));
@@ -90,8 +97,10 @@ void MapPlayerNamesAndTribesPacket::write(FileSystem& fs, EditorGameBase& egbase
 		// Make sure that no player name is empty, and trim leading/trailing whitespaces.
 		std::string player_name = map.get_scenario_player_name(p);
 		boost::trim(player_name);
-		if (player_name.empty()) {
-			player_name = (boost::format(_("Player %u")) % static_cast<unsigned int>(p)).str();
+
+		// Save default player names as empty
+		if (player_name == (boost::format(_("Player %u")) % static_cast<unsigned int>(p)).str()) {
+			player_name = "";
 		}
 
 		Section& s = prof.create_section(section_key.c_str());
@@ -103,4 +112,4 @@ void MapPlayerNamesAndTribesPacket::write(FileSystem& fs, EditorGameBase& egbase
 
 	prof.write("player_names", false, fs);
 }
-}
+}  // namespace Widelands

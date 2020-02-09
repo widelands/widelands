@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -78,7 +78,7 @@ struct MapGenerator {
 
 private:
 	void generate_bobs(std::unique_ptr<uint32_t[]> const* random_bobs,
-	                   Coords,
+	                   const Coords&,
 	                   RNG&,
 	                   MapGenAreaInfo::MapGenTerrainType terrType);
 
@@ -88,7 +88,7 @@ private:
 	                        uint32_t const* const random4,
 	                        const FCoords& fc);
 
-	uint8_t make_node_elevation(double elevation, Coords);
+	uint8_t make_node_elevation(double elevation, const Coords&);
 
 	static uint32_t* generate_random_value_map(uint32_t w, uint32_t h, RNG& rng);
 
@@ -109,6 +109,6 @@ private:
 	const UniqueRandomMapInfo& map_info_;
 	EditorGameBase& egbase_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_EDITOR_MAP_GENERATOR_H

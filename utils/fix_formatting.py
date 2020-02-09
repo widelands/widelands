@@ -12,7 +12,6 @@ end of files and whitespace characters at the end of lines.
 
 After fixing the Lua tabs, this script also executes clang-format over the src
 directory and pyformat over the utils directory.
-
 """
 
 import argparse
@@ -41,6 +40,16 @@ def main():
         print('CWD is not the root of the repository.')
         return 1
 
+    sys.stdout.write('\nFormatting C++ ')
+    for filename in find_files('./src', ['.cc', '.h']):
+        if 'third_party' in filename:
+            continue
+        sys.stdout.write('.')
+        sys.stdout.flush()
+        call(['clang-format', '-i', filename])
+        call(['git', 'add', '--renormalize', filename])
+    print(' done.')
+
     sys.stdout.write('Fixing Lua tabs ')
     for filename in find_files('.', ['.lua']):
         sys.stdout.write('.')
@@ -54,15 +63,7 @@ def main():
                     SPACES_PER_TAB) + line[m.end():]
             new_lines.append(line.rstrip() + '\n')
         write_text_file(filename, ''.join(new_lines))
-    print(' done.')
-
-    sys.stdout.write('\nFormatting C++ ')
-    for filename in find_files('./src', ['.cc', '.h']):
-        if 'third_party' in filename:
-            continue
-        sys.stdout.write('.')
-        sys.stdout.flush()
-        call(['clang-format', '-i', filename])
+        call(['git', 'add', '--renormalize', filename])
     print(' done.')
 
     sys.stdout.write('\nFormatting Python utils ')
@@ -70,10 +71,12 @@ def main():
         sys.stdout.write('.')
         sys.stdout.flush()
         call(['pyformat', '-i', filename])
+        call(['git', 'add', '--renormalize', filename])
     print(' done.')
 
-    print 'Formatting finished.'
+    print('Formatting finished.')
     return 0
+
 
 if __name__ == '__main__':
     sys.exit(main())

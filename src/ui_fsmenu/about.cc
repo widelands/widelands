@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2017 by the Widelands Development Team
+ * Copyright (C) 2016-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,14 +22,19 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "graphic/graphic.h"
 
 FullscreenMenuAbout::FullscreenMenuAbout()
    : FullscreenMenuBase(),
-     title_(this, 0, 0, _("About Widelands"), UI::Align::kCenter),
-     close_(this, "close", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but2.png"), _("Close")),
-     tabs_(this, g_gr->images().get("images/ui_basic/but1.png"), UI::TabPanel::Type::kBorder) {
-	title_.set_fontsize(UI_FONT_SIZE_BIG);
+     title_(this,
+            0,
+            0,
+            0,
+            0,
+            _("About Widelands"),
+            UI::Align::kCenter,
+            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+     close_(this, "close", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Close")),
+     tabs_(this, UI::PanelStyle::kFsMenu, UI::TabPanelStyle::kFsMenu) {
 	tabs_.add_tab("txts/README.lua");
 	tabs_.add_tab("txts/LICENSE.lua");
 	tabs_.add_tab("txts/AUTHORS.lua");

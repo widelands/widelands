@@ -37,7 +37,7 @@ tribes:new_trainingsite_type {
    },
 
    aihints = {
-      trainingsites_max_percent = 20,
+      trainingsites_max_percent = 10,
       prohibited_till = 900,
       very_weak_ai_limit = 1,
       weak_ai_limit = 2
@@ -72,17 +72,19 @@ tribes:new_trainingsite_type {
          descname = _"sleeping",
          actions = {
             "sleep=5000",
-            "check_soldier=soldier attack 9", -- dummy check to get sleep rated as skipped - else it will change statistics
+            "return=no_stats",
          }
       },
       upgrade_soldier_evade_0 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("empire_building", "upgrading soldier evade from level 0 to level 1"),
          actions = {
-            "check_soldier=soldier evade 0", -- Fails when aren't any soldier of level 0 evade
+            "checksoldier=soldier evade 0", -- Fails when aren't any soldier of level 0 evade
+            "return=failed unless site has empire_bread",
+            "return=failed unless site has fish,meat",
             "sleep=30000",
-            "check_soldier=soldier evade 0", -- Because the soldier can be expelled by the player
-            "consume=empire_bread:2 fish,meat",
+            "checksoldier=soldier evade 0", -- Because the soldier can be expelled by the player
+            "consume=empire_bread fish,meat",
             "train=soldier evade 0 1"
          }
       },

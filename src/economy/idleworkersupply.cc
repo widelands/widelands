@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,7 +36,7 @@ namespace Widelands {
  * Automatically register with the worker's economy.
  */
 IdleWorkerSupply::IdleWorkerSupply(Worker& w) : worker_(w), economy_(nullptr) {
-	set_economy(w.get_economy());
+	set_economy(w.get_economy(wwWORKER));
 }
 
 /**
@@ -119,4 +119,4 @@ void IdleWorkerSupply::send_to_storage(Game& game, Warehouse* wh) {
 	t->set_destination(*wh);
 	worker_.start_task_transfer(game, t);
 }
-}
+}  // namespace Widelands

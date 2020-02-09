@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2017 by the Widelands Development Team
+ * Copyright (C) 2003-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,7 @@
 namespace UI {
 /**
  * Initialize an empty box
-*/
+ */
 Box::Box(Panel* const parent,
          int32_t const x,
          int32_t const y,
@@ -88,6 +88,12 @@ void Box::set_inner_spacing(uint32_t size) {
 	inner_spacing_ = size;
 }
 
+void Box::set_max_size(int w, int h) {
+	max_x_ = w;
+	max_y_ = h;
+	set_desired_size(w, h);
+}
+
 /**
  * Compute the desired size based on our children. This assumes that the
  * infinite space is zero, and is later on also re-used to calculate the
@@ -127,6 +133,21 @@ void Box::update_desired_size() {
 	//  desired size, we were typically called because of a child window that
 	//  changed, and we need to relayout that.
 	layout();
+}
+
+bool Box::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
+	if (scrollbar_) {
+		assert(scrolling_);
+		return scrollbar_->handle_mousewheel(which, x, y);
+	}
+	return Panel::handle_mousewheel(which, x, y);
+}
+bool Box::handle_key(bool down, SDL_Keysym code) {
+	if (scrollbar_) {
+		assert(scrolling_);
+		return scrollbar_->handle_key(down, code);
+	}
+	return Panel::handle_key(down, code);
 }
 
 /**
@@ -174,9 +195,9 @@ void Box::layout() {
 			pagesize = get_inner_h() - Scrollbar::kSize;
 		}
 		if (scrollbar_ == nullptr) {
-			scrollbar_.reset(new Scrollbar(this, sb_x, sb_y, sb_w, sb_h,
-			                               g_gr->images().get("images/ui_basic/but3.png"),
-			                               orientation_ == Horizontal));
+			// TODO(GunChleoc): Implement styling if we ever use the scrollbar function.
+			scrollbar_.reset(new Scrollbar(
+			   this, sb_x, sb_y, sb_w, sb_h, UI::PanelStyle::kFsMenu, orientation_ == Horizontal));
 			scrollbar_->moved.connect(boost::bind(&Box::scrollbar_moved, this, _1));
 		} else {
 			scrollbar_->set_pos(Vector2i(sb_x, sb_y));
@@ -275,7 +296,7 @@ void Box::add(Panel* const panel, Resizing resizing, UI::Align const align) {
 
 /**
  * Add spacing of empty pixels.
-*/
+ */
 void Box::add_space(uint32_t space) {
 	Item it;
 
@@ -291,7 +312,7 @@ void Box::add_space(uint32_t space) {
 
 /**
  * Add some infinite space (to align some buttons to the right)
-*/
+ */
 void Box::add_inf_space() {
 	Item it;
 
@@ -309,7 +330,7 @@ void Box::add_inf_space() {
  * Retrieve the given item's desired size. depth is the size of the
  * item along the orientation axis, breadth is the size perpendicular
  * to the orientation axis.
-*/
+ */
 void Box::get_item_desired_size(uint32_t const idx, int* depth, int* breadth) {
 	assert(idx < items_.size());
 
@@ -364,7 +385,7 @@ void Box::set_item_size(uint32_t idx, int depth, int breadth) {
  * Position the given item according to its parameters.
  * pos is the position relative to the parent in the direction of the
  * orientation axis.
-*/
+ */
 void Box::set_item_pos(uint32_t idx, int32_t pos) {
 	assert(idx < items_.size());
 
@@ -402,6 +423,6 @@ void Box::set_item_pos(uint32_t idx, int32_t pos) {
 
 	case Item::ItemSpace:
 		break;  //  no need to do anything
-	};
+	}
 }
-}
+}  // namespace UI

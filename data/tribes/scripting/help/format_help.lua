@@ -4,7 +4,7 @@
 --
 -- Functions used in the ingame help windows for formatting the text and pictures.
 
-include "scripting/formatting.lua"
+include "scripting/richtext.lua"
 
 --  =======================================================
 --  *************** Basic helper functions ****************
@@ -22,17 +22,63 @@ include "scripting/formatting.lua"
 --    :returns: the text on the left and a picture row on the right.
 --
 function image_line(image, count, text)
-   local imgs={}
+   if not text then
+      text = ""
+   end
+   local images = ""
    for i=1,count do
-      imgs[#imgs + 1] = image
+      images = images .. img(image)
    end
-   local imgstr = table.concat(imgs, ";")
 
-   if text then
-      return rt("image=" .. imgstr .. " image-align=right", "  " .. text)
+   return
+      div("width=100%",
+         div("width=50%", p(vspace(6) .. text .. space(6))) ..
+         div("width=*", p("align=right", vspace(6) .. images .. vspace(12)))
+      )
+end
+
+-- RST
+-- .. function:: plot_size_line(size)
+--
+--    Creates a line describing space required on the map.
+--    Consists of a header colored text, followed by normal text and an image.
+--
+--    :arg size: size key. Expected values are "mine", "port", "small, "medium", "big", "none".
+--    :returns: header followed by normal text and image if a space is required, or empty string.
+--
+function plot_size_line(size)
+   local text = ""
+   local image = ""
+   if (size == "mine") then
+      -- TRANSLATORS: Space on the map required for building a building there
+      text = _"Mine plot"
+      image = "images/wui/overlays/mine.png"
+   elseif (size == "port") then
+      -- TRANSLATORS: Space on the map required for building a building there
+      text = _"Port plot"
+      image = "images/wui/overlays/port.png"
+   elseif (size == "small") then
+      -- TRANSLATORS: Space on the map required for building a building there
+      text = _"Small plot"
+      image = "images/wui/overlays/small.png"
+   elseif (size == "medium") then
+      -- TRANSLATORS: Space on the map required for building a building there
+      text = _"Medium plot"
+      image = "images/wui/overlays/medium.png"
+   elseif (size == "big") then
+      -- TRANSLATORS: Space on the map required for building a building there
+      text = _"Big plot"
+      image = "images/wui/overlays/big.png"
    else
-      return rt("image=" .. imgstr .. " image-align=right", "")
+      return ""
    end
+
+   return
+      div("width=100%",
+         div("float=right padding_l=6", p(img(image))) ..
+         -- TRANSLATORS: Space on the map required for building a building there
+         p(join_sentences(font("size=13 color=D1D1D1", _"Space required:"), text))
+      )
 end
 
 
@@ -54,11 +100,12 @@ function dependencies(items, text)
    if not text then
       text = ""
    end
-   local string = "image=" .. items[1].icon_name
+   local images = img(items[1].icon_name)
    for k,v in ipairs({table.unpack(items,2)}) do
-      string = string .. ";images/richtext/arrow-right.png;" ..  v.icon_name
+      images = images .. img("images/richtext/arrow-right.png") ..  img(v.icon_name)
    end
-   return rt(string, p(text))
+   return
+      div("width=100%", p(vspace(6) .. images .. space(6) .. text .. vspace(12)))
 end
 
 
@@ -84,6 +131,38 @@ function help_ware_amount_line(ware_description, amount)
    end
    -- TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
    result = image_line(image, temp_amount, p(_"%1$dx %2$s":bformat(amount, ware_description.descname))) .. result
+   return result
+end
+
+-- RST
+-- .. function:: help_worker_experience(worker_description, becomes_description)
+--
+--    Displays needed experience levels for workers
+--
+--    :arg worker_description: The :class:`LuaWorkerDescription` for the lower-level worker
+--    :arg becomes_description: The :class:`LuaWorkerDescription` for the higher-level worker
+--    :returns: text describing the needed experience
+--
+function help_worker_experience(worker_description, becomes_description)
+   local result = h2(_"Experience levels")
+   -- TRANSLATORS: EP = Experience Points
+   local exp_string = _"%s to %s (%s EP)":format(
+         worker_description.descname,
+         becomes_description.descname,
+         worker_description.needed_experience
+      )
+
+   worker_description = becomes_description
+   becomes_description = worker_description.becomes
+   if(becomes_description) then
+     -- TRANSLATORS: EP = Experience Points
+      exp_string = exp_string .. "<br>" .. _"%s to %s (%s EP)":format(
+            worker_description.descname,
+            becomes_description.descname,
+            worker_description.needed_experience
+         )
+   end
+   result = result .. p("align=right", exp_string)
    return result
 end
 
@@ -152,20 +231,25 @@ function help_consumed_wares_workers(tribe, building, program_name)
       if (countlist > 1) then
          text = _"%s and":bformat(text)
       end
-      local images = consumed_images[1]
-      local image_counter = 2
+      local images = ""
+      local image_counter = 1
       while (image_counter <= consumed_amount[1]) do
-         images = images .. ";" .. consumed_images[1]
+         images = images .. img(consumed_images[1])
          image_counter = image_counter + 1
       end
       for k, v in ipairs({table.unpack(consumed_images,2)}) do
          image_counter = 1
          while (image_counter <= consumed_amount[k + 1]) do
-            images = images .. ";" .. v
+            images = images .. img(v)
             image_counter = image_counter + 1
          end
       end
-      consumed_items_string = image_line(images, 1, p(text)) .. consumed_items_string
+      consumed_items_string =
+         div("width=100%",
+            div("width=50%", p(vspace(6) .. text .. space(6))) ..
+            div("width=*", p("align=right", vspace(6) .. images .. vspace(12)))
+         )
+         .. consumed_items_string
    end
    if (consumed_items_counter > 0) then
       local consumed_header = ""
@@ -181,7 +265,7 @@ function help_consumed_wares_workers(tribe, building, program_name)
          -- TRANSLATORS: Tribal Encyclopedia: Heading for wares consumed by a productionsite
          consumed_header = _("Wares consumed:")
       end
-      result = result .. rt(h3(consumed_header)) .. consumed_items_string
+      result = result .. h3(consumed_header) .. consumed_items_string
    end
    return result
 end

@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # Balázs Meskó <meskobalazs@gmail.com>, 2017
-# litoll <litoll@freemail.hu>, 2016
+# litoll <litoll@freemail.hu>, 2016-2017,2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-08-17 14:06+0000\n"
-"PO-Revision-Date: 2017-08-17 14:11+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-12-30 07:55+0000\n"
+"PO-Revision-Date: 2020-01-09 11:06+0000\n"
+"Last-Translator: litoll <litoll@freemail.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,123 +23,104 @@ msgstr ""
 msgid "Controls"
 msgstr "Irányítás"
 
-#: ../../data/scripting/editor/editor_controls.lua:14
+#: ../../data/scripting/editor/editor_controls.lua:13
 msgid "Keyboard Shortcuts"
 msgstr "Billentyűparancsok"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:17
+#: ../../data/scripting/editor/editor_controls.lua:16
 msgid "Help"
 msgstr "Súgó"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/scripting/editor/editor_controls.lua:19
+#: ../../data/scripting/editor/editor_controls.lua:18
+msgctxt "hotkey"
+msgid "Esc"
+msgstr "Esc"
+
+#: ../../data/scripting/editor/editor_controls.lua:18
 msgid "Toggle main menu"
 msgstr "Főmenü megjelenítése/elrejtése"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 't'
-#: ../../data/scripting/editor/editor_controls.lua:21
+#: ../../data/scripting/editor/editor_controls.lua:20
 msgid "Toggle tools menu"
 msgstr "Eszközök menü megjelenítése/elrejtése"
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:25
-msgid "Toggle building spaces"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:27
-msgid "Toggle immovables display"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:29
-msgid "Toggle animals display"
-msgstr ""
-
 #. TRANSLATORS: This is an access key combination. The hotkey is 'p'
-#: ../../data/scripting/editor/editor_controls.lua:31
-msgid "Toggle resources display"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:33
+#: ../../data/scripting/editor/editor_controls.lua:24
 msgid "Toggle player menu"
 msgstr "Játékos menü megjelenítése/elrejtése"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:35
+#: ../../data/scripting/editor/editor_controls.lua:26
 msgid "Undo"
 msgstr "Visszavonás"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:37
+#: ../../data/scripting/editor/editor_controls.lua:28
 msgid "Redo"
 msgstr "Mégis"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'i'
-#: ../../data/scripting/editor/editor_controls.lua:39
+#: ../../data/scripting/editor/editor_controls.lua:30
 msgid "Activate information tool"
 msgstr "Az információs eszköz aktiválása"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:41
+#: ../../data/scripting/editor/editor_controls.lua:32
 msgctxt "hotkey"
 msgid "Ctrl + L"
 msgstr "Ctrl + L"
 
-#: ../../data/scripting/editor/editor_controls.lua:41
+#: ../../data/scripting/editor/editor_controls.lua:32
 msgid "Load map"
 msgstr "Térkép betöltése"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:43
+#: ../../data/scripting/editor/editor_controls.lua:34
 msgctxt "hotkey"
 msgid "Ctrl + S"
 msgstr "Ctrl + S"
 
-#: ../../data/scripting/editor/editor_controls.lua:43
+#: ../../data/scripting/editor/editor_controls.lua:34
 msgid "Save map"
 msgstr "Térkép mentése"
 
-#: ../../data/scripting/editor/editor_controls.lua:47
+#: ../../data/scripting/editor/editor_controls.lua:38
 msgid "Tools"
 msgstr "Eszközök"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:50
+#: ../../data/scripting/editor/editor_controls.lua:41
 msgctxt "hotkey"
 msgid "0-9"
 msgstr "0-9"
 
-#: ../../data/scripting/editor/editor_controls.lua:50
+#: ../../data/scripting/editor/editor_controls.lua:41
 msgid "Change tool size"
 msgstr "Eszköz méretének módosítása"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:52
+#: ../../data/scripting/editor/editor_controls.lua:43
 msgctxt "hotkey"
 msgid "Click"
 msgstr "Kattintás"
 
-#: ../../data/scripting/editor/editor_controls.lua:52
+#: ../../data/scripting/editor/editor_controls.lua:43
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
 msgstr "Új elemek elhelyezése a térképen, vagy a térképen lévő elemek növelése az „Érték növelése/csökkentése” beállításban meghatározott értékkel."
 
-#: ../../data/scripting/editor/editor_controls.lua:54
+#: ../../data/scripting/editor/editor_controls.lua:45
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
@@ -147,19 +128,19 @@ msgstr "Elemek törlése a térképről, vagy a térképen lévő elemek csökke
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:54
+#: ../../data/scripting/editor/editor_controls.lua:45
 msgctxt "hotkey"
 msgid "Shift + Click"
 msgstr "Shift + Kattintás"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:56
+#: ../../data/scripting/editor/editor_controls.lua:47
 msgctxt "hotkey"
 msgid "Ctrl + Click"
 msgstr "Ctrl + Kattintás"
 
-#: ../../data/scripting/editor/editor_controls.lua:56
+#: ../../data/scripting/editor/editor_controls.lua:47
 msgid "Set map elements to the value selected by ‘Set Value’"
 msgstr "A térképen lévő elemeket az „Érték beállítása” részben meghatározott értékre állítja."
 
@@ -172,14 +153,14 @@ msgid "General"
 msgstr "Általános"
 
 #: ../../data/scripting/editor/editor_help.lua:59
-#: ../../data/scripting/editor/editor_introduction.lua:12
+#: ../../data/scripting/editor/editor_introduction.lua:11
 msgid "Introduction"
 msgstr "Bevezetés"
 
 #: ../../data/scripting/editor/editor_help.lua:71
-#: ../../data/scripting/editor/tips.lua:16
+#: ../../data/scripting/editor/tips.lua:15
 msgid "Tips"
-msgstr ""
+msgstr "Tippek"
 
 #: ../../data/scripting/editor/editor_help.lua:81
 msgid "Terrains"
@@ -193,19 +174,19 @@ msgstr "Fák"
 msgid "The Widelands Editor"
 msgstr "A Widelands térképszerkesztő"
 
-#: ../../data/scripting/editor/editor_introduction.lua:14
+#: ../../data/scripting/editor/editor_introduction.lua:13
 msgid ""
 "This editor is intended for players who would like to design their own maps "
 "to use with Widelands."
 msgstr "Ez a térképszerkesztő olyan játékosok számára van, akik saját térképeket szeretnének készíteni a Widelands-hez."
 
-#: ../../data/scripting/editor/editor_introduction.lua:15
+#: ../../data/scripting/editor/editor_introduction.lua:14
 msgid ""
 "As you can see, this editor is heavy work in progress and as the editor "
 "becomes better and better, this text will also get longer and more complete."
 msgstr "Ahogy látod, ez a szerkesztő jelenleg fejlesztés alatt áll; ahogy fejlődik, úgy lesz e szöveg is egyre hosszabb és teljesebb."
 
-#: ../../data/scripting/editor/editor_introduction.lua:18
+#: ../../data/scripting/editor/editor_introduction.lua:17
 msgid "The wiki also includes a short tutorial on how to build a map."
 msgstr "A wiki szintén tartalmaz egy rövid oktató részt a térképszerkesztésről."
 
@@ -213,38 +194,37 @@ msgstr "A wiki szintén tartalmaz egy rövid oktató részt a térképszerkeszt�
 msgid "Resources"
 msgstr "Erőforrások"
 
-#. TRANSLATORS: A header in the editor help
+#. TRANSLATORS: A header in the editor help if there is 1 valid resource
 #: ../../data/scripting/editor/terrain_help.lua:25
 msgid "Valid Resource:"
-msgid_plural "Valid Resources:"
-msgstr[0] "Érvényes erőforrás:"
-msgstr[1] "Érvényes erőforrások:"
+msgstr "Érvényes erőforrás:"
 
-#: ../../data/scripting/editor/terrain_help.lua:34
+#. TRANSLATORS: A header in the editor help if there is more than 1 valid
+#. resource
+#: ../../data/scripting/editor/terrain_help.lua:28
+msgid "Valid Resources:"
+msgstr "Érvényes erőforrások:"
+
+#: ../../data/scripting/editor/terrain_help.lua:39
 msgid "Default:"
 msgstr "Alapértelmezett:"
 
 #. TRANSLATORS: e.g. "5x Water"
-#: ../../data/scripting/editor/terrain_help.lua:36
+#: ../../data/scripting/editor/terrain_help.lua:41
 msgid "%1%x %2%"
 msgstr "%1%x %2%"
 
 #. TRANSLATORS: A header in the editor help
-#: ../../data/scripting/editor/terrain_help.lua:67
+#: ../../data/scripting/editor/terrain_help.lua:72
 msgid "Probability of trees growing"
 msgstr "Fák növekedésének valószínűsége"
 
-#: ../../data/scripting/editor/terrain_help.lua:72
+#: ../../data/scripting/editor/terrain_help.lua:77
 msgid "No trees will grow here."
 msgstr "Itt nem fognak fék nőni."
 
 #. TRANSLATORS: A header in the editor help. Terrains preferred by a type of
 #. tree.
-#: ../../data/scripting/editor/tree_help.lua:18
+#: ../../data/scripting/editor/tree_help.lua:19
 msgid "Preferred terrains"
 msgstr "Kedvelt terepek"
-
-#. TRANSLATORS: Terrain name (Climate)
-#: ../../data/scripting/editor/tree_help.lua:39
-msgid "%1% (%2%)"
-msgstr "%1% (%2%)"

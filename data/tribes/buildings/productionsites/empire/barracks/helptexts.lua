@@ -12,7 +12,7 @@ function building_helptext_lore_author()
 end
 
 function building_helptext_purpose()
-   -- #TRANSLATORS: Purpose helptext for a building
+   -- TRANSLATORS: Purpose helptext for a building
    return pgettext("empire_building", "Equips recruits and trains them as soldiers.")
 end
 

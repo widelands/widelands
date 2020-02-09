@@ -48,6 +48,12 @@ tribes:new_productionsite_type {
       barbarians_miner = 1
    },
 
+   indicate_workarea_overlaps = {
+      barbarians_goldmine = false,
+      barbarians_goldmine_deep = false,
+      barbarians_goldmine_deeper = false,
+   },
+
    inputs = {
       { name = "ration", amount = 6 }
    },
@@ -60,9 +66,9 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
          descname = _"mining gold",
          actions = {
-            "sleep=45000",
             "return=skipped unless economy needs gold_ore",
             "consume=ration",
+            "sleep=45000",
             "animate=working 20000",
             "mine=gold 2 33 5 17",
             "produce=gold_ore"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -55,7 +55,7 @@ public:
 		// Returns a map pixel 'p' such that rect().x <= p.x <= rect().x + rect().w similar
 		// for y. This requires that 'contains' would return true for 'coords', otherwise this will
 		// be an infinite loop.
-		Vector2f move_inside(const Widelands::Coords& coords) const;
+		Vector2f find_pixel_for_coordinates(const Widelands::Coords& coords) const;
 
 	private:
 		friend class MapView;
@@ -73,6 +73,17 @@ public:
 		View(Vector2f init_viewpoint, float init_zoom) : viewpoint(init_viewpoint), zoom(init_zoom) {
 		}
 		View() : View(Vector2f::zero(), 1.0f) {
+		}
+
+		bool zoom_near(float other_zoom) const {
+			constexpr float epsilon = 1e-5;
+			return std::abs(zoom - other_zoom) < epsilon;
+		}
+
+		bool view_near(const View& other) const {
+			constexpr float epsilon = 1e-5;
+			return zoom_near(other.zoom) && std::abs(viewpoint.x - other.viewpoint.x) < epsilon &&
+			       std::abs(viewpoint.y - other.viewpoint.y) < epsilon;
 		}
 
 		// Mappixel of top-left pixel of this MapView.
@@ -139,7 +150,7 @@ public:
 	void mouse_to_pixel(const Vector2i& pixel, const Transition& transition);
 
 	// Move the view by 'delta_pixels'.
-	void pan_by(Vector2i delta_pixels);
+	void pan_by(Vector2i delta_pixels, const Transition& transition);
 
 	// The current view area visible in the MapView in map pixel coordinates.
 	// The returned value always has 'x' > 0 and 'y' > 0.
@@ -152,16 +163,29 @@ public:
 	// displayed at 'panel_pixel' unchanging, i.e. the center of the zoom.
 	void zoom_around(float new_zoom, const Vector2f& panel_pixel, const Transition& transition);
 
+	// Reset the zoom to 1.0f
+	void reset_zoom();
+	// Zoom in a bit
+	void increase_zoom();
+	// Zoom out a bit
+	void decrease_zoom();
+
 	// True if the user is currently dragging the map.
 	bool is_dragging() const;
 
 	// True if a 'Transition::Smooth' animation is playing.
 	bool is_animating() const;
 
+	// Scrolls the map and returns true if it did.
+	bool scroll_map();
+
 	// Schedules drawing of the terrain of this MapView. The returned value can
 	// be used to override contents of 'fields_to_draw' for player knowledge and
 	// visibility, and to correctly draw map objects, overlays and text.
-	FieldsToDraw* draw_terrain(const Widelands::EditorGameBase& egbase, RenderTarget* dst);
+	FieldsToDraw* draw_terrain(const Widelands::EditorGameBase& egbase,
+	                           Workareas workarea,
+	                           bool grid,
+	                           RenderTarget* dst);
 
 	// Not overriden from UI::Panel, instead we expect to be passed the data through.
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y);

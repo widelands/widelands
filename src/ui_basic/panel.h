@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,13 +25,16 @@
 #include <string>
 
 #include <SDL_keyboard.h>
+#include <boost/signals2/signal.hpp>
 #include <boost/signals2/trackable.hpp>
 
 #include "base/macros.h"
 #include "base/rect.h"
 #include "base/vector.h"
 #include "graphic/align.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
+#include "graphic/styles/panel_styles.h"
+#include "sound/constants.h"
 
 class RenderTarget;
 class Image;
@@ -76,6 +79,8 @@ public:
 		pf_layout_toplevel = 512,
 		/// whether widget wants to receive unicode textinput messages
 		pf_handle_textinput = 1024,
+		/// whether widget and its children will handle any key presses
+		pf_handle_keypresses = 2048,
 	};
 
 	Panel(Panel* const nparent,
@@ -85,6 +90,9 @@ public:
 	      int const nh,
 	      const std::string& tooltip_text = std::string());
 	virtual ~Panel();
+
+	boost::signals2::signal<void()> clicked;
+	boost::signals2::signal<void()> position_changed;
 
 	Panel* get_parent() const {
 		return parent_;
@@ -114,8 +122,8 @@ public:
 	virtual void end();
 
 	// Geometry
-	void set_size(int nw, int nh);
-	void set_desired_size(int w, int h);
+	virtual void set_size(int nw, int nh);
+	virtual void set_desired_size(int w, int h);
 	virtual void set_pos(Vector2i);
 	virtual void move_inside_parent();
 	virtual void layout();
@@ -259,8 +267,7 @@ public:
 		return flags_ & pf_can_focus;
 	}
 	bool has_focus() const {
-		assert(get_can_focus());
-		return (parent_->focus_ == this);
+		return (get_can_focus() && parent_->focus_ == this);
 	}
 	virtual void focus(bool topcaller = true);
 
@@ -289,12 +296,23 @@ public:
 	}
 
 	virtual void die();
+	static void register_click();
 
 protected:
 	// This panel will never receive keypresses (do_key), instead
 	// textinput will be passed on (do_textinput).
 	void set_handle_textinput() {
 		flags_ |= pf_handle_textinput;
+	}
+
+	// If this is set to 'true', this panel ad its children will never receive keypresses (do_key) or
+	// textinput (do_textinput).
+	void set_handle_keypresses(bool const on) {
+		if (on) {
+			flags_ |= pf_handle_keypresses;
+		} else {
+			flags_ &= ~pf_handle_keypresses;
+		}
 	}
 
 	// Defines if think() should be called repeatedly. This is true on construction.
@@ -307,15 +325,26 @@ protected:
 	virtual void update_desired_size();
 
 	static void play_click();
-	static void play_new_chat_member();
-	static void play_new_chat_message();
 
-	static bool draw_tooltip(RenderTarget&, const std::string& text);
+	static bool draw_tooltip(const std::string& text);
+	void draw_background(RenderTarget& dst, const UI::PanelStyleInfo&);
+	void draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo&);
+
+	static const Image* default_cursor_;
+	static const Image* default_cursor_click_;
 
 private:
 	bool handles_mouse() const {
 		return (flags_ & pf_handle_mouse) != 0;
 	}
+
+	bool handles_keypresses() const {
+		if (get_parent() != nullptr && !get_parent()->handles_keypresses()) {
+			return false;
+		}
+		return (flags_ & pf_handle_keypresses) != 0;
+	}
+
 	bool handles_textinput() const {
 		return (flags_ & pf_handle_textinput) != 0;
 	}
@@ -377,8 +406,8 @@ private:
 	static Panel* mousegrab_;
 	static Panel* mousein_;
 	static bool allow_user_input_;
-	static const Image* default_cursor_;
-	static const Image* default_cursor_click_;
+
+	static FxId click_fx_;
 
 	DISALLOW_COPY_AND_ASSIGN(Panel);
 };
@@ -415,6 +444,6 @@ struct NamedPanel : public Panel {
 private:
 	std::string name_;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_PANEL_H

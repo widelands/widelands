@@ -1,1 +1,23 @@
 add_subdirectory(test)
+
+wl_library(io_filesystem
+  SRCS
+    disk_filesystem.cc
+    disk_filesystem.h
+    filesystem.cc
+    filesystem.h
+    filesystem_exceptions.h
+    layered_filesystem.cc
+    layered_filesystem.h
+    zip_exceptions.h
+    zip_filesystem.cc
+    zip_filesystem.h
+  DEPENDS
+    base_exceptions
+    base_i18n
+    base_log
+    base_macros
+    graphic_text_layout
+    io_stream
+    third_party_minizip
+)

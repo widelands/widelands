@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,8 +25,10 @@
 #include <string>
 #include <vector>
 
+#include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 
+#include "base/vector.h"
 #include "scripting/lua.h"
 #include "scripting/lua_coroutine.h"
 #include "scripting/lua_errors.h"
@@ -110,6 +112,20 @@ public:
 		const std::string rv = lua_tostring(L_, -1);
 		lua_pop(L_, 1);
 		return rv;
+	}
+
+	// Parses a Lua subtable into a Vector2i or Vector2f
+	template <typename KeyType, typename ValueType>
+	Vector2<ValueType> get_vector(const KeyType& key) const {
+		Vector2<ValueType> result = Vector2<ValueType>::zero();
+		std::unique_ptr<LuaTable> table(get_table(key));
+		std::vector<ValueType> pts = table->array_entries<ValueType>();
+		if (pts.size() != 2) {
+			throw LuaError((boost::format("Expected 2 entries, but got %d.") % pts.size()).str());
+		}
+		result.x = pts[0];
+		result.y = pts[1];
+		return result;
 	}
 
 	template <typename KeyType> std::unique_ptr<LuaTable> get_table(const KeyType& key) const {
