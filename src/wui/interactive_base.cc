@@ -225,8 +225,8 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged& message) {
-		   set_size(message.width, message.height);
-		   map_view_.set_size(message.width, message.height);
+		   set_size(message.new_width, message.new_height);
+		   map_view_.set_size(message.new_width, message.new_height);
 		   resize_chat_overlay();
 		   finalize_toolbar();
 		   mainview_move();
