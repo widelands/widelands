@@ -271,18 +271,20 @@ void EditorGameBase::allocate_player_maps() {
 }
 
 UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::string& background) {
-    assert(loader_ui_ == nullptr);
-    loader_ui_.reset(new UI::ProgressWindow(background));
+    if (loader_ui_ == nullptr) {
+        loader_ui_.reset(new UI::ProgressWindow(background));
+    }
     return *loader_ui_.get();
 }
 void EditorGameBase::remove_loader_ui() {
     assert(loader_ui_ != nullptr);
     loader_ui_.reset(nullptr);
 }
-UI::ProgressWindow* EditorGameBase::get_loader_ui() {
-    return loader_ui_.get();
+UI::ProgressWindow& EditorGameBase::loader_ui() const {
+    assert(loader_ui_ != nullptr);
+    return *loader_ui_.get();
 }
-// NOCOM test all usages of loader_ui
+// NOCOM test all usages of loader_ui and whether manual removes are necessary
 
 /**
  * Instantly create a building at the given x/y location. There is no build time.

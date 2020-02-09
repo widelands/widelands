@@ -470,7 +470,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	EditorInteractive& eia = dynamic_cast<EditorInteractive&>(*get_parent());
 	Widelands::EditorGameBase& egbase = eia.egbase();
 	Widelands::Map* map = egbase.mutable_map();
-    UI::ProgressWindow& loader_ui = egbase.create_loader_ui("images/loadscreens/editor.jpg");
+    UI::ProgressWindow& loader_ui = egbase.loader_ui();
 	GameTips tips(loader_ui, {"editor"});
 
 	eia.cleanup_for_load();
@@ -520,8 +520,6 @@ void MainMenuNewRandomMap::clicked_create_map() {
 
 	map->recalc_whole_map(egbase);
 	eia.map_changed(EditorInteractive::MapWas::kReplaced);
-
-	egbase.remove_loader_ui();
 
 	UI::WLMessageBox mbox(
 	   &eia,

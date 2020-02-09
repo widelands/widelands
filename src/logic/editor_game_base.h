@@ -122,7 +122,7 @@ public:
     // Destroy the loader UI
     void remove_loader_ui();
     // Get the current loader UI. Can be nullptr.
-	UI::ProgressWindow* get_loader_ui();
+	UI::ProgressWindow& loader_ui() const;
 
 	void set_road(const FCoords&, uint8_t direction, RoadSegment roadtype);
 

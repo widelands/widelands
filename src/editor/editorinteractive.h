@@ -93,7 +93,7 @@ public:
 	// map and run 'script_to_run' directly after all initialization is done.
 	static void run_editor(const std::string& filename, const std::string& script_to_run);
 
-	void load(const std::string& filename);
+	void load(const std::string& filename, UI::ProgressWindow& loader_ui);
 	void cleanup_for_load() override;
 
 	// leaf functions from base class

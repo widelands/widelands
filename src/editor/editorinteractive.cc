@@ -430,12 +430,14 @@ void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
 	rebuild_showhide_menu();
 }
 
-void EditorInteractive::load(const std::string& filename) {
+void EditorInteractive::load(const std::string& filename, UI::ProgressWindow& loader_ui) {
 	assert(filename.size());
 
 	Widelands::Map* map = egbase().mutable_map();
 
 	cleanup_for_load();
+
+    GameTips editortips(loader_ui, {"editor"});
 
 	std::unique_ptr<Widelands::MapLoader> ml(map->get_correct_loader(filename));
 	if (!ml.get())
@@ -445,21 +447,15 @@ void EditorInteractive::load(const std::string& filename) {
 		   filename.c_str());
 	ml->preload_map(true);
 
-	UI::ProgressWindow* loader_ui = egbase().get_loader_ui();
-	// We already have a loader window if Widelands was started with --editor=mapname
-    const bool had_loader_id = loader_ui != nullptr;
-	if (!had_loader_id) {
-		loader_ui = &egbase().create_loader_ui("images/loadscreens/editor.jpg");
-		GameTips editortips(*loader_ui, {"editor"});
-	}
+	// NOCOM GameTips editortips(loader_ui, {"editor"});
 
 	// Create the players. TODO(SirVer): this must be managed better
 	// TODO(GunChleoc): Ugly - we only need this for the test suite right now. We can also get rid of
 	// loading the tribes when we get rid of this.
-	loader_ui->step(_("Creating players"));
+	loader_ui.step(_("Creating players"));
 	iterate_player_numbers(p, map->get_nrplayers()) {
 		if (!map->get_scenario_player_tribe(p).empty()) {
-			loader_ui->step(
+			loader_ui.step(
 			   (boost::format(_("Creating player %d")) % static_cast<unsigned int>(p)).str());
 			egbase().add_player(
 			   p, 0, map->get_scenario_player_tribe(p), map->get_scenario_player_name(p));
@@ -468,10 +464,6 @@ void EditorInteractive::load(const std::string& filename) {
 
 	ml->load_map_complete(egbase(), Widelands::MapLoader::LoadType::kEditor);
 	map_changed(MapWas::kReplaced);
-	if (!had_loader_id) {
-		// We created it, so we have to unset and delete it
-		egbase().remove_loader_ui();
-	}
 }
 
 void EditorInteractive::cleanup_for_load() {
@@ -906,7 +898,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 				loader_ui.step(std::string());
 			} else {
 				loader_ui.step((boost::format(_("Loading map “%s”…")) % filename).str());
-				eia.load(filename);
+				eia.load(filename, loader_ui);
 			}
 		}
 
