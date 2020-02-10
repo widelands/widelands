@@ -100,7 +100,7 @@ void MapGenerator::generate_bobs(std::unique_ptr<uint32_t[]> const* random_bobs,
 		egbase_.create_immovable_with_name(
 		   fc, bobCategory->get_immovable(static_cast<size_t>(rng.rand() / (kMaxElevation / num))),
 		   MapObjectDescr::OwnerType::kWorld, nullptr /* owner */, nullptr /* former_building_descr */
-		);
+		   );
 	}
 
 	if (set_moveable && (num = bobCategory->num_critters())) {
@@ -124,8 +124,7 @@ void MapGenerator::generate_resources(uint32_t const* const random1,
 	const TerrainDescription& terrain_description = egbase_.world().terrain_descr(tix);
 
 	const auto set_resource_helper = [this, &world, &terrain_description, &fc](
-	                                    const uint32_t random_value,
-	                                    const int valid_resource_index) {
+	   const uint32_t random_value, const int valid_resource_index) {
 		const DescriptionIndex res_idx = terrain_description.get_valid_resource(valid_resource_index);
 		const ResourceAmount max_amount = world.get_resource(res_idx)->max_amount();
 		ResourceAmount res_val =
@@ -208,8 +207,9 @@ uint8_t MapGenerator::make_node_elevation(double const elevation, const Coords& 
 	                   water_h :
 	                   elevation < water_fac + land_fac ?
 	                   water_h + 1 + ((elevation - water_fac) / land_fac) * (mount_h - water_h) :
-	                   mount_h + ((elevation - water_fac - land_fac) / (1 - water_fac - land_fac)) *
-	                                (summit_h - mount_h);
+	                   mount_h +
+	                         ((elevation - water_fac - land_fac) / (1 - water_fac - land_fac)) *
+	                            (summit_h - mount_h);
 
 	//  Handle Map Border in island mode
 	if (map_info_.islandMode) {

@@ -426,11 +426,11 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			format_and_add_chat("", "", true, _("Welcome to the Widelands Metaserver!"));
 			const std::string assigned_name = packet.string();
 			if (clientname_ != assigned_name) {
-				format_and_add_chat("", "", true,
-				                    (boost::format(_("You have been logged in as '%s' since your "
-				                                     "requested name is already in use or reserved.")) %
-				                     assigned_name)
-				                       .str());
+				format_and_add_chat(
+				   "", "", true, (boost::format(_("You have been logged in as '%s' since your "
+				                                  "requested name is already in use or reserved.")) %
+				                  assigned_name)
+				                    .str());
 			}
 			clientname_ = assigned_name;
 			clientrights_ = packet.string();
@@ -614,7 +614,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			std::sort(clientlist_.begin(), clientlist_.end(),
 			          [](const InternetClient& left, const InternetClient& right) {
 				          return (left.name < right.name);
-			          });
+				       });
 
 			for (InternetClient& client : old) {
 				if (client.name.size()) {

@@ -268,7 +268,7 @@ void BufferedConnection::start_sending() {
 				   socket_.close();
 			   }
 		   }
-	   });
+		});
 }
 
 // This method is run within a thread
@@ -301,7 +301,7 @@ void BufferedConnection::start_receiving() {
 				   socket_.close();
 			   }
 		   }
-	   });
+		});
 }
 
 void BufferedConnection::reduce_send_buffer(boost::asio::ip::tcp::socket& socket) {
