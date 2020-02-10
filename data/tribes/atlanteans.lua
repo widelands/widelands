@@ -402,8 +402,6 @@ tribes:new_tribe {
    ferry = "atlanteans_ferry",
    port = "atlanteans_port",
    ironore = "iron_ore",
-   rawlog = "log",
-   granite = "granite",
 
    toolbar = {
       left_corner = image_dirname .. "toolbar_left_corner.png",

@@ -520,8 +520,6 @@ void DefaultAI::late_initialization() {
 
 	wares.resize(game().tribes().nrwares());
 	for (DescriptionIndex i = 0; i < static_cast<DescriptionIndex>(game().tribes().nrwares()); ++i) {
-		wares.at(i).producers = 0;
-		wares.at(i).consumers = 0;
 		wares.at(i).preciousness =
 		   game().tribes().get_ware_descr(i)->ai_hints().preciousness(tribe_->name());
 	}
@@ -683,6 +681,9 @@ void DefaultAI::late_initialization() {
 			}
 			for (const DescriptionIndex& temp_output : prod.output_ware_types()) {
 				bo.ware_outputs.push_back(temp_output);
+				if (tribe_->is_construction_material(temp_output.first) && bo.inputs.size() == 0) {
+					wares.at(temp_output).raw_build_material = true;
+				}
 			}
 
 			// Read information about worker outputs
@@ -785,8 +786,7 @@ void DefaultAI::late_initialization() {
 			// now we identify producers of critical build materials
 			for (DescriptionIndex ware : bo.ware_outputs) {
 				// building material except for trivial material
-				if (tribe_->is_construction_material(ware) &&
-				    !(ware == tribe_->rawlog() || ware == tribe_->granite())) {
+				if (wares.at(ware).raw_build_material == false) {
 					bo.set_is(BuildingAttribute::kBuildingMatProducer);
 					if (bo.type == BuildingObserver::Type::kMine) {
 						mines_per_type[bo.mines].is_critical = true;
@@ -797,9 +797,7 @@ void DefaultAI::late_initialization() {
 
 			for (const auto& temp_buildcosts : prod.buildcost()) {
 				// building material except for trivial material
-				if (tribe_->is_construction_material(temp_buildcosts.first) &&
-				    !(temp_buildcosts.first == tribe_->rawlog() ||
-				      temp_buildcosts.first == tribe_->granite())) {
+				if (wares.at(temp_buildcosts.first).raw_build_material == false) {
 					bo.critical_building_material.push_back(temp_buildcosts.first);
 				}
 			}
@@ -838,9 +836,8 @@ void DefaultAI::late_initialization() {
 			bo.type = BuildingObserver::Type::kMilitarysite;
 			const MilitarySiteDescr& milit = dynamic_cast<const MilitarySiteDescr&>(bld);
 			for (const auto& temp_buildcosts : milit.buildcost()) {
-				// Below are non-critical wares (well, various types of wood)
-				if (!(temp_buildcosts.first == tribe_->rawlog() ||
-				      temp_buildcosts.first == tribe_->granite())) {
+				// Below are non-critical wares (wares produced without inputs)
+				if (wares.at(temp_buildcosts.first).raw_build_material == false) {
 					bo.critical_building_material.push_back(temp_buildcosts.first);
 				}
 			}
@@ -872,8 +869,7 @@ void DefaultAI::late_initialization() {
 			// building of new sites if ware is lacking
 			for (const auto& temp_buildcosts : train.buildcost()) {
 				// building material except for trivial material
-				if (!(temp_buildcosts.first == tribe_->rawlog() ||
-				      temp_buildcosts.first == tribe_->granite())) {
+				if (wares.at(temp_buildcosts.first).raw_build_material == false) {
 					bo.critical_building_material.push_back(temp_buildcosts.first);
 				}
 			}
@@ -6517,11 +6513,6 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 				++fishers_count_;
 			}
 
-			for (uint32_t i = 0; i < bo.ware_outputs.size(); ++i)
-				++wares.at(bo.ware_outputs.at(i)).producers;
-
-			for (uint32_t i = 0; i < bo.inputs.size(); ++i)
-				++wares.at(bo.inputs.at(i)).consumers;
 		} else if (bo.type == BuildingObserver::Type::kMine) {
 			mines_.push_back(ProductionSiteObserver());
 			mines_.back().site = &dynamic_cast<ProductionSite&>(b);
@@ -6531,12 +6522,6 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 			assert(!mines_.back().upgrade_pending);
 			assert(mines_.back().dismantle_pending_since == kNever);
 			++mines_.back().bo->unoccupied_count;
-
-			for (uint32_t i = 0; i < bo.ware_outputs.size(); ++i)
-				++wares.at(bo.ware_outputs.at(i)).producers;
-
-			for (uint32_t i = 0; i < bo.inputs.size(); ++i)
-				++wares.at(bo.inputs.at(i)).consumers;
 
 			++mines_per_type[bo.mines].finished;
 
@@ -6636,13 +6621,6 @@ void DefaultAI::lose_building(const Building& b) {
 					break;
 				}
 
-			for (uint32_t i = 0; i < bo.ware_outputs.size(); ++i) {
-				--wares.at(bo.ware_outputs.at(i)).producers;
-			}
-
-			for (uint32_t i = 0; i < bo.inputs.size(); ++i) {
-				--wares.at(bo.inputs.at(i)).consumers;
-			}
 			if (bo.is(BuildingAttribute::kFisher)) {
 				assert(fishers_count_ > 0);
 				--fishers_count_;
@@ -6655,14 +6633,6 @@ void DefaultAI::lose_building(const Building& b) {
 					mines_.erase(i);
 					break;
 				}
-			}
-
-			for (uint32_t i = 0; i < bo.ware_outputs.size(); ++i) {
-				--wares.at(bo.ware_outputs.at(i)).producers;
-			}
-
-			for (uint32_t i = 0; i < bo.inputs.size(); ++i) {
-				--wares.at(bo.inputs.at(i)).consumers;
 			}
 
 			--mines_per_type[bo.mines].finished;

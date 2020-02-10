@@ -220,8 +220,6 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		port_ = add_special_building(table.get_string("port"));
 
 		ironore_ = add_special_ware(table.get_string("ironore"));
-		rawlog_ = add_special_ware(table.get_string("rawlog"));
-		granite_ = add_special_ware(table.get_string("granite"));
 
 		if (table.has_key<std::string>("toolbar")) {
 			toolbar_image_set_.reset(new ToolbarImageset(*table.get_table("toolbar")));
@@ -355,14 +353,6 @@ DescriptionIndex TribeDescr::ferry() const {
 DescriptionIndex TribeDescr::ironore() const {
 	assert(tribes_.ware_exists(ironore_));
 	return ironore_;
-}
-DescriptionIndex TribeDescr::rawlog() const {
-	assert(tribes_.ware_exists(rawlog_));
-	return rawlog_;
-}
-DescriptionIndex TribeDescr::granite() const {
-	assert(tribes_.ware_exists(granite_));
-	return granite_;
 }
 
 const std::vector<DescriptionIndex>& TribeDescr::trainingsites() const {

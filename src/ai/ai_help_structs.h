@@ -565,8 +565,7 @@ struct ShipObserver {
 };
 
 struct WareObserver {
-	uint8_t producers;
-	uint8_t consumers;
+	bool raw_build_material = false;
 	uint8_t preciousness;
 };
 

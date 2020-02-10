@@ -119,8 +119,6 @@ public:
 	DescriptionIndex ferry() const;
 	DescriptionIndex port() const;
 	DescriptionIndex ironore() const;
-	DescriptionIndex rawlog() const;
-	DescriptionIndex granite() const;
 
 	const std::vector<DescriptionIndex>& trainingsites() const;
 	const std::vector<DescriptionIndex>& worker_types_without_cost() const;
@@ -224,8 +222,6 @@ private:
 	DescriptionIndex ferry_;      // The ferry that this tribe uses
 	DescriptionIndex port_;       // The port that this tribe uses
 	DescriptionIndex ironore_;    // Iron ore
-	DescriptionIndex rawlog_;     // Simple log
-	DescriptionIndex granite_;    // Granite
 	std::vector<DescriptionIndex> worker_types_without_cost_;
 	std::vector<DescriptionIndex> trainingsites_;
 	// Order and positioning of wares in the warehouse display
