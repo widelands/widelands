@@ -123,11 +123,9 @@ We have some instructions on how to use Git to help you if you're new to GitHub:
 
 ### Code
 
-Before you make any changes to C++ code, we recommend that you install our githook that will automatically
-format any changed files when you commit.
+The master branch and open pull requests will be formatted automatically by a GitHub action that runs `clang-format`. When you push to an open pull request, the formatting changes will be pushed back to the branch after about four minutes. Don't forget to run 'git pull' before you push again. Formatting is only triggered the first time you push *after* you opened the PR.
 
-1. Install `clang-format`
-2. Run `./install-githooks.sh`
+You need to enable *local and third-party actions* in the Actions tab of your fork's settings to enable automatic formatting. If you disable actions, no formatting will take place on your branches.
 
 We follow the [Google Styleguide](https://google.github.io/styleguide/cppguide.html).
 
