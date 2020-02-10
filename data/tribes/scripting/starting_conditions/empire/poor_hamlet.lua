@@ -8,8 +8,8 @@ set_textdomain("tribes")
 
 return {
    -- TRANSLATORS: This is the name of a starting condition
-   descname = _ "Minimum",
-   -- TRANSLATORS: This is the tooltip for the "Minimum" starting condition
+   descname = _ "Poor Hamlet",
+   -- TRANSLATORS: This is the tooltip for the "Poor Hamlet" (minimum) starting condition
    tooltip = _"Start the game with just a warehouse and the bare minimum for bootstrapping an economy. Warning: the AI can't successfully start from this",
    func =  function(player, shared_in_start)
       local sf = wl.Game().map.player_slots[player.number].starting_field
@@ -18,7 +18,7 @@ return {
       else
          player:allow_workers("all")
       end
-      
+
       prefilled_buildings(player, { "empire_warehouse", sf.x, sf.y,
          wares = {
             granite = 1,
@@ -38,7 +38,7 @@ return {
             [{0,0,0,0}] = 1
          }
       })
-      
+
       player:reveal_fields(sf:region(10))
       player:conquer(sf, 9)
 
@@ -50,19 +50,18 @@ return {
          end
       end
 
-      --Not necessary, empire can conquer already:
-      -- --NOTE: pessimistically, this could be a single rock
-      -- local has_rocks = false
-      -- for k,f in pairs(sf:region(10)) do
-      --    if f.immovable and f.immovable:has_attribute('rocks') then
-      --       has_rocks = true
-      --       break
-      --    end
-      -- end
-      -- if not has_rocks then
-      --    add_wares({granite = 1})
-      --    player:send_message(_"No rocks nearby", _"There are no rocks near to your starting position.  Therefore, you receive extra resources for bootstrapping your economy.")
-      -- end
-      
+      Not necessary, empire can conquer already:
+      --NOTE: pessimistically, this could be a single rock
+      local has_rocks = false
+      for k,f in pairs(sf:region(10)) do
+         if f.immovable and f.immovable:has_attribute('rocks') then
+            has_rocks = true
+            break
+         end
+      end
+      if not has_rocks then
+         add_wares({granite = 1})
+         player:send_message(_"No rocks nearby", _"There are no rocks near to your starting position.  Therefore, you receive extra resources for bootstrapping your economy.")
+      end
    end
 }

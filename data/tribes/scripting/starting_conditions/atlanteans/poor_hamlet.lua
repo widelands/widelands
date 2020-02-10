@@ -8,8 +8,8 @@ set_textdomain("tribes")
 
 return {
    -- TRANSLATORS: This is the name of a starting condition
-   descname = _ "Minimum",
-   -- TRANSLATORS: This is the tooltip for the "Minimum" starting condition
+   descname = _ "Poor Hamlet",
+   -- TRANSLATORS: This is the tooltip for the "Poor Hamlet" (minimum) starting condition
    tooltip = _"Start the game with just a warehouse and the bare minimum for bootstrapping an economy. Warning: the AI can't successfully start from this",
    func =  function(player, shared_in_start)
       local sf = wl.Game().map.player_slots[player.number].starting_field
@@ -18,7 +18,7 @@ return {
       else
          player:allow_workers("all")
       end
-      
+
       prefilled_buildings(player, { "atlanteans_warehouse", sf.x, sf.y,
          wares = {
             log = 2,
@@ -39,7 +39,7 @@ return {
             [{0,0,0,0}] = 1,
          }
       })
-      
+
       player:reveal_fields(sf:region(10))
       player:conquer(sf, 9)
 
@@ -65,6 +65,5 @@ return {
             planks = -1})
          player:send_message(_"No rocks nearby", _"There are no rocks near to your starting position.  Therefore, you receive extra resources for bootstrapping your economy.")
       end
-      
    end
 }

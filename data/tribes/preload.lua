@@ -23,7 +23,7 @@ return {
          dirname .. "scripting/starting_conditions/barbarians/fortified_village.lua";
          dirname .. "scripting/starting_conditions/barbarians/trading_outpost.lua";
          dirname .. "scripting/starting_conditions/barbarians/hardcore.lua";
-         dirname .. "scripting/starting_conditions/barbarians/minimum.lua";
+         dirname .. "scripting/starting_conditions/barbarians/poor_hamlet.lua";
          dirname .. "scripting/starting_conditions/barbarians/village.lua";
       }
    },
@@ -42,7 +42,7 @@ return {
          dirname .. "scripting/starting_conditions/empire/fortified_village.lua";
          dirname .. "scripting/starting_conditions/empire/trading_outpost.lua";
          dirname .. "scripting/starting_conditions/empire/hardcore.lua";
-         dirname .. "scripting/starting_conditions/empire/minimum.lua";
+         dirname .. "scripting/starting_conditions/empire/poor_hamlet.lua";
          dirname .. "scripting/starting_conditions/empire/village.lua";
       }
    },
@@ -61,7 +61,7 @@ return {
          dirname .. "scripting/starting_conditions/atlanteans/fortified_village.lua";
          dirname .. "scripting/starting_conditions/atlanteans/trading_outpost.lua";
          dirname .. "scripting/starting_conditions/atlanteans/hardcore.lua";
-         dirname .. "scripting/starting_conditions/atlanteans/minimum.lua";
+         dirname .. "scripting/starting_conditions/atlanteans/poor_hamlet.lua";
          dirname .. "scripting/starting_conditions/atlanteans/village.lua";
       }
    },
@@ -79,6 +79,7 @@ return {
          dirname .. "scripting/starting_conditions/frisians/headquarters.lua";
          dirname .. "scripting/starting_conditions/frisians/fortified_village.lua";
          dirname .. "scripting/starting_conditions/frisians/trading_outpost.lua";
+         dirname .. "scripting/starting_conditions/frisians/poor_hamlet.lua";
          dirname .. "scripting/starting_conditions/frisians/village.lua";
       }
    }
