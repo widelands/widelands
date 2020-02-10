@@ -268,9 +268,9 @@ void Window::draw_border(RenderTarget& dst) {
 		//  top bar
 		static_assert(0 <= HZ_B_CORNER_PIXMAP_LEN, "assert(0 <= HZ_B_CORNER_PIXMAP_LEN) failed.");
 		for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN)
-			dst.blitrect(Vector2i(pos, 0), pic_top_,
-			             Recti(Vector2i(HZ_B_CORNER_PIXMAP_LEN, 0), HZ_B_MIDDLE_PIXMAP_LEN,
-			                   TP_B_PIXMAP_THICKNESS));
+			dst.blitrect(
+			   Vector2i(pos, 0), pic_top_, Recti(Vector2i(HZ_B_CORNER_PIXMAP_LEN, 0),
+			                                     HZ_B_MIDDLE_PIXMAP_LEN, TP_B_PIXMAP_THICKNESS));
 
 		// odd pixels of top bar and top right corner
 		const int32_t width = hz_bar_end - pos + HZ_B_CORNER_PIXMAP_LEN;
