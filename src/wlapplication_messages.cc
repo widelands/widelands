@@ -118,8 +118,7 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	               "                      not connected to a road.")
 	          << endl
 	          << endl
-	          << _("Graphic options:")
-	          << endl
+	          << _("Graphic options:") << endl
 	          /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
 	          /** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands
 	             textdomain */
