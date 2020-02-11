@@ -209,18 +209,20 @@ OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_worl
                           {"strand", "winter_beach"},
                           {"water", "winter_water"},
                        }),
-        std::make_pair(
-           "desert",
-           std::map<std::string, std::string>{
-              {"beach", "desert_beach"}, {"steppe", "desert_steppe"}, {"wasser", "desert_water"},
-           }),
+        std::make_pair("desert",
+                       std::map<std::string, std::string>{
+                          {"beach", "desert_beach"},
+                          {"steppe", "desert_steppe"},
+                          {"wasser", "desert_water"},
+                       }),
      },
 
      // CRITTERS
      critters_{
         std::make_pair("greenland",
                        std::map<std::string, std::string>{
-                          {"deer", "stag"}, {"elk", "moose"},
+                          {"deer", "stag"},
+                          {"elk", "moose"},
                        }),
         std::make_pair("blackland",
                        std::map<std::string, std::string>{
@@ -228,7 +230,8 @@ OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_worl
                        }),
         std::make_pair("winterland",
                        std::map<std::string, std::string>{
-                          {"deer", "stag"}, {"elk", "moose"},
+                          {"deer", "stag"},
+                          {"elk", "moose"},
                        }),
         std::make_pair("desert",
                        std::map<std::string, std::string>{

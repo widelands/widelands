@@ -2992,7 +2992,8 @@ const MethodType<LuaWarehouseDescription> LuaWarehouseDescription::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaWarehouseDescription> LuaWarehouseDescription::Properties[] = {
-   PROP_RO(LuaWarehouseDescription, heal_per_second), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaWarehouseDescription, heal_per_second),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -3452,7 +3453,8 @@ ResourceDescription
 */
 const char LuaResourceDescription::className[] = "ResourceDescription";
 const MethodType<LuaResourceDescription> LuaResourceDescription::Methods[] = {
-   METHOD(LuaResourceDescription, editor_image), {nullptr, nullptr},
+   METHOD(LuaResourceDescription, editor_image),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaResourceDescription> LuaResourceDescription::Properties[] = {
    PROP_RO(LuaResourceDescription, name),
@@ -3756,7 +3758,9 @@ Economy
 */
 const char LuaEconomy::className[] = "Economy";
 const MethodType<LuaEconomy> LuaEconomy::Methods[] = {
-   METHOD(LuaEconomy, target_quantity), METHOD(LuaEconomy, set_target_quantity), {nullptr, nullptr},
+   METHOD(LuaEconomy, target_quantity),
+   METHOD(LuaEconomy, set_target_quantity),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaEconomy> LuaEconomy::Properties[] = {
    {nullptr, nullptr, nullptr},
@@ -4114,7 +4118,8 @@ const MethodType<LuaBaseImmovable> LuaBaseImmovable::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaBaseImmovable> LuaBaseImmovable::Properties[] = {
-   PROP_RO(LuaBaseImmovable, fields), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaBaseImmovable, fields),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -4234,7 +4239,9 @@ Flag
 */
 const char LuaFlag::className[] = "Flag";
 const MethodType<LuaFlag> LuaFlag::Methods[] = {
-   METHOD(LuaFlag, set_wares), METHOD(LuaFlag, get_wares), {nullptr, nullptr},
+   METHOD(LuaFlag, set_wares),
+   METHOD(LuaFlag, get_wares),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaFlag> LuaFlag::Properties[] = {
    PROP_RO(LuaFlag, ware_economy), PROP_RO(LuaFlag, worker_economy), PROP_RO(LuaFlag, roads),
@@ -4461,7 +4468,9 @@ Road
 */
 const char LuaRoad::className[] = "Road";
 const MethodType<LuaRoad> LuaRoad::Methods[] = {
-   METHOD(LuaRoad, get_workers), METHOD(LuaRoad, set_workers), {nullptr, nullptr},
+   METHOD(LuaRoad, get_workers),
+   METHOD(LuaRoad, set_workers),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaRoad> LuaRoad::Properties[] = {
    PROP_RO(LuaRoad, length),        PROP_RO(LuaRoad, start_flag), PROP_RO(LuaRoad, end_flag),
@@ -4638,7 +4647,8 @@ const MethodType<LuaBuilding> LuaBuilding::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaBuilding> LuaBuilding::Properties[] = {
-   PROP_RO(LuaBuilding, flag), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaBuilding, flag),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -4689,7 +4699,8 @@ const MethodType<LuaConstructionSite> LuaConstructionSite::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaConstructionSite> LuaConstructionSite::Properties[] = {
-   PROP_RO(LuaConstructionSite, building), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaConstructionSite, building),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -5471,10 +5482,13 @@ MilitarySite
 */
 const char LuaMilitarySite::className[] = "MilitarySite";
 const MethodType<LuaMilitarySite> LuaMilitarySite::Methods[] = {
-   METHOD(LuaMilitarySite, get_soldiers), METHOD(LuaMilitarySite, set_soldiers), {nullptr, nullptr},
+   METHOD(LuaMilitarySite, get_soldiers),
+   METHOD(LuaMilitarySite, set_soldiers),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaMilitarySite> LuaMilitarySite::Properties[] = {
-   PROP_RO(LuaMilitarySite, max_soldiers), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaMilitarySite, max_soldiers),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -5528,10 +5542,13 @@ TrainingSite
 */
 const char LuaTrainingSite::className[] = "TrainingSite";
 const MethodType<LuaTrainingSite> LuaTrainingSite::Methods[] = {
-   METHOD(LuaTrainingSite, get_soldiers), METHOD(LuaTrainingSite, set_soldiers), {nullptr, nullptr},
+   METHOD(LuaTrainingSite, get_soldiers),
+   METHOD(LuaTrainingSite, set_soldiers),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaTrainingSite> LuaTrainingSite::Properties[] = {
-   PROP_RO(LuaTrainingSite, max_soldiers), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaTrainingSite, max_soldiers),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -5585,10 +5602,12 @@ Bob
 */
 const char LuaBob::className[] = "Bob";
 const MethodType<LuaBob> LuaBob::Methods[] = {
-   METHOD(LuaBob, has_caps), {nullptr, nullptr},
+   METHOD(LuaBob, has_caps),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaBob> LuaBob::Properties[] = {
-   PROP_RO(LuaBob, field), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaBob, field),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -5979,7 +5998,9 @@ const MethodType<LuaWorker> LuaWorker::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaWorker> LuaWorker::Properties[] = {
-   PROP_RO(LuaWorker, owner), PROP_RO(LuaWorker, location), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaWorker, owner),
+   PROP_RO(LuaWorker, location),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
