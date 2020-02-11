@@ -811,7 +811,7 @@ shortest_order(Game* game,
 	const size_t nr_dests = remaining_to_visit.size();
 	assert(nr_dests > 0);
 	auto get_first_path = [game, start, remaining_to_visit, fleet, is_on_dock](
-	                         Path& path, PortDock& dest) {
+	   Path& path, PortDock& dest) {
 		if (is_on_dock) {
 			PortDock* p = static_cast<PortDock*>(start);
 			if (p != remaining_to_visit[0].first) {
@@ -1269,12 +1269,13 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
 	Bob::log_general_info(egbase);
 
 	molog("Ship belongs to fleet %u\nlastdock: %s\n", fleet_ ? fleet_->serial() : 0,
-	      (lastdock_.is_set()) ? (boost::format("%u (%d x %d)") % lastdock_.serial() %
-	                              lastdock_.get(egbase)->get_positions(egbase)[0].x %
-	                              lastdock_.get(egbase)->get_positions(egbase)[0].y)
-	                                .str()
-	                                .c_str() :
-	                             "-");
+	      (lastdock_.is_set()) ?
+	         (boost::format("%u (%d x %d)") % lastdock_.serial() %
+	          lastdock_.get(egbase)->get_positions(egbase)[0].x %
+	          lastdock_.get(egbase)->get_positions(egbase)[0].y)
+	            .str()
+	            .c_str() :
+	         "-");
 	molog("Has %" PRIuS " destination(s):\n", destinations_.size());
 	for (const auto& pair : destinations_) {
 		molog("    · %u (%3dx%3d) (priority %u)\n", pair.first.serial(),

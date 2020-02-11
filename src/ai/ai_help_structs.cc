@@ -1492,7 +1492,7 @@ void FlagCandidates::sort_by_air_distance() {
 	std::sort(flags_.begin(), flags_.end(),
 	          [](const FlagCandidates::Candidate& lf, const FlagCandidates::Candidate& rf) {
 		          return lf.air_distance < rf.air_distance;
-	          });
+		       });
 }
 
 void FlagCandidates::add_flag(const uint32_t coords,

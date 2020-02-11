@@ -454,17 +454,14 @@ const std::set<UI::FontSets::Selector> kRTLScripts = {
 const std::map<UI::FontSets::Selector, std::set<UBlockCode>> kRTLCodeBlocks = {
    {UI::FontSets::Selector::kArabic,
     {
-       UBlockCode::UBLOCK_ARABIC,
-       UBlockCode::UBLOCK_ARABIC_SUPPLEMENT,
-       UBlockCode::UBLOCK_ARABIC_EXTENDED_A,
-       UBlockCode::UBLOCK_ARABIC_PRESENTATION_FORMS_A,
+       UBlockCode::UBLOCK_ARABIC, UBlockCode::UBLOCK_ARABIC_SUPPLEMENT,
+       UBlockCode::UBLOCK_ARABIC_EXTENDED_A, UBlockCode::UBLOCK_ARABIC_PRESENTATION_FORMS_A,
        UBlockCode::UBLOCK_ARABIC_PRESENTATION_FORMS_B,
        UBlockCode::UBLOCK_ARABIC_MATHEMATICAL_ALPHABETIC_SYMBOLS,
     }},
    {UI::FontSets::Selector::kDevanagari,
     {
-       UBlockCode::UBLOCK_DEVANAGARI,
-       UBlockCode::UBLOCK_DEVANAGARI_EXTENDED,
+       UBlockCode::UBLOCK_DEVANAGARI, UBlockCode::UBLOCK_DEVANAGARI_EXTENDED,
        UBlockCode::UBLOCK_VEDIC_EXTENSIONS,
     }},
    {UI::FontSets::Selector::kHebrew,

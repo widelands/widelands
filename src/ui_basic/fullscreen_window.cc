@@ -40,9 +40,9 @@ FullscreenWindow::FullscreenWindow()
      background_image_(kTemplateDir + "fsmenu/background.png") {
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged& message) {
-		   set_size(message.width, message.height);
+		   set_size(message.new_width, message.new_height);
 		   layout();
-	   });
+		});
 	set_frame_image(FullscreenWindow::Frames::kCornerTopLeft, "fsmenu/top_left.png");
 	set_frame_image(FullscreenWindow::Frames::kCornerTopRight, "fsmenu/top_right.png");
 	set_frame_image(FullscreenWindow::Frames::kCornerBottomLeft, "fsmenu/bottom_left.png");

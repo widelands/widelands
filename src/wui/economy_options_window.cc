@@ -140,7 +140,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 		   if (save_profile_dialog_) {
 			   save_profile_dialog_->update_table();
 		   }
-	   });
+		});
 
 	read_targets();
 }
