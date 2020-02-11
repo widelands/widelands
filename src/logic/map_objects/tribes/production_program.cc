@@ -67,7 +67,7 @@ namespace {
 ///    bool const result = match(candidate, "return");
 /// now candidate points to "   75" and result is true
 bool match(char*& candidate, const char* pattern) {
-	for (char* p = candidate;; ++p, ++pattern)
+	for (char *p = candidate;; ++p, ++pattern)
 		if (!*pattern) {
 			candidate = p;
 			return true;
@@ -113,7 +113,7 @@ bool skip(char*& p, char const c = ' ') {
 ///    bool const result = match_force_skip(candidate, "return");
 /// throws WException
 bool match_force_skip(char*& candidate, const char* pattern) {
-	for (char* p = candidate;; ++p, ++pattern)
+	for (char *p = candidate;; ++p, ++pattern)
 		if (!*pattern) {
 			force_skip(p);
 			candidate = p;
