@@ -681,7 +681,7 @@ void DefaultAI::late_initialization() {
 			}
 			for (const DescriptionIndex& temp_output : prod.output_ware_types()) {
 				bo.ware_outputs.push_back(temp_output);
-				if (tribe_->is_construction_material(temp_output) && bo.inputs.size() == 0) {
+				if (tribe_->is_construction_material(temp_output) && bo.inputs.empty()) {
 					wares.at(temp_output).raw_build_material = true;
 				}
 			}
@@ -786,7 +786,7 @@ void DefaultAI::late_initialization() {
 			// now we identify producers of critical build materials
 			for (DescriptionIndex ware : bo.ware_outputs) {
 				// building material except for trivial material
-				if (wares.at(ware).raw_build_material == false) {
+				if (!wares.at(ware).raw_build_material) {
 					bo.set_is(BuildingAttribute::kBuildingMatProducer);
 					if (bo.type == BuildingObserver::Type::kMine) {
 						mines_per_type[bo.mines].is_critical = true;
@@ -797,7 +797,7 @@ void DefaultAI::late_initialization() {
 
 			for (const auto& temp_buildcosts : prod.buildcost()) {
 				// building material except for trivial material
-				if (wares.at(temp_buildcosts.first).raw_build_material == false) {
+				if (!wares.at(temp_buildcosts.first).raw_build_material) {
 					bo.critical_building_material.push_back(temp_buildcosts.first);
 				}
 			}
@@ -837,7 +837,7 @@ void DefaultAI::late_initialization() {
 			const MilitarySiteDescr& milit = dynamic_cast<const MilitarySiteDescr&>(bld);
 			for (const auto& temp_buildcosts : milit.buildcost()) {
 				// Below are non-critical wares (wares produced without inputs)
-				if (wares.at(temp_buildcosts.first).raw_build_material == false) {
+				if (!wares.at(temp_buildcosts.first).raw_build_material) {
 					bo.critical_building_material.push_back(temp_buildcosts.first);
 				}
 			}
@@ -869,7 +869,7 @@ void DefaultAI::late_initialization() {
 			// building of new sites if ware is lacking
 			for (const auto& temp_buildcosts : train.buildcost()) {
 				// building material except for trivial material
-				if (wares.at(temp_buildcosts.first).raw_build_material == false) {
+				if (!wares.at(temp_buildcosts.first).raw_build_material) {
 					bo.critical_building_material.push_back(temp_buildcosts.first);
 				}
 			}
