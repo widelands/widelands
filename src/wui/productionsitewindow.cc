@@ -74,7 +74,7 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveBase& parent,
 				   break;
 			   }
 		   }
-	   });
+		});
 	if (!do_not_init) {
 		// Inheritance relations may cause problems with the dropdown when this is called from
 		// TrainingSiteWindow constructor

@@ -104,10 +104,9 @@ void EditorPlayerTeamsMenu::PlayerRelationsPanel::draw(RenderTarget& r) {
 		const Widelands::Player& pl = eia_.egbase().player(p1 + 1);
 		for (uint8_t p2 = 0; p2 < nr_players_; ++p2) {
 			if (p1 != p2) {
-				draw_image(r,
-				           pl.is_attack_forbidden(p2 + 1) ?
-				              "images/wui/menus/chat.png" :
-				              "images/wui/menus/toggle_soldier_levels.png",
+				draw_image(r, pl.is_attack_forbidden(p2 + 1) ?
+				                 "images/wui/menus/chat.png" :
+				                 "images/wui/menus/toggle_soldier_levels.png",
 				           (p1 + 1) * kPlayerRelationsCellSize + kPlayerRelationsCellSize / 2,
 				           (p2 + 1) * kPlayerRelationsCellSize + kPlayerRelationsCellSize / 2);
 			}
@@ -195,13 +194,12 @@ EditorPlayerAllowedBuildingsWindow::EditorPlayerAllowedBuildingsWindow(
 	Widelands::Player* player = eia->egbase().get_player(p);
 	for (Widelands::DescriptionIndex di : player->tribe().buildings()) {
 		const Widelands::BuildingDescr& d = *eia->egbase().tribes().get_building_descr(di);
-		UI::Checkbox& c =
-		   *new UI::Checkbox(&box_, Vector2i(0, 0),
-		                     (boost::format(
-		                         /** TRANSLATORS: Building Name (internal_building_name) */
-		                         _("%1$s (%2$s)")) %
-		                      d.descname() % d.name())
-		                        .str());
+		UI::Checkbox& c = *new UI::Checkbox(
+		   &box_, Vector2i(0, 0), (boost::format(
+		                              /** TRANSLATORS: Building Name (internal_building_name) */
+		                              _("%1$s (%2$s)")) %
+		                           d.descname() % d.name())
+		                             .str());
 		c.set_state(player->is_building_type_allowed(di));
 		c.changedto.connect([player, p, di](bool a) { player->allow_building_type(di, a); });
 		box_.add(&c);

@@ -68,9 +68,8 @@ ScenarioToolVisionOptionsMenu::ScenarioToolVisionOptionsMenu(EditorInteractive& 
 		players_.add(
 		   (boost::format(_("Player %1$s (%2$s)")) % std::to_string(static_cast<int>(p)) % name)
 		      .str(),
-		   p,
-		   g_gr->images().get(
-		      Widelands::get_tribeinfo(eia().egbase().map().get_scenario_player_tribe(p)).icon),
+		   p, g_gr->images().get(
+		         Widelands::get_tribeinfo(eia().egbase().map().get_scenario_player_tribe(p)).icon),
 		   sel == p);
 	}
 	modes_.add(_("Reveal"), Widelands::SeeUnseeNode::kReveal, nullptr,

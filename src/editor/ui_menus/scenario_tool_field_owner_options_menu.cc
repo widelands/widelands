@@ -56,9 +56,8 @@ ScenarioToolFieldOwnerOptionsMenu::ScenarioToolFieldOwnerOptionsMenu(
 		list_.add(
 		   (boost::format(_("Player %1$s (%2$s)")) % std::to_string(static_cast<int>(p)) % name)
 		      .str(),
-		   p,
-		   g_gr->images().get(
-		      Widelands::get_tribeinfo(eia().egbase().map().get_scenario_player_tribe(p)).icon),
+		   p, g_gr->images().get(
+		         Widelands::get_tribeinfo(eia().egbase().map().get_scenario_player_tribe(p)).icon),
 		   sel == p, (boost::format(_("Claim fields for %s")) % name).str());
 	}
 
