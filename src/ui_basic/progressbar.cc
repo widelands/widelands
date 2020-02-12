@@ -71,9 +71,9 @@ void ProgressBar::draw(RenderTarget& dst) {
 	assert(0 <= fraction);
 	assert(fraction <= 1);
 
-	const RGBColor& color = fraction <= 0.33f ?
-	                           style_.low_color() :
-	                           fraction <= 0.67f ? style_.medium_color() : style_.high_color();
+	const RGBColor& color = fraction <= 0.33f ? style_.low_color() : fraction <= 0.67f ?
+	                                            style_.medium_color() :
+	                                            style_.high_color();
 
 	// Draw the actual bar
 	if (orientation_ == Horizontal) {

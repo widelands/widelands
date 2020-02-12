@@ -55,15 +55,6 @@ jobs:
             - python-pip
       install: pip install sphinx
       script: ./.travis.sh documentation
-    - name: "Code Formatting"
-      language: python
-      cache: pip
-      addons:
-        apt:
-          packages:
-            - python-pip
-      install: pip install pyformat
-      script: ./.travis.sh formatting
 
     - stage: compiler
       # Run this stage to test whether there are any error during compiling.
