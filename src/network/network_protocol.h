@@ -28,7 +28,7 @@ enum {
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 23,
+	NETWORK_PROTOCOL_VERSION = 24,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
@@ -357,7 +357,7 @@ enum {
 	 * \li unsigned_32: length of data (needed because last part might be shorter)
 	 * \li void[length of data]: data
 	 *
-	 * Sent by the client to request the next part from the host.
+	 * Sent by the client when the complete file has been received.
 	 * \li unsigned_32: number of the last received part
 	 * \li string:      md5sum - to ensure client and host are talking about the same
 	 */

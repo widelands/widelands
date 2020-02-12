@@ -231,6 +231,11 @@ void draw_diagram(uint32_t time_ms,
 	// Make sure we haven't more ticks than we have space for -> avoid overlap
 	how_many_ticks = std::min(how_many_ticks, calc_plot_x_max_ticks(inner_w));
 
+	// Make sure how_many_ticks is a divisor of max_x
+	while (max_x % how_many_ticks != 0) {
+		how_many_ticks--;
+	}
+
 	// Draw coordinate system
 	// X Axis
 	dst.draw_line_strip({Vector2f(kSpacing, inner_h - kSpaceBottom),

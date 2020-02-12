@@ -215,9 +215,11 @@ private:
 
 	void print_stats(uint32_t);
 
-	uint32_t get_stocklevel(Widelands::BuildingObserver&, uint32_t, WareWorker = WareWorker::kWare) const;
-	uint32_t calculate_stocklevel(Widelands::DescriptionIndex,
-	                              WareWorker = WareWorker::kWare) const;  // count all direct outputs_
+	uint32_t
+	get_stocklevel(Widelands::BuildingObserver&, uint32_t, WareWorker = WareWorker::kWare) const;
+	uint32_t
+	   calculate_stocklevel(Widelands::DescriptionIndex,
+	                        WareWorker = WareWorker::kWare) const;  // count all direct outputs_
 
 	void review_wares_targets(uint32_t);
 

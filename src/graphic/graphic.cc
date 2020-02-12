@@ -26,7 +26,7 @@
 #include "base/wexception.h"
 #include "build_info.h"
 #include "graphic/align.h"
-#include "graphic/animation.h"
+#include "graphic/animation/animation_manager.h"
 #include "graphic/build_texture_atlas.h"
 #include "graphic/gl/initialize.h"
 #include "graphic/gl/system_headers.h"

@@ -24,9 +24,8 @@
 #include <unordered_map>
 
 #include "base/macros.h"
-#include "graphic/animation.h"
 #include "logic/map_objects/buildcost.h"
-#include "logic/map_objects/draw_text.h"
+#include "logic/map_objects/info_to_draw.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/widelands_geometry.h"
 #include "notifications/note_ids.h"
@@ -97,13 +96,13 @@ struct BaseImmovable : public MapObject {
 	virtual PositionList get_positions(const EditorGameBase&) const = 0;
 
 	// Draw this immovable onto 'dst' choosing the frame appropriate for
-	// 'gametime'. 'draw_text' decides if census and statistics are written too.
+	// 'gametime'. 'info_to_draw' decides if census and statistics are written too.
 	// The 'coords_to_draw' are passed one to give objects that occupy multiple
 	// fields a way to only draw themselves once. The 'point_on_dst' determines
 	// the point for the hotspot of the animation and 'scale' determines how big
 	// the immovable will be plotted.
 	virtual void draw(uint32_t gametime,
-	                  TextToDraw draw_text,
+	                  InfoToDraw info_to_draw,
 	                  const Vector2f& point_on_dst,
 	                  const Coords& coords,
 	                  float scale,
@@ -229,7 +228,7 @@ public:
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 	void draw(uint32_t gametime,
-	          TextToDraw draw_text,
+	          InfoToDraw info_to_draw,
 	          const Vector2f& point_on_dst,
 	          const Coords& coords,
 	          float scale,
@@ -316,7 +315,7 @@ private:
 
 	void increment_program_pointer();
 	void draw_construction(uint32_t gametime,
-	                       TextToDraw draw_text,
+	                       InfoToDraw info_to_draw,
 	                       const Vector2f& point_on_dst,
 	                       const Widelands::Coords& coords,
 	                       float scale,
@@ -335,16 +334,16 @@ struct PlayerImmovable : public BaseImmovable {
 	explicit PlayerImmovable(const MapObjectDescr&);
 	~PlayerImmovable() override;
 
-	Economy* get_economy() const {
-		return economy_;
+	Economy* get_economy(WareWorker type) const {
+		return type == wwWARE ? ware_economy_ : worker_economy_;
 	}
-	Economy& economy() const {
-		return *economy_;
+	Economy& economy(WareWorker type) const {
+		return *(type == wwWARE ? ware_economy_ : worker_economy_);
 	}
 
 	virtual Flag& base_flag() = 0;
 
-	virtual void set_economy(Economy*);
+	virtual void set_economy(Economy*, WareWorker);
 
 	virtual void add_worker(Worker&);
 	virtual void remove_worker(Worker&);
@@ -384,7 +383,8 @@ protected:
 	void cleanup(EditorGameBase&) override;
 
 private:
-	Economy* economy_;
+	Economy* ware_economy_;
+	Economy* worker_economy_;
 
 	Workers workers_;
 

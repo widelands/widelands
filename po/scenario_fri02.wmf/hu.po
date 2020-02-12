@@ -4,14 +4,15 @@
 # 
 # Translators:
 # Balázs Meskó <meskobalazs@gmail.com>, 2018
+# litoll <litoll@freemail.hu>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-12-30 07:55+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>, 2018\n"
+"Last-Translator: litoll <litoll@freemail.hu>, 2020\n"
 "Language-Team: Hungarian (https://www.transifex.com/widelands/teams/35159/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -101,51 +102,51 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:64
 msgid "30 × Log"
-msgstr ""
+msgstr "30 x Farönk"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:65
 msgid "40 × Granite"
-msgstr ""
+msgstr "40 x Gránit"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:66
 msgid "30 × Fish"
-msgstr ""
+msgstr "30 × Hal"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:67
 msgid "30 × Beer"
-msgstr ""
+msgstr "30 × Sör"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:68
 msgid "150 × Water"
-msgstr ""
+msgstr "150 × Víz"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:69
 msgid "40 × Ration"
-msgstr ""
+msgstr "40 × Harapnivaló"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:70
 msgid "10 × Meal"
-msgstr ""
+msgstr "10 × Ebéd"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:71
 msgid "30 × Coal"
-msgstr ""
+msgstr "30 × Szén"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:72
 msgid "40 × Iron Ore"
-msgstr ""
+msgstr "40 × Vasérc"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:73
 msgid "20 × Iron"
-msgstr ""
+msgstr "20 × Vas"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:74
 msgid "30 × Gold Ore"
-msgstr ""
+msgstr "30 × Aranyérc"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:75
 msgid "10 × Gold"
-msgstr ""
+msgstr "10 × Arany"
 
 #. TRANSLATORS: Continues from "Decide whether you want to work with Murilius
 #. against the Barbarians. If so, fill his warehouse with these wares: [list
@@ -762,7 +763,7 @@ msgstr ""
 #. though
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:383
 msgid "Salvete amici Imperii!"
-msgstr ""
+msgstr "Salvete amici Imperii!"
 
 #. TRANSLATORS: Murilius – Supplied Murilius
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:385
@@ -836,11 +837,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:412
 msgid "Victory"
-msgstr ""
+msgstr "Győzelem"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:413
 msgid "Victory!"
-msgstr ""
+msgstr "Győzelem!"
 
 #. TRANSLATORS: Reebaud – victory
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:415
@@ -851,17 +852,17 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:416
 msgid "Congratulations"
-msgstr ""
+msgstr "Gratulálunk"
 
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgstr ""
+msgstr "Új cél"
 
 #: ../../data/scripting/richtext_scenarios.lua:93
 msgid "New Objectives"
-msgstr ""
+msgstr "Új célok"

@@ -44,7 +44,7 @@ LoginBox::LoginBox(Panel& parent)
 	register_account = new UI::MultilineTextarea(
 	   this, margin, 105, 470, 140, UI::PanelStyle::kWui,
 	   (boost::format(_("In order to use a registered "
-	                    "account, you need an account on the widelands website. "
+	                    "account, you need an account on the Widelands website. "
 	                    "Please log in at %s and set an online "
 	                    "gaming password on your profile page.")) %
 	    "\n\nhttps://widelands.org/accounts/register/\n\n")
@@ -80,6 +80,9 @@ LoginBox::LoginBox(Panel& parent)
 	}
 
 	eb_nickname->focus();
+
+	eb_nickname->cancel.connect(boost::bind(&LoginBox::clicked_back, boost::ref(*this)));
+	eb_password->cancel.connect(boost::bind(&LoginBox::clicked_back, boost::ref(*this)));
 }
 
 /// think function of the UI (main loop)

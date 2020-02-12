@@ -21,7 +21,10 @@
 
 #include "economy/flag.h"
 #include "economy/road.h"
+#include "logic/editor_game_base.h"
 #include "logic/map.h"
+#include "logic/map_objects/world/terrain_description.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
 
 namespace Widelands {
@@ -106,6 +109,55 @@ bool CheckStepDefault::reachable_dest(const Map& map, const FCoords& dest) const
 	}
 
 	return true;
+}
+
+/*
+===============
+CheckStepFerry
+===============
+*/
+bool CheckStepFerry::allowed(
+   const Map& map, const FCoords& from, const FCoords& to, int32_t dir, CheckStep::StepId) const {
+	if (MOVECAPS_SWIM & (from.field->nodecaps() | to.field->nodecaps())) {
+		return true;
+	}
+	FCoords fd, fr;
+	switch (dir) {
+	case WALK_NE:
+		fd = to;
+		fr = map.tl_n(from);
+		break;
+	case WALK_SW:
+		fd = from;
+		fr = map.l_n(from);
+		break;
+	case WALK_NW:
+		fd = fr = to;
+		break;
+	case WALK_SE:
+		fd = fr = from;
+		break;
+	case WALK_E:
+		fd = map.tr_n(from);
+		fr = from;
+		break;
+	case WALK_W:
+		fd = map.tl_n(from);
+		fr = to;
+		break;
+	}
+	const World& world = egbase_.world();
+	return (world.terrain_descr(fd.field->terrain_d()).get_is() & TerrainDescription::Is::kWater) &&
+	       (world.terrain_descr(fr.field->terrain_r()).get_is() & TerrainDescription::Is::kWater);
+}
+
+bool CheckStepFerry::reachable_dest(const Map& map, const FCoords& dest) const {
+	for (int i = 1; i <= 6; ++i) {
+		if (allowed(map, dest, map.get_neighbour(dest, i), i, CheckStep::StepId::stepNormal)) {
+			return true;
+		}
+	}
+	return false;
 }
 
 /*

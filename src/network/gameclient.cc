@@ -149,6 +149,7 @@ bool GameClientImpl::run_map_menu(GameClient* parent) {
  * Show progress dialog and load map or saved game.
  */
 InteractiveGameBase* GameClientImpl::init_game(GameClient* parent, UI::ProgressWindow* loader) {
+	assert(loader);
 	std::vector<std::string> tipstext;
 	tipstext.push_back("general_game");
 	tipstext.push_back("multiplayer");
@@ -162,22 +163,24 @@ InteractiveGameBase* GameClientImpl::init_game(GameClient* parent, UI::ProgressW
 	loader->step(_("Preparing game"));
 
 	game->set_game_controller(parent);
+	game->set_loader_ui(loader);
 	uint8_t const pn = settings.playernum + 1;
 	game->save_handler().set_autosave_filename(
 	   (boost::format("%s_netclient%u") % kAutosavePrefix % static_cast<unsigned int>(pn)).str());
 	InteractiveGameBase* igb;
 	if (pn > 0) {
-		igb = new InteractivePlayer(*game, get_config_section(), pn, true);
+		igb = new InteractivePlayer(*game, get_config_section(), pn, true, parent);
 	} else {
-		igb = new InteractiveSpectator(*game, get_config_section(), true);
+		igb = new InteractiveSpectator(*game, get_config_section(), true, parent);
 	}
+
 	game->set_ibase(igb);
-	igb->set_chat_provider(*parent);
 	if (settings.savegame) {  // savegame
-		game->init_savegame(loader, settings);
+		game->init_savegame(settings);
 	} else {  //  new map
-		game->init_newgame(loader, settings);
+		game->init_newgame(settings);
 	}
+	game->set_loader_ui(nullptr);
 	return igb;
 }
 
@@ -190,8 +193,9 @@ void GameClientImpl::run_game(InteractiveGameBase* igb, UI::ProgressWindow* load
 	lasttimestamp_realtime = SDL_GetTicks();
 
 	modal = igb;
-	game->run(loader,
-	          settings.savegame ? Widelands::Game::Loaded :
+	assert(loader);
+	game->set_loader_ui(loader);
+	game->run(settings.savegame ? Widelands::Game::Loaded :
 	                              settings.scenario ? Widelands::Game::NewMPScenario :
 	                                                  Widelands::Game::NewNonScenario,
 	          "", false, (boost::format("netclient_%d") % static_cast<int>(settings.usernum)).str());
@@ -201,6 +205,7 @@ void GameClientImpl::run_game(InteractiveGameBase* igb, UI::ProgressWindow* load
 		InternetGaming::ref().set_game_done();
 	}
 	modal = nullptr;
+	game->set_loader_ui(nullptr);
 	game = nullptr;
 }
 
@@ -724,33 +729,36 @@ void GameClient::handle_file_part(RecvPacket& packet) {
 	// Only go on, if we are waiting for a file part at the moment. It can happen, that an
 	// "unrequested" part is send by the server if the map was changed just a moment ago
 	// and there was an outstanding request from the client.
-	if (!d->file_)
+	if (!d->file_) {
 		return;  // silently ignore
+	}
 
 	uint32_t part = packet.unsigned_32();
 	uint32_t size = packet.unsigned_32();
-
-	// Send an answer
-	SendPacket s;
-	s.unsigned_8(NETCMD_FILE_PART);
-	s.unsigned_32(part);
-	s.string(d->file_->md5sum);
-	d->net->send(s);
 
 	FilePart fp;
 
 	char buf[NETFILEPARTSIZE];
 	assert(size <= NETFILEPARTSIZE);
 
-	// TODO(Klaus Halfmann): read directcly into FilePart?
-	if (packet.data(buf, size) != size)
+	// TODO(Klaus Halfmann): read directly into FilePart?
+	if (packet.data(buf, size) != size) {
 		log("Readproblem. Will try to go on anyways\n");
+	}
 	memcpy(fp.part, &buf[0], size);
 	d->file_->parts.push_back(fp);
 
 	// Write file to disk as soon as all parts arrived
 	uint32_t left = (d->file_->bytes - NETFILEPARTSIZE * part);
 	if (left <= NETFILEPARTSIZE) {
+
+		// Send an answer. We got everything
+		SendPacket s;
+		s.unsigned_8(NETCMD_FILE_PART);
+		s.unsigned_32(part);
+		s.string(d->file_->md5sum);
+		d->net->send(s);
+
 		FileWrite fw;
 		left = d->file_->bytes;
 		uint32_t i = 0;

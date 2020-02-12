@@ -25,6 +25,7 @@
 
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/base.h"
 #include "ui_fsmenu/load_map_or_game.h"
@@ -62,6 +63,8 @@ private:
 	bool set_has_selection();
 	UI::Checkbox* add_tag_checkbox(UI::Box*, std::string, std::string);
 	void tagbox_changed(int32_t, bool);
+	void clear_filter();
+	void rebuild_balancing_dropdown();
 
 	int32_t const checkbox_space_;
 	const int checkbox_padding_;
@@ -84,8 +87,15 @@ private:
 	UI::Checkbox* cb_dont_localize_mapnames_;
 	bool has_translated_mapname_;
 
-	UI::Checkbox* cb_show_all_maps_;
+	UI::Button* show_all_maps_;
 	std::vector<UI::Checkbox*> tags_checkboxes_;
+
+	UI::Dropdown<std::string>* official_tags_dropdown_;
+
+	UI::Dropdown<std::string>* balancing_tags_dropdown_;
+	bool unspecified_balancing_found_;  // Backwards compatibility
+
+	UI::Dropdown<std::string>* team_tags_dropdown_;
 
 	std::vector<std::string> tags_ordered_;
 	std::set<uint32_t> req_tags_;

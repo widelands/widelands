@@ -2,13 +2,13 @@
 # Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2019
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
-"PO-Revision-Date: 2019-08-11 18:40+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-12-30 07:55+0000\n"
+"PO-Revision-Date: 2020-01-02 17:13+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -304,8 +304,8 @@ msgstr "Laat uns dat Beschicken verfolgen"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:203
 msgid ""
-"Click on the construction site to have a look at it, then close it again "
-"when you have seen enough."
+"Click on the construction site to have a look at it, then close its window "
+"again when you have seen enough."
 msgstr "Klick de Baustee an, um se genauer antokieken, un maak hör Fenster weer to, wenn du genoog sehn hest."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:204
@@ -373,7 +373,7 @@ msgstr "Over de anner Kant kannst du de rechte Muustaste enerwegens up de Kaart 
 msgid ""
 "The third one is to use the minimap. It is especially useful for traveling "
 "big distances."
-msgstr "Oder du kannst de Lütte Kaart bruuken. Dat is besünners för grote Ofstannen gadelk."
+msgstr "Of du kannst de Lütte Kaart bruuken. Dat is besünners för grote Ofstannen gadelk."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:256
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:258
@@ -582,7 +582,7 @@ msgid ""
 "you just ordered the quarry. You can either make it longer by one field at a"
 " time by left-clicking multiple times on neighboring fields for perfect "
 "control over the route the road takes, like so:"
-msgstr "Un nu de Straat. Vergeet nich: wi sünd al klaar tum Stratenbauen, wiel du jüüst de Flintslagerhuus beschickt hest. Du kannst de Straat een Feld up eenmaal verlangern, indeem du mennigmaal mit de linken Muustaste up een benaberts Feld klickst. So kannst du de Verloop vun de Straat akkeraat fastleggen. Dat gaht so:"
+msgstr "Un nu de Straat. Vergeet nich: wi sünd al klaar tum Stratenbauen, wiel du jüüst de Flintslagerhuus beschickt hest. Du kannst de Straat een Feld up eenmaal verlangern, indeem du mennigmaal mit de linken Muustaste up een benabert Feld klickst. So kannst du de Verloop vun de Straat akkeraat fastleggen. Dat gaht so:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:386
 msgid ""
@@ -595,12 +595,12 @@ msgid ""
 "Now, about this road. I’ll enter the road building mode and then make it "
 "longer by one field at a time by left-clicking multiple times on neighboring"
 " fields for perfect control over the route the road takes, like so:"
-msgstr "Ennelk de Straat. Ick maak mi klaar tum Stratenbauen un maak de Straat langer um een Feld up eenmaal, indeem ick mennigmaal mit de linke Muustaste up een benaberts Feld klick. So kann ick de Verloop vun de Straat akkeraat fastleggen. Also so:"
+msgstr "Ennelk de Straat. Ick maak mi klaar tum Stratenbauen un maak de Straat langer um een Feld up eenmaal, indeem ick mennigmaal mit de linke Muustaste up een benabert Feld klick. So kann ick de Verloop vun de Straat akkeraat fastleggen. Also so:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:398
 msgid ""
 "Or, you can directly click the flag where the road should end, like so:"
-msgstr "Oder du kannst stracks up de Fahn, waar de Straat ennen sall, klicken. Also so:"
+msgstr "Of du kannst stracks up de Fahn, waar de Straat ennen sall, klicken. Also so:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:405
 msgid "Connect the quarry to the headquarters"
@@ -645,7 +645,7 @@ msgstr "De Landskupp is hier platt. Diene Lastendragers lopen hier schötig."
 msgid ""
 "There is a small slope to climb to reach this field. This means that your "
 "workers will be faster walking downhill than they will be walking uphill."
-msgstr "Hier mutt man eene lütte Schüünte uplopen. Diene Arbeiders sünd hier en bietje langsamer, wenn se uplopen, un en bietje gauer, wenn se runnerlopen."
+msgstr "Hier mutt man eene lütte Schüünte uplopen. Diene Arbeiders sünd hier een bietje langsamer, wenn se uplopen, un een bietje gauer, wenn se runnerlopen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:420
 msgid ""
@@ -690,7 +690,7 @@ msgid ""
 "created from time to time. To do so, you will have to go back to the main "
 "menu and choose ‘Single Player’ → ‘Load Game’. And please be a bit more "
 "careful next time."
-msgstr "Du kannst dat Speel ok ut eenem sekert Speel laden. Deese worden glückelkerwies unner de Tied automatisk maakt. Um dat to doon, gah torügg tum Höövdmenü un köör »Een Speler« → »Speel laden« ut. Un pass anner Maal bidde en bietje beter up."
+msgstr "Du kannst dat Speel ok ut eenem sekert Speel laden. Deese worden glückelkerwies unner de Tied automatisk maakt. Um dat to doon, gah torügg tum Höövdmenü un köör »Een Speler« → »Speel laden« ut. Un pass anner Maal bidde een bietje beter up."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:447
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:449

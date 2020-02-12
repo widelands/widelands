@@ -91,6 +91,10 @@ Table<void*>::~Table() {
 	multiselect_.clear();
 }
 
+size_t Table<void*>::number_of_columns() const {
+	return columns_.size();
+}
+
 /// Add a new column to this table.
 void Table<void*>::add_column(uint32_t const width,
                               const std::string& title,
@@ -370,12 +374,10 @@ bool Table<void*>::handle_key(bool down, SDL_Keysym code) {
 			}
 			break;
 		case SDLK_UP:
-		case SDLK_KP_8:
 			move_selection(-1);
 			return true;
 
 		case SDLK_DOWN:
-		case SDLK_KP_2:
 			move_selection(1);
 			return true;
 

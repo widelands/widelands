@@ -38,16 +38,13 @@ class InteractiveGameBase : public InteractiveBase {
 public:
 	InteractiveGameBase(Widelands::Game&,
 	                    Section& global_s,
-	                    PlayerType pt = NONE,
-	                    bool multiplayer = false);
+	                    PlayerType pt,
+	                    bool multiplayer,
+	                    ChatProvider* chat_provider);
 	~InteractiveGameBase() override {
 	}
 	Widelands::Game* get_game() const;
 	Widelands::Game& game() const;
-
-	// Chat messages
-	void set_chat_provider(ChatProvider&);
-	ChatProvider* get_chat_provider();
 
 	virtual bool can_see(Widelands::PlayerNumber) const = 0;
 	virtual bool can_act(Widelands::PlayerNumber) const = 0;
@@ -87,10 +84,17 @@ public:
 	bool show_game_client_disconnected();
 	void postload() override;
 	void start() override;
+	void toggle_mainmenu();
 
 protected:
 	// For referencing the items in showhidemenu_
-	enum class ShowHideEntry { kBuildingSpaces, kCensus, kStatistics, kWorkareaOverlap };
+	enum class ShowHideEntry {
+		kBuildingSpaces,
+		kCensus,
+		kStatistics,
+		kSoldierLevels,
+		kWorkareaOverlap
+	};
 
 	// Adds the mapviewmenu_ to the toolbar
 	void add_main_menu();
@@ -99,6 +103,9 @@ protected:
 	void rebuild_showhide_menu() override;
 	// Adds the gamespeedmenu_ to the toolbar
 	void add_gamespeed_menu();
+
+	// Adds a chat toolbar button and registers the chat console window
+	void add_chat_ui();
 
 	bool handle_key(bool down, SDL_Keysym code) override;
 
@@ -119,6 +126,7 @@ protected:
 	} menu_windows_;
 
 	ChatProvider* chat_provider_;
+	UI::UniqueWindow::Registry chat_;
 	bool multiplayer_;
 	PlayerType playertype_;
 
@@ -153,11 +161,13 @@ private:
 	void rebuild_gamespeed_menu();
 
 	// Increases the gamespeed
-	void increase_gamespeed();
+	void increase_gamespeed(uint16_t speed);
 	// Decreases the gamespeed
-	void decrease_gamespeed();
+	void decrease_gamespeed(uint16_t speed);
 	// Pauses / Unpauses the game and calls rebuild_gamespeed_menu
 	void toggle_game_paused();
+	// Resets the speed to 1x
+	void reset_gamespeed();
 
 	struct WantedBuildingWindow {
 		explicit WantedBuildingWindow(const Vector2i& pos,
