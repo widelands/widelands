@@ -319,6 +319,10 @@ UI::ProgressWindow& EditorGameBase::loader_ui() const {
     return *loader_ui_.get();
 }
 // NOCOM test all usages of loader_ui and whether manual removes are necessary
+/* NOCOM loader UI fails on emergency save, e.g. script bugs
+ * FATAL ERROR - game crashed. Attempting emergency save.
+widelands: ../src/logic/editor_game_base.cc:317: UI::ProgressWindow& Widelands::EditorGameBase::loader_ui() const: Assertion `loader_ui_ != nullptr' failed.
+*/
 
 /**
  * Instantly create a building at the given x/y location. There is no build time.
