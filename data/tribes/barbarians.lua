@@ -327,5 +327,4 @@ tribes:new_tribe {
    ship = "barbarians_ship",
    ferry = "barbarians_ferry",
    port = "barbarians_port",
-   ironore = "iron_ore",
 }
