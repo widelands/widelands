@@ -90,10 +90,10 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 	name_ = mapdata.name;
 	// Show directory information
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
-		name_label_.set_text(
-		   (boost::format("<rt>%s%s</rt>") % as_heading(_("Directory"), style_, true) %
-		    as_content(mapdata.localized_name, style_))
-		      .str());
+		name_label_.set_text((boost::format("<rt>%s%s</rt>") %
+		                      as_heading(_("Directory"), style_, true) %
+		                      as_content(mapdata.localized_name, style_))
+		                        .str());
 		main_box_.set_size(main_box_.get_w(), get_h());
 
 	} else {  // Show map information

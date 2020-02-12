@@ -135,7 +135,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 		   default:
 			   break;
 		   }
-	   });
+		});
 
 	if (chat_provider_ != nullptr) {
 		chat_overlay()->set_chat_provider(*chat_provider_);

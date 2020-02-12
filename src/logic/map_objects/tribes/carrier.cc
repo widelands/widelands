@@ -229,8 +229,9 @@ void Carrier::deliver_to_building(Game& game, State& state) {
 			} else {
 				molog("[Carrier]: Building switch from under us, return to road.\n");
 
-				state.ivar1 = &building->base_flag() == &dynamic_cast<RoadBase&>(*get_location(game))
-				                                            .get_flag(static_cast<RoadBase::FlagId>(0));
+				state.ivar1 = &building->base_flag() ==
+				              &dynamic_cast<RoadBase&>(*get_location(game))
+				                  .get_flag(static_cast<RoadBase::FlagId>(0));
 				break;
 			}
 		}

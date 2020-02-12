@@ -81,9 +81,7 @@ Game
 */
 const char LuaGame::className[] = "Game";
 const MethodType<LuaGame> LuaGame::Methods[] = {
-   METHOD(LuaGame, launch_coroutine),
-   METHOD(LuaGame, save),
-   {nullptr, nullptr},
+   METHOD(LuaGame, launch_coroutine), METHOD(LuaGame, save), {nullptr, nullptr},
 };
 const PropertyType<LuaGame> LuaGame::Properties[] = {
    PROP_RO(LuaGame, real_speed),   PROP_RO(LuaGame, time), PROP_RW(LuaGame, desired_speed),
@@ -331,9 +329,7 @@ const MethodType<LuaWorld> LuaWorld::Methods[] = {
    {0, 0},
 };
 const PropertyType<LuaWorld> LuaWorld::Properties[] = {
-   PROP_RO(LuaWorld, immovable_descriptions),
-   PROP_RO(LuaWorld, terrain_descriptions),
-   {0, 0, 0},
+   PROP_RO(LuaWorld, immovable_descriptions), PROP_RO(LuaWorld, terrain_descriptions), {0, 0, 0},
 };
 
 LuaWorld::LuaWorld(lua_State* /* L */) {
