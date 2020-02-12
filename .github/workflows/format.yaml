@@ -1,0 +1,113 @@
+name: Formatting your code
+on:
+  # We are interested only in master and PRs, but GitHub explicitly forbids
+  # pushing to the fork when an event is triggered on the base repo.
+  # We therefore need to intercept all calls and filter out the ones we are
+  # interested in.
+  # For master, and branches with an open PR, we run utils/fix_formatting.py.
+  # We then commit and push the changes to the branch.
+  # If someone pushes to the branch while we're still formatting,
+  # we exit 1 instead of pushing.
+  # For other branches without an open PR, we also run fix_formatting.py, but
+  # we do not push anything, only signal the code quality by exiting 0 or 1.
+  push:
+jobs:
+  run_formatting:
+    name: Run fix_formatting.py
+    # clang-format has broken dependencies on ubuntu-latest
+    runs-on: ubuntu-16.04
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Fetching branch info
+      run: |
+        b="${GITHUB_REF##*/}"
+        if [ "$b" == "master" ]
+        then
+          echo "Always format master ($GITHUB_REF)"
+        else
+          forkname=${{ github.repository }}
+          # grep returns 1 if the branch is not found
+          set +e
+          output=$(curl -i "https://api.github.com/repos/widelands/widelands/pulls?state=open&head=${forkname%%/*}:$b" | grep "$b")
+          set -e
+          if [ -z "$output" ]
+          then
+            echo "Branch $b in repository $forkname does NOT have an open pull request"
+            b=""
+          else
+            echo "Branch $b in repository $forkname has an open pull request"
+          fi
+        fi
+        echo "::set-env name=branch::$b"
+        git config --global user.name "The Widelands Code Formatting Bot"
+        git config --global user.email "actions@github.com"
+        # copied from https://github.com/stefanzweifel/git-auto-commit-action/blob/master/entrypoint.sh
+        cat <<- EOF > $HOME/.netrc
+        machine github.com
+        login $GITHUB_ACTOR
+        password ${{ secrets.GITHUB_TOKEN }}
+        machine api.github.com
+        login $GITHUB_ACTOR
+        password ${{ secrets.GITHUB_TOKEN }}
+        EOF
+        chmod 600 $HOME/.netrc
+    - name: Installing python
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.x
+    - name: Installing formatting tools
+      run: |
+        sudo apt-get update
+        sudo apt-get install clang-format
+        pip install pyformat
+    - name: Invoking fix_formatting.py
+      run: python3 ./utils/fix_formatting.py
+    - name: Gathering changes
+      run: |
+        nrfiles=$(git status -s | wc -l)
+        if [ $nrfiles == 0 ]
+        then
+          echo "Nothing to do"
+          files=""
+        else
+          if [ $nrfiles == 1 ]
+          then
+            echo "1 file formatted"
+            nrfiles=$(git status -s)
+            files="'${nrfiles#???}' was automatically formatted."
+          else
+            echo "$nrfiles files formatted"
+            files="$nrfiles files were automatically formatted."
+          fi
+          if [ -z "$branch" ]
+          then
+            echo "Your branch does not have an open pull request, so no changes will be pushed. Please note however that your code is not properly formatted."
+            git diff
+            exit 1
+          fi
+        fi
+        echo "::set-env name=COMMIT_MESSAGE::$files"
+    - name: Getting the changes into the branch
+      run: |
+        if [ -z "$COMMIT_MESSAGE" ]
+        # skip if there's nothing to do
+        then
+          echo "Code was already correctly formatted"
+          exit 0
+        fi
+        set +e # curl exits 23 because grep will kill it after the first match
+        latest=$(curl -i "https://api.github.com/repos/${{ github.repository }}/commits/$branch" | grep -m 1 "\"sha\": ")
+        set -e
+        latest=${latest#*: \"}
+        latest=${latest%\",}
+        if [ "$latest" == "${{ github.sha }}" ]
+        then
+          echo "No remote changes"
+          git commit -m "$COMMIT_MESSAGE"
+          git push origin "$branch"
+          echo "Changes were successfully pushed to $branch at ${{ github.repository }}. Don't forget to run 'git pull' before pushing to the branch again."
+        else
+          echo "The remote branch '$branch' ($GITHUB_REF) from '${{ github.repository }}' was updated from '${{ github.sha }}' to '$latest', cancel"
+          exit 1
+        fi

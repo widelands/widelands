@@ -490,8 +490,9 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 		}
 
 		if (building_descr->get_built_over_immovable() != Widelands::INVALID_INDEX &&
-		    !(node_.field->get_immovable() && node_.field->get_immovable()->has_attribute(
-		                                         building_descr->get_built_over_immovable()))) {
+		    !(node_.field->get_immovable() &&
+		      node_.field->get_immovable()->has_attribute(
+		         building_descr->get_built_over_immovable()))) {
 			continue;
 		}
 		// Figure out if we can build it here, and in which tab it belongs
