@@ -3,15 +3,15 @@
 # 
 # Translators:
 # GunChleoc, 2016
-# Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2019
+# Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2020
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-01-21 18:02+0000\n"
-"PO-Revision-Date: 2020-01-21 18:25+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-02-06 08:26+0000\n"
+"PO-Revision-Date: 2020-02-11 13:47+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -160,7 +160,7 @@ msgstr "Søfart"
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports, and how to use ferries and waterways."
-msgstr ""
+msgstr "I denne introduktion vil du lære om søvæsen, som indbefatter håndtering af skibe og havne samt færger og vandveje."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy"
