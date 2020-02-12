@@ -5651,7 +5651,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				// unless a mine is prohibited, we want to have at least one of the kind
 				bo.max_needed_preciousness = bo.max_preciousness;
 				return BuildingNecessity::kNeeded;
-			} else if ((mines_per_type[bo.mines].finished == 1 &&
+			} else if (mines_per_type[bo.mines].finished == 1 &&
 			           mines_per_type[bo.mines].total_count() < 2 &&
 			           // bo.is(BuildingAttribute::kBuildingMatProducer) &&
 			           site_needed_for_economy != BasicEconomyBuildingStatus::kDiscouraged) {
