@@ -5657,7 +5657,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			           site_needed_for_economy != BasicEconomyBuildingStatus::kDiscouraged) {
 				bo.max_needed_preciousness = bo.max_preciousness;
 				// bo.primary_priority += bo.max_needed_preciousness *
-				                       // std::abs(management_data.get_military_number_at(129)) / 10;
+				// std::abs(management_data.get_military_number_at(129)) / 10;
 				return BuildingNecessity::kNeeded;
 			}
 			if (bo.max_needed_preciousness == 0) {
