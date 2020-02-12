@@ -681,8 +681,8 @@ void DefaultAI::late_initialization() {
 			}
 			for (const DescriptionIndex& temp_output : prod.output_ware_types()) {
 				bo.ware_outputs.push_back(temp_output);
-				if (tribe_->is_construction_material(temp_output) && bo.inputs.empty()) {
-					wares.at(temp_output).raw_build_material = true;
+				if (tribe_->is_construction_material(temp_output) && !bo.inputs.empty()) {
+					wares.at(temp_output).refined_build_material = true;
 				}
 			}
 
@@ -786,7 +786,7 @@ void DefaultAI::late_initialization() {
 			// now we identify producers of critical build materials
 			for (DescriptionIndex ware : bo.ware_outputs) {
 				// building material except for trivial material
-				if (!wares.at(ware).raw_build_material) {
+				if (wares.at(ware).refined_build_material) {
 					bo.set_is(BuildingAttribute::kBuildingMatProducer);
 					if (bo.type == BuildingObserver::Type::kMine) {
 						mines_per_type[bo.mines].is_critical = true;
@@ -797,7 +797,7 @@ void DefaultAI::late_initialization() {
 
 			for (const auto& temp_buildcosts : prod.buildcost()) {
 				// building material except for trivial material
-				if (!wares.at(temp_buildcosts.first).raw_build_material) {
+				if (wares.at(temp_buildcosts.first).refined_build_material) {
 					bo.critical_building_material.push_back(temp_buildcosts.first);
 				}
 			}
@@ -837,7 +837,7 @@ void DefaultAI::late_initialization() {
 			const MilitarySiteDescr& milit = dynamic_cast<const MilitarySiteDescr&>(bld);
 			for (const auto& temp_buildcosts : milit.buildcost()) {
 				// Below are non-critical wares (wares produced without inputs)
-				if (!wares.at(temp_buildcosts.first).raw_build_material) {
+				if (wares.at(temp_buildcosts.first).refined_build_material) {
 					bo.critical_building_material.push_back(temp_buildcosts.first);
 				}
 			}
@@ -869,7 +869,7 @@ void DefaultAI::late_initialization() {
 			// building of new sites if ware is lacking
 			for (const auto& temp_buildcosts : train.buildcost()) {
 				// building material except for trivial material
-				if (!wares.at(temp_buildcosts.first).raw_build_material) {
+				if (wares.at(temp_buildcosts.first).refined_build_material) {
 					bo.critical_building_material.push_back(temp_buildcosts.first);
 				}
 			}
@@ -4864,14 +4864,14 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 	bool single_critical = false;
 	if ((site.bo->is(BuildingAttribute::kBuildingMatProducer) ||
 	     site.bo->mines == iron_resource_id) &&
-	    mines_per_type[site.bo->mines].total_count() == 1) {
+	    mines_per_type[site.bo->mines].finished == 1) {
 		single_critical = true;
 	}
 
 	// first get rid of mines that have been  missing workers for some time (6 minutes),
 	// released worker (if any) can be useful elsewhere !
-	if (!single_critical && site.built_time + 6 * 60 * 1000 < gametime &&
-	    !site.site->can_start_working()) {
+	if (!single_critical && site.built_time + 10 * 60 * 1000 < gametime &&
+	    !site.site->can_start_working() && mines_per_type[site.bo->mines].total_count() > 2) {
 		initiate_dismantling(site, gametime);
 		return false;
 	}
@@ -4883,9 +4883,14 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 
 	// After 20 minutes in existence we check whether a miner is needed for a critical unoccupied
 	// mine elsewhere
-	if (site.built_time + 20 * 60 * 1000 < gametime && gametime % 5 == 0) {
+	if (site.built_time + 15 * 60 * 1000 < gametime) {
 		if (!mines_per_type[site.bo->mines].is_critical && critical_mine_unoccupied(gametime)) {
-			initiate_dismantling(site, gametime);
+			for (uint8_t i = 0; i < site.site->descr().nr_working_positions(); i++) {
+				const Worker* cw = site.site->working_positions()[i].worker;
+				if (cw) {
+					game().send_player_evict_worker(*site.site->working_positions()[i].worker);
+				}
+			}
 			return true;
 		}
 	}
@@ -5639,18 +5644,20 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			}
 		} else if (bo.type == BuildingObserver::Type::kMine) {
 			bo.primary_priority = bo.max_needed_preciousness;
+			// NOCOM the following could be addressed as mines_per_type[bo.mines].total_count as well
+			// NOCOM any reason for leaving this with in_construction + finished
 			if ((mines_per_type[bo.mines].in_construction + mines_per_type[bo.mines].finished) == 0 &&
 			    site_needed_for_economy != BasicEconomyBuildingStatus::kDiscouraged) {
 				// unless a mine is prohibited, we want to have at least one of the kind
 				bo.max_needed_preciousness = bo.max_preciousness;
 				return BuildingNecessity::kNeeded;
-			} else if (((mines_per_type[bo.mines].in_construction +
-			             mines_per_type[bo.mines].finished) == 1) &&
-			           bo.is(BuildingAttribute::kBuildingMatProducer) &&
+			} else if ((mines_per_type[bo.mines].finished == 1 &&
+			           mines_per_type[bo.mines].total_count() < 2 &&
+			           // bo.is(BuildingAttribute::kBuildingMatProducer) &&
 			           site_needed_for_economy != BasicEconomyBuildingStatus::kDiscouraged) {
 				bo.max_needed_preciousness = bo.max_preciousness;
-				bo.primary_priority += bo.max_needed_preciousness *
-				                       std::abs(management_data.get_military_number_at(129)) / 10;
+				// bo.primary_priority += bo.max_needed_preciousness *
+				                       // std::abs(management_data.get_military_number_at(129)) / 10;
 				return BuildingNecessity::kNeeded;
 			}
 			if (bo.max_needed_preciousness == 0) {
@@ -7054,10 +7061,10 @@ bool DefaultAI::critical_mine_unoccupied(uint32_t gametime) {
 		}
 	}
 
-	// Now check that that there is a single and unworking mine of the critical type
+	// Now check that that there is no working mine of the critical type
 	for (auto& mine : mines_per_type) {
-		if (mine.second.is_critical && mine.second.total_count() == 1 &&
-		    mine.second.unoccupied == 1) {
+		if (mine.second.is_critical && mine.second.finished > 0 &&
+		    mine.second.unoccupied == mine.second.finished) {
 			return true;
 		}
 		assert(mine.second.unoccupied <= mines_.size());
