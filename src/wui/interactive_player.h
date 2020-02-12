@@ -67,7 +67,7 @@ public:
 
 	// For load
 	void cleanup_for_load() override;
-	void postload();
+	void postload() override;
 	void think() override;
 	void draw(RenderTarget& dst) override;
 

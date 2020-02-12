@@ -264,10 +264,43 @@ void EditorGameBase::inform_players_about_immovable(MapIndex const i,
 		}
 }
 
+// Loads map object descriptions for all tribes
+void EditorGameBase::load_all_tribes() {
+    // Load all tribes
+    for (const std::string& tribe_name : Widelands::get_all_tribenames()) {
+        mutable_tribes()->load_tribe(tribe_name);
+    }
+}
+
 void EditorGameBase::allocate_player_maps() {
 	iterate_players_existing(plnum, kMaxPlayers, *this, p) {
 		p->allocate_map();
 	}
+}
+
+/**
+ * Load and prepare detailed game data.
+ * This happens once just after the host has started the game and before the
+ * graphics are loaded.
+ */
+void EditorGameBase::postload() {
+	if (map_.filesystem()) {
+		// save map data to temporary file and reassign map fs
+		try {
+			create_tempfile_and_save_mapdata(FileSystem::ZIP);
+		} catch (const WException& e) {
+			log("EditorGameBase::postload: saving map to temporary file failed: %s", e.what());
+			throw;
+		}
+	}
+
+	// Postload tribes and world
+	if (loader_ui_) {
+		loader_ui_->step(_("Postloading world and tribes…"));
+	}
+	// Tribes don't have a postload at this point.
+	assert(world_);
+	world_->postload();
 }
 
 UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::string& background) {
@@ -280,6 +313,7 @@ void EditorGameBase::remove_loader_ui() {
     assert(loader_ui_ != nullptr);
     loader_ui_.reset(nullptr);
 }
+// NOCOM this can fail for wl_map_object_info and wl_create_spritesheet
 UI::ProgressWindow& EditorGameBase::loader_ui() const {
     assert(loader_ui_ != nullptr);
     return *loader_ui_.get();

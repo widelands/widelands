@@ -102,6 +102,7 @@ public:
 
 	void think() override;
 	bool handle_key(bool down, SDL_Keysym code) override;
+	virtual void postload();
 
 	const Widelands::NodeAndTriangle<>& get_sel_pos() const {
 		return sel_.pos;

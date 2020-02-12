@@ -42,7 +42,6 @@ Tribes::Tribes(LuaInterface* lua)
      lua_(lua) {
 
 	// NOCOM create a test scenario that will load all tribes
-    // NOCOM saving in editor kills scripting files
 
 	// Register tribe names
 	for (const TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {

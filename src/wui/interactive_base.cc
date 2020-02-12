@@ -650,6 +650,15 @@ void InteractiveBase::hide_workarea(const Widelands::Coords& coords, bool is_add
 	}
 }
 
+/**
+ * Called by \ref Game::postload at the end of the game loading
+ * sequence.
+ *
+ * Default implementation does nothing.
+ */
+void InteractiveBase::postload() {
+}
+
 /*
 ===============
 Called once per frame by the UI code

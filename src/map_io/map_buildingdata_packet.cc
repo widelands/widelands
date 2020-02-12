@@ -401,6 +401,13 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 				}
 				uint32_t const next_spawn = fr.unsigned_32();
 				DescriptionIndex const worker_index = tribe.safe_worker_index(worker_typename);
+				if (!game.tribes().worker_exists(worker_index)) {
+					log("WARNING: %s %u has a next_spawn time for nonexistent "
+					    "worker type \"%s\" set to %u, ignoring\n",
+					    warehouse.descr().name().c_str(), warehouse.serial(), worker_typename.c_str(),
+					    next_spawn);
+					continue;
+				}
 				if (tribe.get_worker_descr(worker_index)->buildcost().size()) {
 					log("WARNING: %s %u has a next_spawn time for worker type "
 					    "\"%s\", that costs something to build, set to %u, "

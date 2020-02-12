@@ -461,6 +461,7 @@ void EditorInteractive::load(const std::string& filename, UI::ProgressWindow& lo
 	}
 
 	ml->load_map_complete(egbase(), Widelands::MapLoader::LoadType::kEditor);
+	egbase().postload();
 	map_changed(MapWas::kReplaced);
 }
 
@@ -899,6 +900,8 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 				eia.load(filename, loader_ui);
 			}
 		}
+
+		egbase.postload();
 
 		eia.start();
 
