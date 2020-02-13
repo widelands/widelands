@@ -110,7 +110,7 @@ struct TabPanel : public Panel {
 
 	using TabList = std::vector<Tab*>;
 
-	const TabList& tabs();
+	const TabList& tabs() const;
 	void activate(uint32_t idx);
 	void activate(const std::string&);
 	uint32_t active() {

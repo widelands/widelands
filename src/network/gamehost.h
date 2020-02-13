@@ -65,7 +65,7 @@ struct GameHost : public GameController {
 	// End GameController interface
 
 	// Pregame-related stuff
-	const GameSettings& settings();
+	const GameSettings& settings() const;
 	/** return true in case all conditions for the game start are met */
 	bool can_launch();
 	void set_scenario(bool);
