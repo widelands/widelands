@@ -215,10 +215,11 @@ private:
 
 	void print_stats(uint32_t);
 
-	uint32_t get_stocklevel_by_hint(size_t);
-	uint32_t get_stocklevel(Widelands::BuildingObserver&, uint32_t, WareWorker = WareWorker::kWare);
-	uint32_t calculate_stocklevel(Widelands::DescriptionIndex,
-	                              WareWorker = WareWorker::kWare);  // count all direct outputs_
+	uint32_t
+	get_stocklevel(Widelands::BuildingObserver&, uint32_t, WareWorker = WareWorker::kWare) const;
+	uint32_t
+	   calculate_stocklevel(Widelands::DescriptionIndex,
+	                        WareWorker = WareWorker::kWare) const;  // count all direct outputs_
 
 	void review_wares_targets(uint32_t);
 
@@ -257,7 +258,6 @@ private:
 	void set_inputs_to_max(const Widelands::ProductionSiteObserver&);
 	void stop_site(const Widelands::ProductionSiteObserver&);
 	void initiate_dismantling(Widelands::ProductionSiteObserver&, uint32_t);
-	void print_land_stats();
 
 	// Checks whether first value is in range, or lesser then...
 	template <typename T> void check_range(const T, const T, const T, const char*);
@@ -278,7 +278,7 @@ private:
 	bool attempt_escape(Widelands::ShipObserver& so);
 
 	// finding and owner
-	Widelands::PlayerNumber get_land_owner(const Widelands::Map&, uint32_t);
+	Widelands::PlayerNumber get_land_owner(const Widelands::Map&, uint32_t) const;
 
 	// Functions used for war and training stuff / defaultai_warfare.cc
 	bool check_militarysites(uint32_t);
