@@ -522,7 +522,6 @@ void MainMenuNewRandomMap::clicked_create_map() {
 
 	map->recalc_whole_map(egbase);
 	eia.map_changed(EditorInteractive::MapWas::kReplaced);
-
 	UI::WLMessageBox mbox(
 	   &eia,
 	   /** TRANSLATORS: Window title. This is shown after a random map has been created in the
