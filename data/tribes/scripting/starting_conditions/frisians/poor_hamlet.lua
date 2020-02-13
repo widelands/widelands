@@ -29,11 +29,11 @@ return {
             felling_ax = 1,
             fire_tongs = 1,
             pick = 1,
-            shovel = 2,
+            shovel = 1,
             --Smelter:
             iron = 1,
-            --Farmer, fisher/hunter, geologist, innkeeper, miner:
-            iron_ore = 5
+            --berryfarmer, geologist, landlady, miner:
+            iron_ore = 4
          },
          soldiers = {
             [{0,0,0,0}] = 1
@@ -51,7 +51,6 @@ return {
          end
       end
 
-      Not necessary, empire can conquer already:
       --NOTE: pessimistically, this could be a single rock
       local has_rocks = false
       for k,f in pairs(sf:region(10)) do

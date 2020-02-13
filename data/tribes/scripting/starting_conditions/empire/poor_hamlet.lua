@@ -50,7 +50,6 @@ return {
          end
       end
 
-      Not necessary, empire can conquer already:
       --NOTE: pessimistically, this could be a single rock
       local has_rocks = false
       for k,f in pairs(sf:region(10)) do
