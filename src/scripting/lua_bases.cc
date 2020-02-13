@@ -800,7 +800,8 @@ int LuaPlayerBase::place_building(lua_State* L) {
 
 	DescriptionIndex building_index = tribes.building_index(name);
 
-	if (!player.tribe().has_building(building_index)) {
+	if (!player.tribe().has_building(building_index) &&
+        tribes.get_building_descr(building_index)->type() != Widelands::MapObjectType::MILITARYSITE) {
 		report_error(L, "Building: '%s' is not available for Player %d's tribe '%s'", name.c_str(),
 		             player.player_number(), player.tribe().name().c_str());
 	}
