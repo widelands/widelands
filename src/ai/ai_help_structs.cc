@@ -390,7 +390,7 @@ DescriptionIndex BuildingObserver::get_collected_map_resource() const {
 	}
 }
 
-Widelands::AiModeBuildings BuildingObserver::aimode_limit_status() {
+Widelands::AiModeBuildings BuildingObserver::aimode_limit_status() const {
 	if (total_count() > cnt_limit_by_aimode) {
 		return Widelands::AiModeBuildings::kLimitExceeded;
 	} else if (total_count() == cnt_limit_by_aimode) {

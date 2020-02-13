@@ -996,7 +996,7 @@ GameController::GameType GameHost::get_game_type() {
 	return GameController::GameType::kNetHost;
 }
 
-const GameSettings& GameHost::settings() {
+const GameSettings& GameHost::settings() const {
 	return d->settings;
 }
 

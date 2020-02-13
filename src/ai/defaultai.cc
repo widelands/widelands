@@ -6094,15 +6094,15 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 }
 
 // counts produced output on stock
-uint32_t DefaultAI::calculate_stocklevel(Widelands::DescriptionIndex wt, const WareWorker what) {
+uint32_t DefaultAI::calculate_stocklevel(Widelands::DescriptionIndex wt,
+                                         const WareWorker what) const {
 	uint32_t count = 0;
 
-	for (std::deque<WarehouseSiteObserver>::iterator i = warehousesites.begin();
-	     i != warehousesites.end(); ++i) {
+	for (const Widelands::WarehouseSiteObserver& obs : warehousesites) {
 		if (what == WareWorker::kWare) {
-			count += i->site->get_wares().stock(wt);
+			count += obs.site->get_wares().stock(wt);
 		} else {
-			count += i->site->get_workers().stock(wt);
+			count += obs.site->get_workers().stock(wt);
 		}
 	}
 	return count;
@@ -6112,8 +6112,9 @@ uint32_t DefaultAI::calculate_stocklevel(Widelands::DescriptionIndex wt, const W
 // and distinguish if we count stocks for production hint, for outputs or for workers of a
 // productionsite
 // if multiple outputs, it returns lowest value
-uint32_t
-DefaultAI::get_stocklevel(BuildingObserver& bo, const uint32_t gametime, const WareWorker what) {
+uint32_t DefaultAI::get_stocklevel(BuildingObserver& bo,
+                                   const uint32_t gametime,
+                                   const WareWorker what) const {
 	if (bo.stocklevel_time < gametime - 5 * 1000) {
 		if (what == WareWorker::kWare && (!bo.production_hints.empty() || !bo.ware_outputs.empty())) {
 			// looking for smallest value
@@ -7150,7 +7151,7 @@ void DefaultAI::initiate_dismantling(Widelands::ProductionSiteObserver& site, ui
 }
 
 Widelands::PlayerNumber DefaultAI::get_land_owner(const Widelands::Map& map,
-                                                  const uint32_t coords) {
+                                                  const uint32_t coords) const {
 	FCoords f = map.get_fcoords(Widelands::Coords::unhash(coords));
 	return f.field->get_owned_by();
 }

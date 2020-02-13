@@ -444,7 +444,7 @@ struct BuildingObserver {
 	};
 
 	int32_t total_count() const;
-	Widelands::AiModeBuildings aimode_limit_status();
+	Widelands::AiModeBuildings aimode_limit_status() const;
 	bool buildable(Widelands::Player& p);
 
 	// Convenience functions for is_what

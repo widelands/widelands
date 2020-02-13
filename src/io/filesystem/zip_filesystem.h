@@ -40,7 +40,7 @@ public:
 
 	FilenameSet list_directory(const std::string& path) const override;
 
-	bool is_directory(const std::string& path) override;
+	bool is_directory(const std::string& path) const override;
 	bool file_exists(const std::string& path) const override;
 
 	void* load(const std::string& fname, size_t& length) override;
