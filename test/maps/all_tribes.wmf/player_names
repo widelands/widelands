@@ -1,10 +1,16 @@
-# Automatically created by Widelands r24457[b6656c6@tribes-filtering] (Debug)
+# Automatically created by Widelands r24458[ea6e6ce@tribes-filtering] (Debug)
 
 [global]
 packet_version="2"
 
 [player_1]
 name="Barbarians"
+tribe="barbarians"
+ai="empty"
+closeable="false"
+
+[player_2]
+name="Barbarians2"
 tribe="barbarians"
 ai="empty"
 closeable="false"

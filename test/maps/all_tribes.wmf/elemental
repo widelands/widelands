@@ -1,10 +1,10 @@
-# Automatically created by Widelands r24457[b6656c6@tribes-filtering] (Debug)
+# Automatically created by Widelands r24458[ea6e6ce@tribes-filtering] (Debug)
 
 [global]
 packet_version="1"
 map_w="512"
 map_h="512"
-nr_players="1"
+nr_players="2"
 name="All Tribes"
 author="GunChleoc"
 descr="Test map to showcase all tribes units"
