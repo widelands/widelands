@@ -1,5 +1,4 @@
 function count_buildings(player, old_count, expected_buildings)
-  --print("=====================================================")
   local total_buildings = 0
   -- Verify that we have placed all buildings
    for idx, building in ipairs(player.tribe.buildings) do
