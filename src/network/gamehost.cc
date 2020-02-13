@@ -63,7 +63,6 @@
 #include "ui_fsmenu/launch_mpg.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
-#include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 

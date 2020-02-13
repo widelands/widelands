@@ -260,6 +260,7 @@ wl_library(logic
     ui_basic
     widelands_options
     wui # TODO(GunChleoc): Circular dependency
+    wui_game_tips
 )
 
 add_subdirectory(map_objects)

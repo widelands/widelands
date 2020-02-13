@@ -57,7 +57,6 @@
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
-#include "wui/game_tips.h"
 #include "wui/interactive_base.h"
 #include "wui/interactive_gamebase.h"
 
@@ -331,20 +330,15 @@ void EditorGameBase::load_graphics() {
 	tribes_->load_graphics();
 }
 
-UI::ProgressWindow& EditorGameBase::create_loader_ui(std::vector<std::string> tipstexts, const std::string& background) {
-    if (loader_ui_ == nullptr) {
-        loader_ui_.reset(new UI::ProgressWindow(background));
-    }
-    if (!tipstexts.empty()) {
-        GameTips tips(*loader_ui_, tipstext);
-    }
+UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::vector<std::string>& tipstexts, const std::string& background) {
+    loader_ui_.reset(new UI::ProgressWindow(background));
+    game_tips_.reset(tipstexts.empty() ? nullptr : new GameTips(*loader_ui_, tipstexts));
     return *loader_ui_.get();
 }
 void EditorGameBase::remove_loader_ui() {
     assert(loader_ui_ != nullptr);
     loader_ui_.reset(nullptr);
 }
-
 void EditorGameBase::step_loader_ui(const std::string& text) const {
     if (loader_ui_ != nullptr) {
         loader_ui_->step(text);

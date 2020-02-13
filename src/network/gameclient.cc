@@ -54,7 +54,6 @@
 #include "ui_fsmenu/launch_mpg.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
-#include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 
@@ -149,13 +148,6 @@ bool GameClientImpl::run_map_menu(GameClient* parent) {
  * Show progress dialog and load map or saved game.
  */
 InteractiveGameBase* GameClientImpl::init_game(GameClient* parent, UI::ProgressWindow& loader) {
-    std::vector<std::string> tipstexts{"general_game", "multiplayer"};
-	if (parent->has_players_tribe()) {
-		tipstexts.push_back(parent->get_players_tribe());
-	}
-    // NOCOM lose loader in parameter
-    game->create_loader_ui(tipstexts);
-
 	modal = &loader;
 
 	game->step_loader_ui(_("Preparing game"));
@@ -271,7 +263,11 @@ void GameClient::run() {
 	game.set_write_syncstream(get_config_bool("write_syncstreams", true));
 
 	try {
-        UI::ProgressWindow& loader_ui = d->game->create_loader_ui();
+        std::vector<std::string> tipstexts{"general_game", "multiplayer"};
+        if (has_players_tribe()) {
+            tipstexts.push_back(get_players_tribe());
+        }
+        UI::ProgressWindow& loader_ui = game.create_loader_ui(tipstexts);
 
 		d->game = &game;
 		InteractiveGameBase* igb = d->init_game(this, loader_ui);

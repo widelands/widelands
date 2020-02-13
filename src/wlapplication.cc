@@ -93,7 +93,6 @@
 #include "ui_fsmenu/singleplayer.h"
 #include "wlapplication_messages.h"
 #include "wlapplication_options.h"
-#include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 

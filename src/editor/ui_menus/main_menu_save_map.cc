@@ -42,7 +42,6 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "wlapplication_options.h"
-#include "wui/game_tips.h"
 #include "wui/mapdetails.h"
 #include "wui/maptable.h"
 

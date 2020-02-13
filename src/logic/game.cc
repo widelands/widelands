@@ -67,7 +67,6 @@
 #include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
 #include "wlapplication_options.h"
-#include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 
 namespace Widelands {
@@ -212,7 +211,7 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	if (!maploader)
 		throw wexception("could not load \"%s\"", mapname.c_str());
 	assert(!loader_ui_);
-	create_loader_ui();
+	create_loader_ui({});
 
 	step_loader_ui(_("Preloading map…"));
 	maploader->preload_map(true);
