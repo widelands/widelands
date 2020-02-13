@@ -21,7 +21,6 @@
 #define WL_UI_BASIC_PROGRESSWINDOW_H
 
 #include <cstring>
-#include <memory>
 #include <string>
 #include <vector>
 

@@ -185,7 +185,6 @@ wl_library(wui_game_tips
     graphic
     graphic_fonthandler
     graphic_text_layout
-    io_fileread
     scripting_lua_table
     scripting_lua_interface
     ui_basic
