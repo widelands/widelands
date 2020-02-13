@@ -76,9 +76,6 @@ function place_initial_militarysites(map, sf, player, buildingname)
    building = place_militarysite(player, buildingname, sf, 495, 14)
    connected_road(player, building.flag, "r,r,r|r,r|r,r|r,r")
 
-   building = place_militarysite(player, buildingname, sf, 492, 1)
-   connected_road(player, building.flag, "tr,r,tr|r,r|tr,tr|r,r")
-
    -- Water
    building = place_militarysite(player, buildingname, sf, 13, 504)
    connected_road(player, building.flag, "bl,bl,bl|bl,bl|bl,bl|bl,l|l,l")

@@ -2,6 +2,10 @@
 --       Scenario with all tribes on the map
 -- ================================================
 
+-- This scenario has been prepared for 8 players.
+-- To add a new tribe, copy barbarians.lua into a new files and change all the bulding names.
+-- Make sure that the building sizes are the same, and that ports go on port spaces etc.
+-- Then add the checks to the bottom of this file.
 
 include "scripting/lunit.lua"
 include "scripting/infrastructure.lua"
@@ -10,9 +14,11 @@ include "map:scripting/placement.lua"
 include "map:scripting/barbarians.lua"
 
 -- Check that all buildings have been built
-function verify_buildings(player, total_expected_buildings)
+function verify_buildings(playernumber, total_expected_buildings)
+  local player = wl.Game().players[playernumber]
   print("============================================")
   print("Checking buildings for tribe: " .. player.tribe.name)
+  print("Player: " .. playernumber)
   local total_buildings = 0
   -- Verify that we have placed all buildings
    for idx, building in ipairs(player.tribe.buildings) do
@@ -32,26 +38,39 @@ function verify_buildings(player, total_expected_buildings)
    print("============================================")
 end
 
-local player = wl.Game().players[1]
-player.see_all = 1
+-- See all so that we can debug stuff
+wl.Game().players[1].see_all = 1
 
-init_barbarians(player)
-verify_buildings(player, 123)
+-- Place buildings
+print("Placing buildings for Player 1")
+init_barbarians(wl.Game().players[1])
+print("Placing buildings for Player 2")
+init_barbarians(wl.Game().players[2])
+print("Placing buildings for Player 3")
+init_barbarians(wl.Game().players[3])
+print("Placing buildings for Player 4")
+init_barbarians(wl.Game().players[4])
 
-player = wl.Game().players[2]
-player.see_all = 1
+-- These slots have been prepared for future tribes
+-- print("Placing buildings for Player 5")
+-- init_barbarians(wl.Game().players[5])
+-- print("Placing buildings for Player 6")
+-- init_barbarians(wl.Game().players[6])
+-- print("Placing buildings for Player 7")
+-- init_barbarians(wl.Game().players[7])
+-- print("Placing buildings for Player 8")
+-- init_barbarians(wl.Game().players[8])
 
-init_barbarians(player)
-verify_buildings(player, 123)
 
-player = wl.Game().players[3]
-player.see_all = 1
+-- Verify that nothing went wrong with placing the buildings,
+-- and that a building of each type has been placed.
+verify_buildings(1, 122)
+verify_buildings(2, 122)
+verify_buildings(3, 122)
+verify_buildings(4, 122)
 
-init_barbarians(player)
-verify_buildings(player, 123)
-
-player = wl.Game().players[4]
-player.see_all = 1
-
-init_barbarians(player)
-verify_buildings(player, 123)
+-- These slots have been prepared for future tribes
+-- verify_buildings(5, 122)
+-- verify_buildings(6, 122)
+-- verify_buildings(7, 122)
+-- verify_buildings(8, 122)

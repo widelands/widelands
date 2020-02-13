@@ -10,7 +10,7 @@ local function init_militarysites(player, sf, total_previous_buildings)
    place_safe_building(player, "barbarians_scouts_hut", sf, 21, 16)
    place_safe_building(player, "barbarians_scouts_hut", sf, 13, 18)
 
-   place_militarysite(player, "barbarians_sentry", sf, 27, 8)
+   place_militarysite(player, "barbarians_sentry", sf, 25, 8)
    place_militarysite(player, "barbarians_sentry", sf, 24, -1)
    place_militarysite(player, "barbarians_sentry", sf, 19, 500)
    place_militarysite(player, "barbarians_sentry", sf, 16, 499)
@@ -22,16 +22,16 @@ local function init_militarysites(player, sf, total_previous_buildings)
    place_militarysite(player, "barbarians_barrier", sf, 6, 28)
    place_militarysite(player, "barbarians_barrier", sf, 509, 23)
 
-   place_militarysite(player, "barbarians_tower", sf, 486, 7)
+   place_militarysite(player, "barbarians_tower", sf, 505, 494)
    place_militarysite(player, "barbarians_tower", sf, 491, 23)
-   place_militarysite(player, "barbarians_tower", sf, 26, 11)
+   place_militarysite(player, "barbarians_tower", sf, 23, 12)
 
    -- Military big
    place_militarysite(player, "barbarians_citadel", sf, 503, 500)
    place_militarysite(player, "barbarians_citadel", sf, 11, 28)
    place_militarysite(player, "barbarians_citadel", sf, 507, 26)
 
-   return count_buildings(player, total_previous_buildings, 30)
+   return count_buildings(player, total_previous_buildings, 29)
 end
 
 
@@ -45,9 +45,8 @@ local function init_warehouses(player, sf, total_previous_buildings)
    building = place_warehouse(player, "barbarians_port", sf, 18, 13)
    connected_road(player, building.flag, "br,bl,bl|br,bl")
 
-   building = place_warehouse(player, "barbarians_warehouse", sf, 488, 6)
-   connected_road(player, building.flag, "tr,tr|r,tr|tr,tr")
-   connected_road(player, building.flag, "br,br,br|br,br|br,br|br,r|r,r")
+   building = place_warehouse(player, "barbarians_warehouse", sf, 498, 501)
+   connected_road(player, building.flag, "r,br,r")
 
    building = place_warehouse(player, "barbarians_warehouse", sf, 24, 10)
    connected_road(player, building.flag, "tr,tr|tr,tr|tl,tr")
@@ -288,13 +287,18 @@ local function init_tools_and_training(player, sf, total_previous_buildings)
 
 
    -- Tools, weapons and training sites big
-   building = place_safe_building(player, "barbarians_battlearena", sf, 489, 4)
-   building = place_safe_building(player, "barbarians_battlearena", sf, 488, 9)
-   connected_road(player, building.flag, "r,r")
+   building = place_safe_building(player, "barbarians_battlearena", sf, 495, 507)
+   connected_road(player, building.flag, "bl,bl,l")
+   connected_road(player, building.flag, "tr,tr,tl,tr")
+
+   building = place_safe_building(player, "barbarians_battlearena", sf, 496, 503)
+   connected_road(player, building.flag, "tr,r,tr")
 
    building = place_safe_building(player, "barbarians_trainingcamp", sf, 496, -1)
+   connected_road(player, building.flag, "tr,r|tr,r")
+
    building = place_safe_building(player, "barbarians_trainingcamp", sf, 493, 509)
-   connected_road(player, building.flag, "br,br")
+   connected_road(player, building.flag, "br,br|r,r")
 
    building = place_safe_building(player, "barbarians_helmsmithy", sf, 502, 509)
    building = place_safe_building(player, "barbarians_helmsmithy", sf, 502, 506)
@@ -352,7 +356,6 @@ local function init_mines(player, sf, total_previous_buildings)
 
    building = place_safe_building(player, "barbarians_goldmine", sf, 493, 8)
    connected_road(player, building.flag, "r,r")
-   connected_road(player, building.flag, "bl,bl|l,bl")
 
    building = place_safe_building(player, "barbarians_goldmine_deep", sf, 495, 4)
    connected_road(player, building.flag, "r,tr")
