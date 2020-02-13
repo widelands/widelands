@@ -1,3 +1,6 @@
+
+-- Counts all buildings currently owned by the 'player' and
+-- deducts 'old_count' to see if the remainder matches 'expected_buildings'
 function count_buildings(player, old_count, expected_buildings)
   local total_buildings = 0
   -- Verify that we have placed all buildings
@@ -15,7 +18,8 @@ function count_buildings(player, old_count, expected_buildings)
    return total_buildings
 end
 
--- Add a building with coordinates not going out of range
+-- Add a building with coordinates not going out of range.
+-- Note that this has only been tested with starting_field.y == 1
 function place_safe_building(player, buildingname, starting_field, x, y)
    print("Placing " .. buildingname .. " at " .. ((starting_field.x + x) % 512) .. " " .. ((starting_field.y + y) % 512))
    return player:place_building(buildingname, map:get_field((starting_field.x + x) % 512, (starting_field.y + y) % 512), false, true)
@@ -53,6 +57,7 @@ function place_warehouse(player, buildingname, starting_field, x, y)
    return building
 end
 
+-- Call this with any big militarysite for your tribe
 function place_initial_militarysites(map, sf, player, buildingname)
    -- Left
    local building = place_militarysite(player, buildingname, sf, 506, 0)

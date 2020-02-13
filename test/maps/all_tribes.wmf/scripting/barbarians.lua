@@ -1,3 +1,7 @@
+-- This script places buildings of all types.
+-- Split up into multiple functions to make debugging easier.
+-- Main function is on the bottom.
+
 local function init_militarysites(player, sf, total_previous_buildings)
    print("============================================")
    print("Military")

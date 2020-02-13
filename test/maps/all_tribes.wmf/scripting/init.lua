@@ -3,15 +3,21 @@
 -- ================================================
 
 -- This scenario has been prepared for 8 players.
--- To add a new tribe, copy barbarians.lua into a new files and change all the bulding names.
+-- To add a new tribe, copy barbarians.lua into a new file and change all the bulding names.
+-- Don't forget to define the tribe in player_names.
 -- Make sure that the building sizes are the same, and that ports go on port spaces etc.
 -- Then add the checks to the bottom of this file.
+
+-- TODO(GunChleoc): Place waterways when we have the Lua interface for them
 
 include "scripting/lunit.lua"
 include "scripting/infrastructure.lua"
 
 include "map:scripting/placement.lua"
 include "map:scripting/barbarians.lua"
+include "map:scripting/empire.lua"
+include "map:scripting/atlanteans.lua"
+include "map:scripting/frisians.lua"
 
 -- Check that all buildings have been built
 function verify_buildings(playernumber, total_expected_buildings)
@@ -27,7 +33,7 @@ function verify_buildings(playernumber, total_expected_buildings)
       if building.name ~= "constructionsite"
          and building.name ~= "dismantlesite"
          and #player:get_buildings(building.name) < 1 then
-         print("Building '" .. building.name .. " hasn't been built yet.")
+         print("Building '" .. building.name .. "' hasn't been built yet.")
       end
       total_buildings = total_buildings + #player:get_buildings(building.name)
    end
@@ -45,11 +51,12 @@ wl.Game().players[1].see_all = 1
 print("Placing buildings for Player 1")
 init_barbarians(wl.Game().players[1])
 print("Placing buildings for Player 2")
-init_barbarians(wl.Game().players[2])
+init_empire(wl.Game().players[2])
+
 print("Placing buildings for Player 3")
-init_barbarians(wl.Game().players[3])
+init_atlanteans(wl.Game().players[3])
 print("Placing buildings for Player 4")
-init_barbarians(wl.Game().players[4])
+init_frisians(wl.Game().players[4])
 
 -- These slots have been prepared for future tribes
 -- print("Placing buildings for Player 5")
