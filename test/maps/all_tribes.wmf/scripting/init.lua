@@ -3,12 +3,13 @@
 -- ================================================
 
 
--- include "scripting/coroutine.lua"
+include "scripting/lunit.lua"
 include "scripting/infrastructure.lua"
 
 include "map:scripting/placement.lua"
 include "map:scripting/barbarians.lua"
 
+-- Check that all buildings have been built
 function verify_buildings(player)
   print("Start checking buildings for tribe: " .. player.tribe.name)
   local total_buildings = 0

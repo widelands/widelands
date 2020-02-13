@@ -1,12 +1,7 @@
--- ===============
--- Initialization
--- ===============
-
+-- Place buildings for Barbarian tribe
 function init_barbarians(player)
+   assert_equal("barbarians", player.tribe.name)
 
-
-   local tribe = player.tribe
-   -- NOCOM assert that tribe is barbarians
    local sf = wl.Game().map.player_slots[player.number].starting_field
    map = wl.Game().map
 
@@ -20,26 +15,26 @@ function init_barbarians(player)
    place_safe_building(player, "barbarians_scouts_hut", sf.x + 21, sf.y + 16)
    place_safe_building(player, "barbarians_scouts_hut", sf.x + 13, sf.y + 18)
 
-   place_safe_building(player, "barbarians_sentry", sf.x + 27, sf.y + 8)
-   place_safe_building(player, "barbarians_sentry", sf.x + 31, sf.y + 3)
-   place_safe_building(player, "barbarians_sentry", sf.x + 33, sf.y + 3)
-   place_safe_building(player, "barbarians_sentry", sf.x + 35, sf.y + 3)
-   place_safe_building(player, "barbarians_sentry", sf.x + 27, sf.y + 507)
-   place_safe_building(player, "barbarians_sentry", sf.x + 24, sf.y + 501)
+   place_militarysite(player, "barbarians_sentry", sf.x + 27, sf.y + 8)
+   place_militarysite(player, "barbarians_sentry", sf.x + 24, sf.y - 1)
+   place_militarysite(player, "barbarians_sentry", sf.x + 19, sf.y + 500)
+   place_militarysite(player, "barbarians_sentry", sf.x + 16, sf.y + 499)
+   place_militarysite(player, "barbarians_sentry", sf.x + 15, sf.y + 495)
+   place_militarysite(player, "barbarians_sentry", sf.x + 24, sf.y + 501)
 
    -- Military medium
-   place_safe_building(player, "barbarians_barrier", sf.x + 9, sf.y + 499)
-   place_safe_building(player, "barbarians_barrier", sf.x + 6, sf.y + 28)
-   place_safe_building(player, "barbarians_barrier", sf.x + 509, sf.y + 23)
+   place_militarysite(player, "barbarians_barrier", sf.x + 9, sf.y + 499)
+   place_militarysite(player, "barbarians_barrier", sf.x + 6, sf.y + 28)
+   place_militarysite(player, "barbarians_barrier", sf.x + 509, sf.y + 23)
 
-   place_safe_building(player, "barbarians_tower", sf.x + 486, sf.y + 7)
-   place_safe_building(player, "barbarians_tower", sf.x + 491, sf.y + 23)
-   place_safe_building(player, "barbarians_tower", sf.x + 26, sf.y + 11)
+   place_militarysite(player, "barbarians_tower", sf.x + 486, sf.y + 7)
+   place_militarysite(player, "barbarians_tower", sf.x + 491, sf.y + 23)
+   place_militarysite(player, "barbarians_tower", sf.x + 26, sf.y + 11)
 
    -- Military big
-   place_safe_building(player, "barbarians_citadel", sf.x + 503, sf.y + 500)
-   place_safe_building(player, "barbarians_citadel", sf.x + 11, sf.y + 28)
-   place_safe_building(player, "barbarians_citadel", sf.x + 507, sf.y + 26)
+   place_militarysite(player, "barbarians_citadel", sf.x + 503, sf.y + 500)
+   place_militarysite(player, "barbarians_citadel", sf.x + 11, sf.y + 28)
+   place_militarysite(player, "barbarians_citadel", sf.x + 507, sf.y + 26)
 
    -- Ports, and warehouses
    place_warehouse(player, "barbarians_port", sf.x + 11, sf.y + 509)

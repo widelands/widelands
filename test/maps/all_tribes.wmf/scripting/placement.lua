@@ -3,6 +3,12 @@ function place_safe_building(player, buildingname, x, y)
    return player:place_building(buildingname, map:get_field(x % 512, y % 512), false, true)
 end
 
+-- Place a militarysite and add a soldier to it
+function place_militarysite(player, buildingname, x, y)
+   local building = place_safe_building(player, buildingname, x, y)
+   building:set_soldiers({ [{0,0,0,0}] = 1 })
+   return building
+end
 
 -- Add a warehouse that has everything in it
 function place_warehouse(player, buildingname, x, y)
@@ -31,59 +37,47 @@ end
 
 function place_initial_militarysites(map, sf, player, buildingname)
    -- Left
-   local building = place_safe_building(player, buildingname, sf.x + 506, sf.y)
-   building:set_soldiers({ [{0,0,0,0}] = 1 })
+   local building = place_militarysite(player, buildingname, sf.x + 506, sf.y)
    connected_road(player, sf.immovable.flag, "l,l|l,l|l,l")
 
    -- Right
-   building = place_safe_building(player, buildingname, sf.x + 6, sf.y)
-   building:set_soldiers({ [{0,0,0,0}] = 1 })
+   building = place_militarysite(player, buildingname, sf.x + 6, sf.y)
    connected_road(player, sf.immovable.flag, "r,r|r,r|r,r")
 
    -- Bottom
    connected_road(player, sf.immovable.flag, "bl,bl|bl,br|bl,br|br,bl,bl")
-   building = place_safe_building(player, buildingname, sf.x + 511, sf.y + 9)
+   building = place_militarysite(player, buildingname, sf.x + 511, sf.y + 9)
 
    -- Mountain
-   building = place_safe_building(player, buildingname, sf.x + 504, sf.y + 14)
-   building:set_soldiers({ [{0,0,0,0}] = 1 })
+   building = place_militarysite(player, buildingname, sf.x + 504, sf.y + 14)
    connected_road(player, building.flag, "tr,tr,r|r,r|r,tr|tr,tr")
 
-   building = place_safe_building(player, buildingname, sf.x + 499, sf.y + 509)
-   building:set_soldiers({ [{0,0,0,0}] = 1 })
+   building = place_militarysite(player, buildingname, sf.x + 499, sf.y + 509)
    connected_road(player, building.flag, "r,r,r|br,br|br,r|r,r")
 
-   building = place_safe_building(player, buildingname, sf.x + 495, sf.y + 14)
-   building:set_soldiers({ [{0,0,0,0}] = 1 })
+   building = place_militarysite(player, buildingname, sf.x + 495, sf.y + 14)
    connected_road(player, building.flag, "r,r,r|r,r|r,r|r,r")
 
-   building = place_safe_building(player, buildingname, sf.x + 492, sf.y + 1)
-   building:set_soldiers({ [{0,0,0,0}] = 1 })
+   building = place_militarysite(player, buildingname, sf.x + 492, sf.y + 1)
    connected_road(player, building.flag, "tr,r,tr|r,r|tr,tr|r,r")
 
    -- Water
-   building = place_safe_building(player, buildingname, sf.x + 13, sf.y + 504)
-   building:set_soldiers({ [{0,0,0,0}] = 1 })
+   building = place_militarysite(player, buildingname, sf.x + 13, sf.y + 504)
    connected_road(player, building.flag, "bl,bl,bl|bl,bl|bl,bl|bl,l|l,l")
 
-   building = place_safe_building(player, buildingname, sf.x + 5, sf.y + 18)
-   building:set_soldiers({ [{0,0,0,0}] = 1 })
+   building = place_militarysite(player, buildingname, sf.x + 5, sf.y + 18)
    connected_road(player, building.flag, "l,l,tl|tl,tl|tl,tl|tl,tl|tl,tl")
 
-   building = place_safe_building(player, buildingname, sf.x + 21, sf.y + 509)
-   building:set_soldiers({ [{0,0,0,0}] = 1 })
+   building = place_militarysite(player, buildingname, sf.x + 21, sf.y + 509)
    connected_road(player, building.flag, "tr,tr|tl,l|l,tl|l,l|tl,l|l,l")
 
-   building = place_safe_building(player, buildingname, sf.x + 12, sf.y + 19)
-   building:set_soldiers({ [{0,0,0,0}] = 1 })
+   building = place_militarysite(player, buildingname, sf.x + 12, sf.y + 19)
    connected_road(player, building.flag, "l,l,l|l,tl|l,l")
 
-   building = place_safe_building(player, buildingname, sf.x + 20, sf.y + 18)
-   building:set_soldiers({ [{0,0,0,0}] = 1 })
+   building = place_militarysite(player, buildingname, sf.x + 20, sf.y + 18)
    connected_road(player, building.flag, "l,l,l|l,l|l,l|l,bl")
 
-   building = place_safe_building(player, buildingname, sf.x + 26, sf.y + 4)
-   building:set_soldiers({ [{0,0,0,0}] = 1 })
+   building = place_militarysite(player, buildingname, sf.x + 26, sf.y + 4)
    connected_road(player, building.flag, "tr,tr,tl|tl,tl|tl,tl|l,tl|l,tl")
 end
 
