@@ -117,10 +117,13 @@ public:
 	virtual void postload();
 	void load_graphics();
 	virtual void cleanup_for_load();
-	void set_loader_ui(UI::ProgressWindow*);
-	UI::ProgressWindow* get_loader_ui() {
-		return loader_ui_;
-	}
+
+    // Create a new loader UI
+    UI::ProgressWindow& create_loader_ui(std::vector<std::string> tipstexts, const std::string& background = std::string());
+    // Destroy the loader UI
+    void remove_loader_ui();
+    // Set step text for the current loader UI if it's not nullptr.
+    void step_loader_ui(const std::string& text) const;
 
 	void set_road(const FCoords&, uint8_t direction, RoadSegment roadtype);
 
@@ -204,7 +207,7 @@ public:
 	Tribes* mutable_tribes();
 
 protected:
-	UI::ProgressWindow* loader_ui_;
+	std::unique_ptr<UI::ProgressWindow> loader_ui_;
 
 private:
 	/// Common function for create_critter and create_ship.

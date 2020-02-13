@@ -57,6 +57,7 @@
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
+#include "wui/game_tips.h"
 #include "wui/interactive_base.h"
 #include "wui/interactive_gamebase.h"
 
@@ -84,9 +85,6 @@ EditorGameBase::~EditorGameBase() {
 	delete_tempfile();
 	if (g_sh != nullptr) {
 		g_sh->remove_fx_set(SoundType::kAmbient);
-	}
-	if (loader_ui_) {
-		delete loader_ui_;
 	}
 }
 
@@ -297,9 +295,8 @@ void EditorGameBase::postload() {
 	}
 
 	// Postload tribes and world
-	if (loader_ui_) {
-		loader_ui_->step(_("Postloading world and tribes…"));
-	}
+	step_loader_ui(_("Postloading world and tribes…"));
+
 	assert(tribes_);
 	tribes_->postload();
 	assert(world_);
@@ -330,14 +327,28 @@ void EditorGameBase::postload() {
  */
 void EditorGameBase::load_graphics() {
 	assert(tribes_);
-	assert(loader_ui_);
-	loader_ui_->step(_("Loading graphics"));
+	step_loader_ui(_("Loading graphics"));
 	tribes_->load_graphics();
 }
 
-void EditorGameBase::set_loader_ui(UI::ProgressWindow* w) {
-	assert((w == nullptr) ^ (loader_ui_ == nullptr));
-	loader_ui_ = w;
+UI::ProgressWindow& EditorGameBase::create_loader_ui(std::vector<std::string> tipstexts, const std::string& background) {
+    if (loader_ui_ == nullptr) {
+        loader_ui_.reset(new UI::ProgressWindow(background));
+    }
+    if (!tipstexts.empty()) {
+        GameTips tips(*loader_ui_, tipstext);
+    }
+    return *loader_ui_.get();
+}
+void EditorGameBase::remove_loader_ui() {
+    assert(loader_ui_ != nullptr);
+    loader_ui_.reset(nullptr);
+}
+
+void EditorGameBase::step_loader_ui(const std::string& text) const {
+    if (loader_ui_ != nullptr) {
+        loader_ui_->step(text);
+    }
 }
 
 /**
@@ -529,17 +540,13 @@ Player* EditorGameBase::get_safe_player(PlayerNumber const n) {
  * make this object ready to load new data
  */
 void EditorGameBase::cleanup_for_load() {
-	auto set_progress_message = [this](std::string s) {
-		if (loader_ui_)
-			loader_ui_->step(s);
-	};
-	set_progress_message(_("Cleaning up for loading: Map objects (1/3)"));
+	step_loader_ui(_("Cleaning up for loading: Map objects (1/3)"));
 	cleanup_objects();  /// Clean all the stuff up, so we can load.
 
-	set_progress_message(_("Cleaning up for loading: Players (2/3)"));
+	step_loader_ui(_("Cleaning up for loading: Players (2/3)"));
 	player_manager_->cleanup();
 
-	set_progress_message(_("Cleaning up for loading: Map (3/3)"));
+	step_loader_ui(_("Cleaning up for loading: Map (3/3)"));
 	map_.cleanup();
 
 	delete_tempfile();

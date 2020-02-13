@@ -40,4 +40,14 @@ documentation)
    sphinx-build -W -b json -d build/doctrees source build/json
    popd
    ;;
+website)
+   # Ensure that the website tools won't crash.
+   if [ "$TRAVIS_OS_NAME" = linux ]; then
+       cd ..
+       mkdir temp_web
+       ./wl_create_spritesheet barbarians_carrier idle temp_web
+       ./wl_map_object_info temp_web
+       ./wl_map_info data/maps/Archipelago_Sea.wmf
+   fi
+   ;;
 esac
