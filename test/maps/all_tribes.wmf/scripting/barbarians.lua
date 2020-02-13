@@ -1,3 +1,370 @@
+local function init_militarysites(player, sf, total_previous_buildings)
+   print("============================================")
+   print("Military")
+   print("--------------------------------------------")
+
+   -- Get some territory
+   place_initial_militarysites(map, sf, player, "barbarians_fortress")
+
+   -- Military small
+   place_safe_building(player, "barbarians_scouts_hut", sf, 21, 16)
+   place_safe_building(player, "barbarians_scouts_hut", sf, 13, 18)
+
+   place_militarysite(player, "barbarians_sentry", sf, 27, 8)
+   place_militarysite(player, "barbarians_sentry", sf, 24, -1)
+   place_militarysite(player, "barbarians_sentry", sf, 19, 500)
+   place_militarysite(player, "barbarians_sentry", sf, 16, 499)
+   place_militarysite(player, "barbarians_sentry", sf, 15, 495)
+   place_militarysite(player, "barbarians_sentry", sf, 24, 501)
+
+   -- Military medium
+   place_militarysite(player, "barbarians_barrier", sf, 9, 499)
+   place_militarysite(player, "barbarians_barrier", sf, 6, 28)
+   place_militarysite(player, "barbarians_barrier", sf, 509, 23)
+
+   place_militarysite(player, "barbarians_tower", sf, 486, 7)
+   place_militarysite(player, "barbarians_tower", sf, 491, 23)
+   place_militarysite(player, "barbarians_tower", sf, 26, 11)
+
+   -- Military big
+   place_militarysite(player, "barbarians_citadel", sf, 503, 500)
+   place_militarysite(player, "barbarians_citadel", sf, 11, 28)
+   place_militarysite(player, "barbarians_citadel", sf, 507, 26)
+
+   return count_buildings(player, total_previous_buildings, 30)
+end
+
+
+local function init_warehouses(player, sf, total_previous_buildings)
+   print("============================================")
+   print("Warehouses")
+   print("--------------------------------------------")
+
+   -- Ports and warehouses
+   place_warehouse(player, "barbarians_port", sf, 11, 509)
+   building = place_warehouse(player, "barbarians_port", sf, 18, 13)
+   connected_road(player, building.flag, "br,bl,bl|br,bl")
+
+   building = place_warehouse(player, "barbarians_warehouse", sf, 488, 6)
+   connected_road(player, building.flag, "tr,tr|r,tr|tr,tr")
+   connected_road(player, building.flag, "br,br,br|br,br|br,br|br,r|r,r")
+
+   building = place_warehouse(player, "barbarians_warehouse", sf, 24, 10)
+   connected_road(player, building.flag, "tr,tr|tr,tr|tl,tr")
+   connected_road(player, building.flag, "bl,bl|bl,bl|bl,bl|bl,bl")
+
+   building = place_warehouse(player, "barbarians_headquarters_interim", sf, 11, 495)
+   connected_road(player, building.flag, "br,br,br|br,br|br,br|br,br")
+
+   return count_buildings(player, total_previous_buildings, 5)
+end
+
+local function init_shipconstruction(player, sf, total_previous_buildings)
+   print("============================================")
+   print("Ships and ferries")
+   print("--------------------------------------------")
+
+   -- Shipyards and ferry yards
+   building = place_safe_building(player, "barbarians_shipyard", sf, 15, 18)
+   building = place_safe_building(player, "barbarians_shipyard", sf, 8, 510)
+   connected_road(player, building.flag, "bl,br")
+
+   building = place_safe_building(player, "barbarians_ferry_yard", sf, 8, 13)
+   connected_road(player, building.flag, "bl,bl,bl|bl,bl")
+
+   building = place_safe_building(player, "barbarians_ferry_yard", sf, 18, -1)
+   connected_road(player, building.flag, "tr,r|tr,r")
+
+   return count_buildings(player, total_previous_buildings, 4)
+end
+
+local function init_buildingmaterials(player, sf, total_previous_buildings)
+   print("============================================")
+   print("Buildingmaterials")
+   print("--------------------------------------------")
+
+   -- Building materials small
+   -- (near rocks)
+   building = place_safe_building(player, "barbarians_quarry", sf, 508, 502)
+   connected_road(player, building.flag, "r,r,r")
+   connected_road(player, building.flag, "br,br|br,br,r")
+
+   building = place_safe_building(player, "barbarians_quarry", sf, 511, 502)
+   connected_road(player, building.flag, "r,r,r")
+   connected_road(player, building.flag, "br,br|br,br|br,bl|br,br|bl,br")
+
+   -- (near trees)
+   building = place_safe_building(player, "barbarians_lumberjacks_hut", sf, 2, 502)
+   connected_road(player, building.flag, "r,r")
+
+   building = place_safe_building(player, "barbarians_rangers_hut", sf, 4, 502)
+   connected_road(player, building.flag, "tr,tr")
+
+   building = place_safe_building(player, "barbarians_lumberjacks_hut", sf, 5, 500)
+   connected_road(player, building.flag, "tr,tl")
+
+   building = place_safe_building(player, "barbarians_rangers_hut", sf, 5, 498)
+   connected_road(player, building.flag, "r,r")
+
+   building = place_safe_building(player, "barbarians_lumberjacks_hut", sf, 7, 498)
+   connected_road(player, building.flag, "tr,r")
+
+   building = place_safe_building(player, "barbarians_rangers_hut", sf, 9, 497)
+   connected_road(player, building.flag, "tr,tr,r")
+
+   -- Building materials medium
+   building = place_safe_building(player, "barbarians_wood_hardener", sf, 7, 502)
+   connected_road(player, building.flag, "l,l,l")
+   connected_road(player, building.flag, "tr,tl|tl,tr")
+
+   building = place_safe_building(player, "barbarians_wood_hardener", sf, 3, 505)
+   connected_road(player, building.flag, "tr,tr,tr")
+   connected_road(player, building.flag, "l,bl")
+
+   building = place_safe_building(player, "barbarians_lime_kiln", sf, 511, 506)
+   connected_road(player, building.flag, "r,r")
+
+   building = place_safe_building(player, "barbarians_lime_kiln", sf, 508, 505)
+   connected_road(player, building.flag, "tr,r")
+
+   building = place_safe_building(player, "barbarians_reed_yard", sf, 511, 509)
+   connected_road(player, building.flag, "tr,tr,tl")
+   connected_road(player, building.flag, "bl,bl,br")
+
+   building = place_safe_building(player, "barbarians_reed_yard", sf, 4, 508)
+   connected_road(player, building.flag, "tr,tr|tl,tr|tl,tl")
+   connected_road(player, building.flag, "l,l,l")
+
+   building = place_safe_building(player, "barbarians_charcoal_kiln", sf, 1, 508)
+   building = place_safe_building(player, "barbarians_charcoal_kiln", sf, 508, 0)
+
+   return count_buildings(player, total_previous_buildings, 16)
+end
+
+local function init_food_and_transport(player, sf, total_previous_buildings)
+   print("============================================")
+   print("Food and transport")
+   print("--------------------------------------------")
+
+   -- Food and transport small
+   building = place_safe_building(player, "barbarians_well", sf, 504, 0)
+   building = place_safe_building(player, "barbarians_well", sf, 4, 0)
+   building = place_safe_building(player, "barbarians_well", sf, 510, 11)
+
+   -- (near water)
+   building = place_safe_building(player, "barbarians_fishers_hut", sf, 3, 3)
+   connected_road(player, building.flag, "tr,tl,tl")
+
+   building = place_safe_building(player, "barbarians_fishers_hut", sf, 2, 5)
+   connected_road(player, building.flag, "l,l,tl")
+
+   building = place_safe_building(player, "barbarians_fishers_hut", sf, 3, 9)
+   connected_road(player, building.flag, "bl,bl|bl,bl")
+
+   building = place_safe_building(player, "barbarians_fishers_hut", sf, 5, 12)
+   connected_road(player, building.flag, "bl,bl,bl|bl,bl")
+
+   -- (near animals)
+   building = place_safe_building(player, "barbarians_hunters_hut", sf, 506, 502)
+   connected_road(player, building.flag, "r,r")
+
+   building = place_safe_building(player, "barbarians_gamekeepers_hut", sf, 504, 502)
+   connected_road(player, building.flag, "r,r")
+
+   building = place_safe_building(player, "barbarians_hunters_hut", sf, 502, 502)
+   connected_road(player, building.flag, "r,r")
+
+   building = place_safe_building(player, "barbarians_gamekeepers_hut", sf, 500, 502)
+   connected_road(player, building.flag, "r,r")
+
+   -- Food and transport medium
+   building = place_safe_building(player, "barbarians_bakery", sf, 510, 14)
+   connected_road(player, building.flag, "tr,tl,tl")
+
+   building = place_safe_building(player, "barbarians_bakery", sf, 0, 18)
+   connected_road(player, building.flag, "tr,tl,tl")
+
+   building = place_safe_building(player, "barbarians_micro_brewery", sf, 3, 26)
+   connected_road(player, building.flag, "l,l")
+
+   building = place_safe_building(player, "barbarians_micro_brewery", sf, 5, 26)
+   connected_road(player, building.flag, "l,l")
+
+   building = place_safe_building(player, "barbarians_brewery", sf, 7, 26)
+   connected_road(player, building.flag, "l,l")
+
+   building = place_safe_building(player, "barbarians_brewery", sf, 9, 26)
+   connected_road(player, building.flag, "l,l")
+
+   building = place_safe_building(player, "barbarians_tavern", sf, 503, 22)
+   connected_road(player, building.flag, "r,tr,tr")
+
+   building = place_safe_building(player, "barbarians_tavern", sf, 501, 22)
+   connected_road(player, building.flag, "r,r")
+
+   building = place_safe_building(player, "barbarians_inn", sf, 499, 22)
+   connected_road(player, building.flag, "r,r")
+
+   building = place_safe_building(player, "barbarians_inn", sf, 497, 22)
+   connected_road(player, building.flag, "r,r")
+
+   building = place_safe_building(player, "barbarians_big_inn", sf, 495, 22)
+   connected_road(player, building.flag, "r,r")
+
+   building = place_safe_building(player, "barbarians_big_inn", sf, 493, 22)
+   connected_road(player, building.flag, "r,r")
+
+
+   -- Food and transport big
+   building = place_safe_building(player, "barbarians_farm", sf, 505, 20)
+   connected_road(player, building.flag, "tr,tr|tr,tr")
+
+   building = place_safe_building(player, "barbarians_farm", sf, 507, 16)
+   connected_road(player, building.flag, "tr,tr|tl,tr")
+
+   building = place_safe_building(player, "barbarians_farm", sf, 509, 21)
+   connected_road(player, building.flag, "tr,tr|tr,tr")
+
+   building = place_safe_building(player, "barbarians_farm", sf, 511, 17)
+   connected_road(player, building.flag, "tr,tr|tr,tr")
+
+   building = place_safe_building(player, "barbarians_farm", sf, 511, 25)
+   connected_road(player, building.flag, "tr,tr|tr,tr")
+
+   building = place_safe_building(player, "barbarians_farm", sf, 1, 21)
+   connected_road(player, building.flag, "tr,tr|tr,tr")
+
+   building = place_safe_building(player, "barbarians_farm", sf, 1, 26)
+   connected_road(player, building.flag, "tr,tr|tr,tr")
+
+   building = place_safe_building(player, "barbarians_farm", sf, 3, 22)
+   connected_road(player, building.flag, "tr,tr|tr,tr")
+
+   building = place_safe_building(player, "barbarians_cattlefarm", sf, 7, 21)
+   connected_road(player, building.flag, "l,l,tl")
+
+   building = place_safe_building(player, "barbarians_cattlefarm", sf, 9, 22)
+   connected_road(player, building.flag, "l,l,tl")
+   connected_road(player, building.flag, "tr,tr|r,tr")
+
+   building = place_safe_building(player, "barbarians_weaving_mill", sf, 4, 15)
+   building = place_safe_building(player, "barbarians_weaving_mill", sf, 2, 11)
+
+   return count_buildings(player, total_previous_buildings, 35)
+end
+
+local function init_tools_and_training(player, sf, total_previous_buildings)
+   print("============================================")
+   print("Tools and training")
+   print("--------------------------------------------")
+
+   -- Tools, weapons and training sites medium
+   building = place_safe_building(player, "barbarians_smelting_works", sf, 506, 12)
+   building = place_safe_building(player, "barbarians_smelting_works", sf, 508, 12)
+
+   building = place_safe_building(player, "barbarians_metal_workshop", sf, 496, 18)
+   connected_road(player, building.flag, "tr,tr")
+
+   building = place_safe_building(player, "barbarians_metal_workshop", sf, 497, 16)
+   connected_road(player, building.flag, "tr,tr")
+
+   building = place_safe_building(player, "barbarians_warmill", sf, 498, 18)
+   connected_road(player, building.flag, "tr,tr")
+
+   building = place_safe_building(player, "barbarians_warmill", sf, 499, 16)
+   connected_road(player, building.flag, "tr,tr")
+
+   building = place_safe_building(player, "barbarians_ax_workshop", sf, 500, 18)
+   connected_road(player, building.flag, "tr,tr")
+
+   building = place_safe_building(player, "barbarians_ax_workshop", sf, 501, 16)
+   connected_road(player, building.flag, "tr,tr")
+
+   building = place_safe_building(player, "barbarians_barracks", sf, 502, 18)
+   connected_road(player, building.flag, "tr,tr")
+
+   building = place_safe_building(player, "barbarians_barracks", sf, 503, 16)
+   connected_road(player, building.flag, "tr,tr")
+
+
+   -- Tools, weapons and training sites big
+   building = place_safe_building(player, "barbarians_battlearena", sf, 489, 4)
+   building = place_safe_building(player, "barbarians_battlearena", sf, 488, 9)
+   connected_road(player, building.flag, "r,r")
+
+   building = place_safe_building(player, "barbarians_trainingcamp", sf, 496, -1)
+   building = place_safe_building(player, "barbarians_trainingcamp", sf, 493, 509)
+   connected_road(player, building.flag, "br,br")
+
+   building = place_safe_building(player, "barbarians_helmsmithy", sf, 502, 509)
+   building = place_safe_building(player, "barbarians_helmsmithy", sf, 502, 506)
+   connected_road(player, building.flag, "br,bl,bl")
+
+   return count_buildings(player, total_previous_buildings, 16)
+end
+
+local function init_mines(player, sf, total_previous_buildings)
+   print("============================================")
+   print("Mines")
+   print("--------------------------------------------")
+
+   -- Mines
+   building = place_safe_building(player, "barbarians_granitemine", sf, 504, 4)
+   connected_road(player, building.flag, "tr,tr|tr,tr")
+   connected_road(player, building.flag, "br,r")
+
+   building = place_safe_building(player, "barbarians_granitemine", sf, 506, 5)
+   connected_road(player, building.flag, "tr,tr,tr|tr,tr")
+
+   building = place_safe_building(player, "barbarians_granitemine", sf, 505, 8)
+   connected_road(player, building.flag, "tr,tr,tl")
+
+   building = place_safe_building(player, "barbarians_granitemine", sf, 503, 8)
+   connected_road(player, building.flag, "r,r")
+
+   building = place_safe_building(player, "barbarians_coalmine", sf, 500, 1)
+   connected_road(player, building.flag, "tr,tr|tr,tr")
+
+   building = place_safe_building(player, "barbarians_coalmine", sf, 498, 2)
+   connected_road(player, building.flag, "tr,r")
+
+   building = place_safe_building(player, "barbarians_coalmine_deep", sf, 497, 3)
+   connected_road(player, building.flag, "r,tr")
+
+   building = place_safe_building(player, "barbarians_coalmine_deeper", sf, 502, 3)
+   connected_road(player, building.flag, "l,tl,tl")
+
+   building = place_safe_building(player, "barbarians_ironmine", sf, 501, 8)
+   connected_road(player, building.flag, "r,r")
+
+   building = place_safe_building(player, "barbarians_ironmine", sf, 499, 8)
+   connected_road(player, building.flag, "r,r")
+
+   building = place_safe_building(player, "barbarians_ironmine_deep", sf, 497, 8)
+   connected_road(player, building.flag, "r,r")
+
+   building = place_safe_building(player, "barbarians_ironmine_deeper", sf, 500, 12)
+   connected_road(player, building.flag, "tr,tr,tr,tl")
+   connected_road(player, building.flag, "br,bl")
+
+   building = place_safe_building(player, "barbarians_goldmine", sf, 495, 8)
+   connected_road(player, building.flag, "r,r")
+
+   building = place_safe_building(player, "barbarians_goldmine", sf, 493, 8)
+   connected_road(player, building.flag, "r,r")
+   connected_road(player, building.flag, "bl,bl|l,bl")
+
+   building = place_safe_building(player, "barbarians_goldmine_deep", sf, 495, 4)
+   connected_road(player, building.flag, "r,tr")
+
+   building = place_safe_building(player, "barbarians_goldmine_deeper", sf, 493, 4)
+   connected_road(player, building.flag, "r,r")
+   connected_road(player, building.flag, "l,l,tl")
+
+   return count_buildings(player, total_previous_buildings, 16)
+end
+
+
 -- Place buildings for Barbarian tribe
 function init_barbarians(player)
    assert_equal("barbarians", player.tribe.name)
@@ -6,318 +373,15 @@ function init_barbarians(player)
    map = wl.Game().map
 
    -- Headquarters
-   place_warehouse(player, "barbarians_headquarters", sf.x, sf.y)
-
-   -- Get some territory
-   place_initial_militarysites(map, sf, player, "barbarians_fortress")
-
-   -- Military small
-   place_safe_building(player, "barbarians_scouts_hut", sf.x + 21, sf.y + 16)
-   place_safe_building(player, "barbarians_scouts_hut", sf.x + 13, sf.y + 18)
-
-   place_militarysite(player, "barbarians_sentry", sf.x + 27, sf.y + 8)
-   place_militarysite(player, "barbarians_sentry", sf.x + 24, sf.y - 1)
-   place_militarysite(player, "barbarians_sentry", sf.x + 19, sf.y + 500)
-   place_militarysite(player, "barbarians_sentry", sf.x + 16, sf.y + 499)
-   place_militarysite(player, "barbarians_sentry", sf.x + 15, sf.y + 495)
-   place_militarysite(player, "barbarians_sentry", sf.x + 24, sf.y + 501)
-
-   -- Military medium
-   place_militarysite(player, "barbarians_barrier", sf.x + 9, sf.y + 499)
-   place_militarysite(player, "barbarians_barrier", sf.x + 6, sf.y + 28)
-   place_militarysite(player, "barbarians_barrier", sf.x + 509, sf.y + 23)
-
-   place_militarysite(player, "barbarians_tower", sf.x + 486, sf.y + 7)
-   place_militarysite(player, "barbarians_tower", sf.x + 491, sf.y + 23)
-   place_militarysite(player, "barbarians_tower", sf.x + 26, sf.y + 11)
-
-   -- Military big
-   place_militarysite(player, "barbarians_citadel", sf.x + 503, sf.y + 500)
-   place_militarysite(player, "barbarians_citadel", sf.x + 11, sf.y + 28)
-   place_militarysite(player, "barbarians_citadel", sf.x + 507, sf.y + 26)
-
-   -- Ports, and warehouses
-   place_warehouse(player, "barbarians_port", sf.x + 11, sf.y + 509)
-   building = place_warehouse(player, "barbarians_port", sf.x + 18, sf.y + 13)
-   connected_road(player, building.flag, "br,bl,bl|br,bl")
-
-   building = place_warehouse(player, "barbarians_warehouse", sf.x + 488, sf.y + 6)
-   connected_road(player, building.flag, "tr,tr|r,tr|tr,tr")
-   connected_road(player, building.flag, "br,br,br|br,br|br,br|br,r|r,r")
-
-   building = place_warehouse(player, "barbarians_warehouse", sf.x + 24, sf.y + 10)
-   connected_road(player, building.flag, "tr,tr|tr,tr|tl,tr")
-   connected_road(player, building.flag, "bl,bl|bl,bl|bl,bl|bl,bl")
-
-   building = place_warehouse(player, "barbarians_headquarters_interim", sf.x + 11, sf.y + 495)
-   connected_road(player, building.flag, "br,br,br|br,br|br,br|br,br")
-
-   -- Shipyards and ferry yards
-   building = place_safe_building(player, "barbarians_shipyard", sf.x + 14, sf.y + 16)
-   connected_road(player, building.flag, "bl,bl")
-
-   building = place_safe_building(player, "barbarians_shipyard", sf.x + 8, sf.y)
-
-   building = place_safe_building(player, "barbarians_ferry_yard", sf.x + 8, sf.y + 12)
-   connected_road(player, building.flag, "bl,bl|bl,bl|bl,bl")
-
-   building = place_safe_building(player, "barbarians_ferry_yard", sf.x + 18, sf.y + 1)
-   connected_road(player, building.flag, "tr,tr,tr|tr,r")
-
-   -- Building materials small
-   -- (near rocks)
-   building = place_safe_building(player, "barbarians_quarry", sf.x + 508, sf.y + 502)
-   connected_road(player, building.flag, "r,r,r")
-   connected_road(player, building.flag, "br,br|br,br,r")
-
-   building = place_safe_building(player, "barbarians_quarry", sf.x + 511, sf.y + 502)
-   connected_road(player, building.flag, "r,r,r")
-   connected_road(player, building.flag, "br,br|br,br|br,bl|br,br|bl,br")
-
-   -- (near trees)
-   building = place_safe_building(player, "barbarians_lumberjacks_hut", sf.x + 2, sf.y + 502)
-   connected_road(player, building.flag, "r,r")
-
-   building = place_safe_building(player, "barbarians_rangers_hut", sf.x + 4, sf.y + 502)
-   connected_road(player, building.flag, "tr,tr")
-
-   building = place_safe_building(player, "barbarians_lumberjacks_hut", sf.x + 5, sf.y + 500)
-   connected_road(player, building.flag, "tr,tl")
-
-   building = place_safe_building(player, "barbarians_rangers_hut", sf.x + 5, sf.y + 498)
-   connected_road(player, building.flag, "r,r")
-
-   building = place_safe_building(player, "barbarians_lumberjacks_hut", sf.x + 7, sf.y + 498)
-   connected_road(player, building.flag, "tr,r")
-
-   building = place_safe_building(player, "barbarians_rangers_hut", sf.x + 9, sf.y + 497)
-   connected_road(player, building.flag, "tr,tr,r")
-
-   -- Building materials medium
-   building = place_safe_building(player, "barbarians_wood_hardener", sf.x + 7, sf.y + 502)
-   connected_road(player, building.flag, "l,l,l")
-   connected_road(player, building.flag, "tr,tl|tl,tr")
-
-   building = place_safe_building(player, "barbarians_wood_hardener", sf.x + 3, sf.y + 505)
-   connected_road(player, building.flag, "tr,tr,tr")
-   connected_road(player, building.flag, "l,bl")
-
-   building = place_safe_building(player, "barbarians_lime_kiln", sf.x + 511, sf.y + 506)
-   connected_road(player, building.flag, "r,r")
-
-   building = place_safe_building(player, "barbarians_lime_kiln", sf.x + 508, sf.y + 505)
-   connected_road(player, building.flag, "tr,r")
-
-   building = place_safe_building(player, "barbarians_reed_yard", sf.x + 511, sf.y + 509)
-   connected_road(player, building.flag, "tr,tr,tl")
-   connected_road(player, building.flag, "bl,bl,br")
-
-   building = place_safe_building(player, "barbarians_reed_yard", sf.x + 4, sf.y + 508)
-   connected_road(player, building.flag, "tr,tr|tl,tr|tl,tl")
-   connected_road(player, building.flag, "l,l,l")
-
-   building = place_safe_building(player, "barbarians_charcoal_kiln", sf.x + 1, sf.y + 508)
-   building = place_safe_building(player, "barbarians_charcoal_kiln", sf.x + 508, sf.y)
-
-   -- Food and transport small
-   building = place_safe_building(player, "barbarians_well", sf.x + 504, sf.y)
-   building = place_safe_building(player, "barbarians_well", sf.x + 4, sf.y)
-   building = place_safe_building(player, "barbarians_well", sf.x + 510, sf.y + 11)
-
-   -- (near water)
-   building = place_safe_building(player, "barbarians_fishers_hut", sf.x + 3, sf.y + 3)
-   connected_road(player, building.flag, "tr,tl,tl")
-
-   building = place_safe_building(player, "barbarians_fishers_hut", sf.x + 2, sf.y + 5)
-   connected_road(player, building.flag, "l,l,tl")
-
-   building = place_safe_building(player, "barbarians_fishers_hut", sf.x + 3, sf.y + 9)
-   connected_road(player, building.flag, "bl,bl|bl,bl")
-
-   building = place_safe_building(player, "barbarians_fishers_hut", sf.x + 5, sf.y + 12)
-   connected_road(player, building.flag, "bl,bl,bl|bl,bl")
-
-   -- (near animals)
-   building = place_safe_building(player, "barbarians_hunters_hut", sf.x + 506, sf.y + 502)
-   connected_road(player, building.flag, "r,r")
-
-   building = place_safe_building(player, "barbarians_gamekeepers_hut", sf.x + 504, sf.y + 502)
-   connected_road(player, building.flag, "r,r")
-
-   building = place_safe_building(player, "barbarians_hunters_hut", sf.x + 502, sf.y + 502)
-   connected_road(player, building.flag, "r,r")
-
-   building = place_safe_building(player, "barbarians_gamekeepers_hut", sf.x + 500, sf.y + 502)
-   connected_road(player, building.flag, "r,r")
-
-   -- Food and transport medium
-   building = place_safe_building(player, "barbarians_bakery", sf.x + 510, sf.y + 14)
-   connected_road(player, building.flag, "tr,tl,tl")
-
-   building = place_safe_building(player, "barbarians_bakery", sf.x + 0, sf.y + 18)
-   connected_road(player, building.flag, "tr,tl,tl")
-
-   building = place_safe_building(player, "barbarians_micro_brewery", sf.x + 3, sf.y + 26)
-   connected_road(player, building.flag, "l,l")
-
-   building = place_safe_building(player, "barbarians_micro_brewery", sf.x + 5, sf.y + 26)
-   connected_road(player, building.flag, "l,l")
-
-   building = place_safe_building(player, "barbarians_brewery", sf.x + 7, sf.y + 26)
-   connected_road(player, building.flag, "l,l")
-
-   building = place_safe_building(player, "barbarians_brewery", sf.x + 9, sf.y + 26)
-   connected_road(player, building.flag, "l,l")
-
-   building = place_safe_building(player, "barbarians_tavern", sf.x + 503, sf.y + 22)
-   connected_road(player, building.flag, "r,tr,tr")
-
-   building = place_safe_building(player, "barbarians_tavern", sf.x + 501, sf.y + 22)
-   connected_road(player, building.flag, "r,r")
-
-   building = place_safe_building(player, "barbarians_inn", sf.x + 499, sf.y + 22)
-   connected_road(player, building.flag, "r,r")
-
-   building = place_safe_building(player, "barbarians_inn", sf.x + 497, sf.y + 22)
-   connected_road(player, building.flag, "r,r")
-
-   building = place_safe_building(player, "barbarians_big_inn", sf.x + 495, sf.y + 22)
-   connected_road(player, building.flag, "r,r")
-
-   building = place_safe_building(player, "barbarians_big_inn", sf.x + 493, sf.y + 22)
-   connected_road(player, building.flag, "r,r")
-
-
-   -- Food and transport big
-   building = place_safe_building(player, "barbarians_farm", sf.x + 505, sf.y + 20)
-   connected_road(player, building.flag, "tr,tr|tr,tr")
-
-   building = place_safe_building(player, "barbarians_farm", sf.x + 507, sf.y + 16)
-   connected_road(player, building.flag, "tr,tr|tl,tr")
-
-   building = place_safe_building(player, "barbarians_farm", sf.x + 509, sf.y + 21)
-   connected_road(player, building.flag, "tr,tr|tr,tr")
-
-   building = place_safe_building(player, "barbarians_farm", sf.x + 511, sf.y + 17)
-   connected_road(player, building.flag, "tr,tr|tr,tr")
-
-   building = place_safe_building(player, "barbarians_farm", sf.x + 511, sf.y + 25)
-   connected_road(player, building.flag, "tr,tr|tr,tr")
-
-   building = place_safe_building(player, "barbarians_farm", sf.x + 1, sf.y + 21)
-   connected_road(player, building.flag, "tr,tr|tr,tr")
-
-   building = place_safe_building(player, "barbarians_farm", sf.x + 1, sf.y + 26)
-   connected_road(player, building.flag, "tr,tr|tr,tr")
-
-   building = place_safe_building(player, "barbarians_farm", sf.x + 3, sf.y + 22)
-   connected_road(player, building.flag, "tr,tr|tr,tr")
-
-   building = place_safe_building(player, "barbarians_cattlefarm", sf.x + 7, sf.y + 21)
-   connected_road(player, building.flag, "l,l,tl")
-
-   building = place_safe_building(player, "barbarians_cattlefarm", sf.x + 9, sf.y + 22)
-   connected_road(player, building.flag, "l,l,tl")
-   connected_road(player, building.flag, "tr,tr|r,tr")
-
-   building = place_safe_building(player, "barbarians_weaving_mill", sf.x + 4, sf.y + 15)
-   building = place_safe_building(player, "barbarians_weaving_mill", sf.x + 2, sf.y + 11)
-
-
-   -- Tools, weapons and training sites medium
-   building = place_safe_building(player, "barbarians_smelting_works", sf.x + 506, sf.y + 12)
-   building = place_safe_building(player, "barbarians_smelting_works", sf.x + 508, sf.y + 12)
-
-   building = place_safe_building(player, "barbarians_metal_workshop", sf.x + 496, sf.y + 18)
-   connected_road(player, building.flag, "tr,tr")
-
-   building = place_safe_building(player, "barbarians_metal_workshop", sf.x + 497, sf.y + 16)
-   connected_road(player, building.flag, "tr,tr")
-
-   building = place_safe_building(player, "barbarians_warmill", sf.x + 498, sf.y + 18)
-   connected_road(player, building.flag, "tr,tr")
-
-   building = place_safe_building(player, "barbarians_warmill", sf.x + 499, sf.y + 16)
-   connected_road(player, building.flag, "tr,tr")
-
-   building = place_safe_building(player, "barbarians_ax_workshop", sf.x + 500, sf.y + 18)
-   connected_road(player, building.flag, "tr,tr")
-
-   building = place_safe_building(player, "barbarians_ax_workshop", sf.x + 501, sf.y + 16)
-   connected_road(player, building.flag, "tr,tr")
-
-   building = place_safe_building(player, "barbarians_barracks", sf.x + 502, sf.y + 18)
-   connected_road(player, building.flag, "tr,tr")
-
-   building = place_safe_building(player, "barbarians_barracks", sf.x + 503, sf.y + 16)
-   connected_road(player, building.flag, "tr,tr")
-
-
-   -- Tools, weapons and training sites big
-   building = place_safe_building(player, "barbarians_battlearena", sf.x + 489, sf.y + 4)
-   building = place_safe_building(player, "barbarians_battlearena", sf.x + 488, sf.y + 9)
-   connected_road(player, building.flag, "r,r")
-
-   building = place_safe_building(player, "barbarians_trainingcamp", sf.x + 496, sf.y - 1)
-   building = place_safe_building(player, "barbarians_trainingcamp", sf.x + 493, sf.y + 509)
-   connected_road(player, building.flag, "br,br")
-
-   building = place_safe_building(player, "barbarians_helmsmithy", sf.x + 502, sf.y + 509)
-   building = place_safe_building(player, "barbarians_helmsmithy", sf.x + 502, sf.y + 506)
-   connected_road(player, building.flag, "br,bl,bl")
-
-   -- Mines
-   building = place_safe_building(player, "barbarians_granitemine", sf.x + 504, sf.y + 4)
-   connected_road(player, building.flag, "tr,tr|tr,tr")
-   connected_road(player, building.flag, "br,r")
-
-   building = place_safe_building(player, "barbarians_granitemine", sf.x + 506, sf.y + 5)
-   connected_road(player, building.flag, "tr,tr,tr|tr,tr")
-
-   building = place_safe_building(player, "barbarians_granitemine", sf.x + 505, sf.y + 8)
-   connected_road(player, building.flag, "tr,tr,tl")
-
-   building = place_safe_building(player, "barbarians_granitemine", sf.x + 503, sf.y + 8)
-   connected_road(player, building.flag, "r,r")
-
-   building = place_safe_building(player, "barbarians_coalmine", sf.x + 500, sf.y + 1)
-   connected_road(player, building.flag, "tr,tr|tr,tr")
-
-   building = place_safe_building(player, "barbarians_coalmine", sf.x + 498, sf.y + 2)
-   connected_road(player, building.flag, "tr,r")
-
-   building = place_safe_building(player, "barbarians_coalmine_deep", sf.x + 497, sf.y + 3)
-   connected_road(player, building.flag, "r,tr")
-
-   building = place_safe_building(player, "barbarians_coalmine_deeper", sf.x + 502, sf.y + 3)
-   connected_road(player, building.flag, "l,tl,tl")
-
-   building = place_safe_building(player, "barbarians_ironmine", sf.x + 501, sf.y + 8)
-   connected_road(player, building.flag, "r,r")
-
-   building = place_safe_building(player, "barbarians_ironmine", sf.x + 499, sf.y + 8)
-   connected_road(player, building.flag, "r,r")
-
-   building = place_safe_building(player, "barbarians_ironmine_deep", sf.x + 497, sf.y + 8)
-   connected_road(player, building.flag, "r,r")
-
-   building = place_safe_building(player, "barbarians_ironmine_deeper", sf.x + 500, sf.y + 12)
-   connected_road(player, building.flag, "tr,tr,tr,tl")
-   connected_road(player, building.flag, "br,bl")
-
-   building = place_safe_building(player, "barbarians_goldmine", sf.x + 495, sf.y + 8)
-   connected_road(player, building.flag, "r,r")
-
-   building = place_safe_building(player, "barbarians_goldmine", sf.x + 493, sf.y + 8)
-   connected_road(player, building.flag, "r,r")
-   connected_road(player, building.flag, "bl,bl|l,bl")
-
-   building = place_safe_building(player, "barbarians_goldmine_deep", sf.x + 495, sf.y + 4)
-   connected_road(player, building.flag, "r,tr")
-
-   building = place_safe_building(player, "barbarians_goldmine_deeper", sf.x + 493, sf.y + 4)
-   connected_road(player, building.flag, "r,r")
-   connected_road(player, building.flag, "l,l,tl")
+   place_warehouse(player, "barbarians_headquarters", sf, 0, 0)
+
+   local total_buildings = init_militarysites(player, sf, 1)
+   total_buildings = init_warehouses(player, sf, total_buildings)
+   total_buildings = init_shipconstruction(player, sf, total_buildings)
+   total_buildings = init_buildingmaterials(player, sf, total_buildings)
+   total_buildings = init_food_and_transport(player, sf, total_buildings)
+   total_buildings = init_tools_and_training(player, sf, total_buildings)
+   total_buildings = init_mines(player, sf, total_buildings)
 
    -- Construction
    player:place_building("barbarians_helmsmithy", map:get_field((sf.x + 510) % 512, (sf.y + 3) % 512), true, true)

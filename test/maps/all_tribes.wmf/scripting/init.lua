@@ -40,3 +40,9 @@ player.see_all = 1
 
 init_barbarians(player)
 verify_buildings(player)
+
+player = wl.Game().players[3]
+player.see_all = 1
+
+init_barbarians(player)
+verify_buildings(player)

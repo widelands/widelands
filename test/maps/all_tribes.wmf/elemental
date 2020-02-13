@@ -4,7 +4,7 @@
 packet_version="1"
 map_w="512"
 map_h="512"
-nr_players="2"
+nr_players="3"
 name="All Tribes"
 author="GunChleoc"
 descr="Test map to showcase all tribes units"

@@ -14,3 +14,9 @@ name="Barbarians2"
 tribe="barbarians"
 ai="empty"
 closeable="false"
+
+[player_3]
+name="Barbarians3"
+tribe="barbarians"
+ai="empty"
+closeable="false"
