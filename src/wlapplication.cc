@@ -1353,7 +1353,7 @@ bool WLApplication::new_game() {
 			game.set_ibase(new InteractivePlayer(game, get_config_section(), pn, false));
 			std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(game, true, pn));
 
-            std::vector<std::string> tipstexts{"general_game", "singleplayer"};
+			std::vector<std::string> tipstexts{"general_game", "singleplayer"};
 			if (sp.has_players_tribe()) {
 				tipstexts.push_back(sp.get_players_tribe());
 			}
@@ -1464,7 +1464,7 @@ void WLApplication::replay() {
 	}
 
 	try {
-        game.create_loader_ui({"general_game"});
+		game.create_loader_ui({"general_game"});
 		game.step_loader_ui(_("Loading…"));
 
 		game.set_ibase(new InteractiveSpectator(game, get_config_section()));

@@ -657,11 +657,11 @@ void GameHost::run() {
 	game.set_write_syncstream(get_config_bool("write_syncstreams", true));
 
 	try {
-        std::vector<std::string> tipstexts{"general_game", "multiplayer"};
+		std::vector<std::string> tipstexts{"general_game", "multiplayer"};
 		if (d->hp.has_players_tribe()) {
 			tipstexts.push_back(d->hp.get_players_tribe());
 		}
-        game.create_loader_ui(tipstexts);
+		game.create_loader_ui(tipstexts);
 		game.step_loader_ui(_("Preparing game"));
 
 		d->game = &game;

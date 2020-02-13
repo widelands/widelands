@@ -53,7 +53,7 @@ void MainMenuLoadMap::clicked_ok() {
 		fill_table();
 	} else {
 		EditorInteractive& eia = dynamic_cast<EditorInteractive&>(*get_parent());
-        eia.egbase().create_loader_ui({"editor"}, "images/loadscreens/editor.jpg");
+		eia.egbase().create_loader_ui({"editor"}, "images/loadscreens/editor.jpg");
 		eia.load(mapdata.filename);
 		// load() will delete us.
 	}

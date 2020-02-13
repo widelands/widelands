@@ -330,15 +330,16 @@ void EditorGameBase::load_graphics() {
 	tribes_->load_graphics();
 }
 
-UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::vector<std::string>& tipstexts, const std::string& background) {
-    loader_ui_.reset(new UI::ProgressWindow(background));
-    game_tips_.reset(tipstexts.empty() ? nullptr : new GameTips(*loader_ui_, tipstexts));
-    return *loader_ui_.get();
+UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::vector<std::string>& tipstexts,
+                                                     const std::string& background) {
+	loader_ui_.reset(new UI::ProgressWindow(background));
+	game_tips_.reset(tipstexts.empty() ? nullptr : new GameTips(*loader_ui_, tipstexts));
+	return *loader_ui_.get();
 }
 void EditorGameBase::step_loader_ui(const std::string& text) const {
-    if (loader_ui_ != nullptr) {
-        loader_ui_->step(text);
-    }
+	if (loader_ui_ != nullptr) {
+		loader_ui_->step(text);
+	}
 }
 
 /**

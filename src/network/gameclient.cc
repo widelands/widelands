@@ -263,11 +263,11 @@ void GameClient::run() {
 	game.set_write_syncstream(get_config_bool("write_syncstreams", true));
 
 	try {
-        std::vector<std::string> tipstexts{"general_game", "multiplayer"};
-        if (has_players_tribe()) {
-            tipstexts.push_back(get_players_tribe());
-        }
-        UI::ProgressWindow& loader_ui = game.create_loader_ui(tipstexts);
+		std::vector<std::string> tipstexts{"general_game", "multiplayer"};
+		if (has_players_tribe()) {
+			tipstexts.push_back(get_players_tribe());
+		}
+		UI::ProgressWindow& loader_ui = game.create_loader_ui(tipstexts);
 
 		d->game = &game;
 		InteractiveGameBase* igb = d->init_game(this, loader_ui);

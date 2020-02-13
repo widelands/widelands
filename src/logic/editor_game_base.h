@@ -119,10 +119,11 @@ public:
 	void load_graphics();
 	virtual void cleanup_for_load();
 
-    // Create a new loader UI
-    UI::ProgressWindow& create_loader_ui(const std::vector<std::string>& tipstexts, const std::string& background = std::string());
-    // Set step text for the current loader UI if it's not nullptr.
-    void step_loader_ui(const std::string& text) const;
+	// Create a new loader UI
+	UI::ProgressWindow& create_loader_ui(const std::vector<std::string>& tipstexts,
+	                                     const std::string& background = std::string());
+	// Set step text for the current loader UI if it's not nullptr.
+	void step_loader_ui(const std::string& text) const;
 
 	void set_road(const FCoords&, uint8_t direction, RoadSegment roadtype);
 
@@ -265,7 +266,7 @@ private:
 	std::unique_ptr<InteractiveBase> ibase_;
 	Map map_;
 
-    std::unique_ptr<GameTips> game_tips_;
+	std::unique_ptr<GameTips> game_tips_;
 
 	/// Even after a map is fully loaded, some static data (images, scripts)
 	/// will still be read from a filesystem whenever a map/game is saved.
