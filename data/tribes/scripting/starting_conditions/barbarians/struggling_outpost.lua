@@ -8,7 +8,7 @@ set_textdomain("tribes")
 
 init = {
    -- TRANSLATORS: This is the name of a starting condition
-   descname = _ "Hardcore",
+   descname = _ "Struggling Outpost",
    -- TRANSLATORS: This is the tooltip for the "Hardcore" starting condition
    tooltip = _"Start the game with just your headquarters and a minimum for bootstrapping an economy. Warning: the AI can't successfully start from this",
    func = function(player, shared_in_start)
