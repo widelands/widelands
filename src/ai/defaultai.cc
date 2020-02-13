@@ -5477,14 +5477,10 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			}
 			inputs[31] = (persistent_data->trees_around_cutters < 100) * 2;
 			inputs[32] = (persistent_data->trees_around_cutters < 200) * 2;
-			inputs[33] = (mines_per_type[iron_resource_id].total_count() <= 1) *
-			             -1;
-			inputs[34] = (mines_per_type[iron_resource_id].total_count() <= 1) *
-			             -1;
-			inputs[35] = (mines_per_type[iron_resource_id].total_count() == 0) *
-			             -1;
-			inputs[36] = (mines_per_type[iron_resource_id].total_count() == 0) *
-			             -1;
+			inputs[33] = (mines_per_type[iron_resource_id].total_count() <= 1) * -1;
+			inputs[34] = (mines_per_type[iron_resource_id].total_count() <= 1) * -1;
+			inputs[35] = (mines_per_type[iron_resource_id].total_count() == 0) * -1;
+			inputs[36] = (mines_per_type[iron_resource_id].total_count() == 0) * -1;
 			inputs[37] = -1;
 			inputs[38] = -1;
 			inputs[39] = -1;
@@ -5689,7 +5685,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[17] = (inputs_on_stock) ? 0 : -2;
 			inputs[18] = (suppliers_exist) ? 0 : -3;
 			inputs[19] = (inputs_on_stock) ? 0 : -4;
-			inputs[20] = (mines_per_type[bo.mines].total_count()== 1) ? 3 : 0;
+			inputs[20] = (mines_per_type[bo.mines].total_count() == 1) ? 3 : 0;
 			inputs[21] = (mines_per_type[bo.mines].total_count() == 1) ? 2 : 0;
 			inputs[22] = (bo.current_stats - 50) / 10;
 			inputs[23] = (bo.current_stats - 50) / 20;
