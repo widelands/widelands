@@ -29,6 +29,9 @@ tribes:new_worker_type {
          "callobject=with_stack",
          "animate=stacking_2 1000",
          "return"
+      },
+      find_pond = {
+         "findobject=attrib:pond_dry radius:8",
       }
    },
 

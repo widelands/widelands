@@ -79,9 +79,9 @@ tribes:new_productionsite_type {
          descname = _"making a charcoal stack",
          actions = {
             "return=skipped unless economy needs coal",
-            "return=failed unless site has log:3",
-            "callworker=make_stack",
+            "callworker=find_pond",
             "consume=log:3",
+            "callworker=make_stack",
             "sleep=15000",
          },
       },
@@ -89,7 +89,6 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start collecting coal because ...
          descname = _"collecting coal",
          actions = {
-            "return=skipped unless economy needs coal",
             "sleep=15000",
             "callworker=collect_coal",
          },
