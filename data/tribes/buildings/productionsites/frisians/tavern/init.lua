@@ -61,8 +61,8 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "fruit", amount = 4 },
       { name = "bread_frisians", amount = 4 },
+      { name = "fruit", amount = 4 },
       { name = "smoked_fish", amount = 4 },
       { name = "smoked_meat", amount = 4 },
    },
@@ -86,8 +86,8 @@ tribes:new_productionsite_type {
          actions = {
             -- time total: 49.5
             "return=skipped unless economy needs ration",
-            "return=skipped when site has fruit,bread_frisians and site has smoked_fish,smoked_meat",
-            "consume=fruit,bread_frisians,smoked_fish,smoked_meat",
+            "return=skipped when site has bread_frisians,fruit and site has smoked_fish,smoked_meat",
+            "consume=bread_frisians,fruit,smoked_fish,smoked_meat",
             "sleep=5000",
             "animate=working 34500",
             "sleep=10000",
@@ -100,7 +100,7 @@ tribes:new_productionsite_type {
          actions = {
             -- time total: 66
             "return=skipped unless economy needs ration",
-            "consume=fruit,bread_frisians smoked_fish,smoked_meat",
+            "consume=bread_frisians,fruit smoked_fish,smoked_meat",
             "sleep=5000",
             "animate=working 51000",
             "sleep=10000",
