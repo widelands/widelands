@@ -99,6 +99,7 @@ verify_buildings(4, 122)
 
 -- Run the tests
 run(function()
+   game = wl.Game()
    sleep(1000)
 
    -- Test ships
