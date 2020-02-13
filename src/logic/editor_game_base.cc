@@ -335,10 +335,6 @@ UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::vector<std::stri
     game_tips_.reset(tipstexts.empty() ? nullptr : new GameTips(*loader_ui_, tipstexts));
     return *loader_ui_.get();
 }
-void EditorGameBase::remove_loader_ui() {
-    assert(loader_ui_ != nullptr);
-    loader_ui_.reset(nullptr);
-}
 void EditorGameBase::step_loader_ui(const std::string& text) const {
     if (loader_ui_ != nullptr) {
         loader_ui_->step(text);

@@ -121,8 +121,6 @@ public:
 
     // Create a new loader UI
     UI::ProgressWindow& create_loader_ui(const std::vector<std::string>& tipstexts, const std::string& background = std::string());
-    // Destroy the loader UI
-    void remove_loader_ui();
     // Set step text for the current loader UI if it's not nullptr.
     void step_loader_ui(const std::string& text) const;
 

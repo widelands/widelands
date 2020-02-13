@@ -255,12 +255,10 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	set_game_controller(new SinglePlayerGameController(*this, true, 1));
 	try {
 		bool const result = run(NewSPScenario, script_to_run, false, "single_player");
-		remove_loader_ui();
 		delete ctrl_;
 		ctrl_ = nullptr;
 		return result;
 	} catch (...) {
-		remove_loader_ui();
 		delete ctrl_;
 		ctrl_ = nullptr;
 		throw;
@@ -421,12 +419,10 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 	set_game_controller(new SinglePlayerGameController(*this, true, player_nr));
 	try {
 		bool const result = run(Loaded, script_to_run, false, "single_player");
-		remove_loader_ui();
 		delete ctrl_;
 		ctrl_ = nullptr;
 		return result;
 	} catch (...) {
-		remove_loader_ui();
 		delete ctrl_;
 		ctrl_ = nullptr;
 		throw;
