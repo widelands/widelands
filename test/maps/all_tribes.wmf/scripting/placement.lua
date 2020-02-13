@@ -101,3 +101,8 @@ function place_initial_militarysites(map, sf, player, buildingname)
    connected_road(player, building.flag, "tr,tr,tl|tl,tl|tl,tl|l,tl|l,tl")
 end
 
+function place_player_ship(playernumber)
+   local player = wl.Game().players[playernumber]
+   local starting_field = wl.Game().map.player_slots[playernumber].starting_field
+   player:place_ship(map:get_field((starting_field.x + 12) % 512, (starting_field.y + 6) % 512))
+end
