@@ -341,8 +341,10 @@ UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::vector<std::stri
 }
 void EditorGameBase::change_loader_ui_background(const std::string& background) {
 	assert(has_loader_ui());
-	loader_ui_->set_background(background);
-	game_tips_.reset(nullptr);
+    if (!background.empty()) {
+        loader_ui_->set_background(background);
+        game_tips_.reset(nullptr);
+    }
 }
 void EditorGameBase::step_loader_ui(const std::string& text) const {
 	if (loader_ui_ != nullptr) {

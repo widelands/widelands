@@ -216,11 +216,7 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 
 	step_loader_ui(_("Preloading map…"));
 	maploader->preload_map(true);
-
-	const std::string& background = map().get_background();
-	if (!background.empty()) {
-		change_loader_ui_background(background);
-	}
+	change_loader_ui_background(map().get_background());
 
 	step_loader_ui(_("Loading world…"));
 	world();
@@ -280,6 +276,7 @@ void Game::init_newgame(const GameSettings& settings) {
 	std::unique_ptr<MapLoader> maploader(mutable_map()->get_correct_loader(settings.mapfilename));
 	assert(maploader != nullptr);
 	maploader->preload_map(settings.scenario);
+	change_loader_ui_background(map().get_background());
 
 	step_loader_ui(_("Loading world…"));
 	world();
@@ -287,10 +284,6 @@ void Game::init_newgame(const GameSettings& settings) {
 	step_loader_ui(_("Loading tribes…"));
 	tribes();
 
-	std::string const background = map().get_background();
-	if (!background.empty()) {
-		change_loader_ui_background(background);
-	}
 	step_loader_ui(_("Creating players…"));
 
 	std::vector<PlayerSettings> shared;
@@ -369,13 +362,14 @@ void Game::init_savegame(const GameSettings& settings) {
 		GameLoader gl(settings.mapfilename, *this);
 		Widelands::GamePreloadPacket gpdp;
 		gl.preload_game(gpdp);
+        change_loader_ui_background(gpdp.get_background());
+
 		win_condition_displayname_ = gpdp.get_win_condition();
 		if (win_condition_displayname_ == "Scenario") {
 			// Replays can't handle scenarios
 			set_write_replay(false);
 		}
-		std::string background(gpdp.get_background());
-		change_loader_ui_background(background);
+
 		step_loader_ui(_("Loading…"));
 		gl.load_game(settings.multiplayer);
 		// Players might have selected a different AI type
@@ -401,13 +395,14 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 
 		Widelands::GamePreloadPacket gpdp;
 		gl.preload_game(gpdp);
-		std::string background(gpdp.get_background());
+        change_loader_ui_background(gpdp.get_background());
+
 		win_condition_displayname_ = gpdp.get_win_condition();
 		if (win_condition_displayname_ == "Scenario") {
 			// Replays can't handle scenarios
 			set_write_replay(false);
 		}
-		change_loader_ui_background(background);
+
 		player_nr = gpdp.get_player_nr();
 		set_ibase(new InteractivePlayer(*this, get_config_section(), player_nr, false));
 
