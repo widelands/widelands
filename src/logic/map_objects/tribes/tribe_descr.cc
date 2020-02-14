@@ -62,7 +62,19 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
    : name_(table.get_string("name")),
      descname_(info.descname),
      tribes_(tribes),
-     bridge_height_(table.get_int("bridge_height")) {
+     bridge_height_(table.get_int("bridge_height")),
+     builder_(Widelands::INVALID_INDEX),
+     carrier_(Widelands::INVALID_INDEX),
+     carrier2_(Widelands::INVALID_INDEX),
+     geologist_(Widelands::INVALID_INDEX),
+     soldier_(Widelands::INVALID_INDEX),
+     ship_(Widelands::INVALID_INDEX),
+     ferry_(Widelands::INVALID_INDEX),
+     port_(Widelands::INVALID_INDEX),
+     ironore_(Widelands::INVALID_INDEX),
+     rawlog_(Widelands::INVALID_INDEX),
+     refinedlog_(Widelands::INVALID_INDEX),
+     granite_(Widelands::INVALID_INDEX) {
 	log("┏━ Loading %s:\n", name_.c_str());
 	ScopedTimer timer("┗━ took: %ums");
 
@@ -87,6 +99,9 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 
 		log("┃    Workers: ");
 		load_workers(table, tribes);
+		if (scenario_table != nullptr && scenario_table->has_key("workers_order")) {
+			load_workers(*scenario_table, tribes);
+		}
 		log("%ums\n", timer.ms_since_last_query());
 
 		log("┃    Buildings: ");
@@ -102,6 +117,44 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 
 		if (table.has_key<std::string>("toolbar")) {
 			toolbar_image_set_.reset(new ToolbarImageset(*table.get_table("toolbar")));
+		}
+
+		// Validate special units
+		if (builder_ == Widelands::INVALID_INDEX) {
+			throw GameDataError("special worker 'builder' not defined");
+		}
+		if (carrier_ == Widelands::INVALID_INDEX) {
+			throw GameDataError("special worker 'carrier' not defined");
+		}
+		if (carrier2_ == Widelands::INVALID_INDEX) {
+			throw GameDataError("special worker 'carrier2' not defined");
+		}
+		if (geologist_ == Widelands::INVALID_INDEX) {
+			throw GameDataError("special worker 'geologist' not defined");
+		}
+		if (soldier_ == Widelands::INVALID_INDEX) {
+			throw GameDataError("special worker 'soldier' not defined");
+		}
+		if (ferry_ == Widelands::INVALID_INDEX) {
+			throw GameDataError("special worker 'ferry' not defined");
+		}
+		if (port_ == Widelands::INVALID_INDEX) {
+			throw GameDataError("special building 'port' not defined");
+		}
+		if (ironore_ == Widelands::INVALID_INDEX) {
+			throw GameDataError("special ware 'ironore' not defined");
+		}
+		if (rawlog_ == Widelands::INVALID_INDEX) {
+			throw GameDataError("special ware 'rawlog' not defined");
+		}
+		if (refinedlog_ == Widelands::INVALID_INDEX) {
+			throw GameDataError("special ware 'refinedlog' not defined");
+		}
+		if (granite_ == Widelands::INVALID_INDEX) {
+			throw GameDataError("special ware 'granite' not defined");
+		}
+		if (ship_ == Widelands::INVALID_INDEX) {
+			throw GameDataError("special unit 'ship' not defined");
 		}
 	} catch (const GameDataError& e) {
 		throw GameDataError("tribe %s: %s", name_.c_str(), e.what());
@@ -294,12 +347,24 @@ void TribeDescr::load_workers(const LuaTable& table, Tribes& tribes) {
 		}
 	}
 
-	builder_ = add_special_worker(table.get_string("builder"), tribes);
-	carrier_ = add_special_worker(table.get_string("carrier"), tribes);
-	carrier2_ = add_special_worker(table.get_string("carrier2"), tribes);
-	geologist_ = add_special_worker(table.get_string("geologist"), tribes);
-	soldier_ = add_special_worker(table.get_string("soldier"), tribes);
-	ferry_ = add_special_worker(table.get_string("ferry"), tribes);
+    if (table.has_key("builder")) {
+        builder_ = add_special_worker(table.get_string("builder"), tribes);
+    }
+    if (table.has_key("carrier")) {
+        carrier_ = add_special_worker(table.get_string("carrier"), tribes);
+    }
+    if (table.has_key("carrier2")) {
+        carrier2_ = add_special_worker(table.get_string("carrier2"), tribes);
+    }
+    if (table.has_key("geologist")) {
+        geologist_ = add_special_worker(table.get_string("geologist"), tribes);
+    }
+    if (table.has_key("soldier")) {
+        soldier_ = add_special_worker(table.get_string("soldier"), tribes);
+    }
+    if (table.has_key("ferry")) {
+        ferry_ = add_special_worker(table.get_string("ferry"), tribes);
+    }
 }
 
 void TribeDescr::load_buildings(const LuaTable& table, Tribes& tribes) {
