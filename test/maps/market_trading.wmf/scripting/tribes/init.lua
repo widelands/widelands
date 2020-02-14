@@ -12,6 +12,11 @@ return {
          {
             "barbarians_custom_worker"
          },
+      },
+      wares_order = {
+         {
+            "custom_ware"
+         },
       }
    }
 }

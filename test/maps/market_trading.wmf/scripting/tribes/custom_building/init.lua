@@ -32,7 +32,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      collects_ware_from_map = "log",
+      collects_ware_from_map = "custom_ware",
       basic_amount = 1,
    },
 
@@ -41,7 +41,7 @@ tribes:new_productionsite_type {
    },
 
    outputs = {
-      "log"
+      "custom_ware"
    },
 
    indicate_workarea_overlaps = {

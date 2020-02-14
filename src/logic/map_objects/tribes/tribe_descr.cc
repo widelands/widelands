@@ -91,6 +91,9 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 
 		log("┃    Wares: ");
 		load_wares(table, tribes);
+		if (scenario_table != nullptr && scenario_table->has_key("wares_order")) {
+			load_wares(*scenario_table, tribes);
+		}
 		log("%ums\n", timer.ms_since_last_query());
 
 		log("┃    Immovables: ");
@@ -277,10 +280,18 @@ void TribeDescr::load_wares(const LuaTable& table, Tribes& tribes) {
 		}
 	}
 
-	ironore_ = add_special_ware(table.get_string("ironore"), tribes);
-	rawlog_ = add_special_ware(table.get_string("rawlog"), tribes);
-	refinedlog_ = add_special_ware(table.get_string("refinedlog"), tribes);
-	granite_ = add_special_ware(table.get_string("granite"), tribes);
+    if (table.has_key("ironore")) {
+        ironore_ = add_special_ware(table.get_string("ironore"), tribes);
+    }
+    if (table.has_key("rawlog")) {
+        rawlog_ = add_special_ware(table.get_string("rawlog"), tribes);
+    }
+    if (table.has_key("refinedlog")) {
+        refinedlog_ = add_special_ware(table.get_string("refinedlog"), tribes);
+    }
+    if (table.has_key("granite")) {
+        granite_ = add_special_ware(table.get_string("granite"), tribes);
+    }
 
 	// Verify that the preciousness has been set for all of the tribe's wares
 	for (const DescriptionIndex wi : wares()) {

@@ -6,6 +6,9 @@ run(function()
 
    sleep(100000)
 
+   hq = p1:get_buildings("barbarians_headquarters")[1]
+   assert_true(hq:get_wares("custom_ware") > 350, "We should have collected some of the custom ware")
+
    print("# All Tests passed.")
    wl.ui.MapView():close()
 end)

@@ -37,7 +37,7 @@ tribes:new_worker_type {
          "playsound=sound/woodcutting/tree_falling 130",
          "callobject=fall",
          "animate=idle 2000",
-         "createware=log",
+         "createware=custom_ware",
          "return"
       }
    },
