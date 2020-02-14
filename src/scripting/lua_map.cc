@@ -691,6 +691,10 @@ const Widelands::TribeDescr& get_tribe_descr(lua_State* L, const std::string& tr
 		report_error(L, "Tribe '%s' does not exist", tribename.c_str());
 	}
 	const Tribes& tribes = get_egbase(L).tribes();
+    const Widelands::TribeDescr* tribe = tribes.get_tribe_descr(tribes.tribe_index(tribename));
+    if (tribe == nullptr) {
+        get_egbase(L).mutable_tribes()->load_tribe(tribename);
+    }
 	return *tribes.get_tribe_descr(tribes.tribe_index(tribename));
 }
 
@@ -3087,6 +3091,9 @@ void LuaWareDescription::__unpersist(lua_State* L) {
 /* RST
    .. method:: consumers(tribename)
 
+      Returns a list of buildings for the 'tribe' that consume this ware.
+      Loads the tribe if it hasn't been loaded yet.
+
       :arg tribename: the name of the tribe that this ware gets checked for
       :type tribename: :class:`string`
 
@@ -3135,6 +3142,9 @@ int LuaWareDescription::is_construction_material(lua_State* L) {
 
 /* RST
    .. method:: producers(tribename)
+
+      Returns a list of buildings for the 'tribe' that produce this ware.
+      Loads the tribe if it hasn't been loaded yet.
 
       :arg tribename: the name of the tribe that this ware gets checked for
       :type tribename: :class:`string`

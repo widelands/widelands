@@ -887,7 +887,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 				                     /** TRANSLATORS: Map author name when it hasn't been set yet */
 				                     pgettext("author_name", "Unknown")));
 
-				egbase.step_loader_ui(_("Loading tribes"));
+				egbase.step_loader_ui(_("Loading tribes…"));
 				egbase.tribes();
 			} else {
 				egbase.step_loader_ui((boost::format(_("Loading map “%s”…")) % filename).str());
