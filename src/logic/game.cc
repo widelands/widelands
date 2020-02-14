@@ -216,13 +216,13 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	step_loader_ui(_("Preloading map…"));
 	maploader->preload_map(true);
 
-    // If the scenario has no special background image, show game tips instead.
+	// If the scenario has no special background image, show game tips instead.
 	const std::string& background = map().get_background();
 	if (background.empty()) {
-        create_loader_ui({"general_game"});
-    } else {
-        loader_ui_->set_background(background);
-    }
+		create_loader_ui({"general_game"});
+	} else {
+		loader_ui_->set_background(background);
+	}
 
 	step_loader_ui(_("Loading world…"));
 	world();
