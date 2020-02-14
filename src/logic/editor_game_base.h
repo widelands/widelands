@@ -123,21 +123,21 @@ public:
 	UI::ProgressWindow& create_loader_ui(const std::vector<std::string>& tipstexts,
 	                                     const std::string& background = std::string());
 
-    // Change the background image for the loader UI and remove the game tips
-    void change_loader_ui_background(const std::string& background);
+	// Change the background image for the loader UI and remove the game tips
+	void change_loader_ui_background(const std::string& background);
 
 	// Set step text for the current loader UI if it's not nullptr.
 	void step_loader_ui(const std::string& text) const;
 
 #ifndef NDEBUG
-    // Check whether we currently have a loader_ui. Used for asserts only.
-    bool has_loader_ui() const {
-        return loader_ui_ != nullptr;
-    }
+	// Check whether we currently have a loader_ui. Used for asserts only.
+	bool has_loader_ui() const {
+		return loader_ui_ != nullptr;
+	}
 #endif
 
-    // Destroy the loader UI
-    void remove_loader_ui();
+	// Destroy the loader UI
+	void remove_loader_ui();
 
 	void set_road(const FCoords&, uint8_t direction, RoadSegment roadtype);
 
@@ -277,7 +277,7 @@ private:
 	std::unique_ptr<InteractiveBase> ibase_;
 	Map map_;
 
-    // Shown while loading or saving a game/map
+	// Shown while loading or saving a game/map
 	std::unique_ptr<UI::ProgressWindow> loader_ui_;
 	std::unique_ptr<GameTips> game_tips_;
 
