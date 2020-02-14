@@ -44,6 +44,7 @@ print_loading_message("┗━ took", function()
 
    print_loading_message("┃    Wares", function()
       set_loading_message(_("Wares"), 2)
+
       include "tribes/wares/armor/init.lua"
       include "tribes/wares/armor_chain/init.lua"
       include "tribes/wares/armor_gilded/init.lua"

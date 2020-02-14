@@ -161,7 +161,7 @@ bool RealFSImpl::file_exists(const std::string& path) const {
  * Also returns false if the pathname is invalid (obviously, because the file
  * \e can't exist then)
  */
-bool RealFSImpl::is_directory(const std::string& path) {
+bool RealFSImpl::is_directory(const std::string& path) const {
 	return FileSystemPath(canonicalize_name(path)).is_directory_;
 }
 
@@ -437,9 +437,8 @@ void RealFSImpl::fs_rename(const std::string& old_name, const std::string& new_n
 	const std::string fullname1 = canonicalize_name(old_name);
 	const std::string fullname2 = canonicalize_name(new_name);
 	if (rename(fullname1.c_str(), fullname2.c_str()) != 0)
-		throw FileError(
-		   "RealFSImpl::fs_rename", fullname1,
-		   std::string("unable to rename file to ") + fullname2 + ", " + strerror(errno));
+		throw FileError("RealFSImpl::fs_rename", fullname1, std::string("unable to rename file to ") +
+		                                                       fullname2 + ", " + strerror(errno));
 }
 
 /*****************************************************************************

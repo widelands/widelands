@@ -42,7 +42,7 @@ FullscreenWindow::FullscreenWindow()
 	   [this](const GraphicResolutionChanged& message) {
 		   set_size(message.new_width, message.new_height);
 		   layout();
-	   });
+		});
 	set_frame_image(FullscreenWindow::Frames::kCornerTopLeft, "fsmenu/top_left.png");
 	set_frame_image(FullscreenWindow::Frames::kCornerTopRight, "fsmenu/top_right.png");
 	set_frame_image(FullscreenWindow::Frames::kCornerBottomLeft, "fsmenu/bottom_left.png");
