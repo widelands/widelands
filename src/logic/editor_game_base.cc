@@ -352,6 +352,7 @@ void EditorGameBase::step_loader_ui(const std::string& text) const {
 void EditorGameBase::remove_loader_ui() {
 	assert(loader_ui_ != nullptr);
 	loader_ui_.reset(nullptr);
+	game_tips_.reset(nullptr);
 }
 
 /**
