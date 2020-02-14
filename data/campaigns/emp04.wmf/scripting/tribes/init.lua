@@ -5,7 +5,7 @@
 -- -----------------------
 --
 -- When writing a scenario, you can create custom tribe objects for it.
--- At the moment, only buildings are supported.
+-- At the moment, we support buildings, wares and workers.
 -- If you need support for other types of tribe units, please open a new bug report.
 --
 -- For creating scenario-specific tribe objects, create a subdirectory
@@ -23,6 +23,16 @@
 --             "empire_brewery2",
 --             "empire_well1",
 --             "empire_temple_of_vesta"
+--          }
+--          workers_order = {
+--             {
+--                "empire_vesta_priestess"
+--             },
+--          },
+--          wares_order = {
+--             {
+--                "empire_vesta_wine"
+--             },
 --          }
 --       },
 --       frisians = {
