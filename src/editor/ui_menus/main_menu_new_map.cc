@@ -114,7 +114,7 @@ void MainMenuNewMap::clicked_create_map() {
 
 	map->recalc_whole_map(egbase);
 	parent.map_changed(EditorInteractive::MapWas::kReplaced);
-    egbase.remove_loader_ui();
+	egbase.remove_loader_ui();
 	die();
 }
 

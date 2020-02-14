@@ -535,7 +535,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	     "or be stuck on an island or on top of a mountain."),
 	   UI::WLMessageBox::MBoxType::kOk);
 	mbox.run<UI::Panel::Returncodes>();
-    egbase.remove_loader_ui();
+	egbase.remove_loader_ui();
 	die();
 }
 

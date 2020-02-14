@@ -219,8 +219,8 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 
 	const std::string& background = map().get_background();
 	if (!background.empty()) {
-        change_loader_ui_background(background);
-    }
+		change_loader_ui_background(background);
+	}
 
 	step_loader_ui(_("Loading world…"));
 	world();
@@ -563,7 +563,7 @@ bool Game::run(StartGameType const start_game_type,
 
 	state_ = gs_running;
 
-    remove_loader_ui();
+	remove_loader_ui();
 
 	get_ibase()->run<UI::Panel::Returncodes>();
 
