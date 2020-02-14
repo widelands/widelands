@@ -45,7 +45,7 @@ void GameSaver::save() {
 	ScopedTimer timer("GameSaver::save() took %ums");
 
 	auto set_progress_message = [this](std::string text, int step) {
-		game_.loader_ui().step(
+		game_.step_loader_ui(
 		   step < 0 ? text :
 		              (boost::format(_("Saving game: %1$s (%2$d/%3$d)")) % text % step % 5).str());
 	};

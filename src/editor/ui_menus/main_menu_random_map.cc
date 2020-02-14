@@ -40,7 +40,6 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "wlapplication_options.h"
-#include "wui/game_tips.h"
 
 namespace {
 // The map generator can't find starting positions for too many players
@@ -470,9 +469,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	EditorInteractive& eia = dynamic_cast<EditorInteractive&>(*get_parent());
 	Widelands::EditorGameBase& egbase = eia.egbase();
 	Widelands::Map* map = egbase.mutable_map();
-    UI::ProgressWindow& loader_ui = egbase.loader_ui();
-	GameTips tips(loader_ui, {"editor"});
-
+	egbase.create_loader_ui({"editor"}, "images/loadscreens/editor.jpg");
 	eia.cleanup_for_load();
 
 	UniqueRandomMapInfo map_info;
@@ -490,7 +487,8 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	map->create_empty_map(egbase, map_info.w, map_info.h, 0, _("No Name"),
 	                      get_config_string("realname", pgettext("author_name", "Unknown")),
 	                      sstrm.str().c_str());
-	loader_ui.step(_("Generating random map…"));
+
+    egbase.step_loader_ui(_("Generating random map…"));
 
 	log("============== Generating Map ==============\n");
 	log("ID:            %s\n", map_id_edit_.text().c_str());

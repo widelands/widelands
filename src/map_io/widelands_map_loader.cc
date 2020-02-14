@@ -126,9 +126,8 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 
 	// MANDATORY PACKETS
 	// PRELOAD DATA BEGIN
-	UI::ProgressWindow* loader_ui = &egbase.loader_ui();
-	auto set_progress_message = [loader_ui, is_editor](std::string text, unsigned step) {
-		loader_ui->step(
+	auto set_progress_message = [&egbase, is_editor](std::string text, unsigned step) {
+		egbase.step_loader_ui(
 		   (boost::format(_("Loading map: %1$s (%2$u/%3$d)")) % text % step % (is_editor ? 9 : 24))
 		      .str());
 	};

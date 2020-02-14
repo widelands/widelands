@@ -32,6 +32,7 @@
 #include "logic/player_area.h"
 #include "notifications/notifications.h"
 #include "scripting/lua_interface.h"
+#include "wui/game_tips.h"
 
 namespace UI {
 struct ProgressWindow;
@@ -118,12 +119,11 @@ public:
 	virtual void postload();
 	virtual void cleanup_for_load();
 
-    // Create a new loader UI
-    UI::ProgressWindow& create_loader_ui(const std::string& background = std::string());
-    // Destroy the loader UI
-    void remove_loader_ui();
-    // Get the current loader UI. Can be nullptr.
-	UI::ProgressWindow& loader_ui() const;
+	// Create a new loader UI
+	UI::ProgressWindow& create_loader_ui(const std::vector<std::string>& tipstexts,
+	                                     const std::string& background = std::string());
+	// Set step text for the current loader UI if it's not nullptr.
+	void step_loader_ui(const std::string& text) const;
 
 	void set_road(const FCoords&, uint8_t direction, RoadSegment roadtype);
 
@@ -265,6 +265,8 @@ private:
 	std::unique_ptr<Tribes> tribes_;
 	std::unique_ptr<InteractiveBase> ibase_;
 	Map map_;
+
+	std::unique_ptr<GameTips> game_tips_;
 
 	/// Even after a map is fully loaded, some static data (images, scripts)
 	/// will still be read from a filesystem whenever a map/game is saved.

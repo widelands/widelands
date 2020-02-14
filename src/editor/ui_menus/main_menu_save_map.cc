@@ -42,7 +42,6 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "wlapplication_options.h"
-#include "wui/game_tips.h"
 #include "wui/mapdetails.h"
 #include "wui/maptable.h"
 
@@ -344,9 +343,8 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		map->delete_tag("artifacts");
 	}
 
-    UI::ProgressWindow& loader_ui = egbase.loader_ui();
-	GameTips tips(loader_ui, {"editor"});
-	loader_ui.step("Saving the map…");
+	egbase.create_loader_ui({"editor"}, "images/loadscreens/editor.jpg");
+	egbase.step_loader_ui("Saving the map…");
 
 	// Try saving the map.
 	GenericSaveHandler gsh(

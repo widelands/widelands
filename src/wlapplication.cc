@@ -93,7 +93,6 @@
 #include "ui_fsmenu/singleplayer.h"
 #include "wlapplication_messages.h"
 #include "wlapplication_options.h"
-#include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 
@@ -1353,16 +1352,14 @@ bool WLApplication::new_game() {
 			// the chat
 			game.set_ibase(new InteractivePlayer(game, get_config_section(), pn, false));
 			std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(game, true, pn));
-			UI::ProgressWindow& loader_ui = game.create_loader_ui();
-			std::vector<std::string> tipstext;
-			tipstext.push_back("general_game");
-			tipstext.push_back("singleplayer");
-			if (sp.has_players_tribe()) {
-				tipstext.push_back(sp.get_players_tribe());
-			}
-			GameTips tips(loader_ui, tipstext);
 
-			loader_ui.step(_("Preparing game"));
+			std::vector<std::string> tipstexts{"general_game", "singleplayer"};
+			if (sp.has_players_tribe()) {
+				tipstexts.push_back(sp.get_players_tribe());
+			}
+			game.create_loader_ui(tipstexts);
+
+			game.step_loader_ui(_("Preparing game"));
 
 			game.set_game_controller(ctrl.get());
 			game.init_newgame(sp.settings());
@@ -1467,12 +1464,8 @@ void WLApplication::replay() {
 	}
 
 	try {
-        UI::ProgressWindow& loader_ui = game.create_loader_ui();
-		std::vector<std::string> tipstext;
-		tipstext.push_back("general_game");
-		GameTips tips(loader_ui, tipstext);
-
-		loader_ui.step(_("Loading…"));
+		game.create_loader_ui({"general_game"});
+		game.step_loader_ui(_("Loading…"));
 
 		game.set_ibase(new InteractiveSpectator(game, get_config_section()));
 		game.set_write_replay(false);

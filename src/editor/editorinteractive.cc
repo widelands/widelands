@@ -69,8 +69,8 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "wlapplication_options.h"
-#include "wui/game_tips.h"
 #include "wui/interactive_base.h"
+
 
 EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
    : InteractiveBase(e, get_config_section()),
@@ -430,7 +430,7 @@ void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
 	rebuild_showhide_menu();
 }
 
-void EditorInteractive::load(const std::string& filename, UI::ProgressWindow& loader_ui) {
+void EditorInteractive::load(const std::string& filename) {
 	assert(filename.size());
 
 	Widelands::Map* map = egbase().mutable_map();
@@ -445,15 +445,11 @@ void EditorInteractive::load(const std::string& filename, UI::ProgressWindow& lo
 		   filename.c_str());
 	ml->preload_map(true);
 
-	GameTips editortips(loader_ui, {"editor"});
-
 	// Create the players. TODO(SirVer): this must be managed better
-	// TODO(GunChleoc): Ugly - we only need this for the test suite right now. We can also get rid of
-	// loading the tribes when we get rid of this.
-	loader_ui.step(_("Creating players"));
+	// TODO(GunChleoc): Ugly - we only need this for the test suite right now
 	iterate_player_numbers(p, map->get_nrplayers()) {
 		if (!map->get_scenario_player_tribe(p).empty()) {
-			loader_ui.step(
+			egbase().step_loader_ui(
 			   (boost::format(_("Creating player %d")) % static_cast<unsigned int>(p)).str());
 			egbase().add_player(
 			   p, 0, map->get_scenario_player_tribe(p), map->get_scenario_player_name(p));
@@ -878,12 +874,11 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	EditorInteractive& eia = *new EditorInteractive(egbase);
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
 	{
-        UI::ProgressWindow& loader_ui = egbase.create_loader_ui("images/loadscreens/editor.jpg");
-		GameTips editortips(loader_ui, {"editor"});
+		egbase.create_loader_ui({"editor"}, "images/loadscreens/editor.jpg");
 
 		{
 			if (filename.empty()) {
-				loader_ui.step(_("Creating empty map…"));
+				egbase.step_loader_ui(_("Creating empty map…"));
 				egbase.mutable_map()->create_empty_map(
 				   egbase, 64, 64, 0,
 				   /** TRANSLATORS: Default name for new map */
@@ -892,12 +887,11 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 				                     /** TRANSLATORS: Map author name when it hasn't been set yet */
 				                     pgettext("author_name", "Unknown")));
 
-				loader_ui.step(_("Loading tribes"));
+				egbase.step_loader_ui(_("Loading tribes"));
 				egbase.tribes();
-				loader_ui.step(std::string());
 			} else {
-				loader_ui.step((boost::format(_("Loading map “%s”…")) % filename).str());
-				eia.load(filename, loader_ui);
+				egbase.step_loader_ui((boost::format(_("Loading map “%s”…")) % filename).str());
+				eia.load(filename);
 			}
 		}
 

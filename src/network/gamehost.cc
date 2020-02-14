@@ -63,7 +63,6 @@
 #include "ui_fsmenu/launch_mpg.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
-#include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 
@@ -658,17 +657,12 @@ void GameHost::run() {
 	game.set_write_syncstream(get_config_bool("write_syncstreams", true));
 
 	try {
-		UI::ProgressWindow& loader_ui = game.create_loader_ui();
-
-		std::vector<std::string> tipstext;
-		tipstext.push_back("general_game");
-		tipstext.push_back("multiplayer");
+		std::vector<std::string> tipstexts{"general_game", "multiplayer"};
 		if (d->hp.has_players_tribe()) {
-			tipstext.push_back(d->hp.get_players_tribe());
+			tipstexts.push_back(d->hp.get_players_tribe());
 		}
-		std::unique_ptr<GameTips> tips(new GameTips(loader_ui, tipstext));
-
-		loader_ui.step(_("Preparing game"));
+		game.create_loader_ui(tipstexts);
+		game.step_loader_ui(_("Preparing game"));
 
 		d->game = &game;
 		game.set_game_controller(this);

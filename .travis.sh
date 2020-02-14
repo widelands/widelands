@@ -15,6 +15,9 @@ build)
    if [ "$TRAVIS_OS_NAME" = linux ]; then
        cd ..
        ./regression_test.py -b build/src/widelands
+       mkdir temp_web
+       build/src/widelands/wl_map_object_info temp_web
+       build/src/widelands/wl_map_info data/maps/Archipelago_Sea.wmf
    fi
    ;;
 codecheck)

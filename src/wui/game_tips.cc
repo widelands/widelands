@@ -26,7 +26,6 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
-#include "io/fileread.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 

@@ -295,34 +295,24 @@ void EditorGameBase::postload() {
 	}
 
 	// Postload tribes and world
-	if (loader_ui_) {
-		loader_ui_->step(_("Postloading world and tribes…"));
-	}
 	// Tribes don't have a postload at this point.
+	step_loader_ui(_("Postloading world and tribes…"));
+
 	assert(world_);
 	world_->postload();
 }
 
-UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::string& background) {
-    if (loader_ui_ == nullptr) {
-        loader_ui_.reset(new UI::ProgressWindow(background));
-    }
-    return *loader_ui_.get();
+UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::vector<std::string>& tipstexts,
+                                                     const std::string& background) {
+	loader_ui_.reset(new UI::ProgressWindow(background));
+	game_tips_.reset(tipstexts.empty() ? nullptr : new GameTips(*loader_ui_, tipstexts));
+	return *loader_ui_.get();
 }
-void EditorGameBase::remove_loader_ui() {
-    assert(loader_ui_ != nullptr);
-    loader_ui_.reset(nullptr);
+void EditorGameBase::step_loader_ui(const std::string& text) const {
+	if (loader_ui_ != nullptr) {
+		loader_ui_->step(text);
+	}
 }
-// NOCOM this can fail for wl_map_object_info and wl_create_spritesheet
-UI::ProgressWindow& EditorGameBase::loader_ui() const {
-    assert(loader_ui_ != nullptr);
-    return *loader_ui_.get();
-}
-// NOCOM test all usages of loader_ui and whether manual removes are necessary
-/* NOCOM loader UI fails on emergency save, e.g. script bugs
- * FATAL ERROR - game crashed. Attempting emergency save.
-widelands: ../src/logic/editor_game_base.cc:317: UI::ProgressWindow& Widelands::EditorGameBase::loader_ui() const: Assertion `loader_ui_ != nullptr' failed.
-*/
 
 /**
  * Instantly create a building at the given x/y location. There is no build time.
@@ -513,18 +503,13 @@ Player* EditorGameBase::get_safe_player(PlayerNumber const n) {
  * make this object ready to load new data
  */
 void EditorGameBase::cleanup_for_load() {
-	auto set_progress_message = [this](std::string s) {
-        if (loader_ui_ != nullptr) {
-			loader_ui_->step(s);
-        }
-	};
-	set_progress_message(_("Cleaning up for loading: Map objects (1/3)"));
+	step_loader_ui(_("Cleaning up for loading: Map objects (1/3)"));
 	cleanup_objects();  /// Clean all the stuff up, so we can load.
 
-	set_progress_message(_("Cleaning up for loading: Players (2/3)"));
+	step_loader_ui(_("Cleaning up for loading: Players (2/3)"));
 	player_manager_->cleanup();
 
-	set_progress_message(_("Cleaning up for loading: Map (3/3)"));
+	step_loader_ui(_("Cleaning up for loading: Map (3/3)"));
 	map_.cleanup();
 
 	delete_tempfile();
