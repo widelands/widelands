@@ -4865,7 +4865,7 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 		single_critical = true;
 	}
 
-	// first get rid of mines that have been  missing workers for some time (6 minutes),
+	// first get rid of mines that have been  missing workers for some time (10 minutes),
 	// released worker (if any) can be useful elsewhere !
 	if (!single_critical && site.built_time + 10 * 60 * 1000 < gametime &&
 	    !site.site->can_start_working() && mines_per_type[site.bo->mines].total_count() > 2) {
@@ -4878,7 +4878,7 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 		return false;
 	}
 
-	// After 20 minutes in existence we check whether a miner is needed for a critical unoccupied
+	// After 15 minutes in existence we check whether a miner is needed for a critical unoccupied
 	// mine elsewhere
 	if (site.built_time + 15 * 60 * 1000 < gametime) {
 		if (!mines_per_type[site.bo->mines].is_critical && critical_mine_unoccupied(gametime)) {
@@ -5639,7 +5639,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				return BuildingNecessity::kNeeded;
 			} else if (mines_per_type[bo.mines].finished == mines_per_type[bo.mines].total_count() &&
 			           bo.current_stats >
-			              (85 + std::abs(management_data.get_military_number_at(173)) / 10) &&
+			              (85 + std::abs(management_data.get_military_number_at(129)) / 10) &&
 			           site_needed_for_economy != BasicEconomyBuildingStatus::kDiscouraged) {
 				bo.max_needed_preciousness = bo.max_preciousness;
 				return BuildingNecessity::kNeeded;
