@@ -563,6 +563,8 @@ bool Game::run(StartGameType const start_game_type,
 
 	state_ = gs_running;
 
+    remove_loader_ui();
+
 	get_ibase()->run<UI::Panel::Returncodes>();
 
 	state_ = gs_ending;

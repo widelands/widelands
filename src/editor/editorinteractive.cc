@@ -473,6 +473,7 @@ void EditorInteractive::load(const std::string& filename) {
 	egbase().postload();
 	egbase().load_graphics();
 	map_changed(MapWas::kReplaced);
+    egbase().remove_loader_ui();
 }
 
 void EditorInteractive::cleanup_for_load() {
@@ -919,6 +920,8 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 			eia.egbase().lua().run_script(script_to_run);
 		}
 	}
+
+    egbase.remove_loader_ui();
 	eia.run<UI::Panel::Returncodes>();
 
 	egbase.cleanup_objects();

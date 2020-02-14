@@ -355,6 +355,8 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	   complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR);
 	GenericSaveHandler::Error error = gsh.save();
 
+    egbase.remove_loader_ui();
+
 	// If only the temporary backup couldn't be deleted, we still treat it as
 	// success. Automatic cleanup will deal with later. No need to bother the
 	// player with it.

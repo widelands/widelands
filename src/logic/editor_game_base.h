@@ -136,6 +136,9 @@ public:
     }
 #endif
 
+    // Destroy the loader UI
+    void remove_loader_ui();
+
 	void set_road(const FCoords&, uint8_t direction, RoadSegment roadtype);
 
 	// warping stuff. instantly creating map_objects
