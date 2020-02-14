@@ -17,6 +17,9 @@ build)
       ./regression_test.py -b build/src/widelands
       if [ "$BUILD_WEBSITE_TOOLS" = ON ]; then
          mkdir temp_web
+         # NOCOM where are the web binaries?
+         ls -la build/src
+         ls -la
          build/src/wl_map_object_info temp_web
          build/src/wl_map_info data/maps/Archipelago_Sea.wmf
       fi
