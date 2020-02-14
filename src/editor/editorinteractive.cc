@@ -473,7 +473,6 @@ void EditorInteractive::load(const std::string& filename) {
 	egbase().postload();
 	egbase().load_graphics();
 	map_changed(MapWas::kReplaced);
-	egbase().remove_loader_ui();
 }
 
 void EditorInteractive::cleanup_for_load() {

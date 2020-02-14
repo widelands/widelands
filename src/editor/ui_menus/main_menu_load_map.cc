@@ -56,6 +56,7 @@ void MainMenuLoadMap::clicked_ok() {
 		eia.egbase().create_loader_ui({"editor"}, "images/loadscreens/editor.jpg");
 		eia.load(mapdata.filename);
 		// load() will delete us.
+		eia.egbase().remove_loader_ui();
 	}
 }
 
