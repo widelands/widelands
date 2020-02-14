@@ -902,9 +902,7 @@ void Player::allow_worker_type(DescriptionIndex const i, bool const allow) {
 }
 
 bool Player::is_building_type_allowed(const DescriptionIndex& i) const {
-	return allowed_building_types_.count(i) == 1 ||
-	       (egbase_.tribes().get_building_descr(i)->type() == MapObjectType::MILITARYSITE &&
-	        !tribe_.has_building(i));
+	return allowed_building_types_.count(i) == 1;
 }
 
 /*
@@ -916,6 +914,7 @@ void Player::allow_building_type(DescriptionIndex const i, bool const allow) {
 	if (allow) {
 		allowed_building_types_.insert(i);
 	} else {
+        // NOCOM test with Empire scenario 4
 		auto denyme = allowed_building_types_.find(i);
 		if (denyme != allowed_building_types_.end()) {
 			allowed_building_types_.erase(denyme);
