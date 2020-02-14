@@ -694,8 +694,9 @@ const Widelands::TribeDescr& get_tribe_descr(lua_State* L, const std::string& tr
     const Widelands::TribeDescr* tribe = tribes.get_tribe_descr(tribes.tribe_index(tribename));
     if (tribe == nullptr) {
         get_egbase(L).mutable_tribes()->load_tribe(tribename);
+        tribe = tribes.get_tribe_descr(tribes.tribe_index(tribename));
     }
-	return *tribes.get_tribe_descr(tribes.tribe_index(tribename));
+	return *tribe;
 }
 
 }  // namespace

@@ -218,6 +218,7 @@ int LuaEditorGameBase::get_building_description(lua_State* L) {
       :arg tribe_name: the name of the tribe
 
       Returns the tribe description of the given tribe.
+      Loads the tribe if it hasn't been loaded yet.
 
       (RO) The :class:`~wl.Game.Tribe_description`.
 */
@@ -226,12 +227,20 @@ int LuaEditorGameBase::get_tribe_description(lua_State* L) {
 		report_error(L, "Wrong number of arguments");
 	}
 	EditorGameBase& egbase = get_egbase(L);
+    const Tribes& tribes = get_egbase(L).tribes();
+
 	const std::string tribe_name = luaL_checkstring(L, 2);
 	if (!Widelands::tribe_exists(tribe_name)) {
 		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
 	}
-	const TribeDescr* descr =
-	   egbase.tribes().get_tribe_descr(egbase.tribes().tribe_index(tribe_name));
+	const Widelands::TribeDescr* descr =
+	   tribes.get_tribe_descr(egbase.tribes().tribe_index(tribe_name));
+
+    if (descr == nullptr) {
+        egbase.mutable_tribes()->load_tribe(tribe_name);
+        descr = tribes.get_tribe_descr(egbase.tribes().tribe_index(tribe_name));
+    }
+
 	return to_lua<LuaMaps::LuaTribeDescription>(L, new LuaMaps::LuaTribeDescription(descr));
 }
 
