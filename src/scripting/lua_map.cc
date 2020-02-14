@@ -4350,57 +4350,67 @@ int LuaFlag::set_wares(lua_State* L) {
 	parse_wares_workers_counted(L, f->owner().tribe(), &setpoints, true);
 	WaresWorkersMap c_wares = count_wares_on_flag_(*f, tribes);
 
-	Widelands::Quantity nwares = 0;
-
 	for (const auto& ware : c_wares) {
 		// all wares currently on the flag without a setpoint should be removed
-		if (!setpoints.count(std::make_pair(ware.first, Widelands::WareWorker::wwWARE)))
+        if (!setpoints.count(std::make_pair(ware.first, Widelands::WareWorker::wwWARE))) {
 			setpoints.insert(
 			   std::make_pair(std::make_pair(ware.first, Widelands::WareWorker::wwWARE), 0));
-		nwares += ware.second;
+        }
 	}
+
+    // When the wares on the flag increase, we do it at the end to avoid exceeding the capacity
+    std::map<Widelands::DescriptionIndex, int> wares_to_add;
 
 	// The idea is to change as little as possible on this flag
 	for (const auto& sp : setpoints) {
-		uint32_t cur = 0;
+        int diff = sp.second;
+
 		const Widelands::DescriptionIndex& index = sp.first.first;
 		WaresWorkersMap::iterator i = c_wares.find(index);
-		if (i != c_wares.end())
-			cur = i->second;
+        if (i != c_wares.end()) {
+			diff -= i->second;
+        }
 
-		int d = sp.second - cur;
-		nwares += d;
-
-		if (f->total_capacity() < nwares)
-			report_error(L, "Flag has no capacity left!");
-
-		if (d < 0) {
-			while (d) {
+        if (diff > 0) {
+            // add wares later
+            wares_to_add.insert(std::make_pair(index, diff));
+        } else {
+			while (diff < 0) {
 				for (const WareInstance* ware : f->get_wares()) {
 					if (tribes.ware_index(ware->descr().name()) == index) {
 						const_cast<WareInstance*>(ware)->remove(egbase);
-						++d;
+						++diff;
 						break;
 					}
 				}
 			}
-		} else if (d > 0) {
-			// add wares
-			const WareDescr& wd = *tribes.get_ware_descr(index);
-			for (int32_t j = 0; j < d; j++) {
-				WareInstance& ware = *new WareInstance(index, &wd);
-				ware.init(egbase);
-				f->add_ware(egbase, ware);
-			}
 		}
-#ifndef NDEBUG
-		if (sp.second > 0) {
-			c_wares = count_wares_on_flag_(*f, tribes);
-			assert(c_wares.count(index) == 1);
-			assert(c_wares.at(index) == sp.second);
-		}
-#endif
 	}
+
+    // Now that wares to be removed have gone, we add the remaining wares
+    for (const auto& ware_to_add : wares_to_add) {
+        if (f->total_capacity() < f->current_wares() + ware_to_add.second) {
+            report_error(L, "Flag has no capacity left!");
+        }
+
+        const WareDescr& wd = *tribes.get_ware_descr(ware_to_add.first);
+        for (int i = 0; i < ware_to_add.second; i++) {
+            WareInstance& ware = *new WareInstance(ware_to_add.first, &wd);
+            ware.init(egbase);
+            f->add_ware(egbase, ware);
+        }
+    }
+
+#ifndef NDEBUG
+    WaresWorkersMap wares_on_flag = count_wares_on_flag_(*f, tribes);
+    for (const auto& sp : setpoints) {
+        if (sp.second > 0) {
+            assert(wares_on_flag.count(sp.first.first) == 1);
+			assert(wares_on_flag.at(sp.first.first) == sp.second);
+        }
+    }
+#endif
+
 	return 0;
 }
 
