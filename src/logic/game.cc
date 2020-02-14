@@ -362,7 +362,7 @@ void Game::init_savegame(const GameSettings& settings) {
 		GameLoader gl(settings.mapfilename, *this);
 		Widelands::GamePreloadPacket gpdp;
 		gl.preload_game(gpdp);
-        change_loader_ui_background(gpdp.get_background());
+		change_loader_ui_background(gpdp.get_background());
 
 		win_condition_displayname_ = gpdp.get_win_condition();
 		if (win_condition_displayname_ == "Scenario") {
@@ -395,7 +395,7 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 
 		Widelands::GamePreloadPacket gpdp;
 		gl.preload_game(gpdp);
-        change_loader_ui_background(gpdp.get_background());
+		change_loader_ui_background(gpdp.get_background());
 
 		win_condition_displayname_ = gpdp.get_win_condition();
 		if (win_condition_displayname_ == "Scenario") {
