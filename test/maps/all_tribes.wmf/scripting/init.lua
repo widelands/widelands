@@ -3,9 +3,9 @@
 -- ================================================
 
 -- This scenario has been prepared for 8 players.
--- To add a new tribe, copy barbarians.lua into a new file and change all the bulding names.
+-- To add a new tribe, copy test_barbarians.lua into a new file and change all the bulding names.
 -- Don't forget to define the tribe in player_names.
--- Make sure that the building sizes are the same, and that ports go on port spaces etc.
+-- Make sure that the building sizes are the same or smaller, and that ports go on port spaces etc.
 -- Then add the checks to the bottom of this file.
 
 -- TODO(GunChleoc): Place waterways when we have the Lua interface for them
@@ -15,11 +15,11 @@ include "scripting/lunit.lua"
 include "scripting/infrastructure.lua"
 include "test/scripting/stable_save.lua"
 
-include "map:scripting/placement.lua"
-include "map:scripting/barbarians.lua"
-include "map:scripting/empire.lua"
-include "map:scripting/atlanteans.lua"
-include "map:scripting/frisians.lua"
+game = wl.Game()
+
+-- See all so that we can debug stuff
+game.players[1].see_all = 1
+
 
 -- Check that all buildings have been built
 function verify_buildings(playernumber, total_expected_buildings)
@@ -53,72 +53,113 @@ function verify_buildings(playernumber, total_expected_buildings)
    print("============================================")
 end
 
--- See all so that we can debug stuff
-wl.Game().players[1].see_all = 1
-
--- Place buildings
-print("Placing buildings for Player 1")
-init_barbarians(wl.Game().players[1])
-
-print("Placing buildings for Player 2")
-init_empire(wl.Game().players[2])
-
-print("Placing buildings for Player 3")
-init_atlanteans(wl.Game().players[3])
-
-print("Placing buildings for Player 4")
-init_frisians(wl.Game().players[4])
-
--- These slots have been prepared for future tribes
--- print("Placing buildings for Player 5")
--- init_barbarians(wl.Game().players[5])
-
--- print("Placing buildings for Player 6")
--- init_barbarians(wl.Game().players[6])
-
--- print("Placing buildings for Player 7")
--- init_barbarians(wl.Game().players[7])
-
--- print("Placing buildings for Player 8")
--- init_barbarians(wl.Game().players[8])
-
--- Verify that nothing went wrong with placing the buildings,
--- and that a building of each type has been placed.
-verify_buildings(1, 122)
-verify_buildings(2, 122)
-verify_buildings(3, 122)
-verify_buildings(4, 122)
-
--- These slots have been prepared for future tribes
--- verify_buildings(5, 122)
--- verify_buildings(6, 122)
--- verify_buildings(7, 122)
--- verify_buildings(8, 122)
+-- Placement functions
 
 
+-- Counts all buildings currently owned by the 'player' and
+-- deducts 'old_count' to see if the remainder matches 'expected_buildings'
+function count_buildings(player, old_count, expected_buildings)
+  local total_buildings = 0
+  -- Verify that we have placed all buildings
+   for idx, building in ipairs(player.tribe.buildings) do
+      total_buildings = total_buildings + #player:get_buildings(building.name)
+   end
+   local actual_buildings = total_buildings - old_count
 
--- Run the tests
-run(function()
-   game = wl.Game()
-   sleep(1000)
+   print("--------------------------------------------")
+   print("Found " .. actual_buildings .. " new buildings")
+   if actual_buildings ~= expected_buildings then
+      print("Number of missing buildings: " .. (expected_buildings - actual_buildings))
+   end
+   print("============================================")
+   return total_buildings
+end
 
-   -- Test ships
-   place_player_ship(1)
-   place_player_ship(2)
-   place_player_ship(3)
-   place_player_ship(4)
+-- Add a building with coordinates not going out of range.
+-- Note that this has only been tested with starting_field.y == 1
+function place_safe_building(player, buildingname, starting_field, x, y)
+   print("Placing " .. buildingname .. " at " .. ((starting_field.x + x) % 512) .. " " .. ((starting_field.y + y) % 512))
+   return player:place_building(buildingname, map:get_field((starting_field.x + x) % 512, (starting_field.y + y) % 512), false, true)
+end
 
-   -- Sleep a bit
-   sleep(1000)
+-- Place a militarysite and add a soldier to it
+function place_militarysite(player, buildingname, starting_field, x, y)
+   local building = place_safe_building(player, buildingname, starting_field, x, y)
+   building:set_soldiers({ [{0,0,0,0}] = 1 })
+   return building
+end
 
-   -- Test saveloading nd verify the buildings again
-   stable_save(game, "all_tribes_buildings")
+-- Add a warehouse that has everything in it
+function place_warehouse(player, buildingname, starting_field, x, y)
+   local building = place_safe_building(player, buildingname, starting_field, x, y)
 
-   verify_buildings(1, 122)
-   verify_buildings(2, 122)
-   verify_buildings(3, 122)
-   verify_buildings(4, 122)
+   -- Add all wares
+   wares = {}
+   for i, ware in ipairs(player.tribe.wares) do
+      wares[ware.name] = 20
+   end
+   building:set_wares(wares)
 
-   print("# All Tests passed.")
-   wl.ui.MapView():close()
-end)
+   -- Add all workers
+   workers = {}
+   for i, worker in ipairs(player.tribe.workers) do
+      -- Skip soldiers, they have special code
+      if (worker.type_name ~= "soldier") then
+         workers[worker.name] = 20
+      end
+   end
+   building:set_workers(workers)
+
+   building:set_soldiers({ [{0,0,0,0}] = 100 })
+   return building
+end
+
+-- Call this with any big militarysite for your tribe
+function place_initial_militarysites(map, sf, player, buildingname)
+   -- Left
+   local building = place_militarysite(player, buildingname, sf, 506, 0)
+   connected_road(player, sf.immovable.flag, "l,l|l,l|l,l")
+
+   -- Right
+   building = place_militarysite(player, buildingname, sf, 6, 0)
+   connected_road(player, sf.immovable.flag, "r,r|r,r|r,r")
+
+   -- Bottom
+   connected_road(player, sf.immovable.flag, "bl,bl|bl,br|bl,br|br,bl,bl")
+   building = place_militarysite(player, buildingname, sf, 511, 9)
+
+   -- Mountain
+   building = place_militarysite(player, buildingname, sf, 504, 14)
+   connected_road(player, building.flag, "tr,tr,r|r,r|r,tr|tr,tr")
+
+   building = place_militarysite(player, buildingname, sf, 499, 509)
+   connected_road(player, building.flag, "r,r,r|br,br|br,r|r,r")
+
+   building = place_militarysite(player, buildingname, sf, 495, 14)
+   connected_road(player, building.flag, "r,r,r|r,r|r,r|r,r")
+
+   -- Water
+   building = place_militarysite(player, buildingname, sf, 13, 504)
+   connected_road(player, building.flag, "bl,bl,bl|bl,bl|bl,bl|bl,l|l,l")
+
+   building = place_militarysite(player, buildingname, sf, 5, 18)
+   connected_road(player, building.flag, "l,l,tl|tl,tl|tl,tl|tl,tl|tl,tl")
+
+   building = place_militarysite(player, buildingname, sf, 21, 509)
+   connected_road(player, building.flag, "tr,tr|tl,l|l,tl|l,l|tl,l|l,l")
+
+   building = place_militarysite(player, buildingname, sf, 12, 19)
+   connected_road(player, building.flag, "l,l,l|l,tl|l,l")
+
+   building = place_militarysite(player, buildingname, sf, 20, 18)
+   connected_road(player, building.flag, "l,l,l|l,l|l,l|l,bl")
+
+   building = place_militarysite(player, buildingname, sf, 26, 4)
+   connected_road(player, building.flag, "tr,tr,tl|tl,tl|tl,tl|l,tl|l,tl")
+end
+
+function place_player_ship(playernumber)
+   local player = wl.Game().players[playernumber]
+   local starting_field = wl.Game().map.player_slots[playernumber].starting_field
+   player:place_ship(map:get_field((starting_field.x + 12) % 512, (starting_field.y + 6) % 512))
+end

@@ -395,3 +395,33 @@ function init_frisians(player)
    -- Construction
    player:place_building("frisians_training_arena", map:get_field((sf.x + 510) % 512, (sf.y + 3) % 512), true, true)
 end
+
+-- Run the tests
+run(function()
+   local playernumber = 4
+   local expected_number_of_buildings = 122
+
+   print("Placing buildings for Player 4")
+   init_frisians(game.players[playernumber])
+
+   -- Verify that nothing went wrong with placing the buildings,
+   -- and that a building of each type has been placed.
+   verify_buildings(playernumber, expected_number_of_buildings)
+
+   sleep(1000)
+
+   -- Test ships
+   place_player_ship(playernumber)
+
+   -- Sleep a bit
+   sleep(1000)
+
+   -- Test saveloading nd verify the buildings again
+   stable_save(game, "frisian_tribe")
+
+   -- Did buildings saveload OK?
+   verify_buildings(playernumber, expected_number_of_buildings)
+
+   print("# All Tests passed.")
+   wl.ui.MapView():close()
+end)

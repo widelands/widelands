@@ -41,9 +41,7 @@ Tribes::Tribes(LuaInterface* lua)
      scenario_tribes_(nullptr),
      lua_(lua) {
 
-	// NOCOM create a test scenario that will load all tribes
-
-	// Register tribe names
+    // Register tribe names
 	for (const TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
 		register_object(tribeinfo.name, tribeinfo.script);
 	}
