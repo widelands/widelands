@@ -208,9 +208,9 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	set_write_replay(false);
 
 	std::unique_ptr<MapLoader> maploader(mutable_map()->get_correct_loader(mapname));
-    if (!maploader) {
+	if (!maploader) {
 		throw wexception("could not load \"%s\"", mapname.c_str());
-    }
+	}
 
 	create_loader_ui({"general_game"});
 
