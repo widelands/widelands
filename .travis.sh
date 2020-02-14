@@ -16,8 +16,8 @@ build)
        cd ..
        ./regression_test.py -b build/src/widelands
        mkdir temp_web
-       ./wl_map_object_info temp_web
-       ./wl_map_info data/maps/Archipelago_Sea.wmf
+       build/src/widelands/wl_map_object_info temp_web
+       build/src/widelands/wl_map_info data/maps/Archipelago_Sea.wmf
    fi
    ;;
 codecheck)
