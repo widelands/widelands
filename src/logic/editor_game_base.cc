@@ -70,11 +70,12 @@ initialization
 ============
 */
 EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
-   : loader_ui_(nullptr),
-     gametime_(0),
+   : gametime_(0),
      lua_(lua_interface),
      player_manager_(new PlayersManager(*this)),
      ibase_(nullptr),
+     loader_ui_(nullptr),
+     game_tips_(nullptr),
      tmp_fs_(nullptr) {
 	if (!lua_)  // TODO(SirVer): this is sooo ugly, I can't say
 		lua_.reset(new LuaEditorInterface(this));
@@ -326,15 +327,22 @@ void EditorGameBase::postload() {
  */
 void EditorGameBase::load_graphics() {
 	assert(tribes_);
+    assert(has_loader_ui());
 	step_loader_ui(_("Loading graphics"));
 	tribes_->load_graphics();
 }
 
 UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::vector<std::string>& tipstexts,
                                                      const std::string& background) {
+    assert(!has_loader_ui());
 	loader_ui_.reset(new UI::ProgressWindow(background));
 	game_tips_.reset(tipstexts.empty() ? nullptr : new GameTips(*loader_ui_, tipstexts));
 	return *loader_ui_.get();
+}
+void EditorGameBase::change_loader_ui_background(const std::string& background) {
+    assert(has_loader_ui());
+    loader_ui_->set_background(background);
+    game_tips_.reset(nullptr);
 }
 void EditorGameBase::step_loader_ui(const std::string& text) const {
 	if (loader_ui_ != nullptr) {

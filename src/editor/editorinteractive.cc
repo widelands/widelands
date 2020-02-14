@@ -76,6 +76,7 @@ using Widelands::Building;
 
 // Load all tribes from disk.
 void load_all_tribes(Widelands::EditorGameBase* egbase) {
+    assert(egbase->has_loader_ui());
 	egbase->step_loader_ui(_("Loading tribes"));
 	egbase->tribes();
 }
@@ -442,6 +443,7 @@ void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
 
 void EditorInteractive::load(const std::string& filename) {
 	assert(filename.size());
+    assert(egbase().has_loader_ui());
 
 	Widelands::Map* map = egbase().mutable_map();
 

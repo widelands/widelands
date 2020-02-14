@@ -122,8 +122,19 @@ public:
 	// Create a new loader UI
 	UI::ProgressWindow& create_loader_ui(const std::vector<std::string>& tipstexts,
 	                                     const std::string& background = std::string());
+
+    // Change the background image for the loader UI and remove the game tips
+    void change_loader_ui_background(const std::string& background);
+
 	// Set step text for the current loader UI if it's not nullptr.
 	void step_loader_ui(const std::string& text) const;
+
+#ifndef NDEBUG
+    // Check whether we currently have a loader_ui. Used for asserts only.
+    bool has_loader_ui() const {
+        return loader_ui_ != nullptr;
+    }
+#endif
 
 	void set_road(const FCoords&, uint8_t direction, RoadSegment roadtype);
 
@@ -206,9 +217,6 @@ public:
 	// Returns the mutable tribes. Prefer tribes() whenever possible.
 	Tribes* mutable_tribes();
 
-protected:
-	std::unique_ptr<UI::ProgressWindow> loader_ui_;
-
 private:
 	/// Common function for create_critter and create_ship.
 	Bob& create_bob(Coords, const BobDescr&, Player* owner = nullptr);
@@ -266,6 +274,8 @@ private:
 	std::unique_ptr<InteractiveBase> ibase_;
 	Map map_;
 
+    // Shown while loading or saving a game/map
+	std::unique_ptr<UI::ProgressWindow> loader_ui_;
 	std::unique_ptr<GameTips> game_tips_;
 
 	/// Even after a map is fully loaded, some static data (images, scripts)
