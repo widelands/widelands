@@ -233,15 +233,12 @@ int LuaEditorGameBase::get_tribe_description(lua_State* L) {
 	if (!Widelands::tribe_exists(tribe_name)) {
 		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
 	}
-	const Widelands::TribeDescr* descr =
-	   tribes.get_tribe_descr(egbase.tribes().tribe_index(tribe_name));
 
-    if (descr == nullptr) {
-        egbase.mutable_tribes()->load_tribe(tribe_name);
-        descr = tribes.get_tribe_descr(egbase.tribes().tribe_index(tribe_name));
+    Widelands::DescriptionIndex idx = egbase.tribes().tribe_index(tribe_name);
+    if (idx == Widelands::INVALID_INDEX) {
+        idx = egbase.mutable_tribes()->load_tribe(tribe_name);
     }
-
-	return to_lua<LuaMaps::LuaTribeDescription>(L, new LuaMaps::LuaTribeDescription(descr));
+	return to_lua<LuaMaps::LuaTribeDescription>(L, new LuaMaps::LuaTribeDescription(tribes.get_tribe_descr(idx)));
 }
 
 /* RST
