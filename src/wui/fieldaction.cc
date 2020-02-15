@@ -395,10 +395,14 @@ void FieldActionWindow::add_buttons_auto() {
 				add_button(buildbox, "destroy_waterway", pic_remwaterway,
 				           &FieldActionWindow::act_removewaterway, _("Destroy a waterway"));
 		}
-	} else if (player_ &&
-	           1 < player_->vision(
-	                  Widelands::Map::get_index(node_, ibase().egbase().map().get_width())))
-		add_buttons_attack();
+	} else if (player_) {
+		if (upcast(Building, building, map_.get_immovable(node_))) {
+			if (1 < player_->vision(Widelands::Map::get_index(
+			           building->get_position(), ibase().egbase().map().get_width()))) {
+				add_buttons_attack();
+			}
+		}
+	}
 
 	//  Watch actions, only when in game (no use in editor).
 	if (dynamic_cast<const Game*>(&ibase().egbase())) {
