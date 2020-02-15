@@ -10,7 +10,7 @@ init = {
    -- TRANSLATORS: This is the name of a starting condition
    descname = _ "Struggling Outpost",
    -- TRANSLATORS: This is the tooltip for the "Hardcore" starting condition
-   tooltip = _"Start the game with just your headquarters and a minimum for bootstrapping an economy. Warning: the AI can't successfully start from this",
+   tooltip = _"Start the game with just your headquarters and very few wares for bootstrapping an economy. Warning: the AI can't successfully start from this",
    func =  function(player, shared_in_start)
 
    local sf = wl.Game().map.player_slots[player.number].starting_field
@@ -22,14 +22,15 @@ init = {
 
    prefilled_buildings(player, { "atlanteans_headquarters", sf.x, sf.y,
       wares = {
-         log = 2,
-         planks = 2,
-         spidercloth = 1
+         log = 6,
+         planks = 6,
+         spidercloth = 2,
+         granite = 2,
       },
       workers = {
          atlanteans_baker = 1,
          atlanteans_blackroot_farmer = 1,
-         atlanteans_builder = 1,
+         atlanteans_builder = 2,
          atlanteans_charcoal_burner = 1,
          atlanteans_carrier = 10,
          atlanteans_farmer = 1,

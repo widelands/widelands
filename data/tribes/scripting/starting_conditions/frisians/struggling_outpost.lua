@@ -1,5 +1,5 @@
 -- =======================================================================
---                Hardcore Starting conditions for frisians
+--                Hardcore Starting conditions for Frisians
 -- =======================================================================
 
 include "scripting/infrastructure.lua"
@@ -10,7 +10,7 @@ return {
    -- TRANSLATORS: This is the name of a starting condition
    descname = _ "Struggling Outpost",
    -- TRANSLATORS: This is the tooltip for the "Hardcore" starting condition
-   tooltip = _"Start the game with just your headquarters and a minimum for bootstrapping an economy. Warning: the AI can't successfully start from this",
+   tooltip = _"Start the game with just your headquarters and very few wares for bootstrapping an economy. Warning: the AI can't successfully start from this",
    func =  function(player, shared_in_start)
 
    local sf = wl.Game().map.player_slots[player.number].starting_field
@@ -23,15 +23,16 @@ return {
 
    prefilled_buildings(player, { "frisians_headquarters", sf.x, sf.y,
       wares = {
-         reed = 2,
-         log = 1,
-         brick = 9,
-         coal = 1,
+         reed = 4,
+         log = 3,
+         brick = 14,
+         coal = 3,
+         granite = 2,
       },
       workers = {
          frisians_baker = 1,
-         frisians_brewer = 1,
-         frisians_builder = 1,
+         frisians_fruit_collector = 1,
+         frisians_builder = 2,
          frisians_brickmaker = 1,
          frisians_carrier = 10,
          frisians_charcoal_burner = 1,
@@ -43,7 +44,7 @@ return {
          frisians_landlady = 1,
          frisians_woodcutter = 1,
          frisians_claydigger = 1,
-         frisians_miner = 3,
+         frisians_miner = 2,
          frisians_smelter = 1,
          frisians_stonemason = 1,
          frisians_blacksmith = 1,

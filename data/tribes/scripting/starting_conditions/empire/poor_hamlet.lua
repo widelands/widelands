@@ -41,6 +41,7 @@ return {
 
       player:reveal_fields(sf:region(10))
       player:conquer(sf, 9)
+      player:send_message(_"Be careful.", _"You have only one iron for each tool you will need to start your economy. Make sure no unneeded tool is created.")
 
       local function add_wares(waretable)
          local hq = player:get_buildings("empire_warehouse")[1]
@@ -52,15 +53,27 @@ return {
 
       --NOTE: pessimistically, this could be a single rock
       local has_rocks = false
+      local has_trees = false
       for k,f in pairs(sf:region(10)) do
-         if f.immovable and f.immovable:has_attribute('rocks') then
-            has_rocks = true
-            break
+         if f.immovable then 
+            if f.immovable:has_attribute('rocks') then
+               has_rocks = true
+            elseif f.immovable:has_attribute('tree') then
+               has_trees = true
+            end
+            if has_trees and has_rocks then
+               break
+            end
          end
       end
       if not has_rocks then
          add_wares({granite = 1})
          player:send_message(_"No rocks nearby", _"There are no rocks near to your starting position.  Therefore, you receive extra resources for bootstrapping your economy.")
+      end
+      -- adding exactly one forester
+      if not has_trees then
+         add_wares({log = 1, planks = 1, granite = 1})
+         player:send_message(_"No trees nearby", _"There are no trees near to your starting position.  Therefore, you receive extra resources for bootstrapping your economy.")
       end
    end
 }

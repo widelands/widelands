@@ -10,7 +10,7 @@ return {
    -- TRANSLATORS: This is the name of a starting condition
    descname = _ "Struggling Outpost",
    -- TRANSLATORS: This is the tooltip for the "Hardcore" starting condition
-   tooltip = _"Start the game with just your headquarters and a minimum for bootstrapping an economy. Warning: the AI can't successfully start from this",
+   tooltip = _"Start the game with just your headquarters and very few wares for bootstrapping an economy. Warning: the AI can't successfully start from this",
    func =  function(player, shared_in_start)
 
    local sf = wl.Game().map.player_slots[player.number].starting_field
@@ -23,13 +23,14 @@ return {
 
    prefilled_buildings(player, { "empire_headquarters", sf.x, sf.y,
       wares = {
-         log = 2,
-         planks = 3
+         log = 5,
+         planks = 8,
+         granite = 2,
       },
       workers = {
          empire_baker = 1,
          empire_brewer = 1,
-         empire_builder = 1,
+         empire_builder = 2,
          empire_carpenter = 1,
          empire_carrier = 10,
          empire_charcoal_burner = 1,
