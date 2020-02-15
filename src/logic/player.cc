@@ -914,7 +914,6 @@ void Player::allow_building_type(DescriptionIndex const i, bool const allow) {
 	if (allow) {
 		allowed_building_types_.insert(i);
 	} else {
-        // NOCOM test with Empire scenario 4
 		auto denyme = allowed_building_types_.find(i);
 		if (denyme != allowed_building_types_.end()) {
 			allowed_building_types_.erase(denyme);
