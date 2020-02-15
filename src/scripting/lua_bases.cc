@@ -800,9 +800,14 @@ int LuaPlayerBase::place_building(lua_State* L) {
 	const Tribes& tribes = egbase.tribes();
 	Player& player = get(L, egbase);
 
-	if (!tribes.building_exists(name)) {
-		report_error(L, "Unknown Building: '%s'", name.c_str());
+    // If the building belongs to a tribe that no player is playing, we need to load it now
+	if (!tribes.building_exists(name) && tribes.is_object_registered(name)) {
+        egbase.mutable_tribes()->load_building(name);
 	}
+    // Ensure that the loaded object was indeed a building
+    if (!tribes.building_exists(name)) {
+        report_error(L, "Unknown Building: '%s'", name.c_str());
+    }
 
 	DescriptionIndex building_index = tribes.building_index(name);
 

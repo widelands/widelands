@@ -50,7 +50,7 @@ namespace {
 // Parses the descriptions of the working positions from 'items_table' and
 // fills in 'working_positions'. Throws an error if the table contains invalid
 // values.
-void parse_working_positions(const Tribes& tribes,
+void parse_working_positions(Tribes& tribes,
                              LuaTable* items_table,
                              BillOfMaterials* working_positions) {
 	for (const std::string& worker_name : items_table->keys<std::string>()) {
@@ -59,6 +59,11 @@ void parse_working_positions(const Tribes& tribes,
 			if (amount < 1 || 255 < amount) {
 				throw wexception("count is out of range 1 .. 255");
 			}
+            // Try to load the worker if an object with this name has been registered
+            if (!tribes.worker_exists(worker_name) && tribes.is_object_registered(worker_name)) {
+                tribes.load_worker(worker_name);
+            }
+            // Ensure that we did indeed load a worker
 			DescriptionIndex const woi = tribes.worker_index(worker_name);
 			if (!tribes.worker_exists(woi)) {
 				throw wexception("invalid");
@@ -119,6 +124,8 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 	if (table.has_key("outputs")) {
 		for (const std::string& output : table.get_table("outputs")->array_entries<std::string>()) {
 			try {
+                // Check if ware/worker exists already and if not, try to load it. WIll throw a GameDataError on failure.
+				tribes.try_load_ware_or_worker(output);
 				DescriptionIndex idx = tribes.ware_index(output);
 				if (tribes.ware_exists(idx)) {
 					if (output_ware_types_.count(idx)) {
@@ -146,13 +153,16 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		std::vector<std::unique_ptr<LuaTable>> input_entries =
 		   table.get_table("inputs")->array_entries<std::unique_ptr<LuaTable>>();
 		for (std::unique_ptr<LuaTable>& entry_table : input_entries) {
-			const std::string& ware_name = entry_table->get_string("name");
+			const std::string& ware_or_worker_name = entry_table->get_string("name");
+            // Check if ware/worker exists already and if not, try to load it. Will throw a GameDataError on failure.
+            tribes.try_load_ware_or_worker(ware_or_worker_name);
+
 			int amount = entry_table->get_int("amount");
 			try {
 				if (amount < 1 || 255 < amount) {
 					throw wexception("amount is out of range 1 .. 255");
 				}
-				DescriptionIndex idx = tribes.ware_index(ware_name);
+				DescriptionIndex idx = tribes.ware_index(ware_or_worker_name);
 				if (tribes.ware_exists(idx)) {
 					for (const auto& temp_inputs : input_wares()) {
 						if (temp_inputs.first == idx) {
@@ -161,7 +171,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 					}
 					input_wares_.push_back(WareAmount(idx, amount));
 				} else {
-					idx = tribes.worker_index(ware_name);
+					idx = tribes.worker_index(ware_or_worker_name);
 					if (tribes.worker_exists(idx)) {
 						for (const auto& temp_inputs : input_workers()) {
 							if (temp_inputs.first == idx) {
@@ -174,7 +184,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 					}
 				}
 			} catch (const WException& e) {
-				throw wexception("input \"%s=%d\": %s", ware_name.c_str(), amount, e.what());
+				throw wexception("input \"%s=%d\": %s", ware_or_worker_name.c_str(), amount, e.what());
 			}
 		}
 	}

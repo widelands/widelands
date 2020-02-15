@@ -358,6 +358,10 @@ void Tribes::add_tribe_object_type(const LuaTable& table, const World& world, Ma
 	tribe_objects_being_loaded_.erase(tribe_objects_being_loaded_.find(object_name));
 }
 
+bool Tribes::is_object_registered(const std::string& object_name) const {
+    return registered_tribe_objects_.count(object_name) == 1;
+}
+
 void Tribes::add_tribe(const LuaTable& table, const World& world) {
 	const std::string name = table.get_string("name");
 	// Register as in progress
@@ -472,6 +476,25 @@ DescriptionIndex Tribes::load_worker(const std::string& workername) {
 		throw GameDataError("Error while loading worker type '%s': %s", workername.c_str(), e.what());
 	}
 	return safe_worker_index(workername);
+}
+
+void Tribes::try_load_ware_or_worker(const std::string& objectname) {
+    // Check if ware/worker exists already and if not, try to load it.
+    if (!ware_exists(ware_index(objectname)) &&
+        !worker_exists(worker_index(objectname))) {
+        if (is_object_registered(objectname)) {
+            try {
+                load_worker(objectname);
+            } catch (const GameDataError&) {
+                try {
+                    load_ware(objectname);
+                } catch (const GameDataError&) {
+                    throw GameDataError("\"%s\" has not been registered as a ware/worker type",
+                                        objectname.c_str());
+                }
+            }
+        }
+    }
 }
 
 uint32_t Tribes::get_largest_workarea() const {

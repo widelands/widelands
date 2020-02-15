@@ -69,12 +69,8 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 		items_table = table.get_table("buildcost");
 		for (const std::string& key : items_table->keys<std::string>()) {
 			try {
-				if (!tribes.ware_exists(tribes.ware_index(key)) &&
-				    !tribes.worker_exists(tribes.worker_index(key))) {
-					throw GameDataError("\"%s\" has not been defined as a ware/worker type (wrong "
-					                    "declaration order?)",
-					                    key.c_str());
-				}
+                // Check if ware/worker exists already and if not, try to load it. WIll throw a GameDataError on failure.
+				tribes.try_load_ware_or_worker(key);
 				const int32_t value = items_table->get_int(key);
 				if (value < 1) {
 					throw GameDataError("Buildcost: Ware/Worker count needs to be > 0 in "

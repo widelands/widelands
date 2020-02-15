@@ -106,6 +106,9 @@ public:
 	/// Add a tribe object type to the tribes.
 	void add_tribe_object_type(const LuaTable& table, const World& world, MapObjectType type);
 
+    /// Checks whether an object has been registered. It might not have been loaded yet.
+    bool is_object_registered(const std::string& object_name) const;
+
 	/// Adds a specific tribe's configuration.
 	void add_tribe(const LuaTable& table, const World& world);
 
@@ -121,6 +124,8 @@ public:
 	DescriptionIndex load_ware(const std::string& warename);
 	/// Load a worker that has been registered previously with 'register_object'
 	DescriptionIndex load_worker(const std::string& workername);
+    /// Try to load a ware/worker that has been registered previously with 'register_object' when we don't know whether it's a ware or worker
+	void try_load_ware_or_worker(const std::string& objectname);
 
 	uint32_t get_largest_workarea() const;
 
