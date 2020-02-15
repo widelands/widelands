@@ -260,8 +260,9 @@ void Tribes::register_object(const std::string& name, const std::string& script_
 		throw GameDataError("Tribes::register_object: Attempt to register object\n"
 		                    "   name: '%s'\n"
 		                    "   script: '%s'\n"
-		                    "but the object already exists",
-		                    name.c_str(), script_path.c_str());
+                            "but the object has already been registered to\n"
+                            "   script: '%s'\n",
+		                    name.c_str(), script_path.c_str(), registered_tribe_objects_.at(name).c_str());
 	}
 	if (!g_fs->file_exists(script_path)) {
 		throw GameDataError("Tribes::register_object: Attempt to register object\n"
@@ -280,8 +281,9 @@ void Tribes::register_scenario_object(FileSystem* filesystem,
 		throw GameDataError("Tribes::register_object: Attempt to register scenario object\n"
 		                    "   name: '%s'\n"
 		                    "   script: '%s'\n"
-		                    "but the object already exists",
-		                    name.c_str(), script_path.c_str());
+		                    "but the object has already been registered to\n"
+                            "   script: '%s'\n",
+		                    name.c_str(), script_path.c_str(), registered_scenario_objects_.at(name).c_str());
 	}
 	if (!filesystem->file_exists(script_path)) {
 		throw GameDataError("Tribes::register_object: Attempt to register scenario object\n"
