@@ -59,7 +59,7 @@ return {
       local has_rocks = false
       local has_trees = false
       for k,f in pairs(sf:region(10)) do
-         if f.immovable then 
+         if f.immovable then
             if not has_rocks and f.immovable:has_attribute('rocks') then
                has_rocks = true
             elseif not has_trees and f.immovable:has_attribute('tree') then
