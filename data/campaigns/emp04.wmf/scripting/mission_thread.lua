@@ -37,7 +37,7 @@ function farm_plans()
    local count = 0
    local o1 = add_campaign_objective(obj_click_farmbuilding)
    o1.done = true
-   while not (farmclick or p1.defeated) do
+   while not (farmclick or p1.defeated or (f.owner == p1)) do
       if mv.windows.building_window and not mv.windows.building_window.buttons.dismantle and not mv.windows.building_window.tabs.wares and mv.windows.building_window.tabs.workers then
          farmclick = true
       end
