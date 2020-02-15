@@ -43,7 +43,7 @@ init = {
          barbarians_charcoal_burner = 1
       },
       soldiers = {
-         [{0,0,0,0}] = 1,
+         [{0,0,0,0}] = 2,
       }
    })
 end

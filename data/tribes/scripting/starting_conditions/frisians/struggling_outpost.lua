@@ -52,7 +52,7 @@ return {
          frisians_berry_farmer = 1
       },
       soldiers = {
-         [{0,0,0,0}] = 1
+         [{0,0,0,0}] = 2,
       }
    })
 end

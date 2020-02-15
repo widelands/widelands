@@ -26,11 +26,11 @@ return {
             hammer = 2,
             felling_ax = 1,
             pick = 1,
-            --Forester, gardener:
+            -- Forester, gardener:
             shovel = 2,
-            --Smelter:
+            -- Smelter:
             iron = 1,
-            --Geologist, fisher/hunter, innkeeper, miner:
+            -- Geologist, fisher/hunter, innkeeper, miner:
             iron_ore = 4
          },
          soldiers = {
@@ -46,18 +46,21 @@ return {
          local hq = player:get_buildings("barbarians_warehouse")[1]
          for ware,warecount in pairs(waretable) do
             local oldwarecount = hq:get_wares(ware) or 0
+            if warecount < 0 and -warecount > oldwarecount then
+               warecount = -oldwarecount
+            end
             hq:set_wares(ware, oldwarecount+warecount)
          end
       end
 
-      --NOTE: pessimistically, this could be a single rock
+      -- NOTE: pessimistically, this could be a single rock and a single tree
       local has_rocks = false
       local has_trees = false
       for k,f in pairs(sf:region(10)) do
          if f.immovable then 
-            if f.immovable:has_attribute('rocks') then
+            if not has_rocks and f.immovable:has_attribute('rocks') then
                has_rocks = true
-            elseif f.immovable:has_attribute('tree') then
+            elseif not has_trees and f.immovable:has_attribute('tree') then
                has_trees = true
             end
             if has_trees and has_rocks then
