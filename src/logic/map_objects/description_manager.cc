@@ -52,7 +52,9 @@ DescriptionManager::~DescriptionManager() {
 }
 
 /// Walk given directory and register descriptions
-void DescriptionManager::register_directory(const std::string& dirname, FileSystem* filesystem, bool is_scenario) {
+void DescriptionManager::register_directory(const std::string& dirname,
+                                            FileSystem* filesystem,
+                                            bool is_scenario) {
 	FilenameSet files = filesystem->list_directory(dirname);
 	for (const std::string& file : files) {
 		if (filesystem->is_directory(file)) {
