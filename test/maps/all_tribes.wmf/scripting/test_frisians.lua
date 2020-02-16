@@ -416,7 +416,7 @@ run(function()
    -- Sleep a bit
    sleep(1000)
 
-   -- Test saveloading nd verify the buildings again
+   -- Test saveloading and verify the buildings again
    stable_save(game, "frisian_tribe")
 
    -- Did buildings saveload OK?
