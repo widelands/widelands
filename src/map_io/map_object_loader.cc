@@ -28,8 +28,8 @@ namespace Widelands {
 /*
  * Returns true if this object has already been inserted
  */
-bool MapObjectLoader::is_object_known(Serial const n) {
-	return objects_.find(n) != objects_.end();
+bool MapObjectLoader::is_object_known(Serial const n) const {
+	return objects_.count(n) == 1;
 }
 
 /*

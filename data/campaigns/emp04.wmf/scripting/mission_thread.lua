@@ -37,7 +37,7 @@ function farm_plans()
    local count = 0
    local o1 = add_campaign_objective(obj_click_farmbuilding)
    o1.done = true
-   while not (farmclick or p1.defeated) do
+   while not (farmclick or p1.defeated or (f.owner == p1)) do
       if mv.windows.building_window and not mv.windows.building_window.buttons.dismantle and not mv.windows.building_window.tabs.wares and mv.windows.building_window.tabs.workers then
          farmclick = true
       end
@@ -540,7 +540,7 @@ function karma()
       for count = 0, 10 do
          sleep(1500000)
          local hq = p1:get_buildings("empire_temple_of_vesta")
-         if hq then
+         if hq and hq[1] then
             local beer = hq[1]:get_wares("beer") + 20
             local wine = hq[1]:get_wares("wine") + 10
             hq[1]:set_wares("beer", beer)
