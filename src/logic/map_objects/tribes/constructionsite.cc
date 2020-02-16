@@ -41,6 +41,7 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/map_objects/world/world.h"
+#include "logic/player.h"
 #include "sound/note_sound.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/window.h"

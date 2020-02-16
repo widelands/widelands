@@ -24,30 +24,19 @@
 #include <memory>
 
 #include "base/macros.h"
-#include "graphic/texture.h"
 #include "logic/map_objects/description_maintainer.h"
+#include "logic/map_objects/description_manager.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/map_object_type.h"
-#include "logic/map_objects/tribes/carrier.h"
-#include "logic/map_objects/tribes/constructionsite.h"
-#include "logic/map_objects/tribes/dismantlesite.h"
-#include "logic/map_objects/tribes/ferry.h"
-#include "logic/map_objects/tribes/militarysite.h"
-#include "logic/map_objects/tribes/productionsite.h"
+#include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
-#include "logic/map_objects/tribes/trainingsite.h"
-#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/ware_descr.h"
-#include "logic/map_objects/tribes/warehouse.h"
 #include "logic/map_objects/tribes/worker_descr.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {
-
-class WareDescr;
-class WorkerDescr;
 
 class Tribes {
 public:
@@ -109,42 +98,24 @@ public:
 	/// Adds a specific tribe's configuration.
 	void add_tribe(const LuaTable& table, const World& world);
 
-	/// Load a tribe that has been registered previously with 'register_object'
+	/// Load a tribe that has been registered previously with 'register_description'
 	DescriptionIndex load_tribe(const std::string& tribename);
-	/// Load a building that has been registered previously with 'register_object'
+	/// Load a building that has been registered previously with 'register_description'
 	DescriptionIndex load_building(const std::string& buildingname);
-	/// Load an immovable that has been registered previously with 'register_object'
+	/// Load an immovable that has been registered previously with 'register_description'
 	DescriptionIndex load_immovable(const std::string& immovablename);
-	/// Load a ship that has been registered previously with 'register_object'
+	/// Load a ship that has been registered previously with 'register_description'
 	DescriptionIndex load_ship(const std::string& shipname);
-	/// Load a ware that has been registered previously with 'register_object'
+	/// Load a ware that has been registered previously with 'register_description'
 	DescriptionIndex load_ware(const std::string& warename);
-	/// Load a worker that has been registered previously with 'register_object'
+	/// Load a worker that has been registered previously with 'register_description'
 	DescriptionIndex load_worker(const std::string& workername);
-    /// Try to load a ware/worker that has been registered previously with 'register_object' when we don't know whether it's a ware or worker
+    /// Try to load a ware/worker that has been registered previously with 'register_description' when we don't know whether it's a ware or worker
 	void try_load_ware_or_worker(const std::string& objectname);
 
 	uint32_t get_largest_workarea() const;
 
 private:
-	/// Search a directory for 'register.lua' files and register their 'init.lua' scripts
-	void
-	register_directory(const std::string& dirname, FileSystem* filesystem, bool is_scenario_tribe);
-	/// Map a map object's name to its init script so that we can load it when we want it.
-	void register_object(const std::string& name, const std::string& script_path, const std::vector<std::string>& attributes);
-	/// Map a scenario map object's name to its init script so that we can load it when we want it.
-	void register_scenario_object(FileSystem* filesystem,
-	                              const std::string& name,
-	                              const std::string& script_path, const std::vector<std::string>& attributes);
-	/// Load the map object type for the given 'object_name' that has been registered previously with
-	/// 'register_object'
-	void load_object(const std::string& object_name);
-
-    /// Load object on demand via notification
-    void load_object_on_demand(const std::string& object_name);
-    /// For loading all map objects with a given attribute on demand
-    void register_attributes(const std::vector<std::string>& attributes, const std::string& object_name);
-
 	std::unique_ptr<DescriptionMaintainer<BuildingDescr>> buildings_;
 	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> immovables_;
 	std::unique_ptr<DescriptionMaintainer<ShipDescr>> ships_;
@@ -155,36 +126,12 @@ private:
 
 	uint32_t largest_workarea_;
 
-    struct RegisteredObject {
-        explicit RegisteredObject(const std::string& init_script_path,
-                                  const std::vector<std::string>& init_attributes)
-            : script_path(init_script_path), attributes(init_attributes) {}
-        const std::string script_path;
-        const std::vector<std::string> attributes;
-    };
-
-	/// A list of all available map object types as <name, init script path>
-	std::map<std::string, RegisteredObject> registered_tribe_objects_;
-	/// A list of all extra or replacement map object types used by a scenario as <name, init script
-	/// path>
-	std::map<std::string, RegisteredObject> registered_scenario_objects_;
-    /// Maps attributes to map object types, in case we need them dynamically
-    std::map<std::string, std::set<std::string>> registered_attributes_;
-	/// A list of object types currently being loaded, to avoid circular dependencies
-	std::set<std::string> tribe_objects_being_loaded_;
-	/// List of the tribe objects that have already been loaded
-	std::set<std::string> loaded_tribe_objects_;
 	/// Custom scenario tribes
 	std::unique_ptr<LuaTable> scenario_tribes_;
 
 	LuaInterface* lua_;  // Not owned
 
-    /// For loading any registered tribe object via Lua in scenarios
-    /// Do not use this for normal loading, since this will circumvent the check for circular dependencies
-    /// If the object is not known, loading is skipped quietly
-    std::unique_ptr<Notifications::Subscriber<Widelands::NoteMapObjectType>>
-	   map_objecttype_subscriber_;
-
+    std::unique_ptr<DescriptionManager> description_manager_;
 	DISALLOW_COPY_AND_ASSIGN(Tribes);
 };
 

@@ -24,6 +24,7 @@
 #include "base/i18n.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/tribes.h"
+#include "logic/player.h"
 
 namespace Widelands {
 

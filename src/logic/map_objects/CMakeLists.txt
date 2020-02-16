@@ -7,6 +7,21 @@ wl_library(logic_map_objects_description_maintainer
     logic_constants
 )
 
+wl_library(logic_map_objects_description_manager
+  SRCS
+    description_manager.cc
+    description_manager.h
+  DEPENDS
+    base_log
+    base_macros
+    io_filesystem
+    logic_exceptions
+    logic_map_object_type
+    scripting_lua_interface
+    scripting_lua_table
+)
+
+
 wl_library(logic_tribe_basic_info
   SRCS
     tribes/tribe_basic_info.cc
@@ -144,6 +159,7 @@ wl_library(logic_map_objects
     logic_map # TODO(GunChleoc): Circular dependency
     logic_map_object_type
     logic_map_objects_description_maintainer
+    logic_map_objects_description_manager
     logic_tribe_basic_info
     logic_widelands_geometry
     logic_widelands_geometry_io

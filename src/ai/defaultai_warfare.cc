@@ -18,6 +18,7 @@
  */
 
 #include "ai/defaultai.h"
+#include "logic/map_objects/tribes/militarysite.h"
 
 using namespace Widelands;
 
