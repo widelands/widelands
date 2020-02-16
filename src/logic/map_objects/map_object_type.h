@@ -22,6 +22,9 @@
 
 #include <string>
 
+#include "notifications/note_ids.h"
+#include "notifications/notifications.h"
+
 namespace Widelands {
 
 // This enum lists the available classes of Map Objects.
@@ -64,6 +67,19 @@ enum class MapObjectType : uint8_t {
 
 // Returns a string representation for 'type'.
 std::string to_string(MapObjectType type);
+
+
+struct NoteMapObjectType {
+	CAN_BE_SENT_AS_NOTE(NoteId::MapObjectType)
+
+	const std::string name;
+
+	NoteMapObjectType(const std::string& init_name)
+	   : name(init_name) {
+	}
+};
+
+
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_MAP_OBJECT_TYPE_H

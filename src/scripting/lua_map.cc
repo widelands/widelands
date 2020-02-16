@@ -1431,9 +1431,13 @@ int LuaMap::place_immovable(lua_State* const L) {
 		m = &egbase.create_immovable(
 		   c->coords(), imm_idx, MapObjectDescr::OwnerType::kWorld, nullptr /* owner */);
 	} else if (from_where == "tribes") {
+        // The immovable type might not have been loaded yet
+        Notifications::publish(NoteMapObjectType(objname));
+
 		DescriptionIndex const imm_idx = egbase.tribes().immovable_index(objname);
-		if (imm_idx == Widelands::INVALID_INDEX)
+        if (imm_idx == Widelands::INVALID_INDEX) {
 			report_error(L, "Unknown tribes immovable <%s>", objname.c_str());
+        }
 
 		m = &egbase.create_immovable(
 		   c->coords(), imm_idx, MapObjectDescr::OwnerType::kTribe, nullptr /* owner */);

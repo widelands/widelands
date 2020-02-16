@@ -106,9 +106,6 @@ public:
 	/// Add a tribe object type to the tribes.
 	void add_tribe_object_type(const LuaTable& table, const World& world, MapObjectType type);
 
-    /// Checks whether an object has been registered. It might not have been loaded yet.
-    bool is_object_registered(const std::string& object_name) const;
-
 	/// Adds a specific tribe's configuration.
 	void add_tribe(const LuaTable& table, const World& world);
 
@@ -166,6 +163,12 @@ private:
 	std::unique_ptr<LuaTable> scenario_tribes_;
 
 	LuaInterface* lua_;  // Not owned
+
+    /// For loading any registered tribe object via Lua in scenarios
+    /// Do not use this for normal loading, since this will circumvent the check for circular dependencies
+    /// If the object is not known, loading is skipped quietly
+    std::unique_ptr<Notifications::Subscriber<Widelands::NoteMapObjectType>>
+	   map_objecttype_subscriber_;
 
 	DISALLOW_COPY_AND_ASSIGN(Tribes);
 };

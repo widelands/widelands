@@ -825,6 +825,7 @@ void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) c
 }
 
 ImmovableProgram::ActTransform::ActTransform(char* parameters, ImmovableDescr& descr) {
+    // NOCOM test with barleyfield
 	try {
 		tribe = true;
 		bob = false;
@@ -865,8 +866,10 @@ ImmovableProgram::ActTransform::ActTransform(char* parameters, ImmovableDescr& d
 				}
 			}
 		}
-		if (type_name == descr.name())
+        if (type_name == descr.name()) {
 			throw GameDataError("illegal transformation to the same type");
+        }
+        Notifications::publish(NoteMapObjectType(type_name));
 	} catch (const WException& e) {
 		throw GameDataError("transform: %s", e.what());
 	}
@@ -890,6 +893,7 @@ void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) c
 }
 
 ImmovableProgram::ActGrow::ActGrow(char* parameters, ImmovableDescr& descr) {
+    // NOCOM test with berry bush
 	if (!descr.has_terrain_affinity()) {
 		throw GameDataError(
 		   "Immovable %s can 'grow', but has no terrain_affinity entry.", descr.name().c_str());
@@ -922,6 +926,7 @@ ImmovableProgram::ActGrow::ActGrow(char* parameters, ImmovableDescr& descr) {
 			}
 	end:
 		type_name = parameters;
+        Notifications::publish(NoteMapObjectType(type_name));
 	} catch (const WException& e) {
 		throw GameDataError("grow: %s", e.what());
 	}
@@ -971,6 +976,7 @@ void ImmovableProgram::ActRemove::execute(Game& game, Immovable& immovable) cons
 }
 
 ImmovableProgram::ActSeed::ActSeed(char* parameters, ImmovableDescr& descr) {
+    // NOCOM make a custom tribe immovable that seeds
 	try {
 		probability = 0;
 		for (char* p = parameters;;)
@@ -1009,6 +1015,7 @@ ImmovableProgram::ActSeed::ActSeed(char* parameters, ImmovableDescr& descr) {
 			}
 	end:
 		type_name = parameters;
+        Notifications::publish(NoteMapObjectType(type_name));
 	} catch (const WException& e) {
 		throw GameDataError("seed: %s", e.what());
 	}

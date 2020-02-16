@@ -164,4 +164,5 @@ wl_library(logic_map_object_type
   DEPENDS
     base_exceptions
     base_macros
+    notifications
 )

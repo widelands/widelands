@@ -801,15 +801,14 @@ int LuaPlayerBase::place_building(lua_State* L) {
 	Player& player = get(L, egbase);
 
     // If the building belongs to a tribe that no player is playing, we need to load it now
-	if (!tribes.building_exists(name) && tribes.is_object_registered(name)) {
-        egbase.mutable_tribes()->load_building(name);
-	}
+    Notifications::publish(NoteMapObjectType(name));
+
+	const DescriptionIndex building_index = tribes.building_index(name);
+
     // Ensure that the loaded object was indeed a building
-    if (!tribes.building_exists(name)) {
+    if (!tribes.building_exists(building_index)) {
         report_error(L, "Unknown Building: '%s'", name.c_str());
     }
-
-	DescriptionIndex building_index = tribes.building_index(name);
 
 	if (!player.tribe().has_building(building_index) &&
         tribes.get_building_descr(building_index)->type() != Widelands::MapObjectType::MILITARYSITE) {

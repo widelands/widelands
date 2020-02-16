@@ -60,9 +60,8 @@ void parse_working_positions(Tribes& tribes,
 				throw wexception("count is out of range 1 .. 255");
 			}
             // Try to load the worker if an object with this name has been registered
-            if (!tribes.worker_exists(worker_name) && tribes.is_object_registered(worker_name)) {
-                tribes.load_worker(worker_name);
-            }
+            Notifications::publish(NoteMapObjectType(worker_name));
+
             // Ensure that we did indeed load a worker
 			DescriptionIndex const woi = tribes.worker_index(worker_name);
 			if (!tribes.worker_exists(woi)) {

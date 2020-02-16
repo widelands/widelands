@@ -238,7 +238,14 @@ function productionsite_tests:test_get_inputs_non_existant_name()
 end
 function productionsite_tests:test_foreign_productionsite_new_tribe_fails()
    local field = map:get_field(13,13)
+   -- Includes unknown wares in build, dismantle, inupt and output
    assert_error("Should not be able to place a production site that the tribe can't use", function()
-      player1:place_building("frisians_woodcutters_house", field, false, true)
+      player1:place_building("frisians_brick_kiln", field, false, true)
    end)
+   -- Includes unknown immovable placed by worker
+   --[[ NOCOM register attributes
+   assert_error("Should not be able to place a production site that the tribe can't use", function()
+      player1:place_building("frisians_farm", field, false, true)
+   end)
+   ]]
 end

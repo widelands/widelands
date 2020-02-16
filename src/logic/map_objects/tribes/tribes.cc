@@ -48,6 +48,16 @@ Tribes::Tribes(LuaInterface* lua)
 
 	// Walk tribes directory and register objects
 	register_directory("tribes", g_fs, false);
+
+    map_objecttype_subscriber_ =
+	   Notifications::subscribe<NoteMapObjectType>([this](const NoteMapObjectType& note) {
+        if ((tribe_objects_being_loaded_.count(note.name) == 0)
+            && (registered_scenario_objects_.count(note.name) == 1 || registered_tribe_objects_.count(note.name) == 1)) {
+           load_object(note.name);
+        } else {
+            log("WARNING: Unknown tribe object type '%s'\n", note.name.c_str());
+        }
+    });
 }
 
 Tribes::~Tribes() {
@@ -360,10 +370,6 @@ void Tribes::add_tribe_object_type(const LuaTable& table, const World& world, Ma
 	tribe_objects_being_loaded_.erase(tribe_objects_being_loaded_.find(object_name));
 }
 
-bool Tribes::is_object_registered(const std::string& object_name) const {
-    return registered_tribe_objects_.count(object_name) == 1;
-}
-
 void Tribes::add_tribe(const LuaTable& table, const World& world) {
 	const std::string name = table.get_string("name");
 	// Register as in progress
@@ -416,12 +422,13 @@ void Tribes::load_object(const std::string& object_name) {
 
 	// Protect against circular dependencies when 1 script file has multiple objects in it
 	if (tribe_objects_being_loaded_.count(object_script) == 1) {
-		log("Tribes::load_object: Object script '%s' is already being loaded", object_name.c_str());
+		log("Tribes::load_object: Object script '%s' is already being loaded\n", object_name.c_str());
 		return;
 	}
 	tribe_objects_being_loaded_.insert(object_script);
 	lua_->run_script(object_script);
 	tribe_objects_being_loaded_.erase(tribe_objects_being_loaded_.find(object_script));
+    // NOCOM pull out into separate class "MapObjectTypeRegistry"
 }
 
 DescriptionIndex Tribes::load_tribe(const std::string& tribename) {
@@ -481,21 +488,11 @@ DescriptionIndex Tribes::load_worker(const std::string& workername) {
 }
 
 void Tribes::try_load_ware_or_worker(const std::string& objectname) {
+    Notifications::publish(NoteMapObjectType(objectname));
     // Check if ware/worker exists already and if not, try to load it.
     if (!ware_exists(ware_index(objectname)) &&
         !worker_exists(worker_index(objectname))) {
-        if (is_object_registered(objectname)) {
-            try {
-                load_worker(objectname);
-            } catch (const GameDataError&) {
-                try {
-                    load_ware(objectname);
-                } catch (const GameDataError&) {
-                    throw GameDataError("\"%s\" has not been registered as a ware/worker type",
-                                        objectname.c_str());
-                }
-            }
-        }
+        throw GameDataError("\"%s\" has not been registered as a ware/worker type", objectname.c_str());
     }
 }
 
