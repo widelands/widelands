@@ -105,7 +105,11 @@ Economy::~Economy() {
 Flag* Economy::get_arbitrary_flag() {
 	if (flags_.empty())
 		return nullptr;
-
+	return flags_[0];
+}
+const Flag* Economy::get_arbitrary_flag() const {
+	if (flags_.empty())
+		return nullptr;
 	return flags_[0];
 }
 

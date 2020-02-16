@@ -259,6 +259,7 @@ protected:
 	          RenderTarget* dst) const override;
 
 private:
+	friend struct MapScenarioEditorPacket;
 	friend class ::ShipCfg;
 	friend struct ShipFleet;
 

@@ -95,8 +95,10 @@ struct Road : public RoadBase {
 		return busy_;
 	}
 
-	// Use in the editor only!
+	// Use in the editor or from Lua scripting only!
 	void set_busy(EditorGameBase& e, bool);
+
+	std::vector<const Carrier*> carriers(EditorGameBase&) const;
 
 protected:
 	bool is_bridge(const EditorGameBase&, const FCoords&, uint8_t) const override;

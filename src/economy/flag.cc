@@ -660,7 +660,7 @@ uint8_t Flag::count_wares_in_queue(PlayerImmovable& dest) const {
  * Return a List of all the wares currently on this Flag.
  * Do not rely the result value to stay valid and do not change them.
  */
-Flag::Wares Flag::get_wares() {
+Flag::Wares Flag::get_wares() const {
 	Wares rv;
 
 	for (int32_t i = 0; i < ware_filled_; ++i) {

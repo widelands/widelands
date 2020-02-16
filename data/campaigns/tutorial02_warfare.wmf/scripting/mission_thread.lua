@@ -90,9 +90,9 @@ function create_enemy()
          }
       }
    )
-   connected_road(p2,map:get_field(29,17).immovable,"tr,tl|tl,tl|tl,tl|tl,tl|tl,l")
-   connected_road(p2,map:get_field(31,22).immovable,"tr,tl|tl,tl,tl")
-   connected_road(p2,map:get_field(31,28).immovable,"tr,tr|tr,tl|tl,tl")
+   connected_road("normal", p2,map:get_field(29,17).immovable,"tr,tl|tl,tl|tl,tl|tl,tl|tl,l")
+   connected_road("normal", p2,map:get_field(31,22).immovable,"tr,tl|tl,tl,tl")
+   connected_road("normal", p2,map:get_field(31,28).immovable,"tr,tr|tr,tl|tl,tl")
    p2:forbid_buildings("all")
 end
 

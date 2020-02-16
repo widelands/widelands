@@ -37,6 +37,7 @@ dismantlesites.
 class PartiallyFinishedBuilding : public Building {
 	friend class MapBuildingdataPacket;
 	friend struct MapBuildingPacket;
+	friend struct MapScenarioEditorPacket;
 
 public:
 	explicit PartiallyFinishedBuilding(const BuildingDescr& building_descr);
@@ -50,11 +51,18 @@ public:
 	bool init(EditorGameBase&) override;
 	void set_economy(Economy*, WareWorker) override;
 
-	uint32_t get_nrwaresqueues() {
+	uint32_t get_nrwaresqueues() const {
 		return wares_.size();
+	}
+	const WaresQueue* get_waresqueue(uint32_t const idx) const {
+		return wares_[idx];
 	}
 	WaresQueue* get_waresqueue(uint32_t const idx) {
 		return wares_[idx];
+	}
+
+	const BuildingDescr& building() const {
+		return *building_;
 	}
 
 	uint32_t get_built_per64k() const;
@@ -65,7 +73,7 @@ public:
 	request_builder_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 
 private:
-	void request_builder(Game&);
+	void request_builder(EditorGameBase&);
 
 	virtual uint32_t build_step_time() const = 0;
 

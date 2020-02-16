@@ -67,11 +67,7 @@ void PartiallyFinishedBuilding::cleanup(EditorGameBase& egbase) {
 
 bool PartiallyFinishedBuilding::init(EditorGameBase& egbase) {
 	Building::init(egbase);
-
-	if (upcast(Game, game, &egbase)) {
-		request_builder(*game);
-	}
-
+	request_builder(egbase);
 	return true;
 }
 
@@ -105,7 +101,7 @@ void PartiallyFinishedBuilding::set_economy(Economy* const e, WareWorker type) {
 Issue a request for the builder.
 ===============
 */
-void PartiallyFinishedBuilding::request_builder(Game&) {
+void PartiallyFinishedBuilding::request_builder(EditorGameBase&) {
 	assert(!builder_.is_set() && !builder_request_);
 
 	builder_request_ = new Request(*this, owner().tribe().builder(),

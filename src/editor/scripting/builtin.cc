@@ -102,7 +102,8 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
                        VariableType(VariableTypeID::Nil), // returns
                        {std::make_pair("time", VariableType(VariableTypeID::Integer))}),
       "scripting/coroutine.lua"),
-   // TODO(Nordfriese): This function takes varargs
+
+   // TODO(Nordfriese): This function can take varargs
    new BuiltinFunctionInfo("array_combine", []() { return
 		_("Concatenates the given arrays into a single array."); },
 		new FunctionBase("array_combine", VariableType(VariableTypeID::Nil), // call on
@@ -112,6 +113,21 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
                        std::make_pair("array2", VariableType(VariableType(VariableTypeID::Integer),
                        VariableType(VariableTypeID::Any)))}),
       "scripting/table.lua"),
+
+   new BuiltinFunctionInfo(
+      "connected_road",
+      []() { return _("Force-build one or more roads with flags. The string argument defining the road "
+      		"layout has a format like e.g. 'r,r|br,r|r,r': Multiple directions (e, w, se, sw, ne, nw) "
+      		"separated by ','; '|' instead of ',' denotes flag placement."); },
+      new FunctionBase("connected_road",
+                       VariableType(VariableTypeID::Nil), // call on
+                       VariableType(VariableTypeID::Nil), // returns
+                       {std::make_pair("roadtype", VariableType(VariableTypeID::String)),
+                       std::make_pair("player", VariableType(VariableTypeID::Player)),
+                       std::make_pair("start_flag", VariableType(VariableTypeID::Flag)),
+                       std::make_pair("layout", VariableType(VariableTypeID::String)),
+                       std::make_pair("create_carriers", VariableType(VariableTypeID::Boolean))}),
+      "scripting/infrastructure.lua"),
 
    // Game
 

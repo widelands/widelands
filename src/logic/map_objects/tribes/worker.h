@@ -195,7 +195,7 @@ protected:
 	          RenderTarget* dst) const override;
 	void init_auto_task(Game&) override;
 
-	bool does_carry_ware() {
+	bool does_carry_ware() const {
 		return carried_ware_.is_set();
 	}
 

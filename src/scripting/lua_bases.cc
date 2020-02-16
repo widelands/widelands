@@ -674,15 +674,17 @@ int LuaPlayerBase::place_flag(lua_State* L) {
 }
 
 /* RST
-   .. method:: place_road(f1, dir1, dir2, ...[, force=false])
+   .. method:: place_road(roadtype, f1, dir1, dir2, ...[, force=false])
 
-      Start a road at the given field, then walk the directions
+      Start a road or waterway at the given field, then walk the directions
       given. Places a flag at the last field.
 
       If the last argument to this function is :const:`true` the road will
       be created by force: all immovables in the way are removed and land
       is conquered.
 
+      :arg roadtype: 'normal', 'busy', or 'waterway'
+      :type roadtype: :class:`string`
       :arg f1: fields to connect with this road
       :type f1: :class:`wl.map.Field`
       :arg dirs: direction, can be either ("r", "l", "br", "bl", "tr", "tl") or
@@ -695,7 +697,8 @@ int LuaPlayerBase::place_road(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	const Map& map = egbase.map();
 
-	Flag* starting_flag = (*get_user_class<LuaMaps::LuaFlag>(L, 2))->get(L, egbase);
+	const std::string roadtype = luaL_checkstring(L, 2);
+	Flag* starting_flag = (*get_user_class<LuaMaps::LuaFlag>(L, 3))->get(L, egbase);
 	Coords current = starting_flag->get_position();
 	Path path(current);
 
@@ -707,7 +710,7 @@ int LuaPlayerBase::place_road(lua_State* L) {
 
 	// Construct the path
 	CheckStepLimited cstep;
-	for (int32_t i = 3; i <= lua_gettop(L); i++) {
+	for (int32_t i = 4; i <= lua_gettop(L); i++) {
 		std::string d = luaL_checkstring(L, i);
 
 		if (d == "ne" || d == "tr") {
@@ -740,9 +743,21 @@ int LuaPlayerBase::place_road(lua_State* L) {
 	if (optimal_path.get_nsteps() != path.get_nsteps())
 		report_error(L, "Cannot build a road that crosses itself!");
 
-	Road* r = nullptr;
+	RoadBase* r = nullptr;
 	if (force_road) {
-		r = &get(L, egbase).force_road(path);
+		switch (roadtype) {
+			case "normal":
+			case "busy": {
+				Road& road = get(L, egbase).force_road(path);
+				road.set_busy(egbase, roadtype == "busy");
+				r = &road;
+			} break;
+			case "waterway":
+				r = &get(L, egbase).force_waterway(path);
+				break;
+			default:
+				report_error(L, "Invalid road type '%s' (permitted values are 'normal', 'busy', and 'waterway'", roadtype.c_str());
+		}
 	} else {
 		BaseImmovable* bi = map.get_immovable(current);
 		if (!bi || bi->descr().type() != MapObjectType::FLAG) {
@@ -752,12 +767,26 @@ int LuaPlayerBase::place_road(lua_State* L) {
 		if (bi && bi == starting_flag)
 			report_error(L, "Cannot build a closed loop!");
 
-		r = get(L, egbase).build_road(path);
+		switch (roadtype) {
+			case "normal":
+			case "busy": {
+				Road* road = get(L, egbase).build_road(path);
+				if (road) {
+					road->set_busy(egbase, roadtype == "busy");
+				}
+				r = road;
+			} break;
+			case "waterway":
+				r = get(L, egbase).build_waterway(path);
+				break;
+			default:
+				report_error(L, "Invalid road type '%s' (permitted values are 'normal', 'busy', and 'waterway'", roadtype.c_str());
+		}
 	}
 
 	if (!r) {
 		report_error(L, "Error while creating Road. May be: something is in "
-		                "the way or you do not own the territory were you want to build "
+		                "the way or you do not own the territory where you want to build "
 		                "the road");
 	}
 

@@ -265,6 +265,11 @@ public:
 	                    const InfoToDraw info_to_draw,
 	                    RenderTarget*) const;
 
+	// editor only
+	void set_current_health(uint32_t h) {
+		current_health_ = h;
+	}
+
 	uint32_t get_current_health() const {
 		return current_health_;
 	}

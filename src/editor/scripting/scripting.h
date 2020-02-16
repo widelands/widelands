@@ -380,6 +380,14 @@ public:
 		throw Widelands::GameDataError(
 		   "ScriptingLoader::get: ScriptingObject with serial %u not found", serial);
 	}
+	template <typename T> T* get(const std::string& name) const {
+		for (const auto& so : all<T>()) {
+			if (so->get_name() == name) {
+				return so;
+			}
+		}
+		return nullptr;
+	}
 
 private:
 	std::list<std::unique_ptr<ScriptingObject>> list_;

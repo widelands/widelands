@@ -155,6 +155,7 @@ public:
 	// Returns an arbitrary flag or nullptr if this is an economy without flags
 	// (i.e. an Expedition ship).
 	Flag* get_arbitrary_flag();
+	const Flag* get_arbitrary_flag() const;
 
 	void set_target_quantity(DescriptionIndex, Quantity, Time);
 

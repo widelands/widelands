@@ -114,9 +114,6 @@ public:
 	InputQueue& inputqueue(DescriptionIndex, WareWorker) override;
 
 	void set_building(const BuildingDescr&) override;
-	const BuildingDescr& building() const {
-		return *building_;
-	}
 
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;

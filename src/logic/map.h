@@ -346,6 +346,7 @@ public:
 	MapIndex max_index() const {
 		return width_ * height_;
 	}
+	Coords coords(MapIndex) const;
 	Field& operator[](MapIndex) const;
 	Field& operator[](const Coords&) const;
 	FCoords get_fcoords(const Coords&) const;
@@ -622,6 +623,11 @@ inline MapIndex Map::get_index(const Coords& c, int16_t const width) {
 
 inline MapIndex Map::get_index(const Coords& c) const {
 	return get_index(c, width_);
+}
+
+inline Coords Map::coords(MapIndex m) const {
+	assert(m < max_index());
+	return Coords(m % width_, m / width_);
 }
 
 inline Field& Map::operator[](MapIndex const i) const {

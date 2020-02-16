@@ -123,11 +123,17 @@ void Road::link_into_flags(EditorGameBase& egbase, bool) {
 	}
 }
 
+std::vector<const Carrier*> Road::carriers(EditorGameBase& e) const {
+	std::vector<const Carrier*> v;
+	for (const auto& s : carrier_slots_) {
+		v.push_back(s.carrier.get(e));
+	}
+	return v;
+}
+
 void Road::set_busy(EditorGameBase& e, bool b) {
-	assert(!is_a(Game, &e));
-	if (busy_ != b)
-		return;
 	unmark_map(e);
+	wallet_ = b ? kRoadMaxWallet : 0;
 	busy_ = b;
 	mark_map(e);
 }

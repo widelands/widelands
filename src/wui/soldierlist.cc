@@ -722,13 +722,7 @@ void SoldierSettings::health_slider_changed() {
 void SoldierSettings::clicked_ok() {
 	soldier_.set_level(
 	   health_.get_value(), attack_.get_value(), defense_.get_value(), evade_.get_value());
-	const int32_t cur_h = soldier_.get_current_health();
-	const int32_t desired_h = current_health_.get_value();
-	if (cur_h < desired_h) {
-		soldier_.heal(desired_h - cur_h);
-	} else if (cur_h > desired_h) {
-		soldier_.damage(cur_h - desired_h);
-	}
+	soldier_.set_current_health(current_health_.get_value());
 	die();
 }
 void SoldierSettings::clicked_delete() {

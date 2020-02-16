@@ -82,6 +82,8 @@ void MapSaver::save() {
 	timer_message += "' took %ums";
 	ScopedTimer timer(timer_message);
 
+	const bool is_game = is_a(Game, &egbase_);
+
 	assert(egbase_.get_loader_ui());
 	auto set_progress_message = [this](std::string text, int step) {
 		egbase_.get_loader_ui()->step(
@@ -97,14 +99,10 @@ void MapSaver::save() {
 	// to keep it hidden from the poor debuggers
 	fs_.ensure_directory_exists("binary");
 
-	bool is_game = is_a(Game, &egbase_);
 	if (!is_game) {
 		upcast(EditorInteractive, eia, egbase_.get_ibase());
 		assert(eia);
 		if (eia->finalized()) {
-			// Save game-typical stuff also in the scenario editor
-			is_game = true;
-
 			// We first write the binary and then the Lua script, because the binary writer
 			// also checks in detail that all the ScriptingObject stuff is not messed up
 			log("Writing Scenario Editor Data ... ");
