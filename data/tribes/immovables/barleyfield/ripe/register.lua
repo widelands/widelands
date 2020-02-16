@@ -1,3 +1,3 @@
 return {
-   "barleyfield_ripe"
+   barleyfield_ripe = { "ripe_barley", "field" }
 }

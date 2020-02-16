@@ -1,3 +1,3 @@
 return {
-   "tabard_golden"
+   tabard_golden = {},
 }

@@ -1,3 +1,3 @@
 return {
-   "kitchen_tools"
+   kitchen_tools = {},
 }

@@ -1,3 +1,3 @@
 return {
-   "fur_garment_old"
+   fur_garment_old = {},
 }

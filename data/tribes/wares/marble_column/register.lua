@@ -1,3 +1,3 @@
 return {
-   "marble_column"
+   marble_column = {},
 }

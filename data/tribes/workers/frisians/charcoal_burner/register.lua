@@ -1,3 +1,3 @@
 return {
-   "frisians_charcoal_burner"
+   frisians_charcoal_burner = {},
 }

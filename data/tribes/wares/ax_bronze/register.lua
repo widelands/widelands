@@ -1,3 +1,3 @@
 return {
-   "ax_bronze"
+   ax_bronze = {},
 }

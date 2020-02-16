@@ -1,3 +1,3 @@
 return {
-   "blackrootfield_harvested"
+   blackrootfield_harvested = { "field" },
 }

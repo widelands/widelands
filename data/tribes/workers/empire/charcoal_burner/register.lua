@@ -1,3 +1,3 @@
 return {
-   "empire_charcoal_burner"
+   empire_charcoal_burner = {},
 }

@@ -1,3 +1,3 @@
 return {
-   "brick"
+   brick = {},
 }

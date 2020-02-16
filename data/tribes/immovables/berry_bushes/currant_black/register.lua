@@ -1,6 +1,6 @@
 return {
-   "berry_bush_currant_black_tiny",
-   "berry_bush_currant_black_small",
-   "berry_bush_currant_black_medium",
-   "berry_bush_currant_black_ripe",
+   berry_bush_currant_black_tiny = { "seed_berrybush" },
+   berry_bush_currant_black_small = {},
+   berry_bush_currant_black_medium = { "flowering" },
+   berry_bush_currant_black_ripe = { "ripe_bush" },
 }

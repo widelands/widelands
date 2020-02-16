@@ -1,3 +1,3 @@
 return {
-   "hook_pole"
+   hook_pole = {},
 }

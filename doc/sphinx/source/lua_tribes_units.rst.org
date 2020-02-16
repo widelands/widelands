@@ -15,8 +15,8 @@ file. The ``init.lua`` script will load the unit to be used in the game, and
 `Encyclopedia <https://wlww.widelands.org/encyclopedia/>`_.
 
 Each ``init.lua`` file also needs to have a matching ``register.lua`` file that
-will list the names of all units defined in the ``init.lua``. This is needed for
-registering the objects before they are loaded. For a given ``init.lua``:
+will list the names of all units defined in the ``init.lua``, and their attributes if they have any.
+This is needed for registering the objects before they are loaded. For a given ``init.lua``:
 
 .. code-block:: lua
 
@@ -45,14 +45,17 @@ The matching ``register.lua`` would look like this:
 .. code-block:: lua
 
    return {
-      "berry_bush_blueberry_tiny",
-      "berry_bush_blueberry_small",
-      "berry_bush_blueberry_medium",
-      "berry_bush_blueberry_ripe"
+      berry_bush_blueberry_tiny = { "seed_berrybush" },
+      berry_bush_blueberry_small = {},
+      berry_bush_blueberry_medium = { "flowering" },
+      berry_bush_blueberry_ripe = { "ripe_bush" },
    }
 
-Note that unit types that can be enhanced or that will transform need to list
-the enhanced/transformed type first in the ``init.lua``.
+Note that if you are defining multiple unit types that can be enhanced or that will
+transform into each other in the same ``init.lua``, the enhanced/transformed type
+needs to be listed first.
+Also, ``berry_bush_blueberry_small`` in this example has no attributes, so its
+attribute table is empty.
 
 Available unit types:
 

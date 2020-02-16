@@ -1,3 +1,3 @@
 return {
-   "milking_tongs"
+   milking_tongs = {},
 }

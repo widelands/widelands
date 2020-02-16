@@ -1,3 +1,3 @@
 return {
-   "wheatfield_small"
+   wheatfield_small = { "field" },
 }

@@ -1,3 +1,3 @@
 return {
-   "empire_temple_of_vesta"
+   empire_temple_of_vesta = {},
 }

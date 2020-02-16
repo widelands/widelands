@@ -1,3 +1,3 @@
 return {
-   "meat"
+   meat = {},
 }

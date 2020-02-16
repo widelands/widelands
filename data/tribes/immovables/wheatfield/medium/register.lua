@@ -1,3 +1,3 @@
 return {
-   "wheatfield_medium"
+   wheatfield_medium = { "field", "flowering" },
 }

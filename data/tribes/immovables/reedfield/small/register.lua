@@ -1,3 +1,3 @@
 return {
-   "reedfield_small"
+   reedfield_small = { "field" },
 }

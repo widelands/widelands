@@ -1,3 +1,3 @@
 return {
-   "blackrootfield_ripe"
+   blackrootfield_ripe = { "ripe_blackroot", "field" },
 }

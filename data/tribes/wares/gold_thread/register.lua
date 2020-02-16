@@ -1,3 +1,3 @@
 return {
-   "gold_thread"
+   gold_thread = {},
 }

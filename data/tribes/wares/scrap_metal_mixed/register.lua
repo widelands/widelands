@@ -1,3 +1,3 @@
 return {
-   "scrap_metal_mixed"
+   scrap_metal_mixed = {},
 }

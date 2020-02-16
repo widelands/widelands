@@ -1,3 +1,3 @@
 return {
-   "trident_steel"
+   trident_steel = {},
 }

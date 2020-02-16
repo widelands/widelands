@@ -1,3 +1,3 @@
 return {
-   "iron_ore"
+   iron_ore = {},
 }

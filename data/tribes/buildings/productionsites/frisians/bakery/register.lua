@@ -1,3 +1,3 @@
 return {
-   "frisians_bakery"
+   frisians_bakery = {},
 }

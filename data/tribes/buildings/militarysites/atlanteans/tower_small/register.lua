@@ -1,3 +1,3 @@
 return {
-   "atlanteans_tower_small"
+   atlanteans_tower_small = {},
 }

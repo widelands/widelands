@@ -1,3 +1,3 @@
 return {
-   "blackrootfield_small"
+   blackrootfield_small = { "field" },
 }

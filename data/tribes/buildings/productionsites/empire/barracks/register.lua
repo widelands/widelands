@@ -1,3 +1,3 @@
 return {
-   "empire_barracks"
+   empire_barracks = {},
 }

@@ -1,3 +1,3 @@
 return {
-   "spider_silk"
+   spider_silk = {},
 }

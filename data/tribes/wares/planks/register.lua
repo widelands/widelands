@@ -1,3 +1,3 @@
 return {
-   "planks"
+   planks = {},
 }

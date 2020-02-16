@@ -1,3 +1,3 @@
 return {
-   "ax_broad"
+   ax_broad = {},
 }

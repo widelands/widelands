@@ -1,3 +1,3 @@
 return {
-   "fishing_net"
+   fishing_net = {},
 }

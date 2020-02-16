@@ -1,3 +1,3 @@
 return {
-   "ax_battle"
+   ax_battle = {},
 }

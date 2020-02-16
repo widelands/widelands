@@ -1,3 +1,3 @@
 return {
-   "felling_ax"
+   felling_ax = {},
 }

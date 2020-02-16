@@ -1,3 +1,3 @@
 return {
-   "diamond"
+   diamond = {},
 }

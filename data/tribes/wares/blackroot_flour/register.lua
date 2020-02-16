@@ -1,3 +1,3 @@
 return {
-   "blackroot_flour"
+   blackroot_flour = {},
 }

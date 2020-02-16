@@ -1,3 +1,3 @@
 return {
-   "frisians_brickmaker"
+   frisians_brickmaker = {},
 }

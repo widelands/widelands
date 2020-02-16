@@ -1,3 +1,3 @@
 return {
-   "water"
+   water = {},
 }

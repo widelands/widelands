@@ -1,3 +1,3 @@
 return {
-   "spear_advanced"
+   spear_advanced = {},
 }

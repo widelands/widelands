@@ -1,3 +1,3 @@
 return {
-   "shield_steel"
+   shield_steel = {},
 }

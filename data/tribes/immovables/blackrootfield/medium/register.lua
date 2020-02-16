@@ -1,3 +1,3 @@
 return {
-   "blackrootfield_medium"
+   blackrootfield_medium = { "field", "flowering" },
 }

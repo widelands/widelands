@@ -1,3 +1,3 @@
 return {
-   "frisians_well"
+   frisians_well = {},
 }

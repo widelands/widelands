@@ -1,3 +1,3 @@
 return {
-   "reedfield_medium"
+   reedfield_medium = { "field", "flowering" },
 }

@@ -1,3 +1,3 @@
 return {
-   "ax"
+   ax = {},
 }

@@ -1,3 +1,3 @@
 return {
-   "helmet_warhelm"
+   helmet_warhelm = {},
 }

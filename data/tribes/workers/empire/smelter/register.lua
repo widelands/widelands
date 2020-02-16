@@ -1,3 +1,3 @@
 return {
-   "empire_smelter"
+   empire_smelter = {},
 }

@@ -1,3 +1,3 @@
 return {
-   "shield_advanced"
+   shield_advanced = {},
 }

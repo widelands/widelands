@@ -1,3 +1,3 @@
 return {
-   "empire_barrier"
+   empire_barrier = {},
 }

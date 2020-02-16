@@ -1,3 +1,3 @@
 return {
-   "hunting_bow"
+   hunting_bow = {},
 }

@@ -1,3 +1,3 @@
 return {
-   "pond_burning"
+   pond_burning = {},
 }

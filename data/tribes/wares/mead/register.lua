@@ -1,3 +1,3 @@
 return {
-   "mead"
+   mead = {},
 }

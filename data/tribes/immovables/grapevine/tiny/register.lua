@@ -1,3 +1,3 @@
 return {
-   "grapevine_tiny"
+   grapevine_tiny = { "field", "seed_grapes" },
 }

@@ -1,3 +1,3 @@
 return {
-   "barbarians_goldmine_deeper"
+   barbarians_goldmine_deeper = {},
 }
