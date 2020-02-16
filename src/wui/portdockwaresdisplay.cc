@@ -139,19 +139,19 @@ public:
 			      iq->get_filled() ? kPicWarePresent : iq->get_missing() ? kPicWareMissing :
 			                                                               kPicWareComing :
 			      kNoWare));
-			icons_[c]
-			   ->set_tooltip(iq ?
-			                    iq->get_filled() ?
-			                    /** TRANSLATORS: Tooltip for a ware that is present in the building */
-			                    _("Present") :
-			                       iq->get_missing() ?
-			                    /** TRANSLATORS: Tooltip for a ware that is neither present in the
-			                       building nor being transported there */
-			                    _("Missing") :
-			                    /** TRANSLATORS: Tooltip for a ware that is not present in the
-			                       building, but already being transported there */
-			                          _("Coming") :
-			                    "");
+			icons_[c]->set_tooltip(
+			   iq ?
+			      iq->get_filled() ?
+			      /** TRANSLATORS: Tooltip for a ware that is present in the building */
+			         _("Present") :
+			         iq->get_missing() ?
+			         /** TRANSLATORS: Tooltip for a ware that is neither present in the
+			            building nor being transported there */
+			            _("Missing") :
+			            /** TRANSLATORS: Tooltip for a ware that is not present in the
+			               building, but already being transported there */
+			            _("Coming") :
+			      "");
 		}
 	}
 
