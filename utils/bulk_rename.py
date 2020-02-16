@@ -10,8 +10,8 @@ import sys
 
 
 def main():
-    """Finds all files with the given old_name in basedir and
-    git moves all files that match the old_name to new_name."""
+    """Finds all files with the given old_name in basedir and git moves all
+    files that match the old_name to new_name."""
 
     print('Tool to rename all files for a widelands animation in bulk')
 
@@ -23,7 +23,8 @@ def main():
     basedir = sys.argv[1]
     source_name = sys.argv[2]
     destination_name = sys.argv[3]
-    print('Renaming "%s"\nto       "%s\nin       "%s"' % (source_name, destination_name, basedir))
+    print('Renaming "%s"\nto       "%s\nin       "%s"' %
+          (source_name, destination_name, basedir))
 
     for (dirpath, _, filenames) in os.walk(basedir):
         for filename in filenames:
@@ -32,6 +33,7 @@ def main():
                 destination_path = os.path.join(dirpath, destination_name)
                 call(['git', 'mv', source_path, destination_path])
     return 0
+
 
 if __name__ == '__main__':
     sys.exit(main())

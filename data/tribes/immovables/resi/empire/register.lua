@@ -10,4 +10,3 @@ return {
    empire_resi_iron_2 = { "resi" },
    empire_resi_stones_2 = { "resi" },
 }
-

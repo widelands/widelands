@@ -33,58 +33,65 @@
 
 namespace Widelands {
 
-/// Keeps a registry of names, attributes and init script directory locations for map object descriptions.
-/// Names must be globally unique, but we allow overriding a name via scenario-specific map object descriptions.
+/// Keeps a registry of names, attributes and init script directory locations for map object
+/// descriptions. Names must be globally unique, but we allow overriding a name via
+/// scenario-specific map object descriptions.
 class DescriptionManager {
 public:
 	DescriptionManager(LuaInterface* lua);
 	~DescriptionManager();
 
 	/// Search a directory for 'register.lua' files and register their 'init.lua' scripts
-	void
-	register_directory(const std::string& dirname, FileSystem* filesystem, bool is_scenario);
-	/// Map a map object description's name to its init script so that we can load it when we want it.
-	void register_description(const std::string& description_name, const std::string& script_path, const std::vector<std::string>& attributes);
-	/// Map a scenario's map object description's name to its init script so that we can load it when we want it.
+	void register_directory(const std::string& dirname, FileSystem* filesystem, bool is_scenario);
+	/// Map a map object description's name to its init script so that we can load it when we want
+	/// it.
+	void register_description(const std::string& description_name,
+	                          const std::string& script_path,
+	                          const std::vector<std::string>& attributes);
+	/// Map a scenario's map object description's name to its init script so that we can load it when
+	/// we want it.
 	void register_scenario_description(FileSystem* filesystem,
-	                              const std::string& description_name,
-	                              const std::string& script_path, const std::vector<std::string>& attributes);
-	/// Load the map object description for the given 'description_name' that has been registered previously with
-	/// 'register_description'
+	                                   const std::string& description_name,
+	                                   const std::string& script_path,
+	                                   const std::vector<std::string>& attributes);
+	/// Load the map object description for the given 'description_name' that has been registered
+	/// previously with 'register_description'
 	void load_description(const std::string& description_name);
 
-    /// Return the attributes registered to the given description name.
-    const std::vector<std::string>& get_attributes(const std::string& description_name) const;
+	/// Return the attributes registered to the given description name.
+	const std::vector<std::string>& get_attributes(const std::string& description_name) const;
 
-    /// Deregister all scenario object descrptions
-    void clear_scenario_descriptions();
+	/// Deregister all scenario object descrptions
+	void clear_scenario_descriptions();
 
-    /// Mark a description as being loaded to prevent concurrent loading
-    void mark_loading_in_progress(const std::string& description_name);
-    /// Mark a description as having been loaded
-    void mark_loading_done(const std::string& description_name);
+	/// Mark a description as being loaded to prevent concurrent loading
+	void mark_loading_in_progress(const std::string& description_name);
+	/// Mark a description as having been loaded
+	void mark_loading_done(const std::string& description_name);
 
 private:
-    /// Load a description on demand via notification
-    void load_description_on_demand(const std::string& description_name);
-    /// For loading all map object descriptions with a given attribute on demand
-    void register_attributes(const std::vector<std::string>& attributes, const std::string& description_name);
+	/// Load a description on demand via notification
+	void load_description_on_demand(const std::string& description_name);
+	/// For loading all map object descriptions with a given attribute on demand
+	void register_attributes(const std::vector<std::string>& attributes,
+	                         const std::string& description_name);
 
-    struct RegisteredObject {
-        explicit RegisteredObject(const std::string& init_script_path,
-                                  const std::vector<std::string>& init_attributes)
-            : script_path(init_script_path), attributes(init_attributes) {}
-        const std::string script_path;
-        const std::vector<std::string> attributes;
-    };
+	struct RegisteredObject {
+		explicit RegisteredObject(const std::string& init_script_path,
+		                          const std::vector<std::string>& init_attributes)
+		   : script_path(init_script_path), attributes(init_attributes) {
+		}
+		const std::string script_path;
+		const std::vector<std::string> attributes;
+	};
 
 	/// A list of all available map object descriptions as <name, init script path>
 	std::map<std::string, RegisteredObject> registered_descriptions_;
-	/// A list of all extra or replacement map object descriptions used by a scenario as <name, init script
-	/// path>
+	/// A list of all extra or replacement map object descriptions used by a scenario as <name, init
+	/// script path>
 	std::map<std::string, RegisteredObject> registered_scenario_descriptions_;
-    /// Maps attributes to map object description names, in case we need them dynamically
-    std::map<std::string, std::set<std::string>> registered_attributes_;
+	/// Maps attributes to map object description names, in case we need them dynamically
+	std::map<std::string, std::set<std::string>> registered_attributes_;
 	/// A list of map object descriptions currently being loaded, to avoid circular dependencies
 	std::set<std::string> descriptions_being_loaded_;
 	/// List of the map object descriptions that have already been loaded
@@ -92,10 +99,10 @@ private:
 
 	LuaInterface* lua_;  // Not owned
 
-    /// For loading any registered map object description via Lua in scenarios.
-    /// Do not use this for normal loading in tribes, since this will circumvent the check for circular dependencies.1
-    /// If the object is not known, loading is skipped quietly.
-    std::unique_ptr<Notifications::Subscriber<Widelands::NoteMapObjectType>>
+	/// For loading any registered map object description via Lua in scenarios.
+	/// Do not use this for normal loading in tribes, since this will circumvent the check for
+	/// circular dependencies.1 If the object is not known, loading is skipped quietly.
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteMapObjectType>>
 	   map_objecttype_subscriber_;
 
 	DISALLOW_COPY_AND_ASSIGN(DescriptionManager);
