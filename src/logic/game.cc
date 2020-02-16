@@ -212,7 +212,7 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 		throw wexception("could not load \"%s\"", mapname.c_str());
 	}
 
-	create_loader_ui({"general_game"});
+	create_loader_ui({"general_game"}, false);
 
 	step_loader_ui(_("Preloading map…"));
 	maploader->preload_map(true);
@@ -385,7 +385,7 @@ void Game::init_savegame(const GameSettings& settings) {
 }
 
 bool Game::run_load_game(const std::string& filename, const std::string& script_to_run) {
-	create_loader_ui({"general_game", "singleplayer"});
+	create_loader_ui({"general_game", "singleplayer"}, false);
 	int8_t player_nr;
 
 	step_loader_ui(_("Preloading map…"));

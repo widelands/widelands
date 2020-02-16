@@ -245,7 +245,7 @@ bool GameMainMenuSaveGame::save_game(std::string filename, bool binary) {
 	// Try saving the game.
 	Widelands::Game& game = igbase().game();
 
-	game.create_loader_ui({"general_game"});
+	game.create_loader_ui({"general_game"}, true);
 
 	GenericSaveHandler gsh(
 	   [&game](FileSystem& fs) {

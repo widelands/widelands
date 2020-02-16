@@ -661,7 +661,7 @@ void GameHost::run() {
 		if (d->hp.has_players_tribe()) {
 			tipstexts.push_back(d->hp.get_players_tribe());
 		}
-		game.create_loader_ui(tipstexts);
+		game.create_loader_ui(tipstexts, false);
 		game.step_loader_ui(_("Preparing game"));
 
 		d->game = &game;

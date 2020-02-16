@@ -267,7 +267,7 @@ void GameClient::run() {
 		if (has_players_tribe()) {
 			tipstexts.push_back(get_players_tribe());
 		}
-		UI::ProgressWindow& loader_ui = game.create_loader_ui(tipstexts);
+		UI::ProgressWindow& loader_ui = game.create_loader_ui(tipstexts, false);
 
 		d->game = &game;
 		InteractiveGameBase* igb = d->init_game(this, loader_ui);

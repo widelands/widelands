@@ -469,7 +469,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	EditorInteractive& eia = dynamic_cast<EditorInteractive&>(*get_parent());
 	Widelands::EditorGameBase& egbase = eia.egbase();
 	Widelands::Map* map = egbase.mutable_map();
-	egbase.create_loader_ui({"editor"}, "images/loadscreens/editor.jpg");
+	egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
 	eia.cleanup_for_load();
 
 	UniqueRandomMapInfo map_info;
