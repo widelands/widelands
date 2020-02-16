@@ -23,45 +23,60 @@ init = {
       player:allow_workers("all")
    end
 
-   local field = nil
+   local fields = {}
    repeat
-      field = map:get_field(math.random(map.width), math.random(map.height))
-      if not field:has_caps("swimmable") then
-         field = nil
+      local f = map:get_field(math.random(map.width), math.random(map.height))
+      if not f:has_caps("swimmable") then
+         f = nil
       else
          local route_found = false
          for i,port in pairs(map.port_spaces) do
-            if map:sea_route_exists(field, map:get_field(port.x, port.y)) then
+            if map:sea_route_exists(f, map:get_field(port.x, port.y)) then
                route_found = true
                break
             end
          end
-         if not route_found then field = nil end
+         if not route_found then f = nil end
       end
-   until field
-   local ship = player:place_ship(field)
-   ship.capacity = 50
-   ship:make_expedition({
-      log = 7,
-      granite = 2,
-      blackwood = 2,
-      grout = 2,
-      iron = 2,
+      if f then table.insert(fields, f) end
+   until #fields == 3
 
-      barbarians_stonemason = 1,
-      barbarians_lumberjack = 1,
-      barbarians_ranger = 1,
-      barbarians_gardener = 1,
-      barbarians_geologist = 1,
-      barbarians_miner = 2,
-      barbarians_smelter = 1,
-      barbarians_blacksmith = 1,
-      barbarians_innkeeper = 1,
-      barbarians_fisher = 1,
-      barbarians_soldier = 1,
-      -- One builder is contained without listing him explicitely
-   })
-   scroll_to_field(field)
+   -- default capacity:                     30
+   -- items per expedition (incl. builder): 22
+   -- free capacity per ship:                8 ×3
+   local items = {
+      {
+         log = 3,
+         granite = 1,
+         grout = 1,
+         barbarians_stonemason = 1,
+         barbarians_lumberjack = 1,
+         barbarians_ranger = 1,
+      },
+      {
+         iron = 1,
+         barbarians_innkeeper = 1,
+         barbarians_fisher = 1,
+         barbarians_geologist = 1,
+         barbarians_miner = 2,
+         barbarians_smelter = 1,
+         barbarians_blacksmith = 1,
+      },
+      {
+         log = 2,
+         granite = 1,
+         grout = 1,
+         blackwood = 1,
+         iron = 1,
+         barbarians_gardener = 1,
+         barbarians_soldier = 1,
+      },
+   }
+   for i,f in pairs(fields) do
+      local ship = player:place_ship(f)
+      ship:make_expedition(items[i])
+   end
+   scroll_to_field(fields[1])
 end
 }
 

@@ -10,7 +10,7 @@ init = {
    -- TRANSLATORS: This is the name of a starting condition
    descname = _ "Discovery",
    -- TRANSLATORS: This is the tooltip for the "Discovery" starting condition
-   tooltip = _"Start the game with a ship on the ocean and only a handful of supplies",
+   tooltip = _"Start the game with three ships on the ocean and only a handful of supplies",
    map_tags = {"seafaring"},
 
    func = function(player, shared_in_start)
@@ -23,49 +23,62 @@ init = {
       player:allow_workers("all")
    end
 
-   local field = nil
+   local fields = {}
    repeat
-      field = map:get_field(math.random(map.width), math.random(map.height))
-      if not field:has_caps("swimmable") then
-         field = nil
+      local f = map:get_field(math.random(map.width), math.random(map.height))
+      if not f:has_caps("swimmable") then
+         f = nil
       else
          local route_found = false
          for i,port in pairs(map.port_spaces) do
-            if map:sea_route_exists(field, map:get_field(port.x, port.y)) then
+            if map:sea_route_exists(f, map:get_field(port.x, port.y)) then
                route_found = true
                break
             end
          end
-         if not route_found then field = nil end
+         if not route_found then f = nil end
       end
-   until field
-   local ship = player:place_ship(field)
-   ship.capacity = 55
-   ship:make_expedition({
-      log = 7,
-      granite = 5,
-      planks = 4,
-      spidercloth = 1,
-      iron = 2,
+      if f then table.insert(fields, f) end
+   until #fields == 3
 
-      atlanteans_stonecutter = 1,
-      atlanteans_woodcutter = 1,
-      atlanteans_forester = 1,
-      atlanteans_sawyer = 1,
-      atlanteans_geologist = 1,
-      atlanteans_miner = 3,
-      atlanteans_smelter = 1,
-      atlanteans_toolsmith = 1,
-      atlanteans_smoker = 1,
-      atlanteans_fisher = 1,
-      atlanteans_baker = 1,
-      atlanteans_blackroot_farmer = 1,
-      atlanteans_farmer = 1,
-      atlanteans_spiderbreeder = 1,
-      atlanteans_soldier = 1,
-      -- One builder is contained without listing him explicitely
-   })
-   scroll_to_field(field)
+   -- default capacity:                     30
+   -- items per expedition (incl. builder): 18
+   -- free capacity per ship:               12 ×3
+   local items = {
+      {
+         log = 4,
+         granite = 4,
+         spidercloth = 1,
+         atlanteans_stonecutter = 1,
+         atlanteans_woodcutter = 1,
+         atlanteans_forester = 1,
+      },
+      {
+         log = 3,
+         iron = 2,
+         atlanteans_geologist = 1,
+         atlanteans_miner = 3,
+         atlanteans_smelter = 1,
+         atlanteans_toolsmith = 1,
+         atlanteans_soldier = 1,
+      },
+      {
+         planks = 4,
+         granite = 1,
+         atlanteans_sawyer = 1,
+         atlanteans_smoker = 1,
+         atlanteans_fisher = 1,
+         atlanteans_baker = 1,
+         atlanteans_blackroot_farmer = 1,
+         atlanteans_farmer = 1,
+         atlanteans_spiderbreeder = 1,
+      },
+   }
+   for i,f in pairs(fields) do
+      local ship = player:place_ship(f)
+      ship:make_expedition(items[i])
+   end
+   scroll_to_field(fields[1])
 end
 }
 
