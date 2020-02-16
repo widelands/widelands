@@ -68,25 +68,23 @@ enum class MapObjectType : uint8_t {
 // Returns a string representation for 'type'.
 std::string to_string(MapObjectType type);
 
-
 struct NoteMapObjectType {
 	CAN_BE_SENT_AS_NOTE(NoteId::MapObjectType)
 
-    enum class LoadType {
-        // Load a registered map object if it's not being loaded yet
-        kObject,
-        // Load all registered map objects that have this attribute and that aren't being loaded yet
-        kAttribute
-    };
+	enum class LoadType {
+		// Load a registered map object if it's not being loaded yet
+		kObject,
+		// Load all registered map objects that have this attribute and that aren't being loaded yet
+		kAttribute
+	};
 
 	const std::string name;
-    const LoadType type;
+	const LoadType type;
 
 	NoteMapObjectType(const std::string& init_name, LoadType init_type)
 	   : name(init_name), type(init_type) {
 	}
 };
-
 
 }  // namespace Widelands
 

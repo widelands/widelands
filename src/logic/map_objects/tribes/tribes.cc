@@ -49,10 +49,10 @@ Tribes::Tribes(LuaInterface* lua)
      lua_(lua),
      description_manager_(new Widelands::DescriptionManager(lua_)) {
 
-    // Register tribe names. Tribes have no attributes.
-    std::vector<std::string> attributes;
+	// Register tribe names. Tribes have no attributes.
+	std::vector<std::string> attributes;
 	for (const TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
-        description_manager_->register_description(tribeinfo.name, tribeinfo.script, attributes);
+		description_manager_->register_description(tribeinfo.name, tribeinfo.script, attributes);
 	}
 
 	// Walk tribes directory and register objects
@@ -230,7 +230,7 @@ void Tribes::register_scenario_tribes(FileSystem* filesystem) {
 	// If the map is a scenario with custom tribe entites, load them.
 	if (filesystem->file_exists("scripting/tribes")) {
 		scenario_tribes_.reset(nullptr);
-        description_manager_->clear_scenario_descriptions();
+		description_manager_->clear_scenario_descriptions();
 		if (filesystem->file_exists("scripting/tribes/init.lua")) {
 			scenario_tribes_ = lua_->run_script("map:scripting/tribes/init.lua");
 		}
@@ -262,9 +262,9 @@ void Tribes::add_tribe_object_type(const LuaTable& table, const World& world, Ma
 		workers_->add(new FerryDescr(type_descname, table, *this));
 		break;
 	case MapObjectType::IMMOVABLE: {
-		immovables_->add(new ImmovableDescr(type_descname, table,
-                                            description_manager_->get_attributes(type_name), *this));
-    } break;
+		immovables_->add(new ImmovableDescr(
+		   type_descname, table, description_manager_->get_attributes(type_name), *this));
+	} break;
 	case MapObjectType::MARKET:
 		buildings_->add(new MarketDescr(type_descname, table, *this));
 		break;
@@ -380,12 +380,12 @@ DescriptionIndex Tribes::load_worker(const std::string& workername) {
 }
 
 void Tribes::try_load_ware_or_worker(const std::string& objectname) {
-    Notifications::publish(NoteMapObjectType(objectname, NoteMapObjectType::LoadType::kObject));
-    // Check if ware/worker exists already and if not, try to load it.
-    if (!ware_exists(ware_index(objectname)) &&
-        !worker_exists(worker_index(objectname))) {
-        throw GameDataError("\"%s\" has not been registered as a ware/worker type", objectname.c_str());
-    }
+	Notifications::publish(NoteMapObjectType(objectname, NoteMapObjectType::LoadType::kObject));
+	// Check if ware/worker exists already and if not, try to load it.
+	if (!ware_exists(ware_index(objectname)) && !worker_exists(worker_index(objectname))) {
+		throw GameDataError(
+		   "\"%s\" has not been registered as a ware/worker type", objectname.c_str());
+	}
 }
 
 uint32_t Tribes::get_largest_workarea() const {

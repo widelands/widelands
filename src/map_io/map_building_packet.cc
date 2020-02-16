@@ -73,7 +73,8 @@ void MapBuildingPacket::read(FileSystem& fs,
 
 						//  Get the tribe and the building index.
 						if (Player* const player = egbase.get_safe_player(p)) {
-                            Notifications::publish(NoteMapObjectType(name, NoteMapObjectType::LoadType::kObject));
+							Notifications::publish(
+							   NoteMapObjectType(name, NoteMapObjectType::LoadType::kObject));
 
 							const TribeDescr& tribe = player->tribe();
 							const DescriptionIndex index = tribe.building_index(name);

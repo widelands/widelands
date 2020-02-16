@@ -231,10 +231,11 @@ int LuaEditorGameBase::get_tribe_description(lua_State* L) {
 	if (!Widelands::tribe_exists(tribe_name)) {
 		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
 	}
-    Notifications::publish(NoteMapObjectType(tribe_name, NoteMapObjectType::LoadType::kObject));
+	Notifications::publish(NoteMapObjectType(tribe_name, NoteMapObjectType::LoadType::kObject));
 
-    const Tribes& tribes = get_egbase(L).tribes();
-	return to_lua<LuaMaps::LuaTribeDescription>(L, new LuaMaps::LuaTribeDescription(tribes.get_tribe_descr(tribes.tribe_index(tribe_name))));
+	const Tribes& tribes = get_egbase(L).tribes();
+	return to_lua<LuaMaps::LuaTribeDescription>(
+	   L, new LuaMaps::LuaTribeDescription(tribes.get_tribe_descr(tribes.tribe_index(tribe_name))));
 }
 
 /* RST
@@ -796,18 +797,19 @@ int LuaPlayerBase::place_building(lua_State* L) {
 	const Tribes& tribes = egbase.tribes();
 	Player& player = get(L, egbase);
 
-    // If the building belongs to a tribe that no player is playing, we need to load it now
-    Notifications::publish(NoteMapObjectType(name, NoteMapObjectType::LoadType::kObject));
+	// If the building belongs to a tribe that no player is playing, we need to load it now
+	Notifications::publish(NoteMapObjectType(name, NoteMapObjectType::LoadType::kObject));
 
 	const DescriptionIndex building_index = tribes.building_index(name);
 
-    // Ensure that the loaded object was indeed a building
-    if (!tribes.building_exists(building_index)) {
-        report_error(L, "Unknown Building: '%s'", name.c_str());
-    }
+	// Ensure that the loaded object was indeed a building
+	if (!tribes.building_exists(building_index)) {
+		report_error(L, "Unknown Building: '%s'", name.c_str());
+	}
 
 	if (!player.tribe().has_building(building_index) &&
-        tribes.get_building_descr(building_index)->type() != Widelands::MapObjectType::MILITARYSITE) {
+	    tribes.get_building_descr(building_index)->type() !=
+	       Widelands::MapObjectType::MILITARYSITE) {
 		report_error(L, "Building: '%s' is not available for Player %d's tribe '%s'", name.c_str(),
 		             player.player_number(), player.tribe().name().c_str());
 	}

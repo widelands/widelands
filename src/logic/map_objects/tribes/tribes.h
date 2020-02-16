@@ -110,7 +110,8 @@ public:
 	DescriptionIndex load_ware(const std::string& warename);
 	/// Load a worker that has been registered previously with 'register_description'
 	DescriptionIndex load_worker(const std::string& workername);
-    /// Try to load a ware/worker that has been registered previously with 'register_description' when we don't know whether it's a ware or worker
+	/// Try to load a ware/worker that has been registered previously with 'register_description'
+	/// when we don't know whether it's a ware or worker
 	void try_load_ware_or_worker(const std::string& objectname);
 
 	uint32_t get_largest_workarea() const;
@@ -131,7 +132,7 @@ private:
 
 	LuaInterface* lua_;  // Not owned
 
-    std::unique_ptr<DescriptionManager> description_manager_;
+	std::unique_ptr<DescriptionManager> description_manager_;
 	DISALLOW_COPY_AND_ASSIGN(Tribes);
 };
 

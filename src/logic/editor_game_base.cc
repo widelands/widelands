@@ -267,10 +267,10 @@ void EditorGameBase::inform_players_about_immovable(MapIndex const i,
 
 // Loads map object descriptions for all tribes
 void EditorGameBase::load_all_tribes() {
-    // Load all tribes
-    for (const std::string& tribe_name : Widelands::get_all_tribenames()) {
-        mutable_tribes()->load_tribe(tribe_name);
-    }
+	// Load all tribes
+	for (const std::string& tribe_name : Widelands::get_all_tribenames()) {
+		mutable_tribes()->load_tribe(tribe_name);
+	}
 }
 
 void EditorGameBase::allocate_player_maps() {

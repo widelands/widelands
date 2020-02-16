@@ -179,7 +179,8 @@ private:
 
 	/// Registers a worker with the tribe and adds it to the bottom of the given worker column
 	void add_worker(const std::string& workername,
-	                std::vector<DescriptionIndex>& workers_order_column, Tribes& tribes);
+	                std::vector<DescriptionIndex>& workers_order_column,
+	                Tribes& tribes);
 
 	// Helper function for adding a special worker type (carriers etc.)
 	DescriptionIndex add_special_worker(const std::string& workername, Tribes& tribes);
@@ -207,7 +208,7 @@ private:
 	BridgeAnimationIDs bridges_busy_;
 	uint32_t bridge_height_;
 
-    // A container of all texture images that can be used for drawing a
+	// A container of all texture images that can be used for drawing a
 	// (normal|busy) road or a waterway. The images are guaranteed to exist.
 	RoadTextures road_textures_;
 

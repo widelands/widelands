@@ -320,7 +320,7 @@ int main(int argc, char** argv) {
 		initialize();
 		std::unique_ptr<FileSystem> out_filesystem(&FileSystem::create(output_path));
 		EditorGameBase egbase(nullptr);
-        egbase.load_all_tribes();
+		egbase.load_all_tribes();
 		write_tribes(egbase, out_filesystem.get());
 	} catch (std::exception& e) {
 		log("Exception: %s.\n", e.what());

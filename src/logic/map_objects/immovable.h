@@ -129,11 +129,15 @@ public:
 	using Programs = std::map<std::string, ImmovableProgram*>;
 
 	/// World immovable
-	ImmovableDescr(const std::string& init_descname, const LuaTable&,
-                   const std::vector<std::string>& attributes, const World& world);
+	ImmovableDescr(const std::string& init_descname,
+	               const LuaTable&,
+	               const std::vector<std::string>& attributes,
+	               const World& world);
 	/// Tribes immovable
-	ImmovableDescr(const std::string& init_descname, const LuaTable&,
-                   const std::vector<std::string>& attributes, Tribes& tribes);
+	ImmovableDescr(const std::string& init_descname,
+	               const LuaTable&,
+	               const std::vector<std::string>& attributes,
+	               Tribes& tribes);
 	~ImmovableDescr() override;
 
 	int32_t get_size() const {
@@ -187,7 +191,8 @@ private:
 	// Common constructor functions for tribes and world.
 	ImmovableDescr(const std::string& init_descname,
 	               const LuaTable&,
-	               MapObjectDescr::OwnerType type, const std::vector<std::string>& attributes);
+	               MapObjectDescr::OwnerType type,
+	               const std::vector<std::string>& attributes);
 
 	// Adds a default program if none was defined.
 	void make_sure_default_program_is_there();

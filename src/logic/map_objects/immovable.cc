@@ -219,24 +219,24 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 	}
 
 	if (table.has_key("attributes") && input_type == Widelands::MapObjectDescr::OwnerType::kTribe) {
-        throw GameDataError("Tribe attributes need to be defined in 'register.lua' now");
-    }
-    if (!attributes.empty()) {
+		throw GameDataError("Tribe attributes need to be defined in 'register.lua' now");
+	}
+	if (!attributes.empty()) {
 		add_attributes(attributes, {MapObject::Attribute::RESI});
 
 		for (const std::string& attribute : attributes) {
 			if (attribute == "resi") {
-                // All resource indicators must have a menu icon
+				// All resource indicators must have a menu icon
 				if (icon_filename().empty()) {
 					throw GameDataError("Resource indicator %s has no menu icon", name().c_str());
 				}
 			} else if (attribute == "tree") {
-                // Old trees get an extra species name so we can use it in help lists.
-                if (!table.has_key("species")) {
-                    throw wexception(
-                       "Immovable '%s' with type 'tree' must define a species", name().c_str());
-                }
-                species_ = table.get_string("species");
+				// Old trees get an extra species name so we can use it in help lists.
+				if (!table.has_key("species")) {
+					throw wexception(
+					   "Immovable '%s' with type 'tree' must define a species", name().c_str());
+				}
+				species_ = table.get_string("species");
 			}
 		}
 	}
@@ -258,9 +258,10 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
  * Parse a world immovable from its init file.
  */
 ImmovableDescr::ImmovableDescr(const std::string& init_descname,
-                               const LuaTable& table, const std::vector<std::string>& attributes,
+                               const LuaTable& table,
+                               const std::vector<std::string>& attributes,
                                const World& world)
-    : ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kWorld, attributes) {
+   : ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kWorld, attributes) {
 
 	int editor_category_index =
 	   world.editor_immovable_categories().get_index(table.get_string("editor_category"));
@@ -278,7 +279,8 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
  * /data/tribes/immovables/ashes/init.lua
  */
 ImmovableDescr::ImmovableDescr(const std::string& init_descname,
-                               const LuaTable& table, const std::vector<std::string>& attributes,
+                               const LuaTable& table,
+                               const std::vector<std::string>& attributes,
                                Tribes& tribes)
    : ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kTribe, attributes) {
 	if (table.has_key("buildcost")) {
@@ -727,7 +729,7 @@ MapObject::Loader* Immovable::load(EditorGameBase& egbase,
 
 			if (owner_type != "world") {  //  It is a tribe immovable.
 				const std::string name = tribes_lookup_table.lookup_immovable(fr.c_string());
-                Notifications::publish(NoteMapObjectType(name, NoteMapObjectType::LoadType::kObject));
+				Notifications::publish(NoteMapObjectType(name, NoteMapObjectType::LoadType::kObject));
 
 				const DescriptionIndex idx = egbase.tribes().immovable_index(name);
 				if (idx != Widelands::INVALID_INDEX) {
@@ -859,10 +861,10 @@ ImmovableProgram::ActTransform::ActTransform(char* parameters, ImmovableDescr& d
 				}
 			}
 		}
-        if (type_name == descr.name()) {
+		if (type_name == descr.name()) {
 			throw GameDataError("illegal transformation to the same type");
-        }
-        Notifications::publish(NoteMapObjectType(type_name, NoteMapObjectType::LoadType::kObject));
+		}
+		Notifications::publish(NoteMapObjectType(type_name, NoteMapObjectType::LoadType::kObject));
 	} catch (const WException& e) {
 		throw GameDataError("transform: %s", e.what());
 	}
@@ -918,7 +920,7 @@ ImmovableProgram::ActGrow::ActGrow(char* parameters, ImmovableDescr& descr) {
 			}
 	end:
 		type_name = parameters;
-        Notifications::publish(NoteMapObjectType(type_name, NoteMapObjectType::LoadType::kObject));
+		Notifications::publish(NoteMapObjectType(type_name, NoteMapObjectType::LoadType::kObject));
 	} catch (const WException& e) {
 		throw GameDataError("grow: %s", e.what());
 	}
@@ -1006,7 +1008,7 @@ ImmovableProgram::ActSeed::ActSeed(char* parameters, ImmovableDescr& descr) {
 			}
 	end:
 		type_name = parameters;
-        Notifications::publish(NoteMapObjectType(type_name, NoteMapObjectType::LoadType::kObject));
+		Notifications::publish(NoteMapObjectType(type_name, NoteMapObjectType::LoadType::kObject));
 	} catch (const WException& e) {
 		throw GameDataError("seed: %s", e.what());
 	}

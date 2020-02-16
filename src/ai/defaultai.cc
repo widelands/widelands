@@ -5243,7 +5243,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 		// it seems there are wares with 0 preciousness (no entry in init files?), but we need
 		// positive value here.
-		// TODO(GunChleoc): Since we require in TribeDescr::load_wares that this is set for all wares used
+		// TODO(GunChleoc): Since we require in TribeDescr::load_wares that this is set for all wares
+		// used
 		// by a tribe, something seems to be wrong here. It should always be > 0.
 		const uint16_t preciousness =
 		   std::max<uint16_t>(wares.at(bo.ware_outputs.at(m)).preciousness, 1);

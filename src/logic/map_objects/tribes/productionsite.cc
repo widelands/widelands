@@ -59,10 +59,11 @@ void parse_working_positions(Tribes& tribes,
 			if (amount < 1 || 255 < amount) {
 				throw wexception("count is out of range 1 .. 255");
 			}
-            // Try to load the worker if an object with this name has been registered
-            Notifications::publish(NoteMapObjectType(worker_name, NoteMapObjectType::LoadType::kObject));
+			// Try to load the worker if an object with this name has been registered
+			Notifications::publish(
+			   NoteMapObjectType(worker_name, NoteMapObjectType::LoadType::kObject));
 
-            // Ensure that we did indeed load a worker
+			// Ensure that we did indeed load a worker
 			DescriptionIndex const woi = tribes.worker_index(worker_name);
 			if (!tribes.worker_exists(woi)) {
 				throw wexception("invalid");
@@ -123,7 +124,8 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 	if (table.has_key("outputs")) {
 		for (const std::string& output : table.get_table("outputs")->array_entries<std::string>()) {
 			try {
-                // Check if ware/worker exists already and if not, try to load it. Will throw a GameDataError on failure.
+				// Check if ware/worker exists already and if not, try to load it. Will throw a
+				// GameDataError on failure.
 				tribes.try_load_ware_or_worker(output);
 				DescriptionIndex idx = tribes.ware_index(output);
 				if (tribes.ware_exists(idx)) {
@@ -153,8 +155,9 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		   table.get_table("inputs")->array_entries<std::unique_ptr<LuaTable>>();
 		for (std::unique_ptr<LuaTable>& entry_table : input_entries) {
 			const std::string& ware_or_worker_name = entry_table->get_string("name");
-            // Check if ware/worker exists already and if not, try to load it. Will throw a GameDataError on failure.
-            tribes.try_load_ware_or_worker(ware_or_worker_name);
+			// Check if ware/worker exists already and if not, try to load it. Will throw a
+			// GameDataError on failure.
+			tribes.try_load_ware_or_worker(ware_or_worker_name);
 
 			int amount = entry_table->get_int("amount");
 			try {

@@ -114,7 +114,7 @@ public:
 	virtual Player* get_safe_player(PlayerNumber);
 
 	// loading stuff
-    void load_all_tribes();
+	void load_all_tribes();
 	void allocate_player_maps();
 	virtual void postload();
 	virtual void cleanup_for_load();

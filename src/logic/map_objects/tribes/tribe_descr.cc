@@ -115,10 +115,10 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 		log("%ums\n", timer.ms_since_last_query());
 
 		log("┃    Finalizing: ");
-        if (table.has_key<std::string>("toolbar")) {
+		if (table.has_key<std::string>("toolbar")) {
 			toolbar_image_set_.reset(new ToolbarImageset(*table.get_table("toolbar")));
 		}
-        finalize_loading(tribes);
+		finalize_loading(tribes);
 		log("%ums\n", timer.ms_since_last_query());
 	} catch (const GameDataError& e) {
 		throw GameDataError("tribe %s: %s", name_.c_str(), e.what());
@@ -129,7 +129,7 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 
 	std::unique_ptr<LuaTable> items_table = table.get_table("roads");
 	const auto load_roads = [&items_table](
-	                           const std::string& road_type, std::vector<std::string>* images) {
+	   const std::string& road_type, std::vector<std::string>* images) {
 		std::vector<std::string> roads =
 		   items_table->get_table(road_type)->array_entries<std::string>();
 		for (const std::string& filename : roads) {
@@ -145,23 +145,23 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 		}
 	};
 
-    // Add textures for roads/waterways.
-    std::vector<std::string> road_images;
+	// Add textures for roads/waterways.
+	std::vector<std::string> road_images;
 
-    load_roads("normal", &road_images);
-    for (const std::string& texture_path : road_images) {
-       road_textures_.add_normal_road_texture(g_gr->images().get(texture_path));
-    }
+	load_roads("normal", &road_images);
+	for (const std::string& texture_path : road_images) {
+		road_textures_.add_normal_road_texture(g_gr->images().get(texture_path));
+	}
 
-    load_roads("busy", &road_images);
-    for (const std::string& texture_path : road_images) {
-       road_textures_.add_busy_road_texture(g_gr->images().get(texture_path));
-    }
+	load_roads("busy", &road_images);
+	for (const std::string& texture_path : road_images) {
+		road_textures_.add_busy_road_texture(g_gr->images().get(texture_path));
+	}
 
-    load_roads("waterway", &road_images);
-    for (const std::string& texture_path : road_images) {
-       road_textures_.add_waterway_texture(g_gr->images().get(texture_path));
-    }
+	load_roads("waterway", &road_images);
+	for (const std::string& texture_path : road_images) {
+		road_textures_.add_waterway_texture(g_gr->images().get(texture_path));
+	}
 
 	const auto load_bridge_if_present = [this](const LuaTable& animations_table,
 	                                           Animation::Type animation_type, std::string s_dir,
@@ -175,8 +175,8 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 		}
 	};
 	// Frontier and flag animations can be a mix of file and spritesheet animations
-	const auto load_animations = [this, load_bridge_if_present](const LuaTable& animations_table,
-	                                                            Animation::Type animation_type) {
+	const auto load_animations = [this, load_bridge_if_present](
+	   const LuaTable& animations_table, Animation::Type animation_type) {
 		if (animations_table.has_key("frontier")) {
 			std::unique_ptr<LuaTable> animation_table = animations_table.get_table("frontier");
 			frontier_animation_id_ =
@@ -241,18 +241,18 @@ void TribeDescr::load_wares(const LuaTable& table, Tribes& tribes) {
 		}
 	}
 
-    if (table.has_key("ironore")) {
-        ironore_ = add_special_ware(table.get_string("ironore"), tribes);
-    }
-    if (table.has_key("rawlog")) {
-        rawlog_ = add_special_ware(table.get_string("rawlog"), tribes);
-    }
-    if (table.has_key("refinedlog")) {
-        refinedlog_ = add_special_ware(table.get_string("refinedlog"), tribes);
-    }
-    if (table.has_key("granite")) {
-        granite_ = add_special_ware(table.get_string("granite"), tribes);
-    }
+	if (table.has_key("ironore")) {
+		ironore_ = add_special_ware(table.get_string("ironore"), tribes);
+	}
+	if (table.has_key("rawlog")) {
+		rawlog_ = add_special_ware(table.get_string("rawlog"), tribes);
+	}
+	if (table.has_key("refinedlog")) {
+		refinedlog_ = add_special_ware(table.get_string("refinedlog"), tribes);
+	}
+	if (table.has_key("granite")) {
+		granite_ = add_special_ware(table.get_string("granite"), tribes);
+	}
 
 	// Verify that the preciousness has been set for all of the tribe's wares
 	for (const DescriptionIndex wi : wares()) {
@@ -319,24 +319,24 @@ void TribeDescr::load_workers(const LuaTable& table, Tribes& tribes) {
 		}
 	}
 
-    if (table.has_key("builder")) {
-        builder_ = add_special_worker(table.get_string("builder"), tribes);
-    }
-    if (table.has_key("carrier")) {
-        carrier_ = add_special_worker(table.get_string("carrier"), tribes);
-    }
-    if (table.has_key("carrier2")) {
-        carrier2_ = add_special_worker(table.get_string("carrier2"), tribes);
-    }
-    if (table.has_key("geologist")) {
-        geologist_ = add_special_worker(table.get_string("geologist"), tribes);
-    }
-    if (table.has_key("soldier")) {
-        soldier_ = add_special_worker(table.get_string("soldier"), tribes);
-    }
-    if (table.has_key("ferry")) {
-        ferry_ = add_special_worker(table.get_string("ferry"), tribes);
-    }
+	if (table.has_key("builder")) {
+		builder_ = add_special_worker(table.get_string("builder"), tribes);
+	}
+	if (table.has_key("carrier")) {
+		carrier_ = add_special_worker(table.get_string("carrier"), tribes);
+	}
+	if (table.has_key("carrier2")) {
+		carrier2_ = add_special_worker(table.get_string("carrier2"), tribes);
+	}
+	if (table.has_key("geologist")) {
+		geologist_ = add_special_worker(table.get_string("geologist"), tribes);
+	}
+	if (table.has_key("soldier")) {
+		soldier_ = add_special_worker(table.get_string("soldier"), tribes);
+	}
+	if (table.has_key("ferry")) {
+		ferry_ = add_special_worker(table.get_string("ferry"), tribes);
+	}
 }
 
 void TribeDescr::load_buildings(const LuaTable& table, Tribes& tribes) {
@@ -601,7 +601,8 @@ void TribeDescr::add_building(const std::string& buildingname, Tribes& tribes) {
 }
 
 void TribeDescr::add_worker(const std::string& workername,
-                            std::vector<DescriptionIndex>& workers_order_column, Tribes& tribes) {
+                            std::vector<DescriptionIndex>& workers_order_column,
+                            Tribes& tribes) {
 	try {
 		DescriptionIndex workerindex = tribes.load_worker(workername);
 		if (has_worker(workerindex)) {
@@ -668,43 +669,43 @@ DescriptionIndex TribeDescr::add_special_ware(const std::string& warename, Tribe
 }
 
 void TribeDescr::finalize_loading(Tribes& tribes) {
-    // Validate special units
-    if (builder_ == Widelands::INVALID_INDEX) {
-        throw GameDataError("special worker 'builder' not defined");
-    }
-    if (carrier_ == Widelands::INVALID_INDEX) {
-        throw GameDataError("special worker 'carrier' not defined");
-    }
-    if (carrier2_ == Widelands::INVALID_INDEX) {
-        throw GameDataError("special worker 'carrier2' not defined");
-    }
-    if (geologist_ == Widelands::INVALID_INDEX) {
-        throw GameDataError("special worker 'geologist' not defined");
-    }
-    if (soldier_ == Widelands::INVALID_INDEX) {
-        throw GameDataError("special worker 'soldier' not defined");
-    }
-    if (ferry_ == Widelands::INVALID_INDEX) {
-        throw GameDataError("special worker 'ferry' not defined");
-    }
-    if (port_ == Widelands::INVALID_INDEX) {
-        throw GameDataError("special building 'port' not defined");
-    }
-    if (ironore_ == Widelands::INVALID_INDEX) {
-        throw GameDataError("special ware 'ironore' not defined");
-    }
-    if (rawlog_ == Widelands::INVALID_INDEX) {
-        throw GameDataError("special ware 'rawlog' not defined");
-    }
-    if (refinedlog_ == Widelands::INVALID_INDEX) {
-        throw GameDataError("special ware 'refinedlog' not defined");
-    }
-    if (granite_ == Widelands::INVALID_INDEX) {
-        throw GameDataError("special ware 'granite' not defined");
-    }
-    if (ship_ == Widelands::INVALID_INDEX) {
-        throw GameDataError("special unit 'ship' not defined");
-    }
+	// Validate special units
+	if (builder_ == Widelands::INVALID_INDEX) {
+		throw GameDataError("special worker 'builder' not defined");
+	}
+	if (carrier_ == Widelands::INVALID_INDEX) {
+		throw GameDataError("special worker 'carrier' not defined");
+	}
+	if (carrier2_ == Widelands::INVALID_INDEX) {
+		throw GameDataError("special worker 'carrier2' not defined");
+	}
+	if (geologist_ == Widelands::INVALID_INDEX) {
+		throw GameDataError("special worker 'geologist' not defined");
+	}
+	if (soldier_ == Widelands::INVALID_INDEX) {
+		throw GameDataError("special worker 'soldier' not defined");
+	}
+	if (ferry_ == Widelands::INVALID_INDEX) {
+		throw GameDataError("special worker 'ferry' not defined");
+	}
+	if (port_ == Widelands::INVALID_INDEX) {
+		throw GameDataError("special building 'port' not defined");
+	}
+	if (ironore_ == Widelands::INVALID_INDEX) {
+		throw GameDataError("special ware 'ironore' not defined");
+	}
+	if (rawlog_ == Widelands::INVALID_INDEX) {
+		throw GameDataError("special ware 'rawlog' not defined");
+	}
+	if (refinedlog_ == Widelands::INVALID_INDEX) {
+		throw GameDataError("special ware 'refinedlog' not defined");
+	}
+	if (granite_ == Widelands::INVALID_INDEX) {
+		throw GameDataError("special ware 'granite' not defined");
+	}
+	if (ship_ == Widelands::INVALID_INDEX) {
+		throw GameDataError("special unit 'ship' not defined");
+	}
 
 	// Calculate building properties that have circular dependencies
 	for (DescriptionIndex i : buildings_) {
@@ -726,7 +727,7 @@ void TribeDescr::finalize_loading(Tribes& tribes) {
 				tribes.get_mutable_worker_descr(job.first)->add_employer(i);
 			}
 
-            // Check that all workarea overlap hints are valid
+			// Check that all workarea overlap hints are valid
 			for (const auto& pair : de->get_highlight_overlapping_workarea_for()) {
 				const DescriptionIndex di = safe_building_index(pair.first);
 				if (upcast(const ProductionSiteDescr, p, get_building_descr(di))) {

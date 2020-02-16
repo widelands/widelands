@@ -69,7 +69,8 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 		items_table = table.get_table("buildcost");
 		for (const std::string& key : items_table->keys<std::string>()) {
 			try {
-                // Check if ware/worker exists already and if not, try to load it. Will throw a GameDataError on failure.
+				// Check if ware/worker exists already and if not, try to load it. Will throw a
+				// GameDataError on failure.
 				tribes.try_load_ware_or_worker(key);
 				const int32_t value = items_table->get_int(key);
 				if (value < 1) {
