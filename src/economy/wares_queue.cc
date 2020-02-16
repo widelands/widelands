@@ -63,7 +63,7 @@ void WaresQueue::entered(
 #else
    DescriptionIndex, Worker*
 #endif
-) {
+   ) {
 
 	assert(worker == nullptr);  // WaresQueue can't hold workers
 	assert(filled_ < max_size_);

@@ -188,8 +188,8 @@ SDL_GLContext initialize(
 
 	// Show a basic SDL window with an error message, and log it too, then exit 1. Since font support
 	// does not exist for all languages, we show both the original and a localized text.
-	auto show_opengl_error_and_exit = [](const std::string& message,
-	                                     const std::string& localized_message) {
+	auto show_opengl_error_and_exit = [](
+	   const std::string& message, const std::string& localized_message) {
 		std::string display_message = "";
 		if (message != localized_message) {
 			display_message =

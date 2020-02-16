@@ -175,7 +175,7 @@ Player::Player(EditorGameBase& the_egbase,
 			   if (upcast(Building, building, note.pi))
 				   update_building_statistics(*building, note.ownership);
 		   }
-	   });
+		});
 
 	// Subscribe to NoteFieldTerrainChanged.
 	field_terrain_changed_subscriber_ = Notifications::subscribe<NoteFieldTerrainChanged>(
@@ -183,7 +183,7 @@ Player::Player(EditorGameBase& the_egbase,
 		   if (vision(note.map_index) > 1) {
 			   rediscover_node(egbase().map(), note.fc);
 		   }
-	   });
+		});
 
 	// Populating remaining_shipnames vector
 	for (const auto& shipname : tribe_descr.get_ship_names()) {
@@ -1503,10 +1503,9 @@ void Player::read_statistics(FileRead& fr,
 	size_t nr_entries = fr.unsigned_16();
 
 	// Stats are saved as a single string to reduce number of hard disk write operations
-	const auto parse_stats = [nr_entries](std::vector<std::vector<uint32_t>>* stats,
-	                                      const DescriptionIndex ware_index,
-	                                      const std::string& stats_string,
-	                                      const std::string& description) {
+	const auto parse_stats = [nr_entries](
+	   std::vector<std::vector<uint32_t>>* stats, const DescriptionIndex ware_index,
+	   const std::string& stats_string, const std::string& description) {
 		if (!stats_string.empty()) {
 			std::vector<std::string> stats_vector;
 			boost::split(stats_vector, stats_string, boost::is_any_of("|"));
@@ -1620,8 +1619,8 @@ void Player::write_remaining_shipnames(FileWrite& fw) const {
  */
 void Player::write_statistics(FileWrite& fw) const {
 	// Save stats as a single string to reduce number of hard disk write operations
-	const auto write_stats = [&fw](const std::vector<std::vector<uint32_t>>& stats,
-	                               const DescriptionIndex ware_index) {
+	const auto write_stats = [&fw](
+	   const std::vector<std::vector<uint32_t>>& stats, const DescriptionIndex ware_index) {
 		std::ostringstream oss("");
 		const int sizem = stats[ware_index].size() - 1;
 		if (sizem >= 0) {

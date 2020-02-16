@@ -216,7 +216,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 					      if (canceled.bootstrap == pd->expedition_bootstrap()) {
 						      update_expedition_button(true);
 					      }
-				      });
+					   });
 			}
 		} else if (upcast(const Widelands::ProductionSite, productionsite, building)) {
 			if (!is_a(Widelands::MilitarySite, productionsite)) {

@@ -395,9 +395,14 @@ void FieldActionWindow::add_buttons_auto() {
 				add_button(buildbox, "destroy_waterway", pic_remwaterway,
 				           &FieldActionWindow::act_removewaterway, _("Destroy a waterway"));
 		}
-	} else if (player_ && 1 < player_->vision(Widelands::Map::get_index(
-	                             node_, ibase().egbase().map().get_width())))
-		add_buttons_attack();
+	} else if (player_) {
+		if (upcast(Building, building, map_.get_immovable(node_))) {
+			if (1 < player_->vision(Widelands::Map::get_index(
+			           building->get_position(), ibase().egbase().map().get_width()))) {
+				add_buttons_attack();
+			}
+		}
+	}
 
 	//  Watch actions, only when in game (no use in editor).
 	if (dynamic_cast<const Game*>(&ibase().egbase())) {
@@ -485,8 +490,9 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 		}
 
 		if (building_descr->get_built_over_immovable() != Widelands::INVALID_INDEX &&
-		    !(node_.field->get_immovable() && node_.field->get_immovable()->has_attribute(
-		                                         building_descr->get_built_over_immovable()))) {
+		    !(node_.field->get_immovable() &&
+		      node_.field->get_immovable()->has_attribute(
+		         building_descr->get_built_over_immovable()))) {
 			continue;
 		}
 		// Figure out if we can build it here, and in which tab it belongs

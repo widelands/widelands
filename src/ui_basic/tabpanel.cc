@@ -222,7 +222,7 @@ void TabPanel::activate(const std::string& name) {
 /**
  * Return the tabs in order
  */
-const TabPanel::TabList& TabPanel::tabs() {
+const TabPanel::TabList& TabPanel::tabs() const {
 	return tabs_;
 }
 

@@ -715,9 +715,9 @@ void GameHost::run() {
 		// wait mode when there are no clients
 		check_hung_clients();
 		init_computer_players();
-		game.run(d->settings.savegame ? Widelands::Game::Loaded :
-		                                d->settings.scenario ? Widelands::Game::NewMPScenario :
-		                                                       Widelands::Game::NewNonScenario,
+		game.run(d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
+		                                Widelands::Game::NewMPScenario :
+		                                Widelands::Game::NewNonScenario,
 		         "", false, "nethost");
 
 		game.set_loader_ui(nullptr);
@@ -996,7 +996,7 @@ GameController::GameType GameHost::get_game_type() {
 	return GameController::GameType::kNetHost;
 }
 
-const GameSettings& GameHost::settings() {
+const GameSettings& GameHost::settings() const {
 	return d->settings;
 }
 

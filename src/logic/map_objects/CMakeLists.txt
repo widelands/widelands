@@ -148,7 +148,6 @@ wl_library(logic_map_objects
     map_io
     note_sound
     notifications
-    scripting_lua_interface
     scripting_lua_table
     sound_constants
     sound
