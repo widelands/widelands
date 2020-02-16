@@ -1,3 +1,3 @@
 return {
-   "custom_ware"
+   custom_ware = {},
 }

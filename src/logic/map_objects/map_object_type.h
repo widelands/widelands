@@ -72,10 +72,18 @@ std::string to_string(MapObjectType type);
 struct NoteMapObjectType {
 	CAN_BE_SENT_AS_NOTE(NoteId::MapObjectType)
 
-	const std::string name;
+    enum class LoadType {
+        // Load a registered map object if it's not being loaded yet
+        kObject,
+        // Load all registered map objects that have this attribute and that aren't being loaded yet
+        kAttribute
+    };
 
-	NoteMapObjectType(const std::string& init_name)
-	   : name(init_name) {
+	const std::string name;
+    const LoadType type;
+
+	NoteMapObjectType(const std::string& init_name, LoadType init_type)
+	   : name(init_name), type(init_type) {
 	}
 };
 

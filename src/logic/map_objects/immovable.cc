@@ -197,7 +197,8 @@ ImmovableDescr IMPLEMENTATION
  */
 ImmovableDescr::ImmovableDescr(const std::string& init_descname,
                                const LuaTable& table,
-                               MapObjectDescr::OwnerType input_type)
+                               MapObjectDescr::OwnerType input_type,
+                               const std::vector<std::string>& attributes)
    : MapObjectDescr(MapObjectType::IMMOVABLE, table.get_string("name"), init_descname, table),
      size_(BaseImmovable::NONE),
      owner_type_(input_type),
@@ -217,35 +218,26 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 		terrain_affinity_.reset(new TerrainAffinity(*table.get_table("terrain_affinity"), name()));
 	}
 
-	if (table.has_key("attributes")) {
-		std::vector<std::string> attributes =
-		   table.get_table("attributes")->array_entries<std::string>();
+	if (table.has_key("attributes") && input_type == Widelands::MapObjectDescr::OwnerType::kTribe) {
+        throw GameDataError("Tribe attributes need to be defined in 'register.lua' now");
+    }
+    if (!attributes.empty()) {
 		add_attributes(attributes, {MapObject::Attribute::RESI});
 
-		// All resource indicators must have a menu icon
 		for (const std::string& attribute : attributes) {
 			if (attribute == "resi") {
+                // All resource indicators must have a menu icon
 				if (icon_filename().empty()) {
 					throw GameDataError("Resource indicator %s has no menu icon", name().c_str());
 				}
-				break;
+			} else if (attribute == "tree") {
+                // Old trees get an extra species name so we can use it in help lists.
+                if (!table.has_key("species")) {
+                    throw wexception(
+                       "Immovable '%s' with type 'tree' must define a species", name().c_str());
+                }
+                species_ = table.get_string("species");
 			}
-		}
-
-		// Old trees get an extra species name so we can use it in help lists.
-		bool is_tree = false;
-		for (const std::string& attribute : attributes) {
-			if (attribute == "tree") {
-				is_tree = true;
-				break;
-			}
-		}
-		if (is_tree) {
-			if (!table.has_key("species")) {
-				throw wexception(
-				   "Immovable '%s' with type 'tree' must define a species", name().c_str());
-			}
-			species_ = table.get_string("species");
 		}
 	}
 
@@ -266,9 +258,9 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
  * Parse a world immovable from its init file.
  */
 ImmovableDescr::ImmovableDescr(const std::string& init_descname,
-                               const LuaTable& table,
+                               const LuaTable& table, const std::vector<std::string>& attributes,
                                const World& world)
-   : ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kWorld) {
+    : ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kWorld, attributes) {
 
 	int editor_category_index =
 	   world.editor_immovable_categories().get_index(table.get_string("editor_category"));
@@ -286,9 +278,9 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
  * /data/tribes/immovables/ashes/init.lua
  */
 ImmovableDescr::ImmovableDescr(const std::string& init_descname,
-                               const LuaTable& table,
+                               const LuaTable& table, const std::vector<std::string>& attributes,
                                Tribes& tribes)
-   : ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kTribe) {
+   : ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kTribe, attributes) {
 	if (table.has_key("buildcost")) {
 		buildcost_ = Buildcost(table.get_table("buildcost"), tribes);
 	}
@@ -825,7 +817,6 @@ void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) c
 }
 
 ImmovableProgram::ActTransform::ActTransform(char* parameters, ImmovableDescr& descr) {
-    // NOCOM test with barleyfield
 	try {
 		tribe = true;
 		bob = false;
@@ -869,7 +860,7 @@ ImmovableProgram::ActTransform::ActTransform(char* parameters, ImmovableDescr& d
         if (type_name == descr.name()) {
 			throw GameDataError("illegal transformation to the same type");
         }
-        Notifications::publish(NoteMapObjectType(type_name));
+        Notifications::publish(NoteMapObjectType(type_name, NoteMapObjectType::LoadType::kObject));
 	} catch (const WException& e) {
 		throw GameDataError("transform: %s", e.what());
 	}
@@ -893,7 +884,6 @@ void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) c
 }
 
 ImmovableProgram::ActGrow::ActGrow(char* parameters, ImmovableDescr& descr) {
-    // NOCOM test with berry bush
 	if (!descr.has_terrain_affinity()) {
 		throw GameDataError(
 		   "Immovable %s can 'grow', but has no terrain_affinity entry.", descr.name().c_str());
@@ -926,7 +916,7 @@ ImmovableProgram::ActGrow::ActGrow(char* parameters, ImmovableDescr& descr) {
 			}
 	end:
 		type_name = parameters;
-        Notifications::publish(NoteMapObjectType(type_name));
+        Notifications::publish(NoteMapObjectType(type_name, NoteMapObjectType::LoadType::kObject));
 	} catch (const WException& e) {
 		throw GameDataError("grow: %s", e.what());
 	}
@@ -976,7 +966,6 @@ void ImmovableProgram::ActRemove::execute(Game& game, Immovable& immovable) cons
 }
 
 ImmovableProgram::ActSeed::ActSeed(char* parameters, ImmovableDescr& descr) {
-    // NOCOM make a custom tribe immovable that seeds
 	try {
 		probability = 0;
 		for (char* p = parameters;;)
@@ -1015,7 +1004,7 @@ ImmovableProgram::ActSeed::ActSeed(char* parameters, ImmovableDescr& descr) {
 			}
 	end:
 		type_name = parameters;
-        Notifications::publish(NoteMapObjectType(type_name));
+        Notifications::publish(NoteMapObjectType(type_name, NoteMapObjectType::LoadType::kObject));
 	} catch (const WException& e) {
 		throw GameDataError("seed: %s", e.what());
 	}

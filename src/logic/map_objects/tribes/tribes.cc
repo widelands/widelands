@@ -41,9 +41,10 @@ Tribes::Tribes(LuaInterface* lua)
      scenario_tribes_(nullptr),
      lua_(lua) {
 
-    // Register tribe names
+    // Register tribe names. Tribes have no attributes.
+    std::vector<std::string> attributes;
 	for (const TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
-		register_object(tribeinfo.name, tribeinfo.script);
+        register_object(tribeinfo.name, tribeinfo.script, attributes);
 	}
 
 	// Walk tribes directory and register objects
@@ -51,11 +52,19 @@ Tribes::Tribes(LuaInterface* lua)
 
     map_objecttype_subscriber_ =
 	   Notifications::subscribe<NoteMapObjectType>([this](const NoteMapObjectType& note) {
-        if ((tribe_objects_being_loaded_.count(note.name) == 0)
-            && (registered_scenario_objects_.count(note.name) == 1 || registered_tribe_objects_.count(note.name) == 1)) {
-           load_object(note.name);
-        } else {
-            log("WARNING: Unknown tribe object type '%s'\n", note.name.c_str());
+        switch (note.type) {
+        case NoteMapObjectType::LoadType::kObject:
+            load_object_on_demand(note.name);
+            break;
+        case NoteMapObjectType::LoadType::kAttribute:
+            auto it = registered_attributes_.find(note.name);
+            if (it != registered_attributes_.end()) {
+                for (const std::string& objectname : it->second) {
+                    load_object_on_demand(objectname);
+                }
+                registered_attributes_.erase(it);
+            }
+            break;
         }
     });
 }
@@ -231,6 +240,7 @@ void Tribes::register_scenario_tribes(FileSystem* filesystem) {
 	// If the map is a scenario with custom tribe entites, load them.
 	if (filesystem->file_exists("scripting/tribes")) {
 		scenario_tribes_.reset(nullptr);
+        registered_scenario_objects_.clear();
 		if (filesystem->file_exists("scripting/tribes/init.lua")) {
 			scenario_tribes_ = lua_->run_script("map:scripting/tribes/init.lua");
 		}
@@ -250,14 +260,18 @@ void Tribes::register_directory(const std::string& dirname,
 			if (strcmp(filesystem->fs_filename(file.c_str()), "register.lua") == 0) {
 				if (is_scenario_tribe) {
 					std::unique_ptr<LuaTable> names_table = lua_->run_script("map:" + file);
-					for (const std::string& object_name : names_table->array_entries<std::string>()) {
+					for (const std::string& object_name : names_table->keys<std::string>()) {
+                        const std::vector<std::string> attributes = names_table->get_table(object_name)->array_entries<std::string>();
 						register_scenario_object(
-						   filesystem, object_name, filesystem->fs_dirname(file) + "init.lua");
+						   filesystem, object_name, filesystem->fs_dirname(file) + "init.lua", attributes);
+                        register_attributes(attributes, object_name);
 					}
 				} else {
 					std::unique_ptr<LuaTable> names_table = lua_->run_script(file);
-					for (const std::string& object_name : names_table->array_entries<std::string>()) {
-						register_object(object_name, filesystem->fs_dirname(file) + "init.lua");
+					for (const std::string& object_name : names_table->keys<std::string>()) {
+                        const std::vector<std::string> attributes = names_table->get_table(object_name)->array_entries<std::string>();
+						register_object(object_name, filesystem->fs_dirname(file) + "init.lua", attributes);
+                        register_attributes(attributes, object_name);
 					}
 				}
 			}
@@ -265,14 +279,14 @@ void Tribes::register_directory(const std::string& dirname,
 	}
 }
 
-void Tribes::register_object(const std::string& name, const std::string& script_path) {
+void Tribes::register_object(const std::string& name, const std::string& script_path, const std::vector<std::string>& attributes) {
 	if (registered_tribe_objects_.count(name) == 1) {
 		throw GameDataError("Tribes::register_object: Attempt to register object\n"
 		                    "   name: '%s'\n"
 		                    "   script: '%s'\n"
                             "but the object has already been registered to\n"
                             "   script: '%s'\n",
-		                    name.c_str(), script_path.c_str(), registered_tribe_objects_.at(name).c_str());
+		                    name.c_str(), script_path.c_str(), registered_tribe_objects_.at(name).script_path.c_str());
 	}
 	if (!g_fs->file_exists(script_path)) {
 		throw GameDataError("Tribes::register_object: Attempt to register object\n"
@@ -281,19 +295,20 @@ void Tribes::register_object(const std::string& name, const std::string& script_
 		                    "but the script file does not exist",
 		                    name.c_str(), script_path.c_str());
 	}
-	registered_tribe_objects_.insert(std::make_pair(name, script_path));
+
+    registered_tribe_objects_.insert(std::make_pair(name, RegisteredObject(script_path, attributes)));
 }
 
 void Tribes::register_scenario_object(FileSystem* filesystem,
                                       const std::string& name,
-                                      const std::string& script_path) {
+                                      const std::string& script_path, const std::vector<std::string>& attributes) {
 	if (registered_scenario_objects_.count(name) == 1) {
 		throw GameDataError("Tribes::register_object: Attempt to register scenario object\n"
 		                    "   name: '%s'\n"
 		                    "   script: '%s'\n"
 		                    "but the object has already been registered to\n"
                             "   script: '%s'\n",
-		                    name.c_str(), script_path.c_str(), registered_scenario_objects_.at(name).c_str());
+		                    name.c_str(), script_path.c_str(), registered_scenario_objects_.at(name).script_path.c_str());
 	}
 	if (!filesystem->file_exists(script_path)) {
 		throw GameDataError("Tribes::register_object: Attempt to register scenario object\n"
@@ -302,7 +317,8 @@ void Tribes::register_scenario_object(FileSystem* filesystem,
 		                    "but the script file does not exist",
 		                    name.c_str(), script_path.c_str());
 	}
-	registered_scenario_objects_.insert(std::make_pair(name, "map:" + script_path));
+
+	registered_scenario_objects_.insert(std::make_pair(name, RegisteredObject("map:" + script_path, attributes)));
 }
 
 void Tribes::add_tribe_object_type(const LuaTable& table, const World& world, MapObjectType type) {
@@ -311,6 +327,8 @@ void Tribes::add_tribe_object_type(const LuaTable& table, const World& world, Ma
 	const std::string& msgctxt = table.get_string("msgctxt");
 	const std::string& object_descname =
 	   pgettext_expr(msgctxt.c_str(), table.get_string("descname").c_str());
+
+    assert(registered_scenario_objects_.count(object_name) == 1 || registered_tribe_objects_.count(object_name) == 1);
 
 	// Register as in progress
 	tribe_objects_being_loaded_.insert(object_name);
@@ -329,9 +347,13 @@ void Tribes::add_tribe_object_type(const LuaTable& table, const World& world, Ma
 	case MapObjectType::FERRY:
 		workers_->add(new FerryDescr(object_descname, table, *this));
 		break;
-	case MapObjectType::IMMOVABLE:
-		immovables_->add(new ImmovableDescr(object_descname, table, *this));
-		break;
+	case MapObjectType::IMMOVABLE: {
+        const std::vector<std::string> attributes =
+                registered_scenario_objects_.count(object_name) == 1 ?
+                    registered_scenario_objects_.at(object_name).attributes :
+                    registered_tribe_objects_.at(object_name).attributes;
+		immovables_->add(new ImmovableDescr(object_descname, table, attributes, *this));
+    } break;
 	case MapObjectType::MARKET:
 		buildings_->add(new MarketDescr(object_descname, table, *this));
 		break;
@@ -412,9 +434,9 @@ void Tribes::load_object(const std::string& object_name) {
 
 	// Load it - scenario objects take precedence
 	if (registered_scenario_objects_.count(object_name) == 1) {
-		object_script = registered_scenario_objects_.at(object_name);
+		object_script = registered_scenario_objects_.at(object_name).script_path;
 	} else if (registered_tribe_objects_.count(object_name) == 1) {
-		object_script = registered_tribe_objects_.at(object_name);
+		object_script = registered_tribe_objects_.at(object_name).script_path;
 	} else {
 		throw GameDataError(
 		   "Tribes::load_object: Object '%s' was not registered", object_name.c_str());
@@ -429,6 +451,25 @@ void Tribes::load_object(const std::string& object_name) {
 	lua_->run_script(object_script);
 	tribe_objects_being_loaded_.erase(tribe_objects_being_loaded_.find(object_script));
     // NOCOM pull out into separate class "MapObjectTypeRegistry"
+}
+
+void Tribes::load_object_on_demand(const std::string& object_name) {
+    if ((tribe_objects_being_loaded_.count(object_name) == 0)
+        && (registered_scenario_objects_.count(object_name) == 1 || registered_tribe_objects_.count(object_name) == 1)) {
+       load_object(object_name);
+    } else {
+        log("WARNING: Unknown tribe object type '%s'\n", object_name.c_str());
+    }
+}
+
+void Tribes::register_attributes(const std::vector<std::string>& attributes, const std::string& object_name) {
+    for (const std::string& attribute : attributes) {
+        if (registered_attributes_.count(attribute) == 1) {
+            registered_attributes_.at(attribute).insert(object_name);
+        } else {
+            registered_attributes_.insert(std::make_pair(attribute, std::set<std::string>{object_name}));
+        }
+    }
 }
 
 DescriptionIndex Tribes::load_tribe(const std::string& tribename) {
@@ -488,7 +529,7 @@ DescriptionIndex Tribes::load_worker(const std::string& workername) {
 }
 
 void Tribes::try_load_ware_or_worker(const std::string& objectname) {
-    Notifications::publish(NoteMapObjectType(objectname));
+    Notifications::publish(NoteMapObjectType(objectname, NoteMapObjectType::LoadType::kObject));
     // Check if ware/worker exists already and if not, try to load it.
     if (!ware_exists(ware_index(objectname)) &&
         !worker_exists(worker_index(objectname))) {

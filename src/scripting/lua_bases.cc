@@ -801,7 +801,7 @@ int LuaPlayerBase::place_building(lua_State* L) {
 	Player& player = get(L, egbase);
 
     // If the building belongs to a tribe that no player is playing, we need to load it now
-    Notifications::publish(NoteMapObjectType(name));
+    Notifications::publish(NoteMapObjectType(name, NoteMapObjectType::LoadType::kObject));
 
 	const DescriptionIndex building_index = tribes.building_index(name);
 

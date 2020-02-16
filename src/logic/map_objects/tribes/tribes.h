@@ -131,14 +131,19 @@ private:
 	void
 	register_directory(const std::string& dirname, FileSystem* filesystem, bool is_scenario_tribe);
 	/// Map a map object's name to its init script so that we can load it when we want it.
-	void register_object(const std::string& name, const std::string& script_path);
+	void register_object(const std::string& name, const std::string& script_path, const std::vector<std::string>& attributes);
 	/// Map a scenario map object's name to its init script so that we can load it when we want it.
 	void register_scenario_object(FileSystem* filesystem,
 	                              const std::string& name,
-	                              const std::string& script_path);
+	                              const std::string& script_path, const std::vector<std::string>& attributes);
 	/// Load the map object type for the given 'object_name' that has been registered previously with
 	/// 'register_object'
 	void load_object(const std::string& object_name);
+
+    /// Load object on demand via notification
+    void load_object_on_demand(const std::string& object_name);
+    /// For loading all map objects with a given attribute on demand
+    void register_attributes(const std::vector<std::string>& attributes, const std::string& object_name);
 
 	std::unique_ptr<DescriptionMaintainer<BuildingDescr>> buildings_;
 	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> immovables_;
@@ -150,11 +155,21 @@ private:
 
 	uint32_t largest_workarea_;
 
+    struct RegisteredObject {
+        explicit RegisteredObject(const std::string& init_script_path,
+                                  const std::vector<std::string>& init_attributes)
+            : script_path(init_script_path), attributes(init_attributes) {}
+        const std::string script_path;
+        const std::vector<std::string> attributes;
+    };
+
 	/// A list of all available map object types as <name, init script path>
-	std::map<std::string, std::string> registered_tribe_objects_;
+	std::map<std::string, RegisteredObject> registered_tribe_objects_;
 	/// A list of all extra or replacement map object types used by a scenario as <name, init script
 	/// path>
-	std::map<std::string, std::string> registered_scenario_objects_;
+	std::map<std::string, RegisteredObject> registered_scenario_objects_;
+    /// Maps attributes to map object types, in case we need them dynamically
+    std::map<std::string, std::set<std::string>> registered_attributes_;
 	/// A list of object types currently being loaded, to avoid circular dependencies
 	std::set<std::string> tribe_objects_being_loaded_;
 	/// List of the tribe objects that have already been loaded
