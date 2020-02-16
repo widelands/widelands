@@ -71,7 +71,6 @@
 #include "wlapplication_options.h"
 #include "wui/interactive_base.h"
 
-
 EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
    : InteractiveBase(e, get_config_section()),
      need_save_(false),
@@ -432,6 +431,7 @@ void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
 
 void EditorInteractive::load(const std::string& filename) {
 	assert(filename.size());
+	assert(egbase().has_loader_ui());
 
 	Widelands::Map* map = egbase().mutable_map();
 
@@ -903,6 +903,8 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 			eia.egbase().lua().run_script(script_to_run);
 		}
 	}
+
+	egbase.remove_loader_ui();
 	eia.run<UI::Panel::Returncodes>();
 
 	egbase.cleanup_objects();

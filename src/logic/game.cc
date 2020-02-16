@@ -208,17 +208,16 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	set_write_replay(false);
 
 	std::unique_ptr<MapLoader> maploader(mutable_map()->get_correct_loader(mapname));
-	if (!maploader)
+	if (!maploader) {
 		throw wexception("could not load \"%s\"", mapname.c_str());
-	assert(!loader_ui_);
-	create_loader_ui({});
+	}
+
+	create_loader_ui({"general_game"});
 
 	step_loader_ui(_("Preloading map…"));
 	maploader->preload_map(true);
-	std::string const background = map().get_background();
-	if (!background.empty()) {
-		loader_ui_->set_background(background);
-	}
+	change_loader_ui_background(map().get_background());
+
 	step_loader_ui(_("Loading world…"));
 	world();
 	step_loader_ui(_("Loading tribes…"));
@@ -268,13 +267,14 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
  *
  */
 void Game::init_newgame(const GameSettings& settings) {
-	assert(loader_ui_);
+	assert(has_loader_ui());
 
 	step_loader_ui(_("Preloading map…"));
 
 	std::unique_ptr<MapLoader> maploader(mutable_map()->get_correct_loader(settings.mapfilename));
 	assert(maploader != nullptr);
 	maploader->preload_map(settings.scenario);
+	change_loader_ui_background(map().get_background());
 
 	step_loader_ui(_("Loading world…"));
 	world();
@@ -282,10 +282,7 @@ void Game::init_newgame(const GameSettings& settings) {
 	step_loader_ui(_("Loading tribes…"));
 	tribes();
 
-	std::string const background = map().get_background();
-	if (!background.empty()) {
-		loader_ui_->set_background(background);
-	}
+	step_loader_ui(_("Creating players…"));
 
 	std::vector<PlayerSettings> shared;
 	std::vector<uint8_t> shared_num;
@@ -356,7 +353,7 @@ void Game::init_newgame(const GameSettings& settings) {
  * run<Returncode>() takes care about this difference.
  */
 void Game::init_savegame(const GameSettings& settings) {
-	assert(loader_ui_);
+	assert(has_loader_ui());
 
 	step_loader_ui(_("Preloading map…"));
 
@@ -364,13 +361,14 @@ void Game::init_savegame(const GameSettings& settings) {
 		GameLoader gl(settings.mapfilename, *this);
 		Widelands::GamePreloadPacket gpdp;
 		gl.preload_game(gpdp);
+		change_loader_ui_background(gpdp.get_background());
+
 		win_condition_displayname_ = gpdp.get_win_condition();
 		if (win_condition_displayname_ == "Scenario") {
 			// Replays can't handle scenarios
 			set_write_replay(false);
 		}
-		std::string background(gpdp.get_background());
-		loader_ui_->set_background(background);
+
 		step_loader_ui(_("Loading…"));
 		gl.load_game(settings.multiplayer);
 		// Players might have selected a different AI type
@@ -386,7 +384,6 @@ void Game::init_savegame(const GameSettings& settings) {
 }
 
 bool Game::run_load_game(const std::string& filename, const std::string& script_to_run) {
-	assert(!loader_ui_);
 	create_loader_ui({"general_game", "singleplayer"});
 	int8_t player_nr;
 
@@ -397,13 +394,14 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 
 		Widelands::GamePreloadPacket gpdp;
 		gl.preload_game(gpdp);
-		std::string background(gpdp.get_background());
+		change_loader_ui_background(gpdp.get_background());
+
 		win_condition_displayname_ = gpdp.get_win_condition();
 		if (win_condition_displayname_ == "Scenario") {
 			// Replays can't handle scenarios
 			set_write_replay(false);
 		}
-		loader_ui_->set_background(background);
+
 		player_nr = gpdp.get_player_nr();
 		set_ibase(new InteractivePlayer(*this, get_config_section(), player_nr, false));
 
@@ -460,7 +458,7 @@ bool Game::run(StartGameType const start_game_type,
                const std::string& script_to_run,
                bool replay,
                const std::string& prefix_for_replays) {
-	assert(loader_ui_);
+	assert(has_loader_ui());
 
 	replay_ = replay;
 	postload();
@@ -557,6 +555,8 @@ bool Game::run(StartGameType const start_game_type,
 	g_sh->change_music("ingame", 1000);
 
 	state_ = gs_running;
+
+	remove_loader_ui();
 
 	get_ibase()->run<UI::Panel::Returncodes>();
 
