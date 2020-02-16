@@ -226,19 +226,15 @@ int LuaEditorGameBase::get_tribe_description(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Wrong number of arguments");
 	}
-	EditorGameBase& egbase = get_egbase(L);
-    const Tribes& tribes = get_egbase(L).tribes();
 
 	const std::string tribe_name = luaL_checkstring(L, 2);
 	if (!Widelands::tribe_exists(tribe_name)) {
 		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
 	}
+    Notifications::publish(NoteMapObjectType(tribe_name, NoteMapObjectType::LoadType::kObject));
 
-    Widelands::DescriptionIndex idx = egbase.tribes().tribe_index(tribe_name);
-    if (idx == Widelands::INVALID_INDEX) {
-        idx = egbase.mutable_tribes()->load_tribe(tribe_name);
-    }
-	return to_lua<LuaMaps::LuaTribeDescription>(L, new LuaMaps::LuaTribeDescription(tribes.get_tribe_descr(idx)));
+    const Tribes& tribes = get_egbase(L).tribes();
+	return to_lua<LuaMaps::LuaTribeDescription>(L, new LuaMaps::LuaTribeDescription(tribes.get_tribe_descr(tribes.tribe_index(tribe_name))));
 }
 
 /* RST

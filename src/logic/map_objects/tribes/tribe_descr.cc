@@ -115,50 +115,11 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 		log("%ums\n", timer.ms_since_last_query());
 
 		log("┃    Finalizing: ");
-		finalize_loading(tribes);
-		log("%ums\n", timer.ms_since_last_query());
-
-		if (table.has_key<std::string>("toolbar")) {
+        if (table.has_key<std::string>("toolbar")) {
 			toolbar_image_set_.reset(new ToolbarImageset(*table.get_table("toolbar")));
 		}
-
-		// Validate special units
-		if (builder_ == Widelands::INVALID_INDEX) {
-			throw GameDataError("special worker 'builder' not defined");
-		}
-		if (carrier_ == Widelands::INVALID_INDEX) {
-			throw GameDataError("special worker 'carrier' not defined");
-		}
-		if (carrier2_ == Widelands::INVALID_INDEX) {
-			throw GameDataError("special worker 'carrier2' not defined");
-		}
-		if (geologist_ == Widelands::INVALID_INDEX) {
-			throw GameDataError("special worker 'geologist' not defined");
-		}
-		if (soldier_ == Widelands::INVALID_INDEX) {
-			throw GameDataError("special worker 'soldier' not defined");
-		}
-		if (ferry_ == Widelands::INVALID_INDEX) {
-			throw GameDataError("special worker 'ferry' not defined");
-		}
-		if (port_ == Widelands::INVALID_INDEX) {
-			throw GameDataError("special building 'port' not defined");
-		}
-		if (ironore_ == Widelands::INVALID_INDEX) {
-			throw GameDataError("special ware 'ironore' not defined");
-		}
-		if (rawlog_ == Widelands::INVALID_INDEX) {
-			throw GameDataError("special ware 'rawlog' not defined");
-		}
-		if (refinedlog_ == Widelands::INVALID_INDEX) {
-			throw GameDataError("special ware 'refinedlog' not defined");
-		}
-		if (granite_ == Widelands::INVALID_INDEX) {
-			throw GameDataError("special ware 'granite' not defined");
-		}
-		if (ship_ == Widelands::INVALID_INDEX) {
-			throw GameDataError("special unit 'ship' not defined");
-		}
+        finalize_loading(tribes);
+		log("%ums\n", timer.ms_since_last_query());
 	} catch (const GameDataError& e) {
 		throw GameDataError("tribe %s: %s", name_.c_str(), e.what());
 	}
@@ -707,9 +668,43 @@ DescriptionIndex TribeDescr::add_special_ware(const std::string& warename, Tribe
 }
 
 void TribeDescr::finalize_loading(Tribes& tribes) {
-	if (!has_building(port_)) {
-		throw GameDataError("no special 'port' building");
-	}
+    // Validate special units
+    if (builder_ == Widelands::INVALID_INDEX) {
+        throw GameDataError("special worker 'builder' not defined");
+    }
+    if (carrier_ == Widelands::INVALID_INDEX) {
+        throw GameDataError("special worker 'carrier' not defined");
+    }
+    if (carrier2_ == Widelands::INVALID_INDEX) {
+        throw GameDataError("special worker 'carrier2' not defined");
+    }
+    if (geologist_ == Widelands::INVALID_INDEX) {
+        throw GameDataError("special worker 'geologist' not defined");
+    }
+    if (soldier_ == Widelands::INVALID_INDEX) {
+        throw GameDataError("special worker 'soldier' not defined");
+    }
+    if (ferry_ == Widelands::INVALID_INDEX) {
+        throw GameDataError("special worker 'ferry' not defined");
+    }
+    if (port_ == Widelands::INVALID_INDEX) {
+        throw GameDataError("special building 'port' not defined");
+    }
+    if (ironore_ == Widelands::INVALID_INDEX) {
+        throw GameDataError("special ware 'ironore' not defined");
+    }
+    if (rawlog_ == Widelands::INVALID_INDEX) {
+        throw GameDataError("special ware 'rawlog' not defined");
+    }
+    if (refinedlog_ == Widelands::INVALID_INDEX) {
+        throw GameDataError("special ware 'refinedlog' not defined");
+    }
+    if (granite_ == Widelands::INVALID_INDEX) {
+        throw GameDataError("special ware 'granite' not defined");
+    }
+    if (ship_ == Widelands::INVALID_INDEX) {
+        throw GameDataError("special unit 'ship' not defined");
+    }
 
 	// Calculate building properties that have circular dependencies
 	for (DescriptionIndex i : buildings_) {
@@ -729,6 +724,22 @@ void TribeDescr::finalize_loading(Tribes& tribes) {
 			for (const auto& job : de->working_positions()) {
 				assert(has_worker(job.first));
 				tribes.get_mutable_worker_descr(job.first)->add_employer(i);
+			}
+
+            // Check that all workarea overlap hints are valid
+			for (const auto& pair : de->get_highlight_overlapping_workarea_for()) {
+				const DescriptionIndex di = safe_building_index(pair.first);
+				if (upcast(const ProductionSiteDescr, p, get_building_descr(di))) {
+					if (!p->workarea_info().empty()) {
+						continue;
+					}
+					throw GameDataError("Productionsite %s will inform about conflicting building %s "
+					                    "which doesn’t have a workarea",
+					                    de->name().c_str(), pair.first.c_str());
+				}
+				throw GameDataError("Productionsite %s will inform about conflicting building %s which "
+				                    "is not a productionsite",
+				                    de->name().c_str(), pair.first.c_str());
 			}
 		}
 	}

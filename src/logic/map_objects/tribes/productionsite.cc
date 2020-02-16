@@ -123,7 +123,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 	if (table.has_key("outputs")) {
 		for (const std::string& output : table.get_table("outputs")->array_entries<std::string>()) {
 			try {
-                // Check if ware/worker exists already and if not, try to load it. WIll throw a GameDataError on failure.
+                // Check if ware/worker exists already and if not, try to load it. Will throw a GameDataError on failure.
 				tribes.try_load_ware_or_worker(output);
 				DescriptionIndex idx = tribes.ware_index(output);
 				if (tribes.ware_exists(idx)) {

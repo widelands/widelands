@@ -690,12 +690,9 @@ const Widelands::TribeDescr& get_tribe_descr(lua_State* L, const std::string& tr
 	if (!Widelands::tribe_exists(tribename)) {
 		report_error(L, "Tribe '%s' does not exist", tribename.c_str());
 	}
+    Notifications::publish(NoteMapObjectType(tribename, NoteMapObjectType::LoadType::kObject));
 	const Tribes& tribes = get_egbase(L).tribes();
-    Widelands::DescriptionIndex idx = tribes.tribe_index(tribename);
-    if (idx == Widelands::INVALID_INDEX) {
-        idx = get_egbase(L).mutable_tribes()->load_tribe(tribename);
-    }
-	return *tribes.get_tribe_descr(idx);
+	return *tribes.get_tribe_descr(tribes.tribe_index(tribename));
 }
 
 }  // namespace
@@ -1566,14 +1563,9 @@ void LuaTribeDescription::__persist(lua_State* L) {
 void LuaTribeDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
+	Notifications::publish(NoteMapObjectType(name, NoteMapObjectType::LoadType::kObject));
 	const Tribes& tribes = get_egbase(L).tribes();
-	DescriptionIndex idx = tribes.tribe_index(name);
-
-    if (idx == Widelands::INVALID_INDEX) {
-        idx = get_egbase(L).mutable_tribes()->load_tribe(name);
-    }
-
-	set_description_pointer(tribes.get_tribe_descr(idx));
+	set_description_pointer(tribes.get_tribe_descr(tribes.tribe_index(name)));
 }
 
 /*
