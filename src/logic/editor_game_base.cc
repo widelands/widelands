@@ -332,24 +332,29 @@ void EditorGameBase::load_graphics() {
 	tribes_->load_graphics();
 }
 
-UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::vector<std::string>& tipstexts, bool show_game_tips,
+UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::vector<std::string>& tipstexts,
+                                                     bool show_game_tips,
                                                      const std::string& background) {
 	assert(!has_loader_ui());
 	loader_ui_.reset(new UI::ProgressWindow(background));
-    registered_game_tips_ = tipstexts;
-    if (show_game_tips) {
-        game_tips_.reset(registered_game_tips_.empty() ? nullptr : new GameTips(*loader_ui_, registered_game_tips_));
-    }
+	registered_game_tips_ = tipstexts;
+	if (show_game_tips) {
+		game_tips_.reset(registered_game_tips_.empty() ?
+		                    nullptr :
+		                    new GameTips(*loader_ui_, registered_game_tips_));
+	}
 	return *loader_ui_.get();
 }
 void EditorGameBase::change_loader_ui_background(const std::string& background) {
 	assert(has_loader_ui());
-    assert(game_tips_ == nullptr);
-    if (background.empty()) {
-        game_tips_.reset(registered_game_tips_.empty() ? nullptr : new GameTips(*loader_ui_, registered_game_tips_));
-    } else {
-        loader_ui_->set_background(background);
-    }
+	assert(game_tips_ == nullptr);
+	if (background.empty()) {
+		game_tips_.reset(registered_game_tips_.empty() ?
+		                    nullptr :
+		                    new GameTips(*loader_ui_, registered_game_tips_));
+	} else {
+		loader_ui_->set_background(background);
+	}
 }
 void EditorGameBase::step_loader_ui(const std::string& text) const {
 	if (loader_ui_ != nullptr) {
@@ -360,7 +365,7 @@ void EditorGameBase::remove_loader_ui() {
 	assert(loader_ui_ != nullptr);
 	loader_ui_.reset(nullptr);
 	game_tips_.reset(nullptr);
-    registered_game_tips_.clear();
+	registered_game_tips_.clear();
 }
 
 /**
