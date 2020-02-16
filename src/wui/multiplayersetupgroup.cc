@@ -553,7 +553,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 				}
 				if (matches_tags) {
 					init_dropdown_.add(_(addme.descname), i, nullptr,
-						               i == player_setting.initialization_index, _(addme.tooltip));
+					                   i == player_setting.initialization_index, _(addme.tooltip));
 				}
 			}
 		}

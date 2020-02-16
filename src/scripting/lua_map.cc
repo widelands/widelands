@@ -6015,20 +6015,23 @@ int LuaShip::make_expedition(lua_State* L) {
 	assert(game);
 	Ship* ship = get(L, *game);
 	assert(ship);
-	if (ship->get_ship_state() != Widelands::Ship::ShipStates::kTransport || ship->get_nritems() > 0) {
+	if (ship->get_ship_state() != Widelands::Ship::ShipStates::kTransport ||
+	    ship->get_nritems() > 0) {
 		report_error(L, "Ship.make_expedition can be used only on transport ships!");
 	}
 
 	const Widelands::TribeDescr& tribe = ship->owner().tribe();
 	for (const auto& pair : tribe.get_building_descr(tribe.port())->buildcost()) {
 		for (size_t i = pair.second; i > 0; --i) {
-			Widelands::WareInstance& w = *new Widelands::WareInstance(pair.first, tribe.get_ware_descr(pair.first));
+			Widelands::WareInstance& w =
+			   *new Widelands::WareInstance(pair.first, tribe.get_ware_descr(pair.first));
 			w.init(*game);
 			ship->add_item(*game, Widelands::ShippingItem(w));
 		}
 	}
-	ship->add_item(*game, Widelands::ShippingItem(tribe.get_worker_descr(tribe.builder())->create(*game,
-			ship->get_owner(), nullptr, ship->get_position())));
+	ship->add_item(*game, Widelands::ShippingItem(
+	                         tribe.get_worker_descr(tribe.builder())
+	                            ->create(*game, ship->get_owner(), nullptr, ship->get_position())));
 	if (lua_gettop(L) > 1) {
 		luaL_checktype(L, 2, LUA_TTABLE);
 		lua_pushnil(L);
@@ -6039,7 +6042,8 @@ int LuaShip::make_expedition(lua_State* L) {
 			Widelands::DescriptionIndex index = game->tribes().ware_index(what);
 			if (tribe.has_ware(index)) {
 				while (amount > 0) {
-					Widelands::WareInstance& w = *new Widelands::WareInstance(index, tribe.get_ware_descr(index));
+					Widelands::WareInstance& w =
+					   *new Widelands::WareInstance(index, tribe.get_ware_descr(index));
 					w.init(*game);
 					ship->add_item(*game, Widelands::ShippingItem(w));
 					--amount;
@@ -6048,8 +6052,9 @@ int LuaShip::make_expedition(lua_State* L) {
 				index = tribe.worker_index(what);
 				if (tribe.has_worker(index)) {
 					while (amount > 0) {
-						ship->add_item(*game, Widelands::ShippingItem(tribe.get_worker_descr(index)->create(*game,
-								ship->get_owner(), nullptr, ship->get_position())));
+						ship->add_item(
+						   *game, Widelands::ShippingItem(tribe.get_worker_descr(index)->create(
+						             *game, ship->get_owner(), nullptr, ship->get_position())));
 						--amount;
 					}
 				} else {

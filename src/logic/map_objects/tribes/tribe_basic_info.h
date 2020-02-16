@@ -40,7 +40,10 @@ struct TribeBasicInfo {
 		               const std::string& init_descname,
 		               const std::string& init_tooltip,
 		               const std::set<std::string>& tags)
-		   : script(init_script), descname(init_descname), tooltip(init_tooltip), required_map_tags(tags) {
+		   : script(init_script),
+		     descname(init_descname),
+		     tooltip(init_tooltip),
+		     required_map_tags(tags) {
 		}
 		std::string script;
 		std::string descname;

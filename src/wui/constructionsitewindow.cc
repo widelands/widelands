@@ -66,7 +66,7 @@ ConstructionSiteWindow::FakeWaresDisplay::FakeWaresDisplay(UI::Panel* parent,
 }
 
 ConstructionSiteWindow::FakeWaresDisplay::~FakeWaresDisplay() {
-	warelist_->clear(); // Avoid annoying warnings
+	warelist_->clear();  // Avoid annoying warnings
 }
 
 void ConstructionSiteWindow::FakeWaresDisplay::draw_ware(RenderTarget& dst,

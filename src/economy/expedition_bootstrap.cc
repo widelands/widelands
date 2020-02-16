@@ -123,7 +123,10 @@ void ExpeditionBootstrap::cancel(Game& game) {
 	Notifications::publish(NoteExpeditionCanceled(this));
 }
 
-void ExpeditionBootstrap::demand_additional_item(Game& game, WareWorker ww, DescriptionIndex di, bool add) {
+void ExpeditionBootstrap::demand_additional_item(Game& game,
+                                                 WareWorker ww,
+                                                 DescriptionIndex di,
+                                                 bool add) {
 	if (add) {
 		InputQueue* wq;
 		if (ww == wwWARE) {
@@ -165,19 +168,22 @@ void ExpeditionBootstrap::cleanup(EditorGameBase& /* egbase */) {
 	queues_.clear();
 }
 
-InputQueue& ExpeditionBootstrap::inputqueue(DescriptionIndex index, WareWorker type, bool additional) const {
+InputQueue&
+ExpeditionBootstrap::inputqueue(DescriptionIndex index, WareWorker type, bool additional) const {
 	for (auto& iq : queues_) {
-		if (iq.first->get_index() == index && iq.first->get_type() == type && iq.second == additional) {
+		if (iq.first->get_index() == index && iq.first->get_type() == type &&
+		    iq.second == additional) {
 			return *iq.first;
 		}
 	}
 	NEVER_HERE();
 }
 
-InputQueue& ExpeditionBootstrap::first_empty_inputqueue(DescriptionIndex index, WareWorker type) const {
+InputQueue& ExpeditionBootstrap::first_empty_inputqueue(DescriptionIndex index,
+                                                        WareWorker type) const {
 	for (auto& iq : queues_) {
 		if (iq.first->get_index() == index && iq.first->get_type() == type &&
-				iq.first->get_filled() < iq.first->get_max_fill()) {
+		    iq.first->get_filled() < iq.first->get_max_fill()) {
 			return *iq.first;
 		}
 	}

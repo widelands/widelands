@@ -515,7 +515,6 @@ void ConstructionSite::add_additional_worker(Game& game, Worker& w) {
 	w.start_task_idle(game, 0, -1);
 }
 
-
 /*
 ===============
 Remember the ware on the flag. The worker will be sent from get_building_work().

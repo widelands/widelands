@@ -300,7 +300,12 @@ private:
 struct CmdExpeditionConfig : public PlayerCommand {
 	CmdExpeditionConfig() : PlayerCommand() {
 	}  // For savegame loading
-	CmdExpeditionConfig(uint32_t const t, PlayerNumber const p, PortDock& pd, WareWorker ww, DescriptionIndex di, bool a)
+	CmdExpeditionConfig(uint32_t const t,
+	                    PlayerNumber const p,
+	                    PortDock& pd,
+	                    WareWorker ww,
+	                    DescriptionIndex di,
+	                    bool a)
 	   : PlayerCommand(t, p), serial(pd.serial()), type(ww), index(di), add(a) {
 	}
 

@@ -659,7 +659,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 				worker->set_position(game, cs->get_position());
 				worker->reset_tasks(game);
 				if (cs->get_builder_request() &&
-						worker->descr().worker_index() == worker->get_owner()->tribe().builder()) {
+				    worker->descr().worker_index() == worker->get_owner()->tribe().builder()) {
 					PartiallyFinishedBuilding::request_builder_callback(
 					   game, *cs->get_builder_request(), worker->descr().worker_index(), worker, *cs);
 				} else {
@@ -675,8 +675,8 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			send_signal(game, "cancel_expedition");
 		}
 
-		if (items_.empty() || !baim) {  // we are done, either way
-			ship_state_ = ShipStates::kTransport;            // That's it, expedition finished
+		if (items_.empty() || !baim) {            // we are done, either way
+			ship_state_ = ShipStates::kTransport;  // That's it, expedition finished
 
 			// Bring us back into a fleet and a economy.
 			init_fleet(game);

@@ -118,7 +118,8 @@ private:
 	Economy* ware_economy_;
 	Economy* worker_economy_;
 
-	std::vector<std::pair<std::unique_ptr<InputQueue>, bool>> queues_; // The bool indicates whether this queue can be removed
+	std::vector<std::pair<std::unique_ptr<InputQueue>, bool>>
+	   queues_;  // The bool indicates whether this queue can be removed
 
 	DISALLOW_COPY_AND_ASSIGN(ExpeditionBootstrap);
 };

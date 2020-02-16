@@ -315,7 +315,7 @@ void PlayerDescriptionGroup::toggle_playerinit() {
 		if (tribeinfo.name == player.tribe) {
 			const size_t nr_inits = tribeinfo.initializations.size();
 			for (size_t i = (player.initialization_index + 1) % nr_inits;
-					i != player.initialization_index; i = (i + 1) % nr_inits) {
+			     i != player.initialization_index; i = (i + 1) % nr_inits) {
 				bool matches_tags = true;
 				for (const std::string& tag : tribeinfo.initializations[i].required_map_tags) {
 					if (!tags.count(tag)) {

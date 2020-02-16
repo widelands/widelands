@@ -867,8 +867,12 @@ void Game::send_player_cancel_expedition_ship(Ship& ship) {
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }
 
-void Game::send_player_expedition_config(PortDock& pd, WareWorker ww, DescriptionIndex di, bool add) {
-	send_player_command(new CmdExpeditionConfig(get_gametime(), pd.get_owner()->player_number(), pd, ww, di, add));
+void Game::send_player_expedition_config(PortDock& pd,
+                                         WareWorker ww,
+                                         DescriptionIndex di,
+                                         bool add) {
+	send_player_command(
+	   new CmdExpeditionConfig(get_gametime(), pd.get_owner()->player_number(), pd, ww, di, add));
 }
 
 void Game::send_player_propose_trade(const Trade& trade) {
