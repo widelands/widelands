@@ -167,7 +167,7 @@ namespace {
 	if (!(file).end_of_file())                                                                      \
 		throw GameDataError(                                                                         \
 		   "MapPlayersViewPacket::read: player %u:"                                                  \
-		   "Found %" PRIuS " trailing bytes in \"%s\"",                                                     \
+		   "Found %" PRIuS " trailing bytes in \"%s\"",                                              \
 		   plnum, static_cast<long unsigned int>((file).get_size() - (file).get_pos()), filename);
 
 // Errors for the Read* functions.

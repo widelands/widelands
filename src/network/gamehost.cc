@@ -2307,7 +2307,8 @@ void GameHost::handle_file_part(Client& client, RecvPacket& r) {
 		return;  // Surely the file was changed, so we cancel here.
 	}
 	if (part >= file_->parts.size()) {
-		log("[Host]: Warning: Client reports to have received file part %u but we only have %" PRIuS "\n",
+		log("[Host]: Warning: Client reports to have received file part %u but we only have %" PRIuS
+		    "\n",
 		    part, file_->parts.size());
 		return;
 	}
