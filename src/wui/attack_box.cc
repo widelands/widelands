@@ -47,7 +47,6 @@ AttackBox::AttackBox(UI::Panel* parent,
 
 std::vector<Widelands::Soldier*> AttackBox::get_max_attackers() {
 	assert(player_);
-
 	if (upcast(Building, building, map_.get_immovable(*node_coordinates_))) {
 		if (player_->vision(map_.get_index(building->get_position(), map_.get_width())) > 1) {
 			std::vector<Widelands::Soldier*> v;
@@ -262,6 +261,8 @@ void AttackBox::init() {
 
 	soldiers_slider_->set_enabled(max_attackers > 0);
 	more_soldiers_->set_enabled(max_attackers > 0);
+	// Update the list of soldiers now to avoid a flickering window in the next tick
+	update_attack(false);
 }
 
 void AttackBox::send_less_soldiers() {
