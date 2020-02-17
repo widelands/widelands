@@ -876,6 +876,9 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	{
 		egbase.create_loader_ui({"editor"}, "images/loadscreens/editor.jpg");
 
+		egbase.step_loader_ui(_("Loading tribes…"));
+		egbase.tribes();
+
 		{
 			if (filename.empty()) {
 				egbase.step_loader_ui(_("Creating empty map…"));
@@ -886,9 +889,6 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 				   get_config_string("realname",
 				                     /** TRANSLATORS: Map author name when it hasn't been set yet */
 				                     pgettext("author_name", "Unknown")));
-
-				egbase.step_loader_ui(_("Loading tribes…"));
-				egbase.tribes();
 			} else {
 				egbase.step_loader_ui((boost::format(_("Loading map “%s”…")) % filename).str());
 				eia.load(filename);
