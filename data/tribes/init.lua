@@ -153,7 +153,6 @@ print_loading_message("┗━ took", function()
       include "tribes/wares/wool/init.lua"
       include "tribes/wares/armor_wooden/init.lua"
       include "tribes/wares/balsa/init.lua"
-      include "tribes/wares/barley/init.lua"
       include "tribes/wares/boots_hero/init.lua"
       include "tribes/wares/boots_sturdy/init.lua"
       include "tribes/wares/boots_swift/init.lua"
