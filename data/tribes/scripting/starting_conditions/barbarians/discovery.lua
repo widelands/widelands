@@ -41,41 +41,38 @@ init = {
       if f then table.insert(fields, f) end
    until #fields == 3
 
-   -- default capacity:                     32 (!)
    -- items per expedition (incl. builder): 22
-   -- free capacity per ship:               10 ×3
    local items = {
       {
-         log = 3,
+         log = 7,
          granite = 1,
+         barbarians_lumberjack = 3,
+         barbarians_ranger = 2,
+         barbarians_soldier = 1,
+      },
+      {
+         granite = 1,
+         blackwood = 5,
          grout = 3,
-         barbarians_stonemason = 1,
-         barbarians_lumberjack = 1,
-         barbarians_ranger = 1,
-      },
-      {
-         log = 1,
-         iron = 2,
-         barbarians_innkeeper = 1,
-         barbarians_fisher = 1,
-         barbarians_geologist = 1,
-         barbarians_miner = 2,
-         barbarians_smelter = 1,
-         barbarians_blacksmith = 1,
-      },
-      {
-         log = 3,
-         granite = 1,
-         grout = 1,
-         blackwood = 1,
-         reed = 2
+         barbarians_stonemason = 2,
          barbarians_gardener = 1,
          barbarians_soldier = 1,
+      },
+      {
+         grout = 1,
+         iron = 2,
+         barbarians_soldier = 1,
+         barbarians_geologist = 1,
+         barbarians_miner = 2,
+         barbarians_smelter = 2,
+         barbarians_blacksmith = 1,
+         barbarians_innkeeper = 2,
+         barbarians_fisher = 1,
       },
    }
    for i,f in pairs(fields) do
       local ship = player:place_ship(f)
-      ship.capacity = 32
+      if i == 1 then ship.capacity = 36 else ship.capacity = 35 end
       ship:make_expedition(items[i])
    end
    scroll_to_field(fields[1])

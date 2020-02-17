@@ -41,41 +41,40 @@ init = {
       if f then table.insert(fields, f) end
    until #fields == 3
 
-   -- default capacity:                     30
    -- items per expedition (incl. builder): 18
-   -- free capacity per ship:               12 ×3
    local items = {
       {
          log = 4,
-         granite = 4,
-         spidercloth = 1,
-         atlanteans_stonecutter = 1,
-         atlanteans_woodcutter = 1,
-         atlanteans_forester = 1,
-      },
-      {
-         log = 3,
-         iron = 2,
-         atlanteans_geologist = 1,
-         atlanteans_miner = 3,
-         atlanteans_smelter = 1,
-         atlanteans_toolsmith = 1,
+         granite = 1,
+         planks = 2,
+         spidercloth = 3,
+         atlanteans_woodcutter = 3,
+         atlanteans_forester = 2,
          atlanteans_soldier = 1,
       },
       {
-         planks = 4,
-         granite = 1,
-         atlanteans_sawyer = 1,
-         atlanteans_smoker = 1,
+         log = 3,
+         granite = 4,
+         planks = 2,
+         spidercloth = 3,
+         atlanteans_stonecutter = 2,
+         atlanteans_soldier = 1,
+      },
+      {
+         iron = 2,
+         atlanteans_soldier = 1,
+         atlanteans_geologist = 1,
+         atlanteans_miner = 3,
+         atlanteans_smelter = 2,
+         atlanteans_toolsmith = 1,
+         atlanteans_baker = 2,
+         atlanteans_smoker = 2,
          atlanteans_fisher = 1,
-         atlanteans_baker = 1,
-         atlanteans_blackroot_farmer = 1,
-         atlanteans_farmer = 1,
-         atlanteans_spiderbreeder = 1,
       },
    }
    for i,f in pairs(fields) do
       local ship = player:place_ship(f)
+      if i == 1 then ship.capacity = 44 else ship.capacity = 43 end
       ship:make_expedition(items[i])
    end
    scroll_to_field(fields[1])

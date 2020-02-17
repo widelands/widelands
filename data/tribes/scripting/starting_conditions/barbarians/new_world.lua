@@ -1,5 +1,5 @@
 -- =======================================================================
---                 Start conditions for Discovery
+--                 Start conditions for New World
 -- =======================================================================
 
 include "scripting/ui.lua"
@@ -8,9 +8,9 @@ set_textdomain("tribes")
 
 init = {
    -- TRANSLATORS: This is the name of a starting condition
-   descname = _ "Discovery",
-   -- TRANSLATORS: This is the tooltip for the "Discovery" starting condition
-   tooltip = _"Start the game with three ships on the ocean and only a handful of supplies",
+   descname = _ "New World",
+   -- TRANSLATORS: This is the tooltip for the "New World" starting condition
+   tooltip = _"Start the game with seven ships full of wares on the ocean",
    map_tags = {"seafaring"},
 
    func = function(player, shared_in_start)
@@ -39,45 +39,61 @@ init = {
          if not route_found then f = nil end
       end
       if f then table.insert(fields, f) end
-   until #fields == 3
+   until #fields == 7
 
-   -- items per expedition (incl. builder): 25
+   -- items per expedition (incl. builder): 22
    local items = {
       {
+         log = 3,
+         blackwood = 2,
          granite = 1,
-         brick = 3,
-         reed = 5,
-         log = 4,
-         frisians_soldier = 1,
-         frisians_brickmaker = 1,
-         frisians_reed_farmer = 1,
+         barbarians_soldier = 1,
+         barbarians_gardener = 1,
       },
       {
-         granite = 1,
-         brick = 3,
-         reed = 3,
-         log = 2,
-         frisians_soldier = 1,
-         frisians_stonemason = 2,
-         frisians_woodcutter = 3,
-         frisians_forester = 2,
+         log = 3,
+         blackwood = 2,
+         barbarians_soldier = 1,
+         barbarians_stonemason = 1,
       },
       {
-         iron = 2,
-         reed = 2,
-         brick = 4,
-         frisians_soldier = 1,
-         frisians_geologist = 1,
-         frisians_miner = 2,
-         frisians_smelter = 2,
-         frisians_blacksmith = 1,
-         frisians_smoker = 1,
-         frisians_fisher = 1,
+         blackwood = 2,
+         granite = 1,
+         grout = 1,
+         barbarians_soldier = 1,
+         barbarians_geologist = 1,
+         barbarians_miner = 1,
+         barbarians_smelter = 1,
+      },
+      {
+         barbarians_geologist = 1,
+         barbarians_miner = 1,
+         barbarians_smelter = 1,
+         iron = 4,
+         barbarians_blacksmith = 1,
+      },
+      {
+         log = 7,
+         barbarians_stonemason = 1,
+      },
+      {
+         log = 1,
+         blackwood = 2,
+         granite = 1,
+         grout = 1,
+         barbarians_stonemason = 1,
+         barbarians_innkeeper = 1,
+         barbarians_fisher = 1,
+      },
+      {
+         log = 1,
+         granite = 1,
+         barbarians_lumberjack = 3,
+         barbarians_ranger = 2,
       },
    }
    for i,f in pairs(fields) do
       local ship = player:place_ship(f)
-      if i == 1 then ship.capacity = 41 else ship.capacity = 42 end
       ship:make_expedition(items[i])
    end
    scroll_to_field(fields[1])
