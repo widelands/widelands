@@ -1,8 +1,6 @@
 function ware_helptext(tribe)
    local helptext = {
       -- TRANSLATORS: Helptext for a ware: Coal
-      amazons = pgettext("amazons_ware", "Charcoal produced out of logs by a charcoal burner. The Amazons use charcoal for drying their food and smelting gold."),
-      -- TRANSLATORS: Helptext for a ware: Coal
       atlanteans = pgettext("atlanteans_ware", "Coal is mined in coal mines or produced out of logs by a charcoal kiln. The Atlantean fires in smelting works, armor smithies and weapon smithies are fed with coal."),
       -- TRANSLATORS: Helptext for a ware: Coal
       barbarians = pgettext("barbarians_ware", "Coal is mined in coal mines or produced out of logs by a charcoal kiln. The fires of the Barbarians are usually fed with coal. Consumers are several buildings: lime kiln, smelting works, ax workshop, war mill, and helm smithy."),

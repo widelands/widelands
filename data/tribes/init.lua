@@ -158,6 +158,7 @@ print_loading_message("┗━ took", function()
       include "tribes/wares/boots_swift/init.lua"
       include "tribes/wares/bread_amazons/init.lua"
       include "tribes/wares/cassavaroot/init.lua"
+      include "tribes/wares/charcoal/init.lua"
       include "tribes/wares/chisel/init.lua"
       include "tribes/wares/chocolate/init.lua"
       include "tribes/wares/cocoa_beans/init.lua"
