@@ -54,7 +54,7 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table)
 std::vector<std::string> get_all_tribenames() {
 	std::vector<std::string> tribenames;
 	LuaInterface lua;
-	std::unique_ptr<LuaTable> table(lua.run_script("tribes/preload.lua"));
+	std::unique_ptr<LuaTable> table(lua.run_script("tribes/init.lua"));
 	for (const int key : table->keys<int>()) {
 		std::unique_ptr<LuaTable> info = table->get_table(key);
 		info->do_not_warn_about_unaccessed_keys();
@@ -66,7 +66,7 @@ std::vector<std::string> get_all_tribenames() {
 std::vector<TribeBasicInfo> get_all_tribeinfos() {
 	std::vector<TribeBasicInfo> tribeinfos;
 	LuaInterface lua;
-	std::unique_ptr<LuaTable> table(lua.run_script("tribes/preload.lua"));
+	std::unique_ptr<LuaTable> table(lua.run_script("tribes/init.lua"));
 	for (const int key : table->keys<int>()) {
 		tribeinfos.push_back(TribeBasicInfo(table->get_table(key)));
 	}

@@ -68,8 +68,8 @@ enum class MapObjectType : uint8_t {
 // Returns a string representation for 'type'.
 std::string to_string(MapObjectType type);
 
-struct NoteMapObjectType {
-	CAN_BE_SENT_AS_NOTE(NoteId::MapObjectType)
+struct NoteMapObjectDescription {
+	CAN_BE_SENT_AS_NOTE(NoteId::MapObjectDescription)
 
 	enum class LoadType {
 		// Load a registered map object if it's not being loaded yet
@@ -81,7 +81,7 @@ struct NoteMapObjectType {
 	const std::string name;
 	const LoadType type;
 
-	NoteMapObjectType(const std::string& init_name, LoadType init_type)
+	NoteMapObjectDescription(const std::string& init_name, LoadType init_type)
 	   : name(init_name), type(init_type) {
 	}
 };

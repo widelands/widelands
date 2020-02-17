@@ -30,12 +30,12 @@ namespace Widelands {
 DescriptionManager::DescriptionManager(LuaInterface* lua) : lua_(lua) {
 
 	map_objecttype_subscriber_ =
-	   Notifications::subscribe<NoteMapObjectType>([this](const NoteMapObjectType& note) {
+	   Notifications::subscribe<NoteMapObjectDescription>([this](const NoteMapObjectDescription& note) {
 		   switch (note.type) {
-		   case NoteMapObjectType::LoadType::kObject:
+		   case NoteMapObjectDescription::LoadType::kObject:
 			   load_description_on_demand(note.name);
 			   break;
-		   case NoteMapObjectType::LoadType::kAttribute:
+		   case NoteMapObjectDescription::LoadType::kAttribute:
 			   auto it = registered_attributes_.find(note.name);
 			   if (it != registered_attributes_.end()) {
 				   for (const std::string& objectname : it->second) {

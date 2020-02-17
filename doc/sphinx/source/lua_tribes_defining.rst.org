@@ -3,7 +3,7 @@ Defining Tribes
 
 Each tribe is bootstrapped with the following scripts:
 
-* ``data/tribes/preload.lua``: Provides basic information about all available
+* ``data/tribes/init.lua``: Provides basic information about all available
   tribes to the game launching screens. The player won't be able to select a
   tribe without it being defined in this file.
 * ``data/tribes/<tribe name>.lua``: These scripts tell the engine which units

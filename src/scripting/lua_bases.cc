@@ -231,7 +231,7 @@ int LuaEditorGameBase::get_tribe_description(lua_State* L) {
 	if (!Widelands::tribe_exists(tribe_name)) {
 		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
 	}
-	Notifications::publish(NoteMapObjectType(tribe_name, NoteMapObjectType::LoadType::kObject));
+	Notifications::publish(NoteMapObjectDescription(tribe_name, NoteMapObjectDescription::LoadType::kObject));
 
 	const Tribes& tribes = get_egbase(L).tribes();
 	return to_lua<LuaMaps::LuaTribeDescription>(
@@ -798,7 +798,7 @@ int LuaPlayerBase::place_building(lua_State* L) {
 	Player& player = get(L, egbase);
 
 	// If the building belongs to a tribe that no player is playing, we need to load it now
-	Notifications::publish(NoteMapObjectType(name, NoteMapObjectType::LoadType::kObject));
+	Notifications::publish(NoteMapObjectDescription(name, NoteMapObjectDescription::LoadType::kObject));
 
 	const DescriptionIndex building_index = tribes.building_index(name);
 

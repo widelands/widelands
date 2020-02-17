@@ -429,7 +429,7 @@ void MapObjectDescr::add_attributes(const std::vector<std::string>& attributes,
 uint32_t MapObjectDescr::get_attribute_id(const std::string& name, bool add_if_not_exists) {
 	if (!add_if_not_exists) {
 		// Load on demand for objects that no player tribe owns
-		Notifications::publish(NoteMapObjectType(name, NoteMapObjectType::LoadType::kAttribute));
+		Notifications::publish(NoteMapObjectDescription(name, NoteMapObjectDescription::LoadType::kAttribute));
 	}
 
 	AttribMap::iterator it = dyn_attribs_.find(name);

@@ -61,7 +61,7 @@ void parse_working_positions(Tribes& tribes,
 			}
 			// Try to load the worker if an object with this name has been registered
 			Notifications::publish(
-			   NoteMapObjectType(worker_name, NoteMapObjectType::LoadType::kObject));
+			   NoteMapObjectDescription(worker_name, NoteMapObjectDescription::LoadType::kObject));
 
 			// Ensure that we did indeed load a worker
 			DescriptionIndex const woi = tribes.worker_index(worker_name);

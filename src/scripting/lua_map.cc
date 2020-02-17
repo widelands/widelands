@@ -690,7 +690,7 @@ const Widelands::TribeDescr& get_tribe_descr(lua_State* L, const std::string& tr
 	if (!Widelands::tribe_exists(tribename)) {
 		report_error(L, "Tribe '%s' does not exist", tribename.c_str());
 	}
-	Notifications::publish(NoteMapObjectType(tribename, NoteMapObjectType::LoadType::kObject));
+	Notifications::publish(NoteMapObjectDescription(tribename, NoteMapObjectDescription::LoadType::kObject));
 	const Tribes& tribes = get_egbase(L).tribes();
 	return *tribes.get_tribe_descr(tribes.tribe_index(tribename));
 }
@@ -1429,7 +1429,7 @@ int LuaMap::place_immovable(lua_State* const L) {
 		   c->coords(), imm_idx, MapObjectDescr::OwnerType::kWorld, nullptr /* owner */);
 	} else if (from_where == "tribes") {
 		// The immovable type might not have been loaded yet
-		Notifications::publish(NoteMapObjectType(objname, NoteMapObjectType::LoadType::kObject));
+		Notifications::publish(NoteMapObjectDescription(objname, NoteMapObjectDescription::LoadType::kObject));
 
 		DescriptionIndex const imm_idx = egbase.tribes().immovable_index(objname);
 		if (imm_idx == Widelands::INVALID_INDEX) {
@@ -1563,7 +1563,7 @@ void LuaTribeDescription::__persist(lua_State* L) {
 void LuaTribeDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
-	Notifications::publish(NoteMapObjectType(name, NoteMapObjectType::LoadType::kObject));
+	Notifications::publish(NoteMapObjectDescription(name, NoteMapObjectDescription::LoadType::kObject));
 	const Tribes& tribes = get_egbase(L).tribes();
 	set_description_pointer(tribes.get_tribe_descr(tribes.tribe_index(name)));
 }

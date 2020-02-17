@@ -73,7 +73,7 @@ std::vector<TribeBasicInfo> get_all_tribeinfos();
 /// Returns the basic preload info for a tribe.
 TribeBasicInfo get_tribeinfo(const std::string& tribename);
 
-/// Returns whether this tribe is listed in tribes/preload.lua.
+/// Returns whether this tribe is listed in tribes/init.lua.
 bool tribe_exists(const std::string& tribename);
 
 }  // namespace Widelands

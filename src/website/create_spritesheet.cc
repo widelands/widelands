@@ -368,7 +368,8 @@ int main(int argc, char** argv) {
 		initialize();
 		std::unique_ptr<FileSystem> out_filesystem(&FileSystem::create(output_path));
 		Widelands::EditorGameBase egbase(nullptr);
-		egbase.load_all_tribes();
+		//egbase.load_all_tribes();
+        Notifications::publish(Widelands::NoteMapObjectDescription(tribename, Widelands::NoteMapObjectDescription::LoadType::kObject));
 		write_animation_spritesheets(egbase, map_object_name, animation_name, out_filesystem.get());
 		egbase.cleanup_objects();
 	} catch (std::exception& e) {
