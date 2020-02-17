@@ -1,9 +1,3 @@
--- RST
--- init.lua
--- -----------------
---
--- Tribes initialization
---
 -- This file contains the basic information for all tribes that is
 -- needed before a game is loaded or the editor has been started.
 
