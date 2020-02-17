@@ -29,8 +29,8 @@
 namespace Widelands {
 DescriptionManager::DescriptionManager(LuaInterface* lua) : lua_(lua) {
 
-	map_objecttype_subscriber_ =
-	   Notifications::subscribe<NoteMapObjectDescription>([this](const NoteMapObjectDescription& note) {
+	map_objecttype_subscriber_ = Notifications::subscribe<NoteMapObjectDescription>(
+	   [this](const NoteMapObjectDescription& note) {
 		   switch (note.type) {
 		   case NoteMapObjectDescription::LoadType::kObject:
 			   load_description_on_demand(note.name);
