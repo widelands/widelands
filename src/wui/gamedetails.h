@@ -37,8 +37,6 @@ struct SavegameData {
 	enum class SavegameType { kSavegame, kParentDirectory, kSubDirectory };
 	/// The filename of the currenty selected file
 	std::string filename;
-	/// List of filenames when multiple files have been selected
-	std::string filename_list;
 	/// The name of the map that the game is based on
 	std::string mapname;
 	/// The win condition that was played
@@ -106,8 +104,7 @@ public:
 	/// Reset the data
 	void clear();
 
-	/// Update the display from the 'gamedata'
-	void update(const SavegameData& gamedata);
+	void display(const std::vector<SavegameData>& gamedata);
 
 	/// Box on the bottom where extra buttons can be placed from the outside, e.g. a delete button.
 	UI::Box* button_box() {
@@ -117,6 +114,9 @@ public:
 private:
 	/// Layout the information on screen
 	void layout() override;
+	/// Update the display from the 'gamedata'
+	void show(const SavegameData& gamedata);
+	void show(const std::vector<SavegameData>& gamedata);
 
 	const UI::PanelStyle style_;
 	const Mode mode_;
@@ -127,6 +127,8 @@ private:
 	UI::Icon minimap_icon_;
 	std::unique_ptr<const Image> minimap_image_;
 	UI::Box* button_box_;
+
+	const std::string filename_list_string(const std::vector<SavegameData>& savefiles) const;
 };
 
 #endif  // end of include guard: WL_WUI_GAMEDETAILS_H

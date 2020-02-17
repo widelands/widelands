@@ -86,10 +86,6 @@ private:
 	const std::string get_filename(uint32_t index) const;
 	/// Returns the savegame for the table entry at 'index'
 	const SavegameData& get_savegame(uint32_t index) const;
-	/// Formats the current table selection as a list of filenames with savedate information.
-	const std::string filename_list_string() const;
-	/// Formats a given table selection as a list of filenames with savedate information.
-	const std::string filename_list_string(const std::set<uint32_t>& selections) const;
 
 	/// Reverse default sort order for save date column
 	bool compare_save_time(uint32_t, uint32_t) const;
@@ -116,6 +112,15 @@ private:
 	void add_error_info(SavegameData& gamedata, std::string errormessage) const;
 	void add_sub_dir(const std::string& gamefilename);
 	bool selection_contains_directory() const;
+	const std::vector<SavegameData>
+	get_selected_savegames(const std::set<uint32_t>& selections) const;
+	void set_tooltips_of_buttons(size_t nr_of_selected_items) const;
+	const std::string create_header(const size_t no_selections) const;
+	bool show_confirmation_window(size_t no_selections) const;
+	void delete_own(std::set<uint32_t>& selections);
+	std::set<uint32_t> try_to_delete(std::set<uint32_t>& selections) const;
+	void update_table(std::set<uint32_t>& selections);
+	void deletion_failed(std::set<uint32_t>& selections, const uint32_t no_failed) const;
 };
 
 #endif  // end of include guard: WL_WUI_LOAD_OR_SAVE_GAME_H

@@ -89,10 +89,6 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 	fill_table();
 }
 
-const std::string LoadOrSaveGame::filename_list_string() const {
-	return filename_list_string(table_->selections());
-}
-
 bool LoadOrSaveGame::selection_contains_directory() const {
 	const std::set<uint32_t>& selections = table_->selections();
 	for (const uint32_t index : selections) {
@@ -108,24 +104,15 @@ const SavegameData& LoadOrSaveGame::get_savegame(uint32_t index) const {
 	return games_data_[(*table_)[index]];
 }
 
-const std::string LoadOrSaveGame::filename_list_string(const std::set<uint32_t>& selections) const {
-	boost::format message;
+const std::vector<SavegameData>
+LoadOrSaveGame::get_selected_savegames(const std::set<uint32_t>& selections) const {
+	std::vector<SavegameData> savegames;
 	for (const uint32_t index : selections) {
-		const SavegameData& gamedata = get_savegame(index);
-		if (gamedata.is_directory()) {
-			continue;
-		} else if (gamedata.errormessage.empty()) {
-			std::vector<std::string> listme;
-			listme.push_back(richtext_escape(gamedata.mapname));
-			listme.push_back(gamedata.savedonstring);
-			message = (boost::format("%s\n%s") % message %
-			           i18n::localize_list(listme, i18n::ConcatenateWith::COMMA));
-		} else {
-			message = boost::format("%s\n%s") % message % richtext_escape(gamedata.filename);
-		}
+		savegames.push_back(get_savegame(index));
 	}
-	return message.str();
+	return savegames;
 }
+
 bool LoadOrSaveGame::compare_save_time(uint32_t rowa, uint32_t rowb) const {
 	return get_savegame(rowa).compare_save_time(get_savegame(rowb));
 }
@@ -137,31 +124,10 @@ bool LoadOrSaveGame::compare_map_name(uint32_t rowa, uint32_t rowb) const {
 std::unique_ptr<SavegameData> LoadOrSaveGame::entry_selected() {
 	std::unique_ptr<SavegameData> result(new SavegameData());
 	size_t selections = table_->selections().size();
-	if (selections == 1) {
-		delete_->set_tooltip(
-		   filetype_ == FileType::kReplay ?
-		      /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
-		      _("Delete this replay") :
-		      /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
-		      _("Delete this game"));
-		result.reset(new SavegameData(games_data_[table_->get_selected()]));
-	} else if (selections > 1) {
-		delete_->set_tooltip(
-		   filetype_ == FileType::kReplay ?
-		      /** TRANSLATORS: Tooltip for the delete button. The user has selected multiple files */
-		      _("Delete these replays") :
-		      /** TRANSLATORS: Tooltip for the delete button. The user has selected multiple files */
-		      _("Delete these games"));
-		result->filename_list = filename_list_string();
-		size_t nr_files =
-		   std::count(result->filename_list.begin(), result->filename_list.end(), '\n');
-		result->mapname =
-		   (boost::format(ngettext("Selected %d file:", "Selected %d files:", nr_files)) % nr_files)
-		      .str();
-	} else {
-		delete_->set_tooltip("");
-	}
-	game_details_.update(*result);
+	set_tooltips_of_buttons(selections);
+
+	const std::vector<SavegameData> savegames = get_selected_savegames(table_->selections());
+	game_details_.display(savegames);
 	if (selections > 0 && !selection_contains_directory()) {
 		delete_->set_enabled(true);
 	} else {
@@ -169,7 +135,30 @@ std::unique_ptr<SavegameData> LoadOrSaveGame::entry_selected() {
 		delete_->set_tooltip("");
 	}
 	// TODO(GunChleoc): Take care of the OK button too.
+	if (selections > 0) {
+		result.reset(new SavegameData(savegames[0]));
+	}
 	return result;
+}
+void LoadOrSaveGame::set_tooltips_of_buttons(size_t nr_of_selected_items) const {
+	if (nr_of_selected_items == 1) {
+		delete_->set_tooltip(
+		   filetype_ == FileType::kReplay ?
+		      /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
+		      _("Delete this replay") :
+		      /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
+		      _("Delete this game"));
+	} else if (nr_of_selected_items > 1) {
+		delete_->set_tooltip(filetype_ == FileType::kReplay ?
+		                        /** TRANSLATORS: Tooltip for the delete button. The user has
+		                           selected multiple files */
+		                        _("Delete these replays") :
+		                        /** TRANSLATORS: Tooltip for the delete button. The user has
+		                           selected multiple files */
+		                        _("Delete these games"));
+	} else {
+		delete_->set_tooltip("");
+	}
 }
 
 bool LoadOrSaveGame::has_selection() const {
@@ -208,12 +197,7 @@ const std::string LoadOrSaveGame::get_filename(uint32_t index) const {
 	return get_savegame(index).filename;
 }
 
-void LoadOrSaveGame::clicked_delete() {
-	if (!has_selection()) {
-		return;
-	}
-	std::set<uint32_t> selections = table().selections();
-	const size_t no_selections = selections.size();
+const std::string LoadOrSaveGame::create_header(const size_t no_selections) const {
 	std::string header = "";
 	if (filetype_ == FileType::kReplay) {
 		header =
@@ -236,96 +220,128 @@ void LoadOrSaveGame::clicked_delete() {
 		             no_selections)
 		               .str();
 	}
+	return header;
+}
+
+bool LoadOrSaveGame::show_confirmation_window(size_t no_selections) const {
+	std::string confirmation_window_header = create_header(no_selections);
+	const std::string message =
+	   (boost::format("%s\n%s") % confirmation_window_header % "filename_list_string()").str();
+
+	UI::WLMessageBox confirmationBox(
+	   parent_->get_parent()->get_parent(),
+	   no_selections == 1 ? _("Confirm Deleting File") : _("Confirm Deleting Files"), message,
+	   UI::WLMessageBox::MBoxType::kOkCancel);
+	return confirmationBox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk;
+}
+
+std::set<uint32_t> LoadOrSaveGame::try_to_delete(std::set<uint32_t>& selections) const {
+	// Failed deletions aren't a serious problem, we just catch the errors
+	// and keep track to notify the player.
+	std::set<uint32_t> failed_selections;
+	bool failed;
+	for (const uint32_t index : selections) {
+		failed = false;
+		const std::string& deleteme = get_filename(index);
+		try {
+			g_fs->fs_unlink(deleteme);
+		} catch (const FileError& e) {
+			log("player-requested file deletion failed: %s", e.what());
+			failed = true;
+		}
+		if (filetype_ == FileType::kReplay) {
+			try {
+				g_fs->fs_unlink(deleteme + kSavegameExtension);
+				// If at least one of the two relevant files of a replay are
+				// successfully deleted then count it as success.
+				// (From the player perspective the replay is gone.)
+				failed = false;
+				// If it was a multiplayer replay, also delete the synchstream. Do
+				// it here, so it's only attempted if replay deletion was successful.
+				if (g_fs->file_exists(deleteme + kSyncstreamExtension)) {
+					g_fs->fs_unlink(deleteme + kSyncstreamExtension);
+				}
+			} catch (const FileError& e) {
+				log("player-requested file deletion failed: %s", e.what());
+			}
+		}
+		if (failed) {
+			failed_selections.insert(index);
+		}
+	}
+	return failed_selections;
+}
+
+void LoadOrSaveGame::deletion_failed(std::set<uint32_t>& selections,
+                                     const uint32_t no_failed) const {
+
+	// Notify the player.
+	const std::string caption =
+	   (no_failed == 1) ? _("Error Deleting File!") : _("Error Deleting Files!");
+	std::string header = "";
+	if (filetype_ == FileType::kReplay) {
+		if (selections.size() == 1) {
+			header = _("The replay could not be deleted.");
+		} else {
+			header = (boost::format(ngettext("%d replay could not be deleted.",
+			                                 "%d replays could not be deleted.", no_failed)) %
+			          no_failed)
+			            .str();
+		}
+	} else {
+		if (selections.size() == 1) {
+			header = _("The game could not be deleted.");
+		} else {
+			header = (boost::format(ngettext("%d game could not be deleted.",
+			                                 "%d games could not be deleted.", no_failed)) %
+			          no_failed)
+			            .str();
+		}
+	}
+	std::string message =
+	   (boost::format("%s\n%s") % header % "filename_list_string(failed_selections)").str();
+	UI::WLMessageBox msgBox(
+	   parent_->get_parent()->get_parent(), caption, message, UI::WLMessageBox::MBoxType::kOk);
+	msgBox.run<UI::Panel::Returncodes>();
+}
+
+void LoadOrSaveGame::delete_own(std::set<uint32_t>& selections) {
+	uint32_t number_of_failed_deletes = try_to_delete(selections).size();
+	if (number_of_failed_deletes > 0) {
+		deletion_failed(selections, number_of_failed_deletes);
+	}
+}
+void LoadOrSaveGame::update_table(std::set<uint32_t>& selections) {
+	fill_table();
+
+	// Select something meaningful if possible, then scroll to it.
+	const uint32_t selectme = *selections.begin();
+	if (selectme < table_->size() - 1) {
+		table_->select(selectme);
+	} else if (!table_->empty()) {
+		table_->select(table_->size() - 1);
+	}
+	if (table_->has_selection()) {
+		table_->scroll_to_item(table_->selection_index() + 1);
+	}
+	// Make sure that the game details are updated
+	entry_selected();
+}
+
+void LoadOrSaveGame::clicked_delete() {
+	if (!has_selection()) {
+		return;
+	}
+	std::set<uint32_t> selections = table().selections();
 
 	bool do_delete = SDL_GetModState() & KMOD_CTRL;
 	if (!do_delete) {
-		const std::string message = (boost::format("%s\n%s") % header % filename_list_string()).str();
-
-		UI::WLMessageBox confirmationBox(
-		   parent_->get_parent()->get_parent(),
-		   no_selections == 1 ? _("Confirm Deleting File") : _("Confirm Deleting Files"), message,
-		   UI::WLMessageBox::MBoxType::kOkCancel);
-		do_delete = confirmationBox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk;
+		do_delete = show_confirmation_window(selections.size());
 		table_->focus();
 	}
 	if (do_delete) {
-		// Failed deletions aren't a serious problem, we just catch the errors
-		// and keep track to notify the player.
-		std::set<uint32_t> failed_selections;
-		bool failed;
-		for (const uint32_t index : selections) {
-			failed = false;
-			const std::string& deleteme = get_filename(index);
-			try {
-				g_fs->fs_unlink(deleteme);
-			} catch (const FileError& e) {
-				log("player-requested file deletion failed: %s", e.what());
-				failed = true;
-			}
-			if (filetype_ == FileType::kReplay) {
-				try {
-					g_fs->fs_unlink(deleteme + kSavegameExtension);
-					// If at least one of the two relevant files of a replay are
-					// successfully deleted then count it as success.
-					// (From the player perspective the replay is gone.)
-					failed = false;
-					// If it was a multiplayer replay, also delete the synchstream. Do
-					// it here, so it's only attempted if replay deletion was successful.
-					if (g_fs->file_exists(deleteme + kSyncstreamExtension)) {
-						g_fs->fs_unlink(deleteme + kSyncstreamExtension);
-					}
-				} catch (const FileError& e) {
-					log("player-requested file deletion failed: %s", e.what());
-				}
-			}
-			if (failed) {
-				failed_selections.insert(index);
-			}
-		}
-		if (!failed_selections.empty()) {
-			const uint32_t no_failed = failed_selections.size();
-			// Notify the player.
-			const std::string caption =
-			   (no_failed == 1) ? _("Error Deleting File!") : _("Error Deleting Files!");
-			if (filetype_ == FileType::kReplay) {
-				if (selections.size() == 1) {
-					header = _("The replay could not be deleted.");
-				} else {
-					header = (boost::format(ngettext("%d replay could not be deleted.",
-					                                 "%d replays could not be deleted.", no_failed)) %
-					          no_failed)
-					            .str();
-				}
-			} else {
-				if (selections.size() == 1) {
-					header = _("The game could not be deleted.");
-				} else {
-					header = (boost::format(ngettext("%d game could not be deleted.",
-					                                 "%d games could not be deleted.", no_failed)) %
-					          no_failed)
-					            .str();
-				}
-			}
-			std::string message =
-			   (boost::format("%s\n%s") % header % filename_list_string(failed_selections)).str();
-			UI::WLMessageBox msgBox(
-			   parent_->get_parent()->get_parent(), caption, message, UI::WLMessageBox::MBoxType::kOk);
-			msgBox.run<UI::Panel::Returncodes>();
-		}
-		fill_table();
-
-		// Select something meaningful if possible, then scroll to it.
-		const uint32_t selectme = *selections.begin();
-		if (selectme < table_->size() - 1) {
-			table_->select(selectme);
-		} else if (!table_->empty()) {
-			table_->select(table_->size() - 1);
-		}
-		if (table_->has_selection()) {
-			table_->scroll_to_item(table_->selection_index() + 1);
-		}
-		// Make sure that the game details are updated
-		entry_selected();
+		delete_own(selections);
+		update_table(selections);
 	}
 }
 
@@ -375,7 +391,8 @@ void LoadOrSaveGame::add_time_info(SavegameData& gamedata,
 			   (boost::format(_("Today, %1%:%2%")) % savedate->tm_hour % minute).str();
 			gamedata.savedonstring =
 			   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
-			                                                    hour:minute. This is part of a list. */
+			                                                    hour:minute. This is part of a list.
+			    */
 			   (boost::format(_("saved today at %1%:%2%")) % savedate->tm_hour % minute).str();
 		} else if ((savedate->tm_year == current_year && savedate->tm_mon == current_month &&
 		            savedate->tm_mday == current_day - 1) ||
@@ -392,7 +409,8 @@ void LoadOrSaveGame::add_time_info(SavegameData& gamedata,
 			   (boost::format(_("Yesterday, %1%:%2%")) % savedate->tm_hour % minute).str();
 			gamedata.savedonstring =
 			   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
-			                                                    hour:minute. This is part of a list. */
+			                                                    hour:minute. This is part of a list.
+			    */
 			   (boost::format(_("saved yesterday at %1%:%2%")) % savedate->tm_hour % minute).str();
 		} else {  // Older
 			gamedata.savedatestring =
@@ -403,8 +421,8 @@ void LoadOrSaveGame::add_time_info(SavegameData& gamedata,
 			      .str();
 			gamedata.savedonstring =
 			   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
-			                                                    month (short name) day (number), year
-			      (number). This is part of a list. */
+			                                                    month (short name) day (number),
+			      year (number). This is part of a list. */
 			   (boost::format(_("saved on %1% %2%, %3%")) % savedate->tm_mday %
 			    localize_month(savedate->tm_mon) % (1900 + savedate->tm_year))
 			      .str();
