@@ -44,6 +44,23 @@ init = {
    -- items per expedition (incl. builder): 25
    local items = {
       {
+         log = 1,
+         brick = 2,
+         reed = 2,
+         granite = 2,
+         frisians_soldier = 1,
+         frisians_geologist = 1,
+         frisians_miner = 1,
+         frisians_smelter = 1,
+      },
+      {
+         brick = 2,
+         reed = 2,
+         granite = 2,
+         frisians_woodcutter = 3,
+         frisians_forester = 2,
+      },
+      {
          brick = 2,
          iron = 4,
          frisians_blacksmith = 1,
@@ -68,26 +85,9 @@ init = {
          frisians_brickmaker = 1,
       },
       {
-         log = 1,
-         brick = 2,
-         reed = 2,
-         granite = 2,
-         frisians_soldier = 1,
-         frisians_geologist = 1,
-         frisians_miner = 1,
-         frisians_smelter = 1,
-      },
-      {
          log = 5,
          brick = 4,
          frisians_stonemason = 1,
-      },
-      {
-         brick = 2,
-         reed = 2,
-         granite = 2,
-         frisians_woodcutter = 3,
-         frisians_forester = 2,
       },
       {
          log = 1,
@@ -101,8 +101,7 @@ init = {
    }
    for i,f in pairs(fields) do
       local ship = player:place_ship(f)
-      local mincap = #items[i] + 25
-      if mincap > ship.capacity then ship.capacity = mincap end
+      if i > 3 then ship.capacity = 10 else ship.capacity = 11 end
       ship:make_expedition(items[i])
    end
    scroll_to_field(fields[1])
