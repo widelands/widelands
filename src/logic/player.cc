@@ -1624,10 +1624,10 @@ void Player::read_statistics(FileRead& fr,
 
 	// All statistics should have the same size
 	assert(ware_productions_.size() == ware_consumptions_.size());
-	assert(ware_productions_.at(0).size() == ware_consumptions_.at(0).size());
+	assert(ware_productions_.begin()->second.size() == ware_consumptions_.begin()->second.size());
 
 	assert(ware_productions_.size() == ware_stocks_.size());
-	assert(ware_productions_.at(0).size() == ware_stocks_.at(0).size());
+	assert(ware_productions_.begin()->second.size() == ware_stocks_.begin()->second.size());
 }
 
 /**
@@ -1665,7 +1665,7 @@ void Player::write_statistics(FileWrite& fw) const {
 
 	// Write produce statistics
 	fw.unsigned_16(nr_wares);
-	fw.unsigned_16(ware_productions_.at(0).size());
+	fw.unsigned_16(ware_productions_.begin()->second.size());
 
 	for (const DescriptionIndex ware_index : tribe_wares) {
 		fw.c_string(tribes.get_ware_descr(ware_index)->name());
@@ -1675,7 +1675,7 @@ void Player::write_statistics(FileWrite& fw) const {
 
 	// Write consume statistics
 	fw.unsigned_16(nr_wares);
-	fw.unsigned_16(ware_consumptions_.at(0).size());
+	fw.unsigned_16(ware_consumptions_.begin()->second.size());
 
 	for (const DescriptionIndex ware_index : tribe_wares) {
 		fw.c_string(tribes.get_ware_descr(ware_index)->name());
@@ -1685,7 +1685,7 @@ void Player::write_statistics(FileWrite& fw) const {
 
 	// Write stock statistics
 	fw.unsigned_16(nr_wares);
-	fw.unsigned_16(ware_stocks_.at(0).size());
+	fw.unsigned_16(ware_stocks_.begin()->second.size());
 
 	for (const DescriptionIndex ware_index : tribe_wares) {
 		fw.c_string(tribes.get_ware_descr(ware_index)->name());

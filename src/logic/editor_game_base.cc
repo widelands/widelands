@@ -209,7 +209,7 @@ Tribes* EditorGameBase::mutable_tribes() {
 		// Lazy initialization of Tribes. We need to create the pointer to the
 		// tribe immediately though, because the lua scripts need to have access
 		// to tribes through this method already.
-		ScopedTimer timer("Loading the tribes took %ums");
+		ScopedTimer timer("Registering the tribes took %ums");
 		tribes_.reset(new Tribes(lua_.get()));
 	}
 	return tribes_.get();
