@@ -196,7 +196,7 @@ public:
 	// Returns the result of run().
 	bool run_load_game(const std::string& filename, const std::string& script_to_run);
 
-	void postload();
+	void postload() override;
 
 	void think() override;
 
