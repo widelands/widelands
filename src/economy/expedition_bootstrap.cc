@@ -347,11 +347,11 @@ void ExpeditionBootstrap::load(Warehouse& warehouse,
 		}
 		// Append worker queues to the end
 		for (InputQueue* wq : wqs) {
-			queues_.emplace_back(std::make_pair(wq, false));
+			queues_.emplace_back(std::make_pair(std::unique_ptr<InputQueue>(wq), false));
 		}
 		for (InputQueue* wq : additional_queues) {
 			assert(wq->get_max_size() == 1);
-			queues_.emplace_back(std::make_pair(wq, true));
+			queues_.emplace_back(std::make_pair(std::unique_ptr<InputQueue>(wq), true));
 		}
 	} catch (const GameDataError& e) {
 		throw GameDataError("loading ExpeditionBootstrap: %s", e.what());
