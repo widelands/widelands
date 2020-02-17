@@ -72,7 +72,8 @@ init = {
    }
    for i,f in pairs(fields) do
       local ship = player:place_ship(f)
-      if i == 1 then ship.capacity = 36 else ship.capacity = 35 end
+      local mincap = #items[i] + 22
+      if mincap > ship.capacity then ship.capacity = mincap end
       ship:make_expedition(items[i])
    end
    scroll_to_field(fields[1])
