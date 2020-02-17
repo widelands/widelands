@@ -89,15 +89,15 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 		load_ships(table, tribes);
 		log("%ums\n", timer.ms_since_last_query());
 
+		log("┃    Immovables: ");
+		load_immovables(table, tribes, world);
+		log("%ums\n", timer.ms_since_last_query());
+
 		log("┃    Wares: ");
 		load_wares(table, tribes);
 		if (scenario_table != nullptr && scenario_table->has_key("wares_order")) {
 			load_wares(*scenario_table, tribes);
 		}
-		log("%ums\n", timer.ms_since_last_query());
-
-		log("┃    Immovables: ");
-		load_immovables(table, tribes, world);
 		log("%ums\n", timer.ms_since_last_query());
 
 		log("┃    Workers: ");

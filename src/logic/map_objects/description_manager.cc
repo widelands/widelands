@@ -166,8 +166,6 @@ void DescriptionManager::load_description(const std::string& description_name) {
 
 	// Protect against circular dependencies when 1 script file has multiple descriptions in it
 	if (descriptions_being_loaded_.count(object_script) == 1) {
-		log("DescriptionManager::load_description: Object script '%s' is already being loaded\n",
-		    description_name.c_str());
 		return;
 	}
 	descriptions_being_loaded_.insert(object_script);
@@ -204,10 +202,11 @@ void DescriptionManager::mark_loading_done(const std::string& description_name) 
 }
 
 void DescriptionManager::load_description_on_demand(const std::string& description_name) {
-	if ((descriptions_being_loaded_.count(description_name) == 0) &&
-	    (registered_scenario_descriptions_.count(description_name) == 1 ||
-	     registered_descriptions_.count(description_name) == 1)) {
-		load_description(description_name);
+	if (registered_scenario_descriptions_.count(description_name) == 1 ||
+		registered_descriptions_.count(description_name) == 1) {
+		if (descriptions_being_loaded_.count(description_name) == 0) {
+			load_description(description_name);
+		}
 	} else {
 		log("WARNING: Unknown map object type '%s'\n", description_name.c_str());
 	}
