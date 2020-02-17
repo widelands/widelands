@@ -65,7 +65,8 @@ init = {
       {
          iron = 2,
          reed = 2,
-         brick = 4,
+         brick = 3,
+         frisians_claydigger = 1,
          frisians_soldier = 1,
          frisians_geologist = 1,
          frisians_miner = 2,

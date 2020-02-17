@@ -60,9 +60,10 @@ init = {
          frisians_reed_farmer = 1,
       },
       {
-         log = 4,
+         log = 3,
          brick = 2,
          granite = 2,
+         frisians_claydigger = 1,
          frisians_soldier = 1,
          frisians_brickmaker = 1,
       },
