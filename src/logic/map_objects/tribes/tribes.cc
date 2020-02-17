@@ -315,8 +315,7 @@ void Tribes::add_tribe(const LuaTable& table, const World& world) {
 			tribes_->add(new TribeDescr(Widelands::get_tribeinfo(name), *this, world, table));
 		}
 	} else {
-		throw GameDataError(
-		   "The tribe '%s'' is not listed in data/tribes/init.lua.", name.c_str());
+		throw GameDataError("The tribe '%s'' is not listed in data/tribes/init.lua.", name.c_str());
 	}
 
 	// Mark as done
@@ -380,7 +379,8 @@ DescriptionIndex Tribes::load_worker(const std::string& workername) {
 }
 
 void Tribes::try_load_ware_or_worker(const std::string& objectname) {
-	Notifications::publish(NoteMapObjectDescription(objectname, NoteMapObjectDescription::LoadType::kObject));
+	Notifications::publish(
+	   NoteMapObjectDescription(objectname, NoteMapObjectDescription::LoadType::kObject));
 	// Check if ware/worker exists already and if not, try to load it.
 	if (!ware_exists(ware_index(objectname)) && !worker_exists(worker_index(objectname))) {
 		throw GameDataError(

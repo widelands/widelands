@@ -729,7 +729,8 @@ MapObject::Loader* Immovable::load(EditorGameBase& egbase,
 
 			if (owner_type != "world") {  //  It is a tribe immovable.
 				const std::string name = tribes_lookup_table.lookup_immovable(fr.c_string());
-				Notifications::publish(NoteMapObjectDescription(name, NoteMapObjectDescription::LoadType::kObject));
+				Notifications::publish(
+				   NoteMapObjectDescription(name, NoteMapObjectDescription::LoadType::kObject));
 
 				const DescriptionIndex idx = egbase.tribes().immovable_index(name);
 				if (idx != Widelands::INVALID_INDEX) {
@@ -864,7 +865,8 @@ ImmovableProgram::ActTransform::ActTransform(char* parameters, ImmovableDescr& d
 		if (type_name == descr.name()) {
 			throw GameDataError("illegal transformation to the same type");
 		}
-		Notifications::publish(NoteMapObjectDescription(type_name, NoteMapObjectDescription::LoadType::kObject));
+		Notifications::publish(
+		   NoteMapObjectDescription(type_name, NoteMapObjectDescription::LoadType::kObject));
 	} catch (const WException& e) {
 		throw GameDataError("transform: %s", e.what());
 	}
@@ -920,7 +922,8 @@ ImmovableProgram::ActGrow::ActGrow(char* parameters, ImmovableDescr& descr) {
 			}
 	end:
 		type_name = parameters;
-		Notifications::publish(NoteMapObjectDescription(type_name, NoteMapObjectDescription::LoadType::kObject));
+		Notifications::publish(
+		   NoteMapObjectDescription(type_name, NoteMapObjectDescription::LoadType::kObject));
 	} catch (const WException& e) {
 		throw GameDataError("grow: %s", e.what());
 	}
@@ -1008,7 +1011,8 @@ ImmovableProgram::ActSeed::ActSeed(char* parameters, ImmovableDescr& descr) {
 			}
 	end:
 		type_name = parameters;
-		Notifications::publish(NoteMapObjectDescription(type_name, NoteMapObjectDescription::LoadType::kObject));
+		Notifications::publish(
+		   NoteMapObjectDescription(type_name, NoteMapObjectDescription::LoadType::kObject));
 	} catch (const WException& e) {
 		throw GameDataError("seed: %s", e.what());
 	}
