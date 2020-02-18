@@ -69,7 +69,6 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "wlapplication_options.h"
-#include "wui/game_tips.h"
 #include "wui/interactive_base.h"
 
 namespace {
@@ -77,8 +76,8 @@ using Widelands::Building;
 
 // Load all tribes from disk.
 void load_all_tribes(Widelands::EditorGameBase* egbase) {
-	assert(egbase->get_loader_ui());
-	egbase->get_loader_ui()->step(_("Loading tribes"));
+	assert(egbase->has_loader_ui());
+	egbase->step_loader_ui(_("Loading tribes"));
 	egbase->tribes();
 }
 
@@ -444,6 +443,7 @@ void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
 
 void EditorInteractive::load(const std::string& filename) {
 	assert(filename.size());
+	assert(egbase().has_loader_ui());
 
 	Widelands::Map* map = egbase().mutable_map();
 
@@ -457,20 +457,11 @@ void EditorInteractive::load(const std::string& filename) {
 		   filename.c_str());
 	ml->preload_map(true);
 
-	UI::ProgressWindow* loader_ui = egbase().get_loader_ui();
-	// We already have a loader window if Widelands was started with --editor=mapname
-	const bool create_loader_ui = !loader_ui;
-	if (create_loader_ui) {
-		loader_ui = new UI::ProgressWindow("images/loadscreens/editor.jpg");
-		GameTips editortips(*loader_ui, {"editor"});
-		egbase().set_loader_ui(loader_ui);
-	}
-
 	load_all_tribes(&egbase());
 
 	// Create the players. TODO(SirVer): this must be managed better
 	// TODO(GunChleoc): Ugly - we only need this for the test suite right now
-	loader_ui->step(_("Creating players"));
+	egbase().step_loader_ui(_("Creating players"));
 	iterate_player_numbers(p, map->get_nrplayers()) {
 		if (!map->get_scenario_player_tribe(p).empty()) {
 			egbase().add_player(
@@ -482,11 +473,6 @@ void EditorInteractive::load(const std::string& filename) {
 	egbase().postload();
 	egbase().load_graphics();
 	map_changed(MapWas::kReplaced);
-	if (create_loader_ui) {
-		// We created it, so we have to unset and delete it
-		egbase().set_loader_ui(nullptr);
-		delete loader_ui;
-	}
 }
 
 void EditorInteractive::cleanup_for_load() {
@@ -902,13 +888,11 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	EditorInteractive& eia = *new EditorInteractive(egbase);
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
 	{
-		UI::ProgressWindow loader_ui("images/loadscreens/editor.jpg");
-		GameTips editortips(loader_ui, {"editor"});
-		egbase.set_loader_ui(&loader_ui);
+		egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
 
 		{
 			if (filename.empty()) {
-				loader_ui.step(_("Creating empty map…"));
+				egbase.step_loader_ui(_("Creating empty map…"));
 				egbase.mutable_map()->create_empty_map(
 				   egbase, 64, 64, 0,
 				   /** TRANSLATORS: Default name for new map */
@@ -920,15 +904,14 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 				load_all_tribes(&egbase);
 
 				egbase.load_graphics();
-				loader_ui.step(std::string());
+				egbase.step_loader_ui(std::string());
 			} else {
-				loader_ui.step((boost::format(_("Loading map “%s”…")) % filename).str());
+				egbase.step_loader_ui((boost::format(_("Loading map “%s”…")) % filename).str());
 				eia.load(filename);
 			}
 		}
 
 		egbase.postload();
-		egbase.set_loader_ui(nullptr);
 
 		eia.start();
 
@@ -936,6 +919,8 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 			eia.egbase().lua().run_script(script_to_run);
 		}
 	}
+
+	egbase.remove_loader_ui();
 	eia.run<UI::Panel::Returncodes>();
 
 	egbase.cleanup_objects();
