@@ -391,4 +391,8 @@ void Tribes::try_load_ware_or_worker(const std::string& objectname) {
 uint32_t Tribes::get_largest_workarea() const {
 	return largest_workarea_;
 }
+
+void Tribes::increase_largest_workarea(uint32_t workarea) {
+    largest_workarea_ = std::max(largest_workarea_, workarea);
+}
 }  // namespace Widelands

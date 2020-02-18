@@ -6,7 +6,6 @@
 -- To add a new tribe, copy test_barbarians.lua into a new file and change all the bulding names.
 -- Don't forget to define the tribe in player_names.
 -- Make sure that the building sizes are the same or smaller, and that ports go on port spaces etc.
--- Then add the checks to the bottom of this file.
 
 -- TODO(GunChleoc): Place waterways when we have the Lua interface for them
 
@@ -53,8 +52,6 @@ function verify_buildings(playernumber, total_expected_buildings)
    print("============================================")
 end
 
--- Placement functions
-
 
 -- Counts all buildings currently owned by the 'player' and
 -- deducts 'old_count' to see if the remainder matches 'expected_buildings'
@@ -74,6 +71,9 @@ function count_buildings(player, old_count, expected_buildings)
    print("============================================")
    return total_buildings
 end
+
+
+-- Placement functions
 
 -- Add a building with coordinates not going out of range.
 -- Note that this has only been tested with starting_field.y == 1

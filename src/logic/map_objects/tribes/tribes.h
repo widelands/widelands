@@ -115,6 +115,7 @@ public:
 	void try_load_ware_or_worker(const std::string& objectname);
 
 	uint32_t get_largest_workarea() const;
+    void increase_largest_workarea(uint32_t workarea);
 
 private:
 	std::unique_ptr<DescriptionMaintainer<BuildingDescr>> buildings_;
