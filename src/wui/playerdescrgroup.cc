@@ -82,19 +82,12 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UI::Panel* const parent,
 	                                   h / 2, UI::ButtonStyle::kFsMenuSecondary, "");
 	d->btnPlayerTribe->sigclicked.connect(
 	   boost::bind(&PlayerDescriptionGroup::toggle_playertribe, boost::ref(*this)));
-	d->btnPlayerInit = new UI::Dropdown<uint8_t>(this,
-	         "player_initialization",
-	         xplayerinit, h / 2,
-	         w - xplayerinit,
-	         6,
-	         h / 2,
-	         _("Initialization"),
-	         UI::DropdownType::kTextual,
-	         UI::PanelStyle::kFsMenu,
-	         UI::ButtonStyle::kFsMenuSecondary);
-	d->btnPlayerInit->selected.connect([this]() {
-		d->settings->set_player_init(d->plnum, d->btnPlayerInit->get_selected());
-	});
+	d->btnPlayerInit =
+	   new UI::Dropdown<uint8_t>(this, "player_initialization", xplayerinit, h / 2, w - xplayerinit,
+	                             6, h / 2, _("Initialization"), UI::DropdownType::kTextual,
+	                             UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary);
+	d->btnPlayerInit->selected.connect(
+	   [this]() { d->settings->set_player_init(d->plnum, d->btnPlayerInit->get_selected()); });
 
 	update();
 }
@@ -287,7 +280,8 @@ void PlayerDescriptionGroup::toggle_playerteam() {
 }
 
 void PlayerDescriptionGroup::update_playerinit() {
-	const size_t selection = d->btnPlayerInit->has_selection() ? d->btnPlayerInit->get_selected() : -1;
+	const size_t selection =
+	   d->btnPlayerInit->has_selection() ? d->btnPlayerInit->get_selected() : -1;
 	d->btnPlayerInit->clear();
 
 	const GameSettings& settings = d->settings->settings();
@@ -296,7 +290,8 @@ void PlayerDescriptionGroup::update_playerinit() {
 		return;
 
 	if (settings.scenario) {
-		d->btnPlayerInit->add(_("Scenario"), -1, nullptr, true, _("Start type is set via the scenario"));
+		d->btnPlayerInit->add(
+		   _("Scenario"), -1, nullptr, true, _("Start type is set via the scenario"));
 		return;
 	}
 
@@ -324,7 +319,8 @@ void PlayerDescriptionGroup::update_playerinit() {
 					}
 				}
 				if (matches_tags) {
-					d->btnPlayerInit->add(tribeinfo.initializations[i].descname, i, nullptr, i == selection, tribeinfo.initializations[i].tooltip);
+					d->btnPlayerInit->add(tribeinfo.initializations[i].descname, i, nullptr,
+					                      i == selection, tribeinfo.initializations[i].tooltip);
 				}
 			}
 		}
