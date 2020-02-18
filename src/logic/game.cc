@@ -229,7 +229,8 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	// We have to create the players here.
 	PlayerNumber const nr_players = map().get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
-		step_loader_ui((boost::format(_("Creating player %d…")) % static_cast<unsigned int>(p)).str());
+		step_loader_ui(
+		   (boost::format(_("Creating player %d…")) % static_cast<unsigned int>(p)).str());
 		// If tribe name is empty, pick a random tribe
 		std::string tribe = map().get_scenario_player_tribe(p);
 		if (tribe.empty()) {
