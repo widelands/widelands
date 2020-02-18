@@ -6,7 +6,7 @@ tribes:new_ware_type {
    msgctxt = "ware",
    name = "ax_sharp",
    -- TRANSLATORS: This is a ware name used in lists of wares
-   descname = pgettext("ware", "Sharp Ax"),
+   descname = pgettext("ware", "Replaced Ware"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    default_target_quantity = {

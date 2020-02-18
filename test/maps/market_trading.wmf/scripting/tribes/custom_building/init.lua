@@ -4,7 +4,7 @@ tribes:new_productionsite_type {
    msgctxt = "barbarians_building",
    name = "barbarians_custom_building",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("barbarians_building", "Custom Building"),
+   descname = pgettext("custom_building", "Custom Building"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
@@ -61,9 +61,9 @@ tribes:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Trees",
-      heading = _"Out of Trees",
-      message = pgettext("barbarians_building", "The lumberjack working at this lumberjack’s hut can’t find any trees in his work area. You should consider dismantling or destroying the building or building a ranger’s hut."),
+      title = "No Trees",
+      heading = "Out of Trees",
+      message = "Custom out of resource message.",
       productivity_threshold = 60
    },
 }
