@@ -101,11 +101,13 @@ const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
 
    {nullptr, nullptr}};
 
-
 /**
  * Parse a program
  */
-WorkerProgram::WorkerProgram(const std::string& init_name, const LuaTable& actions_table, const WorkerDescr& worker, const Tribes& tribes)
+WorkerProgram::WorkerProgram(const std::string& init_name,
+                             const LuaTable& actions_table,
+                             const WorkerDescr& worker,
+                             const Tribes& tribes)
    : MapObjectProgram(init_name), worker_(worker), tribes_(tribes) {
 
 	for (const std::string& line : actions_table.array_entries<std::string>()) {
@@ -127,7 +129,8 @@ WorkerProgram::WorkerProgram(const std::string& init_name, const LuaTable& actio
 			}
 
 			if (!parsemap_[mapidx].name) {
-				throw GameDataError("Unknown command '%s' in line '%s'", parseinput.name.c_str(), line.c_str());
+				throw GameDataError(
+				   "Unknown command '%s' in line '%s'", parseinput.name.c_str(), line.c_str());
 			}
 
 			(this->*parsemap_[mapidx].function)(&act, parseinput.arguments);
@@ -412,10 +415,11 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 				static const struct {
 					char const* name;
 					int32_t val;
-				} sizenames[] = {{"any", FindNodeSize::sizeAny},     {"build", FindNodeSize::sizeBuild},
-								 {"small", FindNodeSize::sizeSmall}, {"medium", FindNodeSize::sizeMedium},
-								 {"big", FindNodeSize::sizeBig},     {"mine", FindNodeSize::sizeMine},
-								 {"port", FindNodeSize::sizePort},   {nullptr, 0}};
+				} sizenames[] = {
+				   {"any", FindNodeSize::sizeAny},     {"build", FindNodeSize::sizeBuild},
+				   {"small", FindNodeSize::sizeSmall}, {"medium", FindNodeSize::sizeMedium},
+				   {"big", FindNodeSize::sizeBig},     {"mine", FindNodeSize::sizeMine},
+				   {"port", FindNodeSize::sizePort},   {nullptr, 0}};
 
 				int32_t index;
 
@@ -432,8 +436,8 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 				act->iparam2 = sizenames[index].val;
 			} else if (item.first == "breed") {
 				act->iparam4 = 1;
-            } else if (item.first == "terraform") {
-                act->iparam7 = 1;
+			} else if (item.first == "terraform") {
+				act->iparam7 = 1;
 			} else if (item.first == "resource") {
 				act->sparam1 = item.second;
 			} else if (item.first == "space") {
@@ -441,7 +445,7 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 			} else if (item.first == "avoid") {
 				act->iparam5 = MapObjectDescr::get_attribute_id(item.second);
 			} else if (item.first == "saplingsearches") {
-                act->iparam6 = read_int(item.second, 2);
+				act->iparam6 = read_int(item.second, 2);
 			} else {
 				throw GameDataError("Unknown findspace predicate %s", item.first.c_str());
 			}

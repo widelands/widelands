@@ -107,13 +107,15 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 		for (std::string program_name : programs_table->keys<std::string>()) {
 			std::transform(program_name.begin(), program_name.end(), program_name.begin(), tolower);
 			if (programs_.count(program_name)) {
-				throw GameDataError("Program '%s' has already been declared for worker '%s'", program_name.c_str(), name().c_str());
+				throw GameDataError("Program '%s' has already been declared for worker '%s'",
+				                    program_name.c_str(), name().c_str());
 			}
 			try {
-				programs_[program_name] = std::unique_ptr<WorkerProgram>(
-				   new WorkerProgram(program_name, *programs_table->get_table(program_name), *this, tribes_));
+				programs_[program_name] = std::unique_ptr<WorkerProgram>(new WorkerProgram(
+				   program_name, *programs_table->get_table(program_name), *this, tribes_));
 			} catch (const std::exception& e) {
-				throw GameDataError("%s: Error in worker program %s: %s", name().c_str(), program_name.c_str(), e.what());
+				throw GameDataError("%s: Error in worker program %s: %s", name().c_str(),
+				                    program_name.c_str(), e.what());
 			}
 		}
 	}

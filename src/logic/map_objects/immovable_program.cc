@@ -31,7 +31,8 @@
 
 namespace Widelands {
 
-ImmovableProgram::ImmovableProgram(const std::string& init_name, std::unique_ptr<Action> action) : MapObjectProgram(init_name) {
+ImmovableProgram::ImmovableProgram(const std::string& init_name, std::unique_ptr<Action> action)
+   : MapObjectProgram(init_name) {
 	actions_.push_back(std::move(action));
 }
 
@@ -47,21 +48,27 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 			ProgramParseInput parseinput = parse_program_string(line);
 
 			if (parseinput.name == "animate") {
-				actions_.push_back(std::unique_ptr<Action>(new ActAnimate(parseinput.arguments, immovable)));
+				actions_.push_back(
+				   std::unique_ptr<Action>(new ActAnimate(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "transform") {
-				actions_.push_back(std::unique_ptr<Action>(new ActTransform(parseinput.arguments, immovable)));
+				actions_.push_back(
+				   std::unique_ptr<Action>(new ActTransform(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "grow") {
-				actions_.push_back(std::unique_ptr<Action>(new ActGrow(parseinput.arguments, immovable)));
+				actions_.push_back(
+				   std::unique_ptr<Action>(new ActGrow(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "remove") {
 				actions_.push_back(std::unique_ptr<Action>(new ActRemove(parseinput.arguments)));
 			} else if (parseinput.name == "seed") {
-				actions_.push_back(std::unique_ptr<Action>(new ActSeed(parseinput.arguments, immovable)));
+				actions_.push_back(
+				   std::unique_ptr<Action>(new ActSeed(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "playsound") {
 				actions_.push_back(std::unique_ptr<Action>(new ActPlaySound(parseinput.arguments)));
 			} else if (parseinput.name == "construct") {
-				actions_.push_back(std::unique_ptr<Action>(new ActConstruct(parseinput.arguments, immovable)));
+				actions_.push_back(
+				   std::unique_ptr<Action>(new ActConstruct(parseinput.arguments, immovable)));
 			} else {
-				throw GameDataError("Unknown command '%s' in line '%s'", parseinput.name.c_str(), line.c_str());
+				throw GameDataError(
+				   "Unknown command '%s' in line '%s'", parseinput.name.c_str(), line.c_str());
 			}
 		} catch (const GameDataError& e) {
 			throw GameDataError("Error reading line '%s': %s", line.c_str(), e.what());
@@ -75,7 +82,8 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 ImmovableProgram::Action::~Action() {
 }
 
-ImmovableProgram::ActAnimate::ActAnimate(const std::vector<std::string>& arguments, const ImmovableDescr& descr) {
+ImmovableProgram::ActAnimate::ActAnimate(const std::vector<std::string>& arguments,
+                                         const ImmovableDescr& descr) {
 	parameters = MapObjectProgram::parse_act_animate(arguments, descr, true);
 }
 
@@ -83,8 +91,10 @@ ImmovableProgram::ActAnimate::ActAnimate(const std::vector<std::string>& argumen
 /// distribution and the configured time as the expected value.
 void ImmovableProgram::ActAnimate::execute(Game& game, Immovable& immovable) const {
 	immovable.start_animation(game, parameters.animation);
-	immovable.program_step(
-	   game, parameters.duration ? 1 + game.logic_rand() % parameters.duration + game.logic_rand() % parameters.duration : 0);
+	immovable.program_step(game, parameters.duration ?
+	                                1 + game.logic_rand() % parameters.duration +
+	                                   game.logic_rand() % parameters.duration :
+	                                0);
 }
 
 ImmovableProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments) {
@@ -96,11 +106,13 @@ ImmovableProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arg
  * Whether the effect actually gets played is decided by the sound server itself.
  */
 void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) const {
-	Notifications::publish(NoteSound(SoundType::kAmbient, parameters.fx, immovable.get_position(), parameters.priority));
+	Notifications::publish(
+	   NoteSound(SoundType::kAmbient, parameters.fx, immovable.get_position(), parameters.priority));
 	immovable.program_step(game);
 }
 
-ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments, const ImmovableDescr& descr) {
+ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments,
+                                             const ImmovableDescr& descr) {
 	if (arguments.empty()) {
 		throw GameDataError("Usage: transform=[bob] <name> [<probability>]");
 	}
@@ -114,7 +126,8 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 			} else if (argument[0] >= '0' && argument[0] <= '9') {
 				probability = read_positive(argument, 254);
 			} else {
-				// TODO(GunChleoc): If would be nice to check if target exists, but we can't guarantee the load order. Maybe in postload() one day.
+				// TODO(GunChleoc): If would be nice to check if target exists, but we can't guarantee
+				// the load order. Maybe in postload() one day.
 				type_name = argument;
 			}
 		}
@@ -143,7 +156,8 @@ void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) c
 		immovable.program_step(game);
 }
 
-ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments, const ImmovableDescr& descr) {
+ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments,
+                                   const ImmovableDescr& descr) {
 	if (arguments.size() != 1) {
 		throw GameDataError("Usage: grow=<immovable name>");
 	}
@@ -152,7 +166,8 @@ ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments, const Im
 		   "Immovable %s can 'grow', but has no terrain_affinity entry.", descr.name().c_str());
 	}
 
-	// TODO(GunChleoc): If would be nice to check if target exists, but we can't guarantee the load order. Maybe in postload() one day.
+	// TODO(GunChleoc): If would be nice to check if target exists, but we can't guarantee the load
+	// order. Maybe in postload() one day.
 	type_name = arguments.front();
 }
 
@@ -191,7 +206,8 @@ void ImmovableProgram::ActRemove::execute(Game& game, Immovable& immovable) cons
 	}
 }
 
-ImmovableProgram::ActSeed::ActSeed(std::vector<std::string>& arguments, const ImmovableDescr& descr) {
+ImmovableProgram::ActSeed::ActSeed(std::vector<std::string>& arguments,
+                                   const ImmovableDescr& descr) {
 	if (arguments.size() != 1) {
 		throw GameDataError("Usage: seed=<immovable name>");
 	}
@@ -200,7 +216,8 @@ ImmovableProgram::ActSeed::ActSeed(std::vector<std::string>& arguments, const Im
 		   "Immovable %s can 'seed', but has no terrain_affinity entry.", descr.name().c_str());
 	}
 
-	// TODO(GunChleoc): If would be nice to check if target exists, but we can't guarantee the load order. Maybe in postload() one day.
+	// TODO(GunChleoc): If would be nice to check if target exists, but we can't guarantee the load
+	// order. Maybe in postload() one day.
 	type_name = arguments.front();
 }
 
@@ -237,7 +254,8 @@ void ImmovableProgram::ActSeed::execute(Game& game, Immovable& immovable) const 
 	immovable.program_step(game);
 }
 
-ImmovableProgram::ActConstruct::ActConstruct(std::vector<std::string>& arguments, const ImmovableDescr& descr) {
+ImmovableProgram::ActConstruct::ActConstruct(std::vector<std::string>& arguments,
+                                             const ImmovableDescr& descr) {
 	if (arguments.size() != 3) {
 		throw GameDataError("Usage: construct=<animation> <build duration> <decay duration>");
 	}
@@ -256,7 +274,6 @@ ImmovableProgram::ActConstruct::ActConstruct(std::vector<std::string>& arguments
 }
 
 constexpr uint8_t kCurrentPacketVersionConstructionData = 1;
-
 
 const char* ActConstructData::name() const {
 	return "construct";
@@ -285,7 +302,6 @@ ActConstructData* ActConstructData::load(FileRead& fr, Immovable& imm) {
 
 	return d;
 }
-
 
 void ImmovableProgram::ActConstruct::execute(Game& g, Immovable& imm) const {
 	ActConstructData* d = imm.get_action_data<ActConstructData>();

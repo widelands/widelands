@@ -40,7 +40,8 @@
 
 namespace Widelands {
 
-CritterProgram::CritterProgram(const std::string& program_name, const LuaTable& actions_table) : MapObjectProgram(program_name) {
+CritterProgram::CritterProgram(const std::string& program_name, const LuaTable& actions_table)
+   : MapObjectProgram(program_name) {
 	for (const std::string& line : actions_table.array_entries<std::string>()) {
 		try {
 			const std::vector<std::string> cmd(split_string(line, " \t\r\n"));
@@ -108,7 +109,8 @@ CritterDescr::CritterDescr(const std::string& init_descname,
 	std::unique_ptr<LuaTable> programs = table.get_table("programs");
 	for (const std::string& program_name : programs->keys<std::string>()) {
 		try {
-			programs_[program_name] = std::unique_ptr<CritterProgram>(new CritterProgram(program_name, *programs->get_table(program_name).get()));
+			programs_[program_name] = std::unique_ptr<CritterProgram>(
+			   new CritterProgram(program_name, *programs->get_table(program_name).get()));
 		} catch (const std::exception& e) {
 			throw wexception("Parse error in program %s: %s", program_name.c_str(), e.what());
 		}

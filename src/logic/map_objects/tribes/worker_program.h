@@ -41,7 +41,10 @@ struct WorkerProgram : public MapObjectProgram {
 	using ParseWorkerProgramFn = void (WorkerProgram::*)(Worker::Action*,
 	                                                     const std::vector<std::string>&);
 
-	WorkerProgram(const std::string& init_name, const LuaTable& actions_table, const WorkerDescr& worker, const Tribes& tribes);
+	WorkerProgram(const std::string& init_name,
+	              const LuaTable& actions_table,
+	              const WorkerDescr& worker,
+	              const Tribes& tribes);
 
 	using Actions = std::vector<Worker::Action>;
 	Actions::size_type get_size() const {

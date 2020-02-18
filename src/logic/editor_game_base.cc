@@ -117,9 +117,9 @@ void EditorGameBase::delete_tempfile() {
  * throws an exception if something goes wrong
  */
 void EditorGameBase::create_tempfile_and_save_mapdata(FileSystem::Type const type) {
-    if (!map_.filesystem()) {
-        return;
-    }
+	if (!map_.filesystem()) {
+		return;
+	}
 
 	// save map data to temporary file and reassign map fs
 	try {
@@ -137,8 +137,9 @@ void EditorGameBase::create_tempfile_and_save_mapdata(FileSystem::Type const typ
 					break;
 			}
 			if (suffix > 9) {
-				throw wexception("EditorGameBase::create_tempfile_and_save_mapdata(): for all considered "
-								 "filenames a file already existed");
+				throw wexception(
+				   "EditorGameBase::create_tempfile_and_save_mapdata(): for all considered "
+				   "filenames a file already existed");
 			}
 		}
 
@@ -157,12 +158,15 @@ void EditorGameBase::create_tempfile_and_save_mapdata(FileSystem::Type const typ
 		// This is just a convenience hack:
 		// If tmp_fs_ is a zip filesystem then - because of the way zip filesystems are currently
 		// implemented -
-		// the file is still in zip mode right now, which means that the file isn't finalized yet, i.e.,
-		// not even a valid zip file until zip mode ends. To force ending the zip mode (thus finalizing
+		// the file is still in zip mode right now, which means that the file isn't finalized yet,
+		// i.e.,
+		// not even a valid zip file until zip mode ends. To force ending the zip mode (thus
+		// finalizing
 		// the file)
 		// we simply perform a (otherwise useless) filesystem request.
 		// It's not strictly necessary, but this way we get a valid zip file immediately istead of
-		// at some unkown later point (when an unzip operation happens or a filesystem object destructs).
+		// at some unkown later point (when an unzip operation happens or a filesystem object
+		// destructs).
 		tmp_fs_->file_exists("binary");
 	} catch (const WException& e) {
 		log("EditorGameBase: saving map to temporary file failed: %s", e.what());
@@ -287,7 +291,8 @@ void EditorGameBase::allocate_player_maps() {
 
 /**
  * Load and prepare detailed game and map data.
- * This happens once just after the host has started the game / the editor has started and before the graphics are loaded.
+ * This happens once just after the host has started the game / the editor has started and before
+ * the graphics are loaded.
  */
 void EditorGameBase::postload() {
 	create_tempfile_and_save_mapdata(FileSystem::ZIP);
