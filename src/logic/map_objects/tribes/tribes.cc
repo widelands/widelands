@@ -393,6 +393,6 @@ uint32_t Tribes::get_largest_workarea() const {
 }
 
 void Tribes::increase_largest_workarea(uint32_t workarea) {
-    largest_workarea_ = std::max(largest_workarea_, workarea);
+	largest_workarea_ = std::max(largest_workarea_, workarea);
 }
 }  // namespace Widelands

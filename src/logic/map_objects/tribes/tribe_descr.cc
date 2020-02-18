@@ -712,10 +712,10 @@ void TribeDescr::finalize_loading(Tribes& tribes) {
 		BuildingDescr* building_descr = tribes.get_mutable_building_descr(i);
 		assert(building_descr != nullptr);
 
-        // Calculate largest possible workarea radius
-        for (const auto& pair : building_descr->workarea_info()) {
-            tribes.increase_largest_workarea(pair.first);
-        }
+		// Calculate largest possible workarea radius
+		for (const auto& pair : building_descr->workarea_info()) {
+			tribes.increase_largest_workarea(pair.first);
+		}
 
 		// Add consumers and producers to wares.
 		if (upcast(ProductionSiteDescr, de, building_descr)) {
