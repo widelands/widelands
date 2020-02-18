@@ -450,7 +450,7 @@ void EditorInteractive::load(const std::string& filename) {
 	iterate_player_numbers(p, map->get_nrplayers()) {
 		if (!map->get_scenario_player_tribe(p).empty()) {
 			egbase().step_loader_ui(
-			   (boost::format(_("Creating player %d")) % static_cast<unsigned int>(p)).str());
+			   (boost::format(_("Creating player %d…")) % static_cast<unsigned int>(p)).str());
 			egbase().add_player(
 			   p, 0, map->get_scenario_player_tribe(p), map->get_scenario_player_name(p));
 		}
@@ -874,8 +874,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	EditorInteractive& eia = *new EditorInteractive(egbase);
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
 	{
-		egbase.create_loader_ui({"editor"}, "images/loadscreens/editor.jpg");
-
+		egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
 		egbase.step_loader_ui(_("Loading tribes…"));
 		egbase.tribes();
 

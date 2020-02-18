@@ -100,7 +100,7 @@ void MainMenuNewMap::clicked_create_map() {
 	EditorInteractive& parent = eia();
 	Widelands::EditorGameBase& egbase = parent.egbase();
 	Widelands::Map* map = egbase.mutable_map();
-	egbase.create_loader_ui({"editor"}, "images/loadscreens/editor.jpg");
+	egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
 	egbase.step_loader_ui(_("Creating empty map…"));
 
 	parent.cleanup_for_load();

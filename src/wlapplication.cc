@@ -1357,7 +1357,7 @@ bool WLApplication::new_game() {
 			if (sp.has_players_tribe()) {
 				tipstexts.push_back(sp.get_players_tribe());
 			}
-			game.create_loader_ui(tipstexts);
+			game.create_loader_ui(tipstexts, false);
 
 			game.step_loader_ui(_("Preparing game"));
 
@@ -1464,7 +1464,7 @@ void WLApplication::replay() {
 	}
 
 	try {
-		game.create_loader_ui({"general_game"});
+		game.create_loader_ui({"general_game"}, true);
 		game.step_loader_ui(_("Loading…"));
 
 		game.set_ibase(new InteractiveSpectator(game, get_config_section()));

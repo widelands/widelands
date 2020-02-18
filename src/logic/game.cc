@@ -212,7 +212,7 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 		throw wexception("could not load \"%s\"", mapname.c_str());
 	}
 
-	create_loader_ui({"general_game"});
+	create_loader_ui({"general_game"}, false);
 
 	step_loader_ui(_("Preloading map…"));
 	maploader->preload_map(true);
@@ -229,7 +229,7 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	// We have to create the players here.
 	PlayerNumber const nr_players = map().get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
-		step_loader_ui((boost::format(_("Creating player %d")) % static_cast<unsigned int>(p)).str());
+		step_loader_ui((boost::format(_("Creating player %d…")) % static_cast<unsigned int>(p)).str());
 		// If tribe name is empty, pick a random tribe
 		std::string tribe = map().get_scenario_player_tribe(p);
 		if (tribe.empty()) {
@@ -286,7 +286,7 @@ void Game::init_newgame(const GameSettings& settings) {
 	std::vector<PlayerSettings> shared;
 	std::vector<uint8_t> shared_num;
 	for (uint32_t i = 0; i < settings.players.size(); ++i) {
-		step_loader_ui((boost::format(_("Creating player %d")) % (i + 1)).str());
+		step_loader_ui((boost::format(_("Creating player %d…")) % (i + 1)).str());
 		const PlayerSettings& playersettings = settings.players[i];
 
 		if (playersettings.state == PlayerSettings::State::kClosed ||
@@ -383,7 +383,7 @@ void Game::init_savegame(const GameSettings& settings) {
 }
 
 bool Game::run_load_game(const std::string& filename, const std::string& script_to_run) {
-	create_loader_ui({"general_game", "singleplayer"});
+	create_loader_ui({"general_game", "singleplayer"}, false);
 	int8_t player_nr;
 
 	step_loader_ui(_("Preloading map…"));

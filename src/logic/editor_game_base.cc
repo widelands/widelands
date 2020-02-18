@@ -298,23 +298,32 @@ void EditorGameBase::postload() {
 	// Postload tribes and world
 	// Tribes don't have a postload at this point.
 	step_loader_ui(_("Postloading world and tribes…"));
-
 	assert(world_);
 	world_->postload();
 }
 
 UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::vector<std::string>& tipstexts,
+                                                     bool show_game_tips,
                                                      const std::string& background) {
 	assert(!has_loader_ui());
 	loader_ui_.reset(new UI::ProgressWindow(background));
-	game_tips_.reset(tipstexts.empty() ? nullptr : new GameTips(*loader_ui_, tipstexts));
+	registered_game_tips_ = tipstexts;
+	if (show_game_tips) {
+		game_tips_.reset(registered_game_tips_.empty() ?
+		                    nullptr :
+		                    new GameTips(*loader_ui_, registered_game_tips_));
+	}
 	return *loader_ui_.get();
 }
 void EditorGameBase::change_loader_ui_background(const std::string& background) {
 	assert(has_loader_ui());
-	if (!background.empty()) {
+	assert(game_tips_ == nullptr);
+	if (background.empty()) {
+		game_tips_.reset(registered_game_tips_.empty() ?
+		                    nullptr :
+		                    new GameTips(*loader_ui_, registered_game_tips_));
+	} else {
 		loader_ui_->set_background(background);
-		game_tips_.reset(nullptr);
 	}
 }
 void EditorGameBase::step_loader_ui(const std::string& text) const {
@@ -326,6 +335,7 @@ void EditorGameBase::remove_loader_ui() {
 	assert(loader_ui_ != nullptr);
 	loader_ui_.reset(nullptr);
 	game_tips_.reset(nullptr);
+	registered_game_tips_.clear();
 }
 
 /**
