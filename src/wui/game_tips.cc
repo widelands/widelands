@@ -26,7 +26,6 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
-#include "io/fileread.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
@@ -78,7 +77,7 @@ void GameTips::load_tips(const std::string& name) {
 }
 
 void GameTips::update(bool repaint) {
-	uint8_t ticks = SDL_GetTicks();
+	uint32_t ticks = SDL_GetTicks();
 	if (ticks >= (lastUpdated_ + updateAfter_)) {
 		const uint32_t next = rand() % tips_.size();
 		if (next == lastTip_)
