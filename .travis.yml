@@ -196,10 +196,6 @@ jobs:
       os: osx
       osx_image: xcode10.1
       env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=OFF
-    - name: "DEBUG: macOS 10.12 with Xcode 9.2"
-      os: osx
-      osx_image: xcode9.2
-      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=OFF
     ### RELEASE BUILDS
     - name: "RELEASE: Ubuntu 18.04 with clang 9"
       os: linux
@@ -318,10 +314,6 @@ jobs:
     - name: "RELEASE: macOS 10.13 with Xcode 10.1"
       os: osx
       osx_image: xcode10.1
-      env: BUILD_TYPE=Release BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=OFF
-    - name: "RELEASE: macOS 10.12 with Xcode 9.2"
-      os: osx
-      osx_image: xcode9.2
       env: BUILD_TYPE=Release BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=OFF
 
 language: cpp
