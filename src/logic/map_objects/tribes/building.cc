@@ -45,6 +45,7 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/worker.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
 
 namespace Widelands {
@@ -107,6 +108,12 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 			throw GameDataError("size: %s", e.what());
 		}
 	}
+	if (table.has_key("built_over_immovable")) {
+		// Throws an error if no matching immovable exists
+		built_over_immovable_ = get_attribute_id(table.get_string("built_over_immovable"), false);
+	} else {
+		built_over_immovable_ = INVALID_INDEX;
+	}
 
 	// Parse build options
 	if (table.has_key("enhancement")) {
@@ -160,7 +167,21 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 		return_enhanced_ = Buildcost(table.get_table("return_on_dismantle_on_enhanced"), tribes_);
 	}
 
-	needs_seafaring_ = table.has_key("needs_seafaring") ? table.get_bool("needs_seafaring") : false;
+	needs_seafaring_ = false;
+	needs_waterways_ = false;
+	if (table.has_key("map_check")) {
+		for (const std::string& map_check :
+		     table.get_table("map_check")->array_entries<std::string>()) {
+			if (map_check == "seafaring") {
+				needs_seafaring_ = true;
+			} else if (map_check == "waterways") {
+				needs_waterways_ = true;
+			} else {
+				throw GameDataError(
+				   "Unexpected map_check item '%s' in building description", map_check.c_str());
+			}
+		}
+	}
 
 	if (table.has_key("vision_range")) {
 		vision_range_ = table.get_int("vision_range");
@@ -172,12 +193,54 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
                                 Coords const pos,
                                 bool const construct,
                                 bool loading,
-                                Building::FormerBuildings const former_buildings) const {
+                                FormerBuildings const former_buildings) const {
+	std::pair<DescriptionIndex, std::string> immovable = std::make_pair(INVALID_INDEX, "");
+	if (built_over_immovable_ != INVALID_INDEX) {
+		bool immovable_previously_found = false;
+		for (const auto& pair : former_buildings) {
+			if (!pair.second.empty()) {
+				const MapObjectDescr* d;
+				if (pair.second == "world") {
+					d = egbase.world().get_immovable_descr(pair.first);
+				} else if (pair.second == "tribe") {
+					d = egbase.tribes().get_immovable_descr(pair.first);
+				} else {
+					throw wexception("Invalid FormerBuildings type: %s", pair.second.c_str());
+				}
+				if (d->has_attribute(built_over_immovable_)) {
+					immovable_previously_found = true;
+					break;
+				}
+			}
+		}
+		if (!immovable_previously_found) {
+			// Must be done first, because the immovable will be gone the moment the building is placed
+			const FCoords f = egbase.map().get_fcoords(pos);
+			if (f.field->get_immovable() &&
+			    f.field->get_immovable()->has_attribute(built_over_immovable_)) {
+				upcast(const ImmovableDescr, imm, &f.field->get_immovable()->descr());
+				assert(imm);
+				immovable =
+				   imm->owner_type() == MapObjectDescr::OwnerType::kWorld ?
+				      std::make_pair(egbase.world().get_immovable_index(imm->name()), "world") :
+				      std::make_pair(egbase.tribes().safe_immovable_index(imm->name()), "tribe");
+			} else {
+				throw wexception(
+				   "Attempting to build %s at %dx%d – no immovable with required attribute %i found",
+				   name().c_str(), pos.x, pos.y, built_over_immovable_);
+			}
+		}
+	}
+
 	Building& b = construct ? create_constructionsite() : create_object();
 	b.position_ = pos;
 	b.set_owner(owner);
-	for (DescriptionIndex idx : former_buildings) {
-		b.old_buildings_.push_back(idx);
+	if (immovable.first != INVALID_INDEX) {
+		assert(!immovable.second.empty());
+		b.old_buildings_.push_back(immovable);
+	}
+	for (const auto& pair : former_buildings) {
+		b.old_buildings_.push_back(pair);
 	}
 	if (loading) {
 		b.Building::init(egbase);
@@ -188,8 +251,11 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
 }
 
 bool BuildingDescr::suitability(const Map&, const FCoords& fc) const {
-	return mine_ ? fc.field->nodecaps() & Widelands::BUILDCAPS_MINE :
-	               size_ <= (fc.field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK);
+	return (mine_ ? fc.field->nodecaps() & Widelands::BUILDCAPS_MINE :
+	                size_ <= (fc.field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK)) &&
+	       (built_over_immovable_ == INVALID_INDEX ||
+	        (fc.field->get_immovable() &&
+	         fc.field->get_immovable()->has_attribute(built_over_immovable_)));
 }
 
 const BuildingHints& BuildingDescr::hints() const {
@@ -202,6 +268,18 @@ void BuildingDescr::set_hints_trainingsites_max_percent(int percent) {
 
 uint32_t BuildingDescr::get_unoccupied_animation() const {
 	return get_animation(is_animation_known("unoccupied") ? "unoccupied" : "idle", nullptr);
+}
+
+bool BuildingDescr::is_useful_on_map(bool seafaring_allowed, bool waterways_allowed) const {
+	if (needs_seafaring_ && needs_waterways_) {
+		return seafaring_allowed || waterways_allowed;
+	} else if (needs_seafaring_) {
+		return seafaring_allowed;
+	} else if (needs_waterways_) {
+		return waterways_allowed;
+	} else {
+		return true;
+	}
 }
 
 /**
@@ -251,6 +329,7 @@ Building::Building(const BuildingDescr& building_descr)
      leave_time_(0),
      defeating_player_(0),
      seeing_(false),
+     was_immovable_(nullptr),
      attack_target_(nullptr),
      soldier_control_(nullptr) {
 }
@@ -363,6 +442,21 @@ bool Building::init(EditorGameBase& egbase) {
 			flag = new Flag(egbase, get_owner(), neighb);
 		flag_ = flag;
 		flag->attach_building(egbase, *this);
+	}
+
+	for (const auto& pair : old_buildings_) {
+		if (!pair.second.empty()) {
+			assert(!was_immovable_);
+			if (pair.second == "world") {
+				was_immovable_ = egbase.world().get_immovable_descr(pair.first);
+			} else if (pair.second == "tribe") {
+				was_immovable_ = egbase.tribes().get_immovable_descr(pair.first);
+			} else {
+				throw wexception("Invalid FormerBuildings type: %s", pair.second.c_str());
+			}
+			assert(was_immovable_);
+			break;
+		}
 	}
 
 	// Start the animation
@@ -605,18 +699,23 @@ bool Building::fetch_from_flag(Game&) {
 }
 
 void Building::draw(uint32_t gametime,
-                    const TextToDraw draw_text,
+                    const InfoToDraw info_to_draw,
                     const Vector2f& point_on_dst,
                     const Widelands::Coords& coords,
                     const float scale,
                     RenderTarget* dst) {
+	if (was_immovable_) {
+		dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(),
+		                    gametime - animstart_, &get_owner()->get_playercolor());
+	}
+
 	dst->blit_animation(
 	   point_on_dst, coords, scale, anim_, gametime - animstart_, &get_owner()->get_playercolor());
 
 	//  door animation?
 
 	//  overlay strings (draw when enabled)
-	draw_info(draw_text, point_on_dst, scale, dst);
+	draw_info(info_to_draw, point_on_dst, scale, dst);
 }
 
 /*
@@ -624,16 +723,14 @@ void Building::draw(uint32_t gametime,
 Draw overlay help strings when enabled.
 ===============
 */
-void Building::draw_info(const TextToDraw draw_text,
+void Building::draw_info(const InfoToDraw info_to_draw,
                          const Vector2f& point_on_dst,
                          const float scale,
                          RenderTarget* dst) {
 	const std::string statistics_string =
-	   ((draw_text & TextToDraw::kStatistics) != TextToDraw::kNone) ?
-	      info_string(InfoStringFormat::kStatistics) :
-	      "";
-	do_draw_info(draw_text, info_string(InfoStringFormat::kCensus), statistics_string, point_on_dst,
-	             scale, dst);
+	   (info_to_draw & InfoToDraw::kStatistics) ? info_string(InfoStringFormat::kStatistics) : "";
+	do_draw_info(info_to_draw, info_string(InfoStringFormat::kCensus), statistics_string,
+	             point_on_dst, scale, dst);
 }
 
 int32_t

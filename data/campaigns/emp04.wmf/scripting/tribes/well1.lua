@@ -47,7 +47,7 @@ tribes:new_productionsite_type {
          actions = {
             "sleep=30000",
             "animate=working 30000",
-            "mine=water 5 100 10 2",
+            "mine=water 5 100 5 2",
             "produce=water"
          }
       },

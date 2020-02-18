@@ -63,13 +63,12 @@ wl_library(logic_game_controller
     logic_commands
     logic_game_settings
     ui_basic
-    widelands_ball_of_mud
+    widelands_options
     wui
 )
 
 wl_library(logic_constants
   SRCS
-    roadtype.h
     widelands.cc
     widelands.h
   DEPENDS
@@ -137,6 +136,7 @@ wl_library(logic_map
     base_scoped_timer
     build_info
     economy
+    graphic
     graphic_playercolor
     io_fileread
     io_filesystem
@@ -258,8 +258,9 @@ wl_library(logic
     sound
     sound_constants
     ui_basic
-    widelands_ball_of_mud
+    widelands_options
     wui # TODO(GunChleoc): Circular dependency
+    wui_game_tips
 )
 
 add_subdirectory(map_objects)

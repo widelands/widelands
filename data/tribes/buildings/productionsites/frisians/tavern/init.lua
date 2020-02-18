@@ -21,21 +21,32 @@ tribes:new_productionsite_type {
       reed = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 84},
-         fps = 10,
+         directory = dirname,
+         basename = "idle",
+         hotspot = {50, 73},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 84},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "working",
+         hotspot = {50, 73},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
       unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 66},
-      },
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {50, 58}
+      }
    },
 
    aihints = {
@@ -50,8 +61,8 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "fruit", amount = 4 },
       { name = "bread_frisians", amount = 4 },
+      { name = "fruit", amount = 4 },
       { name = "smoked_fish", amount = 4 },
       { name = "smoked_meat", amount = 4 },
    },
@@ -75,8 +86,8 @@ tribes:new_productionsite_type {
          actions = {
             -- time total: 49.5
             "return=skipped unless economy needs ration",
-            "return=skipped when site has fruit,bread_frisians and site has smoked_fish,smoked_meat",
-            "consume=fruit,bread_frisians,smoked_fish,smoked_meat",
+            "return=skipped when site has bread_frisians,fruit and site has smoked_fish,smoked_meat",
+            "consume=bread_frisians,fruit,smoked_fish,smoked_meat",
             "sleep=5000",
             "animate=working 34500",
             "sleep=10000",
@@ -89,7 +100,7 @@ tribes:new_productionsite_type {
          actions = {
             -- time total: 66
             "return=skipped unless economy needs ration",
-            "consume=fruit,bread_frisians smoked_fish,smoked_meat",
+            "consume=bread_frisians,fruit smoked_fish,smoked_meat",
             "sleep=5000",
             "animate=working 51000",
             "sleep=10000",

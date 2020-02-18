@@ -58,6 +58,7 @@ struct PlayerSettings {
 };
 
 struct UserSettings {
+	// TODO(k.halfman): make this some const instead of calculating this every time
 	static uint8_t none() {
 		return std::numeric_limits<uint8_t>::max();
 	}
@@ -222,10 +223,13 @@ struct GameSettingsProvider {
 	virtual void set_peaceful_mode(bool peace) = 0;
 	virtual bool is_peaceful_mode() = 0;
 
+	bool has_players_tribe() {
+		return UserSettings::highest_playernum() >= settings().playernum;
+	}
 	// For retrieving tips texts
 	struct NoTribe {};
 	const std::string& get_players_tribe() {
-		if (UserSettings::highest_playernum() < settings().playernum)
+		if (!has_players_tribe())
 			throw NoTribe();
 		return settings().players[settings().playernum].tribe;
 	}

@@ -49,6 +49,7 @@ static int setenv(const char* envname, const char* envval, int /* overwrite */) 
 
 // Triggered by BOOST_AUTO_TEST_CASE
 CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
+CLANG_DIAG_OFF("-Wused-but-marked-unused")
 
 BOOST_AUTO_TEST_SUITE(FileSystemTests)
 #ifndef _WIN32

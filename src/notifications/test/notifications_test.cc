@@ -29,6 +29,7 @@
 
 // Triggered by BOOST_AUTO_TEST_CASE
 CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
+CLANG_DIAG_OFF("-Wused-but-marked-unused")
 
 struct SimpleNote {
 	CAN_BE_SENT_AS_NOTE(100)

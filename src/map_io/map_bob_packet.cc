@@ -77,7 +77,7 @@ void MapBobPacket::read(FileSystem& fs,
 	fr.open(fs, "binary/bob");
 
 	Map* map = egbase.mutable_map();
-	map->recalc_whole_map(egbase.world());  //  for movecaps checks in ReadBob
+	map->recalc_whole_map(egbase);  //  for movecaps checks in ReadBob
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion)

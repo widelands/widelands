@@ -32,7 +32,7 @@
 #include "base/wexception.h"
 #include "build_info.h"
 #include "economy/flag.h"
-#include "economy/road.h"
+#include "economy/roadbase.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
@@ -89,7 +89,8 @@ Map::Map()
      width_(0),
      height_(0),
      pathfieldmgr_(new PathfieldManager),
-     allows_seafaring_(false) {
+     allows_seafaring_(false),
+     waterway_max_length_(0) {
 }
 
 Map::~Map() {
@@ -122,7 +123,7 @@ This performs the steps outlined in the comment above Map::recalc_brightness()
 and recalcs the interactive player's overlay.
 ===============
 */
-void Map::recalc_for_field_area(const World& world, const Area<FCoords> area) {
+void Map::recalc_for_field_area(const EditorGameBase& egbase, const Area<FCoords> area) {
 	assert(0 <= area.x);
 	assert(area.x < width_);
 	assert(0 <= area.y);
@@ -135,14 +136,14 @@ void Map::recalc_for_field_area(const World& world, const Area<FCoords> area) {
 		do {
 			recalc_brightness(mr.location());
 			recalc_border(mr.location());
-			recalc_nodecaps_pass1(world, mr.location());
+			recalc_nodecaps_pass1(egbase, mr.location());
 		} while (mr.advance(*this));
 	}
 
 	{  //  Second pass.
 		MapRegion<Area<FCoords>> mr(*this, area);
 		do
-			recalc_nodecaps_pass2(world, mr.location());
+			recalc_nodecaps_pass2(egbase, mr.location());
 		while (mr.advance(*this));
 	}
 }
@@ -156,7 +157,7 @@ a map has been loaded or newly created or in the editor that
 the overlays have completely changed.
 ===========
 */
-void Map::recalc_whole_map(const World& world) {
+void Map::recalc_whole_map(const EditorGameBase& egbase) {
 	//  Post process the map in the necessary two passes to calculate
 	//  brightness and building caps
 	FCoords f;
@@ -168,13 +169,13 @@ void Map::recalc_whole_map(const World& world) {
 			check_neighbour_heights(f, radius);
 			recalc_brightness(f);
 			recalc_border(f);
-			recalc_nodecaps_pass1(world, f);
+			recalc_nodecaps_pass1(egbase, f);
 		}
 
 	for (int16_t y = 0; y < height_; ++y)
 		for (int16_t x = 0; x < width_; ++x) {
 			f = get_fcoords(Coords(x, y));
-			recalc_nodecaps_pass2(world, f);
+			recalc_nodecaps_pass2(egbase, f);
 		}
 	recalculate_allows_seafaring();
 }
@@ -395,10 +396,10 @@ Map::count_owned_valuable_fields(const std::string& immovable_attribute) const {
 		if (use_attribute) {
 			const BaseImmovable* imm = fcoords.field->get_immovable();
 			if (imm != nullptr && imm->has_attribute(attribute_id)) {
-				result[fcoords.field->get_owned_by()] += 1;
+				++result[fcoords.field->get_owned_by()];
 			}
 		} else {
-			result[fcoords.field->get_owned_by()] += 1;
+			++result[fcoords.field->get_owned_by()];
 		}
 	}
 	return result;
@@ -442,7 +443,7 @@ creates an empty map without name with
 the given data
 ===========
 */
-void Map::create_empty_map(const World& world,
+void Map::create_empty_map(const EditorGameBase& egbase,
                            uint32_t const w,
                            uint32_t const h,
                            const Widelands::DescriptionIndex default_terrain,
@@ -467,7 +468,7 @@ void Map::create_empty_map(const World& world,
 			}
 		}
 	}
-	recalc_whole_map(world);
+	recalc_whole_map(egbase);
 
 	filesystem_.reset(nullptr);
 }
@@ -732,6 +733,18 @@ void Map::calculate_needs_widelands_version_after(bool is_post_one_world) {
 }
 
 /*
+ * Getter and setter for the highest permitted length of a waterway on this map.
+ * A value of 0 or 1 means no waterways can be built.
+ */
+uint32_t Map::get_waterway_max_length() const {
+	return waterway_max_length_;
+}
+
+void Map::set_waterway_max_length(uint32_t max_length) {
+	waterway_max_length_ = max_length;
+}
+
+/*
  * The scenario get/set functions
  */
 const std::string& Map::get_scenario_player_tribe(const PlayerNumber p) const {
@@ -871,9 +884,9 @@ void Map::delete_tag(const std::string& tag) {
 	}
 }
 
-NodeCaps Map::get_max_nodecaps(const World& world, const FCoords& fc) const {
-	NodeCaps max_caps = calc_nodecaps_pass1(world, fc, false);
-	max_caps = calc_nodecaps_pass2(world, fc, false, max_caps);
+NodeCaps Map::get_max_nodecaps(const EditorGameBase& egbase, const FCoords& fc) const {
+	NodeCaps max_caps = calc_nodecaps_pass1(egbase, fc, false);
+	max_caps = calc_nodecaps_pass2(egbase, fc, false, max_caps);
 	return static_cast<NodeCaps>(max_caps);
 }
 
@@ -891,7 +904,8 @@ Functor is of the form: functor(Map*, FCoords)
 ===============
 */
 template <typename functorT>
-void Map::find_reachable(const Area<FCoords>& area,
+void Map::find_reachable(const EditorGameBase& egbase,
+                         const Area<FCoords>& area,
                          const CheckStep& checkstep,
                          functorT& functor) const {
 	std::vector<Coords> queue;
@@ -906,7 +920,7 @@ void Map::find_reachable(const Area<FCoords>& area,
 		Pathfield& curpf = pathfields->fields[cur.field - fields_.get()];
 
 		//  handle this node
-		functor(*this, cur);
+		functor(egbase, cur);
 		curpf.cycle = pathfields->cycle;
 
 		// Get neighbours
@@ -934,10 +948,11 @@ Call the functor for every field within the given radius.
 Functor is of the form: functor(Map &, FCoords)
 ===============
 */
-template <typename functorT> void Map::find(const Area<FCoords>& area, functorT& functor) const {
+template <typename functorT>
+void Map::find(const EditorGameBase& egbase, const Area<FCoords>& area, functorT& functor) const {
 	MapRegion<Area<FCoords>> mr(*this, area);
 	do
-		functor(*this, mr.location());
+		functor(egbase, mr.location());
 	while (mr.advance(*this));
 }
 
@@ -953,7 +968,7 @@ struct FindBobsCallback {
 	   : list_(list), functor_(functor), found_(0) {
 	}
 
-	void operator()(const Map&, const FCoords& cur) {
+	void operator()(const EditorGameBase&, const FCoords& cur) {
 		for (Bob* bob = cur.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
 			if (list_ && std::find(list_->begin(), list_->end(), bob) != list_->end())
 				continue;
@@ -982,12 +997,13 @@ the list.
 Returns the number of objects found.
 ===============
 */
-uint32_t Map::find_bobs(Area<FCoords> const area,
+uint32_t Map::find_bobs(const EditorGameBase& egbase,
+                        Area<FCoords> const area,
                         std::vector<Bob*>* const list,
                         const FindBob& functor) const {
 	FindBobsCallback cb(list, functor);
 
-	find(area, cb);
+	find(egbase, area, cb);
 
 	return cb.found_;
 }
@@ -1004,13 +1020,14 @@ the list.
 Returns the number of objects found.
 ===============
 */
-uint32_t Map::find_reachable_bobs(Area<FCoords> const area,
+uint32_t Map::find_reachable_bobs(const EditorGameBase& egbase,
+                                  Area<FCoords> const area,
                                   std::vector<Bob*>* const list,
                                   const CheckStep& checkstep,
                                   const FindBob& functor) const {
 	FindBobsCallback cb(list, functor);
 
-	find_reachable(area, checkstep, cb);
+	find_reachable(egbase, area, checkstep, cb);
 
 	return cb.found_;
 }
@@ -1027,7 +1044,7 @@ struct FindImmovablesCallback {
 	   : list_(list), functor_(functor), found_(0) {
 	}
 
-	void operator()(const Map&, const FCoords& cur) {
+	void operator()(const EditorGameBase&, const FCoords& cur) {
 		BaseImmovable* const imm = cur.field->get_immovable();
 
 		if (!imm)
@@ -1058,12 +1075,13 @@ Returns true if an immovable has been found.
 If list is not 0, found immovables are stored in list.
 ===============
 */
-uint32_t Map::find_immovables(Area<FCoords> const area,
+uint32_t Map::find_immovables(const EditorGameBase& egbase,
+                              Area<FCoords> const area,
                               std::vector<ImmovableFound>* const list,
                               const FindImmovable& functor) const {
 	FindImmovablesCallback cb(list, functor);
 
-	find(area, cb);
+	find(egbase, area, cb);
 
 	return cb.found_;
 }
@@ -1078,13 +1096,14 @@ If list is not 0, found immovables are stored in list.
 Returns the number of immovables we found.
 ===============
 */
-uint32_t Map::find_reachable_immovables(Area<FCoords> const area,
+uint32_t Map::find_reachable_immovables(const EditorGameBase& egbase,
+                                        Area<FCoords> const area,
                                         std::vector<ImmovableFound>* const list,
                                         const CheckStep& checkstep,
                                         const FindImmovable& functor) const {
 	FindImmovablesCallback cb(list, functor);
 
-	find_reachable(area, checkstep, cb);
+	find_reachable(egbase, area, checkstep, cb);
 
 	return cb.found_;
 }
@@ -1096,14 +1115,15 @@ uint32_t Map::find_reachable_immovables(Area<FCoords> const area,
  *
  * \return the number of immovables found.
  */
-uint32_t Map::find_reachable_immovables_unique(const Area<FCoords> area,
+uint32_t Map::find_reachable_immovables_unique(const EditorGameBase& egbase,
+                                               const Area<FCoords> area,
                                                std::vector<BaseImmovable*>& list,
                                                const CheckStep& checkstep,
                                                const FindImmovable& functor) const {
 	std::vector<ImmovableFound> duplist;
 	FindImmovablesCallback cb(&duplist, find_immovable_always_true());
 
-	find_reachable(area, checkstep, cb);
+	find_reachable(egbase, area, checkstep, cb);
 
 	for (ImmovableFound& imm_found : duplist) {
 		BaseImmovable& obj = *imm_found.object;
@@ -1129,8 +1149,8 @@ struct FindNodesCallback {
 	   : list_(list), functor_(functor), found_(0) {
 	}
 
-	void operator()(const Map& map, const FCoords& cur) {
-		if (functor_.accept(map, cur)) {
+	void operator()(const EditorGameBase& egbase, const FCoords& cur) {
+		if (functor_.accept(egbase, cur)) {
 			if (list_)
 				list_->push_back(cur);
 
@@ -1152,12 +1172,13 @@ Returns the number of matching fields.
 Note that list can be 0.
 ===============
 */
-uint32_t Map::find_fields(Area<FCoords> const area,
+uint32_t Map::find_fields(const EditorGameBase& egbase,
+                          Area<FCoords> const area,
                           std::vector<Coords>* list,
                           const FindNode& functor) const {
 	FindNodesCallback cb(list, functor);
 
-	find(area, cb);
+	find(egbase, area, cb);
 
 	return cb.found_;
 }
@@ -1171,13 +1192,14 @@ Returns the number of matching fields.
 Note that list can be 0.
 ===============
 */
-uint32_t Map::find_reachable_fields(Area<FCoords> const area,
+uint32_t Map::find_reachable_fields(const EditorGameBase& egbase,
+                                    Area<FCoords> const area,
                                     std::vector<Coords>* list,
                                     const CheckStep& checkstep,
                                     const FindNode& functor) const {
 	FindNodesCallback cb(list, functor);
 
-	find_reachable(area, checkstep, cb);
+	find_reachable(egbase, area, checkstep, cb);
 
 	return cb.found_;
 }
@@ -1258,13 +1280,15 @@ into two passes. You should always perform both passes. See the comment
 above recalc_brightness.
 ===============
 */
-void Map::recalc_nodecaps_pass1(const World& world, const FCoords& f) {
-	f.field->caps = calc_nodecaps_pass1(world, f, true);
-	f.field->max_caps = calc_nodecaps_pass1(world, f, false);
+void Map::recalc_nodecaps_pass1(const EditorGameBase& egbase, const FCoords& f) {
+	f.field->caps = calc_nodecaps_pass1(egbase, f, true);
+	f.field->max_caps = calc_nodecaps_pass1(egbase, f, false);
 }
 
-NodeCaps Map::calc_nodecaps_pass1(const World& world, const FCoords& f, bool consider_mobs) const {
+NodeCaps
+Map::calc_nodecaps_pass1(const EditorGameBase& egbase, const FCoords& f, bool consider_mobs) const {
 	uint8_t caps = CAPS_NONE;
+	const World& world = egbase.world();
 
 	// 1a) Get all the neighbours to make life easier
 	const FCoords tr = tr_n(f);
@@ -1346,9 +1370,9 @@ NodeCaps Map::calc_nodecaps_pass1(const World& world, const FCoords& f, bool con
 	// if we are interested in the maximum theoretically available NodeCaps, this is not run
 	if (consider_mobs) {
 		//  3) General buildability check: if a "robust" MapObject is on this node
-		//  we cannot build anything on it. Exception: we can build flags on roads.
+		//  we cannot build anything on it. Exception: we can build flags on roads and waterways.
 		if (BaseImmovable* const imm = get_immovable(f))
-			if (!dynamic_cast<Road const*>(imm) && imm->get_size() >= BaseImmovable::SMALL) {
+			if (!dynamic_cast<RoadBase const*>(imm) && imm->get_size() >= BaseImmovable::SMALL) {
 				// 3b) [OVERRIDE] check for "unwalkable" MapObjects
 				if (!imm->get_passable())
 					caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
@@ -1361,8 +1385,8 @@ NodeCaps Map::calc_nodecaps_pass1(const World& world, const FCoords& f, bool con
 	//  restrictions
 	if (caps & MOVECAPS_WALK) {
 		//  4b) Flags must be at least 2 edges apart
-		if (consider_mobs &&
-		    find_immovables(Area<FCoords>(f, 1), nullptr, FindImmovableType(MapObjectType::FLAG)))
+		if (consider_mobs && find_immovables(egbase, Area<FCoords>(f, 1), nullptr,
+		                                     FindImmovableType(MapObjectType::FLAG)))
 			return static_cast<NodeCaps>(caps);
 		caps |= BUILDCAPS_FLAG;
 	}
@@ -1377,13 +1401,13 @@ on this Field.
 Important: flag buildability has already been checked in the first pass.
 ===============
 */
-void Map::recalc_nodecaps_pass2(const World& world, const FCoords& f) {
-	f.field->caps = calc_nodecaps_pass2(world, f, true);
+void Map::recalc_nodecaps_pass2(const EditorGameBase& egbase, const FCoords& f) {
+	f.field->caps = calc_nodecaps_pass2(egbase, f, true);
 	f.field->max_caps =
-	   calc_nodecaps_pass2(world, f, false, static_cast<NodeCaps>(f.field->max_caps));
+	   calc_nodecaps_pass2(egbase, f, false, static_cast<NodeCaps>(f.field->max_caps));
 }
 
-NodeCaps Map::calc_nodecaps_pass2(const World& world,
+NodeCaps Map::calc_nodecaps_pass2(const EditorGameBase& egbase,
                                   const FCoords& f,
                                   bool consider_mobs,
                                   NodeCaps initcaps) const {
@@ -1400,22 +1424,22 @@ NodeCaps Map::calc_nodecaps_pass2(const World& world,
 		     br.field->get_immovable()->descr().type() != MapObjectType::FLAG))
 			return static_cast<NodeCaps>(caps);
 	} else {
-		if (!(calc_nodecaps_pass1(world, br, false) & BUILDCAPS_FLAG))
+		if (!(calc_nodecaps_pass1(egbase, br, false) & BUILDCAPS_FLAG))
 			return static_cast<NodeCaps>(caps);
 	}
 
 	bool mine;
-	uint8_t buildsize = calc_buildsize(world, f, true, &mine, consider_mobs, initcaps);
+	uint8_t buildsize = calc_buildsize(egbase, f, true, &mine, consider_mobs, initcaps);
 	if (buildsize < BaseImmovable::SMALL)
 		return static_cast<NodeCaps>(caps);
 	assert(buildsize >= BaseImmovable::SMALL && buildsize <= BaseImmovable::BIG);
 
 	if (buildsize == BaseImmovable::BIG) {
-		if (calc_buildsize(world, l_n(f), false, nullptr, consider_mobs, initcaps) <
+		if (calc_buildsize(egbase, l_n(f), false, nullptr, consider_mobs, initcaps) <
 		       BaseImmovable::BIG ||
-		    calc_buildsize(world, tl_n(f), false, nullptr, consider_mobs, initcaps) <
+		    calc_buildsize(egbase, tl_n(f), false, nullptr, consider_mobs, initcaps) <
 		       BaseImmovable::BIG ||
-		    calc_buildsize(world, tr_n(f), false, nullptr, consider_mobs, initcaps) <
+		    calc_buildsize(egbase, tr_n(f), false, nullptr, consider_mobs, initcaps) <
 		       BaseImmovable::BIG)
 			buildsize = BaseImmovable::MEDIUM;
 	}
@@ -1489,7 +1513,7 @@ NodeCaps Map::calc_nodecaps_pass2(const World& world,
  * for the calculation. If not (calculation of maximum theoretical possible buildsize) initcaps must
  * be set.
  */
-int Map::calc_buildsize(const World& world,
+int Map::calc_buildsize(const EditorGameBase& egbase,
                         const FCoords& f,
                         bool avoidnature,
                         bool* ismine,
@@ -1509,6 +1533,7 @@ int Map::calc_buildsize(const World& world,
 	const FCoords tl = tl_n(f);
 	const FCoords l = l_n(f);
 
+	const World& world = egbase.world();
 	const TerrainDescription::Is terrains[6] = {world.terrain_descr(tr.field->terrain_d()).get_is(),
 	                                            world.terrain_descr(tl.field->terrain_r()).get_is(),
 	                                            world.terrain_descr(tl.field->terrain_d()).get_is(),
@@ -1540,7 +1565,7 @@ int Map::calc_buildsize(const World& world,
 	int buildsize = BaseImmovable::BIG;
 	if (consider_mobs) {
 		std::vector<ImmovableFound> objectlist;
-		find_immovables(Area<FCoords>(f, 1), &objectlist,
+		find_immovables(egbase, Area<FCoords>(f, 1), &objectlist,
 		                FindImmovableSize(BaseImmovable::SMALL, BaseImmovable::BIG));
 		for (uint32_t i = 0; i < objectlist.size(); ++i) {
 			const BaseImmovable* obj = objectlist[i].object;
@@ -1548,7 +1573,7 @@ int Map::calc_buildsize(const World& world,
 			if (objsize == BaseImmovable::NONE)
 				continue;
 			if (avoidnature && obj->descr().type() == MapObjectType::IMMOVABLE)
-				objsize += 1;
+				++objsize;
 			if (objsize + buildsize > BaseImmovable::BIG)
 				buildsize = BaseImmovable::BIG - objsize + 1;
 		}
@@ -1632,8 +1657,8 @@ std::vector<Coords> Map::find_portdock(const Coords& c) const {
 	return portdock;
 }
 
-bool Map::is_port_space_allowed(const World& world, const FCoords& fc) const {
-	return (get_max_nodecaps(world, fc) & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG &&
+bool Map::is_port_space_allowed(const EditorGameBase& egbase, const FCoords& fc) const {
+	return (get_max_nodecaps(egbase, fc) & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG &&
 	       !find_portdock(fc).empty();
 }
 
@@ -1642,11 +1667,14 @@ bool Map::is_port_space(const Coords& c) const {
 	return port_spaces_.count(c);
 }
 
-bool Map::set_port_space(
-   const World& world, const Coords& c, bool set, bool force, bool recalculate_seafaring) {
+bool Map::set_port_space(const EditorGameBase& egbase,
+                         const Coords& c,
+                         bool set,
+                         bool force,
+                         bool recalculate_seafaring) {
 	bool success = false;
 	if (set) {
-		success = force || is_port_space_allowed(world, get_fcoords(c));
+		success = force || is_port_space_allowed(egbase, get_fcoords(c));
 		if (success) {
 			port_spaces_.insert(c);
 			recalculate_seafaring &= !allows_seafaring();
@@ -1936,6 +1964,7 @@ std::unique_ptr<MapLoader> Map::get_correct_loader(const std::string& filename) 
  * \param inend end point of the search
  * \param path will receive the found path if successful
  * \param flags UNDOCUMENTED
+ * \param type whether to find a path for a ware or a worker
  *
  * \return the cost of the path (in milliseconds of normal walking
  * speed) or -1 if no path has been found.
@@ -1947,7 +1976,8 @@ int32_t Map::findpath(Coords instart,
                       Path& path,
                       const CheckStep& checkstep,
                       uint32_t const flags,
-                      uint32_t const caps_sensitivity) const {
+                      uint32_t const caps_sensitivity,
+                      WareWorker type) const {
 	FCoords start;
 	FCoords end;
 	int32_t upper_cost_limit;
@@ -1968,8 +1998,9 @@ int32_t Map::findpath(Coords instart,
 		return 0;  // duh...
 	}
 
-	if (!checkstep.reachable_dest(*this, end))
+	if (!checkstep.reachable_dest(*this, end)) {
 		return -1;
+	}
 
 	if (!persist)
 		upper_cost_limit = 0;
@@ -1979,7 +2010,7 @@ int32_t Map::findpath(Coords instart,
 
 	// Actual pathfinding
 	boost::shared_ptr<Pathfields> pathfields = pathfieldmgr_->allocate();
-	Pathfield::Queue Open;
+	Pathfield::Queue Open(type);
 	Pathfield* curpf = &pathfields->fields[start.field - fields_.get()];
 	curpf->cycle = pathfields->cycle;
 	curpf->real_cost = 0;
@@ -2020,10 +2051,10 @@ int32_t Map::findpath(Coords instart,
 				continue;
 
 			// Check passability
-			if (!checkstep.allowed(*this, cur, neighb, *direction,
-			                       neighb == end ?
-			                          CheckStep::stepLast :
-			                          cur == start ? CheckStep::stepFirst : CheckStep::stepNormal))
+			if (!checkstep.allowed(
+			       *this, cur, neighb, *direction, neighb == end ? CheckStep::stepLast : cur == start ?
+			                                                       CheckStep::stepFirst :
+			                                                       CheckStep::stepNormal))
 				continue;
 
 			// Calculate cost
@@ -2046,7 +2077,7 @@ int32_t Map::findpath(Coords instart,
 				neighbpf.estim_cost = calc_cost_lowerbound(neighb, end);
 				neighbpf.backlink = *direction;
 				Open.push(&neighbpf);
-			} else if (neighbpf.cost() > cost + neighbpf.estim_cost) {
+			} else if (neighbpf.cost(type) > cost + neighbpf.estim_cost) {
 				// found a better path to a field that's already Open
 				neighbpf.real_cost = cost;
 				neighbpf.backlink = *direction;
@@ -2092,27 +2123,28 @@ bool Map::can_reach_by_water(const Coords& field) const {
 	return false;
 }
 
-int32_t
-Map::change_terrain(const World& world, TCoords<FCoords> const c, DescriptionIndex const terrain) {
+int32_t Map::change_terrain(const EditorGameBase& egbase,
+                            TCoords<FCoords> const c,
+                            DescriptionIndex const terrain) {
 	c.node.field->set_terrain(c.t, terrain);
 
 	// remove invalid resources if necessary
 	// check vertex to which the triangle belongs
-	if (!is_resource_valid(world, c.node, c.node.field->get_resources())) {
+	if (!is_resource_valid(egbase.world(), c.node, c.node.field->get_resources())) {
 		clear_resources(c.node);
 	}
 
 	// always check south-east vertex
 	Widelands::FCoords f_se(c.node);
 	get_neighbour(f_se, Widelands::WALK_SE, &f_se);
-	if (!is_resource_valid(world, f_se, f_se.field->get_resources())) {
+	if (!is_resource_valid(egbase.world(), f_se, f_se.field->get_resources())) {
 		clear_resources(f_se);
 	}
 
 	// check south-west vertex if d-Triangle is changed, check east vertex if r-Triangle is changed
 	Widelands::FCoords f_sw_e(c.node);
 	get_neighbour(f_sw_e, c.t == TriangleIndex::D ? Widelands::WALK_SW : Widelands::WALK_E, &f_sw_e);
-	if (!is_resource_valid(world, f_sw_e, f_sw_e.field->get_resources())) {
+	if (!is_resource_valid(egbase.world(), f_sw_e, f_sw_e.field->get_resources())) {
 		clear_resources(f_sw_e);
 	}
 
@@ -2121,7 +2153,7 @@ Map::change_terrain(const World& world, TCoords<FCoords> const c, DescriptionInd
 
 	// Changing the terrain can affect ports, which can be up to 3 fields away.
 	constexpr int kPotentiallyAffectedNeighbors = 3;
-	recalc_for_field_area(world, Area<FCoords>(c.node, kPotentiallyAffectedNeighbors));
+	recalc_for_field_area(egbase, Area<FCoords>(c.node, kPotentiallyAffectedNeighbors));
 	return kPotentiallyAffectedNeighbors;
 }
 
@@ -2189,18 +2221,19 @@ void Map::clear_resources(const FCoords& c) {
 	initialize_resources(c, Widelands::kNoResource, 0);
 }
 
-uint32_t Map::set_height(const World& world, const FCoords fc, uint8_t const new_value) {
+uint32_t Map::set_height(const EditorGameBase& egbase, const FCoords fc, uint8_t const new_value) {
 	assert(new_value <= MAX_FIELD_HEIGHT);
 	assert(fields_.get() <= fc.field);
 	assert(fc.field < fields_.get() + max_index());
 	fc.field->height = new_value;
 	uint32_t radius = 2;
 	check_neighbour_heights(fc, radius);
-	recalc_for_field_area(world, Area<FCoords>(fc, radius));
+	recalc_for_field_area(egbase, Area<FCoords>(fc, radius));
 	return radius;
 }
 
-uint32_t Map::change_height(const World& world, Area<FCoords> area, int16_t const difference) {
+uint32_t
+Map::change_height(const EditorGameBase& egbase, Area<FCoords> area, int16_t const difference) {
 	{
 		MapRegion<Area<FCoords>> mr(*this, area);
 		do {
@@ -2221,11 +2254,12 @@ uint32_t Map::change_height(const World& world, Area<FCoords> area, int16_t cons
 		regional_radius = std::max(regional_radius, local_radius);
 	} while (mr.advance(*this));
 	area.radius += regional_radius + 2;
-	recalc_for_field_area(world, area);
+	recalc_for_field_area(egbase, area);
 	return area.radius;
 }
 
-uint32_t Map::set_height(const World& world, Area<FCoords> area, HeightInterval height_interval) {
+uint32_t
+Map::set_height(const EditorGameBase& egbase, Area<FCoords> area, HeightInterval height_interval) {
 	assert(height_interval.valid());
 	assert(height_interval.max <= MAX_FIELD_HEIGHT);
 	{
@@ -2262,7 +2296,7 @@ uint32_t Map::set_height(const World& world, Area<FCoords> area, HeightInterval 
 		} while (changed);
 		area.radius = mr.radius();
 	}
-	recalc_for_field_area(world, area);
+	recalc_for_field_area(egbase, area);
 	return area.radius;
 }
 
@@ -2368,16 +2402,16 @@ void Map::recalculate_allows_seafaring() {
 	Notifications::publish(NoteMapOptions());
 }
 
-void Map::cleanup_port_spaces(const World& world) {
+void Map::cleanup_port_spaces(const EditorGameBase& egbase) {
 	// Temporary set to avoid problems with concurrent container operations
 	PortSpacesSet clean_me_up;
 	for (const Coords& c : get_port_spaces()) {
-		if (!is_port_space_allowed(world, get_fcoords(c))) {
+		if (!is_port_space_allowed(egbase, get_fcoords(c))) {
 			clean_me_up.insert(c);
 		}
 	}
 	for (const Coords& c : clean_me_up) {
-		set_port_space(world, c, false);
+		set_port_space(egbase, c, false);
 	}
 	recalculate_allows_seafaring();
 }

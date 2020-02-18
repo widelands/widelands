@@ -39,7 +39,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	// Militarysites rotate (see check_militarysites())
 	int32_t i = 0;
 	for (MilitarySiteObserver mso : militarysites) {
-		i += 1;
+		++i;
 		if (i % 4 == 0)
 			continue;
 		if (i > 20)
@@ -53,8 +53,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		static std::vector<ImmovableFound> immovables;
 		immovables.clear();
 		immovables.reserve(40);
-		map.find_immovables(Area<FCoords>(f, (vision + 3 < 13) ? 13 : vision + 3), &immovables,
-		                    FindImmovableAttackTarget());
+		map.find_immovables(game(), Area<FCoords>(f, (vision + 3 < 13) ? 13 : vision + 3),
+		                    &immovables, FindImmovableAttackTarget());
 
 		for (uint32_t j = 0; j < immovables.size(); ++j) {
 			if (upcast(MilitarySite const, bld, immovables.at(j).object)) {
@@ -203,7 +203,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			if (site->second.mines_nearby == ExtendedBool::kUnset) {
 				FindNodeMineable find_mines_spots_nearby(game(), f.field->get_resources());
 				const int32_t minescount =
-				   map.find_fields(Area<FCoords>(f, 6), nullptr, find_mines_spots_nearby);
+				   map.find_fields(game(), Area<FCoords>(f, 6), nullptr, find_mines_spots_nearby);
 				if (minescount > 0) {
 					site->second.mines_nearby = ExtendedBool::kTrue;
 				} else {
@@ -510,7 +510,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	       player_->vision(Map::get_index(flag->get_building()->get_position(), map.get_width())));
 	attackers_count_ += attackers;
 	enemy_sites[best_target].last_time_attacked = gametime;
-	enemy_sites[best_target].attack_counter += 1;
+	++enemy_sites[best_target].attack_counter;
 
 	last_attack_time_ = gametime;
 	for (int j = 0; j < attackers; ++j) {
@@ -782,7 +782,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	     site != trainingsites.end(); ++site) {
 
 		if (!site->site->can_start_working()) {
-			ts_without_trainers_ += 1;
+			++ts_without_trainers_;
 		}
 	}
 	return true;

@@ -56,13 +56,18 @@ constexpr int32_t kPriorityLow = 2;
 constexpr int32_t kPriorityNormal = 4;
 constexpr int32_t kPriorityHigh = 8;
 
+/* The value "" means that the DescriptionIndex is a normal building, as happens e.g. when enhancing
+ * a building. The value "tribe"/"world" means that the DescriptionIndex refers to an immovable of
+ * OwnerType kTribe/kWorld, as happens e.g. with amazon treetop sentry. This immovable
+ * should therefore always be painted below the building image.
+ */
+using FormerBuildings = std::vector<std::pair<DescriptionIndex, std::string>>;
+
 /*
  * Common to all buildings!
  */
 class BuildingDescr : public MapObjectDescr {
 public:
-	using FormerBuildings = std::vector<DescriptionIndex>;
-
 	BuildingDescr(const std::string& init_descname,
 	              MapObjectType type,
 	              const LuaTable& t,
@@ -123,6 +128,11 @@ public:
 	bool needs_seafaring() const {
 		return needs_seafaring_;
 	}
+	bool needs_waterways() const {
+		return needs_waterways_;
+	}
+
+	bool is_useful_on_map(bool seafaring_allowed, bool waterways_allowed) const;
 
 	// Returns the enhancement this building can become or
 	// INVALID_INDEX if it cannot be enhanced.
@@ -169,6 +179,10 @@ public:
 
 	uint32_t get_unoccupied_animation() const;
 
+	DescriptionIndex get_built_over_immovable() const {
+		return built_over_immovable_;
+	}
+
 protected:
 	virtual Building& create_object() const = 0;
 	Building& create_constructionsite() const;
@@ -186,11 +200,15 @@ private:
 	bool mine_;
 	bool port_;
 	bool needs_seafaring_;  // This building should only be built on seafaring maps.
+	bool needs_waterways_;  // This building should only be built on maps with waterways/ferries
+	                        // enabled
 	DescriptionIndex enhancement_;
 	DescriptionIndex
 	   enhanced_from_;        // The building this building was enhanced from, or INVALID_INDEX
 	bool enhanced_building_;  // if it is one, it is bulldozable
 	BuildingHints hints_;     // hints (knowledge) for computer players
+	DescriptionIndex built_over_immovable_;  // can be built only on nodes where an immovable with
+	                                         // this attribute stands
 
 	// for migration, 0 is the default, meaning get_conquers() + 4
 	uint32_t vision_range_;
@@ -223,8 +241,6 @@ public:
 		PCap_Dismantle = 1 << 1,   // can dismantle this buildings
 		PCap_Enhancable = 1 << 2,  // can be enhanced to something
 	};
-
-	using FormerBuildings = std::vector<DescriptionIndex>;
 
 public:
 	enum class InfoStringFormat { kCensus, kStatistics, kTooltip };
@@ -344,13 +360,13 @@ protected:
 	void act(Game&, uint32_t data) override;
 
 	void draw(uint32_t gametime,
-	          TextToDraw draw_text,
+	          InfoToDraw info_to_draw,
 	          const Vector2f& point_on_dst,
 	          const Coords& coords,
 	          float scale,
 	          RenderTarget* dst) override;
 	void
-	draw_info(TextToDraw draw_text, const Vector2f& point_on_dst, float scale, RenderTarget* dst);
+	draw_info(InfoToDraw info_to_draw, const Vector2f& point_on_dst, float scale, RenderTarget* dst);
 
 	void set_seeing(bool see);
 	void set_attack_target(AttackTarget* new_attack_target);
@@ -377,6 +393,7 @@ protected:
 
 	// The former buildings names, with the current one in last position.
 	FormerBuildings old_buildings_;
+	const MapObjectDescr* was_immovable_;
 
 private:
 	std::string statistics_string_;

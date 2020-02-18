@@ -83,11 +83,11 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
 	map_view_.field_clicked.connect(
 	   [&parent](const Widelands::NodeAndTriangle<>& node_and_triangle) {
 		   parent.map_view()->field_clicked(node_and_triangle);
-	   });
+		});
 	map_view_.track_selection.connect(
 	   [&parent](const Widelands::NodeAndTriangle<>& node_and_triangle) {
 		   parent.map_view()->track_selection(node_and_triangle);
-	   });
+		});
 	map_view_.changeview.connect([this] { stop_tracking_by_drag(); });
 	warp_mainview.connect([&parent](const Vector2f& map_pixel) {
 		parent.map_view()->scroll_to_map_pixel(map_pixel, MapView::Transition::Smooth);
@@ -240,7 +240,7 @@ void WatchWindow::do_follow() {
 		                           .node),
 		        2);
 		     area.radius <= 32; area.radius *= 2)
-			if (map.find_bobs(area, &bobs))
+			if (map.find_bobs(g, area, &bobs))
 				break;
 		//  Find the bob closest to us
 		float closest_dist = 0;

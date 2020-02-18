@@ -85,8 +85,7 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 
 		auto& gl_state = Gl::State::instance();
 		gl_state.enable_vertex_attrib_array({
-		   attr_position_,
-		   attr_color_,
+		   attr_position_, attr_color_,
 		});
 
 		// Batch common rectangles up.

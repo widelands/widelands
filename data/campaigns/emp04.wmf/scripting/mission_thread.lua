@@ -13,7 +13,7 @@ function dismantle()
    local o = add_campaign_objective(obj_dismantle_buildings)
    local buildmessage = false
    sleep(5000)
-   while count_buildings(p1, {"empire_fishers_house", "empire_quarry", "empire_lumberjacks_house1", "empire_well1"}) > 0 do
+   while count_buildings(p1, {"empire_fishers_house", "empire_quarry", "empire_lumberjacks_house1", "empire_well1"}) > 2 do
       if mv.windows.field_action and mv.windows.field_action.tabs.small and not buildmessage then
          campaign_message_box(amalea_19)
          buildmessage = true
@@ -37,7 +37,7 @@ function farm_plans()
    local count = 0
    local o1 = add_campaign_objective(obj_click_farmbuilding)
    o1.done = true
-   while not (farmclick or p1.defeated) do
+   while not (farmclick or p1.defeated or (f.owner == p1)) do
       if mv.windows.building_window and not mv.windows.building_window.buttons.dismantle and not mv.windows.building_window.tabs.wares and mv.windows.building_window.tabs.workers then
          farmclick = true
       end
@@ -310,6 +310,7 @@ function training()
 
    -- after some training we have enough knowledge to build better training buildings
    p1:allow_buildings{"empire_trainingcamp", "empire_colosseum"}
+   p1:forbid_buildings{"empire_trainingcamp1"}
    campaign_message_box(saledus_7)
    local o2 = add_campaign_objective(obj_upgrade)
    sleep(5000)
@@ -539,7 +540,7 @@ function karma()
       for count = 0, 10 do
          sleep(1500000)
          local hq = p1:get_buildings("empire_temple_of_vesta")
-         if hq then
+         if hq and hq[1] then
             local beer = hq[1]:get_wares("beer") + 20
             local wine = hq[1]:get_wares("wine") + 10
             hq[1]:set_wares("beer", beer)

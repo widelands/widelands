@@ -41,7 +41,7 @@ dirname = path.dirname(__file__)
 --    for each tribe's economy. For example, ``{ atlanteans = 3, empire = 1 }``
 --
 --    **preciousness**: How precious this ware is to each tribe. For example,
---    ``{ atlanteans = 0, empire = 1 }``
+--    ``{ atlanteans = 0, empire = 1 }``. We recommend not going higher than ``25``.
 --
 --    **animations**: A table containing all animations for this ware.
 --    Wares have an "idle" animation.

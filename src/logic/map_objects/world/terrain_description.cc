@@ -24,7 +24,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "graphic/animation.h"
+#include "graphic/animation/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/texture.h"
 #include "logic/game_data_error.h"
@@ -113,6 +113,16 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
 		custom_tooltips_ = table.get_table("tooltips")->array_entries<std::string>();
 	}
 
+	if (table.has_key("enhancement")) {
+		enhancement_ = table.get_string("enhancement");
+		if (enhancement_ == name_) {
+			throw GameDataError("%s: a terrain cannot be enhanced to itself", name_.c_str());
+		}
+		// Other invalid terrains will be detected in World::postload
+	} else {
+		enhancement_ = "";
+	}
+
 	if (!(0 < fertility_ && fertility_ < 1000)) {
 		throw GameDataError("%s: fertility is not in (0, 1000).", name_.c_str());
 	}
@@ -124,7 +134,7 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
 	}
 
 	texture_paths_ = table.get_table("textures")->array_entries<std::string>();
-	frame_length_ = FRAME_LENGTH;
+	frame_length_ = kFrameLength;
 	if (texture_paths_.empty()) {
 		throw GameDataError("Terrain %s has no images.", name_.c_str());
 	} else if (texture_paths_.size() == 1) {
@@ -254,6 +264,10 @@ int TerrainDescription::humidity() const {
 
 int TerrainDescription::fertility() const {
 	return fertility_;
+}
+
+const std::string& TerrainDescription::enhancement() const {
+	return enhancement_;
 }
 
 void TerrainDescription::set_minimap_color(const RGBColor& color) {

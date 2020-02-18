@@ -20,7 +20,7 @@
 #ifndef WL_WLAPPLICATION_H
 #define WL_WLAPPLICATION_H
 
-// Workaround for bug http://sourceforge.net/p/mingw/bugs/2152/
+// Workaround for bug https://sourceforge.net/p/mingw/bugs/2152/
 #ifdef __MINGW32__
 #ifndef _WIN64
 #ifndef _USE_32BIT_TIME_T
@@ -195,13 +195,6 @@ struct WLApplication {
 	bool campaign_game();
 	void replay();
 	static void emergency_save(Widelands::Game&);
-
-#ifdef USE_XDG
-	// this is only for src/wlapplication_options.cc
-	std::string get_userconfigdir() {
-		return userconfigdir_;
-	}
-#endif
 
 private:
 	WLApplication(int argc, char const* const* argv);

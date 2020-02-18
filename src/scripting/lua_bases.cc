@@ -35,6 +35,7 @@
 #include "scripting/factory.h"
 #include "scripting/globals.h"
 #include "scripting/lua_map.h"
+#include "ui_basic/progresswindow.h"
 
 using namespace Widelands;
 
@@ -89,6 +90,7 @@ const MethodType<LuaEditorGameBase> LuaEditorGameBase::Methods[] = {
    METHOD(LuaEditorGameBase, get_terrain_description),
    METHOD(LuaEditorGameBase, save_campaign_data),
    METHOD(LuaEditorGameBase, read_campaign_data),
+   METHOD(LuaEditorGameBase, set_loading_message),
    {nullptr, nullptr},
 };
 const PropertyType<LuaEditorGameBase> LuaEditorGameBase::Properties[] = {
@@ -539,6 +541,19 @@ int LuaEditorGameBase::read_campaign_data(lua_State* L) {
 	return 1;
 }
 
+/* RST
+   .. function:: set_loading_message(text)
+
+      :arg text: the text to display
+
+      Change the progress message on the loading screen.
+      May be used from the init.lua files for tribe/world loading only.
+*/
+int LuaEditorGameBase::set_loading_message(lua_State* L) {
+	get_egbase(L).step_loader_ui(luaL_checkstring(L, 2));
+	return 0;
+}
+
 /*
  ==========================================================
  C METHODS
@@ -563,9 +578,7 @@ const MethodType<LuaPlayerBase> LuaPlayerBase::Methods[] = {
    METHOD(LuaPlayerBase, place_ship),  {nullptr, nullptr},
 };
 const PropertyType<LuaPlayerBase> LuaPlayerBase::Properties[] = {
-   PROP_RO(LuaPlayerBase, number),
-   PROP_RO(LuaPlayerBase, tribe_name),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaPlayerBase, number), PROP_RO(LuaPlayerBase, tribe_name), {nullptr, nullptr, nullptr},
 };
 
 void LuaPlayerBase::__persist(lua_State* L) {
@@ -785,7 +798,7 @@ int LuaPlayerBase::place_building(lua_State* L) {
 	}
 	DescriptionIndex building_index = tribes.building_index(name);
 
-	BuildingDescr::FormerBuildings former_buildings;
+	FormerBuildings former_buildings;
 	find_former_buildings(tribes, building_index, &former_buildings);
 	if (constructionsite) {
 		former_buildings.pop_back();
@@ -878,7 +891,9 @@ int LuaPlayerBase::get_workers(lua_State* L) {
 
 	uint32_t nworkers = 0;
 	for (const auto& economy : player.economies()) {
-		nworkers += economy.second->stock_worker(worker);
+		if (economy.second->type() == Widelands::wwWORKER) {
+			nworkers += economy.second->stock_ware_or_worker(worker);
+		}
 	}
 	lua_pushuint32(L, nworkers);
 	return 1;
@@ -904,7 +919,9 @@ int LuaPlayerBase::get_wares(lua_State* L) {
 
 	uint32_t nwares = 0;
 	for (const auto& economy : player.economies()) {
-		nwares += economy.second->stock_ware(ware);
+		if (economy.second->type() == Widelands::wwWARE) {
+			nwares += economy.second->stock_ware_or_worker(ware);
+		}
 	}
 	lua_pushuint32(L, nwares);
 	return 1;

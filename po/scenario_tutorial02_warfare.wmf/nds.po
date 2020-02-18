@@ -2,13 +2,13 @@
 # Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2019
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
-"PO-Revision-Date: 2019-08-10 19:48+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-12-30 07:55+0000\n"
+"PO-Revision-Date: 2020-01-02 17:11+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -290,7 +290,7 @@ msgid ""
 "soldiers) or rookies. From time to time, a soldier will walk out of the "
 "building and be replaced by a stronger/weaker one automatically – this is "
 "what you saw earlier."
-msgstr "För elkeen Soldateree-Boo kannst du fastleggen, of Helden (utbildt Suldaten) of Snöttbaarten vörtrucken worden. Oder un an verlaat een Soldat dat Huus un word automatisk mit eenem starkeren/swackeren utwesselt – dat hest du vörhen sehn."
+msgstr "För elkeen Soldateree-Boo kannst du fastleggen, of Helden (utbildt Suldaten) of Snöttbaarten vörtrucken worden. Of un an verlaat een Soldat dat Huus un word automatisk mit eenem starkeren/swackeren utwesselt – dat hest du vörhen sehn."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:136
 msgid ""

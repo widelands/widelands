@@ -20,16 +20,23 @@ tribes:new_militarysite_type {
       log = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_?.png"),
-         hotspot = {33, 53},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "idle",
+         hotspot = {28, 45},
+         frames = 4,
+         columns = 2,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
       unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {33, 53},
-      },
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {28, 45}
+      }
    },
 
    aihints = {

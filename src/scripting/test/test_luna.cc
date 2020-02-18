@@ -30,6 +30,7 @@
 
 // Triggered by BOOST_AUTO_TEST_CASE
 CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
+CLANG_DIAG_OFF("-Wused-but-marked-unused")
 
 #ifndef BEGIN_LUNA_PROPERTIES
 #define BEGIN_LUNA_PROPERTIES(klass) const PropertyType<klass> klass::Properties[] = {
@@ -85,15 +86,13 @@ LuaClass::~LuaClass() {
 }
 const char LuaClass::className[] = "Class";
 const MethodType<LuaClass> LuaClass::Methods[] = {
-   METHOD(LuaClass, test),
-   {nullptr, nullptr},
+   METHOD(LuaClass, test), {nullptr, nullptr},
 };
 BEGIN_LUNA_PROPERTIES(LuaClass)
 PROP_RO(LuaClass, propr)
-, PROP_RW(LuaClass, prop1),
-   END_LUNA_PROPERTIES()
+, PROP_RW(LuaClass, prop1), END_LUNA_PROPERTIES()
 
-      class LuaSubClass : public LuaClass {
+                               class LuaSubClass : public LuaClass {
 	int y;
 
 public:
@@ -110,8 +109,7 @@ public:
 };
 const char LuaSubClass::className[] = "SubClass";
 const MethodType<LuaSubClass> LuaSubClass::Methods[] = {
-   METHOD(LuaSubClass, subtest),
-   {nullptr, nullptr},
+   METHOD(LuaSubClass, subtest), {nullptr, nullptr},
 };
 BEGIN_LUNA_PROPERTIES(LuaSubClass)
 END_LUNA_PROPERTIES()
@@ -138,8 +136,7 @@ public:
 };
 const char LuaVirtualClass::className[] = "VirtualClass";
 const MethodType<LuaVirtualClass> LuaVirtualClass::Methods[] = {
-   METHOD(LuaVirtualClass, virtualtest),
-   {nullptr, nullptr},
+   METHOD(LuaVirtualClass, virtualtest), {nullptr, nullptr},
 };
 BEGIN_LUNA_PROPERTIES(LuaVirtualClass)
 END_LUNA_PROPERTIES()
@@ -182,9 +179,7 @@ public:
 };
 const char LuaMultiClass::className[] = "MultiClass";
 const MethodType<LuaMultiClass> LuaMultiClass::Methods[] = {
-   METHOD(LuaMultiClass, virtualtest),
-   METHOD(LuaSecond, multitest),
-   {nullptr, nullptr},
+   METHOD(LuaMultiClass, virtualtest), METHOD(LuaSecond, multitest), {nullptr, nullptr},
 };
 BEGIN_LUNA_PROPERTIES(LuaMultiClass)
 PROP_RO(LuaMultiClass, second)

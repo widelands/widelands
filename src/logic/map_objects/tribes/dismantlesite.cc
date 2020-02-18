@@ -27,7 +27,6 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/wares_queue.h"
-#include "graphic/animation.h"
 #include "graphic/rendertarget.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
@@ -76,22 +75,39 @@ DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr,
                              const Coords& c,
                              Player* plr,
                              bool loading,
-                             Building::FormerBuildings& former_buildings)
+                             FormerBuildings& former_buildings)
    : PartiallyFinishedBuilding(gdescr) {
 	position_ = c;
 	set_owner(plr);
 
 	assert(!former_buildings.empty());
-	for (DescriptionIndex former_idx : former_buildings) {
-		old_buildings_.push_back(former_idx);
+	for (const auto& pair : former_buildings) {
+		old_buildings_.push_back(pair);
 	}
-	const BuildingDescr* cur_descr = owner().tribe().get_building_descr(old_buildings_.back());
+	const BuildingDescr* cur_descr = owner().tribe().get_building_descr(old_buildings_.back().first);
 	set_building(*cur_descr);
 
 	if (loading) {
 		Building::init(egbase);
 	} else {
 		init(egbase);
+	}
+}
+
+void DismantleSite::cleanup(EditorGameBase& egbase) {
+	PartiallyFinishedBuilding::cleanup(egbase);
+
+	if (was_immovable_ && work_completed_ >= work_steps_) {
+		// Put the old immovable in place again
+		for (const auto& pair : old_buildings_) {
+			if (!pair.second.empty()) {
+				egbase.create_immovable(position_, pair.first,
+				                        pair.second == "world" ? MapObjectDescr::OwnerType::kWorld :
+				                                                 MapObjectDescr::OwnerType::kTribe,
+				                        get_owner());
+				break;
+			}
+		}
 	}
 }
 
@@ -133,9 +149,17 @@ Count which wares you get back if you dismantle the given building
 */
 const Buildcost DismantleSite::count_returned_wares(Building* building) {
 	Buildcost result;
-	for (DescriptionIndex former_idx : building->get_former_buildings()) {
-		const BuildingDescr* former_descr = building->owner().tribe().get_building_descr(former_idx);
-		const Buildcost& return_wares = former_idx != building->get_former_buildings().front() ?
+	DescriptionIndex first_idx = INVALID_INDEX;
+	for (const auto& pair : building->get_former_buildings()) {
+		if (pair.second.empty()) {
+			first_idx = pair.first;
+			break;
+		}
+	}
+	assert(first_idx != INVALID_INDEX);
+	for (const auto& pair : building->get_former_buildings()) {
+		const BuildingDescr* former_descr = building->owner().tribe().get_building_descr(pair.first);
+		const Buildcost& return_wares = pair.first != first_idx ?
 		                                   former_descr->returned_wares_enhanced() :
 		                                   former_descr->returned_wares();
 
@@ -228,7 +252,7 @@ Draw it.
 ===============
 */
 void DismantleSite::draw(uint32_t gametime,
-                         const TextToDraw draw_text,
+                         const InfoToDraw info_to_draw,
                          const Vector2f& point_on_dst,
                          const Widelands::Coords& coords,
                          float scale,
@@ -236,14 +260,20 @@ void DismantleSite::draw(uint32_t gametime,
 	uint32_t tanim = gametime - animstart_;
 	const RGBColor& player_color = get_owner()->get_playercolor();
 
-	// Draw the construction site marker
-	dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, &player_color);
+	if (was_immovable_) {
+		dst->blit_animation(
+		   point_on_dst, coords, scale, was_immovable_->main_animation(), tanim, &player_color);
+	} else {
+		// Draw the construction site marker
+		dst->blit_animation(
+		   point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, &player_color);
+	}
 
 	// Blit bottom part of the animation according to dismantle progress
 	dst->blit_animation(point_on_dst, coords, scale, building_->get_unoccupied_animation(), tanim,
 	                    &player_color, 100 - ((get_built_per64k() * 100) >> 16));
 
 	// Draw help strings
-	draw_info(draw_text, point_on_dst, scale, dst);
+	draw_info(info_to_draw, point_on_dst, scale, dst);
 }
 }  // namespace Widelands

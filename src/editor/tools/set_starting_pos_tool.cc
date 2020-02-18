@@ -59,8 +59,7 @@ EditorSetStartingPosTool::EditorSetStartingPosTool() : EditorTool(*this, *this, 
 	current_player_ = 1;
 }
 
-int32_t EditorSetStartingPosTool::handle_click_impl(const Widelands::World&,
-                                                    const Widelands::NodeAndTriangle<>& center,
+int32_t EditorSetStartingPosTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
                                                     EditorInteractive&,
                                                     EditorActionArgs*,
                                                     Widelands::Map* map) {

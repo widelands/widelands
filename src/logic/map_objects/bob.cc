@@ -27,6 +27,7 @@
 #include "base/macros.h"
 #include "base/math.h"
 #include "base/wexception.h"
+#include "economy/roadbase.h"
 #include "economy/route.h"
 #include "economy/transfer.h"
 #include "graphic/rendertarget.h"
@@ -639,7 +640,7 @@ void Bob::movepath_update(Game& game, State& state) {
 	if (game.logic_rand() % 8 == 0) {
 		if (is_a(Ship, this)) {
 			const uint32_t ships_count = game.map().find_bobs(
-			   Widelands::Area<Widelands::FCoords>(get_position(), 0), nullptr, FindBobShip());
+			   game, Widelands::Area<Widelands::FCoords>(get_position(), 0), nullptr, FindBobShip());
 			assert(ships_count > 0);
 			if (ships_count > 1) {
 				molog("Pausing the ship because %d ships on the same spot\n", ships_count);
@@ -649,8 +650,9 @@ void Bob::movepath_update(Game& game, State& state) {
 		}
 	}
 
-	bool forcemove = (state.ivar2 && static_cast<Path::StepVector::size_type>(state.ivar1) + 1 ==
-	                                    path->get_nsteps());
+	bool forcemove =
+	   (state.ivar2 &&
+	    static_cast<Path::StepVector::size_type>(state.ivar1) + 1 == path->get_nsteps());
 
 	++state.ivar1;
 	return start_task_move(game, dir, state.diranims, state.ivar2 == 2 ? true : forcemove);
@@ -705,34 +707,41 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 	const float triangle_w = kTriangleWidth * scale;
 	const float triangle_h = kTriangleHeight * scale;
 
+	bool bridge = false;
 	switch (walking_) {
 	case WALK_NW:
 		map.get_brn(end, &start);
 		spos.x += triangle_w / 2.f;
 		spos.y += triangle_h;
+		bridge = is_bridge_segment(end.field->road_southeast);
 		break;
 	case WALK_NE:
 		map.get_bln(end, &start);
 		spos.x -= triangle_w / 2.f;
 		spos.y += triangle_h;
+		bridge = is_bridge_segment(end.field->road_southwest);
 		break;
 	case WALK_W:
 		map.get_rn(end, &start);
 		spos.x += triangle_w;
+		bridge = is_bridge_segment(end.field->road_east);
 		break;
 	case WALK_E:
 		map.get_ln(end, &start);
 		spos.x -= triangle_w;
+		bridge = is_bridge_segment(start.field->road_east);
 		break;
 	case WALK_SW:
 		map.get_trn(end, &start);
 		spos.x += triangle_w / 2.f;
 		spos.y -= triangle_h;
+		bridge = is_bridge_segment(start.field->road_southwest);
 		break;
 	case WALK_SE:
 		map.get_tln(end, &start);
 		spos.x -= triangle_w / 2.f;
 		spos.y -= triangle_h;
+		bridge = is_bridge_segment(start.field->road_southeast);
 		break;
 
 	case IDLE:
@@ -750,6 +759,10 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 		   static_cast<float>(game.get_gametime() - walkstart_) / (walkend_ - walkstart_), 0.f, 1.f);
 		epos.x = f * epos.x + (1.f - f) * spos.x;
 		epos.y = f * epos.y + (1.f - f) * spos.y;
+		if (bridge) {
+			epos.y -= game.player(end.field->get_owned_by()).tribe().bridge_height() * scale *
+			          (1 - 4 * (f - 0.5f) * (f - 0.5f));
+		}
 	}
 	return epos;
 }
@@ -758,7 +771,7 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 /// Note that the current node is actually the node that we are walking to, not
 /// the the one that we start from.
 void Bob::draw(const EditorGameBase& egbase,
-               const TextToDraw&,
+               const InfoToDraw&,
                const Vector2f& field_on_dst,
                const Widelands::Coords& coords,
                const float scale,
@@ -825,7 +838,7 @@ int32_t Bob::start_walk(Game& game, WalkingDir const dir, uint32_t const a, bool
 bool Bob::check_node_blocked(Game& game, const FCoords& field, bool) {
 	// Battles always block movement!
 	std::vector<Bob*> soldiers;
-	game.map().find_bobs(Area<FCoords>(field, 0), &soldiers, FindBobEnemySoldier(get_owner()));
+	game.map().find_bobs(game, Area<FCoords>(field, 0), &soldiers, FindBobEnemySoldier(get_owner()));
 
 	if (!soldiers.empty()) {
 		for (Bob* temp_bob : soldiers) {

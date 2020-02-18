@@ -33,7 +33,7 @@ wl_library(wui_chat_ui
     logic
     sound
     ui_basic
-    widelands_ball_of_mud
+    widelands_options
     wui
 )
 
@@ -84,13 +84,14 @@ wl_library(wui_common_gamedetails
     gamedetails.h
     load_or_save_game.cc
     load_or_save_game.h
+    savegametable.cc
+    savegametable.h
   DEPENDS
     base_i18n
     base_log
     base_time_string
     game_io
     graphic
-    graphic_fonthandler
     graphic_image_io
     graphic_surface
     graphic_text_layout
@@ -153,6 +154,7 @@ wl_library(wui_mapview
     logic_widelands_geometry
     ui_basic
     widelands_ball_of_mud
+    widelands_options
     wui_mapview_pixelfunctions
 )
 
@@ -168,6 +170,22 @@ wl_library(wui_waresdisplay
     graphic_text_layout
     logic
     logic_map_objects
+    ui_basic
+)
+
+
+wl_library(wui_game_tips
+  SRCS
+    game_tips.cc
+    game_tips.h
+  USES_SDL2
+  DEPENDS
+    base_i18n
+    graphic
+    graphic_fonthandler
+    graphic_text_layout
+    scripting_lua_table
+    scripting_lua_interface
     ui_basic
 )
 
@@ -208,8 +226,6 @@ wl_library(wui
     game_options_sound_menu.h
     game_summary.cc
     game_summary.h
-    game_tips.cc
-    game_tips.h
     general_statistics_menu.cc
     general_statistics_menu.h
     helpwindow.cc
@@ -290,7 +306,6 @@ wl_library(wui
     graphic_text
     graphic_text_layout
     graphic_toolbar_imageset
-    io_fileread
     io_filesystem
     io_profile
     logic
@@ -313,7 +328,7 @@ wl_library(wui
     scripting_lua_table
     sound
     ui_basic
-    widelands_ball_of_mud
+    widelands_options
     wui_chat_ui
     wui_common_gamedetails
     wui_economy_options

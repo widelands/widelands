@@ -29,7 +29,6 @@ wl_library(logic_map_objects
     buildcost.h
     checkstep.cc
     checkstep.h
-    draw_text.h
     findbob.cc
     findbob.h
     findimmovable.cc
@@ -40,6 +39,7 @@ wl_library(logic_map_objects
     immovable.h
     immovable_program.h
     immovable_program.cc
+    info_to_draw.h
     map_object.cc
     map_object.h
     map_object_program.cc
@@ -60,6 +60,8 @@ wl_library(logic_map_objects
     tribes/constructionsite.h
     tribes/dismantlesite.cc
     tribes/dismantlesite.h
+    tribes/ferry.cc
+    tribes/ferry.h
     tribes/market.cc
     tribes/market.h
     tribes/militarysite.cc
@@ -126,6 +128,7 @@ wl_library(logic_map_objects
     base_math
     economy
     graphic
+    graphic_animation
     graphic_color
     graphic_fonthandler
     graphic_image_io
@@ -147,7 +150,6 @@ wl_library(logic_map_objects
     map_io
     note_sound
     notifications
-    scripting_lua_interface
     scripting_lua_table
     sound_constants
     sound

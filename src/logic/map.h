@@ -48,10 +48,10 @@ namespace Widelands {
 
 class MapLoader;
 class Objective;
-class World;
 struct BaseImmovable;
 struct MapGenerator;
 struct PathfieldManager;
+class World;
 
 // Global list of available map dimensions.
 const std::vector<int32_t> kMapDimensions = {64,  80,  96,  112, 128, 144, 160, 176, 192, 208,
@@ -164,7 +164,7 @@ public:
 	void cleanup();
 
 	void create_empty_map  // for editor
-	   (const World& world,
+	   (const EditorGameBase&,
 	    uint32_t w = 64,
 	    uint32_t h = 64,
 	    const Widelands::DescriptionIndex default_terrain = 0,
@@ -172,8 +172,8 @@ public:
 	    const std::string& author = pgettext("author_name", "Unknown"),
 	    const std::string& description = _("No description defined"));
 
-	void recalc_whole_map(const World& world);
-	void recalc_for_field_area(const World& world, Area<FCoords>);
+	void recalc_whole_map(const EditorGameBase&);
+	void recalc_for_field_area(const EditorGameBase&, Area<FCoords>);
 
 	/**
 	 *  If the valuable fields are empty, calculates all fields that could be conquered by a player
@@ -199,7 +199,7 @@ public:
 	/***
 	 * Ensures that resources match their adjacent terrains.
 	 */
-	void ensure_resource_consistency(const World& world);
+	void ensure_resource_consistency(const World&);
 
 	/***
 	 * Recalculates all default resources.
@@ -208,7 +208,7 @@ public:
 	 * the editor. Since there, default resources
 	 * are not shown.
 	 */
-	void recalc_default_resources(const World& world);
+	void recalc_default_resources(const World&);
 
 	void set_nrplayers(PlayerNumber);
 
@@ -303,31 +303,39 @@ public:
 	void set_scenario_player_closeable(PlayerNumber, bool);
 
 	/// \returns the maximum theoretical possible nodecaps (no blocking bobs, immovables etc.)
-	NodeCaps get_max_nodecaps(const World& world, const FCoords&) const;
+	NodeCaps get_max_nodecaps(const EditorGameBase&, const FCoords&) const;
 
 	BaseImmovable* get_immovable(const Coords&) const;
-	uint32_t find_bobs(const Area<FCoords>,
+	uint32_t find_bobs(const EditorGameBase&,
+	                   const Area<FCoords>,
 	                   std::vector<Bob*>* list,
 	                   const FindBob& functor = FindBobAlwaysTrue()) const;
-	uint32_t find_reachable_bobs(const Area<FCoords>,
+	uint32_t find_reachable_bobs(const EditorGameBase&,
+	                             const Area<FCoords>,
 	                             std::vector<Bob*>* list,
 	                             const CheckStep&,
 	                             const FindBob& functor = FindBobAlwaysTrue()) const;
-	uint32_t find_immovables(const Area<FCoords>,
+	uint32_t find_immovables(const EditorGameBase&,
+	                         const Area<FCoords>,
 	                         std::vector<ImmovableFound>* list,
 	                         const FindImmovable& = find_immovable_always_true()) const;
-	uint32_t find_reachable_immovables(const Area<FCoords>,
+	uint32_t find_reachable_immovables(const EditorGameBase&,
+	                                   const Area<FCoords>,
 	                                   std::vector<ImmovableFound>* list,
 	                                   const CheckStep&,
 	                                   const FindImmovable& = find_immovable_always_true()) const;
 	uint32_t
-	find_reachable_immovables_unique(const Area<FCoords>,
+	find_reachable_immovables_unique(const EditorGameBase&,
+	                                 const Area<FCoords>,
 	                                 std::vector<BaseImmovable*>& list,
 	                                 const CheckStep&,
 	                                 const FindImmovable& = find_immovable_always_true()) const;
-	uint32_t
-	find_fields(const Area<FCoords>, std::vector<Coords>* list, const FindNode& functor) const;
-	uint32_t find_reachable_fields(const Area<FCoords>,
+	uint32_t find_fields(const EditorGameBase&,
+	                     const Area<FCoords>,
+	                     std::vector<Coords>* list,
+	                     const FindNode& functor) const;
+	uint32_t find_reachable_fields(const EditorGameBase&,
+	                               const Area<FCoords>,
 	                               std::vector<Coords>* list,
 	                               const CheckStep&,
 	                               const FindNode&) const;
@@ -394,7 +402,8 @@ public:
 	                 Path&,
 	                 const CheckStep&,
 	                 const uint32_t flags = 0,
-	                 const uint32_t caps_sensitivity = 0) const;
+	                 const uint32_t caps_sensitivity = 0,
+	                 WareWorker type = wwWORKER) const;
 
 	/**
 	 * We can reach a field by water either if it has MOVECAPS_SWIM or if it has
@@ -410,10 +419,10 @@ public:
 	/// value, because it adjusts the heights of surrounding nodes in each call,
 	/// so it will be terribly slow. Use set_height for Area for that purpose
 	/// instead.
-	uint32_t set_height(const World& world, FCoords, Field::Height);
+	uint32_t set_height(const EditorGameBase&, FCoords, Field::Height);
 
 	/// Changes the height of the nodes in an Area by a difference.
-	uint32_t change_height(const World& world, Area<FCoords>, int16_t difference);
+	uint32_t change_height(const EditorGameBase&, Area<FCoords>, int16_t difference);
 
 	/// Initializes the 'initial_resources' on 'coords' to the 'resource_type'
 	/// with the given 'amount'.
@@ -442,7 +451,7 @@ public:
 	 * the area, because this adjusts the surrounding nodes only once, after all
 	 * nodes in the area had their new height set.
 	 */
-	uint32_t set_height(const World& world, Area<FCoords>, HeightInterval height_interval);
+	uint32_t set_height(const EditorGameBase&, Area<FCoords>, HeightInterval height_interval);
 
 	/***
 	 * Changes the given triangle's terrain. This happens in the editor and might
@@ -452,14 +461,14 @@ public:
 	 *
 	 * @return the radius of changes.
 	 */
-	int32_t change_terrain(const World& world, TCoords<FCoords>, DescriptionIndex);
+	int32_t change_terrain(const EditorGameBase&, TCoords<FCoords>, DescriptionIndex);
 
 	/***
 	 * Verify if a resource attached to a vertex has enough adjacent matching terrains to be valid.
 	 *
 	 * To qualify as valid, resources need to be surrounded by at least two matching terrains.
 	 */
-	bool is_resource_valid(const Widelands::World& world,
+	bool is_resource_valid(const Widelands::World&,
 	                       const Widelands::FCoords& c,
 	                       DescriptionIndex curres) const;
 
@@ -485,13 +494,13 @@ public:
 
 	/// Checks whether the maximum theoretical possible NodeCap of the field is big,
 	/// and there is room for a port space
-	bool is_port_space_allowed(const World& world, const FCoords& fc) const;
+	bool is_port_space_allowed(const EditorGameBase&, const FCoords& fc) const;
 	bool is_port_space(const Coords& c) const;
 
 	/// If 'set', set the space at 'c' as port space, otherwise unset.
 	/// 'force' sets the port space even if it isn't viable, and is to be used for map loading only.
 	/// Returns whether the port space was set/unset successfully.
-	bool set_port_space(const World& world,
+	bool set_port_space(const EditorGameBase&,
 	                    const Widelands::Coords& c,
 	                    bool set,
 	                    bool force = false,
@@ -508,7 +517,7 @@ public:
 	void recalculate_allows_seafaring();
 	/// Remove all port spaces that are not valid (Buildcap < big or not enough space for a
 	/// portdock).
-	void cleanup_port_spaces(const World& world);
+	void cleanup_port_spaces(const EditorGameBase&);
 
 	/// Checks whether there are any artifacts on the map
 	bool has_artifacts();
@@ -520,6 +529,9 @@ public:
 	std::map<Coords, FieldData>
 	resize(EditorGameBase& egbase, const Coords coords, int32_t w, int32_t h);
 
+	uint32_t get_waterway_max_length() const;
+	void set_waterway_max_length(uint32_t max_length);
+
 protected:
 	/// Calculate map compatibility information for the website if it wasn't defined in the map
 	/// packet. If is_post_one_world is true, this map wasn't created for a specific world (Widelands
@@ -529,16 +541,16 @@ protected:
 private:
 	void recalc_border(const FCoords&);
 	void recalc_brightness(const FCoords&);
-	void recalc_nodecaps_pass1(const World& world, const FCoords&);
-	void recalc_nodecaps_pass2(const World& world, const FCoords& f);
+	void recalc_nodecaps_pass1(const EditorGameBase&, const FCoords&);
+	void recalc_nodecaps_pass2(const EditorGameBase&, const FCoords& f);
 	NodeCaps
-	calc_nodecaps_pass1(const World& world, const FCoords&, bool consider_mobs = true) const;
-	NodeCaps calc_nodecaps_pass2(const World& world,
+	calc_nodecaps_pass1(const EditorGameBase&, const FCoords&, bool consider_mobs = true) const;
+	NodeCaps calc_nodecaps_pass2(const EditorGameBase&,
 	                             const FCoords&,
 	                             bool consider_mobs = true,
 	                             NodeCaps initcaps = CAPS_NONE) const;
 	void check_neighbour_heights(FCoords, uint32_t& radius);
-	int calc_buildsize(const World& world,
+	int calc_buildsize(const EditorGameBase&,
 	                   const FCoords& f,
 	                   bool avoidnature,
 	                   bool* ismine = nullptr,
@@ -546,8 +558,10 @@ private:
 	                   NodeCaps initcaps = CAPS_NONE) const;
 	bool is_cycle_connected(const FCoords& start, uint32_t length, const WalkingDir* dirs) const;
 	template <typename functorT>
-	void find_reachable(const Area<FCoords>&, const CheckStep&, functorT&) const;
-	template <typename functorT> void find(const Area<FCoords>&, functorT&) const;
+	void
+	find_reachable(const EditorGameBase&, const Area<FCoords>&, const CheckStep&, functorT&) const;
+	template <typename functorT>
+	void find(const EditorGameBase&, const Area<FCoords>&, functorT&) const;
 
 	/// # of players this map supports (!= Game's number of players!)
 	PlayerNumber nrplayers_;
@@ -579,6 +593,8 @@ private:
 
 	PortSpacesSet port_spaces_;
 	bool allows_seafaring_;
+
+	uint32_t waterway_max_length_;
 
 	Objectives objectives_;
 

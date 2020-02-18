@@ -143,7 +143,7 @@ function plan_the_future()
    campaign_message_box(economy_settings2)
    o = campaign_message_with_objective(economy_settings3, obj_produce_marble_columns)
 
-   while sf.brn.immovable.economy:ware_target_quantity("marble_column") ~= 20 do
+   while sf.brn.immovable.ware_economy:target_quantity("marble_column") ~= 20 do
       sleep(200)
    end
    -- wait that the player has really changed the target quantity

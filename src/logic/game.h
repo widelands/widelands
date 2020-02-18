@@ -31,9 +31,6 @@
 #include "random/random.h"
 #include "scripting/logic.h"
 
-namespace UI {
-struct ProgressWindow;
-}
 struct ComputerPlayer;
 class InteractivePlayer;
 struct GameSettings;
@@ -176,13 +173,12 @@ public:
 	void set_write_replay(bool wr);
 	void set_write_syncstream(bool wr);
 	void save_syncstream(bool save);
-	void init_newgame(UI::ProgressWindow* loader_ui, const GameSettings&);
-	void init_savegame(UI::ProgressWindow* loader_ui, const GameSettings&);
+	void init_newgame(const GameSettings&);
+	void init_savegame(const GameSettings&);
 
 	enum StartGameType { NewSPScenario, NewNonScenario, Loaded, NewMPScenario };
 
-	bool run(UI::ProgressWindow* loader_ui,
-	         StartGameType,
+	bool run(StartGameType,
 	         const std::string& script_to_run,
 	         bool replay,
 	         const std::string& prefix_for_replays);
@@ -257,6 +253,7 @@ public:
 	void send_player_build(int32_t, const Coords&, DescriptionIndex);
 	void send_player_build_flag(int32_t, const Coords&);
 	void send_player_build_road(int32_t, Path&);
+	void send_player_build_waterway(int32_t, Path&);
 	void send_player_flagaction(Flag&);
 	void send_player_start_stop_building(Building&);
 	void send_player_militarysite_set_soldier_preference(Building&, SoldierPreference preference);

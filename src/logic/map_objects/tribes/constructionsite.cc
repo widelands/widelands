@@ -27,7 +27,8 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/wares_queue.h"
-#include "graphic/animation.h"
+#include "graphic/animation/animation.h"
+#include "graphic/animation/animation_manager.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "logic/editor_game_base.h"
@@ -39,6 +40,7 @@
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
+#include "logic/map_objects/world/world.h"
 #include "sound/note_sound.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/window.h"
@@ -53,8 +55,8 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 	// Draw the construction site marker
 	std::vector<std::pair<uint32_t, uint32_t>> animations;
 	uint32_t total_frames = 0;
-	auto push_animation = [](const BuildingDescr* d,
-	                         std::vector<std::pair<uint32_t, uint32_t>>* anims, uint32_t* tf) {
+	auto push_animation = [](
+	   const BuildingDescr* d, std::vector<std::pair<uint32_t, uint32_t>>* anims, uint32_t* tf) {
 		const bool known = d->is_animation_known("build");
 		const uint32_t anim_idx =
 		   known ? d->get_animation("build", nullptr) : d->get_unoccupied_animation();
@@ -78,25 +80,25 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 		++animation_index;
 		assert(animation_index < animations.size());
 	}
-	const uint32_t anim_time = frame_index * FRAME_LENGTH;
+	const uint32_t anim_time = frame_index * kFrameLength;
 
 	if (frame_index > 0) {
 		// Not the first pic within this animation – draw the previous one
 		dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale,
-		                    animations[animation_index].first, anim_time - FRAME_LENGTH,
+		                    animations[animation_index].first, anim_time - kFrameLength,
 		                    &player_color);
 	} else if (animation_index > 0) {
 		// The first pic, but not the first series of animations – draw the last pic of the previous
 		// series
 		dst->blit_animation(
 		   point_on_dst, Widelands::Coords::null(), scale, animations[animation_index - 1].first,
-		   FRAME_LENGTH * (animations[animation_index - 1].second - 1), &player_color);
+		   kFrameLength * (animations[animation_index - 1].second - 1), &player_color);
 	} else if (was) {
 		//  First pic in first series, but there was another building here before –
 		//  get its most fitting picture and draw it instead
 		const uint32_t unocc = was->get_unoccupied_animation();
 		dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, unocc,
-		                    FRAME_LENGTH * (g_gr->animations().get_animation(unocc).nr_frames() - 1),
+		                    kFrameLength * (g_gr->animations().get_animation(unocc).nr_frames() - 1),
 		                    &player_color);
 	}
 	// Now blit a segment of the current construction phase from the bottom.
@@ -196,16 +198,23 @@ bool ConstructionSite::init(EditorGameBase& egbase) {
 	   NoteSound(SoundType::kAmbient, descr().creation_fx(), position_, kFxPriorityAlwaysPlay));
 	PartiallyFinishedBuilding::init(egbase);
 
-	const std::map<DescriptionIndex, uint8_t>* buildcost;
+	const std::map<DescriptionIndex, uint8_t>* buildcost = nullptr;
 	if (!old_buildings_.empty()) {
-		// Enhancement
-		DescriptionIndex was_index = old_buildings_.back();
-		const BuildingDescr* was_descr = owner().tribe().get_building_descr(was_index);
-		info_.was = was_descr;
-		buildcost = &building_->enhancement_cost();
-	} else {
+		// Enhancement and/or built over immovable
+		for (auto it = old_buildings_.end(); it != old_buildings_.begin();) {
+			--it;
+			if (it->second.empty()) {
+				const BuildingDescr* was_descr = owner().tribe().get_building_descr(it->first);
+				info_.was = was_descr;
+				buildcost = &building_->enhancement_cost();
+				break;
+			}
+		}
+	}
+	if (!buildcost) {
 		buildcost = &building_->buildcost();
 	}
+	assert(buildcost);
 
 	//  TODO(unknown): figure out whether planing is necessary
 
@@ -263,7 +272,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 	if (work_steps_ <= work_completed_) {
 		// Put the real building in place
 		DescriptionIndex becomes_idx = owner().tribe().building_index(building_->name());
-		old_buildings_.push_back(becomes_idx);
+		old_buildings_.push_back(std::make_pair(becomes_idx, ""));
 		Building& b = building_->create(egbase, get_owner(), position_, false, false, old_buildings_);
 		if (Worker* const builder = builder_.get(egbase)) {
 			builder->reset_tasks(dynamic_cast<Game&>(egbase));
@@ -330,7 +339,7 @@ void ConstructionSite::enhance(Game&) {
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::LOST));
 
 	info_.intermediates.push_back(building_);
-	old_buildings_.push_back(owner().tribe().building_index(building_->name()));
+	old_buildings_.push_back(std::make_pair(owner().tribe().building_index(building_->name()), ""));
 	building_ = owner().tribe().get_building_descr(building_->enhancement());
 	assert(building_);
 	info_.becomes = building_;
@@ -374,6 +383,10 @@ void ConstructionSite::enhance(Game&) {
 		work_steps_ += pair.second;
 	}
 
+	auto new_desired_capacity = [](uint32_t old_max, uint32_t old_des, uint32_t new_max) {
+		return old_max - old_des >= new_max ? 0 : new_max - old_max + old_des;
+	};
+
 	BuildingSettings* old_settings = settings_.release();
 	if (upcast(const WarehouseDescr, wd, building_)) {
 		upcast(WarehouseSettings, ws, old_settings);
@@ -397,8 +410,8 @@ void ConstructionSite::enhance(Game&) {
 			for (auto& pair_new : new_settings->ware_queues) {
 				if (pair_new.first == pair_old.first) {
 					pair_new.second.priority = pair_old.second.priority;
-					pair_new.second.desired_fill =
-					   std::min(pair_old.second.desired_fill, pair_new.second.max_fill);
+					pair_new.second.desired_fill = new_desired_capacity(
+					   pair_old.second.max_fill, pair_old.second.desired_fill, pair_new.second.max_fill);
 					break;
 				}
 			}
@@ -407,13 +420,14 @@ void ConstructionSite::enhance(Game&) {
 			for (auto& pair_new : new_settings->worker_queues) {
 				if (pair_new.first == pair_old.first) {
 					pair_new.second.priority = pair_old.second.priority;
-					pair_new.second.desired_fill =
-					   std::min(pair_old.second.desired_fill, pair_new.second.max_fill);
+					pair_new.second.desired_fill = new_desired_capacity(
+					   pair_old.second.max_fill, pair_old.second.desired_fill, pair_new.second.max_fill);
 					break;
 				}
 			}
 		}
-		new_settings->desired_capacity = std::min(new_settings->max_capacity, ts->desired_capacity);
+		new_settings->desired_capacity =
+		   new_desired_capacity(ts->max_capacity, ts->desired_capacity, new_settings->max_capacity);
 	} else if (upcast(const ProductionSiteDescr, pd, building_)) {
 		upcast(ProductionsiteSettings, ps, old_settings);
 		assert(ps);
@@ -424,8 +438,8 @@ void ConstructionSite::enhance(Game&) {
 			for (auto& pair_new : new_settings->ware_queues) {
 				if (pair_new.first == pair_old.first) {
 					pair_new.second.priority = pair_old.second.priority;
-					pair_new.second.desired_fill =
-					   std::min(pair_old.second.desired_fill, pair_new.second.max_fill);
+					pair_new.second.desired_fill = new_desired_capacity(
+					   pair_old.second.max_fill, pair_old.second.desired_fill, pair_new.second.max_fill);
 					break;
 				}
 			}
@@ -434,8 +448,8 @@ void ConstructionSite::enhance(Game&) {
 			for (auto& pair_new : new_settings->worker_queues) {
 				if (pair_new.first == pair_old.first) {
 					pair_new.second.priority = pair_old.second.priority;
-					pair_new.second.desired_fill =
-					   std::min(pair_old.second.desired_fill, pair_new.second.max_fill);
+					pair_new.second.desired_fill = new_desired_capacity(
+					   pair_old.second.max_fill, pair_old.second.desired_fill, pair_new.second.max_fill);
 					break;
 				}
 			}
@@ -446,7 +460,8 @@ void ConstructionSite::enhance(Game&) {
 		MilitarysiteSettings* new_settings = new MilitarysiteSettings(*md);
 		settings_.reset(new_settings);
 		new_settings->desired_capacity = std::max<uint32_t>(
-		   1, std::min<uint32_t>(new_settings->max_capacity, ms->desired_capacity));
+		   1,
+		   new_desired_capacity(ms->max_capacity, ms->desired_capacity, new_settings->max_capacity));
 		new_settings->prefer_heroes = ms->prefer_heroes;
 	} else {
 		// TODO(Nordfriese): Add support for markets when trading is implemented
@@ -603,15 +618,21 @@ Draw the construction site.
 ===============
 */
 void ConstructionSite::draw(uint32_t gametime,
-                            TextToDraw draw_text,
+                            InfoToDraw info_to_draw,
                             const Vector2f& point_on_dst,
                             const Widelands::Coords& coords,
                             float scale,
                             RenderTarget* dst) {
 	uint32_t tanim = gametime - animstart_;
-	// Draw the construction site marker
 	const RGBColor& player_color = get_owner()->get_playercolor();
-	dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, &player_color);
+	if (was_immovable_) {
+		dst->blit_animation(
+		   point_on_dst, coords, scale, was_immovable_->main_animation(), tanim, &player_color);
+	} else {
+		// Draw the construction site marker
+		dst->blit_animation(
+		   point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, &player_color);
+	}
 
 	// Draw the partially finished building
 
@@ -628,6 +649,6 @@ void ConstructionSite::draw(uint32_t gametime,
 	info_.draw(point_on_dst, coords, scale, player_color, dst);
 
 	// Draw help strings
-	draw_info(draw_text, point_on_dst, scale, dst);
+	draw_info(info_to_draw, point_on_dst, scale, dst);
 }
 }  // namespace Widelands

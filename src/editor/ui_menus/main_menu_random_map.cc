@@ -420,10 +420,10 @@ void MainMenuNewRandomMap::normalize_landmass(ButtonId clicked_button) {
 
 	// Prefer changing mountainsval to keep consistency with old behaviour
 	while (sum_without_mountainsval + mountainsval_ > 100) {
-		mountainsval_ -= 1;
+		--mountainsval_;
 	}
 	while (sum_without_mountainsval + mountainsval_ < 100) {
-		mountainsval_ += 1;
+		++mountainsval_;
 	}
 
 	// Compensate if mountainsval got above 100% / below 0%
@@ -469,8 +469,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	EditorInteractive& eia = dynamic_cast<EditorInteractive&>(*get_parent());
 	Widelands::EditorGameBase& egbase = eia.egbase();
 	Widelands::Map* map = egbase.mutable_map();
-	UI::ProgressWindow loader_ui;
-
+	egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
 	eia.cleanup_for_load();
 
 	UniqueRandomMapInfo map_info;
@@ -485,10 +484,10 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	      << "ID = " << map_id_edit_.text() << "\n";
 
 	MapGenerator gen(*map, map_info, egbase);
-	map->create_empty_map(egbase.world(), map_info.w, map_info.h, 0, _("No Name"),
+	map->create_empty_map(egbase, map_info.w, map_info.h, 0, _("No Name"),
 	                      get_config_string("realname", pgettext("author_name", "Unknown")),
 	                      sstrm.str().c_str());
-	loader_ui.step(_("Generating random map…"));
+	egbase.step_loader_ui(_("Generating random map…"));
 
 	log("============== Generating Map ==============\n");
 	log("ID:            %s\n", map_id_edit_.text().c_str());
@@ -517,8 +516,9 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	gen.create_random_map();
 
 	egbase.create_tempfile_and_save_mapdata(FileSystem::ZIP);
+	egbase.load_graphics();
 
-	map->recalc_whole_map(egbase.world());
+	map->recalc_whole_map(egbase);
 	eia.map_changed(EditorInteractive::MapWas::kReplaced);
 	UI::WLMessageBox mbox(
 	   &eia,
@@ -535,6 +535,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	     "or be stuck on an island or on top of a mountain."),
 	   UI::WLMessageBox::MBoxType::kOk);
 	mbox.run<UI::Panel::Returncodes>();
+	egbase.remove_loader_ui();
 	die();
 }
 

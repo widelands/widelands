@@ -31,11 +31,11 @@
  * Decrease the resources of the current field by the given value if
  * there is not already another resource there.
  */
-int32_t EditorDecreaseResourcesTool::handle_click_impl(const Widelands::World& world,
-                                                       const Widelands::NodeAndTriangle<>& center,
-                                                       EditorInteractive& /* parent */,
+int32_t EditorDecreaseResourcesTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
+                                                       EditorInteractive& eia,
                                                        EditorActionArgs* args,
                                                        Widelands::Map* map) {
+	const Widelands::World& world = eia.egbase().world();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
 	do {
@@ -58,12 +58,11 @@ int32_t EditorDecreaseResourcesTool::handle_click_impl(const Widelands::World& w
 	return mr.radius();
 }
 
-int32_t EditorDecreaseResourcesTool::handle_undo_impl(const Widelands::World& world,
-                                                      const Widelands::NodeAndTriangle<>& center,
+int32_t EditorDecreaseResourcesTool::handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
                                                       EditorInteractive& parent,
                                                       EditorActionArgs* args,
                                                       Widelands::Map* map) {
-	return parent.tools()->set_resources.handle_undo_impl(world, center, parent, args, map);
+	return parent.tools()->set_resources.handle_undo_impl(center, parent, args, map);
 }
 
 EditorActionArgs EditorDecreaseResourcesTool::format_args_impl(EditorInteractive& parent) {

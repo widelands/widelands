@@ -136,7 +136,7 @@ bool CheckStepOwnTerritory::reachable_dest(const Map& map, const FCoords& dest) 
 FindNodeEnemy::FindNodeEnemy(Player* p, Game& g) : player(p), game(g) {
 }
 
-bool FindNodeEnemy::accept(const Map&, const FCoords& fc) const {
+bool FindNodeEnemy::accept(const EditorGameBase&, const FCoords& fc) const {
 	return (fc.field->nodecaps() & MOVECAPS_WALK) && fc.field->get_owned_by() != 0 &&
 	       player->is_hostile(*game.get_player(fc.field->get_owned_by()));
 }
@@ -147,7 +147,7 @@ bool FindNodeEnemy::accept(const Map&, const FCoords& fc) const {
 FindNodeEnemiesBuilding::FindNodeEnemiesBuilding(Player* p, Game& g) : player(p), game(g) {
 }
 
-bool FindNodeEnemiesBuilding::accept(const Map&, const FCoords& fc) const {
+bool FindNodeEnemiesBuilding::accept(const EditorGameBase&, const FCoords& fc) const {
 	return (fc.field->get_immovable()) && fc.field->get_owned_by() != 0 &&
 	       player->is_hostile(*game.get_player(fc.field->get_owned_by()));
 }
@@ -158,7 +158,7 @@ bool FindNodeEnemiesBuilding::accept(const Map&, const FCoords& fc) const {
 FindEnemyNodeWalkable::FindEnemyNodeWalkable(Player* p, Game& g) : player(p), game(g) {
 }
 
-bool FindEnemyNodeWalkable::accept(const Map&, const FCoords& fc) const {
+bool FindEnemyNodeWalkable::accept(const EditorGameBase&, const FCoords& fc) const {
 	return ((fc.field->nodecaps() & MOVECAPS_WALK) && (fc.field->get_owned_by() > 0) &&
 	        player->is_hostile(*game.get_player(fc.field->get_owned_by())));
 }
@@ -168,7 +168,7 @@ FindNodeAllyOwned::FindNodeAllyOwned(Player* p, Game& g, PlayerNumber n)
    : player(p), game(g), player_number(n) {
 }
 
-bool FindNodeAllyOwned::accept(const Map&, const FCoords& fc) const {
+bool FindNodeAllyOwned::accept(const EditorGameBase&, const FCoords& fc) const {
 	return (fc.field->nodecaps() & MOVECAPS_WALK) && (fc.field->get_owned_by() != 0) &&
 	       (fc.field->get_owned_by() != player_number) &&
 	       !player->is_hostile(*game.get_player(fc.field->get_owned_by()));
@@ -181,7 +181,7 @@ FindNodeUnownedMineable::FindNodeUnownedMineable(Player* p, Game& g, int32_t t)
    : player(p), game(g), ore_type(t) {
 }
 
-bool FindNodeUnownedMineable::accept(const Map&, const FCoords& fc) const {
+bool FindNodeUnownedMineable::accept(const EditorGameBase&, const FCoords& fc) const {
 	if (ore_type == INVALID_INDEX) {
 		return (fc.field->nodecaps() & BUILDCAPS_MINE) && (fc.field->get_owned_by() == neutral());
 	}
@@ -192,7 +192,7 @@ bool FindNodeUnownedMineable::accept(const Map&, const FCoords& fc) const {
 FindNodeUnownedBuildable::FindNodeUnownedBuildable(Player* p, Game& g) : player(p), game(g) {
 }
 
-bool FindNodeUnownedBuildable::accept(const Map&, const FCoords& fc) const {
+bool FindNodeUnownedBuildable::accept(const EditorGameBase&, const FCoords& fc) const {
 	return ((fc.field->nodecaps() & BUILDCAPS_SIZEMASK) ||
 	        (fc.field->nodecaps() & BUILDCAPS_MINE)) &&
 	       (fc.field->get_owned_by() == neutral());
@@ -202,7 +202,7 @@ bool FindNodeUnownedBuildable::accept(const Map&, const FCoords& fc) const {
 FindNodeUnownedWalkable::FindNodeUnownedWalkable(Player* p, Game& g) : player(p), game(g) {
 }
 
-bool FindNodeUnownedWalkable::accept(const Map&, const FCoords& fc) const {
+bool FindNodeUnownedWalkable::accept(const EditorGameBase&, const FCoords& fc) const {
 	return (fc.field->nodecaps() & MOVECAPS_WALK) && (fc.field->get_owned_by() == neutral());
 }
 
@@ -211,7 +211,7 @@ bool FindNodeUnownedWalkable::accept(const Map&, const FCoords& fc) const {
 FindNodeMineable::FindNodeMineable(Game& g, DescriptionIndex r) : game(g), res(r) {
 }
 
-bool FindNodeMineable::accept(const Map&, const FCoords& fc) const {
+bool FindNodeMineable::accept(const EditorGameBase&, const FCoords& fc) const {
 
 	return (fc.field->nodecaps() & BUILDCAPS_MINE) && (fc.field->get_resources() == res);
 }
@@ -220,21 +220,23 @@ bool FindNodeMineable::accept(const Map&, const FCoords& fc) const {
 FindNodeWater::FindNodeWater(const World& world) : world_(world) {
 }
 
-bool FindNodeWater::accept(const Map& map, const FCoords& coord) const {
+bool FindNodeWater::accept(const EditorGameBase& egbase, const FCoords& coord) const {
 	return (world_.terrain_descr(coord.field->terrain_d()).get_is() &
 	        TerrainDescription::Is::kWater) ||
-	       (world_.terrain_descr(map.get_neighbour(coord, WALK_W).field->terrain_r()).get_is() &
+	       (world_.terrain_descr(egbase.map().get_neighbour(coord, WALK_W).field->terrain_r())
+	           .get_is() &
 	        TerrainDescription::Is::kWater) ||
-	       (world_.terrain_descr(map.get_neighbour(coord, WALK_NW).field->terrain_r()).get_is() &
+	       (world_.terrain_descr(egbase.map().get_neighbour(coord, WALK_NW).field->terrain_r())
+	           .get_is() &
 	        TerrainDescription::Is::kWater);
 }
 
-bool FindNodeOpenWater::accept(const Map& /* map */, const FCoords& coord) const {
+bool FindNodeOpenWater::accept(const EditorGameBase&, const FCoords& coord) const {
 	return !(coord.field->nodecaps() & MOVECAPS_WALK) && (coord.field->nodecaps() & MOVECAPS_SWIM);
 }
 
 // FindNodeWithFlagOrRoad
-bool FindNodeWithFlagOrRoad::accept(const Map&, FCoords fc) const {
+bool FindNodeWithFlagOrRoad::accept(const EditorGameBase&, FCoords fc) const {
 	if (upcast(PlayerImmovable const, pimm, fc.field->get_immovable()))
 		return (dynamic_cast<Flag const*>(pimm) ||
 		        (dynamic_cast<Road const*>(pimm) && (fc.field->nodecaps() & BUILDCAPS_FLAG)));
@@ -269,7 +271,7 @@ uint32_t EventTimeQueue::count(const uint32_t current_time, const uint32_t addit
 		uint32_t cnt = 0;
 		for (auto item : queue) {
 			if (item.second == additional_id) {
-				cnt += 1;
+				++cnt;
 			}
 		}
 		return cnt;
@@ -368,7 +370,27 @@ void BuildingObserver::unset_is(const BuildingAttribute attribute) {
 	assert(!is(attribute));
 }
 
-Widelands::AiModeBuildings BuildingObserver::aimode_limit_status() {
+bool BuildingObserver::has_collected_map_resource() const {
+	return collected_map_resource != INVALID_INDEX;
+}
+void BuildingObserver::set_collected_map_resource(const Widelands::TribeDescr& tribe,
+                                                  const std::string& ware_name) {
+	if (!ware_name.empty()) {
+		collected_map_resource = tribe.safe_ware_index(ware_name);
+	} else {
+		collected_map_resource = Widelands::INVALID_INDEX;
+	}
+}
+DescriptionIndex BuildingObserver::get_collected_map_resource() const {
+	if (has_collected_map_resource()) {
+		return collected_map_resource;
+	} else {
+		throw wexception("Building '%s' needs to define the AI hint \"collects_ware_from_map\"",
+		                 desc->name().c_str());
+	}
+}
+
+Widelands::AiModeBuildings BuildingObserver::aimode_limit_status() const {
 	if (total_count() > cnt_limit_by_aimode) {
 		return Widelands::AiModeBuildings::kLimitExceeded;
 	} else if (total_count() == cnt_limit_by_aimode) {
@@ -396,7 +418,7 @@ void MineFieldsObserver::zero() {
 
 // Increase counter by one for specific ore/minefield type
 void MineFieldsObserver::add(const Widelands::DescriptionIndex idx) {
-	stat[idx] += 1;
+	++stat[idx];
 }
 
 // Add ore into critical_ores
@@ -427,7 +449,7 @@ uint8_t MineFieldsObserver::count_types() {
 	uint16_t count = 0;
 	for (auto material : stat) {
 		if (material.second > 0) {
-			count += 1;
+			++count;
 		}
 	}
 	return count;
@@ -461,7 +483,7 @@ void Neuron::set_weight(int8_t w) {
 // This has to be recalculated when the weight or curve type change
 void Neuron::recalculate() {
 	assert(neuron_curves.size() > type);
-	for (uint8_t i = 0; i <= kNeuronMaxPosition; i += 1) {
+	for (uint8_t i = 0; i <= kNeuronMaxPosition; ++i) {
 		results[i] = weight * neuron_curves[type][i] / kNeuronWeightLimit;
 	}
 }
@@ -821,17 +843,17 @@ void ManagementData::mutate(const uint8_t pn) {
 				uint8_t changed_bits = 0;
 				// is this a preferred neuron
 				if (preferred_f_neurons.count(item.get_id()) > 0) {
-					for (uint8_t i = 0; i < kFNeuronBitSize; i += 1) {
+					for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
 						if (std::rand() % 5 == 0) {
 							item.flip_bit(i);
-							changed_bits += 1;
+							++changed_bits;
 						}
 					}
 				} else {  // normal mutation
-					for (uint8_t i = 0; i < kFNeuronBitSize; i += 1) {
+					for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
 						if (std::rand() % (probability * 3) == 0) {
 							item.flip_bit(i);
-							changed_bits += 1;
+							++changed_bits;
 						}
 					}
 				}
@@ -1079,7 +1101,7 @@ uint8_t PlayersStrengths::enemies_seen_lately_count(const uint32_t gametime) {
 	uint8_t count = 0;
 	for (auto& item : all_stats) {
 		if (get_is_enemy(item.first) && player_seen_lately(item.first, gametime)) {
-			count += 1;
+			++count;
 		}
 	}
 	return count;
@@ -1470,7 +1492,7 @@ void FlagCandidates::sort_by_air_distance() {
 	std::sort(flags_.begin(), flags_.end(),
 	          [](const FlagCandidates::Candidate& lf, const FlagCandidates::Candidate& rf) {
 		          return lf.air_distance < rf.air_distance;
-	          });
+		       });
 }
 
 void FlagCandidates::add_flag(const uint32_t coords,

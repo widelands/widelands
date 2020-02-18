@@ -101,6 +101,11 @@ Window::Window(Panel* const parent,
 	   VT_B_PIXMAP_THICKNESS, VT_B_PIXMAP_THICKNESS, TP_B_PIXMAP_THICKNESS, BT_B_PIXMAP_THICKNESS);
 	set_top_on_click(true);
 	set_layout_toplevel(true);
+	layout();
+	focus();
+
+	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
+	   [this](const GraphicResolutionChanged& note) { on_resolution_changed_note(note); });
 }
 
 /**
@@ -263,9 +268,9 @@ void Window::draw_border(RenderTarget& dst) {
 		//  top bar
 		static_assert(0 <= HZ_B_CORNER_PIXMAP_LEN, "assert(0 <= HZ_B_CORNER_PIXMAP_LEN) failed.");
 		for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN)
-			dst.blitrect(Vector2i(pos, 0), pic_top_,
-			             Recti(Vector2i(HZ_B_CORNER_PIXMAP_LEN, 0), HZ_B_MIDDLE_PIXMAP_LEN,
-			                   TP_B_PIXMAP_THICKNESS));
+			dst.blitrect(
+			   Vector2i(pos, 0), pic_top_, Recti(Vector2i(HZ_B_CORNER_PIXMAP_LEN, 0),
+			                                     HZ_B_MIDDLE_PIXMAP_LEN, TP_B_PIXMAP_THICKNESS));
 
 		// odd pixels of top bar and top right corner
 		const int32_t width = hz_bar_end - pos + HZ_B_CORNER_PIXMAP_LEN;
@@ -374,7 +379,8 @@ bool Window::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my) {
 	//  TODO(unknown): This code is erroneous. It checks the current key state. What it
 	//  needs is the key state at the time the mouse was clicked. See the
 	//  usage comment for get_key_state.
-	if ((SDL_GetModState() & KMOD_CTRL && btn == SDL_BUTTON_LEFT) || btn == SDL_BUTTON_MIDDLE)
+	if ((SDL_GetModState() & KMOD_CTRL && btn == SDL_BUTTON_LEFT && my < VT_B_PIXMAP_THICKNESS) ||
+	    btn == SDL_BUTTON_MIDDLE)
 		is_minimal() ? restore() : minimize();
 	else if (btn == SDL_BUTTON_LEFT) {
 		dragging_ = true;
@@ -409,6 +415,25 @@ bool Window::handle_mousewheel(uint32_t, int32_t, int32_t) {
 	// Mouse wheel events should not propagate to objects below us, so we claim
 	// that they have been handled.
 	return true;
+}
+
+bool Window::handle_key(bool down, SDL_Keysym code) {
+	// Handles a key input and event and will close when pressing ESC
+
+	if (down) {
+		switch (code.sym) {
+		case SDLK_ESCAPE: {
+			die();
+			Panel* ch = get_next_sibling();
+			if (ch != nullptr)
+				ch->focus();
+			return true;
+		}
+		default:
+			break;
+		}
+	}
+	return UI::Panel::handle_key(down, code);
 }
 
 /**
@@ -598,5 +623,38 @@ bool Window::handle_mousemove(const uint8_t, int32_t mx, int32_t my, int32_t, in
 		set_pos(Vector2i(new_left, new_top));
 	}
 	return true;
+}
+
+void Window::on_resolution_changed_note(const GraphicResolutionChanged& note) {
+	const int old_center_x = note.old_width / 2;
+	const int old_center_y = note.old_height / 2;
+	constexpr int kEdgeTolerance = 50;
+	constexpr int kCenterTolerance = 10;
+	if (std::abs(get_w() - note.old_width) < kEdgeTolerance &&
+	    std::abs(get_h() - note.old_height) < kEdgeTolerance) {
+		// The window is sort-of fullscreen, e.g. help. So, we resize it.
+		set_size(note.new_width, note.new_height);
+		center_to_parent();
+		layout();
+	} else {
+		// Adjust x position
+		if (std::abs(old_center_x - get_x() - get_w() / 2) < kCenterTolerance) {
+			// The window was centered horizontally. Keep it that way.
+			set_pos(Vector2i((note.new_width - get_w()) / 2, get_y()));
+		} else if (get_x() + get_w() / 2 > old_center_x) {
+			// The window was in the right half of the screen. Shift to maintain distance to right edge
+			// of the screen.
+			set_pos(Vector2i(note.new_width - note.old_width + get_x(), get_y()));
+		}
+		// Adjust y position
+		if (std::abs(old_center_y - get_y() - get_h() / 2) < kCenterTolerance) {
+			// The window was centered vertically. Keep it that way.
+			set_pos(Vector2i(get_x(), (note.new_height - get_h()) / 2));
+		} else if (get_y() + get_h() / 2 > old_center_y) {
+			// The window was in the bottom half of the screen. Shift to maintain distance to bottom
+			// edge of the screen.
+			set_pos(Vector2i(get_x(), note.new_height - note.old_height + get_y()));
+		}
+	}
 }
 }  // namespace UI

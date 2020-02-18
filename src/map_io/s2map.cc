@@ -290,7 +290,7 @@ TerrainConverter::TerrainConverter(const Widelands::World& world,
 Widelands::DescriptionIndex TerrainConverter::lookup(S2MapLoader::WorldType world, int8_t c) const {
 	switch (c) {
 	// the following comments are valid for greenland - blackland and winterland have equivalents
-	// source: http://bazaar.launchpad.net/~xaser/s25rttr/s25edit/view/head:/WLD_reference.txt
+	// source: https://settlers2.net/documentation/world-map-file-format-wldswd/
 	case 0x00:
 		c = 0;
 		break;  // steppe meadow1
@@ -413,9 +413,9 @@ int32_t S2MapLoader::load_map_complete(Widelands::EditorGameBase& egbase, MapLoa
 
 	load_s2mf(egbase);
 
-	map_.recalc_whole_map(egbase.world());
+	map_.recalc_whole_map(egbase);
 
-	postload_set_port_spaces(egbase.world());
+	postload_set_port_spaces(egbase);
 
 	set_state(STATE_LOADED);
 
@@ -520,7 +520,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 		for (int16_t x = 0; x < mapwidth; ++x, ++f, ++pc) {
 			uint8_t c = *pc;
 			// Harbour buildspace & textures - Information taken from:
-			// http://bazaar.launchpad.net/~xaser/s25rttr/s25edit/view/head:/WLD_reference.txt
+			// https://settlers2.net/documentation/world-map-file-format-wldswd/
 			if (c & 0x40) {
 				port_spaces_to_set_.insert(Widelands::Coords(x, y));
 			}
@@ -750,8 +750,8 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	//  conversion. We will then convert them using the
 	//  OneWorldLegacyLookupTable.
 	// Puts an immovable with the 'old_immovable_name' onto the field 'locations'.
-	auto place_immovable = [&egbase, &lookup_table, &world](const Widelands::Coords& location,
-	                                                        const std::string& old_immovable_name) {
+	auto place_immovable = [&egbase, &lookup_table, &world](
+	   const Widelands::Coords& location, const std::string& old_immovable_name) {
 		const std::string new_immovable_name = lookup_table->lookup_immovable(old_immovable_name);
 		Widelands::DescriptionIndex const idx = world.get_immovable_index(new_immovable_name.c_str());
 		if (idx == Widelands::INVALID_INDEX) {
@@ -1025,7 +1025,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	//  loading of Settlers 2 maps in the majority of cases, check all
 	//  starting positions and try to make it Widelands compatible, if its
 	//  size is too small.
-	map_.recalc_whole_map(world);  //  to initialize buildcaps
+	map_.recalc_whole_map(egbase);  //  to initialize buildcaps
 
 	const Widelands::PlayerNumber nr_players = map_.get_nrplayers();
 	log("Checking starting position for all %u players:\n", nr_players);
@@ -1042,14 +1042,14 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 		}
 		Widelands::FCoords fpos = map_.get_fcoords(starting_pos);
 
-		if (!(map_.get_max_nodecaps(world, fpos) & Widelands::BUILDCAPS_BIG)) {
+		if (!(map_.get_max_nodecaps(egbase, fpos) & Widelands::BUILDCAPS_BIG)) {
 			log("wrong size - trying to fix it: ");
 			bool fixed = false;
 
 			Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 			   map_, Widelands::Area<Widelands::FCoords>(fpos, 3));
 			do {
-				if (map_.get_max_nodecaps(world, const_cast<Widelands::FCoords&>(mr.location())) &
+				if (map_.get_max_nodecaps(egbase, const_cast<Widelands::FCoords&>(mr.location())) &
 				    Widelands::BUILDCAPS_BIG) {
 					map_.set_starting_pos(p, mr.location());
 					fixed = true;
@@ -1075,10 +1075,10 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 
 /// Try to fix data which is incompatible between S2 and Widelands.
 /// This is only the port space locations.
-void S2MapLoader::postload_set_port_spaces(const Widelands::World& world) {
+void S2MapLoader::postload_set_port_spaces(const Widelands::EditorGameBase& egbase) {
 	// Set port spaces near desired locations if possible
 	for (const Widelands::Coords& coords : port_spaces_to_set_) {
-		bool was_set = map_.set_port_space(world, coords, true);
+		bool was_set = map_.set_port_space(egbase, coords, true);
 		const Widelands::FCoords fc = map_.get_fcoords(coords);
 		if (!was_set) {
 			// Try to set a port space at alternative location
@@ -1086,7 +1086,7 @@ void S2MapLoader::postload_set_port_spaces(const Widelands::World& world) {
 			   map_, Widelands::Area<Widelands::FCoords>(fc, 3));
 			do {
 				was_set = map_.set_port_space(
-				   world, Widelands::Coords(mr.location().x, mr.location().y), true);
+				   egbase, Widelands::Coords(mr.location().x, mr.location().y), true);
 			} while (!was_set && mr.advance(map_));
 		}
 		if (!was_set) {

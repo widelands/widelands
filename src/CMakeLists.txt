@@ -13,7 +13,7 @@ add_dependencies(codecheck run_build_deps)
 
 # A target that depends on all unit tests as 'make test' will not rebuild
 # tests:
-# http://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests
+# https://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests
 add_custom_target(wl_tests)
 
 #include the cmake version dependend macro _include_directories
@@ -92,8 +92,6 @@ wl_library(widelands_ball_of_mud
     wlapplication.h
     wlapplication_messages.cc
     wlapplication_messages.h
-    wlapplication_options.cc
-    wlapplication_options.h
   USES_SDL2
   USES_SDL2_IMAGE
   USES_SDL2_TTF
@@ -109,7 +107,6 @@ wl_library(widelands_ball_of_mud
     graphic_fonthandler
     graphic_text
     io_filesystem
-    io_profile
     logic
     logic_exceptions
     logic_filesystem_constants
@@ -129,7 +126,22 @@ wl_library(widelands_ball_of_mud
     ui_fsmenu_misc
     ui_fsmenu_network
     ui_fsmenu_options
+    widelands_options
     wui
+)
+
+wl_library(widelands_options
+  SRCS
+    wlapplication_options.cc
+    wlapplication_options.h
+  USES_SDL2
+  USES_SDL2_IMAGE
+  USES_SDL2_TTF
+  DEPENDS
+    base_log
+    io_filesystem
+    io_profile
+    logic_filesystem_constants
 )
 
 if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")

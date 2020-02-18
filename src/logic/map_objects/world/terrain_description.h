@@ -123,6 +123,9 @@ public:
 	/// Fertility, ranging from 0 to 1000.
 	int fertility() const;
 
+	// The terrain which certain workers can transform this terrain into.
+	const std::string& enhancement() const;
+
 	/// Additional tooptip entries for the editor
 	const std::vector<std::string>& custom_tooltips() const {
 		return custom_tooltips_;
@@ -142,6 +145,7 @@ private:
 	int temperature_;
 	int fertility_;
 	int humidity_;
+	std::string enhancement_;
 	std::vector<std::string> texture_paths_;
 	std::vector<const Image*> textures_;
 	RGBColor minimap_colors_[256];

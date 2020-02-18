@@ -42,9 +42,13 @@ constexpr int kMinimumSizeForTextures = 2048;
 struct GraphicResolutionChanged {
 	CAN_BE_SENT_AS_NOTE(NoteId::GraphicResolutionChanged)
 
+	// Old width and height in pixels.
+	int old_width;
+	int old_height;
+
 	// New width and height in pixels.
-	int width;
-	int height;
+	int new_width;
+	int new_height;
 };
 
 /**
@@ -98,7 +102,7 @@ public:
 
 private:
 	// Called when the resolution (might) have changed.
-	void resolution_changed();
+	void resolution_changed(int old_w = 0, int old_h = 0);
 
 	// The height & width of the window should we be in window mode.
 	int window_mode_width_ = 0;

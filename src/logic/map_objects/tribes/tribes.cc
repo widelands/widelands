@@ -35,6 +35,7 @@ Tribes::Tribes()
      wares_(new DescriptionMaintainer<WareDescr>()),
      workers_(new DescriptionMaintainer<WorkerDescr>()),
      tribes_(new DescriptionMaintainer<TribeDescr>()),
+     legacy_lookup_table_(new TribesLegacyLookupTable()),
      largest_workarea_(0) {
 }
 
@@ -115,6 +116,13 @@ void Tribes::add_carrier_type(const LuaTable& table) {
 	   table, *this));
 }
 
+void Tribes::add_ferry_type(const LuaTable& table) {
+	i18n::Textdomain td("tribes");
+	workers_->add(new FerryDescr(
+	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+	   table, *this));
+}
+
 void Tribes::add_soldier_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
 	workers_->add(new SoldierDescr(
@@ -144,6 +152,16 @@ void Tribes::add_custom_building(const LuaTable& table) {
 		TribeDescr* descr = tribes_->get_mutable(tribe_index(tribename));
 		const std::string buildingname = table.get_string("buildingname");
 		descr->add_building(buildingname);
+	} else {
+		throw GameDataError("The tribe '%s'' has no preload file.", tribename.c_str());
+	}
+}
+
+void Tribes::add_custom_worker(const LuaTable& table) {
+	const std::string tribename = table.get_string("tribename");
+	if (Widelands::tribe_exists(tribename)) {
+		TribeDescr* descr = tribes_->get_mutable(tribe_index(tribename));
+		descr->add_worker(table.get_string("workername"));
 	} else {
 		throw GameDataError("The tribe '%s'' has no preload file.", tribename.c_str());
 	}
@@ -194,7 +212,8 @@ bool Tribes::tribe_exists(DescriptionIndex index) const {
 }
 
 DescriptionIndex Tribes::safe_building_index(const std::string& buildingname) const {
-	const DescriptionIndex result = building_index(buildingname);
+	const DescriptionIndex result =
+	   building_index(legacy_lookup_table_.get()->lookup_building(buildingname));
 	if (!building_exists(result)) {
 		throw GameDataError("Unknown building type \"%s\"", buildingname.c_str());
 	}
@@ -202,7 +221,8 @@ DescriptionIndex Tribes::safe_building_index(const std::string& buildingname) co
 }
 
 DescriptionIndex Tribes::safe_immovable_index(const std::string& immovablename) const {
-	const DescriptionIndex result = immovable_index(immovablename);
+	const DescriptionIndex result =
+	   immovable_index(legacy_lookup_table_.get()->lookup_immovable(immovablename));
 	if (!immovable_exists(result)) {
 		throw GameDataError("Unknown immovable type \"%s\"", immovablename.c_str());
 	}
@@ -210,7 +230,7 @@ DescriptionIndex Tribes::safe_immovable_index(const std::string& immovablename) 
 }
 
 DescriptionIndex Tribes::safe_ship_index(const std::string& shipname) const {
-	const DescriptionIndex result = ship_index(shipname);
+	const DescriptionIndex result = ship_index(legacy_lookup_table_.get()->lookup_ship(shipname));
 	if (!ship_exists(result)) {
 		throw GameDataError("Unknown ship type \"%s\"", shipname.c_str());
 	}
@@ -226,7 +246,7 @@ DescriptionIndex Tribes::safe_tribe_index(const std::string& tribename) const {
 }
 
 DescriptionIndex Tribes::safe_ware_index(const std::string& warename) const {
-	const DescriptionIndex result = ware_index(warename);
+	const DescriptionIndex result = ware_index(legacy_lookup_table_.get()->lookup_ware(warename));
 	if (!ware_exists(result)) {
 		throw GameDataError("Unknown ware type \"%s\"", warename.c_str());
 	}
@@ -234,7 +254,8 @@ DescriptionIndex Tribes::safe_ware_index(const std::string& warename) const {
 }
 
 DescriptionIndex Tribes::safe_worker_index(const std::string& workername) const {
-	const DescriptionIndex result = worker_index(workername);
+	const DescriptionIndex result =
+	   worker_index(legacy_lookup_table_.get()->lookup_worker(workername));
 	if (!worker_exists(result)) {
 		throw GameDataError("Unknown worker type \"%s\"", workername.c_str());
 	}
@@ -301,6 +322,9 @@ void Tribes::load_graphics() {
 		}
 		for (const std::string& texture_path : tribe->busy_road_paths()) {
 			tribe->add_busy_road_texture(g_gr->images().get(texture_path));
+		}
+		for (const std::string& texture_path : tribe->waterway_paths()) {
+			tribe->add_waterway_texture(g_gr->images().get(texture_path));
 		}
 	}
 }

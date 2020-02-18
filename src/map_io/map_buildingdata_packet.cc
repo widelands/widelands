@@ -56,7 +56,7 @@
 namespace Widelands {
 
 // Overall package version
-constexpr uint16_t kCurrentPacketVersion = 4;
+constexpr uint16_t kCurrentPacketVersion = 5;
 
 // Building type package versions
 constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
@@ -65,7 +65,7 @@ constexpr uint16_t kCurrentPacketPFBuilding = 1;
 // Responsible for warehouses and expedition bootstraps
 constexpr uint16_t kCurrentPacketVersionWarehouse = 7;
 constexpr uint16_t kCurrentPacketVersionMilitarysite = 6;
-constexpr uint16_t kCurrentPacketVersionProductionsite = 7;
+constexpr uint16_t kCurrentPacketVersionProductionsite = 8;
 constexpr uint16_t kCurrentPacketVersionTrainingsite = 5;
 
 void MapBuildingdataPacket::read(FileSystem& fs,
@@ -85,7 +85,7 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version <= kCurrentPacketVersion && packet_version >= 4) {
 			while (!fr.end_of_file()) {
 				Serial const serial = fr.unsigned_32();
 				try {
@@ -144,10 +144,19 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 						building.leave_allow_ = nullptr;
 					}
 
-					while (fr.unsigned_8()) {
-						DescriptionIndex oldidx =
-						   building.owner().tribe().safe_building_index(fr.c_string());
-						building.old_buildings_.push_back(oldidx);
+					if (packet_version >= kCurrentPacketVersion) {
+						while (fr.unsigned_8()) {
+							DescriptionIndex oldidx =
+							   building.owner().tribe().safe_building_index(fr.c_string());
+							const std::string type(fr.c_string());
+							building.old_buildings_.push_back(std::make_pair(oldidx, type));
+						}
+					} else {
+						while (fr.unsigned_8()) {
+							DescriptionIndex oldidx =
+							   building.owner().tribe().safe_building_index(fr.c_string());
+							building.old_buildings_.push_back(std::make_pair(oldidx, ""));
+						}
 					}
 					// Only construction sites may have an empty list
 					if (building.old_buildings_.empty() && !is_a(ConstructionSite, &building)) {
@@ -176,7 +185,8 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 					}
 
 					//  Set economy now, some stuff below will count on this.
-					building.set_economy(building.flag_->get_economy());
+					building.set_economy(building.flag_->get_economy(wwWARE), wwWARE);
+					building.set_economy(building.flag_->get_economy(wwWORKER), wwWORKER);
 
 					Game& game = dynamic_cast<Game&>(egbase);
 
@@ -446,7 +456,8 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 			if (warehouse.descr().get_isport()) {
 				if (Serial portdock = fr.unsigned_32()) {
 					warehouse.portdock_ = &mol.get<PortDock>(portdock);
-					warehouse.portdock_->set_economy(warehouse.get_economy());
+					warehouse.portdock_->set_economy(warehouse.get_economy(wwWARE), wwWARE);
+					warehouse.portdock_->set_economy(warehouse.get_economy(wwWORKER), wwWORKER);
 					// Expedition specific stuff. This is done in this packet
 					// because the "new style" loader is not supported and
 					// doesn't lend itself to request and other stuff.
@@ -733,15 +744,25 @@ void MapBuildingdataPacket::read_productionsite(
 				}
 			}
 
-			uint16_t const stats_size = fr.unsigned_16();
-			productionsite.statistics_.resize(stats_size);
-			for (uint32_t i = 0; i < productionsite.statistics_.size(); ++i)
-				productionsite.statistics_[i] = fr.unsigned_8();
+			// TODO(hessenfarmer): Savegame compatibility, remove after Build 21.
+			if (packet_version >= 8) {
+				productionsite.actual_percent_ = fr.unsigned_32();
+			} else {
+				uint16_t const stats_size = fr.unsigned_16();
+				uint8_t ok = 0;
+				for (uint16_t i = 0; i < stats_size; ++i) {
+					if (fr.unsigned_8()) {
+						ok++;
+					}
+				}
+				productionsite.actual_percent_ = ok * 1000 / stats_size;
+			}
+
 			productionsite.statistics_string_on_changed_statistics_ = fr.c_string();
 			productionsite.production_result_ = fr.c_string();
 
 			// TODO(GunChleoc): Savegame compatibility, remove after Build 21.
-			if (kCurrentPacketVersionProductionsite >= 7) {
+			if (packet_version >= 7) {
 				productionsite.main_worker_ = fr.signed_32();
 			} else {
 				productionsite.main_worker_ = productionsite.working_positions_[0].worker ? 0 : -1;
@@ -905,10 +926,11 @@ void MapBuildingdataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObj
 			}
 			{
 				const TribeDescr& td = building->owner().tribe();
-				for (DescriptionIndex b_idx : building->old_buildings_) {
-					const BuildingDescr* b_descr = td.get_building_descr(b_idx);
+				for (const auto& pair : building->old_buildings_) {
+					const BuildingDescr* b_descr = td.get_building_descr(pair.first);
 					fw.unsigned_8(1);
 					fw.string(b_descr->name());
+					fw.string(pair.second);
 				}
 				fw.unsigned_8(0);
 			}
@@ -1212,10 +1234,7 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 		}
 	}
 
-	const uint16_t statistics_size = productionsite.statistics_.size();
-	fw.unsigned_16(statistics_size);
-	for (uint32_t i = 0; i < statistics_size; ++i)
-		fw.unsigned_8(productionsite.statistics_[i]);
+	fw.unsigned_32(productionsite.actual_percent_);
 	fw.string(productionsite.statistics_string_on_changed_statistics_);
 	fw.string(productionsite.production_result());
 
