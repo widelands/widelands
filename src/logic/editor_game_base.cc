@@ -117,6 +117,10 @@ void EditorGameBase::delete_tempfile() {
  * throws an exception if something goes wrong
  */
 void EditorGameBase::create_tempfile_and_save_mapdata(FileSystem::Type const type) {
+    if (!map_.filesystem()) {
+        return;
+    }
+
 	// save map data to temporary file and reassign map fs
 	try {
 		g_fs->ensure_directory_exists(kTempFileDir);
