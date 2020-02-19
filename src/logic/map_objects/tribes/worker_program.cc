@@ -415,7 +415,8 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 				} sizenames[] = {{"any", FindNodeSize::sizeAny},     {"build", FindNodeSize::sizeBuild},
 								 {"small", FindNodeSize::sizeSmall}, {"medium", FindNodeSize::sizeMedium},
 								 {"big", FindNodeSize::sizeBig},     {"mine", FindNodeSize::sizeMine},
-								 {"port", FindNodeSize::sizePort},   {nullptr, 0}};
+								 {"port", FindNodeSize::sizePort},   {"swim", FindNodeSize::sizeSwim},
+								 {nullptr, 0}};
 
 				int32_t index;
 
