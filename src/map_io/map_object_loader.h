@@ -41,7 +41,7 @@ class EditorGameBase;
  */
 class MapObjectLoader {
 public:
-	bool is_object_known(uint32_t);
+	bool is_object_known(uint32_t) const;
 
 	/// Registers the object as a new one.
 	///
@@ -91,11 +91,17 @@ public:
 
 	void load_finish_game(Game& g);
 
+	// TODO(Nordfriese): This is one exceedingly ugly hack for savegame compatibiliy.
+	Serial get_economy_savegame_compatibility(Serial ware_economy);
+	Serial get_existing_economy_savegame_compatibility(Serial ware_economy) const;
+
 private:
 	using ReverseMapObjectMap = std::map<Serial, MapObject*>;
 
 	std::map<MapObject*, bool> loaded_objects_;
 	ReverseMapObjectMap objects_;
+
+	std::map<Serial, Serial> economy_savegame_compatibility_;
 
 	std::vector<MapObject*> schedule_destroy_;
 	std::vector<Bob*> schedule_act_;

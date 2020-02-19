@@ -22,6 +22,11 @@
 
 #include "ui_basic/panel.h"
 
+#include <memory>
+
+#include "graphic/graphic.h"
+#include "notifications/notifications.h"
+
 namespace UI {
 /**
  * Windows are cached by default.
@@ -98,6 +103,7 @@ public:
 	handle_mousemove(uint8_t state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff) override;
 	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
 	bool handle_tooltip() override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 protected:
 	void die() override;
@@ -105,6 +111,8 @@ protected:
 	void update_desired_size() override;
 
 private:
+	void on_resolution_changed_note(const GraphicResolutionChanged& note);
+
 	bool is_minimal_;
 	uint32_t oldh_;  // if it is minimized, this is the old height
 	bool dragging_, docked_left_, docked_right_, docked_bottom_;
@@ -121,6 +129,9 @@ private:
 
 	Panel* center_panel_;
 	Panel* fastclick_panel_;
+
+	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
+	   graphic_resolution_changed_subscriber_;
 };
 }  // namespace UI
 

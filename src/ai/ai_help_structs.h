@@ -79,7 +79,10 @@ enum class BuildingAttribute : uint8_t {
 	kUpgradeExtends,
 	kLogRefiner,
 	kIronMine,
+	// TODO(Nordfriese): Someone should update the AI code to handle buildings that need waterways
+	// enabled
 	kNeedsSeafaring,
+	kSupportsSeafaring,
 	kSupportingProducer,
 	kNeedsBerry,
 };
@@ -441,7 +444,7 @@ struct BuildingObserver {
 	};
 
 	int32_t total_count() const;
-	Widelands::AiModeBuildings aimode_limit_status();
+	Widelands::AiModeBuildings aimode_limit_status() const;
 	bool buildable(Widelands::Player& p);
 
 	// Convenience functions for is_what

@@ -21,8 +21,10 @@ run(function()
    sleep(1000)
 
    assert_equal(p1:get_workers("barbarians_builder"), 1)
-   assert_equal(ship.debug_economy, southern_port().debug_economy)
-   assert_not_equal(ship.debug_economy, flag_oversea.debug_economy)
+   assert_equal(ship.debug_ware_economy, southern_port().debug_ware_economy)
+   assert_not_equal(ship.debug_ware_economy, flag_oversea.debug_ware_economy)
+   assert_equal(ship.debug_worker_economy, southern_port().debug_worker_economy)
+   assert_not_equal(ship.debug_worker_economy, flag_oversea.debug_worker_economy)
 
    -- now kill the first port too.
    southern_port():remove()

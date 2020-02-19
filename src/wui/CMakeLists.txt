@@ -83,6 +83,8 @@ wl_library(wui_common_gamedetails
     gamedetails.h
     load_or_save_game.cc
     load_or_save_game.h
+    savegametable.cc
+    savegametable.h
   DEPENDS
     base_i18n
     base_log
@@ -90,7 +92,6 @@ wl_library(wui_common_gamedetails
     helper
     game_io
     graphic
-    graphic_fonthandler
     graphic_image_io
     graphic_surface
     graphic_text_layout
@@ -173,6 +174,22 @@ wl_library(wui_waresdisplay
 )
 
 
+wl_library(wui_game_tips
+  SRCS
+    game_tips.cc
+    game_tips.h
+  USES_SDL2
+  DEPENDS
+    base_i18n
+    graphic
+    graphic_fonthandler
+    graphic_text_layout
+    scripting_lua_table
+    scripting_lua_interface
+    ui_basic
+)
+
+
 wl_library(wui
   SRCS
     actionconfirm.cc
@@ -209,8 +226,6 @@ wl_library(wui
     game_options_sound_menu.h
     game_summary.cc
     game_summary.h
-    game_tips.cc
-    game_tips.h
     general_statistics_menu.cc
     general_statistics_menu.h
     helpwindow.cc
@@ -291,7 +306,6 @@ wl_library(wui
     graphic_text
     graphic_text_layout
     graphic_toolbar_imageset
-    io_fileread
     io_filesystem
     io_profile
     logic

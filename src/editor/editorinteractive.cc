@@ -65,18 +65,19 @@
 #include "map_io/widelands_map_loader.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
+#include "sound/sound_handler.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "wlapplication_options.h"
-#include "wui/game_tips.h"
 #include "wui/interactive_base.h"
 
 namespace {
 using Widelands::Building;
 
 // Load all tribes from disk.
-void load_all_tribes(Widelands::EditorGameBase* egbase, UI::ProgressWindow* loader_ui) {
-	loader_ui->step(_("Loading tribes"));
+void load_all_tribes(Widelands::EditorGameBase* egbase) {
+	assert(egbase->has_loader_ui());
+	egbase->step_loader_ui(_("Loading tribes"));
 	egbase->tribes();
 }
 
@@ -95,7 +96,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                10,
                34U,
                /** TRANSLATORS: Title for the main menu button in the editor */
-               as_tooltip_text_with_hotkey(_("Main Menu"), "h"),
+               as_tooltip_text_with_hotkey(_("Main Menu"), pgettext("hotkey", "Esc")),
                UI::DropdownType::kPictorialMenu,
                UI::PanelStyle::kWui,
                UI::ButtonStyle::kWuiPrimary),
@@ -107,7 +108,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                12,
                34U,
                /** TRANSLATORS: Title for the tool menu button in the editor */
-               as_tooltip_text_with_hotkey(_("Tools"), "t"),
+               as_tooltip_text_with_hotkey(_("Tools"), "T"),
                UI::DropdownType::kPictorialMenu,
                UI::PanelStyle::kWui,
                UI::ButtonStyle::kWuiPrimary),
@@ -194,7 +195,7 @@ void EditorInteractive::add_main_menu() {
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Load Map"), MainMenuEntry::kLoadMap,
 	              g_gr->images().get("images/wui/editor/menus/load_map.png"), false, "",
-	              pgettext("hotkey", "Ctrl+l"));
+	              pgettext("hotkey", "Ctrl+L"));
 
 	menu_windows_.savemap.open_window = [this] {
 		new MainMenuSaveMap(*this, menu_windows_.savemap, menu_windows_.mapoptions);
@@ -202,7 +203,7 @@ void EditorInteractive::add_main_menu() {
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Save Map"), MainMenuEntry::kSaveMap,
 	              g_gr->images().get("images/wui/editor/menus/save_map.png"), false, "",
-	              pgettext("hotkey", "Ctrl+s"));
+	              pgettext("hotkey", "Ctrl+S"));
 
 	menu_windows_.mapoptions.open_window = [this] {
 		new MainMenuMapOptions(*this, menu_windows_.mapoptions);
@@ -313,7 +314,7 @@ void EditorInteractive::add_tool_menu() {
 	toolmenu_.add(_("Players"), ToolMenuEntry::kPlayers,
 	              g_gr->images().get("images/wui/editor/tools/players.png"), false,
 	              /** TRANSLATORS: Tooltip for the map size tool in the editor */
-	              _("Set number of players and their names, tribes and starting positions"), "p");
+	              _("Set number of players and their names, tribes and starting positions"), "P");
 
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Map origin"), ToolMenuEntry::kMapOrigin,
@@ -335,7 +336,7 @@ void EditorInteractive::add_tool_menu() {
 	toolmenu_.add(_("Information"), ToolMenuEntry::kFieldInfo,
 	              g_gr->images().get("images/wui/editor/fsel_editor_info.png"), false,
 	              /** TRANSLATORS: Tooltip for the map information tool in the editor */
-	              _("Click on a field to show information about it"), "i");
+	              _("Click on a field to show information about it"), "I");
 	toolmenu_.selected.connect([this] { tool_menu_selected(toolmenu_.get_selected()); });
 	toolbar()->add(&toolmenu_);
 }
@@ -442,6 +443,7 @@ void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
 
 void EditorInteractive::load(const std::string& filename) {
 	assert(filename.size());
+	assert(egbase().has_loader_ui());
 
 	Widelands::Map* map = egbase().mutable_map();
 
@@ -455,17 +457,11 @@ void EditorInteractive::load(const std::string& filename) {
 		   filename.c_str());
 	ml->preload_map(true);
 
-	UI::ProgressWindow loader_ui("images/loadscreens/editor.jpg");
-	std::vector<std::string> tipstext;
-	tipstext.push_back("editor");
-
-	GameTips editortips(loader_ui, tipstext);
-
-	load_all_tribes(&egbase(), &loader_ui);
+	load_all_tribes(&egbase());
 
 	// Create the players. TODO(SirVer): this must be managed better
 	// TODO(GunChleoc): Ugly - we only need this for the test suite right now
-	loader_ui.step(_("Creating players"));
+	egbase().step_loader_ui(_("Creating players"));
 	iterate_player_numbers(p, map->get_nrplayers()) {
 		if (!map->get_scenario_player_tribe(p).empty()) {
 			egbase().add_player(
@@ -475,7 +471,7 @@ void EditorInteractive::load(const std::string& filename) {
 
 	ml->load_map_complete(egbase(), Widelands::MapLoader::LoadType::kEditor);
 	egbase().postload();
-	egbase().load_graphics(loader_ui);
+	egbase().load_graphics();
 	map_changed(MapWas::kReplaced);
 }
 
@@ -489,6 +485,7 @@ void EditorInteractive::cleanup_for_load() {
 void EditorInteractive::start() {
 	// Run the editor initialization script, if any
 	try {
+		g_sh->change_music("ingame", 1000);
 		egbase().lua().run_script("map:scripting/editor_init.lua");
 	} catch (LuaScriptNotExistingError&) {
 		// do nothing.
@@ -523,6 +520,7 @@ void EditorInteractive::exit() {
 				return;
 		}
 	}
+	g_sh->change_music("menu", 200);
 	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
 
@@ -588,7 +586,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
 			if (imm != nullptr && imm->get_positions(ebase).front() == field.fcoords) {
 				imm->draw(
-				   gametime, TextToDraw::kNone, field.rendertarget_pixel, field.fcoords, scale, &dst);
+				   gametime, InfoToDraw::kNone, field.rendertarget_pixel, field.fcoords, scale, &dst);
 			}
 		}
 
@@ -596,7 +594,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
 			     bob = bob->get_next_bob()) {
 				bob->draw(
-				   ebase, TextToDraw::kNone, field.rendertarget_pixel, field.fcoords, scale, &dst);
+				   ebase, InfoToDraw::kNone, field.rendertarget_pixel, field.fcoords, scale, &dst);
 			}
 		}
 
@@ -784,17 +782,8 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 				select_tool(tools_->current(), EditorTool::Third);
 			return true;
 
-		case SDLK_SPACE:
-			toggle_buildhelp();
-			return true;
-
 		case SDLK_g:
 			toggle_grid();
-			return true;
-
-		case SDLK_c:
-			set_display_flag(
-			   InteractiveBase::dfShowCensus, !get_display_flag(InteractiveBase::dfShowCensus));
 			return true;
 
 		case SDLK_h:
@@ -840,7 +829,9 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_F1:
 			menu_windows_.help.toggle();
 			return true;
-
+		case SDLK_ESCAPE:
+			mainmenu_.toggle();
+			return true;
 		default:
 			break;
 		}
@@ -897,14 +888,11 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	EditorInteractive& eia = *new EditorInteractive(egbase);
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
 	{
-		UI::ProgressWindow loader_ui("images/loadscreens/editor.jpg");
-		std::vector<std::string> tipstext;
-		tipstext.push_back("editor");
-		GameTips editortips(loader_ui, tipstext);
+		egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
 
 		{
 			if (filename.empty()) {
-				loader_ui.step(_("Creating empty map…"));
+				egbase.step_loader_ui(_("Creating empty map…"));
 				egbase.mutable_map()->create_empty_map(
 				   egbase, 64, 64, 0,
 				   /** TRANSLATORS: Default name for new map */
@@ -913,12 +901,12 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 				                     /** TRANSLATORS: Map author name when it hasn't been set yet */
 				                     pgettext("author_name", "Unknown")));
 
-				load_all_tribes(&egbase, &loader_ui);
+				load_all_tribes(&egbase);
 
-				egbase.load_graphics(loader_ui);
-				loader_ui.step(std::string());
+				egbase.load_graphics();
+				egbase.step_loader_ui(std::string());
 			} else {
-				loader_ui.step((boost::format(_("Loading map “%s”…")) % filename).str());
+				egbase.step_loader_ui((boost::format(_("Loading map “%s”…")) % filename).str());
 				eia.load(filename);
 			}
 		}
@@ -931,6 +919,8 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 			eia.egbase().lua().run_script(script_to_run);
 		}
 	}
+
+	egbase.remove_loader_ui();
 	eia.run<UI::Panel::Returncodes>();
 
 	egbase.cleanup_objects();

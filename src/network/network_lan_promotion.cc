@@ -246,8 +246,8 @@ bool LanBase::send(void const* const buf, size_t const len, const NetAddress& ad
 
 bool LanBase::broadcast(void const* const buf, size_t const len, uint16_t const port) {
 
-	const auto do_broadcast = [this, buf, len, port](boost::asio::ip::udp::socket& socket,
-	                                                 const std::string& address) -> bool {
+	const auto do_broadcast = [this, buf, len, port](
+	   boost::asio::ip::udp::socket& socket, const std::string& address) -> bool {
 		if (socket.is_open()) {
 			boost::system::error_code ec;
 			boost::asio::ip::udp::endpoint destination(
@@ -389,8 +389,10 @@ LanGamePromoter::LanGamePromoter() : LanBase(kWidelandsLanPromotionPort) {
 	gameinfo.state = LAN_GAME_OPEN;
 
 	strncpy(gameinfo.gameversion, build_id().c_str(), sizeof(gameinfo.gameversion));
+	gameinfo.gameversion[sizeof(gameinfo.gameversion) - 1] = '\0';
 
 	strncpy(gameinfo.hostname, boost::asio::ip::host_name().c_str(), sizeof(gameinfo.hostname));
+	gameinfo.hostname[sizeof(gameinfo.hostname) - 1] = '\0';
 }
 
 LanGamePromoter::~LanGamePromoter() {
@@ -428,6 +430,7 @@ void LanGamePromoter::run() {
 
 void LanGamePromoter::set_map(char const* map) {
 	strncpy(gameinfo.map, map, sizeof(gameinfo.map));
+	gameinfo.map[sizeof(gameinfo.map) - 1] = '\0';
 
 	needupdate = true;
 }

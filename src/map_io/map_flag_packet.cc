@@ -35,7 +35,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 2;
+constexpr uint16_t kCurrentPacketVersion = 3;
 
 void MapFlagPacket::read(FileSystem& fs,
                          EditorGameBase& egbase,
@@ -53,17 +53,22 @@ void MapFlagPacket::read(FileSystem& fs,
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version <= kCurrentPacketVersion && packet_version >= 2) {
 			const Map& map = egbase.map();
 			PlayerNumber const nr_players = map.get_nrplayers();
 			Widelands::Extent const extent = map.extent();
+			std::set<Serial> all_economy_serials;  // For savegame compatibility only
 			iterate_Map_FCoords(map, extent, fc) if (fr.unsigned_8()) {
 				PlayerNumber const owner = fr.unsigned_8();
 				if (!(0 < owner && owner <= nr_players)) {
 					throw GameDataError("Invalid player number: %i.", owner);
 				}
-
-				const Serial economy_serial = fr.unsigned_32();
+				const Serial ware_economy_serial = fr.unsigned_32();
+				const Serial worker_economy_serial =
+				   packet_version >= 3 ? fr.unsigned_32() :
+				                         mol.get_economy_savegame_compatibility(ware_economy_serial);
+				all_economy_serials.insert(ware_economy_serial);
+				all_economy_serials.insert(worker_economy_serial);
 
 				Serial const serial = fr.unsigned_32();
 
@@ -98,9 +103,13 @@ void MapFlagPacket::read(FileSystem& fs,
 
 					// Get economy from serial
 					Player* player = egbase.get_player(owner);
-					Economy* economy = player->get_economy(economy_serial);
-					if (!economy) {
-						economy = player->create_economy(economy_serial);
+					Economy* ware_economy = player->get_economy(ware_economy_serial);
+					if (!ware_economy) {
+						ware_economy = player->create_economy(ware_economy_serial, wwWARE);
+					}
+					Economy* worker_economy = player->get_economy(worker_economy_serial);
+					if (!worker_economy) {
+						worker_economy = player->create_economy(worker_economy_serial, wwWORKER);
 					}
 
 					//  Now, create this Flag. Directly create it, do not call
@@ -108,13 +117,27 @@ void MapFlagPacket::read(FileSystem& fs,
 					//  packet. We always create this, no matter what skip is
 					//  since we have to read the data packets. We delete this
 					//  object later again, if it is not wanted.
-					Flag* flag = new Flag(dynamic_cast<Game&>(egbase), player, fc, economy);
+					Flag* flag =
+					   new Flag(dynamic_cast<Game&>(egbase), player, fc, ware_economy, worker_economy);
 					mol.register_object<Flag>(serial, *flag);
 
 				} catch (const WException& e) {
 					throw GameDataError(
 					   "%u (at (%i, %i), owned by player %u): %s", serial, fc.x, fc.y, owner, e.what());
 				}
+			}
+			if (Economy::last_economy_serial_ == kInvalidSerial) {
+				// This is for savegame compatibility
+				auto upper_border = all_economy_serials.end();
+				--upper_border;
+				auto lower_border = upper_border;
+				--lower_border;
+				while (*lower_border == (*upper_border) - 1) {
+					--upper_border;
+					--lower_border;
+				}
+				Economy::last_economy_serial_ = 1 + *lower_border;
+				log("Reset economy serial to %u\n", Economy::last_economy_serial_);
 			}
 		} else {
 			throw UnhandledVersionError("MapFlagPacket", packet_version, kCurrentPacketVersion);
@@ -143,7 +166,8 @@ void MapFlagPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver
 
 			fw.unsigned_8(1);
 			fw.unsigned_8(flag->owner().player_number());
-			fw.unsigned_32(flag->economy().serial());
+			fw.unsigned_32(flag->economy(wwWARE).serial());
+			fw.unsigned_32(flag->economy(wwWORKER).serial());
 			fw.unsigned_32(mos.register_object(*flag));
 		} else  //  no existence, no owner
 			fw.unsigned_8(0);

@@ -18,7 +18,7 @@
 
 /*
  * The original version of the word wrapping algorithm was taken
- * from Wesnoth -- http://www.wesnoth.org
+ * from Wesnoth -- https://www.wesnoth.org
  */
 
 #include "graphic/wordwrap.h"

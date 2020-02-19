@@ -64,7 +64,9 @@ Button::Button  //  Common constructor
 	assert(!get_can_focus());
 }
 
-Button::Button  //  for textual buttons. If h = 0, h will resize according to the font's height.
+/// For textual buttons. If h = 0, h will resize according to the font's height. If both h = 0 and w
+/// = 0, will resize for text width as well.
+Button::Button
    (Panel* const parent,
     const std::string& name,
     int32_t const x,
@@ -88,12 +90,21 @@ Button::Button  //  for textual buttons. If h = 0, h will resize according to th
             tooltip_text,
             init_state,
             UI::Button::ImageMode::kShrink, skip_richtext_escape) {
-	// Automatically resize for font height and give it a margin.
-	if (h < 1) {
+	if (h == 0) {
+		// Automatically resize for font height and give it a margin.
+		int new_width = get_w();
 		const int new_height =
-		   text_height(g_gr->styles().button_style(init_style).enabled().font()) + 4;
-		set_desired_size(w, new_height);
-		set_size(w, new_height);
+		   std::max(text_height(g_gr->styles().button_style(init_style).enabled().font()),
+		            text_height(g_gr->styles().button_style(init_style).disabled().font())) +
+		   4 * kButtonImageMargin;
+		if (w == 0) {
+			// Automatically resize for text width too.
+			new_width = std::max(text_width(richtext_escape(title_), style_->enabled().font()),
+			                     text_width(richtext_escape(title_), style_->disabled().font())) +
+			            8 * kButtonImageMargin;
+		}
+		set_desired_size(new_width, new_height);
+		set_size(new_width, new_height);
 	}
 }
 

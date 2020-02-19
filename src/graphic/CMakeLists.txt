@@ -1,3 +1,4 @@
+add_subdirectory(animation)
 add_subdirectory(styles)
 add_subdirectory(text)
 
@@ -249,13 +250,13 @@ wl_library(graphic_terrain_programs
     base_geometry
     base_log
     base_macros
+    graphic
     graphic_fields_to_draw
     graphic_gl_utils
     graphic_image_io
     graphic_surface
     io_filesystem
     logic
-    logic_constants
     logic_map_objects
     logic_map_objects_description_maintainer
     wui_mapview_pixelfunctions
@@ -310,16 +311,15 @@ wl_library(graphic_wordwrap
 
 wl_library(graphic
   SRCS
-    animation.cc
-    animation.h
     default_resolution.h
-    diranimations.h
     graphic.cc
     graphic.h
     style_manager.cc
     style_manager.h
     rendertarget.cc
     rendertarget.h
+    road_segments.cc
+    road_segments.h
   USES_SDL2
   DEPENDS
     base_exceptions
@@ -330,25 +330,21 @@ wl_library(graphic
     base_scoped_timer
     build_info
     graphic_align
+    graphic_animation
     graphic_build_texture_atlas
     graphic_color
     graphic_draw_programs
     graphic_gl_utils
     graphic_image_cache
     graphic_image_io
-    graphic_playercolor
     graphic_render_queue
     graphic_styles
     graphic_surface
     io_filesystem
     io_stream
-    logic_constants
-    logic_exceptions
     logic_widelands_geometry
-    note_sound
     notifications
     scripting_lua_interface
     scripting_lua_table
-    sound
 )
 

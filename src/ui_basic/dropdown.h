@@ -143,6 +143,10 @@ public:
 	void set_size(int nw, int nh) override;
 	void set_desired_size(int w, int h) override;
 
+	/// Expand display button to make enough room for each entry's text. Call this before adding any
+	/// entries.
+	void set_autoexpand_display_button();
+
 protected:
 	/// Add an element to the list
 	/// \param name         the display name of the entry
@@ -174,6 +178,7 @@ protected:
 	void think() override;
 
 private:
+	static void layout_if_alive(int);
 	void layout() override;
 
 	/// Updates the buttons
@@ -216,6 +221,8 @@ private:
 	DropdownType type_;
 	bool is_enabled_;
 	bool skip_richtext_escape_;
+	ButtonStyle button_style_;
+	bool autoexpand_display_button_;
 };
 
 /// A dropdown menu that lets the user select a value of the datatype 'Entry'.

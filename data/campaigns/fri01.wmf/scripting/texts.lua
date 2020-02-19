@@ -115,7 +115,8 @@ obj_escape = {
    number = 1,
    body = objective_text(_"Flee from the Floods",
       li(_[[Build a port, a weaving mill and a shipyard, then start an expedition to flee before the storm flood drowns the island.]]) ..
-      li_arrow(_[[You can build the port either on the easternmost tip of the island or in the place where the enemy’s headquarters stood.]])
+      li_arrow(_[[You can build the port either on the easternmost tip of the island or in the place where the enemy’s headquarters stood.]]) ..
+      li_arrow(_[[If you did not prepare well enough to master this challenge in time, you can reload the scenario from the backup savegame automatically created for you shortly before you reached the enemy’s headquarters.]])
    ),
 }
 
