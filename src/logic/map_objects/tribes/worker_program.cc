@@ -412,11 +412,11 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 			if (item.first == "radius") {
 				act->iparam1 = read_positive(item.second);
 			} else if (item.first == "size") {
-                static const std::map<std::string, FindNodeSize::Size> sizenames{{"any", FindNodeSize::sizeAny},
-                                 {"build", FindNodeSize::sizeBuild},
-								 {"small", FindNodeSize::sizeSmall}, {"medium", FindNodeSize::sizeMedium},
-								 {"big", FindNodeSize::sizeBig},     {"mine", FindNodeSize::sizeMine},
-								 {"port", FindNodeSize::sizePort},   {"swim", FindNodeSize::sizeSwim}};
+				static const std::map<std::string, FindNodeSize::Size> sizenames{
+				   {"any", FindNodeSize::sizeAny},     {"build", FindNodeSize::sizeBuild},
+				   {"small", FindNodeSize::sizeSmall}, {"medium", FindNodeSize::sizeMedium},
+				   {"big", FindNodeSize::sizeBig},     {"mine", FindNodeSize::sizeMine},
+				   {"port", FindNodeSize::sizePort},   {"swim", FindNodeSize::sizeSwim}};
 
 				if (sizenames.count(item.second) != 1) {
 					throw GameDataError("Bad findspace size '%s'", item.second.c_str());
