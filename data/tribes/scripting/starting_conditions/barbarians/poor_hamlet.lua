@@ -42,40 +42,6 @@ return {
       player:conquer(sf, 9)
       player:send_message(_"Be careful", _"You have only one iron for each tool you will need to start your economy. Make sure no unneeded tool is created.")
 
-      local function add_wares(waretable)
-         local hq = player:get_buildings("barbarians_warehouse")[1]
-         for ware,warecount in pairs(waretable) do
-            local oldwarecount = hq:get_wares(ware) or 0
-            if warecount < 0 and -warecount > oldwarecount then
-               warecount = -oldwarecount
-            end
-            hq:set_wares(ware, oldwarecount+warecount)
-         end
-      end
-
-      -- NOTE: pessimistically, this could be a single rock and a single tree
-      local has_rocks = false
-      local has_trees = false
-      for k,f in pairs(sf:region(10)) do
-         if f.immovable then
-            if not has_rocks and f.immovable:has_attribute('rocks') then
-               has_rocks = true
-            elseif not has_trees and f.immovable:has_attribute('tree') then
-               has_trees = true
-            end
-            if has_trees and has_rocks then
-               break
-            end
-         end
-      end
-      if not has_rocks then
-         add_wares({granite = 1})
-         player:send_message(_"No rocks nearby", _"There are no rocks near to your starting position.  Therefore, you receive extra resources for bootstrapping your economy.")
-      end
-      -- adding exactly one forester
-      if not has_trees then
-         add_wares({log = 4})
-         player:send_message(_"No trees nearby", _"There are no trees near to your starting position.  Therefore, you receive extra resources for bootstrapping your economy.")
-      end
+      check_trees_rocks_poor_hamlet(player, sf, "barbarians_warehouse", {granite = 1}, {log = 4})
    end
 }
