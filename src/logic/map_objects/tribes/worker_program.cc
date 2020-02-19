@@ -412,28 +412,16 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 			if (item.first == "radius") {
 				act->iparam1 = read_positive(item.second);
 			} else if (item.first == "size") {
-				static const struct {
-					char const* name;
-					int32_t val;
-				} sizenames[] = {{"any", FindNodeSize::sizeAny},     {"build", FindNodeSize::sizeBuild},
+                static const std::map<std::string, FindNodeSize::Size> sizenames{{"any", FindNodeSize::sizeAny},
+                                 {"build", FindNodeSize::sizeBuild},
 								 {"small", FindNodeSize::sizeSmall}, {"medium", FindNodeSize::sizeMedium},
 								 {"big", FindNodeSize::sizeBig},     {"mine", FindNodeSize::sizeMine},
-								 {"port", FindNodeSize::sizePort},   {"swim", FindNodeSize::sizeSwim},
-								 {nullptr, 0}};
+								 {"port", FindNodeSize::sizePort},   {"swim", FindNodeSize::sizeSwim}};
 
-				int32_t index;
-
-				for (index = 0; sizenames[index].name; ++index) {
-					if (item.second == sizenames[index].name) {
-						break;
-					}
-				}
-
-				if (!sizenames[index].name) {
+				if (sizenames.count(item.second) != 1) {
 					throw GameDataError("Bad findspace size '%s'", item.second.c_str());
 				}
-
-				act->iparam2 = sizenames[index].val;
+				act->iparam2 = sizenames.at(item.second);
 			} else if (item.first == "breed") {
 				act->iparam4 = 1;
 			} else if (item.first == "terraform") {
