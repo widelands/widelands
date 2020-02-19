@@ -42,7 +42,7 @@ return {
 
       player:reveal_fields(sf:region(10))
       player:conquer(sf, 9)
-      player:send_message(_"Be careful.", _"You have only one iron for each tool you will need to start your economy. Make sure no unneeded tool is created.")
+      player:send_message(_"Be careful", _"You have only one iron for each tool you will need to start your economy. Make sure no unneeded tool is created.")
 
       local function add_wares(waretable)
          local hq = player:get_buildings("frisians_warehouse")[1]
