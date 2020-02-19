@@ -399,27 +399,27 @@ void Tribes::postload() {
 }
 
 /// Register wares and workers that have economy demand checks for a building
-void Tribes::postload_register_economy_demand_checks(BuildingDescr& building_descr, const TribeDescr& tribe_descr)
-{
+void Tribes::postload_register_economy_demand_checks(BuildingDescr& building_descr,
+                                                     const TribeDescr& tribe_descr) {
 	if (upcast(ProductionSiteDescr, prodsite, &building_descr)) {
 		// This function can be called only once per loading of tribes
 		assert(prodsite->ware_demand_checks() != nullptr);
 
 		for (const DescriptionIndex wi : *prodsite->ware_demand_checks()) {
 			if (!tribe_descr.has_ware(wi)) {
-				throw GameDataError("Productionsite '%s' for tribe '%s' has an economy demand check for ware '%s', but the tribe does not use this ware",
-									prodsite->name().c_str(),
-									tribe_descr.name().c_str(),
-									get_ware_descr(wi)->name().c_str());
+				throw GameDataError("Productionsite '%s' for tribe '%s' has an economy demand check "
+				                    "for ware '%s', but the tribe does not use this ware",
+				                    prodsite->name().c_str(), tribe_descr.name().c_str(),
+				                    get_ware_descr(wi)->name().c_str());
 			}
 			wares_->get_mutable(wi)->set_has_demand_check(tribe_descr.name());
 		}
 		for (const DescriptionIndex wi : *prodsite->worker_demand_checks()) {
 			if (!tribe_descr.has_worker(wi)) {
-				throw GameDataError("Productionsite '%s' for tribe '%s' has an economy demand check for worker '%s', but the tribe does not use this worker",
-									prodsite->name().c_str(),
-									tribe_descr.name().c_str(),
-									get_worker_descr(wi)->name().c_str());
+				throw GameDataError("Productionsite '%s' for tribe '%s' has an economy demand check "
+				                    "for worker '%s', but the tribe does not use this worker",
+				                    prodsite->name().c_str(), tribe_descr.name().c_str(),
+				                    get_worker_descr(wi)->name().c_str());
 			}
 			workers_->get_mutable(wi)->set_has_demand_check();
 		}

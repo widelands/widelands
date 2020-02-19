@@ -183,13 +183,15 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 	for (std::string program_name : programs->keys<std::string>()) {
 		std::transform(program_name.begin(), program_name.end(), program_name.begin(), tolower);
 		if (programs_.count(program_name)) {
-			throw GameDataError("Program '%s' has already been declared for immovable '%s'", program_name.c_str(), name().c_str());
+			throw GameDataError("Program '%s' has already been declared for immovable '%s'",
+			                    program_name.c_str(), name().c_str());
 		}
 		try {
 			programs_[program_name] = new ImmovableProgram(
 			   program_name, programs->get_table(program_name)->array_entries<std::string>(), *this);
 		} catch (const std::exception& e) {
-			throw GameDataError("%s: Error in immovable program %s: %s", name().c_str(), program_name.c_str(), e.what());
+			throw GameDataError("%s: Error in immovable program %s: %s", name().c_str(),
+			                    program_name.c_str(), e.what());
 		}
 	}
 
@@ -245,7 +247,8 @@ void ImmovableDescr::make_sure_default_program_is_there() {
 		assert(is_animation_known("idle"));
 		std::vector<std::string> arguments{"idle"};
 		programs_["program"] =
-		   new ImmovableProgram("program", std::unique_ptr<ImmovableProgram::Action>(new ImmovableProgram::ActAnimate(arguments, *this)));
+		   new ImmovableProgram("program", std::unique_ptr<ImmovableProgram::Action>(
+		                                      new ImmovableProgram::ActAnimate(arguments, *this)));
 	}
 }
 
@@ -760,7 +763,6 @@ bool Immovable::construct_ware(Game& game, DescriptionIndex index) {
 
 	return true;
 }
-
 
 /*
 ==============================================================================

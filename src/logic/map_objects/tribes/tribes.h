@@ -150,7 +150,8 @@ public:
 
 private:
 	void postload_calculate_trainingsites_proportions();
-	void postload_register_economy_demand_checks(BuildingDescr& building_descr, const TribeDescr& tribe_descr);
+	void postload_register_economy_demand_checks(BuildingDescr& building_descr,
+	                                             const TribeDescr& tribe_descr);
 
 	std::unique_ptr<DescriptionMaintainer<BuildingDescr>> buildings_;
 	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> immovables_;

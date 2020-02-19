@@ -91,8 +91,8 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          const Tribes& tribes,
                                          const World& world)
    : BuildingDescr(init_descname, init_type, table, tribes),
-	 ware_demand_checks_(new std::set<DescriptionIndex>()),
-	 worker_demand_checks_(new std::set<DescriptionIndex>()),
+     ware_demand_checks_(new std::set<DescriptionIndex>()),
+     worker_demand_checks_(new std::set<DescriptionIndex>()),
      out_of_resource_productivity_threshold_(100) {
 	if (msgctxt.empty()) {
 		throw Widelands::GameDataError(
@@ -189,7 +189,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		std::transform(program_name.begin(), program_name.end(), program_name.begin(), tolower);
 		if (programs_.count(program_name)) {
 			throw GameDataError("Program '%s' has already been declared for productionsite '%s'",
-								program_name.c_str(), name().c_str());
+			                    program_name.c_str(), name().c_str());
 		}
 		try {
 			std::unique_ptr<LuaTable> program_table = items_table->get_table(program_name);
@@ -205,7 +205,8 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 			   new ProductionProgram(program_name, program_descname,
 			                         program_table->get_table("actions"), tribes, world, this));
 		} catch (const std::exception& e) {
-			throw GameDataError("%s: Error in productionsite program %s: %s", name().c_str(), program_name.c_str(), e.what());
+			throw GameDataError("%s: Error in productionsite program %s: %s", name().c_str(),
+			                    program_name.c_str(), e.what());
 		}
 	}
 

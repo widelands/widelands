@@ -26,13 +26,15 @@
 
 namespace Widelands {
 
-MapObjectProgram::MapObjectProgram(const std::string& init_name) : name_ (init_name) {}
+MapObjectProgram::MapObjectProgram(const std::string& init_name) : name_(init_name) {
+}
 
 const std::string& MapObjectProgram::name() const {
 	return name_;
 }
 
-std::vector<std::string> MapObjectProgram::split_string(const std::string& s, const char* const separators) {
+std::vector<std::string> MapObjectProgram::split_string(const std::string& s,
+                                                        const char* const separators) {
 	std::vector<std::string> result;
 	for (std::string::size_type pos = 0, endpos;
 	     (pos = s.find_first_not_of(separators, pos)) != std::string::npos; pos = endpos) {
@@ -41,7 +43,6 @@ std::vector<std::string> MapObjectProgram::split_string(const std::string& s, co
 	}
 	return result;
 }
-
 
 unsigned int MapObjectProgram::read_int(const std::string& input, int min_value, int max_value) {
 	unsigned int result = 0U;
@@ -64,12 +65,18 @@ unsigned int MapObjectProgram::read_positive(const std::string& input, int max_v
 	return read_int(input, 1, max_value);
 }
 
-MapObjectProgram::ProgramParseInput MapObjectProgram::parse_program_string(const std::string& line) {
-	const std::pair<std::string, std::string> key_values = MapObjectProgram::read_key_value_pair(line, '=');
+MapObjectProgram::ProgramParseInput
+MapObjectProgram::parse_program_string(const std::string& line) {
+	const std::pair<std::string, std::string> key_values =
+	   MapObjectProgram::read_key_value_pair(line, '=');
 	return ProgramParseInput{key_values.first, split_string(key_values.second, " \t\n")};
 }
 
-const std::pair<std::string, std::string> MapObjectProgram::read_key_value_pair(const std::string& input, const char separator, const std::string& default_value, const std::string& expected_key) {
+const std::pair<std::string, std::string>
+MapObjectProgram::read_key_value_pair(const std::string& input,
+                                      const char separator,
+                                      const std::string& default_value,
+                                      const std::string& expected_key) {
 	const size_t idx = input.find(separator);
 	const std::string key = input.substr(0, idx);
 
@@ -78,14 +85,16 @@ const std::pair<std::string, std::string> MapObjectProgram::read_key_value_pair(
 			throw GameDataError("Empty value in '%s' for separator '%c'\n", input.c_str(), separator);
 		}
 		if (key != expected_key) {
-			throw GameDataError("Expected key '%s' but found '%s' in '%s'\n", expected_key.c_str(), key.c_str(), input.c_str());
+			throw GameDataError("Expected key '%s' but found '%s' in '%s'\n", expected_key.c_str(),
+			                    key.c_str(), input.c_str());
 		}
 	}
 
 	return std::make_pair(key, idx == input.npos ? default_value : input.substr(idx + 1));
 }
 
-MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(const std::vector<std::string>& arguments, const MapObjectDescr& descr, bool is_idle_allowed) {
+MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(
+   const std::vector<std::string>& arguments, const MapObjectDescr& descr, bool is_idle_allowed) {
 	if (arguments.size() < 1 || arguments.size() > 2) {
 		throw GameDataError("Usage: animate=<name> [<duration>]");
 	}
@@ -107,7 +116,9 @@ MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(const 
 	return result;
 }
 
-MapObjectProgram::PlaySoundParameters MapObjectProgram::parse_act_play_sound(const std::vector<std::string>& arguments, uint8_t default_priority) {
+MapObjectProgram::PlaySoundParameters
+MapObjectProgram::parse_act_play_sound(const std::vector<std::string>& arguments,
+                                       uint8_t default_priority) {
 	if (arguments.size() < 1 || arguments.size() > 2) {
 		throw GameDataError("Usage: playsound=<sound_dir/sound_name> [priority]");
 	}
