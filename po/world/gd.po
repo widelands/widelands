@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2019
+# GunChleoc, 2015-2020
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-12-10 17:11+0000\n"
-"PO-Revision-Date: 2019-12-10 17:18+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-02-12 09:08+0000\n"
+"PO-Revision-Date: 2020-02-20 07:29+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -725,114 +725,118 @@ msgstr "Seann chraobh-fhasgadain dhearg"
 msgid "Red Umbrella Tree"
 msgstr "Craobh-fhasgadain dhearg"
 
-#: ../../data/world/init.lua:24
-msgid "Loading world: Resources (1/4)"
-msgstr ""
+#: ../../data/world/init.lua:17
+msgid "Loading world: %1$s (%2$d/%3$d)"
+msgstr "A’ luchdadh an t-saoghail: %1$s (%2$d/%3$d)"
 
-#: ../../data/world/init.lua:29
-msgid "Loading world: Terrains (2/4)"
-msgstr ""
+#: ../../data/world/init.lua:27
+msgid "Resources"
+msgstr "Stòrasan"
 
-#: ../../data/world/init.lua:39
+#: ../../data/world/init.lua:32
+msgid "Terrains"
+msgstr "Cruthan-tìre"
+
+#: ../../data/world/init.lua:42
 msgid "Summer"
 msgstr "Samhradh"
 
-#: ../../data/world/init.lua:45
+#: ../../data/world/init.lua:48
 msgid "Wasteland"
 msgstr "Talamh fàs"
 
-#: ../../data/world/init.lua:51
+#: ../../data/world/init.lua:54
 msgid "Winter"
 msgstr "Geamhradh"
 
-#: ../../data/world/init.lua:57
+#: ../../data/world/init.lua:60
 msgid "Desert"
 msgstr "Fàsach"
 
-#: ../../data/world/init.lua:66
-msgid "Loading world: Immovables (3/4)"
-msgstr ""
+#: ../../data/world/init.lua:69
+msgid "Immovables"
+msgstr "Nithean do-ghluasad"
 
-#: ../../data/world/init.lua:75
+#: ../../data/world/init.lua:78
 msgid "Miscellaneous"
 msgstr "Measgaichte"
 
-#: ../../data/world/init.lua:110
+#: ../../data/world/init.lua:113
 msgid "Artifacts"
 msgstr "Buill-ealain"
 
-#: ../../data/world/init.lua:110
+#: ../../data/world/init.lua:113
 msgid "These immovables are used by the win condition “Artifacts”."
 msgstr "Tha na nithean do-ghluasad seo ’gan cleachdadh le cumha na buaidhe “Buill-ealain”."
 
-#: ../../data/world/init.lua:123
+#: ../../data/world/init.lua:126
 msgid "Plants"
 msgstr "Lusan"
 
-#: ../../data/world/init.lua:144
+#: ../../data/world/init.lua:147
 msgid "Standing Stones"
 msgstr "Tursachan"
 
-#: ../../data/world/init.lua:175
+#: ../../data/world/init.lua:178
 msgid "Rocks"
 msgstr "Carraigean"
 
-#: ../../data/world/init.lua:208
+#: ../../data/world/init.lua:211
 msgid "Dead Trees"
 msgstr "Craobhan marbh"
 
-#: ../../data/world/init.lua:215
+#: ../../data/world/init.lua:218
 msgid "Coniferous Trees"
 msgstr "Craobhan cònach"
 
-#: ../../data/world/init.lua:222
+#: ../../data/world/init.lua:225
 msgid "Deciduous Trees"
 msgstr "Craobhan seargach"
 
-#: ../../data/world/init.lua:229
+#: ../../data/world/init.lua:232
 msgid "Palm Trees"
 msgstr "Craobhan pailme"
 
-#: ../../data/world/init.lua:236
+#: ../../data/world/init.lua:239
 msgid "Wasteland Trees"
 msgstr "Craobhan na talmhainn fàise"
 
-#: ../../data/world/init.lua:273
-msgid "Loading world: Animals (4/4)"
-msgstr ""
+#: ../../data/world/init.lua:276
+msgid "Animals"
+msgstr "Beathaichean"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:284
+#: ../../data/world/init.lua:287
 msgid "Herbivores"
 msgstr "Lus-itheadairean"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:303
+#: ../../data/world/init.lua:306
 msgid "Carnivores"
 msgstr "Feòil-itheadairean"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:319
+#: ../../data/world/init.lua:322
 msgid "Aquatic"
 msgstr "Uisgeach"
 
-#: ../../data/world/resources/init.lua:84
+#: ../../data/world/resources/init.lua:81
 msgid "Coal"
 msgstr "Gual"
 
-#: ../../data/world/resources/init.lua:100
+#: ../../data/world/resources/init.lua:97
 msgid "Gold"
 msgstr "Òr"
 
-#: ../../data/world/resources/init.lua:116
+#: ../../data/world/resources/init.lua:113
 msgid "Iron"
 msgstr "Iarann"
 
-#: ../../data/world/resources/init.lua:132
+#: ../../data/world/resources/init.lua:129
 msgid "Stones"
 msgstr "Clachan"
 
-#: ../../data/world/resources/init.lua:148
+#: ../../data/world/resources/init.lua:145
 #: ../../data/world/terrains/init.lua:469
 #: ../../data/world/terrains/init.lua:792
 #: ../../data/world/terrains/init.lua:1102
@@ -840,7 +844,7 @@ msgstr "Clachan"
 msgid "Water"
 msgstr "Uisge"
 
-#: ../../data/world/resources/init.lua:164
+#: ../../data/world/resources/init.lua:161
 msgid "Fish"
 msgstr "Iasg"
 
