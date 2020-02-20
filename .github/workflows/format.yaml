@@ -69,7 +69,7 @@ jobs:
             forkname=${{ github.repository }}
             # grep returns 1 if the branch is not found
             set +e
-            output=$(curl -i "https://api.github.com/repos/widelands/widelands/pulls?state=open&head=${forkname%%/*}:$b" | grep "$b")
+            output=$(curl -i "https://api.github.com/repos/widelands/widelands/pulls?state=open&head=${forkname%%/*}:$branch" | grep "$branch")
             set -e
             if [ -z "$output" ]
             then
