@@ -972,6 +972,7 @@ public:
 	/*
 	 * Lua Methods
 	 */
+	int dismantle(lua_State* L);
 
 	/*
 	 * C Methods
@@ -1198,6 +1199,10 @@ public:
 	 * Properties
 	 */
 	int get_max_soldiers(lua_State*);
+	int get_prefer_heroes(lua_State*);
+	int set_prefer_heroes(lua_State*);
+	int get_capacity(lua_State*);
+	int set_capacity(lua_State*);
 
 	/*
 	 * Lua Methods

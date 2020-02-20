@@ -4635,6 +4635,7 @@ Building
 */
 const char LuaBuilding::className[] = "Building";
 const MethodType<LuaBuilding> LuaBuilding::Methods[] = {
+   METHOD(LuaBuilding, dismantle),
    {nullptr, nullptr},
 };
 const PropertyType<LuaBuilding> LuaBuilding::Properties[] = {
@@ -4663,6 +4664,17 @@ int LuaBuilding::get_flag(lua_State* L) {
  LUA METHODS
  ==========================================================
  */
+
+/* RST
+   .. method:: dismantle()
+
+      Instantly turn this building into a dismantlesite.
+*/
+int LuaBuilding::dismantle(lua_State* L) {
+	Widelands::Building* bld = get(L, get_egbase(L));
+	bld->get_owner()->dismantle_building(bld);
+	return 0;
+}
 
 /*
  ==========================================================
@@ -5474,7 +5486,7 @@ const MethodType<LuaMilitarySite> LuaMilitarySite::Methods[] = {
    METHOD(LuaMilitarySite, get_soldiers), METHOD(LuaMilitarySite, set_soldiers), {nullptr, nullptr},
 };
 const PropertyType<LuaMilitarySite> LuaMilitarySite::Properties[] = {
-   PROP_RO(LuaMilitarySite, max_soldiers), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaMilitarySite, max_soldiers), PROP_RW(LuaMilitarySite, prefer_heroes), PROP_RW(LuaMilitarySite, capacity), {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -5487,6 +5499,24 @@ const PropertyType<LuaMilitarySite> LuaMilitarySite::Properties[] = {
 int LuaMilitarySite::get_max_soldiers(lua_State* L) {
 	lua_pushuint32(L, get(L, get_egbase(L))->soldier_control()->soldier_capacity());
 	return 1;
+}
+
+int LuaMilitarySite::get_prefer_heroes(lua_State* L) {
+	lua_pushboolean(L, get(L, get_egbase(L))->get_soldier_preference() == Widelands::SoldierPreference::kHeroes);
+	return 1;
+}
+int LuaMilitarySite::set_prefer_heroes(lua_State* L) {
+	get(L, get_egbase(L))->set_soldier_preference(luaL_checkboolean(L, -1) ? Widelands::SoldierPreference::kHeroes : Widelands::SoldierPreference::kRookies);
+	return 0;
+}
+
+int LuaMilitarySite::get_capacity(lua_State* L) {
+	get(L, get_egbase(L))->mutable_soldier_control()->set_soldier_capacity(luaL_checkuint32(L, -1));
+	return 1;
+}
+int LuaMilitarySite::set_capacity(lua_State* L) {
+	lua_pushuint32(get(L, get_egbase(L))->soldier_control()->get_soldier_capacity());
+	return 0;
 }
 
 /*
