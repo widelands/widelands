@@ -258,6 +258,7 @@ wl_library(logic
     sound
     sound_constants
     ui_basic
+    ui_basic_loading_message
     widelands_options
     wui # TODO(GunChleoc): Circular dependency
     wui_game_tips

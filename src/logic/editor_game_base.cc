@@ -77,8 +77,14 @@ EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
      loader_ui_(nullptr),
      game_tips_(nullptr),
      tmp_fs_(nullptr) {
-	if (!lua_)  // TODO(SirVer): this is sooo ugly, I can't say
+	if (!lua_)  { // TODO(SirVer): this is sooo ugly, I can't say
 		lua_.reset(new LuaEditorInterface(this));
+    }
+
+    loading_message_subscriber_ = Notifications::subscribe<UI::NoteLoadingMessage>(
+	   [this](const UI::NoteLoadingMessage& note) {
+        step_loader_ui(note.message);
+    });
 }
 
 EditorGameBase::~EditorGameBase() {
@@ -180,6 +186,7 @@ World* EditorGameBase::mutable_world() {
 		// world immediately though, because the lua scripts need to have access
 		// to world through this method already.
 		ScopedTimer timer("Loading the world took %ums");
+        Notifications::publish(UI::NoteLoadingMessage(_("Loading world…")));
 		world_.reset(new World());
 
 		try {
@@ -210,6 +217,7 @@ Tribes* EditorGameBase::mutable_tribes() {
 		// tribe immediately though, because the lua scripts need to have access
 		// to tribes through this method already.
 		ScopedTimer timer("Registering the tribes took %ums");
+        Notifications::publish(UI::NoteLoadingMessage(_("Loading tribes…")));
 		tribes_.reset(new Tribes(lua_.get()));
 	}
 	return tribes_.get();
@@ -234,6 +242,8 @@ Player* EditorGameBase::add_player(PlayerNumber const player_number,
                                    const std::string& tribe,
                                    const std::string& name,
                                    TeamNumber team) {
+    Notifications::publish(UI::NoteLoadingMessage(
+       (boost::format(_("Creating player %d…")) % static_cast<unsigned int>(player_number)).str()));
 	return player_manager_->add_player(player_number, initialization_index, tribe, name, team);
 }
 
@@ -297,7 +307,7 @@ void EditorGameBase::postload() {
 
 	// Postload tribes and world
 	// Tribes don't have a postload at this point.
-	step_loader_ui(_("Postloading world and tribes…"));
+	Notifications::publish(UI::NoteLoadingMessage(_("Postloading world and tribes…")));
 	assert(world_);
 	world_->postload();
 }
@@ -527,13 +537,13 @@ Player* EditorGameBase::get_safe_player(PlayerNumber const n) {
  * make this object ready to load new data
  */
 void EditorGameBase::cleanup_for_load() {
-	step_loader_ui(_("Cleaning up for loading: Map objects (1/3)"));
+	Notifications::publish(UI::NoteLoadingMessage(_("Cleaning up for loading: Map objects (1/3)")));
 	cleanup_objects();  /// Clean all the stuff up, so we can load.
 
-	step_loader_ui(_("Cleaning up for loading: Players (2/3)"));
+	Notifications::publish(UI::NoteLoadingMessage(_("Cleaning up for loading: Players (2/3)")));
 	player_manager_->cleanup();
 
-	step_loader_ui(_("Cleaning up for loading: Map (3/3)"));
+	Notifications::publish(UI::NoteLoadingMessage(_("Cleaning up for loading: Map (3/3)")));
 	map_.cleanup();
 
 	delete_tempfile();

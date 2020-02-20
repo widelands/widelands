@@ -170,6 +170,7 @@ wl_library(logic_map_objects
     sound_constants
     sound
     ui_basic
+    ui_basic_loading_message
     wui_mapview_pixelfunctions
 )
 

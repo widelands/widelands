@@ -116,6 +116,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 	timer_message += map_.get_name();
 	timer_message += "' took %ums";
 	ScopedTimer timer(timer_message);
+    Notifications::publish(UI::NoteLoadingMessage(_("Loading map…")));
 
 	const bool is_game = load_type == MapLoader::LoadType::kGame;
 	const bool is_editor = load_type == MapLoader::LoadType::kEditor;
@@ -127,9 +128,9 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 	// MANDATORY PACKETS
 	// PRELOAD DATA BEGIN
 	auto set_progress_message = [&egbase, is_editor](std::string text, unsigned step) {
-		egbase.step_loader_ui(
-		   (boost::format(_("Loading map: %1$s (%2$u/%3$d)")) % text % step % (is_editor ? 9 : 24))
-		      .str());
+        Notifications::publish(UI::NoteLoadingMessage(
+                    (boost::format(_("Loading map: %1$s (%2$u/%3$d)")) % text % step % (is_editor ? 9 : 24))
+                       .str()));
 	};
 
 	set_progress_message(_("Elemental data"), 1);

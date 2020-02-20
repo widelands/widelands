@@ -487,7 +487,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	map->create_empty_map(egbase, map_info.w, map_info.h, 0, _("No Name"),
 	                      get_config_string("realname", pgettext("author_name", "Unknown")),
 	                      sstrm.str().c_str());
-	egbase.step_loader_ui(_("Generating random map…"));
+	Notifications::publish(UI::NoteLoadingMessage(_("Generating random map…")));
 
 	log("============== Generating Map ==============\n");
 	log("ID:            %s\n", map_id_edit_.text().c_str());

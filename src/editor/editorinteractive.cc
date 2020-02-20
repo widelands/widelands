@@ -449,8 +449,6 @@ void EditorInteractive::load(const std::string& filename) {
 	// TODO(GunChleoc): Ugly - we only need this for the test suite right now
 	iterate_player_numbers(p, map->get_nrplayers()) {
 		if (!map->get_scenario_player_tribe(p).empty()) {
-			egbase().step_loader_ui(
-			   (boost::format(_("Creating player %d…")) % static_cast<unsigned int>(p)).str());
 			egbase().add_player(
 			   p, 0, map->get_scenario_player_tribe(p), map->get_scenario_player_name(p));
 		}
@@ -875,12 +873,11 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
 	{
 		egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
-		egbase.step_loader_ui(_("Loading tribes…"));
 		egbase.tribes();
 
 		{
 			if (filename.empty()) {
-				egbase.step_loader_ui(_("Creating empty map…"));
+				Notifications::publish(UI::NoteLoadingMessage(_("Creating empty map…")));
 				egbase.mutable_map()->create_empty_map(
 				   egbase, 64, 64, 0,
 				   /** TRANSLATORS: Default name for new map */
@@ -889,7 +886,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 				                     /** TRANSLATORS: Map author name when it hasn't been set yet */
 				                     pgettext("author_name", "Unknown")));
 			} else {
-				egbase.step_loader_ui((boost::format(_("Loading map “%s”…")) % filename).str());
+				Notifications::publish(UI::NoteLoadingMessage((boost::format(_("Loading map “%s”…")) % filename).str()));
 				eia.load(filename);
 			}
 		}
