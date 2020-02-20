@@ -70,11 +70,12 @@ initialization
 ============
 */
 EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
-   : loader_ui_(nullptr),
-     gametime_(0),
+   : gametime_(0),
      lua_(lua_interface),
      player_manager_(new PlayersManager(*this)),
      ibase_(nullptr),
+     loader_ui_(nullptr),
+     game_tips_(nullptr),
      tmp_fs_(nullptr) {
 	if (!lua_)  // TODO(SirVer): this is sooo ugly, I can't say
 		lua_.reset(new LuaEditorInterface(this));
@@ -84,9 +85,6 @@ EditorGameBase::~EditorGameBase() {
 	delete_tempfile();
 	if (g_sh != nullptr) {
 		g_sh->remove_fx_set(SoundType::kAmbient);
-	}
-	if (loader_ui_) {
-		delete loader_ui_;
 	}
 }
 
@@ -297,9 +295,8 @@ void EditorGameBase::postload() {
 	}
 
 	// Postload tribes and world
-	if (loader_ui_) {
-		loader_ui_->step(_("Postloading world and tribes…"));
-	}
+	step_loader_ui(_("Postloading world and tribes…"));
+
 	assert(tribes_);
 	tribes_->postload();
 	assert(world_);
@@ -330,14 +327,45 @@ void EditorGameBase::postload() {
  */
 void EditorGameBase::load_graphics() {
 	assert(tribes_);
-	assert(loader_ui_);
-	loader_ui_->step(_("Loading graphics"));
+	assert(has_loader_ui());
+	step_loader_ui(_("Loading graphics"));
 	tribes_->load_graphics();
 }
 
-void EditorGameBase::set_loader_ui(UI::ProgressWindow* w) {
-	assert((w == nullptr) ^ (loader_ui_ == nullptr));
-	loader_ui_ = w;
+UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::vector<std::string>& tipstexts,
+                                                     bool show_game_tips,
+                                                     const std::string& background) {
+	assert(!has_loader_ui());
+	loader_ui_.reset(new UI::ProgressWindow(background));
+	registered_game_tips_ = tipstexts;
+	if (show_game_tips) {
+		game_tips_.reset(registered_game_tips_.empty() ?
+		                    nullptr :
+		                    new GameTips(*loader_ui_, registered_game_tips_));
+	}
+	return *loader_ui_.get();
+}
+void EditorGameBase::change_loader_ui_background(const std::string& background) {
+	assert(has_loader_ui());
+	assert(game_tips_ == nullptr);
+	if (background.empty()) {
+		game_tips_.reset(registered_game_tips_.empty() ?
+		                    nullptr :
+		                    new GameTips(*loader_ui_, registered_game_tips_));
+	} else {
+		loader_ui_->set_background(background);
+	}
+}
+void EditorGameBase::step_loader_ui(const std::string& text) const {
+	if (loader_ui_ != nullptr) {
+		loader_ui_->step(text);
+	}
+}
+void EditorGameBase::remove_loader_ui() {
+	assert(loader_ui_ != nullptr);
+	loader_ui_.reset(nullptr);
+	game_tips_.reset(nullptr);
+	registered_game_tips_.clear();
 }
 
 /**
@@ -529,17 +557,13 @@ Player* EditorGameBase::get_safe_player(PlayerNumber const n) {
  * make this object ready to load new data
  */
 void EditorGameBase::cleanup_for_load() {
-	auto set_progress_message = [this](std::string s) {
-		if (loader_ui_)
-			loader_ui_->step(s);
-	};
-	set_progress_message(_("Cleaning up for loading: Map objects (1/3)"));
+	step_loader_ui(_("Cleaning up for loading: Map objects (1/3)"));
 	cleanup_objects();  /// Clean all the stuff up, so we can load.
 
-	set_progress_message(_("Cleaning up for loading: Players (2/3)"));
+	step_loader_ui(_("Cleaning up for loading: Players (2/3)"));
 	player_manager_->cleanup();
 
-	set_progress_message(_("Cleaning up for loading: Map (3/3)"));
+	step_loader_ui(_("Cleaning up for loading: Map (3/3)"));
 	map_.cleanup();
 
 	delete_tempfile();
