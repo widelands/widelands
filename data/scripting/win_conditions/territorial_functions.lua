@@ -86,7 +86,16 @@ function calculate_territory_points(fields, players)
 
    -- Check if we have a winner. The table was sorted, so we can simply grab the first entry.
    local winning_points = -1
-   if ranked_players[1].points > ( fields / 2 ) then
+   -- Peaceful mode in territorial time
+   if wl.game().players[1]:is_attack_forbidden(2) then
+      local remaining_points = fields
+      for tidx, teaminfo in ipairs(ranked_players) do
+         remaining_points = remaining_points - teaminfo.points
+      end
+      if (ranked_players[1].points - ranked_players[2].points) > remaining_points then
+         winning_points = ranked_players[1].points
+      end
+   elseif ranked_players[1].points > ( fields / 2 ) then
       winning_points = ranked_players[1].points
    end
 
