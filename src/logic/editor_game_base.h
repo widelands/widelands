@@ -32,6 +32,7 @@
 #include "logic/player_area.h"
 #include "notifications/notifications.h"
 #include "scripting/lua_interface.h"
+#include "wui/game_tips.h"
 
 namespace UI {
 struct ProgressWindow;
@@ -117,10 +118,31 @@ public:
 	virtual void postload();
 	void load_graphics();
 	virtual void cleanup_for_load();
-	void set_loader_ui(UI::ProgressWindow*);
-	UI::ProgressWindow* get_loader_ui() {
-		return loader_ui_;
+
+	/// Create a new loader UI and register which type of gametips to select from.
+	/// If 'show_game_tips' is true, game tips will be shown immediately.
+	/// Optionally sets a background image.
+	UI::ProgressWindow& create_loader_ui(const std::vector<std::string>& tipstexts,
+	                                     bool show_game_tips,
+	                                     const std::string& background = std::string());
+
+	/// If 'background' is not empty, change the background image for the loader UI.
+	/// If 'backgound' is empty, show game tips instead.
+	/// There must be a loader ui and no game tips.
+	void change_loader_ui_background(const std::string& background);
+
+	/// Set step text for the current loader UI if it's not nullptr.
+	void step_loader_ui(const std::string& text) const;
+
+#ifndef NDEBUG
+	/// Check whether we currently have a loader_ui. Used for asserts only.
+	bool has_loader_ui() const {
+		return loader_ui_ != nullptr;
 	}
+#endif
+
+	// Destroy the loader UI and game tips
+	void remove_loader_ui();
 
 	void set_road(const FCoords&, uint8_t direction, RoadSegment roadtype);
 
@@ -203,9 +225,6 @@ public:
 	// Returns the mutable tribes. Prefer tribes() whenever possible.
 	Tribes* mutable_tribes();
 
-protected:
-	UI::ProgressWindow* loader_ui_;
-
 private:
 	/// Common function for create_critter and create_ship.
 	Bob& create_bob(Coords, const BobDescr&, Player* owner = nullptr);
@@ -262,6 +281,11 @@ private:
 	std::unique_ptr<Tribes> tribes_;
 	std::unique_ptr<InteractiveBase> ibase_;
 	Map map_;
+
+	// Shown while loading or saving a game/map
+	std::unique_ptr<UI::ProgressWindow> loader_ui_;
+	std::unique_ptr<GameTips> game_tips_;
+	std::vector<std::string> registered_game_tips_;
 
 	/// Even after a map is fully loaded, some static data (images, scripts)
 	/// will still be read from a filesystem whenever a map/game is saved.

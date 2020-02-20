@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
-# Joe Hansen <joedalton2@yahoo.dk>, 2009,2016-2019
+# Joe Hansen <joedalton2@yahoo.dk>, 2009,2016-2020
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
-"PO-Revision-Date: 2019-08-20 15:14+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-02-12 09:08+0000\n"
+"PO-Revision-Date: 2020-02-12 11:40+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -250,7 +250,7 @@ msgstr "Lagervinduet giver dig et overblik over de varer du har."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:132
 msgid "Afterwards, choose ‘Stock’."
-msgstr ""
+msgstr "Efterfølgende, vælg »Lager«."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:133
 msgid ""
@@ -278,25 +278,25 @@ msgstr "O.k. I listen har du set, at du ikke har flere værtshuse eller kroer. D
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:148
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:150
 msgid "Examine the first two tabs in the stock window"
-msgstr ""
+msgstr "Undersøg de to første faneblade i lagervinduet"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:151
 msgid ""
 "Have a look at the first two tabs in the stock window. They show all the "
 "wares and workers you have."
-msgstr ""
+msgstr "Kig på de to første faneblade i lagervinduet. De viser alle dine varer og arbejdere."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:153
 msgid ""
 "When you have seen enough, switch to the third tab (‘Wares in warehouses’)."
-msgstr ""
+msgstr "Når du har set nok, så skift til det tredje faneblad (»Lagervarer)«"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:161
 msgid ""
 "The stock window has four tabs. The first (and currently selected) one shows"
 " you all your current wares, including those on roads, at flags and inside "
 "buildings waiting for processing."
-msgstr ""
+msgstr "Lagervinduet har fire faneblade. Det første (og i øjeblikket valgte) viser dig alle dine nuværende varer, inklusive dem på veje, ved flag og i bygninger afventende brug."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:162
 msgid ""
@@ -335,7 +335,7 @@ msgstr "Du lukkede lagervinduet!"
 msgid ""
 "You have closed the stock window, but I have not yet finished with my "
 "explanation. Would you please reopen it and choose the third tab?"
-msgstr ""
+msgstr "Du har lukket lagervinduet, men er endnu ikke færdig med min forklaring. Åbn det venligst igen og vælg det tredje faneblad?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:195
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:197
@@ -347,7 +347,7 @@ msgid ""
 "You closed the stock window before I finished telling you everything about "
 "it. If you already know everything, please feel free to leave this tutorial "
 "at any time."
-msgstr ""
+msgstr "Du lukkede lagervinduet før jeg var færdig med at fortælle dig alt om det. Hvis du allerede ved det hele, så kan du forlade denne øvelse."
 
 #. TRANSLATORS: "it" refers to the "Stock" window.
 #. TRANSLATORS: "it" refers to the ware statistics window.
@@ -595,7 +595,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:330
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:332
 msgid "Examine your ware production and consumption"
-msgstr ""
+msgstr "Undersøg din vareproduktion og forbrug."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:333
 msgid ""
@@ -605,23 +605,23 @@ msgstr "De første to faneblade viser dig produktionen og forbruget af alle vare
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:334
 msgid "When you have seen enough, switch to the third tab (‘Economy health’)."
-msgstr ""
+msgstr "Når du har set nok, så skift til det tredje faneblad (»Økonomisk tilstand)«"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:341
 msgid ""
 "In this window, you can select wares to see how their production or "
 "consumption has changed over time. Try it out with some wares."
-msgstr ""
+msgstr "I dette vindue kan du vælge varer for at se hvordan deres produktion eller forbrug har ændret sig over tid. Prøv det med nogle af varerne."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:342
 msgid ""
 "I’ll continue as soon as you click on the third tab (‘Economy health’)."
-msgstr ""
+msgstr "Jeg fortsætter snart du klikker på det tredje faneblad (»Økonomisk tilstand«)."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:350
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:352
 msgid "Examine your economy’s health"
-msgstr ""
+msgstr "Undersøg din økonomis tilstand"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:353
 msgid ""
@@ -635,7 +635,7 @@ msgstr "Prøv det. Du kan sammenligne det med de to forrige faneblade."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:355
 msgid "When you have seen enough, switch to the fourth tab (‘Stock’)."
-msgstr ""
+msgstr "Når du har set nok, så skift til det fjerde faneblad (»Lager«)."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:363
 msgid ""
@@ -648,7 +648,7 @@ msgstr "I dette faneblad kan du se forskellen mellem produktion og forbrug, kald
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:371
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:373
 msgid "Examine your stock"
-msgstr ""
+msgstr "Undersøg dit lager"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:374
 msgid ""
@@ -731,7 +731,7 @@ msgstr "Økonomiindstillinger"
 msgid ""
 "I’ve shown you our stock window, where you could see which wares are at the "
 "warehouses. You remember?"
-msgstr ""
+msgstr "Jeg har vist dig vores lagervindue, hvor du kan se hvilke varer der er på lagrene. Kan du huske det?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:451
 msgid ""
@@ -800,7 +800,7 @@ msgstr "Din stenhugger vil ikke fremstille marmorsøjler, når der er behov for 
 msgid ""
 "To do so, click on any flag and choose ‘Configure economy’. In this window, "
 "you can decide how many wares of each type you wish to have in stock."
-msgstr ""
+msgstr "For at gøre dette klikkes på et flag og der vælges »Konfigurer økonomi«. I dette vindue kan du beslutte hvor mange varer af hver type, du ønsker at have på lager."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:481
 msgid ""
