@@ -31,8 +31,8 @@ world:new_immovable_type{
    },
    spritesheets = {
       idle = {
-         directory = dirname .. "sapling/",
-         basename = "idle",
+         directory = dirname,
+         basename = "sapling",
          fps = 8,
          frames = 4,
          rows = 2,
@@ -58,8 +58,8 @@ world:new_immovable_type{
    },
    spritesheets = {
       idle = {
-         directory = dirname .. "pole/",
-         basename = "idle",
+         directory = dirname,
+         basename = "pole",
          fps = 8,
          frames = 4,
          rows = 2,
@@ -85,8 +85,8 @@ world:new_immovable_type{
    },
    spritesheets = {
       idle = {
-         directory = dirname .. "mature/",
-         basename = "idle",
+         directory = dirname,
+         basename = "mature",
          fps = 8,
          frames = 4,
          rows = 2,
@@ -117,8 +117,8 @@ world:new_immovable_type{
    },
    spritesheets = {
       idle = {
-         directory = dirname .. "old/",
-         basename = "idle",
+         directory = dirname,
+         basename = "old",
          fps = 10,
          frames = 4,
          rows = 2,
