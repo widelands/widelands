@@ -150,7 +150,7 @@ bool GameClientImpl::run_map_menu(GameClient* parent) {
 InteractiveGameBase* GameClientImpl::init_game(GameClient* parent, UI::ProgressWindow& loader) {
 	modal = &loader;
 
-    Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
+	Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
 	game->set_game_controller(parent);
 	uint8_t const pn = settings.playernum + 1;

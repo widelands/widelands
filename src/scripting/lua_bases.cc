@@ -554,7 +554,7 @@ int LuaEditorGameBase::read_campaign_data(lua_State* L) {
       May be used from the init.lua files for tribe/world loading only.
 */
 int LuaEditorGameBase::set_loading_message(lua_State* L) {
-    Notifications::publish(UI::NoteLoadingMessage(luaL_checkstring(L, 2)));
+	Notifications::publish(UI::NoteLoadingMessage(luaL_checkstring(L, 2)));
 	return 0;
 }
 

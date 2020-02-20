@@ -81,23 +81,24 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 
 	initializations_ = info.initializations;
 
-    auto set_progress_message = [](const std::string& str, int i) {
-        Notifications::publish(UI::NoteLoadingMessage((boost::format(_("Loading tribes: %1$s (%2$d/%3$d)")) % str % i % 6).str()));
-    };
+	auto set_progress_message = [](const std::string& str, int i) {
+		Notifications::publish(UI::NoteLoadingMessage(
+		   (boost::format(_("Loading tribes: %1$s (%2$d/%3$d)")) % str % i % 6).str()));
+	};
 
 	try {
 		log("┃    Ships: ");
-        set_progress_message(_("Ships"), 1);
+		set_progress_message(_("Ships"), 1);
 		load_ships(table, tribes);
 		log("%ums\n", timer.ms_since_last_query());
 
 		log("┃    Immovables: ");
-        set_progress_message(_("Immovables"), 2);
+		set_progress_message(_("Immovables"), 2);
 		load_immovables(table, tribes, world);
 		log("%ums\n", timer.ms_since_last_query());
 
 		log("┃    Wares: ");
-        set_progress_message(_("Wares"), 3);
+		set_progress_message(_("Wares"), 3);
 		load_wares(table, tribes);
 		if (scenario_table != nullptr && scenario_table->has_key("wares_order")) {
 			load_wares(*scenario_table, tribes);
@@ -105,7 +106,7 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 		log("%ums\n", timer.ms_since_last_query());
 
 		log("┃    Workers: ");
-        set_progress_message(_("Workers"), 4);
+		set_progress_message(_("Workers"), 4);
 		load_workers(table, tribes);
 		if (scenario_table != nullptr && scenario_table->has_key("workers_order")) {
 			load_workers(*scenario_table, tribes);
@@ -113,16 +114,16 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 		log("%ums\n", timer.ms_since_last_query());
 
 		log("┃    Buildings: ");
-        set_progress_message(_("Buildings"), 5);
+		set_progress_message(_("Buildings"), 5);
 		load_buildings(table, tribes);
 		if (scenario_table != nullptr && scenario_table->has_key("buildings")) {
 			load_buildings(*scenario_table, tribes);
 		}
 		log("%ums\n", timer.ms_since_last_query());
 
-        set_progress_message(_("Finishing"), 6);
+		set_progress_message(_("Finishing"), 6);
 
-        log("┃    Frontiers, flags and roads: ");
+		log("┃    Frontiers, flags and roads: ");
 		load_frontiers_flags_roads(table);
 		log("%ums\n", timer.ms_since_last_query());
 

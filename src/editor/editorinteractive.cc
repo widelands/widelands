@@ -886,7 +886,8 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 				                     /** TRANSLATORS: Map author name when it hasn't been set yet */
 				                     pgettext("author_name", "Unknown")));
 			} else {
-				Notifications::publish(UI::NoteLoadingMessage((boost::format(_("Loading map “%s”…")) % filename).str()));
+				Notifications::publish(
+				   UI::NoteLoadingMessage((boost::format(_("Loading map “%s”…")) % filename).str()));
 				eia.load(filename);
 			}
 		}

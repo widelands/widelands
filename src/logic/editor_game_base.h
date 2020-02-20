@@ -287,8 +287,7 @@ private:
 	std::unique_ptr<UI::ProgressWindow> loader_ui_;
 	std::unique_ptr<GameTips> game_tips_;
 	std::vector<std::string> registered_game_tips_;
-    std::unique_ptr<Notifications::Subscriber<UI::NoteLoadingMessage>>
-	   loading_message_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<UI::NoteLoadingMessage>> loading_message_subscriber_;
 
 	/// Even after a map is fully loaded, some static data (images, scripts)
 	/// will still be read from a filesystem whenever a map/game is saved.

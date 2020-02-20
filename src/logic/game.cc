@@ -306,7 +306,7 @@ void Game::init_newgame(const GameSettings& settings) {
 
 	// Check for win_conditions
 	if (!settings.scenario) {
-        Notifications::publish(UI::NoteLoadingMessage(_("Initializing game…")));
+		Notifications::publish(UI::NoteLoadingMessage(_("Initializing game…")));
 		if (settings.peaceful) {
 			for (uint32_t i = 1; i < settings.players.size(); ++i) {
 				if (Player* p1 = get_player(i)) {
@@ -343,7 +343,7 @@ void Game::init_newgame(const GameSettings& settings) {
 void Game::init_savegame(const GameSettings& settings) {
 	assert(has_loader_ui());
 
-    Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
+	Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
 	try {
 		GameLoader gl(settings.mapfilename, *this);
@@ -374,7 +374,7 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 	create_loader_ui({"general_game", "singleplayer"}, false);
 	int8_t player_nr;
 
-    Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
+	Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
 	{
 		GameLoader gl(filename, *this);
@@ -453,7 +453,7 @@ bool Game::run(StartGameType const start_game_type,
 		PlayerNumber const nr_players = map().get_nrplayers();
 		if (start_game_type == NewNonScenario) {
 			/** TRANSLATORS: All players (plural) */
-            Notifications::publish(UI::NoteLoadingMessage(_("Creating player infrastructure…")));
+			Notifications::publish(UI::NoteLoadingMessage(_("Creating player infrastructure…")));
 			iterate_players_existing(p, nr_players, *this, plr) {
 				plr->create_default_infrastructure();
 			}
