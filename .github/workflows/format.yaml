@@ -82,7 +82,7 @@ jobs:
           fi
         fi
         echo "::set-env name=COMMIT_MESSAGE::$files"
-    - name: Getting the changes into the branch
+    - name: Pushing changes
       run: |
         if [ -z "$COMMIT_MESSAGE" ]
         # skip if there's nothing to do
