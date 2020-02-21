@@ -216,7 +216,7 @@ print_loading_message("┗━ took", function()
       world:new_editor_immovable_category{
          name = "trees_coniferous",
          descname = _ "Coniferous Trees",
-         picture = "world/immovables/trees/spruce/old/idle_0.png",
+         picture = "world/immovables/trees/spruce/menu.png",
          items_per_row = 8,
       }
 
