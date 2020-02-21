@@ -116,7 +116,7 @@ private:
 	get_selected_savegames(const std::set<uint32_t>& selections) const;
 	void set_tooltips_of_buttons(size_t nr_of_selected_items) const;
 	const std::string create_header(const size_t no_selections) const;
-	bool show_confirmation_window(size_t no_selections) const;
+	bool show_confirmation_window(std::set<uint32_t>& selections) const;
 	void delete_own(std::set<uint32_t>& selections);
 	std::set<uint32_t> try_to_delete(std::set<uint32_t>& selections) const;
 	void update_table(std::set<uint32_t>& selections);

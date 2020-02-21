@@ -223,7 +223,8 @@ const std::string LoadOrSaveGame::create_header(const size_t no_selections) cons
 	return header;
 }
 
-bool LoadOrSaveGame::show_confirmation_window(size_t no_selections) const {
+bool LoadOrSaveGame::show_confirmation_window(std::set<uint32_t>& selections) const {
+	size_t no_selections = selections.size();
 	std::string confirmation_window_header = create_header(no_selections);
 	const std::string message =
 	   (boost::format("%s\n%s") % confirmation_window_header % "filename_list_string()").str();
@@ -333,10 +334,11 @@ void LoadOrSaveGame::clicked_delete() {
 		return;
 	}
 	std::set<uint32_t> selections = table().selections();
+	const std::vector<SavegameData> selected = get_selected_savegames(selections);
 
 	bool do_delete = SDL_GetModState() & KMOD_CTRL;
 	if (!do_delete) {
-		do_delete = show_confirmation_window(selections.size());
+		do_delete = show_confirmation_window(selections);
 		table_->focus();
 	}
 	if (do_delete) {
