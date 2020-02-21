@@ -282,8 +282,8 @@ std::string FileSystem::get_homedir() {
 // Could anybody please hit the Megasoft devs for not keeping
 // their own "standards"?
 #define TRY_USE_AS_HOMEDIR(name)                                                                   \
-	char const* const home_char = getenv(name);                                                                         \
-	if (home_char != nullptr && *home_char != 0 && check_writeable_for_data(home_char))                                \
+	char const* const home_char = getenv(name);                                                     \
+	if (home_char != nullptr && *home_char != 0 && check_writeable_for_data(home_char))             \
 		return home_char;
 
 	TRY_USE_AS_HOMEDIR("USERPROFILE");
@@ -391,9 +391,9 @@ std::vector<std::string> FileSystem::get_xdgdatadirs() {
 #ifdef HAS_GETENV
 	environment_char = getenv("XDG_DATA_DIRS");
 #endif
-	std::string environment(environment_char == nullptr || *environment_char == 0
-                            ? "/usr/local/share:/usr/share"
-                            : environment_char);
+	std::string environment(environment_char == nullptr || *environment_char == 0 ?
+	                           "/usr/local/share:/usr/share" :
+	                           environment_char);
 
 	// https://stackoverflow.com/a/14266139
 	std::string token;
