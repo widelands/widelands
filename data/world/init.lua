@@ -230,7 +230,7 @@ print_loading_message("┗━ took", function()
       world:new_editor_immovable_category{
          name = "trees_palm",
          descname = _ "Palm Trees",
-         picture = "world/immovables/trees/palm_borassus/old/idle_0.png",
+         picture = "world/immovables/trees/palm_borassus/menu.png",
          items_per_row = 8,
       }
 
