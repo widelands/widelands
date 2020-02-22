@@ -11,7 +11,7 @@ jobs:
     - name: Setting up bazaar
       run: |
         sudo apt-get update
-        sudo apt-get install bzr openssh-client 
+        sudo apt-get install bzr
         echo "${{ secrets.LP_SSH }}" > ~/.lp_key
         chmod 400 ~/.lp_key
         eval "$(ssh-agent -s)"
@@ -22,15 +22,14 @@ jobs:
       run: |
         cd ~
         git clone --depth 1 https://github.com/widelands/widelands.git wl_master
-        ls -a # test
     - name: Checkout trunk
       run: |
         cd ~
         bzr branch lp:widelands wl_trunk
-        ls -a # test
     - name: Cleaning tree
       run: |
         cd ~/wl_trunk
+        ls -a # test
         for file in *
         do
           if ! [ "$file" == ".bzr" ]
@@ -38,9 +37,11 @@ jobs:
             rm -r "$file"
           fi
         done
+        ls -a # test
     - name: Copying files
       run: |
         cd ~/wl_master
+        ls -a # test
         for file in *
         do
           if ! [ "$file" == ".git" ]
@@ -53,10 +54,11 @@ jobs:
             fi
           fi
         done
+        ls -a # test
     - name: Committing and pushing changes
       run: |
         cd ~/wl_trunk
-        bzr add .
+        bzr add -v
         bzr status
-        bzr commit --strict -m "$(git show --oneline $GITHUB_SHA | grep -m 1 '')"
+        bzr commit -v --strict -m "$(git show --oneline $GITHUB_SHA | grep -m 1 '')"
         # bzr push :parent
