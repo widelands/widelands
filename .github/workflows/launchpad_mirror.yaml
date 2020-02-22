@@ -10,8 +10,8 @@ jobs:
     steps:
     - name: Setting up bazaar
       run: |
-#        sudo apt-get update
-#        sudo apt-get install bzr openssh-client 
+        # sudo apt-get update
+        # sudo apt-get install bzr openssh-client 
         echo "${{ secrets.LP_SSH }}" > ~/.ssh/.id_rsa
         ssh-add ~/.ssh/.id_rsa
         bzr whoami "bunnybot"
@@ -50,4 +50,4 @@ jobs:
         bzr add .
         bzr status
         bzr commit --strict -m "$(git show --oneline $GITHUB_SHA | grep -m 1 '')"
-#        bzr push :parent
+        # bzr push :parent
