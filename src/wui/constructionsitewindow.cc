@@ -137,72 +137,76 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 		// a simplified faksimile of the later building window that contains only
 		// the relevant options.
 		bool nothing_added = false;
-        // NOCOM make more efficient with switch
 		UI::Box& settings_box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
-		if (upcast(Widelands::ProductionsiteSettings, ps, construction_site->get_settings())) {
+        switch (construction_site->building().type()) {
+        case Widelands::MapObjectType::PRODUCTIONSITE:
+        case Widelands::MapObjectType::TRAININGSITE: {
+             upcast(Widelands::ProductionsiteSettings, ps, construction_site->get_settings());
             // We use the ProductionSiteDescr to get the correct order for the input queues
             upcast(const Widelands::ProductionSiteDescr, prodsite, &construction_site->building());
             assert(prodsite != nullptr);
             assert(ps->ware_queues.size() == prodsite->input_wares().size());
-			for (const auto& pair : prodsite->input_wares()) {
-				InputQueueDisplay* queue = new InputQueueDisplay(
-				   &settings_box, 0, 0, *igbase(), *construction_site, Widelands::wwWARE, pair.first);
-				settings_box.add(queue);
-				cs_ware_queues_.push_back(queue);
-			}
+            for (const auto& pair : prodsite->input_wares()) {
+                InputQueueDisplay* queue = new InputQueueDisplay(
+                   &settings_box, 0, 0, *igbase(), *construction_site, Widelands::wwWARE, pair.first);
+                settings_box.add(queue);
+                cs_ware_queues_.push_back(queue);
+            }
             assert(ps->worker_queues.size() == prodsite->input_workers().size());
-			for (const auto& pair : prodsite->input_workers()) {
-				InputQueueDisplay* queue = new InputQueueDisplay(
-				   &settings_box, 0, 0, *igbase(), *construction_site, Widelands::wwWORKER, pair.first);
-				settings_box.add(queue);
-				cs_ware_queues_.push_back(queue);
-			}
-			if (upcast(Widelands::TrainingsiteSettings, ts, ps)) {
-				UI::Box& soldier_capacity_box = *new UI::Box(&settings_box, 0, 0, UI::Box::Horizontal);
-				settings_box.add(&soldier_capacity_box, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-				cs_soldier_capacity_decrease_ = new UI::Button(
-				   &soldier_capacity_box, "decrease", 0, 0, 32, 32, UI::ButtonStyle::kWuiMenu,
-				   g_gr->images().get(pic_decrease_capacity),
-				   _("Decrease capacity. Hold down Ctrl to set the capacity to the lowest value"));
-				cs_soldier_capacity_increase_ = new UI::Button(
-				   &soldier_capacity_box, "increase", 0, 0, 32, 32, UI::ButtonStyle::kWuiMenu,
-				   g_gr->images().get(pic_increase_capacity),
-				   _("Increase capacity. Hold down Ctrl to set the capacity to the highest value"));
-				cs_soldier_capacity_display_ =
-				   new UI::Textarea(&soldier_capacity_box, "", UI::Align::kCenter);
-				cs_soldier_capacity_decrease_->set_repeating(true);
-				cs_soldier_capacity_increase_->set_repeating(true);
-				cs_soldier_capacity_decrease_->set_enabled(can_act);
-				cs_soldier_capacity_increase_->set_enabled(can_act);
-				cs_soldier_capacity_decrease_->sigclicked.connect([this, ts]() {
-					igbase()->game().send_player_change_soldier_capacity(
-					   *construction_site_.get(igbase()->egbase()),
-					   SDL_GetModState() & KMOD_CTRL ? 0 : ts->desired_capacity - 1);
-				});
-				cs_soldier_capacity_increase_->sigclicked.connect([this, ts]() {
-					igbase()->game().send_player_change_soldier_capacity(
-					   *construction_site_.get(igbase()->egbase()),
-					   SDL_GetModState() & KMOD_CTRL ? ts->max_capacity : ts->desired_capacity + 1);
-				});
-				soldier_capacity_box.add(cs_soldier_capacity_decrease_);
-				soldier_capacity_box.add(
-				   cs_soldier_capacity_display_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-				soldier_capacity_box.add(cs_soldier_capacity_increase_);
-				cs_soldier_capacity_display_->set_fixed_width(kSoldierCapacityDisplayWidth);
-				settings_box.add_space(8);
-			}
-			cs_stopped_ = new UI::Checkbox(&settings_box, Vector2i::zero(), _("Stopped"),
-			                               _("Stop this building’s work after completion"));
-			cs_stopped_->clickedto.connect([this, ps](bool stop) {
-				if (stop != ps->stopped) {
-					igbase()->game().send_player_start_stop_building(
-					   *construction_site_.get(igbase()->egbase()));
-				}
-			});
-			settings_box.add(cs_stopped_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-			settings_box.add_space(6);
-			cs_stopped_->set_enabled(can_act);
-		} else if (upcast(Widelands::MilitarysiteSettings, ms, construction_site->get_settings())) {
+            for (const auto& pair : prodsite->input_workers()) {
+                InputQueueDisplay* queue = new InputQueueDisplay(
+                   &settings_box, 0, 0, *igbase(), *construction_site, Widelands::wwWORKER, pair.first);
+                settings_box.add(queue);
+                cs_ware_queues_.push_back(queue);
+            }
+            if (upcast(Widelands::TrainingsiteSettings, ts, ps)) {
+                UI::Box& soldier_capacity_box = *new UI::Box(&settings_box, 0, 0, UI::Box::Horizontal);
+                settings_box.add(&soldier_capacity_box, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+                cs_soldier_capacity_decrease_ = new UI::Button(
+                   &soldier_capacity_box, "decrease", 0, 0, 32, 32, UI::ButtonStyle::kWuiMenu,
+                   g_gr->images().get(pic_decrease_capacity),
+                   _("Decrease capacity. Hold down Ctrl to set the capacity to the lowest value"));
+                cs_soldier_capacity_increase_ = new UI::Button(
+                   &soldier_capacity_box, "increase", 0, 0, 32, 32, UI::ButtonStyle::kWuiMenu,
+                   g_gr->images().get(pic_increase_capacity),
+                   _("Increase capacity. Hold down Ctrl to set the capacity to the highest value"));
+                cs_soldier_capacity_display_ =
+                   new UI::Textarea(&soldier_capacity_box, "", UI::Align::kCenter);
+                cs_soldier_capacity_decrease_->set_repeating(true);
+                cs_soldier_capacity_increase_->set_repeating(true);
+                cs_soldier_capacity_decrease_->set_enabled(can_act);
+                cs_soldier_capacity_increase_->set_enabled(can_act);
+                cs_soldier_capacity_decrease_->sigclicked.connect([this, ts]() {
+                    igbase()->game().send_player_change_soldier_capacity(
+                       *construction_site_.get(igbase()->egbase()),
+                       SDL_GetModState() & KMOD_CTRL ? 0 : ts->desired_capacity - 1);
+                });
+                cs_soldier_capacity_increase_->sigclicked.connect([this, ts]() {
+                    igbase()->game().send_player_change_soldier_capacity(
+                       *construction_site_.get(igbase()->egbase()),
+                       SDL_GetModState() & KMOD_CTRL ? ts->max_capacity : ts->desired_capacity + 1);
+                });
+                soldier_capacity_box.add(cs_soldier_capacity_decrease_);
+                soldier_capacity_box.add(
+                   cs_soldier_capacity_display_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+                soldier_capacity_box.add(cs_soldier_capacity_increase_);
+                cs_soldier_capacity_display_->set_fixed_width(kSoldierCapacityDisplayWidth);
+                settings_box.add_space(8);
+            }
+            cs_stopped_ = new UI::Checkbox(&settings_box, Vector2i::zero(), _("Stopped"),
+                                           _("Stop this building’s work after completion"));
+            cs_stopped_->clickedto.connect([this, ps](bool stop) {
+                if (stop != ps->stopped) {
+                    igbase()->game().send_player_start_stop_building(
+                       *construction_site_.get(igbase()->egbase()));
+                }
+            });
+            settings_box.add(cs_stopped_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+            settings_box.add_space(6);
+            cs_stopped_->set_enabled(can_act);
+        } break;
+        case Widelands::MapObjectType::MILITARYSITE: {
+			upcast(Widelands::MilitarysiteSettings, ms, construction_site->get_settings());
 			UI::Box& soldier_capacity_box = *new UI::Box(&settings_box, 0, 0, UI::Box::Horizontal);
 			settings_box.add(&soldier_capacity_box, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 			cs_soldier_capacity_decrease_ = new UI::Button(
@@ -258,75 +262,78 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				});
 			}
 			settings_box.add_space(8);
-		} else if (upcast(Widelands::WarehouseSettings, ws, construction_site->get_settings())) {
-			auto add_tab = [this, construction_site, can_act](
-			   Widelands::WareWorker ww, FakeWaresDisplay** display) {
-				UI::Box& mainbox = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
-				*display = new FakeWaresDisplay(&mainbox, can_act, *construction_site, ww);
-				mainbox.add(*display, UI::Box::Resizing::kFullSize);
-				UI::Box& buttonsbox = *new UI::Box(&mainbox, 0, 0, UI::Box::Horizontal);
-				mainbox.add(&buttonsbox, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-				mainbox.add_space(15);
-				UI::Button& sp_normal = *new UI::Button(
-				   &buttonsbox, "stock_policy_normal", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-				   g_gr->images().get(pic_stock_policy_button_normal), _("Normal policy"));
-				UI::Button& sp_prefer = *new UI::Button(
-				   &buttonsbox, "stock_policy_prefer", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-				   g_gr->images().get(pic_stock_policy_button_prefer),
-				   _("Preferably store selected wares here"));
-				UI::Button& sp_dont = *new UI::Button(
-				   &buttonsbox, "stock_policy_dontstock", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-				   g_gr->images().get(pic_stock_policy_button_dontstock),
-				   _("Do not store selected wares here"));
-				UI::Button& sp_remove = *new UI::Button(
-				   &buttonsbox, "stock_policy_remove", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-				   g_gr->images().get(pic_stock_policy_button_remove),
-				   _("Remove selected wares from here"));
-				sp_remove.sigclicked.connect(boost::bind(
-				   &ConstructionSiteWindow::change_policy, this, ww, Widelands::StockPolicy::kRemove));
-				sp_dont.sigclicked.connect(boost::bind(&ConstructionSiteWindow::change_policy, this, ww,
-				                                       Widelands::StockPolicy::kDontStock));
-				sp_prefer.sigclicked.connect(boost::bind(
-				   &ConstructionSiteWindow::change_policy, this, ww, Widelands::StockPolicy::kPrefer));
-				sp_normal.sigclicked.connect(boost::bind(
-				   &ConstructionSiteWindow::change_policy, this, ww, Widelands::StockPolicy::kNormal));
-				sp_normal.set_enabled(can_act);
-				sp_dont.set_enabled(can_act);
-				sp_remove.set_enabled(can_act);
-				sp_prefer.set_enabled(can_act);
-				buttonsbox.add(&sp_normal);
-				buttonsbox.add(&sp_prefer);
-				buttonsbox.add(&sp_dont);
-				buttonsbox.add(&sp_remove);
-				if (ww == Widelands::wwWARE) {
-					get_tabs()->add("warehouse_wares", g_gr->images().get(pic_tab_settings_wares),
-					                &mainbox, _("Ware settings to apply after construction"));
-				} else {
-					get_tabs()->add("warehouse_workers", g_gr->images().get(pic_tab_settings_workers),
-					                &mainbox, _("Worker settings to apply after construction"));
-				}
-			};
-			add_tab(Widelands::wwWARE, &cs_warehouse_wares_);
-			add_tab(Widelands::wwWORKER, &cs_warehouse_workers_);
-			if (construction_site->get_info().becomes->get_isport()) {
-				cs_launch_expedition_ =
-				   new UI::Checkbox(&settings_box, Vector2i::zero(), _("Start an expedition"),
-				                    _("Start an expedition from this port after completion"));
-				cs_launch_expedition_->clickedto.connect([this, ws](bool launch) {
-					if (launch != ws->launch_expedition) {
-						igbase()->game().send_player_start_or_cancel_expedition(
-						   *construction_site_.get(igbase()->egbase()));
-					}
-				});
-				settings_box.add(cs_launch_expedition_, UI::Box::Resizing::kFullSize);
-				settings_box.add_space(6);
-				cs_launch_expedition_->set_enabled(can_act);
-			} else {
-				nothing_added = true;
-			}
-		} else {
-			NEVER_HERE();
-		}
+        } break;
+        case Widelands::MapObjectType::WAREHOUSE: {
+            upcast(Widelands::WarehouseSettings, ws, construction_site->get_settings());
+            auto add_tab = [this, construction_site, can_act](
+               Widelands::WareWorker ww, FakeWaresDisplay** display) {
+                UI::Box& mainbox = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
+                *display = new FakeWaresDisplay(&mainbox, can_act, *construction_site, ww);
+                mainbox.add(*display, UI::Box::Resizing::kFullSize);
+                UI::Box& buttonsbox = *new UI::Box(&mainbox, 0, 0, UI::Box::Horizontal);
+                mainbox.add(&buttonsbox, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+                mainbox.add_space(15);
+                UI::Button& sp_normal = *new UI::Button(
+                   &buttonsbox, "stock_policy_normal", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+                   g_gr->images().get(pic_stock_policy_button_normal), _("Normal policy"));
+                UI::Button& sp_prefer = *new UI::Button(
+                   &buttonsbox, "stock_policy_prefer", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+                   g_gr->images().get(pic_stock_policy_button_prefer),
+                   _("Preferably store selected wares here"));
+                UI::Button& sp_dont = *new UI::Button(
+                   &buttonsbox, "stock_policy_dontstock", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+                   g_gr->images().get(pic_stock_policy_button_dontstock),
+                   _("Do not store selected wares here"));
+                UI::Button& sp_remove = *new UI::Button(
+                   &buttonsbox, "stock_policy_remove", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+                   g_gr->images().get(pic_stock_policy_button_remove),
+                   _("Remove selected wares from here"));
+                sp_remove.sigclicked.connect(boost::bind(
+                   &ConstructionSiteWindow::change_policy, this, ww, Widelands::StockPolicy::kRemove));
+                sp_dont.sigclicked.connect(boost::bind(&ConstructionSiteWindow::change_policy, this, ww,
+                                                       Widelands::StockPolicy::kDontStock));
+                sp_prefer.sigclicked.connect(boost::bind(
+                   &ConstructionSiteWindow::change_policy, this, ww, Widelands::StockPolicy::kPrefer));
+                sp_normal.sigclicked.connect(boost::bind(
+                   &ConstructionSiteWindow::change_policy, this, ww, Widelands::StockPolicy::kNormal));
+                sp_normal.set_enabled(can_act);
+                sp_dont.set_enabled(can_act);
+                sp_remove.set_enabled(can_act);
+                sp_prefer.set_enabled(can_act);
+                buttonsbox.add(&sp_normal);
+                buttonsbox.add(&sp_prefer);
+                buttonsbox.add(&sp_dont);
+                buttonsbox.add(&sp_remove);
+                if (ww == Widelands::wwWARE) {
+                    get_tabs()->add("warehouse_wares", g_gr->images().get(pic_tab_settings_wares),
+                                    &mainbox, _("Ware settings to apply after construction"));
+                } else {
+                    get_tabs()->add("warehouse_workers", g_gr->images().get(pic_tab_settings_workers),
+                                    &mainbox, _("Worker settings to apply after construction"));
+                }
+            };
+            add_tab(Widelands::wwWARE, &cs_warehouse_wares_);
+            add_tab(Widelands::wwWORKER, &cs_warehouse_workers_);
+            if (construction_site->get_info().becomes->get_isport()) {
+                cs_launch_expedition_ =
+                   new UI::Checkbox(&settings_box, Vector2i::zero(), _("Start an expedition"),
+                                    _("Start an expedition from this port after completion"));
+                cs_launch_expedition_->clickedto.connect([this, ws](bool launch) {
+                    if (launch != ws->launch_expedition) {
+                        igbase()->game().send_player_start_or_cancel_expedition(
+                           *construction_site_.get(igbase()->egbase()));
+                    }
+                });
+                settings_box.add(cs_launch_expedition_, UI::Box::Resizing::kFullSize);
+                settings_box.add_space(6);
+                cs_launch_expedition_->set_enabled(can_act);
+            } else {
+                nothing_added = true;
+            }
+        } break;
+        default:
+            NEVER_HERE();
+        }
 
 		if (!nothing_added) {
 			get_tabs()->add("settings", g_gr->images().get(pic_tab_settings), &settings_box,
