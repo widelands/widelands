@@ -216,28 +216,28 @@ print_loading_message("┗━ took", function()
       world:new_editor_immovable_category{
          name = "trees_coniferous",
          descname = _ "Coniferous Trees",
-         picture = "world/immovables/trees/spruce/old/idle_0.png",
+         picture = "world/immovables/trees/spruce/menu.png",
          items_per_row = 8,
       }
 
       world:new_editor_immovable_category{
          name = "trees_deciduous",
          descname = _ "Deciduous Trees",
-         picture = "world/immovables/trees/alder/old/idle_0.png",
+         picture = "world/immovables/trees/alder/menu.png",
          items_per_row = 8,
       }
 
       world:new_editor_immovable_category{
          name = "trees_palm",
          descname = _ "Palm Trees",
-         picture = "world/immovables/trees/palm_borassus/old/idle_0.png",
+         picture = "world/immovables/trees/palm_borassus/menu.png",
          items_per_row = 8,
       }
 
       world:new_editor_immovable_category{
          name = "trees_wasteland",
          descname = _ "Wasteland Trees",
-         picture = "world/immovables/trees/umbrella_red/old/idle_0.png",
+         picture = "world/immovables/trees/umbrella_red/menu.png",
          items_per_row = 8,
       }
 
