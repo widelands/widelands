@@ -12,18 +12,25 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install bzr openssh-client 
-        echo "${{ secrets.LP_SSH }}" > .lp_key
-        chmod 400 .lp_key
+        echo "${{ secrets.LP_SSH }}" > ~/.lp_key
+        chmod 400 ~/.lp_key
         eval "$(ssh-agent -s)"
-        # ssh-add .lp_key
+        # ssh-add ~/.lp_key
+        bzr launchpad-login "widelandsofficial"
         bzr whoami "bunnybot"
     - name: Checkout master
-      run: git clone --depth 1 https://github.com/widelands/widelands.git wl_master
+      run: |
+        cd ~
+        git clone --depth 1 https://github.com/widelands/widelands.git wl_master
+        ls -a # test
     - name: Checkout trunk
-      run: bzr branch lp:widelands wl_trunk
+      run: |
+        cd ~
+        bzr branch lp:widelands wl_trunk
+        ls -a # test
     - name: Cleaning tree
       run: |
-        cd wl_trunk
+        cd ~/wl_trunk
         for file in *
         do
           if ! [ "$file" == ".bzr" ]
@@ -33,7 +40,7 @@ jobs:
         done
     - name: Copying files
       run: |
-        cd ../wl_master
+        cd ~/wl_master
         for file in *
         do
           if ! [ "$file" == ".git" ]
@@ -48,7 +55,7 @@ jobs:
         done
     - name: Committing and pushing changes
       run: |
-        cd ../wl_trunk
+        cd ~/wl_trunk
         bzr add .
         bzr status
         bzr commit --strict -m "$(git show --oneline $GITHUB_SHA | grep -m 1 '')"
