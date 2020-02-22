@@ -21,7 +21,7 @@ jobs:
     - name: Checkout master
       run: |
         cd ~
-        git clone --depth 1 https://github.com/widelands/widelands.git wl_master
+        git clone --depth=1 https://github.com/widelands/widelands.git wl_master
     - name: Checkout trunk
       run: |
         cd ~
@@ -29,36 +29,34 @@ jobs:
     - name: Cleaning tree
       run: |
         cd ~/wl_trunk
-        ls -a # test
-        for file in *
+        for file in $(ls -A)
         do
           if ! [ "$file" == ".bzr" ]
           then
             rm -r "$file"
           fi
         done
-        ls -a # test
     - name: Copying files
       run: |
         cd ~/wl_master
-        ls -a # test
-        for file in *
+        for file in $(ls -A)
         do
           if ! [ "$file" == ".git" ]
           then
-            if [[ $file =~ .git* ]]
-            then
-              cp -r $file ../wl_trunk/.bzr${file#*.git}
-            else
-              cp -r $file ../wl_trunk/$file
-            fi
+            cp -r $file ~/wl_trunk/$file
           fi
         done
-        ls -a # test
+        cd ~/wl_trunk
+        mv .gitignore .bzrignore
     - name: Committing and pushing changes
       run: |
         cd ~/wl_trunk
-        bzr add -v
+        echo "TEST aaa" #
         bzr status
-        bzr commit -v --strict -m "$(git show --oneline $GITHUB_SHA | grep -m 1 '')"
+        echo "TEST bbb" #
+        bzr add
+        echo "TEST ccc" #
+        bzr status
+        echo "TEST ddd" #
+        bzr commit --strict -m "$(git show --oneline $GITHUB_SHA | grep -m 1 '')"
         # bzr push :parent
