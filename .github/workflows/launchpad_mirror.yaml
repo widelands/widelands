@@ -18,7 +18,7 @@ jobs:
         echo "${{ secrets.LP_HOST }}" > ~/.ssh/known_hosts
         eval "$(ssh-agent -s)"
         ssh-add ~/.ssh/id_rsa
-        bzr whoami "Wideland's Bunnybot <bunnybot@widelands.org>"
+        bzr whoami "The Widelands Bunnybot <bunnybot@widelands.org>"
         bzr launchpad-login "nordfriese" # nocom widelandsofficial
     - name: Checkout master
       run: |
@@ -52,9 +52,12 @@ jobs:
         mv .gitignore .bzrignore
     - name: Committing and pushing changes
       run: |
+        cd ~/wl_master
+        commit_message=$(git show --oneline $GITHUB_SHA | grep -m 1 "")
+        commit_message="$GITHUB_ACTOR: $commit_message"
+        echo $commit_message
         cd ~/wl_trunk
         bzr remove
         bzr add
-        commit_message=$(git show --oneline $GITHUB_SHA | grep -m 1 "")
-        bzr commit --strict -m "$GITHUB_ACTOR: $commit_message"
+        bzr commit --strict -m "$commit_message"
         bzr push lp:~widelands-dev/widelands/test-github-mirror # :parent
