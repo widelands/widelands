@@ -16,7 +16,7 @@ jobs:
         chmod 400 ~/.lp_key
         eval "$(ssh-agent -s)"
         # ssh-add ~/.lp_key
-        bzr launchpad-login "widelandsofficial"
+        # bzr launchpad-login "widelandsofficial"
         bzr whoami "bunnybot"
     - name: Checkout master
       run: |
@@ -45,7 +45,7 @@ jobs:
         do
           if ! [ "$file" == ".git" ]
           then
-            if [[ "$file" =~ ".git*" ]]
+            if [[ $file =~ .git* ]]
             then
               cp -r $file ../wl_trunk/.bzr${file#*.git}
             else
