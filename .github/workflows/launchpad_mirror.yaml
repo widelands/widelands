@@ -19,7 +19,7 @@ jobs:
         eval "$(ssh-agent -s)"
         ssh-add ~/.ssh/id_rsa
         bzr whoami "The Widelands Bunnybot <bunnybot@widelands.org>"
-        bzr launchpad-login "nordfriese" # nocom widelandsofficial
+        bzr launchpad-login "nordfriese" # NOCOM: "widelandsofficial"
     - name: Checkout master
       run: |
         cd ~
@@ -27,7 +27,7 @@ jobs:
     - name: Checkout trunk
       run: |
         cd ~
-        bzr branch lp:widelands wl_trunk
+        bzr branch lp:~widelands-dev/widelands/test-github-mirror wl_trunk # NOCOM: lp:widelands
     - name: Cleaning tree
       run: |
         cd ~/wl_trunk
@@ -61,4 +61,15 @@ jobs:
         bzr remove
         bzr add
         bzr commit --strict -m "$commit_message"
-        bzr push lp:~widelands-dev/widelands/test-github-mirror # :parent
+        set +e
+        check_for_remote_changes=$(curl -i "https://api.github.com/repos/widelands/widelands/commits/master" | grep -m 1 "\"sha\": ")
+        set -e
+        check_for_remote_changes=${check_for_remote_changes#*: \"}
+        check_for_remote_changes=${check_for_remote_changes%\",}
+        if [ "$check_for_remote_changes" == "$GITHUB_SHA" ]
+        then
+          bzr push :parent
+        else
+          echo "master was updated from '$GITHUB_SHA' to '$check_for_remote_changes', cancel"
+          exit 1
+        fi
