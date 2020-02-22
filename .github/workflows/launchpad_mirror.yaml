@@ -15,7 +15,7 @@ jobs:
         echo "${{ secrets.LP_SSH }}" > .lp_key
         chmod 400 .lp_key
         eval "$(ssh-agent -s)"
-        ssh-add .lp_key
+        # ssh-add .lp_key
         bzr whoami "bunnybot"
     - name: Checkout master
       run: git clone --depth 1 https://github.com/widelands/widelands.git wl_master
