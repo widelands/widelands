@@ -140,13 +140,18 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
         // NOCOM make more efficient with switch
 		UI::Box& settings_box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
 		if (upcast(Widelands::ProductionsiteSettings, ps, construction_site->get_settings())) {
-			for (const auto& pair : ps->ware_queues) {
+            // We use the ProductionSiteDescr to get the correct order for the input queues
+            upcast(const Widelands::ProductionSiteDescr, prodsite, &construction_site->building());
+            assert(prodsite != nullptr);
+            assert(ps->ware_queues.size() == prodsite->input_wares().size());
+			for (const auto& pair : prodsite->input_wares()) {
 				InputQueueDisplay* queue = new InputQueueDisplay(
 				   &settings_box, 0, 0, *igbase(), *construction_site, Widelands::wwWARE, pair.first);
 				settings_box.add(queue);
 				cs_ware_queues_.push_back(queue);
 			}
-			for (const auto& pair : ps->worker_queues) {
+            assert(ps->worker_queues.size() == prodsite->input_workers().size());
+			for (const auto& pair : prodsite->input_workers()) {
 				InputQueueDisplay* queue = new InputQueueDisplay(
 				   &settings_box, 0, 0, *igbase(), *construction_site, Widelands::wwWORKER, pair.first);
 				settings_box.add(queue);

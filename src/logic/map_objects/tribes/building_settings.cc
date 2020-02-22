@@ -34,11 +34,11 @@ namespace Widelands {
 ProductionsiteSettings::ProductionsiteSettings(const ProductionSiteDescr& descr, const TribeDescr& tribe)
    : BuildingSettings(descr.name(), tribe), stopped(false) {
 	for (const auto& pair : descr.input_wares()) {
-		ware_queues.push_back(
+		ware_queues.insert(
 		   std::make_pair(pair.first, InputQueueSetting{pair.second, pair.second, kPriorityNormal}));
 	}
 	for (const auto& pair : descr.input_workers()) {
-		worker_queues.push_back(
+		worker_queues.insert(
 		   std::make_pair(pair.first, InputQueueSetting{pair.second, pair.second, kPriorityNormal}));
 	}
 }
@@ -236,9 +236,14 @@ void ProductionsiteSettings::read(const Game& game, FileRead& fr, const TribesLe
                 }
 				const uint32_t fill = fr.unsigned_32();
 				const int32_t priority = fr.signed_32();
-				ware_queues.at(i).first = di;
-				ware_queues.at(i).second.desired_fill = fill;
-				ware_queues.at(i).second.priority = priority;
+                // Set the fill and priority if the queue exists.
+                // The check protects against changes in the input wares - we simply keep using the default instead in that case.
+                if (ware_queues.count(di) == 1) {
+                    InputQueueSetting& setme = ware_queues.at(di);
+                    // Don't fill it with more than currently possible
+                    setme.desired_fill = std::min(setme.max_fill, fill);
+                    setme.priority = priority;
+                }
 			}
 			for (uint32_t i = 0; i < nr_workers; ++i) {
                 DescriptionIndex di = Widelands::INVALID_INDEX;
@@ -251,9 +256,14 @@ void ProductionsiteSettings::read(const Game& game, FileRead& fr, const TribesLe
                 }
 				const uint32_t fill = fr.unsigned_32();
 				const int32_t priority = fr.signed_32();
-				worker_queues.at(i).first = di;
-				worker_queues.at(i).second.desired_fill = fill;
-				worker_queues.at(i).second.priority = priority;
+                // Set the fill and priority if the queue exists.
+                // The check protects against changes in the input workers - we simply keep using the default instead in that case.
+                if (worker_queues.count(di) == 1) {
+                    InputQueueSetting& setme = worker_queues.at(di);
+                    // Don't fill it with more than currently possible
+                    setme.desired_fill = std::min(setme.max_fill, fill);
+                    setme.priority = priority;
+                }
 			}
 		} else {
 			throw UnhandledVersionError(
@@ -322,7 +332,10 @@ void WarehouseSettings::read(const Game& game, FileRead& fr, const TribesLegacyL
                     di = tribe_.safe_ware_index(tribes_lookup_table.lookup_ware(name));
                 }
 				const uint8_t pref = fr.unsigned_8();
-				ware_preferences[di] = static_cast<StockPolicy>(pref);
+                // TODO(GunChleoc): Condition is savegame compatibility for Build 21
+                if (tribe_.has_ware(di)) {
+                    ware_preferences[di] = static_cast<StockPolicy>(pref);
+                }
 			}
 			for (uint32_t i = 0; i < nr_workers; ++i) {
                 DescriptionIndex di = Widelands::INVALID_INDEX;
@@ -334,7 +347,10 @@ void WarehouseSettings::read(const Game& game, FileRead& fr, const TribesLegacyL
                     di = tribe_.safe_worker_index(tribes_lookup_table.lookup_worker(name));
                 }
 				const uint8_t pref = fr.unsigned_8();
-				worker_preferences[di] = static_cast<StockPolicy>(pref);
+                // TODO(GunChleoc): Condition is savegame compatibility for Build 21
+                if (tribe_.has_worker(di)) {
+                    worker_preferences[di] = static_cast<StockPolicy>(pref);
+                }
 			}
 		} else {
 			throw UnhandledVersionError(

@@ -74,8 +74,8 @@ struct ProductionsiteSettings : public BuildingSettings {
 		uint32_t desired_fill;
 		int32_t priority;
 	};
-	std::vector<std::pair<DescriptionIndex, InputQueueSetting>> ware_queues;
-	std::vector<std::pair<DescriptionIndex, InputQueueSetting>> worker_queues;
+	std::map<DescriptionIndex, InputQueueSetting> ware_queues;
+	std::map<DescriptionIndex, InputQueueSetting> worker_queues;
 	bool stopped;
 };
 
