@@ -15,7 +15,6 @@ jobs:
         mkdir ~/.ssh || true
         echo "${{ secrets.LP_SSH }}" > ~/.ssh/id_rsa
         chmod 400 ~/.ssh/id_rsa
-        cat ~/.ssh/known_hosts || true # nocom
         echo "${{ secrets.LP_HOST }}" > ~/.ssh/known_hosts
         eval "$(ssh-agent -s)"
         ssh-add ~/.ssh/id_rsa
@@ -56,5 +55,6 @@ jobs:
         cd ~/wl_trunk
         bzr remove
         bzr add
-        bzr commit --strict -m "$(git show --oneline $GITHUB_SHA | grep -m 1 '')"
+        commit_message=$(git show --oneline $GITHUB_SHA | grep -m 1 "")
+        bzr commit --strict -m "$GITHUB_ACTOR: $commit_message"
         bzr push lp:~widelands-dev/widelands/test-github-mirror # :parent
