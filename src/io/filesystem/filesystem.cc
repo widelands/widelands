@@ -278,13 +278,13 @@ std::string FileSystem::illegal_filename_tooltip() {
 std::string FileSystem::get_homedir() {
 	std::string homedir;
 #ifdef _WIN32
-// Trying to get it compatible to ALL windows versions...
-// Could anybody please hit the Megasoft devs for not keeping
-// their own "standards"?
-char const* home_char;
+	// Trying to get it compatible to ALL windows versions...
+	// Could anybody please hit the Megasoft devs for not keeping
+	// their own "standards"?
+	char const* home_char;
 #define TRY_USE_AS_HOMEDIR(name)                                                                   \
-    home_char = getenv(name);                                                                         \
-    if (home_char != nullptr && *home_char != 0 && check_writeable_for_data(home_char))             \
+	home_char = getenv(name);                                                                       \
+	if (home_char != nullptr && *home_char != 0 && check_writeable_for_data(home_char))             \
 		return home_char;
 
 	TRY_USE_AS_HOMEDIR("USERPROFILE");
