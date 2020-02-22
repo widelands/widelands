@@ -127,8 +127,8 @@ private:
 	UI::Icon minimap_icon_;
 	std::unique_ptr<const Image> minimap_image_;
 	UI::Box* button_box_;
-
-	const std::string filename_list_string(const std::vector<SavegameData>& savefiles) const;
 };
+
+const std::string as_filename_list(const std::vector<SavegameData>& savefiles);
 
 #endif  // end of include guard: WL_WUI_GAMEDETAILS_H

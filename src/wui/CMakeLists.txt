@@ -86,6 +86,10 @@ wl_library(wui_common_gamedetails
     load_or_save_game.h
     savegametable.cc
     savegametable.h
+    savegamedeleter.cc
+    savegamedeleter.h
+    savegamedata.cc
+    savegamedata.h
   DEPENDS
     base_i18n
     base_log

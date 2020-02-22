@@ -127,6 +127,24 @@ SavegameData SavegameData::create_sub_dir(const std::string& directory) {
 	return SavegameData(directory, SavegameData::SavegameType::kSubDirectory);
 }
 
+const std::string as_filename_list(const std::vector<SavegameData>& savefiles) {
+	boost::format message;
+	for (const SavegameData& gamedata : savefiles) {
+		if (gamedata.is_directory()) {
+			continue;
+		} else if (gamedata.errormessage.empty()) {
+			std::vector<std::string> listme;
+			listme.push_back(richtext_escape(gamedata.mapname));
+			listme.push_back(gamedata.savedonstring);
+			message = (boost::format("%s\n%s") % message %
+			           i18n::localize_list(listme, i18n::ConcatenateWith::COMMA));
+		} else {
+			message = boost::format("%s\n%s") % message % richtext_escape(gamedata.filename);
+		}
+	}
+	return message.str();
+}
+
 GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
    : UI::Box(parent, 0, 0, UI::Box::Vertical),
      style_(style),
@@ -186,7 +204,7 @@ void GameDetails::display(const std::vector<SavegameData>& gamedata) {
 
 void GameDetails::show(const std::vector<SavegameData>& gamedata) {
 
-	std::string filename_list = richtext_escape(filename_list_string(gamedata));
+	std::string filename_list = richtext_escape(as_filename_list(gamedata));
 	boost::replace_all(filename_list, "\n", "<br> • ");
 	size_t nr_files = gamedata.size();
 
@@ -197,25 +215,6 @@ void GameDetails::show(const std::vector<SavegameData>& gamedata) {
 
 	descr_.set_text(as_richtext(as_heading_with_content("", filename_list, style_, true, true)));
 	minimap_icon_.set_visible(false);
-}
-
-const std::string
-GameDetails::filename_list_string(const std::vector<SavegameData>& savefiles) const {
-	boost::format message;
-	for (const SavegameData& gamedata : savefiles) {
-		if (gamedata.is_directory()) {
-			continue;
-		} else if (gamedata.errormessage.empty()) {
-			std::vector<std::string> listme;
-			listme.push_back(richtext_escape(gamedata.mapname));
-			listme.push_back(gamedata.savedonstring);
-			message = (boost::format("%s\n%s") % message %
-			           i18n::localize_list(listme, i18n::ConcatenateWith::COMMA));
-		} else {
-			message = boost::format("%s\n%s") % message % richtext_escape(gamedata.filename);
-		}
-	}
-	return message.str();
 }
 
 void GameDetails::show(const SavegameData& gamedata) {

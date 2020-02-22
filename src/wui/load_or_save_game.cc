@@ -193,10 +193,6 @@ GameDetails* LoadOrSaveGame::game_details() {
 	return &game_details_;
 }
 
-const std::string LoadOrSaveGame::get_filename(uint32_t index) const {
-	return get_savegame(index).filename;
-}
-
 const std::string LoadOrSaveGame::create_header(const size_t no_selections) const {
 	std::string header = "";
 	if (filetype_ == FileType::kReplay) {
@@ -223,11 +219,11 @@ const std::string LoadOrSaveGame::create_header(const size_t no_selections) cons
 	return header;
 }
 
-bool LoadOrSaveGame::show_confirmation_window(std::set<uint32_t>& selections) const {
+bool LoadOrSaveGame::show_confirmation_window(const std::vector<SavegameData>& selections) const {
 	size_t no_selections = selections.size();
 	std::string confirmation_window_header = create_header(no_selections);
 	const std::string message =
-	   (boost::format("%s\n%s") % confirmation_window_header % "filename_list_string()").str();
+	   (boost::format("%s\n%s") % confirmation_window_header % as_filename_list(selections)).str();
 
 	UI::WLMessageBox confirmationBox(
 	   parent_->get_parent()->get_parent(),
@@ -236,44 +232,44 @@ bool LoadOrSaveGame::show_confirmation_window(std::set<uint32_t>& selections) co
 	return confirmationBox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk;
 }
 
-std::set<uint32_t> LoadOrSaveGame::try_to_delete(std::set<uint32_t>& selections) const {
+uint32_t LoadOrSaveGame::try_to_delete(const std::vector<SavegameData>& to_be_deleted) const {
 	// Failed deletions aren't a serious problem, we just catch the errors
 	// and keep track to notify the player.
-	std::set<uint32_t> failed_selections;
+	uint32_t failed_deletions = 0;
 	bool failed;
-	for (const uint32_t index : selections) {
+	for (const auto& delete_me : to_be_deleted) {
 		failed = false;
-		const std::string& deleteme = get_filename(index);
+		const std::string& file_to_be_deleted = delete_me.filename;
 		try {
-			g_fs->fs_unlink(deleteme);
+			g_fs->fs_unlink(file_to_be_deleted);
 		} catch (const FileError& e) {
 			log("player-requested file deletion failed: %s", e.what());
 			failed = true;
 		}
 		if (filetype_ == FileType::kReplay) {
 			try {
-				g_fs->fs_unlink(deleteme + kSavegameExtension);
+				g_fs->fs_unlink(file_to_be_deleted + kSavegameExtension);
 				// If at least one of the two relevant files of a replay are
 				// successfully deleted then count it as success.
 				// (From the player perspective the replay is gone.)
 				failed = false;
 				// If it was a multiplayer replay, also delete the synchstream. Do
 				// it here, so it's only attempted if replay deletion was successful.
-				if (g_fs->file_exists(deleteme + kSyncstreamExtension)) {
-					g_fs->fs_unlink(deleteme + kSyncstreamExtension);
+				if (g_fs->file_exists(file_to_be_deleted + kSyncstreamExtension)) {
+					g_fs->fs_unlink(file_to_be_deleted + kSyncstreamExtension);
 				}
 			} catch (const FileError& e) {
 				log("player-requested file deletion failed: %s", e.what());
 			}
 		}
 		if (failed) {
-			failed_selections.insert(index);
+			++failed_deletions;
 		}
 	}
-	return failed_selections;
+	return failed_deletions;
 }
 
-void LoadOrSaveGame::deletion_failed(std::set<uint32_t>& selections,
+void LoadOrSaveGame::deletion_failed(const uint32_t no_to_be_deleted,
                                      const uint32_t no_failed) const {
 
 	// Notify the player.
@@ -281,7 +277,7 @@ void LoadOrSaveGame::deletion_failed(std::set<uint32_t>& selections,
 	   (no_failed == 1) ? _("Error Deleting File!") : _("Error Deleting Files!");
 	std::string header = "";
 	if (filetype_ == FileType::kReplay) {
-		if (selections.size() == 1) {
+		if (no_to_be_deleted == 1) {
 			header = _("The replay could not be deleted.");
 		} else {
 			header = (boost::format(ngettext("%d replay could not be deleted.",
@@ -290,7 +286,7 @@ void LoadOrSaveGame::deletion_failed(std::set<uint32_t>& selections,
 			            .str();
 		}
 	} else {
-		if (selections.size() == 1) {
+		if (no_to_be_deleted == 1) {
 			header = _("The game could not be deleted.");
 		} else {
 			header = (boost::format(ngettext("%d game could not be deleted.",
@@ -306,10 +302,10 @@ void LoadOrSaveGame::deletion_failed(std::set<uint32_t>& selections,
 	msgBox.run<UI::Panel::Returncodes>();
 }
 
-void LoadOrSaveGame::delete_own(std::set<uint32_t>& selections) {
-	uint32_t number_of_failed_deletes = try_to_delete(selections).size();
+void LoadOrSaveGame::delete_own(const std::vector<SavegameData>& to_be_deleted) {
+	uint32_t number_of_failed_deletes = try_to_delete(to_be_deleted);
 	if (number_of_failed_deletes > 0) {
-		deletion_failed(selections, number_of_failed_deletes);
+		deletion_failed(to_be_deleted.size(), number_of_failed_deletes);
 	}
 }
 void LoadOrSaveGame::update_table(std::set<uint32_t>& selections) {
@@ -338,11 +334,11 @@ void LoadOrSaveGame::clicked_delete() {
 
 	bool do_delete = SDL_GetModState() & KMOD_CTRL;
 	if (!do_delete) {
-		do_delete = show_confirmation_window(selections);
+		do_delete = show_confirmation_window(selected);
 		table_->focus();
 	}
 	if (do_delete) {
-		delete_own(selections);
+		delete_own(selected);
 		update_table(selections);
 	}
 }
