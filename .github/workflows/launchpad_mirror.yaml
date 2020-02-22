@@ -10,9 +10,10 @@ jobs:
     steps:
     - name: Setting up bazaar
       run: |
-        # sudo apt-get update
-        # sudo apt-get install bzr openssh-client 
+        sudo apt-get update
+        sudo apt-get install bzr openssh-client 
         echo "${{ secrets.LP_SSH }}" > .lp_key
+        eval "$(ssh-agent -s)"
         ssh-add .lp_key
         bzr whoami "bunnybot"
     - name: Checkout master
