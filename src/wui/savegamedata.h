@@ -5,6 +5,10 @@
 #include "logic/widelands.h"
 #include <stdint.h>
 #include <string>
+
+/**
+ * Data about a savegame/replay that we're interested in.
+ */
 class SavegameData {
 public:
 	enum class SavegameType { kSavegame, kParentDirectory, kSubDirectory };
@@ -64,5 +68,5 @@ private:
 	/// Savegame or directory
 	SavegameType type_;
 };
-
+const std::string as_filename_list(const std::vector<SavegameData>& savefiles);
 #endif  // SAVEGAMEDATA_H

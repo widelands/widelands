@@ -28,6 +28,7 @@
 #include "ui_basic/panel.h"
 #include "ui_basic/table.h"
 #include "wui/gamedetails.h"
+#include "wui/savegamedeleter.h"
 #include "wui/savegametable.h"
 
 /// Common functions for loading or saving a game or replay.
@@ -92,6 +93,7 @@ private:
 	UI::Panel* parent_;
 	UI::Box* table_box_;
 	FileType filetype_;
+	SavegameDeleter savegame_deleter_;
 
 	SavegameTable* table_;
 	std::vector<SavegameData> games_data_;
@@ -113,12 +115,8 @@ private:
 	const std::vector<SavegameData>
 	get_selected_savegames(const std::set<uint32_t>& selections) const;
 	void set_tooltips_of_buttons(size_t nr_of_selected_items) const;
-	const std::string create_header(const size_t no_selections) const;
-	bool show_confirmation_window(const std::vector<SavegameData>& selections) const;
 	void delete_own(const std::vector<SavegameData>& to_be_deleted);
-	uint32_t try_to_delete(const std::vector<SavegameData>& selections) const;
 	void update_table(std::set<uint32_t>& selections);
-	void deletion_failed(const uint32_t no_to_be_deleted, const uint32_t no_failed) const;
 };
 
 #endif  // end of include guard: WL_WUI_LOAD_OR_SAVE_GAME_H

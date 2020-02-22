@@ -1,6 +1,7 @@
-#include "savegamedata.h"
+#include "wui/savegamedata.h"
 #include "base/i18n.h"
 #include "base/time_string.h"
+#include "graphic/text_layout.h"
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
@@ -95,4 +96,22 @@ SavegameData SavegameData::create_parent_dir(const std::string& current_dir) {
 
 SavegameData SavegameData::create_sub_dir(const std::string& directory) {
 	return SavegameData(directory, SavegameData::SavegameType::kSubDirectory);
+}
+
+const std::string as_filename_list(const std::vector<SavegameData>& savefiles) {
+	boost::format message;
+	for (const SavegameData& gamedata : savefiles) {
+		if (gamedata.is_directory()) {
+			continue;
+		} else if (gamedata.errormessage.empty()) {
+			std::vector<std::string> listme;
+			listme.push_back(richtext_escape(gamedata.mapname));
+			listme.push_back(gamedata.savedonstring);
+			message = (boost::format("%s\n%s") % message %
+			           i18n::localize_list(listme, i18n::ConcatenateWith::COMMA));
+		} else {
+			message = boost::format("%s\n%s") % message % richtext_escape(gamedata.filename);
+		}
+	}
+	return message.str();
 }
