@@ -169,7 +169,7 @@ BuildingSettings* BuildingSettings::load(const Game& game, const TribeDescr& tri
 				break;
 			}
             default:
-                throw wexception(
+                throw GameDataError(
 				   "Unsupported building category %s (%s)", to_string(descr->type()).c_str(), name.c_str());
 			}
 			result->read(game, fr, tribes_lookup_table);
@@ -332,7 +332,7 @@ void WarehouseSettings::read(const Game& game, FileRead& fr, const TribesLegacyL
                     di = tribe_.safe_ware_index(tribes_lookup_table.lookup_ware(name));
                 }
 				const uint8_t pref = fr.unsigned_8();
-                // TODO(GunChleoc): Condition is savegame compatibility for Build 21
+                // Condition protects against changes in the tribe's roster
                 if (tribe_.has_ware(di)) {
                     ware_preferences[di] = static_cast<StockPolicy>(pref);
                 }
@@ -347,7 +347,7 @@ void WarehouseSettings::read(const Game& game, FileRead& fr, const TribesLegacyL
                     di = tribe_.safe_worker_index(tribes_lookup_table.lookup_worker(name));
                 }
 				const uint8_t pref = fr.unsigned_8();
-                // TODO(GunChleoc): Condition is savegame compatibility for Build 21
+                // Condition protects against changes in the tribe's roster
                 if (tribe_.has_worker(di)) {
                     worker_preferences[di] = static_cast<StockPolicy>(pref);
                 }
