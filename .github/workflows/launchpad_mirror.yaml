@@ -1,0 +1,53 @@
+name: Launchpad Mirror
+on:
+  push:
+#    branches:
+#      - master
+jobs:
+  mirror:
+    name: Copying master branch to Launchpad
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setting up bazaar
+      run: |
+#        sudo apt-get update
+#        sudo apt-get install bzr openssh-client 
+        echo "${{ secrets.LP_SSH }}" > ~/.ssh/.id_rsa
+        ssh-add ~/.ssh/.id_rsa
+        bzr whoami "bunnybot"
+    - name: Checkout master
+      run: git clone --depth 1 https://github.com/widelands/widelands.git wl_master
+    - name: Checkout trunk
+      run: bzr branch lp:widelands wl_trunk
+    - name: Cleaning tree
+      run: |
+        cd wl_trunk
+        for file in *
+        do
+          if ! [ "$file" == ".bzr" ]
+          then
+            rm -r "$file"
+          fi
+        done
+    - name: Copying files
+      run: |
+        cd ../wl_master
+        for file in *
+        do
+          if ! [ "$file" == ".git" ]
+          then
+            if [[ "$file" =~ ".git*" ]]
+            then
+              cp -r $file ../wl_trunk/.bzr${file#*.git}
+            else
+              cp -r $file ../wl_trunk/$file
+            fi
+          fi
+        done
+    - name: Committing and pushing changes
+      run: |
+        cd ../wl_trunk
+        bzr add .
+        bzr status
+        bzr commit --strict -m "$(git show --oneline $GITHUB_SHA | grep -m 1 '')"
+#        bzr push :parent
