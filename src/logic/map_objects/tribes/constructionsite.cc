@@ -240,14 +240,15 @@ bool ConstructionSite::init(EditorGameBase& egbase) {
 void ConstructionSite::init_settings() {
 	assert(building_);
 	assert(!settings_);
+    const TribeDescr& tribe = owner().tribe();
 	if (upcast(const WarehouseDescr, wd, building_)) {
-		settings_.reset(new WarehouseSettings(*wd, owner().tribe()));
+		settings_.reset(new WarehouseSettings(*wd, tribe));
 	} else if (upcast(const TrainingSiteDescr, td, building_)) {
-		settings_.reset(new TrainingsiteSettings(*td));
+		settings_.reset(new TrainingsiteSettings(*td, tribe));
 	} else if (upcast(const ProductionSiteDescr, pd, building_)) {
-		settings_.reset(new ProductionsiteSettings(*pd));
+		settings_.reset(new ProductionsiteSettings(*pd, tribe));
 	} else if (upcast(const MilitarySiteDescr, md, building_)) {
-		settings_.reset(new MilitarysiteSettings(*md));
+		settings_.reset(new MilitarysiteSettings(*md, tribe));
 	} else {
 		// TODO(Nordfriese): Add support for markets when trading is implemented
 		log("WARNING: Created constructionsite for a %s, which is not of any known building type\n",
@@ -387,6 +388,7 @@ void ConstructionSite::enhance(Game&) {
 		return old_max - old_des >= new_max ? 0 : new_max - old_max + old_des;
 	};
 
+    // NOCOM make more efficient with switch
 	BuildingSettings* old_settings = settings_.release();
 	if (upcast(const WarehouseDescr, wd, building_)) {
 		upcast(WarehouseSettings, ws, old_settings);
@@ -403,7 +405,7 @@ void ConstructionSite::enhance(Game&) {
 	} else if (upcast(const TrainingSiteDescr, td, building_)) {
 		upcast(TrainingsiteSettings, ts, old_settings);
 		assert(ts);
-		TrainingsiteSettings* new_settings = new TrainingsiteSettings(*td);
+		TrainingsiteSettings* new_settings = new TrainingsiteSettings(*td, owner().tribe());
 		settings_.reset(new_settings);
 		new_settings->stopped = ts->stopped;
 		for (const auto& pair_old : ts->ware_queues) {
@@ -431,7 +433,7 @@ void ConstructionSite::enhance(Game&) {
 	} else if (upcast(const ProductionSiteDescr, pd, building_)) {
 		upcast(ProductionsiteSettings, ps, old_settings);
 		assert(ps);
-		ProductionsiteSettings* new_settings = new ProductionsiteSettings(*pd);
+		ProductionsiteSettings* new_settings = new ProductionsiteSettings(*pd, owner().tribe());
 		settings_.reset(new_settings);
 		new_settings->stopped = ps->stopped;
 		for (const auto& pair_old : ps->ware_queues) {
@@ -457,7 +459,7 @@ void ConstructionSite::enhance(Game&) {
 	} else if (upcast(const MilitarySiteDescr, md, building_)) {
 		upcast(MilitarysiteSettings, ms, old_settings);
 		assert(ms);
-		MilitarysiteSettings* new_settings = new MilitarysiteSettings(*md);
+		MilitarysiteSettings* new_settings = new MilitarysiteSettings(*md, owner().tribe());
 		settings_.reset(new_settings);
 		new_settings->desired_capacity = std::max<uint32_t>(
 		   1,

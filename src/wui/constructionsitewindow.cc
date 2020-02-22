@@ -137,6 +137,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 		// a simplified faksimile of the later building window that contains only
 		// the relevant options.
 		bool nothing_added = false;
+        // NOCOM make more efficient with switch
 		UI::Box& settings_box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
 		if (upcast(Widelands::ProductionsiteSettings, ps, construction_site->get_settings())) {
 			for (const auto& pair : ps->ware_queues) {
