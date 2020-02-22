@@ -13,9 +13,10 @@ jobs:
         sudo apt-get update
         sudo apt-get install bzr
         mkdir ~/.ssh || true
-        echo "${{ secrets.LP_SSH_PRIVATE }}" > ~/.ssh/id_rsa
-        echo "${{ secrets.LP_SSH_PUBLIC }}" > ~/.ssh/id_rsa.pub
+        echo "${{ secrets.LP_SSH }}" > ~/.ssh/id_rsa
         chmod 400 ~/.ssh/id_rsa
+        cat ~/.ssh/known_hosts || true # nocom
+        echo "${{ secrets.LP_HOST }}" > ~/.ssh/known_hosts
         eval "$(ssh-agent -s)"
         ssh-add ~/.ssh/id_rsa
         bzr whoami "Wideland's Bunnybot <bunnybot@widelands.org>"
