@@ -51,12 +51,7 @@ jobs:
     - name: Committing and pushing changes
       run: |
         cd ~/wl_trunk
-        echo "TEST aaa" #
-        bzr status
-        echo "TEST bbb" #
+        bzr remove
         bzr add
-        echo "TEST ccc" #
-        bzr status
-        echo "TEST ddd" #
         bzr commit --strict -m "$(git show --oneline $GITHUB_SHA | grep -m 1 '')"
         # bzr push :parent
