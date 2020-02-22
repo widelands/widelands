@@ -12,8 +12,8 @@ jobs:
       run: |
         # sudo apt-get update
         # sudo apt-get install bzr openssh-client 
-        echo "${{ secrets.LP_SSH }}" > ~/.ssh/.id_rsa
-        ssh-add ~/.ssh/.id_rsa
+        echo "${{ secrets.LP_SSH }}" > .lp_key
+        ssh-add .lp_key
         bzr whoami "bunnybot"
     - name: Checkout master
       run: git clone --depth 1 https://github.com/widelands/widelands.git wl_master
