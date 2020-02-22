@@ -77,14 +77,12 @@ EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
      loader_ui_(nullptr),
      game_tips_(nullptr),
      tmp_fs_(nullptr) {
-	if (!lua_)  { // TODO(SirVer): this is sooo ugly, I can't say
+	if (!lua_) {  // TODO(SirVer): this is sooo ugly, I can't say
 		lua_.reset(new LuaEditorInterface(this));
-    }
+	}
 
-    loading_message_subscriber_ = Notifications::subscribe<UI::NoteLoadingMessage>(
-	   [this](const UI::NoteLoadingMessage& note) {
-        step_loader_ui(note.message);
-    });
+	loading_message_subscriber_ = Notifications::subscribe<UI::NoteLoadingMessage>(
+	   [this](const UI::NoteLoadingMessage& note) { step_loader_ui(note.message); });
 }
 
 EditorGameBase::~EditorGameBase() {
@@ -186,7 +184,7 @@ World* EditorGameBase::mutable_world() {
 		// world immediately though, because the lua scripts need to have access
 		// to world through this method already.
 		ScopedTimer timer("Loading the world took %ums");
-        Notifications::publish(UI::NoteLoadingMessage(_("Loading world…")));
+		Notifications::publish(UI::NoteLoadingMessage(_("Loading world…")));
 		world_.reset(new World());
 
 		try {
@@ -217,7 +215,7 @@ Tribes* EditorGameBase::mutable_tribes() {
 		// tribe immediately though, because the lua scripts need to have access
 		// to tribes through this method already.
 		ScopedTimer timer("Registering the tribes took %ums");
-        Notifications::publish(UI::NoteLoadingMessage(_("Loading tribes…")));
+		Notifications::publish(UI::NoteLoadingMessage(_("Loading tribes…")));
 		tribes_.reset(new Tribes(lua_.get()));
 	}
 	return tribes_.get();
@@ -242,8 +240,8 @@ Player* EditorGameBase::add_player(PlayerNumber const player_number,
                                    const std::string& tribe,
                                    const std::string& name,
                                    TeamNumber team) {
-    Notifications::publish(UI::NoteLoadingMessage(
-       (boost::format(_("Creating player %d…")) % static_cast<unsigned int>(player_number)).str()));
+	Notifications::publish(UI::NoteLoadingMessage(
+	   (boost::format(_("Creating player %d…")) % static_cast<unsigned int>(player_number)).str()));
 	return player_manager_->add_player(player_number, initialization_index, tribe, name, team);
 }
 

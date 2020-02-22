@@ -45,7 +45,7 @@ enum class NoteId : uint32_t {
 	GameSettings,
 	MapOptions,
 	MapObjectDescription,
-    LoadingMessage
+	LoadingMessage
 };
 
 #endif  // end of include guard: WL_NOTIFICATIONS_NOTE_IDS_H

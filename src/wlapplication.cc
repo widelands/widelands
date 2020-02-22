@@ -1359,7 +1359,7 @@ bool WLApplication::new_game() {
 			}
 			game.create_loader_ui(tipstexts, false);
 
-            Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
+			Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
 			game.set_game_controller(ctrl.get());
 			game.init_newgame(sp.settings());
