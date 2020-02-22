@@ -53,7 +53,7 @@ public:
 	virtual FilenameSet list_directory(const std::string& directory) const = 0;
 
 	virtual bool is_writable() const = 0;
-	virtual bool is_directory(const std::string& path) = 0;
+	virtual bool is_directory(const std::string& path) const = 0;
 	virtual bool file_exists(const std::string& path) const = 0;
 
 	virtual void* load(const std::string& fname, size_t& length) = 0;

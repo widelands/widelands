@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-02-06 08:26+0000\n"
+"POT-Creation-Date: 2020-02-21 18:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -524,7 +524,7 @@ msgstr ""
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:155
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:54
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:65
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:64
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:58
 #: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:52
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:56
@@ -534,7 +534,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:56
 #: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:58
 #: ../../data/tribes/buildings/productionsites/atlanteans/spiderfarm/init.lua:53
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:65
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:64
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:61
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:58
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:53
@@ -746,8 +746,8 @@ msgid "Crystal Mine"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:75
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:119
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:74
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:118
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:63
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:74
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:75
@@ -760,26 +760,26 @@ msgid "mining granite"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining quartz because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:91
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:127
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:90
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:126
 msgid "mining quartz"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining diamonds because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:107
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:135
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:106
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:134
 msgid "mining diamonds"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:169
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:168
 msgid "No Crystal"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:170
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:169
 msgid "Main Crystal Vein Exhausted"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:172
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:171
 msgctxt "atlanteans_building"
 msgid ""
 "This crystal mine’s main vein is exhausted. Expect strongly diminished "
@@ -1204,7 +1204,7 @@ msgid "Toolsmithy"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:84
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:83
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:94
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:107
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:182
@@ -1212,12 +1212,12 @@ msgid "making a bread paddle"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pair of buckets because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:96
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:95
 msgid "making a pair of buckets"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making fire tongs because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:108
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:107
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:118
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:119
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:215
@@ -1225,13 +1225,13 @@ msgid "making fire tongs"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:120
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:119
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:171
 msgid "making a fishing net"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:132
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:131
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:142
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:143
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:204
@@ -1239,35 +1239,35 @@ msgid "making a hammer"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hook pole because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:144
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:143
 msgid "making a hook pole"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting bow because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:156
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:155
 msgid "making a hunting bow"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making milking tongs because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:168
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:167
 msgid "making milking tongs"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:180
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:179
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:178
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:179
 msgid "making a pick"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a saw because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:192
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:191
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:191
 msgid "making a saw"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:204
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:203
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:190
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:203
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:127
@@ -1275,7 +1275,7 @@ msgid "making a scythe"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:216
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:215
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:202
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:215
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:138
@@ -2373,7 +2373,7 @@ msgid "Aqua Farm"
 msgstr ""
 
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:101
-#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:101
+#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:100
 msgid "No Ponds"
 msgstr ""
 
@@ -2538,11 +2538,11 @@ msgstr ""
 msgid "collecting coal"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:102
+#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:101
 msgid "Out of Clay Ponds"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:103
+#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:102
 msgctxt "frisians_building"
 msgid ""
 "The charcoal burner working at this charcoal burner’s house can’t find any "
@@ -3935,13 +3935,11 @@ msgstr ""
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/preload.lua:68
-msgid "Frisians (experimental)"
+msgid "Frisians"
 msgstr ""
 
 #: ../../data/tribes/preload.lua:69
-msgid ""
-"The inhabitants of the rough North Sea shore. This tribe is still under "
-"development."
+msgid "The inhabitants of the rough North Sea shore."
 msgstr ""
 
 #: ../../data/tribes/scripting/help/init.lua:54

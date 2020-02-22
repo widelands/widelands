@@ -44,9 +44,10 @@ GameSaver::GameSaver(FileSystem& fs, Game& game) : fs_(fs), game_(game) {
 void GameSaver::save() {
 	ScopedTimer timer("GameSaver::save() took %ums");
 
-	assert(game_.get_loader_ui());
+	// We might not have a loader UI during emergency saves, so we don't assert that we have one.
+	// We also don't want it for game objectives.
 	auto set_progress_message = [this](std::string text, int step) {
-		game_.get_loader_ui()->step(
+		game_.step_loader_ui(
 		   step < 0 ? text :
 		              (boost::format(_("Saving game: %1$s (%2$d/%3$d)")) % text % step % 5).str());
 	};

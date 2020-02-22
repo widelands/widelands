@@ -244,7 +244,7 @@ bool ZipFilesystem::file_exists(const std::string& path) const {
  * Returns true if the given file is a directory, and false if it doesn't.
  * Also returns false if the pathname is invalid
  */
-bool ZipFilesystem::is_directory(const std::string& path) {
+bool ZipFilesystem::is_directory(const std::string& path) const {
 
 	if (!file_exists(path))
 		return false;
