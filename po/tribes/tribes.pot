@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-02-20 07:30+0000\n"
+"POT-Creation-Date: 2020-02-21 18:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -3935,13 +3935,11 @@ msgstr ""
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/preload.lua:68
-msgid "Frisians (experimental)"
+msgid "Frisians"
 msgstr ""
 
 #: ../../data/tribes/preload.lua:69
-msgid ""
-"The inhabitants of the rough North Sea shore. This tribe is still under "
-"development."
+msgid "The inhabitants of the rough North Sea shore."
 msgstr ""
 
 #: ../../data/tribes/scripting/help/init.lua:54
