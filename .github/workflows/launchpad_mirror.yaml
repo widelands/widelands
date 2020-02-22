@@ -15,9 +15,9 @@ jobs:
         echo "${{ secrets.LP_SSH }}" > ~/.lp_key
         chmod 400 ~/.lp_key
         eval "$(ssh-agent -s)"
-        # ssh-add ~/.lp_key
-        # bzr launchpad-login "widelandsofficial"
-        bzr whoami "bunnybot"
+        ssh-add ~/.lp_key
+        bzr whoami "Wideland's Bunnybot <bunnybot@widelands.org>"
+        bzr launchpad-login "nordfriese" # nocom widelandsofficial
     - name: Checkout master
       run: |
         cd ~
@@ -54,4 +54,4 @@ jobs:
         bzr remove
         bzr add
         bzr commit --strict -m "$(git show --oneline $GITHUB_SHA | grep -m 1 '')"
-        # bzr push :parent
+        bzr push lp:~widelands-dev/widelands/test-github-mirror # :parent
