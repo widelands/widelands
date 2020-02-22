@@ -13,6 +13,7 @@ jobs:
         sudo apt-get update
         sudo apt-get install bzr openssh-client 
         echo "${{ secrets.LP_SSH }}" > .lp_key
+        chmod 400 .lp_key
         eval "$(ssh-agent -s)"
         ssh-add .lp_key
         bzr whoami "bunnybot"
