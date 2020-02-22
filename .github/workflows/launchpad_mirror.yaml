@@ -12,10 +12,12 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install bzr
-        echo "${{ secrets.LP_SSH }}" > ~/.lp_key
-        chmod 400 ~/.lp_key
+        mkdir ~/.ssh || true
+        echo "${{ secrets.LP_SSH_PRIVATE }}" > ~/.ssh/id_rsa
+        echo "${{ secrets.LP_SSH_PUBLIC }}" > ~/.ssh/id_rsa.pub
+        chmod 400 ~/.ssh/id_rsa
         eval "$(ssh-agent -s)"
-        ssh-add ~/.lp_key
+        ssh-add ~/.ssh/id_rsa
         bzr whoami "Wideland's Bunnybot <bunnybot@widelands.org>"
         bzr launchpad-login "nordfriese" # nocom widelandsofficial
     - name: Checkout master
