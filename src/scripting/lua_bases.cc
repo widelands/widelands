@@ -23,6 +23,8 @@
 #include <boost/format.hpp>
 
 #include "economy/economy.h"
+#include "economy/road.h"
+#include "economy/waterway.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
@@ -745,20 +747,18 @@ int LuaPlayerBase::place_road(lua_State* L) {
 
 	RoadBase* r = nullptr;
 	if (force_road) {
-		switch (roadtype) {
-		case "normal":
-		case "busy": {
-			Road& road = get(L, egbase).force_road(path);
-			road.set_busy(egbase, roadtype == "busy");
-			r = &road;
-		} break;
-		case "waterway":
+		if (roadtype == "waterway") {
 			r = &get(L, egbase).force_waterway(path);
-			break;
-		default:
-			report_error(
-			   L, "Invalid road type '%s' (permitted values are 'normal', 'busy', and 'waterway'",
-			   roadtype.c_str());
+		} else {
+			Road& road = get(L, egbase).force_road(path);
+			if (roadtype == "busy") {
+				road.set_busy(egbase, true);
+			} else if (roadtype != "normal") {
+				report_error(
+				   L, "Invalid road type '%s' (permitted values are 'normal', 'busy', and 'waterway'",
+				   roadtype.c_str());
+			}
+			r = &road;
 		}
 	} else {
 		BaseImmovable* bi = map.get_immovable(current);
@@ -769,22 +769,18 @@ int LuaPlayerBase::place_road(lua_State* L) {
 		if (bi && bi == starting_flag)
 			report_error(L, "Cannot build a closed loop!");
 
-		switch (roadtype) {
-		case "normal":
-		case "busy": {
+		if (roadtype == "waterway") {
+			r = get(L, egbase).build_waterway(path);
+		} else {
 			Road* road = get(L, egbase).build_road(path);
-			if (road) {
-				road->set_busy(egbase, roadtype == "busy");
+			if (roadtype == "busy") {
+				if (road) road->set_busy(egbase, true);
+			} else if (roadtype != "normal") {
+				report_error(
+				   L, "Invalid road type '%s' (permitted values are 'normal', 'busy', and 'waterway'",
+				   roadtype.c_str());
 			}
 			r = road;
-		} break;
-		case "waterway":
-			r = get(L, egbase).build_waterway(path);
-			break;
-		default:
-			report_error(
-			   L, "Invalid road type '%s' (permitted values are 'normal', 'busy', and 'waterway'",
-			   roadtype.c_str());
 		}
 	}
 

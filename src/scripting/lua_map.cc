@@ -5515,7 +5515,7 @@ int LuaMilitarySite::get_capacity(lua_State* L) {
 	return 1;
 }
 int LuaMilitarySite::set_capacity(lua_State* L) {
-	lua_pushuint32(get(L, get_egbase(L))->soldier_control()->get_soldier_capacity());
+	lua_pushuint32(L, get(L, get_egbase(L))->soldier_control()->soldier_capacity());
 	return 0;
 }
 

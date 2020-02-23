@@ -453,7 +453,7 @@ Flag* Player::build_flag(const Coords& c) {
 }
 
 Flag& Player::force_flag(const FCoords& c) {
-	log("Forcing flag at (%i, %i)\n", c.x, c.y);
+	if (g_verbose) log("Forcing flag at (%i, %i)\n", c.x, c.y);
 	const Map& map = egbase().map();
 	if (BaseImmovable* const immovable = c.field->get_immovable()) {
 		if (upcast(Flag, existing_flag, immovable)) {
@@ -521,7 +521,7 @@ Road& Player::force_road(const Path& path) {
 	Path::StepVector::size_type const laststep = path.get_nsteps() - 1;
 	for (Path::StepVector::size_type i = 0; i < laststep; ++i) {
 		c = map.get_neighbour(c, path[i]);
-		log("Clearing for road at (%i, %i)\n", c.x, c.y);
+		if (g_verbose) log("Clearing for road at (%i, %i)\n", c.x, c.y);
 
 		//  Make sure that the player owns the area around.
 		egbase().conquer_area_no_building(
@@ -587,7 +587,7 @@ Waterway& Player::force_waterway(const Path& path) {
 	Path::StepVector::size_type const laststep = path.get_nsteps() - 1;
 	for (Path::StepVector::size_type i = 0; i < laststep; ++i) {
 		c = map.get_neighbour(c, path[i]);
-		log("Clearing for waterway at (%i, %i)\n", c.x, c.y);
+		if (g_verbose) log("Clearing for waterway at (%i, %i)\n", c.x, c.y);
 
 		//  Make sure that the player owns the area around.
 		egbase().conquer_area_no_building(
@@ -758,7 +758,7 @@ void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
 						                         primary_road->get_flag(RoadBase::FlagEnd) :
 						                         primary_start;
 						primary_road->destroy(egbase());
-						log("destroying road/waterway from (%i, %i) going in dir %u\n",
+						if (g_verbose) log("destroying road/waterway from (%i, %i) going in dir %u\n",
 						    flag->get_position().x, flag->get_position().y, primary_road_id);
 						//  The primary road is gone. Now see if the flag at the other
 						//  end of it is a dead-end.

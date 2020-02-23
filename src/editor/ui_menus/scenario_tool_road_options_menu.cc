@@ -135,14 +135,14 @@ ScenarioToolRoadOptionsMenu::ScenarioToolRoadOptionsMenu(EditorInteractive& pare
 void ScenarioToolRoadOptionsMenu::think() {
 	EditorToolOptionsMenu::think();
 	const EditorInteractive& e = eia();
-	info_.set_text(e.is_building_waterway() ?
-	                  e.get_build_waterway_start() == e.get_build_waterway_end() ?
+	info_.set_text(e.in_road_building_mode(RoadBuildingType::kRoad) ?
+	                  e.get_build_road_start() == e.get_build_road_end() ?
 	                  _("Click on fields to determine the waterway’s path, or click the start flag "
 	                    "again to cancel.") :
 	                  _("Click on fields to determine the waterway’s path. Click on the end field "
 	                    "again to build a flag there. Hold down Ctrl to automatically place flags "
 	                    "along the way. Double-click the start flag to cancel.") :
-	                  e.is_building_road() ?
+	                  e.in_road_building_mode(RoadBuildingType::kWaterway) ?
 	                  e.get_build_road_start() == e.get_build_road_end() ?
 	                  _("Click on fields to determine the road’s path, or click the start flag "
 	                    "again to cancel.") :

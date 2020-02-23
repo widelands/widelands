@@ -12,6 +12,7 @@ wl_library(editor
   DEPENDS
     base_macros
     editor_ui
+    economy
     wui
     ui_basic
     editor_tools_ui
