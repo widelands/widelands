@@ -156,7 +156,7 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 void WarehouseWaresPanel::set_policy(Widelands::StockPolicy newpolicy) {
 	if (gb_.can_act(wh_.owner().player_number())) {
 		bool is_workers = type_ == Widelands::wwWORKER;
-		const std::set<Widelands::DescriptionIndex> indices =
+		const std::set<Widelands::DescriptionIndex>& indices =
 		   is_workers ? wh_.owner().tribe().workers() : wh_.owner().tribe().wares();
 
 		for (const Widelands::DescriptionIndex& index : indices) {
