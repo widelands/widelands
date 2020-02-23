@@ -46,8 +46,33 @@ init = {
       {
          log = 1,
          brick = 2,
+         granite = 2,
+         reed = 3,
+         frisians_claydigger = 1,
+         frisians_soldier = 1,
+         frisians_brickmaker = 1,
+      },
+      {
+         brick = 1,
+         iron = 6,
+         frisians_blacksmith = 1,
+         frisians_soldier = 1,
+         frisians_geologist = 1,
+         frisians_miner = 1,
+         frisians_smelter = 1,
+      },
+      {
+         log = 3,
+         brick = 4,
+         reed = 3,
+         frisians_stonemason = 1,
+         frisians_reed_farmer = 1,
+      },
+      {
+         brick = 2,
          reed = 2,
          granite = 2,
+         iron = 2,
          frisians_soldier = 1,
          frisians_geologist = 1,
          frisians_miner = 1,
@@ -61,36 +86,12 @@ init = {
          frisians_forester = 2,
       },
       {
-         brick = 2,
-         iron = 4,
-         frisians_blacksmith = 1,
-         frisians_soldier = 1,
-         frisians_geologist = 1,
-         frisians_miner = 1,
-         frisians_smelter = 1,
-      },
-      {
-         log = 4,
-         brick = 2,
-         reed = 2,
-         frisians_stonemason = 1,
-         frisians_reed_farmer = 1,
-      },
-      {
-         log = 3,
-         brick = 2,
-         granite = 2,
-         frisians_claydigger = 1,
-         frisians_soldier = 1,
-         frisians_brickmaker = 1,
-      },
-      {
          log = 5,
-         brick = 4,
+         brick = 5,
          frisians_stonemason = 1,
       },
       {
-         log = 1,
+         log = 2,
          brick = 2,
          reed = 2,
          granite = 2,
@@ -101,7 +102,7 @@ init = {
    }
    for i,f in pairs(fields) do
       local ship = player:place_ship(f)
-      if i > 3 then ship.capacity = 40 else ship.capacity = 41 end
+      if i > 4 then ship.capacity = 41 else ship.capacity = 42 end
       ship:make_expedition(items[i])
    end
    scroll_to_field(fields[1])
