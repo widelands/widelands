@@ -2,7 +2,7 @@
 #define WL_WUI_SAVEGAMETABLE_H
 
 #include "ui_basic/table.h"
-class SavegameData;
+#include "wui/gamedetails.h"
 
 /// A Table that displays savegames with support of displaying sub-directories
 /// It must be extended to define columns and how entries are created.

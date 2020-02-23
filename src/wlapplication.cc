@@ -1366,6 +1366,8 @@ bool WLApplication::new_game() {
 			game.run(Widelands::Game::NewNonScenario, "", false, "single_player");
 		} catch (const std::exception& e) {
 			log("Fatal exception: %s\n", e.what());
+			std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(game, true, pn));
+			game.set_game_controller(ctrl.get());
 			emergency_save(game);
 			throw;
 		}
