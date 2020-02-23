@@ -19,25 +19,18 @@
 
 #include "wui/load_or_save_game.h"
 
+#include <boost/algorithm/string.hpp>
 #include <ctime>
 #include <memory>
-
-#include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/time_string.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
-#include "helper.h"
-#include "io/filesystem/filesystem_exceptions.h"
-#include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
-#include "logic/replay.h"
-#include "ui_basic/messagebox.h"
 
 LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                                Widelands::Game& g,
@@ -47,7 +40,7 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
    : parent_(parent),
      table_box_(new UI::Box(parent, 0, 0, UI::Box::Vertical)),
      filetype_(filetype),
-     savegame_deleter_(parent),
+
      // Savegame description
      game_details_(
         parent,
@@ -65,6 +58,11 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
      basedir_(filetype_ == FileType::kReplay ? kReplayDir : kSaveDir),
      curdir_(basedir_),
      game_(g) {
+	if (filetype_ == FileType::kReplay) {
+		savegame_deleter_.reset(new ReplayDeleter(parent_));
+	} else {
+		savegame_deleter_.reset(new SavegameDeleter(parent_));
+	}
 
 	switch (filetype_) {
 	case FileType::kGameSinglePlayer:
@@ -78,14 +76,18 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 	}
 
 	table_->set_column_compare(0, boost::bind(&LoadOrSaveGame::compare_save_time, this, _1, _2));
+	// table_->set_column_compare(0, [this](uint32_t a, uint32_t b) { compare_save_time(a, b); });
 
 	table_->set_column_compare(table_->number_of_columns() - 1,
 	                           boost::bind(&LoadOrSaveGame::compare_map_name, this, _1, _2));
+	//	table_->set_column_compare(
+	//	   table_->number_of_columns() - 1, [this](uint32_t a, uint32_t b) { compare_map_name(a, b);
+	//});
 
 	table_box_->add(table_, UI::Box::Resizing::kExpandBoth);
 	game_details_.button_box()->add(delete_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	delete_->set_enabled(false);
-	delete_->sigclicked.connect(boost::bind(&LoadOrSaveGame::clicked_delete, boost::ref(*this)));
+	delete_->sigclicked.connect([this] { clicked_delete(); });
 
 	fill_table();
 }
@@ -218,7 +220,7 @@ void LoadOrSaveGame::clicked_delete() {
 	std::set<uint32_t> selections = table().selections();
 	const std::vector<SavegameData> selected = get_selected_savegames(selections);
 
-	if (savegame_deleter_.delete_savegames(selected)) {
+	if (savegame_deleter_->delete_savegames(selected)) {
 		update_table(selections);
 	}
 }

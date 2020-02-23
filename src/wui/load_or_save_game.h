@@ -93,7 +93,7 @@ private:
 	UI::Panel* parent_;
 	UI::Box* table_box_;
 	FileType filetype_;
-	SavegameDeleter savegame_deleter_;
+	std::unique_ptr<SavegameDeleter> savegame_deleter_;
 
 	SavegameTable* table_;
 	std::vector<SavegameData> games_data_;
