@@ -351,14 +351,14 @@ size_t Map::count_all_conquerable_fields() {
 	};
 
 	// Walk the map from the starting field of each player
-	for (const Coords& coords : starting_pos_) {
-		walk_starting_coords(coords, 9);
+	for (const Coords& c : starting_pos_) {
+		walk_starting_coords(c, 9);
 	}
 
 	// Walk the map from port spaces
 	if (allows_seafaring()) {
-		for (const Coords& coords : get_port_spaces()) {
-			walk_starting_coords(coords, 5);
+		for (const Coords& c : get_port_spaces()) {
+			walk_starting_coords(c, 5);
 		}
 	}
 
@@ -1827,13 +1827,13 @@ Return the time it takes to walk the given step from coords in the given
 direction, in milliseconds.
 ===============
 */
-int32_t Map::calc_cost(const Coords& coords, const int32_t dir) const {
+int32_t Map::calc_cost(const Coords& c, const int32_t dir) const {
 	FCoords f;
 	int32_t startheight;
 	int32_t delta;
 
 	// Calculate the height delta
-	f = get_fcoords(coords);
+	f = get_fcoords(c);
 	startheight = f.field->get_height();
 
 	get_neighbour(f, dir, &f);
@@ -1847,13 +1847,13 @@ int32_t Map::calc_cost(const Coords& coords, const int32_t dir) const {
 Calculate the average cost of walking the given step in both directions.
 ===============
 */
-int32_t Map::calc_bidi_cost(const Coords& coords, const int32_t dir) const {
+int32_t Map::calc_bidi_cost(const Coords& c, const int32_t dir) const {
 	FCoords f;
 	int32_t startheight;
 	int32_t delta;
 
 	// Calculate the height delta
-	f = get_fcoords(coords);
+	f = get_fcoords(c);
 	startheight = f.field->get_height();
 
 	get_neighbour(f, dir, &f);
@@ -1870,7 +1870,7 @@ with the cost of walking in said direction.
 ===============
 */
 void Map::calc_cost(const Path& path, int32_t* const forward, int32_t* const backward) const {
-	Coords coords = path.get_start();
+	Coords c = path.get_start();
 
 	if (forward)
 		*forward = 0;
@@ -1882,10 +1882,10 @@ void Map::calc_cost(const Path& path, int32_t* const forward, int32_t* const bac
 		const Direction dir = path[i];
 
 		if (forward)
-			*forward += calc_cost(coords, dir);
-		get_neighbour(coords, dir, &coords);
+			*forward += calc_cost(c, dir);
+		get_neighbour(c, dir, &c);
 		if (backward)
-			*backward += calc_cost(coords, get_reverse_dir(dir));
+			*backward += calc_cost(c, get_reverse_dir(dir));
 	}
 }
 
@@ -2328,15 +2328,15 @@ accordingly.
 The radius of modified fields is stored in area.
 =============
 */
-void Map::check_neighbour_heights(FCoords coords, uint32_t& area) {
-	assert(fields_.get() <= coords.field);
-	assert(coords.field < fields_.get() + max_index());
+void Map::check_neighbour_heights(FCoords fc, uint32_t& area) {
+	assert(fields_.get() <= fc.field);
+	assert(fc.field < fields_.get() + max_index());
 
-	int32_t height = coords.field->get_height();
+	int32_t height = fc.field->get_height();
 	bool check[] = {false, false, false, false, false, false};
 
 	const FCoords n[] = {
-	   tl_n(coords), tr_n(coords), l_n(coords), r_n(coords), bl_n(coords), br_n(coords)};
+	   tl_n(fc), tr_n(fc), l_n(fc), r_n(fc), bl_n(fc), br_n(fc)};
 
 	for (uint8_t i = 0; i < 6; ++i) {
 		Field& f = *n[i].field;
