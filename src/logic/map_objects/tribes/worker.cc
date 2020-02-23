@@ -561,11 +561,11 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 	FindNodeAnd functor;
 	functor.add(FindNodeSize(static_cast<FindNodeSize::Size>(action.iparam2)));
 	if (action.sparam1.size()) {
-        if (action.iparam4) {
+		if (action.iparam4) {
 			functor.add(FindNodeResourceBreedable(world.resource_index(action.sparam1.c_str())));
 		} else {
 			functor.add(FindNodeResource(world.resource_index(action.sparam1.c_str())));
-        }
+		}
 	}
 
 	if (action.iparam5 > -1)

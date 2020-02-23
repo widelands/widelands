@@ -78,7 +78,8 @@ struct Field {
 	struct Terrains {
 		DescriptionIndex d, r;
 	};
-	static_assert(sizeof(Terrains) == sizeof(DescriptionIndex) * 2, "assert(sizeof(Terrains) == sizeof(DescriptionIndex) * 2) failed.");
+	static_assert(sizeof(Terrains) == sizeof(DescriptionIndex) * 2,
+	              "assert(sizeof(Terrains) == sizeof(DescriptionIndex) * 2) failed.");
 	struct Resources {
 		DescriptionIndex d : 4, r : 4;
 	};
@@ -280,16 +281,14 @@ private:
 
 // Check that Field is tightly packed.
 #ifndef WIN32
-static_assert(sizeof(Field) == sizeof(void*) * 2
-              + sizeof(RoadSegment) * 3
-              + sizeof(DescriptionIndex) * 3
-              + sizeof(uint8_t) * 7,
+static_assert(sizeof(Field) ==
+                 sizeof(void*) * 2 + sizeof(RoadSegment) * 3 + sizeof(DescriptionIndex) * 3 +
+                    sizeof(uint8_t) * 7,
               "Field is not tightly packed.");
 #else
-static_assert(sizeof(Field) == sizeof(void*) * 2
-              + sizeof(RoadSegment) * 3
-              + sizeof(DescriptionIndex) * 3
-              + sizeof(uint8_t) * 7 + 1,
+static_assert(sizeof(Field) ==
+                 sizeof(void*) * 2 + sizeof(RoadSegment) * 3 + sizeof(DescriptionIndex) * 3 +
+                    sizeof(uint8_t) * 7 + 1,
               "Field is not tightly packed.");
 #endif
 }  // namespace Widelands

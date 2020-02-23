@@ -517,7 +517,9 @@ Immovable& EditorGameBase::do_create_immovable(const Coords& c,
  * idx is the bob type.
  */
 
-Bob& EditorGameBase::create_ship(const Coords& c, DescriptionIndex const ship_type_idx, Player* owner) {
+Bob& EditorGameBase::create_ship(const Coords& c,
+                                 DescriptionIndex const ship_type_idx,
+                                 Player* owner) {
 	const BobDescr* descr = dynamic_cast<const BobDescr*>(tribes().get_ship_descr(ship_type_idx));
 	return create_bob(c, *descr, owner);
 }
