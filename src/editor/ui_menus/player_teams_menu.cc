@@ -39,7 +39,7 @@ EditorPlayerTeamsMenu::PlayerRelationsPanel::PlayerRelationsPanel(UI::Panel* par
                                                                   EditorInteractive& e,
                                                                   uint8_t n)
    : UI::Panel(
-        parent, 0, 0, (n + 2) * kPlayerRelationsCellSize, (n + 1) * kPlayerRelationsCellSize),
+        parent, 0, 0, (n + 2) * kPlayerRelationsCellSize, (n + 2) * kPlayerRelationsCellSize),
      eia_(e),
      nr_players_(n) {
 	assert(eia_.finalized());
@@ -62,6 +62,7 @@ EditorPlayerTeamsMenu::PlayerRelationsPanel::PlayerRelationsPanel(UI::Panel* par
 		assert(teams_.size() == i);
 		teams_.push_back(std::unique_ptr<UI::Dropdown<uint8_t>>(dd));
 
+		assert(buttons_.size() == i * 2);
 		UI::Button* b = new UI::Button(
 		   this, "allowed_buildings_" + std::to_string(static_cast<unsigned>(i)),
 		   (n + 1) * kPlayerRelationsCellSize, (i + 1) * kPlayerRelationsCellSize,
@@ -71,7 +72,16 @@ EditorPlayerTeamsMenu::PlayerRelationsPanel::PlayerRelationsPanel(UI::Panel* par
 		    eia_.egbase().map().get_scenario_player_name(i + 1))
 		      .str());
 		b->sigclicked.connect([this, i]() { eia_.show_allowed_buildings_window(i + 1); });
-		assert(buttons_.size() == i);
+		buttons_.push_back(std::unique_ptr<UI::Button>(b));
+		b = new UI::Button(
+		   this, "goto_start_" + std::to_string(static_cast<unsigned>(i)),
+		   (i + 1) * kPlayerRelationsCellSize, (n + 1) * kPlayerRelationsCellSize,
+		   kPlayerRelationsCellSize, kPlayerRelationsCellSize, UI::ButtonStyle::kWuiSecondary,
+		   g_gr->images().get("images/wui/fieldaction/menu_tab_attack.png"),
+		   (boost::format(_("Go to %s's starting position")) %
+		    eia_.egbase().map().get_scenario_player_name(i + 1))
+		      .str());
+		b->sigclicked.connect([this, i]() { eia_.map_view()->scroll_to_field(eia_.egbase().map().get_starting_pos(i + 1), MapView::Transition::Smooth); });
 		buttons_.push_back(std::unique_ptr<UI::Button>(b));
 	}
 }
