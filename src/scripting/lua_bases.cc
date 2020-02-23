@@ -774,7 +774,8 @@ int LuaPlayerBase::place_road(lua_State* L) {
 		} else {
 			Road* road = get(L, egbase).build_road(path);
 			if (roadtype == "busy") {
-				if (road) road->set_busy(egbase, true);
+				if (road)
+					road->set_busy(egbase, true);
 			} else if (roadtype != "normal") {
 				report_error(
 				   L, "Invalid road type '%s' (permitted values are 'normal', 'busy', and 'waterway'",

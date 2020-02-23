@@ -490,12 +490,14 @@ bool InteractiveBase::has_expedition_port_space(const Widelands::Coords& coords)
 	return false;
 }
 
-std::map<Widelands::Coords, std::vector<uint8_t>> InteractiveBase::road_building_preview_overlays() const {
+std::map<Widelands::Coords, std::vector<uint8_t>>
+InteractiveBase::road_building_preview_overlays() const {
 	if (road_building_mode_)
 		return road_building_mode_->overlay_road_previews;
 	return std::map<Widelands::Coords, std::vector<uint8_t>>();
 }
-std::map<Widelands::Coords, const Image*> InteractiveBase::road_building_steepness_overlays() const {
+std::map<Widelands::Coords, const Image*>
+InteractiveBase::road_building_steepness_overlays() const {
 	if (road_building_mode_)
 		return road_building_mode_->overlay_steepness_indicators;
 	return std::map<Widelands::Coords, const Image*>();
@@ -910,11 +912,15 @@ void InteractiveBase::set_display_flag(uint32_t const flag, bool const on) {
 Begin building a road
 ===============
 */
-void InteractiveBase::start_build_road(Coords road_start, Widelands::PlayerNumber const player, RoadBuildingType t) {
+void InteractiveBase::start_build_road(Coords road_start,
+                                       Widelands::PlayerNumber const player,
+                                       RoadBuildingType t) {
 	assert(!road_building_mode_);
 	road_building_mode_.reset(new RoadBuildingMode(player, road_start, t));
 	road_building_add_overlay();
-	set_sel_picture(g_gr->images().get(t == RoadBuildingType::kWaterway ? "images/ui_basic/fsel_waterwaybuilding.png" : "images/ui_basic/fsel_roadbuilding.png"));
+	set_sel_picture(g_gr->images().get(t == RoadBuildingType::kWaterway ?
+	                                      "images/ui_basic/fsel_waterwaybuilding.png" :
+	                                      "images/ui_basic/fsel_roadbuilding.png"));
 	if (t == RoadBuildingType::kWaterway) {
 		// Show workarea to visualise length limit
 		const Widelands::Map& map = egbase().map();
@@ -930,8 +936,8 @@ void InteractiveBase::start_build_road(Coords road_start, Widelands::PlayerNumbe
 		do {
 			reachable_nodes.insert(
 			   std::make_pair(mr.location(), mr.location().field->get_owned_by() == player &&
-				                                !mr.location().field->is_border() &&
-				                                cstep.reachable_dest(map, mr.location())));
+			                                    !mr.location().field->is_border() &&
+			                                    cstep.reachable_dest(map, mr.location())));
 		} while (mr.advance(map));
 		std::map<Widelands::TCoords<>, uint32_t> wa_data;
 		for (const auto& pair : reachable_nodes) {
@@ -943,13 +949,13 @@ void InteractiveBase::start_build_road(Coords road_start, Widelands::PlayerNumbe
 			if (it != reachable_nodes.end()) {
 				wa_data.insert(
 				   std::make_pair(Widelands::TCoords<>(pair.first, Widelands::TriangleIndex::D),
-					              pair.second && br->second && it->second ? 5 : 6));
+				                  pair.second && br->second && it->second ? 5 : 6));
 			}
 			it = reachable_nodes.find(map.r_n(pair.first));
 			if (it != reachable_nodes.end()) {
 				wa_data.insert(
 				   std::make_pair(Widelands::TCoords<>(pair.first, Widelands::TriangleIndex::R),
-					              pair.second && br->second && it->second ? 5 : 6));
+				                  pair.second && br->second && it->second ? 5 : 6));
 			}
 		}
 		show_workarea(*road_building_mode_->work_area, road_start, wa_data);
@@ -967,9 +973,10 @@ void InteractiveBase::abort_build_road() {
 		assert(road_building_mode_->work_area);
 		hide_workarea(road_building_mode_->path.get_start(), true);
 	}
-	#ifndef NDEBUG
-	else assert(!road_building_mode_->work_area);
-	#endif
+#ifndef NDEBUG
+	else
+		assert(!road_building_mode_->work_area);
+#endif
 	road_building_remove_overlay();
 	road_building_mode_.reset(nullptr);
 	unset_sel_picture();
@@ -987,14 +994,16 @@ void InteractiveBase::finish_build_road() {
 		assert(road_building_mode_->work_area);
 		hide_workarea(road_building_mode_->path.get_start(), true);
 	}
-	#ifndef NDEBUG
-	else assert(!road_building_mode_->work_area);
-	#endif
+#ifndef NDEBUG
+	else
+		assert(!road_building_mode_->work_area);
+#endif
 
 	road_building_remove_overlay();
 
 	const size_t length = road_building_mode_->path.get_nsteps();
-	if (road_building_mode_->type == RoadBuildingType::kWaterway && length > egbase().map().get_waterway_max_length()) {
+	if (road_building_mode_->type == RoadBuildingType::kWaterway &&
+	    length > egbase().map().get_waterway_max_length()) {
 		log("Refusing to finish waterway building: length is %" PRIuS " but limit is %d\n", length,
 		    egbase().map().get_waterway_max_length());
 	} else if (length) {
@@ -1010,9 +1019,13 @@ void InteractiveBase::finish_build_road() {
 				   road_building_mode_->player, *new Widelands::Path(road_building_mode_->path));
 		} else {
 			if (road_building_mode_->type == RoadBuildingType::kWaterway)
-				egbase().get_player(road_building_mode_->player)->build_waterway(*new Widelands::Path(road_building_mode_->path));
+				egbase()
+				   .get_player(road_building_mode_->player)
+				   ->build_waterway(*new Widelands::Path(road_building_mode_->path));
 			else
-				egbase().get_player(road_building_mode_->player)->build_road(*new Widelands::Path(road_building_mode_->path));
+				egbase()
+				   .get_player(road_building_mode_->player)
+				   ->build_road(*new Widelands::Path(road_building_mode_->path));
 		}
 
 		if (allow_user_input() && (SDL_GetModState() & KMOD_CTRL)) {
@@ -1070,7 +1083,8 @@ bool InteractiveBase::append_build_road(Coords const field) {
 		} else {
 			cstep.add(Widelands::CheckStepRoad(player, Widelands::MOVECAPS_WALK));
 		}
-		if (map.findpath(road_building_mode_->path.get_end(), field, 0, path, cstep, Map::fpBidiCost) < 0)
+		if (map.findpath(
+		       road_building_mode_->path.get_end(), field, 0, path, cstep, Map::fpBidiCost) < 0)
 			return false;  //  could not find a path
 		road_building_mode_->path.append(map, path);
 	}
@@ -1091,13 +1105,15 @@ bool InteractiveBase::append_build_road(Coords const field) {
 				// Waterways (unlike roads) are strictly limited by the terrain around the edges
 				cstep.add(Widelands::CheckStepFerry(egbase()));
 			}
-			map.findpath(road_building_mode_->path.get_start(), field, 0, path, cstep, Map::fpBidiCost);
+			map.findpath(
+			   road_building_mode_->path.get_start(), field, 0, path, cstep, Map::fpBidiCost);
 		}
 		road_building_mode_->path.truncate(0);
 		road_building_mode_->path.append(map, path);
 	}
 
-	if (road_building_mode_->type == RoadBuildingType::kWaterway && road_building_mode_->path.get_nsteps() > map.get_waterway_max_length()) {
+	if (road_building_mode_->type == RoadBuildingType::kWaterway &&
+	    road_building_mode_->path.get_nsteps() > map.get_waterway_max_length()) {
 		road_building_mode_->path.truncate(map.get_waterway_max_length());
 	}
 
@@ -1219,8 +1235,9 @@ void InteractiveBase::road_building_add_overlay() {
 
 		if (road_building_mode_->type == RoadBuildingType::kWaterway) {
 			Widelands::CheckStepFerry checkstep(egbase());
-			if (!checkstep.reachable_dest(map, neighb) || road_building_mode_->path.get_index(neighb) >= 0 ||
-				!neighb.field->is_interior(road_building_mode_->player)) {
+			if (!checkstep.reachable_dest(map, neighb) ||
+			    road_building_mode_->path.get_index(neighb) >= 0 ||
+			    !neighb.field->is_interior(road_building_mode_->player)) {
 				continue;
 			}
 			bool next_to = false;

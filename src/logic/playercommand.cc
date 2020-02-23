@@ -1708,9 +1708,10 @@ void CmdEnemyFlagAction::execute(Game& game) {
 	Player* player = game.get_player(sender());
 
 	if (upcast(Flag, flag, game.objects().get_object(serial))) {
-		if (g_verbose) log("Cmd_EnemyFlagAction::execute player(%u): flag->owner(%d) "
-		    "number=%" PRIuS "\n",
-		    player->player_number(), flag->owner().player_number(), soldiers.size());
+		if (g_verbose)
+			log("Cmd_EnemyFlagAction::execute player(%u): flag->owner(%d) "
+			    "number=%" PRIuS "\n",
+			    player->player_number(), flag->owner().player_number(), soldiers.size());
 
 		if (const Building* const building = flag->get_building()) {
 			if (player->is_hostile(flag->owner()) &&

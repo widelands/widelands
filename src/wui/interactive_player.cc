@@ -408,13 +408,19 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 				for (uint8_t dir : rinfo->second) {
 					switch (dir) {
 					case Widelands::WALK_E:
-						f->road_e = in_road_building_mode(RoadBuildingType::kRoad) ? Widelands::RoadSegment::kNormal : Widelands::RoadSegment::kWaterway;
+						f->road_e = in_road_building_mode(RoadBuildingType::kRoad) ?
+						               Widelands::RoadSegment::kNormal :
+						               Widelands::RoadSegment::kWaterway;
 						break;
 					case Widelands::WALK_SE:
-						f->road_se = in_road_building_mode(RoadBuildingType::kRoad) ? Widelands::RoadSegment::kNormal : Widelands::RoadSegment::kWaterway;
+						f->road_se = in_road_building_mode(RoadBuildingType::kRoad) ?
+						                Widelands::RoadSegment::kNormal :
+						                Widelands::RoadSegment::kWaterway;
 						break;
 					case Widelands::WALK_SW:
-						f->road_sw = in_road_building_mode(RoadBuildingType::kRoad) ? Widelands::RoadSegment::kNormal : Widelands::RoadSegment::kWaterway;
+						f->road_sw = in_road_building_mode(RoadBuildingType::kRoad) ?
+						                Widelands::RoadSegment::kNormal :
+						                Widelands::RoadSegment::kWaterway;
 						break;
 					default:
 						throw wexception(

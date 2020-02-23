@@ -296,7 +296,8 @@ protected:
 	const BuildhelpOverlay* get_buildhelp_overlay(Widelands::NodeCaps caps) const;
 
 	struct RoadBuildingMode {
-		RoadBuildingMode(Widelands::PlayerNumber p, Widelands::Coords s, RoadBuildingType t) : player(p), path(s), type(t), work_area(nullptr) {
+		RoadBuildingMode(Widelands::PlayerNumber p, Widelands::Coords s, RoadBuildingType t)
+		   : player(p), path(s), type(t), work_area(nullptr) {
 		}
 		const Widelands::PlayerNumber player;
 		Widelands::CoordPath path;

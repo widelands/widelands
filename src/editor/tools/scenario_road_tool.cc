@@ -135,24 +135,27 @@ int32_t ScenarioPlaceRoadTool::handle_click_impl(const Widelands::NodeAndTriangl
                                                  EditorInteractive& eia,
                                                  EditorActionArgs* args,
                                                  Widelands::Map* map) {
-	assert(!eia.in_road_building_mode(args->road_mode == EditorActionArgs::RoadMode::kWaterway ? RoadBuildingType::kRoad : RoadBuildingType::kWaterway));
-	const RoadBuildingType type = args->road_mode != EditorActionArgs::RoadMode::kWaterway ? RoadBuildingType::kRoad : RoadBuildingType::kWaterway;
+	assert(!eia.in_road_building_mode(args->road_mode == EditorActionArgs::RoadMode::kWaterway ?
+	                                     RoadBuildingType::kRoad :
+	                                     RoadBuildingType::kWaterway));
+	const RoadBuildingType type = args->road_mode != EditorActionArgs::RoadMode::kWaterway ?
+	                                 RoadBuildingType::kRoad :
+	                                 RoadBuildingType::kWaterway;
 	upcast(Widelands::Flag, flag, (*map)[center.node].get_immovable());
 	if (eia.in_road_building_mode(type)) {
 		if (eia.get_build_road_end() == center.node) {
 			Widelands::CoordPath p = eia.get_build_road_path();
 			if (eia.get_build_road_start() == eia.get_build_road_end() ||
 			    create_road(eia.egbase(), Widelands::Path(p), args->road_mode,
-			                args->create_primary_worker, args->create_secondary_worker,
-			                args->force)) {
+			                args->create_primary_worker, args->create_secondary_worker, args->force)) {
 				eia.abort_build_road();
 			}
 		} else {
 			eia.append_build_road(center.node);
 			Widelands::CoordPath p = eia.get_build_road_path();
-			if (flag && create_road(eia.egbase(), Widelands::Path(p), args->road_mode,
-			                        args->create_primary_worker, args->create_secondary_worker,
-			                        args->force)) {
+			if (flag &&
+			    create_road(eia.egbase(), Widelands::Path(p), args->road_mode,
+			                args->create_primary_worker, args->create_secondary_worker, args->force)) {
 				eia.abort_build_road();
 			}
 		}

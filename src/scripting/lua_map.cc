@@ -4635,8 +4635,7 @@ Building
 */
 const char LuaBuilding::className[] = "Building";
 const MethodType<LuaBuilding> LuaBuilding::Methods[] = {
-   METHOD(LuaBuilding, dismantle),
-   {nullptr, nullptr},
+   METHOD(LuaBuilding, dismantle), {nullptr, nullptr},
 };
 const PropertyType<LuaBuilding> LuaBuilding::Properties[] = {
    PROP_RO(LuaBuilding, flag), {nullptr, nullptr, nullptr},
@@ -5486,7 +5485,10 @@ const MethodType<LuaMilitarySite> LuaMilitarySite::Methods[] = {
    METHOD(LuaMilitarySite, get_soldiers), METHOD(LuaMilitarySite, set_soldiers), {nullptr, nullptr},
 };
 const PropertyType<LuaMilitarySite> LuaMilitarySite::Properties[] = {
-   PROP_RO(LuaMilitarySite, max_soldiers), PROP_RW(LuaMilitarySite, prefer_heroes), PROP_RW(LuaMilitarySite, capacity), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaMilitarySite, max_soldiers),
+   PROP_RW(LuaMilitarySite, prefer_heroes),
+   PROP_RW(LuaMilitarySite, capacity),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -5502,11 +5504,14 @@ int LuaMilitarySite::get_max_soldiers(lua_State* L) {
 }
 
 int LuaMilitarySite::get_prefer_heroes(lua_State* L) {
-	lua_pushboolean(L, get(L, get_egbase(L))->get_soldier_preference() == Widelands::SoldierPreference::kHeroes);
+	lua_pushboolean(
+	   L, get(L, get_egbase(L))->get_soldier_preference() == Widelands::SoldierPreference::kHeroes);
 	return 1;
 }
 int LuaMilitarySite::set_prefer_heroes(lua_State* L) {
-	get(L, get_egbase(L))->set_soldier_preference(luaL_checkboolean(L, -1) ? Widelands::SoldierPreference::kHeroes : Widelands::SoldierPreference::kRookies);
+	get(L, get_egbase(L))
+	   ->set_soldier_preference(luaL_checkboolean(L, -1) ? Widelands::SoldierPreference::kHeroes :
+	                                                       Widelands::SoldierPreference::kRookies);
 	return 0;
 }
 

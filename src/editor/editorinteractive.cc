@@ -836,13 +836,19 @@ void EditorInteractive::draw(RenderTarget& dst) {
 				for (uint8_t dir : rinfo->second) {
 					switch (dir) {
 					case Widelands::WALK_E:
-						field.road_e = in_road_building_mode(RoadBuildingType::kRoad) ? Widelands::RoadSegment::kNormal : Widelands::RoadSegment::kWaterway;
+						field.road_e = in_road_building_mode(RoadBuildingType::kRoad) ?
+						                  Widelands::RoadSegment::kNormal :
+						                  Widelands::RoadSegment::kWaterway;
 						break;
 					case Widelands::WALK_SE:
-						field.road_se = in_road_building_mode(RoadBuildingType::kRoad) ? Widelands::RoadSegment::kNormal : Widelands::RoadSegment::kWaterway;
+						field.road_se = in_road_building_mode(RoadBuildingType::kRoad) ?
+						                   Widelands::RoadSegment::kNormal :
+						                   Widelands::RoadSegment::kWaterway;
 						break;
 					case Widelands::WALK_SW:
-						field.road_sw = in_road_building_mode(RoadBuildingType::kRoad) ? Widelands::RoadSegment::kNormal : Widelands::RoadSegment::kWaterway;
+						field.road_sw = in_road_building_mode(RoadBuildingType::kRoad) ?
+						                   Widelands::RoadSegment::kNormal :
+						                   Widelands::RoadSegment::kWaterway;
 						break;
 					default:
 						throw wexception(
@@ -1503,8 +1509,8 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 							if (!economies_to_save.count(flag.get_economy(Widelands::wwWORKER)))
 								economies_to_save.insert(flag.get_economy(Widelands::wwWORKER));
 							write("%s = wl.Game().players[%u]:place_flag(wl.Game().map:get_field(%u, %u), "
-							      "true)", var,
-							      flag.owner().player_number(), coords.x, coords.y);
+							      "true)",
+							      var, flag.owner().player_number(), coords.x, coords.y);
 							if (flag.current_wares()) {
 								std::map<std::string, unsigned> wares;
 								for (const Widelands::WareInstance* w : flag.get_wares()) {
@@ -1580,20 +1586,32 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 							}
 						} break;
 						case Widelands::MapObjectType::WAREHOUSE: {
-							const Widelands::Warehouse& wh = dynamic_cast<const Widelands::Warehouse&>(*f.get_immovable());
-							write("%s = wl.Game().players[%u]:place_building(\"%s\", wl.Game().map:get_field(%u, %u), false, true)", var,
-									wh.owner().player_number(), wh.descr().name().c_str(), wh.get_position().x, wh.get_position().y);
+							const Widelands::Warehouse& wh =
+							   dynamic_cast<const Widelands::Warehouse&>(*f.get_immovable());
+							write("%s = wl.Game().players[%u]:place_building(\"%s\", "
+							      "wl.Game().map:get_field(%u, %u), false, true)",
+							      var, wh.owner().player_number(), wh.descr().name().c_str(),
+							      wh.get_position().x, wh.get_position().y);
 
 							std::map<std::string, unsigned> wares_workers;
 							for (Widelands::DescriptionIndex di : wh.owner().tribe().wares()) {
 								const std::string name = wh.owner().tribe().get_ware_descr(di)->name();
 								const char* pol = nullptr;
 								switch (wh.get_ware_policy(di)) {
-								case Widelands::StockPolicy::kNormal: pol = "normal"; break;
-								case Widelands::StockPolicy::kPrefer: pol = "prefer"; break;
-								case Widelands::StockPolicy::kDontStock: pol = "dontstock"; break;
-								case Widelands::StockPolicy::kRemove: pol = "remove"; break;
-								default: NEVER_HERE();
+								case Widelands::StockPolicy::kNormal:
+									pol = "normal";
+									break;
+								case Widelands::StockPolicy::kPrefer:
+									pol = "prefer";
+									break;
+								case Widelands::StockPolicy::kDontStock:
+									pol = "dontstock";
+									break;
+								case Widelands::StockPolicy::kRemove:
+									pol = "remove";
+									break;
+								default:
+									NEVER_HERE();
 								}
 								write("%s:set_warehouse_policies(\"%s\", \"%s\")", var, name.c_str(), pol);
 								auto it = wares_workers.find(name);
@@ -1612,11 +1630,20 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 								const std::string name = wh.owner().tribe().get_worker_descr(di)->name();
 								const char* pol = nullptr;
 								switch (wh.get_worker_policy(di)) {
-								case Widelands::StockPolicy::kNormal: pol = "normal"; break;
-								case Widelands::StockPolicy::kPrefer: pol = "prefer"; break;
-								case Widelands::StockPolicy::kDontStock: pol = "dontstock"; break;
-								case Widelands::StockPolicy::kRemove: pol = "remove"; break;
-								default: NEVER_HERE();
+								case Widelands::StockPolicy::kNormal:
+									pol = "normal";
+									break;
+								case Widelands::StockPolicy::kPrefer:
+									pol = "prefer";
+									break;
+								case Widelands::StockPolicy::kDontStock:
+									pol = "dontstock";
+									break;
+								case Widelands::StockPolicy::kRemove:
+									pol = "remove";
+									break;
+								default:
+									NEVER_HERE();
 								}
 								write("%s:set_warehouse_policies(\"%s\", \"%s\")", var, name.c_str(), pol);
 								auto it = wares_workers.find(name);
@@ -1631,41 +1658,61 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 							fw.print_f("   })\n");
 						} break;
 						case Widelands::MapObjectType::MILITARYSITE: {
-							const Widelands::MilitarySite& ms = dynamic_cast<const Widelands::MilitarySite&>(*f.get_immovable());
-							write("%s = wl.Game().players[%u]:place_building(\"%s\", wl.Game().map:get_field(%u, %u), false, true)", var,
-									ms.owner().player_number(), ms.descr().name().c_str(), ms.get_position().x, ms.get_position().y);
-							write("%s.prefer_heroes = %s", var, ms.get_soldier_preference() == Widelands::SoldierPreference::kHeroes ? "true" : "false");
+							const Widelands::MilitarySite& ms =
+							   dynamic_cast<const Widelands::MilitarySite&>(*f.get_immovable());
+							write("%s = wl.Game().players[%u]:place_building(\"%s\", "
+							      "wl.Game().map:get_field(%u, %u), false, true)",
+							      var, ms.owner().player_number(), ms.descr().name().c_str(),
+							      ms.get_position().x, ms.get_position().y);
+							write("%s.prefer_heroes = %s", var,
+							      ms.get_soldier_preference() == Widelands::SoldierPreference::kHeroes ?
+							         "true" :
+							         "false");
 							write("%s.capacity = %u", var, ms.soldier_control()->soldier_capacity());
 							// # nocom stationed soldiers
 						} break;
 						case Widelands::MapObjectType::TRAININGSITE: {
-							const Widelands::TrainingSite& ts = dynamic_cast<const Widelands::TrainingSite&>(*f.get_immovable());
-							write("%s = wl.Game().players[%u]:place_building(\"%s\", wl.Game().map:get_field(%u, %u), false, true)", var,
-									ts.owner().player_number(), ts.descr().name().c_str(), ts.get_position().x, ts.get_position().y);
+							const Widelands::TrainingSite& ts =
+							   dynamic_cast<const Widelands::TrainingSite&>(*f.get_immovable());
+							write("%s = wl.Game().players[%u]:place_building(\"%s\", "
+							      "wl.Game().map:get_field(%u, %u), false, true)",
+							      var, ts.owner().player_number(), ts.descr().name().c_str(),
+							      ts.get_position().x, ts.get_position().y);
 							// # nocom stationed soldiers
-						} FALLS_THROUGH;
+						}
+							FALLS_THROUGH;
 						case Widelands::MapObjectType::PRODUCTIONSITE: {
-							const Widelands::ProductionSite& ps = dynamic_cast<const Widelands::ProductionSite&>(*f.get_immovable());
+							const Widelands::ProductionSite& ps =
+							   dynamic_cast<const Widelands::ProductionSite&>(*f.get_immovable());
 							if (type != Widelands::MapObjectType::TRAININGSITE) {
-								write("%s = wl.Game().players[%u]:place_building(\"%s\", wl.Game().map:get_field(%u, %u), false, true)", var,
-										ps.owner().player_number(), ps.descr().name().c_str(), ps.get_position().x, ps.get_position().y);
+								write("%s = wl.Game().players[%u]:place_building(\"%s\", "
+								      "wl.Game().map:get_field(%u, %u), false, true)",
+								      var, ps.owner().player_number(), ps.descr().name().c_str(),
+								      ps.get_position().x, ps.get_position().y);
 							}
 							// # nocom ware/worker settings
 						} break;
 						case Widelands::MapObjectType::CONSTRUCTIONSITE: {
-							const Widelands::ConstructionSite& cs = dynamic_cast<const Widelands::ConstructionSite&>(*f.get_immovable());
-							write("%s = wl.Game().players[%u]:place_building(\"%s\", wl.Game().map:get_field(%u, %u), true, true)", var,
-									cs.owner().player_number(), cs.building().name().c_str(), cs.get_position().x, cs.get_position().y);
+							const Widelands::ConstructionSite& cs =
+							   dynamic_cast<const Widelands::ConstructionSite&>(*f.get_immovable());
+							write("%s = wl.Game().players[%u]:place_building(\"%s\", "
+							      "wl.Game().map:get_field(%u, %u), true, true)",
+							      var, cs.owner().player_number(), cs.building().name().c_str(),
+							      cs.get_position().x, cs.get_position().y);
 							// # nocom builder, ware settings
 						} break;
 						case Widelands::MapObjectType::DISMANTLESITE: {
-							const Widelands::DismantleSite& ds = dynamic_cast<const Widelands::DismantleSite&>(*f.get_immovable());
-							write("%s = wl.Game().players[%u]:place_building(\"%s\", wl.Game().map:get_field(%u, %u), false, true)", var,
-									ds.owner().player_number(), ds.building().name().c_str(), ds.get_position().x, ds.get_position().y);
+							const Widelands::DismantleSite& ds =
+							   dynamic_cast<const Widelands::DismantleSite&>(*f.get_immovable());
+							write("%s = wl.Game().players[%u]:place_building(\"%s\", "
+							      "wl.Game().map:get_field(%u, %u), false, true)",
+							      var, ds.owner().player_number(), ds.building().name().c_str(),
+							      ds.get_position().x, ds.get_position().y);
 							write("%s:dismantle()", var);
 							// # nocom worker
 						} break;
-						default: break;
+						default:
+							break;
 						}
 					}
 				}
@@ -1675,14 +1722,16 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 		for (const Widelands::Economy* e : economies_to_save) {
 			const Widelands::Coords flag = e->get_arbitrary_flag()->get_position();
 			if (e->type() == Widelands::wwWARE) {
-				write("%s = wl.Game().map:get_field(%u, %u).immovable.ware_economy", var, flag.x, flag.y);
+				write(
+				   "%s = wl.Game().map:get_field(%u, %u).immovable.ware_economy", var, flag.x, flag.y);
 				for (Widelands::DescriptionIndex di : e->owner().tribe().wares()) {
 					write("%s:set_target_quantity(%s, %u)", var,
 					      egbase().tribes().get_ware_descr(di)->name().c_str(),
 					      e->target_quantity(di).permanent);
 				}
 			} else {
-				write("%s = wl.Game().map:get_field(%u, %u).immovable.worker_economy", var, flag.x, flag.y);
+				write("%s = wl.Game().map:get_field(%u, %u).immovable.worker_economy", var, flag.x,
+				      flag.y);
 				for (Widelands::DescriptionIndex di : e->owner().tribe().workers()) {
 					write("%s:set_target_quantity(%s, %u)", var,
 					      egbase().tribes().get_worker_descr(di)->name().c_str(),
