@@ -21,25 +21,7 @@ jobs:
       uses: actions/checkout@v2
     - name: Fetching branch info
       run: |
-        b="${GITHUB_REF##*/}"
-        if [ "$b" == "master" ]
-        then
-          echo "Always format master ($GITHUB_REF)"
-        else
-          forkname=${{ github.repository }}
-          # grep returns 1 if the branch is not found
-          set +e
-          output=$(curl -i "https://api.github.com/repos/widelands/widelands/pulls?state=open&head=${forkname%%/*}:$b" | grep "$b")
-          set -e
-          if [ -z "$output" ]
-          then
-            echo "Branch $b in repository $forkname does NOT have an open pull request"
-            b=""
-          else
-            echo "Branch $b in repository $forkname has an open pull request"
-          fi
-        fi
-        echo "::set-env name=branch::$b"
+        echo "::set-env name=branch::${GITHUB_REF##*/}"
         git config --global user.name "The Widelands Code Formatting Bot"
         git config --global user.email "actions@github.com"
         # copied from https://github.com/stefanzweifel/git-auto-commit-action/blob/master/entrypoint.sh
@@ -74,21 +56,33 @@ jobs:
           if [ $nrfiles == 1 ]
           then
             echo "1 file formatted"
-            nrfiles=$(git status -s)
-            files="'${nrfiles#???}' was automatically formatted."
+            files=$(git status -s)
+            files="'${files#???}' was automatically formatted."
           else
             echo "$nrfiles files formatted"
             files="$nrfiles files were automatically formatted."
           fi
-          if [ -z "$branch" ]
+          if [ "$branch" == "master" ]
           then
-            echo "Your branch does not have an open pull request, so no changes will be pushed. Please note however that your code is not properly formatted."
-            git diff
-            exit 1
+            echo "Always push master branch ($GITHUB_REF)"
+          else
+            forkname=${{ github.repository }}
+            # grep returns 1 if the branch is not found
+            set +e
+            output=$(curl -i "https://api.github.com/repos/widelands/widelands/pulls?state=open&head=${forkname%%/*}:$branch" | grep "$branch")
+            set -e
+            if [ -z "$output" ]
+            then
+              echo "Branch $branch in repository $forkname does not have an open pull request, so no changes will be pushed. Please note however that your code is not properly formatted:"
+              git diff --color | grep ""
+              exit 1
+            else
+              echo "Branch $branch in repository $forkname has an open pull request. Changes will be pushed."
+            fi
           fi
         fi
         echo "::set-env name=COMMIT_MESSAGE::$files"
-    - name: Getting the changes into the branch
+    - name: Pushing changes
       run: |
         if [ -z "$COMMIT_MESSAGE" ]
         # skip if there's nothing to do
@@ -96,7 +90,8 @@ jobs:
           echo "Code was already correctly formatted"
           exit 0
         fi
-        set +e # curl exits 23 because grep will kill it after the first match
+        # curl exits 23 because grep will kill it after the first match
+        set +e
         latest=$(curl -i "https://api.github.com/repos/${{ github.repository }}/commits/$branch" | grep -m 1 "\"sha\": ")
         set -e
         latest=${latest#*: \"}
