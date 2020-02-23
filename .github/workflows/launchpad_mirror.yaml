@@ -55,7 +55,7 @@ jobs:
         commit_message=$(curl -i "https://api.github.com/repos/widelands/widelands/commits/$GITHUB_SHA" | grep -F "\"message\": ")
         commit_message=${commit_message#*: \"}
         commit_message=${commit_message%\",}
-        commit_message="$GITHUB_ACTOR: $commit_message"
+        commit_message="$GITHUB_ACTOR: $commit_message ($GITHUB_SHA)"
         echo $commit_message
         cd ~/wl_trunk
         bzr remove
