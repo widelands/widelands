@@ -2335,8 +2335,7 @@ void Map::check_neighbour_heights(FCoords fc, uint32_t& area) {
 	int32_t height = fc.field->get_height();
 	bool check[] = {false, false, false, false, false, false};
 
-	const FCoords n[] = {
-	   tl_n(fc), tr_n(fc), l_n(fc), r_n(fc), bl_n(fc), br_n(fc)};
+	const FCoords n[] = {tl_n(fc), tr_n(fc), l_n(fc), r_n(fc), bl_n(fc), br_n(fc)};
 
 	for (uint8_t i = 0; i < 6; ++i) {
 		Field& f = *n[i].field;
