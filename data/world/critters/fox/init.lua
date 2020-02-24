@@ -29,7 +29,8 @@ world:new_critter_type{
       remove = { "remove" },
    },
    animations = animations,
+   size = 4,
    reproduction_rate = 80,
    appetite = 70,
-   carnivore = { "bunny", "sheep", "chamois", "deer", "reindeer" },
+   carnivore = true,
 }

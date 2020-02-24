@@ -54,8 +54,13 @@ add_directional_animation(animations, "walk", dirname, "walk", {13, 15}, 20)
 --
 --            attributes = { "eatable" }, -- This animal can be hunted
 --
+--    **size**
+--        *Mandatory*. This critter's size in relative units (bigger values mean larger and stronger), within range 1..10, e.g.::
+--
+--            size = 5,
+--
 --    **reproduction_rate**
---        *Mandatory*. How likely this critter is to reproduce when it finds a mating partner, in %, e.g.::
+--        *Mandatory*. How likely this critter is to consider reproducing when it finds a mating partner, in %, e.g.::
 --
 --            reproduction_rate = 10,
 --
@@ -65,9 +70,9 @@ add_directional_animation(animations, "walk", dirname, "walk", {13, 15}, 20)
 --            herbivore = { "field" },
 --
 --    **carnivore**
---        *Optional*. An array of critter names. If given, this critter considers these critter types food. E.g.::
+--        *Optional*. Whether this critter considers all other critter types food. E.g.::
 --
---            carnivore = { "bunny", "sheep" },
+--            carnivore = true,
 --
 --    **appetite**
 --        *Mandatory* if ``herbivore`` or ``carnivore`` is given. How likely this critter is to eat when it finds food, in %, e.g.::
@@ -94,7 +99,8 @@ world:new_critter_type{
       remove = { "remove" },
    },
    animations = animations,
+   size = 4,
    reproduction_rate = 70,
    appetite = 50,
-   carnivore = { "bunny", "deer", "reindeer", "stag" },
+   carnivore = true,
 }

@@ -22,5 +22,6 @@ world:new_critter_type{
       remove = { "remove" },
    },
    animations = animations,
+   size = 1,
    reproduction_rate = 80,
 }

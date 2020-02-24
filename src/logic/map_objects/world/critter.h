@@ -54,9 +54,11 @@ struct CritterDescr : BobDescr {
 		return !food_plants_.empty();
 	}
 	bool is_carnivore() const {
-		return !food_critters_.empty();
+		return carnivore_;
 	}
-	const std::set<std::string>& food_critters() const { return food_critters_; }
+	uint8_t get_size() const {
+		return size_;
+	}
 	const std::set<uint32_t>& food_plants() const { return food_plants_; }
 	uint8_t get_appetite() const {
 		return appetite_;
@@ -74,7 +76,8 @@ private:
 	using Programs = std::map<std::string, CritterProgram*>;
 	Programs programs_;
 	EditorCategory* editor_category_;  // not owned.
-	std::set<std::string> food_critters_;
+	uint8_t size_;
+	bool carnivore_;
 	std::set<uint32_t> food_plants_; // set of immovable attributes
 	uint8_t appetite_; // chance that we feel hungry when we encounter one food item, in %
 	uint8_t reproduction_rate_; // reproduction adjustment factor, in %

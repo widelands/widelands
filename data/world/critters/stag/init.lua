@@ -29,6 +29,7 @@ world:new_critter_type{
       remove = { "remove" },
    },
    animations = animations,
+   size = 7,
    reproduction_rate = 30,
    appetite = 30,
    herbivore = {"field"},

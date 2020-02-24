@@ -77,15 +77,6 @@ void World::postload() {
 			}
 		}
 	}
-	const size_t nr_c = get_nr_critters();
-	for (size_t i = 0; i < nr_c; ++i) {
-		const CritterDescr* c = get_critter_descr(i);
-		for (const std::string d : c->food_critters()) {
-			if (!get_critter_descr(d)) {
-				throw GameDataError("Critter %s: Eaten critter '%s' does not exist", c->name().c_str(), d.c_str());
-			}
-		}
-	}
 }
 
 const DescriptionMaintainer<TerrainDescription>& World::terrains() const {
