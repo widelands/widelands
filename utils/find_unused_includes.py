@@ -23,6 +23,7 @@ EXTERN_ZIP_REGEX = re.compile(r'extern\s+\S+\s+\S+\s+(\S+)\s+')
 TYPEDEF_REGEX = re.compile(r'typedef\s+\S+\s+(\S+);')
 # Special regex for #include "graphic/text/rt_errors.h"
 RT_ERRORS_REGEX = re.compile(r'DEF_ERR\((\S+)\)')
+INLINE_FUNCTION_REGEX = re.compile(r'inline\s+\S+\s+(\S+\()')
 
 EXTERNAL_FILE_EXCLUDES = { 'graphic/gl/system_headers.h', 'scripting/lua.h', 'third_party/eris/lua.hpp', 'scripting/report_error.h' }
 
@@ -54,6 +55,9 @@ def find_classes(file_to_check):
             if match and len(match.groups()) == 1:
                 classes.add(match.groups()[0])
             match = RT_ERRORS_REGEX.match(line)
+            if match and len(match.groups()) == 1:
+                classes.add(match.groups()[0])
+            match = INLINE_FUNCTION_REGEX.match(line)
             if match and len(match.groups()) == 1:
                 classes.add(match.groups()[0])
     return classes
