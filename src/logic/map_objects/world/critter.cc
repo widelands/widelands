@@ -311,17 +311,15 @@ void Critter::roam_update(Game& game, State& state) {
 			}
 		}
 	}
-	if (descr().is_carnivore()) {
-		for (Bob* b = get_position().field->get_first_bob(); b; b = b->get_next_bob()) {
-			assert(b);
-			if (b == this)
-				continue;
-			if (descr().name() == b->descr().name()) {
-				++mating_partners;
-			}
-			if (descr().food_critters().count(b->descr().name())) {
-				candidates_for_eating.push_back(b);
-			}
+	for (Bob* b = get_position().field->get_first_bob(); b; b = b->get_next_bob()) {
+		assert(b);
+		if (b == this)
+			continue;
+		if (descr().name() == b->descr().name()) {
+			++mating_partners;
+		}
+		if (descr().food_critters().count(b->descr().name())) {
+			candidates_for_eating.push_back(b);
 		}
 	}
 	while (!candidates_for_eating.empty()) {
