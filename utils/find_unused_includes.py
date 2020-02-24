@@ -16,7 +16,7 @@ HEADER_REGEX = re.compile(r'^#include\s+\"(\S+)\"$')
 USING_REGEX = re.compile(r'.*using.*\s+(\S+)\s+=')
 CLASS_REGEX = re.compile(r'.*(class|enum|struct)\s+(\S+)\s+.*{')
 DEFINE_REGEX = re.compile(r'\#define\s+(\w+)')
-CONSTEXPR_REGEX = re.compile(r'constexpr.*\s+(\w+)\s+=')
+CONSTEXPR_REGEX = re.compile(r'.*constexpr.*\s+(\w+)\s+=')
 STRING_CONSTANT_REGEX = re.compile(
     r'const\sstd::string\s+(k\w+)\s+=\s+\"\S+\";')
 STRING_CONSTANT_OLD_REGEX = re.compile(

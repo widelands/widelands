@@ -55,7 +55,6 @@
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "io/filesystem/zip_exceptions.h"
 #include "io/filesystem/zip_filesystem.h"
 
 #ifdef _WIN32
