@@ -5,11 +5,16 @@ on:
 #      - master
 jobs:
   mirror:
-    name: Copying master branch to Launchpad
+    name: Synchronizing Launchpad trunk with GitHub master
     runs-on: ubuntu-latest
     steps:
     - name: Setting up bazaar
       run: |
+        if ! [ "$GITHUB_REPOSITORY" == "widelands/widelands" ]
+        then
+          echo "Launchpad mirror should run only from widelands:master, not from fork $GITHUB_REPOSITORY"
+          exit 1
+        fi
         sudo apt-get update
         sudo apt-get install bzr
         mkdir ~/.ssh || true
@@ -20,14 +25,14 @@ jobs:
         ssh-add ~/.ssh/id_rsa
         bzr whoami "The Widelands Bunnybot <bunnybot@widelands.org>"
         bzr launchpad-login "nordfriese" # NOCOM: "widelandsofficial"
-    - name: Checkout master
-      run: |
-        cd ~
-        git clone --depth=1 https://github.com/widelands/widelands.git wl_master
     - name: Checkout trunk
       run: |
         cd ~
         bzr branch lp:~widelands-dev/widelands/test-github-mirror wl_trunk # NOCOM: lp:widelands
+    - name: Checkout master
+      run: |
+        cd ~
+        git clone --depth=1 https://github.com/widelands/widelands.git wl_master
     - name: Cleaning tree
       run: |
         cd ~/wl_trunk
@@ -66,7 +71,7 @@ jobs:
         set -e
         check_for_remote_changes=${check_for_remote_changes#*: \"}
         check_for_remote_changes=${check_for_remote_changes%\",}
-        if [ "$check_for_remote_changes" == "$GITHUB_SHA" ] || true # NOCOM
+        if [ "$check_for_remote_changes" == "$GITHUB_SHA" ]
         then
           bzr push :parent
         else
