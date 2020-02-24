@@ -203,10 +203,10 @@ def main():
                 error_count = error_count + len(hits)
 
     if error_count > 0:
-        print('\nFound %d errors.' % error_count)
+        print('\nFound %d error(s).' % error_count)
         return 1
     else:
-        print('\nDone.')
+        print('\nDone, files are clean.')
 
     return 0
 
