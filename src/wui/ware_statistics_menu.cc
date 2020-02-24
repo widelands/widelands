@@ -30,7 +30,6 @@
 #include "ui_basic/checkbox.h"
 #include "ui_basic/slider.h"
 #include "ui_basic/tabpanel.h"
-#include "ui_basic/textarea.h"
 #include "wui/interactive_player.h"
 #include "wui/plot_area.h"
 #include "wui/waresdisplay.h"

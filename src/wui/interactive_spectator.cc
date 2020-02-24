@@ -28,7 +28,6 @@
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "wui/fieldaction.h"
-#include "wui/game_chat_menu.h"
 #include "wui/game_main_menu_save_game.h"
 #include "wui/general_statistics_menu.h"
 

@@ -38,7 +38,6 @@
 #include "ui_basic/button.h"
 #include "ui_basic/icongrid.h"
 #include "ui_basic/tabpanel.h"
-#include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "wui/actionconfirm.h"
 #include "wui/attack_box.h"

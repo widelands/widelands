@@ -31,7 +31,6 @@
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
-#include "logic/maphollowregion.h"
 #include "logic/player.h"
 #include "ui_basic/tabpanel.h"
 #include "wui/actionconfirm.h"

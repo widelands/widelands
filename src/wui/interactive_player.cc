@@ -45,7 +45,6 @@
 #include "wui/building_statistics_menu.h"
 #include "wui/debugconsole.h"
 #include "wui/fieldaction.h"
-#include "wui/game_chat_menu.h"
 #include "wui/game_message_menu.h"
 #include "wui/game_objectives_menu.h"
 #include "wui/general_statistics_menu.h"
