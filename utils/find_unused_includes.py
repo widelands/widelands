@@ -97,8 +97,8 @@ def find_includes(file_to_check):
 
 
 def check_file(file_to_check):
-    """Checks if the includes in this file are needed and prints superfluous
-    includes."""
+    """Checks if the includes in this file are needed, and returns the ones
+    that aren't."""
 
     hits = []
 
@@ -119,17 +119,63 @@ def check_file(file_to_check):
                     is_useful = True
                     break
             if not is_useful:
-                hits.append('\t' + header_file)
-    if hits:
-        print('\nSuperfluous includes in ' + file_to_check)
-        for hit in hits:
-            print(hit)
+                hits.append(header_file)
 
-    return len(hits)
+    return hits
+
+
+# For .cc files
+FUNCTION_REGEX1 = re.compile(r'.*\S+\s+([a-z_0-9]+)\(.*\).*')
+FUNCTION_REGEX2 = re.compile(r'.*\S+\s+([a-z_0-9]+)\(.*,')
+
+
+def find_functions(file_to_check):
+    """Returns a set of functions defined by this file."""
+    functions = set()
+
+    with open(file_to_check, 'r', encoding='utf-8') as f:
+        for line in f.readlines():
+            line = line.strip()
+
+            match = FUNCTION_REGEX1.match(line)
+            if match and len(match.groups()) > 0:
+                functions.add(match.groups()[0])
+            match = FUNCTION_REGEX2.match(line)
+            if match and len(match.groups()) > 0:
+                functions.add(match.groups()[0])
+
+    return functions
+
+
+def check_cc_file(file_to_check, header_files):
+    """Checks if all header files have a function in common with this file, and
+    returns the ones that don't."""
+
+    hits = []
+
+    with open(file_to_check, 'r', encoding='utf-8') as f:
+        file_contents = f.read()
+
+        for header_file in header_files:
+            # NOCOM implement support for these special files
+            if header_file.startswith('base/'):
+                continue
+            elif header_file in FILE_EXCLUDES:
+                continue
+            header_functions = find_functions(header_file)
+            is_useful = False
+            for header_function in header_functions:
+                if header_function in file_contents:
+                    is_useful = True
+                    break
+            if not is_useful:
+                hits.append(header_file)
+
+    return hits
 
 
 def main():
-    """Script to find unused includes.
+    """Script to find unused includes and print them to console.
 
     Call from src directory.
     """
@@ -141,9 +187,20 @@ def main():
 
     for (dirpath, _, filenames) in os.walk('.'):
         for filename in filenames:
+            full_path = os.path.join(dirpath, filename)
+            hits = []
+
             if filename.endswith('.h'):
-                error_count = error_count + \
-                    check_file(os.path.join(dirpath, filename))
+                hits = check_file(full_path)
+
+            elif filename.endswith('.cc'):
+                hits = check_cc_file(full_path, check_file(full_path))
+
+            if hits:
+                print('\nSuperfluous includes in ' + full_path)
+                for hit in hits:
+                    print('\t' + hit)
+                error_count = error_count + len(hits)
 
     if error_count > 0:
         print('\nFound %d errors.' % error_count)
