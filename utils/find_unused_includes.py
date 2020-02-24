@@ -24,6 +24,8 @@ TYPEDEF_REGEX = re.compile(r'typedef\s+\S+\s+(\S+);')
 # Special regex for #include "graphic/text/rt_errors.h"
 RT_ERRORS_REGEX = re.compile(r'DEF_ERR\((\S+)\)')
 
+EXTERNAL_FILE_EXCLUDES = { 'graphic/gl/system_headers.h', 'scripting/lua.h', 'third_party/eris/lua.hpp', 'scripting/report_error.h' }
+
 def find_classes(file_to_check):
     """Returns a set of classes defined by this file."""
     classes = set()
@@ -89,7 +91,7 @@ def check_file(file_to_check):
             # NOCOM implement support for these special files
             if header_file.startswith('base/'):
                 continue
-            elif header_file == 'graphic/gl/system_headers.h':
+            elif header_file in EXTERNAL_FILE_EXCLUDES:
                 continue
             header_classes = find_classes(header_file)
             is_useful = False
