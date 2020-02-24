@@ -40,6 +40,7 @@
 #include "wui/inputqueuedisplay.h"
 #include "wui/interactive_player.h"
 #include "wui/unique_window_handler.h"
+#include "wui/waresdisplay.h"
 
 static const char* pic_bulldoze = "images/wui/buildings/menu_bld_bulldoze.png";
 static const char* pic_dismantle = "images/wui/buildings/menu_bld_dismantle.png";

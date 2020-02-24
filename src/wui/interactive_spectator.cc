@@ -22,6 +22,7 @@
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "chat/chat.h"
+#include "graphic/game_renderer.h"
 #include "logic/game_controller.h"
 #include "logic/player.h"
 #include "ui_basic/textarea.h"

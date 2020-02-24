@@ -55,6 +55,7 @@
 #include "editor/ui_menus/toolsize_menu.h"
 #include "graphic/graphic.h"
 #include "graphic/playercolor.h"
+#include "graphic/text_layout.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/world/resource_description.h"
