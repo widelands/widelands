@@ -298,9 +298,9 @@ wl_library(wui
     economy
     game_io
     graphic
-    graphic_align
     graphic_color
     graphic_fonthandler
+    graphic_game_renderer
     graphic_minimap_renderer
     graphic_playercolor
     graphic_surface

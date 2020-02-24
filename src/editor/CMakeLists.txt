@@ -109,7 +109,6 @@ wl_library(editor
     logic_widelands_geometry
     map_io
     map_io_map_loader
-    notifications
     random
     scripting_coroutine
     scripting_lua_interface

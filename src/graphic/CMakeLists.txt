@@ -84,7 +84,6 @@ wl_library(graphic_image_cache
     base_macros
     graphic_image_io
     graphic_surface
-    graphic_texture_atlas
 )
 
 wl_library(graphic_sdl_utils

@@ -83,7 +83,6 @@ wl_library(ui_fsmenu_loading_common
     ui_fsmenu_base
     ui_fsmenu_main_menu
     widelands_options
-    wui_common_mapdetails
     wui
 )
 
@@ -106,6 +105,7 @@ wl_library(ui_fsmenu_gameloading
     io_filesystem
     io_profile
     logic
+    logic_constants
     logic_game_controller
     logic_game_settings
     logic_map
@@ -147,6 +147,7 @@ wl_library(ui_fsmenu_maploading
     graphic
     graphic_fonthandler
     graphic_surface
+    graphic_text_layout
     io_filesystem
     io_profile
     logic_filesystem_constants
@@ -157,7 +158,6 @@ wl_library(ui_fsmenu_maploading
     scripting_lua_interface
     scripting_lua_table
     ui_basic
-    ui_fsmenu_base
     ui_fsmenu_loading_common
     wui_common_mapdetails
 )
@@ -172,7 +172,9 @@ wl_library(ui_fsmenu_network
     base_i18n
     base_log
     base_macros
+    build_info
     graphic
+    graphic_text_layout
     network
     random
     sound

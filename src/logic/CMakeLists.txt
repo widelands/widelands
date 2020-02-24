@@ -150,7 +150,6 @@ wl_library(logic_map
     logic_widelands_geometry_io
     map_io_map_loader
     notifications
-    random
     wui_mapview_pixelfunctions # TODO(GunChleoc): Circular dependency
 )
 
@@ -183,6 +182,7 @@ wl_library(logic_commands
     io_fileread
     io_stream
     logic # TODO(GunChleoc): Circular dependency
+    logic_constants
     logic_exceptions
     logic_game_controller
     logic_map
