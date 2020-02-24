@@ -39,7 +39,6 @@
 #include "logic/cmd_queue.h"
 #include "logic/map_objects/info_to_draw.h"
 #include "logic/map_objects/tribes/training_attribute.h"
-#include "logic/map_objects/tribes/wareworker.h"
 #include "logic/widelands.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/tabpanel.h"
