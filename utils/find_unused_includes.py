@@ -18,6 +18,7 @@ CLASS_REGEX = re.compile(r'.*(class|enum|struct)\s+(\S+)\s+.*{')
 DEFINE_REGEX = re.compile(r'\#define\s+(\w+)')
 CONSTEXPR_REGEX = re.compile(r'constexpr.*\s+(\w+)\s+=')
 STRING_CONSTANT_REGEX = re.compile(r'const\sstd::string\s+(k\w+)\s+=\s+\"\S+\";')
+STRING_CONSTANT_OLD_REGEX = re.compile(r'.*const\sstd::string\s+(\w+_\w+)\s+=\s+\"\S+\";')
 EXTERN_REGEX = re.compile(r'extern\s+\S+\s+(\S+);')
 # Extern macros used in third_party/minizip
 EXTERN_ZIP_REGEX = re.compile(r'extern\s+\S+\s+\S+\s+(\S+)\s+')
@@ -49,6 +50,9 @@ def find_classes(file_to_check):
             if match and len(match.groups()) == 1:
                 classes.add(match.groups()[0])
             match = STRING_CONSTANT_REGEX.match(line)
+            if match and len(match.groups()) == 1:
+                classes.add(match.groups()[0])
+            match = STRING_CONSTANT_OLD_REGEX.match(line)
             if match and len(match.groups()) == 1:
                 classes.add(match.groups()[0])
             match = EXTERN_REGEX.match(line)
@@ -92,9 +96,6 @@ def check_file(file_to_check):
     """Checks if the includes in this file are needed and prints superfluous
     includes."""
 
-    sys.stdout.write('.')
-    sys.stdout.flush()
-
     hits = []
 
     with open(file_to_check, 'r', encoding='utf-8') as f:
@@ -131,7 +132,8 @@ def main():
 
     error_count = 0
 
-    print('Tool to check for superfluous includes in header files. Cal from src diectory.')
+    print('Tool to check for superfluous includes in header files. Call from src diectory.')
+    print('Checking...')
 
     for (dirpath, _, filenames) in os.walk('.'):
         for filename in filenames:
