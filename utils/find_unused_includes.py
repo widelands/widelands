@@ -26,7 +26,7 @@ EXTERN_REGEX = re.compile(r'extern\s+\S+\s+(\S+);')
 EXTERN_ZIP_REGEX = re.compile(r'extern\s+\S+\s+\S+\s+(\S+)\s+')
 TYPEDEF_REGEX = re.compile(r'typedef\s+\S+\s+(\S+);')
 # Special regex for #include "graphic/text/rt_errors.h"
-RT_ERRORS_REGEX = re.compile(r'DEF_ERR\((\S+)\)')
+MACRO_CLASS_DEFINITION_REGEX = re.compile(r'^[A-Z_0-9]+\((\w+)\)$')
 INLINE_FUNCTION_REGEX = re.compile(r'inline\s+\S+\s+(\S+\()')
 FORWARD_DECLARATION_REGEX = re.compile(r'(class|struct)\s+(\S+);')
 
@@ -68,7 +68,7 @@ def find_classes(file_to_check):
             match = TYPEDEF_REGEX.match(line)
             if match and len(match.groups()) == 1:
                 classes.add(match.groups()[0])
-            match = RT_ERRORS_REGEX.match(line)
+            match = MACRO_CLASS_DEFINITION_REGEX.match(line)
             if match and len(match.groups()) == 1:
                 classes.add(match.groups()[0])
             match = INLINE_FUNCTION_REGEX.match(line)
