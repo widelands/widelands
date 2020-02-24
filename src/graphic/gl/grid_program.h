@@ -25,8 +25,6 @@
 #include "base/vector.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
-#include "logic/map_objects/description_maintainer.h"
-#include "logic/map_objects/world/terrain_description.h"
 
 class GridProgram {
 public:

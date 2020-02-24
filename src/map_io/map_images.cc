@@ -23,6 +23,7 @@
 
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
+#include "graphic/texture.h"
 
 namespace Widelands {
 

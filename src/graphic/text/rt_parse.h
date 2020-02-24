@@ -31,7 +31,6 @@
 #include <stdint.h>
 
 #include "graphic/color.h"
-#include "graphic/text/rt_errors.h"
 
 namespace RT {
 

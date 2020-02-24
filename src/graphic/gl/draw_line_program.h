@@ -24,7 +24,6 @@
 #include "base/rect.h"
 #include "base/vector.h"
 #include "graphic/blend_mode.h"
-#include "graphic/color.h"
 #include "graphic/gl/utils.h"
 
 // This program actually only draws Triangles, which are tesselations of the
