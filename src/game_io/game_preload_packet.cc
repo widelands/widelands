@@ -33,10 +33,8 @@
 #include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "logic/playersmanager.h"
-#include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "wui/interactive_player.h"
-#include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/minimap.h"
 
