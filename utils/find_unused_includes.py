@@ -27,7 +27,8 @@ RT_ERRORS_REGEX = re.compile(r'DEF_ERR\((\S+)\)')
 INLINE_FUNCTION_REGEX = re.compile(r'inline\s+\S+\s+(\S+\()')
 FORWARD_DECLARATION_REGEX = re.compile(r'(class|struct)\s+(\S+);')
 
-EXTERNAL_FILE_EXCLUDES = { 'graphic/gl/system_headers.h', 'scripting/lua.h', 'third_party/eris/lua.hpp', 'scripting/report_error.h' }
+# Files that are hard to capture by regex
+FILE_EXCLUDES = { 'graphic/gl/system_headers.h', 'scripting/lua.h', 'third_party/eris/lua.hpp', 'scripting/report_error.h', 'editor/tools/set_resources_tool.h' }
 
 def find_classes(file_to_check):
     """Returns a set of classes defined by this file."""
@@ -104,7 +105,7 @@ def check_file(file_to_check):
             # NOCOM implement support for these special files
             if header_file.startswith('base/'):
                 continue
-            elif header_file in EXTERNAL_FILE_EXCLUDES:
+            elif header_file in FILE_EXCLUDES:
                 continue
             header_classes = find_classes(header_file)
             is_useful = False
