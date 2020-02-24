@@ -31,7 +31,7 @@ INLINE_FUNCTION_REGEX = re.compile(r'inline\s+\S+\s+(\S+\()')
 FORWARD_DECLARATION_REGEX = re.compile(r'(class|struct)\s+(\S+);')
 
 # Files that are hard to capture by regex
-FILE_EXCLUDES = {'graphic/gl/system_headers.h', 'scripting/lua.h',
+FILE_EXCLUDES = {'graphic/build_texture_atlas.h', 'graphic/gl/system_headers.h', 'scripting/lua.h',
                  'third_party/eris/lua.hpp', 'scripting/report_error.h', 'editor/tools/set_resources_tool.h'}
 
 
@@ -125,8 +125,8 @@ def check_file(file_to_check):
 
 
 # For .cc files
-FUNCTION_REGEX1 = re.compile(r'.*\S+\s+([a-z_0-9]+)\(.*\).*')
-FUNCTION_REGEX2 = re.compile(r'.*\S+\s+([a-z_0-9]+)\(.*,')
+FUNCTION_REGEX1 = re.compile(r'.*\s+([a-z_0-9]+)\(.*\).*')
+FUNCTION_REGEX2 = re.compile(r'.*\s+([a-z_0-9]+)\(.*,.*')
 
 
 def find_functions(file_to_check):
