@@ -17,8 +17,10 @@ USING_REGEX = re.compile(r'.*using.*\s+(\S+)\s+=')
 CLASS_REGEX = re.compile(r'.*(class|enum|struct)\s+(\S+)\s+.*{')
 DEFINE_REGEX = re.compile(r'\#define\s+(\w+)')
 CONSTEXPR_REGEX = re.compile(r'constexpr.*\s+(\w+)\s+=')
-STRING_CONSTANT_REGEX = re.compile(r'const\sstd::string\s+(k\w+)\s+=\s+\"\S+\";')
-STRING_CONSTANT_OLD_REGEX = re.compile(r'.*const\sstd::string\s+(\w+_\w+)\s+=\s+\"\S+\";')
+STRING_CONSTANT_REGEX = re.compile(
+    r'const\sstd::string\s+(k\w+)\s+=\s+\"\S+\";')
+STRING_CONSTANT_OLD_REGEX = re.compile(
+    r'.*const\sstd::string\s+(\w+_\w+)\s+=\s+\"\S+\";')
 EXTERN_REGEX = re.compile(r'extern\s+\S+\s+(\S+);')
 # Extern macros used in third_party/minizip
 EXTERN_ZIP_REGEX = re.compile(r'extern\s+\S+\s+\S+\s+(\S+)\s+')
@@ -29,7 +31,9 @@ INLINE_FUNCTION_REGEX = re.compile(r'inline\s+\S+\s+(\S+\()')
 FORWARD_DECLARATION_REGEX = re.compile(r'(class|struct)\s+(\S+);')
 
 # Files that are hard to capture by regex
-FILE_EXCLUDES = { 'graphic/gl/system_headers.h', 'scripting/lua.h', 'third_party/eris/lua.hpp', 'scripting/report_error.h', 'editor/tools/set_resources_tool.h' }
+FILE_EXCLUDES = {'graphic/gl/system_headers.h', 'scripting/lua.h',
+                 'third_party/eris/lua.hpp', 'scripting/report_error.h', 'editor/tools/set_resources_tool.h'}
+
 
 def find_classes(file_to_check):
     """Returns a set of classes defined by this file."""
@@ -138,13 +142,14 @@ def main():
     for (dirpath, _, filenames) in os.walk('.'):
         for filename in filenames:
             if filename.endswith('.h'):
-                error_count = error_count + check_file(os.path.join(dirpath, filename))
+                error_count = error_count + \
+                    check_file(os.path.join(dirpath, filename))
 
     if error_count > 0:
-        print('\nFound %d errors.' % error_count);
+        print('\nFound %d errors.' % error_count)
         return 1
     else:
-        print('\nDone.');
+        print('\nDone.')
 
     return 0
 
