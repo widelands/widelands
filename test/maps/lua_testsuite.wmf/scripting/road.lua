@@ -18,7 +18,7 @@ function road_tests:setup()
 
    self.start_flag = player1:place_flag(self.f)
 
-   self.r = player1:place_road(self.start_flag, "r", "r", "br", "br")
+   self.r = player1:place_road("normal", self.start_flag, "r", "r", "br", "br")
    self.end_flag = self.f.rn.rn.brn.brn.immovable
 end
 function road_tests:teardown()

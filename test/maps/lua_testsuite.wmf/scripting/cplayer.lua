@@ -79,38 +79,38 @@ function road_construction_tests:teardown()
    end)
 end
 function road_construction_tests:test_simple()
-   r = player1:place_road(self.start_flag, "r", "br", "r")
+   r = player1:place_road("normal", self.start_flag, "r", "br", "r")
    self.flags[#self.flags+1] = self.f.rn.brn.rn.immovable
    assert_equal(3, r.length)
 end
 function road_construction_tests:test_too_short()
    assert_error("can't place flag", function()
-      player1:place_road(self.start_flag, "r")
+      player1:place_road("normal", self.start_flag, "r")
    end)
 end
 function road_construction_tests:test_connect_two_flags()
    self.flags[#self.flags+1] = player1:place_flag(self.f.rn.rn)
-   r = player1:place_road(self.start_flag,"r", "r")
+   r = player1:place_road("normal", self.start_flag,"r", "r")
    assert_equal(2, r.length)
 end
 function road_construction_tests:test_road_crosses_another()
    self.flags[#self.flags+1] = player1:place_flag(self.f.rn.rn.rn.rn)
-   r = player1:place_road(self.start_flag,"r", "r", "r", "r")
+   r = player1:place_road("normal", self.start_flag,"r", "r", "r", "r")
    assert_equal(4, r.length)
    self.flags[#self.flags+1] = player1:place_flag(self.f.rn.rn.tln.tln)
    self.flags[#self.flags+1] = player1:place_flag(self.f.rn.rn.brn.brn)
    assert_error("Immovable in the way", function()
-      r = player1:place_road(self.flags[3],"br", "br", "br", "br")
+      r = player1:place_road("normal", self.flags[3],"br", "br", "br", "br")
    end)
 end
 function road_construction_tests:test_road_is_closed_loop()
    assert_error("Cannot build closed loop", function()
-      player1:place_road(self.start_flag,"r", "r", "tl", "tl", "bl", "bl")
+      player1:place_road("normal", self.start_flag,"r", "r", "tl", "tl", "bl", "bl")
    end)
 end
 function road_construction_tests:test_road_crosses_itself()
    assert_error("The road crosses itself", function()
-      player1:place_road(self.start_flag,"r", "r", "r", "tl", "bl", "bl")
+      player1:place_road("normal", self.start_flag,"r", "r", "r", "tl", "bl", "bl")
    end)
 end
 
