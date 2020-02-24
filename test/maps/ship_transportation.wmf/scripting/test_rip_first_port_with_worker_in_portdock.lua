@@ -4,7 +4,7 @@ run(function()
 
    create_southern_port()
    local wh = p1:place_building("barbarians_warehouse", map:get_field(13, 16), false, false)
-   connected_road(p1, wh.flag, "r,r,r", true)
+   connected_road("normal", p1, wh.flag, "r,r,r", true)
    create_northern_port()
 
    start_building_farm()
