@@ -32,7 +32,7 @@ FORWARD_DECLARATION_REGEX = re.compile(r'(class|struct)\s+(\S+);')
 
 # Files that are hard to capture by regex
 FILE_EXCLUDES = {'graphic/build_texture_atlas.h', 'graphic/gl/system_headers.h', 'scripting/lua.h',
-                 'third_party/eris/lua.hpp', 'scripting/report_error.h', 'editor/tools/set_resources_tool.h'}
+                 'third_party/eris/lua.hpp', 'scripting/eris.h', 'scripting/report_error.h', 'editor/tools/set_resources_tool.h'}
 
 
 def find_classes(file_to_check):
