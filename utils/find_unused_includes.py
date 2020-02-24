@@ -75,6 +75,10 @@ def check_file(file_to_check):
                 continue
             elif header_file == 'io/filesystem/layered_filesystem.h' and 'g_fs->' in file_contents:
                 continue
+            elif header_file == 'graphic/font_handler.h' and 'g_fh->' in file_contents:
+                continue
+            elif header_file == 'sound/sound_handler.h' and 'g_sh->' in file_contents:
+                continue
             header_classes = find_classes(header_file)
             is_useful = False
             for header_class in header_classes:
@@ -101,6 +105,7 @@ def main():
         for filename in filenames:
             if filename.endswith('.h'):
                 check_file(os.path.join(dirpath, filename))
+    print('\nDone.');
 
     return 0
 
