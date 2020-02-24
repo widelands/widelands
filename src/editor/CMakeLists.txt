@@ -118,5 +118,4 @@ wl_library(editor
     widelands_options
     wui
     wui_common_mapdetails
-    wui_mapview_pixelfunctions
 )

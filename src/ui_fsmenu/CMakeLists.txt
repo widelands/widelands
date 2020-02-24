@@ -10,7 +10,6 @@ wl_library(ui_fsmenu_options
     graphic_fonthandler
     graphic_text
     graphic_text_layout
-    helper
     io_filesystem
     logic_filesystem_constants
     scripting_lua_interface
@@ -101,7 +100,6 @@ wl_library(ui_fsmenu_gameloading
     base_i18n
     graphic
     graphic_playercolor
-    helper
     io_filesystem
     io_profile
     logic

@@ -43,7 +43,6 @@ wl_library(game_io
     logic_widelands_geometry_io
     map_io
     map_io_map_loader
-    scripting_lua_interface
     scripting_lua_table
     ui_basic
     wui

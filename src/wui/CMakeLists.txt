@@ -90,7 +90,6 @@ wl_library(wui_common_gamedetails
     base_i18n
     base_log
     base_time_string
-    helper
     game_io
     graphic
     graphic_image_io
@@ -123,10 +122,8 @@ wl_library(wui_common_mapdetails
     graphic
     graphic_text_layout
     io_filesystem
-    logic_game_controller
     logic_game_settings
     logic_map
-    map_io_map_loader
     ui_basic
     wui_common_suggested_teams
 )
@@ -304,7 +301,6 @@ wl_library(wui
     graphic_minimap_renderer
     graphic_playercolor
     graphic_surface
-    graphic_text
     graphic_text_layout
     graphic_toolbar_imageset
     io_filesystem

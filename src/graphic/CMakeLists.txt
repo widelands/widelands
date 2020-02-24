@@ -194,13 +194,11 @@ wl_library(graphic_game_renderer
     base_macros
     graphic
     graphic_fields_to_draw
-    graphic_gl_utils
     graphic_render_queue
     graphic_surface
     logic
     logic_map_objects
     wui
-    wui_mapview_pixelfunctions
 )
 
 wl_library(graphic_minimap_renderer

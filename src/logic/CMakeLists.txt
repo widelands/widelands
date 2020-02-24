@@ -145,7 +145,6 @@ wl_library(logic_map
     logic_filesystem_constants
     logic_map_objects
     logic_objectives
-    logic_tribe_basic_info
     logic_widelands_geometry
     logic_widelands_geometry_io
     map_io_map_loader
