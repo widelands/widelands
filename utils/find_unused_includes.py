@@ -17,6 +17,9 @@ USING_REGEX = re.compile(r'.*using.*\s+(\S+)\s+=')
 CLASS_REGEX = re.compile(r'.*(class|enum|struct)\s+(\S+)\s+.*{')
 DEFINE_REGEX = re.compile(r'\#define\s+(\w+)')
 CONSTEXPR_REGEX = re.compile(r'constexpr.*\s+(\w+)\s+=')
+EXTERN_REGEX = re.compile(r'extern\s+\S+\s+(\S+);')
+EXTERN_ZIP_REGEX = re.compile(r'extern\s+\S+\s+\S+\s+(\S+)\s+')
+TYPEDEF_REGEX = re.compile(r'typedef\s+\S+\s+(\S+);')
 
 def find_classes(file_to_check):
     """Returns a set of classes defined by this file."""
@@ -34,6 +37,15 @@ def find_classes(file_to_check):
             if match and len(match.groups()) == 1:
                 classes.add(match.groups()[0])
             match = CONSTEXPR_REGEX.match(line)
+            if match and len(match.groups()) == 1:
+                classes.add(match.groups()[0])
+            match = EXTERN_REGEX.match(line)
+            if match and len(match.groups()) == 1:
+                classes.add(match.groups()[0])
+            match = EXTERN_ZIP_REGEX.match(line)
+            if match and len(match.groups()) == 1:
+                classes.add(match.groups()[0])
+            match = TYPEDEF_REGEX.match(line)
             if match and len(match.groups()) == 1:
                 classes.add(match.groups()[0])
     return classes
@@ -70,14 +82,6 @@ def check_file(file_to_check):
         for header_file in header_files:
             # NOCOM implement support for these special files
             if header_file.startswith('base/'):
-                continue
-            elif header_file == 'graphic/graphic.h' and 'g_gr->' in file_contents:
-                continue
-            elif header_file == 'io/filesystem/layered_filesystem.h' and 'g_fs->' in file_contents:
-                continue
-            elif header_file == 'graphic/font_handler.h' and 'g_fh->' in file_contents:
-                continue
-            elif header_file == 'sound/sound_handler.h' and 'g_sh->' in file_contents:
                 continue
             header_classes = find_classes(header_file)
             is_useful = False
