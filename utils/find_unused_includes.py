@@ -10,11 +10,13 @@ import os.path
 import re
 import sys
 
+# NOCOM find forward declarations too
+HEADER_REGEX = re.compile(r'^#include\s+\"(\S+)\"$')
 
 USING_REGEX = re.compile(r'.*using.*\s+(\S+)\s+=')
 CLASS_REGEX = re.compile(r'.*(class|enum|struct)\s+(\S+)\s+.*{')
-HEADER_REGEX = re.compile(r'^#include\s+\"(\S+)\"$')
-
+DEFINE_REGEX = re.compile(r'\#define\s+(\w+)')
+CONSTEXPR_REGEX = re.compile(r'constexpr.*\s+(\w+)\s+=')
 
 def find_classes(file_to_check):
     """Returns a set of classes defined by this file."""
@@ -26,6 +28,12 @@ def find_classes(file_to_check):
             if match and len(match.groups()) == 2:
                 classes.add(match.groups()[1])
             match = USING_REGEX.match(line)
+            if match and len(match.groups()) == 1:
+                classes.add(match.groups()[0])
+            match = DEFINE_REGEX.match(line)
+            if match and len(match.groups()) == 1:
+                classes.add(match.groups()[0])
+            match = CONSTEXPR_REGEX.match(line)
             if match and len(match.groups()) == 1:
                 classes.add(match.groups()[0])
     return classes
@@ -60,7 +68,12 @@ def check_file(file_to_check):
 
         header_files = find_includes(file_to_check)
         for header_file in header_files:
-            if header_file == 'base/macros.h' or header_file == 'base/log.h':
+            # NOCOM implement support for these special files
+            if header_file.startswith('base/'):
+                continue
+            elif header_file == 'graphic/graphic.h' and 'g_gr->' in file_contents:
+                continue
+            elif header_file == 'io/filesystem/layered_filesystem.h' and 'g_fs->' in file_contents:
                 continue
             header_classes = find_classes(header_file)
             is_useful = False
