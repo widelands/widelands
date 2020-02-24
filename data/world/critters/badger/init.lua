@@ -17,6 +17,12 @@ animations = {
       hotspot = { 9, 12 },
       fps = 20,
    },
+   eating = {
+      directory = dirname,
+      basename = "idle", -- TODO(Nordfriese): Make animation
+      hotspot = { 9, 12 },
+      fps = 20,
+   }
 }
 
 add_directional_animation(animations, "walk", dirname, "walk", {13, 15}, 20)
@@ -48,6 +54,26 @@ add_directional_animation(animations, "walk", dirname, "walk", {13, 15}, 20)
 --
 --            attributes = { "eatable" }, -- This animal can be hunted
 --
+--    **reproduction_rate**
+--        *Mandatory*. How likely this critter is to reproduce when it finds a mating partner, in %, e.g.::
+--
+--            reproduction_rate = 10,
+--
+--    **herbivore**
+--        *Optional*. An array of attribute names. If given, this critter considers any immovable with one of these attributes food. E.g.::
+--
+--            herbivore = { "field" },
+--
+--    **carnivore**
+--        *Optional*. An array of critter names. If given, this critter considers these critter types food. E.g.::
+--
+--            carnivore = { "bunny", "sheep" },
+--
+--    **appetite**
+--        *Mandatory* if ``herbivore`` or ``carnivore`` is given. How likely this critter is to eat when it finds food, in %, e.g.::
+--
+--            appetite = 20,
+--
 --    **programs**
 --        *Mandatory*. Every critter has an automatic default program, which is to move around the map at random. Additional programs can be defined that other map objects can then call in their programs, e.g.::
 --
@@ -57,7 +83,7 @@ add_directional_animation(animations, "walk", dirname, "walk", {13, 15}, 20)
 --
 --    **animations**
 --        *Mandatory*. A table containing all animations for this critter. Every critter
---        needs to have an ``idle`` and a directional ``walk`` animation.
+--        needs to have an ``idle`` and a directional ``walk`` animation. Herbivores and carnivores additionally need an ``eating`` animation.
 --        See :doc:`animations` for a detailed description of the animation format.
 world:new_critter_type{
    name = "badger",
@@ -68,4 +94,7 @@ world:new_critter_type{
       remove = { "remove" },
    },
    animations = animations,
+   reproduction_rate = 70,
+   appetite = 50,
+   carnivore = { "bunny", "deer", "reindeer", "stag" },
 }

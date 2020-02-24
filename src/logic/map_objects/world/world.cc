@@ -77,6 +77,15 @@ void World::postload() {
 			}
 		}
 	}
+	const size_t nr_c = get_nr_critters();
+	for (size_t i = 0; i < nr_c; ++i) {
+		const CritterDescr* c = get_critter_descr(i);
+		for (const std::string d : c->food_critters()) {
+			if (!get_critter_descr(d)) {
+				throw GameDataError("Critter %s: Eaten critter '%s' does not exist", c->name().c_str(), d.c_str());
+			}
+		}
+	}
 }
 
 const DescriptionMaintainer<TerrainDescription>& World::terrains() const {
@@ -152,6 +161,10 @@ DescriptionIndex World::get_terrain_index(const std::string& name) const {
 
 DescriptionIndex World::get_nr_terrains() const {
 	return terrains_->size();
+}
+
+DescriptionIndex World::get_nr_critters() const {
+	return critters_->size();
 }
 
 DescriptionIndex World::get_critter(char const* const l) const {

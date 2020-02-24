@@ -10,6 +10,12 @@ animations = {
          path = "sound/animals/elk",
       },
    },
+   eating = {
+      directory = dirname,
+      basename = "idle", -- TODO(Nordfriese): Make animation
+      hotspot = { 15, 27 },
+      fps = 20,
+   }
 }
 
 add_directional_animation(animations, "walk", dirname, "walk", {21, 34}, 20)
@@ -23,4 +29,7 @@ world:new_critter_type{
       remove = { "remove" },
    },
    animations = animations,
+   reproduction_rate = 30,
+   appetite = 50,
+   herbivore = {"field"},
 }

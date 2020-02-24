@@ -103,6 +103,16 @@ struct FindBobAlwaysTrue : public FindBob {
 	}  // make gcc shut up
 };
 
+struct FindBobByName : public FindBob {
+	bool accept(Bob* b) const override;
+	FindBobByName(const std::string& n) : name_(n) {
+	}
+	~FindBobByName() override {
+	}
+private:
+	std::string name_;
+};
+
 // Helper struct to save certain elemental data of a field without an actual instance of Field
 struct FieldData {
 	FieldData(const Field& f);

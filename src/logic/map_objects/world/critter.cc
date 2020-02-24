@@ -106,6 +106,41 @@ CritterDescr::CritterDescr(const std::string& init_descname,
 	add_attributes(
 	   table.get_table("attributes")->array_entries<std::string>(), std::set<uint32_t>());
 
+	reproduction_rate_ = table.get_int("reproduction_rate");
+	if (reproduction_rate_ > 100) {
+		throw GameDataError("Critter %s: reproduction_rate_ %u out of range 0..100", name().c_str(), static_cast<unsigned>(reproduction_rate_));
+	}
+	if (table.has_key("carnivore")) {
+		for (const std::string& d : table.get_table("carnivore")->array_entries<std::string>()) {
+			if (d == name()) {
+				throw GameDataError("Critter %s: Widelands is a peaceful game that does not permit cannibalism", name().c_str());
+			}
+			food_critters_.insert(d);
+		}
+		if (food_critters_.empty()) {
+			throw GameDataError("Critter %s: 'carnivore' specified but empty", name().c_str());
+		}
+	}
+	if (table.has_key("herbivore")) {
+		for (const std::string& a : table.get_table("herbivore")->array_entries<std::string>()) {
+			food_plants_.insert(get_attribute_id(a, true));
+		}
+		if (food_plants_.empty()) {
+			throw GameDataError("Critter %s: 'herbivore' specified but empty", name().c_str());
+		}
+	}
+	if (table.has_key("appetite")) {
+		if (food_critters_.empty() && food_plants_.empty()) {
+			throw GameDataError("Critter %s is neither herbivore but carnivore but has an appetite", name().c_str());
+		}
+		appetite_ = table.get_int("appetite");
+		if (appetite_ > 100) {
+			throw GameDataError("Critter %s: appetite %u out of range 0..100", name().c_str(), static_cast<unsigned>(appetite_));
+		}
+	} else if (!food_critters_.empty() || !food_plants_.empty()) {
+		throw GameDataError("Critter %s is a herbivore or carnivore but has no appetite", name().c_str());
+	}
+
 	std::unique_ptr<LuaTable> programs = table.get_table("programs");
 	for (const std::string& program_name : programs->keys<std::string>()) {
 		try {
@@ -168,10 +203,15 @@ class Critter
 // Implementation
 //
 
-// wait up to 12 seconds between moves
-#define CRITTER_MAX_WAIT_TIME_BETWEEN_WALK 2000
+Critter::Critter(const CritterDescr& critter_descr) : Bob(critter_descr), creation_time_(0) {
+}
 
-Critter::Critter(const CritterDescr& critter_descr) : Bob(critter_descr) {
+bool Critter::init(EditorGameBase& egbase) {
+	if (is_a(Game, &egbase)) {
+		// in editor, assume t0 as creation time so bobs don't die of old age right away when the actual game starts
+		creation_time_= egbase.get_gametime();
+	}
+	return Bob::init(egbase);
 }
 
 /*
@@ -230,23 +270,89 @@ Simply roam the map
 Bob::Task const Critter::taskRoam = {
    "roam", static_cast<Bob::Ptr>(&Critter::roam_update), nullptr, nullptr, true};
 
+constexpr uint16_t kCritterMaxIdleTime = 2000;
+constexpr uint16_t kMealtime = 2500;
+constexpr uint32_t kMinReproductionAge = 5 * 60 * 1000;
+constexpr uint32_t kMinCritterLifetime = 2 * 60 * 60 * 1000;
+constexpr uint32_t kMaxCritterLifetime = 50 * 60 * 60 * 1000;
+
 void Critter::roam_update(Game& game, State& state) {
 	if (get_signal().size())
 		return pop_task(game);
 
+	const uint32_t age = game.get_gametime() - creation_time_;
+	if (age > kMinCritterLifetime && game.logic_rand() % kMaxCritterLifetime < age) {
+		// :(
+		log("NOCOM %s: Goodby world :(\n", descr().name().c_str());
+		return schedule_destroy(game);
+	}
+
 	// alternately move and idle
 	Time idle_time_min = 1000;
-	Time idle_time_rnd = CRITTER_MAX_WAIT_TIME_BETWEEN_WALK;
+	Time idle_time_rnd = kCritterMaxIdleTime;
 	if (state.ivar1) {
 		state.ivar1 = 0;
 		if (start_task_movepath(game,
 		                        game.random_location(get_position(), 2),  //  Pick a random target.
-		                        3, descr().get_walk_anims()))
+		                        3, descr().get_walk_anims())) {
 			return;
+		}
 		idle_time_min = 1;
 		idle_time_rnd = 1000;
 	}
 	state.ivar1 = 1;
+	std::vector<Bob*> candidates_for_eating; // nullptr indicates the immovable here
+	size_t mating_partners = 0;
+	if (descr().is_herbivore() && get_position().field->get_immovable()) {
+		for (uint32_t a : descr().food_plants()) {
+			if (get_position().field->get_immovable()->descr().has_attribute(a)) {
+				candidates_for_eating.push_back(nullptr);
+				break;
+			}
+		}
+	}
+	if (descr().is_carnivore()) {
+		for (Bob* b = get_position().field->get_first_bob(); b; b = b->get_next_bob()) {
+			assert(b);
+			if (b == this)
+				continue;
+			if (descr().name() == b->descr().name()) {
+				++mating_partners;
+			}
+			if (descr().food_critters().count(b->descr().name())) {
+				candidates_for_eating.push_back(b);
+			}
+		}
+	}
+	while (!candidates_for_eating.empty()) {
+		size_t idx = game.logic_rand() % candidates_for_eating.size();
+		if (game.logic_rand() % 100 < descr().get_appetite()) {
+			// yum yum yum
+			Bob* food = candidates_for_eating[idx];
+			if (food) {
+				log("NOCOM Yummy, %ss love %ss\n", descr().name().c_str(), food->descr().name().c_str());
+				food->remove(game);
+			} else {
+				// refers to the plant on our field
+				log("NOCOM Increasing the immovable's growth time is not yet implemented :(\n");
+			}
+			return start_task_idle(game, descr().get_animation("eating", this), kMealtime);
+		}
+		candidates_for_eating.erase(candidates_for_eating.begin() + idx);
+	}
+	// no food sadly, but perhaps another animal to make cute little fox cubs with…?
+	if (age > kMinReproductionAge && game.logic_rand() % 100 < mating_partners * descr().get_reproduction_rate()) {
+		// A potential partner is interested in us. Now politely ask the game's birth control system for permission.
+		const size_t population_size_2 = game.map().find_bobs(game, Area<FCoords>(get_position(), 2), nullptr, FindBobByName(descr().name()));
+		const size_t population_size_5 = game.map().find_bobs(game, Area<FCoords>(get_position(), 5), nullptr, FindBobByName(descr().name()));
+		assert(population_size_2 >= 1); // at least we should be there
+		assert(population_size_5 >= population_size_2);
+		const float chance = 2.f / (1.f + population_size_2) + 4.f / (2.f + population_size_5);
+		if (game.logic_rand() % 1000 < 1000.f * chance) {
+			log("NOCOM A cute little %s cub :)\n", descr().name().c_str());
+			game.create_critter(get_position(), descr().name());
+		}
+	}
 	return start_task_idle(
 	   game, descr().get_animation("idle", this), idle_time_min + game.logic_rand() % idle_time_rnd);
 }
@@ -270,7 +376,7 @@ Load / Save implementation
 
 // We need to bump this packet version every time we rename a critter, so that the world legacy
 // lookup table will work.
-constexpr uint8_t kCurrentPacketVersion = 2;
+constexpr uint8_t kCurrentPacketVersion = 3;
 
 Critter::Loader::Loader() {
 }
@@ -316,7 +422,9 @@ MapObject::Loader* Critter::load(EditorGameBase& egbase,
 				throw GameDataError(
 				   "undefined critter %s/%s", critter_owner.c_str(), critter_name.c_str());
 
-			loader->init(egbase, mol, descr->create_object());
+			Critter& critter = dynamic_cast<Critter&>(descr->create_object());
+			critter.creation_time_ = packet_version >= 3 ? fr.unsigned_32() : 0;
+			loader->init(egbase, mol, critter);
 			loader->load(fr);
 		} else {
 			throw UnhandledVersionError("Critter", packet_version, kCurrentPacketVersion);
@@ -337,6 +445,7 @@ void Critter::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	                                  "world";
 	fw.c_string(save_owner);
 	fw.c_string(descr().name());
+	fw.unsigned_32(creation_time_);
 
 	Bob::save(egbase, mos, fw);
 }

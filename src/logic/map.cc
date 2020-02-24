@@ -36,6 +36,7 @@
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
+#include "logic/map_objects/bob.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/findnode.h"
@@ -68,6 +69,10 @@ FieldData::FieldData(const Field& field)
 	for (Bob* bob = field.get_first_bob(); bob; bob = bob->get_next_bob()) {
 		bobs.push_back(bob->descr().name());
 	}
+}
+
+bool FindBobByName::accept(Bob* b) const {
+	return b && b->descr().name() == name_;
 }
 
 /*
