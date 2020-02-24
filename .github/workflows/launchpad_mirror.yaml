@@ -1,8 +1,8 @@
 name: Launchpad Mirror
 on:
   push:
-#    branches:
-#      - master
+    branches:
+      - master
 jobs:
   mirror:
     name: Synchronizing Launchpad trunk with GitHub master
