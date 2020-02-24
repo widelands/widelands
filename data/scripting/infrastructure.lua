@@ -191,7 +191,7 @@ function is_building(immovable)
 end
 
 -- RST
--- .. function:: add_wares(player, warehouse, waretable)
+-- .. function:: add_wares_to_warehouse(player, warehouse, waretable)
 --
 --    Adds(subtracts) wares to the first warehouse of specified type
 --
@@ -199,7 +199,7 @@ end
 --    :arg warehouse: The type of warehouse (string) to add wares to
 --    :arg waretable: a table of pairs {ware = value}
 
-function add_wares(player, warehouse, waretable)
+function add_wares_to_warehouse(player, warehouse, waretable)
    local hq = player:get_buildings(warehouse)[1]
    for ware,warecount in pairs(waretable) do
       local oldwarecount = hq:get_wares(ware) or 0
@@ -238,12 +238,12 @@ function check_trees_rocks_poor_hamlet(player, sf, warehouse, waretable_rocks, w
       end
    end
    if not has_rocks then
-      add_wares(player, warehouse, waretable_rocks)
+      add_wares_to_warehouse(player, warehouse, waretable_rocks)
       player:send_message(_"No rocks nearby", _"There are no rocks near to your starting position. Therefore, you receive extra resources for bootstrapping your economy.")
    end
    -- adding exactly one forester
    if not has_trees then
-      add_wares(player, warehouse, waretable_trees)
+      add_wares_to_warehouse(player, warehouse, waretable_trees)
       player:send_message(_"No trees nearby", _"There are no trees near to your starting position. Therefore, you receive extra resources for bootstrapping your economy.")
    end
 end
