@@ -30,6 +30,7 @@
 #include "logic/map_objects/findnode.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/world/map_gen.h"
+#include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"

@@ -21,9 +21,7 @@
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_WAREHOUSE_H
 
 #include "base/macros.h"
-#include "base/wexception.h"
 #include "economy/request.h"
-#include "economy/wares_queue.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/map_objects/tribes/wareworker.h"

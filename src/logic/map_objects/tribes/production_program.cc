@@ -32,6 +32,7 @@
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/input_queue.h"
+#include "economy/wares_queue.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
