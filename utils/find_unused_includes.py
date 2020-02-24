@@ -79,7 +79,7 @@ def check_file(file_to_check):
 def main():
     """Script to find unused includes.
 
-    Call from src directory
+    Call from src directory.
     """
 
     print('Tool to check for superfluous includes in header files. Cal from src diectory.')
