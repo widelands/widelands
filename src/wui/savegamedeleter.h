@@ -16,6 +16,9 @@ public:
 	/// (because deletion can be aborted by user via "cancel" in confirmation window)
 	bool delete_savegames(const std::vector<SavegameData>& to_be_deleted) const;
 
+	virtual ~SavegameDeleter() {
+	}
+
 private:
 	bool show_confirmation_window(const std::vector<SavegameData>& selections) const;
 	virtual const std::string

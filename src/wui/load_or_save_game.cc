@@ -384,12 +384,11 @@ void LoadOrSaveGame::fill_table() {
 	clear_selections();
 	games_data_.clear();
 
-	FilenameSet gamefiles = g_fs->list_directory(curdir_);
-
 	// If we are not in basedir we are in a sub-dir so we need to add parent dir
 	if (curdir_ != basedir_) {
 		games_data_.push_back(SavegameData::create_parent_dir(curdir_));
 	}
+	FilenameSet gamefiles = g_fs->list_directory(curdir_);
 
 	for (const std::string& gamefilename : gamefiles) {
 		load_gamefile(gamefilename);
