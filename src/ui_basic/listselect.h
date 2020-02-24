@@ -25,8 +25,8 @@
 
 #include <boost/signals2.hpp>
 
-#include "graphic/color.h"
 #include "graphic/styles/table_style.h"
+#include "graphic/text/rendered_text.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/scrollbar.h"
 
