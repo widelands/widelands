@@ -78,11 +78,11 @@ void GameSaver::save() {
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing Map Data!\n");
-	GameMapPacket M;
-	M.write(fs_, game_, nullptr);
+	GameMapPacket map_packet;
+	map_packet.write(fs_, game_, nullptr);
 	log("Game: Writing Map Data took %ums\n", timer.ms_since_last_query());
 
-	MapObjectSaver* const mos = M.get_map_object_saver();
+	MapObjectSaver* const mos = map_packet.get_map_object_saver();
 
 	log("Game: Writing Player Economies Info ... ");
 	set_progress_message(_("Economies"), 2);
