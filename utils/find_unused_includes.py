@@ -18,8 +18,11 @@ CLASS_REGEX = re.compile(r'.*(class|enum|struct)\s+(\S+)\s+.*{')
 DEFINE_REGEX = re.compile(r'\#define\s+(\w+)')
 CONSTEXPR_REGEX = re.compile(r'constexpr.*\s+(\w+)\s+=')
 EXTERN_REGEX = re.compile(r'extern\s+\S+\s+(\S+);')
+# Extern macros used in third_party/minizip
 EXTERN_ZIP_REGEX = re.compile(r'extern\s+\S+\s+\S+\s+(\S+)\s+')
 TYPEDEF_REGEX = re.compile(r'typedef\s+\S+\s+(\S+);')
+# Special regex for #include "graphic/text/rt_errors.h"
+RT_ERRORS_REGEX = re.compile(r'DEF_ERR\((\S+)\)')
 
 def find_classes(file_to_check):
     """Returns a set of classes defined by this file."""
@@ -46,6 +49,9 @@ def find_classes(file_to_check):
             if match and len(match.groups()) == 1:
                 classes.add(match.groups()[0])
             match = TYPEDEF_REGEX.match(line)
+            if match and len(match.groups()) == 1:
+                classes.add(match.groups()[0])
+            match = RT_ERRORS_REGEX.match(line)
             if match and len(match.groups()) == 1:
                 classes.add(match.groups()[0])
     return classes
@@ -83,6 +89,8 @@ def check_file(file_to_check):
             # NOCOM implement support for these special files
             if header_file.startswith('base/'):
                 continue
+            elif header_file == 'graphic/gl/system_headers.h':
+                continue
             header_classes = find_classes(header_file)
             is_useful = False
             for header_class in header_classes:
@@ -96,6 +104,8 @@ def check_file(file_to_check):
         for hit in hits:
             print(hit)
 
+    return len(hits)
+
 
 def main():
     """Script to find unused includes.
@@ -103,13 +113,20 @@ def main():
     Call from src directory.
     """
 
+    error_count = 0
+
     print('Tool to check for superfluous includes in header files. Cal from src diectory.')
 
     for (dirpath, _, filenames) in os.walk('.'):
         for filename in filenames:
             if filename.endswith('.h'):
-                check_file(os.path.join(dirpath, filename))
-    print('\nDone.');
+                error_count = error_count + check_file(os.path.join(dirpath, filename))
+
+    if error_count > 0:
+        print('\nFound %d errors.' % error_count);
+        return 1
+    else:
+        print('\nDone.');
 
     return 0
 
