@@ -28,7 +28,6 @@
 #include "build_info.h"
 #include "graphic/graphic.h"
 #include "graphic/text_layout.h"
-#include "network/crypto.h"
 #include "network/gameclient.h"
 #include "network/gamehost.h"
 #include "network/internet_gaming.h"
