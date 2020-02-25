@@ -13,6 +13,7 @@ import sys
 # NOCOM find forward declarations too
 HEADER_REGEX = re.compile(r'^#include\s+\"(\S+)\"$')
 
+
 # Detect symbols
 USING_OR_CONSTEXPR_REGEX = re.compile(r'.*(using|constexpr).*\s+(\w+)\s+=')
 CLASS_REGEX = re.compile(r'.*(class|enum|struct)\s+(\S+)\s+.*{')
@@ -20,7 +21,7 @@ DEFINE_REGEX = re.compile(r'\#define\s+(\w+)')
 STRING_CONSTANT_REGEX = re.compile(
     r'.*const\sstd::string\s+(k\w+|\w+_\w+)\s+=\s+\"\S+\";')
 EXTERN_OR_TYPEDEF_REGEX = re.compile(r'(extern|typedef)\s+\S+\s+(\S+);')
-INLINE_FUNCTION_REGEX = re.compile(r'inline\s+\S+\s+(\S+\()')
+INLINE_FUNCTION_REGEX = re.compile(r'inline\s+\S+\s+(\S+)\(')
 FORWARD_DECLARATION_REGEX = re.compile(r'(class|struct)\s+(\S+);')
 
 # Extern macros used in third_party/minizip
@@ -30,7 +31,8 @@ EXTERN_ZIP_REGEX = re.compile(r'extern\s+\S+\s+\S+\s+(\S+)\s+')
 MACRO_CLASS_DEFINITION_REGEX = re.compile(r'^[A-Z_0-9]+\((\w+)\)$')
 
 # For .cc files and DIFFICULT_FILES
-FUNCTION_REGEX = re.compile(r'(^|.*\s+)([a-zA-Z_0-9]+)\(.*(\)|,).*')
+FUNCTION_REGEX = re.compile(
+    r'(^|.*\s+)([a-zA-Z_0-9][a-zA-Z_0-9]{2,})\(.*(\)|,).*')
 
 # Special regex for base/log.h
 HEADER_LOG_REGEX = re.compile(r'(void|bool)\s+(\w+)\(.*\);')
@@ -42,6 +44,17 @@ FILE_EXCLUDES = {'graphic/gl/system_headers.h', 'scripting/lua.h',
 # Headers files with contents that need to be detected by functions
 DIFFICULT_FILES = {'graphic/build_texture_atlas.h',
                    'scripting/report_error.h', 'editor/tools/set_resources_tool.h'}
+
+# Remove overgenerated symbols
+FUNCTION_EXCLUDES = {'_Pragma',
+                     'assert',
+                     'memset',
+                     'operator',
+                     'time',
+                     'TODO',
+                     'what'}
+
+INCLUDE_GUARD_REGEX = re.compile(r'WL_[A-Z_]+_H')
 
 
 def find_classes(file_to_check, include_functions, special_regex, special_regex_group):
@@ -90,9 +103,10 @@ def find_classes(file_to_check, include_functions, special_regex, special_regex_
             if include_functions:
                 match = FUNCTION_REGEX.match(line)
                 if match and len(match.groups()) > 1:
-                    classes.add(match.groups()[1])
+                    if not match.groups()[1] in FUNCTION_EXCLUDES:
+                        classes.add(match.groups()[1])
 
-            if HEADER_LOG_REGEX:
+            if special_regex:
                 match = HEADER_LOG_REGEX.match(line)
                 if match and len(match.groups()) > special_regex_group:
                     classes.add(match.groups()[special_regex_group])
@@ -141,6 +155,8 @@ def check_file(file_to_check, include_functions):
                     header_file, include_functions, None, 0)
 
             for header_class in header_classes:
+                if INCLUDE_GUARD_REGEX.match(header_class):
+                    continue
                 if header_class in file_contents:
                     is_useful = True
                     break
