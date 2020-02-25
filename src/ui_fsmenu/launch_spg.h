@@ -29,11 +29,9 @@
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/launch_game.h"
 
-struct ChatProvider;
 class GameController;
 struct GameSettingsProvider;
 struct PlayerDescriptionGroup;
-class LuaInterface;
 
 /**
  * Fullscreen menu for setting map and mapsettings for single and multi player

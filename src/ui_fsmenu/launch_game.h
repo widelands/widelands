@@ -30,7 +30,6 @@
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/base.h"
 
-struct ChatProvider;
 class GameController;
 struct GameSettingsProvider;
 class LuaInterface;

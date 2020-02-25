@@ -36,7 +36,6 @@ struct GameChatPanel;
 class GameController;
 struct GameSettingsProvider;
 struct MultiPlayerSetupGroup;
-class LuaInterface;
 
 /**
  * Fullscreen menu for setting map and mapsettings for single and multi player

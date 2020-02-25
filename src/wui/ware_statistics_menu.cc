@@ -26,7 +26,6 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warelist.h"
 #include "logic/player.h"
-#include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/slider.h"
 #include "ui_basic/tabpanel.h"

@@ -27,9 +27,6 @@
 
 namespace Widelands {
 
-class Economy;
-struct Flag;
-struct RoutingNodeNeighbour;
 struct Ferry;
 struct Waterway;
 

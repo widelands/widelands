@@ -29,7 +29,6 @@
 #include "graphic/image.h"
 #include "logic/widelands_geometry.h"
 
-class Animation;
 class Surface;
 
 /**

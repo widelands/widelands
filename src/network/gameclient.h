@@ -29,7 +29,6 @@
 #include "network/network.h"
 
 struct GameClientImpl;
-class InteractiveGameBase;
 
 /**
  * GameClient manages the lifetime of a network game in which this computer

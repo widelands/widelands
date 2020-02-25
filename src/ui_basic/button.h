@@ -29,8 +29,6 @@
 
 namespace UI {
 
-struct Font;
-
 enum class ButtonDisableStyle {
 	kMonochrome = 2,   // Greyed out. Can be combined with the other 2 styles.
 	kPermpressed = 4,  // Button will appear pressed.

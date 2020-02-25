@@ -184,7 +184,7 @@ def check_forward_declarations(file_to_check):
                 temp_declarations = copy.copy(forward_declarations)
                 for forward_declaration in forward_declarations:
                     if forward_declaration in line:
-                        # Forward declaration is being used, so we remove it from the se
+                        # Forward declaration is being used, so we remove it from the set
                         temp_declarations.remove(forward_declaration)
                 forward_declarations = temp_declarations
         hits = forward_declarations

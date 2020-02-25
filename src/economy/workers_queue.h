@@ -26,13 +26,11 @@
 namespace Widelands {
 
 class Economy;
-class EditorGameBase;
 class ExpeditionBootstrap;
 class Game;
 class MapObjectLoader;
 struct MapObjectSaver;
 class Player;
-class Request;
 class Worker;
 
 /**

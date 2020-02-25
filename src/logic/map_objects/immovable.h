@@ -40,6 +40,7 @@ class WorldLegacyLookupTable;
 namespace Widelands {
 
 class Building;
+class BuildingDescr;
 class Economy;
 class Map;
 class TerrainAffinity;

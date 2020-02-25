@@ -43,7 +43,6 @@ namespace Widelands {
 struct CoordPath;
 }
 
-class EdgeOverlayManager;
 class UniqueWindowHandler;
 
 struct WorkareaPreview {

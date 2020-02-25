@@ -28,7 +28,6 @@
 #include "map_io/map_loader.h"
 
 class FileSystem;
-class LuaInterface;
 
 namespace Widelands {
 
