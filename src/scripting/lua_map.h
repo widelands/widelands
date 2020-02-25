@@ -1324,6 +1324,8 @@ public:
 	int get_defense_level(lua_State*);
 	int get_health_level(lua_State*);
 	int get_evade_level(lua_State*);
+	int get_current_health(lua_State*);
+	int set_current_health(lua_State*);
 
 	/*
 	 * Lua methods

@@ -150,21 +150,26 @@ struct SoldierMapDescr {
 	SoldierMapDescr(uint8_t init_health,
 	                uint8_t init_attack,
 	                uint8_t init_defense,
-	                uint8_t init_evade)
-	   : health(init_health), attack(init_attack), defense(init_defense), evade(init_evade) {
+	                uint8_t init_evade,
+	                int32_t init_total_health)
+	   : health(init_health), attack(init_attack), defense(init_defense), evade(init_evade), total_health(init_total_health) {
 	}
-	SoldierMapDescr() : health(0), attack(0), defense(0), evade(0) {
+	SoldierMapDescr() : health(0), attack(0), defense(0), evade(0), total_health(-1) {
 	}
 
 	uint8_t health;
 	uint8_t attack;
 	uint8_t defense;
 	uint8_t evade;
+	int32_t total_health; // -1 signals that it does not matter
 
 	bool operator<(const SoldierMapDescr& ot) const {
-		bool equal_health = health == ot.health;
-		bool equal_attack = attack == ot.attack;
-		bool equal_defense = defense == ot.defense;
+		const bool equal_health = health == ot.health;
+		const bool equal_attack = attack == ot.attack;
+		const bool equal_defense = defense == ot.defense;
+		const bool equal_evade = evade == ot.evade;
+		if (equal_health && equal_attack && equal_defense && equal_evade)
+			return total_health < 0 ? false : total_health < ot.total_health;
 		if (equal_health && equal_attack && equal_defense)
 			return evade < ot.evade;
 		if (equal_health && equal_attack)
@@ -173,10 +178,9 @@ struct SoldierMapDescr {
 			return attack < ot.attack;
 		return health < ot.health;
 	}
-	bool operator==(const SoldierMapDescr& ot) const {
-		if (health == ot.health && attack == ot.attack && defense == ot.defense && evade == ot.evade)
-			return true;
-		return false;
+	inline bool operator==(const SoldierMapDescr& ot) const {
+		return health == ot.health && attack == ot.attack && defense == ot.defense && evade == ot.evade &&
+				(total_health < 0 || ot.total_health < 0 || total_health == ot.total_health);
 	}
 };
 
@@ -458,7 +462,7 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WaresWorkersMap& val
 	return 0;
 }
 
-// Unpacks the Lua table of the form {health, attack, defense, evade} at the stack index
+// Unpacks the Lua table of the form {health, attack, defense, evade, health} at the stack index
 // 'table_index' into a SoldierMapDescr struct.
 SoldierMapDescr
 unbox_lua_soldier_description(lua_State* L, int table_index, const SoldierDescr& sd) {
@@ -495,6 +499,14 @@ unbox_lua_soldier_description(lua_State* L, int table_index, const SoldierDescr&
 	if (soldier_descr.evade > sd.get_max_evade_level())
 		report_error(L, "evade level (%i) > max evade level (%i)", soldier_descr.evade,
 		             sd.get_max_evade_level());
+
+	lua_pushuint32(L, 5);
+	lua_rawget(L, table_index);
+	soldier_descr.total_health = lua_isnil(L, -1) ? -1 : luaL_checkuint32(L, -1);
+	lua_pop(L, 1);
+	const int32_t maxhealth = sd.get_base_health() + soldier_descr.health * sd.get_health_incr_per_level();
+	if (soldier_descr.total_health >= 0 && soldier_descr.total_health > maxhealth)
+		report_error(L, "total health (%u) > max possible health (%u @ level %i)", soldier_descr.total_health, maxhealth, soldier_descr.health);
 
 	return soldier_descr;
 }
@@ -534,7 +546,7 @@ int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tri
 		SoldiersMap hist;
 		for (const Soldier* s : soldiers) {
 			SoldierMapDescr sd(s->get_health_level(), s->get_attack_level(), s->get_defense_level(),
-			                   s->get_evade_level());
+			                   s->get_evade_level(), s->get_current_health());
 
 			SoldiersMap::iterator i = hist.find(sd);
 			if (i == hist.end())
@@ -555,6 +567,7 @@ int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tri
 			PUSHLEVEL(2, attack)
 			PUSHLEVEL(3, defense)
 			PUSHLEVEL(4, evade)
+			PUSHLEVEL(5, total_health)
 #undef PUSHLEVEL
 
 			lua_pushuint32(L, i.second);
@@ -569,7 +582,7 @@ int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tri
 		Widelands::Quantity rv = 0;
 		for (const Soldier* s : soldiers) {
 			SoldierMapDescr sd(s->get_health_level(), s->get_attack_level(), s->get_defense_level(),
-			                   s->get_evade_level());
+			                   s->get_evade_level(), -1);
 			if (sd == wanted)
 				++rv;
 		}
@@ -596,7 +609,7 @@ int do_set_soldiers(lua_State* L,
 	SoldiersMap hist;
 	for (const Soldier* s : curs) {
 		SoldierMapDescr sd(s->get_health_level(), s->get_attack_level(), s->get_defense_level(),
-		                   s->get_evade_level());
+		                   s->get_evade_level(), s->get_current_health());
 
 		SoldiersMap::iterator i = hist.find(sd);
 		if (i == hist.end())
@@ -620,7 +633,7 @@ int do_set_soldiers(lua_State* L,
 			while (d) {
 				for (Soldier* s : sc->stationed_soldiers()) {
 					SoldierMapDescr is(s->get_health_level(), s->get_attack_level(),
-					                   s->get_defense_level(), s->get_evade_level());
+					                   s->get_defense_level(), s->get_evade_level(), s->get_current_health());
 
 					if (is == sp.first) {
 						sc->outcorporate_soldier(*s);
@@ -635,6 +648,7 @@ int do_set_soldiers(lua_State* L,
 				Soldier& soldier = dynamic_cast<Soldier&>(
 				   soldier_descr.create(egbase, owner, nullptr, building_position));
 				soldier.set_level(sp.first.health, sp.first.attack, sp.first.defense, sp.first.evade);
+				if (sp.first.total_health >= 0) soldier.set_current_health(sp.first.total_health);
 				if (sc->incorporate_soldier(egbase, soldier)) {
 					soldier.remove(egbase);
 					report_error(L, "No space left for soldier!");
@@ -1124,11 +1138,12 @@ HasSoldiers
          kind in this building.
 
          A soldier description is a :class:`array` that contains the level for
-         health, attack, defense and evade (in this order). A usage example:
+         health, attack, defense, and evade, and optionally the soldier's total current hitpoint number (in this order). A usage example:
 
          .. code-block:: lua
 
-            w:get_soldiers({0,0,0,0})
+            w:get_soldiers({0,0,0,0}) -- returns all level 0 soldiers
+            w:get_soldiers({0,0,0,0, 1000}) -- returns all level 0 soldiers with *exactly* 1000 HP left
 
          would return the number of soldiers of level 0 in this location.
 
@@ -6083,7 +6098,7 @@ const MethodType<LuaSoldier> LuaSoldier::Methods[] = {
 };
 const PropertyType<LuaSoldier> LuaSoldier::Properties[] = {
    PROP_RO(LuaSoldier, attack_level), PROP_RO(LuaSoldier, defense_level),
-   PROP_RO(LuaSoldier, health_level), PROP_RO(LuaSoldier, evade_level),
+   PROP_RO(LuaSoldier, health_level), PROP_RO(LuaSoldier, evade_level), PROP_RW(LuaSoldier, current_health),
    {nullptr, nullptr, nullptr},
 };
 
@@ -6134,6 +6149,26 @@ int LuaSoldier::get_health_level(lua_State* L) {
 int LuaSoldier::get_evade_level(lua_State* L) {
 	lua_pushuint32(L, get(L, get_egbase(L))->get_evade_level());
 	return 1;
+}
+
+/* RST
+   .. attribute:: current_health
+
+      (RW) This soldier's current number of hitpoints left.
+*/
+int LuaSoldier::get_current_health(lua_State* L) {
+	lua_pushuint32(L, get(L, get_egbase(L))->get_current_health());
+	return 1;
+}
+int LuaSoldier::set_current_health(lua_State* L) {
+	Soldier& s = *get(L, get_egbase(L));
+	const uint32_t ch = luaL_checkuint32(L, -1);
+	if (ch == 0) report_error(L, "Soldier.current_health must be greater than 0");
+	const uint32_t maxhealth = s.descr().get_base_health() + s.get_health_level() * s.descr().get_health_incr_per_level();
+	if (ch > maxhealth) report_error(L, "Soldier.current_health %u must not be greater than %u for %s with health level %u",
+			ch, maxhealth, s.descr().name().c_str(), s.get_health_level());
+	s.set_current_health(ch);
+	return 0;
 }
 
 /*
