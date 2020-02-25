@@ -37,7 +37,6 @@
 #include "logic/map_objects/world/world.h"
 #include "ui_basic/progresswindow.h"
 #include "wlapplication_options.h"
-#include "wui/game_tips.h"
 
 inline EditorInteractive& MainMenuNewMap::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
@@ -101,10 +100,8 @@ void MainMenuNewMap::clicked_create_map() {
 	EditorInteractive& parent = eia();
 	Widelands::EditorGameBase& egbase = parent.egbase();
 	Widelands::Map* map = egbase.mutable_map();
-	UI::ProgressWindow* loader_ui = new UI::ProgressWindow("images/loadscreens/editor.jpg");
-	GameTips tips(*loader_ui, {"editor"});
-
-	loader_ui->step(_("Creating empty map…"));
+	egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
+	egbase.step_loader_ui(_("Creating empty map…"));
 
 	parent.cleanup_for_load();
 
@@ -112,14 +109,12 @@ void MainMenuNewMap::clicked_create_map() {
 	                      list_.get_selected(), _("No Name"),
 	                      get_config_string("realname", pgettext("author_name", "Unknown")));
 
-	egbase.set_loader_ui(loader_ui);
 	egbase.postload();
 	egbase.load_graphics();
 
 	map->recalc_whole_map(egbase);
 	parent.map_changed(EditorInteractive::MapWas::kReplaced);
-	egbase.set_loader_ui(nullptr);
-	delete loader_ui;
+	egbase.remove_loader_ui();
 	die();
 }
 
