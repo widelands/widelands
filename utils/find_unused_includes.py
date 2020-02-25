@@ -32,6 +32,9 @@ FORWARD_DECLARATION_REGEX = re.compile(r'(class|struct)\s+(\S+);')
 # For .cc files
 FUNCTION_REGEX = re.compile(r'(^|.*\s+)([a-zA-Z_0-9]+)\(.*(\)|,).*')
 
+# Special regex
+HEADER_LOG_REGEX = re.compile(r'(void|bool)\s+(\w+)\(.*\);')
+
 
 # Files that are hard to capture by regex
 FILE_EXCLUDES = {'graphic/gl/system_headers.h', 'scripting/lua.h',
@@ -42,7 +45,7 @@ DIFFICULT_FILES = {'graphic/build_texture_atlas.h',
                    'scripting/report_error.h', 'editor/tools/set_resources_tool.h'}
 
 
-def find_classes(file_to_check, include_functions):
+def find_classes(file_to_check, include_functions, special_regex, special_regex_group):
     """Returns a set of classes defined by this file."""
     classes = set()
     with open(file_to_check, 'r', encoding='utf-8') as f:
@@ -90,6 +93,11 @@ def find_classes(file_to_check, include_functions):
                 if match and len(match.groups()) > 1:
                     classes.add(match.groups()[1])
 
+            if HEADER_LOG_REGEX:
+                match = HEADER_LOG_REGEX.match(line)
+                if match and len(match.groups()) > special_regex_group:
+                    classes.add(match.groups()[special_regex_group])
+
     return classes
 
 
@@ -120,16 +128,17 @@ def check_file(file_to_check, include_functions):
         header_files = find_includes(file_to_check)
         for header_file in header_files:
             header_classes = set()
-            # NOCOM implement support for these special files
-            if header_file.startswith('base/'):
-                continue
-            elif header_file in FILE_EXCLUDES:
+            is_useful = False
+
+            if header_file in FILE_EXCLUDES:
                 continue
             elif header_file in DIFFICULT_FILES:
-                header_classes = find_classes(header_file, True)
+                header_classes = find_classes(header_file, True, None, 0)
+            elif header_file == 'base/log.h':
+                header_classes = find_classes(header_file, False, HEADER_LOG_REGEX, 1)
             else:
-                header_classes = find_classes(header_file, include_functions)
-            is_useful = False
+                header_classes = find_classes(header_file, include_functions, None, 0)
+
             for header_class in header_classes:
                 if header_class in file_contents:
                     is_useful = True
