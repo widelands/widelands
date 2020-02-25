@@ -11,9 +11,8 @@ import os.path
 import re
 import sys
 
-# NOCOM find forward declarations too
+# Find includes
 HEADER_REGEX = re.compile(r'^#include\s+\"(\S+)\"$')
-
 
 # Detect symbols
 USING_OR_CONSTEXPR_REGEX = re.compile(r'.*(using|constexpr).*\s+(\w+)\s+=')
