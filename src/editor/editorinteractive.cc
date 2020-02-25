@@ -1467,7 +1467,8 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 		fw.print_f("\nfunction %s()\n", autogen_starting_function.c_str());
 
 		std::string autogen_variable_name = "temp_object";
-		while (scripting_saver_->get<Variable>(autogen_variable_name) || scripting_saver_->get<LuaFunction>(autogen_variable_name)) {
+		while (scripting_saver_->get<Variable>(autogen_variable_name) ||
+		       scripting_saver_->get<LuaFunction>(autogen_variable_name)) {
 			autogen_variable_name = "_" + autogen_variable_name;
 		}
 
@@ -1607,7 +1608,8 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 							std::map<std::string, unsigned> wares_workers;
 							for (Widelands::DescriptionIndex di : wh.owner().tribe().wares()) {
 								const std::string name = wh.owner().tribe().get_ware_descr(di)->name();
-								write("%s:set_warehouse_policies(\"%s\", \"%s\")", var, name.c_str(), stockpolicystring(wh.get_ware_policy(di)));
+								write("%s:set_warehouse_policies(\"%s\", \"%s\")", var, name.c_str(),
+								      stockpolicystring(wh.get_ware_policy(di)));
 								auto it = wares_workers.find(name);
 								if (it == wares_workers.end())
 									wares_workers[name] = wh.get_wares().stock(di);
@@ -1622,7 +1624,8 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 							wares_workers.clear();
 							for (Widelands::DescriptionIndex di : wh.owner().tribe().workers()) {
 								const std::string name = wh.owner().tribe().get_worker_descr(di)->name();
-								write("%s:set_warehouse_policies(\"%s\", \"%s\")", var, name.c_str(), stockpolicystring(wh.get_worker_policy(di)));
+								write("%s:set_warehouse_policies(\"%s\", \"%s\")", var, name.c_str(),
+								      stockpolicystring(wh.get_worker_policy(di)));
 								auto it = wares_workers.find(name);
 								if (it == wares_workers.end())
 									wares_workers[name] = wh.get_workers().stock(di);
@@ -1714,9 +1717,11 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 								if (q->get_type() == Widelands::wwWARE) {
 									name = egbase().tribes().get_ware_descr(q->get_index())->name().c_str();
 									write("%s:set_desired_fill(%s, %u)", var, name, q->get_max_fill());
-									write("%s:set_priority(%s, %i)", var, name, ps.get_priority(Widelands::wwWARE, q->get_index()));
+									write("%s:set_priority(%s, %i)", var, name,
+									      ps.get_priority(Widelands::wwWARE, q->get_index()));
 								} else {
-									name = egbase().tribes().get_worker_descr(q->get_index())->name().c_str();
+									name =
+									   egbase().tribes().get_worker_descr(q->get_index())->name().c_str();
 									write("%s:set_desired_fill(%s, %u)", var, name, q->get_max_fill());
 								}
 								filled[name] = q->get_filled();
@@ -1738,9 +1743,11 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 							std::map<const char*, uint32_t> filled;
 							for (size_t i = cs.get_nrwaresqueues(); i; --i) {
 								const Widelands::InputQueue& q = *cs.get_waresqueue(i - 1);
-								const char* name = egbase().tribes().get_ware_descr(q.get_index())->name().c_str();
+								const char* name =
+								   egbase().tribes().get_ware_descr(q.get_index())->name().c_str();
 								write("%s:set_desired_fill(%s, %u)", var, name, q.get_max_fill());
-								write("%s:set_priority(%s, %i)", var, name, cs.get_priority(Widelands::wwWARE, q.get_index()));
+								write("%s:set_priority(%s, %i)", var, name,
+								      cs.get_priority(Widelands::wwWARE, q.get_index()));
 								filled[name] = q.get_filled();
 							}
 							write("%s:set_inputs({", var);
@@ -1750,30 +1757,38 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 							fw.print_f("   })\n");
 							if (upcast(const Widelands::MilitarysiteSettings, ms, cs.get_settings())) {
 								write("%s.setting_soldier_capacity = %u", var, ms->desired_capacity);
-								write("%s.setting_prefer_heroes = %s", var, ms->prefer_heroes ? "true" : "false");
-							} else if (upcast(const Widelands::ProductionsiteSettings, ps, cs.get_settings())) {
+								write("%s.setting_prefer_heroes = %s", var,
+								      ms->prefer_heroes ? "true" : "false");
+							} else if (upcast(const Widelands::ProductionsiteSettings, ps,
+							                  cs.get_settings())) {
 								write("%s.setting_stopped = %s", var, ps->stopped ? "true" : "false");
 								for (const auto& pair : ps->ware_queues) {
-									const char* name = cs.owner().tribe().get_ware_descr(pair.first)->name().c_str();
-									write("%s:set_desired_fill(%s, %u, true)", var, name, pair.second.desired_fill);
+									const char* name =
+									   cs.owner().tribe().get_ware_descr(pair.first)->name().c_str();
+									write("%s:set_desired_fill(%s, %u, true)", var, name,
+									      pair.second.desired_fill);
 									write("%s:set_priority(%s, %d, true)", var, name, pair.second.priority);
 								}
 								for (const auto& pair : ps->worker_queues) {
-									write("%s:set_desired_fill(%s, %u, true)", var, cs.owner().tribe().get_worker_descr(pair.first)->name().c_str(),
-											pair.second.desired_fill);
+									write("%s:set_desired_fill(%s, %u, true)", var,
+									      cs.owner().tribe().get_worker_descr(pair.first)->name().c_str(),
+									      pair.second.desired_fill);
 								}
 								if (upcast(const Widelands::TrainingsiteSettings, ts, cs.get_settings())) {
 									write("%s.setting_soldier_capacity = %u", var, ts->desired_capacity);
 								}
 							} else if (upcast(const Widelands::WarehouseSettings, ws, cs.get_settings())) {
-								write("%s.setting_launch_expedition = %s", var, ws->launch_expedition ? "true" : "false");
+								write("%s.setting_launch_expedition = %s", var,
+								      ws->launch_expedition ? "true" : "false");
 								for (const auto& pair : ws->ware_preferences) {
-									write("%s:set_setting_warehouse_policy(%s, %s)", var, cs.owner().tribe().get_ware_descr(pair.first)->name().c_str(),
-											stockpolicystring(pair.second));
+									write("%s:set_setting_warehouse_policy(%s, %s)", var,
+									      cs.owner().tribe().get_ware_descr(pair.first)->name().c_str(),
+									      stockpolicystring(pair.second));
 								}
 								for (const auto& pair : ws->worker_preferences) {
-									write("%s:set_setting_warehouse_policy(%s, %s)", var, cs.owner().tribe().get_worker_descr(pair.first)->name().c_str(),
-											stockpolicystring(pair.second));
+									write("%s:set_setting_warehouse_policy(%s, %s)", var,
+									      cs.owner().tribe().get_worker_descr(pair.first)->name().c_str(),
+									      stockpolicystring(pair.second));
 								}
 							}
 						} break;
@@ -1784,10 +1799,11 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 							const int16_t ypos = ds.get_position().y;
 							write("%s = wl.Game().players[%u]:place_building(\"%s\", "
 							      "wl.Game().map:get_field(%d, %d), false, true)",
-							      var, ds.owner().player_number(), ds.building().name().c_str(),
-							      xpos, ypos);
+							      var, ds.owner().player_number(), ds.building().name().c_str(), xpos,
+							      ypos);
 							write("%s:dismantle()", var);
-							write("wl.Game().map:get_field(%d, %d).immovable.has_builder = %s", xpos, ypos, ds.has_builder(egbase()) ? "true" : "false");
+							write("wl.Game().map:get_field(%d, %d).immovable.has_builder = %s", xpos, ypos,
+							      ds.has_builder(egbase()) ? "true" : "false");
 						} break;
 						default:
 							break;

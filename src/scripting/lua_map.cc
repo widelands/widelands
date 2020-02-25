@@ -4822,7 +4822,9 @@ int LuaConstructionSite::set_has_builder(lua_State* L) {
 		assert(cs.builder_request_);
 		delete cs.builder_request_;
 		cs.builder_request_ = nullptr;
-		Widelands::Worker& w = egbase.tribes().get_worker_descr(cs.owner().tribe().builder())->create(egbase, cs.get_owner(), &cs, cs.get_position());
+		Widelands::Worker& w = egbase.tribes()
+		                          .get_worker_descr(cs.owner().tribe().builder())
+		                          ->create(egbase, cs.get_owner(), &cs, cs.get_position());
 		cs.builder_ = &w;
 		if (upcast(Widelands::Game, g, &egbase)) {
 			w.start_task_buildingwork(*g);
@@ -4914,7 +4916,8 @@ int LuaConstructionSite::set_setting_soldier_capacity(lua_State* L) {
 
 // documented in parent class
 int LuaConstructionSite::get_priority(lua_State* L) {
-	const Widelands::DescriptionIndex item = get_egbase(L).tribes().safe_ware_index(luaL_checkstring(L, 2));
+	const Widelands::DescriptionIndex item =
+	   get_egbase(L).tribes().safe_ware_index(luaL_checkstring(L, 2));
 	if (lua_gettop(L) > 2 && luaL_checkboolean(L, 3)) {
 		upcast(const Widelands::ProductionsiteSettings, ps, get(L, get_egbase(L))->get_settings());
 		assert(ps);
@@ -4930,7 +4933,8 @@ int LuaConstructionSite::get_priority(lua_State* L) {
 	return 1;
 }
 int LuaConstructionSite::set_priority(lua_State* L) {
-	const Widelands::DescriptionIndex item = get_egbase(L).tribes().safe_ware_index(luaL_checkstring(L, 2));
+	const Widelands::DescriptionIndex item =
+	   get_egbase(L).tribes().safe_ware_index(luaL_checkstring(L, 2));
 	if (lua_gettop(L) > 3 && luaL_checkboolean(L, 4)) {
 		upcast(Widelands::ProductionsiteSettings, ps, get(L, get_egbase(L))->get_settings());
 		assert(ps);
@@ -4948,7 +4952,9 @@ int LuaConstructionSite::set_priority(lua_State* L) {
 int LuaConstructionSite::get_desired_fill(lua_State* L) {
 	const std::string itemname = luaL_checkstring(L, 2);
 	const bool is_ware = get_egbase(L).tribes().ware_exists(itemname);
-	const Widelands::DescriptionIndex item = is_ware ? get_egbase(L).tribes().safe_ware_index(itemname) : get_egbase(L).tribes().safe_worker_index(itemname);
+	const Widelands::DescriptionIndex item = is_ware ?
+	                                            get_egbase(L).tribes().safe_ware_index(itemname) :
+	                                            get_egbase(L).tribes().safe_worker_index(itemname);
 	if (lua_gettop(L) > 2 && luaL_checkboolean(L, 3)) {
 		upcast(const Widelands::ProductionsiteSettings, ps, get(L, get_egbase(L))->get_settings());
 		assert(ps);
@@ -4960,13 +4966,17 @@ int LuaConstructionSite::get_desired_fill(lua_State* L) {
 		}
 		NEVER_HERE();
 	}
-	lua_pushuint32(L, get(L, get_egbase(L))->inputqueue(item, is_ware ? Widelands::wwWARE : Widelands::wwWORKER).get_max_fill());
+	lua_pushuint32(L, get(L, get_egbase(L))
+	                     ->inputqueue(item, is_ware ? Widelands::wwWARE : Widelands::wwWORKER)
+	                     .get_max_fill());
 	return 1;
 }
 int LuaConstructionSite::set_desired_fill(lua_State* L) {
 	const std::string itemname = luaL_checkstring(L, 2);
 	const bool is_ware = get_egbase(L).tribes().ware_exists(itemname);
-	const Widelands::DescriptionIndex item = is_ware ? get_egbase(L).tribes().safe_ware_index(itemname) : get_egbase(L).tribes().safe_worker_index(itemname);
+	const Widelands::DescriptionIndex item = is_ware ?
+	                                            get_egbase(L).tribes().safe_ware_index(itemname) :
+	                                            get_egbase(L).tribes().safe_worker_index(itemname);
 	if (lua_gettop(L) > 3 && luaL_checkboolean(L, 4)) {
 		upcast(Widelands::ProductionsiteSettings, ps, get(L, get_egbase(L))->get_settings());
 		assert(ps);
@@ -4978,7 +4988,9 @@ int LuaConstructionSite::set_desired_fill(lua_State* L) {
 		}
 		NEVER_HERE();
 	}
-	get(L, get_egbase(L))->inputqueue(item, is_ware ? Widelands::wwWARE : Widelands::wwWORKER).set_max_fill(luaL_checkuint32(L, 3));
+	get(L, get_egbase(L))
+	   ->inputqueue(item, is_ware ? Widelands::wwWARE : Widelands::wwWORKER)
+	   .set_max_fill(luaL_checkuint32(L, 3));
 	return 0;
 }
 
@@ -5024,8 +5036,11 @@ int LuaConstructionSite::get_setting_warehouse_policy(lua_State* L) {
 	assert(ws);
 	const std::string itemname = luaL_checkstring(L, 2);
 	const bool is_ware = get_egbase(L).tribes().ware_exists(itemname);
-	const Widelands::DescriptionIndex item = is_ware ? get_egbase(L).tribes().safe_ware_index(itemname) : get_egbase(L).tribes().safe_worker_index(itemname);
-	wh_policy_to_string(L, is_ware ? ws->ware_preferences.at(item) : ws->worker_preferences.at(item));
+	const Widelands::DescriptionIndex item = is_ware ?
+	                                            get_egbase(L).tribes().safe_ware_index(itemname) :
+	                                            get_egbase(L).tribes().safe_worker_index(itemname);
+	wh_policy_to_string(
+	   L, is_ware ? ws->ware_preferences.at(item) : ws->worker_preferences.at(item));
 	return 1;
 }
 /* RST
@@ -5039,8 +5054,11 @@ int LuaConstructionSite::set_setting_warehouse_policy(lua_State* L) {
 	assert(ws);
 	const std::string itemname = luaL_checkstring(L, 2);
 	const bool is_ware = get_egbase(L).tribes().ware_exists(itemname);
-	const Widelands::DescriptionIndex item = is_ware ? get_egbase(L).tribes().safe_ware_index(itemname) : get_egbase(L).tribes().safe_worker_index(itemname);
-	(is_ware ? ws->ware_preferences.at(item) : ws->worker_preferences.at(item)) = string_to_wh_policy(L, 3);
+	const Widelands::DescriptionIndex item = is_ware ?
+	                                            get_egbase(L).tribes().safe_ware_index(itemname) :
+	                                            get_egbase(L).tribes().safe_worker_index(itemname);
+	(is_ware ? ws->ware_preferences.at(item) : ws->worker_preferences.at(item)) =
+	   string_to_wh_policy(L, 3);
 	return 0;
 }
 
@@ -5099,7 +5117,9 @@ int LuaDismantleSite::set_has_builder(lua_State* L) {
 		assert(cs.builder_request_);
 		delete cs.builder_request_;
 		cs.builder_request_ = nullptr;
-		Widelands::Worker& w = egbase.tribes().get_worker_descr(cs.owner().tribe().builder())->create(egbase, cs.get_owner(), &cs, cs.get_position());
+		Widelands::Worker& w = egbase.tribes()
+		                          .get_worker_descr(cs.owner().tribe().builder())
+		                          ->create(egbase, cs.get_owner(), &cs, cs.get_position());
 		cs.builder_ = &w;
 		if (upcast(Widelands::Game, g, &egbase)) {
 			w.start_task_buildingwork(*g);
@@ -5562,16 +5582,11 @@ ProductionSite
 */
 const char LuaProductionSite::className[] = "ProductionSite";
 const MethodType<LuaProductionSite> LuaProductionSite::Methods[] = {
-   METHOD(LuaProductionSite, set_inputs),
-   METHOD(LuaProductionSite, get_inputs),
-   METHOD(LuaProductionSite, get_workers),
-   METHOD(LuaProductionSite, set_workers),
-   METHOD(LuaProductionSite, toggle_start_stop),
-   METHOD(LuaProductionSite, get_priority),
-   METHOD(LuaProductionSite, set_priority),
-   METHOD(LuaProductionSite, get_desired_fill),
-   METHOD(LuaProductionSite, set_desired_fill),
-   {nullptr, nullptr},
+   METHOD(LuaProductionSite, set_inputs),        METHOD(LuaProductionSite, get_inputs),
+   METHOD(LuaProductionSite, get_workers),       METHOD(LuaProductionSite, set_workers),
+   METHOD(LuaProductionSite, toggle_start_stop), METHOD(LuaProductionSite, get_priority),
+   METHOD(LuaProductionSite, set_priority),      METHOD(LuaProductionSite, get_desired_fill),
+   METHOD(LuaProductionSite, set_desired_fill),  {nullptr, nullptr},
 };
 const PropertyType<LuaProductionSite> LuaProductionSite::Properties[] = {
    PROP_RO(LuaProductionSite, valid_workers),
@@ -5614,25 +5629,36 @@ int LuaProductionSite::get_valid_workers(lua_State* L) {
 
 // documented in parent class
 int LuaProductionSite::get_priority(lua_State* L) {
-	lua_pushint32(L, get(L, get_egbase(L))->get_priority(Widelands::wwWARE, get_egbase(L).tribes().safe_ware_index(luaL_checkstring(L, 2))));
+	lua_pushint32(L, get(L, get_egbase(L))
+	                    ->get_priority(Widelands::wwWARE, get_egbase(L).tribes().safe_ware_index(
+	                                                         luaL_checkstring(L, 2))));
 	return 1;
 }
 int LuaProductionSite::set_priority(lua_State* L) {
-	get(L, get_egbase(L))->set_priority(Widelands::wwWARE, get_egbase(L).tribes().safe_ware_index(luaL_checkstring(L, 2)), luaL_checkint32(L, 3));
+	get(L, get_egbase(L))
+	   ->set_priority(Widelands::wwWARE,
+	                  get_egbase(L).tribes().safe_ware_index(luaL_checkstring(L, 2)),
+	                  luaL_checkint32(L, 3));
 	return 0;
 }
 int LuaProductionSite::get_desired_fill(lua_State* L) {
 	const std::string item = luaL_checkstring(L, 2);
 	const bool is_ware = get_egbase(L).tribes().ware_exists(item);
-	lua_pushuint32(L, get(L, get_egbase(L))->inputqueue(is_ware ? get_egbase(L).tribes().safe_ware_index(item) : get_egbase(L).tribes().safe_worker_index(item),
-			is_ware ? Widelands::wwWARE : Widelands::wwWORKER).get_max_fill());
+	lua_pushuint32(L, get(L, get_egbase(L))
+	                     ->inputqueue(is_ware ? get_egbase(L).tribes().safe_ware_index(item) :
+	                                            get_egbase(L).tribes().safe_worker_index(item),
+	                                  is_ware ? Widelands::wwWARE : Widelands::wwWORKER)
+	                     .get_max_fill());
 	return 1;
 }
 int LuaProductionSite::set_desired_fill(lua_State* L) {
 	const std::string item = luaL_checkstring(L, 2);
 	const bool is_ware = get_egbase(L).tribes().ware_exists(item);
-	get(L, get_egbase(L))->inputqueue(is_ware ? get_egbase(L).tribes().safe_ware_index(item) : get_egbase(L).tribes().safe_worker_index(item),
-			is_ware ? Widelands::wwWARE : Widelands::wwWORKER).set_max_fill(luaL_checkuint32(L, 3));
+	get(L, get_egbase(L))
+	   ->inputqueue(is_ware ? get_egbase(L).tribes().safe_ware_index(item) :
+	                          get_egbase(L).tribes().safe_worker_index(item),
+	                is_ware ? Widelands::wwWARE : Widelands::wwWORKER)
+	   .set_max_fill(luaL_checkuint32(L, 3));
 	return 0;
 }
 

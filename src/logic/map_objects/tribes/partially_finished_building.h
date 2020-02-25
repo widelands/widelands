@@ -23,8 +23,8 @@
 #include "logic/map_objects/tribes/building.h"
 
 namespace LuaMaps {
-	class LuaConstructionSite;
-	class LuaDismantleSite;
+class LuaConstructionSite;
+class LuaDismantleSite;
 }
 
 namespace Widelands {
