@@ -30,12 +30,17 @@ MACRO_CLASS_DEFINITION_REGEX = re.compile(r'^[A-Z_0-9]+\((\w+)\)$')
 INLINE_FUNCTION_REGEX = re.compile(r'inline\s+\S+\s+(\S+\()')
 FORWARD_DECLARATION_REGEX = re.compile(r'(class|struct)\s+(\S+);')
 
+# For .cc files
+FUNCTION_REGEX1 = re.compile(r'.*\s+([a-z_0-9]+)\(.*\).*')
+FUNCTION_REGEX2 = re.compile(r'.*\s+([a-z_0-9]+)\(.*,.*')
+
+
 # Files that are hard to capture by regex
 FILE_EXCLUDES = {'graphic/build_texture_atlas.h', 'graphic/gl/system_headers.h', 'scripting/lua.h',
                  'third_party/eris/lua.hpp', 'scripting/eris.h', 'scripting/report_error.h', 'editor/tools/set_resources_tool.h'}
 
 
-def find_classes(file_to_check):
+def find_classes(file_to_check, include_functions):
     """Returns a set of classes defined by this file."""
     classes = set()
     with open(file_to_check, 'r', encoding='utf-8') as f:
@@ -78,6 +83,14 @@ def find_classes(file_to_check):
             if match and len(match.groups()) == 2:
                 classes.add(match.groups()[1])
 
+            if include_functions:
+                match = FUNCTION_REGEX1.match(line)
+                if match and len(match.groups()) > 0:
+                    classes.add(match.groups()[0])
+                match = FUNCTION_REGEX2.match(line)
+                if match and len(match.groups()) > 0:
+                    classes.add(match.groups()[0])
+
     return classes
 
 
@@ -96,7 +109,7 @@ def find_includes(file_to_check):
     return files
 
 
-def check_file(file_to_check):
+def check_file(file_to_check, include_functions):
     """Checks if the includes in this file are needed, and returns the ones
     that aren't."""
 
@@ -112,60 +125,10 @@ def check_file(file_to_check):
                 continue
             elif header_file in FILE_EXCLUDES:
                 continue
-            header_classes = find_classes(header_file)
+            header_classes = find_classes(header_file, include_functions)
             is_useful = False
             for header_class in header_classes:
                 if header_class in file_contents:
-                    is_useful = True
-                    break
-            if not is_useful:
-                hits.append(header_file)
-
-    return hits
-
-
-# For .cc files
-FUNCTION_REGEX1 = re.compile(r'.*\s+([a-z_0-9]+)\(.*\).*')
-FUNCTION_REGEX2 = re.compile(r'.*\s+([a-z_0-9]+)\(.*,.*')
-
-
-def find_functions(file_to_check):
-    """Returns a set of functions defined by this file."""
-    functions = set()
-
-    with open(file_to_check, 'r', encoding='utf-8') as f:
-        for line in f.readlines():
-            line = line.strip()
-
-            match = FUNCTION_REGEX1.match(line)
-            if match and len(match.groups()) > 0:
-                functions.add(match.groups()[0])
-            match = FUNCTION_REGEX2.match(line)
-            if match and len(match.groups()) > 0:
-                functions.add(match.groups()[0])
-
-    return functions
-
-
-def check_cc_file(file_to_check, header_files):
-    """Checks if all header files have a function in common with this file, and
-    returns the ones that don't."""
-
-    hits = []
-
-    with open(file_to_check, 'r', encoding='utf-8') as f:
-        file_contents = f.read()
-
-        for header_file in header_files:
-            # NOCOM implement support for these special files
-            if header_file.startswith('base/'):
-                continue
-            elif header_file in FILE_EXCLUDES:
-                continue
-            header_functions = find_functions(header_file)
-            is_useful = False
-            for header_function in header_functions:
-                if header_function in file_contents:
                     is_useful = True
                     break
             if not is_useful:
@@ -191,10 +154,10 @@ def main():
             hits = []
 
             if filename.endswith('.h'):
-                hits = check_file(full_path)
+                hits = check_file(full_path, False)
 
             elif filename.endswith('.cc'):
-                hits = check_cc_file(full_path, check_file(full_path))
+                hits = check_file(full_path, True)
 
             if hits:
                 print('\nSuperfluous includes in ' + full_path)
