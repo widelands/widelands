@@ -31,8 +31,7 @@ INLINE_FUNCTION_REGEX = re.compile(r'inline\s+\S+\s+(\S+\()')
 FORWARD_DECLARATION_REGEX = re.compile(r'(class|struct)\s+(\S+);')
 
 # For .cc files
-FUNCTION_REGEX1 = re.compile(r'.*\s+([a-zA-Z_0-9]+)\(.*\).*')
-FUNCTION_REGEX2 = re.compile(r'(^|.*\s+)([a-zA-Z_0-9]+)\(.*,.*')
+FUNCTION_REGEX = re.compile(r'(^|.*\s+)([a-zA-Z_0-9]+)\(.*(\)|,).*')
 
 
 # Files that are hard to capture by regex
@@ -85,10 +84,7 @@ def find_classes(file_to_check, include_functions):
                 classes.add(match.groups()[1])
 
             if include_functions:
-                match = FUNCTION_REGEX1.match(line)
-                if match and len(match.groups()) > 0:
-                    classes.add(match.groups()[0])
-                match = FUNCTION_REGEX2.match(line)
+                match = FUNCTION_REGEX.match(line)
                 if match and len(match.groups()) > 1:
                     classes.add(match.groups()[1])
 
