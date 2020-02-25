@@ -1496,8 +1496,11 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 			std::set<Widelands::Serial> saved_mos;
 			for (size_t map_index = map.max_index(); map_index; --map_index) {
 				const Widelands::Coords coords = map.coords(map_index - 1);
+log("NOCOM Saving %dx%d\n", coords.x, coords.y);
 				const Widelands::Field& f = map[map_index - 1];
-				fw.unsigned_8(f.get_owned_by());
+				if (unsigned n = f.get_owned_by()) {
+					write("wl.Game().players[%u]:conquer(wl.Game().map:get_field(%d, %d), 1)", n, coords.x, coords.y);
+				}
 				if (f.get_immovable()) {
 					bool skip = false;
 					if (saved_mos.count(f.get_immovable()->serial())) {
@@ -1511,7 +1514,6 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 					if (!skip) {
 						saved_mos.insert(f.get_immovable()->serial());
 						const Widelands::MapObjectType type = f.get_immovable()->descr().type();
-						fw.unsigned_8(static_cast<uint8_t>(type));
 						switch (type) {
 						case Widelands::MapObjectType::FLAG: {
 							const Widelands::Flag& flag =

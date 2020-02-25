@@ -271,7 +271,8 @@ void MapScenarioEditorPacket::read(FileSystem& fs, EditorGameBase& egbase, bool,
 							}
 						} break;
 						default:
-							throw Widelands::GameDataError("Unexpected map object type %u", t);
+							assert(type < Widelands::MapObjectType::BUILDING);
+							break;
 						}  // switch (type)
 					}     // if immovable
 					for (size_t n = fr.unsigned_32(); n; --n) {
