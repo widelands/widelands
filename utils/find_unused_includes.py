@@ -13,20 +13,19 @@ import sys
 # NOCOM find forward declarations too
 HEADER_REGEX = re.compile(r'^#include\s+\"(\S+)\"$')
 
-USING_REGEX = re.compile(r'.*using.*\s+(\S+)\s+=')
+USING_OR_CONSTEXPR_REGEX = re.compile(r'.*(using|constexpr).*\s+(\w+)\s+=')
 CLASS_REGEX = re.compile(r'.*(class|enum|struct)\s+(\S+)\s+.*{')
 DEFINE_REGEX = re.compile(r'\#define\s+(\w+)')
-CONSTEXPR_REGEX = re.compile(r'.*constexpr.*\s+(\w+)\s+=')
 STRING_CONSTANT_REGEX = re.compile(
-    r'const\sstd::string\s+(k\w+)\s+=\s+\"\S+\";')
-STRING_CONSTANT_OLD_REGEX = re.compile(
-    r'.*const\sstd::string\s+(\w+_\w+)\s+=\s+\"\S+\";')
-EXTERN_REGEX = re.compile(r'extern\s+\S+\s+(\S+);')
+    r'.*const\sstd::string\s+(k\w+|\w+_\w+)\s+=\s+\"\S+\";')
+EXTERN_OR_TYPEDEF_REGEX = re.compile(r'(extern|typedef)\s+\S+\s+(\S+);')
+
 # Extern macros used in third_party/minizip
 EXTERN_ZIP_REGEX = re.compile(r'extern\s+\S+\s+\S+\s+(\S+)\s+')
-TYPEDEF_REGEX = re.compile(r'typedef\s+\S+\s+(\S+);')
-# Special regex for #include "graphic/text/rt_errors.h"
+
+# Special regex for #include "graphic/text/rt_errors.h" and Map_Object_Packet
 MACRO_CLASS_DEFINITION_REGEX = re.compile(r'^[A-Z_0-9]+\((\w+)\)$')
+
 INLINE_FUNCTION_REGEX = re.compile(r'inline\s+\S+\s+(\S+\()')
 FORWARD_DECLARATION_REGEX = re.compile(r'(class|struct)\s+(\S+);')
 
@@ -46,39 +45,39 @@ def find_classes(file_to_check, include_functions):
     with open(file_to_check, 'r', encoding='utf-8') as f:
         for line in f.readlines():
             line = line.strip()
+
             match = CLASS_REGEX.match(line)
             if match and len(match.groups()) == 2:
                 classes.add(match.groups()[1])
-            match = USING_REGEX.match(line)
-            if match and len(match.groups()) == 1:
-                classes.add(match.groups()[0])
+
+            match = USING_OR_CONSTEXPR_REGEX.match(line)
+            if match and len(match.groups()) > 1:
+                classes.add(match.groups()[1])
+
             match = DEFINE_REGEX.match(line)
             if match and len(match.groups()) == 1:
                 classes.add(match.groups()[0])
-            match = CONSTEXPR_REGEX.match(line)
-            if match and len(match.groups()) == 1:
-                classes.add(match.groups()[0])
+
             match = STRING_CONSTANT_REGEX.match(line)
             if match and len(match.groups()) == 1:
                 classes.add(match.groups()[0])
-            match = STRING_CONSTANT_OLD_REGEX.match(line)
-            if match and len(match.groups()) == 1:
-                classes.add(match.groups()[0])
-            match = EXTERN_REGEX.match(line)
-            if match and len(match.groups()) == 1:
-                classes.add(match.groups()[0])
+
+            match = EXTERN_OR_TYPEDEF_REGEX.match(line)
+            if match and len(match.groups()) > 1:
+                classes.add(match.groups()[1])
+
             match = EXTERN_ZIP_REGEX.match(line)
             if match and len(match.groups()) == 1:
                 classes.add(match.groups()[0])
-            match = TYPEDEF_REGEX.match(line)
-            if match and len(match.groups()) == 1:
-                classes.add(match.groups()[0])
+
             match = MACRO_CLASS_DEFINITION_REGEX.match(line)
             if match and len(match.groups()) == 1:
                 classes.add(match.groups()[0])
+
             match = INLINE_FUNCTION_REGEX.match(line)
             if match and len(match.groups()) == 1:
                 classes.add(match.groups()[0])
+
             match = FORWARD_DECLARATION_REGEX.match(line)
             if match and len(match.groups()) == 2:
                 classes.add(match.groups()[1])
