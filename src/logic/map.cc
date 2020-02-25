@@ -36,12 +36,12 @@
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
-#include "logic/map_objects/bob.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/findnode.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
+#include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapfringeregion.h"
@@ -71,8 +71,23 @@ FieldData::FieldData(const Field& field)
 	}
 }
 
+// static
+inline FindCritterByClass::Class FindCritterByClass::classof(const CritterDescr& cd) {
+	return cd.is_herbivore() ? cd.is_carnivore() ? Class::Neither : Class::Herbivore : cd.is_carnivore() ? Class::Carnivore : Class::Neither;
+}
+bool FindCritterByClass::accept(Bob* b) const {
+	if (upcast(const Critter, c, b))
+		return classof(c->descr()) == class_;
+	return false;
+}
+bool FindCarnivores::accept(Bob* b) const {
+	if (upcast(const Critter, c, b))
+		return c->descr().is_carnivore();
+	return false;
+}
 bool FindBobByName::accept(Bob* b) const {
-	return b && b->descr().name() == name_;
+	assert(b);
+	return b->descr().name() == name_;
 }
 
 /*

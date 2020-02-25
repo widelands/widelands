@@ -46,6 +46,7 @@ struct S2MapLoader;
 
 namespace Widelands {
 
+class CritterDescr;
 class MapLoader;
 class Objective;
 struct BaseImmovable;
@@ -105,12 +106,30 @@ struct FindBobAlwaysTrue : public FindBob {
 
 struct FindBobByName : public FindBob {
 	bool accept(Bob* b) const override;
-	FindBobByName(const std::string& n) : name_(n) {
+	explicit FindBobByName(const std::string& n) : name_(n) {
 	}
 	~FindBobByName() override {
 	}
 private:
 	std::string name_;
+};
+struct FindCarnivores : public FindBob {
+	bool accept(Bob* b) const override;
+	explicit FindCarnivores() {
+	}
+	~FindCarnivores() override {
+	}
+};
+struct FindCritterByClass : public FindBob {
+	enum class Class { Herbivore, Carnivore, Neither };
+	static Class classof(const CritterDescr&);
+	bool accept(Bob* b) const override;
+	explicit FindCritterByClass(const CritterDescr& b) : class_(classof(b)) {
+	}
+	~FindCritterByClass() override {
+	}
+private:
+	Class class_;
 };
 
 // Helper struct to save certain elemental data of a field without an actual instance of Field

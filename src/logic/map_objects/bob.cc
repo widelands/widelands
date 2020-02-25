@@ -369,7 +369,7 @@ Bob::Task const Bob::taskIdle = {"idle", &Bob::idle_update,
  *
  * This task always succeeds unless interrupted.
  */
-void Bob::start_task_idle(Game& game, uint32_t const anim, int32_t const timeout) {
+void Bob::start_task_idle(Game& game, uint32_t const anim, int32_t const timeout, Vector2i offset) {
 	assert(timeout < 0 || timeout > 0);
 
 	set_animation(game, anim);
@@ -377,6 +377,8 @@ void Bob::start_task_idle(Game& game, uint32_t const anim, int32_t const timeout
 	push_task(game, taskIdle);
 
 	top_state().ivar1 = timeout;
+	top_state().ivar2 = offset.x;
+	top_state().ivar3 = offset.y;
 }
 
 void Bob::idle_update(Game& game, State& state) {
@@ -781,8 +783,12 @@ void Bob::draw(const EditorGameBase& egbase,
 	}
 
 	auto* const bob_owner = get_owner();
-	const Vector2f point_on_dst = calc_drawpos(egbase, field_on_dst, scale);
-	dst->blit_animation(point_on_dst, coords, scale, anim_, egbase.get_gametime() - animstart_,
+	Vector2f adjust_field_on_dst = field_on_dst;
+	if (const State* s = get_state(taskIdle)) {
+		adjust_field_on_dst.x += s->ivar2;
+		adjust_field_on_dst.y += s->ivar3;
+	}
+	dst->blit_animation(calc_drawpos(egbase, adjust_field_on_dst, scale), coords, scale, anim_, egbase.get_gametime() - animstart_,
 	                    (bob_owner == nullptr) ? nullptr : &bob_owner->get_playercolor());
 }
 

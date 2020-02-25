@@ -270,8 +270,8 @@ Bob::Task const Critter::taskRoam = {
 constexpr uint16_t kCritterMaxIdleTime = 2000;
 constexpr uint16_t kMealtime = 2500;
 constexpr uint32_t kMinReproductionAge = 5 * 60 * 1000;
-constexpr uint32_t kMinCritterLifetime = 2 * 60 * 60 * 1000;
-constexpr uint32_t kMaxCritterLifetime = 50 * 60 * 60 * 1000;
+constexpr uint32_t kMinCritterLifetime = 30 * 60 * 1000;
+constexpr uint32_t kMaxCritterLifetime = 30 * 60 * 60 * 1000;
 
 void Critter::roam_update(Game& game, State& state) {
 	if (get_signal().size())
@@ -289,18 +289,30 @@ void Critter::roam_update(Game& game, State& state) {
 	Time idle_time_rnd = kCritterMaxIdleTime;
 	if (state.ivar1) {
 		state.ivar1 = 0;
-		if (start_task_movepath(game,
-		                        game.random_location(get_position(), 2),  //  Pick a random target.
-		                        3, descr().get_walk_anims())) {
-			return;
+		// lots of magic numbers for reasonable weighting of various nearby animals
+		uint32_t roaming_dist = 24;
+		if (game.map().find_bobs(game, Area<FCoords>(get_position(), 2), nullptr, FindBobByName(descr().name())) > 4) {
+			// Too crowded here! Let's go further away
+			roaming_dist += 3 * game.map().find_bobs(game, Area<FCoords>(get_position(), 5), nullptr, FindBobByName(descr().name()));
+		}
+		// move only a bit away from other animals of the same class
+		roaming_dist += 4 * game.map().find_bobs(game, Area<FCoords>(get_position(), 3), nullptr, FindCritterByClass(descr()));
+		if (!descr().is_carnivore()) {
+			roaming_dist += 6 * game.map().find_bobs(game, Area<FCoords>(get_position(), 4), nullptr, FindCarnivores());
+		}
+		roaming_dist /= 12;
+		assert(roaming_dist >= 2);
+		// the further we want to go, the harder we try to go somewhere
+		for (; roaming_dist; --roaming_dist) {
+			if (start_task_movepath(game, game.random_location(get_position(), roaming_dist), roaming_dist, descr().get_walk_anims())) {
+				return;
+			}
 		}
 		idle_time_min = 1;
 		idle_time_rnd = 1000;
 	}
 	state.ivar1 = 1;
 	std::vector<Critter*> candidates_for_eating; // nullptr indicates the immovable here
-	bool other_herbivores_on_field = false;
-	size_t mating_partners = 0;
 	if (descr().is_herbivore() && get_position().field->get_immovable()) {
 		for (uint32_t a : descr().food_plants()) {
 			if (get_position().field->get_immovable()->descr().has_attribute(a)) {
@@ -309,10 +321,19 @@ void Critter::roam_update(Game& game, State& state) {
 			}
 		}
 	}
+	bool other_herbivores_on_field = false;
+	size_t mating_partners = 0;
+	int32_t n_th_bob_on_field = 0;
+	bool foundme = false;
 	for (Bob* b = get_position().field->get_first_bob(); b; b = b->get_next_bob()) {
 		assert(b);
 		if (b == this) {
+			assert(!foundme);
+			foundme = true;
 			continue;
+		}
+		if (!foundme) {
+			++n_th_bob_on_field;
 		}
 		if (descr().name() == b->descr().name()) {
 			++mating_partners;
@@ -321,6 +342,7 @@ void Critter::roam_update(Game& game, State& state) {
 			other_herbivores_on_field |= c->descr().is_herbivore();
 		}
 	}
+	assert(foundme);
 	if (descr().is_carnivore()) {
 		// only hunt other carnivores if there are no herbivores here
 		for (Bob* b = get_position().field->get_first_bob(); b; b = b->get_next_bob())
@@ -336,7 +358,7 @@ void Critter::roam_update(Game& game, State& state) {
 			Critter* food = candidates_for_eating[idx];
 			bool skipped = false;
 			if (food) {
-				molog("Yummy, a %s loves a %s...\n", descr().name().c_str(), food->descr().name().c_str());
+				molog("Yummy, I love a %s...\n", food->descr().name().c_str());
 				// find hunting partners
 				int32_t attacker_strength = 0;
 				int32_t defender_strength = 0;
@@ -374,7 +396,10 @@ void Critter::roam_update(Game& game, State& state) {
 				}
 			} else {
 				// refers to the plant on our field
-				log("NOCOM Increasing the immovable's growth time is not yet implemented :(\n");
+				upcast(Immovable, imm, get_position().field->get_immovable());
+				assert(imm);
+				molog("Yummy, I love a %s...\n", imm->descr().name().c_str());
+				imm->delay_growth(descr().get_size() * 2000);
 			}
 			if (!skipped)
 				return start_task_idle(game, descr().get_animation("eating", this), kMealtime);
@@ -399,8 +424,8 @@ void Critter::roam_update(Game& game, State& state) {
 			game.create_critter(get_position(), descr().name());
 		}
 	}
-	return start_task_idle(
-	   game, descr().get_animation("idle", this), idle_time_min + game.logic_rand() % idle_time_rnd);
+	return start_task_idle(game, descr().get_animation("idle", this), idle_time_min + game.logic_rand() % idle_time_rnd,
+			Vector2i(std::cos(n_th_bob_on_field), std::sin(n_th_bob_on_field)));
 }
 
 void Critter::init_auto_task(Game& game) {
