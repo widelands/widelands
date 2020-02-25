@@ -71,6 +71,7 @@
 #include "io/filewrite.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/tribes.h"
+#include "logic/map_objects/tribes/warehouse.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/maptriangleregion.h"
@@ -1465,19 +1466,29 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 		}
 		fw.print_f("\nfunction %s()\n", autogen_starting_function.c_str());
 
-		const char* var = nullptr;
-		{
-			std::string s = "temp_object";
-			while (scripting_saver_->get<Variable>(s) || scripting_saver_->get<LuaFunction>(s)) {
-				s = "_" + s;
-			}
-			var = s.c_str();
+		std::string autogen_variable_name = "temp_object";
+		while (scripting_saver_->get<Variable>(autogen_variable_name) || scripting_saver_->get<LuaFunction>(autogen_variable_name)) {
+			autogen_variable_name = "_" + autogen_variable_name;
 		}
 
+#define var autogen_variable_name.c_str()
 #define write(text, ...) fw.print_f("   " text "\n", __VA_ARGS__)
 		write("local %s", var);
 
 		// Map objects
+		auto stockpolicystring = [](Widelands::StockPolicy p) {
+			switch (p) {
+			case Widelands::StockPolicy::kNormal:
+				return "normal";
+			case Widelands::StockPolicy::kPrefer:
+				return "prefer";
+			case Widelands::StockPolicy::kDontStock:
+				return "dontstock";
+			case Widelands::StockPolicy::kRemove:
+				return "remove";
+			}
+			NEVER_HERE();
+		};
 
 		std::set<const Widelands::Economy*> economies_to_save;
 		{
@@ -1596,24 +1607,7 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 							std::map<std::string, unsigned> wares_workers;
 							for (Widelands::DescriptionIndex di : wh.owner().tribe().wares()) {
 								const std::string name = wh.owner().tribe().get_ware_descr(di)->name();
-								const char* pol = nullptr;
-								switch (wh.get_ware_policy(di)) {
-								case Widelands::StockPolicy::kNormal:
-									pol = "normal";
-									break;
-								case Widelands::StockPolicy::kPrefer:
-									pol = "prefer";
-									break;
-								case Widelands::StockPolicy::kDontStock:
-									pol = "dontstock";
-									break;
-								case Widelands::StockPolicy::kRemove:
-									pol = "remove";
-									break;
-								default:
-									NEVER_HERE();
-								}
-								write("%s:set_warehouse_policies(\"%s\", \"%s\")", var, name.c_str(), pol);
+								write("%s:set_warehouse_policies(\"%s\", \"%s\")", var, name.c_str(), stockpolicystring(wh.get_ware_policy(di)));
 								auto it = wares_workers.find(name);
 								if (it == wares_workers.end())
 									wares_workers[name] = wh.get_wares().stock(di);
@@ -1628,24 +1622,7 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 							wares_workers.clear();
 							for (Widelands::DescriptionIndex di : wh.owner().tribe().workers()) {
 								const std::string name = wh.owner().tribe().get_worker_descr(di)->name();
-								const char* pol = nullptr;
-								switch (wh.get_worker_policy(di)) {
-								case Widelands::StockPolicy::kNormal:
-									pol = "normal";
-									break;
-								case Widelands::StockPolicy::kPrefer:
-									pol = "prefer";
-									break;
-								case Widelands::StockPolicy::kDontStock:
-									pol = "dontstock";
-									break;
-								case Widelands::StockPolicy::kRemove:
-									pol = "remove";
-									break;
-								default:
-									NEVER_HERE();
-								}
-								write("%s:set_warehouse_policies(\"%s\", \"%s\")", var, name.c_str(), pol);
+								write("%s:set_warehouse_policies(\"%s\", \"%s\")", var, name.c_str(), stockpolicystring(wh.get_worker_policy(di)));
 								auto it = wares_workers.find(name);
 								if (it == wares_workers.end())
 									wares_workers[name] = wh.get_workers().stock(di);
@@ -1731,7 +1708,24 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 								      var, ps.owner().player_number(), ps.descr().name().c_str(),
 								      ps.get_position().x, ps.get_position().y);
 							}
-							// # nocom ware/worker settings
+							std::map<const char*, uint32_t> filled;
+							for (const Widelands::InputQueue* q : ps.inputqueues()) {
+								const char* name;
+								if (q->get_type() == Widelands::wwWARE) {
+									name = egbase().tribes().get_ware_descr(q->get_index())->name().c_str();
+									write("%s:set_desired_fill(%s, %u)", var, name, q->get_max_fill());
+									write("%s:set_priority(%s, %i)", var, name, ps.get_priority(Widelands::wwWARE, q->get_index()));
+								} else {
+									name = egbase().tribes().get_worker_descr(q->get_index())->name().c_str();
+									write("%s:set_desired_fill(%s, %u)", var, name, q->get_max_fill());
+								}
+								filled[name] = q->get_filled();
+							}
+							write("%s:set_inputs({", var);
+							for (const auto& pair : filled) {
+								write("   %s = %u,", pair.first, pair.second);
+							}
+							fw.print_f("   })\n");
 						} break;
 						case Widelands::MapObjectType::CONSTRUCTIONSITE: {
 							const Widelands::ConstructionSite& cs =
@@ -1740,17 +1734,60 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 							      "wl.Game().map:get_field(%u, %u), true, true)",
 							      var, cs.owner().player_number(), cs.building().name().c_str(),
 							      cs.get_position().x, cs.get_position().y);
-							// # nocom builder, ware settings
+							write("%s.has_builder = %s", var, cs.has_builder(egbase()) ? "true" : "false");
+							std::map<const char*, uint32_t> filled;
+							for (size_t i = cs.get_nrwaresqueues(); i; --i) {
+								const Widelands::InputQueue& q = *cs.get_waresqueue(i - 1);
+								const char* name = egbase().tribes().get_ware_descr(q.get_index())->name().c_str();
+								write("%s:set_desired_fill(%s, %u)", var, name, q.get_max_fill());
+								write("%s:set_priority(%s, %i)", var, name, cs.get_priority(Widelands::wwWARE, q.get_index()));
+								filled[name] = q.get_filled();
+							}
+							write("%s:set_inputs({", var);
+							for (const auto& pair : filled) {
+								write("   %s = %u,", pair.first, pair.second);
+							}
+							fw.print_f("   })\n");
+							if (upcast(const Widelands::MilitarysiteSettings, ms, cs.get_settings())) {
+								write("%s.setting_soldier_capacity = %u", var, ms->desired_capacity);
+								write("%s.setting_prefer_heroes = %s", var, ms->prefer_heroes ? "true" : "false");
+							} else if (upcast(const Widelands::ProductionsiteSettings, ps, cs.get_settings())) {
+								write("%s.setting_stopped = %s", var, ps->stopped ? "true" : "false");
+								for (const auto& pair : ps->ware_queues) {
+									const char* name = cs.owner().tribe().get_ware_descr(pair.first)->name().c_str();
+									write("%s:set_desired_fill(%s, %u, true)", var, name, pair.second.desired_fill);
+									write("%s:set_priority(%s, %d, true)", var, name, pair.second.priority);
+								}
+								for (const auto& pair : ps->worker_queues) {
+									write("%s:set_desired_fill(%s, %u, true)", var, cs.owner().tribe().get_worker_descr(pair.first)->name().c_str(),
+											pair.second.desired_fill);
+								}
+								if (upcast(const Widelands::TrainingsiteSettings, ts, cs.get_settings())) {
+									write("%s.setting_soldier_capacity = %u", var, ts->desired_capacity);
+								}
+							} else if (upcast(const Widelands::WarehouseSettings, ws, cs.get_settings())) {
+								write("%s.setting_launch_expedition = %s", var, ws->launch_expedition ? "true" : "false");
+								for (const auto& pair : ws->ware_preferences) {
+									write("%s:set_setting_warehouse_policy(%s, %s)", var, cs.owner().tribe().get_ware_descr(pair.first)->name().c_str(),
+											stockpolicystring(pair.second));
+								}
+								for (const auto& pair : ws->worker_preferences) {
+									write("%s:set_setting_warehouse_policy(%s, %s)", var, cs.owner().tribe().get_worker_descr(pair.first)->name().c_str(),
+											stockpolicystring(pair.second));
+								}
+							}
 						} break;
 						case Widelands::MapObjectType::DISMANTLESITE: {
 							const Widelands::DismantleSite& ds =
 							   dynamic_cast<const Widelands::DismantleSite&>(*f.get_immovable());
+							const int16_t xpos = ds.get_position().x;
+							const int16_t ypos = ds.get_position().y;
 							write("%s = wl.Game().players[%u]:place_building(\"%s\", "
-							      "wl.Game().map:get_field(%u, %u), false, true)",
+							      "wl.Game().map:get_field(%d, %d), false, true)",
 							      var, ds.owner().player_number(), ds.building().name().c_str(),
-							      ds.get_position().x, ds.get_position().y);
+							      xpos, ypos);
 							write("%s:dismantle()", var);
-							// # nocom worker
+							write("wl.Game().map:get_field(%d, %d).immovable.has_builder = %s", xpos, ypos, ds.has_builder(egbase()) ? "true" : "false");
 						} break;
 						default:
 							break;
@@ -1810,6 +1847,7 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 		}
 
 #undef write
+#undef var
 
 		// Immediately invoke our function (not as a coroutine, to enforce immediate initialization)
 		fw.print_f("end\n%s()\n", autogen_starting_function.c_str());

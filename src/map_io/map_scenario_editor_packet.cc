@@ -77,6 +77,9 @@ void MapScenarioEditorPacket::read(FileSystem& fs, EditorGameBase& egbase, bool,
 				const Widelands::Map& map = egbase.map();
 				for (size_t map_index = map.max_index(); map_index; --map_index) {
 					const Widelands::FCoords coords = map.get_fcoords(map.coords(map_index - 1));
+					if (Widelands::PlayerNumber n = fr.unsigned_8()) {
+						egbase.conquer_area_no_building(PlayerArea<Area<FCoords>>(n, Area<FCoords>(coords, 0)));
+					}
 					if (const uint8_t t = fr.unsigned_8()) {
 						Widelands::Field& field = map[map_index - 1];
 						const Widelands::MapObjectType type = static_cast<Widelands::MapObjectType>(t);

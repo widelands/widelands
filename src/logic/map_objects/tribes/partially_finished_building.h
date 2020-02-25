@@ -22,6 +22,11 @@
 
 #include "logic/map_objects/tribes/building.h"
 
+namespace LuaMaps {
+	class LuaConstructionSite;
+	class LuaDismantleSite;
+}
+
 namespace Widelands {
 
 class Request;
@@ -38,6 +43,8 @@ class PartiallyFinishedBuilding : public Building {
 	friend class MapBuildingdataPacket;
 	friend struct MapBuildingPacket;
 	friend struct MapScenarioEditorPacket;
+	friend class LuaMaps::LuaConstructionSite;
+	friend class LuaMaps::LuaDismantleSite;
 
 public:
 	explicit PartiallyFinishedBuilding(const BuildingDescr& building_descr);
@@ -65,6 +72,9 @@ public:
 		return *building_;
 	}
 
+	bool has_builder(const EditorGameBase& e) const {
+		return builder_.get(e) != nullptr;
+	}
 	uint32_t get_built_per64k() const;
 	Request* get_builder_request() {
 		return builder_request_;
