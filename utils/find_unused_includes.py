@@ -6,6 +6,7 @@
 Call from src directory.
 """
 
+import copy
 import os.path
 import re
 import sys
@@ -166,6 +167,30 @@ def check_file(file_to_check, include_functions):
     return hits
 
 
+def check_forward_declarations(file_to_check):
+    """Detect unused and extraneous forward declarations."""
+    hits = {}
+    with open(file_to_check, 'r', encoding='utf-8') as f:
+        forward_declarations = set()
+
+        for line in f.readlines():
+            line = line.strip()
+            match = FORWARD_DECLARATION_REGEX.match(line)
+            if match and len(match.groups()) == 2:
+                # Add forward declaration to set
+                forward_declarations.add(match.groups()[1])
+            else:
+                # We can't remove while iterating, so we create a copy
+                temp_declarations = copy.copy(forward_declarations)
+                for forward_declaration in forward_declarations:
+                    if forward_declaration in line:
+                        # Forward declaration is being used, so we remove it from the se
+                        temp_declarations.remove(forward_declaration)
+                forward_declarations = temp_declarations
+        hits = forward_declarations
+    return hits
+
+
 def main():
     """Script to find unused includes and print them to console.
 
@@ -184,6 +209,12 @@ def main():
 
             if filename.endswith('.h'):
                 hits = check_file(full_path, False)
+                forward_declarations = check_forward_declarations(full_path)
+                if forward_declarations:
+                    print('\nSuperfluous forward declarations in ' + full_path)
+                    for hit in forward_declarations:
+                        print('\t' + hit)
+                    error_count = error_count + len(forward_declarations)
 
             elif filename.endswith('.cc'):
                 hits = check_file(full_path, True)
