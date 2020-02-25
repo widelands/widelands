@@ -144,18 +144,23 @@ def check_file(file_to_check, include_functions):
             is_useful = False
 
             if header_file in FILE_EXCLUDES:
+                # Too hard to detect, so we assume the include is needed
                 continue
             elif header_file in DIFFICULT_FILES:
+                # Search with function regex switched on
                 header_classes = find_classes(header_file, True, None, 0)
             elif header_file == 'base/log.h':
+                # Search with special regex switched on
                 header_classes = find_classes(
                     header_file, False, HEADER_LOG_REGEX, 1)
             else:
+                # Search with function regex switched on/off according to include_functions
                 header_classes = find_classes(
                     header_file, include_functions, None, 0)
 
             for header_class in header_classes:
                 if INCLUDE_GUARD_REGEX.match(header_class):
+                    # We're not interested in the include guards
                     continue
                 if header_class in file_contents:
                     is_useful = True
@@ -170,6 +175,7 @@ def check_forward_declarations(file_to_check):
     """Detect unused and extraneous forward declarations."""
     hits = set()
 
+    # Collect al classes defined in all headers
     header_classes = set()
     header_files = find_includes(file_to_check)
     for header_file in header_files:
@@ -187,17 +193,20 @@ def check_forward_declarations(file_to_check):
 
             match = FORWARD_DECLARATION_REGEX.match(line)
             if match and len(match.groups()) == 2:
-                # Add forward declaration to set
+                # Add new forward declaration to set
                 forward_declarations.add(match.groups()[1])
             else:
                 # We can't remove while iterating, so we create a copy
                 temp_declarations = copy.copy(forward_declarations)
                 for forward_declaration in forward_declarations:
                     if forward_declaration in line:
-                        # Forward declaration is being used, so we remove it from the set
+                        # Forward declaration is being used, so we remove it from the
+                        # set of declarations to check/report
                         temp_declarations.remove(forward_declaration)
 
-                        # Let's check if it's already defined by a directly included header though
+                        # Let's check if it's already defined by a directly included
+                        # header though.
+                        # If it is, we report it anyway.
                         if forward_declaration in header_classes:
                             hits.add(forward_declaration)
 
