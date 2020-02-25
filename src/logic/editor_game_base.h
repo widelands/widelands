@@ -44,11 +44,6 @@ class InteractiveGameBase;  // TODO(GunChleoc): Get rid
 namespace Widelands {
 
 class PlayersManager;
-
-class Bob;
-class BuildingDescr;
-class Immovable;
-class Map;
 struct ObjectManager;
 class Player;
 class Tribes;

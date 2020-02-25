@@ -36,7 +36,6 @@
 
 namespace Widelands {
 
-struct ProductionProgram;
 class Request;
 class Soldier;
 class WorkerDescr;

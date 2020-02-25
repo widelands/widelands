@@ -46,8 +46,6 @@ struct S2MapLoader;
 namespace Widelands {
 
 class MapLoader;
-class Objective;
-struct BaseImmovable;
 struct MapGenerator;
 struct PathfieldManager;
 class World;

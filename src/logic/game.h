@@ -107,7 +107,6 @@ enum SyncEntry : uint8_t {
 	kBobSetPosition = 0xB8
 };
 
-class Player;
 class PlayerCommand;
 class ReplayWriter;
 

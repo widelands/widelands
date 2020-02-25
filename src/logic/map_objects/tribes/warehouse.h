@@ -22,18 +22,14 @@
 
 #include "base/macros.h"
 #include "economy/request.h"
+#include "economy/ware_instance.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/map_objects/tribes/wareworker.h"
 
 namespace Widelands {
 
-class EditorGameBase;
 class PortDock;
-class Request;
-struct Requirements;
-class Soldier;
-class WareInstance;
 struct WareList;
 
 /*

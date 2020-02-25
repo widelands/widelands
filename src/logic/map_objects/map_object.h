@@ -43,13 +43,11 @@
 #include "scripting/lua_table.h"
 #include "ui_basic/tabpanel.h"
 
-class FileRead;
 class RenderTarget;
 
 namespace Widelands {
 
 class MapObject;
-class MapObjectLoader;
 class Player;
 
 // This enum lists the available classes of Map Objects.

@@ -32,8 +32,6 @@
 #include "logic/map_objects/map_object.h"
 #include "scripting/lua_table.h"
 
-class LuaTable;
-
 constexpr int kWareMenuPicWidth = 24;   //!< Default width for ware's menu icons
 constexpr int kWareMenuPicHeight = 24;  //!< Default height for ware's menu icons
 

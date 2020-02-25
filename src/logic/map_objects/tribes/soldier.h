@@ -180,8 +180,6 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(SoldierDescr);
 };
 
-class Building;
-
 enum CombatWalkingDir {
 	CD_NONE = 0,      // Not in combat
 	CD_WALK_W = 1,    // Going to west       (facing west)

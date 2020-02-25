@@ -31,8 +31,6 @@
 #include "logic/widelands_geometry.h"
 
 namespace Widelands {
-class Map;
-struct Route;
 
 /**
  * BobProgramBase is only used that

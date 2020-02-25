@@ -38,15 +38,9 @@
 #include "logic/message.h"
 #include "scripting/lua_table.h"
 
-struct BuildingHints;
-
 namespace Widelands {
 
-struct Flag;
-struct Message;
 class InputQueue;
-
-class Building;
 
 constexpr int32_t kPriorityLow = 2;
 constexpr int32_t kPriorityNormal = 4;

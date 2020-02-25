@@ -39,9 +39,6 @@
 namespace Widelands {
 
 class ResourceDescription;
-class WareDescr;
-class WorkerDescr;
-class BuildingDescr;
 
 /*
  * Resource indicators:

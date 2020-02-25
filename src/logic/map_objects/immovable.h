@@ -33,7 +33,6 @@
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
 
-class LuaTable;
 class TribesLegacyLookupTable;
 class WorldLegacyLookupTable;
 
@@ -44,7 +43,6 @@ class BuildingDescr;
 class Economy;
 class Map;
 class TerrainAffinity;
-class Tribes;
 class Worker;
 class World;
 struct Flag;

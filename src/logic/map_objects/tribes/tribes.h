@@ -33,9 +33,6 @@
 
 namespace Widelands {
 
-class WareDescr;
-class WorkerDescr;
-
 class Tribes {
 public:
 	Tribes();
