@@ -65,8 +65,8 @@ return {
       name = "frisians",
       author = _"The Widelands Development Team",
       -- TRANSLATORS: This is a tribe name
-      descname = _"Frisians (experimental)",
-      tooltip = _("The inhabitants of the rough North Sea shore. This tribe is still under development."),
+      descname = _"Frisians",
+      tooltip = _("The inhabitants of the rough North Sea shore."),
       icon = dirname .. "images/frisians/icon.png",
 
       starting_conditions = {

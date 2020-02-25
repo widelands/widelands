@@ -86,7 +86,7 @@ return {
          name = "trees",
          -- TRANSLATORS Tab title: tree help
          title = _"Trees",
-         icon = "world/immovables/trees/alder/old/idle_0.png",
+         icon = "world/immovables/trees/alder/menu.png",
          entries = get_trees()
       }
    }

@@ -87,8 +87,8 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Reading Map Data ... ");
-	GameMapPacket M;
-	M.read(fs_, game_);
+	GameMapPacket map_packet;
+	map_packet.read(fs_, game_);
 	log("Game: Reading Map Data took %ums\n", timer.ms_since_last_query());
 
 	// This has to be loaded after the map packet so that the map's filesystem will exist.
@@ -110,10 +110,10 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	log("Game: Reading Player Info took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Calling read_complete()\n");
-	M.read_complete(game_);
+	map_packet.read_complete(game_);
 	log("Game: read_complete took: %ums\n", timer.ms_since_last_query());
 
-	MapObjectLoader* const mol = M.get_map_object_loader();
+	MapObjectLoader* const mol = map_packet.get_map_object_loader();
 
 	log("Game: Reading Player Economies Info ... ");
 	set_progress_message(_("Economies"), 2);
