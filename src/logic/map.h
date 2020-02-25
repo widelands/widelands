@@ -41,7 +41,6 @@
 #include "notifications/notifications.h"
 
 class FileSystem;
-class Image;
 struct S2MapLoader;
 
 namespace Widelands {

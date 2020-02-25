@@ -47,10 +47,8 @@ class Soldier;
 class TrainingSite;
 struct Flag;
 class TribeDescr;
-struct RoadBase;
 struct Road;
 struct Waterway;
-struct AttackController;
 
 /**
  * Manage in-game aspects of players, such as tribe, team, fog-of-war, statistics,

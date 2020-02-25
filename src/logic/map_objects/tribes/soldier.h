@@ -26,8 +26,6 @@
 #include "logic/map_objects/tribes/training_attribute.h"
 #include "logic/map_objects/tribes/worker.h"
 
-struct RGBColor;
-
 namespace Widelands {
 
 // Constants used to launch attacks

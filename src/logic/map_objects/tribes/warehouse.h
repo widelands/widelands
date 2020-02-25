@@ -26,8 +26,6 @@
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/map_objects/tribes/wareworker.h"
 
-class InteractivePlayer;
-
 namespace Widelands {
 
 class EditorGameBase;
@@ -35,7 +33,6 @@ class PortDock;
 class Request;
 struct Requirements;
 class Soldier;
-class TribeDescr;
 class WareInstance;
 struct WareList;
 

@@ -45,18 +45,13 @@ namespace Widelands {
 
 class PlayersManager;
 
-class Battle;
 class Bob;
 class BuildingDescr;
 class Immovable;
 class Map;
 struct ObjectManager;
 class Player;
-struct PlayerImmovable;
 class Tribes;
-class TribeDescr;
-struct Flag;
-struct AttackController;
 struct BuildingSettings;
 
 struct NoteFieldPossession {

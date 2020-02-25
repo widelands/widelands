@@ -40,11 +40,8 @@ namespace Widelands {
 
 class ResourceDescription;
 class WareDescr;
-class Warehouse;
 class WorkerDescr;
-class World;
 class BuildingDescr;
-struct Event;
 
 /*
  * Resource indicators:

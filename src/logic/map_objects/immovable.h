@@ -28,6 +28,7 @@
 #include "logic/map_objects/info_to_draw.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/wareworker.h"
+#include "logic/map_objects/world/editor_category.h"
 #include "logic/widelands_geometry.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
@@ -43,12 +44,10 @@ class Economy;
 class Map;
 class TerrainAffinity;
 class Tribes;
-class WareInstance;
 class Worker;
 class World;
 struct Flag;
 struct PlayerImmovable;
-class TribeDescr;
 
 struct NoteImmovable {
 	CAN_BE_SENT_AS_NOTE(NoteId::Immovable)

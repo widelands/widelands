@@ -25,6 +25,7 @@
 #include "base/macros.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/wareworker.h"
+#include "logic/path.h"
 #include "logic/widelands_geometry.h"
 
 namespace Widelands {

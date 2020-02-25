@@ -48,11 +48,9 @@ class RenderTarget;
 
 namespace Widelands {
 
-class EditorCategory;
 class MapObject;
 class MapObjectLoader;
 class Player;
-struct Path;
 
 // This enum lists the available classes of Map Objects.
 enum class MapObjectType : uint8_t {

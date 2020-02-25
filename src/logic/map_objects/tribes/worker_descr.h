@@ -29,8 +29,6 @@
 #include "logic/map_objects/immovable.h"
 #include "scripting/lua_table.h"
 
-class Image;
-
 namespace Widelands {
 
 // TODO(Antonio Trueba#1#): Get rid of forward class declaration

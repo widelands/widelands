@@ -39,13 +39,11 @@
 #include "scripting/lua_table.h"
 
 struct BuildingHints;
-class Image;
 
 namespace Widelands {
 
 struct Flag;
 struct Message;
-class TribeDescr;
 class InputQueue;
 
 class Building;

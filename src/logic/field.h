@@ -50,7 +50,6 @@ namespace Widelands {
 // class all around the code
 
 class Bob;
-class TerrainDescription;
 struct BaseImmovable;
 
 // Field is used so often, make sure it is as small as possible.
