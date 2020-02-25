@@ -29,6 +29,7 @@
 #include "ui_basic/table.h"
 #include "wui/gamedetails.h"
 #include "wui/savegamedeleter.h"
+#include "wui/savegameloader.h"
 #include "wui/savegametable.h"
 
 /// Common functions for loading or saving a game or replay.
@@ -93,7 +94,9 @@ private:
 	UI::Panel* parent_;
 	UI::Box* table_box_;
 	FileType filetype_;
+
 	std::unique_ptr<SavegameDeleter> savegame_deleter_;
+	std::unique_ptr<SavegameLoader> savegame_loader_;
 
 	SavegameTable* table_;
 	std::vector<SavegameData> games_data_;
@@ -104,18 +107,11 @@ private:
 	std::string curdir_;
 
 	Widelands::Game& game_;
-	void load_gamefile(const std::string& gamefilename);
-	bool is_valid_gametype(const SavegameData& gamedata) const;
-	void add_time_info(SavegameData& gamedata, const Widelands::GamePreloadPacket& gpdp) const;
-	void add_general_information(SavegameData& gamedata,
-	                             const Widelands::GamePreloadPacket& gpdp) const;
-	void add_error_info(SavegameData& gamedata, std::string errormessage) const;
-	void add_sub_dir(const std::string& gamefilename);
+
 	bool selection_contains_directory() const;
 	const std::vector<SavegameData>
 	get_selected_savegames(const std::set<uint32_t>& selections) const;
 	void set_tooltips_of_buttons(size_t nr_of_selected_items) const;
-	void delete_own(const std::vector<SavegameData>& to_be_deleted);
 	void update_table(std::set<uint32_t>& selections);
 };
 

@@ -1,58 +1,67 @@
 #include "savegameloader.h"
 
-#include "base/i18n.h"
-#include "base/time_string.h"
-#include "game_io/game_loader.h"
-#include "io/filesystem/layered_filesystem.h"
-
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
+#include "base/i18n.h"
+#include "base/log.h"
+#include "base/time_string.h"
+#include "game_io/game_loader.h"
+#include "io/filesystem/layered_filesystem.h"
+#include "logic/filesystem_constants.h"
+
 SavegameLoader::SavegameLoader(Widelands::Game& game) : game_(game) {
 }
-std::vector<SavegameData> SavegameLoader::load_files(const std::string directory) {
+std::vector<SavegameData> SavegameLoader::load_files(const std::string& directory) {
+	std::vector<SavegameData> loaded_games;
 	FilenameSet gamefiles = g_fs->list_directory(directory);
 
 	for (const std::string& gamefilename : gamefiles) {
-		load_gamefile(gamefilename);
+		load_gamefile(gamefilename, loaded_games);
 	}
+	return loaded_games;
 }
 
-void SavegameLoader::load_gamefile(const std::string& gamefilename) {
+std::string SavegameLoader::get_savename(const std::string& gamefilename) const {
+	return gamefilename;
+}
 
-	Widelands::GamePreloadPacket gpdp;
-	std::string savename = gamefilename;
+void SavegameLoader::load_gamefile(const std::string& gamefilename,
+                                   std::vector<SavegameData>& loaded_games) const {
+	std::string savename = get_savename(gamefilename);
 
-	//	if (filetype_ == FileType::kReplay) {
-	//		savename += kSavegameExtension;
-	//	}
+	log("savename to be loaded: %s\n", savename.c_str());
+
 	if (!g_fs->file_exists(savename.c_str())) {
 		return;
 	}
 
+	Widelands::GamePreloadPacket gpdp;
 	SavegameData gamedata(gamefilename);
 	try {
 		Widelands::GameLoader gl(savename.c_str(), game_);
 		gl.preload_game(gpdp);
-
+		log("preloaded: %s\n", savename.c_str());
 		gamedata.gametype = gpdp.get_gametype();
 		if (!is_valid_gametype(gamedata)) {
 			return;
 		}
+
 		add_general_information(gamedata, gpdp);
 		add_time_info(gamedata, gpdp);
 
 	} catch (const std::exception& e) {
-
+		log("exception. directory?: %s\n", savename.c_str());
 		if (g_fs->is_directory(gamefilename)) {
-			add_sub_dir(gamefilename);
+			log("yes, directory\n");
+			add_sub_dir(gamefilename, loaded_games);
 			return;
 		} else {
 			add_error_info(gamedata, e.what());
 		}
 	}
 
-	// games_data_.push_back(gamedata);
+	loaded_games.push_back(gamedata);
 }
 
 void SavegameLoader::add_general_information(SavegameData& gamedata,
@@ -80,19 +89,23 @@ void SavegameLoader::add_error_info(SavegameData& gamedata, std::string errormes
 }
 
 bool SavegameLoader::is_valid_gametype(const SavegameData& gamedata) const {
-	// Skip singleplayer games in multiplayer mode and vice versa
-	//	if (filetype_ != FileType::kReplay && filetype_ != FileType::kShowAll) {
-	//		if (filetype_ == FileType::kGameMultiPlayer) {
-	//			if (gamedata.gametype == GameController::GameType::kSingleplayer) {
-	//				return false;
-	//			}
-	//		} else if ((gamedata.gametype != GameController::GameType::kSingleplayer) &&
-	//		           (gamedata.gametype != GameController::GameType::kReplay)) {
-	//			return false;
-	//		}
-	//	}
-	return true;
+	return gamedata.gametype == GameController::GameType::kSingleplayer;
 }
+
+// bool SavegameLoader::is_valid_gametype(const SavegameData& gamedata) const {
+//	 Skip singleplayer games in multiplayer mode and vice versa
+//	if (filetype_ != FileType::kReplay && filetype_ != FileType::kShowAll) {
+//	if (filetype_ == FileType::kGameMultiPlayer) {
+//		if (gamedata.gametype == GameController::GameType::kSingleplayer) {
+//			return false;
+//		}
+//	} else if ((gamedata.gametype != GameController::GameType::kSingleplayer) &&
+//	           (gamedata.gametype != GameController::GameType::kReplay)) {
+//		return false;
+//	}
+//	}
+//	return true;
+//}
 
 void SavegameLoader::add_time_info(SavegameData& gamedata,
                                    const Widelands::GamePreloadPacket& gpdp) const {
@@ -160,11 +173,35 @@ void SavegameLoader::add_time_info(SavegameData& gamedata,
 	}
 }
 
-void SavegameLoader::add_sub_dir(const std::string& gamefilename) {
+void SavegameLoader::add_sub_dir(const std::string& gamefilename,
+                                 std::vector<SavegameData>& loaded_games) const {
 	// Add subdirectory to the list
 	const char* fs_filename = FileSystem::fs_filename(gamefilename.c_str());
+	log("add_sub_dir: %s\n", fs_filename);
 	if (!strcmp(fs_filename, ".") || !strcmp(fs_filename, "..")) {
 		return;
 	}
-	// games_data_.push_back(SavegameData::create_sub_dir(gamefilename));
+	log("finished\n");
+	loaded_games.push_back(SavegameData::create_sub_dir(gamefilename));
+}
+
+ReplayLoader::ReplayLoader(Widelands::Game& game) : SavegameLoader(game) {
+}
+
+bool ReplayLoader::is_valid_gametype(const SavegameData&) const {
+	return true;
+}
+
+std::string ReplayLoader::get_savename(const std::string& gamefilename) const {
+	std::string savename = gamefilename;
+	savename += kSavegameExtension;
+	return savename;
+}
+
+MultiPlayerLoader::MultiPlayerLoader(Widelands::Game& game) : SavegameLoader(game) {
+}
+
+bool MultiPlayerLoader::is_valid_gametype(const SavegameData& gamedata) const {
+	return gamedata.gametype == GameController::GameType::kNetHost ||
+	       gamedata.gametype == GameController::GameType::kNetClient;
 }
