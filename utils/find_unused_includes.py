@@ -35,9 +35,12 @@ FUNCTION_REGEX = re.compile(r'(^|.*\s+)([a-zA-Z_0-9]+)\(.*(\)|,).*')
 
 # Files that are hard to capture by regex
 FILE_EXCLUDES = {'graphic/gl/system_headers.h', 'scripting/lua.h',
-                 'third_party/eris/lua.hpp', 'scripting/eris.h', 'scripting/report_error.h', 'editor/tools/set_resources_tool.h'}
+                 'third_party/eris/lua.hpp', 'scripting/eris.h'}
 
-DIFFICULT_FILES = { 'graphic/build_texture_atlas.h' }
+# Headers that need to be detected by functions
+DIFFICULT_FILES = {'graphic/build_texture_atlas.h',
+                   'scripting/report_error.h', 'editor/tools/set_resources_tool.h'}
+
 
 def find_classes(file_to_check, include_functions):
     """Returns a set of classes defined by this file."""
