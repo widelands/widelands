@@ -29,7 +29,6 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
-#include "base/macros.h"
 #include "base/warning.h"
 #include "build_info.h"
 #include "io/fileread.h"

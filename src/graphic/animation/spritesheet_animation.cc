@@ -28,7 +28,6 @@
 #include <boost/format.hpp>
 
 #include "base/log.h"
-#include "base/macros.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/texture.h"

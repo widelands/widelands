@@ -24,7 +24,6 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
-#include "base/macros.h"
 #include "build_info.h"
 #include "graphic/graphic.h"
 #include "graphic/text_layout.h"

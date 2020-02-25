@@ -26,7 +26,6 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
-#include "base/macros.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "graphic/text/font_set.h"
