@@ -34,7 +34,6 @@
 #include "logic/playersmanager.h"
 #include "scripting/lua_table.h"
 #include "wui/interactive_player.h"
-#include "wui/mapviewpixelfunctions.h"
 #include "wui/minimap.h"
 
 namespace Widelands {

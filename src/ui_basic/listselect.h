@@ -31,7 +31,6 @@
 #include "ui_basic/scrollbar.h"
 
 namespace UI {
-struct Scrollbar;
 
 enum class ListselectLayout {
 	kPlain,     // Highlight the selected element

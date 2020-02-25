@@ -31,7 +31,6 @@ class FileSystem;
 
 namespace Widelands {
 
-class EditorGameBase;
 class MapObjectLoader;
 
 /// Takes ownership of the filesystem that is passed to it.

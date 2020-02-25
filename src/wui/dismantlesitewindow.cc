@@ -19,7 +19,6 @@
 
 #include "wui/dismantlesitewindow.h"
 
-#include "economy/wares_queue.h"
 #include "graphic/graphic.h"
 
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";

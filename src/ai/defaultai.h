@@ -37,7 +37,6 @@
 
 namespace Widelands {
 struct Road;
-struct Flag;
 }  // namespace Widelands
 
 /**

@@ -24,8 +24,6 @@
 
 namespace Widelands {
 
-class Game;
-
 /*
  * This contains all the preload data needed to identify
  * a game for a user (for example in a listbox)

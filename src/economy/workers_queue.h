@@ -25,13 +25,7 @@
 
 namespace Widelands {
 
-class Economy;
 class ExpeditionBootstrap;
-class Game;
-class MapObjectLoader;
-struct MapObjectSaver;
-class Player;
-class Worker;
 
 /**
  * This micro storage room can hold any number of items of a fixed worker.

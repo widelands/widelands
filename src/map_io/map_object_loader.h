@@ -31,7 +31,6 @@
 
 namespace Widelands {
 class Bob;
-class MapObject;
 
 /*
  * This class helps to

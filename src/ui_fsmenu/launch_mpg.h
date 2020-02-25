@@ -33,8 +33,6 @@
 
 struct ChatProvider;
 struct GameChatPanel;
-class GameController;
-struct GameSettingsProvider;
 struct MultiPlayerSetupGroup;
 
 /**

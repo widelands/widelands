@@ -21,7 +21,6 @@
 
 #include <boost/format.hpp>
 
-#include "economy/wares_queue.h"
 #include "graphic/graphic.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "wui/actionconfirm.h"

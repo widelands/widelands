@@ -30,7 +30,6 @@
 
 namespace Widelands {
 class Game;
-struct Message;
 }  // namespace Widelands
 class InteractivePlayer;
 
