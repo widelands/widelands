@@ -72,7 +72,7 @@ FieldData::FieldData(const Field& field)
 }
 
 // static
-inline FindCritterByClass::Class FindCritterByClass::classof(const CritterDescr& cd) {
+FindCritterByClass::Class FindCritterByClass::classof(const CritterDescr& cd) {
 	return cd.is_herbivore() ? cd.is_carnivore() ? Class::Neither : Class::Herbivore :
 	                           cd.is_carnivore() ? Class::Carnivore : Class::Neither;
 }
