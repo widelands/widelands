@@ -31,8 +31,8 @@ INLINE_FUNCTION_REGEX = re.compile(r'inline\s+\S+\s+(\S+\()')
 FORWARD_DECLARATION_REGEX = re.compile(r'(class|struct)\s+(\S+);')
 
 # For .cc files
-FUNCTION_REGEX1 = re.compile(r'.*\s+([a-z_0-9]+)\(.*\).*')
-FUNCTION_REGEX2 = re.compile(r'(^|.*\s+)([a-z_0-9]+)\(.*,.*')
+FUNCTION_REGEX1 = re.compile(r'.*\s+([a-zA-Z_0-9]+)\(.*\).*')
+FUNCTION_REGEX2 = re.compile(r'(^|.*\s+)([a-zA-Z_0-9]+)\(.*,.*')
 
 
 # Files that are hard to capture by regex
