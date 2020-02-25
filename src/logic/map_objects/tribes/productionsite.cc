@@ -413,15 +413,15 @@ InputQueue& ProductionSite::inputqueue(DescriptionIndex const wi, WareWorker con
 			return *ip_queue;
 		}
 	}
-    if (!(owner().tribe().has_ware(wi) || owner().tribe().has_worker(wi))) {
-        throw wexception("%s (%u) has no InputQueue for unknown %s %u", descr().name().c_str(), serial(),
-                         type == WareWorker::wwWARE ? "ware" : "worker", wi);
-    }
+	if (!(owner().tribe().has_ware(wi) || owner().tribe().has_worker(wi))) {
+		throw wexception("%s (%u) has no InputQueue for unknown %s %u", descr().name().c_str(),
+		                 serial(), type == WareWorker::wwWARE ? "ware" : "worker", wi);
+	}
 	throw wexception("%s (%u) has no InputQueue for %s %u: %s", descr().name().c_str(), serial(),
-                     type == WareWorker::wwWARE ? "ware" : "worker", wi,
-                     type == WareWorker::wwWARE ?
-                         owner().tribe().get_ware_descr(wi)->name().c_str() :
-                         owner().tribe().get_worker_descr(wi)->name().c_str());
+	                 type == WareWorker::wwWARE ? "ware" : "worker", wi,
+	                 type == WareWorker::wwWARE ?
+	                    owner().tribe().get_ware_descr(wi)->name().c_str() :
+	                    owner().tribe().get_worker_descr(wi)->name().c_str());
 }
 
 /**

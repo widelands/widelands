@@ -240,7 +240,7 @@ bool ConstructionSite::init(EditorGameBase& egbase) {
 void ConstructionSite::init_settings() {
 	assert(building_);
 	assert(!settings_);
-    const TribeDescr& tribe = owner().tribe();
+	const TribeDescr& tribe = owner().tribe();
 	if (upcast(const WarehouseDescr, wd, building_)) {
 		settings_.reset(new WarehouseSettings(*wd, tribe));
 	} else if (upcast(const TrainingSiteDescr, td, building_)) {
@@ -389,9 +389,9 @@ void ConstructionSite::enhance(Game&) {
 	};
 
 	BuildingSettings* old_settings = settings_.release();
-    switch (building_->type()) {
-    case Widelands::MapObjectType::WAREHOUSE: {
-        upcast(const WarehouseDescr, wd, building_);
+	switch (building_->type()) {
+	case Widelands::MapObjectType::WAREHOUSE: {
+		upcast(const WarehouseDescr, wd, building_);
 		upcast(WarehouseSettings, ws, old_settings);
 		assert(ws);
 		WarehouseSettings* new_settings = new WarehouseSettings(*wd, owner().tribe());
@@ -403,9 +403,9 @@ void ConstructionSite::enhance(Game&) {
 			new_settings->worker_preferences[pair.first] = pair.second;
 		}
 		new_settings->launch_expedition = ws->launch_expedition && building_->get_isport();
-    } break;
-    case Widelands::MapObjectType::TRAININGSITE: {
-        upcast(const TrainingSiteDescr, td, building_);
+	} break;
+	case Widelands::MapObjectType::TRAININGSITE: {
+		upcast(const TrainingSiteDescr, td, building_);
 		upcast(TrainingsiteSettings, ts, old_settings);
 		assert(ts);
 		TrainingsiteSettings* new_settings = new TrainingsiteSettings(*td, owner().tribe());
@@ -433,9 +433,9 @@ void ConstructionSite::enhance(Game&) {
 		}
 		new_settings->desired_capacity =
 		   new_desired_capacity(ts->max_capacity, ts->desired_capacity, new_settings->max_capacity);
-    } break;
-    case Widelands::MapObjectType::PRODUCTIONSITE: {
-        upcast(const ProductionSiteDescr, pd, building_);
+	} break;
+	case Widelands::MapObjectType::PRODUCTIONSITE: {
+		upcast(const ProductionSiteDescr, pd, building_);
 		upcast(ProductionsiteSettings, ps, old_settings);
 		assert(ps);
 		ProductionsiteSettings* new_settings = new ProductionsiteSettings(*pd, owner().tribe());
@@ -461,9 +461,9 @@ void ConstructionSite::enhance(Game&) {
 				}
 			}
 		}
-    } break;
-    case Widelands::MapObjectType::MILITARYSITE: {
-        upcast(const MilitarySiteDescr, md, building_);
+	} break;
+	case Widelands::MapObjectType::MILITARYSITE: {
+		upcast(const MilitarySiteDescr, md, building_);
 		upcast(MilitarysiteSettings, ms, old_settings);
 		assert(ms);
 		MilitarysiteSettings* new_settings = new MilitarysiteSettings(*md, owner().tribe());
@@ -472,8 +472,8 @@ void ConstructionSite::enhance(Game&) {
 		   1,
 		   new_desired_capacity(ms->max_capacity, ms->desired_capacity, new_settings->max_capacity));
 		new_settings->prefer_heroes = ms->prefer_heroes;
-    } break;
-    default:
+	} break;
+	default:
 		// TODO(Nordfriese): Add support for markets when trading is implemented
 		log("WARNING: Enhanced constructionsite to a %s, which is not of any known building type\n",
 		    building_->name().c_str());

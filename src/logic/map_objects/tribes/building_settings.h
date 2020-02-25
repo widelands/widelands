@@ -41,12 +41,16 @@ class TribeDescr;
 class WarehouseDescr;
 
 struct BuildingSettings {
-	BuildingSettings(const std::string& name, const TribeDescr& tribe) : tribe_(tribe), descr_(name) {
+	BuildingSettings(const std::string& name, const TribeDescr& tribe)
+	   : tribe_(tribe), descr_(name) {
 	}
 	virtual ~BuildingSettings() {
 	}
 
-	static BuildingSettings* load(const Game&, const TribeDescr&, FileRead&, const TribesLegacyLookupTable& tribes_lookup_table);
+	static BuildingSettings* load(const Game&,
+	                              const TribeDescr&,
+	                              FileRead&,
+	                              const TribesLegacyLookupTable& tribes_lookup_table);
 
 	virtual void save(const Game&, FileWrite&) const;
 	virtual void read(const Game&, FileRead&, const TribesLegacyLookupTable&);
@@ -55,7 +59,8 @@ struct BuildingSettings {
 	}
 
 protected:
-    const TribeDescr& tribe_;
+	const TribeDescr& tribe_;
+
 private:
 	const std::string descr_;
 };

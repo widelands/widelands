@@ -31,7 +31,8 @@
 
 namespace Widelands {
 
-ProductionsiteSettings::ProductionsiteSettings(const ProductionSiteDescr& descr, const TribeDescr& tribe)
+ProductionsiteSettings::ProductionsiteSettings(const ProductionSiteDescr& descr,
+                                               const TribeDescr& tribe)
    : BuildingSettings(descr.name(), tribe), stopped(false) {
 	for (const auto& pair : descr.input_wares()) {
 		ware_queues.insert(
@@ -139,38 +140,45 @@ constexpr uint8_t kCurrentPacketVersionTrainingsite = 1;
 constexpr uint8_t kCurrentPacketVersionWarehouse = 2;
 
 // static
-BuildingSettings* BuildingSettings::load(const Game& game, const TribeDescr& tribe, FileRead& fr, const TribesLegacyLookupTable& tribes_lookup_table) {
+BuildingSettings* BuildingSettings::load(const Game& game,
+                                         const TribeDescr& tribe,
+                                         FileRead& fr,
+                                         const TribesLegacyLookupTable& tribes_lookup_table) {
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == 1 || packet_version == kCurrentPacketVersion) {
 			const std::string name(fr.c_string());
-			const DescriptionIndex index = tribe.safe_building_index(tribes_lookup_table.lookup_building(name));
-            const BuildingDescr* descr = tribe.get_building_descr(index);
-            if (packet_version == 1) {
-                // TODO(GunChleoc): Savegame compatibility for Build 21
-                fr.unsigned_8(); // Consume unused building type
-            }
+			const DescriptionIndex index =
+			   tribe.safe_building_index(tribes_lookup_table.lookup_building(name));
+			const BuildingDescr* descr = tribe.get_building_descr(index);
+			if (packet_version == 1) {
+				// TODO(GunChleoc): Savegame compatibility for Build 21
+				fr.unsigned_8();  // Consume unused building type
+			}
 			BuildingSettings* result = nullptr;
 			switch (descr->type()) {
-            case MapObjectType::TRAININGSITE: {
-				result = new TrainingsiteSettings(*dynamic_cast<const TrainingSiteDescr*>(descr), tribe);
+			case MapObjectType::TRAININGSITE: {
+				result =
+				   new TrainingsiteSettings(*dynamic_cast<const TrainingSiteDescr*>(descr), tribe);
 				break;
 			}
 			case MapObjectType::PRODUCTIONSITE: {
-				result = new ProductionsiteSettings(*dynamic_cast<const ProductionSiteDescr*>(descr), tribe);
+				result =
+				   new ProductionsiteSettings(*dynamic_cast<const ProductionSiteDescr*>(descr), tribe);
 				break;
 			}
 			case MapObjectType::MILITARYSITE: {
-				result = new MilitarysiteSettings(*dynamic_cast<const MilitarySiteDescr*>(descr), tribe);
+				result =
+				   new MilitarysiteSettings(*dynamic_cast<const MilitarySiteDescr*>(descr), tribe);
 				break;
 			}
 			case MapObjectType::WAREHOUSE: {
 				result = new WarehouseSettings(*dynamic_cast<const WarehouseDescr*>(descr), tribe);
 				break;
 			}
-            default:
-                throw GameDataError(
-				   "Unsupported building category %s (%s)", to_string(descr->type()).c_str(), name.c_str());
+			default:
+				throw GameDataError("Unsupported building category %s (%s)",
+				                    to_string(descr->type()).c_str(), name.c_str());
 			}
 			result->read(game, fr, tribes_lookup_table);
 			return result;
@@ -193,7 +201,9 @@ void BuildingSettings::save(const Game&, FileWrite& fw) const {
 	fw.c_string(descr_.c_str());
 }
 
-void MilitarysiteSettings::read(const Game& game, FileRead& fr, const TribesLegacyLookupTable& tribes_lookup_table) {
+void MilitarysiteSettings::read(const Game& game,
+                                FileRead& fr,
+                                const TribesLegacyLookupTable& tribes_lookup_table) {
 	BuildingSettings::read(game, fr, tribes_lookup_table);
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
@@ -217,7 +227,9 @@ void MilitarysiteSettings::save(const Game& game, FileWrite& fw) const {
 	fw.unsigned_8(prefer_heroes ? 1 : 0);
 }
 
-void ProductionsiteSettings::read(const Game& game, FileRead& fr, const TribesLegacyLookupTable& tribes_lookup_table) {
+void ProductionsiteSettings::read(const Game& game,
+                                  FileRead& fr,
+                                  const TribesLegacyLookupTable& tribes_lookup_table) {
 	BuildingSettings::read(game, fr, tribes_lookup_table);
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
@@ -226,44 +238,46 @@ void ProductionsiteSettings::read(const Game& game, FileRead& fr, const TribesLe
 			const uint32_t nr_wares = fr.unsigned_32();
 			const uint32_t nr_workers = fr.unsigned_32();
 			for (uint32_t i = 0; i < nr_wares; ++i) {
-                DescriptionIndex di = Widelands::INVALID_INDEX;
-                if (packet_version == 1) {
-                    // TODO(GunChleoc): Savegame compatibility for Build 21
-                    di = fr.unsigned_32();
-                } else {
-                    const std::string name(fr.c_string());
-                    di = tribe_.safe_ware_index(tribes_lookup_table.lookup_ware(name));
-                }
+				DescriptionIndex di = Widelands::INVALID_INDEX;
+				if (packet_version == 1) {
+					// TODO(GunChleoc): Savegame compatibility for Build 21
+					di = fr.unsigned_32();
+				} else {
+					const std::string name(fr.c_string());
+					di = tribe_.safe_ware_index(tribes_lookup_table.lookup_ware(name));
+				}
 				const uint32_t fill = fr.unsigned_32();
 				const int32_t priority = fr.signed_32();
-                // Set the fill and priority if the queue exists.
-                // The check protects against changes in the input wares - we simply keep using the default instead in that case.
-                if (ware_queues.count(di) == 1) {
-                    InputQueueSetting& setme = ware_queues.at(di);
-                    // Don't fill it with more than currently possible
-                    setme.desired_fill = std::min(setme.max_fill, fill);
-                    setme.priority = priority;
-                }
+				// Set the fill and priority if the queue exists.
+				// The check protects against changes in the input wares - we simply keep using the
+				// default instead in that case.
+				if (ware_queues.count(di) == 1) {
+					InputQueueSetting& setme = ware_queues.at(di);
+					// Don't fill it with more than currently possible
+					setme.desired_fill = std::min(setme.max_fill, fill);
+					setme.priority = priority;
+				}
 			}
 			for (uint32_t i = 0; i < nr_workers; ++i) {
-                DescriptionIndex di = Widelands::INVALID_INDEX;
-                if (packet_version == 1) {
-                    // TODO(GunChleoc): Savegame compatibility for Build 21
-                    di = fr.unsigned_32();
-                } else {
-                    const std::string name(fr.c_string());
-                    di = tribe_.safe_worker_index(tribes_lookup_table.lookup_worker(name));
-                }
+				DescriptionIndex di = Widelands::INVALID_INDEX;
+				if (packet_version == 1) {
+					// TODO(GunChleoc): Savegame compatibility for Build 21
+					di = fr.unsigned_32();
+				} else {
+					const std::string name(fr.c_string());
+					di = tribe_.safe_worker_index(tribes_lookup_table.lookup_worker(name));
+				}
 				const uint32_t fill = fr.unsigned_32();
 				const int32_t priority = fr.signed_32();
-                // Set the fill and priority if the queue exists.
-                // The check protects against changes in the input workers - we simply keep using the default instead in that case.
-                if (worker_queues.count(di) == 1) {
-                    InputQueueSetting& setme = worker_queues.at(di);
-                    // Don't fill it with more than currently possible
-                    setme.desired_fill = std::min(setme.max_fill, fill);
-                    setme.priority = priority;
-                }
+				// Set the fill and priority if the queue exists.
+				// The check protects against changes in the input workers - we simply keep using the
+				// default instead in that case.
+				if (worker_queues.count(di) == 1) {
+					InputQueueSetting& setme = worker_queues.at(di);
+					// Don't fill it with more than currently possible
+					setme.desired_fill = std::min(setme.max_fill, fill);
+					setme.priority = priority;
+				}
 			}
 		} else {
 			throw UnhandledVersionError(
@@ -282,7 +296,7 @@ void ProductionsiteSettings::save(const Game& game, FileWrite& fw) const {
 	fw.unsigned_32(ware_queues.size());
 	fw.unsigned_32(worker_queues.size());
 	for (const auto& pair : ware_queues) {
-        fw.c_string(tribe_.get_ware_descr(pair.first)->name());
+		fw.c_string(tribe_.get_ware_descr(pair.first)->name());
 		fw.unsigned_32(pair.second.desired_fill);
 		fw.signed_32(pair.second.priority);
 	}
@@ -293,7 +307,9 @@ void ProductionsiteSettings::save(const Game& game, FileWrite& fw) const {
 	}
 }
 
-void TrainingsiteSettings::read(const Game& game, FileRead& fr, const TribesLegacyLookupTable& tribes_lookup_table) {
+void TrainingsiteSettings::read(const Game& game,
+                                FileRead& fr,
+                                const TribesLegacyLookupTable& tribes_lookup_table) {
 	ProductionsiteSettings::read(game, fr, tribes_lookup_table);
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
@@ -314,7 +330,9 @@ void TrainingsiteSettings::save(const Game& game, FileWrite& fw) const {
 	fw.unsigned_32(desired_capacity);
 }
 
-void WarehouseSettings::read(const Game& game, FileRead& fr, const TribesLegacyLookupTable& tribes_lookup_table) {
+void WarehouseSettings::read(const Game& game,
+                             FileRead& fr,
+                             const TribesLegacyLookupTable& tribes_lookup_table) {
 	BuildingSettings::read(game, fr, tribes_lookup_table);
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
@@ -323,34 +341,34 @@ void WarehouseSettings::read(const Game& game, FileRead& fr, const TribesLegacyL
 			const uint32_t nr_wares = fr.unsigned_32();
 			const uint32_t nr_workers = fr.unsigned_32();
 			for (uint32_t i = 0; i < nr_wares; ++i) {
-                DescriptionIndex di = Widelands::INVALID_INDEX;
-                if (packet_version == 1) {
-                    // TODO(GunChleoc): Savegame compatibility for Build 21
-                    di = fr.unsigned_32();
-                } else {
-                    const std::string name(fr.c_string());
-                    di = tribe_.safe_ware_index(tribes_lookup_table.lookup_ware(name));
-                }
+				DescriptionIndex di = Widelands::INVALID_INDEX;
+				if (packet_version == 1) {
+					// TODO(GunChleoc): Savegame compatibility for Build 21
+					di = fr.unsigned_32();
+				} else {
+					const std::string name(fr.c_string());
+					di = tribe_.safe_ware_index(tribes_lookup_table.lookup_ware(name));
+				}
 				const uint8_t pref = fr.unsigned_8();
-                // Condition protects against changes in the tribe's roster
-                if (tribe_.has_ware(di)) {
-                    ware_preferences[di] = static_cast<StockPolicy>(pref);
-                }
+				// Condition protects against changes in the tribe's roster
+				if (tribe_.has_ware(di)) {
+					ware_preferences[di] = static_cast<StockPolicy>(pref);
+				}
 			}
 			for (uint32_t i = 0; i < nr_workers; ++i) {
-                DescriptionIndex di = Widelands::INVALID_INDEX;
-                if (packet_version == 1) {
-                    // TODO(GunChleoc): Savegame compatibility for Build 21
-                    di = fr.unsigned_32();
-                } else {
-                    const std::string name(fr.c_string());
-                    di = tribe_.safe_worker_index(tribes_lookup_table.lookup_worker(name));
-                }
+				DescriptionIndex di = Widelands::INVALID_INDEX;
+				if (packet_version == 1) {
+					// TODO(GunChleoc): Savegame compatibility for Build 21
+					di = fr.unsigned_32();
+				} else {
+					const std::string name(fr.c_string());
+					di = tribe_.safe_worker_index(tribes_lookup_table.lookup_worker(name));
+				}
 				const uint8_t pref = fr.unsigned_8();
-                // Condition protects against changes in the tribe's roster
-                if (tribe_.has_worker(di)) {
-                    worker_preferences[di] = static_cast<StockPolicy>(pref);
-                }
+				// Condition protects against changes in the tribe's roster
+				if (tribe_.has_worker(di)) {
+					worker_preferences[di] = static_cast<StockPolicy>(pref);
+				}
 			}
 		} else {
 			throw UnhandledVersionError(
