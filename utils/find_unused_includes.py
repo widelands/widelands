@@ -24,9 +24,6 @@ EXTERN_OR_TYPEDEF_REGEX = re.compile(r'(extern|typedef)\s+\S+\s+(\S+);')
 INLINE_FUNCTION_REGEX = re.compile(r'inline\s+\S+\s+(\S+)\(')
 FORWARD_DECLARATION_REGEX = re.compile(r'(class|struct)\s+(\S+);')
 
-# Extern macros used in third_party/minizip
-EXTERN_ZIP_REGEX = re.compile(r'extern\s+\S+\s+\S+\s+(\S+)\s+')
-
 # Special regex for #include "graphic/text/rt_errors.h" and Map_Object_Packet
 MACRO_CLASS_DEFINITION_REGEX = re.compile(r'^[A-Z_0-9]+\((\w+)\)$')
 
@@ -86,10 +83,6 @@ def find_classes(file_to_check, include_functions, special_regex, special_regex_
             match = EXTERN_OR_TYPEDEF_REGEX.match(line)
             if match and len(match.groups()) > 1:
                 classes.add(match.groups()[1])
-
-            match = EXTERN_ZIP_REGEX.match(line)
-            if match and len(match.groups()) == 1:
-                classes.add(match.groups()[0])
 
             match = MACRO_CLASS_DEFINITION_REGEX.match(line)
             if match and len(match.groups()) == 1:
