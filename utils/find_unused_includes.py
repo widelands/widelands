@@ -169,7 +169,9 @@ def check_file(file_to_check, include_functions):
 
 def check_forward_declarations(file_to_check):
     """Detect unused and extraneous forward declarations."""
-    hits = {}
+    hits = set()
+
+    header_files = find_includes(file_to_check)
     with open(file_to_check, 'r', encoding='utf-8') as f:
         forward_declarations = set()
 
@@ -186,8 +188,17 @@ def check_forward_declarations(file_to_check):
                     if forward_declaration in line:
                         # Forward declaration is being used, so we remove it from the set
                         temp_declarations.remove(forward_declaration)
+
+                        # Let's check if it's already defined by a directly included header though
+                        for header_file in header_files:
+                            if forward_declaration in find_classes(header_file, False, None, 0):
+                                hits.add(forward_declaration)
+                                break
+
                 forward_declarations = temp_declarations
-        hits = forward_declarations
+        for forward_declaration in forward_declarations:
+            hits.add(forward_declaration)
+
     return hits
 
 
