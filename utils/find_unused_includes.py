@@ -13,12 +13,15 @@ import sys
 # NOCOM find forward declarations too
 HEADER_REGEX = re.compile(r'^#include\s+\"(\S+)\"$')
 
+# Detect symbols
 USING_OR_CONSTEXPR_REGEX = re.compile(r'.*(using|constexpr).*\s+(\w+)\s+=')
 CLASS_REGEX = re.compile(r'.*(class|enum|struct)\s+(\S+)\s+.*{')
 DEFINE_REGEX = re.compile(r'\#define\s+(\w+)')
 STRING_CONSTANT_REGEX = re.compile(
     r'.*const\sstd::string\s+(k\w+|\w+_\w+)\s+=\s+\"\S+\";')
 EXTERN_OR_TYPEDEF_REGEX = re.compile(r'(extern|typedef)\s+\S+\s+(\S+);')
+INLINE_FUNCTION_REGEX = re.compile(r'inline\s+\S+\s+(\S+\()')
+FORWARD_DECLARATION_REGEX = re.compile(r'(class|struct)\s+(\S+);')
 
 # Extern macros used in third_party/minizip
 EXTERN_ZIP_REGEX = re.compile(r'extern\s+\S+\s+\S+\s+(\S+)\s+')
@@ -26,21 +29,17 @@ EXTERN_ZIP_REGEX = re.compile(r'extern\s+\S+\s+\S+\s+(\S+)\s+')
 # Special regex for #include "graphic/text/rt_errors.h" and Map_Object_Packet
 MACRO_CLASS_DEFINITION_REGEX = re.compile(r'^[A-Z_0-9]+\((\w+)\)$')
 
-INLINE_FUNCTION_REGEX = re.compile(r'inline\s+\S+\s+(\S+\()')
-FORWARD_DECLARATION_REGEX = re.compile(r'(class|struct)\s+(\S+);')
-
-# For .cc files
+# For .cc files and DIFFICULT_FILES
 FUNCTION_REGEX = re.compile(r'(^|.*\s+)([a-zA-Z_0-9]+)\(.*(\)|,).*')
 
-# Special regex
+# Special regex for base/log.h
 HEADER_LOG_REGEX = re.compile(r'(void|bool)\s+(\w+)\(.*\);')
 
-
-# Files that are hard to capture by regex
+# Header files with contents that are too hard to detect by regex
 FILE_EXCLUDES = {'graphic/gl/system_headers.h', 'scripting/lua.h',
                  'third_party/eris/lua.hpp', 'scripting/eris.h'}
 
-# Headers that need to be detected by functions
+# Headers files with contents that need to be detected by functions
 DIFFICULT_FILES = {'graphic/build_texture_atlas.h',
                    'scripting/report_error.h', 'editor/tools/set_resources_tool.h'}
 
@@ -135,9 +134,11 @@ def check_file(file_to_check, include_functions):
             elif header_file in DIFFICULT_FILES:
                 header_classes = find_classes(header_file, True, None, 0)
             elif header_file == 'base/log.h':
-                header_classes = find_classes(header_file, False, HEADER_LOG_REGEX, 1)
+                header_classes = find_classes(
+                    header_file, False, HEADER_LOG_REGEX, 1)
             else:
-                header_classes = find_classes(header_file, include_functions, None, 0)
+                header_classes = find_classes(
+                    header_file, include_functions, None, 0)
 
             for header_class in header_classes:
                 if header_class in file_contents:

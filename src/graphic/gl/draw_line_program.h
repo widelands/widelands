@@ -22,7 +22,6 @@
 #include <vector>
 
 #include "base/rect.h"
-#include "base/vector.h"
 #include "graphic/blend_mode.h"
 #include "graphic/gl/utils.h"
 

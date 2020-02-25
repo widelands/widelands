@@ -23,7 +23,6 @@
 #include <map>
 #include <memory>
 
-#include "base/vector.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "logic/editor_game_base.h"
 #include "logic/player.h"

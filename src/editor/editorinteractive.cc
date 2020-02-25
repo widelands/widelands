@@ -27,7 +27,6 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "base/scoped_timer.h"
 #include "base/warning.h"
 #include "editor/tools/decrease_resources_tool.h"
 #include "editor/tools/increase_resources_tool.h"

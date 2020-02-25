@@ -25,7 +25,6 @@
 #include <stdint.h>
 
 #include "base/macros.h"
-#include "base/rect.h"
 #include "graphic/gl/blit_data.h"
 
 class Texture;
