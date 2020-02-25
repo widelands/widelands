@@ -110,6 +110,7 @@ struct FindBobByName : public FindBob {
 	}
 	~FindBobByName() override {
 	}
+
 private:
 	std::string name_;
 };
@@ -128,6 +129,7 @@ struct FindCritterByClass : public FindBob {
 	}
 	~FindCritterByClass() override {
 	}
+
 private:
 	Class class_;
 };

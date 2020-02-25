@@ -73,7 +73,8 @@ FieldData::FieldData(const Field& field)
 
 // static
 inline FindCritterByClass::Class FindCritterByClass::classof(const CritterDescr& cd) {
-	return cd.is_herbivore() ? cd.is_carnivore() ? Class::Neither : Class::Herbivore : cd.is_carnivore() ? Class::Carnivore : Class::Neither;
+	return cd.is_herbivore() ? cd.is_carnivore() ? Class::Neither : Class::Herbivore :
+	                           cd.is_carnivore() ? Class::Carnivore : Class::Neither;
 }
 bool FindCritterByClass::accept(Bob* b) const {
 	if (upcast(const Critter, c, b))

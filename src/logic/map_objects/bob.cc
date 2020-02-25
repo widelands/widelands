@@ -788,7 +788,8 @@ void Bob::draw(const EditorGameBase& egbase,
 		adjust_field_on_dst.x += s->ivar2;
 		adjust_field_on_dst.y += s->ivar3;
 	}
-	dst->blit_animation(calc_drawpos(egbase, adjust_field_on_dst, scale), coords, scale, anim_, egbase.get_gametime() - animstart_,
+	dst->blit_animation(calc_drawpos(egbase, adjust_field_on_dst, scale), coords, scale, anim_,
+	                    egbase.get_gametime() - animstart_,
 	                    (bob_owner == nullptr) ? nullptr : &bob_owner->get_playercolor());
 }
 

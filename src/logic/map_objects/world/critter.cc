@@ -101,7 +101,11 @@ CritterDescr::CritterDescr(const std::string& init_descname,
                            const LuaTable& table,
                            const World& world)
    : BobDescr(init_descname, MapObjectType::CRITTER, MapObjectDescr::OwnerType::kWorld, table),
-     editor_category_(nullptr), size_(0), carnivore_(false), appetite_(0), reproduction_rate_(0) {
+     editor_category_(nullptr),
+     size_(0),
+     carnivore_(false),
+     appetite_(0),
+     reproduction_rate_(0) {
 	assign_directional_animation(&walk_anims_, "walk");
 
 	add_attributes(
@@ -109,11 +113,13 @@ CritterDescr::CritterDescr(const std::string& init_descname,
 
 	size_ = table.get_int("size");
 	if (size_ < 1 || size_ > 10) {
-		throw GameDataError("Critter %s: size_ %u out of range 1..10", name().c_str(), static_cast<unsigned>(size_));
+		throw GameDataError(
+		   "Critter %s: size_ %u out of range 1..10", name().c_str(), static_cast<unsigned>(size_));
 	}
 	reproduction_rate_ = table.get_int("reproduction_rate");
 	if (reproduction_rate_ > 100) {
-		throw GameDataError("Critter %s: reproduction_rate_ %u out of range 0..100", name().c_str(), static_cast<unsigned>(reproduction_rate_));
+		throw GameDataError("Critter %s: reproduction_rate_ %u out of range 0..100", name().c_str(),
+		                    static_cast<unsigned>(reproduction_rate_));
 	}
 	if (table.has_key("carnivore")) {
 		carnivore_ = table.get_bool("carnivore");
@@ -128,14 +134,17 @@ CritterDescr::CritterDescr(const std::string& init_descname,
 	}
 	if (table.has_key("appetite")) {
 		if (!is_carnivore() && !is_herbivore()) {
-			throw GameDataError("Critter %s is neither herbivore but carnivore but has an appetite", name().c_str());
+			throw GameDataError(
+			   "Critter %s is neither herbivore but carnivore but has an appetite", name().c_str());
 		}
 		appetite_ = table.get_int("appetite");
 		if (appetite_ > 100) {
-			throw GameDataError("Critter %s: appetite %u out of range 0..100", name().c_str(), static_cast<unsigned>(appetite_));
+			throw GameDataError("Critter %s: appetite %u out of range 0..100", name().c_str(),
+			                    static_cast<unsigned>(appetite_));
 		}
 	} else if (is_carnivore() || is_herbivore()) {
-		throw GameDataError("Critter %s is a herbivore or carnivore but has no appetite", name().c_str());
+		throw GameDataError(
+		   "Critter %s is a herbivore or carnivore but has no appetite", name().c_str());
 	}
 
 	std::unique_ptr<LuaTable> programs = table.get_table("programs");
@@ -205,8 +214,9 @@ Critter::Critter(const CritterDescr& critter_descr) : Bob(critter_descr), creati
 
 bool Critter::init(EditorGameBase& egbase) {
 	if (is_a(Game, &egbase)) {
-		// in editor, assume t0 as creation time so bobs don't die of old age right away when the actual game starts
-		creation_time_= egbase.get_gametime();
+		// in editor, assume t0 as creation time so bobs don't die of old age right away when the
+		// actual game starts
+		creation_time_ = egbase.get_gametime();
 	}
 	return Bob::init(egbase);
 }
@@ -291,20 +301,28 @@ void Critter::roam_update(Game& game, State& state) {
 		state.ivar1 = 0;
 		// lots of magic numbers for reasonable weighting of various nearby animals
 		uint32_t roaming_dist = 24;
-		if (game.map().find_bobs(game, Area<FCoords>(get_position(), 2), nullptr, FindBobByName(descr().name())) > 4) {
+		if (game.map().find_bobs(
+		       game, Area<FCoords>(get_position(), 2), nullptr, FindBobByName(descr().name())) > 4) {
 			// Too crowded here! Let's go further away
-			roaming_dist += 3 * game.map().find_bobs(game, Area<FCoords>(get_position(), 5), nullptr, FindBobByName(descr().name()));
+			roaming_dist += 3 *
+			                game.map().find_bobs(game, Area<FCoords>(get_position(), 5), nullptr,
+			                                     FindBobByName(descr().name()));
 		}
 		// move only a bit away from other animals of the same class
-		roaming_dist += 4 * game.map().find_bobs(game, Area<FCoords>(get_position(), 3), nullptr, FindCritterByClass(descr()));
+		roaming_dist += 4 *
+		                game.map().find_bobs(game, Area<FCoords>(get_position(), 3), nullptr,
+		                                     FindCritterByClass(descr()));
 		if (!descr().is_carnivore()) {
-			roaming_dist += 6 * game.map().find_bobs(game, Area<FCoords>(get_position(), 4), nullptr, FindCarnivores());
+			roaming_dist +=
+			   6 *
+			   game.map().find_bobs(game, Area<FCoords>(get_position(), 4), nullptr, FindCarnivores());
 		}
 		roaming_dist /= 12;
 		assert(roaming_dist >= 2);
 		// the further we want to go, the harder we try to go somewhere
 		for (; roaming_dist; --roaming_dist) {
-			if (start_task_movepath(game, game.random_location(get_position(), roaming_dist), roaming_dist, descr().get_walk_anims())) {
+			if (start_task_movepath(game, game.random_location(get_position(), roaming_dist),
+			                        roaming_dist, descr().get_walk_anims())) {
 				return;
 			}
 		}
@@ -312,7 +330,7 @@ void Critter::roam_update(Game& game, State& state) {
 		idle_time_rnd = 1000;
 	}
 	state.ivar1 = 1;
-	std::vector<Critter*> candidates_for_eating; // nullptr indicates the immovable here
+	std::vector<Critter*> candidates_for_eating;  // nullptr indicates the immovable here
 	if (descr().is_herbivore() && get_position().field->get_immovable()) {
 		for (uint32_t a : descr().food_plants()) {
 			if (get_position().field->get_immovable()->descr().has_attribute(a)) {
@@ -380,11 +398,18 @@ void Critter::roam_update(Game& game, State& state) {
 				}
 				assert(attacker_strength > 0);
 				assert(defender_strength > 0);
-				const int32_t S = attacker_strength - defender_strength; // weighted combined strength *difference*
-				const int32_t N = defender_strength * defender_strength; // definition of N: the resulting chance is 1 if and only if S >= N
-				const double weighted_success_chance = S <= -N ? 0.0 : S >= N ? 1.0 : -(std::log(S * S + 1) - 2 * S * std::atan(S) - M_PI * S -
-						std::log(N * N + 1) + N * (2 * std::atan(N) - M_PI)) / (2 * N * M_PI);
-				molog("    *** [total strength %d] vs [prey %d] *** success chance %lf\n", S, defender_strength, weighted_success_chance);
+				const int32_t S =
+				   attacker_strength - defender_strength;  // weighted combined strength *difference*
+				const int32_t N = defender_strength * defender_strength;  // definition of N: the
+				                                                          // resulting chance is 1 if
+				                                                          // and only if S >= N
+				const double weighted_success_chance =
+				   S <= -N ? 0.0 : S >= N ? 1.0 :
+				                            -(std::log(S * S + 1) - 2 * S * std::atan(S) - M_PI * S -
+				                              std::log(N * N + 1) + N * (2 * std::atan(N) - M_PI)) /
+				                               (2 * N * M_PI);
+				molog("    *** [total strength %d] vs [prey %d] *** success chance %lf\n", S,
+				      defender_strength, weighted_success_chance);
 				assert(weighted_success_chance >= 0.0);
 				assert(weighted_success_chance <= 1.0);
 				if (game.logic_rand() % N < weighted_success_chance * N) {
@@ -407,25 +432,34 @@ void Critter::roam_update(Game& game, State& state) {
 		candidates_for_eating.erase(candidates_for_eating.begin() + idx);
 	}
 	// no food sadly, but perhaps another animal to make cute little fox cubs with…?
-	if (age > kMinReproductionAge && game.logic_rand() % 100 < mating_partners * descr().get_reproduction_rate()) {
-		// A potential partner is interested in us. Now politely ask the game's birth control system for permission.
+	if (age > kMinReproductionAge &&
+	    game.logic_rand() % 100 < mating_partners * descr().get_reproduction_rate()) {
+		// A potential partner is interested in us. Now politely ask the game's birth control system
+		// for permission.
 		FindBobByName functor(descr().name());
-		const size_t population_size_2 = game.map().find_bobs(game, Area<FCoords>(get_position(), 2), nullptr, functor);
-		const size_t population_size_5 = game.map().find_bobs(game, Area<FCoords>(get_position(), 5), nullptr, functor);
-		const size_t population_size_9 = game.map().find_bobs(game, Area<FCoords>(get_position(), 9), nullptr, functor);
-		assert(population_size_2 >= 1 + mating_partners); // at least we and our partners should be there
+		const size_t population_size_2 =
+		   game.map().find_bobs(game, Area<FCoords>(get_position(), 2), nullptr, functor);
+		const size_t population_size_5 =
+		   game.map().find_bobs(game, Area<FCoords>(get_position(), 5), nullptr, functor);
+		const size_t population_size_9 =
+		   game.map().find_bobs(game, Area<FCoords>(get_position(), 9), nullptr, functor);
+		assert(population_size_2 >=
+		       1 + mating_partners);  // at least we and our partners should be there
 		assert(population_size_5 >= population_size_2);
 		assert(population_size_9 >= population_size_5);
-		const size_t weighted_population = (4 * population_size_2 + 2 * population_size_5 + population_size_9) / 4;
+		const size_t weighted_population =
+		   (4 * population_size_2 + 2 * population_size_5 + population_size_9) / 4;
 		assert(weighted_population >= population_size_2);
-		molog("%lu mating partners; %lu,%lu,%lu = %lu nearby\n", mating_partners, population_size_2, population_size_5, population_size_9, weighted_population);
+		molog("%lu mating partners; %lu,%lu,%lu = %lu nearby\n", mating_partners, population_size_2,
+		      population_size_5, population_size_9, weighted_population);
 		if (game.logic_rand() % 1000 < 1000.0 / (weighted_population * weighted_population)) {
 			molog("A cute little %s cub :)\n", descr().name().c_str());
 			game.create_critter(get_position(), descr().name());
 		}
 	}
-	return start_task_idle(game, descr().get_animation("idle", this), idle_time_min + game.logic_rand() % idle_time_rnd,
-			Vector2i(std::cos(n_th_bob_on_field), std::sin(n_th_bob_on_field)));
+	return start_task_idle(game, descr().get_animation("idle", this),
+	                       idle_time_min + game.logic_rand() % idle_time_rnd,
+	                       Vector2i(std::cos(n_th_bob_on_field), std::sin(n_th_bob_on_field)));
 }
 
 void Critter::init_auto_task(Game& game) {

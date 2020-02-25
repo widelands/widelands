@@ -639,7 +639,10 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 	} else {
 		imm.program_step_ = fr.signed_32();
 	}
-	imm.growth_delay_ = packet_version >= (packet_version > kCurrentPacketVersionImmovableNoFormerBuildings ? 9 : 8) ? fr.unsigned_32() : 0;
+	imm.growth_delay_ =
+	   packet_version >= (packet_version > kCurrentPacketVersionImmovableNoFormerBuildings ? 9 : 8) ?
+	      fr.unsigned_32() :
+	      0;
 
 	if (packet_version >= 3 && packet_version <= 5) {
 		imm.reserved_by_worker_ = fr.unsigned_8();
