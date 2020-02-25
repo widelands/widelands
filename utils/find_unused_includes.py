@@ -64,6 +64,9 @@ def find_classes(file_to_check, include_functions, special_regex, special_regex_
     with open(file_to_check, 'r', encoding='utf-8') as f:
         for line in f.readlines():
             line = line.strip()
+            # Skip comments
+            if line.startswith('*') or line.startswith('/'):
+                continue
 
             match = CLASS_REGEX.match(line)
             if match and len(match.groups()) == 2:
@@ -121,6 +124,10 @@ def find_includes(file_to_check):
     with open(file_to_check, 'r', encoding='utf-8') as f:
         for line in f.readlines():
             line = line.strip()
+            # Skip comments
+            if line.startswith('*') or line.startswith('/'):
+                continue
+
             match = HEADER_REGEX.match(line)
             if match and len(match.groups()) == 1:
                 include_file = match.groups()[0]
@@ -182,6 +189,10 @@ def check_forward_declarations(file_to_check):
 
         for line in f.readlines():
             line = line.strip()
+            # Skip comments
+            if line.startswith('*') or line.startswith('/'):
+                continue
+
             match = FORWARD_DECLARATION_REGEX.match(line)
             if match and len(match.groups()) == 2:
                 # Add forward declaration to set

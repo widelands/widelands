@@ -25,8 +25,6 @@
 
 namespace Widelands {
 
-class ExpeditionBootstrap;
-
 /**
  * This micro storage room can hold any number of items of a fixed worker.
  */
