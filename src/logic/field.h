@@ -180,7 +180,7 @@ struct Field {
 
 	RoadSegment get_road(uint8_t dir) const {
 		switch (dir) {
-        case WalkingDir::WALK_E:
+		case WalkingDir::WALK_E:
 			return road_east;
 		case WalkingDir::WALK_SE:
 			return road_southeast;
