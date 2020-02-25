@@ -1669,22 +1669,25 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 							         "true" :
 							         "false");
 							write("%s.capacity = %u", var, ms.soldier_control()->soldier_capacity());
-							std::map<std::tuple<uint32_t, uint32_t, uint32_t, uint32_t, uint32_t>, uint32_t> soldiers;
-							for (const Widelands::Soldier* s : ms.soldier_control()->stationed_soldiers()) {
+							std::map<std::tuple<uint32_t, uint32_t, uint32_t, uint32_t, uint32_t>,
+							         uint32_t>
+							   soldiers;
+							for (const Widelands::Soldier* s :
+							     ms.soldier_control()->stationed_soldiers()) {
 								std::tuple<uint32_t, uint32_t, uint32_t, uint32_t, uint32_t> key(
-										s->get_health_level(), s->get_attack_level(), s->get_defense_level(), s->get_evade_level(), s->get_current_health());
+								   s->get_health_level(), s->get_attack_level(), s->get_defense_level(),
+								   s->get_evade_level(), s->get_current_health());
 								auto it = soldiers.find(key);
-								if (it == soldiers.end()) soldiers[key] = 1;
-								else ++it->second;
+								if (it == soldiers.end())
+									soldiers[key] = 1;
+								else
+									++it->second;
 							}
 							write("%s:set_soldiers({", var);
 							for (const auto& pair : soldiers) {
-								write("   {%u, %u, %u, %u, %u} = %u,",
-										std::get<0>(pair.first),
-										std::get<1>(pair.first),
-										std::get<2>(pair.first),
-										std::get<3>(pair.first),
-										std::get<4>(pair.first), pair.second);
+								write("   {%u, %u, %u, %u, %u} = %u,", std::get<0>(pair.first),
+								      std::get<1>(pair.first), std::get<2>(pair.first),
+								      std::get<3>(pair.first), std::get<4>(pair.first), pair.second);
 							}
 							fw.print_f("   })\n");
 						} break;
@@ -1696,22 +1699,25 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 							      var, ts.owner().player_number(), ts.descr().name().c_str(),
 							      ts.get_position().x, ts.get_position().y);
 							write("%s.capacity = %u", var, ts.soldier_control()->soldier_capacity());
-							std::map<std::tuple<uint32_t, uint32_t, uint32_t, uint32_t, uint32_t>, uint32_t> soldiers;
-							for (const Widelands::Soldier* s : ts.soldier_control()->stationed_soldiers()) {
+							std::map<std::tuple<uint32_t, uint32_t, uint32_t, uint32_t, uint32_t>,
+							         uint32_t>
+							   soldiers;
+							for (const Widelands::Soldier* s :
+							     ts.soldier_control()->stationed_soldiers()) {
 								std::tuple<uint32_t, uint32_t, uint32_t, uint32_t, uint32_t> key(
-										s->get_health_level(), s->get_attack_level(), s->get_defense_level(), s->get_evade_level(), s->get_current_health());
+								   s->get_health_level(), s->get_attack_level(), s->get_defense_level(),
+								   s->get_evade_level(), s->get_current_health());
 								auto it = soldiers.find(key);
-								if (it == soldiers.end()) soldiers[key] = 1;
-								else ++it->second;
+								if (it == soldiers.end())
+									soldiers[key] = 1;
+								else
+									++it->second;
 							}
 							write("%s:set_soldiers({", var);
 							for (const auto& pair : soldiers) {
-								write("   {%u, %u, %u, %u, %u} = %u,",
-										std::get<0>(pair.first),
-										std::get<1>(pair.first),
-										std::get<2>(pair.first),
-										std::get<3>(pair.first),
-										std::get<4>(pair.first), pair.second);
+								write("   {%u, %u, %u, %u, %u} = %u,", std::get<0>(pair.first),
+								      std::get<1>(pair.first), std::get<2>(pair.first),
+								      std::get<3>(pair.first), std::get<4>(pair.first), pair.second);
 							}
 							fw.print_f("   })\n");
 						}

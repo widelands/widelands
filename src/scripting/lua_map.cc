@@ -152,7 +152,11 @@ struct SoldierMapDescr {
 	                uint8_t init_defense,
 	                uint8_t init_evade,
 	                int32_t init_total_health)
-	   : health(init_health), attack(init_attack), defense(init_defense), evade(init_evade), total_health(init_total_health) {
+	   : health(init_health),
+	     attack(init_attack),
+	     defense(init_defense),
+	     evade(init_evade),
+	     total_health(init_total_health) {
 	}
 	SoldierMapDescr() : health(0), attack(0), defense(0), evade(0), total_health(-1) {
 	}
@@ -161,7 +165,7 @@ struct SoldierMapDescr {
 	uint8_t attack;
 	uint8_t defense;
 	uint8_t evade;
-	int32_t total_health; // -1 signals that it does not matter
+	int32_t total_health;  // -1 signals that it does not matter
 
 	bool operator<(const SoldierMapDescr& ot) const {
 		const bool equal_health = health == ot.health;
@@ -179,8 +183,9 @@ struct SoldierMapDescr {
 		return health < ot.health;
 	}
 	inline bool operator==(const SoldierMapDescr& ot) const {
-		return health == ot.health && attack == ot.attack && defense == ot.defense && evade == ot.evade &&
-				(total_health < 0 || ot.total_health < 0 || total_health == ot.total_health);
+		return health == ot.health && attack == ot.attack && defense == ot.defense &&
+		       evade == ot.evade &&
+		       (total_health < 0 || ot.total_health < 0 || total_health == ot.total_health);
 	}
 };
 
@@ -504,9 +509,11 @@ unbox_lua_soldier_description(lua_State* L, int table_index, const SoldierDescr&
 	lua_rawget(L, table_index);
 	soldier_descr.total_health = lua_isnil(L, -1) ? -1 : luaL_checkuint32(L, -1);
 	lua_pop(L, 1);
-	const int32_t maxhealth = sd.get_base_health() + soldier_descr.health * sd.get_health_incr_per_level();
+	const int32_t maxhealth =
+	   sd.get_base_health() + soldier_descr.health * sd.get_health_incr_per_level();
 	if (soldier_descr.total_health >= 0 && soldier_descr.total_health > maxhealth)
-		report_error(L, "total health (%u) > max possible health (%u @ level %i)", soldier_descr.total_health, maxhealth, soldier_descr.health);
+		report_error(L, "total health (%u) > max possible health (%u @ level %i)",
+		             soldier_descr.total_health, maxhealth, soldier_descr.health);
 
 	return soldier_descr;
 }
@@ -633,7 +640,8 @@ int do_set_soldiers(lua_State* L,
 			while (d) {
 				for (Soldier* s : sc->stationed_soldiers()) {
 					SoldierMapDescr is(s->get_health_level(), s->get_attack_level(),
-					                   s->get_defense_level(), s->get_evade_level(), s->get_current_health());
+					                   s->get_defense_level(), s->get_evade_level(),
+					                   s->get_current_health());
 
 					if (is == sp.first) {
 						sc->outcorporate_soldier(*s);
@@ -648,7 +656,8 @@ int do_set_soldiers(lua_State* L,
 				Soldier& soldier = dynamic_cast<Soldier&>(
 				   soldier_descr.create(egbase, owner, nullptr, building_position));
 				soldier.set_level(sp.first.health, sp.first.attack, sp.first.defense, sp.first.evade);
-				if (sp.first.total_health >= 0) soldier.set_current_health(sp.first.total_health);
+				if (sp.first.total_health >= 0)
+					soldier.set_current_health(sp.first.total_health);
 				if (sc->incorporate_soldier(egbase, soldier)) {
 					soldier.remove(egbase);
 					report_error(L, "No space left for soldier!");
@@ -6097,9 +6106,9 @@ const MethodType<LuaSoldier> LuaSoldier::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaSoldier> LuaSoldier::Properties[] = {
-   PROP_RO(LuaSoldier, attack_level), PROP_RO(LuaSoldier, defense_level),
-   PROP_RO(LuaSoldier, health_level), PROP_RO(LuaSoldier, evade_level), PROP_RW(LuaSoldier, current_health),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaSoldier, attack_level),   PROP_RO(LuaSoldier, defense_level),
+   PROP_RO(LuaSoldier, health_level),   PROP_RO(LuaSoldier, evade_level),
+   PROP_RW(LuaSoldier, current_health), {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -6163,10 +6172,14 @@ int LuaSoldier::get_current_health(lua_State* L) {
 int LuaSoldier::set_current_health(lua_State* L) {
 	Soldier& s = *get(L, get_egbase(L));
 	const uint32_t ch = luaL_checkuint32(L, -1);
-	if (ch == 0) report_error(L, "Soldier.current_health must be greater than 0");
-	const uint32_t maxhealth = s.descr().get_base_health() + s.get_health_level() * s.descr().get_health_incr_per_level();
-	if (ch > maxhealth) report_error(L, "Soldier.current_health %u must not be greater than %u for %s with health level %u",
-			ch, maxhealth, s.descr().name().c_str(), s.get_health_level());
+	if (ch == 0)
+		report_error(L, "Soldier.current_health must be greater than 0");
+	const uint32_t maxhealth =
+	   s.descr().get_base_health() + s.get_health_level() * s.descr().get_health_incr_per_level();
+	if (ch > maxhealth)
+		report_error(
+		   L, "Soldier.current_health %u must not be greater than %u for %s with health level %u", ch,
+		   maxhealth, s.descr().name().c_str(), s.get_health_level());
 	s.set_current_health(ch);
 	return 0;
 }
