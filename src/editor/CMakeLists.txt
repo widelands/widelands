@@ -91,7 +91,6 @@ wl_library(editor
     base_i18n
     base_log
     base_macros
-    base_scoped_timer
     graphic
     graphic_fonthandler
     graphic_playercolor

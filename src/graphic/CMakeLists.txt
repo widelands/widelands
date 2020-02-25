@@ -190,8 +190,6 @@ wl_library(graphic_game_renderer
     game_renderer.cc
     game_renderer.h
   DEPENDS
-    base_geometry
-    base_macros
     graphic
     graphic_fields_to_draw
     graphic_render_queue
@@ -323,7 +321,6 @@ wl_library(graphic
     base_geometry
     base_i18n
     base_log
-    base_macros
     base_scoped_timer
     build_info
     graphic_align

@@ -22,7 +22,6 @@ wl_library(wui_chat_ui
   DEPENDS
     base_exceptions
     base_i18n
-    base_macros
     chat
     graphic
     graphic_color
@@ -133,7 +132,6 @@ wl_library(wui_quicknavigation
     quicknavigation.cc
     quicknavigation.h
   DEPENDS
-    base_geometry
     wui_mapview
 )
 

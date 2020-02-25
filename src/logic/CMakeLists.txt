@@ -71,8 +71,6 @@ wl_library(logic_constants
   SRCS
     widelands.cc
     widelands.h
-  DEPENDS
-    base_macros
 )
 
 wl_library(logic_filesystem_constants

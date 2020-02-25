@@ -39,7 +39,6 @@ wl_library(network
     base_exceptions
     base_i18n
     base_log
-    base_macros
     base_md5
     build_info
     chat

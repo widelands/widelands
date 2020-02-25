@@ -169,7 +169,6 @@ wl_library(ui_fsmenu_network
   DEPENDS
     base_i18n
     base_log
-    base_macros
     build_info
     graphic
     graphic_text_layout
