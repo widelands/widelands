@@ -32,13 +32,14 @@ FORWARD_DECLARATION_REGEX = re.compile(r'(class|struct)\s+(\S+);')
 
 # For .cc files
 FUNCTION_REGEX1 = re.compile(r'.*\s+([a-z_0-9]+)\(.*\).*')
-FUNCTION_REGEX2 = re.compile(r'.*\s+([a-z_0-9]+)\(.*,.*')
+FUNCTION_REGEX2 = re.compile(r'(^|.*\s+)([a-z_0-9]+)\(.*,.*')
 
 
 # Files that are hard to capture by regex
-FILE_EXCLUDES = {'graphic/build_texture_atlas.h', 'graphic/gl/system_headers.h', 'scripting/lua.h',
+FILE_EXCLUDES = {'graphic/gl/system_headers.h', 'scripting/lua.h',
                  'third_party/eris/lua.hpp', 'scripting/eris.h', 'scripting/report_error.h', 'editor/tools/set_resources_tool.h'}
 
+DIFFICULT_FILES = { 'graphic/build_texture_atlas.h' }
 
 def find_classes(file_to_check, include_functions):
     """Returns a set of classes defined by this file."""
@@ -88,8 +89,8 @@ def find_classes(file_to_check, include_functions):
                 if match and len(match.groups()) > 0:
                     classes.add(match.groups()[0])
                 match = FUNCTION_REGEX2.match(line)
-                if match and len(match.groups()) > 0:
-                    classes.add(match.groups()[0])
+                if match and len(match.groups()) > 1:
+                    classes.add(match.groups()[1])
 
     return classes
 
@@ -120,12 +121,16 @@ def check_file(file_to_check, include_functions):
 
         header_files = find_includes(file_to_check)
         for header_file in header_files:
+            header_classes = set()
             # NOCOM implement support for these special files
             if header_file.startswith('base/'):
                 continue
             elif header_file in FILE_EXCLUDES:
                 continue
-            header_classes = find_classes(header_file, include_functions)
+            elif header_file in DIFFICULT_FILES:
+                header_classes = find_classes(header_file, True)
+            else:
+                header_classes = find_classes(header_file, include_functions)
             is_useful = False
             for header_class in header_classes:
                 if header_class in file_contents:
