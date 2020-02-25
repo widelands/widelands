@@ -45,6 +45,5 @@ wl_library(game_io
     scripting_lua_table
     ui_basic
     wui
-    wui_mapview_pixelfunctions
     wui_mapview
 )
