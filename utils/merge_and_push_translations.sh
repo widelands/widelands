@@ -88,9 +88,9 @@ else
   exit 1;
 fi
 
-# Fix formatting for C++, Lua & Python
-python utils/fix_formatting.py --lua data/i18n
-python utils/fix_formatting.py --lua data/txts
+# Fix formatting for Lua
+python utils/fix_formatting.py --lua --dir data/i18n
+python utils/fix_formatting.py --lua --dir data/txts
 
 # Stage changes
 # - Translations
