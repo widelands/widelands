@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Joe Hansen <joedalton2@yahoo.dk>, 2019
+# Joe Hansen <joedalton2@yahoo.dk>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-11-30 12:38+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-02-21 18:05+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2019\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2020\n"
 "Language-Team: Danish (https://www.transifex.com/widelands/teams/35159/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +22,7 @@ msgstr ""
 #. TRANSLATORS: Name of a backup autosave
 #: ../../data/campaigns/fri01.wmf/scripting/mission_thread.lua:132
 msgid "The Great Stormflood (Backup Autosave)"
-msgstr ""
+msgstr "Den store oversvømmelse (backup autosave)"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:27
 msgid "Build a wood economy and a reed farm"
@@ -91,7 +91,7 @@ msgstr "20 × Kul"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:52
 msgid "30 × Reed"
-msgstr ""
+msgstr "30 × Strå"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:53
 msgid ""
@@ -239,6 +239,9 @@ msgid ""
 " reload the scenario from the backup savegame automatically created for you "
 "shortly before you reached the enemy’s headquarters."
 msgstr ""
+"Hvis du ikke forberedte dig nok til at mestre denne udfordring tids nok, så "
+"kan du genindlæse scenariet fra sikkerhedskopien der automatisk blev "
+"oprettet for dig kort tid før du nåede fjendens hovedkvarterer."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:128
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:137
@@ -270,6 +273,10 @@ msgid ""
 "South… So I decided to lead my tribe away to start a quiet, peaceful life on"
 " this untouched island."
 msgstr ""
+"Min stamme og jeg er lige ankommet fra hovedlandet. Der var kampe med "
+"danskerne i nord, schauenburgerne og holstenerne i øst og syd ... Så jeg "
+"besluttede at føre min stamme væk for at starte et stille, fredfyldt liv på "
+"denne uberørte ø."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:138
 msgid "A new home"
@@ -290,6 +297,8 @@ msgid ""
 "I have asked Hauke, one of my advisors, to oversee the construction of our "
 "settlement."
 msgstr ""
+"Jeg har anmodt Hauke, en af mine rådgivere om at overse konstruktionen af "
+"vores bosættelse."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:147
 msgid "The first buildings"
@@ -302,6 +311,8 @@ msgid ""
 "Peace, Chieftain Reebaud! I will start with the colonization of the island "
 "straight away."
 msgstr ""
+"Velkommen, kaptajn Reebaud! Jeg vil starte koloniseringen af denne ø med det"
+" samme."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:152
@@ -413,7 +424,7 @@ msgstr "Mangel på ler"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:194
 msgid "Build another clay pit"
-msgstr ""
+msgstr "Byg endnu en lergrube"
 
 #. TRANSLATORS: Hauke – no clay
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:196
@@ -694,6 +705,9 @@ msgid ""
 "true God that we will kill you all, and your souls shall be tormented in "
 "hell for ever!"
 msgstr ""
+"Dette er MIN ø! DU er besætteren her! Jeg beder til den ene og sande gud om,"
+" at vi dræber jer alle og at jeres sjæle vil blive tortureret i helvede for "
+"evigt!"
 
 #. TRANSLATORS: Reebaud – enemy sighted
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:307
@@ -751,6 +765,9 @@ msgid ""
 "opponent’s blows with a skillful twist of the sword instead of jumping away "
 "like a coward."
 msgstr ""
+"Vi træner ikke soldater til at undvige angreb; en god kriger kan blokere sin"
+" modstanders slag med en dygtig drejning af sværdet i stedet for at hoppe "
+"væk som en kujon."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:333
 msgid "Planning a training center"
@@ -793,7 +810,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:349
 msgid "Our soldiers are strong"
-msgstr ""
+msgstr "Vores soldater er stærke"
 
 #. TRANSLATORS: Reebaud – attack enemy 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:351
@@ -815,7 +832,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:361
 msgid "Our soldiers are strong enough"
-msgstr ""
+msgstr "Vores soldater er stærke nok"
 
 #. TRANSLATORS: Reebaud – attack enemy 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:363
@@ -829,12 +846,12 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:367
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:373
 msgid "Beware!"
-msgstr ""
+msgstr "Vær opmærksom!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:368
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:374
 msgid "Not strong enough"
-msgstr ""
+msgstr "Ikke stærk nok"
 
 #. TRANSLATORS: Hauke – beware of early attacks 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:370
@@ -865,12 +882,12 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:382
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:388
 msgid "Enemy Defeated"
-msgstr ""
+msgstr "Fjende besejret"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:383
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:389
 msgid "Enemy defeated!"
-msgstr ""
+msgstr "Fjende besejret!"
 
 #. TRANSLATORS: Reebaud – enemy defeated 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:385
@@ -889,7 +906,7 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:394
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:400
 msgid "Storm Flood"
-msgstr ""
+msgstr "Stormflod"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:395
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:401
@@ -974,12 +991,12 @@ msgstr ""
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "»%s«"
 
 #: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgstr ""
+msgstr "Nyt mål"
 
 #: ../../data/scripting/richtext_scenarios.lua:93
 msgid "New Objectives"
-msgstr ""
+msgstr "Nye mål"
