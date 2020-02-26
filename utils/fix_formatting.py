@@ -68,37 +68,44 @@ def main():
         print(' done.')
 
     if format_lua:
-        directory = args['dir']
-        if not directory:
-            directory = './data'
-        sys.stdout.write('\nFixing Lua tabs in directory: ' + directory + ' ')
-        for filename in find_files(directory, ['.lua']):
-            sys.stdout.write('.')
-            sys.stdout.flush()
-            lines = read_text_file(filename).strip().split('\n')
-            new_lines = []
-            for line in lines:
-                m = LEADING_TABS.match(line)
-                if m is not None:
-                    line = line[m.start():m.end()].expandtabs(
-                        SPACES_PER_TAB) + line[m.end():]
-                new_lines.append(line.rstrip() + '\n')
-            write_text_file(filename, ''.join(new_lines))
-            call(['git', 'add', '--renormalize', filename])
-        print(' done.')
+        directories = set()
+        if args['dir']:
+            directories.add(args['dir'])
+        else:
+            directories = {'./data', './test'}
+        for directory in directories:
+            sys.stdout.write(
+                '\nFixing Lua tabs in directory: ' + directory + ' ')
+            for filename in find_files(directory, ['.lua']):
+                sys.stdout.write('.')
+                sys.stdout.flush()
+                lines = read_text_file(filename).strip().split('\n')
+                new_lines = []
+                for line in lines:
+                    m = LEADING_TABS.match(line)
+                    if m is not None:
+                        line = line[m.start():m.end()].expandtabs(
+                            SPACES_PER_TAB) + line[m.end():]
+                    new_lines.append(line.rstrip() + '\n')
+                write_text_file(filename, ''.join(new_lines))
+                call(['git', 'add', '--renormalize', filename])
+            print(' done.')
 
     if format_python:
-        directory = args['dir']
-        if not directory:
-            directory = './utils'
-        sys.stdout.write(
-            '\nFormatting Python scripts in directory: ' + directory + ' ')
-        for filename in find_files(directory, ['.py']):
-            sys.stdout.write('.')
-            sys.stdout.flush()
-            call(['pyformat', '-i', filename])
-            call(['git', 'add', '--renormalize', filename])
-        print(' done.')
+        directories = set()
+        if args['dir']:
+            directories.add(args['dir'])
+        else:
+            directories = {'./utils'}
+        for directory in directories:
+            sys.stdout.write(
+                '\nFormatting Python scripts in directory: ' + directory + ' ')
+            for filename in find_files(directory, ['.py']):
+                sys.stdout.write('.')
+                sys.stdout.flush()
+                call(['pyformat', '-i', filename])
+                call(['git', 'add', '--renormalize', filename])
+            print(' done.')
 
     print('Formatting finished.')
     return 0
