@@ -3,14 +3,17 @@
 
 import re
 
-__PRINTF = re.compile(r"\bf?printf\s*\(")
+__PRINTF = re.compile(r'\bf?printf\s*\(')
+
+
 def check_for_printf(lines, fn):
     errors = []
     for lineno, line in enumerate(lines, 1):
         if __PRINTF.search(line):
             errors.append((fn, lineno,
-                "Use log() from base/log.h instead of printf."))
+                           'Use log() from base/log.h instead of printf.'))
     return errors
+
 
 strip_comments_and_strings = True
 evaluate_matches = check_for_printf
@@ -19,8 +22,8 @@ evaluate_matches = check_for_printf
 # ALLOWED TESTS #
 #################
 allowed = [
-"""log ("blubi")""",
-"""trianetn sprintf("rnae")""",
+    """log ("blubi")""",
+    """trianetn sprintf("rnae")""",
 ]
 
 
@@ -28,8 +31,8 @@ allowed = [
 # FORBIDDEN TESTS #
 ###################
 forbidden = [
-"""printf ("blubi")""",
-"""trianetn printf("rnae")""",
-"""fprintf ("blubi")""",
-"""trianetn fprintf("rnae")""",
+    """printf ("blubi")""",
+    """trianetn printf("rnae")""",
+    """fprintf ("blubi")""",
+    """trianetn fprintf("rnae")""",
 ]

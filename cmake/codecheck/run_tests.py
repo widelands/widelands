@@ -46,8 +46,8 @@ class ForbiddenTest(RuleTest):
 
 
 def _make_tests_from_checker(c):
-    """Takes a checker class and turns it's allowed and forbidden variables
-    into TestCases."""
+    """Takes a checker class and turns its allowed and forbidden variables into
+    TestCases."""
     allowed_tests = [AllowedTest(c, allowed) for allowed in c.allowed]
     forbidden_tests = [ForbiddenTest(c, forbidden)
                        for forbidden in c.forbidden]

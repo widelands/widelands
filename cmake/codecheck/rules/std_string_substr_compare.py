@@ -1,15 +1,15 @@
 #!/usr/bin/python
 
 
-"""
-Do not create a temporary std::string with std::string::substr just to compare
-it with another std::string or a char[] constant. Use std::string::compare
-instead.
+"""Do not create a temporary std::string with std::string::substr just to
+compare it with another std::string or a char[] constant.
+
+Use std::string::compare instead.
 """
 
-error_msg = "Do not create a substring just to compare. Use compare instead."
+error_msg = 'Do not create a substring just to compare. Use compare instead.'
 
-regexp=r"""substr *\(.*, *.*\) *[!=]="""
+regexp = r"""substr *\(.*, *.*\) *[!=]="""
 
 forbidden = [
     'substr(0, 3) == str',

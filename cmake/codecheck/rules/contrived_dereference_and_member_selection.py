@@ -1,15 +1,13 @@
 #!/usr/bin/python
 
 
-"""
-This catches use of the contrived syntax for dereference and member selection:
-(*pointer).member
+"""This catches use of the contrived syntax for dereference and member
+selection: (*pointer).member.
 
-Use the more convenient syntax instead:
-pointer->member
+Use the more convenient syntax instead: pointer->member
 """
 
-error_msg = "Do not use (*a).member, use a->member."
+error_msg = 'Do not use (*a).member, use a->member.'
 
 regexp = r"""[^]_A-Za-z0-9 >] *\(\*[a-zA-Z_][_a-zA-Z_]*\)\."""
 

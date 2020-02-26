@@ -27,7 +27,7 @@ def evaluate_matches(lines, fn):
                     continue
         if words[0] in ['class', 'struct', 'enum'] and words[-1] != '{':
             continue
-        if re.match(r"([A-Z][a-z0-9]*)+", words[1]):
+        if re.match(r'([A-Z][a-z0-9]*)+', words[1]):
             continue
         errors.append(
             (fn, lineno + 1,
@@ -35,6 +35,7 @@ def evaluate_matches(lines, fn):
 
     return errors
 # /end evaluate_matches
+
 
 forbidden = [
     'class my_class {',

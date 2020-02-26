@@ -1,8 +1,6 @@
 #!/usr/bin/python
 
-"""
-strdup isn't available on win32
-"""
+"""strdup isn't available on win32."""
 
 error_msg = 'Do not use strdup/strndup. Use std::string instead.'
 

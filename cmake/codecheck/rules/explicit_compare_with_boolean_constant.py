@@ -6,7 +6,7 @@ This detects redundant code like "if (a == true)" (shoud be "if (a)") and
 "while (b = false)" (should be "while (not b)").
 """
 
-error_msg = "Do not explicitly check for boolean state. Use if (a) instead of if (a == true)."
+error_msg = 'Do not explicitly check for boolean state. Use if (a) instead of if (a == true).'
 
 strip_comments_and_strings = True
 

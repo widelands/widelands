@@ -1,11 +1,9 @@
 #!/usr/bin/python
 
 
-"""
-Checks for includes of deprecated c headers.
-"""
+"""Checks for includes of deprecated c headers."""
 
-error_msg = "You have included a deprecated C header. Remove it!"
+error_msg = 'You have included a deprecated C header. Remove it!'
 
 regexp = r"""^# *include +["<](?:assert|complex|type|errno|fenv|float|inttypes|iso646|limits|locale|math|setjmp|signal|stdarg|stdbool|stddef|stdio|stdlib|string|tgmath|time|wchar|wctype)\.h[">]"""
 

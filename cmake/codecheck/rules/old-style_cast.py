@@ -1,17 +1,18 @@
 #!/usr/bin/python
 
 
-"""
-This catches some old-style casts, that should be caught with -Wold-style-cast,
-and when gcc-4.2 is common, -Werror=old-style-cast. It is complex because it
-should allow "operator==(h)" and "operator!=(h)". It should also ignore macros.
+"""This catches some old-style casts, that should be caught with -Wold-style-
+cast, and when gcc-4.2 is common, -Werror=old-style-cast.
+
+It is complex because it should allow "operator==(h)" and
+"operator!=(h)". It should also ignore macros.
 """
 
-error_msg = "Old C-Style cast. Change to static_cast<Type>(var) or similar!"
+error_msg = 'Old C-Style cast. Change to static_cast<Type>(var) or similar!'
 
 strip_comments_and_strings = True
 strip_macros = True
-regexp="""(?x)
+regexp = """(?x)
 (((((((((([_a-zA-Z0-9]o|[^o]|^)p|[^p]|^)e|[^e]|^)r|[^r]|^)a|[^a]|^)t|[^t]|^)o|[^o]|^)r|[^r]|^)[!=]|[^!=]|^)=|[^] "'_a-zA-Z0-9>=]|return|^)
 [ ]*
 \([ ]*((const|enum|long|(un)?signed|short|struct)[ ]+)*
@@ -69,12 +70,12 @@ allowed = [
     '(I const) const;',
     '(I const) const',
     '(I)const',
-    "(dynamic_cast<ConstructionSite const *>(bld) or",
-	"void set_defeating_player(const Player_Number player_number) throw ()",
-	"virtual WaresQueue & waresqueue(Ware_Index) __attribute__ ((noreturn));",
-    "get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL));",
-	"if (not er)                          er = &m_table.add(s);",
-	"if (m_linknext) m_linknext->m_linkpprev = &m_linknext;",
-	
-    "\t(Widelands::Building_Index::value_t)\n",
+    '(dynamic_cast<ConstructionSite const *>(bld) or',
+    'void set_defeating_player(const Player_Number player_number) throw ()',
+    'virtual WaresQueue & waresqueue(Ware_Index) __attribute__ ((noreturn));',
+    'get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL));',
+    'if (not er)                          er = &m_table.add(s);',
+    'if (m_linknext) m_linknext->m_linkpprev = &m_linknext;',
+
+    '\t(Widelands::Building_Index::value_t)\n',
 ]

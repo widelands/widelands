@@ -1,21 +1,19 @@
 #!/usr/bin/python
 
 
-"""
-Catches illegal characters after semicolon. 
-"""
+"""Catches illegal characters after semicolon."""
 
-error_msg = "Illegal character after semicolon"""
+error_msg = 'Illegal character after semicolon'''
 
 strip_macros = True
 strip_comments_and_strings = True
-regexp=r"""(?x)
+regexp = r"""(?x)
 ;[\w+*&/-]
 """
 
 forbidden = [
     # Eriks tests
-    ## illegal_character_after_semicolon.cc
+    # illegal_character_after_semicolon.cc
     '\tfloat A;A;',
     '\tfloat a;a;',
     '\tfloat B;B;',

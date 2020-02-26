@@ -1,18 +1,18 @@
 #!/usr/bin/python
 
 
-"""
-This catches a numerical constant used as a loop condition. Instead
-of while (true) or while (1), one should write for (;;). But it
-avoids catching some cases that are used in macro definitions (see
+"""This catches a numerical constant used as a loop condition. Instead of while
+(true) or while (1), one should write for (;;). But it avoids catching some
+cases that are used in macro definitions (see.
+
 [http://vivekkutal.blogspot.com/2006/03/do-while0.html]): #define
 macro(...) do {...} while (false)
 """
 
-error_msg="Do not use numerical constants in loop condition! " \
-        "Use for(;;) for endless loops."
+error_msg = 'Do not use numerical constants in loop condition! ' \
+    'Use for(;;) for endless loops.'
 
-regexp =r"""(?x)
+regexp = r"""(?x)
 (^.?|[^}].|.[^ ])
 while\s*
 \(

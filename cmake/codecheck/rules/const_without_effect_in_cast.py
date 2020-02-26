@@ -1,20 +1,21 @@
 #!/usr/bin/python
 
-"""
-These were added to find stuff that makes the code "even more annying to read"
-for Nicolai. It detects uses of the const keyword inside casts, that have no
-effect, such as "static_cast<const uint32_t>" or "dynamic_cast<T * const>".
+"""These were added to find stuff that makes the code "even more annoying to
+read" for Nicolai. It detects uses of the const keyword inside casts, that
+have.
+
+no effect, such as "static_cast<const uint32_t>" or "dynamic_cast<T * const>".
 """
 
 error_msg = "Remove the unneeded 'const' from the cast!"
 
 regexp = r"""(?x)
-   _cast<\s*                 # '_cast<' 
+   _cast<\s*                 # '_cast<'
    ((
        const\s+              # 'const   '
        [_a-zA-Z]\w+\s*       # Match an identifier + whitespace
        (
-           (::)?\s*          # :: 
+           (::)?\s*          # ::
            [_a-zA-Z]\w+\s*   # Identifier
        )*
        >

@@ -1,10 +1,8 @@
 #!/usr/bin/python
 
 
-"""
-This catches use of the infamous TRUE and FALSE macros that are sometimes
-sighted, while allowing identifiers like THE_TRUE_STORY.
-"""
+"""This catches use of the infamous TRUE and FALSE macros that are sometimes
+sighted, while allowing identifiers like THE_TRUE_STORY."""
 
 regexp = r'''[^_a-zA-Z0-9"](TRUE|FALSE)[^_a-zA-Z0-9"]'''
 error_msg = "Don't use TRUE/FALSE. Use true/false."
@@ -19,5 +17,3 @@ allowed = [
     'while (TRUESOME)',
     'a = FALSENTRY;',
 ]
-
-

@@ -1,8 +1,6 @@
 #!/usr/bin/python
 
-"""
-strcasecmp isn't available on win32
-"""
+"""strcasecmp isn't available on win32."""
 
 error_msg = 'Do not use strcasecmp/strncasecmp. Use boost::iequals instead.'
 

@@ -2,20 +2,23 @@
 
 strip_comments_and_strings = True
 
+
 def evaluate_matches(lines, fn):
-   errors = []
+    errors = []
 
-   for lineno, line in enumerate(lines):
-      if line.count("typedef"):
-         errors.append((fn, lineno+1, "Do not use \"typedef\". Use \"using\" instead."))
+    for lineno, line in enumerate(lines):
+        if line.count('typedef'):
+            errors.append(
+                (fn, lineno+1, "Do not use \"typedef\". Use \"using\" instead."))
 
-   return errors
+    return errors
 # /end evaluate_matches
 
+
 forbidden = [
-    "typedef uint8_t MyType"
+    'typedef uint8_t MyType'
 ]
 
 allowed = [
-    "using MyType = uint8_t"
+    'using MyType = uint8_t'
 ]

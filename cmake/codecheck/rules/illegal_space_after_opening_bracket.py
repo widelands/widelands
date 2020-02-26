@@ -1,18 +1,16 @@
 #!/usr/bin/python
 
 
-"""
-This catches an opening [ followed by a space or end of line.
-"""
+"""This catches an opening [ followed by a space or end of line."""
 
-error_msg="No space or newline allowed after opening bracket."
+error_msg = 'No space or newline allowed after opening bracket.'
 
 strip_comments_and_strings = True
 strip_macros = True
-regexp=r"""\[( |$|\n)"""
+regexp = r"""\[( |$|\n)"""
 
 forbidden = [
-	'\tfloat a[ 2];',
+    '\tfloat a[ 2];',
 ]
 
 allowed = [

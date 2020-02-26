@@ -1,14 +1,15 @@
 #!/usr/bin/python
 
 
-"""
-For standard containers and similar, do not use "not something.size()" to test
-if it is empty. Just use "something.empty()".
+"""For standard containers and similar, do not use "not something.size()" to
+test if it is empty.
+
+Just use "something.empty()".
 """
 
-error_msg = "Do not use !a.size(), use a.empty() instead."
+error_msg = 'Do not use !a.size(), use a.empty() instead.'
 
-regexp=r"""(not |!) *[a-zA-Z_][a-zA-Z_0-9]* *(\.|->) *size *\(\)"""
+regexp = r"""(not |!) *[a-zA-Z_][a-zA-Z_0-9]* *(\.|->) *size *\(\)"""
 
 forbidden = [
     '	!something.size ();',
@@ -27,5 +28,3 @@ forbidden = [
 allowed = [
     '	something.empty();',
 ]
-
-

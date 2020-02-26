@@ -8,23 +8,21 @@ Checks that unordered, ordered and boost placeholders aren't mixed up in the sam
 Checks that ngettext singular and plural strings have the same placeholders.
 
 Checks that placeholders are numbered in ascending order.
-
 """
 
 import re
 
 # Regex to find placeholders
-FIND_UNORDERED = re.compile(r"(\%[0-9#*]*\.*[0-9#]*[a-zA-Z]{1,2})")
-FIND_ORDERED = re.compile(r"\%[|]{0,1}(\d\$[0-9#*]*\.*[0-9#]*[a-zA-Z]{1,2})")
-FIND_BOOST = re.compile(r"\%(\d)\%")
-CLEAN_BOOST_FOR_UNORDERED = re.compile(r"(\%\d\%)")
+FIND_UNORDERED = re.compile(r'(\%[0-9#*]*\.*[0-9#]*[a-zA-Z]{1,2})')
+FIND_ORDERED = re.compile(r'\%[|]{0,1}(\d\$[0-9#*]*\.*[0-9#]*[a-zA-Z]{1,2})')
+FIND_BOOST = re.compile(r'\%(\d)\%')
+CLEAN_BOOST_FOR_UNORDERED = re.compile(r'(\%\d\%)')
 
 
 def FIND_UNORDERED_placeholders(sanitized_entry):
     """We need to remove boost-style matches first, because we have cases like.
 
     %1%m that match both regex expressions.
-
     """
     for entry in CLEAN_BOOST_FOR_UNORDERED.findall(sanitized_entry):
         sanitized_entry = sanitized_entry.replace(entry, '')
@@ -89,7 +87,6 @@ def find_line(entry, lines):
     """Find the line for the error entry.
 
     Grabs the first match, so this is imprecise for multiple matches
-
     """
     checkme = entry.split('\n')
     for lineno, line in enumerate(lines, 0):
@@ -166,6 +163,7 @@ def evaluate_matches(lines, fn):
                 checkme[0], lines), check_result + '\n' + checkme[0] + ' - ' + checkme[1]))
 
     return result
+
 
 # File this is called on is always called testdir/test.h
 forbidden = [

@@ -1,14 +1,14 @@
 #!/usr/bin/python
 
 
-"""
-Do not call std::string::find_first_of with a single character to
-find. Use the version of std::string::find that takes a single
-character to locate instead.  Same for find_last_of/rfind.
+"""Do not call std::string::find_first_of with a single character to find.
+
+Use the version of std::string::find that takes a single character to
+locate instead.  Same for find_last_of/rfind.
 """
 
 error_msg = "Do not use find_first_of('a'), use find('a') " \
-    "(same for find_last_of/rfind)."
+    '(same for find_last_of/rfind).'
 
 regexp = r"""(?x)
 find_(first|last)_of\s*

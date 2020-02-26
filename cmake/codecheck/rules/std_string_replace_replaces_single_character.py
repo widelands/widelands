@@ -1,11 +1,9 @@
 #!/usr/bin/python
 
-"""
-Do not use std::string::replace to replace a signle character in a
-std::string (just assign the desired character to the position).
-"""
+"""Do not use std::string::replace to replace a signle character in a
+std::string (just assign the desired character to the position)."""
 
-error_msg="""s.replace(pos, 1, "c"); should be s.at(pos) = 'c';."""
+error_msg = """s.replace(pos, 1, "c"); should be s.at(pos) = 'c';."""
 
 strip_comments_and_strings = False
 strip_macros = False

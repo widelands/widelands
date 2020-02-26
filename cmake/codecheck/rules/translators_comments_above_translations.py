@@ -5,7 +5,6 @@ translated.
 
 Also checks for malformed translators' comment tag. Will catch
 permutation typos like "TRASNLATORS".
-
 """
 
 import re
@@ -53,6 +52,7 @@ def evaluate_matches(lines, fn):
             last_translators_comment = ''
             last_translators_comment_line = 0
     return result
+
 
 # File this is called on is always called testdir/test.h
 forbidden = [

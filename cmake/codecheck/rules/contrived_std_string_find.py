@@ -1,11 +1,11 @@
 #!/usr/bin/python
 
 
-"""
-Do not call std::string::find_first_of or std::string::find with a string of
-characters to locate that has the size 1. Use the version of
-std::string::find that takes a single character to locate instead. Same for
-find_last_of/rfind.
+"""Do not call std::string::find_first_of or std::string::find with a string of
+characters to locate that has the size 1.
+
+Use the version of std::string::find that takes a single character to
+locate instead. Same for find_last_of/rfind.
 """
 
 error_msg = "Do not use find(\"a\"), use find('a')."
