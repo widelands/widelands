@@ -13,8 +13,13 @@ build)
    # Run the regression suite only if compiling didn't take too long (to avoid timeouts).
    # On macOS it always fails with a broken GL installation message, so we ommit it.
    if [ "$TRAVIS_OS_NAME" = linux ]; then
-       cd ..
-       ./regression_test.py -b build/src/widelands
+      cd ..
+      ./regression_test.py -b build/src/widelands
+      if [ "$BUILD_WEBSITE_TOOLS" = ON ]; then
+         mkdir temp_web
+         build/src/website/wl_map_object_info temp_web
+         build/src/website/wl_map_info data/maps/Archipelago_Sea.wmf
+      fi
    fi
    ;;
 codecheck)
@@ -39,15 +44,5 @@ documentation)
    ./extract_rst.py
    sphinx-build -W -b json -d build/doctrees source build/json
    popd
-   ;;
-formatting)
-   # Check whether the code is properly formatted
-   cd ..
-   ./utils/fix_formatting.py
-   if [[ -n $(git status -s) ]]; then
-     echo "Code not properly formatted. Please run: './utils/fix_formatting.py'"
-     echo "Also, consider installing the githooks by running: './install-githooks.sh'"
-     exit 1 # CodeStyle warnings.
-   fi
    ;;
 esac

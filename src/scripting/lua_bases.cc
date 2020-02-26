@@ -550,7 +550,7 @@ int LuaEditorGameBase::read_campaign_data(lua_State* L) {
       May be used from the init.lua files for tribe/world loading only.
 */
 int LuaEditorGameBase::set_loading_message(lua_State* L) {
-	get_egbase(L).get_loader_ui()->step(luaL_checkstring(L, 2));
+	get_egbase(L).step_loader_ui(luaL_checkstring(L, 2));
 	return 0;
 }
 
@@ -578,9 +578,7 @@ const MethodType<LuaPlayerBase> LuaPlayerBase::Methods[] = {
    METHOD(LuaPlayerBase, place_ship),  {nullptr, nullptr},
 };
 const PropertyType<LuaPlayerBase> LuaPlayerBase::Properties[] = {
-   PROP_RO(LuaPlayerBase, number),
-   PROP_RO(LuaPlayerBase, tribe_name),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaPlayerBase, number), PROP_RO(LuaPlayerBase, tribe_name), {nullptr, nullptr, nullptr},
 };
 
 void LuaPlayerBase::__persist(lua_State* L) {

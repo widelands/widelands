@@ -46,7 +46,6 @@
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
-#include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {
@@ -68,7 +67,7 @@ TribeDescr::TribeDescr(const LuaTable& table,
 
 		std::unique_ptr<LuaTable> items_table = table.get_table("roads");
 		const auto load_roads = [&items_table](
-		                           const std::string& road_type, std::vector<std::string>* images) {
+		   const std::string& road_type, std::vector<std::string>* images) {
 			std::vector<std::string> roads =
 			   items_table->get_table(road_type)->array_entries<std::string>();
 			for (const std::string& filename : roads) {
@@ -99,8 +98,8 @@ TribeDescr::TribeDescr(const LuaTable& table,
 			}
 		};
 		// Frontier and flag animations can be a mix of file and spritesheet animations
-		const auto load_animations = [this, load_bridge_if_present](const LuaTable& animations_table,
-		                                                            Animation::Type animation_type) {
+		const auto load_animations = [this, load_bridge_if_present](
+		   const LuaTable& animations_table, Animation::Type animation_type) {
 			if (animations_table.has_key("frontier")) {
 				std::unique_ptr<LuaTable> animation_table = animations_table.get_table("frontier");
 				frontier_animation_id_ =

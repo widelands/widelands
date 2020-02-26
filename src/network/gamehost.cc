@@ -63,7 +63,6 @@
 #include "ui_fsmenu/launch_mpg.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
-#include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 
@@ -658,22 +657,15 @@ void GameHost::run() {
 	game.set_write_syncstream(get_config_bool("write_syncstreams", true));
 
 	try {
-		std::unique_ptr<UI::ProgressWindow> loader_ui;
-		loader_ui.reset(new UI::ProgressWindow());
-
-		std::vector<std::string> tipstext;
-		tipstext.push_back("general_game");
-		tipstext.push_back("multiplayer");
+		std::vector<std::string> tipstexts{"general_game", "multiplayer"};
 		if (d->hp.has_players_tribe()) {
-			tipstext.push_back(d->hp.get_players_tribe());
+			tipstexts.push_back(d->hp.get_players_tribe());
 		}
-		std::unique_ptr<GameTips> tips(new GameTips(*loader_ui, tipstext));
-
-		loader_ui->step(_("Preparing game"));
+		game.create_loader_ui(tipstexts, false);
+		game.step_loader_ui(_("Preparing game"));
 
 		d->game = &game;
 		game.set_game_controller(this);
-		game.set_loader_ui(loader_ui.get());
 		InteractiveGameBase* igb;
 		uint8_t pn = d->settings.playernum + 1;
 		game.save_handler().set_autosave_filename(
@@ -715,12 +707,11 @@ void GameHost::run() {
 		// wait mode when there are no clients
 		check_hung_clients();
 		init_computer_players();
-		game.run(d->settings.savegame ? Widelands::Game::Loaded :
-		                                d->settings.scenario ? Widelands::Game::NewMPScenario :
-		                                                       Widelands::Game::NewNonScenario,
+		game.run(d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
+		                                Widelands::Game::NewMPScenario :
+		                                Widelands::Game::NewNonScenario,
 		         "", false, "nethost");
 
-		game.set_loader_ui(nullptr);
 		// if this is an internet game, tell the metaserver that the game is done.
 		if (internet_) {
 			InternetGaming::ref().set_game_done();
@@ -996,7 +987,7 @@ GameController::GameType GameHost::get_game_type() {
 	return GameController::GameType::kNetHost;
 }
 
-const GameSettings& GameHost::settings() {
+const GameSettings& GameHost::settings() const {
 	return d->settings;
 }
 
@@ -2307,7 +2298,8 @@ void GameHost::handle_file_part(Client& client, RecvPacket& r) {
 		return;  // Surely the file was changed, so we cancel here.
 	}
 	if (part >= file_->parts.size()) {
-		log("[Host]: Warning: Client reports to have received file part %u but we only have %lu\n",
+		log("[Host]: Warning: Client reports to have received file part %u but we only have %" PRIuS
+		    "\n",
 		    part, file_->parts.size());
 		return;
 	}

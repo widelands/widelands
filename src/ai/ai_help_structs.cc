@@ -390,7 +390,7 @@ DescriptionIndex BuildingObserver::get_collected_map_resource() const {
 	}
 }
 
-Widelands::AiModeBuildings BuildingObserver::aimode_limit_status() {
+Widelands::AiModeBuildings BuildingObserver::aimode_limit_status() const {
 	if (total_count() > cnt_limit_by_aimode) {
 		return Widelands::AiModeBuildings::kLimitExceeded;
 	} else if (total_count() == cnt_limit_by_aimode) {
@@ -1492,7 +1492,7 @@ void FlagCandidates::sort_by_air_distance() {
 	std::sort(flags_.begin(), flags_.end(),
 	          [](const FlagCandidates::Candidate& lf, const FlagCandidates::Candidate& rf) {
 		          return lf.air_distance < rf.air_distance;
-	          });
+		       });
 }
 
 void FlagCandidates::add_flag(const uint32_t coords,

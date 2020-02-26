@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Joe Hansen <joedalton2@yahoo.dk>, 2019
+# Joe Hansen <joedalton2@yahoo.dk>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-02-21 18:05+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2019\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2020\n"
 "Language-Team: Danish (https://www.transifex.com/widelands/teams/35159/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,17 +21,19 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:27
 msgid "Build a basic economy"
-msgstr ""
+msgstr "Byg en grundlæggende økonomi"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:29
 msgid "Supply All Basic Materials"
-msgstr ""
+msgstr "Skaf alle de grundlæggende materialer"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:30
 msgid ""
 "Build a quarry, a reed farm, a clay pit, a well, a charcoal kiln, a brick "
 "kiln, and houses for a woodcutter and a forester."
 msgstr ""
+"Byg et stenbrud, en stråfarm, en lergrube, en brønd, en trækulsovn, "
+"murstensovn og huse for en skovhugger og en skovfoged."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:35
 msgid "Expand to the south"
@@ -45,7 +47,7 @@ msgstr ""
 msgid ""
 "The north looks not very useful to us, but who knows what we might find in "
 "the south?"
-msgstr ""
+msgstr "Nord ser nyttig ud for os, men hvem ved hvad vi finder mod syd?"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:43
 msgid "Train and recycle"
@@ -72,7 +74,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:52
 msgid "Build an aqua farm"
-msgstr ""
+msgstr "Byg en vandfarm"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:54
 msgid "Build an Aqua Farm to Start Producing Fish"
@@ -87,65 +89,67 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:60
 msgid "Decide whether you want to cooperate with the Empire"
-msgstr ""
+msgstr "Beslut om du ønsker at samarbejde med Imperiet"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:62
 msgid "Gather Wares as a Gift or Destroy the Empire’s Warehouse"
-msgstr ""
+msgstr "Indsaml varer som en gave eller ødelæg Imperiets varehus"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:63
 msgid ""
 "Decide whether you want to work with Murilius against the Barbarians. If so,"
 " fill his warehouse with these wares:"
 msgstr ""
+"Beslut om du ønsker at arbejde med Murilius mod barbarerne. Hvis ja, så fyld"
+" hans varehus med disse varer:"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:64
 msgid "30 × Log"
-msgstr ""
+msgstr "30 × Træstamme"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:65
 msgid "40 × Granite"
-msgstr ""
+msgstr "40 × Granit"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:66
 msgid "30 × Fish"
-msgstr ""
+msgstr "30 × Fisk"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:67
 msgid "30 × Beer"
-msgstr ""
+msgstr "30 × Øl"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:68
 msgid "150 × Water"
-msgstr ""
+msgstr "150 × Vand"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:69
 msgid "40 × Ration"
-msgstr ""
+msgstr "40 × Ration"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:70
 msgid "10 × Meal"
-msgstr ""
+msgstr "10 × Måltider"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:71
 msgid "30 × Coal"
-msgstr ""
+msgstr "30 × Kul"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:72
 msgid "40 × Iron Ore"
-msgstr ""
+msgstr "40 × Jernmalm"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:73
 msgid "20 × Iron"
-msgstr ""
+msgstr "20 × Jern"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:74
 msgid "30 × Gold Ore"
-msgstr ""
+msgstr "30 × Guldmalm"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:75
 msgid "10 × Gold"
-msgstr ""
+msgstr "10 × Guld"
 
 #. TRANSLATORS: Continues from "Decide whether you want to work with Murilius
 #. against the Barbarians. If so, fill his warehouse with these wares: [list
@@ -159,11 +163,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:82
 msgid "Spy on Murilius"
-msgstr ""
+msgstr "Spioner på Murilus"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:84
 msgid "Send a Scout to Spy on the Empire"
-msgstr ""
+msgstr "Send en spion til Imperiet"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:85
 msgid ""
@@ -234,11 +238,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:118
 msgid "Defeat Murilius and the Barbarians!"
-msgstr ""
+msgstr "Besejr Murilius og barbarerne!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:120
 msgid "Defeat the Barbarians and the Empire Colony"
-msgstr ""
+msgstr "Besejr barbarerne og Imperiets koloni."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:121
 msgid ""
@@ -261,7 +265,7 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:146
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:155
 msgid "Welcome Back!"
-msgstr ""
+msgstr "Velkommen tilbage!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:138
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:147
@@ -336,6 +340,9 @@ msgid ""
 "We have built a home in this wonderful landscape. But as our tribe grows, we"
 " need more space. We should start expanding our territory."
 msgstr ""
+"Vi har bygget et hjem i dette vidunderlige landskab. Men som vores stamme "
+"vokser, skal vi bruge mere plads. Vi bør begynde udvidelsen af vores "
+"territorium."
 
 #. TRANSLATORS: Reebaud – Expand South
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:175
@@ -354,7 +361,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:181
 msgid "We are out of metals"
-msgstr ""
+msgstr "Vi har ikke mere metal"
 
 #. TRANSLATORS: Hauke – Train and recycle 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:183
@@ -393,7 +400,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:199
 msgid "New metal"
-msgstr ""
+msgstr "Nyt metal"
 
 #. TRANSLATORS: Hauke – Train and recycle 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:201
@@ -423,11 +430,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:215
 msgid "Metal Production"
-msgstr ""
+msgstr "Metalproduktion"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:216
 msgid "The mines are working"
-msgstr ""
+msgstr "Minerne fungerer"
 
 #. TRANSLATORS: Reebaud – Aqua Farms 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:218
@@ -474,7 +481,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:235
 msgid "We have fish again"
-msgstr ""
+msgstr "Vi har fisk igen"
 
 #. TRANSLATORS: Hauke – Aqua Farms 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:237
@@ -696,7 +703,7 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:352
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:362
 msgid "The Empire is Angry"
-msgstr ""
+msgstr "Imperiet er vrede"
 
 #. TRANSLATORS: "You are enemies of the Empire!". DO NOT TRANSLATE. Reebaud
 #. doesn’t understand Latin. You can transliterate into non-Latin scripts
@@ -808,11 +815,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:402
 msgid "Another Enemy"
-msgstr ""
+msgstr "Endnu en fjende"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:403
 msgid "Defeat the Empire!"
-msgstr ""
+msgstr "Besejr Imperiet"
 
 #. TRANSLATORS: Reebaud – defeat Murilius 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:405
@@ -833,11 +840,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:412
 msgid "Victory"
-msgstr ""
+msgstr "Sejr"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:413
 msgid "Victory!"
-msgstr ""
+msgstr "Sejr!"
 
 #. TRANSLATORS: Reebaud – victory
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:415
@@ -845,6 +852,8 @@ msgid ""
 "We have defeated all our enemies! Now no other tribe will ever dare settle "
 "here again. We are safe, and we can finally live our lives in peace."
 msgstr ""
+"Vi har besejret vores fjender! Nu vil ingen anden stamme forsøge at bosætte "
+"sig her. Vi er sikker, og vi kan endelig leve i fred."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:416
 msgid "Congratulations"
@@ -853,12 +862,12 @@ msgstr ""
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "»%s«"
 
 #: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgstr ""
+msgstr "Nyt mål"
 
 #: ../../data/scripting/richtext_scenarios.lua:93
 msgid "New Objectives"
-msgstr ""
+msgstr "Nye mål"

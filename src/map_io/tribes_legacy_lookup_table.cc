@@ -42,7 +42,9 @@ TribesLegacyLookupTable::TribesLegacyLookupTable()
      // Buildings
      buildings_{},
      // Ships
-     ships_{} {
+     ships_{},
+     // Working Programs
+     programs_{} {
 }
 
 const std::string& TribesLegacyLookupTable::lookup_worker(const std::string& worker) const {
@@ -63,6 +65,10 @@ const std::string& TribesLegacyLookupTable::lookup_building(const std::string& b
 
 const std::string& TribesLegacyLookupTable::lookup_ship(const std::string& ship) const {
 	return lookup_entry(ship, ships_);
+}
+
+const std::string& TribesLegacyLookupTable::lookup_program(const std::string& program) const {
+	return lookup_entry(program, programs_);
 }
 
 const std::string&

@@ -128,6 +128,8 @@ bool SaveHandler::check_next_tick(Widelands::Game& game, uint32_t realtime) {
 	log("Autosave: %d ms interval elapsed, current gametime: %s, saving...\n",
 	    autosave_interval_in_ms_, gametimestring(game.get_gametime(), true).c_str());
 
+	game.get_ibase()->log_message(_("Saving game…"));
+
 	return true;
 }
 
@@ -246,7 +248,7 @@ bool SaveHandler::save_game(Widelands::Game& game,
 	   [&game](FileSystem& fs) {
 		   Widelands::GameSaver gs(fs, game);
 		   gs.save();
-	   },
+		},
 	   complete_filename, fs_type_);
 	gsh.save();
 

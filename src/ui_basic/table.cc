@@ -91,6 +91,10 @@ Table<void*>::~Table() {
 	multiselect_.clear();
 }
 
+size_t Table<void*>::number_of_columns() const {
+	return columns_.size();
+}
+
 /// Add a new column to this table.
 void Table<void*>::add_column(uint32_t const width,
                               const std::string& title,
@@ -301,11 +305,10 @@ void Table<void*>::draw(RenderTarget& dst) {
 				continue;
 			}
 
-			const UI::FontStyleInfo& font_style = er.font_style() != nullptr ?
-			                                         *er.font_style() :
-			                                         er.is_disabled() ?
-			                                         g_gr->styles().table_style(style_).disabled() :
-			                                         g_gr->styles().table_style(style_).enabled();
+			const UI::FontStyleInfo& font_style =
+			   er.font_style() != nullptr ? *er.font_style() : er.is_disabled() ?
+			                                g_gr->styles().table_style(style_).disabled() :
+			                                g_gr->styles().table_style(style_).enabled();
 			std::shared_ptr<const UI::RenderedText> rendered_text =
 			   UI::g_fh->render(as_richtext_paragraph(richtext_escape(entry_string), font_style));
 

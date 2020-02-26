@@ -95,7 +95,7 @@ bool LayeredFileSystem::file_exists(const std::string& path) const {
  * Returns true if path is a directory in at least one of the directories
  */
 // TODO(unknown): What if it's a file in some and a dir in others?????
-bool LayeredFileSystem::is_directory(const std::string& path) {
+bool LayeredFileSystem::is_directory(const std::string& path) const {
 	if (home_ && home_->is_directory(path))
 		return true;
 

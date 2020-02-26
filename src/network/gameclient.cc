@@ -54,7 +54,6 @@
 #include "ui_fsmenu/launch_mpg.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
-#include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 
@@ -102,9 +101,9 @@ struct GameClientImpl {
 	void send_player_command(Widelands::PlayerCommand*);
 
 	bool run_map_menu(GameClient* parent);
-	void run_game(InteractiveGameBase* igb, UI::ProgressWindow*);
+	void run_game(InteractiveGameBase* igb);
 
-	InteractiveGameBase* init_game(GameClient* parent, UI::ProgressWindow*);
+	InteractiveGameBase* init_game(GameClient* parent, UI::ProgressWindow&);
 };
 
 void GameClientImpl::send_hello() {
@@ -148,22 +147,12 @@ bool GameClientImpl::run_map_menu(GameClient* parent) {
 /**
  * Show progress dialog and load map or saved game.
  */
-InteractiveGameBase* GameClientImpl::init_game(GameClient* parent, UI::ProgressWindow* loader) {
-	assert(loader);
-	std::vector<std::string> tipstext;
-	tipstext.push_back("general_game");
-	tipstext.push_back("multiplayer");
-	if (parent->has_players_tribe()) {
-		tipstext.push_back(parent->get_players_tribe());
-	}
-	GameTips tips(*loader, tipstext);
+InteractiveGameBase* GameClientImpl::init_game(GameClient* parent, UI::ProgressWindow& loader) {
+	modal = &loader;
 
-	modal = loader;
-
-	loader->step(_("Preparing game"));
+	game->step_loader_ui(_("Preparing game"));
 
 	game->set_game_controller(parent);
-	game->set_loader_ui(loader);
 	uint8_t const pn = settings.playernum + 1;
 	game->save_handler().set_autosave_filename(
 	   (boost::format("%s_netclient%u") % kAutosavePrefix % static_cast<unsigned int>(pn)).str());
@@ -180,24 +169,22 @@ InteractiveGameBase* GameClientImpl::init_game(GameClient* parent, UI::ProgressW
 	} else {  //  new map
 		game->init_newgame(settings);
 	}
-	game->set_loader_ui(nullptr);
 	return igb;
 }
 
 /**
  * Run the actual game and cleanup when done.
  */
-void GameClientImpl::run_game(InteractiveGameBase* igb, UI::ProgressWindow* loader) {
+void GameClientImpl::run_game(InteractiveGameBase* igb) {
 	time.reset(game->get_gametime());
 	lasttimestamp = game->get_gametime();
 	lasttimestamp_realtime = SDL_GetTicks();
 
 	modal = igb;
-	assert(loader);
-	game->set_loader_ui(loader);
-	game->run(settings.savegame ? Widelands::Game::Loaded :
-	                              settings.scenario ? Widelands::Game::NewMPScenario :
-	                                                  Widelands::Game::NewNonScenario,
+
+	game->run(settings.savegame ? Widelands::Game::Loaded : settings.scenario ?
+	                              Widelands::Game::NewMPScenario :
+	                              Widelands::Game::NewNonScenario,
 	          "", false, (boost::format("netclient_%d") % static_cast<int>(settings.usernum)).str());
 
 	// if this is an internet game, tell the metaserver that the game is done.
@@ -205,7 +192,6 @@ void GameClientImpl::run_game(InteractiveGameBase* igb, UI::ProgressWindow* load
 		InternetGaming::ref().set_game_done();
 	}
 	modal = nullptr;
-	game->set_loader_ui(nullptr);
 	game = nullptr;
 }
 
@@ -277,11 +263,15 @@ void GameClient::run() {
 	game.set_write_syncstream(get_config_bool("write_syncstreams", true));
 
 	try {
-		std::unique_ptr<UI::ProgressWindow> loader_ui(new UI::ProgressWindow());
+		std::vector<std::string> tipstexts{"general_game", "multiplayer"};
+		if (has_players_tribe()) {
+			tipstexts.push_back(get_players_tribe());
+		}
+		UI::ProgressWindow& loader_ui = game.create_loader_ui(tipstexts, false);
 
 		d->game = &game;
-		InteractiveGameBase* igb = d->init_game(this, loader_ui.get());
-		d->run_game(igb, loader_ui.get());
+		InteractiveGameBase* igb = d->init_game(this, loader_ui);
+		d->run_game(igb);
 
 	} catch (...) {
 		WLApplication::emergency_save(game);
