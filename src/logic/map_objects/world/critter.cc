@@ -288,10 +288,13 @@ void Critter::roam_update(Game& game, State& state) {
 		return pop_task(game);
 
 	const uint32_t age = game.get_gametime() - creation_time_;
-	if (age > kMinCritterLifetime && game.logic_rand() % kMaxCritterLifetime < age) {
-		// :(
-		molog("Goodby world :(\n");
-		return schedule_destroy(game);
+	if (age > kMinCritterLifetime) {
+		const uint32_t f = game.logic_rand() % kMaxCritterLifetime;
+		if (f * f < age) {
+			// :(
+			molog("Goodby world :(\n");
+			return schedule_destroy(game);
+		}
 	}
 
 	// alternately move and idle
@@ -452,7 +455,7 @@ void Critter::roam_update(Game& game, State& state) {
 		assert(weighted_population >= population_size_2);
 		molog("%lu mating partners; %lu,%lu,%lu = %lu nearby\n", mating_partners, population_size_2,
 		      population_size_5, population_size_9, weighted_population);
-		if (game.logic_rand() % 1000 < 1000.0 / (weighted_population * weighted_population)) {
+		if (game.logic_rand() % 1000 < 1000.0 / weighted_population) {
 			molog("A cute little %s cub :)\n", descr().name().c_str());
 			game.create_critter(get_position(), descr().name());
 		}
