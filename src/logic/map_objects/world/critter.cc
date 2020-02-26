@@ -343,7 +343,7 @@ void Critter::roam_update(Game& game, State& state) {
 	int32_t n_th_bob_on_field = 0;
 	bool foundme = false;
 	std::vector<Critter*> all_critters_on_field;
-	all_critters_on_field.push_back(this); // not caught by the following loop
+	all_critters_on_field.push_back(this);  // not caught by the following loop
 	for (Bob* b = get_position().field->get_first_bob(); b; b = b->get_next_bob()) {
 		assert(b);
 		if (b == this) {
@@ -372,7 +372,8 @@ void Critter::roam_update(Game& game, State& state) {
 	}
 	size_t nr_candidates_for_eating = candidates_for_eating.size();
 	while (can_eat_immovable || nr_candidates_for_eating > 0) {
-		const size_t idx = game.logic_rand() % (nr_candidates_for_eating + (can_eat_immovable ? 1 : 0));
+		const size_t idx =
+		   game.logic_rand() % (nr_candidates_for_eating + (can_eat_immovable ? 1 : 0));
 		if (game.logic_rand() % 100 < descr().get_appetite()) {
 			// yum yum yum
 			bool skipped = false;
@@ -408,15 +409,15 @@ void Critter::roam_update(Game& game, State& state) {
 				const int32_t S =
 				   attacker_strength - defender_strength;  // weighted combined strength *difference*
 				const int32_t N = defender_strength * defender_strength;  // definition of N: the
-					                                                      // resulting chance is 1 if
-					                                                      // and only if S >= N
+				                                                          // resulting chance is 1 if
+				                                                          // and only if S >= N
 				const double weighted_success_chance =
 				   S <= -N ? 0.0 : S >= N ? 1.0 :
-					                        -(std::log(S * S + 1) - 2 * S * std::atan(S) - M_PI * S -
-					                          std::log(N * N + 1) + N * (2 * std::atan(N) - M_PI)) /
-					                           (2 * N * M_PI);
+				                            -(std::log(S * S + 1) - 2 * S * std::atan(S) - M_PI * S -
+				                              std::log(N * N + 1) + N * (2 * std::atan(N) - M_PI)) /
+				                               (2 * N * M_PI);
 				molog("    *** [total strength %d] vs [prey %d] *** success chance %lf\n", S,
-					  defender_strength, weighted_success_chance);
+				      defender_strength, weighted_success_chance);
 				assert(weighted_success_chance >= 0.0);
 				assert(weighted_success_chance <= 1.0);
 				if (game.logic_rand() % N < weighted_success_chance * N) {
