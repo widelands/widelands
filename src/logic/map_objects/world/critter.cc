@@ -328,11 +328,12 @@ void Critter::roam_update(Game& game, State& state) {
 		idle_time_rnd = 1000;
 	}
 	state.ivar1 = 1;
-	std::vector<Critter*> candidates_for_eating;  // nullptr indicates the immovable here
+	std::vector<Critter*> candidates_for_eating;
+	bool can_eat_immovable = false;
 	if (descr().is_herbivore() && get_position().field->get_immovable()) {
 		for (uint32_t a : descr().food_plants()) {
 			if (get_position().field->get_immovable()->descr().has_attribute(a)) {
-				candidates_for_eating.push_back(nullptr);
+				can_eat_immovable = true;
 				break;
 			}
 		}
@@ -342,6 +343,7 @@ void Critter::roam_update(Game& game, State& state) {
 	int32_t n_th_bob_on_field = 0;
 	bool foundme = false;
 	std::vector<Critter*> all_critters_on_field;
+	all_critters_on_field.push_back(this); // not caught by the following loop
 	for (Bob* b = get_position().field->get_first_bob(); b; b = b->get_next_bob()) {
 		assert(b);
 		if (b == this) {
@@ -368,13 +370,21 @@ void Critter::roam_update(Game& game, State& state) {
 				if (!c->descr().is_carnivore() || !other_herbivores_on_field)
 					candidates_for_eating.push_back(c);
 	}
-	while (!candidates_for_eating.empty()) {
-		size_t idx = game.logic_rand() % candidates_for_eating.size();
+	size_t nr_candidates_for_eating = candidates_for_eating.size();
+	while (can_eat_immovable || nr_candidates_for_eating > 0) {
+		const size_t idx = game.logic_rand() % (nr_candidates_for_eating + (can_eat_immovable ? 1 : 0));
 		if (game.logic_rand() % 100 < descr().get_appetite()) {
 			// yum yum yum
-			Critter* food = candidates_for_eating[idx];
 			bool skipped = false;
-			if (food) {
+			if (idx == nr_candidates_for_eating) {
+				// refers to the plant on our field
+				assert(can_eat_immovable);
+				upcast(Immovable, imm, get_position().field->get_immovable());
+				assert(imm);
+				molog("Yummy, I love a %s...\n", imm->descr().name().c_str());
+				imm->delay_growth(descr().get_size() * 2000);
+			} else {
+				Critter* food = candidates_for_eating[idx];
 				molog("Yummy, I love a %s...\n", food->descr().name().c_str());
 				// find hunting partners
 				int32_t attacker_strength = 0;
@@ -398,15 +408,15 @@ void Critter::roam_update(Game& game, State& state) {
 				const int32_t S =
 				   attacker_strength - defender_strength;  // weighted combined strength *difference*
 				const int32_t N = defender_strength * defender_strength;  // definition of N: the
-				                                                          // resulting chance is 1 if
-				                                                          // and only if S >= N
+					                                                      // resulting chance is 1 if
+					                                                      // and only if S >= N
 				const double weighted_success_chance =
 				   S <= -N ? 0.0 : S >= N ? 1.0 :
-				                            -(std::log(S * S + 1) - 2 * S * std::atan(S) - M_PI * S -
-				                              std::log(N * N + 1) + N * (2 * std::atan(N) - M_PI)) /
-				                               (2 * N * M_PI);
+					                        -(std::log(S * S + 1) - 2 * S * std::atan(S) - M_PI * S -
+					                          std::log(N * N + 1) + N * (2 * std::atan(N) - M_PI)) /
+					                           (2 * N * M_PI);
 				molog("    *** [total strength %d] vs [prey %d] *** success chance %lf\n", S,
-				      defender_strength, weighted_success_chance);
+					  defender_strength, weighted_success_chance);
 				assert(weighted_success_chance >= 0.0);
 				assert(weighted_success_chance <= 1.0);
 				if (game.logic_rand() % N < weighted_success_chance * N) {
@@ -416,17 +426,17 @@ void Critter::roam_update(Game& game, State& state) {
 					molog("    failed :(\n");
 					skipped = true;
 				}
-			} else {
-				// refers to the plant on our field
-				upcast(Immovable, imm, get_position().field->get_immovable());
-				assert(imm);
-				molog("Yummy, I love a %s...\n", imm->descr().name().c_str());
-				imm->delay_growth(descr().get_size() * 2000);
 			}
 			if (!skipped)
 				return start_task_idle(game, descr().get_animation("eating", this), kMealtime);
 		}
-		candidates_for_eating.erase(candidates_for_eating.begin() + idx);
+		if (idx == nr_candidates_for_eating) {
+			assert(can_eat_immovable);
+			can_eat_immovable = false;
+		} else {
+			candidates_for_eating.erase(candidates_for_eating.begin() + idx);
+			--nr_candidates_for_eating;
+		}
 	}
 	// no food sadly, but perhaps another animal to make cute little fox cubs with…?
 	if (age > kMinReproductionAge &&
