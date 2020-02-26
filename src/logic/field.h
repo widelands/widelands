@@ -83,7 +83,7 @@ struct Field {
 	struct Resources {
 		DescriptionIndex d : 4, r : 4;
 	};
-	static_assert(sizeof(Resources) == 1, "assert(sizeof(Resources) == 1) failed.");
+	static_assert(sizeof(Resources) == sizeof(DescriptionIndex) / 2, "assert(sizeof(Resources) == sizeof(DescriptionIndex)) failed.");
 	struct ResourceAmounts {
 		ResourceAmount d : 4, r : 4;
 	};
@@ -286,9 +286,10 @@ static_assert(sizeof(Field) ==
                     sizeof(uint8_t) * 7,
               "Field is not tightly packed.");
 #else
+// NOCOM currently identical with non-Windows
 static_assert(sizeof(Field) ==
                  sizeof(void*) * 2 + sizeof(RoadSegment) * 3 + sizeof(DescriptionIndex) * 3 +
-                    sizeof(uint8_t) * 7 + 1,
+                    sizeof(uint8_t) * 7,
               "Field is not tightly packed.");
 #endif
 }  // namespace Widelands
