@@ -77,13 +77,15 @@ FindCritterByClass::Class FindCritterByClass::classof(const CritterDescr& cd) {
 	                           cd.is_carnivore() ? Class::Carnivore : Class::Neither;
 }
 bool FindCritterByClass::accept(Bob* b) const {
-	if (upcast(const Critter, c, b))
+	if (upcast(const Critter, c, b)) {
 		return classof(c->descr()) == class_;
+	}
 	return false;
 }
 bool FindCarnivores::accept(Bob* b) const {
-	if (upcast(const Critter, c, b))
+	if (upcast(const Critter, c, b)) {
 		return c->descr().is_carnivore();
+	}
 	return false;
 }
 bool FindBobByName::accept(Bob* b) const {

@@ -23,5 +23,5 @@ world:new_critter_type{
    },
    animations = animations,
    size = 1,
-   reproduction_rate = 80,
+   reproduction_rate = 10,
 }

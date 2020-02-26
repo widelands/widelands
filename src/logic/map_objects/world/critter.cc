@@ -102,27 +102,22 @@ CritterDescr::CritterDescr(const std::string& init_descname,
                            const World& world)
    : BobDescr(init_descname, MapObjectType::CRITTER, MapObjectDescr::OwnerType::kWorld, table),
      editor_category_(nullptr),
-     size_(0),
-     carnivore_(false),
+     size_(table.get_int("size")),
+     carnivore_(table.has_key("carnivore") && table.get_bool("carnivore")),
      appetite_(0),
-     reproduction_rate_(0) {
+     reproduction_rate_(table.get_int("reproduction_rate")) {
 	assign_directional_animation(&walk_anims_, "walk");
 
 	add_attributes(
 	   table.get_table("attributes")->array_entries<std::string>(), std::set<uint32_t>());
 
-	size_ = table.get_int("size");
 	if (size_ < 1 || size_ > 10) {
 		throw GameDataError(
 		   "Critter %s: size_ %u out of range 1..10", name().c_str(), static_cast<unsigned>(size_));
 	}
-	reproduction_rate_ = table.get_int("reproduction_rate");
 	if (reproduction_rate_ > 100) {
 		throw GameDataError("Critter %s: reproduction_rate_ %u out of range 0..100", name().c_str(),
 		                    static_cast<unsigned>(reproduction_rate_));
-	}
-	if (table.has_key("carnivore")) {
-		carnivore_ = table.get_bool("carnivore");
 	}
 	if (table.has_key("herbivore")) {
 		for (const std::string& a : table.get_table("herbivore")->array_entries<std::string>()) {
@@ -323,7 +318,7 @@ void Critter::roam_update(Game& game, State& state) {
 		roaming_dist /= 12;
 		assert(roaming_dist >= 2);
 		// the further we want to go, the harder we try to go somewhere
-		for (; roaming_dist; --roaming_dist) {
+		for (; roaming_dist > 0; --roaming_dist) {
 			if (start_task_movepath(game, game.random_location(get_position(), roaming_dist),
 			                        roaming_dist, descr().get_walk_anims())) {
 				return;
@@ -346,6 +341,7 @@ void Critter::roam_update(Game& game, State& state) {
 	size_t mating_partners = 0;
 	int32_t n_th_bob_on_field = 0;
 	bool foundme = false;
+	std::vector<Critter*> all_critters_on_field;
 	for (Bob* b = get_position().field->get_first_bob(); b; b = b->get_next_bob()) {
 		assert(b);
 		if (b == this) {
@@ -360,17 +356,17 @@ void Critter::roam_update(Game& game, State& state) {
 			++mating_partners;
 		}
 		if (upcast(Critter, c, b)) {
+			all_critters_on_field.push_back(c);
 			other_herbivores_on_field |= c->descr().is_herbivore();
 		}
 	}
 	assert(foundme);
 	if (descr().is_carnivore()) {
 		// only hunt other carnivores if there are no herbivores here
-		for (Bob* b = get_position().field->get_first_bob(); b; b = b->get_next_bob())
-			if (descr().name() != b->descr().name())
-				if (upcast(Critter, c, b))
-					if (!c->descr().is_carnivore() || !other_herbivores_on_field)
-						candidates_for_eating.push_back(c);
+		for (Critter* c : all_critters_on_field)
+			if (descr().name() != c->descr().name())
+				if (!c->descr().is_carnivore() || !other_herbivores_on_field)
+					candidates_for_eating.push_back(c);
 	}
 	while (!candidates_for_eating.empty()) {
 		size_t idx = game.logic_rand() % candidates_for_eating.size();
@@ -389,13 +385,11 @@ void Critter::roam_update(Game& game, State& state) {
 					defender_strength = food->descr().get_size();
 				} else {
 					// ffa
-					for (Bob* b = get_position().field->get_first_bob(); b; b = b->get_next_bob()) {
-						if (upcast(Critter, c, b)) {
-							if (c != this && (c == food || c->descr().is_herbivore())) {
-								defender_strength += c->descr().get_size();
-							} else if (c->descr().is_carnivore()) {
-								attacker_strength += c->descr().get_size();
-							}
+					for (Critter* c : all_critters_on_field) {
+						if (c != this && (c == food || c->descr().is_herbivore())) {
+							defender_strength += c->descr().get_size();
+						} else if (c->descr().is_carnivore()) {
+							attacker_strength += c->descr().get_size();
 						}
 					}
 				}

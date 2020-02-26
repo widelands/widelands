@@ -28,5 +28,5 @@ world:new_critter_type{
    size = 4,
    reproduction_rate = 40,
    appetite = 70,
-   herbivore = {"field"},
+   herbivore = {"tree_sapling"},
 }

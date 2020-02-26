@@ -78,11 +78,11 @@ private:
 	using Programs = std::map<std::string, CritterProgram*>;
 	Programs programs_;
 	EditorCategory* editor_category_;  // not owned.
-	uint8_t size_;
-	bool carnivore_;
+	const uint8_t size_;
+	const bool carnivore_;
 	std::set<uint32_t> food_plants_;  // set of immovable attributes
 	uint8_t appetite_;           // chance that we feel hungry when we encounter one food item, in %
-	uint8_t reproduction_rate_;  // reproduction adjustment factor, in %
+	const uint8_t reproduction_rate_;  // reproduction adjustment factor, in %
 	DISALLOW_COPY_AND_ASSIGN(CritterDescr);
 };
 
