@@ -86,7 +86,7 @@ function calculate_territory_points(fields, players)
 
    -- Check if we have a winner. The table was sorted, so we can simply grab the first entry.
    local winning_points = -1
-   -- Peaceful mode needs more land then any other can gain (lead points > remaining fields)
+   -- Peaceful mode needs more land than any other can gain (lead points > remaining fields)
    local plrs = wl.Game().players
    if plrs[1]:is_attack_forbidden(plrs[2].number) then
       local remaining_points = fields

@@ -22,7 +22,7 @@ local wc_desc = _ (
    "area. The winner will be the player or the team that is able to keep " ..
    "that area for at least 20 minutes. " ..
    "If the peaceful mode is selected, the game ends if one player has more " ..
-   "land then any other player could gain."
+   "land than any other player could gain."
 )
 
 return {

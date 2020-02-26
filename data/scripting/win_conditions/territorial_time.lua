@@ -26,7 +26,7 @@ local wc_desc = _ (
    "that area for at least 20 minutes, or the one with the most territory " ..
    "after 4 hours, whichever comes first." ..
    "If the peaceful mode is selected, the game ends if one player has more " ..
-   "land then any other player could gain."
+   "land than any other player could gain."
 )
 
 return {
