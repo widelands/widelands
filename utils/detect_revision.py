@@ -96,7 +96,7 @@ def detect_bzr_revision():
             revno = run_bzr('revno')
             nick = run_bzr('nick')
             return 'bzr%s[%s]' % (revno, nick)
-        except OSError:
+        except (OSError, subprocess.CalledProcessError):
             return None
     return None
 
