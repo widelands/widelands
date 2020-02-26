@@ -25,7 +25,7 @@ local wc_desc = _ (
    "area. The winner will be the player or the team that is able to keep " ..
    "that area for at least 20 minutes, or the one with the most territory " ..
    "after 4 hours, whichever comes first." ..
-   "If the peaceful mode is selected the game ends if one player has more " ..
+   "If the peaceful mode is selected, the game ends if one player has more " ..
    "land then any other player could gain."
 )
 
