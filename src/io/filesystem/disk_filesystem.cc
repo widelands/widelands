@@ -19,8 +19,6 @@
 
 #include "io/filesystem/disk_filesystem.h"
 
-#include <cerrno>
-
 #include <sys/stat.h>
 #ifdef _WIN32
 #include <dos.h>
