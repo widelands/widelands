@@ -27,7 +27,6 @@
 #include "base/rect.h"
 #include "ui_basic/fullscreen_window.h"
 
-class Image;
 class RenderTarget;
 
 namespace UI {

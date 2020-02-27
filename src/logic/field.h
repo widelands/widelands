@@ -50,7 +50,6 @@ namespace Widelands {
 // class all around the code
 
 class Bob;
-class TerrainDescription;
 struct BaseImmovable;
 
 // Field is used so often, make sure it is as small as possible.
@@ -181,11 +180,11 @@ struct Field {
 
 	RoadSegment get_road(uint8_t dir) const {
 		switch (dir) {
-		case WALK_E:
+		case WalkingDir::WALK_E:
 			return road_east;
-		case WALK_SE:
+		case WalkingDir::WALK_SE:
 			return road_southeast;
-		case WALK_SW:
+		case WalkingDir::WALK_SW:
 			return road_southwest;
 		default:
 			throw wexception("Queried road going in invalid direction %i", dir);
@@ -193,13 +192,13 @@ struct Field {
 	}
 	void set_road(uint8_t dir, RoadSegment type) {
 		switch (dir) {
-		case WALK_E:
+		case WalkingDir::WALK_E:
 			road_east = type;
 			break;
-		case WALK_SE:
+		case WalkingDir::WALK_SE:
 			road_southeast = type;
 			break;
-		case WALK_SW:
+		case WalkingDir::WALK_SW:
 			road_southwest = type;
 			break;
 		default:

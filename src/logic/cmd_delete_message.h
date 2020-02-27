@@ -23,7 +23,8 @@
 #include <memory>
 
 #include "logic/cmd_queue.h"
-#include "logic/message_queue.h"
+#include "logic/message_id.h"
+#include "logic/widelands.h"
 
 namespace Widelands {
 

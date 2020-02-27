@@ -29,8 +29,6 @@
 
 #include <stdint.h>
 
-#include "io/filesystem/filesystem_exceptions.h"
-
 using FilenameSet = std::set<std::string>;
 
 class StreamRead;

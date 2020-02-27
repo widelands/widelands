@@ -26,7 +26,6 @@
 #include <boost/format.hpp>
 
 #include "base/log.h"
-#include "base/macros.h"
 #include "base/scoped_timer.h"
 #include "base/time_string.h"
 #include "base/wexception.h"

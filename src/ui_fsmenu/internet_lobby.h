@@ -25,7 +25,6 @@
 #include <vector>
 
 #include "network/internet_gaming.h"
-#include "network/network_lan_promotion.h"
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/listselect.h"
