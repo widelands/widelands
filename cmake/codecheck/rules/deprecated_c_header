@@ -7,11 +7,12 @@ Checks for includes of deprecated c headers.
 
 error_msg = "You have included a deprecated C header. Remove it!"
 
-regexp = r"""^# *include +["<](?:assert|complex|type|errno|fenv|float|inttypes|iso646|limits|locale|math|setjmp|signal|stdarg|stdbool|stddef|stdio|stdlib|string|tgmath|time|wchar|wctype)\.h[">]"""
+regexp = r"""^# *include +["<](?:assert|complex|ctype|type|errno|fenv|float|inttypes|iso646|limits|locale|math|setjmp|signal|stdarg|stdbool|stddef|stdio|stdlib|string|tgmath|time|wchar|wctype)\.h[">]"""
 
 forbidden = [
     '#include <assert.h>',
     '#include <complex.h>',
+    '#include <ctype.h>',
     '#include <type.h>',
     '#include <errno.h>',
     '#include <fenv.h>',
@@ -38,6 +39,7 @@ forbidden = [
 allowed = [
     '#include <cassert>',
     '#include <ccomplex>',
+    '#include <cctype>',
     '#include <ctype>',
     '#include <cerrno>',
     '#include <cfenv>',
