@@ -20,7 +20,6 @@
 #include "ai/defaultai.h"
 
 #include <algorithm>
-#include <ctime>
 #include <memory>
 #include <queue>
 #include <typeinfo>
