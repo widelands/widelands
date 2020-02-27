@@ -32,9 +32,6 @@
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/load_map_or_game.h"
 
-struct NetOpenGame;
-struct NetGameInfo;
-
 class FullscreenMenuNetSetupLAN : public FullscreenMenuLoadMapOrGame {
 public:
 	FullscreenMenuNetSetupLAN();

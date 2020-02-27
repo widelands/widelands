@@ -29,13 +29,13 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
-#include "base/macros.h"
 #include "base/warning.h"
+#include "build_info.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "network/constants.h"
 #include "network/crypto.h"
 #include "network/internet_gaming_messages.h"
+#include "network/internet_gaming_protocol.h"
 #include "random/random.h"
 
 /// Private constructor by purpose: NEVER call directly. Always call InternetGaming::ref(), this

@@ -22,7 +22,7 @@
 
 #include "base/i18n.h"
 #include "logic/message.h"
-#include "logic/message_queue.h"
+#include "logic/message_id.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/table.h"
@@ -30,7 +30,6 @@
 
 namespace Widelands {
 class Game;
-struct Message;
 }  // namespace Widelands
 class InteractivePlayer;
 

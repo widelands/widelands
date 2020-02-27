@@ -35,6 +35,7 @@
 #include "base/wexception.h"
 #include "build_info.h"
 #include "io/fileread.h"
+#include "io/filesystem/filesystem_exceptions.h"
 #include "io/filewrite.h"
 
 #define TRUE_WORDS 7

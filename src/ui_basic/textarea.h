@@ -22,6 +22,7 @@
 
 #include "graphic/align.h"
 #include "graphic/graphic.h"
+#include "graphic/text/rendered_text.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
