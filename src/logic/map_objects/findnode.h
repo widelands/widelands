@@ -22,8 +22,6 @@
 
 #include <vector>
 
-#include <stdint.h>
-
 #include "logic/widelands.h"
 
 namespace Widelands {

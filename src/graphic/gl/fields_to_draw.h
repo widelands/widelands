@@ -24,8 +24,6 @@
 #include <string>
 #include <vector>
 
-#include <stdint.h>
-
 #include "base/vector.h"
 #include "graphic/rendertarget.h"
 #include "graphic/road_segments.h"

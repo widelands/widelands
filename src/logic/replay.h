@@ -30,8 +30,6 @@
 
 #include <string>
 
-#include <stdint.h>
-
 struct Md5Checksum;
 
 class StreamRead;

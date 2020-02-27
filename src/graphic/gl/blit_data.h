@@ -20,8 +20,6 @@
 #ifndef WL_GRAPHIC_GL_BLIT_DATA_H
 #define WL_GRAPHIC_GL_BLIT_DATA_H
 
-#include <stdint.h>
-
 #include "base/rect.h"
 
 // Information of the internal OpenGL data needed to properly blit this image.

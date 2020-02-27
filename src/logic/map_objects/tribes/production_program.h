@@ -25,8 +25,6 @@
 #include <string>
 #include <vector>
 
-#include <stdint.h>
-
 #include "base/log.h"
 #include "base/macros.h"
 #include "logic/map_objects/buildcost.h"

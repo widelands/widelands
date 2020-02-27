@@ -22,8 +22,6 @@
 
 #include <string>
 
-#include <stdint.h>
-
 #include "logic/widelands.h"
 
 /// Manages a set of 6 animations, one for each possible direction.

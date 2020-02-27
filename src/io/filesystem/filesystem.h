@@ -26,8 +26,6 @@
 #include <string>
 #include <vector>
 
-#include <stdint.h>
-
 using FilenameSet = std::set<std::string>;
 
 class StreamRead;

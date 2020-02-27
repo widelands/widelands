@@ -22,8 +22,6 @@
 
 #include <string>
 
-#include <stdint.h>
-
 #include "base/macros.h"
 #include "graphic/gl/blit_data.h"
 

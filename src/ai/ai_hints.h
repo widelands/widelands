@@ -21,7 +21,6 @@
 #define WL_AI_AI_HINTS_H
 
 #include <memory>
-#include <stdint.h>
 #include <string>
 #include <unordered_map>
 

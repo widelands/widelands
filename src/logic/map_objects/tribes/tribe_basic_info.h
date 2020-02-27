@@ -24,8 +24,6 @@
 #include <string>
 #include <vector>
 
-#include <stdint.h>
-
 #include "scripting/lua_table.h"
 
 namespace Widelands {

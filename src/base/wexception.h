@@ -23,8 +23,6 @@
 #include <exception>
 #include <string>
 
-#include <stdint.h>
-
 #include "base/macros.h"
 
 #ifndef PRINTF_FORMAT

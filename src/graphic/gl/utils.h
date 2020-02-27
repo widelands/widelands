@@ -25,8 +25,6 @@
 #include <unordered_set>
 #include <vector>
 
-#include <stdint.h>
-
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"

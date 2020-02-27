@@ -28,8 +28,6 @@
 #include <unordered_set>
 #include <vector>
 
-#include <stdint.h>
-
 #include "graphic/color.h"
 
 namespace RT {

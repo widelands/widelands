@@ -24,8 +24,6 @@
 #include <string>
 #include <unordered_map>
 
-#include <stdint.h>
-
 #include "ai/ai_hints.h"
 #include "base/macros.h"
 #include "logic/map_objects/map_object.h"

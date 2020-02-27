@@ -23,7 +23,6 @@
 #include <string>
 
 #include <SDL_endian.h>
-#include <stdint.h>
 
 #include "base/macros.h"
 

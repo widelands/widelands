@@ -24,8 +24,6 @@
 #include <cstdlib>
 #include <vector>
 
-#include <stdint.h>
-
 /**
  * This class allows for selection of more than just one
  * thing. Like more than one texture, more than one map object

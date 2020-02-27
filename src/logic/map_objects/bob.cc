@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <stdint.h>
-
 #include "base/macros.h"
 #include "base/math.h"
 #include "base/wexception.h"

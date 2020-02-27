@@ -20,8 +20,6 @@
 #ifndef WL_MAP_IO_MAP_PORT_SPACES_PACKET_H
 #define WL_MAP_IO_MAP_PORT_SPACES_PACKET_H
 
-#include <stdint.h>
-
 #include "map_io/map_data_packet.h"
 
 namespace Widelands {

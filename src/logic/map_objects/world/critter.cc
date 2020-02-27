@@ -22,8 +22,6 @@
 #include <memory>
 #include <string>
 
-#include <stdint.h>
-
 #include "base/wexception.h"
 #include "helper.h"
 #include "io/fileread.h"

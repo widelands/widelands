@@ -23,8 +23,6 @@
 #include <memory>
 #include <vector>
 
-#include <stdint.h>
-
 #include "base/macros.h"
 #include "base/rect.h"
 #include "graphic/blend_mode.h"

@@ -23,8 +23,6 @@
 #include <memory>
 #include <string>
 
-#include <stdint.h>
-
 #include "scripting/lua.h"
 
 class FileRead;

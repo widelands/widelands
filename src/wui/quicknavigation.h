@@ -23,7 +23,6 @@
 #include <vector>
 
 #include <SDL_keyboard.h>
-#include <stdint.h>
 
 #include "wui/mapview.h"
 

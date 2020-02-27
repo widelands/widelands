@@ -20,10 +20,9 @@
 #ifndef WL_LOGIC_WIDELANDS_H
 #define WL_LOGIC_WIDELANDS_H
 
+#include <cstdint>
 #include <limits>
 #include <vector>
-
-#include <stdint.h>
 
 namespace Widelands {
 

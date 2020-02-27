@@ -23,8 +23,6 @@
 #include <functional>
 #include <string>
 
-#include <stdint.h>
-
 #include "io/filesystem/filesystem.h"
 
 /**

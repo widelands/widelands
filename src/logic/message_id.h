@@ -20,7 +20,7 @@
 #ifndef WL_LOGIC_MESSAGE_ID_H
 #define WL_LOGIC_MESSAGE_ID_H
 
-#include <stdint.h>
+#include <cstdint>
 
 #include "base/macros.h"
 

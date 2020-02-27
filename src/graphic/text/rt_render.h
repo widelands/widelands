@@ -24,8 +24,6 @@
 #include <set>
 #include <string>
 
-#include <stdint.h>
-
 #include "graphic/image.h"
 #include "graphic/image_cache.h"
 #include "graphic/text/font_set.h"

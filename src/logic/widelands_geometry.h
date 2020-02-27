@@ -23,8 +23,6 @@
 #include <tuple>
 #include <vector>
 
-#include <stdint.h>
-
 namespace Widelands {
 
 using MapIndex = uint32_t;
