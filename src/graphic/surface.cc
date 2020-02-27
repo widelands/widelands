@@ -19,7 +19,6 @@
 
 #include "graphic/surface.h"
 
-#include <cmath>
 #include <cstdlib>
 
 #include <SDL.h>

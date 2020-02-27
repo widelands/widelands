@@ -20,7 +20,6 @@
 #ifndef WL_LOGIC_WIDELANDS_GEOMETRY_H
 #define WL_LOGIC_WIDELANDS_GEOMETRY_H
 
-#include <cmath>
 #include <tuple>
 #include <vector>
 

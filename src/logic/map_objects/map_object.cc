@@ -20,7 +20,6 @@
 #include "logic/map_objects/map_object.h"
 
 #include <algorithm>
-#include <cmath>
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
