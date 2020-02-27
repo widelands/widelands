@@ -55,7 +55,7 @@ function enemy()
       for x=40, 70 do
          for y=120, 160 do
             local field = map:get_field(x,y)
-            if field.owner == p3 and p1:sees_field(field) then
+            if field.owner == kalitath and p1:sees_field(field) then
                seen = true
             end
          end
@@ -74,20 +74,21 @@ function enemy()
             for k,bob in pairs(field.bobs) do
                if bob.descr.name == "atlanteans_scout" then
                   scout = bob
+                  break
                end
             end
          end
       end
    end
    while not contact do
-      if scout.field.owner == p3 and
-         scout.field.brn.owner == p3 and
-         scout.field.bln.owner == p3 and
-         scout.field.trn.owner == p3 and
-         scout.field.tln.owner == p3 and
-         scout.field.rn.owner == p3 and
-         scout.field.ln.owner == p3 then
-         
+      sleep(2000)
+      if scout.field.owner == kalitath and
+         scout.field.brn.owner == kalitath and
+         scout.field.bln.owner == kalitath and
+         scout.field.trn.owner == kalitath and
+         scout.field.tln.owner == kalitath and
+         scout.field.rn.owner == kalitath and
+         scout.field.ln.owner == kalitath then
          contact = true
       end
    end
