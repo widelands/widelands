@@ -20,7 +20,6 @@
 #ifndef WL_EDITOR_TOOLS_ACTION_ARGS_H
 #define WL_EDITOR_TOOLS_ACTION_ARGS_H
 
-#include <list>
 #include <map>
 #include <set>
 #include <string>

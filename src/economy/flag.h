@@ -21,7 +21,6 @@
 #define WL_ECONOMY_FLAG_H
 
 #include <deque>
-#include <list>
 #include <vector>
 
 #include "base/macros.h"

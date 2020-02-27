@@ -19,7 +19,6 @@
 
 #include "logic/map_objects/tribes/soldier.h"
 
-#include <list>
 #include <memory>
 
 #include "base/macros.h"

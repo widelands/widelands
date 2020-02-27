@@ -20,7 +20,6 @@
 #ifndef WL_UI_FSMENU_NETSETUP_LAN_H
 #define WL_UI_FSMENU_NETSETUP_LAN_H
 
-#include <list>
 #include <string>
 
 #include "network/network_lan_promotion.h"
