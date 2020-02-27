@@ -23,7 +23,6 @@
 #ifndef _WIN32
 #include <csignal>
 #endif
-#include <fstream>
 #include <iostream>
 #include <memory>
 #include <stdexcept>
