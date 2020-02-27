@@ -22,7 +22,6 @@
 #include <cassert>
 #include <cerrno>
 
-#include <boost/algorithm/string/replace.hpp>
 #include <sys/stat.h>
 #ifdef _WIN32
 #include <dos.h>

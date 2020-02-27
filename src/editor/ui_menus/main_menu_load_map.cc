@@ -19,7 +19,6 @@
 
 #include "editor/ui_menus/main_menu_load_map.h"
 
-#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"

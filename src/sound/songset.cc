@@ -21,7 +21,6 @@
 
 #include <utility>
 
-#include <boost/algorithm/string/predicate.hpp>
 #include <boost/regex.hpp>
 
 #include "base/log.h"
