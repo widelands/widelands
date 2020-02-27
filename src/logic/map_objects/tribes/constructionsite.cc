@@ -19,8 +19,6 @@
 
 #include "logic/map_objects/tribes/constructionsite.h"
 
-#include <cstdio>
-
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "base/wexception.h"

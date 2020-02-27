@@ -20,7 +20,6 @@
 
 #include "wui/game_debug_ui.h"
 
-#include <cstdio>
 #include <string>
 
 #include "base/i18n.h"

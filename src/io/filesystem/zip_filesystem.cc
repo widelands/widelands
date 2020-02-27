@@ -20,7 +20,6 @@
 #include "io/filesystem/zip_filesystem.h"
 
 #include <cassert>
-#include <cstdio>
 #include <cstdlib>
 #include <cstring>
 #include <memory>

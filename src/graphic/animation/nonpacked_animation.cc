@@ -20,7 +20,6 @@
 #include "graphic/animation/nonpacked_animation.h"
 
 #include <cassert>
-#include <cstdio>
 #include <limits>
 #include <memory>
 

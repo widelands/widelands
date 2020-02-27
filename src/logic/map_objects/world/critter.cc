@@ -19,7 +19,6 @@
 
 #include "logic/map_objects/world/critter.h"
 
-#include <cstdio>
 #include <memory>
 #include <string>
 

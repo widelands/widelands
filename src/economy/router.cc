@@ -19,7 +19,6 @@
 
 #include "economy/router.h"
 
-#include <cstdio>
 #include <cstdlib>
 
 #include "economy/iroute.h"

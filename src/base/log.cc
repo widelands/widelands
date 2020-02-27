@@ -21,7 +21,6 @@
 
 #include <cassert>
 #include <cstdarg>
-#include <cstdio>
 #include <fstream>
 #include <iostream>
 #include <memory>

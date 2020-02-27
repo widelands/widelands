@@ -20,7 +20,6 @@
 #include "io/streamread.h"
 
 #include <cstdarg>
-#include <cstdio>
 #include <cstring>
 
 #include "base/wexception.h"

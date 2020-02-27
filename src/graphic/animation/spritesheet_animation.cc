@@ -20,7 +20,6 @@
 #include "graphic/animation/spritesheet_animation.h"
 
 #include <cassert>
-#include <cstdio>
 #include <limits>
 #include <memory>
 

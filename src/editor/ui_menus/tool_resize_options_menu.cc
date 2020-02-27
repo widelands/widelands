@@ -19,7 +19,6 @@
 
 #include "editor/ui_menus/tool_resize_options_menu.h"
 
-#include <cstdio>
 #include <string>
 
 #include "base/i18n.h"

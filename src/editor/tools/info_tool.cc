@@ -19,7 +19,6 @@
 
 #include "editor/tools/info_tool.h"
 
-#include <cstdio>
 #include <vector>
 
 #include "base/i18n.h"

@@ -19,7 +19,6 @@
 
 #include "wui/waresdisplay.h"
 
-#include <cstdio>
 #include <memory>
 #include <utility>
 
