@@ -20,7 +20,6 @@
 #ifndef WL_NETWORK_NETWORK_H
 #define WL_NETWORK_NETWORK_H
 
-#include <exception>
 #include <functional>
 #include <string>
 #include <vector>

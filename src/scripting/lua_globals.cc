@@ -19,7 +19,6 @@
 
 #include "scripting/lua_globals.h"
 
-#include <exception>
 #include <memory>
 
 #include <SDL.h>
