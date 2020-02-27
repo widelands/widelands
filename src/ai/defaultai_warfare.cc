@@ -606,7 +606,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		   en_bo.total_count() * 100 / (ts_finished_count_ + ts_in_const_count_);
 		if (player_->is_building_type_allowed(enhancement) &&
 		    en_bo.aimode_limit_status() == AiModeBuildings::kAnotherAllowed &&
-			en_bo.max_trainingsites_proportion > current_proportion) {
+		    en_bo.max_trainingsites_proportion > current_proportion) {
 			game().send_player_enhance_building(*tso.site, enhancement);
 		}
 	}
