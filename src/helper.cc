@@ -20,7 +20,6 @@
 #include "helper.h"
 
 #include <cassert>
-#include <cstdarg>
 #include <memory>
 #include <string>
 

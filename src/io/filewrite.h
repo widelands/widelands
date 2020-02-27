@@ -20,7 +20,6 @@
 #ifndef WL_IO_FILEWRITE_H
 #define WL_IO_FILEWRITE_H
 
-#include <cstdarg>
 #include <limits>
 #include <memory>
 #include <string>
