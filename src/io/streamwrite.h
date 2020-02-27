@@ -20,6 +20,7 @@
 #ifndef WL_IO_STREAMWRITE_H
 #define WL_IO_STREAMWRITE_H
 
+#include <cstring>
 #include <string>
 
 #include "base/macros.h"
