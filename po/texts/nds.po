@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # Benedikt Straub <benedikt-straub@web.de>, 2018-2020
@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-12-30 07:55+0000\n"
-"PO-Revision-Date: 2020-01-02 17:14+0000\n"
+"POT-Creation-Date: 2020-02-21 18:05+0000\n"
+"PO-Revision-Date: 2020-02-25 20:48+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -722,7 +722,7 @@ msgstr "Neje Soldaten worden in eener Kasern anhüürt. Hör Vermögen kann dann
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
-msgstr "'t is gefahrelk, aver wenn de Strg-Tast drückt hollen, as du de Knopen för 't Utbauen, Plattrieten of Ofbrannen vun eenem Huus bruukst, word de Sekerheids-Fraag weglaten."
+msgstr "'t is gefahrelk, aver wenn du de Strg-Tast drückt hollst, as du de Knopen för 't Utbauen, Plattrieten of Ofbrannen vun eenem Huus bruukst, word de Sekerheids-Fraag weglaten."
 
 #: ../../data/txts/tips/general_game.lua:59
 msgid "Press I to quickly toggle the display of your stock inventory."
