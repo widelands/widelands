@@ -34,7 +34,6 @@
 
 #include <SDL_image.h>
 #include <SDL_ttf.h>
-#include <boost/format.hpp>
 #include <boost/regex.hpp>
 #ifdef __APPLE__
 #include <mach-o/dyld.h>

@@ -24,7 +24,6 @@
 #include <sstream>
 #include <string>
 
-#include <boost/format.hpp>
 #ifndef _WIN32
 #include <unistd.h>  // for usleep
 #endif

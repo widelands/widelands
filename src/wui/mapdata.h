@@ -24,8 +24,6 @@
 #include <string>
 #include <vector>
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "io/filesystem/filesystem.h"
 #include "logic/map.h"

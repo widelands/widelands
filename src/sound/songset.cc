@@ -21,8 +21,6 @@
 
 #include <utility>
 
-#include <boost/regex.hpp>
-
 #include "base/log.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"

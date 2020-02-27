@@ -19,8 +19,6 @@
 
 #include "wui/actionconfirm.h"
 
-#include <boost/format.hpp>
-
 #include "base/macros.h"
 #include "economy/economy.h"
 #include "graphic/font_handler.h"
