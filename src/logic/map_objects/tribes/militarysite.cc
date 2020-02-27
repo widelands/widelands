@@ -19,7 +19,6 @@
 
 #include "logic/map_objects/tribes/militarysite.h"
 
-#include <clocale>
 #include <cstdio>
 #include <memory>
 
