@@ -24,6 +24,9 @@
 #include <cassert>
 #include <iterator>
 #include <list>
+#ifdef _WIN32
+#include <cstdio>
+#endif
 #include <string>
 #include <vector>
 
@@ -34,7 +37,6 @@
 #include <boost/lexical_cast.hpp>
 #ifdef _WIN32
 #include <direct.h>
-#include <io.h>
 #include <windows.h>
 #else
 #include <glob.h>
