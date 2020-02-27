@@ -114,7 +114,7 @@ end
 function intro()
    sleep(500)
 
-   --p1.see_all = true -- TODO: remove this
+   p1.see_all = true -- TODO: remove this
    include "map:scripting/starting_conditions.lua"
 
    basic_infrastructure = add_campaign_objective(obj_basic_infrastructure)
