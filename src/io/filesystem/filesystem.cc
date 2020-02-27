@@ -22,7 +22,6 @@
 #include "io/filesystem/filesystem.h"
 
 #include <cassert>
-#include <iterator>
 #include <list>
 #ifdef _WIN32
 #include <cstdio>
