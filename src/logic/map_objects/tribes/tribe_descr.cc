@@ -19,7 +19,6 @@
 
 #include "logic/map_objects/tribes/tribe_descr.h"
 
-#include <algorithm>
 #include <iostream>
 #include <memory>
 

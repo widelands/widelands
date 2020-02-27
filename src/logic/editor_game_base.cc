@@ -19,7 +19,6 @@
 
 #include "logic/editor_game_base.h"
 
-#include <algorithm>
 #include <memory>
 #include <set>
 

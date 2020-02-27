@@ -19,8 +19,6 @@
 
 #include "ui_basic/box.h"
 
-#include <algorithm>
-
 #include <boost/bind.hpp>
 
 #include "base/wexception.h"

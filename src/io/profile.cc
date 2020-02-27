@@ -19,7 +19,6 @@
 
 #include "io/profile.h"
 
-#include <algorithm>
 #include <cctype>
 #include <cstdarg>
 #include <cstdio>

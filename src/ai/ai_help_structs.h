@@ -20,7 +20,6 @@
 #ifndef WL_AI_AI_HELP_STRUCTS_H
 #define WL_AI_AI_HELP_STRUCTS_H
 
-#include <algorithm>
 #include <list>
 #include <queue>
 #include <unordered_set>

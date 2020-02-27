@@ -19,7 +19,6 @@
 
 #include "ui_basic/editbox.h"
 
-#include <algorithm>
 #include <limits>
 #include <string>
 

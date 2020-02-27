@@ -19,7 +19,6 @@
 
 #include "io/filesystem/zip_filesystem.h"
 
-#include <algorithm>
 #include <cassert>
 #include <cerrno>
 #include <cstdio>

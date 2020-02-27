@@ -19,8 +19,6 @@
 
 #include "ui_basic/dropdown.h"
 
-#include <algorithm>
-
 #include <boost/format.hpp>
 
 #include "base/i18n.h"

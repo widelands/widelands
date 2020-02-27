@@ -19,7 +19,6 @@
 
 #include "logic/map_objects/tribes/warehouse.h"
 
-#include <algorithm>
 #include <limits>
 
 #include <boost/format.hpp>
