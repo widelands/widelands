@@ -20,7 +20,6 @@
 #ifndef WL_LOGIC_WIDELANDS_H
 #define WL_LOGIC_WIDELANDS_H
 
-#include <cstddef>
 #include <limits>
 #include <vector>
 

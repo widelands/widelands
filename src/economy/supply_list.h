@@ -20,7 +20,6 @@
 #ifndef WL_ECONOMY_SUPPLY_LIST_H
 #define WL_ECONOMY_SUPPLY_LIST_H
 
-#include <cstddef>
 #include <vector>
 
 namespace Widelands {
