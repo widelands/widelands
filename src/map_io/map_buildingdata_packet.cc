@@ -301,8 +301,8 @@ void MapBuildingdataPacket::read_constructionsite(
 					constructionsite.info_.intermediates.push_back(
 					   game.tribes().get_building_descr(game.tribes().building_index(fr.c_string())));
 				}
-				constructionsite.settings_.reset(
-				   BuildingSettings::load(game, constructionsite.owner().tribe(), fr));
+				constructionsite.settings_.reset(BuildingSettings::load(
+				   game, constructionsite.owner().tribe(), fr, tribes_lookup_table));
 			} else {
 				constructionsite.init_settings();
 			}

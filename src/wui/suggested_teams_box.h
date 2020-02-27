@@ -29,7 +29,6 @@
 #include "ui_basic/textarea.h"
 
 namespace UI {
-struct Box;
 
 struct SuggestedTeamsBox : public UI::Box {
 	SuggestedTeamsBox(Panel* parent,

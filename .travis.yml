@@ -55,6 +55,10 @@ jobs:
             - python-pip
       install: pip install sphinx
       script: ./.travis.sh documentation
+    - name: "Includes"
+      language: python
+      script: ./.travis.sh includes
+      cache: false
 
     - stage: compiler
       # Run this stage to test whether there are any error during compiling.
@@ -315,6 +319,8 @@ jobs:
       os: osx
       osx_image: xcode10.1
       env: BUILD_TYPE=Release BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=OFF
+  allow_failures:
+    - name: "Includes"
 
 language: cpp
 

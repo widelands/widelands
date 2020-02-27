@@ -25,16 +25,13 @@
 
 #include <SDL_keycode.h>
 
-#include "graphic/road_segments.h"
 #include "graphic/toolbar_imageset.h"
 #include "io/profile.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
-#include "notifications/notifications.h"
 #include "sound/note_sound.h"
 #include "ui_basic/box.h"
 #include "ui_basic/dropdown.h"
-#include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "wui/chat_overlay.h"
 #include "wui/debugconsole.h"
@@ -46,7 +43,6 @@ namespace Widelands {
 struct CoordPath;
 }
 
-class EdgeOverlayManager;
 class UniqueWindowHandler;
 
 struct WorkareaPreview {

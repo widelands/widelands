@@ -32,11 +32,6 @@
 
 class InteractiveGameBase;
 
-namespace UI {
-class Panel;
-struct Radiogroup;
-}  // namespace UI
-
 namespace Widelands {
 class Building;
 class ConstructionSite;

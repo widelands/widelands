@@ -33,9 +33,6 @@ class LuaTable;
 
 namespace Widelands {
 class Player;
-class BuildingDescr;
-class WareDescr;
-class WorkerDescr;
 struct Coords;
 }  // namespace Widelands
 

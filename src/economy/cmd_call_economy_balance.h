@@ -26,8 +26,6 @@
 
 namespace Widelands {
 class Economy;
-class Game;
-class MapObjectLoader;
 
 struct CmdCallEconomyBalance : public GameLogicCommand {
 	CmdCallEconomyBalance() : GameLogicCommand(0), timerid_(0) {

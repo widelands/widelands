@@ -28,10 +28,10 @@
 #include "ui_basic/checkbox.h"
 #include "ui_basic/progressbar.h"
 #include "ui_basic/radiobutton.h"
-#include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "wui/buildingwindow.h"
 #include "wui/inputqueuedisplay.h"
+#include "wui/waresdisplay.h"
 
 /**
  * Status window for construction sites.

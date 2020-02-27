@@ -31,7 +31,6 @@
 #include "random/random.h"
 #include "scripting/logic.h"
 
-struct ComputerPlayer;
 class InteractivePlayer;
 struct GameSettings;
 class GameController;
@@ -43,7 +42,6 @@ constexpr uint32_t kStatisticsSampleTime = 30000;
 // See forester_cache_
 constexpr int16_t kInvalidForesterEntry = -1;
 
-class ConstructionSite;
 struct Flag;
 struct Path;
 struct PlayerImmovable;
@@ -52,9 +50,7 @@ struct PortDock;
 enum class ScoutingDirection;
 enum class SoldierPreference : uint8_t;
 struct Ship;
-struct PlayerEndStatus;
 class TrainingSite;
-class MilitarySite;
 enum class StockPolicy;
 
 enum {
@@ -112,10 +108,7 @@ enum SyncEntry : uint8_t {
 	kBobSetPosition = 0xB8
 };
 
-class Player;
-class MapLoader;
 class PlayerCommand;
-class ReplayReader;
 class ReplayWriter;
 
 /** class Game
