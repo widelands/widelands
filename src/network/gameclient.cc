@@ -31,7 +31,6 @@
 #include "build_info.h"
 #include "config.h"
 #include "game_io/game_loader.h"
-#include "helper.h"
 #include "io/fileread.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filewrite.h"

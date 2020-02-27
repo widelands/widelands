@@ -31,8 +31,6 @@
 
 namespace Widelands {
 class Bob;
-class MapObject;
-class EditorGameBase;
 
 /*
  * This class helps to

@@ -33,7 +33,6 @@
 #include "logic/map.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
-#include "logic/widelands_geometry.h"
 
 constexpr int kMaxValue = 63;
 

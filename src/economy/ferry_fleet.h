@@ -24,13 +24,9 @@
 
 #include "base/macros.h"
 #include "logic/map_objects/map_object.h"
-#include "logic/widelands_geometry.h"
 
 namespace Widelands {
 
-class Economy;
-struct Flag;
-struct RoutingNodeNeighbour;
 struct Ferry;
 struct Waterway;
 

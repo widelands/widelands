@@ -26,7 +26,6 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "graphic/gl/blit_program.h"
-#include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/draw_line_program.h"
 #include "graphic/gl/fill_rect_program.h"
 #include "graphic/gl/utils.h"

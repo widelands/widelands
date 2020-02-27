@@ -36,6 +36,7 @@
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
 #include "ui_basic/progresswindow.h"
+#include "ui_basic/textarea.h"
 #include "wlapplication_options.h"
 
 inline EditorInteractive& MainMenuNewMap::eia() {

@@ -25,8 +25,6 @@
 #include <set>
 #include <vector>
 
-#include "graphic/font_handler.h"
-#include "graphic/text/font_set.h"
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/player.h"

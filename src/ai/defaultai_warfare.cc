@@ -19,6 +19,9 @@
 
 #include "ai/defaultai.h"
 
+#include "economy/wares_queue.h"
+#include "logic/map_objects/tribes/militarysite.h"
+
 using namespace Widelands;
 
 bool DefaultAI::check_enemy_sites(uint32_t const gametime) {

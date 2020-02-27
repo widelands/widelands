@@ -25,7 +25,6 @@
 #include "base/macros.h"
 #include "logic/map_objects/description_maintainer.h"
 
-class LuaInterface;
 class LuaTable;
 
 namespace Widelands {

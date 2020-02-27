@@ -20,6 +20,7 @@
 #include "ai/defaultai.h"
 
 #include "economy/ship_fleet.h"
+#include "economy/wares_queue.h"
 
 using namespace Widelands;
 

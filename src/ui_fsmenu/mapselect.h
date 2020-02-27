@@ -27,7 +27,6 @@
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/base.h"
 #include "ui_fsmenu/load_map_or_game.h"
 #include "wui/mapdetails.h"
 #include "wui/maptable.h"

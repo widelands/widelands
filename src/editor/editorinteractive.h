@@ -35,7 +35,6 @@
 #include "editor/tools/set_starting_pos_tool.h"
 #include "editor/tools/set_terrain_tool.h"
 #include "logic/map.h"
-#include "notifications/notifications.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/unique_window.h"

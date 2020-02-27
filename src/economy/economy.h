@@ -38,16 +38,11 @@
 
 namespace Widelands {
 
-class Game;
-class Player;
 class Soldier;
-class Warehouse;
 struct Flag;
 struct RSPairStruct;
-class Request;
 struct Route;
 struct Router;
-struct Supply;
 class Economy;
 
 struct NoteEconomy {
