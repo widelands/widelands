@@ -21,7 +21,6 @@
 
 #include <memory>
 
-#include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
