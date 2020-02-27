@@ -22,7 +22,6 @@
 #include <cassert>
 
 #include "base/wexception.h"
-#include "scripting/lua_errors.h"
 
 /*
  * Returns an error to lua. This method never returns as lua_error long jumps.

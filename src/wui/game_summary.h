@@ -20,7 +20,6 @@
 #ifndef WL_WUI_GAME_SUMMARY_H
 #define WL_WUI_GAME_SUMMARY_H
 
-#include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/table.h"

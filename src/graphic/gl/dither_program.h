@@ -28,8 +28,6 @@
 #include "logic/map_objects/description_maintainer.h"
 #include "logic/map_objects/world/terrain_description.h"
 
-class Texture;
-
 class DitherProgram {
 public:
 	DitherProgram();

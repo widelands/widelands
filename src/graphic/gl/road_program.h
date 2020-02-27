@@ -28,9 +28,6 @@
 #include "graphic/gl/utils.h"
 #include "graphic/road_segments.h"
 
-class Texture;
-class Surface;
-
 class RoadProgram {
 public:
 	// Compiles the program. Throws on error.

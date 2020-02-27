@@ -31,8 +31,6 @@
 #include "base/macros.h"
 #include "base/rect.h"
 #include "base/vector.h"
-#include "graphic/align.h"
-#include "graphic/font_handler.h"
 #include "graphic/styles/panel_styles.h"
 #include "sound/constants.h"
 

@@ -24,12 +24,9 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "base/macros.h"
-#include "graphic/align.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
-#include "ui_basic/mouse_constants.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/window.h"
 
