@@ -19,8 +19,6 @@
 
 #include "economy/router.h"
 
-#include <cstdlib>
-
 #include "economy/iroute.h"
 #include "economy/itransport_cost_calculator.h"
 #include "economy/routeastar.h"

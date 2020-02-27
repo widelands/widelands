@@ -19,8 +19,6 @@
 
 #include "graphic/surface.h"
 
-#include <cstdlib>
-
 #include <SDL.h>
 
 #include "base/rect.h"

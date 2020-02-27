@@ -19,7 +19,6 @@
 
 #include "logic/map_objects/bob.h"
 
-#include <cstdlib>
 #include <memory>
 
 #include <stdint.h>

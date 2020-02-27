@@ -23,7 +23,6 @@
 #include <clocale>
 #endif
 
-#include <cstdlib>
 #include <map>
 #include <utility>
 
