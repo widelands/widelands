@@ -21,7 +21,6 @@
 #define WL_UI_BASIC_TABLE_H
 
 #include <functional>
-#include <limits>
 #include <set>
 #include <vector>
 

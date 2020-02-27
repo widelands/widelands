@@ -19,7 +19,6 @@
 
 #include "wui/game_chat_panel.h"
 
-#include <limits>
 #include <string>
 
 #include "sound/sound_handler.h"

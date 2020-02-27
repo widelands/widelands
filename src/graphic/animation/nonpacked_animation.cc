@@ -20,7 +20,6 @@
 #include "graphic/animation/nonpacked_animation.h"
 
 #include <cassert>
-#include <limits>
 #include <memory>
 
 #include <boost/algorithm/string/replace.hpp>

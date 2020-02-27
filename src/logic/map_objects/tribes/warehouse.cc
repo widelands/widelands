@@ -19,8 +19,6 @@
 
 #include "logic/map_objects/tribes/warehouse.h"
 
-#include <limits>
-
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"

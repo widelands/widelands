@@ -21,7 +21,6 @@
 #define WL_LOGIC_FIELD_H
 
 #include <cassert>
-#include <limits>
 
 #include "base/wexception.h"
 #include "graphic/playercolor.h"
