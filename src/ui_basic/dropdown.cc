@@ -19,8 +19,6 @@
 
 #include "ui_basic/dropdown.h"
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"

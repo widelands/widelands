@@ -20,7 +20,6 @@
 #include "scripting/lua_bases.h"
 
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 
 #include "economy/economy.h"
 #include "io/filesystem/layered_filesystem.h"

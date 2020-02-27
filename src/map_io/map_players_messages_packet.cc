@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "io/profile.h"
 #include "logic/game_data_error.h"
 #include "logic/message.h"

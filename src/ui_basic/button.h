@@ -20,10 +20,6 @@
 #ifndef WL_UI_BASIC_BUTTON_H
 #define WL_UI_BASIC_BUTTON_H
 
-#include <boost/bind.hpp>
-#include <boost/function.hpp>
-#include <boost/signals2.hpp>
-
 #include "graphic/styles/button_style.h"
 #include "ui_basic/panel.h"
 
