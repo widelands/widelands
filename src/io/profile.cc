@@ -20,7 +20,6 @@
 #include "io/profile.h"
 
 #include <cstdarg>
-#include <cstring>
 #include <limits>
 #include <string>
 

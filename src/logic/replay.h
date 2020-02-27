@@ -28,7 +28,6 @@
  * playercommands.
  */
 
-#include <cstring>
 #include <string>
 
 #include <stdint.h>

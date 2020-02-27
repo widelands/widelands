@@ -20,7 +20,6 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_BUILDING_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_BUILDING_H
 
-#include <cstring>
 #include <string>
 #include <vector>
 

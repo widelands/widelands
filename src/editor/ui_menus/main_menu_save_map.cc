@@ -19,7 +19,6 @@
 
 #include "editor/ui_menus/main_menu_save_map.h"
 
-#include <cstring>
 #include <memory>
 #include <string>
 

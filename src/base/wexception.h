@@ -20,7 +20,6 @@
 #ifndef WL_BASE_WEXCEPTION_H
 #define WL_BASE_WEXCEPTION_H
 
-#include <cstring>
 #include <exception>
 #include <string>
 

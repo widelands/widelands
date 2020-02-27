@@ -20,7 +20,6 @@
 #ifndef WL_UI_FSMENU_OPTIONS_H
 #define WL_UI_FSMENU_OPTIONS_H
 
-#include <cstring>
 #include <memory>
 #include <string>
 #include <vector>

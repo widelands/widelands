@@ -20,7 +20,6 @@
 #ifndef WL_UI_BASIC_PANEL_H
 #define WL_UI_BASIC_PANEL_H
 
-#include <cstring>
 #include <string>
 
 #include <SDL_keyboard.h>

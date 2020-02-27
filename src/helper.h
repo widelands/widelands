@@ -20,7 +20,6 @@
 #ifndef WL_HELPER_H
 #define WL_HELPER_H
 
-#include <cstring>
 #include <string>
 #include <vector>
 

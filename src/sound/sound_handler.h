@@ -21,7 +21,6 @@
 #define WL_SOUND_SOUND_HANDLER_H
 
 #include <cassert>
-#include <cstring>
 #include <map>
 #include <memory>
 #include <string>

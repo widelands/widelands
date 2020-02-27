@@ -19,7 +19,6 @@
 
 #include "editor/ui_menus/main_menu_random_map.h"
 
-#include <cstring>
 #include <sstream>
 #include <string>
 #include <vector>

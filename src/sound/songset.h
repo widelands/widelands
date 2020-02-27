@@ -20,7 +20,6 @@
 #ifndef WL_SOUND_SONGSET_H
 #define WL_SOUND_SONGSET_H
 
-#include <cstring>
 #include <string>
 #include <vector>
 

@@ -17,7 +17,6 @@
  *
  */
 
-#include <cstring>
 #include <exception>
 #include <memory>
 

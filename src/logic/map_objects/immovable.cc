@@ -19,7 +19,6 @@
 
 #include "logic/map_objects/immovable.h"
 
-#include <cstring>
 #include <memory>
 
 #include <boost/algorithm/string.hpp>

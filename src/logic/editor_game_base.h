@@ -20,7 +20,6 @@
 #ifndef WL_LOGIC_EDITOR_GAME_BASE_H
 #define WL_LOGIC_EDITOR_GAME_BASE_H
 
-#include <cstring>
 #include <memory>
 #include <string>
 #include <vector>

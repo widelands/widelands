@@ -20,7 +20,6 @@
 #ifndef WL_UI_FSMENU_NETSETUP_LAN_H
 #define WL_UI_FSMENU_NETSETUP_LAN_H
 
-#include <cstring>
 #include <list>
 #include <string>
 

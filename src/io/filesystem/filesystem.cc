@@ -22,7 +22,6 @@
 #include "io/filesystem/filesystem.h"
 
 #include <cassert>
-#include <cstring>
 #include <iterator>
 #include <list>
 #include <string>

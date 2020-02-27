@@ -19,7 +19,6 @@
 
 #include "logic/map_objects/tribes/building.h"
 
-#include <cstring>
 #include <memory>
 #include <sstream>
 
