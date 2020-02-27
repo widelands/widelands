@@ -83,9 +83,14 @@ struct Field {
 	struct Resources {
 		DescriptionIndex d : 4, r : 4;
 	};
+#ifndef WIN32
 	static_assert(sizeof(Resources) == sizeof(DescriptionIndex) / 2,
+	              "assert(sizeof(Resources) == sizeof(DescriptionIndex) / 2) failed.");
+#else
+    static_assert(sizeof(Resources) == sizeof(DescriptionIndex),
 	              "assert(sizeof(Resources) == sizeof(DescriptionIndex)) failed.");
-	struct ResourceAmounts {
+#endif
+    struct ResourceAmounts {
 		ResourceAmount d : 4, r : 4;
 	};
 	static_assert(sizeof(ResourceAmounts) == 1, "assert(sizeof(ResourceAmounts) == 1) failed.");
@@ -281,18 +286,10 @@ private:
 #pragma pack(pop)
 
 // Check that Field is tightly packed.
-#ifndef WIN32
 static_assert(sizeof(Field) ==
                  sizeof(void*) * 2 + sizeof(RoadSegment) * 3 + sizeof(DescriptionIndex) * 3 +
                     sizeof(uint8_t) * 7,
               "Field is not tightly packed.");
-#else
-// NOCOM currently identical with non-Windows
-static_assert(sizeof(Field) ==
-                 sizeof(void*) * 2 + sizeof(RoadSegment) * 3 + sizeof(DescriptionIndex) * 3 +
-                    sizeof(uint8_t) * 7,
-              "Field is not tightly packed.");
-#endif
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_FIELD_H
