@@ -35,6 +35,7 @@
 #include "economy/flag.h"
 #include "economy/portdock.h"
 #include "economy/road.h"
+#include "economy/wares_queue.h"
 #include "logic/map.h"
 #include "logic/map_objects/findbob.h"
 #include "logic/map_objects/findimmovable.h"

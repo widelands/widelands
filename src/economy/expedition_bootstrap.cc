@@ -21,7 +21,6 @@
 
 #include <memory>
 
-#include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/portdock.h"
 #include "economy/wares_queue.h"

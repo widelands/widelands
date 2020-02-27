@@ -88,14 +88,17 @@ else
   exit 1;
 fi
 
-# Fix formatting for C++, Lua & Python
-# python utils/fix_formatting.py
+# Fix formatting for Lua
+python utils/fix_formatting.py --lua --dir data/i18n
+python utils/fix_formatting.py --lua --dir data/txts
 
 # Stage changes
 # - Translations
 git add po/*/*.po po/*/*.pot data/i18n/locales/*.json xdg/translations/*.json || true
 # - Authors
 git add data/txts/*.lua || true
+# - Locale data
+git add data/i18n/*.lua || true
 # - Appdata
 git add xdg/org.widelands.Widelands.appdata.xml xdg/org.widelands.Widelands.desktop || true
 # - Statistics

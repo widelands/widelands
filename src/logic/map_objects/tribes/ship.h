@@ -30,9 +30,7 @@
 
 namespace Widelands {
 
-class Economy;
 struct ShipFleet;
-class PortDock;
 
 // This can't be part of the Ship class because of forward declaration in game.h
 // Keep the order of entries for savegame compatibility.

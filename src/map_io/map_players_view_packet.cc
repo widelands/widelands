@@ -31,6 +31,7 @@
 #include "economy/road.h"
 #include "economy/waterway.h"
 #include "io/fileread.h"
+#include "io/filesystem/filesystem_exceptions.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
@@ -167,7 +168,7 @@ namespace {
 	if (!(file).end_of_file())                                                                      \
 		throw GameDataError(                                                                         \
 		   "MapPlayersViewPacket::read: player %u:"                                                  \
-		   "Found %lu trailing bytes in \"%s\"",                                                     \
+		   "Found %" PRIuS " trailing bytes in \"%s\"",                                              \
 		   plnum, static_cast<long unsigned int>((file).get_size() - (file).get_pos()), filename);
 
 // Errors for the Read* functions.
@@ -535,7 +536,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					} catch (const FileRead::FileBoundaryExceeded&) {
 						throw GameDataError(
 						   "MapPlayersViewPacket::read: player %u: in "
-						   "\"%s\":%lu: node (%i, %i): unexpected end of file "
+						   "\"%s\":%" PRIuS ": node (%i, %i): unexpected end of file "
 						   "while reading time_node_last_unseen",
 						   plnum, unseen_times_filename,
 						   static_cast<long unsigned int>(unseen_times_file.get_pos() - 4), f.x, f.y);
@@ -546,14 +547,14 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					} catch (const FileRead::FileBoundaryExceeded&) {
 						throw GameDataError(
 						   "MapPlayersViewPacket::read: player %u: in "
-						   "\"%s\":%lu: node (%i, %i): unexpected end of file "
+						   "\"%s\":%" PRIuS ": node (%i, %i): unexpected end of file "
 						   "while reading owner",
 						   plnum, unseen_times_filename,
 						   static_cast<long unsigned int>(unseen_times_file.get_pos() - 1), f.x, f.y);
 					}
 					if (nr_players < owner) {
 						throw GameDataError("MapPlayersViewPacket::read: player %u: in "
-						                    "\"%s\":%lu & 0xf: node (%i, %i): Player thinks that "
+						                    "\"%s\":%" PRIuS " & 0xf: node (%i, %i): Player thinks that "
 						                    "this node is owned by player %u, but there are only %u "
 						                    "players",
 						                    plnum, owners_filename,
@@ -743,7 +744,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						} catch (const FileRead::FileBoundaryExceeded&) {
 							throw GameDataError(
 							   "MapPlayersViewPacket::read: player %u: in "
-							   "\"%s\":%lu: node (%i, %i) t = D: unexpected end of "
+							   "\"%s\":%" PRIuS ": node (%i, %i) t = D: unexpected end of "
 							   "file while reading time_triangle_last_surveyed",
 							   plnum, survey_times_filename,
 							   static_cast<long unsigned int>(survey_times_file.get_pos() - 4), f.x, f.y);
@@ -778,7 +779,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						} catch (const FileRead::FileBoundaryExceeded&) {
 							throw GameDataError(
 							   "MapPlayersViewPacket::read: player %u: in "
-							   "\"%s\":%lu: node (%i, %i) t = R: unexpected end of "
+							   "\"%s\":%" PRIuS ": node (%i, %i) t = R: unexpected end of "
 							   "file while reading time_triangle_last_surveyed",
 							   plnum, survey_times_filename,
 							   static_cast<long unsigned int>(survey_times_file.get_pos() - 4), f.x, f.y);
