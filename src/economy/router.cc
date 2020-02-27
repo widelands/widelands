@@ -19,7 +19,6 @@
 
 #include "economy/router.h"
 
-#include <cassert>
 #include <cstdio>
 #include <cstdlib>
 

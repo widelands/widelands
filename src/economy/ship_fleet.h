@@ -20,6 +20,8 @@
 #ifndef WL_ECONOMY_SHIP_FLEET_H
 #define WL_ECONOMY_SHIP_FLEET_H
 
+#include <memory>
+
 #include "base/macros.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/wareworker.h"

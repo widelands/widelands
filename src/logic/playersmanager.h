@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_PLAYERSMANAGER_H
 #define WL_LOGIC_PLAYERSMANAGER_H
 
+#include <cassert>
 #include <string>
 #include <vector>
 

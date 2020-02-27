@@ -19,6 +19,8 @@
 
 #include "io/fileread.h"
 
+#include <cassert>
+
 FileRead::FileRead() : data_(nullptr), length_(0) {
 }
 

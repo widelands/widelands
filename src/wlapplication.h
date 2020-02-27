@@ -29,7 +29,6 @@
 #endif
 #endif
 
-#include <cassert>
 #include <cstring>
 #include <map>
 #include <stdexcept>

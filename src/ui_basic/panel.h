@@ -20,7 +20,6 @@
 #ifndef WL_UI_BASIC_PANEL_H
 #define WL_UI_BASIC_PANEL_H
 
-#include <cassert>
 #include <cstring>
 #include <string>
 

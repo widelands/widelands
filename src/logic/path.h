@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_PATH_H
 #define WL_LOGIC_PATH_H
 
+#include <cassert>
 #include <vector>
 
 #include "logic/widelands.h"

@@ -19,6 +19,7 @@
 
 #include "wlapplication.h"
 
+#include <cassert>
 #include <cerrno>
 #ifndef _WIN32
 #include <csignal>

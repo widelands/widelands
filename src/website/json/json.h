@@ -20,7 +20,6 @@
 #ifndef WL_WEBSITE_JSON_JSON_H
 #define WL_WEBSITE_JSON_JSON_H
 
-#include <cassert>
 #include <memory>
 #include <string>
 #include <vector>

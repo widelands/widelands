@@ -19,7 +19,6 @@
 
 #include "io/filesystem/disk_filesystem.h"
 
-#include <cassert>
 #include <cerrno>
 
 #include <sys/stat.h>

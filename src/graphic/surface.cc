@@ -19,7 +19,6 @@
 
 #include "graphic/surface.h"
 
-#include <cassert>
 #include <cmath>
 #include <cstdlib>
 

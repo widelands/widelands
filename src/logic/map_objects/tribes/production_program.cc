@@ -19,6 +19,7 @@
 
 #include "logic/map_objects/tribes/production_program.h"
 
+#include <cassert>
 #include <memory>
 #include <sstream>
 
