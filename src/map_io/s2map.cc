@@ -39,7 +39,6 @@
 #include "logic/mapregion.h"
 #include "map_io/map_loader.h"
 #include "map_io/world_legacy_lookup_table.h"
-#include "scripting/lua_interface.h"
 
 using std::cerr;
 using std::endl;

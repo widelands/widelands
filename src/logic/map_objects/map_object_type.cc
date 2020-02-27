@@ -19,7 +19,6 @@
 
 #include "logic/map_objects/map_object_type.h"
 
-#include "base/macros.h"
 #include "base/wexception.h"
 
 namespace Widelands {

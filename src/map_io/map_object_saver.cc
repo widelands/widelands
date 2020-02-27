@@ -30,7 +30,6 @@
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/tribes/battle.h"
 #include "logic/map_objects/tribes/building.h"
-#include "logic/map_objects/tribes/ware_descr.h"
 
 namespace Widelands {
 

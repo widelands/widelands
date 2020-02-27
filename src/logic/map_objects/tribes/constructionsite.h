@@ -28,19 +28,10 @@
 #include "logic/map_objects/tribes/partially_finished_building.h"
 #include "scripting/lua_table.h"
 
-class FileRead;
-class FileWrite;
-
 namespace Widelands {
 
 class Building;
-class MilitarySiteDescr;
-class ProductionSiteDescr;
-class Request;
 enum class StockPolicy;
-class TrainingSiteDescr;
-class WarehouseDescr;
-class WaresQueue;
 
 /// Per-player and per-field constructionsite information
 struct ConstructionsiteInformation {

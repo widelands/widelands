@@ -25,7 +25,6 @@
 #include <string>
 
 #include "economy/economy.h"
-#include "logic/map_objects/tribes/tribe_descr.h"
 #include "notifications/notifications.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"

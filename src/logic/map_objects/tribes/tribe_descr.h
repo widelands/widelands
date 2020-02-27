@@ -27,11 +27,9 @@
 #include "base/macros.h"
 #include "graphic/animation/animation.h"
 #include "graphic/toolbar_imageset.h"
-#include "logic/map_objects/description_maintainer.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/road_textures.h"
-#include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/ware_descr.h"
@@ -40,13 +38,6 @@
 #include "logic/widelands.h"
 
 namespace Widelands {
-
-class ResourceDescription;
-class WareDescr;
-class Warehouse;
-class WorkerDescr;
-class World;
-class BuildingDescr;
 
 /*
  * Resource indicators:

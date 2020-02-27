@@ -25,6 +25,7 @@
 #include "base/log.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
+#include "scripting/lua_table.h"
 
 namespace Widelands {
 DescriptionManager::DescriptionManager(LuaInterface* lua) : lua_(lua) {

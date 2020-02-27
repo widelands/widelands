@@ -23,6 +23,7 @@
 
 #include "base/macros.h"
 #include "graphic/surface.h"
+#include "graphic/texture.h"
 
 /**
  * The screen.

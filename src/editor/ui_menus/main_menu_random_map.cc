@@ -38,7 +38,6 @@
 #include "logic/map_objects/world/world.h"
 #include "random/random.h"
 #include "ui_basic/messagebox.h"
-#include "ui_basic/progresswindow.h"
 #include "wlapplication_options.h"
 
 namespace {

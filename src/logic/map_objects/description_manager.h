@@ -29,7 +29,6 @@
 #include "io/filesystem/filesystem.h"
 #include "logic/map_objects/map_object_type.h"
 #include "scripting/lua_interface.h"
-#include "scripting/lua_table.h"
 
 namespace Widelands {
 

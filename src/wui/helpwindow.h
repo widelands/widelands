@@ -22,16 +22,11 @@
 
 #include <memory>
 
-#include "graphic/align.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/unique_window.h"
 
 class LuaInterface;
-
-namespace Widelands {
-class BuildingDescr;
-}
 
 namespace UI {
 

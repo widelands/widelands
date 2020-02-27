@@ -25,7 +25,6 @@
 #include <memory>
 
 #include "graphic/graphic.h"
-#include "notifications/notifications.h"
 
 namespace UI {
 /**

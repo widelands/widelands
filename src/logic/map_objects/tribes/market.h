@@ -24,6 +24,7 @@
 
 #include "economy/request.h"
 #include "economy/wares_queue.h"
+#include "logic/map_objects/tribes/bill_of_materials.h"
 #include "logic/map_objects/tribes/building.h"
 
 namespace Widelands {

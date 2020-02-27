@@ -22,11 +22,7 @@
 
 #include "logic/map.h"
 
-class LuaInterface;
-
 namespace Widelands {
-
-class EditorGameBase;
 
 /// Loads a map from a file. It firsts only loads small chunks of information
 /// like size, nr of players for the map select dialog. For this loading

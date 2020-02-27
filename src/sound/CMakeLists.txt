@@ -28,7 +28,6 @@ wl_library(sound
   DEPENDS
     base_i18n
     base_log
-    helper
     io_fileread
     io_filesystem
     logic_exceptions

@@ -27,22 +27,13 @@
 #include <boost/algorithm/string.hpp>
 
 #include "base/i18n.h"
-#include "io/filesystem/filesystem.h"
 #include "ui_basic/button.h"
 #include "ui_basic/table.h"
-#include "ui_basic/textarea.h"
-#include "wui/maptable.h"
 
 namespace Widelands {
-class EditorGameBase;
 class Game;
 class Map;
-class MapLoader;
 }  // namespace Widelands
-class Image;
-class RenderTarget;
-class GameController;
-struct GameSettingsProvider;
 
 /// Select a Map, Saved Game or Replay in Fullscreen Mode.
 /// This class defines common coordinates for these UI screens.

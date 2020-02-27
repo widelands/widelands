@@ -29,7 +29,7 @@
 
 #include "base/macros.h"
 #include "graphic/image.h"
-#include "graphic/texture_atlas.h"
+#include "graphic/texture.h"
 
 // For historic reasons, most part of the Widelands code base expect that an
 // Image stays valid for the whole duration of the program run. This class is

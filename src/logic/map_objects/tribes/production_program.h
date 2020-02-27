@@ -45,8 +45,6 @@ class Game;
 class ImmovableDescr;
 class ProductionSiteDescr;
 class ProductionSite;
-class TribeDescr;
-class Tribes;
 class Worker;
 class World;
 

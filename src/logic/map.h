@@ -39,18 +39,14 @@
 #include "logic/widelands_geometry.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
-#include "random/random.h"
 
 class FileSystem;
-class Image;
 struct S2MapLoader;
 
 namespace Widelands {
 
 class EditorGameBase;
 class MapLoader;
-class Objective;
-struct BaseImmovable;
 struct MapGenerator;
 struct PathfieldManager;
 class World;

@@ -28,8 +28,6 @@
 
 namespace Widelands {
 
-class Building;
-
 /*
 DismantleSite
 -------------
