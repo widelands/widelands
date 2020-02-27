@@ -24,13 +24,10 @@
 #include <boost/function.hpp>
 #include <boost/signals2.hpp>
 
-#include "graphic/color.h"
 #include "graphic/styles/button_style.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
-
-struct Font;
 
 enum class ButtonDisableStyle {
 	kMonochrome = 2,   // Greyed out. Can be combined with the other 2 styles.

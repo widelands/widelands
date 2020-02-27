@@ -23,7 +23,6 @@
 #include "economy/supply.h"
 
 namespace Widelands {
-class Worker;
 class Economy;
 
 struct IdleWorkerSupply : public Supply {

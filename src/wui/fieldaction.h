@@ -23,12 +23,10 @@
 #include "ui_basic/unique_window.h"
 
 namespace Widelands {
-class Building;
 class Player;
-struct PlayerImmovable;
 }  // namespace Widelands
+
 class InteractiveBase;
-class InteractivePlayer;
 
 // fieldaction.cc
 void show_field_action(InteractiveBase* parent,

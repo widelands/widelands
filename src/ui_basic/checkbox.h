@@ -22,7 +22,7 @@
 
 #include <boost/signals2.hpp>
 
-#include "graphic/color.h"
+#include "graphic/text/rendered_text.h"
 #include "ui_basic/panel.h"
 
 constexpr int kStateboxSize = 20;

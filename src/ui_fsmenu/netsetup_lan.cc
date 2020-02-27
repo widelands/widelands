@@ -20,7 +20,6 @@
 #include "ui_fsmenu/netsetup_lan.h"
 
 #include "base/i18n.h"
-#include "base/macros.h"
 #include "graphic/graphic.h"
 #include "network/constants.h"
 #include "network/internet_gaming.h"

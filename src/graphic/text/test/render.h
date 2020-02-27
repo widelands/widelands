@@ -25,8 +25,6 @@
 
 #include "graphic/text/rt_render.h"
 
-class SDLSurface;
-
 // A stand alone richtext renderer for tests and binaries.
 class StandaloneRenderer {
 public:

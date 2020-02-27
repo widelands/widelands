@@ -24,11 +24,7 @@
 
 #include "editor/tools/draw_tool.h"
 #include "editor/tools/tool.h"
-
-class EditorInteractive;
-namespace UI {
-struct Button;
-}
+#include "ui_basic/button.h"
 
 /**
  * The all actions done with an editor tool are saved on a stack to

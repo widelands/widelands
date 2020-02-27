@@ -25,7 +25,6 @@
 #include "logic/game.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/walkingdir.h"
-#include "notifications/notifications.h"
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
 #include "wui/interactive_gamebase.h"

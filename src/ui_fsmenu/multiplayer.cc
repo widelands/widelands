@@ -22,6 +22,7 @@
 #include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "network/internet_gaming.h"
+#include "network/internet_gaming_protocol.h"
 #include "random/random.h"
 #include "ui_basic/messagebox.h"
 #include "wlapplication_options.h"

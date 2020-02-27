@@ -24,12 +24,9 @@
 #include <memory>
 #include <string>
 
-#include "graphic/font_handler.h"
-#include "graphic/text/font_set.h"
 #include "network/network_player_settings_backend.h"
 #include "ui_basic/box.h"
 #include "ui_basic/panel.h"
-#include "ui_basic/textarea.h"
 
 struct GameSettingsProvider;
 struct MultiPlayerClientGroup;

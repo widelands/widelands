@@ -23,7 +23,6 @@
 #include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "io/machdep.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/map_object.h"

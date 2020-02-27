@@ -23,8 +23,8 @@
 #include "base/macros.h"
 #include "graphic/animation/diranimations.h"
 #include "logic/map_objects/bob.h"
+#include "logic/map_objects/world/editor_category.h"
 
-class LuaTable;
 class WorldLegacyLookupTable;
 
 namespace Widelands {

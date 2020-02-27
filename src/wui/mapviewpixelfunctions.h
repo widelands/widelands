@@ -26,10 +26,6 @@
 #include "logic/widelands_geometry.h"
 #include "wui/mapviewpixelconstants.h"
 
-namespace Widelands {
-class Map;
-}
-
 namespace MapviewPixelFunctions {
 
 float calc_brightness(int32_t l, int32_t r, int32_t tl, int32_t tr, int32_t bl, int32_t br);
