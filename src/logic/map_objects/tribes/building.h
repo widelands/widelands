@@ -24,8 +24,6 @@
 #include <string>
 #include <vector>
 
-#include <boost/signals2.hpp>
-
 #include "ai/ai_hints.h"
 #include "base/macros.h"
 #include "logic/map_objects/buildcost.h"

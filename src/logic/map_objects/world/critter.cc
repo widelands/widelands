@@ -23,7 +23,6 @@
 #include <memory>
 #include <string>
 
-#include <boost/format.hpp>
 #include <stdint.h>
 
 #include "base/wexception.h"

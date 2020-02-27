@@ -20,8 +20,6 @@
 #ifndef WL_ECONOMY_SHIP_FLEET_H
 #define WL_ECONOMY_SHIP_FLEET_H
 
-#include <boost/shared_ptr.hpp>
-
 #include "base/macros.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/wareworker.h"
@@ -72,7 +70,7 @@ constexpr uint32_t kRouteNotCalculated = std::numeric_limits<uint32_t>::max();
 struct ShipFleet : MapObject {
 	struct PortPath {
 		int32_t cost;
-		boost::shared_ptr<Path> path;
+		std::shared_ptr<Path> path;
 
 		PortPath() : cost(-1) {
 		}
