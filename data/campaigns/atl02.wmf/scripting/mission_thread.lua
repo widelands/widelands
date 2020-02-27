@@ -23,7 +23,7 @@ function mining()
    while not check_for_buildings(p1, {
       atlanteans_coalmine = 1,
       atlanteans_ironmine = 1,
-      atlanteans_gold = 1
+      atlanteans_goldmine = 1
    }) do sleep(3731) end
    mining.done = true
    msg_boxes(mining_established)
