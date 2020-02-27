@@ -33,7 +33,6 @@
 #include "economy/portdock.h"
 #include "economy/request.h"
 #include "economy/ship_fleet.h"
-#include "economy/ware_instance.h"
 #include "economy/warehousesupply.h"
 #include "economy/wares_queue.h"
 #include "logic/editor_game_base.h"

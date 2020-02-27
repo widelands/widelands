@@ -34,8 +34,6 @@
 #include "logic/cmd_queue.h"
 #include "network/network_protocol.h"
 
-class FileRead;
-
 constexpr size_t kNetworkBufferSize = 512;
 
 /**

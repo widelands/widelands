@@ -25,7 +25,6 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
-#include "map_io/map_object_saver.h"
 
 constexpr uint16_t kCurrentPacketVersion = 5;
 

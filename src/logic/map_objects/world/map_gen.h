@@ -26,11 +26,8 @@
 
 #include "logic/map_objects/world/terrain_description.h"
 
-class LuaTable;
-
 namespace Widelands {
 
-class World;
 struct MapGenInfo;
 
 /// Holds world and area specific information for the map generator.

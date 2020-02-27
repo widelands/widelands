@@ -28,15 +28,6 @@
 #include "logic/map_objects/tribes/wareworker.h"
 #include "ui_basic/textarea.h"
 
-namespace UI {
-struct Textarea;
-}
-
-namespace Widelands {
-class TribeDescr;
-struct WareList;
-}  // namespace Widelands
-
 using WaresOrderCoords = std::map<Widelands::DescriptionIndex, Widelands::Coords>;
 
 /**

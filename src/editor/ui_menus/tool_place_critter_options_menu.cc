@@ -28,9 +28,7 @@
 #include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/world.h"
 #include "ui_basic/box.h"
-#include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
-#include "ui_basic/textarea.h"
 
 namespace {
 UI::Checkbox* create_critter_checkbox(UI::Panel* parent,

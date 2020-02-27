@@ -27,7 +27,6 @@
 #include "logic/player_end_result.h"
 #include "network/nethost_interface.h"
 #include "network/network.h"
-#include "ui_basic/unique_window.h"
 
 struct ChatMessage;
 struct GameHostImpl;

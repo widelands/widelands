@@ -25,10 +25,7 @@
 #include <stdint.h>
 
 #include "base/macros.h"
-#include "base/rect.h"
 #include "graphic/gl/blit_data.h"
-
-class Texture;
 
 /**
  * Interface to a bitmap that can act as the source of a rendering

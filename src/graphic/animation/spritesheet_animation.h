@@ -26,7 +26,6 @@
 #include <vector>
 
 #include "base/rect.h"
-#include "base/vector.h"
 #include "graphic/animation/animation.h"
 #include "graphic/color.h"
 #include "graphic/image.h"

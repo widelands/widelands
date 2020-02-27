@@ -25,7 +25,6 @@
 
 #include "base/i18n.h"
 #include "logic/map_objects/tribes/ship.h"
-#include "notifications/notifications.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/table.h"
