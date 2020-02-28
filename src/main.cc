@@ -18,7 +18,6 @@
  */
 
 #include <iostream>
-#include <stdexcept>
 #include <typeinfo>
 
 #include <SDL_main.h>

@@ -30,7 +30,6 @@
 #endif
 
 #include <map>
-#include <stdexcept>
 #include <string>
 
 #include <SDL_events.h>

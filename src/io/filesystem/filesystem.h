@@ -21,7 +21,6 @@
 #define WL_IO_FILESYSTEM_FILESYSTEM_H
 
 #include <set>
-#include <stdexcept>
 #include <string>
 #include <vector>
 

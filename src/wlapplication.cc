@@ -25,7 +25,6 @@
 #endif
 #include <iostream>
 #include <memory>
-#include <stdexcept>
 #include <string>
 
 #include <SDL_image.h>
