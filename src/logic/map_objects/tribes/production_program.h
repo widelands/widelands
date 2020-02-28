@@ -21,7 +21,6 @@
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_PRODUCTION_PROGRAM_H
 
 #include <memory>
-#include <set>
 #include <string>
 #include <vector>
 

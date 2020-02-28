@@ -20,7 +20,6 @@
 #ifndef WL_WUI_MAPAUTHORDATA_H
 #define WL_WUI_MAPAUTHORDATA_H
 
-#include <set>
 #include <string>
 #include <vector>
 

@@ -21,7 +21,6 @@
 #define WL_WUI_ATTACK_BOX_H
 
 #include <memory>
-#include <set>
 #include <vector>
 
 #include "logic/map_objects/bob.h"

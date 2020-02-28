@@ -21,7 +21,6 @@
 #define WL_LOGIC_MAP_H
 
 #include <memory>
-#include <set>
 #include <string>
 #include <vector>
 
