@@ -22,7 +22,6 @@
 
 #include <map>
 #include <memory>
-#include <vector>
 
 #include "base/macros.h"
 #include "graphic/image.h"

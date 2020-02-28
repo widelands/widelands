@@ -22,7 +22,6 @@
 
 #include <memory>
 #include <unordered_set>
-#include <vector>
 
 #include "graphic/image.h"
 #include "wui/mapauthordata.h"

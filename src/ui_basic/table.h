@@ -22,7 +22,6 @@
 
 #include <functional>
 #include <set>
-#include <vector>
 
 #include "graphic/align.h"
 #include "graphic/styles/font_style.h"

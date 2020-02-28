@@ -21,7 +21,6 @@
 #define WL_LOGIC_WIDELANDS_GEOMETRY_H
 
 #include <tuple>
-#include <vector>
 
 namespace Widelands {
 

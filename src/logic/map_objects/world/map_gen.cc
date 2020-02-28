@@ -20,7 +20,6 @@
 #include "logic/map_objects/world/map_gen.h"
 
 #include <memory>
-#include <vector>
 
 #include "base/wexception.h"
 #include "logic/game_data_error.h"

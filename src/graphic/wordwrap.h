@@ -20,7 +20,6 @@
 #define WL_GRAPHIC_WORDWRAP_H
 
 #include <memory>
-#include <vector>
 
 #include <unicode/uchar.h>
 

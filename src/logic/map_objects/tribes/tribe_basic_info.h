@@ -21,7 +21,6 @@
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_TRIBE_BASIC_INFO_H
 
 #include <memory>
-#include <vector>
 
 #include "scripting/lua_table.h"
 

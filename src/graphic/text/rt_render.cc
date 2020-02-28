@@ -21,7 +21,6 @@
 
 #include <memory>
 #include <queue>
-#include <vector>
 
 #include <SDL.h>
 #include <boost/algorithm/string.hpp>

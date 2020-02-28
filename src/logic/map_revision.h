@@ -21,7 +21,6 @@
 #define WL_LOGIC_MAP_REVISION_H
 
 #include <string>
-#include <vector>
 
 namespace Widelands {
 

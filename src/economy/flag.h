@@ -21,7 +21,6 @@
 #define WL_ECONOMY_FLAG_H
 
 #include <deque>
-#include <vector>
 
 #include "base/macros.h"
 #include "economy/routing_node.h"

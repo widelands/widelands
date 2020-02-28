@@ -21,7 +21,6 @@
 #define WL_WEBSITE_JSON_JSON_H
 
 #include <memory>
-#include <vector>
 
 #include "io/filesystem/filesystem.h"
 #include "website/json/value.h"

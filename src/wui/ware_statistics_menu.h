@@ -20,8 +20,6 @@
 #ifndef WL_WUI_WARE_STATISTICS_MENU_H
 #define WL_WUI_WARE_STATISTICS_MENU_H
 
-#include <vector>
-
 #include "logic/widelands.h"
 #include "ui_basic/unique_window.h"
 #include "wui/plot_area.h"

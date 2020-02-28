@@ -20,8 +20,6 @@
 #ifndef WL_UI_FSMENU_CAMPAIGN_SELECT_H
 #define WL_UI_FSMENU_CAMPAIGN_SELECT_H
 
-#include <vector>
-
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/campaigndetails.h"

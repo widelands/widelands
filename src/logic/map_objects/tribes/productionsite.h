@@ -21,7 +21,6 @@
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_PRODUCTIONSITE_H
 
 #include <memory>
-#include <vector>
 
 #include "base/macros.h"
 #include "logic/map_objects/tribes/bill_of_materials.h"

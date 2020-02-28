@@ -21,7 +21,6 @@
 
 #include <memory>
 #include <unordered_set>
-#include <vector>
 
 #include <boost/algorithm/string/predicate.hpp>
 

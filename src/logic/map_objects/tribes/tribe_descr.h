@@ -21,7 +21,6 @@
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_TRIBE_DESCR_H
 
 #include <memory>
-#include <vector>
 
 #include "base/macros.h"
 #include "graphic/animation/animation.h"

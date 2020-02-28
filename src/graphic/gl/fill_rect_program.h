@@ -20,8 +20,6 @@
 #ifndef WL_GRAPHIC_GL_FILL_RECT_PROGRAM_H
 #define WL_GRAPHIC_GL_FILL_RECT_PROGRAM_H
 
-#include <vector>
-
 #include "base/rect.h"
 #include "graphic/blend_mode.h"
 #include "graphic/color.h"

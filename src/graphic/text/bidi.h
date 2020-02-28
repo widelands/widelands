@@ -20,8 +20,6 @@
 #ifndef WL_GRAPHIC_TEXT_BIDI_H
 #define WL_GRAPHIC_TEXT_BIDI_H
 
-#include <vector>
-
 #include <unicode/uchar.h>
 #include <unicode/unistr.h>
 

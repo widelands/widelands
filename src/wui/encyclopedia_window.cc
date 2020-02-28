@@ -20,7 +20,6 @@
 #include "wui/encyclopedia_window.h"
 
 #include <memory>
-#include <vector>
 
 #include "base/i18n.h"
 #include "graphic/text_layout.h"

@@ -20,8 +20,6 @@
 #ifndef WL_GRAPHIC_GL_BLIT_PROGRAM_H
 #define WL_GRAPHIC_GL_BLIT_PROGRAM_H
 
-#include <vector>
-
 #include "base/macros.h"
 #include "base/rect.h"
 #include "graphic/blend_mode.h"

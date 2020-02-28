@@ -21,7 +21,6 @@
 #define WL_WUI_ENCYCLOPEDIA_WINDOW_H
 
 #include <memory>
-#include <vector>
 
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"

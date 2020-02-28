@@ -21,7 +21,6 @@
 #define WL_ECONOMY_ROUTE_H
 
 #include <cstdint>
-#include <vector>
 
 #include "economy/iroute.h"
 #include "io/fileread.h"

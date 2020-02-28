@@ -19,8 +19,6 @@
 
 #include "editor/ui_menus/main_menu_new_map.h"
 
-#include <vector>
-
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "editor/editorinteractive.h"

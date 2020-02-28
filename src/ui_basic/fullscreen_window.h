@@ -22,7 +22,6 @@
 
 #include <memory>
 #include <unordered_map>
-#include <vector>
 
 #include "graphic/align.h"
 #include "graphic/graphic.h"

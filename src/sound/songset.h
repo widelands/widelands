@@ -20,8 +20,6 @@
 #ifndef WL_SOUND_SONGSET_H
 #define WL_SOUND_SONGSET_H
 
-#include <vector>
-
 #include <SDL_mixer.h>
 
 #include "io/fileread.h"

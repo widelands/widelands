@@ -22,7 +22,6 @@
 
 #include <functional>
 #include <memory>
-#include <vector>
 
 #include "base/macros.h"
 #include "economy/supply.h"

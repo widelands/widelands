@@ -21,7 +21,6 @@
 #define WL_EDITOR_UI_MENUS_TOOL_SET_TERRAIN_OPTIONS_MENU_H
 
 #include <memory>
-#include <vector>
 
 #include "editor/ui_menus/categorized_item_selection_menu.h"
 #include "editor/ui_menus/tool_options_menu.h"

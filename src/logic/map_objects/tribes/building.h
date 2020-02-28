@@ -20,8 +20,6 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_BUILDING_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_BUILDING_H
 
-#include <vector>
-
 #include "ai/ai_hints.h"
 #include "base/macros.h"
 #include "logic/map_objects/buildcost.h"

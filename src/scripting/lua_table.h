@@ -22,7 +22,6 @@
 
 #include <memory>
 #include <set>
-#include <vector>
 
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>

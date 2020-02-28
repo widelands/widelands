@@ -20,8 +20,6 @@
 #ifndef WL_GRAPHIC_GL_TERRAIN_PROGRAM_H
 #define WL_GRAPHIC_GL_TERRAIN_PROGRAM_H
 
-#include <vector>
-
 #include "base/vector.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"

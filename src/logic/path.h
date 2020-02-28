@@ -21,7 +21,6 @@
 #define WL_LOGIC_PATH_H
 
 #include <cassert>
-#include <vector>
 
 #include "logic/widelands.h"
 #include "logic/widelands_geometry.h"

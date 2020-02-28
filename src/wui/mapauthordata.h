@@ -20,8 +20,6 @@
 #ifndef WL_WUI_MAPAUTHORDATA_H
 #define WL_WUI_MAPAUTHORDATA_H
 
-#include <vector>
-
 #include <boost/algorithm/string.hpp>
 
 #include "base/i18n.h"

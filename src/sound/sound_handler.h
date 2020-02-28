@@ -23,7 +23,6 @@
 #include <cassert>
 #include <map>
 #include <memory>
-#include <vector>
 
 #ifndef _MSC_VER
 #include <unistd.h>

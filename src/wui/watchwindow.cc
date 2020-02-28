@@ -19,8 +19,6 @@
 
 #include "wui/watchwindow.h"
 
-#include <vector>
-
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "base/rect.h"

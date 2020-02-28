@@ -20,8 +20,6 @@
 #ifndef WL_WUI_MAPDATA_H
 #define WL_WUI_MAPDATA_H
 
-#include <vector>
-
 #include "base/i18n.h"
 #include "io/filesystem/filesystem.h"
 #include "logic/map.h"

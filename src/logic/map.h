@@ -21,7 +21,6 @@
 #define WL_LOGIC_MAP_H
 
 #include <memory>
-#include <vector>
 
 #include "base/i18n.h"
 #include "economy/itransport_cost_calculator.h"

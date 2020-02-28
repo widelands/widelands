@@ -21,7 +21,6 @@
 #define WL_NETWORK_NETWORK_H
 
 #include <functional>
-#include <vector>
 
 #include <boost/asio.hpp>
 #include <boost/lexical_cast.hpp>

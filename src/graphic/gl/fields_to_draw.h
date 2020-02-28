@@ -20,8 +20,6 @@
 #ifndef WL_GRAPHIC_GL_FIELDS_TO_DRAW_H
 #define WL_GRAPHIC_GL_FIELDS_TO_DRAW_H
 
-#include <vector>
-
 #include "base/vector.h"
 #include "graphic/rendertarget.h"
 #include "graphic/road_segments.h"
