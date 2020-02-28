@@ -20,8 +20,6 @@
 #ifndef WL_EDITOR_UI_MENUS_CATEGORIZED_ITEM_SELECTION_MENU_H
 #define WL_EDITOR_UI_MENUS_CATEGORIZED_ITEM_SELECTION_MENU_H
 
-#include <string>
-
 #include "boost/format.hpp"
 
 #include "base/i18n.h"

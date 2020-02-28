@@ -21,7 +21,6 @@
 
 #include <algorithm>
 #include <memory>
-#include <string>
 
 #ifndef _WIN32
 #include <unistd.h>  // for usleep

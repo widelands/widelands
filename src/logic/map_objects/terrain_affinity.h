@@ -20,8 +20,6 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TERRAIN_AFFINITY_H
 #define WL_LOGIC_MAP_OBJECTS_TERRAIN_AFFINITY_H
 
-#include <string>
-
 #include "base/macros.h"
 #include "logic/map_objects/description_maintainer.h"
 

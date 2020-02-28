@@ -21,7 +21,6 @@
 #define WL_IO_PROFILE_H
 
 #include <memory>
-#include <string>
 #include <vector>
 
 #include "base/macros.h"

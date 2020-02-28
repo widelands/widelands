@@ -20,7 +20,6 @@
 #include "wui/plot_area.h"
 
 #include <memory>
-#include <string>
 
 #include "base/i18n.h"
 #include "base/wexception.h"

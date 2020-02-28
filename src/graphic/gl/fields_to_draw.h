@@ -20,7 +20,6 @@
 #ifndef WL_GRAPHIC_GL_FIELDS_TO_DRAW_H
 #define WL_GRAPHIC_GL_FIELDS_TO_DRAW_H
 
-#include <string>
 #include <vector>
 
 #include "base/vector.h"

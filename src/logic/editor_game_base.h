@@ -21,7 +21,6 @@
 #define WL_LOGIC_EDITOR_GAME_BASE_H
 
 #include <memory>
-#include <string>
 #include <vector>
 
 #include "base/macros.h"

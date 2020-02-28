@@ -21,7 +21,6 @@
 #define WL_UI_FSMENU_LAUNCH_MPG_H
 
 #include <memory>
-#include <string>
 
 #include "logic/game_settings.h"
 #include "ui_basic/button.h"

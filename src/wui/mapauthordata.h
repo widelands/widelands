@@ -20,7 +20,6 @@
 #ifndef WL_WUI_MAPAUTHORDATA_H
 #define WL_WUI_MAPAUTHORDATA_H
 
-#include <string>
 #include <vector>
 
 #include <boost/algorithm/string.hpp>

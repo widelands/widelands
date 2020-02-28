@@ -20,8 +20,6 @@
 #ifndef WL_GRAPHIC_IMAGE_H
 #define WL_GRAPHIC_IMAGE_H
 
-#include <string>
-
 #include "base/macros.h"
 #include "graphic/gl/blit_data.h"
 

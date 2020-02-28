@@ -20,7 +20,6 @@
 #ifndef WL_UI_FSMENU_INTERNET_LOBBY_H
 #define WL_UI_FSMENU_INTERNET_LOBBY_H
 
-#include <string>
 #include <vector>
 
 #include "network/internet_gaming.h"

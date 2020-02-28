@@ -20,7 +20,6 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_BUILDING_SETTINGS_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_BUILDING_SETTINGS_H
 
-#include <string>
 #include <vector>
 
 #include "logic/widelands.h"

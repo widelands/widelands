@@ -20,8 +20,6 @@
 
 #include "wui/game_debug_ui.h"
 
-#include <string>
-
 #include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "logic/field.h"

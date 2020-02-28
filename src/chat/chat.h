@@ -21,7 +21,6 @@
 #define WL_CHAT_CHAT_H
 
 #include <ctime>
-#include <string>
 #include <vector>
 
 #include "logic/widelands.h"

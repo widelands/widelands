@@ -21,7 +21,6 @@
 #define WL_NETWORK_NETWORK_H
 
 #include <functional>
-#include <string>
 #include <vector>
 
 #include <boost/asio.hpp>

@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_WORKAREA_INFO_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_WORKAREA_INFO_H
 
+#include <map>
 #include <string>
 
 /** The WorkareaInfo stores radii and for each radius a set of strings.

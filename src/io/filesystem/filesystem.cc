@@ -26,7 +26,6 @@
 #ifdef _WIN32
 #include <cstdio>
 #endif
-#include <string>
 #include <vector>
 
 // We have to add Boost to this block to make codecheck happy

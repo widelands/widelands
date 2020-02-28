@@ -20,7 +20,6 @@
 #include "logic/map_objects/world/critter.h"
 
 #include <memory>
-#include <string>
 
 #include "base/wexception.h"
 #include "helper.h"

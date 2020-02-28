@@ -20,7 +20,6 @@
 #ifndef WL_UI_BASIC_PROGRESSWINDOW_H
 #define WL_UI_BASIC_PROGRESSWINDOW_H
 
-#include <string>
 #include <vector>
 
 #include "base/rect.h"

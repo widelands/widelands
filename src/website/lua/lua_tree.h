@@ -21,7 +21,6 @@
 #define WL_WEBSITE_LUA_LUA_TREE_H
 
 #include <memory>
-#include <string>
 #include <vector>
 
 #include "io/filesystem/filesystem.h"

@@ -19,8 +19,6 @@
 
 #include "graphic/text/bidi.h"
 
-#include <string>
-
 #include <unicode/utypes.h>
 
 #include "base/log.h"

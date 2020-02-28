@@ -20,8 +20,6 @@
 #ifndef WL_LOGIC_SAVE_HANDLER_H
 #define WL_LOGIC_SAVE_HANDLER_H
 
-#include <string>
-
 #include "io/filesystem/filesystem.h"
 
 namespace Widelands {

@@ -20,7 +20,6 @@
 #define WL_GRAPHIC_GL_UTILS_H
 
 #include <memory>
-#include <string>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>

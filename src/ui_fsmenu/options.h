@@ -21,7 +21,6 @@
 #define WL_UI_FSMENU_OPTIONS_H
 
 #include <memory>
-#include <string>
 #include <vector>
 
 #include "ui_basic/box.h"

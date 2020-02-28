@@ -19,7 +19,6 @@
 
 #include "wui/watchwindow.h"
 
-#include <string>
 #include <vector>
 
 #include "base/i18n.h"

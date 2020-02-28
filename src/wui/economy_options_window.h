@@ -21,7 +21,6 @@
 #define WL_WUI_ECONOMY_OPTIONS_WINDOW_H
 
 #include <memory>
-#include <string>
 
 #include "economy/economy.h"
 #include "notifications/notifications.h"

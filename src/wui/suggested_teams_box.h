@@ -20,8 +20,6 @@
 #ifndef WL_WUI_SUGGESTED_TEAMS_BOX_H
 #define WL_WUI_SUGGESTED_TEAMS_BOX_H
 
-#include <string>
-
 #include "logic/widelands.h"
 #include "ui_basic/box.h"
 #include "ui_basic/icon.h"

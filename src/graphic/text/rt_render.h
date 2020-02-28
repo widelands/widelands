@@ -21,7 +21,6 @@
 #define WL_GRAPHIC_TEXT_RT_RENDER_H
 
 #include <memory>
-#include <string>
 
 #include "graphic/image.h"
 #include "graphic/image_cache.h"

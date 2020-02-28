@@ -20,7 +20,6 @@
 #include "ui_basic/editbox.h"
 
 #include <memory>
-#include <string>
 
 #include <SDL_keycode.h>
 

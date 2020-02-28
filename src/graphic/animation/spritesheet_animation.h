@@ -20,7 +20,6 @@
 #ifndef WL_GRAPHIC_ANIMATION_SPRITESHEET_ANIMATION_H
 #define WL_GRAPHIC_ANIMATION_SPRITESHEET_ANIMATION_H
 
-#include <string>
 #include <vector>
 
 #include "base/rect.h"

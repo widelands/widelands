@@ -21,7 +21,6 @@
 #define WL_LOGIC_MAP_H
 
 #include <memory>
-#include <string>
 #include <vector>
 
 #include "base/i18n.h"

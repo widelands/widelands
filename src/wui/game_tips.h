@@ -20,7 +20,6 @@
 #ifndef WL_WUI_GAME_TIPS_H
 #define WL_WUI_GAME_TIPS_H
 
-#include <string>
 #include <vector>
 
 #include "ui_basic/progresswindow.h"

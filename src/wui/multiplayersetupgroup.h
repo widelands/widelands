@@ -21,7 +21,6 @@
 #define WL_WUI_MULTIPLAYERSETUPGROUP_H
 
 #include <memory>
-#include <string>
 
 #include "network/network_player_settings_backend.h"
 #include "ui_basic/box.h"

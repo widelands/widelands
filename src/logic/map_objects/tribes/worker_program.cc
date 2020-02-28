@@ -19,8 +19,6 @@
 
 #include "logic/map_objects/tribes/worker_program.h"
 
-#include <string>
-
 #include "base/log.h"
 #include "helper.h"
 #include "logic/game_data_error.h"

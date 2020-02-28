@@ -20,8 +20,6 @@
 #ifndef WL_WUI_PLAYERDESCRGROUP_H
 #define WL_WUI_PLAYERDESCRGROUP_H
 
-#include <string>
-
 #include "ui_basic/panel.h"
 
 struct GameSettingsProvider;

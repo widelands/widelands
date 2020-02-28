@@ -30,7 +30,6 @@
 #endif
 
 #include <map>
-#include <string>
 
 #include <SDL_events.h>
 #include <SDL_keyboard.h>

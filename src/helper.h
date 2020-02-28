@@ -20,7 +20,6 @@
 #ifndef WL_HELPER_H
 #define WL_HELPER_H
 
-#include <string>
 #include <vector>
 
 #include <SDL_keyboard.h>

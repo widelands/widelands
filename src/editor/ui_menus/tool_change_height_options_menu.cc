@@ -19,8 +19,6 @@
 
 #include "editor/ui_menus/tool_change_height_options_menu.h"
 
-#include <string>
-
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/increase_height_tool.h"

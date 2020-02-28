@@ -20,8 +20,6 @@
 #ifndef WL_MAP_IO_MAP_OBJECT_SAVER_H
 #define WL_MAP_IO_MAP_OBJECT_SAVER_H
 
-#include <string>
-
 #include "graphic/playercolor.h"
 #include "logic/widelands.h"
 #include "map_io/map_message_saver.h"

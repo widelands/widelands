@@ -19,8 +19,6 @@
 
 #include "wui/suggested_teams_box.h"
 
-#include <string>
-
 #include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "graphic/playercolor.h"
