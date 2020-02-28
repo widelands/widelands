@@ -290,7 +290,7 @@ void WareWorkerHints::read_preciousness(const std::string& name, const LuaTable&
 			throw wexception("Preciousness of %d is far too high for ware/worker '%s' and tribe '%s'. "
 			                 "We recommend not going over 25.",
 			                 value, name.c_str(), key.c_str());
-		} else if (value > 25) {
+		} else if (value > 50) {
 			log("WARNING: Preciousness of %d is a bit high for ware/worker '%s' and tribe '%s'. We "
 			    "recommend not going over 25.\n",
 			    value, name.c_str(), key.c_str());
