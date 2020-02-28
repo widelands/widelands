@@ -29,7 +29,6 @@
  * Implementation is in immovable.cc
  */
 
-#include "logic/map_objects/buildcost.h"
 #include "logic/map_objects/immovable.h"
 
 namespace Widelands {

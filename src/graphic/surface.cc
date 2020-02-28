@@ -25,7 +25,6 @@
 
 #include <SDL.h>
 
-#include "base/macros.h"
 #include "base/rect.h"
 #include "base/vector.h"
 #include "graphic/gl/coordinate_conversion.h"

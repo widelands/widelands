@@ -106,6 +106,7 @@ wl_library(widelands_ball_of_mud
     graphic
     graphic_fonthandler
     graphic_text
+    graphic_text_layout
     io_filesystem
     logic
     logic_exceptions

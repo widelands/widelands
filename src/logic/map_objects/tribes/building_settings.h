@@ -25,6 +25,7 @@
 #include <vector>
 
 #include "logic/widelands.h"
+#include "map_io/tribes_legacy_lookup_table.h"
 
 class FileRead;
 class FileWrite;
@@ -40,111 +41,89 @@ class TribeDescr;
 class WarehouseDescr;
 
 struct BuildingSettings {
-	BuildingSettings(const std::string& name) : descr_(name) {
+	BuildingSettings(const std::string& name, const TribeDescr& tribe)
+	   : tribe_(tribe), descr_(name) {
 	}
 	virtual ~BuildingSettings() {
 	}
 
-	static BuildingSettings* load(const Game&, const TribeDescr&, FileRead&);
+	static BuildingSettings* load(const Game&,
+	                              const TribeDescr&,
+	                              FileRead&,
+	                              const TribesLegacyLookupTable& tribes_lookup_table);
 
 	virtual void save(const Game&, FileWrite&) const;
-	virtual void read(const Game&, FileRead&);
+	virtual void read(const Game&, FileRead&, const TribesLegacyLookupTable&);
 
 	virtual void apply(const BuildingSettings&) {
 	}
 
 protected:
-	enum class BuildingType : uint8_t {
-		kWarehouse = 1,
-		kProductionsite = 2,
-		kTrainingsite = 3,
-		kMilitarysite = 4,
-	};
-	virtual BuildingType type() const = 0;
+	const TribeDescr& tribe_;
 
 private:
 	const std::string descr_;
 };
 
 struct ProductionsiteSettings : public BuildingSettings {
-	ProductionsiteSettings(const ProductionSiteDescr& descr);
+	ProductionsiteSettings(const ProductionSiteDescr& descr, const TribeDescr& tribe);
 	~ProductionsiteSettings() override {
 	}
 	void apply(const BuildingSettings&) override;
 
 	void save(const Game&, FileWrite&) const override;
-	void read(const Game&, FileRead&) override;
+	void read(const Game&, FileRead&, const TribesLegacyLookupTable& tribes_lookup_table) override;
 
 	struct InputQueueSetting {
 		const uint32_t max_fill;
 		uint32_t desired_fill;
 		int32_t priority;
 	};
-	std::vector<std::pair<DescriptionIndex, InputQueueSetting>> ware_queues;
-	std::vector<std::pair<DescriptionIndex, InputQueueSetting>> worker_queues;
+	std::map<DescriptionIndex, InputQueueSetting> ware_queues;
+	std::map<DescriptionIndex, InputQueueSetting> worker_queues;
 	bool stopped;
-
-protected:
-	BuildingType type() const override {
-		return BuildingType::kProductionsite;
-	}
 };
 
 struct MilitarysiteSettings : public BuildingSettings {
-	MilitarysiteSettings(const MilitarySiteDescr&);
+	MilitarysiteSettings(const MilitarySiteDescr&, const TribeDescr& tribe);
 	~MilitarysiteSettings() override {
 	}
 	void apply(const BuildingSettings&) override;
 
 	void save(const Game&, FileWrite&) const override;
-	void read(const Game&, FileRead&) override;
+	void read(const Game&, FileRead&, const TribesLegacyLookupTable& tribes_lookup_table) override;
 
 	const uint32_t max_capacity;
 	uint32_t desired_capacity;
 	bool prefer_heroes;
-
-protected:
-	BuildingType type() const override {
-		return BuildingType::kMilitarysite;
-	}
 };
 
 struct TrainingsiteSettings : public ProductionsiteSettings {
-	TrainingsiteSettings(const TrainingSiteDescr&);
+	TrainingsiteSettings(const TrainingSiteDescr&, const TribeDescr& tribe);
 	~TrainingsiteSettings() override {
 	}
 	void apply(const BuildingSettings&) override;
 
 	void save(const Game&, FileWrite&) const override;
-	void read(const Game&, FileRead&) override;
+	void read(const Game&, FileRead&, const TribesLegacyLookupTable& tribes_lookup_table) override;
 
 	const uint32_t max_capacity;
 	uint32_t desired_capacity;
-
-protected:
-	BuildingType type() const override {
-		return BuildingType::kTrainingsite;
-	}
 };
 
 struct WarehouseSettings : public BuildingSettings {
-	WarehouseSettings(const WarehouseDescr&, const TribeDescr&);
+	WarehouseSettings(const WarehouseDescr&, const TribeDescr& tribe);
 	~WarehouseSettings() override {
 	}
 	void apply(const BuildingSettings&) override;
 
 	void save(const Game&, FileWrite&) const override;
-	void read(const Game&, FileRead&) override;
+	void read(const Game&, FileRead&, const TribesLegacyLookupTable& tribes_lookup_table) override;
 
 	std::map<DescriptionIndex, StockPolicy> ware_preferences;
 	std::map<DescriptionIndex, StockPolicy> worker_preferences;
 	const bool launch_expedition_allowed;
 	bool launch_expedition;
-
-protected:
-	BuildingType type() const override {
-		return BuildingType::kWarehouse;
-	}
 };
 
 }  // namespace Widelands

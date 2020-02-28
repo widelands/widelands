@@ -24,7 +24,6 @@
 
 #include <boost/format.hpp>
 
-#include "base/time_string.h"
 #include "build_info.h"
 #include "graphic/image_io.h"
 #include "graphic/minimap_renderer.h"
@@ -33,11 +32,8 @@
 #include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "logic/playersmanager.h"
-#include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "wui/interactive_player.h"
-#include "wui/mapviewpixelconstants.h"
-#include "wui/mapviewpixelfunctions.h"
 #include "wui/minimap.h"
 
 namespace Widelands {

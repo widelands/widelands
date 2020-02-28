@@ -71,8 +71,6 @@ wl_library(logic_constants
   SRCS
     widelands.cc
     widelands.h
-  DEPENDS
-    base_macros
 )
 
 wl_library(logic_filesystem_constants
@@ -145,12 +143,10 @@ wl_library(logic_map
     logic_filesystem_constants
     logic_map_objects
     logic_objectives
-    logic_tribe_basic_info
     logic_widelands_geometry
     logic_widelands_geometry_io
     map_io_map_loader
     notifications
-    random
     wui_mapview_pixelfunctions # TODO(GunChleoc): Circular dependency
 )
 
@@ -183,6 +179,7 @@ wl_library(logic_commands
     io_fileread
     io_stream
     logic # TODO(GunChleoc): Circular dependency
+    logic_constants
     logic_exceptions
     logic_game_controller
     logic_map
