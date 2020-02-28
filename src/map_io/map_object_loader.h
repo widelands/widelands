@@ -20,8 +20,6 @@
 #ifndef WL_MAP_IO_MAP_OBJECT_LOADER_H
 #define WL_MAP_IO_MAP_OBJECT_LOADER_H
 
-#include <typeinfo>
-
 #include "base/macros.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/map_object.h"

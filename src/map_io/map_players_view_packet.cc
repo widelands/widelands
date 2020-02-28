@@ -19,8 +19,6 @@
 
 #include "map_io/map_players_view_packet.h"
 
-#include <typeinfo>
-
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"

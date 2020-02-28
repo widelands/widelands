@@ -21,7 +21,6 @@
 
 #include <algorithm>
 #include <memory>
-#include <typeinfo>
 #include <unordered_set>
 
 #include "ai/ai_hints.h"

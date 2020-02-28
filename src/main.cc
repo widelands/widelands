@@ -18,7 +18,6 @@
  */
 
 #include <iostream>
-#include <typeinfo>
 
 #include <SDL_main.h>
 #include <unistd.h>
