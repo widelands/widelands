@@ -57,6 +57,7 @@ wl_library(logic_game_controller
     replay_game_controller.cc
     single_player_game_controller.h
     single_player_game_controller.cc
+  USES_SDL2
   DEPENDS
     ai
     logic
@@ -92,6 +93,7 @@ wl_library(logic_generic_save_handler
   SRCS
     generic_save_handler.h
     generic_save_handler.cc
+  USES_SDL2
   DEPENDS
     base_i18n
     base_log

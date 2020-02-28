@@ -22,8 +22,6 @@
 #include <cassert>
 #include <memory>
 
-#include <SDL.h>
-
 #include "graphic/image.h"
 #include "graphic/image_io.h"
 #include "graphic/texture.h"

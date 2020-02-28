@@ -26,7 +26,7 @@
 #include <iostream>
 #include <memory>
 
-#include <SDL_image.h>
+#include <SDL.h>
 #include <SDL_ttf.h>
 #include <boost/regex.hpp>
 #ifdef __APPLE__

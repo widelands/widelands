@@ -19,8 +19,6 @@
 
 #include "editor/ui_menus/tool_place_immovable_options_menu.h"
 
-#include <SDL_keycode.h>
-
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/place_immovable_tool.h"

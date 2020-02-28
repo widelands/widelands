@@ -21,6 +21,8 @@
 
 #include <memory>
 
+#include <SDL_messagebox.h>
+
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"

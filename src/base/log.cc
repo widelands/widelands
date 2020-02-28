@@ -24,7 +24,7 @@
 #include <iostream>
 #include <memory>
 
-#include <SDL.h>
+#include <SDL_log.h>
 #ifdef _WIN32
 #include <windows.h>
 #endif

@@ -99,6 +99,7 @@ wl_library(scripting_logic
     persistence.cc
     persistence.h
     eris.h
+  USES_SDL2
   DEPENDS
     base_exceptions
     base_log

@@ -19,6 +19,8 @@
 
 #include "scripting/lua_ui.h"
 
+#include <SDL_mouse.h>
+
 #include "base/macros.h"
 #include "logic/game_controller.h"
 #include "logic/player.h"

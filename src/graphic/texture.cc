@@ -20,7 +20,7 @@
 
 #include <cassert>
 
-#include <SDL.h>
+#include <SDL_surface.h>
 
 #include "base/log.h"
 #include "base/macros.h"

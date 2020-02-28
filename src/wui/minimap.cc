@@ -21,6 +21,8 @@
 
 #include <memory>
 
+#include <SDL_mouse.h>
+
 #include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "graphic/minimap_renderer.h"

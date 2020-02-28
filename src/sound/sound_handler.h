@@ -28,8 +28,6 @@
 #include <unistd.h>
 #endif
 
-#include <SDL_mutex.h>
-
 #include "random/random.h"
 #include "sound/constants.h"
 #include "sound/fxset.h"

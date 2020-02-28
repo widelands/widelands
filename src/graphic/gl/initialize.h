@@ -20,7 +20,7 @@
 #ifndef WL_GRAPHIC_GL_INITIALIZE_H
 #define WL_GRAPHIC_GL_INITIALIZE_H
 
-#include <SDL.h>
+#include <SDL_video.h>
 
 #include "graphic/gl/system_headers.h"
 

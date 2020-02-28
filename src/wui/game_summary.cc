@@ -19,6 +19,7 @@
 
 #include "wui/game_summary.h"
 
+#include <SDL_mouse.h>
 #include <boost/algorithm/string.hpp>
 
 #include "base/time_string.h"

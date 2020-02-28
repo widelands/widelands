@@ -22,7 +22,6 @@
 #include <memory>
 #include <queue>
 
-#include <SDL.h>
 #include <boost/algorithm/string.hpp>
 
 #include "base/i18n.h"

@@ -21,6 +21,8 @@
 
 #include <memory>
 
+#include <SDL_timer.h>
+
 #include "base/i18n.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"

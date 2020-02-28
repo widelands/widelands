@@ -19,6 +19,7 @@ wl_library(wui_chat_ui
     game_chat_panel.h
     chat_msg_layout.h
     chat_msg_layout.cc
+  USES_SDL2
   DEPENDS
     base_exceptions
     base_i18n
@@ -139,6 +140,7 @@ wl_library(wui_mapview
   SRCS
     mapview.cc
     mapview.h
+  USES_SDL2
   DEPENDS
     base_geometry
     base_macros
@@ -158,6 +160,7 @@ wl_library(wui_waresdisplay
   SRCS
     waresdisplay.cc
     waresdisplay.h
+  USES_SDL2
   DEPENDS
     base_exceptions
     base_i18n

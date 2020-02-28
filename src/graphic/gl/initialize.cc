@@ -21,7 +21,7 @@
 
 #include <csignal>
 
-#include <SDL.h>
+#include <SDL_messagebox.h>
 #include <boost/algorithm/string.hpp>
 #include <boost/regex.hpp>
 

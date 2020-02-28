@@ -19,6 +19,9 @@
 
 #include "ui_basic/listselect.h"
 
+#include <SDL_mouse.h>
+#include <SDL_timer.h>
+
 #include "base/log.h"
 #include "graphic/align.h"
 #include "graphic/font_handler.h"

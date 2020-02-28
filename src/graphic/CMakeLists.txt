@@ -64,7 +64,6 @@ wl_library(graphic_image_io
     image_io.h
     image_io.cc
   USES_PNG
-  USES_SDL2
   USES_SDL2_IMAGE
   DEPENDS
     base_exceptions
@@ -79,7 +78,6 @@ wl_library(graphic_image_cache
   SRCS
     image_cache.cc
     image_cache.h
-  USES_SDL2
   DEPENDS
     base_macros
     graphic_image_io

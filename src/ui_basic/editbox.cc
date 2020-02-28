@@ -21,7 +21,7 @@
 
 #include <memory>
 
-#include <SDL_keycode.h>
+#include <SDL_mouse.h>
 
 #include "graphic/color.h"
 #include "graphic/font_handler.h"

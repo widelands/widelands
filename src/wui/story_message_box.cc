@@ -19,6 +19,8 @@
 
 #include "wui/story_message_box.h"
 
+#include <SDL_mouse.h>
+
 #include "logic/game_controller.h"
 #include "logic/save_handler.h"
 #include "ui_basic/button.h"

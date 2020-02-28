@@ -19,6 +19,9 @@
 
 #include "ui_basic/scrollbar.h"
 
+#include <SDL_mouse.h>
+#include <SDL_timer.h>
+
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"

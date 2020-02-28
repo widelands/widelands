@@ -22,8 +22,6 @@
 
 #include <vector>
 
-#include <SDL_keyboard.h>
-
 #include "base/wexception.h"
 
 /// Returns the word starting at the character that p points to and ending

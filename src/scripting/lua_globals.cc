@@ -21,7 +21,7 @@
 
 #include <memory>
 
-#include <SDL.h>
+#include <SDL_timer.h>
 
 #include "base/i18n.h"
 #include "build_info.h"

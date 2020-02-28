@@ -21,7 +21,6 @@
 
 #include <memory>
 
-#include <SDL.h>
 #include <boost/algorithm/string/replace.hpp>
 
 #include "graphic/text/rt_errors_impl.h"

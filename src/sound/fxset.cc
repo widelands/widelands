@@ -21,7 +21,7 @@
 
 #include <cassert>
 
-#include <SDL.h>
+#include <SDL_timer.h>
 
 #include "base/log.h"
 #include "io/fileread.h"

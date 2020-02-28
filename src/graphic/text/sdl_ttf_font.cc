@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <SDL.h>
-#include <SDL_ttf.h>
 #include <boost/format.hpp>
 
 #include "graphic/sdl_utils.h"
