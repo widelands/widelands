@@ -21,7 +21,6 @@
 
 #include <algorithm>
 #include <memory>
-#include <unordered_set>
 
 #include "ai/ai_hints.h"
 #include "base/log.h"

@@ -21,7 +21,6 @@
 #define WL_UI_BASIC_FULLSCREEN_WINDOW_H
 
 #include <memory>
-#include <unordered_map>
 
 #include "graphic/align.h"
 #include "graphic/graphic.h"

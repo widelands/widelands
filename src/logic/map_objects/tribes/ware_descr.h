@@ -21,7 +21,6 @@
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_WARE_DESCR_H
 
 #include <memory>
-#include <unordered_map>
 
 #include "ai/ai_hints.h"
 #include "base/macros.h"

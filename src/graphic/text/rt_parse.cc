@@ -20,8 +20,6 @@
 #include "graphic/text/rt_parse.h"
 
 #include <memory>
-#include <unordered_map>
-#include <unordered_set>
 
 #include <SDL.h>
 #include <boost/algorithm/string/replace.hpp>

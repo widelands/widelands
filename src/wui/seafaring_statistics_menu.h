@@ -21,7 +21,6 @@
 #define WL_WUI_SEAFARING_STATISTICS_MENU_H
 
 #include <memory>
-#include <unordered_map>
 
 #include "base/i18n.h"
 #include "logic/map_objects/tribes/ship.h"
