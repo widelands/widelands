@@ -20,7 +20,6 @@
 #ifndef WL_WUI_MAPVIEW_H
 #define WL_WUI_MAPVIEW_H
 
-#include <memory>
 #include <queue>
 
 #include "base/rect.h"

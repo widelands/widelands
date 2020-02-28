@@ -19,8 +19,6 @@
 
 #include "map_io/map_buildingdata_packet.h"
 
-#include <memory>
-
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/expedition_bootstrap.h"

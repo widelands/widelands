@@ -19,7 +19,6 @@
 
 #include "map_io/coords_profile.h"
 
-#include <memory>
 #include <string>
 
 #include "base/wexception.h"

@@ -17,7 +17,6 @@
  *
  */
 
-#include <memory>
 #include <string>
 
 #define BOOST_TEST_MODULE Notifications

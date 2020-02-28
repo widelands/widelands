@@ -21,7 +21,6 @@
 #define WL_IO_FILEWRITE_H
 
 #include <limits>
-#include <memory>
 #include <string>
 
 #include "io/streamwrite.h"

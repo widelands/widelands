@@ -19,7 +19,6 @@
 
 #include "logic/map_objects/tribes/worker_program.h"
 
-#include <memory>
 #include <string>
 
 #include "base/log.h"

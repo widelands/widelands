@@ -20,7 +20,6 @@
 #ifndef WL_GRAPHIC_GL_ROAD_PROGRAM_H
 #define WL_GRAPHIC_GL_ROAD_PROGRAM_H
 
-#include <memory>
 #include <vector>
 
 #include "base/macros.h"

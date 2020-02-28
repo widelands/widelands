@@ -19,8 +19,6 @@
 
 #include "logic/map_objects/bob.h"
 
-#include <memory>
-
 #include "base/macros.h"
 #include "base/math.h"
 #include "base/wexception.h"

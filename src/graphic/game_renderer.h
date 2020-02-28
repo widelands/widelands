@@ -20,8 +20,6 @@
 #ifndef WL_GRAPHIC_GAME_RENDERER_H
 #define WL_GRAPHIC_GAME_RENDERER_H
 
-#include <memory>
-
 #include "graphic/gl/fields_to_draw.h"
 #include "logic/editor_game_base.h"
 #include "logic/player.h"

@@ -20,7 +20,6 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_WORLD_TERRAIN_DESCRIPTION_H
 #define WL_LOGIC_MAP_OBJECTS_WORLD_TERRAIN_DESCRIPTION_H
 
-#include <memory>
 #include <string>
 #include <vector>
 

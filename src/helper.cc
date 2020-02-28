@@ -20,7 +20,6 @@
 #include "helper.h"
 
 #include <cassert>
-#include <memory>
 #include <string>
 
 std::vector<std::string> split_string(const std::string& s, const char* const separators) {

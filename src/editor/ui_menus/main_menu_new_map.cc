@@ -19,7 +19,6 @@
 
 #include "editor/ui_menus/main_menu_new_map.h"
 
-#include <memory>
 #include <string>
 #include <vector>
 

@@ -19,8 +19,6 @@
 
 #include "logic/save_handler.h"
 
-#include <memory>
-
 #include <boost/algorithm/string.hpp>
 
 #include "base/log.h"

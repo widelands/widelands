@@ -20,7 +20,6 @@
 #ifndef WL_GRAPHIC_ANIMATION_SPRITESHEET_ANIMATION_H
 #define WL_GRAPHIC_ANIMATION_SPRITESHEET_ANIMATION_H
 
-#include <memory>
 #include <string>
 #include <vector>
 
