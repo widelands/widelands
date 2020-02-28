@@ -21,7 +21,6 @@
 
 #include <algorithm>
 #include <memory>
-#include <queue>
 #include <typeinfo>
 #include <unordered_set>
 
