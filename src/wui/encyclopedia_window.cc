@@ -19,7 +19,6 @@
 
 #include "wui/encyclopedia_window.h"
 
-#include <map>
 #include <memory>
 #include <vector>
 

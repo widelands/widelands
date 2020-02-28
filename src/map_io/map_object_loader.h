@@ -20,7 +20,6 @@
 #ifndef WL_MAP_IO_MAP_OBJECT_LOADER_H
 #define WL_MAP_IO_MAP_OBJECT_LOADER_H
 
-#include <map>
 #include <typeinfo>
 
 #include "base/macros.h"

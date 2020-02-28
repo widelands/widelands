@@ -20,7 +20,6 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_PRODUCTIONSITE_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_PRODUCTIONSITE_H
 
-#include <map>
 #include <memory>
 #include <set>
 #include <string>

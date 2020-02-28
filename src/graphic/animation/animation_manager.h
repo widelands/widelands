@@ -20,7 +20,6 @@
 #ifndef WL_GRAPHIC_ANIMATION_ANIMATION_MANAGER_H
 #define WL_GRAPHIC_ANIMATION_ANIMATION_MANAGER_H
 
-#include <map>
 #include <memory>
 #include <vector>
 

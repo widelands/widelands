@@ -20,7 +20,6 @@
 #ifndef WL_WUI_ENCYCLOPEDIA_WINDOW_H
 #define WL_WUI_ENCYCLOPEDIA_WINDOW_H
 
-#include <map>
 #include <memory>
 #include <vector>
 

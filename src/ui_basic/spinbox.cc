@@ -19,7 +19,6 @@
 
 #include "ui_basic/spinbox.h"
 
-#include <map>
 #include <vector>
 
 #include "base/i18n.h"

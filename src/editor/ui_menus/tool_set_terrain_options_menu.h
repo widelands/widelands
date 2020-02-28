@@ -20,7 +20,6 @@
 #ifndef WL_EDITOR_UI_MENUS_TOOL_SET_TERRAIN_OPTIONS_MENU_H
 #define WL_EDITOR_UI_MENUS_TOOL_SET_TERRAIN_OPTIONS_MENU_H
 
-#include <map>
 #include <memory>
 #include <vector>
 

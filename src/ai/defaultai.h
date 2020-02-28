@@ -21,7 +21,6 @@
 #ifndef WL_AI_DEFAULTAI_H
 #define WL_AI_DEFAULTAI_H
 
-#include <map>
 #include <memory>
 #include <unordered_map>
 #include <unordered_set>

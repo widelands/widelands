@@ -19,7 +19,6 @@
 
 #include "map_io/map_buildingdata_packet.h"
 
-#include <map>
 #include <memory>
 
 #include "base/macros.h"

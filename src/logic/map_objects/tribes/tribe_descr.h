@@ -20,7 +20,6 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_TRIBE_DESCR_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_TRIBE_DESCR_H
 
-#include <map>
 #include <memory>
 #include <vector>
 

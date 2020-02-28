@@ -19,8 +19,6 @@
 
 #include "map_io/map_road_packet.h"
 
-#include <map>
-
 #include "base/macros.h"
 #include "economy/road.h"
 #include "io/fileread.h"

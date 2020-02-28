@@ -20,7 +20,6 @@
 #ifndef WL_LOGIC_MAP_H
 #define WL_LOGIC_MAP_H
 
-#include <map>
 #include <memory>
 #include <set>
 #include <string>

@@ -20,7 +20,6 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_WORKAREA_INFO_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_WORKAREA_INFO_H
 
-#include <map>
 #include <set>
 #include <string>
 
