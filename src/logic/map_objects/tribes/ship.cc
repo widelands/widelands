@@ -1363,9 +1363,10 @@ void Ship::Loader::load(FileRead& fr, uint8_t pw) {
 	// Economy
 	// TODO(Nordfriese): Savegame compatibility
 	ware_economy_serial_ = fr.unsigned_32();
-	worker_economy_serial_ = packet_version_ >= 10 ?
-	                            fr.unsigned_32() :
-	                            mol().get_economy_savegame_compatibility(ware_economy_serial_);
+	worker_economy_serial_ =
+	   packet_version_ >= 10 ? fr.unsigned_32() : ware_economy_serial_ == kInvalidSerial ?
+	                           kInvalidSerial :
+	                           mol().get_economy_savegame_compatibility(ware_economy_serial_);
 
 	// The state the ship is in
 	ship_state_ = static_cast<ShipStates>(fr.unsigned_8());
@@ -1452,12 +1453,7 @@ void Ship::Loader::load_finish() {
 	if (worker_economy_serial_ != kInvalidSerial) {
 		ship.worker_economy_ = ship.get_owner()->get_economy(worker_economy_serial_);
 		if (!ship.worker_economy_) {
-			const Serial last = Economy::last_economy_serial_;
 			ship.worker_economy_ = ship.get_owner()->create_economy(worker_economy_serial_, wwWORKER);
-			if (packet_version_ < 9) {
-				log("Reset economy serial from %u to %u\n", Economy::last_economy_serial_, last);
-				Economy::last_economy_serial_ = last;
-			}
 		}
 	}
 
