@@ -24,7 +24,6 @@
 #endif
 
 #include <map>
-#include <utility>
 
 #include <boost/format.hpp>
 
