@@ -284,7 +284,7 @@ int16_t BuildingHints::get_ai_limit(const Widelands::AiType ai_type) const {
 // TODO(GunChleoc): WareDescr has a bare "preciousness" table that should be moved below a new
 // "aihints" table.
 void WareWorkerHints::read_preciousness(const std::string& name, const LuaTable& table) {
-    constexpr int kMaxRecommendedPreciousness = 50;
+	constexpr int kMaxRecommendedPreciousness = 50;
 	for (const std::string& key : table.keys<std::string>()) {
 		const int value = table.get_int(key);
 		if (value > 200) {
