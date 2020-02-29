@@ -76,7 +76,8 @@ void GetProperty::load(FileRead& fr, Loader& loader) {
 			   "GetProperty", packet_version, kCurrentPacketVersionGetProperty);
 		}
 		loader.push_back(fr.unsigned_32());
-		loader.push_back(fr.unsigned_32());
+		const std::string p = fr.c_string();
+		property_ = p.empty() ? nullptr : builtin_p(p).property.get();
 	} catch (const WException& e) {
 		throw wexception("GetProperty: %s", e.what());
 	}
@@ -85,14 +86,12 @@ void GetProperty::load_pointers(const ScriptingLoader& l, Loader& loader) {
 	Assignable::load_pointers(l, loader);
 	variable_ = &l.get<Assignable>(loader.front());
 	loader.pop_front();
-	property_ = kBuiltinProperties[loader.front()]->property.get();
-	loader.pop_front();
 }
 void GetProperty::save(FileWrite& fw) const {
 	Assignable::save(fw);
 	fw.unsigned_16(kCurrentPacketVersionGetProperty);
 	fw.unsigned_32(variable_->serial());
-	fw.unsigned_32(property_to_serial(*property_));
+	fw.c_string(property_ ? builtin_p(*property_)->unique_name.c_str() : "");
 }
 const VariableType& GetProperty::type() const {
 	return property_->get_type();

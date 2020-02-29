@@ -150,7 +150,13 @@ void FS_FunctionCall::load(FileRead& fr, Loader& loader) {
 			   "FS_FunctionCall", packet_version, kCurrentPacketVersionFS_FunctionCall);
 		}
 		loader.push_back(fr.unsigned_32());
-		loader.push_back(fr.signed_32());
+		if (fr.unsigned_8()) {
+			function_ = builtin_f(fr.c_string()).function.get();
+			assert(function_);
+		} else {
+			function_ = nullptr;
+			loader.push_back(fr.unsigned_32());
+		}
 		for (uint32_t n = fr.unsigned_32(); n; --n) {
 			loader.push_back(fr.unsigned_32());
 		}
@@ -163,8 +169,10 @@ void FS_FunctionCall::load_pointers(const ScriptingLoader& l, Loader& loader) {
 	Assignable::load_pointers(l, loader);
 	variable_ = loader.front() ? &l.get<Assignable>(loader.front()) : nullptr;
 	loader.pop_front();
-	function_ = &serial_to_function(l, loader.front());
-	loader.pop_front();
+	if (!function_) {
+		function_ = &l.get<LuaFunction>(loader.front());
+		loader.pop_front();
+	}
 	while (!loader.empty()) {
 		parameters_.push_back(&l.get<Assignable>(loader.front()));
 		loader.pop_front();
@@ -174,7 +182,13 @@ void FS_FunctionCall::save(FileWrite& fw) const {
 	FunctionStatement::save(fw);
 	fw.unsigned_16(kCurrentPacketVersionFS_FunctionCall);
 	fw.unsigned_32(variable_ ? variable_->serial() : 0);
-	fw.signed_32(function_to_serial(*function_));
+	if (const BuiltinFunctionInfo* f = builtin_f(*function_)) {
+		fw.unsigned_8(1);
+		fw.c_string(f->unique_name.c_str());
+	} else {
+		fw.unsigned_8(0);
+		fw.unsigned_32(dynamic_cast<const LuaFunction&>(*function_).serial());
+	}
 	fw.unsigned_32(parameters_.size());
 	for (const Assignable* p : parameters_) {
 		fw.unsigned_32(p->serial());
@@ -265,7 +279,8 @@ void FS_SetProperty::load(FileRead& fr, Loader& loader) {
 			   "FS_SetProperty", packet_version, kCurrentPacketVersionFS_SetProperty);
 		}
 		loader.push_back(fr.unsigned_32());
-		loader.push_back(fr.unsigned_32());
+		const std::string p = fr.c_string();
+		property_ = p.empty() ? nullptr : builtin_p(p).property.get();
 		loader.push_back(fr.unsigned_32());
 	} catch (const WException& e) {
 		throw wexception("FS_SetProperty: %s", e.what());
@@ -275,8 +290,6 @@ void FS_SetProperty::load_pointers(const ScriptingLoader& l, Loader& loader) {
 	FunctionStatement::load_pointers(l, loader);
 	variable_ = &l.get<Assignable>(loader.front());
 	loader.pop_front();
-	property_ = kBuiltinProperties[loader.front()]->property.get();
-	loader.pop_front();
 	value_ = &l.get<Assignable>(loader.front());
 	loader.pop_front();
 }
@@ -284,7 +297,7 @@ void FS_SetProperty::save(FileWrite& fw) const {
 	FunctionStatement::save(fw);
 	fw.unsigned_16(kCurrentPacketVersionFS_SetProperty);
 	fw.unsigned_32(variable_->serial());
-	fw.unsigned_32(property_to_serial(*property_));
+	fw.c_string(property_ ? builtin_p(*property_)->unique_name.c_str() : "");
 	fw.unsigned_32(value_->serial());
 }
 void FS_SetProperty::set_property(Property& p) {

@@ -48,12 +48,20 @@ const BuiltinPropertyInfo& builtin_p(const std::string& name) {
 	throw wexception("Unknown builtin property %s", name.c_str());
 }
 
+const BuiltinPropertyInfo* builtin_p(const Property& p) {
+	for (size_t i = 0; kBuiltinProperties[i]; ++i) {
+		if (kBuiltinProperties[i]->property.get() == &p) {
+			return kBuiltinProperties[i];
+		}
+	}
+	return nullptr;
+}
+
 /************************************************************
                      Builtin functions
 ************************************************************/
 
-// Do not change the order! Indices are stored in map files!
-// The _() function is not contained here – Property::Access it instead via
+// The _() function is not contained here – access it instead via
 // `ConstexprString`'s `translatable` attribute.
 const BuiltinFunctionInfo* kBuiltinFunctions[] = {
 
@@ -994,7 +1002,6 @@ nullptr};
                       Builtin properties
 ************************************************************/
 
-// Do not change the order! Indices are stored in map files!
 const BuiltinPropertyInfo* kBuiltinProperties[] = {
 
 	// Game

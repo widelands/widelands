@@ -48,10 +48,6 @@ bool is_name_valid(const std::string&);
 // Throws an exception if the name is not a valid identifier
 void check_name_valid(const std::string&);
 
-int32_t function_to_serial(FunctionBase&);
-FunctionBase& serial_to_function(const ScriptingLoader&, int32_t);
-uint32_t property_to_serial(Property&);
-
 // Lua is not typesafe, but we are. A "variable" is declared as a specific type
 // and it may be assigned only values of this type and its subtypes, and nil.
 // We support just about every Lua type and class the scenario scripter will need –

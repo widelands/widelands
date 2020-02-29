@@ -130,5 +130,6 @@ struct BuiltinPropertyInfo {
 const extern BuiltinPropertyInfo* kBuiltinProperties[];
 // Quick access to a builtin by its unique name
 const BuiltinPropertyInfo& builtin_p(const std::string&);
+const BuiltinPropertyInfo* builtin_p(const Property&);
 
 #endif  // end of include guard: WL_EDITOR_SCRIPTING_BUILTIN_H
