@@ -26,11 +26,9 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warelist.h"
 #include "logic/player.h"
-#include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/slider.h"
 #include "ui_basic/tabpanel.h"
-#include "ui_basic/textarea.h"
 #include "wui/interactive_player.h"
 #include "wui/plot_area.h"
 #include "wui/waresdisplay.h"
@@ -177,9 +175,10 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 		   cur_ware, parent.get_player()->get_ware_consumption_statistics(
 		                Widelands::DescriptionIndex(cur_ware)));
 
-		plot_stock_->register_plot_data(cur_ware, parent.get_player()->get_ware_stock_statistics(
-		                                             Widelands::DescriptionIndex(cur_ware)),
-		                                colors[kInactiveColorIndex]);
+		plot_stock_->register_plot_data(
+		   cur_ware,
+		   parent.get_player()->get_ware_stock_statistics(Widelands::DescriptionIndex(cur_ware)),
+		   colors[kInactiveColorIndex]);
 	}
 
 	display_ = new StatisticWaresDisplay(

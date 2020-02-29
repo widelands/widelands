@@ -27,15 +27,9 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "base/scoped_timer.h"
 #include "base/warning.h"
-#include "editor/tools/decrease_height_tool.h"
 #include "editor/tools/decrease_resources_tool.h"
-#include "editor/tools/increase_height_tool.h"
 #include "editor/tools/increase_resources_tool.h"
-#include "editor/tools/noise_height_tool.h"
-#include "editor/tools/place_critter_tool.h"
-#include "editor/tools/place_immovable_tool.h"
 #include "editor/tools/set_port_space_tool.h"
 #include "editor/tools/set_terrain_tool.h"
 #include "editor/ui_menus/help.h"
@@ -55,6 +49,7 @@
 #include "editor/ui_menus/toolsize_menu.h"
 #include "graphic/graphic.h"
 #include "graphic/playercolor.h"
+#include "graphic/text_layout.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/world/resource_description.h"

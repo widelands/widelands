@@ -27,7 +27,6 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "base/macros.h"
 #include "base/wexception.h"
 #include "graphic/animation/animation_manager.h"
 #include "graphic/graphic.h"
@@ -67,7 +66,7 @@ TribeDescr::TribeDescr(const LuaTable& table,
 
 		std::unique_ptr<LuaTable> items_table = table.get_table("roads");
 		const auto load_roads = [&items_table](
-		   const std::string& road_type, std::vector<std::string>* images) {
+		                           const std::string& road_type, std::vector<std::string>* images) {
 			std::vector<std::string> roads =
 			   items_table->get_table(road_type)->array_entries<std::string>();
 			for (const std::string& filename : roads) {
@@ -98,8 +97,8 @@ TribeDescr::TribeDescr(const LuaTable& table,
 			}
 		};
 		// Frontier and flag animations can be a mix of file and spritesheet animations
-		const auto load_animations = [this, load_bridge_if_present](
-		   const LuaTable& animations_table, Animation::Type animation_type) {
+		const auto load_animations = [this, load_bridge_if_present](const LuaTable& animations_table,
+		                                                            Animation::Type animation_type) {
 			if (animations_table.has_key("frontier")) {
 				std::unique_ptr<LuaTable> animation_table = animations_table.get_table("frontier");
 				frontier_animation_id_ =

@@ -413,7 +413,15 @@ InputQueue& ProductionSite::inputqueue(DescriptionIndex const wi, WareWorker con
 			return *ip_queue;
 		}
 	}
-	throw wexception("%s (%u) has no InputQueue for %u", descr().name().c_str(), serial(), wi);
+	if (!(owner().tribe().has_ware(wi) || owner().tribe().has_worker(wi))) {
+		throw wexception("%s (%u) has no InputQueue for unknown %s %u", descr().name().c_str(),
+		                 serial(), type == WareWorker::wwWARE ? "ware" : "worker", wi);
+	}
+	throw wexception("%s (%u) has no InputQueue for %s %u: %s", descr().name().c_str(), serial(),
+	                 type == WareWorker::wwWARE ? "ware" : "worker", wi,
+	                 type == WareWorker::wwWARE ?
+	                    owner().tribe().get_ware_descr(wi)->name().c_str() :
+	                    owner().tribe().get_worker_descr(wi)->name().c_str());
 }
 
 /**
@@ -428,9 +436,9 @@ void ProductionSite::format_statistics_string() {
 	const unsigned int percent = std::min(get_actual_statistics() * 100 / 98, 100);
 	const std::string perc_str = g_gr->styles().color_tag(
 	   (boost::format(_("%i%%")) % percent).str(),
-	   (percent < 33) ? g_gr->styles().building_statistics_style().low_color() : (percent < 66) ?
-	                    g_gr->styles().building_statistics_style().medium_color() :
-	                    g_gr->styles().building_statistics_style().high_color());
+	   (percent < 33) ? g_gr->styles().building_statistics_style().low_color() :
+	                    (percent < 66) ? g_gr->styles().building_statistics_style().medium_color() :
+	                                     g_gr->styles().building_statistics_style().high_color());
 
 	if (0 < percent && percent < 100) {
 		RGBColor color = g_gr->styles().building_statistics_style().high_color();
@@ -1049,7 +1057,7 @@ void ProductionSite::unnotify_player() {
 }
 
 const BuildingSettings* ProductionSite::create_building_settings() const {
-	ProductionsiteSettings* settings = new ProductionsiteSettings(descr());
+	ProductionsiteSettings* settings = new ProductionsiteSettings(descr(), owner().tribe());
 	settings->stopped = is_stopped_;
 	for (auto& pair : settings->ware_queues) {
 		pair.second.priority = get_priority(wwWARE, pair.first, false);

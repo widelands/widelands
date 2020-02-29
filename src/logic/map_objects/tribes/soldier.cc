@@ -33,7 +33,6 @@
 #include "graphic/animation/animation_manager.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
@@ -675,7 +674,7 @@ void Soldier::draw_info_icon(Vector2i draw_position,
 	// Draw level info in building windows, or if kSoldierLevels is on.
 	if (draw_mode == InfoMode::kInBuilding || (info_to_draw & InfoToDraw::kSoldierLevels)) {
 		const auto draw_level_image = [icon_size, scale, &draw_position, dst](
-		   const Vector2i& offset, const Image* image) {
+		                                 const Vector2i& offset, const Image* image) {
 			dst->blitrect_scale(
 			   Rectf(draw_position + offset * icon_size * scale, icon_size * scale, icon_size * scale),
 			   image, Recti(0, 0, icon_size, icon_size), 1.f, BlendMode::UseAlpha);

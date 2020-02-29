@@ -30,7 +30,6 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
-#include "logic/map_objects/world/world.h"
 #include "scripting/logic.h"
 
 namespace Widelands {
@@ -51,11 +50,11 @@ void write_lua_dir(FileSystem& target_fs, FileSystem* map_fs, const std::string&
 	}
 }
 }  // namespace
-   /*
-    * ========================================================================
-    *            PUBLIC IMPLEMENTATION
-    * ========================================================================
-    */
+/*
+ * ========================================================================
+ *            PUBLIC IMPLEMENTATION
+ * ========================================================================
+ */
 void MapScriptingPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, MapObjectLoader& mol) {
 	// Always try to load the global State: even in a normal game, some lua
 	// coroutines could run. But make sure that this is really a game, other

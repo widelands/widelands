@@ -31,7 +31,6 @@
 #include "build_info.h"
 #include "config.h"
 #include "game_io/game_loader.h"
-#include "helper.h"
 #include "io/fileread.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filewrite.h"
@@ -182,9 +181,9 @@ void GameClientImpl::run_game(InteractiveGameBase* igb) {
 
 	modal = igb;
 
-	game->run(settings.savegame ? Widelands::Game::Loaded : settings.scenario ?
-	                              Widelands::Game::NewMPScenario :
-	                              Widelands::Game::NewNonScenario,
+	game->run(settings.savegame ? Widelands::Game::Loaded :
+	                              settings.scenario ? Widelands::Game::NewMPScenario :
+	                                                  Widelands::Game::NewNonScenario,
 	          "", false, (boost::format("netclient_%d") % static_cast<int>(settings.usernum)).str());
 
 	// if this is an internet game, tell the metaserver that the game is done.

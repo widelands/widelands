@@ -14,10 +14,6 @@ public:
 	}
 	std::vector<SavegameData> load_files(const std::string& directory);
 
-protected:
-	void load_gamefile(const std::string& gamefilename,
-	                   std::vector<SavegameData>& loaded_games) const;
-
 private:
 	virtual std::string get_savename(const std::string& gamefilename) const;
 	void add_general_information(SavegameData& gamedata,
@@ -26,7 +22,9 @@ private:
 	virtual bool is_valid_gametype(const SavegameData& gamedata) const;
 	void add_time_info(SavegameData& gamedata, const Widelands::GamePreloadPacket& gpdp) const;
 	void add_sub_dir(const std::string& gamefilename, std::vector<SavegameData>& loaded_games) const;
-	void load_directory_savegame(const std::string& gamefilename,
+	void load_savegame_from_directory(const std::string& gamefilename,
+	                                  std::vector<SavegameData>& loaded_games) const;
+	void load_savegame_from_file(const std::string& gamefilename,
 	                             std::vector<SavegameData>& loaded_games) const;
 	void load(const std::string& to_be_loaded, std::vector<SavegameData>& loaded_games) const;
 
@@ -39,7 +37,7 @@ public:
 
 private:
 	bool is_valid_gametype(const SavegameData& gamedata) const override;
-	virtual std::string get_savename(const std::string& gamefilename) const override;
+	std::string get_savename(const std::string& gamefilename) const override;
 };
 
 class MultiPlayerLoader : public SavegameLoader {

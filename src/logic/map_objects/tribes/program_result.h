@@ -20,7 +20,7 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_PROGRAM_RESULT_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_PROGRAM_RESULT_H
 
-#include "base/macros.h"
+#include "base/wexception.h"
 
 namespace Widelands {
 // Don't change these values, they are used as hardcoded array indices

@@ -22,16 +22,7 @@
 #include <ctime>
 #include <memory>
 
-#include <boost/algorithm/string.hpp>
-
-#include "base/i18n.h"
-#include "base/log.h"
-#include "base/time_string.h"
-#include "game_io/game_loader.h"
-#include "game_io/game_preload_packet.h"
 #include "logic/filesystem_constants.h"
-#include "logic/game_controller.h"
-#include "logic/game_settings.h"
 
 LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                                Widelands::Game& g,

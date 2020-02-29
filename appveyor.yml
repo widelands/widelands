@@ -4,8 +4,6 @@
 #   Appveyor build configuration  #
 ###################################
 
-environment:
-  appveyor_build_worker_cloud: gce
 init:
   - cmd: "IF \"%PLATFORM%\" == \"x86\" (set MINGWPATH=C:\\msys64\\mingw32\\bin& set MINGWSUFFIX=i686& set MINGWINCLUDE=C:\\msys64\\mingw32\\include) ELSE (set MINGWPATH=C:\\msys64\\mingw64\\bin& set MINGWSUFFIX=x86_64& set MINGWINCLUDE=C:\\msys64\\mingw64\\include)"
 

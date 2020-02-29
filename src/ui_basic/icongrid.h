@@ -25,7 +25,6 @@
 #include <boost/signals2.hpp>
 
 #include "ui_basic/panel.h"
-#include "ui_basic/textarea.h"
 
 namespace UI {
 

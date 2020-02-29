@@ -1,12 +1,11 @@
 #include "wui/savegamedata.h"
 
+#include <boost/format.hpp>
+#include <boost/lexical_cast.hpp>
+
 #include "base/i18n.h"
 #include "base/time_string.h"
 #include "graphic/text_layout.h"
-
-#include <boost/algorithm/string/replace.hpp>
-#include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 
 SavegameData::SavegameData()
    : gametime(""),

@@ -30,7 +30,6 @@
 #include "base/macros.h"
 #include "base/scoped_timer.h"
 #include "base/wexception.h"
-#include "build_info.h"
 #include "economy/flag.h"
 #include "economy/roadbase.h"
 #include "io/filesystem/filesystem_exceptions.h"
@@ -40,7 +39,6 @@
 #include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/findnode.h"
 #include "logic/map_objects/tribes/soldier.h"
-#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapfringeregion.h"
@@ -2051,10 +2049,10 @@ int32_t Map::findpath(Coords instart,
 				continue;
 
 			// Check passability
-			if (!checkstep.allowed(
-			       *this, cur, neighb, *direction, neighb == end ? CheckStep::stepLast : cur == start ?
-			                                                       CheckStep::stepFirst :
-			                                                       CheckStep::stepNormal))
+			if (!checkstep.allowed(*this, cur, neighb, *direction,
+			                       neighb == end ?
+			                          CheckStep::stepLast :
+			                          cur == start ? CheckStep::stepFirst : CheckStep::stepNormal))
 				continue;
 
 			// Calculate cost

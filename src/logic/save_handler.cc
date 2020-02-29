@@ -26,7 +26,6 @@
 #include <boost/format.hpp>
 
 #include "base/log.h"
-#include "base/macros.h"
 #include "base/scoped_timer.h"
 #include "base/time_string.h"
 #include "base/wexception.h"
@@ -248,7 +247,7 @@ bool SaveHandler::save_game(Widelands::Game& game,
 	   [&game](FileSystem& fs) {
 		   Widelands::GameSaver gs(fs, game);
 		   gs.save();
-		},
+	   },
 	   complete_filename, fs_type_);
 	gsh.save();
 

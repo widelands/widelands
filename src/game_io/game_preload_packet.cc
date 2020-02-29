@@ -24,7 +24,6 @@
 
 #include <boost/format.hpp>
 
-#include "base/time_string.h"
 #include "build_info.h"
 #include "graphic/image_io.h"
 #include "graphic/minimap_renderer.h"
@@ -33,11 +32,8 @@
 #include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "logic/playersmanager.h"
-#include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "wui/interactive_player.h"
-#include "wui/mapviewpixelconstants.h"
-#include "wui/mapviewpixelfunctions.h"
 #include "wui/minimap.h"
 
 namespace Widelands {
@@ -111,7 +107,9 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 	s.set_string("background", map.get_background());
 	s.set_string("win_condition", game.get_win_condition_displayname());
 	s.set_int("savetimestamp", static_cast<uint32_t>(time(nullptr)));
-	s.set_int("gametype", static_cast<int32_t>(game.game_controller()->get_game_type()));
+	s.set_int("gametype", static_cast<int32_t>(game.game_controller() != nullptr ?
+	                                              game.game_controller()->get_game_type() :
+	                                              GameController::GameType::kReplay));
 
 	prof.write("preload", false, fs);
 

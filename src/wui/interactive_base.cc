@@ -32,7 +32,6 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "economy/waterway.h"
-#include "graphic/default_resolution.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
@@ -52,7 +51,6 @@
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
 #include "wui/logmessage.h"
-#include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/minimap.h"
 #include "wui/unique_window_handler.h"
@@ -230,16 +228,17 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 		   resize_chat_overlay();
 		   finalize_toolbar();
 		   mainview_move();
-		});
+	   });
 	sound_subscriber_ = Notifications::subscribe<NoteSound>(
 	   [this](const NoteSound& note) { play_sound_effect(note); });
-	shipnotes_subscriber_ = Notifications::subscribe<Widelands::NoteShip>([this](
-	   const Widelands::NoteShip& note) {
-		if (note.action == Widelands::NoteShip::Action::kWaitingForCommand &&
-		    note.ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
-			expedition_port_spaces_.emplace(note.ship, note.ship->exp_port_spaces().front());
-		}
-	});
+	shipnotes_subscriber_ =
+	   Notifications::subscribe<Widelands::NoteShip>([this](const Widelands::NoteShip& note) {
+		   if (note.action == Widelands::NoteShip::Action::kWaitingForCommand &&
+		       note.ship->get_ship_state() ==
+		          Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
+			   expedition_port_spaces_.emplace(note.ship, note.ship->exp_port_spaces().front());
+		   }
+	   });
 
 	toolbar_.set_layout_toplevel(true);
 	map_view_.changeview.connect([this] { mainview_move(); });

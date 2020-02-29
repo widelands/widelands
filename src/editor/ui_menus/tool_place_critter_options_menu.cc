@@ -28,9 +28,7 @@
 #include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/world.h"
 #include "ui_basic/box.h"
-#include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
-#include "ui_basic/textarea.h"
 
 namespace {
 UI::Checkbox* create_critter_checkbox(UI::Panel* parent,
@@ -54,7 +52,7 @@ EditorToolPlaceCritterOptionsMenu::EditorToolPlaceCritterOptionsMenu(
 	      this, world.editor_critter_categories(), world.critters(),
 	      [](UI::Panel* cb_parent, const Widelands::CritterDescr& critter_descr) {
 		      return create_critter_checkbox(cb_parent, critter_descr);
-		   },
+	      },
 	      [this] { select_correct_tool(); }, &tool));
 	set_center_panel(multi_select_menu_.get());
 }

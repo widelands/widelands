@@ -21,7 +21,6 @@
 #define WL_WUI_TRAININGSITEWINDOW_H
 
 #include "logic/map_objects/tribes/trainingsite.h"
-#include "ui_basic/button.h"
 #include "wui/productionsitewindow.h"
 
 /**

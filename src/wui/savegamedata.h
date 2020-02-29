@@ -1,5 +1,5 @@
-#ifndef SAVEGAMEDATA_H
-#define SAVEGAMEDATA_H
+#ifndef WL_WUI_SAVEGAMEDATA_H
+#define WL_WUI_SAVEGAMEDATA_H
 #include "io/filesystem/filesystem.h"
 #include "logic/game_controller.h"
 #include "logic/widelands.h"
@@ -69,4 +69,4 @@ private:
 	SavegameType type_;
 };
 const std::string as_filename_list(const std::vector<SavegameData>& savefiles);
-#endif  // SAVEGAMEDATA_H
+#endif  // WL_WUI_SAVEGAMEDATA_H

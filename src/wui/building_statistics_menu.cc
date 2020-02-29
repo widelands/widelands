@@ -25,7 +25,6 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "graphic/font_handler.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/tribes.h"
@@ -289,7 +288,8 @@ void BuildingStatisticsMenu::init(int last_selected_tab) {
 	// Show the tabs that have buttons on them
 	int tab_counter = 0;
 	auto add_tab = [this, row_counters, &tab_counter, last_selected_tab](
-	   int tab_index, const std::string& name, const std::string& image, const std::string& descr) {
+	                  int tab_index, const std::string& name, const std::string& image,
+	                  const std::string& descr) {
 		if (row_counters[tab_index] > 0) {
 			tab_panel_.add(name, g_gr->images().get(image), tabs_[tab_index], descr);
 			if (last_selected_tab == tab_index) {

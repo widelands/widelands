@@ -22,7 +22,6 @@
 
 #include <memory>
 
-#include "game_io/game_preload_packet.h"
 #include "logic/game.h"
 #include "ui_basic/box.h"
 #include "ui_basic/panel.h"

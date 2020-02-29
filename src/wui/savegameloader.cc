@@ -28,29 +28,25 @@ std::string SavegameLoader::get_savename(const std::string& gamefilename) const 
 
 void SavegameLoader::load(const std::string& to_be_loaded,
                           std::vector<SavegameData>& loaded_games) const {
-	log("loading file %s\n...", to_be_loaded.c_str());
 	if (g_fs->is_directory(to_be_loaded)) {
-		log("loading from directory...\n");
 		try {
-			load_directory_savegame(to_be_loaded, loaded_games);
+			load_savegame_from_directory(to_be_loaded, loaded_games);
 		} catch (const std::exception& e) {
-			log("exception! adding as subir...\n");
+			// loading failed, so this is actually a normal directory
 			add_sub_dir(to_be_loaded, loaded_games);
 		}
 	} else {
-		log("loading from file...\n");
-		load_gamefile(to_be_loaded, loaded_games);
+		load_savegame_from_file(to_be_loaded, loaded_games);
 	}
 }
 
-void SavegameLoader::load_directory_savegame(const std::string& gamefilename,
-                                             std::vector<SavegameData>& loaded_games) const {
+void SavegameLoader::load_savegame_from_directory(const std::string& gamefilename,
+                                                  std::vector<SavegameData>& loaded_games) const {
 	Widelands::GamePreloadPacket gpdp;
 	SavegameData gamedata(gamefilename);
 
 	Widelands::GameLoader gl(gamefilename.c_str(), game_);
 	gl.preload_game(gpdp);
-	log("preloaded from directory: %s\n", gamefilename.c_str());
 	gamedata.gametype = gpdp.get_gametype();
 	if (!is_valid_gametype(gamedata)) {
 		return;
@@ -61,8 +57,8 @@ void SavegameLoader::load_directory_savegame(const std::string& gamefilename,
 	loaded_games.push_back(gamedata);
 }
 
-void SavegameLoader::load_gamefile(const std::string& gamefilename,
-                                   std::vector<SavegameData>& loaded_games) const {
+void SavegameLoader::load_savegame_from_file(const std::string& gamefilename,
+                                             std::vector<SavegameData>& loaded_games) const {
 	std::string savename = get_savename(gamefilename);
 
 	log("savename to be loaded: %s\n", savename.c_str());
@@ -80,7 +76,6 @@ void SavegameLoader::load_gamefile(const std::string& gamefilename,
 	try {
 		Widelands::GameLoader gl(savename.c_str(), game_);
 		gl.preload_game(gpdp);
-		log("preloaded: %s\n", savename.c_str());
 		gamedata.gametype = gpdp.get_gametype();
 		if (!is_valid_gametype(gamedata)) {
 			return;
@@ -90,14 +85,7 @@ void SavegameLoader::load_gamefile(const std::string& gamefilename,
 		add_time_info(gamedata, gpdp);
 
 	} catch (const std::exception& e) {
-		log("exception. directory?: %s\n", savename.c_str());
-		if (g_fs->is_directory(gamefilename)) {
-			log("yes, directory\n");
-			add_sub_dir(gamefilename, loaded_games);
-			return;
-		} else {
-			add_error_info(gamedata, e.what());
-		}
+		add_error_info(gamedata, e.what());
 	}
 
 	loaded_games.push_back(gamedata);
@@ -216,11 +204,9 @@ void SavegameLoader::add_sub_dir(const std::string& gamefilename,
                                  std::vector<SavegameData>& loaded_games) const {
 	// Add subdirectory to the list
 	const char* fs_filename = FileSystem::fs_filename(gamefilename.c_str());
-	log("add_sub_dir: %s\n", fs_filename);
 	if (!strcmp(fs_filename, ".") || !strcmp(fs_filename, "..")) {
 		return;
 	}
-	log("finished\n");
 	loaded_games.push_back(SavegameData::create_sub_dir(gamefilename));
 }
 

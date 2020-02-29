@@ -23,6 +23,7 @@
 
 #include "base/macros.h"
 #include "base/math.h"
+#include "graphic/game_renderer.h"
 #include "graphic/rendertarget.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
@@ -543,8 +544,12 @@ void MapView::zoom_around(float new_zoom,
 	}
 
 	case Transition::Smooth: {
+		if (view_plans_.empty() && view_.zoom_near(new_zoom)) {
+			// We're already at the target zoom...
+			return;
+		}
 		if (!view_plans_.empty() && view_plans_.back().back().view.zoom_near(new_zoom)) {
-			// We're already there
+			// ...or on the way there.
 			return;
 		}
 		const int w = get_w();

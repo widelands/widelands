@@ -24,7 +24,6 @@
 #include "base/i18n.h"
 #include "io/filesystem/filesystem.h"
 #include "ui_basic/button.h"
-#include "ui_basic/textarea.h"
 
 /// Select a Map, Saved Game or Replay in Fullscreen Mode.
 /// This class defines common coordinates for these UI screens.

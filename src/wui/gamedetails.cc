@@ -141,6 +141,7 @@ void GameDetails::show(const SavegameData& gamedata) {
 	                 .str();
 
 	std::string filename = gamedata.filename;
+	log("before assert: %s\n", filename.c_str());
 	// Remove first directory from filename. This will be the save/ or replays/ folder
 	assert(filename.find('/') != std::string::npos);
 	filename.erase(0, filename.find('/') + 1);

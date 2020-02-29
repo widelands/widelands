@@ -38,7 +38,6 @@
 #include "ui_basic/button.h"
 #include "ui_basic/icongrid.h"
 #include "ui_basic/tabpanel.h"
-#include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "wui/actionconfirm.h"
 #include "wui/attack_box.h"
@@ -490,9 +489,8 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 		}
 
 		if (building_descr->get_built_over_immovable() != Widelands::INVALID_INDEX &&
-		    !(node_.field->get_immovable() &&
-		      node_.field->get_immovable()->has_attribute(
-		         building_descr->get_built_over_immovable()))) {
+		    !(node_.field->get_immovable() && node_.field->get_immovable()->has_attribute(
+		                                         building_descr->get_built_over_immovable()))) {
 			continue;
 		}
 		// Figure out if we can build it here, and in which tab it belongs
