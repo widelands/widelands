@@ -82,7 +82,7 @@ void MapSaver::save() {
 
 	bool is_game = is_a(Game, &egbase_);
 
-	auto set_progress_message = [this](std::string text, int step) {
+    auto set_progress_message = [](std::string text, int step) {
 		Notifications::publish(UI::NoteLoadingMessage(
 		   step < 0 ? text :
 		              (boost::format(_("Saving map: %1$s (%2$d/%3$d)")) % text % step % 23).str()));
