@@ -137,15 +137,16 @@ int32_t ScenarioPlaceRoadTool::handle_click_impl(const Widelands::NodeAndTriangl
 			Widelands::CoordPath p = eia.get_build_road_path();
 			if (eia.get_build_road_start() == eia.get_build_road_end() ||
 			    create_road(eia.egbase(), Widelands::Path(p), args->road_mode,
-			                args->create_primary_worker, args->create_secondary_worker, args->place_flags, args->force)) {
+			                args->create_primary_worker, args->create_secondary_worker,
+			                args->place_flags, args->force)) {
 				eia.abort_build_road();
 			}
 		} else {
 			eia.append_build_road(center.node);
 			Widelands::CoordPath p = eia.get_build_road_path();
-			if (flag &&
-			    create_road(eia.egbase(), Widelands::Path(p), args->road_mode,
-			                args->create_primary_worker, args->create_secondary_worker, args->place_flags, args->force)) {
+			if (flag && create_road(eia.egbase(), Widelands::Path(p), args->road_mode,
+			                        args->create_primary_worker, args->create_secondary_worker,
+			                        args->place_flags, args->force)) {
 				eia.abort_build_road();
 			}
 		}

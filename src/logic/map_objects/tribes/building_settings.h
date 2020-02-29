@@ -72,7 +72,9 @@ struct ProductionsiteSettings : public BuildingSettings {
 	void apply(const BuildingSettings&) override;
 
 	void save(const EditorGameBase&, FileWrite&) const override;
-	void read(const EditorGameBase&, FileRead&, const TribesLegacyLookupTable& tribes_lookup_table) override;
+	void read(const EditorGameBase&,
+	          FileRead&,
+	          const TribesLegacyLookupTable& tribes_lookup_table) override;
 
 	struct InputQueueSetting {
 		const uint32_t max_fill;
@@ -91,7 +93,9 @@ struct MilitarysiteSettings : public BuildingSettings {
 	void apply(const BuildingSettings&) override;
 
 	void save(const EditorGameBase&, FileWrite&) const override;
-	void read(const EditorGameBase&, FileRead&, const TribesLegacyLookupTable& tribes_lookup_table) override;
+	void read(const EditorGameBase&,
+	          FileRead&,
+	          const TribesLegacyLookupTable& tribes_lookup_table) override;
 
 	const uint32_t max_capacity;
 	uint32_t desired_capacity;
@@ -105,7 +109,9 @@ struct TrainingsiteSettings : public ProductionsiteSettings {
 	void apply(const BuildingSettings&) override;
 
 	void save(const EditorGameBase&, FileWrite&) const override;
-	void read(const EditorGameBase&, FileRead&, const TribesLegacyLookupTable& tribes_lookup_table) override;
+	void read(const EditorGameBase&,
+	          FileRead&,
+	          const TribesLegacyLookupTable& tribes_lookup_table) override;
 
 	const uint32_t max_capacity;
 	uint32_t desired_capacity;
@@ -118,7 +124,9 @@ struct WarehouseSettings : public BuildingSettings {
 	void apply(const BuildingSettings&) override;
 
 	void save(const EditorGameBase&, FileWrite&) const override;
-	void read(const EditorGameBase&, FileRead&, const TribesLegacyLookupTable& tribes_lookup_table) override;
+	void read(const EditorGameBase&,
+	          FileRead&,
+	          const TribesLegacyLookupTable& tribes_lookup_table) override;
 
 	std::map<DescriptionIndex, StockPolicy> ware_preferences;
 	std::map<DescriptionIndex, StockPolicy> worker_preferences;
