@@ -1763,7 +1763,7 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 #define DESCR_FOR(type)                                                                            \
 	new BuiltinPropertyInfo(                                                                        \
 	   "descr_" #type, []() { return _("The MapObjectDescr associated with this map object"); },    \
-	   new Property("descr", Property::Access::RO, VariableType(VariableTypeID::type),                              \
+	   new Property("descr", Property::Access::RO, VariableType(VariableTypeID::type),              \
 	                VariableType(VariableTypeID::type##Descr), false))
 
 	DESCR_FOR(MapObject),
