@@ -91,6 +91,10 @@ ScenarioToolVisionOptionsMenu::ScenarioToolVisionOptionsMenu(EditorInteractive& 
 	}
 }
 
+ScenarioToolVisionOptionsMenu::~ScenarioToolVisionOptionsMenu() {
+	eia().select_tool(eia().tools()->info, EditorTool::First);
+}
+
 void ScenarioToolVisionOptionsMenu::select_player() {
 	const Widelands::PlayerNumber p = players_.get_selected();
 	assert(p);

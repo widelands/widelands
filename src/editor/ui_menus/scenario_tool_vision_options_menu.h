@@ -35,8 +35,7 @@ struct ScenarioToolVisionOptionsMenu : public EditorToolOptionsMenu {
 	ScenarioToolVisionOptionsMenu(EditorInteractive&,
 	                              ScenarioVisionTool&,
 	                              UI::UniqueWindow::Registry&);
-	~ScenarioToolVisionOptionsMenu() {
-	}
+	~ScenarioToolVisionOptionsMenu() override;
 
 private:
 	EditorInteractive& eia();

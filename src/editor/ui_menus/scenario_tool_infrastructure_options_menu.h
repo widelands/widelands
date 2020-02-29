@@ -24,6 +24,7 @@
 #include "editor/ui_menus/tool_options_menu.h"
 #include "logic/map.h"
 #include "ui_basic/box.h"
+#include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/icongrid.h"
 #include "ui_basic/multilinetextarea.h"
@@ -47,8 +48,10 @@ private:
 
 	void select_tab();
 	void toggle_selected(UI::IconGrid*, Widelands::MapObjectType, int32_t);
+	void make_auto_infra();
 
 	UI::Box box_;
+	UI::Button auto_infra_;
 	UI::TabPanel tabs_;
 	UI::Checkbox force_;
 	UI::MultilineTextarea selected_items_;

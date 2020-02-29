@@ -48,7 +48,8 @@ struct ScenarioPlaceRoadTool : public EditorTool {
 	     mode_(EditorActionArgs::RoadMode::kNormal),
 	     create_primary_worker_(true),
 	     create_secondary_worker_(true),
-	     force_(false) {
+	     force_(false),
+	     place_flags_(false) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
@@ -71,6 +72,9 @@ struct ScenarioPlaceRoadTool : public EditorTool {
 	bool get_force() const {
 		return force_;
 	}
+	bool get_place_flags() const {
+		return place_flags_;
+	}
 	bool get_create_primary_worker() const {
 		return create_primary_worker_;
 	}
@@ -84,6 +88,9 @@ struct ScenarioPlaceRoadTool : public EditorTool {
 	void set_force(bool f) {
 		force_ = f;
 	}
+	void set_place_flags(bool f) {
+		place_flags_ = f;
+	}
 	void set_create_primary_worker(bool c) {
 		create_primary_worker_ = c;
 	}
@@ -96,6 +103,7 @@ private:
 	bool create_primary_worker_;
 	bool create_secondary_worker_;
 	bool force_;
+	bool place_flags_;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_SCENARIO_WORKER_TOOL_H

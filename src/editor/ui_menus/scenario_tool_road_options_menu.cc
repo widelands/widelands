@@ -75,6 +75,10 @@ ScenarioToolRoadOptionsMenu::ScenarioToolRoadOptionsMenu(EditorInteractive& pare
                        Vector2i(0, 0),
                        _("Create second carrier"),
                        _("Create a second carrier for busy roads")),
+     place_flags_(&main_box_,
+                   Vector2i(0, 0),
+                   _("Place flags"),
+                   _("Place flags along the road")),
      info_(&main_box_,
            0,
            0,
@@ -85,6 +89,7 @@ ScenarioToolRoadOptionsMenu::ScenarioToolRoadOptionsMenu(EditorInteractive& pare
            UI::Align::kCenter,
            UI::MultilineTextarea::ScrollMode::kNoScrolling) {
 	force_.set_state(tool_.get_force());
+	place_flags_.set_state(tool_.get_place_flags());
 	create_primary_.set_state(tool_.get_create_primary_worker());
 	create_secondary_.set_state(tool_.get_create_secondary_worker());
 	type_.set_state(roadmode(tool_.get_mode()));
@@ -97,6 +102,10 @@ ScenarioToolRoadOptionsMenu::ScenarioToolRoadOptionsMenu(EditorInteractive& pare
 	});
 	force_.changedto.connect([this](bool f) {
 		tool_.set_force(f);
+		select_correct_tool();
+	});
+	place_flags_.changedto.connect([this](bool f) {
+		tool_.set_place_flags(f);
 		select_correct_tool();
 	});
 	create_primary_.changedto.connect([this](bool c) {
@@ -122,6 +131,7 @@ ScenarioToolRoadOptionsMenu::ScenarioToolRoadOptionsMenu(EditorInteractive& pare
 	main_box_.add(&buttons_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	main_box_.add(&create_primary_, UI::Box::Resizing::kFullSize);
 	main_box_.add(&create_secondary_, UI::Box::Resizing::kFullSize);
+	main_box_.add(&place_flags_, UI::Box::Resizing::kFullSize);
 	main_box_.add(&force_, UI::Box::Resizing::kFullSize);
 	main_box_.add(&info_, UI::Box::Resizing::kFullSize);
 	set_center_panel(&main_box_);
@@ -140,15 +150,13 @@ void ScenarioToolRoadOptionsMenu::think() {
 	                  _("Click on fields to determine the waterway’s path, or click the start flag "
 	                    "again to cancel.") :
 	                  _("Click on fields to determine the waterway’s path. Click on the end field "
-	                    "again to build a flag there. Hold down Ctrl to automatically place flags "
-	                    "along the way. Double-click the start flag to cancel.") :
+	                    "again to build a flag there. Double-click the start flag to cancel.") :
 	                  e.in_road_building_mode(RoadBuildingType::kWaterway) ?
 	                  e.get_build_road_start() == e.get_build_road_end() ?
 	                  _("Click on fields to determine the road’s path, or click the start flag "
 	                    "again to cancel.") :
 	                  _("Click on fields to determine the road’s path. Click on the end field again "
-	                    "to build a flag there. Hold down Ctrl to automatically place flags along "
-	                    "the way. Double-click the start flag to cancel.") :
+	                    "to build a flag there. Double-click the start flag to cancel.") :
 	                  roadmode(type_.get_state()) == EditorActionArgs::RoadMode::kWaterway ?
 	                  _("Click on a flag to start building a waterway.") :
 	                  _("Click on a flag to start building a road."));

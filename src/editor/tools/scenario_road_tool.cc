@@ -29,6 +29,7 @@ static bool create_road(Widelands::EditorGameBase& egbase,
                         EditorActionArgs::RoadMode mode,
                         bool primary_carrier,
                         bool secondary_carrier,
+                        bool place_flags,
                         bool force) {
 	if (path.get_nsteps() < 2) {
 		return false;
@@ -53,15 +54,9 @@ static bool create_road(Widelands::EditorGameBase& egbase,
 			return false;
 		}
 		// Build flags along the way whereever possible
-		if (SDL_GetModState() & KMOD_CTRL) {
-			if (SDL_GetModState() & KMOD_SHIFT) {
-				for (auto it = first; it <= last; ++it) {
-					player.build_flag(egbase.map().get_fcoords(*it));
-				}
-			} else {
-				for (auto it = last; first <= it; --it) {
-					player.build_flag(egbase.map().get_fcoords(*it));
-				}
+		if (place_flags) {
+			for (auto it = last; first <= it; --it) {
+				player.build_flag(egbase.map().get_fcoords(*it));
 			}
 		}
 		// Create ferries if desired
@@ -88,15 +83,9 @@ static bool create_road(Widelands::EditorGameBase& egbase,
 			return false;
 		}
 		// Build flags along the road whereever possible
-		if (SDL_GetModState() & KMOD_CTRL) {
-			if (SDL_GetModState() & KMOD_SHIFT) {
-				for (auto it = first; it <= last; ++it) {
-					player.build_flag(egbase.map().get_fcoords(*it));
-				}
-			} else {
-				for (auto it = last; first <= it; --it) {
-					player.build_flag(egbase.map().get_fcoords(*it));
-				}
+		if (place_flags) {
+			for (auto it = last; first <= it; --it) {
+				player.build_flag(egbase.map().get_fcoords(*it));
 			}
 		}
 		// Create carriers if desired
@@ -147,7 +136,7 @@ int32_t ScenarioPlaceRoadTool::handle_click_impl(const Widelands::NodeAndTriangl
 			Widelands::CoordPath p = eia.get_build_road_path();
 			if (eia.get_build_road_start() == eia.get_build_road_end() ||
 			    create_road(eia.egbase(), Widelands::Path(p), args->road_mode,
-			                args->create_primary_worker, args->create_secondary_worker, args->force)) {
+			                args->create_primary_worker, args->create_secondary_worker, args->place_flags, args->force)) {
 				eia.abort_build_road();
 			}
 		} else {
@@ -155,7 +144,7 @@ int32_t ScenarioPlaceRoadTool::handle_click_impl(const Widelands::NodeAndTriangl
 			Widelands::CoordPath p = eia.get_build_road_path();
 			if (flag &&
 			    create_road(eia.egbase(), Widelands::Path(p), args->road_mode,
-			                args->create_primary_worker, args->create_secondary_worker, args->force)) {
+			                args->create_primary_worker, args->create_secondary_worker, args->place_flags, args->force)) {
 				eia.abort_build_road();
 			}
 		}
@@ -174,6 +163,7 @@ EditorActionArgs ScenarioPlaceRoadTool::format_args_impl(EditorInteractive& pare
 	a.create_primary_worker = create_primary_worker_;
 	a.create_secondary_worker = create_secondary_worker_;
 	a.force = force_;
+	a.place_flags = place_flags_;
 	return a;
 }
 

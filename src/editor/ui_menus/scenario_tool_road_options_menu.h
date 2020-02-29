@@ -48,7 +48,7 @@ private:
 
 	UI::Box main_box_;
 	UI::Panel buttons_;
-	UI::Checkbox force_, create_primary_, create_secondary_;
+	UI::Checkbox force_, create_primary_, create_secondary_, place_flags_;
 	UI::Radiogroup type_;
 	UI::MultilineTextarea info_;
 };

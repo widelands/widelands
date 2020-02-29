@@ -23,6 +23,7 @@
 
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
+#include "ui_basic/messagebox.h"
 
 inline EditorInteractive& ScenarioToolInfrastructureOptionsMenu::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
@@ -38,6 +39,8 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(
    : EditorToolOptionsMenu(parent, registry, 400, 200, _("Place Infrastructure"), tool),
      tool_(tool),
      box_(this, 0, 0, UI::Box::Vertical),
+     auto_infra_(&box_, "auto_infra", 0, 0, 100, 30, UI::ButtonStyle::kWuiSecondary, _("Place Headquarters"),
+     		_("Automatically place a Headquarters building at each player's starting position")),
      tabs_(&box_, UI::TabPanelStyle::kWuiDark),
      force_(&box_,
             Vector2i(0, 0),
@@ -194,9 +197,14 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(
 		tool_.set_force(force_.get_state());
 		select_correct_tool();
 	});
+	auto_infra_.sigclicked.connect([this]() {
+		make_auto_infra();
+		select_correct_tool();
+	});
 
 	box_.add(&tabs_, UI::Box::Resizing::kExpandBoth);
 	box_.add(&force_, UI::Box::Resizing::kFullSize);
+	box_.add(&auto_infra_, UI::Box::Resizing::kFullSize);
 	box_.add(&selected_items_, UI::Box::Resizing::kFullSize);
 	tabs_.activate(tool_.get_player() - 1);
 	select_tab();
@@ -205,6 +213,61 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(
 	if (get_usedefaultpos()) {
 		center_to_parent();
 	}
+}
+
+void ScenarioToolInfrastructureOptionsMenu::make_auto_infra() {
+	std::list<std::string> errors;
+	Widelands::EditorGameBase& egbase = eia().egbase();
+	auto is_hq = [&egbase](Widelands::DescriptionIndex di) {
+		const Widelands::BuildingDescr& b = *egbase.tribes().get_building_descr(di);
+		return b.type() == Widelands::MapObjectType::WAREHOUSE && b.get_size() == Widelands::BaseImmovable::Size::BIG &&
+				!b.get_isport() && !b.get_ismine() && !b.is_destructible() && !b.can_be_dismantled() && !b.is_buildable() &&
+				!b.is_enhanced() && !b.needs_seafaring() && !b.needs_waterways() && b.get_built_over_immovable() == Widelands::INVALID_INDEX;
+	};
+	for (unsigned p = egbase.map().get_nrplayers(); p; --p) {
+		Widelands::Player& player = *egbase.get_player(p);
+		Widelands::DescriptionIndex index = player.tribe().building_index(player.tribe().name() + "_headquarters");
+		if (index == Widelands::INVALID_INDEX || !is_hq(index)) {
+			// So the HQ for this tribe does not follow the naming conventions. So we try to find some other suitable building…
+			index = Widelands::INVALID_INDEX;
+			for (Widelands::DescriptionIndex di : player.tribe().buildings()) {
+				if (is_hq(di)) {
+					index = di;
+					errors.push_back((boost::format(
+							_("Player %1$u (tribe %2$s): Headquarters does not follow naming conventions, identified %3$s as headquarters"))
+							% p % player.tribe().descname().c_str() % egbase.tribes().get_building_descr(di)->name().c_str()).str());
+				}
+			}
+		}
+		if (index != Widelands::INVALID_INDEX) {
+			const Widelands::BuildingDescr& b = *egbase.tribes().get_building_descr(index);
+			if (b.suitability(egbase.map(), egbase.map().get_fcoords(egbase.map().get_starting_pos(p)))) {
+				player.force_building(egbase.map().get_starting_pos(p), {std::make_pair(index, "")});
+			} else {
+				errors.push_back((boost::format(
+						_("Player %1$u (tribe %2$s): Starting position is not suited for a %3$s"))
+						% p % player.tribe().descname().c_str() % b.name().c_str()).str());
+			}
+		} else {
+			errors.push_back((boost::format(
+					_("Player %1$u (tribe %2$s): Headquarters building could not be identified"))
+					% p % player.tribe().descname().c_str()).str());
+		}
+	}
+	std::string text;
+	if (errors.empty()) {
+		text = _("All buildings placed successfully. Don’t forget to add the initial wares and workers.");
+	} else {
+		text = _("Not all buildings could be placed!");
+		text += "\n";
+		text += (boost::format(ngettext("%u warning generated:", "%u warnings generated:", errors.size())) % errors.size()).str();
+		text += "\n";
+		for (const std::string& e : errors) {
+			text += "\n" + e;
+		}
+	}
+	UI::WLMessageBox m(get_parent(), errors.empty() ? _("Success") : _("Error"), text, UI::WLMessageBox::MBoxType::kOk);
+	m.run<UI::Panel::Returncodes>();
 }
 
 void ScenarioToolInfrastructureOptionsMenu::select_tab() {

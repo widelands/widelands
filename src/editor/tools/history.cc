@@ -41,6 +41,7 @@ EditorActionArgs::EditorActionArgs(EditorInteractive& base)
      random_index(-1),
      create_primary_worker(false),
      create_secondary_worker(false),
+     place_flags(false),
      force(false),
      interval(0, 0),
      refcount(0) {
