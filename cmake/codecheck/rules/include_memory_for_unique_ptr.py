@@ -8,8 +8,8 @@ def does_include_memory(lines, fn):
             includes_memory = True
 
         if ('unique_ptr' in line or 'shared_ptr' in line) and not includes_memory:
-            return [ (fn, lineno,
-                'This file uses unique_ptr or shared_ptr but does not include <memory>.') ]
+            return [(fn, lineno,
+                     'This file uses unique_ptr or shared_ptr but does not include <memory>.')]
     return []
 
 
@@ -24,7 +24,7 @@ allowed = [
 
 std::unique_ptr foo;
 """,
-"""#include <memory>
+    """#include <memory>
 
 std::shared_ptr foo;
 """,
@@ -43,10 +43,10 @@ std::unique_ptr<Blub> foo;
 
 #include <memory>
 """,
-"""
+    """
     std::shared_ptr<Blub> foo;
 """,
-"""
+    """
 std::shared_ptr<Blub> foo;
 
 #include <memory>
