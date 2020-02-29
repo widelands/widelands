@@ -67,7 +67,8 @@ public:
 		dfShowSoldierLevels = 4,  ///< show level information above soldiers
 		dfShowWorkareaOverlap =
 		   8,         ///< highlight overlapping workareas when placing a constructionsite
-		dfDebug = 16  ///< general debugging info
+		dfDebug = 16, ///< general debugging info
+		dfShowOwnership = 32, ///< highlight fields in their owner's playercolor
 	};
 
 	/// A build help overlay, i.e. small, big, mine, port ...

@@ -258,7 +258,7 @@ private:
 	};
 
 	// For referencing the items in showhidemenu_
-	enum class ShowHideEntry { kBuildingSpaces, kGrid, kAnimals, kImmovables, kResources, kCensus };
+	enum class ShowHideEntry { kBuildingSpaces, kGrid, kAnimals, kImmovables, kResources, kCensus, kOwnership };
 
 	// Adds the mainmenu_ to the toolbar
 	void add_main_menu();
@@ -367,6 +367,8 @@ private:
 	bool draw_immovables_ = true;
 	bool draw_bobs_ = true;
 	bool draw_grid_ = true;
+
+	Workareas ownership_layer_cache_;
 
 	void update_players();
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteEditorPlayerEdited>> player_notes_;

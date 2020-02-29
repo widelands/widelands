@@ -592,12 +592,16 @@ void EditorInteractive::rebuild_showhide_menu() {
 	                  ShowHideEntry::kResources,
 	                  g_gr->images().get("images/wui/menus/toggle_resources.png"));
 
-	if (finalized_)
+	if (finalized_) {
 		/** TRANSLATORS: An entry in the game's show/hide menu to toggle whether building names are
 		 * shown */
 		showhidemenu_.add(get_display_flag(dfShowCensus) ? _("Hide Census") : _("Show Census"),
 		                  ShowHideEntry::kCensus,
 		                  g_gr->images().get("images/wui/menus/toggle_census.png"), false, "", "C");
+		showhidemenu_.add(get_display_flag(dfShowOwnership) ? _("Hide Ownership Layer") : _("Show Ownership Layer"),
+		                  ShowHideEntry::kOwnership,
+		                  g_gr->images().get("images/wui/menus/toggle_ownership_layer.png"), false, "", "E");
+	}
 }
 
 void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
@@ -619,6 +623,9 @@ void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
 	} break;
 	case ShowHideEntry::kCensus: {
 		set_display_flag(dfShowCensus, !get_display_flag(dfShowCensus));
+	} break;
+	case ShowHideEntry::kOwnership: {
+		set_display_flag(dfShowOwnership, !get_display_flag(dfShowOwnership));
 	} break;
 	}
 	rebuild_showhide_menu();
@@ -674,6 +681,7 @@ void EditorInteractive::unfinalize() {
 	variables_.clear();
 	includes_.clear();
 	set_display_flag(dfShowCensus, false);
+	set_display_flag(dfShowOwnership, false);
 	rebuild_scenario_tool_menu();
 	rebuild_showhide_menu();
 }
@@ -773,7 +781,45 @@ static void draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field&
 
 void EditorInteractive::draw(RenderTarget& dst) {
 	const auto& ebase = egbase();
-	auto* fields_to_draw = map_view()->draw_terrain(ebase, Workareas(), draw_grid_, &dst);
+	const auto& map = ebase.map();
+	const unsigned nrplayers = map.get_nrplayers();
+	if (get_display_flag(dfShowOwnership)) {
+		if (ownership_layer_cache_.size() != nrplayers) {
+			ownership_layer_cache_.clear();
+			ownership_layer_cache_.resize(nrplayers);
+		}
+		std::vector<std::set<Widelands::Coords>> territory;
+		territory.resize(nrplayers);
+		for (Widelands::Coords c(0, 0); c.x < map.get_width(); ++c.x, c.y = 0) {
+			for (; c.y < map.get_height(); ++c.y) {
+				if (unsigned o = map[c].get_owned_by()) {
+					territory[o - 1].insert(c);
+				}
+			}
+		}
+		for (unsigned p = 0; p < nrplayers; ++p) {
+			std::vector<WorkareaPreviewData> wa_data;
+			const uint32_t col = (kPlayerColors[p].r << 16) | (kPlayerColors[p].g << 8) | kPlayerColors[p].b | 0x7f000000;
+			for (const Widelands::Coords& c : territory[p]) {
+				if (territory[p].count(map.br_n(c))) {
+					if (territory[p].count(map.r_n(c))) {
+						wa_data.push_back(WorkareaPreviewData(Widelands::TCoords<>(c, Widelands::TriangleIndex::R), 6, col));
+					}
+					if (territory[p].count(map.bl_n(c))) {
+						wa_data.push_back(WorkareaPreviewData(Widelands::TCoords<>(c, Widelands::TriangleIndex::D), 6, col));
+					}
+				}
+			}
+			if (wa_data != ownership_layer_cache_[p].first) {
+				log("NOCOM Updated for %u\n", p);
+				// TODO(Nordfriese): Border lines would be nice of course, but their calculation gets very costly easily
+				ownership_layer_cache_[p] = WorkareasEntry(wa_data, std::vector<std::vector<Widelands::Coords>>());
+			}
+		}
+	} else {
+		ownership_layer_cache_.clear();
+	}
+	auto* fields_to_draw = map_view()->draw_terrain(ebase, ownership_layer_cache_, draw_grid_, &dst);
 	const auto road_building_p = road_building_preview_overlays();
 	const auto road_building_s = road_building_steepness_overlays();
 	const auto info_to_draw = get_info_to_draw(!map_view()->is_animating());
@@ -786,9 +832,8 @@ void EditorInteractive::draw(RenderTarget& dst) {
 	// therefore potentially expensive - though it never showed up in any of my
 	// profiles. We could change the Map should this become a bottleneck, since
 	// plrnum -> coords is needed less often.
-	const auto& map = ebase.map();
 	std::map<Widelands::Coords, int> starting_positions;
-	for (int i = 1; i <= map.get_nrplayers(); ++i) {
+	for (unsigned i = 1; i <= nrplayers; ++i) {
 		starting_positions[map.get_starting_pos(i)] = i;
 	}
 
@@ -1117,6 +1162,12 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_c:
 			if (finalized_) {
 				set_display_flag(dfShowCensus, !get_display_flag(dfShowCensus));
+				rebuild_showhide_menu();
+			}
+			return true;
+		case SDLK_e:
+			if (finalized_) {
+				set_display_flag(dfShowOwnership, !get_display_flag(dfShowOwnership));
 				rebuild_showhide_menu();
 			}
 			return true;
