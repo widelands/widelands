@@ -68,9 +68,11 @@ const BuiltinFunctionInfo* builtin_f(const FunctionBase&);
 // Property needs to be embedded in GetProperty or FS_SetProperty to be used for anything.
 class Property {
 public:
+	enum Access { RO, RW };
+
 	Property(
-	   const std::string& n, bool ro, const VariableType& c, const VariableType& t, bool ais = true)
-	   : call_on_(c), type_(t), name_(n), read_only_(ro), available_in_subclasses_(ais) {
+	   const std::string& n, Access a, const VariableType& c, const VariableType& t, bool ais = true)
+	   : call_on_(c), type_(t), name_(n), access_(a), available_in_subclasses_(ais) {
 		assert(type_.id() != VariableTypeID::Nil);
 	}
 
@@ -86,8 +88,8 @@ public:
 	const std::string& get_name() const {
 		return name_;
 	}
-	bool read_only() const {
-		return read_only_;
+	Access get_access() const {
+		return access_;
 	}
 	bool available_in_subclasses() const {
 		return available_in_subclasses_;
@@ -97,7 +99,7 @@ private:
 	VariableType call_on_;
 	VariableType type_;
 	std::string name_;
-	bool read_only_;
+	Access access_;
 	bool available_in_subclasses_;
 
 	DISALLOW_COPY_AND_ASSIGN(Property);
