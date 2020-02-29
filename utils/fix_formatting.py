@@ -96,7 +96,7 @@ def main():
         if args['dir']:
             directories.add(args['dir'])
         else:
-            directories = {'./utils'}
+            directories = {'./utils', './cmake/codecheck'}
         for directory in directories:
             sys.stdout.write(
                 '\nFormatting Python scripts in directory: ' + directory + ' ')
