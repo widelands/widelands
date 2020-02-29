@@ -26,20 +26,13 @@
 #include "logic/widelands.h"
 #include "map_io/tribes_legacy_lookup_table.h"
 
-class FileRead;
-class FileWrite;
-
 namespace Widelands {
 
 class Economy;
-class EditorGameBase;
 struct Flag;
 class Game;
-class MapObjectLoader;
-struct MapObjectSaver;
 struct PlayerImmovable;
 class RequestList;
-struct Requirements;
 struct Supply;
 struct Transfer;
 class Worker;

@@ -23,15 +23,13 @@
 #include <memory>
 #include <string>
 
-#include "graphic/playercolor.h"
-#include "logic/map.h"
+#include "logic/widelands.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/base.h"
 
-struct ChatProvider;
 class GameController;
 struct GameSettingsProvider;
 class LuaInterface;

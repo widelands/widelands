@@ -26,6 +26,7 @@
 #include "logic/player.h"
 #include "ui_basic/button.h"
 #include "ui_basic/radiobutton.h"
+#include "ui_basic/textarea.h"
 #include "wui/interactive_gamebase.h"
 
 using Widelands::SoldierControl;

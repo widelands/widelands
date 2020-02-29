@@ -22,6 +22,7 @@
 #include <boost/format.hpp>
 
 #include "graphic/graphic.h"
+#include "logic/map_objects/tribes/militarysite.h"
 #include "wui/actionconfirm.h"
 #include "wui/inputqueuedisplay.h"
 #include "wui/interactive_player.h"
@@ -138,14 +139,22 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 		// the relevant options.
 		bool nothing_added = false;
 		UI::Box& settings_box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
-		if (upcast(Widelands::ProductionsiteSettings, ps, construction_site->get_settings())) {
-			for (const auto& pair : ps->ware_queues) {
+		switch (construction_site->building().type()) {
+		case Widelands::MapObjectType::PRODUCTIONSITE:
+		case Widelands::MapObjectType::TRAININGSITE: {
+			upcast(Widelands::ProductionsiteSettings, ps, construction_site->get_settings());
+			// We use the ProductionSiteDescr to get the correct order for the input queues
+			upcast(const Widelands::ProductionSiteDescr, prodsite, &construction_site->building());
+			assert(prodsite != nullptr);
+			assert(ps->ware_queues.size() == prodsite->input_wares().size());
+			for (const auto& pair : prodsite->input_wares()) {
 				InputQueueDisplay* queue = new InputQueueDisplay(
 				   &settings_box, 0, 0, *igbase(), *construction_site, Widelands::wwWARE, pair.first);
 				settings_box.add(queue);
 				cs_ware_queues_.push_back(queue);
 			}
-			for (const auto& pair : ps->worker_queues) {
+			assert(ps->worker_queues.size() == prodsite->input_workers().size());
+			for (const auto& pair : prodsite->input_workers()) {
 				InputQueueDisplay* queue = new InputQueueDisplay(
 				   &settings_box, 0, 0, *igbase(), *construction_site, Widelands::wwWORKER, pair.first);
 				settings_box.add(queue);
@@ -196,7 +205,9 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			settings_box.add(cs_stopped_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 			settings_box.add_space(6);
 			cs_stopped_->set_enabled(can_act);
-		} else if (upcast(Widelands::MilitarysiteSettings, ms, construction_site->get_settings())) {
+		} break;
+		case Widelands::MapObjectType::MILITARYSITE: {
+			upcast(Widelands::MilitarysiteSettings, ms, construction_site->get_settings());
 			UI::Box& soldier_capacity_box = *new UI::Box(&settings_box, 0, 0, UI::Box::Horizontal);
 			settings_box.add(&soldier_capacity_box, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 			cs_soldier_capacity_decrease_ = new UI::Button(
@@ -252,7 +263,9 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				});
 			}
 			settings_box.add_space(8);
-		} else if (upcast(Widelands::WarehouseSettings, ws, construction_site->get_settings())) {
+		} break;
+		case Widelands::MapObjectType::WAREHOUSE: {
+			upcast(Widelands::WarehouseSettings, ws, construction_site->get_settings());
 			auto add_tab = [this, construction_site, can_act](
 			   Widelands::WareWorker ww, FakeWaresDisplay** display) {
 				UI::Box& mainbox = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
@@ -318,7 +331,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			} else {
 				nothing_added = true;
 			}
-		} else {
+		} break;
+		default:
 			NEVER_HERE();
 		}
 

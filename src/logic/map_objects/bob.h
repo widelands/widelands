@@ -27,13 +27,10 @@
 #include "logic/map_objects/info_to_draw.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/walkingdir.h"
+#include "logic/path.h"
 #include "logic/widelands_geometry.h"
 
 namespace Widelands {
-class Map;
-struct Route;
-struct Transfer;
-class TribeDescr;
 
 /**
  * BobProgramBase is only used that

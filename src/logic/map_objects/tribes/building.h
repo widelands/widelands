@@ -31,26 +31,16 @@
 #include "logic/map_objects/buildcost.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/attack_target.h"
-#include "logic/map_objects/tribes/bill_of_materials.h"
 #include "logic/map_objects/tribes/building_settings.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "logic/map_objects/tribes/workarea_info.h"
 #include "logic/message.h"
-#include "notifications/notifications.h"
 #include "scripting/lua_table.h"
-
-struct BuildingHints;
-class Image;
 
 namespace Widelands {
 
-struct Flag;
-struct Message;
-class TribeDescr;
 class InputQueue;
-
-class Building;
 
 constexpr int32_t kPriorityLow = 2;
 constexpr int32_t kPriorityNormal = 4;

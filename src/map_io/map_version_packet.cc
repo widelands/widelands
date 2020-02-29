@@ -19,7 +19,6 @@
 
 #include "map_io/map_version_packet.h"
 
-#include "build_info.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "io/profile.h"

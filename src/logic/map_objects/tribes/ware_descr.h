@@ -32,15 +32,10 @@
 #include "logic/map_objects/map_object.h"
 #include "scripting/lua_table.h"
 
-class Image;
-class LuaTable;
-
 constexpr int kWareMenuPicWidth = 24;   //!< Default width for ware's menu icons
 constexpr int kWareMenuPicHeight = 24;  //!< Default height for ware's menu icons
 
 namespace Widelands {
-
-class TribeDescr;
 
 /**
  * Wares can be stored in warehouses. They can be transferred across an

@@ -27,8 +27,6 @@
 
 #include <stdint.h>
 
-#include "base/macros.h"
-
 namespace Widelands {
 
 //  Type definitions for the game logic.

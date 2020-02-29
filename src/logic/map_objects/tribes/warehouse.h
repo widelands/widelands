@@ -21,24 +21,15 @@
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_WAREHOUSE_H
 
 #include "base/macros.h"
-#include "base/wexception.h"
 #include "economy/request.h"
-#include "economy/wares_queue.h"
+#include "economy/ware_instance.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/map_objects/tribes/wareworker.h"
 
-class InteractivePlayer;
-
 namespace Widelands {
 
-class EditorGameBase;
 class PortDock;
-class Request;
-struct Requirements;
-class Soldier;
-class TribeDescr;
-class WareInstance;
 struct WareList;
 
 /*

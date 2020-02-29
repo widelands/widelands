@@ -25,7 +25,6 @@
 #include <string>
 
 #include "base/macros.h"
-#include "graphic/align.h"
 #include "scripting/lua_table.h"
 
 namespace UI {

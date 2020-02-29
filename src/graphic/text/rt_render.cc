@@ -46,6 +46,7 @@
 #include "graphic/text/font_io.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text/rendered_text.h"
+#include "graphic/text/rt_errors.h"
 #include "graphic/text/rt_parse.h"
 #include "graphic/text/sdl_ttf_font.h"
 #include "graphic/text/textstream.h"

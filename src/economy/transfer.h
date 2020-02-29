@@ -27,8 +27,6 @@ class Game;
 struct PlayerImmovable;
 class Request;
 class WareInstance;
-class MapObjectLoader;
-struct MapObjectSaver;
 class Worker;
 
 /**

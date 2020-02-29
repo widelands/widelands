@@ -21,7 +21,6 @@
 
 #include "editor/editorinteractive.h"
 #include "editor/tools/tool.h"
-#include "graphic/playercolor.h"
 
 // global variable to pass data from callback to class
 static int32_t current_player_;

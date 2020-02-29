@@ -30,8 +30,6 @@ class FileWrite;
 namespace Widelands {
 class MapObjectLoader;
 struct MapObjectSaver;
-class EditorGameBase;
-class Game;
 }  // namespace Widelands
 
 /**

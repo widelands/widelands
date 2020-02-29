@@ -24,7 +24,6 @@
 #include <boost/format.hpp>
 
 #include "base/log.h"
-#include "base/macros.h"
 
 LuaTable::LuaTable(lua_State* L) : L_(L), warn_about_unaccessed_keys_(true) {
 	// S: <table>

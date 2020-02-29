@@ -26,8 +26,6 @@ namespace Widelands {
 
 class EditorGameBase;
 class Map;
-class MapObjectLoader;
-struct MapObjectSaver;
 
 /*
  * This packet contains the version information of the map.

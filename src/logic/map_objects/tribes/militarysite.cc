@@ -984,7 +984,7 @@ bool MilitarySite::update_upgrade_requirements() {
 }
 
 const BuildingSettings* MilitarySite::create_building_settings() const {
-	MilitarysiteSettings* settings = new MilitarysiteSettings(descr());
+	MilitarysiteSettings* settings = new MilitarysiteSettings(descr(), owner().tribe());
 	settings->desired_capacity =
 	   std::min(settings->max_capacity, soldier_control_.soldier_capacity());
 	settings->prefer_heroes = soldier_preference_ == SoldierPreference::kHeroes;
