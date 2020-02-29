@@ -31,7 +31,6 @@
 #include "logic/map_objects/walkingdir.h"
 
 namespace Widelands {
-class Building;
 class Request;
 struct RoadBase;
 struct Road;

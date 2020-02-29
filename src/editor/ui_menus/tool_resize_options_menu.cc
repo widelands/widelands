@@ -26,7 +26,6 @@
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/resize_tool.h"
-#include "graphic/graphic.h"
 #include "logic/map.h"
 
 inline EditorInteractive& EditorToolResizeOptionsMenu::eia() {

@@ -34,6 +34,9 @@
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/player.h"
+#include "ui_basic/box.h"
+#include "ui_basic/button.h"
+#include "ui_basic/textarea.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/soldiercapacitycontrol.h"
 

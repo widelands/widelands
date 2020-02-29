@@ -39,21 +39,16 @@
 #include "logic/cmd_queue.h"
 #include "logic/map_objects/info_to_draw.h"
 #include "logic/map_objects/tribes/training_attribute.h"
-#include "logic/map_objects/tribes/wareworker.h"
 #include "logic/widelands.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/tabpanel.h"
 
-class FileRead;
 class RenderTarget;
 
 namespace Widelands {
 
-class EditorCategory;
 class MapObject;
-class MapObjectLoader;
 class Player;
-struct Path;
 
 // This enum lists the available classes of Map Objects.
 enum class MapObjectType : uint8_t {

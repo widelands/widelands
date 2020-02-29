@@ -30,7 +30,6 @@
 #include "ai/computer_player.h"
 #include "base/i18n.h"
 #include "economy/economy.h"
-#include "economy/wares_queue.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
@@ -38,7 +37,6 @@
 
 namespace Widelands {
 struct Road;
-struct Flag;
 }  // namespace Widelands
 
 /**

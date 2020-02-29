@@ -28,12 +28,8 @@
 
 namespace Widelands {
 
-class Economy;
 class EditorGameBase;
-class Game;
-class MapObjectLoader;
 class PortDock;
-class Request;
 class WareInstance;
 class Warehouse;
 class Worker;

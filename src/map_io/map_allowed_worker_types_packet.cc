@@ -21,7 +21,6 @@
 
 #include <boost/format.hpp>
 
-#include "base/macros.h"
 #include "io/profile.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"

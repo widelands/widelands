@@ -299,8 +299,8 @@ void MapBuildingdataPacket::read_constructionsite(
 					constructionsite.info_.intermediates.push_back(egbase.tribes().get_building_descr(
 					   egbase.tribes().building_index(fr.c_string())));
 				}
-				constructionsite.settings_.reset(
-				   BuildingSettings::load(egbase, constructionsite.owner().tribe(), fr));
+				constructionsite.settings_.reset(BuildingSettings::load(
+				   egbase, constructionsite.owner().tribe(), fr, tribes_lookup_table));
 			} else {
 				constructionsite.init_settings();
 			}

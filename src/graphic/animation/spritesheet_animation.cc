@@ -28,10 +28,8 @@
 #include <boost/format.hpp>
 
 #include "base/log.h"
-#include "base/macros.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
-#include "graphic/playercolor.h"
 #include "graphic/texture.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"

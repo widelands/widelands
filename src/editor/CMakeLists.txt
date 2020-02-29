@@ -14,6 +14,8 @@ wl_library(editor
     editor_ui
     economy
     wui
+    random
+    graphic_text_layout
     ui_basic
     editor_tools_ui
     editor_scenario_tools
@@ -21,12 +23,10 @@ wl_library(editor
     graphic_surface
     editor_tools
     logic_map_objects
-    base_scoped_timer
     scripting_lua_table
     base_exceptions
     map_io_map_loader
     widelands_options
-    notifications
     graphic_game_renderer
     logic_widelands_geometry
     sound
@@ -39,7 +39,6 @@ wl_library(editor
     logic
     base_i18n
     io_fileread
-    logic_tribe_basic_info
 )
 
 wl_library(editor_scripting
@@ -112,14 +111,12 @@ wl_library(editor_tools
     base_i18n
     base_macros
     editor
-    graphic_playercolor
     graphic_text_layout
     logic
     logic_map
     logic_map_objects
     logic_widelands_geometry
     ui_basic
-    wui_mapview_pixelfunctions
 )
 
 wl_library(editor_scenario_tools
@@ -181,6 +178,7 @@ wl_library(editor_ui
     logic_map_objects_description_maintainer
     random
     io_filesystem
+    logic_constants
     logic_filesystem_constants
     wui
     graphic_fonthandler
@@ -272,4 +270,5 @@ wl_library(editor_scenario_tools_ui
     base_i18n
     ui_basic
     economy
+    ui_basic
 )

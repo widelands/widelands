@@ -23,6 +23,7 @@
 
 #include "base/macros.h"
 #include "base/math.h"
+#include "graphic/game_renderer.h"
 #include "graphic/rendertarget.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"

@@ -23,8 +23,9 @@
 #include <memory>
 
 #include "graphic/align.h"
+#include "graphic/styles/font_style.h"
 #include "graphic/styles/panel_styles.h"
-#include "graphic/text_layout.h"
+#include "graphic/text/rendered_text.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/scrollbar.h"
 

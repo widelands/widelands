@@ -26,6 +26,7 @@
 
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
+#include "logic/map_objects/tribes/soldier.h"
 #include "wui/soldierlist.h"
 
 int32_t

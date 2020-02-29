@@ -26,7 +26,6 @@
 #include <boost/function.hpp>
 #include <stdint.h>
 
-#include "base/vector.h"
 #include "wui/mapview.h"
 
 /**

@@ -26,6 +26,7 @@
 #include "editor/editorinteractive.h"
 #include "editor/ui_menus/main_menu_load_or_save_map.h"
 #include "editor/ui_menus/main_menu_map_options.h"
+#include "logic/note_map_options.h"
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/textarea.h"

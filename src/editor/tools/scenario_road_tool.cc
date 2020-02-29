@@ -23,6 +23,7 @@
 #include "economy/waterway.h"
 #include "editor/editorinteractive.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/tribes/ferry.h"
 
 static bool create_road(Widelands::EditorGameBase& egbase,
                         Widelands::Path path,

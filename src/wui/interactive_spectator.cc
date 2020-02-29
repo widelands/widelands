@@ -22,12 +22,12 @@
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "chat/chat.h"
+#include "graphic/game_renderer.h"
 #include "logic/game_controller.h"
 #include "logic/player.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "wui/fieldaction.h"
-#include "wui/game_chat_menu.h"
 #include "wui/game_main_menu_save_game.h"
 #include "wui/general_statistics_menu.h"
 

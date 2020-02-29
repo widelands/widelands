@@ -20,7 +20,6 @@
 #ifndef WL_EDITOR_UI_MENUS_MAIN_MENU_MAP_OPTIONS_H
 #define WL_EDITOR_UI_MENUS_MAIN_MENU_MAP_OPTIONS_H
 
-#include "logic/note_map_options.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"

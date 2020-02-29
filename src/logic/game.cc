@@ -42,6 +42,7 @@
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
 #include "io/fileread.h"
+#include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
 #include "logic/cmd_calculate_statistics.h"

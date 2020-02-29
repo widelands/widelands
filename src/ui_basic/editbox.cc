@@ -33,7 +33,6 @@
 #include "graphic/style_manager.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
-#include "graphic/text/rt_errors.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
 

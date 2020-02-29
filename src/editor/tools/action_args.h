@@ -30,6 +30,7 @@
 #include "logic/field.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/building_settings.h"
+#include "logic/map_objects/tribes/worker_descr.h"
 #include "logic/path.h"
 #include "logic/see_unsee_node.h"
 #include "logic/widelands_geometry.h"

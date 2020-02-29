@@ -30,6 +30,7 @@
 #include "graphic/graphic.h"
 #include "graphic/text_layout.h"
 #include "logic/map.h"
+#include "logic/note_map_options.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilineeditbox.h"
 #include "ui_basic/textarea.h"

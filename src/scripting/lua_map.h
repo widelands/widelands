@@ -42,13 +42,10 @@
 #include "scripting/luna.h"
 
 namespace Widelands {
-class SoldierDescr;
 class BuildingDescr;
 class Bob;
 class ResourceDescription;
 class WareDescr;
-class WorkerDescr;
-class TerrainDescription;
 class TribeDescr;
 }  // namespace Widelands
 

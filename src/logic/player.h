@@ -27,7 +27,6 @@
 #include "base/macros.h"
 #include "economy/economy.h"
 #include "graphic/color.h"
-#include "graphic/playercolor.h"
 #include "logic/editor_game_base.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/constructionsite.h"
@@ -44,14 +43,9 @@ namespace Widelands {
 
 struct Path;
 struct PlayerImmovable;
-class Soldier;
 class TrainingSite;
-struct Flag;
-class TribeDescr;
-struct RoadBase;
 struct Road;
 struct Waterway;
-struct AttackController;
 
 /**
  * Manage in-game aspects of players, such as tribe, team, fog-of-war, statistics,

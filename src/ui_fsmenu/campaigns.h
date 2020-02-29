@@ -26,7 +26,6 @@
 #include <vector>
 
 #include "graphic/image.h"
-#include "scripting/lua_table.h"
 #include "wui/mapauthordata.h"
 
 /**

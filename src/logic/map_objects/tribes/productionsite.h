@@ -36,11 +36,8 @@
 
 namespace Widelands {
 
-struct ProductionProgram;
 class Request;
 class Soldier;
-class WareDescr;
-class WaresQueue;
 class WorkerDescr;
 
 enum class FailNotificationType { kDefault, kFull };

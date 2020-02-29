@@ -33,7 +33,6 @@ class EditorGameBase;
 class MapObjectLoader;
 struct Flag;
 struct MapObjectSaver;
-struct RoutingNode;
 
 /**
  * Route stores a route from flag to flag.

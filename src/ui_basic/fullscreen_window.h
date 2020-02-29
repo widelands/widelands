@@ -27,7 +27,6 @@
 
 #include "graphic/align.h"
 #include "graphic/graphic.h"
-#include "notifications/notifications.h"
 #include "ui_basic/panel.h"
 
 namespace UI {

@@ -24,10 +24,6 @@
 #include "logic/widelands_geometry.h"
 
 class EditorTool;
-namespace Widelands {
-class map;
-}
-class EditorInteractive;
 
 /// Class to save an action done by an editor tool
 // implementations in editor_history.cc

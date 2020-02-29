@@ -23,6 +23,7 @@
 #include "graphic/font_handler.h"
 #include "network/crypto.h"
 #include "network/internet_gaming.h"
+#include "network/internet_gaming_protocol.h"
 #include "ui_basic/button.h"
 #include "ui_basic/messagebox.h"
 #include "wlapplication_options.h"

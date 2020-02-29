@@ -28,6 +28,7 @@
 #include "logic/game.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/carrier.h"
+#include "logic/map_objects/tribes/ferry.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
 

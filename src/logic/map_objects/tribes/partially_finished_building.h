@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_PARTIALLY_FINISHED_BUILDING_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_PARTIALLY_FINISHED_BUILDING_H
 
+#include "economy/wares_queue.h"
 #include "logic/map_objects/tribes/building.h"
 
 namespace LuaMaps {
@@ -30,7 +31,6 @@ class LuaDismantleSite;
 namespace Widelands {
 
 class Request;
-class WaresQueue;
 
 /*
 PartiallyFinishedBuilding
