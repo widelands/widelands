@@ -17,7 +17,7 @@ std::vector<SavegameData> SavegameLoader::load_files(const std::string& director
 	FilenameSet gamefiles = g_fs->list_directory(directory);
 
 	for (const std::string& gamefilename : gamefiles) {
-		load_gamefile(gamefilename, loaded_games);
+		load(gamefilename, loaded_games);
 	}
 	return loaded_games;
 }
@@ -26,11 +26,50 @@ std::string SavegameLoader::get_savename(const std::string& gamefilename) const 
 	return gamefilename;
 }
 
+void SavegameLoader::load(const std::string& to_be_loaded,
+                          std::vector<SavegameData>& loaded_games) const {
+	log("loading file %s\n...", to_be_loaded.c_str());
+	if (g_fs->is_directory(to_be_loaded)) {
+		log("loading from directory...\n");
+		try {
+			load_directory_savegame(to_be_loaded, loaded_games);
+		} catch (const std::exception& e) {
+			log("exception! adding as subir...\n");
+			add_sub_dir(to_be_loaded, loaded_games);
+		}
+	} else {
+		log("loading from file...\n");
+		load_gamefile(to_be_loaded, loaded_games);
+	}
+}
+
+void SavegameLoader::load_directory_savegame(const std::string& gamefilename,
+                                             std::vector<SavegameData>& loaded_games) const {
+	Widelands::GamePreloadPacket gpdp;
+	SavegameData gamedata(gamefilename);
+
+	Widelands::GameLoader gl(gamefilename.c_str(), game_);
+	gl.preload_game(gpdp);
+	log("preloaded from directory: %s\n", gamefilename.c_str());
+	gamedata.gametype = gpdp.get_gametype();
+	if (!is_valid_gametype(gamedata)) {
+		return;
+	}
+
+	add_general_information(gamedata, gpdp);
+	add_time_info(gamedata, gpdp);
+	loaded_games.push_back(gamedata);
+}
+
 void SavegameLoader::load_gamefile(const std::string& gamefilename,
                                    std::vector<SavegameData>& loaded_games) const {
 	std::string savename = get_savename(gamefilename);
 
 	log("savename to be loaded: %s\n", savename.c_str());
+	//	if (gamefilename.find_first_of(".wgf") != std::string::npos) {
+	//		log("rejecting %s->%s\n", gamefilename.c_str(), savename.c_str());
+	//		return;
+	//	}
 
 	if (!g_fs->file_exists(savename.c_str())) {
 		return;

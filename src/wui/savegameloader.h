@@ -26,6 +26,9 @@ private:
 	virtual bool is_valid_gametype(const SavegameData& gamedata) const;
 	void add_time_info(SavegameData& gamedata, const Widelands::GamePreloadPacket& gpdp) const;
 	void add_sub_dir(const std::string& gamefilename, std::vector<SavegameData>& loaded_games) const;
+	void load_directory_savegame(const std::string& gamefilename,
+	                             std::vector<SavegameData>& loaded_games) const;
+	void load(const std::string& to_be_loaded, std::vector<SavegameData>& loaded_games) const;
 
 	Widelands::Game& game_;
 };
