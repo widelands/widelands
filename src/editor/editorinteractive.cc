@@ -598,9 +598,10 @@ void EditorInteractive::rebuild_showhide_menu() {
 		showhidemenu_.add(get_display_flag(dfShowCensus) ? _("Hide Census") : _("Show Census"),
 		                  ShowHideEntry::kCensus,
 		                  g_gr->images().get("images/wui/menus/toggle_census.png"), false, "", "C");
-		showhidemenu_.add(get_display_flag(dfShowOwnership) ? _("Hide Ownership Layer") : _("Show Ownership Layer"),
-		                  ShowHideEntry::kOwnership,
-		                  g_gr->images().get("images/wui/menus/toggle_ownership_layer.png"), false, "", "E");
+		showhidemenu_.add(
+		   get_display_flag(dfShowOwnership) ? _("Hide Ownership Layer") : _("Show Ownership Layer"),
+		   ShowHideEntry::kOwnership,
+		   g_gr->images().get("images/wui/menus/toggle_ownership_layer.png"), false, "", "E");
 	}
 }
 
@@ -799,21 +800,26 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		}
 		for (unsigned p = 0; p < nrplayers; ++p) {
 			std::vector<WorkareaPreviewData> wa_data;
-			const uint32_t col = (kPlayerColors[p].r << 16) | (kPlayerColors[p].g << 8) | kPlayerColors[p].b | 0x7f000000;
+			const uint32_t col = (kPlayerColors[p].r << 16) | (kPlayerColors[p].g << 8) |
+			                     kPlayerColors[p].b | 0x7f000000;
 			for (const Widelands::Coords& c : territory[p]) {
 				if (territory[p].count(map.br_n(c))) {
 					if (territory[p].count(map.r_n(c))) {
-						wa_data.push_back(WorkareaPreviewData(Widelands::TCoords<>(c, Widelands::TriangleIndex::R), 6, col));
+						wa_data.push_back(WorkareaPreviewData(
+						   Widelands::TCoords<>(c, Widelands::TriangleIndex::R), 6, col));
 					}
 					if (territory[p].count(map.bl_n(c))) {
-						wa_data.push_back(WorkareaPreviewData(Widelands::TCoords<>(c, Widelands::TriangleIndex::D), 6, col));
+						wa_data.push_back(WorkareaPreviewData(
+						   Widelands::TCoords<>(c, Widelands::TriangleIndex::D), 6, col));
 					}
 				}
 			}
 			if (wa_data != ownership_layer_cache_[p].first) {
 				log("NOCOM Updated for %u\n", p);
-				// TODO(Nordfriese): Border lines would be nice of course, but their calculation gets very costly easily
-				ownership_layer_cache_[p] = WorkareasEntry(wa_data, std::vector<std::vector<Widelands::Coords>>());
+				// TODO(Nordfriese): Border lines would be nice of course, but their calculation gets
+				// very costly easily
+				ownership_layer_cache_[p] =
+				   WorkareasEntry(wa_data, std::vector<std::vector<Widelands::Coords>>());
 			}
 		}
 	} else {

@@ -258,7 +258,15 @@ private:
 	};
 
 	// For referencing the items in showhidemenu_
-	enum class ShowHideEntry { kBuildingSpaces, kGrid, kAnimals, kImmovables, kResources, kCensus, kOwnership };
+	enum class ShowHideEntry {
+		kBuildingSpaces,
+		kGrid,
+		kAnimals,
+		kImmovables,
+		kResources,
+		kCensus,
+		kOwnership
+	};
 
 	// Adds the mainmenu_ to the toolbar
 	void add_main_menu();
