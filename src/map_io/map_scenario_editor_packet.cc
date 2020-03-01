@@ -474,11 +474,11 @@ void MapScenarioEditorPacket::write(FileSystem& fs, EditorGameBase& egbase, MapO
 						fw.unsigned_32(egbase.tribes().safe_building_index(wh.descr().name()));
 						for (Widelands::DescriptionIndex di : wh.owner().tribe().wares()) {
 							fw.unsigned_32(wh.get_wares().stock(di));
-							fw.unsigned_32(static_cast<uint8_t>(wh.get_ware_policy(di)));
+							fw.unsigned_8(static_cast<uint8_t>(wh.get_ware_policy(di)));
 						}
 						for (Widelands::DescriptionIndex di : wh.owner().tribe().workers()) {
 							fw.unsigned_32(wh.get_workers().stock(di));
-							fw.unsigned_32(static_cast<uint8_t>(wh.get_worker_policy(di)));
+							fw.unsigned_8(static_cast<uint8_t>(wh.get_worker_policy(di)));
 						}
 						if (wh.get_portdock() && wh.get_portdock()->expedition_bootstrap()) {
 							fw.unsigned_8(1);
@@ -587,7 +587,7 @@ void MapScenarioEditorPacket::write(FileSystem& fs, EditorGameBase& egbase, MapO
 					fw.unsigned_32(s->get_attack_level());
 					fw.unsigned_32(s->get_defense_level());
 					fw.unsigned_32(s->get_evade_level());
-					fw.signed_32(s->get_current_health());
+					fw.unsigned_32(s->get_current_health());
 				}
 			}  // workers
 
