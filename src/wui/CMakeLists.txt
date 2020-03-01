@@ -147,6 +147,7 @@ wl_library(wui_mapview
     graphic_fields_to_draw
     graphic_game_renderer
     logic_map
+    logic_map_objects
     logic_widelands_geometry
     ui_basic
     widelands_ball_of_mud

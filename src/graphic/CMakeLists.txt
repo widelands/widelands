@@ -196,7 +196,6 @@ wl_library(graphic_game_renderer
     graphic_surface
     logic
     logic_map_objects
-    wui
 )
 
 wl_library(graphic_minimap_renderer
