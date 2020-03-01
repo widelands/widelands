@@ -108,6 +108,11 @@ void GameDetails::show(const std::vector<SavegameData>& gamedata) {
 
 void GameDetails::show(const SavegameData& gamedata) {
 	clear();
+
+	if (gamedata.is_directory()) {
+		return;
+	}
+
 	if (!gamedata.errormessage.empty()) {
 		name_label_.set_text(as_richtext(
 		   as_heading_with_content(_("Error:"), gamedata.errormessage, style_, true, true)));
@@ -118,7 +123,14 @@ void GameDetails::show(const SavegameData& gamedata) {
 	name_label_.set_text(
 	   as_richtext(as_heading_with_content(_("Map Name:"), gamedata.mapname, style_, true)));
 
-	// Show game information
+	show_game_description(gamedata);
+
+	show_minimap(gamedata);
+
+	layout();
+}
+
+void GameDetails::show_game_description(const SavegameData& gamedata) {
 	std::string description = as_heading_with_content(
 	   mode_ == Mode::kReplay ?
 	      /** TRANSLATORS: The time a replay starts. Shown in the replay loading screen*/
@@ -141,7 +153,6 @@ void GameDetails::show(const SavegameData& gamedata) {
 	                 .str();
 
 	std::string filename = gamedata.filename;
-	log("before assert: %s\n", filename.c_str());
 	// Remove first directory from filename. This will be the save/ or replays/ folder
 	assert(filename.find('/') != std::string::npos);
 	filename.erase(0, filename.find('/') + 1);
@@ -151,7 +162,9 @@ void GameDetails::show(const SavegameData& gamedata) {
 	                 .str();
 
 	descr_.set_text(as_richtext(description));
+}
 
+void GameDetails::show_minimap(const SavegameData& gamedata) {
 	std::string minimap_path = gamedata.minimap_path;
 	if (!minimap_path.empty()) {
 		try {
@@ -165,8 +178,6 @@ void GameDetails::show(const SavegameData& gamedata) {
 			log("Failed to load the minimap image : %s\n", e.what());
 		}
 	}
-
-	layout();
 }
 
 void GameDetails::layout() {

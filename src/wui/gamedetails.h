@@ -56,6 +56,8 @@ private:
 	/// Update the display from the 'gamedata'
 	void show(const SavegameData& gamedata);
 	void show(const std::vector<SavegameData>& gamedata);
+	void show_game_description(const SavegameData& gamedata);
+	void GameDetails::show_minimap(const SavegameData& gamedata);
 
 	const UI::PanelStyle style_;
 	const Mode mode_;
