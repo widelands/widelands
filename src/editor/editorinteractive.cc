@@ -817,7 +817,8 @@ void EditorInteractive::draw(RenderTarget& dst) {
 				}
 			}
 			if (wa_data != ownership_layer_cache_[p].first) {
-				// TODO(Nordfriese): Border lines would be nice, but their calculation can be very costly
+				// TODO(Nordfriese): Border lines would be nice, but their calculation can be very
+				// costly
 				ownership_layer_cache_[p] =
 				   WorkareasEntry(wa_data, std::vector<std::vector<Widelands::Coords>>());
 			}
@@ -1428,7 +1429,8 @@ std::string EditorInteractive::try_finalize() {
 
 		ConstexprString* str = new ConstexprString("Hello World :)");
 		str->init(*scripting_saver_);
-		FS_FunctionCall* print = new FS_FunctionCall(builtin_f("print").function.get(), nullptr, {str});
+		FS_FunctionCall* print =
+		   new FS_FunctionCall(builtin_f("print").function.get(), nullptr, {str});
 		print->init(*scripting_saver_);
 		lf->mutable_body().push_back(print);
 
@@ -1526,7 +1528,7 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 	{
 		auto generate_unused_name = [this](std::string basename) {
 			while (scripting_saver_->get<Variable>(basename) ||
-				   scripting_saver_->get<LuaFunction>(basename)) {
+			       scripting_saver_->get<LuaFunction>(basename)) {
 				basename = "_" + basename;
 			}
 			return basename;
@@ -1594,7 +1596,8 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 								economies_to_save.insert(flag.get_economy(Widelands::wwWORKER));
 							write("%s = %s:place_flag(%s:get_field(%u, %u), "
 							      "true)",
-							      var, pvar[flag.owner().player_number() - 1].c_str(), autogen_map_name.c_str(), coords.x, coords.y);
+							      var, pvar[flag.owner().player_number() - 1].c_str(),
+							      autogen_map_name.c_str(), coords.x, coords.y);
 							if (flag.current_wares()) {
 								std::map<std::string, unsigned> wares;
 								for (const Widelands::WareInstance* w : flag.get_wares()) {
@@ -1618,7 +1621,8 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 							fw.print_f("   %s = %s:place_road(%s, "
 							           "%s:get_field(%u, %u).immovable",
 							           var, pvar[road.owner().player_number() - 1].c_str(),
-							           r ? r->is_busy() ? "busy" : "normal" : "waterway", autogen_map_name.c_str(),
+							           r ? r->is_busy() ? "busy" : "normal" : "waterway",
+							           autogen_map_name.c_str(),
 							           road.get_flag(Widelands::RoadBase::FlagStart).get_position().x,
 							           road.get_flag(Widelands::RoadBase::FlagStart).get_position().y);
 							const size_t n = road.get_path().get_nsteps();
@@ -1674,8 +1678,9 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 							   dynamic_cast<const Widelands::Warehouse&>(*f.get_immovable());
 							write("%s = %s:place_building(\"%s\", "
 							      "%s:get_field(%u, %u), false, true)",
-							      var, pvar[wh.owner().player_number() - 1].c_str(), wh.descr().name().c_str(), autogen_map_name.c_str(),
-							      wh.get_position().x, wh.get_position().y);
+							      var, pvar[wh.owner().player_number() - 1].c_str(),
+							      wh.descr().name().c_str(), autogen_map_name.c_str(), wh.get_position().x,
+							      wh.get_position().y);
 
 							std::map<std::string, unsigned> wares_workers;
 							for (Widelands::DescriptionIndex di : wh.owner().tribe().wares()) {
@@ -1714,8 +1719,9 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 							   dynamic_cast<const Widelands::MilitarySite&>(*f.get_immovable());
 							write("%s = %s:place_building(\"%s\", "
 							      "%s:get_field(%u, %u), false, true)",
-							      var, pvar[ms.owner().player_number() - 1].c_str(), ms.descr().name().c_str(), autogen_map_name.c_str(),
-							      ms.get_position().x, ms.get_position().y);
+							      var, pvar[ms.owner().player_number() - 1].c_str(),
+							      ms.descr().name().c_str(), autogen_map_name.c_str(), ms.get_position().x,
+							      ms.get_position().y);
 							write("%s.prefer_heroes = %s", var,
 							      ms.get_soldier_preference() == Widelands::SoldierPreference::kHeroes ?
 							         "true" :
@@ -1748,8 +1754,9 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 							   dynamic_cast<const Widelands::TrainingSite&>(*f.get_immovable());
 							write("%s = %s:place_building(\"%s\", "
 							      "%s:get_field(%u, %u), false, true)",
-							      var, pvar[ts.owner().player_number() - 1].c_str(), ts.descr().name().c_str(), autogen_map_name.c_str(),
-							      ts.get_position().x, ts.get_position().y);
+							      var, pvar[ts.owner().player_number() - 1].c_str(),
+							      ts.descr().name().c_str(), autogen_map_name.c_str(), ts.get_position().x,
+							      ts.get_position().y);
 							write("%s.capacity = %u", var, ts.soldier_control()->soldier_capacity());
 							std::map<std::tuple<uint32_t, uint32_t, uint32_t, uint32_t, uint32_t>,
 							         uint32_t>
@@ -1780,7 +1787,8 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 							if (type != Widelands::MapObjectType::TRAININGSITE) {
 								write("%s = %s:place_building(\"%s\", "
 								      "%s:get_field(%u, %u), false, true)",
-								      var, pvar[ps.owner().player_number() - 1].c_str(), ps.descr().name().c_str(), autogen_map_name.c_str(),
+								      var, pvar[ps.owner().player_number() - 1].c_str(),
+								      ps.descr().name().c_str(), autogen_map_name.c_str(),
 								      ps.get_position().x, ps.get_position().y);
 							}
 							std::map<const char*, uint32_t> filled;
@@ -1809,7 +1817,8 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 							   dynamic_cast<const Widelands::ConstructionSite&>(*f.get_immovable());
 							write("%s = %s:place_building(\"%s\", "
 							      "%s:get_field(%u, %u), true, true)",
-							      var, pvar[cs.owner().player_number() - 1].c_str(), cs.building().name().c_str(), autogen_map_name.c_str(),
+							      var, pvar[cs.owner().player_number() - 1].c_str(),
+							      cs.building().name().c_str(), autogen_map_name.c_str(),
 							      cs.get_position().x, cs.get_position().y);
 							write("%s.has_builder = %s", var, cs.has_builder(egbase()) ? "true" : "false");
 							std::map<const char*, uint32_t> filled;
@@ -1839,7 +1848,8 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 									   cs.owner().tribe().get_ware_descr(pair.first)->name().c_str();
 									write("%s:set_desired_fill(\"%s\", %u, true)", var, name,
 									      pair.second.desired_fill);
-									write("%s:set_priority(\"%s\", %d, true)", var, name, pair.second.priority);
+									write(
+									   "%s:set_priority(\"%s\", %d, true)", var, name, pair.second.priority);
 								}
 								for (const auto& pair : ps->worker_queues) {
 									write("%s:set_desired_fill(\"%s\", %u, true)", var,
@@ -1871,10 +1881,11 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 							const int16_t ypos = ds.get_position().y;
 							write("%s = %s:place_building(\"%s\", "
 							      "%s:get_field(%d, %d), false, true)",
-							      var, pvar[ds.owner().player_number() - 1].c_str(), ds.building().name().c_str(), autogen_map_name.c_str(), xpos,
-							      ypos);
+							      var, pvar[ds.owner().player_number() - 1].c_str(),
+							      ds.building().name().c_str(), autogen_map_name.c_str(), xpos, ypos);
 							write("%s:dismantle()", var);
-							write("%s:get_field(%d, %d).immovable.has_builder = %s", autogen_map_name.c_str(), xpos, ypos,
+							write("%s:get_field(%d, %d).immovable.has_builder = %s",
+							      autogen_map_name.c_str(), xpos, ypos,
 							      ds.has_builder(egbase()) ? "true" : "false");
 						} break;
 						default:
@@ -1888,21 +1899,22 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 		for (const Widelands::Economy* e : economies_to_save) {
 			const Widelands::Coords flag = e->get_arbitrary_flag()->get_position();
 			if (e->type() == Widelands::wwWARE) {
-				write(
-				   "%s = %s:get_field(%u, %u).immovable.ware_economy", var, autogen_map_name.c_str(), flag.x, flag.y);
+				write("%s = %s:get_field(%u, %u).immovable.ware_economy", var, autogen_map_name.c_str(),
+				      flag.x, flag.y);
 				for (Widelands::DescriptionIndex di : e->owner().tribe().wares()) {
 					const Widelands::WareDescr& d = *egbase().tribes().get_ware_descr(di);
 					if (d.has_demand_check(e->owner().tribe().name()))
-						write("%s:set_target_quantity(\"%s\", %u)", var,
-							  d.name().c_str(), e->target_quantity(di).permanent);
+						write("%s:set_target_quantity(\"%s\", %u)", var, d.name().c_str(),
+						      e->target_quantity(di).permanent);
 				}
 			} else {
-				write("%s = %s:get_field(%u, %u).immovable.worker_economy", var, autogen_map_name.c_str(), flag.x, flag.y);
+				write("%s = %s:get_field(%u, %u).immovable.worker_economy", var,
+				      autogen_map_name.c_str(), flag.x, flag.y);
 				for (Widelands::DescriptionIndex di : e->owner().tribe().workers()) {
 					const Widelands::WorkerDescr& d = *egbase().tribes().get_worker_descr(di);
 					if (d.has_demand_check())
-						write("%s:set_target_quantity(\"%s\", %u)", var,
-							  d.name().c_str(), e->target_quantity(di).permanent);
+						write("%s:set_target_quantity(\"%s\", %u)", var, d.name().c_str(),
+						      e->target_quantity(di).permanent);
 				}
 			}
 		}
@@ -1921,13 +1933,16 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 			for (size_t map_index = map.max_index(); map_index; --map_index) {
 				const Widelands::Coords c = map.coords(map_index - 1);
 				if (map[map_index - 1].get_owned_by() == p) {
-					write("%s:conquer(%s:get_field(%u, %u), 0)", pvar[p - 1].c_str(), autogen_map_name.c_str(), c.x, c.y);
+					write("%s:conquer(%s:get_field(%u, %u), 0)", pvar[p - 1].c_str(),
+					      autogen_map_name.c_str(), c.x, c.y);
 				}
 				const int vis = player.vision(map_index - 1);
 				if (vis > 0) {
-					write("%s:reveal_fields({%s:get_field(%u, %u)})", pvar[p - 1].c_str(), autogen_map_name.c_str(), c.x, c.y);
+					write("%s:reveal_fields({%s:get_field(%u, %u)})", pvar[p - 1].c_str(),
+					      autogen_map_name.c_str(), c.x, c.y);
 					if (vis < 2) {
-						write("%s:hide_fields({%s:get_field(%u, %u)})", autogen_map_name.c_str(), pvar[p - 1].c_str(), c.x, c.y);
+						write("%s:hide_fields({%s:get_field(%u, %u)})", autogen_map_name.c_str(),
+						      pvar[p - 1].c_str(), c.x, c.y);
 					}
 				}
 			}
