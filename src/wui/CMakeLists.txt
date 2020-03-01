@@ -53,16 +53,21 @@ wl_library(wui_economy_options
     wui_waresdisplay
 )
 
+wl_library(wui_mapview_pixelconstants
+  SRCS
+    mapviewpixelconstants.h
+    mapviewpixelconstants.cc
+)
 
 wl_library(wui_mapview_pixelfunctions
   SRCS
-    mapviewpixelconstants.h
     mapviewpixelfunctions.cc
     mapviewpixelfunctions.h
   DEPENDS
     base_geometry
     logic_map
     logic_widelands_geometry
+    wui_mapview_pixelconstants
 )
 
 wl_library(wui_common_suggested_teams

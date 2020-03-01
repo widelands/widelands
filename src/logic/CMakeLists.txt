@@ -147,7 +147,7 @@ wl_library(logic_map
     logic_widelands_geometry_io
     map_io_map_loader
     notifications
-    wui_mapview_pixelfunctions # TODO(GunChleoc): Circular dependency
+    wui_mapview_pixelconstants
 )
 
 wl_library(logic_commands
