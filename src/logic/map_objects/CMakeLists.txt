@@ -116,7 +116,7 @@ wl_library(logic_map_objects
     world/world.cc
     world/world.h
   DEPENDS
-    ai
+    ai_hints
     base_exceptions
     base_geometry
     base_i18n
