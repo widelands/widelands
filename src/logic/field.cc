@@ -34,40 +34,37 @@ void Field::set_brightness(int32_t const l,
                            int32_t const bl,
                            int32_t const br) {
 
-    auto calc_brightness = [](int32_t const left,
-            int32_t const right,
-            int32_t const topleft,
-            int32_t const topright,
-            int32_t const bottomleft,
-            int32_t const bottomright) {
-        constexpr float kVectorThird = 0.57735f;  // sqrt(1/3)
-        constexpr float kCos60 = 0.5f;
-        constexpr float kSin60 = 0.86603f;
-        constexpr float kLightFactor = -75.0f;
+	auto calc_brightness = [](int32_t const left, int32_t const right, int32_t const topleft,
+	                          int32_t const topright, int32_t const bottomleft,
+	                          int32_t const bottomright) {
+		constexpr float kVectorThird = 0.57735f;  // sqrt(1/3)
+		constexpr float kCos60 = 0.5f;
+		constexpr float kSin60 = 0.86603f;
+		constexpr float kLightFactor = -75.0f;
 
-        static Vector3f sun_vect =
-           Vector3f(kVectorThird, -kVectorThird, -kVectorThird);  //  |sun_vect| = 1
+		static Vector3f sun_vect =
+		   Vector3f(kVectorThird, -kVectorThird, -kVectorThird);  //  |sun_vect| = 1
 
-        // find normal
-        // more guessed than thought about
-        // but hey, results say I am good at guessing :)
-        // perhaps I will paint an explanation for this someday
-        // florian
-        Vector3f normal(0, 0, kTriangleWidth);
-        normal.x -= left * kHeightFactor;
-        normal.x += right * kHeightFactor;
-        normal.x -= topleft * kHeightFactorFloat * kCos60;
-        normal.y -= topleft * kHeightFactorFloat * kSin60;
-        normal.x += topright * kHeightFactorFloat * kCos60;
-        normal.y -= topright * kHeightFactorFloat * kSin60;
-        normal.x -= bottomleft * kHeightFactorFloat * kCos60;
-        normal.y += bottomleft * kHeightFactorFloat * kSin60;
-        normal.x += bottomright * kHeightFactorFloat * kCos60;
-        normal.y += bottomright * kHeightFactorFloat * kSin60;
-        normal.normalize();
+		// find normal
+		// more guessed than thought about
+		// but hey, results say I am good at guessing :)
+		// perhaps I will paint an explanation for this someday
+		// florian
+		Vector3f normal(0, 0, kTriangleWidth);
+		normal.x -= left * kHeightFactor;
+		normal.x += right * kHeightFactor;
+		normal.x -= topleft * kHeightFactorFloat * kCos60;
+		normal.y -= topleft * kHeightFactorFloat * kSin60;
+		normal.x += topright * kHeightFactorFloat * kCos60;
+		normal.y -= topright * kHeightFactorFloat * kSin60;
+		normal.x -= bottomleft * kHeightFactorFloat * kCos60;
+		normal.y += bottomleft * kHeightFactorFloat * kSin60;
+		normal.x += bottomright * kHeightFactorFloat * kCos60;
+		normal.y += bottomright * kHeightFactorFloat * kSin60;
+		normal.normalize();
 
-        return normal.dot(sun_vect) * kLightFactor;
-    };
+		return normal.dot(sun_vect) * kLightFactor;
+	};
 
 	// HACK to normalize flat terrain to zero brightness
 	static float flatbrightness = calc_brightness(0, 0, 0, 0, 0, 0);
