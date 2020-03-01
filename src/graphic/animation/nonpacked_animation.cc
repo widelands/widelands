@@ -31,7 +31,6 @@
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/playercolor.h"
-#include "graphic/texture.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
@@ -130,6 +129,20 @@ void NonPackedAnimation::NonPackedMipMapEntry::blit(uint32_t idx,
 	}
 }
 
+std::vector<std::unique_ptr<const Texture>> NonPackedAnimation::NonPackedMipMapEntry::frame_textures(bool return_playercolor_masks) const {
+    ensure_graphics_are_loaded();
+
+    std::vector<std::unique_ptr<const Texture>> result;
+    const Rectf rect(Vector2f::zero(), width(), height());
+    for (const std::string& filename : return_playercolor_masks ? playercolor_mask_image_files : image_files) {
+        std::unique_ptr<Texture> texture(new Texture(width(), height()));
+        texture->fill_rect(rect, RGBAColor(0, 0, 0, 0));
+        texture->blit(rect, *g_gr->images().get(filename), rect, 1., BlendMode::Copy);
+        result.push_back(std::move(texture));
+	}
+    return result;
+}
+
 int NonPackedAnimation::NonPackedMipMapEntry::width() const {
 	return frames.at(0)->width();
 }
@@ -206,18 +219,6 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table, const std::string&
 	} catch (const LuaError& e) {
 		throw Widelands::GameDataError("Error in animation table: %s.", e.what());
 	}
-}
-
-std::vector<const Image*> NonPackedAnimation::images(float scale) const {
-	const NonPackedMipMapEntry& mipmap =
-	   dynamic_cast<const NonPackedMipMapEntry&>(mipmap_entry(scale));
-	return mipmap.frames;
-}
-
-std::vector<const Image*> NonPackedAnimation::pc_masks(float scale) const {
-	const NonPackedMipMapEntry& mipmap =
-	   dynamic_cast<const NonPackedMipMapEntry&>(mipmap_entry(scale));
-	return mipmap.playercolor_mask_frames;
 }
 
 const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const {

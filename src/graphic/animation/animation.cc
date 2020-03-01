@@ -195,3 +195,7 @@ float Animation::find_best_scale(float scale) const {
 int Animation::representative_frame() const {
 	return representative_frame_;
 }
+
+std::vector<std::unique_ptr<const Texture>> Animation::frame_textures(float scale, bool return_playercolor_masks) const {
+	return mipmap_entry(scale).frame_textures(return_playercolor_masks);
+}

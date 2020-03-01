@@ -42,9 +42,6 @@ public:
 
 	const Image* representative_image(const RGBColor* clr) const override;
 
-	std::vector<const Image*> images(float scale) const override;
-	std::vector<const Image*> pc_masks(float scale) const override;
-
 private:
 	void add_scale_if_files_present(const std::string& basename,
 	                                const std::string& directory,
@@ -80,6 +77,8 @@ private:
 		int w;
 		/// Texture height
 		int h;
+
+        std::vector<std::unique_ptr<const Texture>> frame_textures(bool return_playercolor_masks) const override;
 
 	private:
 		/// Sprite sheet file name on disk

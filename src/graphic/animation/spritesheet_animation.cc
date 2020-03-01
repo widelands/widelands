@@ -30,7 +30,6 @@
 #include "base/log.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
-#include "graphic/texture.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
@@ -133,6 +132,29 @@ void SpriteSheetAnimation::SpriteSheetMipMapEntry::blit(uint32_t idx,
 	}
 }
 
+std::vector<std::unique_ptr<const Texture>> SpriteSheetAnimation::SpriteSheetMipMapEntry::frame_textures(bool return_playercolor_masks) const {
+    ensure_graphics_are_loaded();
+
+    std::vector<std::unique_ptr<const Texture>> result;
+    const Rectf rect(Vector2f::zero(), width(), height());
+    if (!return_playercolor_masks || has_playercolor_masks) {
+        const size_t no_of_frames = rows * columns;
+        for (size_t i = 0; i < no_of_frames; ++i) {
+            std::unique_ptr<Texture> texture(new Texture(width(), height()));
+
+            const int column = i % columns;
+            const int row = i / columns;
+
+            texture->fill_rect(rect, RGBAColor(0, 0, 0, 0));
+            texture->blit(rect,
+                          return_playercolor_masks ? *playercolor_mask_sheet : *sheet,
+                          Rectf(column * width(), row * height(), width(), height()), 1., BlendMode::Copy);
+            result.push_back(std::move(texture));
+        }
+    }
+    return result;
+}
+
 int SpriteSheetAnimation::SpriteSheetMipMapEntry::width() const {
 	return w;
 }
@@ -206,18 +228,6 @@ SpriteSheetAnimation::SpriteSheetAnimation(const LuaTable& table, const std::str
 	} catch (const LuaError& e) {
 		throw Widelands::GameDataError("Error in animation table: %s", e.what());
 	}
-}
-
-std::vector<const Image*> SpriteSheetAnimation::images(float) const {
-	// We only need to implement this if we add compressed spritemaps, or maybe for usage in a test
-	log("ERROR: Accessing image files is not supported by spritesheets\n");
-	NEVER_HERE();
-}
-
-std::vector<const Image*> SpriteSheetAnimation::pc_masks(float) const {
-	// We only need to implement this if we add compressed spritemaps, or maybe for usage in a test
-	log("ERROR: Accessing image files is not supported by spritesheets\n");
-	NEVER_HERE();
 }
 
 const Image* SpriteSheetAnimation::representative_image(const RGBColor* clr) const {
