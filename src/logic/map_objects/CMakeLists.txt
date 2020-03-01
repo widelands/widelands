@@ -151,6 +151,5 @@ wl_library(logic_map_objects
     scripting_lua_table
     sound_constants
     sound
-    ui_basic
     wui_mapview_pixelfunctions
 )

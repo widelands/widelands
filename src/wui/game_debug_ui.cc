@@ -98,10 +98,10 @@ UI headers in the game logic code (same reason why we have a separate
 building_ui.cc).
 ===============
 */
-void Widelands::MapObject::create_debug_panels(const Widelands::EditorGameBase& egbase,
-                                               UI::TabPanel& tabs) {
+void create_debug_panels(const Widelands::EditorGameBase& egbase,
+                                               UI::TabPanel& tabs, Widelands::MapObject& obj) {
 	tabs.add("debug", g_gr->images().get("images/wui/fieldaction/menu_debug.png"),
-	         new MapObjectDebugPanel(tabs, egbase, *this));
+	         new MapObjectDebugPanel(tabs, egbase, obj));
 }
 
 /*
@@ -143,7 +143,7 @@ MapObjectDebugWindow::MapObjectDebugWindow(InteractiveBase& parent, Widelands::M
 	serial_ = obj.serial();
 	set_title(std::to_string(serial_));
 
-	obj.create_debug_panels(parent.egbase(), tabs_);
+	create_debug_panels(parent.egbase(), tabs_, obj);
 
 	set_center_panel(&tabs_);
 }
