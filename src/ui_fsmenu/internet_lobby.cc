@@ -24,6 +24,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/random.h"
 #include "build_info.h"
 #include "graphic/graphic.h"
 #include "graphic/text_layout.h"
@@ -31,7 +32,6 @@
 #include "network/gamehost.h"
 #include "network/internet_gaming.h"
 #include "network/internet_gaming_protocol.h"
-#include "random/random.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/messagebox.h"
 #include "wlapplication_options.h"
