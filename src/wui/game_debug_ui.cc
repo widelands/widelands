@@ -128,8 +128,8 @@ MapObjectDebugWindow::MapObjectDebugWindow(InteractiveBase& parent, Widelands::M
 	serial_ = obj.serial();
 	set_title(std::to_string(serial_));
 
-    tabs_.add("debug", g_gr->images().get("images/wui/fieldaction/menu_debug.png"),
-	         new MapObjectDebugPanel(tabs_, parent.egbase(), obj));
+	tabs_.add("debug", g_gr->images().get("images/wui/fieldaction/menu_debug.png"),
+	          new MapObjectDebugPanel(tabs_, parent.egbase(), obj));
 
 	set_center_panel(&tabs_);
 }

@@ -391,7 +391,8 @@ FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase,
 
 	fields_to_draw_.reset(egbase, view_.viewpoint, view_.zoom, dst);
 	const float scale = 1.f / view_.zoom;
-	::draw_terrain(egbase.get_gametime(), egbase.world(), fields_to_draw_, scale, workarea, grid, dst);
+	::draw_terrain(
+	   egbase.get_gametime(), egbase.world(), fields_to_draw_, scale, workarea, grid, dst);
 	return &fields_to_draw_;
 }
 
