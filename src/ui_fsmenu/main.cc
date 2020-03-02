@@ -19,8 +19,6 @@
 
 #include "ui_fsmenu/main.h"
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "build_info.h"
 

@@ -19,9 +19,6 @@
 
 #include "wui/game_client_disconnected.h"
 
-#include <boost/bind.hpp>
-#include <boost/format.hpp>
-
 #include "ai/computer_player.h"
 #include "ai/defaultai.h"
 #include "base/i18n.h"

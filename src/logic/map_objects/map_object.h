@@ -26,10 +26,6 @@
 #include <string>
 #include <vector>
 
-#include <boost/function.hpp>
-#include <boost/signals2.hpp>
-#include <boost/unordered_map.hpp>
-
 #include "base/log.h"
 #include "base/macros.h"
 #include "graphic/animation/animation.h"
@@ -448,7 +444,7 @@ inline int32_t get_reverse_dir(int32_t const dir) {
  * Keeps the list of all objects currently in the game.
  */
 struct ObjectManager {
-	using MapObjectMap = boost::unordered_map<Serial, MapObject*>;
+	using MapObjectMap = std::unordered_map<Serial, MapObject*>;
 
 	ObjectManager() {
 		lastserial_ = 0;

@@ -19,8 +19,6 @@
 
 #include "wui/buildingwindow.h"
 
-#include <boost/format.hpp>
-
 #include "base/macros.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"

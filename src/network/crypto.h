@@ -20,8 +20,9 @@
 #ifndef WL_NETWORK_CRYPTO_H
 #define WL_NETWORK_CRYPTO_H
 
-#include <boost/version.hpp>
 #include <string>
+
+#include <boost/version.hpp>
 
 namespace crypto {
 

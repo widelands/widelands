@@ -20,9 +20,6 @@
 #include <memory>
 
 #include <SDL.h>
-#include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 
 #include "base/log.h"
 #include "config.h"
