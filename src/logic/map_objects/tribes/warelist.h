@@ -23,7 +23,6 @@
 #include <cassert>
 #include <vector>
 
-#include <boost/bind.hpp>
 #include <boost/signals2.hpp>
 
 #include "logic/widelands.h"

@@ -24,7 +24,6 @@
 
 #include <SDL.h>
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 #include <boost/regex.hpp>
 
 #include "base/i18n.h"

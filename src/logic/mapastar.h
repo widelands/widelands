@@ -20,6 +20,8 @@
 #ifndef WL_LOGIC_MAPASTAR_H
 #define WL_LOGIC_MAPASTAR_H
 
+#include <memory>
+
 #include "base/log.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/wareworker.h"
@@ -46,7 +48,7 @@ protected:
 	}
 
 	Map& map;
-	boost::shared_ptr<Pathfields> pathfields;
+	std::shared_ptr<Pathfields> pathfields;
 	Pathfield::Queue queue;
 };
 
