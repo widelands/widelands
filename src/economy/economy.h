@@ -20,12 +20,10 @@
 #ifndef WL_ECONOMY_ECONOMY_H
 #define WL_ECONOMY_ECONOMY_H
 
+#include <functional>
 #include <memory>
 #include <set>
 #include <vector>
-
-#include <boost/function.hpp>
-#include <boost/utility.hpp>
 
 #include "base/macros.h"
 #include "economy/supply.h"
@@ -133,7 +131,7 @@ public:
 
 	bool find_route(Flag& start, Flag& end, Route* route, int32_t cost_cutoff = -1);
 
-	using WarehouseAcceptFn = boost::function<bool(Warehouse&)>;
+	using WarehouseAcceptFn = std::function<bool(Warehouse&)>;
 	Warehouse* find_closest_warehouse(Flag& start,
 	                                  Route* route = nullptr,
 	                                  uint32_t cost_cutoff = 0,

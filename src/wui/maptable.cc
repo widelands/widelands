@@ -20,8 +20,6 @@
 
 #include <string>
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "io/filesystem/filesystem.h"

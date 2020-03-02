@@ -204,7 +204,7 @@ void WarehouseWaresPanel::change_real_amount(int32_t delta) {
 void WarehouseWaresPanel::set_policy(Widelands::StockPolicy newpolicy) {
 	if (ib_.omnipotent() || ib_.can_act(wh_.owner().player_number())) {
 		const bool is_workers = type_ == Widelands::wwWORKER;
-		const std::set<Widelands::DescriptionIndex> indices =
+		const std::set<Widelands::DescriptionIndex>& indices =
 		   is_workers ? wh_.owner().tribe().workers() : wh_.owner().tribe().wares();
 
 		for (const Widelands::DescriptionIndex& index : indices) {

@@ -21,9 +21,6 @@
 
 #include <memory>
 
-#include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/set_starting_pos_tool.h"

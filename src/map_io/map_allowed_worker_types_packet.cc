@@ -19,8 +19,6 @@
 
 #include "map_io/map_allowed_worker_types_packet.h"
 
-#include <boost/format.hpp>
-
 #include "io/profile.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"

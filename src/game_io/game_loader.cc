@@ -21,9 +21,6 @@
 
 #include <memory>
 
-#include <boost/bind.hpp>
-#include <boost/signals2.hpp>
-
 #include "base/log.h"
 #include "base/scoped_timer.h"
 #include "game_io/game_class_packet.h"

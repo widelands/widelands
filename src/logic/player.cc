@@ -23,9 +23,6 @@
 #include <memory>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/bind.hpp>
-#include <boost/format.hpp>
-#include <boost/signals2.hpp>
 
 #include "base/i18n.h"
 #include "base/log.h"

@@ -19,13 +19,6 @@
 
 #include "wui/interactive_player.h"
 
-#include <boost/bind.hpp>
-#include <boost/format.hpp>
-#include <boost/lambda/bind.hpp>
-#include <boost/lambda/construct.hpp>
-#include <boost/lexical_cast.hpp>
-#include <boost/type_traits.hpp>
-
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "economy/flag.h"
