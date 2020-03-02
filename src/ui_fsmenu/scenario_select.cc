@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"

@@ -21,8 +21,6 @@
 
 #include <iostream>
 
-#include <boost/bind.hpp>
-
 #include "base/log.h"
 #include "graphic/align.h"
 #include "graphic/font_handler.h"

@@ -20,7 +20,6 @@
 #ifndef WL_LOGIC_MESSAGE_H
 #define WL_LOGIC_MESSAGE_H
 
-#include <boost/signals2.hpp>
 #include <string>
 
 #include "graphic/graphic.h"

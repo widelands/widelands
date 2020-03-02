@@ -19,9 +19,6 @@
 
 #include "ui_fsmenu/internet_lobby.h"
 
-#include <boost/bind.hpp>
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "base/log.h"
 #include "build_info.h"
