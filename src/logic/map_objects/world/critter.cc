@@ -116,7 +116,7 @@ CritterDescr::CritterDescr(const std::string& init_descname,
 			throw wexception("Parse error in program %s: %s", program_name.c_str(), e.what());
 		}
 	}
-	int editor_category_index =
+	const DescriptionIndex editor_category_index =
 	   world.editor_critter_categories().get_index(table.get_string("editor_category"));
 	if (editor_category_index == Widelands::INVALID_INDEX) {
 		throw GameDataError(

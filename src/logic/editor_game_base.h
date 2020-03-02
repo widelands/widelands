@@ -160,7 +160,7 @@ public:
 	                                      MapObjectDescr::OwnerType,
 	                                      Player* owner,
 	                                      const BuildingDescr* former_building);
-	Bob& create_ship(const Coords&, int ship_type_idx, Player* owner = nullptr);
+	Bob& create_ship(const Coords&, const DescriptionIndex ship_type_idx, Player* owner = nullptr);
 	Bob& create_ship(const Coords&, const std::string& name, Player* owner = nullptr);
 	Bob& create_ferry(const Coords&, Player* owner);
 
