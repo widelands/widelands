@@ -28,6 +28,7 @@
 
 #include <sys/stat.h>
 #ifdef _WIN32
+#include <boost/algorithm/string.hpp>
 #include <dos.h>
 #include <windows.h>
 #ifdef _MSC_VER
