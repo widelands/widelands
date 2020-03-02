@@ -59,7 +59,6 @@ def print_error(filename, line_index, message):
 
 __INCLUDE = re.compile(r'#include "([^"]+)"')
 
-
 def extract_includes(srcdir, source):
     """Returns all locally included files."""
     includes = set()
@@ -70,19 +69,41 @@ def extract_includes(srcdir, source):
     return includes
 
 
+__USES_INCLUDES = defaultdict(str)
+__USES_INCLUDES['USES_BOOST_REGEX'] = r'<boost\/regex\.hpp>'
+__USES_INCLUDES['USES_ICU'] = r'<unicode\/.+\.h>'
+__USES_INCLUDES['USES_PNG'] = r'<png\.h>'
+__USES_INCLUDES['USES_SDL2_IMAGE'] = r'<SDL_image\.h>'
+__USES_INCLUDES['USES_SDL2_MIXER'] = r'<SDL_mixer\.h>'
+__USES_INCLUDES['USES_SDL2_TTF'] = r'<SDL_ttf\.h>'
+__USES_INCLUDES['USES_SDL2'] = r'(?!(<SDL_image\.h>|<SDL_mixer\.h>|<SDL_ttf\.h>))(<SDL.+\.h>)'
+__USES_INCLUDES['USES_ZLIB'] = r'"zlib\.h"'
+
+def extract_uses_includes(srcdir, source):
+    """Returns all included files for the USES_* libraries."""
+    includes = set()
+    for line in io.open(source, encoding='utf-8'):
+        for key in __USES_INCLUDES.keys():
+            match = re.compile(r'^#include (' + __USES_INCLUDES[key] + ')').match(line)
+            if match:
+                includes.add(match.group(1))
+    return includes
+
 class Target(object):
     """Container for data for a cmake target."""
 
-    def __init__(self, type, name, defined_at, srcs, depends):
+    def __init__(self, type, name, defined_at, srcs, depends, uses):
         self.type = type
         self.name = name
         self.defined_at = defined_at
         self.srcs = srcs
         self.depends = depends
+        self.uses = uses
 
     def __repr__(self):
-        return '%s(%s, nsrcs:%s, %s)' % (self.type, self.name, len(self.srcs), self.depends)
+        return '%s(%s, nsrcs:%s, %s + %s)' % (self.type, self.name, len(self.srcs), self.depends, self.depends)
 
+__USES = re.compile(r'\s*(USES_\w+)$')
 
 def _parse_content(content):
     rv = defaultdict(list)
@@ -90,7 +111,9 @@ def _parse_content(content):
     for line in content[::-1]:
         if not line.strip():
             continue
-        if re.match(r'^[A-Z0-9_-]+$', line):
+        if __USES.match(line):
+            rv['USES'].append(line)
+        elif re.match(r'^[A-Z0-9_-]+$', line):
             rv[line] = opts
             opts = []
         else:
@@ -99,7 +122,6 @@ def _parse_content(content):
 
 
 __START_TARGET = re.compile(r'\s*(wl_\w+)\s*\(\s*(\w+)')
-
 
 def extract_targets(cmake_file):
     dirname = path.dirname(cmake_file)
@@ -129,9 +151,8 @@ def extract_targets(cmake_file):
             srcs = set(path.realpath(path.join(dirname, src))
                        for src in d['SRCS'])
             targets.append(Target(match.group(1), match.group(2), (line_idx, cmake_file),
-                                  srcs, d['DEPENDS']))
+                                  srcs, d['DEPENDS'], d['USES']))
     return targets
-
 
 def base_dir():
     """Returns the absolute path of the Widelands source dir."""
@@ -161,7 +182,15 @@ def report_unused_sources(srcdir, sources, owners_of_src):
     return len(unused_sources) != 0
 
 
-def report_unmentioned_or_unnecesary_dependencies(srcdir, target, includes_by_src, owners_of_src):
+def report_unmentioned_or_unnecesary_dependencies(srcdir, target, includes_by_src, uses_includes_by_src, owners_of_src):
+    # NOCOM Report them here
+    """
+    for use in target.uses:
+        print(use)
+    for NOCOM in uses_includes_by_src:
+        print(NOCOM)
+    """
+
     target_includes = set()
     for src in target.srcs:
         target_includes.update(includes_by_src[src])
@@ -208,6 +237,10 @@ def main():
     for src in sources:
         includes_by_src[src] = extract_includes(srcdir, src)
 
+    uses_includes_by_src = defaultdict(set)
+    for src in sources:
+        uses_includes_by_src[src] = extract_uses_includes(srcdir, src)
+
     target_list = []
     for cmake_file in cmake_files:
         target_list.extend(extract_targets(cmake_file))
@@ -220,13 +253,14 @@ def main():
                 print('%s:1 is owned by more than one target.' % src)
             owners_of_src[src] = lib
 
+
     if (report_unused_sources(srcdir, sources, owners_of_src)):
         return 1
 
     has_errors = False
     for t in targets.values():
         has_errors |= report_unmentioned_or_unnecesary_dependencies(
-            srcdir, t, includes_by_src, owners_of_src)
+            srcdir, t, includes_by_src, uses_includes_by_src, owners_of_src)
 
     return has_errors
 
