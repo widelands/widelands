@@ -5,7 +5,6 @@ wl_library(website_common
   SRCS
     website_common.cc
     website_common.h
-  USES_SDL2
   DEPENDS
     base_exceptions
     base_i18n

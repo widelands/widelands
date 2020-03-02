@@ -288,7 +288,6 @@ wl_library(graphic_wordwrap
     wordwrap.cc
     wordwrap.h
   USES_ICU
-  USES_SDL2_TTF
   DEPENDS
     base_geometry
     base_log

@@ -65,6 +65,7 @@ wl_library(scripting_lua_interface
     lua_path.h
     run_script.cc
     run_script.h
+  USES_SDL2
   DEPENDS
     base_i18n
     base_macros

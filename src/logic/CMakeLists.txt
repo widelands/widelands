@@ -93,7 +93,6 @@ wl_library(logic_generic_save_handler
   SRCS
     generic_save_handler.h
     generic_save_handler.cc
-  USES_SDL2
   DEPENDS
     base_i18n
     base_log
