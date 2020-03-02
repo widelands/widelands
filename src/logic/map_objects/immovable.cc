@@ -24,7 +24,6 @@
 #include <memory>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 
 #include "base/log.h"
 #include "base/macros.h"
@@ -270,7 +269,7 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
                                const World& world)
    : ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kWorld) {
 
-	int editor_category_index =
+	const DescriptionIndex editor_category_index =
 	   world.editor_immovable_categories().get_index(table.get_string("editor_category"));
 	if (editor_category_index == Widelands::INVALID_INDEX) {
 		throw GameDataError(

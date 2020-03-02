@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "base/macros.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"

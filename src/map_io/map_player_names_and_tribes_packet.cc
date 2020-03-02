@@ -20,7 +20,6 @@
 #include "map_io/map_player_names_and_tribes_packet.h"
 
 #include <boost/algorithm/string/trim.hpp>
-#include <boost/format.hpp>
 
 #include "io/profile.h"
 #include "logic/editor_game_base.h"

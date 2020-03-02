@@ -20,7 +20,6 @@
 #include "ui_basic/multilinetextarea.h"
 
 #include <boost/algorithm/string.hpp>
-#include <boost/bind.hpp>
 
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"

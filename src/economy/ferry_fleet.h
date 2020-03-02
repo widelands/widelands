@@ -20,8 +20,6 @@
 #ifndef WL_ECONOMY_FERRY_FLEET_H
 #define WL_ECONOMY_FERRY_FLEET_H
 
-#include <boost/shared_ptr.hpp>
-
 #include "base/macros.h"
 #include "logic/map_objects/map_object.h"
 
