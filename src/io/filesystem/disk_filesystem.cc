@@ -25,7 +25,6 @@
 #endif
 #endif
 
-
 #include <sys/stat.h>
 #ifdef _WIN32
 #include <boost/algorithm/string.hpp>
