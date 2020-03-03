@@ -61,12 +61,6 @@ void SavegameLoader::load_savegame_from_file(const std::string& gamefilename,
                                              std::vector<SavegameData>& loaded_games) const {
 	std::string savename = get_savename(gamefilename);
 
-	log("savename to be loaded: %s\n", savename.c_str());
-	//	if (gamefilename.find_first_of(".wgf") != std::string::npos) {
-	//		log("rejecting %s->%s\n", gamefilename.c_str(), savename.c_str());
-	//		return;
-	//	}
-
 	if (!g_fs->file_exists(savename.c_str())) {
 		return;
 	}
@@ -213,8 +207,8 @@ void SavegameLoader::add_sub_dir(const std::string& gamefilename,
 ReplayLoader::ReplayLoader(Widelands::Game& game) : SavegameLoader(game) {
 }
 
-bool ReplayLoader::is_valid_gametype(const SavegameData&) const {
-	return true;
+bool ReplayLoader::is_valid_gametype(const SavegameData& gamedata) const {
+	return gamedata.gametype == GameController::GameType::kReplay;
 }
 
 std::string ReplayLoader::get_savename(const std::string& gamefilename) const {

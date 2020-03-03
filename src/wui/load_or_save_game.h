@@ -108,10 +108,9 @@ private:
 	Widelands::Game& game_;
 
 	bool selection_contains_directory() const;
-	const std::vector<SavegameData>
-	get_selected_savegames(const std::set<uint32_t>& selections) const;
+	const std::vector<SavegameData> get_selected_savegames() const;
 	void set_tooltips_of_buttons(size_t nr_of_selected_items) const;
-	void update_table(std::set<uint32_t>& selections);
+	void select_item_and_scroll_to_it(std::set<uint32_t>& selections);
 };
 
 #endif  // end of include guard: WL_WUI_LOAD_OR_SAVE_GAME_H

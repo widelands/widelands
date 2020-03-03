@@ -43,6 +43,7 @@ public:
 	/// Reset the data
 	void clear();
 
+	/// show details of savegames including minimap
 	void display(const std::vector<SavegameData>& gamedata);
 
 	/// Box on the bottom where extra buttons can be placed from the outside, e.g. a delete button.

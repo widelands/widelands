@@ -104,8 +104,8 @@ const SavegameData& LoadOrSaveGame::get_savegame(uint32_t index) const {
 	return games_data_[(*table_)[index]];
 }
 
-const std::vector<SavegameData>
-LoadOrSaveGame::get_selected_savegames(const std::set<uint32_t>& selections) const {
+const std::vector<SavegameData> LoadOrSaveGame::get_selected_savegames() const {
+	const std::set<uint32_t> selections = table_->selections();
 	std::vector<SavegameData> savegames;
 	for (const uint32_t index : selections) {
 		savegames.push_back(get_savegame(index));
@@ -126,7 +126,7 @@ std::unique_ptr<SavegameData> LoadOrSaveGame::entry_selected() {
 	size_t selections = table_->selections().size();
 	set_tooltips_of_buttons(selections);
 
-	const std::vector<SavegameData> savegames = get_selected_savegames(table_->selections());
+	const std::vector<SavegameData> savegames = get_selected_savegames();
 	game_details_.display(savegames);
 	if (selections > 0 && !selection_contains_directory()) {
 		delete_->set_enabled(true);
@@ -193,10 +193,7 @@ GameDetails* LoadOrSaveGame::game_details() {
 	return &game_details_;
 }
 
-void LoadOrSaveGame::update_table(std::set<uint32_t>& selections) {
-	fill_table();
-
-	// Select something meaningful if possible, then scroll to it.
+void LoadOrSaveGame::select_item_and_scroll_to_it(std::set<uint32_t>& selections) {
 	const uint32_t selectme = *selections.begin();
 	if (selectme < table_->size() - 1) {
 		table_->select(selectme);
@@ -206,19 +203,20 @@ void LoadOrSaveGame::update_table(std::set<uint32_t>& selections) {
 	if (table_->has_selection()) {
 		table_->scroll_to_item(table_->selection_index() + 1);
 	}
-	// Make sure that the game details are updated
-	entry_selected();
 }
 
 void LoadOrSaveGame::clicked_delete() {
 	if (!has_selection()) {
 		return;
 	}
-	std::set<uint32_t> selections = table().selections();
-	const std::vector<SavegameData> selected = get_selected_savegames(selections);
+	const std::vector<SavegameData> selected = get_selected_savegames();
 
+	std::set<uint32_t> selections = table_->selections();
 	if (savegame_deleter_->delete_savegames(selected)) {
-		update_table(selections);
+		fill_table();
+		select_item_and_scroll_to_it(selections);
+		// Make sure that the game details are updated
+		entry_selected();
 	}
 }
 
