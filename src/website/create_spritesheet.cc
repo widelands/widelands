@@ -239,14 +239,6 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 
 	const int nr_frames = representative_animation.nr_frames();
 
-	// Only create spritesheet if animation has more than 1 frame.
-	if (nr_frames < 2) {
-		log("ABORTING. Animation '%s' for '%s' has less than 2 images and doesn't need a "
-		    "spritesheet.\n",
-		    animation_name.c_str(), map_object_name.c_str());
-		return;
-	}
-
 	// Add global paramaters for this animation to Lua
 	std::unique_ptr<LuaTree::Element> lua_object(new LuaTree::Element());
 	LuaTree::Object* lua_animation = lua_object->add_object(animation_name);
@@ -273,9 +265,15 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 		++rows;
 	}
 
-	lua_animation->add_int("frames", nr_frames);
-	lua_animation->add_int("rows", rows);
-	lua_animation->add_int("columns", columns);
+    if (nr_frames > 1) {
+        lua_animation->add_int("frames", nr_frames);
+        lua_animation->add_int("rows", rows);
+        lua_animation->add_int("columns", columns);
+    } else {
+        log("NOTE: Animation '%s' for '%s' has less than 2 images and doesn't need a "
+		    "spritesheet. Add it to the \"animations\" table.\n",
+            animation_name.c_str(), map_object_name.c_str());
+    }
 
 	const int representative_frame = representative_animation.representative_frame();
 	if (representative_frame > 0) {
