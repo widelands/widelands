@@ -19,9 +19,6 @@
 
 #include "wui/game_message_menu.h"
 
-#include <boost/bind.hpp>
-#include <boost/format.hpp>
-
 #include "base/time_string.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"

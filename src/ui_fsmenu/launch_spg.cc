@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/algorithm/string/predicate.hpp>
-
 #include "base/i18n.h"
 #include "base/warning.h"
 #include "base/wexception.h"

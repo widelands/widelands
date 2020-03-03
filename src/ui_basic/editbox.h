@@ -23,7 +23,6 @@
 #include <memory>
 
 #include <SDL_keyboard.h>
-#include <boost/signals2.hpp>
 
 #include "graphic/styles/font_style.h"
 #include "ui_basic/panel.h"

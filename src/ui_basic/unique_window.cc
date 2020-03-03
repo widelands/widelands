@@ -19,8 +19,6 @@
 
 #include "ui_basic/unique_window.h"
 
-#include <boost/bind.hpp>
-
 namespace UI {
 /*
 ==============================================================================

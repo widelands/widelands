@@ -23,8 +23,6 @@
 #include <memory>
 #include <vector>
 
-#include <boost/bind.hpp>
-
 #include "graphic/color.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/slider.h"

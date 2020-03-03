@@ -21,8 +21,6 @@
 
 #include <cstdio>
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "economy/wares_queue.h"

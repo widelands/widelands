@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/lexical_cast.hpp>
-
 #include "graphic/graphic.h"
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"

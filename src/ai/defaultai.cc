@@ -716,7 +716,7 @@ void DefaultAI::late_initialization() {
 				bo.set_is(BuildingAttribute::kSupportingProducer);
 			}
 
-			iron_resource_id = game().world().get_resource("iron");
+			iron_resource_id = game().world().resource_index("iron");
 			if (iron_resource_id == INVALID_INDEX) {
 				throw wexception("The AI needs the world to define the resource 'iron'");
 			}
@@ -724,7 +724,7 @@ void DefaultAI::late_initialization() {
 			if (bo.type == BuildingObserver::Type::kMine) {
 				// get the resource needed by the mine
 				if (bh.get_mines()) {
-					bo.mines = game().world().get_resource(bh.get_mines());
+					bo.mines = game().world().resource_index(bh.get_mines());
 				}
 
 				bo.mines_percent = bh.get_mines_percent();
@@ -1570,7 +1570,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		fish_fields_list.clear();
 		map.find_reachable_fields(game(), Area<FCoords>(field.coords, kProductionArea),
 		                          &fish_fields_list, fisher_cstep,
-		                          FindNodeResource(world.get_resource("fish")));
+		                          FindNodeResource(world.resource_index("fish")));
 
 		// This is "list" of unique fields in fish_fields_list we got above
 		static std::set<Coords> counted_fields;

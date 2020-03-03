@@ -19,6 +19,8 @@
 
 #include "ui_basic/button.h"
 
+#include <memory>
+
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"

@@ -23,9 +23,6 @@
 #include <iostream>
 #include <memory>
 
-#include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "base/scoped_timer.h"
 #include "base/wexception.h"
