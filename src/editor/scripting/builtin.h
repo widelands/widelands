@@ -20,9 +20,8 @@
 #ifndef WL_EDITOR_SCRIPTING_BUILTIN_H
 #define WL_EDITOR_SCRIPTING_BUILTIN_H
 
+#include <functional>
 #include <memory>
-
-#include <boost/function.hpp>
 
 #include "editor/scripting/function.h"
 #include "editor/scripting/scripting.h"
@@ -34,7 +33,7 @@
 // Wrapper for a (static) FunctionBase object, for use in kBuiltinFunctions
 struct BuiltinFunctionInfo {
 	BuiltinFunctionInfo(std::string u,
-	                    boost::function<std::string()> d,
+	                    std::function<std::string()> d,
 	                    FunctionBase* f,
 	                    std::string i = "")
 	   : function(f), unique_name(u), description(d), included_from(i) {
@@ -46,7 +45,7 @@ struct BuiltinFunctionInfo {
 	// internal name, unique among all kBuiltinFunctions entries
 	const std::string unique_name;
 	// Implemented as a function to make it translatable
-	const boost::function<std::string()> description;
+	const std::function<std::string()> description;
 
 	const std::string included_from;
 
@@ -111,7 +110,7 @@ private:
 
 // Wrapper for a (static) Property object, for use in kBuiltinProperties
 struct BuiltinPropertyInfo {
-	BuiltinPropertyInfo(std::string u, boost::function<std::string()> d, Property* p)
+	BuiltinPropertyInfo(std::string u, std::function<std::string()> d, Property* p)
 	   : property(p), unique_name(u), description(d) {
 	}
 	~BuiltinPropertyInfo() {
@@ -121,7 +120,7 @@ struct BuiltinPropertyInfo {
 	// internal name, unique among all kBuiltinProperties entries
 	const std::string unique_name;
 	// Implemented as a function to make it translatable
-	const boost::function<std::string()> description;
+	const std::function<std::string()> description;
 
 	DISALLOW_COPY_AND_ASSIGN(BuiltinPropertyInfo);
 };
