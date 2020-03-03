@@ -84,7 +84,8 @@ void ProductionsiteSettings::apply(const BuildingSettings& bs) {
 			for (const auto& other : s->ware_queues) {
 				if (pair.first == other.first) {
 					pair.second.priority = other.second.priority;
-					pair.second.desired_fill = new_desired_capacity(other.second.max_fill, other.second.desired_fill, pair.second.max_fill);
+					pair.second.desired_fill = new_desired_capacity(
+					   other.second.max_fill, other.second.desired_fill, pair.second.max_fill);
 					break;
 				}
 			}
@@ -93,7 +94,8 @@ void ProductionsiteSettings::apply(const BuildingSettings& bs) {
 			for (const auto& other : s->worker_queues) {
 				if (pair.first == other.first) {
 					pair.second.priority = other.second.priority;
-					pair.second.desired_fill = new_desired_capacity(other.second.max_fill, other.second.desired_fill, pair.second.max_fill);
+					pair.second.desired_fill = new_desired_capacity(
+					   other.second.max_fill, other.second.desired_fill, pair.second.max_fill);
 					break;
 				}
 			}
@@ -104,14 +106,16 @@ void ProductionsiteSettings::apply(const BuildingSettings& bs) {
 void TrainingsiteSettings::apply(const BuildingSettings& bs) {
 	ProductionsiteSettings::apply(bs);
 	if (upcast(const TrainingsiteSettings, s, &bs)) {
-		desired_capacity = new_desired_capacity(s->max_capacity, s->desired_capacity, desired_capacity);
+		desired_capacity =
+		   new_desired_capacity(s->max_capacity, s->desired_capacity, desired_capacity);
 	}
 }
 
 void MilitarysiteSettings::apply(const BuildingSettings& bs) {
 	BuildingSettings::apply(bs);
 	if (upcast(const MilitarysiteSettings, s, &bs)) {
-		desired_capacity = new_desired_capacity(s->max_capacity, s->desired_capacity, desired_capacity);
+		desired_capacity =
+		   new_desired_capacity(s->max_capacity, s->desired_capacity, desired_capacity);
 		prefer_heroes = s->prefer_heroes;
 	}
 }
