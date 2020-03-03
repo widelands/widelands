@@ -727,33 +727,20 @@ void MilitarySite::act(Game& game, uint32_t const data) {
 		update_soldier_request();
 	}
 
+    // Heal soldiers
 	if (nexthealtime_ <= timeofgame) {
-		uint32_t total_heal = descr().get_heal_per_second();
-		std::vector<Soldier*> soldiers = soldier_control_.present_soldiers();
-		uint32_t max_total_level = 0;
-		float max_health = 0;
-		Soldier* soldier_to_heal = 0;
-
-		for (uint32_t i = 0; i < soldiers.size(); ++i) {
-			Soldier* s = soldiers[i];
-
-			// The healing algorithm is:
-			// * heal soldier with highest total level
-			// * heal healthiest if multiple of same total level exist
-			if (s->get_current_health() < s->get_max_health()) {
-				if (0 == soldier_to_heal || s->get_total_level() > max_total_level ||
-				    (s->get_total_level() == max_total_level &&
-				     s->get_current_health() / s->get_max_health() > max_health)) {
-					max_total_level = s->get_total_level();
-					max_health = s->get_current_health() / s->get_max_health();
-					soldier_to_heal = s;
-				}
-			}
-		}
-
-		if (0 != soldier_to_heal) {
-			soldier_to_heal->heal(total_heal);
-		}
+        for (Soldier* soldier : soldier_control_.stationed_soldiers()) {
+            if (is_present(*soldier)) {
+                // Fully heal all present soldiers
+                soldier->heal(descr().get_heal_per_second());
+            } else if (soldier->get_battle() == nullptr || soldier->get_battle()->opponent(*soldier) == nullptr) {
+                // Somewhat heal soldiers in the field that are not currently engaged in fighting an opponent
+                const PlayerNumber owner_number = soldier->get_position().field->get_owned_by();
+                if (owner().player_number() == owner_number) {
+                    soldier->heal(descr().get_heal_per_second() / 2);
+                }
+            }
+        }
 
 		nexthealtime_ = timeofgame + 1000;
 		schedule_act(game, 1000);
