@@ -223,16 +223,24 @@ def report_unmentioned_or_unnecessary_dependencies(srcdir, target, includes_by_s
     # Report errors
     unmentioned = set(necessary.keys()) - set(target.depends)
     for name in unmentioned:
+        dependson_string = 'DEPENDS on '
+        if name.startswith('USES'):
+            dependson_string = ''
+
         print_error(
             target.defined_at[1], target.defined_at[0],
-            '%s misses DEPENDS on %s, because it includes %s' % (
+            ('%s misses ' + dependson_string + '%s, because it includes %s') % (
                 target.name, name, ','.join(sorted(necessary[name]))))
 
     unnecessary = set(target.depends) - set(necessary.keys())
     for name in unnecessary:
+        dependson_string = 'DEPENDS on '
+        if name.startswith('USES'):
+            dependson_string = ''
+
         print_error(
             target.defined_at[1], target.defined_at[0],
-            '%s DEPENDS on %s, but includes none of its headers.' % (target.name, name))
+            ('%s ' + dependson_string + '%s, but includes none of its headers.') % (target.name, name))
 
 
 def parse_args():
