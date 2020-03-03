@@ -24,8 +24,6 @@
 
 #include <memory>
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/i18n.h"
 #include "ui_basic/button.h"
 #include "ui_basic/table.h"

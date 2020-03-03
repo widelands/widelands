@@ -25,7 +25,6 @@
 #include <memory>
 
 #include <boost/algorithm/string/replace.hpp>
-#include <boost/format.hpp>
 
 #include "base/macros.h"
 #include "graphic/graphic.h"

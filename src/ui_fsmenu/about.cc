@@ -19,8 +19,6 @@
 
 #include "ui_fsmenu/about.h"
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 
 FullscreenMenuAbout::FullscreenMenuAbout()

@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "base/macros.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
@@ -230,7 +228,7 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 	                     _("Hide Statistics") :
 	                     _("Show Statistics"),
 	                  ShowHideEntry::kStatistics,
-	                  g_gr->images().get("images/wui/menus/toggle_statistics.png"), false, "", "s");
+	                  g_gr->images().get("images/wui/menus/toggle_statistics.png"), false, "", "S");
 
 	showhidemenu_.add(get_display_flag(dfShowSoldierLevels) ?
 	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
@@ -239,7 +237,7 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 	                     _("Show Soldier Levels"),
 	                  ShowHideEntry::kSoldierLevels,
 	                  g_gr->images().get("images/wui/menus/toggle_soldier_levels.png"), false, "",
-	                  "l");
+	                  "L");
 }
 
 void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry) {

@@ -23,10 +23,6 @@
 #include <memory>
 #include <string>
 
-#include <boost/algorithm/string/replace.hpp>
-#include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
-
 std::vector<std::string> split_string(const std::string& s, const char* const separators) {
 	std::vector<std::string> result;
 	for (std::string::size_type pos = 0, endpos;

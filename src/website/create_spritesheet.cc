@@ -23,7 +23,6 @@
 
 #include <SDL.h>
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 
 #include "base/log.h"
 #include "base/macros.h"

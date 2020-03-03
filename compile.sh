@@ -311,10 +311,9 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
   create_update_script () {
     # First check if this is an git checkout at all - only in that case,
     # creation of a script makes any sense.
-    STATUS="$(git status)"
-    if [ -n "${STATUS##*nothing to commit, working tree clean*}" ]; then
+    if [ -n "$(git status -s)" ]; then
       echo "You don't appear to be using Git, or your working tree is not clean. An update script will not be created"
-      echo "${STATUS}"
+      git status
       return 0
     fi
       rm -f update.sh || true

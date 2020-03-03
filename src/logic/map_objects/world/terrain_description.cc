@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "graphic/animation/animation.h"
 #include "graphic/graphic.h"
@@ -102,7 +100,7 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
    : name_(table.get_string("name")),
      descname_(table.get_string("descname")),
      is_(terrain_type_from_string(table.get_string("is"))),
-     default_resource_index_(world.get_resource(table.get_string("default_resource").c_str())),
+     default_resource_index_(world.resource_index(table.get_string("default_resource").c_str())),
      default_resource_amount_(table.get_int("default_resource_amount")),
      dither_layer_(table.get_int("dither_layer")),
      temperature_(table.get_int("temperature")),
@@ -154,7 +152,7 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
 		throw GameDataError("Default resource is not in valid resources.\n");
 	}
 
-	int editor_category_index =
+	const DescriptionIndex editor_category_index =
 	   world.editor_terrain_categories().get_index(table.get_string("editor_category"));
 	if (editor_category_index == Widelands::INVALID_INDEX) {
 		throw GameDataError(

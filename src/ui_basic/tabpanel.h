@@ -20,9 +20,8 @@
 #ifndef WL_UI_BASIC_TABPANEL_H
 #define WL_UI_BASIC_TABPANEL_H
 
+#include <memory>
 #include <vector>
-
-#include <boost/signals2.hpp>
 
 #include "graphic/text/rendered_text.h"
 #include "ui_basic/panel.h"
