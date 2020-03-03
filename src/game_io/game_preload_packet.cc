@@ -22,8 +22,6 @@
 #include <ctime>
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "build_info.h"
 #include "graphic/image_io.h"
 #include "graphic/minimap_renderer.h"

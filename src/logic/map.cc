@@ -22,10 +22,6 @@
 #include <algorithm>
 #include <memory>
 
-#include <boost/algorithm/string.hpp>
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/format.hpp>
-
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/scoped_timer.h"
@@ -907,7 +903,7 @@ void Map::find_reachable(const EditorGameBase& egbase,
                          const CheckStep& checkstep,
                          functorT& functor) const {
 	std::vector<Coords> queue;
-	boost::shared_ptr<Pathfields> pathfields = pathfieldmgr_->allocate();
+	std::shared_ptr<Pathfields> pathfields = pathfieldmgr_->allocate();
 
 	queue.push_back(area);
 
@@ -2007,7 +2003,7 @@ int32_t Map::findpath(Coords instart,
 		upper_cost_limit = persist * calc_cost_estimate(start, end);
 
 	// Actual pathfinding
-	boost::shared_ptr<Pathfields> pathfields = pathfieldmgr_->allocate();
+	std::shared_ptr<Pathfields> pathfields = pathfieldmgr_->allocate();
 	Pathfield::Queue Open(type);
 	Pathfield* curpf = &pathfields->fields[start.field - fields_.get()];
 	curpf->cycle = pathfields->cycle;

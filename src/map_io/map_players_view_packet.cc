@@ -22,8 +22,6 @@
 #include <iostream>
 #include <typeinfo>
 
-#include <boost/format.hpp>
-
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"

@@ -21,9 +21,6 @@
 
 #include <memory>
 
-#include <boost/bind.hpp>
-#include <boost/format.hpp>
-
 #include "economy/ship_fleet.h"
 #include "graphic/graphic.h"
 #include "graphic/text_layout.h"
@@ -202,7 +199,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 				   NEVER_HERE();
 			   }
 		   }
-		});
+	   });
 }
 
 const std::string

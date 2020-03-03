@@ -20,9 +20,8 @@
 #include "wui/plot_area.h"
 
 #include <cstdio>
+#include <memory>
 #include <string>
-
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/wexception.h"

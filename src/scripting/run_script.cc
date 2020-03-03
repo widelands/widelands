@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "io/filesystem/filesystem.h"
 #include "scripting/lua_table.h"
 

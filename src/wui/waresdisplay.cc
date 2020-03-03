@@ -20,9 +20,8 @@
 #include "wui/waresdisplay.h"
 
 #include <cstdio>
+#include <memory>
 #include <utility>
-
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/wexception.h"
@@ -46,7 +45,7 @@ AbstractWaresDisplay::AbstractWaresDisplay(
    const Widelands::TribeDescr& tribe,
    Widelands::WareWorker type,
    bool selectable,
-   boost::function<void(Widelands::DescriptionIndex, bool)> callback_function,
+   std::function<void(Widelands::DescriptionIndex, bool)> callback_function,
    bool horizontal,
    int32_t hgap,
    int32_t vgap)

@@ -20,7 +20,6 @@
 #include "map_io/map_elemental_packet.h"
 
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 
 #include "io/profile.h"
 #include "logic/editor_game_base.h"

@@ -6,16 +6,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2015
 # ks k, 2017
-# ks k, 2017-2019
+# ks k, 2017-2020
 # Moon Yeonki <backnii@gmail.com>, 2017
 # TaeMin An, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-02-20 07:30+0000\n"
-"PO-Revision-Date: 2020-02-20 07:32+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-02-26 18:51+0000\n"
+"PO-Revision-Date: 2020-03-01 16:58+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -88,6 +88,26 @@ msgstr "몇 가지 시작 건물이 공간 부족으로 건설되지 않았습�
 msgid "Not enough space"
 msgstr "충분하지 않은 공간"
 
+#: ../../data/scripting/infrastructure.lua:242
+msgid "No rocks nearby"
+msgstr "근처에 바위가 없습니다"
+
+#: ../../data/scripting/infrastructure.lua:242
+msgid ""
+"There are no rocks near to your starting position. Therefore, you receive "
+"extra resources for bootstrapping your economy."
+msgstr ""
+
+#: ../../data/scripting/infrastructure.lua:247
+msgid "No trees nearby"
+msgstr "근처에 나무가 없습니다"
+
+#: ../../data/scripting/infrastructure.lua:247
+msgid ""
+"There are no trees near to your starting position. Therefore, you receive "
+"extra resources for bootstrapping your economy."
+msgstr "당신의 출발 위치 근처에 나무가 없습니다. 따라서 경제 성장하는데 필요한 추가 자원이 제공됩니다."
+
 #: ../../data/scripting/messages.lua:51 ../../data/scripting/messages.lua:53
 #: ../../src/wui/game_message_menu.cc:71 ../../src/wui/game_summary.cc:104
 msgid "Status"
@@ -113,7 +133,7 @@ msgstr "새로운 목표"
 
 #: ../../data/scripting/richtext_scenarios.lua:93
 msgid "New Objectives"
-msgstr "새로운 목표"
+msgstr "새로운 목표들"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:43
@@ -322,7 +342,7 @@ msgstr "지도 불러오기"
 #: ../../src/editor/editorinteractive.cc:198
 msgctxt "hotkey"
 msgid "Ctrl+L"
-msgstr ""
+msgstr "Ctrl+L"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:204
@@ -333,7 +353,7 @@ msgstr "지도 저장"
 #: ../../src/editor/editorinteractive.cc:206
 msgctxt "hotkey"
 msgid "Ctrl+S"
-msgstr ""
+msgstr "Ctrl+S"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:212
@@ -853,12 +873,12 @@ msgstr "태그:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:145
 msgid "Waterway length limit:"
-msgstr ""
+msgstr "수로 길이 제한:"
 
 #. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:151
 msgid "Disabled"
-msgstr ""
+msgstr "사용 안 함"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:157
 msgid "Suggested Teams:"
@@ -1246,25 +1266,25 @@ msgstr "현재 크기: %u"
 #: ../../src/game_io/game_loader.cc:72
 #, c-format
 msgid "Loading game: %1$s (%2$u/%3$d)"
-msgstr ""
+msgstr "놀이를 불러오고 있음: %1$s (%2$u/%3$d)"
 
 #: ../../src/game_io/game_loader.cc:74 ../../src/game_io/game_saver.cc:59
 #: ../../src/map_io/map_saver.cc:103
 #: ../../src/map_io/widelands_map_loader.cc:135
 msgid "Elemental data"
-msgstr ""
+msgstr "원소 자료"
 
 #: ../../src/game_io/game_loader.cc:119 ../../src/game_io/game_saver.cc:88
 msgid "Economies"
-msgstr ""
+msgstr "경제"
 
 #: ../../src/game_io/game_loader.cc:127 ../../src/game_io/game_saver.cc:96
 msgid "AI"
-msgstr ""
+msgstr "인공지능"
 
 #: ../../src/game_io/game_loader.cc:135 ../../src/game_io/game_saver.cc:104
 msgid "Command queue"
-msgstr ""
+msgstr "명령 대기열"
 
 #: ../../src/game_io/game_loader.cc:144 ../../src/map_io/map_saver.cc:155
 #: ../../src/map_io/widelands_map_loader.cc:354
@@ -1275,20 +1295,20 @@ msgstr "메시지"
 
 #: ../../src/game_io/game_loader.cc:161
 msgid "Finishing"
-msgstr ""
+msgstr "마무리"
 
 #: ../../src/game_io/game_saver.cc:52
 #, c-format
 msgid "Saving game: %1$s (%2$d/%3$d)"
-msgstr ""
+msgstr "놀이를 저장하고있음: %1$s (%2$d/%3$d)"
 
 #: ../../src/game_io/game_saver.cc:54
 msgid "Autosaving game…"
-msgstr ""
+msgstr "놀이를 자동으로 저장하고있음..."
 
 #: ../../src/game_io/game_saver.cc:112
 msgid "Interactive player"
-msgstr ""
+msgstr "대화형 플레이어"
 
 #. * TRANSLATORS: Error message printed to console/command line/log file
 #: ../../src/graphic/gl/initialize.cc:205
@@ -1454,7 +1474,7 @@ msgid "Initializing game…"
 msgstr ""
 
 #: ../../src/logic/game.cc:373 ../../src/logic/game.cc:409
-#: ../../src/ui_basic/progresswindow.cc:49 ../../src/wlapplication.cc:1468
+#: ../../src/ui_basic/progresswindow.cc:49 ../../src/wlapplication.cc:1470
 msgid "Loading…"
 msgstr "불러오는 중..."
 
@@ -2840,8 +2860,8 @@ msgstr ""
 #. * TRANSLATORS: Header for campaign description
 #: ../../src/ui_fsmenu/campaigndetails.cc:70
 #: ../../src/ui_fsmenu/scenariodetails.cc:66 ../../src/wui/mapdetails.cc:151
-#: ../../src/wui/savegametable.cc:126 ../../src/wui/savegametable.cc:179
-#: ../../src/wui/savegametable.cc:240
+#: ../../src/wui/savegametable.cc:125 ../../src/wui/savegametable.cc:178
+#: ../../src/wui/savegametable.cc:239
 msgid "Description"
 msgstr "설명"
 
@@ -4887,7 +4907,7 @@ msgid "No Author"
 msgstr "저자 없음"
 
 #. * TRANSLATORS: Parent directory/folder
-#: ../../src/wui/mapdata.cc:145 ../../src/wui/savegametable.cc:105
+#: ../../src/wui/mapdata.cc:145 ../../src/wui/savegametable.cc:104
 msgid "parent"
 msgstr "상위"
 
@@ -5092,17 +5112,17 @@ msgid "(vacant)"
 msgstr "(공석)"
 
 #. * TRANSLATORS: %1% is a map's name.
-#: ../../src/wui/savegametable.cc:24
+#: ../../src/wui/savegametable.cc:23
 msgid "Autosave: %1%"
 msgstr "자동 저장: %1%"
 
 #. * TRANSLATORS: %1% is a number, %2% a map's name.
-#: ../../src/wui/savegametable.cc:27
+#: ../../src/wui/savegametable.cc:26
 msgid "Autosave %1%: %2%"
 msgstr "자동 저장 %1%: %2%"
 
 #. * TRANSLATORS: %1% is a filename, %2% a map's name.
-#: ../../src/wui/savegametable.cc:31
+#: ../../src/wui/savegametable.cc:30
 msgctxt "filename_mapname"
 msgid "%1%: %2%"
 msgstr "%1%: %2%"
@@ -5112,7 +5132,7 @@ msgstr "%1%: %2%"
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
-#: ../../src/wui/savegametable.cc:43
+#: ../../src/wui/savegametable.cc:42
 msgid "SP"
 msgstr "SP"
 
@@ -5122,7 +5142,7 @@ msgstr "SP"
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/wui/savegametable.cc:51
+#: ../../src/wui/savegametable.cc:50
 msgid "H (%1%)"
 msgstr "H (%1%)"
 
@@ -5132,27 +5152,27 @@ msgstr "H (%1%)"
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/wui/savegametable.cc:59
+#: ../../src/wui/savegametable.cc:58
 msgid "MP (%1%)"
 msgstr "MP (%1%)"
 
-#: ../../src/wui/savegametable.cc:93
+#: ../../src/wui/savegametable.cc:92
 #, c-format
 msgid "Incompatible: %s"
 msgstr "부적합: %s"
 
-#: ../../src/wui/savegametable.cc:125 ../../src/wui/savegametable.cc:153
-#: ../../src/wui/savegametable.cc:218
+#: ../../src/wui/savegametable.cc:124 ../../src/wui/savegametable.cc:152
+#: ../../src/wui/savegametable.cc:217
 msgid "Save Date"
 msgstr "저장 날짜"
 
-#: ../../src/wui/savegametable.cc:125 ../../src/wui/savegametable.cc:153
-#: ../../src/wui/savegametable.cc:218
+#: ../../src/wui/savegametable.cc:124 ../../src/wui/savegametable.cc:152
+#: ../../src/wui/savegametable.cc:217
 msgid "The date this game was saved"
 msgstr "게임이 저장된 날짜"
 
-#: ../../src/wui/savegametable.cc:127 ../../src/wui/savegametable.cc:180
-#: ../../src/wui/savegametable.cc:241
+#: ../../src/wui/savegametable.cc:126 ../../src/wui/savegametable.cc:179
+#: ../../src/wui/savegametable.cc:240
 msgid ""
 "The filename that the game was saved under followed by the map’s name, or "
 "the map’s name followed by the last objective achieved."
@@ -5161,52 +5181,52 @@ msgstr "저장된 게임의 파일 이름은 지도 이름 혹은 최근에 달�
 #. * TRANSLATORS: Tooltip header for the "Mode" column when choosing a
 #. game/replay to
 #. load.
-#: ../../src/wui/savegametable.cc:157 ../../src/wui/savegametable.cc:222
+#: ../../src/wui/savegametable.cc:156 ../../src/wui/savegametable.cc:221
 msgid "Game Mode"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
-#: ../../src/wui/savegametable.cc:161
+#: ../../src/wui/savegametable.cc:160
 msgid "SP = Single Player"
 msgstr "SP = 단일 플레이어"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
-#: ../../src/wui/savegametable.cc:165 ../../src/wui/savegametable.cc:226
+#: ../../src/wui/savegametable.cc:164 ../../src/wui/savegametable.cc:225
 msgid "MP = Multiplayer"
 msgstr "MP = 멀티플레이어"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
-#: ../../src/wui/savegametable.cc:168 ../../src/wui/savegametable.cc:229
+#: ../../src/wui/savegametable.cc:167 ../../src/wui/savegametable.cc:228
 msgid "H = Multiplayer (Host)"
 msgstr "H = 멀티플레이어 (호스트)"
 
-#: ../../src/wui/savegametable.cc:172 ../../src/wui/savegametable.cc:233
+#: ../../src/wui/savegametable.cc:171 ../../src/wui/savegametable.cc:232
 msgid "Numbers are the number of players."
 msgstr "숫자는 플레이어 숫자입니다."
 
 #. * TRANSLATORS: Game Mode table column when choosing a game/replay to load.
 #. * TRANSLATORS: Keep this to 5 letters maximum.
 #. * TRANSLATORS: A tooltip will explain if you need to use an abbreviation.
-#: ../../src/wui/savegametable.cc:178 ../../src/wui/savegametable.cc:239
+#: ../../src/wui/savegametable.cc:177 ../../src/wui/savegametable.cc:238
 msgid "Mode"
 msgstr "모드"
 
-#: ../../src/wui/savegametable.cc:198
+#: ../../src/wui/savegametable.cc:197
 msgctxt "mapname_gametime"
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
-#: ../../src/wui/savegametable.cc:206
+#: ../../src/wui/savegametable.cc:205
 msgid "Filename: Map name (start of replay)"
 msgstr "파일 이름:지도 이름(다시보기의 시작)"
 
-#: ../../src/wui/savegametable.cc:207
+#: ../../src/wui/savegametable.cc:206
 msgid "Map name (start of replay)"
 msgstr "지도 이름 (리플레이 시작)"
 

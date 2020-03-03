@@ -19,6 +19,8 @@
 
 #include "wui/ware_statistics_menu.h"
 
+#include <functional>
+
 #include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -72,7 +74,7 @@ public:
 	                      int32_t const x,
 	                      int32_t const y,
 	                      const Widelands::TribeDescr& tribe,
-	                      boost::function<void(Widelands::DescriptionIndex, bool)> callback_function,
+	                      std::function<void(Widelands::DescriptionIndex, bool)> callback_function,
 	                      std::vector<uint8_t>& color_map)
 	   : AbstractWaresDisplay(parent, x, y, tribe, Widelands::wwWARE, true, callback_function),
 	     color_map_(color_map) {

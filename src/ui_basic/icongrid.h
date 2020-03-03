@@ -22,8 +22,6 @@
 
 #include <vector>
 
-#include <boost/signals2.hpp>
-
 #include "ui_basic/panel.h"
 
 namespace UI {

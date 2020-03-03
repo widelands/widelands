@@ -22,8 +22,6 @@
 #include <memory>
 
 #include <boost/algorithm/string/join.hpp>
-#include <boost/bind.hpp>
-#include <boost/format.hpp>
 
 #include "base/log.h"
 #include "base/macros.h"

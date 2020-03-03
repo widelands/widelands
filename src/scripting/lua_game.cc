@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "logic/filesystem_constants.h"

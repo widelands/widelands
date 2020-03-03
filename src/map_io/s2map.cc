@@ -707,7 +707,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 
 			Widelands::DescriptionIndex nres = 0;
 			if (*res) {
-				nres = world.get_resource(res);
+				nres = world.resource_index(res);
 				if (nres == Widelands::INVALID_INDEX)
 					throw wexception("world does not define resource type %s, you can not "
 					                 "play settler maps here",

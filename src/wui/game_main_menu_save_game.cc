@@ -22,7 +22,6 @@
 #include <memory>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "game_io/game_loader.h"
@@ -251,7 +250,7 @@ bool GameMainMenuSaveGame::save_game(std::string filename, bool binary) {
 	   [&game](FileSystem& fs) {
 		   Widelands::GameSaver gs(fs, game);
 		   gs.save();
-		},
+	   },
 	   complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR);
 	GenericSaveHandler::Error error = gsh.save();
 
