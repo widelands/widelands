@@ -383,7 +383,7 @@ void ConstructionSite::enhance(Game&) {
 	}
 
 	auto new_desired_capacity = [](uint32_t old_max, uint32_t old_des, uint32_t new_max) {
-		return old_max - old_des >= new_max ? 0 : new_max - old_max + old_des;
+		return old_des * new_max / old_max;
 	};
 
 	BuildingSettings* old_settings = settings_.release();
