@@ -23,8 +23,6 @@
 #include <string>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 
 #include "ai/computer_player.h"
 #include "base/i18n.h"

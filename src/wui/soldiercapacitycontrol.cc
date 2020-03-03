@@ -19,8 +19,6 @@
 
 #include "wui/soldiercapacitycontrol.h"
 
-#include <boost/lexical_cast.hpp>
-
 #include "graphic/graphic.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/player.h"

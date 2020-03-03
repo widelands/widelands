@@ -19,6 +19,8 @@
 
 #include "ui_basic/window.h"
 
+#include <memory>
+
 #include <SDL_keycode.h>
 
 #include "base/log.h"

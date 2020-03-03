@@ -23,8 +23,6 @@
 #include <deque>
 #include <memory>
 
-#include <boost/signals2.hpp>
-
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "notifications/note_ids.h"

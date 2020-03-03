@@ -19,8 +19,6 @@
 #ifndef WL_UI_BASIC_SLIDER_H
 #define WL_UI_BASIC_SLIDER_H
 
-#include <boost/signals2.hpp>
-
 #include "graphic/styles/text_panel_style.h"
 #include "ui_basic/panel.h"
 
