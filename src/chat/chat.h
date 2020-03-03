@@ -20,6 +20,7 @@
 #ifndef WL_CHAT_CHAT_H
 #define WL_CHAT_CHAT_H
 
+#include <cstring>
 #include <ctime>
 
 #include "logic/widelands.h"
