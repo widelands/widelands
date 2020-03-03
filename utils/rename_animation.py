@@ -34,7 +34,7 @@ def main():
         if source_file.startswith(source_prefix):
             suffix = source_file[len(source_prefix):]
             destination_file = destination_prefix + suffix
-            call(['bzr', 'mv', source_file, destination_file])
+            call(['git', 'mv', source_file, destination_file])
     return 0
 
 
