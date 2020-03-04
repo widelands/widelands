@@ -19,6 +19,8 @@
 
 #include "wui/mapdata.h"
 
+#include <boost/format.hpp>
+
 #include "io/filesystem/filesystem.h"
 
 MapData::MapData(const std::string& init_filename,
