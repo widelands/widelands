@@ -748,8 +748,10 @@ void MilitarySite::act(Game& game, uint32_t const data) {
                         soldier_to_heal = soldier;
                     }
                 }
-            } else if (soldier->get_battle() == nullptr || soldier->get_battle()->opponent(*soldier) == nullptr) {
-                // Somewhat heal soldiers in the field that are not currently engaged in fighting an opponent
+            } else if ((soldier->get_battle() == nullptr || soldier->get_battle()->opponent(*soldier) == nullptr)
+                       && !get_economy(WareWorker::wwWORKER)->warehouses().empty()) {
+                // Somewhat heal soldiers in the field that are not currently engaged in fighting an opponent,
+                // but only if there is a warehouse connected
                 const PlayerNumber owner_number = soldier->get_position().field->get_owned_by();
                 if (owner().player_number() == owner_number) {
                     soldier->heal(total_heal / 2);
