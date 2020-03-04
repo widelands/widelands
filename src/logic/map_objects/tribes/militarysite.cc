@@ -727,39 +727,41 @@ void MilitarySite::act(Game& game, uint32_t const data) {
 		update_soldier_request();
 	}
 
-    // Heal soldiers
+	// Heal soldiers
 	if (nexthealtime_ <= timeofgame) {
 		const uint32_t total_heal = descr().get_heal_per_second();
 		uint32_t max_total_level = 0;
 		float max_health = 0;
 		Soldier* soldier_to_heal = nullptr;
 
-        for (Soldier* soldier : soldier_control_.stationed_soldiers()) {
-            if (is_present(*soldier)) {
-                // The healing algorithm for present soldiers is:
-                // * heal soldier with highest total level
-                // * heal healthiest if multiple of same total level exist
-                if (soldier->get_current_health() < soldier->get_max_health()) {
-                    if (soldier_to_heal == nullptr || soldier->get_total_level() > max_total_level ||
-                        (soldier->get_total_level() == max_total_level &&
-                         soldier->get_current_health() / soldier->get_max_health() > max_health)) {
-                        max_total_level = soldier->get_total_level();
-                        max_health = soldier->get_current_health() / soldier->get_max_health();
-                        soldier_to_heal = soldier;
-                    }
-                }
-            } else if ((soldier->get_battle() == nullptr || soldier->get_battle()->opponent(*soldier) == nullptr)
-                       && !get_economy(WareWorker::wwWORKER)->warehouses().empty()) {
-                // Somewhat heal soldiers in the field that are not currently engaged in fighting an opponent,
-                // but only if there is a warehouse connected
-                const PlayerNumber owner_number = soldier->get_position().field->get_owned_by();
-                if (owner().player_number() == owner_number) {
-                    soldier->heal(total_heal / 2);
-                }
-            }
-        }
+		for (Soldier* soldier : soldier_control_.stationed_soldiers()) {
+			if (is_present(*soldier)) {
+				// The healing algorithm for present soldiers is:
+				// * heal soldier with highest total level
+				// * heal healthiest if multiple of same total level exist
+				if (soldier->get_current_health() < soldier->get_max_health()) {
+					if (soldier_to_heal == nullptr || soldier->get_total_level() > max_total_level ||
+					    (soldier->get_total_level() == max_total_level &&
+					     soldier->get_current_health() / soldier->get_max_health() > max_health)) {
+						max_total_level = soldier->get_total_level();
+						max_health = soldier->get_current_health() / soldier->get_max_health();
+						soldier_to_heal = soldier;
+					}
+				}
+			} else if ((soldier->get_battle() == nullptr ||
+			            soldier->get_battle()->opponent(*soldier) == nullptr) &&
+			           !get_economy(WareWorker::wwWORKER)->warehouses().empty()) {
+				// Somewhat heal soldiers in the field that are not currently engaged in fighting an
+				// opponent,
+				// but only if there is a warehouse connected
+				const PlayerNumber owner_number = soldier->get_position().field->get_owned_by();
+				if (owner().player_number() == owner_number) {
+					soldier->heal(total_heal / 2);
+				}
+			}
+		}
 
-        if (soldier_to_heal != nullptr) {
+		if (soldier_to_heal != nullptr) {
 			soldier_to_heal->heal(total_heal);
 		}
 
