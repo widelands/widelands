@@ -1,18 +1,18 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # ks k, 2017
-# ks k, 2017
+# ks k, 2017,2020
 # tamanegi, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-12-30 07:55+0000\n"
-"PO-Revision-Date: 2019-12-30 08:11+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-02-26 18:51+0000\n"
+"PO-Revision-Date: 2020-03-01 04:47+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -132,7 +132,7 @@ msgid ""
 " --ai_training        Enables AI training mode. See\n"
 "                      https://www.widelands.org/wiki/Ai%20Training/\n"
 "                      for a full description of the AI training logic."
-msgstr ""
+msgstr " --ai_training        인공지능 훈련 모드를 활성화합니다.\n                      이 모드에 대한 자세한 내용은 다음 페이지를 봐 주십시오.\n                      https://wl.widelands.org/wiki/Ai%20Training/"
 
 #: ../../src/wlapplication_messages.cc:100
 msgid ""
@@ -178,22 +178,22 @@ msgstr "グラフィックオプション:"
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:126
+#: ../../src/wlapplication_messages.cc:125
 msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
 msgstr " --fullscreen=[true|false]\n                      フルスクリーンモードの利用を設定します。"
 
-#: ../../src/wlapplication_messages.cc:130
+#: ../../src/wlapplication_messages.cc:129
 msgid " --xres=[...]         Width of the window in pixel."
 msgstr " --xres=[...]         ウィンドウの幅 (ピクセル単位)"
 
-#: ../../src/wlapplication_messages.cc:131
+#: ../../src/wlapplication_messages.cc:130
 msgid " --yres=[...]         Height of the window in pixel."
 msgstr " --yres=[...]         ウィンドウの高さ (ピクセル単位)"
 
-#: ../../src/wlapplication_messages.cc:132
+#: ../../src/wlapplication_messages.cc:131
 msgid " --maxfps=[5 ...]     Maximal optical framerate of the game."
 msgstr " --maxfps=[5 ...]     フレームレートの最大値を指定します。"
 
@@ -201,17 +201,17 @@ msgstr " --maxfps=[5 ...]     フレームレートの最大値を指定しま�
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:137
+#: ../../src/wlapplication_messages.cc:136
 msgid "Options for the internal window manager:"
 msgstr "内部ウィンドウマネージャーのオプション:"
 
-#: ../../src/wlapplication_messages.cc:138
+#: ../../src/wlapplication_messages.cc:137
 msgid ""
 " --animate_map_panning=[yes|no]\n"
 "                      Should automatic map movements be animated."
 msgstr " --animate_map_panning=[yes|no]\n                      マップ上での自動移動をアニメーションさせるか\n                      どうかを設定します。"
 
-#: ../../src/wlapplication_messages.cc:141
+#: ../../src/wlapplication_messages.cc:140
 msgid ""
 " --border_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the screen\n"
@@ -223,7 +223,7 @@ msgstr " --border_snap_distance=[0 ...]\n                      画面端から�
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:149
+#: ../../src/wlapplication_messages.cc:148
 msgid ""
 " --dock_windows_to_edges=[true|false]\n"
 "                      Eliminate a window's border towards the\n"
@@ -231,7 +231,7 @@ msgid ""
 "                      window is next to the edge of the screen."
 msgstr " --dock_windows_to_edges=[true|false]\n                      ウィンドウの端がスクリーンの端に接した\n                      時、ウィンドウの端を消します。"
 
-#: ../../src/wlapplication_messages.cc:154
+#: ../../src/wlapplication_messages.cc:153
 msgid ""
 " --panel_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the panel when\n"
@@ -239,7 +239,7 @@ msgid ""
 "                      distance from the edge of the panel."
 msgstr " --panel_snap_distance=[0 ...]\n                      ウィンドウ端がパネル端からこの距離内に\n                      来たときに、パネル端へウィンドウを移動\n                      させます。"
 
-#: ../../src/wlapplication_messages.cc:159
+#: ../../src/wlapplication_messages.cc:158
 msgid ""
 " --snap_windows_only_when_overlapping=[yes|no]\n"
 "                      Only move a window to the edge of a panel\n"
@@ -247,18 +247,18 @@ msgid ""
 "                      panel."
 msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                      ウィンドウがパネルと重なっているときに、\n                      ウィンドウだけをパネル端へ移動させます。"
 
-#: ../../src/wlapplication_messages.cc:165
+#: ../../src/wlapplication_messages.cc:164
 msgid " --verbose            Enable verbose debug messages"
 msgstr " --verbose            デバッグメッセージを有効化します。"
 
-#: ../../src/wlapplication_messages.cc:166
+#: ../../src/wlapplication_messages.cc:165
 msgid " --help               Show this help"
 msgstr " --help               このヘルプを表示します。"
 
-#: ../../src/wlapplication_messages.cc:167
+#: ../../src/wlapplication_messages.cc:166
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://www.widelands.org/\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr ""
+msgstr "버그 보고를 하거나 제안이 있습니까? 프로젝트의 웹 사이트를 확인하십시오.\n        https://www.widelands.org/\n\n그럼 게임을 즐기시길 바랍니다!"
