@@ -729,18 +729,37 @@ void MilitarySite::act(Game& game, uint32_t const data) {
 
     // Heal soldiers
 	if (nexthealtime_ <= timeofgame) {
+		const uint32_t total_heal = descr().get_heal_per_second();
+		uint32_t max_total_level = 0;
+		float max_health = 0;
+		Soldier* soldier_to_heal = nullptr;
+
         for (Soldier* soldier : soldier_control_.stationed_soldiers()) {
             if (is_present(*soldier)) {
-                // Fully heal all present soldiers
-                soldier->heal(descr().get_heal_per_second());
+                // The healing algorithm for present soldiers is:
+                // * heal soldier with highest total level
+                // * heal healthiest if multiple of same total level exist
+                if (soldier->get_current_health() < soldier->get_max_health()) {
+                    if (soldier_to_heal == nullptr || soldier->get_total_level() > max_total_level ||
+                        (soldier->get_total_level() == max_total_level &&
+                         soldier->get_current_health() / soldier->get_max_health() > max_health)) {
+                        max_total_level = soldier->get_total_level();
+                        max_health = soldier->get_current_health() / soldier->get_max_health();
+                        soldier_to_heal = soldier;
+                    }
+                }
             } else if (soldier->get_battle() == nullptr || soldier->get_battle()->opponent(*soldier) == nullptr) {
                 // Somewhat heal soldiers in the field that are not currently engaged in fighting an opponent
                 const PlayerNumber owner_number = soldier->get_position().field->get_owned_by();
                 if (owner().player_number() == owner_number) {
-                    soldier->heal(descr().get_heal_per_second() / 2);
+                    soldier->heal(total_heal / 2);
                 }
             }
         }
+
+        if (soldier_to_heal != nullptr) {
+			soldier_to_heal->heal(total_heal);
+		}
 
 		nexthealtime_ = timeofgame + 1000;
 		schedule_act(game, 1000);
