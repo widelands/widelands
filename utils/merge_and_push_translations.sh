@@ -27,10 +27,9 @@ fi
 rm -f po/*/*.pot.*~
 rm -f po/*/*.po.*~
 
-STATUS="$(git status)"
-echo "${STATUS}"
-if [[ "${STATUS}" != *"nothing to commit, working tree clean"* ]]; then
+if [ -n "$(git status -s)" ]; then
   echo "git status must be empty to prevent accidental commits etc."
+  git status
   exit 1
 fi
 
