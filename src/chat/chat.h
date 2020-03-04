@@ -20,8 +20,8 @@
 #ifndef WL_CHAT_CHAT_H
 #define WL_CHAT_CHAT_H
 
-#include <cstring>
 #include <ctime>
+#include <string>
 
 #include "logic/widelands.h"
 #include "notifications/note_ids.h"

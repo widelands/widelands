@@ -23,7 +23,7 @@
 #include "base/macros.h"
 
 #ifdef _WIN32
-#include <cstring>
+#include <string>
 #endif
 
 // Print a formatted log messages to stdout on most systems and 'stdout.txt' on windows.
