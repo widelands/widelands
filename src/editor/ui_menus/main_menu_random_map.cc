@@ -24,8 +24,6 @@
 #include <string>
 #include <vector>
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"

@@ -22,8 +22,6 @@
 #include <cstdio>
 #include <string>
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
@@ -33,7 +31,6 @@
 #include "logic/map.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
-#include "logic/widelands_geometry.h"
 
 constexpr int kMaxValue = 63;
 

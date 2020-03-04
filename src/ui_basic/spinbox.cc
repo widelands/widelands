@@ -22,13 +22,9 @@
 #include <map>
 #include <vector>
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "base/log.h"
-#include "base/macros.h"
 #include "base/wexception.h"
-#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/text/font_set.h"
 #include "ui_basic/button.h"

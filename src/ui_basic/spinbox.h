@@ -23,9 +23,6 @@
 #include <cstring>
 #include <list>
 
-#include <boost/signals2.hpp>
-
-#include "graphic/align.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 

@@ -44,7 +44,6 @@
 #include "logic/map_objects/tribes/dismantlesite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/tribes.h"
-#include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/resource_description.h"
@@ -517,15 +516,16 @@ Immovable& EditorGameBase::do_create_immovable(const Coords& c,
  * idx is the bob type.
  */
 
-Bob& EditorGameBase::create_ship(const Coords& c, int const ship_type_idx, Player* owner) {
+Bob& EditorGameBase::create_ship(const Coords& c,
+                                 DescriptionIndex const ship_type_idx,
+                                 Player* owner) {
 	const BobDescr* descr = dynamic_cast<const BobDescr*>(tribes().get_ship_descr(ship_type_idx));
 	return create_bob(c, *descr, owner);
 }
 
 Bob& EditorGameBase::create_ship(const Coords& c, const std::string& name, Player* owner) {
 	try {
-		int idx = tribes().safe_ship_index(name);
-		return create_ship(c, idx, owner);
+		return create_ship(c, tribes().safe_ship_index(name), owner);
 	} catch (const GameDataError& e) {
 		throw GameDataError("create_ship(%i,%i,%s,%s): ship not found: %s", c.x, c.y, name.c_str(),
 		                    owner->get_name().c_str(), e.what());

@@ -22,15 +22,10 @@
 #include <algorithm>
 #include <memory>
 
-#include <boost/algorithm/string.hpp>
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/format.hpp>
-
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/scoped_timer.h"
 #include "base/wexception.h"
-#include "build_info.h"
 #include "economy/flag.h"
 #include "economy/roadbase.h"
 #include "io/filesystem/filesystem_exceptions.h"
@@ -40,7 +35,6 @@
 #include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/findnode.h"
 #include "logic/map_objects/tribes/soldier.h"
-#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapfringeregion.h"
@@ -909,7 +903,7 @@ void Map::find_reachable(const EditorGameBase& egbase,
                          const CheckStep& checkstep,
                          functorT& functor) const {
 	std::vector<Coords> queue;
-	boost::shared_ptr<Pathfields> pathfields = pathfieldmgr_->allocate();
+	std::shared_ptr<Pathfields> pathfields = pathfieldmgr_->allocate();
 
 	queue.push_back(area);
 
@@ -2009,7 +2003,7 @@ int32_t Map::findpath(Coords instart,
 		upper_cost_limit = persist * calc_cost_estimate(start, end);
 
 	// Actual pathfinding
-	boost::shared_ptr<Pathfields> pathfields = pathfieldmgr_->allocate();
+	std::shared_ptr<Pathfields> pathfields = pathfieldmgr_->allocate();
 	Pathfield::Queue Open(type);
 	Pathfield* curpf = &pathfields->fields[start.field - fields_.get()];
 	curpf->cycle = pathfields->cycle;

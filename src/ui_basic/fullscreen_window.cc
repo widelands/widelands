@@ -24,7 +24,6 @@
 
 #include "base/log.h"
 #include "graphic/rendertarget.h"
-#include "graphic/style_manager.h"
 
 /*
 ==============================================================================

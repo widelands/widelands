@@ -29,7 +29,6 @@
 namespace Widelands {
 struct Ferry;
 struct FerryFleet;
-class Request;
 
 class WaterwayDescr : public RoadBaseDescr {
 public:

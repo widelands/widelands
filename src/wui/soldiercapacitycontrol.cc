@@ -19,13 +19,12 @@
 
 #include "wui/soldiercapacitycontrol.h"
 
-#include <boost/lexical_cast.hpp>
-
 #include "graphic/graphic.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/player.h"
 #include "ui_basic/button.h"
 #include "ui_basic/radiobutton.h"
+#include "ui_basic/textarea.h"
 #include "wui/interactive_gamebase.h"
 
 using Widelands::SoldierControl;

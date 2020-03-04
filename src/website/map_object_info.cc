@@ -21,8 +21,6 @@
 
 #include <SDL.h>
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 
 #include "base/log.h"
 #include "base/macros.h"
@@ -32,6 +30,8 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
+#include "logic/map_objects/tribes/building.h"
+#include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/world/world.h"

@@ -20,7 +20,6 @@
 #ifndef WL_UI_FSMENU_MULTIPLAYER_H
 #define WL_UI_FSMENU_MULTIPLAYER_H
 
-#include "network/internet_gaming.h"
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/main_menu.h"

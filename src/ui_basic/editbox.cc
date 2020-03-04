@@ -21,10 +21,10 @@
 
 #include <algorithm>
 #include <limits>
+#include <memory>
 #include <string>
 
 #include <SDL_keycode.h>
-#include <boost/format.hpp>
 
 #include "graphic/color.h"
 #include "graphic/font_handler.h"
@@ -33,7 +33,6 @@
 #include "graphic/style_manager.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
-#include "graphic/text/rt_errors.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
 

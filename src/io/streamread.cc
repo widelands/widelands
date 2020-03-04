@@ -25,6 +25,7 @@
 #include <cstring>
 
 #include "base/wexception.h"
+#include "io/machdep.h"
 
 StreamRead::~StreamRead() {
 }

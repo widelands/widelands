@@ -19,6 +19,8 @@
 
 #include "ui_basic/panel.h"
 
+#include <memory>
+
 #include "base/log.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"

@@ -34,8 +34,6 @@
 
 #include <SDL_image.h>
 #include <SDL_ttf.h>
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/format.hpp>
 #include <boost/regex.hpp>
 #ifdef __APPLE__
 #include <mach-o/dyld.h>
@@ -55,10 +53,10 @@
 #include "graphic/default_resolution.h"
 #include "graphic/font_handler.h"
 #include "graphic/text/font_set.h"
+#include "graphic/text_layout.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/ai_dna_handler.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -91,7 +89,6 @@
 #include "ui_fsmenu/options.h"
 #include "ui_fsmenu/scenario_select.h"
 #include "ui_fsmenu/singleplayer.h"
-#include "wlapplication_messages.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"

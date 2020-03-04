@@ -30,7 +30,6 @@ namespace Widelands {
 
 struct Flag;
 struct RoutingNode;
-struct RoadBase;
 
 /**
  * @see RoutingNode::get_neighbours

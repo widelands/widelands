@@ -25,7 +25,6 @@
 
 #include "base/macros.h"
 #include "base/wexception.h"
-#include "io/machdep.h"
 
 /**
  * Abstract base class for stream-like data sources.

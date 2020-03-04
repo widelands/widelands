@@ -26,7 +26,6 @@
 
 #include <stdint.h>
 
-#include "graphic/color.h"
 #include "graphic/image.h"
 #include "graphic/image_cache.h"
 #include "graphic/text/font_set.h"

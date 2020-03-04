@@ -23,8 +23,6 @@
 #include <memory>
 #include <tuple>
 
-#include <boost/format.hpp>
-
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
@@ -36,7 +34,6 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
-#include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/cmd_incorporate.h"
@@ -113,7 +110,7 @@ bool Worker::run_mine(Game& game, State& state, const Action& action) {
 	Map* map = game.mutable_map();
 
 	// Make sure that the specified resource is available in this world
-	DescriptionIndex const res = game.world().get_resource(action.sparam1.c_str());
+	DescriptionIndex const res = game.world().resource_index(action.sparam1.c_str());
 	if (res == Widelands::INVALID_INDEX)
 		throw GameDataError(_("should mine resource %s, which does not exist in world; tribe "
 		                      "is not compatible with world"),
@@ -216,7 +213,7 @@ bool Worker::run_breed(Game& game, State& state, const Action& action) {
 	Map* map = game.mutable_map();
 
 	// Make sure that the specified resource is available in this world
-	DescriptionIndex const res = game.world().get_resource(action.sparam1.c_str());
+	DescriptionIndex const res = game.world().resource_index(action.sparam1.c_str());
 	if (res == Widelands::INVALID_INDEX)
 		throw GameDataError(_("should breed resource type %s, which does not exist in world; "
 		                      "tribe is not compatible with world"),
@@ -561,10 +558,11 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 	FindNodeAnd functor;
 	functor.add(FindNodeSize(static_cast<FindNodeSize::Size>(action.iparam2)));
 	if (action.sparam1.size()) {
-		if (action.iparam4)
-			functor.add(FindNodeResourceBreedable(world.get_resource(action.sparam1.c_str())));
-		else
-			functor.add(FindNodeResource(world.get_resource(action.sparam1.c_str())));
+		if (action.iparam4) {
+			functor.add(FindNodeResourceBreedable(world.resource_index(action.sparam1.c_str())));
+		} else {
+			functor.add(FindNodeResource(world.resource_index(action.sparam1.c_str())));
+		}
 	}
 
 	if (action.iparam5 > -1)
@@ -588,7 +586,7 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 			FindNodeAnd functorAnyFull;
 			functorAnyFull.add(FindNodeSize(static_cast<FindNodeSize::Size>(action.iparam2)));
 			functorAnyFull.add(FindNodeResourceBreedable(
-			   world.get_resource(action.sparam1.c_str()), AnimalBreedable::kAnimalFull));
+			   world.resource_index(action.sparam1.c_str()), AnimalBreedable::kAnimalFull));
 			if (action.iparam5 > -1)
 				functorAnyFull.add(FindNodeImmovableAttribute(action.iparam5), true);
 

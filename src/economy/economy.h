@@ -20,12 +20,10 @@
 #ifndef WL_ECONOMY_ECONOMY_H
 #define WL_ECONOMY_ECONOMY_H
 
+#include <functional>
 #include <memory>
 #include <set>
 #include <vector>
-
-#include <boost/function.hpp>
-#include <boost/utility.hpp>
 
 #include "base/macros.h"
 #include "economy/supply.h"
@@ -38,16 +36,11 @@
 
 namespace Widelands {
 
-class Game;
-class Player;
 class Soldier;
-class Warehouse;
 struct Flag;
 struct RSPairStruct;
-class Request;
 struct Route;
 struct Router;
-struct Supply;
 class Economy;
 
 struct NoteEconomy {
@@ -95,10 +88,8 @@ struct NoteEconomy {
 class Economy {
 public:
 	friend class EconomyDataPacket;
-	// TODO(Nordfriese): These 3 friends are for savegame compatibility
+	// TODO(Nordfriese): This friend is for savegame compatibility
 	friend struct CmdCallEconomyBalance;
-	friend class MapFlagPacket;
-	friend struct Ship;
 
 	// Initialize the global serial on game start
 	static void initialize_serial();
@@ -140,7 +131,7 @@ public:
 
 	bool find_route(Flag& start, Flag& end, Route* route, int32_t cost_cutoff = -1);
 
-	using WarehouseAcceptFn = boost::function<bool(Warehouse&)>;
+	using WarehouseAcceptFn = std::function<bool(Warehouse&)>;
 	Warehouse* find_closest_warehouse(Flag& start,
 	                                  Route* route = nullptr,
 	                                  uint32_t cost_cutoff = 0,

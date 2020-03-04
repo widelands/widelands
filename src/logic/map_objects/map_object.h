@@ -26,10 +26,6 @@
 #include <string>
 #include <vector>
 
-#include <boost/function.hpp>
-#include <boost/signals2.hpp>
-#include <boost/unordered_map.hpp>
-
 #include "base/log.h"
 #include "base/macros.h"
 #include "graphic/animation/animation.h"
@@ -39,21 +35,16 @@
 #include "logic/cmd_queue.h"
 #include "logic/map_objects/info_to_draw.h"
 #include "logic/map_objects/tribes/training_attribute.h"
-#include "logic/map_objects/tribes/wareworker.h"
 #include "logic/widelands.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/tabpanel.h"
 
-class FileRead;
 class RenderTarget;
 
 namespace Widelands {
 
-class EditorCategory;
 class MapObject;
-class MapObjectLoader;
 class Player;
-struct Path;
 
 // This enum lists the available classes of Map Objects.
 enum class MapObjectType : uint8_t {
@@ -453,7 +444,7 @@ inline int32_t get_reverse_dir(int32_t const dir) {
  * Keeps the list of all objects currently in the game.
  */
 struct ObjectManager {
-	using MapObjectMap = boost::unordered_map<Serial, MapObject*>;
+	using MapObjectMap = std::unordered_map<Serial, MapObject*>;
 
 	ObjectManager() {
 		lastserial_ = 0;

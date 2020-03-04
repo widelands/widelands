@@ -22,12 +22,11 @@
 #include <cstdio>
 #include <vector>
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "graphic/text_layout.h"
 #include "logic/map_objects/world/editor_category.h"
+#include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
 #include "ui_basic/multilinetextarea.h"

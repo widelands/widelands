@@ -20,7 +20,6 @@
 #include "editor/tools/draw_tool.h"
 
 #include "editor/tools/action_args.h"
-#include "editor/tools/history.h"
 
 // TODO(unknown): Saving every action in a list isn't very efficient.
 // A long list can take several seconds to undo/redo every action.

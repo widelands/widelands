@@ -28,7 +28,6 @@ namespace Widelands {
 
 struct BaseImmovable;
 class ImmovableDescr;
-class Player;
 
 struct FindImmovable {
 private:

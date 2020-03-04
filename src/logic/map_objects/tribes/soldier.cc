@@ -23,8 +23,6 @@
 #include <list>
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "base/macros.h"
 #include "base/math.h"
 #include "base/wexception.h"
@@ -33,7 +31,6 @@
 #include "graphic/animation/animation_manager.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"

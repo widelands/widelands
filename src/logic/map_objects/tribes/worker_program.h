@@ -31,10 +31,6 @@
 
 namespace Widelands {
 
-// TODO(Antonio Trueba#1#): Get rid of forward class
-// declaration (Chicken-and-egg problem)
-class WorkerDescr;
-
 struct WorkerProgram : public BobProgramBase {
 
 	using ParseWorkerProgramFn = void (WorkerProgram::*)(Worker::Action*,
