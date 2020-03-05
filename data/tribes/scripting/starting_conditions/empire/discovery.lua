@@ -2,6 +2,7 @@
 --                 Start conditions for Discovery
 -- =======================================================================
 
+include "scripting/starting_conditions.lua"
 include "scripting/ui.lua"
 
 set_textdomain("tribes")
@@ -23,24 +24,7 @@ init = {
       player:allow_workers("all")
    end
 
-   local fields = {}
-   repeat
-      local f = map:get_field(math.random(map.width), math.random(map.height))
-      if not f:has_caps("swimmable") then
-         f = nil
-      else
-         local route_found = false
-         for i,port in pairs(map.port_spaces) do
-            if map:sea_route_exists(f, map:get_field(port.x, port.y)) then
-               route_found = true
-               break
-            end
-         end
-         if not route_found then f = nil end
-      end
-      if f then table.insert(fields, f) end
-   until #fields == 3
-
+   local fields = find_ocean_fields(3)
    -- items per expedition (incl. builder): 20
    local items = {
       {
