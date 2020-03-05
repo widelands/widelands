@@ -31,7 +31,7 @@ void SavegameLoader::load(const std::string& to_be_loaded,
 	if (g_fs->is_directory(to_be_loaded)) {
 		try {
 			load_savegame_from_directory(to_be_loaded, loaded_games);
-		} catch (const std::exception& e) {
+		} catch (const std::exception&) {
 			// loading failed, so this is actually a normal directory
 			add_sub_dir(to_be_loaded, loaded_games);
 		}
@@ -107,10 +107,6 @@ void SavegameLoader::add_error_info(SavegameData& gamedata, std::string errormes
 	      .str();
 
 	gamedata.mapname = FileSystem::filename_without_ext(gamedata.filename.c_str());
-}
-
-bool SavegameLoader::is_valid_gametype(const SavegameData& gamedata) const {
-	return gamedata.gametype == GameController::GameType::kSingleplayer;
 }
 
 // bool SavegameLoader::is_valid_gametype(const SavegameData& gamedata) const {
@@ -223,4 +219,18 @@ MultiPlayerLoader::MultiPlayerLoader(Widelands::Game& game) : SavegameLoader(gam
 bool MultiPlayerLoader::is_valid_gametype(const SavegameData& gamedata) const {
 	return gamedata.gametype == GameController::GameType::kNetHost ||
 	       gamedata.gametype == GameController::GameType::kNetClient;
+}
+
+SinglePlayerLoader::SinglePlayerLoader(Widelands::Game& game) : SavegameLoader(game) {
+}
+
+bool SinglePlayerLoader::is_valid_gametype(const SavegameData& gamedata) const {
+	return gamedata.gametype == GameController::GameType::kSingleplayer;
+}
+
+EverythingLoader::EverythingLoader(Widelands::Game& game) : SavegameLoader(game) {
+}
+
+bool EverythingLoader::is_valid_gametype(const SavegameData& gamedata) const {
+	return true;
 }

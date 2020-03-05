@@ -50,26 +50,27 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
      basedir_(filetype_ == FileType::kReplay ? kReplayDir : kSaveDir),
      curdir_(basedir_),
      game_(g) {
-	if (filetype_ == FileType::kReplay) {
-		savegame_deleter_.reset(new ReplayDeleter(parent_));
-		savegame_loader_.reset(new ReplayLoader(g));
-	} else {
-		savegame_deleter_.reset(new SavegameDeleter(parent_));
-		savegame_loader_.reset((new SavegameLoader(g)));
-	}
-	if (filetype_ == FileType::kGameMultiPlayer) {
-		savegame_loader_.reset(new MultiPlayerLoader(g));
-	}
-
 	switch (filetype_) {
-	case FileType::kGameSinglePlayer:
-		table_ = new SavegameTableSinglePlayer(table_box_, style, localize_autosave);
-		break;
 	case FileType::kReplay:
 		table_ = new SavegameTableReplay(table_box_, style, localize_autosave);
+		savegame_deleter_.reset(new ReplayDeleter(parent_));
+		savegame_loader_.reset(new ReplayLoader(g));
 		break;
-	default:
+	case FileType::kGameSinglePlayer:
+		table_ = new SavegameTableSinglePlayer(table_box_, style, localize_autosave);
+		savegame_deleter_.reset(new SavegameDeleter(parent_));
+		savegame_loader_.reset((new SinglePlayerLoader(g)));
+		break;
+	case FileType::kGameMultiPlayer:
 		table_ = new SavegameTableMultiplayer(table_box_, style, localize_autosave);
+		savegame_deleter_.reset(new SavegameDeleter(parent_));
+		savegame_loader_.reset(new MultiPlayerLoader(g));
+		break;
+	case FileType::kShowAll:
+		table_ = new SavegameTableMultiplayer(table_box_, style, localize_autosave);  // wrong??!!
+		savegame_deleter_.reset(new SavegameDeleter(parent_));
+		savegame_loader_.reset(new EverythingLoader(g));
+		break;
 	}
 
 	table_->set_column_compare(0, boost::bind(&LoadOrSaveGame::compare_save_time, this, _1, _2));

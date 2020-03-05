@@ -1,11 +1,12 @@
 #ifndef WL_WUI_SAVEGAMEDELETER_H
 #define WL_WUI_SAVEGAMEDELETER_H
 
-#include "savegamedata.h"
-#include "ui_basic/panel.h"
-#include <stdint.h>
 #include <string>
 #include <vector>
+
+#include "ui_basic/panel.h"
+#include "wui/savegamedata.h"
+
 /// Encapsualates the deletion of savegames. Is extended by ReplayDeleter to handle deletion of
 /// replays
 class SavegameDeleter {
@@ -41,7 +42,7 @@ public:
 private:
 	const std::string
 	create_header_for_confirmation_window(const size_t no_selections) const override;
-	virtual const std::string
+	const std::string
 	create_header_for_deletion_failed_window(const size_t no_to_be_deleted,
 	                                         const size_t no_failed) const override;
 	uint32_t try_to_delete(const std::vector<SavegameData>& to_be_deleted) const override;

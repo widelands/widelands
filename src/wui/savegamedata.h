@@ -1,10 +1,11 @@
 #ifndef WL_WUI_SAVEGAMEDATA_H
 #define WL_WUI_SAVEGAMEDATA_H
+
+#include <string>
+
 #include "io/filesystem/filesystem.h"
 #include "logic/game_controller.h"
 #include "logic/widelands.h"
-#include <stdint.h>
-#include <string>
 
 /**
  * Data about a savegame/replay that we're interested in.
