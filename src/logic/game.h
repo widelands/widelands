@@ -46,7 +46,7 @@ struct Flag;
 struct Path;
 struct PlayerImmovable;
 enum class IslandExploreDirection;
-struct PortDock;
+class PortDock;
 enum class ScoutingDirection;
 enum class SoldierPreference : uint8_t;
 struct Ship;
