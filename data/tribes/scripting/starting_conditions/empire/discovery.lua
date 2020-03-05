@@ -3,7 +3,6 @@
 -- =======================================================================
 
 include "scripting/starting_conditions.lua"
-include "scripting/ui.lua"
 
 set_textdomain("tribes")
 
@@ -61,7 +60,7 @@ init = {
       ship.capacity = 34
       ship:make_expedition(items[i])
    end
-   scroll_to_field(fields[1])
+   sleep_then_goto(1000, fields[1])
 end
 }
 

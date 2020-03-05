@@ -1,3 +1,6 @@
+include "scripting/coroutine.lua"
+include "scripting/ui.lua"
+
 function find_ocean_fields(how_many)
    local map = wl.Game().map
    local fields = {}
@@ -14,4 +17,11 @@ function find_ocean_fields(how_many)
       end
    until #fields == how_many
    return fields
+end
+
+function sleep_then_goto(sleeptime, field)
+   run(function()
+      sleep(sleeptime)
+      scroll_to_field(field)
+   end)
 end
