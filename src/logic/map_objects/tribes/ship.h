@@ -330,7 +330,6 @@ protected:
 		Serial worker_economy_serial_;
 		std::vector<std::pair<uint32_t, uint32_t>> destinations_;
 		int32_t capacity_ = 0U;
-		Serial economy_serial_;
 		ShipStates ship_state_ = ShipStates::kTransport;
 		std::string shipname_;
 		std::unique_ptr<Expedition> expedition_;

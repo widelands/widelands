@@ -71,9 +71,6 @@ AbstractWaresDisplay* create_portdock_wares_display(UI::Panel* parent,
 	return new PortDockWaresDisplay(parent, width, pd, type);
 }
 
-constexpr uint32_t kItemSize = 28;
-constexpr uint32_t kAdditionalItemsBorder = 4;
-
 static char const* kPicWarePresent = "images/wui/buildings/high_priority_button.png";
 static char const* kPicWareComing = "images/wui/buildings/normal_priority_button.png";
 static char const* kPicWareMissing = "images/wui/buildings/low_priority_button.png";
