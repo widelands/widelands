@@ -31,6 +31,8 @@
 
 namespace UI {
 
+class BaseDropdown;
+
 enum class ListselectLayout {
 	kPlain,     // Highlight the selected element
 	kDropdown,  // When the mouse moves, instantly select the element that the mouse hovers over
@@ -117,6 +119,10 @@ struct BaseListselect : public Panel {
 	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
 	bool handle_key(bool down, SDL_Keysym) override;
 
+	void set_notify_on_delete(UI::BaseDropdown* d) {
+		notify_on_delete_ = d;
+	}
+
 private:
 	static const int32_t DOUBLE_CLICK_INTERVAL = 500;  // half a second
 	static const int32_t ms_darken_value = -20;
@@ -157,6 +163,8 @@ private:
 	const UI::PanelStyleInfo* background_style_;  // Background color and texture. Not owned.
 	int lineheight_;
 	std::string current_tooltip_;
+
+	UI::BaseDropdown* notify_on_delete_;
 };
 
 template <typename Entry> struct Listselect : public BaseListselect {

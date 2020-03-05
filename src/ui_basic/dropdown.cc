@@ -128,6 +128,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	}
 	list_ =
 	   new UI::Listselect<uintptr_t>(list_parent, 0, 0, w, 0, style, ListselectLayout::kDropdown);
+	list_->set_notify_on_delete(this);
 
 	list_->set_visible(false);
 	button_box_.add(&display_button_, UI::Box::Resizing::kExpandBoth);
@@ -157,7 +158,10 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 BaseDropdown::~BaseDropdown() {
 	// The list needs to be able to drop outside of windows, so it won't close with the window.
 	// So, we tell it to die.
-	list_->die();
+	if (list_) {
+		list_->set_notify_on_delete(nullptr);
+		list_->die();
+	}
 
 	// Unsubscribe from layouting hooks
 	assert(living_dropdowns_.find(id_) != living_dropdowns_.end());
