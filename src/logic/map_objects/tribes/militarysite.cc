@@ -727,7 +727,7 @@ void MilitarySite::act(Game& game, uint32_t const data) {
 		update_soldier_request();
 	}
 
-    // Heal soldiers
+	// Heal soldiers
 	if (nexthealtime_ <= timeofgame) {
 		const uint32_t total_heal = descr().get_heal_per_second();
 		uint32_t max_total_level = 0;
@@ -747,11 +747,10 @@ void MilitarySite::act(Game& game, uint32_t const data) {
                         max_health = soldier->get_current_health() / soldier->get_max_health();
                         soldier_to_heal = soldier;
                     }
-
                 } else if ((soldier->get_battle() == nullptr || soldier->get_battle()->opponent(*soldier) == nullptr)
                            && !get_economy(WareWorker::wwWORKER)->warehouses().empty()) {
                     // Somewhat heal soldiers in the field that are not currently engaged in fighting an opponent,
-                    // but only if there is a warehouse connected goes like this:
+                    // but only if there is a warehouse connected.
                     const PlayerNumber field_owner = soldier->get_position().field->get_owned_by();
                     if (owner().player_number() == field_owner) {
                         const unsigned int air_distance = game.map().calc_distance(get_position(), soldier->get_position());
