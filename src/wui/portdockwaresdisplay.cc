@@ -91,7 +91,7 @@ public:
 			UI::Dropdown<std::pair<Widelands::WareWorker, Widelands::DescriptionIndex>>& d =
 			   *new UI::Dropdown<std::pair<Widelands::WareWorker, Widelands::DescriptionIndex>>(
 			      box, (boost::format("additional_%u") % c).str(), 0, 0, kWareMenuPicWidth, 8,
-			      kWareMenuPicHeight, "", UI::DropdownType::kPictorial, UI::PanelStyle::kWui,
+			      kWareMenuPicHeight, _("Additional item"), UI::DropdownType::kPictorial, UI::PanelStyle::kWui,
 			      UI::ButtonStyle::kWuiSecondary);
 			d.add(_("(Empty)"), kEmptySlot, g_gr->images().get(kNoWare), true, _("(Empty)"));
 			for (Widelands::DescriptionIndex i : pd.owner().tribe().wares()) {
