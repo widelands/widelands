@@ -734,35 +734,40 @@ void MilitarySite::act(Game& game, uint32_t const data) {
 		float max_health = 0;
 		Soldier* soldier_to_heal = nullptr;
 
-        for (Soldier* soldier : soldier_control_.stationed_soldiers()) {
-            if (soldier->get_current_health() < soldier->get_max_health()) {
-                if (is_present(*soldier)) {
-                    // The healing algorithm for present soldiers is:
-                    // * heal soldier with highest total level
-                    // * heal healthiest if multiple of same total level exist
-                    if (soldier_to_heal == nullptr || soldier->get_total_level() > max_total_level ||
-                        (soldier->get_total_level() == max_total_level &&
-                         soldier->get_current_health() / soldier->get_max_health() > max_health)) {
-                        max_total_level = soldier->get_total_level();
-                        max_health = soldier->get_current_health() / soldier->get_max_health();
-                        soldier_to_heal = soldier;
-                    }
-                } else if ((soldier->get_battle() == nullptr || soldier->get_battle()->opponent(*soldier) == nullptr)
-                           && !get_economy(WareWorker::wwWORKER)->warehouses().empty()) {
-                    // Somewhat heal soldiers in the field that are not currently engaged in fighting an opponent,
-                    // but only if there is a warehouse connected.
-                    const PlayerNumber field_owner = soldier->get_position().field->get_owned_by();
-                    if (owner().player_number() == field_owner) {
-                        const unsigned int air_distance = game.map().calc_distance(get_position(), soldier->get_position());
-                        const unsigned int heal_with_factor = total_heal * descr().get_conquers() / std::max(air_distance * 4U, 1U);
-                        log("NOCOM distance: %d, heal_with_factor: %d, total_heal: %d, get_conquers %d\n", air_distance, heal_with_factor, total_heal, descr().get_conquers());
-                        soldier->heal(std::max(total_heal, heal_with_factor));
-                    }
-                }
-            }
-        }
+		for (Soldier* soldier : soldier_control_.stationed_soldiers()) {
+			if (soldier->get_current_health() < soldier->get_max_health()) {
+				if (is_present(*soldier)) {
+					// The healing algorithm for present soldiers is:
+					// * heal soldier with highest total level
+					// * heal healthiest if multiple of same total level exist
+					if (soldier_to_heal == nullptr || soldier->get_total_level() > max_total_level ||
+					    (soldier->get_total_level() == max_total_level &&
+					     soldier->get_current_health() / soldier->get_max_health() > max_health)) {
+						max_total_level = soldier->get_total_level();
+						max_health = soldier->get_current_health() / soldier->get_max_health();
+						soldier_to_heal = soldier;
+					}
+				} else if ((soldier->get_battle() == nullptr ||
+				            soldier->get_battle()->opponent(*soldier) == nullptr) &&
+				           !get_economy(WareWorker::wwWORKER)->warehouses().empty()) {
+					// Somewhat heal soldiers in the field that are not currently engaged in fighting an
+					// opponent,
+					// but only if there is a warehouse connected.
+					const PlayerNumber field_owner = soldier->get_position().field->get_owned_by();
+					if (owner().player_number() == field_owner) {
+						const unsigned int air_distance =
+						   game.map().calc_distance(get_position(), soldier->get_position());
+						const unsigned int heal_with_factor =
+						   total_heal * descr().get_conquers() / std::max(air_distance * 4U, 1U);
+						log("NOCOM distance: %d, heal_with_factor: %d, total_heal: %d, get_conquers %d\n",
+						    air_distance, heal_with_factor, total_heal, descr().get_conquers());
+						soldier->heal(std::max(total_heal, heal_with_factor));
+					}
+				}
+			}
+		}
 
-        if (soldier_to_heal != nullptr) {
+		if (soldier_to_heal != nullptr) {
 			soldier_to_heal->heal(total_heal);
 		}
 
