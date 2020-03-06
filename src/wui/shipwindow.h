@@ -20,6 +20,7 @@
 #ifndef WL_WUI_SHIPWINDOW_H
 #define WL_WUI_SHIPWINDOW_H
 
+#include <functional>
 #include <memory>
 
 #include "logic/game.h"
@@ -44,7 +45,7 @@ private:
 	                        const std::string& name,
 	                        const std::string& title,
 	                        const std::string& picname,
-	                        boost::function<void()> callback);
+	                        std::function<void()> callback);
 	void set_button_visibility();
 	void no_port_error_message();
 

@@ -21,8 +21,6 @@
 
 #include <string>
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/log.h"
 #include "io/profile.h"
 #include "logic/editor_game_base.h"

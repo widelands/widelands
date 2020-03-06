@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-02-20 07:30+0000\n"
-"PO-Revision-Date: 2020-02-20 07:32+0000\n"
+"POT-Creation-Date: 2020-02-26 18:51+0000\n"
+"PO-Revision-Date: 2020-02-26 19:01+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Igbo (http://www.transifex.com/widelands/widelands/language/ig/)\n"
 "MIME-Version: 1.0\n"
@@ -80,6 +80,26 @@ msgstr ""
 
 #: ../../data/scripting/infrastructure.lua:171
 msgid "Not enough space"
+msgstr ""
+
+#: ../../data/scripting/infrastructure.lua:242
+msgid "No rocks nearby"
+msgstr ""
+
+#: ../../data/scripting/infrastructure.lua:242
+msgid ""
+"There are no rocks near to your starting position. Therefore, you receive "
+"extra resources for bootstrapping your economy."
+msgstr ""
+
+#: ../../data/scripting/infrastructure.lua:247
+msgid "No trees nearby"
+msgstr ""
+
+#: ../../data/scripting/infrastructure.lua:247
+msgid ""
+"There are no trees near to your starting position. Therefore, you receive "
+"extra resources for bootstrapping your economy."
 msgstr ""
 
 #: ../../data/scripting/messages.lua:51 ../../data/scripting/messages.lua:53
@@ -1448,7 +1468,7 @@ msgid "Initializing game…"
 msgstr ""
 
 #: ../../src/logic/game.cc:373 ../../src/logic/game.cc:409
-#: ../../src/ui_basic/progresswindow.cc:49 ../../src/wlapplication.cc:1468
+#: ../../src/ui_basic/progresswindow.cc:49 ../../src/wlapplication.cc:1470
 msgid "Loading…"
 msgstr ""
 
@@ -2834,8 +2854,8 @@ msgstr ""
 #. * TRANSLATORS: Header for campaign description
 #: ../../src/ui_fsmenu/campaigndetails.cc:70
 #: ../../src/ui_fsmenu/scenariodetails.cc:66 ../../src/wui/mapdetails.cc:151
-#: ../../src/wui/savegametable.cc:126 ../../src/wui/savegametable.cc:179
-#: ../../src/wui/savegametable.cc:240
+#: ../../src/wui/savegametable.cc:125 ../../src/wui/savegametable.cc:178
+#: ../../src/wui/savegametable.cc:239
 msgid "Description"
 msgstr ""
 
@@ -4881,7 +4901,7 @@ msgid "No Author"
 msgstr ""
 
 #. * TRANSLATORS: Parent directory/folder
-#: ../../src/wui/mapdata.cc:145 ../../src/wui/savegametable.cc:105
+#: ../../src/wui/mapdata.cc:145 ../../src/wui/savegametable.cc:104
 msgid "parent"
 msgstr ""
 
@@ -5086,17 +5106,17 @@ msgid "(vacant)"
 msgstr ""
 
 #. * TRANSLATORS: %1% is a map's name.
-#: ../../src/wui/savegametable.cc:24
+#: ../../src/wui/savegametable.cc:23
 msgid "Autosave: %1%"
 msgstr ""
 
 #. * TRANSLATORS: %1% is a number, %2% a map's name.
-#: ../../src/wui/savegametable.cc:27
+#: ../../src/wui/savegametable.cc:26
 msgid "Autosave %1%: %2%"
 msgstr ""
 
 #. * TRANSLATORS: %1% is a filename, %2% a map's name.
-#: ../../src/wui/savegametable.cc:31
+#: ../../src/wui/savegametable.cc:30
 msgctxt "filename_mapname"
 msgid "%1%: %2%"
 msgstr ""
@@ -5106,7 +5126,7 @@ msgstr ""
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
-#: ../../src/wui/savegametable.cc:43
+#: ../../src/wui/savegametable.cc:42
 msgid "SP"
 msgstr ""
 
@@ -5116,7 +5136,7 @@ msgstr ""
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/wui/savegametable.cc:51
+#: ../../src/wui/savegametable.cc:50
 msgid "H (%1%)"
 msgstr ""
 
@@ -5126,27 +5146,27 @@ msgstr ""
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/wui/savegametable.cc:59
+#: ../../src/wui/savegametable.cc:58
 msgid "MP (%1%)"
 msgstr ""
 
-#: ../../src/wui/savegametable.cc:93
+#: ../../src/wui/savegametable.cc:92
 #, c-format
 msgid "Incompatible: %s"
 msgstr ""
 
-#: ../../src/wui/savegametable.cc:125 ../../src/wui/savegametable.cc:153
-#: ../../src/wui/savegametable.cc:218
+#: ../../src/wui/savegametable.cc:124 ../../src/wui/savegametable.cc:152
+#: ../../src/wui/savegametable.cc:217
 msgid "Save Date"
 msgstr ""
 
-#: ../../src/wui/savegametable.cc:125 ../../src/wui/savegametable.cc:153
-#: ../../src/wui/savegametable.cc:218
+#: ../../src/wui/savegametable.cc:124 ../../src/wui/savegametable.cc:152
+#: ../../src/wui/savegametable.cc:217
 msgid "The date this game was saved"
 msgstr ""
 
-#: ../../src/wui/savegametable.cc:127 ../../src/wui/savegametable.cc:180
-#: ../../src/wui/savegametable.cc:241
+#: ../../src/wui/savegametable.cc:126 ../../src/wui/savegametable.cc:179
+#: ../../src/wui/savegametable.cc:240
 msgid ""
 "The filename that the game was saved under followed by the map’s name, or "
 "the map’s name followed by the last objective achieved."
@@ -5155,52 +5175,52 @@ msgstr ""
 #. * TRANSLATORS: Tooltip header for the "Mode" column when choosing a
 #. game/replay to
 #. load.
-#: ../../src/wui/savegametable.cc:157 ../../src/wui/savegametable.cc:222
+#: ../../src/wui/savegametable.cc:156 ../../src/wui/savegametable.cc:221
 msgid "Game Mode"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
-#: ../../src/wui/savegametable.cc:161
+#: ../../src/wui/savegametable.cc:160
 msgid "SP = Single Player"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
-#: ../../src/wui/savegametable.cc:165 ../../src/wui/savegametable.cc:226
+#: ../../src/wui/savegametable.cc:164 ../../src/wui/savegametable.cc:225
 msgid "MP = Multiplayer"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
-#: ../../src/wui/savegametable.cc:168 ../../src/wui/savegametable.cc:229
+#: ../../src/wui/savegametable.cc:167 ../../src/wui/savegametable.cc:228
 msgid "H = Multiplayer (Host)"
 msgstr ""
 
-#: ../../src/wui/savegametable.cc:172 ../../src/wui/savegametable.cc:233
+#: ../../src/wui/savegametable.cc:171 ../../src/wui/savegametable.cc:232
 msgid "Numbers are the number of players."
 msgstr ""
 
 #. * TRANSLATORS: Game Mode table column when choosing a game/replay to load.
 #. * TRANSLATORS: Keep this to 5 letters maximum.
 #. * TRANSLATORS: A tooltip will explain if you need to use an abbreviation.
-#: ../../src/wui/savegametable.cc:178 ../../src/wui/savegametable.cc:239
+#: ../../src/wui/savegametable.cc:177 ../../src/wui/savegametable.cc:238
 msgid "Mode"
 msgstr ""
 
-#: ../../src/wui/savegametable.cc:198
+#: ../../src/wui/savegametable.cc:197
 msgctxt "mapname_gametime"
 msgid "%1% (%2%)"
 msgstr ""
 
-#: ../../src/wui/savegametable.cc:206
+#: ../../src/wui/savegametable.cc:205
 msgid "Filename: Map name (start of replay)"
 msgstr ""
 
-#: ../../src/wui/savegametable.cc:207
+#: ../../src/wui/savegametable.cc:206
 msgid "Map name (start of replay)"
 msgstr ""
 

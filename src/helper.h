@@ -26,7 +26,6 @@
 #include <vector>
 
 #include <SDL_keyboard.h>
-#include <boost/utility.hpp>
 
 #include "base/wexception.h"
 

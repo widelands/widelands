@@ -19,7 +19,7 @@
 
 #include "ui_basic/table.h"
 
-#include <boost/bind.hpp>
+#include <memory>
 
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
