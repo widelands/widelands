@@ -19,7 +19,7 @@ tribes:new_carrier_type {
          frames = 100,
          columns = 10,
          rows = 10,
-         hotspot = { 15, 22 }
+         hotspot = { 11, 18 }
       },
 
       walk = {
@@ -30,7 +30,7 @@ tribes:new_carrier_type {
          columns = 3,
          rows = 4,
          directional = true,
-         hotspot = { 10, 20 }
+         hotspot = { 6, 16 }
       },
       walkload = {
          directory = dirname,
@@ -40,7 +40,7 @@ tribes:new_carrier_type {
          columns = 3,
          rows = 4,
          directional = true,
-         hotspot = { 8, 23 }
+         hotspot = { 6, 18 }
       }
    }
 }
