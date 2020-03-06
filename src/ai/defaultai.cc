@@ -5640,7 +5640,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				return BuildingNecessity::kNeeded;
 			} else if (mines_per_type[bo.mines].finished == mines_per_type[bo.mines].total_count() &&
 			           bo.current_stats >
-			              (85 + std::abs(management_data.get_military_number_at(129)) / 10) &&
+			              static_cast<uint32_t>(85 +
+			                 std::abs(management_data.get_military_number_at(129)) / 10) &&
 			           site_needed_for_economy != BasicEconomyBuildingStatus::kDiscouraged) {
 				bo.max_needed_preciousness = bo.max_preciousness;
 				return BuildingNecessity::kNeeded;
