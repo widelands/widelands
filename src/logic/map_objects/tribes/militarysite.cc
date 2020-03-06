@@ -751,8 +751,7 @@ void MilitarySite::act(Game& game, uint32_t const data) {
 				            soldier->get_battle()->opponent(*soldier) == nullptr) &&
 				           !get_economy(WareWorker::wwWORKER)->warehouses().empty()) {
 					// Somewhat heal soldiers in the field that are not currently engaged in fighting an
-					// opponent,
-					// but only if there is a warehouse connected.
+					// opponent, but only if there is a warehouse connected.
 					const PlayerNumber field_owner = soldier->get_position().field->get_owned_by();
 					if (owner().player_number() == field_owner) {
 						const unsigned int air_distance =
