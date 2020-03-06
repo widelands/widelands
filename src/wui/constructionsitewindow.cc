@@ -19,8 +19,6 @@
 
 #include "wui/constructionsitewindow.h"
 
-#include <boost/format.hpp>
-
 #include "graphic/graphic.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "wui/actionconfirm.h"

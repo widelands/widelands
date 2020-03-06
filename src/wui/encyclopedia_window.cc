@@ -23,8 +23,6 @@
 #include <memory>
 #include <vector>
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "graphic/text_layout.h"
 #include "io/filesystem/layered_filesystem.h"

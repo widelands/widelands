@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
@@ -6294,7 +6292,7 @@ int LuaField::get_resource(lua_State* L) {
 }
 int LuaField::set_resource(lua_State* L) {
 	auto& egbase = get_egbase(L);
-	DescriptionIndex res = egbase.world().get_resource(luaL_checkstring(L, -1));
+	DescriptionIndex res = egbase.world().resource_index(luaL_checkstring(L, -1));
 
 	if (res == Widelands::INVALID_INDEX)
 		report_error(L, "Illegal resource: '%s'", luaL_checkstring(L, -1));

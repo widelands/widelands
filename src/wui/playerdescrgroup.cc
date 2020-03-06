@@ -21,8 +21,6 @@
 
 #include <string>
 
-#include <boost/format.hpp>
-
 #include "ai/computer_player.h"
 #include "base/i18n.h"
 #include "base/wexception.h"

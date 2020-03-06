@@ -21,10 +21,10 @@
 
 #include <algorithm>
 #include <limits>
+#include <memory>
 #include <string>
 
 #include <SDL_keycode.h>
-#include <boost/format.hpp>
 
 #include "graphic/color.h"
 #include "graphic/font_handler.h"

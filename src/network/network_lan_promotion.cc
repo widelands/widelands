@@ -25,8 +25,6 @@
 
 #include <memory>
 
-#include <boost/lexical_cast.hpp>
-
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/warning.h"

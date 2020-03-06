@@ -22,7 +22,6 @@
 #include <memory>
 
 #include <SDL_keycode.h>
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
