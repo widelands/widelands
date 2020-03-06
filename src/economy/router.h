@@ -19,9 +19,9 @@
 #ifndef WL_ECONOMY_ROUTER_H
 #define WL_ECONOMY_ROUTER_H
 
+#include <functional>
 #include <vector>
 
-#include <boost/function.hpp>
 #include <stdint.h>
 
 #include "logic/map_objects/tribes/wareworker.h"
@@ -36,7 +36,7 @@ struct RoutingNode;
  * The functionality was split from Economy
  */
 struct Router {
-	using ResetCycleFn = boost::function<void()>;
+	using ResetCycleFn = std::function<void()>;
 
 	explicit Router(const ResetCycleFn& reset);
 

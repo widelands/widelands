@@ -23,8 +23,6 @@
 #include <cstdio>
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"

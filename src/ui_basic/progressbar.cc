@@ -20,8 +20,7 @@
 #include "ui_basic/progressbar.h"
 
 #include <cstdio>
-
-#include <boost/format.hpp>
+#include <memory>
 
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"

@@ -20,6 +20,8 @@
 #ifndef WL_UI_BASIC_TEXTAREA_H
 #define WL_UI_BASIC_TEXTAREA_H
 
+#include <memory>
+
 #include "graphic/align.h"
 #include "graphic/graphic.h"
 #include "graphic/text/rendered_text.h"

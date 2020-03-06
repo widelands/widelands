@@ -22,9 +22,8 @@
 
 #include <climits>
 #include <map>
+#include <memory>
 #include <vector>
-
-#include <boost/shared_ptr.hpp>
 
 #include "logic/map_objects/tribes/training_attribute.h"
 
@@ -93,7 +92,7 @@ public:
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) const;
 
 private:
-	boost::shared_ptr<BaseCapsule> m;
+	std::shared_ptr<BaseCapsule> m;
 };
 
 /**

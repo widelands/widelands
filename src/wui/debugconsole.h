@@ -20,10 +20,9 @@
 #ifndef WL_WUI_DEBUGCONSOLE_H
 #define WL_WUI_DEBUGCONSOLE_H
 
+#include <functional>
 #include <string>
 #include <vector>
-
-#include <boost/function.hpp>
 
 struct ChatProvider;
 
@@ -50,7 +49,7 @@ struct Handler {
 	 * The passed array contains a list of all (space-separated) components
 	 * of the command, including the command name itself.
 	 */
-	using HandlerFn = boost::function<void(const std::vector<std::string>&)>;
+	using HandlerFn = std::function<void(const std::vector<std::string>&)>;
 
 	Handler();
 	virtual ~Handler();

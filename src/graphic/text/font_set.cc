@@ -22,9 +22,6 @@
 #include <cstdlib>
 #include <memory>
 
-#include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "base/log.h"
 #include "io/filesystem/layered_filesystem.h"

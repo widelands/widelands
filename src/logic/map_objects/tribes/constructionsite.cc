@@ -21,8 +21,6 @@
 
 #include <cstdio>
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "base/wexception.h"
@@ -384,9 +382,8 @@ void ConstructionSite::enhance(Game&) {
 		work_steps_ += pair.second;
 	}
 
-	auto new_desired_capacity = [](uint32_t old_max, uint32_t old_des, uint32_t new_max) {
-		return old_max - old_des >= new_max ? 0 : new_max - old_max + old_des;
-	};
+	auto new_desired_capacity = [](
+	   uint32_t old_max, uint32_t old_des, uint32_t new_max) { return old_des * new_max / old_max; };
 
 	BuildingSettings* old_settings = settings_.release();
 	switch (building_->type()) {

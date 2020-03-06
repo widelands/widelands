@@ -50,7 +50,7 @@ constexpr uint32_t kCommandQueueBucketSize = 65536;  // Make this a power of two
 // practically all buckets were used, so there is not much memory overhead.
 // This removed the bottleneck for big games.
 //
-// I first tried with boost::unordered_map, but as expected, it grew beyond all
+// I first tried with unordered_map, but as expected, it grew beyond all
 // limits when accessed with gametime. Therefore I reverted back to a simple
 // vector.
 //
