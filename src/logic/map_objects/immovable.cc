@@ -587,15 +587,16 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 		}
 	}
 
-	// Animation
-	char const* const animname = fr.c_string();
-	try {
-		imm.anim_ = imm.descr().get_animation(animname, &imm);
-	} catch (const GameDataError& e) {
-		imm.anim_ = imm.descr().main_animation();
-		log("Warning: Immovable: %s, using animation %s instead.\n", e.what(),
-		    imm.descr().get_animation_name(imm.anim_).c_str());
-	}
+	// Animation. If the animation is no longer known, pick the main animation instead.
+    char const* const animname = fr.c_string();
+    if (imm.descr().is_animation_known(animname)) {
+        imm.anim_ = imm.descr().get_animation(animname, &imm);
+    } else {
+        log("Unknown animation '%s' for immovable '%s', using main animation instead.\n",
+            animname, imm.descr().name().c_str());
+        imm.anim_ = imm.descr().main_animation();
+    }
+
 	imm.animstart_ = fr.signed_32();
 	if (packet_version >= 4) {
 		imm.anim_construction_total_ = fr.unsigned_32();

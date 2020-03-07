@@ -1007,8 +1007,18 @@ void Bob::Loader::load(FileRead& fr) {
 
 			bob.set_position(egbase(), read_coords_32(&fr));
 
+            // Animation. If the animation is no longer known, pick the main animation instead.
 			std::string animname = fr.c_string();
-			bob.anim_ = animname.size() ? bob.descr().get_animation(animname, &bob) : 0;
+            if (bob.descr().is_animation_known(animname)) {
+                bob.anim_ = bob.descr().get_animation(animname, &bob);
+            } else {
+                if (!animname.empty()) {
+                    log("Unknown animation '%s' for bob '%s', using main animation instead.\n",
+                        animname.c_str(), bob.descr().name().c_str());
+                }
+                bob.anim_ = bob.descr().main_animation();
+            }
+
 			bob.animstart_ = fr.signed_32();
 			bob.walking_ = static_cast<WalkingDir>(read_direction_8_allow_null(&fr));
 			if (bob.walking_) {
