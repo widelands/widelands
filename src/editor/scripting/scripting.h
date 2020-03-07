@@ -20,6 +20,7 @@
 #ifndef WL_EDITOR_SCRIPTING_SCRIPTING_H
 #define WL_EDITOR_SCRIPTING_SCRIPTING_H
 
+#include <cassert>
 #include <list>
 #include <map>
 #include <memory>
