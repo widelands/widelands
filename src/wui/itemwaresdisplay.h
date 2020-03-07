@@ -20,8 +20,6 @@
 #ifndef WL_WUI_ITEMWARESDISPLAY_H
 #define WL_WUI_ITEMWARESDISPLAY_H
 
-#include <vector>
-
 #include "logic/widelands.h"
 #include "ui_basic/panel.h"
 

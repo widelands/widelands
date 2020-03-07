@@ -20,7 +20,6 @@
 #include "wui/helpwindow.h"
 
 #include <memory>
-#include <string>
 
 #include "base/i18n.h"
 #include "graphic/text_layout.h"

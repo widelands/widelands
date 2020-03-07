@@ -20,7 +20,6 @@
 #ifndef WL_WUI_INTERACTIVE_GAMEBASE_H
 #define WL_WUI_INTERACTIVE_GAMEBASE_H
 
-#include <map>
 #include <memory>
 
 #include "io/profile.h"

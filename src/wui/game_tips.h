@@ -20,10 +20,6 @@
 #ifndef WL_WUI_GAME_TIPS_H
 #define WL_WUI_GAME_TIPS_H
 
-#include <cstring>
-#include <string>
-#include <vector>
-
 #include "ui_basic/progresswindow.h"
 
 /// Displays game tips in progress window

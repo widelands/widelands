@@ -21,8 +21,9 @@
 
 #include <cassert>
 #include <cstdarg>
-#include <cstdio>
+#ifdef _WIN32
 #include <fstream>
+#endif
 #include <iostream>
 #include <memory>
 

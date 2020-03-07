@@ -20,9 +20,6 @@
 #ifndef WL_UI_FSMENU_MAPSELECT_H
 #define WL_UI_FSMENU_MAPSELECT_H
 
-#include <string>
-#include <vector>
-
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"

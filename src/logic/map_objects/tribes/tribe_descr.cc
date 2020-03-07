@@ -19,8 +19,6 @@
 
 #include "logic/map_objects/tribes/tribe_descr.h"
 
-#include <algorithm>
-#include <iostream>
 #include <memory>
 
 #include "base/i18n.h"

@@ -20,8 +20,6 @@
 #ifndef WL_WUI_LOGMESSAGE_H
 #define WL_WUI_LOGMESSAGE_H
 
-#include <string>
-
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
 

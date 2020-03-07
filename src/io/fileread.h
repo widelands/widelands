@@ -20,7 +20,6 @@
 #ifndef WL_IO_FILEREAD_H
 #define WL_IO_FILEREAD_H
 
-#include <cassert>
 #include <limits>
 
 #ifndef _WIN32

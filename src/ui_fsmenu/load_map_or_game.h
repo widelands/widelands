@@ -22,8 +22,6 @@
 
 #include "ui_fsmenu/base.h"
 
-#include <memory>
-
 #include "base/i18n.h"
 #include "ui_basic/button.h"
 #include "ui_basic/table.h"

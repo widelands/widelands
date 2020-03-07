@@ -20,8 +20,6 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_WALKINGDIR_H
 #define WL_LOGIC_MAP_OBJECTS_WALKINGDIR_H
 
-#include <stdint.h>
-
 namespace Widelands {
 
 /// Constants for where we are going.

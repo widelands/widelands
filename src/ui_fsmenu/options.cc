@@ -19,9 +19,6 @@
 
 #include "ui_fsmenu/options.h"
 
-#include <algorithm>
-#include <cstdio>
-#include <iostream>
 #include <memory>
 
 #include <boost/algorithm/string.hpp>

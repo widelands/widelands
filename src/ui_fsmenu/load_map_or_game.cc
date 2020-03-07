@@ -19,8 +19,6 @@
 
 #include "ui_fsmenu/load_map_or_game.h"
 
-#include <memory>
-
 #include "base/i18n.h"
 #include "io/filesystem/filesystem.h"
 #include "ui_basic/button.h"

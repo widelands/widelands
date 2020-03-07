@@ -19,7 +19,6 @@
 
 #include "ui_basic/progressbar.h"
 
-#include <cstdio>
 #include <memory>
 
 #include "graphic/font_handler.h"

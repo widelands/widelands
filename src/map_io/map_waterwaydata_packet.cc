@@ -19,8 +19,6 @@
 
 #include "map_io/map_waterwaydata_packet.h"
 
-#include <map>
-
 #include "base/macros.h"
 #include "economy/ferry_fleet.h"
 #include "economy/flag.h"

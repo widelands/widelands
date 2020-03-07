@@ -19,7 +19,6 @@
 
 #include "logic/map_objects/tribes/trainingsite.h"
 
-#include <cstdio>
 #include <memory>
 
 #include "base/i18n.h"

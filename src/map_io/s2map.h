@@ -20,8 +20,6 @@
 #ifndef WL_MAP_IO_S2MAP_H
 #define WL_MAP_IO_S2MAP_H
 
-#include <string>
-
 #include "map_io/map_loader.h"
 
 class FileRead;

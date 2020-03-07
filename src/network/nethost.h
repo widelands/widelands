@@ -20,7 +20,6 @@
 #ifndef WL_NETWORK_NETHOST_H
 #define WL_NETWORK_NETHOST_H
 
-#include <map>
 #include <memory>
 #include <thread>
 

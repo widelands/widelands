@@ -21,7 +21,6 @@
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_WARELIST_H
 
 #include <cassert>
-#include <vector>
 
 #include <boost/signals2.hpp>
 

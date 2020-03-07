@@ -21,7 +21,6 @@
 #define WL_UI_BASIC_LISTSELECT_H
 
 #include <deque>
-#include <limits>
 #include <memory>
 
 #include "graphic/styles/table_style.h"

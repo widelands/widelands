@@ -21,9 +21,6 @@
 #define WL_SCRIPTING_LUA_COROUTINE_H
 
 #include <memory>
-#include <string>
-
-#include <stdint.h>
 
 #include "scripting/lua.h"
 
