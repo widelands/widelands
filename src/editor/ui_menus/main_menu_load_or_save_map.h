@@ -20,8 +20,6 @@
 #ifndef WL_EDITOR_UI_MENUS_MAIN_MENU_LOAD_OR_SAVE_MAP_H
 #define WL_EDITOR_UI_MENUS_MAIN_MENU_LOAD_OR_SAVE_MAP_H
 
-#include <string>
-
 #include "editor/editorinteractive.h"
 #include "logic/filesystem_constants.h"
 #include "ui_basic/button.h"

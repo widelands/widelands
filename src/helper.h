@@ -20,9 +20,6 @@
 #ifndef WL_HELPER_H
 #define WL_HELPER_H
 
-#include <cassert>
-#include <cstring>
-#include <string>
 #include <vector>
 
 #include <SDL_keyboard.h>

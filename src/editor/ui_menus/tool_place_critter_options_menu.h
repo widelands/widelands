@@ -21,7 +21,6 @@
 #define WL_EDITOR_UI_MENUS_TOOL_PLACE_CRITTER_OPTIONS_MENU_H
 
 #include <memory>
-#include <vector>
 
 #include "editor/tools/place_critter_tool.h"
 #include "editor/ui_menus/categorized_item_selection_menu.h"

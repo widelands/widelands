@@ -19,18 +19,12 @@
 
 #include "wlapplication.h"
 
-#include <cerrno>
+#include <cassert>
 #ifndef _WIN32
 #include <csignal>
 #endif
-#include <cstdlib>
-#include <cstring>
-#include <ctime>
-#include <fstream>
 #include <iostream>
 #include <memory>
-#include <stdexcept>
-#include <string>
 
 #include <SDL_image.h>
 #include <SDL_ttf.h>

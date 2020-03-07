@@ -23,8 +23,6 @@
 
 #include "base/md5.h"
 
-#include <cstdio>
-
 #include "base/macros.h"
 
 /**

@@ -19,8 +19,6 @@
 
 #include "map_io/map_building_packet.h"
 
-#include <map>
-
 #include "base/macros.h"
 #include "economy/request.h"
 #include "io/fileread.h"

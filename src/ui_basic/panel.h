@@ -20,10 +20,6 @@
 #ifndef WL_UI_BASIC_PANEL_H
 #define WL_UI_BASIC_PANEL_H
 
-#include <cassert>
-#include <cstring>
-#include <string>
-
 #include <SDL_keyboard.h>
 #include <boost/signals2/signal.hpp>
 #include <boost/signals2/trackable.hpp>

@@ -20,9 +20,6 @@
 #define WL_ECONOMY_ROUTER_H
 
 #include <functional>
-#include <vector>
-
-#include <stdint.h>
 
 #include "logic/map_objects/tribes/wareworker.h"
 

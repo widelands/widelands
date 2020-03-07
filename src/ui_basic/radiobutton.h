@@ -20,8 +20,6 @@
 #ifndef WL_UI_BASIC_RADIOBUTTON_H
 #define WL_UI_BASIC_RADIOBUTTON_H
 
-#include <stdint.h>
-
 #include "base/vector.h"
 #include "ui_basic/checkbox.h"
 

@@ -22,8 +22,6 @@
 
 #include <string>
 
-#include <stdint.h>
-
 namespace RT {
 
 class TextStream {
