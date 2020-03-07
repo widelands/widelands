@@ -19,9 +19,9 @@ install:
   # Update mirrors
   - cmd: "bash --login -c \"pacman --noconfirm --sync pacman pacman-mirrors\""
   # comment broken repo out
-  - cmd: "bash --login -c \"sed -i '2,/Ser/s/Ser/\#\#Ser/' C:/msys64/etc/pacman.d/mirrorlist.msys\""
-  - cmd: "bash --login -c \"sed -i '2,/Ser/s/Ser/\#\#Ser/' C:/msys64/etc/pacman.d/mirrorlist.mingw32\""
-  - cmd: "bash --login -c \"sed -i '2,/Ser/s/Ser/\#\#Ser/' C:/msys64/etc/pacman.d/mirrorlist.mingw64\""
+  - cmd: "sed -i '2,/Ser/s/Ser/\#\#Ser/' C:/msys64/etc/pacman.d/mirrorlist.msys\"
+  - cmd: "sed -i '2,/Ser/s/Ser/\#\#Ser/' C:/msys64/etc/pacman.d/mirrorlist.mingw32\"
+  - cmd: "sed -i '2,/Ser/s/Ser/\#\#Ser/' C:/msys64/etc/pacman.d/mirrorlist.mingw64\"
   # Update msys2 system (twice, first run does system packages)
   - cmd: "bash --login -c \"pacman -Suuyy --noconfirm\""
   - cmd: "bash --login -c \"pacman -Suuyy --nodeps --noconfirm\""
