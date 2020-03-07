@@ -22,7 +22,6 @@
 
 #include <map>
 #include <memory>
-#include <string>
 
 #include "ui_basic/panel.h"
 

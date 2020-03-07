@@ -19,8 +19,6 @@
 
 #include "ui_basic/listselect.h"
 
-#include <iostream>
-
 #include "base/log.h"
 #include "graphic/align.h"
 #include "graphic/font_handler.h"

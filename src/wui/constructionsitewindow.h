@@ -21,7 +21,6 @@
 #define WL_WUI_CONSTRUCTIONSITEWINDOW_H
 
 #include <memory>
-#include <vector>
 
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "ui_basic/button.h"

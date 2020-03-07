@@ -20,7 +20,6 @@
 #ifndef WL_RANDOM_RANDOM_H
 #define WL_RANDOM_RANDOM_H
 
-#include <stdint.h>
 #include <string>
 
 extern const uint32_t rng_sbox[256];

@@ -20,9 +20,8 @@
 #define WL_GRAPHIC_WORDWRAP_H
 
 #include <memory>
-#include <string>
+
 #include <unicode/uchar.h>
-#include <vector>
 
 #include "base/vector.h"
 #include "graphic/align.h"

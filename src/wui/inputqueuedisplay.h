@@ -20,10 +20,6 @@
 #ifndef WL_WUI_INPUTQUEUEDISPLAY_H
 #define WL_WUI_INPUTQUEUEDISPLAY_H
 
-#include <cstdlib>
-
-#include <stdint.h>
-
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "ui_basic/button.h"

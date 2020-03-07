@@ -20,7 +20,6 @@
 #include "wui/playerdescrgroup.h"
 
 #include <memory>
-#include <string>
 
 #include "ai/computer_player.h"
 #include "base/i18n.h"

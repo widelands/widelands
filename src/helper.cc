@@ -19,9 +19,7 @@
 
 #include "helper.h"
 
-#include <cstdarg>
-#include <memory>
-#include <string>
+#include <cassert>
 
 std::vector<std::string> split_string(const std::string& s, const char* const separators) {
 	std::vector<std::string> result;

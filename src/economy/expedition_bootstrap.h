@@ -21,7 +21,6 @@
 #define WL_ECONOMY_EXPEDITION_BOOTSTRAP_H
 
 #include <memory>
-#include <vector>
 
 #include "base/macros.h"
 #include "economy/input_queue.h"

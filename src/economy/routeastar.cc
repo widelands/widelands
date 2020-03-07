@@ -19,6 +19,8 @@
 
 #include "economy/routeastar.h"
 
+#include <cassert>
+
 #include "base/wexception.h"
 #include "economy/iroute.h"
 #include "economy/router.h"

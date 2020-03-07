@@ -20,7 +20,6 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_SHIP_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_SHIP_H
 
-#include <list>
 #include <memory>
 
 #include "base/macros.h"

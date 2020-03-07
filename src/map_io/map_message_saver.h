@@ -23,8 +23,6 @@
 #include <cassert>
 #include <map>
 
-#include <stdint.h>
-
 #include "logic/message_id.h"
 
 namespace Widelands {

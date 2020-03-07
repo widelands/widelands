@@ -19,8 +19,6 @@
 
 #include "graphic/gl/fill_rect_program.h"
 
-#include <vector>
-
 #include "base/macros.h"
 #include "base/wexception.h"
 
