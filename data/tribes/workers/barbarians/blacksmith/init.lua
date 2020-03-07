@@ -34,16 +34,7 @@ tribes:new_worker_type {
          columns = 3,
          directional = true,
          hotspot = { 11, 24 }
-      },
-      walkload = {
-         directory = dirname,
-         basename = "walk",
-         fps = 15,
-         frames = 10,
-         rows = 4,
-         columns = 3,
-         directional = true,
-         hotspot = { 11, 24 }
       }
+      -- TODO(GUhnChleoc): Needs walkload animation
    }
 }

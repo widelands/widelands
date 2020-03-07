@@ -34,16 +34,6 @@ tribes:new_worker_type {
          directional = true,
          hotspot = { 7, 22 }
       },
-      walkload = {
-         directory = dirname,
-         basename = "walk",
-         fps = 10,
-         frames = 10,
-         rows = 4,
-         columns = 3,
-         directional = true,
-         hotspot = { 7, 22 }
-      },
       work = {
          directory = dirname,
          basename = "work",
