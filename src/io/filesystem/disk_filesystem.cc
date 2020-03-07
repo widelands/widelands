@@ -19,12 +19,13 @@
 
 #include "io/filesystem/disk_filesystem.h"
 
+#include <cerrno>
 #ifdef _WIN32
 #ifdef _MSC_VER
 #include <cstdio>
 #endif
 #endif
-
+#include <cstring>
 
 #include <sys/stat.h>
 #ifdef _WIN32

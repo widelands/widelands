@@ -21,6 +21,7 @@
 #define WL_CHAT_CHAT_H
 
 #include <ctime>
+#include <string>
 
 #include "logic/widelands.h"
 #include "notifications/note_ids.h"

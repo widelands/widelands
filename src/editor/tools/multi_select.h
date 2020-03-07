@@ -21,6 +21,7 @@
 #define WL_EDITOR_TOOLS_MULTI_SELECT_H
 
 #include <cassert>
+#include <cstdint>
 #include <cstdlib>
 #include <vector>
 
