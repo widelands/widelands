@@ -20,8 +20,6 @@
 #ifndef WL_NETWORK_GAMECLIENT_H
 #define WL_NETWORK_GAMECLIENT_H
 
-#include <memory>
-
 #include "chat/chat.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"

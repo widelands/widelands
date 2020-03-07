@@ -20,7 +20,6 @@
 #ifndef WL_BASE_I18N_H
 #define WL_BASE_I18N_H
 
-#include <cstring>
 #include <string>
 #include <vector>
 

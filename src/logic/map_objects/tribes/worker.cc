@@ -19,7 +19,6 @@
 
 #include "logic/map_objects/tribes/worker.h"
 
-#include <iterator>
 #include <memory>
 #include <tuple>
 

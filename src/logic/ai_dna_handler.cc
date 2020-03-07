@@ -19,8 +19,6 @@
 
 #include "logic/ai_dna_handler.h"
 
-#include <cstring>
-
 #include "base/time_string.h"
 #include "base/wexception.h"
 #include "io/filesystem/layered_filesystem.h"

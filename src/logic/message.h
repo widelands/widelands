@@ -20,8 +20,6 @@
 #ifndef WL_LOGIC_MESSAGE_H
 #define WL_LOGIC_MESSAGE_H
 
-#include <string>
-
 #include "graphic/graphic.h"
 #include "logic/widelands.h"
 #include "logic/widelands_geometry.h"

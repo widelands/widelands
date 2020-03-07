@@ -20,8 +20,6 @@
 #ifndef WL_SOUND_NOTE_SOUND_H
 #define WL_SOUND_NOTE_SOUND_H
 
-#include <string>
-
 #include "logic/widelands_geometry.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"

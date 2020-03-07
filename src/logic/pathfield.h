@@ -21,9 +21,6 @@
 #define WL_LOGIC_PATHFIELD_H
 
 #include <memory>
-#include <vector>
-
-#include <stdint.h>
 
 #include "logic/cookie_priority_queue.h"
 #include "logic/map_objects/tribes/wareworker.h"

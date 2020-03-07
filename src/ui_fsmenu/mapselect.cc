@@ -18,7 +18,6 @@
 
 #include "ui_fsmenu/mapselect.h"
 
-#include <cstdio>
 #include <memory>
 
 #include "base/i18n.h"
