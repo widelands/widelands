@@ -384,6 +384,7 @@ void ConstructionSite::enhance(Game&) {
 	   uint32_t old_max, uint32_t old_des, uint32_t new_max) { return old_des * new_max / old_max; };
 
 	BuildingSettings* old_settings = settings_.release();
+	assert(old_settings);
 	switch (building_->type()) {
 	case Widelands::MapObjectType::WAREHOUSE: {
 		upcast(const WarehouseDescr, wd, building_);
@@ -473,6 +474,7 @@ void ConstructionSite::enhance(Game&) {
 		log("WARNING: Enhanced constructionsite to a %s, which is not of any known building type\n",
 		    building_->name().c_str());
 	}
+	delete old_settings;
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::GAINED));
 	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kChanged));
 }
