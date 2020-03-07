@@ -20,7 +20,6 @@
 #include "graphic/text/font_io.h"
 
 #include <memory>
-#include <string>
 
 #include <boost/format.hpp>
 

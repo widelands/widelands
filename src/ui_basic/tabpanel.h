@@ -21,7 +21,6 @@
 #define WL_UI_BASIC_TABPANEL_H
 
 #include <memory>
-#include <vector>
 
 #include "graphic/text/rendered_text.h"
 #include "ui_basic/panel.h"

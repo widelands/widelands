@@ -20,7 +20,7 @@
 #ifndef WL_GRAPHIC_GL_BLIT_DATA_H
 #define WL_GRAPHIC_GL_BLIT_DATA_H
 
-#include <stdint.h>
+#include <cstdint>
 
 #include "base/rect.h"
 

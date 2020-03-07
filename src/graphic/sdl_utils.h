@@ -20,7 +20,7 @@
 #ifndef WL_GRAPHIC_SDL_UTILS_H
 #define WL_GRAPHIC_SDL_UTILS_H
 
-#include <stdint.h>
+#include <cstdint>
 
 struct SDL_Surface;
 

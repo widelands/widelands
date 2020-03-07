@@ -20,7 +20,7 @@
 #ifndef WL_NETWORK_CONSTANTS_H
 #define WL_NETWORK_CONSTANTS_H
 
-#include <stdint.h>
+#include <cstdint>
 
 constexpr uint16_t kWidelandsLanDiscoveryPort = 7394;
 constexpr uint16_t kWidelandsLanPromotionPort = 7395;

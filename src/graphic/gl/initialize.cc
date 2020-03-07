@@ -20,7 +20,6 @@
 #include "graphic/gl/initialize.h"
 
 #include <csignal>
-#include <cstdlib>
 
 #include <SDL.h>
 #include <boost/algorithm/string.hpp>

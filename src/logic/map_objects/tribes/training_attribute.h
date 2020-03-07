@@ -20,8 +20,6 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_TRAINING_ATTRIBUTE_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_TRAINING_ATTRIBUTE_H
 
-#include <cstdint>
-
 namespace Widelands {
 
 /**

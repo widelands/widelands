@@ -19,14 +19,10 @@
 
 #include "io/filesystem/zip_filesystem.h"
 
-#include <algorithm>
 #include <cassert>
 #include <cerrno>
-#include <cstdio>
-#include <cstdlib>
 #include <cstring>
 #include <memory>
-#include <string>
 
 #include <boost/format.hpp>
 

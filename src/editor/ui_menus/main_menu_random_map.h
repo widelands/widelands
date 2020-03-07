@@ -20,8 +20,6 @@
 #ifndef WL_EDITOR_UI_MENUS_MAIN_MENU_RANDOM_MAP_H
 #define WL_EDITOR_UI_MENUS_MAIN_MENU_RANDOM_MAP_H
 
-#include <vector>
-
 #include "base/macros.h"
 #include "editor/ui_menus/map_size_box.h"
 #include "ui_basic/box.h"

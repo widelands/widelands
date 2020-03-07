@@ -21,9 +21,6 @@
 #define WL_GRAPHIC_RENDER_QUEUE_H
 
 #include <memory>
-#include <vector>
-
-#include <stdint.h>
 
 #include "base/macros.h"
 #include "base/rect.h"

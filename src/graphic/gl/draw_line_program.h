@@ -19,8 +19,6 @@
 #ifndef WL_GRAPHIC_GL_DRAW_LINE_PROGRAM_H
 #define WL_GRAPHIC_GL_DRAW_LINE_PROGRAM_H
 
-#include <vector>
-
 #include "base/rect.h"
 #include "graphic/blend_mode.h"
 #include "graphic/gl/utils.h"
