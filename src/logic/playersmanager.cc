@@ -19,8 +19,6 @@
 
 #include "logic/playersmanager.h"
 
-#include <cstring>
-
 #include "base/wexception.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_settings.h"

@@ -20,12 +20,6 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_MAP_OBJECT_H
 #define WL_LOGIC_MAP_OBJECTS_MAP_OBJECT_H
 
-#include <cstring>
-#include <map>
-#include <set>
-#include <string>
-#include <vector>
-
 #include "base/log.h"
 #include "base/macros.h"
 #include "graphic/animation/animation.h"

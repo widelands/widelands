@@ -20,12 +20,7 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_WARE_DESCR_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_WARE_DESCR_H
 
-#include <cstring>
 #include <memory>
-#include <string>
-#include <unordered_map>
-
-#include <stdint.h>
 
 #include "ai/ai_hints.h"
 #include "base/macros.h"

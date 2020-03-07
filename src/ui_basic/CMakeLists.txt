@@ -60,7 +60,6 @@ wl_library(ui_basic
     unique_window.h
     window.cc
     window.h
-  USES_BOOST_REGEX
   USES_SDL2
   DEPENDS
     base_exceptions

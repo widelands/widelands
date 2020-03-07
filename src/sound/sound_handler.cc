@@ -19,7 +19,6 @@
 
 #include "sound/sound_handler.h"
 
-#include <cerrno>
 #include <memory>
 
 #include <SDL.h>

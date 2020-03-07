@@ -20,7 +20,6 @@
 #include "wlapplication_messages.h"
 
 #include <iostream>
-#include <map>
 
 #include <boost/format.hpp>
 

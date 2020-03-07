@@ -20,7 +20,6 @@
 #include "graphic/gl/road_program.h"
 
 #include <cassert>
-#include <cmath>
 
 #include "base/log.h"
 #include "graphic/gl/coordinate_conversion.h"

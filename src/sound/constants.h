@@ -21,7 +21,6 @@
 #define WL_SOUND_CONSTANTS_H
 
 #include <limits>
-#include <stdint.h>
 
 /* How important is it to play the effect even when others are running
  * already?

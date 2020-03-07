@@ -19,9 +19,7 @@
 
 #include "wui/waresdisplay.h"
 
-#include <cstdio>
 #include <memory>
-#include <utility>
 
 #include "base/i18n.h"
 #include "base/wexception.h"

@@ -20,12 +20,8 @@
 #include "logic/map_objects/map_object.h"
 
 #include <algorithm>
-#include <cmath>
 #include <cstdarg>
-#include <cstdio>
-#include <cstring>
 #include <memory>
-#include <string>
 
 #include "base/log.h"
 #include "base/wexception.h"

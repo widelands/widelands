@@ -19,8 +19,6 @@
 
 #include "editor/ui_menus/toolsize_menu.h"
 
-#include <cstdio>
-
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/tool.h"

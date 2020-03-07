@@ -21,7 +21,6 @@
 #define WL_LOGIC_MAP_OBJECTS_IMMOVABLE_H
 
 #include <memory>
-#include <unordered_map>
 
 #include "base/macros.h"
 #include "logic/map_objects/buildcost.h"

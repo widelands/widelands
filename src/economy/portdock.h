@@ -20,7 +20,6 @@
 #ifndef WL_ECONOMY_PORTDOCK_H
 #define WL_ECONOMY_PORTDOCK_H
 
-#include <list>
 #include <memory>
 
 #include "base/macros.h"

@@ -20,9 +20,6 @@
 #ifndef WL_UI_BASIC_SPINBOX_H
 #define WL_UI_BASIC_SPINBOX_H
 
-#include <cstring>
-#include <list>
-
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 

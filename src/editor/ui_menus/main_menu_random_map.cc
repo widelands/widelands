@@ -19,10 +19,7 @@
 
 #include "editor/ui_menus/main_menu_random_map.h"
 
-#include <cstring>
 #include <sstream>
-#include <string>
-#include <vector>
 
 #include "base/i18n.h"
 #include "base/log.h"

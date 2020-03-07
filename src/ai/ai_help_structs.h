@@ -21,9 +21,6 @@
 #define WL_AI_AI_HELP_STRUCTS_H
 
 #include <bitset>
-#include <list>
-#include <queue>
-#include <unordered_set>
 
 #include "ai/ai_hints.h"
 #include "economy/flag.h"

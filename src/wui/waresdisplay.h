@@ -22,7 +22,6 @@
 
 #include <functional>
 #include <memory>
-#include <vector>
 
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warelist.h"

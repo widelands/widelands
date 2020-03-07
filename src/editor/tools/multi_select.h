@@ -21,11 +21,9 @@
 #define WL_EDITOR_TOOLS_MULTI_SELECT_H
 
 #include <cassert>
-#include <climits>
+#include <cstdint>
 #include <cstdlib>
 #include <vector>
-
-#include <stdint.h>
 
 /**
  * This class allows for selection of more than just one

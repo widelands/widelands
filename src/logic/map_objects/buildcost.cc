@@ -19,7 +19,6 @@
 
 #include "logic/map_objects/buildcost.h"
 
-#include <map>
 #include <memory>
 
 #include "base/wexception.h"

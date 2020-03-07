@@ -19,6 +19,7 @@
 
 #include "map_io/world_legacy_lookup_table.h"
 
+#include <map>
 #include <memory>
 
 namespace {

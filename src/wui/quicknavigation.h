@@ -20,10 +20,7 @@
 #ifndef WL_WUI_QUICKNAVIGATION_H
 #define WL_WUI_QUICKNAVIGATION_H
 
-#include <vector>
-
 #include <SDL_keyboard.h>
-#include <stdint.h>
 
 #include "wui/mapview.h"
 

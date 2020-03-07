@@ -20,7 +20,6 @@
 #include "wui/attack_box.h"
 
 #include <memory>
-#include <string>
 
 #include "base/macros.h"
 #include "graphic/text_layout.h"

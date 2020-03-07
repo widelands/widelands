@@ -19,7 +19,6 @@
 
 #include <cassert>
 #include <memory>
-#include <vector>
 
 #include <SDL.h>
 #include <boost/algorithm/string.hpp>
