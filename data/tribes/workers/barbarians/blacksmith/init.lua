@@ -35,6 +35,6 @@ tribes:new_worker_type {
          directional = true,
          hotspot = { 11, 24 }
       }
-      -- TODO(GUhnChleoc): Needs walkload animation
+      -- TODO(GunChleoc): Needs walkload animation
    }
 }

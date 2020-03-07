@@ -45,16 +45,7 @@ tribes:new_worker_type {
          directional = true,
          hotspot = { 8, 32 }
       },
-      walkload = {
-         directory = dirname,
-         basename = "walk",
-         fps = 10,
-         frames = 10,
-         rows = 4,
-         columns = 3,
-         directional = true,
-         hotspot = { 8, 32 }
-      },
+      -- TODO(GunChleoc): Needs walkload animation, or some ware hotspot/sizing magic.
       fish = {
          directory = dirname,
          basename = "fish",
