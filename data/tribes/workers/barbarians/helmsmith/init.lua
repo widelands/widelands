@@ -1,15 +1,5 @@
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 4, 21 }
-   }
-}
-add_directional_animation(animations, "walk", dirname, "walk", {9, 21}, 10)
-add_directional_animation(animations, "walkload", dirname, "walkload", {7, 21}, 10)
-
-
 tribes:new_worker_type {
    msgctxt = "barbarians_worker",
    name = "barbarians_helmsmith",
@@ -24,5 +14,34 @@ tribes:new_worker_type {
       hammer = 1
    },
 
-   animations = animations,
+   animations = {
+      idle = {
+         directory = dirname,
+         basename = "idle",
+         hotspot = { 4, 25 }
+      }
+   },
+   spritesheets = {
+      walk = {
+         directory = dirname,
+         basename = "walk",
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 9, 25 }
+      },
+      -- TODO(GunChleoc): walkload needs mipmap
+      walkload = {
+         directory = dirname,
+         basename = "walkload",
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 7, 21 }
+      }
+   }
 }
