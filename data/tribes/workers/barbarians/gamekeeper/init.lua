@@ -1,25 +1,5 @@
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 14, 22 }
-   },
-   releasein = {
-      pictures = path.list_files(dirname .. "releasein_??.png"),
-      hotspot = { 15, 22 },
-      fps = 5
-   },
-   releaseout = {
-      pictures = path.list_files(dirname .. "releaseout_??.png"),
-      hotspot = { 15, 22 },
-      fps = 5
-   }
-}
-add_directional_animation(animations, "walk", dirname, "walk", {15, 22}, 10)
-add_directional_animation(animations, "walkload", dirname, "walkload", {15, 22})
-
-
 tribes:new_worker_type {
    msgctxt = "barbarians_worker",
    name = "barbarians_gamekeeper",
@@ -44,5 +24,41 @@ tribes:new_worker_type {
       }
    },
 
-   animations = animations,
+   animations = {
+      idle = {
+         directory = dirname,
+         basename = "idle",
+         hotspot = { 14, 22 }
+      },
+   },
+   spritesheets = {
+      walk = {
+         directory = dirname,
+         basename = "walk",
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 15, 22 }
+      },
+      releasein = {
+         directory = dirname,
+         basename = "releasein",
+         fps = 5,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         hotspot = { 15, 22 }
+      },
+      releaseout = {
+         directory = dirname,
+         basename = "releaseout",
+         fps = 5,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         hotspot = { 15, 22 }
+      }
+   }
 }
