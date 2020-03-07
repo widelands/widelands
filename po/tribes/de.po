@@ -3,6 +3,7 @@
 # 
 # Translators:
 # Wuzzy <almikes@aol.com>, 2018
+# Andreas Berger <andreas@berger-ecommerce.com>, 2020
 # GunChleoc, 2015
 # Elisabeth Jäger, 2016-2018
 # GunChleoc, 2018
@@ -21,9 +22,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-02-21 18:05+0000\n"
-"PO-Revision-Date: 2020-02-21 18:09+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-02-26 18:51+0000\n"
+"PO-Revision-Date: 2020-03-01 11:55+0000\n"
+"Last-Translator: Andreas Berger <andreas@berger-ecommerce.com>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3969,8 +3970,8 @@ msgstr "Militärgebäude"
 msgid "Finishing"
 msgstr "Abschließen"
 
-#: ../../data/tribes/preload.lua:15 ../../data/tribes/preload.lua:32
-#: ../../data/tribes/preload.lua:49 ../../data/tribes/preload.lua:66
+#: ../../data/tribes/preload.lua:15 ../../data/tribes/preload.lua:34
+#: ../../data/tribes/preload.lua:53 ../../data/tribes/preload.lua:73
 msgid "The Widelands Development Team"
 msgstr "Das Widelands-Entwicklungsteam"
 
@@ -3984,33 +3985,33 @@ msgid "The mighty tribes of the east-lands."
 msgstr "Die mächtigen Stämme des Ostens."
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:34
+#: ../../data/tribes/preload.lua:36
 msgid "Empire"
 msgstr "Imperium"
 
-#: ../../data/tribes/preload.lua:35
+#: ../../data/tribes/preload.lua:37
 msgid "This is the culture of the Roman Empire."
 msgstr "Dies ist die Kultur des römischen Imperiums."
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:51
+#: ../../data/tribes/preload.lua:55
 msgid "Atlanteans"
 msgstr "Atlanter"
 
-#: ../../data/tribes/preload.lua:52
+#: ../../data/tribes/preload.lua:56
 msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
 msgstr "Dieser Stamm wird schon in den ältesten Sagen erwähnt. Die Söhne und Töchter von Atlantis."
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:68
+#: ../../data/tribes/preload.lua:75
 msgid "Frisians"
-msgstr ""
+msgstr "Friesen"
 
-#: ../../data/tribes/preload.lua:69
+#: ../../data/tribes/preload.lua:76
 msgid "The inhabitants of the rough North Sea shore."
-msgstr ""
+msgstr "Die Einwohner der rauen Nordseeküste. Dieser Stamm wird noch entwickelt."
 
 #: ../../data/tribes/scripting/help/init.lua:54
 msgid "Tribal Encyclopedia"
@@ -4072,6 +4073,59 @@ msgstr "Hauptquartier"
 #: ../../data/tribes/scripting/starting_conditions/frisians/headquarters.lua:13
 msgid "Start the game with your headquarters only"
 msgstr "Beginne das Spiel nur mit deinem Hauptquartier."
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:11
+#: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:11
+msgid "Poor Hamlet"
+msgstr "Armes Volk"
+
+#. TRANSLATORS: This is the tooltip for the "Poor Hamlet" (minimum) starting
+#. condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:13
+#: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:13
+msgid ""
+"Start the game with just a warehouse and the bare minimum for bootstrapping "
+"an economy. Warning: the AI can't successfully start from this"
+msgstr "Am Anfang des Spieles steht nur ein Lagerhaus und das absolute Minimum für den Aufbau einer Wirtschaft bereit. Warnung: Die KI kann damit nicht erfolgreich starten."
+
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:45
+#: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:43
+#: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:44
+#: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:45
+msgid "Be careful"
+msgstr "Sei bedacht"
+
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:45
+#: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:43
+#: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:44
+#: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:45
+msgid ""
+"You have only one iron for each tool you will need to start your economy. "
+"Make sure no unneeded tool is created."
+msgstr "Du hast nur ein Eisen für jedes Werkzeug, das du für den Start deiner Wirtschaft brauchst. Stellen sicher, dass kein unnötiges Werkzeug hergestellt wird."
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/struggling_outpost.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/struggling_outpost.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/struggling_outpost.lua:11
+#: ../../data/tribes/scripting/starting_conditions/frisians/struggling_outpost.lua:11
+msgid "Struggling Outpost"
+msgstr "Mühsamer Vorposten"
+
+#. TRANSLATORS: This is the tooltip for the "Hardcore" starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/struggling_outpost.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/struggling_outpost.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/struggling_outpost.lua:13
+#: ../../data/tribes/scripting/starting_conditions/frisians/struggling_outpost.lua:13
+msgid ""
+"Start the game with just your headquarters and very few wares for "
+"bootstrapping an economy. Warning: the AI can't successfully start from this"
+msgstr "Am Anfang des Spieles steht nur ein Hauptquartier und sehr wenigen Waren für den Aufbau einer Wirtschaft bereit. Warnung: Die KI kann damit nicht erfolgreich starten."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:11

@@ -22,6 +22,8 @@
 
 #include "logic/widelands_geometry.h"
 
+#include <string>
+
 class Section;
 
 namespace Widelands {
