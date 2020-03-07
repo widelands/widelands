@@ -1004,14 +1004,14 @@ void Bob::Loader::load(FileRead& fr) {
 
             // Animation. If the animation is no longer known, pick the main animation instead.
 			std::string animname = fr.c_string();
-            if (bob.descr().is_animation_known(animname)) {
-                bob.anim_ = bob.descr().get_animation(animname, &bob);
+            if (animname.empty()) {
+                bob.anim_ = 0;
+            } else if (bob.descr().is_animation_known(animname)) {
+                    bob.anim_ = bob.descr().get_animation(animname, &bob);
             } else {
-                if (!animname.empty()) {
-                    log("Unknown animation '%s' for bob '%s', using main animation instead.\n",
-                        animname.c_str(), bob.descr().name().c_str());
-                }
                 bob.anim_ = bob.descr().main_animation();
+                log("Unknown animation '%s' for bob '%s', using main animation instead.\n",
+                    animname.c_str(), bob.descr().name().c_str());
             }
 
 			bob.animstart_ = fr.signed_32();

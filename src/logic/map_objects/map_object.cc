@@ -340,6 +340,9 @@ uint32_t MapObjectDescr::get_animation(const std::string& animname, const MapObj
 }
 
 uint32_t MapObjectDescr::main_animation() const {
+    if (is_animation_known("idle")) {
+        return get_animation("idle", nullptr);
+    }
 	return !anims_.empty() ? anims_.begin()->second : 0;
 }
 
