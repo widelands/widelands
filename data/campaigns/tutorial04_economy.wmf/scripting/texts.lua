@@ -303,7 +303,10 @@ building_priority_settings = {
       li_object("empire_marblemine", p(_[[Great. Our taverns have now been built up and are supplying us with rations.]]) ..
          p(_[[At the moment, all mines are supplied with rations. If you want to prioritize a special mine, you simply have to open its window. In the wares tab, behind every ware, you can see ‘traffic lights’.]]) ..
          p(_[[When you click on the red dot (low priority), the corresponding ware gets delivered less frequently. Green means that as many wares as possible should be delivered to this building, maybe because it produces something important.]]) ..
-         p(_[[The actual supply state is indicated by varying colors of the wares icons themselves: Wares stored in the building are shown in full color. Missing wares are greyed out. Wares not present in the building yet but already being transported there are shown in a darker grey.]]) ..
+         p(_[[The actual supply state is indicated by varying colors of the ware icons themselves:]]) ..
+         li(_[[Wares stored in the building are shown in full color.]]) ..
+         li(_[[Missing wares are greyed out.]]) ..
+         li(_[[Wares not present in the building yet but already being transported there are shown in a darker grey.]]) ..
          p(_[[In our situation, you might want to work the bakeries as fast as possible because they supply our taverns, so you could set water to the highest priority for them. The other buildings (for example the donkey farm) would then get less water, but the bakery could work faster.]]), plr.color)
       -- we cannot check whether the user does this, so no objective
       -- see https://github.com/widelands/widelands/issues/2012
