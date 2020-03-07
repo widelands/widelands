@@ -20,9 +20,6 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_IMMOVABLE_PROGRAM_H
 #define WL_LOGIC_MAP_OBJECTS_IMMOVABLE_PROGRAM_H
 
-#include <cstring>
-#include <string>
-
 #include "base/macros.h"
 
 /*

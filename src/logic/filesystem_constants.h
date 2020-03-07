@@ -20,7 +20,6 @@
 #ifndef WL_LOGIC_FILESYSTEM_CONSTANTS_H
 #define WL_LOGIC_FILESYSTEM_CONSTANTS_H
 
-#include <cstdint>
 #include <string>
 
 /// Stop writing screenshots or syncstreams if we have less disk space left than this

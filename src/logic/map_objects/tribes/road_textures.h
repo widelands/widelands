@@ -20,7 +20,6 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_ROAD_TEXTURES_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_ROAD_TEXTURES_H
 
-#include <memory>
 #include <vector>
 
 #include "graphic/image.h"

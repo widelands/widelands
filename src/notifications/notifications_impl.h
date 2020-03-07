@@ -22,8 +22,6 @@
 
 #include "base/macros.h"
 
-#include <stdint.h>
-
 #include <algorithm>
 #include <cassert>
 #include <list>

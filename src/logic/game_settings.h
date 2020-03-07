@@ -22,7 +22,6 @@
 
 #include <memory>
 #include <string>
-#include <vector>
 
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"

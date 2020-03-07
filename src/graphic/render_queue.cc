@@ -20,7 +20,6 @@
 #include "graphic/render_queue.h"
 
 #include <algorithm>
-#include <limits>
 
 #include "base/rect.h"
 #include "base/wexception.h"

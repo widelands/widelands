@@ -21,7 +21,6 @@
 #define WL_GRAPHIC_TEXT_LAYOUT_H
 
 #include <memory>
-#include <string>
 
 #include "graphic/align.h"
 #include "graphic/color.h"

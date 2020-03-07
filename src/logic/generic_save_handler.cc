@@ -20,7 +20,6 @@
 #include "logic/generic_save_handler.h"
 
 #include <memory>
-#include <string>
 
 #include <boost/format.hpp>
 

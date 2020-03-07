@@ -19,7 +19,6 @@
 
 #include "logic/map.h"
 
-#include <algorithm>
 #include <memory>
 
 #include "base/log.h"
