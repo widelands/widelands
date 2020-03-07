@@ -19,9 +19,7 @@
 
 #include "logic/editor_game_base.h"
 
-#include <algorithm>
 #include <memory>
-#include <set>
 
 #include "base/i18n.h"
 #include "base/macros.h"

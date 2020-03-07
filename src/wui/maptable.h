@@ -20,8 +20,6 @@
 #ifndef WL_WUI_MAPTABLE_H
 #define WL_WUI_MAPTABLE_H
 
-#include <vector>
-
 #include "ui_basic/table.h"
 #include "wui/mapdata.h"
 

@@ -20,7 +20,6 @@
 #ifndef WL_WUI_INTERACTIVE_BASE_H
 #define WL_WUI_INTERACTIVE_BASE_H
 
-#include <map>
 #include <memory>
 
 #include <SDL_keycode.h>

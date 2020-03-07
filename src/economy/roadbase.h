@@ -20,8 +20,6 @@
 #ifndef WL_ECONOMY_ROADBASE_H
 #define WL_ECONOMY_ROADBASE_H
 
-#include <vector>
-
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "graphic/road_segments.h"

@@ -20,8 +20,6 @@
 #ifndef WL_ECONOMY_WATERWAY_H
 #define WL_ECONOMY_WATERWAY_H
 
-#include <vector>
-
 #include "base/macros.h"
 #include "economy/roadbase.h"
 #include "logic/path.h"

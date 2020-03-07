@@ -20,7 +20,6 @@
 #include "economy/economy.h"
 
 #include <memory>
-#include <unordered_set>
 
 #include "base/macros.h"
 #include "base/wexception.h"

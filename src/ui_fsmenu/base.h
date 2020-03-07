@@ -20,8 +20,6 @@
 #ifndef WL_UI_FSMENU_BASE_H
 #define WL_UI_FSMENU_BASE_H
 
-#include <string>
-
 #include "ui_basic/fullscreen_window.h"
 #include "ui_basic/panel.h"
 

@@ -19,9 +19,7 @@
 
 #include "wui/encyclopedia_window.h"
 
-#include <map>
 #include <memory>
-#include <vector>
 
 #include "base/i18n.h"
 #include "graphic/text_layout.h"

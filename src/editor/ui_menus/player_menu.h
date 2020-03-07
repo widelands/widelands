@@ -21,8 +21,6 @@
 #define WL_EDITOR_UI_MENUS_PLAYER_MENU_H
 
 #include <memory>
-#include <string>
-#include <vector>
 
 #include "editor/ui_menus/tool_options_menu.h"
 #include "ui_basic/box.h"

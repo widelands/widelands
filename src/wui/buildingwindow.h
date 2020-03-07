@@ -20,7 +20,6 @@
 #ifndef WL_WUI_BUILDINGWINDOW_H
 #define WL_WUI_BUILDINGWINDOW_H
 
-#include <cstdlib>
 #include <memory>
 
 #include "economy/expedition_bootstrap.h"

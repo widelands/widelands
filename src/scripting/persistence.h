@@ -20,8 +20,6 @@
 #ifndef WL_SCRIPTING_PERSISTENCE_H
 #define WL_SCRIPTING_PERSISTENCE_H
 
-#include <string>
-
 #include "scripting/lua.h"
 
 class FileRead;

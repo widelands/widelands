@@ -19,8 +19,6 @@
 
 #include "map_io/map_flagdata_packet.h"
 
-#include <map>
-
 #include "base/macros.h"
 #include "economy/flag.h"
 #include "economy/request.h"

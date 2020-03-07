@@ -19,7 +19,7 @@
 
 #include "sound/songset.h"
 
-#include <utility>
+#include <cassert>
 
 #include "base/log.h"
 #include "io/fileread.h"

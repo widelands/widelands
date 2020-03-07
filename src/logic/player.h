@@ -21,8 +21,6 @@
 #define WL_LOGIC_PLAYER_H
 
 #include <memory>
-#include <unordered_map>
-#include <unordered_set>
 
 #include "base/macros.h"
 #include "economy/economy.h"

@@ -21,8 +21,6 @@
 #define WL_NETWORK_INTERNET_GAMING_H
 
 #include <memory>
-#include <string>
-#include <vector>
 
 #include "chat/chat.h"
 #include "network/netclient.h"

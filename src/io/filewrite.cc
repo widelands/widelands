@@ -19,6 +19,8 @@
 
 #include "io/filewrite.h"
 
+#include <cassert>
+
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/filesystem.h"
 

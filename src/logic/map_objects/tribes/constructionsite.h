@@ -21,7 +21,6 @@
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_CONSTRUCTIONSITE_H
 
 #include <memory>
-#include <vector>
 
 #include "base/macros.h"
 #include "logic/map_objects/tribes/building_settings.h"

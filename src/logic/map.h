@@ -20,12 +20,7 @@
 #ifndef WL_LOGIC_MAP_H
 #define WL_LOGIC_MAP_H
 
-#include <cstring>
-#include <map>
 #include <memory>
-#include <set>
-#include <string>
-#include <vector>
 
 #include "base/i18n.h"
 #include "economy/itransport_cost_calculator.h"
