@@ -36,7 +36,7 @@ tribes:new_worker_type {
          rows = 4,
          columns = 3,
          directional = true,
-         hotspot = { 9, 23 }
+         hotspot = { 9, 19 }
       }
    }
 }
