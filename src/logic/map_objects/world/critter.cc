@@ -317,13 +317,14 @@ void Critter::roam_update(Game& game, State& state) {
 	const uint32_t age = game.get_gametime() - creation_time_;
 	const uint32_t reproduction_rate = descr().get_reproduction_rate();
 
-	{ // chance to die
+	{  // chance to die
 		const double r = reproduction_rate * reproduction_rate / 10000000.0;
 		const double i1 = r / kMinCritterLifetime;
 		const double i2 = (1 - r) / (kMaxCritterLifetime - kMinCritterLifetime);
 		assert(i1 * kMaxCritterLifetime <= 1.0);
 		assert(i2 >= i1);
-		const double d = i1 * age + std::max(0.0, (i2 - i1) * age * reproduction_rate / (kMaxCritterLifetime - kMinCritterLifetime));
+		const double d = i1 * age + std::max(0.0, (i2 - i1) * age * reproduction_rate /
+		                                             (kMaxCritterLifetime - kMinCritterLifetime));
 		assert(d >= 0.0);
 		assert(d <= 1.0);
 		if (game.logic_rand() % kMinCritterLifetime < d * kMinCritterLifetime) {
@@ -445,8 +446,7 @@ void Critter::roam_update(Game& game, State& state) {
 		}
 	}
 	// no food sadly, but perhaps another animal to make cute little fox cubs with…?
-	if (age > kMinReproductionAge &&
-	    game.logic_rand() % 100 < mating_partners * reproduction_rate) {
+	if (age > kMinReproductionAge && game.logic_rand() % 100 < mating_partners * reproduction_rate) {
 		// A potential partner is interested in us. Now politely ask the game's birth control system
 		// for permission.
 		FindBobByName functor(descr().name());
@@ -463,7 +463,9 @@ void Critter::roam_update(Game& game, State& state) {
 		const size_t weighted_population =
 		   (3 * population_size_2 + 2 * population_size_5 + population_size_9) / 3;
 		assert(weighted_population >= population_size_2);
-		if ((game.logic_rand() % (reproduction_rate * reproduction_rate)) * std::exp2(weighted_population - mating_partners - 1) < reproduction_rate * reproduction_rate * weighted_population) {
+		if ((game.logic_rand() % (reproduction_rate * reproduction_rate)) *
+		       std::exp2(weighted_population - mating_partners - 1) <
+		    reproduction_rate * reproduction_rate * weighted_population) {
 			molog("A cute little %s cub :)\n", descr().name().c_str());
 			game.create_critter(get_position(), descr().name());
 		}
