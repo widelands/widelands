@@ -66,7 +66,9 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 		savegame_loader_.reset(new MultiPlayerLoader(g));
 		break;
 	case FileType::kShowAll:
-		table_ = new SavegameTableMultiplayer(table_box_, style, localize_autosave);  // wrong??!!
+		table_ = new SavegameTableMultiplayer(
+		   table_box_, style, localize_autosave);  // wrong? showAll = save window -> "accidental"
+		                                           // same table as multiplayer
 		savegame_deleter_.reset(new SavegameDeleter(parent_));
 		savegame_loader_.reset(new EverythingLoader(g));
 		break;

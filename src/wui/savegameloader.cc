@@ -109,21 +109,6 @@ void SavegameLoader::add_error_info(SavegameData& gamedata, std::string errormes
 	gamedata.mapname = FileSystem::filename_without_ext(gamedata.filename.c_str());
 }
 
-// bool SavegameLoader::is_valid_gametype(const SavegameData& gamedata) const {
-//	 Skip singleplayer games in multiplayer mode and vice versa
-//	if (filetype_ != FileType::kReplay && filetype_ != FileType::kShowAll) {
-//	if (filetype_ == FileType::kGameMultiPlayer) {
-//		if (gamedata.gametype == GameController::GameType::kSingleplayer) {
-//			return false;
-//		}
-//	} else if ((gamedata.gametype != GameController::GameType::kSingleplayer) &&
-//	           (gamedata.gametype != GameController::GameType::kReplay)) {
-//		return false;
-//	}
-//	}
-//	return true;
-//}
-
 void SavegameLoader::add_time_info(SavegameData& gamedata,
                                    const Widelands::GamePreloadPacket& gpdp) const {
 	gamedata.savetimestamp = gpdp.get_savetimestamp();
@@ -204,7 +189,8 @@ ReplayLoader::ReplayLoader(Widelands::Game& game) : SavegameLoader(game) {
 }
 
 bool ReplayLoader::is_valid_gametype(const SavegameData& gamedata) const {
-	return gamedata.gametype == GameController::GameType::kReplay;
+	return true;  // why?? what is the purpose of GameController::GameType::kReplay
+	              //	return gamedata.is_replay(); <-- should be this, right?!
 }
 
 std::string ReplayLoader::get_savename(const std::string& gamefilename) const {
@@ -217,20 +203,19 @@ MultiPlayerLoader::MultiPlayerLoader(Widelands::Game& game) : SavegameLoader(gam
 }
 
 bool MultiPlayerLoader::is_valid_gametype(const SavegameData& gamedata) const {
-	return gamedata.gametype == GameController::GameType::kNetHost ||
-	       gamedata.gametype == GameController::GameType::kNetClient;
+	return gamedata.is_multiplayer();
 }
 
 SinglePlayerLoader::SinglePlayerLoader(Widelands::Game& game) : SavegameLoader(game) {
 }
 
 bool SinglePlayerLoader::is_valid_gametype(const SavegameData& gamedata) const {
-	return gamedata.gametype == GameController::GameType::kSingleplayer;
+	return gamedata.is_singleplayer();
 }
 
 EverythingLoader::EverythingLoader(Widelands::Game& game) : SavegameLoader(game) {
 }
 
-bool EverythingLoader::is_valid_gametype(const SavegameData& gamedata) const {
+bool EverythingLoader::is_valid_gametype(const SavegameData&) const {
 	return true;
 }

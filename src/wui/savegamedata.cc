@@ -49,6 +49,19 @@ bool SavegameData::is_sub_directory() const {
 	return type_ == SavegameType::kSubDirectory;
 }
 
+bool SavegameData::is_replay() const {
+	return gametype == GameController::GameType::kReplay;
+}
+
+bool SavegameData::is_singleplayer() const {
+	return gametype == GameController::GameType::kSingleplayer;
+}
+
+bool SavegameData::is_multiplayer() const {
+	return gametype == GameController::GameType::kNetHost ||
+	       gametype == GameController::GameType::kNetClient;
+}
+
 bool SavegameData::compare_save_time(const SavegameData& other) const {
 	if (is_directory() || other.is_directory()) {
 		return compare_directories(other);

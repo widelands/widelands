@@ -59,6 +59,12 @@ public:
 
 	bool is_sub_directory() const;
 
+	bool is_multiplayer() const;
+
+	bool is_singleplayer() const;
+
+	bool is_replay() const;
+
 	bool compare_save_time(const SavegameData& other) const;
 
 	bool compare_directories(const SavegameData& other) const;
