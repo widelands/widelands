@@ -3,6 +3,7 @@
 -- =======================================================================
 
 include "scripting/coroutine.lua" -- for sleep
+include "scripting/table.lua"
 include "scripting/win_conditions/win_condition_functions.lua"
 
 set_textdomain("win_conditions")
@@ -31,17 +32,22 @@ return {
             sleep(5000)
 
             for idx,p in ipairs(plrs) do
-                if (#p:get_buildings("barbarians_headquarters") + #p:get_buildings("atlanteans_headquarters") + #p:get_buildings("empire_headquarters") + #p:get_buildings("frisians_headquarters")) == 0 then
-                    for idx,b in ipairs(p:get_buildings("barbarians_warehouse")) do
-                        b:destroy()
-                    end
-                    for idx,b in ipairs(p:get_buildings("atlanteans_warehouse")) do
-                        b:destroy()
-                    end
-                    for idx,b in ipairs(p:get_buildings("empire_warehouse")) do
-                        b:destroy()
-                    end
-                    for idx,b in ipairs(p:get_buildings("frisians_warehouse")) do
+                if (
+                    #p:get_buildings("barbarians_headquarters") + 
+                    #p:get_buildings("atlanteans_headquarters") + 
+                    #p:get_buildings("empire_headquarters") + 
+                    #p:get_buildings("frisians_headquarters")
+                ) == 0 then
+                    for idx,b in ipairs(array_combine(
+                        p:get_buildings("barbarians_warehouse"),
+                        p:get_buildings("atlanteans_warehouse"),
+                        p:get_buildings("empire_warehouse"),
+                        p:get_buildings("frisians_warehouse"),
+                        p:get_buildings("barbarians_port"),
+                        p:get_buildings("atlanteans_port"),
+                        p:get_buildings("empire_port"),
+                        p:get_buildings("frisians_port")
+                    )) do
                         b:destroy()
                     end
                 end
