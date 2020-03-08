@@ -861,7 +861,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		if (bf.military_score_ < std::abs(management_data.get_military_number_at(91) * 10) &&
 		    bf.area_military_capacity - static_cast<int16_t>(total_capacity) -
 		          std::abs(management_data.get_military_number_at(84) / 10) >
-		       std::abs(management_data.get_military_number_at(24) / 25) * enemy_military_capacity) {
+		       (std::abs(management_data.get_military_number_at(24) / 25) + 1) * enemy_military_capacity) {
 			should_be_dismantled = true;
 		}
 	} else {
