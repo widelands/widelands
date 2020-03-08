@@ -23,9 +23,9 @@
 #include <string>
 
 #ifndef _WIN32
-#include <SDL.h>     // for a dirty hack.
 #include <unistd.h>  // for usleep
 #else
+#include <SDL_events.h> // for a dirty hack.
 #include <windows.h>
 #endif
 
