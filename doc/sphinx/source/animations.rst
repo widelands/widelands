@@ -58,8 +58,9 @@ Let's have a detailed look at the ``idle`` animation:
    *Mandatory*. The directory where the animation image files are located.
 
 **basename**
-   *Mandatory*. The filename prefix for the image files. Our example will pick up any image from ``idle_00.png`` through ``idle_99.png`` in the specified directory path -- the current path in our example. These images can optionally have corresponding player color mask images called ``idle_00_pc.png`` through ``idle_99_pc.png``. Make sure to include leading 0's in the file names and to have consistent length -- we support 1, 2 and 3 digit numbers in an animation.
+   *Optional*. The filename prefix for the image files. Our example will pick up any image from ``idle_00.png`` through ``idle_99.png`` in the specified directory path -- the current path in our example. These images can optionally have corresponding player color mask images called ``idle_00_pc.png`` through ``idle_99_pc.png``. Make sure to include leading 0's in the file names and to have consistent length -- we support 1, 2 and 3 digit numbers in an animation.
    If your animation contains only one file, you can also call it ``idle.png`` (and ``idle_pc.png`` for the player color mask) without ``_`` or any numbers in the file name.
+   You can omit the basename if it's identical to the animation's name.
 
    We support *mipmaps* for animations. They allow us to provide the same image in different resolutions for optimum rendering quality.
    For using mipmaps, simply name your files accordingly, and the engine will pick them up. e.g. ``idle_0.5_00.png`` will be rendered at scale ``0.5``, and ``idle_1_00.png`` will be rendered at the neutral scale ``1``.
