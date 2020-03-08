@@ -19,8 +19,6 @@
 
 #include "scripting/lua_map.h"
 
-#include <memory>
-
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"

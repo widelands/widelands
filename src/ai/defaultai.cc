@@ -20,12 +20,7 @@
 #include "ai/defaultai.h"
 
 #include <algorithm>
-#include <cmath>
-#include <ctime>
 #include <memory>
-#include <queue>
-#include <typeinfo>
-#include <unordered_set>
 
 #include "ai/ai_hints.h"
 #include "base/log.h"

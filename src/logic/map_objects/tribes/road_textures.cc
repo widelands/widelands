@@ -19,8 +19,6 @@
 
 #include "logic/map_objects/tribes/road_textures.h"
 
-#include <memory>
-
 const Image& RoadTextures::get_normal_texture(const Widelands::Coords& coords,
                                               int direction) const {
 	return *normal_textures_.at((coords.x + coords.y + direction) % normal_textures_.size());

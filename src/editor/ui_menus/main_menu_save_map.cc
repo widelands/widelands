@@ -19,10 +19,7 @@
 
 #include "editor/ui_menus/main_menu_save_map.h"
 
-#include <cstdio>
-#include <cstring>
 #include <memory>
-#include <string>
 
 #include "base/i18n.h"
 #include "base/wexception.h"

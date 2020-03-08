@@ -20,9 +20,7 @@
 #ifndef WL_IO_FILESYSTEM_ZIP_FILESYSTEM_H
 #define WL_IO_FILESYSTEM_ZIP_FILESYSTEM_H
 
-#include <cstring>
 #include <memory>
-#include <string>
 
 #include "io/filesystem/filesystem.h"
 #include "io/streamread.h"

@@ -19,8 +19,6 @@
 
 #include "map_io/map_scripting_packet.h"
 
-#include <string>
-
 #include <boost/algorithm/string/predicate.hpp>
 
 #include "base/macros.h"

@@ -19,8 +19,6 @@
 
 #include "graphic/game_renderer.h"
 
-#include <memory>
-
 #include "graphic/render_queue.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"

@@ -17,9 +17,6 @@
  *
  */
 
-#include <memory>
-#include <string>
-
 #define BOOST_TEST_MODULE Notifications
 #include <boost/test/unit_test.hpp>
 

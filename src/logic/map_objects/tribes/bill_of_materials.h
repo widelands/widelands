@@ -20,8 +20,6 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_BILL_OF_MATERIALS_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_BILL_OF_MATERIALS_H
 
-#include <vector>
-
 #include "logic/widelands.h"
 
 namespace Widelands {

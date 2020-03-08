@@ -20,7 +20,6 @@
 #ifndef WL_WUI_MAP_TAGS_H
 #define WL_WUI_MAP_TAGS_H
 
-#include <map>
 #include <string>
 
 /// Functions for localizing the known map tags.

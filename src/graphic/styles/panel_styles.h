@@ -20,9 +20,6 @@
 #ifndef WL_GRAPHIC_STYLES_PANEL_STYLES_H
 #define WL_GRAPHIC_STYLES_PANEL_STYLES_H
 
-#include <map>
-#include <memory>
-
 #include "graphic/color.h"
 #include "graphic/image.h"
 

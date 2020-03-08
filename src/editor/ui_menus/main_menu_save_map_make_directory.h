@@ -20,8 +20,6 @@
 #ifndef WL_EDITOR_UI_MENUS_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H
 #define WL_EDITOR_UI_MENUS_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H
 
-#include <string>
-
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"

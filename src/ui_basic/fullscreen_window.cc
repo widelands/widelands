@@ -19,7 +19,6 @@
 
 #include "ui_basic/fullscreen_window.h"
 
-#include <cstdio>
 #include <memory>
 
 #include "base/log.h"

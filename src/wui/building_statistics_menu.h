@@ -20,8 +20,6 @@
 #ifndef WL_WUI_BUILDING_STATISTICS_MENU_H
 #define WL_WUI_BUILDING_STATISTICS_MENU_H
 
-#include <vector>
-
 #include "graphic/color.h"
 #include "logic/map_objects/tribes/building.h"
 #include "ui_basic/box.h"

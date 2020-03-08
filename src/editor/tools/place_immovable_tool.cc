@@ -19,8 +19,6 @@
 
 #include "editor/tools/place_immovable_tool.h"
 
-#include <string>
-
 #include "base/macros.h"
 #include "editor/editorinteractive.h"
 #include "logic/editor_game_base.h"

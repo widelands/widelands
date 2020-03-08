@@ -21,7 +21,6 @@
 
 #include <algorithm>
 #include <memory>
-#include <thread>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>

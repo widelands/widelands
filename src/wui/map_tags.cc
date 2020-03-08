@@ -19,6 +19,8 @@
 
 #include "wui/map_tags.h"
 
+#include <map>
+
 #include "base/i18n.h"
 
 namespace {

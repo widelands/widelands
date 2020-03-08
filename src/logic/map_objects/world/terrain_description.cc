@@ -19,8 +19,6 @@
 
 #include "logic/map_objects/world/terrain_description.h"
 
-#include <memory>
-
 #include "base/i18n.h"
 #include "graphic/animation/animation.h"
 #include "graphic/graphic.h"

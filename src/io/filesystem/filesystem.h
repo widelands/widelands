@@ -20,14 +20,9 @@
 #ifndef WL_IO_FILESYSTEM_FILESYSTEM_H
 #define WL_IO_FILESYSTEM_FILESYSTEM_H
 
-#include <cstring>
-#include <memory>
 #include <set>
-#include <stdexcept>
 #include <string>
 #include <vector>
-
-#include <stdint.h>
 
 using FilenameSet = std::set<std::string>;
 

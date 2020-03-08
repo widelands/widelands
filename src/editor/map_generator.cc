@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <stdint.h>
-
 #include "base/wexception.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"

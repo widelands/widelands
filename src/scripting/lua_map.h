@@ -20,8 +20,6 @@
 #ifndef WL_SCRIPTING_LUA_MAP_H
 #define WL_SCRIPTING_LUA_MAP_H
 
-#include <set>
-
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/portdock.h"
