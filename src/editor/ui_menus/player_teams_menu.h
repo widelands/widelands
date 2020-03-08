@@ -20,8 +20,8 @@
 #ifndef WL_EDITOR_UI_MENUS_PLAYER_TEAMS_MENU_H
 #define WL_EDITOR_UI_MENUS_PLAYER_TEAMS_MENU_H
 
-#include <memory>
 #include <cstdint>
+#include <memory>
 #include <vector>
 
 #include "editor/ui_menus/tool_options_menu.h"
