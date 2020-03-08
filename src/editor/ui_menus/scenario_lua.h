@@ -25,7 +25,6 @@
 
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
-#include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/table.h"

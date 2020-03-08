@@ -25,7 +25,6 @@
 #include "editor/tools/scenario_road_tool.h"
 #include "editor/ui_menus/tool_options_menu.h"
 #include "ui_basic/box.h"
-#include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/radiobutton.h"

@@ -30,7 +30,7 @@
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/widelands.h"
 #include "ui_basic/checkbox.h"
-#include "ui_basic/messagebox.h"
+#include "ui_basic/editbox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "wlapplication_options.h"
 

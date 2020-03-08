@@ -24,7 +24,6 @@
 
 #include "editor/tools/scenario_field_owner_tool.h"
 #include "editor/ui_menus/tool_options_menu.h"
-#include "logic/map.h"
 #include "ui_basic/dropdown.h"
 
 class EditorInteractive;

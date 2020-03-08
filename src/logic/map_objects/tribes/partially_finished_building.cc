@@ -19,7 +19,6 @@
 
 #include "logic/map_objects/tribes/partially_finished_building.h"
 
-#include "base/macros.h"
 #include "economy/request.h"
 #include "economy/wares_queue.h"
 #include "logic/game.h"

@@ -27,7 +27,6 @@
 
 namespace Widelands {
 
-class EditorGameBase;
 class PortDock;
 class WareInstance;
 class Warehouse;

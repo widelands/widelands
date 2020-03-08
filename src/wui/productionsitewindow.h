@@ -24,7 +24,6 @@
 
 #include "logic/map_objects/tribes/productionsite.h"
 #include "ui_basic/dropdown.h"
-#include "ui_basic/spinbox.h"
 #include "ui_basic/table.h"
 #include "wui/buildingwindow.h"
 

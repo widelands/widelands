@@ -21,7 +21,6 @@
 #define WL_WUI_PORTDOCKWARESDISPLAY_H
 
 #include "ui_basic/box.h"
-#include "wui/interactive_gamebase.h"
 #include "wui/waresdisplay.h"
 
 namespace Widelands {

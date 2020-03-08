@@ -36,7 +36,6 @@
 #include "logic/game_data_error.h"
 
 class EditorInteractive;
-class FunctionBase;
 class Property;
 class ScriptingLoader;
 class ScriptingSaver;

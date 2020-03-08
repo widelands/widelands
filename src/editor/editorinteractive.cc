@@ -32,7 +32,6 @@
 #include "editor/scripting/constexpr.h"
 #include "editor/scripting/function_statements.h"
 #include "editor/scripting/variable.h"
-#include "editor/tools/decrease_height_tool.h"
 #include "editor/tools/decrease_resources_tool.h"
 #include "editor/tools/increase_resources_tool.h"
 #include "editor/tools/set_port_space_tool.h"

@@ -41,7 +41,6 @@
 #include "wui/game_options_sound_menu.h"
 #include "wui/game_summary.h"
 #include "wui/interactive_player.h"
-#include "wui/unique_window_handler.h"
 
 namespace {
 

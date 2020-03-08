@@ -20,7 +20,6 @@
 #include "editor/tools/scenario_vision_tool.h"
 
 #include "editor/editorinteractive.h"
-#include "logic/field.h"
 #include "logic/mapregion.h"
 #include "logic/widelands_geometry.h"
 

@@ -22,8 +22,6 @@
 
 #include "editor/scripting/scripting.h"
 
-class FunctionStatement;
-
 void write_lua(int32_t indent, FileWrite&, const std::list<FunctionStatement*>&, bool print_end);
 
 /************************************************************

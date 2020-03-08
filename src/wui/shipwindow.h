@@ -26,10 +26,11 @@
 #include "logic/game.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/walkingdir.h"
+#include "ui_basic/box.h"
 #include "ui_basic/button.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/unique_window.h"
-#include "wui/interactive_gamebase.h"
 #include "wui/itemwaresdisplay.h"
 
 /**

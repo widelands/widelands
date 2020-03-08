@@ -29,7 +29,6 @@
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/path.h"
-#include "notifications/notifications.h"
 #include "sound/note_sound.h"
 #include "ui_basic/box.h"
 #include "ui_basic/dropdown.h"
@@ -39,10 +38,6 @@
 #include "wui/mapview.h"
 #include "wui/minimap.h"
 #include "wui/quicknavigation.h"
-
-namespace Widelands {
-struct CoordPath;
-}
 
 class UniqueWindowHandler;
 
