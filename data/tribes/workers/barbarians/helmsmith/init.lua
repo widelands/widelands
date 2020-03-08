@@ -17,7 +17,7 @@ tribes:new_worker_type {
    animations = {
       idle = {
          directory = dirname,
-         hotspot = { 4, 25 }
+         hotspot = { 4, 20 }
       }
    },
    spritesheets = {
@@ -28,9 +28,8 @@ tribes:new_worker_type {
          rows = 4,
          columns = 3,
          directional = true,
-         hotspot = { 9, 25 }
+         hotspot = { 9, 20 }
       },
-      -- TODO(GunChleoc): walkload needs mipmap
       walkload = {
          directory = dirname,
          fps = 10,
@@ -38,7 +37,7 @@ tribes:new_worker_type {
          rows = 4,
          columns = 3,
          directional = true,
-         hotspot = { 7, 21 }
+         hotspot = { 7, 20 }
       }
    }
 }
