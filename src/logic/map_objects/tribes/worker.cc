@@ -533,7 +533,7 @@ struct FindNodeSpace {
 		for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 			FCoords const neighb = egbase.map().get_neighbour(coords, dir);
 
-			if (!(neighb.field->nodecaps() & MOVECAPS_WALK) &&
+			if (!(neighb.field->maxcaps() & MOVECAPS_WALK) &&
 			    neighb.field->get_immovable() != ignoreimmovable)
 				return false;
 		}
