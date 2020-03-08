@@ -1,30 +1,5 @@
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 11, 23 }
-   },
-   dig = {
-      pictures = path.list_files(dirname .. "dig_??.png"),
-      hotspot = { 12, 24 },
-      fps = 5
-   },
-   planting = {
-      pictures = path.list_files(dirname .. "plant_??.png"),
-      hotspot = { 18, 24 },
-      fps = 10
-   },
-   water = {
-      pictures = path.list_files(dirname .. "water_??.png"),
-      hotspot = { 19, 25 },
-      fps = 5
-   }
-}
-add_directional_animation(animations, "walk", dirname, "walk", {11, 23}, 10)
-add_directional_animation(animations, "walkload", dirname, "walkload", {11, 23})
-
-
 tribes:new_worker_type {
    msgctxt = "barbarians_worker",
    name = "barbarians_ranger",
@@ -44,12 +19,52 @@ tribes:new_worker_type {
          "findspace=size:any radius:5 avoid:field saplingsearches:5",
          "walk=coords",
          "animate=dig 3500",
-         "animate=planting 2500",
+         "animate=plant 2500",
          "plant=attrib:tree_sapling",
          "animate=water 3500",
          "return"
       }
    },
 
-   animations = animations,
+   animations = {
+      idle = {
+         directory = dirname,
+         hotspot = { 11, 20 }
+      }
+   },
+   spritesheets = {
+      walk = {
+         directory = dirname,
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 11, 20 }
+      },
+      dig = {
+         directory = dirname,
+         fps = 5,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         hotspot = { 12, 22 }
+      },
+      plant = {
+         directory = dirname,
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         hotspot = { 16, 20 }
+      },
+      water = {
+         directory = dirname,
+         fps = 5,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         hotspot = { 18, 23 }
+      },
+   }
 }
