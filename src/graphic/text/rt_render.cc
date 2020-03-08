@@ -19,15 +19,11 @@
 
 #include "graphic/text/rt_render.h"
 
-#include <cmath>
 #include <memory>
 #include <queue>
-#include <string>
-#include <vector>
 
 #include <SDL.h>
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/log.h"

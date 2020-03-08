@@ -21,7 +21,6 @@
 #define WL_UI_FSMENU_LAUNCH_GAME_H
 
 #include <memory>
-#include <string>
 
 #include "logic/widelands.h"
 #include "ui_basic/button.h"

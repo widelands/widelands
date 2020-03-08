@@ -1,7 +1,6 @@
 #include "network/bufferedconnection.h"
 
 #include <memory>
-#include <thread>
 
 #include "base/log.h"
 

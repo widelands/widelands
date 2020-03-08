@@ -20,7 +20,6 @@
 
 #include <cassert>
 #include <memory>
-#include <string>
 
 #include "base/log.h"
 #include "base/wexception.h"

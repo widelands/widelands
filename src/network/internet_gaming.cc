@@ -21,11 +21,9 @@
 
 #include <algorithm>
 #include <memory>
-#include <thread>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 
 #include "base/i18n.h"
 #include "base/log.h"

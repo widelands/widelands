@@ -20,10 +20,6 @@
 #ifndef WL_UI_BASIC_ICONGRID_H
 #define WL_UI_BASIC_ICONGRID_H
 
-#include <vector>
-
-#include <boost/signals2.hpp>
-
 #include "ui_basic/panel.h"
 
 namespace UI {

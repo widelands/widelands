@@ -20,8 +20,8 @@
 #ifndef WL_WUI_WARESDISPLAY_H
 #define WL_WUI_WARESDISPLAY_H
 
+#include <functional>
 #include <memory>
-#include <vector>
 
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warelist.h"
@@ -46,7 +46,7 @@ public:
 	   Widelands::WareWorker type,
 	   bool selectable,
 	   CLANG_DIAG_OFF("-Wunknown-pragmas") CLANG_DIAG_OFF("-Wzero-as-null-pointer-constant")
-	      boost::function<void(Widelands::DescriptionIndex, bool)> callback_function = 0,
+	      std::function<void(Widelands::DescriptionIndex, bool)> callback_function = 0,
 	   CLANG_DIAG_ON("-Wzero-as-null-pointer-constant")
 	      CLANG_DIAG_ON("-Wunknown-pragmas") bool horizontal = false,
 	   int32_t hgap = 3,
@@ -145,7 +145,7 @@ private:
 	 * It is not selected directly, but will be on mouse release.
 	 */
 	Widelands::DescriptionIndex selection_anchor_;
-	boost::function<void(Widelands::DescriptionIndex, bool)> callback_function_;
+	std::function<void(Widelands::DescriptionIndex, bool)> callback_function_;
 
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
 	   graphic_resolution_changed_subscriber_;

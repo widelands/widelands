@@ -19,10 +19,6 @@
 
 #include "editor/ui_menus/help.h"
 
-#include <memory>
-
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "scripting/lua_coroutine.h"

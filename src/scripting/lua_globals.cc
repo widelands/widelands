@@ -19,11 +19,9 @@
 
 #include "scripting/lua_globals.h"
 
-#include <exception>
 #include <memory>
 
 #include <SDL.h>
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "build_info.h"

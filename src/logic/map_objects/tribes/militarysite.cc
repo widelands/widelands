@@ -19,11 +19,7 @@
 
 #include "logic/map_objects/tribes/militarysite.h"
 
-#include <clocale>
-#include <cstdio>
 #include <memory>
-
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/log.h"

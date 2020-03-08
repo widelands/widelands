@@ -21,9 +21,7 @@
 #define WL_UI_BASIC_LISTSELECT_H
 
 #include <deque>
-#include <limits>
-
-#include <boost/signals2.hpp>
+#include <memory>
 
 #include "graphic/styles/table_style.h"
 #include "graphic/text/rendered_text.h"

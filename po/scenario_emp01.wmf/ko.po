@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
-# ks k, 2019
+# ks k, 2019-2020
 # TaeMin An, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
-"PO-Revision-Date: 2019-08-10 17:15+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-02-26 18:51+0000\n"
+"PO-Revision-Date: 2020-03-01 10:58+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -376,7 +376,7 @@ msgstr "폐하, 우리성이 완성될 날이 머지 않았습니다. 남쪽의 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:218
 msgid "Now we truly can look forward to settling down on another island."
-msgstr ""
+msgstr "이제 우리는 다른 섬에 정착하기를 진심으로 기대할 수 있습니다."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:223
 msgid "Mission Complete"
@@ -430,12 +430,12 @@ msgstr ""
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgstr ""
+msgstr "새로운 목표"
 
 #: ../../data/scripting/richtext_scenarios.lua:93
 msgid "New Objectives"
-msgstr ""
+msgstr "새로운 목표들"

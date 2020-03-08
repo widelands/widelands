@@ -19,7 +19,6 @@
 
 #include "io/filesystem/layered_filesystem.h"
 
-#include <cstdio>
 #include <memory>
 
 #include "base/wexception.h"

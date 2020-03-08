@@ -22,10 +22,6 @@
 
 #include <map>
 #include <memory>
-#include <string>
-#include <vector>
-
-#include <boost/utility.hpp>
 
 #include "base/macros.h"
 #include "graphic/image.h"

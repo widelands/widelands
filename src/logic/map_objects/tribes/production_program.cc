@@ -19,11 +19,10 @@
 
 #include "logic/map_objects/tribes/production_program.h"
 
+#include <cassert>
 #include <memory>
-#include <sstream>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/macros.h"

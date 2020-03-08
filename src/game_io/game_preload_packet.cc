@@ -19,10 +19,7 @@
 
 #include "game_io/game_preload_packet.h"
 
-#include <ctime>
 #include <memory>
-
-#include <boost/format.hpp>
 
 #include "build_info.h"
 #include "graphic/image_io.h"

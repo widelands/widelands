@@ -20,11 +20,9 @@
 #ifndef WL_SOUND_SOUND_HANDLER_H
 #define WL_SOUND_SOUND_HANDLER_H
 
-#include <cstring>
+#include <cassert>
 #include <map>
 #include <memory>
-#include <string>
-#include <vector>
 
 #ifndef _MSC_VER
 #include <unistd.h>

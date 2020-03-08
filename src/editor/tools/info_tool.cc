@@ -19,11 +19,6 @@
 
 #include "editor/tools/info_tool.h"
 
-#include <cstdio>
-#include <vector>
-
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "graphic/text_layout.h"

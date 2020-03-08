@@ -26,8 +26,6 @@
 #include <cstring>
 #include <string>
 
-#include <stdint.h>
-
 /* Structure to save state of computation between the single steps.  */
 struct Md5Ctx {
 	uint32_t A;

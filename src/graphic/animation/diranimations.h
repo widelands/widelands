@@ -20,10 +20,6 @@
 #ifndef WL_GRAPHIC_ANIMATION_DIRANIMATIONS_H
 #define WL_GRAPHIC_ANIMATION_DIRANIMATIONS_H
 
-#include <string>
-
-#include <stdint.h>
-
 #include "logic/widelands.h"
 
 /// Manages a set of 6 animations, one for each possible direction.

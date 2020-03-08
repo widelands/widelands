@@ -19,11 +19,6 @@
 
 #include "editor/ui_menus/main_menu_map_options.h"
 
-#include <cstdio>
-#include <string>
-
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "graphic/font_handler.h"

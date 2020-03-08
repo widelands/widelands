@@ -20,7 +20,7 @@
 #ifndef WL_GRAPHIC_TEXT_LAYOUT_H
 #define WL_GRAPHIC_TEXT_LAYOUT_H
 
-#include <string>
+#include <memory>
 
 #include "graphic/align.h"
 #include "graphic/color.h"

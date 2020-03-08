@@ -21,11 +21,7 @@
 
 #include <algorithm>
 #include <memory>
-#include <sstream>
-#include <string>
 
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/format.hpp>
 #ifndef _WIN32
 #include <unistd.h>  // for usleep
 #endif

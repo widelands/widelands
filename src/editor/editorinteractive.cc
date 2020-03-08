@@ -20,11 +20,8 @@
 #include "editor/editorinteractive.h"
 
 #include <memory>
-#include <string>
-#include <vector>
 
 #include <SDL_keycode.h>
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/warning.h"

@@ -19,10 +19,6 @@
 
 #include "map_io/map_flag_packet.h"
 
-#include <map>
-
-#include <boost/format.hpp>
-
 #include "base/macros.h"
 #include "economy/flag.h"
 #include "io/fileread.h"

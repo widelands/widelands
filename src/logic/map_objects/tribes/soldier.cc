@@ -19,11 +19,7 @@
 
 #include "logic/map_objects/tribes/soldier.h"
 
-#include <cstdio>
-#include <list>
 #include <memory>
-
-#include <boost/format.hpp>
 
 #include "base/macros.h"
 #include "base/math.h"

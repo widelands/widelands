@@ -19,12 +19,6 @@
 
 #include "editor/ui_menus/main_menu_new_map.h"
 
-#include <memory>
-#include <string>
-#include <vector>
-
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "editor/editorinteractive.h"

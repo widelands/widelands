@@ -19,12 +19,9 @@
 
 #include "logic/game.h"
 
-#include <cstring>
-#include <limits>
 #include <memory>
 #include <string>
 
-#include <boost/format.hpp>
 #ifndef _WIN32
 #include <SDL.h>     // for a dirty hack.
 #include <unistd.h>  // for usleep

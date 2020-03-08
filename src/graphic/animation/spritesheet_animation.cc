@@ -20,12 +20,9 @@
 #include "graphic/animation/spritesheet_animation.h"
 
 #include <cassert>
-#include <cstdio>
-#include <limits>
 #include <memory>
 
 #include <boost/algorithm/string/replace.hpp>
-#include <boost/format.hpp>
 
 #include "base/log.h"
 #include "graphic/graphic.h"

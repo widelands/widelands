@@ -19,11 +19,9 @@
 
 #include "wui/load_or_save_game.h"
 
-#include <ctime>
 #include <memory>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/log.h"

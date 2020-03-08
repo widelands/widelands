@@ -21,7 +21,6 @@
 #define WL_GRAPHIC_TEXT_SDL_TTF_FONT_H
 
 #include <memory>
-#include <string>
 
 #include <SDL_ttf.h>
 

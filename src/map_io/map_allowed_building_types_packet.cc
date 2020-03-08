@@ -19,8 +19,6 @@
 
 #include "map_io/map_allowed_building_types_packet.h"
 
-#include <boost/format.hpp>
-
 #include "base/macros.h"
 #include "io/profile.h"
 #include "logic/game.h"
