@@ -157,10 +157,6 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table, const std::string&
 				    table.get_table("pictures")->array_entries<std::string>().front().c_str());
 			}
 		} else {
-			if (basename.empty() || !table.has_key("directory")) {
-				throw Widelands::GameDataError(
-				   "Animation did not define both a basename and a directory for its image files");
-			}
 			add_available_scales(basename, table.get_string("directory"));
 		}
 

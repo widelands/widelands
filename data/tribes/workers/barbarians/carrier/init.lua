@@ -14,7 +14,6 @@ tribes:new_carrier_type {
    spritesheets = {
       idle = {
          directory = dirname,
-         basename = "idle",
          fps = 5,
          frames = 100,
          columns = 10,
@@ -24,7 +23,6 @@ tribes:new_carrier_type {
 
       walk = {
          directory = dirname,
-         basename = "walk",
          fps = 10,
          frames = 10,
          columns = 3,
@@ -34,7 +32,6 @@ tribes:new_carrier_type {
       },
       walkload = {
          directory = dirname,
-         basename = "walkload",
          fps = 10,
          frames = 10,
          columns = 3,

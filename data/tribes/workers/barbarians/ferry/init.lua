@@ -12,7 +12,6 @@ tribes:new_ferry_type {
    -- TODO(Nordfriese): Make animations
    spritesheets = {
       idle = {
-         basename = "idle",
          directory = dirname,
          hotspot = {29, 19},
          fps = 10,

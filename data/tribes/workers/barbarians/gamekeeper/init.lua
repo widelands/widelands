@@ -27,14 +27,12 @@ tribes:new_worker_type {
    animations = {
       idle = {
          directory = dirname,
-         basename = "idle",
          hotspot = { 14, 22 }
       },
    },
    spritesheets = {
       walk = {
          directory = dirname,
-         basename = "walk",
          fps = 10,
          frames = 10,
          rows = 4,
@@ -44,7 +42,6 @@ tribes:new_worker_type {
       },
       releasein = {
          directory = dirname,
-         basename = "releasein",
          fps = 5,
          frames = 10,
          rows = 4,
@@ -53,7 +50,6 @@ tribes:new_worker_type {
       },
       releaseout = {
          directory = dirname,
-         basename = "releaseout",
          fps = 5,
          frames = 10,
          rows = 4,

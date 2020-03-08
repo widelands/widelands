@@ -30,14 +30,12 @@ tribes:new_worker_type {
    animations = {
       idle = {
          directory = dirname,
-         basename = "idle",
          hotspot = { 7, 33 },
       },
    },
    spritesheets = {
       walk = {
          directory = dirname,
-         basename = "walk",
          fps = 10,
          frames = 10,
          rows = 4,
@@ -48,7 +46,6 @@ tribes:new_worker_type {
       -- TODO(GunChleoc): Needs walkload animation, or some ware hotspot/sizing magic.
       fish = {
          directory = dirname,
-         basename = "fish",
          fps = 10,
          frames = 30,
          rows = 6,

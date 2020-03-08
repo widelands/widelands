@@ -149,10 +149,6 @@ SpriteSheetAnimation::SpriteSheetAnimation(const LuaTable& table, const std::str
    : Animation(table) {
 	try {
 		// Get image files
-		if (basename.empty() || !table.has_key("directory")) {
-			throw Widelands::GameDataError(
-			   "Animation did not define both a basename and a directory for its sprite sheet file");
-		}
 		const std::string directory = table.get_string("directory");
 
 		// Frames, rows and columns

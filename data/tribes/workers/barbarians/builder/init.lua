@@ -17,7 +17,6 @@ tribes:new_worker_type {
    spritesheets = {
       idle = {
          directory = dirname,
-         basename = "idle",
          fps = 10,
          frames = 150,
          rows = 13,
@@ -26,7 +25,6 @@ tribes:new_worker_type {
       },
       walk = {
          directory = dirname,
-         basename = "walk",
          fps = 10,
          frames = 10,
          rows = 4,
@@ -36,7 +34,6 @@ tribes:new_worker_type {
       },
       work = {
          directory = dirname,
-         basename = "work",
          fps = 10,
          frames = 92,
          rows = 11,

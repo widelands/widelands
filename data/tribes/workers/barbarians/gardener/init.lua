@@ -36,14 +36,12 @@ tribes:new_worker_type {
    animations = {
       idle = {
          directory = dirname,
-         basename = "idle",
          hotspot = { -4, 11 }
       }
    },
    spritesheets = {
       walk = {
          directory = dirname,
-         basename = "walk",
          fps = 10,
          frames = 10,
          rows = 4,
@@ -54,7 +52,6 @@ tribes:new_worker_type {
       -- TODO(GunChleoc): Walkload needs mipmap
       walkload = {
          directory = dirname,
-         basename = "walkload",
          fps = 10,
          frames = 10,
          rows = 4,
@@ -64,7 +61,6 @@ tribes:new_worker_type {
       },
       plant = {
          directory = dirname,
-         basename = "plant",
          fps = 10,
          frames = 15,
          rows = 5,
@@ -73,7 +69,6 @@ tribes:new_worker_type {
       },
       harvest = {
          directory = dirname,
-         basename = "harvest",
          fps = 5,
          frames = 20,
          rows = 5,
