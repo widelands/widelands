@@ -1,10 +1,5 @@
 dirname = path.dirname(__file__)
 
-animations = {}
-add_animation(animations, "idle", dirname, "idle", {16, 30}, 5)
-add_directional_animation(animations, "walk", dirname, "walk", {16, 30}, 10)
-
-
 tribes:new_worker_type {
    msgctxt = "barbarians_worker",
    name = "barbarians_recruit",
@@ -16,5 +11,21 @@ tribes:new_worker_type {
 
    buildcost = {}, -- This will give the worker the property "buildable"
 
-   animations = animations,
+   animations = {
+      idle = {
+         directory = dirname,
+         hotspot = { 10, 20 }
+      }
+   },
+   spritesheets = {
+      walk = {
+         directory = dirname,
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 10, 20 }
+      }
+   }
 }
