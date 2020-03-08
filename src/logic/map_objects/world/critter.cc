@@ -110,8 +110,8 @@ CritterDescr::CritterDescr(const std::string& init_descname,
 		throw GameDataError(
 		   "Critter %s: size_ %u out of range 1..10", name().c_str(), static_cast<unsigned>(size_));
 	}
-	if (reproduction_rate_ > 100) {
-		throw GameDataError("Critter %s: reproduction_rate_ %u out of range 0..100", name().c_str(),
+	if (reproduction_rate_ > 100 || reproduction_rate_ < 1) {
+		throw GameDataError("Critter %s: reproduction_rate_ %u out of range 1..100", name().c_str(),
 		                    static_cast<unsigned>(reproduction_rate_));
 	}
 	if (table.has_key("herbivore")) {
@@ -270,22 +270,12 @@ Bob::Task const Critter::taskRoam = {
 constexpr uint16_t kCritterMaxIdleTime = 2000;
 constexpr uint16_t kMealtime = 2500;
 constexpr uint32_t kMinReproductionAge = 5 * 60 * 1000;
-constexpr uint32_t kMinCritterLifetime = 30 * 60 * 1000;
-constexpr uint32_t kMaxCritterLifetime = 30 * 60 * 60 * 1000;
+constexpr uint32_t kMinCritterLifetime = 20 * 60 * 1000;
+constexpr uint32_t kMaxCritterLifetime = 10 * 60 * 60 * 1000;
 
 void Critter::roam_update(Game& game, State& state) {
 	if (get_signal().size())
 		return pop_task(game);
-
-	const uint32_t age = game.get_gametime() - creation_time_;
-	if (age > kMinCritterLifetime) {
-		const uint32_t f = game.logic_rand() % kMaxCritterLifetime;
-		if (f * f < age) {
-			// :(
-			molog("Goodby world :(\n");
-			return schedule_destroy(game);
-		}
-	}
 
 	// alternately move and idle
 	Time idle_time_min = 1000;
@@ -323,6 +313,26 @@ void Critter::roam_update(Game& game, State& state) {
 		idle_time_rnd = 1000;
 	}
 	state.ivar1 = 1;
+
+	const uint32_t age = game.get_gametime() - creation_time_;
+	const uint32_t reproduction_rate = descr().get_reproduction_rate();
+
+	{ // chance to die
+		const double r = reproduction_rate * reproduction_rate / 10000000.0;
+		const double i1 = r / kMinCritterLifetime;
+		const double i2 = (1 - r) / (kMaxCritterLifetime - kMinCritterLifetime);
+		assert(i1 * kMaxCritterLifetime <= 1.0);
+		assert(i2 >= i1);
+		const double d = i1 * age + std::max(0.0, (i2 - i1) * age * reproduction_rate / (kMaxCritterLifetime - kMinCritterLifetime));
+		assert(d >= 0.0);
+		assert(d <= 1.0);
+		if (game.logic_rand() % kMinCritterLifetime < d * kMinCritterLifetime) {
+			// :(
+			molog("Goodbye world :( (NOCOM aged %u minutes, %.12f)\n", age / 60000, d);
+			return schedule_destroy(game);
+		}
+	}
+
 	std::vector<Critter*> candidates_for_eating;
 	bool can_eat_immovable = false;
 	if (descr().is_herbivore() && get_position().field->get_immovable()) {
@@ -436,7 +446,7 @@ void Critter::roam_update(Game& game, State& state) {
 	}
 	// no food sadly, but perhaps another animal to make cute little fox cubs with…?
 	if (age > kMinReproductionAge &&
-	    game.logic_rand() % 100 < mating_partners * descr().get_reproduction_rate()) {
+	    game.logic_rand() % 100 < mating_partners * reproduction_rate) {
 		// A potential partner is interested in us. Now politely ask the game's birth control system
 		// for permission.
 		FindBobByName functor(descr().name());
@@ -451,11 +461,9 @@ void Critter::roam_update(Game& game, State& state) {
 		assert(population_size_5 >= population_size_2);
 		assert(population_size_9 >= population_size_5);
 		const size_t weighted_population =
-		   (4 * population_size_2 + 2 * population_size_5 + population_size_9) / 4;
+		   (3 * population_size_2 + 2 * population_size_5 + population_size_9) / 3;
 		assert(weighted_population >= population_size_2);
-		molog("%lu mating partners; %lu,%lu,%lu = %lu nearby\n", mating_partners, population_size_2,
-		      population_size_5, population_size_9, weighted_population);
-		if (game.logic_rand() % 1000 < 1000.0 / weighted_population) {
+		if ((game.logic_rand() % (reproduction_rate * reproduction_rate)) * std::exp2(weighted_population - mating_partners - 1) < reproduction_rate * reproduction_rate * weighted_population) {
 			molog("A cute little %s cub :)\n", descr().name().c_str());
 			game.create_critter(get_position(), descr().name());
 		}
