@@ -657,8 +657,9 @@ struct RequestSupplyPair {
 	};
 };
 
-using RSPairQueue = std::
-   priority_queue<RequestSupplyPair, std::vector<RequestSupplyPair>, RequestSupplyPair::Compare>;
+using RSPairQueue = std::priority_queue<RequestSupplyPair,
+                                        std::vector<RequestSupplyPair>,
+                                        RequestSupplyPair::Compare>;
 
 struct RSPairStruct {
 	RSPairQueue queue;
@@ -998,9 +999,8 @@ void Economy::handle_active_supplies(Game& game) {
 		} else {
 			wh = find_closest_warehouse(
 			   supply.get_position(game)->base_flag(), nullptr, 0,
-			   (!havenormal) ?
-			      WarehouseAcceptFn() :
-			      boost::bind(&accept_warehouse_if_policy, _1, type_, ware, StockPolicy::kNormal));
+			   (!havenormal) ? WarehouseAcceptFn() : boost::bind(&accept_warehouse_if_policy, _1,
+			                                                     type_, ware, StockPolicy::kNormal));
 		}
 		if (!wh) {
 			log("Warning: Economy::handle_active_supplies "

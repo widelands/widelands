@@ -199,7 +199,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 				   NEVER_HERE();
 			   }
 		   }
-	   });
+		});
 }
 
 const std::string

@@ -243,7 +243,7 @@ bool SaveHandler::save_game(Widelands::Game& game,
 	   [&game](FileSystem& fs) {
 		   Widelands::GameSaver gs(fs, game);
 		   gs.save();
-	   },
+		},
 	   complete_filename, fs_type_);
 	gsh.save();
 

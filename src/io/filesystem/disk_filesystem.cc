@@ -441,9 +441,8 @@ void RealFSImpl::fs_rename(const std::string& old_name, const std::string& new_n
 	const std::string fullname1 = canonicalize_name(old_name);
 	const std::string fullname2 = canonicalize_name(new_name);
 	if (rename(fullname1.c_str(), fullname2.c_str()) != 0)
-		throw FileError(
-		   "RealFSImpl::fs_rename", fullname1,
-		   std::string("unable to rename file to ") + fullname2 + ", " + strerror(errno));
+		throw FileError("RealFSImpl::fs_rename", fullname1, std::string("unable to rename file to ") +
+		                                                       fullname2 + ", " + strerror(errno));
 }
 
 /*****************************************************************************
