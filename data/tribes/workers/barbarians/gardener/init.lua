@@ -49,7 +49,6 @@ tribes:new_worker_type {
          directional = true,
          hotspot = { 8, 23 }
       },
-      -- TODO(GunChleoc): Walkload needs mipmap
       walkload = {
          directory = dirname,
          fps = 10,
