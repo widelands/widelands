@@ -329,7 +329,7 @@ void Critter::roam_update(Game& game, State& state) {
 		assert(d <= 1.0);
 		if (game.logic_rand() % kMinCritterLifetime < d * kMinCritterLifetime) {
 			// :(
-			molog("Goodbye world :( (NOCOM aged %u minutes, %.12f)\n", age / 60000, d);
+			molog("Goodbye world :(\n");
 			return schedule_destroy(game);
 		}
 	}
