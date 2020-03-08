@@ -280,9 +280,9 @@ void MapObjectDescr::add_animations(const LuaTable& table, Animation::Type anim_
 	for (const std::string& animname : table.keys<std::string>()) {
 		try {
 			std::unique_ptr<LuaTable> anim = table.get_table(animname);
-			// TODO(GunChleoc): Require basename after conversion has been completed
+			// TODO(GunChleoc): Maybe remove basename after conversion has been completed
 			const std::string basename =
-			   anim->has_key<std::string>("basename") ? anim->get_string("basename") : "";
+			   anim->has_key<std::string>("basename") ? anim->get_string("basename") : animname;
 			const bool is_directional =
 			   anim->has_key<std::string>("directional") ? anim->get_bool("directional") : false;
 			if (is_directional) {
