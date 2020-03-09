@@ -27,10 +27,10 @@ wl_library(sound
   DEPENDS
     base_i18n
     base_log
+    base_random
     io_fileread
     io_filesystem
     logic_exceptions
-    random
     sound_constants
     widelands_options
 )

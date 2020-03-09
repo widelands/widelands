@@ -41,7 +41,6 @@
 #include "logic/player.h"
 #include "sound/note_sound.h"
 #include "sound/sound_handler.h"
-#include "ui_basic/window.h"
 
 namespace Widelands {
 
