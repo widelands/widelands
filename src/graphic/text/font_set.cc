@@ -19,7 +19,6 @@
 
 #include "graphic/text/font_set.h"
 
-#include <cstdlib>
 #include <memory>
 
 #include "base/i18n.h"

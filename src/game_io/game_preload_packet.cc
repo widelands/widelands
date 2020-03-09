@@ -19,7 +19,6 @@
 
 #include "game_io/game_preload_packet.h"
 
-#include <ctime>
 #include <memory>
 
 #include "build_info.h"

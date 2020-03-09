@@ -19,11 +19,7 @@
 
 #include "graphic/build_texture_atlas.h"
 
-#include <map>
 #include <memory>
-#include <string>
-#include <unordered_set>
-#include <vector>
 
 #include <boost/algorithm/string/predicate.hpp>
 

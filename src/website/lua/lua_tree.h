@@ -20,10 +20,7 @@
 #ifndef WL_WEBSITE_LUA_LUA_TREE_H
 #define WL_WEBSITE_LUA_LUA_TREE_H
 
-#include <cassert>
 #include <memory>
-#include <string>
-#include <vector>
 
 #include "io/filesystem/filesystem.h"
 #include "website/lua/value.h"

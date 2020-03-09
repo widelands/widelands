@@ -20,10 +20,6 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_FINDNODE_H
 #define WL_LOGIC_MAP_OBJECTS_FINDNODE_H
 
-#include <vector>
-
-#include <stdint.h>
-
 #include "logic/widelands.h"
 
 namespace Widelands {

@@ -20,8 +20,6 @@
 #include "editor/editorinteractive.h"
 
 #include <memory>
-#include <string>
-#include <vector>
 
 #include <SDL_keycode.h>
 

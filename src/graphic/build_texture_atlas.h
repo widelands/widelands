@@ -22,7 +22,6 @@
 
 #include <map>
 #include <memory>
-#include <vector>
 
 #include "graphic/texture.h"
 
