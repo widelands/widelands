@@ -281,10 +281,10 @@ std::string FileSystem::get_homedir() {
 	if (home_char != nullptr && *home_char != 0 && check_writeable_for_data(home_char))             \
 		return home_char;
 
-	TRY_USE_AS_HOMEDIR("USERPROFILE");
-	TRY_USE_AS_HOMEDIR("HOMEPATH");
-	TRY_USE_AS_HOMEDIR("HOME");
-	TRY_USE_AS_HOMEDIR("APPDATA");
+	TRY_USE_AS_HOMEDIR("USERPROFILE")
+	TRY_USE_AS_HOMEDIR("HOMEPATH")
+	TRY_USE_AS_HOMEDIR("HOME")
+	TRY_USE_AS_HOMEDIR("APPDATA")
 
 	log("None of the directories was useable - falling back to \".\"\n");
 #else
