@@ -28,7 +28,9 @@
 #include <unistd.h>
 #endif
 
-#include "random/random.h"
+#include <SDL_mutex.h>
+
+#include "base/random.h"
 #include "sound/constants.h"
 #include "sound/fxset.h"
 #include "sound/songset.h"

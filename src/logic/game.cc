@@ -60,7 +60,6 @@
 #include "logic/replay.h"
 #include "logic/single_player_game_controller.h"
 #include "map_io/widelands_map_loader.h"
-#include "scripting/logic.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
