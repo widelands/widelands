@@ -357,8 +357,4 @@ tribes:new_tribe {
    ship = "empire_ship",
    ferry = "empire_ferry",
    port = "empire_port",
-   ironore = "iron_ore",
-   rawlog = "log",
-   refinedlog = "planks",
-   granite = "granite",
 }
