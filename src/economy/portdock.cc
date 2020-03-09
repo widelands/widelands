@@ -373,6 +373,8 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 		}
 	}
 
+	// TODO(Nordfriese): Quick and dirty fix to make #3683 #3544 #503 happen less often.
+	// The real fix will be part of Noordfrees:shipping-tweaks
 	for (auto it = waiting_.begin(); it != waiting_.end(); it = update_shippingitem(game, it))
 		;
 
