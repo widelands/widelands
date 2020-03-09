@@ -28,8 +28,6 @@
 
 namespace MapviewPixelFunctions {
 
-float calc_brightness(int32_t l, int32_t r, int32_t tl, int32_t tr, int32_t bl, int32_t br);
-
 Vector2f calc_pix_difference(const Widelands::Map&, Vector2f, Vector2f);
 float calc_pix_distance(const Widelands::Map&, Vector2f, Vector2f);
 
