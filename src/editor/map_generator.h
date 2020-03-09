@@ -22,9 +22,9 @@
 
 #include <memory>
 
+#include "base/random.h"
 #include "logic/map_objects/world/map_gen.h"
 #include "logic/widelands_geometry.h"
-#include "random/random.h"
 
 namespace Widelands {
 
