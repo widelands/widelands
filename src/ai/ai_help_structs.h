@@ -74,8 +74,6 @@ enum class BuildingAttribute : uint8_t {
 	kBuildingMatProducer,
 	kUpgradeSubstitutes,
 	kUpgradeExtends,
-	kLogRefiner,
-	kIronMine,
 	// TODO(Nordfriese): Someone should update the AI code to handle buildings that need waterways
 	// enabled
 	kNeedsSeafaring,
@@ -564,8 +562,7 @@ struct ShipObserver {
 };
 
 struct WareObserver {
-	uint8_t producers;
-	uint8_t consumers;
+	bool refined_build_material = false;
 	uint8_t preciousness;
 };
 
