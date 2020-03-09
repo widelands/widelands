@@ -74,10 +74,10 @@ wl_library(ui_fsmenu_loading_common
     singleplayer.h
   DEPENDS
     base_i18n
+    base_random
     graphic
     io_filesystem
     network
-    random
     ui_basic
     ui_fsmenu_base
     ui_fsmenu_main_menu
@@ -169,11 +169,11 @@ wl_library(ui_fsmenu_network
   DEPENDS
     base_i18n
     base_log
+    base_random
     build_info
     graphic
     graphic_text_layout
     network
-    random
     sound
     ui_basic
     ui_fsmenu_base
