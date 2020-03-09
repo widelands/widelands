@@ -19,11 +19,6 @@
 
 #include "map_io/coords_profile.h"
 
-#include <cstdio>
-#include <cstdlib>
-#include <memory>
-#include <string>
-
 #include "base/wexception.h"
 #include "io/profile.h"
 #include "logic/widelands_geometry.h"

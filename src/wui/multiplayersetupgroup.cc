@@ -20,7 +20,6 @@
 #include "wui/multiplayersetupgroup.h"
 
 #include <memory>
-#include <string>
 
 #include <boost/algorithm/string.hpp>
 

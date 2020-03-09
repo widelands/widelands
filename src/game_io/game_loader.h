@@ -22,8 +22,6 @@
 
 #include <string>
 
-#include <stdint.h>
-
 class FileSystem;
 
 namespace Widelands {

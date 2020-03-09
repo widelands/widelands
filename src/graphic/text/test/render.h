@@ -21,7 +21,6 @@
 #define WL_GRAPHIC_TEXT_TEST_RENDER_H
 
 #include <memory>
-#include <string>
 
 #include "graphic/text/rt_render.h"
 

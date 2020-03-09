@@ -17,7 +17,6 @@
  *
  */
 
-#include <exception>
 #ifdef _WIN32
 #include <sstream>
 #endif

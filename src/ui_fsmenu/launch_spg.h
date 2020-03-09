@@ -21,7 +21,6 @@
 #define WL_UI_FSMENU_LAUNCH_SPG_H
 
 #include <memory>
-#include <string>
 
 #include "graphic/playercolor.h"
 #include "logic/game_settings.h"

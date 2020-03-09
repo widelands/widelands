@@ -20,10 +20,7 @@
 #ifndef WL_NETWORK_NETWORK_H
 #define WL_NETWORK_NETWORK_H
 
-#include <exception>
 #include <functional>
-#include <string>
-#include <vector>
 
 #include <boost/asio.hpp>
 #include <boost/lexical_cast.hpp>

@@ -19,10 +19,7 @@
 
 #include "logic/map_objects/tribes/building.h"
 
-#include <cstdio>
-#include <cstring>
 #include <memory>
-#include <sstream>
 
 #include <boost/algorithm/string.hpp>
 

@@ -20,8 +20,6 @@
 #ifndef WL_SCRIPTING_LUA_ERRORS_H
 #define WL_SCRIPTING_LUA_ERRORS_H
 
-#include <string>
-
 #include "base/wexception.h"
 
 class LuaError : public WException {

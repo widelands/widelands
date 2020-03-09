@@ -20,8 +20,6 @@
 #ifndef WL_LOGIC_CMD_CALCULATE_STATISTICS_H
 #define WL_LOGIC_CMD_CALCULATE_STATISTICS_H
 
-#include <string>
-
 #include "logic/cmd_queue.h"
 
 namespace Widelands {

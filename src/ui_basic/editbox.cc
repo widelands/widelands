@@ -19,10 +19,7 @@
 
 #include "ui_basic/editbox.h"
 
-#include <algorithm>
-#include <limits>
 #include <memory>
-#include <string>
 
 #include <SDL_keycode.h>
 

@@ -21,7 +21,6 @@
 
 #ifndef _WIN32
 #ifndef __APPLE__
-#include <cstdlib>
 
 #include <execinfo.h>
 #endif

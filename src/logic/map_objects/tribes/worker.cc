@@ -19,7 +19,6 @@
 
 #include "logic/map_objects/tribes/worker.h"
 
-#include <iterator>
 #include <memory>
 #include <tuple>
 
@@ -527,8 +526,8 @@ int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map,
 // If landbased_ is false, the behaviour is modified to instead accept the node
 // only if *at least one* adjacent triangle has MOVECAPS_SWIM.
 struct FindNodeSpace {
-	explicit FindNodeSpace(BaseImmovable* const ignoreimm, bool land)
-	   : ignore_immovable_(ignoreimm), landbased_(land) {
+	explicit FindNodeSpace(bool land)
+	   : landbased_(land) {
 	}
 
 	bool accept(const EditorGameBase& egbase, const FCoords& coords) const {
@@ -538,11 +537,8 @@ struct FindNodeSpace {
 
 		for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 			FCoords const neighb = egbase.map().get_neighbour(coords, dir);
-			if (neighb.field->get_immovable() == ignore_immovable_) {
-				continue;
-			}
 			if (landbased_) {
-				if (!(neighb.field->nodecaps() & MOVECAPS_WALK))
+				if (!(neighb.field->maxcaps() & MOVECAPS_WALK))
 					return false;
 			} else {
 				if (neighb.field->nodecaps() & MOVECAPS_SWIM) {
@@ -550,12 +546,10 @@ struct FindNodeSpace {
 				}
 			}
 		}
-
 		return landbased_;
 	}
 
 private:
-	BaseImmovable* ignore_immovable_;
 	bool landbased_;
 };
 
@@ -583,7 +577,7 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 		functor.add(FindNodeImmovableAttribute(action.iparam5), true);
 
 	if (action.iparam3)
-		functor.add(FindNodeSpace(get_location(game), findnodesize != FindNodeSize::Size::sizeSwim));
+		functor.add(FindNodeSpace(findnodesize != FindNodeSize::Size::sizeSwim));
 
 	if (action.iparam7)
 		functor.add(FindNodeTerraform());
@@ -606,7 +600,7 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 
 			if (action.iparam3)
 				functorAnyFull.add(
-				   FindNodeSpace(get_location(game), findnodesize != FindNodeSize::Size::sizeSwim));
+				   FindNodeSpace(findnodesize != FindNodeSize::Size::sizeSwim));
 
 			// If there are fields full of fish, we change the type of notification
 			if (map.find_reachable_fields(game, area, &list, cstep, functorAnyFull)) {

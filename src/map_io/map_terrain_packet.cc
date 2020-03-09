@@ -19,8 +19,6 @@
 
 #include "map_io/map_terrain_packet.h"
 
-#include <map>
-
 #include "base/log.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
