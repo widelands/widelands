@@ -21,7 +21,6 @@
 #define WL_GRAPHIC_TEXTURE_ATLAS_H
 
 #include <memory>
-#include <vector>
 
 #include "base/macros.h"
 #include "graphic/texture.h"

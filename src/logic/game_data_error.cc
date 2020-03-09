@@ -20,7 +20,6 @@
 #include "logic/game_data_error.h"
 
 #include <cstdarg>
-#include <cstdio>
 
 #include <boost/format.hpp>
 

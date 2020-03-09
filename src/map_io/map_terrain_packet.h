@@ -20,8 +20,6 @@
 #ifndef WL_MAP_IO_MAP_TERRAIN_PACKET_H
 #define WL_MAP_IO_MAP_TERRAIN_PACKET_H
 
-#include <string>
-
 class WorldLegacyLookupTable;
 class FileSystem;
 

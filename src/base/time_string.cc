@@ -21,9 +21,6 @@
 
 #include <cassert>
 #include <ctime>
-#include <string>
-
-#include <stdint.h>
 
 #include "base/i18n.h"
 

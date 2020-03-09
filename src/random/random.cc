@@ -19,7 +19,6 @@
 
 #include "random/random.h"
 
-#include <cstdio>
 #include <random>
 
 #include <boost/uuid/uuid.hpp>

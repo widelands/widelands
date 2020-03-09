@@ -21,7 +21,6 @@
 #define WL_GRAPHIC_TEXT_RENDERED_TEXT_H
 
 #include <memory>
-#include <vector>
 
 #include "base/rect.h"
 #include "base/vector.h"

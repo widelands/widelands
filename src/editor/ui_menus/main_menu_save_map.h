@@ -21,7 +21,6 @@
 #define WL_EDITOR_UI_MENUS_MAIN_MENU_SAVE_MAP_H
 
 #include <memory>
-#include <string>
 
 #include "editor/editorinteractive.h"
 #include "editor/ui_menus/main_menu_load_or_save_map.h"

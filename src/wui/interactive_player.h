@@ -21,7 +21,6 @@
 #define WL_WUI_INTERACTIVE_PLAYER_H
 
 #include <memory>
-#include <vector>
 
 #include <SDL_keyboard.h>
 

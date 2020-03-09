@@ -22,9 +22,6 @@
 
 #include <map>
 #include <memory>
-#include <set>
-#include <string>
-#include <vector>
 
 #include "base/macros.h"
 #include "base/rect.h"

@@ -20,10 +20,7 @@
 #ifndef WL_IO_PROFILE_H
 #define WL_IO_PROFILE_H
 
-#include <cstring>
 #include <memory>
-#include <string>
-#include <vector>
 
 #include "base/macros.h"
 #include "base/vector.h"

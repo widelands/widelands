@@ -19,8 +19,6 @@
 #include "wui/mapdetails.h"
 
 #include <algorithm>
-#include <cstdio>
-#include <memory>
 
 #include "base/i18n.h"
 #include "base/log.h"

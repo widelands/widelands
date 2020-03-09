@@ -21,10 +21,7 @@
 #ifndef WL_AI_DEFAULTAI_H
 #define WL_AI_DEFAULTAI_H
 
-#include <map>
 #include <memory>
-#include <unordered_map>
-#include <unordered_set>
 
 #include "ai/ai_help_structs.h"
 #include "ai/computer_player.h"

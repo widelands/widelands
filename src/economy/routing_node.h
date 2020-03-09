@@ -20,8 +20,6 @@
 #ifndef WL_ECONOMY_ROUTING_NODE_H
 #define WL_ECONOMY_ROUTING_NODE_H
 
-#include <vector>
-
 #include "logic/cookie_priority_queue.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "logic/widelands_geometry.h"

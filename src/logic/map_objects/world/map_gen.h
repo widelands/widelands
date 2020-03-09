@@ -21,8 +21,6 @@
 #define WL_LOGIC_MAP_OBJECTS_WORLD_MAP_GEN_H
 
 #include <map>
-#include <string>
-#include <vector>
 
 #include "logic/map_objects/world/terrain_description.h"
 

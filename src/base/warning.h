@@ -20,11 +20,8 @@
 #ifndef WL_BASE_WARNING_H
 #define WL_BASE_WARNING_H
 
-#include <cstring>
 #include <exception>
 #include <string>
-
-#include <stdint.h>
 
 #include "base/macros.h"
 
