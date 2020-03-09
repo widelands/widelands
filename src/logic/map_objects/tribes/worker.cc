@@ -523,7 +523,7 @@ int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map,
 // fields, trees, rocks and such on triangles and keep the nodes
 // passable. See code structure issue #1096824.
 struct FindNodeSpace {
-	explicit FindNodeSpace(BaseImmovable* const ignoreimm) : ignoreimmovable(ignoreimm) {
+	explicit FindNodeSpace() {
 	}
 
 	bool accept(const EditorGameBase& egbase, const FCoords& coords) const {
@@ -533,8 +533,7 @@ struct FindNodeSpace {
 		for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 			FCoords const neighb = egbase.map().get_neighbour(coords, dir);
 
-			if (!(neighb.field->nodecaps() & MOVECAPS_WALK) &&
-			    neighb.field->get_immovable() != ignoreimmovable)
+			if (!(neighb.field->maxcaps() & MOVECAPS_WALK))
 				return false;
 		}
 
@@ -568,7 +567,7 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 		functor.add(FindNodeImmovableAttribute(action.iparam5), true);
 
 	if (action.iparam3)
-		functor.add(FindNodeSpace(get_location(game)));
+		functor.add(FindNodeSpace());
 
 	if (action.iparam7)
 		functor.add(FindNodeTerraform());
@@ -590,7 +589,7 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 				functorAnyFull.add(FindNodeImmovableAttribute(action.iparam5), true);
 
 			if (action.iparam3)
-				functorAnyFull.add(FindNodeSpace(get_location(game)));
+				functorAnyFull.add(FindNodeSpace());
 
 			// If there are fields full of fish, we change the type of notification
 			if (map.find_reachable_fields(game, area, &list, cstep, functorAnyFull)) {
