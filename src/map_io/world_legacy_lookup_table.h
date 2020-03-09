@@ -21,6 +21,7 @@
 #define WL_MAP_IO_WORLD_LEGACY_LOOKUP_TABLE_H
 
 #include <memory>
+#include <string>
 
 #include "base/macros.h"
 
