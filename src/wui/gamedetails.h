@@ -23,13 +23,11 @@
 #include <memory>
 
 #include "graphic/image.h"
-#include "io/filesystem/filesystem.h"
 #include "logic/game_controller.h"
-#include "logic/widelands.h"
-#include "savegamedata.h"
 #include "ui_basic/box.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/multilinetextarea.h"
+#include "wui/savegamedata.h"
 
 /**
  * Show a Panel with information about a savegame/replay file

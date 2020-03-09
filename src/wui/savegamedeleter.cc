@@ -85,9 +85,8 @@ void SavegameDeleter::notify_deletion_failed(const std::vector<SavegameData>& to
 	msgBox.run<UI::Panel::Returncodes>();
 }
 
-const std::string
-SavegameDeleter::create_header_for_deletion_failed_window(const size_t no_to_be_deleted,
-                                                          const size_t no_failed) const {
+std::string SavegameDeleter::create_header_for_deletion_failed_window(size_t no_to_be_deleted,
+                                                                      size_t no_failed) const {
 	if (no_to_be_deleted == 1) {
 		return _("The game could not be deleted.");
 	} else {
@@ -116,9 +115,8 @@ ReplayDeleter::create_header_for_confirmation_window(const size_t no_selections)
 	return header;
 }
 
-const std::string
-ReplayDeleter::create_header_for_deletion_failed_window(const size_t no_to_be_deleted,
-                                                        const size_t no_failed) const {
+std::string ReplayDeleter::create_header_for_deletion_failed_window(size_t no_to_be_deleted,
+                                                                    size_t no_failed) const {
 	if (no_to_be_deleted == 1) {
 		return _("The replay could not be deleted.");
 	} else {

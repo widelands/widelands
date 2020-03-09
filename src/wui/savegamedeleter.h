@@ -29,8 +29,8 @@ private:
 
 	void notify_deletion_failed(const std::vector<SavegameData>& to_be_deleted,
 	                            const uint32_t no_failed) const;
-	virtual const std::string create_header_for_deletion_failed_window(const size_t no_to_be_deleted,
-	                                                                   const size_t no_failed) const;
+	virtual std::string create_header_for_deletion_failed_window(size_t no_to_be_deleted,
+	                                                             size_t no_failed) const;
 
 	UI::Panel* parent_;
 };
@@ -42,9 +42,8 @@ public:
 private:
 	const std::string
 	create_header_for_confirmation_window(const size_t no_selections) const override;
-	const std::string
-	create_header_for_deletion_failed_window(const size_t no_to_be_deleted,
-	                                         const size_t no_failed) const override;
+	std::string create_header_for_deletion_failed_window(size_t no_to_be_deleted,
+	                                                     size_t no_failed) const override;
 	uint32_t try_to_delete(const std::vector<SavegameData>& to_be_deleted) const override;
 };
 

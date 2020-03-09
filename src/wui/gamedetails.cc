@@ -26,7 +26,6 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
-#include "base/time_string.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
 #include "graphic/text_layout.h"

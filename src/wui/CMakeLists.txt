@@ -105,7 +105,6 @@ wl_library(wui_common_gamedetails
     logic_constants
     logic_filesystem_constants
     logic_game_controller
-    logic_game_settings
     ui_basic
 )
 

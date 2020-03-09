@@ -1,4 +1,4 @@
-#include "savegameloader.h"
+#include "wui/savegameloader.h"
 
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
@@ -188,9 +188,9 @@ void SavegameLoader::add_sub_dir(const std::string& gamefilename,
 ReplayLoader::ReplayLoader(Widelands::Game& game) : SavegameLoader(game) {
 }
 
-bool ReplayLoader::is_valid_gametype(const SavegameData& gamedata) const {
-	return true;  // why?? what is the purpose of GameController::GameType::kReplay
-	              //	return gamedata.is_replay(); <-- should be this, right?!
+bool ReplayLoader::is_valid_gametype(const SavegameData&) const {
+	return true;  // why?? what is the purpose of GameController::GameType::kReplay?
+	// return gamedata.is_replay(); <-- should be this, right?!
 }
 
 std::string ReplayLoader::get_savename(const std::string& gamefilename) const {
