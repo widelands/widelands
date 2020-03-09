@@ -21,7 +21,6 @@
 #define WL_LOGIC_MESSAGE_QUEUE_H
 
 #include <cassert>
-#include <map>
 #include <memory>
 
 #include "base/macros.h"

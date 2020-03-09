@@ -21,7 +21,6 @@
 #define WL_UI_FSMENU_LAUNCH_MPG_H
 
 #include <memory>
-#include <string>
 
 #include "logic/game_settings.h"
 #include "ui_basic/button.h"
@@ -33,10 +32,7 @@
 
 struct ChatProvider;
 struct GameChatPanel;
-class GameController;
-struct GameSettingsProvider;
 struct MultiPlayerSetupGroup;
-class LuaInterface;
 
 /**
  * Fullscreen menu for setting map and mapsettings for single and multi player

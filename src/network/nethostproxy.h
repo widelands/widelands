@@ -20,7 +20,6 @@
 #ifndef WL_NETWORK_NETHOSTPROXY_H
 #define WL_NETWORK_NETHOSTPROXY_H
 
-#include <map>
 #include <memory>
 
 #include "network/bufferedconnection.h"

@@ -26,7 +26,6 @@
  * Further explanations for all functions and its return values
  * can be found in io/profile.cc
  */
-class Section;
 
 /*
  * Check if all options has been read.

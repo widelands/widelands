@@ -19,14 +19,8 @@
 
 #include "io/profile.h"
 
-#include <algorithm>
-#include <cctype>
 #include <cstdarg>
-#include <cstdio>
-#include <cstdlib>
 #include <cstring>
-#include <limits>
-#include <string>
 
 #include <boost/algorithm/string.hpp>
 
@@ -35,6 +29,7 @@
 #include "base/wexception.h"
 #include "build_info.h"
 #include "io/fileread.h"
+#include "io/filesystem/filesystem_exceptions.h"
 #include "io/filewrite.h"
 
 #define TRUE_WORDS 7

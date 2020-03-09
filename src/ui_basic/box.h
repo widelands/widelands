@@ -21,7 +21,6 @@
 #define WL_UI_BASIC_BOX_H
 
 #include <memory>
-#include <vector>
 
 #include "graphic/align.h"
 #include "ui_basic/panel.h"

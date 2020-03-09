@@ -26,8 +26,6 @@
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilinetextarea.h"
 
-struct ChatProvider;
-
 /**
  * Provides a panel that contains chat message scrollbar and a chat message
  * entry field.

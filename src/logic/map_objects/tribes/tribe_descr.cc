@@ -19,15 +19,9 @@
 
 #include "logic/map_objects/tribes/tribe_descr.h"
 
-#include <algorithm>
-#include <iostream>
 #include <memory>
 
-#include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
-#include "base/macros.h"
 #include "base/wexception.h"
 #include "graphic/animation/animation_manager.h"
 #include "graphic/graphic.h"
@@ -218,11 +212,6 @@ TribeDescr::TribeDescr(const LuaTable& table,
 
 		port_ = add_special_building(table.get_string("port"));
 
-		ironore_ = add_special_ware(table.get_string("ironore"));
-		rawlog_ = add_special_ware(table.get_string("rawlog"));
-		refinedlog_ = add_special_ware(table.get_string("refinedlog"));
-		granite_ = add_special_ware(table.get_string("granite"));
-
 		if (table.has_key<std::string>("toolbar")) {
 			toolbar_image_set_.reset(new ToolbarImageset(*table.get_table("toolbar")));
 		}
@@ -351,22 +340,6 @@ DescriptionIndex TribeDescr::port() const {
 DescriptionIndex TribeDescr::ferry() const {
 	assert(tribes_.worker_exists(ferry_));
 	return ferry_;
-}
-DescriptionIndex TribeDescr::ironore() const {
-	assert(tribes_.ware_exists(ironore_));
-	return ironore_;
-}
-DescriptionIndex TribeDescr::rawlog() const {
-	assert(tribes_.ware_exists(rawlog_));
-	return rawlog_;
-}
-DescriptionIndex TribeDescr::refinedlog() const {
-	assert(tribes_.ware_exists(refinedlog_));
-	return refinedlog_;
-}
-DescriptionIndex TribeDescr::granite() const {
-	assert(tribes_.ware_exists(granite_));
-	return granite_;
 }
 
 const std::vector<DescriptionIndex>& TribeDescr::trainingsites() const {

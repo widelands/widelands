@@ -19,8 +19,6 @@
 
 #include "logic/map_objects/terrain_affinity.h"
 
-#include <vector>
-
 #include "logic/field.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"

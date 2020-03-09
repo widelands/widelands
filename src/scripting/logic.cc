@@ -30,7 +30,6 @@
 #include "scripting/lua_coroutine.h"
 #include "scripting/lua_editor.h"
 #include "scripting/lua_game.h"
-#include "scripting/lua_globals.h"
 #include "scripting/lua_map.h"
 #include "scripting/lua_root.h"
 #include "scripting/lua_table.h"

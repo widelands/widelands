@@ -20,13 +20,8 @@
 #ifndef WL_WUI_QUICKNAVIGATION_H
 #define WL_WUI_QUICKNAVIGATION_H
 
-#include <vector>
-
 #include <SDL_keyboard.h>
-#include <boost/function.hpp>
-#include <stdint.h>
 
-#include "base/vector.h"
 #include "wui/mapview.h"
 
 /**

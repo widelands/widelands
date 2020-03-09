@@ -19,9 +19,6 @@
 
 #include "graphic/game_renderer.h"
 
-#include <memory>
-
-#include "graphic/gl/coordinate_conversion.h"
 #include "graphic/render_queue.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
@@ -29,8 +26,6 @@
 #include "logic/map_objects/world/world.h"
 #include "logic/player.h"
 #include "wui/interactive_base.h"
-#include "wui/mapviewpixelconstants.h"
-#include "wui/mapviewpixelfunctions.h"
 
 void draw_border_markers(const FieldsToDraw::Field& field,
                          const float scale,

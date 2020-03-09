@@ -19,8 +19,6 @@
 
 #include "map_io/map_waterway_packet.h"
 
-#include <map>
-
 #include "base/macros.h"
 #include "economy/waterway.h"
 #include "io/fileread.h"

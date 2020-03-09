@@ -20,14 +20,12 @@
 #define WL_GRAPHIC_WORDWRAP_H
 
 #include <memory>
-#include <string>
+
 #include <unicode/uchar.h>
-#include <vector>
 
 #include "base/vector.h"
 #include "graphic/align.h"
 #include "graphic/color.h"
-#include "graphic/graphic.h"
 #include "graphic/text/sdl_ttf_font.h"
 
 class RenderTarget;

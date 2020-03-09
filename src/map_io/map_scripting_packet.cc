@@ -19,8 +19,6 @@
 
 #include "map_io/map_scripting_packet.h"
 
-#include <string>
-
 #include <boost/algorithm/string/predicate.hpp>
 
 #include "base/macros.h"
@@ -30,7 +28,6 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
-#include "logic/map_objects/world/world.h"
 #include "scripting/logic.h"
 
 namespace Widelands {

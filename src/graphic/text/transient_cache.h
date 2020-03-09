@@ -24,10 +24,8 @@
 #include <list>
 #include <map>
 #include <memory>
-#include <string>
 
 #include <SDL.h>
-#include <boost/utility.hpp>
 
 #include "base/macros.h"
 

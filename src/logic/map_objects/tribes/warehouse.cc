@@ -19,11 +19,6 @@
 
 #include "logic/map_objects/tribes/warehouse.h"
 
-#include <algorithm>
-#include <limits>
-
-#include <boost/format.hpp>
-
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
@@ -33,7 +28,6 @@
 #include "economy/portdock.h"
 #include "economy/request.h"
 #include "economy/ship_fleet.h"
-#include "economy/ware_instance.h"
 #include "economy/warehousesupply.h"
 #include "economy/wares_queue.h"
 #include "logic/editor_game_base.h"
@@ -438,8 +432,7 @@ bool Warehouse::load_finish_planned_worker(PlannedWorkers& pw) {
 	for (WorkerDescr::Buildcost::const_iterator cost_it = cost.begin(); cost_it != cost.end();
 	     ++cost_it, ++idx) {
 		WareWorker type;
-		DescriptionIndex wareindex;
-		wareindex = owner().tribe().ware_index(cost_it->first);
+		DescriptionIndex wareindex = owner().tribe().ware_index(cost_it->first);
 		if (owner().tribe().has_ware(wareindex)) {
 			type = wwWARE;
 		} else {

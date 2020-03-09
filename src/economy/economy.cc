@@ -20,9 +20,6 @@
 #include "economy/economy.h"
 
 #include <memory>
-#include <unordered_set>
-
-#include <boost/bind.hpp>
 
 #include "base/macros.h"
 #include "base/wexception.h"

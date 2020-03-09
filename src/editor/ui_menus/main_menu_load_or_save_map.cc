@@ -19,7 +19,6 @@
 
 #include "editor/ui_menus/main_menu_load_or_save_map.h"
 
-#include <cstdio>
 #include <memory>
 
 #include "base/i18n.h"

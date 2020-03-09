@@ -92,6 +92,7 @@ wl_library(widelands_ball_of_mud
     wlapplication.h
     wlapplication_messages.cc
     wlapplication_messages.h
+  USES_BOOST_REGEX
   USES_SDL2
   USES_SDL2_IMAGE
   USES_SDL2_TTF
@@ -106,6 +107,7 @@ wl_library(widelands_ball_of_mud
     graphic
     graphic_fonthandler
     graphic_text
+    graphic_text_layout
     io_filesystem
     logic
     logic_exceptions

@@ -20,8 +20,6 @@
 #ifndef WL_SCRIPTING_LUA_MAP_H
 #define WL_SCRIPTING_LUA_MAP_H
 
-#include <set>
-
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/portdock.h"
@@ -42,13 +40,10 @@
 #include "scripting/luna.h"
 
 namespace Widelands {
-class SoldierDescr;
 class BuildingDescr;
 class Bob;
 class ResourceDescription;
 class WareDescr;
-class WorkerDescr;
-class TerrainDescription;
 class TribeDescr;
 }  // namespace Widelands
 

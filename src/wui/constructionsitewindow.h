@@ -21,17 +21,16 @@
 #define WL_WUI_CONSTRUCTIONSITEWINDOW_H
 
 #include <memory>
-#include <vector>
 
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/progressbar.h"
 #include "ui_basic/radiobutton.h"
-#include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "wui/buildingwindow.h"
 #include "wui/inputqueuedisplay.h"
+#include "wui/waresdisplay.h"
 
 /**
  * Status window for construction sites.

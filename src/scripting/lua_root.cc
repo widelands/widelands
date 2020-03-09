@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "logic/cmd_luacoroutine.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
@@ -34,7 +32,6 @@
 #include "logic/map_objects/world/world.h"
 #include "scripting/globals.h"
 #include "scripting/lua_coroutine.h"
-#include "scripting/lua_editor.h"
 #include "scripting/lua_game.h"
 #include "scripting/lua_map.h"
 #include "scripting/lua_table.h"

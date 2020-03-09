@@ -21,19 +21,14 @@
 #define WL_ECONOMY_EXPEDITION_BOOTSTRAP_H
 
 #include <memory>
-#include <vector>
 
 #include "base/macros.h"
 #include "economy/input_queue.h"
 
 namespace Widelands {
 
-class Economy;
 class EditorGameBase;
-class Game;
-class MapObjectLoader;
 class PortDock;
-class Request;
 class WareInstance;
 class Warehouse;
 class Worker;

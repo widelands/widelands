@@ -22,15 +22,10 @@
 #include "io/filesystem/filesystem.h"
 
 #include <cassert>
-#include <cerrno>
-#include <climits>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-#include <iterator>
 #include <list>
-#include <string>
-#include <vector>
+#ifdef _WIN32
+#include <cstdio>
+#endif
 
 // We have to add Boost to this block to make codecheck happy
 #include <boost/algorithm/string/predicate.hpp>
@@ -39,7 +34,6 @@
 #include <boost/lexical_cast.hpp>
 #ifdef _WIN32
 #include <direct.h>
-#include <io.h>
 #include <windows.h>
 #else
 #include <glob.h>
@@ -53,8 +47,8 @@
 #include "config.h"
 #include "graphic/text_layout.h"
 #include "io/filesystem/disk_filesystem.h"
+#include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "io/filesystem/zip_exceptions.h"
 #include "io/filesystem/zip_filesystem.h"
 
 #ifdef _WIN32

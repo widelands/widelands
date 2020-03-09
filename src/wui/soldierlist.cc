@@ -19,8 +19,7 @@
 
 #include "wui/soldierlist.h"
 
-#include <boost/bind.hpp>
-#include <boost/format.hpp>
+#include <functional>
 
 #include "base/macros.h"
 #include "graphic/font_handler.h"
@@ -34,6 +33,7 @@
 #include "logic/player.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
+#include "ui_basic/textarea.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/soldiercapacitycontrol.h"
 
@@ -52,7 +52,7 @@ constexpr int kIconBorder = 2;
  * Iconic representation of soldiers, including their levels and current health.
  */
 struct SoldierPanel : UI::Panel {
-	using SoldierFn = boost::function<void(const Soldier*)>;
+	using SoldierFn = std::function<void(const Soldier*)>;
 
 	SoldierPanel(UI::Panel& parent,
 	             Widelands::EditorGameBase& egbase,

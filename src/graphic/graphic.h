@@ -32,7 +32,6 @@
 class AnimationManager;
 class RenderTarget;
 class Screen;
-class StreamWrite;
 
 // A graphics card must at least support this size for texture for Widelands to
 // run.

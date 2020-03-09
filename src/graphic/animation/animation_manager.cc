@@ -24,6 +24,7 @@
 #include "graphic/animation/nonpacked_animation.h"
 #include "graphic/animation/spritesheet_animation.h"
 #include "graphic/graphic.h"
+#include "graphic/texture.h"
 
 uint32_t
 AnimationManager::load(const LuaTable& table, const std::string& basename, Animation::Type type) {

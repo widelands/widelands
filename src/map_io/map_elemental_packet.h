@@ -22,8 +22,6 @@
 
 #include <string>
 
-#include <stdint.h>
-
 #include "map_io/map_data_packet.h"
 
 namespace Widelands {

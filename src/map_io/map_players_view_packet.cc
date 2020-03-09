@@ -19,11 +19,6 @@
 
 #include "map_io/map_players_view_packet.h"
 
-#include <iostream>
-#include <typeinfo>
-
-#include <boost/format.hpp>
-
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
@@ -31,6 +26,7 @@
 #include "economy/road.h"
 #include "economy/waterway.h"
 #include "io/fileread.h"
+#include "io/filesystem/filesystem_exceptions.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"

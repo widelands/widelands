@@ -21,26 +21,16 @@
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_CONSTRUCTIONSITE_H
 
 #include <memory>
-#include <vector>
 
 #include "base/macros.h"
 #include "logic/map_objects/tribes/building_settings.h"
 #include "logic/map_objects/tribes/partially_finished_building.h"
 #include "scripting/lua_table.h"
 
-class FileRead;
-class FileWrite;
-
 namespace Widelands {
 
 class Building;
-class MilitarySiteDescr;
-class ProductionSiteDescr;
-class Request;
 enum class StockPolicy;
-class TrainingSiteDescr;
-class WarehouseDescr;
-class WaresQueue;
 
 /// Per-player and per-field constructionsite information
 struct ConstructionsiteInformation {

@@ -20,13 +20,11 @@
 #include "graphic/gl/road_program.h"
 
 #include <cassert>
-#include <cmath>
 
 #include "base/log.h"
 #include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
-#include "graphic/image_io.h"
 #include "graphic/texture.h"
 #include "logic/player.h"
 

@@ -20,12 +20,9 @@
 #ifndef WL_WUI_ECONOMY_OPTIONS_WINDOW_H
 #define WL_WUI_ECONOMY_OPTIONS_WINDOW_H
 
-#include <map>
 #include <memory>
-#include <string>
 
 #include "economy/economy.h"
-#include "logic/map_objects/tribes/tribe_descr.h"
 #include "notifications/notifications.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"

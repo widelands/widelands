@@ -19,10 +19,10 @@
 
 #include "io/filesystem/layered_filesystem.h"
 
-#include <cstdio>
 #include <memory>
 
 #include "base/wexception.h"
+#include "io/filesystem/filesystem_exceptions.h"
 #include "io/streamread.h"
 
 LayeredFileSystem* g_fs;

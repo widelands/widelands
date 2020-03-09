@@ -19,9 +19,8 @@
 
 #include "map_io/map_images.h"
 
-#include <memory>
-
 #include "graphic/graphic.h"
+#include "graphic/image_cache.h"
 #include "graphic/image_io.h"
 
 namespace Widelands {

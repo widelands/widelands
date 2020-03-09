@@ -20,16 +20,12 @@
 #ifndef WL_WUI_SUGGESTED_TEAMS_BOX_H
 #define WL_WUI_SUGGESTED_TEAMS_BOX_H
 
-#include <set>
-#include <string>
-
 #include "logic/widelands.h"
 #include "ui_basic/box.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/textarea.h"
 
 namespace UI {
-struct Box;
 
 struct SuggestedTeamsBox : public UI::Box {
 	SuggestedTeamsBox(Panel* parent,

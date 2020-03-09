@@ -20,19 +20,12 @@
 #ifndef WL_MAP_IO_MAP_OBJECT_LOADER_H
 #define WL_MAP_IO_MAP_OBJECT_LOADER_H
 
-#include <map>
-#include <typeinfo>
-
-#include <stdint.h>
-
 #include "base/macros.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/map_object.h"
 
 namespace Widelands {
 class Bob;
-class MapObject;
-class EditorGameBase;
 
 /*
  * This class helps to
@@ -92,16 +85,13 @@ public:
 	void load_finish_game(Game& g);
 
 	// TODO(Nordfriese): This is one exceedingly ugly hack for savegame compatibiliy.
-	Serial get_economy_savegame_compatibility(Serial ware_economy);
-	Serial get_existing_economy_savegame_compatibility(Serial ware_economy) const;
+	Serial get_economy_savegame_compatibility(Serial ware_economy) const;
 
 private:
 	using ReverseMapObjectMap = std::map<Serial, MapObject*>;
 
 	std::map<MapObject*, bool> loaded_objects_;
 	ReverseMapObjectMap objects_;
-
-	std::map<Serial, Serial> economy_savegame_compatibility_;
 
 	std::vector<MapObject*> schedule_destroy_;
 	std::vector<Bob*> schedule_act_;

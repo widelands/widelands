@@ -22,8 +22,6 @@
 #include <memory>
 
 #include <boost/algorithm/string/join.hpp>
-#include <boost/bind.hpp>
-#include <boost/format.hpp>
 
 #include "base/log.h"
 #include "base/macros.h"
@@ -32,7 +30,6 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "economy/waterway.h"
-#include "graphic/default_resolution.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
@@ -52,7 +49,6 @@
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
 #include "wui/logmessage.h"
-#include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/minimap.h"
 #include "wui/unique_window_handler.h"
