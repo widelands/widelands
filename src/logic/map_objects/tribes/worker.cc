@@ -526,8 +526,7 @@ int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map,
 // If landbased_ is false, the behaviour is modified to instead accept the node
 // only if *at least one* adjacent triangle has MOVECAPS_SWIM.
 struct FindNodeSpace {
-	explicit FindNodeSpace(bool land)
-	   : landbased_(land) {
+	explicit FindNodeSpace(bool land) : landbased_(land) {
 	}
 
 	bool accept(const EditorGameBase& egbase, const FCoords& coords) const {
@@ -599,8 +598,7 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 				functorAnyFull.add(FindNodeImmovableAttribute(action.iparam5), true);
 
 			if (action.iparam3)
-				functorAnyFull.add(
-				   FindNodeSpace(findnodesize != FindNodeSize::Size::sizeSwim));
+				functorAnyFull.add(FindNodeSpace(findnodesize != FindNodeSize::Size::sizeSwim));
 
 			// If there are fields full of fish, we change the type of notification
 			if (map.find_reachable_fields(game, area, &list, cstep, functorAnyFull)) {
