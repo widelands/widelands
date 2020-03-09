@@ -19,6 +19,8 @@
 
 #include "logic/map_objects/tribes/constructionsite.h"
 
+#include <memory>
+
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "base/wexception.h"
@@ -400,11 +402,11 @@ void ConstructionSite::enhance(Game&) {
 	auto new_desired_capacity = [](
 	   uint32_t old_max, uint32_t old_des, uint32_t new_max) { return old_des * new_max / old_max; };
 
-	BuildingSettings* old_settings = settings_.release();
+	std::unique_ptr<BuildingSettings> old_settings(settings_.release());
 	switch (building_->type()) {
 	case Widelands::MapObjectType::WAREHOUSE: {
 		upcast(const WarehouseDescr, wd, building_);
-		upcast(WarehouseSettings, ws, old_settings);
+		upcast(WarehouseSettings, ws, old_settings.get());
 		assert(ws);
 		WarehouseSettings* new_settings = new WarehouseSettings(*wd, owner().tribe());
 		settings_.reset(new_settings);
@@ -418,7 +420,7 @@ void ConstructionSite::enhance(Game&) {
 	} break;
 	case Widelands::MapObjectType::TRAININGSITE: {
 		upcast(const TrainingSiteDescr, td, building_);
-		upcast(TrainingsiteSettings, ts, old_settings);
+		upcast(TrainingsiteSettings, ts, old_settings.get());
 		assert(ts);
 		TrainingsiteSettings* new_settings = new TrainingsiteSettings(*td, owner().tribe());
 		settings_.reset(new_settings);
@@ -448,7 +450,7 @@ void ConstructionSite::enhance(Game&) {
 	} break;
 	case Widelands::MapObjectType::PRODUCTIONSITE: {
 		upcast(const ProductionSiteDescr, pd, building_);
-		upcast(ProductionsiteSettings, ps, old_settings);
+		upcast(ProductionsiteSettings, ps, old_settings.get());
 		assert(ps);
 		ProductionsiteSettings* new_settings = new ProductionsiteSettings(*pd, owner().tribe());
 		settings_.reset(new_settings);
@@ -476,7 +478,7 @@ void ConstructionSite::enhance(Game&) {
 	} break;
 	case Widelands::MapObjectType::MILITARYSITE: {
 		upcast(const MilitarySiteDescr, md, building_);
-		upcast(MilitarysiteSettings, ms, old_settings);
+		upcast(MilitarysiteSettings, ms, old_settings.get());
 		assert(ms);
 		MilitarysiteSettings* new_settings = new MilitarysiteSettings(*md, owner().tribe());
 		settings_.reset(new_settings);
