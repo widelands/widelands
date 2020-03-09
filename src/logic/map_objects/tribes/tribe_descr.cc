@@ -65,11 +65,7 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
      soldier_(Widelands::INVALID_INDEX),
      ship_(Widelands::INVALID_INDEX),
      ferry_(Widelands::INVALID_INDEX),
-     port_(Widelands::INVALID_INDEX),
-     ironore_(Widelands::INVALID_INDEX),
-     rawlog_(Widelands::INVALID_INDEX),
-     refinedlog_(Widelands::INVALID_INDEX),
-     granite_(Widelands::INVALID_INDEX) {
+     port_(Widelands::INVALID_INDEX) {
 	log("┏━ Loading %s:\n", name_.c_str());
 	ScopedTimer timer("┗━ took: %ums");
 
@@ -246,19 +242,6 @@ void TribeDescr::load_wares(const LuaTable& table, Tribes& tribes) {
 		if (!column.empty()) {
 			wares_order_.push_back(column);
 		}
-	}
-
-	if (table.has_key("ironore")) {
-		ironore_ = add_special_ware(table.get_string("ironore"), tribes);
-	}
-	if (table.has_key("rawlog")) {
-		rawlog_ = add_special_ware(table.get_string("rawlog"), tribes);
-	}
-	if (table.has_key("refinedlog")) {
-		refinedlog_ = add_special_ware(table.get_string("refinedlog"), tribes);
-	}
-	if (table.has_key("granite")) {
-		granite_ = add_special_ware(table.get_string("granite"), tribes);
 	}
 
 	// Verify that the preciousness has been set for all of the tribe's wares
@@ -478,22 +461,6 @@ DescriptionIndex TribeDescr::ferry() const {
 	assert(tribes_.worker_exists(ferry_));
 	return ferry_;
 }
-DescriptionIndex TribeDescr::ironore() const {
-	assert(tribes_.ware_exists(ironore_));
-	return ironore_;
-}
-DescriptionIndex TribeDescr::rawlog() const {
-	assert(tribes_.ware_exists(rawlog_));
-	return rawlog_;
-}
-DescriptionIndex TribeDescr::refinedlog() const {
-	assert(tribes_.ware_exists(refinedlog_));
-	return refinedlog_;
-}
-DescriptionIndex TribeDescr::granite() const {
-	assert(tribes_.ware_exists(granite_));
-	return granite_;
-}
 
 const std::vector<DescriptionIndex>& TribeDescr::trainingsites() const {
 	return trainingsites_;
@@ -663,17 +630,6 @@ DescriptionIndex TribeDescr::add_special_building(const std::string& buildingnam
 		   "Failed adding special building '%s': %s", buildingname.c_str(), e.what());
 	}
 }
-DescriptionIndex TribeDescr::add_special_ware(const std::string& warename, Tribes& tribes) {
-	try {
-		DescriptionIndex ware = tribes.load_ware(warename);
-		if (!has_ware(ware)) {
-			throw GameDataError("This tribe doesn't have the ware '%s'", warename.c_str());
-		}
-		return ware;
-	} catch (const WException& e) {
-		throw GameDataError("Failed adding special ware '%s': %s", warename.c_str(), e.what());
-	}
-}
 
 void TribeDescr::finalize_loading(Tribes& tribes) {
 	// Validate special units
@@ -697,18 +653,6 @@ void TribeDescr::finalize_loading(Tribes& tribes) {
 	}
 	if (port_ == Widelands::INVALID_INDEX) {
 		throw GameDataError("special building 'port' not defined");
-	}
-	if (ironore_ == Widelands::INVALID_INDEX) {
-		throw GameDataError("special ware 'ironore' not defined");
-	}
-	if (rawlog_ == Widelands::INVALID_INDEX) {
-		throw GameDataError("special ware 'rawlog' not defined");
-	}
-	if (refinedlog_ == Widelands::INVALID_INDEX) {
-		throw GameDataError("special ware 'refinedlog' not defined");
-	}
-	if (granite_ == Widelands::INVALID_INDEX) {
-		throw GameDataError("special ware 'granite' not defined");
 	}
 	if (ship_ == Widelands::INVALID_INDEX) {
 		throw GameDataError("special unit 'ship' not defined");
