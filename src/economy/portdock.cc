@@ -284,7 +284,7 @@ void PortDock::update_shippingitem(Game& game, Worker& worker) {
 	}
 }
 
-void PortDock::update_shippingitem(Game& game, std::list<ShippingItem>::iterator it) {
+std::list<ShippingItem>::iterator PortDock::update_shippingitem(Game& game, std::list<ShippingItem>::iterator it) {
 	it->update_destination(game, *this);
 
 	const PortDock* dst = it->get_destination(game);
@@ -296,11 +296,11 @@ void PortDock::update_shippingitem(Game& game, std::list<ShippingItem>::iterator
 		if (ships_coming_.empty()) {
 			set_need_ship(game, true);
 		}
+		return ++it;
 	} else {
 		it->set_location(game, warehouse_);
 		it->end_shipping(game);
-		*it = waiting_.back();
-		waiting_.pop_back();
+		return waiting_.erase(it);
 	}
 }
 
@@ -371,6 +371,8 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 			return;
 		}
 	}
+
+	for (auto it = waiting_.begin(); it != waiting_.end(); it = update_shippingitem(game, it));
 
 	ship.pop_destination(game, *this);
 	fleet_->push_next_destinations(game, ship, *this);
