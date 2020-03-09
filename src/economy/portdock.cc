@@ -284,7 +284,8 @@ void PortDock::update_shippingitem(Game& game, Worker& worker) {
 	}
 }
 
-std::list<ShippingItem>::iterator PortDock::update_shippingitem(Game& game, std::list<ShippingItem>::iterator it) {
+std::list<ShippingItem>::iterator
+PortDock::update_shippingitem(Game& game, std::list<ShippingItem>::iterator it) {
 	it->update_destination(game, *this);
 
 	const PortDock* dst = it->get_destination(game);
@@ -372,7 +373,8 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 		}
 	}
 
-	for (auto it = waiting_.begin(); it != waiting_.end(); it = update_shippingitem(game, it));
+	for (auto it = waiting_.begin(); it != waiting_.end(); it = update_shippingitem(game, it))
+		;
 
 	ship.pop_destination(game, *this);
 	fleet_->push_next_destinations(game, ship, *this);
