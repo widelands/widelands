@@ -180,6 +180,7 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 		get_tabs()->add("workers", g_gr->images().get(pic_tab_workers), worker_box, workers_heading);
 		update_worker_table(production_site);
 	}
+	worker_table_selection_changed();
 	think();
 }
 
