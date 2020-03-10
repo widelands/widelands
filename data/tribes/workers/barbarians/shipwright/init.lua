@@ -1,16 +1,5 @@
 dirname = path.dirname(__file__)
 
-animations = {}
-add_animation(animations, "idle", dirname, "idle", {11, 23})
-add_animation(animations, "work", dirname, "work", {11, 26}, 10)
-animations["work"]["sound_effect"] = {
-   path = "sound/hammering/hammering",
-   priority = 64
-}
-add_directional_animation(animations, "walk", dirname, "walk", {9, 24}, 10)
-add_directional_animation(animations, "walkload", dirname, "walkload", {11, 22}, 10)
-
-
 tribes:new_worker_type {
    msgctxt = "barbarians_worker",
    name = "barbarians_shipwright",
@@ -47,5 +36,42 @@ tribes:new_worker_type {
       },
    },
 
-   animations = animations,
+   animations = {
+      idle = {
+         directory = dirname,
+         hotspot = { 4, 18 }
+      },
+   },
+   spritesheets = {
+      walk = {
+         directory = dirname,
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 6, 18 }
+      },
+      walkload = {
+         directory = dirname,
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 10, 20 }
+      },
+      work = {
+         directory = dirname,
+         fps = 10,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 12, 22 },
+         sound_effect = {
+            path = "sound/hammering/hammering",
+            priority = 64
+         }
+      },
+   }
 }
