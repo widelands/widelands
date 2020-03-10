@@ -30,7 +30,7 @@
 
 #include <SDL_mutex.h>
 
-#include "random/random.h"
+#include "base/random.h"
 #include "sound/constants.h"
 #include "sound/fxset.h"
 #include "sound/songset.h"

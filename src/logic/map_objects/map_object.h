@@ -20,6 +20,8 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_MAP_OBJECT_H
 #define WL_LOGIC_MAP_OBJECTS_MAP_OBJECT_H
 
+#include <boost/signals2/signal.hpp>
+
 #include "base/log.h"
 #include "base/macros.h"
 #include "graphic/animation/animation.h"
@@ -31,7 +33,6 @@
 #include "logic/map_objects/tribes/training_attribute.h"
 #include "logic/widelands.h"
 #include "scripting/lua_table.h"
-#include "ui_basic/tabpanel.h"
 
 class RenderTarget;
 
@@ -283,9 +284,6 @@ public:
 	void schedule_destroy(Game&);
 	uint32_t schedule_act(Game&, uint32_t tdelta, uint32_t data = 0);
 	virtual void act(Game&, uint32_t data);
-
-	// implementation is in game_debug_ui.cc
-	virtual void create_debug_panels(const EditorGameBase& egbase, UI::TabPanel& tabs);
 
 	LogSink* get_logsink() {
 		return logsink_;
