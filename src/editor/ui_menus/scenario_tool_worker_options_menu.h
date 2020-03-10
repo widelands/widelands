@@ -29,6 +29,7 @@
 #include "ui_basic/icongrid.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/spinbox.h"
+#include "ui_basic/tabpanel.h"
 
 class EditorInteractive;
 

@@ -506,19 +506,13 @@ void EditorInteractive::rebuild_scenario_tool_menu() {
 	   pgettext("hotkey", "Shift+I"));
 
 	scenario_tool_windows_.lua.open_window = [this] {
-		// TODO(Nordfriese): remove the warning when ScenarioLuaEditor is implemented properly
-		UI::WLMessageBox m(this, _("Not yet implemented"),
-		                   _("Please note that this feature is still under development and not in a "
-		                     "useable state yet."),
-		                   UI::WLMessageBox::MBoxType::kOkCancel);
-		if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk)
-			new ScenarioLuaEditor(*this, scenario_tool_windows_.lua);
+		new ScenarioLuaEditor(*this, scenario_tool_windows_.lua);
 	};
-	/** TRANSLATORS: An entry in the editor's scenario tool menu */
-	scenario_toolmenu_.add(_("Scripting"), ScenarioToolMenuEntry::kLua,
-	                       g_gr->images().get("images/wui/editor/menus/scripting.png"), false,
-	                       /** TRANSLATORS: Tooltip for the scenario scripting menu in the editor */
-	                       _("Edit the scenario storyline"));
+	/** TRANS%LATORS: An entry in the editor's scenario tool menu */
+	// scenario_toolmenu_.add(_("Scripting"), ScenarioToolMenuEntry::kLua,
+	                       // g_gr->images().get("images/wui/editor/menus/scripting.png"), false,
+	                       /** TRANS%LATORS: Tooltip for the scenario scripting menu in the editor */
+	                       // _("Edit the scenario storyline"));
 }
 
 void EditorInteractive::scenario_tool_menu_selected(ScenarioToolMenuEntry entry) {
@@ -1479,7 +1473,7 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 
 	// Builtin includes
 	{
-		// We always include these ones because they define run() and connected_road()
+		// We always include this one because it defines run()
 		std::set<std::string> builtin_includes = {"scripting/coroutine.lua"};
 		// Check which other includes to include
 		for (const FS_FunctionCall* f : scripting_saver_->all<FS_FunctionCall>()) {
