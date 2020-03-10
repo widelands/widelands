@@ -1452,7 +1452,9 @@ void Ship::Loader::load_finish() {
 	ship.shipname_ = shipname_;
 
 	// TODO(Nordfriese): Savegame compatibility
-	ship.capacity_ = capacity_ == std::numeric_limits<uint32_t>::max() ? ship.descr().get_default_capacity() : capacity_;
+	ship.capacity_ = capacity_ == std::numeric_limits<uint32_t>::max() ?
+	                    ship.descr().get_default_capacity() :
+	                    capacity_;
 
 	// if the ship is on an expedition, restore the expedition specific data
 	if (expedition_) {

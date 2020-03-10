@@ -83,7 +83,8 @@ const MethodType<LuaGame> LuaGame::Methods[] = {
 };
 const PropertyType<LuaGame> LuaGame::Properties[] = {
    PROP_RO(LuaGame, real_speed),   PROP_RO(LuaGame, time), PROP_RW(LuaGame, desired_speed),
-   PROP_RW(LuaGame, allow_saving), PROP_RO(LuaGame, type), PROP_RO(LuaGame, interactive_player), {nullptr, nullptr, nullptr},
+   PROP_RW(LuaGame, allow_saving), PROP_RO(LuaGame, type), PROP_RO(LuaGame, interactive_player),
+   {nullptr, nullptr, nullptr},
 };
 
 LuaGame::LuaGame(lua_State* /* L */) {

@@ -1404,7 +1404,8 @@ int LuaMap::find_ocean_fields(lua_State* L) {
 						break;
 					}
 				}
-				if (success) break;
+				if (success)
+					break;
 			}
 		}
 		if (success) {
@@ -5958,7 +5959,8 @@ int LuaShip::set_capacity(lua_State* L) {
 	Widelands::Ship& s = *get(L, get_egbase(L));
 	const uint32_t c = luaL_checkuint32(L, -1);
 	if (s.get_nritems() > c) {
-		report_error(L, "Ship is currently transporting %u items – cannot set capacity to %u", s.get_nritems(), c);
+		report_error(L, "Ship is currently transporting %u items – cannot set capacity to %u",
+		             s.get_nritems(), c);
 	}
 	s.set_capacity(c);
 	return 0;
