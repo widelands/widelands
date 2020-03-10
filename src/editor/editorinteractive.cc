@@ -510,9 +510,9 @@ void EditorInteractive::rebuild_scenario_tool_menu() {
 	};
 	/** TRANS%LATORS: An entry in the editor's scenario tool menu */
 	// scenario_toolmenu_.add(_("Scripting"), ScenarioToolMenuEntry::kLua,
-	                       // g_gr->images().get("images/wui/editor/menus/scripting.png"), false,
-	                       /** TRANS%LATORS: Tooltip for the scenario scripting menu in the editor */
-	                       // _("Edit the scenario storyline"));
+	// g_gr->images().get("images/wui/editor/menus/scripting.png"), false,
+	/** TRANS%LATORS: Tooltip for the scenario scripting menu in the editor */
+	// _("Edit the scenario storyline"));
 }
 
 void EditorInteractive::scenario_tool_menu_selected(ScenarioToolMenuEntry entry) {
