@@ -27,6 +27,7 @@
 #include "economy/road.h"
 #include "economy/ware_instance.h"
 #include "economy/waterway.h"
+#include "graphic/rendertarget.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/map_object.h"

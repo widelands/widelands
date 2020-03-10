@@ -14,7 +14,7 @@ wl_library(editor
     editor_ui
     economy
     wui
-    random
+    base_random
     graphic_text_layout
     ui_basic
     editor_tools_ui
@@ -175,8 +175,8 @@ wl_library(editor_ui
     ui_menus/toolsize_menu.h
   DEPENDS
     base_macros
+    base_random
     logic_map_objects_description_maintainer
-    random
     io_filesystem
     logic_constants
     logic_filesystem_constants

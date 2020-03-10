@@ -23,12 +23,12 @@
 #include <memory>
 
 #include "base/md5.h"
+#include "base/random.h"
 #include "io/streamwrite.h"
 #include "logic/cmd_queue.h"
 #include "logic/editor_game_base.h"
 #include "logic/save_handler.h"
 #include "logic/trade_agreement.h"
-#include "random/random.h"
 #include "scripting/logic.h"
 
 class InteractivePlayer;
