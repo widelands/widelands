@@ -27,6 +27,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/random.h"
 #include "base/warning.h"
 #include "build_info.h"
 #include "io/fileread.h"
@@ -34,7 +35,6 @@
 #include "network/crypto.h"
 #include "network/internet_gaming_messages.h"
 #include "network/internet_gaming_protocol.h"
-#include "random/random.h"
 
 /// Private constructor by purpose: NEVER call directly. Always call InternetGaming::ref(), this
 /// will ensure

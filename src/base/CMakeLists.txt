@@ -56,6 +56,16 @@ wl_library(base_md5
     base_macros
 )
 
+wl_library(base_random
+  SRCS
+    random.h
+    random.cc
+  DEPENDS
+    io_stream
+    base_exceptions
+)
+
+
 wl_library(base_scoped_timer
   SRCS
     scoped_timer.h

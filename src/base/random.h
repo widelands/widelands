@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_RANDOM_RANDOM_H
-#define WL_RANDOM_RANDOM_H
+#ifndef WL_BASE_RANDOM_H
+#define WL_BASE_RANDOM_H
 
 #include <string>
 
@@ -49,4 +49,4 @@ private:
 /// generator, so do not use in logic code - it will desync.
 std::string generate_random_uuid();
 
-#endif  // end of include guard: WL_RANDOM_RANDOM_H
+#endif  // end of include guard: WL_BASE_RANDOM_H

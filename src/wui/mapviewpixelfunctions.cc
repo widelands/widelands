@@ -24,44 +24,6 @@
 using namespace Widelands;
 
 /**
- * Calculate brightness based upon the slopes.
- */
-float MapviewPixelFunctions::calc_brightness(int32_t const l,
-                                             int32_t const r,
-                                             int32_t const tl,
-                                             int32_t const tr,
-                                             int32_t const bl,
-                                             int32_t const br) {
-	constexpr float kVectorThird = 0.57735f;  // sqrt(1/3)
-	constexpr float kCos60 = 0.5f;
-	constexpr float kSin60 = 0.86603f;
-	constexpr float kLightFactor = -75.0f;
-
-	static Vector3f sun_vect =
-	   Vector3f(kVectorThird, -kVectorThird, -kVectorThird);  //  |sun_vect| = 1
-
-	// find normal
-	// more guessed than thought about
-	// but hey, results say I am good at guessing :)
-	// perhaps I will paint an explanation for this someday
-	// florian
-	Vector3f normal(0, 0, kTriangleWidth);
-	normal.x -= l * kHeightFactor;
-	normal.x += r * kHeightFactor;
-	normal.x -= tl * kHeightFactorFloat * kCos60;
-	normal.y -= tl * kHeightFactorFloat * kSin60;
-	normal.x += tr * kHeightFactorFloat * kCos60;
-	normal.y -= tr * kHeightFactorFloat * kSin60;
-	normal.x -= bl * kHeightFactorFloat * kCos60;
-	normal.y += bl * kHeightFactorFloat * kSin60;
-	normal.x += br * kHeightFactorFloat * kCos60;
-	normal.y += br * kHeightFactorFloat * kSin60;
-	normal.normalize();
-
-	return normal.dot(sun_vect) * kLightFactor;
-}
-
-/**
  * Compute a - b, taking care to handle wrap-around effects properly.
  */
 Vector2f MapviewPixelFunctions::calc_pix_difference(const Map& map, Vector2f a, Vector2f b) {
