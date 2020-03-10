@@ -108,6 +108,7 @@ public:
 			d.selected.connect(boost::bind(&PortDockAdditionalItemsDisplay::select, this, c));
 
 			UI::Icon* icon = new UI::Icon(box, g_gr->images().get(kNoWare));
+			icon->set_handle_mouse(true);
 			boxes_.push_back(box);
 			icons_.push_back(icon);
 			dropdowns_.push_back(&d);
