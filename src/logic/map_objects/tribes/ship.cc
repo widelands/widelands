@@ -1383,7 +1383,8 @@ void Ship::Loader::load(FileRead& fr, uint8_t pw) {
 
 	shipname_ = fr.c_string();
 
-	capacity_ = packet_version_ >= 11 ? fr.unsigned_32() : -1;
+	// TODO(Nordfriese): Savegame compatibility
+	capacity_ = packet_version_ >= 11 ? fr.unsigned_32() : std::numeric_limits<uint32_t>::max();
 
 	lastdock_ = fr.unsigned_32();
 
@@ -1450,7 +1451,8 @@ void Ship::Loader::load_finish() {
 	// restore the  ship id and name
 	ship.shipname_ = shipname_;
 
-	ship.capacity_ = capacity_ < 0 ? ship.descr().get_default_capacity() : capacity_;
+	// TODO(Nordfriese): Savegame compatibility
+	ship.capacity_ = capacity_ == std::numeric_limits<uint32_t>::max() ? ship.descr().get_default_capacity() : capacity_;
 
 	// if the ship is on an expedition, restore the expedition specific data
 	if (expedition_) {

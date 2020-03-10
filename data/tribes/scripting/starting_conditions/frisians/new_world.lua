@@ -23,9 +23,7 @@ init = {
       player:allow_workers("all")
    end
 
-   local fields = find_ocean_fields(7)
-   -- items per expedition (incl. builder): 25
-   local items = {
+   launch_expeditions(player, {
       {
          log = 1,
          brick = 2,
@@ -82,13 +80,7 @@ init = {
          frisians_fisher = 1,
          frisians_stonemason = 1,
       },
-   }
-   for i,f in pairs(fields) do
-      local ship = player:place_ship(f)
-      if i > 4 then ship.capacity = 41 else ship.capacity = 42 end
-      ship:make_expedition(items[i])
-   end
-   sleep_then_goto(1000, fields[1])
+   })
 end
 }
 

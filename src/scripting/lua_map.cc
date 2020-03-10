@@ -1217,6 +1217,7 @@ const MethodType<LuaMap> LuaMap::Methods[] = {
    METHOD(LuaMap, recalculate_seafaring),
    METHOD(LuaMap, set_port_space),
    METHOD(LuaMap, sea_route_exists),
+   METHOD(LuaMap, find_ocean_fields),
    {nullptr, nullptr},
 };
 const PropertyType<LuaMap> LuaMap::Properties[] = {
@@ -1378,6 +1379,45 @@ int LuaMap::count_owned_valuable_fields(lua_State* L) {
 	for (const auto& fieldinfo : get_egbase(L).map().count_owned_valuable_fields(attribute)) {
 		lua_pushinteger(L, fieldinfo.first);
 		lua_pushinteger(L, fieldinfo.second);
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
+int LuaMap::find_ocean_fields(lua_State* L) {
+	upcast(Game, game, &get_egbase(L));
+	assert(game);
+	const Map& map = game->map();
+
+	std::vector<LuaMaps::LuaField*> result;
+	for (uint32_t i = luaL_checkuint32(L, 2); i;) {
+		const uint32_t x = game->logic_rand() % map.get_width();
+		const uint32_t y = game->logic_rand() % map.get_width();
+		Widelands::Coords field(x, y);
+		bool success = false;
+		if (map[field].maxcaps() & Widelands::MOVECAPS_SWIM) {
+			for (Widelands::Coords port : map.get_port_spaces()) {
+				for (const Widelands::Coords& c : map.find_portdock(port)) {
+					Widelands::Path p;
+					if (map.findpath(field, c, 0, p, CheckStepDefault(MOVECAPS_SWIM)) >= 0) {
+						success = true;
+						break;
+					}
+				}
+				if (success) break;
+			}
+		}
+		if (success) {
+			result.push_back(new LuaMaps::LuaField(x, y));
+			--i;
+		}
+	}
+
+	lua_newtable(L);
+	int counter = 0;
+	for (auto& f : result) {
+		lua_pushinteger(L, ++counter);
+		to_lua<LuaMaps::LuaField>(L, f);
 		lua_settable(L, -3);
 	}
 	return 1;
@@ -5915,7 +5955,12 @@ int LuaShip::get_capacity(lua_State* L) {
 	return 1;
 }
 int LuaShip::set_capacity(lua_State* L) {
-	get(L, get_egbase(L))->set_capacity(luaL_checkuint32(L, -1));
+	Widelands::Ship& s = *get(L, get_egbase(L));
+	const uint32_t c = luaL_checkuint32(L, -1);
+	if (s.get_nritems() > c) {
+		report_error(L, "Ship is currently transporting %u items – cannot set capacity to %u", s.get_nritems(), c);
+	}
+	s.set_capacity(c);
 	return 0;
 }
 
@@ -6013,7 +6058,7 @@ int LuaShip::make_expedition(lua_State* L) {
 	assert(ship);
 	if (ship->get_ship_state() != Widelands::Ship::ShipStates::kTransport ||
 	    ship->get_nritems() > 0) {
-		report_error(L, "Ship.make_expedition can be used only on transport ships!");
+		report_error(L, "Ship.make_expedition can be used only on empty transport ships!");
 	}
 
 	const Widelands::TribeDescr& tribe = ship->owner().tribe();

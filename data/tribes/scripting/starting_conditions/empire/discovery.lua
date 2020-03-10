@@ -23,9 +23,7 @@ init = {
       player:allow_workers("all")
    end
 
-   local fields = find_ocean_fields(3)
-   -- items per expedition (incl. builder): 20
-   local items = {
+   launch_expeditions(player, {
       {
          log = 3,
          granite = 2,
@@ -54,13 +52,7 @@ init = {
          empire_innkeeper = 2,
          empire_fisher = 1,
       },
-   }
-   for i,f in pairs(fields) do
-      local ship = player:place_ship(f)
-      ship.capacity = 34
-      ship:make_expedition(items[i])
-   end
-   sleep_then_goto(1000, fields[1])
+   })
 end
 }
 

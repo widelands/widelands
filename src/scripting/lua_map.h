@@ -102,6 +102,7 @@ public:
 	int set_port_space(lua_State*);
 	int sea_route_exists(lua_State*);
 	int set_waterway_max_length(lua_State*);
+	int find_ocean_fields(lua_State*);
 
 	/*
 	 * C methods
