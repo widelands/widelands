@@ -1646,11 +1646,13 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 							if (r) {
 								std::map<std::string, unsigned> workers;
 								for (const Widelands::Carrier* c : r->carriers(egbase())) {
-									auto it = workers.find(c->descr().name());
-									if (it == workers.end())
-										workers[c->descr().name()] = 1;
-									else
-										++it->second;
+									if (c) {
+										auto it = workers.find(c->descr().name());
+										if (it == workers.end())
+											workers[c->descr().name()] = 1;
+										else
+											++it->second;
+									}
 								}
 								write("%s:set_workers({", var);
 								for (const auto& pair : workers)
