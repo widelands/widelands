@@ -104,15 +104,33 @@ Window::Window(Panel* const parent,
      pic_background_(g_gr->images().get(kTemplateDir + "wui/background.png")),
      center_panel_(nullptr),
      fastclick_panel_(nullptr),
-     button_close_(new Button(this, "b_close", -TP_B_PIXMAP_THICKNESS, -TP_B_PIXMAP_THICKNESS,
-     		TP_B_PIXMAP_THICKNESS, TP_B_PIXMAP_THICKNESS, ButtonStyle::kWuiSecondary,
-			g_gr->images().get(kTemplateDir + "wui/window_close.png"), _("Close"))),
-     button_pin_(new Button(this, "b_close", 0, -TP_B_PIXMAP_THICKNESS,
-     		TP_B_PIXMAP_THICKNESS, TP_B_PIXMAP_THICKNESS, ButtonStyle::kWuiSecondary,
-			g_gr->images().get(kWindowImageUnpinned), "")),
-     button_minimize_(new Button(this, "b_close", TP_B_PIXMAP_THICKNESS, -TP_B_PIXMAP_THICKNESS,
-     		TP_B_PIXMAP_THICKNESS, TP_B_PIXMAP_THICKNESS, ButtonStyle::kWuiSecondary,
-			g_gr->images().get(kWindowImageMinimize), "")) {
+     button_close_(new Button(this,
+                              "b_close",
+                              -TP_B_PIXMAP_THICKNESS,
+                              -TP_B_PIXMAP_THICKNESS,
+                              TP_B_PIXMAP_THICKNESS,
+                              TP_B_PIXMAP_THICKNESS,
+                              ButtonStyle::kWuiSecondary,
+                              g_gr->images().get(kTemplateDir + "wui/window_close.png"),
+                              _("Close"))),
+     button_pin_(new Button(this,
+                            "b_close",
+                            0,
+                            -TP_B_PIXMAP_THICKNESS,
+                            TP_B_PIXMAP_THICKNESS,
+                            TP_B_PIXMAP_THICKNESS,
+                            ButtonStyle::kWuiSecondary,
+                            g_gr->images().get(kWindowImageUnpinned),
+                            "")),
+     button_minimize_(new Button(this,
+                                 "b_close",
+                                 TP_B_PIXMAP_THICKNESS,
+                                 -TP_B_PIXMAP_THICKNESS,
+                                 TP_B_PIXMAP_THICKNESS,
+                                 TP_B_PIXMAP_THICKNESS,
+                                 ButtonStyle::kWuiSecondary,
+                                 g_gr->images().get(kWindowImageMinimize),
+                                 "")) {
 	set_title(title);
 
 	button_close_->sigclicked.connect([this] {
@@ -143,7 +161,8 @@ Window::Window(Panel* const parent,
 }
 
 void Window::update_toolbar_buttons() {
-	button_minimize_->set_pic(g_gr->images().get(is_minimal_ ? kWindowImageMaximize : kWindowImageMinimize));
+	button_minimize_->set_pic(
+	   g_gr->images().get(is_minimal_ ? kWindowImageMaximize : kWindowImageMinimize));
 	button_minimize_->set_tooltip(is_minimal_ ? _("Restore") : _("Minimize"));
 	button_pin_->set_pic(g_gr->images().get(pinned_ ? kWindowImagePinned : kWindowImageUnpinned));
 	button_pin_->set_tooltip(pinned_ ? _("Unpin") : _("Pin"));
@@ -330,7 +349,9 @@ void Window::draw_border(RenderTarget& dst) {
 		                g_gr->styles().font_style(UI::FontStyle::kWuiWindowTitle), get_inner_w());
 
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
-		Vector2i pos(get_lborder() + 3 * TP_B_PIXMAP_THICKNESS + (get_inner_w() - 3 * TP_B_PIXMAP_THICKNESS) / 2, TP_B_PIXMAP_THICKNESS / 2);
+		Vector2i pos(get_lborder() + 3 * TP_B_PIXMAP_THICKNESS +
+		                (get_inner_w() - 3 * TP_B_PIXMAP_THICKNESS) / 2,
+		             TP_B_PIXMAP_THICKNESS / 2);
 		UI::center_vertically(text->height(), &pos);
 		text->draw(dst, pos, UI::Align::kCenter);
 	}
