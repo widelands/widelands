@@ -21,9 +21,6 @@
 #define WL_LOGIC_GENERIC_SAVE_HANDLER_H
 
 #include <functional>
-#include <string>
-
-#include <stdint.h>
 
 #include "io/filesystem/filesystem.h"
 

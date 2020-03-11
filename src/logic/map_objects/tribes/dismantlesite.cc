@@ -19,12 +19,7 @@
 
 #include "logic/map_objects/tribes/dismantlesite.h"
 
-#include <cstdio>
-
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
-#include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/wares_queue.h"
 #include "graphic/rendertarget.h"
@@ -252,7 +247,7 @@ Draw it.
 ===============
 */
 void DismantleSite::draw(uint32_t gametime,
-                         const TextToDraw draw_text,
+                         const InfoToDraw info_to_draw,
                          const Vector2f& point_on_dst,
                          const Widelands::Coords& coords,
                          float scale,
@@ -274,6 +269,6 @@ void DismantleSite::draw(uint32_t gametime,
 	                    &player_color, 100 - ((get_built_per64k() * 100) >> 16));
 
 	// Draw help strings
-	draw_info(draw_text, point_on_dst, scale, dst);
+	draw_info(info_to_draw, point_on_dst, scale, dst);
 }
 }  // namespace Widelands

@@ -18,7 +18,6 @@ wl_library(map_io_map_loader
     logic_map
     logic_map_objects
     map_io
-    scripting_lua_interface
     ui_basic
 )
 
@@ -90,6 +89,10 @@ wl_library(map_io
     map_terrain_packet.h
     map_version_packet.cc
     map_version_packet.h
+    map_waterway_packet.cc
+    map_waterway_packet.h
+    map_waterwaydata_packet.cc
+    map_waterwaydata_packet.h
     map_wincondition_packet.cc
     map_wincondition_packet.h
   DEPENDS
@@ -97,9 +100,9 @@ wl_library(map_io
     base_log
     base_macros
     base_scoped_timer
-    build_info
     economy
     graphic
+    graphic_image_cache
     graphic_image_io
     graphic_minimap_renderer
     graphic_playercolor

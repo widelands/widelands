@@ -19,12 +19,6 @@
 
 #include "editor/ui_menus/main_menu_new_map.h"
 
-#include <memory>
-#include <string>
-#include <vector>
-
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "editor/editorinteractive.h"
@@ -36,6 +30,7 @@
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
 #include "ui_basic/progresswindow.h"
+#include "ui_basic/textarea.h"
 #include "wlapplication_options.h"
 
 inline EditorInteractive& MainMenuNewMap::eia() {
@@ -100,9 +95,8 @@ void MainMenuNewMap::clicked_create_map() {
 	EditorInteractive& parent = eia();
 	Widelands::EditorGameBase& egbase = parent.egbase();
 	Widelands::Map* map = egbase.mutable_map();
-	UI::ProgressWindow loader_ui;
-
-	loader_ui.step(_("Creating empty map…"));
+	egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
+	egbase.step_loader_ui(_("Creating empty map…"));
 
 	parent.cleanup_for_load();
 
@@ -110,13 +104,12 @@ void MainMenuNewMap::clicked_create_map() {
 	                      list_.get_selected(), _("No Name"),
 	                      get_config_string("realname", pgettext("author_name", "Unknown")));
 
-	egbase.set_loader_ui(&loader_ui);
 	egbase.postload();
 	egbase.load_graphics();
 
 	map->recalc_whole_map(egbase);
 	parent.map_changed(EditorInteractive::MapWas::kReplaced);
-	egbase.set_loader_ui(nullptr);
+	egbase.remove_loader_ui();
 	die();
 }
 

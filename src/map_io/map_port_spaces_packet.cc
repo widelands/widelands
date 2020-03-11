@@ -19,10 +19,6 @@
 
 #include "map_io/map_port_spaces_packet.h"
 
-#include <string>
-
-#include <boost/algorithm/string.hpp>
-
 #include "base/log.h"
 #include "io/profile.h"
 #include "logic/editor_game_base.h"
@@ -45,6 +41,7 @@ void MapPortSpacesPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, Map
 	try {
 		int32_t const packet_version = s1.get_int("packet_version");
 		if (packet_version == kCurrentPacketVersion) {
+			map->set_waterway_max_length(s1.get_natural("waterway_max_length", 0));
 			const uint16_t num = s1.get_int("number_of_port_spaces", 0);
 			if (!num)
 				return;
@@ -66,11 +63,13 @@ void MapPortSpacesPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, Map
 void MapPortSpacesPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver&)
 
 {
+	const Map& map = egbase.map();
+
 	Profile prof;
 	Section& s1 = prof.create_section("global");
 	s1.set_int("packet_version", kCurrentPacketVersion);
+	s1.set_int("waterway_max_length", map.get_waterway_max_length());
 
-	const Map& map = egbase.map();
 	s1.set_int("number_of_port_spaces", map.get_port_spaces().size());
 
 	Section& s2 = prof.create_section("port_spaces");

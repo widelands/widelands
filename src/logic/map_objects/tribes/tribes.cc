@@ -24,7 +24,16 @@
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/tribes/carrier.h"
+#include "logic/map_objects/tribes/constructionsite.h"
+#include "logic/map_objects/tribes/dismantlesite.h"
+#include "logic/map_objects/tribes/ferry.h"
 #include "logic/map_objects/tribes/market.h"
+#include "logic/map_objects/tribes/militarysite.h"
+#include "logic/map_objects/tribes/productionsite.h"
+#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 
 namespace Widelands {
@@ -112,6 +121,13 @@ void Tribes::add_ware_type(const LuaTable& table) {
 void Tribes::add_carrier_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
 	workers_->add(new CarrierDescr(
+	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+	   table, *this));
+}
+
+void Tribes::add_ferry_type(const LuaTable& table) {
+	i18n::Textdomain td("tribes");
+	workers_->add(new FerryDescr(
 	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
 	   table, *this));
 }
@@ -324,6 +340,9 @@ void Tribes::load_graphics() {
 		}
 		for (const std::string& texture_path : tribe->busy_road_paths()) {
 			tribe->add_busy_road_texture(g_gr->images().get(texture_path));
+		}
+		for (const std::string& texture_path : tribe->waterway_paths()) {
+			tribe->add_waterway_texture(g_gr->images().get(texture_path));
 		}
 	}
 }

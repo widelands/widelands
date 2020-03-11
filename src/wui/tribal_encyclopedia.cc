@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "logic/game_controller.h"
 #include "logic/map_objects/tribes/tribe_descr.h"

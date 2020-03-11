@@ -19,8 +19,6 @@
 
 #include "base/vector.h"
 
-#include <cmath>
-
 Vector2f middle(const Vector2f& a, const Vector2f& b) {
 	return Vector2f((a.x + b.x) / 2.f, (a.y + b.y) / 2.f);
 }

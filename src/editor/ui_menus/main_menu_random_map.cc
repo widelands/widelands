@@ -19,15 +19,11 @@
 
 #include "editor/ui_menus/main_menu_random_map.h"
 
-#include <cstring>
 #include <sstream>
-#include <string>
-#include <vector>
-
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/random.h"
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/map_generator.h"
@@ -36,7 +32,6 @@
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/map_objects/world/world.h"
-#include "random/random.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "wlapplication_options.h"
@@ -469,8 +464,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	EditorInteractive& eia = dynamic_cast<EditorInteractive&>(*get_parent());
 	Widelands::EditorGameBase& egbase = eia.egbase();
 	Widelands::Map* map = egbase.mutable_map();
-	UI::ProgressWindow loader_ui;
-
+	egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
 	eia.cleanup_for_load();
 
 	UniqueRandomMapInfo map_info;
@@ -488,7 +482,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	map->create_empty_map(egbase, map_info.w, map_info.h, 0, _("No Name"),
 	                      get_config_string("realname", pgettext("author_name", "Unknown")),
 	                      sstrm.str().c_str());
-	loader_ui.step(_("Generating random map…"));
+	egbase.step_loader_ui(_("Generating random map…"));
 
 	log("============== Generating Map ==============\n");
 	log("ID:            %s\n", map_id_edit_.text().c_str());
@@ -514,7 +508,6 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	}
 	log("\n");
 
-	egbase.set_loader_ui(&loader_ui);
 	gen.create_random_map();
 
 	egbase.postload();
@@ -522,7 +515,6 @@ void MainMenuNewRandomMap::clicked_create_map() {
 
 	map->recalc_whole_map(egbase);
 	eia.map_changed(EditorInteractive::MapWas::kReplaced);
-	egbase.set_loader_ui(nullptr);
 	UI::WLMessageBox mbox(
 	   &eia,
 	   /** TRANSLATORS: Window title. This is shown after a random map has been created in the
@@ -538,6 +530,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	     "or be stuck on an island or on top of a mountain."),
 	   UI::WLMessageBox::MBoxType::kOk);
 	mbox.run<UI::Panel::Returncodes>();
+	egbase.remove_loader_ui();
 	die();
 }
 

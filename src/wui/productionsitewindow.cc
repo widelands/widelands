@@ -19,8 +19,6 @@
 
 #include "wui/productionsitewindow.h"
 
-#include <boost/format.hpp>
-
 #include "economy/input_queue.h"
 #include "economy/request.h"
 #include "graphic/graphic.h"
@@ -64,7 +62,7 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
 				   break;
 			   }
 		   }
-	   });
+		});
 	init(avoid_fastclick, workarea_preview_wanted);
 }
 

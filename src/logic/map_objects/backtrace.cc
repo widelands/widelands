@@ -21,7 +21,6 @@
 
 #ifndef _WIN32
 #ifndef __APPLE__
-#include <cstdlib>
 
 #include <execinfo.h>
 #endif
@@ -36,7 +35,7 @@ std::string get_backtrace() {
 	void* stack[BACKTRACE_STACKSIZE];
 	size_t size = backtrace(stack, BACKTRACE_STACKSIZE);
 	char** const list = backtrace_symbols(stack, size);
-	for (char* const* it = list; size; --size, ++it) {
+	for (char *const *it = list; size; --size, ++it) {
 		result += *it;
 		result += '\n';
 	}

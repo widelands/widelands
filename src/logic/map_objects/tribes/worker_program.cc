@@ -19,9 +19,6 @@
 
 #include "logic/map_objects/tribes/worker_program.h"
 
-#include <memory>
-#include <string>
-
 #include "base/log.h"
 #include "helper.h"
 #include "logic/game_data_error.h"
@@ -69,6 +66,7 @@ The available commands are:
 - `callobject`_
 - `plant`_
 - `createbob`_
+- `buildferry`_
 - `removeobject`_
 - `repeatsearch`_
 - `findresources`_
@@ -90,6 +88,7 @@ const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
    {"callobject", &WorkerProgram::parse_callobject},
    {"plant", &WorkerProgram::parse_plant},
    {"createbob", &WorkerProgram::parse_createbob},
+   {"buildferry", &WorkerProgram::parse_buildferry},
    {"removeobject", &WorkerProgram::parse_removeobject},
    {"repeatsearch", &WorkerProgram::parse_repeatsearch},
    {"findresources", &WorkerProgram::parse_findresources},
@@ -773,6 +772,29 @@ void WorkerProgram::parse_createbob(Worker::Action* act, const std::vector<std::
 	for (uint32_t i = 1; i < cmd.size(); ++i) {
 		act->sparamv.push_back(cmd[i]);
 	}
+}
+
+/* RST
+buildferry
+^^^^^^^^^^
+.. function:: buildferry
+
+   Adds a new instance of this tribe's ferry to the map at the worker's current location. Example::
+
+      construct = {
+         "findspace=size:swim radius:4",
+         "walk=coords",
+         "animate=work 2000",
+         "buildferry",
+         "animate=work 2000",
+         "return"
+      }
+*/
+void WorkerProgram::parse_buildferry(Worker::Action* act, const std::vector<std::string>& cmd) {
+	if (cmd.size() > 1) {
+		throw wexception("buildferry takes no arguments");
+	}
+	act->function = &Worker::run_buildferry;
 }
 
 /* RST

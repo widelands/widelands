@@ -20,11 +20,8 @@
 #include "wui/multiplayersetupgroup.h"
 
 #include <memory>
-#include <string>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 
 #include "ai/computer_player.h"
 #include "base/i18n.h"
@@ -100,7 +97,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 			   case NoteGameSettings::Action::kPlayer:
 				   break;
 			   }
-		   });
+			});
 	}
 
 	/// Update dropdown sizes
@@ -295,7 +292,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					   update();
 				   }
 			   }
-		   });
+			});
 
 		// Init dropdowns
 		update();
@@ -600,7 +597,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			tribes_dropdown_.set_enabled(false);
 			init_dropdown_.set_visible(false);
 			init_dropdown_.set_enabled(false);
-		} else {
+		} else {  // kHuman, kShared, kComputer
 			rebuild_tribes_dropdown(settings);
 			rebuild_init_dropdown(settings);
 			rebuild_team_dropdown(settings);

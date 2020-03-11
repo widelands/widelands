@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
-# Joe Hansen <joedalton2@yahoo.dk>, 2015-2017,2019
+# Joe Hansen <joedalton2@yahoo.dk>, 2015-2017,2019-2020
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
-"PO-Revision-Date: 2019-08-20 15:17+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-02-21 18:05+0000\n"
+"PO-Revision-Date: 2020-02-25 12:35+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -106,7 +106,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:63
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:65
 msgid "Show building spaces"
-msgstr ""
+msgstr "Vis byggepladser"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:66
 msgid ""
@@ -306,8 +306,8 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:203
 msgid ""
-"Click on the construction site to have a look at it, then close it again "
-"when you have seen enough."
+"Click on the construction site to have a look at it, then close its window "
+"again when you have seen enough."
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:204
@@ -421,7 +421,7 @@ msgstr "Andre måder at flytte visningen"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:285
 msgid "Excellent. Now there is a faster way to move, using the mouse instead."
-msgstr ""
+msgstr "Glimrende. Nu er der en hurtigere måde at flytte, via musen i stedet for."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:292
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:294
@@ -1068,11 +1068,11 @@ msgstr "Tak fordi du spillede denne øvelse. Nyd Wideland og husk at besøge os 
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "»%s«"
 
 #: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgstr ""
+msgstr "Nyt mål"
 
 #: ../../data/scripting/richtext_scenarios.lua:93
 msgid "New Objectives"

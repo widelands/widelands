@@ -20,9 +20,7 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_TRIBE_DESCR_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_TRIBE_DESCR_H
 
-#include <map>
 #include <memory>
-#include <vector>
 
 #include "base/macros.h"
 #include "graphic/animation/animation.h"
@@ -30,7 +28,6 @@
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/road_textures.h"
-#include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/ware_descr.h"
@@ -40,12 +37,6 @@
 namespace Widelands {
 
 class ResourceDescription;
-class WareDescr;
-class Warehouse;
-class WorkerDescr;
-class World;
-class BuildingDescr;
-struct Event;
 
 /*
  * Resource indicators:
@@ -116,28 +107,31 @@ public:
 	DescriptionIndex geologist() const;
 	DescriptionIndex soldier() const;
 	DescriptionIndex ship() const;
+	DescriptionIndex ferry() const;
 	DescriptionIndex port() const;
-	DescriptionIndex ironore() const;
-	DescriptionIndex rawlog() const;
-	DescriptionIndex refinedlog() const;
-	DescriptionIndex granite() const;
 
 	const std::vector<DescriptionIndex>& trainingsites() const;
 	const std::vector<DescriptionIndex>& worker_types_without_cost() const;
 
 	uint32_t frontier_animation() const;
 	uint32_t flag_animation() const;
+	uint32_t bridge_animation(uint8_t dir, bool busy) const;
+
+	// Bridge height in pixels at 1x scale, for drawing bobs walking over a bridge
+	uint32_t bridge_height() const;
 
 	// A vector of all texture images that can be used for drawing a
-	// (normal|busy) road. The images are guaranteed to exist.
+	// (normal|busy) road or a waterway. The images are guaranteed to exist.
 	const std::vector<std::string>& normal_road_paths() const;
 	const std::vector<std::string>& busy_road_paths() const;
+	const std::vector<std::string>& waterway_paths() const;
 
-	// Add the corresponding texture for roads.
+	// Add the corresponding texture for roads/waterways.
 	void add_normal_road_texture(const Image* texture);
 	void add_busy_road_texture(const Image* texture);
+	void add_waterway_texture(const Image* texture);
 
-	// The road textures used for drawing roads.
+	// The road textures used for drawing roads and waterways.
 	const RoadTextures& road_textures() const;
 
 	DescriptionIndex get_resource_indicator(const ResourceDescription* const res,
@@ -187,8 +181,17 @@ private:
 
 	uint32_t frontier_animation_id_;
 	uint32_t flag_animation_id_;
+	struct BridgeAnimationIDs {
+		uint32_t e;
+		uint32_t se;
+		uint32_t sw;
+	};
+	BridgeAnimationIDs bridges_normal_;
+	BridgeAnimationIDs bridges_busy_;
+	uint32_t bridge_height_;
 	std::vector<std::string> normal_road_paths_;
 	std::vector<std::string> busy_road_paths_;
+	std::vector<std::string> waterway_paths_;
 	RoadTextures road_textures_;
 
 	std::vector<DescriptionIndex> buildings_;
@@ -200,17 +203,14 @@ private:
 	// The wares that are used by construction sites
 	std::set<DescriptionIndex> construction_materials_;
 	// Special units. Some of them are used by the engine, some are only used by the AI.
-	DescriptionIndex builder_;     // The builder for this tribe
-	DescriptionIndex carrier_;     // The basic carrier for this tribe
-	DescriptionIndex carrier2_;    // Additional carrier for busy roads
-	DescriptionIndex geologist_;   // This tribe's geologist worker
-	DescriptionIndex soldier_;     // The soldier that this tribe uses
-	DescriptionIndex ship_;        // The ship that this tribe uses
-	DescriptionIndex port_;        // The port that this tribe uses
-	DescriptionIndex ironore_;     // Iron ore
-	DescriptionIndex rawlog_;      // Simple log
-	DescriptionIndex refinedlog_;  // Refined log, e.g. wood or blackwood
-	DescriptionIndex granite_;     // Granite
+	DescriptionIndex builder_;    // The builder for this tribe
+	DescriptionIndex carrier_;    // The basic carrier for this tribe
+	DescriptionIndex carrier2_;   // Additional carrier for busy roads
+	DescriptionIndex geologist_;  // This tribe's geologist worker
+	DescriptionIndex soldier_;    // The soldier that this tribe uses
+	DescriptionIndex ship_;       // The ship that this tribe uses
+	DescriptionIndex ferry_;      // The ferry that this tribe uses
+	DescriptionIndex port_;       // The port that this tribe uses
 	std::vector<DescriptionIndex> worker_types_without_cost_;
 	std::vector<DescriptionIndex> trainingsites_;
 	// Order and positioning of wares in the warehouse display

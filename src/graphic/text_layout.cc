@@ -19,8 +19,9 @@
 
 #include "graphic/text_layout.h"
 
+#include <memory>
+
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"

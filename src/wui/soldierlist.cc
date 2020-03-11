@@ -19,8 +19,7 @@
 
 #include "wui/soldierlist.h"
 
-#include <boost/bind.hpp>
-#include <boost/format.hpp>
+#include <functional>
 
 #include "base/macros.h"
 #include "graphic/font_handler.h"
@@ -34,6 +33,7 @@
 #include "logic/player.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
+#include "ui_basic/textarea.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/soldiercapacitycontrol.h"
 
@@ -44,7 +44,7 @@ namespace {
 
 constexpr uint32_t kMaxColumns = 6;
 constexpr uint32_t kAnimateSpeed = 300;  ///< in pixels per second
-constexpr uint32_t kIconBorder = 2;
+constexpr int kIconBorder = 2;
 
 }  // namespace
 
@@ -52,7 +52,7 @@ constexpr uint32_t kIconBorder = 2;
  * Iconic representation of soldiers, including their levels and current health.
  */
 struct SoldierPanel : UI::Panel {
-	using SoldierFn = boost::function<void(const Soldier*)>;
+	using SoldierFn = std::function<void(const Soldier*)>;
 
 	SoldierPanel(UI::Panel& parent,
 	             Widelands::EditorGameBase& egbase,
@@ -105,8 +105,8 @@ private:
 	uint32_t rows_;
 	uint32_t cols_;
 
-	uint32_t icon_width_;
-	uint32_t icon_height_;
+	int icon_width_;
+	int icon_height_;
 
 	int32_t last_animate_time_;
 };
@@ -296,7 +296,8 @@ void SoldierPanel::draw(RenderTarget& dst) {
 			continue;
 
 		constexpr float kNoZoom = 1.f;
-		soldier->draw_info_icon(icon.pos + Vector2i(kIconBorder, kIconBorder), kNoZoom, false, &dst);
+		soldier->draw_info_icon(icon.pos + Vector2i(kIconBorder, kIconBorder), kNoZoom,
+		                        Soldier::InfoMode::kInBuilding, InfoToDraw::kSoldierLevels, &dst);
 	}
 }
 

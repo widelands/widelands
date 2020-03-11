@@ -24,7 +24,6 @@
 
 #include "economy/flag.h"
 #include "logic/cmd_queue.h"
-#include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/trainingsite.h"
@@ -170,10 +169,35 @@ struct CmdBuildRoad : public PlayerCommand {
 	void serialize(StreamWrite&) override;
 
 private:
-	Path* path;
+	std::unique_ptr<Path> path;
 	Coords start;
 	Path::StepVector::size_type nsteps;
-	char* steps;
+	std::unique_ptr<uint8_t[]> steps;
+};
+
+struct CmdBuildWaterway : public PlayerCommand {
+	CmdBuildWaterway() : PlayerCommand(), path(nullptr), start(), nsteps(0), steps(nullptr) {
+	}  // For savegame loading
+	CmdBuildWaterway(uint32_t, int32_t, Path&);
+	explicit CmdBuildWaterway(StreamRead&);
+
+	~CmdBuildWaterway() override;
+
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kBuildWaterway;
+	}
+
+	void execute(Game&) override;
+	void serialize(StreamWrite&) override;
+
+private:
+	std::unique_ptr<Path> path;
+	Coords start;
+	Path::StepVector::size_type nsteps;
+	std::unique_ptr<uint8_t[]> steps;
 };
 
 struct CmdFlagAction : public PlayerCommand {

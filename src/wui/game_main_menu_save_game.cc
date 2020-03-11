@@ -22,7 +22,6 @@
 #include <memory>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "game_io/game_loader.h"
@@ -135,7 +134,9 @@ void GameMainMenuSaveGame::entry_selected() {
 	load_or_save_.delete_button()->set_enabled(load_or_save_.has_selection());
 	if (load_or_save_.has_selection()) {
 		std::unique_ptr<SavegameData> gamedata = load_or_save_.entry_selected();
-		filename_editbox_.set_text(FileSystem::filename_without_ext(gamedata->filename.c_str()));
+		if (!gamedata->is_directory()) {
+			filename_editbox_.set_text(FileSystem::filename_without_ext(gamedata->filename.c_str()));
+		}
 	}
 }
 
@@ -161,12 +162,18 @@ void GameMainMenuSaveGame::ok() {
 	if (!ok_.enabled()) {
 		return;
 	}
-
-	std::string filename = filename_editbox_.text();
-	if (save_game(filename, !get_config_bool("nozip", false))) {
-		die();
+	if (load_or_save_.has_selection() && load_or_save_.entry_selected()->is_directory()) {
+		std::unique_ptr<SavegameData> gamedata = load_or_save_.entry_selected();
+		load_or_save_.change_directory_to(gamedata->filename);
+		curdir_ = gamedata->filename;
+		filename_editbox_.focus();
 	} else {
-		load_or_save_.table_.focus();
+		std::string filename = filename_editbox_.text();
+		if (save_game(filename, !get_config_bool("nozip", false))) {
+			die();
+		} else {
+			load_or_save_.table().focus();
+		}
 	}
 }
 
@@ -236,13 +243,18 @@ bool GameMainMenuSaveGame::save_game(std::string filename, bool binary) {
 
 	// Try saving the game.
 	Widelands::Game& game = igbase().game();
+
+	game.create_loader_ui({"general_game"}, true);
+
 	GenericSaveHandler gsh(
 	   [&game](FileSystem& fs) {
 		   Widelands::GameSaver gs(fs, game);
 		   gs.save();
-	   },
+		},
 	   complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR);
 	GenericSaveHandler::Error error = gsh.save();
+
+	game.remove_loader_ui();
 
 	// If only the temporary backup couldn't be deleted, we still treat it as
 	// success. Automatic cleanup will deal with later. No need to bother the

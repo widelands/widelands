@@ -30,11 +30,7 @@ namespace Widelands {
 class Building;
 class Economy;
 class EditorGameBase;
-class Game;
 struct IdleWareSupply;
-class MapObject;
-struct PlayerImmovable;
-struct Transfer;
 
 /**
  * WareInstance represents one item while it is being carried around.

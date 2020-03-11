@@ -21,13 +21,12 @@
 #define WL_GRAPHIC_TEXTURE_ATLAS_H
 
 #include <memory>
-#include <vector>
 
 #include "base/macros.h"
 #include "graphic/texture.h"
 
 // A 2d bin packer based on the blog post
-// http://codeincomplete.com/posts/2011/5/7/bin_packing/.
+// https://codeincomplete.com/posts/bin-packing/.
 class TextureAtlas {
 public:
 	struct PackedTexture {

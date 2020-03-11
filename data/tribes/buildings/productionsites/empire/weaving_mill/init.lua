@@ -7,16 +7,16 @@ tribes:new_productionsite_type {
    descname = pgettext("empire_building", "Weaving Mill"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   size = "big",
+   size = "medium",
 
    buildcost = {
       log = 3,
-      granite = 4,
+      granite = 3,
       marble = 1
    },
    return_on_dismantle = {
       log = 1,
-      granite = 3
+      granite = 2
    },
 
    animations = {
@@ -48,7 +48,7 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "wool", amount = 8 }
+      { name = "wool", amount = 6 }
    },
    outputs = {
       "cloth"

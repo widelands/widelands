@@ -20,17 +20,12 @@
 #ifndef WL_GRAPHIC_SURFACE_H
 #define WL_GRAPHIC_SURFACE_H
 
-#include <memory>
-#include <vector>
-
 #include "base/macros.h"
 #include "base/rect.h"
 #include "graphic/blend_mode.h"
 #include "graphic/color.h"
 #include "graphic/gl/draw_line_program.h"
 #include "graphic/image.h"
-
-class Texture;
 
 // Interface to a basic surfaces that can be used as destination for blitting
 // and drawing. It also allows low level pixel access.

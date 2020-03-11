@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "logic/cmd_luacoroutine.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
@@ -34,7 +32,6 @@
 #include "logic/map_objects/world/world.h"
 #include "scripting/globals.h"
 #include "scripting/lua_coroutine.h"
-#include "scripting/lua_editor.h"
 #include "scripting/lua_game.h"
 #include "scripting/lua_map.h"
 #include "scripting/lua_table.h"
@@ -81,9 +78,7 @@ Game
 */
 const char LuaGame::className[] = "Game";
 const MethodType<LuaGame> LuaGame::Methods[] = {
-   METHOD(LuaGame, launch_coroutine),
-   METHOD(LuaGame, save),
-   {nullptr, nullptr},
+   METHOD(LuaGame, launch_coroutine), METHOD(LuaGame, save), {nullptr, nullptr},
 };
 const PropertyType<LuaGame> LuaGame::Properties[] = {
    PROP_RO(LuaGame, real_speed),   PROP_RO(LuaGame, time), PROP_RW(LuaGame, desired_speed),
@@ -331,9 +326,7 @@ const MethodType<LuaWorld> LuaWorld::Methods[] = {
    {0, 0},
 };
 const PropertyType<LuaWorld> LuaWorld::Properties[] = {
-   PROP_RO(LuaWorld, immovable_descriptions),
-   PROP_RO(LuaWorld, terrain_descriptions),
-   {0, 0, 0},
+   PROP_RO(LuaWorld, immovable_descriptions), PROP_RO(LuaWorld, terrain_descriptions), {0, 0, 0},
 };
 
 LuaWorld::LuaWorld(lua_State* /* L */) {
@@ -526,6 +519,7 @@ Tribes
 const char LuaTribes::className[] = "Tribes";
 const MethodType<LuaTribes> LuaTribes::Methods[] = {
    METHOD(LuaTribes, new_carrier_type),
+   METHOD(LuaTribes, new_ferry_type),
    METHOD(LuaTribes, new_constructionsite_type),
    METHOD(LuaTribes, new_dismantlesite_type),
    METHOD(LuaTribes, new_immovable_type),
@@ -820,6 +814,29 @@ int LuaTribes::new_carrier_type(lua_State* L) {
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
 		get_egbase(L).mutable_tribes()->add_carrier_type(table);
+	} catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
+   .. method:: new_ferry_type{table}
+
+      Adds a new ferry worker type. Takes a single argument, a table with
+      the descriptions. See the files in tribes/ for usage examples.
+
+      :returns: :const:`nil`
+*/
+int LuaTribes::new_ferry_type(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		EditorGameBase& egbase = get_egbase(L);
+		egbase.mutable_tribes()->add_ferry_type(table);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}

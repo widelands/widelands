@@ -20,10 +20,9 @@
 #ifndef WL_UI_BASIC_TABPANEL_H
 #define WL_UI_BASIC_TABPANEL_H
 
-#include <vector>
+#include <memory>
 
-#include <boost/signals2.hpp>
-
+#include "graphic/text/rendered_text.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
@@ -110,7 +109,7 @@ struct TabPanel : public Panel {
 
 	using TabList = std::vector<Tab*>;
 
-	const TabList& tabs();
+	const TabList& tabs() const;
 	void activate(uint32_t idx);
 	void activate(const std::string&);
 	uint32_t active() {

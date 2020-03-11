@@ -21,7 +21,7 @@
 #define WL_EDITOR_UI_MENUS_MAIN_MENU_NEW_MAP_H
 
 #include "editor/ui_menus/map_size_box.h"
-#include "logic/map_objects/description_maintainer.h"
+#include "logic/widelands.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/listselect.h"

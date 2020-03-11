@@ -21,12 +21,16 @@ world:new_immovable_type{
          "grow=larch_summer_pole",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "sapling/idle_?.png"),
-         hotspot = { 4, 12 },
+         directory = dirname,
+         basename = "sapling",
          fps = 8,
-      },
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 5, 13 }
+      }
    },
 }
 
@@ -44,12 +48,16 @@ world:new_immovable_type{
          "grow=larch_summer_mature",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "pole/idle_?.png"),
-         hotspot = { 9, 28 },
+         directory = dirname,
+         basename = "pole",
          fps = 8,
-      },
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 10, 29 }
+      }
    },
 }
 
@@ -67,12 +75,16 @@ world:new_immovable_type{
          "grow=larch_summer_old",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "mature/idle_?.png"),
-         hotspot = { 12, 48 },
+         directory = dirname,
+         basename = "mature",
          fps = 8,
-      },
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 13, 49 }
+      }
    },
 }
 
@@ -80,7 +92,7 @@ world:new_immovable_type{
    name = "larch_summer_old",
    descname = _ "Larch (Old)",
    species = _ "Larch",
-   icon = dirname .. "old/idle_0.png",
+   icon = dirname .. "menu.png",
    editor_category = "trees_coniferous",
    size = "small",
    attributes = { "tree" },
@@ -95,14 +107,18 @@ world:new_immovable_type{
          "remove=",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "old/idle_?.png"),
-         hotspot = { 15, 59 },
+         directory = dirname,
+         basename = "old",
          fps = 10,
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 16, 60 },
          sound_effect = {
             path = "sound/animals/bird6",
          },
-      },
+      }
    },
 }

@@ -13,7 +13,7 @@ add_dependencies(codecheck run_build_deps)
 
 # A target that depends on all unit tests as 'make test' will not rebuild
 # tests:
-# http://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests
+# https://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests
 add_custom_target(wl_tests)
 
 #include the cmake version dependend macro _include_directories
@@ -73,7 +73,6 @@ add_subdirectory(logic)
 add_subdirectory(map_io)
 add_subdirectory(network)
 add_subdirectory(notifications)
-add_subdirectory(random)
 add_subdirectory(scripting)
 add_subdirectory(sound)
 add_subdirectory(third_party)
@@ -92,6 +91,7 @@ wl_library(widelands_ball_of_mud
     wlapplication.h
     wlapplication_messages.cc
     wlapplication_messages.h
+  USES_BOOST_REGEX
   USES_SDL2
   USES_SDL2_IMAGE
   USES_SDL2_TTF
@@ -100,12 +100,14 @@ wl_library(widelands_ball_of_mud
     base_geometry
     base_i18n
     base_log
+    base_random
     base_time_string
     build_info
     editor
     graphic
     graphic_fonthandler
     graphic_text
+    graphic_text_layout
     io_filesystem
     logic
     logic_exceptions
@@ -116,7 +118,6 @@ wl_library(widelands_ball_of_mud
     logic_single_player_game_settings
     map_io_map_loader
     network
-    random
     sound
     ui_basic
     ui_fsmenu_gameloading

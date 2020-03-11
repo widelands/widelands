@@ -20,16 +20,11 @@
 #ifndef WL_IO_FILEWRITE_H
 #define WL_IO_FILEWRITE_H
 
-#include <cassert>
-#include <cstdarg>
 #include <limits>
-#include <memory>
-#include <string>
 
 #include "io/streamwrite.h"
 
 class FileSystem;
-class RealFSImpl;
 
 /// Mirror of \ref FileRead : all writes are first stored in a block of memory
 /// and finally written out when write() is called.

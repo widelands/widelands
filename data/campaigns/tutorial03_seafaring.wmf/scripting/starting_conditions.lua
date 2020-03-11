@@ -78,12 +78,20 @@ function init_player()
    {"atlanteans_guardhouse", 49, 60},
    {"atlanteans_crystalmine", 51, 61},
    {"atlanteans_guardhall", 43, 64},
+   {"atlanteans_guardhall", 16, 90},
+   {"atlanteans_guardhall", 47, 92},
+   {"atlanteans_guardhall", 41, 101},
+   {"atlanteans_guardhall", 27, 82},
+   {"atlanteans_guardhall", 37, 92},
    {"atlanteans_fishbreeders_house", 40, 66},
    {"atlanteans_fishers_house", 42, 66},
    {"atlanteans_fishbreeders_house", 44, 66},
    {"atlanteans_fishers_house", 46, 66},
    {"atlanteans_fishbreeders_house", 48, 66},
    {"atlanteans_castle", 22, 55},
+   {"atlanteans_castle", 19, 71},
+   {"atlanteans_castle", 40, 74},
+   {"atlanteans_castle", 27, 99},
    {"atlanteans_coalmine", 22, 48},
    {"atlanteans_coalmine", 16, 49},
    {"atlanteans_farm", 20, 59},
@@ -142,7 +150,7 @@ function init_player()
    {"atlanteans_goldmine", 32, 25}
    )
 
-   plr:forbid_buildings{"atlanteans_shipyard"}
+   plr:forbid_buildings{"atlanteans_shipyard", "atlanteans_ferry_yard"}
 
    connected_road(plr,map:get_field(42,44).immovable,"bl,br,bl|bl,bl|bl,l|l,bl|l,l,l|l,l|tr,tl|r,tr")
    connected_road(plr,map:get_field(42,44).immovable,"br,r|br,r,r|r,r,tr|r,r|r,r|br,bl|br,br|br,br|r,r")
@@ -158,6 +166,16 @@ function init_player()
    connected_road(plr,map:get_field(41,47).immovable,"r,tr,tr")
 
    connected_road(plr,map:get_field(33,26).immovable,"r,tr|tr,tr|tr,tr|tr,tr|tl,tr")
+
+   connected_road(plr,map:get_field(20,72).immovable, "tr,tr|tr,tr|tr,tl")
+   connected_road(plr,map:get_field(20,72).immovable, "l,bl|br,br|r,r|r,r|r,r|r,r|r,r|r,r|r,r|r,r|r,r|r,r,r")
+   connected_road(plr,map:get_field(40,75).immovable, "r,r|r,r|br,br|br,bl|br,bl|bl,bl|bl,l|l,l|l,l|l,l|tl,tl|l,l|l,l|l,l|l,l,bl")
+   connected_road(plr,map:get_field(27,83).immovable, "l,l|l,l|l,l|l,l|l,l|bl,bl|bl,bl|br,br|br,bl")
+   connected_road(plr,map:get_field(16,91).immovable, "br,r|r,r|r,r|r,r|r,r|r,r|r,r|r,r|r,r|r,r|br,r")
+   connected_road(plr,map:get_field(37,93).immovable, "tr,r|r,r|r,r|r,r|r,br,r")
+   connected_road(plr,map:get_field(47,93).immovable, "br,br|bl,bl|bl,bl|bl,bl|l,l|l,bl")
+   connected_road(plr,map:get_field(42,102).immovable, "l,l|l,l|tl,tl|l,tl|l,tl|l,l|l,l|bl,l,bl")
+   connected_road(plr,map:get_field(30,98).immovable, "l,tl|tl,tl")
 end
 
 run(init_player)

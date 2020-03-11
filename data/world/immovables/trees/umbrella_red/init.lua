@@ -22,12 +22,16 @@ world:new_immovable_type{
          "grow=umbrella_red_wasteland_pole",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "sapling/idle_?.png"),
-         hotspot = { 5, 12 },
+         directory = dirname,
+         basename = "sapling",
          fps = 8,
-      },
+         frames = 5,
+         rows = 3,
+         columns = 2,
+         hotspot = { 6, 13 }
+      }
    },
 }
 
@@ -46,12 +50,16 @@ world:new_immovable_type{
          "grow=umbrella_red_wasteland_mature",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "pole/idle_?.png"),
-         hotspot = { 12, 28 },
+         directory = dirname,
+         basename = "pole",
          fps = 8,
-      },
+         frames = 5,
+         rows = 3,
+         columns = 2,
+         hotspot = { 13, 29 }
+      }
    },
 }
 
@@ -73,12 +81,16 @@ world:new_immovable_type{
          "grow=umbrella_red_wasteland_old",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "mature/idle_?.png"),
-         hotspot = { 18, 48 },
+         directory = dirname,
+         basename = "mature",
          fps = 8,
-      },
+         frames = 5,
+         rows = 3,
+         columns = 2,
+         hotspot = { 19, 49 }
+      }
    },
 }
 
@@ -88,7 +100,7 @@ world:new_immovable_type{
    descname = _ "Red Umbrella Tree (Old)",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    species = _ "Red Umbrella Tree",
-   icon = dirname .. "old/idle_0.png",
+   icon = dirname .. "menu.png",
    editor_category = "trees_wasteland",
    size = "small",
    attributes = { "tree" },
@@ -103,11 +115,15 @@ world:new_immovable_type{
          "remove=",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "old/idle_?.png"),
-         hotspot = { 24, 60 },
+         directory = dirname,
+         basename = "old",
          fps = 10,
-      },
+         frames = 5,
+         rows = 3,
+         columns = 2,
+         hotspot = { 25, 61 }
+      }
    },
 }

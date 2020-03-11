@@ -19,7 +19,6 @@
 
 #include "ui_fsmenu/campaigns.h"
 
-#include <map>
 #include <memory>
 
 #include "base/log.h"

@@ -22,8 +22,6 @@
 
 #include <memory>
 
-#include <boost/signals2.hpp>
-
 #include "graphic/minimap_renderer.h"
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
@@ -52,9 +50,13 @@ public:
 	}
 
 private:
+	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
+	   graphic_resolution_changed_subscriber_;
+
 	void toggle(MiniMapLayer);
 	void update_button_permpressed();
 	void resize();
+	void check_boundaries();
 
 	/**
 	 * MiniMap::View is the panel that represents the pure representation of the
@@ -77,7 +79,9 @@ private:
 
 		bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 
-		void set_zoom(int32_t z);
+		void set_zoom(bool zoom);
+
+		bool can_zoom();
 
 	private:
 		InteractiveBase& ibase_;

@@ -22,7 +22,6 @@
 #include <memory>
 
 #include <SDL_keycode.h>
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
@@ -93,7 +92,7 @@ EditorToolSetTerrainOptionsMenu::EditorToolSetTerrainOptionsMenu(
 	      this, world.editor_terrain_categories(), world.terrains(),
 	      [this](UI::Panel* cb_parent, const TerrainDescription& terrain_descr) {
 		      return create_terrain_checkbox(cb_parent, terrain_descr, &offscreen_images_);
-	      },
+		   },
 	      [this] { select_correct_tool(); }, &tool));
 	set_center_panel(multi_select_menu_.get());
 }

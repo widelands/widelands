@@ -20,12 +20,8 @@
 #include "logic/map_objects/map_object.h"
 
 #include <algorithm>
-#include <cmath>
 #include <cstdarg>
-#include <cstdio>
-#include <cstring>
 #include <memory>
-#include <string>
 
 #include "base/log.h"
 #include "base/wexception.h"
@@ -41,7 +37,6 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
-#include "logic/queue_cmd_ids.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
 
@@ -515,20 +510,26 @@ void MapObject::cleanup(EditorGameBase& egbase) {
 	egbase.objects().remove(*this);
 }
 
-void MapObject::do_draw_info(const TextToDraw& draw_text,
+void MapObject::do_draw_info(const InfoToDraw& info_to_draw,
                              const std::string& census,
                              const std::string& statictics,
                              const Vector2f& field_on_dst,
                              float scale,
                              RenderTarget* dst) const {
-	if (draw_text == TextToDraw::kNone) {
+	if (!(info_to_draw & (InfoToDraw::kCensus | InfoToDraw::kStatistics))) {
 		return;
 	}
 
 	// Rendering text is expensive, so let's just do it for only a few sizes.
+	const float granularity = 4.f;
+	float text_scale = scale;
 	// The formula is a bit fancy to avoid too much text overlap.
-	scale = std::round(2.f * (scale > 1.f ? std::sqrt(scale) : std::pow(scale, 2.f))) / 2.f;
-	if (scale < 1.f) {
+	text_scale = std::round(granularity *
+	                        (text_scale > 1.f ? std::sqrt(text_scale) : std::pow(text_scale, 2.f))) /
+	             granularity;
+
+	// Skip tiny text for performance reasons
+	if (text_scale < 0.5f) {
 		return;
 	}
 
@@ -539,11 +540,12 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 	std::shared_ptr<const UI::RenderedText> rendered_census =
 	   UI::g_fh->render(as_richtext_paragraph(census, census_font, UI::Align::kCenter), 120 * scale);
 	Vector2i position = field_on_dst.cast<int>() - Vector2i(0, 48) * scale;
-	if ((draw_text & TextToDraw::kCensus) != TextToDraw::kNone) {
+	if (info_to_draw & InfoToDraw::kCensus) {
 		rendered_census->draw(*dst, position, UI::Align::kCenter);
 	}
 
-	if ((draw_text & TextToDraw::kStatistics) != TextToDraw::kNone && !statictics.empty()) {
+	// Draw statistics if we want them, they are available and they fill fit
+	if (info_to_draw & InfoToDraw::kStatistics && !statictics.empty() && scale >= 0.5f) {
 		UI::FontStyleInfo statistics_font(
 		   g_gr->styles().building_statistics_style().statistics_font());
 		statistics_font.set_size(scale * statistics_font.size());
@@ -718,20 +720,28 @@ std::string to_string(const MapObjectType type) {
 		return "worker";
 	case MapObjectType::CARRIER:
 		return "carrier";
+	case MapObjectType::FERRY:
+		return "ferry";
 	case MapObjectType::SOLDIER:
 		return "soldier";
 	case MapObjectType::WARE:
 		return "ware";
 	case MapObjectType::BATTLE:
 		return "battle";
-	case MapObjectType::FLEET:
-		return "fleet";
+	case MapObjectType::SHIP_FLEET:
+		return "ship_fleet";
+	case MapObjectType::FERRY_FLEET:
+		return "ferry_fleet";
 	case MapObjectType::IMMOVABLE:
 		return "immovable";
 	case MapObjectType::FLAG:
 		return "flag";
 	case MapObjectType::ROAD:
 		return "road";
+	case MapObjectType::WATERWAY:
+		return "waterway";
+	case MapObjectType::ROADBASE:
+		return "roadbase";
 	case MapObjectType::PORTDOCK:
 		return "portdock";
 	case MapObjectType::BUILDING:

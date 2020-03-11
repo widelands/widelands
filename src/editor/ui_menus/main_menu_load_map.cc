@@ -19,9 +19,6 @@
 
 #include "editor/ui_menus/main_menu_load_map.h"
 
-#include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -33,7 +30,7 @@
  * Create all the buttons etc...
  */
 MainMenuLoadMap::MainMenuLoadMap(EditorInteractive& parent, UI::UniqueWindow::Registry& registry)
-   : MainMenuLoadOrSaveMap(parent, registry, 2, "load_map_menu", _("Load Map")) {
+   : MainMenuLoadOrSaveMap(parent, registry, "load_map_menu", _("Load Map")) {
 	set_current_directory(curdir_);
 
 	table_.selected.connect(boost::bind(&MainMenuLoadMap::entry_selected, this));
@@ -53,8 +50,10 @@ void MainMenuLoadMap::clicked_ok() {
 		fill_table();
 	} else {
 		EditorInteractive& eia = dynamic_cast<EditorInteractive&>(*get_parent());
+		eia.egbase().create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
 		eia.load(mapdata.filename);
 		// load() will delete us.
+		eia.egbase().remove_loader_ui();
 	}
 }
 

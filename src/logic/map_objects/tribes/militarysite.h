@@ -31,9 +31,6 @@
 
 namespace Widelands {
 
-class Soldier;
-class World;
-
 // I assume elsewhere, that enum SoldierPreference fits to uint8_t.
 enum class SoldierPreference : uint8_t {
 	kRookies,
@@ -85,7 +82,7 @@ public:
 	void act(Game&, uint32_t data) override;
 	void remove_worker(Worker&) override;
 
-	void set_economy(Economy*) override;
+	void set_economy(Economy*, WareWorker) override;
 	bool get_building_work(Game&, Worker&, bool success) override;
 
 	/// Launch the given soldier on an attack towards the given

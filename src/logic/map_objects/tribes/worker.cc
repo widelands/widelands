@@ -19,11 +19,8 @@
 
 #include "logic/map_objects/tribes/worker.h"
 
-#include <iterator>
 #include <memory>
 #include <tuple>
-
-#include <boost/format.hpp>
 
 #include "base/log.h"
 #include "base/macros.h"
@@ -36,7 +33,6 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
-#include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/cmd_incorporate.h"
@@ -113,7 +109,7 @@ bool Worker::run_mine(Game& game, State& state, const Action& action) {
 	Map* map = game.mutable_map();
 
 	// Make sure that the specified resource is available in this world
-	DescriptionIndex const res = game.world().get_resource(action.sparam1.c_str());
+	DescriptionIndex const res = game.world().resource_index(action.sparam1.c_str());
 	if (res == Widelands::INVALID_INDEX)
 		throw GameDataError(_("should mine resource %s, which does not exist in world; tribe "
 		                      "is not compatible with world"),
@@ -216,7 +212,7 @@ bool Worker::run_breed(Game& game, State& state, const Action& action) {
 	Map* map = game.mutable_map();
 
 	// Make sure that the specified resource is available in this world
-	DescriptionIndex const res = game.world().get_resource(action.sparam1.c_str());
+	DescriptionIndex const res = game.world().resource_index(action.sparam1.c_str());
 	if (res == Widelands::INVALID_INDEX)
 		throw GameDataError(_("should breed resource type %s, which does not exist in world; "
 		                      "tribe is not compatible with world"),
@@ -530,7 +526,7 @@ int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map,
 // If landbased_ is false, the behaviour is modified to instead accept the node
 // only if *at least one* adjacent triangle has MOVECAPS_SWIM.
 struct FindNodeSpace {
-	explicit FindNodeSpace(BaseImmovable* const ignoreimm, bool land) : ignore_immovable_(ignoreimm), landbased_(land) {
+	explicit FindNodeSpace() {
 	}
 
 	bool accept(const EditorGameBase& egbase, const FCoords& coords) const {
@@ -540,17 +536,9 @@ struct FindNodeSpace {
 
 		for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 			FCoords const neighb = egbase.map().get_neighbour(coords, dir);
-			if (neighb.field->get_immovable() == ignore_immovable_) {
-				continue;
-			}
-			if (landbased_) {
-				if (!(neighb.field->nodecaps() & MOVECAPS_WALK))
-					return false;
-			} else {
-				if (neighb.field->nodecaps() & MOVECAPS_SWIM) {
-					return true;
-				}
-			}
+
+			if (!(neighb.field->maxcaps() & MOVECAPS_WALK))
+				return false;
 		}
 
 		return landbased_;
@@ -574,17 +562,18 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 	const FindNodeSize::Size findnodesize = static_cast<FindNodeSize::Size>(action.iparam2);
 	functor.add(FindNodeSize(findnodesize));
 	if (action.sparam1.size()) {
-		if (action.iparam4)
-			functor.add(FindNodeResourceBreedable(world.get_resource(action.sparam1.c_str())));
-		else
-			functor.add(FindNodeResource(world.get_resource(action.sparam1.c_str())));
+		if (action.iparam4) {
+			functor.add(FindNodeResourceBreedable(world.resource_index(action.sparam1.c_str())));
+		} else {
+			functor.add(FindNodeResource(world.resource_index(action.sparam1.c_str())));
+		}
 	}
 
 	if (action.iparam5 > -1)
 		functor.add(FindNodeImmovableAttribute(action.iparam5), true);
 
 	if (action.iparam3)
-		functor.add(FindNodeSpace(get_location(game), findnodesize != FindNodeSize::Size::sizeSwim));
+		functor.add(FindNodeSpace());
 
 	if (action.iparam7)
 		functor.add(FindNodeTerraform());
@@ -601,12 +590,12 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 			FindNodeAnd functorAnyFull;
 			functorAnyFull.add(FindNodeSize(static_cast<FindNodeSize::Size>(action.iparam2)));
 			functorAnyFull.add(FindNodeResourceBreedable(
-			   world.get_resource(action.sparam1.c_str()), AnimalBreedable::kAnimalFull));
+			   world.resource_index(action.sparam1.c_str()), AnimalBreedable::kAnimalFull));
 			if (action.iparam5 > -1)
 				functorAnyFull.add(FindNodeImmovableAttribute(action.iparam5), true);
 
 			if (action.iparam3)
-				functorAnyFull.add(FindNodeSpace(get_location(game), findnodesize != FindNodeSize::Size::sizeSwim));
+				functorAnyFull.add(FindNodeSpace());
 
 			// If there are fields full of fish, we change the type of notification
 			if (map.find_reachable_fields(game, area, &list, cstep, functorAnyFull)) {
@@ -826,9 +815,8 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	// Checks if the 'immovable_description' has a terrain_affinity, if so use it. Otherwise assume
 	// it to be 1 (perfect fit). Adds it to the best_suited_immovables_index.
 	const auto test_suitability = [&best_suited_immovables_index, &fpos, &map, &game](
-	                                 const uint32_t attribute_id, const DescriptionIndex index,
-	                                 const ImmovableDescr& immovable_description,
-	                                 MapObjectDescr::OwnerType owner_type) {
+	   const uint32_t attribute_id, const DescriptionIndex index,
+	   const ImmovableDescr& immovable_description, MapObjectDescr::OwnerType owner_type) {
 		if (!immovable_description.has_attribute(attribute_id)) {
 			return;
 		}
@@ -987,6 +975,20 @@ bool Worker::run_terraform(Game& game, State& state, const Action&) {
 }
 
 /**
+ * buildferry
+ *
+ * Creates a new instance of the ferry the worker's
+ * tribe uses and adds it to the appropriate fleet.
+ *
+ */
+bool Worker::run_buildferry(Game& game, State& state, const Action&) {
+	game.create_ferry(get_position(), owner_);
+	++state.ivar1;
+	schedule_act(game, 10);
+	return true;
+}
+
+/**
  * Simply remove the currently selected object - make no fuss about it.
  */
 bool Worker::run_removeobject(Game& game, State& state, const Action&) {
@@ -1048,11 +1050,10 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
 			get_owner()->add_message_with_timeout(
-			   game,
-			   std::unique_ptr<Message>(new Message(Message::Type::kGeologists, game.get_gametime(),
-			                                        rdescr->descname(), rdescr->representative_image(),
-			                                        ri.descr().descname(), rt_description, position,
-			                                        serial_, rdescr->name())),
+			   game, std::unique_ptr<Message>(new Message(
+			            Message::Type::kGeologists, game.get_gametime(), rdescr->descname(),
+			            rdescr->representative_image(), ri.descr().descname(), rt_description,
+			            position, serial_, rdescr->name())),
 			   rdescr->timeout_ms(), rdescr->timeout_radius());
 		}
 	}
@@ -1115,7 +1116,12 @@ bool Worker::run_construct(Game& game, State& state, const Action& /* action */)
 }
 
 Worker::Worker(const WorkerDescr& worker_descr)
-   : Bob(worker_descr), economy_(nullptr), supply_(nullptr), transfer_(nullptr), current_exp_(0) {
+   : Bob(worker_descr),
+     worker_economy_(nullptr),
+     ware_economy_(nullptr),
+     supply_(nullptr),
+     transfer_(nullptr),
+     current_exp_(0) {
 }
 
 Worker::~Worker() {
@@ -1133,14 +1139,16 @@ void Worker::log_general_info(const EditorGameBase& egbase) const {
 		FORMAT_WARNINGS_ON
 		molog("** Owner (plrnr): %i\n", loc->owner().player_number());
 		FORMAT_WARNINGS_OFF
-		molog("* Economy: %p\n", loc->get_economy());
+		molog("* WorkerEconomy: %p\n", loc->get_economy(wwWORKER));
+		molog("* WareEconomy: %p\n", loc->get_economy(wwWARE));
 		FORMAT_WARNINGS_ON
 	}
 
 	PlayerImmovable* imm = location_.get(egbase);
 	molog("location: %u\n", imm ? imm->serial() : 0);
 	FORMAT_WARNINGS_OFF
-	molog("Economy: %p\n", economy_);
+	molog("WorkerEconomy: %p\n", worker_economy_);
+	molog("WareEconomy: %p\n", ware_economy_);
 	molog("transfer: %p\n", transfer_);
 	FORMAT_WARNINGS_ON
 
@@ -1177,26 +1185,34 @@ void Worker::set_location(PlayerImmovable* const location) {
 		old_location->remove_worker(*this);
 	} else {
 		if (!is_shipping()) {
-			assert(!economy_);
+			assert(!ware_economy_);
+			assert(!worker_economy_);
 		}
 	}
 
 	location_ = location;
 
 	if (location) {
-		Economy* const eco = location->get_economy();
+		Economy* const eco_wo = location->get_economy(wwWORKER);
+		Economy* const eco_wa = location->get_economy(wwWARE);
 
-		if (!economy_ || (descr().type() == MapObjectType::SOLDIER)) {
-			set_economy(eco);
-		} else if (economy_ != eco) {
-			throw wexception("Worker::set_location changes economy, but worker is no soldier");
+		if (!worker_economy_ || (descr().type() == MapObjectType::SOLDIER)) {
+			set_economy(eco_wo, wwWORKER);
+		} else if (worker_economy_ != eco_wo) {
+			throw wexception("Worker::set_location changes worker_economy, but worker is no soldier");
+		}
+		if (!ware_economy_ || (descr().type() == MapObjectType::SOLDIER)) {
+			set_economy(eco_wa, wwWARE);
+		} else if (ware_economy_ != eco_wa) {
+			throw wexception("Worker::set_location changes ware_economy, but worker is no soldier");
 		}
 		location->add_worker(*this);
 	} else {
 		if (!is_shipping()) {
 			// Our location has been destroyed, we are now fugitives.
 			// Interrupt whatever we've been doing.
-			set_economy(nullptr);
+			set_economy(nullptr, wwWARE);
+			set_economy(nullptr, wwWORKER);
 
 			EditorGameBase& egbase = get_owner()->egbase();
 			if (upcast(Game, game, &egbase)) {
@@ -1211,22 +1227,33 @@ void Worker::set_location(PlayerImmovable* const location) {
  * \li by set_location() when appropriate
  * \li by the current location, when the location's economy changes
  */
-void Worker::set_economy(Economy* const economy) {
-	if (economy == economy_)
+void Worker::set_economy(Economy* const economy, WareWorker type) {
+	Economy* old = get_economy(type);
+	if (economy == old) {
 		return;
+	}
 
-	if (economy_)
-		economy_->remove_workers(owner().tribe().worker_index(descr().name().c_str()), 1);
-
-	economy_ = economy;
-
-	if (WareInstance* const ware = get_carried_ware(get_owner()->egbase()))
-		ware->set_economy(economy_);
-	if (supply_)
-		supply_->set_economy(economy_);
-
-	if (economy_)
-		economy_->add_workers(owner().tribe().worker_index(descr().name().c_str()), 1);
+	switch (type) {
+	case wwWARE: {
+		ware_economy_ = economy;
+		if (WareInstance* const ware = get_carried_ware(get_owner()->egbase())) {
+			ware->set_economy(ware_economy_);
+		}
+	} break;
+	case wwWORKER: {
+		worker_economy_ = economy;
+		if (old) {
+			old->remove_wares_or_workers(owner().tribe().worker_index(descr().name().c_str()), 1);
+		}
+		if (supply_) {
+			supply_->set_economy(worker_economy_);
+		}
+		if (worker_economy_) {
+			worker_economy_->add_wares_or_workers(
+			   owner().tribe().worker_index(descr().name().c_str()), 1, ware_economy_);
+		}
+	} break;
+	}
 }
 
 /**
@@ -1270,7 +1297,8 @@ void Worker::cleanup(EditorGameBase& egbase) {
 	if (get_location(egbase))
 		set_location(nullptr);
 
-	set_economy(nullptr);
+	set_economy(nullptr, wwWARE);
+	set_economy(nullptr, wwWORKER);
 
 	Bob::cleanup(egbase);
 }
@@ -1376,8 +1404,8 @@ DescriptionIndex Worker::level(Game& game) {
 	assert(t.has_worker(new_index));
 
 	// Inform the economy, that something has changed
-	economy_->remove_workers(old_index, 1);
-	economy_->add_workers(new_index, 1);
+	worker_economy_->remove_wares_or_workers(old_index, 1);
+	worker_economy_->add_wares_or_workers(new_index, 1, ware_economy_);
 
 	create_needed_experience(game);
 	return old_index;  //  So that the caller knows what to replace him with.
@@ -1388,7 +1416,8 @@ DescriptionIndex Worker::level(Game& game) {
  */
 void Worker::init_auto_task(Game& game) {
 	if (PlayerImmovable* location = get_location(game)) {
-		if (get_economy()->warehouses().size() || location->descr().type() >= MapObjectType::BUILDING)
+		if (get_economy(wwWORKER)->warehouses().size() ||
+		    location->descr().type() >= MapObjectType::BUILDING)
 			return start_task_gowarehouse(game);
 
 		set_location(nullptr);
@@ -1542,19 +1571,20 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 
 			Path path(road.get_path());
 
-			if (nextstep != &road.get_flag(Road::FlagEnd))
+			if (nextstep != &road.get_flag(RoadBase::FlagEnd)) {
 				path.reverse();
+			}
 
 			molog("[transfer]: starting task [movepath] and setting location to road %u\n",
 			      road.serial());
 			start_task_movepath(game, path, descr().get_right_walk_anims(does_carry_ware(), this));
 			set_location(&road);
-		} else if (upcast(Road, road, nextstep)) {  //  Flag to Road
-			if (&road->get_flag(Road::FlagStart) != location &&
-			    &road->get_flag(Road::FlagEnd) != location)
+		} else if (upcast(RoadBase, road, nextstep)) {  //  Flag to Road
+			if (&road->get_flag(RoadBase::FlagStart) != location &&
+			    &road->get_flag(RoadBase::FlagEnd) != location) {
 				throw wexception(
 				   "MO(%u): [transfer]: nextstep is road, but we are nowhere near", serial());
-
+			}
 			molog("[transfer]: set location to road %u\n", road->serial());
 			set_location(road);
 			set_animation(game, descr().get_animation("idle", this));
@@ -1562,14 +1592,14 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 		} else
 			throw wexception(
 			   "MO(%u): [transfer]: flag to bad nextstep %u", serial(), nextstep->serial());
-	} else if (upcast(Road, road, location)) {
+	} else if (upcast(RoadBase, road, location)) {
 		// Road to Flag
 		if (nextstep->descr().type() == MapObjectType::FLAG) {
 			const Path& path = road->get_path();
 			int32_t const index =
-			   nextstep == &road->get_flag(Road::FlagStart) ?
+			   nextstep == &road->get_flag(RoadBase::FlagStart) ?
 			      0 :
-			      nextstep == &road->get_flag(Road::FlagEnd) ? path.get_nsteps() : -1;
+			      nextstep == &road->get_flag(RoadBase::FlagEnd) ? path.get_nsteps() : -1;
 
 			if (index >= 0) {
 				if (start_task_movepath(
@@ -1645,7 +1675,8 @@ bool Worker::is_shipping() {
 void Worker::shipping_pop(Game& game, State& /* state */) {
 	// Defense against unorderly cleanup via reset_tasks
 	if (!get_location(game)) {
-		set_economy(nullptr);
+		set_economy(nullptr, wwWARE);
+		set_economy(nullptr, wwWORKER);
 	}
 }
 
@@ -1931,10 +1962,9 @@ void Worker::return_update(Game& game, State& state) {
 		      .str();
 
 		get_owner()->add_message(
-		   game,
-		   std::unique_ptr<Message>(new Message(Message::Type::kGameLogic, game.get_gametime(),
-		                                        _("Worker"), "images/ui_basic/menu_help.png",
-		                                        _("Worker got lost!"), message, get_position())),
+		   game, std::unique_ptr<Message>(new Message(
+		            Message::Type::kGameLogic, game.get_gametime(), _("Worker"),
+		            "images/ui_basic/menu_help.png", _("Worker got lost!"), message, get_position())),
 		   serial_);
 		set_location(nullptr);
 		return pop_task(game);
@@ -2069,8 +2099,8 @@ void Worker::gowarehouse_update(Game& game, State& /* state */) {
 	if (location->descr().type() >= MapObjectType::BUILDING)
 		return start_task_leavebuilding(game, true);
 
-	if (!get_economy()->warehouses().size()) {
-		molog("[gowarehouse]: No warehouse left in Economy\n");
+	if (!get_economy(wwWORKER)->warehouses().size()) {
+		molog("[gowarehouse]: No warehouse left in WorkerEconomy\n");
 		return pop_task(game);
 	}
 
@@ -2483,10 +2513,13 @@ struct FindFlagWithPlayersWarehouse {
 	explicit FindFlagWithPlayersWarehouse(const Player& owner) : owner_(owner) {
 	}
 	bool accept(const BaseImmovable& imm) const {
-		if (upcast(Flag const, flag, &imm))
-			if (flag->get_owner() == &owner_)
-				if (flag->economy().warehouses().size())
+		if (upcast(Flag const, flag, &imm)) {
+			if (flag->get_owner() == &owner_) {
+				if (!flag->economy(wwWORKER).warehouses().empty()) {
 					return true;
+				}
+			}
+		}
 		return false;
 	}
 
@@ -2515,7 +2548,7 @@ void Worker::fugitive_update(Game& game, State& state) {
 
 	// check whether we're on a flag and it's time to return home
 	if (upcast(Flag, flag, map[get_position()].get_immovable())) {
-		if (flag->get_owner() == get_owner() && flag->economy().warehouses().size()) {
+		if (flag->get_owner() == get_owner() && flag->economy(wwWORKER).warehouses().size()) {
 			set_location(flag);
 			return pop_task(game);
 		}
@@ -3090,7 +3123,7 @@ void Worker::draw_inner(const EditorGameBase& game,
  * Draw the worker, taking the carried ware into account.
  */
 void Worker::draw(const EditorGameBase& egbase,
-                  const TextToDraw&,
+                  const InfoToDraw&,
                   const Vector2f& field_on_dst,
                   const Widelands::Coords& coords,
                   const float scale,
@@ -3176,7 +3209,8 @@ void Worker::Loader::load_finish() {
 	// not a factor, we do not overwrite the economy they might have set for us
 	// already.
 	if (PlayerImmovable* const location = worker.location_.get(egbase())) {
-		worker.set_economy(location->get_economy());
+		worker.set_economy(location->get_economy(wwWARE), wwWARE);
+		worker.set_economy(location->get_economy(wwWORKER), wwWORKER);
 	}
 }
 

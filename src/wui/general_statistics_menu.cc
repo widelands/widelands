@@ -21,12 +21,9 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "base/log.h"
 #include "graphic/graphic.h"
-#include "graphic/rendertarget.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -37,7 +34,6 @@
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/slider.h"
-#include "ui_basic/textarea.h"
 #include "wui/interactive_player.h"
 
 using namespace Widelands;

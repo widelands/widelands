@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007
@@ -7,13 +7,13 @@
 # GunChleoc, 2016
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015-2017
-# Gontzal M. Pujana <juchuf@gmail.com>, 2017
+# Gontzal Manuel Pujana Onaindia <juchuf@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-10 07:32+0000\n"
-"PO-Revision-Date: 2019-05-10 07:33+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-01-21 18:02+0000\n"
+"PO-Revision-Date: 2020-01-21 18:25+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -162,8 +162,8 @@ msgstr "Marítimo"
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
-"ships and ports."
-msgstr "En este tutorial, serás marinero, aprenderás cómo manejar buques y puertos."
+"ships and ports, and how to use ferries and waterways."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy"

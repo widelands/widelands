@@ -20,14 +20,11 @@
 #ifndef WL_EDITOR_UI_MENUS_TOOL_SET_TERRAIN_OPTIONS_MENU_H
 #define WL_EDITOR_UI_MENUS_TOOL_SET_TERRAIN_OPTIONS_MENU_H
 
-#include <map>
 #include <memory>
-#include <vector>
 
 #include "editor/ui_menus/categorized_item_selection_menu.h"
 #include "editor/ui_menus/tool_options_menu.h"
 #include "logic/map_objects/world/terrain_description.h"
-#include "ui_basic/textarea.h"
 
 class EditorInteractive;
 struct EditorSetTerrainTool;

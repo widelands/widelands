@@ -20,7 +20,7 @@
 #ifndef WL_ECONOMY_ROUTE_H
 #define WL_ECONOMY_ROUTE_H
 
-#include <vector>
+#include <cstdint>
 
 #include "economy/iroute.h"
 #include "io/fileread.h"
@@ -33,7 +33,6 @@ class EditorGameBase;
 class MapObjectLoader;
 struct Flag;
 struct MapObjectSaver;
-struct RoutingNode;
 
 /**
  * Route stores a route from flag to flag.

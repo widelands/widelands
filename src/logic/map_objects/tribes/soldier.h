@@ -26,8 +26,6 @@
 #include "logic/map_objects/tribes/training_attribute.h"
 #include "logic/map_objects/tribes/worker.h"
 
-struct RGBColor;
-
 namespace Widelands {
 
 // Constants used to launch attacks
@@ -182,8 +180,6 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(SoldierDescr);
 };
 
-class Building;
-
 enum CombatWalkingDir {
 	CD_NONE = 0,      // Not in combat
 	CD_WALK_W = 1,    // Going to west       (facing west)
@@ -210,6 +206,8 @@ class Soldier : public Worker {
 	MO_DESCR(SoldierDescr)
 
 public:
+	enum class InfoMode { kWalkingAround, kInBuilding };
+
 	explicit Soldier(const SoldierDescr&);
 
 	bool init(EditorGameBase&) override;
@@ -246,20 +244,21 @@ public:
 
 	/// Draw this soldier
 	void draw(const EditorGameBase&,
-	          const TextToDraw& draw_text,
+	          const InfoToDraw& info_to_draw,
 	          const Vector2f& point_on_dst,
 	          const Widelands::Coords& coords,
 	          float scale,
 	          RenderTarget* dst) const override;
 
-	static void calc_info_icon_size(const TribeDescr&, uint32_t& w, uint32_t& h);
+	static void calc_info_icon_size(const TribeDescr&, int& w, int& h);
 
 	// Draw the info icon containing health bar and levels. If 'anchor_below' is
 	// true, the icon is drawn horizontally centered above Otherwise, the icon
 	// is drawn below and right of 'draw_position'.
 	void draw_info_icon(Vector2i draw_position,
 	                    const float scale,
-	                    const bool anchor_below,
+	                    const InfoMode draw_mode,
+	                    const InfoToDraw info_to_draw,
 	                    RenderTarget*) const;
 
 	uint32_t get_current_health() const {
@@ -370,8 +369,6 @@ private:
 
 	std::pair<std::unique_ptr<SoldierLevelRange>, std::unique_ptr<DirAnimations>>
 	   walking_animations_cache_;
-
-	static constexpr uint8_t kSoldierHealthBarWidth = 13;
 
 	/// Number of consecutive blocked signals until the soldiers are considered permanently stuck
 	static constexpr uint8_t kBockCountIsStuck = 10;

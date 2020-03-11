@@ -19,10 +19,6 @@
 
 #include "wui/inputqueuedisplay.h"
 
-#include <algorithm>
-
-#include <boost/format.hpp>
-
 #include "economy/input_queue.h"
 #include "economy/request.h"
 #include "graphic/graphic.h"
@@ -363,11 +359,12 @@ void InputQueueDisplay::update_max_fill_buttons() {
 	   UI::ButtonStyle::kWuiMenu, g_gr->images().get("images/ui_basic/scrollbar_right.png"),
 	   (tooltip_format
 
-	    % g_gr->styles()
-	         .font_style(UI::FontStyle::kTooltipHeader)
-	         .as_font_tag(
-	            /** TRANSLATORS: Button tooltip in a building's wares input queue */
-	            _("Increase the number of wares you want to be stored here"))
+	    %
+	    g_gr->styles()
+	       .font_style(UI::FontStyle::kTooltipHeader)
+	       .as_font_tag(
+	          /** TRANSLATORS: Button tooltip in a building's wares input queue */
+	          _("Increase the number of wares you want to be stored here"))
 
 	    %
 	    as_listitem(

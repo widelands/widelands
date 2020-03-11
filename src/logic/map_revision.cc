@@ -19,6 +19,8 @@
 
 #include "logic/map_revision.h"
 
+#include <ctime>
+
 #include "build_info.h"
 
 namespace Widelands {

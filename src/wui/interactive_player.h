@@ -21,7 +21,6 @@
 #define WL_WUI_INTERACTIVE_PLAYER_H
 
 #include <memory>
-#include <vector>
 
 #include <SDL_keyboard.h>
 
@@ -42,7 +41,8 @@ public:
 	InteractivePlayer(Widelands::Game&,
 	                  Section& global_s,
 	                  Widelands::PlayerNumber,
-	                  bool multiplayer);
+	                  bool multiplayer,
+	                  ChatProvider* chat_provider = nullptr);
 
 	bool can_see(Widelands::PlayerNumber) const override;
 	bool can_act(Widelands::PlayerNumber) const override;
@@ -96,12 +96,10 @@ private:
 	bool auto_roadbuild_mode_;
 	Widelands::Coords flag_to_connect_;
 
-	UI::Button* toggle_chat_;
 	UI::Button* toggle_message_menu_;
 
 	// Statistics menu on the toolbar
 	UI::Dropdown<StatisticsMenuEntry> statisticsmenu_;
-	UI::UniqueWindow::Registry chat_;
 	UI::UniqueWindow::Registry objectives_;
 	UI::UniqueWindow::Registry encyclopedia_;
 	UI::UniqueWindow::Registry message_menu_;

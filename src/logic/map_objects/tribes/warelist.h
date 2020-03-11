@@ -21,9 +21,7 @@
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_WARELIST_H
 
 #include <cassert>
-#include <vector>
 
-#include <boost/bind.hpp>
 #include <boost/signals2.hpp>
 
 #include "logic/widelands.h"

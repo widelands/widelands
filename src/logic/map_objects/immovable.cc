@@ -19,12 +19,9 @@
 
 #include "logic/map_objects/immovable.h"
 
-#include <cstdio>
-#include <cstring>
 #include <memory>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 
 #include "base/log.h"
 #include "base/macros.h"
@@ -270,7 +267,7 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
                                const World& world)
    : ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kWorld) {
 
-	int editor_category_index =
+	const DescriptionIndex editor_category_index =
 	   world.editor_immovable_categories().get_index(table.get_string("editor_category"));
 	if (editor_category_index == Widelands::INVALID_INDEX) {
 		throw GameDataError(
@@ -464,7 +461,7 @@ void Immovable::act(Game& game, uint32_t const data) {
 }
 
 void Immovable::draw(uint32_t gametime,
-                     const TextToDraw draw_text,
+                     const InfoToDraw info_to_draw,
                      const Vector2f& point_on_dst,
                      const Widelands::Coords& coords,
                      float scale,
@@ -475,15 +472,16 @@ void Immovable::draw(uint32_t gametime,
 	if (!anim_construction_total_) {
 		dst->blit_animation(point_on_dst, coords, scale, anim_, gametime - animstart_);
 		if (former_building_descr_) {
-			do_draw_info(draw_text, former_building_descr_->descname(), "", point_on_dst, scale, dst);
+			do_draw_info(
+			   info_to_draw, former_building_descr_->descname(), "", point_on_dst, scale, dst);
 		}
 	} else {
-		draw_construction(gametime, draw_text, point_on_dst, coords, scale, dst);
+		draw_construction(gametime, info_to_draw, point_on_dst, coords, scale, dst);
 	}
 }
 
 void Immovable::draw_construction(const uint32_t gametime,
-                                  const TextToDraw draw_text,
+                                  const InfoToDraw info_to_draw,
                                   const Vector2f& point_on_dst,
                                   const Widelands::Coords& coords,
                                   const float scale,
@@ -526,7 +524,7 @@ void Immovable::draw_construction(const uint32_t gametime,
 
 	// Additionally, if statistics are enabled, draw a progression string
 	do_draw_info(
-	   draw_text, descr().descname(),
+	   info_to_draw, descr().descname(),
 	   g_gr->styles().color_tag((boost::format(_("%i%% built")) % (100 * done / total)).str(),
 	                            g_gr->styles().building_statistics_style().construction_color()),
 	   point_on_dst, scale, dst);
@@ -1232,7 +1230,7 @@ PlayerImmovable IMPLEMENTATION
  * Zero-initialize
  */
 PlayerImmovable::PlayerImmovable(const MapObjectDescr& mo_descr)
-   : BaseImmovable(mo_descr), economy_(nullptr) {
+   : BaseImmovable(mo_descr), ware_economy_(nullptr), worker_economy_(nullptr) {
 }
 
 /**
@@ -1246,14 +1244,16 @@ PlayerImmovable::~PlayerImmovable() {
 /**
  * Change the economy, transfer the workers
  */
-void PlayerImmovable::set_economy(Economy* const e) {
-	if (economy_ == e)
+void PlayerImmovable::set_economy(Economy* const e, WareWorker type) {
+	if (get_economy(type) == e) {
 		return;
+	}
 
-	for (uint32_t i = 0; i < workers_.size(); ++i)
-		workers_[i]->set_economy(e);
+	(type == wwWARE ? ware_economy_ : worker_economy_) = e;
 
-	economy_ = e;
+	for (uint32_t i = 0; i < workers_.size(); ++i) {
+		workers_[i]->set_economy(e, type);
+	}
 }
 
 /**
@@ -1347,7 +1347,8 @@ void PlayerImmovable::log_general_info(const EditorGameBase& egbase) const {
 	FORMAT_WARNINGS_ON
 	molog("player_number: %i\n", owner_->player_number());
 	FORMAT_WARNINGS_OFF
-	molog("economy_: %p\n", economy_);
+	molog("ware_economy_: %p\n", ware_economy_);
+	molog("worker_economy_: %p\n", worker_economy_);
 	FORMAT_WARNINGS_ON
 }
 

@@ -23,7 +23,6 @@
 #include "logic/save_handler.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
-#include "ui_basic/textarea.h"
 #include "wui/interactive_player.h"
 
 namespace {

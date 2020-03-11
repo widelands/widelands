@@ -19,13 +19,9 @@
 
 #include "sound/songset.h"
 
-#include <utility>
-
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/regex.hpp>
+#include <cassert>
 
 #include "base/log.h"
-#include "helper.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 

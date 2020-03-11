@@ -23,7 +23,6 @@
 
 #include "base/log.h"
 #include "base/scoped_timer.h"
-#include "base/warning.h"
 #include "io/filesystem/filesystem.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
@@ -55,6 +54,8 @@
 #include "map_io/map_scripting_packet.h"
 #include "map_io/map_terrain_packet.h"
 #include "map_io/map_version_packet.h"
+#include "map_io/map_waterway_packet.h"
+#include "map_io/map_waterwaydata_packet.h"
 #include "map_io/map_wincondition_packet.h"
 #include "map_io/tribes_legacy_lookup_table.h"
 #include "map_io/world_legacy_lookup_table.h"
@@ -124,10 +125,13 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 
 	// MANDATORY PACKETS
 	// PRELOAD DATA BEGIN
-	assert(egbase.get_loader_ui());
-	const unsigned nr_steps = is_editor ? 9 : 24;
-	egbase.get_loader_ui()->step(
-	   (boost::format(_("Loading map: Elemental data (1/%u)")) % nr_steps).str());
+	auto set_progress_message = [&egbase, is_editor](std::string text, unsigned step) {
+		egbase.step_loader_ui(
+		   (boost::format(_("Loading map: %1$s (%2$u/%3$d)")) % text % step % (is_editor ? 9 : 24))
+		      .str());
+	};
+
+	set_progress_message(_("Elemental data"), 1);
 	log("Reading Elemental Data ... ");
 	MapElementalPacket elemental_data_packet;
 	elemental_data_packet.read(*fs_, egbase, is_game, *mol_);
@@ -154,7 +158,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 	}
 
 	log("Reading Heights Data ... ");
-	egbase.get_loader_ui()->step((boost::format(_("Loading map: Heights (2/%u)")) % nr_steps).str());
+	set_progress_message(_("Heights"), 2);
 	{
 		MapHeightsPacket p;
 		p.read(*fs_, egbase, is_game, *mol_);
@@ -165,8 +169,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 	   create_world_legacy_lookup_table(old_world_name_));
 	std::unique_ptr<TribesLegacyLookupTable> tribes_lookup_table(new TribesLegacyLookupTable());
 	log("Reading Terrain Data ... ");
-	egbase.get_loader_ui()->step(
-	   (boost::format(_("Loading map: Terrains (3/%u)")) % nr_steps).str());
+	set_progress_message(_("Terrains"), 3);
 	{
 		MapTerrainPacket p;
 		p.read(*fs_, egbase, *world_lookup_table);
@@ -176,14 +179,12 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 	MapObjectPacket mapobjects;
 
 	log("Reading Map Objects ... ");
-	egbase.get_loader_ui()->step(
-	   (boost::format(_("Loading map: Map objects (4/%u)")) % nr_steps).str());
+	set_progress_message(_("Map objects"), 4);
 	mapobjects.read(*fs_, egbase, *mol_, *world_lookup_table, *tribes_lookup_table);
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Player Start Position Data ... ");
-	egbase.get_loader_ui()->step(
-	   (boost::format(_("Loading map: Starting positions (5/%u)")) % nr_steps).str());
+	set_progress_message(_("Starting positions"), 5);
 	{
 		MapPlayerPositionPacket p;
 		p.read(*fs_, egbase, is_game, *mol_);
@@ -203,8 +204,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 	}
 
 	log("Reading Resources Data ... ");
-	egbase.get_loader_ui()->step(
-	   (boost::format(_("Loading map: Resources (6/%u)")) % nr_steps).str());
+	set_progress_message(_("Resources"), 6);
 	{
 		MapResourcesPacket p;
 		p.read(*fs_, egbase, *world_lookup_table);
@@ -215,16 +215,14 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 	// Do not load unneeded packages in the editor
 	if (!is_editor) {
 		log("Reading Map Version Data ... ");
-		egbase.get_loader_ui()->step(
-		   (boost::format(_("Loading map: Map version (7/%u)")) % nr_steps).str());
+		set_progress_message(_("Map version"), 7);
 		{
 			MapVersionPacket p;
 			p.read(*fs_, egbase, is_game, old_world_name_.empty());
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
-		egbase.get_loader_ui()->step(
-		   (boost::format(_("Loading map: Building restrictions (8/%u)")) % nr_steps).str());
+		set_progress_message(_("Building restrictions"), 8);
 		log("Reading Allowed Worker Types Data ... ");
 		{
 			MapAllowedWorkerTypesPacket p;
@@ -239,8 +237,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
-		egbase.get_loader_ui()->step(
-		   (boost::format(_("Loading map: Territories (9/%u)")) % nr_steps).str());
+		set_progress_message(_("Territories"), 9);
 		log("Reading Node Ownership Data ... ");
 		{
 			MapNodeOwnershipPacket p;
@@ -248,8 +245,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
-		egbase.get_loader_ui()->step(
-		   (boost::format(_("Loading map: Exploration (10/%u)")) % nr_steps).str());
+		set_progress_message(_("Exploration"), 10);
 		log("Reading Exploration Data ... ");
 		{
 			MapExplorationPacket p;
@@ -262,8 +258,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		//  this order without knowing what you do
 		//  EXISTENT PACKETS
 		log("Reading Flag Data ... ");
-		egbase.get_loader_ui()->step(
-		   (boost::format(_("Loading map: Flags (11/%u)")) % nr_steps).str());
+		set_progress_message(_("Flags"), 11);
 		{
 			MapFlagPacket p;
 			p.read(*fs_, egbase, is_game, *mol_);
@@ -271,17 +266,22 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Reading Road Data ... ");
-		egbase.get_loader_ui()->step(
-		   (boost::format(_("Loading map: Roads (12/%u)")) % nr_steps).str());
+		set_progress_message(_("Roads and waterways"), 12);
 		{
 			MapRoadPacket p;
 			p.read(*fs_, egbase, is_game, *mol_);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
+		log("Reading Waterway Data ... ");
+		{
+			MapWaterwayPacket p;
+			p.read(*fs_, egbase, is_game, *mol_);
+		}
+		log("took %ums\n ", timer.ms_since_last_query());
+
 		log("Reading Building Data ... ");
-		egbase.get_loader_ui()->step(
-		   (boost::format(_("Loading map: Buildings (13/%u)")) % nr_steps).str());
+		set_progress_message(_("Buildings"), 13);
 		{
 			MapBuildingPacket p;
 			p.read(*fs_, egbase, is_game, *mol_);
@@ -290,8 +290,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 
 		//  DATA PACKETS
 		log("Reading Flagdata Data ... ");
-		egbase.get_loader_ui()->step(
-		   (boost::format(_("Loading map: Initializing flags (14/%u)")) % nr_steps).str());
+		set_progress_message(_("Initializing flags"), 14);
 		{
 			MapFlagdataPacket p;
 			p.read(*fs_, egbase, is_game, *mol_, *tribes_lookup_table);
@@ -299,17 +298,22 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Reading Roaddata Data ... ");
-		egbase.get_loader_ui()->step(
-		   (boost::format(_("Loading map: Initializing roads (15/%u)")) % nr_steps).str());
+		set_progress_message(_("Initializing roads and waterways"), 15);
 		{
 			MapRoaddataPacket p;
 			p.read(*fs_, egbase, is_game, *mol_, *tribes_lookup_table);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
+		log("Reading Waterwaydata Data ... ");
+		{
+			MapWaterwaydataPacket p;
+			p.read(*fs_, egbase, is_game, *mol_);
+		}
+		log("took %ums\n ", timer.ms_since_last_query());
+
 		log("Reading Buildingdata Data ... ");
-		egbase.get_loader_ui()->step(
-		   (boost::format(_("Loading map: Initializing buildings (16/%u)")) % nr_steps).str());
+		set_progress_message(_("Initializing buildings"), 16);
 		{
 			MapBuildingdataPacket p;
 			p.read(*fs_, egbase, is_game, *mol_, *tribes_lookup_table);
@@ -317,8 +321,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Second and third phase loading Map Objects ... ");
-		egbase.get_loader_ui()->step(
-		   (boost::format(_("Loading map: Initializing map objects (17/%u)")) % nr_steps).str());
+		set_progress_message(_("Initializing map objects"), 17);
 		mapobjects.load_finish();
 		{
 			const Field& fields_end = map()[map().max_index()];
@@ -336,8 +339,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		//  NOTE DO NOT CHANGE THE PLACE UNLESS YOU KNOW WHAT ARE YOU DOING
 		//  Must be loaded after every kind of object that can see.
 		log("Reading Players View Data ... ");
-		egbase.get_loader_ui()->step(
-		   (boost::format(_("Loading map: Vision (18/%u)")) % nr_steps).str());
+		set_progress_message(_("Vision"), 18);
 		{
 			MapPlayersViewPacket p;
 			p.read(*fs_, egbase, is_game, *mol_, *tribes_lookup_table, *world_lookup_table);
@@ -348,8 +350,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		//    * command queue (PlayerMessageCommand, inherited by
 		//      Cmd_MessageSetStatusRead and Cmd_MessageSetStatusArchived)
 		log("Reading Player Message Data ... ");
-		egbase.get_loader_ui()->step(
-		   (boost::format(_("Loading map: Messages (19/%u)")) % nr_steps).str());
+		set_progress_message(_("Messages"), 19);
 		{
 			MapPlayersMessagesPacket p;
 			p.read(*fs_, egbase, is_game, *mol_);
@@ -358,8 +359,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 
 		// Map data used by win conditions.
 		log("Reading Wincondition Data ... ");
-		egbase.get_loader_ui()->step(
-		   (boost::format(_("Loading map: Win condition (20/%u)")) % nr_steps).str());
+		set_progress_message(_("Win condition"), 20);
 		{
 			MapWinconditionPacket p;
 			p.read(*fs_, *egbase.mutable_map(), *mol_);
@@ -370,8 +370,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		// defined through Lua scripting. They are also not required for a game,
 		// since they will be only be set after it has started.
 		log("Reading Objective Data ... ");
-		egbase.get_loader_ui()->step(
-		   (boost::format(_("Loading map: Objectives (21/%u)")) % nr_steps).str());
+		set_progress_message(_("Objectives"), 21);
 		if (!is_game) {
 			read_objective_data(*fs_, egbase);
 		}
@@ -379,9 +378,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 	}
 
 	log("Reading Scripting Data ... ");
-	egbase.get_loader_ui()->step(
-	   (boost::format(_("Loading map: Scripting (%1$u/%2$u)")) % (is_editor ? 7 : 22) % nr_steps)
-	      .str());
+	set_progress_message(_("Scripting"), is_editor ? 7 : 22);
 	{
 		MapScriptingPacket p;
 		p.read(*fs_, egbase, is_game, *mol_);
@@ -389,15 +386,11 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading map images ... ");
-	egbase.get_loader_ui()->step(
-	   (boost::format(_("Loading map: Images (%1$u/%2$u)")) % (is_editor ? 8 : 23) % nr_steps)
-	      .str());
+	set_progress_message(_("Images"), is_editor ? 8 : 23);
 	load_map_images(*fs_);
 	log("took %ums\n ", timer.ms_since_last_query());
 
-	egbase.get_loader_ui()->step(
-	   (boost::format(_("Loading map: Checking map (%1$u/%2$u)")) % (is_editor ? 9 : 24) % nr_steps)
-	      .str());
+	set_progress_message(_("Checking map"), is_editor ? 9 : 24);
 	if (!is_editor) {
 		if (mol_->get_nr_unloaded_objects()) {
 			log("WARNING: There are %i unloaded objects. This is a bug, please "

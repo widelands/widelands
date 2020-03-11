@@ -22,7 +22,6 @@
 
 #include <ctime>
 #include <string>
-#include <vector>
 
 #include "logic/widelands.h"
 #include "notifications/note_ids.h"

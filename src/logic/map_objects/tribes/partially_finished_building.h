@@ -20,12 +20,12 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_PARTIALLY_FINISHED_BUILDING_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_PARTIALLY_FINISHED_BUILDING_H
 
+#include "economy/wares_queue.h"
 #include "logic/map_objects/tribes/building.h"
 
 namespace Widelands {
 
 class Request;
-class WaresQueue;
 
 /*
 PartiallyFinishedBuilding
@@ -48,7 +48,7 @@ public:
 	const Image* representative_image() const override;
 	void cleanup(EditorGameBase&) override;
 	bool init(EditorGameBase&) override;
-	void set_economy(Economy*) override;
+	void set_economy(Economy*, WareWorker) override;
 
 	uint32_t get_nrwaresqueues() {
 		return wares_.size();

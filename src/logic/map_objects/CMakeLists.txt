@@ -29,7 +29,6 @@ wl_library(logic_map_objects
     buildcost.h
     checkstep.cc
     checkstep.h
-    draw_text.h
     findbob.cc
     findbob.h
     findimmovable.cc
@@ -39,6 +38,7 @@ wl_library(logic_map_objects
     immovable.cc
     immovable.h
     immovable_program.h
+    info_to_draw.h
     map_object.cc
     map_object.h
     terrain_affinity.cc
@@ -57,6 +57,8 @@ wl_library(logic_map_objects
     tribes/constructionsite.h
     tribes/dismantlesite.cc
     tribes/dismantlesite.h
+    tribes/ferry.cc
+    tribes/ferry.h
     tribes/market.cc
     tribes/market.h
     tribes/militarysite.cc
@@ -114,7 +116,7 @@ wl_library(logic_map_objects
     world/world.cc
     world/world.h
   DEPENDS
-    ai
+    ai_hints
     base_exceptions
     base_geometry
     base_i18n
@@ -146,10 +148,8 @@ wl_library(logic_map_objects
     map_io
     note_sound
     notifications
-    scripting_lua_interface
     scripting_lua_table
     sound_constants
     sound
-    ui_basic
-    wui_mapview_pixelfunctions
+    wui_mapview_pixelconstants
 )

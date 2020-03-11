@@ -13,6 +13,9 @@
 world = wl.World()
 
 if wl.Game then egbase = wl.Game() else egbase = wl.Editor() end
+function set_loading_message(str, i)
+   egbase:set_loading_message(_("Loading world: %1$s (%2$d/%3$d)"):bformat(str, i, 4))
+end
 
 set_textdomain("world")
 
@@ -21,12 +24,12 @@ include "scripting/mapobjects.lua"
 print("┏━ Running Lua for world:")
 print_loading_message("┗━ took", function()
    print_loading_message("┃    Resources", function()
-      egbase:set_loading_message(_("Loading world: Resources (1/4)"))
+      set_loading_message(_("Resources"), 1)
       include "world/resources/init.lua"
    end)
 
    print_loading_message("┃    Terrains", function()
-      egbase:set_loading_message(_("Loading world: Terrains (2/4)"))
+      set_loading_message(_("Terrains"), 2)
 
 -- RST
 -- .. function:: new_editor_terrain_category{table}
@@ -63,7 +66,7 @@ print_loading_message("┗━ took", function()
    end)
 
    print_loading_message("┃    Immovables", function()
-      egbase:set_loading_message(_("Loading world: Immovables (3/4)"))
+      set_loading_message(_("Immovables"), 3)
 -- RST
 -- .. function:: new_editor_immovable_category{table}
 --
@@ -213,28 +216,28 @@ print_loading_message("┗━ took", function()
       world:new_editor_immovable_category{
          name = "trees_coniferous",
          descname = _ "Coniferous Trees",
-         picture = "world/immovables/trees/spruce/old/idle_0.png",
+         picture = "world/immovables/trees/spruce/menu.png",
          items_per_row = 8,
       }
 
       world:new_editor_immovable_category{
          name = "trees_deciduous",
          descname = _ "Deciduous Trees",
-         picture = "world/immovables/trees/alder/old/idle_0.png",
+         picture = "world/immovables/trees/alder/menu.png",
          items_per_row = 8,
       }
 
       world:new_editor_immovable_category{
          name = "trees_palm",
          descname = _ "Palm Trees",
-         picture = "world/immovables/trees/palm_borassus/old/idle_0.png",
+         picture = "world/immovables/trees/palm_borassus/menu.png",
          items_per_row = 8,
       }
 
       world:new_editor_immovable_category{
          name = "trees_wasteland",
          descname = _ "Wasteland Trees",
-         picture = "world/immovables/trees/umbrella_red/old/idle_0.png",
+         picture = "world/immovables/trees/umbrella_red/menu.png",
          items_per_row = 8,
       }
 
@@ -277,7 +280,7 @@ print_loading_message("┗━ took", function()
    end)
 
    print_loading_message("┃    Critters", function()
-      egbase:set_loading_message(_("Loading world: Animals (4/4)"))
+      set_loading_message(_("Animals"), 4)
 
 -- RST
 -- .. function:: new_editor_critter_category{table}

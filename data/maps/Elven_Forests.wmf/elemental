@@ -9,7 +9,7 @@ name=_"Elven Forests"
 author="Winterwind"
 descr=_"The breath-taking beauty of these emerald lands has lured many tribes into an attempt to take them for themselves."
 hint=
-tags="2teams,artifacts,ffa,official"
+tags="2teams,artifacts,balanced,ffa,official"
 
 [teams00]
 team1="0,1"

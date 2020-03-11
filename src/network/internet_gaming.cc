@@ -21,22 +21,20 @@
 
 #include <algorithm>
 #include <memory>
-#include <thread>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 
 #include "base/i18n.h"
 #include "base/log.h"
-#include "base/macros.h"
+#include "base/random.h"
 #include "base/warning.h"
+#include "build_info.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "network/constants.h"
 #include "network/crypto.h"
 #include "network/internet_gaming_messages.h"
-#include "random/random.h"
+#include "network/internet_gaming_protocol.h"
 
 /// Private constructor by purpose: NEVER call directly. Always call InternetGaming::ref(), this
 /// will ensure
@@ -426,11 +424,11 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			format_and_add_chat("", "", true, _("Welcome to the Widelands Metaserver!"));
 			const std::string assigned_name = packet.string();
 			if (clientname_ != assigned_name) {
-				format_and_add_chat("", "", true,
-				                    (boost::format(_("You have been logged in as '%s' since your "
-				                                     "requested name is already in use or reserved.")) %
-				                     assigned_name)
-				                       .str());
+				format_and_add_chat(
+				   "", "", true, (boost::format(_("You have been logged in as '%s' since your "
+				                                  "requested name is already in use or reserved.")) %
+				                  assigned_name)
+				                    .str());
 			}
 			clientname_ = assigned_name;
 			clientrights_ = packet.string();
@@ -614,7 +612,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			std::sort(clientlist_.begin(), clientlist_.end(),
 			          [](const InternetClient& left, const InternetClient& right) {
 				          return (left.name < right.name);
-			          });
+				       });
 
 			for (InternetClient& client : old) {
 				if (client.name.size()) {
@@ -911,15 +909,16 @@ void InternetGaming::send(const std::string& msg) {
 
 		if (msg == "/help") {
 			format_and_add_chat("", "", true, _("Supported admin commands:"));
-			format_and_add_chat("", "", true, _("/motd <msg> sets a permanent greeting message"));
-			format_and_add_chat("", "", true, _("/announce <msg> send a one time system message"));
-			format_and_add_chat(
-			   "", "", true, _("/warn <user> <msg> send a private system message to the given user"));
+			format_and_add_chat("", "", true, _("/motd <msg> - Set a permanent greeting message"));
+			format_and_add_chat("", "", true, _("/announce <msg> - Send a one time system message"));
 			format_and_add_chat(
 			   "", "", true,
-			   _("/kick <user|game> removes the given user or game from the metaserver"));
+			   _("/warn <user> <msg> - Send a private system message to the given user"));
 			format_and_add_chat(
-			   "", "", true, _("/ban <user> bans a user for 24 hours from the metaserver"));
+			   "", "", true,
+			   _("/kick <user|game> - Remove the given user or game from the metaserver"));
+			format_and_add_chat(
+			   "", "", true, _("/ban <user> - Ban a user for 24 hours from the metaserver"));
 			return;
 		}
 

@@ -18,8 +18,6 @@
 
 #include "graphic/screen.h"
 
-#include <algorithm>
-#include <cassert>
 #include <memory>
 
 #include "base/wexception.h"

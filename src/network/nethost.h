@@ -20,7 +20,6 @@
 #ifndef WL_NETWORK_NETHOST_H
 #define WL_NETWORK_NETHOST_H
 
-#include <map>
 #include <memory>
 #include <thread>
 
@@ -71,12 +70,12 @@ private:
 	// Feel free to make this method public if you need it
 	bool is_listening() const;
 
-	/**
-	 * Starts an asynchronous accept on the given acceptor.
-	 * If someone wants to connect, establish a connection
-	 * and add the connection to accept_queue_ and continue waiting.
-	 * @param acceptor The acceptor we should be listening on.
-	 */
+/**
+ * Starts an asynchronous accept on the given acceptor.
+ * If someone wants to connect, establish a connection
+ * and add the connection to accept_queue_ and continue waiting.
+ * @param acceptor The acceptor we should be listening on.
+ */
 #if BOOST_VERSION >= 106600
 	void start_accepting(boost::asio::ip::tcp::acceptor& acceptor);
 #else

@@ -26,8 +26,6 @@
 
 namespace Widelands {
 class Economy;
-class Game;
-class MapObjectLoader;
 
 struct CmdCallEconomyBalance : public GameLogicCommand {
 	CmdCallEconomyBalance() : GameLogicCommand(0), timerid_(0) {
@@ -46,6 +44,7 @@ struct CmdCallEconomyBalance : public GameLogicCommand {
 
 private:
 	OPtr<Flag> flag_;
+	WareWorker type_;
 	uint32_t timerid_;
 };
 }  // namespace Widelands

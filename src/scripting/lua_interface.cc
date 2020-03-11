@@ -20,9 +20,6 @@
 #include "scripting/lua_interface.h"
 
 #include <memory>
-#include <string>
-
-#include <boost/algorithm/string/predicate.hpp>
 
 #include "io/filesystem/layered_filesystem.h"
 #include "scripting/lua_globals.h"

@@ -19,6 +19,8 @@
 
 #include "ui_basic/panel.h"
 
+#include <memory>
+
 #include "base/log.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
@@ -122,7 +124,8 @@ Panel::~Panel() {
 void Panel::free_children() {
 	// Scan-build claims this results in double free.
 	// This is a false positive.
-	// See https://bugs.launchpad.net/widelands/+bug/1198928
+	// The reason is that the variable will be reassigned in the destructor of the deleted child.
+	// This is very uncommon behavior and bad style, but will be non trivial to fix.
 	while (first_child_) {
 		Panel* next_child = first_child_->next_;
 		delete first_child_;
@@ -867,9 +870,9 @@ bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y, Vector2i rel_mou
 			continue;
 		}
 		// Found a child at the position
-		if (child->do_mousewheel(which, x, y,
-		                         rel_mouse_pos - Vector2i(child->get_x() + child->get_lborder(),
-		                                                  child->get_y() + child->get_tborder()))) {
+		if (child->do_mousewheel(
+		       which, x, y, rel_mouse_pos - Vector2i(child->get_x() + child->get_lborder(),
+		                                             child->get_y() + child->get_tborder()))) {
 			return true;
 		}
 	}

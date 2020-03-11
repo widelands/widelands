@@ -20,16 +20,10 @@
 #ifndef WL_GRAPHIC_GL_ROAD_PROGRAM_H
 #define WL_GRAPHIC_GL_ROAD_PROGRAM_H
 
-#include <memory>
-#include <vector>
-
 #include "base/macros.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
-#include "logic/roadtype.h"
-
-class Texture;
-class Surface;
+#include "graphic/road_segments.h"
 
 class RoadProgram {
 public:
@@ -63,7 +57,7 @@ private:
 	              const FieldsToDraw::Field& start,
 	              const FieldsToDraw::Field& end,
 	              float scale,
-	              const Widelands::RoadType road_type,
+	              const Widelands::RoadSegment road_type,
 	              const Direction direction,
 	              uint32_t* gl_texture);
 

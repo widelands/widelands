@@ -20,7 +20,6 @@
 #include "scripting/lua_bases.h"
 
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 
 #include "economy/economy.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -296,7 +295,7 @@ int LuaEditorGameBase::get_resource_description(lua_State* L) {
 	}
 	const std::string resource_name = luaL_checkstring(L, 2);
 	const World& world = get_egbase(L).world();
-	const DescriptionIndex idx = world.get_resource(resource_name.c_str());
+	const DescriptionIndex idx = world.resource_index(resource_name.c_str());
 
 	if (idx == INVALID_INDEX) {
 		report_error(L, "Resource %s does not exist", resource_name.c_str());
@@ -550,7 +549,7 @@ int LuaEditorGameBase::read_campaign_data(lua_State* L) {
       May be used from the init.lua files for tribe/world loading only.
 */
 int LuaEditorGameBase::set_loading_message(lua_State* L) {
-	get_egbase(L).get_loader_ui()->step(luaL_checkstring(L, 2));
+	get_egbase(L).step_loader_ui(luaL_checkstring(L, 2));
 	return 0;
 }
 
@@ -578,9 +577,7 @@ const MethodType<LuaPlayerBase> LuaPlayerBase::Methods[] = {
    METHOD(LuaPlayerBase, place_ship),  {nullptr, nullptr},
 };
 const PropertyType<LuaPlayerBase> LuaPlayerBase::Properties[] = {
-   PROP_RO(LuaPlayerBase, number),
-   PROP_RO(LuaPlayerBase, tribe_name),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaPlayerBase, number), PROP_RO(LuaPlayerBase, tribe_name), {nullptr, nullptr, nullptr},
 };
 
 void LuaPlayerBase::__persist(lua_State* L) {
@@ -893,7 +890,9 @@ int LuaPlayerBase::get_workers(lua_State* L) {
 
 	uint32_t nworkers = 0;
 	for (const auto& economy : player.economies()) {
-		nworkers += economy.second->stock_worker(worker);
+		if (economy.second->type() == Widelands::wwWORKER) {
+			nworkers += economy.second->stock_ware_or_worker(worker);
+		}
 	}
 	lua_pushuint32(L, nworkers);
 	return 1;
@@ -919,7 +918,9 @@ int LuaPlayerBase::get_wares(lua_State* L) {
 
 	uint32_t nwares = 0;
 	for (const auto& economy : player.economies()) {
-		nwares += economy.second->stock_ware(ware);
+		if (economy.second->type() == Widelands::wwWARE) {
+			nwares += economy.second->stock_ware_or_worker(ware);
+		}
 	}
 	lua_pushuint32(L, nwares);
 	return 1;

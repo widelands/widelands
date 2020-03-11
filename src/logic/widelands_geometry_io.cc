@@ -19,6 +19,8 @@
 
 #include "logic/widelands_geometry_io.h"
 
+#include <cassert>
+
 #include "io/streamread.h"
 #include "io/streamwrite.h"
 

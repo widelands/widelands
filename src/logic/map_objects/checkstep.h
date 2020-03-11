@@ -20,15 +20,15 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_CHECKSTEP_H
 #define WL_LOGIC_MAP_OBJECTS_CHECKSTEP_H
 
+#include <memory>
 #include <set>
 #include <vector>
-
-#include <boost/shared_ptr.hpp>
 
 #include "logic/widelands_geometry.h"
 
 namespace Widelands {
 
+class EditorGameBase;
 class Map;
 class Player;
 
@@ -65,7 +65,7 @@ private:
 		const T op;
 	};
 
-	boost::shared_ptr<BaseCapsule> capsule;
+	std::shared_ptr<BaseCapsule> capsule;
 
 	static const CheckStep& always_false();
 
@@ -131,6 +131,23 @@ struct CheckStepDefault {
 
 private:
 	uint8_t movecaps_;
+};
+
+/**
+ * Implements the step checking behaviour for ferries.
+ *
+ * A ferry can travel on an edge if and only if both adjacent triangles are water.
+ */
+struct CheckStepFerry {
+	CheckStepFerry(const EditorGameBase& egbase) : egbase_(egbase) {
+	}
+
+	bool allowed(
+	   const Map&, const FCoords& start, const FCoords& end, int32_t dir, CheckStep::StepId) const;
+	bool reachable_dest(const Map&, const FCoords& dest) const;
+
+private:
+	const EditorGameBase& egbase_;
 };
 
 /**

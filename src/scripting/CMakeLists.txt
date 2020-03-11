@@ -37,7 +37,6 @@ wl_library(scripting_lua_table
   DEPENDS
     base_log
     base_geometry
-    base_macros
     scripting_base
     scripting_coroutine
     scripting_errors
@@ -70,7 +69,6 @@ wl_library(scripting_lua_interface
     base_i18n
     base_macros
     build_info
-    helper
     io_filesystem
     scripting_base
     scripting_errors

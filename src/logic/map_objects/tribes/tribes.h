@@ -23,28 +23,15 @@
 #include <memory>
 
 #include "base/macros.h"
-#include "graphic/texture.h"
 #include "logic/map_objects/description_maintainer.h"
 #include "logic/map_objects/immovable.h"
-#include "logic/map_objects/tribes/carrier.h"
-#include "logic/map_objects/tribes/constructionsite.h"
-#include "logic/map_objects/tribes/dismantlesite.h"
-#include "logic/map_objects/tribes/militarysite.h"
-#include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/ship.h"
-#include "logic/map_objects/tribes/soldier.h"
-#include "logic/map_objects/tribes/trainingsite.h"
-#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/ware_descr.h"
-#include "logic/map_objects/tribes/warehouse.h"
 #include "logic/map_objects/tribes/worker_descr.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {
-
-class WareDescr;
-class WorkerDescr;
 
 class Tribes {
 public:
@@ -87,6 +74,9 @@ public:
 
 	/// Adds this worker type to the tribe description.
 	void add_soldier_type(const LuaTable& table);
+
+	/// Adds this worker type to the tribe description.
+	void add_ferry_type(const LuaTable& table);
 
 	/// Adds this worker type to the tribe description.
 	void add_worker_type(const LuaTable& table);

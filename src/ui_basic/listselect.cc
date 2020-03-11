@@ -19,10 +19,6 @@
 
 #include "ui_basic/listselect.h"
 
-#include <iostream>
-
-#include <boost/bind.hpp>
-
 #include "base/log.h"
 #include "graphic/align.h"
 #include "graphic/font_handler.h"
@@ -498,11 +494,6 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		uint32_t selected_idx;
 		switch (code.sym) {
-		case SDLK_KP_2:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
 		case SDLK_DOWN:
 			selected_idx = selection_index() + 1;
 			if (selected_idx < size())
@@ -513,11 +504,6 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 				scrollbar_.set_scrollpos(scrollpos_);
 			}
 			return true;
-		case SDLK_KP_8:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
 		case SDLK_UP:
 			selected_idx = selection_index();
 			if (selected_idx > 0)

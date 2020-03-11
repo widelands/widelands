@@ -19,11 +19,10 @@
 
 #include "logic/map_objects/tribes/production_program.h"
 
+#include <cassert>
 #include <memory>
-#include <sstream>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/macros.h"
@@ -32,8 +31,8 @@
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/input_queue.h"
+#include "economy/wares_queue.h"
 #include "helper.h"
-#include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/checkstep.h"
@@ -48,7 +47,6 @@
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
-#include "logic/message_queue.h"
 #include "logic/player.h"
 #include "sound/note_sound.h"
 #include "sound/sound_handler.h"
@@ -67,7 +65,7 @@ namespace {
 ///    bool const result = match(candidate, "return");
 /// now candidate points to "   75" and result is true
 bool match(char*& candidate, const char* pattern) {
-	for (char* p = candidate;; ++p, ++pattern)
+	for (char *p = candidate;; ++p, ++pattern)
 		if (!*pattern) {
 			candidate = p;
 			return true;
@@ -113,7 +111,7 @@ bool skip(char*& p, char const c = ' ') {
 ///    bool const result = match_force_skip(candidate, "return");
 /// throws WException
 bool match_force_skip(char*& candidate, const char* pattern) {
-	for (char* p = candidate;; ++p, ++pattern)
+	for (char *p = candidate;; ++p, ++pattern)
 		if (!*pattern) {
 			force_skip(p);
 			candidate = p;
@@ -299,7 +297,7 @@ std::string ProductionProgram::ActReturn::Negation::description_negation(const T
 }
 
 bool ProductionProgram::ActReturn::EconomyNeedsWare::evaluate(const ProductionSite& ps) const {
-	return ps.get_economy()->needs_ware(ware_type);
+	return ps.get_economy(wwWARE)->needs_ware_or_worker(ware_type);
 }
 std::string
 ProductionProgram::ActReturn::EconomyNeedsWare::description(const Tribes& tribes) const {
@@ -321,7 +319,7 @@ ProductionProgram::ActReturn::EconomyNeedsWare::description_negation(const Tribe
 }
 
 bool ProductionProgram::ActReturn::EconomyNeedsWorker::evaluate(const ProductionSite& ps) const {
-	return ps.get_economy()->needs_worker(worker_type);
+	return ps.get_economy(wwWORKER)->needs_ware_or_worker(worker_type);
 }
 std::string
 ProductionProgram::ActReturn::EconomyNeedsWorker::description(const Tribes& tribes) const {
@@ -372,11 +370,9 @@ bool ProductionProgram::ActReturn::SiteHas::evaluate(const ProductionSite& ps) c
 std::string ProductionProgram::ActReturn::SiteHas::description(const Tribes& tribes) const {
 	std::vector<std::string> condition_list;
 	for (const auto& entry : group.first) {
-		if (entry.second == wwWARE) {
-			condition_list.push_back(tribes.get_ware_descr(entry.first)->descname());
-		} else {
-			condition_list.push_back(tribes.get_worker_descr(entry.first)->descname());
-		}
+		condition_list.push_back(entry.second == wwWARE ?
+		                            tribes.get_ware_descr(entry.first)->descname() :
+		                            tribes.get_worker_descr(entry.first)->descname());
 	}
 	std::string condition = i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
 	if (1 < group.second) {
@@ -398,11 +394,9 @@ std::string
 ProductionProgram::ActReturn::SiteHas::description_negation(const Tribes& tribes) const {
 	std::vector<std::string> condition_list;
 	for (const auto& entry : group.first) {
-		if (entry.second == wwWARE) {
-			condition_list.push_back(tribes.get_ware_descr(entry.first)->descname());
-		} else {
-			condition_list.push_back(tribes.get_worker_descr(entry.first)->descname());
-		}
+		condition_list.push_back(entry.second == wwWARE ?
+		                            tribes.get_ware_descr(entry.first)->descname() :
+		                            tribes.get_worker_descr(entry.first)->descname());
 	}
 	std::string condition = i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
 	if (1 < group.second) {
@@ -873,11 +867,9 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 
 			std::vector<std::string> ware_list;
 			for (const auto& entry : group.first) {
-				if (entry.second == wwWARE) {
-					ware_list.push_back(tribe.get_ware_descr(entry.first)->descname());
-				} else {
-					ware_list.push_back(tribe.get_worker_descr(entry.first)->descname());
-				}
+				ware_list.push_back(entry.second == wwWARE ?
+				                       tribe.get_ware_descr(entry.first)->descname() :
+				                       tribe.get_worker_descr(entry.first)->descname());
 			}
 			std::string ware_string = i18n::localize_list(ware_list, i18n::ConcatenateWith::OR);
 

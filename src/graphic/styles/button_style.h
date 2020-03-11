@@ -22,7 +22,6 @@
 
 #include <memory>
 
-#include "graphic/styles/font_style.h"
 #include "graphic/styles/panel_styles.h"
 #include "graphic/styles/text_panel_style.h"
 

@@ -19,17 +19,14 @@
 
 #include "map_io/map_players_view_packet.h"
 
-#include <iostream>
-#include <typeinfo>
-
-#include <boost/format.hpp>
-
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/road.h"
+#include "economy/waterway.h"
 #include "io/fileread.h"
+#include "io/filesystem/filesystem_exceptions.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
@@ -130,8 +127,8 @@ namespace {
 	}
 
 // Try to find the file with newest fitting version number
-#define OPEN_INPUT_FILE_NEW_VERSION(                                                               \
-   filetype, file, filename, fileversion, filename_template, version)                              \
+#define OPEN_INPUT_FILE_NEW_VERSION(filetype, file, filename, fileversion, filename_template,      \
+                                    version)                                                       \
 	uint8_t fileversion = version;                                                                  \
 	filetype file;                                                                                  \
 	char(filename)[FILENAME_SIZE];                                                                  \
@@ -166,7 +163,7 @@ namespace {
 	if (!(file).end_of_file())                                                                      \
 		throw GameDataError(                                                                         \
 		   "MapPlayersViewPacket::read: player %u:"                                                  \
-		   "Found %lu trailing bytes in \"%s\"",                                                     \
+		   "Found %" PRIuS " trailing bytes in \"%s\"",                                              \
 		   plnum, static_cast<long unsigned int>((file).get_size() - (file).get_pos()), filename);
 
 // Errors for the Read* functions.
@@ -355,7 +352,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						const MapObjectDescr* map_object_descr;
 						if (const BaseImmovable* base_immovable = f.field->get_immovable()) {
 							map_object_descr = &base_immovable->descr();
-							if (Road::is_road_descr(map_object_descr))
+							if (Road::is_road_descr(map_object_descr) ||
+							    Waterway::is_waterway_descr(map_object_descr))
 								map_object_descr = nullptr;
 							else if (upcast(Building const, building, base_immovable))
 								if (building->get_position() != f)
@@ -384,14 +382,12 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					}
 
 					{  //  edges
-						uint8_t mask = 0;
 						if (f_vision | bl_vision)
-							mask = RoadType::kMask << RoadType::kSouthWest;
+							f_player_field.r_sw = f.field->get_road(WALK_SW);
 						if (f_vision | br_vision)
-							mask |= RoadType::kMask << RoadType::kSouthEast;
+							f_player_field.r_se = f.field->get_road(WALK_SE);
 						if (f_vision | r_vision)
-							mask |= RoadType::kMask << RoadType::kEast;
-						f_player_field.roads = f.field->get_roads() & mask;
+							f_player_field.r_e = f.field->get_road(WALK_E);
 					}
 
 					//  The player is not given information about resources that he
@@ -517,9 +513,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 				br_everseen = br_vision;
 				br_seen = 1 < br_vision;
 
-				//  Store the player's view of roads and ownership in these
+				//  Store the player's view of ownership in these
 				//  temporary variables and save it in the player when set.
-				uint8_t roads = 0;
 				PlayerNumber owner = 0;
 
 				switch (f_vision) {  //  owner and map_object_descr
@@ -536,7 +531,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					} catch (const FileRead::FileBoundaryExceeded&) {
 						throw GameDataError(
 						   "MapPlayersViewPacket::read: player %u: in "
-						   "\"%s\":%lu: node (%i, %i): unexpected end of file "
+						   "\"%s\":%" PRIuS ": node (%i, %i): unexpected end of file "
 						   "while reading time_node_last_unseen",
 						   plnum, unseen_times_filename,
 						   static_cast<long unsigned int>(unseen_times_file.get_pos() - 4), f.x, f.y);
@@ -547,14 +542,14 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					} catch (const FileRead::FileBoundaryExceeded&) {
 						throw GameDataError(
 						   "MapPlayersViewPacket::read: player %u: in "
-						   "\"%s\":%lu: node (%i, %i): unexpected end of file "
+						   "\"%s\":%" PRIuS ": node (%i, %i): unexpected end of file "
 						   "while reading owner",
 						   plnum, unseen_times_filename,
 						   static_cast<long unsigned int>(unseen_times_file.get_pos() - 1), f.x, f.y);
 					}
 					if (nr_players < owner) {
 						throw GameDataError("MapPlayersViewPacket::read: player %u: in "
-						                    "\"%s\":%lu & 0xf: node (%i, %i): Player thinks that "
+						                    "\"%s\":%" PRIuS " & 0xf: node (%i, %i): Player thinks that "
 						                    "this node is owned by player %u, but there are only %u "
 						                    "players",
 						                    plnum, owners_filename,
@@ -601,7 +596,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					const MapObjectDescr* map_object_descr;
 					if (const BaseImmovable* base_immovable = f.field->get_immovable()) {
 						map_object_descr = &base_immovable->descr();
-						if (Road::is_road_descr(map_object_descr))
+						if (Road::is_road_descr(map_object_descr) ||
+						    Waterway::is_waterway_descr(map_object_descr))
 							map_object_descr = nullptr;
 						else if (upcast(Building const, building, base_immovable))
 							if (building->get_position() != f)
@@ -678,48 +674,45 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 				}
 
 				{  //  edges
-					uint8_t mask = 0;
 					if (f_seen | bl_seen) {
-						mask = RoadType::kMask << RoadType::kSouthWest;
+						f_player_field.r_sw = f.field->get_road(WALK_SW);
 					} else if (f_everseen | bl_everseen) {
 						//  The player has seen the SouthWest edge but does not see
 						//  it now. Load his information about this edge from file.
 						if (road_file_version == kCurrentPacketVersionRoads) {
-							roads = roads_file.unsigned_8();
+							f_player_field.r_sw = static_cast<RoadSegment>(roads_file.unsigned_8());
 						} else {
 							throw UnhandledVersionError("MapPlayersViewPacket - Road file",
 							                            road_file_version, kCurrentPacketVersionRoads);
 						}
 					}
 					if (f_seen | br_seen) {
-						mask |= RoadType::kMask << RoadType::kSouthEast;
+						f_player_field.r_se = f.field->get_road(WALK_SE);
 					} else if (f_everseen | br_everseen) {
 						//  The player has seen the SouthEast edge but does not see
 						//  it now. Load his information about this edge from file.
 						if (road_file_version == kCurrentPacketVersionRoads) {
-							roads |= roads_file.unsigned_8();
+							f_player_field.r_se = static_cast<RoadSegment>(roads_file.unsigned_8());
 						} else {
 							throw UnhandledVersionError("MapPlayersViewPacket - Road file",
 							                            road_file_version, kCurrentPacketVersionRoads);
 						}
 					}
 					if (f_seen | r_seen) {
-						mask |= RoadType::kMask << RoadType::kEast;
+						f_player_field.r_e = f.field->get_road(WALK_E);
 					} else if (f_everseen | r_everseen) {
 						//  The player has seen the      East edge but does not see
 						//  it now. Load his information about this edge from file.
 						if (road_file_version == kCurrentPacketVersionRoads) {
-							roads |= roads_file.unsigned_8();
+							f_player_field.r_e = static_cast<RoadSegment>(roads_file.unsigned_8());
 						} else {
 							throw UnhandledVersionError("MapPlayersViewPacket - Road file",
 							                            road_file_version, kCurrentPacketVersionRoads);
 						}
 					}
-					roads |= f.field->get_roads() & mask;
 				}
 
 				//  Now save this information in the player field.
-				f_player_field.roads = roads;
 				f_player_field.owner = owner;
 
 				//  geologic survey
@@ -746,7 +739,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						} catch (const FileRead::FileBoundaryExceeded&) {
 							throw GameDataError(
 							   "MapPlayersViewPacket::read: player %u: in "
-							   "\"%s\":%lu: node (%i, %i) t = D: unexpected end of "
+							   "\"%s\":%" PRIuS ": node (%i, %i) t = D: unexpected end of "
 							   "file while reading time_triangle_last_surveyed",
 							   plnum, survey_times_filename,
 							   static_cast<long unsigned int>(survey_times_file.get_pos() - 4), f.x, f.y);
@@ -781,7 +774,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						} catch (const FileRead::FileBoundaryExceeded&) {
 							throw GameDataError(
 							   "MapPlayersViewPacket::read: player %u: in "
-							   "\"%s\":%lu: node (%i, %i) t = R: unexpected end of "
+							   "\"%s\":%" PRIuS ": node (%i, %i) t = R: unexpected end of "
 							   "file while reading time_triangle_last_surveyed",
 							   plnum, survey_times_filename,
 							   static_cast<long unsigned int>(survey_times_file.get_pos() - 4), f.x, f.y);
@@ -834,7 +827,7 @@ inline static void write_unseen_immovable(MapObjectData const* map_object_data,
                                           FileWrite& immovables_file) {
 	MapObjectDescr const* const map_object_descr = map_object_data->map_object_descr;
 	const ConstructionsiteInformation& csi = map_object_data->csi;
-	assert(!Road::is_road_descr(map_object_descr));
+	assert(!Road::is_road_descr(map_object_descr) && !Waterway::is_waterway_descr(map_object_descr));
 	uint8_t immovable_kind = 255;
 
 	if (!map_object_descr)

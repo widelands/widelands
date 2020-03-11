@@ -20,12 +20,9 @@
 #ifndef WL_WUI_ECONOMY_OPTIONS_WINDOW_H
 #define WL_WUI_ECONOMY_OPTIONS_WINDOW_H
 
-#include <map>
 #include <memory>
-#include <string>
 
 #include "economy/economy.h"
-#include "logic/map_objects/tribes/tribe_descr.h"
 #include "notifications/notifications.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
@@ -40,14 +37,19 @@ const std::string kDefaultEconomyProfile = "Default";
 
 // Used to indicate that a profile has been saved or deleted, so all open windows can update it
 struct NoteEconomyProfile {
-	NoteEconomyProfile(Widelands::Serial s) : serial(s) {
+	NoteEconomyProfile(Widelands::Serial ware, Widelands::Serial worker)
+	   : ware_serial(ware), worker_serial(worker) {
 	}
-	Widelands::Serial serial;
+	Widelands::Serial ware_serial;
+	Widelands::Serial worker_serial;
 	CAN_BE_SENT_AS_NOTE(NoteId::EconomyProfile)
 };
 
 struct EconomyOptionsWindow : public UI::Window {
-	EconomyOptionsWindow(UI::Panel* parent, Widelands::Economy* economy, bool can_act);
+	EconomyOptionsWindow(UI::Panel* parent,
+	                     Widelands::Economy* ware_economy,
+	                     Widelands::Economy* worker_economy,
+	                     bool can_act);
 	~EconomyOptionsWindow() override;
 
 	struct PredefinedTargets {
@@ -125,7 +127,8 @@ private:
 	void on_economy_note(const Widelands::NoteEconomy& note);
 
 	UI::Box main_box_;
-	Widelands::Serial serial_;
+	Widelands::Serial ware_serial_;
+	Widelands::Serial worker_serial_;
 	Widelands::Player* player_;
 	UI::TabPanel tabpanel_;
 	EconomyOptionsPanel* ware_panel_;

@@ -19,8 +19,6 @@
 
 #include "wui/portdockwaresdisplay.h"
 
-#include <boost/lexical_cast.hpp>
-
 #include "economy/expedition_bootstrap.h"
 #include "economy/portdock.h"
 #include "logic/player.h"

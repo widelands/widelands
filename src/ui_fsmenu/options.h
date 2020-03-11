@@ -20,10 +20,7 @@
 #ifndef WL_UI_FSMENU_OPTIONS_H
 #define WL_UI_FSMENU_OPTIONS_H
 
-#include <cstring>
 #include <memory>
-#include <string>
-#include <vector>
 
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
@@ -67,6 +64,8 @@ public:
 		bool auto_roadbuild_mode;
 		bool transparent_chat;
 		bool single_watchwin;
+		bool ctrl_zoom;
+		bool game_clock;
 
 		// Language options
 		std::string language;
@@ -153,6 +152,8 @@ private:
 	UI::Checkbox auto_roadbuild_mode_;
 	UI::Checkbox transparent_chat_;
 	UI::Checkbox single_watchwin_;
+	UI::Checkbox ctrl_zoom_;
+	UI::Checkbox game_clock_;
 
 	OptionsCtrl::OptionsStruct os_;
 

@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # ks k, 2018
-# ks k, 2018
+# ks k, 2018,2020
 # TaeMin An, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
-"PO-Revision-Date: 2019-08-10 17:15+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-02-26 18:51+0000\n"
+"PO-Revision-Date: 2020-03-01 04:53+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -293,7 +293,7 @@ msgid ""
 "The third material necessary for improved buildings is reed, used to cover "
 "roofs. Reed fields are planted by a gardener around his building, the reed "
 "yard."
-msgstr ""
+msgstr "개선된 건물에 필요한 세 번째 재료는 지붕을 덮는 데 사용되는 갈대입니다. 갈대밭은 정원사가 그의 건물인 갈대 마당 주변에 심습니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:129
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:131
@@ -1032,12 +1032,12 @@ msgstr "그러나 그들은 알'쑨란 주변의 전쟁때문에 지금 이 삶�
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgstr ""
+msgstr "새로운 목표"
 
 #: ../../data/scripting/richtext_scenarios.lua:93
 msgid "New Objectives"
-msgstr ""
+msgstr "새로운 목표들"

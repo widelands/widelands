@@ -21,12 +21,16 @@ world:new_immovable_type{
          "grow=aspen_summer_pole",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "sapling/idle_?.png"),
-         hotspot = { 5, 12 },
+         directory = dirname,
+         basename = "sapling",
          fps = 8,
-      },
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 6, 13 }
+      }
    },
 }
 
@@ -44,12 +48,16 @@ world:new_immovable_type{
          "grow=aspen_summer_mature",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "pole/idle_?.png"),
-         hotspot = { 12, 28 },
+         directory = dirname,
+         basename = "pole",
          fps = 8,
-      },
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 13, 29 }
+      }
    },
 }
 
@@ -70,12 +78,16 @@ world:new_immovable_type{
          "grow=aspen_summer_old",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "mature/idle_?.png"),
-         hotspot = { 18, 47 },
+         directory = dirname,
+         basename = "mature",
          fps = 8,
-      },
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 19, 48 }
+      }
    },
 }
 
@@ -83,7 +95,7 @@ world:new_immovable_type{
    name = "aspen_summer_old",
    descname = _ "Aspen (Old)",
    species = _ "Aspen",
-   icon = dirname .. "old/idle_0.png",
+   icon = dirname .. "menu.png",
    editor_category = "trees_deciduous",
    size = "small",
    attributes = { "tree" },
@@ -99,20 +111,25 @@ world:new_immovable_type{
          "transform=fallentree",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "old/idle_?.png"),
-         hotspot = { 23, 58 },
+         directory = dirname,
+         basename = "old",
          fps = 10,
-         sound_effect = {
-            path = "sound/animals/bird1",
-         },
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 24, 59 }
       },
       falling = {
-         pictures = path.list_files(dirname .. "old/f_tree_??.png"),
-         hotspot = { 20, 59 },
+         directory = dirname,
+         basename = "falling",
          fps = 10,
+         frames = 9,
+         rows = 3,
+         columns = 3,
+         hotspot = { 21, 60 },
          play_once = true
-      },
+      }
    },
 }

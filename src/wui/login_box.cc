@@ -23,6 +23,7 @@
 #include "graphic/font_handler.h"
 #include "network/crypto.h"
 #include "network/internet_gaming.h"
+#include "network/internet_gaming_protocol.h"
 #include "ui_basic/button.h"
 #include "ui_basic/messagebox.h"
 #include "wlapplication_options.h"
@@ -44,23 +45,23 @@ LoginBox::LoginBox(Panel& parent)
 	register_account = new UI::MultilineTextarea(
 	   this, margin, 105, 470, 140, UI::PanelStyle::kWui,
 	   (boost::format(_("In order to use a registered "
-	                    "account, you need an account on the widelands website. "
+	                    "account, you need an account on the Widelands website. "
 	                    "Please log in at %s and set an online "
 	                    "gaming password on your profile page.")) %
 	    "\n\nhttps://widelands.org/accounts/register/\n\n")
 	      .str());
 
-	loginbtn = new UI::Button(
-	   this, "login",
-	   UI::g_fh->fontset()->is_rtl() ? (get_inner_w() / 2 - 200) / 2 :
-	                                   (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2,
-	   get_inner_h() - 20 - margin, 200, 20, UI::ButtonStyle::kWuiPrimary, _("Save"));
+	loginbtn =
+	   new UI::Button(this, "login", UI::g_fh->fontset()->is_rtl() ?
+	                                    (get_inner_w() / 2 - 200) / 2 :
+	                                    (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2,
+	                  get_inner_h() - 20 - margin, 200, 20, UI::ButtonStyle::kWuiPrimary, _("Save"));
 
-	cancelbtn = new UI::Button(
-	   this, "cancel",
-	   UI::g_fh->fontset()->is_rtl() ? (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2 :
-	                                   (get_inner_w() / 2 - 200) / 2,
-	   loginbtn->get_y(), 200, 20, UI::ButtonStyle::kWuiSecondary, _("Cancel"));
+	cancelbtn =
+	   new UI::Button(this, "cancel", UI::g_fh->fontset()->is_rtl() ?
+	                                     (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2 :
+	                                     (get_inner_w() / 2 - 200) / 2,
+	                  loginbtn->get_y(), 200, 20, UI::ButtonStyle::kWuiSecondary, _("Cancel"));
 
 	loginbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_ok, boost::ref(*this)));
 	cancelbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_back, boost::ref(*this)));

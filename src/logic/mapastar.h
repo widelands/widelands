@@ -20,14 +20,18 @@
 #ifndef WL_LOGIC_MAPASTAR_H
 #define WL_LOGIC_MAPASTAR_H
 
+#include <memory>
+
 #include "base/log.h"
 #include "logic/map.h"
+#include "logic/map_objects/tribes/wareworker.h"
 #include "logic/pathfield.h"
 
 namespace Widelands {
 
 struct MapAStarBase {
-	explicit MapAStarBase(Map& m) : map(m), pathfields(m.pathfieldmgr_->allocate()) {
+	explicit MapAStarBase(Map& m, WareWorker type)
+	   : map(m), pathfields(m.pathfieldmgr_->allocate()), queue(type) {
 	}
 
 	bool empty() const {
@@ -44,7 +48,7 @@ protected:
 	}
 
 	Map& map;
-	boost::shared_ptr<Pathfields> pathfields;
+	std::shared_ptr<Pathfields> pathfields;
 	Pathfield::Queue queue;
 };
 
@@ -108,7 +112,8 @@ struct StepEvalAStar {
  * @endcode
  */
 template <typename StepEval> struct MapAStar : MapAStarBase {
-	MapAStar(Map& map_, const StepEval& eval_) : MapAStarBase(map_), eval(eval_) {
+	MapAStar(Map& map_, const StepEval& eval_, WareWorker type)
+	   : MapAStarBase(map_, type), eval(eval_) {
 	}
 
 	void push(Coords pos, int32_t cost = 0);
@@ -131,7 +136,7 @@ template <typename StepEval> void MapAStar<StepEval>::push(Coords pos, int32_t c
 		pf.real_cost = cost;
 		pf.estim_cost = eval.estimate(map, map.get_fcoords(pos));
 		queue.push(&pf);
-	} else if (pf.cookie().is_active() && cost <= pf.real_cost) {
+	} else if (pf.cookie(queue.type()).is_active() && cost <= pf.real_cost) {
 		pf.backlink = IDLE;
 		pf.real_cost = cost;
 		queue.decrease_key(&pf);

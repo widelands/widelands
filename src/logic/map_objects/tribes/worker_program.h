@@ -20,8 +20,6 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_WORKER_PROGRAM_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_WORKER_PROGRAM_H
 
-#include <memory>
-
 #include "base/macros.h"
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/tribes/tribes.h"
@@ -30,10 +28,6 @@
 #include "scripting/lua_table.h"
 
 namespace Widelands {
-
-// TODO(Antonio Trueba#1#): Get rid of forward class
-// declaration (Chicken-and-egg problem)
-class WorkerDescr;
 
 struct WorkerProgram : public BobProgramBase {
 
@@ -85,6 +79,7 @@ private:
 	void parse_callobject(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_plant(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_createbob(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_buildferry(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_removeobject(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_repeatsearch(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_findresources(Worker::Action* act, const std::vector<std::string>& cmd);
