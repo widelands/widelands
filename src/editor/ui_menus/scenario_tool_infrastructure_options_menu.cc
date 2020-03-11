@@ -39,16 +39,27 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(
    : EditorToolOptionsMenu(parent, registry, 400, 200, _("Place Infrastructure"), tool),
      tool_(tool),
      box_(this, 0, 0, UI::Box::Vertical),
-     auto_infra_(
-        &box_,
-        "auto_infra",
+     buttonsbox_(&box_, 0, 0, UI::Box::Horizontal),
+     auto_infra_cur_(
+        &buttonsbox_,
+        "auto_infra_cur",
         0,
         0,
         100,
         30,
         UI::ButtonStyle::kWuiSecondary,
-        _("Place Headquarters"),
-        _("Automatically place a Headquarters building at each player's starting position")),
+        _("Place one Headquarters"),
+        _("Automatically place a Headquarters building at this player's starting position")),
+     auto_infra_all_(
+        &buttonsbox_,
+        "auto_infra_all",
+        0,
+        0,
+        100,
+        30,
+        UI::ButtonStyle::kWuiSecondary,
+        _("Place all Headquarters"),
+        _("Automatically place a Headquarters building at every player's starting position")),
      tabs_(&box_, UI::TabPanelStyle::kWuiDark),
      force_(&box_,
             Vector2i(0, 0),
@@ -205,14 +216,20 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(
 		tool_.set_force(force_.get_state());
 		select_correct_tool();
 	});
-	auto_infra_.sigclicked.connect([this]() {
-		make_auto_infra();
+	auto_infra_cur_.sigclicked.connect([this]() {
+		make_auto_infra(false);
+		select_correct_tool();
+	});
+	auto_infra_all_.sigclicked.connect([this]() {
+		make_auto_infra(true);
 		select_correct_tool();
 	});
 
+	buttonsbox_.add(&auto_infra_cur_, UI::Box::Resizing::kExpandBoth);
+	buttonsbox_.add(&auto_infra_all_, UI::Box::Resizing::kExpandBoth);
 	box_.add(&tabs_, UI::Box::Resizing::kExpandBoth);
 	box_.add(&force_, UI::Box::Resizing::kFullSize);
-	box_.add(&auto_infra_, UI::Box::Resizing::kFullSize);
+	box_.add(&buttonsbox_, UI::Box::Resizing::kFullSize);
 	box_.add(&selected_items_, UI::Box::Resizing::kFullSize);
 	tabs_.activate(tool_.get_player() - 1);
 	select_tab();
@@ -223,7 +240,7 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(
 	}
 }
 
-void ScenarioToolInfrastructureOptionsMenu::make_auto_infra() {
+void ScenarioToolInfrastructureOptionsMenu::make_auto_infra(bool all) {
 	std::list<std::string> errors;
 	Widelands::EditorGameBase& egbase = eia().egbase();
 	auto is_hq = [&egbase](Widelands::DescriptionIndex di) {
@@ -234,7 +251,15 @@ void ScenarioToolInfrastructureOptionsMenu::make_auto_infra() {
 		       !b.is_buildable() && !b.is_enhanced() && !b.needs_seafaring() &&
 		       !b.needs_waterways() && b.get_built_over_immovable() == Widelands::INVALID_INDEX;
 	};
-	for (unsigned p = egbase.map().get_nrplayers(); p; --p) {
+	std::set<unsigned> for_whom;
+	if (all) {
+		for (unsigned p = egbase.map().get_nrplayers(); p; --p) {
+			for_whom.insert(p);
+		}
+	} else {
+		for_whom.insert(tabs_.active() + 1);
+	}
+	for (unsigned p : for_whom) {
 		Widelands::Player& player = *egbase.get_player(p);
 		Widelands::DescriptionIndex index =
 		   player.tribe().building_index(player.tribe().name() + "_headquarters");

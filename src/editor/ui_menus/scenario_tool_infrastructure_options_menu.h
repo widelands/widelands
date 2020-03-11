@@ -48,10 +48,10 @@ private:
 
 	void select_tab();
 	void toggle_selected(UI::IconGrid*, Widelands::MapObjectType, int32_t);
-	void make_auto_infra();
+	void make_auto_infra(bool all);
 
-	UI::Box box_;
-	UI::Button auto_infra_;
+	UI::Box box_, buttonsbox_;
+	UI::Button auto_infra_cur_, auto_infra_all_;
 	UI::TabPanel tabs_;
 	UI::Checkbox force_;
 	UI::MultilineTextarea selected_items_;
