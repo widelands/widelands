@@ -81,7 +81,7 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UI::Panel* const parent,
 	   boost::bind(&PlayerDescriptionGroup::toggle_playertribe, boost::ref(*this)));
 	d->btnPlayerInit =
 	   new UI::Dropdown<uint8_t>(this, "player_initialization", xplayerinit, h / 2, w - xplayerinit,
-	                             6, h / 2, _("Initialization"), UI::DropdownType::kTextual,
+	                             6, h / 2, "", UI::DropdownType::kTextual,
 	                             UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary);
 	d->btnPlayerInit->selected.connect(
 	   [this]() { d->settings->set_player_init(d->plnum, d->btnPlayerInit->get_selected()); });
