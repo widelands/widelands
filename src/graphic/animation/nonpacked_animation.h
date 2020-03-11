@@ -62,7 +62,8 @@ private:
 		int width() const override;
 		int height() const override;
 
-        std::vector<std::unique_ptr<const Texture>> frame_textures(bool return_playercolor_masks) const override;
+		std::vector<std::unique_ptr<const Texture>>
+		frame_textures(bool return_playercolor_masks) const override;
 
 		/// Image files on disk
 		std::vector<std::string> image_files;

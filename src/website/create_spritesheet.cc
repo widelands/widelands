@@ -46,61 +46,61 @@ char const* const animation_direction_names[6] = {"_ne", "_e", "_se", "_sw", "_w
 // Find trimmed rect for a teaxture according to transparent pixels, searching from the outside in.
 // Lock texture before you call this function.
 Recti find_trim_rect(Texture* texture) {
-    Recti result(Vector2i::zero(), texture->width(), texture->height());
+	Recti result(Vector2i::zero(), texture->width(), texture->height());
 
-    // Left margin
-    bool loop_done = false;
-    for (int x = 0; x < texture->width() && !loop_done; ++x) {
-        for (int y = 0; y < texture->height(); ++y) {
+	// Left margin
+	bool loop_done = false;
+	for (int x = 0; x < texture->width() && !loop_done; ++x) {
+		for (int y = 0; y < texture->height(); ++y) {
 			RGBAColor pixel = texture->get_pixel(x, y);
 			if (pixel.a != 0) {
-                result.x = x;
-                loop_done = true;
-                break;
+				result.x = x;
+				loop_done = true;
+				break;
 			}
 		}
-    }
+	}
 
-    // Right margin
-    loop_done = false;
-    for (int x = texture->width() - 1; x > 0 && !loop_done; --x) {
-        for (int y = 0; y < texture->height(); ++y) {
+	// Right margin
+	loop_done = false;
+	for (int x = texture->width() - 1; x > 0 && !loop_done; --x) {
+		for (int y = 0; y < texture->height(); ++y) {
 			RGBAColor pixel = texture->get_pixel(x, y);
 			if (pixel.a != 0) {
-                result.w = x + 1;
-                loop_done = true;
-                break;
+				result.w = x + 1;
+				loop_done = true;
+				break;
 			}
 		}
-    }
+	}
 
-    // Top margin
-    loop_done = false;
-    for (int y = 0; y < texture->height() && !loop_done; ++y) {
-        for (int x = 0; x < texture->width(); ++x) {
+	// Top margin
+	loop_done = false;
+	for (int y = 0; y < texture->height() && !loop_done; ++y) {
+		for (int x = 0; x < texture->width(); ++x) {
 			RGBAColor pixel = texture->get_pixel(x, y);
 			if (pixel.a != 0) {
-                result.y = y;
-                loop_done = true;
-                break;
+				result.y = y;
+				loop_done = true;
+				break;
 			}
 		}
-    }
+	}
 
-    // Bottom margin
-    loop_done = false;
-    for (int y = texture->height() - 1; y >= 0 && !loop_done; --y) {
-        for (int x = 0; x < texture->width(); ++x) {
+	// Bottom margin
+	loop_done = false;
+	for (int y = texture->height() - 1; y >= 0 && !loop_done; --y) {
+		for (int x = 0; x < texture->width(); ++x) {
 			RGBAColor pixel = texture->get_pixel(x, y);
 			if (pixel.a != 0) {
-                result.h = y + 1;
-                loop_done = true;
-                break;
+				result.h = y + 1;
+				loop_done = true;
+				break;
 			}
 		}
-    }
+	}
 
-    return result;
+	return result;
 }
 
 // Finds margins so that we can crop the animation to save space
@@ -111,11 +111,11 @@ void find_margins(const std::vector<std::unique_ptr<const Texture>>& images, Rec
 		temp_texture->blit(image_dimensions, *image, image_dimensions, 1., BlendMode::Copy);
 		temp_texture->lock();
 
-        const Recti new_rect = find_trim_rect(temp_texture.get());
-        margins->x = std::min(margins->x, new_rect.x);
-        margins->w = std::max(margins->w, new_rect.w);
-        margins->y = std::min(margins->y, new_rect.y);
-        margins->h = std::max(margins->h, new_rect.h);
+		const Recti new_rect = find_trim_rect(temp_texture.get());
+		margins->x = std::min(margins->x, new_rect.x);
+		margins->w = std::max(margins->w, new_rect.w);
+		margins->y = std::min(margins->y, new_rect.y);
+		margins->h = std::max(margins->h, new_rect.h);
 	}
 }
 
@@ -153,12 +153,10 @@ void write_spritesheet(const std::vector<std::unique_ptr<const Texture>>& imgs,
 
 // Container for writing spritesheet files
 struct SpritesheetData {
-	explicit SpritesheetData(const std::string& fb,
-                             const Animation& animation,
-                             const float scale)
+	explicit SpritesheetData(const std::string& fb, const Animation& animation, const float scale)
 	   : filename_base(fb),
-         images(animation.frame_textures(scale, false)),
-         pc_masks(animation.frame_textures(scale, true)) {
+	     images(animation.frame_textures(scale, false)),
+	     pc_masks(animation.frame_textures(scale, true)) {
 	}
 
 	const std::string filename_base;
@@ -241,7 +239,7 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 	// Add global paramaters for this animation to Lua
 	std::unique_ptr<LuaTree::Element> lua_object(new LuaTree::Element());
 	LuaTree::Object* lua_animation = lua_object->add_object(animation_name);
-    // The Lua files all have 'dirname = path.dirname(__file__)' defined, so we use that.
+	// The Lua files all have 'dirname = path.dirname(__file__)' defined, so we use that.
 	lua_animation->add_raw("directory", "dirname");
 
 	// We only write FPS if the animation is not a build animation and does not use the default FPS.
@@ -264,15 +262,15 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 		++rows;
 	}
 
-    if (nr_frames > 1) {
-        lua_animation->add_int("frames", nr_frames);
-        lua_animation->add_int("rows", rows);
-        lua_animation->add_int("columns", columns);
-    } else {
-        log("NOTE: Animation '%s' for '%s' has less than 2 images and doesn't need a "
+	if (nr_frames > 1) {
+		lua_animation->add_int("frames", nr_frames);
+		lua_animation->add_int("rows", rows);
+		lua_animation->add_int("columns", columns);
+	} else {
+		log("NOTE: Animation '%s' for '%s' has less than 2 images and doesn't need a "
 		    "spritesheet. Add it to the \"animations\" table.\n",
-            animation_name.c_str(), map_object_name.c_str());
-    }
+		    animation_name.c_str(), map_object_name.c_str());
+	}
 
 	const int representative_frame = representative_animation.representative_frame();
 	if (representative_frame > 0) {
@@ -300,34 +298,36 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 				                                     .str();
 				const Animation& directional_animation = g_gr->animations().get_animation(
 				   descr->get_animation(directional_animname, nullptr));
-				spritesheets_to_write.emplace_back(new SpritesheetData(filename_base, directional_animation, scale));
+				spritesheets_to_write.emplace_back(
+				   new SpritesheetData(filename_base, directional_animation, scale));
 			}
 
 		} else {
-			spritesheets_to_write.emplace_back(new SpritesheetData(
-			   (boost::format("%s_%d") % animation_name % scale).str(), representative_animation, scale));
+			spritesheets_to_write.emplace_back(
+			   new SpritesheetData((boost::format("%s_%d") % animation_name % scale).str(),
+			                       representative_animation, scale));
 		}
 
 		// Find margins for trimming
-        const int max_width = spritesheets_to_write.front()->images.front()->width();
-        const int max_height = spritesheets_to_write.front()->images.front()->height();
+		const int max_width = spritesheets_to_write.front()->images.front()->width();
+		const int max_height = spritesheets_to_write.front()->images.front()->height();
 		Recti margins(max_width, max_height, 0, 0);
 		for (const auto& animation_data : spritesheets_to_write) {
 			find_margins(animation_data->images, &margins);
 		}
 
-        // Turn right and bottom edges from absolute coordinates to relative
-        margins.w -= margins.x;
-        margins.h -= margins.y;
-        margins.w = std::min(margins.w, max_width);
-        margins.h = std::min(margins.h, max_height);
+		// Turn right and bottom edges from absolute coordinates to relative
+		margins.w -= margins.x;
+		margins.h -= margins.y;
+		margins.w = std::min(margins.w, max_width);
+		margins.h = std::min(margins.h, max_height);
 
-        assert(margins.x >= 0);
-        assert(margins.y >= 0);
-        assert(margins.w <= max_width);
-        assert(margins.h <= max_height);
-        assert(margins.w > 1);
-        assert(margins.h > 1);
+		assert(margins.x >= 0);
+		assert(margins.y >= 0);
+		assert(margins.w <= max_width);
+		assert(margins.h <= max_height);
+		assert(margins.w > 1);
+		assert(margins.h > 1);
 
 		// Write the spritesheet(s)
 		const int spritesheet_width = columns * margins.w;
@@ -346,9 +346,9 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 			write_spritesheet(spritesheet_data->images, spritesheet_data->filename_base + ".png",
 			                  margins, columns, spritesheet_width, spritesheet_height, out_filesystem);
 			if (!spritesheet_data->pc_masks.empty()) {
-				write_spritesheet(spritesheet_data->pc_masks, spritesheet_data->filename_base + "_pc.png",
-				                  margins, columns, spritesheet_width, spritesheet_height,
-				                  out_filesystem);
+				write_spritesheet(spritesheet_data->pc_masks,
+				                  spritesheet_data->filename_base + "_pc.png", margins, columns,
+				                  spritesheet_width, spritesheet_height, out_filesystem);
 			}
 		}
 

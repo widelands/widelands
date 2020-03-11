@@ -129,27 +129,28 @@ void SpriteSheetAnimation::SpriteSheetMipMapEntry::blit(uint32_t idx,
 	}
 }
 
-std::vector<std::unique_ptr<const Texture>> SpriteSheetAnimation::SpriteSheetMipMapEntry::frame_textures(bool return_playercolor_masks) const {
-    ensure_graphics_are_loaded();
+std::vector<std::unique_ptr<const Texture>>
+SpriteSheetAnimation::SpriteSheetMipMapEntry::frame_textures(bool return_playercolor_masks) const {
+	ensure_graphics_are_loaded();
 
-    std::vector<std::unique_ptr<const Texture>> result;
-    const Rectf rect(Vector2f::zero(), width(), height());
-    if (!return_playercolor_masks || has_playercolor_masks) {
-        const size_t no_of_frames = rows * columns;
-        for (size_t i = 0; i < no_of_frames; ++i) {
-            std::unique_ptr<Texture> texture(new Texture(width(), height()));
+	std::vector<std::unique_ptr<const Texture>> result;
+	const Rectf rect(Vector2f::zero(), width(), height());
+	if (!return_playercolor_masks || has_playercolor_masks) {
+		const size_t no_of_frames = rows * columns;
+		for (size_t i = 0; i < no_of_frames; ++i) {
+			std::unique_ptr<Texture> texture(new Texture(width(), height()));
 
-            const int column = i % columns;
-            const int row = i / columns;
+			const int column = i % columns;
+			const int row = i / columns;
 
-            texture->fill_rect(rect, RGBAColor(0, 0, 0, 0));
-            texture->blit(rect,
-                          return_playercolor_masks ? *playercolor_mask_sheet : *sheet,
-                          Rectf(column * width(), row * height(), width(), height()), 1., BlendMode::Copy);
-            result.push_back(std::move(texture));
-        }
-    }
-    return result;
+			texture->fill_rect(rect, RGBAColor(0, 0, 0, 0));
+			texture->blit(rect, return_playercolor_masks ? *playercolor_mask_sheet : *sheet,
+			              Rectf(column * width(), row * height(), width(), height()), 1.,
+			              BlendMode::Copy);
+			result.push_back(std::move(texture));
+		}
+	}
+	return result;
 }
 
 int SpriteSheetAnimation::SpriteSheetMipMapEntry::width() const {

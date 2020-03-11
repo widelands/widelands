@@ -28,8 +28,8 @@
 #include "base/vector.h"
 #include "graphic/color.h"
 #include "graphic/image.h"
-#include "graphic/texture.h"
 #include "graphic/surface.h"
+#include "graphic/texture.h"
 #include "scripting/lua_table.h"
 #include "sound/constants.h"
 
@@ -105,7 +105,8 @@ public:
 	/// We need to expose these for the packed animation,
 	/// so that the create_spritesheet utility can use them.
 	/// Do not use otherwise.
-	std::vector<std::unique_ptr<const Texture>> frame_textures(float scale, bool return_playercolor_masks) const;
+	std::vector<std::unique_ptr<const Texture>> frame_textures(float scale,
+	                                                           bool return_playercolor_masks) const;
 
 	/// The scales for which this animation has exact images.
 	std::set<float> available_scales() const;
@@ -142,7 +143,8 @@ protected:
 		/// The height of this mipmap entry's textures
 		virtual int height() const = 0;
 
-        virtual std::vector<std::unique_ptr<const Texture>> frame_textures(bool return_playercolor_masks) const = 0;
+		virtual std::vector<std::unique_ptr<const Texture>>
+		frame_textures(bool return_playercolor_masks) const = 0;
 
 		/// Whether this texture set has player color masks provided
 		bool has_playercolor_masks;

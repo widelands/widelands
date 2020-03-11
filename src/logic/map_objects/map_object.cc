@@ -286,32 +286,32 @@ void MapObjectDescr::add_animations(const LuaTable& table, Animation::Type anim_
 			const bool is_directional =
 			   anim->has_key<std::string>("directional") ? anim->get_bool("directional") : false;
 			if (is_directional) {
-                std::set<float> available_scales;
+				std::set<float> available_scales;
 				for (int dir = 0; dir < 6; ++dir) {
-					const std::string directional_animname =
-					   animname + animation_direction_names[dir];
+					const std::string directional_animname = animname + animation_direction_names[dir];
 					if (is_animation_known(directional_animname)) {
 						throw GameDataError("Tried to add already existing directional animation '%s\'",
 						                    directional_animname.c_str());
 					}
-					const std::string directional_basename =
-					   basename + animation_direction_names[dir];
-                    uint32_t anim_id = 0;
-                    try {
-                        anim_id = g_gr->animations().load(*anim, directional_basename, anim_type);
-                        anims_.insert(std::make_pair(directional_animname, anim_id));
-                    } catch (const std::exception& e) {
-                        throw GameDataError("Direction '%s': %s",
-                                            animation_direction_names[dir], e.what());
-                    }
-                    // Validate directions' scales
-                    if (dir == 0) {
-                        available_scales = g_gr->animations().get_animation(anim_id).available_scales();
-                    }
-                    if (available_scales.size() != g_gr->animations().get_animation(anim_id).available_scales().size()) {
-                        throw GameDataError("Direction '%s': number of available scales does not match with direction '%s'",
-                                            animation_direction_names[dir], animation_direction_names[0]);
-                    }
+					const std::string directional_basename = basename + animation_direction_names[dir];
+					uint32_t anim_id = 0;
+					try {
+						anim_id = g_gr->animations().load(*anim, directional_basename, anim_type);
+						anims_.insert(std::make_pair(directional_animname, anim_id));
+					} catch (const std::exception& e) {
+						throw GameDataError(
+						   "Direction '%s': %s", animation_direction_names[dir], e.what());
+					}
+					// Validate directions' scales
+					if (dir == 0) {
+						available_scales = g_gr->animations().get_animation(anim_id).available_scales();
+					}
+					if (available_scales.size() !=
+					    g_gr->animations().get_animation(anim_id).available_scales().size()) {
+						throw GameDataError("Direction '%s': number of available scales does not match "
+						                    "with direction '%s'",
+						                    animation_direction_names[dir], animation_direction_names[0]);
+					}
 				}
 			} else {
 				if (is_animation_known(animname)) {
@@ -322,8 +322,8 @@ void MapObjectDescr::add_animations(const LuaTable& table, Animation::Type anim_
 					anims_.insert(std::make_pair(
 					   animname, g_gr->animations().load(name_, *anim, basename, anim_type)));
 				} else {
-					anims_.insert(std::make_pair(
-					   animname, g_gr->animations().load(*anim, basename, anim_type)));
+					anims_.insert(
+					   std::make_pair(animname, g_gr->animations().load(*anim, basename, anim_type)));
 				}
 			}
 		} catch (const std::exception& e) {
