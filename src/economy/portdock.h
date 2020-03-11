@@ -139,7 +139,7 @@ private:
 
 	void init_fleet(EditorGameBase& egbase);
 	void set_fleet(ShipFleet* fleet);
-	void update_shippingitem(Game&, std::list<ShippingItem>::iterator);
+	std::list<ShippingItem>::iterator update_shippingitem(Game&, std::list<ShippingItem>::iterator);
 	void set_need_ship(Game&, bool need);
 
 	void load_wares(Game&, Ship&);
