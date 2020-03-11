@@ -20,6 +20,8 @@
 #ifndef WL_GRAPHIC_ANIMATION_NONPACKED_ANIMATION_H
 #define WL_GRAPHIC_ANIMATION_NONPACKED_ANIMATION_H
 
+#include <memory>
+
 #include "base/rect.h"
 #include "graphic/animation/animation.h"
 #include "graphic/color.h"
