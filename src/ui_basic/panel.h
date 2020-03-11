@@ -348,6 +348,7 @@ private:
 
 	void check_child_death();
 
+	friend class Window;
 	void do_draw(RenderTarget&);
 	void do_draw_inner(RenderTarget&);
 	void do_think();
