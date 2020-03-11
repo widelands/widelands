@@ -41,10 +41,10 @@ end
 --
 --    :arg player: The `wl.game.Player` to use
 --    :arg items: An array of tables with `ware_or_worker_name = amount` pairs. As many ships will
---    be created as there are subtables, and the n-th ship created will load the additional wares
---    and workers defined in `items[n]`. The capacity of each ship will be adjusted to accommodate
---    the build cost of the player's tribe's port building plus one builder plus the number of
---    additional items for this ship.
+--                be created as there are subtables, and the n-th ship created will load the
+--                additional wares and workers defined in `items[n]`. The capacity of each ship will
+--                be adjusted to accommodate the build cost of the player's tribe's port building
+--                plus one builder plus the number of additional items for this ship.
 --
 --    :returns: :const:`nil`
 function launch_expeditions(player, items)
