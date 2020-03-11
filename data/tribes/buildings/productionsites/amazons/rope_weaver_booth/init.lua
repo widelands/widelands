@@ -12,7 +12,6 @@ tribes:new_productionsite_type {
    buildcost = {
       log = 5,
       granite = 2,
-      rope = 1,
       rubber =1
    },
    return_on_dismantle = {
@@ -57,10 +56,9 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
          descname = _"making a rope",
          actions = {
-            "return=skipped unless economy needs rope",
             "consume=liana:2",
-            "sleep=32000",
-            "animate=working 40000",
+            "sleep=20000",
+            "animate=working 35000",
             "produce=rope"
          },
       },

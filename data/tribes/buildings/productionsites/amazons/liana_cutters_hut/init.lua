@@ -30,7 +30,7 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      amazons_junglemasters_hut = true,
+      amazons_junglepreservers_hut = true,
    },
 
    aihints = {

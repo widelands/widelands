@@ -306,7 +306,8 @@ function building_help_dependencies_production(tribe, building_description)
          elseif(resi_name == "diamond") then resi_name = "stones"
          elseif(resi_name == "quartz") then resi_name = "stones"
          elseif(resi_name == "marble") then resi_name = "stones"
-         elseif(resi_name == "gold_ore") then resi_name = "gold" end
+         elseif(resi_name == "gold_ore") then resi_name = "gold"
+         elseif(resi_name == "gold_dust") then resi_name = "gold" end
          result = result .. dependencies_resi(tribe.name,
             resi_name,
             {building_description, ware_description},

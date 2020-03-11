@@ -13,15 +13,15 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("building", "Plants trees in the surrounding area.")
+   return pgettext("building", "Builds ferries.")
 end
 
 function building_helptext_note()
    -- TRANSLATORS: Note helptext for a building
-   return pgettext("amazons_building", "The junglemaster's hut needs free space within the work area to plant the trees.")
+   return pgettext("building", "Needs water nearby.")
 end
 
 function building_helptext_performance()
-   -- TRANSLATORS: Performance helptext for a building
+   -- TRANSLATORS#: Performance helptext for a building
    return no_performance_text_yet()
 end

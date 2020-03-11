@@ -59,7 +59,7 @@ tribes:new_worker_type {
          "return"
       },
       harvest = {
-         "findobject=attrib:tree radius:10",
+         "findobject=attrib:normal_tree radius:10",
          "walk=object",
          "playsound=sound/woodcutting/woodcutting 255",
          "animate=hacking 25000",

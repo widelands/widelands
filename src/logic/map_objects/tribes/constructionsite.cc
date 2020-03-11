@@ -633,8 +633,8 @@ void ConstructionSite::draw(uint32_t gametime,
 	uint32_t tanim = gametime - animstart_;
 	const RGBColor& player_color = get_owner()->get_playercolor();
 	if (was_immovable_) {
-		dst->blit_animation(
-		   point_on_dst, coords, scale, was_immovable_->main_animation(), tanim, &player_color);
+		dst->blit_animation(point_on_dst, coords, scale,
+		                    was_immovable_->get_animation("idle", nullptr), tanim, &player_color);
 	} else {
 		// Draw the construction site marker
 		dst->blit_animation(

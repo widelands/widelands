@@ -1,14 +1,17 @@
 image_dirname = path.dirname(__file__) .. "images/amazons/"
 
+animations = {}
+add_animation(animations, "frontier", image_dirname, "frontier", {5, 35})
+add_animation(animations, "bridge_normal_e", image_dirname, "bridge_normal_e", {-2, 11})
+add_animation(animations, "bridge_busy_e", image_dirname, "bridge_busy_e", {-2, 11})
+add_animation(animations, "bridge_normal_se", image_dirname, "bridge_normal_se", {5, 2})
+add_animation(animations, "bridge_busy_se", image_dirname, "bridge_busy_se", {5, 2})
+add_animation(animations, "bridge_normal_sw", image_dirname, "bridge_normal_sw", {36, 6})
+add_animation(animations, "bridge_busy_sw", image_dirname, "bridge_busy_sw", {36, 3})
+
 tribes:new_tribe {
    name = "amazons",
-   animations = {
-      frontier = {
-         directory = image_dirname,
-         basename = "frontier",
-         hotspot = {5, 35}
-      }
-   },
+   animations = animations,
    spritesheets = {
       flag = {
          directory = image_dirname,
@@ -21,7 +24,9 @@ tribes:new_tribe {
       }
    },
 
-   -- Image file paths for this tribe's road textures
+   bridge_height = 8,
+
+   -- Image file paths for this tribe's road and waterway textures
    roads = {
       busy = {
          image_dirname .. "roadt_busy.png",
@@ -29,6 +34,9 @@ tribes:new_tribe {
       normal = {
          image_dirname .. "roadt_normal_00.png",
          image_dirname .. "roadt_normal_01.png",
+      },
+      waterway = {
+         "tribes/images/amazons/waterway_0.png",
       },
    },
 
@@ -124,6 +132,7 @@ tribes:new_tribe {
       {
          -- Carriers
          "amazons_carrier",
+         "amazons_ferry",
          "amazons_tapir",
          "amazons_tapir_breeder"
       },
@@ -171,14 +180,50 @@ tribes:new_tribe {
       "balsa_amazons_pole",
       "balsa_amazons_mature",
       "balsa_amazons_old",
+      "balsa_black_amazons_sapling",
+      "balsa_black_amazons_pole",
+      "balsa_black_amazons_mature",
+      "balsa_black_amazons_old",
+      "balsa_desert_amazons_sapling",
+      "balsa_desert_amazons_pole",
+      "balsa_desert_amazons_mature",
+      "balsa_desert_amazons_old",
+      "balsa_winter_amazons_sapling",
+      "balsa_winter_amazons_pole",
+      "balsa_winter_amazons_mature",
+      "balsa_winter_amazons_old",
       "ironwood_amazons_sapling",
       "ironwood_amazons_pole",
       "ironwood_amazons_mature",
       "ironwood_amazons_old",
+      "ironwood_black_amazons_sapling",
+      "ironwood_black_amazons_pole",
+      "ironwood_black_amazons_mature",
+      "ironwood_black_amazons_old",
+      "ironwood_desert_amazons_sapling",
+      "ironwood_desert_amazons_pole",
+      "ironwood_desert_amazons_mature",
+      "ironwood_desert_amazons_old",
+      "ironwood_winter_amazons_sapling",
+      "ironwood_winter_amazons_pole",
+      "ironwood_winter_amazons_mature",
+      "ironwood_winter_amazons_old",
       "rubber_amazons_sapling",
       "rubber_amazons_pole",
       "rubber_amazons_mature",
       "rubber_amazons_old",
+      "rubber_black_amazons_sapling",
+      "rubber_black_amazons_pole",
+      "rubber_black_amazons_mature",
+      "rubber_black_amazons_old",
+      "rubber_desert_amazons_sapling",
+      "rubber_desert_amazons_pole",
+      "rubber_desert_amazons_mature",
+      "rubber_desert_amazons_old",
+      "rubber_winter_amazons_sapling",
+      "rubber_winter_amazons_pole",
+      "rubber_winter_amazons_mature",
+      "rubber_winter_amazons_old",
       "cassavarootfield_tiny",
       "cassavarootfield_small",
       "cassavarootfield_medium",
@@ -211,7 +256,7 @@ tribes:new_tribe {
       -- Small
       "amazons_stonecutters_hut",
       "amazons_woodcutters_hut",
-      "amazons_junglemasters_hut",
+      "amazons_junglepreservers_hut",
       "amazons_hunter_gatherers_hut",
       "amazons_liana_cutters_hut",
       "amazons_water_gatherers_hut",
@@ -231,7 +276,6 @@ tribes:new_tribe {
       "amazons_food_preserver",
       "amazons_youth_gathering",
       "amazons_gardening_center",
-      "amazons_shipyard",
 
       -- Big
       "amazons_tapir_farm",
@@ -255,6 +299,10 @@ tribes:new_tribe {
       "amazons_fortress",
       "amazons_fortification",
 
+      -- Seafaring/Ferry Sites - these are only displayed on seafaring/ferry maps
+      "amazons_ferry_yard",
+      "amazons_shipyard",
+
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",
       "dismantlesite",
@@ -277,6 +325,7 @@ tribes:new_tribe {
    geologist = "amazons_geologist",
    soldier = "amazons_soldier",
    ship = "amazons_ship",
+   ferry = "amazons_ferry",
    port = "amazons_port",
    ironore = "gold_dust",
    rawlog = "log",

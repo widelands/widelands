@@ -2,9 +2,9 @@ dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
    msgctxt = "amazons_building",
-   name = "amazons_junglemasters_hut",
+   name = "amazons_junglepreservers_hut",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("amazons_building", "Junglemaster's Hut"),
+   descname = pgettext("amazons_building", "Junglepreserver's Hut"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
@@ -49,7 +49,7 @@ tribes:new_productionsite_type {
       amazons_cocoa_farm = false,
       amazons_cassava_root_plantation = false,
       amazons_rare_tree_plantation = false,
-      amazons_junglemasters_hut = false,
+      amazons_junglepreservers_hut = false,
       amazons_liana_cutters_hut = true,
       amazons_woodcutters_hut = true,
    },

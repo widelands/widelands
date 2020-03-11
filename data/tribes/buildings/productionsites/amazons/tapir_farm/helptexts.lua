@@ -18,10 +18,10 @@ end
 
 function building_helptext_note()
    -- TRANSLATORS: Note helptext for a building
-   return pgettext ("Tapirs help to prevent trafic jams on highly used roads.")
+   return pgettext ("amazons_building", "Tapirs help to prevent trafic jams on highly used roads.")
 end
 
 function building_helptext_performance()
    -- TRANSLATORS#: Performance helptext for a building
-   return no_performance_text_yet ()
+   return no_performance_text_yet()
 end

@@ -48,7 +48,7 @@ tribes:new_productionsite_type {
 
    indicate_workarea_overlaps = {
       amazons_rare_tree_plantation = true,
-      amazons_junglemasters_hut = true,
+      amazons_junglepreservers_hut = true,
    },
 
    programs = {
@@ -56,6 +56,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting bushes because ...
          descname = _"enhancing the fertility of land",
          actions = {
+            "callworker=check",
             "consume=charcoal fish",
             "call=terraform",
             "call=terraform",

@@ -16,7 +16,7 @@
 
 if wl.Game then egbase = wl.Game() else egbase = wl.Editor() end
 function set_loading_message(str, i)
-   egbase:set_loading_message(_("Loading tribes: %1$s (%2$d/%3$d)"):bformat(str, i, 15))
+   egbase:set_loading_message(_("Loading tribes: %1$s (%2$d/%3$d)"):bformat(str, i, 17))
 end
 
 tribes = wl.Tribes()
@@ -31,6 +31,8 @@ print_loading_message("┗━ took", function()
 
    print_loading_message("┃    Ships", function()
       set_loading_message(_("Ships"), 1)
+
+      include "tribes/ships/amazons/init.lua"
       include "tribes/ships/atlanteans/init.lua"
       include "tribes/ships/barbarians/init.lua"
       include "tribes/ships/empire/init.lua"
@@ -44,43 +46,50 @@ print_loading_message("┗━ took", function()
    print_loading_message("┃    Wares", function()
       set_loading_message(_("Wares"), 2)
 
+      include "tribes/wares/clay/init.lua"
+      include "tribes/wares/brick/init.lua"
+      include "tribes/wares/fruit/init.lua"
+      include "tribes/wares/honey/init.lua"
+      include "tribes/wares/barley/init.lua"
+      include "tribes/wares/bread_frisians/init.lua"
+      include "tribes/wares/honey_bread/init.lua"
+      include "tribes/wares/mead/init.lua"
+      include "tribes/wares/scrap_iron/init.lua"
+      include "tribes/wares/scrap_metal_mixed/init.lua"
+      include "tribes/wares/fur/init.lua"
+      include "tribes/wares/fur_garment/init.lua"
+      include "tribes/wares/fur_garment_old/init.lua"
+      include "tribes/wares/fur_garment_studded/init.lua"
+      include "tribes/wares/fur_garment_golden/init.lua"
+      include "tribes/wares/helmet_golden/init.lua"
+      include "tribes/wares/sword_short/init.lua"
+      include "tribes/wares/sword_long/init.lua"
+      include "tribes/wares/sword_broad/init.lua"
+      include "tribes/wares/sword_double/init.lua"
+      include "tribes/wares/needles/init.lua"
       include "tribes/wares/armor/init.lua"
       include "tribes/wares/armor_chain/init.lua"
       include "tribes/wares/armor_gilded/init.lua"
       include "tribes/wares/armor_helmet/init.lua"
-      include "tribes/wares/armor_wooden/init.lua"
       include "tribes/wares/ax/init.lua"
       include "tribes/wares/ax_battle/init.lua"
       include "tribes/wares/ax_broad/init.lua"
       include "tribes/wares/ax_bronze/init.lua"
       include "tribes/wares/ax_sharp/init.lua"
       include "tribes/wares/ax_warriors/init.lua"
-      include "tribes/wares/balsa/init.lua"
-      include "tribes/wares/barley/init.lua"
       include "tribes/wares/basket/init.lua"
       include "tribes/wares/beer/init.lua"
       include "tribes/wares/beer_strong/init.lua"
       include "tribes/wares/blackroot/init.lua"
       include "tribes/wares/blackroot_flour/init.lua"
       include "tribes/wares/blackwood/init.lua"
-      include "tribes/wares/boots_hero/init.lua"
-      include "tribes/wares/boots_sturdy/init.lua"
-      include "tribes/wares/boots_swift/init.lua"
-      include "tribes/wares/bread_amazons/init.lua"
       include "tribes/wares/bread_atlanteans/init.lua"
       include "tribes/wares/bread_barbarians/init.lua"
       include "tribes/wares/bread_empire/init.lua"
-      include "tribes/wares/bread_frisians/init.lua"
       include "tribes/wares/bread_paddle/init.lua"
-      include "tribes/wares/brick/init.lua"
       include "tribes/wares/buckets/init.lua"
-      include "tribes/wares/cassavaroot/init.lua"
-      include "tribes/wares/chisel/init.lua"
-      include "tribes/wares/chocolate/init.lua"
-      include "tribes/wares/clay/init.lua"
       include "tribes/wares/cloth/init.lua"
       include "tribes/wares/coal/init.lua"
-      include "tribes/wares/cocoa_beans/init.lua"
       include "tribes/wares/corn/init.lua"
       include "tribes/wares/cornmeal/init.lua"
       include "tribes/wares/diamond/init.lua"
@@ -90,14 +99,7 @@ print_loading_message("┗━ took", function()
       include "tribes/wares/fishing_net/init.lua"
       include "tribes/wares/fishing_rod/init.lua"
       include "tribes/wares/flour/init.lua"
-      include "tribes/wares/fruit/init.lua"
-      include "tribes/wares/fur/init.lua"
-      include "tribes/wares/fur_garment/init.lua"
-      include "tribes/wares/fur_garment_golden/init.lua"
-      include "tribes/wares/fur_garment_old/init.lua"
-      include "tribes/wares/fur_garment_studded/init.lua"
       include "tribes/wares/gold/init.lua"
-      include "tribes/wares/gold_dust/init.lua"
       include "tribes/wares/gold_ore/init.lua"
       include "tribes/wares/gold_thread/init.lua"
       include "tribes/wares/granite/init.lua"
@@ -105,40 +107,25 @@ print_loading_message("┗━ took", function()
       include "tribes/wares/grout/init.lua"
       include "tribes/wares/hammer/init.lua"
       include "tribes/wares/helmet/init.lua"
-      include "tribes/wares/helmet_golden/init.lua"
       include "tribes/wares/helmet_mask/init.lua"
       include "tribes/wares/helmet_warhelm/init.lua"
-      include "tribes/wares/helmet_wooden/init.lua"
-      include "tribes/wares/honey/init.lua"
-      include "tribes/wares/honey_bread/init.lua"
       include "tribes/wares/hook_pole/init.lua"
       include "tribes/wares/hunting_bow/init.lua"
       include "tribes/wares/hunting_spear/init.lua"
       include "tribes/wares/iron/init.lua"
       include "tribes/wares/iron_ore/init.lua"
-      include "tribes/wares/ironwood/init.lua"
       include "tribes/wares/kitchen_tools/init.lua"
-      include "tribes/wares/liana/init.lua"
       include "tribes/wares/log/init.lua"
-      include "tribes/wares/machete/init.lua"
       include "tribes/wares/marble/init.lua"
       include "tribes/wares/marble_column/init.lua"
-      include "tribes/wares/mead/init.lua"
       include "tribes/wares/meal/init.lua"
       include "tribes/wares/meat/init.lua"
       include "tribes/wares/milking_tongs/init.lua"
-      include "tribes/wares/needles/init.lua"
       include "tribes/wares/pick/init.lua"
       include "tribes/wares/planks/init.lua"
-      include "tribes/wares/protector_padded/init.lua"
       include "tribes/wares/quartz/init.lua"
       include "tribes/wares/ration/init.lua"
-      include "tribes/wares/reed/init.lua"
-      include "tribes/wares/rope/init.lua"
-      include "tribes/wares/rubber/init.lua"
       include "tribes/wares/saw/init.lua"
-      include "tribes/wares/scrap_iron/init.lua"
-      include "tribes/wares/scrap_metal_mixed/init.lua"
       include "tribes/wares/scythe/init.lua"
       include "tribes/wares/shield_advanced/init.lua"
       include "tribes/wares/shield_steel/init.lua"
@@ -148,32 +135,48 @@ print_loading_message("┗━ took", function()
       include "tribes/wares/snack/init.lua"
       include "tribes/wares/spear/init.lua"
       include "tribes/wares/spear_advanced/init.lua"
-      include "tribes/wares/spear_hardened/init.lua"
       include "tribes/wares/spear_heavy/init.lua"
-      include "tribes/wares/spear_stone_tipped/init.lua"
       include "tribes/wares/spear_war/init.lua"
       include "tribes/wares/spear_wooden/init.lua"
       include "tribes/wares/spidercloth/init.lua"
       include "tribes/wares/spider_silk/init.lua"
-      include "tribes/wares/stonebowl/init.lua"
-      include "tribes/wares/sword_broad/init.lua"
-      include "tribes/wares/sword_double/init.lua"
-      include "tribes/wares/sword_long/init.lua"
-      include "tribes/wares/sword_short/init.lua"
       include "tribes/wares/tabard/init.lua"
       include "tribes/wares/tabard_golden/init.lua"
+      include "tribes/wares/reed/init.lua"
       include "tribes/wares/trident_double/init.lua"
       include "tribes/wares/trident_heavy_double/init.lua"
       include "tribes/wares/trident_light/init.lua"
       include "tribes/wares/trident_long/init.lua"
       include "tribes/wares/trident_steel/init.lua"
-      include "tribes/wares/tunic/init.lua"
-      include "tribes/wares/vest_padded/init.lua"
-      include "tribes/wares/warriors_coat/init.lua"
       include "tribes/wares/water/init.lua"
       include "tribes/wares/wheat/init.lua"
       include "tribes/wares/wine/init.lua"
       include "tribes/wares/wool/init.lua"
+      include "tribes/wares/armor_wooden/init.lua"
+      include "tribes/wares/balsa/init.lua"
+      include "tribes/wares/boots_hero/init.lua"
+      include "tribes/wares/boots_sturdy/init.lua"
+      include "tribes/wares/boots_swift/init.lua"
+      include "tribes/wares/bread_amazons/init.lua"
+      include "tribes/wares/cassavaroot/init.lua"
+      include "tribes/wares/charcoal/init.lua"
+      include "tribes/wares/chisel/init.lua"
+      include "tribes/wares/chocolate/init.lua"
+      include "tribes/wares/cocoa_beans/init.lua"
+      include "tribes/wares/gold_dust/init.lua"
+      include "tribes/wares/helmet_wooden/init.lua"
+      include "tribes/wares/ironwood/init.lua"
+      include "tribes/wares/liana/init.lua"
+      include "tribes/wares/machete/init.lua"
+      include "tribes/wares/protector_padded/init.lua"
+      include "tribes/wares/rope/init.lua"
+      include "tribes/wares/rubber/init.lua"
+      include "tribes/wares/spear_hardened/init.lua"
+      include "tribes/wares/spear_stone_tipped/init.lua"
+      include "tribes/wares/stonebowl/init.lua"
+      include "tribes/wares/tunic/init.lua"
+      include "tribes/wares/vest_padded/init.lua"
+      include "tribes/wares/warriors_coat/init.lua"
 
    end)
 
@@ -189,11 +192,6 @@ print_loading_message("┗━ took", function()
       include "tribes/immovables/blackrootfield/ripe/init.lua"
       include "tribes/immovables/blackrootfield/small/init.lua"
       include "tribes/immovables/blackrootfield/tiny/init.lua"
-      include "tribes/immovables/cassavafield/harvested/init.lua"
-      include "tribes/immovables/cassavafield/medium/init.lua"
-      include "tribes/immovables/cassavafield/ripe/init.lua"
-      include "tribes/immovables/cassavafield/small/init.lua"
-      include "tribes/immovables/cassavafield/tiny/init.lua"
       include "tribes/immovables/cornfield/harvested/init.lua"
       include "tribes/immovables/cornfield/medium/init.lua"
       include "tribes/immovables/cornfield/ripe/init.lua"
@@ -218,12 +216,10 @@ print_loading_message("┗━ took", function()
       include "tribes/immovables/reedfield/ripe/init.lua"
       include "tribes/immovables/reedfield/small/init.lua"
       include "tribes/immovables/reedfield/tiny/init.lua"
-      include "tribes/immovables/resi/amazons/init.lua"
       include "tribes/immovables/resi/atlanteans/init.lua"
       include "tribes/immovables/resi/barbarians/init.lua"
       include "tribes/immovables/resi/empire/init.lua"
       include "tribes/immovables/resi/frisians/init.lua"
-      include "tribes/immovables/shipconstruction_amazons/init.lua"
       include "tribes/immovables/shipconstruction_atlanteans/init.lua"
       include "tribes/immovables/shipconstruction_barbarians/init.lua"
       include "tribes/immovables/shipconstruction_empire/init.lua"
@@ -237,12 +233,19 @@ print_loading_message("┗━ took", function()
       include "tribes/immovables/berry_bushes/sea_buckthorn/init.lua"
       include "tribes/immovables/berry_bushes/desert_hackberry/init.lua"
       include "tribes/immovables/berry_bushes/juniper/init.lua"
-      include "tribes/immovables/cocoafield/init.lua"
       include "tribes/immovables/barleyfield/tiny/init.lua"
       include "tribes/immovables/barleyfield/small/init.lua"
       include "tribes/immovables/barleyfield/medium/init.lua"
       include "tribes/immovables/barleyfield/ripe/init.lua"
       include "tribes/immovables/barleyfield/harvested/init.lua"
+      include "tribes/immovables/cassavafield/harvested/init.lua"
+      include "tribes/immovables/cassavafield/medium/init.lua"
+      include "tribes/immovables/cassavafield/ripe/init.lua"
+      include "tribes/immovables/cassavafield/small/init.lua"
+      include "tribes/immovables/cassavafield/tiny/init.lua"
+      include "tribes/immovables/resi/amazons/init.lua"
+      include "tribes/immovables/shipconstruction_amazons/init.lua"
+      include "tribes/immovables/cocoafield/init.lua"
       include "tribes/immovables/trees/balsa/init.lua"
       include "tribes/immovables/trees/ironwood/init.lua"
       include "tribes/immovables/trees/rubber/init.lua"
@@ -396,7 +399,9 @@ print_loading_message("┗━ took", function()
       include "tribes/workers/frisians/shipwright/init.lua"
       include "tribes/workers/frisians/scout/init.lua"
 
+      set_loading_message(_("Amazonian workers"), 8)
       include "tribes/workers/amazons/carrier/init.lua"
+      include "tribes/workers/amazons/ferry/init.lua"
       include "tribes/workers/amazons/tapir/init.lua"
       include "tribes/workers/amazons/builder/init.lua"
       include "tribes/workers/amazons/soldier/init.lua"
@@ -428,7 +433,7 @@ print_loading_message("┗━ took", function()
    -- ===================================
 
    print_loading_message("┃    Warehouses", function()
-      set_loading_message(_("Warehouses"), 8)
+      set_loading_message(_("Warehouses"), 9)
       include "tribes/buildings/warehouses/atlanteans/headquarters/init.lua"
       include "tribes/buildings/warehouses/atlanteans/port/init.lua"
       include "tribes/buildings/warehouses/atlanteans/warehouse/init.lua"
@@ -453,7 +458,7 @@ print_loading_message("┗━ took", function()
    -- ===================================
 
    print_loading_message("┃    Productionsites", function()
-      set_loading_message(_("Atlantean productionsites"), 9)
+      set_loading_message(_("Atlantean productionsites"), 10)
       -- Atlanteans small
       include "tribes/buildings/productionsites/atlanteans/quarry/init.lua"
       include "tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua"
@@ -490,8 +495,9 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/productionsites/atlanteans/coalmine/init.lua"
       include "tribes/buildings/productionsites/atlanteans/ironmine/init.lua"
       include "tribes/buildings/productionsites/atlanteans/goldmine/init.lua"
+
       -- Barbarians small
-      set_loading_message(_("Barbarian productionsites"), 10)
+      set_loading_message(_("Barbarian productionsites"), 11)
       include "tribes/buildings/productionsites/barbarians/quarry/init.lua"
       include "tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua"
       include "tribes/buildings/productionsites/barbarians/rangers_hut/init.lua"
@@ -537,7 +543,7 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/productionsites/barbarians/goldmine/init.lua"
 
       -- Empire small
-      set_loading_message(_("Empire productionsites"), 11)
+      set_loading_message(_("Empire productionsites"), 12)
       include "tribes/buildings/productionsites/empire/quarry/init.lua"
       include "tribes/buildings/productionsites/empire/lumberjacks_house/init.lua"
       include "tribes/buildings/productionsites/empire/foresters_house/init.lua"
@@ -581,7 +587,7 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/productionsites/empire/goldmine/init.lua"
 
       --Frisians mines
-      set_loading_message(_("Frisian productionsites"), 12)
+      set_loading_message(_("Frisian productionsites"), 13)
       include "tribes/buildings/productionsites/frisians/coalmine_deep/init.lua"
       include "tribes/buildings/productionsites/frisians/rockmine_deep/init.lua"
       include "tribes/buildings/productionsites/frisians/goldmine_deep/init.lua"
@@ -631,11 +637,12 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/productionsites/frisians/barracks/init.lua"
 
       -- Amazons small
+      set_loading_message(_("Amazonian productionsites"), 14)
       include "tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua"
       include "tribes/buildings/productionsites/amazons/rare_trees_woodcutters_hut/init.lua"
       include "tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua"
       include "tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua"
-      include "tribes/buildings/productionsites/amazons/junglemasters_hut/init.lua"
+      include "tribes/buildings/productionsites/amazons/junglepreservers_hut/init.lua"
       include "tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua"
       include "tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua"
       include "tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua"
@@ -653,6 +660,7 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/productionsites/amazons/shipyard/init.lua"
       include "tribes/buildings/productionsites/amazons/stonecarvery/init.lua"
       include "tribes/buildings/productionsites/amazons/youth_gathering/init.lua"
+      include "tribes/buildings/productionsites/amazons/ferry_yard/init.lua"
       -- Amazons big
       include "tribes/buildings/productionsites/amazons/tapir_farm/init.lua"
       include "tribes/buildings/productionsites/amazons/cocoa_farm/init.lua"
@@ -667,7 +675,7 @@ print_loading_message("┗━ took", function()
    -- ===================================
 
    print_loading_message("┃    Trainingsites", function()
-      set_loading_message(_("Trainingsites"), 13)
+      set_loading_message(_("Trainingsites"), 15)
       include "tribes/buildings/trainingsites/atlanteans/dungeon/init.lua"
       include "tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua"
       include "tribes/buildings/trainingsites/barbarians/battlearena/init.lua"
@@ -686,7 +694,7 @@ print_loading_message("┗━ took", function()
    -- ===================================
 
    print_loading_message("┃    Militarysites", function()
-      set_loading_message(_("Militarysites"), 14)
+      set_loading_message(_("Militarysites"), 16)
       include "tribes/buildings/militarysites/atlanteans/guardhouse/init.lua"
       include "tribes/buildings/militarysites/atlanteans/guardhall/init.lua"
       include "tribes/buildings/militarysites/atlanteans/tower_small/init.lua"
@@ -729,7 +737,7 @@ print_loading_message("┗━ took", function()
    --    Partially Finished Buildings
    -- ===================================
 
-   set_loading_message(_("Finishing"), 15)
+   set_loading_message(_("Finishing"), 17)
 
    print_loading_message("┃    Partially finished buildings", function()
       include "tribes/buildings/partially_finished/constructionsite/init.lua"

@@ -95,7 +95,7 @@ world:new_immovable_type{
    icon = dirname .. "menu.png",
    editor_category = "trees_deciduous",
    size = "small",
-   attributes = { "tree" },
+   attributes = { "tree", "normal_tree" },
    terrain_affinity = terrain_affinity,
    programs = {
       program = {

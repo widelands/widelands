@@ -1,7 +1,7 @@
 function ware_helptext(tribe)
    local helptext = {
       -- TRANSLATORS: Helptext for a ware: Wooden Spear
-      amazons = pgettext("amazons_ware", "This spear is the basic weapon in the Amazon military system. It is produced by the stonecarver. In combination with a tunic, it is the equipment to fit out young soldiers.")
+      amazons = pgettext("amazons_ware", "This spear is the basic weapon in the Amazon military system. It is produced by the stonecarver. In combination with a tunic, it is the equipment to fit out young soldiers."),
       -- TRANSLATORS: Helptext for a ware: Wooden Spear
       empire = pgettext("empire_ware", "This wooden spear is the basic weapon in the Empire military system. It is produced in the weapon smithy. In combination with a helmet, it is the equipment to fit out young soldiers.")
    }
