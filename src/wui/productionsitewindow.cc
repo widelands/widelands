@@ -256,12 +256,11 @@ void ProductionSiteWindow::update_worker_table(Widelands::ProductionSite* produc
 
 void ProductionSiteWindow::worker_table_selection_changed() {
 	Widelands::ProductionSite* ps = production_site_.get(ibase()->egbase());
-	if (ps == nullptr) {
+	if (!ps || !ibase()->omnipotent()) {
+		// This signal is only used in the editor
 		return;
 	}
 
-	// This signal is only used in the editor
-	assert(ibase()->omnipotent());
 	assert(worker_table_);
 	assert(worker_type_);
 	assert(worker_xp_decrease_fast_);
