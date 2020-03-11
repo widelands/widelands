@@ -598,6 +598,7 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 				functorAnyFull.add(FindNodeImmovableAttribute(action.iparam5), true);
 
 			if (action.iparam3)
+
 				functorAnyFull.add(
 				   FindNodeSpace(findnodesize != FindNodeSize::Size::sizeSwim));
 			// If there are fields full of fish, we change the type of notification
