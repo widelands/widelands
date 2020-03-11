@@ -22,10 +22,7 @@
 #include "graphic/render_queue.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
-#include "logic/editor_game_base.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
-#include "wui/interactive_base.h"
 
 void draw_border_markers(const FieldsToDraw::Field& field,
                          const float scale,
@@ -52,7 +49,8 @@ void draw_border_markers(const FieldsToDraw::Field& field,
 	}
 }
 
-void draw_terrain(const Widelands::EditorGameBase& egbase,
+void draw_terrain(uint32_t gametime,
+                  const Widelands::World& world,
                   const FieldsToDraw& fields_to_draw,
                   const float scale,
                   Workareas workarea,
@@ -70,10 +68,10 @@ void draw_terrain(const Widelands::EditorGameBase& egbase,
 	i.terrain_arguments.destination_rect =
 	   Rectf(bounding_rect.x, surface_height - bounding_rect.y - bounding_rect.h, bounding_rect.w,
 	         bounding_rect.h);
-	i.terrain_arguments.gametime = egbase.get_gametime();
+	i.terrain_arguments.gametime = gametime;
 	i.terrain_arguments.renderbuffer_width = surface_width;
 	i.terrain_arguments.renderbuffer_height = surface_height;
-	i.terrain_arguments.terrains = &egbase.world().terrains();
+	i.terrain_arguments.terrains = &world.terrains();
 	i.terrain_arguments.fields_to_draw = &fields_to_draw;
 	i.terrain_arguments.scale = scale;
 	RenderQueue::instance().enqueue(i);
