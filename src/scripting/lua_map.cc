@@ -1384,6 +1384,16 @@ int LuaMap::count_owned_valuable_fields(lua_State* L) {
 	return 1;
 }
 
+/* RST
+   .. method:: find_ocean_fields(number)
+
+      Returns an array with the given number of Fields so that every field is swimmable,
+      and from each field a sea route to any port space exists.
+
+      :arg number: The number of fields to find.
+
+     :returns: :class:`array` of :class:`wl.map.Field`
+*/
 int LuaMap::find_ocean_fields(lua_State* L) {
 	upcast(Game, game, &get_egbase(L));
 	assert(game);
