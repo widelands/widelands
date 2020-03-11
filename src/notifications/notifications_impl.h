@@ -81,7 +81,7 @@ public:
 		auto subscribers_it = std::find_if(
 		   subscribers.begin(), subscribers.end(), [&subscriber](const void* p_subscriber) {
 			   return static_cast<const Subscriber<T>*>(p_subscriber)->id_ == subscriber->id_;
-			});
+		   });
 
 		assert(subscribers_it != subscribers.end());
 		subscribers.erase(subscribers_it);

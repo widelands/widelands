@@ -385,8 +385,9 @@ int LuaPlayer::send_message(lua_State* L) {
 	}
 
 	MessageId const message = plr.add_message(
-	   game, std::unique_ptr<Message>(new Message(Message::Type::kScenario, game.get_gametime(),
-	                                              title, icon, heading, body, c, 0, sub_type, st)),
+	   game,
+	   std::unique_ptr<Message>(new Message(Message::Type::kScenario, game.get_gametime(), title,
+	                                        icon, heading, body, c, 0, sub_type, st)),
 	   popup);
 
 	return to_lua<LuaMessage>(L, new LuaMessage(player_number(), message));
@@ -968,7 +969,9 @@ Objective
 */
 const char LuaObjective::className[] = "Objective";
 const MethodType<LuaObjective> LuaObjective::Methods[] = {
-   METHOD(LuaObjective, remove), METHOD(LuaObjective, __eq), {nullptr, nullptr},
+   METHOD(LuaObjective, remove),
+   METHOD(LuaObjective, __eq),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaObjective> LuaObjective::Properties[] = {
    PROP_RO(LuaObjective, name),    PROP_RW(LuaObjective, title), PROP_RW(LuaObjective, body),
@@ -1130,7 +1133,8 @@ Message
 */
 const char LuaMessage::className[] = "Message";
 const MethodType<LuaMessage> LuaMessage::Methods[] = {
-   METHOD(LuaMessage, __eq), {nullptr, nullptr},
+   METHOD(LuaMessage, __eq),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaMessage> LuaMessage::Properties[] = {
    PROP_RO(LuaMessage, title),     PROP_RO(LuaMessage, body),   PROP_RO(LuaMessage, sent),

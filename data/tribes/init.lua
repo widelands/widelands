@@ -31,6 +31,7 @@ print_loading_message("┗━ took", function()
 
    print_loading_message("┃    Ships", function()
       set_loading_message(_("Ships"), 1)
+
       include "tribes/ships/amazons/init.lua"
       include "tribes/ships/atlanteans/init.lua"
       include "tribes/ships/barbarians/init.lua"
