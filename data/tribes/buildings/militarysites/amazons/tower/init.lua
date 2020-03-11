@@ -10,7 +10,7 @@ tribes:new_militarysite_type {
    size = "medium",
    vision_range = 16,
    enhancement = "amazons_observation_tower",
-   
+
    buildcost = {
       rope = 2,
       granite = 2,
