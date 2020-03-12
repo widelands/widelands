@@ -1,8 +1,8 @@
 name: Launchpad Mirror
 on:
   push:
-    branches:
-      - master
+#    branches:
+#      - master
 jobs:
   mirror:
     name: Synchronizing Launchpad trunk with GitHub master
@@ -24,7 +24,7 @@ jobs:
         eval "$(ssh-agent -s)"
         ssh-add ~/.ssh/id_rsa
         bzr whoami "The Widelands Bunnybot <bunnybot@widelands.org>"
-        bzr launchpad-login "nordfriese" # NOCOM: "widelandsofficial"
+        bzr launchpad-login "widelandsofficial"
     - name: Checkout trunk
       run: |
         cd ~
