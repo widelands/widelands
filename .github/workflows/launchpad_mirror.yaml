@@ -71,7 +71,7 @@ jobs:
         set -e
         check_for_remote_changes=${check_for_remote_changes#*: \"}
         check_for_remote_changes=${check_for_remote_changes%\",}
-        if [ "$check_for_remote_changes" == "$GITHUB_SHA" ]
+        if [ "$check_for_remote_changes" == "$GITHUB_SHA" ] || true # NOCOM
         then
           bzr push :parent
         else
