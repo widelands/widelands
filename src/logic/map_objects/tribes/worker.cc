@@ -539,9 +539,6 @@ struct FindNodeSpace {
 
 		return true;
 	}
-
-private:
-	BaseImmovable* ignoreimmovable;
 };
 
 bool Worker::run_findspace(Game& game, State& state, const Action& action) {
