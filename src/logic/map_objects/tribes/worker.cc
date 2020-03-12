@@ -524,7 +524,6 @@ int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map,
 // passable. See code structure issue #1096824.
 struct FindNodeSpace {
 	explicit FindNodeSpace () {
-	}
 
 	bool accept(const EditorGameBase& egbase, const FCoords& coords) const {
 		if (!(coords.field->nodecaps() & MOVECAPS_WALK))

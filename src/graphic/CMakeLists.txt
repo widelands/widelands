@@ -197,7 +197,6 @@ wl_library(graphic_game_renderer
     graphic_surface
     logic
     logic_map_objects
-    wui
 )
 
 wl_library(graphic_minimap_renderer
@@ -255,7 +254,7 @@ wl_library(graphic_terrain_programs
     logic
     logic_map_objects
     logic_map_objects_description_maintainer
-    wui_mapview_pixelfunctions
+    wui_mapview_pixelconstants
 )
 
 
