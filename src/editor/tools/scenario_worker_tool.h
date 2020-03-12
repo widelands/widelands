@@ -27,18 +27,13 @@
 
 // Place and delete workers and ships.
 struct ScenarioDeleteWorkerTool : public EditorTool {
-	explicit ScenarioDeleteWorkerTool() : EditorTool(*this, *this) {
+	explicit ScenarioDeleteWorkerTool() : EditorTool(*this, *this, false) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
 	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
 	                          Widelands::Map* map) override;
-
-	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-	                         EditorInteractive& parent,
-	                         EditorActionArgs* args,
-	                         Widelands::Map* map) override;
 
 	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
 
@@ -49,7 +44,7 @@ struct ScenarioDeleteWorkerTool : public EditorTool {
 
 struct ScenarioPlaceWorkerTool : public EditorTool {
 	explicit ScenarioPlaceWorkerTool(ScenarioDeleteWorkerTool& tool)
-	   : EditorTool(tool, tool),
+	   : EditorTool(tool, tool, false),
 	     player_(1),
 	     experience_(0),
 	     carried_ware_(Widelands::INVALID_INDEX) {
@@ -59,11 +54,6 @@ struct ScenarioPlaceWorkerTool : public EditorTool {
 	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
 	                          Widelands::Map*) override;
-
-	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-	                         EditorInteractive& parent,
-	                         EditorActionArgs* args,
-	                         Widelands::Map*) override;
 
 	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
 

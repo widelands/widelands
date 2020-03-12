@@ -62,14 +62,6 @@ int32_t ScenarioPlaceWorkerTool::handle_click_impl(const Widelands::NodeAndTrian
 	return 1;
 }
 
-int32_t ScenarioPlaceWorkerTool::handle_undo_impl(const Widelands::NodeAndTriangle<>&,
-                                                  EditorInteractive& eia,
-                                                  EditorActionArgs* args,
-                                                  Widelands::Map*) {
-	eia.egbase().objects().get_object(args->infrastructure_placed)->remove(eia.egbase());
-	return 1;
-}
-
 EditorActionArgs ScenarioPlaceWorkerTool::format_args_impl(EditorInteractive& parent) {
 	EditorActionArgs a(parent);
 	a.new_owner = player_;
@@ -118,39 +110,6 @@ int32_t ScenarioDeleteWorkerTool::handle_click_impl(const Widelands::NodeAndTria
 		args->workers_deleted.push_back(list_w);
 		args->ships_deleted.push_back(list_s);
 	} while (mr.advance(*map));
-	return mr.radius();
-}
-
-int32_t ScenarioDeleteWorkerTool::handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-                                                   EditorInteractive& eia,
-                                                   EditorActionArgs* args,
-                                                   Widelands::Map* map) {
-	Widelands::EditorGameBase& egbase = eia.egbase();
-	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
-	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
-	do {
-		for (const auto& tuple : *args->workers_deleted.begin()) {
-			Widelands::Player* player = egbase.get_player(tuple.owner);
-			Widelands::Worker& w = tuple.descr->create(egbase, player, nullptr, mr.location());
-			w.set_current_experience(tuple.experience);
-			if (tuple.carried_ware != Widelands::INVALID_INDEX) {
-				Widelands::WareInstance* wi = new Widelands::WareInstance(
-				   tuple.carried_ware, egbase.tribes().get_ware_descr(tuple.carried_ware));
-				wi->init(egbase);
-				w.set_carried_ware(egbase, wi);
-			}
-		}
-		for (const auto& pair : *args->ships_deleted.begin()) {
-			Widelands::Player* player = egbase.get_player(pair.first);
-			dynamic_cast<Widelands::Ship&>(
-			   egbase.create_ship(center.node, player->tribe().ship(), player))
-			   .set_shipname(pair.second);
-		}
-		args->workers_deleted.erase(args->workers_deleted.begin());
-		args->ships_deleted.erase(args->ships_deleted.begin());
-	} while (mr.advance(*map));
-	assert(args->workers_deleted.empty());
-	assert(args->ships_deleted.empty());
 	return mr.radius();
 }
 

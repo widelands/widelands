@@ -1608,7 +1608,7 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 							const Widelands::RoadBase& road =
 							   dynamic_cast<const Widelands::RoadBase&>(*f.get_immovable());
 							const Widelands::Road* r = dynamic_cast<const Widelands::Road*>(&road);
-							fw.print_f("   %s = %s:place_road(%s, "
+							fw.print_f("   %s = %s:place_road(\"%s\", "
 							           "%s:get_field(%u, %u).immovable",
 							           var, pvar[road.owner().player_number() - 1].c_str(),
 							           r ? r->is_busy() ? "busy" : "normal" : "waterway",

@@ -47,6 +47,8 @@ add_directional_animation(animations, "sail", dirname, "sail", {89, 86}, 10)
 --
 --    **vision_range**: How far the ship can see.
 --
+--    **icon**: The filepath for the menu icon.
+--
 --    **animations**: A table containing all animations for this ship.
 --    Ships have an "idle", a "sinking" and a directional "sail" animation.
 tribes:new_ship_type {
@@ -55,5 +57,6 @@ tribes:new_ship_type {
    descname = _"Ship",
    capacity = 30,
    vision_range = 4,
+   icon = dirname .. "menu.png",
    animations = animations,
 }

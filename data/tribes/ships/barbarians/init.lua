@@ -16,5 +16,6 @@ tribes:new_ship_type {
    descname = _"Ship",
    capacity = 30,
    vision_range = 4,
+   icon = dirname .. "menu.png",
    animations = animations,
 }

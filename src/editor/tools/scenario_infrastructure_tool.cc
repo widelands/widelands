@@ -80,14 +80,6 @@ int32_t ScenarioInfrastructureTool::handle_click_impl(const Widelands::NodeAndTr
 	return 1;
 }
 
-int32_t ScenarioInfrastructureTool::handle_undo_impl(const Widelands::NodeAndTriangle<>&,
-                                                     EditorInteractive& eia,
-                                                     EditorActionArgs* args,
-                                                     Widelands::Map*) {
-	eia.egbase().objects().get_object(args->infrastructure_placed)->remove(eia.egbase());
-	return 1;
-}
-
 EditorActionArgs ScenarioInfrastructureTool::format_args_impl(EditorInteractive& parent) {
 	EditorActionArgs a(parent);
 	a.new_owner = player_;
