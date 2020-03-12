@@ -53,8 +53,8 @@ StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registr
 	tabs->add("workers_in_warehouses", g_gr->images().get(pic_tab_workers_warehouse),
 	          warehouse_workers_, _("Workers in warehouses"));
 
-    // Preselect the wares_in_warehouses tab
-    tabs->activate(2);
+	// Preselect the wares_in_warehouses tab
+	tabs->activate(2);
 }
 
 /*
