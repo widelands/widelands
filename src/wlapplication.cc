@@ -871,18 +871,18 @@ void WLApplication::init_language() {
 	if (!g_fs->file_exists(i18n::get_localedir()) || !g_fs->is_directory(i18n::get_localedir())) {
 		log("Localedir: Trying %s\n", g_fs->canonicalize_name(homedir_ + "/locale").c_str());
 		i18n::set_localedir(g_fs->canonicalize_name(homedir_ + "/locale"));
-	}
 
-	// Produce error message and then exit if that didn't work either
-	if (!g_fs->file_exists(i18n::get_localedir()) || !g_fs->is_directory(i18n::get_localedir())) {
-		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "'locale' directory not found",
-		                         std::string(g_fs->canonicalize_name(datadir_ + "/locale") +
-		                                     " is not a directory. Please create it.")
-		                            .c_str(),
-		                         NULL);
-		log("ERROR: %s is not a directory. Please create it.\n",
-		    g_fs->canonicalize_name(datadir_ + "/locale").c_str());
-		exit(1);
+        // Produce error message and then exit if that didn't work either
+        if (!g_fs->file_exists(i18n::get_localedir()) || !g_fs->is_directory(i18n::get_localedir())) {
+            SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "'locale' directory not found",
+                                     std::string(g_fs->canonicalize_name(datadir_ + "/locale") +
+                                                 " is not a directory. Please create it.")
+                                        .c_str(),
+                                     NULL);
+            log("ERROR: %s is not a directory. Please create it.\n",
+                g_fs->canonicalize_name(datadir_ + "/locale").c_str());
+            exit(1);
+        }
 	}
 
 	assert(g_fs->file_exists(i18n::get_localedir()));
