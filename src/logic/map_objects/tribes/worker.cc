@@ -526,19 +526,18 @@ struct FindNodeSpace {
 	explicit FindNodeSpace () {
 	}
 
-	bool accept(const EditorGameBase& egbase, const FCoords& coords) const {
-		if (!(coords.field->nodecaps() & MOVECAPS_WALK))
+	   bool accept(const EditorGameBase& egbase, const FCoords& coords)
+	      const {if (!(coords.field->nodecaps() & MOVECAPS_WALK)) return false;
+
+	for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
+		FCoords const neighb = egbase.map().get_neighbour(coords, dir);
+
+		if (!(neighb.field->maxcaps() & MOVECAPS_WALK))
 			return false;
-
-		for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
-			FCoords const neighb = egbase.map().get_neighbour(coords, dir);
-
-			if (!(neighb.field->maxcaps() & MOVECAPS_WALK))
-				return false;
-		}
-
-		return true;
 	}
+
+	return true;
+}
 };
 
 bool Worker::run_findspace(Game& game, State& state, const Action& action) {
