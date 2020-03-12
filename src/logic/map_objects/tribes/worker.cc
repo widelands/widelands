@@ -523,21 +523,20 @@ int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map,
 // fields, trees, rocks and such on triangles and keep the nodes
 // passable. See code structure issue #1096824.
 struct FindNodeSpace {
-	explicit FindNodeSpace () {
+	explicit FindNodeSpace(){
 
-	bool accept(const EditorGameBase& egbase, const FCoords& coords) const {
-		if (!(coords.field->nodecaps() & MOVECAPS_WALK))
+	   bool accept(const EditorGameBase& egbase, const FCoords& coords)
+	      const {if (!(coords.field->nodecaps() & MOVECAPS_WALK)) return false;
+
+	for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
+		FCoords const neighb = egbase.map().get_neighbour(coords, dir);
+
+		if (!(neighb.field->maxcaps() & MOVECAPS_WALK))
 			return false;
-
-		for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
-			FCoords const neighb = egbase.map().get_neighbour(coords, dir);
-
-			if (!(neighb.field->maxcaps() & MOVECAPS_WALK))
-				return false;
-		}
-
-		return true;
 	}
+
+	return true;
+}
 };
 
 bool Worker::run_findspace(Game& game, State& state, const Action& action) {
