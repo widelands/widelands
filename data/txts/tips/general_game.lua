@@ -72,6 +72,10 @@ tips = {
       seconds = 3
    },
    {
+      text = _"Speed up or slow down game time with %1%. Use %2% for rapid change, %3% will adjust speed smoothly.":bformat(pgettext("hotkey", "Page Up/Page Down"), pgettext("hotkey", "Ctrl+(Page Up/Page Down)"), pgettext("hotkey", "Shift+(Page Up/Page Down)")),
+      seconds = 7
+   },
+   {
       text = _"When a building is destroyed, its workers will start looking for a nearby flag from which they can move by road to a connected warehouse. If there are no such flags in the vicinity, they will keep wandering around and eventually die.",
       seconds = 7
    },
