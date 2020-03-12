@@ -1,8 +1,8 @@
 name: Launchpad Mirror
 on:
   push:
-#    branches:
-#      - master
+    branches:
+      - master
 jobs:
   mirror:
     name: Synchronizing Launchpad trunk with GitHub master
@@ -28,7 +28,7 @@ jobs:
     - name: Checkout trunk
       run: |
         cd ~
-        bzr branch lp:~widelands-dev/widelands/test-github-mirror wl_trunk # NOCOM: lp:widelands
+        bzr branch lp:widelands wl_trunk
     - name: Checkout master
       run: |
         cd ~
@@ -71,7 +71,7 @@ jobs:
         set -e
         check_for_remote_changes=${check_for_remote_changes#*: \"}
         check_for_remote_changes=${check_for_remote_changes%\",}
-        if [ "$check_for_remote_changes" == "$GITHUB_SHA" ] || true # NOCOM
+        if [ "$check_for_remote_changes" == "$GITHUB_SHA" ]
         then
           bzr push :parent
         else
