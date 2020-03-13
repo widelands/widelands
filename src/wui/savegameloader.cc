@@ -190,7 +190,7 @@ ReplayLoader::ReplayLoader(Widelands::Game& game) : SavegameLoader(game) {
 
 bool ReplayLoader::is_valid_gametype(const SavegameData&) const {
 	return true;  // why?? what is the purpose of GameController::GameType::kReplay?
-	// return gamedata.is_replay(); <-- should be this, right?!
+	              // return gamedata.is_replay(); <-- should be this, right?!
 }
 
 std::string ReplayLoader::get_savename(const std::string& gamefilename) const {
