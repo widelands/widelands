@@ -1,0 +1,80 @@
+name: Launchpad Mirror
+on:
+  push:
+    branches:
+      - master
+jobs:
+  mirror:
+    name: Synchronizing Launchpad trunk with GitHub master
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setting up bazaar
+      run: |
+        if ! [ "$GITHUB_REPOSITORY" == "widelands/widelands" ]
+        then
+          echo "Launchpad mirror should run only from widelands:master, not from fork $GITHUB_REPOSITORY"
+          exit 1
+        fi
+        sudo apt-get update
+        sudo apt-get install bzr
+        mkdir ~/.ssh || true
+        echo "${{ secrets.LP_SSH }}" > ~/.ssh/id_rsa
+        chmod 400 ~/.ssh/id_rsa
+        echo "${{ secrets.LP_HOST }}" > ~/.ssh/known_hosts
+        eval "$(ssh-agent -s)"
+        ssh-add ~/.ssh/id_rsa
+        bzr whoami "The Widelands Bunnybot <bunnybot@widelands.org>"
+        bzr launchpad-login "widelandsofficial"
+    - name: Checkout trunk
+      run: |
+        cd ~
+        bzr branch lp:widelands wl_trunk
+    - name: Checkout master
+      run: |
+        cd ~
+        git clone --depth=1 https://github.com/widelands/widelands.git wl_master
+    - name: Cleaning tree
+      run: |
+        cd ~/wl_trunk
+        for file in $(ls -A)
+        do
+          if ! [ "$file" == ".bzr" ]
+          then
+            rm -r "$file"
+          fi
+        done
+    - name: Copying files
+      run: |
+        cd ~/wl_master
+        for file in $(ls -A)
+        do
+          if ! [ "$file" == ".git" ]
+          then
+            cp -r $file ~/wl_trunk/$file
+          fi
+        done
+        cd ~/wl_trunk
+        mv .gitignore .bzrignore
+    - name: Committing and pushing changes
+      run: |
+        commit_message=$(curl -i "https://api.github.com/repos/widelands/widelands/commits/$GITHUB_SHA" | grep -F "\"message\": ")
+        commit_message=${commit_message#*: \"}
+        commit_message=${commit_message%\",}
+        commit_message="$GITHUB_ACTOR: $commit_message ($GITHUB_SHA)"
+        echo $commit_message
+        cd ~/wl_trunk
+        bzr remove
+        bzr add
+        bzr commit --strict -m "$commit_message"
+        set +e
+        check_for_remote_changes=$(curl -i "https://api.github.com/repos/widelands/widelands/commits/master" | grep -m 1 "\"sha\": ")
+        set -e
+        check_for_remote_changes=${check_for_remote_changes#*: \"}
+        check_for_remote_changes=${check_for_remote_changes%\",}
+        if [ "$check_for_remote_changes" == "$GITHUB_SHA" ]
+        then
+          bzr push :parent
+        else
+          echo "master was updated from '$GITHUB_SHA' to '$check_for_remote_changes', cancel"
+          exit 1
+        fi
