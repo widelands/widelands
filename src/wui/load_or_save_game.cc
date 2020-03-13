@@ -192,15 +192,12 @@ GameDetails* LoadOrSaveGame::game_details() {
 }
 
 void LoadOrSaveGame::select_item_and_scroll_to_it(std::set<uint32_t>& selections) {
+	if (table_->empty()) {
+		return;
+	}
 	const uint32_t selectme = *selections.begin();
-	if (selectme < table_->size() - 1) {
-		table_->select(selectme);
-	} else if (!table_->empty()) {
-		table_->select(table_->size() - 1);
-	}
-	if (table_->has_selection()) {
-		table_->scroll_to_item(table_->selection_index() + 1);
-	}
+	table_->select(std::min(selectme, table_->size() - 1));
+	table_->scroll_to_item(table_->selection_index() + 1);
 }
 
 void LoadOrSaveGame::clicked_delete() {
