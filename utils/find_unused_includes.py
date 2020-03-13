@@ -21,7 +21,9 @@ DEFINE_REGEX = re.compile(r'\#define\s+(\w+)')
 STRING_CONSTANT_REGEX = re.compile(
     r'.*const\sstd::string\s+(k\w+|\w+_\w+)\s+=\s+\"\S+\";')
 EXTERN_OR_TYPEDEF_REGEX = re.compile(r'(extern|typedef)\s+\S+\s+(\S+);')
-INLINE_FUNCTION_REGEX = re.compile(r'inline\s+\S+\s+(\S+)\(')
+INLINE_FUNCTION_OR_STATIC_CONST_REGEX = re.compile(
+    r'(inline|static const)\s+\S+\s+(\S+)\(')
+
 FORWARD_DECLARATION_REGEX = re.compile(r'(class|struct)\s+(\S+);')
 
 # Special regex for #include "graphic/text/rt_errors.h" and Map_Object_Packet
@@ -88,9 +90,9 @@ def find_classes(file_to_check, include_functions, special_regex, special_regex_
             if match and len(match.groups()) == 1:
                 classes.add(match.groups()[0])
 
-            match = INLINE_FUNCTION_REGEX.match(line)
-            if match and len(match.groups()) == 1:
-                classes.add(match.groups()[0])
+            match = INLINE_FUNCTION_OR_STATIC_CONST_REGEX.match(line)
+            if match and len(match.groups()) == 2:
+                classes.add(match.groups()[1])
 
             match = FORWARD_DECLARATION_REGEX.match(line)
             if match and len(match.groups()) == 2:

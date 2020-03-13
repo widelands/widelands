@@ -53,16 +53,21 @@ wl_library(wui_economy_options
     wui_waresdisplay
 )
 
+wl_library(wui_mapview_pixelconstants
+  SRCS
+    mapviewpixelconstants.h
+    mapviewpixelconstants.cc
+)
 
 wl_library(wui_mapview_pixelfunctions
   SRCS
-    mapviewpixelconstants.h
     mapviewpixelfunctions.cc
     mapviewpixelfunctions.h
   DEPENDS
     base_geometry
     logic_map
     logic_widelands_geometry
+    wui_mapview_pixelconstants
 )
 
 wl_library(wui_common_suggested_teams
@@ -147,6 +152,7 @@ wl_library(wui_mapview
     graphic_fields_to_draw
     graphic_game_renderer
     logic_map
+    logic_map_objects
     logic_widelands_geometry
     ui_basic
     widelands_ball_of_mud

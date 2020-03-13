@@ -74,7 +74,8 @@ jobs:
             if [ -z "$output" ]
             then
               echo "Branch $branch in repository $forkname does not have an open pull request, so no changes will be pushed. Please note however that your code is not properly formatted:"
-              git diff --color | grep ""
+              git status -s
+              git --no-pager diff --cached
               exit 1
             else
               echo "Branch $branch in repository $forkname has an open pull request. Changes will be pushed."
