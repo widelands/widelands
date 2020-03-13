@@ -272,18 +272,19 @@ std::string FileSystem::illegal_filename_tooltip() {
 std::string FileSystem::get_homedir() {
 	std::string homedir;
 #ifdef _WIN32
-// Trying to get it compatible to ALL windows versions...
-// Could anybody please hit the Megasoft devs for not keeping
-// their own "standards"?
+	// Trying to get it compatible to ALL windows versions...
+	// Could anybody please hit the Megasoft devs for not keeping
+	// their own "standards"?
+	char const* home_char;
 #define TRY_USE_AS_HOMEDIR(name)                                                                   \
-	homedir = getenv(name);                                                                         \
-	if (homedir.size() && check_writeable_for_data(homedir.c_str()))                                \
-		return homedir;
+	home_char = getenv(name);                                                                       \
+	if (home_char != nullptr && *home_char != 0 && check_writeable_for_data(home_char))             \
+		return home_char;
 
-	TRY_USE_AS_HOMEDIR("USERPROFILE");
-	TRY_USE_AS_HOMEDIR("HOMEPATH");
-	TRY_USE_AS_HOMEDIR("HOME");
-	TRY_USE_AS_HOMEDIR("APPDATA");
+	TRY_USE_AS_HOMEDIR("USERPROFILE")
+	TRY_USE_AS_HOMEDIR("HOMEPATH")
+	TRY_USE_AS_HOMEDIR("HOME")
+	TRY_USE_AS_HOMEDIR("APPDATA")
 
 	log("None of the directories was useable - falling back to \".\"\n");
 #else
@@ -381,13 +382,13 @@ std::string FileSystem::get_userconfigdir() {
  */
 std::vector<std::string> FileSystem::get_xdgdatadirs() {
 	std::vector<std::string> xdgdatadirs;
-	std::string environment;
+	const char* environment_char;
 #ifdef HAS_GETENV
-	environment = getenv("XDG_DATA_DIRS");
+	environment_char = getenv("XDG_DATA_DIRS");
 #endif
-	if (environment.empty()) {
-		environment = "/usr/local/share:/usr/share";
-	}
+	std::string environment(environment_char == nullptr || *environment_char == 0 ?
+	                           "/usr/local/share:/usr/share" :
+	                           environment_char);
 
 	// https://stackoverflow.com/a/14266139
 	std::string token;

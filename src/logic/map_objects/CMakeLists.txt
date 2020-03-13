@@ -131,7 +131,7 @@ wl_library(logic_map_objects
     world/world.cc
     world/world.h
   DEPENDS
-    ai
+    ai_hints
     base_exceptions
     base_geometry
     base_i18n
@@ -169,9 +169,8 @@ wl_library(logic_map_objects
     scripting_lua_table
     sound_constants
     sound
-    ui_basic
     ui_basic_loading_message
-    wui_mapview_pixelfunctions
+    wui_mapview_pixelconstants
 )
 
 wl_library(logic_map_object_type
