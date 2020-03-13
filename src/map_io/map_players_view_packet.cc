@@ -161,10 +161,10 @@ namespace {
 
 #define CHECK_TRAILING_BYTES(file, filename)                                                       \
 	if (!(file).end_of_file())                                                                      \
-		throw GameDataError(                                                                         \
-		   "MapPlayersViewPacket::read: player %u:"                                                  \
-		   "Found %" PRIuS " trailing bytes in \"%s\"",                                              \
-		   plnum, static_cast<long unsigned int>((file).get_size() - (file).get_pos()), filename);
+		throw GameDataError("MapPlayersViewPacket::read: player %u:"                                 \
+		                    "Found %" PRIuS " trailing bytes in \"%s\"",                             \
+		                    plnum, static_cast<size_t>((file).get_size() - (file).get_pos()),        \
+		                    filename);
 
 // Errors for the Read* functions.
 struct TribeImmovableNonexistent : public FileRead::DataError {
@@ -529,23 +529,23 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					try {
 						f_player_field.time_node_last_unseen = unseen_times_file.unsigned_32();
 					} catch (const FileRead::FileBoundaryExceeded&) {
-						throw GameDataError(
-						   "MapPlayersViewPacket::read: player %u: in "
-						   "\"%s\":%" PRIuS ": node (%i, %i): unexpected end of file "
-						   "while reading time_node_last_unseen",
-						   plnum, unseen_times_filename,
-						   static_cast<long unsigned int>(unseen_times_file.get_pos() - 4), f.x, f.y);
+						throw GameDataError("MapPlayersViewPacket::read: player %u: in "
+						                    "\"%s\":%" PRIuS ": node (%i, %i): unexpected end of file "
+						                    "while reading time_node_last_unseen",
+						                    plnum, unseen_times_filename,
+						                    static_cast<size_t>(unseen_times_file.get_pos() - 4), f.x,
+						                    f.y);
 					}
 
 					try {
 						owner = owners_file.unsigned_8();
 					} catch (const FileRead::FileBoundaryExceeded&) {
-						throw GameDataError(
-						   "MapPlayersViewPacket::read: player %u: in "
-						   "\"%s\":%" PRIuS ": node (%i, %i): unexpected end of file "
-						   "while reading owner",
-						   plnum, unseen_times_filename,
-						   static_cast<long unsigned int>(unseen_times_file.get_pos() - 1), f.x, f.y);
+						throw GameDataError("MapPlayersViewPacket::read: player %u: in "
+						                    "\"%s\":%" PRIuS ": node (%i, %i): unexpected end of file "
+						                    "while reading owner",
+						                    plnum, unseen_times_filename,
+						                    static_cast<size_t>(unseen_times_file.get_pos() - 1), f.x,
+						                    f.y);
 					}
 					if (nr_players < owner) {
 						throw GameDataError("MapPlayersViewPacket::read: player %u: in "
@@ -553,8 +553,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						                    "this node is owned by player %u, but there are only %u "
 						                    "players",
 						                    plnum, owners_filename,
-						                    static_cast<long unsigned int>(owners_file.get_pos() - 1),
-						                    f.x, f.y, owner, nr_players);
+						                    static_cast<size_t>(owners_file.get_pos() - 1), f.x, f.y,
+						                    owner, nr_players);
 					}
 					uint8_t imm_kind = 0;
 					if (node_immovable_kinds_file_version == kCurrentPacketVersionImmovableKinds) {
@@ -742,7 +742,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 							   "\"%s\":%" PRIuS ": node (%i, %i) t = D: unexpected end of "
 							   "file while reading time_triangle_last_surveyed",
 							   plnum, survey_times_filename,
-							   static_cast<long unsigned int>(survey_times_file.get_pos() - 4), f.x, f.y);
+							   static_cast<size_t>(survey_times_file.get_pos() - 4), f.x, f.y);
 						}
 					}
 				} catch (const FileRead::FileBoundaryExceeded&) {
@@ -777,7 +777,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 							   "\"%s\":%" PRIuS ": node (%i, %i) t = R: unexpected end of "
 							   "file while reading time_triangle_last_surveyed",
 							   plnum, survey_times_filename,
-							   static_cast<long unsigned int>(survey_times_file.get_pos() - 4), f.x, f.y);
+							   static_cast<size_t>(survey_times_file.get_pos() - 4), f.x, f.y);
 						}
 					}
 				} catch (const FileRead::FileBoundaryExceeded&) {
