@@ -58,20 +58,20 @@ override_dh_auto_install:
 	# ... but we want to place them in the right location so that the .install files work
 	# mv debian/tmp/usr/widelands debian/tmp/usr/games
 	# TODO(GunChleoc): wl_render_richtext is currently unmaintained
-	for b in wl_map_info wl_map_object_info widelands ; do \
+	# Move the main binary to the right location (no idea why it's misplaced)
+	for b in wl_map_info wl_map_object_info widelands wl_create_spritesheet ; do \
 	  mv debian/tmp/usr/$${b} debian/tmp/usr/games ;\
 	done
 	# Take care of the logo
 	for size in 16 32 48 64 128 ; do \
 	  mkdir -p debian/tmp/usr/share/icons/hicolor/$${size}x$${size}/apps ; \
-	  cp ./debian/tmp/usr/share/games/widelands/data/images/logos/wl-ico-$${size}.png \
+	  mv ./debian/tmp/usr/share/games/widelands/data/images/logos/wl-ico-$${size}.png \
 	     debian/tmp/usr/share/icons/hicolor/$${size}x$${size}/apps/widelands.png; \
 	done
-	# Move the main binary to the right location (no idea why it's misplaced)
 	# Dir is already there in the PPA mkdir debian/tmp/usr/games
 	# appdata
 	mkdir -p debian/tmp/usr/share/metainfo/
-	cp debian/org.widelands.Widelands.appdata.xml debian/tmp/usr/share/metainfo/
+	mv debian/org.widelands.Widelands.appdata.xml debian/tmp/usr/share/metainfo/
 
 override_dh_missing:
 	dh_missing --fail-missing
