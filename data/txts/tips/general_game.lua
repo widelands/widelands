@@ -76,6 +76,10 @@ tips = {
       seconds = 7
    },
    {
+      text = _"Move map view using %1%. %2% will move the view faster, %3% moves slowly.":bformat(pgettext("hotkey", "Arrow keys"), pgettext("hotkey", "Ctrl+Arrow keys"), pgettext("hotkey", "Shift+Arrow keys")),
+      seconds = 4
+   },
+   {
       text = _"When a building is destroyed, its workers will start looking for a nearby flag from which they can move by road to a connected warehouse. If there are no such flags in the vicinity, they will keep wandering around and eventually die.",
       seconds = 7
    },
