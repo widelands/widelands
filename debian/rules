@@ -68,7 +68,7 @@ override_dh_auto_install:
 	     debian/tmp/usr/share/icons/hicolor/$${size}x$${size}/apps/widelands.png; \
 	done
 	# Move the main binary to the right location (no idea why it's misplaced)
-	mkdir debian/tmp/usr/games
+	# Dir is already there in the PPA mkdir debian/tmp/usr/games
 	# appdata
 	mkdir -p debian/tmp/usr/share/metainfo/
 	cp debian/org.widelands.Widelands.appdata.xml debian/tmp/usr/share/metainfo/
