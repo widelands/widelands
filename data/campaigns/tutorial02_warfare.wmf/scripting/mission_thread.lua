@@ -12,6 +12,7 @@ end
 
 local trainingcamp_done = false
 local battlearena_done = false
+local scouting_done = false
 
 function training2()
    -- Teach about trainingsites and soldiers' abilities - concurrent part 2
@@ -23,6 +24,16 @@ function training2()
    trainingcamp_done = true
 end
 
+function scouting()
+   -- Teach player about scouting
+   sleep(4*60*1000)
+   o = message_box_objective(plr, scouting1)
+   while #plr:get_buildings("barbarians_scouts_hut") == 0 do sleep(500) end
+   set_objective_done(o)
+   message_box_objective(plr, scouting2)
+   scouting_done = true
+end
+
 function training()
    -- Teach about trainingsites and soldiers' abilities
    sleep(5000) -- to let soldiers walk
@@ -30,6 +41,7 @@ function training()
    message_box_objective(plr, abilities)
    local o = message_box_objective(plr, battlearena1)
    run(training2)
+   run(scouting)
 
    while #plr:get_buildings("barbarians_battlearena") == 0 do sleep(500) end
    set_objective_done(o, 0)
@@ -38,7 +50,8 @@ function training()
 end
 
 function military_buildings()
-   while not trainingcamp_done or not battlearena_done do sleep(3000) end
+   while not trainingcamp_done or not battlearena_done or
+      not scouting_done do sleep(3000) end
    message_box_objective(plr, heroes_rookies)
    message_box_objective(plr, soldier_capacity)
    local o = message_box_objective(plr, dismantle)

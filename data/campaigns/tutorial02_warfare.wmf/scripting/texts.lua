@@ -126,6 +126,37 @@ trainingcamp2 = {
    )
 }
 
+scouting1 = {
+   position = "topright",
+   title = _"Scout's Hut",
+   body = (
+      h1(_"Explore Your Surroundings") ..
+      p(_[[Large part of the map is not explored yet. It might be a good idea to know which direction is best for expanding our empire.]]) ..
+      p(_[[You can try your luck and expand randomly, but it is risky. Safe way is to use scout to explore unseen parts of the map. What if he finds mountains overflowing with gold?]]) ..
+      p(_[[We will need a scout hut to start an expedition. It is a small building.]]) ..
+      li_object("barbarians_scouts_hut", _[[Build scout's hut.]], plr.color)
+   ),
+   h = 300,
+   obj_name = "build_scouts_hut",
+   obj_title = _"Build a scout's hut",
+   obj_body = (
+      p(_[[It's good to know your surroundings. Scout will explore unseen parts of the map for you.]]) ..
+      li(_[[Build Scout's Hut.]])
+   )
+}
+
+scouting2 = {
+   position = "topright",
+   title = _"Scout is ready",
+   body = (
+      h1(_"Ready to go!") ..
+      p(_[[Well done, scout's hut has been built. Meanwhile our scout will move in, let's learn more about him a little.]]) ..
+      p(_[[First of all, he needs to take some food for his scouting trips. By chance, we have some rations in our warehouse.]]) ..
+      li_object("barbarians_scout", _[[When provided with food, he randomly walks around the area. You should follow his movement before fog of war hides what he saw.]], plr.color)
+   ),
+   h = 200
+}
+
 heroes_rookies = {
    position = "topright",
    title = _"Heroes and Rookies",
