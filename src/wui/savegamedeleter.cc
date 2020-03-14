@@ -107,10 +107,11 @@ ReplayDeleter::create_header_for_confirmation_window(const size_t no_selections)
 	std::string header =
 	   no_selections == 1 ?
 	      _("Do you really want to delete this replay?") :
-	      /** TRANSLATORS: Used with multiple replays, 1 replay has a
+	      (boost::format(
+	          /** TRANSLATORS: Used with multiple replays, 1 replay has a
 	                      separate string. DO NOT omit the placeholder in your translation. */
-	      (boost::format(ngettext("Do you really want to delete this %d replay?",
-	                              "Do you really want to delete these %d replays?", no_selections)) %
+	          ngettext("Do you really want to delete this %d replay?",
+	                   "Do you really want to delete these %d replays?", no_selections)) %
 	       no_selections)
 	         .str();
 

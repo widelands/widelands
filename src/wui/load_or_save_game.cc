@@ -121,20 +121,17 @@ bool LoadOrSaveGame::compare_map_name(uint32_t rowa, uint32_t rowb) const {
 
 std::unique_ptr<SavegameData> LoadOrSaveGame::entry_selected() {
 	std::unique_ptr<SavegameData> result(new SavegameData());
-	size_t selections = table_->selections().size();
-	set_tooltips_of_buttons(selections);
+
+	set_tooltips_of_buttons(table_->selections().size());
 
 	const std::vector<SavegameData> savegames = get_selected_savegames();
 	game_details_.display(savegames);
-	if (selections > 0 && !selection_contains_directory()) {
-		delete_->set_enabled(true);
+	if (!table_->selections().empty()) {
+		delete_->set_enabled(!selection_contains_directory());
+		result.reset(new SavegameData(savegames[0]));
 	} else {
 		delete_->set_enabled(false);
 		delete_->set_tooltip("");
-	}
-	// TODO(GunChleoc): Take care of the OK button too.
-	if (selections > 0) {
-		result.reset(new SavegameData(savegames[0]));
 	}
 	return result;
 }
