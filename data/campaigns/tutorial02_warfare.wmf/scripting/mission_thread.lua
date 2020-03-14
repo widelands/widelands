@@ -113,4 +113,4 @@ function conclusion()
 end
 
 run(intro)
-run (military_buildings)
+run(military_buildings)
