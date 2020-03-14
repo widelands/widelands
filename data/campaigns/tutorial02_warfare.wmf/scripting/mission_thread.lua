@@ -17,7 +17,7 @@ local scouting_done = false
 function training2()
    -- Teach about trainingsites and soldiers' abilities - concurrent part 2
    sleep(2*60*1000)
-   o = message_box_objective(plr, trainingcamp1)
+   local o = message_box_objective(plr, trainingcamp1)
    while #plr:get_buildings("barbarians_trainingcamp") == 0 do sleep(500) end
    set_objective_done(o)
    message_box_objective(plr, trainingcamp2)
