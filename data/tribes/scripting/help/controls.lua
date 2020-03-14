@@ -75,11 +75,11 @@ return {
                -- TRANSLATORS: This is an access key combination. The hotkey is 'e'
                dl(help_format_hotkey("E"), _"Toggle seafaring statistics") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "Arrow keys")), _"Map view movement") ..
+               dl(help_format_hotkey(pgettext("hotkey", "Arrow keys")), _"Move the map") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + Arrow keys")), _"Fast map view movement") ..
+               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + Arrow keys")), _"Move the map fast") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "Shift + Arrow keys")), _"Slow map view movement") ..
+               dl(help_format_hotkey(pgettext("hotkey", "Shift + Arrow keys")), _"Move the map slowly") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
                dl(help_format_hotkey(pgettext("hotkey", "Home")), _"Center main mapview on starting location") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
