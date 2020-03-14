@@ -776,7 +776,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 							   "MapPlayersViewPacket::read: player %u: in "
 							   "\"%s\":%" PRIuS ": node (%i, %i) t = R: unexpected end of "
 							   "file while reading time_triangle_last_surveyed",
-							   plnum, survey_times_filename,
+							   static_cast<unsigned int>(plnum), survey_times_filename,
 							   static_cast<size_t>(survey_times_file.get_pos() - 4), f.x, f.y);
 						}
 					}
