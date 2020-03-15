@@ -174,9 +174,10 @@ void MapScenarioEditorPacket::read(FileSystem& fs, EditorGameBase& egbase, bool,
 								for (size_t n = fr.unsigned_32(); n; --n) {
 									const bool is_worker = fr.unsigned_8();
 									const Widelands::DescriptionIndex di = fr.unsigned_32();
+									const bool is_additional = fr.unsigned_8();
 									wh.get_portdock()
 									   ->expedition_bootstrap()
-									   ->inputqueue(di, is_worker ? Widelands::wwWORKER : Widelands::wwWARE)
+									   ->inputqueue(di, is_worker ? Widelands::wwWORKER : Widelands::wwWARE, is_additional)
 									   .set_filled(fr.unsigned_32());
 								}
 							}
@@ -483,12 +484,13 @@ void MapScenarioEditorPacket::write(FileSystem& fs, EditorGameBase& egbase, MapO
 						if (wh.get_portdock() && wh.get_portdock()->expedition_bootstrap()) {
 							fw.unsigned_8(1);
 							const std::vector<Widelands::InputQueue*> qs =
-							   wh.get_portdock()->expedition_bootstrap()->queues();
+							   wh.get_portdock()->expedition_bootstrap()->queues(true);
 							fw.unsigned_32(qs.size());
 							for (const Widelands::InputQueue* q : qs) {
 								fw.unsigned_8(q->get_type() == Widelands::wwWARE ? 0 : 1);
 								fw.unsigned_32(q->get_index());
 								fw.unsigned_32(q->get_filled());
+								fw.unsigned_8(wh.get_portdock()->expedition_bootstrap()->is_additional(*q));
 							}
 						} else {
 							fw.unsigned_8(0);

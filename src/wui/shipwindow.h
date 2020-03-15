@@ -30,6 +30,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/editbox.h"
+#include "ui_basic/spinbox.h"
 #include "ui_basic/unique_window.h"
 #include "wui/itemwaresdisplay.h"
 
@@ -101,6 +102,7 @@ private:
 
 	UI::Box main_box_;
 	UI::EditBox shipname_;
+	UI::SpinBox capacity_;
 	UI::Button ok_;
 	UI::Button cancel_;
 	std::vector<std::unique_ptr<UI::Box>> row_boxes_;

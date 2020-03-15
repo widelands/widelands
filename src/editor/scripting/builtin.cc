@@ -1045,6 +1045,12 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 			VariableType(VariableTypeID::Game), // class
 			VariableType(VariableTypeID::Integer) // type
 		)),
+	new BuiltinPropertyInfo("interactive_player", []() { return
+	_("The player number of the interactive player, or 0 for spectators."); },
+		new Property("interactive_player", Property::Access::RO,
+			VariableType(VariableTypeID::Game), // class
+			VariableType(VariableTypeID::Integer) // type
+		)),
 	new BuiltinPropertyInfo("players", []() { return _("An array with the player instances."); },
 		new Property("players", Property::Access::RO,
 			VariableType(VariableTypeID::Game), // class

@@ -114,7 +114,7 @@ ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table)
 	// Read the sailing animations
 	assign_directional_animation(&sail_anims_, "sail");
 
-	capacity_ = table.has_key("capacity") ? table.get_int("capacity") : 20;
+	default_capacity_ = table.has_key("capacity") ? table.get_int("capacity") : 20;
 }
 
 uint32_t ShipDescr::movecaps() const {
@@ -130,7 +130,8 @@ Ship::Ship(const ShipDescr& gdescr)
      fleet_(nullptr),
      ware_economy_(nullptr),
      worker_economy_(nullptr),
-     ship_state_(ShipStates::kTransport) {
+     ship_state_(ShipStates::kTransport),
+     capacity_(gdescr.get_default_capacity()) {
 }
 
 Ship::~Ship() {
@@ -623,63 +624,48 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 	case ShipStates::kExpeditionColonizing: {
 		assert(!expedition_->seen_port_buildspaces.empty());
 		BaseImmovable* baim = map[expedition_->seen_port_buildspaces.front()].get_immovable();
-		// Following is a preparation for very rare situation, when colonizing port already have a
-		// worker (bug-1727673)
-		// We leave the worker on the ship then
-		bool leftover_builder = false;
 		if (baim) {
+			assert(!items_.empty());
+			const size_t nr_items = items_.size() - 1;
 			upcast(ConstructionSite, cs, baim);
-
-			for (int i = items_.size() - 1; i >= 0; --i) {
-				WareInstance* ware;
-				Worker* worker;
-				items_.at(i).get(game, &ware, &worker);
-				if (ware) {
-					// no, we don't transfer the wares, we create new ones out of
-					// air and remove the old ones ;)
-					WaresQueue& wq =
-					   dynamic_cast<WaresQueue&>(cs->inputqueue(ware->descr_index(), wwWARE));
-					const uint32_t cur = wq.get_filled();
-
-					// This is to help to debug the situation when colonization fails
-					// Can the reason be that worker was not unloaded as the last one?
-					if (wq.get_max_fill() <= cur) {
-						log("  %d: Colonization error: unloading wares to constructionsite of %s"
-						    " (owner %d) failed.\n"
-						    " Wares unloaded to the site: %d, max capacity: %d, remaining to unload: %d\n"
-						    " No free capacity to unload another ware\n",
-						    get_owner()->player_number(), cs->get_info().becomes->name().c_str(),
-						    cs->get_owner()->player_number(), cur, wq.get_max_fill(), i);
-					}
-
-					assert(wq.get_max_fill() > cur);
-					wq.set_filled(cur + 1);
-					items_.at(i).remove(game);
-					items_.resize(i);
-					break;
+			WareInstance* ware;
+			Worker* worker;
+			items_.at(nr_items).get(game, &ware, &worker);
+			if (ware) {
+				// no, we don't transfer the wares, we create new ones out of
+				// air and remove the old ones ;)
+				WaresQueue* wq;
+				try {
+					wq = dynamic_cast<WaresQueue*>(&cs->inputqueue(ware->descr_index(), wwWARE));
+					assert(wq);
+				} catch (const WException&) {
+					// cs->inputqueue() may throw if this is an additional item
+					wq = nullptr;
+				}
+				if (!wq || wq->get_filled() >= wq->get_max_fill()) {
+					cs->add_additional_ware(ware->descr_index());
 				} else {
-					assert(worker);
-					// If constructionsite does not need worker anymore, we must leave it on the ship.
-					// Also we presume that he is on position 0
-					if (cs->get_builder_request() == nullptr) {
-						log("%2d: WARNING: Colonizing ship %s cannot unload the worker to new port at "
-						    "%3dx%3d because the request is no longer active\n",
-						    get_owner()->player_number(), shipname_.c_str(), cs->get_position().x,
-						    cs->get_position().y);
-						leftover_builder = true;
-						break;  // no more unloading (builder shoud be on position 0)
-					}
-					worker->set_economy(nullptr, wwWARE);
-					worker->set_economy(nullptr, wwWORKER);
-					worker->set_location(cs);
-					worker->set_position(game, cs->get_position());
-					worker->reset_tasks(game);
+					wq->set_filled(wq->get_filled() + 1);
+				}
+				items_.at(nr_items).remove(game);
+				items_.resize(nr_items);
+			} else {
+				assert(worker);
+				worker->set_economy(nullptr, wwWARE);
+				worker->set_economy(nullptr, wwWORKER);
+				worker->set_location(cs);
+				worker->set_position(game, cs->get_position());
+				worker->reset_tasks(game);
+				if (cs->get_builder_request() &&
+				    worker->descr().worker_index() == worker->get_owner()->tribe().builder()) {
 					PartiallyFinishedBuilding::request_builder_callback(
 					   game, *cs->get_builder_request(), worker->descr().worker_index(), worker, *cs);
-					items_.resize(i);
+				} else {
+					cs->add_additional_worker(game, *worker);
 				}
+				items_.resize(nr_items);
 			}
-		} else {  // it seems that port constructionsite has dissapeared
+		} else {  // it seems that port constructionsite has disappeared
 			// Send a message to the player, that a port constructionsite is gone
 			send_message(game, _("Port Lost!"), _("New port construction site is gone"),
 			             _("Unloading of wares failed, expedition is cancelled now."),
@@ -687,8 +673,8 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			send_signal(game, "cancel_expedition");
 		}
 
-		if (items_.empty() || !baim || leftover_builder) {  // we are done, either way
-			ship_state_ = ShipStates::kTransport;            // That's it, expedition finished
+		if (items_.empty() || !baim) {            // we are done, either way
+			ship_state_ = ShipStates::kTransport;  // That's it, expedition finished
 
 			// Bring us back into a fleet and a economy.
 			init_fleet(game);
@@ -952,7 +938,7 @@ Ship::estimated_arrival_time(Game& game, const PortDock& dest, const PortDock* i
 }
 
 void Ship::add_item(Game& game, const ShippingItem& item) {
-	assert(items_.size() < descr().get_capacity());
+	assert(items_.size() < get_capacity());
 
 	items_.push_back(item);
 	items_.back().set_location(game, this);
@@ -1346,7 +1332,7 @@ Load / Save implementation
 ==============================
 */
 
-constexpr uint8_t kCurrentPacketVersion = 10;
+constexpr uint8_t kCurrentPacketVersion = 11;
 
 const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	if (name == "shipidle" || name == "ship")
@@ -1396,6 +1382,10 @@ void Ship::Loader::load(FileRead& fr, uint8_t pw) {
 	}
 
 	shipname_ = fr.c_string();
+
+	// TODO(Nordfriese): Savegame compatibility
+	capacity_ = packet_version_ >= 11 ? fr.unsigned_32() : std::numeric_limits<uint32_t>::max();
+
 	lastdock_ = fr.unsigned_32();
 
 	if (packet_version_ >= 9) {
@@ -1461,6 +1451,11 @@ void Ship::Loader::load_finish() {
 	// restore the  ship id and name
 	ship.shipname_ = shipname_;
 
+	// TODO(Nordfriese): Savegame compatibility
+	ship.capacity_ = capacity_ == std::numeric_limits<uint32_t>::max() ?
+	                    ship.descr().get_default_capacity() :
+	                    capacity_;
+
 	// if the ship is on an expedition, restore the expedition specific data
 	if (expedition_) {
 		ship.expedition_.swap(expedition_);
@@ -1485,6 +1480,7 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 	try {
 		// The header has been peeled away by the caller
 		uint8_t const packet_version = fr.unsigned_8();
+		// TODO(Nordfriese): Savegame compatibility
 		if (packet_version >= 8 && packet_version <= kCurrentPacketVersion) {
 			try {
 				const ShipDescr* descr = nullptr;
@@ -1542,6 +1538,7 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	}
 
 	fw.string(shipname_);
+	fw.unsigned_32(capacity_);
 	fw.unsigned_32(mos.get_object_file_index_or_zero(lastdock_.get(egbase)));
 	fw.unsigned_32(destinations_.size());
 	for (const auto& pair : destinations_) {

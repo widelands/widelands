@@ -64,6 +64,9 @@ ShipCfg::ShipCfg(InteractiveBase& ib, Ship& s)
      ship_(&s),
      main_box_(this, 0, 0, UI::Box::Vertical),
      shipname_(&main_box_, 0, 0, 200, UI::PanelStyle::kWui),
+     capacity_(&main_box_, 0, 0, 200, 100, s.get_capacity(), 1, Widelands::INVALID_INDEX,
+            UI::PanelStyle::kWui, _("Capacity"), UI::SpinBox::Units::kNone,
+	        UI::SpinBox::Type::kBig),
      ok_(&main_box_,
          "ok",
          0,
@@ -85,7 +88,7 @@ ShipCfg::ShipCfg(InteractiveBase& ib, Ship& s)
 	shipname_.set_text(s.get_shipname());
 
 	{
-		const uint32_t capacity = s.descr().get_capacity();
+		const uint32_t capacity = s.get_capacity();
 		const uint32_t carried_items = s.get_nritems();
 		uint32_t rows = capacity / kShipCfgMaxColumns;
 		if (kShipCfgMaxColumns * rows < capacity)
@@ -135,6 +138,7 @@ ShipCfg::ShipCfg(InteractiveBase& ib, Ship& s)
 	ok_.sigclicked.connect(boost::bind(&ShipCfg::clicked_ok, this));
 	cancel_.sigclicked.connect(boost::bind(&ShipCfg::die, this));
 
+	main_box_.add(&capacity_, UI::Box::Resizing::kFullSize);
 	main_box_.add(&shipname_, UI::Box::Resizing::kFullSize);
 	main_box_.add(&cancel_, UI::Box::Resizing::kFullSize);
 	main_box_.add(&ok_, UI::Box::Resizing::kFullSize);
@@ -162,7 +166,11 @@ void ShipCfg::clicked_ok() {
 			s->items_.begin()->remove(egbase);
 			s->items_.erase(s->items_.begin());
 		}
+		uint32_t capacity = capacity_.get_value();
+		s->set_capacity(capacity);
 		for (const auto& dd : items_) {
+			if (!capacity)
+				break;
 			if (dd && dd->get_selected().second != Widelands::INVALID_INDEX) {
 				if (dd->get_selected().first == Widelands::wwWARE) {
 					Widelands::WareInstance& w = *new Widelands::WareInstance(
@@ -178,6 +186,7 @@ void ShipCfg::clicked_ok() {
 					      ->create(egbase, s->get_owner(), nullptr, s->get_position());
 					s->items_.push_back(Widelands::ShippingItem(w));
 				}
+				--capacity;
 			}
 		}
 	}
@@ -195,7 +204,7 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Ship* s
 	assert(ship->get_owner());
 
 	display_ = new ItemWaresDisplay(&vbox_, ship->owner());
-	display_->set_capacity(ship->descr().get_capacity());
+	display_->set_capacity(ship->get_capacity());
 	vbox_.add(display_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	// Expedition buttons

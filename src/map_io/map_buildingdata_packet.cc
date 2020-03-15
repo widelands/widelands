@@ -60,7 +60,7 @@ constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
 constexpr uint16_t kCurrentPacketVersionConstructionsite = 4;
 constexpr uint16_t kCurrentPacketPFBuilding = 1;
 // Responsible for warehouses and expedition bootstraps
-constexpr uint16_t kCurrentPacketVersionWarehouse = 7;
+constexpr uint16_t kCurrentPacketVersionWarehouse = 8;
 constexpr uint16_t kCurrentPacketVersionMilitarysite = 6;
 constexpr uint16_t kCurrentPacketVersionProductionsite = 8;
 constexpr uint16_t kCurrentPacketVersionTrainingsite = 5;

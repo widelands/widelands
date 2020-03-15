@@ -67,13 +67,13 @@ public:
 		return sail_anims_;
 	}
 
-	Quantity get_capacity() const {
-		return capacity_;
+	Quantity get_default_capacity() const {
+		return default_capacity_;
 	}
 
 private:
 	DirAnimations sail_anims_;
-	Quantity capacity_;
+	Quantity default_capacity_;
 	DISALLOW_COPY_AND_ASSIGN(ShipDescr);
 };
 
@@ -247,6 +247,13 @@ struct Ship : Bob {
 	void exp_cancel(Game&);
 	void sink_ship(Game&);
 
+	Quantity get_capacity() const {
+		return capacity_;
+	}
+	void set_capacity(Quantity c) {
+		capacity_ = c;
+	}
+
 protected:
 	void draw(const EditorGameBase&,
 	          const InfoToDraw& info_to_draw,
@@ -311,6 +318,8 @@ private:
 	};
 	std::unique_ptr<Expedition> expedition_;
 
+	Quantity capacity_;
+
 	// saving and loading
 protected:
 	struct Loader : Bob::Loader {
@@ -327,6 +336,7 @@ protected:
 		Serial ware_economy_serial_;
 		Serial worker_economy_serial_;
 		std::vector<std::pair<uint32_t, uint32_t>> destinations_;
+		uint32_t capacity_ = 0U;
 		ShipStates ship_state_ = ShipStates::kTransport;
 		std::string shipname_;
 		std::unique_ptr<Expedition> expedition_;

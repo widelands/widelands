@@ -100,7 +100,9 @@ public:
 	int recalculate(lua_State*);
 	int recalculate_seafaring(lua_State*);
 	int set_port_space(lua_State*);
+	int sea_route_exists(lua_State*);
 	int set_waterway_max_length(lua_State*);
+	int find_ocean_fields(lua_State*);
 
 	/*
 	 * C methods
@@ -1408,12 +1410,15 @@ public:
 	int get_island_explore_direction(lua_State* L);
 	int set_island_explore_direction(lua_State* L);
 	int get_shipname(lua_State* L);
+	int get_capacity(lua_State* L);
+	int set_capacity(lua_State* L);
 	/*
 	 * Lua methods
 	 */
 	int get_wares(lua_State* L);
 	int get_workers(lua_State* L);
 	int build_colonization_port(lua_State* L);
+	int make_expedition(lua_State* L);
 
 	/*
 	 * C methods

@@ -23,6 +23,7 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
+#include "economy/expedition_bootstrap.h"
 #include "economy/input_queue.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -152,6 +153,8 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdShipSink(des);
 	case QueueCommandTypes::kShipCancelExpedition:
 		return new CmdShipCancelExpedition(des);
+	case QueueCommandTypes::kExpeditionConfig:
+		return new CmdExpeditionConfig(des);
 
 	default:
 		throw wexception("PlayerCommand::deserialize(): Invalid command id encountered");
@@ -685,6 +688,60 @@ void CmdStartOrCancelExpedition::write(FileWrite& fw, EditorGameBase& egbase, Ma
 
 	// Now serial
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
+}
+
+/*** Cmd_ExpeditionConfig ***/
+
+CmdExpeditionConfig::CmdExpeditionConfig(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
+	serial = des.unsigned_32();
+	type = des.unsigned_8() == 0 ? wwWARE : wwWORKER;
+	index = des.unsigned_32();
+	add = des.unsigned_8();
+}
+
+void CmdExpeditionConfig::execute(Game& game) {
+	if (upcast(PortDock, pd, game.objects().get_object(serial))) {
+		if (ExpeditionBootstrap* x = pd->expedition_bootstrap()) {
+			x->demand_additional_item(game, type, index, add);
+		}
+	}
+}
+
+void CmdExpeditionConfig::serialize(StreamWrite& ser) {
+	write_id_and_sender(ser);
+	ser.unsigned_32(serial);
+	ser.unsigned_8(type == wwWARE ? 0 : 1);
+	ser.unsigned_32(index);
+	ser.unsigned_8(add ? 1 : 0);
+}
+
+constexpr uint16_t kCurrentPacketVersionCmdExpeditionConfig = 1;
+
+void CmdExpeditionConfig::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersionCmdExpeditionConfig) {
+			PlayerCommand::read(fr, egbase, mol);
+			serial = get_object_serial_or_zero<PortDock>(fr.unsigned_32(), mol);
+			type = fr.unsigned_8() == 0 ? wwWARE : wwWORKER;
+			index = fr.unsigned_32();
+			add = fr.unsigned_8();
+		} else {
+			throw UnhandledVersionError(
+			   "CmdExpeditionConfig", packet_version, kCurrentPacketVersionCmdExpeditionConfig);
+		}
+	} catch (const WException& e) {
+		throw GameDataError("enhance building: %s", e.what());
+	}
+}
+void CmdExpeditionConfig::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_16(kCurrentPacketVersionCmdExpeditionConfig);
+	PlayerCommand::write(fw, egbase, mos);
+
+	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
+	fw.unsigned_8(type == wwWARE ? 0 : 1);
+	fw.unsigned_32(index);
+	fw.unsigned_8(add ? 1 : 0);
 }
 
 /*** Cmd_EnhanceBuilding ***/
