@@ -128,7 +128,7 @@ public:
 	ExpeditionBootstrap* expedition_bootstrap() const;
 
 	// Gets called by the ExpeditionBootstrap as soon as all wares and workers are available.
-	void expedition_bootstrap_complete(Game& game);
+	void set_expedition_bootstrap_complete(Game& game, bool complete);
 
 private:
 	friend struct ShipFleet;

@@ -62,7 +62,7 @@ std::string as_richtext_paragraph(const std::string& text, UI::Align align) {
 int text_width(const std::string& text, const UI::FontStyleInfo& style, float scale) {
 	UI::FontStyleInfo info(style);
 	info.set_size(info.size() * scale - UI::g_fh->fontset()->size_offset());
-	return UI::g_fh->render(as_editor_richtext_paragraph(text, info))->width();
+	return UI::g_fh->render(as_editor_richtext_paragraph(richtext_escape(text), info))->width();
 }
 
 int text_height(const UI::FontStyleInfo& style, float scale) {

@@ -51,7 +51,8 @@ public:
 	                  InteractiveGameBase& igb,
 	                  Widelands::Building& building,
 	                  const Widelands::InputQueue& queue,
-	                  bool = false);
+	                  bool no_capacity_buttons = false,
+	                  bool no_priority_buttons = false);
 	// Constructor for fake queues (e.g. in ConstructionSite settings)
 	InputQueueDisplay(UI::Panel* parent,
 	                  int32_t x,
@@ -60,7 +61,8 @@ public:
 	                  Widelands::ConstructionSite&,
 	                  Widelands::WareWorker,
 	                  Widelands::DescriptionIndex,
-	                  bool = false);
+	                  bool no_capacity_buttons = false,
+	                  bool no_priority_buttons = false);
 	~InputQueueDisplay() override;
 
 	void think() override;
@@ -82,7 +84,8 @@ private:
 	uint32_t cache_size_;
 	uint32_t cache_max_fill_;
 	uint32_t total_height_;
-	bool show_only_;
+	bool no_capacity_buttons_;
+	bool no_priority_buttons_;
 
 	virtual void max_size_changed();
 	void update_priority_buttons();

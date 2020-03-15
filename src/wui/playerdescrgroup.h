@@ -20,6 +20,9 @@
 #ifndef WL_WUI_PLAYERDESCRGROUP_H
 #define WL_WUI_PLAYERDESCRGROUP_H
 
+#include <map>
+#include <memory>
+
 #include "ui_basic/panel.h"
 
 struct GameSettingsProvider;
@@ -46,10 +49,11 @@ private:
 	void enable_player(bool);
 	void toggle_playertype();
 	void toggle_playertribe();
-	void toggle_playerinit();
 	void toggle_playerteam();
 
-	PlayerDescriptionGroupImpl* d;
+	void update_playerinit();
+
+	std::unique_ptr<PlayerDescriptionGroupImpl> d;
 	std::map<std::string, std::string> tribenames_;
 };
 

@@ -23,6 +23,8 @@ override_dh_auto_configure:
 
 override_dh_auto_install:
 	dh_auto_install --parallel
+	mkdir -p  debian/tmp/usr/share/applications/
+	cp debian/org.widelands.Widelands.desktop debian/tmp/usr/share/applications/
 	# Take care of the fonts (use system-wide ones)
 	# Not doing so would violate the Debian Policy, preventing the package to enter the official repositories
 	# Skip this part for our packages, since we use the embedded fonts :/
@@ -50,20 +52,29 @@ override_dh_auto_install:
 	fi
 	# Remove binaries that are not intended for the user (according to SirVer)
 	# We want all binaries for our PPA...
-	# for b in wl_map_info wl_map_object_info wl_render_richtext ; do \
+	# for b in wl_map_info wl_map_object_info wl_render_richtext wl_create_spritesheet ; do \
 	#  rm debian/tmp/usr/$${b} ;\
 	# done
-	# Move the main binary to the right location (no idea why it's misplaced)
-	mkdir debian/tmp/usr/games
 	# ... but we want to place them in the right location so that the .install files work
 	# mv debian/tmp/usr/widelands debian/tmp/usr/games
 	# TODO(GunChleoc): wl_render_richtext is currently unmaintained
-	for b in wl_map_info wl_map_object_info widelands ; do \
+	# Move the main binary to the right location (no idea why it's misplaced)
+	for b in wl_map_info wl_map_object_info widelands wl_create_spritesheet ; do \
 	  mv debian/tmp/usr/$${b} debian/tmp/usr/games ;\
 	done
+	# Take care of the logo
+	for size in 16 32 48 64 128 ; do \
+	  mkdir -p debian/tmp/usr/share/icons/hicolor/$${size}x$${size}/apps ; \
+	  mv ./debian/tmp/usr/share/games/widelands/data/images/logos/wl-ico-$${size}.png \
+	     debian/tmp/usr/share/icons/hicolor/$${size}x$${size}/apps/widelands.png; \
+	done
+	# Dir is already there in the PPA mkdir debian/tmp/usr/games
+	# appdata
+	mkdir -p debian/tmp/usr/share/metainfo/
+	mv debian/org.widelands.Widelands.appdata.xml debian/tmp/usr/share/metainfo/
 
-override_dh_install:
-	dh_install --fail-missing
+override_dh_missing:
+	dh_missing --fail-missing
 
 # Just build the current trunk, don't replace with any potentially newer versions.
 # get-orig-source:

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-02-21 18:05+0000\n"
+"POT-Creation-Date: 2020-03-03 09:07+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2020\n"
 "Language-Team: Danish (https://www.transifex.com/widelands/teams/35159/da/)\n"
@@ -37,11 +37,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:35
 msgid "Expand to the south"
-msgstr ""
+msgstr "Udvid mod syd"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:37
 msgid "Expand Your Territory to Explore the South"
-msgstr ""
+msgstr "Udvid dit territorium for at udforske Syden"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:38
 msgid ""
@@ -51,11 +51,11 @@ msgstr "Nord ser nyttig ud for os, men hvem ved hvad vi finder mod syd?"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:43
 msgid "Train and recycle"
-msgstr ""
+msgstr "Træn og genbrug"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:45
 msgid "Recycle Weapons to Regain Metal"
-msgstr ""
+msgstr "Genbrug våben for metal"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:46
 msgid ""
@@ -208,7 +208,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:101
 msgid "Defeat the Barbarians!"
-msgstr ""
+msgstr "Besejr barbarerne!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:103
 msgid "Defeat the Barbarians"
@@ -220,7 +220,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:109
 msgid "Defeat Murilius!"
-msgstr ""
+msgstr "Besejr Murilius!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:111
 msgid "Defeat the Arrogant Outpost of the Empire"
@@ -271,7 +271,7 @@ msgstr "Velkommen tilbage!"
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:147
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:156
 msgid "A new home"
-msgstr ""
+msgstr "Et nyt hjem"
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:140
@@ -328,7 +328,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:169
 msgid "Go South"
-msgstr ""
+msgstr "Gå mod syd"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:170
 msgid "Expand and conquer"
@@ -357,7 +357,7 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:198
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:208
 msgid "Metal Shortage"
-msgstr ""
+msgstr "Mangel på metal"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:181
 msgid "We are out of metals"
@@ -381,7 +381,7 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:190
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:209
 msgid "Getting new metal"
-msgstr ""
+msgstr "Nyt metal"
 
 #. TRANSLATORS: Reebaud – Train and recycle 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:192
@@ -505,7 +505,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:244
 msgid "Our economy is complete"
-msgstr ""
+msgstr "Vores økonomi er fuldstændig"
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:246
@@ -560,7 +560,7 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:300
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:316
 msgid "Strangers"
-msgstr ""
+msgstr "Fremmede"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:263
@@ -736,11 +736,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:371
 msgid "Two Enemies"
-msgstr ""
+msgstr "To fjender"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:372
 msgid "Defeat the enemies!"
-msgstr ""
+msgstr "Besejr fjenderne!"
 
 #. TRANSLATORS: Reebaud – defeat both enemies
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:374
@@ -759,7 +759,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:381
 msgid "The Empire is Grateful"
-msgstr ""
+msgstr "Imperiet er taknemmelig"
 
 #. TRANSLATORS: "Greetings, friends of the Empire!". DO NOT TRANSLATE. Reebaud
 #. doesn’t understand Latin. You can transliterate into non-Latin scripts
@@ -788,7 +788,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:392
 msgid "The Reward For Your Service"
-msgstr ""
+msgstr "Belønningen for din tjeneste"
 
 #. TRANSLATORS: "Friends of the Empire". DO NOT TRANSLATE. Reebaud doesn’t
 #. understand Latin. You can transliterate into non-Latin scripts though
@@ -802,6 +802,8 @@ msgid ""
 "You have done well, strangers! As I did tell you earlier, you will be "
 "rewarded with the friendship of the Empire!"
 msgstr ""
+"Du har gjort det godt, fremmede! Som jeg sagde tidligere, så vil du blive "
+"belønnet med Imperiets venskab!"
 
 #. TRANSLATORS: Murilius – defeat Murilius 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:399
@@ -857,7 +859,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:416
 msgid "Congratulations"
-msgstr ""
+msgstr "Tillykke"
 
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
