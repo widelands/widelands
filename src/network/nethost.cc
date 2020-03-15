@@ -159,7 +159,7 @@ void NetHost::start_accepting(boost::asio::ip::tcp::acceptor& acceptor) {
 		                    }
 		                    // Wait for the next client
 		                    start_accepting(acceptor);
-	                    });
+		                 });
 }
 #else
 // This method is run within a thread
@@ -189,7 +189,7 @@ void NetHost::start_accepting(
 		   }
 		   // Wait for the next client
 		   start_accepting(acceptor, pair);
-	   });
+		});
 }
 #endif  // Boost version check
 

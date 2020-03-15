@@ -52,8 +52,8 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 	// Draw the construction site marker
 	std::vector<std::pair<uint32_t, uint32_t>> animations;
 	uint32_t total_frames = 0;
-	auto push_animation = [](const BuildingDescr* d,
-	                         std::vector<std::pair<uint32_t, uint32_t>>* anims, uint32_t* tf) {
+	auto push_animation = [](
+	   const BuildingDescr* d, std::vector<std::pair<uint32_t, uint32_t>>* anims, uint32_t* tf) {
 		const bool known = d->is_animation_known("build");
 		const uint32_t anim_idx =
 		   known ? d->get_animation("build", nullptr) : d->get_unoccupied_animation();
@@ -381,9 +381,8 @@ void ConstructionSite::enhance(Game&) {
 		work_steps_ += pair.second;
 	}
 
-	auto new_desired_capacity = [](uint32_t old_max, uint32_t old_des, uint32_t new_max) {
-		return old_des * new_max / old_max;
-	};
+	auto new_desired_capacity = [](
+	   uint32_t old_max, uint32_t old_des, uint32_t new_max) { return old_des * new_max / old_max; };
 
 	std::unique_ptr<BuildingSettings> old_settings(settings_.release());
 	switch (building_->type()) {
