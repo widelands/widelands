@@ -3,7 +3,7 @@
 -- ================
 
 function intro()
-   reveal_concentric(plr, wl.Game().map:get_field(32, 59), 15)
+   reveal_concentric(plr, sf, 15)
    sleep(1000)
    message_box_objective(plr, introduction)
 
@@ -35,8 +35,7 @@ function scouting()
 end
 
 function exploring()
-   local village = map:get_field(33, 57) -- center of village
-   local pois = village:region(30, 29)
+   local pois = sf:region(30, 29)
    local o = message_box_objective(plr, scouting2)
    while not any_field_seen(plr, pois) do sleep(2000) end
    set_objective_done(o)

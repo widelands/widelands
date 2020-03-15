@@ -14,6 +14,8 @@ include "scripting/table.lua"
 include "scripting/ui.lua"
 include "scripting/field_animations.lua"
 
+sf = map.player_slots[1].starting_field
+
 include "map:scripting/starting_conditions.lua"
 
 include "map:scripting/texts.lua"
