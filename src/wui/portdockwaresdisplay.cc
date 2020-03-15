@@ -22,6 +22,7 @@
 #include "economy/expedition_bootstrap.h"
 #include "economy/portdock.h"
 #include "logic/player.h"
+#include "ui_basic/icon.h"
 #include "wui/inputqueuedisplay.h"
 
 using Widelands::InputQueue;
@@ -47,7 +48,7 @@ private:
 
 PortDockWaresDisplay::PortDockWaresDisplay(Panel* parent,
                                            uint32_t width,
-                                           const Widelands::PortDock& pd,
+                                           const PortDock& pd,
                                            Widelands::WareWorker type)
    : AbstractWaresDisplay(parent, 0, 0, pd.owner().tribe(), type, false), portdock_(pd) {
 	set_inner_size(width, 0);
@@ -70,14 +71,148 @@ AbstractWaresDisplay* create_portdock_wares_display(UI::Panel* parent,
 	return new PortDockWaresDisplay(parent, width, pd, type);
 }
 
+static char const* kPicWarePresent = "images/wui/buildings/high_priority_button.png";
+static char const* kPicWareComing = "images/wui/buildings/normal_priority_button.png";
+static char const* kPicWareMissing = "images/wui/buildings/low_priority_button.png";
+static char const* kNoWare = "images/wui/editor/no_ware.png";
+static const auto kEmptySlot = std::make_pair(Widelands::wwWARE, Widelands::INVALID_INDEX);
+
+struct PortDockAdditionalItemsDisplay : UI::Box {
+public:
+	PortDockAdditionalItemsDisplay(
+	   Widelands::Game& g, Panel* parent, bool can_act, PortDock& pd, const uint32_t capacity)
+	   : UI::Box(parent, 0, 0, UI::Box::Horizontal), game_(g), portdock_(pd), capacity_(capacity) {
+		assert(capacity_ > 0);
+		assert(portdock_.expedition_bootstrap());
+		assert(portdock_.expedition_bootstrap()->count_additional_queues() <= capacity_);
+		for (uint32_t c = 0; c < capacity_; ++c) {
+			UI::Box* box = new UI::Box(this, 0, 0, UI::Box::Vertical);
+
+			UI::Dropdown<std::pair<Widelands::WareWorker, Widelands::DescriptionIndex>>& d =
+			   *new UI::Dropdown<std::pair<Widelands::WareWorker, Widelands::DescriptionIndex>>(
+			      box, (boost::format("additional_%u") % c).str(), 0, 0, kWareMenuPicWidth, 8,
+			      kWareMenuPicHeight, _("Additional item"), UI::DropdownType::kPictorial,
+			      UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
+			d.add(_("(Empty)"), kEmptySlot, g_gr->images().get(kNoWare), true, _("(Empty)"));
+			for (Widelands::DescriptionIndex i : pd.owner().tribe().wares()) {
+				const Widelands::WareDescr& w = *pd.owner().tribe().get_ware_descr(i);
+				d.add(
+				   w.descname(), std::make_pair(Widelands::wwWARE, i), w.icon(), false, w.descname());
+			}
+			for (Widelands::DescriptionIndex i : pd.owner().tribe().workers()) {
+				const Widelands::WorkerDescr& w = *pd.owner().tribe().get_worker_descr(i);
+				d.add(
+				   w.descname(), std::make_pair(Widelands::wwWORKER, i), w.icon(), false, w.descname());
+			}
+			d.set_enabled(can_act);
+			d.selected.connect(boost::bind(&PortDockAdditionalItemsDisplay::select, this, c));
+
+			UI::Icon* icon = new UI::Icon(box, g_gr->images().get(kNoWare));
+			icon->set_handle_mouse(true);
+			boxes_.push_back(box);
+			icons_.push_back(icon);
+			dropdowns_.push_back(&d);
+			box->add(&d);
+			box->add(icon);
+			add(box);
+		}
+		update_selection();
+	}
+
+	void think() override {
+		UI::Box::think();
+		if (!portdock_.expedition_bootstrap()) {
+			return die();
+		}
+		update_selection();
+
+		for (uint32_t c = 0; c < capacity_; ++c) {
+			const InputQueue* iq = portdock_.expedition_bootstrap()->inputqueue(c);
+			assert(!iq || (iq->get_max_size() == 1 && iq->get_max_fill() == 1));
+			icons_[c]->set_icon(g_gr->images().get(
+			   iq ?
+			      iq->get_filled() ? kPicWarePresent : iq->get_missing() ? kPicWareMissing :
+			                                                               kPicWareComing :
+			      kNoWare));
+			icons_[c]->set_tooltip(
+			   iq ?
+			      iq->get_filled() ?
+			      /** TRANSLATORS: Tooltip for a ware that is present in the building */
+			         _("Present") :
+			         iq->get_missing() ?
+			         /** TRANSLATORS: Tooltip for a ware that is neither present in the
+			            building nor being transported there */
+			            _("Missing") :
+			            /** TRANSLATORS: Tooltip for a ware that is not present in the
+			               building, but already being transported there */
+			            _("Coming") :
+			      "");
+		}
+	}
+
+	void update_selection() {
+		for (uint32_t c = 0; c < capacity_; ++c) {
+			if (dropdowns_[c]->is_expanded()) {
+				continue;
+			}
+			const InputQueue* iq = portdock_.expedition_bootstrap()->inputqueue(c);
+			if (!iq) {
+				dropdowns_[c]->select(kEmptySlot);
+			} else {
+				dropdowns_[c]->select(std::make_pair(iq->get_type(), iq->get_index()));
+			}
+			assert(dropdowns_[c]->has_selection());
+		}
+	}
+
+	void select(uint32_t index) {
+		assert(index < dropdowns_.size());
+		const auto& new_sel = dropdowns_[index]->get_selected();
+		const InputQueue* iq = portdock_.expedition_bootstrap()->inputqueue(index);
+		if (new_sel.second == Widelands::INVALID_INDEX && !iq) {
+			return;
+		}
+		if (iq && iq->get_type() == new_sel.first && iq->get_index() == new_sel.second) {
+			return;
+		}
+		if (iq) {
+			game_.send_player_expedition_config(portdock_, iq->get_type(), iq->get_index(), false);
+		}
+		if (new_sel.second != Widelands::INVALID_INDEX) {
+			game_.send_player_expedition_config(portdock_, new_sel.first, new_sel.second, true);
+		}
+	}
+
+private:
+	Widelands::Game& game_;
+	PortDock& portdock_;
+	uint32_t capacity_;
+	std::vector<UI::Box*> boxes_;
+	std::vector<UI::Icon*> icons_;
+	std::vector<UI::Dropdown<std::pair<Widelands::WareWorker, Widelands::DescriptionIndex>>*>
+	   dropdowns_;
+};
+
 /// Create a panel that displays the wares and the builder waiting for the expedition to start.
 UI::Box*
 create_portdock_expedition_display(UI::Panel* parent, Warehouse& wh, InteractiveGameBase& igb) {
 	UI::Box& box = *new UI::Box(parent, 0, 0, UI::Box::Vertical);
 
 	// Add the input queues.
-	for (const InputQueue* wq : wh.get_portdock()->expedition_bootstrap()->queues()) {
-		box.add(new InputQueueDisplay(&box, 0, 0, igb, wh, *wq, true));
+	int32_t capacity =
+	   igb.egbase().tribes().get_ship_descr(wh.get_owner()->tribe().ship())->get_default_capacity();
+	for (const InputQueue* wq : wh.get_portdock()->expedition_bootstrap()->queues(false)) {
+		InputQueueDisplay* iqd = new InputQueueDisplay(&box, 0, 0, igb, wh, *wq, true);
+		box.add(iqd);
+		capacity -= wq->get_max_size();
+	}
+	assert(capacity >= 0);
+
+	if (capacity > 0) {
+		const bool can_act = igb.can_act(wh.get_owner()->player_number());
+		box.add(new PortDockAdditionalItemsDisplay(
+		           igb.game(), &box, can_act, *wh.get_portdock(), capacity),
+		        UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	}
 
 	return &box;
