@@ -143,6 +143,10 @@ public:
 	/// entries.
 	void set_autoexpand_display_button();
 
+	void notify_list_deleted() {
+		list_ = nullptr;
+	}
+
 protected:
 	/// Add an element to the list
 	/// \param name         the display name of the entry
