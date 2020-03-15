@@ -21,7 +21,7 @@ tribes:new_carrier_type {
       }
    },
 
-   ware_hotspot = {0, 31},
+   ware_hotspot = {0, 29},
    spritesheets = {
       idle = {
          directory = dirname,
