@@ -69,10 +69,15 @@ public:
 	void set_economy(Economy* economy, WareWorker);
 
 	// Returns the wares and workers currently waiting for the expedition.
-	std::vector<InputQueue*> queues() const;
+	std::vector<InputQueue*> queues(bool all) const;
 
 	// Returns the matching input queue for the given index and type.
-	InputQueue& inputqueue(DescriptionIndex index, WareWorker type) const;
+	InputQueue& inputqueue(DescriptionIndex index, WareWorker type, bool) const;
+	InputQueue* inputqueue(size_t additional_index) const;
+	InputQueue& first_empty_inputqueue(DescriptionIndex index, WareWorker type) const;
+
+	void demand_additional_item(Game&, WareWorker, DescriptionIndex, bool);
+	size_t count_additional_queues() const;
 
 	// Delete all wares we currently handle.
 	void cleanup(EditorGameBase& egbase);
@@ -108,7 +113,8 @@ private:
 	Economy* ware_economy_;
 	Economy* worker_economy_;
 
-	std::vector<std::unique_ptr<InputQueue>> queues_;
+	std::vector<std::pair<std::unique_ptr<InputQueue>, bool>>
+	   queues_;  // The bool indicates whether this queue can be removed
 
 	DISALLOW_COPY_AND_ASSIGN(ExpeditionBootstrap);
 };
