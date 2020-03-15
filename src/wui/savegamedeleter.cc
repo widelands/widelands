@@ -90,9 +90,9 @@ std::string SavegameDeleter::create_header_for_deletion_failed_window(size_t no_
 	if (no_to_be_deleted == 1) {
 		return _("The game could not be deleted.");
 	} else {
-		return (boost::format(ngettext(
-		           /** TRANSLATORS: Used with multiple games, 1 game has a separate
+		/** TRANSLATORS: Used with multiple games, 1 game has a separate
 		                        string. DO NOT omit the placeholder in your translation. */
+		return (boost::format(ngettext(
 		           "%d game could not be deleted.", "%d games could not be deleted.", no_failed)) %
 		        no_failed)
 		   .str();
@@ -107,11 +107,10 @@ ReplayDeleter::create_header_for_confirmation_window(const size_t no_selections)
 	std::string header =
 	   no_selections == 1 ?
 	      _("Do you really want to delete this replay?") :
-	      (boost::format(ngettext(
-	          /** TRANSLATORS: Used with multiple replays, 1 replay has a
-	                   separate string. DO NOT omit the placeholder in your translation. */
-	          "Do you really want to delete this %d replay?",
-	          "Do you really want to delete these %d replays?", no_selections)) %
+	      /** TRANSLATORS: Used with multiple replays, 1 replay has a
+	                         separate string. DO NOT omit the placeholder in your translation. */
+	      (boost::format(ngettext("Do you really want to delete this %d replay?",
+	                              "Do you really want to delete these %d replays?", no_selections)) %
 	       no_selections)
 	         .str();
 
