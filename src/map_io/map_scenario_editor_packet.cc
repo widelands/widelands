@@ -177,7 +177,8 @@ void MapScenarioEditorPacket::read(FileSystem& fs, EditorGameBase& egbase, bool,
 									const bool is_additional = fr.unsigned_8();
 									wh.get_portdock()
 									   ->expedition_bootstrap()
-									   ->inputqueue(di, is_worker ? Widelands::wwWORKER : Widelands::wwWARE, is_additional)
+									   ->inputqueue(di, is_worker ? Widelands::wwWORKER : Widelands::wwWARE,
+									                is_additional)
 									   .set_filled(fr.unsigned_32());
 								}
 							}

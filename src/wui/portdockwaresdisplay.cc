@@ -81,9 +81,15 @@ static const auto kEmptySlot = std::make_pair(Widelands::wwWARE, Widelands::INVA
 
 struct PortDockAdditionalItemsDisplay : UI::Box {
 public:
-	PortDockAdditionalItemsDisplay(
-	   Widelands::EditorGameBase& egb, Panel* parent, bool can_act, PortDock& pd, const uint32_t capacity)
-	   : UI::Box(parent, 0, 0, UI::Box::Horizontal), egbase_(egb), portdock_(pd), capacity_(capacity) {
+	PortDockAdditionalItemsDisplay(Widelands::EditorGameBase& egb,
+	                               Panel* parent,
+	                               bool can_act,
+	                               PortDock& pd,
+	                               const uint32_t capacity)
+	   : UI::Box(parent, 0, 0, UI::Box::Horizontal),
+	     egbase_(egb),
+	     portdock_(pd),
+	     capacity_(capacity) {
 		assert(capacity_ > 0);
 		assert(portdock_.expedition_bootstrap());
 		assert(portdock_.expedition_bootstrap()->count_additional_queues() <= capacity_);
@@ -181,13 +187,15 @@ public:
 			if (upcast(Widelands::Game, game, &egbase_))
 				game->send_player_expedition_config(portdock_, iq->get_type(), iq->get_index(), false);
 			else
-				portdock_.expedition_bootstrap()->demand_additional_item(egbase_, iq->get_type(), iq->get_index(), false);
+				portdock_.expedition_bootstrap()->demand_additional_item(
+				   egbase_, iq->get_type(), iq->get_index(), false);
 		}
 		if (new_sel.second != Widelands::INVALID_INDEX) {
 			if (upcast(Widelands::Game, game, &egbase_))
 				game->send_player_expedition_config(portdock_, new_sel.first, new_sel.second, true);
 			else
-				portdock_.expedition_bootstrap()->demand_additional_item(egbase_, new_sel.first, new_sel.second, true);
+				portdock_.expedition_bootstrap()->demand_additional_item(
+				   egbase_, new_sel.first, new_sel.second, true);
 		}
 	}
 
