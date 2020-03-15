@@ -150,13 +150,30 @@ scouting2 = {
    title = _"Scout is ready",
    body = (
       h1(_"Ready to go!") ..
-      p(_[[Well done, scout's hut has been built. Meanwhile our scout will move in, let's learn more about him a little.]]) ..
+      p(_[[Well done, scout's hut has been built. Meanwhile our scout will move in, let's learn something about him.]]) ..
       p(_[[First of all, he needs to take some food for his scouting trips. By chance, we have some rations in our warehouse.]]) ..
       li_object("barbarians_scout", _[[When provided with food, he randomly walks around the area. You should follow his movement before fog of war hides what he saw.]], plr.color)
    ),
-   h = 200
+   h = 300,
+   obj_name = "explore_map",
+   obj_title = _"Explore the map",
+   obj_body = (
+      p(_[[Wait for scout to explore unseen areas.]]) ..
+      li(_[[Observe scout.]])
+   )
 }
 
+scouting3 = {
+   position = "topright",
+   title = _"Scout made progress",
+   body = (
+      h1(_"New horizons?") ..
+      p(_[[As you can see, scout can go quite far. Good news is that there are no enemies around.]]) ..
+      p(_[[You can use minimap to see progress of exploration.]]) ..
+      p(_[[Don't forget that scouting is hard work and as such can not be done without provision of food.]])
+   ),
+   h = 250
+}
 heroes_rookies = {
    position = "topright",
    title = _"Heroes and Rookies",
