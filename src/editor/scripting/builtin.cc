@@ -995,6 +995,15 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
                        VariableType(VariableTypeID::Ship), // call on
                        VariableType(VariableTypeID::Boolean), // returns
                        {})),
+   new BuiltinFunctionInfo(
+      "ship_make_expedition",
+      []() { return _("Turns this ship into an expedition ship without a base port. Creates all necessary "
+		  "wares and a builder plus the specified additional items. "
+		  "The ship must be empty when this method is called."); },
+      new FunctionBase("make_expedition",
+                       VariableType(VariableTypeID::Ship), // call on
+                       VariableType(VariableTypeID::Nil), // returns
+                       {std::make_pair("items", VariableType(VariableType(VariableTypeID::String), VariableType(VariableTypeID::Integer)))})),
 
 nullptr};
 
@@ -2009,6 +2018,12 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 		new Property("destination", Property::Access::RO,
 			VariableType(VariableTypeID::Ship), // class
 			VariableType(VariableTypeID::PortDock) // type
+		)),
+	new BuiltinPropertyInfo("ship_capacity", []() { return
+	_("The ship's capacity"); },
+		new Property("capacity", Property::Access::RW,
+			VariableType(VariableTypeID::Ship), // class
+			VariableType(VariableTypeID::Integer) // type
 		)),
 	new BuiltinPropertyInfo("ship_last_portdock", []() { return
 	_("nil if no port was ever visited or the last portdock was destroyed; "
