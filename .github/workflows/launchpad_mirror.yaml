@@ -62,8 +62,7 @@ jobs:
         commit_message=${commit_message#*: \"}
         commit_message=${commit_message%\",}
         commit_message="$commit_message\n\n(by $GITHUB_ACTOR)\n$GITHUB_SHA"
-        commit_message=${commit_message//\r\n/\n}
-        commit_message=${commit_message//\r/\n}
+        commit_message=${commit_message//"\r\n"/"\n"}
         printf "$commit_message" > ~/temp_commit_message
         bzr remove
         bzr add
