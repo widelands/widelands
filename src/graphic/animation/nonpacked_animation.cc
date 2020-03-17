@@ -142,7 +142,9 @@ NonPackedAnimation IMPLEMENTATION
 ==============================================================================
 */
 
-NonPackedAnimation::NonPackedAnimation(const LuaTable& table, const std::string& basename, const std::string& animation_directory)
+NonPackedAnimation::NonPackedAnimation(const LuaTable& table,
+                                       const std::string& basename,
+                                       const std::string& animation_directory)
    : Animation(table) {
 	try {
 		// Get image files
@@ -157,8 +159,11 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table, const std::string&
 				    table.get_table("pictures")->array_entries<std::string>().front().c_str());
 			}
 		} else {
-            // TODO(GunChleoc): When all animations have been converted, require that animation_directory is not empty.
-			add_available_scales(basename, animation_directory.empty() ? table.get_string("directory") : animation_directory);
+			// TODO(GunChleoc): When all animations have been converted, require that
+			// animation_directory is not empty.
+			add_available_scales(basename, animation_directory.empty() ?
+			                                  table.get_string("directory") :
+			                                  animation_directory);
 		}
 
 		// Frames

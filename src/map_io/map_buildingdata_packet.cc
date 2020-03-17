@@ -88,16 +88,17 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 				try {
 					Building& building = mol.get<Building>(serial);
 
-                    // Animation. If the animation is no longer known, pick the main animation instead.
+					// Animation. If the animation is no longer known, pick the main animation instead.
 					if (fr.unsigned_8()) {
-                        char const* const animname = fr.c_string();
-                        if (building.descr().is_animation_known(animname)) {
-                            building.anim_ = building.descr().get_animation(animname, &building);
-                        } else {
-                            log("Unknown animation '%s' for building '%s', using main animation instead.\n",
-                                animname, building.descr().name().c_str());
-                            building.anim_ = building.descr().main_animation();
-                        }
+						char const* const animname = fr.c_string();
+						if (building.descr().is_animation_known(animname)) {
+							building.anim_ = building.descr().get_animation(animname, &building);
+						} else {
+							log(
+							   "Unknown animation '%s' for building '%s', using main animation instead.\n",
+							   animname, building.descr().name().c_str());
+							building.anim_ = building.descr().main_animation();
+						}
 					} else {
 						building.anim_ = building.descr().main_animation();
 					}
