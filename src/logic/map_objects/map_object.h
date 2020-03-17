@@ -149,7 +149,7 @@ protected:
 	void assign_directional_animation(DirAnimations* anims, const std::string& basename);
 
 private:
-	void add_animations(const LuaTable& table, Animation::Type anim_type);
+	void add_animations(const LuaTable& table, const std::string& animation_directory, Animation::Type anim_type);
 
 	/// Throws an exception if the MapObjectDescr has no representative image
 	void check_representative_image();

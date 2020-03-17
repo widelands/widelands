@@ -6,13 +6,13 @@ tribes:new_ferry_type {
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext ("barbarians_worker", "Ferry"),
    helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
    -- TODO(Nordfriese): Make animations
    spritesheets = {
       idle = {
-         directory = dirname,
          hotspot = {29, 19},
          fps = 10,
          columns = 5,
@@ -21,7 +21,6 @@ tribes:new_ferry_type {
       },
       walk = {
          basename = "sail",
-         directory = dirname,
          directional = true,
          hotspot = {29, 19},
          fps = 10,
@@ -31,7 +30,6 @@ tribes:new_ferry_type {
       },
       walkload = {
          basename = "sail",
-         directory = dirname,
          directional = true,
          hotspot = {29, 19},
          fps = 10,

@@ -6,6 +6,7 @@ tribes:new_worker_type {
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Blacksmith"),
    helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -19,13 +20,11 @@ tribes:new_worker_type {
 
    animations = {
       idle = {
-         directory = dirname,
          hotspot = { 6, 28 },
       }
    },
    spritesheets = {
       walk = {
-         directory = dirname,
          fps = 15,
          frames = 10,
          rows = 4,

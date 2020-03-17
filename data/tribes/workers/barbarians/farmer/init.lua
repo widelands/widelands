@@ -6,6 +6,7 @@ tribes:new_worker_type {
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Farmer"),
    helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -37,13 +38,11 @@ tribes:new_worker_type {
 
    animations = {
       idle = {
-         directory = dirname,
          hotspot = { 8, 17 },
       },
    },
    spritesheets = {
       walk = {
-         directory = dirname,
          fps = 10,
          frames = 10,
          rows = 4,
@@ -52,7 +51,6 @@ tribes:new_worker_type {
          hotspot = { 14, 18 }
       },
       walkload = {
-         directory = dirname,
          fps = 10,
          frames = 10,
          rows = 4,
@@ -61,7 +59,6 @@ tribes:new_worker_type {
          hotspot = { 12, 19 }
       },
       plant = {
-         directory = dirname,
          fps = 10,
          frames = 20,
          rows = 5,
@@ -69,7 +66,6 @@ tribes:new_worker_type {
          hotspot = { 14, 19 }
       },
       harvest = {
-         directory = dirname,
          fps = 10,
          frames = 10,
          rows = 4,
@@ -77,7 +73,6 @@ tribes:new_worker_type {
          hotspot = { 17, 21 }
       },
       gather = {
-         directory = dirname,
          fps = 5,
          frames = 20,
          rows = 5,

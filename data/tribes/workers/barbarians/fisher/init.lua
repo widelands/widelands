@@ -6,6 +6,7 @@ tribes:new_worker_type {
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Fisher"),
    helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -29,13 +30,11 @@ tribes:new_worker_type {
 
    animations = {
       idle = {
-         directory = dirname,
          hotspot = { 7, 33 },
       },
    },
    spritesheets = {
       walk = {
-         directory = dirname,
          fps = 10,
          frames = 10,
          rows = 4,
@@ -45,7 +44,6 @@ tribes:new_worker_type {
       },
       -- TODO(GunChleoc): Needs walkload animation, or some ware hotspot/sizing magic.
       fish = {
-         directory = dirname,
          fps = 10,
          frames = 30,
          rows = 6,
