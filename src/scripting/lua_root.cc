@@ -35,6 +35,7 @@
 #include "scripting/lua_game.h"
 #include "scripting/lua_map.h"
 #include "scripting/lua_table.h"
+#include "wui/interactive_player.h"
 
 using namespace Widelands;
 
@@ -82,7 +83,8 @@ const MethodType<LuaGame> LuaGame::Methods[] = {
 };
 const PropertyType<LuaGame> LuaGame::Properties[] = {
    PROP_RO(LuaGame, real_speed),   PROP_RO(LuaGame, time), PROP_RW(LuaGame, desired_speed),
-   PROP_RW(LuaGame, allow_saving), PROP_RO(LuaGame, type), {nullptr, nullptr, nullptr},
+   PROP_RW(LuaGame, allow_saving), PROP_RO(LuaGame, type), PROP_RO(LuaGame, interactive_player),
+   {nullptr, nullptr, nullptr},
 };
 
 LuaGame::LuaGame(lua_State* /* L */) {
@@ -155,6 +157,17 @@ int LuaGame::set_allow_saving(lua_State* L) {
 // UNTESTED
 int LuaGame::get_allow_saving(lua_State* L) {
 	lua_pushboolean(L, get_game(L).save_handler().get_allow_saving());
+	return 1;
+}
+
+/* RST
+   .. attribute:: interactive_player
+
+      (RO) The player number of the interactive player, or 0 for spectator
+*/
+int LuaGame::get_interactive_player(lua_State* L) {
+	upcast(const InteractivePlayer, p, get_game(L).get_ibase());
+	lua_pushuint32(L, p ? p->player_number() : 0);
 	return 1;
 }
 

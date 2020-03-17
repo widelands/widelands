@@ -33,6 +33,7 @@
 #include "logic/game_settings.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
+#include "map_io/map_loader.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/mouse_constants.h"
@@ -529,10 +530,28 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			init_dropdown_.set_label("");
 			i18n::Textdomain td("tribes");  // for translated initialisation
 			const Widelands::TribeBasicInfo tribeinfo = Widelands::get_tribeinfo(player_setting.tribe);
+			std::set<std::string> tags;
+			if (!settings.mapfilename.empty()) {
+				Widelands::Map map;
+				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(settings.mapfilename);
+				if (ml) {
+					ml->preload_map(true);
+					tags = map.get_tags();
+				}
+			}
 			for (size_t i = 0; i < tribeinfo.initializations.size(); ++i) {
 				const Widelands::TribeBasicInfo::Initialization& addme = tribeinfo.initializations[i];
-				init_dropdown_.add(_(addme.descname), i, nullptr,
-				                   i == player_setting.initialization_index, _(addme.tooltip));
+				bool matches_tags = true;
+				for (const std::string& tag : addme.required_map_tags) {
+					if (!tags.count(tag)) {
+						matches_tags = false;
+						break;
+					}
+				}
+				if (matches_tags) {
+					init_dropdown_.add(_(addme.descname), i, nullptr,
+					                   i == player_setting.initialization_index, _(addme.tooltip));
+				}
 			}
 		}
 

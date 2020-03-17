@@ -45,6 +45,14 @@ return {
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
                dl(help_format_hotkey(pgettext("hotkey", "Page Down")), _"Decrease game speed") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + Page Up")), _"Increase game speed by 10x") ..
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + Page Down")), _"Decrease game speed by 10x") ..
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", "Shift + Page Up")), _"Increase game speed by 0.25x") ..
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", "Shift + Page Down")), _"Decrease game speed by 0.25x") ..
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
                dl(help_format_hotkey(pgettext("hotkey", "Pause")), _"Pause the game") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'c'
                dl(help_format_hotkey("C"), _"Toggle census") ..
@@ -66,6 +74,12 @@ return {
                dl(help_format_hotkey("B"), _"Toggle building statistics") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'e'
                dl(help_format_hotkey("E"), _"Toggle seafaring statistics") ..
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", "Arrow keys")), _"Move the map") ..
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + Arrow keys")), _"Move the map fast") ..
+               -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+               dl(help_format_hotkey(pgettext("hotkey", "Shift + Arrow keys")), _"Move the map slowly") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
                dl(help_format_hotkey(pgettext("hotkey", "Home")), _"Center main mapview on starting location") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
