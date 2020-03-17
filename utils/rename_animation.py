@@ -12,14 +12,14 @@ import sys
 
 def main():
     """Finds all files with the given relative source path with file prefix and
-    bzr moves all files that match this prefix to the given destination path
+    git moves all files that match this prefix to the given destination path
     with file prefix."""
 
     print('Tool to rename all files for a widelands animation in bulk')
 
     if len(sys.argv) != 3:
-        print('Usage:   renameanimation.py <old_name> <new_name>')
-        print('Example: renameanimation.py <mybuilding/foo> <mybuilding/bar>')
+        print('Usage:   rename_animation.py <old_name> <new_name>')
+        print('Example: rename_animation.py <mybuilding/foo> <mybuilding/bar>')
         return 1
 
     source_prefix = sys.argv[1]
