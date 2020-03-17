@@ -123,12 +123,12 @@ namespace {
 	} catch (const FileError&) {                                                                    \
 		throw GameDataError("MapPlayersViewPacket::read: player %u:Could not open "                  \
 		                    "\"%s\" for reading. This file should exist when \"%s\" exists",         \
-		                    plnum, filename, unseen_times_filename);                                 \
+		                    static_cast<unsigned int>(plnum), filename, unseen_times_filename);      \
 	}
 
 // Try to find the file with newest fitting version number
-#define OPEN_INPUT_FILE_NEW_VERSION(filetype, file, filename, fileversion, filename_template,      \
-                                    version)                                                       \
+#define OPEN_INPUT_FILE_NEW_VERSION(                                                               \
+   filetype, file, filename, fileversion, filename_template, version)                              \
 	uint8_t fileversion = version;                                                                  \
 	filetype file;                                                                                  \
 	char(filename)[FILENAME_SIZE];                                                                  \
@@ -141,7 +141,8 @@ namespace {
 			if (fileversion == 0)                                                                     \
 				throw GameDataError("MapPlayersViewPacket::read: player %u:Could not open "            \
 				                    "\"%s\" for reading. This file should exist when \"%s\" exists",   \
-				                    plnum, filename, unseen_times_filename);                           \
+				                    static_cast<unsigned int>(plnum), filename,                        \
+				                    unseen_times_filename);                                            \
 		}                                                                                            \
 	}
 
@@ -163,8 +164,8 @@ namespace {
 	if (!(file).end_of_file())                                                                      \
 		throw GameDataError("MapPlayersViewPacket::read: player %u:"                                 \
 		                    "Found %" PRIuS " trailing bytes in \"%s\"",                             \
-		                    plnum, static_cast<size_t>((file).get_size() - (file).get_pos()),        \
-		                    filename);
+		                    static_cast<unsigned int>(plnum),                                        \
+		                    static_cast<size_t>((file).get_size() - (file).get_pos()), filename);
 
 // Errors for the Read* functions.
 struct TribeImmovableNonexistent : public FileRead::DataError {
@@ -309,7 +310,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 		char unseen_times_filename[FILENAME_SIZE];
 		snprintf(unseen_times_filename, sizeof(unseen_times_filename), UNSEEN_TIMES_FILENAME_TEMPLATE,
-		         plnum, kCurrentPacketVersionUnseenTimes);
+		         static_cast<unsigned int>(plnum), kCurrentPacketVersionUnseenTimes);
 		FileRead unseen_times_file;
 		struct NotFound {};
 
@@ -319,7 +320,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 			    "version without player point of view. Will give player %u "
 			    "knowledge of unseen nodes, edges and triangles (but not "
 			    "resources).",
-			    unseen_times_filename, plnum);
+			    unseen_times_filename, static_cast<unsigned int>(plnum));
 
 			for (FCoords first_in_row(Coords(0, 0), &first_field); first_in_row.y < mapheight;
 			     ++first_in_row.y, first_in_row.field += mapwidth) {
@@ -405,8 +406,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 		try {
 			char fname[FILENAME_SIZE];
-			snprintf(
-			   fname, sizeof(fname), VISION_FILENAME_TEMPLATE, plnum, kCurrentPacketVersionVision);
+			snprintf(fname, sizeof(fname), VISION_FILENAME_TEMPLATE, static_cast<unsigned int>(plnum),
+			         kCurrentPacketVersionVision);
 			vision_file.open(fs, fname);
 			have_vision = true;
 		} catch (...) {
@@ -434,7 +435,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 				} while (r.x);
 			}
 
-			log("Vision check successful for player %u\n", plnum);
+			log("Vision check successful for player %u\n", static_cast<unsigned int>(plnum));
 		}
 
 		// Read the player's knowledge about all fields
@@ -532,7 +533,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						throw GameDataError("MapPlayersViewPacket::read: player %u: in "
 						                    "\"%s\":%" PRIuS ": node (%i, %i): unexpected end of file "
 						                    "while reading time_node_last_unseen",
-						                    plnum, unseen_times_filename,
+						                    static_cast<unsigned int>(plnum), unseen_times_filename,
 						                    static_cast<size_t>(unseen_times_file.get_pos() - 4), f.x,
 						                    f.y);
 					}
@@ -543,7 +544,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						throw GameDataError("MapPlayersViewPacket::read: player %u: in "
 						                    "\"%s\":%" PRIuS ": node (%i, %i): unexpected end of file "
 						                    "while reading owner",
-						                    plnum, unseen_times_filename,
+						                    static_cast<unsigned int>(plnum), unseen_times_filename,
 						                    static_cast<size_t>(unseen_times_file.get_pos() - 1), f.x,
 						                    f.y);
 					}
@@ -552,7 +553,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						                    "\"%s\":%" PRIuS " & 0xf: node (%i, %i): Player thinks that "
 						                    "this node is owned by player %u, but there are only %u "
 						                    "players",
-						                    plnum, owners_filename,
+						                    static_cast<unsigned int>(plnum), owners_filename,
 						                    static_cast<size_t>(owners_file.get_pos() - 1), f.x, f.y,
 						                    owner, nr_players);
 					}
@@ -741,7 +742,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 							   "MapPlayersViewPacket::read: player %u: in "
 							   "\"%s\":%" PRIuS ": node (%i, %i) t = D: unexpected end of "
 							   "file while reading time_triangle_last_surveyed",
-							   plnum, survey_times_filename,
+							   static_cast<unsigned int>(plnum), survey_times_filename,
 							   static_cast<size_t>(survey_times_file.get_pos() - 4), f.x, f.y);
 						}
 					}
@@ -749,7 +750,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					throw GameDataError("MapPlayersViewPacket::read: player %u: in \"%s\": "
 					                    "node (%i, %i) t = D: unexpected end of file while reading "
 					                    "survey bit",
-					                    plnum, surveys_filename, f.x, f.y);
+					                    static_cast<unsigned int>(plnum), surveys_filename, f.x, f.y);
 				}
 				try {
 					bool survey = false;
@@ -784,7 +785,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					throw GameDataError("MapPlayersViewPacket::read: player %u: in \"%s\": "
 					                    "node (%i, %i) t = R: unexpected end of file while reading "
 					                    "survey bit",
-					                    plnum, surveys_filename, f.x, f.y);
+					                    static_cast<unsigned int>(plnum), surveys_filename, f.x, f.y);
 				}
 			} while (r.x);
 		}
@@ -800,7 +801,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 			// TODO(GunChleoc): Savegame compatibility - remove after Build 20
 			log("MapPlayersViewPacket - No hidden fields to read for Player %d - probably an old save "
 			    "file\n",
-			    plnum);
+			    static_cast<unsigned int>(plnum));
 		} else {
 			throw UnhandledVersionError("MapPlayersViewPacket - Hidden fields file",
 			                            hidden_file_version, kCurrentPacketVersionHidden);
