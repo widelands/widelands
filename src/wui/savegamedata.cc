@@ -58,8 +58,15 @@ bool SavegameData::is_singleplayer() const {
 }
 
 bool SavegameData::is_multiplayer() const {
-	return gametype == GameController::GameType::kNetHost ||
-	       gametype == GameController::GameType::kNetClient;
+	return is_multiplayer_host() || is_multiplayer_client();
+}
+
+bool SavegameData::is_multiplayer_host() const {
+	return gametype == GameController::GameType::kNetHost;
+}
+
+bool SavegameData::is_multiplayer_client() const {
+	return gametype == GameController::GameType::kNetClient;
 }
 
 bool SavegameData::compare_save_time(const SavegameData& other) const {

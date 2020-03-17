@@ -61,6 +61,10 @@ public:
 
 	bool is_multiplayer() const;
 
+	bool is_multiplayer_host() const;
+
+	bool is_multiplayer_client() const;
+
 	bool is_singleplayer() const;
 
 	bool is_replay() const;
