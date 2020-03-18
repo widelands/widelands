@@ -22,12 +22,7 @@ function build_port()
    wl.ui.MapView().buildhelp = true -- so that the player sees the port building icon
    local o = message_box_objective(plr, tell_about_port_building)
 
-   while not (second_port_field.immovable and
-      second_port_field.immovable.descr.type_name == "constructionsite" and
-      second_port_field.immovable.building == "atlanteans_port" and
-      #second_port_field.bobs > 0)
-   do sleep(1000) end
-
+   while not construction_started(second_port_field, "atlanteans_port") do sleep(1000) end
    run(build_ships)
 
    while #plr:get_buildings("atlanteans_port") < 2 do sleep(200) end
@@ -98,16 +93,27 @@ function conclude()
    waterways()
 end
 
+function complete_ferry_yard()
+   plr:allow_buildings{"atlanteans_ferry_yard"}
+   local o = message_box_objective(plr, ferry_2)
+   while #plr:get_buildings("atlanteans_ferry_yard") < 1 do sleep(200) end
+   set_objective_done(o)
+end
+
 function waterways()
-   map:place_immovable("atlanteans_resi_gold_2", map:get_field(23, 102), "tribes")
+   map:place_immovable("atlanteans_resi_gold_2", gold_mine, "tribes")
+
    message_box_objective(plr, ferry_1)
    sleep(1000)
-   message_box_objective(plr, ferry_2)
-   sleep(500)
+
+   run(complete_ferry_yard)
+   local area = shore:region(37)
+   while not construction_started_region(area, "atlanteans_ferry_yard") do sleep(1000) end
+   sleep(2000)
+
    message_box_objective(plr, ferry_3)
    sleep(500)
    message_box_objective(plr, ferry_4)
-   plr:allow_buildings{"atlanteans_ferry_yard"}
 
    -- Build waterway
    click_on_field(waterway_field)

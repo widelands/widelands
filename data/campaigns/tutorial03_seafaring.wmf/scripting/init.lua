@@ -21,6 +21,8 @@ port_on_island = map:get_field(102, 36)
 additional_port_space = map:get_field(85, 5)
 castle_field = map:get_field(36, 20)
 waterway_field = map:get_field(27, 95)
+gold_mine = map:get_field(23, 102)
+shore = map:get_field(34, 68)
 
 include "map:scripting/texts.lua"
 include "map:scripting/helper_functions.lua"
