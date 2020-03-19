@@ -693,6 +693,65 @@ void InteractiveBase::hide_workarea(const Widelands::Coords& coords, bool is_add
 void InteractiveBase::postload() {
 }
 
+void InteractiveBase::draw_road_building(FieldsToDraw::Field& field) {
+	const auto rinfo = road_building_preview_overlays().find(field.fcoords);
+	if (rinfo != road_building_preview_overlays().end()) {
+		for (uint8_t dir : rinfo->second) {
+			switch (dir) {
+			case Widelands::WALK_E:
+				field.road_e = in_road_building_mode(RoadBuildingType::kRoad) ?
+				                  Widelands::RoadSegment::kNormal :
+				                  Widelands::RoadSegment::kWaterway;
+				break;
+			case Widelands::WALK_SE:
+				field.road_se = in_road_building_mode(RoadBuildingType::kRoad) ?
+				                   Widelands::RoadSegment::kNormal :
+				                   Widelands::RoadSegment::kWaterway;
+				break;
+			case Widelands::WALK_SW:
+				field.road_sw = in_road_building_mode(RoadBuildingType::kRoad) ?
+				                   Widelands::RoadSegment::kNormal :
+				                   Widelands::RoadSegment::kWaterway;
+				break;
+			default:
+				throw wexception(
+				   "Attempt to set road-building overlay for invalid direction %i", dir);
+			}
+		}
+	}
+}
+
+// static
+void InteractiveBase::draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field& field,
+                                               const Widelands::Player::Field& player_field,
+                                               const float scale,
+                                               RenderTarget* dst) {
+	if (player_field.map_object_descr == nullptr) {
+		return;
+	}
+
+	if (player_field.constructionsite.becomes) {
+		assert(field.owner != nullptr);
+		player_field.constructionsite.draw(
+		   field.rendertarget_pixel, field.fcoords, scale, field.owner->get_playercolor(), dst);
+
+	} else if (upcast(const Widelands::BuildingDescr, building, player_field.map_object_descr)) {
+		assert(field.owner != nullptr);
+		// this is a building therefore we either draw unoccupied or idle animation
+		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
+		                    building->get_unoccupied_animation(), 0, &field.owner->get_playercolor());
+	} else if (player_field.map_object_descr->type() == Widelands::MapObjectType::FLAG) {
+		assert(field.owner != nullptr);
+		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
+		                    field.owner->tribe().flag_animation(), 0,
+		                    &field.owner->get_playercolor());
+	} else if (const uint32_t pic = player_field.map_object_descr->main_animation()) {
+		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale, pic, 0,
+		                    (field.owner == nullptr) ? nullptr : &field.owner->get_playercolor());
+	}
+}
+
+
 /*
 ===============
 Called once per frame by the UI code

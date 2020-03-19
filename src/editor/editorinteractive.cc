@@ -347,17 +347,18 @@ void EditorInteractive::add_tool_menu() {
 	              _("Add or remove port spaces"));
 
 	tool_windows_.players.open_window = [this] {
-		if (finalized_)
+		if (finalized_) {
 			new EditorPlayerTeamsMenu(*this, tools()->info, tool_windows_.players);
-		else
+		} else {
 			new EditorPlayerMenu(*this, tools()->set_starting_pos, tool_windows_.players);
+		}
 	};
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Players"), ToolMenuEntry::kPlayers,
 	              g_gr->images().get("images/wui/editor/tools/players.png"), false,
 	              finalized_ ?
 	                 /** TRANSLATORS: Tooltip for the players tool in the editor */
-	                 _("Assign players to teams, set hostility relations, and configure allowed "
+	                 _("Assign players to teams, set diplomatic relations, and configure allowed "
 	                   "building types") :
 	                 /** TRANSLATORS: Tooltip for the players tool in the editor */
 	                 _("Set number of players and their names, tribes and starting positions"),
@@ -464,7 +465,7 @@ void EditorInteractive::rebuild_scenario_tool_menu() {
 	   _("Vision"), ScenarioToolMenuEntry::kVision,
 	   g_gr->images().get("images/wui/editor/tools/sc_vis.png"), false,
 	   /** TRANSLATORS: Tooltip for the vision scenario tool in the editor */
-	   _("Reveal and hide fields to the players"));
+	   _("Reveal and hide fields for the players"));
 
 	scenario_tool_windows_.infrastructure.open_window = [this] {
 		new ScenarioToolInfrastructureOptionsMenu(
@@ -557,12 +558,27 @@ void EditorInteractive::add_showhide_menu() {
 void EditorInteractive::rebuild_showhide_menu() {
 	showhidemenu_.clear();
 
+	if (finalized_) {
+		showhidemenu_.add(
+		   get_display_flag(dfShowOwnership) ? _("Hide Ownership Layer") : _("Show Ownership Layer"),
+		   ShowHideEntry::kOwnership,
+		   g_gr->images().get("images/wui/menus/toggle_ownership_layer.png"), false, "", "E");
+	}
+
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether building spaces are
 	 * shown */
 	showhidemenu_.add(buildhelp() ? _("Hide Building Spaces") : _("Show Building Spaces"),
 	                  ShowHideEntry::kBuildingSpaces,
 	                  g_gr->images().get("images/wui/menus/toggle_buildhelp.png"), false, "",
 	                  pgettext("hotkey", "Space"));
+
+	if (finalized_) {
+		/** TRANSLATORS: An entry in the game's show/hide menu to toggle whether building names are
+		 * shown */
+		showhidemenu_.add(get_display_flag(dfShowCensus) ? _("Hide Census") : _("Show Census"),
+		                  ShowHideEntry::kCensus,
+		                  g_gr->images().get("images/wui/menus/toggle_census.png"), false, "", "C");
+	}
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether the map grid is shown
 	 */
@@ -584,17 +600,6 @@ void EditorInteractive::rebuild_showhide_menu() {
 	                  ShowHideEntry::kResources,
 	                  g_gr->images().get("images/wui/menus/toggle_resources.png"));
 
-	if (finalized_) {
-		/** TRANSLATORS: An entry in the game's show/hide menu to toggle whether building names are
-		 * shown */
-		showhidemenu_.add(get_display_flag(dfShowCensus) ? _("Hide Census") : _("Show Census"),
-		                  ShowHideEntry::kCensus,
-		                  g_gr->images().get("images/wui/menus/toggle_census.png"), false, "", "C");
-		showhidemenu_.add(
-		   get_display_flag(dfShowOwnership) ? _("Hide Ownership Layer") : _("Show Ownership Layer"),
-		   ShowHideEntry::kOwnership,
-		   g_gr->images().get("images/wui/menus/toggle_ownership_layer.png"), false, "", "E");
-	}
 }
 
 void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
@@ -743,35 +748,6 @@ bool EditorInteractive::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 	return InteractiveBase::handle_mousepress(btn, x, y);
 }
 
-static void draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field& field,
-                                                      const Widelands::Player::Field& player_field,
-                                                      const float scale,
-                                                      RenderTarget* dst) {
-	if (player_field.map_object_descr == nullptr) {
-		return;
-	}
-
-	if (player_field.constructionsite.becomes) {
-		assert(field.owner != nullptr);
-		player_field.constructionsite.draw(
-		   field.rendertarget_pixel, field.fcoords, scale, field.owner->get_playercolor(), dst);
-
-	} else if (upcast(const Widelands::BuildingDescr, building, player_field.map_object_descr)) {
-		assert(field.owner != nullptr);
-		// this is a building therefore we either draw unoccupied or idle animation
-		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
-		                    building->get_unoccupied_animation(), 0, &field.owner->get_playercolor());
-	} else if (player_field.map_object_descr->type() == Widelands::MapObjectType::FLAG) {
-		assert(field.owner != nullptr);
-		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
-		                    field.owner->tribe().flag_animation(), 0,
-		                    &field.owner->get_playercolor());
-	} else if (const uint32_t pic = player_field.map_object_descr->main_animation()) {
-		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale, pic, 0,
-		                    (field.owner == nullptr) ? nullptr : &field.owner->get_playercolor());
-	}
-}
-
 void EditorInteractive::draw(RenderTarget& dst) {
 	const auto& ebase = egbase();
 	const auto& map = ebase.map();
@@ -817,7 +793,6 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		ownership_layer_cache_.clear();
 	}
 	auto* fields_to_draw = map_view()->draw_terrain(ebase, ownership_layer_cache_, draw_grid_, &dst);
-	const auto road_building_p = road_building_preview_overlays();
 	const auto road_building_s = road_building_steepness_overlays();
 	const auto info_to_draw = get_info_to_draw(!map_view()->is_animating());
 
@@ -875,32 +850,8 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		}
 
 		if (field.vision > 0) {
-			const auto rinfo = road_building_p.find(field.fcoords);
-			if (rinfo != road_building_p.end()) {
-				for (uint8_t dir : rinfo->second) {
-					switch (dir) {
-					case Widelands::WALK_E:
-						field.road_e = in_road_building_mode(RoadBuildingType::kRoad) ?
-						                  Widelands::RoadSegment::kNormal :
-						                  Widelands::RoadSegment::kWaterway;
-						break;
-					case Widelands::WALK_SE:
-						field.road_se = in_road_building_mode(RoadBuildingType::kRoad) ?
-						                   Widelands::RoadSegment::kNormal :
-						                   Widelands::RoadSegment::kWaterway;
-						break;
-					case Widelands::WALK_SW:
-						field.road_sw = in_road_building_mode(RoadBuildingType::kRoad) ?
-						                   Widelands::RoadSegment::kNormal :
-						                   Widelands::RoadSegment::kWaterway;
-						break;
-					default:
-						throw wexception(
-						   "Attempt to set road-building overlay for invalid direction %i", dir);
-					}
-				}
-			}
-
+			draw_road_building(field);
+			draw_bridges(dst, field, field->vision > 1 ? gametime : 0, scale);
 			draw_border_markers(field, scale, *fields_to_draw, &dst);
 
 			if (draw_immovables_) {
@@ -1214,8 +1165,9 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex const which) {
 	if (&primary != tools_->current_pointer) {
 		// Leave road building mode when unselecting the roads tool
-		if (in_road_building_mode())
+		if (in_road_building_mode()) {
 			abort_build_road();
+		}
 		illustrating_vision_for_ =
 		   &primary == &tools_->sc_vision ? tools_->sc_vision.get_player() : 0;
 	}
@@ -1483,7 +1435,7 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 				}
 			}
 		}
-		fw.print_f("\n");
+		fw.string("\n");
 		for (const std::string& i : builtin_includes) {
 			fw.print_f("include \"%s\"\n", i.c_str());
 		}
@@ -1491,7 +1443,7 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 
 	// Global variables
 	if (!variables_.empty()) {
-		fw.print_f("\n");
+		fw.string("\n");
 		for (const auto& var : variables_) {
 			var->write_lua(0, fw);
 		}
@@ -1500,14 +1452,14 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 	// User-defined functions
 	for (const auto& f : scripting_saver_->all<LuaFunction>()) {
 		f->write_lua(0, fw);
-		fw.print_f("\n");
+		fw.string("\n");
 	}
 
 	// Hand-written includes
 	// NOTE: Those should not contain "directly scripted" code but only functions which
 	// can then be invoked from the user-defined functions here (not yet implemented)
 	if (!includes_.empty()) {
-		fw.print_f("\n");
+		fw.string("\n");
 		for (const std::string& i : includes_) {
 			fw.print_f("include \"map:%s\"\n", i.c_str());
 		}
@@ -1950,7 +1902,7 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 	// Main function(s) call
 	assert(!functions_.empty());
 	for (const auto& f : functions_) {
-		fw.print_f("\n");
+		fw.string("\n");
 		f->write_lua(0, fw);
 	}
 }

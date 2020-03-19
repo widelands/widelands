@@ -308,6 +308,12 @@ protected:
 	bool has_workarea_preview(const Widelands::Coords& coords,
 	                          const Widelands::Map* map = nullptr) const;
 
+	static void draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field&,
+                                               const Widelands::Player::Field&,
+                                               const float scale,
+                                               RenderTarget*);
+	void draw_road_building(FieldsToDraw::Field&);
+
 	/// Returns true if the current player is allowed to hear sounds from map objects on this field
 	virtual bool player_hears_field(const Widelands::Coords& coords) const = 0;
 
