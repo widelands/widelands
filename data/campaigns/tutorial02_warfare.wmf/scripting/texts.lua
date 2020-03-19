@@ -134,7 +134,7 @@ scouting1 = {
       p(_[[Large parts of the map haven’t been explored yet. It might be a good idea to know which direction is best for expanding our empire.]]) ..
       p(_[[You can try your luck and expand randomly, but it is risky. A safer way is to use a scout to explore unseen parts of the map. What if he finds mountains overflowing with gold?]]) ..
       p(_[[We will need a scout hut to start an expedition. It is a small building.]]) ..
-      li_object("barbarians_scouts_hut", _[[Build scout's hut.]], plr.color)
+      li_object("barbarians_scouts_hut", _[[Build a scout’s hut.]], plr.color)
    ),
    h = 300,
    obj_name = "build_scouts_hut",
