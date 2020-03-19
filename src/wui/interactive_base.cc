@@ -694,8 +694,9 @@ void InteractiveBase::postload() {
 }
 
 void InteractiveBase::draw_road_building(FieldsToDraw::Field& field) {
-	const auto rinfo = road_building_preview_overlays().find(field.fcoords);
-	if (rinfo != road_building_preview_overlays().end()) {
+	const auto rpo = road_building_preview_overlays();
+	const auto rinfo = rpo.find(field.fcoords);
+	if (rinfo != rpo.end()) {
 		for (uint8_t dir : rinfo->second) {
 			switch (dir) {
 			case Widelands::WALK_E:

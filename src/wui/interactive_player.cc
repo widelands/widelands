@@ -367,7 +367,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 		// Add road building overlays if applicable.
 		if (f->vision > 0) {
-			draw_road_building(field);
+			draw_road_building(*f);
 			draw_bridges(dst, f, f->vision > 1 ? gametime : 0, scale);
 			draw_border_markers(*f, scale, *fields_to_draw, dst);
 

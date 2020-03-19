@@ -851,7 +851,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 
 		if (field.vision > 0) {
 			draw_road_building(field);
-			draw_bridges(dst, field, field->vision > 1 ? gametime : 0, scale);
+			draw_bridges(&dst, &field, field.vision > 1 ? gametime : 0, scale);
 			draw_border_markers(field, scale, *fields_to_draw, &dst);
 
 			if (draw_immovables_) {
