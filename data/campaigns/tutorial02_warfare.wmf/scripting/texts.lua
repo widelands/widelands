@@ -128,7 +128,7 @@ trainingcamp2 = {
 
 scouting1 = {
    position = "topright",
-   title = _"Scout's Hut",
+   title = _"Scout’s Hut",
    body = (
       h1(_"Explore Your Surroundings") ..
       p(_[[Large parts of the map haven’t been explored yet. It might be a good idea to know which direction is best for expanding our empire.]]) ..
