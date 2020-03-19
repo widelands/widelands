@@ -141,7 +141,7 @@ scouting1 = {
    obj_title = _"Build a scout’s hut",
    obj_body = (
       p(_[[It’s good to know your surroundings. A scout will explore unseen parts of the map for you.]]) ..
-      li(_[[Build Scout's Hut.]])
+      li(_[[Build a Scout’s Hut.]])
    )
 }
 
