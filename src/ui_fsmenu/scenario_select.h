@@ -58,6 +58,7 @@ private:
 	UI::Textarea title_;
 	UI::MultilineTextarea subtitle_;
 	ScenarioDetails scenario_details_;
+	UI::Textarea scenario_difficulty_header_;
 	UI::Dropdown<uint32_t> scenario_difficulty_;
 
 	CampaignData* campaign_;
