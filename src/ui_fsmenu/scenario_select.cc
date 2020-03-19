@@ -63,13 +63,14 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(CampaignData* camp)
                UI::Align::kCenter,
                UI::MultilineTextarea::ScrollMode::kNoScrolling),
      scenario_details_(this),
-     scenario_difficulty_header_(this, 0,
-            0,
-            0,
-            0,
-            _("Difficulty:"),
-            UI::Align::kCenter,
-            g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelHeading)),
+     scenario_difficulty_header_(this,
+                                 0,
+                                 0,
+                                 0,
+                                 0,
+                                 _("Difficulty:"),
+                                 UI::Align::kCenter,
+                                 g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelHeading)),
      scenario_difficulty_(this,
                           "scenario_difficulty",
                           0,
@@ -161,9 +162,11 @@ void FullscreenMenuScenarioSelect::layout() {
 	scenario_difficulty_.set_size(get_right_column_w(right_column_x_), scenario_difficulty_.get_h());
 	scenario_difficulty_.set_pos(
 	   Vector2i(right_column_x_, ok_.get_y() - padding_ - scenario_difficulty_.get_h()));
-	scenario_difficulty_header_.set_size(get_right_column_w(right_column_x_), scenario_difficulty_.get_h());
-	scenario_difficulty_header_.set_pos(
-	   Vector2i(right_column_x_, ok_.get_y() - padding_ - scenario_difficulty_.get_h() - scenario_difficulty_header_.get_h()));
+	scenario_difficulty_header_.set_size(
+	   get_right_column_w(right_column_x_), scenario_difficulty_.get_h());
+	scenario_difficulty_header_.set_pos(Vector2i(
+	   right_column_x_,
+	   ok_.get_y() - padding_ - scenario_difficulty_.get_h() - scenario_difficulty_header_.get_h()));
 }
 
 std::string FullscreenMenuScenarioSelect::get_map() {
