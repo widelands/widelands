@@ -197,7 +197,7 @@ ferry_2 = {
    body = (
       h1(_"Rowboats & Ferry Yards") ..
       li_object("atlanteans_ferry_yard", _[[This is where ferries come in. Ferries are small rowboats that can carry only one ware at a time, and no workers (other than the one who rows it and who never leaves his boat). Ferries are built in ferry yards, one rowboat costs two logs and one piece of cloth and is quickly constructed. A ferry yard is a medium-sized building that needs to be built close to the shore.]]) ..
-      li(_[[Let's build a ferry yard close to the shore before we will continue.]])
+      li(_[[Let’s build a ferry yard close to the shore before we will continue.]])
    ),
    h = 300,
    obj_name = "build_ferry_yard",
