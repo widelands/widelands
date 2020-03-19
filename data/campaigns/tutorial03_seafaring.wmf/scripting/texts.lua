@@ -77,7 +77,7 @@ tell_about_shipyard = {
    title = _"Constructing ships",
    body = (
       h1(_"Let’s build ships") ..
-      p(_[[It seems like port construction is in progress. Meanwhile, let's build some ships.]]) ..
+      p(_[[Great. While your port is being constructed, let’s build some ships.]]) ..
       p(_[[Ships are constructed in a shipyard by a shipwright. We have to build one somewhere close to the shore.]]) ..
       li(_[[Build a shipyard close to the coast. It is a medium building.]])
    ),
