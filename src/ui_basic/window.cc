@@ -135,7 +135,7 @@ Window::Window(Panel* const parent,
 
 	button_close_->sigclicked.connect([this] {
 		if (!pinned_) {
-			die();
+			clicked_button_close();
 		}
 	});
 	button_pin_->sigclicked.connect([this] {
@@ -170,6 +170,10 @@ void Window::update_toolbar_buttons() {
 	button_pin_->set_tooltip(pinned_ ? _("Unpin") : _("Pin"));
 	button_close_->set_enabled(!pinned_);
 	button_minimize_->set_enabled(!pinned_ || is_minimal_);
+}
+
+void Window::clicked_button_close() {
+	die();
 }
 
 /**

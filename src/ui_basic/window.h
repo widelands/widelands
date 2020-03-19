@@ -109,6 +109,8 @@ protected:
 	void layout() override;
 	void update_desired_size() override;
 
+	virtual void clicked_button_close();
+
 private:
 	void on_resolution_changed_note(const GraphicResolutionChanged& note);
 
