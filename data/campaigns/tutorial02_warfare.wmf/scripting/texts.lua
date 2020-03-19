@@ -170,7 +170,7 @@ scouting3 = {
       h1(_"New horizons?") ..
       p(_[[As you can see, scout can go quite far. Good news is that there are no enemies around.]]) ..
       p(_[[You can use minimap to see progress of exploration.]]) ..
-      p(_[[Don't forget that scouting is hard work and as such can not be done without provision of food.]])
+      p(_[[Don’t forget that scouting is hard work and as such can not be done without provision of food.]])
    ),
    h = 250
 }
