@@ -715,18 +715,18 @@ void InteractiveBase::draw_road_building(FieldsToDraw::Field& field) {
 				                   Widelands::RoadSegment::kWaterway;
 				break;
 			default:
-				throw wexception(
-				   "Attempt to set road-building overlay for invalid direction %i", dir);
+				throw wexception("Attempt to set road-building overlay for invalid direction %i", dir);
 			}
 		}
 	}
 }
 
 // static
-void InteractiveBase::draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field& field,
-                                               const Widelands::Player::Field& player_field,
-                                               const float scale,
-                                               RenderTarget* dst) {
+void InteractiveBase::draw_immovable_for_formerly_visible_field(
+   const FieldsToDraw::Field& field,
+   const Widelands::Player::Field& player_field,
+   const float scale,
+   RenderTarget* dst) {
 	if (player_field.map_object_descr == nullptr) {
 		return;
 	}
@@ -751,7 +751,6 @@ void InteractiveBase::draw_immovable_for_formerly_visible_field(const FieldsToDr
 		                    (field.owner == nullptr) ? nullptr : &field.owner->get_playercolor());
 	}
 }
-
 
 /*
 ===============

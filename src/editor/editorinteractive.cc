@@ -599,7 +599,6 @@ void EditorInteractive::rebuild_showhide_menu() {
 	showhidemenu_.add(draw_resources_ ? _("Hide Resources") : _("Show Resources"),
 	                  ShowHideEntry::kResources,
 	                  g_gr->images().get("images/wui/menus/toggle_resources.png"));
-
 }
 
 void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
