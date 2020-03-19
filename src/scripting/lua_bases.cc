@@ -909,7 +909,7 @@ int LuaPlayerBase::conquer(lua_State* L) {
 
       :arg name: name of the worker to get
       :type name: :class:`string`.
-      :returns: the number of wares
+      :returns: the number of workers
 */
 // UNTESTED
 int LuaPlayerBase::get_workers(lua_State* L) {
