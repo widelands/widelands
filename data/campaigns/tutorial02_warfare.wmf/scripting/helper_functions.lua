@@ -11,4 +11,3 @@ function any_field_seen(player, fields)
    end
    return false
 end
-
