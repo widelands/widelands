@@ -134,18 +134,20 @@ Window::Window(Panel* const parent,
 	set_title(title);
 
 	button_close_->sigclicked.connect([this] {
-		if (!pinned_)
+		if (!pinned_) {
 			die();
+		}
 	});
 	button_pin_->sigclicked.connect([this] {
 		pinned_ = !pinned_;
 		update_toolbar_buttons();
 	});
 	button_minimize_->sigclicked.connect([this] {
-		if (is_minimal_)
+		if (is_minimal_) {
 			restore();
-		else
+		} else {
 			minimize();
+		}
 	});
 	update_toolbar_buttons();
 
@@ -533,8 +535,9 @@ void Window::restore() {
 	update_toolbar_buttons();
 }
 void Window::minimize() {
-	if (pinned_)
+	if (pinned_) {
 		return;
+	}
 	assert(!is_minimal_);
 	int32_t y = get_y(), x = get_x();
 	if (docked_bottom_) {
