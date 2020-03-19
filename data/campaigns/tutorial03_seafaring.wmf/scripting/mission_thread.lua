@@ -16,7 +16,7 @@ function introduction()
 end
 
 function build_port()
-   sleep(200)
+   sleep(2000)
    message_box_objective(plr, tell_about_port)
 
    wl.ui.MapView().buildhelp = true -- so that the player sees the port building icon
@@ -25,7 +25,7 @@ function build_port()
    while not construction_started(second_port_field, "atlanteans_port") do sleep(1000) end
    run(build_ships)
 
-   while #plr:get_buildings("atlanteans_port") < 2 do sleep(200) end
+   while #plr:get_buildings("atlanteans_port") < 2 do sleep(1000) end
    set_objective_done(o)
 end
 
@@ -34,7 +34,7 @@ function build_ships()
    local o = message_box_objective(plr, tell_about_shipyard)
    plr:allow_buildings{"atlanteans_shipyard"}
 
-   while #plr:get_buildings("atlanteans_shipyard") < 1 do sleep(200) end
+   while #plr:get_buildings("atlanteans_shipyard") < 1 do sleep(1000) end
    set_objective_done(o)
 
    local o = message_box_objective(plr, tell_about_ships)
@@ -49,7 +49,7 @@ function build_ships()
 end
 
 function expedition()
-   sleep(200)
+   sleep(2000)
    message_box_objective(plr, expedition1)
    local o = message_box_objective(plr, expedition2)
 
