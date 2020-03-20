@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-03-14 02:07+0000\n"
-"PO-Revision-Date: 2020-03-14 02:09+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-03-16 06:59+0000\n"
+"PO-Revision-Date: 2020-03-17 09:23+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -568,21 +568,21 @@ msgstr "Når du klikker på den røde prik (lav prioritet), bliver den tilsvaren
 msgid ""
 "The actual supply state is indicated by varying colors of the ware icons "
 "themselves:"
-msgstr ""
+msgstr "Den faktiske leverancestatus vises med varierende farver på selve vareikonerne:"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:307
 msgid "Wares stored in the building are shown in full color."
-msgstr ""
+msgstr "Varer lagret i bygningen vises i fuld farve."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:308
 msgid "Missing wares are greyed out."
-msgstr ""
+msgstr "Manglende varer er gråtonet."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:309
 msgid ""
 "Wares not present in the building yet but already being transported there "
 "are shown in a darker grey."
-msgstr ""
+msgstr "Varer der ikke er til stede i bygningen endnu, men allerede er under transport dertil vises i en mørkere grå."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:310
 msgid ""

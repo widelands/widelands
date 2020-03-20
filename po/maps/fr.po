@@ -8,16 +8,16 @@
 # Samuël Weber/GwendalD <samuel.weber@normalesup.org>, 2017
 # Jaypad <ju-ju@nataju.fr>, 2015-2016
 # Pierre Salagnac <pierre.salagnac@free.fr>, 2007
-# Renaud Bouchard, 2016-2019
+# Renaud Bouchard, 2016-2020
 # Tubuntu <tubuntu@testimonium.be>, 2015
 # zecas <jjorge@free.fr>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-01-21 18:02+0000\n"
-"PO-Revision-Date: 2020-01-21 18:25+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-03-16 06:59+0000\n"
+"PO-Revision-Date: 2020-03-16 10:14+0000\n"
+"Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -166,7 +166,7 @@ msgstr "Navigation"
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports, and how to use ferries and waterways."
-msgstr ""
+msgstr "Dans ce tutoriel, vous allez faire la connaissance avec les affaires maritimes, qui est l'art de gérer ses vaisseaux et ses ports, et de comment utiliser les ferries et les voies navigables."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy"
