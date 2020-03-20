@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-03-14 02:07+0000\n"
-"PO-Revision-Date: 2020-03-14 02:09+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-03-16 06:59+0000\n"
+"PO-Revision-Date: 2020-03-19 20:58+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid ""
 "Click on the ‘OK’ button or press the ‘Enter ⏎’ key on the keyboard to close"
 " this window."
-msgstr ""
+msgstr "Klik på tasten »O.k.« eller tryk på tasten »Retur « for at lukke dette vindue."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:14
 msgid "Nice And Easy Does It All the Time"
@@ -85,7 +85,7 @@ msgstr ""
 msgid ""
 " You can open and close this window by clicking on the ‘Objectives’ button "
 "in the toolbar on the bottom of the screen."
-msgstr ""
+msgstr "Du kan åbne og lukke dette vindue ved at klikke på knappen »Mål« i værktøjslinjen i bunden af skærmen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:55
 msgid ""
@@ -101,7 +101,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:57
 msgid "Try it out."
-msgstr ""
+msgstr "Prøv det."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:63
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:65
@@ -122,12 +122,12 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:68
 msgid "Show the building spaces now."
-msgstr ""
+msgstr "Vis byggepladserne nu."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:73
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:88
 msgid "Building Spaces"
-msgstr ""
+msgstr "Byggepladser"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:77
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:92
@@ -163,7 +163,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:82
 msgid ""
 "Left-click the ‘OK’ button to close this window so that I can show you how."
-msgstr ""
+msgstr "Venstreklik på knappen »O.k.« for at lukke dette vindue, så jeg kan vise dig hvordan."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:83
 msgid ""
@@ -302,7 +302,7 @@ msgstr "Nu har du delt vejen i to dele med hver sin bærer. Det betyder mindre a
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:202
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:213
 msgid "Let’s see the progress"
-msgstr ""
+msgstr "Lad os se status"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:203
 msgid ""
@@ -312,7 +312,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:204
 msgid "To close the construction site’s window, simply right-click on it."
-msgstr ""
+msgstr "Luk konstruktionsstedets vindue ved at højreklikke på det."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:210
 msgid "The Construction Site"
@@ -338,7 +338,7 @@ msgstr "Hvis du ønsker, at det skal gå hurtigere, så brug Side op-tasten på 
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:227
 msgid "Change is rapid with pressed Ctrl and smooth with pressed Shift."
-msgstr ""
+msgstr "Ændring er hurtig med Ctrl og blød med Skift."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:234
 msgid "The Lumberjack’s Hut is Done"
@@ -434,7 +434,7 @@ msgstr "Lær at bruge minikortet"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:296
 msgid "Try moving around by clicking on the minimap"
-msgstr ""
+msgstr "Prøv at flytte omkring ved at klikke på minikortet"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:297
 msgid "Play around a bit with the different overlays (roads, flags, etc.)"
@@ -450,7 +450,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:304
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:319
 msgid "Using the Minimap"
-msgstr ""
+msgstr "Brug af minikortet"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:306
 msgid "Very good. And now about the minimap. "
@@ -688,7 +688,7 @@ msgid ""
 "It seems like you destroyed a construction site for a quarry we wanted to "
 "build. Luckily, we still have enough logs left this time, so you can simply "
 "build another one."
-msgstr ""
+msgstr "Der ser ud til, at du ødelage et konstruktionssted for et stenbrud vi ønskede at bygge. Heldigvis har vi stadig nok træstammer, så du kan bare bygge et andet."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:440
 msgid ""
@@ -728,7 +728,7 @@ msgstr "Når der er mange klipper, kan du overveje at bygge et andet stenbrud. D
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:490
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:502
 msgid "Census and Statistics"
-msgstr "Folketælling og statistik"
+msgstr "Optælling og statistik"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:471
 msgid ""
@@ -736,18 +736,18 @@ msgid ""
 "construction sites look the same, and some buildings look alike. It is "
 "sometimes hard to tell them apart. Widelands offers a feature to show label "
 "texts over the buildings. They are called the ‘census’."
-msgstr ""
+msgstr "Mens vi venter vil jeg hurtigt vise dig en anden nyttig funktion. Alle konstruktionssteder ser ens ud og nogle bygninger ligner hinanden. Det kan være svært at adskille dem. Widelands tilbyder en funktion til at vise etikettekster over bygningerne. De kaldes for »census« (optælling)."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:472
 msgid ""
 "In order to show or hide the building census labels, you can select the "
 "‘Show Census’ / ‘Hide Census’ entry from the ‘Show / Hide’ menu on the "
 "bottom, or press the ‘c’ key on the keyboard."
-msgstr ""
+msgstr "For at vise eller skjule bygningernes optællingsetiketter (census), så kan du vælge elementet »Vis cenus« / »Skjul census« fra menuen »Vis/skjul« i bunden, eller trykke på tasten »c« på tastaturet."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:473
 msgid "Let me enable the census for you."
-msgstr ""
+msgstr "Lad mig aktivere optælling (census) for dig."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:482
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:484
@@ -778,7 +778,7 @@ msgid ""
 "In addition to the buildings’ census, you can also activate statictics "
 "labels on them. This will display information about the productivity of "
 "buildings or the progress of construction sites."
-msgstr ""
+msgstr "Udover bygningernes optælling (census), så kan du også aktivere statistiketiketter på dem. Dette vil vise information om produktiviteten for bygninger eller status for byggepladser."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:504
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."
@@ -871,7 +871,7 @@ msgid ""
 "All windows in Widelands can be closed by right-clicking into them. Some "
 "windows can also be toggled with the buttons and menus at the very bottom of"
 " the screen."
-msgstr ""
+msgstr "Alle vinduer i Widelands kan lukkes ved at højreklikke på dem. Nogle vinduer kan aktiveres via knapperne og menuerne i bunden af skærmen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:546
 msgid "Close the messages window now by right-clicking into it."
@@ -903,7 +903,7 @@ msgstr "Ødelæg de to stenbrud"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:575
 msgid "Destroy the Quarries"
-msgstr ""
+msgstr "Ødelæg stenbruddene"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:576
 msgid ""
@@ -938,7 +938,7 @@ msgstr "Beskeder ankommet!"
 msgid ""
 "You received some messages. See how the button at the bottom of the screen "
 "has changed appearance?"
-msgstr ""
+msgstr "Du modtog nogle beskeder. Se hvordan knappen i bunden af skærmen har ændret udseende?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:598
 msgid "Expand your territory"
@@ -946,11 +946,11 @@ msgstr "Udvid dit territorium"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:600
 msgid "Make your Territory Grow"
-msgstr ""
+msgstr "Få dit territorium til at vokse"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:601
 msgid "Build a military building on your border."
-msgstr ""
+msgstr "Byg en militæranlæg på din grænse."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:602
 msgid ""
@@ -1009,7 +1009,7 @@ msgstr "Udvidelse foregår ved at bygge en militærbygning i udkanten af dit ter
 msgid ""
 "As soon as a military building is manned, it will extend your land. I will "
 "tell you more about military buildings in another tutorial."
-msgstr ""
+msgstr "Så snart et militært anlæg er bemandet, så vil det udvide dit land. Jeg vil fortælle dig om militære anlæg i en anden øvelse."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:619
 msgid "Military Site Occupied"
@@ -1061,7 +1061,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:643
 msgid "Then click on the ‘Exit Game’ entry."
-msgstr ""
+msgstr "Klik så på »Afslut spil«."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:644
 msgid ""
@@ -1080,4 +1080,4 @@ msgstr "Nyt mål"
 
 #: ../../data/scripting/richtext_scenarios.lua:93
 msgid "New Objectives"
-msgstr ""
+msgstr "Nye mål"

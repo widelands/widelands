@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-03-03 09:07+0000\n"
+"POT-Creation-Date: 2020-03-16 06:59+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2020\n"
 "Language-Team: Danish (https://www.transifex.com/widelands/teams/35159/da/)\n"
@@ -653,7 +653,7 @@ msgid ""
 msgstr ""
 "Byg en jernmine og måske en guldmine. Da de kun fremstiller malm, skal vi "
 "bruge en ovn til at smelte dem. Byg også en smedje til at sikre, at vi ikke "
-"løber tør for værktøjer - og ja, en lille rustningssmedje. Den fremstiller "
+"løber tør for værktøjer – og ja, en lille rustningssmedje. Den fremstiller "
 "hjelme samt sværd. Jeg håber ikke vi møder fjender her, men det er bedre at "
 "være forberedt."
 
@@ -825,6 +825,9 @@ msgid ""
 "garments studded with iron and also gold to cushion blows; and helmets "
 "forged from iron, and gold as well, to lengthen their life in battle."
 msgstr ""
+"Soldater trænes i to trin i forsvar og helbred. De får en pels med jern og "
+"også guld til små slag; og hjelm smedet fra jern og guld for at forlænge "
+"deres liv på slagmarken."
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:326
@@ -835,6 +838,11 @@ msgid ""
 "first double-edged sword, and are given various other swords to wield in "
 "their other hand. This makes six steps of attack training."
 msgstr ""
+"De lærer at angribe med tre forskellige sværd: Langsværdet, bredsværdet og "
+"sværet med dobbeltæg. De sidste to indeholder guld og alle jern. De "
+"avancerede soldater lærer at bruge to sværd samtidig: De beholder deres "
+"første sværd med dobbeltæg og får et andet sværd til den anden hånd. Dette "
+"udgør seks trin i angrebstræning."
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:329
@@ -860,6 +868,12 @@ msgid ""
 "new small one so we will still get basic weapons. We need at least one gold "
 "mine now, because the best weapons and armor use gold."
 msgstr ""
+"Vi skal bruge en skrædderbutik til at sy flere beskyttende "
+"beklædnignsgenstande og endnu et syrum til at fremstille almindelige "
+"pelsbeklædninger. Du bør også opgradere den lille rustningsmedje til at "
+"fremstille bedre våben og hjelme, og bygge en ny lille, så vi stadig får "
+"grundlæggende våben. Vi skal bruge mindst en guldmine nu, da de bedste våben"
+" og rustninger bruger guld."
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:338
@@ -969,6 +983,10 @@ msgid ""
 "possible in one go. The enemy will only be able to see it if they build a "
 "fortress right at the border."
 msgstr ""
+"Spejderne har informeret mig om, at fjenden ikke kan bygge tårne. Vi kan "
+"bygge en fæstning, som er bygningen, der vil skubbe grænsen så langt mod øst"
+" som muligt. Fjenden vil kun kunne se det, hvis vi bygger en fæstning lige "
+"på grænsen."
 
 #. TRANSLATORS: Reebaud – beware of early attacks 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:379
@@ -999,6 +1017,8 @@ msgid ""
 "They are defeated! I thank you, all my gods, for granting us victory over "
 "the unbelievers!"
 msgstr ""
+"De er besejret! Jeg takker dig, alle guderne, for at tildele os sejren over "
+"hedningene!"
 
 #. TRANSLATORS: Maukor – enemy defeated 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:391
@@ -1036,6 +1056,10 @@ msgid ""
 " build a port on. If we manage to construct a ship, and fill it with all we "
 "need to build a new settlement, we may be able to escape."
 msgstr ""
+"Fortvivl ikke, jeg har lidt håb tilbage! Den østligste del af øen, samt "
+"pladsen hvor fjendes hovedkvarter stod, ser ud til at være et egnet sted at "
+"bygge en havn. Hvis vi kan bygge et skib og fylde det med hvad vi skal bruge"
+" til en ny bosættelse, så kan vi måske undslippe."
 
 #. TRANSLATORS: Hauke – rising water
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:406
@@ -1053,11 +1077,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:410
 msgid "Don’t Forget the Soldiers"
-msgstr ""
+msgstr "Glem ikke soldaterne"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:411
 msgid "Soldiers to the port!"
-msgstr ""
+msgstr "Soldater til havnen!"
 
 #. TRANSLATORS: Reebaud – rising water
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:413
@@ -1067,6 +1091,11 @@ msgid ""
 " our ship, if they don’t mind being all crammed together. Let’s send some to"
 " the port when it’s completed, so they can embark when we set sail!"
 msgstr ""
+"Jeg glemte næsten i travlheden – uanset hvor vi går i land, så skal vi bruge"
+" soldater til at sikre og udvide vores nye koloni. Der er plads op til ti "
+"soldater på vores skib, hvis vi kan leve med at være som sild i en tønde. "
+"Lad os sende nogle til havnen når de er klar, så de kan sejle med, når vi "
+"sætter sejl!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:417
 msgid "Victory"
