@@ -18,7 +18,7 @@ run(function()
    assert_equal(p1:get_wares("blackwood"), 1)
 
    -- remove the ship while the ware is in transit.
-   stable_save(game, "0_before_removing_ship", 10 * 1000)
+   stable_save(game, "0_before_removing_ship", 1000)
    ship:remove()
    sleep(1000)
    stable_save(game, "1_no_more_ship", 10 * 1000)
