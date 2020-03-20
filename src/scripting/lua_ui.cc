@@ -686,7 +686,6 @@ int LuaMapView::get_is_animating(lua_State* L) {
 	lua_pushboolean(L, get()->map_view()->is_animating());
 	return 1;
 }
-
 /*
  * Lua Functions
  */

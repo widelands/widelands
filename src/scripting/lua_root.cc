@@ -177,7 +177,6 @@ int LuaGame::get_interactive_player(lua_State* L) {
       (RO) The gametime at which the game was last saved.
 */
 int LuaGame::get_last_save_time(lua_State* L) {
-    // NOCOM
     lua_pushuint32(L, get_game(L).save_handler().last_save_time());
 	return 1;
 }
