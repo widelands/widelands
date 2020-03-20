@@ -96,6 +96,7 @@ public:
 	virtual Widelands::Player* get_player() const = 0;
 
 	void think() override;
+    double average_fps() const;
 	bool handle_key(bool down, SDL_Keysym code) override;
 	virtual void postload();
 

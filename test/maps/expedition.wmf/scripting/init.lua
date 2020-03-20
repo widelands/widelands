@@ -200,7 +200,7 @@ function test_cancel_started_expedition_on_ship(needs_second_ship)
    game.desired_speed = 10 * 1000
    sleep(10000)
 
-   stable_save(game, "ready_to_sail")
+   stable_save(game, "ready_to_sail", 10 * 1000)
 
    sleep(10000)
    assert_equal(1, p1:get_workers("barbarians_builder"))
@@ -244,7 +244,7 @@ function test_cancel_started_expedition_underway()
    assert_equal("ccw",expedition_ship.island_explore_direction)
    sleep(6000)
 
-   stable_save(game, "sailing")
+   stable_save(game, "sailing", 10 * 1000)
    assert_equal(1, p1:get_workers("barbarians_builder"))
 
    cancel_expedition_in_shipwindow(expedition_ship)
@@ -278,7 +278,7 @@ function test_cancel_when_port_space_was_reached()
    sleep(500)
    assert_equal(1, p1:get_workers("barbarians_builder"))
 
-   stable_save(game, "reached_port_space")
+   stable_save(game, "reached_port_space", 10 * 1000)
    sleep(5000)
    ships = p1:get_ships()
    --ships table should contain 1-2 items (1-2 ships)
@@ -331,8 +331,7 @@ function test_transporting_works()
    sleep(500)
    assert_equal(1, p1:get_workers("barbarians_builder"))
 
-   stable_save(game, "port_done")
-   game.desired_speed = 25 * 1000
+   stable_save(game, "port_done", 25 * 1000)
 
    -- build a lumberjack and see if the ship starts transporting stuff
    p1:place_building("barbarians_lumberjacks_hut", map:get_field(17, 1), true)
