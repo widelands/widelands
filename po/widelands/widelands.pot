@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-03-14 02:07+0000\n"
+"POT-Creation-Date: 2020-03-20 06:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -127,7 +127,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:43
-#: ../../src/wui/multiplayersetupgroup.cc:396
+#: ../../src/wui/multiplayersetupgroup.cc:397
 msgid "No AI"
 msgstr ""
 
@@ -1088,8 +1088,8 @@ msgstr ""
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:68
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:100
 #: ../../src/ui_fsmenu/launch_mpg.cc:516
-#: ../../src/wui/multiplayersetupgroup.cc:139
-#: ../../src/wui/multiplayersetupgroup.cc:193
+#: ../../src/wui/multiplayersetupgroup.cc:140
+#: ../../src/wui/multiplayersetupgroup.cc:194
 #, c-format
 msgid "Player %u"
 msgstr ""
@@ -1098,19 +1098,19 @@ msgstr ""
 #: ../../src/editor/ui_menus/player_menu.cc:174
 #: ../../src/ui_fsmenu/campaign_select.cc:61
 #: ../../src/ui_fsmenu/campaigndetails.cc:56
-#: ../../src/wui/multiplayersetupgroup.cc:213
+#: ../../src/wui/multiplayersetupgroup.cc:214
 msgid "Tribe"
 msgstr ""
 
 #: ../../src/editor/ui_menus/player_menu.cc:182
-#: ../../src/wui/multiplayersetupgroup.cc:478
-#: ../../src/wui/playerdescrgroup.cc:164
+#: ../../src/wui/multiplayersetupgroup.cc:479
+#: ../../src/wui/playerdescrgroup.cc:166
 msgctxt "tribe"
 msgid "Random"
 msgstr ""
 
 #: ../../src/editor/ui_menus/player_menu.cc:184
-#: ../../src/wui/multiplayersetupgroup.cc:480
+#: ../../src/wui/multiplayersetupgroup.cc:481
 msgid "The tribe will be selected at random"
 msgstr ""
 
@@ -1205,9 +1205,9 @@ msgstr ""
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:74
-#: ../../src/ui_basic/dropdown.cc:247 ../../src/ui_basic/dropdown.cc:294
-#: ../../src/ui_basic/dropdown.cc:364 ../../src/ui_basic/dropdown.cc:372
-#: ../../src/wui/multiplayersetupgroup.cc:386
+#: ../../src/ui_basic/dropdown.cc:251 ../../src/ui_basic/dropdown.cc:298
+#: ../../src/ui_basic/dropdown.cc:368 ../../src/ui_basic/dropdown.cc:376
+#: ../../src/wui/multiplayersetupgroup.cc:387
 msgid "%1%: %2%"
 msgstr ""
 
@@ -1390,49 +1390,49 @@ msgid "Cleaning up for loading: Map (3/3)"
 msgstr ""
 
 #. * TRANSLATORS: Win condition for this game has not been set.
-#: ../../src/logic/game.cc:138
+#: ../../src/logic/game.cc:139
 msgid "Not set"
 msgstr ""
 
-#: ../../src/logic/game.cc:214 ../../src/logic/game.cc:271
-#: ../../src/logic/game.cc:356 ../../src/logic/game.cc:388
+#: ../../src/logic/game.cc:215 ../../src/logic/game.cc:272
+#: ../../src/logic/game.cc:357 ../../src/logic/game.cc:389
 msgid "Preloading map…"
 msgstr ""
 
-#: ../../src/logic/game.cc:218 ../../src/logic/game.cc:278
+#: ../../src/logic/game.cc:219 ../../src/logic/game.cc:279
 msgid "Loading world…"
 msgstr ""
 
-#: ../../src/logic/game.cc:220 ../../src/logic/game.cc:281
+#: ../../src/logic/game.cc:221 ../../src/logic/game.cc:282
 msgid "Loading tribes…"
 msgstr ""
 
-#: ../../src/logic/game.cc:230 ../../src/logic/game.cc:284
+#: ../../src/logic/game.cc:231 ../../src/logic/game.cc:285
 msgid "Creating players…"
 msgstr ""
 
-#: ../../src/logic/game.cc:247 ../../src/logic/game.cc:312
+#: ../../src/logic/game.cc:248 ../../src/logic/game.cc:313
 msgid "Loading map…"
 msgstr ""
 
-#: ../../src/logic/game.cc:319
+#: ../../src/logic/game.cc:320
 msgid "Initializing game…"
 msgstr ""
 
-#: ../../src/logic/game.cc:370 ../../src/logic/game.cc:406
+#: ../../src/logic/game.cc:371 ../../src/logic/game.cc:407
 #: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1461
 msgid "Loading…"
 msgstr ""
 
-#: ../../src/logic/game.cc:467
+#: ../../src/logic/game.cc:468
 msgid "Creating player infrastructure…"
 msgstr ""
 
-#: ../../src/logic/game.cc:477 ../../src/logic/player.cc:224
+#: ../../src/logic/game.cc:478 ../../src/logic/player.cc:224
 msgid "Missing starting position"
 msgstr ""
 
-#: ../../src/logic/game.cc:478 ../../src/logic/player.cc:225
+#: ../../src/logic/game.cc:479 ../../src/logic/player.cc:225
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting "
@@ -1441,11 +1441,11 @@ msgid ""
 "this problem."
 msgstr ""
 
-#: ../../src/logic/game.cc:884
+#: ../../src/logic/game.cc:893
 msgid "Trade Offer"
 msgstr ""
 
-#: ../../src/logic/game.cc:886
+#: ../../src/logic/game.cc:895
 msgid "This market has received a new trade offer."
 msgstr ""
 
@@ -1553,8 +1553,8 @@ msgstr[1] ""
 #. * TRANSLATORS: Number of soldiers that should attack. Used in Attack box.
 #. * TRANSLATORS: Number of soldiers stationed at a militarysite.
 #: ../../src/logic/map_objects/tribes/militarysite.cc:375
-#: ../../src/wui/attack_box.cc:107 ../../src/wui/constructionsitewindow.cc:398
-#: ../../src/wui/constructionsitewindow.cc:410
+#: ../../src/wui/attack_box.cc:107 ../../src/wui/constructionsitewindow.cc:413
+#: ../../src/wui/constructionsitewindow.cc:425
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
@@ -1776,74 +1776,74 @@ msgstr ""
 msgid "Can’t find any more resources!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:435
+#: ../../src/logic/map_objects/tribes/ship.cc:436
 msgid "Port Space"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:435
+#: ../../src/logic/map_objects/tribes/ship.cc:436
 msgid "Port Space Found"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:436
+#: ../../src/logic/map_objects/tribes/ship.cc:437
 msgid "An expedition ship found a new port build space."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:554
+#: ../../src/logic/map_objects/tribes/ship.cc:555
 msgid "Island Circumnavigated"
 msgstr ""
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../src/logic/map_objects/tribes/ship.cc:554
+#: ../../src/logic/map_objects/tribes/ship.cc:555
 msgctxt "ship"
 msgid "Waiting"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:555
+#: ../../src/logic/map_objects/tribes/ship.cc:556
 msgid "An expedition ship sailed around its island without any events."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:617
+#: ../../src/logic/map_objects/tribes/ship.cc:618
 msgid "Coast Reached"
 msgstr ""
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:617
+#: ../../src/logic/map_objects/tribes/ship.cc:618
 msgid "Land Ahoy!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:618
+#: ../../src/logic/map_objects/tribes/ship.cc:619
 msgid "An expedition ship reached a coast and is waiting for further commands."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:684
+#: ../../src/logic/map_objects/tribes/ship.cc:670
 msgid "New port construction site is gone"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:684
+#: ../../src/logic/map_objects/tribes/ship.cc:670
 msgid "Port Lost!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:685
+#: ../../src/logic/map_objects/tribes/ship.cc:671
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr ""
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:1077
+#: ../../src/logic/map_objects/tribes/ship.cc:1063
 msgctxt "ship"
 msgid "Expedition"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:1077
+#: ../../src/logic/map_objects/tribes/ship.cc:1063
 msgid "Expedition Ready"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:1078
+#: ../../src/logic/map_objects/tribes/ship.cc:1064
 msgid "An expedition ship is waiting for your commands."
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. The ship is currently transporting wares.
-#: ../../src/logic/map_objects/tribes/ship.cc:1230
+#: ../../src/logic/map_objects/tribes/ship.cc:1216
 #: ../../src/wui/seafaring_statistics_menu.cc:211
 msgctxt "ship_state"
 msgid "Shipping"
@@ -1851,28 +1851,28 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. The ship is ready to transport wares, but has
 #. * nothing to do.
-#: ../../src/logic/map_objects/tribes/ship.cc:1234
+#: ../../src/logic/map_objects/tribes/ship.cc:1220
 #: ../../src/wui/seafaring_statistics_menu.cc:209
 msgctxt "ship_state"
 msgid "Idle"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:1239
+#: ../../src/logic/map_objects/tribes/ship.cc:1225
 #: ../../src/wui/seafaring_statistics_menu.cc:213
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:1243
+#: ../../src/logic/map_objects/tribes/ship.cc:1229
 #: ../../src/wui/seafaring_statistics_menu.cc:215
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:1247
+#: ../../src/logic/map_objects/tribes/ship.cc:1233
 #: ../../src/wui/seafaring_statistics_menu.cc:217
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -1880,7 +1880,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is unloading wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1252
+#: ../../src/logic/map_objects/tribes/ship.cc:1238
 #: ../../src/wui/seafaring_statistics_menu.cc:219
 msgctxt "ship_state"
 msgid "Founding a Colony"
@@ -2164,12 +2164,12 @@ msgid ""
 msgstr ""
 
 #. * TRANSLATORS: %s contains an error message.
-#: ../../src/network/gameclient.cc:1073
+#: ../../src/network/gameclient.cc:1080
 #, c-format
 msgid "%s An automatic savegame will be created."
 msgstr ""
 
-#: ../../src/network/gameclient.cc:1077
+#: ../../src/network/gameclient.cc:1084
 msgid "Disconnected from Host"
 msgstr ""
 
@@ -2693,13 +2693,13 @@ msgctxt "dropdown"
 msgid "Select Item"
 msgstr ""
 
-#: ../../src/ui_basic/dropdown.cc:294 ../../src/ui_basic/dropdown.cc:296
+#: ../../src/ui_basic/dropdown.cc:298 ../../src/ui_basic/dropdown.cc:300
 #: ../../src/ui_fsmenu/launch_mpg.cc:443
 msgid "Error"
 msgstr ""
 
 #. * TRANSLATORS: Selection in Dropdown menus.
-#: ../../src/ui_basic/dropdown.cc:357
+#: ../../src/ui_basic/dropdown.cc:361
 msgctxt "dropdown"
 msgid "Not Selected"
 msgstr ""
@@ -2921,8 +2921,8 @@ msgstr ""
 #. * TRANSLATORS: This is a map tag
 #: ../../src/ui_fsmenu/launch_game.cc:110
 #: ../../src/ui_fsmenu/scenariodetails.cc:46 ../../src/wui/map_tags.cc:44
-#: ../../src/wui/mapdetails.cc:97 ../../src/wui/multiplayersetupgroup.cc:523
-#: ../../src/wui/playerdescrgroup.cc:173
+#: ../../src/wui/mapdetails.cc:97 ../../src/wui/multiplayersetupgroup.cc:524
+#: ../../src/wui/playerdescrgroup.cc:290
 msgid "Scenario"
 msgstr ""
 
@@ -2931,7 +2931,7 @@ msgid "Win condition is set through the scenario"
 msgstr ""
 
 #: ../../src/ui_fsmenu/launch_game.cc:116 ../../src/ui_fsmenu/launch_mpg.cc:69
-#: ../../src/wui/multiplayersetupgroup.cc:527
+#: ../../src/wui/multiplayersetupgroup.cc:528
 msgid "Saved Game"
 msgstr ""
 
@@ -3065,7 +3065,7 @@ msgid "Player’s type"
 msgstr ""
 
 #: ../../src/ui_fsmenu/launch_spg.cc:74 ../../src/wui/game_summary.cc:102
-#: ../../src/wui/multiplayersetupgroup.cc:235
+#: ../../src/wui/multiplayersetupgroup.cc:236
 msgid "Team"
 msgstr ""
 
@@ -3230,14 +3230,14 @@ msgid "State"
 msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:227
-#: ../../src/wui/multiplayersetupgroup.cc:378
-#: ../../src/wui/playerdescrgroup.cc:130
+#: ../../src/wui/multiplayersetupgroup.cc:379
+#: ../../src/wui/playerdescrgroup.cc:132
 msgid "Open"
 msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:230
-#: ../../src/wui/multiplayersetupgroup.cc:373
 #: ../../src/wui/multiplayersetupgroup.cc:374
+#: ../../src/wui/multiplayersetupgroup.cc:375
 msgid "Closed"
 msgstr ""
 
@@ -3719,7 +3719,7 @@ msgid "Show work area"
 msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:583
-#: ../../src/wui/constructionsitewindow.cc:318
+#: ../../src/wui/constructionsitewindow.cc:333
 msgid "Start an expedition"
 msgstr ""
 
@@ -3727,74 +3727,74 @@ msgstr ""
 msgid "Cancel the expedition"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:131
+#: ../../src/wui/constructionsitewindow.cc:146
 #: ../../src/wui/dismantlesitewindow.cc:54
 msgid "Building materials"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:167
-#: ../../src/wui/constructionsitewindow.cc:214
+#: ../../src/wui/constructionsitewindow.cc:182
+#: ../../src/wui/constructionsitewindow.cc:229
 #: ../../src/wui/soldiercapacitycontrol.cc:71
 msgid ""
 "Decrease capacity. Hold down Ctrl to set the capacity to the lowest value"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:171
-#: ../../src/wui/constructionsitewindow.cc:218
+#: ../../src/wui/constructionsitewindow.cc:186
+#: ../../src/wui/constructionsitewindow.cc:233
 #: ../../src/wui/soldiercapacitycontrol.cc:80
 msgid ""
 "Increase capacity. Hold down Ctrl to set the capacity to the highest value"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:195
+#: ../../src/wui/constructionsitewindow.cc:210
 msgid "Stopped"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:196
+#: ../../src/wui/constructionsitewindow.cc:211
 msgid "Stop this building’s work after completion"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:250 ../../src/wui/soldierlist.cc:410
+#: ../../src/wui/constructionsitewindow.cc:265 ../../src/wui/soldierlist.cc:410
 msgid "Prefer heroes"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:253 ../../src/wui/soldierlist.cc:407
+#: ../../src/wui/constructionsitewindow.cc:268 ../../src/wui/soldierlist.cc:407
 msgid "Prefer rookies"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:277
+#: ../../src/wui/constructionsitewindow.cc:292
 #: ../../src/wui/warehousewindow.cc:146
 msgid "Normal policy"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:281
+#: ../../src/wui/constructionsitewindow.cc:296
 #: ../../src/wui/warehousewindow.cc:147
 msgid "Preferably store selected wares here"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:285
+#: ../../src/wui/constructionsitewindow.cc:300
 #: ../../src/wui/warehousewindow.cc:148
 msgid "Do not store selected wares here"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:289
+#: ../../src/wui/constructionsitewindow.cc:304
 #: ../../src/wui/warehousewindow.cc:149
 msgid "Remove selected wares from here"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:308
+#: ../../src/wui/constructionsitewindow.cc:323
 msgid "Ware settings to apply after construction"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:311
+#: ../../src/wui/constructionsitewindow.cc:326
 msgid "Worker settings to apply after construction"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:319
+#: ../../src/wui/constructionsitewindow.cc:334
 msgid "Start an expedition from this port after completion"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:339
+#: ../../src/wui/constructionsitewindow.cc:354
 msgid "Settings to apply after construction"
 msgstr ""
 
@@ -4345,49 +4345,49 @@ msgstr ""
 msgid "Military"
 msgstr ""
 
-#: ../../src/wui/inputqueuedisplay.cc:271
+#: ../../src/wui/inputqueuedisplay.cc:275
 msgid "Highest priority"
 msgstr ""
 
-#: ../../src/wui/inputqueuedisplay.cc:274
+#: ../../src/wui/inputqueuedisplay.cc:278
 msgid "Normal priority"
 msgstr ""
 
-#: ../../src/wui/inputqueuedisplay.cc:277
+#: ../../src/wui/inputqueuedisplay.cc:281
 msgid "Lowest priority"
 msgstr ""
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue
-#: ../../src/wui/inputqueuedisplay.cc:339
+#: ../../src/wui/inputqueuedisplay.cc:343
 msgid "Decrease the number of wares you want to be stored here"
 msgstr ""
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue - option
 #. explanation
-#: ../../src/wui/inputqueuedisplay.cc:345
+#: ../../src/wui/inputqueuedisplay.cc:349
 msgid "Hold down Shift to decrease all ware types at the same time"
 msgstr ""
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue - option
 #. explanation
-#: ../../src/wui/inputqueuedisplay.cc:350
+#: ../../src/wui/inputqueuedisplay.cc:354
 msgid "Hold down Ctrl to allow none of this ware"
 msgstr ""
 
 #. * TRANSLATORS: Button tooltip in a building's wares input queue
-#: ../../src/wui/inputqueuedisplay.cc:367
+#: ../../src/wui/inputqueuedisplay.cc:371
 msgid "Increase the number of wares you want to be stored here"
 msgstr ""
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue - option
 #. explanation
-#: ../../src/wui/inputqueuedisplay.cc:373
+#: ../../src/wui/inputqueuedisplay.cc:377
 msgid "Hold down Shift to increase all ware types at the same time"
 msgstr ""
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue - option
 #. explanation
-#: ../../src/wui/inputqueuedisplay.cc:378
+#: ../../src/wui/inputqueuedisplay.cc:382
 msgid "Hold down Ctrl to allow all of this ware"
 msgstr ""
 
@@ -4895,66 +4895,62 @@ msgstr ""
 msgid "Zoom"
 msgstr ""
 
-#: ../../src/wui/multiplayersetupgroup.cc:61
+#: ../../src/wui/multiplayersetupgroup.cc:62
 msgid "Role"
 msgstr ""
 
-#: ../../src/wui/multiplayersetupgroup.cc:144
+#: ../../src/wui/multiplayersetupgroup.cc:145
 msgid "Spectator"
 msgstr ""
 
-#: ../../src/wui/multiplayersetupgroup.cc:202
-#: ../../src/wui/multiplayersetupgroup.cc:386
+#: ../../src/wui/multiplayersetupgroup.cc:203
+#: ../../src/wui/multiplayersetupgroup.cc:387
 msgid "Type"
 msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/wui/multiplayersetupgroup.cc:361
 #: ../../src/wui/multiplayersetupgroup.cc:362
-#: ../../src/wui/playerdescrgroup.cc:146
+#: ../../src/wui/multiplayersetupgroup.cc:363
+#: ../../src/wui/playerdescrgroup.cc:148
 msgid "Random AI"
 msgstr ""
 
-#: ../../src/wui/multiplayersetupgroup.cc:366
-#: ../../src/wui/multiplayersetupgroup.cc:368
+#: ../../src/wui/multiplayersetupgroup.cc:367
+#: ../../src/wui/multiplayersetupgroup.cc:369
 msgid "Shared in"
 msgstr ""
 
-#: ../../src/wui/multiplayersetupgroup.cc:386
-#: ../../src/wui/playerdescrgroup.cc:154
+#: ../../src/wui/multiplayersetupgroup.cc:387
+#: ../../src/wui/playerdescrgroup.cc:156
 msgid "Human"
 msgstr ""
 
 #. * TRANSLATORS: This is an option in multiplayer setup for sharing
 #. another player's starting position.
-#: ../../src/wui/multiplayersetupgroup.cc:462
+#: ../../src/wui/multiplayersetupgroup.cc:463
 #, c-format
 msgid "Shared in Player %u"
 msgstr ""
 
-#: ../../src/wui/multiplayersetupgroup.cc:524
-#: ../../src/wui/playerdescrgroup.cc:174
+#: ../../src/wui/multiplayersetupgroup.cc:525
+#: ../../src/wui/playerdescrgroup.cc:290
 msgid "Start type is set via the scenario"
 msgstr ""
 
-#: ../../src/wui/multiplayersetupgroup.cc:566
+#: ../../src/wui/multiplayersetupgroup.cc:585
 msgid "No Team"
 msgstr ""
 
-#: ../../src/wui/multiplayersetupgroup.cc:572
+#: ../../src/wui/multiplayersetupgroup.cc:591
 #, c-format
 msgid "Team %d"
 msgstr ""
 
-#: ../../src/wui/playerdescrgroup.cc:80
-msgid "Initialization"
-msgstr ""
-
-#: ../../src/wui/playerdescrgroup.cc:143
+#: ../../src/wui/playerdescrgroup.cc:145
 msgid "Computer"
 msgstr ""
 
-#: ../../src/wui/playerdescrgroup.cc:165
+#: ../../src/wui/playerdescrgroup.cc:167
 msgid "The tribe will be set at random."
 msgstr ""
 
@@ -5002,6 +4998,31 @@ msgstr ""
 
 #: ../../src/wui/plot_area.cc:357
 msgid "game"
+msgstr ""
+
+#: ../../src/wui/portdockwaresdisplay.cc:94
+msgid "Additional item"
+msgstr ""
+
+#: ../../src/wui/portdockwaresdisplay.cc:96
+msgid "(Empty)"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip for a ware that is present in the building
+#: ../../src/wui/portdockwaresdisplay.cc:141
+msgid "Present"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip for a ware that is neither present in the
+#. building nor being transported there
+#: ../../src/wui/portdockwaresdisplay.cc:145
+msgid "Missing"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip for a ware that is not present in the
+#. building, but already being transported there
+#: ../../src/wui/portdockwaresdisplay.cc:148
+msgid "Coming"
 msgstr ""
 
 #: ../../src/wui/productionsitewindow.cc:106
