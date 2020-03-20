@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "logic/filesystem_constants.h"
@@ -35,7 +33,6 @@
 #include "logic/player_end_result.h"
 #include "logic/playersmanager.h"
 #include "scripting/globals.h"
-#include "scripting/lua_interface.h"
 #include "scripting/lua_map.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"

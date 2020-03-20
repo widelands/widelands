@@ -30,7 +30,6 @@
 #include "map_io/tribes_legacy_lookup_table.h"
 
 namespace Widelands {
-class Building;
 
 /**
  * Worker is the base class for all humans (and actually potential non-humans,

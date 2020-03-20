@@ -21,9 +21,6 @@
 #define WL_SCRIPTING_LUA_COROUTINE_H
 
 #include <memory>
-#include <string>
-
-#include <stdint.h>
 
 #include "scripting/lua.h"
 
@@ -33,9 +30,6 @@ class LuaTable;
 
 namespace Widelands {
 class Player;
-class BuildingDescr;
-class WareDescr;
-class WorkerDescr;
 struct Coords;
 }  // namespace Widelands
 

@@ -26,14 +26,12 @@
 #include "graphic/animation/diranimations.h"
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/world/critter_program.h"
+#include "logic/map_objects/world/editor_category.h"
 
-class LuaTable;
 class WorldLegacyLookupTable;
 
 namespace Widelands {
 
-struct CritterAction;
-struct CritterProgram;
 class World;
 
 //

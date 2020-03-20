@@ -20,14 +20,7 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_PRODUCTION_PROGRAM_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_PRODUCTION_PROGRAM_H
 
-#include <cassert>
-#include <cstring>
 #include <memory>
-#include <set>
-#include <string>
-#include <vector>
-
-#include <stdint.h>
 
 #include "base/log.h"
 #include "base/macros.h"
@@ -38,7 +31,6 @@
 #include "logic/map_objects/tribes/training_attribute.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "scripting/lua_table.h"
-#include "sound/constants.h"
 
 namespace Widelands {
 
@@ -46,8 +38,6 @@ class Game;
 class ImmovableDescr;
 class ProductionSiteDescr;
 class ProductionSite;
-class TribeDescr;
-class Tribes;
 class Worker;
 class World;
 

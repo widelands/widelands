@@ -28,9 +28,6 @@
 #include "wui/plot_area.h"
 
 class InteractiveGameBase;
-namespace UI {
-struct Radiogroup;
-}
 
 struct GeneralStatisticsMenu : public UI::UniqueWindow {
 

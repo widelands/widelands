@@ -20,12 +20,8 @@
 #include "logic/map_objects/map_object.h"
 
 #include <algorithm>
-#include <cmath>
 #include <cstdarg>
-#include <cstdio>
-#include <cstring>
 #include <memory>
-#include <string>
 
 #include "base/log.h"
 #include "base/wexception.h"
@@ -41,7 +37,6 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
-#include "logic/queue_cmd_ids.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
 

@@ -25,7 +25,6 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
-#include "map_io/map_object_saver.h"
 
 constexpr uint16_t kCurrentPacketVersion = 5;
 
@@ -42,17 +41,16 @@ void EconomyDataPacket::read(FileRead& fr) {
 				   eco_->serial_, saved_serial);
 			}
 			// TODO(Nordfriese): Savegame compatibility
-			// assert(Economy::last_economy_serial_ >= eco_->serial_); // Uncomment when we break
-			// savegame compatibility
 			assert((packet_version == kCurrentPacketVersion) ^ (mol_ != nullptr));
 			Economy* other_eco = nullptr;
 			if (mol_) {
 				assert(eco_->type() == wwWARE);
-				const Serial serial = mol_->get_existing_economy_savegame_compatibility(eco_->serial());
+				const Serial serial = mol_->get_economy_savegame_compatibility(eco_->serial_);
 				other_eco = eco_->owner().get_economy(serial);
 				assert(other_eco);
 				assert(other_eco->type() == wwWORKER);
 			}
+			assert(Economy::last_economy_serial_ >= (other_eco ? other_eco->serial_ : eco_->serial_));
 			try {
 				const TribeDescr& tribe = eco_->owner().tribe();
 				while (Time const last_modified = fr.unsigned_32()) {

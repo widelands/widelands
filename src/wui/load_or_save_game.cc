@@ -19,17 +19,16 @@
 
 #include "wui/load_or_save_game.h"
 
-#include <ctime>
 #include <memory>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/time_string.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
+#include "graphic/text_layout.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"

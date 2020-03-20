@@ -21,8 +21,6 @@
 
 #include <cassert>
 #include <memory>
-#include <set>
-#include <string>
 
 #include <SDL.h>
 

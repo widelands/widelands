@@ -20,17 +20,11 @@
 #ifndef WL_ECONOMY_FERRY_FLEET_H
 #define WL_ECONOMY_FERRY_FLEET_H
 
-#include <boost/shared_ptr.hpp>
-
 #include "base/macros.h"
 #include "logic/map_objects/map_object.h"
-#include "logic/widelands_geometry.h"
 
 namespace Widelands {
 
-class Economy;
-struct Flag;
-struct RoutingNodeNeighbour;
 struct Ferry;
 struct Waterway;
 

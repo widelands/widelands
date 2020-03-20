@@ -39,8 +39,8 @@ wl_library(network
     base_exceptions
     base_i18n
     base_log
-    base_macros
     base_md5
+    base_random
     build_info
     chat
     game_io
@@ -54,7 +54,6 @@ wl_library(network
     logic_game_settings
     logic_tribe_basic_info
     map_io_map_loader
-    random
     scripting_lua_interface
     scripting_lua_table
     ui_basic

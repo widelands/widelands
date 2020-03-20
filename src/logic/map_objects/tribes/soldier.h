@@ -26,8 +26,6 @@
 #include "logic/map_objects/tribes/training_attribute.h"
 #include "logic/map_objects/tribes/worker.h"
 
-struct RGBColor;
-
 namespace Widelands {
 
 // Constants used to launch attacks
@@ -181,8 +179,6 @@ private:
 
 	DISALLOW_COPY_AND_ASSIGN(SoldierDescr);
 };
-
-class Building;
 
 enum CombatWalkingDir {
 	CD_NONE = 0,      // Not in combat

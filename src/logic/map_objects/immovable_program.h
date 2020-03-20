@@ -20,13 +20,8 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_IMMOVABLE_PROGRAM_H
 #define WL_LOGIC_MAP_OBJECTS_IMMOVABLE_PROGRAM_H
 
-#include <cstring>
 #include <memory>
-#include <string>
 
-#include "base/macros.h"
-
-#include "logic/map_objects/buildcost.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/map_object_program.h"
 

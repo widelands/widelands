@@ -223,7 +223,8 @@ lumberjack_message_08 = {
    body = (
       p(_[[Well done! Let’s wait till the hut is finished.]]) ..
       li_image("images/wui/menus/gamespeed.png",
-   _[[If you want things to go faster, simply use the Page Up key on your keyboard to increase the game speed. You can use Page Down to make the game slower again.]])
+         _[[If you want things to go faster, simply use the Page Up key on your keyboard to increase the game speed. You can use Page Down to make the game slower again.]]) ..
+         p(_[[Change is rapid with pressed Ctrl and smooth with pressed Shift.]])
    ),
    h = 200,
    w = 350

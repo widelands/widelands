@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "base/scoped_timer.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"

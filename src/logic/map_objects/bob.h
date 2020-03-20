@@ -28,15 +28,12 @@
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/map_object_program.h"
 #include "logic/map_objects/walkingdir.h"
+#include "logic/path.h"
 #include "logic/widelands_geometry.h"
 
 namespace Widelands {
 
 class Bob;
-class Map;
-struct Route;
-struct Transfer;
-class TribeDescr;
 
 /**
  * Implement MapObjectDescr for the following \ref Bob class.

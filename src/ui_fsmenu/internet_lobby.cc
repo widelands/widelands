@@ -19,18 +19,16 @@
 
 #include "ui_fsmenu/internet_lobby.h"
 
-#include <boost/bind.hpp>
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "base/log.h"
-#include "base/macros.h"
+#include "base/random.h"
+#include "build_info.h"
 #include "graphic/graphic.h"
-#include "network/crypto.h"
+#include "graphic/text_layout.h"
 #include "network/gameclient.h"
 #include "network/gamehost.h"
 #include "network/internet_gaming.h"
-#include "random/random.h"
+#include "network/internet_gaming_protocol.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/messagebox.h"
 #include "wlapplication_options.h"

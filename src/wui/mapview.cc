@@ -23,7 +23,9 @@
 
 #include "base/macros.h"
 #include "base/math.h"
+#include "graphic/game_renderer.h"
 #include "graphic/rendertarget.h"
+#include "logic/map_objects/world/world.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 #include "wui/mapviewpixelfunctions.h"
@@ -389,7 +391,8 @@ FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase,
 
 	fields_to_draw_.reset(egbase, view_.viewpoint, view_.zoom, dst);
 	const float scale = 1.f / view_.zoom;
-	::draw_terrain(egbase, fields_to_draw_, scale, workarea, grid, dst);
+	::draw_terrain(
+	   egbase.get_gametime(), egbase.world(), fields_to_draw_, scale, workarea, grid, dst);
 	return &fields_to_draw_;
 }
 
@@ -543,8 +546,12 @@ void MapView::zoom_around(float new_zoom,
 	}
 
 	case Transition::Smooth: {
+		if (view_plans_.empty() && view_.zoom_near(new_zoom)) {
+			// We're already at the target zoom...
+			return;
+		}
 		if (!view_plans_.empty() && view_plans_.back().back().view.zoom_near(new_zoom)) {
-			// We're already there
+			// ...or on the way there.
 			return;
 		}
 		const int w = get_w();

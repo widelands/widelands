@@ -21,17 +21,16 @@
 #define WL_UI_BASIC_LISTSELECT_H
 
 #include <deque>
-#include <limits>
+#include <memory>
 
-#include <boost/signals2.hpp>
-
-#include "graphic/color.h"
 #include "graphic/styles/table_style.h"
+#include "graphic/text/rendered_text.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/scrollbar.h"
 
 namespace UI {
-struct Scrollbar;
+
+class BaseDropdown;
 
 enum class ListselectLayout {
 	kPlain,     // Highlight the selected element
@@ -119,6 +118,10 @@ struct BaseListselect : public Panel {
 	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
 	bool handle_key(bool down, SDL_Keysym) override;
 
+	void set_notify_on_delete(UI::BaseDropdown* d) {
+		notify_on_delete_ = d;
+	}
+
 private:
 	static const int32_t DOUBLE_CLICK_INTERVAL = 500;  // half a second
 	static const int32_t ms_darken_value = -20;
@@ -159,6 +162,8 @@ private:
 	const UI::PanelStyleInfo* background_style_;  // Background color and texture. Not owned.
 	int lineheight_;
 	std::string current_tooltip_;
+
+	UI::BaseDropdown* notify_on_delete_;
 };
 
 template <typename Entry> struct Listselect : public BaseListselect {

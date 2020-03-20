@@ -20,6 +20,7 @@
 #ifndef WL_WUI_LOGIN_BOX_H
 #define WL_WUI_LOGIN_BOX_H
 
+#include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilinetextarea.h"

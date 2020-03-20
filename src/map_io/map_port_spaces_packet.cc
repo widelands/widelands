@@ -19,10 +19,6 @@
 
 #include "map_io/map_port_spaces_packet.h"
 
-#include <string>
-
-#include <boost/algorithm/string.hpp>
-
 #include "base/log.h"
 #include "io/profile.h"
 #include "logic/editor_game_base.h"

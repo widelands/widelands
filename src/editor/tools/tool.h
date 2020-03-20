@@ -28,8 +28,6 @@
 #include "logic/editor_game_base.h"
 #include "logic/widelands_geometry.h"
 
-class EditorInteractive;
-
 /**
  * An editor tool is a tool that can be selected in the editor. Examples are:
  * modify height, place immovable, place critter, place building. A Tool only

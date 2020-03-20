@@ -88,31 +88,19 @@ void MapObjectLoader::load_finish_game(Game& g) {
 	}
 }
 
-Serial MapObjectLoader::get_economy_savegame_compatibility(Serial ware_economy) {
-	const auto it = economy_savegame_compatibility_.find(ware_economy);
-	if (it == economy_savegame_compatibility_.end()) {
-		// Since we don't now know how many economies there are left to load,
-		// we choose the highest possible serial for the new economy.
-		// That way it is highly unlikely that the running serial for new economies
-		// will collide with this savegame hack.
-		const Serial worker_economy = kInvalidSerial - 1 - economy_savegame_compatibility_.size();
-		log("Savegame compatibility: Splitting economy %u into ware economy %u and worker economy "
-		    "%u\n",
-		    ware_economy, ware_economy, worker_economy);
-		economy_savegame_compatibility_[ware_economy] = worker_economy;
-		return worker_economy;
+constexpr Serial kEconomySavegameCompatibilityPrefix = std::numeric_limits<Serial>::max() / 2;
+Serial MapObjectLoader::get_economy_savegame_compatibility(Serial ware_economy) const {
+	if (ware_economy >= kEconomySavegameCompatibilityPrefix) {
+		throw GameDataError(
+		   "We are sorry, but this savegame is not compatible with the current Widelands "
+		   "version any more because it contains an economy with the unbelievably high serial %u",
+		   ware_economy);
 	}
-	return it->second;
-}
-
-Serial MapObjectLoader::get_existing_economy_savegame_compatibility(Serial ware_economy) const {
-	const auto it = economy_savegame_compatibility_.find(ware_economy);
-	if (it == economy_savegame_compatibility_.end()) {
-		throw GameDataError("MapObjectLoader::get_existing_economy_savegame_compatibility: "
-		                    "no matching worker economy found for ware economy %u",
-		                    ware_economy);
-	}
-	return it->second;
+	const Serial worker_economy = kEconomySavegameCompatibilityPrefix + ware_economy;
+	log("Savegame compatibility: Splitting worker economy %u off from old-style economy %u\n",
+	    worker_economy, ware_economy);
+	assert(worker_economy > ware_economy);
+	return worker_economy;
 }
 
 }  // namespace Widelands

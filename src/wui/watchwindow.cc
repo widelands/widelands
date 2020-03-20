@@ -19,9 +19,6 @@
 
 #include "wui/watchwindow.h"
 
-#include <string>
-#include <vector>
-
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "base/rect.h"
@@ -33,7 +30,6 @@
 #include "wlapplication_options.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/interactive_player.h"
-#include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
 
 #define REFRESH_TIME 5000

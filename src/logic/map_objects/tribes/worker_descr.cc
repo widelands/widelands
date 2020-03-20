@@ -30,7 +30,6 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/map_objects/tribes/worker_program.h"
-#include "logic/nodecaps.h"
 
 namespace Widelands {
 

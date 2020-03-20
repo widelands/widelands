@@ -37,7 +37,6 @@ wl_library(scripting_lua_table
   DEPENDS
     base_log
     base_geometry
-    base_macros
     scripting_base
     scripting_coroutine
     scripting_errors

@@ -19,6 +19,8 @@
 
 #include "ui_basic/button.h"
 
+#include <memory>
+
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
@@ -96,8 +98,8 @@ Button::Button(Panel* const parent,
 		   4 * kButtonImageMargin;
 		if (w == 0) {
 			// Automatically resize for text width too.
-			new_width = std::max(text_width(richtext_escape(title_), style_->enabled().font()),
-			                     text_width(richtext_escape(title_), style_->disabled().font())) +
+			new_width = std::max(text_width(title_, style_->enabled().font()),
+			                     text_width(title_, style_->disabled().font())) +
 			            8 * kButtonImageMargin;
 		}
 		set_desired_size(new_width, new_height);

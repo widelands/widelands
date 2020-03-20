@@ -21,6 +21,7 @@
 
 #include "base/log.h"
 #include "base/md5.h"
+#include "base/random.h"
 #include "base/wexception.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
@@ -33,7 +34,6 @@
 #include "logic/game_data_error.h"
 #include "logic/playercommand.h"
 #include "logic/save_handler.h"
-#include "random/random.h"
 
 namespace Widelands {
 

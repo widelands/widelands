@@ -20,14 +20,9 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_WORLD_TERRAIN_DESCRIPTION_H
 #define WL_LOGIC_MAP_OBJECTS_WORLD_TERRAIN_DESCRIPTION_H
 
-#include <memory>
-#include <string>
-#include <vector>
-
 #include "base/macros.h"
 #include "graphic/color.h"
 #include "graphic/image.h"
-#include "logic/map_objects/world/resource_description.h"
 #include "logic/widelands.h"
 
 class LuaTable;

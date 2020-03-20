@@ -19,9 +19,6 @@
 
 #include "map_io/map_buildingdata_packet.h"
 
-#include <map>
-#include <memory>
-
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/expedition_bootstrap.h"
@@ -63,7 +60,7 @@ constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
 constexpr uint16_t kCurrentPacketVersionConstructionsite = 4;
 constexpr uint16_t kCurrentPacketPFBuilding = 1;
 // Responsible for warehouses and expedition bootstraps
-constexpr uint16_t kCurrentPacketVersionWarehouse = 7;
+constexpr uint16_t kCurrentPacketVersionWarehouse = 8;
 constexpr uint16_t kCurrentPacketVersionMilitarysite = 6;
 constexpr uint16_t kCurrentPacketVersionProductionsite = 8;
 constexpr uint16_t kCurrentPacketVersionTrainingsite = 5;
@@ -301,8 +298,8 @@ void MapBuildingdataPacket::read_constructionsite(
 					constructionsite.info_.intermediates.push_back(
 					   game.tribes().get_building_descr(game.tribes().building_index(fr.c_string())));
 				}
-				constructionsite.settings_.reset(
-				   BuildingSettings::load(game, constructionsite.owner().tribe(), fr));
+				constructionsite.settings_.reset(BuildingSettings::load(
+				   game, constructionsite.owner().tribe(), fr, tribes_lookup_table));
 			} else {
 				constructionsite.init_settings();
 			}

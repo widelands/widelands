@@ -19,10 +19,7 @@
 
 #include "sound/songset.h"
 
-#include <utility>
-
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/regex.hpp>
+#include <cassert>
 
 #include "base/log.h"
 #include "io/fileread.h"

@@ -20,7 +20,6 @@
 #ifndef WL_MAP_IO_WORLD_LEGACY_LOOKUP_TABLE_H
 #define WL_MAP_IO_WORLD_LEGACY_LOOKUP_TABLE_H
 
-#include <map>
 #include <memory>
 #include <string>
 

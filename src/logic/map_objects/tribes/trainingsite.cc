@@ -19,10 +19,7 @@
 
 #include "logic/map_objects/tribes/trainingsite.h"
 
-#include <cstdio>
 #include <memory>
-
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/macros.h"
@@ -525,7 +522,7 @@ void TrainingSite::drop_stalled_soldiers(Game&) {
 }
 
 const BuildingSettings* TrainingSite::create_building_settings() const {
-	TrainingsiteSettings* settings = new TrainingsiteSettings(descr());
+	TrainingsiteSettings* settings = new TrainingsiteSettings(descr(), owner().tribe());
 	settings->apply(*ProductionSite::create_building_settings());
 	settings->desired_capacity =
 	   std::min(settings->max_capacity, soldier_control_.soldier_capacity());
