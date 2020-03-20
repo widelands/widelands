@@ -199,6 +199,9 @@ public:
 		return portdock_;
 	}
 
+	// Returns the first matching not completely filled waresqueue of the expedition if this is a
+	// port.
+	// Will throw an exception otherwise or if all queues of this type are full.
 	const BuildingSettings* create_building_settings() const override;
 
 	// Returns the waresqueue of the expedition if this is a port.

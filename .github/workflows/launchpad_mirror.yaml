@@ -57,15 +57,16 @@ jobs:
         mv .gitignore .bzrignore
     - name: Committing and pushing changes
       run: |
+        cd ~/wl_trunk
         commit_message=$(curl -i "https://api.github.com/repos/widelands/widelands/commits/$GITHUB_SHA" | grep -F "\"message\": ")
         commit_message=${commit_message#*: \"}
         commit_message=${commit_message%\",}
-        commit_message="$GITHUB_ACTOR: $commit_message ($GITHUB_SHA)"
-        echo $commit_message
-        cd ~/wl_trunk
+        commit_message="$commit_message\n\n(by $GITHUB_ACTOR)\n$GITHUB_SHA"
+        commit_message=${commit_message//"\r\n"/"\n"}
+        printf "$commit_message" > ~/temp_commit_message
         bzr remove
         bzr add
-        bzr commit --strict -m "$commit_message"
+        bzr commit --strict -F ~/temp_commit_message
         set +e
         check_for_remote_changes=$(curl -i "https://api.github.com/repos/widelands/widelands/commits/master" | grep -m 1 "\"sha\": ")
         set -e

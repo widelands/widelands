@@ -54,6 +54,7 @@ private:
 		                 bool can_act,
 		                 Widelands::ConstructionSite& cs,
 		                 Widelands::WareWorker type);
+		~FakeWaresDisplay() override;
 
 	protected:
 		void draw_ware(RenderTarget& dst, Widelands::DescriptionIndex ware) override;
@@ -61,6 +62,7 @@ private:
 	private:
 		Widelands::WarehouseSettings& settings_;
 		const Widelands::TribeDescr& tribe_;
+		std::unique_ptr<Widelands::WareList> warelist_;
 	};
 
 	Widelands::OPtr<Widelands::ConstructionSite> construction_site_;

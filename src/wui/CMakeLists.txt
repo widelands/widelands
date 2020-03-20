@@ -321,6 +321,7 @@ wl_library(wui
     logic_objectives
     logic_tribe_basic_info
     logic_widelands_geometry
+    map_io_map_loader
     network
     note_sound
     notifications

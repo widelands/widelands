@@ -88,6 +88,8 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 		return *new CmdShipCancelExpedition();
 	case QueueCommandTypes::kStartOrCancelExpedition:
 		return *new CmdStartOrCancelExpedition();
+	case QueueCommandTypes::kExpeditionConfig:
+		return *new CmdExpeditionConfig();
 	case QueueCommandTypes::kShipConstructPort:
 		return *new CmdShipConstructPort();
 	case QueueCommandTypes::kShipScoutDirection:
