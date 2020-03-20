@@ -577,11 +577,10 @@ const MethodType<LuaMapView> LuaMapView::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaMapView> LuaMapView::Properties[] = {
-    PROP_RO(LuaMapView, average_fps),
-   PROP_RO(LuaMapView, center_map_pixel), PROP_RW(LuaMapView, buildhelp),
-   PROP_RW(LuaMapView, census),           PROP_RW(LuaMapView, statistics),
-   PROP_RO(LuaMapView, is_building_road), PROP_RO(LuaMapView, is_animating),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaMapView, average_fps),  PROP_RO(LuaMapView, center_map_pixel),
+   PROP_RW(LuaMapView, buildhelp),    PROP_RW(LuaMapView, census),
+   PROP_RW(LuaMapView, statistics),   PROP_RO(LuaMapView, is_building_road),
+   PROP_RO(LuaMapView, is_animating), {nullptr, nullptr, nullptr},
 };
 
 LuaMapView::LuaMapView(lua_State* L) : LuaPanel(get_egbase(L).get_ibase()) {
@@ -601,8 +600,8 @@ void LuaMapView::__unpersist(lua_State* L) {
       (RO) The average frames per second that the user interface is being drawn at.
 */
 int LuaMapView::get_average_fps(lua_State* L) {
-    lua_pushdouble(L, get()->average_fps());
-    return 1;
+	lua_pushdouble(L, get()->average_fps());
+	return 1;
 }
 /* RST
    .. attribute:: center_map_pixel
