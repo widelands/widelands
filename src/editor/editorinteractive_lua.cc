@@ -169,7 +169,8 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 		write("local %s = wl.Game().map", autogen_map_name);
 
 		const uint8_t nrplayers = map.get_nrplayers();
-		std::unique_ptr<std::string[]> pvar_cache(new std::string[nrplayers]);; // so the char*s won't go out of scope at once
+		std::unique_ptr<std::string[]> pvar_cache(new std::string[nrplayers]);
+		;  // so the char*s won't go out of scope at once
 		std::unique_ptr<const char* []> pvar(new const char*[nrplayers]);
 		for (unsigned i = 1; i <= nrplayers; ++i) {
 			pvar_cache[i - 1] = generate_unused_name("p" + std::to_string(i));

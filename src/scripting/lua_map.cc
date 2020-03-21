@@ -6287,7 +6287,8 @@ int LuaShip::get_scouting_direction(lua_State* L) {
 int LuaShip::set_scouting_direction(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	if (upcast(Game, game, &egbase)) {
-		game->send_player_ship_scouting_direction(*get(L, egbase), Widelands::string_to_walkingdir(luaL_checkstring(L, 3)));
+		game->send_player_ship_scouting_direction(
+		   *get(L, egbase), Widelands::string_to_walkingdir(luaL_checkstring(L, 3)));
 	}
 	return 0;
 }
