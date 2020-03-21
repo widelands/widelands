@@ -5024,13 +5024,13 @@ int LuaConstructionSite::get_priority(lua_State* L) {
 		}
 		for (const auto& pair : ps->ware_queues) {
 			if (pair.first == item) {
-				luaL_pushstring(L, Widelands::priority_to_string(pair.second.priority));
+				lua_pushstring(L, Widelands::priority_to_string(pair.second.priority));
 				return 1;
 			}
 		}
 		NEVER_HERE();
 	}
-	luaL_pushstring(L, Widelands::priority_to_string(get(L, get_egbase(L))->get_priority(Widelands::wwWARE, item)));
+	lua_pushstring(L, Widelands::priority_to_string(get(L, get_egbase(L))->get_priority(Widelands::wwWARE, item)));
 	return 1;
 }
 int LuaConstructionSite::set_priority(lua_State* L) {
@@ -5704,7 +5704,7 @@ int LuaProductionSite::get_valid_workers(lua_State* L) {
 
 // documented in parent class
 int LuaProductionSite::get_priority(lua_State* L) {
-	luaL_pushstring(L, Widelands::priority_to_string(get(L, get_egbase(L))
+	lua_pushstring(L, Widelands::priority_to_string(get(L, get_egbase(L))
 	                    ->get_priority(Widelands::wwWARE, get_egbase(L).tribes().safe_ware_index(
 	                                                         luaL_checkstring(L, 2)))));
 	return 1;
