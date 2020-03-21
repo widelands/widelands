@@ -152,11 +152,11 @@ void MapObjectPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSav
 
 		// These checks can be eliminated and the object saver simplified
 		// once all MapObjects are saved using the new system
-		if (mos.is_object_known(obj))
+		if (mos.is_object_known(obj)) {
 			continue;
+		}
 
-		if (!is_a(Game, &egbase) &&
-		    (is_a(PlayerImmovable, pobj) || is_a(Worker, pobj) || is_a(Ship, pobj))) {
+		if (!is_a(Game, &egbase) && obj.get_owner()) {
 			// those are defined via Lua scripting and NOT stored in map files for the reason explained
 			// in MapScenarioEditorPacket
 			continue;

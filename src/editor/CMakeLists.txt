@@ -1,6 +1,7 @@
 wl_library(editor
   SRCS
     editorinteractive.cc
+    editorinteractive_lua.cc
     editorinteractive.h
     map_generator.cc
     map_generator.h

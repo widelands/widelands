@@ -369,10 +369,12 @@ void MapScenarioEditorPacket::write(FileSystem& fs, EditorGameBase& egbase, MapO
 
 	fw.unsigned_16(kCurrentPacketVersion);
 
-	if (eia->finalized_) {
-		// Scripting
-
+	if (!eia->finalized_) {
+		fw.unsigned_8(0);
+	} else {
 		fw.unsigned_8(1);
+
+		// Scripting
 
 		fw.unsigned_8(eia->get_display_flag(InteractiveBase::dfShowCensus) ? 1 : 0);
 
@@ -639,8 +641,6 @@ void MapScenarioEditorPacket::write(FileSystem& fs, EditorGameBase& egbase, MapO
 				}
 			}
 		}
-	} else {
-		fw.unsigned_8(0);
 	}
 
 	fw.write(fs, "binary/scenario");
