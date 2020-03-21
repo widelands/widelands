@@ -4988,7 +4988,8 @@ int LuaConstructionSite::get_setting_soldier_capacity(lua_State* L) {
 	if (ms && ts) {
 		report_error(L, "A constructionsite cannot become both a militarysite and a trainingsite");
 	} else if (!ms && !ts) {
-		report_error(L, "This constructionsite will become neither a militarysite nor a trainingsite");
+		report_error(
+		   L, "This constructionsite will become neither a militarysite nor a trainingsite");
 	}
 	lua_pushuint32(L, ms ? ms->desired_capacity : ts->desired_capacity);
 	return 1;
@@ -4999,7 +5000,8 @@ int LuaConstructionSite::set_setting_soldier_capacity(lua_State* L) {
 	if (ms && ts) {
 		report_error(L, "A constructionsite cannot become both a militarysite and a trainingsite");
 	} else if (!ms && !ts) {
-		report_error(L, "This constructionsite will become neither a militarysite nor a trainingsite");
+		report_error(
+		   L, "This constructionsite will become neither a militarysite nor a trainingsite");
 	}
 	(ms ? ms->desired_capacity : ts->desired_capacity) = luaL_checkuint32(L, -1);
 	return 0;
