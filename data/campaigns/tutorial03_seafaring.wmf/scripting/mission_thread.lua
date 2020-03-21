@@ -92,7 +92,7 @@ function expedition()
    set_objective_done(o)
 
    -- places 5 signs with iron to show the player he really found some iron ore
-   local fields = map:get_field(97,35):region(3)
+   local fields = iron_on_island:region(3)
    for i=1,5 do
       local successful = false
       while not successful do
@@ -112,13 +112,22 @@ end
 function conclude_expedition()
    additional_port_space.terr = "desert_steppe" -- make it land again so that the player can build a port
    message_box_objective(plr, expedition4)
+   sleep(3000)
+   iron_mine()
+end
+
+function iron_mine()
+   local o = message_box_objective(plr, expedition5)
+   while #plr:get_buildings("atlanteans_ironmine") < 1 do sleep(3000) end
+   print(string.format("get_buildings('atlanteans_ironmine') = %d", #plr:get_buildings("atlanteans_ironmine")))
+   set_objective_done(o)
    expedition_done = true
 end
 
 function complete_ferry_yard()
    plr:allow_buildings{"atlanteans_ferry_yard"}
    local o = message_box_objective(plr, ferry_2)
-   while #plr:get_buildings("atlanteans_ferry_yard") < 1 do sleep(200) end
+   while #plr:get_buildings("atlanteans_ferry_yard") < 1 do sleep(3000) end
    set_objective_done(o)
 end
 
@@ -139,6 +148,7 @@ end
 function complete_ferries()
    -- wait until 4 ferries are assigned to waterways
    local n = 0
+   -- TODO: make oneline
    while n < 4 do
       sleep(3000)
       -- get_workers reports assigned counts
@@ -150,6 +160,7 @@ end
 function watch_ferry_production()
    -- warn player about over-producing
    local n = 0
+   -- TODO: make oneline
    while n < 1 do
       sleep(3000)
       n = plr:get_workers("atlanteans_ferry")
@@ -168,6 +179,8 @@ function waterways()
    local area = shore:region(37)
    while not construction_started_region(area, "atlanteans_ferry_yard") do sleep(1000) end
    sleep(5000)
+   -- place resource indicator again in case player preferred ships/exploring
+   map:place_immovable("atlanteans_resi_gold_2", gold_mine, "tribes")
 
    message_box_objective(plr, ferry_3)
    sleep(500)
@@ -189,8 +202,8 @@ function waterways()
    run(complete_ferries)
    watch_ferry_production()
    while not (gold_mine_done and ferries_done) do sleep(3000) end
-
    set_objective_done(o)
+
    message_box_objective(plr, ferry_6)
    waterways_done = true
 end

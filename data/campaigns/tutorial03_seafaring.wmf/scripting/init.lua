@@ -18,6 +18,7 @@ sf = map.player_slots[1].starting_field
 second_port_field = map:get_field(37, 27)
 shipyard_tip = map:get_field(37, 41)
 port_on_island = map:get_field(102, 36)
+iron_on_island = map:get_field(97,35)
 additional_port_space = map:get_field(85, 5)
 castle_field = map:get_field(36, 20)
 waterway_field = map:get_field(27, 95)

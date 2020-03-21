@@ -184,12 +184,31 @@ expedition4 = {
    title = _"Conclusion",
    body = (
       h1(_"Congratulations") ..
-      p(_[[You’ve lead the expedition to a successful end and founded a new colony. I’ve sent out some geologists – they already report that they’ve found some iron ore.]]) ..
+      li_object('atlanteans_resi_iron_2', _[[You’ve lead the expedition to a successful end and founded a new colony. I’ve sent out some geologists – they already report that they’ve found some iron ore.]]) ..
       p(_[[So far you have learned everything about seafaring: how to build ports and ships and how to send out an expedition. Remember that expeditions are sometimes the fastest way to reach essential resources – and sometimes the only one.]]) ..
       p(_[[But I want to speak a word of warning. Ports are like headquarters: they can be attacked by a nearby enemy. While your headquarters has soldiers to defend it, your newly built port won’t. You should therefore avoid settling next to an enemy.]]) ..
       p(_[[On this map, there is no enemy to fear. In other games, you should make building one or two military fortifications around your new colonies a priority.]])
    ),
    h = 400
+}
+
+expedition5 = {
+   position = "topright",
+   field = iron_on_island,
+   title = _"Our mission",
+   body = (
+      h1(_"Start mining") ..
+      li_object('atlanteans_ironmine', p(_[[It was long and expensive job to get here. The island has not much to offer, but there is some iron ore inside its mountain. Our economy needs iron ore, so we have to build an iron mine.]]), plr.color) ..
+      li(_[[Start mining iron ore in the mountain.]])
+   ),
+   h = 300,
+   obj_name = "build_iron_mine",
+   obj_title = _"Build an irone mine on the island",
+   obj_body = (
+      h1(_"Build an iron mine") ..
+      p(_[[Our economy lacks resources.]]) ..
+      li_arrow(_[[Start mining iron ore in mountains on the island.]])
+   )
 }
 
 ferry_1 = {
