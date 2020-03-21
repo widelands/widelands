@@ -100,8 +100,9 @@ ShipCfg::ShipCfg(InteractiveBase& ib, Ship& s)
 		const uint32_t capacity = s.get_capacity();
 		const uint32_t carried_items = s.get_nritems();
 		uint32_t rows = capacity / kShipCfgMaxColumns;
-		if (kShipCfgMaxColumns * rows < capacity)
+		if (kShipCfgMaxColumns * rows < capacity) {
 			++rows;
+		}
 		assert(kShipCfgMaxColumns * rows >= capacity);
 
 		row_boxes_.resize(rows);
@@ -161,8 +162,9 @@ Ship* ShipCfg::ship() {
 	return ship_.get(ibase_.egbase());
 }
 void ShipCfg::think() {
-	if (!ship())
+	if (!ship()) {
 		die();
+	}
 	UI::Window::think();
 }
 void ShipCfg::clicked_ok() {
@@ -178,8 +180,9 @@ void ShipCfg::clicked_ok() {
 		uint32_t capacity = capacity_.get_value();
 		s->set_capacity(capacity);
 		for (const auto& dd : items_) {
-			if (!capacity)
+			if (!capacity) {
 				break;
+			}
 			if (dd && dd->get_selected().second != Widelands::INVALID_INDEX) {
 				if (dd->get_selected().first == Widelands::wwWARE) {
 					Widelands::WareInstance& w = *new Widelands::WareInstance(
@@ -279,8 +282,9 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Ship* s
 		btn_sink_ = make_button(
 		   buttons, "sink", _("Sink the ship"), pic_sink, boost::bind(&ShipWindow::act_sink, this));
 		buttons->add(btn_sink_);
-	} else
+	} else {
 		btn_sink_ = nullptr;
+	}
 
 	btn_cancel_expedition_ =
 	   make_button(buttons, "cancel_expedition", _("Cancel the Expedition"), pic_cancel_expedition,
@@ -294,16 +298,18 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Ship* s
 		                         boost::bind(&ShipWindow::act_debug, this));
 		btn_debug_->set_enabled(true);
 		buttons->add(btn_debug_);
-	} else
+	} else {
 		btn_debug_ = nullptr;
+	}
 	if (ibase_.omnipotent()) {
 		btn_editorcfg_ =
 		   make_button(buttons, "editorcfg", _("Configure wares and workers and rename the ship"),
 		               pic_editorcfg, boost::bind(&ShipWindow::act_editorcfg, this));
 		btn_editorcfg_->set_enabled(true);
 		buttons->add(btn_editorcfg_);
-	} else
+	} else {
 		btn_editorcfg_ = nullptr;
+	}
 
 	if (ibase_.get_game()) {
 		btn_destination_ =
@@ -311,8 +317,9 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Ship* s
 		               boost::bind(&ShipWindow::act_destination, this));
 		btn_destination_->set_enabled(false);
 		buttons->add(btn_destination_);
-	} else
+	} else {
 		btn_destination_ = nullptr;
+	}
 
 	btn_goto_ = make_button(
 	   buttons, "goto", _("Go to ship"), pic_goto, boost::bind(&ShipWindow::act_goto, this));
@@ -399,10 +406,12 @@ void ShipWindow::think() {
 	set_title(ship->get_shipname());
 	bool can_act = ibase_.can_act(ship->owner().player_number()) || ibase_.omnipotent();
 
-	if (btn_destination_)
+	if (btn_destination_) {
 		btn_destination_->set_enabled(ship->get_current_destination(ibase_.egbase()));
-	if (btn_sink_)
+	}
+	if (btn_sink_) {
 		btn_sink_->set_enabled(can_act);
+	}
 
 	display_->clear();
 	for (uint32_t idx = 0; idx < ship->get_nritems(); ++idx) {
@@ -445,8 +454,9 @@ void ShipWindow::think() {
 		                                    (state != Ship::ShipStates::kExpeditionColonizing));
 		btn_explore_island_ccw_->set_enabled(can_act && coast_nearby &&
 		                                     (state != Ship::ShipStates::kExpeditionColonizing));
-		if (btn_sink_)
+		if (btn_sink_) {
 			btn_sink_->set_enabled(can_act && (state != Ship::ShipStates::kExpeditionColonizing));
+		}
 	}
 	btn_cancel_expedition_->set_enabled(ship->state_is_expedition() && can_act &&
 	                                    (state != Ship::ShipStates::kExpeditionColonizing));
@@ -533,8 +543,9 @@ void ShipWindow::act_scout_towards(WalkingDir direction) {
 		return;
 	}
 	// ignore request if the direction is not swimmable at all
-	if (!ship->exp_dir_swimmable(static_cast<Direction>(direction)))
+	if (!ship->exp_dir_swimmable(static_cast<Direction>(direction))) {
 		return;
+	}
 	ibase_.game().send_player_ship_scouting_direction(*ship, direction);
 }
 
@@ -544,8 +555,9 @@ void ShipWindow::act_construct_port() {
 	if (ship == nullptr) {
 		return;
 	}
-	if (ship->exp_port_spaces().empty())
+	if (ship->exp_port_spaces().empty()) {
 		return;
+	}
 	ibase_.game().send_player_ship_construct_port(*ship, ship->exp_port_spaces().front());
 }
 
@@ -558,10 +570,11 @@ void ShipWindow::act_explore_island(IslandExploreDirection direction) {
 	bool coast_nearby = false;
 	bool moveable = false;
 	for (Direction dir = 1; (dir <= LAST_DIRECTION) && (!coast_nearby || !moveable); ++dir) {
-		if (!ship->exp_dir_swimmable(dir))
+		if (!ship->exp_dir_swimmable(dir)) {
 			coast_nearby = true;
-		else
+		} else {
 			moveable = true;
+		}
 	}
 	if (!coast_nearby || !moveable)
 		return;

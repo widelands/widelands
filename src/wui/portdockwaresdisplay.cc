@@ -184,11 +184,12 @@ public:
 			return;
 		}
 		if (iq) {
-			if (upcast(Widelands::Game, game, &egbase_))
+			if (upcast(Widelands::Game, game, &egbase_)) {
 				game->send_player_expedition_config(portdock_, iq->get_type(), iq->get_index(), false);
-			else
+			} else {
 				portdock_.expedition_bootstrap()->demand_additional_item(
 				   egbase_, iq->get_type(), iq->get_index(), false);
+			}
 		}
 		if (new_sel.second != Widelands::INVALID_INDEX) {
 			if (upcast(Widelands::Game, game, &egbase_))

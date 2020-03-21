@@ -596,7 +596,7 @@ SoldierSettings::SoldierSettings(InteractiveBase& ib, Widelands::Soldier& s, boo
                      1,
                      1,
                      UI::SliderStyle::kWuiDark,
-                     _("The soldier’s current hitpoints")),
+                     _("The soldier’s current health")),
      delete_(&main_box_,
              "delete",
              0,
