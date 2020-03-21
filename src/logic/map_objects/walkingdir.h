@@ -20,6 +20,8 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_WALKINGDIR_H
 #define WL_LOGIC_MAP_OBJECTS_WALKINGDIR_H
 
+#include <string>
+
 namespace Widelands {
 
 /// Constants for where we are going.
@@ -38,6 +40,8 @@ enum WalkingDir {
 WalkingDir get_cw_neighbour(WalkingDir dir);
 WalkingDir get_ccw_neighbour(WalkingDir dir);
 WalkingDir get_backward_dir(WalkingDir dir);
+
+std::string walkingdir_to_string(WalkingDir);
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_WALKINGDIR_H

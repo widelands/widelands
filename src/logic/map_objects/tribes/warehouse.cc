@@ -64,6 +64,32 @@ void remove_no_longer_existing_workers(Game& game, std::vector<Worker*>* workers
 
 }  // namespace
 
+std::string to_string(Widelands::StockPolicy p) {
+	switch (p) {
+	case Widelands::StockPolicy::kNormal:
+		return "normal";
+	case Widelands::StockPolicy::kPrefer:
+		return "prefer";
+	case Widelands::StockPolicy::kDontStock:
+		return "dontstock";
+	case Widelands::StockPolicy::kRemove:
+		return "remove";
+	}
+	NEVER_HERE();
+}
+Widelands::StockPolicy to_policy(const std::string& str) {
+	if (str == "normal") {
+		return StockPolicy::kNormal;
+	} else if (str == "prefer") {
+		return StockPolicy::kPrefer;
+	} else if (str == "dontstock") {
+		return StockPolicy::kDontStock;
+	} else if (str == "remove") {
+		return StockPolicy::kRemove;
+	}
+	NEVER_HERE();
+}
+
 bool Warehouse::AttackTarget::can_be_attacked() const {
 	return warehouse_->descr().get_conquers() > 0;
 }

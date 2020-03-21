@@ -47,8 +47,8 @@ static bool create_road(Widelands::EditorGameBase& egbase,
 	}
 	Widelands::CoordPath cp(egbase.map(), path);
 	const auto& cv = cp.get_coords();
-	const auto first = cv.begin() + 1;
-	const auto last = cv.end() - 1;
+	const auto first = cv.cbegin() + 1;
+	const auto last = cv.cend() - 1;
 	if (mode == EditorActionArgs::RoadMode::kWaterway) {
 		Widelands::Waterway* ww = force ? &player.force_waterway(path) : player.build_waterway(path);
 		if (!ww) {
@@ -64,9 +64,11 @@ static bool create_road(Widelands::EditorGameBase& egbase,
 		if (primary_carrier) {
 			std::set<Widelands::Waterway*> wws;
 			for (auto it = first; it <= last; ++it) {
-				if (upcast(Widelands::Waterway, w, egbase.map()[*it].get_immovable()))
-					if (!wws.count(w))
+				if (upcast(Widelands::Waterway, w, egbase.map()[*it].get_immovable())) {
+					if (!wws.count(w)) {
 						wws.insert(w);
+					}
+				}
 			}
 			assert(!wws.empty());
 			for (Widelands::Waterway* w : wws) {

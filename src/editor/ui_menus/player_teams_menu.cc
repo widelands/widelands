@@ -78,7 +78,8 @@ EditorPlayerTeamsMenu::PlayerRelationsPanel::PlayerRelationsPanel(UI::Panel* par
 		                   kPlayerRelationsCellSize, kPlayerRelationsCellSize,
 		                   UI::ButtonStyle::kWuiSecondary,
 		                   g_gr->images().get("images/wui/fieldaction/menu_tab_attack.png"),
-		                   (boost::format(_("Go to %s's starting position")) %
+		                   /** TRANSLATORS: %s is the name of a player */
+		                   (boost::format(_("Go to %s’s starting position")) %
 		                    eia_.egbase().map().get_scenario_player_name(i + 1))
 		                      .str());
 		b->sigclicked.connect([this, i]() {
@@ -159,15 +160,19 @@ bool EditorPlayerTeamsMenu::PlayerRelationsPanel::handle_mousepress(uint8_t b,
 		return false;
 	}
 	if (att == 0) {
-		for (uint8_t a = 1; a <= nr_players_; ++a)
-			if (a != def)
+		for (uint8_t a = 1; a <= nr_players_; ++a) {
+			if (a != def) {
 				eia_.egbase().get_player(a)->set_attack_forbidden(
 				   def, !eia_.egbase().player(a).is_attack_forbidden(def));
+			}
+		}
 	} else if (def == 0) {
-		for (uint8_t d = 1; d <= nr_players_; ++d)
-			if (d != att)
+		for (uint8_t d = 1; d <= nr_players_; ++d) {
+			if (d != att) {
 				eia_.egbase().get_player(att)->set_attack_forbidden(
 				   d, !eia_.egbase().player(att).is_attack_forbidden(d));
+			}
+		}
 	} else {
 		eia_.egbase().get_player(att)->set_attack_forbidden(
 		   def, !eia_.egbase().player(att).is_attack_forbidden(def));

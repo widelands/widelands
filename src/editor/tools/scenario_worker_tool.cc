@@ -36,7 +36,7 @@ int32_t ScenarioPlaceWorkerTool::handle_click_impl(const Widelands::NodeAndTrian
 	const size_t nr_items = args->worker_types.size();
 	Widelands::EditorGameBase& egbase = eia.egbase();
 	args->infrastructure_placed = 0;
-	if (args->random_index < 0) {
+	if (args->random_index == kRandomIndexNotSet) {
 		args->random_index = std::rand() % nr_items;
 	}
 	Widelands::Player* player = egbase.get_player(args->new_owner);
@@ -55,7 +55,7 @@ int32_t ScenarioPlaceWorkerTool::handle_click_impl(const Widelands::NodeAndTrian
 			worker.set_carried_ware(egbase, wi);
 		}
 		bob = &worker;
-	} else {
+	} else if ((*map)[center.node].nodecaps() & Widelands::MOVECAPS_SWIM) {
 		bob = &egbase.create_ship(center.node, player->tribe().ship(), player);
 	}
 	args->infrastructure_placed = bob->serial();
@@ -65,7 +65,7 @@ int32_t ScenarioPlaceWorkerTool::handle_click_impl(const Widelands::NodeAndTrian
 EditorActionArgs ScenarioPlaceWorkerTool::format_args_impl(EditorInteractive& parent) {
 	EditorActionArgs a(parent);
 	a.new_owner = player_;
-	a.random_index = -1;
+	a.random_index = kRandomIndexNotSet;
 	a.experience = experience_;
 	a.carried_ware = carried_ware_;
 	for (const Widelands::WorkerDescr* d : descr_) {
@@ -86,8 +86,9 @@ int32_t ScenarioDeleteWorkerTool::handle_click_impl(const Widelands::NodeAndTria
 		std::list<Widelands::Ship*> ships_to_delete;
 		for (Widelands::Bob* b = mr.location().field->get_first_bob(); b; b = b->get_next_bob()) {
 			if (upcast(Widelands::Worker, w, b)) {
-				if (!w->get_location(egbase))
+				if (!w->get_location(egbase)) {
 					workers_to_delete.push_back(w);
+				}
 			} else if (upcast(Widelands::Ship, s, b)) {
 				ships_to_delete.push_back(s);
 			}

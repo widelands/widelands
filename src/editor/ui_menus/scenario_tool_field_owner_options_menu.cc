@@ -45,7 +45,7 @@ ScenarioToolFieldOwnerOptionsMenu::ScenarioToolFieldOwnerOptionsMenu(
            UI::PanelStyle::kWui,
            UI::ButtonStyle::kWuiSecondary) {
 
-	list_.selected.connect(boost::bind(&ScenarioToolFieldOwnerOptionsMenu::select, this));
+	list_.selected.connect([this]() { select(); });
 	const Widelands::Map& map = parent.egbase().map();
 	const Widelands::PlayerNumber max = map.get_nrplayers();
 	const Widelands::PlayerNumber sel = tool_.get_new_owner();

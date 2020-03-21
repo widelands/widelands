@@ -34,6 +34,8 @@ class BobDescr;
 class EditorInteractive;
 struct EditorToolAction;
 
+constexpr uint32_t kRandomIndexNotSet = std::numeric_limits<uint32_t>::max();
+
 /// Class to save important and changeable properties of classes needed for actions
 // Implementations in editor_history.cc
 struct EditorActionArgs {
@@ -62,10 +64,10 @@ struct EditorActionArgs {
 	std::vector<const Widelands::WorkerDescr*> worker_types;  // worker tool
 	uint32_t experience;                                      // worker tool
 	Widelands::DescriptionIndex carried_ware;                 // worker tool
-	int32_t random_index;                                     // infrastructure and worker tools
+	uint32_t random_index;                                    // infrastructure and worker tools
 	Widelands::SeeUnseeNode vision;                           // vision tool
 
-	enum RoadMode { kNormal, kBusy, kWaterway };
+	enum class RoadMode : int8_t { kNormal, kBusy, kWaterway };
 	RoadMode road_mode;            // road tool
 	bool create_primary_worker;    // road tool
 	bool create_secondary_worker;  // road tool

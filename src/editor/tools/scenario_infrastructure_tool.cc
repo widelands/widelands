@@ -37,7 +37,7 @@ int32_t ScenarioInfrastructureTool::handle_click_impl(const Widelands::NodeAndTr
 	const size_t nr_items = args->infrastructure_types.size();
 	Widelands::EditorGameBase& egbase = eia.egbase();
 	args->infrastructure_placed = 0;
-	if (args->random_index < 0) {
+	if (args->random_index == kRandomIndexNotSet) {
 		args->random_index = std::rand() % nr_items;
 	}
 	const std::pair<Widelands::MapObjectType, Widelands::DescriptionIndex>& item_to_place =
@@ -85,7 +85,7 @@ EditorActionArgs ScenarioInfrastructureTool::format_args_impl(EditorInteractive&
 	a.new_owner = player_;
 	a.force = force_;
 	a.infrastructure_constructionsite = construct_;
-	a.random_index = -1;
+	a.random_index = kRandomIndexNotSet;
 	for (auto& pair : index_) {
 		a.infrastructure_types.push_back(pair);
 	}

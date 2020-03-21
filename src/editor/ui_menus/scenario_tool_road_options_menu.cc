@@ -25,30 +25,6 @@ inline EditorInteractive& ScenarioToolRoadOptionsMenu::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 
-static EditorActionArgs::RoadMode roadmode(int32_t i) {
-	switch (i) {
-	case 0:
-		return EditorActionArgs::RoadMode::kNormal;
-	case 1:
-		return EditorActionArgs::RoadMode::kBusy;
-	case 2:
-		return EditorActionArgs::RoadMode::kWaterway;
-	default:
-		NEVER_HERE();
-	}
-}
-static int32_t roadmode(EditorActionArgs::RoadMode m) {
-	switch (m) {
-	case EditorActionArgs::RoadMode::kNormal:
-		return 0;
-	case EditorActionArgs::RoadMode::kBusy:
-		return 1;
-	case EditorActionArgs::RoadMode::kWaterway:
-		return 2;
-	}
-	NEVER_HERE();
-}
-
 constexpr uint16_t kButtonSize = 34;
 
 ScenarioToolRoadOptionsMenu::ScenarioToolRoadOptionsMenu(EditorInteractive& parent,
@@ -89,11 +65,11 @@ ScenarioToolRoadOptionsMenu::ScenarioToolRoadOptionsMenu(EditorInteractive& pare
 	place_flags_.set_state(tool_.get_place_flags());
 	create_primary_.set_state(tool_.get_create_primary_worker());
 	create_secondary_.set_state(tool_.get_create_secondary_worker());
-	type_.set_state(roadmode(tool_.get_mode()));
+	type_.set_state(static_cast<int32_t>(tool_.get_mode()));
 	create_secondary_.set_enabled(tool_.get_mode() == EditorActionArgs::RoadMode::kBusy);
 
 	type_.changedto.connect([this](int32_t i) {
-		tool_.set_mode(roadmode(i));
+		tool_.set_mode(static_cast<EditorActionArgs::RoadMode>(i));
 		create_secondary_.set_enabled(tool_.get_mode() == EditorActionArgs::RoadMode::kBusy);
 		select_correct_tool();
 	});
@@ -154,7 +130,7 @@ void ScenarioToolRoadOptionsMenu::think() {
 	                    "again to cancel.") :
 	                  _("Click on fields to determine the road’s path. Click on the end field again "
 	                    "to build a flag there. Double-click the start flag to cancel.") :
-	                  roadmode(type_.get_state()) == EditorActionArgs::RoadMode::kWaterway ?
+	                  static_cast<EditorActionArgs::RoadMode>(type_.get_state()) == EditorActionArgs::RoadMode::kWaterway ?
 	                  _("Click on a flag to start building a waterway.") :
 	                  _("Click on a flag to start building a road."));
 }

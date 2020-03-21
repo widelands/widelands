@@ -24,7 +24,6 @@
 #include <memory>
 
 #include "editor/tools/tool.h"
-// #include "logic/path.h"
 
 struct ScenarioDeleteRoadTool : public EditorTool {
 	explicit ScenarioDeleteRoadTool() : EditorTool(*this, *this, false) {

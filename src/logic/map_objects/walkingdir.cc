@@ -84,4 +84,23 @@ WalkingDir get_backward_dir(WalkingDir dir) {
 	}
 	NEVER_HERE();
 }
+
+std::string walkingdir_to_string(WalkingDir d) {
+	switch (d) {
+	case Widelands::WALK_E:
+		return "e";
+	case Widelands::WALK_NE:
+		return "ne";
+	case Widelands::WALK_SE:
+		return "se";
+	case Widelands::WALK_W:
+		return "w";
+	case Widelands::WALK_NW:
+		return "nw";
+	case Widelands::WALK_SW:
+		return "sw";
+	default:
+		NEVER_HERE();
+	}
+}
 }  // namespace Widelands

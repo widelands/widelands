@@ -45,7 +45,7 @@ ScenarioFlagSettingsWindow::ScenarioFlagSettingsWindow(EditorInteractive& parent
         0,
         300,
         100,
-        (boost::format(_("Flag at %1$dx%2$d")) % f.get_position().x % f.get_position().y).str()),
+        (boost::format(_("Flag at %1%×%2%")) % f.get_position().x % f.get_position().y).str()),
      main_box_(this, 0, 0, UI::Box::Vertical),
      wares_box_(&main_box_, 0, 0, UI::Box::Horizontal),
      economy_options_(&main_box_,

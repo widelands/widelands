@@ -93,6 +93,9 @@ enum class StockPolicy {
 	kRemove = 3,
 };
 
+std::string to_string(Widelands::StockPolicy p);
+Widelands::StockPolicy to_policy(const std::string& str);
+
 class Warehouse : public Building {
 	friend class PortDock;
 	friend class MapBuildingdataPacket;

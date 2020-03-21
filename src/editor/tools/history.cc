@@ -36,7 +36,7 @@ EditorActionArgs::EditorActionArgs(EditorInteractive& base)
      new_map_size(0, 0),
      new_owner(0),
      infrastructure_constructionsite(false),
-     random_index(-1),
+     random_index(kRandomIndexNotSet),
      create_primary_worker(false),
      create_secondary_worker(false),
      place_flags(false),

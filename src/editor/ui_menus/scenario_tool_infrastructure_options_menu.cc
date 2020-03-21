@@ -49,7 +49,7 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(
         30,
         UI::ButtonStyle::kWuiSecondary,
         _("Place one Headquarters"),
-        _("Automatically place a Headquarters building at this player's starting position")),
+        _("Automatically place a Headquarters building at this player’s starting position")),
      auto_infra_all_(
         &buttonsbox_,
         "auto_infra_all",
@@ -59,12 +59,12 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(
         30,
         UI::ButtonStyle::kWuiSecondary,
         _("Place all Headquarters"),
-        _("Automatically place a Headquarters building at every player's starting position")),
+        _("Automatically place a Headquarters building at every player’s starting position")),
      tabs_(&box_, UI::TabPanelStyle::kWuiDark),
      force_(&box_,
             Vector2i(0, 0),
             _("Force"),
-            _("Allow building on unsuited spots, destroy nearby immovables, "
+            _("Allow building on unsuitable spots, destroy nearby immovables, "
               "and conquer the surrounding land")),
      selected_items_(&box_,
                      0,
@@ -85,7 +85,7 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(
 			UI::Box* box = new UI::Box(tab, 0, 0, UI::Box::Vertical);
 
 			UI::Checkbox* c = new UI::Checkbox(
-			   box, Vector2i(0, 0), _("Constructionsite"), _("Place a constructionsite if allowed"));
+			   box, Vector2i(0, 0), _("Construction Site"), _("Place a construction site if allowed"));
 			box->add(c, UI::Box::Resizing::kFullSize);
 			c->set_state(tool_.get_construct());
 			c->changed.connect([this, c]() {
@@ -139,8 +139,9 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(
 			}
 			const size_t nrb = eia().egbase().tribes().nrbuildings();
 			for (Widelands::DescriptionIndex di = 0; di < nrb; ++di) {
-				if (buildings.count(di))
+				if (buildings.count(di)) {
 					continue;
+				}
 				buildings.insert(di);
 				const Widelands::BuildingDescr* descr = tribe.get_building_descr(di);
 				if (descr->type() != Widelands::MapObjectType::MILITARYSITE) {
@@ -151,7 +152,7 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(
 					i = ig_mine;
 				} else if (descr->get_isport()) {
 					i = ig_port;
-				} else
+				} else {
 					switch (descr->get_size()) {
 					case Widelands::BaseImmovable::BIG:
 						i = ig_big;
@@ -165,6 +166,7 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(
 					default:
 						NEVER_HERE();
 					}
+				}
 				assert(i);
 				i->add(descr->name(), descr->representative_image(), reinterpret_cast<void*>(di),
 				       descr->descname());
@@ -330,7 +332,7 @@ void ScenarioToolInfrastructureOptionsMenu::select_tab() {
 
 	const Widelands::TribeDescr& tribe = *egbase.tribes().get_tribe_descr(
 	   egbase.tribes().tribe_index(egbase.map().get_scenario_player_tribe(p)));
-	auto& list = tool_.get_index();
+	auto& list = tool_.get_indices();
 	for (auto it = list.begin(); it != list.end();) {
 		bool erase = false;
 		switch (it->first) {
@@ -347,10 +349,11 @@ void ScenarioToolInfrastructureOptionsMenu::select_tab() {
 		default:
 			NEVER_HERE();
 		}
-		if (erase)
+		if (erase) {
 			it = list.erase(it);
-		else
+		} else {
 			++it;
+		}
 	}
 
 	update_text();
@@ -358,13 +361,13 @@ void ScenarioToolInfrastructureOptionsMenu::select_tab() {
 }
 
 void ScenarioToolInfrastructureOptionsMenu::update_text() {
-	const size_t nr_items = tool_.get_index().size();
+	const size_t nr_items = tool_.get_indices().size();
 	if (nr_items == 0) {
 		selected_items_.set_text(_("Nothing selected"));
 		return;
 	}
 	auto name_of = [this](size_t i) {
-		const auto& pair = tool_.get_index()[i];
+		const auto& pair = tool_.get_indices()[i];
 		switch (pair.first) {
 		case Widelands::MapObjectType::BUILDING:
 			return eia().egbase().tribes().get_building_descr(pair.second)->descname();
@@ -387,7 +390,7 @@ void ScenarioToolInfrastructureOptionsMenu::update_text() {
 void ScenarioToolInfrastructureOptionsMenu::toggle_selected(UI::IconGrid* ig,
                                                             Widelands::MapObjectType type,
                                                             int32_t grid_idx) {
-	auto& list = tool_.get_index();
+	auto& list = tool_.get_indices();
 	const Widelands::DescriptionIndex di =
 	   static_cast<int32_t>(reinterpret_cast<intptr_t>(ig->get_data(grid_idx)));
 	auto pair = std::make_pair(type, di);

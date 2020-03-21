@@ -5069,38 +5069,6 @@ int LuaConstructionSite::set_desired_fill(lua_State* L) {
 	return 0;
 }
 
-// Transforms the given warehouse policy to a string which is used by the lua code
-inline void wh_policy_to_string(lua_State* L, StockPolicy p) {
-	switch (p) {
-	case StockPolicy::kNormal:
-		lua_pushstring(L, "normal");
-		break;
-	case StockPolicy::kPrefer:
-		lua_pushstring(L, "prefer");
-		break;
-	case StockPolicy::kDontStock:
-		lua_pushstring(L, "dontstock");
-		break;
-	case StockPolicy::kRemove:
-		lua_pushstring(L, "remove");
-		break;
-	}
-}
-// Transforms the given string from the lua code to a warehouse policy
-inline StockPolicy string_to_wh_policy(lua_State* L, uint32_t index) {
-	std::string str = luaL_checkstring(L, index);
-	if (str == "normal")
-		return StockPolicy::kNormal;
-	else if (str == "prefer")
-		return StockPolicy::kPrefer;
-	else if (str == "dontstock")
-		return StockPolicy::kDontStock;
-	else if (str == "remove")
-		return StockPolicy::kRemove;
-	else
-		report_error(L, "<%s> is no valid warehouse policy!", str.c_str());
-}
-
 /* RST
    .. method:: get_setting_warehouse_policy(wareworker)
 
@@ -5114,8 +5082,8 @@ int LuaConstructionSite::get_setting_warehouse_policy(lua_State* L) {
 	const Widelands::DescriptionIndex item = is_ware ?
 	                                            get_egbase(L).tribes().safe_ware_index(itemname) :
 	                                            get_egbase(L).tribes().safe_worker_index(itemname);
-	wh_policy_to_string(
-	   L, is_ware ? ws->ware_preferences.at(item) : ws->worker_preferences.at(item));
+	lua_pushstring(L, Widelands::to_string(
+	   is_ware ? ws->ware_preferences.at(item) : ws->worker_preferences.at(item)));
 	return 1;
 }
 /* RST
@@ -5133,7 +5101,7 @@ int LuaConstructionSite::set_setting_warehouse_policy(lua_State* L) {
 	                                            get_egbase(L).tribes().safe_ware_index(itemname) :
 	                                            get_egbase(L).tribes().safe_worker_index(itemname);
 	(is_ware ? ws->ware_preferences.at(item) : ws->worker_preferences.at(item)) =
-	   string_to_wh_policy(L, 3);
+	   Widelands::to_policy(luaL_checkstring(L, 3));
 	return 0;
 }
 
@@ -5435,7 +5403,7 @@ int LuaWarehouse::set_warehouse_policies(lua_State* L) {
 		report_error(L, "Wrong number of arguments to set_warehouse_policies!");
 
 	Warehouse* wh = get(L, get_egbase(L));
-	StockPolicy p = string_to_wh_policy(L, -1);
+	StockPolicy p = Widelands::to_policy(luaL_checkstring(L, -1));
 	lua_pop(L, 1);
 	const TribeDescr& tribe = wh->owner().tribe();
 
@@ -5477,7 +5445,7 @@ int LuaWarehouse::set_warehouse_policies(lua_State* L) {
 // Gets the warehouse policy by ware/worker-name or id
 #define WH_GET_POLICY(type)                                                                        \
 	inline void do_get_##type##_policy(lua_State* L, Warehouse* wh, const DescriptionIndex idx) {   \
-		wh_policy_to_string(L, wh->get_##type##_policy(idx));                                        \
+		lua_pushstring(L, Widelands::to_string(wh->get_##type##_policy(idx)));                       \
 	}                                                                                               \
                                                                                                    \
 	inline bool do_get_##type##_policy(lua_State* L, Warehouse* wh, const std::string& name) {      \

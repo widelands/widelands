@@ -62,10 +62,10 @@ struct ScenarioInfrastructureTool : public EditorTool {
 	}
 
 	const std::vector<std::pair<Widelands::MapObjectType, Widelands::DescriptionIndex>>&
-	get_index() const {
+	get_indices() const {
 		return index_;
 	}
-	std::vector<std::pair<Widelands::MapObjectType, Widelands::DescriptionIndex>>& get_index() {
+	std::vector<std::pair<Widelands::MapObjectType, Widelands::DescriptionIndex>>& get_indices() {
 		return index_;
 	}
 	Widelands::PlayerNumber get_player() const {

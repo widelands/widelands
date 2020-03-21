@@ -72,8 +72,9 @@ std::set<uint32_t> ControlStructure::references() const {
 
 void ControlStructure::selftest() const {
 	FunctionStatement::selftest();
-	if (body_.empty())
+	if (body_.empty()) {
 		throw wexception("empty body");
+	}
 }
 
 // static
@@ -96,15 +97,18 @@ void ControlStructure::selftest_body(const LuaFunction& f,
 			last_statement_is_return = true;
 			last_statement_is_break = false;
 			if (f.get_returns().id() == VariableTypeID::Nil) {
-				if (r->get_return())
+				if (r->get_return()) {
 					throw wexception("non-empty return statement in function returning nil");
+				}
 			} else {
-				if (!r->get_return())
+				if (!r->get_return()) {
 					throw wexception("empty return statement in function returning non-nil");
-				if (!r->get_return()->type().is_subclass(f.get_returns()))
+				}
+				if (!r->get_return()->type().is_subclass(f.get_returns())) {
 					throw wexception("in return statement: %s cannot be casted to %s",
 					                 descname(r->get_return()->type()).c_str(),
 					                 descname(f.get_returns()).c_str());
+				}
 			}
 		} else {
 			if (last_statement_is_break) {
@@ -159,10 +163,12 @@ void FS_While::save(FileWrite& fw) const {
 }
 void FS_While::selftest() const {
 	ControlStructure::selftest();
-	if (!condition_)
+	if (!condition_) {
 		throw wexception("condition not set");
-	if (!is(condition_->type().id(), VariableTypeID::Boolean))
+	}
+	if (!is(condition_->type().id(), VariableTypeID::Boolean)) {
 		throw wexception("condition is not a boolean expression");
+	}
 }
 std::set<uint32_t> FS_While::references() const {
 	auto set = ControlStructure::references();
@@ -224,12 +230,15 @@ void FS_ForEach::save(FileWrite& fw) const {
 }
 void FS_ForEach::selftest() const {
 	ControlStructure::selftest();
-	if (!table_)
+	if (!table_) {
 		throw wexception("table not set");
-	if (!i_)
+	}
+	if (!i_) {
 		throw wexception("first variable not set");
-	if (!j_)
+	}
+	if (!j_) {
 		throw wexception("second variable not set");
+	}
 }
 std::set<uint32_t> FS_ForEach::references() const {
 	auto set = ControlStructure::references();
@@ -297,12 +306,15 @@ void FS_For::save(FileWrite& fw) const {
 }
 void FS_For::selftest() const {
 	ControlStructure::selftest();
-	if (!variable_)
+	if (!variable_) {
 		throw wexception("variable not set");
-	if (!i_)
+	}
+	if (!i_) {
 		throw wexception("first border not set");
-	if (!j_)
+	}
+	if (!j_) {
 		throw wexception("second border not set");
+	}
 }
 std::set<uint32_t> FS_For::references() const {
 	auto set = ControlStructure::references();
@@ -424,17 +436,22 @@ std::set<uint32_t> FS_If::references() const {
 }
 void FS_If::selftest() const {
 	ControlStructure::selftest();
-	if (!condition_)
+	if (!condition_) {
 		throw wexception("condition not set");
-	if (!is(condition_->type().id(), VariableTypeID::Boolean))
+	}
+	if (!is(condition_->type().id(), VariableTypeID::Boolean)) {
 		throw wexception("condition is not a boolean expression");
+	}
 	for (const auto& pair : elseif_bodies_) {
-		if (!pair.first)
+		if (!pair.first) {
 			throw wexception("elseif condition not set");
-		if (!is(pair.first->type().id(), VariableTypeID::Boolean))
+		}
+		if (!is(pair.first->type().id(), VariableTypeID::Boolean)) {
 			throw wexception("elseif condition is not a boolean expression");
-		if (pair.second.empty())
+		}
+		if (pair.second.empty()) {
 			throw wexception("empty elseif body");
+		}
 	}
 }
 void FS_If::selftest_body(const LuaFunction& f) const {

@@ -77,7 +77,7 @@ ScenarioToolVisionOptionsMenu::ScenarioToolVisionOptionsMenu(EditorInteractive& 
 	           _("Make fields visible for this player"));
 	modes_.add(_("Hide"), Widelands::SeeUnseeNode::kUnexplore, nullptr,
 	           tool_.get_mode() == Widelands::SeeUnseeNode::kUnexplore,
-	           _("Mark field as never seen by the player"));
+	           _("Mark fields as never seen by the player"));
 	modes_.add(_("Previously seen"), Widelands::SeeUnseeNode::kUnsee, nullptr,
 	           tool_.get_mode() == Widelands::SeeUnseeNode::kUnsee,
 	           _("Mark fields as previously revealed but not currently seen"));
