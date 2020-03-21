@@ -4918,13 +4918,17 @@ int LuaConstructionSite::set_has_builder(lua_State* L) {
 */
 int LuaConstructionSite::get_setting_launch_expedition(lua_State* L) {
 	upcast(Widelands::WarehouseSettings, ws, get(L, get_egbase(L))->get_settings());
-	assert(ws);
+	if (!ws) {
+		report_error(L, "This constructionsite will not become a warehouse");
+	}
 	lua_pushboolean(L, ws->launch_expedition);
 	return 1;
 }
 int LuaConstructionSite::set_setting_launch_expedition(lua_State* L) {
 	upcast(Widelands::WarehouseSettings, ws, get(L, get_egbase(L))->get_settings());
-	assert(ws);
+	if (!ws) {
+		report_error(L, "This constructionsite will not become a warehouse");
+	}
 	ws->launch_expedition = luaL_checkboolean(L, -1);
 	return 0;
 }
@@ -4936,13 +4940,17 @@ int LuaConstructionSite::set_setting_launch_expedition(lua_State* L) {
 */
 int LuaConstructionSite::get_setting_stopped(lua_State* L) {
 	upcast(Widelands::ProductionsiteSettings, ws, get(L, get_egbase(L))->get_settings());
-	assert(ws);
+	if (!ws) {
+		report_error(L, "This constructionsite will not become a productionsite");
+	}
 	lua_pushboolean(L, ws->stopped);
 	return 1;
 }
 int LuaConstructionSite::set_setting_stopped(lua_State* L) {
 	upcast(Widelands::ProductionsiteSettings, ws, get(L, get_egbase(L))->get_settings());
-	assert(ws);
+	if (!ws) {
+		report_error(L, "This constructionsite will not become a productionsite");
+	}
 	ws->stopped = luaL_checkboolean(L, -1);
 	return 0;
 }
@@ -4954,13 +4962,17 @@ int LuaConstructionSite::set_setting_stopped(lua_State* L) {
 */
 int LuaConstructionSite::get_setting_prefer_heroes(lua_State* L) {
 	upcast(Widelands::MilitarysiteSettings, ms, get(L, get_egbase(L))->get_settings());
-	assert(ms);
+	if (!ms) {
+		report_error(L, "This constructionsite will not become a militarysite");
+	}
 	lua_pushboolean(L, ms->prefer_heroes);
 	return 1;
 }
 int LuaConstructionSite::set_setting_prefer_heroes(lua_State* L) {
 	upcast(Widelands::MilitarysiteSettings, ms, get(L, get_egbase(L))->get_settings());
-	assert(ms);
+	if (!ms) {
+		report_error(L, "This constructionsite will not become a militarysite");
+	}
 	ms->prefer_heroes = luaL_checkboolean(L, -1);
 	return 0;
 }
@@ -4973,14 +4985,22 @@ int LuaConstructionSite::set_setting_prefer_heroes(lua_State* L) {
 int LuaConstructionSite::get_setting_soldier_capacity(lua_State* L) {
 	upcast(Widelands::MilitarysiteSettings, ms, get(L, get_egbase(L))->get_settings());
 	upcast(Widelands::TrainingsiteSettings, ts, get(L, get_egbase(L))->get_settings());
-	assert((ms == nullptr) ^ (ts == nullptr));
+	if (ms && ts) {
+		report_error(L, "A constructionsite cannot become both a militarysite and a trainingsite");
+	} else if (!ms && !ts) {
+		report_error(L, "This constructionsite will become neither a militarysite nor a trainingsite");
+	}
 	lua_pushuint32(L, ms ? ms->desired_capacity : ts->desired_capacity);
 	return 1;
 }
 int LuaConstructionSite::set_setting_soldier_capacity(lua_State* L) {
 	upcast(Widelands::MilitarysiteSettings, ms, get(L, get_egbase(L))->get_settings());
 	upcast(Widelands::TrainingsiteSettings, ts, get(L, get_egbase(L))->get_settings());
-	assert((ms == nullptr) ^ (ts == nullptr));
+	if (ms && ts) {
+		report_error(L, "A constructionsite cannot become both a militarysite and a trainingsite");
+	} else if (!ms && !ts) {
+		report_error(L, "This constructionsite will become neither a militarysite nor a trainingsite");
+	}
 	(ms ? ms->desired_capacity : ts->desired_capacity) = luaL_checkuint32(L, -1);
 	return 0;
 }
@@ -4997,7 +5017,9 @@ int LuaConstructionSite::get_priority(lua_State* L) {
 	   get_egbase(L).tribes().safe_ware_index(luaL_checkstring(L, 2));
 	if (lua_gettop(L) > 2 && luaL_checkboolean(L, 3)) {
 		upcast(const Widelands::ProductionsiteSettings, ps, get(L, get_egbase(L))->get_settings());
-		assert(ps);
+		if (!ps) {
+			report_error(L, "This constructionsite will not become a productionsite");
+		}
 		for (const auto& pair : ps->ware_queues) {
 			if (pair.first == item) {
 				lua_pushint32(L, pair.second.priority);
@@ -5014,7 +5036,9 @@ int LuaConstructionSite::set_priority(lua_State* L) {
 	   get_egbase(L).tribes().safe_ware_index(luaL_checkstring(L, 2));
 	if (lua_gettop(L) > 3 && luaL_checkboolean(L, 4)) {
 		upcast(Widelands::ProductionsiteSettings, ps, get(L, get_egbase(L))->get_settings());
-		assert(ps);
+		if (!ps) {
+			report_error(L, "This constructionsite will not become a productionsite");
+		}
 		for (auto& pair : ps->ware_queues) {
 			if (pair.first == item) {
 				pair.second.priority = luaL_checkint32(L, 3);
@@ -5034,7 +5058,9 @@ int LuaConstructionSite::get_desired_fill(lua_State* L) {
 	                                            get_egbase(L).tribes().safe_worker_index(itemname);
 	if (lua_gettop(L) > 2 && luaL_checkboolean(L, 3)) {
 		upcast(const Widelands::ProductionsiteSettings, ps, get(L, get_egbase(L))->get_settings());
-		assert(ps);
+		if (!ps) {
+			report_error(L, "This constructionsite will not become a productionsite");
+		}
 		for (const auto& pair : is_ware ? ps->ware_queues : ps->worker_queues) {
 			if (pair.first == item) {
 				lua_pushuint32(L, pair.second.desired_fill);
@@ -5056,7 +5082,9 @@ int LuaConstructionSite::set_desired_fill(lua_State* L) {
 	                                            get_egbase(L).tribes().safe_worker_index(itemname);
 	if (lua_gettop(L) > 3 && luaL_checkboolean(L, 4)) {
 		upcast(Widelands::ProductionsiteSettings, ps, get(L, get_egbase(L))->get_settings());
-		assert(ps);
+		if (!ps) {
+			report_error(L, "This constructionsite will not become a productionsite");
+		}
 		for (auto& pair : is_ware ? ps->ware_queues : ps->worker_queues) {
 			if (pair.first == item) {
 				pair.second.desired_fill = luaL_checkuint32(L, 3);
@@ -5078,7 +5106,9 @@ int LuaConstructionSite::set_desired_fill(lua_State* L) {
 */
 int LuaConstructionSite::get_setting_warehouse_policy(lua_State* L) {
 	upcast(Widelands::WarehouseSettings, ws, get(L, get_egbase(L))->get_settings());
-	assert(ws);
+	if (!ws) {
+		report_error(L, "This constructionsite will not become a warehouse");
+	}
 	const std::string itemname = luaL_checkstring(L, 2);
 	const bool is_ware = get_egbase(L).tribes().ware_exists(itemname);
 	const Widelands::DescriptionIndex item = is_ware ?
@@ -5096,7 +5126,9 @@ int LuaConstructionSite::get_setting_warehouse_policy(lua_State* L) {
 */
 int LuaConstructionSite::set_setting_warehouse_policy(lua_State* L) {
 	upcast(Widelands::WarehouseSettings, ws, get(L, get_egbase(L))->get_settings());
-	assert(ws);
+	if (!ws) {
+		report_error(L, "This constructionsite will not become a warehouse");
+	}
 	const std::string itemname = luaL_checkstring(L, 2);
 	const bool is_ware = get_egbase(L).tribes().ware_exists(itemname);
 	const Widelands::DescriptionIndex item = is_ware ?

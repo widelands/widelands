@@ -488,14 +488,16 @@ bool InteractiveBase::has_expedition_port_space(const Widelands::Coords& coords)
 
 std::map<Widelands::Coords, std::vector<uint8_t>>
 InteractiveBase::road_building_preview_overlays() const {
-	if (road_building_mode_)
+	if (road_building_mode_) {
 		return road_building_mode_->overlay_road_previews;
+	}
 	return std::map<Widelands::Coords, std::vector<uint8_t>>();
 }
 std::map<Widelands::Coords, const Image*>
 InteractiveBase::road_building_steepness_overlays() const {
-	if (road_building_mode_)
+	if (road_building_mode_) {
 		return road_building_mode_->overlay_steepness_indicators;
+	}
 	return std::map<Widelands::Coords, const Image*>();
 }
 
@@ -1066,21 +1068,23 @@ void InteractiveBase::finish_build_road() {
 
 		// Build the path as requested
 		if (g) {
-			if (road_building_mode_->type == RoadBuildingType::kWaterway)
+			if (road_building_mode_->type == RoadBuildingType::kWaterway) {
 				g->send_player_build_waterway(
 				   road_building_mode_->player, *new Widelands::Path(road_building_mode_->path));
-			else
+			} else {
 				g->send_player_build_road(
 				   road_building_mode_->player, *new Widelands::Path(road_building_mode_->path));
+			}
 		} else {
-			if (road_building_mode_->type == RoadBuildingType::kWaterway)
+			if (road_building_mode_->type == RoadBuildingType::kWaterway) {
 				egbase()
 				   .get_player(road_building_mode_->player)
 				   ->build_waterway(*new Widelands::Path(road_building_mode_->path));
-			else
+			} else {
 				egbase()
 				   .get_player(road_building_mode_->player)
 				   ->build_road(*new Widelands::Path(road_building_mode_->path));
+			}
 		}
 
 		if (allow_user_input() && (SDL_GetModState() & KMOD_CTRL)) {
@@ -1308,9 +1312,8 @@ void InteractiveBase::road_building_add_overlay() {
 			if (!next_to && road_building_mode_->path.get_nsteps() >= map.get_waterway_max_length()) {
 				continue;  // exceeds length limit
 			}
-		} else {
-			if (!(caps & Widelands::MOVECAPS_WALK))
-				continue;  // need to be able to walk there
+		} else if (!(caps & Widelands::MOVECAPS_WALK)) {
+			continue;  // need to be able to walk there
 		}
 
 		//  can't build on robusts
@@ -1322,8 +1325,10 @@ void InteractiveBase::road_building_add_overlay() {
 				continue;
 		}
 
-		if (road_building_mode_->path.get_index(neighb) >= 0)
-			continue;  // the road can't cross itself
+		if (road_building_mode_->path.get_index(neighb) >= 0) {
+			// the road can't cross itself
+			continue;
+		}
 
 		int32_t slope;
 		if (Widelands::WALK_E == dir || Widelands::WALK_NE == dir || Widelands::WALK_SE == dir) {
