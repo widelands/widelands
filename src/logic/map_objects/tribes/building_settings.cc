@@ -33,10 +33,14 @@ namespace Widelands {
 
 std::string priority_to_string(int32_t i) {
 	switch (i) {
-		case 2: return "low";
-		case 4: return "normal";
-		case 8: return "high";
-		default: NEVER_HERE();
+	case 2:
+		return "low";
+	case 4:
+		return "normal";
+	case 8:
+		return "high";
+	default:
+		NEVER_HERE();
 	}
 }
 int32_t string_to_priority(const std::string& s) {

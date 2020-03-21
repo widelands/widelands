@@ -5030,7 +5030,8 @@ int LuaConstructionSite::get_priority(lua_State* L) {
 		}
 		NEVER_HERE();
 	}
-	luaL_pushstring(L, Widelands::priority_to_string(get(L, get_egbase(L))->get_priority(Widelands::wwWARE, item)));
+	luaL_pushstring(L, Widelands::priority_to_string(
+	                      get(L, get_egbase(L))->get_priority(Widelands::wwWARE, item)));
 	return 1;
 }
 int LuaConstructionSite::set_priority(lua_State* L) {
@@ -5049,7 +5050,9 @@ int LuaConstructionSite::set_priority(lua_State* L) {
 		}
 		NEVER_HERE();
 	}
-	get(L, get_egbase(L))->set_priority(Widelands::wwWARE, item, Widelands::string_to_priority(luaL_checkstring(L, 3)));
+	get(L, get_egbase(L))
+	   ->set_priority(
+	      Widelands::wwWARE, item, Widelands::string_to_priority(luaL_checkstring(L, 3)));
 	return 0;
 }
 int LuaConstructionSite::get_desired_fill(lua_State* L) {
@@ -5704,9 +5707,11 @@ int LuaProductionSite::get_valid_workers(lua_State* L) {
 
 // documented in parent class
 int LuaProductionSite::get_priority(lua_State* L) {
-	luaL_pushstring(L, Widelands::priority_to_string(get(L, get_egbase(L))
-	                    ->get_priority(Widelands::wwWARE, get_egbase(L).tribes().safe_ware_index(
-	                                                         luaL_checkstring(L, 2)))));
+	luaL_pushstring(
+	   L, Widelands::priority_to_string(
+	         get(L, get_egbase(L))
+	            ->get_priority(Widelands::wwWARE,
+	                           get_egbase(L).tribes().safe_ware_index(luaL_checkstring(L, 2)))));
 	return 1;
 }
 int LuaProductionSite::set_priority(lua_State* L) {
