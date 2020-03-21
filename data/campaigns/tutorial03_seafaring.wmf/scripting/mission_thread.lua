@@ -129,7 +129,6 @@ function complete_ferries()
       sleep(3000)
       -- get_workers reports assigned counts
       n = plr:get_workers("atlanteans_ferry")
-      print(string.format("### complete_ferries: get_workers('atlanteans_ferry'): %d", n))
    end
    ferries_done = true
 end
@@ -140,7 +139,6 @@ function watch_ferry_production()
    while n < 1 do
       sleep(3000)
       n = plr:get_workers("atlanteans_ferry")
-      print(string.format("### watch_ferry_production: get_workers('atlanteans_ferry'): %d", n))
    end
    message_box_objective(plr, ferry_yard_production)
 end
