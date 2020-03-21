@@ -5049,7 +5049,9 @@ int LuaConstructionSite::set_priority(lua_State* L) {
 		}
 		NEVER_HERE();
 	}
-	get(L, get_egbase(L))->set_priority(Widelands::wwWARE, item, Widelands::string_to_priority(luaL_checkstring(L, 3)));
+	get(L, get_egbase(L))
+	   ->set_priority(
+	      Widelands::wwWARE, item, Widelands::string_to_priority(luaL_checkstring(L, 3)));
 	return 0;
 }
 int LuaConstructionSite::get_desired_fill(lua_State* L) {
