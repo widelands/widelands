@@ -1094,7 +1094,7 @@ HasInputs
 
       :arg ware: ware name
       :type ware: :class:`string`
-      :arg prio: The new priority. One of `2` (low), `4` (normal), or `8` (high).
+      :arg prio: The new priority. One of "low", "normal", or "high".
       :arg cs_setting: Only valid for productionsite-constructionsites. If `true`, refers to the settings to apply after construction.
 */
 
@@ -1105,7 +1105,7 @@ HasInputs
 
       :arg ware: ware name
       :type ware: :class:`string`
-      :returns: :class:`integer`
+      :returns: :class:`string`
       :arg cs_setting: Only valid for productionsite-constructionsites. If `true`, refers to the settings to apply after construction.
 */
 
@@ -5024,13 +5024,13 @@ int LuaConstructionSite::get_priority(lua_State* L) {
 		}
 		for (const auto& pair : ps->ware_queues) {
 			if (pair.first == item) {
-				lua_pushint32(L, pair.second.priority);
+				luaL_pushstring(L, Widelands::priority_to_string(pair.second.priority));
 				return 1;
 			}
 		}
 		NEVER_HERE();
 	}
-	lua_pushint32(L, get(L, get_egbase(L))->get_priority(Widelands::wwWARE, item));
+	luaL_pushstring(L, Widelands::priority_to_string(get(L, get_egbase(L))->get_priority(Widelands::wwWARE, item)));
 	return 1;
 }
 int LuaConstructionSite::set_priority(lua_State* L) {
@@ -5043,13 +5043,13 @@ int LuaConstructionSite::set_priority(lua_State* L) {
 		}
 		for (auto& pair : ps->ware_queues) {
 			if (pair.first == item) {
-				pair.second.priority = luaL_checkint32(L, 3);
+				pair.second.priority = Widelands::string_to_priority(luaL_checkstring(L, 3));
 				return 0;
 			}
 		}
 		NEVER_HERE();
 	}
-	get(L, get_egbase(L))->set_priority(Widelands::wwWARE, item, luaL_checkint32(L, 3));
+	get(L, get_egbase(L))->set_priority(Widelands::wwWARE, item, Widelands::string_to_priority(luaL_checkstring(L, 3)));
 	return 0;
 }
 int LuaConstructionSite::get_desired_fill(lua_State* L) {
@@ -5704,16 +5704,16 @@ int LuaProductionSite::get_valid_workers(lua_State* L) {
 
 // documented in parent class
 int LuaProductionSite::get_priority(lua_State* L) {
-	lua_pushint32(L, get(L, get_egbase(L))
+	luaL_pushstring(L, Widelands::priority_to_string(get(L, get_egbase(L))
 	                    ->get_priority(Widelands::wwWARE, get_egbase(L).tribes().safe_ware_index(
-	                                                         luaL_checkstring(L, 2))));
+	                                                         luaL_checkstring(L, 2)))));
 	return 1;
 }
 int LuaProductionSite::set_priority(lua_State* L) {
 	get(L, get_egbase(L))
 	   ->set_priority(Widelands::wwWARE,
 	                  get_egbase(L).tribes().safe_ware_index(luaL_checkstring(L, 2)),
-	                  luaL_checkint32(L, 3));
+	                  Widelands::string_to_priority(luaL_checkstring(L, 3)));
 	return 0;
 }
 int LuaProductionSite::get_desired_fill(lua_State* L) {

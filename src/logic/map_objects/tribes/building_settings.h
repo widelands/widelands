@@ -36,6 +36,9 @@ class TrainingSiteDescr;
 class TribeDescr;
 class WarehouseDescr;
 
+std::string priority_to_string(int32_t);
+int32_t string_to_priority(const std::string&);
+
 struct BuildingSettings {
 	BuildingSettings(const std::string& name, const TribeDescr& tribe)
 	   : tribe_(tribe), descr_(name) {

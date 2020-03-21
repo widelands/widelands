@@ -245,6 +245,8 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(
 void ScenarioToolInfrastructureOptionsMenu::make_auto_infra(bool all) {
 	std::list<std::string> errors;
 	Widelands::EditorGameBase& egbase = eia().egbase();
+	// TODO(Nordfriese): Instead of iterating all warehouse types until we find one that seems to fit,
+	// add a "DescriptionIndex headquarters_" to TribeDescr which we can use here
 	auto is_hq = [&egbase](Widelands::DescriptionIndex di) {
 		const Widelands::BuildingDescr& b = *egbase.tribes().get_building_descr(di);
 		return b.type() == Widelands::MapObjectType::WAREHOUSE &&

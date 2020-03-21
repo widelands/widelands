@@ -393,8 +393,8 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 								if (q->get_type() == Widelands::wwWARE) {
 									name = egbase().tribes().get_ware_descr(q->get_index())->name().c_str();
 									write("%s:set_desired_fill(\"%s\", %u)", var, name, q->get_max_fill());
-									write("%s:set_priority(\"%s\", %i)", var, name,
-									      ps.get_priority(Widelands::wwWARE, q->get_index()));
+									write("%s:set_priority(\"%s\", \"%s\")", var, name,
+									      Widelands::priority_to_string(ps.get_priority(Widelands::wwWARE, q->get_index())).c_str());
 								} else {
 									name =
 									   egbase().tribes().get_worker_descr(q->get_index())->name().c_str();
@@ -422,8 +422,8 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 								const char* name =
 								   egbase().tribes().get_ware_descr(q.get_index())->name().c_str();
 								write("%s:set_desired_fill(\"%s\", %u)", var, name, q.get_max_fill());
-								write("%s:set_priority(\"%s\", %i)", var, name,
-								      cs.get_priority(Widelands::wwWARE, q.get_index()));
+								write("%s:set_priority(\"%s\", \"%s\")", var, name,
+								      Widelands::priority_to_string(cs.get_priority(Widelands::wwWARE, q.get_index())).c_str());
 								filled[name] = q.get_filled();
 							}
 							write("%s:set_inputs({", var);
@@ -444,7 +444,7 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 									write("%s:set_desired_fill(\"%s\", %u, true)", var, name,
 									      pair.second.desired_fill);
 									write(
-									   "%s:set_priority(\"%s\", %d, true)", var, name, pair.second.priority);
+									   "%s:set_priority(\"%s\", \"%s\", true)", var, name, Widelands::priority_to_string(pair.second.priority).c_str());
 								}
 								for (const auto& pair : ps->worker_queues) {
 									write("%s:set_desired_fill(\"%s\", %u, true)", var,

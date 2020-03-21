@@ -139,6 +139,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 	assert(!parent.finalized());
 	const Widelands::Map& map = eia().egbase().map();
 	const Widelands::PlayerNumber nr_players = map.get_nrplayers();
+	assert(nr_players > 0);
 	iterate_player_numbers(p, kMaxPlayers) {
 		const bool map_has_player = p <= nr_players;
 

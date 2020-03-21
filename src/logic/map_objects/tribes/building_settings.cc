@@ -31,6 +31,25 @@
 
 namespace Widelands {
 
+std::string priority_to_string(int32_t i) {
+	switch (i) {
+		case 2: return "low";
+		case 4: return "normal";
+		case 8: return "high";
+		default: NEVER_HERE();
+	}
+}
+int32_t string_to_priority(const std::string& s) {
+	if (s == "low") {
+		return 2;
+	} else if (s == "normal") {
+		return 4;
+	} else if (s == "high") {
+		return 8;
+	}
+	NEVER_HERE();
+}
+
 ProductionsiteSettings::ProductionsiteSettings(const ProductionSiteDescr& descr,
                                                const TribeDescr& tribe)
    : BuildingSettings(descr.name(), tribe), stopped(false) {
