@@ -6686,14 +6686,16 @@ int LuaSoldier::get_current_health(lua_State* L) {
 int LuaSoldier::set_current_health(lua_State* L) {
 	Soldier& s = *get(L, get_egbase(L));
 	const uint32_t ch = luaL_checkuint32(L, -1);
-	if (ch == 0)
+	if (ch == 0) {
 		report_error(L, "Soldier.current_health must be greater than 0");
+	}
 	const uint32_t maxhealth =
 	   s.descr().get_base_health() + s.get_health_level() * s.descr().get_health_incr_per_level();
-	if (ch > maxhealth)
+	if (ch > maxhealth) {
 		report_error(
 		   L, "Soldier.current_health %u must not be greater than %u for %s with health level %u", ch,
 		   maxhealth, s.descr().name().c_str(), s.get_health_level());
+	}
 	s.set_current_health(ch);
 	return 0;
 }
