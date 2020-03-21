@@ -113,7 +113,6 @@ end
 function iron_mine()
    local o = message_box_objective(plr, expedition5)
    while #plr:get_buildings("atlanteans_ironmine") < 1 do sleep(3000) end
-   print(string.format("get_buildings('atlanteans_ironmine') = %d", #plr:get_buildings("atlanteans_ironmine")))
    set_objective_done(o)
    expedition_done = true
 end
