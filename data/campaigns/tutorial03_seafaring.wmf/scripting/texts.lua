@@ -164,7 +164,7 @@ expedition3 = {
    )
 }
 
-conclusion = {
+expedition4 = {
    position = "topright",
    field = port_on_island,
    title = _"Conclusion",
@@ -184,12 +184,13 @@ ferry_1 = {
    title = _"There is more to it…",
    body = (
       h1(_"Another gold mountain") ..
-      p(_[[Now that you have learned all about ships, there is another way of water-based transport I would like to teach you.]]) ..
+      p(_[[We have some time before your shipyard is finished. There is another way of water-based transport I would like to teach you.]]) ..
       p(_[[Ships have the advantage that they can carry large quantities of wares and workers at a time, but unfortunately their destinations are limited to a handful of spaces suited for a port.]]) ..
       p(_[[Look at this valley here in the far south. We have found a mountain with gold down here and would like to mine ores from it as well. But the streams seperating it from our main colony are too wide to build bridges and too narrow for ships to pass them. Our roads would have to take long curves, which slows down ware transport a lot.]])
    ),
    h = 350
 }
+
 ferry_2 = {
    position = "topright",
    field = shore,
@@ -210,6 +211,7 @@ ferry_2 = {
       li_arrow(_[[You need to build the ferry yard close to the shore, otherwise it won’t be able to build ferries there.]])
    )
 }
+
 ferry_3 = {
    position = "topright",
    title = _"There is more to it…",
@@ -222,6 +224,7 @@ ferry_3 = {
    ),
    h = 350
 }
+
 ferry_4 = {
    position = "topright",
    title = _"There is more to it…",
@@ -231,6 +234,7 @@ ferry_4 = {
    ),
    h = 150
 }
+
 ferry_5 = {
    field = gold_mine,
    position = "topright",
@@ -250,19 +254,32 @@ ferry_5 = {
       li_arrow(_[[The only rule for waterway placement is that the two triangles directly adjacent to each segment of the waterway have to be water, and the entire path needs to be within your territory.]])
    )
 }
+
 ferry_6 = {
    position = "topright",
    title = _"Conclusion",
    body = (
       h1(_"About Ferries") ..
       p(_[[Now there are only a few more things I would like you to keep in mind whenever using ferries.]]) ..
-      p(_[[Do remember to stop your ferry yard when you don’t need any new ferries to be produced. As long as a ferry services a waterway, its lifetime is unlimited, but unemployed ferries will rot away and eventually sink.]]) ..
       p(_[[Never forget that these rowboats are too small to carry workers. You can use them as shortcuts for ware transport within parts of your territory, but not to claim regions you can reach neither by road nor by ship. Never cut all your roads between two places connected by waterways unless you are certain no worker will ever have to walk there.]]) ..
       p(_[[And if your waterways present a significant shortcut between your road networks, your economy will tend to send many wares over the waterway. As a waterway can hold only one ferry – unlike roads, which receive a second carrier if they are very busy –, and as they often tend to be rather longer than the two or three fields recommended for roads, there is always a risk of waterways becoming severe bottlenecks in your economy. Try to build several of them in parallel to distribute the strain. If this is not possible, it is in some cases even more efficient not to use waterways.]])
    ),
    h = 450
 }
-ferry_7 = {
+
+ferry_yard_production = {
+   position = "topright",
+   title = _"Ferry yard production",
+   body = (
+      h1(_"Rowboat is ready") ..
+      p(_[[Your first ferry line has opened.]]) ..
+      p(_[[Do remember to stop your ferry yard when you don’t need any new ferries to be produced. As long as a ferry services a waterway, its lifetime is unlimited, but unemployed ferries will rot away and eventually sink.]]) ..
+      li_image("images/ui_basic/stop.png", _[[This is the icon for stopping production. You will find it in the building window.]])
+   ),
+   h = 250
+}
+
+congratulation = {
    position = "topright",
    title = _"Congratulations",
    body = (

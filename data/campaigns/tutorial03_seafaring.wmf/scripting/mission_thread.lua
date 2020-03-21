@@ -2,6 +2,11 @@
 -- Mission thread
 -- ===============
 
+local waterways_done = false
+local expedition_done = false
+local gold_mine_done = false
+local ferries_done = false
+
 function introduction()
    fields = get_sees_fields(plr)
    reveal_randomly(plr, fields, 2000)
@@ -33,6 +38,10 @@ function build_ships()
    sleep(20*1000)
    local o = message_box_objective(plr, tell_about_shipyard)
    plr:allow_buildings{"atlanteans_shipyard"}
+
+   local area = home_bay:region(20)
+   while not construction_started_region(area, "atlanteans_shipyard") do sleep(1000) end
+   run(waterways)
 
    while #plr:get_buildings("atlanteans_shipyard") < 1 do sleep(1000) end
    set_objective_done(o)
@@ -83,14 +92,13 @@ function expedition()
       end
    end
 
-   conclude()
+   conclude_expedition()
 end
 
-function conclude()
+function conclude_expedition()
    additional_port_space.terr = "desert_steppe" -- make it land again so that the player can build a port
-   message_box_objective(plr, conclusion)
-   sleep(5000)
-   waterways()
+   message_box_objective(plr, expedition4)
+   expedition_done = true
 end
 
 function complete_ferry_yard()
@@ -100,7 +108,45 @@ function complete_ferry_yard()
    set_objective_done(o)
 end
 
+function complete_gold_mine()
+   local field_for_mine = map:get_field(20, 102):region(5)
+   while field_for_mine do
+      sleep(3000)
+      for i,f in pairs(field_for_mine) do
+         if f.immovable and f.immovable.descr.name == "atlanteans_goldmine" then
+            field_for_mine = nil
+            break
+         end
+      end
+   end
+   gold_mine_done = true
+end
+
+function complete_ferries()
+   -- wait until 4 ferries are assigned to waterways
+   local n = 0
+   while n < 4 do
+      sleep(3000)
+      -- get_workers reports assigned counts
+      n = plr:get_workers("atlanteans_ferry")
+      print(string.format("### complete_ferries: get_workers('atlanteans_ferry'): %d", n))
+   end
+   ferries_done = true
+end
+
+function watch_ferry_production()
+   -- warn player about over-producing
+   local n = 0
+   while n < 1 do
+      sleep(3000)
+      n = plr:get_workers("atlanteans_ferry")
+      print(string.format("### watch_ferry_production: get_workers('atlanteans_ferry'): %d", n))
+   end
+   message_box_objective(plr, ferry_yard_production)
+end
+
 function waterways()
+   sleep(5000)
    map:place_immovable("atlanteans_resi_gold_2", gold_mine, "tribes")
 
    message_box_objective(plr, ferry_1)
@@ -109,7 +155,7 @@ function waterways()
    run(complete_ferry_yard)
    local area = shore:region(37)
    while not construction_started_region(area, "atlanteans_ferry_yard") do sleep(1000) end
-   sleep(2000)
+   sleep(5000)
 
    message_box_objective(plr, ferry_3)
    sleep(500)
@@ -126,43 +172,21 @@ function waterways()
    click_on_panel(wl.ui.MapView().windows.field_action.buttons.destroy_waterway)
 
    local o = message_box_objective(plr, ferry_5)
-   while #plr:get_buildings("atlanteans_ferry_yard") < 1 do sleep(2500) end
    -- check for goldmine, and waterways with ferries
-   local field_for_mine = map:get_field(20, 102):region(5)
-   while field_for_mine do
-      sleep(3000)
-      for i,f in pairs(field_for_mine) do
-         if f.immovable and f.immovable.descr.name == "atlanteans_goldmine" then
-            field_for_mine = nil
-            break
-         end
-      end
-   end
-   local waterways = {}
-   while #waterways < 4 do
-      for x = 13, 51 do
-         sleep(250)
-         for y = 67, 100 do
-            local f = map:get_field(x, y)
-            if f.immovable and f.immovable.descr.type_name == "waterway" and
-                  f.immovable:get_workers("atlanteans_ferry") > 0 then
-               local ww = f.immovable
-               for i,w in pairs(waterways) do
-                  if w == ww then
-                     ww = nil
-                     break
-                  end
-               end
-               if ww then table.insert(waterways, ww) end
-            end
-         end
-      end
-   end
+   run(complete_gold_mine)
+   run(complete_ferries)
+   watch_ferry_production()
+   while not (gold_mine_done and ferries_done) do sleep(3000) end
 
    set_objective_done(o)
    message_box_objective(plr, ferry_6)
-   sleep(1000)
-   message_box_objective(plr, ferry_7)
+   waterways_done = true
+end
+
+function conclude_tutorial()
+   while not (expedition_done and waterways_done) do sleep(3000) end
+   message_box_objective(plr, congratulation)
 end
 
 run(introduction)
+run(conclude_tutorial)

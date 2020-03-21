@@ -23,6 +23,7 @@ castle_field = map:get_field(36, 20)
 waterway_field = map:get_field(27, 95)
 gold_mine = map:get_field(23, 102)
 shore = map:get_field(34, 68)
+home_bay = map:get_field(39, 34)
 
 include "map:scripting/texts.lua"
 include "map:scripting/helper_functions.lua"
