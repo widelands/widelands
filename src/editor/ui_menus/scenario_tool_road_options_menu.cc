@@ -130,7 +130,8 @@ void ScenarioToolRoadOptionsMenu::think() {
 	                    "again to cancel.") :
 	                  _("Click on fields to determine the road’s path. Click on the end field again "
 	                    "to build a flag there. Double-click the start flag to cancel.") :
-	                  static_cast<EditorActionArgs::RoadMode>(type_.get_state()) == EditorActionArgs::RoadMode::kWaterway ?
+	                  static_cast<EditorActionArgs::RoadMode>(type_.get_state()) ==
+	                           EditorActionArgs::RoadMode::kWaterway ?
 	                  _("Click on a flag to start building a waterway.") :
 	                  _("Click on a flag to start building a road."));
 }
