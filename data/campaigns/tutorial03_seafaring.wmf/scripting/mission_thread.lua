@@ -36,13 +36,7 @@ end
 
 function watch_ship_production()
    -- warn player about over-producing
-   local ship1 = plr:get_ships()[1]
-   print(ship1.shipname)
-   local n = 0
-   while n < 2 do
-      sleep(30*1000)
-      n = #plr:get_ships()
-   end
+   while #plr:get_ships() < 2 do sleep(30*1000) end
    local ship2 = plr:get_ships()[2]
    scroll_to_field(ship2.field)
    message_box_objective(plr, shipyard_production(ship2.shipname))
