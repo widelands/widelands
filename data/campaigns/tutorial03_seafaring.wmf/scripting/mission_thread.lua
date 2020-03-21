@@ -147,24 +147,13 @@ end
 
 function complete_ferries()
    -- wait until 4 ferries are assigned to waterways
-   local n = 0
-   -- TODO: make oneline
-   while n < 4 do
-      sleep(3000)
-      -- get_workers reports assigned counts
-      n = plr:get_workers("atlanteans_ferry")
-   end
+   while plr:get_workers("atlanteans_ferry") < 4 do sleep(3000) end
    ferries_done = true
 end
 
 function watch_ferry_production()
    -- warn player about over-producing
-   local n = 0
-   -- TODO: make oneline
-   while n < 1 do
-      sleep(3000)
-      n = plr:get_workers("atlanteans_ferry")
-   end
+   while plr:get_workers("atlanteans_ferry") < 1 do sleep(3000) end
    message_box_objective(plr, ferry_yard_production)
 end
 
