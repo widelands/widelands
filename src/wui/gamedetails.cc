@@ -91,16 +91,33 @@ void GameDetails::display(const std::vector<SavegameData>& gamedata) {
 
 void GameDetails::show(const std::vector<SavegameData>& gamedata) {
 
-	std::string filename_list = richtext_escape(as_filename_list(gamedata));
-	boost::replace_all(filename_list, "\n", "<br> • ");
-	size_t nr_files = gamedata.size();
+	size_t number_of_files = 0;
+	size_t number_of_directories = 0;
+	for (const SavegameData& g : gamedata) {
+		if (g.is_directory()) {
+			number_of_directories++;
+		} else {
+			number_of_files++;
+		}
+	}
+	std::string name_list = richtext_escape(as_filename_list(gamedata));
+	boost::replace_all(name_list, "\n", "<br> • ");
 
-	name_label_.set_text(as_richtext(as_heading_with_content(
-	   (boost::format(ngettext("Selected %d file:", "Selected %d files:", nr_files)) % nr_files)
-	      .str(),
-	   "", style_, true)));
+	std::string combined_header = as_richtext(as_heading_with_content(
+	   (boost::format(ngettext(
+	       "Selected %d directory and ", "Selected %d directories and ", number_of_directories)) %
+	    number_of_directories)
+	         .str() +
+	      (boost::format(ngettext("%d file:", "%d files:", number_of_files)) % number_of_files)
+	         .str(),
+	   "", style_, true));
 
-	descr_.set_text(as_richtext(as_heading_with_content("", filename_list, style_, true, true)));
+	name_label_.set_text(combined_header);
+
+	std::string combined_description =
+	   as_richtext(as_heading_with_content("", name_list, style_, true, true));
+
+	descr_.set_text(combined_description);
 	minimap_icon_.set_visible(false);
 }
 
@@ -108,6 +125,10 @@ void GameDetails::show(const SavegameData& gamedata) {
 	clear();
 
 	if (gamedata.is_directory()) {
+		name_label_.set_text(as_richtext(
+		   as_heading_with_content(_("Directory Name:"), gamedata.filename, style_, true)));
+
+		layout();
 		return;
 	}
 
