@@ -120,8 +120,9 @@ void ScenarioToolWorkerOptionsMenu::select_tab() {
 	for (auto it = sel.begin(); it != sel.end();) {
 		if (*it && !tribe.has_worker(tribe.worker_index((*it)->name()))) {
 			it = sel.erase(it);
-		} else
+		} else {
 			++it;
+		}
 	}
 	if (!tribe.has_ware(tool_.get_carried_ware())) {
 		tool_.set_carried_ware(Widelands::INVALID_INDEX);

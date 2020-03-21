@@ -131,15 +131,15 @@ void write_lua(int32_t indent,
                bool print_end) {
 	for (const auto& f : body) {
 		for (int32_t i = 0; i <= indent; ++i) {
-			fw.print_f("   ");
+			fw.string("   ");
 		}
 		f->write_lua(indent + 1, fw);
-		fw.print_f("\n");
+		fw.string("\n");
 	}
 	for (int32_t i = 0; i < indent; ++i) {
-		fw.print_f("   ");
+		fw.string("   ");
 	}
 	if (print_end) {
-		fw.print_f("end");
+		fw.string("end");
 	}
 }

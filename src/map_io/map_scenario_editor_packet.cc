@@ -432,10 +432,12 @@ void MapScenarioEditorPacket::write(FileSystem& fs, EditorGameBase& egbase, MapO
 						for (const WareInstance* w : flag.get_wares()) {
 							fw.unsigned_32(w->descr_index());
 						}
-						if (!economies_to_save.count(flag.get_economy(Widelands::wwWARE)))
+						if (!economies_to_save.count(flag.get_economy(Widelands::wwWARE))) {
 							economies_to_save.insert(flag.get_economy(Widelands::wwWARE));
-						if (!economies_to_save.count(flag.get_economy(Widelands::wwWORKER)))
+						}
+						if (!economies_to_save.count(flag.get_economy(Widelands::wwWORKER))) {
 							economies_to_save.insert(flag.get_economy(Widelands::wwWORKER));
+						}
 					} break;
 					case Widelands::MapObjectType::ROAD: {
 						const Widelands::Road& road =

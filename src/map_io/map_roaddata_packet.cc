@@ -58,6 +58,7 @@ void MapRoaddataPacket::read(FileSystem& fs,
 		uint16_t const packet_version = fr.unsigned_16();
 		// TODO(Nordfriese): Savegame compatibility
 		if (packet_version <= kCurrentPacketVersion && packet_version >= 4) {
+			Game* game = dynamic_cast<Game*>(&egbase);
 			const Map& map = egbase.map();
 			PlayerNumber const nr_players = map.get_nrplayers();
 			while (!fr.end_of_file()) {
@@ -151,10 +152,8 @@ void MapRoaddataPacket::read(FileSystem& fs,
 							}
 						} else {
 							delete carrier_request;
-							if (carrier) {
-								if (Game* game = dynamic_cast<Game*>(&egbase)) {
-									carrier->reset_tasks(*game);
-								}
+							if (carrier && game) {
+								carrier->reset_tasks(*game);
 							}
 						}
 					}

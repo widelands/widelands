@@ -1113,7 +1113,7 @@ Worker::Worker(const WorkerDescr& worker_descr)
      supply_(nullptr),
      transfer_(nullptr),
      current_exp_(0),
-     is_destroying_(false) {
+     is_being_destroyed_(false) {
 }
 
 Worker::~Worker() {
@@ -1216,7 +1216,7 @@ void Worker::set_location(PlayerImmovable* const location) {
 			EditorGameBase& egbase = get_owner()->egbase();
 			if (upcast(Game, game, &egbase)) {
 				send_signal(*game, "location");
-			} else if (!is_destroying_) {
+			} else if (!is_being_destroyed_) {
 				// In the editor, we delete workers in buildings/on roads/etc when deleting their
 				// workplace
 				remove(egbase);
@@ -1279,8 +1279,8 @@ bool Worker::init(EditorGameBase& egbase) {
  * Remove the worker.
  */
 void Worker::cleanup(EditorGameBase& egbase) {
-	assert(!is_destroying_);
-	is_destroying_ = true;
+	assert(!is_being_destroyed_);
+	is_being_destroyed_ = true;
 
 	WareInstance* const ware = get_carried_ware(egbase);
 

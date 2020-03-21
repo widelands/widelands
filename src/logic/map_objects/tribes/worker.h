@@ -298,7 +298,7 @@ private:
 	Transfer* transfer_;               ///< where we are currently being sent
 	int32_t current_exp_;              ///< current experience
 
-	bool is_destroying_;
+	bool is_being_destroyed_;
 
 	// saving and loading
 protected:

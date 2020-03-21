@@ -628,8 +628,9 @@ int do_set_soldiers(lua_State* L,
 	for (const SoldiersMap::value_type& sp : setpoints) {
 		Widelands::Quantity cur = 0;
 		SoldiersMap::iterator i = hist.find(sp.first);
-		if (i != hist.end())
+		if (i != hist.end()) {
 			cur = i->second;
+		}
 
 		int d = sp.second - cur;
 		if (d < 0) {
@@ -652,8 +653,9 @@ int do_set_soldiers(lua_State* L,
 				Soldier& soldier = dynamic_cast<Soldier&>(
 				   soldier_descr.create(egbase, owner, nullptr, building_position));
 				soldier.set_level(sp.first.health, sp.first.attack, sp.first.defense, sp.first.evade);
-				if (sp.first.total_health >= 0)
+				if (sp.first.total_health >= 0) {
 					soldier.set_current_health(sp.first.total_health);
+				}
 				if (sc->incorporate_soldier(egbase, soldier)) {
 					soldier.remove(egbase);
 					report_error(L, "No space left for soldier!");

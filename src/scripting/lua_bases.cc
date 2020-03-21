@@ -762,19 +762,22 @@ int LuaPlayerBase::place_road(lua_State* L) {
 	} else {
 		BaseImmovable* bi = map.get_immovable(current);
 		if (!bi || bi->descr().type() != MapObjectType::FLAG) {
-			if (!get(L, egbase).build_flag(current))
+			if (!get(L, egbase).build_flag(current)) {
 				report_error(L, "Could not place end flag!");
+			}
 		}
-		if (bi && bi == starting_flag)
+		if (bi && bi == starting_flag) {
 			report_error(L, "Cannot build a closed loop!");
+		}
 
 		if (roadtype == "waterway") {
 			r = get(L, egbase).build_waterway(path);
 		} else {
 			Road* road = get(L, egbase).build_road(path);
 			if (roadtype == "busy") {
-				if (road)
+				if (road) {
 					road->set_busy(egbase, true);
+				}
 			} else if (roadtype != "normal") {
 				report_error(
 				   L, "Invalid road type '%s' (permitted values are 'normal', 'busy', and 'waterway'",

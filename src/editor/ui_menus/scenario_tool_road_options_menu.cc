@@ -30,7 +30,7 @@ constexpr uint16_t kButtonSize = 34;
 ScenarioToolRoadOptionsMenu::ScenarioToolRoadOptionsMenu(EditorInteractive& parent,
                                                          ScenarioPlaceRoadTool& tool,
                                                          UI::UniqueWindow::Registry& registry)
-   : EditorToolOptionsMenu(parent, registry, 250, 200, _("Roads and waterways"), tool),
+   : EditorToolOptionsMenu(parent, registry, 250, 200, _("Roads and Waterways"), tool),
      tool_(tool),
      main_box_(this, 0, 0, UI::Box::Vertical),
      buttons_(&main_box_,
