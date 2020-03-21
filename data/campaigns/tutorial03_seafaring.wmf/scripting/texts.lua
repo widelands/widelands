@@ -95,21 +95,35 @@ tell_about_shipyard = {
 tell_about_ships = {
    position = "topright",
    title = _"Constructing ships",
-   body =
+   body = (
       h1(_"Waiting for the ships") ..
-      p(_[[Very good. Your shipyard is finished and your shipwright immediately started working. For the construction of ships, he needs logs, planks and spidercloth, which will be transported to the shipyard.]] .. " " ..
-      _[[The shipwright will take the ware he needs to a free spot at the shoreline and build a ship there. When the first ship is finished, it will launch onto the sea, and the shipwright will construct another one.]]) ..
-      li(_[[We should wait until we have two ships. That should be enough for now.]]) ..
-      li_arrow(_[[You need to stop your shipyard when you have enough ships. Otherwise, your shipwright will consume all your logs and spidercloth, producing dozens of ships.]]) ..
-      li_image("images/ui_basic/stop.png", _[[This is the icon for stopping production. You will find it in the building window.]]),
+      p(_[[Very good. Your shipyard is finished and your shipwright immediately started working. For the construction of ships, he needs logs, planks and spidercloth, which will be transported to the shipyard.]]) ..
+      p(_[[The shipwright will take the ware he needs to a free spot at the shoreline and build a ship there. When the first ship is finished, it will launch onto the sea, and the shipwright will construct another one.]]) ..
+      li(_[[We should wait until we have two ships. That should be enough for now.]])
+   ),
    obj_name = "wait_for_ships",
    obj_title = _"Construct two ships",
    obj_body = (
       p(_[[Ships are constructed automatically when the shipyard is complete and the needed wares have been delivered.]]) ..
       li(_[[Wait until the shipwright has constructed two ships.]]) ..
       li_arrow(_[[Do not forget to stop your shipyard when you have enough ships.]])
-   )
+   ),
+   h = 300
 }
+
+function shipyard_production(shipname)
+   return {
+      position = "topright",
+      title = _"Shipyard production",
+      body = (
+         h1(_"We have enough ships") ..
+         p(_[[Your second ship, "]] .. shipname .. _[[", is ready now.]]) ..
+         li_arrow(_[[You need to stop your shipyard when you have enough ships. Otherwise, your shipwright will consume all your logs and spidercloth, producing dozens of ships.]]) ..
+         li_image("images/ui_basic/stop.png", _[[This is the icon for stopping production. You will find it in the building window.]])
+      ),
+      h = 250
+   }
+end
 
 expedition1 = {
    position = "topright",
