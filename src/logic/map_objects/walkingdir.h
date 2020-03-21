@@ -42,6 +42,7 @@ WalkingDir get_ccw_neighbour(WalkingDir dir);
 WalkingDir get_backward_dir(WalkingDir dir);
 
 std::string walkingdir_to_string(WalkingDir);
+WalkingDir string_to_walkingdir(const std::string&);
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_WALKINGDIR_H

@@ -6278,28 +6278,7 @@ int LuaShip::get_state(lua_State* L) {
 int LuaShip::get_scouting_direction(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	if (is_a(Game, &egbase)) {
-		switch (get(L, egbase)->get_scouting_direction()) {
-		case WalkingDir::WALK_NE:
-			lua_pushstring(L, "ne");
-			break;
-		case WalkingDir::WALK_E:
-			lua_pushstring(L, "e");
-			break;
-		case WalkingDir::WALK_SE:
-			lua_pushstring(L, "se");
-			break;
-		case WalkingDir::WALK_SW:
-			lua_pushstring(L, "sw");
-			break;
-		case WalkingDir::WALK_W:
-			lua_pushstring(L, "w");
-			break;
-		case WalkingDir::WALK_NW:
-			lua_pushstring(L, "nw");
-			break;
-		case WalkingDir::IDLE:
-			return 0;
-		}
+		lua_pushstring(L, Widelands::walkingdir_to_string(get(L, egbase)->get_scouting_direction()));
 		return 1;
 	}
 	return 0;
@@ -6308,26 +6287,7 @@ int LuaShip::get_scouting_direction(lua_State* L) {
 int LuaShip::set_scouting_direction(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	if (upcast(Game, game, &egbase)) {
-		std::string dirname = luaL_checkstring(L, 3);
-		WalkingDir dir = WalkingDir::IDLE;
-
-		if (dirname == "ne") {
-			dir = WalkingDir::WALK_NE;
-		} else if (dirname == "e") {
-			dir = WalkingDir::WALK_E;
-		} else if (dirname == "se") {
-			dir = WalkingDir::WALK_SE;
-		} else if (dirname == "sw") {
-			dir = WalkingDir::WALK_SW;
-		} else if (dirname == "w") {
-			dir = WalkingDir::WALK_W;
-		} else if (dirname == "nw") {
-			dir = WalkingDir::WALK_NW;
-		} else {
-			return 0;
-		}
-		game->send_player_ship_scouting_direction(*get(L, egbase), dir);
-		return 1;
+		game->send_player_ship_scouting_direction(*get(L, egbase), Widelands::string_to_walkingdir(luaL_checkstring(L, 3)));
 	}
 	return 0;
 }

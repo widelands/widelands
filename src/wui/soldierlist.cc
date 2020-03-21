@@ -689,7 +689,7 @@ SoldierSettings::SoldierSettings(InteractiveBase& ib, Widelands::Soldier& s, boo
 inline static void update_label(UI::Textarea& l, const UI::Slider& s, const std::string& prefix) {
 	l.set_text(
 	   /** TRANSLATORS: "XYZ level: 1 / 5" */
-	   (boost::format(_("%1$s: %2$d / %3$d")) % prefix % s.get_value() % s.get_max_value()).str());
+	   (boost::format(_("%1%: %2% / %3%")) % prefix % s.get_value() % s.get_max_value()).str());
 }
 void SoldierSettings::update_label_h() {
 	/** TRANSLATORS: Part of a string: "Health level: 1 / 5" */
@@ -708,8 +708,8 @@ void SoldierSettings::update_label_e() {
 	update_label(elabel_, evade_, _("Evade level"));
 }
 void SoldierSettings::update_label_c() {
-	/** TRANSLATORS: Part of a string: "Hitpoints: 12345 / 20000" */
-	update_label(clabel_, current_health_, _("Hitpoints"));
+	/** TRANSLATORS: Part of a string: "Health: 12345 / 20000" */
+	update_label(clabel_, current_health_, _("Health"));
 }
 
 void SoldierSettings::health_slider_changed() {

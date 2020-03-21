@@ -139,20 +139,8 @@ SoldierDescr::SoldierDescr(const std::string& init_descname,
 				if (dir_name == "range") {
 					range = new SoldierLevelRange(*range_table->get_table(dir_name));
 					continue;
-				} else if (dir_name == "sw") {
-					dir = WALK_SW;
-				} else if (dir_name == "se") {
-					dir = WALK_SE;
-				} else if (dir_name == "nw") {
-					dir = WALK_NW;
-				} else if (dir_name == "ne") {
-					dir = WALK_NE;
-				} else if (dir_name == "e") {
-					dir = WALK_E;
-				} else if (dir_name == "w") {
-					dir = WALK_W;
 				} else {
-					throw GameDataError("Invalid walking direction: %s", dir_name.c_str());
+					dir = string_to_walkingdir(dir_name);
 				}
 				const std::string anim_name = range_table->get_string(dir_name);
 				if (!is_animation_known(anim_name)) {

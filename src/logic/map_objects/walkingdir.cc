@@ -103,4 +103,21 @@ std::string walkingdir_to_string(WalkingDir d) {
 		NEVER_HERE();
 	}
 }
+
+WalkingDir string_to_walkingdir(const std::string& dir_name) {
+	if (dir_name == "sw") {
+		return WALK_SW;
+	} else if (dir_name == "se") {
+		return WALK_SE;
+	} else if (dir_name == "nw") {
+		return WALK_NW;
+	} else if (dir_name == "ne") {
+		return WALK_NE;
+	} else if (dir_name == "e") {
+		return WALK_E;
+	} else if (dir_name == "w") {
+		return WALK_W;
+	}
+	NEVER_HERE();
+}
 }  // namespace Widelands
