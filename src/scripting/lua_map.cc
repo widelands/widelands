@@ -5084,8 +5084,8 @@ int LuaConstructionSite::get_setting_warehouse_policy(lua_State* L) {
 	const Widelands::DescriptionIndex item = is_ware ?
 	                                            get_egbase(L).tribes().safe_ware_index(itemname) :
 	                                            get_egbase(L).tribes().safe_worker_index(itemname);
-	lua_pushstring(L, Widelands::to_string(
-	   is_ware ? ws->ware_preferences.at(item) : ws->worker_preferences.at(item)));
+	lua_pushstring(L, Widelands::to_string(is_ware ? ws->ware_preferences.at(item) :
+	                                                 ws->worker_preferences.at(item)));
 	return 1;
 }
 /* RST
