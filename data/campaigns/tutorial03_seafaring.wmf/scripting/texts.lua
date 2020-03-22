@@ -181,9 +181,9 @@ expedition3 = {
 expedition4 = {
    position = "topright",
    field = port_on_island,
-   title = _"Conclusion",
+   title = _"New colony",
    body = (
-      h1(_"Congratulations") ..
+      h1(_"Your colony has been founded") ..
       li_object('atlanteans_resi_iron_2', _[[You’ve lead the expedition to a successful end and founded a new colony. I’ve sent out some geologists – they already report that they’ve found some iron ore.]]) ..
       p(_[[So far you have learned everything about seafaring: how to build ports and ships and how to send out an expedition. Remember that expeditions are sometimes the fastest way to reach essential resources – and sometimes the only one.]]) ..
       p(_[[But I want to speak a word of warning. Ports are like headquarters: they can be attacked by a nearby enemy. While your headquarters has soldiers to defend it, your newly built port won’t. You should therefore avoid settling next to an enemy.]]) ..
