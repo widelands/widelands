@@ -70,6 +70,18 @@ jobs:
             - clang
             - clang-tidy
             - python-yaml
+            - libboost-dev
+            - libboost-regex-dev
+            - libboost-system-dev
+            - libboost-test-dev
+            - libglew-dev
+            - libicu-dev
+            - libpng-dev
+            - libsdl2-dev
+            - libsdl2-image-dev
+            - libsdl2-mixer-dev
+            - libsdl2-ttf-dev
+            - zlib1g-dev
 
     - stage: compiler
       # Run this stage to test whether there are any error during compiling.
