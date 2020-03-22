@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
-# Joe Hansen <joedalton2@yahoo.dk>, 2015-2017,2019
+# Joe Hansen <joedalton2@yahoo.dk>, 2015-2017,2019-2020
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
-"PO-Revision-Date: 2019-08-20 14:55+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-03-03 09:07+0000\n"
+"PO-Revision-Date: 2020-03-06 17:01+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -858,7 +858,7 @@ msgstr "Ostur, vi har ikke tid. Vandet stiger for hurtigt, og hvis vi bygger ski
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:446
 msgid "Ostur Seems Confident"
-msgstr "Ostur ser tilfreds ud"
+msgstr "Ostur ser selvsikker ud"
 
 #. TRANSLATORS: Ostur
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:455

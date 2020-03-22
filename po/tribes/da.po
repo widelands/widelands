@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-02-21 18:05+0000\n"
-"PO-Revision-Date: 2020-02-25 13:03+0000\n"
+"POT-Creation-Date: 2020-03-16 06:59+0000\n"
+"PO-Revision-Date: 2020-03-17 12:28+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -2577,7 +2577,7 @@ msgstr "brænding af mursten"
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:7
 msgctxt "frisians_building"
 msgid "Charcoal Burner’s House"
-msgstr "Trækulsbrænderhus"
+msgstr "Kulsvierhus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a charcoal stack
 #. because ...
@@ -2601,7 +2601,7 @@ msgid ""
 "clay ponds in his work area. Please make sure there is a working clay pit "
 "nearby and the charcoal burner’s house is supplied with all needed wares, or"
 " consider dismantling or destroying this building."
-msgstr "Trækulsbrænderen der arbejder i dette trækulsbrænderhus kan ikke finde nogle lergruber indenfor sit arbejdsområde. Sikr dig at der er en lergrube i nærheden og at trækulsbrænderhuset har alle krævede ressourcer, eller overvej at ødelægge eller rive bygningen ned."
+msgstr "Kulsvieren der arbejder i dette kulsvierhus kan ikke finde nogle lergruber indenfor sit arbejdsområde. Sikr dig, at der er en lergrube i nærheden og at kulsvierhuset har alle krævede ressourcer, eller overvej at ødelægge eller rive bygningen ned."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:7
@@ -3957,8 +3957,8 @@ msgstr "Militæranlæg"
 msgid "Finishing"
 msgstr "Afslutter"
 
-#: ../../data/tribes/preload.lua:15 ../../data/tribes/preload.lua:32
-#: ../../data/tribes/preload.lua:49 ../../data/tribes/preload.lua:66
+#: ../../data/tribes/preload.lua:15 ../../data/tribes/preload.lua:36
+#: ../../data/tribes/preload.lua:57 ../../data/tribes/preload.lua:78
 msgid "The Widelands Development Team"
 msgstr "Widelands' udviklingshold"
 
@@ -3972,31 +3972,31 @@ msgid "The mighty tribes of the east-lands."
 msgstr "De mægte stammer fra landene i øst."
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:34
+#: ../../data/tribes/preload.lua:38
 msgid "Empire"
 msgstr "Imperium"
 
-#: ../../data/tribes/preload.lua:35
+#: ../../data/tribes/preload.lua:39
 msgid "This is the culture of the Roman Empire."
 msgstr "Det romerske imperiums kultur."
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:51
+#: ../../data/tribes/preload.lua:59
 msgid "Atlanteans"
 msgstr "Atlantere"
 
-#: ../../data/tribes/preload.lua:52
+#: ../../data/tribes/preload.lua:60
 msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
 msgstr "Denne stamme er kendt fra de ældste sagn, sønnerne og døtrene af Atlantis."
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:68
+#: ../../data/tribes/preload.lua:80
 msgid "Frisians"
 msgstr "Friserne"
 
-#: ../../data/tribes/preload.lua:69
+#: ../../data/tribes/preload.lua:81
 msgid "The inhabitants of the rough North Sea shore."
 msgstr "Indbyggerne fra kystområderne i det rå Nordsøen."
 
@@ -4027,6 +4027,23 @@ msgstr "Arbejdere"
 #: ../../data/tribes/scripting/help/init.lua:99
 msgid "Buildings"
 msgstr "Bygninger"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/discovery.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/discovery.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/discovery.lua:11
+#: ../../data/tribes/scripting/starting_conditions/frisians/discovery.lua:11
+msgid "Discovery"
+msgstr "Opdagelse"
+
+#. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/discovery.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/discovery.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/discovery.lua:13
+#: ../../data/tribes/scripting/starting_conditions/frisians/discovery.lua:13
+msgid ""
+"Start the game with three ships on the ocean and only a handful of supplies"
+msgstr "Start spillet med tre skibe på havet og kun en håndfuld forsyninger"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:11
@@ -4060,6 +4077,75 @@ msgstr "Hovedkvarter"
 #: ../../data/tribes/scripting/starting_conditions/frisians/headquarters.lua:13
 msgid "Start the game with your headquarters only"
 msgstr "Start spillet med dit hovedkvarter kun"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/new_world.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/new_world.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/new_world.lua:11
+#: ../../data/tribes/scripting/starting_conditions/frisians/new_world.lua:11
+msgid "New World"
+msgstr "Ny verden"
+
+#. TRANSLATORS: This is the tooltip for the "New World" starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/new_world.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/new_world.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/new_world.lua:13
+#: ../../data/tribes/scripting/starting_conditions/frisians/new_world.lua:13
+msgid "Start the game with seven ships full of wares on the ocean"
+msgstr "Start spillet med syv skibe på havet fuld af varer"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:11
+#: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:11
+msgid "Poor Hamlet"
+msgstr "Stakkels Hamlet"
+
+#. TRANSLATORS: This is the tooltip for the "Poor Hamlet" (minimum) starting
+#. condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:13
+#: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:13
+msgid ""
+"Start the game with just a warehouse and the bare minimum for bootstrapping "
+"an economy. Warning: the AI can't successfully start from this"
+msgstr "Start spillet kun med et lager og det helt grundlæggende for at starte en økonomi. Advarsel: Den kunstige intelligens kan med succes starte fra dette udgangspunkt"
+
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:45
+#: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:43
+#: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:44
+#: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:45
+msgid "Be careful"
+msgstr "Vær forsigtig"
+
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:45
+#: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:43
+#: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:44
+#: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:45
+msgid ""
+"You have only one iron for each tool you will need to start your economy. "
+"Make sure no unneeded tool is created."
+msgstr "Du har kun en portion jern for hvert værktøj du skal bruge for at starte din økonomi. Sikr dig at intet unødvendigt værktøj fremstilles."
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/struggling_outpost.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/struggling_outpost.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/struggling_outpost.lua:11
+#: ../../data/tribes/scripting/starting_conditions/frisians/struggling_outpost.lua:11
+msgid "Struggling Outpost"
+msgstr "Kæmpende forpost"
+
+#. TRANSLATORS: This is the tooltip for the "Hardcore" starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/struggling_outpost.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/struggling_outpost.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/struggling_outpost.lua:13
+#: ../../data/tribes/scripting/starting_conditions/frisians/struggling_outpost.lua:13
+msgid ""
+"Start the game with just your headquarters and very few wares for "
+"bootstrapping an economy. Warning: the AI can't successfully start from this"
+msgstr "Start spillet kun med dit hovedkvarter og nogle få varer til at igangsætte din økonomi. Advarsel: Den kunstige intelligens kan med succes starte fra dette udgangspunkt"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:11
@@ -4775,7 +4861,7 @@ msgstr "Bærer"
 #: ../../data/tribes/workers/atlanteans/charcoal_burner/init.lua:17
 msgctxt "atlanteans_worker"
 msgid "Charcoal Burner"
-msgstr "Trækulsvier"
+msgstr "Kulsvier"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/farmer/init.lua:32
@@ -4979,7 +5065,7 @@ msgstr "Kvægavler"
 #: ../../data/tribes/workers/barbarians/charcoal_burner/init.lua:17
 msgctxt "barbarians_worker"
 msgid "Charcoal Burner"
-msgstr "Trækulsvier"
+msgstr "Kulsvier"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/farmer/init.lua:32
@@ -5165,7 +5251,7 @@ msgstr "Bærer"
 #: ../../data/tribes/workers/empire/charcoal_burner/init.lua:17
 msgctxt "empire_worker"
 msgid "Charcoal Burner"
-msgstr "Trækulsvier"
+msgstr "Kulsvier"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/donkey/init.lua:18
@@ -5399,7 +5485,7 @@ msgstr "Fragtmand"
 #: ../../data/tribes/workers/frisians/charcoal_burner/init.lua:7
 msgctxt "frisians_worker"
 msgid "Charcoal Burner"
-msgstr "Trækulsbrænder"
+msgstr "Kulsvier"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/claydigger/init.lua:7

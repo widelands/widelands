@@ -31,7 +31,6 @@ namespace Widelands {
 class Economy;
 class MapObjectLoader;
 struct MapObjectSaver;
-class PortDock;
 class WareInstance;
 class Worker;
 
