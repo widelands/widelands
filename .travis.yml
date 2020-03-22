@@ -37,6 +37,8 @@ before_script:
 branches:
   only:
     - master
+    # NOCOM remove this line
+    - missing-braces
 
 cache: ccache
 
