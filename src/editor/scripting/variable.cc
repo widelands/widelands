@@ -91,7 +91,7 @@ void GetProperty::save(FileWrite& fw) const {
 	Assignable::save(fw);
 	fw.unsigned_16(kCurrentPacketVersionGetProperty);
 	fw.unsigned_32(variable_->serial());
-	fw.c_string(property_ ? builtin_p(*property_)->unique_name.c_str() : "");
+	fw.c_string(property_ ? builtin_p(*property_).c_str() : "");
 }
 const VariableType& GetProperty::type() const {
 	return property_->get_type();

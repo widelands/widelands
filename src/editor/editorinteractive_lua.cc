@@ -109,9 +109,11 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 		std::set<std::string> builtin_includes = {"scripting/coroutine.lua"};
 		// Check which other includes to include
 		for (const FS_FunctionCall* f : scripting_saver_->all<FS_FunctionCall>()) {
-			if (const BuiltinFunctionInfo* b = builtin_f(*f->get_function())) {
-				if (!b->included_from.empty() && !builtin_includes.count(b->included_from)) {
-					builtin_includes.insert(b->included_from);
+			const std::string bf = builtin_f(*f->get_function());
+			if (!bf.empty()) {
+				const BuiltinFunctionInfo& b = builtin_f(bf);
+				if (!b.included_from.empty() && !builtin_includes.count(b.included_from)) {
+					builtin_includes.insert(b.included_from);
 				}
 			}
 		}

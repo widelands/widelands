@@ -182,9 +182,10 @@ void FS_FunctionCall::save(FileWrite& fw) const {
 	FunctionStatement::save(fw);
 	fw.unsigned_16(kCurrentPacketVersionFS_FunctionCall);
 	fw.unsigned_32(variable_ ? variable_->serial() : 0);
-	if (const BuiltinFunctionInfo* f = builtin_f(*function_)) {
+	const std::string f = builtin_f(*function_);
+	if (!f.empty()) {
 		fw.unsigned_8(1);
-		fw.c_string(f->unique_name.c_str());
+		fw.c_string(f.c_str());
 	} else {
 		fw.unsigned_8(0);
 		fw.unsigned_32(dynamic_cast<const LuaFunction&>(*function_).serial());
@@ -297,7 +298,7 @@ void FS_SetProperty::save(FileWrite& fw) const {
 	FunctionStatement::save(fw);
 	fw.unsigned_16(kCurrentPacketVersionFS_SetProperty);
 	fw.unsigned_32(variable_->serial());
-	fw.c_string(property_ ? builtin_p(*property_)->unique_name.c_str() : "");
+	fw.c_string(property_ ? builtin_p(*property_).c_str() : "");
 	fw.unsigned_32(value_->serial());
 }
 void FS_SetProperty::set_property(Property& p) {

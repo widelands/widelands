@@ -21,6 +21,7 @@
 #define WL_EDITOR_SCRIPTING_BUILTIN_H
 
 #include <functional>
+#include <map>
 #include <memory>
 
 #include "editor/scripting/function.h"
@@ -32,18 +33,15 @@
 
 // Wrapper for a (static) FunctionBase object, for use in kBuiltinFunctions
 struct BuiltinFunctionInfo {
-	BuiltinFunctionInfo(std::string u,
-	                    std::function<std::string()> d,
+	BuiltinFunctionInfo(std::function<std::string()> d,
 	                    FunctionBase* f,
 	                    std::string i = "")
-	   : function(f), unique_name(u), description(d), included_from(i) {
+	   : function(f), description(d), included_from(i) {
 	}
 	~BuiltinFunctionInfo() {
 	}
 
 	const std::unique_ptr<FunctionBase> function;
-	// internal name, unique among all kBuiltinFunctions entries
-	const std::string unique_name;
 	// Implemented as a function to make it translatable
 	const std::function<std::string()> description;
 
@@ -53,10 +51,10 @@ struct BuiltinFunctionInfo {
 };
 
 // All supported builtin functions.
-const extern BuiltinFunctionInfo* kBuiltinFunctions[];
+const extern std::map<std::string, BuiltinFunctionInfo*> kBuiltinFunctions;
 // Quick access to a builtin by its unique name
 const BuiltinFunctionInfo& builtin_f(const std::string&);
-const BuiltinFunctionInfo* builtin_f(const FunctionBase&);
+std::string builtin_f(const FunctionBase&);
 
 /************************************************************
                        Property
@@ -110,15 +108,13 @@ private:
 
 // Wrapper for a (static) Property object, for use in kBuiltinProperties
 struct BuiltinPropertyInfo {
-	BuiltinPropertyInfo(std::string u, std::function<std::string()> d, Property* p)
-	   : property(p), unique_name(u), description(d) {
+	BuiltinPropertyInfo(std::function<std::string()> d, Property* p)
+	   : property(p), description(d) {
 	}
 	~BuiltinPropertyInfo() {
 	}
 
 	const std::unique_ptr<Property> property;
-	// internal name, unique among all kBuiltinProperties entries
-	const std::string unique_name;
 	// Implemented as a function to make it translatable
 	const std::function<std::string()> description;
 
@@ -126,9 +122,9 @@ struct BuiltinPropertyInfo {
 };
 
 // All supported builtin properties.
-const extern BuiltinPropertyInfo* kBuiltinProperties[];
+const extern std::map<std::string, BuiltinPropertyInfo*> kBuiltinProperties;
 // Quick access to a builtin by its unique name
 const BuiltinPropertyInfo& builtin_p(const std::string&);
-const BuiltinPropertyInfo* builtin_p(const Property&);
+std::string builtin_p(const Property&);
 
 #endif  // end of include guard: WL_EDITOR_SCRIPTING_BUILTIN_H
