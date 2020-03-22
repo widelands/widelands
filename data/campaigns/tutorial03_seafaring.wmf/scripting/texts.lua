@@ -198,7 +198,7 @@ expedition5 = {
    title = _"Our mission",
    body = (
       h1(_"Start mining") ..
-      li_object('atlanteans_ironmine', p(_[[It was long and expensive job to get here. The island has not much to offer, but there is some iron ore inside its mountain. Our economy needs iron ore, so we have to build an iron mine.]]), plr.color) ..
+      li_object('atlanteans_ironmine', p(_[[It was a long and expensive job to get here. The island has not much to offer, but there is some iron ore inside its mountain. Our economy needs iron ore, so we have to build an iron mine.]]), plr.color) ..
       li(_[[Start mining iron ore in the mountain.]])
    ),
    h = 300,
