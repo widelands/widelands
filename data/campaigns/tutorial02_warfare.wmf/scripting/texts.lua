@@ -158,7 +158,7 @@ scouting2 = {
    obj_name = "explore_map",
    obj_title = _"Explore the map",
    obj_body = (
-      p(_[[Wait for scout to explore unseen areas.]]) ..
+      p(_[[Wait for the scout to explore unseen areas.]]) ..
       li(_[[Observe scout.]])
    )
 }
