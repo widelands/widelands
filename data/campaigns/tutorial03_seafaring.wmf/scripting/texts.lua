@@ -217,7 +217,7 @@ ferry_1 = {
    title = _"There is more to it…",
    body = (
       h1(_"Another gold mountain") ..
-      p(_[[We have some time before your shipyard is finished. There is another way of water-based transport I would like to teach you.]]) ..
+      p(_[[It will take some time for your shipyard to build some ships. While we’re waiting for them, there is another way of water-based transport I would like to teach you.]]) ..
       p(_[[Ships have the advantage that they can carry large quantities of wares and workers at a time, but unfortunately their destinations are limited to a handful of spaces suited for a port.]]) ..
       p(_[[Look at this valley here in the far south. We have found a mountain with gold down here and would like to mine ores from it as well. But the streams seperating it from our main colony are too wide to build bridges and too narrow for ships to pass them. Our roads would have to take long curves, which slows down ware transport a lot.]])
    ),
