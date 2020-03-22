@@ -864,7 +864,7 @@ bool WLApplication::init_settings() {
  * Initialize language settings
  */
 void WLApplication::init_language() {
-	// Find the locale dir
+	// Set the locale dir
     i18n::set_localedir(g_fs->canonicalize_name(datadir_ + "/locale"));
 
 	// If locale dir is not a directory, barf. We can handle it not being there tough.
