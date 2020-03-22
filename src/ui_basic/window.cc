@@ -114,7 +114,7 @@ Window::Window(Panel* const parent,
                               g_gr->images().get(kTemplateDir + "wui/window_close.png"),
                               _("Close"))),
      button_pin_(new Button(this,
-                            "b_close",
+                            "b_pin",
                             0,
                             -TP_B_PIXMAP_THICKNESS,
                             TP_B_PIXMAP_THICKNESS,
@@ -123,7 +123,7 @@ Window::Window(Panel* const parent,
                             g_gr->images().get(kWindowImageUnpinned),
                             "")),
      button_minimize_(new Button(this,
-                                 "b_close",
+                                 "b_minimize",
                                  TP_B_PIXMAP_THICKNESS,
                                  -TP_B_PIXMAP_THICKNESS,
                                  TP_B_PIXMAP_THICKNESS,
@@ -169,7 +169,7 @@ void Window::update_toolbar_buttons() {
 	button_pin_->set_pic(g_gr->images().get(pinned_ ? kWindowImagePinned : kWindowImageUnpinned));
 	button_pin_->set_tooltip(pinned_ ? _("Unpin") : _("Pin"));
 	button_close_->set_enabled(!pinned_);
-	button_minimize_->set_enabled(!pinned_ || is_minimal_);
+	button_minimize_->set_enabled(!pinned_);
 }
 
 void Window::clicked_button_close() {
