@@ -59,6 +59,15 @@ jobs:
       language: python
       script: ./.travis.sh includes
       cache: false
+    - name: "Clang-tidy"
+      script: ./.travis.sh clang-tidy
+      cache: false
+      addons:
+        apt:
+          packages:
+            - clang
+            - clang-tidy
+            - python-yaml
 
     - stage: compiler
       # Run this stage to test whether there are any error during compiling.
