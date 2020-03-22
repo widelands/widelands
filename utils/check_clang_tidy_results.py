@@ -6,7 +6,13 @@ import sys
 def main():
     """Checks whether clang-tidy warnings that were previously cleaned have regressed."""
     if len(sys.argv) == 2:
-        print('Checking clang-tidy results...')
+        print('#######################################')
+        print('#######################################')
+        print('###                                 ###')
+        print('###   Checking clang-tidy results   ###')
+        print('###                                 ###')
+        print('#######################################')
+        print('#######################################')
     else:
         print(
             'Usage: check_clang_tidy_results.py <log_file>')
@@ -31,10 +37,22 @@ def main():
                     errors = errors + 1
 
     if errors > 0:
-        print('Found %s errors.' % errors)
+        print('#######################################')
+        print('#######################################')
+        print('###                                 ###')
+        print('###   Found %s error(s)             ###' % errors)
+        print('###                                 ###')
+        print('#######################################')
+        print('#######################################')
         return 1
     else:
-        print('Check has passed.')
+        print('#######################################')
+        print('#######################################')
+        print('###                                 ###')
+        print('###   Check has passed              ###')
+        print('###                                 ###')
+        print('#######################################')
+        print('#######################################')
         return 0
 
 
