@@ -168,7 +168,7 @@ scouting3 = {
    title = _"Scout made progress",
    body = (
       h1(_"New horizons?") ..
-      p(_[[As you can see, scout can go quite far. Good news is that there are no enemies around.]]) ..
+      p(_[[As you can see, scouts can go quite far. The good news is that there are no enemies around.]]) ..
       p(_[[You can use minimap to see progress of exploration.]]) ..
       p(_[[Don’t forget that scouting is hard work and as such can not be done without provision of food.]])
    ),
