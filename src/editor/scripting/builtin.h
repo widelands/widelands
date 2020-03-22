@@ -33,9 +33,7 @@
 
 // Wrapper for a (static) FunctionBase object, for use in kBuiltinFunctions
 struct BuiltinFunctionInfo {
-	BuiltinFunctionInfo(std::function<std::string()> d,
-	                    FunctionBase* f,
-	                    std::string i = "")
+	BuiltinFunctionInfo(std::function<std::string()> d, FunctionBase* f, std::string i = "")
 	   : function(f), description(d), included_from(i) {
 	}
 	~BuiltinFunctionInfo() {
@@ -108,8 +106,7 @@ private:
 
 // Wrapper for a (static) Property object, for use in kBuiltinProperties
 struct BuiltinPropertyInfo {
-	BuiltinPropertyInfo(std::function<std::string()> d, Property* p)
-	   : property(p), description(d) {
+	BuiltinPropertyInfo(std::function<std::string()> d, Property* p) : property(p), description(d) {
 	}
 	~BuiltinPropertyInfo() {
 	}
