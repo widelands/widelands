@@ -368,8 +368,9 @@ void FullscreenMenuMapSelect::fill_table() {
 		} else if (g_fs->is_directory(mapfilename)) {
 			// Add subdirectory to the list
 			const char* fs_filename = FileSystem::fs_filename(mapfilename.c_str());
-			if (!strcmp(fs_filename, ".") || !strcmp(fs_filename, ".."))
+            if (!strcmp(fs_filename, ".") || !strcmp(fs_filename, "..")) {
 				continue;
+            }
 			maps_data_.push_back(MapData::create_directory(mapfilename));
 		}
 	}

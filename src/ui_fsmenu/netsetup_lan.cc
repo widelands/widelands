@@ -178,10 +178,12 @@ bool FullscreenMenuNetSetupLAN::get_host_address(NetAddress* addr) {
 	}
 
 	// The user probably entered a hostname on his own. Try to resolve it
-	if (NetAddress::resolve_to_v6(addr, host, kWidelandsLanPort))
+    if (NetAddress::resolve_to_v6(addr, host, kWidelandsLanPort)) {
 		return true;
-	if (NetAddress::resolve_to_v4(addr, host, kWidelandsLanPort))
+    }
+    if (NetAddress::resolve_to_v4(addr, host, kWidelandsLanPort)) {
 		return true;
+    }
 	return false;
 }
 
@@ -244,8 +246,9 @@ void FullscreenMenuNetSetupLAN::game_closed(const NetOpenGame*) {
 }
 
 void FullscreenMenuNetSetupLAN::game_updated(const NetOpenGame* game) {
-	if (UI::Table<const NetOpenGame* const>::EntryRecord* const er = table_.find(game))
+    if (UI::Table<const NetOpenGame* const>::EntryRecord* const er = table_.find(game)) {
 		update_game_info(*er, game->info);
+    }
 }
 
 void FullscreenMenuNetSetupLAN::discovery_callback(int32_t const type,
@@ -307,7 +310,8 @@ void FullscreenMenuNetSetupLAN::clicked_lasthost() {
 	Section& s = get_config_safe_section();
 	std::string const host = s.get_string("lasthost", "");
 	hostname_.set_text(host);
-	if (host.size())
+    if (host.size()) {
 		joingame_.set_enabled(true);
+    }
 	table_.select(table_.no_selection_index());
 }
