@@ -143,16 +143,16 @@ function reveal_village()
 
    -- Build roads
    -- Start at northern sentry
-   connected_road(plr, map:get_field(58, 10).immovable,
+   connected_road("normal", plr, map:get_field(58, 10).immovable,
       "w,sw|se,sw|e,se|se,se|sw,sw|sw,w|sw,sw|se,sw|sw,sw|se,sw|" ..
       "sw,sw|sw,sw|sw,sw|se,se,sw|e,e|sw,sw|se,sw|")
 
-   connected_road(plr, map:get_field(57, 25).immovable, "sw,w|sw,w")
-   connected_road(plr, map:get_field(57, 29).immovable, "w,w|w,w")
-   connected_road(plr, map:get_field(55, 34).immovable, "sw,sw")
-   connected_road(plr, map:get_field(57, 22).immovable, "sw,w")
-   connected_road(plr, map:get_field(54, 19).immovable, "sw,se,e")
-   connected_road(plr, map:get_field(56, 17).immovable, "sw,se")
+   connected_road("normal", plr, map:get_field(57, 25).immovable, "sw,w|sw,w")
+   connected_road("normal", plr, map:get_field(57, 29).immovable, "w,w|w,w")
+   connected_road("normal", plr, map:get_field(55, 34).immovable, "sw,sw")
+   connected_road("normal", plr, map:get_field(57, 22).immovable, "sw,w")
+   connected_road("normal", plr, map:get_field(54, 19).immovable, "sw,se,e")
+   connected_road("normal", plr, map:get_field(56, 17).immovable, "sw,se")
 end
 
 run(village_thread)
