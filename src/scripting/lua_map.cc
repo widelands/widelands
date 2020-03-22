@@ -5994,13 +5994,13 @@ int LuaMilitarySite::set_prefer_heroes(lua_State* L) {
 	return 0;
 }
 
-int LuaMilitarySite::get_capacity(lua_State* L) {
-	get(L, get_egbase(L))->mutable_soldier_control()->set_soldier_capacity(luaL_checkuint32(L, -1));
-	return 1;
-}
 int LuaMilitarySite::set_capacity(lua_State* L) {
-	lua_pushuint32(L, get(L, get_egbase(L))->soldier_control()->soldier_capacity());
+	get(L, get_egbase(L))->mutable_soldier_control()->set_soldier_capacity(luaL_checkuint32(L, -1));
 	return 0;
+}
+int LuaMilitarySite::get_capacity(lua_State* L) {
+	lua_pushuint32(L, get(L, get_egbase(L))->soldier_control()->soldier_capacity());
+	return 1;
 }
 
 /*
