@@ -117,7 +117,7 @@ function shipyard_production(shipname)
       title = _"Shipyard production",
       body = (
          h1(_"We have enough ships") ..
-         p(_[[Your second ship, "]] .. shipname .. _[[", is ready now.]]) ..
+         p((_[[Your second ship, "%1%", is ready now.]]):bformat(shipname)) ..
          li_arrow(_[[You need to stop your shipyard when you have enough ships. Otherwise, your shipwright will consume all your logs and spidercloth, producing dozens of ships.]]) ..
          li_image("images/ui_basic/stop.png", _[[This is the icon for stopping production. You will find it in the building window.]])
       ),
