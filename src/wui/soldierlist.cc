@@ -401,9 +401,7 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
 	              font_style_))
 	           ->width();
 	uint32_t maxtextwidth = std::max(
-	   w,
-	   UI::g_fh->render(as_richtext_paragraph(infotext_.get_text(), font_style_))
-	      ->width());
+	   w, UI::g_fh->render(as_richtext_paragraph(infotext_.get_text(), font_style_))->width());
 	set_min_desired_breadth(maxtextwidth + 4);
 
 	UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
