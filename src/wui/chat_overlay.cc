@@ -106,8 +106,9 @@ void ChatOverlay::set_chat_provider(ChatProvider& chat) {
  */
 void ChatOverlay::think() {
 	if (m->havemessages_) {
-		if (time(nullptr) - m->oldest_ > CHAT_DISPLAY_TIME)
+        if (time(nullptr) - m->oldest_ > CHAT_DISPLAY_TIME) {
 			m->recompute();
+        }
 	}
 }
 
@@ -177,8 +178,9 @@ void ChatOverlay::Impl::recompute() {
 }
 
 void ChatOverlay::draw(RenderTarget& dst) {
-	if (!m->havemessages_)
+    if (!m->havemessages_) {
 		return;
+    }
 
 	std::shared_ptr<const UI::RenderedText> im(nullptr);
 	try {

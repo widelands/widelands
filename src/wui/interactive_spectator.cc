@@ -69,8 +69,9 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 
 void InteractiveSpectator::draw(RenderTarget& dst) {
 	// This fixes a crash with displaying an error dialog during loading.
-	if (!game().is_loaded())
+    if (!game().is_loaded()) {
 		return;
+    }
 
 	draw_map_view(map_view(), &dst);
 }

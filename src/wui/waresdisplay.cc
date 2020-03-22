@@ -436,21 +436,25 @@ void AbstractWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIn
 
 // Wares highlighting/selecting
 void AbstractWaresDisplay::select_ware(Widelands::DescriptionIndex ware) {
-	if (selected_[ware])
+    if (selected_[ware]) {
 		return;
+    }
 
 	selected_[ware] = true;
-	if (callback_function_)
+    if (callback_function_) {
 		callback_function_(ware, true);
+    }
 }
 
 void AbstractWaresDisplay::unselect_ware(Widelands::DescriptionIndex ware) {
-	if (!selected_[ware])
+    if (!selected_[ware]) {
 		return;
+    }
 
 	selected_[ware] = false;
-	if (callback_function_)
+    if (callback_function_) {
 		callback_function_(ware, false);
+    }
 }
 
 bool AbstractWaresDisplay::ware_selected(Widelands::DescriptionIndex ware) {
@@ -459,8 +463,9 @@ bool AbstractWaresDisplay::ware_selected(Widelands::DescriptionIndex ware) {
 
 // Wares hiding
 void AbstractWaresDisplay::hide_ware(Widelands::DescriptionIndex ware) {
-	if (hidden_[ware])
+    if (hidden_[ware]) {
 		return;
+    }
 	hidden_[ware] = true;
 }
 
@@ -535,8 +540,8 @@ std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
 
 	const UI::WareInfoStyleInfo& style = g_gr->styles().ware_info_style(UI::WareInfoStyle::kNormal);
 
-	for (i = order.begin(); i != order.end(); ++i)
-		for (j = i->begin(); j != i->end(); ++j)
+    for (i = order.begin(); i != order.end(); ++i) {
+        for (j = i->begin(); j != i->end(); ++j) {
 			if ((c = map.find(*j)) != map.end()) {
 				ret += "<div width=30 padding=2><p align=center>"
 				       "<div width=26 background=" +
@@ -546,5 +551,7 @@ std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
 				       "><p>" + style.info_font().as_font_tag(get_amount_string(c->second)) +
 				       "</p></div></p></div>";
 			}
+        }
+    }
 	return ret;
 }

@@ -60,8 +60,9 @@ Left-press: warp the view point to the new position
 ===============
 */
 bool MiniMap::View::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
-	if (btn != SDL_BUTTON_LEFT)
+    if (btn != SDL_BUTTON_LEFT) {
 		return false;
+    }
 
 	dynamic_cast<MiniMap&>(*get_parent())
 	   .warpview(minimap_pixel_to_mappixel(ibase_.egbase().map(), Vector2i(x, y), view_area_,
@@ -199,8 +200,9 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
 
 	check_boundaries();
 
-	if (get_usedefaultpos())
+    if (get_usedefaultpos()) {
 		center_to_parent();
+    }
 
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged&) { check_boundaries(); });
@@ -210,8 +212,9 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
 
 void MiniMap::toggle(MiniMapLayer const button) {
 	*view_.minimap_layers_ = MiniMapLayer(*view_.minimap_layers_ ^ button);
-	if (button == MiniMapLayer::Zoom2)
+    if (button == MiniMapLayer::Zoom2) {
 		resize();
+    }
 	update_button_permpressed();
 }
 

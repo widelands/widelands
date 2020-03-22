@@ -133,8 +133,9 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	centerviewbtn_->sigclicked.connect(boost::bind(&GameMessageMenu::center_view, this));
 	centerviewbtn_->set_enabled(false);
 
-	if (get_usedefaultpos())
+    if (get_usedefaultpos()) {
 		center_to_parent();
+    }
 
 	list->set_column_compare(ColTitle, boost::bind(&GameMessageMenu::compare_title, this, _1, _2));
 	list->set_column_compare(ColStatus, boost::bind(&GameMessageMenu::compare_status, this, _1, _2));
@@ -297,8 +298,9 @@ void GameMessageMenu::think() {
 	}
 
 	if (list->size()) {
-		if (!list->has_selection())
+        if (!list->has_selection()) {
 			list->select(0);
+        }
 	} else {
 		centerviewbtn_->set_enabled(false);
 		message_body.set_text(std::string());
@@ -349,8 +351,9 @@ void GameMessageMenu::selected(uint32_t const t) {
  * a message was double clicked
  */
 void GameMessageMenu::double_clicked(uint32_t const /* t */) {
-	if (centerviewbtn_->enabled())
+    if (centerviewbtn_->enabled()) {
 		center_view();
+    }
 }
 
 /**
@@ -359,14 +362,16 @@ void GameMessageMenu::double_clicked(uint32_t const /* t */) {
 bool GameMessageMenu::handle_key(bool down, SDL_Keysym code) {
 	// Special ESCAPE handling
 	// When ESCAPE is pressed down is false
-	if (code.sym == SDLK_ESCAPE)
+    if (code.sym == SDLK_ESCAPE) {
 		return UI::Window::handle_key(true, code);
+    }
 	if (down) {
 		switch (code.sym) {
 		// Don't forget to change the tooltips if any of these get reassigned
 		case SDLK_g:
-			if (centerviewbtn_->enabled())
+            if (centerviewbtn_->enabled()) {
 				center_view();
+            }
 			return true;
 		case SDLK_0:
 			if (code.mod & KMOD_ALT) {

@@ -70,9 +70,11 @@ MapObjectDebugPanel::MapObjectDebugPanel(UI::Panel& parent,
 }
 
 MapObjectDebugPanel::~MapObjectDebugPanel() {
-	if (Widelands::MapObject* const obj = object_.get(egbase_))
-		if (obj->get_logsink() == this)
+    if (Widelands::MapObject* const obj = object_.get(egbase_)) {
+        if (obj->get_logsink() == this) {
 			obj->set_logsink(nullptr);
+        }
+    }
 }
 
 /*
@@ -233,24 +235,30 @@ void FieldDebugWindow::think() {
 
 		if (owner) {
 			Widelands::NodeCaps const buildcaps = egbase.player(owner).get_buildcaps(coords_);
-			if (buildcaps & Widelands::BUILDCAPS_BIG)
+            if (buildcaps & Widelands::BUILDCAPS_BIG) {
 				str += "  can build big building\n";
-			else if (buildcaps & Widelands::BUILDCAPS_MEDIUM)
+            } else if (buildcaps & Widelands::BUILDCAPS_MEDIUM) {
 				str += "  can build medium building\n";
-			else if (buildcaps & Widelands::BUILDCAPS_SMALL)
+            } else if (buildcaps & Widelands::BUILDCAPS_SMALL) {
 				str += "  can build small building\n";
-			if (buildcaps & Widelands::BUILDCAPS_FLAG)
+            }
+            if (buildcaps & Widelands::BUILDCAPS_FLAG) {
 				str += "  can place flag\n";
-			if (buildcaps & Widelands::BUILDCAPS_MINE)
+            }
+            if (buildcaps & Widelands::BUILDCAPS_MINE) {
 				str += "  can build mine\n";
-			if (buildcaps & Widelands::BUILDCAPS_PORT)
+            }
+            if (buildcaps & Widelands::BUILDCAPS_PORT) {
 				str += "  can build port\n";
+            }
 		}
 	}
-	if (coords_.field->nodecaps() & Widelands::MOVECAPS_WALK)
+    if (coords_.field->nodecaps() & Widelands::MOVECAPS_WALK) {
 		str += "is walkable\n";
-	if (coords_.field->nodecaps() & Widelands::MOVECAPS_SWIM)
+    }
+    if (coords_.field->nodecaps() & Widelands::MOVECAPS_SWIM) {
 		str += "is swimmable\n";
+    }
 	Widelands::MapIndex const i = coords_.field - &map_[0];
 	Widelands::PlayerNumber const nr_players = map_.get_nrplayers();
 	iterate_players_existing_const(plnum, nr_players, egbase, player) {
@@ -269,8 +277,9 @@ void FieldDebugWindow::think() {
 				        time_last_surveyed % static_cast<unsigned int>(player_field.resource_amounts.d))
 				          .str();
 
-			} else
+			} else {
 				str += "  D triangle never surveyed\n";
+            }
 		}
 		{
 			Widelands::Time const time_last_surveyed =
@@ -281,8 +290,9 @@ void FieldDebugWindow::think() {
 				        time_last_surveyed % static_cast<unsigned int>(player_field.resource_amounts.r))
 				          .str();
 
-			} else
+			} else {
 				str += "  R triangle never surveyed\n";
+            }
 		}
 		switch (vision) {
 		case 0:
@@ -382,8 +392,9 @@ Open the debug window for the immovable on our position.
 ===============
 */
 void FieldDebugWindow::open_immovable() {
-	if (Widelands::BaseImmovable* const imm = coords_.field->get_immovable())
+    if (Widelands::BaseImmovable* const imm = coords_.field->get_immovable()) {
 		show_mapobject_debug(ibase(), *imm);
+    }
 }
 
 /*
@@ -392,10 +403,12 @@ Open the bob debug window for the bob of the given index in the list
 ===============
 */
 void FieldDebugWindow::open_bob(const uint32_t index) {
-	if (index != UI::Listselect<intptr_t>::no_selection_index())
+    if (index != UI::Listselect<intptr_t>::no_selection_index()) {
 		if (Widelands::MapObject* const object =
-		       ibase().egbase().objects().get_object(ui_bobs_.get_selected()))
+            ibase().egbase().objects().get_object(ui_bobs_.get_selected())) {
 			show_mapobject_debug(ibase(), *object);
+        }
+    }
 }
 
 /*
