@@ -31,10 +31,11 @@ def main():
     with open(log_file) as checkme:
         contents = checkme.readlines()
         for line in contents:
-            for check in CLEAN_CHECKS:
-                if check in line:
-                    print(line.strip())
-                    errors = errors + 1
+            if not 'third_party' in line:
+                for check in CLEAN_CHECKS:
+                    if check in line:
+                        print(line.strip())
+                        errors = errors + 1
 
     if errors > 0:
         print('#######################################')
