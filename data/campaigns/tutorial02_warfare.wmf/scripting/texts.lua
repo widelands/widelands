@@ -151,7 +151,7 @@ scouting2 = {
    body = (
       h1(_"Ready to go!") ..
       p(_[[Well done, your scout’s hut has been built. While our scout is moving in, let’s learn a little bit more about him.]]) ..
-      p(_[[First of all, he needs to take some food for his scouting trips. By chance, we have some rations in our warehouse.]]) ..
+      p(_[[First of all, he will need to take some food with him on his scouting trips. Fortunately, we have some rations in our warehouse.]]) ..
       li_object("barbarians_scout", _[[When provided with food, he will walk randomly around the area. You should follow his movement before fog of war hides what he saw.]], plr.color)
    ),
    h = 300,
