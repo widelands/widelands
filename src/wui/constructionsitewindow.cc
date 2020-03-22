@@ -50,7 +50,22 @@ ConstructionSiteWindow::FakeWaresDisplay::FakeWaresDisplay(UI::Panel* parent,
                                                            Widelands::WareWorker type)
    : WaresDisplay(parent, 0, 0, cs.owner().tribe(), type, can_act),
      settings_(*dynamic_cast<Widelands::WarehouseSettings*>(cs.get_settings())),
-     tribe_(cs.owner().tribe()) {
+     tribe_(cs.owner().tribe()),
+     warelist_(new Widelands::WareList()) {
+	if (type == Widelands::wwWARE) {
+		for (const auto& pair : cs.get_additional_wares()) {
+			warelist_->add(pair.first, pair.second);
+		}
+	} else {
+		for (const Widelands::Worker* w : cs.get_additional_workers()) {
+			warelist_->add(w->descr().worker_index(), 1);
+		}
+	}
+	add_warelist(*warelist_);
+}
+
+ConstructionSiteWindow::FakeWaresDisplay::~FakeWaresDisplay() {
+	warelist_->clear();  // Avoid annoying warnings
 }
 
 void ConstructionSiteWindow::FakeWaresDisplay::draw_ware(RenderTarget& dst,

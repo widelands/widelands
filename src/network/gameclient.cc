@@ -840,8 +840,15 @@ void GameClient::handle_setting_tribes(RecvPacket& packet) {
 			std::string const initialization_script = packet.string();
 			std::unique_ptr<LuaTable> t = lua.run_script(initialization_script);
 			t->do_not_warn_about_unaccessed_keys();
+			std::set<std::string> tags;
+			if (t->has_key("map_tags")) {
+				std::unique_ptr<LuaTable> tt = t->get_table("map_tags");
+				for (int key : tt->keys<int>()) {
+					tags.insert(tt->get_string(key));
+				}
+			}
 			info.initializations.push_back(Widelands::TribeBasicInfo::Initialization(
-			   initialization_script, t->get_string("descname"), t->get_string("tooltip")));
+			   initialization_script, t->get_string("descname"), t->get_string("tooltip"), tags));
 		}
 		d->settings.tribes.push_back(info);
 	}

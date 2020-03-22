@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2010
@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-12-30 07:55+0000\n"
-"PO-Revision-Date: 2019-12-30 08:11+0000\n"
+"POT-Creation-Date: 2020-03-16 06:59+0000\n"
+"PO-Revision-Date: 2020-03-16 07:06+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Galician (http://www.transifex.com/widelands/widelands/language/gl/)\n"
 "MIME-Version: 1.0\n"
@@ -754,6 +754,47 @@ msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
 msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:75
+msgctxt "hotkey"
+msgid "Ctrl+(Page Up/Page Down)"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:75
+msgctxt "hotkey"
+msgid "Page Up/Page Down"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:75
+msgctxt "hotkey"
+msgid "Shift+(Page Up/Page Down)"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:75
+msgid ""
+"Speed up or slow down the game with %1%. Use %2% for rapid change, %3% will "
+"adjust speed smoothly."
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:79
+msgctxt "hotkey"
+msgid "Arrow keys"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:79
+msgctxt "hotkey"
+msgid "Ctrl+Arrow keys"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:79
+msgid ""
+"Move map view using %1%. %2% will move the view faster, %3% moves slowly."
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:79
+msgctxt "hotkey"
+msgid "Shift+Arrow keys"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:83
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"

@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # Любомир Василев, 2015
@@ -7,10 +7,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-10 07:32+0000\n"
-"PO-Revision-Date: 2019-05-10 11:09+0000\n"
-"Last-Translator: Любомир Василев\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-03-03 09:07+0000\n"
+"PO-Revision-Date: 2020-03-03 09:10+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -181,23 +181,23 @@ msgstr "%1$s владееше %2$3.0f%% от земята (%3$i от %4$i)."
 msgid "Territory percentage"
 msgstr "Процент от територията"
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:195
+#: ../../data/scripting/win_conditions/territorial_functions.lua:211
 msgid "You own more than half of the map’s area."
 msgstr "Вие владеете повече от половината карта."
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:196
+#: ../../data/scripting/win_conditions/territorial_functions.lua:212
 #, lua-format
 msgid "Keep it for %i more minute to win the game."
 msgid_plural "Keep it for %i more minutes to win the game."
 msgstr[0] "Удръжте я още %i минута, за да спечелите играта."
 msgstr[1] "Удръжте я още %i минути, за да спечелите играта."
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:222
+#: ../../data/scripting/win_conditions/territorial_functions.lua:238
 #, lua-format
 msgid "%s owns more than half of the map’s area."
 msgstr "%s владее повече от половината карта."
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:223
+#: ../../data/scripting/win_conditions/territorial_functions.lua:239
 #, lua-format
 msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."
@@ -212,10 +212,11 @@ msgstr "Владетел на територии"
 msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
-"least 20 minutes."
-msgstr "Всеки играч или отбор се опитва да завладее повече от половината площ на картата. Победител е този играч или отбор, който успее да удържи тази територия поне 20 минути."
+"least 20 minutes. If the peaceful mode is selected, the game ends if one "
+"player has more land than any other player could gain."
+msgstr ""
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:56
+#: ../../data/scripting/win_conditions/territorial_lord.lua:58
 msgid "Currently no faction owns more than half of the map’s area."
 msgstr "В момента нито една фракция не владее повече от половината територия на картата."
 
@@ -228,8 +229,9 @@ msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes, or the one with the most territory after 4 hours, "
-"whichever comes first."
-msgstr "Всеки играч или отбор се опитва да завладее повече от половината площ на картата. Победител е този играч или отбор, който успее да удържи тази територия поне 20 минути или този, който владее най-голяма територия след 4 часа, което се случи първо."
+"whichever comes first.If the peaceful mode is selected, the game ends if one"
+" player has more land than any other player could gain."
+msgstr ""
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #. TRANSLATORS: Context: 'The game will end in 30 minutes.'
