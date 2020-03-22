@@ -402,7 +402,7 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
 	           ->width();
 	uint32_t maxtextwidth = std::max(
 	   w,
-	   UI::g_fh->render(as_richtext_paragraph(_("Click soldier to configure levels"), font_style_))
+	   UI::g_fh->render(as_richtext_paragraph(infotext_.get_text(), font_style_))
 	      ->width());
 	set_min_desired_breadth(maxtextwidth + 4);
 
