@@ -144,8 +144,13 @@ function complete_ferries()
 end
 
 function watch_ferry_production()
-   -- warn player about over-producing
-   while plr:get_workers("atlanteans_ferry") < 1 do sleep(3000) end
+   -- warn player about over-producing after third ferry
+   while #get_fields_with_ferry(swimmable_fields) < 3 do sleep(3000) end
+   local ferry_yards = plr:get_buildings("atlanteans_ferry_yard")
+   if #ferry_yards > 0 then
+      local yard = ferry_yards[1]
+      scroll_to_field(yard.fields[1])
+   end
    message_box_objective(plr, ferry_yard_production)
 end
 

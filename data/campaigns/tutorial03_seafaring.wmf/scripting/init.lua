@@ -30,6 +30,8 @@ include "map:scripting/texts.lua"
 include "map:scripting/helper_functions.lua"
 include "map:scripting/helper_functions_demonstration.lua"
 
+swimmable_fields = get_swimmable_fields()
+
 include "map:scripting/starting_conditions.lua"
 
 include "map:scripting/mission_thread.lua"
