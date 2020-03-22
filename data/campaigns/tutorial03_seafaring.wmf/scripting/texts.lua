@@ -304,7 +304,7 @@ ferry_yard_production = {
    position = "topright",
    title = _"Ferry yard production",
    body = (
-      h1(_"Rowboat is ready") ..
+      h1(_"Ferry is ready") ..
       p(_[[Your first ferry line has opened.]]) ..
       p(_[[Do remember to stop your ferry yard when you don’t need any new ferries to be produced. As long as a ferry services a waterway, its lifetime is unlimited, but unemployed ferries will rot away and eventually sink.]]) ..
       li_image("images/ui_basic/stop.png", _[[This is the icon for stopping production. You will find it in the building window.]])
