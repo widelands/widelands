@@ -58,7 +58,7 @@ clang-tidy)
    cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
    python ../utils/run-clang-tidy.py -checks=*braces* > ../clang-tidy.log
    pushd ..
-   utils/check_clang_tidy_results.py
+   utils/check_clang_tidy_results.py clang-tidy.log
    pushd build
    ;;
 esac
