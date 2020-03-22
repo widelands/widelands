@@ -125,17 +125,16 @@ function complete_ferry_yard()
 end
 
 function complete_gold_mine()
-   local field_for_mine = map:get_field(20, 102):region(5)
-   while field_for_mine do
+   local fields_for_mine = map:get_field(20, 102):region(5)
+   while not gold_mine_done do
       sleep(3000)
-      for i,f in pairs(field_for_mine) do
+      for i,f in pairs(fields_for_mine) do
          if f.immovable and f.immovable.descr.name == "atlanteans_goldmine" then
-            field_for_mine = nil
+            gold_mine_done = true
             break
          end
       end
    end
-   gold_mine_done = true
 end
 
 function complete_ferries()
