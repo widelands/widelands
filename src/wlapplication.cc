@@ -865,30 +865,20 @@ bool WLApplication::init_settings() {
  */
 void WLApplication::init_language() {
 	// Find the locale dir
-	i18n::set_localedir(g_fs->canonicalize_name(datadir_ + "/locale"));
+    i18n::set_localedir(g_fs->canonicalize_name(datadir_ + "/locale"));
 
-	// If locale dir does not exist, try below the homedir
-	if (!g_fs->file_exists(i18n::get_localedir()) || !g_fs->is_directory(i18n::get_localedir())) {
-		log("Localedir: Trying %s\n", g_fs->canonicalize_name(homedir_ + "/locale").c_str());
-		i18n::set_localedir(g_fs->canonicalize_name(homedir_ + "/locale"));
-
-		// Produce error message and then exit if that didn't work either
-		if (!g_fs->file_exists(i18n::get_localedir()) || !g_fs->is_directory(i18n::get_localedir())) {
-			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "'locale' directory not found",
-			                         std::string(g_fs->canonicalize_name(datadir_ + "/locale") +
-			                                     " is not a directory. Please create it.")
-			                            .c_str(),
-			                         NULL);
-			log("ERROR: %s is not a directory. Please create it.\n",
-			    g_fs->canonicalize_name(datadir_ + "/locale").c_str());
-			exit(1);
-		}
+	// If locale dir is not a directory, barf. We can handle it not being there tough.
+	if (g_fs->file_exists(i18n::get_localedir()) && !g_fs->is_directory(i18n::get_localedir())) {
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "'locale' directory not valid",
+                                 std::string(i18n::get_localedir() +
+                                             "\nis not a directory. Please fix this.")
+                                    .c_str(),
+                                 NULL);
+        log("ERROR: %s is not a directory. Please fix this.\n", i18n::get_localedir().c_str());
+        exit(1);
 	}
 
-	assert(g_fs->file_exists(i18n::get_localedir()));
-	assert(g_fs->is_directory(i18n::get_localedir()));
-
-	if (g_fs->list_directory(i18n::get_localedir()).empty()) {
+	if (!g_fs->is_directory(i18n::get_localedir()) || g_fs->list_directory(i18n::get_localedir()).empty()) {
 		log("WARNING: No locale translations found in %s\n", i18n::get_localedir().c_str());
 	}
 
