@@ -39,10 +39,6 @@
 #include "wui/minimap.h"
 #include "wui/quicknavigation.h"
 
-namespace Widelands {
-struct CoordPath;
-}
-
 class UniqueWindowHandler;
 
 struct WorkareaPreview {
