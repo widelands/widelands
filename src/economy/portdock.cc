@@ -106,8 +106,9 @@ Flag& PortDock::base_flag() {
  * has the given flag.
  */
 PortDock* PortDock::get_dock(Flag& flag) const {
-	if (fleet_)
+    if (fleet_) {
 		return fleet_->get_dock(flag);
+    }
 	return nullptr;
 }
 
@@ -204,8 +205,9 @@ void PortDock::cleanup(EditorGameBase& egbase) {
 		}
 	}
 
-	if (fleet_)
+    if (fleet_) {
 		fleet_->remove_port(egbase, this);
+    }
 
 	for (const Coords& coords : dockpoints_) {
 		unset_position(egbase, coords);
@@ -234,8 +236,9 @@ void PortDock::cleanup(EditorGameBase& egbase) {
  * Add the flags of all ports that can be reached via this dock.
  */
 void PortDock::add_neighbours(std::vector<RoutingNodeNeighbour>& neighbours) {
-	if (fleet_ && fleet_->active())
+    if (fleet_ && fleet_->active()) {
 		fleet_->add_neighbours(*this, neighbours);
+    }
 }
 
 /**
@@ -375,8 +378,9 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 
 	// TODO(Nordfriese): Quick and dirty fix to make #3683 #3544 #503 happen less often.
 	// The real fix will be part of Noordfrees:shipping-tweaks
-	for (auto it = waiting_.begin(); it != waiting_.end(); it = update_shippingitem(game, it))
+    for (auto it = waiting_.begin(); it != waiting_.end(); it = update_shippingitem(game, it)) {
 		;
+    }
 
 	ship.pop_destination(game, *this);
 	fleet_->push_next_destinations(game, ship, *this);
@@ -619,13 +623,15 @@ void PortDock::Loader::load_finish() {
 
 	if (pd.warehouse_->get_portdock() != &pd) {
 		log("Inconsistent PortDock <> Warehouse link\n");
-		if (upcast(Game, game, &egbase()))
+        if (upcast(Game, game, &egbase())) {
 			pd.schedule_destroy(*game);
+        }
 	}
 
 	// This shouldn't be necessary, but let's check just in case
-	if (!pd.fleet_)
+    if (!pd.fleet_) {
 		pd.init_fleet(egbase());
+    }
 }
 
 MapObject::Loader* PortDock::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr) {

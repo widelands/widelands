@@ -83,8 +83,9 @@ void InputQueue::request_callback(Game& game,
 
 	iq.entered(index, worker);
 
-	if (iq.callback_fn_)
+    if (iq.callback_fn_) {
 		(*iq.callback_fn_)(game, &iq, index, worker, iq.callback_data_);
+    }
 }
 
 void InputQueue::set_callback(CallbackFn* const fn, void* const data) {
@@ -106,8 +107,9 @@ void InputQueue::set_max_size(const Quantity size) {
 }
 
 void InputQueue::set_max_fill(Quantity size) {
-	if (size > max_size_)
+    if (size > max_size_) {
 		size = max_size_;
+    }
 
 	max_fill_ = size;
 
