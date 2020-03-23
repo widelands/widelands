@@ -786,7 +786,8 @@ void FieldActionWindow::act_abort_buildwaterway() {
 }
 
 void FieldActionWindow::act_abort_buildroad_and_start_buildwaterway() {
-	if (!ibase().in_road_building_mode(RoadBuildingType::kRoad) || ibase().in_road_building_mode(RoadBuildingType::kWaterway)) {
+	if (!ibase().in_road_building_mode(RoadBuildingType::kRoad) ||
+	    ibase().in_road_building_mode(RoadBuildingType::kWaterway)) {
 		return;
 	}
 	const Widelands::Coords c = ibase().get_build_road_start();
@@ -796,7 +797,8 @@ void FieldActionWindow::act_abort_buildroad_and_start_buildwaterway() {
 }
 
 void FieldActionWindow::act_abort_buildwaterway_and_start_buildroad() {
-	if (ibase().in_road_building_mode(RoadBuildingType::kRoad) || !ibase().in_road_building_mode(RoadBuildingType::kWaterway)) {
+	if (ibase().in_road_building_mode(RoadBuildingType::kRoad) ||
+	    !ibase().in_road_building_mode(RoadBuildingType::kWaterway)) {
 		return;
 	}
 	const Widelands::Coords c = ibase().get_build_road_start();
@@ -1011,17 +1013,19 @@ void show_field_action(InteractiveBase* const ibase,
 			FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
 			if (ibase->in_road_building_mode(RoadBuildingType::kRoad)) {
 				w.add_buttons_road(target != ibase->get_build_road_start() &&
-					               (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG));
+				                   (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG));
 			} else {
 				w.add_buttons_waterway(target != ibase->get_build_road_start() &&
-					                   (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG));
+				                       (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG));
 			}
 			w.init();
 			return;
 		}
 
 		// append or take away from the road
-		if (!ibase->append_build_road(target) || (ibase->in_road_building_mode(RoadBuildingType::kWaterway) && target != ibase->get_build_road_end())) {
+		if (!ibase->append_build_road(target) ||
+		    (ibase->in_road_building_mode(RoadBuildingType::kWaterway) &&
+		     target != ibase->get_build_road_end())) {
 			FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
 			w.add_buttons_road(false);
 			w.init();

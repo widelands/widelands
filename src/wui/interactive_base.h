@@ -263,7 +263,8 @@ protected:
 
 	// Overlays displayed while a road or waterway is under construction.
 	struct RoadBuildingMode {
-		RoadBuildingMode(Widelands::PlayerNumber p, Widelands::Coords s, RoadBuildingType t) : player(p), path(s), type(t), work_area(nullptr) {
+		RoadBuildingMode(Widelands::PlayerNumber p, Widelands::Coords s, RoadBuildingType t)
+		   : player(p), path(s), type(t), work_area(nullptr) {
 		}
 		const Widelands::PlayerNumber player;
 		Widelands::CoordPath path;
