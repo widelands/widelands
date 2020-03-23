@@ -218,7 +218,7 @@ bool CheckStepRoad::allowed(const Map& map,
     }
 
 	// Check for blocking immovables
-	if (BaseImmovable const* const imm = map.get_immovable(end))
+    if (BaseImmovable const* const imm = map.get_immovable(end)) {
 		if (imm->get_size() >= BaseImmovable::SMALL) {
             if (id != CheckStep::stepLast) {
 				return false;
@@ -227,7 +227,7 @@ bool CheckStepRoad::allowed(const Map& map,
 			return dynamic_cast<Flag const*>(imm) ||
 			       (dynamic_cast<Road const*>(imm) && (endcaps & BUILDCAPS_FLAG));
 		}
-
+    }
 	return true;
 }
 

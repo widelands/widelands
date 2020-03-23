@@ -69,8 +69,9 @@ bool match(char*& candidate, const char* pattern) {
 		if (!*pattern) {
 			candidate = p;
 			return true;
-		} else if (*p != *pattern)
+		} else if (*p != *pattern) {
 			break;
+        }
     }
 	return false;
 }
