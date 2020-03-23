@@ -19,8 +19,10 @@ p1_start = map.player_slots[1].starting_field
 
 include "map:scripting/texts.lua"
 
-total_soldiers = 25
-takeover_soldiers = 10
+total_soldiers = {40, 25, 10}
+total_soldiers = total_soldiers[difficulty]
+takeover_soldiers = {15, 10, 5}
+takeover_soldiers = takeover_soldiers[difficulty]
 campaign_data = game:read_campaign_data("frisians", "fri01")
 if not campaign_data then
    campaign_message_box(campaign_data_warning)

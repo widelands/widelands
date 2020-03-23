@@ -26,15 +26,17 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 3;
+constexpr uint16_t kCurrentPacketVersion = 4;
 
 void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 	try {
 		FileRead fr;
 		fr.open(fs, "binary/game_class");
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion) {
+		// TODO(Nordfriese): Savegame compatibility
+		if (packet_version >= 3 && packet_version <= kCurrentPacketVersion) {
 			game.gametime_ = fr.unsigned_32();
+			game.scenario_difficulty_ = packet_version >= 4 ? fr.unsigned_32() : 1;
 		} else {
 			throw UnhandledVersionError("GameClassPacket", packet_version, kCurrentPacketVersion);
 		}
@@ -60,6 +62,8 @@ void GameClassPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const) {
 	// EDITOR GAME CLASS
 	// Write gametime
 	fw.unsigned_32(game.gametime_);
+
+	fw.unsigned_32(game.scenario_difficulty_);
 
 	// TODO(sirver,trading): save/load trade_agreements and related data.
 

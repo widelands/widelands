@@ -1427,6 +1427,7 @@ bool WLApplication::campaign_game() {
 		if (select_campaignmap.run<FullscreenMenuBase::MenuTarget>() ==
 		    FullscreenMenuBase::MenuTarget::kOk) {
 			filename = select_campaignmap.get_map();
+			game.set_scenario_difficulty(select_campaignmap.get_difficulty());
 			break;
 		}
 	}
