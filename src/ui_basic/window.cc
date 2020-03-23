@@ -106,7 +106,7 @@ Window::Window(Panel* const parent,
      fastclick_panel_(nullptr),
      button_close_(new Button(this,
                               "b_close",
-                              -TP_B_PIXMAP_THICKNESS,
+                              get_w() - 2 * TP_B_PIXMAP_THICKNESS,
                               -TP_B_PIXMAP_THICKNESS,
                               TP_B_PIXMAP_THICKNESS,
                               TP_B_PIXMAP_THICKNESS,
@@ -115,7 +115,7 @@ Window::Window(Panel* const parent,
                               _("Close"))),
      button_pin_(new Button(this,
                             "b_pin",
-                            0,
+                            -TP_B_PIXMAP_THICKNESS,
                             -TP_B_PIXMAP_THICKNESS,
                             TP_B_PIXMAP_THICKNESS,
                             TP_B_PIXMAP_THICKNESS,
@@ -124,7 +124,7 @@ Window::Window(Panel* const parent,
                             "")),
      button_minimize_(new Button(this,
                                  "b_minimize",
-                                 TP_B_PIXMAP_THICKNESS,
+                                 0,
                                  -TP_B_PIXMAP_THICKNESS,
                                  TP_B_PIXMAP_THICKNESS,
                                  TP_B_PIXMAP_THICKNESS,
@@ -166,10 +166,11 @@ void Window::update_toolbar_buttons() {
 	button_minimize_->set_pic(
 	   g_gr->images().get(is_minimal_ ? kWindowImageMaximize : kWindowImageMinimize));
 	button_minimize_->set_tooltip(is_minimal_ ? _("Restore") : _("Minimize"));
+	button_minimize_->set_visual_state(is_minimal_ ? Button::VisualState::kPermpressed : Button::VisualState::kRaised);
 	button_pin_->set_pic(g_gr->images().get(pinned_ ? kWindowImagePinned : kWindowImageUnpinned));
 	button_pin_->set_tooltip(pinned_ ? _("Unpin") : _("Pin"));
+	button_pin_->set_visual_state(pinned_ ? Button::VisualState::kPermpressed : Button::VisualState::kRaised);
 	button_close_->set_enabled(!pinned_);
-	button_minimize_->set_enabled(!pinned_);
 }
 
 void Window::clicked_button_close() {
@@ -218,6 +219,7 @@ void Window::layout() {
 		center_panel_->set_pos(Vector2i::zero());
 		center_panel_->set_size(get_inner_w(), get_inner_h());
 	}
+	button_close_->set_pos(Vector2i(get_w() - 2 * TP_B_PIXMAP_THICKNESS, -TP_B_PIXMAP_THICKNESS));
 }
 
 /**
@@ -352,12 +354,9 @@ void Window::draw_border(RenderTarget& dst) {
 		// The title shouldn't be richtext, but we escape it just to make sure.
 		std::shared_ptr<const UI::RenderedText> text =
 		   autofit_text(richtext_escape(title_),
-		                g_gr->styles().font_style(UI::FontStyle::kWuiWindowTitle), get_inner_w());
+		                g_gr->styles().font_style(UI::FontStyle::kWuiWindowTitle), get_inner_w() - TP_B_PIXMAP_THICKNESS);
 
-		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
-		Vector2i pos(get_lborder() + 3 * TP_B_PIXMAP_THICKNESS +
-		                (get_inner_w() - 3 * TP_B_PIXMAP_THICKNESS) / 2,
-		             TP_B_PIXMAP_THICKNESS / 2);
+		Vector2i pos(get_lborder() + (get_inner_w() + TP_B_PIXMAP_THICKNESS) / 2, TP_B_PIXMAP_THICKNESS / 2);
 		UI::center_vertically(text->height(), &pos);
 		text->draw(dst, pos, UI::Align::kCenter);
 	}
@@ -444,8 +443,9 @@ void Window::draw_border(RenderTarget& dst) {
 }
 
 void Window::think() {
-	if (!is_minimal())
+	if (!is_minimal()) {
 		Panel::think();
+	}
 }
 
 /**
@@ -502,9 +502,9 @@ bool Window::handle_key(bool down, SDL_Keysym code) {
 		case SDLK_ESCAPE: {
 			if (!pinned_) {
 				die();
-				Panel* ch = get_next_sibling();
-				if (ch != nullptr)
+				if (Panel* ch = get_next_sibling()) {
 					ch->focus();
+				}
 				return true;
 			}
 		}
@@ -539,9 +539,6 @@ void Window::restore() {
 	update_toolbar_buttons();
 }
 void Window::minimize() {
-	if (pinned_) {
-		return;
-	}
 	assert(!is_minimal_);
 	int32_t y = get_y(), x = get_x();
 	if (docked_bottom_) {
