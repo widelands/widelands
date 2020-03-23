@@ -166,10 +166,12 @@ void Window::update_toolbar_buttons() {
 	button_minimize_->set_pic(
 	   g_gr->images().get(is_minimal_ ? kWindowImageMaximize : kWindowImageMinimize));
 	button_minimize_->set_tooltip(is_minimal_ ? _("Restore") : _("Minimize"));
-	button_minimize_->set_visual_state(is_minimal_ ? Button::VisualState::kPermpressed : Button::VisualState::kRaised);
+	button_minimize_->set_visual_state(is_minimal_ ? Button::VisualState::kPermpressed :
+	                                                 Button::VisualState::kRaised);
 	button_pin_->set_pic(g_gr->images().get(pinned_ ? kWindowImagePinned : kWindowImageUnpinned));
 	button_pin_->set_tooltip(pinned_ ? _("Unpin") : _("Pin"));
-	button_pin_->set_visual_state(pinned_ ? Button::VisualState::kPermpressed : Button::VisualState::kRaised);
+	button_pin_->set_visual_state(pinned_ ? Button::VisualState::kPermpressed :
+	                                        Button::VisualState::kRaised);
 	button_close_->set_enabled(!pinned_);
 }
 
@@ -352,11 +354,12 @@ void Window::draw_border(RenderTarget& dst) {
 	// draw the title if we have one
 	if (!title_.empty()) {
 		// The title shouldn't be richtext, but we escape it just to make sure.
-		std::shared_ptr<const UI::RenderedText> text =
-		   autofit_text(richtext_escape(title_),
-		                g_gr->styles().font_style(UI::FontStyle::kWuiWindowTitle), get_inner_w() - TP_B_PIXMAP_THICKNESS);
+		std::shared_ptr<const UI::RenderedText> text = autofit_text(
+		   richtext_escape(title_), g_gr->styles().font_style(UI::FontStyle::kWuiWindowTitle),
+		   get_inner_w() - TP_B_PIXMAP_THICKNESS);
 
-		Vector2i pos(get_lborder() + (get_inner_w() + TP_B_PIXMAP_THICKNESS) / 2, TP_B_PIXMAP_THICKNESS / 2);
+		Vector2i pos(
+		   get_lborder() + (get_inner_w() + TP_B_PIXMAP_THICKNESS) / 2, TP_B_PIXMAP_THICKNESS / 2);
 		UI::center_vertically(text->height(), &pos);
 		text->draw(dst, pos, UI::Align::kCenter);
 	}
