@@ -5139,8 +5139,13 @@ int LuaConstructionSite::set_setting_warehouse_policy(lua_State* L) {
 	const Widelands::DescriptionIndex item = is_ware ?
 	                                            get_egbase(L).tribes().safe_ware_index(itemname) :
 	                                            get_egbase(L).tribes().safe_worker_index(itemname);
-	(is_ware ? ws->ware_preferences.at(item) : ws->worker_preferences.at(item)) =
-	   Widelands::to_policy(luaL_checkstring(L, 3));
+	const std::string pol = luaL_checkstring(L, 3);
+	try {
+		(is_ware ? ws->ware_preferences.at(item) : ws->worker_preferences.at(item)) =
+		   Widelands::to_policy(pol);
+	} catch (const WException&) {
+		report_error(L, "Invalid warehouse policy '%s'", pol.c_str());
+	}
 	return 0;
 }
 
@@ -5442,7 +5447,13 @@ int LuaWarehouse::set_warehouse_policies(lua_State* L) {
 		report_error(L, "Wrong number of arguments to set_warehouse_policies!");
 
 	Warehouse* wh = get(L, get_egbase(L));
-	StockPolicy p = Widelands::to_policy(luaL_checkstring(L, -1));
+	const std::string pol = luaL_checkstring(L, -1);
+	StockPolicy p;
+	try {
+		p = Widelands::to_policy(pol);
+	} catch (const WException&) {
+		report_error(L, "Invalid warehouse policy '%s'", pol.c_str());
+	}
 	lua_pop(L, 1);
 	const TribeDescr& tribe = wh->owner().tribe();
 
