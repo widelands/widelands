@@ -46,9 +46,9 @@ Widelands::NodeCaps set_starting_pos_tool_nodecaps(const Widelands::FCoords& c,
 	}
 
 	Widelands::NodeCaps const caps = c.field->nodecaps();
-	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG)
+    if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG) {
 		return caps;
-
+    }
 	return Widelands::NodeCaps::CAPS_NONE;
 }
 

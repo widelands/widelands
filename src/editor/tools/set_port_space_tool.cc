@@ -32,8 +32,9 @@ namespace {
 Widelands::NodeCaps port_tool_nodecaps(const Widelands::FCoords& c, const Map& map) {
 	NodeCaps const caps = c.field->nodecaps();
 	if ((caps & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG) {
-		if (!map.find_portdock(c).empty())
+        if (!map.find_portdock(c).empty()) {
 			return caps;
+        }
 	}
 	return NodeCaps::CAPS_NONE;
 }
