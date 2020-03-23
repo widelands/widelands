@@ -28,6 +28,7 @@
 #include "io/profile.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
+#include "logic/path.h"
 #include "sound/note_sound.h"
 #include "ui_basic/box.h"
 #include "ui_basic/dropdown.h"
@@ -49,6 +50,8 @@ struct WorkareaPreview {
 	const WorkareaInfo* info;
 	std::map<Widelands::TCoords<>, uint32_t> data;
 };
+
+enum class RoadBuildingType { kRoad, kWaterway };
 
 /**
  * This is used to represent the code that InteractivePlayer and
@@ -136,25 +139,19 @@ public:
 	void set_display_flag(uint32_t flag, bool on);
 
 	//  road building
-	bool is_building_road() const {
-		return buildroad_ != nullptr;
+	bool in_road_building_mode() const {
+		return road_building_mode_ != nullptr;
 	}
-	void start_build_road(Widelands::Coords start, Widelands::PlayerNumber player);
+	bool in_road_building_mode(RoadBuildingType t) const {
+		return road_building_mode_ && (road_building_mode_->type == t);
+	}
+	void start_build_road(Widelands::Coords start, Widelands::PlayerNumber player, RoadBuildingType);
 	void abort_build_road();
 	void finish_build_road();
 	bool append_build_road(Widelands::Coords field);
 	Widelands::Coords get_build_road_start() const;
 	Widelands::Coords get_build_road_end() const;
-
-	bool is_building_waterway() const {
-		return buildwaterway_ != nullptr;
-	}
-	void start_build_waterway(Widelands::Coords start, Widelands::PlayerNumber player);
-	void abort_build_waterway();
-	void finish_build_waterway();
-	bool append_build_waterway(Widelands::Coords field);
-	Widelands::Coords get_build_waterway_start() const;
-	Widelands::Coords get_build_waterway_end() const;
+	Widelands::CoordPath get_build_road_path() const;
 
 	virtual void cleanup_for_load() {
 	}
@@ -233,6 +230,7 @@ protected:
 	                  const FieldsToDraw::Field* f,
 	                  uint32_t gametime,
 	                  float scale) const;
+	void draw_road_building(FieldsToDraw::Field&);
 
 	void unset_sel_picture();
 	void set_sel_picture(const Image* image);
@@ -264,18 +262,18 @@ protected:
 	const BuildhelpOverlay* get_buildhelp_overlay(Widelands::NodeCaps caps) const;
 
 	// Overlays displayed while a road or waterway is under construction.
-	struct RoadBuildingOverlays {
-		std::map<Widelands::Coords, std::vector<uint8_t>> road_previews;
-		std::map<Widelands::Coords, const Image*> steepness_indicators;
+	struct RoadBuildingMode {
+		RoadBuildingMode(Widelands::PlayerNumber p, Widelands::Coords s, RoadBuildingType t) : player(p), path(s), type(t), work_area(nullptr) {
+		}
+		const Widelands::PlayerNumber player;
+		Widelands::CoordPath path;
+		const RoadBuildingType type;
+		std::unique_ptr<WorkareaInfo> work_area;
+		std::map<Widelands::Coords, std::vector<uint8_t>> overlay_road_previews;
+		std::map<Widelands::Coords, const Image*> overlay_steepness_indicators;
 	};
-
-	const RoadBuildingOverlays& road_building_overlays() const {
-		return road_building_overlays_;
-	}
-
-	const RoadBuildingOverlays& waterway_building_overlays() const {
-		return waterway_building_overlays_;
-	}
+	std::map<Widelands::Coords, std::vector<uint8_t>> road_building_preview_overlays() const;
+	std::map<Widelands::Coords, const Image*> road_building_steepness_overlays() const;
 
 	/// Returns true if there is a workarea preview being shown at the given coordinates.
 	/// If 'map' is 0, checks only if the given coords are the center of a workarea;
@@ -297,8 +295,6 @@ private:
 	void resize_chat_overlay();
 	void road_building_add_overlay();
 	void road_building_remove_overlay();
-	void waterway_building_add_overlay();
-	void waterway_building_remove_overlay();
 	void cmd_map_object(const std::vector<std::string>& args);
 	void cmd_lua(const std::vector<std::string>& args);
 
@@ -360,9 +356,6 @@ private:
 
 	std::map<Widelands::Ship*, Widelands::Coords> expedition_port_spaces_;
 
-	RoadBuildingOverlays road_building_overlays_;
-	RoadBuildingOverlays waterway_building_overlays_;
-
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
 	   graphic_resolution_changed_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<NoteSound>> sound_subscriber_;
@@ -373,12 +366,7 @@ private:
 	uint32_t frametime_;        //  in millseconds
 	uint32_t avg_usframetime_;  //  in microseconds!
 
-	std::unique_ptr<Widelands::CoordPath> buildroad_;  //  path for the new road
-	Widelands::PlayerNumber road_build_player_;
-
-	std::unique_ptr<Widelands::CoordPath> buildwaterway_;
-	Widelands::PlayerNumber waterway_build_player_;
-	std::unique_ptr<WorkareaInfo> waterway_work_area_;
+	std::unique_ptr<RoadBuildingMode> road_building_mode_;
 
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
 	BuildhelpOverlay buildhelp_overlays_[Widelands::Field::Buildhelp_None];
