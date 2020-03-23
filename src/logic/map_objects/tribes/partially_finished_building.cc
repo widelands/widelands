@@ -90,8 +90,9 @@ void PartiallyFinishedBuilding::set_economy(Economy* const e, WareWorker type) {
 		}
 	}
 	Building::set_economy(e, type);
-	if (builder_request_ && type == builder_request_->get_type())
+    if (builder_request_ && type == builder_request_->get_type()) {
 		builder_request_->set_economy(e);
+    }
 
 	if (e && type == wwWARE) {
 		for (WaresQueue* temp_ware : wares_) {
@@ -164,13 +165,15 @@ uint32_t PartiallyFinishedBuilding::get_built_per64k() const {
 		// the construction worker in get_building_work(), and there can be
 		// a small delay between the worker completing his job and requesting
 		// new work.
-		if (thisstep > ts)
+        if (thisstep > ts) {
 			thisstep = ts;
+        }
 	}
 	thisstep = (thisstep << 16) / ts;
 	uint32_t total = (thisstep + (work_completed_ << 16));
-	if (work_steps_)
+    if (work_steps_) {
 		total /= work_steps_;
+    }
 
 	assert(total <= (1 << 16));
 

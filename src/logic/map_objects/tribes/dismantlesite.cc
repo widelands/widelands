@@ -174,9 +174,9 @@ Construction sites only burn if some of the work has been completed.
 ===============
 */
 bool DismantleSite::burn_on_destroy() {
-	if (work_completed_ >= work_steps_)
+    if (work_completed_ >= work_steps_) {
 		return false;  // completed, so don't burn
-
+    }
 	return true;
 }
 
@@ -194,8 +194,9 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
 		return true;
 	}
 
-	if (!work_steps_)           //  Happens for building without buildcost.
+    if (!work_steps_) {          //  Happens for building without buildcost.
 		schedule_destroy(game);  //  Complete the building immediately.
+    }
 
 	// Check if one step has completed
 	if (static_cast<int32_t>(game.get_gametime() - work_steptime_) >= 0 && working_) {
@@ -204,8 +205,9 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
 		for (uint32_t i = 0; i < wares_.size(); ++i) {
 			WaresQueue& wq = *wares_[i];
 
-			if (!wq.get_filled())
+            if (!wq.get_filled()) {
 				continue;
+            }
 
 			wq.set_filled(wq.get_filled() - 1);
 			wq.set_max_size(wq.get_max_size() - 1);

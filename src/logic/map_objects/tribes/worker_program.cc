@@ -173,8 +173,9 @@ createware
  * iparam1 = ware index
  */
 void WorkerProgram::parse_createware(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() != 2)
+    if (cmd.size() != 2) {
 		throw wexception("Usage: createware=<ware type>");
+    }
 
 	act->function = &Worker::run_createware;
 	act->iparam1 = tribes_.safe_ware_index(cmd[1]);
@@ -208,16 +209,18 @@ mine
  * sparam1 = resource
  */
 void WorkerProgram::parse_mine(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() != 3)
+    if (cmd.size() != 3) {
 		throw wexception("Usage: mine=<ware type> <area>");
+    }
 
 	act->function = &Worker::run_mine;
 	act->sparam1 = cmd[1];
 	char* endp;
 	act->iparam1 = strtol(cmd[2].c_str(), &endp, 0);
 
-	if (*endp)
+    if (*endp) {
 		throw wexception("Bad area '%s'", cmd[2].c_str());
+    }
 }
 
 /* RST
@@ -245,16 +248,18 @@ breed
  * sparam1 = resource
  */
 void WorkerProgram::parse_breed(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() != 3)
+    if (cmd.size() != 3) {
 		throw wexception("Usage: breed=<ware type> <area>");
+    }
 
 	act->function = &Worker::run_breed;
 	act->sparam1 = cmd[1];
 	char* endp;
 	act->iparam1 = strtol(cmd[2].c_str(), &endp, 0);
 
-	if (*endp)
+    if (*endp) {
 		throw wexception("Bad area '%s'", cmd[2].c_str());
+    }
 }
 
 /* RST
@@ -314,19 +319,22 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 			char* endp;
 
 			act->iparam1 = strtol(value.c_str(), &endp, 0);
-			if (*endp)
+            if (*endp) {
 				throw wexception("Bad findobject radius '%s'", value.c_str());
+            }
 
 		} else if (key == "attrib") {
 			act->iparam2 = MapObjectDescr::get_attribute_id(value);
 		} else if (key == "type") {
 			act->sparam1 = value;
-		} else
+		} else {
 			throw wexception("Bad findobject predicate %s:%s", key.c_str(), value.c_str());
+        }
 	}
 
-	if (act->iparam1 <= 0)
+    if (act->iparam1 <= 0) {
 		throw wexception("findobject: must specify radius");
+    }
 
 	workarea_info_[act->iparam1].insert(" findobject");
 }
@@ -436,8 +444,9 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 			char* endp;
 
 			act->iparam1 = strtol(value.c_str(), &endp, 0);
-			if (*endp)
+            if (*endp) {
 				throw wexception("Bad findspace radius '%s'", value.c_str());
+            }
 
 		} else if (key == "size") {
 			static const struct {
@@ -455,12 +464,15 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 
 			int32_t index;
 
-			for (index = 0; sizenames[index].name; ++index)
-				if (value == sizenames[index].name)
+            for (index = 0; sizenames[index].name; ++index) {
+                if (value == sizenames[index].name) {
 					break;
+                }
+            }
 
-			if (!sizenames[index].name)
+            if (!sizenames[index].name) {
 				throw wexception("Bad findspace size '%s'", value.c_str());
+            }
 
 			act->iparam2 = sizenames[index].val;
 		} else if (key == "breed") {
@@ -481,14 +493,17 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 			} else {
 				act->iparam6 = ival;
 			}
-		} else
+		} else {
 			throw wexception("Bad findspace predicate %s:%s", key.c_str(), value.c_str());
+        }
 	}
 
-	if (act->iparam1 <= 0)
+    if (act->iparam1 <= 0) {
 		throw wexception("findspace: must specify radius");
-	if (act->iparam2 < 0)
+    }
+    if (act->iparam2 < 0) {
 		throw wexception("findspace: must specify size");
+    }
 	workarea_info_[act->iparam1].insert(" findspace");
 }
 
@@ -540,19 +555,21 @@ walk
  * iparam1 = walkXXX
  */
 void WorkerProgram::parse_walk(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() != 2)
+    if (cmd.size() != 2) {
 		throw wexception("Usage: walk=<where>");
+    }
 
 	act->function = &Worker::run_walk;
 
-	if (cmd[1] == "object")
+    if (cmd[1] == "object") {
 		act->iparam1 = Worker::Action::walkObject;
-	else if (cmd[1] == "coords")
+    } else if (cmd[1] == "coords") {
 		act->iparam1 = Worker::Action::walkCoords;
-	else if (cmd[1] == "object-or-coords")
+    } else if (cmd[1] == "object-or-coords") {
 		act->iparam1 = Worker::Action::walkObject | Worker::Action::walkCoords;
-	else
+    } else {
 		throw wexception("Bad walk destination '%s'", cmd[1].c_str());
+    }
 }
 
 /* RST
@@ -581,8 +598,9 @@ animate
 void WorkerProgram::parse_animate(Worker::Action* act, const std::vector<std::string>& cmd) {
 	char* endp;
 
-	if (cmd.size() != 3)
+    if (cmd.size() != 3) {
 		throw GameDataError("Usage: animate=<name> <time>");
+    }
 
 	if (!worker_.is_animation_known(cmd[1])) {
 		throw GameDataError("unknown animation \"%s\" in worker program for worker \"%s\"",
@@ -596,11 +614,13 @@ void WorkerProgram::parse_animate(Worker::Action* act, const std::vector<std::st
 	act->iparam1 = worker_.get_animation(cmd[1], nullptr);
 
 	act->iparam2 = strtol(cmd[2].c_str(), &endp, 0);
-	if (*endp)
+    if (*endp) {
 		throw GameDataError("Bad duration '%s'", cmd[2].c_str());
+    }
 
-	if (act->iparam2 <= 0)
+    if (act->iparam2 <= 0) {
 		throw GameDataError("animation duration must be positive");
+    }
 }
 
 /* RST
@@ -648,8 +668,9 @@ callobject
  * sparam1 = callobject command name
  */
 void WorkerProgram::parse_callobject(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() != 2)
+    if (cmd.size() != 2) {
 		throw wexception("Usage: callobject=<program name>");
+    }
 
 	act->function = &Worker::run_callobject;
 	act->sparam1 = cmd[1];
@@ -705,21 +726,24 @@ plant
  * iparam1  one of plantXXX
  */
 void WorkerProgram::parse_plant(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() < 2)
+    if (cmd.size() < 2) {
 		throw wexception(
 		   "Usage: plant plant=attrib:<attribute> [attrib:<attribute> ...] [unless object]");
+    }
 
 	act->function = &Worker::run_plant;
 	act->iparam1 = Worker::Action::plantAlways;
 	for (uint32_t i = 1; i < cmd.size(); ++i) {
 		if (i >= 2 && cmd[i] == "unless") {
 			++i;
-			if (i >= cmd.size())
+            if (i >= cmd.size()) {
 				throw GameDataError("plant: something expected after unless");
-			if (cmd[i] == "object")
+            }
+            if (cmd[i] == "object") {
 				act->iparam1 = Worker::Action::plantUnlessObject;
-			else
+            } else {
 				throw GameDataError("plant: 'unless %s' not understood", cmd[i].c_str());
+            }
 
 			continue;
 		}
@@ -764,8 +788,9 @@ createbob
 */
 // TODO(GunChleoc): attrib:eatable would be much better, then depend on terrain too
 void WorkerProgram::parse_createbob(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() < 2)
+    if (cmd.size() < 2) {
 		throw wexception("Usage: createbob=<bob name> <bob name> ...");
+    }
 
 	act->function = &Worker::run_createbob;
 
@@ -866,18 +891,21 @@ repeatsearch
 void WorkerProgram::parse_repeatsearch(Worker::Action* act, const std::vector<std::string>& cmd) {
 	char* endp;
 
-	if (cmd.size() != 4)
+    if (cmd.size() != 4) {
 		throw wexception("Usage: repeatsearch=<repeat #> <radius> <subcommand>");
+    }
 
 	act->function = &Worker::run_repeatsearch;
 
 	act->iparam1 = strtol(cmd[1].c_str(), &endp, 0);
-	if (*endp)
+    if (*endp) {
 		throw wexception("Bad repeat count '%s'", cmd[1].c_str());
+    }
 
 	act->iparam2 = strtol(cmd[2].c_str(), &endp, 0);
-	if (*endp)
+    if (*endp) {
 		throw wexception("Bad radius '%s'", cmd[2].c_str());
+    }
 
 	act->sparam1 = cmd[3];
 }
@@ -900,8 +928,9 @@ findresources
       }
 */
 void WorkerProgram::parse_findresources(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() != 1)
+    if (cmd.size() != 1) {
 		throw wexception("Usage: findresources");
+    }
 
 	act->function = &Worker::run_findresources;
 }
@@ -927,8 +956,9 @@ scout
  * iparam2 = time
  */
 void WorkerProgram::parse_scout(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() != 3)
+    if (cmd.size() != 3) {
 		throw wexception("Usage: scout=<radius> <time>");
+    }
 
 	act->iparam1 = atoi(cmd[1].c_str());
 	act->iparam2 = atoi(cmd[2].c_str());
@@ -962,8 +992,9 @@ playsound
       }
 */
 void WorkerProgram::parse_playsound(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() < 3 || cmd.size() > 4)
+    if (cmd.size() < 3 || cmd.size() > 4) {
 		throw wexception("Usage: playsound <sound_dir> <sound_name> [priority]");
+    }
 
 	act->iparam2 = SoundHandler::register_fx(SoundType::kAmbient, cmd[1]);
 
@@ -1003,8 +1034,9 @@ construct
  * for construction. This is used in ship building.
  */
 void WorkerProgram::parse_construct(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() != 1)
+    if (cmd.size() != 1) {
 		throw wexception("Usage: construct");
+    }
 
 	act->function = &Worker::run_construct;
 }

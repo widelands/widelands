@@ -40,13 +40,15 @@ void CritterProgram::parse(const std::vector<std::string>& lines) {
 	for (const std::string& line : lines) {
 		try {
 			const std::vector<std::string> cmd(split_string(line, " \t\r\n"));
-			if (cmd.empty())
+            if (cmd.empty()) {
 				continue;
+            }
 
 			CritterAction act;
 			if (cmd[0] == "remove") {
-				if (cmd.size() != 1)
+                if (cmd.size() != 1) {
 					throw wexception("Usage: remove");
+                }
 				act.function = &Critter::run_remove;
 			} else {
 				throw wexception("unknown command type \"%s\"", cmd[0].c_str());
@@ -138,8 +140,9 @@ Get a program from the workers description.
 */
 CritterProgram const* CritterDescr::get_program(const std::string& programname) const {
 	Programs::const_iterator const it = programs_.find(programname);
-	if (it == programs_.end())
+    if (it == programs_.end()) {
 		throw wexception("%s has no program '%s'", name().c_str(), programname.c_str());
+    }
 	return it->second;
 }
 
@@ -202,13 +205,15 @@ void Critter::program_update(Game& game, State& state) {
 	for (;;) {
 		const CritterProgram& program = dynamic_cast<const CritterProgram&>(*state.program);
 
-		if (state.ivar1 >= program.get_size())
+        if (state.ivar1 >= program.get_size()) {
 			return pop_task(game);
+        }
 
 		const CritterAction& action = program[state.ivar1];
 
-		if ((this->*(action.function))(game, state, action))
+        if ((this->*(action.function))(game, state, action)) {
 			return;
+        }
 	}
 }
 
@@ -226,8 +231,9 @@ Bob::Task const Critter::taskRoam = {
    "roam", static_cast<Bob::Ptr>(&Critter::roam_update), nullptr, nullptr, true};
 
 void Critter::roam_update(Game& game, State& state) {
-	if (get_signal().size())
+    if (get_signal().size()) {
 		return pop_task(game);
+    }
 
 	// alternately move and idle
 	Time idle_time_min = 1000;
@@ -236,8 +242,9 @@ void Critter::roam_update(Game& game, State& state) {
 		state.ivar1 = 0;
 		if (start_task_movepath(game,
 		                        game.random_location(get_position(), 2),  //  Pick a random target.
-		                        3, descr().get_walk_anims()))
+                                3, descr().get_walk_anims())) {
 			return;
+        }
 		idle_time_min = 1;
 		idle_time_rnd = 1000;
 	}
@@ -271,10 +278,12 @@ Critter::Loader::Loader() {
 }
 
 const Bob::Task* Critter::Loader::get_task(const std::string& name) {
-	if (name == "roam")
+    if (name == "roam") {
 		return &taskRoam;
-	if (name == "program")
+    }
+    if (name == "program") {
 		return &taskProgram;
+    }
 	return Bob::Loader::get_task(name);
 }
 
@@ -307,9 +316,10 @@ MapObject::Loader* Critter::load(EditorGameBase& egbase,
 				   "Tribes don't have critters %s/%s", critter_owner.c_str(), critter_name.c_str());
 			}
 
-			if (!descr)
+            if (!descr) {
 				throw GameDataError(
 				   "undefined critter %s/%s", critter_owner.c_str(), critter_name.c_str());
+            }
 
 			loader->init(egbase, mol, descr->create_object());
 			loader->load(fr);

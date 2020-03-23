@@ -65,12 +65,13 @@ namespace {
 ///    bool const result = match(candidate, "return");
 /// now candidate points to "   75" and result is true
 bool match(char*& candidate, const char* pattern) {
-	for (char *p = candidate;; ++p, ++pattern)
+    for (char *p = candidate;; ++p, ++pattern) {
 		if (!*pattern) {
 			candidate = p;
 			return true;
 		} else if (*p != *pattern)
 			break;
+    }
 	return false;
 }
 
@@ -78,25 +79,29 @@ bool match(char*& candidate, const char* pattern) {
 /// Throws WException if no characters were skipped.
 void force_skip(char*& p, char const c = ' ') {
 	char* t = p;
-	while (*t == c)
+    while (*t == c) {
 		++t;
-	if (p < t)
+    }
+    if (p < t) {
 		p = t;
-	else
+    } else {
 		throw wexception("expected '%c' but found \"%s\"", c, p);
+    }
 }
 
 /// Skips a sequence of consecutive characters with the value c, starting at p.
 /// Returns whether any characters were skipped.
 bool skip(char*& p, char const c = ' ') {
 	char* t = p;
-	while (*t == c)
+    while (*t == c) {
 		++t;
+    }
 	if (p < t) {
 		p = t;
 		return true;
-	} else
+	} else {
 		return false;
+    }
 }
 
 /// Combines match and force_skip.
@@ -111,21 +116,22 @@ bool skip(char*& p, char const c = ' ') {
 ///    bool const result = match_force_skip(candidate, "return");
 /// throws WException
 bool match_force_skip(char*& candidate, const char* pattern) {
-	for (char *p = candidate;; ++p, ++pattern)
+    for (char *p = candidate;; ++p, ++pattern) {
 		if (!*pattern) {
 			force_skip(p);
 			candidate = p;
 			return true;
-		} else if (*p != *pattern)
+		} else if (*p != *pattern) {
 			return false;
-
+        }
+    }
 	NEVER_HERE();
 }
 
 ProductionProgram::ActReturn::Condition* create_economy_condition(char*& parameters,
                                                                   const Tribes& tribes) {
 	try {
-		if (match_force_skip(parameters, "needs"))
+        if (match_force_skip(parameters, "needs")) {
 			try {
 				bool reached_end;
 				char const* const type_name = next_word(parameters, reached_end);
@@ -147,14 +153,16 @@ ProductionProgram::ActReturn::Condition* create_economy_condition(char*& paramet
 						}
 					}
 					return new ProductionProgram::ActReturn::EconomyNeedsWorker(workerindex);
-				} else
+				} else {
 					throw GameDataError(
 					   "expected %s but found \"%s\"", "ware type or worker type", type_name);
+                }
 			} catch (const WException& e) {
 				throw GameDataError("needs: %s", e.what());
 			}
-		else
+        } else {
 			throw GameDataError("expected %s but found \"%s\"", "\"needs\"", parameters);
+        }
 	} catch (const WException& e) {
 		throw GameDataError("economy: %s", e.what());
 	}
@@ -163,10 +171,11 @@ ProductionProgram::ActReturn::Condition* create_economy_condition(char*& paramet
 ProductionProgram::ActReturn::Condition*
 create_site_condition(char*& parameters, const ProductionSiteDescr& descr, const Tribes& tribes) {
 	try {
-		if (match_force_skip(parameters, "has"))
+        if (match_force_skip(parameters, "has")) {
 			return new ProductionProgram::ActReturn::SiteHas(parameters, descr, tribes);
-		else
+        } else {
 			throw GameDataError("expected %s but found \"%s\"", "\"has\"", parameters);
+        }
 	} catch (const WException& e) {
 		throw GameDataError("site: %s", e.what());
 	}
@@ -174,10 +183,11 @@ create_site_condition(char*& parameters, const ProductionSiteDescr& descr, const
 
 ProductionProgram::ActReturn::Condition* create_workers_condition(char*& parameters) {
 	try {
-		if (match(parameters, "need experience"))
+        if (match(parameters, "need experience")) {
 			return new ProductionProgram::ActReturn::WorkersNeedExperience;
-		else
+        } else {
 			throw GameDataError("expected %s but found \"%s\"", "\"need experience\"", parameters);
+        }
 	} catch (const WException& e) {
 		throw GameDataError("workers: %s", e.what());
 	}
@@ -205,8 +215,9 @@ void ProductionProgram::parse_ware_type_group(char*& parameters,
 	uint8_t count_max = 0;
 	for (;;) {
 		char const* ware = parameters;
-		while (*parameters && *parameters != ',' && *parameters != ':' && *parameters != ' ')
+        while (*parameters && *parameters != ',' && *parameters != ':' && *parameters != ' ') {
 			++parameters;
+        }
 		char const terminator = *parameters;
 		*parameters = '\0';
 
@@ -239,11 +250,12 @@ void ProductionProgram::parse_ware_type_group(char*& parameters,
 			                    ware, ware);
 		}
 
-		if (group.first.size() && ware_index <= group.first.begin()->first)
+        if (group.first.size() && ware_index <= group.first.begin()->first) {
 			throw GameDataError("wrong order of ware types within group: ware type %s appears "
 			                    "after ware type %s (fix order!)",
 			                    ware,
 			                    tribes.get_ware_descr(group.first.begin()->first)->name().c_str());
+        }
 		last_insert_pos = group.first.insert(last_insert_pos, std::make_pair(ware_index, type));
 		*parameters = terminator;
 		switch (terminator) {
@@ -252,14 +264,16 @@ void ProductionProgram::parse_ware_type_group(char*& parameters,
 			char* endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
 			count = value;
-			if ((*endp && *endp != ' ') || value < 1 || count != value)
+            if ((*endp && *endp != ' ') || value < 1 || count != value) {
 				throw GameDataError("expected %s but found \"%s\"", "count", parameters);
+            }
 			parameters = endp;
-			if (count_max < count)
+            if (count_max < count) {
 				throw GameDataError("group count is %u but (total) input storage capacity of "
 				                    "the specified ware type(s) is only %u, so the group can "
 				                    "never be fulfilled by the site",
 				                    count, count_max);
+            }
 		}
 			FALLS_THROUGH;
 		case '\0':
@@ -357,8 +371,9 @@ bool ProductionProgram::ActReturn::SiteHas::evaluate(const ProductionSite& ps) c
 			if (input_type.first == ip_queue->get_index() &&
 			    input_type.second == ip_queue->get_type()) {
 				uint8_t const filled = ip_queue->get_filled();
-				if (count <= filled)
+                if (count <= filled) {
 					return true;
+                }
 				count -= filled;
 				break;
 			}
@@ -416,9 +431,11 @@ ProductionProgram::ActReturn::SiteHas::description_negation(const Tribes& tribes
 
 bool ProductionProgram::ActReturn::WorkersNeedExperience::evaluate(const ProductionSite& ps) const {
 	ProductionSite::WorkingPosition const* const wp = ps.working_positions_;
-	for (uint32_t i = ps.descr().nr_working_positions(); i;)
-		if (wp[--i].worker->needs_experience())
+    for (uint32_t i = ps.descr().nr_working_positions(); i;) {
+        if (wp[--i].worker->needs_experience()) {
 			return true;
+        }
+    }
 	return false;
 }
 std::string ProductionProgram::ActReturn::WorkersNeedExperience::description(const Tribes&) const {
@@ -435,17 +452,18 @@ ProductionProgram::ActReturn::WorkersNeedExperience::description_negation(const 
 ProductionProgram::ActReturn::Condition* ProductionProgram::ActReturn::create_condition(
    char*& parameters, const ProductionSiteDescr& descr, const Tribes& tribes) {
 	try {
-		if (match_force_skip(parameters, "not"))
+        if (match_force_skip(parameters, "not")) {
 			return new ActReturn::Negation(parameters, descr, tribes);
-		else if (match_force_skip(parameters, "economy"))
+        } else if (match_force_skip(parameters, "economy")) {
 			return create_economy_condition(parameters, tribes);
-		else if (match_force_skip(parameters, "site"))
+        } else if (match_force_skip(parameters, "site")) {
 			return create_site_condition(parameters, descr, tribes);
-		else if (match_force_skip(parameters, "workers"))
+        } else if (match_force_skip(parameters, "workers")) {
 			return create_workers_condition(parameters);
-		else
+        } else {
 			throw GameDataError(
 			   "expected %s but found \"%s\"", "{\"not\"|\"economy\"|\"workers\"}", parameters);
+        }
 	} catch (const WException& e) {
 		throw GameDataError("invalid condition: %s", e.what());
 	}
@@ -455,17 +473,18 @@ ProductionProgram::ActReturn::ActReturn(char* parameters,
                                         const ProductionSiteDescr& descr,
                                         const Tribes& tribes) {
 	try {
-		if (match(parameters, "failed"))
+        if (match(parameters, "failed")) {
 			result_ = ProgramResult::kFailed;
-		else if (match(parameters, "completed"))
+        } else if (match(parameters, "completed")) {
 			result_ = ProgramResult::kCompleted;
-		else if (match(parameters, "skipped"))
+        } else if (match(parameters, "skipped")) {
 			result_ = ProgramResult::kSkipped;
-		else if (match(parameters, "no_stats"))
+        } else if (match(parameters, "no_stats")) {
 			result_ = ProgramResult::kNone;
-		else
+        } else {
 			throw GameDataError("expected %s but found \"%s\"",
 			                    "{\"failed\"|\"completed\"|\"skipped\"|\"no_stats\"}", parameters);
+        }
 
 		if (skip(parameters)) {
 			if (match_force_skip(parameters, "when")) {
@@ -474,31 +493,38 @@ ProductionProgram::ActReturn::ActReturn(char* parameters,
 					conditions_.push_back(create_condition(parameters, descr, tribes));
 					if (*parameters) {
 						skip(parameters);
-						if (!match_force_skip(parameters, "and"))
+                        if (!match_force_skip(parameters, "and")) {
 							throw GameDataError("expected \"%s\" or end of input", "and");
-					} else
+                        }
+					} else {
 						break;
+                    }
 				}
 			} else if (match_force_skip(parameters, "unless")) {
 				is_when_ = false;
 				for (;;) {
-					if (!*parameters)
+                    if (!*parameters) {
 						throw GameDataError("expected condition at end of input");
+                    }
 					conditions_.push_back(create_condition(parameters, descr, tribes));
 					if (*parameters) {
 						skip(parameters);
-						if (!match_force_skip(parameters, "or"))
+                        if (!match_force_skip(parameters, "or")) {
 							throw GameDataError("expected \"%s\" or end of input", "or");
-					} else
+                        }
+					} else {
 						break;
+                    }
 				}
-			} else
+			} else {
 				throw GameDataError(
 				   "expected %s but found \"%s\"", "{\"when\"|\"unless\"}", parameters);
-		} else if (*parameters)
+            }
+		} else if (*parameters) {
 			throw GameDataError("expected %s but found \"%s\"", ("space or end of input"), parameters);
-		else
+        } else {
 			is_when_ = true;
+        }
 
 	} catch (const WException& e) {
 		throw GameDataError("return: %s", e.what());
@@ -582,10 +608,11 @@ ProductionProgram::ActCall::ActCall(char* parameters, const ProductionSiteDescr&
 			char const* const program_name = next_word(parameters, reached_end);
 			const ProductionSiteDescr::Programs& programs = descr.programs();
 			ProductionSiteDescr::Programs::const_iterator const it = programs.find(program_name);
-			if (it == programs.end())
+            if (it == programs.end()) {
 				throw GameDataError("the program \"%s\" has not (yet) been declared in %s "
 				                    "(wrong declaration order?)",
 				                    program_name, descr.name().c_str());
+            }
 			program_ = it->second.get();
 		}
 
@@ -597,35 +624,40 @@ ProductionProgram::ActCall::ActCall(char* parameters, const ProductionSiteDescr&
 			ProgramResult result_to_set_method_for;
 			if (match_force_skip(parameters, "failure")) {
 				if (handling_methods_[program_result_index(ProgramResult::kFailed)] !=
-				    ProgramResultHandlingMethod::kContinue)
+                    ProgramResultHandlingMethod::kContinue) {
 					throw GameDataError("%s handling method already defined", "failure");
+                }
 				result_to_set_method_for = ProgramResult::kFailed;
 			} else if (match_force_skip(parameters, "completion")) {
 				if (handling_methods_[program_result_index(ProgramResult::kCompleted)] !=
-				    ProgramResultHandlingMethod::kContinue)
+                    ProgramResultHandlingMethod::kContinue) {
 					throw GameDataError("%s handling method already defined", "completion");
+                }
 				result_to_set_method_for = ProgramResult::kCompleted;
 			} else if (match_force_skip(parameters, "skip")) {
 				if (handling_methods_[program_result_index(ProgramResult::kSkipped)] !=
-				    ProgramResultHandlingMethod::kContinue)
+                    ProgramResultHandlingMethod::kContinue) {
 					throw GameDataError("%s handling method already defined", "skip");
+                }
 				result_to_set_method_for = ProgramResult::kSkipped;
-			} else
+			} else {
 				throw GameDataError(
 				   "expected %s but found \"%s\"", "{\"failure\"|\"completion\"|\"skip\"}", parameters);
+            }
 
 			ProgramResultHandlingMethod handling_method;
-			if (match(parameters, "fail"))
+            if (match(parameters, "fail")) {
 				handling_method = ProgramResultHandlingMethod::kFail;
-			else if (match(parameters, "complete"))
+            } else if (match(parameters, "complete")) {
 				handling_method = ProgramResultHandlingMethod::kComplete;
-			else if (match(parameters, "skip"))
+            } else if (match(parameters, "skip")) {
 				handling_method = ProgramResultHandlingMethod::kSkip;
-			else if (match(parameters, "repeat"))
+            } else if (match(parameters, "repeat")) {
 				handling_method = ProgramResultHandlingMethod::kRepeat;
-			else
+            } else {
 				throw GameDataError("expected %s but found \"%s\"",
 				                    "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}", parameters);
+            }
 			handling_methods_[program_result_index(result_to_set_method_for)] = handling_method;
 			reached_end = !*parameters;
 		}
@@ -722,10 +754,12 @@ ProductionProgram::ActSleep::ActSleep(char* parameters) {
 			char* endp;
 			long long int const value = strtoll(parameters, &endp, 0);
 			duration_ = value;
-			if (*endp || value <= 0 || duration_ != value)
+            if (*endp || value <= 0 || duration_ != value) {
 				throw GameDataError("expected %s but found \"%s\"", "duration in ms", parameters);
-		} else
+            }
+		} else {
 			duration_ = 0;  //  Get duration from the result of a previous action.
+        }
 	} catch (const WException& e) {
 		throw GameDataError("sleep: %s", e.what());
 	}
@@ -738,12 +772,14 @@ void ProductionProgram::ActSleep::execute(Game& game, ProductionSite& ps) const 
 ProductionProgram::ActCheckMap::ActCheckMap(char* parameters) {
 	try {
 		if (*parameters) {
-			if (!strcmp(parameters, "seafaring"))
+            if (!strcmp(parameters, "seafaring")) {
 				feature_ = SEAFARING;
-			else
+            } else {
 				throw GameDataError("Unknown parameter \"%s\"", parameters);
-		} else
+            }
+		} else {
 			throw GameDataError("No parameter given!");
+        }
 	} catch (const WException& e) {
 		throw GameDataError("sleep: %s", e.what());
 	}
@@ -778,10 +814,12 @@ ProductionProgram::ActAnimate::ActAnimate(char* parameters, ProductionSiteDescr*
 			char* endp;
 			long long int const value = strtoll(parameters, &endp, 0);
 			duration_ = value;
-			if (*endp || value <= 0 || duration_ != value)
+            if (*endp || value <= 0 || duration_ != value) {
 				throw GameDataError("expected %s but found \"%s\"", "duration in ms", parameters);
-		} else
+            }
+		} else {
 			duration_ = 0;  //  Get duration from the result of a previous action.
+        }
 	} catch (const WException& e) {
 		throw GameDataError("animate: %s", e.what());
 	}
@@ -800,8 +838,9 @@ ProductionProgram::ActConsume::ActConsume(char* parameters,
 			consumed_wares_workers_.resize(consumed_wares_workers_.size() + 1);
 			parse_ware_type_group(parameters, *consumed_wares_workers_.rbegin(), tribes,
 			                      descr.input_wares(), descr.input_workers());
-			if (!*parameters)
+            if (!*parameters) {
 				break;
+            }
 			force_skip(parameters);
 		}
 		if (consumed_wares_workers_.empty()) {
@@ -852,8 +891,9 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 				}
 			}
 			// group does not request ware
-			if (!found)
+            if (!found) {
 				++it;
+            }
 		}
 	}
 
@@ -953,8 +993,9 @@ ProductionProgram::ActProduce::ActProduce(char* parameters,
 					char* endp;
 					unsigned long long int const value = strtoull(parameters, &endp, 0);
 					item.second = value;
-					if ((*endp && *endp != ' ') || value < 1 || item.second != value)
+                    if ((*endp && *endp != ' ') || value < 1 || item.second != value) {
 						throw GameDataError("expected %s but found \"%s\"", "count", parameters);
+                    }
 					parameters = endp;
 					goto item_end;
 				}
@@ -963,10 +1004,11 @@ ProductionProgram::ActProduce::ActProduce(char* parameters,
 		item_end:
 			more = *parameters != '\0';
 			*parameters = '\0';
-			if (!descr.is_output_ware_type(item.first = tribes.safe_ware_index(ware)))
+            if (!descr.is_output_ware_type(item.first = tribes.safe_ware_index(ware))) {
 				throw GameDataError("%s is not declared as an output (\"%s\" was not "
 				                    "found in the \"outputs\" table)",
 				                    ware, ware);
+            }
 		}
 	} catch (const WException& e) {
 		throw GameDataError("produce: %s", e.what());
@@ -1039,8 +1081,9 @@ ProductionProgram::ActRecruit::ActRecruit(char* parameters,
 					char* endp;
 					unsigned long long int const value = strtoull(parameters, &endp, 0);
 					item.second = value;
-					if ((*endp && *endp != ' ') || value < 1 || item.second != value)
+                    if ((*endp && *endp != ' ') || value < 1 || item.second != value) {
 						throw GameDataError("expected %s but found \"%s\"", "count", parameters);
+                    }
 					parameters = endp;
 					goto item_end;
 				}
@@ -1049,10 +1092,11 @@ ProductionProgram::ActRecruit::ActRecruit(char* parameters,
 		item_end:
 			more = *parameters != '\0';
 			*parameters = '\0';
-			if (!descr.is_output_worker_type(item.first = tribes.safe_worker_index(worker)))
+            if (!descr.is_output_worker_type(item.first = tribes.safe_worker_index(worker))) {
 				throw GameDataError("%s is not declared as an output (\"%s\" was not "
 				                    "found in the \"outputs\" table)",
 				                    worker, worker);
+            }
 		}
 	} catch (const WException& e) {
 		throw GameDataError("recruit: %s", e.what());
@@ -1110,8 +1154,9 @@ ProductionProgram::ActMine::ActMine(char* parameters,
 			char* endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
 			distance_ = value;
-			if (*endp != ' ' || distance_ != value)
+            if (*endp != ' ' || distance_ != value) {
 				throw GameDataError("expected %s but found \"%s\"", "distance", parameters);
+            }
 			parameters = endp;
 		}
 
@@ -1119,8 +1164,9 @@ ProductionProgram::ActMine::ActMine(char* parameters,
 			char* endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
 			max_ = value;
-			if (*endp != ' ' || value < 1 || 100 < value)
+            if (*endp != ' ' || value < 1 || 100 < value) {
 				throw GameDataError("expected %s but found \"%s\"", "percentage", parameters);
+            }
 			parameters = endp;
 		}
 
@@ -1128,16 +1174,18 @@ ProductionProgram::ActMine::ActMine(char* parameters,
 			char* endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
 			chance_ = value;
-			if (*endp != ' ' || value < 1 || 100 < value)
+            if (*endp != ' ' || value < 1 || 100 < value) {
 				throw GameDataError("expected %s but found \"%s\"", "percentage", parameters);
+            }
 			parameters = endp;
 		}
 		{
 			char* endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
 			training_ = value;
-			if (*endp || value < 1 || 100 < value)
+            if (*endp || value < 1 || 100 < value) {
 				throw GameDataError("expected %s but found \"%s\"", "percentage", parameters);
+            }
 		}
 		std::string description = (boost::format("%1$s %2$s mine %3$s") % descr->name() %
 		                           production_program_name % world.get_resource(resource_)->name())
@@ -1177,28 +1225,32 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 			// Add penalty for fields that are running out
 			// Except for totally depleted fields or wrong ressource fields
 			// if we already know there is no ressource (left) we won't mine there
-			if (amount == 0)
+            if (amount == 0) {
 				totalchance += 0;
-			else if (amount <= 2)
+            } else if (amount <= 2) {
 				totalchance += 6;
-			else if (amount <= 4)
+            } else if (amount <= 4) {
 				totalchance += 4;
-			else if (amount <= 6)
+            } else if (amount <= 6) {
 				totalchance += 2;
+            }
 		} while (mr.advance(*map));
 	}
 
 	//  how much is digged
 	int32_t digged_percentage = 100;
-	if (totalstart)
+    if (totalstart) {
 		digged_percentage = (totalstart - totalres) * 100 / totalstart;
-	if (!totalres)
+    }
+    if (!totalres) {
 		digged_percentage = 100;
+    }
 
 	if (digged_percentage < max_) {
 		//  mine can produce normally
-		if (totalres == 0)
+        if (totalres == 0) {
 			return ps.program_end(game, ProgramResult::kFailed);
+        }
 
 		//  second pass through nodes
 		assert(totalchance);
@@ -1211,8 +1263,9 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 				DescriptionIndex fres = mr.location().field->get_resources();
 				ResourceAmount amount = mr.location().field->get_resources_amount();
 
-				if (fres != resource_)
+                if (fres != resource_) {
 					amount = 0;
+                }
 
 				pick -= 8 * amount;
 				if (pick < 0) {
@@ -1263,26 +1316,29 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 ProductionProgram::ActCheckSoldier::ActCheckSoldier(char* parameters) {
 	//  TODO(unknown): This is currently hardcoded for "soldier", but should allow any
 	//  soldier type name.
-	if (!match_force_skip(parameters, "soldier"))
+    if (!match_force_skip(parameters, "soldier")) {
 		throw GameDataError("expected %s but found \"%s\"", "soldier type", parameters);
+    }
 	try {
-		if (match_force_skip(parameters, "health"))
+        if (match_force_skip(parameters, "health")) {
 			attribute = TrainingAttribute::kHealth;
-		else if (match_force_skip(parameters, "attack"))
+        } else if (match_force_skip(parameters, "attack")) {
 			attribute = TrainingAttribute::kAttack;
-		else if (match_force_skip(parameters, "defense"))
+        } else if (match_force_skip(parameters, "defense")) {
 			attribute = TrainingAttribute::kDefense;
-		else if (match_force_skip(parameters, "evade"))
+        } else if (match_force_skip(parameters, "evade")) {
 			attribute = TrainingAttribute::kEvade;
-		else
+        } else {
 			throw GameDataError("expected %s but found \"%s\"",
 			                    "{\"health\"|\"attack\"|\"defense\"|\"evade\"}", parameters);
+        }
 
 		char* endp;
 		unsigned long long int const value = strtoull(parameters, &endp, 0);
 		level = value;
-		if (*endp || level != value)
+        if (*endp || level != value) {
 			throw GameDataError("expected %s but found \"%s\"", "level", parameters);
+        }
 	} catch (const WException& e) {
 		throw GameDataError("checksoldier: %s", e.what());
 	}
@@ -1306,17 +1362,21 @@ void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps)
 			return ps.program_end(game, ProgramResult::kSkipped);
 		}
 		if (attribute == TrainingAttribute::kHealth) {
-			if ((*it)->get_health_level() == level)
+            if ((*it)->get_health_level() == level) {
 				break;
+            }
 		} else if (attribute == TrainingAttribute::kAttack) {
-			if ((*it)->get_attack_level() == level)
+            if ((*it)->get_attack_level() == level) {
 				break;
+            }
 		} else if (attribute == TrainingAttribute::kDefense) {
-			if ((*it)->get_defense_level() == level)
+            if ((*it)->get_defense_level() == level) {
 				break;
+            }
 		} else if (attribute == TrainingAttribute::kEvade) {
-			if ((*it)->get_evade_level() == level)
+            if ((*it)->get_evade_level() == level) {
 				break;
+            }
 		}
 	}
 	ps.molog("    okay\n");  // okay, do nothing
@@ -1332,27 +1392,30 @@ void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps)
 ProductionProgram::ActTrain::ActTrain(char* parameters) {
 	//  TODO(unknown): This is currently hardcoded for "soldier", but should allow any
 	//  soldier type name.
-	if (!match_force_skip(parameters, "soldier"))
+    if (!match_force_skip(parameters, "soldier")) {
 		throw GameDataError("expected %s but found \"%s\"", "soldier type", parameters);
+    }
 	try {
-		if (match_force_skip(parameters, "health"))
+        if (match_force_skip(parameters, "health")) {
 			attribute = TrainingAttribute::kHealth;
-		else if (match_force_skip(parameters, "attack"))
+        } else if (match_force_skip(parameters, "attack")) {
 			attribute = TrainingAttribute::kAttack;
-		else if (match_force_skip(parameters, "defense"))
+        } else if (match_force_skip(parameters, "defense")) {
 			attribute = TrainingAttribute::kDefense;
-		else if (match_force_skip(parameters, "evade"))
+        } else if (match_force_skip(parameters, "evade")) {
 			attribute = TrainingAttribute::kEvade;
-		else
+        } else {
 			throw GameDataError("expected %s but found \"%s\"",
 			                    "{\"health\"|\"attack\"|\"defense\"|\"evade\"}", parameters);
+        }
 
 		{
 			char* endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
 			level = value;
-			if (*endp != ' ' || level != value)
+            if (*endp != ' ' || level != value) {
 				throw GameDataError("expected %s but found \"%s\"", "level", parameters);
+            }
 			parameters = endp;
 		}
 
@@ -1360,8 +1423,9 @@ ProductionProgram::ActTrain::ActTrain(char* parameters) {
 			char* endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
 			target_level = value;
-			if (*endp || target_level != value || target_level <= level)
+            if (*endp || target_level != value || target_level <= level) {
 				throw GameDataError("expected level > %u but found \"%s\"", level, parameters);
+            }
 		}
 	} catch (const WException& e) {
 		throw GameDataError("train: %s", e.what());
@@ -1383,32 +1447,35 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 			return ps.program_end(game, ProgramResult::kSkipped);
 		}
 		if (attribute == TrainingAttribute::kHealth) {
-			if ((*it)->get_health_level() == level)
+            if ((*it)->get_health_level() == level) {
 				break;
+            }
 		} else if (attribute == TrainingAttribute::kAttack) {
-			if ((*it)->get_attack_level() == level)
+            if ((*it)->get_attack_level() == level) {
 				break;
+            }
 		} else if (attribute == TrainingAttribute::kDefense) {
-			if ((*it)->get_defense_level() == level)
+            if ((*it)->get_defense_level() == level) {
 				break;
+            }
 		} else if (attribute == TrainingAttribute::kEvade) {
-			if ((*it)->get_evade_level() == level)
+            if ((*it)->get_evade_level() == level) {
 				break;
+            }
 		}
 	}
 	ps.molog("    okay\n");  // okay, do nothing
 
 	try {
-		if (attribute == TrainingAttribute::kHealth)
+        if (attribute == TrainingAttribute::kHealth) {
 			(*it)->set_health_level(target_level);
-		else if (attribute == TrainingAttribute::kAttack)
+        } else if (attribute == TrainingAttribute::kAttack) {
 			(*it)->set_attack_level(target_level);
-
-		else if (attribute == TrainingAttribute::kDefense)
+        } else if (attribute == TrainingAttribute::kDefense) {
 			(*it)->set_defense_level(target_level);
-
-		else if (attribute == TrainingAttribute::kEvade)
+        } else if (attribute == TrainingAttribute::kEvade) {
 			(*it)->set_evade_level(target_level);
+        }
 
 	} catch (...) {
 		throw wexception("Fail training soldier!!");
@@ -1435,8 +1502,9 @@ ProductionProgram::ActPlaySound::ActPlaySound(char* parameters) {
 			char* endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
 			priority = value;
-			if (*endp || priority != value)
+            if (*endp || priority != value) {
 				throw GameDataError("expected %s but found \"%s\"", "priority", parameters);
+            }
 		} else {
 			priority = kFxPriorityAllowMultiple - 1;
 		}
@@ -1460,8 +1528,9 @@ ProductionProgram::ActConstruct::ActConstruct(char* parameters,
 	try {
 		std::vector<std::string> params = split_string(parameters, " ");
 
-		if (params.size() != 3)
+        if (params.size() != 3) {
 			throw GameDataError("usage: construct object-name worker-program radius:NN");
+        }
 
 		objectname = params[0];
 		workerprogram = params[1];
@@ -1480,8 +1549,9 @@ ProductionProgram::ActConstruct::ActConstruct(char* parameters,
 const ImmovableDescr&
 ProductionProgram::ActConstruct::get_construction_descr(const Tribes& tribes) const {
 	const ImmovableDescr* descr = tribes.get_immovable_descr(tribes.immovable_index(objectname));
-	if (!descr)
+    if (!descr) {
 		throw wexception("ActConstruct: immovable '%s' does not exist", objectname.c_str());
+    }
 
 	return *descr;
 }
@@ -1706,9 +1776,10 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 			}
 		}
 	}
-	if (actions_.empty())
+    if (actions_.empty()) {
 		throw GameDataError("no actions in production program \"%s\" for building \"%s\"",
 		                    name().c_str(), building->name().c_str());
+    }
 }
 
 const std::string& ProductionProgram::name() const {
