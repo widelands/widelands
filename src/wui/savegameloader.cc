@@ -42,6 +42,7 @@ void SavegameLoader::load(const std::string& to_be_loaded,
 
 void SavegameLoader::load_savegame_from_directory(const std::string& gamefilename,
                                                   std::vector<SavegameData>& loaded_games) const {
+
 	Widelands::GamePreloadPacket gpdp;
 	SavegameData gamedata(gamefilename);
 
@@ -189,8 +190,9 @@ ReplayLoader::ReplayLoader(Widelands::Game& game) : SavegameLoader(game) {
 }
 
 bool ReplayLoader::is_valid_gametype(const SavegameData&) const {
-	return true;  // why?? what is the purpose of GameController::GameType::kReplay?
-	              // return gamedata.is_replay(); <-- should be this, right?!
+	return true;  // TODO jmoerschbach: why?? what is the purpose of
+	              // GameController::GameType::kReplay? return gamedata.is_replay(); <-- should be
+	              // this, right?!
 }
 
 std::string ReplayLoader::get_savename(const std::string& gamefilename) const {
