@@ -41,8 +41,15 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table) {
 		for (const std::string& script_path : starting_conditions->array_entries<std::string>()) {
 			std::unique_ptr<LuaTable> script_table = lua.run_script(script_path);
 			script_table->do_not_warn_about_unaccessed_keys();
+			std::set<std::string> tags;
+			if (script_table->has_key("map_tags")) {
+				std::unique_ptr<LuaTable> t = script_table->get_table("map_tags");
+				for (int key : t->keys<int>()) {
+					tags.insert(t->get_string(key));
+				}
+			}
 			initializations.push_back(Initialization(script_path, script_table->get_string("descname"),
-			                                         script_table->get_string("tooltip")));
+			                                         script_table->get_string("tooltip"), tags));
 		}
 	} catch (const WException& e) {
 		throw Widelands::GameDataError(

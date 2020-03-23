@@ -1,14 +1,14 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # abuyop <abuyop@gmail.com>, 2015,2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-10 07:32+0000\n"
-"PO-Revision-Date: 2019-05-10 07:33+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-03-03 09:07+0000\n"
+"PO-Revision-Date: 2020-03-03 09:10+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Malay (http://www.transifex.com/widelands/widelands/language/ms/)\n"
 "MIME-Version: 1.0\n"
@@ -177,22 +177,22 @@ msgstr "%1$s memiliki %2$3.0f%% keluasan tanah (%3$i dari %4$i)."
 msgid "Territory percentage"
 msgstr ""
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:195
+#: ../../data/scripting/win_conditions/territorial_functions.lua:211
 msgid "You own more than half of the map’s area."
 msgstr "Anda menguasai lebih dari separuh kawasan peta."
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:196
+#: ../../data/scripting/win_conditions/territorial_functions.lua:212
 #, lua-format
 msgid "Keep it for %i more minute to win the game."
 msgid_plural "Keep it for %i more minutes to win the game."
 msgstr[0] "Kekalkannya lebih dari %i minit lagi untuk memenangi permainan."
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:222
+#: ../../data/scripting/win_conditions/territorial_functions.lua:238
 #, lua-format
 msgid "%s owns more than half of the map’s area."
 msgstr "%s menguasai lebih dari separuh kawasan peta."
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:223
+#: ../../data/scripting/win_conditions/territorial_functions.lua:239
 #, lua-format
 msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."
@@ -206,10 +206,11 @@ msgstr "Pemerintah Berwilayah"
 msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
-"least 20 minutes."
-msgstr "Setiap pemain atau pasukan cuba menguasai lebih dari separuh kawasan peta. Pemenang merupakan pemain atau pasukan yang dapat mengekalkan penguasaan kawasan tersebut sekurang-kurangnya 20 minit."
+"least 20 minutes. If the peaceful mode is selected, the game ends if one "
+"player has more land than any other player could gain."
+msgstr ""
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:56
+#: ../../data/scripting/win_conditions/territorial_lord.lua:58
 msgid "Currently no faction owns more than half of the map’s area."
 msgstr ""
 
@@ -222,8 +223,9 @@ msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes, or the one with the most territory after 4 hours, "
-"whichever comes first."
-msgstr "Setiap pemain atau pasukan cuba menguasai lebih dari separuh kawasan peta. Pemenang merupakan pemain atau pasukan yang dapat mengekalkan penguasaan kawasan tersebut sekurang-kurangnya 20 minit, atau sesiapa yang menguasai kawasan paling banyak selepas 4 jam, yang mana salah satu berlaku dahulu."
+"whichever comes first.If the peaceful mode is selected, the game ends if one"
+" player has more land than any other player could gain."
+msgstr ""
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #. TRANSLATORS: Context: 'The game will end in 30 minutes.'

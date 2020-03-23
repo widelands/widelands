@@ -19,6 +19,8 @@
 
 #include "logic/map_objects/tribes/constructionsite.h"
 
+#include <memory>
+
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "base/wexception.h"
@@ -39,7 +41,6 @@
 #include "logic/player.h"
 #include "sound/note_sound.h"
 #include "sound/sound_handler.h"
-#include "ui_basic/window.h"
 
 namespace Widelands {
 
@@ -268,13 +269,30 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 
 	if (work_steps_ <= work_completed_) {
 		// Put the real building in place
+		Game& game = dynamic_cast<Game&>(egbase);
 		DescriptionIndex becomes_idx = owner().tribe().building_index(building_->name());
 		old_buildings_.push_back(std::make_pair(becomes_idx, ""));
 		Building& b = building_->create(egbase, get_owner(), position_, false, false, old_buildings_);
 		if (Worker* const builder = builder_.get(egbase)) {
-			builder->reset_tasks(dynamic_cast<Game&>(egbase));
+			builder->reset_tasks(game);
 			builder->set_location(&b);
 		}
+		if (upcast(Warehouse, wh, &b)) {
+			for (const auto& pair : additional_wares_) {
+				for (uint8_t i = pair.second; i > 0; --i) {
+					wh->receive_ware(game, pair.first);
+				}
+			}
+			for (Worker* w : additional_workers_) {
+				wh->incorporate_worker(game, w);
+			}
+		}
+#ifndef NDEBUG
+		else {
+			assert(additional_wares_.empty());
+			assert(additional_workers_.empty());
+		}
+#endif
 
 		// Apply settings
 		if (settings_) {
@@ -383,11 +401,11 @@ void ConstructionSite::enhance(Game&) {
 	auto new_desired_capacity = [](
 	   uint32_t old_max, uint32_t old_des, uint32_t new_max) { return old_des * new_max / old_max; };
 
-	BuildingSettings* old_settings = settings_.release();
+	std::unique_ptr<BuildingSettings> old_settings(settings_.release());
 	switch (building_->type()) {
 	case Widelands::MapObjectType::WAREHOUSE: {
 		upcast(const WarehouseDescr, wd, building_);
-		upcast(WarehouseSettings, ws, old_settings);
+		upcast(WarehouseSettings, ws, old_settings.get());
 		assert(ws);
 		WarehouseSettings* new_settings = new WarehouseSettings(*wd, owner().tribe());
 		settings_.reset(new_settings);
@@ -401,7 +419,7 @@ void ConstructionSite::enhance(Game&) {
 	} break;
 	case Widelands::MapObjectType::TRAININGSITE: {
 		upcast(const TrainingSiteDescr, td, building_);
-		upcast(TrainingsiteSettings, ts, old_settings);
+		upcast(TrainingsiteSettings, ts, old_settings.get());
 		assert(ts);
 		TrainingsiteSettings* new_settings = new TrainingsiteSettings(*td, owner().tribe());
 		settings_.reset(new_settings);
@@ -431,7 +449,7 @@ void ConstructionSite::enhance(Game&) {
 	} break;
 	case Widelands::MapObjectType::PRODUCTIONSITE: {
 		upcast(const ProductionSiteDescr, pd, building_);
-		upcast(ProductionsiteSettings, ps, old_settings);
+		upcast(ProductionsiteSettings, ps, old_settings.get());
 		assert(ps);
 		ProductionsiteSettings* new_settings = new ProductionsiteSettings(*pd, owner().tribe());
 		settings_.reset(new_settings);
@@ -459,7 +477,7 @@ void ConstructionSite::enhance(Game&) {
 	} break;
 	case Widelands::MapObjectType::MILITARYSITE: {
 		upcast(const MilitarySiteDescr, md, building_);
-		upcast(MilitarysiteSettings, ms, old_settings);
+		upcast(MilitarysiteSettings, ms, old_settings.get());
 		assert(ms);
 		MilitarysiteSettings* new_settings = new MilitarysiteSettings(*md, owner().tribe());
 		settings_.reset(new_settings);
@@ -487,6 +505,20 @@ bool ConstructionSite::burn_on_destroy() {
 		return false;  // completed, so don't burn
 
 	return work_completed_ || !old_buildings_.empty();
+}
+
+void ConstructionSite::add_additional_ware(DescriptionIndex di) {
+	auto it = additional_wares_.find(di);
+	if (it == additional_wares_.end()) {
+		additional_wares_.emplace(di, 1);
+	} else {
+		++it->second;
+	}
+}
+
+void ConstructionSite::add_additional_worker(Game& game, Worker& w) {
+	additional_workers_.push_back(&w);
+	w.start_task_idle(game, 0, -1);
 }
 
 /*

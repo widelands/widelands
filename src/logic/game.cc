@@ -36,6 +36,7 @@
 #include "base/warning.h"
 #include "build_info.h"
 #include "economy/economy.h"
+#include "economy/portdock.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
 #include "io/fileread.h"
@@ -60,7 +61,6 @@
 #include "logic/replay.h"
 #include "logic/single_player_game_controller.h"
 #include "map_io/widelands_map_loader.h"
-#include "scripting/logic.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
@@ -848,6 +848,14 @@ void Game::send_player_sink_ship(Ship& ship) {
 void Game::send_player_cancel_expedition_ship(Ship& ship) {
 	send_player_command(new CmdShipCancelExpedition(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial()));
+}
+
+void Game::send_player_expedition_config(PortDock& pd,
+                                         WareWorker ww,
+                                         DescriptionIndex di,
+                                         bool add) {
+	send_player_command(
+	   new CmdExpeditionConfig(get_gametime(), pd.get_owner()->player_number(), pd, ww, di, add));
 }
 
 void Game::send_player_propose_trade(const Trade& trade) {

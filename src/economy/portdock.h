@@ -128,7 +128,7 @@ public:
 	ExpeditionBootstrap* expedition_bootstrap() const;
 
 	// Gets called by the ExpeditionBootstrap as soon as all wares and workers are available.
-	void expedition_bootstrap_complete(Game& game);
+	void set_expedition_bootstrap_complete(Game& game, bool complete);
 
 private:
 	friend struct ShipFleet;
@@ -139,7 +139,7 @@ private:
 
 	void init_fleet(EditorGameBase& egbase);
 	void set_fleet(ShipFleet* fleet);
-	void update_shippingitem(Game&, std::list<ShippingItem>::iterator);
+	std::list<ShippingItem>::iterator update_shippingitem(Game&, std::list<ShippingItem>::iterator);
 	void set_need_ship(Game&, bool need);
 
 	void load_wares(Game&, Ship&);

@@ -23,12 +23,12 @@
 #include <memory>
 
 #include "base/md5.h"
+#include "base/random.h"
 #include "io/streamwrite.h"
 #include "logic/cmd_queue.h"
 #include "logic/editor_game_base.h"
 #include "logic/save_handler.h"
 #include "logic/trade_agreement.h"
-#include "random/random.h"
 #include "scripting/logic.h"
 
 class InteractivePlayer;
@@ -46,6 +46,7 @@ struct Flag;
 struct Path;
 struct PlayerImmovable;
 enum class IslandExploreDirection;
+class PortDock;
 enum class ScoutingDirection;
 enum class SoldierPreference : uint8_t;
 struct Ship;
@@ -251,6 +252,7 @@ public:
 	void send_player_start_stop_building(Building&);
 	void send_player_militarysite_set_soldier_preference(Building&, SoldierPreference preference);
 	void send_player_start_or_cancel_expedition(Building&);
+	void send_player_expedition_config(PortDock&, WareWorker, DescriptionIndex, bool);
 
 	void send_player_enhance_building(Building&, DescriptionIndex);
 	void send_player_evict_worker(Worker&);

@@ -27,6 +27,7 @@
 #include "graphic/style_manager.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text_layout.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/mouse_constants.h"
 
 constexpr int kMargin = 2;
@@ -81,7 +82,8 @@ BaseListselect::BaseListselect(Panel* const parent,
      background_style_(selection_mode == ListselectLayout::kDropdown ?
                           g_gr->styles().dropdown_style(style) :
                           nullptr),
-     lineheight_(text_height(table_style_.enabled()) + kMargin) {
+     lineheight_(text_height(table_style_.enabled()) + kMargin),
+     notify_on_delete_(nullptr) {
 	set_thinks(false);
 
 	scrollbar_.moved.connect(boost::bind(&BaseListselect::set_scrollpos, this, _1));
@@ -104,6 +106,9 @@ BaseListselect::BaseListselect(Panel* const parent,
  */
 BaseListselect::~BaseListselect() {
 	clear();
+	if (notify_on_delete_) {
+		notify_on_delete_->notify_list_deleted();
+	}
 }
 
 /**

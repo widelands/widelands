@@ -284,7 +284,8 @@ void PortDock::update_shippingitem(Game& game, Worker& worker) {
 	}
 }
 
-void PortDock::update_shippingitem(Game& game, std::list<ShippingItem>::iterator it) {
+std::list<ShippingItem>::iterator
+PortDock::update_shippingitem(Game& game, std::list<ShippingItem>::iterator it) {
 	it->update_destination(game, *this);
 
 	const PortDock* dst = it->get_destination(game);
@@ -296,11 +297,11 @@ void PortDock::update_shippingitem(Game& game, std::list<ShippingItem>::iterator
 		if (ships_coming_.empty()) {
 			set_need_ship(game, true);
 		}
+		return ++it;
 	} else {
 		it->set_location(game, warehouse_);
 		it->end_shipping(game);
-		*it = waiting_.back();
-		waiting_.pop_back();
+		return waiting_.erase(it);
 	}
 }
 
@@ -372,6 +373,11 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 		}
 	}
 
+	// TODO(Nordfriese): Quick and dirty fix to make #3683 #3544 #503 happen less often.
+	// The real fix will be part of Noordfrees:shipping-tweaks
+	for (auto it = waiting_.begin(); it != waiting_.end(); it = update_shippingitem(game, it))
+		;
+
 	ship.pop_destination(game, *this);
 	fleet_->push_next_destinations(game, ship, *this);
 	if (ship.get_current_destination(game)) {
@@ -387,7 +393,7 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 }
 
 void PortDock::load_wares(Game& game, Ship& ship) {
-	uint32_t free_capacity = ship.descr().get_capacity() - ship.get_nritems();
+	uint32_t free_capacity = ship.get_capacity() - ship.get_nritems();
 	std::unordered_map<const PortDock*, bool> destination_check;
 	for (auto it = waiting_.begin(); it != waiting_.end() && free_capacity;) {
 		PortDock* dest = it->destination_dock_.get(game);
@@ -508,9 +514,11 @@ ExpeditionBootstrap* PortDock::expedition_bootstrap() const {
 	return expedition_bootstrap_.get();
 }
 
-void PortDock::expedition_bootstrap_complete(Game& game) {
-	expedition_ready_ = true;
-	get_fleet()->update(game);
+void PortDock::set_expedition_bootstrap_complete(Game& game, bool complete) {
+	if (expedition_ready_ != complete) {
+		expedition_ready_ = complete;
+		get_fleet()->update(game);
+	}
 }
 
 void PortDock::cancel_expedition(Game& game) {
