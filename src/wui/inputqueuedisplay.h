@@ -109,6 +109,8 @@ private:
 	uint32_t check_max_size() const;
 	uint32_t check_max_fill() const;
 
+	void change_fill_setting(Widelands::WareWorker, Widelands::DescriptionIndex, size_t);
+
 	void compute_max_fill_buttons_enabled_state();
 };
 

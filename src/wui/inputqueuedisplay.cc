@@ -567,6 +567,30 @@ void InputQueueDisplay::update_siblings_priority(int32_t state) {
 	SDL_SetModState(old_modifiers);
 }
 
+void InputQueueDisplay::change_fill_setting(Widelands::WareWorker ww, Widelands::DescriptionIndex idx, size_t new_fill) {
+	switch (ww) {
+	case Widelands::wwWARE:
+		for (auto& pair : mutable_settings().ware_queues) {
+			if (pair.first == idx) {
+				assert(pair.second.max_fill >= new_fill);
+				pair.second.desired_fill = new_fill;
+				return;
+			}
+		}
+		NEVER_HERE();
+	case Widelands::wwWORKER:
+		for (auto& pair : mutable_settings().worker_queues) {
+			if (pair.first == idx) {
+				assert(pair.second.max_fill >= new_fill);
+				pair.second.desired_fill = new_fill;
+				return;
+			}
+		}
+		NEVER_HERE();
+	}
+	NEVER_HERE();
+}
+
 /**
  * One of the buttons to increase or decrease the amount of wares
  * stored here has been clicked
@@ -584,33 +608,12 @@ void InputQueueDisplay::decrease_max_fill_clicked() {
 			   building_, index_, type_, maxfill, settings_ != nullptr);
 		} else {
 			if (settings_) {
-				switch (type_) {
-				case Widelands::wwWARE:
-					for (auto& pair : mutable_settings().ware_queues) {
-						if (pair.first == index_) {
-							assert(pair.second.max_fill >= maxfill);
-							pair.second.desired_fill = maxfill;
-							goto decreased_max_fill;
-						}
-					}
-					NEVER_HERE();
-				case Widelands::wwWORKER:
-					for (auto& pair : mutable_settings().worker_queues) {
-						if (pair.first == index_) {
-							assert(pair.second.max_fill >= maxfill);
-							pair.second.desired_fill = maxfill;
-							goto decreased_max_fill;
-						}
-					}
-					NEVER_HERE();
-				}
-				NEVER_HERE();
+				change_fill_setting(type_, index_, maxfill);
 			} else {
 				building_.inputqueue(index_, type_).set_max_fill(maxfill);
 			}
 		}
 	}
-decreased_max_fill:
 
 	// Update other queues of this building
 	if (SDL_GetModState() & KMOD_SHIFT) {
@@ -632,33 +635,12 @@ void InputQueueDisplay::increase_max_fill_clicked() {
 			   building_, index_, type_, maxfill, settings_ != nullptr);
 		} else {
 			if (settings_) {
-				switch (type_) {
-				case Widelands::wwWARE:
-					for (auto& pair : mutable_settings().ware_queues) {
-						if (pair.first == index_) {
-							assert(pair.second.max_fill >= maxfill);
-							pair.second.desired_fill = maxfill;
-							goto increased_max_fill;
-						}
-					}
-					NEVER_HERE();
-				case Widelands::wwWORKER:
-					for (auto& pair : mutable_settings().worker_queues) {
-						if (pair.first == index_) {
-							assert(pair.second.max_fill >= maxfill);
-							pair.second.desired_fill = maxfill;
-							goto increased_max_fill;
-						}
-					}
-					NEVER_HERE();
-				}
-				NEVER_HERE();
+				change_fill_setting(type_, index_, maxfill);
 			} else {
 				building_.inputqueue(index_, type_).set_max_fill(maxfill);
 			}
 		}
 	}
-increased_max_fill:
 
 	if (SDL_GetModState() & KMOD_SHIFT) {
 		update_siblings_max_fill(
@@ -689,34 +671,12 @@ void InputQueueDisplay::update_siblings_max_fill(int32_t delta) {
 				   building_, display->index_, display->type_, new_fill, settings_ != nullptr);
 			} else {
 				if (settings_) {
-					switch (display->type_) {
-					case Widelands::wwWARE:
-						for (auto& pair : mutable_settings().ware_queues) {
-							if (pair.first == display->index_) {
-								assert(pair.second.max_fill >= new_fill);
-								pair.second.desired_fill = new_fill;
-								goto one_sibling_fill_updated;
-							}
-						}
-						NEVER_HERE();
-					case Widelands::wwWORKER:
-						for (auto& pair : mutable_settings().worker_queues) {
-							if (pair.first == display->index_) {
-								assert(pair.second.max_fill >= new_fill);
-								pair.second.desired_fill = new_fill;
-								goto one_sibling_fill_updated;
-							}
-						}
-						NEVER_HERE();
-					}
-					NEVER_HERE();
+					change_fill_setting(display->type_, display->index_, new_fill);
 				} else {
 					building_.inputqueue(display->index_, display->type_).set_max_fill(new_fill);
 				}
 			}
 		}
-	one_sibling_fill_updated:
-		continue;
 	} while ((sibling = sibling->get_next_sibling()));
 }
 

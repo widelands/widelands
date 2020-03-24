@@ -366,7 +366,7 @@ void ScenarioToolInfrastructureOptionsMenu::select_tab() {
 void ScenarioToolInfrastructureOptionsMenu::update_text() {
 	const size_t nr_items = tool_.get_indices().size();
 	if (nr_items == 0) {
-		selected_items_.set_text(_("Nothing selected"));
+		selected_items_.set_text(pgettext("dropdown", "Not Selected"));
 		return;
 	}
 	auto name_of = [this](size_t i) {
