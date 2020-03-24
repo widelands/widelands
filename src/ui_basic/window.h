@@ -90,6 +90,14 @@ public:
 		return true;
 	}
 
+	bool is_pinned() const {
+		return pinned_;
+	}
+	void set_pinned(bool p) {
+		pinned_ = p;
+		update_toolbar_buttons();
+	}
+
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
 	void draw_border(RenderTarget&) override;
