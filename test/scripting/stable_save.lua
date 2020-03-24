@@ -12,14 +12,13 @@ function stable_save(game, savename, desired_speed)
    game.desired_speed = 1000
 
    -- Wait until save was finished
-   local counter = 0
    repeat
       sleep(200)
-   until game.last_save_time ~= last_save_time or counter > 20
+   until game.last_save_time ~= last_save_time
    print("###### stable_save: new save time " .. game.last_save_time)
 
    -- Give the loaded game a chance to catch up
-   counter = 0
+   local counter = 0
    while mapview.average_fps < 20 and counter < 100 do
       sleep(200)
       counter = counter + 1

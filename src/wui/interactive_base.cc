@@ -677,7 +677,7 @@ void InteractiveBase::think() {
 }
 
 double InteractiveBase::average_fps() const {
-	return 1000.0 / (avg_usframetime_ / 1000);
+	return 1000.0 * 1000.0 / avg_usframetime_;
 }
 
 /*
