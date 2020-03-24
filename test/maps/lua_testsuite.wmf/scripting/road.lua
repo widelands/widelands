@@ -18,7 +18,7 @@ function road_tests:setup()
 
    self.start_flag = player1:place_flag(self.f)
 
-   self.r = player1:place_road("normal", self.start_flag, "r", "r", "br", "br")
+   self.r = player1:place_road("busy", self.start_flag, "r", "r", "br", "br")
    self.end_flag = self.f.rn.rn.brn.brn.immovable
 end
 function road_tests:teardown()
@@ -39,7 +39,7 @@ function road_tests:test_field()
    assert_equal(self.f.rn.rn.brn, f[3])
 end
 function road_tests:test_roadtype()
-   assert_equal("normal", self.r.road_type)
+   assert_equal("busy", self.r.road_type)
 end
 function road_tests:test_type()
    assert_equal("road", self.r.descr.type_name)
