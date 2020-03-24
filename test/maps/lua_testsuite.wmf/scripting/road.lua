@@ -101,6 +101,6 @@ function road_tests:test_carrier_no_space()
    end)
 end
 function road_tests:test_valid_workers()
-   assert_equal(1, _cnt(self.r.valid_workers))
+   assert_equal(2, _cnt(self.r.valid_workers))
    assert_equal(1, self.r.valid_workers.barbarians_carrier)
 end
