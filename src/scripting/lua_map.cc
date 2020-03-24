@@ -6293,7 +6293,11 @@ int LuaShip::get_state(lua_State* L) {
 int LuaShip::get_scouting_direction(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	if (is_a(Game, &egbase)) {
-		lua_pushstring(L, Widelands::walkingdir_to_string(get(L, egbase)->get_scouting_direction()));
+		const Widelands::WalkingDir w = get(L, egbase)->get_scouting_direction();
+		if (w == Widelands::WalkingDir::IDLE) {
+			return 0;
+		}
+		lua_pushstring(L, Widelands::walkingdir_to_string(w));
 		return 1;
 	}
 	return 0;
