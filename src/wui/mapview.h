@@ -114,6 +114,10 @@ public:
 	// Called whenever the view changed, also during automatic animations.
 	boost::signals2::signal<void()> changeview;
 
+	// Called whenever the view changed by a call to scroll_to_field or scroll_to_map_pixel.
+	// Note: This signal is called *before* the view actually starts to move there.
+	boost::signals2::signal<void()> jump;
+
 	// Called when the user clicked on a field.
 	boost::signals2::signal<void(const Widelands::NodeAndTriangle<>&)> field_clicked;
 
