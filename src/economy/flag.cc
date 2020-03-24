@@ -631,7 +631,7 @@ void Flag::propagate_promoted_road(Road* const promoted_road) {
 
 	// Calculate the sum of the involved wallets' adjusted value
 	int32_t sum = 0;
-	for (int8_t i = 0; i < WalkingDir::LAST_DIRECTION; ++i) {
+	for (int8_t i = WalkingDir::FIRST_DIRECTION; i <= WalkingDir::LAST_DIRECTION; ++i) {
 		Road* const road = get_road(i);
 		if (road && road != promoted_road) {
 			sum += kRoadMaxWallet + road->wallet() * road->wallet();
@@ -639,7 +639,7 @@ void Flag::propagate_promoted_road(Road* const promoted_road) {
 	}
 
 	// Distribute propagation coins in a smart way
-	for (int8_t i = 0; i < WalkingDir::LAST_DIRECTION; ++i) {
+	for (int8_t i = WalkingDir::FIRST_DIRECTION; i <= WalkingDir::LAST_DIRECTION; ++i) {
 		Road* const road = get_road(i);
 		if (road && !road->is_busy()) {
 			road->add_to_wallet(0.5 * (kRoadMaxWallet - road->wallet()) *
