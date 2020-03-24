@@ -54,7 +54,8 @@ function get_swimmable_fields()
    for x = 0, (map.width - 1) do
       for y = 0, (map.height - 1) do
          local f = map:get_field(x, y)
-         if f:has_caps("swimmable") then
+         -- don't use f:has_caps("swimmable"), ferry can sit on a beach
+         if f.terr == "summer_water" or f.terd == "summer_water" then
             table.insert(fields, f)
          end
       end
@@ -62,7 +63,7 @@ function get_swimmable_fields()
    return fields
 end
 
--- Returns array of fields where bob is "atlanteans_ferry"
+-- Returns array of fields in area where bob is "atlanteans_ferry"
 function get_fields_with_ferry(area)
    local fields = {}
    for i,field in pairs(area) do
@@ -70,6 +71,17 @@ function get_fields_with_ferry(area)
          if bob.descr.name == "atlanteans_ferry" then
             table.insert(fields, field)
          end
+      end
+   end
+   return fields
+end
+
+-- Returns array of fields in area of "waterway" type
+function get_waterway_fields(area)
+   local fields = {}
+   for i,field in pairs(area) do
+      if field.immovable and field.immovable.descr.type_name == "waterway" then
+         table.insert(fields, field)
       end
    end
    return fields

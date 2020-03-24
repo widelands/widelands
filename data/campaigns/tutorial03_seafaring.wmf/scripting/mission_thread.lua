@@ -137,21 +137,32 @@ function complete_gold_mine()
    end
 end
 
-function complete_ferries()
-   -- wait until 4 ferries are assigned to waterways
-   while plr:get_workers("atlanteans_ferry") < 4 do sleep(3000) end
-   ferries_done = true
-end
-
-function watch_ferry_production()
+function waterways_and_ferries()
    -- warn player about over-producing after third ferry
    while #get_fields_with_ferry(swimmable_fields) < 3 do sleep(3000) end
+
    local ferry_yards = plr:get_buildings("atlanteans_ferry_yard")
    if #ferry_yards > 0 then
       local yard = ferry_yards[1]
       scroll_to_field(yard.fields[1])
    end
    message_box_objective(plr, ferry_yard_production)
+
+   -- wait until 4 ferries are located on waterways
+   local pass, ff, wwf = 0, {}, {}
+   -- three passes to eliminate ferry crossing other ferry's waterway
+   while pass < 3 do
+      sleep(3000)
+      ff = get_fields_with_ferry(swimmable_fields)
+      wwf = get_waterway_fields(ff)
+      if #wwf >= 4 then
+         pass = pass + 1
+      else
+         pass = 0
+      end
+   end
+
+   ferries_done = true
 end
 
 function waterways()
@@ -185,8 +196,7 @@ function waterways()
    local o = message_box_objective(plr, ferry_5)
    -- check for goldmine, and waterways with ferries
    run(complete_gold_mine)
-   run(complete_ferries)
-   watch_ferry_production()
+   waterways_and_ferries()
    while not (gold_mine_done and ferries_done) do sleep(3000) end
    set_objective_done(o)
 
