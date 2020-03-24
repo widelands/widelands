@@ -244,6 +244,7 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(
 
 void ScenarioToolInfrastructureOptionsMenu::make_auto_infra(bool all) {
 	std::list<std::string> errors;
+	std::list<Widelands::Building*> placed;
 	Widelands::EditorGameBase& egbase = eia().egbase();
 	// TODO(Nordfriese): Instead of iterating all warehouse types until we find one that seems to
 	// fit,
@@ -288,7 +289,7 @@ void ScenarioToolInfrastructureOptionsMenu::make_auto_infra(bool all) {
 			const Widelands::BuildingDescr& b = *egbase.tribes().get_building_descr(index);
 			if (b.suitability(
 			       egbase.map(), egbase.map().get_fcoords(egbase.map().get_starting_pos(p)))) {
-				player.force_building(egbase.map().get_starting_pos(p), {std::make_pair(index, "")});
+				placed.push_back(&player.force_building(egbase.map().get_starting_pos(p), {std::make_pair(index, "")}));
 			} else {
 				errors.push_back(
 				   (boost::format(
@@ -303,6 +304,9 @@ void ScenarioToolInfrastructureOptionsMenu::make_auto_infra(bool all) {
 			    p % player.tribe().descname().c_str())
 			      .str());
 		}
+	}
+	for (Widelands::Building* b : placed) {
+		eia().show_building_window(b->get_position(), true, false);
 	}
 	std::string text;
 	if (errors.empty()) {
