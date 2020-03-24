@@ -289,7 +289,8 @@ void ScenarioToolInfrastructureOptionsMenu::make_auto_infra(bool all) {
 			const Widelands::BuildingDescr& b = *egbase.tribes().get_building_descr(index);
 			if (b.suitability(
 			       egbase.map(), egbase.map().get_fcoords(egbase.map().get_starting_pos(p)))) {
-				placed.push_back(&player.force_building(egbase.map().get_starting_pos(p), {std::make_pair(index, "")}));
+				placed.push_back(&player.force_building(
+				   egbase.map().get_starting_pos(p), {std::make_pair(index, "")}));
 			} else {
 				errors.push_back(
 				   (boost::format(
