@@ -567,7 +567,9 @@ void InputQueueDisplay::update_siblings_priority(int32_t state) {
 	SDL_SetModState(old_modifiers);
 }
 
-void InputQueueDisplay::change_fill_setting(Widelands::WareWorker ww, Widelands::DescriptionIndex idx, size_t new_fill) {
+void InputQueueDisplay::change_fill_setting(Widelands::WareWorker ww,
+                                            Widelands::DescriptionIndex idx,
+                                            size_t new_fill) {
 	switch (ww) {
 	case Widelands::wwWARE:
 		for (auto& pair : mutable_settings().ware_queues) {
