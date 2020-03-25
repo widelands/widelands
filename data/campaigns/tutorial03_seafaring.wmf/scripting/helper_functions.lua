@@ -86,3 +86,15 @@ function get_waterway_fields(area)
    end
    return fields
 end
+
+-- Scroll to first building of `which` type
+-- Return prior center map pixel of the MapView,
+--  otherwise nil if no building exists
+function scroll_to_first_building(which)
+   local buildings = plr:get_buildings(which)
+   if #buildings > 0 then
+      local first = buildings[1]
+      return scroll_to_field(first.fields[1])
+   end
+   return nil
+end

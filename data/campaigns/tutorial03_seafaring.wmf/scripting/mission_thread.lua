@@ -54,7 +54,10 @@ function build_ships()
    while #plr:get_buildings("atlanteans_shipyard") < 1 do sleep(1000) end
    set_objective_done(o)
 
+   -- scroll to shipyard and back
+   local prior_center = scroll_to_first_building("atlanteans_shipyard")
    local o = message_box_objective(plr, tell_about_ships)
+   if prior_center then scroll_to_map_pixel(prior_center) end
 
    -- we only wait for one ship and a bit longer because it takes long enough
    while #plr:get_ships() < 1 do sleep(30*1000) end
@@ -67,6 +70,7 @@ end
 
 function expedition()
    sleep(2000)
+   scroll_to_field(sf)
    message_box_objective(plr, expedition1)
    local o = message_box_objective(plr, expedition2)
 
@@ -140,12 +144,7 @@ end
 function waterways_and_ferries()
    -- warn player about over-producing after third ferry
    while #get_fields_with_ferry(swimmable_fields) < 3 do sleep(3000) end
-
-   local ferry_yards = plr:get_buildings("atlanteans_ferry_yard")
-   if #ferry_yards > 0 then
-      local yard = ferry_yards[1]
-      scroll_to_field(yard.fields[1])
-   end
+   scroll_to_first_building("atlanteans_ferry_yard")
    message_box_objective(plr, ferry_yard_production)
 
    -- wait until 4 ferries are located on waterways
