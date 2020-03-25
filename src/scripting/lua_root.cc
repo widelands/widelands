@@ -213,7 +213,7 @@ int LuaGame::get_type(lua_State* L) {
 */
 int LuaGame::get_scenario_difficulty(lua_State* L) {
 	const uint32_t d = get_game(L).get_scenario_difficulty();
-	if (!d) {
+	if (d == kScenarioDifficultyNotSet) {
 		report_error(L, "Scenario difficulty not set");
 	}
 	lua_pushuint32(L, d);
