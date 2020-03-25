@@ -33,7 +33,9 @@
 class SpriteSheetAnimation : public Animation {
 public:
 	~SpriteSheetAnimation() override = default;
-	explicit SpriteSheetAnimation(const LuaTable& table, const std::string& basename);
+	explicit SpriteSheetAnimation(const LuaTable& table,
+	                              const std::string& basename,
+	                              const std::string& animation_directory);
 
 	const Image* representative_image(const RGBColor* clr) const override;
 
