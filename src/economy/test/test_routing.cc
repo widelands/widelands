@@ -48,8 +48,9 @@ public:
 		neighbours_.push_back(nb);
 	}
 	TestingRoutingNode* get_neighbour(uint8_t idx) const {
-		if (idx >= neighbours_.size())
+        if (idx >= neighbours_.size()) {
 			throw BadAccess();
+        }
 		return neighbours_[idx];
 	}
 
@@ -137,8 +138,9 @@ public:
 					chain_begin_found = true;
 					++j;
 				}
-				if (j == n.end())
+                if (j == n.end()) {
 					return true;
+                }
 			} else {
 				if (*i != *j) {
 					j = n.begin();

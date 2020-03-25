@@ -80,8 +80,9 @@ void ShipFleet::set_economy(Economy* e, WareWorker type) {
 			e = ports_[0]->get_economy(type);
 		}
 #ifndef NDEBUG
-		else
+        else {
 			assert(e == nullptr);
+        }
 #endif
 
 		if (upcast(Game, game, &get_owner()->egbase())) {

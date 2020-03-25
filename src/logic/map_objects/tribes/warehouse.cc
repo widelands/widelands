@@ -389,8 +389,9 @@ int Warehouse::SoldierControl::outcorporate_soldier(Soldier& soldier) {
 		warehouse_->supply_->remove_workers(soldier_index, 1);
 	}
 #ifndef NDEBUG
-	else
+    else {
 		throw wexception("outcorporate_soldier: soldier not in this warehouse!");
+    }
 #endif
 	return 0;
 }
