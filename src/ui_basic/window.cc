@@ -19,8 +19,11 @@
 
 #include "ui_basic/window.h"
 
+#include <memory>
+
 #include <SDL_keycode.h>
 
+#include "base/i18n.h"
 #include "base/log.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
@@ -52,6 +55,11 @@ namespace UI {
 #define VT_B_THINGY_PIXMAP_LEN 20
 
 #define VT_B_MIDDLE_PIXMAP_LEN (VT_B_TOTAL_PIXMAP_LEN - 2 * VT_B_THINGY_PIXMAP_LEN)
+
+static const std::string kWindowImagePinned = kTemplateDir + "wui/window_pinned.png";
+static const std::string kWindowImageUnpinned = kTemplateDir + "wui/window_unpinned.png";
+static const std::string kWindowImageMinimize = kTemplateDir + "wui/window_minimize.png";
+static const std::string kWindowImageMaximize = kTemplateDir + "wui/window_maximize.png";
 
 /**
  * Initialize a framed window.
@@ -88,20 +96,87 @@ Window::Window(Panel* const parent,
      drag_start_win_y_(0),
      drag_start_mouse_x_(0),
      drag_start_mouse_y_(0),
+     pinned_(false),
      pic_lborder_(g_gr->images().get(kTemplateDir + "wui/left.png")),
      pic_rborder_(g_gr->images().get(kTemplateDir + "wui/right.png")),
      pic_top_(g_gr->images().get(kTemplateDir + "wui/top.png")),
      pic_bottom_(g_gr->images().get(kTemplateDir + "wui/bottom.png")),
      pic_background_(g_gr->images().get(kTemplateDir + "wui/background.png")),
      center_panel_(nullptr),
-     fastclick_panel_(nullptr) {
+     fastclick_panel_(nullptr),
+     button_close_(new Button(this,
+                              "b_close",
+                              get_w() - 2 * TP_B_PIXMAP_THICKNESS,
+                              -TP_B_PIXMAP_THICKNESS,
+                              TP_B_PIXMAP_THICKNESS,
+                              TP_B_PIXMAP_THICKNESS,
+                              ButtonStyle::kWuiSecondary,
+                              g_gr->images().get(kTemplateDir + "wui/window_close.png"),
+                              _("Close"))),
+     button_pin_(new Button(this,
+                            "b_pin",
+                            -TP_B_PIXMAP_THICKNESS,
+                            -TP_B_PIXMAP_THICKNESS,
+                            TP_B_PIXMAP_THICKNESS,
+                            TP_B_PIXMAP_THICKNESS,
+                            ButtonStyle::kWuiSecondary,
+                            g_gr->images().get(kWindowImageUnpinned),
+                            "")),
+     button_minimize_(new Button(this,
+                                 "b_minimize",
+                                 0,
+                                 -TP_B_PIXMAP_THICKNESS,
+                                 TP_B_PIXMAP_THICKNESS,
+                                 TP_B_PIXMAP_THICKNESS,
+                                 ButtonStyle::kWuiSecondary,
+                                 g_gr->images().get(kWindowImageMinimize),
+                                 "")) {
 	set_title(title);
+
+	button_close_->sigclicked.connect([this] {
+		if (!pinned_) {
+			clicked_button_close();
+		}
+	});
+	button_pin_->sigclicked.connect([this] {
+		pinned_ = !pinned_;
+		update_toolbar_buttons();
+	});
+	button_minimize_->sigclicked.connect([this] {
+		if (is_minimal_) {
+			restore();
+		} else {
+			minimize();
+		}
+	});
+	update_toolbar_buttons();
 
 	set_border(
 	   VT_B_PIXMAP_THICKNESS, VT_B_PIXMAP_THICKNESS, TP_B_PIXMAP_THICKNESS, BT_B_PIXMAP_THICKNESS);
 	set_top_on_click(true);
 	set_layout_toplevel(true);
+	layout();
 	focus();
+
+	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
+	   [this](const GraphicResolutionChanged& note) { on_resolution_changed_note(note); });
+}
+
+void Window::update_toolbar_buttons() {
+	button_minimize_->set_pic(
+	   g_gr->images().get(is_minimal_ ? kWindowImageMaximize : kWindowImageMinimize));
+	button_minimize_->set_tooltip(is_minimal_ ? _("Restore") : _("Minimize"));
+	button_minimize_->set_visual_state(is_minimal_ ? Button::VisualState::kPermpressed :
+	                                                 Button::VisualState::kRaised);
+	button_pin_->set_pic(g_gr->images().get(pinned_ ? kWindowImagePinned : kWindowImageUnpinned));
+	button_pin_->set_tooltip(pinned_ ? _("Unpin") : _("Pin"));
+	button_pin_->set_visual_state(pinned_ ? Button::VisualState::kPermpressed :
+	                                        Button::VisualState::kRaised);
+	button_close_->set_enabled(!pinned_);
+}
+
+void Window::clicked_button_close() {
+	die();
 }
 
 /**
@@ -146,6 +221,7 @@ void Window::layout() {
 		center_panel_->set_pos(Vector2i::zero());
 		center_panel_->set_size(get_inner_w(), get_inner_h());
 	}
+	button_close_->set_pos(Vector2i(get_w() - 2 * TP_B_PIXMAP_THICKNESS, -TP_B_PIXMAP_THICKNESS));
 }
 
 /**
@@ -264,9 +340,9 @@ void Window::draw_border(RenderTarget& dst) {
 		//  top bar
 		static_assert(0 <= HZ_B_CORNER_PIXMAP_LEN, "assert(0 <= HZ_B_CORNER_PIXMAP_LEN) failed.");
 		for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN)
-			dst.blitrect(Vector2i(pos, 0), pic_top_,
-			             Recti(Vector2i(HZ_B_CORNER_PIXMAP_LEN, 0), HZ_B_MIDDLE_PIXMAP_LEN,
-			                   TP_B_PIXMAP_THICKNESS));
+			dst.blitrect(
+			   Vector2i(pos, 0), pic_top_, Recti(Vector2i(HZ_B_CORNER_PIXMAP_LEN, 0),
+			                                     HZ_B_MIDDLE_PIXMAP_LEN, TP_B_PIXMAP_THICKNESS));
 
 		// odd pixels of top bar and top right corner
 		const int32_t width = hz_bar_end - pos + HZ_B_CORNER_PIXMAP_LEN;
@@ -278,12 +354,12 @@ void Window::draw_border(RenderTarget& dst) {
 	// draw the title if we have one
 	if (!title_.empty()) {
 		// The title shouldn't be richtext, but we escape it just to make sure.
-		std::shared_ptr<const UI::RenderedText> text =
-		   autofit_text(richtext_escape(title_),
-		                g_gr->styles().font_style(UI::FontStyle::kWuiWindowTitle), get_inner_w());
+		std::shared_ptr<const UI::RenderedText> text = autofit_text(
+		   richtext_escape(title_), g_gr->styles().font_style(UI::FontStyle::kWuiWindowTitle),
+		   get_inner_w() - TP_B_PIXMAP_THICKNESS);
 
-		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
-		Vector2i pos(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2);
+		Vector2i pos(
+		   get_lborder() + (get_inner_w() + TP_B_PIXMAP_THICKNESS) / 2, TP_B_PIXMAP_THICKNESS / 2);
 		UI::center_vertically(text->height(), &pos);
 		text->draw(dst, pos, UI::Align::kCenter);
 	}
@@ -360,11 +436,19 @@ void Window::draw_border(RenderTarget& dst) {
 			   Recti(Vector2i(HZ_B_TOTAL_PIXMAP_LEN - width, 0), width, BT_B_PIXMAP_THICKNESS));
 		}
 	}
+
+	// draw them again so they aren't hidden by the border
+	for (Button* b : {button_close_, button_pin_, button_minimize_}) {
+		b->set_pos(Vector2i(b->get_x() + TP_B_PIXMAP_THICKNESS, b->get_y() + TP_B_PIXMAP_THICKNESS));
+		b->do_draw(dst);
+		b->set_pos(Vector2i(b->get_x() - TP_B_PIXMAP_THICKNESS, b->get_y() - TP_B_PIXMAP_THICKNESS));
+	}
 }
 
 void Window::think() {
-	if (!is_minimal())
+	if (!is_minimal()) {
 		Panel::think();
+	}
 }
 
 /**
@@ -385,7 +469,7 @@ bool Window::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my) {
 		drag_start_mouse_x_ = get_x() + get_lborder() + mx;
 		drag_start_mouse_y_ = get_y() + get_tborder() + my;
 		grab_mouse(true);
-	} else if (btn == SDL_BUTTON_RIGHT) {
+	} else if (btn == SDL_BUTTON_RIGHT && !pinned_) {
 		play_click();
 		die();
 	}
@@ -419,11 +503,13 @@ bool Window::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
 		case SDLK_ESCAPE: {
-			die();
-			Panel* ch = get_next_sibling();
-			if (ch != nullptr)
-				ch->focus();
-			return true;
+			if (!pinned_) {
+				die();
+				if (Panel* ch = get_next_sibling()) {
+					ch->focus();
+				}
+				return true;
+			}
 		}
 		default:
 			break;
@@ -453,6 +539,7 @@ void Window::restore() {
 	update_desired_size();
 	move_inside_parent();
 	set_handle_keypresses(true);
+	update_toolbar_buttons();
 }
 void Window::minimize() {
 	assert(!is_minimal_);
@@ -469,6 +556,7 @@ void Window::minimize() {
 	set_size(get_w(), TP_B_PIXMAP_THICKNESS);
 	set_pos(Vector2i(x, y));  // If on border, this feels more natural
 	set_handle_keypresses(false);
+	update_toolbar_buttons();
 }
 
 /**
@@ -619,5 +707,38 @@ bool Window::handle_mousemove(const uint8_t, int32_t mx, int32_t my, int32_t, in
 		set_pos(Vector2i(new_left, new_top));
 	}
 	return true;
+}
+
+void Window::on_resolution_changed_note(const GraphicResolutionChanged& note) {
+	const int old_center_x = note.old_width / 2;
+	const int old_center_y = note.old_height / 2;
+	constexpr int kEdgeTolerance = 50;
+	constexpr int kCenterTolerance = 10;
+	if (std::abs(get_w() - note.old_width) < kEdgeTolerance &&
+	    std::abs(get_h() - note.old_height) < kEdgeTolerance) {
+		// The window is sort-of fullscreen, e.g. help. So, we resize it.
+		set_size(note.new_width, note.new_height);
+		center_to_parent();
+		layout();
+	} else {
+		// Adjust x position
+		if (std::abs(old_center_x - get_x() - get_w() / 2) < kCenterTolerance) {
+			// The window was centered horizontally. Keep it that way.
+			set_pos(Vector2i((note.new_width - get_w()) / 2, get_y()));
+		} else if (get_x() + get_w() / 2 > old_center_x) {
+			// The window was in the right half of the screen. Shift to maintain distance to right edge
+			// of the screen.
+			set_pos(Vector2i(note.new_width - note.old_width + get_x(), get_y()));
+		}
+		// Adjust y position
+		if (std::abs(old_center_y - get_y() - get_h() / 2) < kCenterTolerance) {
+			// The window was centered vertically. Keep it that way.
+			set_pos(Vector2i(get_x(), (note.new_height - get_h()) / 2));
+		} else if (get_y() + get_h() / 2 > old_center_y) {
+			// The window was in the bottom half of the screen. Shift to maintain distance to bottom
+			// edge of the screen.
+			set_pos(Vector2i(get_x(), note.new_height - note.old_height + get_y()));
+		}
+	}
 }
 }  // namespace UI

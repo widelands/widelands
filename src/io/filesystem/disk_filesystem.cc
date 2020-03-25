@@ -19,17 +19,21 @@
 
 #include "io/filesystem/disk_filesystem.h"
 
-#include <cassert>
 #include <cerrno>
+#ifdef _WIN32
+#ifdef _MSC_VER
+#include <cstdio>
+#endif
+#endif
+#include <cstring>
 
-#include <boost/algorithm/string/replace.hpp>
 #include <sys/stat.h>
 #ifdef _WIN32
+#include <boost/algorithm/string.hpp>
 #include <dos.h>
 #include <windows.h>
 #ifdef _MSC_VER
 #include <direct.h>
-#include <io.h>
 #define S_ISDIR(x) ((x & _S_IFDIR) ? 1 : 0)
 #endif
 #else  // not _WIN32
@@ -161,7 +165,7 @@ bool RealFSImpl::file_exists(const std::string& path) const {
  * Also returns false if the pathname is invalid (obviously, because the file
  * \e can't exist then)
  */
-bool RealFSImpl::is_directory(const std::string& path) {
+bool RealFSImpl::is_directory(const std::string& path) const {
 	return FileSystemPath(canonicalize_name(path)).is_directory_;
 }
 
@@ -437,9 +441,8 @@ void RealFSImpl::fs_rename(const std::string& old_name, const std::string& new_n
 	const std::string fullname1 = canonicalize_name(old_name);
 	const std::string fullname2 = canonicalize_name(new_name);
 	if (rename(fullname1.c_str(), fullname2.c_str()) != 0)
-		throw FileError(
-		   "RealFSImpl::fs_rename", fullname1,
-		   std::string("unable to rename file to ") + fullname2 + ", " + strerror(errno));
+		throw FileError("RealFSImpl::fs_rename", fullname1, std::string("unable to rename file to ") +
+		                                                       fullname2 + ", " + strerror(errno));
 }
 
 /*****************************************************************************

@@ -20,13 +20,7 @@
 #ifndef WL_GRAPHIC_ANIMATION_SPRITESHEET_ANIMATION_H
 #define WL_GRAPHIC_ANIMATION_SPRITESHEET_ANIMATION_H
 
-#include <map>
-#include <memory>
-#include <string>
-#include <vector>
-
 #include "base/rect.h"
-#include "base/vector.h"
 #include "graphic/animation/animation.h"
 #include "graphic/color.h"
 #include "graphic/image.h"
@@ -39,7 +33,9 @@
 class SpriteSheetAnimation : public Animation {
 public:
 	~SpriteSheetAnimation() override = default;
-	explicit SpriteSheetAnimation(const LuaTable& table, const std::string& basename);
+	explicit SpriteSheetAnimation(const LuaTable& table,
+	                              const std::string& basename,
+	                              const std::string& animation_directory);
 
 	const Image* representative_image(const RGBColor* clr) const override;
 

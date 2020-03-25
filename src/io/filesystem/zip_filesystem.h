@@ -20,11 +20,8 @@
 #ifndef WL_IO_FILESYSTEM_ZIP_FILESYSTEM_H
 #define WL_IO_FILESYSTEM_ZIP_FILESYSTEM_H
 
-#include <cstring>
 #include <memory>
-#include <string>
 
-#include "base/macros.h"
 #include "io/filesystem/filesystem.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
@@ -40,7 +37,7 @@ public:
 
 	FilenameSet list_directory(const std::string& path) const override;
 
-	bool is_directory(const std::string& path) override;
+	bool is_directory(const std::string& path) const override;
 	bool file_exists(const std::string& path) const override;
 
 	void* load(const std::string& fname, size_t& length) override;

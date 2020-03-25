@@ -20,7 +20,6 @@
 #ifndef WL_IO_FILEREAD_H
 #define WL_IO_FILEREAD_H
 
-#include <cassert>
 #include <limits>
 
 #ifndef _WIN32
@@ -28,7 +27,6 @@
 #endif
 
 #include "io/filesystem/filesystem.h"
-#include "io/machdep.h"
 #include "io/streamread.h"
 
 /// Can be used to read a file. It works quite naively by reading the entire

@@ -21,13 +21,9 @@
 #define WL_UI_BASIC_FULLSCREEN_WINDOW_H
 
 #include <memory>
-#include <string>
-#include <unordered_map>
-#include <vector>
 
 #include "graphic/align.h"
 #include "graphic/graphic.h"
-#include "notifications/notifications.h"
 #include "ui_basic/panel.h"
 
 namespace UI {

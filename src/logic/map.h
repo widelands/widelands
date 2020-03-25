@@ -20,17 +20,13 @@
 #ifndef WL_LOGIC_MAP_H
 #define WL_LOGIC_MAP_H
 
-#include <cstring>
-#include <map>
 #include <memory>
-#include <set>
-#include <string>
-#include <vector>
 
 #include "base/i18n.h"
 #include "economy/itransport_cost_calculator.h"
 #include "logic/field.h"
 #include "logic/map_objects/findimmovable.h"
+#include "logic/map_objects/tribes/wareworker.h"
 #include "logic/map_objects/walkingdir.h"
 #include "logic/map_revision.h"
 #include "logic/objective.h"
@@ -38,17 +34,13 @@
 #include "logic/widelands_geometry.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
-#include "random/random.h"
 
 class FileSystem;
-class Image;
 struct S2MapLoader;
 
 namespace Widelands {
 
 class MapLoader;
-class Objective;
-struct BaseImmovable;
 struct MapGenerator;
 struct PathfieldManager;
 class World;

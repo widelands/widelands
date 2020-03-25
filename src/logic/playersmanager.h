@@ -20,8 +20,7 @@
 #ifndef WL_LOGIC_PLAYERSMANAGER_H
 #define WL_LOGIC_PLAYERSMANAGER_H
 
-#include <string>
-#include <vector>
+#include <cassert>
 
 #include "graphic/playercolor.h"
 #include "logic/player_end_result.h"

@@ -20,8 +20,6 @@
 #ifndef WL_MAP_IO_MAP_OBJECT_PACKET_H
 #define WL_MAP_IO_MAP_OBJECT_PACKET_H
 
-#include <set>
-
 #include "logic/map_objects/map_object.h"
 
 class FileSystem;

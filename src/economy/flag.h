@@ -21,8 +21,6 @@
 #define WL_ECONOMY_FLAG_H
 
 #include <deque>
-#include <list>
-#include <vector>
 
 #include "base/macros.h"
 #include "economy/routing_node.h"
@@ -31,7 +29,6 @@
 #include "logic/map_objects/walkingdir.h"
 
 namespace Widelands {
-class Building;
 class Request;
 struct RoadBase;
 struct Road;

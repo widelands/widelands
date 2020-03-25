@@ -21,8 +21,6 @@
 #define WL_UI_BASIC_FILEVIEW_PANEL_H
 
 #include <memory>
-#include <string>
-#include <vector>
 
 #include "ui_basic/box.h"
 #include "ui_basic/multilinetextarea.h"

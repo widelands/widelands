@@ -19,14 +19,10 @@
 
 #include "editor/ui_menus/tool_resize_options_menu.h"
 
-#include <cstdio>
-#include <string>
-
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/resize_tool.h"
-#include "graphic/graphic.h"
 #include "logic/map.h"
 
 inline EditorInteractive& EditorToolResizeOptionsMenu::eia() {

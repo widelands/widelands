@@ -19,12 +19,7 @@
 
 #include "logic/map_objects/tribes/dismantlesite.h"
 
-#include <cstdio>
-
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
-#include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/wares_queue.h"
 #include "graphic/rendertarget.h"

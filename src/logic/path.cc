@@ -19,8 +19,6 @@
 
 #include "logic/path.h"
 
-#include <algorithm>
-
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game_data_error.h"

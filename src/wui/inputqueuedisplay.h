@@ -20,10 +20,6 @@
 #ifndef WL_WUI_INPUTQUEUEDISPLAY_H
 #define WL_WUI_INPUTQUEUEDISPLAY_H
 
-#include <cstdlib>
-
-#include <stdint.h>
-
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "ui_basic/button.h"
@@ -31,11 +27,6 @@
 #include "ui_basic/radiobutton.h"
 
 class InteractiveGameBase;
-
-namespace UI {
-class Panel;
-struct Radiogroup;
-}  // namespace UI
 
 namespace Widelands {
 class Building;
@@ -60,7 +51,8 @@ public:
 	                  InteractiveGameBase& igb,
 	                  Widelands::Building& building,
 	                  const Widelands::InputQueue& queue,
-	                  bool = false);
+	                  bool no_capacity_buttons = false,
+	                  bool no_priority_buttons = false);
 	// Constructor for fake queues (e.g. in ConstructionSite settings)
 	InputQueueDisplay(UI::Panel* parent,
 	                  int32_t x,
@@ -69,7 +61,8 @@ public:
 	                  Widelands::ConstructionSite&,
 	                  Widelands::WareWorker,
 	                  Widelands::DescriptionIndex,
-	                  bool = false);
+	                  bool no_capacity_buttons = false,
+	                  bool no_priority_buttons = false);
 	~InputQueueDisplay() override;
 
 	void think() override;
@@ -91,7 +84,8 @@ private:
 	uint32_t cache_size_;
 	uint32_t cache_max_fill_;
 	uint32_t total_height_;
-	bool show_only_;
+	bool no_capacity_buttons_;
+	bool no_priority_buttons_;
 
 	virtual void max_size_changed();
 	void update_priority_buttons();

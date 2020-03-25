@@ -20,9 +20,10 @@
 #include "ui_fsmenu/multiplayer.h"
 
 #include "base/i18n.h"
+#include "base/random.h"
 #include "graphic/graphic.h"
 #include "network/internet_gaming.h"
-#include "random/random.h"
+#include "network/internet_gaming_protocol.h"
 #include "ui_basic/messagebox.h"
 #include "wlapplication_options.h"
 #include "wui/login_box.h"

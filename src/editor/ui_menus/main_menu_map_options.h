@@ -20,10 +20,10 @@
 #ifndef WL_EDITOR_UI_MENUS_MAIN_MENU_MAP_OPTIONS_H
 #define WL_EDITOR_UI_MENUS_MAIN_MENU_MAP_OPTIONS_H
 
-#include "logic/note_map_options.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilineeditbox.h"
@@ -64,11 +64,14 @@ private:
 	UI::Textarea size_;
 	UI::MultilineEditbox* descr_;
 	UI::MultilineEditbox* hint_;
-	UI::Listselect<std::string> teams_list_;
 
 	// Tag, Checkbox
 	std::map<std::string, UI::Checkbox*> tags_checkboxes_;
+	UI::Dropdown<std::string> balancing_dropdown_;
+
+	UI::Listselect<std::string> teams_list_;
 	UI::SpinBox* waterway_length_box_;
+
 	UI::UniqueWindow::Registry& registry_;
 };
 

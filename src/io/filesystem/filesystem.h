@@ -20,16 +20,9 @@
 #ifndef WL_IO_FILESYSTEM_FILESYSTEM_H
 #define WL_IO_FILESYSTEM_FILESYSTEM_H
 
-#include <cstring>
-#include <memory>
 #include <set>
-#include <stdexcept>
 #include <string>
 #include <vector>
-
-#include <stdint.h>
-
-#include "io/filesystem/filesystem_exceptions.h"
 
 using FilenameSet = std::set<std::string>;
 
@@ -53,7 +46,7 @@ public:
 	virtual FilenameSet list_directory(const std::string& directory) const = 0;
 
 	virtual bool is_writable() const = 0;
-	virtual bool is_directory(const std::string& path) = 0;
+	virtual bool is_directory(const std::string& path) const = 0;
 	virtual bool file_exists(const std::string& path) const = 0;
 
 	virtual void* load(const std::string& fname, size_t& length) = 0;

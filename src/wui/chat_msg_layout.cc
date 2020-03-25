@@ -20,7 +20,6 @@
 #include "wui/chat_msg_layout.h"
 
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 
 #include "graphic/color.h"
 #include "graphic/playercolor.h"

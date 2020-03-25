@@ -20,9 +20,6 @@
 #ifndef WL_LOGIC_AI_DNA_HANDLER_H
 #define WL_LOGIC_AI_DNA_HANDLER_H
 
-#include <stdint.h>
-#include <vector>
-
 #include "logic/player.h"
 
 namespace Widelands {

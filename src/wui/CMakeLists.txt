@@ -22,7 +22,6 @@ wl_library(wui_chat_ui
   DEPENDS
     base_exceptions
     base_i18n
-    base_macros
     chat
     graphic
     graphic_color
@@ -54,16 +53,21 @@ wl_library(wui_economy_options
     wui_waresdisplay
 )
 
+wl_library(wui_mapview_pixelconstants
+  SRCS
+    mapviewpixelconstants.h
+    mapviewpixelconstants.cc
+)
 
 wl_library(wui_mapview_pixelfunctions
   SRCS
-    mapviewpixelconstants.h
     mapviewpixelfunctions.cc
     mapviewpixelfunctions.h
   DEPENDS
     base_geometry
     logic_map
     logic_widelands_geometry
+    wui_mapview_pixelconstants
 )
 
 wl_library(wui_common_suggested_teams
@@ -84,14 +88,14 @@ wl_library(wui_common_gamedetails
     gamedetails.h
     load_or_save_game.cc
     load_or_save_game.h
+    savegametable.cc
+    savegametable.h
   DEPENDS
     base_i18n
     base_log
     base_time_string
-    helper
     game_io
     graphic
-    graphic_fonthandler
     graphic_image_io
     graphic_surface
     graphic_text_layout
@@ -122,10 +126,8 @@ wl_library(wui_common_mapdetails
     graphic
     graphic_text_layout
     io_filesystem
-    logic_game_controller
     logic_game_settings
     logic_map
-    map_io_map_loader
     ui_basic
     wui_common_suggested_teams
 )
@@ -135,7 +137,6 @@ wl_library(wui_quicknavigation
     quicknavigation.cc
     quicknavigation.h
   DEPENDS
-    base_geometry
     wui_mapview
 )
 
@@ -151,6 +152,7 @@ wl_library(wui_mapview
     graphic_fields_to_draw
     graphic_game_renderer
     logic_map
+    logic_map_objects
     logic_widelands_geometry
     ui_basic
     widelands_ball_of_mud
@@ -170,6 +172,22 @@ wl_library(wui_waresdisplay
     graphic_text_layout
     logic
     logic_map_objects
+    ui_basic
+)
+
+
+wl_library(wui_game_tips
+  SRCS
+    game_tips.cc
+    game_tips.h
+  USES_SDL2
+  DEPENDS
+    base_i18n
+    graphic
+    graphic_fonthandler
+    graphic_text_layout
+    scripting_lua_table
+    scripting_lua_interface
     ui_basic
 )
 
@@ -210,8 +228,6 @@ wl_library(wui
     game_options_sound_menu.h
     game_summary.cc
     game_summary.h
-    game_tips.cc
-    game_tips.h
     general_statistics_menu.cc
     general_statistics_menu.h
     helpwindow.cc
@@ -283,16 +299,14 @@ wl_library(wui
     economy
     game_io
     graphic
-    graphic_align
     graphic_color
     graphic_fonthandler
+    graphic_game_renderer
     graphic_minimap_renderer
     graphic_playercolor
     graphic_surface
-    graphic_text
     graphic_text_layout
     graphic_toolbar_imageset
-    io_fileread
     io_filesystem
     io_profile
     logic
@@ -307,6 +321,7 @@ wl_library(wui
     logic_objectives
     logic_tribe_basic_info
     logic_widelands_geometry
+    map_io_map_loader
     network
     note_sound
     notifications

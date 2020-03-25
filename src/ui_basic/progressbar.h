@@ -20,7 +20,7 @@
 #ifndef WL_UI_BASIC_PROGRESSBAR_H
 #define WL_UI_BASIC_PROGRESSBAR_H
 
-#include "graphic/style_manager.h"
+#include "graphic/styles/progress_bar_style.h"
 #include "ui_basic/panel.h"
 
 namespace UI {

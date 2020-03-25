@@ -23,8 +23,6 @@
 #include <deque>
 #include <memory>
 
-#include <boost/signals2.hpp>
-
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "notifications/note_ids.h"
@@ -141,6 +139,14 @@ public:
 	void set_size(int nw, int nh) override;
 	void set_desired_size(int w, int h) override;
 
+	/// Expand display button to make enough room for each entry's text. Call this before adding any
+	/// entries.
+	void set_autoexpand_display_button();
+
+	void notify_list_deleted() {
+		list_ = nullptr;
+	}
+
 protected:
 	/// Add an element to the list
 	/// \param name         the display name of the entry
@@ -172,6 +178,7 @@ protected:
 	void think() override;
 
 private:
+	static void layout_if_alive(int);
 	void layout() override;
 
 	/// Updates the buttons
@@ -213,8 +220,8 @@ private:
 	uint32_t current_selection_;
 	DropdownType type_;
 	bool is_enabled_;
-
-	static void layout_if_alive(int);
+	ButtonStyle button_style_;
+	bool autoexpand_display_button_;
 };
 
 /// A dropdown menu that lets the user select a value of the datatype 'Entry'.

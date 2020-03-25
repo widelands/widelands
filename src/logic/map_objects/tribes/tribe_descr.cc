@@ -19,15 +19,9 @@
 
 #include "logic/map_objects/tribes/tribe_descr.h"
 
-#include <algorithm>
-#include <iostream>
 #include <memory>
 
-#include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
-#include "base/macros.h"
 #include "base/wexception.h"
 #include "graphic/animation/animation_manager.h"
 #include "graphic/graphic.h"
@@ -46,7 +40,6 @@
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
-#include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {
@@ -68,7 +61,7 @@ TribeDescr::TribeDescr(const LuaTable& table,
 
 		std::unique_ptr<LuaTable> items_table = table.get_table("roads");
 		const auto load_roads = [&items_table](
-		                           const std::string& road_type, std::vector<std::string>* images) {
+		   const std::string& road_type, std::vector<std::string>* images) {
 			std::vector<std::string> roads =
 			   items_table->get_table(road_type)->array_entries<std::string>();
 			for (const std::string& filename : roads) {
@@ -87,48 +80,56 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		load_roads("busy", &busy_road_paths_);
 		load_roads("waterway", &waterway_paths_);
 
-		const auto load_bridge_if_present = [this](const LuaTable& animations_table,
-		                                           Animation::Type animation_type, std::string s_dir,
-		                                           std::string s_type, uint32_t* id) {
-			if (animations_table.has_key("bridge_" + s_type + "_" + s_dir)) {
+		const auto load_bridge_if_present = [this](
+		   const LuaTable& animations_table, const std::string& animation_directory,
+		   Animation::Type animation_type, std::string s_dir, std::string s_type, uint32_t* id) {
+			const std::string directional_name("bridge_" + s_type + "_" + s_dir);
+			if (animations_table.has_key(directional_name)) {
 				std::unique_ptr<LuaTable> animation_table =
-				   animations_table.get_table("bridge_" + s_type + "_" + s_dir);
-				*id = g_gr->animations().load(name_ + std::string("_bridge_" + s_type + "_" + s_dir),
-				                              *animation_table, animation_table->get_string("basename"),
+				   animations_table.get_table(directional_name);
+				*id = g_gr->animations().load(name_ + std::string("_") + directional_name,
+				                              *animation_table, directional_name, animation_directory,
 				                              animation_type);
 			}
 		};
 		// Frontier and flag animations can be a mix of file and spritesheet animations
-		const auto load_animations = [this, load_bridge_if_present](const LuaTable& animations_table,
-		                                                            Animation::Type animation_type) {
+		const auto load_animations = [this, load_bridge_if_present](
+		   const LuaTable& animations_table, const std::string& animation_directory,
+		   Animation::Type animation_type) {
 			if (animations_table.has_key("frontier")) {
 				std::unique_ptr<LuaTable> animation_table = animations_table.get_table("frontier");
 				frontier_animation_id_ =
 				   g_gr->animations().load(name_ + std::string("_frontier"), *animation_table,
-				                           animation_table->get_string("basename"), animation_type);
+				                           "frontier", animation_directory, animation_type);
 			}
 			if (animations_table.has_key("flag")) {
 				std::unique_ptr<LuaTable> animation_table = animations_table.get_table("flag");
 				flag_animation_id_ =
-				   g_gr->animations().load(name_ + std::string("_flag"), *animation_table,
-				                           animation_table->get_string("basename"), animation_type);
+				   g_gr->animations().load(name_ + std::string("_flag"), *animation_table, "flag",
+				                           animation_directory, animation_type);
 			}
+			load_bridge_if_present(animations_table, animation_directory, animation_type, "e",
+			                       "normal", &bridges_normal_.e);
+			load_bridge_if_present(animations_table, animation_directory, animation_type, "se",
+			                       "normal", &bridges_normal_.se);
+			load_bridge_if_present(animations_table, animation_directory, animation_type, "sw",
+			                       "normal", &bridges_normal_.sw);
 			load_bridge_if_present(
-			   animations_table, animation_type, "e", "normal", &bridges_normal_.e);
+			   animations_table, animation_directory, animation_type, "e", "busy", &bridges_busy_.e);
 			load_bridge_if_present(
-			   animations_table, animation_type, "se", "normal", &bridges_normal_.se);
+			   animations_table, animation_directory, animation_type, "se", "busy", &bridges_busy_.se);
 			load_bridge_if_present(
-			   animations_table, animation_type, "sw", "normal", &bridges_normal_.sw);
-			load_bridge_if_present(animations_table, animation_type, "e", "busy", &bridges_busy_.e);
-			load_bridge_if_present(animations_table, animation_type, "se", "busy", &bridges_busy_.se);
-			load_bridge_if_present(animations_table, animation_type, "sw", "busy", &bridges_busy_.sw);
+			   animations_table, animation_directory, animation_type, "sw", "busy", &bridges_busy_.sw);
 		};
 
+		std::string animation_directory = table.get_string("animation_directory");
 		if (table.has_key("animations")) {
-			load_animations(*table.get_table("animations"), Animation::Type::kFiles);
+			load_animations(
+			   *table.get_table("animations"), animation_directory, Animation::Type::kFiles);
 		}
 		if (table.has_key("spritesheets")) {
-			load_animations(*table.get_table("spritesheets"), Animation::Type::kSpritesheet);
+			load_animations(
+			   *table.get_table("spritesheets"), animation_directory, Animation::Type::kSpritesheet);
 		}
 
 		items_table = table.get_table("wares_order");
@@ -218,11 +219,6 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		}
 
 		port_ = add_special_building(table.get_string("port"));
-
-		ironore_ = add_special_ware(table.get_string("ironore"));
-		rawlog_ = add_special_ware(table.get_string("rawlog"));
-		refinedlog_ = add_special_ware(table.get_string("refinedlog"));
-		granite_ = add_special_ware(table.get_string("granite"));
 
 		if (table.has_key<std::string>("toolbar")) {
 			toolbar_image_set_.reset(new ToolbarImageset(*table.get_table("toolbar")));
@@ -352,22 +348,6 @@ DescriptionIndex TribeDescr::port() const {
 DescriptionIndex TribeDescr::ferry() const {
 	assert(tribes_.worker_exists(ferry_));
 	return ferry_;
-}
-DescriptionIndex TribeDescr::ironore() const {
-	assert(tribes_.ware_exists(ironore_));
-	return ironore_;
-}
-DescriptionIndex TribeDescr::rawlog() const {
-	assert(tribes_.ware_exists(rawlog_));
-	return rawlog_;
-}
-DescriptionIndex TribeDescr::refinedlog() const {
-	assert(tribes_.ware_exists(refinedlog_));
-	return refinedlog_;
-}
-DescriptionIndex TribeDescr::granite() const {
-	assert(tribes_.ware_exists(granite_));
-	return granite_;
 }
 
 const std::vector<DescriptionIndex>& TribeDescr::trainingsites() const {

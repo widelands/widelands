@@ -38,10 +38,9 @@ int32_t EditorSetHeightTool::handle_click_impl(const Widelands::NodeAndTriangle<
 			args->original_heights.push_back(mr.location().field->get_height());
 		while (mr.advance(*map));
 	}
-	return map->set_height(
-	   eia.egbase(),
-	   Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius),
-	   args->interval);
+	return map->set_height(eia.egbase(), Widelands::Area<Widelands::FCoords>(
+	                                        map->get_fcoords(center.node), args->sel_radius),
+	                       args->interval);
 }
 
 int32_t

@@ -20,12 +20,8 @@
 #ifndef WL_IO_STREAMREAD_H
 #define WL_IO_STREAMREAD_H
 
-#include <cstring>
-#include <string>
-
 #include "base/macros.h"
 #include "base/wexception.h"
-#include "io/machdep.h"
 
 /**
  * Abstract base class for stream-like data sources.

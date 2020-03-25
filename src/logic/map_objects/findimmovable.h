@@ -20,15 +20,12 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_FINDIMMOVABLE_H
 #define WL_LOGIC_MAP_OBJECTS_FINDIMMOVABLE_H
 
-#include <stdint.h>
-
 #include "logic/map_objects/map_object.h"
 
 namespace Widelands {
 
 struct BaseImmovable;
 class ImmovableDescr;
-class Player;
 
 struct FindImmovable {
 private:

@@ -27,7 +27,6 @@
 #include "logic/player_end_result.h"
 #include "network/nethost_interface.h"
 #include "network/network.h"
-#include "ui_basic/unique_window.h"
 
 struct ChatMessage;
 struct GameHostImpl;
@@ -65,7 +64,7 @@ struct GameHost : public GameController {
 	// End GameController interface
 
 	// Pregame-related stuff
-	const GameSettings& settings();
+	const GameSettings& settings() const;
 	/** return true in case all conditions for the game start are met */
 	bool can_launch();
 	void set_scenario(bool);

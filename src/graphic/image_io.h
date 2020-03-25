@@ -21,7 +21,6 @@
 #define WL_GRAPHIC_IMAGE_IO_H
 
 #include <memory>
-#include <string>
 
 #include "base/wexception.h"
 

@@ -20,8 +20,6 @@
 #ifndef WL_LOGIC_QUEUE_CMD_FACTORY_H
 #define WL_LOGIC_QUEUE_CMD_FACTORY_H
 
-#include <stdint.h>
-
 #include "logic/queue_cmd_ids.h"
 
 namespace Widelands {

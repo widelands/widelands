@@ -18,7 +18,7 @@
 
 #include "ui_basic/slider.h"
 
-#include <cmath>
+#include <memory>
 
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"

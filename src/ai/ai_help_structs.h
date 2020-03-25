@@ -20,10 +20,7 @@
 #ifndef WL_AI_AI_HELP_STRUCTS_H
 #define WL_AI_AI_HELP_STRUCTS_H
 
-#include <algorithm>
-#include <list>
-#include <queue>
-#include <unordered_set>
+#include <bitset>
 
 #include "ai/ai_hints.h"
 #include "economy/flag.h"
@@ -77,8 +74,6 @@ enum class BuildingAttribute : uint8_t {
 	kBuildingMatProducer,
 	kUpgradeSubstitutes,
 	kUpgradeExtends,
-	kLogRefiner,
-	kIronMine,
 	// TODO(Nordfriese): Someone should update the AI code to handle buildings that need waterways
 	// enabled
 	kNeedsSeafaring,
@@ -444,7 +439,7 @@ struct BuildingObserver {
 	};
 
 	int32_t total_count() const;
-	Widelands::AiModeBuildings aimode_limit_status();
+	Widelands::AiModeBuildings aimode_limit_status() const;
 	bool buildable(Widelands::Player& p);
 
 	// Convenience functions for is_what
@@ -567,8 +562,7 @@ struct ShipObserver {
 };
 
 struct WareObserver {
-	uint8_t producers;
-	uint8_t consumers;
+	bool refined_build_material = false;
 	uint8_t preciousness;
 };
 

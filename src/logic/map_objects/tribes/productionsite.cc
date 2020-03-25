@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "base/wexception.h"
@@ -46,8 +44,6 @@
 namespace Widelands {
 
 namespace {
-
-constexpr size_t STATISTICS_VECTOR_LENGTH = 20;
 
 // Parses the descriptions of the working positions from 'items_table' and
 // fills in 'working_positions'. Throws an error if the table contains invalid
@@ -287,14 +283,13 @@ ProductionSite::ProductionSite(const ProductionSiteDescr& ps_descr)
      program_timer_(false),
      program_time_(0),
      post_timer_(50),
-     statistics_(STATISTICS_VECTOR_LENGTH, false),
      last_stat_percent_(0),
-     crude_percent_(0),
+     actual_percent_(0),
      last_program_end_time(0),
      is_stopped_(false),
      default_anim_("idle"),
      main_worker_(-1) {
-	calc_statistics();
+	format_statistics_string();
 }
 
 ProductionSite::~ProductionSite() {
@@ -304,7 +299,7 @@ ProductionSite::~ProductionSite() {
 
 void ProductionSite::load_finish(EditorGameBase& egbase) {
 	Building::load_finish(egbase);
-	calc_statistics();
+	format_statistics_string();
 }
 
 /**
@@ -416,48 +411,41 @@ InputQueue& ProductionSite::inputqueue(DescriptionIndex const wi, WareWorker con
 			return *ip_queue;
 		}
 	}
-	throw wexception("%s (%u) has no InputQueue for %u", descr().name().c_str(), serial(), wi);
+	if (!(owner().tribe().has_ware(wi) || owner().tribe().has_worker(wi))) {
+		throw wexception("%s (%u) has no InputQueue for unknown %s %u", descr().name().c_str(),
+		                 serial(), type == WareWorker::wwWARE ? "ware" : "worker", wi);
+	}
+	throw wexception("%s (%u) has no InputQueue for %s %u: %s", descr().name().c_str(), serial(),
+	                 type == WareWorker::wwWARE ? "ware" : "worker", wi,
+	                 type == WareWorker::wwWARE ?
+	                    owner().tribe().get_ware_descr(wi)->name().c_str() :
+	                    owner().tribe().get_worker_descr(wi)->name().c_str());
 }
 
 /**
  * Calculate statistic.
  */
-void ProductionSite::calc_statistics() {
-	// TODO(sirver): this method does too much: it calculates statistics for the
-	// last few cycles, but it also formats them as a string and persists them
-	// into a string for reuse when the class is asked for the statistics
-	// string. However this string should only then be constructed.
-	uint8_t pos;
-	uint8_t ok = 0;
-	uint8_t lastOk = 0;
+void ProductionSite::format_statistics_string() {
+	// TODO(sirver): this method does too much: it formats the actual statistics
+	// as a string and persists them into a string for reuse when the class is
+	// asked for the statistics string. However this string should only then be constructed.
 
-	for (pos = 0; pos < STATISTICS_VECTOR_LENGTH; ++pos) {
-		if (statistics_[pos]) {
-			++ok;
-			if (pos >= STATISTICS_VECTOR_LENGTH / 2)
-				++lastOk;
-		}
-	}
 	// boost::format would treat uint8_t as char
-	const unsigned int percOk = (ok * 100) / STATISTICS_VECTOR_LENGTH;
-	last_stat_percent_ = percOk;
-
-	const unsigned int lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
-
+	const unsigned int percent = std::min(get_actual_statistics() * 100 / 98, 100);
 	const std::string perc_str = g_gr->styles().color_tag(
-	   (boost::format(_("%i%%")) % percOk).str(),
-	   (percOk < 33) ? g_gr->styles().building_statistics_style().low_color() :
-	                   (percOk < 66) ? g_gr->styles().building_statistics_style().medium_color() :
-	                                   g_gr->styles().building_statistics_style().high_color());
+	   (boost::format(_("%i%%")) % percent).str(),
+	   (percent < 33) ? g_gr->styles().building_statistics_style().low_color() : (percent < 66) ?
+	                    g_gr->styles().building_statistics_style().medium_color() :
+	                    g_gr->styles().building_statistics_style().high_color());
 
-	if (0 < percOk && percOk < 100) {
+	if (0 < percent && percent < 100) {
 		RGBColor color = g_gr->styles().building_statistics_style().high_color();
 		std::string trend;
-		if (lastPercOk > percOk) {
+		if (last_stat_percent_ < actual_percent_) {
 			trend_ = Trend::kRising;
 			color = g_gr->styles().building_statistics_style().high_color();
 			trend = "+";
-		} else if (lastPercOk < percOk) {
+		} else if (last_stat_percent_ > actual_percent_) {
 			trend_ = Trend::kFalling;
 			color = g_gr->styles().building_statistics_style().low_color();
 			trend = "-";
@@ -473,6 +461,7 @@ void ProductionSite::calc_statistics() {
 	} else {
 		statistics_string_on_changed_statistics_ = perc_str;
 	}
+	last_stat_percent_ = actual_percent_;
 }
 
 /**
@@ -1002,22 +991,19 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 	switch (result) {
 	case ProgramResult::kFailed:
 		failed_skipped_programs_[program_name] = game.get_gametime();
-		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
-		statistics_.push_back(false);
-		calc_statistics();
-		update_crude_statistics(current_duration, false);
+		update_actual_statistics(current_duration, false);
+		format_statistics_string();
 		break;
 	case ProgramResult::kCompleted:
 		failed_skipped_programs_.erase(program_name);
-		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
-		statistics_.push_back(true);
 		train_workers(game);
-		update_crude_statistics(current_duration, true);
-		calc_statistics();
+		update_actual_statistics(current_duration, true);
+		format_statistics_string();
 		break;
 	case ProgramResult::kSkipped:
 		failed_skipped_programs_[program_name] = game.get_gametime();
-		update_crude_statistics(current_duration, false);
+		update_actual_statistics(current_duration, false);
+		format_statistics_string();
 		break;
 	case ProgramResult::kNone:
 		failed_skipped_programs_.erase(program_name);
@@ -1035,8 +1021,8 @@ void ProductionSite::train_workers(Game& game) {
 }
 
 void ProductionSite::notify_player(Game& game, uint8_t minutes, FailNotificationType type) {
-	if (last_stat_percent_ == 0 ||
-	    (last_stat_percent_ <= descr().out_of_resource_productivity_threshold() &&
+	if (get_actual_statistics() == 0 ||
+	    (get_actual_statistics() <= descr().out_of_resource_productivity_threshold() &&
 	     trend_ == Trend::kFalling)) {
 
 		if (type == FailNotificationType::kFull) {
@@ -1069,7 +1055,7 @@ void ProductionSite::unnotify_player() {
 }
 
 const BuildingSettings* ProductionSite::create_building_settings() const {
-	ProductionsiteSettings* settings = new ProductionsiteSettings(descr());
+	ProductionsiteSettings* settings = new ProductionsiteSettings(descr(), owner().tribe());
 	settings->stopped = is_stopped_;
 	for (auto& pair : settings->ware_queues) {
 		pair.second.priority = get_priority(wwWARE, pair.first, false);
@@ -1111,16 +1097,18 @@ void ProductionSite::set_default_anim(std::string anim) {
 	default_anim_ = anim;
 }
 
-void ProductionSite::update_crude_statistics(uint32_t duration, const bool produced) {
-	static const uint32_t duration_cap = 180 * 1000;  // This is highest allowed program duration
+constexpr uint32_t kStatsEntireDuration = 5 * 60 * 1000;  // statistic evaluation base
+constexpr uint32_t kStatsDurationCap = 180 * 1000;  // This is highest allowed program duration
+
+void ProductionSite::update_actual_statistics(uint32_t duration, const bool produced) {
 	// just for case something went very wrong...
-	static const uint32_t entire_duration = 10 * 60 * 1000;
-	if (duration > duration_cap) {
-		duration = duration_cap;
+	if (duration > kStatsDurationCap) {
+		duration = kStatsDurationCap;
 	}
-	const uint32_t past_duration = entire_duration - duration;
-	crude_percent_ = (crude_percent_ * past_duration + produced * duration * 1000) / entire_duration;
-	assert(crude_percent_ <= 1000);  // be sure we do not go above 100 %
+	const uint32_t past_duration = kStatsEntireDuration - duration;
+	actual_percent_ =
+	   (actual_percent_ * past_duration + produced * duration * 1000) / kStatsEntireDuration;
+	assert(actual_percent_ <= 1000);  // be sure we do not go above 100 %
 }
 
 }  // namespace Widelands

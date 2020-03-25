@@ -19,11 +19,8 @@
 
 #include "logic/map_objects/tribes/worker.h"
 
-#include <iterator>
 #include <memory>
 #include <tuple>
-
-#include <boost/format.hpp>
 
 #include "base/log.h"
 #include "base/macros.h"
@@ -36,7 +33,6 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
-#include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/cmd_incorporate.h"
@@ -113,7 +109,7 @@ bool Worker::run_mine(Game& game, State& state, const Action& action) {
 	Map* map = game.mutable_map();
 
 	// Make sure that the specified resource is available in this world
-	DescriptionIndex const res = game.world().get_resource(action.sparam1.c_str());
+	DescriptionIndex const res = game.world().resource_index(action.sparam1.c_str());
 	if (res == Widelands::INVALID_INDEX)
 		throw GameDataError(_("should mine resource %s, which does not exist in world; tribe "
 		                      "is not compatible with world"),
@@ -216,7 +212,7 @@ bool Worker::run_breed(Game& game, State& state, const Action& action) {
 	Map* map = game.mutable_map();
 
 	// Make sure that the specified resource is available in this world
-	DescriptionIndex const res = game.world().get_resource(action.sparam1.c_str());
+	DescriptionIndex const res = game.world().resource_index(action.sparam1.c_str());
 	if (res == Widelands::INVALID_INDEX)
 		throw GameDataError(_("should breed resource type %s, which does not exist in world; "
 		                      "tribe is not compatible with world"),
@@ -527,7 +523,7 @@ int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map,
 // fields, trees, rocks and such on triangles and keep the nodes
 // passable. See code structure issue #1096824.
 struct FindNodeSpace {
-	explicit FindNodeSpace(BaseImmovable* const ignoreimm) : ignoreimmovable(ignoreimm) {
+	explicit FindNodeSpace() {
 	}
 
 	bool accept(const EditorGameBase& egbase, const FCoords& coords) const {
@@ -537,16 +533,12 @@ struct FindNodeSpace {
 		for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 			FCoords const neighb = egbase.map().get_neighbour(coords, dir);
 
-			if (!(neighb.field->nodecaps() & MOVECAPS_WALK) &&
-			    neighb.field->get_immovable() != ignoreimmovable)
+			if (!(neighb.field->maxcaps() & MOVECAPS_WALK))
 				return false;
 		}
 
 		return true;
 	}
-
-private:
-	BaseImmovable* ignoreimmovable;
 };
 
 bool Worker::run_findspace(Game& game, State& state, const Action& action) {
@@ -561,17 +553,18 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 	FindNodeAnd functor;
 	functor.add(FindNodeSize(static_cast<FindNodeSize::Size>(action.iparam2)));
 	if (action.sparam1.size()) {
-		if (action.iparam4)
-			functor.add(FindNodeResourceBreedable(world.get_resource(action.sparam1.c_str())));
-		else
-			functor.add(FindNodeResource(world.get_resource(action.sparam1.c_str())));
+		if (action.iparam4) {
+			functor.add(FindNodeResourceBreedable(world.resource_index(action.sparam1.c_str())));
+		} else {
+			functor.add(FindNodeResource(world.resource_index(action.sparam1.c_str())));
+		}
 	}
 
 	if (action.iparam5 > -1)
 		functor.add(FindNodeImmovableAttribute(action.iparam5), true);
 
 	if (action.iparam3)
-		functor.add(FindNodeSpace(get_location(game)));
+		functor.add(FindNodeSpace());
 
 	if (action.iparam7)
 		functor.add(FindNodeTerraform());
@@ -588,12 +581,12 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 			FindNodeAnd functorAnyFull;
 			functorAnyFull.add(FindNodeSize(static_cast<FindNodeSize::Size>(action.iparam2)));
 			functorAnyFull.add(FindNodeResourceBreedable(
-			   world.get_resource(action.sparam1.c_str()), AnimalBreedable::kAnimalFull));
+			   world.resource_index(action.sparam1.c_str()), AnimalBreedable::kAnimalFull));
 			if (action.iparam5 > -1)
 				functorAnyFull.add(FindNodeImmovableAttribute(action.iparam5), true);
 
 			if (action.iparam3)
-				functorAnyFull.add(FindNodeSpace(get_location(game)));
+				functorAnyFull.add(FindNodeSpace());
 
 			// If there are fields full of fish, we change the type of notification
 			if (map.find_reachable_fields(game, area, &list, cstep, functorAnyFull)) {
@@ -813,9 +806,8 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	// Checks if the 'immovable_description' has a terrain_affinity, if so use it. Otherwise assume
 	// it to be 1 (perfect fit). Adds it to the best_suited_immovables_index.
 	const auto test_suitability = [&best_suited_immovables_index, &fpos, &map, &game](
-	                                 const uint32_t attribute_id, const DescriptionIndex index,
-	                                 const ImmovableDescr& immovable_description,
-	                                 MapObjectDescr::OwnerType owner_type) {
+	   const uint32_t attribute_id, const DescriptionIndex index,
+	   const ImmovableDescr& immovable_description, MapObjectDescr::OwnerType owner_type) {
 		if (!immovable_description.has_attribute(attribute_id)) {
 			return;
 		}
@@ -1049,11 +1041,10 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
 			get_owner()->add_message_with_timeout(
-			   game,
-			   std::unique_ptr<Message>(new Message(Message::Type::kGeologists, game.get_gametime(),
-			                                        rdescr->descname(), rdescr->representative_image(),
-			                                        ri.descr().descname(), rt_description, position,
-			                                        serial_, rdescr->name())),
+			   game, std::unique_ptr<Message>(new Message(
+			            Message::Type::kGeologists, game.get_gametime(), rdescr->descname(),
+			            rdescr->representative_image(), ri.descr().descname(), rt_description,
+			            position, serial_, rdescr->name())),
 			   rdescr->timeout_ms(), rdescr->timeout_radius());
 		}
 	}
@@ -1962,10 +1953,9 @@ void Worker::return_update(Game& game, State& state) {
 		      .str();
 
 		get_owner()->add_message(
-		   game,
-		   std::unique_ptr<Message>(new Message(Message::Type::kGameLogic, game.get_gametime(),
-		                                        _("Worker"), "images/ui_basic/menu_help.png",
-		                                        _("Worker got lost!"), message, get_position())),
+		   game, std::unique_ptr<Message>(new Message(
+		            Message::Type::kGameLogic, game.get_gametime(), _("Worker"),
+		            "images/ui_basic/menu_help.png", _("Worker got lost!"), message, get_position())),
 		   serial_);
 		set_location(nullptr);
 		return pop_task(game);

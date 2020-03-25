@@ -19,15 +19,11 @@
 
 #include "graphic/text/rt_render.h"
 
-#include <cmath>
 #include <memory>
 #include <queue>
-#include <string>
-#include <vector>
 
 #include <SDL.h>
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/log.h"
@@ -46,6 +42,7 @@
 #include "graphic/text/font_io.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text/rendered_text.h"
+#include "graphic/text/rt_errors.h"
 #include "graphic/text/rt_parse.h"
 #include "graphic/text/sdl_ttf_font.h"
 #include "graphic/text/textstream.h"

@@ -22,8 +22,6 @@
 #include <memory>
 
 #include <boost/algorithm/string/join.hpp>
-#include <boost/bind.hpp>
-#include <boost/format.hpp>
 
 #include "base/log.h"
 #include "base/macros.h"
@@ -32,7 +30,6 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "economy/waterway.h"
-#include "graphic/default_resolution.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
@@ -52,7 +49,6 @@
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
 #include "wui/logmessage.h"
-#include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/minimap.h"
 #include "wui/unique_window_handler.h"
@@ -191,6 +187,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      road_build_player_(0),
      buildwaterway_(nullptr),
      waterway_build_player_(0),
+     waterway_work_area_(nullptr),
      unique_window_handler_(new UniqueWindowHandler()) {
 
 	// Load the buildhelp icons.
@@ -224,22 +221,21 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged& message) {
-		   set_size(message.width, message.height);
-		   map_view_.set_size(message.width, message.height);
+		   set_size(message.new_width, message.new_height);
+		   map_view_.set_size(message.new_width, message.new_height);
 		   resize_chat_overlay();
 		   finalize_toolbar();
 		   mainview_move();
-	   });
+		});
 	sound_subscriber_ = Notifications::subscribe<NoteSound>(
 	   [this](const NoteSound& note) { play_sound_effect(note); });
-	shipnotes_subscriber_ =
-	   Notifications::subscribe<Widelands::NoteShip>([this](const Widelands::NoteShip& note) {
-		   if (note.action == Widelands::NoteShip::Action::kWaitingForCommand &&
-		       note.ship->get_ship_state() ==
-		          Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
-			   expedition_port_spaces_.emplace(note.ship, note.ship->exp_port_spaces().front());
-		   }
-	   });
+	shipnotes_subscriber_ = Notifications::subscribe<Widelands::NoteShip>([this](
+	   const Widelands::NoteShip& note) {
+		if (note.action == Widelands::NoteShip::Action::kWaitingForCommand &&
+		    note.ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
+			expedition_port_spaces_.emplace(note.ship, note.ship->exp_port_spaces().front());
+		}
+	});
 
 	toolbar_.set_layout_toplevel(true);
 	map_view_.changeview.connect([this] { mainview_move(); });
@@ -891,12 +887,48 @@ void InteractiveBase::start_build_waterway(Coords waterway_start,
 	// create an empty path
 	assert(!buildwaterway_);
 	buildwaterway_.reset(new CoordPath(waterway_start));
-
 	waterway_build_player_ = player;
-
 	waterway_building_add_overlay();
-
 	set_sel_picture(g_gr->images().get("images/ui_basic/fsel_waterwaybuilding.png"));
+
+	// Show workarea to visualise length limit
+	const Widelands::Map& map = egbase().map();
+	const uint32_t len = map.get_waterway_max_length();
+	assert(len > 1);
+	assert(!waterway_work_area_);
+	waterway_work_area_.reset(new WorkareaInfo());
+	waterway_work_area_->insert(std::make_pair(len, std::set<std::string>()));
+
+	std::map<Widelands::FCoords, bool> reachable_nodes;
+	Widelands::CheckStepFerry cstep(egbase());
+	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
+	   map, Widelands::Area<Widelands::FCoords>(map.get_fcoords(waterway_start), len));
+	do {
+		reachable_nodes.insert(
+		   std::make_pair(mr.location(), mr.location().field->get_owned_by() == player &&
+		                                    !mr.location().field->is_border() &&
+		                                    cstep.reachable_dest(map, mr.location())));
+	} while (mr.advance(map));
+	std::map<Widelands::TCoords<>, uint32_t> wa_data;
+	for (const auto& pair : reachable_nodes) {
+		const auto br = reachable_nodes.find(map.br_n(pair.first));
+		if (br == reachable_nodes.end()) {
+			continue;
+		}
+		auto it = reachable_nodes.find(map.bl_n(pair.first));
+		if (it != reachable_nodes.end()) {
+			wa_data.insert(
+			   std::make_pair(Widelands::TCoords<>(pair.first, Widelands::TriangleIndex::D),
+			                  pair.second && br->second && it->second ? 5 : 6));
+		}
+		it = reachable_nodes.find(map.r_n(pair.first));
+		if (it != reachable_nodes.end()) {
+			wa_data.insert(
+			   std::make_pair(Widelands::TCoords<>(pair.first, Widelands::TriangleIndex::R),
+			                  pair.second && br->second && it->second ? 5 : 6));
+		}
+	}
+	show_workarea(*waterway_work_area_, waterway_start, wa_data);
 }
 
 /*
@@ -918,6 +950,9 @@ void InteractiveBase::abort_build_road() {
 
 void InteractiveBase::abort_build_waterway() {
 	assert(buildwaterway_);
+	assert(waterway_work_area_);
+	hide_workarea(buildwaterway_->get_start(), true);
+	waterway_work_area_.reset(nullptr);
 
 	waterway_building_remove_overlay();
 
@@ -984,6 +1019,10 @@ void InteractiveBase::finish_build_road() {
 
 void InteractiveBase::finish_build_waterway() {
 	assert(buildwaterway_ != nullptr);
+
+	assert(waterway_work_area_);
+	hide_workarea(buildwaterway_->get_start(), true);
+	waterway_work_area_.reset(nullptr);
 
 	waterway_building_remove_overlay();
 

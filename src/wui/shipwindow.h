@@ -20,12 +20,12 @@
 #ifndef WL_WUI_SHIPWINDOW_H
 #define WL_WUI_SHIPWINDOW_H
 
+#include <functional>
 #include <memory>
 
 #include "logic/game.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/walkingdir.h"
-#include "notifications/notifications.h"
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
 #include "wui/interactive_gamebase.h"
@@ -45,7 +45,7 @@ private:
 	                        const std::string& name,
 	                        const std::string& title,
 	                        const std::string& picname,
-	                        boost::function<void()> callback);
+	                        std::function<void()> callback);
 	void set_button_visibility();
 	void no_port_error_message();
 

@@ -19,9 +19,6 @@
 
 #include "wui/watchwindow.h"
 
-#include <string>
-#include <vector>
-
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "base/rect.h"
@@ -33,7 +30,6 @@
 #include "wlapplication_options.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/interactive_player.h"
-#include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
 
 #define REFRESH_TIME 5000
@@ -83,11 +79,11 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
 	map_view_.field_clicked.connect(
 	   [&parent](const Widelands::NodeAndTriangle<>& node_and_triangle) {
 		   parent.map_view()->field_clicked(node_and_triangle);
-	   });
+		});
 	map_view_.track_selection.connect(
 	   [&parent](const Widelands::NodeAndTriangle<>& node_and_triangle) {
 		   parent.map_view()->track_selection(node_and_triangle);
-	   });
+		});
 	map_view_.changeview.connect([this] { stop_tracking_by_drag(); });
 	warp_mainview.connect([&parent](const Vector2f& map_pixel) {
 		parent.map_view()->scroll_to_map_pixel(map_pixel, MapView::Transition::Smooth);

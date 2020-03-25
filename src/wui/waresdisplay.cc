@@ -19,10 +19,7 @@
 
 #include "wui/waresdisplay.h"
 
-#include <cstdio>
-#include <utility>
-
-#include <boost/format.hpp>
+#include <memory>
 
 #include "base/i18n.h"
 #include "base/wexception.h"
@@ -46,7 +43,7 @@ AbstractWaresDisplay::AbstractWaresDisplay(
    const Widelands::TribeDescr& tribe,
    Widelands::WareWorker type,
    bool selectable,
-   boost::function<void(Widelands::DescriptionIndex, bool)> callback_function,
+   std::function<void(Widelands::DescriptionIndex, bool)> callback_function,
    bool horizontal,
    int32_t hgap,
    int32_t vgap)
@@ -121,6 +118,8 @@ void AbstractWaresDisplay::recalc_desired_size(bool relayout) {
 	if (relayout) {
 		// Since we are usually stacked deep within other panels, we need to tell our highest parent
 		// window to relayout
+		// TODO(GunChleoc): Window::on_resolution_changed_note can't shift these properly due to the
+		// changing dimensions.
 		UI::Panel* p = this;
 		while (p->get_parent()) {
 			p = p->get_parent();

@@ -72,11 +72,23 @@ tribes:new_productionsite_type {
          actions = {
             "call=brew_mead",
             "call=brew_beer",
-            "call=brew_mead",
+            "call=brew_mead_2",
             "return=no_stats"
          }
       },
+      -- 2 identical programs for mead to prevent unnecessary skipping penalty
       brew_mead = {
+         -- TRANSLATORS: Completed/Skipped/Did not start brewing mead because ...
+         descname = _"brewing mead",
+         actions = {
+            "return=skipped unless economy needs mead or workers need experience",
+            "consume=barley water honey",
+            "sleep=30000",
+            "animate=working 35000",
+            "produce=mead"
+         }
+      },
+      brew_mead_2 = {
          -- TRANSLATORS: Completed/Skipped/Did not start brewing mead because ...
          descname = _"brewing mead",
          actions = {

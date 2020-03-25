@@ -20,15 +20,10 @@
 #ifndef WL_UI_BASIC_TABLE_H
 #define WL_UI_BASIC_TABLE_H
 
-#include <limits>
+#include <functional>
 #include <set>
-#include <vector>
-
-#include <boost/function.hpp>
-#include <boost/signals2.hpp>
 
 #include "graphic/align.h"
-#include "graphic/color.h"
 #include "graphic/styles/font_style.h"
 #include "ui_basic/button.h"
 #include "ui_basic/panel.h"
@@ -183,7 +178,7 @@ public:
 	 *
 	 * return true if the first item is strictly less than the second
 	 */
-	using CompareFn = boost::function<bool(uint32_t, uint32_t)>;
+	using CompareFn = std::function<bool(uint32_t, uint32_t)>;
 
 	boost::signals2::signal<void()> cancel;
 	boost::signals2::signal<void(uint32_t)> selected;
@@ -198,6 +193,8 @@ public:
 	void set_column_title(uint8_t col, const std::string& title);
 	void set_column_tooltip(uint8_t col, const std::string& tooltip);
 	void set_column_compare(uint8_t col, const CompareFn& fn);
+
+	size_t number_of_columns() const;
 
 	void clear();
 	void set_sort_column(uint8_t const col) {

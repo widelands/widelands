@@ -22,8 +22,6 @@
 
 #include "logic/map.h"
 
-class LuaInterface;
-
 namespace Widelands {
 
 class EditorGameBase;

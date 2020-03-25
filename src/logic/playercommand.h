@@ -24,7 +24,6 @@
 
 #include "economy/flag.h"
 #include "logic/cmd_queue.h"
-#include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/trainingsite.h"
@@ -295,6 +294,37 @@ struct CmdStartOrCancelExpedition : public PlayerCommand {
 
 private:
 	Serial serial;
+};
+
+struct CmdExpeditionConfig : public PlayerCommand {
+	CmdExpeditionConfig() : PlayerCommand() {
+	}  // For savegame loading
+	CmdExpeditionConfig(uint32_t const t,
+	                    PlayerNumber const p,
+	                    PortDock& pd,
+	                    WareWorker ww,
+	                    DescriptionIndex di,
+	                    bool a)
+	   : PlayerCommand(t, p), serial(pd.serial()), type(ww), index(di), add(a) {
+	}
+
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kExpeditionConfig;
+	}
+
+	explicit CmdExpeditionConfig(StreamRead&);
+
+	void execute(Game&) override;
+	void serialize(StreamWrite&) override;
+
+private:
+	Serial serial;
+	WareWorker type;
+	DescriptionIndex index;
+	bool add;
 };
 
 struct CmdEnhanceBuilding : public PlayerCommand {

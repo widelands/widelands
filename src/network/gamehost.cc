@@ -21,11 +21,7 @@
 
 #include <algorithm>
 #include <memory>
-#include <sstream>
-#include <string>
 
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/format.hpp>
 #ifndef _WIN32
 #include <unistd.h>  // for usleep
 #endif
@@ -40,7 +36,6 @@
 #include "chat/chat.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
-#include "helper.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
@@ -49,7 +44,6 @@
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/playersmanager.h"
-#include "map_io/widelands_map_loader.h"
 #include "network/constants.h"
 #include "network/internet_gaming.h"
 #include "network/nethost.h"
@@ -58,12 +52,10 @@
 #include "network/network_lan_promotion.h"
 #include "network/network_player_settings_backend.h"
 #include "network/network_protocol.h"
-#include "scripting/lua_interface.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/launch_mpg.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
-#include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 
@@ -658,22 +650,15 @@ void GameHost::run() {
 	game.set_write_syncstream(get_config_bool("write_syncstreams", true));
 
 	try {
-		std::unique_ptr<UI::ProgressWindow> loader_ui;
-		loader_ui.reset(new UI::ProgressWindow());
-
-		std::vector<std::string> tipstext;
-		tipstext.push_back("general_game");
-		tipstext.push_back("multiplayer");
+		std::vector<std::string> tipstexts{"general_game", "multiplayer"};
 		if (d->hp.has_players_tribe()) {
-			tipstext.push_back(d->hp.get_players_tribe());
+			tipstexts.push_back(d->hp.get_players_tribe());
 		}
-		std::unique_ptr<GameTips> tips(new GameTips(*loader_ui, tipstext));
-
-		loader_ui->step(_("Preparing game"));
+		game.create_loader_ui(tipstexts, false);
+		game.step_loader_ui(_("Preparing game"));
 
 		d->game = &game;
 		game.set_game_controller(this);
-		game.set_loader_ui(loader_ui.get());
 		InteractiveGameBase* igb;
 		uint8_t pn = d->settings.playernum + 1;
 		game.save_handler().set_autosave_filename(
@@ -715,12 +700,11 @@ void GameHost::run() {
 		// wait mode when there are no clients
 		check_hung_clients();
 		init_computer_players();
-		game.run(d->settings.savegame ? Widelands::Game::Loaded :
-		                                d->settings.scenario ? Widelands::Game::NewMPScenario :
-		                                                       Widelands::Game::NewNonScenario,
+		game.run(d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
+		                                Widelands::Game::NewMPScenario :
+		                                Widelands::Game::NewNonScenario,
 		         "", false, "nethost");
 
-		game.set_loader_ui(nullptr);
 		// if this is an internet game, tell the metaserver that the game is done.
 		if (internet_) {
 			InternetGaming::ref().set_game_done();
@@ -996,7 +980,7 @@ GameController::GameType GameHost::get_game_type() {
 	return GameController::GameType::kNetHost;
 }
 
-const GameSettings& GameHost::settings() {
+const GameSettings& GameHost::settings() const {
 	return d->settings;
 }
 
@@ -2214,7 +2198,10 @@ void GameHost::handle_new_file(Client& client) {
 	}
 	send_system_message_code(
 	   "STARTED_SENDING_FILE", file_->filename, d->settings.users.at(client.usernum).name);
-	send_file_part(client.sock_id, 0);
+	// Send all parts to the interested client
+	for (size_t part = 0; part < file_->parts.size(); ++part) {
+		send_file_part(client.sock_id, part);
+	}
 	// Remember client as "currently receiving file"
 	d->settings.users[client.usernum].ready = false;
 	broadcast_setting_user(client.usernum);
@@ -2297,28 +2284,24 @@ void GameHost::handle_file_part(Client& client, RecvPacket& r) {
 		throw DisconnectException("REQUEST_OF_N_E_FILE");
 	}
 	uint32_t part = r.unsigned_32();
-	std::string x = r.string();
-	if (x != file_->md5sum) {
-		log("[Host]: File transfer checksum mismatch %s != %s\n", x.c_str(), file_->md5sum.c_str());
+	std::string md5sum = r.string();
+	if (md5sum != file_->md5sum) {
+		log("[Host]: File transfer checksum mismatch %s != %s\n", md5sum.c_str(),
+		    file_->md5sum.c_str());
 		return;  // Surely the file was changed, so we cancel here.
 	}
 	if (part >= file_->parts.size()) {
-		throw DisconnectException("REQUEST_OF_N_E_FILEPART");
+		log("[Host]: Warning: Client reports to have received file part %u but we only have %" PRIuS
+		    "\n",
+		    part, file_->parts.size());
+		return;
 	}
 	if (part == file_->parts.size() - 1) {
 		send_system_message_code(
 		   "COMPLETED_FILE_TRANSFER", file_->filename, d->settings.users.at(client.usernum).name);
 		d->settings.users[client.usernum].ready = true;
 		broadcast_setting_user(client.usernum);
-		return;
 	}
-	++part;
-	if (part % 100 == 0) {  // Show Progress message every 100th transfer
-		send_system_message_code("SENDING_FILE_PART",
-		                         (boost::format("%i/%i") % part % (file_->parts.size() + 1)).str(),
-		                         file_->filename, d->settings.users.at(client.usernum).name);
-	}
-	send_file_part(client.sock_id, part);
 }
 
 void GameHost::send_file_part(NetHostInterface::ConnectionId csock_id, uint32_t part) {

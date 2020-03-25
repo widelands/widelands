@@ -82,9 +82,8 @@ void MapSaver::save() {
 
 	bool is_game = is_a(Game, &egbase_);
 
-	assert(egbase_.get_loader_ui());
 	auto set_progress_message = [this](std::string text, int step) {
-		egbase_.get_loader_ui()->step(
+		egbase_.step_loader_ui(
 		   step < 0 ? text :
 		              (boost::format(_("Saving map: %1$s (%2$d/%3$d)")) % text % step % 23).str());
 	};

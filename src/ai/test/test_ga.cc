@@ -19,8 +19,6 @@
 
 // Unittests related to Genetic Algorithm
 
-#include <exception>
-
 #include <boost/test/unit_test.hpp>
 
 #ifdef _WIN32
@@ -31,6 +29,7 @@
 
 // Triggered by BOOST_AUTO_TEST_CASE
 CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
+CLANG_DIAG_OFF("-Wused-but-marked-unused")
 
 using namespace Widelands;
 

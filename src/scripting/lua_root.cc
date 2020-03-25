@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "logic/cmd_luacoroutine.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
@@ -34,10 +32,10 @@
 #include "logic/map_objects/world/world.h"
 #include "scripting/globals.h"
 #include "scripting/lua_coroutine.h"
-#include "scripting/lua_editor.h"
 #include "scripting/lua_game.h"
 #include "scripting/lua_map.h"
 #include "scripting/lua_table.h"
+#include "wui/interactive_player.h"
 
 using namespace Widelands;
 
@@ -81,13 +79,12 @@ Game
 */
 const char LuaGame::className[] = "Game";
 const MethodType<LuaGame> LuaGame::Methods[] = {
-   METHOD(LuaGame, launch_coroutine),
-   METHOD(LuaGame, save),
-   {nullptr, nullptr},
+   METHOD(LuaGame, launch_coroutine), METHOD(LuaGame, save), {nullptr, nullptr},
 };
 const PropertyType<LuaGame> LuaGame::Properties[] = {
    PROP_RO(LuaGame, real_speed),   PROP_RO(LuaGame, time), PROP_RW(LuaGame, desired_speed),
-   PROP_RW(LuaGame, allow_saving), PROP_RO(LuaGame, type), {nullptr, nullptr, nullptr},
+   PROP_RW(LuaGame, allow_saving), PROP_RO(LuaGame, type), PROP_RO(LuaGame, interactive_player),
+   {nullptr, nullptr, nullptr},
 };
 
 LuaGame::LuaGame(lua_State* /* L */) {
@@ -160,6 +157,17 @@ int LuaGame::set_allow_saving(lua_State* L) {
 // UNTESTED
 int LuaGame::get_allow_saving(lua_State* L) {
 	lua_pushboolean(L, get_game(L).save_handler().get_allow_saving());
+	return 1;
+}
+
+/* RST
+   .. attribute:: interactive_player
+
+      (RO) The player number of the interactive player, or 0 for spectator
+*/
+int LuaGame::get_interactive_player(lua_State* L) {
+	upcast(const InteractivePlayer, p, get_game(L).get_ibase());
+	lua_pushuint32(L, p ? p->player_number() : 0);
 	return 1;
 }
 
@@ -331,9 +339,7 @@ const MethodType<LuaWorld> LuaWorld::Methods[] = {
    {0, 0},
 };
 const PropertyType<LuaWorld> LuaWorld::Properties[] = {
-   PROP_RO(LuaWorld, immovable_descriptions),
-   PROP_RO(LuaWorld, terrain_descriptions),
-   {0, 0, 0},
+   PROP_RO(LuaWorld, immovable_descriptions), PROP_RO(LuaWorld, terrain_descriptions), {0, 0, 0},
 };
 
 LuaWorld::LuaWorld(lua_State* /* L */) {

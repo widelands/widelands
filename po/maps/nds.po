@@ -1,8 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2019
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2020
 # GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2014
@@ -10,9 +10,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-25 10:10+0000\n"
-"PO-Revision-Date: 2019-05-25 12:36+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-02-21 18:05+0000\n"
+"PO-Revision-Date: 2020-02-26 16:08+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -161,8 +161,8 @@ msgstr "Seefahrt"
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
-"ships and ports."
-msgstr "In deese Inföhren lehrst du alls över Seefahrt, also wo du Schippen un Muden bruukst."
+"ships and ports, and how to use ferries and waterways."
+msgstr "In deeser Inföhren lehrst du, wo du Schippen, Muden, Fähren un Prielen bruukst."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy"
@@ -365,7 +365,7 @@ msgstr "Veer Slötten"
 msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are "
 "completing their schemes to dominate these lands…"
-msgstr ""
+msgstr "In hör machtigen Slötten seker bewaakt planen veer machtgierige Kriegsdrievers, deese Lannen to manntjen …"
 
 #: ../../data/maps/Four_Mountains.wmf/elemental:8
 msgid "Four Mountains"
@@ -391,7 +391,7 @@ msgstr "Lechtmaan"
 msgid ""
 "Whether it is the latest solstice, or lunar illness, something moves these "
 "tribes towards their final ordeal."
-msgstr ""
+msgstr "Weer 't dat leste Sünnverdüüstern of eene Maanphase – elkeenwat drifft deese Völkers to hör lesten Proov."
 
 #: ../../data/maps/Glacier_Lake_v2.wmf/elemental:8
 msgid "Glacier Lake"
@@ -527,7 +527,7 @@ msgid ""
 "Your well established smuggling routes suddenly got busy: two other tribes "
 "have appeared and now a rivalry among smugglers has started. Which team will"
 " be the first to smuggle a certain number of wares?"
-msgstr ""
+msgstr "Diene goden, ollen Smuggelpadden sünd up eenmaal besig worden: Twee anner Völker sünd ankomen un een Wettstried tüsken Smuggel-Lüü hett begunnen. Welke Klottje is de eerste, wat eene wisse Tahl vun Waren smuggelt?"
 
 #: ../../data/maps/Mystical_Maze.wmf/elemental:8
 msgid "Mystical Maze"
@@ -817,7 +817,7 @@ msgstr "Grote Welt"
 msgid ""
 "The world is not enough! If you want to win, you have to send some ships. "
 "But remember: your opponents are very close to you."
-msgstr ""
+msgstr "De Welt is nich genoog! Wenn du siegen willst, muttst du Schippe schicken. Vergeet man nich: Diene Feinde sünd dicht bi di."
 
 #: ../../data/maps/Wisent_Valley.wmf/elemental:8
 msgid "Wisent Valley"
@@ -838,4 +838,4 @@ msgid ""
 " 4 players’ map, with a black AI to add a complication to the expansion of "
 "the other players, or you can play as a challenge with the black player "
 "against the other 4 (VERY difficult)."
-msgstr ""
+msgstr "De swarte Speler is in de Midde sünner Mineraalen in de Ketel dreven – dat gifft dree Aarden, deese Kaart to spölen: Sünner de swarte Speler as normaale Kaart för 4 Spelers; mit eenem swarten künstelk Speler, um dat Verwiedern för de anner Spelers een bietje slimmer to maken; of du kannst mit de swarten Speler tegen de anner veer spölen (BANNIG slimm)."

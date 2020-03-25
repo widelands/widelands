@@ -19,12 +19,9 @@
 
 #include "logic/map_objects/immovable.h"
 
-#include <cstdio>
-#include <cstring>
 #include <memory>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 
 #include "base/log.h"
 #include "base/macros.h"
@@ -270,7 +267,7 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
                                const World& world)
    : ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kWorld) {
 
-	int editor_category_index =
+	const DescriptionIndex editor_category_index =
 	   world.editor_immovable_categories().get_index(table.get_string("editor_category"));
 	if (editor_category_index == Widelands::INVALID_INDEX) {
 		throw GameDataError(
@@ -588,15 +585,16 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 		}
 	}
 
-	// Animation
+	// Animation. If the animation is no longer known, pick the main animation instead.
 	char const* const animname = fr.c_string();
-	try {
+	if (imm.descr().is_animation_known(animname)) {
 		imm.anim_ = imm.descr().get_animation(animname, &imm);
-	} catch (const GameDataError& e) {
+	} else {
+		log("Unknown animation '%s' for immovable '%s', using main animation instead.\n", animname,
+		    imm.descr().name().c_str());
 		imm.anim_ = imm.descr().main_animation();
-		log("Warning: Immovable: %s, using animation %s instead.\n", e.what(),
-		    imm.descr().get_animation_name(imm.anim_).c_str());
 	}
+
 	imm.animstart_ = fr.signed_32();
 	if (packet_version >= 4) {
 		imm.anim_construction_total_ = fr.unsigned_32();

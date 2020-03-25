@@ -20,7 +20,11 @@
 #ifndef WL_UI_BASIC_WINDOW_H
 #define WL_UI_BASIC_WINDOW_H
 
-#include "ui_basic/panel.h"
+#include "ui_basic/button.h"
+
+#include <memory>
+
+#include "graphic/graphic.h"
 
 namespace UI {
 /**
@@ -86,6 +90,14 @@ public:
 		return true;
 	}
 
+	bool is_pinned() const {
+		return pinned_;
+	}
+	void set_pinned(bool p) {
+		pinned_ = p;
+		update_toolbar_buttons();
+	}
+
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
 	void draw_border(RenderTarget&) override;
@@ -105,12 +117,17 @@ protected:
 	void layout() override;
 	void update_desired_size() override;
 
+	virtual void clicked_button_close();
+
 private:
+	void on_resolution_changed_note(const GraphicResolutionChanged& note);
+
 	bool is_minimal_;
 	uint32_t oldh_;  // if it is minimized, this is the old height
 	bool dragging_, docked_left_, docked_right_, docked_bottom_;
 	int32_t drag_start_win_x_, drag_start_win_y_;
 	int32_t drag_start_mouse_x_, drag_start_mouse_y_;
+	bool pinned_;
 
 	std::string title_;
 
@@ -122,6 +139,14 @@ private:
 
 	Panel* center_panel_;
 	Panel* fastclick_panel_;
+
+	Button* button_close_;
+	Button* button_pin_;
+	Button* button_minimize_;
+	void update_toolbar_buttons();
+
+	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
+	   graphic_resolution_changed_subscriber_;
 };
 }  // namespace UI
 

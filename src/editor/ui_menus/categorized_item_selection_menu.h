@@ -20,14 +20,9 @@
 #ifndef WL_EDITOR_UI_MENUS_CATEGORIZED_ITEM_SELECTION_MENU_H
 #define WL_EDITOR_UI_MENUS_CATEGORIZED_ITEM_SELECTION_MENU_H
 
-#include <algorithm>
-#include <cmath>
-#include <string>
-
 #include "boost/format.hpp"
 
 #include "base/i18n.h"
-#include "graphic/image.h"
 #include "logic/map_objects/description_maintainer.h"
 #include "logic/map_objects/world/editor_category.h"
 #include "ui_basic/box.h"

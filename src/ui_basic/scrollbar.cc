@@ -19,8 +19,6 @@
 
 #include "ui_basic/scrollbar.h"
 
-#include <algorithm>
-
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
@@ -356,9 +354,8 @@ void Scrollbar::draw(RenderTarget& dst) {
 		draw_area(dst, Area::MinusPage,
 		          Recti(0, buttonsize_, get_w(), knobpos - buttonsize_ - knobsize / 2));
 		assert(knobpos + knobsize / 2 + buttonsize_ <= static_cast<uint32_t>(get_h()));
-		draw_area(
-		   dst, Area::PlusPage,
-		   Recti(0, knobpos + knobsize / 2, get_w(), get_h() - knobpos - knobsize / 2 - buttonsize_));
+		draw_area(dst, Area::PlusPage, Recti(0, knobpos + knobsize / 2, get_w(),
+		                                     get_h() - knobpos - knobsize / 2 - buttonsize_));
 	}
 }
 

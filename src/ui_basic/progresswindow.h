@@ -20,14 +20,9 @@
 #ifndef WL_UI_BASIC_PROGRESSWINDOW_H
 #define WL_UI_BASIC_PROGRESSWINDOW_H
 
-#include <cstring>
-#include <string>
-#include <vector>
-
 #include "base/rect.h"
 #include "ui_basic/fullscreen_window.h"
 
-class Image;
 class RenderTarget;
 
 namespace UI {

@@ -21,26 +21,16 @@
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_CONSTRUCTIONSITE_H
 
 #include <memory>
-#include <vector>
 
 #include "base/macros.h"
 #include "logic/map_objects/tribes/building_settings.h"
 #include "logic/map_objects/tribes/partially_finished_building.h"
 #include "scripting/lua_table.h"
 
-class FileRead;
-class FileWrite;
-
 namespace Widelands {
 
 class Building;
-class MilitarySiteDescr;
-class ProductionSiteDescr;
-class Request;
 enum class StockPolicy;
-class TrainingSiteDescr;
-class WarehouseDescr;
-class WaresQueue;
 
 /// Per-player and per-field constructionsite information
 struct ConstructionsiteInformation {
@@ -126,6 +116,15 @@ public:
 	bool fetch_from_flag(Game&) override;
 	bool get_building_work(Game&, Worker&, bool success) override;
 
+	void add_additional_ware(DescriptionIndex);
+	void add_additional_worker(Game&, Worker&);
+	const std::map<DescriptionIndex, uint8_t>& get_additional_wares() const {
+		return additional_wares_;
+	}
+	const std::vector<Worker*>& get_additional_workers() const {
+		return additional_workers_;
+	}
+
 	BuildingSettings* get_settings() const {
 		return settings_.get();
 	}
@@ -154,6 +153,9 @@ private:
 
 	bool builder_idle_;                 // used to determine whether the builder is idle
 	ConstructionsiteInformation info_;  // asked for by player point of view for the gameview
+
+	std::map<DescriptionIndex, uint8_t> additional_wares_;
+	std::vector<Worker*> additional_workers_;
 
 	std::unique_ptr<BuildingSettings> settings_;
 	void init_settings();

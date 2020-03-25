@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/lexical_cast.hpp>
-
 #include "graphic/graphic.h"
 #include "io/profile.h"
 #include "logic/editor_game_base.h"
@@ -140,7 +138,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 		   if (save_profile_dialog_) {
 			   save_profile_dialog_->update_table();
 		   }
-	   });
+		});
 
 	read_targets();
 }

@@ -74,11 +74,23 @@ tribes:new_productionsite_type {
          actions = {
             "call=bake_honey",
             "call=bake_normal",
-            "call=bake_honey",
+            "call=bake_honey_2",
             "return=no_stats"
          }
       },
+      -- 2 identical programs for honey bread to prevent unnecessary skipping penalty
       bake_honey = {
+         -- TRANSLATORS: Completed/Skipped/Did not start baking honey bread because ...
+         descname = _"baking honey bread",
+         actions = {
+            "return=skipped unless economy needs honey_bread or workers need experience",
+            "consume=barley water honey",
+            "sleep=20000",
+            "animate=working 25000",
+            "produce=honey_bread"
+         }
+      },
+      bake_honey_2 = {
          -- TRANSLATORS: Completed/Skipped/Did not start baking honey bread because ...
          descname = _"baking honey bread",
          actions = {

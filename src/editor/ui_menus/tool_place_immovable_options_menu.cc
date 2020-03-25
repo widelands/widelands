@@ -27,9 +27,7 @@
 #include "logic/map.h"
 #include "logic/map_objects/world/world.h"
 #include "ui_basic/box.h"
-#include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
-#include "ui_basic/textarea.h"
 
 namespace {
 
@@ -55,7 +53,7 @@ EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
 	      this, world.editor_immovable_categories(), world.immovables(),
 	      [](UI::Panel* cb_parent, const ImmovableDescr& immovable_descr) {
 		      return create_immovable_checkbox(cb_parent, immovable_descr);
-	      },
+		   },
 	      [this] { select_correct_tool(); }, &tool));
 	set_center_panel(multi_select_menu_.get());
 }

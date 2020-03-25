@@ -39,7 +39,6 @@
 #include "logic/mapregion.h"
 #include "map_io/map_loader.h"
 #include "map_io/world_legacy_lookup_table.h"
-#include "scripting/lua_interface.h"
 
 using std::cerr;
 using std::endl;
@@ -708,7 +707,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 
 			Widelands::DescriptionIndex nres = 0;
 			if (*res) {
-				nres = world.get_resource(res);
+				nres = world.resource_index(res);
 				if (nres == Widelands::INVALID_INDEX)
 					throw wexception("world does not define resource type %s, you can not "
 					                 "play settler maps here",
@@ -750,8 +749,8 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	//  conversion. We will then convert them using the
 	//  OneWorldLegacyLookupTable.
 	// Puts an immovable with the 'old_immovable_name' onto the field 'locations'.
-	auto place_immovable = [&egbase, &lookup_table, &world](const Widelands::Coords& location,
-	                                                        const std::string& old_immovable_name) {
+	auto place_immovable = [&egbase, &lookup_table, &world](
+	   const Widelands::Coords& location, const std::string& old_immovable_name) {
 		const std::string new_immovable_name = lookup_table->lookup_immovable(old_immovable_name);
 		Widelands::DescriptionIndex const idx = world.get_immovable_index(new_immovable_name.c_str());
 		if (idx == Widelands::INVALID_INDEX) {

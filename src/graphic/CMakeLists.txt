@@ -84,7 +84,6 @@ wl_library(graphic_image_cache
     base_macros
     graphic_image_io
     graphic_surface
-    graphic_texture_atlas
 )
 
 wl_library(graphic_sdl_utils
@@ -103,6 +102,7 @@ wl_library(graphic_gl_utils
     gl/system_headers.h
     gl/utils.cc
     gl/utils.h
+  USES_BOOST_REGEX
   USES_SDL2
   USES_OPENGL
   DEPENDS
@@ -191,17 +191,12 @@ wl_library(graphic_game_renderer
     game_renderer.cc
     game_renderer.h
   DEPENDS
-    base_geometry
-    base_macros
     graphic
     graphic_fields_to_draw
-    graphic_gl_utils
     graphic_render_queue
     graphic_surface
     logic
     logic_map_objects
-    wui
-    wui_mapview_pixelfunctions
 )
 
 wl_library(graphic_minimap_renderer
@@ -259,7 +254,7 @@ wl_library(graphic_terrain_programs
     logic
     logic_map_objects
     logic_map_objects_description_maintainer
-    wui_mapview_pixelfunctions
+    wui_mapview_pixelconstants
 )
 
 
@@ -326,7 +321,6 @@ wl_library(graphic
     base_geometry
     base_i18n
     base_log
-    base_macros
     base_scoped_timer
     build_info
     graphic_align

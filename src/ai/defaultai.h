@@ -21,16 +21,12 @@
 #ifndef WL_AI_DEFAULTAI_H
 #define WL_AI_DEFAULTAI_H
 
-#include <map>
 #include <memory>
-#include <unordered_map>
-#include <unordered_set>
 
 #include "ai/ai_help_structs.h"
 #include "ai/computer_player.h"
 #include "base/i18n.h"
 #include "economy/economy.h"
-#include "economy/wares_queue.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
@@ -38,7 +34,6 @@
 
 namespace Widelands {
 struct Road;
-struct Flag;
 }  // namespace Widelands
 
 /**
@@ -215,10 +210,11 @@ private:
 
 	void print_stats(uint32_t);
 
-	uint32_t get_stocklevel_by_hint(size_t);
-	uint32_t get_stocklevel(Widelands::BuildingObserver&, uint32_t, WareWorker = WareWorker::kWare);
-	uint32_t calculate_stocklevel(Widelands::DescriptionIndex,
-	                              WareWorker = WareWorker::kWare);  // count all direct outputs_
+	uint32_t
+	get_stocklevel(Widelands::BuildingObserver&, uint32_t, WareWorker = WareWorker::kWare) const;
+	uint32_t
+	   calculate_stocklevel(Widelands::DescriptionIndex,
+	                        WareWorker = WareWorker::kWare) const;  // count all direct outputs_
 
 	void review_wares_targets(uint32_t);
 
@@ -257,7 +253,6 @@ private:
 	void set_inputs_to_max(const Widelands::ProductionSiteObserver&);
 	void stop_site(const Widelands::ProductionSiteObserver&);
 	void initiate_dismantling(Widelands::ProductionSiteObserver&, uint32_t);
-	void print_land_stats();
 
 	// Checks whether first value is in range, or lesser then...
 	template <typename T> void check_range(const T, const T, const T, const char*);
@@ -278,7 +273,7 @@ private:
 	bool attempt_escape(Widelands::ShipObserver& so);
 
 	// finding and owner
-	Widelands::PlayerNumber get_land_owner(const Widelands::Map&, uint32_t);
+	Widelands::PlayerNumber get_land_owner(const Widelands::Map&, uint32_t) const;
 
 	// Functions used for war and training stuff / defaultai_warfare.cc
 	bool check_militarysites(uint32_t);

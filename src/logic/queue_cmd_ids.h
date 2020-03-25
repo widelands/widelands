@@ -20,6 +20,8 @@
 #ifndef WL_LOGIC_QUEUE_CMD_IDS_H
 #define WL_LOGIC_QUEUE_CMD_IDS_H
 
+#include <cstdint>
+
 /*
  * This file contains the ids for the different
  * cmd_queue cmds. They are needed to save those
@@ -95,7 +97,8 @@ enum class QueueCommandTypes : uint8_t {
 	kIncorporate = 130,
 	kLuaScript,
 	kLuaCoroutine,
-	kCalculateStatistics,  // 133
+	kCalculateStatistics,
+	kExpeditionConfig,  // 134
 	kCallEconomyBalance = 200,
 
 	kDeleteMessage,  // 201

@@ -20,10 +20,6 @@
 #ifndef WL_UI_FSMENU_NETSETUP_LAN_H
 #define WL_UI_FSMENU_NETSETUP_LAN_H
 
-#include <cstring>
-#include <list>
-#include <string>
-
 #include "network/network_lan_promotion.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
@@ -31,9 +27,6 @@
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/load_map_or_game.h"
-
-struct NetOpenGame;
-struct NetGameInfo;
 
 class FullscreenMenuNetSetupLAN : public FullscreenMenuLoadMapOrGame {
 public:

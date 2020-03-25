@@ -51,6 +51,13 @@ bool Ferry::init(EditorGameBase& egbase) {
 	return init_fleet();
 }
 
+void Ferry::cleanup(EditorGameBase& e) {
+	if (fleet_) {
+		fleet_->remove_ferry(e, this);
+	}
+	Carrier::cleanup(e);
+}
+
 const Bob::Task Ferry::taskUnemployed = {
    "unemployed", static_cast<Bob::Ptr>(&Ferry::unemployed_update), nullptr, nullptr, true};
 
