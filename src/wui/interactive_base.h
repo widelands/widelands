@@ -362,7 +362,10 @@ private:
 		                              bool was_minimized,
 		                              bool was_pinned,
 		                              bool was_showing_workarea)
-		   : window_position(pos), minimize(was_minimized), pin(was_pinned), show_workarea(was_showing_workarea) {
+		   : window_position(pos),
+		     minimize(was_minimized),
+		     pin(was_pinned),
+		     show_workarea(was_showing_workarea) {
 		}
 		const Vector2i window_position;
 		const bool minimize;
