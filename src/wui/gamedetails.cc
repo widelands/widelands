@@ -103,13 +103,15 @@ void GameDetails::show(const std::vector<SavegameData>& gamedata) {
 	std::string name_list = richtext_escape(as_filename_list(gamedata));
 	boost::replace_all(name_list, "\n", "<br> • ");
 
+	const std::string header_second_part(
+	   (boost::format(ngettext("%d file:", "%d files:", number_of_files)) % number_of_files).str());
+
 	std::string combined_header = as_richtext(as_heading_with_content(
-	   (boost::format(ngettext(
-	       "Selected %d directory and ", "Selected %d directories and ", number_of_directories)) %
-	    number_of_directories)
-	         .str() +
-	      (boost::format(ngettext("%d file:", "%d files:", number_of_files)) % number_of_files)
-	         .str(),
+	   /** TRANSLATORS: %1% = number of selected directories, %2% = number of selected files*/
+	   (boost::format(ngettext("Selected %1% directory and %2%", "Selected %1% directories and %2%",
+	                           number_of_directories)) %
+	    number_of_directories % header_second_part)
+	      .str(),
 	   "", style_, true));
 
 	name_label_.set_text(combined_header);
