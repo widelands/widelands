@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-01-10 12:51+0000\n"
-"PO-Revision-Date: 2020-01-10 21:57+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
+"POT-Creation-Date: 2020-03-16 06:59+0000\n"
+"PO-Revision-Date: 2020-03-16 07:06+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -761,6 +761,47 @@ msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
 msgstr "Du kannst mit dem Mausrad oder %1% rein- und rauszoomen. Drücke %2%, um den Zoomfaktor zurückzusetzen."
 
 #: ../../data/txts/tips/general_game.lua:75
+msgctxt "hotkey"
+msgid "Ctrl+(Page Up/Page Down)"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:75
+msgctxt "hotkey"
+msgid "Page Up/Page Down"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:75
+msgctxt "hotkey"
+msgid "Shift+(Page Up/Page Down)"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:75
+msgid ""
+"Speed up or slow down the game with %1%. Use %2% for rapid change, %3% will "
+"adjust speed smoothly."
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:79
+msgctxt "hotkey"
+msgid "Arrow keys"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:79
+msgctxt "hotkey"
+msgid "Ctrl+Arrow keys"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:79
+msgid ""
+"Move map view using %1%. %2% will move the view faster, %3% moves slowly."
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:79
+msgctxt "hotkey"
+msgid "Shift+Arrow keys"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:83
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"
