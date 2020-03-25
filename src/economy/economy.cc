@@ -486,10 +486,13 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type) c
 	} else {
 		// Target quantity is set to 0, we need to check if there is an open request.
 		// For soldier requests, do not recruit new rookies if only heroes are needed.
-		const SoldierDescr* sd = type_ == wwWORKER ? dynamic_cast<const SoldierDescr*>(owner().egbase().tribes().get_worker_descr(ware_or_worker_type)) : nullptr;
+		const SoldierDescr* sd =
+		   type_ == wwWORKER ? dynamic_cast<const SoldierDescr*>(
+		                          owner().egbase().tribes().get_worker_descr(ware_or_worker_type)) :
+		                       nullptr;
 		for (const Request* req : requests_) {
-			if (req->get_type() == type_ && req->get_index() == ware_or_worker_type && req->is_open() &&
-					(!sd || req->get_requirements().check(soldier_prototype(sd)))) {
+			if (req->get_type() == type_ && req->get_index() == ware_or_worker_type &&
+			    req->is_open() && (!sd || req->get_requirements().check(soldier_prototype(sd)))) {
 				return true;
 			}
 		}
@@ -798,7 +801,7 @@ void Economy::create_requested_worker(Game& game, DescriptionIndex index) {
 	// Minimal invasive fix of bug 1236538: never create a rookie for a request
 	// that required a hero.
 	if (upcast(const SoldierDescr, s_desc, &w_desc)) {
-		soldier_prototype(s_desc); // init prototype
+		soldier_prototype(s_desc);  // init prototype
 		soldier_level_check = true;
 	} else {
 		soldier_level_check = false;
