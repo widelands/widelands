@@ -55,14 +55,14 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 				// So now we try to create an InteractivePlayer object for another
 				// player instead.
 				const PlayerNumber max = game.map().get_nrplayers();
-                for (player_number = 1; player_number <= max; ++player_number) {
-                    if (game.get_player(player_number)) {
+				for (player_number = 1; player_number <= max; ++player_number) {
+					if (game.get_player(player_number)) {
 						break;
-                    }
-                }
-                if (player_number > max) {
+					}
+				}
+				if (player_number > max) {
 					throw GameDataError("The game has no players!");
-                }
+				}
 			}
 
 			Vector2f center_map_pixel = Vector2f::zero();

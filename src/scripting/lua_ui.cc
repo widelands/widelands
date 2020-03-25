@@ -146,20 +146,20 @@ int LuaPanel::get_dropdowns(lua_State* L) {
       (RO) An :class:`array` of all visible tabs inside this Panel.
 */
 static void put_all_tabs_into_table(lua_State* L, UI::Panel* g) {
-    if (!g) {
+	if (!g) {
 		return;
-    }
+	}
 
 	for (UI::Panel* f = g->get_first_child(); f; f = f->get_next_sibling()) {
 		put_all_tabs_into_table(L, f);
 
-        if (upcast(UI::TabPanel, t, f)) {
+		if (upcast(UI::TabPanel, t, f)) {
 			for (UI::Tab* tab : t->tabs()) {
 				lua_pushstring(L, tab->get_name());
 				to_lua<LuaTab>(L, new LuaTab(tab));
 				lua_rawset(L, -3);
 			}
-        }
+		}
 	}
 }
 int LuaPanel::get_tabs(lua_State* L) {
@@ -271,9 +271,9 @@ int LuaPanel::get_descendant_position(lua_State* L) {
 		cur = cur->get_parent();
 	}
 
-    if (!cur) {
+	if (!cur) {
 		report_error(L, "Widget is not a descendant!");
-    }
+	}
 
 	lua_pushint32(L, cp.x);
 	lua_pushint32(L, cp.y);
@@ -717,9 +717,9 @@ int LuaMapView::click(lua_State* L) {
 // UNTESTED
 int LuaMapView::start_road_building(lua_State* L) {
 	InteractiveBase* me = get();
-    if (me->is_building_road()) {
+	if (me->is_building_road()) {
 		report_error(L, "Already building road!");
-    }
+	}
 
 	Widelands::Coords starting_field =
 	   (*get_user_class<LuaMaps::LuaFlag>(L, 2))->get(L, get_egbase(L))->get_position();
@@ -739,9 +739,9 @@ int LuaMapView::start_road_building(lua_State* L) {
 // UNTESTED
 int LuaMapView::abort_road_building(lua_State* /* L */) {
 	InteractiveBase* me = get();
-    if (me->is_building_road()) {
+	if (me->is_building_road()) {
 		me->abort_build_road();
-    }
+	}
 	return 0;
 }
 

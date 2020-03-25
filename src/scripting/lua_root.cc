@@ -224,9 +224,9 @@ int LuaGame::get_type(lua_State* L) {
 int LuaGame::launch_coroutine(lua_State* L) {
 	int nargs = lua_gettop(L);
 	uint32_t runtime = get_game(L).get_gametime();
-    if (nargs < 2) {
+	if (nargs < 2) {
 		report_error(L, "Too few arguments!");
-    }
+	}
 	if (nargs == 3) {
 		runtime = luaL_checkuint32(L, 3);
 		lua_pop(L, 1);
