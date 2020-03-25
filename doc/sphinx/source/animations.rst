@@ -29,8 +29,6 @@ are available, and what your image files need to look like:
 
    animations = {
       idle = {
-         directory = path.dirname(__file__),
-         basename = "idle",
          hotspot = { 5, 7 },
          fps = 4,
          sound_effect = {
@@ -39,8 +37,7 @@ are available, and what your image files need to look like:
          },
          representative_frame = 3,
       },
-      walk = {
-         directory = path.dirname(__file__),
+      walkload = {
          basename = "walk",
          hotspot = { 5, 7 },
          fps = 4,
@@ -55,10 +52,12 @@ Let's have a detailed look at the ``idle`` animation:
    *Mandatory*. This is the name of the animation. The animation can then be referenced by this name e.g. if you want to trigger it in a production program.
 
 **directory**
-   *Mandatory*. The directory where the animation image files are located.
+   *DEPRECATED*. The directory where the animation image files are located. Replaced by *animation_directory* in the Unit's definition.
 
 **basename**
-   *Mandatory*. The filename prefix for the image files. Our example will pick up any image from ``idle_00.png`` through ``idle_99.png`` in the specified directory path -- the current path in our example. These images can optionally have corresponding player color mask images called ``idle_00_pc.png`` through ``idle_99_pc.png``. Make sure to include leading 0's in the file names and to have consistent length -- we support 1, 2 and 3 digit numbers in an animation.
+   *DEPRECATED*. The filename prefix for the image files. The plan is to make the file name prefixes identical to the animation name and then to get rid of this parameter.
+
+   Our example will pick up any image from ``idle_00.png`` through ``idle_99.png`` in the specified directory path -- the current path in our example. These images can optionally have corresponding player color mask images called ``idle_00_pc.png`` through ``idle_99_pc.png``. Make sure to include leading 0's in the file names and to have consistent length -- we support 1, 2 and 3 digit numbers in an animation.
    If your animation contains only one file, you can also call it ``idle.png`` (and ``idle_pc.png`` for the player color mask) without ``_`` or any numbers in the file name.
 
    We support *mipmaps* for animations. They allow us to provide the same image in different resolutions for optimum rendering quality.
@@ -138,8 +137,6 @@ Here's the example from above as spritesheets:
 
    spritesheets = {
       idle = {
-         directory = path.dirname(__file__),
-         basename = "idle",
          fps = 4,
          frames = 150,
          rows = 13,
@@ -152,8 +149,6 @@ Here's the example from above as spritesheets:
          representative_frame = 3,
       },
       walk = {
-         directory = path.dirname(__file__),
-         basename = "walk",
          fps = 4,
          frames = 10,
          rows = 4,
