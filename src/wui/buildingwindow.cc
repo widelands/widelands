@@ -88,7 +88,8 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 			break;
 		// The building is no more. Next think() will call die().
 		case Widelands::NoteBuilding::Action::kStartWarp:
-			ibase()->add_wanted_building_window(building_position_, get_pos(), is_minimal());
+			ibase()->add_wanted_building_window(
+			   building_position_, get_pos(), is_minimal(), is_pinned());
 			break;
 		default:
 			break;
