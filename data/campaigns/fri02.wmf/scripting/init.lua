@@ -16,6 +16,7 @@ p2 = game.players[2] -- Murilius – friend or foe
 p3 = game.players[3] -- Kru-Gu’Lhar – determined enemy
 map = game.map
 p1_start = map.player_slots[1].starting_field
+difficulty = wl.Game().scenario_difficulty
 
 include "map:scripting/texts.lua"
 
