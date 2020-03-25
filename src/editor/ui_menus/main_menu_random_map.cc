@@ -19,15 +19,11 @@
 
 #include "editor/ui_menus/main_menu_random_map.h"
 
-#include <cstring>
 #include <sstream>
-#include <string>
-#include <vector>
-
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/random.h"
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/map_generator.h"
@@ -36,7 +32,6 @@
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/map_objects/world/world.h"
-#include "random/random.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "wlapplication_options.h"

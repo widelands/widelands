@@ -23,8 +23,6 @@
 #include <deque>
 #include <memory>
 
-#include <boost/signals2.hpp>
-
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "notifications/note_ids.h"
@@ -146,6 +144,10 @@ public:
 	/// Expand display button to make enough room for each entry's text. Call this before adding any
 	/// entries.
 	void set_autoexpand_display_button();
+
+	void notify_list_deleted() {
+		list_ = nullptr;
+	}
 
 protected:
 	/// Add an element to the list

@@ -45,4 +45,10 @@ documentation)
    sphinx-build -W -b json -d build/doctrees source build/json
    popd
    ;;
+includes)
+   # Check for superfluous includes and forward declarations
+   pushd ../src
+   ../utils/find_unused_includes.py
+   popd
+   ;;
 esac

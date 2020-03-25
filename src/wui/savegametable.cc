@@ -4,8 +4,8 @@
 
 #include "base/i18n.h"
 #include "graphic/graphic.h"
+#include "graphic/text_layout.h"
 #include "logic/filesystem_constants.h"
-#include "wui/gamedetails.h"
 
 SavegameTable::SavegameTable(UI::Panel* parent, UI::PanelStyle style, bool localize_autosave)
    : UI::Table<uintptr_t>(parent, 0, 0, 0, 0, style, UI::TableRows::kMultiDescending),

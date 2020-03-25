@@ -20,12 +20,9 @@
 #include "graphic/animation/nonpacked_animation.h"
 
 #include <cassert>
-#include <cstdio>
-#include <limits>
 #include <memory>
 
 #include <boost/algorithm/string/replace.hpp>
-#include <boost/format.hpp>
 
 #include "base/macros.h"
 #include "graphic/graphic.h"
@@ -145,7 +142,9 @@ NonPackedAnimation IMPLEMENTATION
 ==============================================================================
 */
 
-NonPackedAnimation::NonPackedAnimation(const LuaTable& table, const std::string& basename)
+NonPackedAnimation::NonPackedAnimation(const LuaTable& table,
+                                       const std::string& basename,
+                                       const std::string& animation_directory)
    : Animation(table) {
 	try {
 		// Get image files
@@ -160,11 +159,11 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table, const std::string&
 				    table.get_table("pictures")->array_entries<std::string>().front().c_str());
 			}
 		} else {
-			if (basename.empty() || !table.has_key("directory")) {
-				throw Widelands::GameDataError(
-				   "Animation did not define both a basename and a directory for its image files");
-			}
-			add_available_scales(basename, table.get_string("directory"));
+			// TODO(GunChleoc): When all animations have been converted, require that
+			// animation_directory is not empty.
+			add_available_scales(basename, animation_directory.empty() ?
+			                                  table.get_string("directory") :
+			                                  animation_directory);
 		}
 
 		// Frames

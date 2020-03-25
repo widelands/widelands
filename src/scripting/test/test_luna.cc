@@ -17,9 +17,9 @@
  *
  */
 
-#include <cstring>
-#include <exception>
 #include <memory>
+
+#include <cstring>
 
 #include <boost/test/unit_test.hpp>
 

@@ -18,7 +18,6 @@ wl_library(map_io_map_loader
     logic_map
     logic_map_objects
     map_io
-    scripting_lua_interface
     ui_basic
 )
 
@@ -101,9 +100,9 @@ wl_library(map_io
     base_log
     base_macros
     base_scoped_timer
-    build_info
     economy
     graphic
+    graphic_image_cache
     graphic_image_io
     graphic_minimap_renderer
     graphic_playercolor

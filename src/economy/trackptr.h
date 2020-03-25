@@ -21,8 +21,7 @@
 #define WL_ECONOMY_TRACKPTR_H
 
 #include <cassert>
-
-#include <stdint.h>
+#include <cstdint>
 
 class BaseTrackPtr;
 

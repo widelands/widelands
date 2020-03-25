@@ -23,15 +23,14 @@
 #include <memory>
 
 #include "base/md5.h"
+#include "base/random.h"
 #include "io/streamwrite.h"
 #include "logic/cmd_queue.h"
 #include "logic/editor_game_base.h"
 #include "logic/save_handler.h"
 #include "logic/trade_agreement.h"
-#include "random/random.h"
 #include "scripting/logic.h"
 
-struct ComputerPlayer;
 class InteractivePlayer;
 struct GameSettings;
 class GameController;
@@ -43,17 +42,15 @@ constexpr uint32_t kStatisticsSampleTime = 30000;
 // See forester_cache_
 constexpr int16_t kInvalidForesterEntry = -1;
 
-class ConstructionSite;
 struct Flag;
 struct Path;
 struct PlayerImmovable;
 enum class IslandExploreDirection;
+class PortDock;
 enum class ScoutingDirection;
 enum class SoldierPreference : uint8_t;
 struct Ship;
-struct PlayerEndStatus;
 class TrainingSite;
-class MilitarySite;
 enum class StockPolicy;
 
 enum {
@@ -111,10 +108,7 @@ enum SyncEntry : uint8_t {
 	kBobSetPosition = 0xB8
 };
 
-class Player;
-class MapLoader;
 class PlayerCommand;
-class ReplayReader;
 class ReplayWriter;
 
 /** class Game
@@ -258,6 +252,7 @@ public:
 	void send_player_start_stop_building(Building&);
 	void send_player_militarysite_set_soldier_preference(Building&, SoldierPreference preference);
 	void send_player_start_or_cancel_expedition(Building&);
+	void send_player_expedition_config(PortDock&, WareWorker, DescriptionIndex, bool);
 
 	void send_player_enhance_building(Building&, DescriptionIndex);
 	void send_player_evict_worker(Worker&);

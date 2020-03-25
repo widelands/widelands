@@ -21,15 +21,12 @@
 
 #include <memory>
 
-#include <boost/algorithm/string/predicate.hpp>
-
 #include "base/i18n.h"
 #include "base/warning.h"
 #include "base/wexception.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/map_objects/map_object.h"
-#include "logic/player.h"
 #include "map_io/map_loader.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"

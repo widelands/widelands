@@ -20,8 +20,6 @@
 #ifndef WL_ECONOMY_IROUTE_H
 #define WL_ECONOMY_IROUTE_H
 
-#include <stdint.h>
-
 namespace Widelands {
 
 struct RoutingNode;

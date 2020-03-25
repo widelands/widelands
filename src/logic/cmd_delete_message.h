@@ -20,10 +20,9 @@
 #ifndef WL_LOGIC_CMD_DELETE_MESSAGE_H
 #define WL_LOGIC_CMD_DELETE_MESSAGE_H
 
-#include <memory>
-
 #include "logic/cmd_queue.h"
-#include "logic/message_queue.h"
+#include "logic/message_id.h"
+#include "logic/widelands.h"
 
 namespace Widelands {
 

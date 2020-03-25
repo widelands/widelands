@@ -23,8 +23,6 @@
 #include <cassert>
 #include <map>
 #include <memory>
-#include <string>
-#include <vector>
 
 #include "base/wexception.h"
 #include "logic/widelands.h"

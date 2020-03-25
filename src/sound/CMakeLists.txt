@@ -22,17 +22,15 @@ wl_library(sound
     songset.h
     sound_handler.cc
     sound_handler.h
-  USES_BOOST_REGEX
   USES_SDL2
   USES_SDL2_MIXER
   DEPENDS
     base_i18n
     base_log
-    helper
+    base_random
     io_fileread
     io_filesystem
     logic_exceptions
-    random
     sound_constants
     widelands_options
 )

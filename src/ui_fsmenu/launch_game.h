@@ -21,9 +21,7 @@
 #define WL_UI_FSMENU_LAUNCH_GAME_H
 
 #include <memory>
-#include <string>
 
-#include "graphic/playercolor.h"
 #include "logic/game_settings.h"
 #include "logic/map.h"
 #include "ui_basic/button.h"
@@ -33,7 +31,6 @@
 #include "ui_fsmenu/base.h"
 #include "wui/suggested_teams_ui.h"
 
-struct ChatProvider;
 class GameController;
 struct GameSettingsProvider;
 class LuaInterface;

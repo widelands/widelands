@@ -19,23 +19,15 @@
 
 #include "wlapplication.h"
 
-#include <cerrno>
+#include <cassert>
 #ifndef _WIN32
 #include <csignal>
 #endif
-#include <cstdlib>
-#include <cstring>
-#include <ctime>
-#include <fstream>
 #include <iostream>
 #include <memory>
-#include <stdexcept>
-#include <string>
 
 #include <SDL_image.h>
 #include <SDL_ttf.h>
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/format.hpp>
 #include <boost/regex.hpp>
 #ifdef __APPLE__
 #include <mach-o/dyld.h>
@@ -46,6 +38,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/random.h"
 #include "base/time_string.h"
 #include "base/warning.h"
 #include "base/wexception.h"
@@ -55,10 +48,10 @@
 #include "graphic/default_resolution.h"
 #include "graphic/font_handler.h"
 #include "graphic/text/font_set.h"
+#include "graphic/text_layout.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/ai_dna_handler.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -73,7 +66,6 @@
 #include "network/gameclient.h"
 #include "network/gamehost.h"
 #include "network/internet_gaming.h"
-#include "random/random.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
@@ -91,7 +83,6 @@
 #include "ui_fsmenu/options.h"
 #include "ui_fsmenu/scenario_select.h"
 #include "ui_fsmenu/singleplayer.h"
-#include "wlapplication_messages.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
@@ -1366,6 +1357,8 @@ bool WLApplication::new_game() {
 			game.run(Widelands::Game::NewNonScenario, "", false, "single_player");
 		} catch (const std::exception& e) {
 			log("Fatal exception: %s\n", e.what());
+			std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(game, true, pn));
+			game.set_game_controller(ctrl.get());
 			emergency_save(game);
 			throw;
 		}

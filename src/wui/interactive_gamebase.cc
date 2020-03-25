@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "base/macros.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
@@ -128,6 +126,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 					   if (wanted_building_window.minimize) {
 						   building_window->minimize();
 					   }
+					   building_window->set_pinned(wanted_building_window.pin);
 					   wanted_building_windows_.erase(coords.hash());
 				   }
 			   }
@@ -230,7 +229,7 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 	                     _("Hide Statistics") :
 	                     _("Show Statistics"),
 	                  ShowHideEntry::kStatistics,
-	                  g_gr->images().get("images/wui/menus/toggle_statistics.png"), false, "", "s");
+	                  g_gr->images().get("images/wui/menus/toggle_statistics.png"), false, "", "S");
 
 	showhidemenu_.add(get_display_flag(dfShowSoldierLevels) ?
 	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
@@ -239,7 +238,7 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 	                     _("Show Soldier Levels"),
 	                  ShowHideEntry::kSoldierLevels,
 	                  g_gr->images().get("images/wui/menus/toggle_soldier_levels.png"), false, "",
-	                  "l");
+	                  "L");
 }
 
 void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry) {
@@ -538,10 +537,11 @@ void InteractiveGameBase::toggle_mainmenu() {
 
 void InteractiveGameBase::add_wanted_building_window(const Widelands::Coords& coords,
                                                      const Vector2i point,
-                                                     bool was_minimal) {
+                                                     bool was_minimal,
+                                                     bool was_pinned) {
 	wanted_building_windows_.insert(std::make_pair(
 	   coords.hash(), std::unique_ptr<const WantedBuildingWindow>(new WantedBuildingWindow(
-	                     point, was_minimal, has_workarea_preview(coords)))));
+	                     point, was_minimal, was_pinned, has_workarea_preview(coords)))));
 }
 
 UI::UniqueWindow* InteractiveGameBase::show_building_window(const Widelands::Coords& coord,

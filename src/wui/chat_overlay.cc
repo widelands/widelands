@@ -21,9 +21,6 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
-#include "base/macros.h"
 #include "base/wexception.h"
 #include "chat/chat.h"
 #include "graphic/font_handler.h"

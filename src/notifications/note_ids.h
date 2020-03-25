@@ -20,7 +20,7 @@
 #ifndef WL_NOTIFICATIONS_NOTE_IDS_H
 #define WL_NOTIFICATIONS_NOTE_IDS_H
 
-#include <stdint.h>
+#include <cstdint>
 
 // List all note ids here. They must be unique in the running
 // system, this is easier to guarantee when they are all listed in

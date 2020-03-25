@@ -21,12 +21,16 @@ except AttributeError:
         return iter(d.values())
     def iteritems(d):
         return iter(d.items())
+    def bytes_to_str(bytes):
+        return str(bytes, 'utf-8')
 else:
     # Python 2
     def itervalues(d):
         return d.itervalues()
     def iteritems(d):
         return d.iteritems()
+    def bytes_to_str(bytes):
+        return str(bytes)
 
 def datadir():
     return os.path.join(os.path.dirname(__file__), "data")
@@ -99,7 +103,7 @@ class WidelandsTestCase(unittest.TestCase):
                 line = widelands.stdout.readline()
                 if not line:
                     break
-                stdout_file.write(str(line))
+                stdout_file.write(bytes_to_str(line))
                 stdout_file.flush()
             widelands.communicate()
             self.widelands_returncode = widelands.returncode

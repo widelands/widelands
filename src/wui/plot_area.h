@@ -21,9 +21,6 @@
 #define WL_WUI_PLOT_AREA_H
 
 #include <memory>
-#include <vector>
-
-#include <boost/bind.hpp>
 
 #include "graphic/color.h"
 #include "ui_basic/panel.h"

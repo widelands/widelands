@@ -19,9 +19,7 @@
 
 #include "graphic/gl/draw_line_program.h"
 
-#include <algorithm>
 #include <cassert>
-#include <vector>
 
 #include "base/log.h"
 

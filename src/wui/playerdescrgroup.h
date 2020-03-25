@@ -22,7 +22,6 @@
 
 #include <map>
 #include <memory>
-#include <string>
 
 #include "logic/game_settings.h"
 #include "ui_basic/panel.h"
@@ -51,10 +50,11 @@ private:
 	void enable_player(bool);
 	void toggle_playertype();
 	void toggle_playertribe();
-	void toggle_playerinit();
 	void toggle_playerteam();
 
-	PlayerDescriptionGroupImpl* d;
+	void update_playerinit();
+
+	std::unique_ptr<PlayerDescriptionGroupImpl> d;
 	std::map<std::string, std::string> tribenames_;
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 };

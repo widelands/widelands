@@ -19,17 +19,21 @@
 
 #include "io/filesystem/disk_filesystem.h"
 
-#include <cassert>
 #include <cerrno>
+#ifdef _WIN32
+#ifdef _MSC_VER
+#include <cstdio>
+#endif
+#endif
+#include <cstring>
 
-#include <boost/algorithm/string/replace.hpp>
 #include <sys/stat.h>
 #ifdef _WIN32
+#include <boost/algorithm/string.hpp>
 #include <dos.h>
 #include <windows.h>
 #ifdef _MSC_VER
 #include <direct.h>
-#include <io.h>
 #define S_ISDIR(x) ((x & _S_IFDIR) ? 1 : 0)
 #endif
 #else  // not _WIN32

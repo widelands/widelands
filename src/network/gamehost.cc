@@ -21,11 +21,7 @@
 
 #include <algorithm>
 #include <memory>
-#include <sstream>
-#include <string>
 
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/format.hpp>
 #ifndef _WIN32
 #include <unistd.h>  // for usleep
 #endif
@@ -40,7 +36,6 @@
 #include "chat/chat.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
-#include "helper.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
@@ -49,7 +44,6 @@
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/playersmanager.h"
-#include "map_io/widelands_map_loader.h"
 #include "network/constants.h"
 #include "network/internet_gaming.h"
 #include "network/nethost.h"
@@ -58,7 +52,6 @@
 #include "network/network_lan_promotion.h"
 #include "network/network_player_settings_backend.h"
 #include "network/network_protocol.h"
-#include "scripting/lua_interface.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/launch_mpg.h"
 #include "wlapplication.h"
@@ -2298,7 +2291,8 @@ void GameHost::handle_file_part(Client& client, RecvPacket& r) {
 		return;  // Surely the file was changed, so we cancel here.
 	}
 	if (part >= file_->parts.size()) {
-		log("[Host]: Warning: Client reports to have received file part %u but we only have %lu\n",
+		log("[Host]: Warning: Client reports to have received file part %u but we only have %" PRIuS
+		    "\n",
 		    part, file_->parts.size());
 		return;
 	}

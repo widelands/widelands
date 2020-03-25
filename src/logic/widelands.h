@@ -20,14 +20,9 @@
 #ifndef WL_LOGIC_WIDELANDS_H
 #define WL_LOGIC_WIDELANDS_H
 
-#include <cassert>
-#include <cstddef>
+#include <cstdint>
 #include <limits>
 #include <vector>
-
-#include <stdint.h>
-
-#include "base/macros.h"
 
 namespace Widelands {
 
@@ -61,9 +56,9 @@ using TeamNumber = uint8_t;
  * EditorCategory, BuildingDescr, ImmovableDescr, ShipDescr, TribeDescr
  * and others.
  */
-using DescriptionIndex = uint8_t;
+using DescriptionIndex = uint16_t;
 
-constexpr DescriptionIndex INVALID_INDEX = std::numeric_limits<uint8_t>::max();
+constexpr DescriptionIndex INVALID_INDEX = std::numeric_limits<uint16_t>::max();
 constexpr DescriptionIndex kInvalidWare = INVALID_INDEX - 1;
 constexpr DescriptionIndex kNoResource = INVALID_INDEX - 1;
 

@@ -20,16 +20,13 @@
 #ifndef WL_NETWORK_GAMECLIENT_H
 #define WL_NETWORK_GAMECLIENT_H
 
-#include <memory>
-
 #include "chat/chat.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "logic/player_end_result.h"
-#include "network/netclient_interface.h"
+#include "network/network.h"
 
 struct GameClientImpl;
-class InteractiveGameBase;
 
 /**
  * GameClient manages the lifetime of a network game in which this computer

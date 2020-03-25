@@ -19,8 +19,6 @@
 
 #include "wui/buildingwindow.h"
 
-#include <boost/format.hpp>
-
 #include "base/macros.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
@@ -31,7 +29,6 @@
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
-#include "logic/maphollowregion.h"
 #include "logic/player.h"
 #include "ui_basic/tabpanel.h"
 #include "wui/actionconfirm.h"
@@ -40,6 +37,7 @@
 #include "wui/inputqueuedisplay.h"
 #include "wui/interactive_player.h"
 #include "wui/unique_window_handler.h"
+#include "wui/waresdisplay.h"
 
 static const char* pic_bulldoze = "images/wui/buildings/menu_bld_bulldoze.png";
 static const char* pic_dismantle = "images/wui/buildings/menu_bld_dismantle.png";
@@ -86,7 +84,8 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 			break;
 		// The building is no more. Next think() will call die().
 		case Widelands::NoteBuilding::Action::kStartWarp:
-			igbase()->add_wanted_building_window(building_position_, get_pos(), is_minimal());
+			igbase()->add_wanted_building_window(
+			   building_position_, get_pos(), is_minimal(), is_pinned());
 			break;
 		default:
 			break;

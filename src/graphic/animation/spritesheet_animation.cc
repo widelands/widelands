@@ -20,18 +20,13 @@
 #include "graphic/animation/spritesheet_animation.h"
 
 #include <cassert>
-#include <cstdio>
-#include <limits>
 #include <memory>
 
 #include <boost/algorithm/string/replace.hpp>
-#include <boost/format.hpp>
 
 #include "base/log.h"
-#include "base/macros.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
-#include "graphic/playercolor.h"
 #include "graphic/texture.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -150,15 +145,16 @@ SpriteSheetAnimation IMPLEMENTATION
 ==============================================================================
 */
 
-SpriteSheetAnimation::SpriteSheetAnimation(const LuaTable& table, const std::string& basename)
+SpriteSheetAnimation::SpriteSheetAnimation(const LuaTable& table,
+                                           const std::string& basename,
+                                           const std::string& animation_directory)
    : Animation(table) {
 	try {
 		// Get image files
-		if (basename.empty() || !table.has_key("directory")) {
-			throw Widelands::GameDataError(
-			   "Animation did not define both a basename and a directory for its sprite sheet file");
-		}
-		const std::string directory = table.get_string("directory");
+		// TODO(GunChleoc): When all animations have been converted, require that animation_directory
+		// is not empty.
+		const std::string directory =
+		   animation_directory.empty() ? table.get_string("directory") : animation_directory;
 
 		// Frames, rows and columns
 		nr_frames_ = table.get_int("frames");

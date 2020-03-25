@@ -20,7 +20,7 @@
 #ifndef WL_LOGIC_TRADE_AGREEMENT_H
 #define WL_LOGIC_TRADE_AGREEMENT_H
 
-#include "logic/map_objects/map_object.h"
+#include "logic/map_objects/tribes/bill_of_materials.h"
 
 namespace Widelands {
 

@@ -1,15 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
+# ks k, 2020
 # TaeMin An, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
-"PO-Revision-Date: 2019-08-10 17:15+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-02-26 18:51+0000\n"
+"PO-Revision-Date: 2020-03-01 05:12+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,23 +29,23 @@ msgstr "기본적인 건축 자재를 수집하고 진영 주변의 경계를 �
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:24
 msgid "Build a lumberjack’s hut"
-msgstr "나무꾼의 오두막을 지으십시오."
+msgstr "나무꾼의 오두막을 지으십시오"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:25
 msgid "Build a ranger’s hut"
-msgstr "숲 지킴이의 오두막을 지으십시오."
+msgstr "숲 지킴이의 오두막을 지으십시오"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:26
 msgid "Build a quarry"
-msgstr "채석장을 지으십시오."
+msgstr "채석장을 지으십시오"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:27
 msgid "Build a wood hardener"
-msgstr "목재 경화소를 지으십시오."
+msgstr "목재 경화소를 지으십시오"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:28
 msgid "Build a sentry on the eastern border"
-msgstr "동쪽 끝 경계에 초소를 지으십시오."
+msgstr "동쪽 끝 경계에 초소를 지으십시오"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:29
 msgid "You should eventually also build a reed yard and a lime kiln."
@@ -646,12 +647,12 @@ msgstr "족장, 불쌍한 운송일꾼들을 기억하시오. 우리의 길이 �
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgstr ""
+msgstr "새로운 목표"
 
 #: ../../data/scripting/richtext_scenarios.lua:93
 msgid "New Objectives"
-msgstr ""
+msgstr "새로운 목표들"

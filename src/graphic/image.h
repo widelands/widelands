@@ -20,15 +20,8 @@
 #ifndef WL_GRAPHIC_IMAGE_H
 #define WL_GRAPHIC_IMAGE_H
 
-#include <string>
-
-#include <stdint.h>
-
 #include "base/macros.h"
-#include "base/rect.h"
 #include "graphic/gl/blit_data.h"
-
-class Texture;
 
 /**
  * Interface to a bitmap that can act as the source of a rendering

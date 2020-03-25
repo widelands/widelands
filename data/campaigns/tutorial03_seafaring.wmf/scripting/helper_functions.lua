@@ -27,3 +27,23 @@ function filled_buildings(p, ...)
       elseif b.valid_inputs then b:set_inputs(b.valid_inputs) end
    end
 end
+
+-- Check if construction of specified building has started on given field
+-- First bob on the field indicates start of construction works
+function construction_started(field, building_desc)
+   return field.immovable and
+      field.immovable.descr.type_name == "constructionsite" and
+      field.immovable.building == building_desc and
+      #field.bobs > 0
+end
+
+-- Check if construction of specified building has started in given region
+-- construction_started() function is called for each field in region
+function construction_started_region(region, building_desc)
+   for k,v in pairs(region) do
+      if construction_started(v, building_desc) then
+         return true
+      end
+   end
+   return false
+end

@@ -20,12 +20,7 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_PRODUCTIONSITE_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_PRODUCTIONSITE_H
 
-#include <cstring>
-#include <map>
 #include <memory>
-#include <set>
-#include <string>
-#include <vector>
 
 #include "base/macros.h"
 #include "logic/map_objects/tribes/bill_of_materials.h"
@@ -36,11 +31,8 @@
 
 namespace Widelands {
 
-struct ProductionProgram;
 class Request;
 class Soldier;
-class WareDescr;
-class WaresQueue;
 class WorkerDescr;
 
 enum class FailNotificationType { kDefault, kFull };

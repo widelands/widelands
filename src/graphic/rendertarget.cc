@@ -19,7 +19,6 @@
 
 #include "graphic/rendertarget.h"
 
-#include "base/macros.h"
 #include "graphic/align.h"
 #include "graphic/animation/animation.h"
 #include "graphic/animation/animation_manager.h"

@@ -20,13 +20,7 @@
 #ifndef WL_GRAPHIC_ANIMATION_NONPACKED_ANIMATION_H
 #define WL_GRAPHIC_ANIMATION_NONPACKED_ANIMATION_H
 
-#include <map>
-#include <memory>
-#include <string>
-#include <vector>
-
 #include "base/rect.h"
-#include "base/vector.h"
 #include "graphic/animation/animation.h"
 #include "graphic/color.h"
 #include "graphic/image.h"
@@ -40,7 +34,9 @@
 class NonPackedAnimation : public Animation {
 public:
 	~NonPackedAnimation() override = default;
-	explicit NonPackedAnimation(const LuaTable& table, const std::string& basename);
+	explicit NonPackedAnimation(const LuaTable& table,
+	                            const std::string& basename,
+	                            const std::string& animation_directory);
 
 	const Image* representative_image(const RGBColor* clr) const override;
 

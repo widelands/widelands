@@ -19,17 +19,11 @@
 
 #include "wui/interactive_player.h"
 
-#include <boost/bind.hpp>
-#include <boost/format.hpp>
-#include <boost/lambda/bind.hpp>
-#include <boost/lambda/construct.hpp>
-#include <boost/lexical_cast.hpp>
-#include <boost/type_traits.hpp>
-
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "economy/flag.h"
 #include "game_io/game_loader.h"
+#include "graphic/game_renderer.h"
 #include "logic/cmd_queue.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/immovable.h"
@@ -44,7 +38,6 @@
 #include "wui/building_statistics_menu.h"
 #include "wui/debugconsole.h"
 #include "wui/fieldaction.h"
-#include "wui/game_chat_menu.h"
 #include "wui/game_message_menu.h"
 #include "wui/game_objectives_menu.h"
 #include "wui/general_statistics_menu.h"

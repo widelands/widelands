@@ -19,13 +19,7 @@
 
 #include "wui/building_statistics_menu.h"
 
-#include <cmath>
-
-#include <boost/bind.hpp>
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
-#include "graphic/font_handler.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/tribes.h"

@@ -41,7 +41,7 @@ tribes:new_worker_type {
 
    programs = {
       plant = {
-         "findspace=size:any radius:2",
+         "findspace=size:any radius:2 space",
          "walk=coords",
          "animate=planting 6000",
          "plant=attrib:seed_corn",

@@ -20,13 +20,8 @@
 #include "wui/attack_box.h"
 
 #include <memory>
-#include <string>
-
-#include <boost/format.hpp>
 
 #include "base/macros.h"
-#include "graphic/font_handler.h"
-#include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
 #include "logic/map_objects/tribes/soldier.h"
 

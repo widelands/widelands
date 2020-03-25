@@ -21,15 +21,10 @@
 #define WL_NETWORK_INTERNET_GAMING_H
 
 #include <memory>
-#include <string>
-#include <vector>
 
-#include "build_info.h"
 #include "chat/chat.h"
-#include "network/internet_gaming_protocol.h"
 #include "network/netclient.h"
 #include "network/network.h"
-#include "network/network_lan_promotion.h"
 
 /// A simple network client struct
 struct InternetClient {

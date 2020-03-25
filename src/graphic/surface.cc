@@ -19,13 +19,8 @@
 
 #include "graphic/surface.h"
 
-#include <cassert>
-#include <cmath>
-#include <cstdlib>
-
 #include <SDL.h>
 
-#include "base/macros.h"
 #include "base/rect.h"
 #include "base/vector.h"
 #include "graphic/gl/coordinate_conversion.h"

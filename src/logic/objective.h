@@ -20,10 +20,6 @@
 #ifndef WL_LOGIC_OBJECTIVE_H
 #define WL_LOGIC_OBJECTIVE_H
 
-#include <cassert>
-#include <cstring>
-#include <string>
-
 #include "base/i18n.h"
 
 namespace Widelands {
