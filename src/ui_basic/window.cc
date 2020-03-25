@@ -262,36 +262,43 @@ void Window::move_inside_parent() {
 	if (Panel* const parent = get_parent()) {
 		int32_t px = get_x();
 		int32_t py = get_y();
-		if ((parent->get_inner_w() < get_w()) && (px + get_w() <= parent->get_inner_w() || px >= 0))
+        if ((parent->get_inner_w() < get_w()) && (px + get_w() <= parent->get_inner_w() || px >= 0)) {
 			px = (parent->get_inner_w() - get_w()) / 2;
-		if ((parent->get_inner_h() < get_h()) && (py + get_h() < parent->get_inner_h() || py > 0))
+        }
+        if ((parent->get_inner_h() < get_h()) && (py + get_h() < parent->get_inner_h() || py > 0)) {
 			py = 0;
+        }
 
 		if (parent->get_inner_w() >= get_w()) {
 			if (px < 0) {
 				px = 0;
-				if (parent->get_dock_windows_to_edges() && !docked_left_)
+                if (parent->get_dock_windows_to_edges() && !docked_left_) {
 					docked_left_ = true;
+                }
 			} else if (px + get_w() >= parent->get_inner_w()) {
 				px = parent->get_inner_w() - get_w();
-				if (parent->get_dock_windows_to_edges() && !docked_right_)
+                if (parent->get_dock_windows_to_edges() && !docked_right_) {
 					docked_right_ = true;
+                }
 			}
-			if (docked_left_)
+            if (docked_left_) {
 				px -= VT_B_PIXMAP_THICKNESS;
-			else if (docked_right_)
+            } else if (docked_right_) {
 				px += VT_B_PIXMAP_THICKNESS;
+            }
 		}
 		if (parent->get_inner_h() >= get_h()) {
-			if (py < 0)
+            if (py < 0) {
 				py = 0;
-			else if (py + get_h() > parent->get_inner_h()) {
+			} else if (py + get_h() > parent->get_inner_h()) {
 				py = parent->get_inner_h() - get_h();
-				if (!is_minimal_ && parent->get_dock_windows_to_edges() && !docked_bottom_)
+                if (!is_minimal_ && parent->get_dock_windows_to_edges() && !docked_bottom_) {
 					docked_bottom_ = true;
+                }
 			}
-			if (docked_bottom_)
+            if (docked_bottom_) {
 				py += BT_B_PIXMAP_THICKNESS;
+            }
 		}
 		set_pos(Vector2i(px, py));
 	}
@@ -339,10 +346,11 @@ void Window::draw_border(RenderTarget& dst) {
 
 		//  top bar
 		static_assert(0 <= HZ_B_CORNER_PIXMAP_LEN, "assert(0 <= HZ_B_CORNER_PIXMAP_LEN) failed.");
-		for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN)
+        for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN) {
 			dst.blitrect(
 			   Vector2i(pos, 0), pic_top_, Recti(Vector2i(HZ_B_CORNER_PIXMAP_LEN, 0),
 			                                     HZ_B_MIDDLE_PIXMAP_LEN, TP_B_PIXMAP_THICKNESS));
+        }
 
 		// odd pixels of top bar and top right corner
 		const int32_t width = hz_bar_end - pos + HZ_B_CORNER_PIXMAP_LEN;
@@ -380,10 +388,11 @@ void Window::draw_border(RenderTarget& dst) {
 
 			//  left bar
 			static_assert(0 <= VT_B_THINGY_PIXMAP_LEN, "assert(0 <= VT_B_THINGY_PIXMAP_LEN) failed.");
-			for (; pos < vt_bar_end_minus_middle; pos += VT_B_MIDDLE_PIXMAP_LEN)
+            for (; pos < vt_bar_end_minus_middle; pos += VT_B_MIDDLE_PIXMAP_LEN) {
 				dst.blitrect(Vector2i(0, pos), pic_lborder_,
 				             Recti(Vector2i(0, VT_B_THINGY_PIXMAP_LEN), VT_B_PIXMAP_THICKNESS,
 				                   VT_B_MIDDLE_PIXMAP_LEN));
+            }
 
 			//  odd pixels of left bar and left bottom thingy
 			const int32_t height = vt_bar_end - pos + VT_B_THINGY_PIXMAP_LEN;
@@ -404,10 +413,11 @@ void Window::draw_border(RenderTarget& dst) {
 
 			//  right bar
 			static_assert(0 <= VT_B_THINGY_PIXMAP_LEN, "assert(0 <= VT_B_THINGY_PIXMAP_LEN) failed.");
-			for (; pos < vt_bar_end_minus_middle; pos += VT_B_MIDDLE_PIXMAP_LEN)
+            for (; pos < vt_bar_end_minus_middle; pos += VT_B_MIDDLE_PIXMAP_LEN) {
 				dst.blitrect(Vector2i(right_border_x, pos), pic_rborder_,
 				             Recti(Vector2i(0, VT_B_THINGY_PIXMAP_LEN), VT_B_PIXMAP_THICKNESS,
 				                   VT_B_MIDDLE_PIXMAP_LEN));
+            }
 
 			// odd pixels of right bar and right bottom thingy
 			const int32_t height = vt_bar_end - pos + VT_B_THINGY_PIXMAP_LEN;
@@ -424,10 +434,11 @@ void Window::draw_border(RenderTarget& dst) {
 			    Recti(Vector2i::zero(), pos, BT_B_PIXMAP_THICKNESS));
 
 			//  bottom bar
-			for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN)
+            for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN) {
 				dst.blitrect(Vector2i(pos, get_h() - BT_B_PIXMAP_THICKNESS), pic_bottom_,
 				             Recti(Vector2i(HZ_B_CORNER_PIXMAP_LEN, 0), HZ_B_MIDDLE_PIXMAP_LEN,
 				                   BT_B_PIXMAP_THICKNESS));
+            }
 
 			// odd pixels of bottom bar and bottom right corner
 			const int32_t width = hz_bar_end - pos + HZ_B_CORNER_PIXMAP_LEN;
@@ -460,9 +471,9 @@ bool Window::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my) {
 	//  needs is the key state at the time the mouse was clicked. See the
 	//  usage comment for get_key_state.
 	if ((SDL_GetModState() & KMOD_CTRL && btn == SDL_BUTTON_LEFT && my < VT_B_PIXMAP_THICKNESS) ||
-	    btn == SDL_BUTTON_MIDDLE)
+        btn == SDL_BUTTON_MIDDLE) {
 		is_minimal() ? restore() : minimize();
-	else if (btn == SDL_BUTTON_LEFT) {
+	} else if (btn == SDL_BUTTON_LEFT) {
 		dragging_ = true;
 		drag_start_win_x_ = get_x();
 		drag_start_win_y_ = get_y();
@@ -548,8 +559,9 @@ void Window::minimize() {
 		y -= BT_B_PIXMAP_THICKNESS;  //  Minimal can not be bottom-docked.
 		docked_bottom_ = false;
 	}
-	if (y < 0)
+    if (y < 0) {
 		y = 0;  //  Move into the screen
+    }
 	oldh_ = get_inner_h();
 	is_minimal_ = true;
 	set_border(get_lborder(), get_rborder(), get_tborder(), 0);
@@ -620,15 +632,15 @@ bool Window::handle_mousemove(const uint8_t, int32_t mx, int32_t my, int32_t, in
 				new_top = max_y - h;
 			}
 
-			if (nearest_snap_distance_x == bsnap)
+            if (nearest_snap_distance_x == bsnap) {
 				nearest_snap_distance_x = psnap;
-			else {
+			} else {
 				assert(nearest_snap_distance_x < bsnap);
 				nearest_snap_distance_x = std::min(nearest_snap_distance_x, psnap);
 			}
-			if (nearest_snap_distance_y == bsnap)
+            if (nearest_snap_distance_y == bsnap) {
 				nearest_snap_distance_y = psnap;
-			else {
+			} else {
 				assert(nearest_snap_distance_y < bsnap);
 				nearest_snap_distance_y = std::min(nearest_snap_distance_y, psnap);
 			}
