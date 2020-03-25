@@ -53,6 +53,9 @@ translations for strings in this table.
     transform to after gaining enough experience. If `experience`
     is defined, this needs to be set as well.
 
+**animation_directory**
+    *Mandatory*. The location of the animation png files.
+
 **animations**:
      A table containing all animations for this worker.
      Workers have an "idle" animation. They also have directional animations

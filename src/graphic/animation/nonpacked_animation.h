@@ -34,7 +34,9 @@
 class NonPackedAnimation : public Animation {
 public:
 	~NonPackedAnimation() override = default;
-	explicit NonPackedAnimation(const LuaTable& table, const std::string& basename);
+	explicit NonPackedAnimation(const LuaTable& table,
+	                            const std::string& basename,
+	                            const std::string& animation_directory);
 
 	const Image* representative_image(const RGBColor* clr) const override;
 
