@@ -769,7 +769,7 @@ void MilitarySite::act(Game& game, uint32_t const data) {
 						   game.map().calc_distance(get_position(), soldier->get_position());
 						const unsigned int heal_with_factor =
 						   total_heal * descr().get_conquers() / std::max(air_distance * 4U, 1U);
-						soldier->heal(std::max(total_heal, heal_with_factor));
+						soldier->heal(std::min(total_heal, heal_with_factor));
 					}
 				}
 			}

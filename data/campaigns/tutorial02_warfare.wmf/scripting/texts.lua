@@ -126,6 +126,54 @@ trainingcamp2 = {
    )
 }
 
+scouting1 = {
+   position = "topright",
+   title = _"Scout’s Hut",
+   body = (
+      h1(_"Explore Your Surroundings") ..
+      p(_[[Large parts of the map haven’t been explored yet. It might be a good idea to know which direction is best for expanding our empire.]]) ..
+      p(_[[You can try your luck and expand randomly, but this is risky. A safer way is to use a scout to explore unseen parts of the map. What if he finds mountains overflowing with gold?]]) ..
+      p(_[[We will need a scout’s hut to start exploring. It is a small building.]]) ..
+      li_object("barbarians_scouts_hut", _[[Build a scout’s hut.]], plr.color)
+   ),
+   h = 300,
+   obj_name = "build_scouts_hut",
+   obj_title = _"Build a scout’s hut",
+   obj_body = (
+      p(_[[It’s good to know your surroundings. A scout will explore unseen parts of the map for you.]]) ..
+      li(_[[Build a Scout’s Hut.]])
+   )
+}
+
+scouting2 = {
+   position = "topright",
+   title = _"Scout is ready",
+   body = (
+      h1(_"Ready to go!") ..
+      p(_[[Well done, your scout’s hut has been built. While our scout is moving in, let’s learn a little bit more about him.]]) ..
+      p(_[[First of all, he will need to take some food with him on his scouting trips. Fortunately, we have some rations in our warehouse.]]) ..
+      li_object("barbarians_scout", _[[When provided with food, he will walk randomly around the area. You should follow his movement before fog of war hides what he saw.]], plr.color)
+   ),
+   h = 300,
+   obj_name = "explore_map",
+   obj_title = _"Explore the map",
+   obj_body = (
+      p(_[[Wait for the scout to explore unseen areas.]]) ..
+      li(_[[Observe your scout.]])
+   )
+}
+
+scouting3 = {
+   position = "topright",
+   title = _"Scout made progress",
+   body = (
+      h1(_"New horizons?") ..
+      p(_[[As you can see, scouts can go quite far. The good news is that there are no enemies around.]]) ..
+      p(_[[You can use the minimap to see the exploration’s progress.]]) ..
+      p(_[[Don’t forget that scouting is hard work and as such cannot be done without provision of food.]])
+   ),
+   h = 250
+}
 heroes_rookies = {
    position = "topright",
    title = _"Heroes and Rookies",
