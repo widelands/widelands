@@ -79,7 +79,7 @@ obj_battlearena = {
    name = "build_battlearena",
    title = _"Build a battle arena",
    number = 1,
-   body = objective_text("Battle arena",
+   body = objective_text(_"Battle arena",
       li(_[[Build a battle arena. It is a big building.]]) ..
       li_arrow(_[[Since the construction will take some time, you can change the game speed using Page Up and Page Down.]])
    )
@@ -115,7 +115,7 @@ obj_trainingcamp = {
    name = "build_trainingcamp",
    title = _"Build a training camp",
    number = 1,
-   body = objective_text("Training camp",
+   body = objective_text(_"Training camp",
       p(_[[The battle arena only trains the soldiers in evade. To get the strongest possible soldier, you also need to build a training camp, which trains them in attack and health.]]) ..
       li(_[[Build a training camp.]])
    )
@@ -148,7 +148,7 @@ obj_scouting1 = {
    name = "build_scouts_hut",
    title = _"Build a scout’s hut",
    number = 1,
-   body = objective_text("Scout’s hut",
+   body = objective_text(_"Scout’s hut",
       p(_[[It’s good to know your surroundings. A scout will explore unseen parts of the map for you.]]) ..
       li(_[[Build a Scout’s Hut.]])
    )
@@ -169,7 +169,7 @@ obj_scouting2 = {
    name = "explore_map",
    title = _"Explore the map",
    number = 1,
-   body = objective_text("Scout",
+   body = objective_text(_"Scout",
       p(_[[Wait for the scout to explore unseen areas.]]) ..
       li(_[[Observe your scout.]])
    )
@@ -230,7 +230,7 @@ obj_dismantle = {
    name = "dismantle_sentry",
    title = _"Dismantle your north-western sentry",
    number = 1,
-   body = objective_text("Number of soldiers",
+   body = objective_text(_"Number of soldiers",
       p(_[[You can control the number of soldiers stationed at a military site with the arrow buttons. If you want to get even your last soldier out, you will have to destroy it. However, it then will no longer protect your territory, which will make it vulnerable to hostile attacks.]]) ..
       li(_[[Dismantle your sentry in the north-west, next to the barrier.]])
    )
@@ -253,7 +253,7 @@ obj_fortress = {
    name = "enhance_fortress",
    title = _"Enhance your fortress to a citadel",
    number = 1,
-   body = objective_text("Enhance Your Fortress",
+   body = objective_text(_"Enhance Your Fortress",
       li(_[[Enhance your fortress to a mighty citadel.]]) ..
       li_arrow(_[[The citadel can house 12 soldiers, and it is the biggest military building the Barbarians can build. It also costs a lot of resources and takes a long time to build. It is most suited to guard strategically important points like constricted points or mountains.]])
    )
@@ -275,7 +275,7 @@ obj_attack = {
    name = "defeated_the_empire",
    title = _"Defeat the enemy tribe",
    number = 1,
-   body = objective_text("Defeat Your Enemy",
+   body = objective_text(_"Defeat Your Enemy",
       li(_[[Defeat the nearby enemy.]]) ..
       li_arrow(_[[To attack a building, click on its doors, choose the number of soldiers that you wish to send and click on the ‘Attack’ button.]])
    )
