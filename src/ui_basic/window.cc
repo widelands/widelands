@@ -521,7 +521,7 @@ bool Window::handle_key(bool down, SDL_Keysym code) {
 				}
 				return true;
 			}
-		}
+		} break;
 		default:
 			break;
 		}
