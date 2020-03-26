@@ -104,6 +104,7 @@ void GameDetails::show(const std::vector<SavegameData>& gamedata) {
 	boost::replace_all(name_list, "\n", "<br> • ");
 
 	const std::string header_second_part(
+	   /** TRANSLATORS: This is the second part of "Selected %1% directory/directories and %2%" */
 	   (boost::format(ngettext("%d file:", "%d files:", number_of_files)) % number_of_files).str());
 
 	std::string combined_header = as_richtext(as_heading_with_content(
