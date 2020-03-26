@@ -30,11 +30,10 @@ tribes:new_worker_type {
       }
    },
 
+   animation_directory = dirname,
    ware_hotspot = {0, 29},
    spritesheets = {
       walk = {
-         directory = dirname,
-         basename = "walk",
          directional = true,
          hotspot = {17, 28},
          fps = 15,
@@ -43,7 +42,6 @@ tribes:new_worker_type {
          rows = 5
       },
       idle = {
-         directory = dirname,
          basename = "walk_se",
          hotspot = {17, 28},
          fps = 15,
@@ -52,8 +50,6 @@ tribes:new_worker_type {
          rows = 5
       },
       release = {
-         directory = dirname,
-         basename = "release",
          hotspot = {14, 25},
          -- I apologize for the unusual frame durations in this animation…
          fps = 11,

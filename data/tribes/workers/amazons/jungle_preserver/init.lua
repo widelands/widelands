@@ -1,28 +1,5 @@
 dirname = path.dirname (__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files (dirname .. "idle_??.png"),
-      hotspot = {8, 23},
-   },
-   dig = {
-      pictures = path.list_files (dirname .. "dig_??.png"),
-      hotspot = { 15, 20 },
-      fps = 20
-   },
-   planting = {
-      pictures = path.list_files (dirname .. "plant_??.png"),
-      hotspot = { 15, 18 },
-      fps = 10
-   },
-   water = {
-      pictures = path.list_files (dirname .. "water_??.png"),
-      hotspot = { 14, 20 },
-      fps = 10
-   }
-}
-add_directional_animation(animations, "walk", dirname, "walk", {11, 24}, 15)
-
 tribes:new_worker_type {
    msgctxt = "amazons_worker",
    name = "amazons_jungle_preserver",
@@ -47,10 +24,42 @@ tribes:new_worker_type {
          "animate=dig 2000",
          "animate=planting 1000",
          "plant=attrib:tree_pole",
-         "animate=water 2000",
+         "animate=planting 1000",
          "return"
       }
    },
 
-   animations = animations,
+   animation_directory = dirname,
+   spritesheets = {
+      walk = {
+         directional = true,
+         hotspot = {17, 28},
+         fps = 15,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      },
+      idle = {
+         basename = "walk_se",
+         hotspot = {17, 28},
+         fps = 15,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      },
+      dig = {
+         hotspot = {14, 23},
+         fps = 15,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      },
+      planting = {
+         hotspot = {11, 18},
+         fps = 15,
+         frames = 15,
+         columns = 5,
+         rows = 3
+      },
+   }
 }

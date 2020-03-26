@@ -30,5 +30,6 @@ tribes:new_ferry_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
+   animation_directory = dirname,
    animations = animations,
 }

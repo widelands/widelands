@@ -14,11 +14,10 @@ tribes:new_worker_type {
       hammer = 1
    },
 
+   animation_directory = dirname,
    ware_hotspot = {0, 29},
    spritesheets = {
       walk = {
-         directory = dirname,
-         basename = "walk",
          directional = true,
          hotspot = {17, 28},
          fps = 15,
@@ -27,8 +26,6 @@ tribes:new_worker_type {
          rows = 5
       },
       walkload = {
-         directory = dirname,
-         basename = "walkload",
          directional = true,
          hotspot = {17, 31},
          fps = 15,
@@ -37,8 +34,6 @@ tribes:new_worker_type {
          rows = 5
       },
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {12, 30},
          fps = 15,
          frames = 40,
@@ -46,8 +41,6 @@ tribes:new_worker_type {
          rows = 5
       },
       work = {
-         directory = dirname,
-         basename = "work",
          hotspot = {16, 38},
          fps = 15,
          frames = 80,

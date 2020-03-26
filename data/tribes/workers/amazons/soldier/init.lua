@@ -83,6 +83,7 @@ tribes:new_soldier_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
+   animation_directory = dirname .. "rookie",
    animations = animations,
 
    default_target_quantity = 10,

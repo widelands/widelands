@@ -71,6 +71,7 @@ tribes:new_worker_type {
       },
    },
 
+   animation_directory = dirname,
    ware_hotspot = {0, 20},
    animations = animations,
 }
