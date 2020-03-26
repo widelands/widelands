@@ -725,31 +725,44 @@ void MilitarySite::act(Game& game, uint32_t const data) {
 		update_soldier_request();
 	}
 
+	// Heal soldiers
 	if (nexthealtime_ <= timeofgame) {
-		uint32_t total_heal = descr().get_heal_per_second();
-		std::vector<Soldier*> soldiers = soldier_control_.present_soldiers();
+		const uint32_t total_heal = descr().get_heal_per_second();
 		uint32_t max_total_level = 0;
 		float max_health = 0;
-		Soldier* soldier_to_heal = 0;
+		Soldier* soldier_to_heal = nullptr;
 
-		for (uint32_t i = 0; i < soldiers.size(); ++i) {
-			Soldier* s = soldiers[i];
-
-			// The healing algorithm is:
-			// * heal soldier with highest total level
-			// * heal healthiest if multiple of same total level exist
-			if (s->get_current_health() < s->get_max_health()) {
-				if (0 == soldier_to_heal || s->get_total_level() > max_total_level ||
-				    (s->get_total_level() == max_total_level &&
-				     s->get_current_health() / s->get_max_health() > max_health)) {
-					max_total_level = s->get_total_level();
-					max_health = s->get_current_health() / s->get_max_health();
-					soldier_to_heal = s;
+		for (Soldier* soldier : soldier_control_.stationed_soldiers()) {
+			if (soldier->get_current_health() < soldier->get_max_health()) {
+				if (is_present(*soldier)) {
+					// The healing algorithm for present soldiers is:
+					// * heal soldier with highest total level
+					// * heal healthiest if multiple of same total level exist
+					if (soldier_to_heal == nullptr || soldier->get_total_level() > max_total_level ||
+					    (soldier->get_total_level() == max_total_level &&
+					     soldier->get_current_health() / soldier->get_max_health() > max_health)) {
+						max_total_level = soldier->get_total_level();
+						max_health = soldier->get_current_health() / soldier->get_max_health();
+						soldier_to_heal = soldier;
+					}
+				} else if ((soldier->get_battle() == nullptr ||
+				            soldier->get_battle()->opponent(*soldier) == nullptr) &&
+				           !get_economy(WareWorker::wwWORKER)->warehouses().empty()) {
+					// Somewhat heal soldiers in the field that are not currently engaged in fighting an
+					// opponent, but only if there is a warehouse connected.
+					const PlayerNumber field_owner = soldier->get_position().field->get_owned_by();
+					if (owner().player_number() == field_owner) {
+						const unsigned int air_distance =
+						   game.map().calc_distance(get_position(), soldier->get_position());
+						const unsigned int heal_with_factor =
+						   total_heal * descr().get_conquers() / std::max(air_distance * 4U, 1U);
+						soldier->heal(std::min(total_heal, heal_with_factor));
+					}
 				}
 			}
 		}
 
-		if (0 != soldier_to_heal) {
+		if (soldier_to_heal != nullptr) {
 			soldier_to_heal->heal(total_heal);
 		}
 

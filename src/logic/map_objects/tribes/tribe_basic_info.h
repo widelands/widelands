@@ -34,12 +34,17 @@ struct TribeBasicInfo {
 	struct Initialization {
 		Initialization(const std::string& init_script,
 		               const std::string& init_descname,
-		               const std::string& init_tooltip)
-		   : script(init_script), descname(init_descname), tooltip(init_tooltip) {
+		               const std::string& init_tooltip,
+		               const std::set<std::string>& tags)
+		   : script(init_script),
+		     descname(init_descname),
+		     tooltip(init_tooltip),
+		     required_map_tags(tags) {
 		}
 		std::string script;
 		std::string descname;
 		std::string tooltip;
+		std::set<std::string> required_map_tags;
 	};
 
 	explicit TribeBasicInfo(std::unique_ptr<LuaTable> table);

@@ -60,7 +60,7 @@ constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
 constexpr uint16_t kCurrentPacketVersionConstructionsite = 4;
 constexpr uint16_t kCurrentPacketPFBuilding = 1;
 // Responsible for warehouses and expedition bootstraps
-constexpr uint16_t kCurrentPacketVersionWarehouse = 7;
+constexpr uint16_t kCurrentPacketVersionWarehouse = 8;
 constexpr uint16_t kCurrentPacketVersionMilitarysite = 6;
 constexpr uint16_t kCurrentPacketVersionProductionsite = 8;
 constexpr uint16_t kCurrentPacketVersionTrainingsite = 5;
@@ -88,18 +88,19 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 				try {
 					Building& building = mol.get<Building>(serial);
 
+					// Animation. If the animation is no longer known, pick the main animation instead.
 					if (fr.unsigned_8()) {
-						char const* const animation_name = fr.c_string();
-						try {
-							building.anim_ = building.descr().get_animation(animation_name, &building);
-						} catch (const GameDataError& e) {
-							building.anim_ = building.descr().get_animation("idle", &building);
-							log("Warning: Tribe %s building: %s, using animation %s instead.\n",
-							    building.owner().tribe().name().c_str(), e.what(),
-							    building.descr().get_animation_name(building.anim_).c_str());
+						char const* const animname = fr.c_string();
+						if (building.descr().is_animation_known(animname)) {
+							building.anim_ = building.descr().get_animation(animname, &building);
+						} else {
+							log(
+							   "Unknown animation '%s' for building '%s', using main animation instead.\n",
+							   animname, building.descr().name().c_str());
+							building.anim_ = building.descr().main_animation();
 						}
 					} else {
-						building.anim_ = 0;
+						building.anim_ = building.descr().main_animation();
 					}
 					building.animstart_ = fr.unsigned_32();
 

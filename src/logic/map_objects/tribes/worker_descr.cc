@@ -92,9 +92,12 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 	// Read the walking animations
 	assign_directional_animation(&walk_anims_, "walk");
 
-	// Many workers don't carry wares, so they have no walkload animation.
+	// Not all workers need a special walkload animation - for some the walk animation looks good
+	// enough.
 	if (is_animation_known("walkload_e")) {
 		assign_directional_animation(&walkload_anims_, "walkload");
+	} else {
+		assign_directional_animation(&walkload_anims_, "walk");
 	}
 
 	// Read programs

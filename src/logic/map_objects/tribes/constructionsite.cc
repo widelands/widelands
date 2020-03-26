@@ -269,13 +269,30 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 
 	if (work_steps_ <= work_completed_) {
 		// Put the real building in place
+		Game& game = dynamic_cast<Game&>(egbase);
 		DescriptionIndex becomes_idx = owner().tribe().building_index(building_->name());
 		old_buildings_.push_back(std::make_pair(becomes_idx, ""));
 		Building& b = building_->create(egbase, get_owner(), position_, false, false, old_buildings_);
 		if (Worker* const builder = builder_.get(egbase)) {
-			builder->reset_tasks(dynamic_cast<Game&>(egbase));
+			builder->reset_tasks(game);
 			builder->set_location(&b);
 		}
+		if (upcast(Warehouse, wh, &b)) {
+			for (const auto& pair : additional_wares_) {
+				for (uint8_t i = pair.second; i > 0; --i) {
+					wh->receive_ware(game, pair.first);
+				}
+			}
+			for (Worker* w : additional_workers_) {
+				wh->incorporate_worker(game, w);
+			}
+		}
+#ifndef NDEBUG
+		else {
+			assert(additional_wares_.empty());
+			assert(additional_workers_.empty());
+		}
+#endif
 
 		// Apply settings
 		if (settings_) {
@@ -488,6 +505,20 @@ bool ConstructionSite::burn_on_destroy() {
 		return false;  // completed, so don't burn
 
 	return work_completed_ || !old_buildings_.empty();
+}
+
+void ConstructionSite::add_additional_ware(DescriptionIndex di) {
+	auto it = additional_wares_.find(di);
+	if (it == additional_wares_.end()) {
+		additional_wares_.emplace(di, 1);
+	} else {
+		++it->second;
+	}
+}
+
+void ConstructionSite::add_additional_worker(Game& game, Worker& w) {
+	additional_workers_.push_back(&w);
+	w.start_task_idle(game, 0, -1);
 }
 
 /*
