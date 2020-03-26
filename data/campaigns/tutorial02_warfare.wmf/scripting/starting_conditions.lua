@@ -26,7 +26,8 @@ function init_player()
          workers = {
             barbarians_builder = 3,
             barbarians_ox = 15,
-            barbarians_trainer = 2
+            barbarians_trainer = 2,
+            barbarians_scout = 1
          },
          wares = {
             log = 40,
@@ -36,6 +37,7 @@ function init_player()
             grout = 30,
             granite = 30,
             reed = 40,
+            ration = 20,
 
             -- wares for training
             ax_sharp = 20,

@@ -26,22 +26,27 @@
 #include "graphic/graphic.h"
 #include "graphic/texture.h"
 
-uint32_t
-AnimationManager::load(const LuaTable& table, const std::string& basename, Animation::Type type) {
+uint32_t AnimationManager::load(const LuaTable& table,
+                                const std::string& basename,
+                                const std::string& animation_directory,
+                                Animation::Type type) {
 	switch (type) {
 	case Animation::Type::kFiles:
-		animations_.push_back(std::unique_ptr<Animation>(new NonPackedAnimation(table, basename)));
+		animations_.push_back(
+		   std::unique_ptr<Animation>(new NonPackedAnimation(table, basename, animation_directory)));
 		break;
 	case Animation::Type::kSpritesheet:
-		animations_.push_back(std::unique_ptr<Animation>(new SpriteSheetAnimation(table, basename)));
+		animations_.push_back(std::unique_ptr<Animation>(
+		   new SpriteSheetAnimation(table, basename, animation_directory)));
 	}
 	return animations_.size();
 }
 uint32_t AnimationManager::load(const std::string& map_object_name,
                                 const LuaTable& table,
                                 const std::string& basename,
+                                const std::string& animation_directory,
                                 Animation::Type type) {
-	const size_t result = load(table, basename, type);
+	const size_t result = load(table, basename, animation_directory, type);
 	representative_animations_by_map_object_name_.insert(std::make_pair(map_object_name, result));
 	return result;
 }
