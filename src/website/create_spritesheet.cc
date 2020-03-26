@@ -43,7 +43,7 @@
 namespace {
 char const* const animation_direction_names[6] = {"_ne", "_e", "_se", "_sw", "_w", "_nw"};
 
-// Find trimmed rect for a teaxture according to transparent pixels, searching from the outside in.
+// Find trimmed rect for a texture according to transparent pixels, searching from the outside in.
 // Lock texture before you call this function.
 Recti find_trim_rect(Texture* texture) {
 	Recti result(Vector2i::zero(), texture->width(), texture->height());
