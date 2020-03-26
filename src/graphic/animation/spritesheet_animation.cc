@@ -168,11 +168,16 @@ SpriteSheetAnimation IMPLEMENTATION
 ==============================================================================
 */
 
-SpriteSheetAnimation::SpriteSheetAnimation(const LuaTable& table, const std::string& basename)
+SpriteSheetAnimation::SpriteSheetAnimation(const LuaTable& table,
+                                           const std::string& basename,
+                                           const std::string& animation_directory)
    : Animation(table) {
 	try {
 		// Get image files
-		const std::string directory = table.get_string("directory");
+		// TODO(GunChleoc): When all animations have been converted, require that animation_directory
+		// is not empty.
+		const std::string directory =
+		   animation_directory.empty() ? table.get_string("directory") : animation_directory;
 
 		// Frames, rows and columns
 		nr_frames_ = table.get_int("frames");

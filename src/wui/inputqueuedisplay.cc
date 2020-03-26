@@ -38,7 +38,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
                                      InteractiveGameBase& igb,
                                      Widelands::Building& building,
                                      const Widelands::InputQueue& queue,
-                                     bool show_only)
+                                     bool no_capacity_buttons,
+                                     bool no_priority_buttons)
    : UI::Panel(parent, x, y, 0, 28),
      igb_(igb),
      building_(building),
@@ -53,7 +54,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
      cache_size_(queue.get_max_size()),
      cache_max_fill_(queue.get_max_fill()),
      total_height_(0),
-     show_only_(show_only) {
+     no_capacity_buttons_(no_capacity_buttons),
+     no_priority_buttons_(no_priority_buttons) {
 	if (type_ == Widelands::wwWARE) {
 		const Widelands::WareDescr& ware = *queue.owner().tribe().get_ware_descr(queue_->get_index());
 		set_tooltip(ware.descname().c_str());
@@ -67,9 +69,9 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
 
 	uint16_t ph = max_fill_indicator_->height();
 
-	uint32_t priority_button_height = show_only ? 0 : 3 * PriorityButtonSize;
+	uint32_t priority_button_height = no_priority_buttons ? 0 : 3 * PriorityButtonSize;
 	uint32_t image_height =
-	   show_only ? kWareMenuPicHeight : std::max<int32_t>(kWareMenuPicHeight, ph);
+	   no_capacity_buttons ? kWareMenuPicHeight : std::max<int32_t>(kWareMenuPicHeight, ph);
 
 	total_height_ = std::max(priority_button_height, image_height) + 2 * Border;
 
@@ -85,7 +87,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
                                      Widelands::ConstructionSite& building,
                                      Widelands::WareWorker ww,
                                      Widelands::DescriptionIndex di,
-                                     bool show_only)
+                                     bool no_capacity_buttons,
+                                     bool no_priority_buttons)
    : UI::Panel(parent, x, y, 0, 28),
      igb_(igb),
      building_(building),
@@ -98,7 +101,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
      type_(ww),
      max_fill_indicator_(g_gr->images().get(pic_max_fill_indicator)),
      total_height_(0),
-     show_only_(show_only) {
+     no_capacity_buttons_(no_capacity_buttons),
+     no_priority_buttons_(no_priority_buttons) {
 	cache_size_ = check_max_size();
 	cache_max_fill_ = check_max_fill();
 	if (type_ == Widelands::wwWARE) {
@@ -113,9 +117,9 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
 
 	uint16_t ph = max_fill_indicator_->height();
 
-	uint32_t priority_button_height = show_only ? 0 : 3 * PriorityButtonSize;
+	uint32_t priority_button_height = no_priority_buttons_ ? 0 : 3 * PriorityButtonSize;
 	uint32_t image_height =
-	   show_only ? kWareMenuPicHeight : std::max<int32_t>(kWareMenuPicHeight, ph);
+	   no_capacity_buttons_ ? kWareMenuPicHeight : std::max<int32_t>(kWareMenuPicHeight, ph);
 
 	total_height_ = std::max(priority_button_height, image_height) + 2 * Border;
 
@@ -162,8 +166,8 @@ uint32_t InputQueueDisplay::check_max_fill() const {
  * This is useful for construction sites, whose queues shrink over time.
  */
 void InputQueueDisplay::max_size_changed() {
-	uint32_t pbs = show_only_ ? 0 : PriorityButtonSize;
-	uint32_t ctrl_b_size = show_only_ ? 0 : 2 * kWareMenuPicWidth;
+	uint32_t pbs = no_priority_buttons_ ? 0 : PriorityButtonSize;
+	uint32_t ctrl_b_size = no_capacity_buttons_ ? 0 : 2 * kWareMenuPicWidth;
 
 	cache_size_ = check_max_size();
 
@@ -213,7 +217,7 @@ void InputQueueDisplay::draw(RenderTarget& dst) {
 	assert(nr_inputs_to_draw + nr_missing_to_draw + nr_coming_to_draw == cache_size_);
 
 	Vector2i point = Vector2i::zero();
-	point.x = Border + (show_only_ ? 0 : CellWidth + CellSpacing);
+	point.x = Border + (no_capacity_buttons_ ? 0 : CellWidth + CellSpacing);
 	point.y = Border + (total_height_ - 2 * Border - kWareMenuPicHeight) / 2;
 
 	for (; nr_inputs_to_draw; --nr_inputs_to_draw, point.x += CellWidth + CellSpacing) {
@@ -231,7 +235,7 @@ void InputQueueDisplay::draw(RenderTarget& dst) {
 		                              RGBAColor(191, 191, 191, 127));
 	}
 
-	if (!show_only_) {
+	if (!no_capacity_buttons_) {
 		uint16_t pw = max_fill_indicator_->width();
 		point.y = Border;
 		point.x = Border + CellWidth + CellSpacing + (cache_max_fill_ * (CellWidth + CellSpacing)) -
@@ -248,7 +252,7 @@ void InputQueueDisplay::update_priority_buttons() {
 	if (type_ != Widelands::wwWARE)
 		return;
 
-	if (cache_size_ <= 0 || show_only_) {
+	if (cache_size_ <= 0 || no_priority_buttons_) {
 		delete priority_radiogroup_;
 		priority_radiogroup_ = nullptr;
 	}
@@ -320,7 +324,7 @@ void InputQueueDisplay::update_max_fill_buttons() {
 	increase_max_fill_ = nullptr;
 	decrease_max_fill_ = nullptr;
 
-	if (cache_size_ <= 0 || show_only_)
+	if (cache_size_ <= 0 || no_capacity_buttons_)
 		return;
 
 	uint32_t x = Border;

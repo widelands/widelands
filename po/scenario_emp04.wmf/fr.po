@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -9,15 +9,16 @@
 # Stephan Lutz <stephan-lutz@gmx.de>, 2018
 # zecas <jjorge@free.fr>, 2018
 # Christophe Quintard <christophe.quintard@gmail.com>, 2019
-# Renaud Bouchard, 2019
+# Kura Go <kurago@ml1.net>, 2019
+# Renaud Bouchard, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-10-09 07:57+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-03-16 06:59+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: Renaud Bouchard, 2019\n"
+"Last-Translator: Renaud Bouchard, 2020\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -556,7 +557,7 @@ msgid ""
 "fishermen’s houses and the quarries don’t have any resources near them. All "
 "of the lumberjacks’ houses and the wells seem also to be inefficient or worn"
 " out."
-msgstr ""
+msgstr "Donc, tout d'abord nous avons besoin de materi"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:314
@@ -565,6 +566,9 @@ msgid ""
 "need to closely monitor them when we are able to supply them. Until then we "
 "shouldn't do anything with them."
 msgstr ""
+"Pour les autres bâtiments nous ne pouvons encore dire, si ils fonctionnent "
+"correctement. Nous devrons les surveiller de prés quand nous les "
+"approvisionnerons. En attendant nous ne devrions pas les utiliser."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:317
@@ -574,6 +578,11 @@ msgid ""
 "production in all bigger buildings and get the workers some rest until we "
 "have produced some of their input wares."
 msgstr ""
+"Excepté, peut être pourrions nous restreindre les entrées de tout bâtiments "
+"qui consomme n'importe lequel de nos matériaux jusqu'à zéro. Ou bien nous "
+"pourrions même mettre en pause la production dans tout les plus gros "
+"bâtiments et les ouvriers au repos tant que nous n'avons pas produit les "
+"marchandises d'entrées."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:324
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:584
@@ -649,6 +658,9 @@ msgid ""
 "least three lumberjacks’ houses and two quarries. Be sure to have "
 "dismanteled all of the unproductive buildings though."
 msgstr ""
+"En premier lieu, nous avons besoin de plus de matériaux de construction. "
+"Nous devrions donc bâtir trois maisons de bucherons et deux clairières. "
+"Assurez vous d'avoir démantelé tous les bâtiments improductifs cependant."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:352

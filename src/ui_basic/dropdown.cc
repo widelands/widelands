@@ -128,6 +128,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	}
 	list_ =
 	   new UI::Listselect<uintptr_t>(list_parent, 0, 0, w, 0, style, ListselectLayout::kDropdown);
+	list_->set_notify_on_delete(this);
 
 	list_->set_visible(false);
 	button_box_.add(&display_button_, UI::Box::Resizing::kExpandBoth);
@@ -157,7 +158,10 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 BaseDropdown::~BaseDropdown() {
 	// The list needs to be able to drop outside of windows, so it won't close with the window.
 	// So, we tell it to die.
-	list_->die();
+	if (list_) {
+		list_->set_notify_on_delete(nullptr);
+		list_->die();
+	}
 
 	// Unsubscribe from layouting hooks
 	assert(living_dropdowns_.find(id_) != living_dropdowns_.end());
@@ -246,9 +250,7 @@ void BaseDropdown::add(const std::string& name,
 		const std::string fitme =
 		   label_.empty() ? name : (boost::format(_("%1%: %2%")) % label_ % name).str();
 		const int new_width =
-		   text_width(
-		      richtext_escape(fitme), g_gr->styles().button_style(button_style_).enabled().font()) +
-		   8;
+		   text_width(fitme, g_gr->styles().button_style(button_style_).enabled().font()) + 8;
 		if (new_width > display_button_.get_w()) {
 			set_desired_size(get_w() + new_width - display_button_.get_w(), get_h());
 			set_size(get_w() + new_width - display_button_.get_w(), get_h());

@@ -239,8 +239,6 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 	// Add global paramaters for this animation to Lua
 	std::unique_ptr<LuaTree::Element> lua_object(new LuaTree::Element());
 	LuaTree::Object* lua_animation = lua_object->add_object(animation_name);
-	// The Lua files all have 'dirname = path.dirname(__file__)' defined, so we use that.
-	lua_animation->add_raw("directory", "dirname");
 
 	// We only write FPS if the animation is not a build animation and does not use the default FPS.
 	if (animation_name != "build") {

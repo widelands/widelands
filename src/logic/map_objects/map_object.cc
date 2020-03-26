@@ -239,13 +239,18 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
                     init_descname,
                     table.has_key("helptext_script") ? table.get_string("helptext_script") : "") {
 	bool has_animations = false;
+	// TODO(GunChleoc): When all animations have been converted, require that animation_directory is
+	// not empty if the map object has animations.
+	const std::string animation_directory(
+	   table.has_key("animation_directory") ? table.get_string("animation_directory") : "");
 	if (table.has_key("animations")) {
 		has_animations = true;
-		add_animations(*table.get_table("animations"), Animation::Type::kFiles);
+		add_animations(*table.get_table("animations"), animation_directory, Animation::Type::kFiles);
 	}
 	if (table.has_key("spritesheets")) {
 		has_animations = true;
-		add_animations(*table.get_table("spritesheets"), Animation::Type::kSpritesheet);
+		add_animations(
+		   *table.get_table("spritesheets"), animation_directory, Animation::Type::kSpritesheet);
 	}
 	if (has_animations) {
 		if (!is_animation_known("idle")) {
@@ -276,7 +281,9 @@ bool MapObjectDescr::is_animation_known(const std::string& animname) const {
 /**
  * Add all animations for this map object
  */
-void MapObjectDescr::add_animations(const LuaTable& table, Animation::Type anim_type) {
+void MapObjectDescr::add_animations(const LuaTable& table,
+                                    const std::string& animation_directory,
+                                    Animation::Type anim_type) {
 	for (const std::string& animname : table.keys<std::string>()) {
 		try {
 			std::unique_ptr<LuaTable> anim = table.get_table(animname);
@@ -296,7 +303,7 @@ void MapObjectDescr::add_animations(const LuaTable& table, Animation::Type anim_
 					const std::string directional_basename = basename + animation_direction_names[dir];
 					uint32_t anim_id = 0;
 					try {
-						anim_id = g_gr->animations().load(*anim, directional_basename, anim_type);
+						anim_id = g_gr->animations().load(*anim, directional_basename, animation_directory, anim_type);
 						anims_.insert(std::make_pair(directional_animname, anim_id));
 					} catch (const std::exception& e) {
 						throw GameDataError(
@@ -320,10 +327,10 @@ void MapObjectDescr::add_animations(const LuaTable& table, Animation::Type anim_
 				}
 				if (animname == "idle") {
 					anims_.insert(std::make_pair(
-					   animname, g_gr->animations().load(name_, *anim, basename, anim_type)));
+					   animname, g_gr->animations().load(name_, *anim, basename, animation_directory, anim_type)));
 				} else {
 					anims_.insert(
-					   std::make_pair(animname, g_gr->animations().load(*anim, basename, anim_type)));
+					   std::make_pair(animname, g_gr->animations().load(*anim, basename, animation_directory, anim_type)));
 				}
 			}
 		} catch (const std::exception& e) {
@@ -354,6 +361,9 @@ uint32_t MapObjectDescr::get_animation(const std::string& animname, const MapObj
 }
 
 uint32_t MapObjectDescr::main_animation() const {
+	if (is_animation_known("idle")) {
+		return get_animation("idle", nullptr);
+	}
 	return !anims_.empty() ? anims_.begin()->second : 0;
 }
 
