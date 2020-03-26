@@ -105,7 +105,7 @@ run(function()
    sleep(500)
    assert_equal("exp_colonizing", ships[1].state)
    sleep(15000)
-   stable_save(game, "port_in_constr")
+   stable_save(game, "port_in_constr", 30 * 1000)
 
    -- while unfinished yet, removing it
    new_port=map:get_field(16,2).immovable
