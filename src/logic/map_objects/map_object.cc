@@ -303,7 +303,8 @@ void MapObjectDescr::add_animations(const LuaTable& table,
 					const std::string directional_basename = basename + animation_direction_names[dir];
 					uint32_t anim_id = 0;
 					try {
-						anim_id = g_gr->animations().load(*anim, directional_basename, animation_directory, anim_type);
+						anim_id = g_gr->animations().load(
+						   *anim, directional_basename, animation_directory, anim_type);
 						anims_.insert(std::make_pair(directional_animname, anim_id));
 					} catch (const std::exception& e) {
 						throw GameDataError(
@@ -327,10 +328,12 @@ void MapObjectDescr::add_animations(const LuaTable& table,
 				}
 				if (animname == "idle") {
 					anims_.insert(std::make_pair(
-					   animname, g_gr->animations().load(name_, *anim, basename, animation_directory, anim_type)));
+					   animname,
+					   g_gr->animations().load(name_, *anim, basename, animation_directory, anim_type)));
 				} else {
-					anims_.insert(
-					   std::make_pair(animname, g_gr->animations().load(*anim, basename, animation_directory, anim_type)));
+					anims_.insert(std::make_pair(
+					   animname,
+					   g_gr->animations().load(*anim, basename, animation_directory, anim_type)));
 				}
 			}
 		} catch (const std::exception& e) {
