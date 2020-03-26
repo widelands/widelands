@@ -82,14 +82,10 @@ const MethodType<LuaGame> LuaGame::Methods[] = {
    METHOD(LuaGame, launch_coroutine), METHOD(LuaGame, save), {nullptr, nullptr},
 };
 const PropertyType<LuaGame> LuaGame::Properties[] = {
-   PROP_RO(LuaGame, real_speed),
-   PROP_RO(LuaGame, time),
-   PROP_RW(LuaGame, desired_speed),
-   PROP_RW(LuaGame, allow_saving),
-   PROP_RO(LuaGame, last_save_time),
-   PROP_RO(LuaGame, type),
-   PROP_RO(LuaGame, interactive_player),
-   PROP_RO(LuaGame, scenario_difficulty),
+   PROP_RO(LuaGame, real_speed),         PROP_RO(LuaGame, time),
+   PROP_RW(LuaGame, desired_speed),      PROP_RW(LuaGame, allow_saving),
+   PROP_RO(LuaGame, last_save_time),     PROP_RO(LuaGame, type),
+   PROP_RO(LuaGame, interactive_player), PROP_RO(LuaGame, scenario_difficulty),
    {nullptr, nullptr, nullptr},
 };
 
