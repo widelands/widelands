@@ -38,7 +38,7 @@ function watch_ship_production()
    -- warn player about over-producing
    while #plr:get_ships() < 2 do sleep(30*1000) end
    local ship2 = plr:get_ships()[2]
-   scroll_to_field(ship2.field)
+   wait_for_roadbuilding_and_scroll(ship2.field)
    message_box_objective(plr, shipyard_production(ship2.shipname))
 end
 
@@ -70,7 +70,7 @@ end
 
 function expedition()
    sleep(2000)
-   scroll_to_field(sf)
+   wait_for_roadbuilding_and_scroll(sf)
    message_box_objective(plr, expedition1)
    local o = message_box_objective(plr, expedition2)
 

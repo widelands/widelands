@@ -94,7 +94,7 @@ function scroll_to_first_building(which)
    local buildings = plr:get_buildings(which)
    if #buildings > 0 then
       local first = buildings[1]
-      return scroll_to_field(first.fields[1])
+      return wait_for_roadbuilding_and_scroll(first.fields[1])
    end
    return nil
 end
