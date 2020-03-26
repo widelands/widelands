@@ -26,6 +26,12 @@ QuickNavigation::QuickNavigation(MapView* map_view)
 	havefirst_ = false;
 }
 
+inline void QuickNavigation::insert_if_applicable(std::list<MapView::View>& l) {
+	if (l.empty() || !l.back().view_roughly_near(current_)) {
+		l.push_back(current_);
+	}
+}
+
 void QuickNavigation::jumped() {
 	if (!location_jumping_started_) {
 		assert(previous_locations_.empty());
@@ -34,9 +40,7 @@ void QuickNavigation::jumped() {
 		return;
 	}
 	next_locations_.clear();
-	if (previous_locations_.empty() || !previous_locations_.back().view_near(current_)) {
-		previous_locations_.push_back(current_);
-	}
+	insert_if_applicable(previous_locations_);
 }
 
 void QuickNavigation::view_changed() {
@@ -67,16 +71,12 @@ bool QuickNavigation::handle_key(bool down, SDL_Keysym key) {
 		}
 	} else if (key.sym == SDLK_COMMA && !previous_locations_.empty()) {
 		// go to previous location
-		if (next_locations_.empty() || !next_locations_.back().view_near(current_)) {
-			next_locations_.push_back(current_);
-		}
+		insert_if_applicable(next_locations_);
 		map_view_->set_view(previous_locations_.back(), MapView::Transition::Smooth);
 		previous_locations_.pop_back();
 	} else if (key.sym == SDLK_PERIOD && !next_locations_.empty()) {
 		// go to next location
-		if (previous_locations_.empty() || !previous_locations_.back().view_near(current_)) {
-			previous_locations_.push_back(current_);
-		}
+		insert_if_applicable(previous_locations_);
 		map_view_->set_view(next_locations_.back(), MapView::Transition::Smooth);
 		next_locations_.pop_back();
 	} else {

@@ -476,6 +476,7 @@ bool MapView::handle_mousepress(uint8_t const btn, int32_t const x, int32_t cons
 		// also handle the click.
 	}
 	if (btn == SDL_BUTTON_RIGHT) {
+		jump();
 		dragging_ = true;
 		grab_mouse(true);
 		WLApplication::get()->set_mouse_lock(true);

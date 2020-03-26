@@ -70,6 +70,7 @@ private:
 	std::list<MapView::View> next_locations_;
 	// Ignore the initial (0,0,1×) view
 	bool location_jumping_started_;
+	void insert_if_applicable(std::list<MapView::View>&);
 };
 
 #endif  // end of include guard: WL_WUI_QUICKNAVIGATION_H

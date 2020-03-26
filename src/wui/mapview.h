@@ -79,6 +79,11 @@ public:
 			       std::abs(viewpoint.y - other.viewpoint.y) < epsilon;
 		}
 
+		bool view_roughly_near(const View& other) const {
+			return zoom_near(other.zoom) && std::abs(viewpoint.x - other.viewpoint.x) < g_gr->get_xres() / 2 &&
+			       std::abs(viewpoint.y - other.viewpoint.y) < g_gr->get_yres() / 2;
+		}
+
 		// Mappixel of top-left pixel of this MapView.
 		Vector2f viewpoint;
 
@@ -114,8 +119,8 @@ public:
 	// Called whenever the view changed, also during automatic animations.
 	boost::signals2::signal<void()> changeview;
 
-	// Called whenever the view changed by a call to scroll_to_field or scroll_to_map_pixel.
-	// Note: This signal is called *before* the view actually starts to move there.
+	// Called whenever the view changed by a call to scroll_to_field or scroll_to_map_pixel, or by starting to drag the view.
+	// Note: This signal is called *before* the view actually starts to move.
 	boost::signals2::signal<void()> jump;
 
 	// Called when the user clicked on a field.
