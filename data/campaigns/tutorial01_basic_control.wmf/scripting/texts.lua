@@ -16,7 +16,7 @@ scold_player = {
       p(_[[I am sorry, but will I have to tear this down again. We might need the space here later on. If I am too slow for you, you might want to play a real game and just find everything out for yourself. Otherwise, please bear with me, I am not the youngest and quickest anymore.]]
       )
    ),
-   h = 300,
+   h = 150,
    show_instantly = true
 }
 
