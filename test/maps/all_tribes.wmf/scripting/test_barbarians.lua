@@ -392,6 +392,9 @@ function init_barbarians(player)
 
    -- Construction
    player:place_building("barbarians_helmsmithy", map:get_field((sf.x + 510) % 512, (sf.y + 3) % 512), true, true)
+
+   -- Test ships
+   place_player_ship(player.number)
 end
 
 
@@ -407,20 +410,15 @@ run(function()
    -- and that a building of each type has been placed.
    verify_buildings(playernumber, expected_number_of_buildings)
 
-   sleep(1000)
-
-   -- Test ships
-   place_player_ship(playernumber)
-
-   -- Sleep a bit
-   sleep(1000)
+   -- Sleep a bit so the tribe units can run some programs
+   sleep_with_fps(30 * 10)
 
    -- Test saveloading and verify the buildings again
-   stable_save(game, "barbarian_tribe")
+   stable_save(game, "barbarian_tribe", 1000)
 
    -- Did buildings saveload OK?
    verify_buildings(playernumber, expected_number_of_buildings)
 
    print("# All Tests passed.")
-   wl.ui.MapView():close()
+   mapview:close()
 end)

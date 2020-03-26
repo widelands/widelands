@@ -9,7 +9,7 @@ run(function()
    hq = p1:get_buildings("barbarians_headquarters")[1]
    assert_true(hq:get_wares("custom_ware") > 350, "We should have collected some of the custom ware")
 
-   stable_save(game, "custom_units")
+   stable_save(game, "custom_units", 50 * 1000)
 
    assert_true(hq:get_wares("custom_ware") > 350, "We should have collected some of the custom ware")
 

@@ -11,7 +11,7 @@ run(function()
    -- Ca. 11 minutes until we have a ripe barleyfield. Sleep half now, half after saving
    sleep(1000 * 60 * 6)
 
-   stable_save(game, "foreign_units")
+   stable_save(game, "foreign_units", 50 * 1000)
 
    sleep(1000 * 60 * 6)
 

@@ -18,7 +18,7 @@ game = wl.Game()
 
 -- See all so that we can debug stuff
 game.players[1].see_all = 1
-
+mapview = wl.ui.MapView()
 
 -- Check that all buildings have been built
 function verify_buildings(playernumber, total_expected_buildings)
@@ -162,4 +162,21 @@ function place_player_ship(playernumber)
    local player = wl.Game().players[playernumber]
    local starting_field = wl.Game().map.player_slots[playernumber].starting_field
    player:place_ship(map:get_field((starting_field.x + 12) % 512, (starting_field.y + 6) % 512))
+end
+
+-- Sleep and adjust game speed each second for reasonable average FPS
+function sleep_with_fps(seconds)
+   local counter = 0
+   repeat
+      counter = counter + 1
+      sleep(1000)
+      local average_fps = mapview.average_fps
+      if average_fps < 15 then
+         local new_desired_speed = game.desired_speed - 1000 * (20 - math.floor(average_fps))
+         if new_desired_speed < 5000 then new_desired_speed = 5000 end
+         game.desired_speed = new_desired_speed
+      elseif average_fps > 20 then
+         game.desired_speed = game.desired_speed + 1000
+      end
+   until counter == seconds
 end
