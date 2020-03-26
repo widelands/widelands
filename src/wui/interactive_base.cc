@@ -677,7 +677,7 @@ void InteractiveBase::think() {
 }
 
 double InteractiveBase::average_fps() const {
-    return 1000.0 / (avg_usframetime_ / 1000);
+	return 1000.0 * 1000.0 / avg_usframetime_;
 }
 
 /*
@@ -749,9 +749,9 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		// Blit FPS when playing a game in debug mode
 		if (get_display_flag(dfDebug)) {
 			static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
-			rendered_text = UI::g_fh->render(as_richtext_paragraph(
-			   (fps_format % (1000.0 / frametime_) % average_fps()).str(),
-			   UI::FontStyle::kWuiGameSpeedAndCoordinates));
+			rendered_text = UI::g_fh->render(
+			   as_richtext_paragraph((fps_format % (1000.0 / frametime_) % average_fps()).str(),
+			                         UI::FontStyle::kWuiGameSpeedAndCoordinates));
 			rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, 5));
 		}
 	}

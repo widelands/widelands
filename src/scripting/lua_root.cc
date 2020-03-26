@@ -82,9 +82,10 @@ const MethodType<LuaGame> LuaGame::Methods[] = {
    METHOD(LuaGame, launch_coroutine), METHOD(LuaGame, save), {nullptr, nullptr},
 };
 const PropertyType<LuaGame> LuaGame::Properties[] = {
-   PROP_RO(LuaGame, real_speed),   PROP_RO(LuaGame, time), PROP_RW(LuaGame, desired_speed),
-   PROP_RW(LuaGame, allow_saving), PROP_RO(LuaGame, last_save_time), PROP_RO(LuaGame, type), PROP_RO(LuaGame, interactive_player),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaGame, real_speed),         PROP_RO(LuaGame, time),
+   PROP_RW(LuaGame, desired_speed),      PROP_RW(LuaGame, allow_saving),
+   PROP_RO(LuaGame, last_save_time),     PROP_RO(LuaGame, type),
+   PROP_RO(LuaGame, interactive_player), {nullptr, nullptr, nullptr},
 };
 
 LuaGame::LuaGame(lua_State* /* L */) {
@@ -177,7 +178,7 @@ int LuaGame::get_interactive_player(lua_State* L) {
       (RO) The gametime at which the game was last saved.
 */
 int LuaGame::get_last_save_time(lua_State* L) {
-    lua_pushuint32(L, get_game(L).save_handler().last_save_time());
+	lua_pushuint32(L, get_game(L).save_handler().last_save_time());
 	return 1;
 }
 
