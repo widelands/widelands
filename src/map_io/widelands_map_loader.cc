@@ -95,10 +95,12 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario) {
 	}
 	// No scripting/init.lua file -> not playable as scenario
 	Map::ScenarioTypes m = Map::NO_SCENARIO;
-	if (fs_->file_exists("scripting/init.lua"))
+	if (fs_->file_exists("scripting/init.lua")) {
 		m |= Map::SP_SCENARIO;
-	if (fs_->file_exists("scripting/multiplayer_init.lua"))
+	}
+	if (fs_->file_exists("scripting/multiplayer_init.lua")) {
 		m |= Map::MP_SCENARIO;
+	}
 	map_.set_scenario_types(m);
 
 	set_state(STATE_PRELOADED);
@@ -325,13 +327,16 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		mapobjects.load_finish();
 		{
 			const Field& fields_end = map()[map().max_index()];
-			for (Field* field = &map()[0]; field < &fields_end; ++field)
+			for (Field* field = &map()[0]; field < &fields_end; ++field) {
 				if (BaseImmovable* const imm = field->get_immovable()) {
-					if (upcast(Building const, building, imm))
-						if (field != &map()[building->get_position()])
+					if (upcast(Building const, building, imm)) {
+						if (field != &map()[building->get_position()]) {
 							continue;  //  not the building's main position
+						}
+					}
 					imm->load_finish(egbase);
 				}
+			}
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
