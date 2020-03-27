@@ -228,7 +228,7 @@ dismantle = {
 
 obj_dismantle = {
    name = "dismantle_sentry",
-   title = _"Soldiers, dismiss!",
+   title = _"Soldiers, dismissed!",
    number = 1,
    body = objective_text(_"Dismantle your north-western sentry",
       p(_[[You can control the number of soldiers stationed at a military site with the arrow buttons. If you want to get even your last soldier out, you will have to destroy it. However, it then will no longer protect your territory, which will make it vulnerable to hostile attacks.]]) ..
