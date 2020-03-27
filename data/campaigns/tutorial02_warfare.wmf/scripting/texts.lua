@@ -113,7 +113,7 @@ trainingcamp1 = {
 
 obj_trainingcamp = {
    name = "build_trainingcamp",
-   title = _"Training camp",
+   title = _"Training Camp",
    number = 1,
    body = objective_text(_"Build a training camp",
       p(_[[The battle arena only trains the soldiers in evade. To get the strongest possible soldier, you also need to build a training camp, which trains them in attack and health.]]) ..
