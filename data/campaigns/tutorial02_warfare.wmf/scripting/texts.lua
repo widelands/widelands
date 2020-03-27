@@ -77,7 +77,7 @@ battlearena1 = {
 
 obj_battlearena = {
    name = "build_battlearena",
-   title = _"Battle arena",
+   title = _"Battle Arena",
    number = 1,
    body = objective_text(_"Build a battle arena",
       li(_[[Build a battle arena. It is a big building.]]) ..
