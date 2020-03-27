@@ -168,8 +168,6 @@ wl_library(editor_ui
     ui_menus/main_menu_save_map_make_directory.h
     ui_menus/map_size_box.cc
     ui_menus/map_size_box.h
-    ui_menus/scenario_lua.cc
-    ui_menus/scenario_lua.h
     ui_menus/tool_options_menu.cc
     ui_menus/tool_options_menu.h
     ui_menus/toolsize_menu.cc
@@ -199,7 +197,6 @@ wl_library(editor_ui
     graphic
     graphic_text_layout
     scripting_lua_interface
-    editor_scripting
     logic_map
     logic
     base_i18n

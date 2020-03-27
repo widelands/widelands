@@ -37,7 +37,6 @@
 #include "editor/ui_menus/main_menu_save_map.h"
 #include "editor/ui_menus/player_menu.h"
 #include "editor/ui_menus/player_teams_menu.h"
-#include "editor/ui_menus/scenario_lua.h"
 #include "editor/ui_menus/scenario_tool_field_owner_options_menu.h"
 #include "editor/ui_menus/scenario_tool_infrastructure_options_menu.h"
 #include "editor/ui_menus/scenario_tool_road_options_menu.h"
@@ -67,8 +66,109 @@
 #include "map_io/map_loader.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
+#include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "wui/interactive_base.h"
+
+void EditorInteractive::unfinalize() {
+	finalized_ = false;
+	illustrating_vision_for_ = 0;
+	allowed_buildings_windows_.clear();
+	scripting_saver_.reset(nullptr);
+	functions_.clear();
+	variables_.clear();
+	includes_.clear();
+	set_display_flag(dfShowCensus, false);
+	set_display_flag(dfShowOwnership, false);
+	rebuild_scenario_tool_menu();
+	rebuild_showhide_menu();
+}
+
+void EditorInteractive::init_allowed_buildings_windows_registries() {
+	assert(finalized_);
+	assert(allowed_buildings_windows_.empty());
+	const unsigned nrplayers = egbase().map().get_nrplayers();
+	for (Widelands::PlayerNumber p = 1; p <= nrplayers; ++p) {
+		UI::UniqueWindow::Registry* r = new UI::UniqueWindow::Registry();
+		r->open_window = [this, p, r]() { new EditorPlayerAllowedBuildingsWindow(this, p, *r); };
+		allowed_buildings_windows_.push_back(std::unique_ptr<UI::UniqueWindow::Registry>(r));
+	}
+}
+
+void EditorInteractive::finalize_clicked() {
+	assert(!finalized_);
+	UI::WLMessageBox m(
+	   this, _("Finalize"),
+	   _("Are you sure you want to finalize this map?\n\n"
+	     "This means you will not be able to add or remove players, rename them, "
+	     "or change their tribe and starting position.\n"
+	     "Nor can the waterway length limit be changed any more.\n\n"
+	     "This step is only required if you want to design a scenario with the editor."),
+	   UI::WLMessageBox::MBoxType::kOkCancel);
+	if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
+		return;
+	}
+	const std::string result = try_finalize();
+	if (result.empty()) {
+		// Success!
+		return;
+	}
+	UI::WLMessageBox error(this, _("Finalize Failed"),
+	                       (boost::format(_("Finalizing failed! Reason: %s")) % result).str(),
+	                       UI::WLMessageBox::MBoxType::kOk);
+	error.run<UI::Panel::Returncodes>();
+}
+
+std::string EditorInteractive::try_finalize() {
+	if (finalized_) {
+		return _("Already finalized");
+	}
+	const Widelands::Map& map = egbase().map();
+	const size_t nr_players = map.get_nrplayers();
+	if (nr_players < 1) {
+		return _("The map has no players");
+	}
+	const Widelands::Tribes& t = egbase().tribes();
+	for (Widelands::PlayerNumber p = 1; p <= nr_players; ++p) {
+		if (!t.tribe_exists(t.tribe_index(map.get_scenario_player_tribe(p)))) {
+			return (boost::format(_("Invalid tribe \"%1$s\" for player %2$s (%3$s)")) %
+			        map.get_scenario_player_tribe(p).c_str() % std::to_string(static_cast<int>(p)) %
+			        map.get_scenario_player_name(p).c_str())
+			   .str();
+		}
+		if (!map.get_starting_pos(p)) {
+			return (boost::format(_("No starting position was set for player %s")) %
+			        std::to_string(static_cast<int>(p)))
+			   .str();
+		}
+	}
+	finalized_ = true;
+	init_allowed_buildings_windows_registries();
+	new_scripting_saver();
+	{  // Create a main function with some dummy content
+		LuaFunction* lf = new LuaFunction("mission_thread");
+		lf->init(*scripting_saver_);
+
+		ConstexprString* str = new ConstexprString("Hello World :)");
+		str->init(*scripting_saver_);
+		FS_FunctionCall* print =
+		   new FS_FunctionCall(builtin_f("print").function.get(), nullptr, {str});
+		print->init(*scripting_saver_);
+		lf->mutable_body().push_back(print);
+
+		FS_FunctionCall* fc = new FS_FunctionCall(lf, nullptr, {});
+		fc->init(*scripting_saver_);
+		FS_LaunchCoroutine* lc = new FS_LaunchCoroutine(fc);
+		lc->init(*scripting_saver_);
+		functions_.push_back(lc);
+	}
+	tool_windows_.players.destroy();
+	menu_windows_.mapoptions.destroy();
+	rebuild_scenario_tool_menu();
+	rebuild_showhide_menu();
+	select_tool(tools_->info, EditorTool::ToolIndex::First);
+	return "";
+}
 
 void EditorInteractive::write_lua(FileWrite& fw) const {
 	const Widelands::Map& map = egbase().map();
