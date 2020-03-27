@@ -46,8 +46,9 @@ void MapPlayerNamesAndTribesPacket::read(FileSystem& fs,
 }
 
 void MapPlayerNamesAndTribesPacket::pre_read(FileSystem& fs, Map* const map, bool const skip) {
-	if (skip)
+	if (skip) {
 		return;
+	}
 
 	Profile prof;
 	prof.read("player_names", nullptr, fs);
