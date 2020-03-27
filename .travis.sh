@@ -53,7 +53,7 @@ includes)
    ;;
 clang-tidy)
    # Check for clang-tidy warnings that were cleaned up previously.
-   # We only check for braces + default checks at this point.
+   # We only check for missing optional braces at this point.
    # We can add more checks later when we have cleaned up more.
    cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
    python ../utils/run-clang-tidy.py -checks=-*,*braces* > ../clang-tidy.log
