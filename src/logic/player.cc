@@ -424,7 +424,8 @@ NodeCaps Player::get_buildcaps(const FCoords& fc) const {
 
 	if (!fc.field->is_interior(player_number_)) {
 		buildcaps = 0;
-	} else if (buildcaps & BUILDCAPS_BUILDINGMASK) { // Check if a building's flag can't be build due to ownership
+	} else if (buildcaps & BUILDCAPS_BUILDINGMASK) {  // Check if a building's flag can't be build
+	                                                  // due to ownership
 		FCoords flagcoords;
 		map.get_brn(fc, &flagcoords);
 		if (!flagcoords.field->is_interior(player_number_)) {
@@ -465,7 +466,7 @@ Flag& Player::force_flag(const FCoords& c) {
 				return *existing_flag;
 			}
 		} else if (!dynamic_cast<RoadBase const*>(immovable)) {  //  A road or waterway is OK
-			immovable->remove(egbase());                         //  Make room for the flag.
+			immovable->remove(egbase());                          //  Make room for the flag.
 		}
 	}
 	MapRegion<Area<FCoords>> mr(map, Area<FCoords>(c, 1));
