@@ -1,19 +1,5 @@
 dirname = path.dirname (__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files (dirname .. "idle_??.png"),
-      hotspot = {8, 23},
-   },
-   work = {
-      pictures = path.list_files (dirname .. "work_??.png"),
-      hotspot = { 15, 20 },
-      fps = 20
-   }
-}
-add_directional_animation(animations, "walk", dirname, "walk", {11, 24}, 15)
-add_directional_animation(animations, "walkload", dirname, "walkload", {10, 26}, 15)
-
 tribes:new_worker_type {
    msgctxt = "amazons_worker",
    name = "amazons_liana_cutter",
@@ -35,13 +21,45 @@ tribes:new_worker_type {
          "playsound=sound/woodcutting/woodcutting 255",
          "animate=work 4000",
          "playsound=sound/woodcutting/tree_falling 130",
-         "animate=idle 1000",
+         "animate=work 1000",
          "createware=liana",
          "return"
       }
    },
 
    animation_directory = dirname,
-   ware_hotspot = {0, 20},
-   animations = animations,
+   ware_hotspot = {0, 29},
+   spritesheets = {
+      walk = {
+         directional = true,
+         hotspot = {17, 28},
+         fps = 15,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      },
+      walkload = {
+         directional = true,
+         hotspot = {17, 31},
+         fps = 15,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      },
+      idle = {
+         basename = "walk_se",
+         hotspot = {17, 28},
+         fps = 15,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      },
+      work = {
+         hotspot = {19, 35},
+         fps = 15,
+         frames = 15,
+         columns = 5,
+         rows = 3
+      },
+   }
 }
