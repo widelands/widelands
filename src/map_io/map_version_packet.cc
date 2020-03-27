@@ -41,8 +41,9 @@ void MapVersionPacket::read(FileSystem& fs,
 }
 
 void MapVersionPacket::pre_read(FileSystem& fs, Map* map, bool skip, bool is_post_one_world) {
-	if (skip)
+	if (skip) {
 		return;
+	}
 
 	Profile prof;
 	try {
