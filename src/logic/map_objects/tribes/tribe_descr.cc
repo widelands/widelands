@@ -166,58 +166,56 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 		road_textures_.add_waterway_texture(g_gr->images().get(texture_path));
 	}
 
-    const auto load_bridge_if_present = [this](
-       const LuaTable& animations_table, const std::string& animation_directory,
-       Animation::Type animation_type, std::string s_dir, std::string s_type, uint32_t* id) {
-        const std::string directional_name("bridge_" + s_type + "_" + s_dir);
-        if (animations_table.has_key(directional_name)) {
-            std::unique_ptr<LuaTable> animation_table =
-               animations_table.get_table(directional_name);
-            *id = g_gr->animations().load(name_ + std::string("_") + directional_name,
-                                          *animation_table, directional_name, animation_directory,
-                                          animation_type);
-        }
-    };
+	const auto load_bridge_if_present = [this](
+	   const LuaTable& animations_table, const std::string& animation_directory,
+	   Animation::Type animation_type, std::string s_dir, std::string s_type, uint32_t* id) {
+		const std::string directional_name("bridge_" + s_type + "_" + s_dir);
+		if (animations_table.has_key(directional_name)) {
+			std::unique_ptr<LuaTable> animation_table = animations_table.get_table(directional_name);
+			*id =
+			   g_gr->animations().load(name_ + std::string("_") + directional_name, *animation_table,
+			                           directional_name, animation_directory, animation_type);
+		}
+	};
 	// Frontier and flag animations can be a mix of file and spritesheet animations
-    // Frontier and flag animations can be a mix of file and spritesheet animations
-    const auto load_animations = [this, load_bridge_if_present](
-       const LuaTable& animations_table, const std::string& animation_directory,
-       Animation::Type animation_type) {
-        if (animations_table.has_key("frontier")) {
-            std::unique_ptr<LuaTable> animation_table = animations_table.get_table("frontier");
-            frontier_animation_id_ =
-               g_gr->animations().load(name_ + std::string("_frontier"), *animation_table,
-                                       "frontier", animation_directory, animation_type);
-        }
-        if (animations_table.has_key("flag")) {
-            std::unique_ptr<LuaTable> animation_table = animations_table.get_table("flag");
-            flag_animation_id_ =
-               g_gr->animations().load(name_ + std::string("_flag"), *animation_table, "flag",
-                                       animation_directory, animation_type);
-        }
-        load_bridge_if_present(animations_table, animation_directory, animation_type, "e",
-                               "normal", &bridges_normal_.e);
-        load_bridge_if_present(animations_table, animation_directory, animation_type, "se",
-                               "normal", &bridges_normal_.se);
-        load_bridge_if_present(animations_table, animation_directory, animation_type, "sw",
-                               "normal", &bridges_normal_.sw);
-        load_bridge_if_present(
-           animations_table, animation_directory, animation_type, "e", "busy", &bridges_busy_.e);
-        load_bridge_if_present(
-           animations_table, animation_directory, animation_type, "se", "busy", &bridges_busy_.se);
-        load_bridge_if_present(
-           animations_table, animation_directory, animation_type, "sw", "busy", &bridges_busy_.sw);
-    };
+	// Frontier and flag animations can be a mix of file and spritesheet animations
+	const auto load_animations = [this, load_bridge_if_present](
+	   const LuaTable& animations_table, const std::string& animation_directory,
+	   Animation::Type animation_type) {
+		if (animations_table.has_key("frontier")) {
+			std::unique_ptr<LuaTable> animation_table = animations_table.get_table("frontier");
+			frontier_animation_id_ =
+			   g_gr->animations().load(name_ + std::string("_frontier"), *animation_table, "frontier",
+			                           animation_directory, animation_type);
+		}
+		if (animations_table.has_key("flag")) {
+			std::unique_ptr<LuaTable> animation_table = animations_table.get_table("flag");
+			flag_animation_id_ =
+			   g_gr->animations().load(name_ + std::string("_flag"), *animation_table, "flag",
+			                           animation_directory, animation_type);
+		}
+		load_bridge_if_present(
+		   animations_table, animation_directory, animation_type, "e", "normal", &bridges_normal_.e);
+		load_bridge_if_present(animations_table, animation_directory, animation_type, "se", "normal",
+		                       &bridges_normal_.se);
+		load_bridge_if_present(animations_table, animation_directory, animation_type, "sw", "normal",
+		                       &bridges_normal_.sw);
+		load_bridge_if_present(
+		   animations_table, animation_directory, animation_type, "e", "busy", &bridges_busy_.e);
+		load_bridge_if_present(
+		   animations_table, animation_directory, animation_type, "se", "busy", &bridges_busy_.se);
+		load_bridge_if_present(
+		   animations_table, animation_directory, animation_type, "sw", "busy", &bridges_busy_.sw);
+	};
 
-    std::string animation_directory = table.get_string("animation_directory");
-    if (table.has_key("animations")) {
-        load_animations(
-           *table.get_table("animations"), animation_directory, Animation::Type::kFiles);
-    }
-    if (table.has_key("spritesheets")) {
-        load_animations(
-           *table.get_table("spritesheets"), animation_directory, Animation::Type::kSpritesheet);
-    }
+	std::string animation_directory = table.get_string("animation_directory");
+	if (table.has_key("animations")) {
+		load_animations(*table.get_table("animations"), animation_directory, Animation::Type::kFiles);
+	}
+	if (table.has_key("spritesheets")) {
+		load_animations(
+		   *table.get_table("spritesheets"), animation_directory, Animation::Type::kSpritesheet);
+	}
 }
 
 void TribeDescr::load_ships(const LuaTable& table, Tribes& tribes) {
