@@ -146,7 +146,7 @@ scouting1 = {
 
 obj_scouting1 = {
    name = "build_scouts_hut",
-   title = _"Scout’s hut",
+   title = _"Scout’s Hut",
    number = 1,
    body = objective_text(_"Build a scout’s hut",
       p(_[[It’s good to know your surroundings. A scout will explore unseen parts of the map for you.]]) ..
