@@ -73,10 +73,11 @@ WordWrap::WordWrap(int fontsize, const RGBColor& color, uint32_t gwrapwidth)
 	wrapwidth_ = gwrapwidth;
 
 	if (wrapwidth_ < std::numeric_limits<uint32_t>::max()) {
-		if (wrapwidth_ < 2 * kLineMargin)
+		if (wrapwidth_ < 2 * kLineMargin) {
 			wrapwidth_ = 0;
-		else
+		} else {
 			wrapwidth_ -= 2 * kLineMargin;
+		}
 	}
 }
 
@@ -133,8 +134,9 @@ void WordWrap::compute_end_of_line(const std::string& text,
 	assert(text.empty() || wrapwidth_ > safety_margin);
 
 	std::string::size_type orig_end = text.find('\n', line_start);
-	if (orig_end == std::string::npos)
+	if (orig_end == std::string::npos) {
 		orig_end = text.size();
+	}
 
 	if (wrapwidth_ == std::numeric_limits<uint32_t>::max() ||
 	    orig_end - line_start <= minimum_chars) {
@@ -176,13 +178,15 @@ void WordWrap::compute_end_of_line(const std::string& text,
 	// Invariant: space points to a space character such that [line_start, space) fits
 	std::string::size_type space = end_lower;
 
-	while (space > line_start && text[space] != ' ')
+	while (space > line_start && text[space] != ' ') {
 		--space;
+	}
 
 	for (;;) {
 		std::string::size_type nextspace = text.find(' ', space + 1);
-		if (nextspace > end_upper)
+		if (nextspace > end_upper) {
 			break;  // we already know that this cannot possibly fit
+		}
 
 		// check whether the next word still fits
 		if (!line_fits(i18n::make_ligatures(text.substr(line_start, nextspace - line_start).c_str()),
@@ -264,8 +268,9 @@ uint32_t WordWrap::width() const {
 
 	for (uint32_t line = 0; line < lines_.size(); ++line) {
 		uint32_t linewidth = text_width(lines_[line].text, fontsize_);
-		if (linewidth > calculated_width)
+		if (linewidth > calculated_width) {
 			calculated_width = linewidth;
+		}
 	}
 
 	return calculated_width + 2 * kLineMargin;
@@ -292,10 +297,11 @@ void WordWrap::calc_wrapped_pos(uint32_t caret, uint32_t& line, uint32_t& pos) c
 	while (max > min) {
 		uint32_t mid = min + (max - min + 1) / 2;
 
-		if (caret >= lines_[mid].start)
+		if (caret >= lines_[mid].start) {
 			min = mid;
-		else
+		} else {
 			max = mid - 1;
+		}
 	}
 
 	assert(caret >= lines_[min].start);
@@ -317,8 +323,9 @@ uint32_t WordWrap::line_offset(uint32_t line) const {
  * \note This also draws the caret, if any.
  */
 void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t caret) {
-	if (lines_.empty())
+	if (lines_.empty()) {
 		return;
+	}
 
 	uint32_t caretline, caretpos;
 
@@ -330,8 +337,9 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t car
 
 	const int fontheight = text_height(fontsize_);
 	for (uint32_t line = 0; line < lines_.size(); ++line, where.y += fontheight) {
-		if (where.y >= dst.height() || (where.y + fontheight) <= 0)
+		if (where.y >= dst.height() || (where.y + fontheight) <= 0) {
 			continue;
+		}
 
 		Vector2i point(where.x, where.y);
 

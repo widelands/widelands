@@ -98,11 +98,13 @@ LanBase::LanBase(uint16_t port) : io_service(), socket_v4(io_service), socket_v6
 		exit(EXIT_FAILURE);
 	}
 	for (ifa = ifaddr, n = 0; ifa != nullptr; ifa = ifa->ifa_next, n++) {
-		if (ifa->ifa_addr == nullptr)
+		if (ifa->ifa_addr == nullptr) {
 			continue;
+		}
 		if (!(ifa->ifa_flags & IFF_LOOPBACK) && !(ifa->ifa_flags & IFF_BROADCAST) &&
-		    !(ifa->ifa_flags & IFF_MULTICAST))
+		    !(ifa->ifa_flags & IFF_MULTICAST)) {
 			continue;
+		}
 		switch (ifa->ifa_addr->sa_family) {
 		case AF_INET:
 			s = getnameinfo(ifa->ifa_broadaddr, sizeof(struct sockaddr_in), host, NI_MAXHOST, nullptr,
@@ -142,10 +144,12 @@ LanBase::LanBase(uint16_t port) : io_service(), socket_v4(io_service), socket_v6
 		report_network_error();
 	}
 
-	for (const std::string& ip : broadcast_addresses_v4)
+	for (const std::string& ip : broadcast_addresses_v4) {
 		log("[LAN] Will broadcast to %s.\n", ip.c_str());
-	if (socket_v6.is_open())
+	}
+	if (socket_v6.is_open()) {
 		log("[LAN] Will broadcast for IPv6.\n");
+	}
 }
 
 LanBase::~LanBase() {
@@ -202,8 +206,9 @@ ssize_t LanBase::receive(void* const buf, size_t const len, NetAddress* addr) {
 	};
 
 	// Try to receive something somewhere
-	if (!do_receive(socket_v4))
+	if (!do_receive(socket_v4)) {
 		do_receive(socket_v6);
+	}
 
 	// Return how much has been received, might be 0
 	return recv_len;
@@ -305,8 +310,9 @@ void LanBase::start_socket(boost::asio::ip::udp::socket* socket,
                            boost::asio::ip::udp version,
                            uint16_t port) {
 
-	if (socket->is_open())
+	if (socket->is_open()) {
 		return;
+	}
 
 	boost::system::error_code ec;
 	// Try to open the socket
@@ -367,8 +373,9 @@ void LanBase::close_socket(boost::asio::ip::udp::socket* socket) {
 	boost::system::error_code ec;
 	if (socket->is_open()) {
 		const boost::asio::ip::udp::endpoint& endpoint = socket->local_endpoint(ec);
-		if (!ec)
+		if (!ec) {
 			log("[LAN] Closing an IPv%d socket.\n", get_ip_version(endpoint.protocol()));
+		}
 		socket->shutdown(boost::asio::ip::udp::socket::shutdown_both, ec);
 		socket->close(ec);
 	}
@@ -413,8 +420,9 @@ void LanGamePromoter::run() {
 		char magic[8];
 		NetAddress addr;
 
-		if (receive(magic, 8, &addr) < 8)
+		if (receive(magic, 8, &addr) < 8) {
 			continue;
+		}
 
 		log("Received %s packet from %s\n", magic, addr.ip.to_string().c_str());
 
@@ -448,8 +456,9 @@ void LanGameFinder::reset() {
 	strncpy(magic, "QUERY", 8);
 	magic[6] = LAN_PROMOTION_PROTOCOL_VERSION;
 
-	if (!broadcast(magic, 8, kWidelandsLanPromotionPort))
+	if (!broadcast(magic, 8, kWidelandsLanPromotionPort)) {
 		report_network_error();
+	}
 }
 
 void LanGameFinder::run() {

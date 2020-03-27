@@ -27,8 +27,9 @@ static std::map<std::string, std::string> igmessages;
 
 /// Returns a translated message fitting to the message code \arg code
 const std::string& InternetGamingMessages::get_message(const std::string& code) {
-	if (igmessages.find(code) != igmessages.end())
+	if (igmessages.find(code) != igmessages.end()) {
 		return igmessages[code];
+	}
 	// if no message for code was found, just return code
 	return code;
 }

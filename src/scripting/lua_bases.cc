@@ -142,8 +142,9 @@ int LuaEditorGameBase::get_players(lua_State* L) {
 	uint32_t idx = 1;
 	for (PlayerNumber i = 1; i <= kMaxPlayers; i++) {
 		Player* rv = egbase.get_player(i);
-		if (!rv)
+		if (!rv) {
 			continue;
+		}
 
 		lua_pushuint32(L, idx++);
 		get_factory(L).push_player(L, i);
@@ -659,14 +660,16 @@ int LuaPlayerBase::place_flag(lua_State* L) {
 	uint32_t n = lua_gettop(L);
 	LuaMaps::LuaField* c = *get_user_class<LuaMaps::LuaField>(L, 2);
 	bool force = false;
-	if (n > 2)
+	if (n > 2) {
 		force = luaL_checkboolean(L, 3);
+	}
 
 	Flag* f;
 	if (!force) {
 		f = get(L, get_egbase(L)).build_flag(c->fcoords(L));
-		if (!f)
+		if (!f) {
 			report_error(L, "Couldn't build flag!");
+		}
 	} else {
 		f = &get(L, get_egbase(L)).force_flag(c->fcoords(L));
 	}
@@ -732,8 +735,9 @@ int LuaPlayerBase::place_road(lua_State* L) {
 		} else if (d == "nw" || d == "tl") {
 			path.append(map, 6);
 			map.get_tln(current, &current);
-		} else
+		} else {
 			report_error(L, "Illegal direction: %s", d.c_str());
+		}
 
 		cstep.add_allowed_location(current);
 	}
@@ -741,8 +745,9 @@ int LuaPlayerBase::place_road(lua_State* L) {
 	// Make sure that the road cannot cross itself
 	Path optimal_path;
 	map.findpath(path.get_start(), path.get_end(), 0, optimal_path, cstep, Map::fpBidiCost);
-	if (optimal_path.get_nsteps() != path.get_nsteps())
+	if (optimal_path.get_nsteps() != path.get_nsteps()) {
 		report_error(L, "Cannot build a road that crosses itself!");
+	}
 
 	RoadBase* r = nullptr;
 	if (force_road) {
@@ -817,10 +822,12 @@ int LuaPlayerBase::place_building(lua_State* L) {
 	bool constructionsite = false;
 	bool force = false;
 
-	if (lua_gettop(L) >= 4)
+	if (lua_gettop(L) >= 4) {
 		constructionsite = luaL_checkboolean(L, 4);
-	if (lua_gettop(L) >= 5)
+	}
+	if (lua_gettop(L) >= 5) {
 		force = luaL_checkboolean(L, 5);
+	}
 
 	EditorGameBase& egbase = get_egbase(L);
 	const Tribes& tribes = egbase.tribes();
@@ -846,8 +853,9 @@ int LuaPlayerBase::place_building(lua_State* L) {
 	} else {
 		b = get(L, egbase).build(c->coords(), building_index, constructionsite, former_buildings);
 	}
-	if (!b)
+	if (!b) {
 		report_error(L, "Couldn't place building!");
+	}
 
 	LuaMaps::upcasted_map_object_to_lua(L, b);
 	return 1;
@@ -895,8 +903,9 @@ int LuaPlayerBase::place_ship(lua_State* L) {
 */
 int LuaPlayerBase::conquer(lua_State* L) {
 	uint32_t radius = 1;
-	if (lua_gettop(L) > 2)
+	if (lua_gettop(L) > 2) {
 		radius = luaL_checkuint32(L, 3);
+	}
 
 	get_egbase(L).conquer_area_no_building(PlayerArea<Area<FCoords>>(
 	   player_number_,
@@ -965,11 +974,13 @@ int LuaPlayerBase::get_wares(lua_State* L) {
  ==========================================================
  */
 Player& LuaPlayerBase::get(lua_State* L, Widelands::EditorGameBase& egbase) {
-	if (player_number_ > kMaxPlayers)
+	if (player_number_ > kMaxPlayers) {
 		report_error(L, "Illegal player number %i", player_number_);
+	}
 	Player* rv = egbase.get_player(player_number_);
-	if (!rv)
+	if (!rv) {
 		report_error(L, "Player with the number %i does not exist", player_number_);
+	}
 	return *rv;
 }
 

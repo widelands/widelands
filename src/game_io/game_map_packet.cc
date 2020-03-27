@@ -35,8 +35,9 @@ GameMapPacket::~GameMapPacket() {
 }
 
 void GameMapPacket::read(FileSystem& fs, Game& game, MapObjectLoader* const) {
-	if (!fs.file_exists("map") || !fs.is_directory("map"))
+	if (!fs.file_exists("map") || !fs.is_directory("map")) {
 		throw GameDataError("no map");
+	}
 
 	//  Now Load the map as it would be a normal map saving.
 	delete wml_;

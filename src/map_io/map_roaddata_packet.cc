@@ -44,8 +44,9 @@ void MapRoaddataPacket::read(FileSystem& fs,
                              bool const skip,
                              MapObjectLoader& mol,
                              const TribesLegacyLookupTable& tribes_lookup_table) {
-	if (skip)
+	if (skip) {
 		return;
+	}
 
 	FileRead fr;
 	try {
@@ -65,8 +66,9 @@ void MapRoaddataPacket::read(FileSystem& fs,
 				try {
 					Game& game = dynamic_cast<Game&>(egbase);
 					Road& road = mol.get<Road>(serial);
-					if (mol.is_object_loaded(road))
+					if (mol.is_object_loaded(road)) {
 						throw GameDataError("already loaded");
+					}
 					PlayerNumber player_index = fr.unsigned_8();
 					if (!(0 < player_index && player_index <= nr_players)) {
 						throw GameDataError("Invalid player number: %i.", player_index);
@@ -98,15 +100,17 @@ void MapRoaddataPacket::read(FileSystem& fs,
 					road.cost_[0] = fr.unsigned_32();
 					road.cost_[1] = fr.unsigned_32();
 					Path::StepVector::size_type const nr_steps = fr.unsigned_16();
-					if (!nr_steps)
+					if (!nr_steps) {
 						throw GameDataError("nr_steps = 0");
+					}
 					Path p(road.flags_[0]->get_position());
-					for (Path::StepVector::size_type i = nr_steps; i; --i)
+					for (Path::StepVector::size_type i = nr_steps; i; --i) {
 						try {
 							p.append(map, read_direction_8(&fr));
 						} catch (const WException& e) {
 							throw GameDataError("step #%" PRIuS ": %s", nr_steps - i, e.what());
 						}
+					}
 					road.set_path(egbase, p);
 					road.idle_index_ = packet_version >= 5 ? p.get_nsteps() / 2 : fr.unsigned_32();
 
@@ -115,20 +119,21 @@ void MapRoaddataPacket::read(FileSystem& fs,
 					road.link_into_flags(game, true);
 
 					uint32_t const count = fr.unsigned_32();
-					if (!count)
+					if (!count) {
 						throw GameDataError("no carrier slot");
+					}
 
 					for (uint32_t i = 0; i < count; ++i) {
 						Carrier* carrier = nullptr;
 						Request* carrier_request = nullptr;
 
-						if (uint32_t const carrier_serial = fr.unsigned_32())
+						if (uint32_t const carrier_serial = fr.unsigned_32()) {
 							try {
 								carrier = &mol.get<Carrier>(carrier_serial);
 							} catch (const WException& e) {
 								throw GameDataError("carrier (%u): %s", carrier_serial, e.what());
 							}
-						else {
+						} else {
 							carrier = nullptr;
 						}
 
@@ -178,8 +183,8 @@ void MapRoaddataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 
 	const Map& map = egbase.map();
 	const Field& fields_end = map[map.max_index()];
-	for (Field const* field = &map[0]; field < &fields_end; ++field)
-		if (upcast(Road const, r, field->get_immovable()))
+	for (Field const* field = &map[0]; field < &fields_end; ++field) {
+		if (upcast(Road const, r, field->get_immovable())) {
 			if (!mos.is_object_saved(*r)) {
 				assert(mos.is_object_known(*r));
 
@@ -209,8 +214,9 @@ void MapRoaddataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 				const Path& path = r->path_;
 				const Path::StepVector::size_type nr_steps = path.get_nsteps();
 				fw.unsigned_16(nr_steps);
-				for (Path::StepVector::size_type i = 0; i < nr_steps; ++i)
+				for (Path::StepVector::size_type i = 0; i < nr_steps; ++i) {
 					fw.unsigned_8(path[i]);
+				}
 
 				fw.unsigned_32(r->carrier_slots_.size());
 
@@ -232,7 +238,8 @@ void MapRoaddataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 				}
 				mos.mark_object_as_saved(*r);
 			}
-
+		}
+	}
 	fw.write(fs, "binary/road_data");
 }
 }  // namespace Widelands
