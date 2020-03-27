@@ -425,7 +425,7 @@ NodeCaps Player::get_buildcaps(const FCoords& fc) const {
 	if (!fc.field->is_interior(player_number_)) {
 		buildcaps = 0;
 	} else if (buildcaps & BUILDCAPS_BUILDINGMASK) {  // Check if a building's flag can't be build
-	                                                  // due to ownership
+		                                               // due to ownership
 		FCoords flagcoords;
 		map.get_brn(fc, &flagcoords);
 		if (!flagcoords.field->is_interior(player_number_)) {
