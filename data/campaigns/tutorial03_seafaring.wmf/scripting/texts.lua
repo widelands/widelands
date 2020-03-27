@@ -95,21 +95,35 @@ tell_about_shipyard = {
 tell_about_ships = {
    position = "topright",
    title = _"Constructing ships",
-   body =
+   body = (
       h1(_"Waiting for the ships") ..
-      p(_[[Very good. Your shipyard is finished and your shipwright immediately started working. For the construction of ships, he needs logs, planks and spidercloth, which will be transported to the shipyard.]] .. " " ..
-      _[[The shipwright will take the ware he needs to a free spot at the shoreline and build a ship there. When the first ship is finished, it will launch onto the sea, and the shipwright will construct another one.]]) ..
-      li(_[[We should wait until we have two ships. That should be enough for now.]]) ..
-      li_arrow(_[[You need to stop your shipyard when you have enough ships. Otherwise, your shipwright will consume all your logs and spidercloth, producing dozens of ships.]]) ..
-      li_image("images/ui_basic/stop.png", _[[This is the icon for stopping production. You will find it in the building window.]]),
+      p(_[[Very good. Your shipyard is finished and your shipwright immediately started working. For the construction of ships, he needs logs, planks and spidercloth, which will be transported to the shipyard.]]) ..
+      p(_[[The shipwright will take the ware he needs to a free spot at the shoreline and build a ship there. When the first ship is finished, it will launch onto the sea, and the shipwright will construct another one.]]) ..
+      li(_[[We should wait until we have two ships. That should be enough for now.]])
+   ),
    obj_name = "wait_for_ships",
    obj_title = _"Construct two ships",
    obj_body = (
       p(_[[Ships are constructed automatically when the shipyard is complete and the needed wares have been delivered.]]) ..
       li(_[[Wait until the shipwright has constructed two ships.]]) ..
       li_arrow(_[[Do not forget to stop your shipyard when you have enough ships.]])
-   )
+   ),
+   h = 300
 }
+
+function shipyard_production(shipname)
+   return {
+      position = "topright",
+      title = _"Shipyard production",
+      body = (
+         h1(_"We have enough ships") ..
+         p((_[[Your second ship, "%1%", is ready now.]]):bformat(shipname)) ..
+         li_arrow(_[[You need to stop your shipyard when you have enough ships. Otherwise, your shipwright will consume all your logs and spidercloth, producing dozens of ships.]]) ..
+         li_image("images/ui_basic/stop.png", _[[This is the icon for stopping production. You will find it in the building window.]])
+      ),
+      h = 250
+   }
+end
 
 expedition1 = {
    position = "topright",
@@ -164,18 +178,37 @@ expedition3 = {
    )
 }
 
-conclusion = {
+expedition4 = {
    position = "topright",
    field = port_on_island,
-   title = _"Conclusion",
+   title = _"New colony",
    body = (
-      h1(_"Congratulations") ..
-      p(_[[You’ve lead the expedition to a successful end and founded a new colony. I’ve sent out some geologists – they already report that they’ve found some iron ore.]]) ..
+      h1(_"Your colony has been founded") ..
+      li_object('atlanteans_resi_iron_2', _[[You’ve lead the expedition to a successful end and founded a new colony. I’ve sent out some geologists – they already report that they’ve found some iron ore.]]) ..
       p(_[[So far you have learned everything about seafaring: how to build ports and ships and how to send out an expedition. Remember that expeditions are sometimes the fastest way to reach essential resources – and sometimes the only one.]]) ..
       p(_[[But I want to speak a word of warning. Ports are like headquarters: they can be attacked by a nearby enemy. While your headquarters has soldiers to defend it, your newly built port won’t. You should therefore avoid settling next to an enemy.]]) ..
       p(_[[On this map, there is no enemy to fear. In other games, you should make building one or two military fortifications around your new colonies a priority.]])
    ),
    h = 400
+}
+
+expedition5 = {
+   position = "topright",
+   field = iron_on_island,
+   title = _"Our mission",
+   body = (
+      h1(_"Start mining") ..
+      li_object('atlanteans_ironmine', p(_[[It was a long and expensive job to get here. The island has not much to offer, but there is some iron ore inside its mountain. Our economy needs iron ore, so we have to build an iron mine.]]), plr.color) ..
+      li(_[[Start mining iron ore in the mountain.]])
+   ),
+   h = 300,
+   obj_name = "build_iron_mine",
+   obj_title = _"Build an irone mine on the island",
+   obj_body = (
+      h1(_"Build an iron mine") ..
+      p(_[[Our economy lacks resources.]]) ..
+      li_arrow(_[[Start mining iron ore in mountains on the island.]])
+   )
 }
 
 ferry_1 = {
@@ -184,12 +217,13 @@ ferry_1 = {
    title = _"There is more to it…",
    body = (
       h1(_"Another gold mountain") ..
-      p(_[[Now that you have learned all about ships, there is another way of water-based transport I would like to teach you.]]) ..
+      p(_[[It will take some time for your shipyard to build some ships. While we’re waiting for them, there is another way of water-based transport I would like to teach you.]]) ..
       p(_[[Ships have the advantage that they can carry large quantities of wares and workers at a time, but unfortunately their destinations are limited to a handful of spaces suited for a port.]]) ..
       p(_[[Look at this valley here in the far south. We have found a mountain with gold down here and would like to mine ores from it as well. But the streams seperating it from our main colony are too wide to build bridges and too narrow for ships to pass them. Our roads would have to take long curves, which slows down ware transport a lot.]])
    ),
    h = 350
 }
+
 ferry_2 = {
    position = "topright",
    field = shore,
@@ -210,6 +244,7 @@ ferry_2 = {
       li_arrow(_[[You need to build the ferry yard close to the shore, otherwise it won’t be able to build ferries there.]])
    )
 }
+
 ferry_3 = {
    position = "topright",
    title = _"There is more to it…",
@@ -222,6 +257,7 @@ ferry_3 = {
    ),
    h = 350
 }
+
 ferry_4 = {
    position = "topright",
    title = _"There is more to it…",
@@ -231,6 +267,7 @@ ferry_4 = {
    ),
    h = 150
 }
+
 ferry_5 = {
    field = gold_mine,
    position = "topright",
@@ -250,19 +287,31 @@ ferry_5 = {
       li_arrow(_[[The only rule for waterway placement is that the two triangles directly adjacent to each segment of the waterway have to be water, and the entire path needs to be within your territory.]])
    )
 }
+
 ferry_6 = {
    position = "topright",
    title = _"Conclusion",
    body = (
       h1(_"About Ferries") ..
       p(_[[Now there are only a few more things I would like you to keep in mind whenever using ferries.]]) ..
-      p(_[[Do remember to stop your ferry yard when you don’t need any new ferries to be produced. As long as a ferry services a waterway, its lifetime is unlimited, but unemployed ferries will rot away and eventually sink.]]) ..
       p(_[[Never forget that these rowboats are too small to carry workers. You can use them as shortcuts for ware transport within parts of your territory, but not to claim regions you can reach neither by road nor by ship. Never cut all your roads between two places connected by waterways unless you are certain no worker will ever have to walk there.]]) ..
       p(_[[And if your waterways present a significant shortcut between your road networks, your economy will tend to send many wares over the waterway. As a waterway can hold only one ferry – unlike roads, which receive a second carrier if they are very busy –, and as they often tend to be rather longer than the two or three fields recommended for roads, there is always a risk of waterways becoming severe bottlenecks in your economy. Try to build several of them in parallel to distribute the strain. If this is not possible, it is in some cases even more efficient not to use waterways.]])
    ),
    h = 450
 }
-ferry_7 = {
+
+ferry_yard_production = {
+   position = "topright",
+   title = _"Ferry yard production",
+   body = (
+      h1(_"More ferries needed?") ..
+      p(_[[Do remember to stop your ferry yard when you don’t need any new ferries to be produced. As long as a ferry services a waterway, its lifetime is unlimited, but unemployed ferries will rot away and eventually sink.]]) ..
+      li_image("images/ui_basic/stop.png", _[[This is the icon for stopping production. You will find it in the building window.]])
+   ),
+   h = 250
+}
+
+congratulation = {
    position = "topright",
    title = _"Congratulations",
    body = (

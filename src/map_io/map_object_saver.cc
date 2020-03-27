@@ -55,8 +55,9 @@ MapObjectSaver::MapObjectSaver()
 MapObjectSaver::MapObjectRec& MapObjectSaver::get_object_record(const MapObject& obj) {
 	MapObjectRecordMap::iterator it = objects_.find(&obj);
 
-	if (it != objects_.end())
+	if (it != objects_.end()) {
 		return it->second;
+	}
 
 	MapObjectRec rec;
 #ifndef NDEBUG
@@ -78,8 +79,9 @@ MapObjectSaver::MapObjectRec& MapObjectSaver::get_object_record(const MapObject&
 bool MapObjectSaver::is_object_known(const MapObject& obj) const {
 	MapObjectRecordMap::const_iterator it = objects_.find(&obj);
 
-	if (it == objects_.end())
+	if (it == objects_.end()) {
 		return false;
+	}
 
 	return it->second.registered;
 }
@@ -96,30 +98,31 @@ Serial MapObjectSaver::register_object(const MapObject& obj) {
 
 	assert(!rec.registered);
 
-	if (dynamic_cast<Flag const*>(&obj))
+	if (dynamic_cast<Flag const*>(&obj)) {
 		++nr_flags_;
-	else if (dynamic_cast<Road const*>(&obj))
+	} else if (dynamic_cast<Road const*>(&obj)) {
 		++nr_roads_;
-	else if (dynamic_cast<Waterway const*>(&obj))
+	} else if (dynamic_cast<Waterway const*>(&obj)) {
 		++nr_waterways_;
-	else if (dynamic_cast<Building const*>(&obj))
+	} else if (dynamic_cast<Building const*>(&obj)) {
 		++nr_buildings_;
-	else if (dynamic_cast<Immovable const*>(&obj))
+	} else if (dynamic_cast<Immovable const*>(&obj)) {
 		++nr_immovables_;
-	else if (dynamic_cast<WareInstance const*>(&obj))
+	} else if (dynamic_cast<WareInstance const*>(&obj)) {
 		++nr_wares_;
-	else if (dynamic_cast<Bob const*>(&obj))
+	} else if (dynamic_cast<Bob const*>(&obj)) {
 		++nr_bobs_;
-	else if (dynamic_cast<Battle const*>(&obj))
+	} else if (dynamic_cast<Battle const*>(&obj)) {
 		++nr_battles_;
-	else if (dynamic_cast<ShipFleet const*>(&obj))
+	} else if (dynamic_cast<ShipFleet const*>(&obj)) {
 		++nr_ship_fleets_;
-	else if (dynamic_cast<FerryFleet const*>(&obj))
+	} else if (dynamic_cast<FerryFleet const*>(&obj)) {
 		++nr_ferry_fleets_;
-	else if (dynamic_cast<PortDock const*>(&obj))
+	} else if (dynamic_cast<PortDock const*>(&obj)) {
 		++nr_portdocks_;
-	else
+	} else {
 		throw wexception("MapObjectSaver: Unknown MapObject type");
+	}
 
 	rec.registered = true;
 	return rec.fileserial;
@@ -137,8 +140,9 @@ uint32_t MapObjectSaver::get_object_file_index(const MapObject& obj) {
  * Returns the file index of the given object, or zero for null pointers.
  */
 uint32_t MapObjectSaver::get_object_file_index_or_zero(const MapObject* obj) {
-	if (obj)
+	if (obj) {
 		return get_object_file_index(*obj);
+	}
 	return 0;
 }
 

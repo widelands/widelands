@@ -67,8 +67,9 @@ bool NetAddress::resolve_to_v6(NetAddress* addr, const std::string& hostname, ui
 bool NetAddress::parse_ip(NetAddress* addr, const std::string& ip, uint16_t port) {
 	boost::system::error_code ec;
 	boost::asio::ip::address new_addr = boost::asio::ip::address::from_string(ip, ec);
-	if (ec)
+	if (ec) {
 		return false;
+	}
 	addr->ip = new_addr;
 	addr->port = port;
 	return true;
@@ -112,10 +113,11 @@ void NetworkTime::think(uint32_t const speed) {
 
 	// in case weird things are happening with the system time
 	// (e.g. debugger, extremely slow simulation, ...)
-	if (delta < 0)
+	if (delta < 0) {
 		delta = 0;
-	else if (delta > 1000)
+	} else if (delta > 1000) {
 		delta = 1000;
+	}
 
 	delta = (delta * speed) / 1000;
 
@@ -123,20 +125,23 @@ void NetworkTime::think(uint32_t const speed) {
 
 	// Play catch up
 	uint32_t speedup = 0;
-	if (latency_ > static_cast<uint32_t>(10 * delta))
+	if (latency_ > static_cast<uint32_t>(10 * delta)) {
 		//  just try to kill as much of the latency as possible if we are that
 		//  far behind
 		speedup = latency_ / 3;
-	else if (latency_ > static_cast<uint32_t>(delta))
+	} else if (latency_ > static_cast<uint32_t>(delta)) {
 		speedup = delta / 8;  //  speed up by 12.5%
-	if (static_cast<int32_t>(delta + speedup) > behind)
+	}
+	if (static_cast<int32_t>(delta + speedup) > behind) {
 		speedup = behind - delta;
+	}
 
 	delta += speedup;
 	latency_ -= speedup;
 
-	if (delta > behind)
+	if (delta > behind) {
 		delta = behind;
+	}
 
 	time_ += delta;
 }
@@ -150,8 +155,9 @@ int32_t NetworkTime::networktime() const {
 }
 
 void NetworkTime::receive(int32_t const ntime) {
-	if (ntime < networktime_)
+	if (ntime < networktime_) {
 		throw wexception("NetworkTime: Time appears to be running backwards.");
+	}
 
 	uint32_t const behind = networktime_ - time_;
 
@@ -180,8 +186,9 @@ void SendPacket::data(const void* const packet_data, const size_t size) {
 		// So if they are removed the protocol has to be updated
 	}
 
-	for (size_t idx = 0; idx < size; ++idx)
+	for (size_t idx = 0; idx < size; ++idx) {
 		buffer.push_back(static_cast<const uint8_t*>(packet_data)[idx]);
+	}
 }
 
 void SendPacket::reset() {
@@ -207,11 +214,13 @@ uint8_t* SendPacket::get_data() const {
 
 /*** class RecvPacket ***/
 size_t RecvPacket::data(void* const packet_data, size_t const bufsize) {
-	if (index_ + bufsize > buffer.size())
+	if (index_ + bufsize > buffer.size()) {
 		throw wexception("Packet too short");
+	}
 
-	for (size_t read = 0; read < bufsize; ++read)
+	for (size_t read = 0; read < bufsize; ++read) {
 		static_cast<uint8_t*>(packet_data)[read] = buffer[index_++];
+	}
 
 	return bufsize;
 }

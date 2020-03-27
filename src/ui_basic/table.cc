@@ -190,8 +190,9 @@ void Table<void*>::clear() {
 	}
 	entry_records_.clear();
 
-	if (scrollbar_)
+	if (scrollbar_) {
 		scrollbar_->set_steps(1);
+	}
 	scrollpos_ = 0;
 	last_click_time_ = -10000;
 	clear_selections();
@@ -229,8 +230,9 @@ void Table<void*>::draw(RenderTarget& dst) {
 	dst.brighten_rect(Recti(0, 0, get_eff_w(), get_h()), ms_darken_value);
 
 	while (idx < entry_records_.size()) {
-		if (y >= static_cast<int32_t>(get_h()))
+		if (y >= static_cast<int32_t>(get_h())) {
 			return;
+		}
 
 		const EntryRecord& er = *entry_records_[idx];
 
@@ -396,8 +398,9 @@ bool Table<void*>::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
  * Handle mouse presses: select the appropriate entry
  */
 bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t, int32_t const y) {
-	if (get_can_focus())
+	if (get_can_focus()) {
 		focus();
+	}
 
 	switch (btn) {
 	case SDL_BUTTON_LEFT: {
@@ -435,14 +438,16 @@ bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t, int32_t const y
  *        negative values up.
  */
 void Table<void*>::move_selection(const int32_t offset) {
-	if (!has_selection())
+	if (!has_selection()) {
 		return;
+	}
 	int32_t new_selection = (is_multiselect_ ? last_multiselect_ : selection_) + offset;
 
-	if (new_selection < 0)
+	if (new_selection < 0) {
 		new_selection = 0;
-	else if (static_cast<uint32_t>(new_selection) > entry_records_.size() - 1)
+	} else if (static_cast<uint32_t>(new_selection) > entry_records_.size() - 1) {
 		new_selection = entry_records_.size() - 1;
+	}
 
 	multiselect(new_selection);
 	// Scroll to newly selected entry
@@ -455,8 +460,9 @@ void Table<void*>::move_selection(const int32_t offset) {
  * Args: i  the entry to select
  */
 void Table<void*>::select(const uint32_t i) {
-	if (empty() || i == no_selection_index())
+	if (empty() || i == no_selection_index()) {
 		return;
+	}
 
 	selection_ = i;
 	if (is_multiselect_) {
@@ -683,8 +689,9 @@ void Table<void*>::sort(const uint32_t lower_bound, uint32_t upper_bound) {
 	assert(columns_.at(sort_column_).btn);
 	assert(sort_column_ < columns_.size());
 
-	if (upper_bound > size())
+	if (upper_bound > size()) {
 		upper_bound = size();
+	}
 
 	std::vector<uint32_t> indices;
 	std::vector<EntryRecord*> copy;

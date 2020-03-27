@@ -239,6 +239,7 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_average_fps(lua_State* L);
 	int get_center_map_pixel(lua_State*);
 	int get_buildhelp(lua_State* L);
 	int set_buildhelp(lua_State* L);
