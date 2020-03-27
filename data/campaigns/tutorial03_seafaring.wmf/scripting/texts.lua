@@ -185,6 +185,7 @@ obj_expedition_sail = {
    name = "found_settlement",
    title = _"Explore",
    number = 1,
+   -- TRANSLATORS: "Found" as in "founding", NOT as in "finding"
    body = objective_text("Found a settlement",
       li(_[[Navigate your ship to an island that could contain iron ore.]]) ..
       li_arrow(_[[When you click on the expedition ship, a window opens where you can control your ship.]]) ..
