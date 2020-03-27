@@ -92,8 +92,9 @@ BaseListselect::BaseListselect(Panel* const parent,
 		check_pic_ = g_gr->images().get("images/ui_basic/list_selected.png");
 		max_pic_width_ = check_pic_->width();
 		int pic_h = check_pic_->height();
-		if (pic_h > lineheight_)
+		if (pic_h > lineheight_) {
 			lineheight_ = pic_h;
+		}
 	} else {
 		max_pic_width_ = 0;
 	}
@@ -147,19 +148,22 @@ void BaseListselect::add(const std::string& name,
 		int w = pic->width();
 		int h = pic->height();
 		entry_height = (h >= entry_height) ? h : entry_height;
-		if (max_pic_width_ < w)
+		if (max_pic_width_ < w) {
 			max_pic_width_ = w;
+		}
 	}
 
-	if (entry_height > lineheight_)
+	if (entry_height > lineheight_) {
 		lineheight_ = entry_height;
+	}
 
 	entry_records_.push_back(er);
 
 	layout();
 
-	if (sel)
+	if (sel) {
 		select(entry_records_.size() - 1);
+	}
 }
 
 /**
@@ -170,29 +174,33 @@ void BaseListselect::add(const std::string& name,
  * top of list and files at the bottom.
  */
 void BaseListselect::sort(const uint32_t Begin, uint32_t End) {
-	if (End > size())
+	if (End > size()) {
 		End = size();
-	for (uint32_t i = Begin; i < End; ++i)
+	}
+	for (uint32_t i = Begin; i < End; ++i) {
 		for (uint32_t j = i + 1; j < End; ++j) {
 			EntryRecord* const eri = entry_records_[i];
 			EntryRecord* const erj = entry_records_[j];
 			if (strcmp(eri->name.c_str(), erj->name.c_str()) > 0) {
-				if (selection_ == i)
+				if (selection_ == i) {
 					selection_ = j;
-				else if (selection_ == j)
+				} else if (selection_ == j) {
 					selection_ = i;
+				}
 				entry_records_[i] = erj;
 				entry_records_[j] = eri;
 			}
 		}
+	}
 }
 
 /**
  * Scroll to the given position, in pixels.
  */
 void BaseListselect::set_scrollpos(const int32_t i) {
-	if (scrollpos_ == uint32_t(i))
+	if (scrollpos_ == uint32_t(i)) {
 		return;
+	}
 
 	scrollpos_ = i;
 }
@@ -203,12 +211,14 @@ void BaseListselect::set_scrollpos(const int32_t i) {
  * Args: i  the entry to select
  */
 void BaseListselect::select(const uint32_t i) {
-	if (selection_ == i)
+	if (selection_ == i) {
 		return;
+	}
 
 	if (selection_mode_ == ListselectLayout::kShowCheck) {
-		if (selection_ != no_selection_index())
+		if (selection_ != no_selection_index()) {
 			entry_records_[selection_]->pic = nullptr;
+		}
 		entry_records_[i]->pic = check_pic_;
 	}
 	selection_ = i;
@@ -464,16 +474,18 @@ bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t, int32_t y) {
 		last_click_time_ = time;
 
 		y = (y + scrollpos_) / get_lineheight();
-		if (y < 0 || static_cast<int32_t>(entry_records_.size()) <= y)
+		if (y < 0 || static_cast<int32_t>(entry_records_.size()) <= y) {
 			return false;
+		}
 		play_click();
 		select(y);
 		clicked();
 
 		if  //  check if doubleclicked
 		   (time - real_last_click_time < DOUBLE_CLICK_INTERVAL && last_selection_ == selection_ &&
-		    selection_ != no_selection_index())
+		    selection_ != no_selection_index()) {
 			double_clicked(selection_);
+		}
 
 		return true;
 	}
@@ -501,8 +513,9 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 		switch (code.sym) {
 		case SDLK_DOWN:
 			selected_idx = selection_index() + 1;
-			if (selected_idx < size())
+			if (selected_idx < size()) {
 				select(selected_idx);
+			}
 			if ((selection_index() + 1) * get_lineheight() - get_inner_h() > scrollpos_) {
 				int32_t scrollpos = (selection_index() + 1) * get_lineheight() - get_inner_h();
 				scrollpos_ = (scrollpos < 0) ? 0 : scrollpos;
@@ -511,8 +524,9 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 		case SDLK_UP:
 			selected_idx = selection_index();
-			if (selected_idx > 0)
+			if (selected_idx > 0) {
 				select(selected_idx - 1);
+			}
 			if (selection_index() * get_lineheight() < scrollpos_) {
 				scrollpos_ = selection_index() * get_lineheight();
 				scrollbar_.set_scrollpos(scrollpos_);
@@ -534,10 +548,11 @@ void BaseListselect::remove(const uint32_t i) {
 
 	delete (entry_records_[i]);
 	entry_records_.erase(entry_records_.begin() + i);
-	if (selection_ == i)
+	if (selection_ == i) {
 		selected(selection_ = no_selection_index());
-	else if (i < selection_)
+	} else if (i < selection_) {
 		--selection_;
+	}
 }
 
 /**

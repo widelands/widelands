@@ -48,22 +48,24 @@ bool CheckStepRoadAI::allowed(
 	}
 
 	// Calculate cost and passability
-	if (!(endcaps & movecaps))
+	if (!(endcaps & movecaps)) {
 		return false;
+	}
 
 	// Check for blocking immovables
-	if (BaseImmovable const* const imm = map.get_immovable(end))
+	if (BaseImmovable const* const imm = map.get_immovable(end)) {
 		if (imm->get_size() >= BaseImmovable::SMALL) {
-			if (id != CheckStep::stepLast && !open_end)
+			if (id != CheckStep::stepLast && !open_end) {
 				return false;
-
-			if (dynamic_cast<Flag const*>(imm))
+			}
+			if (dynamic_cast<Flag const*>(imm)) {
 				return true;
-
-			if (!dynamic_cast<Road const*>(imm) || !(endcaps & BUILDCAPS_FLAG))
+			}
+			if (!dynamic_cast<Road const*>(imm) || !(endcaps & BUILDCAPS_FLAG)) {
 				return false;
+			}
 		}
-
+	}
 	return true;
 }
 
@@ -71,11 +73,12 @@ bool CheckStepRoadAI::reachable_dest(const Map& map, const FCoords& dest) const 
 	NodeCaps const caps = dest.field->nodecaps();
 
 	if (!(caps & movecaps)) {
-		if (!((movecaps & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK)))
+		if (!((movecaps & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK))) {
 			return false;
-
-		if (!map.can_reach_by_water(dest))
+		}
+		if (!map.can_reach_by_water(dest)) {
 			return false;
+		}
 	}
 
 	return true;
@@ -237,9 +240,10 @@ bool FindNodeOpenWater::accept(const EditorGameBase&, const FCoords& coord) cons
 
 // FindNodeWithFlagOrRoad
 bool FindNodeWithFlagOrRoad::accept(const EditorGameBase&, FCoords fc) const {
-	if (upcast(PlayerImmovable const, pimm, fc.field->get_immovable()))
+	if (upcast(PlayerImmovable const, pimm, fc.field->get_immovable())) {
 		return (dynamic_cast<Flag const*>(pimm) ||
 		        (dynamic_cast<Road const*>(pimm) && (fc.field->nodecaps() & BUILDCAPS_FLAG)));
+	}
 	return false;
 }
 

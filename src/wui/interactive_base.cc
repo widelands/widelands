@@ -676,6 +676,10 @@ void InteractiveBase::think() {
 	UI::Panel::think();
 }
 
+double InteractiveBase::average_fps() const {
+	return 1000.0 * 1000.0 / avg_usframetime_;
+}
+
 /*
 ===============
 Draw debug overlay when appropriate.
@@ -695,7 +699,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	// range 13 - 15, this is used for training of AI
 	if (game != nullptr) {
 		if (game->is_auto_speed()) {
-			uint32_t cur_fps = 1000000 / avg_usframetime_;
+			const uint32_t cur_fps = average_fps();
 			int32_t speed_diff = 0;
 			if (cur_fps < 13) {
 				speed_diff = -100;
@@ -745,9 +749,9 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		// Blit FPS when playing a game in debug mode
 		if (get_display_flag(dfDebug)) {
 			static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
-			rendered_text = UI::g_fh->render(as_richtext_paragraph(
-			   (fps_format % (1000.0 / frametime_) % (1000.0 / (avg_usframetime_ / 1000))).str(),
-			   UI::FontStyle::kWuiGameSpeedAndCoordinates));
+			rendered_text = UI::g_fh->render(
+			   as_richtext_paragraph((fps_format % (1000.0 / frametime_) % average_fps()).str(),
+			                         UI::FontStyle::kWuiGameSpeedAndCoordinates));
 			rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, 5));
 		}
 	}
