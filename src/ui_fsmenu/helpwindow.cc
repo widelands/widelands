@@ -97,7 +97,7 @@ bool FullscreenHelpWindow::handle_key(bool down, SDL_Keysym code) {
 }
 
 void FullscreenHelpWindow::clicked_ok() {
-    if (is_modal()) {
+	if (is_modal()) {
 		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 	} else {
 		// Do not call die() here - could lead to broken pointers.

@@ -186,9 +186,9 @@ void InputQueueDisplay::max_size_changed() {
  * Compare the current InputQueue state with the cached state; update if necessary.
  */
 void InputQueueDisplay::think() {
-    if (static_cast<uint32_t>(check_max_size()) != cache_size_) {
+	if (static_cast<uint32_t>(check_max_size()) != cache_size_) {
 		max_size_changed();
-    }
+	}
 
 	// TODO(sirver): It seems cache_max_fill_ is not really useful for anything.
 	if (static_cast<uint32_t>(check_max_fill()) != cache_max_fill_) {
@@ -201,9 +201,9 @@ void InputQueueDisplay::think() {
  * Render the current InputQueue state.
  */
 void InputQueueDisplay::draw(RenderTarget& dst) {
-    if (!cache_size_) {
+	if (!cache_size_) {
 		return;
-    }
+	}
 
 	cache_max_fill_ = check_max_fill();
 
@@ -251,9 +251,9 @@ void InputQueueDisplay::draw(RenderTarget& dst) {
  */
 void InputQueueDisplay::update_priority_buttons() {
 
-    if (type_ != Widelands::wwWARE) {
+	if (type_ != Widelands::wwWARE) {
 		return;
-    }
+	}
 
 	if (cache_size_ <= 0 || no_priority_buttons_) {
 		delete priority_radiogroup_;
@@ -314,9 +314,9 @@ void InputQueueDisplay::update_priority_buttons() {
 	priority_radiogroup_->clicked.connect(boost::bind(&InputQueueDisplay::radiogroup_clicked, this));
 
 	bool const can_act = igb_.can_act(building_.owner().player_number());
-    if (!can_act) {
+	if (!can_act) {
 		priority_radiogroup_->set_enabled(false);
-    }
+	}
 }
 
 /**
@@ -328,9 +328,9 @@ void InputQueueDisplay::update_max_fill_buttons() {
 	increase_max_fill_ = nullptr;
 	decrease_max_fill_ = nullptr;
 
-    if (cache_size_ <= 0 || no_capacity_buttons_) {
+	if (cache_size_ <= 0 || no_capacity_buttons_) {
 		return;
-    }
+	}
 
 	uint32_t x = Border;
 	uint32_t y = Border + (total_height_ - 2 * Border - kWareMenuPicWidth) / 2;
@@ -541,11 +541,11 @@ void InputQueueDisplay::compute_max_fill_buttons_enabled_state() {
 	// Disable those buttons for replay watchers
 	bool const can_act = igb_.can_act(building_.owner().player_number());
 	if (!can_act) {
-        if (increase_max_fill_) {
+		if (increase_max_fill_) {
 			increase_max_fill_->set_enabled(false);
-        }
-        if (decrease_max_fill_) {
+		}
+		if (decrease_max_fill_) {
 			decrease_max_fill_->set_enabled(false);
-        }
+		}
 	}
 }

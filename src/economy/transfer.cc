@@ -87,11 +87,11 @@ void Transfer::set_request(Request* req) {
 	assert(req);
 
 	if (&req->target() != destination_.get(game_)) {
-        if (destination_.is_set()) {
+		if (destination_.is_set()) {
 			log("WARNING: Transfer::set_request req->target (%u) "
 			    "vs. destination (%u) mismatch\n",
 			    req->target().serial(), destination_.serial());
-        }
+		}
 		destination_ = &req->target();
 	}
 	request_ = req;
@@ -134,16 +134,16 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* const location, bool& 
 
 	success = true;
 
-    if (location == destination) {
+	if (location == destination) {
 		return nullptr;
-    }
+	}
 
 	Flag& locflag = location->base_flag();
 	Flag& destflag = destination->base_flag();
 
-    if (&locflag == &destflag) {
+	if (&locflag == &destflag) {
 		return &locflag == location ? destination : &locflag;
-    }
+	}
 
 	// Brute force: recalculate the best route every time
 	if (!locflag.get_economy(type)->find_route(locflag, destflag, &route_)) {
@@ -153,22 +153,22 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* const location, bool& 
 		return nullptr;
 	}
 
-    if (route_.get_nrsteps() >= 1) {
-        if (upcast(RoadBase const, road, location)) {
-            if (&road->get_flag(RoadBase::FlagEnd) == &route_.get_flag(game_, 1)) {
+	if (route_.get_nrsteps() >= 1) {
+		if (upcast(RoadBase const, road, location)) {
+			if (&road->get_flag(RoadBase::FlagEnd) == &route_.get_flag(game_, 1)) {
 				route_.trim_start(1);
-            }
-        }
-    }
+			}
+		}
+	}
 
-    if (route_.get_nrsteps() >= 1) {
-        if (upcast(RoadBase const, road, destination)) {
+	if (route_.get_nrsteps() >= 1) {
+		if (upcast(RoadBase const, road, destination)) {
 			if (&road->get_flag(RoadBase::FlagEnd) ==
-                &route_.get_flag(game_, route_.get_nrsteps() - 1)) {
+			    &route_.get_flag(game_, route_.get_nrsteps() - 1)) {
 				route_.truncate(route_.get_nrsteps() - 1);
-            }
-        }
-    }
+			}
+		}
+	}
 
 	// Reroute into PortDocks or the associated warehouse when appropriate
 	if (route_.get_nrsteps() >= 1) {
@@ -182,15 +182,15 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* const location, bool& 
 			PortDock* pd = wh->get_portdock();
 			assert(pd);
 
-            if (location == pd) {
+			if (location == pd) {
 				return pd->get_dock(nextflag);
-            }
-            if (location == wh) {
+			}
+			if (location == wh) {
 				return pd;
-            }
-            if (location == &curflag || ware_) {
+			}
+			if (location == &curflag || ware_) {
 				return wh;
-            }
+			}
 			return &curflag;
 		}
 
@@ -208,13 +208,13 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* const location, bool& 
 		assert(&route_.get_flag(game_, 0) == location);
 
 		// special rule to get wares into buildings
-        if (ware_ && route_.get_nrsteps() == 1) {
+		if (ware_ && route_.get_nrsteps() == 1) {
 			if (dynamic_cast<Building const*>(destination)) {
 				assert(&route_.get_flag(game_, 1) == &destflag);
 
 				return destination;
 			}
-        }
+		}
 
 		if (route_.get_nrsteps() >= 1) {
 			return &route_.get_flag(game_, 1);
@@ -310,9 +310,9 @@ void Transfer::read(FileRead& fr, Transfer::ReadData& rd) {
 }
 
 void Transfer::read_pointers(MapObjectLoader& mol, const Widelands::Transfer::ReadData& rd) {
-    if (rd.destination) {
+	if (rd.destination) {
 		destination_ = &mol.get<PlayerImmovable>(rd.destination);
-    }
+	}
 }
 
 void Transfer::write(MapObjectSaver& mos, FileWrite& fw) {

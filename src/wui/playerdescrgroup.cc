@@ -141,7 +141,7 @@ void PlayerDescriptionGroup::update() {
 			std::string title;
 
 			if (player.state == PlayerSettings::State::kComputer) {
-                if (player.ai.empty()) {
+				if (player.ai.empty()) {
 					title = _("Computer");
 				} else {
 					if (player.random_ai) {
@@ -196,9 +196,9 @@ void PlayerDescriptionGroup::update() {
 void PlayerDescriptionGroup::enable_player(bool on) {
 	const GameSettings& settings = d->settings->settings();
 
-    if (d->plnum >= settings.players.size()) {
+	if (d->plnum >= settings.players.size()) {
 		return;
-    }
+	}
 
 	if (on) {
 		if (settings.players[d->plnum].state == PlayerSettings::State::kClosed) {
@@ -223,9 +223,9 @@ void PlayerDescriptionGroup::toggle_playertype() {
 void PlayerDescriptionGroup::toggle_playertribe() {
 	const GameSettings& settings = d->settings->settings();
 
-    if (d->plnum >= settings.players.size()) {
+	if (d->plnum >= settings.players.size()) {
 		return;
-    }
+	}
 
 	const PlayerSettings& player = settings.players.at(d->plnum);
 	const std::string& currenttribe = player.tribe;
@@ -261,19 +261,19 @@ void PlayerDescriptionGroup::toggle_playertribe() {
 void PlayerDescriptionGroup::toggle_playerteam() {
 	const GameSettings& settings = d->settings->settings();
 
-    if (d->plnum >= settings.players.size()) {
+	if (d->plnum >= settings.players.size()) {
 		return;
-    }
+	}
 
 	Widelands::TeamNumber currentteam = settings.players[d->plnum].team;
 	Widelands::TeamNumber maxteam = settings.players.size() / 2;
 	Widelands::TeamNumber newteam;
 
-    if (currentteam >= maxteam) {
+	if (currentteam >= maxteam) {
 		newteam = 0;
-    } else {
+	} else {
 		newteam = currentteam + 1;
-    }
+	}
 
 	d->settings->set_player_team(d->plnum, newteam);
 	update();
@@ -286,9 +286,9 @@ void PlayerDescriptionGroup::update_playerinit() {
 
 	const GameSettings& settings = d->settings->settings();
 
-    if (d->plnum >= settings.players.size()) {
+	if (d->plnum >= settings.players.size()) {
 		return;
-    }
+	}
 
 	if (settings.scenario) {
 		d->btnPlayerInit->add(

@@ -86,7 +86,7 @@ EditorSetTerrainTool::handle_undo_impl(const Widelands::NodeAndTriangle<Wideland
 		return radius + max;
 	} else {
 		return radius;
-    }
+	}
 }
 
 EditorActionArgs EditorSetTerrainTool::format_args_impl(EditorInteractive& parent) {

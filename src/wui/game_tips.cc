@@ -42,9 +42,9 @@ GameTips::GameTips(UI::ProgressWindow& progressWindow, const std::vector<std::st
 	// Loading the "texts" locale for translating the tips
 	i18n::Textdomain textdomain("texts");
 
-    for (uint8_t i = 0; i < names.size(); ++i) {
+	for (uint8_t i = 0; i < names.size(); ++i) {
 		load_tips(names[i]);
-    }
+	}
 
 	if (!tips_.empty()) {
 		// add visualization only if any tips are loaded
@@ -81,11 +81,11 @@ void GameTips::update(bool repaint) {
 	uint32_t ticks = SDL_GetTicks();
 	if (ticks >= (lastUpdated_ + updateAfter_)) {
 		const uint32_t next = rand() % tips_.size();
-        if (next == lastTip_) {
+		if (next == lastTip_) {
 			lastTip_ = (next + 1) % tips_.size();
-        } else {
+		} else {
 			lastTip_ = next;
-        }
+		}
 		show_tip(next);
 		lastUpdated_ = SDL_GetTicks();
 		updateAfter_ = tips_[next].interval * 1000;

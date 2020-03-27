@@ -549,7 +549,7 @@ void MainMenuNewRandomMap::id_edit_box_changed() {
 		world_names.push_back(descr.name);
 	}
 
-    if (!UniqueRandomMapInfo::set_from_id_string(map_info, str, world_names)) {
+	if (!UniqueRandomMapInfo::set_from_id_string(map_info, str, world_names)) {
 		ok_button_.set_enabled(false);
 	} else {
 		std::stringstream sstrm;
@@ -604,7 +604,7 @@ void MainMenuNewRandomMap::nr_edit_box_changed() {
 			ok_button_.set_enabled(true);
 		} else {
 			ok_button_.set_enabled(false);
-        }
+		}
 	} catch (...) {
 		ok_button_.set_enabled(false);
 	}

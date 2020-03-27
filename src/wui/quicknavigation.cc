@@ -36,12 +36,12 @@ void QuickNavigation::set_landmark(size_t index, const MapView::View& view) {
 }
 
 bool QuickNavigation::handle_key(bool down, SDL_Keysym key) {
-    if (!havefirst_) {
+	if (!havefirst_) {
 		return false;
-    }
-    if (!down) {
+	}
+	if (!down) {
 		return false;
-    }
+	}
 
 	if (key.sym >= SDLK_1 && key.sym <= SDLK_9) {
 		unsigned int which = key.sym - SDLK_0;

@@ -209,9 +209,9 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 		for (;;) {  // The other buildhelp overlays.
 			++buildhelp_overlay;
 			++filename;
-            if (buildhelp_overlay == buildhelp_overlays_end) {
+			if (buildhelp_overlay == buildhelp_overlays_end) {
 				break;
-            }
+			}
 			buildhelp_overlay->pic = g_gr->images().get(*filename);
 			buildhelp_overlay->hotspot =
 			   Vector2i(buildhelp_overlay->pic->width() / 2, buildhelp_overlay->pic->height() / 2);
@@ -862,9 +862,9 @@ bool InteractiveBase::get_display_flag(uint32_t const flag) {
 void InteractiveBase::set_display_flag(uint32_t const flag, bool const on) {
 	display_flags_ &= ~flag;
 
-    if (on) {
+	if (on) {
 		display_flags_ |= flag;
-    }
+	}
 }
 
 /*
@@ -979,11 +979,11 @@ void InteractiveBase::finish_build_road() {
 		upcast(Game, game, &egbase());
 
 		// Build the path as requested
-        if (game) {
+		if (game) {
 			game->send_player_build_road(road_build_player_, *new Widelands::Path(*buildroad_));
 		} else {
 			egbase().get_player(road_build_player_)->build_road(*new Widelands::Path(*buildroad_));
-        }
+		}
 
 		if (allow_user_input() && (SDL_GetModState() & KMOD_CTRL)) {
 			//  place flags
@@ -1001,8 +1001,8 @@ void InteractiveBase::finish_build_road() {
 						game->send_player_build_flag(road_build_player_, map.get_fcoords(*it));
 					} else {
 						egbase().get_player(road_build_player_)->build_flag(map.get_fcoords(*it));
-                    }
-                }
+					}
+				}
 			} else {
 				for //  end to start
 					(std::vector<Coords>::const_iterator it = last;
@@ -1012,8 +1012,8 @@ void InteractiveBase::finish_build_road() {
 						game->send_player_build_flag(road_build_player_, map.get_fcoords(*it));
 					} else {
 						egbase().get_player(road_build_player_)->build_flag(map.get_fcoords(*it));
-                    }
-                }
+					}
+				}
 			}
 		}
 	}
@@ -1098,9 +1098,9 @@ bool InteractiveBase::append_build_road(Coords const field) {
 	{  //  find a path to the clicked-on node
 		Widelands::Path path;
 		Widelands::CheckStepRoad cstep(player, Widelands::MOVECAPS_WALK);
-        if (map.findpath(buildroad_->get_end(), field, 0, path, cstep, Map::fpBidiCost) < 0) {
+		if (map.findpath(buildroad_->get_end(), field, 0, path, cstep, Map::fpBidiCost) < 0) {
 			return false;  //  could not find a path
-        }
+		}
 		buildroad_->append(map, path);
 	}
 
@@ -1298,45 +1298,45 @@ void InteractiveBase::road_building_add_overlay() {
 		map.get_neighbour(endpos, dir, &neighb);
 		caps = egbase().player(road_build_player_).get_buildcaps(neighb);
 
-        if (!(caps & Widelands::MOVECAPS_WALK)) {
+		if (!(caps & Widelands::MOVECAPS_WALK)) {
 			continue;  // need to be able to walk there
-        }
+		}
 
 		//  can't build on robusts
 		Widelands::BaseImmovable* const imm = map.get_immovable(neighb);
 		if (imm && imm->get_size() >= Widelands::BaseImmovable::SMALL) {
 			if (!(dynamic_cast<const Widelands::Flag*>(imm) ||
 			      (dynamic_cast<const Widelands::RoadBase*>(imm) &&
-                   (caps & Widelands::BUILDCAPS_FLAG)))) {
+			       (caps & Widelands::BUILDCAPS_FLAG)))) {
 				continue;
-            }
+			}
 		}
 
-        if (buildroad_->get_index(neighb) >= 0) {
+		if (buildroad_->get_index(neighb) >= 0) {
 			continue;  // the road can't cross itself
-        }
+		}
 
 		int32_t slope;
 
-        if (Widelands::WALK_E == dir || Widelands::WALK_NE == dir || Widelands::WALK_SE == dir) {
+		if (Widelands::WALK_E == dir || Widelands::WALK_NE == dir || Widelands::WALK_SE == dir) {
 			slope = neighb.field->get_height() - endpos.field->get_height();
-        } else {
+		} else {
 			slope = endpos.field->get_height() - neighb.field->get_height();
-        }
+		}
 
 		const char* name = nullptr;
 
-        if (slope <= -4) {
+		if (slope <= -4) {
 			name = "images/wui/overlays/road_building_reddown.png";
-        } else if (slope <= -2) {
+		} else if (slope <= -2) {
 			name = "images/wui/overlays/road_building_yellowdown.png";
-        } else if (slope < 2) {
+		} else if (slope < 2) {
 			name = "images/wui/overlays/road_building_green.png";
-        } else if (slope < 4) {
+		} else if (slope < 4) {
 			name = "images/wui/overlays/road_building_yellow.png";
-        } else {
+		} else {
 			name = "images/wui/overlays/road_building_red.png";
-        }
+		}
 		road_building_overlays_.steepness_indicators[neighb] = g_gr->images().get(name);
 	}
 }
@@ -1399,9 +1399,9 @@ void InteractiveBase::waterway_building_add_overlay() {
 		if (imm && imm->get_size() >= Widelands::BaseImmovable::SMALL) {
 			if (!(dynamic_cast<const Widelands::Flag*>(imm) ||
 			      (dynamic_cast<const Widelands::RoadBase*>(imm) &&
-                   (caps & Widelands::BUILDCAPS_FLAG)))) {
-                continue;
-            }
+			       (caps & Widelands::BUILDCAPS_FLAG)))) {
+				continue;
+			}
 		}
 
 		int32_t slope;

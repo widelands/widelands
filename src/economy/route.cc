@@ -86,9 +86,9 @@ void Route::load(LoadData& data, FileRead& fr) {
 
 	totalcost_ = fr.signed_32();
 	uint32_t nsteps = fr.unsigned_16();
-    for (uint32_t step = 0; step < nsteps; ++step) {
+	for (uint32_t step = 0; step < nsteps; ++step) {
 		data.flags.push_back(fr.unsigned_32());
-    }
+	}
 }
 
 /**

@@ -210,9 +210,9 @@ void Road::assign_carrier(Carrier& c, uint8_t slot) {
 
 	delete s.carrier_request;
 	s.carrier_request = nullptr;
-    if (Carrier* const current_carrier = s.carrier.get(owner().egbase())) {
+	if (Carrier* const current_carrier = s.carrier.get(owner().egbase())) {
 		current_carrier->set_location(nullptr);
-    }
+	}
 
 	carrier_slots_[slot].carrier = &c;
 	carrier_slots_[slot].carrier_request = nullptr;
@@ -290,9 +290,9 @@ void Road::postsplit(Game& game, Flag& flag) {
 			if (dynamic_cast<Building const*>(map.get_immovable(w->get_position()))) {
 				Coords pos;
 				map.get_brn(w->get_position(), &pos);
-                if (pos == path.get_start()) {
+				if (pos == path.get_start()) {
 					idx = 0;
-                }
+				}
 			}
 		}
 

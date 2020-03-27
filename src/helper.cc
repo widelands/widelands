@@ -34,18 +34,18 @@ std::vector<std::string> split_string(const std::string& s, const char* const se
 char* next_word(char*& p, bool& reached_end, char const terminator) {
 	assert(terminator);
 	char* const result = p;
-    for (; *p != terminator; ++p) {
+	for (; *p != terminator; ++p) {
 		if (*p == '\0') {
 			reached_end = true;
 			goto end;
 		}
-    }
+	}
 	reached_end = false;
 	*p = '\0';  //  terminate the word
 	++p;        //  move past the terminator
 end:
-    if (result < p) {
+	if (result < p) {
 		return result;
-    }
+	}
 	throw wexception("expected word");
 }

@@ -110,9 +110,9 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 			std::transform(program_name.begin(), program_name.end(), program_name.begin(), tolower);
 
 			try {
-                if (programs_.count(program_name)) {
+				if (programs_.count(program_name)) {
 					throw wexception("this program has already been declared");
-                }
+				}
 
 				programs_[program_name] =
 				   std::unique_ptr<WorkerProgram>(new WorkerProgram(program_name, *this, tribes_));
@@ -139,9 +139,9 @@ WorkerDescr::~WorkerDescr() {
 WorkerProgram const* WorkerDescr::get_program(const std::string& programname) const {
 	Programs::const_iterator it = programs_.find(programname);
 
-    if (it == programs_.end()) {
+	if (it == programs_.end()) {
 		throw wexception("%s has no program '%s'", name().c_str(), programname.c_str());
-    }
+	}
 
 	return it->second.get();
 }

@@ -315,7 +315,7 @@ void InteractivePlayer::think() {
 	if (flag_to_connect_) {
 		Widelands::Field& field = egbase().map()[flag_to_connect_];
 		if (upcast(Widelands::Flag const, flag, field.get_immovable())) {
-            if (!flag->has_road() && !is_building_road()) {
+			if (!flag->has_road() && !is_building_road()) {
 				if (auto_roadbuild_mode_) {
 					//  There might be a fieldaction window open, showing a button
 					//  for roadbuilding. If that dialog remains open so that the
@@ -331,7 +331,7 @@ void InteractivePlayer::think() {
 					start_build_road(flag_to_connect_, field.get_owned_by());
 				}
 			}
-            flag_to_connect_ = Widelands::Coords::null();
+			flag_to_connect_ = Widelands::Coords::null();
 		}
 	}
 	{
@@ -353,9 +353,9 @@ void InteractivePlayer::think() {
 void InteractivePlayer::draw(RenderTarget& dst) {
 	// Bail out if the game isn't actually loaded.
 	// This fixes a crash with displaying an error dialog during loading.
-    if (!game().is_loaded()) {
+	if (!game().is_loaded()) {
 		return;
-    }
+	}
 
 	draw_map_view(map_view(), &dst);
 }
@@ -515,17 +515,17 @@ void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and
 	const Map& map = egbase().map();
 	if (1 < player().vision(Map::get_index(node_and_triangle.node, map.get_width()))) {
 		// Special case for buildings
-        if (upcast(Building, building, map.get_immovable(node_and_triangle.node))) {
+		if (upcast(Building, building, map.get_immovable(node_and_triangle.node))) {
 			if (can_see(building->owner().player_number())) {
 				show_building_window(node_and_triangle.node, false, false);
 				return;
 			}
-        }
+		}
 
 		if (!is_building_road() && !is_building_waterway()) {
-            if (try_show_ship_window()) {
+			if (try_show_ship_window()) {
 				return;
-            }
+			}
 		}
 
 		// everything else can bring up the temporary dialog
@@ -593,9 +593,9 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 
 		case SDLK_KP_5:
-            if (code.mod & KMOD_NUM) {
+			if (code.mod & KMOD_NUM) {
 				break;
-            }
+			}
 			FALLS_THROUGH;
 		case SDLK_HOME:
 			map_view()->scroll_to_field(

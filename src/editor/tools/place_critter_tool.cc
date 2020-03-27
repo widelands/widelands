@@ -56,9 +56,9 @@ int32_t EditorPlaceCritterTool::handle_click_impl(const Widelands::NodeAndTriang
 		do {
 			const Widelands::BobDescr& descr = *(*i);
 			if (mr.location().field->nodecaps() & descr.movecaps()) {
-                if (Widelands::Bob* const bob = mr.location().field->get_first_bob()) {
+				if (Widelands::Bob* const bob = mr.location().field->get_first_bob()) {
 					bob->remove(egbase);  //  There is already a bob. Remove it.
-                }
+				}
 				descr.create(egbase, nullptr, mr.location());
 			}
 			++i;
@@ -66,7 +66,7 @@ int32_t EditorPlaceCritterTool::handle_click_impl(const Widelands::NodeAndTriang
 		return mr.radius() + 2;
 	} else {
 		return 0;
-    }
+	}
 }
 
 int32_t EditorPlaceCritterTool::handle_undo_impl(
@@ -84,9 +84,9 @@ int32_t EditorPlaceCritterTool::handle_undo_impl(
 			if (*i) {
 				const Widelands::BobDescr& descr = *(*i);
 				if (mr.location().field->nodecaps() & descr.movecaps()) {
-                    if (Widelands::Bob* const bob = mr.location().field->get_first_bob()) {
+					if (Widelands::Bob* const bob = mr.location().field->get_first_bob()) {
 						bob->remove(egbase);  //  There is already a bob. Remove it.
-                    }
+					}
 					descr.create(egbase, nullptr, mr.location());
 				}
 			} else if (Widelands::Bob* const bob = mr.location().field->get_first_bob()) {
@@ -97,7 +97,7 @@ int32_t EditorPlaceCritterTool::handle_undo_impl(
 		return mr.radius() + 2;
 	} else {
 		return 0;
-    }
+	}
 }
 
 EditorActionArgs EditorPlaceCritterTool::format_args_impl(EditorInteractive& parent) {

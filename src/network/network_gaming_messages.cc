@@ -30,9 +30,9 @@ static std::map<std::string, std::string> ngmessages;
 
 /// Returns a translated message fitting to the message code \arg code
 const std::string NetworkGamingMessages::get_message(const std::string& code) {
-    if (ngmessages.find(code) != ngmessages.end()) {
+	if (ngmessages.find(code) != ngmessages.end()) {
 		return ngmessages[code];
-    }
+	}
 	// if no message for code was found, just return code
 	return code;
 }
@@ -55,9 +55,9 @@ const std::string NetworkGamingMessages::get_message(const std::string& code,
 		strings.push_back(get_message(arg1));
 		if (!arg2.empty()) {
 			strings.push_back(get_message(arg2));
-            if (!arg3.empty()) {
+			if (!arg3.empty()) {
 				strings.push_back(get_message(arg3));
-            }
+			}
 		}
 	}
 
@@ -74,9 +74,9 @@ const std::string NetworkGamingMessages::get_message(const std::string& code,
 			strings.resize(strings.size() - 2);
 			strings.push_back(temp);
 		} catch (...) {
-            if (last < 3) {
+			if (last < 3) {
 				break;  // no way to merge the two strings;
-            }
+			}
 			try {
 				// try to merge last three strings
 				std::string temp = (boost::format(strings.at(strings.size() - 3)) %
@@ -85,9 +85,9 @@ const std::string NetworkGamingMessages::get_message(const std::string& code,
 				strings.resize(strings.size() - 3);
 				strings.push_back(temp);
 			} catch (...) {
-                if (last < 4) {
+				if (last < 4) {
 					break;  // no way to merge the three strings;
-                }
+				}
 				try {
 					// try to merge all four strings
 					std::string temp =
@@ -104,9 +104,9 @@ const std::string NetworkGamingMessages::get_message(const std::string& code,
 	}
 
 	// Check if merging succeded
-    if (strings.size() == 1) {
+	if (strings.size() == 1) {
 		return strings.at(0);
-    }
+	}
 
 	// No, it did not
 	return ((boost::format("%s, %s, %s, %s") % get_message(code) % get_message(arg1) %

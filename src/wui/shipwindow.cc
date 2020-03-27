@@ -358,9 +358,9 @@ void ShipWindow::act_scout_towards(WalkingDir direction) {
 		return;
 	}
 	// ignore request if the direction is not swimmable at all
-    if (!ship->exp_dir_swimmable(static_cast<Direction>(direction))) {
+	if (!ship->exp_dir_swimmable(static_cast<Direction>(direction))) {
 		return;
-    }
+	}
 	igbase_.game().send_player_ship_scouting_direction(*ship, direction);
 }
 
@@ -370,9 +370,9 @@ void ShipWindow::act_construct_port() {
 	if (ship == nullptr) {
 		return;
 	}
-    if (ship->exp_port_spaces().empty()) {
+	if (ship->exp_port_spaces().empty()) {
 		return;
-    }
+	}
 	igbase_.game().send_player_ship_construct_port(*ship, ship->exp_port_spaces().front());
 }
 
@@ -385,14 +385,14 @@ void ShipWindow::act_explore_island(IslandExploreDirection direction) {
 	bool coast_nearby = false;
 	bool moveable = false;
 	for (Direction dir = 1; (dir <= LAST_DIRECTION) && (!coast_nearby || !moveable); ++dir) {
-        if (!ship->exp_dir_swimmable(dir)) {
+		if (!ship->exp_dir_swimmable(dir)) {
 			coast_nearby = true;
-        } else {
+		} else {
 			moveable = true;
-        }
+		}
 	}
-    if (!coast_nearby || !moveable) {
+	if (!coast_nearby || !moveable) {
 		return;
-    }
+	}
 	igbase_.game().send_player_ship_explore_island(*ship, direction);
 }

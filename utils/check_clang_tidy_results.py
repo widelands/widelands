@@ -3,8 +3,10 @@
 
 import sys
 
+
 def main():
-    """Checks whether clang-tidy warnings that were previously cleaned have regressed."""
+    """Checks whether clang-tidy warnings that were previously cleaned have
+    regressed."""
     if len(sys.argv) == 2:
         print('#######################################')
         print('#######################################')

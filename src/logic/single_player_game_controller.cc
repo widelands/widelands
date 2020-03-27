@@ -40,9 +40,9 @@ SinglePlayerGameController::SinglePlayerGameController(Widelands::Game& game,
 }
 
 SinglePlayerGameController::~SinglePlayerGameController() {
-    for (uint32_t i = 0; i < computerplayers_.size(); ++i) {
+	for (uint32_t i = 0; i < computerplayers_.size(); ++i) {
 		delete computerplayers_[i];
-    }
+	}
 	computerplayers_.clear();
 }
 
@@ -52,11 +52,11 @@ void SinglePlayerGameController::think() {
 	lastframe_ = curtime;
 
 	// prevent crazy frametimes
-    if (frametime < 0) {
+	if (frametime < 0) {
 		frametime = 0;
-    } else if (frametime > 1000) {
+	} else if (frametime > 1000) {
 		frametime = 1000;
-    }
+	}
 
 	frametime = frametime * real_speed() / 1000;
 
@@ -66,13 +66,13 @@ void SinglePlayerGameController::think() {
 		const Widelands::PlayerNumber nr_players = game_.map().get_nrplayers();
 		iterate_players_existing(p, nr_players, game_, plr) if (p != local_) {
 
-            if (p > computerplayers_.size()) {
+			if (p > computerplayers_.size()) {
 				computerplayers_.resize(p);
-            }
-            if (!computerplayers_[p - 1]) {
+			}
+			if (!computerplayers_[p - 1]) {
 				computerplayers_[p - 1] =
 				   ComputerPlayer::get_implementation(plr->get_ai())->instantiate(game_, p);
-            }
+			}
 			computerplayers_[p - 1]->think();
 		}
 	}
@@ -92,7 +92,7 @@ GameController::GameType SinglePlayerGameController::get_game_type() {
 }
 
 uint32_t SinglePlayerGameController::real_speed() {
-    return paused_ ? 0 : speed_;
+	return paused_ ? 0 : speed_;
 }
 
 uint32_t SinglePlayerGameController::desired_speed() {

@@ -176,9 +176,9 @@ const std::string& FullscreenMenuLoadGame::filename() const {
 }
 
 bool FullscreenMenuLoadGame::handle_key(bool down, SDL_Keysym code) {
-    if (!down) {
+	if (!down) {
 		return false;
-    }
+	}
 
 	switch (code.sym) {
 	case SDLK_KP_PERIOD:

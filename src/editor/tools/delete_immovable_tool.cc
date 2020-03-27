@@ -34,7 +34,7 @@ int32_t EditorDeleteImmovableTool::handle_click_impl(const Widelands::NodeAndTri
                                                      Widelands::Map* map) {
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
-    do {
+	do {
 		if (upcast(Widelands::Immovable, immovable, mr.location().field->get_immovable())) {
 			args->old_immovable_types.push_back(immovable->descr().name());
 			immovable->remove(eia.egbase());  //  Delete no buildings or stuff.

@@ -82,9 +82,9 @@ bool Router::find_route(RoutingNode& start,
 
 		if (current == &end) {
 			// found our goal
-            if (route) {
+			if (route) {
 				astar.routeto(end, *route);
-            }
+			}
 			return true;
 		}
 	}

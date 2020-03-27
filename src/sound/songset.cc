@@ -40,9 +40,9 @@ Songset::Songset(const std::string& dir, const std::string& basename)
 Songset::~Songset() {
 	songs_.clear();
 
-    if (m_) {
+	if (m_) {
 		Mix_FreeMusic(m_);
-    }
+	}
 
 	if (rwops_) {
 		SDL_FreeRW(rwops_);
@@ -101,13 +101,13 @@ Mix_Music* Songset::get_song(uint32_t random) {
 		}
 	} else {
 		return nullptr;
-    }
+	}
 
-    if (rwops_) {
+	if (rwops_) {
 		m_ = Mix_LoadMUS_RW(rwops_, 0);
-    }
+	}
 
-    if (m_) {
+	if (m_) {
 		log("Songset: Loaded song \"%s\"\n", filename.c_str());
 	} else {
 		log("Songset: Loading song \"%s\" failed!\n", filename.c_str());

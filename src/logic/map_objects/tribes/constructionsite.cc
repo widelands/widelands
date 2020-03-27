@@ -501,9 +501,9 @@ Construction sites only burn if some of the work has been completed.
 ===============
 */
 bool ConstructionSite::burn_on_destroy() {
-    if (work_completed_ >= work_steps_) {
+	if (work_completed_ >= work_steps_) {
 		return false;  // completed, so don't burn
-    }
+	}
 
 	return work_completed_ || !old_buildings_.empty();
 }
@@ -530,9 +530,9 @@ Remember the ware on the flag. The worker will be sent from get_building_work().
 bool ConstructionSite::fetch_from_flag(Game& game) {
 	++fetchfromflag_;
 
-    if (Worker* const builder = builder_.get(game)) {
+	if (Worker* const builder = builder_.get(game)) {
 		builder->update_task_buildingwork(game);
-    }
+	}
 
 	return true;
 }
@@ -551,9 +551,9 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 		return true;
 	}
 
-    if (!work_steps_)  {        //  Happens for building without buildcost.
+	if (!work_steps_) {         //  Happens for building without buildcost.
 		schedule_destroy(game);  //  Complete the building immediately.
-    }
+	}
 
 	// Check if one step has completed
 	if (working_) {
@@ -567,9 +567,9 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 			// perhaps dependent on kind of construction?
 
 			++work_completed_;
-            if (work_completed_ >= work_steps_) {
+			if (work_completed_ >= work_steps_) {
 				schedule_destroy(game);
-            }
+			}
 
 			working_ = false;
 		}
@@ -601,9 +601,9 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 		for (uint32_t i = 0; i < wares_.size(); ++i) {
 			WaresQueue& wq = *wares_[i];
 
-            if (!wq.get_filled()) {
+			if (!wq.get_filled()) {
 				continue;
-            }
+			}
 
 			wq.set_filled(wq.get_filled() - 1);
 			wq.set_max_size(wq.get_max_size() - 1);
@@ -638,11 +638,11 @@ void ConstructionSite::wares_queue_callback(
    Game& game, InputQueue*, DescriptionIndex, Worker*, void* const data) {
 	ConstructionSite& cs = *static_cast<ConstructionSite*>(data);
 
-    if (!cs.working_) {
-        if (Worker* const builder = cs.builder_.get(game)) {
+	if (!cs.working_) {
+		if (Worker* const builder = cs.builder_.get(game)) {
 			builder->update_task_buildingwork(game);
-        }
-    }
+		}
+	}
 }
 
 /*

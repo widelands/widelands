@@ -94,7 +94,7 @@ std::shared_ptr<const Image> SdlTtfFont::render(const std::string& txt,
 
 		if (text_surface->format->BitsPerPixel != 32) {
 			throw RenderError("SDL_TTF did not return a 32 bit surface for shadow text. Giving up!");
-        }
+		}
 
 		SDL_Rect dstrct1 = {0, 0, 0, 0};
 		SDL_SetSurfaceAlphaMod(shadow, SDL_ALPHA_OPAQUE);
@@ -129,35 +129,35 @@ std::shared_ptr<const Image> SdlTtfFont::render(const std::string& txt,
 		SDL_FreeSurface(shadow);
 	} else {
 		text_surface = TTF_RenderUTF8_Blended(font_, txt.c_str(), sdlclr);
-    }
+	}
 
-    if (!text_surface) {
+	if (!text_surface) {
 		throw RenderError(
 		   (boost::format("Rendering '%s' gave the error: %s") % txt % TTF_GetError()).str());
-    }
+	}
 
 	return texture_cache->insert(hash, std::make_shared<Texture>(text_surface));
 }
 
 uint16_t SdlTtfFont::ascent(int style) const {
 	uint16_t rv = TTF_FontAscent(font_);
-    if (style & SHADOW) {
+	if (style & SHADOW) {
 		rv += SHADOW_OFFSET;
-    }
+	}
 	return rv;
 }
 
 void SdlTtfFont::set_style(int style) {
 	int sdl_style = TTF_STYLE_NORMAL;
-    if (style & UNDERLINE) {
+	if (style & UNDERLINE) {
 		sdl_style |= TTF_STYLE_UNDERLINE;
-    }
+	}
 
 	// Remember the last style. This should avoid that SDL_TTF flushes its
 	// glyphcache all too often
-    if (sdl_style == style_) {
+	if (sdl_style == style_) {
 		return;
-    }
+	}
 	style_ = sdl_style;
 	TTF_SetFontStyle(font_, sdl_style);
 }
