@@ -24,6 +24,7 @@
 #include "base/log.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
+#include "graphic/image_io.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
@@ -43,6 +44,10 @@ Panel* Panel::mousein_ = nullptr;
 bool Panel::allow_user_input_ = true;
 const Image* Panel::default_cursor_ = nullptr;
 const Image* Panel::default_cursor_click_ = nullptr;
+SDL_Surface* Panel::default_cursor_sdl_surface_ = nullptr;
+SDL_Surface* Panel::default_cursor_click_sdl_surface_ = nullptr;
+SDL_Cursor* Panel::default_cursor_sdl_ = nullptr;
+SDL_Cursor* Panel::default_cursor_click_sdl_ = nullptr;
 FxId Panel::click_fx_ = kNoSoundEffect;
 
 /**
@@ -164,6 +169,18 @@ int Panel::do_run() {
 
 	default_cursor_ = g_gr->images().get("images/ui_basic/cursor.png");
 	default_cursor_click_ = g_gr->images().get("images/ui_basic/cursor_click.png");
+	if (!default_cursor_sdl_surface_) {
+		default_cursor_sdl_surface_ = load_image_as_sdl_surface("images/ui_basic/cursor.png", g_fs);
+	}
+	if (!default_cursor_sdl_) {
+		default_cursor_sdl_ = SDL_CreateColorCursor(default_cursor_sdl_surface_, 3, 7);
+	}
+	if (!default_cursor_click_sdl_surface_) {
+		default_cursor_click_sdl_surface_ = load_image_as_sdl_surface("images/ui_basic/cursor_click.png", g_fs);
+	}
+	if (!default_cursor_click_sdl_) {
+		default_cursor_click_sdl_ = SDL_CreateColorCursor(default_cursor_click_sdl_surface_, 3, 7);
+	}
 
 	// Loop
 	running_ = true;
@@ -207,6 +224,7 @@ int Panel::do_run() {
 			RenderTarget& rt = *g_gr->get_render_target();
 			forefather->do_draw(rt);
 			if (get_config_bool("sdl_cursor", false)) {
+				SDL_SetCursor(app->is_mouse_pressed() ? default_cursor_click_sdl_ : default_cursor_sdl_);
 				SDL_ShowCursor(SDL_ENABLE);
 			} else {
 				SDL_ShowCursor(SDL_DISABLE);
