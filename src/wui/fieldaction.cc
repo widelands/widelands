@@ -672,10 +672,8 @@ void FieldActionWindow::act_buildflag() {
 	else
 		player_->build_flag(node_);
 
-	if (ibase().is_building_road()) {
+	if (ibase().in_road_building_mode()) {
 		ibase().finish_build_road();
-	} else if (ibase().is_building_waterway()) {
-		ibase().finish_build_waterway();
 	} else if (game) {
 		upcast(InteractivePlayer, iaplayer, &ibase());
 		iaplayer->set_flag_to_connect(node_);
@@ -749,17 +747,17 @@ Start road building.
 ===============
 */
 void FieldActionWindow::act_buildroad() {
-	// If we area already building a road just ignore this
-	if (!ibase().is_building_road()) {
-		ibase().start_build_road(node_, player_->player_number());
+	// If we are already building a road just ignore this
+	if (!ibase().in_road_building_mode()) {
+		ibase().start_build_road(node_, player_->player_number(), RoadBuildingType::kRoad);
 		reset_mouse_and_die();
 	}
 }
 
 void FieldActionWindow::act_buildwaterway() {
 	// If we are already building a waterway just ignore this
-	if (!ibase().is_building_waterway()) {
-		ibase().start_build_waterway(node_, player_->player_number());
+	if (!ibase().in_road_building_mode(RoadBuildingType::kWaterway)) {
+		ibase().start_build_road(node_, player_->player_number(), RoadBuildingType::kWaterway);
 		reset_mouse_and_die();
 	}
 }
@@ -770,39 +768,42 @@ Abort building a road.
 ===============
 */
 void FieldActionWindow::act_abort_buildroad() {
-	if (!ibase().is_building_road())
+	if (!ibase().in_road_building_mode(RoadBuildingType::kRoad)) {
 		return;
+	}
 
 	ibase().abort_build_road();
 	reset_mouse_and_die();
 }
 
 void FieldActionWindow::act_abort_buildwaterway() {
-	if (!ibase().is_building_waterway()) {
+	if (!ibase().in_road_building_mode(RoadBuildingType::kWaterway)) {
 		return;
 	}
 
-	ibase().abort_build_waterway();
+	ibase().abort_build_road();
 	reset_mouse_and_die();
 }
 
 void FieldActionWindow::act_abort_buildroad_and_start_buildwaterway() {
-	if (!ibase().is_building_road() || ibase().is_building_waterway()) {
+	if (!ibase().in_road_building_mode(RoadBuildingType::kRoad) ||
+	    ibase().in_road_building_mode(RoadBuildingType::kWaterway)) {
 		return;
 	}
 	const Widelands::Coords c = ibase().get_build_road_start();
 	ibase().abort_build_road();
-	ibase().start_build_waterway(c, player_->player_number());
+	ibase().start_build_road(c, player_->player_number(), RoadBuildingType::kWaterway);
 	reset_mouse_and_die();
 }
 
 void FieldActionWindow::act_abort_buildwaterway_and_start_buildroad() {
-	if (!ibase().is_building_waterway() || ibase().is_building_road()) {
+	if (ibase().in_road_building_mode(RoadBuildingType::kRoad) ||
+	    !ibase().in_road_building_mode(RoadBuildingType::kWaterway)) {
 		return;
 	}
-	const Widelands::Coords c = ibase().get_build_waterway_start();
-	ibase().abort_build_waterway();
-	ibase().start_build_road(c, player_->player_number());
+	const Widelands::Coords c = ibase().get_build_road_start();
+	ibase().abort_build_road();
+	ibase().start_build_road(c, player_->player_number(), RoadBuildingType::kRoad);
 	reset_mouse_and_die();
 }
 
@@ -1002,22 +1003,29 @@ Bring up a field action window or continue road building.
 void show_field_action(InteractiveBase* const ibase,
                        Widelands::Player* const player,
                        UI::UniqueWindow::Registry* const registry) {
-	if (ibase->is_building_road()) {
-		// we're building a road right now
+	if (ibase->in_road_building_mode()) {
+		// we're building a road or waterway right now
 		const Widelands::Map& map = player->egbase().map();
 		const Widelands::FCoords target = map.get_fcoords(ibase->get_sel_pos().node);
 
 		// if user clicked on the same field again, build a flag
 		if (target == ibase->get_build_road_end()) {
 			FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
-			w.add_buttons_road(target != ibase->get_build_road_start() &&
-			                   (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG));
+			if (ibase->in_road_building_mode(RoadBuildingType::kRoad)) {
+				w.add_buttons_road(target != ibase->get_build_road_start() &&
+				                   (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG));
+			} else {
+				w.add_buttons_waterway(target != ibase->get_build_road_start() &&
+				                       (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG));
+			}
 			w.init();
 			return;
 		}
 
 		// append or take away from the road
-		if (!ibase->append_build_road(target)) {
+		if (!ibase->append_build_road(target) ||
+		    (ibase->in_road_building_mode(RoadBuildingType::kWaterway) &&
+		     target != ibase->get_build_road_end())) {
 			FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
 			w.add_buttons_road(false);
 			w.init();
@@ -1041,52 +1049,13 @@ void show_field_action(InteractiveBase* const ibase,
 				// We are done, so we close the window.
 				registry->destroy();
 				return;
-			}
-		}
-	} else if (ibase->is_building_waterway()) {
-		// we're building a waterway right now
-		const Widelands::Map& map = player->egbase().map();
-		const Widelands::FCoords target = map.get_fcoords(ibase->get_sel_pos().node);
-
-		// if user clicked on the same field again, build a flag
-		if (target == ibase->get_build_waterway_end()) {
-			FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
-			w.add_buttons_waterway(target != ibase->get_build_waterway_start() &&
-			                       (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG));
-			w.init();
-			return;
-		}
-
-		// append or take away from the waterway
-		if (!ibase->append_build_waterway(target) || target != ibase->get_build_waterway_end()) {
-			// Player clicked an unsuited field or path exceeds length restriction
-			FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
-			w.add_buttons_waterway(false);
-			w.init();
-			return;
-		}
-
-		// Did he click on a flag or a road where a flag can be built?
-		if (upcast(const Widelands::PlayerImmovable, i, map.get_immovable(target))) {
-			bool finish = false;
-			if (is_a(Widelands::Flag, i)) {
-				finish = true;
-			} else if (is_a(Widelands::RoadBase, i)) {
-				if (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG) {
-					upcast(Game, game, &player->egbase());
-					game->send_player_build_flag(player->player_number(), target);
-					finish = true;
-				}
-			}
-
-			if (finish) {
-				ibase->finish_build_waterway();
-				// We are done, so we close the window.
-				registry->destroy();
-				return;
 			} else {
 				FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
-				w.add_buttons_waterway(false);
+				if (ibase->in_road_building_mode(RoadBuildingType::kRoad)) {
+					w.add_buttons_waterway(false);
+				} else {
+					w.add_buttons_road(false);
+				}
 				w.init();
 				return;
 			}
