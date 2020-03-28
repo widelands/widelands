@@ -334,7 +334,7 @@ RoadBase* Flag::get_roadbase(Flag& flag) {
 	return nullptr;
 }
 Road* Flag::get_road(Flag& flag) {
-	for (int8_t i = 1; i <= 6; ++i) {
+	for (int8_t i = WalkingDir::FIRST_DIRECTION; i <= WalkingDir::LAST_DIRECTION; ++i) {
 		if (Road* const road = get_road(i)) {
 			if (&road->get_flag(RoadBase::FlagStart) == &flag ||
 			    &road->get_flag(RoadBase::FlagEnd) == &flag) {
@@ -361,7 +361,7 @@ Waterway* Flag::get_waterway(uint8_t const dir) const {
 /// \return the number of RoadBases connected to the flag
 uint8_t Flag::nr_of_roadbases() const {
 	uint8_t counter = 0;
-	for (uint8_t road_id = 6; road_id; --road_id) {
+	for (uint8_t road_id = WalkingDir::LAST_DIRECTION; road_id >= WalkingDir::FIRST_DIRECTION; --road_id) {
 		if (get_roadbase(road_id) != nullptr) {
 			++counter;
 		}
@@ -372,7 +372,7 @@ uint8_t Flag::nr_of_roadbases() const {
 /// \return the number of roads connected to the flag.
 uint8_t Flag::nr_of_roads() const {
 	uint8_t counter = 0;
-	for (uint8_t road_id = 6; road_id; --road_id) {
+	for (uint8_t road_id = WalkingDir::LAST_DIRECTION; road_id >= WalkingDir::FIRST_DIRECTION; --road_id) {
 		if (get_roadbase(road_id) != nullptr) {
 			++counter;
 		}
@@ -383,7 +383,7 @@ uint8_t Flag::nr_of_roads() const {
 /// \return the number of waterways connected to the flag.
 uint8_t Flag::nr_of_waterways() const {
 	uint8_t counter = 0;
-	for (uint8_t road_id = 6; road_id; --road_id) {
+	for (uint8_t road_id = WalkingDir::LAST_DIRECTION; road_id >= WalkingDir::FIRST_DIRECTION; --road_id) {
 		if (get_waterway(road_id) != nullptr) {
 			++counter;
 		}
@@ -396,7 +396,7 @@ bool Flag::is_dead_end() const {
 		return false;
 	}
 	Flag const* first_other_flag = nullptr;
-	for (uint8_t road_id = 6; road_id; --road_id) {
+	for (uint8_t road_id = WalkingDir::LAST_DIRECTION; road_id >= WalkingDir::FIRST_DIRECTION; --road_id) {
 		if (RoadBase* const road = get_roadbase(road_id)) {
 			Flag& start = road->get_flag(RoadBase::FlagStart);
 			Flag& other = this == &start ? road->get_flag(RoadBase::FlagEnd) : start;
@@ -758,7 +758,7 @@ void Flag::call_carrier(Game& game, WareInstance& ware, PlayerImmovable* const n
 	// Deal with the normal (flag) case
 	const Flag& nextflag = dynamic_cast<const Flag&>(*nextstep);
 
-	for (int32_t dir = 1; dir <= 6; ++dir) {
+	for (int32_t dir = WalkingDir::FIRST_DIRECTION; dir <= WalkingDir::LAST_DIRECTION; ++dir) {
 		RoadBase* const road = get_roadbase(dir);
 		Flag* other;
 		RoadBase::FlagId flagid;
