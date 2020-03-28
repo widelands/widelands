@@ -136,6 +136,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                 UI::PanelStyle::kFsMenu,
                 _("Maximum FPS:")),
      translation_info_(&box_interface_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu),
+     sdl_cursor_(&box_interface_left_, Vector2i::zero(), _("Use SDL Mouse Cursor"), "", 0),
 
      // Windows options
      snap_win_overlap_only_(
@@ -322,6 +323,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
 	fullscreen_.set_state(opt.fullscreen);
 	inputgrab_.set_state(opt.inputgrab);
+	sdl_cursor_.set_state(opt.sdl_cursor);
 
 	// Windows options
 	snap_win_overlap_only_.set_state(opt.snap_win_overlap_only);
@@ -565,6 +567,7 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	os_.fullscreen = fullscreen_.get_state();
 	os_.inputgrab = inputgrab_.get_state();
 	os_.maxfps = sb_maxfps_.get_value();
+	os_.sdl_cursor = sdl_cursor_.get_state();
 
 	// Windows options
 	os_.snap_win_overlap_only = snap_win_overlap_only_.get_state();
@@ -622,6 +625,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.fullscreen = opt_section_.get_bool("fullscreen", false);
 	opt.inputgrab = opt_section_.get_bool("inputgrab", false);
 	opt.maxfps = opt_section_.get_int("maxfps", 25);
+	opt.sdl_cursor = opt_section_.get_bool("sdl_cursor", false);
 
 	// Windows options
 	opt.snap_win_overlap_only = opt_section_.get_bool("snap_windows_only_when_overlapping", false);
@@ -660,6 +664,7 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_bool("fullscreen", opt.fullscreen);
 	opt_section_.set_bool("inputgrab", opt.inputgrab);
 	opt_section_.set_int("maxfps", opt.maxfps);
+	opt_section_.set_bool("sdl_cursor", opt.sdl_cursor);
 
 	// Windows options
 	opt_section_.set_bool("snap_windows_only_when_overlapping", opt.snap_win_overlap_only);

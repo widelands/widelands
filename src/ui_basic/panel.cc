@@ -206,9 +206,13 @@ int Panel::do_run() {
 		if (start_time >= next_draw_time) {
 			RenderTarget& rt = *g_gr->get_render_target();
 			forefather->do_draw(rt);
-			rt.blit((app->get_mouse_position() - Vector2i(3, 7)),
-			        app->is_mouse_pressed() ? default_cursor_click_ : default_cursor_);
-
+			if (get_config_bool("sdl_cursor", false)) {
+				SDL_ShowCursor(SDL_ENABLE);
+			} else {
+				SDL_ShowCursor(SDL_DISABLE);
+				rt.blit((app->get_mouse_position() - Vector2i(3, 7)),
+						app->is_mouse_pressed() ? default_cursor_click_ : default_cursor_);
+			}
 			if (is_modal()) {
 				do_tooltip();
 			} else {

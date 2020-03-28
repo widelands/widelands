@@ -366,7 +366,12 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		exit(2);
 	}
 
-	SDL_ShowCursor(SDL_DISABLE);
+	if (get_config_bool("sdl_cursor", false)) {
+		SDL_ShowCursor(SDL_ENABLE);
+	} else {
+		SDL_ShowCursor(SDL_DISABLE);
+	}
+
 	g_gr = new Graphic();
 
 	if (TTF_Init() == -1) {

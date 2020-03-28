@@ -46,6 +46,7 @@ public:
 		bool fullscreen;
 		bool inputgrab;
 		uint32_t maxfps;
+		bool sdl_cursor;
 
 		// Windows options
 		bool snap_win_overlap_only;
@@ -131,6 +132,7 @@ private:
 	UI::Checkbox inputgrab_;
 	UI::SpinBox sb_maxfps_;
 	UI::MultilineTextarea translation_info_;
+	UI::Checkbox sdl_cursor_;
 
 	// Windows options
 	UI::Checkbox snap_win_overlap_only_;
