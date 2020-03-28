@@ -176,7 +176,8 @@ int Panel::do_run() {
 		default_cursor_sdl_ = SDL_CreateColorCursor(default_cursor_sdl_surface_, 3, 7);
 	}
 	if (!default_cursor_click_sdl_surface_) {
-		default_cursor_click_sdl_surface_ = load_image_as_sdl_surface("images/ui_basic/cursor_click.png", g_fs);
+		default_cursor_click_sdl_surface_ =
+		   load_image_as_sdl_surface("images/ui_basic/cursor_click.png", g_fs);
 	}
 	if (!default_cursor_click_sdl_) {
 		default_cursor_click_sdl_ = SDL_CreateColorCursor(default_cursor_click_sdl_surface_, 3, 7);
@@ -224,12 +225,13 @@ int Panel::do_run() {
 			RenderTarget& rt = *g_gr->get_render_target();
 			forefather->do_draw(rt);
 			if (get_config_bool("sdl_cursor", false)) {
-				SDL_SetCursor(app->is_mouse_pressed() ? default_cursor_click_sdl_ : default_cursor_sdl_);
+				SDL_SetCursor(app->is_mouse_pressed() ? default_cursor_click_sdl_ :
+				                                        default_cursor_sdl_);
 				SDL_ShowCursor(SDL_ENABLE);
 			} else {
 				SDL_ShowCursor(SDL_DISABLE);
 				rt.blit((app->get_mouse_position() - Vector2i(3, 7)),
-						app->is_mouse_pressed() ? default_cursor_click_ : default_cursor_);
+				        app->is_mouse_pressed() ? default_cursor_click_ : default_cursor_);
 			}
 			if (is_modal()) {
 				do_tooltip();
