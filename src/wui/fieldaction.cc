@@ -748,7 +748,7 @@ Start road building.
 */
 void FieldActionWindow::act_buildroad() {
 	// If we are already building a road just ignore this
-	if (!ibase().in_road_building_mode(RoadBuildingType::kRoad)) {
+	if (!ibase().in_road_building_mode()) {
 		ibase().start_build_road(node_, player_->player_number(), RoadBuildingType::kRoad);
 		reset_mouse_and_die();
 	}
@@ -768,8 +768,9 @@ Abort building a road.
 ===============
 */
 void FieldActionWindow::act_abort_buildroad() {
-	if (!ibase().in_road_building_mode(RoadBuildingType::kRoad))
+	if (!ibase().in_road_building_mode(RoadBuildingType::kRoad)) {
 		return;
+	}
 	ibase().abort_build_road();
 	reset_mouse_and_die();
 }
@@ -794,8 +795,8 @@ void FieldActionWindow::act_abort_buildroad_and_start_buildwaterway() {
 }
 
 void FieldActionWindow::act_abort_buildwaterway_and_start_buildroad() {
-	if (!ibase().in_road_building_mode(RoadBuildingType::kWaterway) ||
-	    ibase().in_road_building_mode(RoadBuildingType::kRoad)) {
+	if (ibase().in_road_building_mode(RoadBuildingType::kRoad) ||
+	    !ibase().in_road_building_mode(RoadBuildingType::kWaterway)) {
 		return;
 	}
 	const Widelands::Coords c = ibase().get_build_road_start();

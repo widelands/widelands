@@ -341,7 +341,6 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 	Workareas workareas = get_workarea_overlays(map);
 	auto* fields_to_draw = given_map_view->draw_terrain(gbase, workareas, false, dst);
-	const auto road_building_p = road_building_preview_overlays();
 	const auto road_building_s = road_building_steepness_overlays();
 
 	const float scale = 1.f / given_map_view->view().zoom;
@@ -440,15 +439,17 @@ void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and
 	const Map& map = egbase().map();
 	if (1 < player().vision(Map::get_index(node_and_triangle.node, map.get_width()))) {
 		// Special case for buildings
-		if (upcast(Building, building, map.get_immovable(node_and_triangle.node)))
+		if (upcast(Building, building, map.get_immovable(node_and_triangle.node))) {
 			if (can_see(building->owner().player_number())) {
 				show_building_window(node_and_triangle.node, false, false);
 				return;
 			}
+		}
 
 		if (!in_road_building_mode()) {
-			if (try_show_ship_window())
+			if (try_show_ship_window()) {
 				return;
+			}
 		}
 
 		// everything else can bring up the temporary dialog

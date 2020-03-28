@@ -30,7 +30,7 @@ run(function()
    southern_port():remove()
    sleep(1000)
 
-   stable_save(game, "no_ports")
+   stable_save(game, "no_ports", 10 * 1000)
 
    -- There are no more ports, therefore also no fleet. The workers on the ship
    -- are not accessible and should therefore not show up in the stock anymore.

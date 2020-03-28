@@ -1,18 +1,19 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# Karl Vest, 2020
 # MiroslavR <miroslavr256@gmail.com>, 2015-2017
 # Miroslav Remák <Unknown>, 2014
 # MiroslavR <miroslavr256@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
-"PO-Revision-Date: 2019-08-10 17:15+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-03-20 06:16+0000\n"
+"PO-Revision-Date: 2020-03-22 15:36+0000\n"
+"Last-Translator: Karl Vest\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -212,7 +213,7 @@ msgid ""
 "we need to deliver light tridents and tabards to the barracks. Recruits will"
 " arrive from the warehouse and receive one of each and some basic training "
 "to become a soldier."
-msgstr ""
+msgstr "Teraz, keď sa kujú zbrane, je možné verbovať nových vojakov. Aby sa tak mohlo stať, musime do Kasární doručiť ľahké trojzubce a krátke plášte. Verbovanci dorazia zo Skladu, budú vyzbrojení, odetí a vycvičení a stanú sa vojakmi."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:108
 msgid "Build training sites for soldiers"
@@ -546,7 +547,7 @@ msgid ""
 "the bread is tedious and boring; I feel a more industrial approach would be "
 "helpful here. I for one would love to just have fresh bread delivered to my "
 "house every day."
-msgstr ""
+msgstr "Mohli by sme však uprostred nájsť kompromis: pre mňa je pečenie chleba otravná úloha. Drvenie čierneho koreňa a kukurice na múku a následné pečenie chleba je únavné a nudné; mám pocit, že by tu pomohol priemyselnejší prístup. Ja by som si napríklad prial každodennú donášku čerstvého chleba k svojmu domu."
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:243
@@ -668,14 +669,14 @@ msgid ""
 "I have received word that our mining industry started working. Now that we "
 "are forging weapons, I will send a letter to Sidolus informing him that it’s"
 " time to build a barracks and start recruiting soldiers."
-msgstr ""
+msgstr "Dostalo sa mi do uší, že náš ťažobný priemysel začal fungovať. A tak, keď už kujeme zbrane, pošlem list Sidolusovi a budem ho informovať, že je čas postaviť Kasárne a začať verbovať vojakov."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:329
 msgid ""
 "Today I saw the first recruits gathering in front of the new barracks. If "
 "everything goes well, they should receive their training soon."
-msgstr ""
+msgstr "Dnes som pred novými kasárňami videl prvých verbovancov. Ak pôjde všetko dobre, čoskoro by mali prejsť tréningom."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:335
 msgid "Jundlina Summons Sidolus"
@@ -930,12 +931,12 @@ msgstr "Prišli sme o budovu v boji s oceánom!"
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s“"
 
 #: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgstr ""
+msgstr "Nová uloha"
 
 #: ../../data/scripting/richtext_scenarios.lua:93
 msgid "New Objectives"
-msgstr ""
+msgstr "Nové úlohy"

@@ -99,8 +99,9 @@ void Statebox::layout() {
  * Args: enabled  true if the checkbox should be enabled, false otherwise
  */
 void Statebox::set_enabled(bool const enabled) {
-	if (((flags_ & Is_Enabled) > 1) && enabled)
+	if (((flags_ & Is_Enabled) > 1) && enabled) {
 		return;
+	}
 
 	set_flags(Is_Enabled, enabled);
 
@@ -159,9 +160,10 @@ void Statebox::draw(RenderTarget& dst) {
 		   image_anchor, pic_graphics_, Recti(Vector2i((flags_ & Is_Checked) ? kStateboxSize : 0, 0),
 		                                      kStateboxSize, kStateboxSize));
 
-		if (flags_ & Is_Highlighted)
+		if (flags_ & Is_Highlighted) {
 			dst.draw_rect(
 			   Recti(image_anchor, kStateboxSize + 1, kStateboxSize + 1), RGBColor(100, 100, 80));
+		}
 	}
 }
 

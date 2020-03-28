@@ -42,6 +42,8 @@ constexpr uint32_t kStatisticsSampleTime = 30000;
 // See forester_cache_
 constexpr int16_t kInvalidForesterEntry = -1;
 
+constexpr uint32_t kScenarioDifficultyNotSet = 0;
+
 struct Flag;
 struct Path;
 struct PlayerImmovable;
@@ -283,8 +285,8 @@ public:
 		return scenario_difficulty_;
 	}
 	void set_scenario_difficulty(uint32_t d) {
-		assert(!scenario_difficulty_);
-		assert(d);
+		assert(scenario_difficulty_ == kScenarioDifficultyNotSet);
+		assert(d != kScenarioDifficultyNotSet);
 		scenario_difficulty_ = d;
 	}
 

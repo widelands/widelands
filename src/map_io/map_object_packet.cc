@@ -61,7 +61,7 @@ void MapObjectPacket::read(FileSystem& fs,
 		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
 
 			// Initial loading stage
-			for (;;)
+			for (;;) {
 				switch (uint8_t const header = fr.unsigned_8()) {
 				case 0:
 					return;
@@ -108,6 +108,7 @@ void MapObjectPacket::read(FileSystem& fs,
 				default:
 					throw GameDataError("unknown object header %u", header);
 				}
+			}
 		} else {
 			throw UnhandledVersionError("MapObjectPacket", packet_version, kCurrentPacketVersion);
 		}
@@ -162,10 +163,11 @@ void MapObjectPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSav
 			continue;
 		}
 
-		if (!obj.has_new_save_support())
+		if (!obj.has_new_save_support()) {
 			throw GameDataError("MO(%u of type %s) without new style save support not saved "
 			                    "explicitly",
 			                    obj.serial(), obj.descr().name().c_str());
+		}
 
 		mos.register_object(obj);
 		obj.save(egbase, mos, fw);

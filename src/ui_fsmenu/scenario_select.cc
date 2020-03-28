@@ -68,8 +68,8 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(CampaignData* camp)
                                  0,
                                  0,
                                  0,
-                                 _("Difficulty:"),
-                                 UI::Align::kCenter,
+                                 is_tutorial_ ? "" : _("Difficulty"),
+                                 UI::Align::kLeft,
                                  g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelHeading)),
      scenario_difficulty_(this,
                           "scenario_difficulty",
@@ -117,14 +117,15 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(CampaignData* camp)
 	table_.double_clicked.connect(
 	   boost::bind(&FullscreenMenuScenarioSelect::clicked_ok, boost::ref(*this)));
 
-	{
+	if (is_tutorial_) {
+		scenario_difficulty_.set_visible(false);
+	} else {
 		uint32_t val = 0;
-		if (campaign_) {
-			assert(!campaign_->difficulties.empty());
-			for (const std::string& d : campaign_->difficulties) {
-				++val;  // We use values from 1 up because that's how Lua indexes arrays
-				scenario_difficulty_.add(d, val, nullptr, val == campaign_->default_difficulty);
-			}
+		assert(campaign_);
+		assert(!campaign_->difficulties.empty());
+		for (const std::string& d : campaign_->difficulties) {
+			++val;  // We use values from 1 up because that's how Lua indexes arrays
+			scenario_difficulty_.add(d, val, nullptr, val == campaign_->default_difficulty);
 		}
 		scenario_difficulty_.set_enabled(val > 1);
 	}

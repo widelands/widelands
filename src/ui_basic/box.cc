@@ -55,8 +55,9 @@ Box::Box(Panel* const parent,
  * only a vertical scrollbar may be added.
  */
 void Box::set_scrolling(bool scroll) {
-	if (scroll == scrolling_)
+	if (scroll == scrolling_) {
 		return;
+	}
 
 	scrolling_ = scroll;
 	update_desired_size();
@@ -69,8 +70,9 @@ void Box::set_scrolling(bool scroll) {
  * its orientation.
  */
 void Box::set_min_desired_breadth(uint32_t min) {
-	if (min == mindesiredbreadth_)
+	if (min == mindesiredbreadth_) {
 		return;
+	}
 
 	mindesiredbreadth_ = min;
 	update_desired_size();
@@ -104,12 +106,14 @@ void Box::update_desired_size() {
 		get_item_desired_size(idx, &depth, &breadth);
 
 		totaldepth += depth;
-		if (breadth > maxbreadth)
+		if (breadth > maxbreadth) {
 			maxbreadth = breadth;
+		}
 	}
 
-	if (!items_.empty())
+	if (!items_.empty()) {
 		totaldepth += (items_.size() - 1) * inner_spacing_;
+	}
 
 	if (orientation_ == Horizontal) {
 		if (totaldepth > max_x_ && scrolling_) {
@@ -208,22 +212,25 @@ void Box::layout() {
 
 	// Second pass: Count number of infinite spaces
 	int infspace_count = 0;
-	for (size_t idx = 0; idx < items_.size(); ++idx)
-		if (items_[idx].fillspace)
+	for (size_t idx = 0; idx < items_.size(); ++idx) {
+		if (items_[idx].fillspace) {
 			infspace_count++;
+		}
+	}
 
 	// Third pass: Distribute left over space to all infinite spaces. To
 	// avoid having some pixels left at the end due to rounding errors, we
 	// divide the remaining space by the number of remaining infinite
 	// spaces every time, and not just one.
 	int max_depths = orientation_ == Horizontal ? get_inner_w() : get_inner_h();
-	for (size_t idx = 0; idx < items_.size(); ++idx)
+	for (size_t idx = 0; idx < items_.size(); ++idx) {
 		if (items_[idx].fillspace) {
 			assert(infspace_count > 0);
 			items_[idx].assigned_var_depth = std::max(0, (max_depths - totaldepth) / infspace_count);
 			totaldepth += items_[idx].assigned_var_depth;
 			infspace_count--;
 		}
+	}
 
 	// Fourth pass: Update positions of all other items
 	update_positions();
@@ -370,10 +377,11 @@ void Box::set_item_size(uint32_t idx, int depth, int breadth) {
 	const Item& it = items_[idx];
 
 	if (it.type == Item::ItemPanel) {
-		if (orientation_ == Horizontal)
+		if (orientation_ == Horizontal) {
 			it.u.panel.panel->set_size(depth, breadth);
-		else
+		} else {
 			it.u.panel.panel->set_size(breadth, depth);
+		}
 	}
 }
 
@@ -410,10 +418,11 @@ void Box::set_item_pos(uint32_t idx, int32_t pos) {
 			breadth = 0;
 		}
 
-		if (orientation_ == Horizontal)
+		if (orientation_ == Horizontal) {
 			it.u.panel.panel->set_pos(Vector2i(pos, breadth));
-		else
+		} else {
 			it.u.panel.panel->set_pos(Vector2i(breadth, pos));
+		}
 		break;
 	}
 

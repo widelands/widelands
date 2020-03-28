@@ -34,7 +34,7 @@ void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 		fr.open(fs, "binary/game_class");
 		uint16_t const packet_version = fr.unsigned_16();
 		// TODO(Nordfriese): Savegame compatibility
-		if (packet_version <= kCurrentPacketVersion && packet_version >= 3) {
+		if (packet_version >= 3 && packet_version <= kCurrentPacketVersion) {
 			game.gametime_ = fr.unsigned_32();
 			game.scenario_difficulty_ = packet_version >= 4 ? fr.unsigned_32() : 1;
 		} else {

@@ -146,18 +146,20 @@ int LuaPanel::get_dropdowns(lua_State* L) {
       (RO) An :class:`array` of all visible tabs inside this Panel.
 */
 static void put_all_tabs_into_table(lua_State* L, UI::Panel* g) {
-	if (!g)
+	if (!g) {
 		return;
+	}
 
 	for (UI::Panel* f = g->get_first_child(); f; f = f->get_next_sibling()) {
 		put_all_tabs_into_table(L, f);
 
-		if (upcast(UI::TabPanel, t, f))
+		if (upcast(UI::TabPanel, t, f)) {
 			for (UI::Tab* tab : t->tabs()) {
 				lua_pushstring(L, tab->get_name());
 				to_lua<LuaTab>(L, new LuaTab(tab));
 				lua_rawset(L, -3);
 			}
+		}
 	}
 }
 int LuaPanel::get_tabs(lua_State* L) {
@@ -269,8 +271,9 @@ int LuaPanel::get_descendant_position(lua_State* L) {
 		cur = cur->get_parent();
 	}
 
-	if (!cur)
+	if (!cur) {
 		report_error(L, "Widget is not a descendant!");
+	}
 
 	lua_pushint32(L, cp.x);
 	lua_pushint32(L, cp.y);
@@ -577,10 +580,10 @@ const MethodType<LuaMapView> LuaMapView::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaMapView> LuaMapView::Properties[] = {
-   PROP_RO(LuaMapView, center_map_pixel), PROP_RW(LuaMapView, buildhelp),
-   PROP_RW(LuaMapView, census),           PROP_RW(LuaMapView, statistics),
-   PROP_RO(LuaMapView, is_building_road), PROP_RO(LuaMapView, is_animating),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaMapView, average_fps),  PROP_RO(LuaMapView, center_map_pixel),
+   PROP_RW(LuaMapView, buildhelp),    PROP_RW(LuaMapView, census),
+   PROP_RW(LuaMapView, statistics),   PROP_RO(LuaMapView, is_building_road),
+   PROP_RO(LuaMapView, is_animating), {nullptr, nullptr, nullptr},
 };
 
 LuaMapView::LuaMapView(lua_State* L) : LuaPanel(get_egbase(L).get_ibase()) {
@@ -594,6 +597,15 @@ void LuaMapView::__unpersist(lua_State* L) {
 /*
  * Properties
  */
+/* RST
+   .. attribute:: average_fps
+
+      (RO) The average frames per second that the user interface is being drawn at.
+*/
+int LuaMapView::get_average_fps(lua_State* L) {
+	lua_pushdouble(L, get()->average_fps());
+	return 1;
+}
 /* RST
    .. attribute:: center_map_pixel
 
@@ -702,7 +714,7 @@ int LuaMapView::click(lua_State* L) {
 }
 
 /* RST
-   .. method:: start_road_building(flag, [waterway = false])
+   .. method:: start_road_building(flag[, waterway = false])
 
       Enters the road building mode as if the player has clicked
       the flag and chosen build road. It will also warp the mouse
@@ -715,8 +727,9 @@ int LuaMapView::click(lua_State* L) {
 // UNTESTED
 int LuaMapView::start_road_building(lua_State* L) {
 	InteractiveBase* me = get();
-	if (me->in_road_building_mode())
+	if (me->in_road_building_mode()) {
 		report_error(L, "Already building road!");
+	}
 
 	Widelands::Coords starting_field =
 	   (*get_user_class<LuaMaps::LuaFlag>(L, 2))->get(L, get_egbase(L))->get_position();
@@ -738,8 +751,9 @@ int LuaMapView::start_road_building(lua_State* L) {
 // UNTESTED
 int LuaMapView::abort_road_building(lua_State* /* L */) {
 	InteractiveBase* me = get();
-	if (me->in_road_building_mode())
+	if (me->in_road_building_mode()) {
 		me->abort_build_road();
+	}
 	return 0;
 }
 

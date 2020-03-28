@@ -96,6 +96,7 @@ public:
 	virtual Widelands::Player* get_player() const = 0;
 
 	void think() override;
+	double average_fps() const;
 	bool handle_key(bool down, SDL_Keysym code) override;
 	virtual void postload();
 
@@ -258,6 +259,7 @@ protected:
 	                  const FieldsToDraw::Field* f,
 	                  uint32_t gametime,
 	                  float scale) const;
+	void draw_road_building(FieldsToDraw::Field&);
 
 	void unset_sel_picture();
 	void set_sel_picture(const Image* image);
@@ -288,6 +290,7 @@ protected:
 	// to be displayed on this field.
 	const BuildhelpOverlay* get_buildhelp_overlay(Widelands::NodeCaps caps) const;
 
+	// Overlays displayed while a road or waterway is under construction.
 	struct RoadBuildingMode {
 		RoadBuildingMode(Widelands::PlayerNumber p, Widelands::Coords s, RoadBuildingType t)
 		   : player(p), path(s), type(t), work_area(nullptr) {
@@ -299,7 +302,6 @@ protected:
 		std::map<Widelands::Coords, std::vector<uint8_t>> overlay_road_previews;
 		std::map<Widelands::Coords, const Image*> overlay_steepness_indicators;
 	};
-
 	std::map<Widelands::Coords, std::vector<uint8_t>> road_building_preview_overlays() const;
 	std::map<Widelands::Coords, const Image*> road_building_steepness_overlays() const;
 
@@ -313,7 +315,6 @@ protected:
 	                                                      const Widelands::Player::Field&,
 	                                                      const float scale,
 	                                                      RenderTarget*);
-	void draw_road_building(FieldsToDraw::Field&);
 
 	/// Returns true if the current player is allowed to hear sounds from map objects on this field
 	virtual bool player_hears_field(const Widelands::Coords& coords) const = 0;

@@ -776,6 +776,10 @@ void InteractiveBase::think() {
 	UI::Panel::think();
 }
 
+double InteractiveBase::average_fps() const {
+	return 1000.0 * 1000.0 / avg_usframetime_;
+}
+
 /*
 ===============
 Draw debug overlay when appropriate.
@@ -795,7 +799,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	// range 13 - 15, this is used for training of AI
 	if (g) {
 		if (g->is_auto_speed()) {
-			uint32_t cur_fps = 1000000 / avg_usframetime_;
+			const uint32_t cur_fps = average_fps();
 			int32_t speed_diff = 0;
 			if (cur_fps < 13) {
 				speed_diff = -100;
@@ -845,9 +849,9 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		// Blit FPS when playing a game in debug mode
 		if (get_display_flag(dfDebug)) {
 			static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
-			rendered_text = UI::g_fh->render(as_richtext_paragraph(
-			   (fps_format % (1000.0 / frametime_) % (1000.0 / (avg_usframetime_ / 1000))).str(),
-			   UI::FontStyle::kWuiGameSpeedAndCoordinates));
+			rendered_text = UI::g_fh->render(
+			   as_richtext_paragraph((fps_format % (1000.0 / frametime_) % average_fps()).str(),
+			                         UI::FontStyle::kWuiGameSpeedAndCoordinates));
 			rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, 5));
 		}
 	}
@@ -1035,6 +1039,7 @@ void InteractiveBase::abort_build_road() {
 	else
 		assert(!road_building_mode_->work_area);
 #endif
+
 	road_building_remove_overlay();
 	road_building_mode_.reset(nullptr);
 	unset_sel_picture();
@@ -1144,8 +1149,9 @@ bool InteractiveBase::append_build_road(Coords const field) {
 			cstep.add(Widelands::CheckStepRoad(player, Widelands::MOVECAPS_WALK));
 		}
 		if (map.findpath(
-		       road_building_mode_->path.get_end(), field, 0, path, cstep, Map::fpBidiCost) < 0)
-			return false;  //  could not find a path
+		       road_building_mode_->path.get_end(), field, 0, path, cstep, Map::fpBidiCost) < 0) {
+			return false;  // could not find a path
+		}
 		road_building_mode_->path.append(map, path);
 	}
 
@@ -1155,11 +1161,11 @@ bool InteractiveBase::append_build_road(Coords const field) {
 		//  is guaranteed to not hinder building placement.
 		Widelands::Path path;
 		{
+			Widelands::CheckStepAnd cstep;
 			Widelands::CheckStepLimited clim;
 			for (const Coords& coord : road_building_mode_->path.get_coords()) {
 				clim.add_allowed_location(coord);
 			}
-			Widelands::CheckStepAnd cstep;
 			cstep.add(clim);
 			if (road_building_mode_->type == RoadBuildingType::kWaterway) {
 				// Waterways (unlike roads) are strictly limited by the terrain around the edges
@@ -1300,6 +1306,7 @@ void InteractiveBase::road_building_add_overlay() {
 			    !neighb.field->is_interior(road_building_mode_->player)) {
 				continue;
 			}
+
 			bool next_to = false;
 			Widelands::FCoords nb;
 			for (int32_t d = 1; d <= 6; ++d) {
@@ -1318,17 +1325,15 @@ void InteractiveBase::road_building_add_overlay() {
 		}
 
 		//  can't build on robusts
-		Widelands::BaseImmovable* const imm = map.get_immovable(neighb);
-		if (imm && imm->get_size() >= Widelands::BaseImmovable::SMALL) {
-			if (!(dynamic_cast<const Widelands::Flag*>(imm) ||
-			      (dynamic_cast<const Widelands::RoadBase*>(imm) &&
-			       (caps & Widelands::BUILDCAPS_FLAG))))
-				continue;
-		}
-
-		if (road_building_mode_->path.get_index(neighb) >= 0) {
-			// the road can't cross itself
+		const Widelands::BaseImmovable* imm = map.get_immovable(neighb);
+		if (imm && imm->get_size() >= Widelands::BaseImmovable::SMALL &&
+		    (!(dynamic_cast<const Widelands::Flag*>(imm) ||
+		       (dynamic_cast<const Widelands::RoadBase*>(imm) &&
+		        (caps & Widelands::BUILDCAPS_FLAG))))) {
 			continue;
+		}
+		if (road_building_mode_->path.get_index(neighb) >= 0) {
+			continue;  // the road can't cross itself
 		}
 
 		int32_t slope;
