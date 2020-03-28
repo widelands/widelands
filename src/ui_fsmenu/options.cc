@@ -125,6 +125,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
      fullscreen_(&box_interface_left_, Vector2i::zero(), _("Fullscreen"), "", 0),
      inputgrab_(&box_interface_left_, Vector2i::zero(), _("Grab Input"), "", 0),
+     sdl_cursor_(&box_interface_left_, Vector2i::zero(), _("Use SDL Mouse Cursor"), "", 0),
      sb_maxfps_(&box_interface_left_,
                 0,
                 0,
@@ -136,7 +137,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                 UI::PanelStyle::kFsMenu,
                 _("Maximum FPS:")),
      translation_info_(&box_interface_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu),
-     sdl_cursor_(&box_interface_left_, Vector2i::zero(), _("Use SDL Mouse Cursor"), "", 0),
 
      // Windows options
      snap_win_overlap_only_(
@@ -250,6 +250,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	box_interface_left_.add(&resolution_dropdown_);
 	box_interface_left_.add(&fullscreen_);
 	box_interface_left_.add(&inputgrab_);
+	box_interface_left_.add(&sdl_cursor_);
 	box_interface_left_.add(&sb_maxfps_);
 
 	// Windows
@@ -385,6 +386,7 @@ void FullscreenMenuOptions::layout() {
 
 	fullscreen_.set_desired_size(column_width, fullscreen_.get_h());
 	inputgrab_.set_desired_size(column_width, inputgrab_.get_h());
+	sdl_cursor_.set_desired_size(column_width, sdl_cursor_.get_h());
 	sb_maxfps_.set_unit_width(column_width / 2);
 	sb_maxfps_.set_desired_size(column_width, sb_maxfps_.get_h());
 
@@ -566,8 +568,8 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	}
 	os_.fullscreen = fullscreen_.get_state();
 	os_.inputgrab = inputgrab_.get_state();
-	os_.maxfps = sb_maxfps_.get_value();
 	os_.sdl_cursor = sdl_cursor_.get_state();
+	os_.maxfps = sb_maxfps_.get_value();
 
 	// Windows options
 	os_.snap_win_overlap_only = snap_win_overlap_only_.get_state();

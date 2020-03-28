@@ -130,9 +130,9 @@ private:
 	UI::Dropdown<uintptr_t> resolution_dropdown_;
 	UI::Checkbox fullscreen_;
 	UI::Checkbox inputgrab_;
+	UI::Checkbox sdl_cursor_;
 	UI::SpinBox sb_maxfps_;
 	UI::MultilineTextarea translation_info_;
-	UI::Checkbox sdl_cursor_;
 
 	// Windows options
 	UI::Checkbox snap_win_overlap_only_;
