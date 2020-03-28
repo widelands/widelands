@@ -17,6 +17,9 @@
  *
  */
 
+#include <algorithm>
+#include <iterator>
+
 #include "economy/flag.h"
 
 #include "base/macros.h"
@@ -56,9 +59,7 @@ Flag::Flag()
      ware_filled_(0),
      wares_(new PendingWare[ware_capacity_]),
      always_call_for_flag_(nullptr) {
-	for (uint32_t i = 0; i < 6; ++i) {
-		roads_[i] = nullptr;
-	}
+       std::fill(std::begin(roads_), std::end(roads_), nullptr);
 }
 
 /**
@@ -79,8 +80,8 @@ Flag::~Flag() {
 		log("Flag: ouch! flagjobs left\n");
 	}
 
-	for (int32_t i = 0; i < 6; ++i) {
-		if (roads_[i]) {
+	for (const RoadBase* const road : roads_) {
+		if (road) {
 			log("Flag: ouch! road left\n");
 		}
 	}
@@ -125,9 +126,7 @@ Flag::Flag(EditorGameBase& egbase,
      ware_filled_(0),
      wares_(new PendingWare[ware_capacity_]),
      always_call_for_flag_(nullptr) {
-	for (uint32_t i = 0; i < 6; ++i) {
-		roads_[i] = nullptr;
-	}
+	std::fill(std::begin(roads_), std::end(roads_), nullptr);
 
 	set_owner(owning_player);
 
@@ -209,9 +208,9 @@ void Flag::set_economy(Economy* const e, WareWorker type) {
 		}
 	}
 
-	for (int8_t i = 0; i < 6; ++i) {
-		if (roads_[i]) {
-			roads_[i]->set_economy(e, type);
+	for (RoadBase* const road : roads_) {
+		if (road) {
+			road->set_economy(e, type);
 		}
 	}
 }
@@ -283,8 +282,7 @@ BaseImmovable::PositionList Flag::get_positions(const EditorGameBase&) const {
  * \return neighbouring flags.
  */
 void Flag::get_neighbours(WareWorker type, RoutingNodeNeighbours& neighbours) {
-	for (int8_t i = 0; i < 6; ++i) {
-		RoadBase* const road = roads_[i];
+	for (RoadBase* const road : roads_) {
 		if (!road) {
 			continue;
 		}
@@ -323,8 +321,8 @@ void Flag::get_neighbours(WareWorker type, RoutingNodeNeighbours& neighbours) {
  * \return the road that leads to the given flag.
  */
 RoadBase* Flag::get_roadbase(Flag& flag) {
-	for (int8_t i = 0; i < 6; ++i) {
-		if (RoadBase* const road = roads_[i]) {
+	for (RoadBase* const road : roads_) {
+		if (road) {
 			if (&road->get_flag(RoadBase::FlagStart) == &flag ||
 			    &road->get_flag(RoadBase::FlagEnd) == &flag) {
 				return road;
@@ -843,10 +841,10 @@ void Flag::cleanup(EditorGameBase& egbase) {
 		assert(!building_);
 	}
 
-	for (int8_t i = 0; i < 6; ++i) {
-		if (roads_[i]) {
-			roads_[i]->remove(egbase);  //  immediate death
-			assert(!roads_[i]);
+	for (RoadBase* const road : roads_) {
+		if (road) {
+			road->remove(egbase);  //  immediate death
+			assert(!road);
 		}
 	}
 
