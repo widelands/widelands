@@ -166,7 +166,7 @@ public:
 	void toggle_buildhelp();
 
 	// Returns the list of landmarks that have been mapped to the keys 0-9
-	const std::vector<QuickNavigation::Landmark>& landmarks();
+	const QuickNavigation::Landmark* landmarks();
 
 	// Sets the landmark for the keyboard 'key' to 'point'
 	void set_landmark(size_t key, const MapView::View& view);
