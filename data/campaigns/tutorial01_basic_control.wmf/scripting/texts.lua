@@ -211,7 +211,9 @@ lumberjack_message_07 = {
    position = "topright",
    body = (
       h1(_"Let’s see the progress") ..
-      li_object("barbarians_builder", _[[If you click on the construction site, a window will open. You can see the wares that are still missing grayed out. You can also see the progress of this construction site.]], plr.color)
+      li_object("barbarians_builder", _[[If you click on the construction site, a window will open. You can see the wares that are still missing grayed out. You can also see the progress of this construction site.]], plr.color) ..
+      li_image("images/wui/buildings/toggle_workarea.png",
+         _[[Buildings like lumberjack’s hut cover only some work area. Have a look how perfect this spot is.]])
    ),
    h = 450,
    w = 350
