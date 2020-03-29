@@ -127,9 +127,10 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 				probability = read_positive(argument, 254);
 			} else {
 				type_name = argument;
-                // This ensures that the object we're transforming to is loaded and known. It does not ensure that it's an appropriate immovable.
-                Notifications::publish(
-                           NoteMapObjectDescription(type_name, NoteMapObjectDescription::LoadType::kObject));
+				// This ensures that the object we're transforming to is loaded and known. It does not
+				// ensure that it's an appropriate immovable.
+				Notifications::publish(
+				   NoteMapObjectDescription(type_name, NoteMapObjectDescription::LoadType::kObject));
 			}
 		}
 		if (type_name == descr.name()) {
@@ -168,9 +169,10 @@ ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments,
 	}
 
 	type_name = arguments.front();
-    // This ensures that the object we're transforming to is loaded and known. It does not ensure that it's an appropriate immovable.
-    Notifications::publish(
-               NoteMapObjectDescription(type_name, NoteMapObjectDescription::LoadType::kObject));
+	// This ensures that the object we're transforming to is loaded and known. It does not ensure
+	// that it's an appropriate immovable.
+	Notifications::publish(
+	   NoteMapObjectDescription(type_name, NoteMapObjectDescription::LoadType::kObject));
 }
 
 void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const {
@@ -219,9 +221,10 @@ ImmovableProgram::ActSeed::ActSeed(std::vector<std::string>& arguments,
 	}
 
 	type_name = arguments.front();
-    // This ensures that the object we're transforming to is loaded and known. It does not ensure that it's an appropriate immovable.
-    Notifications::publish(
-               NoteMapObjectDescription(type_name, NoteMapObjectDescription::LoadType::kObject));
+	// This ensures that the object we're transforming to is loaded and known. It does not ensure
+	// that it's an appropriate immovable.
+	Notifications::publish(
+	   NoteMapObjectDescription(type_name, NoteMapObjectDescription::LoadType::kObject));
 }
 
 void ImmovableProgram::ActSeed::execute(Game& game, Immovable& immovable) const {

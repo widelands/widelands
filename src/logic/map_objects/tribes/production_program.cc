@@ -66,20 +66,20 @@ bool match_and_skip(const std::vector<std::string>& args,
 ProductionProgram::ActReturn::Condition* create_economy_condition(const std::string& item,
                                                                   const ProductionSiteDescr& descr,
                                                                   const Tribes& tribes) {
-    try {
-        tribes.try_load_ware_or_worker(item);
-        DescriptionIndex index = tribes.ware_index(item);
-        if (tribes.ware_exists(index)) {
-            descr.ware_demand_checks()->insert(index);
-            return new ProductionProgram::ActReturn::EconomyNeedsWare(index);
-        } else {
-            index = tribes.worker_index(item);
-            descr.worker_demand_checks()->insert(index);
-            return new ProductionProgram::ActReturn::EconomyNeedsWorker(index);
-        }
+	try {
+		tribes.try_load_ware_or_worker(item);
+		DescriptionIndex index = tribes.ware_index(item);
+		if (tribes.ware_exists(index)) {
+			descr.ware_demand_checks()->insert(index);
+			return new ProductionProgram::ActReturn::EconomyNeedsWare(index);
+		} else {
+			index = tribes.worker_index(item);
+			descr.worker_demand_checks()->insert(index);
+			return new ProductionProgram::ActReturn::EconomyNeedsWorker(index);
+		}
 	} catch (const GameDataError& e) {
-        throw GameDataError("economy condition: %s", e.what());
-    }
+		throw GameDataError("economy condition: %s", e.what());
+	}
 }
 
 TrainingAttribute parse_training_attribute(const std::string& argument) {
