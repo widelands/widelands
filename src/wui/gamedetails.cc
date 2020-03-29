@@ -80,7 +80,7 @@ void GameDetails::clear() {
 }
 
 void GameDetails::display(const std::vector<SavegameData>& gamedata) {
-    if (gamedata.empty()) {
+	if (gamedata.empty()) {
 		return;
 	} else if (gamedata.size() > 1) {
 		show(gamedata);

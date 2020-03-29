@@ -154,7 +154,7 @@ void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) c
 		}
 	} else {
 		immovable.program_step(game);
-    }
+	}
 }
 
 ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments,

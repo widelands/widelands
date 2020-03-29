@@ -315,7 +315,7 @@ void InteractivePlayer::think() {
 	if (flag_to_connect_) {
 		Widelands::Field& field = egbase().map()[flag_to_connect_];
 		if (upcast(Widelands::Flag const, flag, field.get_immovable())) {
-            if (!flag->has_road() && !in_road_building_mode()) {
+			if (!flag->has_road() && !in_road_building_mode()) {
 				if (auto_roadbuild_mode_) {
 					//  There might be a fieldaction window open, showing a button
 					//  for roadbuilding. If that dialog remains open so that the
