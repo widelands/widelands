@@ -920,7 +920,7 @@ void InteractiveBase::toggle_minimap() {
 	rebuild_mapview_menu();
 }
 
-const std::vector<QuickNavigation::Landmark>& InteractiveBase::landmarks() {
+const QuickNavigation::Landmark* InteractiveBase::landmarks() {
 	return quick_navigation_.landmarks();
 }
 
