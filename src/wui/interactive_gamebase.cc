@@ -126,6 +126,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 					   if (wanted_building_window.minimize) {
 						   building_window->minimize();
 					   }
+					   building_window->set_pinned(wanted_building_window.pin);
 					   wanted_building_windows_.erase(coords.hash());
 				   }
 			   }
@@ -536,10 +537,11 @@ void InteractiveGameBase::toggle_mainmenu() {
 
 void InteractiveGameBase::add_wanted_building_window(const Widelands::Coords& coords,
                                                      const Vector2i point,
-                                                     bool was_minimal) {
+                                                     bool was_minimal,
+                                                     bool was_pinned) {
 	wanted_building_windows_.insert(std::make_pair(
 	   coords.hash(), std::unique_ptr<const WantedBuildingWindow>(new WantedBuildingWindow(
-	                     point, was_minimal, has_workarea_preview(coords)))));
+	                     point, was_minimal, was_pinned, has_workarea_preview(coords)))));
 }
 
 UI::UniqueWindow* InteractiveGameBase::show_building_window(const Widelands::Coords& coord,

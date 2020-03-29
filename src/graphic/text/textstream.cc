@@ -40,8 +40,9 @@ void TextStream::consume(size_t cnt) {
 		if (text_[pos_] == '\n') {
 			++line_;
 			col_ = 0;
-		} else
+		} else {
 			++col_;
+		}
 		++pos_;
 		--cnt;
 	}
@@ -54,12 +55,14 @@ void TextStream::consume(size_t cnt) {
  * r* means skip_ws starting from the back of the string
  */
 void TextStream::skip_ws() {
-	while (pos_ < end_ && isspace(text_[pos_]))
+	while (pos_ < end_ && isspace(text_[pos_])) {
 		consume(1);
+	}
 }
 void TextStream::rskip_ws() {
-	while (pos_ < end_ && isspace(text_[end_ - 1]))
+	while (pos_ < end_ && isspace(text_[end_ - 1])) {
 		--end_;
+	}
 }
 
 /*
@@ -74,11 +77,13 @@ std::string TextStream::peek(size_t n, size_t at) const {
  * Also advances the stream.
  */
 void TextStream::expect(std::string n, bool skip_whitespace) {
-	if (skip_whitespace)
+	if (skip_whitespace) {
 		skip_ws();
+	}
 
-	if (peek(n.size()) != n)
+	if (peek(n.size()) != n) {
 		throw SyntaxErrorImpl(line_, col_, (format("'%s'") % n).str(), peek(n.size()), peek(100));
+	}
 	consume(n.size());
 }
 
@@ -101,8 +106,9 @@ std::string TextStream::till_any(std::string chars) {
 				break;
 			}
 		}
-		if (found)
+		if (found) {
 			break;
+		}
 
 		// Get rid of control characters
 		// https://en.cppreference.com/w/cpp/language/escape
@@ -120,8 +126,9 @@ std::string TextStream::till_any(std::string chars) {
 		rv += text_[j];
 		++j;
 	}
-	if (!found)
+	if (!found) {
 		throw EndOfTextImpl(started_at, peek(100, started_at));
+	}
 	consume(j - started_at);
 
 	// Undo the extra \ that were inserted in Parser::parse to prevent crashes.
@@ -154,8 +161,9 @@ std::string TextStream::parse_string() {
 		std::string rv = till_any(delim);
 		consume(1);
 		return rv;
-	} else
+	} else {
 		return till_any(" \t>");
+	}
 }
 
 /*

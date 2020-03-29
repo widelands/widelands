@@ -61,8 +61,9 @@ void* md5_finish_ctx(Md5Ctx* const ctx, void* const resbuf) {
 
 	/* Now count remaining bytes.  */
 	ctx->total[0] += bytes;
-	if (ctx->total[0] < bytes)
+	if (ctx->total[0] < bytes) {
 		++ctx->total[1];
+	}
 
 	pad = bytes >= 56 ? 64 + 56 - bytes : 56 - bytes;
 	memcpy(&ctx->buffer[bytes], fillbuf, pad);
@@ -147,8 +148,9 @@ void md5_process_block(void const* const buffer, uint32_t const len, Md5Ctx* con
 	   length of the file up to 2^64 bits.  Here we only compute the
 	   number of bytes.  Do a double word increment.  */
 	ctx->total[0] += len;
-	if (ctx->total[0] < len)
+	if (ctx->total[0] < len) {
 		++ctx->total[1];
+	}
 
 	/* Process all bytes in the buffer with 64 bytes in each round of
 	   the loop.  */

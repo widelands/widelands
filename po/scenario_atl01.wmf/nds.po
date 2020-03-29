@@ -1,18 +1,18 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2019
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2020
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # GunChleoc, 2014
 # GunChleoc, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
-"PO-Revision-Date: 2019-08-10 17:15+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-03-28 05:00+0000\n"
+"PO-Revision-Date: 2020-03-29 13:34+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -293,7 +293,7 @@ msgid ""
 "human to be empowered by the sea god Lutas to breathe above sea level – and "
 "the wise clerics, who provided the link to Lutas – they prospered and became"
 " civilized."
-msgstr ""
+msgstr "Up de verbargen un verlesen Insel Atlantis hett sik, as de Welt leep jung weer, een stoltes Volk daallaten. Vun de Stamm vun König Ajanthul – de eersten Minsk, de de Seegott Luutas de Macht geven hett, boven Water to amen – un de wiesen Pastoren, well de Verbinnen to Luutas weren, regeert, sünd se groot un kultüürriek worden."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:150
@@ -304,7 +304,7 @@ msgid ""
 "began looking for a cure for death even though most clerics warned him "
 "against it. Some said that endless life was only for the gods and that to "
 "seek for it was forbidden."
-msgstr ""
+msgstr "Deeses Vertellsel passeert unner de Heerskupp vun König Askandor, de 43. Nafolger vun König Ajanthul. He weer en goder König un hett Atlantis mit Klookheid un Vörutkieken regeert. Aver as oller Mann hett he Angst vör'm Starven kregen un begunnen, eene Medizin vör'm Dood to söken, ofschoon de Pastoren hüm daar vör warnt hebben. Se hebben seggt, dat dat ewich Leven blot för Gotten is, un 't is Minsken verseggt, daarna to söken."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:154
 msgid "Disgraced Before the God"
@@ -321,7 +321,7 @@ msgid ""
 "During the nights, they went crazy and were full of fear. It was not long "
 "before the horse breeder Xydra figured out what was wrong with them: the sea"
 " level in front of their stable was rising with ever increasing speed."
-msgstr ""
+msgstr "Aver all sach good ut. Blot de Peer hebben sik een bietje komisk benohmen. In de Nacht weren se ganz dördreiht un rappelig. Na körter Tied hett de Peertüchter Skied' utfunnen, wat löss weer: De See tegen hör Stallen leep immer gauer up."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:160
@@ -331,7 +331,7 @@ msgid ""
 " of the boldness of their king. He decided to withdraw the rights that were "
 "granted to King Ajanthul and his children. And so, he called them back below"
 " the sea again."
-msgstr ""
+msgstr "De Pastoren hebben leep vööl beedt un dann ok bold utfunnen, waarum dat Water steeg: De Gott Luutas hett keen Vertrauen in de Atlantingers mehr, wiel hör König to driest weer. He wull de Rechten torüggnehmen, wat König Ajanthul un sien Kinners vergünnt wurren. Also hett he se torügg in de See ropen."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:164
 msgid "Uproar and Confusion"
@@ -348,7 +348,7 @@ msgid ""
 "turned to the clerics, but they had no substantial help to offer. Most "
 "accepted their fate while others tried to change the god’s mind by offering "
 "animals in his temple. But to no avail…"
-msgstr ""
+msgstr "Vör luter Schuld hett de König sik sülven doodstoken. Sünner Baas hebben de Lüü to de Pastoren kiekt, aver de kunnen ok nich hülpen. De meesten hebben hör Schicksaal annohmen, anner wullten in de Tempel Deerten opfern, um de Gott anners to stimmen. Dat hett aver nix brocht …"
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:170
@@ -358,7 +358,7 @@ msgid ""
 "situation, she convinced herself that to soothe the god, an offer of great "
 "personal value was needed. So she offered him her most beloved: her husband,"
 " the father of her only child."
-msgstr ""
+msgstr "Jundlin', de Dochter vun de doden König un hoogste Pastorin vun Luutas, weer de stuurste Pastor. As unbannig völe Gaven nix ännert hebben, weer se seker, dat nix as eene Gaav vun hogen persönelken Weert de Gott besadigen kann. Also opferte se hüm dat, wat se am meesten leevte: hör Mann, de Vader vun hör eenzigst Kind."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:172
@@ -370,14 +370,14 @@ msgid ""
 "she set the temple on fire and stole a ship to flee from the god’s influence"
 " over Atlantis. This small group started praying to Satul, the fire god and "
 "the worst enemy of Lutas."
-msgstr ""
+msgstr "Aver nich mal dat kunn de Gott anners stimmen. Dat Water leep wieder up. Haast dördreiht vör Schuld, Pien un Wut wurr Jundlin' tur Ketterin: In't Geheem hett se normale Lüü sammelt, wat mit de Beslutt vun de Pastoren, de Will vun de Gott antonehmen, nich tofree weren. Tosamen hebben se all de Tempel ofbrannt un een Schipp stohlen, mit de se weg vun Atlantis un Luutas sien Macht flüchtden. De lütte Klottje hett begunnen, to Satuul de Füürgott to beden, Luutas sien slimmster Feind."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:174
 msgid ""
 "Leaving the dying Atlantis and their past behind, they started on a quest to"
 " find a place sheltered by the fire and protected from the sea."
-msgstr ""
+msgstr "As se Atlantis im Starven un hör Vergangenheid torüggleten, sünd se up eene Söök fahren, um eene Stee to finnen, waar dat Füür se schütt und vör de See wahrt."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:181
 msgid "The Princess’ Memoir"
@@ -930,12 +930,12 @@ msgstr "Wi hebben een Huus an de See verloren!"
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "»%s«"
 
 #: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgstr ""
+msgstr "Neje Upgaav"
 
 #: ../../data/scripting/richtext_scenarios.lua:93
 msgid "New Objectives"
-msgstr ""
+msgstr "Neje Upgaven"

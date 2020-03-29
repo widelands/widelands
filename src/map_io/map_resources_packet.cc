@@ -46,10 +46,11 @@ void MapResourcesPacket::read(FileSystem& fs,
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
 			int32_t const nr_res = fr.unsigned_16();
-			if (world.get_nr_resources() < nr_res)
+			if (world.get_nr_resources() < nr_res) {
 				log("WARNING: Number of resources in map (%i) is bigger than in world "
 				    "(%i)",
 				    nr_res, world.get_nr_resources());
+			}
 
 			// construct ids and map
 			std::map<uint8_t, uint8_t> smap;
@@ -57,9 +58,10 @@ void MapResourcesPacket::read(FileSystem& fs,
 				uint8_t const id = fr.unsigned_16();
 				const std::string resource_name = lookup_table.lookup_resource(fr.c_string());
 				DescriptionIndex const res = world.resource_index(resource_name.c_str());
-				if (res == Widelands::INVALID_INDEX)
+				if (res == Widelands::INVALID_INDEX) {
 					throw GameDataError(
 					   "resource '%s' exists in map but not in world", resource_name.c_str());
+				}
 				smap[id] = res;
 			}
 

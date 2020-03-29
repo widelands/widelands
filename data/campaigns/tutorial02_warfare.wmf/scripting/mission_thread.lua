@@ -3,7 +3,7 @@
 -- ================
 
 function intro()
-   reveal_concentric(plr, wl.Game().map:get_field(32, 59), 15)
+   reveal_concentric(plr, sf, 15)
    sleep(1000)
    message_box_objective(plr, introduction)
 
@@ -12,15 +12,35 @@ end
 
 local trainingcamp_done = false
 local battlearena_done = false
+local scouting_done = false
 
 function training2()
    -- Teach about trainingsites and soldiers' abilities - concurrent part 2
-   sleep(2*60*1000)
-   o = message_box_objective(plr, trainingcamp1)
+   sleep(60*1000)
+   local o = message_box_objective(plr, trainingcamp1)
    while #plr:get_buildings("barbarians_trainingcamp") == 0 do sleep(500) end
    set_objective_done(o)
    message_box_objective(plr, trainingcamp2)
    trainingcamp_done = true
+end
+
+function scouting()
+   -- Teach player about scouting
+   sleep(2*60*1000)
+   local o = message_box_objective(plr, scouting1)
+   while #plr:get_buildings("barbarians_scouts_hut") == 0 do sleep(500) end
+   set_objective_done(o)
+
+   exploring()
+end
+
+function exploring()
+   local pois = sf:region(30, 29)
+   local o = message_box_objective(plr, scouting2)
+   while not any_field_seen(plr, pois) do sleep(2000) end
+   set_objective_done(o)
+   message_box_objective(plr, scouting3)
+   scouting_done = true
 end
 
 function training()
@@ -30,6 +50,7 @@ function training()
    message_box_objective(plr, abilities)
    local o = message_box_objective(plr, battlearena1)
    run(training2)
+   run(scouting)
 
    while #plr:get_buildings("barbarians_battlearena") == 0 do sleep(500) end
    set_objective_done(o, 0)
@@ -38,7 +59,8 @@ function training()
 end
 
 function military_buildings()
-   while not trainingcamp_done or not battlearena_done do sleep(3000) end
+   while not trainingcamp_done or not battlearena_done or
+      not scouting_done do sleep(3000) end
    message_box_objective(plr, heroes_rookies)
    message_box_objective(plr, soldier_capacity)
    local o = message_box_objective(plr, dismantle)
@@ -90,9 +112,9 @@ function create_enemy()
          }
       }
    )
-   connected_road(p2,map:get_field(29,17).immovable,"tr,tl|tl,tl|tl,tl|tl,tl|tl,l")
-   connected_road(p2,map:get_field(31,22).immovable,"tr,tl|tl,tl,tl")
-   connected_road(p2,map:get_field(31,28).immovable,"tr,tr|tr,tl|tl,tl")
+   connected_road("normal", p2,map:get_field(29,17).immovable,"tr,tl|tl,tl|tl,tl|tl,tl|tl,l")
+   connected_road("normal", p2,map:get_field(31,22).immovable,"tr,tl|tl,tl,tl")
+   connected_road("normal", p2,map:get_field(31,28).immovable,"tr,tr|tr,tl|tl,tl")
    p2:forbid_buildings("all")
 end
 
@@ -113,4 +135,4 @@ function conclusion()
 end
 
 run(intro)
-run (military_buildings)
+run(military_buildings)

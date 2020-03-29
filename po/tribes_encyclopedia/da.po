@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-03-16 06:59+0000\n"
-"PO-Revision-Date: 2020-03-19 21:15+0000\n"
+"POT-Creation-Date: 2020-03-20 06:16+0000\n"
+"PO-Revision-Date: 2020-03-25 14:12+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -104,14 +104,14 @@ msgid ""
 "‘The Citadel of Adlen surely is the finest masterpiece of Barbarian "
 "craftsmanship. Nothing as strong and big and beautiful has ever been built "
 "in such a short time.’"
-msgstr ""
+msgstr "»Kastellet Adlen er det fineste mesterværk indenfor barbarernes håndværk. Intet er så stærkt og stort og smukt samt bygget på så kort en periode.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/helptexts.lua:9
 msgctxt "barbarians_building"
 msgid ""
 "Colintan, chief planner of the Citadel of Adlen,<br>at its opening ceremony"
-msgstr ""
+msgstr "Colintan, chefplanlægger for Kastellet Adlen,<br>ved dets åbningsceremoni"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/helptexts.lua:3
@@ -119,7 +119,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘This stronghold made from blackwood and stones will be a hard nut to crack "
 "for them.’"
-msgstr ""
+msgstr "»Denne fæstning lavet af hårdt træ og sten vil være en hård nød at knække for dem.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/helptexts.lua:8
@@ -134,13 +134,13 @@ msgid ""
 "‘The log cabin was so small that two men could hardly live there. But we "
 "were young and carefree. We just relished our freedom and the responsibility"
 " as an outpost.’"
-msgstr ""
+msgstr "»Bjælkehytten var så lille, at to mænd næsten ikke kunne leve der. Men de var unge og bekymringsfrie. Vi levede bare vores frihed og ansvarlighed ud som en forpost.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/helptexts.lua:9
 msgctxt "barbarians_building"
 msgid "Boldreth,<br>about his time as young soldier"
-msgstr ""
+msgstr "Boldreth,<br>om den tid hvor han var en ung soldat"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/helptexts.lua:3
@@ -149,13 +149,13 @@ msgid ""
 "‘From the height of our tower we could see far into enemy territory. The "
 "enemy was well prepared, but we also noticed some weak points in their "
 "defense.’"
-msgstr ""
+msgstr "»Fra tårnet kunne vi se langt ind i fjendens territorium. Fjenden var godt forberedt, men vi så også nogle svage punkter i deres forsvar.«"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/partially_finished/constructionsite/helptexts.lua:3
 msgctxt "building"
 msgid "‘Don’t swear at the builder who is short of building materials.’"
-msgstr ""
+msgstr "»Band ikke ad byggearbejderen der mangle byggematerialer.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/partially_finished/constructionsite/helptexts.lua:8
@@ -173,7 +173,7 @@ msgstr "En ny bygning bliver bygget på denne byggeplads."
 #: ../../data/tribes/buildings/partially_finished/dismantlesite/helptexts.lua:3
 msgctxt "building"
 msgid "‘New paths will appear when you are willing to tear down the old.’"
-msgstr ""
+msgstr "»Nye veje vil fremkomme, når du er villig til at rive de gamle ned.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/partially_finished/dismantlesite/helptexts.lua:8
@@ -292,13 +292,13 @@ msgid ""
 "‘Only after the last duck has been shot down<br>Only after the last deer has"
 " been put to death<br>Only after the last fish has been caught<br>Then will "
 "you find that spiders are not to be eaten.’"
-msgstr ""
+msgstr "»Først efter den sidste and er skudt<br>Først efter den sidste hjort er død<br>Først efter den sidste fisk er fanget<br>Så vil du opdage, at edderkopper ikke skal spises.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/helptexts.lua:14
 msgctxt "atlanteans_building"
 msgid "Prophecy of the fishbreeders"
-msgstr ""
+msgstr "Fiskeavlernes profeti"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/helptexts.lua:19
@@ -410,7 +410,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "When no cornmeal is required, the mill will try to produce blackroot flour "
 "even when there is no demand for it."
-msgstr ""
+msgstr "Når der ikke kræves majsmel, så vil møllen forsøge at fremstille rodfrugtmel selvom der ingen efterspørgsel er efter dette."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/helptexts.lua:16
@@ -637,7 +637,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘He who has enough bread will never be too tired to dig the ore and wield "
 "the ax.’"
-msgstr ""
+msgstr "»Den som har nok brød vil aldrig være for træt til at udgrave malm og svinge øksen.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:8
@@ -645,7 +645,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Khantarakh, ‘The Modern Barbarian Economy’,<br>3ʳᵈ cowhide ‘Craftsmanship "
 "and Trade’"
-msgstr ""
+msgstr "Khantarakh, »Den moderne barbarøkonomi«,<br>3. koskind »Håndværk og handel«"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:13
@@ -668,7 +668,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Don't ask what your tribe can do for you, ask what you can do for your "
 "tribe!’"
-msgstr ""
+msgstr "»Spørg ikke hvad din stamme kan gøre for dig, spørg hvad du kan gøre for din stamme!«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/barracks/helptexts.lua:11
@@ -688,7 +688,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Seasonal fish and game specialties served with pitta bread.<br>Choose from "
 "a prime selection of regional craft beer brands.’"
-msgstr ""
+msgstr "»Sæsonens fisk og vildtspecialiteter serveret med pittabrød.<br>Vælg fra et sublimt udvalg af lokale ølmærker.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/helptexts.lua:12
@@ -711,7 +711,7 @@ msgid ""
 "‘When the Barbarian was created,<br>this was the first thing that he "
 "stated:<br>“You want me fighting without fear?<br>Then you should create "
 "some beer!”’"
-msgstr ""
+msgstr "Da barbarerne blev skabt,<br>så var dette det første han sagde:<br>»Du ønsker at jeg kæmper uden frygt?<br>Så bør du skaffe noget øl!«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/brewery/helptexts.lua:14
@@ -731,7 +731,7 @@ msgstr "Brygger øl for at holde minearbejderne i godt humør."
 msgctxt "barbarians_building"
 msgid ""
 "‘The smart leader builds roads, while the really wise leader breeds cattle.’"
-msgstr ""
+msgstr "»Den smarte leder bygger veje, mens den virkelig smarte leder avler kvæg.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:8
@@ -739,7 +739,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Khantarakh, ‘The Modern Barbarian Economy’,<br> 5ᵗʰ cowhide ‘Traffic and "
 "Logistics’"
-msgstr ""
+msgstr "Khantarakh, »Den moderne barbarøkonomi«,<br> 5. koskind »Trafik og logistik«"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:13
@@ -765,7 +765,7 @@ msgid ""
 "sky.<br>He sets the fire, sees it smolder<br>The logs he carried on his "
 "shoulder.<br>Burnt down to just one single coal<br>This troubles much a "
 "burner’s soul.’"
-msgstr ""
+msgstr "»Hvad er kulsvierens arbejde?<br>Han er stammens mest møjsommelige indtjener!<br>Træstamme på træstamme i store bunker.<br>Indtil ovnen når himlen.<br>Han starter ilden, ser det ulme.<br>Træstammerne bar han på sine skuldre.<br>Brændt ned til kun et enkelt stykke kul.<br>En kulsviers lod.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/helptexts.lua:18
@@ -844,13 +844,13 @@ msgid ""
 "‘See the crop fields from here to the horizons. They are a huge, heaving, "
 "golden sea.<br>Oh wheat, source of wealth, soul of beer, strength of our "
 "warriors!’"
-msgstr ""
+msgstr "»Se markerne herfra til horisonten. De er et stort, svævende hav.<br>Oh hvede, kilde til rigdom, øllets sjæl, krigernes styrke!«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:9
 msgctxt "barbarians_building"
 msgid "Line from the harvesting song ‘The Wealth of the Fields’"
-msgstr ""
+msgstr "Linje fra høstsangen »Markens rigdom«"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:14
@@ -877,7 +877,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Frequent response of a barbarian fisherman,<br>often followed by an "
 "enjoyable brawl"
-msgstr ""
+msgstr "Ofte hørt svar fra en fisker hos barbarerne,<br>ofte fulgt af et fornøjeligt slagsmål"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:13
@@ -1047,13 +1047,13 @@ msgstr "Hvis madforsyningen er stabil, så kan denne mine fremstille granit på 
 msgctxt "barbarians_building"
 msgid ""
 "‘The helmets forgéd by this smithy<br>Are widely known for looking pithy.’"
-msgstr ""
+msgstr "»Hjelmene smedet af denne smed<br>Er kendt for at se fyndige ud.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/helptexts.lua:11
 msgctxt "barbarians_building"
 msgid "Slogan of ‘Harrath’s Handsome Helmets’ in Al’thunran"
-msgstr ""
+msgstr "Slogan for »Harraths smukke hjelme« i Al’thunran"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/helptexts.lua:16
@@ -1094,13 +1094,13 @@ msgstr "Fiskeren holder pause i %s før arbejdet genoptages."
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/helptexts.lua:6
 msgctxt "barbarians_building"
 msgid "‘Miner’s Delight: Pitta bread with fish or meat, comes with one beer.’"
-msgstr ""
+msgstr "»Minens ønskedrøm: Pittabrød med fisk eller kød, der følger en øl med.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/helptexts.lua:11
 msgctxt "barbarians_building"
 msgid "Chef’s recommendation in ‘The Singing Master Miner’"
-msgstr ""
+msgstr "Kokkens anbefaling i »Den syngende ekspertminearbejder«"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/helptexts.lua:16
@@ -1412,7 +1412,7 @@ msgstr "»Bag den næste bakke kan der være rigdom og lykke, men også fjendtli
 #: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/helptexts.lua:12
 msgctxt "barbarians_building"
 msgid "Chat’Karuth<br>at the oath taking ceremony of the first scout troupe"
-msgstr ""
+msgstr "Chat’Karuth<br>ved ed-ceremonien for den første spejdertrup"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/helptexts.lua:6
@@ -1421,14 +1421,14 @@ msgid ""
 "‘When I saw the Saxnot for the first time, her majestic dragon head already "
 "looked up to the skies and the master was about to install the square "
 "sail.<br>It was the most noble ship I ever saw.’"
-msgstr ""
+msgstr "»Da jeg så Saxnot for den første gang, rejste dens majestætiske dragehoved sig allerede op i himlen og sejlmesteren var ved at installere det firkantede sejl.<br>Det var det mest ædle skib jeg nogensinde har set.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/helptexts.lua:13
 #: ../../data/tribes/buildings/warehouses/barbarians/port/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "Captain Thanlas the Elder,<br>Explorer"
-msgstr ""
+msgstr "Kaptajn Thanlas den Ældre,<br>Udforsker"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/helptexts.lua:6
@@ -1436,25 +1436,25 @@ msgctxt "barbarians_building"
 msgid ""
 "‘From inferior looking rubble they form shiny gold and gleaming iron.<br>The"
 " smelters are real magicians among our craftsmen.’"
-msgstr ""
+msgstr "»Fra ubetydelige murbrokker former de skinnende guld og glitrende jern.<br>Smelteværksarbejderne er magikere blandt vores håndværkere.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/helptexts.lua:12
 msgctxt "barbarians_building"
 msgid "Chat’Karuth<br>at the 5ᵗʰ conference of master craftsmen"
-msgstr ""
+msgstr "Chat’Karuth<br>på den 5. konference for eksperthåndværkere"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/tavern/helptexts.lua:6
 msgctxt "barbarians_building"
 msgid "‘Fresh from the countryside: Bread, fish or game to go.’"
-msgstr ""
+msgstr "»Frisk fra landet: Brød, fisk eller vildt efter ønske.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/tavern/helptexts.lua:11
 msgctxt "barbarians_building"
 msgid "Menu of the tavern ‘Ye Ol’ Bronze Axe’"
-msgstr ""
+msgstr "Menu på værtshuset »Ye Ol'-bronzeøksen«"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/tavern/helptexts.lua:16
@@ -1490,7 +1490,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Fine cloth and jewelry mean nothing to a true Barbarian.<br>But a noble "
 "sail in the wind will please his eyes.’"
-msgstr ""
+msgstr "»Fint tøj og smykker betyder intet for en sand barbar.<br>Men et stolt sej i vinden vil fornøje ham.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:12
@@ -1498,7 +1498,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Khantarakh, ‘The Modern Barbarian Economy’,<br>9ᵗʰ cowhide ‘Seafaring and "
 "Conquest’"
-msgstr ""
+msgstr "Khantarakh, »Den moderne barbarøkonomi«,<br>9. koskind »Søvæsen og erobring«"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:17
@@ -1535,7 +1535,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Then he hit the door with his ax and, behold,<br>the door only trembled, "
 "but the shaft of the ax burst into a thousand pieces.’"
-msgstr ""
+msgstr "»Så ramte han døren med sin økse, se,<br>døren rystede kun, men skaftet på øksen sprang i tusind stykker.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/helptexts.lua:12
@@ -1543,7 +1543,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Legend about a quarrel between the brothers Harthor and Manthor,<br>Manthor "
 "is said to be the inventor of blackwood"
-msgstr ""
+msgstr "Legende om en skænderi mellem brødrene Harthor og Manthor,<br>Manthor siges at være opfinderen af hårdt træ."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/helptexts.lua:18
@@ -1775,7 +1775,7 @@ msgctxt "frisians_building"
 msgid ""
 "Of course I could still forge short and long swords, but it is beneath my "
 "honor to bother with such basic equipment now."
-msgstr ""
+msgstr "Selvfølgelig kunne jeg stadig smede korte sværd og langsværd, men det er under min ære at rode med så simpelt udstyr nu."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/helptexts.lua:11
@@ -1845,7 +1845,7 @@ msgid ""
 "alone! You’d better pay close attention to me in order to make the most of "
 "it. Now here is your new short sword, forged just for you by our best "
 "blacksmiths. Time’s up everyone, now go occupy your sentinels!"
-msgstr ""
+msgstr "Du har tredive sekunder til at lære det grundlæggende i sværdbekæmpelse og hvordan man kan holde sig i live i kamp. En tredjedel af den tid er gået til introduktionen alene! Du skal være meget opmærksom på mig for at få mest muligt ud af det. Her er dit nye korte sværd, smedet lige til dig af vores bedste smede. Tiden er inde alle sammen, gå ud og indtag jeres vagthuse!"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:8
@@ -1985,7 +1985,7 @@ msgctxt "frisians_building"
 msgid ""
 "If there is not enough coal, only the most foolish of leaders would deprive "
 "his brick kilns of it first."
-msgstr ""
+msgstr "Hvis der ikke er nok kul, så vi kun den tåbeligste leder fjerne forsyningen til murstensovnene først."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/brick_kiln/helptexts.lua:8
@@ -2391,7 +2391,7 @@ msgctxt "building"
 msgid ""
 "Brews beer out of barley and water. It also brews mead, which is beer "
 "refined with honey. Mead is consumed by experienced soldiers."
-msgstr ""
+msgstr "Brygger øl ud af byg og vand. Brygger også mjød, som er øl raffineret med honning. Mjød drikkes af erfarne soldater."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/helptexts.lua:3
@@ -2684,7 +2684,7 @@ msgctxt "frisians_building"
 msgid ""
 "The tavern can produce one ration in %s on average if the supply is steady; "
 "otherwise, it will take 50%% longer."
-msgstr ""
+msgstr "Værtshuset kan fremstille en ration per %s i gennemsnit hvis leverancen er stabil; ellers vil det tage 50%% længere."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:3
@@ -2692,7 +2692,7 @@ msgctxt "frisians_building"
 msgid ""
 "Reindeer’s fur and roofing reed<br>These items two make up the seed<br>For "
 "ships of wood to chain the gales<br>In sturdy, beautious, blowing sails!"
-msgstr ""
+msgstr "Rensdyrpels og tagstrå<br>Disse ting udgør grundlaget<br>For at skibe af træ kan tæmme stormene<br> I robuste, smukke, blæsende sejl!"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:8
@@ -2934,7 +2934,7 @@ msgctxt "frisians_building"
 msgid ""
 "Just be quiet, listen carefully, and do try not to stab yourself until I’ve "
 "explained to you how to hold a broadsword."
-msgstr ""
+msgstr "Vær stille, lyt omhyggeligt og prøv at undgå at stikke dig selv indtil jeg har forklaret dig hvordan du holder på et bredsværd."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/helptexts.lua:16
@@ -2990,7 +2990,7 @@ msgid ""
 "‘Steep like the slopes of Kal’mavrath, shiny like the most delicate armor "
 "and strong like our ancestors, that’s how the headquarters of Chat’Karuth "
 "presented itself to us.’"
-msgstr ""
+msgstr "»Stejl som skrænterne på Kal'mavrath, skinnende som den mest delikate rustning og stærk som vores forfædre, sådan præsenterede hovedkvarteret Chat'Karuth sig til os.«"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/barbarians/headquarters/helptexts.lua:13
@@ -3011,7 +3011,7 @@ msgstr "Hovedkvarteret er din hovedbygning."
 msgctxt "barbarians_building"
 msgid ""
 "‘I prefer the planks of a ship to any fortress, no matter how strong it is.’"
-msgstr ""
+msgstr "»Jeg foretrækker et skibs planker for enhver fæstning, aunset hvor stærk den er.«"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/barbarians/port/helptexts.lua:13
@@ -3033,7 +3033,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Berthron, chief military adviser of Chat’Karuth,<br>when they lost the "
 "headquarters in the battle around the heights of Kal’Megarath"
-msgstr ""
+msgstr "Berthron, ledende militærrådgiver for Chat’Karuth,<br>da de mistede hovedkvarteret i slaget omkring Kal’Megarath"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/empire/headquarters/helptexts.lua:16
@@ -3151,7 +3151,7 @@ msgstr "Denne stråmark vokser."
 #. TRANSLATORS: Helptext for a reed field
 #: ../../data/tribes/immovables/reedfield/ripe/helptexts.lua:4
 msgid "This reed field is ready for harvesting."
-msgstr ""
+msgstr "Denne stråmark er klar til høst."
 
 #. TRANSLATORS: Helptext for a reed field
 #: ../../data/tribes/immovables/reedfield/tiny/helptexts.lua:4
@@ -4656,7 +4656,7 @@ msgstr "Imperiets ild i smelteværker, rustnings- og våbensmedjer fodres normal
 msgctxt "frisians_ware"
 msgid ""
 "The fires of the brick kilns, furnaces and armor smithies are fed with coal."
-msgstr ""
+msgstr "Ilden i murstensovne, ovne og rustningsmedje fodres med kul."
 
 #. TRANSLATORS: Helptext for a ware: Corn
 #: ../../data/tribes/wares/corn/helptexts.lua:4
@@ -4687,7 +4687,7 @@ msgstr "Disse vidunderlige diamanter bruges til at bygge nogle eksklusive bygnin
 #: ../../data/tribes/wares/felling_ax/helptexts.lua:4
 msgctxt "ware"
 msgid "The felling ax is the tool to chop down trees."
-msgstr ""
+msgstr "Skovøksen er værktøjet til at fælde træer med."
 
 #. TRANSLATORS: Helptext for a ware: Felling Ax
 #: ../../data/tribes/wares/felling_ax/helptexts.lua:6
@@ -4696,7 +4696,7 @@ msgid ""
 "Felling axes are used by lumberjacks and produced in the metal workshop (but"
 " cease to be produced by the building if it is enhanced to an ax workshop "
 "and war mill)."
-msgstr ""
+msgstr "Skovøksen bruges af skovhuggere og fremstilles i metalfabrikken (men produktionen stopper hvis bygningen forbedres til et økseværksted og en krigsmølle)."
 
 #. TRANSLATORS: Helptext for a ware: Felling Ax
 #: ../../data/tribes/wares/felling_ax/helptexts.lua:8
@@ -4708,13 +4708,13 @@ msgstr "Skovøkser bruges af skovhuggere og fremstilles af smedjen."
 #: ../../data/tribes/wares/felling_ax/helptexts.lua:10
 msgctxt "empire_ware"
 msgid "Felling axes are used by lumberjacks and produced by the toolsmithy."
-msgstr ""
+msgstr "Skovøkser bruges af skovhuggere og fremstilles af værktøjssmedjen."
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:4
 msgctxt "ware"
 msgid "Fire tongs are the tools for smelting ores."
-msgstr ""
+msgstr "Ildtanger er værktøjerne for smeltning af malm."
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:6
@@ -4737,13 +4737,13 @@ msgid ""
 "They are used in the smelting works and produced by the metal workshop (but "
 "they cease to be produced by the building if it is enhanced to an ax "
 "workshop and war mill)."
-msgstr ""
+msgstr "De bruges i smelteværkerne og fremstilles af metalfabrikken (men produktionen stopper hvis bygningen forbedres til et økseværksted og krigsmølle)."
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:12
 msgctxt "empire_ware_fire_tongs"
 msgid "They are used in the smelting works and produced by the toolsmith."
-msgstr ""
+msgstr "De bruges i smelteværkerne og fremstilles af værktøjsmageren."
 
 #. TRANSLATORS: Helptext for a ware: Fish
 #: ../../data/tribes/wares/fish/helptexts.lua:4
@@ -4826,7 +4826,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Fruit are berries gathered from berry bushes by a fruit collector. They are "
 "used for rations and for feeding the fish at the aqua farms."
-msgstr ""
+msgstr "Frugt er bær indsamlet fra bærbuske af en frugtindsamler. De bruges til rationer og som fødegrundlag for fiskene i vandlandbrugene."
 
 #. TRANSLATORS: Helptext for a ware: Fur
 #: ../../data/tribes/wares/fur/helptexts.lua:4
@@ -4834,7 +4834,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Fur is won from reindeer in a reindeer farm. It is woven into cloth or "
 "turned into fur garments for soldiers."
-msgstr ""
+msgstr "Pels udvindes fra rensdyr i en rensdyrfarm. Det væves til klæde eller omdannes til pelsbeklædninger for soldater."
 
 #. TRANSLATORS: Helptext for a ware: Fur Garment
 #: ../../data/tribes/wares/fur_garment/helptexts.lua:4
@@ -4879,7 +4879,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "It is produced by the smelting works and used by the armor smithy, the "
 "weapon smithy and the gold spinning mill."
-msgstr ""
+msgstr "Det fremstilles af smelteværket og bruges af rustningssmedjen, våbensmedjen og guldspindemøllen."
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:8
@@ -4889,7 +4889,7 @@ msgid ""
 "smelting works and used as a precious building material and to produce "
 "different axes (in the war mill) and different parts of armor (in the helm "
 "smithy)."
-msgstr ""
+msgstr "Kun særdeles vigtige ting dekoreres med guld. Det fremstilles af smelteværker og bruges som et værdifuldt byggemateriale og til at fremstille forskellige økser (i krigsmøllen) og forskellige rustningsdele (i hjelmsmedjen)."
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:10
@@ -4898,7 +4898,7 @@ msgid ""
 "Only very important things are embellished with gold. It is produced by the "
 "furnace and is used to produce better swords and the best helmets. The best "
 "armor is also decorated with gold."
-msgstr ""
+msgstr "Kun meget vigtige ting forgyldes med guld. Det fremstilles af ovnen og bruges til at fremstille bedre sværd og de bedste hjelme. Den bedste rustning dekoreres også med guld."
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:12
@@ -4920,7 +4920,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Smelted in a smelting works, it turns into gold which is used as a precious "
 "building material and to produce weapons and armor."
-msgstr ""
+msgstr "Smeltet i et smelteværk, bliver det til guld, der bruges som et kostbart byggemateriale og til at fremstille våben og rustninger."
 
 #. TRANSLATORS: Helptext for a ware: Gold Ore
 #: ../../data/tribes/wares/gold_ore/helptexts.lua:8
@@ -4928,7 +4928,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Smelted in a smelting works, it turns into gold which is used as a precious "
 "building material and to produce weapons and armor."
-msgstr ""
+msgstr "Smeltet i et smelteværk, bliver det til guld, der bruges som et kostbart byggemateriale og til at fremstille våben og rustninger."
 
 #. TRANSLATORS: Helptext for a ware: Gold Ore
 #: ../../data/tribes/wares/gold_ore/helptexts.lua:10
@@ -4936,7 +4936,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Smelted in a furnace, it turns into gold which is used as a precious "
 "building material and to produce weapons and armor."
-msgstr ""
+msgstr "Smeltet i en ovn, bliver det til guld, der bruges som et kostbart byggemateriale og til at fremstille våben og rustninger."
 
 #. TRANSLATORS: Helptext for a ware: Gold Ore
 #: ../../data/tribes/wares/gold_ore/helptexts.lua:12
@@ -4944,7 +4944,7 @@ msgctxt "empire_ware"
 msgid ""
 "Smelted in a smelting works, it turns into gold which is used as a precious "
 "building material and to produce weapons and armor."
-msgstr ""
+msgstr "Smeltet i et smelteværk, bliver det til guld, der bruges som et kostbart byggemateriale og til at fremstille våben og rustninger."
 
 #. TRANSLATORS: Helptext for a ware: Gold Thread
 #: ../../data/tribes/wares/gold_thread/helptexts.lua:4
@@ -5148,7 +5148,7 @@ msgstr "De fremstilles af klejnsmeden."
 #: ../../data/tribes/wares/iron/helptexts.lua:4
 msgctxt "ware"
 msgid "Iron is smelted out of iron ores."
-msgstr ""
+msgstr "Jern smeltes ud af jernmalm."
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:6
@@ -5164,7 +5164,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "It is produced by the smelting works and used to produce weapons and tools "
 "in the metal workshop, ax workshop, war mill and helm smithy."
-msgstr ""
+msgstr "Den fremstilles af smelteværkerne og bruges til at fremstille våben og værktøjer i metalfabrikken, økseværkstedet, krigsmøllen og hjelmsmedjen."
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:10
@@ -5180,7 +5180,7 @@ msgctxt "frisians_ware"
 msgid ""
 "It is produced by the furnace. Tools and weapons are made of iron. It is "
 "also used as jewellery for fur garment armor to give it a silver shine."
-msgstr ""
+msgstr "Det fremstilles af ovnen. Værktøjer og våben er lavet af jern. Det bruges også til smykker for pelsbeklædninger i rustninger, så de får sølvglans."
 
 #. TRANSLATORS: Helptext for a ware: Iron Ore
 #: ../../data/tribes/wares/iron_ore/helptexts.lua:4
@@ -5192,7 +5192,7 @@ msgstr "Jermalm udvindes i jernminer."
 #: ../../data/tribes/wares/iron_ore/helptexts.lua:6
 msgctxt "atlanteans_ware"
 msgid "It is smelted in a smelting works to retrieve the iron."
-msgstr ""
+msgstr "Det smeltes i et smelteværk for at få ren jern."
 
 #. TRANSLATORS: Helptext for a ware: Iron Ore
 #: ../../data/tribes/wares/iron_ore/helptexts.lua:8
@@ -5204,7 +5204,7 @@ msgstr "Det smeltes i et smelteværk for at få jern."
 #: ../../data/tribes/wares/iron_ore/helptexts.lua:10
 msgctxt "frisians_ware"
 msgid "It is smelted in a furnace to retrieve the iron."
-msgstr ""
+msgstr "Det smeltes i en ovn for at udvinde jernet."
 
 #. TRANSLATORS: Helptext for a ware: Iron Ore
 #: ../../data/tribes/wares/iron_ore/helptexts.lua:12
@@ -5219,7 +5219,7 @@ msgid ""
 "Kitchen tools are needed for preparing rations, snacks and meals. Be sure to"
 " have a metal workshop to produce this basic tool (but it ceases to be "
 "produced by the building if it is enhanced to an ax workshop and war mill)."
-msgstr ""
+msgstr "Køkkenredskaber er krævet for at tilberede rationer, mellemmåltider og måltider. Sikr dig, at du har en metalfabrik til at fremstille dette grundlæggende værktøj (men det holder op med at blive fremstillet af bygningen, hvis den opgraderes til et økseværksted eller en våbenfabrik)."
 
 #. TRANSLATORS: Helptext for a ware: Kitchen Tools
 #: ../../data/tribes/wares/kitchen_tools/helptexts.lua:6
@@ -5227,7 +5227,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Kitchen tools are needed for preparing rations and meals. The smoker also "
 "needs them."
-msgstr ""
+msgstr "Køkkenredskaber er krævet for at kunne forberede rationer og måltider. Røgeriarbejderen skal også bruge dem."
 
 #. TRANSLATORS: Helptext for a ware: Kitchen Tools
 #: ../../data/tribes/wares/kitchen_tools/helptexts.lua:8
@@ -5235,7 +5235,7 @@ msgctxt "empire_ware"
 msgid ""
 "Kitchen tools are needed for preparing rations and meals. They are produced "
 "in a toolsmithy and used in taverns and inns."
-msgstr ""
+msgstr "Køkkenredskaber er krævet for at kunne forberede rationer og måltider. De fremstilles i en værktøjssmedje og bruges i værtshuse og kroer."
 
 #. TRANSLATORS: Helptext for a ware: Log
 #: ../../data/tribes/wares/log/helptexts.lua:4
@@ -5307,7 +5307,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Mead is produced by mead breweries. Soldiers drink mead during advanced "
 "training."
-msgstr ""
+msgstr "Mjød fremstilles af mjødbryggerierne. Soldater drikker mjød under avanceret træning."
 
 #. TRANSLATORS: Helptext for a ware: Meal
 #: ../../data/tribes/wares/meal/helptexts.lua:4
@@ -5331,7 +5331,7 @@ msgctxt "frisians_ware"
 msgid ""
 "A meal is made out of honey bread and beer and either smoked fish or meat. "
 "It is consumed by miners in deep mines."
-msgstr ""
+msgstr "Et måltid udgøres af et honningbrød og øl og enten røget fisk eller kød. Det spises af minearbrejdere i dybe miner."
 
 #. TRANSLATORS: Helptext for a ware: Meat
 #: ../../data/tribes/wares/meat/helptexts.lua:4
@@ -5486,7 +5486,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Rations are produced in taverns and drinking halls out of something to eat: "
 "Fruit, bread or smoked meat or fish."
-msgstr ""
+msgstr "Rationer fremstilles i værtshuse og drikkehaller fra noget spiseligt: Frugt, brød eller røget kød eller fisk."
 
 #. TRANSLATORS: Helptext for a ware: Reed
 #: ../../data/tribes/wares/reed/helptexts.lua:4
@@ -5503,7 +5503,7 @@ msgid ""
 "Reed is grown in a reed farm. Nothing is better suited to make roofs "
 "waterproof. It is also used to make buckets and fishing nets as well as "
 "cloth."
-msgstr ""
+msgstr "Strå vokser på et strålandbrug. Intet er bedre egnet til at gøre loftet vandtæt. Det bruges også til at lave spande og fiskenet samt klæde."
 
 #. TRANSLATORS: Helptext for a ware: Saw
 #: ../../data/tribes/wares/saw/helptexts.lua:4
@@ -5631,7 +5631,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Fish is smoked in a smokery. Smoked fish is then consumed by soldiers in "
 "training or turned into rations and meals for miners and scouts."
-msgstr ""
+msgstr "Fisk ryges i et røgeri. Røget fisk fortæres af soldater under træning eller omdannes til rationer og måltider for minearbejdere og spejdere."
 
 #. TRANSLATORS: Helptext for a ware: Smoked Meat
 #: ../../data/tribes/wares/smoked_meat/helptexts.lua:4
@@ -5648,7 +5648,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Meat is smoked in a smokery. Smoked meat is then consumed by soldiers in "
 "training or turned into rations and meals for miners and scouts."
-msgstr ""
+msgstr "Kød ryges i et røgere. Røget kød spises så af soldater under træning eller omdannes til rationer og måltider for minearbejdere og spejdere."
 
 #. TRANSLATORS: Helptext for a ware: Snack
 #: ../../data/tribes/wares/snack/helptexts.lua:4
@@ -5726,7 +5726,7 @@ msgctxt "frisians_ware"
 msgid ""
 "The broadsword is the weapon used by level 2 soldiers. Level 5 soldiers are "
 "equipped with a broadsword and a double-edged sword."
-msgstr ""
+msgstr "Bredsværdet er våbenet brugt af niveau 2-soldater. Niveau  5-soldater er udstyret med et bredsværd og et sværd med dobbeltæg."
 
 #. TRANSLATORS: Helptext for a ware: Double-edged Sword
 #: ../../data/tribes/wares/sword_double/helptexts.lua:4
@@ -5936,7 +5936,7 @@ msgstr "Planter og høster majsmarker."
 #: ../../data/tribes/workers/frisians/ferry/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Ships wares across narrow rivers."
-msgstr ""
+msgstr "Sender varer over smalle floder."
 
 #. TRANSLATORS: Helptext for a worker: Fish Breeder
 #: ../../data/tribes/workers/atlanteans/fishbreeder/helptexts.lua:3
@@ -6087,7 +6087,7 @@ msgstr "Fælder træer."
 #: ../../data/tribes/workers/barbarians/baker/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Bakes pitta bread for the miners, soldiers and scouts."
-msgstr ""
+msgstr "Bager pittabrød til minearbejdere, soldater og spejdere."
 
 #. TRANSLATORS: Helptext for a worker: Master Blacksmith
 #. TRANSLATORS: Helptext for a worker: Blacksmith

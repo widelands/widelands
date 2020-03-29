@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-11-30 12:38+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-03-28 05:00+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
 "Last-Translator: tamanegi, 2018\n"
 "Language-Team: Japanese (https://www.transifex.com/widelands/teams/35159/ja/)\n"
@@ -910,45 +910,51 @@ msgstr ""
 "幸いにも大洪水は西から迫っているようですな。まだ急げばなんとかなりますぞ！港と造船所以外は必要ありませんぞ ── "
 "おっと、船の帆を作るために、カヤと毛皮から丈夫な布を織る織物工房は必要でしたな。それら必要な物資がそろえば港から探検に出発できますぞ。あとは全力を尽くすのみですな！それ以上については、神々の加護にすがるしかありませんな！"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:410
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:412
 msgid "Don’t Forget the Soldiers"
 msgstr "兵士を忘れずに"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:411
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:413
 msgid "Soldiers to the port!"
 msgstr "兵士を港へ！"
 
 #. TRANSLATORS: Reebaud – rising water
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:413
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:415
+#, lua-format
 msgid ""
 "I almost forgot in this haste – whereever we will land, we’ll need soldiers "
-"to secure and expand our new colony. There’s space for up to ten soldiers on"
-" our ship, if they don’t mind being all crammed together. Let’s send some to"
-" the port when it’s completed, so they can embark when we set sail!"
-msgstr ""
+"to secure and expand our new colony. There’s space for up to %d soldier on "
+"our ship, if they don’t mind being all crammed together. Let’s send some to "
+"the port when it’s completed, so they can embark when we set sail!"
+msgid_plural ""
+"I almost forgot in this haste – whereever we will land, we’ll need soldiers "
+"to secure and expand our new colony. There’s space for up to %d soldiers on "
+"our ship, if they don’t mind being all crammed together. Let’s send some to "
+"the port when it’s completed, so they can embark when we set sail!"
+msgstr[0] ""
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:417
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:421
 msgid "Victory"
 msgstr "勝利"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:418
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:422
 msgid "We escaped!"
 msgstr "脱出に成功！"
 
 #. TRANSLATORS: Reebaud – victory
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:420
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:424
 msgid ""
 "The gods have answered our prayers. We will escape the island’s drowning, "
 "and I am confident we will be able to build a new home again in a more "
 "peaceful corner of this world!"
 msgstr "神々は我々の願いに応えてくれた。沈みゆく島より我々は脱出する。きっと次はもっと平和な世界の片隅に新たな住処を見つけられるはずだ！"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:421
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:425
 msgid "Congratulations"
 msgstr "おめでとうございます"
 
 #. TRANSLATORS: Reebaud – victory
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:423
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:427
 msgid ""
 "You have completed this mission. You may move on to the next scenario now to"
 " help us build a new home, far from the false God’s vengeful reach…"
