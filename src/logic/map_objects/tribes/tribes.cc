@@ -217,15 +217,6 @@ const TribeDescr* Tribes::get_tribe_descr(DescriptionIndex tribeindex) const {
 	return tribes_->get_mutable(tribeindex);
 }
 
-void Tribes::set_ware_type_has_demand_check(DescriptionIndex wareindex,
-                                            const std::string& tribename) const {
-	wares_->get_mutable(wareindex)->set_has_demand_check(tribename);
-}
-
-void Tribes::set_worker_type_has_demand_check(DescriptionIndex workerindex) const {
-	workers_->get_mutable(workerindex)->set_has_demand_check();
-}
-
 // ************************ Loading *************************
 
 void Tribes::register_scenario_tribes(FileSystem* filesystem) {

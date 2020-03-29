@@ -65,6 +65,15 @@ public:
 
 	Building& create_object() const override;
 
+	// List of wares to register having economy checks. Parsed by the tribes during postload and must
+	// be nullptr after loading has finished
+	std::set<DescriptionIndex>* ware_demand_checks() const;
+	// List of workers to register having economy checks. Parsed by the tribes during postload and
+	// must be nullptr after loading has finished
+	std::set<DescriptionIndex>* worker_demand_checks() const;
+	// Clear ware and worker demand check info
+	void clear_demand_checks();
+
 	uint32_t nr_working_positions() const {
 		uint32_t result = 0;
 		for (const auto& working_pos : working_positions()) {
@@ -135,6 +144,8 @@ public:
 	}
 
 private:
+	std::unique_ptr<std::set<DescriptionIndex>> ware_demand_checks_;
+	std::unique_ptr<std::set<DescriptionIndex>> worker_demand_checks_;
 	BillOfMaterials working_positions_;
 	BillOfMaterials input_wares_;
 	BillOfMaterials input_workers_;

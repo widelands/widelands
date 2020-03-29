@@ -672,10 +672,10 @@ int LuaMapView::set_statistics(lua_State* L) {
 /* RST
    .. attribute:: is_building_road
 
-      (RO) Is the player currently in road building mode?
+      (RO) Is the player currently in road/waterway building mode?
 */
 int LuaMapView::get_is_building_road(lua_State* L) {
-	lua_pushboolean(L, get()->is_building_road());
+	lua_pushboolean(L, get()->in_road_building_mode());
 	return 1;
 }
 
@@ -714,7 +714,7 @@ int LuaMapView::click(lua_State* L) {
 }
 
 /* RST
-   .. method:: start_road_building(flag)
+   .. method:: start_road_building(flag[, waterway = false])
 
       Enters the road building mode as if the player has clicked
       the flag and chosen build road. It will also warp the mouse
@@ -722,11 +722,12 @@ int LuaMapView::click(lua_State* L) {
       building mode.
 
       :arg flag: :class:`wl.map.Flag` object to start building from.
+      :arg waterway: if `true`, start building a waterway rather than a road
 */
 // UNTESTED
 int LuaMapView::start_road_building(lua_State* L) {
 	InteractiveBase* me = get();
-	if (me->is_building_road()) {
+	if (me->in_road_building_mode()) {
 		report_error(L, "Already building road!");
 	}
 
@@ -734,7 +735,9 @@ int LuaMapView::start_road_building(lua_State* L) {
 	   (*get_user_class<LuaMaps::LuaFlag>(L, 2))->get(L, get_egbase(L))->get_position();
 
 	me->map_view()->mouse_to_field(starting_field, MapView::Transition::Jump);
-	me->start_build_road(starting_field, me->get_player()->player_number());
+	me->start_build_road(starting_field, me->get_player()->player_number(),
+	                     lua_gettop(L) > 2 && luaL_checkboolean(L, 3) ? RoadBuildingType::kWaterway :
+	                                                                    RoadBuildingType::kRoad);
 
 	return 0;
 }
@@ -748,7 +751,7 @@ int LuaMapView::start_road_building(lua_State* L) {
 // UNTESTED
 int LuaMapView::abort_road_building(lua_State* /* L */) {
 	InteractiveBase* me = get();
-	if (me->is_building_road()) {
+	if (me->in_road_building_mode()) {
 		me->abort_build_road();
 	}
 	return 0;

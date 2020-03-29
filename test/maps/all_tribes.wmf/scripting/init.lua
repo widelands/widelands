@@ -118,44 +118,44 @@ end
 function place_initial_militarysites(map, sf, player, buildingname)
    -- Left
    local building = place_militarysite(player, buildingname, sf, 506, 0)
-   connected_road(player, sf.immovable.flag, "l,l|l,l|l,l")
+   connected_road("normal", player, sf.immovable.flag, "l,l|l,l|l,l")
 
    -- Right
    building = place_militarysite(player, buildingname, sf, 6, 0)
-   connected_road(player, sf.immovable.flag, "r,r|r,r|r,r")
+   connected_road("normal", player, sf.immovable.flag, "r,r|r,r|r,r")
 
    -- Bottom
-   connected_road(player, sf.immovable.flag, "bl,bl|bl,br|bl,br|br,bl,bl")
+   connected_road("normal", player, sf.immovable.flag, "bl,bl|bl,br|bl,br|br,bl,bl")
    building = place_militarysite(player, buildingname, sf, 511, 9)
 
    -- Mountain
    building = place_militarysite(player, buildingname, sf, 504, 14)
-   connected_road(player, building.flag, "tr,tr,r|r,r|r,tr|tr,tr")
+   connected_road("normal", player, building.flag, "tr,tr,r|r,r|r,tr|tr,tr")
 
    building = place_militarysite(player, buildingname, sf, 499, 509)
-   connected_road(player, building.flag, "r,r,r|br,br|br,r|r,r")
+   connected_road("normal", player, building.flag, "r,r,r|br,br|br,r|r,r")
 
    building = place_militarysite(player, buildingname, sf, 495, 14)
-   connected_road(player, building.flag, "r,r,r|r,r|r,r|r,r")
+   connected_road("normal", player, building.flag, "r,r,r|r,r|r,r|r,r")
 
    -- Water
    building = place_militarysite(player, buildingname, sf, 13, 504)
-   connected_road(player, building.flag, "bl,bl,bl|bl,bl|bl,bl|bl,l|l,l")
+   connected_road("normal", player, building.flag, "bl,bl,bl|bl,bl|bl,bl|bl,l|l,l")
 
    building = place_militarysite(player, buildingname, sf, 5, 18)
-   connected_road(player, building.flag, "l,l,tl|tl,tl|tl,tl|tl,tl|tl,tl")
+   connected_road("normal", player, building.flag, "l,l,tl|tl,tl|tl,tl|tl,tl|tl,tl")
 
    building = place_militarysite(player, buildingname, sf, 21, 509)
-   connected_road(player, building.flag, "tr,tr|tl,l|l,tl|l,l|tl,l|l,l")
+   connected_road("normal", player, building.flag, "tr,tr|tl,l|l,tl|l,l|tl,l|l,l")
 
    building = place_militarysite(player, buildingname, sf, 12, 19)
-   connected_road(player, building.flag, "l,l,l|l,tl|l,l")
+   connected_road("normal", player, building.flag, "l,l,l|l,tl|l,l")
 
    building = place_militarysite(player, buildingname, sf, 20, 18)
-   connected_road(player, building.flag, "l,l,l|l,l|l,l|l,bl")
+   connected_road("normal", player, building.flag, "l,l,l|l,l|l,l|l,bl")
 
    building = place_militarysite(player, buildingname, sf, 26, 4)
-   connected_road(player, building.flag, "tr,tr,tl|tl,tl|tl,tl|l,tl|l,tl")
+   connected_road("normal", player, building.flag, "tr,tr,tl|tl,tl|tl,tl|l,tl|l,tl")
 end
 
 function place_player_ship(playernumber)
