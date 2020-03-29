@@ -47,12 +47,14 @@ int32_t ScenarioInfrastructureTool::handle_click_impl(const Widelands::NodeAndTr
 	switch (item_to_place.first) {
 	case Widelands::MapObjectType::BUILDING: {
 		Widelands::FormerBuildings b;
+		if (!args->infrastructure_constructionsite) {
+			b.push_back(std::make_pair(item_to_place.second, ""));
+		}
 		if (args->force) {
 			if (args->infrastructure_constructionsite &&
 			    egbase.tribes().get_building_descr(item_to_place.second)->is_buildable()) {
 				mo = &player.force_csite(center.node, item_to_place.second);
 			} else {
-				b.push_back(std::make_pair(item_to_place.second, ""));
 				mo = &player.force_building(center.node, b);
 			}
 		} else {
