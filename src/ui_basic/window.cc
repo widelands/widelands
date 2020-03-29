@@ -39,6 +39,10 @@ namespace UI {
 /// Height the top border must have
 #define TP_B_PIXMAP_THICKNESS 20
 
+constexpr int16_t kWindowTitlebarButtonsSize = 16;
+constexpr int16_t kWindowTitlebarButtonsSpacing = 2;
+constexpr int16_t kWindowTitlebarButtonsYPos = (TP_B_PIXMAP_THICKNESS + kWindowTitlebarButtonsSize) / -2)
+
 /// Height the bottom border must have
 #define BT_B_PIXMAP_THICKNESS 20
 
@@ -106,28 +110,28 @@ Window::Window(Panel* const parent,
      fastclick_panel_(nullptr),
      button_close_(new Button(this,
                               "b_close",
-                              get_w() - 2 * TP_B_PIXMAP_THICKNESS,
-                              -TP_B_PIXMAP_THICKNESS,
-                              TP_B_PIXMAP_THICKNESS,
-                              TP_B_PIXMAP_THICKNESS,
+                              get_w() - TP_B_PIXMAP_THICKNESS - kWindowTitlebarButtonsSize,
+                              kWindowTitlebarButtonsYPos,
+                              kWindowTitlebarButtonsSize,
+                              kWindowTitlebarButtonsSize,
                               ButtonStyle::kWuiSecondary,
                               g_gr->images().get(kTemplateDir + "wui/window_close.png"),
                               _("Close"))),
      button_pin_(new Button(this,
                             "b_pin",
                             -TP_B_PIXMAP_THICKNESS,
-                            -TP_B_PIXMAP_THICKNESS,
-                            TP_B_PIXMAP_THICKNESS,
-                            TP_B_PIXMAP_THICKNESS,
+                            kWindowTitlebarButtonsYPos,
+                            kWindowTitlebarButtonsSize,
+                            kWindowTitlebarButtonsSize,
                             ButtonStyle::kWuiSecondary,
                             g_gr->images().get(kWindowImageUnpinned),
                             "")),
      button_minimize_(new Button(this,
                                  "b_minimize",
-                                 0,
-                                 -TP_B_PIXMAP_THICKNESS,
-                                 TP_B_PIXMAP_THICKNESS,
-                                 TP_B_PIXMAP_THICKNESS,
+                                 kWindowTitlebarButtonsSpacing + kWindowTitlebarButtonsSize - TP_B_PIXMAP_THICKNESS,
+                                 kWindowTitlebarButtonsYPos,
+                                 kWindowTitlebarButtonsSize,
+                                 kWindowTitlebarButtonsSize,
                                  ButtonStyle::kWuiSecondary,
                                  g_gr->images().get(kWindowImageMinimize),
                                  "")) {
@@ -222,11 +226,11 @@ void Window::layout() {
 		center_panel_->set_size(get_inner_w(), get_inner_h());
 	}
 	button_close_->set_pos(
-	   Vector2i(get_w() - TP_B_PIXMAP_THICKNESS * (docked_right_ ? 3 : 2), -TP_B_PIXMAP_THICKNESS));
+	   Vector2i(get_w() - kWindowTitlebarButtonsSize - TP_B_PIXMAP_THICKNESS * (docked_right_ ? 2 : 1), kWindowTitlebarButtonsYPos);
 	button_pin_->set_pos(
-	   Vector2i(TP_B_PIXMAP_THICKNESS * (docked_left_ ? 0 : -1), -TP_B_PIXMAP_THICKNESS));
+	   Vector2i(TP_B_PIXMAP_THICKNESS * (docked_left_ ? 0 : -1), kWindowTitlebarButtonsYPos));
 	button_minimize_->set_pos(
-	   Vector2i(TP_B_PIXMAP_THICKNESS * (docked_left_ ? 1 : 0), -TP_B_PIXMAP_THICKNESS));
+	   Vector2i(kWindowTitlebarButtonsSize + kWindowTitlebarButtonsSpacing - TP_B_PIXMAP_THICKNESS * (docked_left_ ? 0 : 1), kWindowTitlebarButtonsYPos));
 }
 
 /**
