@@ -42,23 +42,63 @@ tribes:new_worker_type {
       plant = {
          "findspace=size:any radius:3 space",
          "walk=coords",
-         "animate=planting 6000",
+         "animate=dig 6000",
          "plant=attrib:seed_cocoa",
-         "animate=planting 6000",
+         "animate=planting_harvesting 6000",
          "return"
       },
       harvest = {
          "findobject=attrib:ripe_cocoa radius:3",
          "walk=object",
-         "animate=harvesting 10000",
+         "animate=planting_harvesting 8000",
          "callobject=harvest",
-         "animate=gathering 4000",
+         "animate=planting_harvesting 6000",
          "createware=cocoa_beans",
          "return"
       }
    },
 
    animation_directory = dirname,
-   ware_hotspot = {0, 20},
-   animations = animations,
+   ware_hotspot = {0, 29},
+   spritesheets = {
+      walk = {
+         directional = true,
+         hotspot = {17, 28},
+         fps = 15,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      },
+      walkload = {
+         directional = true,
+         hotspot = {17, 31},
+         fps = 15,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      },
+      idle = {
+         basename = "walk_se",
+         hotspot = {17, 28},
+         fps = 15,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      },
+      dig = {
+         hotspot = {14, 23},
+         fps = 15,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      },
+      planting_harvesting = {
+         -- one animation that looks good enough both for planting and for harvesting ;)
+         hotspot = {11, 18},
+         fps = 15,
+         frames = 15,
+         columns = 5,
+         rows = 3
+      }
+   },
 }
