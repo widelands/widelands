@@ -177,9 +177,8 @@ ProductionProgram::parse_bill_of_materials(const std::vector<std::string>& argum
 	for (const std::string& argument : arguments) {
 		const std::pair<std::string, std::string> produceme = read_key_value_pair(argument, ':', "1");
 
-		const DescriptionIndex index = ww == WareWorker::wwWARE ?
-		                                  tribes.load_ware(produceme.first) :
-		                                  tribes.load_worker(produceme.first);
+		const DescriptionIndex index = ww == WareWorker::wwWARE ? tribes.load_ware(produceme.first) :
+		                                                          tribes.load_worker(produceme.first);
 
 		// Verify the building outputs
 		switch (ww) {
