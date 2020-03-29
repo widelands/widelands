@@ -152,8 +152,9 @@ void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) c
 			game.create_immovable_with_name(
 			   c, type_name, owner_type, player, nullptr /* former_building_descr */);
 		}
-	} else
+	} else {
 		immovable.program_step(game);
+    }
 }
 
 ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments,
