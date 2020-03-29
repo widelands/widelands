@@ -82,10 +82,6 @@ public:
 	WorkerDescr* get_mutable_worker_descr(DescriptionIndex worker_index) const;
 	const TribeDescr* get_tribe_descr(DescriptionIndex tribe_index) const;
 
-	void set_ware_type_has_demand_check(DescriptionIndex ware_index,
-	                                    const std::string& tribename) const;
-	void set_worker_type_has_demand_check(DescriptionIndex worker_index) const;
-
 	// ************************ Loading *************************
 
 	/// Define a scenario tribe directory, search it for 'register.lua' files and register their
