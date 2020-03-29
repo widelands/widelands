@@ -371,7 +371,7 @@ DescriptionIndex Tribes::load_worker(const std::string& workername) {
 	return safe_worker_index(workername);
 }
 
-void Tribes::try_load_ware_or_worker(const std::string& objectname) {
+void Tribes::try_load_ware_or_worker(const std::string& objectname) const {
 	Notifications::publish(
 	   NoteMapObjectDescription(objectname, NoteMapObjectDescription::LoadType::kObject));
 	// Check if ware/worker exists already and if not, try to load it.

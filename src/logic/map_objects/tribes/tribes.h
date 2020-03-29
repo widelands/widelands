@@ -112,7 +112,7 @@ public:
 	DescriptionIndex load_worker(const std::string& workername);
 	/// Try to load a ware/worker that has been registered previously with 'register_description'
 	/// when we don't know whether it's a ware or worker
-	void try_load_ware_or_worker(const std::string& objectname);
+	void try_load_ware_or_worker(const std::string& objectname) const;
 
 	uint32_t get_largest_workarea() const;
 	void increase_largest_workarea(uint32_t workarea);
