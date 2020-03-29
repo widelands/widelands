@@ -41,7 +41,8 @@ namespace UI {
 
 constexpr int16_t kWindowTitlebarButtonsSize = 16;
 constexpr int16_t kWindowTitlebarButtonsSpacing = 2;
-constexpr int16_t kWindowTitlebarButtonsYPos = (TP_B_PIXMAP_THICKNESS + kWindowTitlebarButtonsSize) / -2;
+constexpr int16_t kWindowTitlebarButtonsYPos =
+   (TP_B_PIXMAP_THICKNESS + kWindowTitlebarButtonsSize) / -2;
 
 /// Height the bottom border must have
 #define BT_B_PIXMAP_THICKNESS 20
@@ -226,12 +227,16 @@ void Window::layout() {
 		center_panel_->set_pos(Vector2i::zero());
 		center_panel_->set_size(get_inner_w(), get_inner_h());
 	}
-	button_close_->set_pos(
-	   Vector2i(get_w() + kWindowTitlebarButtonsYPos - TP_B_PIXMAP_THICKNESS * (docked_right_ ? 2 : 1), kWindowTitlebarButtonsYPos));
+	button_close_->set_pos(Vector2i(
+	   get_w() + kWindowTitlebarButtonsYPos - TP_B_PIXMAP_THICKNESS * (docked_right_ ? 2 : 1),
+	   kWindowTitlebarButtonsYPos));
 	button_pin_->set_pos(
-	   Vector2i(kWindowTitlebarButtonsYPos + TP_B_PIXMAP_THICKNESS * (docked_left_ ? 1 : 0), kWindowTitlebarButtonsYPos));
-	button_minimize_->set_pos(
-	   Vector2i(kWindowTitlebarButtonsYPos + kWindowTitlebarButtonsSize + kWindowTitlebarButtonsSpacing + TP_B_PIXMAP_THICKNESS * (docked_left_ ? 1 : 0), kWindowTitlebarButtonsYPos));
+	   Vector2i(kWindowTitlebarButtonsYPos + TP_B_PIXMAP_THICKNESS * (docked_left_ ? 1 : 0),
+	            kWindowTitlebarButtonsYPos));
+	button_minimize_->set_pos(Vector2i(kWindowTitlebarButtonsYPos + kWindowTitlebarButtonsSize +
+	                                      kWindowTitlebarButtonsSpacing +
+	                                      TP_B_PIXMAP_THICKNESS * (docked_left_ ? 1 : 0),
+	                                   kWindowTitlebarButtonsYPos));
 }
 
 /**
