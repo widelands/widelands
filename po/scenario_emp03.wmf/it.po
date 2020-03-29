@@ -1,19 +1,20 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
 # Airina Santonocito <airina.santonocito@gmail.com>, 2017
 # Mat V <enthusedquill6@gmail.com>, 2017
 # Guybrush88 <erpizzo@alice.it>, 2019
+# Filippo Montano, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-03-20 06:16+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2019\n"
+"Last-Translator: Filippo Montano, 2020\n"
 "Language-Team: Italian (https://www.transifex.com/widelands/teams/35159/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -50,6 +51,8 @@ msgid ""
 "Build a quarry close to the abundant rocks to free some building plots and "
 "get some valuable resources."
 msgstr ""
+"Costruisci una cava accanto all'abbondanza di rocce per liberare spazi di "
+"costruzione ed ottenere alcune importanti risorse."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:65
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
@@ -73,7 +76,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:74
 msgid "Lower the demand for marble columns to 4"
-msgstr ""
+msgstr "Riduci la richiesta di colonne di marmo a 4"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:76
 msgid "Lower Demand for Marble Columns"
@@ -84,6 +87,9 @@ msgid ""
 "Lower the demand for marble columns in the economy settings to four. This "
 "will help to save some marble for buildings."
 msgstr ""
+"Riduci la richiesta di colonne di marmo nelle impostazioni economiche a "
+"quattro. Questo aiuterà a conservare alcuni pezzi di marmo per le "
+"costruzioni."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:78
 msgid ""
@@ -103,6 +109,8 @@ msgstr "Spazio per il porto"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:87
 msgid "Search for a port space in order to regain access to the sea."
 msgstr ""
+"Ricerca un punto per costruire un porto, per riconquistare l'accesso al "
+"mare."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:93
 msgid "Build a port and a shipyard on the Island"
@@ -133,6 +141,8 @@ msgstr "Produzione di grano"
 msgid ""
 "Produce at least 50 sheaves of wheat to get your wool production started."
 msgstr ""
+"Produci almeno 50 covoni di grano per poter poter iniziare la produzione "
+"della lana."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:111
 msgid "Produce cloth for building our first ship"
@@ -147,6 +157,8 @@ msgid ""
 "Now turn all the wheat into at least 50 bales of wool and then use the wool "
 "to weave cloth in order to build a ship."
 msgstr ""
+"Ora trasforma tutto il tuo grano in almeno 50 balle di lana e quindi usa la "
+"lana per tessere stoffe, per poter infine costruire una nave."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:120
 msgid "Build 2 ports on distant islands"
@@ -156,23 +168,27 @@ msgstr "Costruisci 2 porti su isole distanti"
 #. them
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid "Build two Expedition Ports"
-msgstr ""
+msgstr "Costruisci due porti per Spedizioni"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:124
 msgid ""
 "Explore the island in the south. Use an expedition to build a port there. "
 "Afterwards, try to find some mining resources."
 msgstr ""
+"Esplora l'isola a meridione. Usa una spedizione per costruirvi un porto. "
+"Dopodichè, cerca qualche risorsa mineraria."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:125
 msgid ""
 "Send a ship northwards to gather some intelligence about the Barbarians. Try"
 " to build a port on the island and found an outpost."
 msgstr ""
+"Invia una nave verso nord per scoprire informazioni a proposito dei Barbari."
+" Prova a costruire un porto sull'isola e crea un avamposto."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:131
 msgid "Produce gold to send out expeditions"
-msgstr ""
+msgstr "Produci dell'oro per inviare delle spedizioni"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:133
 msgid "Gold Production"
@@ -182,6 +198,7 @@ msgstr "Produzione d'oro"
 msgid ""
 "Produce at least six bars of gold to be able to colonize your vicinity."
 msgstr ""
+"Produci almeno sei barre di oro per poter poi colonizzare le zone vicine."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:140
 msgid "Defeat the Barbarians"
@@ -193,15 +210,15 @@ msgstr "Sconfiggi il nemico"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:143
 msgid "End the Barbarians’ existence in this part of the world."
-msgstr ""
+msgstr "Poni fine all'esistenza dei Barbari in questa parte del mondo."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:149
 msgid "Explore further and build ports"
-msgstr ""
+msgstr "Esplora ancora e costruisci dei porti"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:151
 msgid "Explore Additional Islands and Search for Port Spaces"
-msgstr ""
+msgstr "Esplora ulteriori isole e cerca altri spazi portuali"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:152
 msgid ""
