@@ -9,7 +9,7 @@ run(function()
    assert_equal(5, hq:get_workers("barbarians_miner_chief"))
 
    -- This mine needs a miner, a chief miner and a master miner
-   p1:place_road(p1:place_flag(map:get_field(25,22)), "bl", "bl", "bl", "bl")
+   p1:place_road("normal", p1:place_flag(map:get_field(25,22)), "bl", "bl", "bl", "bl")
    local mine = p1:place_building("barbarians_coalmine_deeper", wl.Game().map:get_field(24, 21), false, true)
 
    sleep(1000)
