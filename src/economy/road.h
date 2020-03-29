@@ -92,6 +92,9 @@ struct Road : public RoadBase {
 		return busy_;
 	}
 
+	// Use in the editor or from Lua scripting only!
+	void set_busy(EditorGameBase& e, bool);
+
 protected:
 	bool is_bridge(const EditorGameBase&, const FCoords&, uint8_t) const override;
 	RoadSegment road_type_for_drawing() const override;
