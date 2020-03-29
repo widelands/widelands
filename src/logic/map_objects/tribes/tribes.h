@@ -126,10 +126,6 @@ public:
 	const WorkerDescr* get_worker_descr(DescriptionIndex worker_index) const;
 	const TribeDescr* get_tribe_descr(DescriptionIndex tribe_index) const;
 
-	void set_ware_type_has_demand_check(const DescriptionIndex& ware_index,
-	                                    const std::string& tribename) const;
-	void set_worker_type_has_demand_check(const DescriptionIndex& worker_index) const;
-
 	/// Load tribes' graphics
 	void load_graphics();
 
@@ -140,6 +136,8 @@ public:
 
 private:
 	void postload_calculate_trainingsites_proportions();
+	void postload_register_economy_demand_checks(BuildingDescr& building_descr,
+	                                             const TribeDescr& tribe_descr);
 
 	std::unique_ptr<DescriptionMaintainer<BuildingDescr>> buildings_;
 	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> immovables_;
