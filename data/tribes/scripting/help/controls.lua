@@ -99,8 +99,6 @@ return {
                dl(help_format_hotkey(pgettext("hotkey", "Ctrl + F11")), _"Take a screenshot") ..
                toggle_fullscreen_hotkey ..
                -- TRANSLATORS: This is an access key combination.
-               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + F10")), _"Quit the game immediately") ..
-               -- TRANSLATORS: This is an access key combination.
                dl(help_format_hotkey(pgettext("hotkey", "F6")), _"Show the debug console (only in debug-builds)")
          ) ..
 
