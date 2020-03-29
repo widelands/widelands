@@ -188,8 +188,9 @@ IFont& FontCache::get_font(NodeStyle* ns) {
 
 	FontDescr fd = {ns->font_face, font_size};
 	FontMap::iterator i = fontmap_.find(fd);
-	if (i != fontmap_.end())
+	if (i != fontmap_.end()) {
 		return *i->second;
+	}
 
 	std::unique_ptr<IFont> font;
 	try {
@@ -1201,22 +1202,30 @@ public:
 
 	void enter() override {
 		const AttrMap& a = tag_.attrs();
-		if (a.has("color"))
+		if (a.has("color")) {
 			nodestyle_.font_color = a["color"].get_color();
-		if (a.has("size"))
+		}
+		if (a.has("size")) {
 			nodestyle_.font_size = a["size"].get_int();
-		if (a.has("face"))
+		}
+		if (a.has("face")) {
 			nodestyle_.font_face = a["face"].get_string();
-		if (a.has("bold"))
+		}
+		if (a.has("bold")) {
 			nodestyle_.font_style |= a["bold"].get_bool() ? IFont::BOLD : 0;
-		if (a.has("italic"))
+		}
+		if (a.has("italic")) {
 			nodestyle_.font_style |= a["italic"].get_bool() ? IFont::ITALIC : 0;
-		if (a.has("underline"))
+		}
+		if (a.has("underline")) {
 			nodestyle_.font_style |= a["underline"].get_bool() ? IFont::UNDERLINE : 0;
-		if (a.has("shadow"))
+		}
+		if (a.has("shadow")) {
 			nodestyle_.font_style |= a["shadow"].get_bool() ? IFont::SHADOW : 0;
-		if (a.has("ref"))
+		}
+		if (a.has("ref")) {
 			nodestyle_.reference = a["ref"].get_string();
+		}
 	}
 };
 
@@ -1233,8 +1242,9 @@ public:
 
 	void enter() override {
 		const AttrMap& a = tag_.attrs();
-		if (a.has("indent"))
+		if (a.has("indent")) {
 			indent_ = a["indent"].get_int();
+		}
 		if (a.has("align")) {
 			const std::string align = a["align"].get_string();
 			if (align == "right") {
@@ -1256,8 +1266,9 @@ public:
 				nodestyle_.valign = UI::Align::kTop;
 			}
 		}
-		if (a.has("spacing"))
+		if (a.has("spacing")) {
 			nodestyle_.spacing = a["spacing"].get_int();
+		}
 	}
 	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
 		// Put a newline if this is not the first paragraph
@@ -1369,10 +1380,11 @@ public:
 	void enter() override {
 		const AttrMap& a = tag_.attrs();
 
-		if (a.has("gap"))
+		if (a.has("gap")) {
 			space_ = a["gap"].get_int();
-		else
+		} else {
 			space_ = INFINITE_WIDTH;
+		}
 
 		if (a.has("fill")) {
 			fill_text_ = a["fill"].get_string();
@@ -1476,14 +1488,18 @@ public:
 		// TODO(GunChleoc): padding_l and padding_r don't seem to produce balanced results.
 		// We ran into that with the game tips,
 		// using "<rt padding_l=48 padding_t=28 padding_r=48 padding_b=28>" there.
-		if (a.has("padding_r"))
+		if (a.has("padding_r")) {
 			padding.right = a["padding_r"].get_int();
-		if (a.has("padding_b"))
+		}
+		if (a.has("padding_b")) {
 			padding.bottom = a["padding_b"].get_int();
-		if (a.has("padding_l"))
+		}
+		if (a.has("padding_l")) {
 			padding.left = a["padding_l"].get_int();
-		if (a.has("padding_t"))
+		}
+		if (a.has("padding_t")) {
 			padding.top = a["padding_t"].get_int();
+		}
 		if (a.has("margin")) {
 			uint8_t p = a["margin"].get_int();
 			margin.left = margin.top = margin.right = margin.bottom = p;
@@ -1621,19 +1637,21 @@ public:
 		}
 		if (a.has("float")) {
 			const std::string s = a["float"].get_string();
-			if (s == "right")
+			if (s == "right") {
 				render_node_->set_floating(RenderNode::Floating::kRight);
-			else if (s == "left")
+			} else if (s == "left") {
 				render_node_->set_floating(RenderNode::Floating::kLeft);
+			}
 		}
 		if (a.has("valign")) {
 			const std::string align = a["valign"].get_string();
-			if (align == "top")
+			if (align == "top") {
 				render_node_->set_valign(UI::Align::kTop);
-			else if (align == "bottom")
+			} else if (align == "bottom") {
 				render_node_->set_valign(UI::Align::kBottom);
-			else if (align == "center" || align == "middle")
+			} else if (align == "center" || align == "middle") {
 				render_node_->set_valign(UI::Align::kCenter);
+			}
 		}
 	}
 
@@ -1702,11 +1720,12 @@ TagHandler* create_taghandler(Tag& tag,
 		map["space"] = &create_taghandler<HspaceTagHandler>;
 	}
 	TagHandlerMap::iterator i = map.find(tag.name());
-	if (i == map.end())
+	if (i == map.end()) {
 		throw RenderError(
 		   (boost::format("No Tag handler for %s. This is a bug, please submit a report.") %
 		    tag.name())
 		      .str());
+	}
 	return i->second(tag, fc, ns, image_cache, renderer_style, fontsets);
 }
 

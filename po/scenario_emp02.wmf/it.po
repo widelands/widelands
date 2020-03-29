@@ -1,11 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # xno, 2015
 # xno, 2016
 # xno, 2016
 # SecondCloud500 <eddieven2000@gmail.com>, 2017
+# Filippo Montano, 2020
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
 # Guybrush88 <erpizzo@alice.it>, 2015-2016
@@ -13,10 +14,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
-"PO-Revision-Date: 2019-08-10 17:15+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-03-20 06:16+0000\n"
+"PO-Revision-Date: 2020-03-23 21:13+0000\n"
+"Last-Translator: Filippo Montano\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -97,29 +98,29 @@ msgstr "Cibo per i tuoi minatori"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:75
 msgid "Build a tavern to produce some food to sustain our miners."
-msgstr ""
+msgstr "Costruisci una taverna per produrre delle razioni a sostegno dei minatori."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:76
 msgid ""
 "Of course this means you will need more resources for preparing this food – "
 "like fish, meat or bread."
-msgstr ""
+msgstr "Ovviamente questo significa che avrai bisogno di più risorse per preparare le razioni – quindi pesce, carne e pane."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:77
 msgid ""
 "To provide these foodstuffs, you can build a fisher’s house, a hunter’s "
 "house, a farm, a mill and a bakery."
-msgstr ""
+msgstr "Per fornire questi alimenti, puoi costruire una Casa del Pescatore, una Casa del Cacciatore, un Mulino, una Fattoria ed un Forno"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:78
 msgid ""
 "Build a brewery and a winery to supply the miners with some good and strong "
 "drinks."
-msgstr ""
+msgstr "Costruisci una Birreria ed una Azienda Vinicola per sostentare i minatori con dei buoni alcolici"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:79
 msgid "Maybe you will also need a piggery, a vineyard and some wells."
-msgstr ""
+msgstr "Forse potresti costruire anche una Porcilaia, una Vigna ed anche alcuni Pozzi"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:80
 msgid ""
@@ -140,11 +141,11 @@ msgstr "Proteggi la tua frontiera orientale"
 msgid ""
 "Build stronger military buildings, such as an outpost, a barrier or a tower,"
 " on the eastern frontier."
-msgstr ""
+msgstr "Costruisci alcuni edifici militari più resistenti, quali un avamposto, un fortino od una torre sulla frontiera orientale."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:90
 msgid "Build a tower to watch deep inside the enemy territory."
-msgstr ""
+msgstr "Costruisci una torre per dare un'occhiata nelle provondità del territorio nemico."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:96
 msgid "Destroy the Barbarian tribe"
@@ -156,20 +157,20 @@ msgstr "Distruggi la tribù dei Barbari"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:99
 msgid "Build a barracks to start training soldiers."
-msgstr ""
+msgstr "Costruisci una caserma per iniziare a reclutare soldati."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:100
 msgid ""
 "Attack and completely destroy the Barbarian buildings as soon as you have "
 "enough soldiers."
-msgstr ""
+msgstr "Attacca e spazza via tutti gli edifici dei Barbari non appena hai abbastanza soldati."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:101
 msgid ""
 "Build a fortress on the peninsula (near where the Barbarian headquarters "
 "stood before). Finally, this will avoid new settlements of other tribes in "
 "that region."
-msgstr ""
+msgstr "Costruisci una fortezza sulla penisola (vicino a dove sorgeva in precedenza il quartier generale dei Barbari). Così, successivamente, eviteremo qualsiasi nuovo insediamento di altre tribù in questa regione."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:109
 msgid "A New Island"
@@ -318,7 +319,7 @@ msgid ""
 "Sire, I’ve got good news for you: As I walked to the east, I found a larger "
 "mountain. I am not absolutely sure – a geologist should check if I am right "
 "– but I believe we could mine marble from some places on the mountain."
-msgstr ""
+msgstr "Mio Signore, reco buone notizie: Stavo camminando verso est, ed ho trovato una montagna più grande. Non ne sono pienamente sicuro – un geologo dovrebbe confermare se ho ragione – ma ritengo che potremmo estrarre marmo da alcuni giacimenti sulla montagna."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:187
@@ -349,7 +350,7 @@ msgid ""
 "of iron ore. I advise you to immediately build iron and coal mines (or at "
 "least charcoal kilns), smelting works, toolsmithies, armor and weapon "
 "smithies."
-msgstr ""
+msgstr "Rigraziamo gli Dei, che incredibile colpo di fortuna! Ci sono altre due montagne, in una pare esserci una gran quantità di carbone, nell'altra di minerale di ferro. Ti consiglio di costruire subito miniere di ferro e carbone (o almeno delle carbonaie), fonderie, fucine per gli strumenti, le armature e l'armeria."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:203
@@ -384,14 +385,14 @@ msgid ""
 "more comfortable life, but the people working in the mines are unhappy with "
 "the current situation. They have to do hard work and have no time for making"
 " their own food."
-msgstr ""
+msgstr "E' ovviamente una buona idea costruire miniere, che ci daranno una vita più agiata, ma le persone che lavorano in miniera sono scontenti della situazione corrente. Devono lavorare duramente e non hanno tempo di preparare il proprio cibo."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:220
 msgid ""
 "What do you think about helping them out? I can’t tell you what we need "
 "exactly… but here are my recommendations:"
-msgstr ""
+msgstr "Cosa ne pensi di aiutarli? Non so dirti di cosa abbiamo bisogno... ma ecco alcune raccomandazioni:"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:225
 msgid "Our New Tavern"
@@ -447,7 +448,7 @@ msgstr "In un primo momento, sono stato ingenuo e speravo che fossero pacifici, 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:248
 msgid "Anyway, we must build stronger military buildings as soon as possible."
-msgstr ""
+msgstr "Tuttavia, dobbiamo costrurire edifici militari più resistenti non appena possibile."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:253
 msgid "Command to Attack"
@@ -459,7 +460,7 @@ msgid ""
 "That’s good. The first big military building is complete and the mining "
 "infrastructure is getting better and better. Now we should think about "
 "preparing ourselves for battle."
-msgstr ""
+msgstr "Ottimo. Il primo grande edificio militare è stato completato e l'infrastruttura mineraria sta migliorando sempre di più. Ora dovremmo pensare a prepararci alla battaglia."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:262
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:270
@@ -478,7 +479,7 @@ msgid ""
 "There are still a few Barbarians hiding on our island, but I am sure that we"
 " will find them soon. Every Barbarian who doesn’t attack us will be put in a"
 " boat with the other peaceful ones, and sent back to their country."
-msgstr ""
+msgstr "Ci sono ancora alcuni Barbari che si nascondono sulla nostra isola, ma sono certo che li troveremo presto. Ciascun Barbaro che non ci attacchi sarà messo in una barca con gli altri pacifisti, e verrà rispedito alla loro patria."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:271
 msgid ""

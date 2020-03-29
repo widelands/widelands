@@ -48,7 +48,9 @@ hq:set_workers {
    frisians_brewer = 1,
    frisians_trainer = 3,
 }
-hq:set_soldiers({0,0,0,0}, 20)
+nr_soldiers = {25, 12, 4}
+nr_soldiers = nr_soldiers[difficulty]
+hq:set_soldiers({0,0,0,0}, nr_soldiers)
 
 -- =======================================================================
 --                                 Player 2
@@ -117,4 +119,6 @@ hq2:set_workers {
    frisians_brewer_master = 5,
    frisians_reindeer = 50,
 }
-hq2:set_soldiers({0,6,0,0}, 50)
+nr_soldiers = {30, 50, 90}
+nr_soldiers = nr_soldiers[difficulty]
+hq2:set_soldiers({0,6,0,0}, nr_soldiers)

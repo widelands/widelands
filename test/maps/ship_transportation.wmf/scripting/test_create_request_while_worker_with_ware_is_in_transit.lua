@@ -9,10 +9,10 @@ run(function()
    -- create a ready-to-work lumberjack connected to the northern port
    local lumberjack_hut = p1:place_building("barbarians_lumberjacks_hut", map:get_field(18, 4), false, true)
    if lumberjack_hut.valid_workers then lumberjack_hut:set_workers(lumberjack_hut.valid_workers) end
-   connected_road(p1, map:get_field(18,5).immovable, "l,l|tl,tr|", true)
+   connected_road("normal", p1, map:get_field(18,5).immovable, "l,l|tl,tr|", true)
 
    -- a long street to capture the woodcutter when his house is burned
-   connected_road(p1, map:get_field(18,5).immovable, "r,r|r,r|r,tr|tr,tl|l,l|l,l|l,l|", true)
+   connected_road("normal", p1, map:get_field(18,5).immovable, "r,r|r,r|r,tr|tr,tl|l,l|l,l|l,l|", true)
 
    -- plant a tree inside the street to the right of the lumberjack hut
 
@@ -46,7 +46,7 @@ run(function()
 
    -- start to build a lumberjack on the second port while the required log is still in transit
    local cons = p1:place_building("barbarians_lumberjacks_hut", map:get_field(17, 17), true, true)
-   connected_road(p1, map:get_field(18,18).immovable, "l,tl|", true)
+   connected_road("normal", p1, map:get_field(18,18).immovable, "l,tl|", true)
 
    -- give the log time to reach the building site
    while not (ship:get_workers() == 0) do

@@ -49,8 +49,8 @@ prefilled_buildings(p1,
 hq = map:get_field(8, 18).immovable
 port = map:get_field(16, 16).immovable
 
-connected_road(p1, map:get_field(8,19).immovable, "r,r|r,r|r,r|r,tr,tr|", true)
-connected_road(p1, map:get_field(7,21).immovable, "tr,tr|", true)
+connected_road("normal", p1, map:get_field(8,19).immovable, "r,r|r,r|r,r|r,tr,tr|", true)
+connected_road("normal", p1, map:get_field(7,21).immovable, "tr,tr|", true)
 first_ship = nil
 second_ship = nil
 
@@ -335,7 +335,7 @@ function test_transporting_works()
 
    -- build a lumberjack and see if the ship starts transporting stuff
    p1:place_building("barbarians_lumberjacks_hut", map:get_field(17, 1), true)
-   connected_road(p1, map:get_field(18,2).immovable, "bl,l|", true)
+   connected_road("normal", p1, map:get_field(18,2).immovable, "bl,l|", true)
    while map:get_field(17, 1).immovable.descr.name ~= "barbarians_lumberjacks_hut" do
       sleep(3222)
    end
