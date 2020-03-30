@@ -50,8 +50,9 @@ void GameCmdQueuePacket::read(FileSystem& fs, Game& game, MapObjectLoader* const
 			for (;;) {
 				uint32_t const packet_id = fr.unsigned_16();
 
-				if (!packet_id)
+				if (!packet_id) {
 					break;
+				}
 
 				CmdQueue::CmdItem item;
 				item.category = fr.signed_32();

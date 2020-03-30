@@ -1,13 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Karl Vest, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-03-20 06:16+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
+"Last-Translator: Karl Vest, 2020\n"
 "Language-Team: Slovak (https://www.transifex.com/widelands/teams/35159/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,25 +35,27 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:56
 msgid "Build a quarry"
-msgstr ""
+msgstr "Postavte kameňolom"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:58
 msgid "Quarry"
-msgstr ""
+msgstr "Kameňolom"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:59
 msgid ""
 "Build a quarry close to the abundant rocks to free some building plots and "
 "get some valuable resources."
 msgstr ""
+"Kameňolom postavte blízko množstva skál, aby ste uvoľnili stavebné miesta a "
+"získali cenné suroviny."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:65
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
-msgstr ""
+msgstr "Postavte drevorubačov dom, pílu a kamenársky dom"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:67
 msgid "Lumberjack, Sawmill and Stonemason"
-msgstr ""
+msgstr "Drevorubač, Píla a Kamenár"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:68
 msgid ""
@@ -64,13 +70,15 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:76
 msgid "Lower Demand for Marble Columns"
-msgstr ""
+msgstr "Znížte dopyt po mramorových stĺpoch"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:77
 msgid ""
 "Lower the demand for marble columns in the economy settings to four. This "
 "will help to save some marble for buildings."
 msgstr ""
+"V nastaveniach ekonomiky znížte dopyt po mramorových stĺpoch na štyri kusy. "
+"Toto pomôže ušetriť mramor pre stavanie budov."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:78
 msgid ""
@@ -79,11 +87,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:84
 msgid "Find a port space on the small island"
-msgstr ""
+msgstr "Na malom ostrove nájdite prístavné miesto"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:86
 msgid "Port Space"
-msgstr ""
+msgstr "Prístavné miesto"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:87
 msgid "Search for a port space in order to regain access to the sea."
@@ -91,7 +99,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:93
 msgid "Build a port and a shipyard on the Island"
-msgstr ""
+msgstr "Na ostrove postavte prístav a lodenicu"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:95
 msgid "Ship Industry"
@@ -99,11 +107,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:96
 msgid "Build a port to set sail from this island."
-msgstr ""
+msgstr "Postavte prístav, aby ste z tohto ostrova mohli odplávať"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:97
 msgid "Build a shipyard to produce the ships to sail on."
-msgstr ""
+msgstr "Postavte lodenicu pre výrobu lodí, na ktorých môžete odplávať"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:102
 msgid "Produce wheat"
@@ -160,7 +168,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:133
 msgid "Gold Production"
-msgstr ""
+msgstr "Produkcia zlata"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:134
 msgid ""
@@ -169,23 +177,25 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:140
 msgid "Defeat the Barbarians"
-msgstr ""
+msgstr "Porazte Barbarov"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:142
 msgid "Defeat the Enemy"
-msgstr ""
+msgstr "Porazte nepriateľa"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:143
 msgid "End the Barbarians’ existence in this part of the world."
-msgstr ""
+msgstr "Ukončite existenciu Barbarov v tejto časti sveta"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:149
 msgid "Explore further and build ports"
-msgstr ""
+msgstr "Vykonajte ďalší prieskum a postavte prístavy"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:151
 msgid "Explore Additional Islands and Search for Port Spaces"
 msgstr ""
+"Preskúmajte ďalšie ostrovy a hľadajte Prístavné miesta, miesta pre stavbu "
+"prístavov"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:152
 msgid ""
@@ -231,7 +241,7 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:621
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:650
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "Lutiov denník"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:187

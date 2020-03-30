@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
@@ -7,9 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
-"PO-Revision-Date: 2019-08-10 17:15+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-03-28 05:00+0000\n"
+"PO-Revision-Date: 2020-03-28 05:02+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -276,16 +276,121 @@ msgid ""
 msgstr "それと大事な注意ですが、Widelandsの各部族で訓練の方法は異なります。そのため、必要な物資や建物の種類も異なってきます。さらに、部族が異なれば能力のレベルだけで強さを比較することは困難です。例えば、帝国の攻撃レベル0の兵士の基本ダメージは %1% ですが、野蛮人の同レベルの兵士では %2% しかありません。"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
+msgid "Scout’s Hut"
+msgstr ""
+
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:133
+msgid "Explore Your Surroundings"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:134
+msgid ""
+"Large parts of the map haven’t been explored yet. It might be a good idea to"
+" know which direction is best for expanding our empire."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:135
+msgid ""
+"You can try your luck and expand randomly, but this is risky. A safer way is"
+" to use a scout to explore unseen parts of the map. What if he finds "
+"mountains overflowing with gold?"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:136
+msgid "We will need a scout’s hut to start exploring. It is a small building."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:137
+msgid "Build a scout’s hut."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:141
+msgid "Build a scout’s hut"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143
+msgid ""
+"It’s good to know your surroundings. A scout will explore unseen parts of "
+"the map for you."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:144
+msgid "Build a Scout’s Hut."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:150
+msgid "Scout is ready"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:152
+msgid "Ready to go!"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:153
+msgid ""
+"Well done, your scout’s hut has been built. While our scout is moving in, "
+"let’s learn a little bit more about him."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:154
+msgid ""
+"First of all, he will need to take some food with him on his scouting trips."
+" Fortunately, we have some rations in our warehouse."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:155
+msgid ""
+"When provided with food, he will walk randomly around the area. You should "
+"follow his movement before fog of war hides what he saw."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:159
+msgid "Explore the map"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:161
+msgid "Wait for the scout to explore unseen areas."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:162
+msgid "Observe your scout."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:168
+msgid "Scout made progress"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:170
+msgid "New horizons?"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:171
+msgid ""
+"As you can see, scouts can go quite far. The good news is that there are no "
+"enemies around."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:172
+msgid "You can use the minimap to see the exploration’s progress."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:173
+msgid ""
+"Don’t forget that scouting is hard work and as such cannot be done without "
+"provision of food."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:179
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:181
 msgid "Heroes and Rookies"
 msgstr "ヒーローとルーキー"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:134
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:182
 msgid ""
 "While our soldiers are training, let me tell you what we can do with them."
 msgstr "兵士たちが訓練している間に説明できることはしておきましょう。"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:135
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:183
 msgid ""
 "In every military building, you can set the preference for heroes (trained "
 "soldiers) or rookies. From time to time, a soldier will walk out of the "
@@ -293,29 +398,29 @@ msgid ""
 "what you saw earlier."
 msgstr "全ての軍事建物では、訓練を積んだヒーローとルーキーのどちらを優先するかを選ぶことができます。兵士たちは時々自動的に別の建物への配置替えをします。これは前にも見ましたよね？その配置替えとこの設定は関係しています。"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:136
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:184
 msgid ""
 "The initial setting depends on the type of the building. For the Barbarians,"
 " the sentry is the only building that prefers rookies by default. You should"
 " change this setting to fit your current needs."
 msgstr "初期設定は建物の種類に依存します。野蛮人の場合、詰所だけが唯一デフォルトでルーキーを優先します。この設定は必要に応じて変更する必要があります。"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:137
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:185
 msgid ""
 "When you are expanding into no man’s land, you can make your buildings "
 "prefer rookies. When you are planning to attack, send heroes into that "
 "region. Conquered buildings always prefer heroes."
 msgstr "もし、誰もいない方向に領土を拡大する場合なら、ルーキーを優先していても問題ありません。しかし、敵への攻撃を想定しているのならそのような場所へはヒーローを送るべきでしょう。それと、敵の建物を占領した際は、建物の種類によらずヒーローが優先がされます。"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:191
 msgid "Soldier capacity"
 msgstr "兵士の収容数"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:145
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:193
 msgid "Adjusting the number of soldiers"
 msgstr "兵士数の調整"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:146
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:194
 msgid ""
 "There is another way how you can control the strength of a military "
 "building: by the number of soldiers stationed there. Just click on the arrow"
@@ -324,48 +429,48 @@ msgid ""
 "example."
 msgstr "軍事建物の強さを調整する別の方法があります。駐留している兵士数を調整するのです。矢印ボタンをクリックして目的の数に調整するだけです。全ての建物には最大収容数が設定されています。例えば防塞の場合、その値は5です。"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:147
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:195
 msgid ""
 "If you wish to send a certain soldier away, you can simply click on it. It "
 "will then be replaced by another soldier."
 msgstr "もし特定の兵士を他の場所に送り出したい場合は、その兵士のアイコンをクリックしてください。かわりとなる兵士は自動的にやってくるでしょう。"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:148
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:196
 msgid ""
 "Let me also describe what the numbers in the statistics string mean. This "
 "string can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’."
 msgstr "建物状態ラベルでの表示についても解説させてください。このラベルでは数字が三つまで出てくることがあります。例えば、兵士数 1[+5] (空+2)のような感じです。"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:149
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:197
 msgid ""
 "The first number describes how many soldiers are currently in this building."
 " In this example, only one soldier is left inside (each military building is"
 " always guarded by at least one soldier)."
 msgstr "先頭の数値は建物の内部にいる兵士数です。この例ではたった一人だけ建物に残っています。(全ての軍事系建物は最低でも一人の兵士が守りにつきます)"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:150
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:198
 msgid ""
 "The second number tells you how many additional soldiers reside in this "
 "building, but are currently outside. The five soldiers may be attacking an "
 "enemy. They will return when they have been successful."
 msgstr "二番目の数字はこの建物に所属しているものの、現在は外に出ている兵士の数です。この例では5人の兵士はおそらく敵を攻撃しているのでしょう。彼らは生き延びれば戻ってくるでしょう。"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:151
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:199
 msgid ""
 "The third number indicates the missing soldiers. From the eight soldiers (1 "
 "+ 5 + 2) you wish to have here, two may have died. They will be replaced by "
 "new soldiers from your warehouse, if possible."
 msgstr "三つ目の数字は不足している兵士数です。本来8人 (1+5+2) いるべき場所だったのですが、二人は死んでしまったのでしょう。まだ予備の兵士が残っていれば、倉庫からやってくることでしょう。"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:157
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:205
 msgid "Dismantle your sentry"
 msgstr "詰所を解体する"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:159
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:207
 msgid "Dismantling military buildings"
 msgstr "軍事建物の解体"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:160
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:208
 msgid ""
 "You can only reduce the number of soldiers to one. The last soldier of a "
 "building will never come out (unless this building is attacked). If you want"
@@ -373,7 +478,7 @@ msgid ""
 " building."
 msgstr "駐留する兵士数は1までしか減らせません。そして最後の兵士は建物が攻撃を受けでもしない限り、外に出てきません。もし、兵士を他の場所に送りたいのならば、建物を解体するか破壊するしかありません。"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:161
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:209
 msgid ""
 "However, destroying a military building is always linked with a risk: the "
 "land is still yours, but it is no longer protected. Any enemy that builds "
@@ -384,28 +489,28 @@ msgid ""
 "enemies."
 msgstr "しかし、軍事建物の消失にはリスクがあります。建物がなくなり、軍事建物の占領エリアから外れてしまった領土がすぐに失われるわけではありませんが、そのような領土は無防備な状態になります。敵の軍事建物の占領エリアにそのような無防備な領土が入ると、領土が敵に奪われてしまいます。そして、占領された土地にあったあなたの建物は焼け落ちてしまうでしょう。それと視界が狭くなるという問題もあります。なので、基本的にはあなたの領土深くにあり、敵の影響を受けない軍事建物だけを壊すするようにしましょう。"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:162
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:210
 msgid ""
 "Have you seen your sentry? Since it cannot contain many soldiers and is next"
 " to a stronger barrier, it is rather useless."
 msgstr "詰所の存在に気づきましたか？詰所はあまりたくさんの兵士を収容できない上、隣に強力な防塞があるので、もはや必要性が薄くなっています。"
 
 #. TRANSLATORS: 'it' refers to the Barbarian sentry
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:164
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:212
 msgid "Dismantle it."
 msgstr "解体しましょう。"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:165
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:213
 msgid ""
 "You can also use this opportunity to become familiar with the other options:"
 " the heroes/rookies preference and the capacity."
 msgstr "ついでに、ヒーロー/ルーキーの優先設定や収容数の変更を試してみるのも良い考えです。"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:167
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:215
 msgid "Dismantle your north-western sentry"
 msgstr "北西にある詰所を解体する"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:169
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:217
 msgid ""
 "You can control the number of soldiers stationed at a military site with the"
 " arrow buttons. If you want to get even your last soldier out, you will have"
@@ -413,59 +518,59 @@ msgid ""
 "which will make it vulnerable to hostile attacks."
 msgstr "軍事建物では矢印ボタンで兵士数を調整できます。最後の一人まで外に追い出したいのなら、破壊か解体するしかありません。しかし、兵士のいなくなった建物はもう領土を守りません。敵の攻撃や進出には十分注意しましょう。"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:170
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:218
 msgid "Dismantle your sentry in the north-west, next to the barrier."
 msgstr "北西の防塞の隣にある詰所を解体しましょう"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:176
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:188
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:224
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:236
 msgid "Enhance Your Fortress"
 msgstr "要塞を拡張する"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:178
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:226
 msgid "Enhancing Buildings"
 msgstr "建物の拡張"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:179
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:227
 msgid ""
 "Well done. Now you know how to draw back your soldiers from the places where"
 " you don’t need them. It is time to tell you how to reinforce your front "
 "line."
 msgstr "良くできました。これで必要としないところから兵士を撤退させることができるようになりましたね。それでは、彼らを前線に集める方法を教えましょう。"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:180
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:228
 msgid ""
 "Your fortress is already quite strong and conquers a lot of space. But there"
 " is an even bigger building: the citadel."
 msgstr "あなたの要塞は既に非常に強力な建物で広大な占領エリアを持っています。しかし、まださらに強力な建物、城塞があります。"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:181
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:229
 msgid ""
 "Citadels can’t be built directly. Instead, you’ll have to construct a "
 "fortress first and then enhance it to a citadel. To do so, click on the "
 "fortress, then choose the ‘Enhance to Citadel’ button."
 msgstr "城塞は直接建てることはできません。かわりに、一旦要塞を建設し、それを拡張する必要があります。実際にそれを行うには、要塞をクリックし、「城塞に拡張」ボタンを押す必要があります。"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:182
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:230
 msgid ""
 "Your soldiers will leave the fortress while the construction is going on. "
 "This means that your fortress will lose its military influence, as I "
 "described above."
 msgstr "拡張中は兵士たちは要塞から離れる必要があります。これはつまり前述のように、要塞は軍事的な影響を失ったということになります。"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:183
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:231
 msgid "Enhance your fortress to a citadel now."
 msgstr "要塞を城塞に拡張してください。"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:186
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:234
 msgid "Enhance your fortress to a citadel"
 msgstr "要塞を城塞に拡張する"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:189
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:237
 msgid "Enhance your fortress to a mighty citadel."
 msgstr "要塞を強大な城塞に拡張します。"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:190
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:238
 msgid ""
 "The citadel can house 12 soldiers, and it is the biggest military building "
 "the Barbarians can build. It also costs a lot of resources and takes a long "
@@ -473,15 +578,15 @@ msgid ""
 "like constricted points or mountains."
 msgstr "城塞は最大12人の兵士を収容できる、野蛮人の最大の建物です。当然、その建設には長い時間と多大なコストがかかります。この建物は隘路や山の近くのような戦略的に重要な地点に向いているでしょう。"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:197
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:245
 msgid "Defeat your Enemy"
 msgstr "敵を倒す"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:199
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:247
 msgid "Defeat the Enemy"
 msgstr "敵を倒す"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:200
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:248
 msgid ""
 "Great work, the citadel is finished. But what’s that? A hostile tribe has "
 "settled next to us while the citadel was under construction! Do you see how "
@@ -490,44 +595,44 @@ msgid ""
 "defeat the enemy!"
 msgstr "よくできました。城塞が完成しました。おや、あれはなんでしょう？我々が城塞を建設している隙に敵が侵入していました！彼らがどのように我々の領土をかすめ取ったかわかりましたか？我々の木こりも庵を失ってしまいました。これはつまり私が話した通りのことが起こったということです。さて、領土をとりかえし、敵を倒しましょう！"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:201
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:210
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:249
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:258
 msgid ""
 "To attack a building, click on its doors, choose the number of soldiers that"
 " you wish to send and click on the ‘Attack’ button."
 msgstr "建物を攻撃するには、ドアをクリックします。そして攻撃に参加する兵士数を選んで「攻撃」ボタンを押します。"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:201
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:249
 msgid ""
 "Your soldiers will come from all nearby military buildings. Likewise, the "
 "defenders will come from all nearby military buildings of the enemy and "
 "intercept your forces."
 msgstr "近隣のあなたの軍事建物から兵士は出撃していきます。同様に、防御側も近隣の軍事建物から迎撃するために出撃します。"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:202
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:250
 msgid ""
 "Attack and conquer all military buildings of the enemy and destroy their "
 "headquarters."
 msgstr "敵のすべての軍事系建物を攻撃して占領し、敵の本拠地を破壊してください。"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:206
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:254
 msgid "Defeat the enemy tribe"
 msgstr "敵の部族を倒そう"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:208
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:256
 msgid "Defeat Your Enemy"
 msgstr "敵を倒そう"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:209
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:257
 msgid "Defeat the nearby enemy."
 msgstr "近くの敵を倒そう"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:215
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:217
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:263
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:265
 msgid "Conclusion"
 msgstr "終わりに"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:218
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:266
 msgid ""
 "Thank you for playing this tutorial. I hope you enjoyed it and you learned "
 "how to create and train soldiers, how to control where they go and how to "
@@ -535,14 +640,14 @@ msgid ""
 "Having trained soldiers is a huge advantage."
 msgstr "このチュートリアルをプレイしていただきありがとうございます。兵士の訓練法、兵士の管理方法、そしてどのように敵を倒すのかがわかったと思います。敵を倒すのは簡単だったでしょう？訓練された兵士にはそれだけのアドバンテージがあるのです。"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:219
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:267
 msgid ""
 "But a war is expensive, and not always the path leading to the goal. When "
 "setting up a new game, you can also choose peaceful win conditions. You "
 "should definitely try them out, they’re worth it."
 msgstr "しかし戦争は不経済です。そして必ずしもゴールにつながる道でもありません。新しいゲームをプレイする時には平和的な勝利条件を設定することもできます。どうぞ一度お試しください。それだけの価値はあるつもりです。"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:220
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:268
 msgid ""
 "You are now ready to play the campaigns. They will teach you about the "
 "different economies of the tribes. You can also play the remaining "

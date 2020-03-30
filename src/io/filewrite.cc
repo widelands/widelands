@@ -62,8 +62,9 @@ void FileWrite::data(const void* const src, const size_t size, Pos const pos = P
 	if (i + size > length_) {
 		if (i + size > max_size_) {
 			max_size_ += 4096;
-			if (max_size_ < i + size)
+			if (max_size_ < i + size) {
 				max_size_ = i + size;
+			}
 			char* new_data = static_cast<char*>(realloc(data_, max_size_));
 			assert(new_data);
 			data_ = new_data;

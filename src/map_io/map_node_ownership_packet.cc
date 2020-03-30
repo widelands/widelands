@@ -35,8 +35,9 @@ void MapNodeOwnershipPacket::read(FileSystem& fs,
                                   MapObjectLoader&)
 
 {
-	if (skip)
+	if (skip) {
 		return;
+	}
 	FileRead fr;
 	try {
 		fr.open(fs, "binary/node_ownership");
@@ -52,8 +53,9 @@ void MapNodeOwnershipPacket::read(FileSystem& fs,
 		if (packet_version == kCurrentPacketVersion) {
 			const Map& map = egbase.map();
 			MapIndex const max_index = map.max_index();
-			for (MapIndex i = 0; i < max_index; ++i)
+			for (MapIndex i = 0; i < max_index; ++i) {
 				map[i].set_owned_by(fr.unsigned_8());
+			}
 		} else {
 			throw UnhandledVersionError(
 			   "MapNodeOwnershipPacket", packet_version, kCurrentPacketVersion);
@@ -70,8 +72,9 @@ void MapNodeOwnershipPacket::write(FileSystem& fs, EditorGameBase& egbase, MapOb
 
 	const Map& map = egbase.map();
 	MapIndex const max_index = map.max_index();
-	for (MapIndex i = 0; i < max_index; ++i)
+	for (MapIndex i = 0; i < max_index; ++i) {
 		fw.unsigned_8(map[i].get_owned_by());
+	}
 
 	fw.write(fs, "binary/node_ownership");
 }

@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2019
+# Benedikt Straub <benedikt-straub@web.de>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-11-30 12:38+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-03-28 05:00+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2019\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2020\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +22,7 @@ msgstr ""
 #. TRANSLATORS: Name of a backup autosave
 #: ../../data/campaigns/fri01.wmf/scripting/mission_thread.lua:132
 msgid "The Great Stormflood (Backup Autosave)"
-msgstr ""
+msgstr "De Grote Mandränke (automatisk sekert tum Wedderhalen)"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:27
 msgid "Build a wood economy and a reed farm"
@@ -239,6 +239,9 @@ msgid ""
 " reload the scenario from the backup savegame automatically created for you "
 "shortly before you reached the enemy’s headquarters."
 msgstr ""
+"Wenn du nich good genoog vörbereidt büst, um dat bi Tied hentokriegen, "
+"kannst du de Rutfödderung vun de sekert Speel weer laden, wat automatisk för"
+" di maakt worden is, jüüst ehr du bi de feindelken Raadhuus ankomen büst."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:128
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:137
@@ -1082,38 +1085,50 @@ msgstr ""
 " Spinnweelmöhlen, um ut Reit un Fell de starken Stoff för de Seils to weven."
 " Dann könen wi an de Muu eene Söke utrüsten. Beedt to de Gotten un maakt to!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:410
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:412
 msgid "Don’t Forget the Soldiers"
 msgstr "Vergeet de Soldaten nich"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:411
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:413
 msgid "Soldiers to the port!"
 msgstr "Soldaten tur Muu!"
 
 #. TRANSLATORS: Reebaud – rising water
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:413
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:415
+#, lua-format
 msgid ""
 "I almost forgot in this haste – whereever we will land, we’ll need soldiers "
-"to secure and expand our new colony. There’s space for up to ten soldiers on"
-" our ship, if they don’t mind being all crammed together. Let’s send some to"
-" the port when it’s completed, so they can embark when we set sail!"
-msgstr ""
-"In deeser Iel hebb ick dat haast vergeten – waar ok immer wi lannen bruken "
-"wi Soldaten um uns' nejes Dörp to sekern un to vergrotern. Wi könen bit to "
-"teihn Soldaten up uns' Schipp mitnehmen, wenn se inverstahn sünd, all "
-"tosammen proppt to wesen. Laat uns welke tur Muu stüren, wenn se beschickt "
-"is, dann könen se an Boord gahn, wenn wi schippern!"
+"to secure and expand our new colony. There’s space for up to %d soldier on "
+"our ship, if they don’t mind being all crammed together. Let’s send some to "
+"the port when it’s completed, so they can embark when we set sail!"
+msgid_plural ""
+"I almost forgot in this haste – whereever we will land, we’ll need soldiers "
+"to secure and expand our new colony. There’s space for up to %d soldiers on "
+"our ship, if they don’t mind being all crammed together. Let’s send some to "
+"the port when it’s completed, so they can embark when we set sail!"
+msgstr[0] ""
+"Ick hebb dat in deeser Iel haast vergeten – waar wi ok lannen sallen, wi "
+"bruken Soldaten, um uns' nejes Dörp to sekern und to vergrotern. Wi könen "
+"bit to %d Soldat up uns' Schipp mitnehmen, wenn 't hör nix utmaakt, all "
+"vollstoppt to wesen. Laat uns welke tur Muu schicken, wenn se kumpleet is, "
+"daarmit se an Boord gahn könen, wenn wi lössseilen!"
+msgstr[1] ""
+"Ick hebb dat in deeser Iel haast vergeten – waar wi ok lannen sallen, wi "
+"bruken Soldaten, um uns' nejes Dörp to sekern und to vergrotern. Wi könen "
+"bit to %d Soldaten up uns' Schipp mitnehmen, wenn 't hör nix utmaakt, all "
+"vollstoppt to wesen. Laat uns welke tur Muu schicken, wenn se kumpleet is, "
+"daarmit se an Boord gahn könen, wenn wi lössseilen!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:417
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:421
 msgid "Victory"
 msgstr "Sieg"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:418
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:422
 msgid "We escaped!"
 msgstr "Wi sünd utrieten!"
 
 #. TRANSLATORS: Reebaud – victory
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:420
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:424
 msgid ""
 "The gods have answered our prayers. We will escape the island’s drowning, "
 "and I am confident we will be able to build a new home again in a more "
@@ -1123,12 +1138,12 @@ msgstr ""
 "ut, un ick bün wiss, dat wi in eener liedsameren Eck vun de Welt eene neje "
 "Heimaad upbauen könen!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:421
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:425
 msgid "Congratulations"
 msgstr "Glückwunsk"
 
 #. TRANSLATORS: Reebaud – victory
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:423
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:427
 msgid ""
 "You have completed this mission. You may move on to the next scenario now to"
 " help us build a new home, far from the false God’s vengeful reach…"
@@ -1140,7 +1155,7 @@ msgstr ""
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "“%s”"
+msgstr "»%s«"
 
 #: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
