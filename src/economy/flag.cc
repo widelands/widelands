@@ -17,10 +17,10 @@
  *
  */
 
+#include "economy/flag.h"
+
 #include <algorithm>
 #include <iterator>
-
-#include "economy/flag.h"
 
 #include "base/macros.h"
 #include "base/wexception.h"
