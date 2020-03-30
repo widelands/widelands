@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-03-28 05:00+0000\n"
+"POT-Creation-Date: 2020-03-29 18:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -64,36 +64,36 @@ msgid "%2.1f%%"
 msgstr ""
 
 #. TRANSLATORS: Short for "Not enough space"
-#: ../../data/scripting/infrastructure.lua:169
+#: ../../data/scripting/infrastructure.lua:173
 msgid "No Space"
 msgstr ""
 
-#: ../../data/scripting/infrastructure.lua:170
+#: ../../data/scripting/infrastructure.lua:174
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr ""
 
-#: ../../data/scripting/infrastructure.lua:171
+#: ../../data/scripting/infrastructure.lua:175
 msgid "Not enough space"
 msgstr ""
 
-#: ../../data/scripting/infrastructure.lua:242
+#: ../../data/scripting/infrastructure.lua:246
 msgid "No rocks nearby"
 msgstr ""
 
-#: ../../data/scripting/infrastructure.lua:242
+#: ../../data/scripting/infrastructure.lua:246
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
 msgstr ""
 
-#: ../../data/scripting/infrastructure.lua:247
+#: ../../data/scripting/infrastructure.lua:251
 msgid "No trees nearby"
 msgstr ""
 
-#: ../../data/scripting/infrastructure.lua:247
+#: ../../data/scripting/infrastructure.lua:251
 msgid ""
 "There are no trees near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
@@ -1369,23 +1369,23 @@ msgstr ""
 msgid "off"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:295
+#: ../../src/logic/editor_game_base.cc:298
 msgid "Postloading world and tribes…"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:328
+#: ../../src/logic/editor_game_base.cc:331
 msgid "Loading graphics"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:558
+#: ../../src/logic/editor_game_base.cc:561
 msgid "Cleaning up for loading: Map objects (1/3)"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:561
+#: ../../src/logic/editor_game_base.cc:564
 msgid "Cleaning up for loading: Players (2/3)"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:564
+#: ../../src/logic/editor_game_base.cc:567
 msgid "Cleaning up for loading: Map (3/3)"
 msgstr ""
 
@@ -1420,7 +1420,7 @@ msgid "Initializing game…"
 msgstr ""
 
 #: ../../src/logic/game.cc:372 ../../src/logic/game.cc:408
-#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1462
+#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1455
 msgid "Loading…"
 msgstr ""
 
@@ -1511,7 +1511,7 @@ msgstr ""
 msgid "No description defined"
 msgstr ""
 
-#: ../../src/logic/map_objects/immovable.cc:528
+#: ../../src/logic/map_objects/immovable.cc:471
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:152
 #, c-format
 msgid "%i%% built"
@@ -1590,28 +1590,28 @@ msgstr ""
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the ware
 #. * '%s'
-#: ../../src/logic/map_objects/tribes/production_program.cc:306
+#: ../../src/logic/map_objects/tribes/production_program.cc:240
 #, c-format
 msgid "the economy needs the ware ‘%s’"
 msgstr ""
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy doesn't need the
 #. * ware '%s'
-#: ../../src/logic/map_objects/tribes/production_program.cc:315
+#: ../../src/logic/map_objects/tribes/production_program.cc:249
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
 msgstr ""
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the worker
 #. * '%s'
-#: ../../src/logic/map_objects/tribes/production_program.cc:328
+#: ../../src/logic/map_objects/tribes/production_program.cc:262
 #, c-format
 msgid "the economy needs the worker ‘%s’"
 msgstr ""
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
 #. * TRANSLATORS:      ... because the economy doesn’t need the worker '%s'
-#: ../../src/logic/map_objects/tribes/production_program.cc:338
+#: ../../src/logic/map_objects/tribes/production_program.cc:272
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
 msgstr ""
@@ -1630,34 +1630,34 @@ msgstr ""
 #. * TRANSLATORS: This is an item in a list of workers, e.g. "Recruited 2x Ox":
 #. * TRANSLATORS:    %1$i = "2"
 #. * TRANSLATORS:    %2$s = "Ox"
-#: ../../src/logic/map_objects/tribes/production_program.cc:383
-#: ../../src/logic/map_objects/tribes/production_program.cc:407
+#: ../../src/logic/map_objects/tribes/production_program.cc:320
+#: ../../src/logic/map_objects/tribes/production_program.cc:344
+#: ../../src/logic/map_objects/tribes/production_program.cc:809
 #: ../../src/logic/map_objects/tribes/production_program.cc:884
-#: ../../src/logic/map_objects/tribes/production_program.cc:993
-#: ../../src/logic/map_objects/tribes/production_program.cc:1078
+#: ../../src/logic/map_objects/tribes/production_program.cc:935
 #, c-format
 msgid "%1$ix %2$s"
 msgstr ""
 
 #. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/map_objects/tribes/production_program.cc:389
+#: ../../src/logic/map_objects/tribes/production_program.cc:326
 #, c-format
 msgid "the building has the following wares: %s"
 msgstr ""
 
 #. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/map_objects/tribes/production_program.cc:413
+#: ../../src/logic/map_objects/tribes/production_program.cc:350
 #, c-format
 msgid "the building doesn’t have the following wares: %s"
 msgstr ""
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs experience'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:426
+#: ../../src/logic/map_objects/tribes/production_program.cc:363
 msgid "a worker needs experience"
 msgstr ""
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers need no experience'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:432
+#: ../../src/logic/map_objects/tribes/production_program.cc:369
 msgid "the workers need no experience"
 msgstr ""
 
@@ -1671,33 +1671,33 @@ msgstr ""
 #. * TRANSLATORS: on a development build if you can, and let us know if there are any issues
 #.
 #. * TRANSLATORS: we need to address for your language.
-#: ../../src/logic/map_objects/tribes/production_program.cc:539
-#: ../../src/logic/map_objects/tribes/production_program.cc:908
+#: ../../src/logic/map_objects/tribes/production_program.cc:500
+#: ../../src/logic/map_objects/tribes/production_program.cc:833
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr ""
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware '%s'"
-#: ../../src/logic/map_objects/tribes/production_program.cc:545
+#: ../../src/logic/map_objects/tribes/production_program.cc:506
 #, c-format
 msgid "Completed %1$s because %2$s"
 msgstr ""
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware '%s'"
-#: ../../src/logic/map_objects/tribes/production_program.cc:551
-#: ../../src/logic/map_objects/tribes/production_program.cc:557
+#: ../../src/logic/map_objects/tribes/production_program.cc:512
+#: ../../src/logic/map_objects/tribes/production_program.cc:518
 #, c-format
 msgid "Skipped %1$s because %2$s"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:758
+#: ../../src/logic/map_objects/tribes/production_program.cc:710
 msgid "No use for ships on this map!"
 msgstr ""
 
 #. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta bread is missing'
 #.
-#: ../../src/logic/map_objects/tribes/production_program.cc:894
+#: ../../src/logic/map_objects/tribes/production_program.cc:819
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -1706,7 +1706,7 @@ msgstr[1] ""
 
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total amount of
 #. wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1004
+#: ../../src/logic/map_objects/tribes/production_program.cc:895
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -1715,64 +1715,64 @@ msgstr[1] ""
 
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to total amount of
 #. workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1089
+#: ../../src/logic/map_objects/tribes/production_program.cc:946
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1296
+#: ../../src/logic/map_objects/tribes/production_program.cc:1106
 msgid "No soldier to train!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1305
-#: ../../src/logic/map_objects/tribes/production_program.cc:1382
+#: ../../src/logic/map_objects/tribes/production_program.cc:1115
+#: ../../src/logic/map_objects/tribes/production_program.cc:1173
 msgid "No soldier found for this training level!"
 msgstr ""
 
 #. * TRANSLATORS: Success message of a trainingsite '%s' stands for the description of the
 #. * training program, e.g. Completed upgrading soldier evade from level 0 to level 1
-#: ../../src/logic/map_objects/tribes/production_program.cc:1420
+#: ../../src/logic/map_objects/tribes/production_program.cc:1215
 #, c-format
 msgid "Completed %s"
 msgstr ""
 
 #. * TRANSLATORS: Productivity label on a building if there is 1 worker missing
-#: ../../src/logic/map_objects/tribes/productionsite.cc:330
+#: ../../src/logic/map_objects/tribes/productionsite.cc:347
 msgid "Worker missing"
 msgstr ""
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1 worker
 #. missing. If you need plural forms here, please let us know.
-#: ../../src/logic/map_objects/tribes/productionsite.cc:333
+#: ../../src/logic/map_objects/tribes/productionsite.cc:350
 msgid "Workers missing"
 msgstr ""
 
 #. * TRANSLATORS: Productivity label on a building if there is 1 worker missing
-#: ../../src/logic/map_objects/tribes/productionsite.cc:342
+#: ../../src/logic/map_objects/tribes/productionsite.cc:359
 msgid "Worker is coming"
 msgstr ""
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1 worker
 #. missing. If you need plural forms here, please let us know.
-#: ../../src/logic/map_objects/tribes/productionsite.cc:345
+#: ../../src/logic/map_objects/tribes/productionsite.cc:362
 msgid "Workers are coming"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:352
+#: ../../src/logic/map_objects/tribes/productionsite.cc:369
 msgid "(stopped)"
 msgstr ""
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/map_objects/tribes/productionsite.cc:436
+#: ../../src/logic/map_objects/tribes/productionsite.cc:453
 #: ../../src/wui/building_statistics_menu.cc:678
 #, c-format
 msgid "%i%%"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:1034
+#: ../../src/logic/map_objects/tribes/productionsite.cc:1051
 msgid "Can’t find any more resources!"
 msgstr ""
 
@@ -2138,7 +2138,7 @@ msgid "Checking map"
 msgstr ""
 
 #: ../../src/network/gameclient.cc:149 ../../src/network/gamehost.cc:662
-#: ../../src/wlapplication.cc:1353
+#: ../../src/wlapplication.cc:1346
 msgid "Preparing game"
 msgstr ""
 
@@ -3490,11 +3490,11 @@ msgstr ""
 msgid "Load Game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1150
+#: ../../src/wlapplication.cc:1143
 msgid "Game data error"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1158
+#: ../../src/wlapplication.cc:1151
 #, c-format
 msgid ""
 "Please report this problem to help us improve Widelands. You will find "
@@ -3502,7 +3502,7 @@ msgid ""
 "using build %1$s (%2$s)."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1165
+#: ../../src/wlapplication.cc:1158
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3510,11 +3510,11 @@ msgid ""
 "It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1292
+#: ../../src/wlapplication.cc:1285
 msgid "Invalid Address"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1293
+#: ../../src/wlapplication.cc:1286
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr ""
 
@@ -4439,40 +4439,40 @@ msgid "Map View"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:290
+#: ../../src/wui/interactive_base.cc:283
 msgid "Hide Minimap"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:290
+#: ../../src/wui/interactive_base.cc:283
 msgid "Show Minimap"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:295
+#: ../../src/wui/interactive_base.cc:288
 msgid "Zoom +"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:297
+#: ../../src/wui/interactive_base.cc:290
 msgctxt "hotkey"
 msgid "Ctrl++"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:300
+#: ../../src/wui/interactive_base.cc:293
 msgid "Reset zoom"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:302
+#: ../../src/wui/interactive_base.cc:295
 msgctxt "hotkey"
 msgid "Ctrl+0"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:305
+#: ../../src/wui/interactive_base.cc:298
 msgid "Zoom -"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:307
+#: ../../src/wui/interactive_base.cc:300
 msgctxt "hotkey"
 msgid "Ctrl+-"
 msgstr ""
