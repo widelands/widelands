@@ -47,10 +47,11 @@ void StreamWrite::print_f(char const* const fmt, ...) {
 		char* heapbuf = nullptr;
 
 		do {
-			if (i < 0)
+			if (i < 0) {
 				size = 2 * size;  //  old vsnprintf
-			else
+			} else {
 				size = i + 1;  //  C99-compatible vsnprintf
+			}
 
 			delete[] heapbuf;
 			heapbuf = new char[size];

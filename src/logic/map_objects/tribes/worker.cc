@@ -3237,7 +3237,7 @@ const Bob::Task* Worker::Loader::get_task(const std::string& name) {
 	return Bob::Loader::get_task(name);
 }
 
-const BobProgramBase* Worker::Loader::get_program(const std::string& name) {
+const MapObjectProgram* Worker::Loader::get_program(const std::string& name) {
 	Worker& worker = get<Worker>();
 	return worker.descr().get_program(name);
 }

@@ -79,6 +79,20 @@ Campaigns::Campaigns() {
 				campaign_data->prerequisites.insert(prerequisite);
 			}
 		}
+		if (campaign_table->has_key("difficulties")) {
+			for (const std::string& d :
+			     campaign_table->get_table("difficulties")->array_entries<std::string>()) {
+				campaign_data->difficulties.push_back(d);
+			}
+			assert(campaign_table->has_key("default_difficulty"));
+			campaign_data->default_difficulty =
+			   get_positive_int(*campaign_table, "default_difficulty");
+		} else {
+			assert(!campaign_table->has_key("default_difficulty"));
+			/** TRANSLATORS: A campaign difficulty */
+			campaign_data->difficulties.push_back(_("Default"));
+			campaign_data->default_difficulty = 1;
+		}
 
 		campaign_data->visible = false;
 

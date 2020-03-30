@@ -21,7 +21,7 @@
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_WORKER_PROGRAM_H
 
 #include "base/macros.h"
-#include "logic/map_objects/bob.h"
+#include "logic/map_objects/map_object_program.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/workarea_info.h"
 #include "logic/map_objects/tribes/worker.h"
@@ -29,20 +29,16 @@
 
 namespace Widelands {
 
-struct WorkerProgram : public BobProgramBase {
+struct WorkerProgram : public MapObjectProgram {
 
 	using ParseWorkerProgramFn = void (WorkerProgram::*)(Worker::Action*,
 	                                                     const std::vector<std::string>&);
 
-	WorkerProgram(const std::string& name, const WorkerDescr& worker, const Tribes& tribes)
-	   : name_(name), worker_(worker), tribes_(tribes) {
-	}
-	~WorkerProgram() override {
-	}
+	WorkerProgram(const std::string& init_name,
+	              const LuaTable& actions_table,
+	              const WorkerDescr& worker,
+	              const Tribes& tribes);
 
-	std::string get_name() const override {
-		return name_;
-	}
 	using Actions = std::vector<Worker::Action>;
 	Actions::size_type get_size() const {
 		return actions_.size();
@@ -56,7 +52,6 @@ struct WorkerProgram : public BobProgramBase {
 		return &actions_[idx];
 	}
 
-	void parse(const LuaTable& table);
 	const WorkareaInfo& get_workarea_info() const {
 		return workarea_info_;
 	}
@@ -88,7 +83,6 @@ private:
 	void parse_construct(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_terraform(Worker::Action* act, const std::vector<std::string>& cmd);
 
-	const std::string name_;
 	const WorkerDescr& worker_;
 	const Tribes& tribes_;
 	Actions actions_;

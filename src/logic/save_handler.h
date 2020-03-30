@@ -64,8 +64,13 @@ public:
 		save_filename_ = filename;
 	}
 
+	uint32_t last_save_time() const {
+		return last_save_realtime_;
+	}
+
 private:
 	uint32_t next_save_realtime_;
+	uint32_t last_save_realtime_;
 	bool initialized_;
 	bool allow_saving_;
 	bool save_requested_;
