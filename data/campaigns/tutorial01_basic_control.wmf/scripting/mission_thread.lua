@@ -135,13 +135,23 @@ function build_lumberjack()
       campaign_message_box(lumberjack_message_06, 3 * 1000)
    end
 
-   local o = campaign_message_with_objective(lumberjack_message_07, obj_lumberjack_progress)
+
+   local o = campaign_message_with_objective(lumberjack_message_07a, obj_lumberjack_progress)
    scroll_to_field(first_lumberjack_field)
    mouse_to_field(first_lumberjack_field)
 
    while not wl.ui.MapView().windows.building_window do sleep(100) end
-   while wl.ui.MapView().windows.building_window do sleep(100) end
+   -- demonstrate work area button
+   blocker = UserInputDisabler:new()
+   sleep(1000)
+   campaign_message_box(lumberjack_message_07b, 1000)
+   click_on_panel(wl.ui.MapView().windows.building_window.buttons.workarea)
+   blocker:lift_blocks()
+
+   sleep(10000)
+   close_windows()
    set_objective_done(o)
+   sleep(3000)
 
    campaign_message_box(lumberjack_message_08)
    wl.ui.MapView().dropdowns["dropdown_menu_gamespeed"]:open()

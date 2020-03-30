@@ -206,7 +206,7 @@ obj_lumberjack_progress = {
    h = 300,
    w = 350
 }
-lumberjack_message_07 = {
+lumberjack_message_07a = {
    title = _"The Construction Site",
    position = "topright",
    body = (
@@ -214,6 +214,18 @@ lumberjack_message_07 = {
       li_object("barbarians_builder", _[[If you click on the construction site, a window will open. You can see the wares that are still missing grayed out. You can also see the progress of this construction site.]], plr.color)
    ),
    h = 450,
+   w = 350
+}
+
+lumberjack_message_07b = {
+   title = _"The Construction Site",
+   position = "topright",
+   body = (
+      li_image("images/wui/buildings/toggle_workarea.png",
+         _[[This button toggles building’s range. Buildings like lumberjack’s hut cover only some work area. Let me show you how perfect this spot is.]]) ..
+      li(close_story_window_instructions)
+   ),
+   h = 200,
    w = 350
 }
 
