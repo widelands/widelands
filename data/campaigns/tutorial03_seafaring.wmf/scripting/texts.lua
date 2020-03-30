@@ -57,18 +57,20 @@ tell_about_port_building = {
       p(_[[Ports are big buildings, but they can only be built at special locations: those marked with the]]) ..
       li_image("images/wui/overlays/port.png", _[[blue port space icon.]]) ..
       p(_[[Port spaces are set by the map designer, so a map will either contain them or not. They might, however, be hidden under trees or be blocked by surrounding buildings.]]) ..
-      p(_[[You might already have noticed that you have such an icon next to your castle.]]) ..
-      li(_[[Build a port in the northern part of your camp.]])
-   ),
-   obj_name = "build_port",
-   obj_title = _"Build a port in the northern part of your camp.",
-   obj_body = (
-      h1(_"Build a port") ..
+      p(_[[You might already have noticed that you have such an icon next to your castle.]])
+   )
+}
+
+obj_build_port = {
+   name = "build_port",
+   title = _"Build a port",
+   number = 1,
+   body = objective_text("Build a port in the northern part of your camp",
       p(_[[You always need a port when you want to transport wares with a ship.]]) ..
       li(_[[Build a port next to your castle, on the blue port space icon.]]) ..
       li_arrow(_[[Ports are built like normal buildings, but are only available on blue port spaces. Just click on a field with the icon and the building menu automatically offers you to build a port.]]) ..
       li_arrow(_[[Although ports act as warehouses, you should not build more than necessary: they cost quartz, diamonds and gold, which makes them quite expensive.]])
-   ),
+   )
 }
 
 tell_about_shipyard = {
@@ -78,18 +80,19 @@ tell_about_shipyard = {
    body = (
       h1(_"Let’s build ships") ..
       p(_[[Great. While your port is being constructed, let’s build some ships.]]) ..
-      p(_[[Ships are constructed in a shipyard by a shipwright. We have to build one somewhere close to the shore.]]) ..
-      li(_[[Build a shipyard close to the coast. It is a medium building.]])
-   ),
-   h = 300,
-   obj_name = "build_shipyard",
-   obj_title = _"Build a shipyard",
-   obj_body = (
-      h1(_"Build a shipyard") ..
-      p(_[[Ships are produced in a shipyard.]]) ..
+      p(_[[Ships are constructed in a shipyard by a shipwright. We have to build one somewhere close to the shore.]])
+   )
+}
+
+obj_build_shipyard = {
+   name = "build_shipyard",
+   title = _"Build a shipyard",
+   number = 1,
+   body = objective_text("Build a shipyard close to the coast",
+      p(_[[Ships are produced in a shipyard. It is a medium building.]]) ..
       li(_[[Build a shipyard close to the shore of the southern part of your territory.]]) ..
       li_arrow(_[[The shipyard is a medium building. Although it can be built everywhere on the map, the shipwright only works when he is close to the water and there are no trees or roads at the shoreline.]])
-   ),
+   )
 }
 
 tell_about_ships = {
@@ -100,15 +103,18 @@ tell_about_ships = {
       p(_[[Very good. Your shipyard is finished and your shipwright immediately started working. For the construction of ships, he needs logs, planks and spidercloth, which will be transported to the shipyard.]]) ..
       p(_[[The shipwright will take the ware he needs to a free spot at the shoreline and build a ship there. When the first ship is finished, it will launch onto the sea, and the shipwright will construct another one.]]) ..
       li(_[[We should wait until we have two ships. That should be enough for now.]])
-   ),
-   obj_name = "wait_for_ships",
-   obj_title = _"Construct two ships",
-   obj_body = (
+   )
+}
+
+obj_make_ships = {
+   name = "wait_for_ships",
+   title = _"Ships",
+   number = 1,
+   body = objective_text("Construct two ships",
       p(_[[Ships are constructed automatically when the shipyard is complete and the needed wares have been delivered.]]) ..
       li(_[[Wait until the shipwright has constructed two ships.]]) ..
       li_arrow(_[[Do not forget to stop your shipyard when you have enough ships.]])
-   ),
-   h = 300
+   )
 }
 
 function shipyard_production(shipname)
@@ -149,10 +155,14 @@ expedition2 = {
          _[[You can check out the needed wares in the fifth tab of your port (it will appear when you’ve started an expedition).]])) ..
       p(_[[Now try this out. I will tell you later what the next steps are.]]) ..
       li(_[[Start an expedition in any of your ports.]])
-   ),
-   obj_name = "start_expedition",
-   obj_title = _"Start an expedition",
-   obj_body = (
+   )
+}
+
+obj_expedition_start = {
+   name = "start_expedition",
+   title = _"Expedition",
+   number = 1,
+   body = objective_text("Start an expedition",
       li(_[[Start an expedition.]]) ..
       li_image("images/wui/buildings/start_expedition.png", _[[To do so, click on the ‘Start Expedition’ button in any port. A new tab where you can see the needed wares will appear.]])
    )
@@ -168,10 +178,15 @@ expedition3 = {
          _[[Once a port space has been found, you can construct a new port with the button in the center of the ship’s control window.]])) ..
       p(_[[The wares will then be unloaded, and the ship will take up the task of transporting wares once again. The builder will start his work and build a port.]]) ..
       li(_[[Search for an island with a mountain, and look for a port space there. Colonize the island.]])
-   ),
-   obj_name = "found_settlement",
-   obj_title = _"Found a settlement",
-   obj_body = (
+   )
+}
+
+obj_expedition_sail = {
+   name = "found_settlement",
+   title = _"Explore",
+   number = 1,
+   -- TRANSLATORS: "Found" as in "founding", NOT as in "finding"
+   body = objective_text("Found a settlement",
       li(_[[Navigate your ship to an island that could contain iron ore.]]) ..
       li_arrow(_[[When you click on the expedition ship, a window opens where you can control your ship.]]) ..
       li(_[[When you have found a suitable port space, build a port there.]])
@@ -188,8 +203,7 @@ expedition4 = {
       p(_[[So far you have learned everything about seafaring: how to build ports and ships and how to send out an expedition. Remember that expeditions are sometimes the fastest way to reach essential resources – and sometimes the only one.]]) ..
       p(_[[But I want to speak a word of warning. Ports are like headquarters: they can be attacked by a nearby enemy. While your headquarters has soldiers to defend it, your newly built port won’t. You should therefore avoid settling next to an enemy.]]) ..
       p(_[[On this map, there is no enemy to fear. In other games, you should make building one or two military fortifications around your new colonies a priority.]])
-   ),
-   h = 400
+   )
 }
 
 expedition5 = {
@@ -200,12 +214,14 @@ expedition5 = {
       h1(_"Start mining") ..
       li_object('atlanteans_ironmine', p(_[[It was a long and expensive job to get here. The island has not much to offer, but there is some iron ore inside its mountain. Our economy needs iron ore, so we have to build an iron mine.]]), plr.color) ..
       li(_[[Start mining iron ore in the mountain.]])
-   ),
-   h = 300,
-   obj_name = "build_iron_mine",
-   obj_title = _"Build an irone mine on the island",
-   obj_body = (
-      h1(_"Build an iron mine") ..
+   )
+}
+
+obj_expedition_iron = {
+   name = "build_iron_mine",
+   title = _"Iron Mine",
+   number = 1,
+   body = objective_text("Build an irone mine on the island",
       p(_[[Our economy lacks resources.]]) ..
       li_arrow(_[[Start mining iron ore in mountains on the island.]])
    )
@@ -234,12 +250,14 @@ ferry_2 = {
          p(_[[This is where ferries come in. Ferries are small rowboats that can carry only one ware at a time, and no workers (other than the one who rows it and who never leaves his boat).]]) ..
          p(_[[ Ferries are built in ferry yards, one rowboat costs two logs and one piece of cloth and is quickly constructed. A ferry yard is a medium-sized building that needs to be built close to the shore.]]), plr.color) ..
       li(_[[Let’s build a ferry yard close to the shore before we will continue.]])
-   ),
-   h = 300,
-   obj_name = "build_ferry_yard",
-   obj_title = _"Build a ferry yard close to the shore",
-   obj_body = (
-      h1(_"Build a ferry yard") ..
+   )
+}
+
+obj_ferry_yard = {
+   name = "build_ferry_yard",
+   title = _"Build a ferry yard",
+   number = 1,
+   body = objective_text("Build a ferry yard close to the shore",
       p(_[[Ferries are constructed by a ferry yard.]]) ..
       li_arrow(_[[You need to build the ferry yard close to the shore, otherwise it won’t be able to build ferries there.]])
    )
@@ -276,12 +294,14 @@ ferry_5 = {
       h1(_"Golden waves") ..
       p(_[[As you can see, it is not that hard. When you build a waterway, the closest idle ferry will assign itself to it.]]) ..
       p(_[[Now it’s your turn: Build a gold mine on the mountain in the south and connect it to the main land by building waterways over the streams.]])
-   ),
-   h = 250,
-   obj_name = "build_waterways",
-   obj_title = _"Build a gold mine and waterways",
-   obj_body = (
-      h1(_"Build waterways") ..
+   )
+}
+
+obj_waterways = {
+   name = "build_waterways",
+   title = _"Waterways",
+   number = 1,
+   body = objective_text("Build a gold mine and waterways",
       p(_[[Build a gold mine on the mountain in the south, and connect it to the mainland by building waterways over the streams.]]) ..
       li_arrow(_[[A waterway is built just like a road: You click on a flag near the shore, choose ‘Build a waterway’, and select the path for the waterway just as you would do for a road.]]) ..
       li_arrow(_[[The only rule for waterway placement is that the two triangles directly adjacent to each segment of the waterway have to be water, and the entire path needs to be within your territory.]])
