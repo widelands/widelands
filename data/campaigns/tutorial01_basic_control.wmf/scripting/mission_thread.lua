@@ -135,14 +135,6 @@ function build_lumberjack()
       campaign_message_box(lumberjack_message_06, 3 * 1000)
    end
 
-   sleep(5000)
-   print("### Here we go!")
-   blocker = UserInputDisabler:new()
-   close_windows()
-   sleep(1500)
-   click_on_field(first_lumberjack_field)
-   blocker:lift_blocks()
-
    local o = campaign_message_with_objective(lumberjack_message_07, obj_lumberjack_progress)
    scroll_to_field(first_lumberjack_field)
    mouse_to_field(first_lumberjack_field)
