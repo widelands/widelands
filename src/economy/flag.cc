@@ -841,10 +841,10 @@ void Flag::cleanup(EditorGameBase& egbase) {
 		assert(!building_);
 	}
 
-	for (RoadBase* const road : roads_) {
-		if (road) {
-			road->remove(egbase);  //  immediate death
-			assert(!road);
+	for (uint8_t i = 0; i < (sizeof(roads_) / sizeof(roads_[0])); ++i) {
+		if (roads_[i]) {
+			roads_[i]->remove(egbase);  //  immediate death
+			assert(!roads_[i]);
 		}
 	}
 
