@@ -41,13 +41,15 @@ void CritterProgram::parse(const std::vector<std::string>& lines) {
 	for (const std::string& line : lines) {
 		try {
 			const std::vector<std::string> cmd(split_string(line, " \t\r\n"));
-			if (cmd.empty())
+			if (cmd.empty()) {
 				continue;
+			}
 
 			CritterAction act;
 			if (cmd[0] == "remove") {
-				if (cmd.size() != 1)
+				if (cmd.size() != 1) {
 					throw wexception("Usage: remove");
+				}
 				act.function = &Critter::run_remove;
 			} else {
 				throw wexception("unknown command type \"%s\"", cmd[0].c_str());
@@ -174,8 +176,9 @@ Get a program from the workers description.
 */
 CritterProgram const* CritterDescr::get_program(const std::string& programname) const {
 	Programs::const_iterator const it = programs_.find(programname);
-	if (it == programs_.end())
+	if (it == programs_.end()) {
 		throw wexception("%s has no program '%s'", name().c_str(), programname.c_str());
+	}
 	return it->second;
 }
 
@@ -244,13 +247,15 @@ void Critter::program_update(Game& game, State& state) {
 	for (;;) {
 		const CritterProgram& program = dynamic_cast<const CritterProgram&>(*state.program);
 
-		if (state.ivar1 >= program.get_size())
+		if (state.ivar1 >= program.get_size()) {
 			return pop_task(game);
+		}
 
 		const CritterAction& action = program[state.ivar1];
 
-		if ((this->*(action.function))(game, state, action))
+		if ((this->*(action.function))(game, state, action)) {
 			return;
+		}
 	}
 }
 
@@ -274,8 +279,9 @@ constexpr uint32_t kMinCritterLifetime = 20 * 60 * 1000;
 constexpr uint32_t kMaxCritterLifetime = 10 * 60 * 60 * 1000;
 
 void Critter::roam_update(Game& game, State& state) {
-	if (get_signal().size())
+	if (get_signal().size()) {
 		return pop_task(game);
+	}
 
 	// alternately move and idle
 	Time idle_time_min = 1000;
@@ -371,10 +377,13 @@ void Critter::roam_update(Game& game, State& state) {
 	assert(foundme);
 	if (descr().is_carnivore()) {
 		// only hunt other carnivores if there are no herbivores here
-		for (Critter* c : all_critters_on_field)
-			if (descr().name() != c->descr().name())
-				if (!c->descr().is_carnivore() || !other_herbivores_on_field)
+		for (Critter* c : all_critters_on_field) {
+			if (descr().name() != c->descr().name()) {
+				if (!c->descr().is_carnivore() || !other_herbivores_on_field) {
 					candidates_for_eating.push_back(c);
+				}
+			}
+		}
 	}
 	size_t nr_candidates_for_eating = candidates_for_eating.size();
 	while (can_eat_immovable || nr_candidates_for_eating > 0) {
@@ -434,8 +443,9 @@ void Critter::roam_update(Game& game, State& state) {
 					skipped = true;
 				}
 			}
-			if (!skipped)
+			if (!skipped) {
 				return start_task_idle(game, descr().get_animation("eating", this), kMealtime);
+			}
 		}
 		if (idx == nr_candidates_for_eating) {
 			assert(can_eat_immovable);
@@ -501,10 +511,12 @@ Critter::Loader::Loader() {
 }
 
 const Bob::Task* Critter::Loader::get_task(const std::string& name) {
-	if (name == "roam")
+	if (name == "roam") {
 		return &taskRoam;
-	if (name == "program")
+	}
+	if (name == "program") {
 		return &taskProgram;
+	}
 	return Bob::Loader::get_task(name);
 }
 
@@ -537,9 +549,10 @@ MapObject::Loader* Critter::load(EditorGameBase& egbase,
 				   "Tribes don't have critters %s/%s", critter_owner.c_str(), critter_name.c_str());
 			}
 
-			if (!descr)
+			if (!descr) {
 				throw GameDataError(
 				   "undefined critter %s/%s", critter_owner.c_str(), critter_name.c_str());
+			}
 
 			Critter& critter = dynamic_cast<Critter&>(descr->create_object());
 			critter.creation_time_ = packet_version >= 3 ? fr.unsigned_32() : 0;
