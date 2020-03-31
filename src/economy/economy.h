@@ -39,7 +39,6 @@ struct Flag;
 struct RSPairStruct;
 struct Route;
 struct Router;
-class Worker;
 class WorkerDescr;
 
 struct NoteEconomy {
