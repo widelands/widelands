@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
@@ -10,17 +10,17 @@
 # GunChleoc, 2018
 # Viktor S <awsswa59@gmail.com>, 2019
 # Yuriy Sokolov <lention@mail.ru>, 2015
-# Владимир Куряев <istercul@gmail.com>, 2016
+# 6da4f49c4b78e697e34b24b2a66289f5, 2016
 # Олег Шевченко <olegrock@gmail.com>, 2017
 # Олег Шевченко <olegrock@gmail.com>, 2018-2019
 # Fede4ka, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-09-06 07:24+0000\n"
-"PO-Revision-Date: 2019-09-11 09:48+0000\n"
-"Last-Translator: Viktor S <awsswa59@gmail.com>\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-03-28 05:00+0000\n"
+"PO-Revision-Date: 2020-03-28 05:02+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -166,9 +166,10 @@ msgstr "Постройте колодец, ферму и пекарню."
 msgid ""
 "Other ways to produce food – different kinds of food – are fishers and "
 "farms. The wheat of the farms has to be processed with water in a bakery "
-"before it becomes edible. You can obtain water by building a well on a spot "
-"where your geologists have found a water source."
-msgstr "Другой путь производства пайков – переработка различных видов еды, которые поставляются рыбаками и фермерами. Пшеница с ферм и вода, должны быть доставлены в пекарню, чтобы пекарь мог приготовить что-нибудь съедобное. Вы можете получить воду, построив колодец на участке, где ваши геологи нашли водный источник."
+"before it becomes edible. You can obtain water by building a well. For the "
+"best productivity, build it on a spot where your geologists have found a "
+"water source."
+msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:78
 msgid "Refine your mined resources"

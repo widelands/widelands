@@ -34,14 +34,14 @@ const std::string SavegameTable::map_filename(const std::string& filename,
 }
 
 const std::string SavegameTable::find_game_type(const SavegameData& savegame) const {
-	switch (savegame.gametype) {
-	case GameController::GameType::kSingleplayer:
+	if (savegame.is_singleplayer()) {
 		/** TRANSLATORS: "Single Player" entry in the Game Mode table column. */
 		/** TRANSLATORS: "Keep this to 6 letters maximum. */
 		/** TRANSLATORS: A tooltip will explain the abbreviation. */
 		/** TRANSLATORS: Make sure that this translation is consistent with the tooltip. */
 		return _("SP");
-	case GameController::GameType::kNetHost:
+	}
+	if (savegame.is_multiplayer_host()) {
 		/** TRANSLATORS: "Multiplayer Host" entry in the Game Mode table column. */
 		/** TRANSLATORS: "Keep this to 2 letters maximum. */
 		/** TRANSLATORS: A tooltip will explain the abbreviation. */
@@ -49,7 +49,8 @@ const std::string SavegameTable::find_game_type(const SavegameData& savegame) co
 		        tooltip. */
 		/** TRANSLATORS: %1% is the number of players */
 		return (boost::format(_("H (%1%)")) % savegame.nrplayers).str();
-	case GameController::GameType::kNetClient:
+	}
+	if (savegame.is_multiplayer_client()) {
 		/** TRANSLATORS: "Multiplayer" entry in the Game Mode table column. */
 		/** TRANSLATORS: "Keep this to 2 letters maximum. */
 		/** TRANSLATORS: A tooltip will explain the abbreviation. */
@@ -57,10 +58,9 @@ const std::string SavegameTable::find_game_type(const SavegameData& savegame) co
 		        tooltip. */
 		/** TRANSLATORS: %1% is the number of players */
 		return (boost::format(_("MP (%1%)")) % savegame.nrplayers).str();
-	case GameController::GameType::kReplay:
+	}
+	if (savegame.is_replay()) {
 		return "";
-	case GameController::GameType::kUndefined:
-		NEVER_HERE();
 	}
 	NEVER_HERE();
 }

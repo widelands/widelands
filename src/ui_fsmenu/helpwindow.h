@@ -49,6 +49,10 @@ public:
 protected:
 	void clicked_ok();
 
+	void clicked_button_close() override {
+		clicked_ok();
+	}
+
 private:
 	std::unique_ptr<MultilineTextarea> textarea_;
 };

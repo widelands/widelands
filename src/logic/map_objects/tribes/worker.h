@@ -308,7 +308,7 @@ protected:
 
 	protected:
 		const Task* get_task(const std::string& name) override;
-		const BobProgramBase* get_program(const std::string& name) override;
+		const MapObjectProgram* get_program(const std::string& name) override;
 
 	private:
 		uint32_t location_;

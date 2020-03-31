@@ -16,7 +16,7 @@ scold_player = {
       p(_[[I am sorry, but will I have to tear this down again. We might need the space here later on. If I am too slow for you, you might want to play a real game and just find everything out for yourself. Otherwise, please bear with me, I am not the youngest and quickest anymore.]]
       )
    ),
-   h = 300,
+   h = 150,
    show_instantly = true
 }
 
@@ -416,9 +416,9 @@ talk_about_roadbuilding_02 = {
    title = _"Road Building",
    body = (
       li_image("images/wui/fieldaction/menu_tab_buildroad.png", _[[One more thing: around the field where your road would end, you can see different markers. They have the following meaning:]]) ..
-      li_image("images/wui/overlays/roadb_green.png", _[[The terrain is flat here. Your carriers will be very swift on this terrain.]]) ..
-      li_image("images/wui/overlays/roadb_yellow.png", _[[There is a small slope to climb to reach this field. This means that your workers will be faster walking downhill than they will be walking uphill.]]) ..
-      li_image("images/wui/overlays/roadb_red.png", _[[The connection between the fields is extremely steep. The speed increase in one direction is huge while the slowdown in the other is also substantial.]]) ..
+      li_image("images/wui/overlays/road_building_green.png", _[[The terrain is flat here. Your carriers will be very swift on this terrain.]]) ..
+      li_image("images/wui/overlays/road_building_yellow.png", _[[There is a small slope to climb to reach this field. This means that your workers will be faster walking downhill than they will be walking uphill.]]) ..
+      li_image("images/wui/overlays/road_building_red.png", _[[The connection between the fields is extremely steep. The speed increase in one direction is huge while the slowdown in the other is also substantial.]]) ..
       p(_[[Keep the slopes in mind while placing roads and use them to your advantage. Also, try to keep roads as short as possible and always remember to place as many flags as you can on road segments to share the load better.]])
    ),
    h = 450

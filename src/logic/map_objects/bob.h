@@ -26,22 +26,12 @@
 #include "graphic/animation/diranimations.h"
 #include "logic/map_objects/info_to_draw.h"
 #include "logic/map_objects/map_object.h"
+#include "logic/map_objects/map_object_program.h"
 #include "logic/map_objects/walkingdir.h"
 #include "logic/path.h"
 #include "logic/widelands_geometry.h"
 
 namespace Widelands {
-
-/**
- * BobProgramBase is only used that
- * get_name always works
- */
-
-struct BobProgramBase {
-	virtual ~BobProgramBase() {
-	}
-	virtual std::string get_name() const = 0;
-};
 
 class Bob;
 
@@ -219,7 +209,7 @@ public:
 		DirAnimations diranims;
 		Path* path;
 		Route* route;
-		const BobProgramBase* program;  ///< pointer to current program
+		const MapObjectProgram* program;  ///< pointer to current program
 	};
 
 	MO_DESCR(BobDescr)
@@ -415,7 +405,7 @@ protected:
 
 	protected:
 		virtual const Task* get_task(const std::string& name);
-		virtual const BobProgramBase* get_program(const std::string& name);
+		virtual const MapObjectProgram* get_program(const std::string& name);
 
 	private:
 		struct LoadState {

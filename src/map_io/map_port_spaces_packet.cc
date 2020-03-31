@@ -43,8 +43,9 @@ void MapPortSpacesPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, Map
 		if (packet_version == kCurrentPacketVersion) {
 			map->set_waterway_max_length(s1.get_natural("waterway_max_length", 0));
 			const uint16_t num = s1.get_int("number_of_port_spaces", 0);
-			if (!num)
+			if (!num) {
 				return;
+			}
 
 			Section& s2 = prof.get_safe_section("port_spaces");
 			for (uint16_t i = 0; i < num; ++i) {

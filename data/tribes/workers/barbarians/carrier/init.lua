@@ -6,6 +6,7 @@ tribes:new_carrier_type {
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Carrier"),
    helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -13,34 +14,27 @@ tribes:new_carrier_type {
 
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          fps = 5,
          frames = 100,
          columns = 10,
          rows = 10,
-         hotspot = { 15, 22 }
+         hotspot = { 11, 18 }
       },
-
       walk = {
-         directory = dirname,
-         basename = "walk",
          fps = 10,
          frames = 10,
          columns = 3,
          rows = 4,
          directional = true,
-         hotspot = { 10, 20 }
+         hotspot = { 6, 16 }
       },
       walkload = {
-         directory = dirname,
-         basename = "walkload",
          fps = 10,
          frames = 10,
          columns = 3,
          rows = 4,
          directional = true,
-         hotspot = { 8, 23 }
+         hotspot = { 6, 18 }
       }
    }
 }

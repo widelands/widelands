@@ -117,6 +117,7 @@ struct MapObjectDescr {
 	}
 
 	virtual uint32_t get_animation(const std::string& animname, const MapObject* mo) const;
+
 	uint32_t main_animation() const;
 	std::string get_animation_name(uint32_t) const;  ///< needed for save, debug
 
@@ -149,7 +150,9 @@ protected:
 	void assign_directional_animation(DirAnimations* anims, const std::string& basename);
 
 private:
-	void add_animations(const LuaTable& table, Animation::Type anim_type);
+	void add_animations(const LuaTable& table,
+	                    const std::string& animation_directory,
+	                    Animation::Type anim_type);
 
 	/// Throws an exception if the MapObjectDescr has no representative image
 	void check_representative_image();

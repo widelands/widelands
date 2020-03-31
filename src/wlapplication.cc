@@ -549,13 +549,6 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, int modifi
 	if (down) {
 		const bool ctrl = (modifiers & KMOD_LCTRL) || (modifiers & KMOD_RCTRL);
 		switch (keycode) {
-		case SDLK_F10:
-			// exits the game.
-			if (ctrl) {
-				should_die_ = true;
-			}
-			return true;
-
 		case SDLK_F11:
 			// Takes a screenshot.
 			if (ctrl) {
@@ -1427,6 +1420,7 @@ bool WLApplication::campaign_game() {
 		if (select_campaignmap.run<FullscreenMenuBase::MenuTarget>() ==
 		    FullscreenMenuBase::MenuTarget::kOk) {
 			filename = select_campaignmap.get_map();
+			game.set_scenario_difficulty(select_campaignmap.get_difficulty());
 			break;
 		}
 	}
