@@ -456,7 +456,8 @@ void Economy::remove_supply(Supply& supply) {
 	supplies_.remove_supply(supply);
 }
 
-// minimal invasive fix of bug 1236538 and issue #3794
+// Minimal invasive fix of bug 1236538 and issue #3794.
+// It does not matter which tribe this soldier has, only that all training levels are 0.
 std::unique_ptr<Worker> Economy::soldier_prototype_(nullptr);
 // static
 Worker& Economy::soldier_prototype(const WorkerDescr* d) {
