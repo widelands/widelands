@@ -135,7 +135,6 @@ function build_lumberjack()
       campaign_message_box(lumberjack_message_06, 3 * 1000)
    end
 
-
    local o = campaign_message_with_objective(lumberjack_message_07a, obj_lumberjack_progress)
    scroll_to_field(first_lumberjack_field)
    mouse_to_field(first_lumberjack_field)
