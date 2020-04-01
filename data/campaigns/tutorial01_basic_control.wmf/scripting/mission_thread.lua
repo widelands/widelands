@@ -148,8 +148,7 @@ function build_lumberjack()
    click_on_panel(wl.ui.MapView().windows.building_window.buttons.workarea)
    blocker:lift_blocks()
 
-   sleep(10000)
-   close_windows()
+   while wl.ui.MapView().windows.building_window do sleep(100) end
    set_objective_done(o)
    sleep(3000)
 

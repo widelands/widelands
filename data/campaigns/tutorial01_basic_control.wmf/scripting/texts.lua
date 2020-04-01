@@ -200,8 +200,8 @@ obj_lumberjack_progress = {
    title=_"Let’s see the progress",
    number = 1,
    body = objective_text(_"Let’s see the progress",
-      li(_[[Click on the construction site to have a look at it, then close its window again when you have seen enough.]]) ..
-      li_arrow(_[[To close the construction site’s window, simply right-click on it.]])
+      li(_[[Click on the construction site to have a look at it.]]) ..
+      li_arrow(_[[When you have seen enough, close the construction site’s window: simply right-click on it.]])
    ),
    h = 300,
    w = 350
@@ -223,9 +223,10 @@ lumberjack_message_07b = {
    body = (
       li_image("images/wui/buildings/toggle_workarea.png",
          _[[This button toggles building’s range. Buildings like lumberjack’s hut cover only some work area. Let me show you how perfect this spot is.]]) ..
+      p(_[[Close construction site window when you have seen enough.]]) ..
       li(close_story_window_instructions)
    ),
-   h = 200,
+   h = 250,
    w = 350
 }
 
