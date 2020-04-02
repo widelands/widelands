@@ -315,7 +315,7 @@ function victory()
    while not (done_mining and done_fighting) do sleep(4731) end
    sleep(10000)
    campaign_message_box(victory_1)
-   p1:reveal_scenario("frisians02")
+   p1:mark_scenario_as_solved("fri02.wmf")
    --END OF MISSION 2
 end
 
