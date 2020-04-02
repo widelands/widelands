@@ -221,8 +221,8 @@ ImmovableProgram::ActSeed::ActSeed(std::vector<std::string>& arguments,
 	type_name = arguments.front();
 	const int p = std::stoi(arguments[1]);
 	if (p <= 0 || p >= 255) {
-		throw GameDataError(
-		   "Immovable %s: Seeding radius range factor %i out of range [1,254]", descr.name().c_str(), p);
+		throw GameDataError("Immovable %s: Seeding radius range factor %i out of range [1,254]",
+		                    descr.name().c_str(), p);
 	}
 	probability = p;
 }
