@@ -183,11 +183,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      lastframe_(SDL_GetTicks()),
      frametime_(0),
      avg_usframetime_(0),
-     buildroad_(nullptr),
-     road_build_player_(0),
-     buildwaterway_(nullptr),
-     waterway_build_player_(0),
-     waterway_work_area_(nullptr),
+     road_building_mode_(nullptr),
      unique_window_handler_(new UniqueWindowHandler()) {
 
 	// Load the buildhelp icons.
@@ -263,11 +259,8 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 }
 
 InteractiveBase::~InteractiveBase() {
-	if (buildroad_) {
+	if (road_building_mode_) {
 		abort_build_road();
-	}
-	if (buildwaterway_) {
-		abort_build_waterway();
 	}
 }
 
@@ -459,6 +452,21 @@ bool InteractiveBase::has_expedition_port_space(const Widelands::Coords& coords)
 		}
 	}
 	return false;
+}
+
+std::map<Widelands::Coords, std::vector<uint8_t>>
+InteractiveBase::road_building_preview_overlays() const {
+	if (road_building_mode_) {
+		return road_building_mode_->overlay_road_previews;
+	}
+	return std::map<Widelands::Coords, std::vector<uint8_t>>();
+}
+std::map<Widelands::Coords, const Image*>
+InteractiveBase::road_building_steepness_overlays() const {
+	if (road_building_mode_) {
+		return road_building_mode_->overlay_steepness_indicators;
+	}
+	return std::map<Widelands::Coords, const Image*>();
 }
 
 // Show the given workareas at the given coords
@@ -655,6 +663,34 @@ void InteractiveBase::hide_workarea(const Widelands::Coords& coords, bool is_add
 void InteractiveBase::postload() {
 }
 
+void InteractiveBase::draw_road_building(FieldsToDraw::Field& field) {
+	const auto rpo = road_building_preview_overlays();
+	const auto rinfo = rpo.find(field.fcoords);
+	if (rinfo != rpo.end()) {
+		for (uint8_t dir : rinfo->second) {
+			switch (dir) {
+			case Widelands::WALK_E:
+				field.road_e = in_road_building_mode(RoadBuildingType::kRoad) ?
+				                  Widelands::RoadSegment::kNormal :
+				                  Widelands::RoadSegment::kWaterway;
+				break;
+			case Widelands::WALK_SE:
+				field.road_se = in_road_building_mode(RoadBuildingType::kRoad) ?
+				                   Widelands::RoadSegment::kNormal :
+				                   Widelands::RoadSegment::kWaterway;
+				break;
+			case Widelands::WALK_SW:
+				field.road_sw = in_road_building_mode(RoadBuildingType::kRoad) ?
+				                   Widelands::RoadSegment::kNormal :
+				                   Widelands::RoadSegment::kWaterway;
+				break;
+			default:
+				throw wexception("Attempt to set road-building overlay for invalid direction %i", dir);
+			}
+		}
+	}
+}
+
 /*
 ===============
 Called once per frame by the UI code
@@ -820,7 +856,7 @@ void InteractiveBase::toggle_minimap() {
 	rebuild_mapview_menu();
 }
 
-const std::vector<QuickNavigation::Landmark>& InteractiveBase::landmarks() {
+const QuickNavigation::Landmark* InteractiveBase::landmarks() {
 	return quick_navigation_.landmarks();
 }
 
@@ -874,65 +910,56 @@ void InteractiveBase::set_display_flag(uint32_t const flag, bool const on) {
 Begin building a road
 ===============
 */
-void InteractiveBase::start_build_road(Coords road_start, Widelands::PlayerNumber const player) {
-	// create an empty path
-	assert(!buildroad_);
-	buildroad_.reset(new CoordPath(road_start));
-
-	road_build_player_ = player;
+void InteractiveBase::start_build_road(Coords road_start,
+                                       Widelands::PlayerNumber const player,
+                                       RoadBuildingType t) {
+	assert(!road_building_mode_);
+	road_building_mode_.reset(new RoadBuildingMode(player, road_start, t));
 
 	road_building_add_overlay();
+	set_sel_picture(g_gr->images().get(t == RoadBuildingType::kWaterway ?
+	                                      "images/ui_basic/fsel_waterwaybuilding.png" :
+	                                      "images/ui_basic/fsel_roadbuilding.png"));
 
-	set_sel_picture(g_gr->images().get("images/ui_basic/fsel_roadbuilding.png"));
-}
+	if (t == RoadBuildingType::kWaterway) {
+		// Show workarea to visualise length limit
+		const Widelands::Map& map = egbase().map();
+		const uint32_t len = map.get_waterway_max_length();
+		assert(len > 1);
+		road_building_mode_->work_area.reset(new WorkareaInfo());
+		road_building_mode_->work_area->insert(std::make_pair(len, std::set<std::string>()));
 
-void InteractiveBase::start_build_waterway(Coords waterway_start,
-                                           Widelands::PlayerNumber const player) {
-	// create an empty path
-	assert(!buildwaterway_);
-	buildwaterway_.reset(new CoordPath(waterway_start));
-	waterway_build_player_ = player;
-	waterway_building_add_overlay();
-	set_sel_picture(g_gr->images().get("images/ui_basic/fsel_waterwaybuilding.png"));
-
-	// Show workarea to visualise length limit
-	const Widelands::Map& map = egbase().map();
-	const uint32_t len = map.get_waterway_max_length();
-	assert(len > 1);
-	assert(!waterway_work_area_);
-	waterway_work_area_.reset(new WorkareaInfo());
-	waterway_work_area_->insert(std::make_pair(len, std::set<std::string>()));
-
-	std::map<Widelands::FCoords, bool> reachable_nodes;
-	Widelands::CheckStepFerry cstep(egbase());
-	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
-	   map, Widelands::Area<Widelands::FCoords>(map.get_fcoords(waterway_start), len));
-	do {
-		reachable_nodes.insert(
-		   std::make_pair(mr.location(), mr.location().field->get_owned_by() == player &&
-		                                    !mr.location().field->is_border() &&
-		                                    cstep.reachable_dest(map, mr.location())));
-	} while (mr.advance(map));
-	std::map<Widelands::TCoords<>, uint32_t> wa_data;
-	for (const auto& pair : reachable_nodes) {
-		const auto br = reachable_nodes.find(map.br_n(pair.first));
-		if (br == reachable_nodes.end()) {
-			continue;
+		std::map<Widelands::FCoords, bool> reachable_nodes;
+		Widelands::CheckStepFerry cstep(egbase());
+		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
+		   map, Widelands::Area<Widelands::FCoords>(map.get_fcoords(road_start), len));
+		do {
+			reachable_nodes.insert(
+			   std::make_pair(mr.location(), mr.location().field->get_owned_by() == player &&
+			                                    !mr.location().field->is_border() &&
+			                                    cstep.reachable_dest(map, mr.location())));
+		} while (mr.advance(map));
+		std::map<Widelands::TCoords<>, uint32_t> wa_data;
+		for (const auto& pair : reachable_nodes) {
+			const auto br = reachable_nodes.find(map.br_n(pair.first));
+			if (br == reachable_nodes.end()) {
+				continue;
+			}
+			auto it = reachable_nodes.find(map.bl_n(pair.first));
+			if (it != reachable_nodes.end()) {
+				wa_data.insert(
+				   std::make_pair(Widelands::TCoords<>(pair.first, Widelands::TriangleIndex::D),
+				                  pair.second && br->second && it->second ? 5 : 6));
+			}
+			it = reachable_nodes.find(map.r_n(pair.first));
+			if (it != reachable_nodes.end()) {
+				wa_data.insert(
+				   std::make_pair(Widelands::TCoords<>(pair.first, Widelands::TriangleIndex::R),
+				                  pair.second && br->second && it->second ? 5 : 6));
+			}
 		}
-		auto it = reachable_nodes.find(map.bl_n(pair.first));
-		if (it != reachable_nodes.end()) {
-			wa_data.insert(
-			   std::make_pair(Widelands::TCoords<>(pair.first, Widelands::TriangleIndex::D),
-			                  pair.second && br->second && it->second ? 5 : 6));
-		}
-		it = reachable_nodes.find(map.r_n(pair.first));
-		if (it != reachable_nodes.end()) {
-			wa_data.insert(
-			   std::make_pair(Widelands::TCoords<>(pair.first, Widelands::TriangleIndex::R),
-			                  pair.second && br->second && it->second ? 5 : 6));
-		}
+		show_workarea(*road_building_mode_->work_area, road_start, wa_data);
 	}
-	show_workarea(*waterway_work_area_, waterway_start, wa_data);
 }
 
 /*
@@ -941,29 +968,18 @@ Stop building the road
 ===============
 */
 void InteractiveBase::abort_build_road() {
-	assert(buildroad_);
+	assert(road_building_mode_);
+	if (road_building_mode_->type == RoadBuildingType::kWaterway) {
+		assert(road_building_mode_->work_area);
+		hide_workarea(road_building_mode_->path.get_start(), true);
+	}
+#ifndef NDEBUG
+	else
+		assert(!road_building_mode_->work_area);
+#endif
 
 	road_building_remove_overlay();
-
-	road_build_player_ = 0;
-
-	buildroad_.reset(nullptr);
-
-	unset_sel_picture();
-}
-
-void InteractiveBase::abort_build_waterway() {
-	assert(buildwaterway_);
-	assert(waterway_work_area_);
-	hide_workarea(buildwaterway_->get_start(), true);
-	waterway_work_area_.reset(nullptr);
-
-	waterway_building_remove_overlay();
-
-	waterway_build_player_ = 0;
-
-	buildwaterway_.reset(nullptr);
-
+	road_building_mode_.reset(nullptr);
 	unset_sel_picture();
 }
 
@@ -973,92 +989,60 @@ Finally build the road
 ===============
 */
 void InteractiveBase::finish_build_road() {
-	assert(buildroad_);
+	assert(road_building_mode_);
+
+	if (road_building_mode_->type == RoadBuildingType::kWaterway) {
+		assert(road_building_mode_->work_area);
+		hide_workarea(road_building_mode_->path.get_start(), true);
+	}
+#ifndef NDEBUG
+	else
+		assert(!road_building_mode_->work_area);
+#endif
 
 	road_building_remove_overlay();
 
-	if (buildroad_->get_nsteps()) {
-		upcast(Game, game, &egbase());
-
-		// Build the path as requested
-		if (game)
-			game->send_player_build_road(road_build_player_, *new Widelands::Path(*buildroad_));
-		else
-			egbase().get_player(road_build_player_)->build_road(*new Widelands::Path(*buildroad_));
-
-		if (allow_user_input() && (SDL_GetModState() & KMOD_CTRL)) {
-			//  place flags
-			const Map& map = egbase().map();
-			const std::vector<Coords>& c_vector = buildroad_->get_coords();
-			std::vector<Coords>::const_iterator const first = c_vector.begin() + 2;
-			std::vector<Coords>::const_iterator const last = c_vector.end() - 2;
-
-			if (SDL_GetModState() & KMOD_SHIFT) {
-				for //  start to end
-					(std::vector<Coords>::const_iterator it = first;
-					 it <= last;
-					 ++it)
-					if (game)
-						game->send_player_build_flag(road_build_player_, map.get_fcoords(*it));
-					else
-						egbase().get_player(road_build_player_)->build_flag(map.get_fcoords(*it));
-
-			} else {
-				for //  end to start
-					(std::vector<Coords>::const_iterator it = last;
-					 first <= it;
-					 --it)
-					if (game)
-						game->send_player_build_flag(road_build_player_, map.get_fcoords(*it));
-					else
-						egbase().get_player(road_build_player_)->build_flag(map.get_fcoords(*it));
-			}
-		}
-	}
-
-	buildroad_.reset(nullptr);
-
-	unset_sel_picture();
-}
-
-void InteractiveBase::finish_build_waterway() {
-	assert(buildwaterway_ != nullptr);
-
-	assert(waterway_work_area_);
-	hide_workarea(buildwaterway_->get_start(), true);
-	waterway_work_area_.reset(nullptr);
-
-	waterway_building_remove_overlay();
-
-	const size_t length = buildwaterway_->get_nsteps();
-	if (length > egbase().map().get_waterway_max_length()) {
+	const size_t length = road_building_mode_->path.get_nsteps();
+	if (road_building_mode_->type == RoadBuildingType::kWaterway &&
+	    length > egbase().map().get_waterway_max_length()) {
 		log("Refusing to finish waterway building: length is %" PRIuS " but limit is %d\n", length,
 		    egbase().map().get_waterway_max_length());
 	} else if (length) {
-		upcast(Game, game, &egbase());
+		upcast(Game, g, &egbase());
 
 		// Build the path as requested
-		if (game) {
-			game->send_player_build_waterway(
-			   waterway_build_player_, *new Widelands::Path(*buildwaterway_));
+		if (g) {
+			if (road_building_mode_->type == RoadBuildingType::kWaterway) {
+				g->send_player_build_waterway(
+				   road_building_mode_->player, *new Widelands::Path(road_building_mode_->path));
+			} else {
+				g->send_player_build_road(
+				   road_building_mode_->player, *new Widelands::Path(road_building_mode_->path));
+			}
 		} else {
-			egbase()
-			   .get_player(waterway_build_player_)
-			   ->build_waterway(*new Widelands::Path(*buildwaterway_));
+			if (road_building_mode_->type == RoadBuildingType::kWaterway) {
+				egbase()
+				   .get_player(road_building_mode_->player)
+				   ->build_waterway(*new Widelands::Path(road_building_mode_->path));
+			} else {
+				egbase()
+				   .get_player(road_building_mode_->player)
+				   ->build_road(*new Widelands::Path(road_building_mode_->path));
+			}
 		}
 
 		if (allow_user_input() && (SDL_GetModState() & KMOD_CTRL)) {
 			//  place flags
 			const Map& map = egbase().map();
-			const std::vector<Coords>& c_vector = buildwaterway_->get_coords();
+			const std::vector<Coords>& c_vector = road_building_mode_->path.get_coords();
 			std::vector<Coords>::const_iterator const first = c_vector.begin() + 2;
 			std::vector<Coords>::const_iterator const last = c_vector.end() - 2;
 
-			auto place_flag = [this, game](const Widelands::FCoords& coords) {
-				if (game) {
-					game->send_player_build_flag(waterway_build_player_, coords);
+			auto place_flag = [this, g](const Widelands::FCoords& coords) {
+				if (g) {
+					g->send_player_build_flag(road_building_mode_->player, coords);
 				} else {
-					egbase().get_player(waterway_build_player_)->build_flag(coords);
+					egbase().get_player(road_building_mode_->player)->build_flag(coords);
 				}
 			};
 
@@ -1076,8 +1060,7 @@ void InteractiveBase::finish_build_waterway() {
 		}
 	}
 
-	buildwaterway_.reset(nullptr);
-
+	road_building_mode_.reset(nullptr);
 	unset_sel_picture();
 }
 
@@ -1088,17 +1071,26 @@ Otherwise append if possible or return false.
 ===============
 */
 bool InteractiveBase::append_build_road(Coords const field) {
-	assert(buildroad_);
+	assert(road_building_mode_);
 
 	const Map& map = egbase().map();
-	const Widelands::Player& player = egbase().player(road_build_player_);
+	const Widelands::Player& player = egbase().player(road_building_mode_->player);
 
 	{  //  find a path to the clicked-on node
 		Widelands::Path path;
-		Widelands::CheckStepRoad cstep(player, Widelands::MOVECAPS_WALK);
-		if (map.findpath(buildroad_->get_end(), field, 0, path, cstep, Map::fpBidiCost) < 0)
-			return false;  //  could not find a path
-		buildroad_->append(map, path);
+		Widelands::CheckStepAnd cstep;
+		if (road_building_mode_->type == RoadBuildingType::kWaterway) {
+			cstep.add(Widelands::CheckStepFerry(egbase()));
+			cstep.add(
+			   Widelands::CheckStepRoad(player, Widelands::MOVECAPS_SWIM | Widelands::MOVECAPS_WALK));
+		} else {
+			cstep.add(Widelands::CheckStepRoad(player, Widelands::MOVECAPS_WALK));
+		}
+		if (map.findpath(
+		       road_building_mode_->path.get_end(), field, 0, path, cstep, Map::fpBidiCost) < 0) {
+			return false;  // could not find a path
+		}
+		road_building_mode_->path.append(map, path);
 	}
 
 	{
@@ -1107,71 +1099,30 @@ bool InteractiveBase::append_build_road(Coords const field) {
 		//  is guaranteed to not hinder building placement.
 		Widelands::Path path;
 		{
-			Widelands::CheckStepLimited cstep;
-			{
-				for (const Coords& coord : buildroad_->get_coords()) {
-					cstep.add_allowed_location(coord);
-				}
+			Widelands::CheckStepAnd cstep;
+			Widelands::CheckStepLimited clim;
+			for (const Coords& coord : road_building_mode_->path.get_coords()) {
+				clim.add_allowed_location(coord);
 			}
-			map.findpath(buildroad_->get_start(), field, 0, path, cstep, Map::fpBidiCost);
+			cstep.add(clim);
+			if (road_building_mode_->type == RoadBuildingType::kWaterway) {
+				// Waterways (unlike roads) are strictly limited by the terrain around the edges
+				cstep.add(Widelands::CheckStepFerry(egbase()));
+			}
+			map.findpath(
+			   road_building_mode_->path.get_start(), field, 0, path, cstep, Map::fpBidiCost);
 		}
-		buildroad_->truncate(0);
-		buildroad_->append(map, path);
+		road_building_mode_->path.truncate(0);
+		road_building_mode_->path.append(map, path);
+	}
+
+	if (road_building_mode_->type == RoadBuildingType::kWaterway &&
+	    road_building_mode_->path.get_nsteps() > map.get_waterway_max_length()) {
+		road_building_mode_->path.truncate(map.get_waterway_max_length());
 	}
 
 	road_building_remove_overlay();
 	road_building_add_overlay();
-
-	return true;
-}
-
-bool InteractiveBase::append_build_waterway(Coords const field) {
-	assert(buildwaterway_);
-
-	const Map& map = egbase().map();
-	const Widelands::Player& player = egbase().player(waterway_build_player_);
-
-	{  //  find a path to the clicked-on node
-		Widelands::Path path;
-		Widelands::CheckStepAnd cstep;
-		cstep.add(Widelands::CheckStepFerry(egbase()));
-		cstep.add(
-		   Widelands::CheckStepRoad(player, Widelands::MOVECAPS_SWIM | Widelands::MOVECAPS_WALK));
-		if (map.findpath(buildwaterway_->get_end(), field, 0, path, cstep, Map::fpBidiCost) < 0) {
-			return false;  //  could not find a path
-		}
-		buildwaterway_->append(map, path);
-	}
-
-	{
-		//  Fix the waterway by finding an optimal path through the set of nodes
-		//  currently used by the waterway. This will not claim any new nodes.
-		//  Since waterways (unlike roads) are strictly limited by the terrain around the
-		//  edges, the path may be zigzagging around (that is, the path may contain two
-		//  neighbouring nodes but not the edge between them).
-		Widelands::Path path;
-		{
-			Widelands::CheckStepLimited clim;
-			{
-				for (const Coords& coord : buildwaterway_->get_coords()) {
-					clim.add_allowed_location(coord);
-				}
-			}
-			Widelands::CheckStepAnd cstep;
-			cstep.add(Widelands::CheckStepFerry(egbase()));
-			cstep.add(clim);
-			map.findpath(buildwaterway_->get_start(), field, 0, path, cstep, Map::fpBidiCost);
-		}
-		buildwaterway_->truncate(0);
-		buildwaterway_->append(map, path);
-	}
-
-	if (buildwaterway_->get_nsteps() > map.get_waterway_max_length()) {
-		buildwaterway_->truncate(map.get_waterway_max_length());
-	}
-
-	waterway_building_remove_overlay();
-	waterway_building_add_overlay();
 
 	return true;
 }
@@ -1182,15 +1133,8 @@ Return the current road-building startpoint
 ===============
 */
 Coords InteractiveBase::get_build_road_start() const {
-	assert(buildroad_);
-
-	return buildroad_->get_start();
-}
-
-Coords InteractiveBase::get_build_waterway_start() const {
-	assert(buildwaterway_);
-
-	return buildwaterway_->get_start();
+	assert(road_building_mode_);
+	return road_building_mode_->path.get_start();
 }
 
 /*
@@ -1199,15 +1143,13 @@ Return the current road-building endpoint
 ===============
 */
 Coords InteractiveBase::get_build_road_end() const {
-	assert(buildroad_);
-
-	return buildroad_->get_end();
+	assert(road_building_mode_);
+	return road_building_mode_->path.get_end();
 }
 
-Coords InteractiveBase::get_build_waterway_end() const {
-	assert(buildwaterway_);
-
-	return buildwaterway_->get_end();
+Widelands::CoordPath InteractiveBase::get_build_road_path() const {
+	assert(road_building_mode_);
+	return road_building_mode_->path;
 }
 
 void InteractiveBase::log_message(const std::string& message) const {
@@ -1265,134 +1207,71 @@ Add road building data to the road overlay
 ===============
 */
 void InteractiveBase::road_building_add_overlay() {
-	assert(buildroad_);
-	assert(road_building_overlays_.road_previews.empty());
-	assert(road_building_overlays_.steepness_indicators.empty());
+	assert(road_building_mode_);
+	assert(road_building_mode_->overlay_road_previews.empty());
+	assert(road_building_mode_->overlay_steepness_indicators.empty());
 
 	const Map& map = egbase().map();
 
 	// preview of the road
-	const CoordPath::StepVector::size_type nr_steps = buildroad_->get_nsteps();
+	const CoordPath::StepVector::size_type nr_steps = road_building_mode_->path.get_nsteps();
 	for (CoordPath::StepVector::size_type idx = 0; idx < nr_steps; ++idx) {
-		Widelands::Direction dir = (*buildroad_)[idx];
-		Coords c = buildroad_->get_coords()[idx];
+		Widelands::Direction dir = (road_building_mode_->path)[idx];
+		Coords c = road_building_mode_->path.get_coords()[idx];
 
 		if (dir < Widelands::WALK_E || dir > Widelands::WALK_SW) {
 			map.get_neighbour(c, dir, &c);
 			dir = Widelands::get_reverse_dir(dir);
 		}
-		road_building_overlays_.road_previews.emplace(c, std::vector<uint8_t>());
-		road_building_overlays_.road_previews[c].push_back(dir);
+		road_building_mode_->overlay_road_previews.emplace(c, std::vector<uint8_t>());
+		road_building_mode_->overlay_road_previews[c].push_back(dir);
 	}
 
 	// build hints
-	Widelands::FCoords endpos = map.get_fcoords(buildroad_->get_end());
+	Widelands::FCoords endpos = map.get_fcoords(road_building_mode_->path.get_end());
 
 	for (int32_t dir = 1; dir <= 6; ++dir) {
 		Widelands::FCoords neighb;
 		int32_t caps;
 
 		map.get_neighbour(endpos, dir, &neighb);
-		caps = egbase().player(road_build_player_).get_buildcaps(neighb);
+		caps = egbase().player(road_building_mode_->player).get_buildcaps(neighb);
 
-		if (!(caps & Widelands::MOVECAPS_WALK))
-			continue;  // need to be able to walk there
-
-		//  can't build on robusts
-		Widelands::BaseImmovable* const imm = map.get_immovable(neighb);
-		if (imm && imm->get_size() >= Widelands::BaseImmovable::SMALL) {
-			if (!(dynamic_cast<const Widelands::Flag*>(imm) ||
-			      (dynamic_cast<const Widelands::RoadBase*>(imm) &&
-			       (caps & Widelands::BUILDCAPS_FLAG))))
+		if (road_building_mode_->type == RoadBuildingType::kWaterway) {
+			Widelands::CheckStepFerry checkstep(egbase());
+			if (!checkstep.reachable_dest(map, neighb) ||
+			    road_building_mode_->path.get_index(neighb) >= 0 ||
+			    !neighb.field->is_interior(road_building_mode_->player)) {
 				continue;
-		}
+			}
 
-		if (buildroad_->get_index(neighb) >= 0)
-			continue;  // the road can't cross itself
-
-		int32_t slope;
-
-		if (Widelands::WALK_E == dir || Widelands::WALK_NE == dir || Widelands::WALK_SE == dir)
-			slope = neighb.field->get_height() - endpos.field->get_height();
-		else
-			slope = endpos.field->get_height() - neighb.field->get_height();
-
-		const char* name = nullptr;
-
-		if (slope <= -4)
-			name = "images/wui/overlays/road_building_reddown.png";
-		else if (slope <= -2)
-			name = "images/wui/overlays/road_building_yellowdown.png";
-		else if (slope < 2)
-			name = "images/wui/overlays/road_building_green.png";
-		else if (slope < 4)
-			name = "images/wui/overlays/road_building_yellow.png";
-		else
-			name = "images/wui/overlays/road_building_red.png";
-		road_building_overlays_.steepness_indicators[neighb] = g_gr->images().get(name);
-	}
-}
-
-void InteractiveBase::waterway_building_add_overlay() {
-	assert(buildwaterway_);
-	assert(waterway_building_overlays_.road_previews.empty());
-	assert(waterway_building_overlays_.steepness_indicators.empty());
-
-	const Map& map = egbase().map();
-
-	// preview of the waterway
-	const CoordPath::StepVector::size_type nr_steps = buildwaterway_->get_nsteps();
-	for (CoordPath::StepVector::size_type idx = 0; idx < nr_steps; ++idx) {
-		Widelands::Direction dir = (*buildwaterway_)[idx];
-		Coords c = buildwaterway_->get_coords()[idx];
-
-		if (dir < Widelands::WALK_E || dir > Widelands::WALK_SW) {
-			map.get_neighbour(c, dir, &c);
-			dir = Widelands::get_reverse_dir(dir);
-		}
-		waterway_building_overlays_.road_previews.insert(std::make_pair(c, std::vector<uint8_t>()));
-		waterway_building_overlays_.road_previews[c].push_back(dir);
-	}
-
-	// build hints
-	Widelands::FCoords endpos = map.get_fcoords(buildwaterway_->get_end());
-
-	for (int32_t dir = 1; dir <= 6; ++dir) {
-		Widelands::FCoords neighb;
-		int32_t caps;
-
-		map.get_neighbour(endpos, dir, &neighb);
-		caps = egbase().player(waterway_build_player_).get_buildcaps(neighb);
-		Widelands::CheckStepFerry checkstep(egbase());
-
-		if (!checkstep.reachable_dest(map, neighb) || buildwaterway_->get_index(neighb) >= 0 ||
-		    !neighb.field->is_interior(waterway_build_player_)) {
-			continue;
-		}
-
-		{
 			bool next_to = false;
 			Widelands::FCoords nb;
 			for (int32_t d = 1; d <= 6; ++d) {
 				map.get_neighbour(neighb, d, &nb);
-				if (nb != endpos && buildwaterway_->get_index(nb) >= 0 &&
+				if (nb != endpos && road_building_mode_->path.get_index(nb) >= 0 &&
 				    checkstep.allowed(map, neighb, nb, d, Widelands::CheckStep::StepId::stepNormal)) {
 					next_to = true;
 					break;
 				}
 			}
-			if (!next_to && buildwaterway_->get_nsteps() >= map.get_waterway_max_length()) {
+			if (!next_to && road_building_mode_->path.get_nsteps() >= map.get_waterway_max_length()) {
 				continue;  // exceeds length limit
 			}
+		} else if (!(caps & Widelands::MOVECAPS_WALK)) {
+			continue;  // need to be able to walk there
 		}
 
 		//  can't build on robusts
 		const Widelands::BaseImmovable* imm = map.get_immovable(neighb);
-		if (imm && imm->get_size() >= Widelands::BaseImmovable::SMALL) {
-			if (!(dynamic_cast<const Widelands::Flag*>(imm) ||
-			      (dynamic_cast<const Widelands::RoadBase*>(imm) &&
-			       (caps & Widelands::BUILDCAPS_FLAG))))
-				continue;
+		if (imm && imm->get_size() >= Widelands::BaseImmovable::SMALL &&
+		    (!(dynamic_cast<const Widelands::Flag*>(imm) ||
+		       (dynamic_cast<const Widelands::RoadBase*>(imm) &&
+		        (caps & Widelands::BUILDCAPS_FLAG))))) {
+			continue;
+		}
+		if (road_building_mode_->path.get_index(neighb) >= 0) {
+			continue;  // the road can't cross itself
 		}
 
 		int32_t slope;
@@ -1405,18 +1284,32 @@ void InteractiveBase::waterway_building_add_overlay() {
 
 		const char* name = nullptr;
 
-		if (slope <= -4) {
-			name = "images/wui/overlays/waterway_building_steepdown.png";
-		} else if (slope >= 4) {
-			name = "images/wui/overlays/waterway_building_steepup.png";
-		} else if (slope <= -2) {
-			name = "images/wui/overlays/waterway_building_down.png";
-		} else if (slope >= 2) {
-			name = "images/wui/overlays/waterway_building_up.png";
+		if (road_building_mode_->type == RoadBuildingType::kWaterway) {
+			if (slope <= -4) {
+				name = "images/wui/overlays/waterway_building_steepdown.png";
+			} else if (slope >= 4) {
+				name = "images/wui/overlays/waterway_building_steepup.png";
+			} else if (slope <= -2) {
+				name = "images/wui/overlays/waterway_building_down.png";
+			} else if (slope >= 2) {
+				name = "images/wui/overlays/waterway_building_up.png";
+			} else {
+				name = "images/wui/overlays/waterway_building_even.png";
+			}
 		} else {
-			name = "images/wui/overlays/waterway_building_even.png";
+			if (slope <= -4) {
+				name = "images/wui/overlays/road_building_reddown.png";
+			} else if (slope <= -2) {
+				name = "images/wui/overlays/road_building_yellowdown.png";
+			} else if (slope < 2) {
+				name = "images/wui/overlays/road_building_green.png";
+			} else if (slope < 4) {
+				name = "images/wui/overlays/road_building_yellow.png";
+			} else {
+				name = "images/wui/overlays/road_building_red.png";
+			}
 		}
-		waterway_building_overlays_.steepness_indicators[neighb] = g_gr->images().get(name);
+		road_building_mode_->overlay_steepness_indicators[neighb] = g_gr->images().get(name);
 	}
 }
 
@@ -1426,15 +1319,9 @@ Remove road building data from road overlay
 ===============
 */
 void InteractiveBase::road_building_remove_overlay() {
-	assert(buildroad_);
-	road_building_overlays_.road_previews.clear();
-	road_building_overlays_.steepness_indicators.clear();
-}
-
-void InteractiveBase::waterway_building_remove_overlay() {
-	assert(buildwaterway_);
-	waterway_building_overlays_.road_previews.clear();
-	waterway_building_overlays_.steepness_indicators.clear();
+	assert(road_building_mode_);
+	road_building_mode_->overlay_road_previews.clear();
+	road_building_mode_->overlay_steepness_indicators.clear();
 }
 
 bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {

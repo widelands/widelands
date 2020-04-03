@@ -315,7 +315,7 @@ void InteractivePlayer::think() {
 	if (flag_to_connect_) {
 		Widelands::Field& field = egbase().map()[flag_to_connect_];
 		if (upcast(Widelands::Flag const, flag, field.get_immovable())) {
-			if (!flag->has_road() && !is_building_road())
+			if (!flag->has_road() && !in_road_building_mode())
 				if (auto_roadbuild_mode_) {
 					//  There might be a fieldaction window open, showing a button
 					//  for roadbuilding. If that dialog remains open so that the
@@ -328,7 +328,7 @@ void InteractivePlayer::think() {
 					set_sel_pos(Widelands::NodeAndTriangle<>{
 					   flag_to_connect_,
 					   Widelands::TCoords<>(flag_to_connect_, Widelands::TriangleIndex::D)});
-					start_build_road(flag_to_connect_, field.get_owned_by());
+					start_build_road(flag_to_connect_, field.get_owned_by(), RoadBuildingType::kRoad);
 				}
 			flag_to_connect_ = Widelands::Coords::null();
 		}
@@ -370,8 +370,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 	Workareas workareas = get_workarea_overlays(map);
 	auto* fields_to_draw = given_map_view->draw_terrain(gbase, workareas, false, dst);
-	const auto& road_building = road_building_overlays();
-	const auto& waterway_building = waterway_building_overlays();
+	const auto& road_building_s = road_building_steepness_overlays();
 
 	const float scale = 1.f / given_map_view->view().zoom;
 
@@ -396,44 +395,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 		// Add road building overlays if applicable.
 		if (f->vision > 0) {
-			const auto rinfo = road_building.road_previews.find(f->fcoords);
-			if (rinfo != road_building.road_previews.end()) {
-				for (uint8_t dir : rinfo->second) {
-					switch (dir) {
-					case Widelands::WALK_E:
-						f->road_e = Widelands::RoadSegment::kNormal;
-						break;
-					case Widelands::WALK_SE:
-						f->road_se = Widelands::RoadSegment::kNormal;
-						break;
-					case Widelands::WALK_SW:
-						f->road_sw = Widelands::RoadSegment::kNormal;
-						break;
-					default:
-						throw wexception(
-						   "Attempt to set road-building overlay for invalid direction %i", dir);
-					}
-				}
-			}
-			const auto winfo = waterway_building.road_previews.find(f->fcoords);
-			if (winfo != waterway_building.road_previews.end()) {
-				for (uint8_t dir : winfo->second) {
-					switch (dir) {
-					case Widelands::WALK_E:
-						f->road_e = Widelands::RoadSegment::kWaterway;
-						break;
-					case Widelands::WALK_SE:
-						f->road_se = Widelands::RoadSegment::kWaterway;
-						break;
-					case Widelands::WALK_SW:
-						f->road_sw = Widelands::RoadSegment::kWaterway;
-						break;
-					default:
-						throw wexception(
-						   "Attempt to set waterway-building overlay for invalid direction %i", dir);
-					}
-				}
-			}
+			draw_road_building(*f);
 
 			draw_bridges(dst, f, f->vision > 1 ? gametime : 0, scale);
 			draw_border_markers(*f, scale, *fields_to_draw, dst);
@@ -475,16 +437,10 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 			// Draw road building slopes.
 			{
-				const auto itb = road_building.steepness_indicators.find(f->fcoords);
-				if (itb != road_building.steepness_indicators.end()) {
+				const auto itb = road_building_s.find(f->fcoords);
+				if (itb != road_building_s.end()) {
 					blit_field_overlay(dst, *f, itb->second,
 					                   Vector2i(itb->second->width() / 2, itb->second->height() / 2),
-					                   scale);
-				}
-				const auto itw = waterway_building.steepness_indicators.find(f->fcoords);
-				if (itw != waterway_building.steepness_indicators.end()) {
-					blit_field_overlay(dst, *f, itw->second,
-					                   Vector2i(itw->second->width() / 2, itw->second->height() / 2),
 					                   scale);
 				}
 			}
@@ -513,15 +469,17 @@ void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and
 	const Map& map = egbase().map();
 	if (1 < player().vision(Map::get_index(node_and_triangle.node, map.get_width()))) {
 		// Special case for buildings
-		if (upcast(Building, building, map.get_immovable(node_and_triangle.node)))
+		if (upcast(Building, building, map.get_immovable(node_and_triangle.node))) {
 			if (can_see(building->owner().player_number())) {
 				show_building_window(node_and_triangle.node, false, false);
 				return;
 			}
+		}
 
-		if (!is_building_road() && !is_building_waterway()) {
-			if (try_show_ship_window())
+		if (!in_road_building_mode()) {
+			if (try_show_ship_window()) {
 				return;
+			}
 		}
 
 		// everything else can bring up the temporary dialog

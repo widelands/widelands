@@ -9,6 +9,7 @@
 # xno, 2016
 # Davide Nicolini <davide97@gmail.com>, 2019
 # SecondCloud500 <eddieven2000@gmail.com>, 2017
+# Filippo Montano, 2020
 # GunChleoc, 2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
@@ -18,9 +19,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-02-06 08:26+0000\n"
-"PO-Revision-Date: 2020-02-09 18:22+0000\n"
-"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
+"POT-Creation-Date: 2020-03-20 06:16+0000\n"
+"PO-Revision-Date: 2020-03-23 21:27+0000\n"
+"Last-Translator: Filippo Montano\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -482,7 +483,7 @@ msgid ""
 "swiftly. I will not feel safe on this island as long as we have not seen all"
 " its shores. I brought plenty of good men from Atlantis. The military might "
 "is available. We only need some housing to live in."
-msgstr ""
+msgstr "Che Satul possa riscaldarti, Jundlina! Sono d'accordo con le proposte di Loftomor. Abbiamo bisogno di una buona fornitura di materiali da costruzione, dobbiamo espandere rapidamente il nostro territorio. Non mi sentirò sicuro su quest'isola fintanto che non avrò visto tutte le sue scogliere. Ho portato una moltitudine di buoni uomini da Atlantide. La forza militare è disponibile. Abbiamo solo bisogno di qualche abitazione in cui vivere."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:216
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:256

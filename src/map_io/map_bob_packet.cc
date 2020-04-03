@@ -52,8 +52,9 @@ void MapBobPacket::read_bob(FileRead& fr,
 	try {
 		const World& world = egbase.world();
 		DescriptionIndex const idx = world.get_critter(name.c_str());
-		if (idx == INVALID_INDEX)
+		if (idx == INVALID_INDEX) {
 			throw GameDataError("world does not define bob type \"%s\"", name.c_str());
+		}
 
 		const CritterDescr& descr = *world.get_critter_descr(idx);
 		descr.create(egbase, nullptr, coords);
@@ -80,15 +81,16 @@ void MapBobPacket::read(FileSystem& fs,
 	map->recalc_whole_map(egbase);  //  for movecaps checks in ReadBob
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion)
+		if (packet_version == kCurrentPacketVersion) {
 			for (uint16_t y = 0; y < map->get_height(); ++y) {
 				for (uint16_t x = 0; x < map->get_width(); ++x) {
 					uint32_t const nr_bobs = fr.unsigned_32();
-					for (uint32_t i = 0; i < nr_bobs; ++i)
+					for (uint32_t i = 0; i < nr_bobs; ++i) {
 						read_bob(fr, egbase, mol, Coords(x, y), lookup_table, packet_version);
+					}
 				}
 			}
-		else {
+		} else {
 			throw UnhandledVersionError("MapBobPacket", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException& e) {

@@ -5,7 +5,7 @@
 function intro()
    reveal_concentric(plr, sf, 15)
    sleep(1000)
-   message_box_objective(plr, introduction)
+   campaign_message_box(introduction)
 
    training()
 end
@@ -17,17 +17,17 @@ local scouting_done = false
 function training2()
    -- Teach about trainingsites and soldiers' abilities - concurrent part 2
    sleep(60*1000)
-   local o = message_box_objective(plr, trainingcamp1)
+   local o = campaign_message_with_objective(trainingcamp1, obj_trainingcamp)
    while #plr:get_buildings("barbarians_trainingcamp") == 0 do sleep(500) end
    set_objective_done(o)
-   message_box_objective(plr, trainingcamp2)
+   campaign_message_box(trainingcamp2)
    trainingcamp_done = true
 end
 
 function scouting()
    -- Teach player about scouting
    sleep(2*60*1000)
-   local o = message_box_objective(plr, scouting1)
+   local o = campaign_message_with_objective(scouting1, obj_scouting1)
    while #plr:get_buildings("barbarians_scouts_hut") == 0 do sleep(500) end
    set_objective_done(o)
 
@@ -36,10 +36,10 @@ end
 
 function exploring()
    local pois = sf:region(30, 29)
-   local o = message_box_objective(plr, scouting2)
+   local o = campaign_message_with_objective(scouting2, obj_scouting2)
    while not any_field_seen(plr, pois) do sleep(2000) end
    set_objective_done(o)
-   message_box_objective(plr, scouting3)
+   campaign_message_box(scouting3)
    scouting_done = true
 end
 
@@ -47,23 +47,23 @@ function training()
    -- Teach about trainingsites and soldiers' abilities
    sleep(5000) -- to let soldiers walk
 
-   message_box_objective(plr, abilities)
-   local o = message_box_objective(plr, battlearena1)
+   campaign_message_box(abilities)
+   local o = campaign_message_with_objective(battlearena1, obj_battlearena)
    run(training2)
    run(scouting)
 
    while #plr:get_buildings("barbarians_battlearena") == 0 do sleep(500) end
    set_objective_done(o, 0)
-   message_box_objective(plr, battlearena2)
+   campaign_message_box(battlearena2)
    battlearena_done = true
 end
 
 function military_buildings()
    while not trainingcamp_done or not battlearena_done or
       not scouting_done do sleep(3000) end
-   message_box_objective(plr, heroes_rookies)
-   message_box_objective(plr, soldier_capacity)
-   local o = message_box_objective(plr, dismantle)
+   campaign_message_box(heroes_rookies)
+   campaign_message_box(soldier_capacity)
+   local o = campaign_message_with_objective(dismantle, obj_dismantle)
 
    while #plr:get_buildings("barbarians_sentry") > 1 do sleep(200) end
    set_objective_done(o)
@@ -75,7 +75,7 @@ function enhance_fortress()
    sleep(5000)
 
    local citadel_field = wl.Game().map:get_field(32, 62)
-   local o = message_box_objective(plr, fortress_enhancement)
+   local o = campaign_message_with_objective(fortress_enhancement, obj_fortress)
    while not (citadel_field.immovable and
       citadel_field.immovable.descr.name == "barbarians_citadel") do sleep(800) end
    set_objective_done(o, 0)
@@ -112,14 +112,14 @@ function create_enemy()
          }
       }
    )
-   connected_road(p2,map:get_field(29,17).immovable,"tr,tl|tl,tl|tl,tl|tl,tl|tl,l")
-   connected_road(p2,map:get_field(31,22).immovable,"tr,tl|tl,tl,tl")
-   connected_road(p2,map:get_field(31,28).immovable,"tr,tr|tr,tl|tl,tl")
+   connected_road("normal", p2,map:get_field(29,17).immovable,"tr,tl|tl,tl|tl,tl|tl,tl|tl,l")
+   connected_road("normal", p2,map:get_field(31,22).immovable,"tr,tl|tl,tl,tl")
+   connected_road("normal", p2,map:get_field(31,28).immovable,"tr,tr|tr,tl|tl,tl")
    p2:forbid_buildings("all")
 end
 
 function attack()
-   local o = message_box_objective(plr, attack_enemy)
+   local o = campaign_message_with_objective(attack_enemy, obj_attack)
 
    local plr2 = wl.Game().players[2]
    while #plr2:get_buildings("empire_headquarters") > 0 do
@@ -131,7 +131,7 @@ function attack()
 end
 
 function conclusion()
-   message_box_objective(plr, conclude_tutorial)
+   campaign_message_box(conclude_tutorial)
 end
 
 run(intro)
