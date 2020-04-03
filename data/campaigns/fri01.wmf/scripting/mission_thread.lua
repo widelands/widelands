@@ -1,6 +1,3 @@
-include "scripting/messages.lua"
-include "scripting/field_animations.lua"
-
 show_warning_early_attack = true
 show_warning_reed = true
 show_warning_clay = true

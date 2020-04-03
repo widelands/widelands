@@ -1,5 +1,3 @@
-include "scripting/field_animations.lua"
-
 local done_mining = false
 local done_fighting = false
 
