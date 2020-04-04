@@ -2,12 +2,6 @@
 --                      Texts for the tutorial mission
 -- =======================================================================
 
--- =========================
--- Some formating functions
--- =========================
-
-include "scripting/richtext_scenarios.lua"
-
 -- We want the soldier here so we can get some actual stats.
 local tribe = wl.Game():get_tribe_description("barbarians")
 local soldier = wl.Game():get_worker_description(tribe.soldier)
