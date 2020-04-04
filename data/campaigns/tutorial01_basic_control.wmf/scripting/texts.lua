@@ -222,7 +222,7 @@ lumberjack_message_07b = {
    position = "topright",
    body = (
       li_image("images/wui/buildings/toggle_workarea.png",
-         _[[This button toggles building’s range. Buildings like lumberjack’s hut cover only some work area. Let me show you how perfect this spot is.]]) ..
+         _[[This button toggles showing the building’s work area. When the lumberjack leaves the building to look for trees to fell, he will only look for them within this area. Let me show you how perfect this spot is.]]) ..
       p(_[[Close construction site window when you have seen enough.]]) ..
       li(close_story_window_instructions)
    ),
