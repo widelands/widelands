@@ -6,6 +6,8 @@ include "scripting/coroutine.lua"
 include "scripting/infrastructure.lua"
 include "scripting/messages.lua"
 include "scripting/objective_utils.lua"
+include "scripting/richtext_scenarios.lua"
+include "scripting/set.lua"
 include "scripting/table.lua"
 include "scripting/ui.lua"
 

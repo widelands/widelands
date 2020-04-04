@@ -2,8 +2,6 @@
 --                      Texts for the tutorial mission
 -- =======================================================================
 
-include "scripting/richtext_scenarios.lua"
-
 -- ================
 -- General messages
 -- ================

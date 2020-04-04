@@ -75,7 +75,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 55000",
          "remove=10",
-         "seed=liana_wasteland_sapling",
+         "seed=liana_wasteland_sapling 30",
          "animate=idle 30000",
          "remove=10",
          "grow=liana_wasteland_old",
@@ -109,7 +109,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 1455000",
          "transform=deadtree4 48",
-         "seed=liana_wasteland_sapling",
+         "seed=liana_wasteland_sapling 100",
       },
       fall = {
          "remove=",
