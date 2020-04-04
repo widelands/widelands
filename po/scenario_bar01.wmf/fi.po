@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016,2018
@@ -11,10 +11,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-12-10 17:11+0000\n"
-"PO-Revision-Date: 2019-12-13 18:36+0000\n"
-"Last-Translator: Jukka Pakarinen\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-03-28 05:00+0000\n"
+"PO-Revision-Date: 2020-03-28 05:02+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -160,9 +160,10 @@ msgstr "Rakenna kaivo, maatila ja leipomo"
 msgid ""
 "Other ways to produce food – different kinds of food – are fishers and "
 "farms. The wheat of the farms has to be processed with water in a bakery "
-"before it becomes edible. You can obtain water by building a well on a spot "
-"where your geologists have found a water source."
-msgstr "Muut tavat tuottaa ruokaa – erilaista ruokaa – ovat kalastajat ja maatilat. Maatilojen vehnä täytyy käsitellä veden kanssa leipomossa ennen kuin siitä tulee syötävää. Voit hankkia vettä rakentamalla kaivon sellaiseen paikkaan, josta geologi on löytänyt vesisuonen."
+"before it becomes edible. You can obtain water by building a well. For the "
+"best productivity, build it on a spot where your geologists have found a "
+"water source."
+msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:78
 msgid "Refine your mined resources"

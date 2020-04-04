@@ -109,7 +109,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 1550000",
          "transform=deadtree4 5",
-         "seed=alder_summer_sapling",
+         "seed=alder_summer_sapling 180",
       },
       fall = {
          "remove=",
