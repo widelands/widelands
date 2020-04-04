@@ -208,8 +208,8 @@ void ImmovableProgram::ActRemove::execute(Game& game, Immovable& immovable) cons
 
 ImmovableProgram::ActSeed::ActSeed(std::vector<std::string>& arguments,
                                    const ImmovableDescr& descr) {
-	if (arguments.size() != 1) {
-		throw GameDataError("Usage: seed=<immovable name>");
+	if (arguments.size() != 2) {
+		throw GameDataError("Usage: seed=<immovable name> <radius_range_factor>");
 	}
 	if (!descr.has_terrain_affinity()) {
 		throw GameDataError(
@@ -219,6 +219,12 @@ ImmovableProgram::ActSeed::ActSeed(std::vector<std::string>& arguments,
 	// TODO(GunChleoc): If would be nice to check if target exists, but we can't guarantee the load
 	// order. Maybe in postload() one day.
 	type_name = arguments.front();
+	const int p = std::stoi(arguments[1]);
+	if (p <= 0 || p >= 255) {
+		throw GameDataError("Immovable %s: Seeding radius range factor %i out of range [1,254]",
+		                    descr.name().c_str(), p);
+	}
+	probability = p;
 }
 
 void ImmovableProgram::ActSeed::execute(Game& game, Immovable& immovable) const {
