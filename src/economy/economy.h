@@ -34,12 +34,12 @@
 
 namespace Widelands {
 
-class Soldier;
+class Economy;
 struct Flag;
 struct RSPairStruct;
 struct Route;
 struct Router;
-class Economy;
+class WorkerDescr;
 
 struct NoteEconomy {
 	CAN_BE_SENT_AS_NOTE(NoteId::Economy)
@@ -269,7 +269,8 @@ private:
 	 */
 	uint32_t request_timerid_;
 
-	static std::unique_ptr<Soldier> soldier_prototype_;
+	static std::unique_ptr<Worker> soldier_prototype_;
+	static Worker& soldier_prototype(const WorkerDescr* = nullptr);
 
 	// This is always an EconomyOptionsWindow* (or nullptr) but I don't want a wui dependency here.
 	// We cannot use UniqueWindow to make sure an economy never has two windows because the serial
