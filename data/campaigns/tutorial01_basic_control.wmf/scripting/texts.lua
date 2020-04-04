@@ -200,8 +200,7 @@ obj_lumberjack_progress = {
    title=_"Let’s see the progress",
    number = 1,
    body = objective_text(_"Let’s see the progress",
-      li(_[[Click on the construction site to have a look at it.]]) ..
-      li_arrow(_[[When you have seen enough, close the construction site’s window: simply right-click on it.]])
+      li(_[[Click on the construction site to have a look at it.]])
    ),
    h = 300,
    w = 350
