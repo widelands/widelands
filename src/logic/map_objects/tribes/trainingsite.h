@@ -280,8 +280,8 @@ private:
 	// after ongoing request is (partially) fulfilled. The other direction happens immediately.
 	uint8_t  highest_trainee_level_seen; // When requesting already-trained, start here.
 	uint8_t  latest_trainee_kickout_level; // If I cannot train, request soldiers that have been trainable
-	bool     latest_trainee_was_kickout; // If soldier was not dropped, requesting new soldier.
 	uint8_t  trainee_general_threshold; // This is the acceptance threshold currently in use.
+	bool     latest_trainee_was_kickout; // If soldier was not dropped, requesting new soldier.
 	bool     requesting_weak_trainees;  // Value of the previous after incorporate.
 	uint32_t request_open_since;        // Time units. If no soldiers appear, threshold is lowered after this.
 	const uint32_t acceptance_threshold_timeout = 10000; // Lower the bar after this many milliseconds.

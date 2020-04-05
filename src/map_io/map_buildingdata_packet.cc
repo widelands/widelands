@@ -49,7 +49,7 @@
 #include "logic/widelands_geometry_io.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-
+#include <iostream>
 namespace Widelands {
 
 // Overall package version
@@ -63,7 +63,7 @@ constexpr uint16_t kCurrentPacketPFBuilding = 1;
 constexpr uint16_t kCurrentPacketVersionWarehouse = 8;
 constexpr uint16_t kCurrentPacketVersionMilitarysite = 6;
 constexpr uint16_t kCurrentPacketVersionProductionsite = 8;
-constexpr uint16_t kCurrentPacketVersionTrainingsite = 5;
+constexpr uint16_t kCurrentPacketVersionTrainingsite = 6;
 
 void MapBuildingdataPacket::read(FileSystem& fs,
                                  EditorGameBase& egbase,
@@ -781,8 +781,10 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
                                               MapObjectLoader& mol,
                                               const TribesLegacyLookupTable& tribes_lookup_table) {
 	try {
-		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionTrainingsite) {
+	  uint16_t const packet_version = fr.unsigned_16();
+	  //TODO(unknown) remove support for previous packet after release
+		if (packet_version == kCurrentPacketVersionTrainingsite
+		 || packet_version == kCurrentPacketVersionTrainingsite -1) {
 			read_productionsite(trainingsite, fr, game, mol, tribes_lookup_table);
 
 			delete trainingsite.soldier_request_;
@@ -841,7 +843,24 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 				mapsize--;
 				trainingsite.training_failure_count_[std::make_pair(traintype, trainlevel)] =
 				   std::make_pair(trainstall, spresence);
+
 			}
+			if (5 < packet_version) {
+				trainingsite.highest_trainee_level_seen = fr.unsigned_8();
+				trainingsite.latest_trainee_kickout_level = fr.unsigned_8();
+				trainingsite.trainee_general_threshold = fr.unsigned_8();
+				if (fr.unsigned_8())
+				    trainingsite.latest_trainee_was_kickout = true;
+				else
+				  trainingsite.latest_trainee_was_kickout = false;
+				if (fr.unsigned_8())
+				  trainingsite.requesting_weak_trainees = true;
+				else
+				  trainingsite.requesting_weak_trainees = false;
+				trainingsite.request_open_since = fr.unsigned_32();
+			}
+
+
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Trainingsite", packet_version,
 			                            kCurrentPacketVersionTrainingsite);
@@ -1281,6 +1300,19 @@ void MapBuildingdataPacket::write_trainingsite(const TrainingSite& trainingsite,
 		fw.unsigned_16(fail_and_presence.second.first);
 		fw.unsigned_8(fail_and_presence.second.second);
 	}
+	fw.unsigned_8(trainingsite.highest_trainee_level_seen);
+	fw.unsigned_8(trainingsite.latest_trainee_kickout_level);
+	fw.unsigned_8(trainingsite.trainee_general_threshold);
+	if (trainingsite.latest_trainee_was_kickout)
+		fw.unsigned_8(1);
+	else
+		fw.unsigned_8(0);
+	if (trainingsite.requesting_weak_trainees)
+		fw.unsigned_8(1);
+	else
+		fw.unsigned_8(0);
+	fw.unsigned_32(trainingsite.request_open_since);
+
 	// DONE
 }
 }  // namespace Widelands

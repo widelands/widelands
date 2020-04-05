@@ -398,7 +398,7 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 	if (0 == soldier_request_->get_num_transfers() && timeofgame > request_open_since + acceptance_threshold_timeout) {
 		rebuild_request = true;
 		if (requesting_weak_trainees) {
-			if (254 < trainee_general_threshold)
+			if (std::numeric_limits<uint8_t>::max()-1 < trainee_general_threshold)
 				trainee_general_threshold++;
 		} else
 			if (0 < trainee_general_threshold)
@@ -434,12 +434,12 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 				                       descr().get_min_level(TrainingAttribute::kHealth),
 				                       descr().get_max_level(TrainingAttribute::kHealth)));
 
-			if ((254 > trainee_general_threshold) && (0 < trainee_general_threshold)) {
+			if ((std::numeric_limits<uint8_t>::max()-1 > trainee_general_threshold) && (0 < trainee_general_threshold)) {
 				RequireAnd qr;
 				if (requesting_weak_trainees)
 					qr.add(RequireAttribute(TrainingAttribute::kTotal, 0, trainee_general_threshold));
 				else
-					qr.add(RequireAttribute(TrainingAttribute::kTotal, trainee_general_threshold, 254));
+					qr.add(RequireAttribute(TrainingAttribute::kTotal, trainee_general_threshold, std::numeric_limits<uint8_t>::max()-1));
 				qr.add(r);
 				soldier_request_->set_requirements(qr);
 				schedule_act(game, 1+acceptance_threshold_timeout);
