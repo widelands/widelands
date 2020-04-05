@@ -41,11 +41,10 @@ void MouseCursor::initialize(bool init_use_sdl) {
 
 	default_cursor_sdl_surface_ = load_image_as_sdl_surface(default_filename, g_fs);
 	default_cursor_sdl_ =
-			SDL_CreateColorCursor(default_cursor_sdl_surface_, default_hotspot_x, default_hotspot_y);
-	default_cursor_click_sdl_surface_ =
-			load_image_as_sdl_surface(default_click_filename, g_fs);
-	default_cursor_click_sdl_ =
-			SDL_CreateColorCursor(default_cursor_click_sdl_surface_, default_hotspot_x, default_hotspot_y);
+	   SDL_CreateColorCursor(default_cursor_sdl_surface_, default_hotspot_x, default_hotspot_y);
+	default_cursor_click_sdl_surface_ = load_image_as_sdl_surface(default_click_filename, g_fs);
+	default_cursor_click_sdl_ = SDL_CreateColorCursor(
+	   default_cursor_click_sdl_surface_, default_hotspot_x, default_hotspot_y);
 
 	set_use_sdl(init_use_sdl);
 }
@@ -82,6 +81,6 @@ void MouseCursor::change_cursor(bool is_pressed) {
 void MouseCursor::draw(RenderTarget& rt, Vector2i position) {
 	if (!use_sdl_) {
 		rt.blit((position - Vector2i(default_hotspot_x, default_hotspot_y)),
-				was_pressed_ ? default_cursor_click_ : default_cursor_);
+		        was_pressed_ ? default_cursor_click_ : default_cursor_);
 	}
 }
