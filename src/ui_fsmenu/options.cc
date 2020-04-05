@@ -126,7 +126,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
      fullscreen_(&box_interface_left_, Vector2i::zero(), _("Fullscreen"), "", 0),
      inputgrab_(&box_interface_left_, Vector2i::zero(), _("Grab Input"), "", 0),
-     sdl_cursor_(&box_interface_left_, Vector2i::zero(), _("Use SDL Mouse Cursor"), "", 0),
+     sdl_cursor_(&box_interface_left_, Vector2i::zero(), _("Use system mouse cursor"), "", 0),
      sb_maxfps_(&box_interface_left_,
                 0,
                 0,
