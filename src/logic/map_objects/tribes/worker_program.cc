@@ -590,6 +590,8 @@ callobject
          "createware=log",
          "return"
       }
+
+   See also :doc:`immovable_program`.
 */
 /**
  * sparam1 = callobject command name
