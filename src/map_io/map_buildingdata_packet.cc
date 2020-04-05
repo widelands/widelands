@@ -49,7 +49,6 @@
 #include "logic/widelands_geometry_io.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include <iostream>
 namespace Widelands {
 
 // Overall package version
@@ -782,7 +781,7 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
                                               const TribesLegacyLookupTable& tribes_lookup_table) {
 	try {
 	  uint16_t const packet_version = fr.unsigned_16();
-	  //TODO(unknown) remove support for previous packet after release
+	  // TODO(unknown): remove support for previous packet after release
 		if (packet_version == kCurrentPacketVersionTrainingsite
 		 || packet_version == kCurrentPacketVersionTrainingsite -1) {
 			read_productionsite(trainingsite, fr, game, mol, tribes_lookup_table);
