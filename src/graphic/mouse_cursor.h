@@ -27,24 +27,41 @@
 class RenderTarget;
 class Image;
 
+/**
+ * This class manages drawing the mouse cursor.
+ * It can be used in two modes:
+ * In the SDL mode the cursor is set using SDL calls and is rendered by the OS.
+ * Most of the time it offers better performance.
+ * If the SDL mode is disabled the cursor is rendered by Widelands.
+ * This is be useful e.g. if we want the cursor to be present on screenshots.
+ */
 class MouseCursor {
 public:
 	MouseCursor();
 	~MouseCursor();
 
+	// Call initialize before first use
 	void initialize(bool init_use_sdl);
+
+	// Enable/disable SDL mode
 	void set_use_sdl(bool init_use_sdl);
 	bool is_using_sdl() const;
+
+	// Switch between "normal" and "pressed" cursors
 	void change_cursor(bool is_pressed);
+
+	// Render the cursor (does nothing in SDL mode)
 	void draw(RenderTarget& rt, Vector2i position);
 
 private:
 	bool use_sdl_ = false;
 	bool was_pressed_ = false;
 
+	// Used when SDL mode is disabled
 	const Image* default_cursor_ = nullptr;
 	const Image* default_cursor_click_ = nullptr;
 
+	// Used in SDL mode
 	SDL_Surface* default_cursor_sdl_surface_ = nullptr;
 	SDL_Surface* default_cursor_click_sdl_surface_ = nullptr;
 	SDL_Cursor* default_cursor_sdl_ = nullptr;
