@@ -29,6 +29,7 @@
 #include "graphic/default_resolution.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
+#include "graphic/mouse_cursor.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
@@ -614,6 +615,7 @@ void OptionsCtrl::handle_menu() {
 		uint32_t active_tab = opt_dialog_->get_values().active_tab;
 		g_gr->change_resolution(opt_dialog_->get_values().xres, opt_dialog_->get_values().yres);
 		g_gr->set_fullscreen(opt_dialog_->get_values().fullscreen);
+		g_mouse_cursor->set_use_sdl(opt_dialog_->get_values().sdl_cursor);
 		opt_dialog_.reset(new FullscreenMenuOptions(options_struct(active_tab)));
 		handle_menu();  // Restart general options menu
 	}

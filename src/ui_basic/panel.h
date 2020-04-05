@@ -324,13 +324,6 @@ protected:
 	void draw_background(RenderTarget& dst, const UI::PanelStyleInfo&);
 	void draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo&);
 
-	static const Image* default_cursor_;
-	static const Image* default_cursor_click_;
-	static SDL_Surface* default_cursor_sdl_surface_;
-	static SDL_Surface* default_cursor_click_sdl_surface_;
-	static SDL_Cursor* default_cursor_sdl_;
-	static SDL_Cursor* default_cursor_click_sdl_;
-
 private:
 	bool handles_mouse() const {
 		return (flags_ & pf_handle_mouse) != 0;
