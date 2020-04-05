@@ -201,7 +201,7 @@ void TrainingSite::SoldierControl::set_soldier_capacity(Quantity const capacity)
 	assert(capacity <= max_soldier_capacity());
 	assert(training_site_->capacity_ != capacity);
 	training_site_->capacity_ = capacity;
-	training_site_->update_soldier_request();
+	training_site_->update_soldier_request(false);
 }
 
 /**
@@ -248,7 +248,8 @@ int TrainingSite::SoldierControl::incorporate_soldier(EditorGameBase& egbase, So
 		s.start_task_idle(*game, 0, -1);
 
 	// Make sure the request count is reduced or the request is deleted.
-	training_site_->update_soldier_request();
+
+	training_site_->update_soldier_request(true);
 
 	return 0;
 }
@@ -277,6 +278,12 @@ TrainingSite::TrainingSite(const TrainingSiteDescr& d)
 	set_post_timer(6000);
 	training_failure_count_.clear();
 	max_stall_val_ = training_state_multiplier_ * d.get_max_stall();
+	highest_trainee_level_seen = 1;
+	latest_trainee_kickout_level = 10;
+	latest_trainee_was_kickout = false;
+	requesting_weak_trainees = false;
+	request_open_since = 0;
+	trainee_general_threshold = 2;
 
 	if (d.get_train_health())
 		init_kick_state(TrainingAttribute::kHealth, d);
@@ -309,7 +316,7 @@ bool TrainingSite::init(EditorGameBase& egbase) {
 			soldier->start_task_idle(*game, 0, -1);
 		}
 	}
-	update_soldier_request();
+	update_soldier_request(false);
 	return true;
 }
 
@@ -372,11 +379,40 @@ void TrainingSite::remove_worker(Worker& w) {
 /**
  * Request soldiers up to capacity, or let go of surplus soldiers.
  */
-void TrainingSite::update_soldier_request() {
-	if (soldiers_.size() < capacity_) {
+void TrainingSite::update_soldier_request(bool did_incorporate) {
+	Game & game = dynamic_cast<Game&>(get_owner()->egbase());
+	bool rebuild_request = false;
+	const uint32_t timeofgame = game.get_gametime();
+	if (!soldier_request_ || (did_incorporate && latest_trainee_was_kickout != requesting_weak_trainees)) {
+		rebuild_request = true;
+		requesting_weak_trainees = latest_trainee_was_kickout;
+		if (requesting_weak_trainees)
+			trainee_general_threshold = latest_trainee_kickout_level - 1;
+		else
+			trainee_general_threshold = highest_trainee_level_seen + 1;
+		request_open_since = timeofgame;
+	}
+	if (did_incorporate)
+		request_open_since = timeofgame;
+	if (soldier_request_)
+	if (0 == soldier_request_->get_num_transfers() && timeofgame > request_open_since + acceptance_threshold_timeout) {
+		rebuild_request = true;
+		if (requesting_weak_trainees) {
+			if (254 < trainee_general_threshold)
+				trainee_general_threshold++;
+		} else
+			if (0 < trainee_general_threshold)
+				trainee_general_threshold--;
+	}
+
+	if (rebuild_request || (soldiers_.size() < capacity_ && !soldier_request_)) {
+		if (rebuild_request && soldier_request_)  {
+			delete soldier_request_;
+			soldier_request_ = nullptr;
+		}
 		if (!soldier_request_) {
 			soldier_request_ = new Request(
-			   *this, owner().tribe().soldier(), TrainingSite::request_soldier_callback, wwWORKER);
+						*this, owner().tribe().soldier(), TrainingSite::request_soldier_callback, wwWORKER);
 
 			RequireOr r;
 
@@ -398,10 +434,23 @@ void TrainingSite::update_soldier_request() {
 				                       descr().get_min_level(TrainingAttribute::kHealth),
 				                       descr().get_max_level(TrainingAttribute::kHealth)));
 
+			if ((254 > trainee_general_threshold) && (0 < trainee_general_threshold)) {
+				RequireAnd qr;
+				if (requesting_weak_trainees)
+					qr.add(RequireAttribute(TrainingAttribute::kTotal, 0, trainee_general_threshold));
+				else
+					qr.add(RequireAttribute(TrainingAttribute::kTotal, trainee_general_threshold, 254));
+				qr.add(r);
+				soldier_request_->set_requirements(qr);
+				schedule_act(game, 1+acceptance_threshold_timeout);
+			} else {
+
 			soldier_request_->set_requirements(r);
-		}
+			}
+		} // ends request regenration
 
 		soldier_request_->set_count(capacity_ - soldiers_.size());
+		request_open_since = timeofgame;
 	} else if (soldiers_.size() >= capacity_) {
 		delete soldier_request_;
 		soldier_request_ = nullptr;
@@ -455,7 +504,16 @@ void TrainingSite::drop_unupgradable_soldiers(Game&) {
 	// Drop soldiers only now, so that changes in the soldiers array don't
 	// mess things up
 	for (Soldier* soldier : droplist) {
+		uint8_t level = soldier->get_level(TrainingAttribute::kTotal);
+		if (level > highest_trainee_level_seen)
+			highest_trainee_level_seen = level;
+
 		soldier_control_.drop_soldier(*soldier);
+		if (latest_trainee_was_kickout) {
+			// If I am calling in weaklings: Stop that. Immediately.
+			latest_trainee_was_kickout = false;
+			update_soldier_request(true);
+		}
 	}
 }
 
@@ -465,10 +523,10 @@ void TrainingSite::drop_unupgradable_soldiers(Game&) {
  */
 void TrainingSite::drop_stalled_soldiers(Game&) {
 	Soldier* soldier_to_drop = nullptr;
-	uint32_t highest_soldier_level_seen = 0;
+	uint8_t highest_soldier_level_seen = 0;
 
 	for (uint32_t i = 0; i < soldiers_.size(); ++i) {
-		uint32_t this_soldier_level = soldiers_[i]->get_level(TrainingAttribute::kTotal);
+		uint8_t this_soldier_level = soldiers_[i]->get_level(TrainingAttribute::kTotal);
 
 		bool this_soldier_is_safe = false;
 		if (this_soldier_level <= highest_soldier_level_seen) {
@@ -517,7 +575,12 @@ void TrainingSite::drop_stalled_soldiers(Game&) {
 	// Finally drop the soldier.
 	if (nullptr != soldier_to_drop) {
 		log("TrainingSite::drop_stalled_soldiers: Kicking somebody out.\n");
+		uint8_t level = soldier_to_drop->get_level(TrainingAttribute::kTotal);
+		if (level > highest_trainee_level_seen)
+			highest_trainee_level_seen = level;
+		latest_trainee_kickout_level = level;
 		soldier_control_.drop_soldier(*soldier_to_drop);
+		latest_trainee_was_kickout = true;
 	}
 }
 
@@ -533,9 +596,9 @@ const BuildingSettings* TrainingSite::create_building_settings() const {
  * In addition to advancing the program, update soldier status.
  */
 void TrainingSite::act(Game& game, uint32_t const data) {
+        // unit of gametime is [ms].
 	ProductionSite::act(game, data);
-
-	update_soldier_request();
+	update_soldier_request(false);
 }
 
 void TrainingSite::program_end(Game& game, ProgramResult const result) {
