@@ -41,7 +41,7 @@ public:
 	~MouseCursor();
 
 	// Call initialize before first use
-	void initialize(bool init_use_sdl);
+	void initialize(bool init_use_sdl = true);
 
 	// Enable/disable SDL mode
 	void set_use_sdl(bool init_use_sdl);

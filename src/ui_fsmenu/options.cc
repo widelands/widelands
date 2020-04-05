@@ -629,7 +629,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.fullscreen = opt_section_.get_bool("fullscreen", false);
 	opt.inputgrab = opt_section_.get_bool("inputgrab", false);
 	opt.maxfps = opt_section_.get_int("maxfps", 25);
-	opt.sdl_cursor = opt_section_.get_bool("sdl_cursor", false);
+	opt.sdl_cursor = opt_section_.get_bool("sdl_cursor", true);
 
 	// Windows options
 	opt.snap_win_overlap_only = opt_section_.get_bool("snap_windows_only_when_overlapping", false);

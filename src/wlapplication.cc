@@ -383,7 +383,7 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	   get_config_bool("fullscreen", false));
 
 	g_mouse_cursor = new MouseCursor();
-	g_mouse_cursor->initialize(get_config_bool("sdl_cursor", false));
+	g_mouse_cursor->initialize(get_config_bool("sdl_cursor", true));
 
 	g_sh = new SoundHandler();
 
@@ -794,7 +794,7 @@ bool WLApplication::init_settings() {
 	get_config_bool("auto_speed", false);
 	get_config_bool("dock_windows_to_edges", false);
 	get_config_bool("fullscreen", false);
-	get_config_bool("sdl_cursor", false);
+	get_config_bool("sdl_cursor", true);
 	get_config_bool("snap_windows_only_when_overlapping", false);
 	get_config_bool("animate_map_panning", false);
 	get_config_bool("write_syncstreams", false);
