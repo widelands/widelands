@@ -64,7 +64,7 @@ Parameter semantics:
 ``name``
     The name of the immovable to turn into. If the ``bob`` flag is given, this refers to any kind of bob; otherwise to an immovable.
 ``chance``
-    A natural integer in [1,254] defining the chance that the transformation succeeds. If it doesn't succeed, the next program step is triggered. If ``chance`` is omitted, the transformation will always succeed.
+    A natural integer in [1,254] defining the chance that the transformation succeeds. The game will generate a random number between 0 and 255 and the program step succeeds if and only if this number is less than ``chance``. Otherwise, the next program step is triggered. If ``chance`` is omitted, the transformation will always succeed.
 
 Deletes the immovable (preventing subsequent program steps from being called) and replaces it with an immovable or bob of the given name. The chance that this program step succeeds can be specified (by default, the step will always succeed).
 
@@ -94,7 +94,7 @@ Parameter syntax::
 Parameter semantics:
 
 ``chance``
-    A natural integer in [1,254] defining the chance that removing succeeds. If it doesn't succeed, the next program step is triggered. If ``chance`` is omitted, the removal will always succeed.
+    A natural integer in [1,254] defining the chance that removing succeeds. The game will generate a random number between 0 and 255 and the program step succeeds if and only if this number is less than ``chance``. Otherwise, the next program step is triggered. If ``chance`` is omitted, the removal will always succeed.
 
 Deletes the immovable (preventing subsequent program steps from being called). The chance that this program step succeeds can be specified (by default, the step will always succeed).
 
