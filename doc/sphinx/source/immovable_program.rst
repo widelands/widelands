@@ -43,11 +43,11 @@ Parameter syntax::
 Parameter semantics:
 
 ``animation``
-    The name of an animation (defined in the productionsite).
+    The name of an animation (defined in the immovable).
 ``duration``
     A natural integer specifying the duration in milliseconds.
 
-Starts the specified animation for the productionsite. Blocks the execution of the program for the specified duration. (The duration does not have to equal the length of the animation. It will loop around. The animation will not be stopped by this command. It will run until another animation is started.)
+Starts the specified animation for the immovable. Blocks the execution of the program for the specified duration. (The duration does not have to equal the length of the animation. It will loop around. The animation will not be stopped by this command. It will run until another animation is started.)
 
 transform
 ---------
