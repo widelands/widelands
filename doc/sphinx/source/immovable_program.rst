@@ -2,7 +2,9 @@
 
 Immovable Program Reference
 ===========================
-Immovables can have programs that will be executed by the game engine. It is not mandatory for immovables to define programs. Immovables without a program will simply display their main animation indefinitely. Programs are required to allow workers to interact with an immovable (e.g. a tree will need a "fall" program to allow woodcutters to remove the tree).
+Immovables can have programs that will be executed by the game engine. Programs are required to allow workers to interact with an immovable (e.g. a tree will need a "fall" program to allow woodcutters to remove the tree).
+
+It is not mandatory for immovables to define programs. If the immovable defines a program named ``program``, this program will be started as the main program on creation. Immovables without such a program will simply display their main animation indefinitely.
 
 Programs are defined as Lua tables. Each program must be declared as a subtable in the immovable's Lua table called ``programs`` and have a unique table key. The entries in a program's subtable are the ``actions`` to execute, like this::
 
