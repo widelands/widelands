@@ -202,12 +202,14 @@ int Panel::do_run() {
 		if (start_time >= next_draw_time) {
 			RenderTarget& rt = *g_gr->get_render_target();
 			forefather->do_draw(rt);
-			g_mouse_cursor->change_cursor(app->is_mouse_pressed());
-			g_mouse_cursor->draw(rt, app->get_mouse_position());
-			if (is_modal()) {
-				do_tooltip();
-			} else {
-				forefather->do_tooltip();
+			if (g_mouse_cursor->is_visible()) {
+				g_mouse_cursor->change_cursor(app->is_mouse_pressed());
+				g_mouse_cursor->draw(rt, app->get_mouse_position());
+				if (is_modal()) {
+					do_tooltip();
+				} else {
+					forefather->do_tooltip();
+				}
 			}
 
 			g_gr->refresh();
