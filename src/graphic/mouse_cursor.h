@@ -20,7 +20,7 @@
 #ifndef WL_GRAPHIC_MOUSE_CURSOR_H
 #define WL_GRAPHIC_MOUSE_CURSOR_H
 
-#include <SDL.h>
+#include <SDL_mouse.h>
 
 #include "base/vector.h"
 

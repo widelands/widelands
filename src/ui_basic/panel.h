@@ -31,7 +31,6 @@
 #include "sound/constants.h"
 
 class RenderTarget;
-class Image;
 
 namespace UI {
 
