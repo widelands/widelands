@@ -165,7 +165,7 @@ struct WLApplication {
 	}
 
 	/// Lock the mouse cursor into place (e.g., for scrolling the map)
-	void set_mouse_lock(const bool locked);
+	void set_mouse_lock(bool locked);
 	// @}
 
 	// Refresh the graphics settings with the latest options.
