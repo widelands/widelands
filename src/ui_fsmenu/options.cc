@@ -615,7 +615,6 @@ void OptionsCtrl::handle_menu() {
 		uint32_t active_tab = opt_dialog_->get_values().active_tab;
 		g_gr->change_resolution(opt_dialog_->get_values().xres, opt_dialog_->get_values().yres);
 		g_gr->set_fullscreen(opt_dialog_->get_values().fullscreen);
-		g_mouse_cursor->set_use_sdl(opt_dialog_->get_values().sdl_cursor);
 		opt_dialog_.reset(new FullscreenMenuOptions(options_struct(active_tab)));
 		handle_menu();  // Restart general options menu
 	}
@@ -694,6 +693,7 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_string("language", opt.language);
 
 	WLApplication::get()->set_input_grab(opt.inputgrab);
+	g_mouse_cursor->set_use_sdl(opt_dialog_->get_values().sdl_cursor);
 	i18n::set_locale(opt.language);
 	UI::g_fh->reinitialize_fontset(i18n::get_locale());
 
