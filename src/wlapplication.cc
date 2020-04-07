@@ -760,6 +760,16 @@ void WLApplication::set_input_grab(bool grab) {
 	}
 }
 
+void WLApplication::set_mouse_lock(const bool locked) {
+	mouse_locked_ = locked;
+
+	// If we use the SDL cursor then it needs to be hidden when locked
+	// otherwise it'll jerk around which looks ugly
+	if (g_mouse_cursor->is_using_sdl()) {
+		g_mouse_cursor->set_visible(!mouse_locked_);
+	}
+}
+
 void WLApplication::refresh_graphics() {
 	g_gr->change_resolution(
 	   get_config_int("xres", DEFAULT_RESOLUTION_W), get_config_int("yres", DEFAULT_RESOLUTION_H));

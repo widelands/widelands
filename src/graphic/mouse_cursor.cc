@@ -60,7 +60,7 @@ void MouseCursor::set_use_sdl(bool init_use_sdl) {
 	use_sdl_ = init_use_sdl;
 
 	if (use_sdl_) {
-		SDL_ShowCursor(SDL_ENABLE);
+		SDL_ShowCursor(visible_ ? SDL_ENABLE : SDL_DISABLE);
 		SDL_SetCursor(was_pressed_ ? default_cursor_click_sdl_ : default_cursor_sdl_);
 	} else {
 		SDL_ShowCursor(SDL_DISABLE);
@@ -71,6 +71,20 @@ bool MouseCursor::is_using_sdl() const {
 	return use_sdl_;
 }
 
+void MouseCursor::set_visible(bool visible) {
+	if (visible_ == visible) {
+		return;
+	}
+	visible_ = visible;
+	if (use_sdl_) {
+		SDL_ShowCursor(visible_ ? SDL_ENABLE : SDL_DISABLE);
+	}
+}
+
+bool MouseCursor::is_visible() const {
+	return visible_;
+}
+
 void MouseCursor::change_cursor(bool is_pressed) {
 	if (use_sdl_ && (was_pressed_ != is_pressed)) {
 		SDL_SetCursor(is_pressed ? default_cursor_click_sdl_ : default_cursor_sdl_);
@@ -79,7 +93,7 @@ void MouseCursor::change_cursor(bool is_pressed) {
 }
 
 void MouseCursor::draw(RenderTarget& rt, Vector2i position) {
-	if (!use_sdl_) {
+	if (!use_sdl_ && visible_) {
 		rt.blit((position - Vector2i(default_hotspot_x, default_hotspot_y)),
 		        was_pressed_ ? default_cursor_click_ : default_cursor_);
 	}

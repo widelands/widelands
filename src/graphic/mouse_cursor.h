@@ -50,12 +50,17 @@ public:
 	// Switch between "normal" and "pressed" cursors
 	void change_cursor(bool is_pressed);
 
+	// Hide/show the cursor
+	void set_visible(bool visible);
+	bool is_visible() const;
+
 	// Render the cursor (does nothing in SDL mode)
 	void draw(RenderTarget& rt, Vector2i position);
 
 private:
 	bool use_sdl_ = false;
 	bool was_pressed_ = false;
+	bool visible_ = true;
 
 	// Used when SDL mode is disabled
 	const Image* default_cursor_ = nullptr;
