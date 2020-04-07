@@ -72,7 +72,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 20000",
          "remove=30",
-         "seed=palm_date_desert_sapling",
+         "seed=palm_date_desert_sapling 20",
          "animate=idle 20000",
          "remove=20",
          "grow=palm_date_desert_old",
@@ -104,7 +104,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 1050000",
          "transform=deadtree5 32",
-         "seed=palm_date_desert_sapling",
+         "seed=palm_date_desert_sapling 200",
       },
       fall = {
          "remove=",
