@@ -279,9 +279,11 @@ TrainingSite::TrainingSite(const TrainingSiteDescr& d)
 	training_failure_count_.clear();
 	max_stall_val_ = training_state_multiplier_ * d.get_max_stall();
 	highest_trainee_level_seen = 1;
-	latest_trainee_kickout_level = 10;
+	latest_trainee_kickout_level = 1;
 	latest_trainee_was_kickout = false;
 	requesting_weak_trainees = false;
+				static unsigned debupcounter = 1001;
+				ts_uid_ = debupcounter++;
 	request_open_since = 0;
 	trainee_general_threshold = 2;
 
@@ -378,39 +380,72 @@ void TrainingSite::remove_worker(Worker& w) {
 
 /**
  * Request soldiers up to capacity, or let go of surplus soldiers.
+ *
+ * Now, we attempt to intelligently select most suitable soldiers
+ * (either already somwhat trained, or if training stalls, less
+ * trained ones). If no luck, the criteria is made relaxed until
+ * somebody shows up.
  */
 void TrainingSite::update_soldier_request(bool did_incorporate) {
 	Game & game = dynamic_cast<Game&>(get_owner()->egbase());
 	bool rebuild_request = false;
+	bool need_more_soldiers = false;
+	uint32_t dynamic_timeout = acceptance_threshold_timeout;
+	if (soldiers_.size() < capacity_)
+		need_more_soldiers = true;
 	const uint32_t timeofgame = game.get_gametime();
-	if (!soldier_request_ || (did_incorporate && latest_trainee_was_kickout != requesting_weak_trainees)) {
-		rebuild_request = true;
+
+	if (did_incorporate && latest_trainee_was_kickout != requesting_weak_trainees) {
+		// If type of desired recruits has been changed, the request is rebuild after incorporate
+		// even if (wrong/old) type recruits are on the way.
+		rebuild_request = need_more_soldiers;
 		requesting_weak_trainees = latest_trainee_was_kickout;
-		if (requesting_weak_trainees)
-			trainee_general_threshold = latest_trainee_kickout_level - 1;
-		else
-			trainee_general_threshold = highest_trainee_level_seen + 1;
-		request_open_since = timeofgame;
-	}
-	if (did_incorporate)
-		request_open_since = timeofgame;
-	if (soldier_request_)
-	if (0 == soldier_request_->get_num_transfers() && timeofgame > request_open_since + acceptance_threshold_timeout) {
-		rebuild_request = true;
-		if (requesting_weak_trainees) {
-			if (std::numeric_limits<uint8_t>::max()-1 < trainee_general_threshold)
-				trainee_general_threshold++;
-		} else
-			if (0 < trainee_general_threshold)
-				trainee_general_threshold--;
 	}
 
-	if (rebuild_request || (soldiers_.size() < capacity_ && !soldier_request_)) {
-		if (rebuild_request && soldier_request_)  {
+	if (did_incorporate) {
+		// If we got somebody in, lets become picky again.
+		if (requesting_weak_trainees)
+			trainee_general_threshold = latest_trainee_kickout_level;
+		else
+			trainee_general_threshold = static_cast<uint8_t>(std::max<unsigned>(1, (std::min<unsigned>(highest_trainee_level_seen,
+							(static_cast<unsigned>(trainee_general_threshold) + 1 + static_cast<unsigned>(highest_trainee_level_seen))/2))));
+		request_open_since = timeofgame;
+	}
+	if (soldier_request_ && need_more_soldiers) {
+		dynamic_timeout = acceptance_threshold_timeout / std::max<uint32_t>(1, static_cast<unsigned>(highest_trainee_level_seen));
+		if (0 == soldier_request_->get_num_transfers() && timeofgame > request_open_since + dynamic_timeout) {
+			// Timeout: We have been asking for certain type of soldiers, nobody is answering the call.
+			// Relaxing the criteria (and thus rebuild the request)
+			rebuild_request = need_more_soldiers;
+			if (requesting_weak_trainees) {
+				if (std::numeric_limits<uint8_t>::max()-1 < trainee_general_threshold)
+					trainee_general_threshold++;
+			} else
+				if (0 < trainee_general_threshold)
+					trainee_general_threshold--;
+		}
+	}
+	unsigned arr = 0;
+// debugging, remove
+if (soldier_request_)
+arr = soldier_request_->get_num_transfers();
+log ("%d %d%d%d%d TrainingSite::update_soldier_request: thr%3d %s nms %d rq %d ss%2lu arr %d dic %d rbr %d ros %d ts %d\n", ts_uid_,
+descr().get_max_level(TrainingAttribute::kAttack), descr().get_max_level(TrainingAttribute::kDefense),
+descr().get_max_level(TrainingAttribute::kHealth), descr().get_max_level(TrainingAttribute::kEvade), trainee_general_threshold,
+requesting_weak_trainees ? " weak " : "strong", need_more_soldiers ? 1:0, soldier_request_ ? 1:0,
+soldiers_.size(), arr, did_incorporate ? 1:0, rebuild_request ? 1:0, request_open_since, timeofgame );
+
+	if (!soldier_request_)
+		rebuild_request = need_more_soldiers;
+
+	if (rebuild_request) {
+		if (soldier_request_) {
 			delete soldier_request_;
 			soldier_request_ = nullptr;
 		}
-		if (!soldier_request_) {
+		// Should I replace the if-statement with an assert? If I come here without needing new soldiers, something is wrong
+		// above.
+		if (need_more_soldiers) {
 			soldier_request_ = new Request(
 						*this, owner().tribe().soldier(), TrainingSite::request_soldier_callback, wwWORKER);
 
@@ -434,23 +469,24 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 				                       descr().get_min_level(TrainingAttribute::kHealth),
 				                       descr().get_max_level(TrainingAttribute::kHealth)));
 
+			// The above selects everybody that could be trained here. If I am picky, then also exclude those
+			// that I could train but do not wish to spend time & resources on.
 			if ((std::numeric_limits<uint8_t>::max()-1 > trainee_general_threshold) && (0 < trainee_general_threshold)) {
 				RequireAnd qr;
 				if (requesting_weak_trainees)
-					qr.add(RequireAttribute(TrainingAttribute::kTotal, 0, trainee_general_threshold));
+					qr.add(RequireAttribute(TrainingAttribute::kTotal, 0, trainee_general_threshold-1));
 				else
-					qr.add(RequireAttribute(TrainingAttribute::kTotal, trainee_general_threshold, std::numeric_limits<uint8_t>::max()-1));
+					qr.add(RequireAttribute(TrainingAttribute::kTotal, trainee_general_threshold+1, std::numeric_limits<uint8_t>::max()-1));
 				qr.add(r);
 				soldier_request_->set_requirements(qr);
-				schedule_act(game, 1+acceptance_threshold_timeout);
+				schedule_act(game, 1+dynamic_timeout);
 			} else {
-
-			soldier_request_->set_requirements(r);
+				soldier_request_->set_requirements(r);
 			}
+			soldier_request_->set_count(capacity_ - soldiers_.size());
+			request_open_since = timeofgame;
 		} // ends request regenration
 
-		soldier_request_->set_count(capacity_ - soldiers_.size());
-		request_open_since = timeofgame;
 	} else if (soldiers_.size() >= capacity_) {
 		delete soldier_request_;
 		soldier_request_ = nullptr;

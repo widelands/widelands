@@ -781,7 +781,7 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
                                               const TribesLegacyLookupTable& tribes_lookup_table) {
 	try {
 	  uint16_t const packet_version = fr.unsigned_16();
-	  // TODO(unknown): remove support for previous packet after release
+	  // TODO(unknown): remove support for previous packet after release 21, to keep code simple.
 		if (packet_version == kCurrentPacketVersionTrainingsite
 		 || packet_version == kCurrentPacketVersionTrainingsite -1) {
 			read_productionsite(trainingsite, fr, game, mol, tribes_lookup_table);
@@ -844,6 +844,7 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 				   std::make_pair(trainstall, spresence);
 
 			}
+			// TODO(unknown): Packet version 5 was in build 20. If-statement for savegame compatibility
 			if (5 < packet_version) {
 				trainingsite.highest_trainee_level_seen = fr.unsigned_8();
 				trainingsite.latest_trainee_kickout_level = fr.unsigned_8();
@@ -857,7 +858,8 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 				else
 				  trainingsite.requesting_weak_trainees = false;
 				trainingsite.request_open_since = fr.unsigned_32();
-			}
+			} else
+				log("\nLoaded a trainingsite in build 20 compatibility mode.\n");
 
 
 		} else {

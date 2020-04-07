@@ -284,7 +284,8 @@ private:
 	bool     latest_trainee_was_kickout; // If soldier was not dropped, requesting new soldier.
 	bool     requesting_weak_trainees;  // Value of the previous after incorporate.
 	uint32_t request_open_since;        // Time units. If no soldiers appear, threshold is lowered after this.
-	const uint32_t acceptance_threshold_timeout = 10000; // Lower the bar after this many milliseconds.
+unsigned ts_uid_; // debugging only: Print "training site numbers" to log.
+	const uint32_t acceptance_threshold_timeout = 5555; // Lower the bar after this many milliseconds.
 	void init_kick_state(const TrainingAttribute&, const TrainingSiteDescr&);
 };
 
