@@ -93,7 +93,7 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 					const float y = fr.float_32();
 					const float zoom = fr.float_32();
 					MapView::View view = {Vector2f(x, y), zoom};
-					if (set > 0) {
+					if (set > 0 && i < kQuicknavSlots) {
 						ibase->set_landmark(i, view);
 					}
 				}
@@ -146,13 +146,13 @@ void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSav
 
 	// Map landmarks
 	if (ibase != nullptr) {
-		const std::vector<QuickNavigation::Landmark>& landmarks = ibase->landmarks();
-		fw.unsigned_8(landmarks.size());
-		for (const QuickNavigation::Landmark& landmark : landmarks) {
-			fw.unsigned_8(landmark.set ? 1 : 0);
-			fw.float_32(landmark.view.viewpoint.x);
-			fw.float_32(landmark.view.viewpoint.y);
-			fw.float_32(landmark.view.zoom);
+		const QuickNavigation::Landmark* landmarks = ibase->landmarks();
+		fw.unsigned_8(kQuicknavSlots);
+		for (size_t i = 0; i < kQuicknavSlots; ++i) {
+			fw.unsigned_8(landmarks[i].set ? 1 : 0);
+			fw.float_32(landmarks[i].view.viewpoint.x);
+			fw.float_32(landmarks[i].view.viewpoint.y);
+			fw.float_32(landmarks[i].view.zoom);
 		}
 
 		fw.unsigned_32(ibase->get_expedition_port_spaces().size());

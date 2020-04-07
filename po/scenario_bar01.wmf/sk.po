@@ -1,18 +1,19 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2014
 # GunChleoc, 2014
+# Karl Vest, 2020
 # MiroslavR <miroslavr256@gmail.com>, 2015,2017
 # MiroslavR <miroslavr256@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
-"PO-Revision-Date: 2019-08-10 17:15+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-03-20 06:16+0000\n"
+"PO-Revision-Date: 2020-03-22 13:59+0000\n"
+"Last-Translator: Karl Vest\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -294,7 +295,7 @@ msgid ""
 "The third material necessary for improved buildings is reed, used to cover "
 "roofs. Reed fields are planted by a gardener around his building, the reed "
 "yard."
-msgstr ""
+msgstr "Tretí materiál potrebný pre vylepšené budovy je trstina, používaná na pokrytie strechy. Trstinové polia sú vysádzané záhradníkom okolo svojej budovy na trstinovej záhrade."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:129
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:131
@@ -380,7 +381,7 @@ msgstr "Ako mi otec povedal, sú chvíle, kedy treba bojovať, a chvíle, kedy t
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:188
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:201
 msgid "Thron is Contemplating the War"
-msgstr ""
+msgstr "Thron zvažuje vojnu."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:189
 msgid "Thron is shaking his head…"
@@ -424,7 +425,7 @@ msgstr "Búr sa proti každému, kto ohrozuje našu holú existenciu, aj keby mu
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:213
 msgid "Thron is Considering the Future"
-msgstr ""
+msgstr "Thron zvažuje budúcnosť."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:216
@@ -1033,12 +1034,12 @@ msgstr "Majú však strach, že vojna v Al’thunrane bude mať dopad na ich pok
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s“"
 
 #: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgstr ""
+msgstr "Nová uloha"
 
 #: ../../data/scripting/richtext_scenarios.lua:93
 msgid "New Objectives"
-msgstr ""
+msgstr "Nové úlohy"

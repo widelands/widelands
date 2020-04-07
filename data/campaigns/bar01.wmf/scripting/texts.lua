@@ -2,8 +2,6 @@
 -- Some formating functions
 -- =========================
 
-include "scripting/richtext_scenarios.lua"
-
 function thron(title, text)
    return speech("map:chieftain.png", "2F9131", title, text)
 end
