@@ -418,7 +418,7 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 			// Relaxing the criteria (and thus rebuild the request)
 			rebuild_request = need_more_soldiers;
 			if (requesting_weak_trainees_) {
-				if (std::numeric_limits<uint8_t>::max()-1 < trainee_general_threshold_)
+				if (std::numeric_limits<uint8_t>::max()-1 > trainee_general_threshold_)
 					trainee_general_threshold_++;
 			} else
 				if (0 < trainee_general_threshold_)
