@@ -846,18 +846,18 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 			}
 			// TODO(unknown): Packet version 5 was in build 20. If-statement for savegame compatibility
 			if (5 < packet_version) {
-				trainingsite.highest_trainee_level_seen = fr.unsigned_8();
-				trainingsite.latest_trainee_kickout_level = fr.unsigned_8();
-				trainingsite.trainee_general_threshold = fr.unsigned_8();
+				trainingsite.highest_trainee_level_seen_ = fr.unsigned_8();
+				trainingsite.latest_trainee_kickout_level_ = fr.unsigned_8();
+				trainingsite.trainee_general_threshold_ = fr.unsigned_8();
 				if (fr.unsigned_8())
-				    trainingsite.latest_trainee_was_kickout = true;
+				    trainingsite.latest_trainee_was_kickout_ = true;
 				else
-				  trainingsite.latest_trainee_was_kickout = false;
+				  trainingsite.latest_trainee_was_kickout_ = false;
 				if (fr.unsigned_8())
-				  trainingsite.requesting_weak_trainees = true;
+				  trainingsite.requesting_weak_trainees_ = true;
 				else
-				  trainingsite.requesting_weak_trainees = false;
-				trainingsite.request_open_since = fr.unsigned_32();
+				  trainingsite.requesting_weak_trainees_ = false;
+				trainingsite.request_open_since_ = fr.unsigned_32();
 			} else
 				log("\nLoaded a trainingsite in build 20 compatibility mode.\n");
 
@@ -1301,18 +1301,18 @@ void MapBuildingdataPacket::write_trainingsite(const TrainingSite& trainingsite,
 		fw.unsigned_16(fail_and_presence.second.first);
 		fw.unsigned_8(fail_and_presence.second.second);
 	}
-	fw.unsigned_8(trainingsite.highest_trainee_level_seen);
-	fw.unsigned_8(trainingsite.latest_trainee_kickout_level);
-	fw.unsigned_8(trainingsite.trainee_general_threshold);
-	if (trainingsite.latest_trainee_was_kickout)
+	fw.unsigned_8(trainingsite.highest_trainee_level_seen_);
+	fw.unsigned_8(trainingsite.latest_trainee_kickout_level_);
+	fw.unsigned_8(trainingsite.trainee_general_threshold_);
+	if (trainingsite.latest_trainee_was_kickout_)
 		fw.unsigned_8(1);
 	else
 		fw.unsigned_8(0);
-	if (trainingsite.requesting_weak_trainees)
+	if (trainingsite.requesting_weak_trainees_)
 		fw.unsigned_8(1);
 	else
 		fw.unsigned_8(0);
-	fw.unsigned_32(trainingsite.request_open_since);
+	fw.unsigned_32(trainingsite.request_open_since_);
 
 	// DONE
 }

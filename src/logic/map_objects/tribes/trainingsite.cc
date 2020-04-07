@@ -278,14 +278,14 @@ TrainingSite::TrainingSite(const TrainingSiteDescr& d)
 	set_post_timer(6000);
 	training_failure_count_.clear();
 	max_stall_val_ = training_state_multiplier_ * d.get_max_stall();
-	highest_trainee_level_seen = 1;
-	latest_trainee_kickout_level = 1;
-	latest_trainee_was_kickout = false;
-	requesting_weak_trainees = false;
-				static unsigned debupcounter = 1001;
-				ts_uid_ = debupcounter++;
-	request_open_since = 0;
-	trainee_general_threshold = 2;
+	highest_trainee_level_seen_ = 1;
+	latest_trainee_kickout_level_ = 1;
+	latest_trainee_was_kickout_ = false;
+	requesting_weak_trainees_ = false;
+	// static unsigned debupcounter = 1001;
+	// ts_uid_ = debupcounter++;
+	request_open_since_ = 0;
+	trainee_general_threshold_ = 2;
 
 	if (d.get_train_health())
 		init_kick_state(TrainingAttribute::kHealth, d);
@@ -395,97 +395,97 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 		need_more_soldiers = true;
 	const uint32_t timeofgame = game.get_gametime();
 
-	if (did_incorporate && latest_trainee_was_kickout != requesting_weak_trainees) {
+	if (did_incorporate && latest_trainee_was_kickout_ != requesting_weak_trainees_) {
 		// If type of desired recruits has been changed, the request is rebuild after incorporate
 		// even if (wrong/old) type recruits are on the way.
 		rebuild_request = need_more_soldiers;
-		requesting_weak_trainees = latest_trainee_was_kickout;
+		requesting_weak_trainees_ = latest_trainee_was_kickout_;
 	}
 
 	if (did_incorporate) {
 		// If we got somebody in, lets become picky again.
-		if (requesting_weak_trainees)
-			trainee_general_threshold = latest_trainee_kickout_level;
+		if (requesting_weak_trainees_)
+			trainee_general_threshold_ = latest_trainee_kickout_level_;
 		else
-			trainee_general_threshold = static_cast<uint8_t>(std::max<unsigned>(1, (std::min<unsigned>(highest_trainee_level_seen,
-							(static_cast<unsigned>(trainee_general_threshold) + 1 + static_cast<unsigned>(highest_trainee_level_seen))/2))));
-		request_open_since = timeofgame;
+			trainee_general_threshold_ = static_cast<uint8_t>(std::max<unsigned>(1, (std::min<unsigned>(highest_trainee_level_seen_,
+							(static_cast<unsigned>(trainee_general_threshold_) + 1 + static_cast<unsigned>(highest_trainee_level_seen_))/2))));
+		request_open_since_ = timeofgame;
 	}
 	if (soldier_request_ && need_more_soldiers) {
-		dynamic_timeout = acceptance_threshold_timeout / std::max<uint32_t>(1, static_cast<unsigned>(highest_trainee_level_seen));
-		if (0 == soldier_request_->get_num_transfers() && timeofgame > request_open_since + dynamic_timeout) {
+		dynamic_timeout = acceptance_threshold_timeout / std::max<uint32_t>(1, static_cast<unsigned>(highest_trainee_level_seen_));
+		if (0 == soldier_request_->get_num_transfers() && timeofgame > request_open_since_ + dynamic_timeout) {
 			// Timeout: We have been asking for certain type of soldiers, nobody is answering the call.
 			// Relaxing the criteria (and thus rebuild the request)
 			rebuild_request = need_more_soldiers;
-			if (requesting_weak_trainees) {
-				if (std::numeric_limits<uint8_t>::max()-1 < trainee_general_threshold)
-					trainee_general_threshold++;
+			if (requesting_weak_trainees_) {
+				if (std::numeric_limits<uint8_t>::max()-1 < trainee_general_threshold_)
+					trainee_general_threshold_++;
 			} else
-				if (0 < trainee_general_threshold)
-					trainee_general_threshold--;
+				if (0 < trainee_general_threshold_)
+					trainee_general_threshold_--;
 		}
 	}
-	unsigned arr = 0;
-// debugging, remove
-if (soldier_request_)
-arr = soldier_request_->get_num_transfers();
-log ("%d %d%d%d%d TrainingSite::update_soldier_request: thr%3d %s nms %d rq %d ss%2lu arr %d dic %d rbr %d ros %d ts %d\n", ts_uid_,
-descr().get_max_level(TrainingAttribute::kAttack), descr().get_max_level(TrainingAttribute::kDefense),
-descr().get_max_level(TrainingAttribute::kHealth), descr().get_max_level(TrainingAttribute::kEvade), trainee_general_threshold,
-requesting_weak_trainees ? " weak " : "strong", need_more_soldiers ? 1:0, soldier_request_ ? 1:0,
-soldiers_.size(), arr, did_incorporate ? 1:0, rebuild_request ? 1:0, request_open_since, timeofgame );
 
 	if (!soldier_request_)
 		rebuild_request = need_more_soldiers;
 
+	// unsigned arr = 0;
+	// if (soldier_request_)
+	// arr = soldier_request_->get_num_transfers();
+	// log ("%d %d%d%d%d TrainingSite::update_soldier_request: thr%3d %s nms %d rq %d ss%2lu arr %d dic %d rbr %d ros %d ts %d\n", ts_uid_,
+	// descr().get_max_level(TrainingAttribute::kAttack), descr().get_max_level(TrainingAttribute::kDefense),
+	// descr().get_max_level(TrainingAttribute::kHealth), descr().get_max_level(TrainingAttribute::kEvade), trainee_general_threshold_,
+	// requesting_weak_trainees_ ? " weak " : "strong", need_more_soldiers ? 1:0, soldier_request_ ? 1:0,
+	// soldiers_.size(), arr, did_incorporate ? 1:0, rebuild_request ? 1:0, request_open_since_, timeofgame );
+
 	if (rebuild_request) {
+
 		if (soldier_request_) {
 			delete soldier_request_;
 			soldier_request_ = nullptr;
 		}
-		// Should I replace the if-statement with an assert? If I come here without needing new soldiers, something is wrong
-		// above.
-		if (need_more_soldiers) {
-			soldier_request_ = new Request(
-						*this, owner().tribe().soldier(), TrainingSite::request_soldier_callback, wwWORKER);
 
-			RequireOr r;
+		assert(need_more_soldiers);
 
-			// set requirements to match this site
-			if (descr().get_train_attack())
+		soldier_request_ = new Request(
+					*this, owner().tribe().soldier(), TrainingSite::request_soldier_callback, wwWORKER);
+
+		RequireOr r;
+
+		// set requirements to match this site
+		if (descr().get_train_attack())
 				r.add(RequireAttribute(TrainingAttribute::kAttack,
 				                       descr().get_min_level(TrainingAttribute::kAttack),
 				                       descr().get_max_level(TrainingAttribute::kAttack)));
-			if (descr().get_train_defense())
+		if (descr().get_train_defense())
 				r.add(RequireAttribute(TrainingAttribute::kDefense,
 				                       descr().get_min_level(TrainingAttribute::kDefense),
 				                       descr().get_max_level(TrainingAttribute::kDefense)));
-			if (descr().get_train_evade())
+		if (descr().get_train_evade())
 				r.add(RequireAttribute(TrainingAttribute::kEvade,
 				                       descr().get_min_level(TrainingAttribute::kEvade),
 				                       descr().get_max_level(TrainingAttribute::kEvade)));
-			if (descr().get_train_health())
+		if (descr().get_train_health())
 				r.add(RequireAttribute(TrainingAttribute::kHealth,
 				                       descr().get_min_level(TrainingAttribute::kHealth),
 				                       descr().get_max_level(TrainingAttribute::kHealth)));
 
-			// The above selects everybody that could be trained here. If I am picky, then also exclude those
-			// that I could train but do not wish to spend time & resources on.
-			if ((std::numeric_limits<uint8_t>::max()-1 > trainee_general_threshold) && (0 < trainee_general_threshold)) {
-				RequireAnd qr;
-				if (requesting_weak_trainees)
-					qr.add(RequireAttribute(TrainingAttribute::kTotal, 0, trainee_general_threshold-1));
-				else
-					qr.add(RequireAttribute(TrainingAttribute::kTotal, trainee_general_threshold+1, std::numeric_limits<uint8_t>::max()-1));
-				qr.add(r);
-				soldier_request_->set_requirements(qr);
-				schedule_act(game, 1+dynamic_timeout);
-			} else {
-				soldier_request_->set_requirements(r);
-			}
-			soldier_request_->set_count(capacity_ - soldiers_.size());
-			request_open_since = timeofgame;
-		} // ends request regenration
+		// The above selects everybody that could be trained here. If I am picky, then also exclude those
+		// that I could train but do not wish to spend time & resources on.
+		if ((std::numeric_limits<uint8_t>::max()-1 > trainee_general_threshold_) && (0 < trainee_general_threshold_)) {
+			RequireAnd qr;
+			if (requesting_weak_trainees_)
+				qr.add(RequireAttribute(TrainingAttribute::kTotal, 0, trainee_general_threshold_-1));
+			else
+				qr.add(RequireAttribute(TrainingAttribute::kTotal, trainee_general_threshold_+1, std::numeric_limits<uint8_t>::max()-1));
+			qr.add(r);
+			soldier_request_->set_requirements(qr);
+			schedule_act(game, 1+dynamic_timeout);
+		} else {
+			soldier_request_->set_requirements(r);
+		}
+		soldier_request_->set_count(capacity_ - soldiers_.size());
+		request_open_since_ = timeofgame;
 
 	} else if (soldiers_.size() >= capacity_) {
 		delete soldier_request_;
@@ -541,13 +541,13 @@ void TrainingSite::drop_unupgradable_soldiers(Game&) {
 	// mess things up
 	for (Soldier* soldier : droplist) {
 		uint8_t level = soldier->get_level(TrainingAttribute::kTotal);
-		if (level > highest_trainee_level_seen)
-			highest_trainee_level_seen = level;
+		if (level > highest_trainee_level_seen_)
+			highest_trainee_level_seen_ = level;
 
 		soldier_control_.drop_soldier(*soldier);
-		if (latest_trainee_was_kickout) {
+		if (latest_trainee_was_kickout_) {
 			// If I am calling in weaklings: Stop that. Immediately.
-			latest_trainee_was_kickout = false;
+			latest_trainee_was_kickout_ = false;
 			update_soldier_request(true);
 		}
 	}
@@ -612,11 +612,11 @@ void TrainingSite::drop_stalled_soldiers(Game&) {
 	if (nullptr != soldier_to_drop) {
 		log("TrainingSite::drop_stalled_soldiers: Kicking somebody out.\n");
 		uint8_t level = soldier_to_drop->get_level(TrainingAttribute::kTotal);
-		if (level > highest_trainee_level_seen)
-			highest_trainee_level_seen = level;
-		latest_trainee_kickout_level = level;
+		if (level > highest_trainee_level_seen_)
+			highest_trainee_level_seen_ = level;
+		latest_trainee_kickout_level_ = level;
 		soldier_control_.drop_soldier(*soldier_to_drop);
-		latest_trainee_was_kickout = true;
+		latest_trainee_was_kickout_ = true;
 	}
 }
 
