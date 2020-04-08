@@ -391,7 +391,9 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 	bool rebuild_request = false;
 	bool need_more_soldiers = false;
 	uint32_t dynamic_timeout = acceptance_threshold_timeout;
+
 	if (soldiers_.size() < capacity_)
+		// If not full, I need more soldiers.
 		need_more_soldiers = true;
 	const uint32_t timeofgame = game.get_gametime();
 
@@ -404,6 +406,7 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 
 	if (did_incorporate) {
 		// If we got somebody in, lets become picky again.
+		// Request is not regenerated at this point. Should it?
 		if (requesting_weak_trainees_)
 			trainee_general_threshold_ = latest_trainee_kickout_level_;
 		else
@@ -412,7 +415,8 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 		request_open_since_ = timeofgame;
 	}
 	if (soldier_request_ && need_more_soldiers) {
-		dynamic_timeout = acceptance_threshold_timeout / std::max<uint32_t>(1, static_cast<unsigned>(highest_trainee_level_seen_));
+		if (!requesting_weak_trainees_)
+			dynamic_timeout = acceptance_threshold_timeout / std::max<uint32_t>(1, static_cast<unsigned>(trainee_general_threshold_));
 		if (0 == soldier_request_->get_num_transfers() && timeofgame > request_open_since_ + dynamic_timeout) {
 			// Timeout: We have been asking for certain type of soldiers, nobody is answering the call.
 			// Relaxing the criteria (and thus rebuild the request)
@@ -439,7 +443,7 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 	// soldiers_.size(), arr, did_incorporate ? 1:0, rebuild_request ? 1:0, request_open_since_, timeofgame );
 
 	if (rebuild_request) {
-
+		// I've changed my acceptance criteria
 		if (soldier_request_) {
 			delete soldier_request_;
 			soldier_request_ = nullptr;
@@ -487,14 +491,15 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 		soldier_request_->set_count(capacity_ - soldiers_.size());
 		request_open_since_ = timeofgame;
 
-	} else if (soldiers_.size() >= capacity_) {
+	} else if (!need_more_soldiers) {
 		delete soldier_request_;
 		soldier_request_ = nullptr;
 
 		while (soldiers_.size() > capacity_) {
 			soldier_control_.drop_soldier(**soldiers_.rbegin());
 		}
-	}
+	} else
+		soldier_request_->set_count(capacity_ - soldiers_.size());
 }
 
 /**
