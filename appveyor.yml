@@ -61,5 +61,5 @@ platform:
   - x86
 
 configuration:
-  - Release
   - Debug
+#  - Release
