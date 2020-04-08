@@ -282,8 +282,6 @@ TrainingSite::TrainingSite(const TrainingSiteDescr& d)
 	latest_trainee_kickout_level_ = 1;
 	latest_trainee_was_kickout_ = false;
 	requesting_weak_trainees_ = false;
-	// static unsigned debupcounter = 1001;
-	// ts_uid_ = debupcounter++;
 	request_open_since_ = 0;
 	trainee_general_threshold_ = 2;
 
@@ -433,15 +431,6 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 	if (!soldier_request_)
 		rebuild_request = need_more_soldiers;
 
-	// unsigned arr = 0;
-	// if (soldier_request_)
-	// arr = soldier_request_->get_num_transfers();
-	// log ("%d %d%d%d%d TrainingSite::update_soldier_request: thr%3d %s nms %d rq %d ss%2lu arr %d dic %d rbr %d ros %d ts %d\n", ts_uid_,
-	// descr().get_max_level(TrainingAttribute::kAttack), descr().get_max_level(TrainingAttribute::kDefense),
-	// descr().get_max_level(TrainingAttribute::kHealth), descr().get_max_level(TrainingAttribute::kEvade), trainee_general_threshold_,
-	// requesting_weak_trainees_ ? " weak " : "strong", need_more_soldiers ? 1:0, soldier_request_ ? 1:0,
-	// soldiers_.size(), arr, did_incorporate ? 1:0, rebuild_request ? 1:0, request_open_since_, timeofgame );
-
 	if (rebuild_request) {
 		// I've changed my acceptance criteria
 		if (soldier_request_) {
@@ -458,21 +447,21 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 
 		// set requirements to match this site
 		if (descr().get_train_attack())
-				r.add(RequireAttribute(TrainingAttribute::kAttack,
-				                       descr().get_min_level(TrainingAttribute::kAttack),
-				                       descr().get_max_level(TrainingAttribute::kAttack)));
+			r.add(RequireAttribute(TrainingAttribute::kAttack,
+			                       descr().get_min_level(TrainingAttribute::kAttack),
+			                       descr().get_max_level(TrainingAttribute::kAttack)));
 		if (descr().get_train_defense())
-				r.add(RequireAttribute(TrainingAttribute::kDefense,
-				                       descr().get_min_level(TrainingAttribute::kDefense),
-				                       descr().get_max_level(TrainingAttribute::kDefense)));
+			r.add(RequireAttribute(TrainingAttribute::kDefense,
+			                       descr().get_min_level(TrainingAttribute::kDefense),
+			                       descr().get_max_level(TrainingAttribute::kDefense)));
 		if (descr().get_train_evade())
-				r.add(RequireAttribute(TrainingAttribute::kEvade,
-				                       descr().get_min_level(TrainingAttribute::kEvade),
-				                       descr().get_max_level(TrainingAttribute::kEvade)));
+			r.add(RequireAttribute(TrainingAttribute::kEvade,
+			                       descr().get_min_level(TrainingAttribute::kEvade),
+			                       descr().get_max_level(TrainingAttribute::kEvade)));
 		if (descr().get_train_health())
-				r.add(RequireAttribute(TrainingAttribute::kHealth,
-				                       descr().get_min_level(TrainingAttribute::kHealth),
-				                       descr().get_max_level(TrainingAttribute::kHealth)));
+			r.add(RequireAttribute(TrainingAttribute::kHealth,
+			                       descr().get_min_level(TrainingAttribute::kHealth),
+			                       descr().get_max_level(TrainingAttribute::kHealth)));
 
 		// The above selects everybody that could be trained here. If I am picky, then also exclude those
 		// that I could train but do not wish to spend time & resources on.
