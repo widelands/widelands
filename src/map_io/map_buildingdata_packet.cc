@@ -780,17 +780,17 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
                                               MapObjectLoader& mol,
                                               const TribesLegacyLookupTable& tribes_lookup_table) {
 	try {
-	  uint16_t const packet_version = fr.unsigned_16();
-	  // TODO(unknown): remove support for previous packet after release 21, to keep code simple.
-		if (packet_version == kCurrentPacketVersionTrainingsite
-		 || packet_version == kCurrentPacketVersionTrainingsite -1) {
+		uint16_t const packet_version = fr.unsigned_16();
+		// TODO(unknown): remove support for previous packet after release 21, to keep code simple.
+		if (packet_version == kCurrentPacketVersionTrainingsite || packet_version == kCurrentPacketVersionTrainingsite -1) {
+
 			read_productionsite(trainingsite, fr, game, mol, tribes_lookup_table);
 
 			delete trainingsite.soldier_request_;
 			trainingsite.soldier_request_ = nullptr;
 			if (fr.unsigned_8()) {
 				trainingsite.soldier_request_ =
-				   new Request(trainingsite, 0, TrainingSite::request_soldier_callback, wwWORKER);
+					 new Request(trainingsite, 0, TrainingSite::request_soldier_callback, wwWORKER);
 				trainingsite.soldier_request_->read(fr, game, mol, tribes_lookup_table);
 			}
 
@@ -850,13 +850,13 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 				trainingsite.latest_trainee_kickout_level_ = fr.unsigned_8();
 				trainingsite.trainee_general_threshold_ = fr.unsigned_8();
 				if (fr.unsigned_8())
-				    trainingsite.latest_trainee_was_kickout_ = true;
+					trainingsite.latest_trainee_was_kickout_ = true;
 				else
-				  trainingsite.latest_trainee_was_kickout_ = false;
+					trainingsite.latest_trainee_was_kickout_ = false;
 				if (fr.unsigned_8())
-				  trainingsite.requesting_weak_trainees_ = true;
+					trainingsite.requesting_weak_trainees_ = true;
 				else
-				  trainingsite.requesting_weak_trainees_ = false;
+					trainingsite.requesting_weak_trainees_ = false;
 				trainingsite.request_open_since_ = fr.unsigned_32();
 			} else
 				log("\nLoaded a trainingsite in build 20 compatibility mode.\n");
