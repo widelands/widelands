@@ -2027,6 +2027,7 @@ void GameHost::handle_network() {
 	Client peer;
 	assert(d->net != nullptr);
 	while (d->net->try_accept(&peer.sock_id)) {
+log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
 		// Should only happen if the game has not been started yet
 		assert(d->game == nullptr);
 		peer.playernum = UserSettings::not_connected();
