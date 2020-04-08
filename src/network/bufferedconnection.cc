@@ -100,15 +100,15 @@ std::unique_ptr<BufferedConnection> BufferedConnection::connect(const NetAddress
 #if BOOST_VERSION >= 106600
 std::unique_ptr<BufferedConnection>
 BufferedConnection::accept(boost::asio::ip::tcp::acceptor& acceptor) {
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 	assert(acceptor.is_open());
 	std::unique_ptr<BufferedConnection> ptr(new BufferedConnection(acceptor));
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 	if (!ptr->is_connected()) {
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+		log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 		ptr.reset();
 	}
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 	return ptr;
 }
 #else
@@ -216,14 +216,14 @@ void BufferedConnection::receive(RecvPacket* packet) {
 
 // Called by send() method but will only do something if not sending yet
 void BufferedConnection::start_sending() {
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 	std::unique_lock<std::mutex> lock(mutex_send_);
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 	if (currently_sending_) {
 		// Already sending, don't start a second write call
 		return;
 	}
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 	// Find something to send
 	std::queue<std::vector<uint8_t>>* nonempty_queue = nullptr;
 	for (auto& entry : buffers_to_send_) {
@@ -237,10 +237,10 @@ log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
 		// Nothing (further) to send (right now)
 		return;
 	}
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 	currently_sending_ = true;
 	lock.unlock();
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 	// Start writing to the socket. This might block if the network buffer within
 	// the operating system is currently full.
 	// When done with sending, call the lambda method defined below
@@ -251,12 +251,12 @@ log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
 #else
 	   [this, nonempty_queue](boost::system::error_code ec, std::size_t /*length*/) {
 #endif
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+		   log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 		   std::unique_lock<std::mutex> lock2(mutex_send_);
 		   currently_sending_ = false;
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+		   log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 		   if (!ec) {
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+			   log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 			   // No error: Remove the buffer from the queue
 			   assert(nonempty_queue != nullptr);
 			   assert(!nonempty_queue->empty());
@@ -266,7 +266,7 @@ log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
 			   // Try to send some more data
 			   start_sending();
 		   } else {
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+			   log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 			   if (socket_.is_open()) {
 				   log("[BufferedConnection] Error when sending packet to host (error %i: %s)\n",
 				       ec.value(), ec.message().c_str());
@@ -280,23 +280,23 @@ log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
 
 // This method is run within a thread
 void BufferedConnection::start_receiving() {
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 	if (!is_connected()) {
 		return;
 	}
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 	socket_.async_read_some(
 	   boost::asio::buffer(asio_receive_buffer_, kNetworkBufferSize),
 	   [this](boost::system::error_code ec, std::size_t length) {
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+		   log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 		   if (!ec) {
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+			   log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 			   assert(length > 0);
 			   assert(length <= kNetworkBufferSize);
 			   // Has read something
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+			   log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 			   std::unique_lock<std::mutex> lock(mutex_receive_);
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+			   log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 			   for (size_t i = 0; i < length; ++i) {
 				   receive_buffer_.push_back(asio_receive_buffer_[i]);
 			   }
@@ -304,7 +304,7 @@ log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
 			   // Try to receive some more data
 			   start_receiving();
 		   } else {
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+			   log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 			   if (socket_.is_open()) {
 				   log("[BufferedConnection] Error when receiving data from host (error %i: %s)\n",
 				       ec.value(), ec.message().c_str());
@@ -317,7 +317,7 @@ log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
 }
 
 void BufferedConnection::reduce_send_buffer(boost::asio::ip::tcp::socket& socket) {
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 	// Reduce the size of the send buffer. This will result in (slightly) slower
 	// file transfers but keeps the program responsive (e.g., chat messages are
 	// displayed) while transmitting files
@@ -333,7 +333,7 @@ log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
 			log("[BufferedConnection] Warning: Failed to reduce send buffer size\n");
 		}
 	}
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 }
 
 BufferedConnection::BufferedConnection(const NetAddress& host)
@@ -370,11 +370,11 @@ BufferedConnection::BufferedConnection(const NetAddress& host)
 BufferedConnection::BufferedConnection(boost::asio::ip::tcp::acceptor& acceptor)
    : io_service_(), socket_(io_service_), receive_buffer_(), currently_sending_(false) {
 
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 	boost::system::error_code ec;
 	acceptor.accept(socket_, ec);
 	assert(ec != boost::asio::error::would_block);
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 	if (ec) {
 		// Some error
 		log("[BufferedConnection] Error when trying to accept connection: %s.\n",
@@ -384,39 +384,39 @@ log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
 	}
 	assert(is_connected());
 
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 	log("[BufferedConnection] Accepting connection from %s.\n",
 	    socket_.remote_endpoint().address().to_string().c_str());
 
 	reduce_send_buffer(socket_);
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 
 	start_receiving();
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 	asio_thread_ = std::thread([this]() {
 		// The output might actually be messed up if it collides with the main thread...
 		log("[BufferedConnection] Starting networking thread\n");
 		io_service_.run();
 		log("[BufferedConnection] Stopping networking thread\n");
 	});
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 }
 #else
 BufferedConnection::BufferedConnection()
    : io_service_(), socket_(io_service_), receive_buffer_(), currently_sending_(false) {
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 }
 
 void BufferedConnection::notify_connected() {
 	assert(is_connected());
 
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 	log("[BufferedConnection] Connection to %s.\n",
 	    socket_.remote_endpoint().address().to_string().c_str());
 
 	reduce_send_buffer(socket_);
 
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 	start_receiving();
 	asio_thread_ = std::thread([this]() {
 		// The output might actually be messed up if it collides with the main thread...
@@ -424,7 +424,7 @@ log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
 		io_service_.run();
 		log("[BufferedConnection] Stopping networking thread\n");
 	});
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 }
 #endif
 
