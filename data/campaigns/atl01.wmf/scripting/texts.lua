@@ -2,8 +2,6 @@
 --                 Texts for the Atlantean tutorial mission
 -- =======================================================================
 
-include "scripting/richtext_scenarios.lua"
-
 function jundlina(title, text)
    return speech("map:princess.png", "2F9131", title, text)
 end

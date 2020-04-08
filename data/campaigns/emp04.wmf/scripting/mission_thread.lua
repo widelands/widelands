@@ -1,7 +1,3 @@
-include "scripting/messages.lua"
-include "map:scripting/helper_functions.lua"
-include "scripting/field_animations.lua"
-
 -- Some objectives need to be waited for in separate threads
 local obj_find_monastery_done = false
 local julia_conquered = false

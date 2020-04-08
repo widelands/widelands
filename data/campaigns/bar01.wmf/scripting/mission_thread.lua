@@ -2,9 +2,6 @@
 --                            Main mission thread
 -- =======================================================================
 
-include "scripting/table.lua"
-include "scripting/ui.lua"
-
 quarry_done = false
 enhance_buildings_done = false
 build_materials_done = false

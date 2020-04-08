@@ -2,13 +2,6 @@
 --                      Texts for the tutorial mission
 -- =======================================================================
 
--- =========================
--- Some formating functions
--- =========================
-
-include "scripting/richtext_scenarios.lua"
-
-
 -- =============
 -- Texts below
 -- =============
