@@ -1,5 +1,6 @@
 #include "network/nethost.h"
 
+#include <iostream>
 #include <memory>
 
 #include "base/log.h"
@@ -91,10 +92,10 @@ void NetHost::close(const ConnectionId id) {
 
 bool NetHost::try_accept(ConnectionId* new_id) {
 
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+// log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
 	std::lock_guard<std::mutex> lock(mutex_accept_);
 	if (accept_queue_.empty()) {
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+// log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
 		return false;
 	}
 
@@ -177,6 +178,10 @@ log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
 			                    }
 
 log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+		                    } else {
+log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+std::cout << "acceptor.async_wait() failed:" << ec << "\n";
+exit(0);
 		                    }
 		                    // Wait for the next client
 		                    start_accepting(acceptor);
