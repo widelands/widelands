@@ -319,9 +319,15 @@ void EconomyOptionsWindow::EconomyOptionsPanel::toggle_infinite() {
 			if (tq.permanent == Widelands::kEconomyTargetInfinity) {
 				auto it = infinity_substitutes_.find(index);
 				if (it == infinity_substitutes_.end()) {
-					// The game was started with the target set to infinite, so we just use the default value
-					a = is_wares ? economy_options_window_->get_predefined_targets().at(kDefaultEconomyProfile).wares.at(index) :
-							economy_options_window_->get_predefined_targets().at(kDefaultEconomyProfile).workers.at(index);
+					// The game was started with the target set to infinite, so we just use the default
+					// value
+					a = is_wares ?
+					       economy_options_window_->get_predefined_targets()
+					          .at(kDefaultEconomyProfile)
+					          .wares.at(index) :
+					       economy_options_window_->get_predefined_targets()
+					          .at(kDefaultEconomyProfile)
+					          .workers.at(index);
 				} else {
 					// Restore saved old value
 					a = it->second;
