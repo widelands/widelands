@@ -177,11 +177,11 @@ void NetHost::start_accepting(boost::asio::ip::tcp::acceptor& acceptor) {
 				                    log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 			                    }
 
-							log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+			                    log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 		                    } else {
-								log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
-								std::cout << "acceptor.async_wait() failed:" << ec << "\n";
-								exit(0);
+			                    log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
+			                    std::cout << "acceptor.async_wait() failed:" << ec << "\n";
+			                    exit(0);
 		                    }
 		                    // Wait for the next client
 		                    start_accepting(acceptor);
