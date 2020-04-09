@@ -72,6 +72,7 @@ struct EconomyOptionsWindow : public UI::Window {
 	}
 
 	void change_target(int amount);
+	void toggle_infinite();
 	void reset_target();
 
 	void layout() override;
@@ -112,6 +113,7 @@ private:
 
 		void set_economy(Widelands::Serial serial);
 		void change_target(int amount);
+		void toggle_infinite();
 		void reset_target();
 		void update_desired_size() override;
 
@@ -121,6 +123,8 @@ private:
 		Widelands::WareWorker type_;
 		TargetWaresDisplay display_;
 		EconomyOptionsWindow* economy_options_window_;
+
+		std::map<Widelands::DescriptionIndex, uint32_t> infinity_substitutes_;
 	};
 
 	/// Actions performed when a NoteEconomyWindow is received.
