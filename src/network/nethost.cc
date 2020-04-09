@@ -92,14 +92,14 @@ void NetHost::close(const ConnectionId id) {
 
 bool NetHost::try_accept(ConnectionId* new_id) {
 
-// log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	// log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 	std::lock_guard<std::mutex> lock(mutex_accept_);
 	if (accept_queue_.empty()) {
-// log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+		// log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 		return false;
 	}
 
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 	ConnectionId id = next_id_++;
 	assert(id > 0);
 	assert(clients_.count(id) == 0);
@@ -108,24 +108,24 @@ log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
 	assert(clients_.count(id) == 1);
 	*new_id = id;
 
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 	return true;
 }
 
 std::unique_ptr<RecvPacket> NetHost::try_receive(const ConnectionId id) {
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 
 	// Check whether there is data for the requested client
 	if (!is_connected(id)) {
 		return std::unique_ptr<RecvPacket>();
 	}
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 
 	// Try to get one packet from the connection
 	if (!BufferedConnection::Peeker(clients_.at(id).get()).recvpacket()) {
 		return std::unique_ptr<RecvPacket>();
 	}
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 
 	std::unique_ptr<RecvPacket> packet(new RecvPacket);
 	clients_.at(id)->receive(packet.get());
@@ -149,39 +149,39 @@ void NetHost::send(const std::vector<ConnectionId>& ids, const SendPacket& packe
 // This method is run within a thread
 void NetHost::start_accepting(boost::asio::ip::tcp::acceptor& acceptor) {
 
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 	if (!is_listening()) {
 		return;
 	}
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 
 	// Do an asynchronous wait until something can be read on the acceptor.
 	// If we can read something, then there is a client that wants to connect to us
 	acceptor.async_wait(boost::asio::ip::tcp::acceptor::wait_read,
 	                    [this, &acceptor](const boost::system::error_code& ec) {
 
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+		                    log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 		                    if (!ec) {
 
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+			                    log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 			                    // No error occurred, so try to establish a connection
 			                    std::unique_ptr<BufferedConnection> conn =
 			                       BufferedConnection::accept(acceptor);
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+			                    log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 			                    if (conn) {
 
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+				                    log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 				                    assert(conn->is_connected());
 				                    std::lock_guard<std::mutex> lock(mutex_accept_);
 				                    accept_queue_.push(std::move(conn));
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+				                    log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 			                    }
 
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+							log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
 		                    } else {
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
-std::cout << "acceptor.async_wait() failed:" << ec << "\n";
-exit(0);
+								log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+								std::cout << "acceptor.async_wait() failed:" << ec << "\n";
+								exit(0);
 		                    }
 		                    // Wait for the next client
 		                    start_accepting(acceptor);
@@ -193,25 +193,25 @@ void NetHost::start_accepting(
    boost::asio::ip::tcp::acceptor& acceptor,
    std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*>& pair) {
 
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 	if (!is_listening()) {
 		return;
 	}
 
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 	if (!pair.first) {
 		assert(pair.second == nullptr);
 		pair = BufferedConnection::create_unconnected();
 	}
 
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+	log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 	acceptor.async_accept(
 	   *(pair.second), [this, &acceptor, &pair](const boost::system::error_code& ec) {
 
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+		   log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 		   if (!ec) {
 
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+			   log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 			   // No error occurred, so try to establish a connection
 			   pair.first->notify_connected();
 			   assert(pair.first->is_connected());
@@ -223,7 +223,7 @@ log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
 		   // Wait for the next client
 		   start_accepting(acceptor, pair);
 
-log("At %li in %s:%i %s\n",  time(0), __func__, __LINE__, __FILE__);
+		   log("At %li in %s:%i %s\n", time(0), __func__, __LINE__, __FILE__);
 		});
 }
 #endif  // Boost version check
