@@ -22,12 +22,13 @@ tribes:new_immovable_type {
       rope = 3
    },
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "build_??.png"),
-         hotspot = { 75, 141 },
-         fps = 1,
-         representative_frame = 3
-      },
+         hotspot = {73, 37},
+         frames = 4,
+         columns = 2,
+         rows = 2
+      }
    }
 }
