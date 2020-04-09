@@ -781,8 +781,8 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
                                               const TribesLegacyLookupTable& tribes_lookup_table) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		// TODO(unknown): remove support for previous packet after release 21, to keep code simple.
-		if (packet_version == kCurrentPacketVersionTrainingsite || packet_version == kCurrentPacketVersionTrainingsite -1) {
+		// TODO(tppq): remove support for packet version 5 after release 21, to keep code simple.
+		if (packet_version <= kCurrentPacketVersionTrainingsite && packet_version >= 5) {
 
 			read_productionsite(trainingsite, fr, game, mol, tribes_lookup_table);
 
@@ -844,23 +844,27 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 				   std::make_pair(trainstall, spresence);
 
 			}
-			// TODO(unknown): Packet version 5 was in build 20. If-statement for savegame compatibility
+
+			// TODO(tppq): Packet version 5 was in build 20. If-statement for savegame compatibility
+			// Could do all this unconditionally after build 21 is out.
 			if (5 < packet_version) {
 				trainingsite.highest_trainee_level_seen_ = fr.unsigned_8();
 				trainingsite.latest_trainee_kickout_level_ = fr.unsigned_8();
 				trainingsite.trainee_general_threshold_ = fr.unsigned_8();
-				if (fr.unsigned_8())
+				if (fr.unsigned_8()) {
 					trainingsite.latest_trainee_was_kickout_ = true;
-				else
+				} else {
 					trainingsite.latest_trainee_was_kickout_ = false;
-				if (fr.unsigned_8())
+				}
+				if (fr.unsigned_8()) {
 					trainingsite.requesting_weak_trainees_ = true;
-				else
+				} else {
 					trainingsite.requesting_weak_trainees_ = false;
+				}
 				trainingsite.request_open_since_ = fr.unsigned_32();
-			} else
+			} else {
 				log("\nLoaded a trainingsite in build 20 compatibility mode.\n");
-
+			}
 
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Trainingsite", packet_version,

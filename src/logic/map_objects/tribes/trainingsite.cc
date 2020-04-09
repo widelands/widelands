@@ -385,14 +385,15 @@ void TrainingSite::remove_worker(Worker& w) {
  * somebody shows up.
  */
 void TrainingSite::update_soldier_request(bool did_incorporate) {
-	Game & game = dynamic_cast<Game&>(get_owner()->egbase());
+	Game& game = dynamic_cast<Game&>(get_owner()->egbase());
 	bool rebuild_request = false;
 	bool need_more_soldiers = false;
 	uint32_t dynamic_timeout = acceptance_threshold_timeout;
 
-	if (soldiers_.size() < capacity_)
+	if (soldiers_.size() < capacity_) {
 		// If not full, I need more soldiers.
 		need_more_soldiers = true;
+	}
 	const uint32_t timeofgame = game.get_gametime();
 
 	if (did_incorporate && latest_trainee_was_kickout_ != requesting_weak_trainees_) {
@@ -405,31 +406,37 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 	if (did_incorporate) {
 		// If we got somebody in, lets become picky again.
 		// Request is not regenerated at this point. Should it?
-		if (requesting_weak_trainees_)
+		if (requesting_weak_trainees_) {
 			trainee_general_threshold_ = latest_trainee_kickout_level_;
-		else
+		} else {
 			trainee_general_threshold_ = static_cast<uint8_t>(std::max<unsigned>(1, (std::min<unsigned>(highest_trainee_level_seen_,
 							(static_cast<unsigned>(trainee_general_threshold_) + 1 + static_cast<unsigned>(highest_trainee_level_seen_))/2))));
+		}
 		request_open_since_ = timeofgame;
 	}
 	if (soldier_request_ && need_more_soldiers) {
-		if (!requesting_weak_trainees_)
+		if (!requesting_weak_trainees_) {
 			dynamic_timeout = acceptance_threshold_timeout / std::max<uint32_t>(1, static_cast<unsigned>(trainee_general_threshold_));
+		}
 		if (0 == soldier_request_->get_num_transfers() && timeofgame > request_open_since_ + dynamic_timeout) {
 			// Timeout: We have been asking for certain type of soldiers, nobody is answering the call.
 			// Relaxing the criteria (and thus rebuild the request)
 			rebuild_request = need_more_soldiers;
 			if (requesting_weak_trainees_) {
-				if (std::numeric_limits<uint8_t>::max()-1 > trainee_general_threshold_)
+				if (std::numeric_limits<uint8_t>::max()-1 > trainee_general_threshold_) {
 					trainee_general_threshold_++;
-			} else
-				if (0 < trainee_general_threshold_)
+				}
+			} else {
+				if (0 < trainee_general_threshold_) {
 					trainee_general_threshold_--;
+				}
+			}
 		}
 	}
 
-	if (!soldier_request_)
+	if (!soldier_request_) {
 		rebuild_request = need_more_soldiers;
+	}
 
 	if (rebuild_request) {
 		// I've changed my acceptance criteria
@@ -446,31 +453,36 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 		RequireOr r;
 
 		// set requirements to match this site
-		if (descr().get_train_attack())
+		if (descr().get_train_attack()) {
 			r.add(RequireAttribute(TrainingAttribute::kAttack,
 			                       descr().get_min_level(TrainingAttribute::kAttack),
 			                       descr().get_max_level(TrainingAttribute::kAttack)));
-		if (descr().get_train_defense())
+		}
+		if (descr().get_train_defense()) {
 			r.add(RequireAttribute(TrainingAttribute::kDefense,
 			                       descr().get_min_level(TrainingAttribute::kDefense),
 			                       descr().get_max_level(TrainingAttribute::kDefense)));
-		if (descr().get_train_evade())
+		}
+		if (descr().get_train_evade()) {
 			r.add(RequireAttribute(TrainingAttribute::kEvade,
 			                       descr().get_min_level(TrainingAttribute::kEvade),
 			                       descr().get_max_level(TrainingAttribute::kEvade)));
-		if (descr().get_train_health())
+		}
+		if (descr().get_train_health()) {
 			r.add(RequireAttribute(TrainingAttribute::kHealth,
 			                       descr().get_min_level(TrainingAttribute::kHealth),
 			                       descr().get_max_level(TrainingAttribute::kHealth)));
+		}
 
 		// The above selects everybody that could be trained here. If I am picky, then also exclude those
 		// that I could train but do not wish to spend time & resources on.
 		if ((std::numeric_limits<uint8_t>::max()-1 > trainee_general_threshold_) && (0 < trainee_general_threshold_)) {
 			RequireAnd qr;
-			if (requesting_weak_trainees_)
+			if (requesting_weak_trainees_) {
 				qr.add(RequireAttribute(TrainingAttribute::kTotal, 0, trainee_general_threshold_-1));
-			else
+			} else {
 				qr.add(RequireAttribute(TrainingAttribute::kTotal, trainee_general_threshold_+1, std::numeric_limits<uint8_t>::max()-1));
+			}
 			qr.add(r);
 			soldier_request_->set_requirements(qr);
 			schedule_act(game, 1+dynamic_timeout);
@@ -487,8 +499,9 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 		while (soldiers_.size() > capacity_) {
 			soldier_control_.drop_soldier(**soldiers_.rbegin());
 		}
-	} else
+	} else {
 		soldier_request_->set_count(capacity_ - soldiers_.size());
+	}
 }
 
 /**
@@ -535,8 +548,9 @@ void TrainingSite::drop_unupgradable_soldiers(Game&) {
 	// mess things up
 	for (Soldier* soldier : droplist) {
 		uint8_t level = soldier->get_level(TrainingAttribute::kTotal);
-		if (level > highest_trainee_level_seen_)
+		if (level > highest_trainee_level_seen_) {
 			highest_trainee_level_seen_ = level;
+		}
 
 		soldier_control_.drop_soldier(*soldier);
 		if (latest_trainee_was_kickout_) {
@@ -564,7 +578,7 @@ void TrainingSite::drop_stalled_soldiers(Game&) {
 			// level-zero soldiers are excepted from kick-out implicitly. This is intentional.
 			this_soldier_is_safe = true;
 		} else {
-			for (const Upgrade& upgrade : upgrades_)
+			for (const Upgrade& upgrade : upgrades_) {
 				if (!this_soldier_is_safe) {
 					// Soldier is safe, if he:
 					//  - is below maximum, and
@@ -594,6 +608,7 @@ void TrainingSite::drop_stalled_soldiers(Game&) {
 						break;
 					}
 				}
+			}
 		}
 		if (!this_soldier_is_safe) {
 			// Make this soldier a kick-out candidate
@@ -606,8 +621,9 @@ void TrainingSite::drop_stalled_soldiers(Game&) {
 	if (nullptr != soldier_to_drop) {
 		log("TrainingSite::drop_stalled_soldiers: Kicking somebody out.\n");
 		uint8_t level = soldier_to_drop->get_level(TrainingAttribute::kTotal);
-		if (level > highest_trainee_level_seen_)
+		if (level > highest_trainee_level_seen_) {
 			highest_trainee_level_seen_ = level;
+		}
 		latest_trainee_kickout_level_ = level;
 		soldier_control_.drop_soldier(*soldier_to_drop);
 		latest_trainee_was_kickout_ = true;
