@@ -106,7 +106,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 1455000",
          "transform=deadtree3 34",
-         "seed=cirrus_wasteland_sapling",
+         "seed=cirrus_wasteland_sapling 100",
       },
       fall = {
          "remove=",

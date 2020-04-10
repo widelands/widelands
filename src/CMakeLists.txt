@@ -145,17 +145,6 @@ wl_library(widelands_options
     logic_filesystem_constants
 )
 
-
-# TODO(sirver): Split into libs with useful names.
-wl_library(helper
-  SRCS
-    helper.cc
-    helper.h
-  USES_SDL2
-  DEPENDS
-    base_exceptions
-)
-
 if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
   target_link_libraries(widelands_ball_of_mud ${EXECINFO_LIBRARY})
 endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")

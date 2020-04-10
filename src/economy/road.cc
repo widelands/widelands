@@ -123,6 +123,13 @@ void Road::link_into_flags(EditorGameBase& egbase, bool) {
 	}
 }
 
+void Road::set_busy(EditorGameBase& e, bool b) {
+	unmark_map(e);
+	wallet_ = b ? kRoadMaxWallet : 0;
+	busy_ = b;
+	mark_map(e);
+}
+
 void Road::set_economy(Economy* const e, WareWorker type) {
 	RoadBase::set_economy(e, type);
 	if (type == wwWORKER) {

@@ -45,17 +45,20 @@ IFont* load_font(const std::string& face, int ptsize) {
 	}
 
 	SDL_RWops* ops = SDL_RWFromConstMem(memory->data(), memory->size());
-	if (!ops)
+	if (!ops) {
 		throw BadFont("could not load font!: RWops Pointer invalid");
+	}
 
 	TTF_Font* font = TTF_OpenFontIndexRW(ops, true, ptsize, 0);
-	if (!font)
+	if (!font) {
 		throw BadFont((boost::format("could not load font!: %s") % TTF_GetError()).str());
+	}
 
-	if (!font)
+	if (!font) {
 		throw BadFont(
 		   (boost::format("Font loading error for %s, %i pts: %s") % face % ptsize % TTF_GetError())
 		      .str());
+	}
 
 	return new SdlTtfFont(font, face, ptsize, memory.release());
 }

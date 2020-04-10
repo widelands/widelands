@@ -82,8 +82,10 @@ const MethodType<LuaGame> LuaGame::Methods[] = {
    METHOD(LuaGame, launch_coroutine), METHOD(LuaGame, save), {nullptr, nullptr},
 };
 const PropertyType<LuaGame> LuaGame::Properties[] = {
-   PROP_RO(LuaGame, real_speed),   PROP_RO(LuaGame, time), PROP_RW(LuaGame, desired_speed),
-   PROP_RW(LuaGame, allow_saving), PROP_RO(LuaGame, type), PROP_RO(LuaGame, interactive_player),
+   PROP_RO(LuaGame, real_speed),         PROP_RO(LuaGame, time),
+   PROP_RW(LuaGame, desired_speed),      PROP_RW(LuaGame, allow_saving),
+   PROP_RO(LuaGame, last_save_time),     PROP_RO(LuaGame, type),
+   PROP_RO(LuaGame, interactive_player), PROP_RO(LuaGame, scenario_difficulty),
    {nullptr, nullptr, nullptr},
 };
 
@@ -172,6 +174,16 @@ int LuaGame::get_interactive_player(lua_State* L) {
 }
 
 /* RST
+   .. attribute:: last_save_time
+
+      (RO) The gametime at which the game was last saved.
+*/
+int LuaGame::get_last_save_time(lua_State* L) {
+	lua_pushuint32(L, get_game(L).save_handler().last_save_time());
+	return 1;
+}
+
+/* RST
    .. attribute:: type
 
       (RO) One string out of 'undefined', 'singleplayer', 'netclient', 'nethost', 'replay',
@@ -200,6 +212,21 @@ int LuaGame::get_type(lua_State* L) {
 	return 1;
 }
 
+/* RST
+   .. attribute:: scenario_difficulty
+      (RO) The difficulty level of the current scenario. Values range from 1 to the number
+      of levels specified in the campaign's configuration in campaigns.lua. By convention
+      higher values mean more difficult. Throws an error if used outside of a scenario.
+*/
+int LuaGame::get_scenario_difficulty(lua_State* L) {
+	const uint32_t d = get_game(L).get_scenario_difficulty();
+	if (d == kScenarioDifficultyNotSet) {
+		report_error(L, "Scenario difficulty not set");
+	}
+	lua_pushuint32(L, d);
+	return 1;
+}
+
 /*
  ==========================================================
  LUA METHODS
@@ -224,8 +251,9 @@ int LuaGame::get_type(lua_State* L) {
 int LuaGame::launch_coroutine(lua_State* L) {
 	int nargs = lua_gettop(L);
 	uint32_t runtime = get_game(L).get_gametime();
-	if (nargs < 2)
+	if (nargs < 2) {
 		report_error(L, "Too few arguments!");
+	}
 	if (nargs == 3) {
 		runtime = luaL_checkuint32(L, 3);
 		lua_pop(L, 1);

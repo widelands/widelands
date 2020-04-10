@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-11-30 12:38+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-03-28 05:00+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2019\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
@@ -26,7 +26,7 @@ msgstr ""
 #. TRANSLATORS: Name of a backup autosave
 #: ../../data/campaigns/fri01.wmf/scripting/mission_thread.lua:132
 msgid "The Great Stormflood (Backup Autosave)"
-msgstr ""
+msgstr "Die große Sturmflut (automatische Sicherung)"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:27
 msgid "Build a wood economy and a reed farm"
@@ -246,6 +246,10 @@ msgid ""
 " reload the scenario from the backup savegame automatically created for you "
 "shortly before you reached the enemy’s headquarters."
 msgstr ""
+"Falls du nicht genügend vorbereitet warst, um diese Herausforderung "
+"innerhalb der zur Verfügung stehenden Zeit zu meistern, kannst du das "
+"Szenario von der automatisch kurz vor Erreichen des gegnerischen "
+"Hauptquartiers erstellten Sicherung neu laden."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:128
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:137
@@ -1111,39 +1115,40 @@ msgstr ""
 "gemacht wird. Dann können wir eine Expedition vom Hafen aus starten. Betet "
 "zu den Göttern und beeilt euch!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:410
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:412
 msgid "Don’t Forget the Soldiers"
 msgstr "Vergesst die Krieger nicht"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:411
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:413
 msgid "Soldiers to the port!"
 msgstr "Krieger zum Hafen!"
 
 #. TRANSLATORS: Reebaud – rising water
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:413
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:415
+#, lua-format
 msgid ""
 "I almost forgot in this haste – whereever we will land, we’ll need soldiers "
-"to secure and expand our new colony. There’s space for up to ten soldiers on"
-" our ship, if they don’t mind being all crammed together. Let’s send some to"
-" the port when it’s completed, so they can embark when we set sail!"
-msgstr ""
-"In der Eile hätte ich es fast vergessen – wo immer wir landen, werden wir "
-"Krieger brauchen, um unsere neue Kolonie zu sichern und zu erweitern. Wir "
-"haben Platz für zehn Krieger auf unserem Schiff, sofern sie sich nicht daran"
-" stören, total zusammengepfercht zu sein. Lasst uns ein paar zum Hafen "
-"senden, sobald dieser fertig gestellt ist, damit sie an Bord gehen können, "
-"sobald wir in See stechen."
+"to secure and expand our new colony. There’s space for up to %d soldier on "
+"our ship, if they don’t mind being all crammed together. Let’s send some to "
+"the port when it’s completed, so they can embark when we set sail!"
+msgid_plural ""
+"I almost forgot in this haste – whereever we will land, we’ll need soldiers "
+"to secure and expand our new colony. There’s space for up to %d soldiers on "
+"our ship, if they don’t mind being all crammed together. Let’s send some to "
+"the port when it’s completed, so they can embark when we set sail!"
+msgstr[0] ""
+msgstr[1] ""
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:417
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:421
 msgid "Victory"
 msgstr "Sieg"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:418
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:422
 msgid "We escaped!"
 msgstr "Wir sind entkommen!"
 
 #. TRANSLATORS: Reebaud – victory
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:420
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:424
 msgid ""
 "The gods have answered our prayers. We will escape the island’s drowning, "
 "and I am confident we will be able to build a new home again in a more "
@@ -1153,12 +1158,12 @@ msgstr ""
 "entkommen und ich bin mir sicher, dass wir uns in einer anderen, "
 "friedlicheren Ecke der Welt ein neues Zuhause aufbauen werden!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:421
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:425
 msgid "Congratulations"
 msgstr "Glückwunsch"
 
 #. TRANSLATORS: Reebaud – victory
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:423
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:427
 msgid ""
 "You have completed this mission. You may move on to the next scenario now to"
 " help us build a new home, far from the false God’s vengeful reach…"

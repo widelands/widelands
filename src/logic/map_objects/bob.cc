@@ -1002,8 +1002,18 @@ void Bob::Loader::load(FileRead& fr) {
 
 			bob.set_position(egbase(), read_coords_32(&fr));
 
+			// Animation. If the animation is no longer known, pick the main animation instead.
 			std::string animname = fr.c_string();
-			bob.anim_ = animname.size() ? bob.descr().get_animation(animname, &bob) : 0;
+			if (animname.empty()) {
+				bob.anim_ = 0;
+			} else if (bob.descr().is_animation_known(animname)) {
+				bob.anim_ = bob.descr().get_animation(animname, &bob);
+			} else {
+				bob.anim_ = bob.descr().main_animation();
+				log("Unknown animation '%s' for bob '%s', using main animation instead.\n",
+				    animname.c_str(), bob.descr().name().c_str());
+			}
+
 			bob.animstart_ = fr.signed_32();
 			bob.walking_ = static_cast<WalkingDir>(read_direction_8_allow_null(&fr));
 			if (bob.walking_) {
@@ -1031,8 +1041,17 @@ void Bob::Loader::load(FileRead& fr) {
 
 				if (fr.unsigned_8()) {
 					uint32_t anims[6];
-					for (int j = 0; j < 6; ++j)
-						anims[j] = bob.descr().get_animation(fr.c_string(), &bob);
+					for (int j = 0; j < 6; ++j) {
+						std::string dir_animname = fr.c_string();
+						if (bob.descr().is_animation_known(dir_animname)) {
+							anims[j] = bob.descr().get_animation(dir_animname, &bob);
+						} else {
+							anims[j] = bob.descr().main_animation();
+							log("Unknown directional animation '%s' for bob '%s', using main animation "
+							    "instead.\n",
+							    dir_animname.c_str(), bob.descr().name().c_str());
+						}
+					}
 					state.diranims =
 					   DirAnimations(anims[0], anims[1], anims[2], anims[3], anims[4], anims[5]);
 				}
@@ -1100,8 +1119,8 @@ const Bob::Task* Bob::Loader::get_task(const std::string& name) {
 	throw GameDataError("unknown bob task '%s'", name.c_str());
 }
 
-const BobProgramBase* Bob::Loader::get_program(const std::string& name) {
-	throw GameDataError("unknown bob program '%s'", name.c_str());
+const MapObjectProgram* Bob::Loader::get_program(const std::string& name) {
+	throw GameDataError("unknown map object program '%s'", name.c_str());
 }
 
 void Bob::save(EditorGameBase& eg, MapObjectSaver& mos, FileWrite& fw) {
@@ -1164,7 +1183,7 @@ void Bob::save(EditorGameBase& eg, MapObjectSaver& mos, FileWrite& fw) {
 			fw.unsigned_8(0);
 		}
 
-		fw.c_string(state.program ? state.program->get_name() : "");
+		fw.c_string(state.program ? state.program->name() : "");
 	}
 }
 }  // namespace Widelands

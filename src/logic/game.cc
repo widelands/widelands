@@ -135,6 +135,7 @@ Game::Game()
      auto_speed_(false),
      state_(gs_notrunning),
      cmdqueue_(*this),
+     scenario_difficulty_(kScenarioDifficultyNotSet),
      /** TRANSLATORS: Win condition for this game has not been set. */
      win_condition_displayname_(_("Not set")),
      replay_(false) {
