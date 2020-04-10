@@ -438,6 +438,9 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 	}
 	if (soldier_request_ && need_more_soldiers) {
 		if (!requesting_weak_trainees_) {
+			// If requesting strong folks, the acceptance time can sometimes grow unbearable large without this.
+			// In request weak mode, resources are typically thin and this harms less, In addition,
+			// the starting value tends to be much smaller in request-weak mode.
 			dynamic_timeout = acceptance_threshold_timeout / std::max<uint32_t>(1, static_cast<unsigned>(trainee_general_threshold_));
 		}
 		if (0 == soldier_request_->get_num_transfers() && timeofgame > request_open_since_ + dynamic_timeout) {
@@ -446,6 +449,13 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 			rebuild_request = need_more_soldiers;
 			if (0 < trainee_general_threshold_) {
 				trainee_general_threshold_--;
+			} else if (requesting_weak_trainees_) {
+				// If requesting weak trainees, and no people show up:
+				// set the state back to request_strong, which will allow everybody in
+				// when threshold is zero. Hopefully, you are fine with this misuse
+				// of variable names.
+				requesting_weak_trainees_ = false;
+				latest_trainee_was_kickout_ = false;
 			}
 		}
 	}
