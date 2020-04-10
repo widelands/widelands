@@ -114,50 +114,61 @@ void EditorGameBase::delete_tempfile() {
  * throws an exception if something goes wrong
  */
 void EditorGameBase::create_tempfile_and_save_mapdata(FileSystem::Type const type) {
-	// should only be called when a map was already loaded
-	assert(map_.filesystem());
-
-	g_fs->ensure_directory_exists(kTempFileDir);
-
-	std::string filename = kTempFileDir + g_fs->file_separator() + timestring() + "_mapdata";
-	std::string complete_filename = filename + kTempFileExtension;
-
-	// if a file with that name already exists, then try a few name modifications
-	if (g_fs->file_exists(complete_filename)) {
-		int suffix;
-		for (suffix = 0; suffix <= 9; suffix++) {
-			complete_filename = filename + "-" + std::to_string(suffix) + kTempFileExtension;
-			if (!g_fs->file_exists(complete_filename))
-				break;
-		}
-		if (suffix > 9) {
-			throw wexception("EditorGameBase::create_tempfile_and_save_mapdata(): for all considered "
-			                 "filenames a file already existed");
-		}
+	if (!map_.filesystem()) {
+		return;
 	}
 
-	// create tmp_fs_
-	tmp_fs_.reset(g_fs->create_sub_file_system(complete_filename, type));
+	// save map data to temporary file and reassign map fs
+	try {
+		g_fs->ensure_directory_exists(kTempFileDir);
 
-	// save necessary map data (we actually save the whole map)
-	std::unique_ptr<Widelands::MapSaver> wms(new Widelands::MapSaver(*tmp_fs_, *this));
-	wms->save();
+		std::string filename = kTempFileDir + g_fs->file_separator() + timestring() + "_mapdata";
+		std::string complete_filename = filename + kTempFileExtension;
 
-	// swap map fs
-	std::unique_ptr<FileSystem> mapfs(tmp_fs_->make_sub_file_system("."));
-	map_.swap_filesystem(mapfs);
-	mapfs.reset();
+		// if a file with that name already exists, then try a few name modifications
+		if (g_fs->file_exists(complete_filename)) {
+			int suffix;
+			for (suffix = 0; suffix <= 9; suffix++) {
+				complete_filename = filename + "-" + std::to_string(suffix) + kTempFileExtension;
+				if (!g_fs->file_exists(complete_filename))
+					break;
+			}
+			if (suffix > 9) {
+				throw wexception(
+				   "EditorGameBase::create_tempfile_and_save_mapdata(): for all considered "
+				   "filenames a file already existed");
+			}
+		}
 
-	// This is just a convenience hack:
-	// If tmp_fs_ is a zip filesystem then - because of the way zip filesystems are currently
-	// implemented -
-	// the file is still in zip mode right now, which means that the file isn't finalized yet, i.e.,
-	// not even a valid zip file until zip mode ends. To force ending the zip mode (thus finalizing
-	// the file)
-	// we simply perform a (otherwise useless) filesystem request.
-	// It's not strictly necessary, but this way we get a valid zip file immediately istead of
-	// at some unkown later point (when an unzip operation happens or a filesystem object destructs).
-	tmp_fs_->file_exists("binary");
+		// create tmp_fs_
+		tmp_fs_.reset(g_fs->create_sub_file_system(complete_filename, type));
+
+		// save necessary map data (we actually save the whole map)
+		std::unique_ptr<Widelands::MapSaver> wms(new Widelands::MapSaver(*tmp_fs_, *this));
+		wms->save();
+
+		// swap map fs
+		std::unique_ptr<FileSystem> mapfs(tmp_fs_->make_sub_file_system("."));
+		map_.swap_filesystem(mapfs);
+		mapfs.reset();
+
+		// This is just a convenience hack:
+		// If tmp_fs_ is a zip filesystem then - because of the way zip filesystems are currently
+		// implemented -
+		// the file is still in zip mode right now, which means that the file isn't finalized yet,
+		// i.e.,
+		// not even a valid zip file until zip mode ends. To force ending the zip mode (thus
+		// finalizing
+		// the file)
+		// we simply perform a (otherwise useless) filesystem request.
+		// It's not strictly necessary, but this way we get a valid zip file immediately istead of
+		// at some unkown later point (when an unzip operation happens or a filesystem object
+		// destructs).
+		tmp_fs_->file_exists("binary");
+	} catch (const WException& e) {
+		log("EditorGameBase: saving map to temporary file failed: %s", e.what());
+		throw;
+	}
 }
 
 void EditorGameBase::think() {
@@ -276,20 +287,12 @@ void EditorGameBase::allocate_player_maps() {
 }
 
 /**
- * Load and prepare detailed game data.
- * This happens once just after the host has started the game and before the
- * graphics are loaded.
+ * Load and prepare detailed game and map data.
+ * This happens once just after the host has started the game / the editor has started and before
+ * the graphics are loaded.
  */
 void EditorGameBase::postload() {
-	if (map_.filesystem()) {
-		// save map data to temporary file and reassign map fs
-		try {
-			create_tempfile_and_save_mapdata(FileSystem::ZIP);
-		} catch (const WException& e) {
-			log("EditorGameBase::postload: saving map to temporary file failed: %s", e.what());
-			throw;
-		}
-	}
+	create_tempfile_and_save_mapdata(FileSystem::ZIP);
 
 	// Postload tribes and world
 	step_loader_ui(_("Postloading world and tribes…"));

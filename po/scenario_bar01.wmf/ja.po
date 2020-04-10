@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
@@ -7,9 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
-"PO-Revision-Date: 2019-08-10 17:15+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-03-28 05:00+0000\n"
+"PO-Revision-Date: 2020-03-28 05:02+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -156,9 +156,10 @@ msgstr "井戸、農場、そしてパン工房を１つずつ建てましょう
 msgid ""
 "Other ways to produce food – different kinds of food – are fishers and "
 "farms. The wheat of the farms has to be processed with water in a bakery "
-"before it becomes edible. You can obtain water by building a well on a spot "
-"where your geologists have found a water source."
-msgstr "他に食料を生産する方法 ── 他の種類の食料を生産する方法があります。漁師や農場を使うのです。農場で生産された小麦を食べられるようにするには、パン工房で水と一緒に加工する必要があります。水は地質学者が発見した場所に井戸を建設すれば効率良く汲み上げることができます。なお、水だけは資源が無いところでも半分程度の効率ですが、汲み上げることができます。"
+"before it becomes edible. You can obtain water by building a well. For the "
+"best productivity, build it on a spot where your geologists have found a "
+"water source."
+msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:78
 msgid "Refine your mined resources"

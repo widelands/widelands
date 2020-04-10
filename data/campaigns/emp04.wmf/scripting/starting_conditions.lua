@@ -14,10 +14,10 @@ place_building_in_region(p3, "empire_mill", {field_mill})
 field_warehouse = map:get_field(21, 186)
 place_building_in_region(p3, "empire_temple_of_vesta", {field_warehouse}, {workers = {empire_carrier = 0, empire_recruit = 0}, wares = {wheat = 200}, soldiers = {[{0,0,0,0}] = 3}})
 
-   r1 = p3:place_road(field_warehouse.immovable.flag, "l", "tl", true)
-   r2 = p3:place_road(field_mill.immovable.flag, "tr", "r", true)
-   r3 = p3:place_road(field_mill.immovable.flag, "l", "tl", "tr", true)
-   r4 = p3:place_road(field_mill.immovable.flag, "br", "r", true)
+   r1 = p3:place_road("normal", field_warehouse.immovable.flag, "l", "tl", true)
+   r2 = p3:place_road("normal", field_mill.immovable.flag, "tr", "r", true)
+   r3 = p3:place_road("normal", field_mill.immovable.flag, "l", "tl", "tr", true)
+   r4 = p3:place_road("normal", field_mill.immovable.flag, "br", "r", true)
 
 p3:forbid_buildings("all")
 field_warehouse.brn.immovable.ware_economy:set_target_quantity("beer", 180)
@@ -130,7 +130,7 @@ function try_place_roads_with_carriers(x, y)
                to_field:has_caps("flag") or
                (to_field.immovable and to_field.immovable.descr.type_name == "flag")
             ) then
-            local road = p1:place_road(field.immovable, direction[1], direction[2], true)
+            local road = p1:place_road("normal", field.immovable, direction[1], direction[2], true)
             road:set_workers('empire_carrier', 1)
          end
       end

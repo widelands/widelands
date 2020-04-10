@@ -64,8 +64,9 @@ NumberGlob::NumberGlob(const std::string& file_template) : template_(file_templa
 }
 
 bool NumberGlob::next(std::string* s) {
-	if (current_ > max_)
+	if (current_ > max_) {
 		return false;
+	}
 
 	if (max_) {
 		*s = boost::replace_last_copy(

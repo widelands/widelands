@@ -1,17 +1,18 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
+# Karl Vest, 2020
 # MiroslavR <miroslavr256@gmail.com>, 2015
 # Miroslav Remák <Unknown>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
-"PO-Revision-Date: 2019-08-10 17:15+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-03-20 06:16+0000\n"
+"PO-Revision-Date: 2020-03-22 15:40+0000\n"
+"Last-Translator: Karl Vest\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,12 +31,12 @@ msgstr "Ľutujeme, táto mapa ešte nie je implementovaná."
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgstr ""
+msgstr "Nová uloha"
 
 #: ../../data/scripting/richtext_scenarios.lua:93
 msgid "New Objectives"
-msgstr ""
+msgstr "Nové úlohy"

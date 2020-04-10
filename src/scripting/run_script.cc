@@ -66,8 +66,9 @@ run_string_as_script(lua_State* L, const std::string& identifier, const std::str
 		lua_pop(L, 1);    // No return value from script
 		lua_newtable(L);  // Push an empty table
 	}
-	if (!lua_istable(L, -1))
+	if (!lua_istable(L, -1)) {
 		throw LuaError("Script did not return a table!");
+	}
 
 	// Restore old value of __file__.
 	if (last_file.empty()) {

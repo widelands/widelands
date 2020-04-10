@@ -17,6 +17,8 @@
 --
 --    **animations**: Global animations. Contains subtables for ``frontier`` and ``flag``. Each animation needs the parameters ``pictures`` (table of filenames) and ``hotspot`` (2 integer coordinates), and may also define ``fps`` (integer frames per second).
 --
+--    **animation_directory**: The location of the animation png files.
+--
 --    **bridges**: Contains animations for ``normal_e``, ``normal_se``, ``normal_sw``, ``busy_e``, ``busy_se`` and ``busy_sw``.
 --
 --    **bridge_height**: The height in pixels of each bridge at it's summit at 1x scale.
@@ -66,19 +68,19 @@
 
 image_dirname = path.dirname(__file__) .. "images/atlanteans/"
 
-animations = {}
-add_animation(animations, "frontier", image_dirname, "frontier", {3, 12})
-add_animation(animations, "flag", image_dirname, "flag", {15, 35}, 10)
-add_animation(animations, "bridge_normal_e", image_dirname, "bridge_normal_e", {-2, 11})
-add_animation(animations, "bridge_busy_e", image_dirname, "bridge_busy_e", {-2, 11})
-add_animation(animations, "bridge_normal_se", image_dirname, "bridge_normal_se", {5, 2})
-add_animation(animations, "bridge_busy_se", image_dirname, "bridge_busy_se", {5, 2})
-add_animation(animations, "bridge_normal_sw", image_dirname, "bridge_normal_sw", {36, 6})
-add_animation(animations, "bridge_busy_sw", image_dirname, "bridge_busy_sw", {36, 3})
-
 tribes:new_tribe {
    name = "atlanteans",
-   animations = animations,
+   animation_directory = image_dirname,
+   animations = {
+      frontier = { hotspot = {3, 12} },
+      flag = { hotspot = {15, 35}, fps = 10 },
+      bridge_normal_e = { hotspot = {-2, 11} },
+      bridge_busy_e = { hotspot = {-2, 11} },
+      bridge_normal_se = { hotspot = {5, 2} },
+      bridge_busy_se = { hotspot = {5, 2} },
+      bridge_normal_sw = { hotspot = {36, 6} },
+      bridge_busy_sw = { hotspot = {36, 6} }
+   },
 
    bridge_height = 8,
 

@@ -78,13 +78,15 @@ Panel::Panel(Panel* const nparent,
 	if (parent_) {
 		next_ = parent_->first_child_;
 		prev_ = nullptr;
-		if (next_)
+		if (next_) {
 			next_->prev_ = this;
-		else
+		} else {
 			parent_->last_child_ = this;
+		}
 		parent_->first_child_ = this;
-	} else
+	} else {
 		prev_ = next_ = nullptr;
+	}
 }
 
 /**
@@ -92,29 +94,35 @@ Panel::Panel(Panel* const nparent,
  */
 Panel::~Panel() {
 	// Release pointers to this object
-	if (mousegrab_ == this)
+	if (mousegrab_ == this) {
 		mousegrab_ = nullptr;
-	if (mousein_ == this)
+	}
+	if (mousein_ == this) {
 		mousein_ = nullptr;
+	}
 
 	// Free children
 	free_children();
 
 	// Unlink
 	if (parent_) {
-		if (parent_->mousein_child_ == this)
+		if (parent_->mousein_child_ == this) {
 			parent_->mousein_child_ = nullptr;
-		if (parent_->focus_ == this)
+		}
+		if (parent_->focus_ == this) {
 			parent_->focus_ = nullptr;
+		}
 
-		if (prev_)
+		if (prev_) {
 			prev_->next_ = next_;
-		else
+		} else {
 			parent_->first_child_ = next_;
-		if (next_)
+		}
+		if (next_) {
 			next_->prev_ = prev_;
-		else
+		} else {
 			parent_->last_child_ = prev_;
+		}
 	}
 }
 
@@ -250,8 +258,9 @@ void Panel::end() {
  * function, you probably want to override \ref layout.
  */
 void Panel::set_size(const int nw, const int nh) {
-	if (nw == w_ && nh == h_)
+	if (nw == w_ && nh == h_) {
 		return;
+	}
 
 	assert(nw >= 0);
 	assert(nh >= 0);
@@ -260,8 +269,9 @@ void Panel::set_size(const int nw, const int nh) {
 	w_ = std::max(0, nw);
 	h_ = std::max(0, nh);
 
-	if (parent_)
+	if (parent_) {
 		move_inside_parent();
+	}
 
 	layout();
 }
@@ -295,8 +305,9 @@ void Panel::get_desired_size(int* w, int* h) const {
  * \note NEVER override this function
  */
 void Panel::set_desired_size(int w, int h) {
-	if (desired_w_ == w && desired_h_ == h)
+	if (desired_w_ == w && desired_h_ == h) {
 		return;
+	}
 
 	assert(w < 3000);
 	assert(h < 3000);
@@ -328,8 +339,9 @@ void Panel::update_desired_size() {
  */
 void Panel::set_layout_toplevel(bool ltl) {
 	flags_ &= ~pf_layout_toplevel;
-	if (ltl)
+	if (ltl) {
 		flags_ |= pf_layout_toplevel;
+	}
 }
 
 bool Panel::get_layout_toplevel() const {
@@ -342,8 +354,9 @@ bool Panel::get_layout_toplevel() const {
  * and return the result.
  */
 Vector2i Panel::to_parent(const Vector2i& pt) const {
-	if (!parent_)
+	if (!parent_) {
 		return pt;
+	}
 
 	return pt + Vector2i(lborder_ + x_, tborder_ + y_);
 }
@@ -401,39 +414,45 @@ int Panel::get_inner_h() const {
  * Make this panel the top-most panel in the parent's Z-order.
  */
 void Panel::move_to_top() {
-	if (!parent_)
+	if (!parent_) {
 		return;
+	}
 
 	// unlink
-	if (prev_)
+	if (prev_) {
 		prev_->next_ = next_;
-	else
+	} else {
 		parent_->first_child_ = next_;
-	if (next_)
+	}
+	if (next_) {
 		next_->prev_ = prev_;
-	else
+	} else {
 		parent_->last_child_ = prev_;
+	}
 
 	// relink
 	prev_ = nullptr;
 	next_ = parent_->first_child_;
 	parent_->first_child_ = this;
-	if (next_)
+	if (next_) {
 		next_->prev_ = this;
-	else
+	} else {
 		parent_->last_child_ = this;
+	}
 }
 
 /**
  * Makes the panel visible or invisible
  */
 void Panel::set_visible(bool const on) {
-	if (((flags_ & pf_visible) > 1) == on)
+	if (((flags_ & pf_visible) > 1) == on) {
 		return;
+	}
 
 	flags_ &= ~pf_visible;
-	if (on)
+	if (on) {
 		flags_ |= pf_visible;
+	}
 }
 
 /**
@@ -484,11 +503,13 @@ void Panel::think() {
  * (grand-)children for which set_thinks(false) has not been called.
  */
 void Panel::do_think() {
-	if (thinks())
+	if (thinks()) {
 		think();
+	}
 
-	for (Panel* child = first_child_; child; child = child->next_)
+	for (Panel* child = first_child_; child; child = child->next_) {
 		child->do_think();
+	}
 }
 
 /**
@@ -504,10 +525,11 @@ Vector2i Panel::get_mouse_position() const {
  */
 void Panel::set_mouse_pos(const Vector2i p) {
 	const Vector2i relative_p = p + Vector2i(get_x() + get_lborder(), get_y() + get_tborder());
-	if (parent_)
+	if (parent_) {
 		parent_->set_mouse_pos(relative_p);
-	else
+	} else {
 		WLApplication::get()->warp_mouse(relative_p);
+	}
 }
 
 /**
@@ -623,10 +645,11 @@ bool Panel::handle_tooltip() {
  * \param yes true if the panel should receive mouse events
  */
 void Panel::set_handle_mouse(bool const yes) {
-	if (yes)
+	if (yes) {
 		flags_ |= pf_handle_mouse;
-	else
+	} else {
 		flags_ &= ~pf_handle_mouse;
+	}
 }
 
 /**
@@ -651,13 +674,14 @@ void Panel::grab_mouse(bool const grab) {
  */
 void Panel::set_can_focus(bool const yes) {
 
-	if (yes)
+	if (yes) {
 		flags_ |= pf_can_focus;
-	else {
+	} else {
 		flags_ &= ~pf_can_focus;
 
-		if (parent_ && parent_->focus_ == this)
+		if (parent_ && parent_->focus_ == this) {
 			parent_->focus_ = nullptr;
+		}
 	}
 }
 
@@ -693,10 +717,11 @@ void Panel::focus(const bool topcaller) {
  * \param yes true if the panel's think function should be called
  */
 void Panel::set_thinks(bool const yes) {
-	if (yes)
+	if (yes) {
 		flags_ |= pf_thinks;
-	else
+	} else {
 		flags_ &= ~pf_thinks;
+	}
 }
 
 /**
@@ -710,8 +735,9 @@ void Panel::die() {
 
 	for (Panel* p = parent_; p; p = p->parent_) {
 		p->flags_ |= pf_child_die;
-		if (p == modal_)
+		if (p == modal_) {
 			break;
+		}
 	}
 }
 
@@ -763,8 +789,9 @@ void Panel::do_draw_inner(RenderTarget& dst) {
 	draw(dst);
 
 	// draw back to front
-	for (Panel* child = last_child_; child; child = child->prev_)
+	for (Panel* child = last_child_; child; child = child->prev_) {
 		child->do_draw(dst);
+	}
 
 	draw_overlay(dst);
 }
@@ -778,22 +805,25 @@ void Panel::do_draw_inner(RenderTarget& dst) {
  * \param dst RenderTarget for the parent Panel
  */
 void Panel::do_draw(RenderTarget& dst) {
-	if (!is_visible())
+	if (!is_visible()) {
 		return;
+	}
 
 	Recti outerrc;
 	Vector2i outerofs = Vector2i::zero();
 
-	if (!dst.enter_window(Recti(Vector2i(x_, y_), w_, h_), &outerrc, &outerofs))
+	if (!dst.enter_window(Recti(Vector2i(x_, y_), w_, h_), &outerrc, &outerofs)) {
 		return;
+	}
 
 	draw_border(dst);
 
 	Recti innerwindow(
 	   Vector2i(lborder_, tborder_), w_ - (lborder_ + rborder_), h_ - (tborder_ + bborder_));
 
-	if (dst.enter_window(innerwindow, nullptr, nullptr))
+	if (dst.enter_window(innerwindow, nullptr, nullptr)) {
 		do_draw_inner(dst);
+	}
 
 	dst.set_window(outerrc, outerofs);
 }
@@ -806,18 +836,22 @@ void Panel::do_draw(RenderTarget& dst) {
 inline Panel* Panel::child_at_mouse_cursor(int32_t const x, int32_t const y, Panel* child) {
 
 	for (; child; child = child->next_) {
-		if (!child->handles_mouse() || !child->is_visible())
+		if (!child->handles_mouse() || !child->is_visible()) {
 			continue;
+		}
 		if (x < child->x_ + static_cast<int32_t>(child->w_) && x >= child->x_ &&
-		    y < child->y_ + static_cast<int32_t>(child->h_) && y >= child->y_)
+		    y < child->y_ + static_cast<int32_t>(child->h_) && y >= child->y_) {
 			break;
+		}
 	}
 
-	if (mousein_child_ && mousein_child_ != child)
+	if (mousein_child_ && mousein_child_ != child) {
 		mousein_child_->do_mousein(false);
+	}
 	mousein_child_ = child;
-	if (child)
+	if (child) {
 		child->do_mousein(true);
+	}
 
 	return child;
 }
@@ -845,15 +879,18 @@ bool Panel::do_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	}
 	x -= lborder_;
 	y -= tborder_;
-	if (flags_ & pf_top_on_click)
+	if (flags_ & pf_top_on_click) {
 		move_to_top();
+	}
 
-	if (mousegrab_ != this)
+	if (mousegrab_ != this) {
 		for (Panel* child = first_child_; (child = child_at_mouse_cursor(x, y, child));
 		     child = child->next_) {
-			if (child->do_mousepress(btn, x - child->x_, y - child->y_))
+			if (child->do_mousepress(btn, x - child->x_, y - child->y_)) {
 				return true;
+			}
 		}
+	}
 	return handle_mousepress(btn, x, y);
 }
 
@@ -882,11 +919,14 @@ bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y, Vector2i rel_mou
 bool Panel::do_mouserelease(const uint8_t btn, int32_t x, int32_t y) {
 	x -= lborder_;
 	y -= tborder_;
-	if (mousegrab_ != this)
+	if (mousegrab_ != this) {
 		for (Panel* child = first_child_; (child = child_at_mouse_cursor(x, y, child));
-		     child = child->next_)
-			if (child->do_mouserelease(btn, x - child->x_, y - child->y_))
+		     child = child->next_) {
+			if (child->do_mouserelease(btn, x - child->x_, y - child->y_)) {
 				return true;
+			}
+		}
+	}
 	return handle_mouserelease(btn, x, y);
 }
 
@@ -961,10 +1001,11 @@ Panel* Panel::ui_trackmouse(int32_t& x, int32_t& y) {
 	Panel* mousein;
 	Panel* rcv = nullptr;
 
-	if (mousegrab_)
+	if (mousegrab_) {
 		mousein = rcv = mousegrab_;
-	else
+	} else {
 		mousein = modal_;
+	}
 
 	x -= mousein->x_;
 	y -= mousein->y_;
@@ -974,17 +1015,20 @@ Panel* Panel::ui_trackmouse(int32_t& x, int32_t& y) {
 	}
 
 	if (0 <= x && x < static_cast<int32_t>(mousein->w_) && 0 <= y &&
-	    y < static_cast<int32_t>(mousein->h_))
+	    y < static_cast<int32_t>(mousein->h_)) {
 		rcv = mousein;
-	else
+	} else {
 		mousein = nullptr;
+	}
 
 	if (mousein != mousein_) {
-		if (mousein_)
+		if (mousein_) {
 			mousein_->do_mousein(false);
+		}
 		mousein_ = mousein;
-		if (mousein_)
+		if (mousein_) {
 			mousein_->do_mousein(true);
+		}
 	}
 
 	return rcv;
@@ -1033,8 +1077,9 @@ bool Panel::ui_mousemove(
 	}
 
 	Panel* const p = ui_trackmouse(x, y);
-	if (p == nullptr)
+	if (p == nullptr) {
 		return false;
+	}
 
 	return p->do_mousemove(state, x, y, xdiff, ydiff);
 }
@@ -1110,10 +1155,12 @@ bool Panel::draw_tooltip(const std::string& text) {
 	Recti r(WLApplication::get()->get_mouse_position() + Vector2i(2, 32), tip_width, tip_height);
 	const Vector2i tooltip_bottom_right = r.opposite_of_origin();
 	const Vector2i screen_bottom_right(g_gr->get_xres(), g_gr->get_yres());
-	if (screen_bottom_right.x < tooltip_bottom_right.x)
+	if (screen_bottom_right.x < tooltip_bottom_right.x) {
 		r.x -= 4 + r.w;
-	if (screen_bottom_right.y < tooltip_bottom_right.y)
+	}
+	if (screen_bottom_right.y < tooltip_bottom_right.y) {
 		r.y -= 35 + r.h;
+	}
 
 	dst.fill_rect(r, RGBColor(63, 52, 34));
 	dst.draw_rect(r, RGBColor(0, 0, 0));
