@@ -857,8 +857,8 @@ void TrainingSite::training_successful(TrainingAttribute type, uint32_t level) {
 
 void TrainingSite::training_done() {
 	for (auto& fail_and_presence : training_failure_count_) {
-		// If a soldier is present at this training level, deteoriate
-		if (fail_and_presence.second.second) {
+		// If a soldier is present at this training level and site is running, deteoriate
+		if (fail_and_presence.second.second && (!is_stopped())) {
 			fail_and_presence.second.first++;
 			fail_and_presence.second.second = 0;
 		} else if (0 < fail_and_presence.second.first) {  // If no soldier, let's become optimistic
