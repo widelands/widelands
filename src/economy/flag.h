@@ -20,7 +20,9 @@
 #ifndef WL_ECONOMY_FLAG_H
 #define WL_ECONOMY_FLAG_H
 
+#include <algorithm>
 #include <deque>
+#include <iterator>
 
 #include "base/macros.h"
 #include "economy/routing_node.h"
@@ -113,7 +115,8 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	void detach_building(EditorGameBase&);
 
 	bool has_roadbase() const {
-		return roads_[0] || roads_[1] || roads_[2] || roads_[3] || roads_[4] || roads_[5];
+		return std::any_of(std::begin(roads_), std::end(roads_),
+		                   [](const RoadBase* road) { return road != nullptr; });
 	}
 	bool has_waterway() const {
 		return nr_of_waterways() > 0;
