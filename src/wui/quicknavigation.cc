@@ -69,6 +69,19 @@ bool QuickNavigation::handle_key(bool down, SDL_Keysym key) {
 		} else if (landmarks_[which].set) {
 			map_view_->set_view(landmarks_[which].view, MapView::Transition::Smooth);
 		}
+	} else if (key.sym >= SDLK_KP_1 && key.sym <= SDLK_KP_9) {
+		if (!(key.mod & KMOD_NUM)) {
+			return false;
+		}
+		int which = key.sym - SDLK_KP_1;
+		assert(which >= 0);
+		assert(which < kQuicknavSlots);
+
+		if (key.mod & KMOD_CTRL) {
+			set_landmark(which, current_);
+		} else if (landmarks_[which].set) {
+			map_view_->set_view(landmarks_[which].view, MapView::Transition::Smooth);
+		}
 	} else if (key.sym == SDLK_COMMA && !previous_locations_.empty()) {
 		// go to previous location
 		insert_if_applicable(next_locations_);
