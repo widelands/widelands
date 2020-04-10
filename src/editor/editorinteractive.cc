@@ -708,6 +708,11 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		switch (code.sym) {
 		// Sel radius
+		case SDLK_KP_1:
+			if (!(code.mod & KMOD_NUM)) {
+				break;
+			}
+			FALLS_THROUGH;
 		case SDLK_1:
 			if (code.mod & (KMOD_CTRL)) {
 				toggle_buildhelp();
@@ -715,6 +720,12 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 				set_sel_radius_and_update_menu(0);
 			}
 			return true;
+
+		case SDLK_KP_2:
+			if (!(code.mod & KMOD_NUM)) {
+				break;
+			}
+			FALLS_THROUGH;
 		case SDLK_2:
 			if (code.mod & (KMOD_CTRL)) {
 				toggle_immovables();
@@ -722,6 +733,12 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 				set_sel_radius_and_update_menu(1);
 			}
 			return true;
+
+		case SDLK_KP_3:
+			if (!(code.mod & KMOD_NUM)) {
+				break;
+			}
+			FALLS_THROUGH;
 		case SDLK_3:
 			if (code.mod & (KMOD_CTRL)) {
 				toggle_bobs();
@@ -729,6 +746,12 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 				set_sel_radius_and_update_menu(2);
 			}
 			return true;
+
+		case SDLK_KP_4:
+			if (!(code.mod & KMOD_NUM)) {
+				break;
+			}
+			FALLS_THROUGH;
 		case SDLK_4:
 			if (code.mod & (KMOD_CTRL)) {
 				toggle_resources();
@@ -736,21 +759,57 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 				set_sel_radius_and_update_menu(3);
 			}
 			return true;
+
+		case SDLK_KP_5:
+			if (!(code.mod & KMOD_NUM)) {
+				break;
+			}
+			FALLS_THROUGH;
 		case SDLK_5:
 			set_sel_radius_and_update_menu(4);
 			return true;
+
+		case SDLK_KP_6:
+			if (!(code.mod & KMOD_NUM)) {
+				break;
+			}
+			FALLS_THROUGH;
 		case SDLK_6:
 			set_sel_radius_and_update_menu(5);
 			return true;
+
+		case SDLK_KP_7:
+			if (!(code.mod & KMOD_NUM)) {
+				break;
+			}
+			FALLS_THROUGH;
 		case SDLK_7:
 			set_sel_radius_and_update_menu(6);
 			return true;
+
+		case SDLK_KP_8:
+			if (!(code.mod & KMOD_NUM)) {
+				break;
+			}
+			FALLS_THROUGH;
 		case SDLK_8:
 			set_sel_radius_and_update_menu(7);
 			return true;
+
+		case SDLK_KP_9:
+			if (!(code.mod & KMOD_NUM)) {
+				break;
+			}
+			FALLS_THROUGH;
 		case SDLK_9:
 			set_sel_radius_and_update_menu(8);
 			return true;
+
+		case SDLK_KP_0:
+			if (!(code.mod & KMOD_NUM)) {
+				break;
+			}
+			FALLS_THROUGH;
 		case SDLK_0:
 			if (!(code.mod & KMOD_CTRL)) {
 				set_sel_radius_and_update_menu(9);
