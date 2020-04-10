@@ -150,6 +150,28 @@ int32_t TrainingSiteDescr::get_max_level(const TrainingAttribute at) const {
 	NEVER_HERE();
 }
 
+/**
+ * Return the maximum level that can be trained, both by school type
+ * and resourcing.
+ */
+int32_t TrainingSite::get_max_unstall_level(const TrainingAttribute at, const TrainingSiteDescr &tsd) const {
+	const int32_t max = tsd.get_max_level(at);
+	const int32_t min = tsd.get_min_level(at);
+	int32_t lev = min;
+	int32_t rtv = min;
+	while (lev < max) {
+		TypeAndLevel train_tl(at, ++lev);
+		TrainFailCount::const_iterator tstep = training_failure_count_.find(train_tl);
+		if (max_stall_val_ > tstep->second.first) {
+			rtv = lev;
+		} else {
+			lev = max;
+		}
+	}
+
+	return rtv;
+}
+
 int32_t TrainingSiteDescr::get_max_stall() const {
 	return max_stall_;
 }
@@ -422,14 +444,8 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 			// Timeout: We have been asking for certain type of soldiers, nobody is answering the call.
 			// Relaxing the criteria (and thus rebuild the request)
 			rebuild_request = need_more_soldiers;
-			if (requesting_weak_trainees_) {
-				if (std::numeric_limits<uint8_t>::max()-1 > trainee_general_threshold_) {
-					trainee_general_threshold_++;
-				}
-			} else {
-				if (0 < trainee_general_threshold_) {
-					trainee_general_threshold_--;
-				}
+			if (0 < trainee_general_threshold_) {
+				trainee_general_threshold_--;
 			}
 		}
 	}
@@ -454,35 +470,55 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 
 		// set requirements to match this site
 		if (descr().get_train_attack()) {
-			r.add(RequireAttribute(TrainingAttribute::kAttack,
-			                       descr().get_min_level(TrainingAttribute::kAttack),
-			                       descr().get_max_level(TrainingAttribute::kAttack)));
+			if (requesting_weak_trainees_) {
+				r.add(RequireAttribute(TrainingAttribute::kAttack,
+						descr().get_min_level(TrainingAttribute::kAttack),
+						get_max_unstall_level(TrainingAttribute::kAttack, descr())));
+			} else {
+				r.add(RequireAttribute(TrainingAttribute::kAttack,
+						descr().get_min_level(TrainingAttribute::kAttack),
+						descr().get_max_level(TrainingAttribute::kAttack)));
+			}
 		}
 		if (descr().get_train_defense()) {
-			r.add(RequireAttribute(TrainingAttribute::kDefense,
-			                       descr().get_min_level(TrainingAttribute::kDefense),
-			                       descr().get_max_level(TrainingAttribute::kDefense)));
+			if (requesting_weak_trainees_) {
+				r.add(RequireAttribute(TrainingAttribute::kDefense,
+					descr().get_min_level(TrainingAttribute::kDefense),
+					get_max_unstall_level(TrainingAttribute::kDefense, descr())));
+			} else {
+				r.add(RequireAttribute(TrainingAttribute::kDefense,
+				                       descr().get_min_level(TrainingAttribute::kDefense),
+				                       descr().get_max_level(TrainingAttribute::kDefense)));
+			}
 		}
 		if (descr().get_train_evade()) {
+			if (requesting_weak_trainees_) {
+				r.add(RequireAttribute(TrainingAttribute::kEvade,
+					descr().get_min_level(TrainingAttribute::kEvade),
+					get_max_unstall_level(TrainingAttribute::kEvade, descr())));
+			} else {
 			r.add(RequireAttribute(TrainingAttribute::kEvade,
 			                       descr().get_min_level(TrainingAttribute::kEvade),
 			                       descr().get_max_level(TrainingAttribute::kEvade)));
+			}
 		}
 		if (descr().get_train_health()) {
+			if (requesting_weak_trainees_) {
+				r.add(RequireAttribute(TrainingAttribute::kHealth,
+					descr().get_min_level(TrainingAttribute::kHealth),
+					get_max_unstall_level(TrainingAttribute::kHealth, descr())));
+			} else {
 			r.add(RequireAttribute(TrainingAttribute::kHealth,
 			                       descr().get_min_level(TrainingAttribute::kHealth),
 			                       descr().get_max_level(TrainingAttribute::kHealth)));
+			}
 		}
 
 		// The above selects everybody that could be trained here. If I am picky, then also exclude those
 		// that I could train but do not wish to spend time & resources on.
-		if ((std::numeric_limits<uint8_t>::max()-1 > trainee_general_threshold_) && (0 < trainee_general_threshold_)) {
+		if (0 < trainee_general_threshold_) {
 			RequireAnd qr;
-			if (requesting_weak_trainees_) {
-				qr.add(RequireAttribute(TrainingAttribute::kTotal, 0, trainee_general_threshold_-1));
-			} else {
-				qr.add(RequireAttribute(TrainingAttribute::kTotal, trainee_general_threshold_+1, std::numeric_limits<uint8_t>::max()-1));
-			}
+			qr.add(RequireAttribute(TrainingAttribute::kTotal, trainee_general_threshold_+1, std::numeric_limits<uint8_t>::max()-1));
 			qr.add(r);
 			soldier_request_->set_requirements(qr);
 			schedule_act(game, 1+dynamic_timeout);

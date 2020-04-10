@@ -231,6 +231,7 @@ private:
 	void add_upgrade(TrainingAttribute, const std::string& prefix);
 	void calc_upgrades();
 
+	int32_t get_max_unstall_level(TrainingAttribute, const TrainingSiteDescr&) const;
 	void drop_unupgradable_soldiers(Game&);
 	void drop_stalled_soldiers(Game&);
 	Upgrade* get_upgrade(TrainingAttribute);
@@ -261,6 +262,7 @@ private:
 	// These are used for kicking out soldiers prematurely
 	static const uint32_t training_state_multiplier_;
 	// Unuque key to address each training level of each war art
+
 	using TypeAndLevel = std::pair<TrainingAttribute, uint16_t>;
 	// First entry is the "stallness", second is a bool
 	using FailAndPresence = std::pair<uint16_t, uint8_t>;  // first might wrap in a long play..
