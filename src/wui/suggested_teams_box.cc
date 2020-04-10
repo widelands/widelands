@@ -46,7 +46,6 @@ SuggestedTeamsBox::SuggestedTeamsBox(Panel* parent,
                    padding),
      suggested_teams_box_label_(new UI::Textarea(this)),
      lineup_box_(nullptr) {
-	set_size(max_x, max_y);
 	add(suggested_teams_box_label_);
 }
 SuggestedTeamsBox::~SuggestedTeamsBox() {
