@@ -45,12 +45,10 @@ tribes:new_tribe {
          [0] = "amazons_resi_none",
       },
       coal = {
-         [10] = "amazons_resi_coal_1",
-         [20] = "amazons_resi_coal_2",
+         [100] = "amazons_resi_none",
       },
       iron = {
-         [10] = "amazons_resi_iron_1",
-         [20] = "amazons_resi_iron_2",
+         [100] = "amazons_resi_none",
       },
       gold = {
          [10] = "amazons_resi_gold_1",
@@ -235,12 +233,8 @@ tribes:new_tribe {
       "cocoa_field_ripe",
       "amazons_resi_none",
       "amazons_resi_water",
-      "amazons_resi_coal_1",
-      "amazons_resi_iron_1",
       "amazons_resi_gold_1",
       "amazons_resi_stones_1",
-      "amazons_resi_coal_2",
-      "amazons_resi_iron_2",
       "amazons_resi_gold_2",
       "amazons_resi_stones_2",
       "amazons_shipconstruction",
