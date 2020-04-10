@@ -306,6 +306,7 @@ TrainingSite::TrainingSite(const TrainingSiteDescr& d)
 	requesting_weak_trainees_ = false;
 	request_open_since_ = 0;
 	trainee_general_lower_bound_ = 2;
+	repeated_layoff_ctr_ = 0;
 
 	if (d.get_train_health())
 		init_kick_state(TrainingAttribute::kHealth, d);
