@@ -305,7 +305,7 @@ TrainingSite::TrainingSite(const TrainingSiteDescr& d)
 	latest_trainee_was_kickout_ = false;
 	requesting_weak_trainees_ = false;
 	request_open_since_ = 0;
-	trainee_general_threshold_ = 2;
+	trainee_general_lower_bound_ = 2;
 
 	if (d.get_train_health())
 		init_kick_state(TrainingAttribute::kHealth, d);
@@ -411,6 +411,21 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 	bool rebuild_request = false;
 	bool need_more_soldiers = false;
 	uint32_t dynamic_timeout = acceptance_threshold_timeout;
+	uint8_t trainee_general_upper_bound = std::numeric_limits<uint8_t>::max()-1;
+	bool limit_upper_bound = false;
+
+	// Usually, we prefer already partially trained soldiers here.
+	// In some conditions, this can lead to same soldiers walking back and forth.
+	// this tries to break that cycle. The goal is that this code only kicks in
+	// in those specific conditions.
+	if (kUpperBoundThreshold_ < repeated_layoff_ctr_) {
+		if (repeated_layoff_ctr_ > kUpperBoundThreshold_ + highest_trainee_level_seen_) {
+			repeated_layoff_ctr_ = 0;
+		} else {
+			trainee_general_upper_bound = kUpperBoundThreshold_ + highest_trainee_level_seen_ - repeated_layoff_ctr_;
+			limit_upper_bound = true;
+		}
+	}
 
 	if (soldiers_.size() < capacity_) {
 		// If not full, I need more soldiers.
@@ -429,26 +444,27 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 		// If we got somebody in, lets become picky again.
 		// Request is not regenerated at this point. Should it?
 		if (requesting_weak_trainees_) {
-			trainee_general_threshold_ = latest_trainee_kickout_level_;
+			trainee_general_lower_bound_ = latest_trainee_kickout_level_;
 		} else {
-			trainee_general_threshold_ = static_cast<uint8_t>(std::max<unsigned>(1, (std::min<unsigned>(highest_trainee_level_seen_,
-							(static_cast<unsigned>(trainee_general_threshold_) + 1 + static_cast<unsigned>(highest_trainee_level_seen_))/2))));
+			trainee_general_lower_bound_ = static_cast<uint8_t>(std::max<unsigned>(1, (std::min<unsigned>(highest_trainee_level_seen_,
+							(static_cast<unsigned>(trainee_general_lower_bound_) + 1 + static_cast<unsigned>(highest_trainee_level_seen_))/2))));
 		}
 		request_open_since_ = timeofgame;
 	}
 	if (soldier_request_ && need_more_soldiers) {
-		if (!requesting_weak_trainees_) {
+		if ((!requesting_weak_trainees_) && (!limit_upper_bound)) {
 			// If requesting strong folks, the acceptance time can sometimes grow unbearable large without this.
 			// In request weak mode, resources are typically thin and this harms less, In addition,
 			// the starting value tends to be much smaller in request-weak mode.
-			dynamic_timeout = acceptance_threshold_timeout / std::max<uint32_t>(1, static_cast<unsigned>(trainee_general_threshold_));
+			dynamic_timeout = acceptance_threshold_timeout / std::max<uint32_t>(1, static_cast<unsigned>(trainee_general_lower_bound_));
+			// In the special case of training not working at all, there is no need for this speedup (hence the 2nd check)
 		}
 		if (0 == soldier_request_->get_num_transfers() && timeofgame > request_open_since_ + dynamic_timeout) {
 			// Timeout: We have been asking for certain type of soldiers, nobody is answering the call.
 			// Relaxing the criteria (and thus rebuild the request)
 			rebuild_request = need_more_soldiers;
-			if (0 < trainee_general_threshold_) {
-				trainee_general_threshold_--;
+			if (0 < trainee_general_lower_bound_) {
+				trainee_general_lower_bound_--;
 			} else if (requesting_weak_trainees_) {
 				// If requesting weak trainees, and no people show up:
 				// set the state back to request_strong, which will allow everybody in
@@ -526,9 +542,15 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 
 		// The above selects everybody that could be trained here. If I am picky, then also exclude those
 		// that I could train but do not wish to spend time & resources on.
-		if (0 < trainee_general_threshold_) {
+		if (limit_upper_bound) {
 			RequireAnd qr;
-			qr.add(RequireAttribute(TrainingAttribute::kTotal, trainee_general_threshold_+1, std::numeric_limits<uint8_t>::max()-1));
+			qr.add(RequireAttribute(TrainingAttribute::kTotal, 0, trainee_general_upper_bound));
+			qr.add(r);
+			soldier_request_->set_requirements(qr);
+			schedule_act(game, 1+dynamic_timeout);
+		} else if (0 < trainee_general_lower_bound_) {
+			RequireAnd qr;
+			qr.add(RequireAttribute(TrainingAttribute::kTotal, trainee_general_lower_bound_+1, std::numeric_limits<uint8_t>::max()-1));
 			qr.add(r);
 			soldier_request_->set_requirements(qr);
 			schedule_act(game, 1+dynamic_timeout);
@@ -604,6 +626,7 @@ void TrainingSite::drop_unupgradable_soldiers(Game&) {
 			latest_trainee_was_kickout_ = false;
 			update_soldier_request(true);
 		}
+		repeated_layoff_ctr_ = 0 ; // redundant, but safe (also reset whenever level increases)
 	}
 }
 
@@ -673,6 +696,12 @@ void TrainingSite::drop_stalled_soldiers(Game&) {
 		latest_trainee_kickout_level_ = level;
 		soldier_control_.drop_soldier(*soldier_to_drop);
 		latest_trainee_was_kickout_ = true;
+		// We can enter into state where same soldiers repeatedly enter the site
+		// even if they cannot be promited (lack of gold, lack of an equipmentsmith
+		// of some kind or so). The repeated_layoff_ctr_ works around that.
+		if (std::numeric_limits<uint8_t>::max()-1 > repeated_layoff_ctr_) {
+			repeated_layoff_ctr_++;
+		}
 	}
 }
 
@@ -695,6 +724,12 @@ void TrainingSite::act(Game& game, uint32_t const data) {
 
 void TrainingSite::program_end(Game& game, ProgramResult const result) {
 	result_ = result;
+	if (ProgramResult::kCompleted == result) {
+		// I try to already somewhat trained soldiers here, except when
+		// no training happens. Now some training has happened, hence zero.
+		// read in update_soldier_request
+		repeated_layoff_ctr_ = 0;
+	}
 	ProductionSite::program_end(game, result);
 	// For unknown reasons sometimes there is a fully upgraded soldier
 	// that failed to be send away, so at the end of this function

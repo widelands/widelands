@@ -282,7 +282,9 @@ private:
 	// after ongoing request is (partially) fulfilled. The other direction happens immediately.
 	uint8_t  highest_trainee_level_seen_; // When requesting already-trained, start here.
 	uint8_t  latest_trainee_kickout_level_; // If I cannot train, request soldiers that have been trainable
-	uint8_t  trainee_general_threshold_; // This is the acceptance threshold currently in use.
+	uint8_t  trainee_general_lower_bound_; // This is the acceptance threshold currently in use.
+	const uint8_t kUpperBoundThreshold_ = 3; // Higher value makes it less likely to get weak soldiers in.
+	uint8_t  repeated_layoff_ctr_; // increases when soldier is prematurely releases, reset when training succeeds.
 	bool     latest_trainee_was_kickout_; // If soldier was not dropped, requesting new soldier.
 	bool     requesting_weak_trainees_;  // Value of the previous after incorporate.
 	uint32_t request_open_since_;        // Time units. If no soldiers appear, threshold is lowered after this.

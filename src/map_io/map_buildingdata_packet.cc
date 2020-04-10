@@ -850,17 +850,12 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 			if (5 < packet_version) {
 				trainingsite.highest_trainee_level_seen_ = fr.unsigned_8();
 				trainingsite.latest_trainee_kickout_level_ = fr.unsigned_8();
-				trainingsite.trainee_general_threshold_ = fr.unsigned_8();
-				if (fr.unsigned_8()) {
-					trainingsite.latest_trainee_was_kickout_ = true;
-				} else {
-					trainingsite.latest_trainee_was_kickout_ = false;
-				}
-				if (fr.unsigned_8()) {
-					trainingsite.requesting_weak_trainees_ = true;
-				} else {
-					trainingsite.requesting_weak_trainees_ = false;
-				}
+				trainingsite.trainee_general_lower_bound_ = fr.unsigned_8();
+				uint8_t somebits = fr.unsigned_8();
+				trainingsite.latest_trainee_was_kickout_ = 0 < (somebits & 1);
+				trainingsite.requesting_weak_trainees_   = 0 < (somebits & 2);
+				assert(4 > somebits);
+				trainingsite.repeated_layoff_ctr_ = fr.unsigned_8();
 				trainingsite.request_open_since_ = fr.unsigned_32();
 			} else {
 				log("\nLoaded a trainingsite in build 20 compatibility mode.\n");
@@ -1307,15 +1302,16 @@ void MapBuildingdataPacket::write_trainingsite(const TrainingSite& trainingsite,
 	}
 	fw.unsigned_8(trainingsite.highest_trainee_level_seen_);
 	fw.unsigned_8(trainingsite.latest_trainee_kickout_level_);
-	fw.unsigned_8(trainingsite.trainee_general_threshold_);
-	if (trainingsite.latest_trainee_was_kickout_)
-		fw.unsigned_8(1);
-	else
-		fw.unsigned_8(0);
-	if (trainingsite.requesting_weak_trainees_)
-		fw.unsigned_8(1);
-	else
-		fw.unsigned_8(0);
+	fw.unsigned_8(trainingsite.trainee_general_lower_bound_);
+	uint8_t somebits = 0;
+	if (trainingsite.latest_trainee_was_kickout_) {
+		somebits++;
+	}
+	if (trainingsite.requesting_weak_trainees_) {
+		somebits += 2;
+	}
+	fw.unsigned_8(somebits);
+	fw.unsigned_8(trainingsite.repeated_layoff_ctr_);
 	fw.unsigned_32(trainingsite.request_open_since_);
 
 	// DONE
