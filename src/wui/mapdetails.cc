@@ -48,8 +48,7 @@ MapDetails::MapDetails(
                  UI::Align::kLeft,
                  UI::MultilineTextarea::ScrollMode::kNoScrolling),
      descr_(&main_box_, 0, 0, UI::Scrollbar::kSize, 0, style, ""),
-     suggested_teams_box_(
-        new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical, padding_, 0, w)) {
+     suggested_teams_box_(new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical, padding_, 0)) {
 
 	main_box_.add(&name_label_);
 	main_box_.add_space(padding_);
@@ -160,6 +159,7 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 		if (mapdata.suggested_teams.empty()) {
 			suggested_teams_box_->hide();
 		} else {
+			suggested_teams_box_->set_size(get_parent()->get_w(), 0);
 			suggested_teams_box_->show(mapdata.suggested_teams);
 		}
 	}

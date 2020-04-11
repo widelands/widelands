@@ -59,7 +59,7 @@ Flag::Flag()
      ware_filled_(0),
      wares_(new PendingWare[ware_capacity_]),
      always_call_for_flag_(nullptr) {
-       std::fill(std::begin(roads_), std::end(roads_), nullptr);
+	std::fill(std::begin(roads_), std::end(roads_), nullptr);
 }
 
 /**
@@ -359,7 +359,8 @@ Waterway* Flag::get_waterway(uint8_t const dir) const {
 /// \return the number of RoadBases connected to the flag
 uint8_t Flag::nr_of_roadbases() const {
 	uint8_t counter = 0;
-	for (uint8_t road_id = WalkingDir::LAST_DIRECTION; road_id >= WalkingDir::FIRST_DIRECTION; --road_id) {
+	for (uint8_t road_id = WalkingDir::LAST_DIRECTION; road_id >= WalkingDir::FIRST_DIRECTION;
+	     --road_id) {
 		if (get_roadbase(road_id) != nullptr) {
 			++counter;
 		}
@@ -370,7 +371,8 @@ uint8_t Flag::nr_of_roadbases() const {
 /// \return the number of roads connected to the flag.
 uint8_t Flag::nr_of_roads() const {
 	uint8_t counter = 0;
-	for (uint8_t road_id = WalkingDir::LAST_DIRECTION; road_id >= WalkingDir::FIRST_DIRECTION; --road_id) {
+	for (uint8_t road_id = WalkingDir::LAST_DIRECTION; road_id >= WalkingDir::FIRST_DIRECTION;
+	     --road_id) {
 		if (get_roadbase(road_id) != nullptr) {
 			++counter;
 		}
@@ -381,7 +383,8 @@ uint8_t Flag::nr_of_roads() const {
 /// \return the number of waterways connected to the flag.
 uint8_t Flag::nr_of_waterways() const {
 	uint8_t counter = 0;
-	for (uint8_t road_id = WalkingDir::LAST_DIRECTION; road_id >= WalkingDir::FIRST_DIRECTION; --road_id) {
+	for (uint8_t road_id = WalkingDir::LAST_DIRECTION; road_id >= WalkingDir::FIRST_DIRECTION;
+	     --road_id) {
 		if (get_waterway(road_id) != nullptr) {
 			++counter;
 		}
@@ -394,7 +397,8 @@ bool Flag::is_dead_end() const {
 		return false;
 	}
 	Flag const* first_other_flag = nullptr;
-	for (uint8_t road_id = WalkingDir::LAST_DIRECTION; road_id >= WalkingDir::FIRST_DIRECTION; --road_id) {
+	for (uint8_t road_id = WalkingDir::LAST_DIRECTION; road_id >= WalkingDir::FIRST_DIRECTION;
+	     --road_id) {
 		if (RoadBase* const road = get_roadbase(road_id)) {
 			Flag& start = road->get_flag(RoadBase::FlagStart);
 			Flag& other = this == &start ? road->get_flag(RoadBase::FlagEnd) : start;
