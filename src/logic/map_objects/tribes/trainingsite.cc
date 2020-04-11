@@ -565,7 +565,7 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 			                        std::numeric_limits<uint8_t>::max() - 1));
 			qr.add(r);
 			soldier_request_->set_requirements(qr);
-			if(game) {
+			if (game) {
 				schedule_act(*game, 1 + dynamic_timeout);
 			}
 		} else {
