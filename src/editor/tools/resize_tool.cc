@@ -40,6 +40,12 @@ int32_t EditorResizeTool::handle_click_impl(const Widelands::NodeAndTriangle<>& 
 	args->resized.deleted_fields =
 	   map->resize(eia.egbase(), center.node, args->new_map_size.w, args->new_map_size.h);
 
+	// fix for issue #3754
+	Widelands::NodeAndTriangle<> sel = eia.get_sel_pos();
+	map->normalize_coords(sel.node);
+	map->normalize_coords(sel.triangle.node);
+	eia.set_sel_pos(sel);
+
 	map->recalc_whole_map(eia.egbase());
 	return 0;
 }
@@ -51,6 +57,12 @@ EditorResizeTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands::C
                                    Widelands::Map* map) {
 	Widelands::EditorGameBase& egbase = eia.egbase();
 	map->resize(egbase, center.node, args->resized.old_map_size.w, args->resized.old_map_size.h);
+
+	// fix for issue #3754
+	Widelands::NodeAndTriangle<> sel = eia.get_sel_pos();
+	map->normalize_coords(sel.node);
+	map->normalize_coords(sel.triangle.node);
+	eia.set_sel_pos(sel);
 
 	for (const auto& it : args->resized.deleted_fields) {
 		const Widelands::FCoords f = map->get_fcoords(it.first);

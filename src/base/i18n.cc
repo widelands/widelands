@@ -282,8 +282,9 @@ void set_locale(const std::string& name) {
 				// log("locale is not working: %s\n", try_locale.c_str());
 			}
 		}
-		if (leave_while)
+		if (leave_while) {
 			break;
+		}
 
 		found = alt_str.find(',', 0);
 	}

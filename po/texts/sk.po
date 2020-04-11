@@ -1,16 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
+# Karl Vest, 2020
 # MiroslavR <miroslavr256@gmail.com>, 2015-2017
 # Miroslav Remák <Unknown>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-12-30 07:55+0000\n"
-"PO-Revision-Date: 2019-12-30 08:11+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-03-20 06:16+0000\n"
+"PO-Revision-Date: 2020-03-26 21:32+0000\n"
+"Last-Translator: Karl Vest\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,7 +38,7 @@ msgstr "Licenčné informácie hry Widelands"
 #. TRANSLATORS: Placeholder is copyright end year
 #: ../../data/txts/LICENSE.lua:10
 msgid "Copyright 2002 - %1% by the Widelands Development Team."
-msgstr ""
+msgstr "Copyright 2002 - %1% by the Widelands Development Team."
 
 #: ../../data/txts/LICENSE.lua:12
 msgid ""
@@ -82,14 +83,14 @@ msgstr "V systéme MacOS môžete nájsť súbor s názvom COPYING v archíve, k
 
 #: ../../data/txts/LICENSE.lua:23
 msgid "This game comes as-is and without any warranty."
-msgstr ""
+msgstr "Táto hra je poskytovaná „tak, ako je“, bez záruky akéhokoľvek druhu."
 
 #: ../../data/txts/LICENSE.lua:24
 msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
 "(Translations)."
-msgstr ""
+msgstr "Viac informácií a podporu nájdete na %1% (webstránka, wiki, fórum pre otázky a podporu vo všeobecnosti), %2% (bugtracker), and %3% (preklady)."
 
 #: ../../data/txts/README.lua:6
 msgid "Readme"
@@ -200,11 +201,11 @@ msgstr "Widelands preložili"
 
 #: ../../data/txts/developers.lua:3
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlantíďania"
 
 #: ../../data/txts/developers.lua:3
 msgid "Barbarians"
-msgstr ""
+msgstr "Barbari"
 
 #: ../../data/txts/developers.lua:3
 msgid "Campaign Story"
@@ -252,7 +253,7 @@ msgstr "FreeBSD"
 
 #: ../../data/txts/developers.lua:3
 msgid "Frisians"
-msgstr ""
+msgstr "Frízania"
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphicians"
@@ -324,7 +325,7 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "vacant"
-msgstr ""
+msgstr "neobsadený"
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
@@ -413,7 +414,7 @@ msgstr "Prepnutie stavebných miest"
 #: ../../data/txts/help/common_helptexts.lua:49
 msgctxt "hotkey"
 msgid "Ctrl + F"
-msgstr ""
+msgstr "Ctrl + F"
 
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"
@@ -452,7 +453,7 @@ msgstr "Hráč s farbou vlajky. Ak si viacerí klienti vyberú rovnakú farbu, z
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr ""
+msgstr "Divácky režim, čo znamená, že vidíte všetko, ale nemáte kontrolu nad žiadnym hráčom."
 
 #: ../../data/txts/help/multiplayer_help.lua:15
 msgid "Player settings"
@@ -514,7 +515,7 @@ msgid ""
 "Keep an eye on your fishers and build a fish breeder’s house. After fish "
 "resources are exhausted in their work area, the fish supply cannot be "
 "regenerated."
-msgstr ""
+msgstr "Sledujte činnosť svojich rybárov a postavte rybochovateľov dom. Potom ako sa v ich pracovnej oblasti minú ryby, nie je už možné zdroj rýb obnoviť."
 
 #: ../../data/txts/tips/atlanteans.lua:8
 msgid ""
@@ -538,7 +539,7 @@ msgstr "Sledujte činnosť svojich rybárov. Keď sa v ich pracovnej oblasti min
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
 "logs or game."
-msgstr ""
+msgstr "Nezabudnite vždy postaviť lesnícku a hájnickú chatrč, aby vám nedošlo drevo alebo jedlo."
 
 #: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
 #: ../../data/txts/tips/frisians.lua:12
@@ -553,7 +554,7 @@ msgstr ""
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at %s."
-msgstr ""
+msgstr "Všeobecnú pomoc pre prácu s editorom, ako aj krátky návod možno nájsť na našej wiki na adrese %s."
 
 #: ../../data/txts/tips/editor.lua:11
 msgid ""
@@ -584,7 +585,7 @@ msgstr "Podržaním klávesu Alt možno zapnúť druhý alternatívny nástroj (
 msgid ""
 "The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr ""
+msgstr "Numerické klávesy (0 - 9) vám umožňujú priamo nastaviť veľkosť označenej oblasti okolo vášho ukazovateľa myši."
 
 #: ../../data/txts/tips/editor.lua:31
 msgid ""
@@ -596,12 +597,12 @@ msgstr "Kláves medzerník sa správa rovnako ako v normálnej hre. Zapína/vyp�
 msgid ""
 "When placing trees, use the help button to see which trees are more likely "
 "to survive on which terrain."
-msgstr ""
+msgstr "Keď budete umiestňovať stromy, použite tlačidlo Pomoc, aby ste videli, ktoré stromy majú najväčšiu šancu prežiť na ktorom teréne."
 
 #: ../../data/txts/tips/editor.lua:39
 msgid ""
 "If you do not set water and fish resources, a default amount will be used."
-msgstr ""
+msgstr "Ak nezadáte zdroje vody a rýb, použijú sa prednastavené hodnoty."
 
 #: ../../data/txts/tips/editor.lua:43
 msgid ""
@@ -634,7 +635,7 @@ msgstr ""
 
 #: ../../data/txts/tips/frisians.lua:8
 msgid "Always build a forester’s house, so you will not run out of logs."
-msgstr ""
+msgstr "Nezabudnite vždy postaviť horáreň, aby vám nedošlo drevo."
 
 #: ../../data/txts/tips/general_game.lua:6
 msgid ""
@@ -670,7 +671,7 @@ msgstr "Rozdeľte svoje cesty na kratšie úseky umiestnením vlajok. Tak sa pre
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found online at %s."
-msgstr ""
+msgstr "Nejaké ďalšie otázky? Naše FAQ, často kladené otázky, wiki a samozrejme naše komunitné fóra môžete nájsť na %s."
 
 #: ../../data/txts/tips/general_game.lua:31
 msgid ""
@@ -754,6 +755,47 @@ msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
 msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:75
+msgctxt "hotkey"
+msgid "Ctrl+(Page Up/Page Down)"
+msgstr "Ctrl+(Page Up/Page Down)"
+
+#: ../../data/txts/tips/general_game.lua:75
+msgctxt "hotkey"
+msgid "Page Up/Page Down"
+msgstr "Page Up/Page Down"
+
+#: ../../data/txts/tips/general_game.lua:75
+msgctxt "hotkey"
+msgid "Shift+(Page Up/Page Down)"
+msgstr "Shift+(Page Up/Page Down)"
+
+#: ../../data/txts/tips/general_game.lua:75
+msgid ""
+"Speed up or slow down the game with %1%. Use %2% for rapid change, %3% will "
+"adjust speed smoothly."
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:79
+msgctxt "hotkey"
+msgid "Arrow keys"
+msgstr "Klávesy šípiek"
+
+#: ../../data/txts/tips/general_game.lua:79
+msgctxt "hotkey"
+msgid "Ctrl+Arrow keys"
+msgstr "Ctrl+klávesa šípky"
+
+#: ../../data/txts/tips/general_game.lua:79
+msgid ""
+"Move map view using %1%. %2% will move the view faster, %3% moves slowly."
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:79
+msgctxt "hotkey"
+msgid "Shift+Arrow keys"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:83
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"

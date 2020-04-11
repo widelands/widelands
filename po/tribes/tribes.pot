@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-03-03 09:07+0000\n"
+"POT-Creation-Date: 2020-03-29 18:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -3362,6 +3362,20 @@ msgctxt "frisians_building"
 msgid "Warehouse"
 msgstr ""
 
+#: ../../data/tribes/economy_profiles/atlanteans:4
+#: ../../data/tribes/economy_profiles/barbarians:4
+#: ../../data/tribes/economy_profiles/empire:4
+#: ../../data/tribes/economy_profiles/frisians:4
+msgid "Efficiency"
+msgstr ""
+
+#: ../../data/tribes/economy_profiles/atlanteans:5
+#: ../../data/tribes/economy_profiles/barbarians:5
+#: ../../data/tribes/economy_profiles/empire:5
+#: ../../data/tribes/economy_profiles/frisians:5
+msgid "Stockpile"
+msgstr ""
+
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/ashes/init.lua:42
 msgctxt "immovable"
@@ -3899,8 +3913,8 @@ msgstr ""
 msgid "Finishing"
 msgstr ""
 
-#: ../../data/tribes/preload.lua:15 ../../data/tribes/preload.lua:34
-#: ../../data/tribes/preload.lua:53 ../../data/tribes/preload.lua:73
+#: ../../data/tribes/preload.lua:15 ../../data/tribes/preload.lua:36
+#: ../../data/tribes/preload.lua:57 ../../data/tribes/preload.lua:78
 msgid "The Widelands Development Team"
 msgstr ""
 
@@ -3914,31 +3928,31 @@ msgid "The mighty tribes of the east-lands."
 msgstr ""
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:36
+#: ../../data/tribes/preload.lua:38
 msgid "Empire"
 msgstr ""
 
-#: ../../data/tribes/preload.lua:37
+#: ../../data/tribes/preload.lua:39
 msgid "This is the culture of the Roman Empire."
 msgstr ""
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:55
+#: ../../data/tribes/preload.lua:59
 msgid "Atlanteans"
 msgstr ""
 
-#: ../../data/tribes/preload.lua:56
+#: ../../data/tribes/preload.lua:60
 msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
 msgstr ""
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:75
+#: ../../data/tribes/preload.lua:80
 msgid "Frisians"
 msgstr ""
 
-#: ../../data/tribes/preload.lua:76
+#: ../../data/tribes/preload.lua:81
 msgid "The inhabitants of the rough North Sea shore."
 msgstr ""
 
@@ -3971,6 +3985,23 @@ msgid "Buildings"
 msgstr ""
 
 #. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/discovery.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/discovery.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/discovery.lua:11
+#: ../../data/tribes/scripting/starting_conditions/frisians/discovery.lua:11
+msgid "Discovery"
+msgstr ""
+
+#. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/discovery.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/discovery.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/discovery.lua:13
+#: ../../data/tribes/scripting/starting_conditions/frisians/discovery.lua:13
+msgid ""
+"Start the game with three ships on the ocean and only a handful of supplies"
+msgstr ""
+
+#. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:11
 #: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:11
 #: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:11
@@ -4000,6 +4031,22 @@ msgstr ""
 #: ../../data/tribes/scripting/starting_conditions/empire/headquarters.lua:13
 #: ../../data/tribes/scripting/starting_conditions/frisians/headquarters.lua:13
 msgid "Start the game with your headquarters only"
+msgstr ""
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/new_world.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/new_world.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/new_world.lua:11
+#: ../../data/tribes/scripting/starting_conditions/frisians/new_world.lua:11
+msgid "New World"
+msgstr ""
+
+#. TRANSLATORS: This is the tooltip for the "New World" starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/new_world.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/new_world.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/new_world.lua:13
+#: ../../data/tribes/scripting/starting_conditions/frisians/new_world.lua:13
+msgid "Start the game with seven ships full of wares on the ocean"
 msgstr ""
 
 #. TRANSLATORS: This is the name of a starting condition

@@ -123,7 +123,7 @@ namespace {
 	} catch (const FileError&) {                                                                    \
 		throw GameDataError("MapPlayersViewPacket::read: player %u:Could not open "                  \
 		                    "\"%s\" for reading. This file should exist when \"%s\" exists",         \
-		                    plnum, filename, unseen_times_filename);                                 \
+		                    static_cast<unsigned int>(plnum), filename, unseen_times_filename);      \
 	}
 
 // Try to find the file with newest fitting version number
@@ -141,7 +141,8 @@ namespace {
 			if (fileversion == 0)                                                                     \
 				throw GameDataError("MapPlayersViewPacket::read: player %u:Could not open "            \
 				                    "\"%s\" for reading. This file should exist when \"%s\" exists",   \
-				                    plnum, filename, unseen_times_filename);                           \
+				                    static_cast<unsigned int>(plnum), filename,                        \
+				                    unseen_times_filename);                                            \
 		}                                                                                            \
 	}
 
@@ -161,10 +162,10 @@ namespace {
 
 #define CHECK_TRAILING_BYTES(file, filename)                                                       \
 	if (!(file).end_of_file())                                                                      \
-		throw GameDataError(                                                                         \
-		   "MapPlayersViewPacket::read: player %u:"                                                  \
-		   "Found %" PRIuS " trailing bytes in \"%s\"",                                              \
-		   plnum, static_cast<long unsigned int>((file).get_size() - (file).get_pos()), filename);
+		throw GameDataError("MapPlayersViewPacket::read: player %u:"                                 \
+		                    "Found %" PRIuS " trailing bytes in \"%s\"",                             \
+		                    static_cast<unsigned int>(plnum),                                        \
+		                    static_cast<size_t>((file).get_size() - (file).get_pos()), filename);
 
 // Errors for the Read* functions.
 struct TribeImmovableNonexistent : public FileRead::DataError {
@@ -198,15 +199,17 @@ const ImmovableDescr& read_immovable_type(StreamRead* fr,
 	if (owner == static_cast<uint8_t>(MapObjectDescr::OwnerType::kWorld)) {
 		DescriptionIndex const index =
 		   egbase.world().get_immovable_index(world_lookup_table.lookup_immovable(name));
-		if (index == Widelands::INVALID_INDEX)
+		if (index == Widelands::INVALID_INDEX) {
 			throw WorldImmovableNonexistent(name);
+		}
 		return *egbase.world().get_immovable_descr(index);
 	} else {
 		assert(owner == static_cast<uint8_t>(MapObjectDescr::OwnerType::kTribe));
 		DescriptionIndex const index =
 		   egbase.tribes().immovable_index(tribes_lookup_table.lookup_immovable(name));
-		if (index == Widelands::INVALID_INDEX)
+		if (index == Widelands::INVALID_INDEX) {
 			throw TribeImmovableNonexistent(name);
+		}
 		return *egbase.tribes().get_immovable_descr(index);
 	}
 }
@@ -295,8 +298,9 @@ void MapPlayersViewPacket::read(FileSystem& fs,
                                 const WorldLegacyLookupTable& world_lookup_table)
 
 {
-	if (skip)
+	if (skip) {
 		return;
+	}
 
 	const Map& map = egbase.map();
 	const uint16_t mapwidth = map.get_width();
@@ -309,7 +313,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 		char unseen_times_filename[FILENAME_SIZE];
 		snprintf(unseen_times_filename, sizeof(unseen_times_filename), UNSEEN_TIMES_FILENAME_TEMPLATE,
-		         plnum, kCurrentPacketVersionUnseenTimes);
+		         static_cast<unsigned int>(plnum), kCurrentPacketVersionUnseenTimes);
 		FileRead unseen_times_file;
 		struct NotFound {};
 
@@ -319,7 +323,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 			    "version without player point of view. Will give player %u "
 			    "knowledge of unseen nodes, edges and triangles (but not "
 			    "resources).",
-			    unseen_times_filename, plnum);
+			    unseen_times_filename, static_cast<unsigned int>(plnum));
 
 			for (FCoords first_in_row(Coords(0, 0), &first_field); first_in_row.y < mapheight;
 			     ++first_in_row.y, first_in_row.field += mapwidth) {
@@ -353,16 +357,19 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						if (const BaseImmovable* base_immovable = f.field->get_immovable()) {
 							map_object_descr = &base_immovable->descr();
 							if (Road::is_road_descr(map_object_descr) ||
-							    Waterway::is_waterway_descr(map_object_descr))
+							    Waterway::is_waterway_descr(map_object_descr)) {
 								map_object_descr = nullptr;
-							else if (upcast(Building const, building, base_immovable))
-								if (building->get_position() != f)
+							} else if (upcast(Building const, building, base_immovable)) {
+								if (building->get_position() != f) {
 									//  TODO(unknown): This is not the building's main position
 									//  so we can not see it. But it should be
 									//  possible to see it from a distance somehow.
 									map_object_descr = nullptr;
-						} else
+								}
+							}
+						} else {
 							map_object_descr = nullptr;
+						}
 						f_player_field.map_object_descr = map_object_descr;
 					}
 
@@ -374,20 +381,25 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						Field::Terrains terrains;
 						terrains.d = terrains.r = 0;
 
-						if (f_vision | bl_vision | br_vision)
+						if (f_vision | bl_vision | br_vision) {
 							terrains.d = f.field->terrain_d();
-						if (f_vision | br_vision | r_vision)
+						}
+						if (f_vision | br_vision | r_vision) {
 							terrains.r = f.field->terrain_r();
+						}
 						f_player_field.terrains = terrains;
 					}
 
 					{  //  edges
-						if (f_vision | bl_vision)
+						if (f_vision | bl_vision) {
 							f_player_field.r_sw = f.field->get_road(WALK_SW);
-						if (f_vision | br_vision)
+						}
+						if (f_vision | br_vision) {
 							f_player_field.r_se = f.field->get_road(WALK_SE);
-						if (f_vision | r_vision)
+						}
+						if (f_vision | r_vision) {
 							f_player_field.r_e = f.field->get_road(WALK_E);
+						}
 					}
 
 					//  The player is not given information about resources that he
@@ -405,8 +417,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 		try {
 			char fname[FILENAME_SIZE];
-			snprintf(
-			   fname, sizeof(fname), VISION_FILENAME_TEMPLATE, plnum, kCurrentPacketVersionVision);
+			snprintf(fname, sizeof(fname), VISION_FILENAME_TEMPLATE, static_cast<unsigned int>(plnum),
+			         kCurrentPacketVersionVision);
 			vision_file.open(fs, fname);
 			have_vision = true;
 		} catch (...) {
@@ -429,12 +441,13 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					// loaded vision were the same. I removed this check, because
 					// scripting could have given the player a permanent view of
 					// this field. That's why we save this stuff in the first place!
-					if (file_vision != f_player_field.vision)
+					if (file_vision != f_player_field.vision) {
 						f_player_field.vision = file_vision;
+					}
 				} while (r.x);
 			}
 
-			log("Vision check successful for player %u\n", plnum);
+			log("Vision check successful for player %u\n", static_cast<unsigned int>(plnum));
 		}
 
 		// Read the player's knowledge about all fields
@@ -529,32 +542,32 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					try {
 						f_player_field.time_node_last_unseen = unseen_times_file.unsigned_32();
 					} catch (const FileRead::FileBoundaryExceeded&) {
-						throw GameDataError(
-						   "MapPlayersViewPacket::read: player %u: in "
-						   "\"%s\":%" PRIuS ": node (%i, %i): unexpected end of file "
-						   "while reading time_node_last_unseen",
-						   plnum, unseen_times_filename,
-						   static_cast<long unsigned int>(unseen_times_file.get_pos() - 4), f.x, f.y);
+						throw GameDataError("MapPlayersViewPacket::read: player %u: in "
+						                    "\"%s\":%" PRIuS ": node (%i, %i): unexpected end of file "
+						                    "while reading time_node_last_unseen",
+						                    static_cast<unsigned int>(plnum), unseen_times_filename,
+						                    static_cast<size_t>(unseen_times_file.get_pos() - 4), f.x,
+						                    f.y);
 					}
 
 					try {
 						owner = owners_file.unsigned_8();
 					} catch (const FileRead::FileBoundaryExceeded&) {
-						throw GameDataError(
-						   "MapPlayersViewPacket::read: player %u: in "
-						   "\"%s\":%" PRIuS ": node (%i, %i): unexpected end of file "
-						   "while reading owner",
-						   plnum, unseen_times_filename,
-						   static_cast<long unsigned int>(unseen_times_file.get_pos() - 1), f.x, f.y);
+						throw GameDataError("MapPlayersViewPacket::read: player %u: in "
+						                    "\"%s\":%" PRIuS ": node (%i, %i): unexpected end of file "
+						                    "while reading owner",
+						                    static_cast<unsigned int>(plnum), unseen_times_filename,
+						                    static_cast<size_t>(unseen_times_file.get_pos() - 1), f.x,
+						                    f.y);
 					}
 					if (nr_players < owner) {
 						throw GameDataError("MapPlayersViewPacket::read: player %u: in "
 						                    "\"%s\":%" PRIuS " & 0xf: node (%i, %i): Player thinks that "
 						                    "this node is owned by player %u, but there are only %u "
 						                    "players",
-						                    plnum, owners_filename,
-						                    static_cast<long unsigned int>(owners_file.get_pos() - 1),
-						                    f.x, f.y, owner, nr_players);
+						                    static_cast<unsigned int>(plnum), owners_filename,
+						                    static_cast<size_t>(owners_file.get_pos() - 1), f.x, f.y,
+						                    owner, nr_players);
 					}
 					uint8_t imm_kind = 0;
 					if (node_immovable_kinds_file_version == kCurrentPacketVersionImmovableKinds) {
@@ -597,16 +610,19 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					if (const BaseImmovable* base_immovable = f.field->get_immovable()) {
 						map_object_descr = &base_immovable->descr();
 						if (Road::is_road_descr(map_object_descr) ||
-						    Waterway::is_waterway_descr(map_object_descr))
+						    Waterway::is_waterway_descr(map_object_descr)) {
 							map_object_descr = nullptr;
-						else if (upcast(Building const, building, base_immovable))
-							if (building->get_position() != f)
+						} else if (upcast(Building const, building, base_immovable)) {
+							if (building->get_position() != f) {
 								//  TODO(unknown): This is not the building's main position so
 								//  we can not see it. But it should be possible
 								//  to see it from a distance somehow.
 								map_object_descr = nullptr;
-					} else
+							}
+						}
+					} else {
 						map_object_descr = nullptr;
+					}
 					f_player_field.map_object_descr = map_object_descr;
 					break;
 				}
@@ -741,15 +757,15 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 							   "MapPlayersViewPacket::read: player %u: in "
 							   "\"%s\":%" PRIuS ": node (%i, %i) t = D: unexpected end of "
 							   "file while reading time_triangle_last_surveyed",
-							   plnum, survey_times_filename,
-							   static_cast<long unsigned int>(survey_times_file.get_pos() - 4), f.x, f.y);
+							   static_cast<unsigned int>(plnum), survey_times_filename,
+							   static_cast<size_t>(survey_times_file.get_pos() - 4), f.x, f.y);
 						}
 					}
 				} catch (const FileRead::FileBoundaryExceeded&) {
 					throw GameDataError("MapPlayersViewPacket::read: player %u: in \"%s\": "
 					                    "node (%i, %i) t = D: unexpected end of file while reading "
 					                    "survey bit",
-					                    plnum, surveys_filename, f.x, f.y);
+					                    static_cast<unsigned int>(plnum), surveys_filename, f.x, f.y);
 				}
 				try {
 					bool survey = false;
@@ -776,15 +792,15 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 							   "MapPlayersViewPacket::read: player %u: in "
 							   "\"%s\":%" PRIuS ": node (%i, %i) t = R: unexpected end of "
 							   "file while reading time_triangle_last_surveyed",
-							   plnum, survey_times_filename,
-							   static_cast<long unsigned int>(survey_times_file.get_pos() - 4), f.x, f.y);
+							   static_cast<unsigned int>(plnum), survey_times_filename,
+							   static_cast<size_t>(survey_times_file.get_pos() - 4), f.x, f.y);
 						}
 					}
 				} catch (const FileRead::FileBoundaryExceeded&) {
 					throw GameDataError("MapPlayersViewPacket::read: player %u: in \"%s\": "
 					                    "node (%i, %i) t = R: unexpected end of file while reading "
 					                    "survey bit",
-					                    plnum, surveys_filename, f.x, f.y);
+					                    static_cast<unsigned int>(plnum), surveys_filename, f.x, f.y);
 				}
 			} while (r.x);
 		}
@@ -800,7 +816,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 			// TODO(GunChleoc): Savegame compatibility - remove after Build 20
 			log("MapPlayersViewPacket - No hidden fields to read for Player %d - probably an old save "
 			    "file\n",
-			    plnum);
+			    static_cast<unsigned int>(plnum));
 		} else {
 			throw UnhandledVersionError("MapPlayersViewPacket - Hidden fields file",
 			                            hidden_file_version, kCurrentPacketVersionHidden);
@@ -830,25 +846,25 @@ inline static void write_unseen_immovable(MapObjectData const* map_object_data,
 	assert(!Road::is_road_descr(map_object_descr) && !Waterway::is_waterway_descr(map_object_descr));
 	uint8_t immovable_kind = 255;
 
-	if (!map_object_descr)
+	if (!map_object_descr) {
 		immovable_kind = UNSEEN_NONE;
-	else if (upcast(ImmovableDescr const, immovable_descr, map_object_descr)) {
+	} else if (upcast(ImmovableDescr const, immovable_descr, map_object_descr)) {
 		immovable_kind = UNSEEN_TRIBEORWORLD;
 		write_immovable_type(&immovables_file, *immovable_descr);
-	} else if (map_object_descr->type() == MapObjectType::FLAG)
+	} else if (map_object_descr->type() == MapObjectType::FLAG) {
 		immovable_kind = UNSEEN_FLAG;
-	else if (upcast(BuildingDescr const, building_descr, map_object_descr)) {
+	} else if (upcast(BuildingDescr const, building_descr, map_object_descr)) {
 		immovable_kind = UNSEEN_BUILDING;
 		write_building_type(&immovables_file, *building_descr);
-		if (!csi.becomes)
+		if (!csi.becomes) {
 			immovables_file.unsigned_8(0);
-		else {
+		} else {
 			// the building is a constructionsite
 			immovables_file.unsigned_8(1);
 			write_building_type(&immovables_file, *csi.becomes);
-			if (!csi.was)
+			if (!csi.was) {
 				immovables_file.unsigned_8(0);
-			else {
+			} else {
 				// constructionsite is an enhancement, therefor we write down the enhancement
 				immovables_file.unsigned_8(1);
 				write_building_type(&immovables_file, *csi.was);
@@ -856,9 +872,9 @@ inline static void write_unseen_immovable(MapObjectData const* map_object_data,
 			immovables_file.unsigned_32(csi.totaltime);
 			immovables_file.unsigned_32(csi.completedtime);
 		}
-	} else if (map_object_descr->type() == MapObjectType::PORTDOCK)
+	} else if (map_object_descr->type() == MapObjectType::PORTDOCK) {
 		immovable_kind = UNSEEN_PORTDOCK;
-	else {
+	} else {
 		// We should never get here.. output some information about the situation.
 		log("\nwidelands_map_players_view_data_packet.cc::write_unseen_immovable(): ");
 		log("%s %s was not expected.\n", typeid(*map_object_descr).name(),
@@ -971,12 +987,15 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 					}
 
 					//  edges
-					if ((!bl_seen) && (f_everseen || bl_everseen))
+					if ((!bl_seen) && (f_everseen || bl_everseen)) {
 						roads_file.unsigned_8(f_player_field.road_sw());
-					if ((!br_seen) && (f_everseen || br_everseen))
+					}
+					if ((!br_seen) && (f_everseen || br_everseen)) {
 						roads_file.unsigned_8(f_player_field.road_se());
-					if ((!r_seen) && (f_everseen || r_everseen))
+					}
+					if ((!r_seen) && (f_everseen || r_everseen)) {
 						roads_file.unsigned_8(f_player_field.road_e());
+					}
 				}
 
 				//  geologic survey

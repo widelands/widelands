@@ -41,7 +41,7 @@ tribes:new_worker_type {
          "return"
       },
       cut_marble = {
-         "findobject= attrib:rocks radius:6",
+         "findobject=attrib:rocks radius:6",
          "walk=object",
          "playsound=sound/stonecutting/stonecutter 220",
          "animate=hacking 17500",

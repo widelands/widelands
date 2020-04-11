@@ -182,8 +182,9 @@ std::string gametimestring(uint32_t gametime, bool show_seconds) {
 
 	// remove leading 0s
 	int i = 0;
-	while (result.at(i) == '0')
+	while (result.at(i) == '0') {
 		++i;
+	}
 	if (result.at(i) == ':') {
 		if (show_seconds) {
 			++i;

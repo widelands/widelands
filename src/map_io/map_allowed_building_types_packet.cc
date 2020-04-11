@@ -34,8 +34,9 @@ void MapAllowedBuildingTypesPacket::read(FileSystem& fs,
                                          EditorGameBase& egbase,
                                          bool const skip,
                                          MapObjectLoader&) {
-	if (skip)
+	if (skip) {
 		return;
+	}
 
 	Profile prof;
 	try {

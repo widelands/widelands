@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2015-2016
@@ -8,9 +8,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-10 07:32+0000\n"
-"PO-Revision-Date: 2019-05-10 07:33+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-03-03 09:07+0000\n"
+"PO-Revision-Date: 2020-03-03 09:10+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -179,22 +179,22 @@ msgstr "%1$sは土地の%2$3.0f%%を所有していました。(%3$i of %4$i)"
 msgid "Territory percentage"
 msgstr ""
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:195
+#: ../../data/scripting/win_conditions/territorial_functions.lua:211
 msgid "You own more than half of the map’s area."
 msgstr "あなたはマップ面積の半分以上を所有しています。"
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:196
+#: ../../data/scripting/win_conditions/territorial_functions.lua:212
 #, lua-format
 msgid "Keep it for %i more minute to win the game."
 msgid_plural "Keep it for %i more minutes to win the game."
 msgstr[0] "%i分以上維持すれば勝利です。"
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:222
+#: ../../data/scripting/win_conditions/territorial_functions.lua:238
 #, lua-format
 msgid "%s owns more than half of the map’s area."
 msgstr "%sがマップ面積の半分以上を所有しています。"
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:223
+#: ../../data/scripting/win_conditions/territorial_functions.lua:239
 #, lua-format
 msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."
@@ -208,10 +208,11 @@ msgstr "領主"
 msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
-"least 20 minutes."
-msgstr "マップ面積の半分以上を獲得することが目的です。最低20分間その面積を維持したプレイヤー（チーム）が勝者になります。"
+"least 20 minutes. If the peaceful mode is selected, the game ends if one "
+"player has more land than any other player could gain."
+msgstr ""
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:56
+#: ../../data/scripting/win_conditions/territorial_lord.lua:58
 msgid "Currently no faction owns more than half of the map’s area."
 msgstr ""
 
@@ -224,8 +225,9 @@ msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes, or the one with the most territory after 4 hours, "
-"whichever comes first."
-msgstr "マップ面積の半分以上を獲得することが目的です。少なくとも20分間その面積を維持するか、もしくは４時間後の時点にもっとも広い領地をもつプレイヤー（チーム）が勝利します。どちらかの条件を満たした時点でゲームは終了します。"
+"whichever comes first.If the peaceful mode is selected, the game ends if one"
+" player has more land than any other player could gain."
+msgstr ""
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #. TRANSLATORS: Context: 'The game will end in 30 minutes.'
