@@ -409,7 +409,7 @@ void TrainingSite::remove_worker(Worker& w) {
  * somebody shows up.
  */
 void TrainingSite::update_soldier_request(bool did_incorporate) {
-	Game& game = dynamic_cast<Game&>(get_owner()->egbase());
+	Game* game = get_owner() ? dynamic_cast<Game*>(&(get_owner()->egbase())) : nullptr;
 	bool rebuild_request = false;
 	bool need_more_soldiers = false;
 	uint32_t dynamic_timeout = acceptance_threshold_timeout;
@@ -434,7 +434,7 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 		// If not full, I need more soldiers.
 		need_more_soldiers = true;
 	}
-	const uint32_t timeofgame = game.get_gametime();
+	const uint32_t timeofgame = game ? game->get_gametime() : 0;
 
 	if (did_incorporate && latest_trainee_was_kickout_ != requesting_weak_trainees_) {
 		// If type of desired recruits has been changed, the request is rebuild after incorporate
@@ -559,14 +559,15 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 			qr.add(RequireAttribute(TrainingAttribute::kTotal, 0, trainee_general_upper_bound));
 			qr.add(r);
 			soldier_request_->set_requirements(qr);
-			schedule_act(game, 1 + dynamic_timeout);
 		} else if (0 < trainee_general_lower_bound_) {
 			RequireAnd qr;
 			qr.add(RequireAttribute(TrainingAttribute::kTotal, trainee_general_lower_bound_ + 1,
 			                        std::numeric_limits<uint8_t>::max() - 1));
 			qr.add(r);
 			soldier_request_->set_requirements(qr);
-			schedule_act(game, 1 + dynamic_timeout);
+			if(game) {
+				schedule_act(*game, 1 + dynamic_timeout);
+			}
 		} else {
 			soldier_request_->set_requirements(r);
 		}
