@@ -154,7 +154,8 @@ int32_t TrainingSiteDescr::get_max_level(const TrainingAttribute at) const {
  * Return the maximum level that can be trained, both by school type
  * and resourcing.
  */
-int32_t TrainingSite::get_max_unstall_level(const TrainingAttribute at, const TrainingSiteDescr &tsd) const {
+int32_t TrainingSite::get_max_unstall_level(const TrainingAttribute at,
+                                            const TrainingSiteDescr& tsd) const {
 	const int32_t max = tsd.get_max_level(at);
 	const int32_t min = tsd.get_min_level(at);
 	int32_t lev = min;
@@ -412,7 +413,7 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 	bool rebuild_request = false;
 	bool need_more_soldiers = false;
 	uint32_t dynamic_timeout = acceptance_threshold_timeout;
-	uint8_t trainee_general_upper_bound = std::numeric_limits<uint8_t>::max()-1;
+	uint8_t trainee_general_upper_bound = std::numeric_limits<uint8_t>::max() - 1;
 	bool limit_upper_bound = false;
 
 	// Usually, we prefer already partially trained soldiers here.
@@ -423,7 +424,8 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 		if (repeated_layoff_ctr_ > kUpperBoundThreshold_ + highest_trainee_level_seen_) {
 			repeated_layoff_ctr_ = 0;
 		} else {
-			trainee_general_upper_bound = kUpperBoundThreshold_ + highest_trainee_level_seen_ - repeated_layoff_ctr_;
+			trainee_general_upper_bound =
+			   kUpperBoundThreshold_ + highest_trainee_level_seen_ - repeated_layoff_ctr_;
 			limit_upper_bound = true;
 		}
 	}
@@ -447,20 +449,28 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 		if (requesting_weak_trainees_) {
 			trainee_general_lower_bound_ = latest_trainee_kickout_level_;
 		} else {
-			trainee_general_lower_bound_ = static_cast<uint8_t>(std::max<unsigned>(1, (std::min<unsigned>(highest_trainee_level_seen_,
-							(static_cast<unsigned>(trainee_general_lower_bound_) + 1 + static_cast<unsigned>(highest_trainee_level_seen_))/2))));
+			trainee_general_lower_bound_ = static_cast<uint8_t>(std::max<unsigned>(
+			   1, (std::min<unsigned>(highest_trainee_level_seen_,
+			                          (static_cast<unsigned>(trainee_general_lower_bound_) + 1 +
+			                           static_cast<unsigned>(highest_trainee_level_seen_)) /
+			                             2))));
 		}
 		request_open_since_ = timeofgame;
 	}
 	if (soldier_request_ && need_more_soldiers) {
 		if ((!requesting_weak_trainees_) && (!limit_upper_bound)) {
-			// If requesting strong folks, the acceptance time can sometimes grow unbearable large without this.
+			// If requesting strong folks, the acceptance time can sometimes grow unbearable large
+			// without this.
 			// In request weak mode, resources are typically thin and this harms less, In addition,
 			// the starting value tends to be much smaller in request-weak mode.
-			dynamic_timeout = acceptance_threshold_timeout / std::max<uint32_t>(1, static_cast<unsigned>(trainee_general_lower_bound_));
-			// In the special case of training not working at all, there is no need for this speedup (hence the 2nd check)
+			dynamic_timeout =
+			   acceptance_threshold_timeout /
+			   std::max<uint32_t>(1, static_cast<unsigned>(trainee_general_lower_bound_));
+			// In the special case of training not working at all, there is no need for this speedup
+			// (hence the 2nd check)
 		}
-		if (0 == soldier_request_->get_num_transfers() && timeofgame > request_open_since_ + dynamic_timeout) {
+		if (0 == soldier_request_->get_num_transfers() &&
+		    timeofgame > request_open_since_ + dynamic_timeout) {
 			// Timeout: We have been asking for certain type of soldiers, nobody is answering the call.
 			// Relaxing the criteria (and thus rebuild the request)
 			rebuild_request = need_more_soldiers;
@@ -491,7 +501,7 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 		assert(need_more_soldiers);
 
 		soldier_request_ = new Request(
-					*this, owner().tribe().soldier(), TrainingSite::request_soldier_callback, wwWORKER);
+		   *this, owner().tribe().soldier(), TrainingSite::request_soldier_callback, wwWORKER);
 
 		RequireOr r;
 
@@ -499,19 +509,19 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 		if (descr().get_train_attack()) {
 			if (requesting_weak_trainees_) {
 				r.add(RequireAttribute(TrainingAttribute::kAttack,
-						descr().get_min_level(TrainingAttribute::kAttack),
-						get_max_unstall_level(TrainingAttribute::kAttack, descr())));
+				                       descr().get_min_level(TrainingAttribute::kAttack),
+				                       get_max_unstall_level(TrainingAttribute::kAttack, descr())));
 			} else {
 				r.add(RequireAttribute(TrainingAttribute::kAttack,
-						descr().get_min_level(TrainingAttribute::kAttack),
-						descr().get_max_level(TrainingAttribute::kAttack)));
+				                       descr().get_min_level(TrainingAttribute::kAttack),
+				                       descr().get_max_level(TrainingAttribute::kAttack)));
 			}
 		}
 		if (descr().get_train_defense()) {
 			if (requesting_weak_trainees_) {
 				r.add(RequireAttribute(TrainingAttribute::kDefense,
-					descr().get_min_level(TrainingAttribute::kDefense),
-					get_max_unstall_level(TrainingAttribute::kDefense, descr())));
+				                       descr().get_min_level(TrainingAttribute::kDefense),
+				                       get_max_unstall_level(TrainingAttribute::kDefense, descr())));
 			} else {
 				r.add(RequireAttribute(TrainingAttribute::kDefense,
 				                       descr().get_min_level(TrainingAttribute::kDefense),
@@ -521,40 +531,42 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 		if (descr().get_train_evade()) {
 			if (requesting_weak_trainees_) {
 				r.add(RequireAttribute(TrainingAttribute::kEvade,
-					descr().get_min_level(TrainingAttribute::kEvade),
-					get_max_unstall_level(TrainingAttribute::kEvade, descr())));
+				                       descr().get_min_level(TrainingAttribute::kEvade),
+				                       get_max_unstall_level(TrainingAttribute::kEvade, descr())));
 			} else {
-			r.add(RequireAttribute(TrainingAttribute::kEvade,
-			                       descr().get_min_level(TrainingAttribute::kEvade),
-			                       descr().get_max_level(TrainingAttribute::kEvade)));
+				r.add(RequireAttribute(TrainingAttribute::kEvade,
+				                       descr().get_min_level(TrainingAttribute::kEvade),
+				                       descr().get_max_level(TrainingAttribute::kEvade)));
 			}
 		}
 		if (descr().get_train_health()) {
 			if (requesting_weak_trainees_) {
 				r.add(RequireAttribute(TrainingAttribute::kHealth,
-					descr().get_min_level(TrainingAttribute::kHealth),
-					get_max_unstall_level(TrainingAttribute::kHealth, descr())));
+				                       descr().get_min_level(TrainingAttribute::kHealth),
+				                       get_max_unstall_level(TrainingAttribute::kHealth, descr())));
 			} else {
-			r.add(RequireAttribute(TrainingAttribute::kHealth,
-			                       descr().get_min_level(TrainingAttribute::kHealth),
-			                       descr().get_max_level(TrainingAttribute::kHealth)));
+				r.add(RequireAttribute(TrainingAttribute::kHealth,
+				                       descr().get_min_level(TrainingAttribute::kHealth),
+				                       descr().get_max_level(TrainingAttribute::kHealth)));
 			}
 		}
 
-		// The above selects everybody that could be trained here. If I am picky, then also exclude those
+		// The above selects everybody that could be trained here. If I am picky, then also exclude
+		// those
 		// that I could train but do not wish to spend time & resources on.
 		if (limit_upper_bound) {
 			RequireAnd qr;
 			qr.add(RequireAttribute(TrainingAttribute::kTotal, 0, trainee_general_upper_bound));
 			qr.add(r);
 			soldier_request_->set_requirements(qr);
-			schedule_act(game, 1+dynamic_timeout);
+			schedule_act(game, 1 + dynamic_timeout);
 		} else if (0 < trainee_general_lower_bound_) {
 			RequireAnd qr;
-			qr.add(RequireAttribute(TrainingAttribute::kTotal, trainee_general_lower_bound_+1, std::numeric_limits<uint8_t>::max()-1));
+			qr.add(RequireAttribute(TrainingAttribute::kTotal, trainee_general_lower_bound_ + 1,
+			                        std::numeric_limits<uint8_t>::max() - 1));
 			qr.add(r);
 			soldier_request_->set_requirements(qr);
-			schedule_act(game, 1+dynamic_timeout);
+			schedule_act(game, 1 + dynamic_timeout);
 		} else {
 			soldier_request_->set_requirements(r);
 		}
@@ -627,7 +639,7 @@ void TrainingSite::drop_unupgradable_soldiers(Game&) {
 			latest_trainee_was_kickout_ = false;
 			update_soldier_request(true);
 		}
-		repeated_layoff_ctr_ = 0 ; // redundant, but safe (also reset whenever level increases)
+		repeated_layoff_ctr_ = 0;  // redundant, but safe (also reset whenever level increases)
 	}
 }
 
@@ -700,7 +712,7 @@ void TrainingSite::drop_stalled_soldiers(Game&) {
 		// We can enter into state where same soldiers repeatedly enter the site
 		// even if they cannot be promited (lack of gold, lack of an equipmentsmith
 		// of some kind or so). The repeated_layoff_ctr_ works around that.
-		if (std::numeric_limits<uint8_t>::max()-1 > repeated_layoff_ctr_) {
+		if (std::numeric_limits<uint8_t>::max() - 1 > repeated_layoff_ctr_) {
 			repeated_layoff_ctr_++;
 		}
 	}
@@ -718,7 +730,7 @@ const BuildingSettings* TrainingSite::create_building_settings() const {
  * In addition to advancing the program, update soldier status.
  */
 void TrainingSite::act(Game& game, uint32_t const data) {
-        // unit of gametime is [ms].
+	// unit of gametime is [ms].
 	ProductionSite::act(game, data);
 	update_soldier_request(false);
 }

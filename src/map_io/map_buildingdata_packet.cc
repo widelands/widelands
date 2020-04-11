@@ -805,7 +805,7 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 			trainingsite.soldier_request_ = nullptr;
 			if (fr.unsigned_8()) {
 				trainingsite.soldier_request_ =
-					 new Request(trainingsite, 0, TrainingSite::request_soldier_callback, wwWORKER);
+				   new Request(trainingsite, 0, TrainingSite::request_soldier_callback, wwWORKER);
 				trainingsite.soldier_request_->read(fr, game, mol, tribes_lookup_table);
 			}
 
@@ -857,7 +857,6 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 				mapsize--;
 				trainingsite.training_failure_count_[std::make_pair(traintype, trainlevel)] =
 				   std::make_pair(trainstall, spresence);
-
 			}
 
 			// TODO(tppq): Packet version 5 was in build 20. If-statement for savegame compatibility
@@ -868,7 +867,7 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 				trainingsite.trainee_general_lower_bound_ = fr.unsigned_8();
 				uint8_t somebits = fr.unsigned_8();
 				trainingsite.latest_trainee_was_kickout_ = 0 < (somebits & 1);
-				trainingsite.requesting_weak_trainees_   = 0 < (somebits & 2);
+				trainingsite.requesting_weak_trainees_ = 0 < (somebits & 2);
 				assert(4 > somebits);
 				trainingsite.repeated_layoff_ctr_ = fr.unsigned_8();
 				trainingsite.request_open_since_ = fr.unsigned_32();
