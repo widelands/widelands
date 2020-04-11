@@ -36,6 +36,8 @@ inline EditorInteractive& MainMenuMapOptions::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 
+constexpr uint16_t kMaxRecommendedWaterwayLengthLimit = 24;
+
 /**
  * Create all the buttons etc...
  */
@@ -141,7 +143,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	tags_box_.add(new UI::Textarea(&tags_box_, 0, 0, max_w_, labelh_, _("Waterway length limit:")));
 	UI::Box* ww_box = new UI::Box(&tags_box_, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
 	waterway_length_box_ =
-	   new UI::SpinBox(ww_box, 0, 0, max_w_, max_w_ / 2, 1, 1, std::numeric_limits<int32_t>::max(),
+	   new UI::SpinBox(ww_box, 0, 0, max_w_, max_w_ / 2, 1, 1, kMaxRecommendedWaterwayLengthLimit,
 	                   UI::PanelStyle::kWui, std::string(), UI::SpinBox::Units::kFields);
 	/** TRANSLATORS: Map Options: Waterways are disabled */
 	waterway_length_box_->add_replacement(1, _("Disabled"));
@@ -204,8 +206,10 @@ void MainMenuMapOptions::update() {
 	size_.set_text((boost::format(_("Size: %1% x %2%")) % map.get_width() % map.get_height()).str());
 	descr_->set_text(map.get_description());
 	hint_->set_text(map.get_hint());
-	// map.get_waterway_max_length() defaults to 0 for older maps
-	waterway_length_box_->set_value(std::max<uint32_t>(1, map.get_waterway_max_length()));
+	// map.get_waterway_max_length() defaults to 0 for older maps, and can be
+	// set to arbitrarily high values by manually editing the map files
+	waterway_length_box_->set_value(std::max<uint32_t>(1, std::min<uint32_t>(kMaxRecommendedWaterwayLengthLimit,
+	   map.get_waterway_max_length())));
 
 	std::set<std::string> tags = map.get_tags();
 	for (auto tag : tags_checkboxes_) {
