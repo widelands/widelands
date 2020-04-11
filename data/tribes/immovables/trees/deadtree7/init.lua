@@ -16,10 +16,7 @@ tribes:new_immovable_type{
          "remove=16",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "idle.png"),
-         hotspot = { 23, 61 },
-      },
-   }
+   icon = dirname .. "menu.png",
+   animation_directory = dirname,
+   animations = { idle = { hotspot = {2, 72}}}
 }

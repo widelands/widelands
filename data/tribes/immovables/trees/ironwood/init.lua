@@ -28,6 +28,39 @@ terrain_affinity_winter = {
    pickiness = 50,
 }
 
+spritesheet_sapling = { idle = {
+   basename = "ironwood_sapling",
+   hotspot = {8, 21},
+   fps = 8,
+   frames = 4,
+   columns = 2,
+   rows = 2
+}}
+spritesheet_pole = { idle = {
+   basename = "ironwood_pole",
+   hotspot = {13, 46},
+   fps = 8,
+   frames = 4,
+   columns = 2,
+   rows = 2
+}}
+spritesheet_mature = { idle = {
+   basename = "ironwood_mature",
+   hotspot = {18, 69},
+   fps = 8,
+   frames = 4,
+   columns = 2,
+   rows = 2
+}}
+spritesheet_old = { idle = {
+   basename = "ironwood_old",
+   hotspot = {18, 77},
+   fps = 8,
+   frames = 4,
+   columns = 2,
+   rows = 2
+}}
+
 tribes:new_immovable_type{
    msgctxt = "immovable",
    name = "ironwood_amazons_sapling",
@@ -44,13 +77,9 @@ tribes:new_immovable_type{
          "grow=ironwood_amazons_pole",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "sapling/idle_?.png"),
-         hotspot = { 5, 12 },
-         fps = 8,
-      },
-   },
+   icon = dirname .. "menu_sapling.png",
+   animation_directory = dirname,
+   spritesheets = spritesheet_sapling
 }
 
 tribes:new_immovable_type{
@@ -69,13 +98,9 @@ tribes:new_immovable_type{
          "grow=ironwood_amazons_mature",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "pole/idle_?.png"),
-         hotspot = { 12, 28 },
-         fps = 8,
-      },
-   },
+   icon = dirname .. "menu_pole.png",
+   animation_directory = dirname,
+   spritesheets = spritesheet_pole
 }
 
 tribes:new_immovable_type{
@@ -94,13 +119,9 @@ tribes:new_immovable_type{
          "grow=ironwood_amazons_old",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "mature/idle_?.png"),
-         hotspot = { 18, 48 },
-         fps = 8,
-      },
-   },
+   icon = dirname .. "menu_mature.png",
+   animation_directory = dirname,
+   spritesheets = spritesheet_mature
 }
 
 tribes:new_immovable_type{
@@ -110,7 +131,6 @@ tribes:new_immovable_type{
    descname = _ "Ironwood Tree (Old)",
    -- TRANSLATORS:  This is a amazon rare tree.
    species = _ "Ironwood Tree",
-   icon = dirname .. "old/idle_0.png",
    helptext_script = dirname .. "helptexts.lua",
    size = "small",
    attributes = { "tree_ironwood", "tree" },
@@ -125,13 +145,9 @@ tribes:new_immovable_type{
          "remove=",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "old/idle_?.png"),
-         hotspot = { 24, 60 },
-         fps = 10,
-      },
-   },
+   icon = dirname .. "menu_old.png",
+   animation_directory = dirname,
+   spritesheets = spritesheet_old
 }
 
 tribes:new_immovable_type{
@@ -150,13 +166,9 @@ tribes:new_immovable_type{
          "grow=ironwood_black_amazons_pole",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "sapling/idle_?.png"),
-         hotspot = { 5, 12 },
-         fps = 8,
-      },
-   },
+   icon = dirname .. "menu_sapling.png",
+   animation_directory = dirname,
+   spritesheets = spritesheet_sapling
 }
 
 tribes:new_immovable_type{
@@ -175,13 +187,9 @@ tribes:new_immovable_type{
          "grow=ironwood_black_amazons_mature",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "pole/idle_?.png"),
-         hotspot = { 12, 28 },
-         fps = 8,
-      },
-   },
+   icon = dirname .. "menu_pole.png",
+   animation_directory = dirname,
+   spritesheets = spritesheet_pole
 }
 
 tribes:new_immovable_type{
@@ -200,13 +208,9 @@ tribes:new_immovable_type{
          "grow=ironwood_black_amazons_old",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "mature/idle_?.png"),
-         hotspot = { 18, 48 },
-         fps = 8,
-      },
-   },
+   icon = dirname .. "menu_mature.png",
+   animation_directory = dirname,
+   spritesheets = spritesheet_mature
 }
 
 tribes:new_immovable_type{
@@ -216,7 +220,6 @@ tribes:new_immovable_type{
    descname = _ "Ironwood Tree (Old)",
    -- TRANSLATORS:  This is a amazon rare tree.
    species = _ "Ironwood Tree",
-   icon = dirname .. "old/idle_0.png",
    helptext_script = dirname .. "helptexts.lua",
    size = "small",
    attributes = { "tree_ironwood", "tree" },
@@ -231,13 +234,9 @@ tribes:new_immovable_type{
          "remove=",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "old/idle_?.png"),
-         hotspot = { 24, 60 },
-         fps = 10,
-      },
-   },
+   icon = dirname .. "menu_old.png",
+   animation_directory = dirname,
+   spritesheets = spritesheet_old
 }
 
 tribes:new_immovable_type{
@@ -256,13 +255,9 @@ tribes:new_immovable_type{
          "grow=ironwood_desert_amazons_pole",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "sapling/idle_?.png"),
-         hotspot = { 5, 12 },
-         fps = 8,
-      },
-   },
+   icon = dirname .. "menu_sapling.png",
+   animation_directory = dirname,
+   spritesheets = spritesheet_sapling
 }
 
 tribes:new_immovable_type{
@@ -281,13 +276,9 @@ tribes:new_immovable_type{
          "grow=ironwood_desert_amazons_mature",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "pole/idle_?.png"),
-         hotspot = { 12, 28 },
-         fps = 8,
-      },
-   },
+   icon = dirname .. "menu_pole.png",
+   animation_directory = dirname,
+   spritesheets = spritesheet_pole
 }
 
 tribes:new_immovable_type{
@@ -306,13 +297,9 @@ tribes:new_immovable_type{
          "grow=ironwood_desert_amazons_old",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "mature/idle_?.png"),
-         hotspot = { 18, 48 },
-         fps = 8,
-      },
-   },
+   icon = dirname .. "menu_mature.png",
+   animation_directory = dirname,
+   spritesheets = spritesheet_mature
 }
 
 tribes:new_immovable_type{
@@ -322,7 +309,6 @@ tribes:new_immovable_type{
    descname = _ "Ironwood Tree (Old)",
    -- TRANSLATORS:  This is a amazon rare tree.
    species = _ "Ironwood Tree",
-   icon = dirname .. "old/idle_0.png",
    helptext_script = dirname .. "helptexts.lua",
    size = "small",
    attributes = { "tree_ironwood", "tree" },
@@ -337,13 +323,9 @@ tribes:new_immovable_type{
          "remove=",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "old/idle_?.png"),
-         hotspot = { 24, 60 },
-         fps = 10,
-      },
-   },
+   icon = dirname .. "menu_old.png",
+   animation_directory = dirname,
+   spritesheets = spritesheet_old
 }
 
 tribes:new_immovable_type{
@@ -362,13 +344,9 @@ tribes:new_immovable_type{
          "grow=ironwood_winter_amazons_pole",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "sapling/idle_?.png"),
-         hotspot = { 5, 12 },
-         fps = 8,
-      },
-   },
+   icon = dirname .. "menu_sapling.png",
+   animation_directory = dirname,
+   spritesheets = spritesheet_sapling
 }
 
 tribes:new_immovable_type{
@@ -387,13 +365,9 @@ tribes:new_immovable_type{
          "grow=ironwood_winter_amazons_mature",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "pole/idle_?.png"),
-         hotspot = { 12, 28 },
-         fps = 8,
-      },
-   },
+   icon = dirname .. "menu_pole.png",
+   animation_directory = dirname,
+   spritesheets = spritesheet_pole
 }
 
 tribes:new_immovable_type{
@@ -412,13 +386,9 @@ tribes:new_immovable_type{
          "grow=ironwood_winter_amazons_old",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "mature/idle_?.png"),
-         hotspot = { 18, 48 },
-         fps = 8,
-      },
-   },
+   icon = dirname .. "menu_mature.png",
+   animation_directory = dirname,
+   spritesheets = spritesheet_mature
 }
 
 tribes:new_immovable_type{
@@ -428,7 +398,6 @@ tribes:new_immovable_type{
    descname = _ "Ironwood Tree (Old)",
    -- TRANSLATORS:  This is a amazon rare tree.
    species = _ "Ironwood Tree",
-   icon = dirname .. "old/idle_0.png",
    helptext_script = dirname .. "helptexts.lua",
    size = "small",
    attributes = { "tree_ironwood", "tree" },
@@ -443,11 +412,7 @@ tribes:new_immovable_type{
          "remove=",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "old/idle_?.png"),
-         hotspot = { 24, 60 },
-         fps = 10,
-      },
-   },
+   icon = dirname .. "menu_old.png",
+   animation_directory = dirname,
+   spritesheets = spritesheet_old
 }
