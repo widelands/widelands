@@ -31,7 +31,6 @@
 #include "sound/constants.h"
 
 class RenderTarget;
-class Image;
 
 namespace UI {
 
@@ -323,9 +322,6 @@ protected:
 	static bool draw_tooltip(const std::string& text);
 	void draw_background(RenderTarget& dst, const UI::PanelStyleInfo&);
 	void draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo&);
-
-	static const Image* default_cursor_;
-	static const Image* default_cursor_click_;
 
 private:
 	bool handles_mouse() const {

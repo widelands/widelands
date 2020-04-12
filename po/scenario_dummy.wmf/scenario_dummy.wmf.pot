@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-03-29 18:59+0000\n"
+"POT-Creation-Date: 2020-04-12 17:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -25,12 +25,4 @@ msgstr ""
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
-
-#: ../../data/scripting/richtext_scenarios.lua:91
-msgid "New Objective"
-msgstr ""
-
-#: ../../data/scripting/richtext_scenarios.lua:93
-msgid "New Objectives"
 msgstr ""

@@ -456,6 +456,22 @@ void Economy::remove_supply(Supply& supply) {
 	supplies_.remove_supply(supply);
 }
 
+// Minimal invasive fix of bug 1236538 and issue #3794.
+// It does not matter which tribe this soldier has, only that all training levels are 0.
+std::unique_ptr<Worker> Economy::soldier_prototype_(nullptr);
+// static
+Worker& Economy::soldier_prototype(const WorkerDescr* d) {
+	if (!soldier_prototype_) {
+		if (!d) {
+			throw wexception("soldier_prototype_ not initialized and no SoldierDescr provided");
+		}
+		assert(d->type() == MapObjectType::SOLDIER);
+		soldier_prototype_.reset(&static_cast<Worker&>(d->create_object()));
+		assert(soldier_prototype_->descr().type() == MapObjectType::SOLDIER);
+	}
+	return *soldier_prototype_;
+}
+
 bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type) const {
 	Quantity const t = target_quantity(ware_or_worker_type).permanent;
 
@@ -470,13 +486,16 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type) c
 			}
 		}
 		return true;
-
-		// we have target quantity set to 0, we need to check if there is an open request
 	} else {
-		for (const Request* temp_req : requests_) {
-			const Request& req = *temp_req;
-
-			if (req.get_type() == type_ && req.get_index() == ware_or_worker_type) {
+		// Target quantity is set to 0, we need to check if there is an open request.
+		// For soldier requests, do not recruit new rookies if only heroes are needed.
+		const bool is_soldier = type_ == wwWORKER && ware_or_worker_type == owner().tribe().soldier();
+		for (const Request* req : requests_) {
+			if (req->get_type() == type_ && req->get_index() == ware_or_worker_type &&
+			    req->is_open() &&
+			    (!is_soldier ||
+			     req->get_requirements().check(soldier_prototype(
+			        owner().egbase().tribes().get_worker_descr(ware_or_worker_type))))) {
 				return true;
 			}
 		}
@@ -767,9 +786,6 @@ void Economy::balance_requestsupply(Game& game) {
 	}
 }
 
-std::unique_ptr<Soldier> Economy::soldier_prototype_ =
-   nullptr;  // minimal invasive fix of bug 1236538
-
 /**
  * Check whether there is a supply for the given request. If the request is a
  * worker request without supply, attempt to create a new worker in a warehouse.
@@ -788,10 +804,7 @@ void Economy::create_requested_worker(Game& game, DescriptionIndex index) {
 	// Minimal invasive fix of bug 1236538: never create a rookie for a request
 	// that required a hero.
 	if (upcast(const SoldierDescr, s_desc, &w_desc)) {
-		if (!soldier_prototype_) {
-			Soldier* test_rookie = static_cast<Soldier*>(&(s_desc->create_object()));
-			soldier_prototype_.reset(test_rookie);
-		}
+		soldier_prototype(s_desc);  // init prototype
 		soldier_level_check = true;
 	} else {
 		soldier_level_check = false;
@@ -810,8 +823,9 @@ void Economy::create_requested_worker(Game& game, DescriptionIndex index) {
 
 		// Requests for heroes should not trigger the creation of more rookies
 		if (soldier_level_check) {
-			if (!(req.get_requirements().check(*soldier_prototype_)))
+			if (!(req.get_requirements().check(soldier_prototype()))) {
 				continue;
+			}
 		}
 
 		uint32_t current_demand = req.get_open_count();

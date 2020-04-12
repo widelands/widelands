@@ -3512,7 +3512,7 @@ void DefaultAI::check_flag_distances(const uint32_t gametime) {
 			// has to be checked Now going over roads leading from this flag
 			const uint16_t current_flag_distance = flag_warehouse_distance.get_distance(
 			   remaining_flags.front()->get_position().hash(), gametime, &tmp_wh);
-			for (uint8_t i = 1; i <= 6; ++i) {
+			for (uint8_t i = WalkingDir::FIRST_DIRECTION; i <= WalkingDir::LAST_DIRECTION; ++i) {
 				Road* const road = remaining_flags.front()->get_road(i);
 
 				if (!road) {
@@ -3728,7 +3728,7 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 		while (new_road_found && full_road.back()->nr_of_roads() <= 2 &&
 		       full_road.back()->get_building() == nullptr) {
 			new_road_found = false;
-			for (uint8_t i = 1; i <= 6; ++i) {
+			for (uint8_t i = WalkingDir::FIRST_DIRECTION; i <= WalkingDir::LAST_DIRECTION; ++i) {
 				Road* const near_road = full_road.back()->get_road(i);
 
 				if (!near_road) {
@@ -3824,7 +3824,7 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 		NearFlag& nf = reachableflags.back();
 
 		// Now go over roads going from this flag
-		for (uint8_t i = 1; i <= 6; ++i) {
+		for (uint8_t i = WalkingDir::FIRST_DIRECTION; i <= WalkingDir::LAST_DIRECTION; ++i) {
 			Road* const near_road = nf.flag->get_road(i);
 
 			if (!near_road) {
@@ -4181,7 +4181,7 @@ void DefaultAI::collect_nearflags(std::map<uint32_t, NearFlag>& nearflags,
 		nearflags[start_field].to_be_checked = false;
 
 		// Now going over roads leading from this flag
-		for (uint8_t i = 1; i <= 6; ++i) {
+		for (uint8_t i = WalkingDir::FIRST_DIRECTION; i <= WalkingDir::LAST_DIRECTION; ++i) {
 			Road* const road = nearflags[start_field].flag->get_road(i);
 
 			if (!road) {
