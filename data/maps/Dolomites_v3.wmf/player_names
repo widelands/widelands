@@ -1,4 +1,4 @@
-# Automatically created by Widelands bzr7905[trunk] (Debug)
+# Automatically created by Widelands build-19-rc1 (Release)
 
 [global]
 packet_version="2"
@@ -35,6 +35,18 @@ closeable="false"
 
 [player_6]
 name="Player 6"
+tribe="barbarians"
+ai=
+closeable="false"
+
+[player_7]
+name="Player 7"
+tribe="barbarians"
+ai=
+closeable="false"
+
+[player_8]
+name="Player 8"
 tribe="barbarians"
 ai=
 closeable="false"

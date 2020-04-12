@@ -1,4 +1,4 @@
-# Automatically created by Widelands bzr7905[trunk] (Debug)
+# Automatically created by Widelands build-19-rc1 (Release)
 
 [global]
 packet_version="2"
@@ -8,3 +8,5 @@ player_3="108 27"
 player_4="244 61"
 player_5="93 96"
 player_6="157 107"
+player_7="284 129"
+player_8="25 45"
