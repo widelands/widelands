@@ -80,7 +80,7 @@ struct InputCallback {
 ///
 /// \par WLApplication is a singleton
 ///
-/// Because of it's special purpose, having more than one WLApplication is
+/// Because of its special purpose, having more than one WLApplication is
 /// useless. So we implement singleton semantics:
 /// \li A private(!) static class variable (--> unique for the whole program,
 ///     although nobody can get at it) the_singleton holds a pointer to the
@@ -104,20 +104,15 @@ struct InputCallback {
 /// For testing purposes, we can spawn a second process with widelands running
 /// in it (see init_double_game()). The fact that WLApplication is a singleton
 /// is not touched by this: the processes start out as a byte exact memory
-/// copy, so the two instances ca not know (except for fork()'s return value)
+/// copy, so the two instances cannot know (except for fork()'s return value)
 /// that they are (or are not) a primary thread. Each WLApplication singleton
-/// really *is* a singleton - inside it's own process.
+/// really *is* a singleton - inside its own process.
 ///
 /// Forking does not work on windows, but nobody cares enough to investigate.
 /// It is only a debugging convenience anyway.
 ///
 ///
 /// \par The mouse cursor
-///
-/// SDL can handle a mouse cursor on its own, but only in black and white. That
-/// is not sufficient.
-///
-/// So Widelands must paint its own cursor and hide the system cursor.
 ///
 /// Ordinarily, relative coordinates break down when the cursor leaves the
 /// window. This means we have to grab the mouse, then relative coords are
@@ -170,9 +165,7 @@ struct WLApplication {
 	}
 
 	/// Lock the mouse cursor into place (e.g., for scrolling the map)
-	void set_mouse_lock(const bool locked) {
-		mouse_locked_ = locked;
-	}
+	void set_mouse_lock(bool locked);
 	// @}
 
 	// Refresh the graphics settings with the latest options.
