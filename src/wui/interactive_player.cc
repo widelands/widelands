@@ -24,6 +24,7 @@
 #include "economy/flag.h"
 #include "game_io/game_loader.h"
 #include "graphic/game_renderer.h"
+#include "graphic/mouse_cursor.h"
 #include "logic/cmd_queue.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/immovable.h"
@@ -430,7 +431,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			}
 
 			// Blit the selection marker.
-			if (f->fcoords == get_sel_pos().node) {
+			if (g_mouse_cursor->is_visible() && f->fcoords == get_sel_pos().node) {
 				const Image* pic = get_sel_picture();
 				blit_field_overlay(dst, *f, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
 			}

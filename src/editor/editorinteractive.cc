@@ -45,6 +45,7 @@
 #include "editor/ui_menus/tool_set_terrain_options_menu.h"
 #include "editor/ui_menus/toolsize_menu.h"
 #include "graphic/graphic.h"
+#include "graphic/mouse_cursor.h"
 #include "graphic/playercolor.h"
 #include "graphic/text_layout.h"
 #include "logic/map.h"
@@ -558,17 +559,19 @@ void EditorInteractive::draw(RenderTarget& dst) {
 	// Figure out which fields are currently under the selection.
 	std::set<Widelands::Coords> selected_nodes;
 	std::set<Widelands::TCoords<>> selected_triangles;
-	if (!get_sel_triangles()) {
-		Widelands::MapRegion<> mr(map, Widelands::Area<>(get_sel_pos().node, get_sel_radius()));
-		do {
-			selected_nodes.emplace(mr.location());
-		} while (mr.advance(map));
-	} else {
-		Widelands::MapTriangleRegion<> mr(
-		   map, Widelands::Area<Widelands::TCoords<>>(get_sel_pos().triangle, get_sel_radius()));
-		do {
-			selected_triangles.emplace(mr.location());
-		} while (mr.advance(map));
+	if (g_mouse_cursor->is_visible()) {
+		if (!get_sel_triangles()) {
+			Widelands::MapRegion<> mr(map, Widelands::Area<>(get_sel_pos().node, get_sel_radius()));
+			do {
+				selected_nodes.emplace(mr.location());
+			} while (mr.advance(map));
+		} else {
+			Widelands::MapTriangleRegion<> mr(
+			   map, Widelands::Area<Widelands::TCoords<>>(get_sel_pos().triangle, get_sel_radius()));
+			do {
+				selected_triangles.emplace(mr.location());
+			} while (mr.advance(map));
+		}
 	}
 
 	const auto& world = ebase.world();
@@ -622,36 +625,43 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			                   Vector2i(player_image->width() / 2, kStartingPosHotspotY), scale);
 		}
 
-		// Draw selection markers on the field.
-		if (selected_nodes.count(field.fcoords) > 0) {
-			const Image* pic = get_sel_picture();
-			blit_field_overlay(&dst, field, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
-		}
-
-		// Draw selection markers on the triangles.
-		if (field.all_neighbors_valid()) {
-			const FieldsToDraw::Field& rn = fields_to_draw->at(field.rn_index);
-			const FieldsToDraw::Field& brn = fields_to_draw->at(field.brn_index);
-			const FieldsToDraw::Field& bln = fields_to_draw->at(field.bln_index);
-			if (selected_triangles.count(
-			       Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::R))) {
-				const Vector2i tripos(
-				   (field.rendertarget_pixel.x + rn.rendertarget_pixel.x + brn.rendertarget_pixel.x) /
-				      3,
-				   (field.rendertarget_pixel.y + rn.rendertarget_pixel.y + brn.rendertarget_pixel.y) /
-				      3);
+		if (g_mouse_cursor->is_visible()) {
+			// Draw selection markers on the field.
+			if (selected_nodes.count(field.fcoords) > 0) {
 				const Image* pic = get_sel_picture();
-				blit_overlay(&dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
+				blit_field_overlay(
+				   &dst, field, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
 			}
-			if (selected_triangles.count(
-			       Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::D))) {
-				const Vector2i tripos(
-				   (field.rendertarget_pixel.x + bln.rendertarget_pixel.x + brn.rendertarget_pixel.x) /
-				      3,
-				   (field.rendertarget_pixel.y + bln.rendertarget_pixel.y + brn.rendertarget_pixel.y) /
-				      3);
-				const Image* pic = get_sel_picture();
-				blit_overlay(&dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
+
+			// Draw selection markers on the triangles.
+			if (field.all_neighbors_valid()) {
+				const FieldsToDraw::Field& rn = fields_to_draw->at(field.rn_index);
+				const FieldsToDraw::Field& brn = fields_to_draw->at(field.brn_index);
+				const FieldsToDraw::Field& bln = fields_to_draw->at(field.bln_index);
+				if (selected_triangles.count(
+				       Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::R))) {
+					const Vector2i tripos((field.rendertarget_pixel.x + rn.rendertarget_pixel.x +
+					                       brn.rendertarget_pixel.x) /
+					                         3,
+					                      (field.rendertarget_pixel.y + rn.rendertarget_pixel.y +
+					                       brn.rendertarget_pixel.y) /
+					                         3);
+					const Image* pic = get_sel_picture();
+					blit_overlay(
+					   &dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
+				}
+				if (selected_triangles.count(
+				       Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::D))) {
+					const Vector2i tripos((field.rendertarget_pixel.x + bln.rendertarget_pixel.x +
+					                       brn.rendertarget_pixel.x) /
+					                         3,
+					                      (field.rendertarget_pixel.y + bln.rendertarget_pixel.y +
+					                       brn.rendertarget_pixel.y) /
+					                         3);
+					const Image* pic = get_sel_picture();
+					blit_overlay(
+					   &dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
+				}
 			}
 		}
 	}
