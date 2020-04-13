@@ -698,7 +698,7 @@ MultiPlayerSetupGroup::~MultiPlayerSetupGroup() {
 void MultiPlayerSetupGroup::update() {
 	const GameSettings& settings = settings_->settings();
 
-	size_t number_of_users = settings.users.size();
+	const size_t number_of_users = settings.users.size();
 	// Update / initialize client groups
 	if (multi_player_client_groups.size() < number_of_users) {
 		multi_player_client_groups.resize(number_of_users);
@@ -713,7 +713,7 @@ void MultiPlayerSetupGroup::update() {
 		multi_player_client_groups.at(i)->set_visible(true);
 	}
 
-	size_t number_of_players = settings.players.size();
+	const size_t number_of_players = settings.players.size();
 	playerbox.set_scrolling(number_of_players * buth_ > playerbox.get_h());
 
 	// Keep track of which player slots are visible
