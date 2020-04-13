@@ -679,8 +679,8 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 	playerbox.add_space(0);
 	multi_player_player_groups.resize(kMaxPlayers);
 	for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
-		multi_player_player_groups.at(i) =
-		   new MultiPlayerPlayerGroup(&playerbox, playerbox.get_w(), buth_, i, settings, npsb.get());
+		multi_player_player_groups.at(i) = new MultiPlayerPlayerGroup(
+		   &playerbox, playerbox.get_w() - UI::Scrollbar::kSize, buth_, i, settings, npsb.get());
 		playerbox.add(multi_player_player_groups.at(i));
 	}
 	playerbox.add_space(0);
@@ -712,9 +712,12 @@ void MultiPlayerSetupGroup::update() {
 		multi_player_client_groups.at(i)->set_visible(true);
 	}
 
+	size_t number_of_players = settings.players.size();
+	playerbox.set_scrolling(number_of_players * buth_ > playerbox.get_h());
+
 	// Keep track of which player slots are visible
 	for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
-		const bool should_be_visible = i < settings.players.size();
+		const bool should_be_visible = i < number_of_players;
 		if (should_be_visible != multi_player_player_groups.at(i)->is_visible()) {
 			multi_player_player_groups.at(i)->set_visible(should_be_visible);
 		}
