@@ -694,27 +694,6 @@ void ProductionProgram::ActSleep::execute(Game& game, ProductionSite& ps) const 
 	return ps.program_step(game, duration_ ? duration_ : 0, ps.top_state().phase);
 }
 
-ProductionProgram::ActCheckMap::ActCheckMap(const std::vector<std::string>& arguments) {
-	if (arguments.size() != 1 || arguments.front() != "seafaring") {
-		throw GameDataError("Usage: checkmap=seafaring");
-	}
-	feature_ = Feature::kSeafaring;
-}
-
-void ProductionProgram::ActCheckMap::execute(Game& game, ProductionSite& ps) const {
-	switch (feature_) {
-	case Feature::kSeafaring: {
-		if (game.map().allows_seafaring()) {
-			return ps.program_step(game, 0);
-		} else {
-			ps.set_production_result(_("No use for ships on this map!"));
-			return ps.program_end(game, ProgramResult::kFailed);
-		}
-	}
-	}
-	NEVER_HERE();
-}
-
 ProductionProgram::ActAnimate::ActAnimate(const std::vector<std::string>& arguments,
                                           ProductionSiteDescr* descr) {
 	parameters = MapObjectProgram::parse_act_animate(arguments, *descr, false);
@@ -1440,9 +1419,6 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 			} else if (parseinput.name == "construct") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActConstruct(parseinput.arguments, name(), building)));
-			} else if (parseinput.name == "checkmap") {
-				actions_.push_back(
-				   std::unique_ptr<ProductionProgram::Action>(new ActCheckMap(parseinput.arguments)));
 			} else {
 				throw GameDataError(
 				   "Unknown command '%s' in line '%s'", parseinput.name.c_str(), line.c_str());
