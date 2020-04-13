@@ -66,11 +66,11 @@ jobs:
       name: "DEBUG: macOS 10.14 with Xcode 11.3"
       os: osx
       osx_image: xcode11.3
-      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON
+      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON LDFLAGS="-L/usr/local/opt/gettext/lib" CPPFLAGS="-I/usr/local/opt/gettext/include"
     - name: "RELEASE: macOS 10.14 with Xcode 11.3"
       os: osx
       osx_image: xcode11.3
-      env: BUILD_TYPE=Release BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON
+      env: BUILD_TYPE=Release BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON LDFLAGS="-L/usr/local/opt/gettext/lib" CPPFLAGS="-I/usr/local/opt/gettext/include"
 
     - stage: build
     ### DEBUG BUILDS
