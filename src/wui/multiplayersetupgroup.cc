@@ -698,11 +698,12 @@ MultiPlayerSetupGroup::~MultiPlayerSetupGroup() {
 void MultiPlayerSetupGroup::update() {
 	const GameSettings& settings = settings_->settings();
 
+	size_t number_of_users = settings.users.size();
 	// Update / initialize client groups
-	if (multi_player_client_groups.size() < settings.users.size()) {
-		multi_player_client_groups.resize(settings.users.size());
+	if (multi_player_client_groups.size() < number_of_users) {
+		multi_player_client_groups.resize(number_of_users);
 	}
-	for (uint32_t i = 0; i < settings.users.size(); ++i) {
+	for (uint32_t i = 0; i < number_of_users; ++i) {
 		if (!multi_player_client_groups.at(i)) {
 			multi_player_client_groups.at(i) =
 			   new MultiPlayerClientGroup(&clientbox, clientbox.get_w(), buth_, i, settings_);
