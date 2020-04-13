@@ -40,35 +40,35 @@ cache: ccache
 
 jobs:
   include:
-    - stage: tests
-      name: "Codecheck Suite"
-      script: ./.travis.sh codecheck
-      cache: false
-    - name: "Documentation Test"
-      language: python
-      cache: pip
-      addons:
-        apt:
-          packages:
-            - python-pip
-      install: pip install sphinx
-      script: ./.travis.sh documentation
-    - name: "Includes"
-      language: python
-      script: ./.travis.sh includes
-      cache: false
-
+#    - stage: tests
+#      name: "Codecheck Suite"
+#      script: ./.travis.sh codecheck
+#      cache: false
+#    - name: "Documentation Test"
+#      language: python
+#      cache: pip
+#      addons:
+#        apt:
+#          packages:
+#            - python-pip
+#      install: pip install sphinx
+#      script: ./.travis.sh documentation
+#    - name: "Includes"
+#      language: python
+#      script: ./.travis.sh includes
+#      cache: false
+#
     - stage: compiler
       # Run this stage to test whether there are any error during compiling.
       # We use macOS, since it is the fastest to build.
       name: "DEBUG: macOS 10.14 with Xcode 11.3"
       os: osx
       osx_image: xcode11.3
-      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON LDFLAGS="-L/usr/local/opt/gettext/lib" CPPFLAGS="-I/usr/local/opt/gettext/include"
+      env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON
     - name: "RELEASE: macOS 10.14 with Xcode 11.3"
       os: osx
       osx_image: xcode11.3
-      env: BUILD_TYPE=Release BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON LDFLAGS="-L/usr/local/opt/gettext/lib" CPPFLAGS="-I/usr/local/opt/gettext/include"
+      env: BUILD_TYPE=Release BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON
 
     - stage: build
     ### DEBUG BUILDS
