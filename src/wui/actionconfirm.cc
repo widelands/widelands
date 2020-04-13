@@ -166,7 +166,8 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
 	main_box->add_space(1.5 * padding);
 	main_box->add(button_box, UI::Box::Resizing::kFullSize);
 	button_box->set_size(textarea->get_w(), okbtn->get_h());
-	main_box->set_size(textarea->get_w(), textarea->get_h() + button_box->get_h() + 1.5 * padding + (checkbox_ ? checkbox_->get_h() + padding : 0));
+	main_box->set_size(textarea->get_w(), textarea->get_h() + button_box->get_h() + 1.5 * padding +
+	                                         (checkbox_ ? checkbox_->get_h() + padding : 0));
 	set_inner_size(main_box->get_w() + 2 * padding, main_box->get_h() + 2 * padding);
 
 	center_to_parent();
@@ -229,9 +230,11 @@ DismantleConfirm::DismantleConfirm(InteractivePlayer& parent, Widelands::Buildin
    : ActionConfirm(parent,
                    _("Dismantle building?"),
                    _("Do you really want to dismantle this building?"),
-                   building, _("Preserve wares")) {
+                   building,
+                   _("Preserve wares")) {
 	assert(checkbox_);
-	checkbox_->set_tooltip(_("Any wares left in the building will be dropped out by the builder, increasing the dismantling time"));
+	checkbox_->set_tooltip(_("Any wares left in the building will be dropped out by the builder, "
+	                         "increasing the dismantling time"));
 	checkbox_->set_state(true);
 }
 
@@ -285,11 +288,13 @@ EnhanceConfirm::EnhanceConfirm(InteractivePlayer& parent,
             _("Be careful if the enemy is near!"))
               .str() :
            _("Do you really want to enhance this building?"),
-        building, _("Preserve wares")),
+        building,
+        _("Preserve wares")),
      id_(id),
      still_under_construction_(still_under_construction) {
 	assert(checkbox_);
-	checkbox_->set_tooltip(_("Any wares left in the building will be dropped out by the builder, increasing the enhancing time"));
+	checkbox_->set_tooltip(_("Any wares left in the building will be dropped out by the builder, "
+	                         "increasing the enhancing time"));
 	checkbox_->set_state(true);
 }
 

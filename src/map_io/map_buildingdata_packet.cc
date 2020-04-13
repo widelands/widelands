@@ -296,7 +296,8 @@ void MapBuildingdataPacket::read_constructionsite(
 		if (packet_version >= 3) {
 			read_partially_finished_building(constructionsite, fr, game, mol, tribes_lookup_table);
 
-			for (ConstructionSite::Wares::iterator wares_iter = constructionsite.consume_wares_.begin();
+			for (ConstructionSite::Wares::iterator wares_iter =
+			        constructionsite.consume_wares_.begin();
 			     wares_iter != constructionsite.consume_wares_.end(); ++wares_iter) {
 
 				(*wares_iter)->set_callback(ConstructionSite::wares_queue_callback, &constructionsite);

@@ -140,8 +140,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 
 	// Add the wares queue
 	for (uint32_t i = 0; i < construction_site->nr_dropout_waresqueues(); ++i) {
-		box.add(new InputQueueDisplay(
-		   &box, 0, 0, *igbase(), *construction_site, *construction_site->get_dropout_waresqueue(i), true, true));
+		box.add(new InputQueueDisplay(&box, 0, 0, *igbase(), *construction_site,
+		                              *construction_site->get_dropout_waresqueue(i), true, true));
 	}
 	for (uint32_t i = 0; i < construction_site->nr_consume_waresqueues(); ++i) {
 		box.add(new InputQueueDisplay(

@@ -388,8 +388,8 @@ void ConstructionSite::enhance(Game&) {
 	size_t new_index = 0;
 	for (const auto& pair : buildcost) {
 		if (new_ware_types.count(pair.first)) {
-			WaresQueue& wq =
-			   *(consume_wares_[old_size + new_index] = new WaresQueue(*this, pair.first, pair.second));
+			WaresQueue& wq = *(consume_wares_[old_size + new_index] =
+			                      new WaresQueue(*this, pair.first, pair.second));
 			wq.set_callback(ConstructionSite::wares_queue_callback, this);
 			wq.set_consume_interval(CONSTRUCTIONSITE_STEP_TIME);
 			++new_index;

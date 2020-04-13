@@ -732,7 +732,8 @@ void Game::send_player_bulldoze(PlayerImmovable& pi, bool const recurse) {
 }
 
 void Game::send_player_dismantle(PlayerImmovable& pi, bool kw) {
-	send_player_command(new CmdDismantleBuilding(get_gametime(), pi.owner().player_number(), pi, kw));
+	send_player_command(
+	   new CmdDismantleBuilding(get_gametime(), pi.owner().player_number(), pi, kw));
 }
 
 void Game::send_player_build(int32_t const pid, const Coords& coords, DescriptionIndex const id) {

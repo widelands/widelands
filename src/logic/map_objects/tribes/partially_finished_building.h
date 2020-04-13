@@ -82,8 +82,9 @@ protected:
 	OPtr<Worker> builder_;
 
 	using Wares = std::vector<WaresQueue*>;
-	Wares consume_wares_; // wares to consume (constructionsites) or to painstakingly recover (dismantlesites)
-	Wares dropout_wares_; // additional items to drop out immediately
+	Wares consume_wares_;  // wares to consume (constructionsites) or to painstakingly recover
+	                       // (dismantlesites)
+	Wares dropout_wares_;  // additional items to drop out immediately
 
 	bool working_;             // true if the builder is currently working
 	uint32_t work_steptime_;   // time when next step is completed

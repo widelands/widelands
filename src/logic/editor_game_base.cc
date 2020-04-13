@@ -390,17 +390,18 @@ Building& EditorGameBase::warp_building(const Coords& c,
  * \li former_buildings : the former buildings. If it is not empty, this is
  * an enhancement.
  */
-Building& EditorGameBase::warp_constructionsite(const Coords& c,
-                                                PlayerNumber const owner,
-                                                DescriptionIndex idx,
-                                                bool loading,
-                                                FormerBuildings former_buildings,
-                                                const BuildingSettings* settings,
-                                                std::map<DescriptionIndex, Quantity> preserved_wares) {
+Building&
+EditorGameBase::warp_constructionsite(const Coords& c,
+                                      PlayerNumber const owner,
+                                      DescriptionIndex idx,
+                                      bool loading,
+                                      FormerBuildings former_buildings,
+                                      const BuildingSettings* settings,
+                                      std::map<DescriptionIndex, Quantity> preserved_wares) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
-	ConstructionSite& b =
-	   dynamic_cast<ConstructionSite&>(tribe.get_building_descr(idx)->create(*this, plr, c, true, loading, former_buildings));
+	ConstructionSite& b = dynamic_cast<ConstructionSite&>(
+	   tribe.get_building_descr(idx)->create(*this, plr, c, true, loading, former_buildings));
 	if (settings) {
 		b.apply_settings(*settings);
 	}

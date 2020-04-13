@@ -821,7 +821,9 @@ void Player::military_site_set_soldier_preference(PlayerImmovable& imm,
  * enhance this building, remove it, but give the constructionsite
  * an idea of enhancing
  */
-void Player::enhance_building(Building* building, DescriptionIndex const index_of_new_building, bool keep_wares) {
+void Player::enhance_building(Building* building,
+                              DescriptionIndex const index_of_new_building,
+                              bool keep_wares) {
 	enhance_or_dismantle(building, index_of_new_building, keep_wares);
 }
 
@@ -854,7 +856,8 @@ void Player::enhance_or_dismantle(Building* building,
 					wares[di - 1] = wh->get_wares().stock(di - 1);
 				}
 				if (wh->get_portdock() && wh->get_portdock()->expedition_bootstrap()) {
-					for (const InputQueue* q : wh->get_portdock()->expedition_bootstrap()->queues(true)) {
+					for (const InputQueue* q :
+					     wh->get_portdock()->expedition_bootstrap()->queues(true)) {
 						if (q->get_type() == wwWARE) {
 							auto it = wares.find(q->get_index());
 							if (it == wares.end()) {
@@ -897,10 +900,11 @@ void Player::enhance_or_dismantle(Building* building,
 		//  pointer.
 
 		if (index_of_new_building != INVALID_INDEX) {
-			building = &egbase().warp_constructionsite(
-			   position, player_number_, index_of_new_building, false, former_buildings, settings, wares);
+			building = &egbase().warp_constructionsite(position, player_number_, index_of_new_building,
+			                                           false, former_buildings, settings, wares);
 		} else {
-			building = &egbase().warp_dismantlesite(position, player_number_, false, former_buildings, wares);
+			building =
+			   &egbase().warp_dismantlesite(position, player_number_, false, former_buildings, wares);
 		}
 
 		// Open the new building window if needed

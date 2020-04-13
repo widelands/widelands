@@ -330,11 +330,8 @@ private:
 struct CmdEnhanceBuilding : public PlayerCommand {
 	CmdEnhanceBuilding() : PlayerCommand(), serial_(0), keep_wares_(false) {
 	}  // For savegame loading
-	CmdEnhanceBuilding(const uint32_t init_duetime,
-	                   const int32_t p,
-	                   Building& b,
-	                   const DescriptionIndex i,
-	                   bool kw)
+	CmdEnhanceBuilding(
+	   const uint32_t init_duetime, const int32_t p, Building& b, const DescriptionIndex i, bool kw)
 	   : PlayerCommand(init_duetime, p), serial_(b.serial()), bi_(i), keep_wares_(kw) {
 	}
 
