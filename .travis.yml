@@ -26,12 +26,10 @@ addons:
 before_script:
   - >
     if [ "$TRAVIS_OS_NAME" = osx ]; then \
-      # brew doesn't add a link by default
-      brew link --force gettext && \
       # icu4c cannot be forced
       export ICU_ROOT="$(brew --prefix icu4c)" && \
-      # add ccache to the PATH variable
-      export PATH="/usr/local/opt/ccache/libexec:$PATH"; \
+      # add ccache and brew to the PATH variable
+      export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH"; \
     fi
 
 branches:
