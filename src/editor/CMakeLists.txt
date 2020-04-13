@@ -32,6 +32,7 @@ wl_library(editor
     logic_widelands_geometry
     sound
     graphic
+    graphic_mouse_cursor
     build_info
     scripting_lua_interface
     graphic_playercolor

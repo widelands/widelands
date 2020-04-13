@@ -12,9 +12,9 @@ function introduction()
    reveal_randomly(plr, fields, 2000)
    additional_port_space.terr = "summer_water" -- disable the port space
    sleep(1000)
-   message_box_objective(plr, intro_south)
+   campaign_message_box(intro_south)
    sleep(300)
-   message_box_objective(plr, intro_north)
+   campaign_message_box(intro_north)
    sleep(20000)
 
    build_port()
@@ -22,10 +22,10 @@ end
 
 function build_port()
    sleep(2000)
-   message_box_objective(plr, tell_about_port)
+   campaign_message_box(tell_about_port)
 
    wl.ui.MapView().buildhelp = true -- so that the player sees the port building icon
-   local o = message_box_objective(plr, tell_about_port_building)
+   local o = campaign_message_with_objective(tell_about_port_building, obj_build_port)
 
    while not construction_started(second_port_field, "atlanteans_port") do sleep(1000) end
    run(build_ships)
@@ -39,12 +39,12 @@ function watch_ship_production()
    while #plr:get_ships() < 2 do sleep(30*1000) end
    local ship2 = plr:get_ships()[2]
    wait_for_roadbuilding_and_scroll(ship2.field)
-   message_box_objective(plr, shipyard_production(ship2.shipname))
+   campaign_message_box(shipyard_production(ship2.shipname))
 end
 
 function build_ships()
    sleep(20*1000)
-   local o = message_box_objective(plr, tell_about_shipyard)
+   local o = campaign_message_with_objective(tell_about_shipyard, obj_build_shipyard)
    plr:allow_buildings{"atlanteans_shipyard"}
 
    local area = home_bay:region(20)
@@ -56,7 +56,7 @@ function build_ships()
 
    -- scroll to shipyard and back
    local prior_center = scroll_to_first_building("atlanteans_shipyard")
-   local o = message_box_objective(plr, tell_about_ships)
+   local o = campaign_message_with_objective(tell_about_ships, obj_make_ships)
    if prior_center then scroll_to_map_pixel(prior_center) end
 
    -- we only wait for one ship and a bit longer because it takes long enough
@@ -71,8 +71,8 @@ end
 function expedition()
    sleep(2000)
    wait_for_roadbuilding_and_scroll(sf)
-   message_box_objective(plr, expedition1)
-   local o = message_box_objective(plr, expedition2)
+   campaign_message_box(expedition1)
+   local o = campaign_message_with_objective(expedition2, obj_expedition_start)
 
    local function _ship_ready_for_expedition()
       for k,ship in ipairs(plr:get_ships()) do
@@ -84,7 +84,7 @@ function expedition()
    while not _ship_ready_for_expedition() do sleep(1000) end
    set_objective_done(o)
 
-   o = message_box_objective(plr, expedition3)
+   local o = campaign_message_with_objective(expedition3, obj_expedition_sail)
 
    while #plr:get_buildings("atlanteans_port") < 3 do sleep(200) end
    set_objective_done(o)
@@ -109,13 +109,13 @@ end
 
 function conclude_expedition()
    additional_port_space.terr = "desert_steppe" -- make it land again so that the player can build a port
-   message_box_objective(plr, expedition4)
+   campaign_message_box(expedition4)
    sleep(3000)
    iron_mine()
 end
 
 function iron_mine()
-   local o = message_box_objective(plr, expedition5)
+   local o = campaign_message_with_objective(expedition5, obj_expedition_iron)
    while #plr:get_buildings("atlanteans_ironmine") < 1 do sleep(3000) end
    set_objective_done(o)
    expedition_done = true
@@ -123,7 +123,7 @@ end
 
 function complete_ferry_yard()
    plr:allow_buildings{"atlanteans_ferry_yard"}
-   local o = message_box_objective(plr, ferry_2)
+   local o = campaign_message_with_objective(ferry_2, obj_ferry_yard)
    while #plr:get_buildings("atlanteans_ferry_yard") < 1 do sleep(3000) end
    set_objective_done(o)
 end
@@ -145,7 +145,7 @@ function waterways_and_ferries()
    -- warn player about over-producing after third ferry
    while #get_fields_with_ferry(swimmable_fields) < 3 do sleep(3000) end
    scroll_to_first_building("atlanteans_ferry_yard")
-   message_box_objective(plr, ferry_yard_production)
+   campaign_message_box(ferry_yard_production)
 
    -- wait until 4 ferries are located on waterways
    local pass, ff, wwf = 0, {}, {}
@@ -168,7 +168,7 @@ function waterways()
    sleep(5000)
    map:place_immovable("atlanteans_resi_gold_2", gold_mine, "tribes")
 
-   message_box_objective(plr, ferry_1)
+   campaign_message_box(ferry_1)
    sleep(1000)
 
    run(complete_ferry_yard)
@@ -178,9 +178,9 @@ function waterways()
    -- place resource indicator again in case player preferred ships/exploring
    map:place_immovable("atlanteans_resi_gold_2", gold_mine, "tribes")
 
-   message_box_objective(plr, ferry_3)
+   campaign_message_box(ferry_3)
    sleep(500)
-   message_box_objective(plr, ferry_4)
+   campaign_message_box(ferry_4)
 
    -- Build waterway
    click_on_field(waterway_field)
@@ -192,20 +192,20 @@ function waterways()
    click_on_field(waterway_field.trn)
    click_on_panel(wl.ui.MapView().windows.field_action.buttons.destroy_waterway)
 
-   local o = message_box_objective(plr, ferry_5)
+   local o = campaign_message_with_objective(ferry_5, obj_waterways)
    -- check for goldmine, and waterways with ferries
    run(complete_gold_mine)
    waterways_and_ferries()
    while not (gold_mine_done and ferries_done) do sleep(3000) end
    set_objective_done(o)
 
-   message_box_objective(plr, ferry_6)
+   campaign_message_box(ferry_6)
    waterways_done = true
 end
 
 function conclude_tutorial()
    while not (expedition_done and waterways_done) do sleep(3000) end
-   message_box_objective(plr, congratulation)
+   campaign_message_box(congratulation)
 end
 
 run(introduction)

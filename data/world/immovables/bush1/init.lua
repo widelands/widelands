@@ -74,6 +74,8 @@ dirname = path.dirname(__file__)
 --               "grow=alder_summer_old",
 --            },
 --
+--       See :doc:`immovable_program`.
+--
 --    **terrain_affinity**
 --        *Mandatory for trees*. If your immovable is a tree (c.f. `Trees`_), you will need to specify its
 --        terrain affinity, which will determine its chances to survive on different
