@@ -39,12 +39,16 @@ public:
 	 *
 	 * The 'basename' is the filename prefix for loading the images, e.g. "idle" or "walk_ne".
 	 */
-	uint32_t load(const LuaTable& table, const std::string& basename, Animation::Type type);
+	uint32_t load(const LuaTable& table,
+	              const std::string& basename,
+	              const std::string& animation_directory,
+	              Animation::Type type);
 	/// Same as above, but this animation will be used for getting a representative image by map
 	/// object name
 	uint32_t load(const std::string& map_object_name,
 	              const LuaTable& table,
 	              const std::string& basename,
+	              const std::string& animation_directory,
 	              Animation::Type type);
 
 	/// Returns the animation with the given ID or throws an exception if it is

@@ -53,6 +53,8 @@ struct CampaignData {
 	std::set<std::string> prerequisites;
 	bool visible;
 	std::vector<std::unique_ptr<ScenarioData>> scenarios;
+	std::vector<std::string> difficulties;
+	uint32_t default_difficulty;
 
 	CampaignData() = default;
 };

@@ -8,6 +8,7 @@ wl_library(ui_fsmenu_options
     base_log
     graphic
     graphic_fonthandler
+    graphic_mouse_cursor
     graphic_text
     graphic_text_layout
     io_filesystem

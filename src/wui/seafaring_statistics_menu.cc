@@ -369,42 +369,79 @@ bool SeafaringStatisticsMenu::handle_key(bool down, SDL_Keysym code) {
 		case SDLK_w:
 			watch_ship();
 			return true;
+
+		case SDLK_KP_0:
+			if (!(code.mod & KMOD_NUM)) {
+				return false;
+			}
+			FALLS_THROUGH;
 		case SDLK_0:
 			if (code.mod & KMOD_ALT) {
 				filter_ships(ShipFilterStatus::kAll);
 				return true;
 			}
 			return false;
+
+		case SDLK_KP_1:
+			if (!(code.mod & KMOD_NUM)) {
+				return false;
+			}
+			FALLS_THROUGH;
 		case SDLK_1:
 			if (code.mod & KMOD_ALT) {
 				filter_ships(ShipFilterStatus::kIdle);
 				return true;
 			}
 			return false;
+
+		case SDLK_KP_2:
+			if (!(code.mod & KMOD_NUM)) {
+				return false;
+			}
+			FALLS_THROUGH;
 		case SDLK_2:
 			if (code.mod & KMOD_ALT) {
 				filter_ships(ShipFilterStatus::kShipping);
 				return true;
 			}
 			return false;
+
+		case SDLK_KP_3:
+			if (!(code.mod & KMOD_NUM)) {
+				return false;
+			}
+			FALLS_THROUGH;
 		case SDLK_3:
 			if (code.mod & KMOD_ALT) {
 				filter_ships(ShipFilterStatus::kExpeditionWaiting);
 				return true;
 			}
 			return false;
+
+		case SDLK_KP_4:
+			if (!(code.mod & KMOD_NUM)) {
+				return false;
+			}
+			FALLS_THROUGH;
 		case SDLK_4:
 			if (code.mod & KMOD_ALT) {
 				filter_ships(ShipFilterStatus::kExpeditionScouting);
 				return true;
 			}
 			return false;
+
+		case SDLK_KP_5:
+			if (!(code.mod & KMOD_NUM)) {
+				return false;
+			}
+			FALLS_THROUGH;
 		case SDLK_5:
 			if (code.mod & KMOD_ALT) {
 				filter_ships(ShipFilterStatus::kExpeditionPortspaceFound);
 				return true;
 			}
 			return false;
+
 		case SDL_SCANCODE_KP_PERIOD:
 		case SDLK_KP_PERIOD:
 			if (code.mod & KMOD_NUM)

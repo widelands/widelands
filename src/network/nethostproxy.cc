@@ -64,8 +64,9 @@ std::unique_ptr<RecvPacket> NetHostProxy::try_receive(const ConnectionId id) {
 	receive_commands();
 
 	// Check whether client is not (yet) connected
-	if (clients_.count(id) == 0 || clients_.at(id).state_ == Client::State::kConnecting)
+	if (clients_.count(id) == 0 || clients_.at(id).state_ == Client::State::kConnecting) {
 		return std::unique_ptr<RecvPacket>();
+	}
 
 	std::queue<std::unique_ptr<RecvPacket>>& packet_list = clients_.at(id).received_;
 

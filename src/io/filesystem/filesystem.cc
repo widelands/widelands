@@ -136,14 +136,15 @@ bool FileSystem::is_path_absolute(const std::string& path) const {
 	std::string::size_type const path_size = path.size();
 	std::string::size_type const root_size = root_.size();
 
-	if (path_size < root_size)
+	if (path_size < root_size) {
 		return false;
-
-	if (path_size == root_size)
+	}
+	if (path_size == root_size) {
 		return path == root_;
-
-	if (path.compare(0, root_.size(), root_))
+	}
+	if (path.compare(0, root_.size(), root_)) {
 		return false;
+	}
 
 #ifdef _WIN32
 	if (path.size() >= 3 && path[1] == ':' && path[2] == '\\')  // "C:\"
@@ -152,8 +153,9 @@ bool FileSystem::is_path_absolute(const std::string& path) const {
 	}
 #endif
 	assert(root_size < path_size);  //  Otherwise an invalid read happens below.
-	if (path[root_size] != file_separator())
+	if (path[root_size] != file_separator()) {
 		return false;
+	}
 
 	return true;
 }
@@ -170,25 +172,28 @@ std::string FileSystem::fix_cross_file(const std::string& path) const {
 	for (uint32_t i = 0; i < path_size; ++i) {
 		temp = path.at(i);
 #ifdef _WIN32
-		if (temp == ":")
+		if (temp == ":") {
 			fixedPath.at(i) = '-';
-		else if (temp == "/")
+		} else if (temp == "/") {
 #else
-		if (temp == "\\")
+		if (temp == "\\") {
 #endif
 			fixedPath.at(i) = file_separator();
+		}
 		// As a security measure, eat all:
 		// * tildes
 		// * double dots
 		// * dots with following slash/backslash (but not a single dot - we need it in e.g. "xyz.wmf")
 		// away to avoid misuse of the file transfer function.
-		if (temp == "~")
+		if (temp == "~") {
 			fixedPath.at(i) = '_';
+		}
 		if (temp == "." && (i + 1 < path_size)) {
 			std::string temp2;
 			temp2 = path.at(i + 1);
-			if (temp2 == "." || temp2 == "\\" || temp2 == "/")
+			if (temp2 == "." || temp2 == "\\" || temp2 == "/") {
 				fixedPath.at(i) = '_';
+			}
 		}
 	}
 	return fixedPath;
@@ -201,8 +206,9 @@ std::string FileSystem::fix_cross_file(const std::string& path) const {
 std::string FileSystem::get_working_directory() {
 	char cwd[PATH_MAX + 1];
 	char* const result = getcwd(cwd, PATH_MAX);
-	if (!result)
+	if (!result) {
 		throw FileError("FileSystem::get_working_directory()", "widelands", "can not run getcwd");
+	}
 
 	return std::string(cwd);
 }
@@ -289,8 +295,9 @@ std::string FileSystem::get_homedir() {
 	log("None of the directories was useable - falling back to \".\"\n");
 #else
 #ifdef HAS_GETENV
-	if (char const* const h = getenv("HOME"))
+	if (char const* const h = getenv("HOME")) {
 		homedir = h;
+	}
 #endif
 #endif
 
@@ -451,10 +458,11 @@ static void fs_tokenize(const std::string& path, char const filesep, Inserter co
 	std::string::size_type pos2;  //  next filesep character
 
 	// Extract the first path component
-	if (path.find(filesep) == 0)  // Is this an absolute path?
+	if (path.find(filesep) == 0) {  // Is this an absolute path?
 		pos = 1;
-	else  // Relative path
+	} else {  // Relative path
 		pos = 0;
+	}
 	pos2 = path.find(filesep, pos);
 	// 'current' token is now between pos and pos2
 
@@ -470,8 +478,9 @@ static void fs_tokenize(const std::string& path, char const filesep, Inserter co
 
 	// Extract the last component (most probably a filename)
 	std::string node = path.substr(pos);
-	if (!node.empty())
+	if (!node.empty()) {
 		*components++ = node;
+	}
 }
 
 /**
@@ -485,8 +494,9 @@ std::string FileSystem::canonicalize_name(std::string path) const {
 #ifdef _WIN32
 	// replace all slashes with backslashes so following can work.
 	for (uint32_t j = 0; j < path.size(); ++j) {
-		if (path[j] == '/')
+		if (path[j] == '/') {
 			path[j] = '\\';
+		}
 	}
 #endif
 
@@ -496,10 +506,11 @@ std::string FileSystem::canonicalize_name(std::string path) const {
 	if (!components.empty() && *components.begin() == "~") {
 		components.erase(components.begin());
 		fs_tokenize(get_homedir(), file_separator(), std::inserter(components, components.begin()));
-	} else if (!is_path_absolute(path))
+	} else if (!is_path_absolute(path)) {
 		//  make relative paths absolute (so that "../../foo" can work)
 		fs_tokenize(root_.empty() ? get_working_directory() : root_, file_separator(),
 		            std::inserter(components, components.begin()));
+	}
 
 	// Clean up the path
 	for (i = components.begin(); i != components.end();) {
@@ -562,8 +573,9 @@ const char* FileSystem::fs_filename(const char* p) {
 	const char* result = p;
 
 	while (*p != '\0') {
-		if (*p == '/' || *p == '\\')
+		if (*p == '/' || *p == '\\') {
 			result = p + 1;
+		}
 		++p;
 	}
 
@@ -579,10 +591,11 @@ std::string FileSystem::filename_ext(const std::string& f) {
 	// Find last '.' - denotes start of extension
 	size_t ext_start = f.rfind('.');
 
-	if (std::string::npos == ext_start)
+	if (std::string::npos == ext_start) {
 		return "";
-	else
+	} else {
 		return f.substr(ext_start);
+	}
 }
 
 std::string FileSystem::filename_without_ext(const char* const p) {
@@ -612,8 +625,9 @@ FileSystem& FileSystem::create(const std::string& root) {
 		    errno == ENAMETOOLONG) {
 			throw FileNotFoundError("FileSystem::create", root);
 		}
-		if (errno == EACCES)
+		if (errno == EACCES) {
 			throw FileAccessDeniedError("FileSystem::create", root);
+		}
 	}
 
 	if (S_ISDIR(statinfo.st_mode)) {

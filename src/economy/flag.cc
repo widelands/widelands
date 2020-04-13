@@ -19,6 +19,9 @@
 
 #include "economy/flag.h"
 
+#include <algorithm>
+#include <iterator>
+
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
@@ -56,9 +59,7 @@ Flag::Flag()
      ware_filled_(0),
      wares_(new PendingWare[ware_capacity_]),
      always_call_for_flag_(nullptr) {
-	for (uint32_t i = 0; i < 6; ++i) {
-		roads_[i] = nullptr;
-	}
+	std::fill(std::begin(roads_), std::end(roads_), nullptr);
 }
 
 /**
@@ -79,8 +80,8 @@ Flag::~Flag() {
 		log("Flag: ouch! flagjobs left\n");
 	}
 
-	for (int32_t i = 0; i < 6; ++i) {
-		if (roads_[i]) {
+	for (const RoadBase* const road : roads_) {
+		if (road) {
 			log("Flag: ouch! road left\n");
 		}
 	}
@@ -125,9 +126,7 @@ Flag::Flag(EditorGameBase& egbase,
      ware_filled_(0),
      wares_(new PendingWare[ware_capacity_]),
      always_call_for_flag_(nullptr) {
-	for (uint32_t i = 0; i < 6; ++i) {
-		roads_[i] = nullptr;
-	}
+	std::fill(std::begin(roads_), std::end(roads_), nullptr);
 
 	set_owner(owning_player);
 
@@ -209,9 +208,9 @@ void Flag::set_economy(Economy* const e, WareWorker type) {
 		}
 	}
 
-	for (int8_t i = 0; i < 6; ++i) {
-		if (roads_[i]) {
-			roads_[i]->set_economy(e, type);
+	for (RoadBase* const road : roads_) {
+		if (road) {
+			road->set_economy(e, type);
 		}
 	}
 }
@@ -283,8 +282,7 @@ BaseImmovable::PositionList Flag::get_positions(const EditorGameBase&) const {
  * \return neighbouring flags.
  */
 void Flag::get_neighbours(WareWorker type, RoutingNodeNeighbours& neighbours) {
-	for (int8_t i = 0; i < 6; ++i) {
-		RoadBase* const road = roads_[i];
+	for (RoadBase* const road : roads_) {
 		if (!road) {
 			continue;
 		}
@@ -323,8 +321,8 @@ void Flag::get_neighbours(WareWorker type, RoutingNodeNeighbours& neighbours) {
  * \return the road that leads to the given flag.
  */
 RoadBase* Flag::get_roadbase(Flag& flag) {
-	for (int8_t i = 0; i < 6; ++i) {
-		if (RoadBase* const road = roads_[i]) {
+	for (RoadBase* const road : roads_) {
+		if (road) {
 			if (&road->get_flag(RoadBase::FlagStart) == &flag ||
 			    &road->get_flag(RoadBase::FlagEnd) == &flag) {
 				return road;
@@ -334,7 +332,7 @@ RoadBase* Flag::get_roadbase(Flag& flag) {
 	return nullptr;
 }
 Road* Flag::get_road(Flag& flag) {
-	for (int8_t i = 1; i <= 6; ++i) {
+	for (int8_t i = WalkingDir::FIRST_DIRECTION; i <= WalkingDir::LAST_DIRECTION; ++i) {
 		if (Road* const road = get_road(i)) {
 			if (&road->get_flag(RoadBase::FlagStart) == &flag ||
 			    &road->get_flag(RoadBase::FlagEnd) == &flag) {
@@ -361,7 +359,8 @@ Waterway* Flag::get_waterway(uint8_t const dir) const {
 /// \return the number of RoadBases connected to the flag
 uint8_t Flag::nr_of_roadbases() const {
 	uint8_t counter = 0;
-	for (uint8_t road_id = 6; road_id; --road_id) {
+	for (uint8_t road_id = WalkingDir::LAST_DIRECTION; road_id >= WalkingDir::FIRST_DIRECTION;
+	     --road_id) {
 		if (get_roadbase(road_id) != nullptr) {
 			++counter;
 		}
@@ -372,7 +371,8 @@ uint8_t Flag::nr_of_roadbases() const {
 /// \return the number of roads connected to the flag.
 uint8_t Flag::nr_of_roads() const {
 	uint8_t counter = 0;
-	for (uint8_t road_id = 6; road_id; --road_id) {
+	for (uint8_t road_id = WalkingDir::LAST_DIRECTION; road_id >= WalkingDir::FIRST_DIRECTION;
+	     --road_id) {
 		if (get_roadbase(road_id) != nullptr) {
 			++counter;
 		}
@@ -383,7 +383,8 @@ uint8_t Flag::nr_of_roads() const {
 /// \return the number of waterways connected to the flag.
 uint8_t Flag::nr_of_waterways() const {
 	uint8_t counter = 0;
-	for (uint8_t road_id = 6; road_id; --road_id) {
+	for (uint8_t road_id = WalkingDir::LAST_DIRECTION; road_id >= WalkingDir::FIRST_DIRECTION;
+	     --road_id) {
 		if (get_waterway(road_id) != nullptr) {
 			++counter;
 		}
@@ -396,7 +397,8 @@ bool Flag::is_dead_end() const {
 		return false;
 	}
 	Flag const* first_other_flag = nullptr;
-	for (uint8_t road_id = 6; road_id; --road_id) {
+	for (uint8_t road_id = WalkingDir::LAST_DIRECTION; road_id >= WalkingDir::FIRST_DIRECTION;
+	     --road_id) {
 		if (RoadBase* const road = get_roadbase(road_id)) {
 			Flag& start = road->get_flag(RoadBase::FlagStart);
 			Flag& other = this == &start ? road->get_flag(RoadBase::FlagEnd) : start;
@@ -631,7 +633,7 @@ void Flag::propagate_promoted_road(Road* const promoted_road) {
 
 	// Calculate the sum of the involved wallets' adjusted value
 	int32_t sum = 0;
-	for (int8_t i = 0; i < WalkingDir::LAST_DIRECTION; ++i) {
+	for (int8_t i = WalkingDir::FIRST_DIRECTION; i <= WalkingDir::LAST_DIRECTION; ++i) {
 		Road* const road = get_road(i);
 		if (road && road != promoted_road) {
 			sum += kRoadMaxWallet + road->wallet() * road->wallet();
@@ -639,7 +641,7 @@ void Flag::propagate_promoted_road(Road* const promoted_road) {
 	}
 
 	// Distribute propagation coins in a smart way
-	for (int8_t i = 0; i < WalkingDir::LAST_DIRECTION; ++i) {
+	for (int8_t i = WalkingDir::FIRST_DIRECTION; i <= WalkingDir::LAST_DIRECTION; ++i) {
 		Road* const road = get_road(i);
 		if (road && !road->is_busy()) {
 			road->add_to_wallet(0.5 * (kRoadMaxWallet - road->wallet()) *
@@ -758,7 +760,7 @@ void Flag::call_carrier(Game& game, WareInstance& ware, PlayerImmovable* const n
 	// Deal with the normal (flag) case
 	const Flag& nextflag = dynamic_cast<const Flag&>(*nextstep);
 
-	for (int32_t dir = 1; dir <= 6; ++dir) {
+	for (int32_t dir = WalkingDir::FIRST_DIRECTION; dir <= WalkingDir::LAST_DIRECTION; ++dir) {
 		RoadBase* const road = get_roadbase(dir);
 		Flag* other;
 		RoadBase::FlagId flagid;
@@ -843,7 +845,7 @@ void Flag::cleanup(EditorGameBase& egbase) {
 		assert(!building_);
 	}
 
-	for (int8_t i = 0; i < 6; ++i) {
+	for (uint8_t i = 0; i < (sizeof(roads_) / sizeof(roads_[0])); ++i) {
 		if (roads_[i]) {
 			roads_[i]->remove(egbase);  //  immediate death
 			assert(!roads_[i]);

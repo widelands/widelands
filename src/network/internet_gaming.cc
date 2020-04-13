@@ -93,8 +93,9 @@ static InternetGaming* ig = nullptr;
 
 /// \returns the one and only InternetGaming instance.
 InternetGaming& InternetGaming::ref() {
-	if (!ig)
+	if (!ig) {
 		ig = new InternetGaming();
+	}
 	return *ig;
 }
 
@@ -177,8 +178,9 @@ bool InternetGaming::do_login(bool should_relogin) {
 				}
 
 				return true;
-			} else if (error())
+			} else if (error()) {
 				return false;
+			}
 		}
 	}
 	log("InternetGaming: No answer from metaserver!\n");
@@ -198,9 +200,9 @@ bool InternetGaming::relogin() {
 
 	state_ = LOBBY;
 	// Client is reconnected, so let's try resend the timeouted command.
-	if (waitcmd_ == IGPCMD_GAME_CONNECT)
+	if (waitcmd_ == IGPCMD_GAME_CONNECT) {
 		join_game(gamename_);
-	else if (waitcmd_ == IGPCMD_GAME_OPEN) {
+	} else if (waitcmd_ == IGPCMD_GAME_OPEN) {
 		state_ = IN_GAME;
 		open_game();
 	} else if (waitcmd_ == IGPCMD_GAME_START) {
@@ -311,8 +313,9 @@ void InternetGaming::handle_failed_read() {
 
 /// handles all communication between the metaserver and the client
 void InternetGaming::handle_metaserver_communication(bool relogin_on_error) {
-	if (error())
+	if (error()) {
 		return;
+	}
 	try {
 		while (net != nullptr) {
 			// Check if the connection is still open
@@ -512,9 +515,10 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			std::string message = packet.string();
 			std::string type = packet.string();
 
-			if (type != "public" && type != "private" && type != "system")
+			if (type != "public" && type != "private" && type != "system") {
 				throw WLWarning(
 				   _("Invalid message type"), _("Invalid chat message type \"%s\"."), type.c_str());
+			}
 
 			bool personal = type == "private";
 			bool system = type == "system";
@@ -760,8 +764,9 @@ const std::string InternetGaming::relay_password() {
 
 /// called by a client to join the game \arg gamename
 void InternetGaming::join_game(const std::string& gamename) {
-	if (!logged_in())
+	if (!logged_in()) {
 		return;
+	}
 
 	// Reset the game ips, we should receive new ones shortly
 	gameips_ = std::make_pair(NetAddress(), NetAddress());
@@ -781,8 +786,9 @@ void InternetGaming::join_game(const std::string& gamename) {
 
 /// called by a client to open a new game with name gamename_
 void InternetGaming::open_game() {
-	if (!logged_in())
+	if (!logged_in()) {
 		return;
+	}
 
 	// Reset the game ips, we should receive new ones shortly
 	gameips_ = std::make_pair(NetAddress(), NetAddress());
@@ -800,8 +806,9 @@ void InternetGaming::open_game() {
 
 /// called by a client that is host of a game to inform the metaserver, that the game started
 void InternetGaming::set_game_playing() {
-	if (!logged_in())
+	if (!logged_in()) {
 		return;
+	}
 
 	SendPacket s;
 	s.string(IGPCMD_GAME_START);
@@ -817,8 +824,9 @@ void InternetGaming::set_game_playing() {
 /// If this is called by the hosting client, this further informs the metaserver, that the game was
 /// closed.
 void InternetGaming::set_game_done() {
-	if (!logged_in())
+	if (!logged_in()) {
 		return;
+	}
 
 	SendPacket s;
 	s.string(IGPCMD_GAME_DISCONNECT);
@@ -993,12 +1001,12 @@ void InternetGaming::send(const std::string& msg) {
  * If conversion fails, it throws a \ref warning
  */
 bool InternetGaming::str2bool(std::string str) {
-	if ((str != "true") && (str != "false"))
+	if ((str != "true") && (str != "false")) {
 		throw WLWarning(_("Conversion error"),
 		                /** TRANSLATORS: Geeky message from the metaserver */
 		                /** TRANSLATORS: This message is shown if %s isn't "true" or "false" */
 		                _("Unable to determine truth value for \"%s\""), str.c_str());
-
+	}
 	return str == "true";
 }
 
