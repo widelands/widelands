@@ -57,7 +57,7 @@ constexpr uint16_t kCurrentPacketVersion = 5;
 // Building type package versions
 constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
 constexpr uint16_t kCurrentPacketVersionConstructionsite = 4;
-constexpr uint16_t kCurrentPacketPFBuilding = 1;
+constexpr uint16_t kCurrentPacketPFBuilding = 2;
 // Responsible for warehouses and expedition bootstraps
 constexpr uint16_t kCurrentPacketVersionWarehouse = 8;
 constexpr uint16_t kCurrentPacketVersionMilitarysite = 6;
@@ -231,7 +231,7 @@ void MapBuildingdataPacket::read_partially_finished_building(
    const TribesLegacyLookupTable& tribes_lookup_table) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketPFBuilding) {
+		if (packet_version <= kCurrentPacketPFBuilding && packet_version >= 1) {
 			const TribeDescr& tribe = pfb.owner().tribe();
 			pfb.building_ = tribe.get_building_descr(tribe.safe_building_index(fr.c_string()));
 
@@ -255,11 +255,18 @@ void MapBuildingdataPacket::read_partially_finished_building(
 			}
 
 			try {
-				uint16_t const size = fr.unsigned_16();
-				pfb.wares_.resize(size);
-				for (uint16_t i = 0; i < pfb.wares_.size(); ++i) {
-					pfb.wares_[i] = new WaresQueue(pfb, INVALID_INDEX, 0);
-					pfb.wares_[i]->read(fr, game, mol, tribes_lookup_table);
+				uint16_t size = fr.unsigned_16();
+				pfb.consume_wares_.resize(size);
+				for (uint16_t i = 0; i < pfb.consume_wares_.size(); ++i) {
+					pfb.consume_wares_[i] = new WaresQueue(pfb, INVALID_INDEX, 0);
+					pfb.consume_wares_[i]->read(fr, game, mol, tribes_lookup_table);
+				}
+				// TODO(Nordfriese): Savegame compatibility
+				size = packet_version >= 2 ? fr.unsigned_16() : 0;
+				pfb.dropout_wares_.resize(size);
+				for (uint16_t i = 0; i < pfb.dropout_wares_.size(); ++i) {
+					pfb.dropout_wares_[i] = new WaresQueue(pfb, INVALID_INDEX, 0);
+					pfb.dropout_wares_[i]->read(fr, game, mol, tribes_lookup_table);
 				}
 			} catch (const WException& e) {
 				throw GameDataError("wares: %s", e.what());
@@ -289,8 +296,8 @@ void MapBuildingdataPacket::read_constructionsite(
 		if (packet_version >= 3) {
 			read_partially_finished_building(constructionsite, fr, game, mol, tribes_lookup_table);
 
-			for (ConstructionSite::Wares::iterator wares_iter = constructionsite.wares_.begin();
-			     wares_iter != constructionsite.wares_.end(); ++wares_iter) {
+			for (ConstructionSite::Wares::iterator wares_iter = constructionsite.consume_wares_.begin();
+			     wares_iter != constructionsite.consume_wares_.end(); ++wares_iter) {
 
 				(*wares_iter)->set_callback(ConstructionSite::wares_queue_callback, &constructionsite);
 			}
@@ -1026,10 +1033,15 @@ void MapBuildingdataPacket::write_partially_finished_building(const PartiallyFin
 		fw.unsigned_32(0);
 	}
 
-	const uint16_t wares_size = pfb.wares_.size();
+	uint16_t wares_size = pfb.consume_wares_.size();
 	fw.unsigned_16(wares_size);
 	for (uint16_t i = 0; i < wares_size; ++i) {
-		pfb.wares_[i]->write(fw, game, mos);
+		pfb.consume_wares_[i]->write(fw, game, mos);
+	}
+	wares_size = pfb.dropout_wares_.size();
+	fw.unsigned_16(wares_size);
+	for (uint16_t i = 0; i < wares_size; ++i) {
+		pfb.dropout_wares_[i]->write(fw, game, mos);
 	}
 
 	fw.unsigned_8(pfb.working_);

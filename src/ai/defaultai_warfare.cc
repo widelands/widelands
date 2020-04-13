@@ -609,7 +609,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		if (player_->is_building_type_allowed(enhancement) &&
 		    en_bo.aimode_limit_status() == AiModeBuildings::kAnotherAllowed &&
 		    en_bo.max_trainingsites_proportion > current_proportion) {
-			game().send_player_enhance_building(*tso.site, enhancement);
+			game().send_player_enhance_building(*tso.site, enhancement, true);
 		}
 	}
 
@@ -897,7 +897,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 	} else if (should_be_dismantled && can_be_dismantled) {
 		changed = true;
 		if (ms->get_playercaps() & Widelands::Building::PCap_Dismantle) {
-			game().send_player_dismantle(*ms);
+			game().send_player_dismantle(*ms, true);
 			military_last_dismantle_ = game().get_gametime();
 		} else {
 			game().send_player_bulldoze(*ms);

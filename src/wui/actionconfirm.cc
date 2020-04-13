@@ -27,6 +27,7 @@
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
 #include "ui_basic/box.h"
+#include "ui_basic/checkbox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/window.h"
 #include "wui/interactive_player.h"
@@ -35,7 +36,9 @@ struct ActionConfirm : public UI::Window {
 	ActionConfirm(InteractivePlayer& parent,
 	              const std::string& windowtitle,
 	              const std::string& message,
-	              Widelands::MapObject& map_object);
+	              Widelands::MapObject& map_object,
+	              // May be "", in which case no checkbox will be added
+	              const std::string& checkbox = "");
 
 	InteractivePlayer& iaplayer() const {
 		return dynamic_cast<InteractivePlayer&>(*get_parent());
@@ -46,6 +49,7 @@ struct ActionConfirm : public UI::Window {
 
 protected:
 	Widelands::ObjectPointer object_;
+	UI::Checkbox* checkbox_;
 };
 
 /**
@@ -125,9 +129,11 @@ struct ShipCancelExpeditionConfirm : public ActionConfirm {
 ActionConfirm::ActionConfirm(InteractivePlayer& parent,
                              const std::string& windowtitle,
                              const std::string& message,
-                             Widelands::MapObject& map_object)
+                             Widelands::MapObject& map_object,
+                             const std::string& checkbox)
    : UI::Window(&parent, "building_action_confirm", 0, 0, 200, 120, windowtitle),
-     object_(&map_object) {
+     object_(&map_object),
+     checkbox_(nullptr) {
 	const int padding = 6;
 	UI::Box* main_box = new UI::Box(this, padding, padding, UI::Box::Vertical);
 	UI::Box* button_box = new UI::Box(main_box, 0, 0, UI::Box::Horizontal);
@@ -151,10 +157,16 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
 	button_box->add(
 	   UI::g_fh->fontset()->is_rtl() ? cancelbtn : okbtn, UI::Box::Resizing::kFillSpace);
 	main_box->add(textarea);
+	if (!checkbox.empty()) {
+		checkbox_ = new UI::Checkbox(main_box, Vector2i(0, 0), checkbox);
+		// tooltip and initial state will be set by the subclass constructor
+		main_box->add_space(padding);
+		main_box->add(checkbox_, UI::Box::Resizing::kFullSize);
+	}
 	main_box->add_space(1.5 * padding);
 	main_box->add(button_box, UI::Box::Resizing::kFullSize);
 	button_box->set_size(textarea->get_w(), okbtn->get_h());
-	main_box->set_size(textarea->get_w(), textarea->get_h() + button_box->get_h() + 1.5 * padding);
+	main_box->set_size(textarea->get_w(), textarea->get_h() + button_box->get_h() + 1.5 * padding + (checkbox_ ? checkbox_->get_h() + padding : 0));
 	set_inner_size(main_box->get_w() + 2 * padding, main_box->get_h() + 2 * padding);
 
 	center_to_parent();
@@ -217,8 +229,10 @@ DismantleConfirm::DismantleConfirm(InteractivePlayer& parent, Widelands::Buildin
    : ActionConfirm(parent,
                    _("Dismantle building?"),
                    _("Do you really want to dismantle this building?"),
-                   building) {
-	// Nothing special to do
+                   building, _("Preserve wares")) {
+	assert(checkbox_);
+	checkbox_->set_tooltip(_("Any wares left in the building will be dropped out by the builder, increasing the dismantling time"));
+	checkbox_->set_state(true);
 }
 
 /*
@@ -231,8 +245,9 @@ void DismantleConfirm::think() {
 	upcast(Widelands::Building, building, object_.get(egbase));
 
 	if (!building || !iaplayer().can_act(building->owner().player_number()) ||
-	    !(building->get_playercaps() & Widelands::Building::PCap_Dismantle))
+	    !(building->get_playercaps() & Widelands::Building::PCap_Dismantle)) {
 		die();
+	}
 }
 
 /**
@@ -245,7 +260,7 @@ void DismantleConfirm::ok() {
 
 	if (building && iaplayer().can_act(building->owner().player_number()) &&
 	    (building->get_playercaps() & Widelands::Building::PCap_Dismantle)) {
-		game.send_player_dismantle(*todismantle);
+		game.send_player_dismantle(*todismantle, checkbox_->get_state());
 		iaplayer().hide_workarea(building->get_position(), false);
 	}
 
@@ -270,10 +285,12 @@ EnhanceConfirm::EnhanceConfirm(InteractivePlayer& parent,
             _("Be careful if the enemy is near!"))
               .str() :
            _("Do you really want to enhance this building?"),
-        building),
+        building, _("Preserve wares")),
      id_(id),
      still_under_construction_(still_under_construction) {
-	// Nothing special to do
+	assert(checkbox_);
+	checkbox_->set_tooltip(_("Any wares left in the building will be dropped out by the builder, increasing the enhancing time"));
+	checkbox_->set_state(true);
 }
 
 /*
@@ -287,8 +304,9 @@ void EnhanceConfirm::think() {
 
 	if (!building || !iaplayer().can_act(building->owner().player_number()) ||
 	    !(still_under_construction_ ||
-	      (building->get_playercaps() & Widelands::Building::PCap_Enhancable)))
+	      (building->get_playercaps() & Widelands::Building::PCap_Enhancable))) {
 		die();
+	}
 }
 
 /**
@@ -300,13 +318,13 @@ void EnhanceConfirm::ok() {
 	if (still_under_construction_) {
 		upcast(Widelands::ConstructionSite, cs, object_.get(game));
 		if (cs && iaplayer().can_act(cs->owner().player_number())) {
-			game.send_player_enhance_building(*cs, Widelands::INVALID_INDEX);
+			game.send_player_enhance_building(*cs, Widelands::INVALID_INDEX, checkbox_->get_state());
 		}
 	} else {
 		upcast(Widelands::Building, building, object_.get(game));
 		if (building && iaplayer().can_act(building->owner().player_number()) &&
 		    (building->get_playercaps() & Widelands::Building::PCap_Enhancable)) {
-			game.send_player_enhance_building(*building, id_);
+			game.send_player_enhance_building(*building, id_, checkbox_->get_state());
 		}
 	}
 

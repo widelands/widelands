@@ -395,14 +395,16 @@ Building& EditorGameBase::warp_constructionsite(const Coords& c,
                                                 DescriptionIndex idx,
                                                 bool loading,
                                                 FormerBuildings former_buildings,
-                                                const BuildingSettings* settings) {
+                                                const BuildingSettings* settings,
+                                                std::map<DescriptionIndex, Quantity> preserved_wares) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
-	Building& b =
-	   tribe.get_building_descr(idx)->create(*this, plr, c, true, loading, former_buildings);
+	ConstructionSite& b =
+	   dynamic_cast<ConstructionSite&>(tribe.get_building_descr(idx)->create(*this, plr, c, true, loading, former_buildings));
 	if (settings) {
-		dynamic_cast<ConstructionSite&>(b).apply_settings(*settings);
+		b.apply_settings(*settings);
 	}
+	b.add_dropout_wares(preserved_wares);
 	return b;
 }
 
@@ -414,7 +416,8 @@ Building& EditorGameBase::warp_constructionsite(const Coords& c,
 Building& EditorGameBase::warp_dismantlesite(const Coords& c,
                                              PlayerNumber const owner,
                                              bool loading,
-                                             FormerBuildings former_buildings) {
+                                             FormerBuildings former_buildings,
+                                             std::map<DescriptionIndex, Quantity> preserved_wares) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
 
@@ -423,7 +426,7 @@ Building& EditorGameBase::warp_dismantlesite(const Coords& c,
 
 	upcast(const DismantleSiteDescr, ds_descr, descr);
 
-	return *new DismantleSite(*ds_descr, *this, c, plr, loading, former_buildings);
+	return *new DismantleSite(*ds_descr, *this, c, plr, loading, former_buildings, preserved_wares);
 }
 
 /**

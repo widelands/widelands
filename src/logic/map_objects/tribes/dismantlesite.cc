@@ -70,8 +70,9 @@ DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr,
                              const Coords& c,
                              Player* plr,
                              bool loading,
-                             FormerBuildings& former_buildings)
-   : PartiallyFinishedBuilding(gdescr) {
+                             FormerBuildings& former_buildings,
+                             const std::map<DescriptionIndex, Quantity>& preserved_wares)
+   : PartiallyFinishedBuilding(gdescr), preserved_wares_(preserved_wares) {
 	position_ = c;
 	set_owner(plr);
 
@@ -128,10 +129,15 @@ bool DismantleSite::init(EditorGameBase& egbase) {
 
 	PartiallyFinishedBuilding::init(egbase);
 
+	for (const auto& pair : preserved_wares_) {
+		WaresQueue* q = new WaresQueue(*this, pair.first, pair.second);
+		q->set_filled(pair.second);
+		dropout_wares_.push_back(q);
+	}
 	for (const auto& ware : count_returned_wares(this)) {
 		WaresQueue* wq = new WaresQueue(*this, ware.first, ware.second);
 		wq->set_filled(ware.second);
-		wares_.push_back(wq);
+		consume_wares_.push_back(wq);
 		work_steps_ += ware.second;
 	}
 	return true;
@@ -194,18 +200,32 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
 		return true;
 	}
 
-	if (!work_steps_)           //  Happens for building without buildcost.
-		schedule_destroy(game);  //  Complete the building immediately.
+	for (WaresQueue* q : dropout_wares_) {
+		if (q->get_filled()) {
+			q->set_filled(q->get_filled() - 1);
+			q->set_max_size(q->get_max_size() - 1);
+			const WareDescr& wd = *owner().tribe().get_ware_descr(q->get_index());
+			WareInstance& ware = *new WareInstance(q->get_index(), &wd);
+			ware.init(game);
+			worker.start_task_dropoff(game, ware);
+			return true;
+		}
+	}
+
+	if (!work_steps_) {
+		// Happens for building without buildcost. Complete the building immediately.
+		schedule_destroy(game);
+	}
 
 	// Check if one step has completed
 	if (static_cast<int32_t>(game.get_gametime() - work_steptime_) >= 0 && working_) {
 		++work_completed_;
 
-		for (uint32_t i = 0; i < wares_.size(); ++i) {
-			WaresQueue& wq = *wares_[i];
-
-			if (!wq.get_filled())
+		for (uint32_t i = 0; i < consume_wares_.size(); ++i) {
+			WaresQueue& wq = *consume_wares_[i];
+			if (!wq.get_filled()) {
 				continue;
+			}
 
 			wq.set_filled(wq.get_filled() - 1);
 			wq.set_max_size(wq.get_max_size() - 1);

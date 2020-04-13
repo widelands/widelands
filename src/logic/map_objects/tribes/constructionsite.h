@@ -132,6 +132,8 @@ public:
 
 	void enhance(Game&);
 
+	void add_dropout_wares(const std::map<DescriptionIndex, Quantity>&);
+
 protected:
 	void update_statistics_string(std::string* statistics_string) override;
 

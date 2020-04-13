@@ -409,7 +409,7 @@ void BuildingWindow::act_dismantle() {
 	Widelands::Building* building = building_.get(parent_->egbase());
 	if (SDL_GetModState() & KMOD_CTRL) {
 		if (building->get_playercaps() & Widelands::Building::PCap_Dismantle) {
-			igbase()->game().send_player_dismantle(*building);
+			igbase()->game().send_player_dismantle(*building, false);
 			hide_workarea(true);
 		}
 	} else {
@@ -471,7 +471,7 @@ void BuildingWindow::act_enhance(Widelands::DescriptionIndex id, bool csite) {
 		assert(construction_site);
 		if (SDL_GetModState() & KMOD_CTRL) {
 			igbase()->game().send_player_enhance_building(
-			   *construction_site, Widelands::INVALID_INDEX);
+			   *construction_site, Widelands::INVALID_INDEX, false);
 		} else {
 			show_enhance_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), *construction_site,
 			                     construction_site->get_info().becomes->enhancement(), true);
@@ -481,7 +481,7 @@ void BuildingWindow::act_enhance(Widelands::DescriptionIndex id, bool csite) {
 
 	if (SDL_GetModState() & KMOD_CTRL) {
 		if (building->get_playercaps() & Widelands::Building::PCap_Enhancable)
-			igbase()->game().send_player_enhance_building(*building, id);
+			igbase()->game().send_player_enhance_building(*building, id, false);
 	} else {
 		show_enhance_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), *building, id);
 	}
