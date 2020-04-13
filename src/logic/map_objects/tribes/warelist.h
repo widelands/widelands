@@ -62,8 +62,6 @@ struct WareList {
 		return !(*this == wl);
 	}
 
-	mutable boost::signals2::signal<void()> changed;
-
 private:
 	std::vector<Quantity> wares_;
 };
