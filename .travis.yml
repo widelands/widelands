@@ -40,25 +40,24 @@ cache: ccache
 
 jobs:
   include:
-# NOCOM uncomment!
-#    - stage: tests
-#      name: "Codecheck Suite"
-#      script: ./.travis.sh codecheck
-#      cache: false
-#    - name: "Documentation Test"
-#      language: python
-#      cache: pip
-#      addons:
-#        apt:
-#          packages:
-#            - python-pip
-#      install: pip install sphinx
-#      script: ./.travis.sh documentation
-#    - name: "Includes"
-#      language: python
-#      script: ./.travis.sh includes
-#      cache: false
-#
+    - stage: tests
+      name: "Codecheck Suite"
+      script: ./.travis.sh codecheck
+      cache: false
+    - name: "Documentation Test"
+      language: python
+      cache: pip
+      addons:
+        apt:
+          packages:
+            - python-pip
+      install: pip install sphinx
+      script: ./.travis.sh documentation
+    - name: "Includes"
+      language: python
+      script: ./.travis.sh includes
+      cache: false
+
     - stage: compiler
       # Run this stage to test whether there are any error during compiling.
       # We use macOS, since it is the fastest to build (but also the most susceptible to transient errors…)
