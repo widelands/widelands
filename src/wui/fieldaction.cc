@@ -1027,7 +1027,11 @@ void show_field_action(InteractiveBase* const ibase,
 		    (ibase->in_road_building_mode(RoadBuildingType::kWaterway) &&
 		     target != ibase->get_build_road_end())) {
 			FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
-			w.add_buttons_road(false);
+			if (ibase->in_road_building_mode(RoadBuildingType::kRoad)) {
+				w.add_buttons_road(false);
+			} else {
+				w.add_buttons_waterway(false);
+			}
 			w.init();
 			return;
 		}
@@ -1052,9 +1056,9 @@ void show_field_action(InteractiveBase* const ibase,
 			} else {
 				FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
 				if (ibase->in_road_building_mode(RoadBuildingType::kRoad)) {
-					w.add_buttons_waterway(false);
-				} else {
 					w.add_buttons_road(false);
+				} else {
+					w.add_buttons_waterway(false);
 				}
 				w.init();
 				return;

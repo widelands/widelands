@@ -302,6 +302,21 @@ wl_library(graphic_wordwrap
 )
 
 
+# Mouse cursor
+
+wl_library(graphic_mouse_cursor
+  SRCS
+    mouse_cursor.cc
+    mouse_cursor.h
+  USES_SDL2
+  DEPENDS
+    base_geometry
+    graphic
+    graphic_image_io
+    io_filesystem
+)
+
+
 # Base library
 
 wl_library(graphic

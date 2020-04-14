@@ -24,6 +24,7 @@
 #include "base/log.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
+#include "graphic/mouse_cursor.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
@@ -41,8 +42,6 @@ Panel* Panel::mousein_ = nullptr;
 // events are ignored and not passed on to any widget. This is only useful
 // for scripts that want to show off functionality without the user interfering.
 bool Panel::allow_user_input_ = true;
-const Image* Panel::default_cursor_ = nullptr;
-const Image* Panel::default_cursor_click_ = nullptr;
 FxId Panel::click_fx_ = kNoSoundEffect;
 
 /**
@@ -162,9 +161,6 @@ int Panel::do_run() {
 		forefather = forefather->parent_;
 	}
 
-	default_cursor_ = g_gr->images().get("images/ui_basic/cursor.png");
-	default_cursor_click_ = g_gr->images().get("images/ui_basic/cursor_click.png");
-
 	// Loop
 	running_ = true;
 
@@ -206,13 +202,14 @@ int Panel::do_run() {
 		if (start_time >= next_draw_time) {
 			RenderTarget& rt = *g_gr->get_render_target();
 			forefather->do_draw(rt);
-			rt.blit((app->get_mouse_position() - Vector2i(3, 7)),
-			        app->is_mouse_pressed() ? default_cursor_click_ : default_cursor_);
-
-			if (is_modal()) {
-				do_tooltip();
-			} else {
-				forefather->do_tooltip();
+			if (g_mouse_cursor->is_visible()) {
+				g_mouse_cursor->change_cursor(app->is_mouse_pressed());
+				g_mouse_cursor->draw(rt, app->get_mouse_position());
+				if (is_modal()) {
+					do_tooltip();
+				} else {
+					forefather->do_tooltip();
+				}
 			}
 
 			g_gr->refresh();

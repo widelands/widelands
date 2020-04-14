@@ -47,6 +47,7 @@
 #include "editor/editorinteractive.h"
 #include "graphic/default_resolution.h"
 #include "graphic/font_handler.h"
+#include "graphic/mouse_cursor.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
 #include "io/filesystem/disk_filesystem.h"
@@ -366,7 +367,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		exit(2);
 	}
 
-	SDL_ShowCursor(SDL_DISABLE);
 	g_gr = new Graphic();
 
 	if (TTF_Init() == -1) {
@@ -381,6 +381,9 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	   get_config_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
 	   get_config_int("xres", DEFAULT_RESOLUTION_W), get_config_int("yres", DEFAULT_RESOLUTION_H),
 	   get_config_bool("fullscreen", false));
+
+	g_mouse_cursor = new MouseCursor();
+	g_mouse_cursor->initialize(get_config_bool("sdl_cursor", true));
 
 	g_sh = new SoundHandler();
 
@@ -750,6 +753,16 @@ void WLApplication::set_input_grab(bool grab) {
 	}
 }
 
+void WLApplication::set_mouse_lock(const bool locked) {
+	mouse_locked_ = locked;
+
+	// If we use the SDL cursor then it needs to be hidden when locked
+	// otherwise it'll jerk around which looks ugly
+	if (g_mouse_cursor->is_using_sdl()) {
+		g_mouse_cursor->set_visible(!mouse_locked_);
+	}
+}
+
 void WLApplication::refresh_graphics() {
 	g_gr->change_resolution(
 	   get_config_int("xres", DEFAULT_RESOLUTION_W), get_config_int("yres", DEFAULT_RESOLUTION_H));
@@ -784,6 +797,7 @@ bool WLApplication::init_settings() {
 	get_config_bool("auto_speed", false);
 	get_config_bool("dock_windows_to_edges", false);
 	get_config_bool("fullscreen", false);
+	get_config_bool("sdl_cursor", true);
 	get_config_bool("snap_windows_only_when_overlapping", false);
 	get_config_bool("animate_map_panning", false);
 	get_config_bool("write_syncstreams", false);
@@ -878,6 +892,9 @@ void WLApplication::shutdown_settings() {
 }
 
 void WLApplication::shutdown_hardware() {
+	delete g_mouse_cursor;
+	g_mouse_cursor = nullptr;
+
 	delete g_gr;
 	g_gr = nullptr;
 
