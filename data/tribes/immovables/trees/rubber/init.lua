@@ -52,14 +52,25 @@ spritesheet_mature = { idle = {
    columns = 2,
    rows = 2
 }}
-spritesheet_old = { idle = {
-   basename = "rubber_old",
-   hotspot = {18, 75},
-   fps = 2,
-   frames = 4,
-   columns = 2,
-   rows = 2
-}}
+spritesheet_old = {
+   idle = {
+      basename = "rubber_old",
+      hotspot = {18, 75},
+      fps = 2,
+      frames = 4,
+      columns = 2,
+      rows = 2
+   },
+   fall = {
+      basename = "rubber_fall",
+      hotspot = {19, 80},
+      fps = 10,
+      frames = 10,
+      columns = 5,
+      rows = 2,
+      play_once = true
+   }
+}
 
 tribes:new_immovable_type{
    msgctxt = "immovable",
@@ -142,6 +153,7 @@ tribes:new_immovable_type{
          "seed=rubber_amazons_sapling",
       },
       fall = {
+         "animate=fall 1000",
          "remove=",
       },
    },
@@ -231,6 +243,7 @@ tribes:new_immovable_type{
          "seed=rubber_black_amazons_sapling",
       },
       fall = {
+         "animate=fall 1000",
          "remove=",
       },
    },
@@ -320,6 +333,7 @@ tribes:new_immovable_type{
          "seed=rubber_desert_amazons_sapling",
       },
       fall = {
+         "animate=fall 1000",
          "remove=",
       },
    },
@@ -409,6 +423,7 @@ tribes:new_immovable_type{
          "seed=rubber_winter_amazons_sapling",
       },
       fall = {
+         "animate=fall 1000",
          "remove=",
       },
    },
