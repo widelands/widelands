@@ -22,8 +22,6 @@
 
 #include <cassert>
 
-#include <boost/signals2.hpp>
-
 #include "logic/widelands.h"
 
 namespace Widelands {
