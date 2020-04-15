@@ -564,15 +564,127 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 	// Many slightly different cases. This contains MASSES of code duplication.
 	if (dx < 0) {
 		if (dy < 0) {
-			// NOCOM shrink both
-			log("NOCOM unsupported\n");
-			return;
-			
-			
-			
-			
-			
-			// nocom players&portspaces
+			if (split.x > w) {
+				if (split.y > h) {
+					// shrink both, one single block
+					const int16_t xoff = split.x - w;
+					const int16_t yoff = split.y - h;
+					for (int16_t x = 0; x < w; ++x) {
+						for (int16_t y = 0; y < h; ++y) {
+							Coords cn(x, y);
+							Coords co(x + xoff, y + yoff);
+							new_fields[get_index(cn, w)] = operator[](co);
+							assert(!was_preserved[get_index(co)]);
+							was_preserved[get_index(co)] = true;
+						}
+					}
+					for (Coords& c : starting_pos_) {
+						if (c) {
+							if (c.x >= split.x || c.x < xoff || c.y >= split.y || c.y < yoff) {
+								c = Coords::null();
+							} else {
+								c.x -= xoff;
+								c.y -= yoff;
+							}
+						}
+					}
+					for (Coords c : port_spaces_) {
+						if (c.x >= xoff && c.x < split.x && c.y >= yoff && c.y < split.y) {
+							new_port_spaces.insert(Coords(c.x - xoff, c.y - yoff));
+						}
+					}
+				} else {
+					// shrink both, single block horz and upper/lower strip
+					const int16_t xoff = split.x - w;
+					for (int16_t x = 0; x < w; ++x) {
+						for (int16_t y = 0; y < h; ++y) {
+							Coords cn(x, y);
+							Coords co(x + xoff, y < split.y ? y : y - dy);
+							new_fields[get_index(cn, w)] = operator[](co);
+							assert(!was_preserved[get_index(co)]);
+							was_preserved[get_index(co)] = true;
+						}
+					}
+					for (Coords& c : starting_pos_) {
+						if (c) {
+							if (c.x >= split.x || c.x < xoff || (c.y >= split.y && c.y < split.y - dy)) {
+								c = Coords::null();
+							} else {
+								c.x -= xoff;
+								if (c.y >= split.y) {
+									c.y += dy;
+								}
+							}
+						}
+					}
+					for (Coords c : port_spaces_) {
+						if (c.x >= xoff && c.x < split.x && (c.y < split.y || c.y >= split.y - dy)) {
+							new_port_spaces.insert(Coords(c.x - xoff, c.y < split.y ? c.y : c.y + dy));
+						}
+					}
+				}
+			} else {
+				if (split.y > h) {
+					// shrink both, single block vert and left/right strip
+					const int16_t yoff = split.y - h;
+					for (int16_t x = 0; x < w; ++x) {
+						for (int16_t y = 0; y < h; ++y) {
+							Coords cn(x, y);
+							Coords co(x < split.x ? x : x - dx, y + yoff);
+							new_fields[get_index(cn, w)] = operator[](co);
+							assert(!was_preserved[get_index(co)]);
+							was_preserved[get_index(co)] = true;
+						}
+					}
+					for (Coords& c : starting_pos_) {
+						if (c) {
+							if (c.y >= split.y || c.y < yoff || (c.x >= split.x && c.x < split.x - dx)) {
+								c = Coords::null();
+							} else {
+								c.y -= yoff;
+								if (c.x >= split.x) {
+									c.x += dx;
+								}
+							}
+						}
+					}
+					for (Coords c : port_spaces_) {
+						if (c.y >= yoff && c.y < split.y && (c.x < split.x || c.x >= split.x - dx)) {
+							new_port_spaces.insert(Coords(c.x < split.x ? c.x : c.x + dx, c.y - yoff));
+						}
+					}
+				} else {
+					// shrink both, upper/lower and left/right strips
+					for (int16_t x = 0; x < w; ++x) {
+						for (int16_t y = 0; y < h; ++y) {
+							Coords cn(x, y);
+							Coords co(x < split.x ? x : x - dx, y < split.y ? y : y - dy);
+							new_fields[get_index(cn, w)] = operator[](co);
+							assert(!was_preserved[get_index(co)]);
+							was_preserved[get_index(co)] = true;
+						}
+					}
+					for (Coords& c : starting_pos_) {
+						if (c) {
+							if ((c.x >= split.x && c.x < split.x - dx) || (c.y >= split.y && c.y < split.y - dy)) {
+								c = Coords::null();
+							} else {
+								if (c.x >= split.x) {
+									c.x += dx;
+								}
+								if (c.y >= split.y) {
+									c.y += dy;
+								}
+							}
+						}
+					}
+					for (Coords c : port_spaces_) {
+						if ((c.x < split.x || c.x >= split.x - dx) && (c.y < split.y || c.y >= split.y - dy)) {
+							new_port_spaces.insert(Coords(c.x < split.x ? c.x : c.x + dx, c.y < split.y ? c.y : c.y + dy));
+						}
+					}
+				}
+			}
 		} else {
 			if (split.x > w) {
 				// shrink horz, increase vert; one single block to pick the new data from
@@ -835,7 +947,6 @@ void Map::set_to(EditorGameBase& egbase, ResizeHistory rh) {
 	for (MapIndex i = max_index(); i; --i) {
 		const FieldData& fd = rh.fields.front();
 		Field& f = fields_[i - 1];
-		FCoords fc = get_fcoords(f);
 		f.set_terrains(fd.terrains);
 		f.set_height(fd.height);
 		f.resources = fd.resources;
@@ -847,8 +958,7 @@ void Map::set_to(EditorGameBase& egbase, ResizeHistory rh) {
 	// second pass
 	for (MapIndex i = max_index(); i; --i) {
 		const FieldData& fd = backup.front();
-		Field& f = fields_[i - 1];
-		FCoords fc = get_fcoords(f);
+		FCoords fc = get_fcoords(operator[](i - 1));
 		if (!fd.immovable.empty()) {
 			egbase.create_immovable_with_name(
 			   fc, fd.immovable, Widelands::MapObjectDescr::OwnerType::kWorld, nullptr, nullptr);
