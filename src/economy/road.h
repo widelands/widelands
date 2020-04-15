@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -91,6 +91,9 @@ struct Road : public RoadBase {
 	bool is_busy() const {
 		return busy_;
 	}
+
+	// Use in the editor or from Lua scripting only!
+	void set_busy(EditorGameBase& e, bool);
 
 protected:
 	bool is_bridge(const EditorGameBase&, const FCoords&, uint8_t) const override;

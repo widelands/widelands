@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -176,8 +176,9 @@ const std::string& FullscreenMenuLoadGame::filename() const {
 }
 
 bool FullscreenMenuLoadGame::handle_key(bool down, SDL_Keysym code) {
-	if (!down)
+	if (!down) {
 		return false;
+	}
 
 	switch (code.sym) {
 	case SDLK_KP_PERIOD:

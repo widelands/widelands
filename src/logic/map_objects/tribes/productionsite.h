@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -64,6 +64,15 @@ public:
 	                    const World& world);
 
 	Building& create_object() const override;
+
+	// List of wares to register having economy checks. Parsed by the tribes during postload and must
+	// be nullptr after loading has finished
+	std::set<DescriptionIndex>* ware_demand_checks() const;
+	// List of workers to register having economy checks. Parsed by the tribes during postload and
+	// must be nullptr after loading has finished
+	std::set<DescriptionIndex>* worker_demand_checks() const;
+	// Clear ware and worker demand check info
+	void clear_demand_checks();
 
 	uint32_t nr_working_positions() const {
 		uint32_t result = 0;
@@ -135,6 +144,8 @@ public:
 	}
 
 private:
+	std::unique_ptr<std::set<DescriptionIndex>> ware_demand_checks_;
+	std::unique_ptr<std::set<DescriptionIndex>> worker_demand_checks_;
 	BillOfMaterials working_positions_;
 	BillOfMaterials input_wares_;
 	BillOfMaterials input_workers_;
@@ -158,7 +169,6 @@ class ProductionSite : public Building {
 	friend struct ProductionProgram::ActCall;
 	friend struct ProductionProgram::ActCallWorker;
 	friend struct ProductionProgram::ActSleep;
-	friend struct ProductionProgram::ActCheckMap;
 	friend struct ProductionProgram::ActAnimate;
 	friend struct ProductionProgram::ActConsume;
 	friend struct ProductionProgram::ActProduce;

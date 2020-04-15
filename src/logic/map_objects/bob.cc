@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1119,8 +1119,8 @@ const Bob::Task* Bob::Loader::get_task(const std::string& name) {
 	throw GameDataError("unknown bob task '%s'", name.c_str());
 }
 
-const BobProgramBase* Bob::Loader::get_program(const std::string& name) {
-	throw GameDataError("unknown bob program '%s'", name.c_str());
+const MapObjectProgram* Bob::Loader::get_program(const std::string& name) {
+	throw GameDataError("unknown map object program '%s'", name.c_str());
 }
 
 void Bob::save(EditorGameBase& eg, MapObjectSaver& mos, FileWrite& fw) {
@@ -1183,7 +1183,7 @@ void Bob::save(EditorGameBase& eg, MapObjectSaver& mos, FileWrite& fw) {
 			fw.unsigned_8(0);
 		}
 
-		fw.c_string(state.program ? state.program->get_name() : "");
+		fw.c_string(state.program ? state.program->name() : "");
 	}
 }
 }  // namespace Widelands

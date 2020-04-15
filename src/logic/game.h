@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,6 +41,8 @@ namespace Widelands {
 constexpr uint32_t kStatisticsSampleTime = 30000;
 // See forester_cache_
 constexpr int16_t kInvalidForesterEntry = -1;
+
+constexpr uint32_t kScenarioDifficultyNotSet = 0;
 
 struct Flag;
 struct Path;
@@ -279,6 +281,15 @@ public:
 		return savehandler_;
 	}
 
+	uint32_t get_scenario_difficulty() const {
+		return scenario_difficulty_;
+	}
+	void set_scenario_difficulty(uint32_t d) {
+		assert(scenario_difficulty_ == kScenarioDifficultyNotSet);
+		assert(d != kScenarioDifficultyNotSet);
+		scenario_difficulty_ = d;
+	}
+
 	// Statistics
 	const GeneralStatsVector& get_general_statistics() const {
 		return general_stats_;
@@ -387,6 +398,8 @@ private:
 	SaveHandler savehandler_;
 
 	std::unique_ptr<ReplayWriter> replaywriter_;
+
+	uint32_t scenario_difficulty_;
 
 	GeneralStatsVector general_stats_;
 	int next_trade_agreement_id_ = 1;
