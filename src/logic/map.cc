@@ -540,7 +540,6 @@ void Map::set_origin(const Coords& new_origin) {
 	log("Map origin was shifted by (%d, %d)\n", new_origin.x, new_origin.y);
 }
 
-
 // TODO(Nordfriese): These three functions have lots of code duplication and other redundancies.
 // Not to mention that they are very very ugly. They could do with some general refactoring.
 
@@ -666,7 +665,8 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 					}
 					for (Coords& c : starting_pos_) {
 						if (c) {
-							if ((c.x >= split.x && c.x < split.x - dx) || (c.y >= split.y && c.y < split.y - dy)) {
+							if ((c.x >= split.x && c.x < split.x - dx) ||
+							    (c.y >= split.y && c.y < split.y - dy)) {
 								c = Coords::null();
 							} else {
 								if (c.x >= split.x) {
@@ -679,8 +679,10 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 						}
 					}
 					for (Coords c : port_spaces_) {
-						if ((c.x < split.x || c.x >= split.x - dx) && (c.y < split.y || c.y >= split.y - dy)) {
-							new_port_spaces.insert(Coords(c.x < split.x ? c.x : c.x + dx, c.y < split.y ? c.y : c.y + dy));
+						if ((c.x < split.x || c.x >= split.x - dx) &&
+						    (c.y < split.y || c.y >= split.y - dy)) {
+							new_port_spaces.insert(
+							   Coords(c.x < split.x ? c.x : c.x + dx, c.y < split.y ? c.y : c.y + dy));
 						}
 					}
 				}
@@ -754,7 +756,8 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 				}
 				for (Coords c : port_spaces_) {
 					if (c.x < split.x || c.x >= split.x - dx) {
-						new_port_spaces.insert(Coords(c.x < split.x ? c.x : c.x + dx, c.y < split.y ? c.y : c.y + dy));
+						new_port_spaces.insert(
+						   Coords(c.x < split.x ? c.x : c.x + dx, c.y < split.y ? c.y : c.y + dy));
 					}
 				}
 			}
@@ -829,7 +832,8 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 				}
 				for (Coords c : port_spaces_) {
 					if (c.y < split.y || c.y >= split.y - dy) {
-						new_port_spaces.insert(Coords(c.x < split.x ? c.x : c.x + dx, c.y < split.y ? c.y : c.y + dy));
+						new_port_spaces.insert(
+						   Coords(c.x < split.x ? c.x : c.x + dx, c.y < split.y ? c.y : c.y + dy));
 					}
 				}
 			}
@@ -870,7 +874,8 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 				}
 			}
 			for (Coords c : port_spaces_) {
-				new_port_spaces.insert(Coords(c.x < split.x ? c.x : c.x + dx, c.y < split.y ? c.y : c.y + dy));
+				new_port_spaces.insert(
+				   Coords(c.x < split.x ? c.x : c.x + dx, c.y < split.y ? c.y : c.y + dy));
 			}
 		}
 	}

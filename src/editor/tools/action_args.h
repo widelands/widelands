@@ -64,7 +64,7 @@ struct EditorActionArgs {
 	std::list<Widelands::DescriptionIndex> new_immovable_types;         // immovable change tools
 	Widelands::HeightInterval interval;                                 // noise height tool
 	std::list<Widelands::DescriptionIndex> terrain_type, original_terrain_type;  // set terrain tool
-	Widelands::ResizeHistory resized;                                                       // resize tool
+	Widelands::ResizeHistory resized;                                            // resize tool
 
 	std::list<EditorToolAction*> draw_actions;  // draw tool
 
