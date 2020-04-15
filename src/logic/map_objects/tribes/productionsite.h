@@ -169,7 +169,6 @@ class ProductionSite : public Building {
 	friend struct ProductionProgram::ActCall;
 	friend struct ProductionProgram::ActCallWorker;
 	friend struct ProductionProgram::ActSleep;
-	friend struct ProductionProgram::ActCheckMap;
 	friend struct ProductionProgram::ActAnimate;
 	friend struct ProductionProgram::ActConsume;
 	friend struct ProductionProgram::ActProduce;
