@@ -191,7 +191,7 @@ void FullscreenMenuLaunchSPG::win_condition_selected() {
  * start-button has been pressed
  */
 void FullscreenMenuLaunchSPG::clicked_ok() {
-	if (!g_fs->file_exists(filename_))
+	if (!g_fs->file_exists(filename_)) {
 		throw WLWarning(_("File not found"),
 		                _("Widelands tried to start a game with a file that could not be "
 		                  "found at the given path.\n"
@@ -201,6 +201,7 @@ void FullscreenMenuLaunchSPG::clicked_ok() {
 		                  "from the host to you, but perhaps the transfer was not yet "
 		                  "finished!?!"),
 		                filename_.c_str());
+	}
 	if (settings_->can_launch()) {
 		if (is_scenario_) {
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kScenarioGame);
@@ -247,8 +248,9 @@ void FullscreenMenuLaunchSPG::update(bool map_was_changed) {
 		pos_[i]->set_enabled(!is_scenario_ && (player.state == PlayerSettings::State::kOpen ||
 		                                       player.state == PlayerSettings::State::kComputer));
 	}
-	for (uint32_t i = nr_players_; i < kMaxPlayers; ++i)
+	for (uint32_t i = nr_players_; i < kMaxPlayers; ++i) {
 		pos_[i]->set_visible(false);
+	}
 
 	// update the player description groups
 	for (uint32_t i = 0; i < kMaxPlayers; ++i) {
@@ -261,8 +263,9 @@ void FullscreenMenuLaunchSPG::update(bool map_was_changed) {
  * Returns whether a map has been selected.
  */
 bool FullscreenMenuLaunchSPG::select_map() {
-	if (!settings_->can_change_map())
+	if (!settings_->can_change_map()) {
 		return false;
+	}
 
 	FullscreenMenuMapSelect msm(settings_, nullptr);
 	FullscreenMenuBase::MenuTarget code = msm.run<FullscreenMenuBase::MenuTarget>();
@@ -332,8 +335,9 @@ void FullscreenMenuLaunchSPG::safe_place_for_host(uint8_t const newplayernumber)
 
 	// Check whether the host would still keep a valid position and return if
 	// yes.
-	if (settings.playernum == UserSettings::none() || settings.playernum < newplayernumber)
+	if (settings.playernum == UserSettings::none() || settings.playernum < newplayernumber) {
 		return;
+	}
 
 	// Check if a still valid place is open.
 	for (uint8_t i = 0; i < newplayernumber; ++i) {

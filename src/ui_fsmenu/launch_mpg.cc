@@ -80,8 +80,9 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 	}
 
 	void think() override {
-		if (ctrl_)
+		if (ctrl_) {
 			ctrl_->think();
+		}
 	}
 
 	void pressedButton(FullscreenMenuBase::MenuTarget i) {
@@ -271,8 +272,9 @@ void FullscreenMenuLaunchMPG::change_map_or_save() {
  * Select a map and send all information to the user interface.
  */
 void FullscreenMenuLaunchMPG::select_map() {
-	if (!settings_->can_change_map())
+	if (!settings_->can_change_map()) {
 		return;
+	}
 
 	FullscreenMenuMapSelect msm(settings_, ctrl_);
 	FullscreenMenuBase::MenuTarget code = msm.run<FullscreenMenuBase::MenuTarget>();
@@ -292,8 +294,9 @@ void FullscreenMenuLaunchMPG::select_map() {
 	// So we should recheck all map predefined values,
 	// which is done in refresh(), if filename_proof_ is different to settings.mapfilename -> dummy
 	// rename
-	if (mapdata.filename == filename_proof_)
+	if (mapdata.filename == filename_proof_) {
 		filename_proof_ = filename_proof_ + "new";
+	}
 
 	settings_->set_map(mapdata.name, mapdata.filename, nr_players_);
 }
@@ -303,8 +306,9 @@ void FullscreenMenuLaunchMPG::select_map() {
  * interface.
  */
 void FullscreenMenuLaunchMPG::select_saved_game() {
-	if (!settings_->can_change_map())
+	if (!settings_->can_change_map()) {
 		return;
+	}
 
 	Widelands::Game game;  // The place all data is saved to.
 	FullscreenMenuLoadGame lsgm(game, settings_);
@@ -352,7 +356,7 @@ void FullscreenMenuLaunchMPG::select_saved_game() {
  * start-button has been pressed
  */
 void FullscreenMenuLaunchMPG::clicked_ok() {
-	if (!g_fs->file_exists(settings_->settings().mapfilename))
+	if (!g_fs->file_exists(settings_->settings().mapfilename)) {
 		throw WLWarning(_("File not found"),
 		                _("Widelands tried to start a game with a file that could not be "
 		                  "found at the given path.\n"
@@ -362,6 +366,7 @@ void FullscreenMenuLaunchMPG::clicked_ok() {
 		                  "from the host to you, but perhaps the transfer was not yet "
 		                  "finished!?!"),
 		                settings_->settings().mapfilename.c_str());
+	}
 	if (settings_->can_launch()) {
 		if (win_condition_dropdown_.has_selection()) {
 			settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
@@ -410,8 +415,9 @@ void FullscreenMenuLaunchMPG::refresh() {
 				load_previous_playerdata();
 			} else {
 				load_map_info();
-				if (settings.scenario)
+				if (settings.scenario) {
 					set_scenario_values();
+				}
 			}
 			// Try to translate the map name.
 			// This will work on every official map as expected
@@ -461,8 +467,9 @@ void FullscreenMenuLaunchMPG::refresh() {
  */
 void FullscreenMenuLaunchMPG::set_scenario_values() {
 	const GameSettings& settings = settings_->settings();
-	if (settings.mapfilename.empty())
+	if (settings.mapfilename.empty()) {
 		throw wexception("settings()->scenario was set to true, but no map is available");
+	}
 	Widelands::Map map;  //  MapLoader needs a place to put its preload data
 	std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(settings.mapfilename));
 	map.set_filename(settings.mapfilename);
@@ -529,8 +536,9 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata() {
 
 		if (player_save_ai[i - 1].empty()) {
 			// Assure that player is open
-			if (settings_->settings().players.at(i - 1).state != PlayerSettings::State::kHuman)
+			if (settings_->settings().players.at(i - 1).state != PlayerSettings::State::kHuman) {
 				settings_->set_player_state(i - 1, PlayerSettings::State::kOpen);
+			}
 		} else {
 			settings_->set_player_state(i - 1, PlayerSettings::State::kComputer);
 			settings_->set_player_ai(i - 1, player_save_ai[i - 1]);
@@ -552,16 +560,17 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata() {
 		infotext += player_save_tribe[i - 1];
 		infotext += "):\n    ";
 		// Check if this is a list of names, or just one name:
-		if (player_save_name[i - 1].compare(0, 1, " "))
+		if (player_save_name[i - 1].compare(0, 1, " ")) {
 			infotext += player_save_name[i - 1];
-		else {
+		} else {
 			std::string temp = player_save_name[i - 1];
 			bool firstrun = true;
 			while (temp.find(' ', 1) < temp.size()) {
-				if (firstrun)
+				if (firstrun) {
 					firstrun = false;
-				else
+				} else {
 					infotext += "\n    ";
+				}
 				uint32_t x = temp.find(' ', 1);
 				infotext += temp.substr(1, x);
 				temp = temp.substr(x + 1, temp.size());
@@ -600,8 +609,9 @@ void FullscreenMenuLaunchMPG::load_map_info() {
 	             static_cast<unsigned int>(nr_players_))
 	               .str() +
 	            "\n";
-	if (settings_->settings().scenario)
+	if (settings_->settings().scenario) {
 		infotext += std::string("• ") + (boost::format(_("Scenario mode selected"))).str() + "\n";
+	}
 	infotext += "\n";
 	infotext += map.get_description();
 	infotext += "\n";

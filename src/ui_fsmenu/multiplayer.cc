@@ -117,9 +117,9 @@ void FullscreenMenuMultiPlayer::internet_login() {
 	InternetGaming::ref().login(nickname_, auth, register_, meta, port);
 
 	// Check whether metaserver send some data
-	if (InternetGaming::ref().logged_in())
+	if (InternetGaming::ref().logged_in()) {
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kMetaserver);
-	else {
+	} else {
 		// something went wrong -> show the error message
 		ChatMessage msg = InternetGaming::ref().get_messages().back();
 		UI::WLMessageBox wmb(this, _("Error!"), msg.msg, UI::WLMessageBox::MBoxType::kOk);
