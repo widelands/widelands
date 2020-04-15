@@ -540,154 +540,324 @@ void Map::set_origin(const Coords& new_origin) {
 	log("Map origin was shifted by (%d, %d)\n", new_origin.x, new_origin.y);
 }
 
-/* Helper function for resize():
- * Calculates the coords of 'c' after resizing the map from the given old size to the given new size
- * at 'split'.
- */
-static Coords transform_coords(const Coords& c,
-                               const Coords& split,
-                               int16_t w_new,
-                               int16_t h_new,
-                               int16_t w_old,
-                               int16_t h_old) {
-	const int16_t delta_w = w_new - w_old;
-	const int16_t delta_h = h_new - h_old;
-	if (c.x < split.x && c.y < split.y) {
-		// Nothing to shift
-		Coords result(c);
-		Map::normalize_coords(result, w_new, h_new);
-		return result;
-	} else if ((w_new < w_old && c.x >= split.x && c.x < split.x - delta_w) ||
-	           (h_new < h_old && c.y >= split.y && c.y < split.y - delta_h)) {
-		// Field removed
-		return Coords::null();
-	}
-	Coords result(c.x, c.y);
-	if (c.x >= split.x) {
-		result.x += delta_w;
-	}
-	if (c.y >= split.y) {
-		result.y += delta_h;
-	}
-	Map::normalize_coords(result, w_new, h_new);
-	return result;
-}
 
-/* Change the size of the (already initialized) map to 'w'×'h' by inserting/deleting fields south
- * and east of 'split'. Returns the data of fields that were deleted during resizing. This function
- * will notify all players of the change in map size, but not of anything else. This is because the
- * editor may want to do some post-resize cleanup first, and this function is intended to be used
- * only by the editor anyway. You should call recalc_whole_map() afterwards to resolve height
- * differences etc.
- */
-std::map<Coords, FieldData>
-Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, const int32_t h) {
-	assert(w > 0);
-	assert(h > 0);
+// TODO(Nordfriese): These three functions have lots of code duplication and other redundancies.
+// Not to mention that they are very very ugly. They could do with some general refactoring.
 
-	std::map<Coords, FieldData> deleted;
+void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, const int32_t h) {
 	if (w == width_ && h == height_) {
-		return deleted;
+		return;
 	}
-
-	const uint32_t field_size = w * h;
-	const uint32_t old_field_size = width_ * height_;
-
-	std::unique_ptr<Field[]> new_fields(new Field[field_size]);
-	clear_array<>(&new_fields, field_size);
-
-	// Take care of starting positions and port spaces
-	for (uint8_t i = get_nrplayers(); i > 0; --i) {
-		if (starting_pos_[i - 1]) {
-			starting_pos_[i - 1] =
-			   transform_coords(starting_pos_[i - 1], split, w, h, width_, height_);
-		}
-	}
-
-	PortSpacesSet new_port_spaces;
-	for (Coords it : port_spaces_) {
-		if (Coords c = transform_coords(it, split, w, h, width_, height_)) {
-			new_port_spaces.insert(c);
-		}
-	}
-	port_spaces_ = new_port_spaces;
 
 	Field::Terrains default_terrains;
 	default_terrains.r = 0;
 	default_terrains.d = 0;
 
-	std::unique_ptr<bool[]> preserved_coords(new bool[old_field_size]);
-	clear_array<bool>(&preserved_coords, old_field_size);
+	std::unique_ptr<Field[]> new_fields(new Field[w * h]);
+	clear_array<>(&new_fields, w * h);
+	std::unique_ptr<bool[]> was_preserved(new bool[width_ * height_]);
+	clear_array<bool>(&was_preserved, width_ * height_);
+	PortSpacesSet new_port_spaces;
+	const int16_t dx = w - width_;
+	const int16_t dy = h - height_;
 
-	const int16_t w_max = w > width_ ? w : width_;
-	const int16_t h_max = h > height_ ? h : height_;
-	for (int16_t x = 0; x < w_max; ++x) {
-		for (int16_t y = 0; y < h_max; ++y) {
-			Coords c_new = Coords(x, y);
-			if (x < width_ && y < height_ && !preserved_coords[get_index(c_new, width_)]) {
-				// Save the data of fields that will be deleted
-				Field& field = operator[](c_new);
-				deleted.insert(std::make_pair(c_new, FieldData(field)));
-				// ...and now we delete stuff that needs removing when the field is destroyed
-				if (BaseImmovable* imm = field.get_immovable()) {
-					imm->remove(egbase);
-				}
-				while (Bob* bob = field.get_first_bob()) {
-					bob->remove(egbase);
-				}
-			}
-			if (x < w && y < h) {
-				if (Coords c_old = transform_coords(c_new, split, width_, height_, w, h)) {
-					bool& entry = preserved_coords[get_index(c_old, width_)];
-					if (!entry) {
-						// Copy existing field
-						entry = true;
-						new_fields[get_index(c_new, w)] = operator[](c_old);
-						continue;
+	// Many slightly different cases. This contains MASSES of code duplication.
+	if (dx < 0) {
+		if (dy < 0) {
+			// NOCOM shrink both
+			log("NOCOM unsupported\n");
+			return;
+			
+			
+			
+			
+			
+			// nocom players&portspaces
+		} else {
+			if (split.x > w) {
+				// shrink horz, increase vert; one single block to pick the new data from
+				const int16_t xoff = split.x - w;
+				for (int16_t x = 0; x < w; ++x) {
+					for (int16_t y = 0; y < h; ++y) {
+						Coords cn(x, y);
+						if (y >= split.y && y < split.y + dy) {
+							Field& field = new_fields[get_index(cn, w)];
+							field.set_height(10);
+							field.set_terrains(default_terrains);
+						} else {
+							Coords co(x + xoff, y < split.y ? y : y - dy);
+							new_fields[get_index(cn, w)] = operator[](co);
+							assert(!was_preserved[get_index(co)]);
+							was_preserved[get_index(co)] = true;
+						}
 					}
 				}
-				// Init new field
-				Field& field = new_fields[get_index(c_new, w)];
-				field.set_height(10);
-				field.set_terrains(default_terrains);
+				for (Coords& c : starting_pos_) {
+					if (c) {
+						if (c.x >= split.x || c.x < xoff) {
+							c = Coords::null();
+						} else {
+							if (c.y >= split.y) {
+								c.y += dy;
+							}
+							c.x -= xoff;
+						}
+					}
+				}
+				for (Coords c : port_spaces_) {
+					if (c.x >= xoff && c.x < split.x) {
+						new_port_spaces.insert(Coords(c.x - xoff, c.y < split.y ? c.y : c.y + dy));
+					}
+				}
+			} else {
+				// shrink horz, increase vert; one left and one right strip
+				for (int16_t x = 0; x < w; ++x) {
+					for (int16_t y = 0; y < h; ++y) {
+						Coords cn(x, y);
+						if (y >= split.y && y < split.y + dy) {
+							Field& field = new_fields[get_index(cn, w)];
+							field.set_height(10);
+							field.set_terrains(default_terrains);
+						} else {
+							Coords co(x < split.x ? x : x - dx, y < split.y ? y : y - dy);
+							new_fields[get_index(cn, w)] = operator[](co);
+							assert(!was_preserved[get_index(co)]);
+							was_preserved[get_index(co)] = true;
+						}
+					}
+				}
+				for (Coords& c : starting_pos_) {
+					if (c) {
+						if (c.x >= split.x && c.x < split.x - dx) {
+							c = Coords::null();
+						} else {
+							if (c.x >= split.x) {
+								c.x += dx;
+							}
+							if (c.y >= split.y) {
+								c.y += dy;
+							}
+						}
+					}
+				}
+				for (Coords c : port_spaces_) {
+					if (c.x < split.x || c.x >= split.x - dx) {
+						new_port_spaces.insert(Coords(c.x < split.x ? c.x : c.x + dx, c.y < split.y ? c.y : c.y + dy));
+					}
+				}
+			}
+		}
+	} else {
+		if (dy < 0) {
+			if (split.y > h) {
+				// shrink vert, increase horz; one single block to pick the new data from
+				const int16_t yoff = split.y - h;
+				for (int16_t x = 0; x < w; ++x) {
+					for (int16_t y = 0; y < h; ++y) {
+						Coords cn(x, y);
+						if (x >= split.x && x < split.x + dx) {
+							Field& field = new_fields[get_index(cn, w)];
+							field.set_height(10);
+							field.set_terrains(default_terrains);
+						} else {
+							Coords co(x < split.x ? x : x - dx, y + yoff);
+							new_fields[get_index(cn, w)] = operator[](co);
+							assert(!was_preserved[get_index(co)]);
+							was_preserved[get_index(co)] = true;
+						}
+					}
+				}
+				for (Coords& c : starting_pos_) {
+					if (c) {
+						if (c.y >= split.y || c.y < yoff) {
+							c = Coords::null();
+						} else {
+							if (c.x >= split.x) {
+								c.x += dx;
+							}
+							c.y -= yoff;
+						}
+					}
+				}
+				for (Coords c : port_spaces_) {
+					if (c.y >= yoff && c.y < split.y) {
+						new_port_spaces.insert(Coords(c.x < split.x ? c.x : c.x + dx, c.y - yoff));
+					}
+				}
+			} else {
+				// shrink vert, increase horz; one lower and one upper strip
+				for (int16_t x = 0; x < w; ++x) {
+					for (int16_t y = 0; y < h; ++y) {
+						Coords cn(x, y);
+						if (x >= split.x && x < split.x + dx) {
+							Field& field = new_fields[get_index(cn, w)];
+							field.set_height(10);
+							field.set_terrains(default_terrains);
+						} else {
+							Coords co(x < split.x ? x : x - dx, y < split.y ? y : y - dy);
+							new_fields[get_index(cn, w)] = operator[](co);
+							assert(!was_preserved[get_index(co)]);
+							was_preserved[get_index(co)] = true;
+						}
+					}
+				}
+				for (Coords& c : starting_pos_) {
+					if (c) {
+						if (c.y >= split.y && c.y < split.y - dy) {
+							c = Coords::null();
+						} else {
+							if (c.x >= split.x) {
+								c.x += dx;
+							}
+							if (c.y >= split.y) {
+								c.y += dy;
+							}
+						}
+					}
+				}
+				for (Coords c : port_spaces_) {
+					if (c.y < split.y || c.y >= split.y - dy) {
+						new_port_spaces.insert(Coords(c.x < split.x ? c.x : c.x + dx, c.y < split.y ? c.y : c.y + dy));
+					}
+				}
+			}
+		} else {
+			// increase both
+			for (int16_t x = 0; x < w; ++x) {
+				for (int16_t y = 0; y < h; ++y) {
+					Coords co;
+					if (x < split.x && y < split.y) {
+						co = Coords(x, y);
+					} else if (x >= split.x + dx && y < split.y) {
+						co = Coords(x - dx, y);
+					} else if (y >= split.y + dy && x < split.x) {
+						co = Coords(x, y - dy);
+					} else if (x >= split.x + dx && y >= split.y + dy) {
+						co = Coords(x - dx, y - dy);
+					} else {
+						co = Coords::null();
+					}
+					Coords cn(x, y);
+					if (co) {
+						new_fields[get_index(cn, w)] = operator[](co);
+						assert(!was_preserved[get_index(co)]);
+						was_preserved[get_index(co)] = true;
+					} else {
+						Field& field = new_fields[get_index(cn, w)];
+						field.set_height(10);
+						field.set_terrains(default_terrains);
+					}
+				}
+			}
+			for (Coords& c : starting_pos_) {
+				if (c && c.x >= split.x) {
+					c.x += dx;
+				}
+				if (c && c.y >= split.y) {
+					c.y += dy;
+				}
+			}
+			for (Coords c : port_spaces_) {
+				new_port_spaces.insert(Coords(c.x < split.x ? c.x : c.x + dx, c.y < split.y ? c.y : c.y + dy));
 			}
 		}
 	}
 
-	// Replace all fields
-	fields_.reset(new Field[field_size]);
-	clear_array<>(&fields_, field_size);
-	for (size_t ind = 0; ind < field_size; ++ind) {
-		fields_[ind] = new_fields[ind];
+	for (int16_t x = 0; x < width_; ++x) {
+		for (int16_t y = 0; y < height_; ++y) {
+			Coords c(x, y);
+			if (!was_preserved[get_index(c)]) {
+				Field& f = operator[](c);
+				if (upcast(Immovable, i, f.get_immovable())) {
+					i->remove(egbase);
+				}
+				while (Bob* b = f.get_first_bob()) {
+					b->remove(egbase);
+				}
+			}
+		}
 	}
-	log("Resized map from (%d, %d) to (%u, %u) at (%d, %d)\n", width_, height_, w, h, split.x,
-	    split.y);
 	width_ = w;
 	height_ = h;
-
-	// Inform immovables and bobs about their new position
-	for (MapIndex idx = 0; idx < field_size; ++idx) {
-		Field& f = operator[](idx);
-		if (upcast(Immovable, immovable, f.get_immovable())) {
-			immovable->position_ = get_fcoords(f);
-		}
-		// Ensuring that all bob iterators are changed correctly is a bit hacky, but the more obvious
-		// solution of doing it like in set_origin() is highly problematic here, or so ASan tells me
-		std::vector<Bob*> bobs;
-		for (Bob* bob = f.get_first_bob(); bob; bob = bob->get_next_bob()) {
-			bobs.push_back(bob);
-		}
-		f.bobs = nullptr;
-		for (Bob* bob : bobs) {
-			bob->position_.field = nullptr;
-			bob->linknext_ = nullptr;
-			bob->linkpprev_ = nullptr;
-			bob->set_position(egbase, get_fcoords(f));
+	fields_.reset(new_fields.release());
+	port_spaces_ = new_port_spaces;
+	recalc_whole_map(egbase);
+	for (int16_t x = 0; x < width_; ++x) {
+		for (int16_t y = 0; y < height_; ++y) {
+			Field& f = operator[](Coords(x, y));
+			if (upcast(Immovable, imm, f.get_immovable())) {
+				imm->position_ = get_fcoords(f);
+			}
+			if (Bob* b = f.get_first_bob()) {
+				b->linkpprev_ = &f.bobs;
+			}
+			for (Bob* b = f.get_first_bob(); b; b = b->get_next_bob()) {
+				b->position_.x = x;
+				b->position_.y = y;
+				b->position_.field = &f;
+			}
 		}
 	}
+	log("Map was resized to %d×%d\n", width_, height_);
+}
 
-	egbase.allocate_player_maps();
-	return deleted;
+ResizeHistory Map::dump_state(const EditorGameBase&) const {
+	ResizeHistory rh;
+	rh.size.w = width_;
+	rh.size.h = height_;
+	rh.port_spaces = port_spaces_;
+	rh.starting_positions = starting_pos_;
+	for (MapIndex i = max_index(); i; --i) {
+		rh.fields.push_back(FieldData(operator[](i - 1)));
+	}
+	return rh;
+}
+
+void Map::set_to(EditorGameBase& egbase, ResizeHistory rh) {
+	std::list<FieldData> backup = rh.fields;
+	for (int16_t x = 0; x < width_; ++x) {
+		for (int16_t y = 0; y < height_; ++y) {
+			Field& f = operator[](Coords(x, y));
+			if (upcast(Immovable, i, f.get_immovable())) {
+				i->remove(egbase);
+			}
+			while (Bob* b = f.get_first_bob()) {
+				b->remove(egbase);
+			}
+		}
+	}
+	width_ = rh.size.w;
+	height_ = rh.size.h;
+	fields_.reset(new Field[width_ * height_]);
+	port_spaces_ = rh.port_spaces;
+	starting_pos_ = rh.starting_positions;
+	// first pass
+	for (MapIndex i = max_index(); i; --i) {
+		const FieldData& fd = rh.fields.front();
+		Field& f = fields_[i - 1];
+		FCoords fc = get_fcoords(f);
+		f.set_terrains(fd.terrains);
+		f.set_height(fd.height);
+		f.resources = fd.resources;
+		f.initial_res_amount = fd.resource_amount;
+		f.res_amount = fd.resource_amount;
+		rh.fields.pop_front();
+	}
+	recalc_whole_map(egbase);
+	// second pass
+	for (MapIndex i = max_index(); i; --i) {
+		const FieldData& fd = backup.front();
+		Field& f = fields_[i - 1];
+		FCoords fc = get_fcoords(f);
+		if (!fd.immovable.empty()) {
+			egbase.create_immovable_with_name(
+			   fc, fd.immovable, Widelands::MapObjectDescr::OwnerType::kWorld, nullptr, nullptr);
+		}
+		for (const std::string& bob : fd.bobs) {
+			egbase.create_critter(fc, bob);
+		}
+		backup.pop_front();
+	}
 }
 
 /*

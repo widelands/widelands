@@ -57,12 +57,6 @@ struct EditorActionArgs {
 		Widelands::DescriptionIndex idx;
 		Widelands::ResourceAmount amount;
 	};
-	struct ResizeHistory {
-		Widelands::Extent old_map_size = Widelands::Extent(0, 0);
-		std::map<Widelands::Coords, Widelands::FieldData> deleted_fields;
-		std::set<Widelands::Coords> port_spaces;
-		std::vector<Widelands::Coords> starting_positions;
-	};
 
 	std::list<ResourceState> original_resource;                         // resources set tool
 	std::list<const Widelands::BobDescr *> old_bob_type, new_bob_type;  // bob change tools
@@ -70,7 +64,7 @@ struct EditorActionArgs {
 	std::list<Widelands::DescriptionIndex> new_immovable_types;         // immovable change tools
 	Widelands::HeightInterval interval;                                 // noise height tool
 	std::list<Widelands::DescriptionIndex> terrain_type, original_terrain_type;  // set terrain tool
-	ResizeHistory resized;                                                       // resize tool
+	Widelands::ResizeHistory resized;                                                       // resize tool
 
 	std::list<EditorToolAction*> draw_actions;  // draw tool
 
