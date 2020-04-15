@@ -23,9 +23,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-12 17:31+0000\n"
-"PO-Revision-Date: 2020-04-14 09:37+0000\n"
-"Last-Translator: Julien Schneider <schneider.julien@gmail.com>\n"
+"POT-Creation-Date: 2020-04-15 14:44+0000\n"
+"PO-Revision-Date: 2020-04-15 14:46+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -459,7 +459,7 @@ msgstr "Ajoutez ou enlevez des espace portuaire"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:307
-#: ../../src/ui_fsmenu/launch_mpg.cc:141
+#: ../../src/ui_fsmenu/launch_mpg.cc:142
 msgid "Players"
 msgstr "Joueurs"
 
@@ -739,7 +739,7 @@ msgid "%1%x %2%"
 msgstr "%1%x %2%"
 
 #: ../../src/editor/tools/info_tool.cc:207
-#: ../../src/ui_fsmenu/launch_mpg.cc:61 ../../src/ui_fsmenu/launch_mpg.cc:149
+#: ../../src/ui_fsmenu/launch_mpg.cc:61 ../../src/ui_fsmenu/launch_mpg.cc:150
 #: ../../src/ui_fsmenu/netsetup_lan.cc:125 ../../src/wui/mapdetails.cc:96
 #: ../../src/wui/minimap.cc:118
 msgid "Map"
@@ -753,7 +753,7 @@ msgstr "Nom : %s"
 
 #: ../../src/editor/tools/info_tool.cc:212
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:204
-#: ../../src/ui_fsmenu/launch_mpg.cc:596
+#: ../../src/ui_fsmenu/launch_mpg.cc:605
 msgid "Size: %1% x %2%"
 msgstr "Taille : %1% x %2%"
 
@@ -895,7 +895,7 @@ msgid "Suggested Teams:"
 msgstr "Équipes suggérées :"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:163
-#: ../../src/ui_fsmenu/launch_mpg.cc:599
+#: ../../src/ui_fsmenu/launch_mpg.cc:608
 #, c-format
 msgid "%u Player"
 msgid_plural "%u Players"
@@ -1051,7 +1051,7 @@ msgstr "Créer un répertoire"
 
 #. * TRANSLATORS: A folder that hasn't been given a name yet
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:163
-#: ../../src/ui_fsmenu/internet_lobby.cc:446
+#: ../../src/ui_fsmenu/internet_lobby.cc:455
 msgid "unnamed"
 msgstr "sansnom"
 
@@ -1141,7 +1141,7 @@ msgstr "Nombre de joueurs"
 #: ../../src/logic/single_player_game_settings_provider.cc:96
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:69
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:101
-#: ../../src/ui_fsmenu/launch_mpg.cc:516
+#: ../../src/ui_fsmenu/launch_mpg.cc:523
 #: ../../src/wui/multiplayersetupgroup.cc:140
 #: ../../src/wui/multiplayersetupgroup.cc:194
 #, c-format
@@ -1701,9 +1701,9 @@ msgstr "l'économie n'a pas besoin d'un %s"
 #. * TRANSLATORS:    %2$s = "Ox"
 #: ../../src/logic/map_objects/tribes/production_program.cc:320
 #: ../../src/logic/map_objects/tribes/production_program.cc:344
-#: ../../src/logic/map_objects/tribes/production_program.cc:809
-#: ../../src/logic/map_objects/tribes/production_program.cc:884
-#: ../../src/logic/map_objects/tribes/production_program.cc:935
+#: ../../src/logic/map_objects/tribes/production_program.cc:788
+#: ../../src/logic/map_objects/tribes/production_program.cc:863
+#: ../../src/logic/map_objects/tribes/production_program.cc:914
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$ix %2$s"
@@ -1746,7 +1746,7 @@ msgstr "l'ouvrier n'a pas besoin d'expérience"
 #. are any issues
 #. * TRANSLATORS: we need to address for your language.
 #: ../../src/logic/map_objects/tribes/production_program.cc:500
-#: ../../src/logic/map_objects/tribes/production_program.cc:833
+#: ../../src/logic/map_objects/tribes/production_program.cc:812
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr "N'a pas commencé à %1$s parce que %2$s"
@@ -1764,15 +1764,11 @@ msgstr "A produit %1$s parce que %2$s"
 msgid "Skipped %1$s because %2$s"
 msgstr "N'a pas produit %1$s parce que %2$s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:710
-msgid "No use for ships on this map!"
-msgstr "Pas besoin des navires sur cette carte !"
-
 #. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
 #. are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
 #. bread is missing'
-#: ../../src/logic/map_objects/tribes/production_program.cc:819
+#: ../../src/logic/map_objects/tribes/production_program.cc:798
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -1782,7 +1778,7 @@ msgstr[1] "%s sont manquants"
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
 #. wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:895
+#: ../../src/logic/map_objects/tribes/production_program.cc:874
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -1792,19 +1788,19 @@ msgstr[1] "%s Produit"
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
 #. workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:946
+#: ../../src/logic/map_objects/tribes/production_program.cc:925
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] "recruté %s"
 msgstr[1] "%s recruté"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1106
+#: ../../src/logic/map_objects/tribes/production_program.cc:1085
 msgid "No soldier to train!"
 msgstr "Aucun soldat à entraîner !"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1115
-#: ../../src/logic/map_objects/tribes/production_program.cc:1173
+#: ../../src/logic/map_objects/tribes/production_program.cc:1094
+#: ../../src/logic/map_objects/tribes/production_program.cc:1152
 msgid "No soldier found for this training level!"
 msgstr "Aucun soldat trouvé pour ce niveau d’entraînement !"
 
@@ -1812,7 +1808,7 @@ msgstr "Aucun soldat trouvé pour ce niveau d’entraînement !"
 #. description of the
 #. * training program, e.g. Completed upgrading soldier evade from level 0 to
 #. level 1
-#: ../../src/logic/map_objects/tribes/production_program.cc:1215
+#: ../../src/logic/map_objects/tribes/production_program.cc:1194
 #, c-format
 msgid "Completed %s"
 msgstr "Complété %s"
@@ -2784,7 +2780,7 @@ msgid "Select Item"
 msgstr "Choisir un objet"
 
 #: ../../src/ui_basic/dropdown.cc:298 ../../src/ui_basic/dropdown.cc:300
-#: ../../src/ui_fsmenu/launch_mpg.cc:443
+#: ../../src/ui_fsmenu/launch_mpg.cc:449
 msgid "Error"
 msgstr "Erreur"
 
@@ -2976,25 +2972,25 @@ msgstr "Version"
 msgid "Game"
 msgstr "Partie"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:381
+#: ../../src/ui_fsmenu/internet_lobby.cc:389
 #, c-format
 msgid "The game %s is already running. Please choose a different name."
 msgstr "La partie %s est déjà en cours. Choisissez un nom différent s'il vous plait."
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:395
+#: ../../src/ui_fsmenu/internet_lobby.cc:403
 msgid ""
 "Widelands was unable to get the IP address of the server in time. There "
 "seems to be a network problem, either on your side or on the side of the "
 "server.\n"
 msgstr "Widelands n'a pas été capable d'obtenir l'adresse IP du serveur à temps. Il semble qu'il y ait un problème réseau, soit de votre coté soit du coté du serveur.\n"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:398
+#: ../../src/ui_fsmenu/internet_lobby.cc:406
 msgid "Connection Timed Out"
 msgstr "La connexion a expiré"
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
-#: ../../src/ui_fsmenu/internet_lobby.cc:438
+#: ../../src/ui_fsmenu/internet_lobby.cc:447
 #, c-format
 msgid "unnamed %u"
 msgstr "inconnu %u"
@@ -3081,55 +3077,55 @@ msgstr "Sélectionnez une sauvegarde"
 msgid "Cancel selection"
 msgstr "Annuler la sélection"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:114 ../../src/ui_fsmenu/launch_spg.cc:226
+#: ../../src/ui_fsmenu/launch_mpg.cc:115 ../../src/ui_fsmenu/launch_spg.cc:227
 msgid "(no map)"
 msgstr "(pas de carte)"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:115
+#: ../../src/ui_fsmenu/launch_mpg.cc:116
 msgid "Change map or saved game"
 msgstr "Changer de carte ou de sauvegarde"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:124
+#: ../../src/ui_fsmenu/launch_mpg.cc:125
 msgid "Show the help window"
 msgstr "Afficher la fenêtre d'aide"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:133
+#: ../../src/ui_fsmenu/launch_mpg.cc:134
 msgid "Clients"
 msgstr "Clients"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:157 ../../src/ui_fsmenu/launch_spg.cc:92
+#: ../../src/ui_fsmenu/launch_mpg.cc:158 ../../src/ui_fsmenu/launch_spg.cc:92
 msgid "Type of game"
 msgstr "Type de partie"
 
 #. * TRANSLATORS: This is a heading for a help window
-#: ../../src/ui_fsmenu/launch_mpg.cc:177 ../../src/ui_fsmenu/launch_mpg.cc:627
+#: ../../src/ui_fsmenu/launch_mpg.cc:178 ../../src/ui_fsmenu/launch_mpg.cc:637
 msgid "Multiplayer Game Setup"
 msgstr "Configuration du jeu multi-joueur"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:189
+#: ../../src/ui_fsmenu/launch_mpg.cc:190
 msgid "Please select a map or saved game."
 msgstr "Choisissez une carte ou une sauvegarde s'il vous plait."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:192
+#: ../../src/ui_fsmenu/launch_mpg.cc:193
 msgid "The host has not yet selected a map or saved game."
 msgstr "L'hôte n'a pas encore sélectionné de carte ou de sauvegarde."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:338
+#: ../../src/ui_fsmenu/launch_mpg.cc:342
 msgid "Saved Game is Directory"
 msgstr "La sauvegarde est un dossier"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:339
+#: ../../src/ui_fsmenu/launch_mpg.cc:343
 msgid ""
 "WARNING:\n"
 "The saved game you selected is a directory. This happens if you set the option ‘nozip’ to true or manually unzipped the saved game.\n"
 "Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
 msgstr "ATTENTION :\nLa sauvegarde que vous avez sélectionné est un répertoire. Cela arrive si vous avez activé l'option 'nozip' ou si vous avez manuellement dézippé la sauvegarde.\nWidelands n'est pas capable de transférer la structure d'un répertoire aux clients, veuillez sélectionner une autre sauvegarde ou Zipper le contenu des répertoires."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:356 ../../src/ui_fsmenu/launch_spg.cc:195
+#: ../../src/ui_fsmenu/launch_mpg.cc:360 ../../src/ui_fsmenu/launch_spg.cc:195
 msgid "File not found"
 msgstr "Fichier introuvable"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:357 ../../src/ui_fsmenu/launch_spg.cc:196
+#: ../../src/ui_fsmenu/launch_mpg.cc:361 ../../src/ui_fsmenu/launch_spg.cc:196
 #, c-format
 msgid ""
 "Widelands tried to start a game with a file that could not be found at the given path.\n"
@@ -3137,30 +3133,30 @@ msgid ""
 "If this happens in a network game, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
 msgstr "Widelands à tenté de démarrer un jeu avec un fichier introuvable dans le chemin donné.\nCe fichier est : %s\nSi cela arrive pendant une partie en réseau: l'hébergeur peut avoir sélectionné un fichier que vous ne possédez pas. Normalement ce type de fichier doit vous être envoyé par l'hébergeur. Peut-être que le transfert de ce fichier n'est pas encore terminé !?!"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:397
+#: ../../src/ui_fsmenu/launch_mpg.cc:402
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
 msgstr "Le fichier sélectionné est introuvable. S'il ne vous est pas transféré automatiquement, veuiller contacter l'hébergeur concernant ce problème."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:445
+#: ../../src/ui_fsmenu/launch_mpg.cc:451
 #, c-format
 msgid "Unable to load the win condition script file '%s'."
 msgstr "Impossible de charger le fichier de script des conditions de victoire '%s'."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:498
+#: ../../src/ui_fsmenu/launch_mpg.cc:505
 msgid "Saved players are:"
 msgstr "Les joueurs sauvegardés sont :"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:518
+#: ../../src/ui_fsmenu/launch_mpg.cc:525
 msgid "closed"
 msgstr "fermé"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:594
+#: ../../src/ui_fsmenu/launch_mpg.cc:603
 msgid "Map details:"
 msgstr "Détails de la carte :"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:604
+#: ../../src/ui_fsmenu/launch_mpg.cc:613
 msgid "Scenario mode selected"
 msgstr "Mode scénario sélectionné"
 
@@ -3280,11 +3276,11 @@ msgstr "Officiel & Unofficiel"
 msgid "Any Teams"
 msgstr "N'importe qu'elle équipe"
 
-#: ../../src/ui_fsmenu/mapselect.cc:435
+#: ../../src/ui_fsmenu/mapselect.cc:436
 msgid "Balanced & Unbalanced"
 msgstr "Équilibré et déséquilibré"
 
-#: ../../src/ui_fsmenu/mapselect.cc:440
+#: ../../src/ui_fsmenu/mapselect.cc:441
 msgctxt "balancing"
 msgid "Unspecified"
 msgstr "non-spécifié"
@@ -3341,25 +3337,25 @@ msgstr "Hôte"
 msgid "State"
 msgstr "État"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:227
+#: ../../src/ui_fsmenu/netsetup_lan.cc:229
 #: ../../src/wui/multiplayersetupgroup.cc:379
 #: ../../src/wui/playerdescrgroup.cc:132
 msgid "Open"
 msgstr "Ouvert"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:230
+#: ../../src/ui_fsmenu/netsetup_lan.cc:232
 #: ../../src/wui/multiplayersetupgroup.cc:374
 #: ../../src/wui/multiplayersetupgroup.cc:375
 msgid "Closed"
 msgstr "Fermé"
 
 #. * TRANSLATORS: The state of a LAN game can be open, closed or unknown
-#: ../../src/ui_fsmenu/netsetup_lan.cc:234
+#: ../../src/ui_fsmenu/netsetup_lan.cc:236
 msgctxt "game_state"
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:282 ../../src/wui/login_box.cc:166
+#: ../../src/ui_fsmenu/netsetup_lan.cc:285 ../../src/wui/login_box.cc:166
 msgid ""
 "Enter a valid nickname. This value may contain only English letters, "
 "numbers, and @ . + - _ characters."
@@ -3475,26 +3471,26 @@ msgid "Off"
 msgstr "Arrêt"
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
-#: ../../src/ui_fsmenu/options.cc:314 ../../src/ui_fsmenu/options.cc:323
+#: ../../src/ui_fsmenu/options.cc:315 ../../src/ui_fsmenu/options.cc:324
 msgid "%1% x %2%"
 msgstr "%1% x %2%"
 
-#: ../../src/ui_fsmenu/options.cc:425
+#: ../../src/ui_fsmenu/options.cc:426
 msgid "Try system language"
 msgstr "Essayer la langue du système"
 
 #. * TRANSLATORS: %s = language name
-#: ../../src/ui_fsmenu/options.cc:524
+#: ../../src/ui_fsmenu/options.cc:525
 #, c-format
 msgid "The translation into %s is complete."
 msgstr "La traduction est complète à %s."
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
-#: ../../src/ui_fsmenu/options.cc:527
+#: ../../src/ui_fsmenu/options.cc:528
 msgid "The translation into %1% is %2%%% complete."
 msgstr "La traduction en%1% est %2%%% complète."
 
-#: ../../src/ui_fsmenu/options.cc:541
+#: ../../src/ui_fsmenu/options.cc:542
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
 msgstr "Si vous voulez nous aider dans les traductions, merci de visiter %s"

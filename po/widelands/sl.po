@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-12 17:31+0000\n"
-"PO-Revision-Date: 2020-04-12 17:33+0000\n"
+"POT-Creation-Date: 2020-04-15 14:44+0000\n"
+"PO-Revision-Date: 2020-04-15 14:46+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Slovenian (http://www.transifex.com/widelands/widelands/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -446,7 +446,7 @@ msgstr "Dodaj ali odstrani prostor v pristanišču"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:307
-#: ../../src/ui_fsmenu/launch_mpg.cc:141
+#: ../../src/ui_fsmenu/launch_mpg.cc:142
 msgid "Players"
 msgstr "Igralci"
 
@@ -726,7 +726,7 @@ msgid "%1%x %2%"
 msgstr "%1%x %2%"
 
 #: ../../src/editor/tools/info_tool.cc:207
-#: ../../src/ui_fsmenu/launch_mpg.cc:61 ../../src/ui_fsmenu/launch_mpg.cc:149
+#: ../../src/ui_fsmenu/launch_mpg.cc:61 ../../src/ui_fsmenu/launch_mpg.cc:150
 #: ../../src/ui_fsmenu/netsetup_lan.cc:125 ../../src/wui/mapdetails.cc:96
 #: ../../src/wui/minimap.cc:118
 msgid "Map"
@@ -740,7 +740,7 @@ msgstr "Ime: %s"
 
 #: ../../src/editor/tools/info_tool.cc:212
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:204
-#: ../../src/ui_fsmenu/launch_mpg.cc:596
+#: ../../src/ui_fsmenu/launch_mpg.cc:605
 msgid "Size: %1% x %2%"
 msgstr "Velikost: %1% x %2%"
 
@@ -882,7 +882,7 @@ msgid "Suggested Teams:"
 msgstr "Predlagane ekipe:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:163
-#: ../../src/ui_fsmenu/launch_mpg.cc:599
+#: ../../src/ui_fsmenu/launch_mpg.cc:608
 #, c-format
 msgid "%u Player"
 msgid_plural "%u Players"
@@ -1040,7 +1040,7 @@ msgstr "Ustvari mapo"
 
 #. * TRANSLATORS: A folder that hasn't been given a name yet
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:163
-#: ../../src/ui_fsmenu/internet_lobby.cc:446
+#: ../../src/ui_fsmenu/internet_lobby.cc:455
 msgid "unnamed"
 msgstr "neimenovano"
 
@@ -1130,7 +1130,7 @@ msgstr "Število igralcev"
 #: ../../src/logic/single_player_game_settings_provider.cc:96
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:69
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:101
-#: ../../src/ui_fsmenu/launch_mpg.cc:516
+#: ../../src/ui_fsmenu/launch_mpg.cc:523
 #: ../../src/wui/multiplayersetupgroup.cc:140
 #: ../../src/wui/multiplayersetupgroup.cc:194
 #, c-format
@@ -1698,9 +1698,9 @@ msgstr "gospodarstvo ne potrebuje delavca '%s'"
 #. * TRANSLATORS:    %2$s = "Ox"
 #: ../../src/logic/map_objects/tribes/production_program.cc:320
 #: ../../src/logic/map_objects/tribes/production_program.cc:344
-#: ../../src/logic/map_objects/tribes/production_program.cc:809
-#: ../../src/logic/map_objects/tribes/production_program.cc:884
-#: ../../src/logic/map_objects/tribes/production_program.cc:935
+#: ../../src/logic/map_objects/tribes/production_program.cc:788
+#: ../../src/logic/map_objects/tribes/production_program.cc:863
+#: ../../src/logic/map_objects/tribes/production_program.cc:914
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$ix %2$s"
@@ -1743,7 +1743,7 @@ msgstr "delavci ne potrebujejo izkušenj"
 #. are any issues
 #. * TRANSLATORS: we need to address for your language.
 #: ../../src/logic/map_objects/tribes/production_program.cc:500
-#: ../../src/logic/map_objects/tribes/production_program.cc:833
+#: ../../src/logic/map_objects/tribes/production_program.cc:812
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr "Se ni začelo %1$s, ker %2$s"
@@ -1761,15 +1761,11 @@ msgstr "Končano %1$s, ker %2$s"
 msgid "Skipped %1$s because %2$s"
 msgstr "Se je preskočilo %1$s, ker %2$s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:710
-msgid "No use for ships on this map!"
-msgstr "Ladje na tem zemljevidu ne koristijo!"
-
 #. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
 #. are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
 #. bread is missing'
-#: ../../src/logic/map_objects/tribes/production_program.cc:819
+#: ../../src/logic/map_objects/tribes/production_program.cc:798
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -1781,7 +1777,7 @@ msgstr[3] "%s manjka"
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
 #. wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:895
+#: ../../src/logic/map_objects/tribes/production_program.cc:874
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -1793,7 +1789,7 @@ msgstr[3] "Ustvarjeno %s"
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
 #. workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:946
+#: ../../src/logic/map_objects/tribes/production_program.cc:925
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
@@ -1802,12 +1798,12 @@ msgstr[1] "Najeta %s"
 msgstr[2] "Najeti %s"
 msgstr[3] "Najetih %s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1106
+#: ../../src/logic/map_objects/tribes/production_program.cc:1085
 msgid "No soldier to train!"
 msgstr "Za urjenje ni vojakov!"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1115
-#: ../../src/logic/map_objects/tribes/production_program.cc:1173
+#: ../../src/logic/map_objects/tribes/production_program.cc:1094
+#: ../../src/logic/map_objects/tribes/production_program.cc:1152
 msgid "No soldier found for this training level!"
 msgstr "Za urjenje na tem nivoju ni najdenih vojakov!"
 
@@ -1815,7 +1811,7 @@ msgstr "Za urjenje na tem nivoju ni najdenih vojakov!"
 #. description of the
 #. * training program, e.g. Completed upgrading soldier evade from level 0 to
 #. level 1
-#: ../../src/logic/map_objects/tribes/production_program.cc:1215
+#: ../../src/logic/map_objects/tribes/production_program.cc:1194
 #, c-format
 msgid "Completed %s"
 msgstr "Končano %s"
@@ -2791,7 +2787,7 @@ msgid "Select Item"
 msgstr "Izberite postavko"
 
 #: ../../src/ui_basic/dropdown.cc:298 ../../src/ui_basic/dropdown.cc:300
-#: ../../src/ui_fsmenu/launch_mpg.cc:443
+#: ../../src/ui_fsmenu/launch_mpg.cc:449
 msgid "Error"
 msgstr "Napaka"
 
@@ -2989,25 +2985,25 @@ msgstr "Različica"
 msgid "Game"
 msgstr "Igra"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:381
+#: ../../src/ui_fsmenu/internet_lobby.cc:389
 #, c-format
 msgid "The game %s is already running. Please choose a different name."
 msgstr "Igra %s že teče. Prosimo, izberite drugo ime."
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:395
+#: ../../src/ui_fsmenu/internet_lobby.cc:403
 msgid ""
 "Widelands was unable to get the IP address of the server in time. There "
 "seems to be a network problem, either on your side or on the side of the "
 "server.\n"
 msgstr "Widelands ni uspel do časa pridobiti strežnikovega naslova IP. Izgleda, da je napaka z omrežjem na vaši ali strežnikovi strani.\n"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:398
+#: ../../src/ui_fsmenu/internet_lobby.cc:406
 msgid "Connection Timed Out"
 msgstr "Čas za povezavo je potekel"
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
-#: ../../src/ui_fsmenu/internet_lobby.cc:438
+#: ../../src/ui_fsmenu/internet_lobby.cc:447
 #, c-format
 msgid "unnamed %u"
 msgstr "neimenovana %u"
@@ -3094,55 +3090,55 @@ msgstr "Izberite shranjeno igro"
 msgid "Cancel selection"
 msgstr "Prekliči izbiro"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:114 ../../src/ui_fsmenu/launch_spg.cc:226
+#: ../../src/ui_fsmenu/launch_mpg.cc:115 ../../src/ui_fsmenu/launch_spg.cc:227
 msgid "(no map)"
 msgstr "(ni zemljevida)"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:115
+#: ../../src/ui_fsmenu/launch_mpg.cc:116
 msgid "Change map or saved game"
 msgstr "Spremeni zemljevid ali shranjeno igro"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:124
+#: ../../src/ui_fsmenu/launch_mpg.cc:125
 msgid "Show the help window"
 msgstr "Prikaži okno s pomočjo"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:133
+#: ../../src/ui_fsmenu/launch_mpg.cc:134
 msgid "Clients"
 msgstr "Odjemalci"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:157 ../../src/ui_fsmenu/launch_spg.cc:92
+#: ../../src/ui_fsmenu/launch_mpg.cc:158 ../../src/ui_fsmenu/launch_spg.cc:92
 msgid "Type of game"
 msgstr "Tip igre"
 
 #. * TRANSLATORS: This is a heading for a help window
-#: ../../src/ui_fsmenu/launch_mpg.cc:177 ../../src/ui_fsmenu/launch_mpg.cc:627
+#: ../../src/ui_fsmenu/launch_mpg.cc:178 ../../src/ui_fsmenu/launch_mpg.cc:637
 msgid "Multiplayer Game Setup"
 msgstr "Nastavitve večigralske igre"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:189
+#: ../../src/ui_fsmenu/launch_mpg.cc:190
 msgid "Please select a map or saved game."
 msgstr "Izberite zemljevid ali shranjeno igro."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:192
+#: ../../src/ui_fsmenu/launch_mpg.cc:193
 msgid "The host has not yet selected a map or saved game."
 msgstr "Gostitelj še ni izbral zemljevida ali shranjene igre."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:338
+#: ../../src/ui_fsmenu/launch_mpg.cc:342
 msgid "Saved Game is Directory"
 msgstr "Shranjena igra je mapa"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:339
+#: ../../src/ui_fsmenu/launch_mpg.cc:343
 msgid ""
 "WARNING:\n"
 "The saved game you selected is a directory. This happens if you set the option ‘nozip’ to true or manually unzipped the saved game.\n"
 "Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
 msgstr "POZOR:\nIzbrana shranjena igra je mapa. To se zgodi, če vklopite nastavitev 'nozip' ali ročno razširite shranjeno igro.\nWidelands ne more prenesti direktorijske strukture ostalim odjemalcem, zato izberite drugo igro ali stisnite vsebino mape v datoteko."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:356 ../../src/ui_fsmenu/launch_spg.cc:195
+#: ../../src/ui_fsmenu/launch_mpg.cc:360 ../../src/ui_fsmenu/launch_spg.cc:195
 msgid "File not found"
 msgstr "Datoteke ni mogoče najti"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:357 ../../src/ui_fsmenu/launch_spg.cc:196
+#: ../../src/ui_fsmenu/launch_mpg.cc:361 ../../src/ui_fsmenu/launch_spg.cc:196
 #, c-format
 msgid ""
 "Widelands tried to start a game with a file that could not be found at the given path.\n"
@@ -3150,30 +3146,30 @@ msgid ""
 "If this happens in a network game, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
 msgstr "Widelands je poskusil začeti igro z datoteko, ki ne obstaja.\nIme datoteke je: %s\nČe se to zgodi pri mrežni igri, je morda gostitelj izbral datoteko, ki je vi nimate. Običajno gostitelj prenese datoteko k vam. Ali je prenos uspešno končan!?!"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:397
+#: ../../src/ui_fsmenu/launch_mpg.cc:402
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
 msgstr "Izbrana datoteka ni najdena. Če ni samodejno prenešena k vam, pišite gostitelju."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:445
+#: ../../src/ui_fsmenu/launch_mpg.cc:451
 #, c-format
 msgid "Unable to load the win condition script file '%s'."
 msgstr "Skripte s pogoji za zmago ni bilo mogoče naložiti '%s'."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:498
+#: ../../src/ui_fsmenu/launch_mpg.cc:505
 msgid "Saved players are:"
 msgstr "Shranjeni igralci so:"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:518
+#: ../../src/ui_fsmenu/launch_mpg.cc:525
 msgid "closed"
 msgstr "zaprto"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:594
+#: ../../src/ui_fsmenu/launch_mpg.cc:603
 msgid "Map details:"
 msgstr "Podrobnosti zemljevida:"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:604
+#: ../../src/ui_fsmenu/launch_mpg.cc:613
 msgid "Scenario mode selected"
 msgstr "Način scenarija"
 
@@ -3293,11 +3289,11 @@ msgstr "Uradni & Neuradni"
 msgid "Any Teams"
 msgstr "Katera koli ekipa"
 
-#: ../../src/ui_fsmenu/mapselect.cc:435
+#: ../../src/ui_fsmenu/mapselect.cc:436
 msgid "Balanced & Unbalanced"
 msgstr "Uravnoteženo & Neuravnoteženo"
 
-#: ../../src/ui_fsmenu/mapselect.cc:440
+#: ../../src/ui_fsmenu/mapselect.cc:441
 msgctxt "balancing"
 msgid "Unspecified"
 msgstr "Nedoločeno"
@@ -3354,25 +3350,25 @@ msgstr "Gostitelj"
 msgid "State"
 msgstr "Stanje"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:227
+#: ../../src/ui_fsmenu/netsetup_lan.cc:229
 #: ../../src/wui/multiplayersetupgroup.cc:379
 #: ../../src/wui/playerdescrgroup.cc:132
 msgid "Open"
 msgstr "Odprto"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:230
+#: ../../src/ui_fsmenu/netsetup_lan.cc:232
 #: ../../src/wui/multiplayersetupgroup.cc:374
 #: ../../src/wui/multiplayersetupgroup.cc:375
 msgid "Closed"
 msgstr "Zaprto"
 
 #. * TRANSLATORS: The state of a LAN game can be open, closed or unknown
-#: ../../src/ui_fsmenu/netsetup_lan.cc:234
+#: ../../src/ui_fsmenu/netsetup_lan.cc:236
 msgctxt "game_state"
 msgid "Unknown"
 msgstr "Neznano"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:282 ../../src/wui/login_box.cc:166
+#: ../../src/ui_fsmenu/netsetup_lan.cc:285 ../../src/wui/login_box.cc:166
 msgid ""
 "Enter a valid nickname. This value may contain only English letters, "
 "numbers, and @ . + - _ characters."
@@ -3488,26 +3484,26 @@ msgid "Off"
 msgstr "Izključeno"
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
-#: ../../src/ui_fsmenu/options.cc:314 ../../src/ui_fsmenu/options.cc:323
+#: ../../src/ui_fsmenu/options.cc:315 ../../src/ui_fsmenu/options.cc:324
 msgid "%1% x %2%"
 msgstr "%1% x %2%"
 
-#: ../../src/ui_fsmenu/options.cc:425
+#: ../../src/ui_fsmenu/options.cc:426
 msgid "Try system language"
 msgstr "Poskusi sistemski jezik"
 
 #. * TRANSLATORS: %s = language name
-#: ../../src/ui_fsmenu/options.cc:524
+#: ../../src/ui_fsmenu/options.cc:525
 #, c-format
 msgid "The translation into %s is complete."
 msgstr "Prevod v jezik %s je končan."
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
-#: ../../src/ui_fsmenu/options.cc:527
+#: ../../src/ui_fsmenu/options.cc:528
 msgid "The translation into %1% is %2%%% complete."
 msgstr "Prevod v jezik %1% je %2% %% končan."
 
-#: ../../src/ui_fsmenu/options.cc:541
+#: ../../src/ui_fsmenu/options.cc:542
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
 msgstr "Če želite pomagati s prevodom, obiščite %s"
