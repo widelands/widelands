@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -101,8 +101,8 @@ Button::Button(Panel* const parent,
 		   4 * kButtonImageMargin;
 		if (w == 0) {
 			// Automatically resize for text width too.
-			new_width = std::max(text_width(richtext_escape(title_), style_->enabled().font()),
-			                     text_width(richtext_escape(title_), style_->disabled().font())) +
+			new_width = std::max(text_width(title_, style_->enabled().font()),
+			                     text_width(title_, style_->disabled().font())) +
 			            8 * kButtonImageMargin;
 		}
 		set_desired_size(new_width, new_height);
@@ -134,8 +134,9 @@ Button::~Button() {
 void Button::set_pic(const Image* pic) {
 	title_.clear();
 
-	if (title_image_ == pic)
+	if (title_image_ == pic) {
 		return;
+	}
 
 	title_image_ = pic;
 }
@@ -144,8 +145,9 @@ void Button::set_pic(const Image* pic) {
  * Set a text title for the Button
  */
 void Button::set_title(const std::string& title) {
-	if (title_ == title)
+	if (title_ == title) {
 		return;
+	}
 
 	title_image_ = nullptr;
 	title_ = title;
@@ -156,13 +158,14 @@ void Button::set_title(const std::string& title) {
  * Buttons are enabled by default
  */
 void Button::set_enabled(bool const on) {
-	if (enabled_ == on)
+	if (enabled_ == on) {
 		return;
+	}
 
 	// disabled buttons should look different...
-	if (on)
+	if (on) {
 		enabled_ = true;
-	else {
+	} else {
 		if (pressed_) {
 			pressed_ = false;
 			set_thinks(false);
@@ -191,8 +194,9 @@ void Button::draw(RenderTarget& dst) {
 	// Draw the background
 	draw_background(dst, style_to_use.background());
 
-	if (is_flat && highlighted_)
+	if (is_flat && highlighted_) {
 		dst.brighten_rect(Recti(0, 0, get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
+	}
 
 	//  If we've got a picture, draw it centered
 	if (title_image_) {
@@ -296,8 +300,9 @@ void Button::think() {
 		uint32_t const time = SDL_GetTicks();
 		if (time_nextact_ <= time) {
 			time_nextact_ += MOUSE_BUTTON_AUTOREPEAT_TICK;  //  schedule next tick
-			if (time_nextact_ < time)
+			if (time_nextact_ < time) {
 				time_nextact_ = time;
+			}
 			play_click();
 			sigclicked();
 			//  The button may not exist at this point (for example if the button
@@ -315,21 +320,24 @@ void Button::handle_mousein(bool const inside) {
 
 	highlighted_ = inside && enabled_;
 
-	if (oldhl == highlighted_)
+	if (oldhl == highlighted_) {
 		return;
+	}
 
-	if (highlighted_)
+	if (highlighted_) {
 		sigmousein();
-	else
+	} else {
 		sigmouseout();
+	}
 }
 
 /**
  * Update the pressed status of the button
  */
 bool Button::handle_mousepress(uint8_t const btn, int32_t, int32_t) {
-	if (btn != SDL_BUTTON_LEFT)
+	if (btn != SDL_BUTTON_LEFT) {
 		return false;
+	}
 
 	if (enabled_) {
 		grab_mouse(true);
@@ -343,8 +351,9 @@ bool Button::handle_mousepress(uint8_t const btn, int32_t, int32_t) {
 }
 
 bool Button::handle_mouserelease(uint8_t const btn, int32_t, int32_t) {
-	if (btn != SDL_BUTTON_LEFT)
+	if (btn != SDL_BUTTON_LEFT) {
 		return false;
+	}
 
 	if (pressed_) {
 		pressed_ = false;

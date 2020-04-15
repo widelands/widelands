@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2019 by the Widelands Development Team
+ * Copyright (C) 2012-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,8 +27,9 @@ static std::map<std::string, std::string> igmessages;
 
 /// Returns a translated message fitting to the message code \arg code
 const std::string& InternetGamingMessages::get_message(const std::string& code) {
-	if (igmessages.find(code) != igmessages.end())
+	if (igmessages.find(code) != igmessages.end()) {
 		return igmessages[code];
+	}
 	// if no message for code was found, just return code
 	return code;
 }

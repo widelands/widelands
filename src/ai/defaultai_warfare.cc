@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2019 by the Widelands Development Team
+ * Copyright (C) 2009-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,10 +43,12 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	int32_t i = 0;
 	for (MilitarySiteObserver mso : militarysites) {
 		++i;
-		if (i % 4 == 0)
+		if (i % 4 == 0) {
 			continue;
-		if (i > 20)
+		}
+		if (i > 20) {
 			continue;
+		}
 
 		MilitarySite* ms = mso.site;
 		uint32_t const vision = ms->descr().vision_range();

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -84,7 +84,8 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 			break;
 		// The building is no more. Next think() will call die().
 		case Widelands::NoteBuilding::Action::kStartWarp:
-			igbase()->add_wanted_building_window(building_position_, get_pos(), is_minimal());
+			igbase()->add_wanted_building_window(
+			   building_position_, get_pos(), is_minimal(), is_pinned());
 			break;
 		default:
 			break;

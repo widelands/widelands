@@ -1,7 +1,3 @@
-include "scripting/messages.lua"
-include "map:scripting/helper_functions.lua"
-include "scripting/field_animations.lua"
-
 -- Some objectives need to be waited for in separate threads
 local obj_find_monastery_done = false
 local julia_conquered = false
@@ -481,10 +477,10 @@ function wheat_chain()
       place_building_in_region(p1, "empire_brewery", {field_brewery})
       place_building_in_region(p1, "empire_mill", {field_mill})
       place_building_in_region(p1, "empire_temple_of_vesta", {field_warehouse}, {wares = {water = 30, flour = 30, beer = 40,}})
-      connected_road(p1, field_warehouse.immovable.flag, "l, tl", true)
-      connected_road(p1, field_mill.immovable.flag, "tr, r", true)
-      connected_road(p1, field_mill.immovable.flag, "l, tl, tr", true)
-      connected_road(p1, field_mill.immovable.flag, "br, r", true)
+      connected_road("normal", p1, field_warehouse.immovable.flag, "l, tl", true)
+      connected_road("normal", p1, field_mill.immovable.flag, "tr, r", true)
+      connected_road("normal", p1, field_mill.immovable.flag, "l, tl, tr", true)
+      connected_road("normal", p1, field_mill.immovable.flag, "br, r", true)
 
       campaign_message_box(amalea_12)
       campaign_message_box(saledus_3)

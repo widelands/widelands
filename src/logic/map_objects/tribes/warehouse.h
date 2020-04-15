@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -199,6 +199,9 @@ public:
 		return portdock_;
 	}
 
+	// Returns the first matching not completely filled waresqueue of the expedition if this is a
+	// port.
+	// Will throw an exception otherwise or if all queues of this type are full.
 	const BuildingSettings* create_building_settings() const override;
 
 	// Returns the waresqueue of the expedition if this is a port.

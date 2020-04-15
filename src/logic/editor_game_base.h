@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -212,6 +212,8 @@ public:
 	// Returns the mutable tribes. Prefer tribes() whenever possible.
 	Tribes* mutable_tribes();
 
+	void create_tempfile_and_save_mapdata(FileSystem::Type type);
+
 private:
 	/// Common function for create_critter and create_ship.
 	Bob& create_bob(Coords, const BobDescr&, Player* owner = nullptr);
@@ -281,7 +283,6 @@ private:
 	/// a temporary file (in a special dir) is created for such data.
 	std::unique_ptr<FileSystem> tmp_fs_;
 	void delete_tempfile();
-	void create_tempfile_and_save_mapdata(FileSystem::Type type);
 
 	DISALLOW_COPY_AND_ASSIGN(EditorGameBase);
 };

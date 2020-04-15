@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2019 by the Widelands Development Team
+ * Copyright (C) 2009-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -254,10 +254,11 @@ void SpinBox::change_value(int32_t const value) {
  */
 void SpinBox::set_value(int32_t const value) {
 	sbi_->value = value;
-	if (sbi_->value > sbi_->max)
+	if (sbi_->value > sbi_->max) {
 		sbi_->value = sbi_->max;
-	else if (sbi_->value < sbi_->min)
+	} else if (sbi_->value < sbi_->min) {
 		sbi_->value = sbi_->min;
+	}
 	update();
 }
 
@@ -274,10 +275,11 @@ void SpinBox::set_value_list(const std::vector<int32_t>& values) {
 void SpinBox::set_interval(int32_t const min, int32_t const max) {
 	sbi_->max = max;
 	sbi_->min = min;
-	if (sbi_->value > max)
+	if (sbi_->value > max) {
 		sbi_->value = max;
-	else if (sbi_->value < min)
+	} else if (sbi_->value < min) {
 		sbi_->value = min;
+	}
 	update();
 }
 

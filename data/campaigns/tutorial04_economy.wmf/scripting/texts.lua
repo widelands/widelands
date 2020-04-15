@@ -2,12 +2,6 @@
 --                      Texts for the tutorial mission
 -- =======================================================================
 
--- =========================
--- Some formating functions
--- =========================
-
-include "scripting/richtext_scenarios.lua"
-
 -- =============
 -- Texts below
 -- =============
@@ -150,7 +144,7 @@ obj_switch_stock_tab = {
    body = objective_text(_"Examine the first two tabs in the stock window",
       p(_[[Have a look at the first two tabs in the stock window. They show all the wares and workers you have.]]) ..
       li_image("images/wui/stats/menu_tab_wares_warehouse.png",
-         _[[When you have seen enough, switch to the third tab (‘Wares in warehouses’).]])
+         _[[When you have seen enough, switch back to the third tab (‘Wares in warehouses’).]])
    )
 }
 inventory2 = {
@@ -158,7 +152,7 @@ inventory2 = {
    title = _"Stock",
    body = (
       li_image("images/wui/buildings/menu_tab_wares.png",
-         _[[The stock window has four tabs. The first (and currently selected) one shows you all your current wares, including those on roads, at flags and inside buildings waiting for processing.]]) ..
+         _[[The stock window has four tabs. The first one shows you all your current wares, including those on roads, at flags and inside buildings waiting for processing.]]) ..
       p(_[[Looking at the rations, there are currently only five in total, probably on their way to somewhere. Five rations are not much for such a big economy.]]) ..
       li_image("images/wui/buildings/menu_tab_workers.png",
          _[[The second tab shows you all your workers, again those on roads and in buildings summed up.]])
@@ -183,7 +177,7 @@ reopen_stock_menu = {
    title = _"You closed the stock window!",
    body = (
       li_image("images/wui/menus/statistics_stock.png",
-         _[[You have closed the stock window, but I have not yet finished with my explanation. Would you please reopen it and choose the third tab?]])
+         _[[You have closed the stock window, but I have not yet finished with my explanation. Would you please reopen it and choose the first tab?]])
    ),
    show_instantly = true,
    w = 300,
@@ -192,6 +186,28 @@ reopen_stock_menu = {
 
 obj_reopen_stock_menu = {
    name = "open_stock_menu_again",
+   title = _"Open the stock window again",
+   number = 1,
+   body = objective_text(_"Open the stock window again",
+      li_image("images/wui/menus/statistics_stock.png",
+         _[[You closed the stock window before I finished telling you everything about it. If you already know everything, please feel free to leave this tutorial at any time.]]) ..
+      -- TRANSLATORS: "it" refers to the "Stock" window.
+      li(_[[Otherwise, please reopen it and have a look at all its tabs.]])
+   )
+}
+
+reopen_stock_menu2 = {
+   title = _"You closed the stock window!",
+   body = (
+      li_image("images/wui/menus/statistics_stock.png",
+         _[[You have closed the stock window, but I have not yet finished with my explanation. Would you please reopen it and choose the third tab?]])
+   ),
+   show_instantly = true,
+   w = 300,
+   h = 250
+}
+obj_reopen_stock_menu2 = {
+   name = "open_stock_menu_again2",
    title = _"Open the stock window again",
    number = 1,
    body = objective_text(_"Open the stock window again",

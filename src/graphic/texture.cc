@@ -42,8 +42,9 @@ namespace {
 const SDL_PixelFormat& rgba_format() {
 	static SDL_PixelFormat format;
 	static bool init = false;
-	if (init)
+	if (init) {
 		return format;
+	}
 
 	init = true;
 	memset(&format, 0, sizeof(format));

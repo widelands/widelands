@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2019 by the Widelands Development Team
+ * Copyright (C) 2018-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -235,8 +235,6 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 	// Add global paramaters for this animation to Lua
 	std::unique_ptr<LuaTree::Element> lua_object(new LuaTree::Element());
 	LuaTree::Object* lua_animation = lua_object->add_object(animation_name);
-	lua_animation->add_raw("directory", "path.dirname(__file__)");
-	lua_animation->add_string("basename", animation_name);
 
 	// We only write FPS if the animation is not a build animation and does not use the default FPS.
 	if (animation_name != "build") {

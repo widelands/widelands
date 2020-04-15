@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,10 +42,13 @@ constexpr uint32_t kStatisticsSampleTime = 30000;
 // See forester_cache_
 constexpr int16_t kInvalidForesterEntry = -1;
 
+constexpr uint32_t kScenarioDifficultyNotSet = 0;
+
 struct Flag;
 struct Path;
 struct PlayerImmovable;
 enum class IslandExploreDirection;
+class PortDock;
 enum class ScoutingDirection;
 enum class SoldierPreference : uint8_t;
 struct Ship;
@@ -251,6 +254,7 @@ public:
 	void send_player_start_stop_building(Building&);
 	void send_player_militarysite_set_soldier_preference(Building&, SoldierPreference preference);
 	void send_player_start_or_cancel_expedition(Building&);
+	void send_player_expedition_config(PortDock&, WareWorker, DescriptionIndex, bool);
 
 	void send_player_enhance_building(Building&, DescriptionIndex);
 	void send_player_evict_worker(Worker&);
@@ -275,6 +279,15 @@ public:
 
 	SaveHandler& save_handler() {
 		return savehandler_;
+	}
+
+	uint32_t get_scenario_difficulty() const {
+		return scenario_difficulty_;
+	}
+	void set_scenario_difficulty(uint32_t d) {
+		assert(scenario_difficulty_ == kScenarioDifficultyNotSet);
+		assert(d != kScenarioDifficultyNotSet);
+		scenario_difficulty_ = d;
 	}
 
 	// Statistics
@@ -385,6 +398,8 @@ private:
 	SaveHandler savehandler_;
 
 	std::unique_ptr<ReplayWriter> replaywriter_;
+
+	uint32_t scenario_difficulty_;
 
 	GeneralStatsVector general_stats_;
 	int next_trade_agreement_id_ = 1;

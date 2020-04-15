@@ -41,7 +41,7 @@ end
 
 function start_building_farm()
    p1:place_building("barbarians_farm", map:get_field(18, 4), true, true)
-   connected_road(p1, map:get_field(18,5).immovable, "l,l|tl,tr|", true)
+   connected_road("normal", p1, map:get_field(18,5).immovable, "l,l|tl,tr|", true)
 end
 
 function farm()

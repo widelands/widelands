@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -155,15 +155,17 @@ void WLMessageBox::clicked_ok() {
 		cancel_button_->set_enabled(false);
 	}
 	ok();
-	if (is_modal())
+	if (is_modal()) {
 		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
+	}
 }
 
 void WLMessageBox::clicked_back() {
 	ok_button_->set_enabled(false);
 	cancel_button_->set_enabled(false);
 	cancel();
-	if (is_modal())
+	if (is_modal()) {
 		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
+	}
 }
 }  // namespace UI

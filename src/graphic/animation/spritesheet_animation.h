@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 by the Widelands Development Team
+ * Copyright (C) 2019-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,7 +33,9 @@
 class SpriteSheetAnimation : public Animation {
 public:
 	~SpriteSheetAnimation() override = default;
-	explicit SpriteSheetAnimation(const LuaTable& table, const std::string& basename);
+	explicit SpriteSheetAnimation(const LuaTable& table,
+	                              const std::string& basename,
+	                              const std::string& animation_directory);
 
 	const Image* representative_image(const RGBColor* clr) const override;
 

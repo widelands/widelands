@@ -72,6 +72,18 @@ tips = {
       seconds = 3
    },
    {
+      text = _"Use the ‘,’ (comma) and ‘.’ (period) keys to quickly jump between recently visited locations.",
+      seconds = 3
+   },
+   {
+      text = _"Speed up or slow down the game with %1%. Use %2% for rapid change, %3% will adjust speed smoothly.":bformat(pgettext("hotkey", "Page Up/Page Down"), pgettext("hotkey", "Ctrl+(Page Up/Page Down)"), pgettext("hotkey", "Shift+(Page Up/Page Down)")),
+      seconds = 7
+   },
+   {
+      text = _"Move map view using %1%. %2% will move the view faster, %3% moves slowly.":bformat(pgettext("hotkey", "Arrow keys"), pgettext("hotkey", "Ctrl+Arrow keys"), pgettext("hotkey", "Shift+Arrow keys")),
+      seconds = 4
+   },
+   {
       text = _"When a building is destroyed, its workers will start looking for a nearby flag from which they can move by road to a connected warehouse. If there are no such flags in the vicinity, they will keep wandering around and eventually die.",
       seconds = 7
    },

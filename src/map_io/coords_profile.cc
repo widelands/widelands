@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,9 +36,10 @@ Coords parse_coords(const std::string& name, const char* const coords, const Ext
 	//  not set starting positions in the editor. So check whether x, y < -1 so
 	//  the editor can load incomplete maps. For games the starting positions
 	//  will be checked in player initalisation anyway.
-	if (((x < 0 || extent.w <= x || y < 0 || extent.h <= y) && (x != -1 || y != -1)) || *endp)
+	if (((x < 0 || extent.w <= x || y < 0 || extent.h <= y) && (x != -1 || y != -1)) || *endp) {
 		throw wexception("%s: \"%s\" is not a Coords on a map with size (%u, %u)", name.c_str(),
 		                 coords, extent.w, extent.h);
+	}
 	return Coords(x, y);
 }
 

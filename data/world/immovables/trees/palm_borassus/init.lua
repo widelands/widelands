@@ -101,7 +101,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 2000000",
          "transform=deadtree5 25",
-         "seed=palm_borassus_desert_sapling",
+         "seed=palm_borassus_desert_sapling 160",
       },
       fall = {
          "remove=",

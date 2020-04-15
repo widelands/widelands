@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,6 +29,7 @@
 #include "graphic/default_resolution.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
+#include "graphic/mouse_cursor.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
@@ -125,6 +126,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
      fullscreen_(&box_interface_left_, Vector2i::zero(), _("Fullscreen"), "", 0),
      inputgrab_(&box_interface_left_, Vector2i::zero(), _("Grab Input"), "", 0),
+     sdl_cursor_(&box_interface_left_, Vector2i::zero(), _("Use system mouse cursor"), "", 0),
      sb_maxfps_(&box_interface_left_,
                 0,
                 0,
@@ -249,6 +251,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	box_interface_left_.add(&resolution_dropdown_);
 	box_interface_left_.add(&fullscreen_);
 	box_interface_left_.add(&inputgrab_);
+	box_interface_left_.add(&sdl_cursor_);
 	box_interface_left_.add(&sb_maxfps_);
 
 	// Windows
@@ -293,8 +296,9 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 		    (SDL_BITSPERPIXEL(mode.format) == 32 || SDL_BITSPERPIXEL(mode.format) == 24)) {
 			ScreenResolution this_res = {
 			   mode.w, mode.h, static_cast<int32_t>(SDL_BITSPERPIXEL(mode.format))};
-			if (this_res.depth == 24)
+			if (this_res.depth == 24) {
 				this_res.depth = 32;
+			}
 			if (resolutions_.empty() || this_res.xres != resolutions_.rbegin()->xres ||
 			    this_res.yres != resolutions_.rbegin()->yres) {
 				resolutions_.push_back(this_res);
@@ -322,6 +326,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
 	fullscreen_.set_state(opt.fullscreen);
 	inputgrab_.set_state(opt.inputgrab);
+	sdl_cursor_.set_state(opt.sdl_cursor);
 
 	// Windows options
 	snap_win_overlap_only_.set_state(opt.snap_win_overlap_only);
@@ -383,6 +388,7 @@ void FullscreenMenuOptions::layout() {
 
 	fullscreen_.set_desired_size(column_width, fullscreen_.get_h());
 	inputgrab_.set_desired_size(column_width, inputgrab_.get_h());
+	sdl_cursor_.set_desired_size(column_width, sdl_cursor_.get_h());
 	sb_maxfps_.set_unit_width(column_width / 2);
 	sb_maxfps_.set_desired_size(column_width, sb_maxfps_.get_h());
 
@@ -564,6 +570,7 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	}
 	os_.fullscreen = fullscreen_.get_state();
 	os_.inputgrab = inputgrab_.get_state();
+	os_.sdl_cursor = sdl_cursor_.get_state();
 	os_.maxfps = sb_maxfps_.get_value();
 
 	// Windows options
@@ -603,8 +610,9 @@ OptionsCtrl::OptionsCtrl(Section& s)
 
 void OptionsCtrl::handle_menu() {
 	FullscreenMenuBase::MenuTarget i = opt_dialog_->run<FullscreenMenuBase::MenuTarget>();
-	if (i != FullscreenMenuBase::MenuTarget::kBack)
+	if (i != FullscreenMenuBase::MenuTarget::kBack) {
 		save_options();
+	}
 	if (i == FullscreenMenuBase::MenuTarget::kApplyOptions) {
 		uint32_t active_tab = opt_dialog_->get_values().active_tab;
 		g_gr->change_resolution(opt_dialog_->get_values().xres, opt_dialog_->get_values().yres);
@@ -622,6 +630,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.fullscreen = opt_section_.get_bool("fullscreen", false);
 	opt.inputgrab = opt_section_.get_bool("inputgrab", false);
 	opt.maxfps = opt_section_.get_int("maxfps", 25);
+	opt.sdl_cursor = opt_section_.get_bool("sdl_cursor", true);
 
 	// Windows options
 	opt.snap_win_overlap_only = opt_section_.get_bool("snap_windows_only_when_overlapping", false);
@@ -660,6 +669,7 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_bool("fullscreen", opt.fullscreen);
 	opt_section_.set_bool("inputgrab", opt.inputgrab);
 	opt_section_.set_int("maxfps", opt.maxfps);
+	opt_section_.set_bool("sdl_cursor", opt.sdl_cursor);
 
 	// Windows options
 	opt_section_.set_bool("snap_windows_only_when_overlapping", opt.snap_win_overlap_only);
@@ -685,6 +695,7 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_string("language", opt.language);
 
 	WLApplication::get()->set_input_grab(opt.inputgrab);
+	g_mouse_cursor->set_use_sdl(opt_dialog_->get_values().sdl_cursor);
 	i18n::set_locale(opt.language);
 	UI::g_fh->reinitialize_fontset(i18n::get_locale());
 

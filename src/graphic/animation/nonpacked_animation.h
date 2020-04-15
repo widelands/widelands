@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,7 +34,9 @@
 class NonPackedAnimation : public Animation {
 public:
 	~NonPackedAnimation() override = default;
-	explicit NonPackedAnimation(const LuaTable& table, const std::string& basename);
+	explicit NonPackedAnimation(const LuaTable& table,
+	                            const std::string& basename,
+	                            const std::string& animation_directory);
 
 	const Image* representative_image(const RGBColor* clr) const override;
 

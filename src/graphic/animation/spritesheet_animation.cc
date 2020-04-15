@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 by the Widelands Development Team
+ * Copyright (C) 2019-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -145,15 +145,16 @@ SpriteSheetAnimation IMPLEMENTATION
 ==============================================================================
 */
 
-SpriteSheetAnimation::SpriteSheetAnimation(const LuaTable& table, const std::string& basename)
+SpriteSheetAnimation::SpriteSheetAnimation(const LuaTable& table,
+                                           const std::string& basename,
+                                           const std::string& animation_directory)
    : Animation(table) {
 	try {
 		// Get image files
-		if (basename.empty() || !table.has_key("directory")) {
-			throw Widelands::GameDataError(
-			   "Animation did not define both a basename and a directory for its sprite sheet file");
-		}
-		const std::string directory = table.get_string("directory");
+		// TODO(GunChleoc): When all animations have been converted, require that animation_directory
+		// is not empty.
+		const std::string directory =
+		   animation_directory.empty() ? table.get_string("directory") : animation_directory;
 
 		// Frames, rows and columns
 		nr_frames_ = table.get_int("frames");

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -539,9 +539,6 @@ struct FindNodeSpace {
 
 		return true;
 	}
-
-private:
-	BaseImmovable* ignoreimmovable;
 };
 
 bool Worker::run_findspace(Game& game, State& state, const Action& action) {
@@ -3240,7 +3237,7 @@ const Bob::Task* Worker::Loader::get_task(const std::string& name) {
 	return Bob::Loader::get_task(name);
 }
 
-const BobProgramBase* Worker::Loader::get_program(const std::string& name) {
+const MapObjectProgram* Worker::Loader::get_program(const std::string& name) {
 	Worker& worker = get<Worker>();
 	return worker.descr().get_program(name);
 }

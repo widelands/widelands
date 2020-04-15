@@ -91,6 +91,12 @@ wl_library(wui_common_gamedetails
     load_or_save_game.h
     savegametable.cc
     savegametable.h
+    savegamedeleter.cc
+    savegamedeleter.h
+    savegamedata.cc
+    savegamedata.h
+    savegameloader.cc
+    savegameloader.h
   DEPENDS
     base_i18n
     base_log
@@ -105,7 +111,6 @@ wl_library(wui_common_gamedetails
     logic_constants
     logic_filesystem_constants
     logic_game_controller
-    logic_game_settings
     ui_basic
 )
 
@@ -306,6 +311,7 @@ wl_library(wui
     graphic_fonthandler
     graphic_game_renderer
     graphic_minimap_renderer
+    graphic_mouse_cursor
     graphic_playercolor
     graphic_surface
     graphic_text_layout
@@ -324,6 +330,7 @@ wl_library(wui
     logic_objectives
     logic_tribe_basic_info
     logic_widelands_geometry
+    map_io_map_loader
     network
     note_sound
     notifications

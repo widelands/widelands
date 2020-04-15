@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,6 +19,9 @@
 
 #ifndef WL_WUI_PLAYERDESCRGROUP_H
 #define WL_WUI_PLAYERDESCRGROUP_H
+
+#include <map>
+#include <memory>
 
 #include "ui_basic/panel.h"
 
@@ -46,10 +49,11 @@ private:
 	void enable_player(bool);
 	void toggle_playertype();
 	void toggle_playertribe();
-	void toggle_playerinit();
 	void toggle_playerteam();
 
-	PlayerDescriptionGroupImpl* d;
+	void update_playerinit();
+
+	std::unique_ptr<PlayerDescriptionGroupImpl> d;
 	std::map<std::string, std::string> tribenames_;
 };
 

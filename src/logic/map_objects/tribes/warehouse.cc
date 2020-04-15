@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1361,8 +1361,7 @@ void Warehouse::check_remove_stock(Game& game) {
 InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type) {
 	assert(portdock_ != nullptr);
 	assert(portdock_->expedition_bootstrap() != nullptr);
-
-	return portdock_->expedition_bootstrap()->inputqueue(index, type);
+	return portdock_->expedition_bootstrap()->first_empty_inputqueue(index, type);
 }
 
 const BuildingSettings* Warehouse::create_building_settings() const {

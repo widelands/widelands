@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,8 +39,9 @@ void MapHeightsPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, MapObj
 		if (packet_version == kCurrentPacketVersion) {
 			const Map& map = egbase.map();
 			MapIndex const max_index = map.max_index();
-			for (MapIndex i = 0; i < max_index; ++i)
+			for (MapIndex i = 0; i < max_index; ++i) {
 				map[i].set_height(fr.unsigned_8());
+			}
 		} else {
 			throw UnhandledVersionError("MapHeightsPacket", packet_version, kCurrentPacketVersion);
 		}
@@ -61,8 +62,9 @@ void MapHeightsPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSa
 
 	const Map& map = egbase.map();
 	MapIndex const max_index = map.max_index();
-	for (MapIndex i = 0; i < max_index; ++i)
+	for (MapIndex i = 0; i < max_index; ++i) {
 		fw.unsigned_8(map[i].get_height());
+	}
 
 	fw.write(fs, "binary/heights");
 }

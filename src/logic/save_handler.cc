@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -201,6 +201,7 @@ void SaveHandler::initialize(uint32_t realtime) {
 	autosave_interval_in_ms_ = get_config_int("autosave", kDefaultAutosaveInterval * 60) * 1000;
 
 	next_save_realtime_ = realtime + autosave_interval_in_ms_;
+	last_save_realtime_ = realtime;
 
 	number_of_rolls_ = get_config_int("rolling_autosave", 5);
 
@@ -247,6 +248,7 @@ bool SaveHandler::save_game(Widelands::Game& game,
 		},
 	   complete_filename, fs_type_);
 	gsh.save();
+	last_save_realtime_ = SDL_GetTicks();
 
 	// Ignore it if only the temporary backup wasn't deleted
 	// but save was successfull otherwise

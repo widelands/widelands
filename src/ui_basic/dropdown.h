@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2019 by the Widelands Development Team
+ * Copyright (C) 2016-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -142,6 +142,10 @@ public:
 	/// Expand display button to make enough room for each entry's text. Call this before adding any
 	/// entries.
 	void set_autoexpand_display_button();
+
+	void notify_list_deleted() {
+		list_ = nullptr;
+	}
 
 protected:
 	/// Add an element to the list

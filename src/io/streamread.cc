@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2019 by the Widelands Development Team
+ * Copyright (C) 2007-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,9 +47,10 @@ StreamRead::DataError::DataError(char const* const fmt, ...) {
 void StreamRead::data_complete(void* const read_data, const size_t size) {
 	size_t read = data(read_data, size);
 
-	if (read != size)
+	if (read != size) {
 		throw data_error(
 		   "Stream ended unexpectedly (%" PRIuS " bytes read, %" PRIuS " expected)", read, size);
+	}
 }
 
 int8_t StreamRead::signed_8() {
@@ -104,8 +105,9 @@ std::string StreamRead::string() {
 	for (;;) {
 		data_complete(&ch, 1);
 
-		if (ch == 0)
+		if (ch == 0) {
 			break;
+		}
 
 		x += ch;
 	}
