@@ -524,7 +524,7 @@ public:
 	// Visible for testing.
 	void set_size(uint32_t w, uint32_t h);
 
-	// Change the map size
+	// Change the map size. Must not be used outside the editor.
 	void resize(EditorGameBase&, Coords, int32_t w, int32_t h);
 	ResizeHistory dump_state(const EditorGameBase&) const;
 	void set_to(EditorGameBase&, ResizeHistory);
