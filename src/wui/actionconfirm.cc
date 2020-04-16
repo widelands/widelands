@@ -247,7 +247,7 @@ DismantleConfirm::DismantleConfirm(InteractivePlayer& parent, Widelands::Buildin
                    should_allow_preserving_wares(building.descr()) ? _("Preserve wares") : "") {
 	if (checkbox_) {
 		checkbox_->set_tooltip(_("Any wares left in the building will be dropped out by the builder, "
-			                     "increasing the dismantling time"));
+		                         "increasing the dismantling time"));
 		checkbox_->set_state(true);
 	}
 }
@@ -308,7 +308,7 @@ EnhanceConfirm::EnhanceConfirm(InteractivePlayer& parent,
      still_under_construction_(still_under_construction) {
 	if (checkbox_) {
 		checkbox_->set_tooltip(_("Any wares left in the building will be dropped out by the builder, "
-			                     "increasing the enhancing time"));
+		                         "increasing the enhancing time"));
 		checkbox_->set_state(true);
 	}
 }
@@ -338,7 +338,8 @@ void EnhanceConfirm::ok() {
 	if (still_under_construction_) {
 		upcast(Widelands::ConstructionSite, cs, object_.get(game));
 		if (cs && iaplayer().can_act(cs->owner().player_number())) {
-			game.send_player_enhance_building(*cs, Widelands::INVALID_INDEX, checkbox_ && checkbox_->get_state());
+			game.send_player_enhance_building(
+			   *cs, Widelands::INVALID_INDEX, checkbox_ && checkbox_->get_state());
 		}
 	} else {
 		upcast(Widelands::Building, building, object_.get(game));

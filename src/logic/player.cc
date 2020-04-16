@@ -859,7 +859,7 @@ void Player::enhance_or_dismantle(Building* building,
 				it->second += add;
 			}
 		};
-		
+
 		if (upcast(Warehouse, wh, building)) {
 			workers = wh->get_incorporated_workers();
 			if (keep_wares) {
