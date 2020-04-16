@@ -214,7 +214,7 @@ obj_expedition_iron = {
    name = "build_iron_mine",
    title = _"Iron Mine",
    number = 1,
-   body = objective_text("Build an irone mine on the island",
+   body = objective_text("Build an iron mine on the island",
       p(_[[Our economy lacks resources.]]) ..
       li_arrow(_[[Start mining iron ore in mountains on the island.]])
    )
