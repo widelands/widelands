@@ -57,7 +57,7 @@ const ShipFleetDescr& ShipFleet::descr() const {
  * instance, then add themselves \em before calling the \ref init function.
  * The Fleet takes care of merging with existing fleets, if any.
  */
-ShipFleet::ShipFleet(Player* player) : MapObject(&g_ship_fleet_descr), act_pending_(false) {
+ShipFleet::ShipFleet(Player* player) : MapObject(&g_ship_fleet_descr), act_pending_(false), schedule_(*this) {
 	owner_ = player;
 }
 
@@ -201,6 +201,13 @@ bool ShipFleet::merge(EditorGameBase& egbase, ShipFleet* other) {
 		return true;
 	}
 
+	// TODO(Nordfriese): Currently fleets merge only directly after creation, so the fleet being
+	// merged has either no ports or no ships, and therefore should not yet have scheduled anything.
+	// Scripts could also enforce fleet merges by changing the terrain so that two previously
+	// separate oceans, both with a functional system of ships and ports, are now connected.
+	// (Would this even be detected? Not sure.) The schedule side of such a merge is not supported.
+	assert(other->get_schedule().empty());
+
 	while (!other->ships_.empty()) {
 		Ship* ship = other->ships_.back();
 		other->ships_.pop_back();
@@ -221,8 +228,9 @@ bool ShipFleet::merge(EditorGameBase& egbase, ShipFleet* other) {
 		ports_[idx]->set_fleet(this);
 	}
 
-	if (!ships_.empty() && !ports_.empty())
+	if (!ships_.empty() && !ports_.empty()) {
 		check_merge_economy();
+	}
 
 	other->ports_.clear();
 	other->portpaths_.clear();
@@ -381,7 +389,7 @@ void ShipFleet::add_neighbours(PortDock& pd, std::vector<RoutingNodeNeighbour>& 
 	}
 }
 
-void ShipFleet::add_ship(Ship* ship) {
+void ShipFleet::add_ship(EditorGameBase& egbase, Ship* ship) {
 	ships_.push_back(ship);
 	ship->set_fleet(this);
 	if (upcast(Game, game, &get_owner()->egbase())) {
@@ -392,11 +400,13 @@ void ShipFleet::add_ship(Ship* ship) {
 			ship->set_economy(*game, ports_[0]->get_economy(wwWARE), wwWARE);
 			ship->set_economy(*game, ports_[0]->get_economy(wwWORKER), wwWORKER);
 		}
+		schedule_.ship_added(*game, *ship);
 	}
 
 	if (ships_.size() == 1) {
 		check_merge_economy();
 	}
+	update(egbase);
 }
 
 void ShipFleet::remove_ship(EditorGameBase& egbase, Ship* ship) {
@@ -409,6 +419,7 @@ void ShipFleet::remove_ship(EditorGameBase& egbase, Ship* ship) {
 	if (upcast(Game, game, &egbase)) {
 		ship->set_economy(*game, nullptr, wwWARE);
 		ship->set_economy(*game, nullptr, wwWORKER);
+		schedule_.ship_removed(*game, ship);
 	}
 
 	if (ship->get_current_destination(egbase)) {
@@ -543,7 +554,7 @@ void ShipFleet::connect_port(EditorGameBase& egbase, uint32_t idx) {
 	}
 }
 
-void ShipFleet::add_port(EditorGameBase& /* egbase */, PortDock* port) {
+void ShipFleet::add_port(EditorGameBase& egbase, PortDock* port) {
 	ports_.push_back(port);
 	port->set_fleet(this);
 	if (ports_.size() == 1) {
@@ -559,6 +570,10 @@ void ShipFleet::add_port(EditorGameBase& /* egbase */, PortDock* port) {
 	}
 
 	portpaths_.resize((ports_.size() * (ports_.size() - 1)) / 2);
+	if (upcast(Game, g, &egbase)) {
+		schedule_.port_added(*g, *port);
+	}
+	update(egbase);
 }
 
 void ShipFleet::remove_port(EditorGameBase& egbase, PortDock* port) {
@@ -594,10 +609,11 @@ void ShipFleet::remove_port(EditorGameBase& egbase, PortDock* port) {
 
 	if (empty()) {
 		remove(egbase);
-	} else if (is_a(Game, &egbase)) {
+	} else if (upcast(Game, g, &egbase)) {
 		// Some ship perhaps lose their destination now, so new a destination must be appointed (if
 		// any)
 		molog("Port removed from fleet, triggering fleet update\n");
+		schedule_.port_removed(*g, *port);
 		update(egbase);
 	}
 }
@@ -714,7 +730,7 @@ bool ShipFleet::penalize_route(Game& game, PortDock& p, const Ship& s, uint32_t*
  *
  * @note Do not call this directly; instead, trigger it via @ref update
  */
-void ShipFleet::act(Game& game, uint32_t /* data */) {
+void ShipFleet::act(Game& game, uint32_t) {
 	act_pending_ = false;
 
 	if (empty()) {
@@ -734,108 +750,8 @@ void ShipFleet::act(Game& game, uint32_t /* data */) {
 
 	molog("ShipFleet::act\n");
 
-	// For each waiting port, try to find idle ships and send to it the closest one.
-	uint16_t waiting_ports = ports_.size();
-	for (PortDock* p : ports_) {
-		if (p->get_need_ship() == 0) {
-			--waiting_ports;
-			continue;
-		}
-
-		Ship* closest_ship = nullptr;
-		uint32_t shortest_dist = kRouteNotCalculated;
-		bool waiting = true;
-
-		for (Ship* s : ships_) {
-			bool fallback = false;
-			if (s->get_current_destination(game)) {
-				if (s->has_destination(game, *p)) {
-					waiting = false;
-					--waiting_ports;
-					break;
-				}
-				fallback = true;  // The ship already has a destination
-			}
-			if (s->get_ship_state() != Ship::ShipStates::kTransport) {
-				continue;  // Ship is not available, e.g. in expedition
-			}
-
-			// Here we get distance ship->port
-			uint32_t route_length = kRouteNotCalculated;
-
-			// Get precalculated distance for ships available at ports
-			{
-				PortDock* cur_port = get_dock(game, s->get_position());
-				if (cur_port) {          // Ship is at a port
-					if (cur_port == p) {  // Same port
-						route_length = 0;
-					} else {  // Different port
-						Path precalculated_path;
-						if (get_path(*cur_port, *p, precalculated_path)) {
-							route_length = precalculated_path.get_nsteps();
-						}
-					}
-				}
-			}
-
-			// Get distance for ships available but not at a port (should not happen frequently)
-			if (route_length == kRouteNotCalculated) {
-				route_length = s->calculate_sea_route(game, *p);
-			}
-			if (fallback) {
-				if (!penalize_route(game, *p, *s, &route_length)) {
-					continue;
-				}
-			}
-
-			if (route_length < shortest_dist) {
-				shortest_dist = route_length;
-				closest_ship = s;
-			}
-		}
-
-		if (waiting && closest_ship) {
-			--waiting_ports;
-			closest_ship->push_destination(game, *p);
-			closest_ship->send_signal(game, "wakeup");
-		}
-	}
-
-	if (waiting_ports > 0) {
-		molog("... there are %u ports requesting ship(s) we cannot satisfy yet\n", waiting_ports);
-		schedule_act(game, kFleetInterval);  // retry next time
-		act_pending_ = true;
-	}
-
-	// Deal with edge-case of losing destination before reaching it
-	for (Ship* s : ships_) {
-		if (s->get_current_destination(game)) {
-			continue;  // The ship has a destination
-		}
-		if (s->get_ship_state() != Ship::ShipStates::kTransport) {
-			continue;  // Ship is not available, e.g. in expedition
-		}
-		if (s->items_.empty()) {
-			continue;  // No pending wares/workers
-		}
-
-		// Send ship to the closest port
-		PortDock* closest_port = nullptr;
-		uint32_t shortest_dist = kRouteNotCalculated;
-
-		for (PortDock* p : ports_) {
-			uint32_t route_length = s->calculate_sea_route(game, *p);
-			if (route_length < shortest_dist) {
-				shortest_dist = route_length;
-				closest_port = p;
-			}
-		}
-
-		if (closest_port) {
-			s->push_destination(game, *closest_port);
-			s->send_signal(game, "wakeup");
-		}
-	}
+	// All the work is done by the schedule
+	schedule_.update(game, *this);
 }
 
 /**
