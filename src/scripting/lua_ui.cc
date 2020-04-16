@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -796,7 +796,7 @@ int LuaMapView::scroll_to_map_pixel(lua_State* L) {
 }
 
 /* RST
-   .. method:: scroll_to_map_pixel(field)
+   .. method:: scroll_to_field(field)
 
       Starts an animation to center the view on top of the 'field'. Use
       `is_animating` to check if the animation is still going on.

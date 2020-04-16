@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -97,9 +97,9 @@ bool FullscreenHelpWindow::handle_key(bool down, SDL_Keysym code) {
 }
 
 void FullscreenHelpWindow::clicked_ok() {
-	if (is_modal())
+	if (is_modal()) {
 		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
-	else {
+	} else {
 		// Do not call die() here - could lead to broken pointers.
 		// The window should get deleted with the parent anyways - best use a unique_ptr there.
 		set_visible(false);
