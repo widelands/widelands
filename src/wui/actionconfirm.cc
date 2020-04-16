@@ -244,7 +244,7 @@ DismantleConfirm::DismantleConfirm(InteractivePlayer& parent, Widelands::Buildin
                    _("Dismantle building?"),
                    _("Do you really want to dismantle this building?"),
                    building,
-                   should_allow_preserving_wares(building.descr() ? _("Preserve wares") : "")) {
+                   should_allow_preserving_wares(building.descr()) ? _("Preserve wares") : "") {
 	if (checkbox_) {
 		checkbox_->set_tooltip(_("Any wares left in the building will be dropped out by the builder, "
 			                     "increasing the dismantling time"));
@@ -303,7 +303,7 @@ EnhanceConfirm::EnhanceConfirm(InteractivePlayer& parent,
               .str() :
            _("Do you really want to enhance this building?"),
         building,
-        should_allow_preserving_wares(building.descr() ? _("Preserve wares"))),
+        should_allow_preserving_wares(building.descr()) ? _("Preserve wares") : ""),
      id_(id),
      still_under_construction_(still_under_construction) {
 	if (checkbox_) {
