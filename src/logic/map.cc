@@ -562,9 +562,7 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 			if (split.x > w) {
 				if (split.y > h) {
 					// shrink both, one single block
-					lambda_co = [xoff, yoff](int x, int y) {
-						return Coords(x + xoff, y + yoff);
-					};
+					lambda_co = [xoff, yoff](int x, int y) { return Coords(x + xoff, y + yoff); };
 					lambda_cn = [split, xoff, yoff](Coords c) {
 						if (c.x >= xoff && c.x < split.x && c.y >= yoff && c.y < split.y) {
 							return Coords(c.x - xoff, c.y - yoff);
@@ -573,9 +571,8 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 					};
 				} else {
 					// shrink both, single block horz and upper/lower strip
-					lambda_co = [split, dy, xoff](int x, int y) {
-						return Coords(x + xoff, y < split.y ? y : y - dy);
-					};
+					lambda_co = [split, dy, xoff](
+					   int x, int y) { return Coords(x + xoff, y < split.y ? y : y - dy); };
 					lambda_cn = [split, xoff, dy](Coords c) {
 						if (c.x >= xoff && c.x < split.x && (c.y < split.y || c.y >= split.y - dy)) {
 							return Coords(c.x - xoff, c.y < split.y ? c.y : c.y + dy);
@@ -586,9 +583,8 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 			} else {
 				if (split.y > h) {
 					// shrink both, single block vert and left/right strip
-					lambda_co = [split, yoff, dx](int x, int y) {
-						return Coords(x < split.x ? x : x - dx, y + yoff);
-					};
+					lambda_co = [split, yoff, dx](
+					   int x, int y) { return Coords(x < split.x ? x : x - dx, y + yoff); };
 					lambda_cn = [split, yoff, dx](Coords c) {
 						if (c.y >= yoff && c.y < split.y && (c.x < split.x || c.x >= split.x - dx)) {
 							return Coords(c.x < split.x ? c.x : c.x + dx, c.y - yoff);
