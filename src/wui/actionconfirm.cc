@@ -221,6 +221,19 @@ void BulldozeConfirm::ok() {
 	die();
 }
 
+static bool should_allow_preserving_wares(const Widelands::BuildingDescr& d) {
+	switch (d.type()) {
+	case Widelands::MapObjectType::WAREHOUSE:
+	case Widelands::MapObjectType::MARKET:
+		return true;
+	case Widelands::MapObjectType::PRODUCTIONSITE:
+	case Widelands::MapObjectType::TRAININGSITE:
+		return !dynamic_cast<const Widelands::ProductionSiteDescr&>(d).input_wares().empty();
+	default:
+		return false;
+	}
+}
+
 /*
 ===============
 Create the panels for dismantle confirmation.
@@ -231,11 +244,12 @@ DismantleConfirm::DismantleConfirm(InteractivePlayer& parent, Widelands::Buildin
                    _("Dismantle building?"),
                    _("Do you really want to dismantle this building?"),
                    building,
-                   _("Preserve wares")) {
-	assert(checkbox_);
-	checkbox_->set_tooltip(_("Any wares left in the building will be dropped out by the builder, "
-	                         "increasing the dismantling time"));
-	checkbox_->set_state(true);
+                   should_allow_preserving_wares(building.descr() ? _("Preserve wares") : "")) {
+	if (checkbox_) {
+		checkbox_->set_tooltip(_("Any wares left in the building will be dropped out by the builder, "
+			                     "increasing the dismantling time"));
+		checkbox_->set_state(true);
+	}
 }
 
 /*
@@ -263,7 +277,7 @@ void DismantleConfirm::ok() {
 
 	if (building && iaplayer().can_act(building->owner().player_number()) &&
 	    (building->get_playercaps() & Widelands::Building::PCap_Dismantle)) {
-		game.send_player_dismantle(*todismantle, checkbox_->get_state());
+		game.send_player_dismantle(*todismantle, checkbox_ && checkbox_->get_state());
 		iaplayer().hide_workarea(building->get_position(), false);
 	}
 
@@ -289,13 +303,14 @@ EnhanceConfirm::EnhanceConfirm(InteractivePlayer& parent,
               .str() :
            _("Do you really want to enhance this building?"),
         building,
-        _("Preserve wares")),
+        should_allow_preserving_wares(building.descr() ? _("Preserve wares"))),
      id_(id),
      still_under_construction_(still_under_construction) {
-	assert(checkbox_);
-	checkbox_->set_tooltip(_("Any wares left in the building will be dropped out by the builder, "
-	                         "increasing the enhancing time"));
-	checkbox_->set_state(true);
+	if (checkbox_) {
+		checkbox_->set_tooltip(_("Any wares left in the building will be dropped out by the builder, "
+			                     "increasing the enhancing time"));
+		checkbox_->set_state(true);
+	}
 }
 
 /*
@@ -323,13 +338,13 @@ void EnhanceConfirm::ok() {
 	if (still_under_construction_) {
 		upcast(Widelands::ConstructionSite, cs, object_.get(game));
 		if (cs && iaplayer().can_act(cs->owner().player_number())) {
-			game.send_player_enhance_building(*cs, Widelands::INVALID_INDEX, checkbox_->get_state());
+			game.send_player_enhance_building(*cs, Widelands::INVALID_INDEX, checkbox_ && checkbox_->get_state());
 		}
 	} else {
 		upcast(Widelands::Building, building, object_.get(game));
 		if (building && iaplayer().can_act(building->owner().player_number()) &&
 		    (building->get_playercaps() & Widelands::Building::PCap_Enhancable)) {
-			game.send_player_enhance_building(*building, id_, checkbox_->get_state());
+			game.send_player_enhance_building(*building, id_, checkbox_ && checkbox_->get_state());
 		}
 	}
 

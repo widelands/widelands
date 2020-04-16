@@ -848,22 +848,32 @@ void Player::enhance_or_dismantle(Building* building,
 		//  the building.
 		std::vector<Worker*> workers;
 		std::map<DescriptionIndex, Quantity> wares;
-		upcast(Warehouse, wh, building);
-		if (wh) {
+		auto add_to_wares = [&wares](DescriptionIndex di, Quantity add) {
+			if (add == 0) {
+				return;
+			}
+			auto it = wares.find(di);
+			if (it == wares.end()) {
+				wares[di] = add;
+			} else {
+				it->second += add;
+			}
+		};
+		
+		if (upcast(Warehouse, wh, building)) {
 			workers = wh->get_incorporated_workers();
 			if (keep_wares) {
 				for (DescriptionIndex di = wh->get_wares().get_nrwareids(); di; --di) {
 					wares[di - 1] = wh->get_wares().stock(di - 1);
 				}
-				if (wh->get_portdock() && wh->get_portdock()->expedition_bootstrap()) {
-					for (const InputQueue* q :
-					     wh->get_portdock()->expedition_bootstrap()->queues(true)) {
-						if (q->get_type() == wwWARE) {
-							auto it = wares.find(q->get_index());
-							if (it == wares.end()) {
-								wares[q->get_index()] = q->get_filled();
-							} else {
-								it->second += q->get_filled();
+				if (PortDock* pd = wh->get_portdock()) {
+					for (DescriptionIndex di : tribe().wares()) {
+						add_to_wares(di, pd->count_waiting(wwWARE, di));
+					}
+					if (ExpeditionBootstrap* x = pd->expedition_bootstrap()) {
+						for (const InputQueue* q : x->queues(true)) {
+							if (q->get_type() == wwWARE) {
+								add_to_wares(q->get_index(), q->get_filled());
 							}
 						}
 					}
@@ -872,6 +882,7 @@ void Player::enhance_or_dismantle(Building* building,
 		} else {
 			workers = building->get_workers();
 			if (keep_wares) {
+				// TODO(Nordfriese): Add support for markets?
 				if (upcast(ProductionSite, ps, building)) {
 					for (const InputQueue* q : ps->inputqueues()) {
 						if (q->get_type() == wwWARE) {
