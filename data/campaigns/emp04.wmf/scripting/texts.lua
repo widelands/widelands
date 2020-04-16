@@ -2,8 +2,6 @@
 -- Some formating functions
 -- =========================
 
-include "scripting/richtext_scenarios.lua"
-
 function lutius(title, text)
    return speech("map:Lutius.png", "2F9131", title, text)
 end

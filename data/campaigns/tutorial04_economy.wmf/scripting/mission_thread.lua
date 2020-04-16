@@ -92,8 +92,13 @@ function burn_tavern_down()
    o = campaign_message_with_objective(inventory2, obj_switch_stock_tab)
    wait_for_window_and_tab_or_complain(
       "stock_menu",
-      "wares_in_warehouses",
+      "total_wares",
       reopen_stock_menu, obj_reopen_stock_menu
+   )
+   wait_for_window_and_tab_or_complain(
+      "stock_menu",
+      "wares_in_warehouses",
+      reopen_stock_menu2, obj_reopen_stock_menu2
    )
    set_objective_done(o, 0)
    campaign_message_box(inventory3)

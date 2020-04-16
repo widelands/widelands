@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2019 by the Widelands Development Team
+ * Copyright (C) 2010-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -61,6 +61,19 @@ bool QuickNavigation::handle_key(bool down, SDL_Keysym key) {
 
 	if (key.sym >= SDLK_1 && key.sym <= SDLK_9) {
 		int which = key.sym - SDLK_1;
+		assert(which >= 0);
+		assert(which < kQuicknavSlots);
+
+		if (key.mod & KMOD_CTRL) {
+			set_landmark(which, current_);
+		} else if (landmarks_[which].set) {
+			map_view_->set_view(landmarks_[which].view, MapView::Transition::Smooth);
+		}
+	} else if (key.sym >= SDLK_KP_1 && key.sym <= SDLK_KP_9) {
+		if (!(key.mod & KMOD_NUM)) {
+			return false;
+		}
+		int which = key.sym - SDLK_KP_1;
 		assert(which >= 0);
 		assert(which < kQuicknavSlots);
 

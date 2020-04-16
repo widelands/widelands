@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -324,25 +324,6 @@ struct ProductionProgram : public MapObjectProgram {
 
 	private:
 		Duration duration_;
-	};
-
-	/// Checks whether the map has a certain feature enabled.
-	///
-	/// Parameter syntax:
-	///    parameters ::= feature
-	/// Parameter semantics:
-	///    feature:
-	///       The name of the feature that should be checked. Possible values are:
-	///       * Seafaring : to check whether the map has at least two port build spaces
-	///
-	/// Ends the program if the feature is not enabled.
-	struct ActCheckMap : public Action {
-		explicit ActCheckMap(const std::vector<std::string>& arguments);
-		void execute(Game&, ProductionSite&) const override;
-
-	private:
-		enum class Feature { kSeafaring = 1 };
-		Feature feature_;
 	};
 
 	/// Runs an animation.
