@@ -31,7 +31,6 @@
 #include "sound/constants.h"
 
 class RenderTarget;
-class Image;
 
 namespace UI {
 
@@ -324,9 +323,6 @@ protected:
 	void draw_background(RenderTarget& dst, const UI::PanelStyleInfo&);
 	void draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo&);
 
-	static const Image* default_cursor_;
-	static const Image* default_cursor_click_;
-
 private:
 	bool handles_mouse() const {
 		return (flags_ & pf_handle_mouse) != 0;
@@ -348,6 +344,7 @@ private:
 
 	void check_child_death();
 
+	friend class Window;
 	void do_draw(RenderTarget&);
 	void do_draw_inner(RenderTarget&);
 	void do_think();

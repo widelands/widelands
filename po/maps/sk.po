@@ -2,15 +2,16 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
+# Karl Vest, 2020
 # MiroslavR <miroslavr256@gmail.com>, 2015-2016
 # Miroslav Remák <Unknown>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-01-21 18:02+0000\n"
-"PO-Revision-Date: 2020-01-21 18:25+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-03-20 06:16+0000\n"
+"PO-Revision-Date: 2020-03-22 15:06+0000\n"
+"Last-Translator: Karl Vest\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -89,22 +90,22 @@ msgstr "Po opravení lode sa Lutius a jeho ľud vrátili k pátraniu po vhodnom 
 msgid ""
 "On their way home to defend the Empire, the crew of Lutius was surprised by "
 "the will of the gods."
-msgstr ""
+msgstr "Lutiusova skupina, na svojej ceste domov obrániť Impérium, bola zaskočená vôľou bohov."
 
 #: ../../data/campaigns/emp04.wmf/elemental:8
 msgid "Surprise, Surprise!"
-msgstr ""
+msgstr "Prekvapenie!"
 
 #: ../../data/campaigns/emp04.wmf/elemental:10
 msgid ""
 "After returning home, Lutius and his crew are faced with an economy in "
 "shambles. Resolving the bottlenecks in the economy will be of utmost "
 "importance to reinstate the glory of the empire."
-msgstr ""
+msgstr "Po návrate domov je Lutius a jeho družina postavená pred ekonomiku v troskách. Napravenie najslabšieho článku ekonomiky bude v navrátení slávy Impéria tou najdôležitejšou úlohou."
 
 #: ../../data/campaigns/fri01.wmf/elemental:8
 msgid "The Great Stormflood"
-msgstr ""
+msgstr "Veľká potopa."
 
 #: ../../data/campaigns/fri01.wmf/elemental:10
 msgid ""
@@ -113,23 +114,23 @@ msgid ""
 "Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
 " a sign from the Gods that the Frisian community on the island of Langeness "
 "is not wanted here?"
-msgstr ""
+msgstr "V roku 1362 bol tichý a pokojný život obyvateľov ostrovov Severného Frízska narušený jednou z najväčších záplav v ľudskej histórii, potopou svätého Marcellusa. Nie je to nič viac ako jedna z ďalších záplav alebo je to znamenie bohov, že Frízska komunita na ostrove Langeness tu nie je vítaná?"
 
 #: ../../data/campaigns/fri01.wmf/elemental:11
 msgid ""
 "This scenario is set in a historical context, but most of the story line is "
 "fiction."
-msgstr ""
+msgstr "Tento dej je zasadený do historického kontextu, ale príbeh deja je vymyslený."
 
 #: ../../data/campaigns/fri02.wmf/elemental:8
 msgid "An Icy Welcome"
-msgstr ""
+msgstr "Ľadové privítanie."
 
 #: ../../data/campaigns/fri02.wmf/elemental:10
 msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
-msgstr ""
+msgstr "Reebaud a jeho kmeň dorazil na sever. Ich príchod však medzi zamrznutými stepami a snehom pokrytými kopcami nie je vítaný."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -159,7 +160,7 @@ msgstr "Moreplavba"
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports, and how to use ferries and waterways."
-msgstr ""
+msgstr "V tomto tutoriáli spoznáte moreplavbu, čo predstavuje spôsob ako narábať s loďami a prístavmi a ako používať prevozníkov a vodné cesty."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy"
@@ -487,11 +488,11 @@ msgid ""
 "range where the amount of gold and the space to live merely suffice for one "
 "tribe – only two opposite paths lead. But remember, be careful… this last "
 "living space is also a hard and small place to live."
-msgstr ""
+msgstr "Vrtošiví bohovia neodpovedali na naše modlitby. Naopak, slnečné žiarenie, ktorého intenzita sa neustále stupňovala, zohrialo Zem tisícnásobne a roztopilo ľadovce, následkom čoho ľudí pohltilo more. Teraz sa však na poslednom kúsku zeme – vysoko v majestátnych horách – ukrývajú dva kmene, ktoré prežili. Napriek tomu, že bohovia prejavili milosť a podnebie sa opäť schladilo, voda neprestala stúpať. K poslednému bezpečnému miestu – najvyššiemu pohoriu, kde je zlata a životného priestoru dosť akurát pre jeden kmeň – vedú len dve cesty. Dávajte si však veľký pozor… Život na tomto malom mieste bude tvrdý. "
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:11
 msgid "Don’t forget to take care of your timber supplies, you’ll need them."
-msgstr ""
+msgstr "Nezabudni sa postarať o dodávky dreva, budeš ich potrebovať."
 
 #: ../../data/maps/Last_Survivors.wmf/elemental:8
 msgid "Last Survivors"
@@ -545,13 +546,13 @@ msgid ""
 "Only a small hill in the centre of the map connects these four competing "
 "tribes. Lead your army to this hill right away and build a giant stronghold "
 "as a sign of your superiority!"
-msgstr ""
+msgstr "Tieto štyri súperiace kmene spája iba malý kopec v strede. Veď svoju armádu priamo k tomuto kopcu a postav si veľkú pevnosť ako znak svojej nadradenosti."
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:11
 msgid ""
 "There is space for only one stronghold in the centre. Water can be found "
 "everywhere, so there is no need to send out geologists."
-msgstr ""
+msgstr "Je tu miesto iba pre jednú pevnosť v strede. Vodu nájdeš všade a tak kvôli nej nemusíš vysielať geológa."
 
 #: ../../data/maps/River_Explorers.wmf/elemental:8
 msgid "River Explorers"

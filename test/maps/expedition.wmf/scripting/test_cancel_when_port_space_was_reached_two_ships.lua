@@ -27,7 +27,7 @@ run(function()
    sleep(500)
    assert_equal(1, p1:get_workers("barbarians_builder"))
 
-   stable_save(game, "reached_port_space")
+   stable_save(game, "reached_port_space", 10 * 1000)
    assert_equal(1, p1:get_workers("barbarians_builder"))
 
    cancel_expedition_in_shipwindow(expedition_ship)

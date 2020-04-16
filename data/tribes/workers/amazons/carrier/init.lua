@@ -21,11 +21,10 @@ tribes:new_carrier_type {
       }
    },
 
-   ware_hotspot = {0, 31},
+   animation_directory = dirname,
+   ware_hotspot = {0, 29},
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {11, 29},
          fps = 10,
          frames = 80,
@@ -33,8 +32,6 @@ tribes:new_carrier_type {
          rows = 8
       },
       fetch_water = {
-         directory = dirname,
-         basename = "fetch_water",
          hotspot = {10, 22},
          fps = 10,
          frames = 10,
@@ -42,8 +39,6 @@ tribes:new_carrier_type {
          rows = 2
       },
       walk = {
-         directory = dirname,
-         basename = "walk",
          directional = true,
          hotspot = {17, 28},
          fps = 15,
@@ -52,8 +47,6 @@ tribes:new_carrier_type {
          rows = 5
       },
       walkload = {
-         directory = dirname,
-         basename = "walkload",
          directional = true,
          hotspot = {17, 31},
          fps = 15,

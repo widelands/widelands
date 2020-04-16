@@ -72,7 +72,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 55000",
          "remove=7",
-         "seed=rowan_summer_sapling",
+         "seed=rowan_summer_sapling 40",
          "animate=idle 30000",
          "remove=10",
          "grow=rowan_summer_old",
@@ -104,7 +104,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 1432000",
          "transform=deadtree4 26",
-         "seed=rowan_summer_sapling",
+         "seed=rowan_summer_sapling 180",
       },
       fall = {
          "remove=",

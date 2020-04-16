@@ -21,8 +21,9 @@ tribes:new_carrier_type {
    vision_range = 2,
 
    default_target_quantity = 10,
-   ware_hotspot = { 0, 18 },
 
+   animation_directory = dirname,
+   ware_hotspot = { 0, 18 },
    animations = animations,
 
    aihints = {

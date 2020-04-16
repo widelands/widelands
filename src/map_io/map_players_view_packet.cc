@@ -127,8 +127,8 @@ namespace {
 	}
 
 // Try to find the file with newest fitting version number
-#define OPEN_INPUT_FILE_NEW_VERSION(                                                               \
-   filetype, file, filename, fileversion, filename_template, version)                              \
+#define OPEN_INPUT_FILE_NEW_VERSION(filetype, file, filename, fileversion, filename_template,      \
+                                    version)                                                       \
 	uint8_t fileversion = version;                                                                  \
 	filetype file;                                                                                  \
 	char(filename)[FILENAME_SIZE];                                                                  \
@@ -199,15 +199,17 @@ const ImmovableDescr& read_immovable_type(StreamRead* fr,
 	if (owner == static_cast<uint8_t>(MapObjectDescr::OwnerType::kWorld)) {
 		DescriptionIndex const index =
 		   egbase.world().get_immovable_index(world_lookup_table.lookup_immovable(name));
-		if (index == Widelands::INVALID_INDEX)
+		if (index == Widelands::INVALID_INDEX) {
 			throw WorldImmovableNonexistent(name);
+		}
 		return *egbase.world().get_immovable_descr(index);
 	} else {
 		assert(owner == static_cast<uint8_t>(MapObjectDescr::OwnerType::kTribe));
 		DescriptionIndex const index =
 		   egbase.tribes().immovable_index(tribes_lookup_table.lookup_immovable(name));
-		if (index == Widelands::INVALID_INDEX)
+		if (index == Widelands::INVALID_INDEX) {
 			throw TribeImmovableNonexistent(name);
+		}
 		return *egbase.tribes().get_immovable_descr(index);
 	}
 }
@@ -296,8 +298,9 @@ void MapPlayersViewPacket::read(FileSystem& fs,
                                 const WorldLegacyLookupTable& world_lookup_table)
 
 {
-	if (skip)
+	if (skip) {
 		return;
+	}
 
 	const Map& map = egbase.map();
 	const uint16_t mapwidth = map.get_width();
@@ -354,16 +357,19 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						if (const BaseImmovable* base_immovable = f.field->get_immovable()) {
 							map_object_descr = &base_immovable->descr();
 							if (Road::is_road_descr(map_object_descr) ||
-							    Waterway::is_waterway_descr(map_object_descr))
+							    Waterway::is_waterway_descr(map_object_descr)) {
 								map_object_descr = nullptr;
-							else if (upcast(Building const, building, base_immovable))
-								if (building->get_position() != f)
+							} else if (upcast(Building const, building, base_immovable)) {
+								if (building->get_position() != f) {
 									//  TODO(unknown): This is not the building's main position
 									//  so we can not see it. But it should be
 									//  possible to see it from a distance somehow.
 									map_object_descr = nullptr;
-						} else
+								}
+							}
+						} else {
 							map_object_descr = nullptr;
+						}
 						f_player_field.map_object_descr = map_object_descr;
 					}
 
@@ -375,20 +381,25 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						Field::Terrains terrains;
 						terrains.d = terrains.r = 0;
 
-						if (f_vision | bl_vision | br_vision)
+						if (f_vision | bl_vision | br_vision) {
 							terrains.d = f.field->terrain_d();
-						if (f_vision | br_vision | r_vision)
+						}
+						if (f_vision | br_vision | r_vision) {
 							terrains.r = f.field->terrain_r();
+						}
 						f_player_field.terrains = terrains;
 					}
 
 					{  //  edges
-						if (f_vision | bl_vision)
+						if (f_vision | bl_vision) {
 							f_player_field.r_sw = f.field->get_road(WALK_SW);
-						if (f_vision | br_vision)
+						}
+						if (f_vision | br_vision) {
 							f_player_field.r_se = f.field->get_road(WALK_SE);
-						if (f_vision | r_vision)
+						}
+						if (f_vision | r_vision) {
 							f_player_field.r_e = f.field->get_road(WALK_E);
+						}
 					}
 
 					//  The player is not given information about resources that he
@@ -430,8 +441,9 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					// loaded vision were the same. I removed this check, because
 					// scripting could have given the player a permanent view of
 					// this field. That's why we save this stuff in the first place!
-					if (file_vision != f_player_field.vision)
+					if (file_vision != f_player_field.vision) {
 						f_player_field.vision = file_vision;
+					}
 				} while (r.x);
 			}
 
@@ -598,16 +610,19 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					if (const BaseImmovable* base_immovable = f.field->get_immovable()) {
 						map_object_descr = &base_immovable->descr();
 						if (Road::is_road_descr(map_object_descr) ||
-						    Waterway::is_waterway_descr(map_object_descr))
+						    Waterway::is_waterway_descr(map_object_descr)) {
 							map_object_descr = nullptr;
-						else if (upcast(Building const, building, base_immovable))
-							if (building->get_position() != f)
+						} else if (upcast(Building const, building, base_immovable)) {
+							if (building->get_position() != f) {
 								//  TODO(unknown): This is not the building's main position so
 								//  we can not see it. But it should be possible
 								//  to see it from a distance somehow.
 								map_object_descr = nullptr;
-					} else
+							}
+						}
+					} else {
 						map_object_descr = nullptr;
+					}
 					f_player_field.map_object_descr = map_object_descr;
 					break;
 				}
@@ -831,25 +846,25 @@ inline static void write_unseen_immovable(MapObjectData const* map_object_data,
 	assert(!Road::is_road_descr(map_object_descr) && !Waterway::is_waterway_descr(map_object_descr));
 	uint8_t immovable_kind = 255;
 
-	if (!map_object_descr)
+	if (!map_object_descr) {
 		immovable_kind = UNSEEN_NONE;
-	else if (upcast(ImmovableDescr const, immovable_descr, map_object_descr)) {
+	} else if (upcast(ImmovableDescr const, immovable_descr, map_object_descr)) {
 		immovable_kind = UNSEEN_TRIBEORWORLD;
 		write_immovable_type(&immovables_file, *immovable_descr);
-	} else if (map_object_descr->type() == MapObjectType::FLAG)
+	} else if (map_object_descr->type() == MapObjectType::FLAG) {
 		immovable_kind = UNSEEN_FLAG;
-	else if (upcast(BuildingDescr const, building_descr, map_object_descr)) {
+	} else if (upcast(BuildingDescr const, building_descr, map_object_descr)) {
 		immovable_kind = UNSEEN_BUILDING;
 		write_building_type(&immovables_file, *building_descr);
-		if (!csi.becomes)
+		if (!csi.becomes) {
 			immovables_file.unsigned_8(0);
-		else {
+		} else {
 			// the building is a constructionsite
 			immovables_file.unsigned_8(1);
 			write_building_type(&immovables_file, *csi.becomes);
-			if (!csi.was)
+			if (!csi.was) {
 				immovables_file.unsigned_8(0);
-			else {
+			} else {
 				// constructionsite is an enhancement, therefor we write down the enhancement
 				immovables_file.unsigned_8(1);
 				write_building_type(&immovables_file, *csi.was);
@@ -857,9 +872,9 @@ inline static void write_unseen_immovable(MapObjectData const* map_object_data,
 			immovables_file.unsigned_32(csi.totaltime);
 			immovables_file.unsigned_32(csi.completedtime);
 		}
-	} else if (map_object_descr->type() == MapObjectType::PORTDOCK)
+	} else if (map_object_descr->type() == MapObjectType::PORTDOCK) {
 		immovable_kind = UNSEEN_PORTDOCK;
-	else {
+	} else {
 		// We should never get here.. output some information about the situation.
 		log("\nwidelands_map_players_view_data_packet.cc::write_unseen_immovable(): ");
 		log("%s %s was not expected.\n", typeid(*map_object_descr).name(),
@@ -972,12 +987,15 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 					}
 
 					//  edges
-					if ((!bl_seen) && (f_everseen || bl_everseen))
+					if ((!bl_seen) && (f_everseen || bl_everseen)) {
 						roads_file.unsigned_8(f_player_field.road_sw());
-					if ((!br_seen) && (f_everseen || br_everseen))
+					}
+					if ((!br_seen) && (f_everseen || br_everseen)) {
 						roads_file.unsigned_8(f_player_field.road_se());
-					if ((!r_seen) && (f_everseen || r_everseen))
+					}
+					if ((!r_seen) && (f_everseen || r_everseen)) {
 						roads_file.unsigned_8(f_player_field.road_e());
+					}
 				}
 
 				//  geologic survey

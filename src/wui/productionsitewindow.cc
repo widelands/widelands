@@ -62,7 +62,7 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
 				   break;
 			   }
 		   }
-	   });
+		});
 	init(avoid_fastclick, workarea_preview_wanted);
 }
 

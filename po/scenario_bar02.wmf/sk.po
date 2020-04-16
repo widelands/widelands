@@ -1,16 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2014
+# Karl Vest, 2020
 # MiroslavR <miroslavr256@gmail.com>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
-"PO-Revision-Date: 2019-08-10 17:15+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-03-20 06:16+0000\n"
+"PO-Revision-Date: 2020-03-22 15:39+0000\n"
+"Last-Translator: Karl Vest\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -145,7 +146,7 @@ msgstr "Vybudujte výcvikovú infraštruktúru"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:92
 msgid "Build a barracks to train some basic soldiers."
-msgstr ""
+msgstr "Postavte Kasárne, aby ste mohli vycvičiť vojakov záklaďákov."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:93
 msgid "Build a battle arena and a training camp to the west of the mountains."
@@ -194,7 +195,7 @@ msgstr "Postavte výcvikové stavby"
 msgid ""
 "Build a barracks, a battle arena and a training camp to the west of the "
 "mountains."
-msgstr ""
+msgstr "Postavte zápasnícku arénu a výcvikový tábor na západ od hôr."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:114
 msgid ""
@@ -202,7 +203,7 @@ msgid ""
 " battle arena are used for training soldiers in their different attributes. "
 "These attributes are important in fights and the better a soldier is, the "
 "higher is the chance to win a fight."
-msgstr ""
+msgstr "Kasárne vyrábajú základných vojakov. Výcvikové stavby ako výcvikový tábor alebo zápasnícka aréna slúžia na výcvik vojakov v rozličných vlastnostiach. Tieto vlastnosti zohrávajú dôležitú rolu v bojoch a čím je vojak lepší, tým väčšiu šancu má vyhrať súboj."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:116
 msgid "The attributes are: health, attack, defense and evade."
@@ -361,7 +362,7 @@ msgid ""
 "ring is intact. Until now, he has not answered any of my messages. But the "
 "time I spend waiting won’t be lost. I will train my soldiers further and "
 "prepare for battle."
-msgstr ""
+msgstr "Vyslal som svojich mužov, aby sa stretli s Kalitatom v jeho pevnosti. Zatarasil bývalý hlavný vchod do hlavného mesta a snaží sa dokola obliehať Al’thunran. Nepustí nikoho dnu ani von, kým je kruh celý. Zatiaľ mi neodpovedal na žiadne správy. Ale čas, ktorý strávim čakaním, nebude stratený. Vylepším si vojakov a pripravím sa na boj."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:208
 msgid "Your Loyal Companion"
@@ -467,7 +468,7 @@ msgid ""
 "settlement. He has instructed us to build a tower, to have a greater visual "
 "range over the area around our hall to protect our people from sudden "
 "attacks."
-msgstr ""
+msgstr "Thron mi oznámil, že severovýchodne od našej osady objavil v snehu stopy. Prikázal nám postaviť vežu, ktorá nám umožní dovidieť na väčšiu oblasť okolo základne, aby sme tak mohli ochrániť našich ľudí pred náhlymi útokmi."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:268
 msgid "Further Exploration"
@@ -647,12 +648,12 @@ msgstr "Náčelník, pamätajte na úbohých nosičov: naše cesty sa stále pre
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "'%s'"
 
 #: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgstr ""
+msgstr "Nová uloha"
 
 #: ../../data/scripting/richtext_scenarios.lua:93
 msgid "New Objectives"
-msgstr ""
+msgstr "Nové úlohy"

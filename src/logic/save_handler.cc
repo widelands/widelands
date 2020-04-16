@@ -200,6 +200,7 @@ void SaveHandler::initialize(uint32_t realtime) {
 	autosave_interval_in_ms_ = get_config_int("autosave", kDefaultAutosaveInterval * 60) * 1000;
 
 	next_save_realtime_ = realtime + autosave_interval_in_ms_;
+	last_save_realtime_ = realtime;
 
 	number_of_rolls_ = get_config_int("rolling_autosave", 5);
 
@@ -243,9 +244,10 @@ bool SaveHandler::save_game(Widelands::Game& game,
 	   [&game](FileSystem& fs) {
 		   Widelands::GameSaver gs(fs, game);
 		   gs.save();
-	   },
+		},
 	   complete_filename, fs_type_);
 	gsh.save();
+	last_save_realtime_ = SDL_GetTicks();
 
 	// Ignore it if only the temporary backup wasn't deleted
 	// but save was successfull otherwise

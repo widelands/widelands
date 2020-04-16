@@ -81,7 +81,7 @@ tribes:new_productionsite_type {
             -- time total: xx
             "return=skipped unless economy needs balsa",
             "callworker=plant_balsa",
-            "sleep=12000"
+            "sleep=13000"
          },
       },
       plant_rubber = {
@@ -91,7 +91,7 @@ tribes:new_productionsite_type {
             -- time total: xx
             "return=skipped unless economy needs rubber",
             "callworker=plant_rubber",
-            "sleep=12000"
+            "sleep=13000"
          },
       },
       plant_ironwood = {
@@ -101,7 +101,7 @@ tribes:new_productionsite_type {
             -- time total: xx
             "return=skipped unless economy needs ironwood",
             "callworker=plant_ironwood",
-            "sleep=12000"
+            "sleep=13000"
          },
       },
    }

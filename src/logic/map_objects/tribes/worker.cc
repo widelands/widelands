@@ -599,8 +599,7 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 
 			if (action.iparam3)
 
-				functorAnyFull.add(
-				   FindNodeSpace(findnodesize != FindNodeSize::Size::sizeSwim));
+				functorAnyFull.add(FindNodeSpace(findnodesize != FindNodeSize::Size::sizeSwim));
 			// If there are fields full of fish, we change the type of notification
 			if (map.find_reachable_fields(game, area, &list, cstep, functorAnyFull)) {
 				fail_notification_type = FailNotificationType::kFull;
@@ -819,9 +818,8 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	// Checks if the 'immovable_description' has a terrain_affinity, if so use it. Otherwise assume
 	// it to be 1 (perfect fit). Adds it to the best_suited_immovables_index.
 	const auto test_suitability = [&best_suited_immovables_index, &fpos, &map, &game](
-	                                 const uint32_t attribute_id, const DescriptionIndex index,
-	                                 const ImmovableDescr& immovable_description,
-	                                 MapObjectDescr::OwnerType owner_type) {
+	   const uint32_t attribute_id, const DescriptionIndex index,
+	   const ImmovableDescr& immovable_description, MapObjectDescr::OwnerType owner_type) {
 		if (!immovable_description.has_attribute(attribute_id)) {
 			return;
 		}
@@ -1055,11 +1053,10 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
 			get_owner()->add_message_with_timeout(
-			   game,
-			   std::unique_ptr<Message>(new Message(Message::Type::kGeologists, game.get_gametime(),
-			                                        rdescr->descname(), rdescr->representative_image(),
-			                                        ri.descr().descname(), rt_description, position,
-			                                        serial_, rdescr->name())),
+			   game, std::unique_ptr<Message>(new Message(
+			            Message::Type::kGeologists, game.get_gametime(), rdescr->descname(),
+			            rdescr->representative_image(), ri.descr().descname(), rt_description,
+			            position, serial_, rdescr->name())),
 			   rdescr->timeout_ms(), rdescr->timeout_radius());
 		}
 	}
@@ -1968,10 +1965,9 @@ void Worker::return_update(Game& game, State& state) {
 		      .str();
 
 		get_owner()->add_message(
-		   game,
-		   std::unique_ptr<Message>(new Message(Message::Type::kGameLogic, game.get_gametime(),
-		                                        _("Worker"), "images/ui_basic/menu_help.png",
-		                                        _("Worker got lost!"), message, get_position())),
+		   game, std::unique_ptr<Message>(new Message(
+		            Message::Type::kGameLogic, game.get_gametime(), _("Worker"),
+		            "images/ui_basic/menu_help.png", _("Worker got lost!"), message, get_position())),
 		   serial_);
 		set_location(nullptr);
 		return pop_task(game);
@@ -3253,7 +3249,7 @@ const Bob::Task* Worker::Loader::get_task(const std::string& name) {
 	return Bob::Loader::get_task(name);
 }
 
-const BobProgramBase* Worker::Loader::get_program(const std::string& name) {
+const MapObjectProgram* Worker::Loader::get_program(const std::string& name) {
 	Worker& worker = get<Worker>();
 	return worker.descr().get_program(name);
 }

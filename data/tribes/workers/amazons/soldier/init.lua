@@ -1,26 +1,5 @@
 dirname = path.dirname (__file__)
 
--- Quick overview: We use 4 sets of animations here.
--- The default set (fri_rookie, "rookie") is for soldiers with no helmet and one sword.
--- The set prefixed "h" (fri_health, "helm") is for soldiers with a helmet and one sword.
--- The set prefixed "s" (fri_attack, "sword") is for soldiers with no helmet and two swords.
--- The set prefixed "sh" (fri_hero, "hero") is for soldiers with a helmet and two swords.
---
--- Side Note for the w/e naming scheme:
--- The attack and evade animation consider the soldier on the LEFT to be called E
--- and the soldier on the RIGHT to be called W.
--- In my animations, the soldier on the LEFT is considered the WESTERN soldier
--- and the soldier on the RIGHT the EASTERN one.
--- The die animations consider the soldier on the LEFT to called W
--- and the soldier on the RIGHT to be called E.
--- That's the same as in the animations.
--- Confused?
--- Oh, and by the way, the soldiers' swords are not long enough to touch the opponent if the
--- hotspot is at the soldier's feet. That's why all battle hotspots are shifted by 3 pixels.
---
--- The above explanation refers only to frisian soldiers. Other tribes's soldiers
--- may follow other conventions described in their respective init.lua's.
-
 animations = {
    -- normal
    idle = {
@@ -104,6 +83,7 @@ tribes:new_soldier_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
+   animation_directory = dirname .. "rookie",
    animations = animations,
 
    default_target_quantity = 10,

@@ -94,6 +94,7 @@ wl_library(editor
     base_random
     graphic
     graphic_fonthandler
+    graphic_mouse_cursor
     graphic_playercolor
     graphic_surface
     graphic_text_layout

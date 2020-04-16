@@ -1,26 +1,5 @@
 dirname = path.dirname (__file__)
 
--- TODO(Nordfriese): Make animations
-animations = {
-   pictures = path.list_files (dirname .. "idle_??.png"),
-   hotspot = {20, 36},
-}
-animations = {
-   idle = animations,
-   walk_se = animations,
-   walk_sw = animations,
-   walk_ne = animations,
-   walk_nw = animations,
-   walk_e = animations,
-   walk_w = animations,
-   walkload_se = animations,
-   walkload_sw = animations,
-   walkload_ne = animations,
-   walkload_nw = animations,
-   walkload_e = animations,
-   walkload_w = animations,
-}
-
 tribes:new_ferry_type {
    msgctxt = "amazons_worker",
    name = "amazons_ferry",
@@ -30,5 +9,23 @@ tribes:new_ferry_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
-   animations = animations,
+   animation_directory = dirname,
+   ware_hotspot = {7, -5},
+   spritesheets = {
+      idle = {
+         hotspot = {28, 21},
+         fps = 15,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      },
+      walk = {
+         directional = true,
+         hotspot = {38, 25},
+         fps = 15,
+         frames = 30,
+         columns = 5,
+         rows = 6
+      },
+   },
 }

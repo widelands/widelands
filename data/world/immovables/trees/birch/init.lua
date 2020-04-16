@@ -72,7 +72,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 25000",
          "remove=10",
-         "seed=birch_summer_sapling",
+         "seed=birch_summer_sapling 200",
          "animate=idle 30000",
          "remove=10",
          "grow=birch_summer_old",
@@ -104,7 +104,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 800000",
          "transform=deadtree2 27",
-         "seed=birch_summer_sapling",
+         "seed=birch_summer_sapling 60",
       },
       fall = {
          "remove=",

@@ -86,8 +86,9 @@ bool save_to_png(Texture* texture, StreamWrite* sw, ColorType color_type) {
 	png_structp png_ptr = png_create_write_struct(
 	   PNG_LIBPNG_VER_STRING, static_cast<png_voidp>(nullptr), nullptr, nullptr);
 
-	if (!png_ptr)
+	if (!png_ptr) {
 		throw wexception("save_to_png: could not create png struct");
+	}
 
 	png_infop info_ptr = png_create_info_struct(png_ptr);
 	if (!info_ptr) {

@@ -106,6 +106,7 @@ wl_library(widelands_ball_of_mud
     editor
     graphic
     graphic_fonthandler
+    graphic_mouse_cursor
     graphic_text
     graphic_text_layout
     io_filesystem
@@ -143,17 +144,6 @@ wl_library(widelands_options
     io_filesystem
     io_profile
     logic_filesystem_constants
-)
-
-
-# TODO(sirver): Split into libs with useful names.
-wl_library(helper
-  SRCS
-    helper.cc
-    helper.h
-  USES_SDL2
-  DEPENDS
-    base_exceptions
 )
 
 if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")

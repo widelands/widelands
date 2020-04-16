@@ -67,7 +67,8 @@ public:
 
 	void add_wanted_building_window(const Widelands::Coords& coords,
 	                                const Vector2i point,
-	                                bool was_minimal);
+	                                bool was_minimal,
+	                                bool was_pinned);
 	UI::UniqueWindow* show_building_window(const Widelands::Coords& coords,
 	                                       bool avoid_fastclick,
 	                                       bool workarea_preview_wanted);
@@ -171,11 +172,16 @@ private:
 	struct WantedBuildingWindow {
 		explicit WantedBuildingWindow(const Vector2i& pos,
 		                              bool was_minimized,
+		                              bool was_pinned,
 		                              bool was_showing_workarea)
-		   : window_position(pos), minimize(was_minimized), show_workarea(was_showing_workarea) {
+		   : window_position(pos),
+		     minimize(was_minimized),
+		     pin(was_pinned),
+		     show_workarea(was_showing_workarea) {
 		}
 		const Vector2i window_position;
 		const bool minimize;
+		const bool pin;
 		const bool show_workarea;
 	};
 

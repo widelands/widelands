@@ -439,6 +439,7 @@ void MapView::scroll_to_field(const Widelands::Coords& c, const Transition& tran
 }
 
 void MapView::scroll_to_map_pixel(const Vector2f& pos, const Transition& transition) {
+	jump();
 	const TimestampedView current = animation_target_view();
 	const Rectf area = get_view_area(current.view, get_w(), get_h());
 	const Vector2f target_view = pos - Vector2f(area.w / 2.f, area.h / 2.f);
@@ -475,6 +476,7 @@ bool MapView::handle_mousepress(uint8_t const btn, int32_t const x, int32_t cons
 		// also handle the click.
 	}
 	if (btn == SDL_BUTTON_RIGHT) {
+		jump();
 		dragging_ = true;
 		grab_mouse(true);
 		WLApplication::get()->set_mouse_lock(true);
@@ -650,15 +652,26 @@ bool MapView::handle_key(bool down, SDL_Keysym code) {
 	}
 
 	switch (code.sym) {
+	case SDLK_KP_PLUS:
 	case SDLK_PLUS:
+	case SDLK_EQUALS:
 		increase_zoom();
 		return true;
+
+	case SDLK_KP_MINUS:
 	case SDLK_MINUS:
 		decrease_zoom();
 		return true;
+
+	case SDLK_KP_0:
+		if (!(code.mod & KMOD_NUM)) {
+			return false;
+		}
+		FALLS_THROUGH;
 	case SDLK_0:
 		reset_zoom();
 		return true;
+
 	default:
 		return false;
 	}

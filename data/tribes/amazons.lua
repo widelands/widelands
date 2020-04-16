@@ -1,17 +1,17 @@
 image_dirname = path.dirname(__file__) .. "images/amazons/"
 
-animations = {}
-add_animation(animations, "frontier", image_dirname, "frontier", {5, 35})
-add_animation(animations, "bridge_normal_e", image_dirname, "bridge_normal_e", {-2, 11})
-add_animation(animations, "bridge_busy_e", image_dirname, "bridge_busy_e", {-2, 11})
-add_animation(animations, "bridge_normal_se", image_dirname, "bridge_normal_se", {5, 2})
-add_animation(animations, "bridge_busy_se", image_dirname, "bridge_busy_se", {5, 2})
-add_animation(animations, "bridge_normal_sw", image_dirname, "bridge_normal_sw", {36, 6})
-add_animation(animations, "bridge_busy_sw", image_dirname, "bridge_busy_sw", {36, 3})
-
 tribes:new_tribe {
    name = "amazons",
-   animations = animations,
+   animation_directory = image_dirname,
+   animations = {
+      frontier = { hotspot = {5, 35} },
+      bridge_normal_e = { hotspot = {-2, 11} },
+      bridge_busy_e = { hotspot = {-2, 11} },
+      bridge_normal_se = { hotspot = {5, 2} },
+      bridge_busy_se = { hotspot = {5, 2} },
+      bridge_normal_sw = { hotspot = {36, 6} },
+      bridge_busy_sw = { hotspot = {36, 3} }
+   },
    spritesheets = {
       flag = {
          directory = image_dirname,
@@ -45,12 +45,10 @@ tribes:new_tribe {
          [0] = "amazons_resi_none",
       },
       coal = {
-         [10] = "amazons_resi_coal_1",
-         [20] = "amazons_resi_coal_2",
+         [100] = "amazons_resi_none",
       },
       iron = {
-         [10] = "amazons_resi_iron_1",
-         [20] = "amazons_resi_iron_2",
+         [100] = "amazons_resi_none",
       },
       gold = {
          [10] = "amazons_resi_gold_1",
@@ -235,12 +233,8 @@ tribes:new_tribe {
       "cocoa_field_ripe",
       "amazons_resi_none",
       "amazons_resi_water",
-      "amazons_resi_coal_1",
-      "amazons_resi_iron_1",
       "amazons_resi_gold_1",
       "amazons_resi_stones_1",
-      "amazons_resi_coal_2",
-      "amazons_resi_iron_2",
       "amazons_resi_gold_2",
       "amazons_resi_stones_2",
       "amazons_shipconstruction",

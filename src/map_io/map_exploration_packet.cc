@@ -35,8 +35,9 @@ void MapExplorationPacket::read(FileSystem& fs,
                                 EditorGameBase& egbase,
                                 bool const skip,
                                 MapObjectLoader&) {
-	if (skip)
+	if (skip) {
 		return;
+	}
 
 	FileRead fr;
 	try {
@@ -60,12 +61,13 @@ void MapExplorationPacket::read(FileSystem& fs,
 				uint32_t const data = fr.unsigned_32();
 				for (uint8_t j = 0; j < nr_players; ++j) {
 					bool see = data & (1 << j);
-					if (Player* const player = egbase.get_player(j + 1))
+					if (Player* const player = egbase.get_player(j + 1)) {
 						player->fields_[i].vision = see ? 1 : 0;
-					else if (see)
+					} else if (see) {
 						log("MapExplorationPacket::read: WARNING: Player %u, "
 						    "which does not exist, sees field %u.\n",
 						    j + 1, i);
+					}
 				}
 			}
 		} else {
@@ -89,8 +91,9 @@ void MapExplorationPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 		uint32_t data = 0;
 		for (uint8_t j = 0; j < nr_players; ++j) {
 			uint8_t const player_index = j + 1;
-			if (Player const* const player = egbase.get_player(player_index))
+			if (Player const* const player = egbase.get_player(player_index)) {
 				data |= ((0 < player->vision(i)) << j);
+			}
 		}
 		fw.unsigned_32(data);
 	}

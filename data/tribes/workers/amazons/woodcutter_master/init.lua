@@ -1,20 +1,5 @@
 dirname = path.dirname (__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files (dirname .. "idle_??.png"),
-      hotspot = {9, 23},
-      fps = 10
-   },
-   hacking = {
-      pictures = path.list_files (dirname .. "hacking_??.png"),
-      hotspot = {19, 33},
-      fps = 10
-   }
-}
-add_directional_animation(animations, "walk", dirname, "walk", {16, 23}, 15)
-add_directional_animation(animations, "walkload", dirname, "walkload", {12, 26}, 15)
-
 tribes:new_worker_type {
    msgctxt = "amazons_worker",
    name = "amazons_woodcutter_master",
@@ -32,7 +17,7 @@ tribes:new_worker_type {
          "animate=hacking 25000",
          "playsound=sound/woodcutting/tree_falling 130",
          "callobject=fall",
-         "animate=idle 2000",
+         "animate=hacking 2000",
          "createware=ironwood",
          "return"
       },
@@ -43,7 +28,7 @@ tribes:new_worker_type {
          "animate=hacking 25000",
          "playsound=sound/woodcutting/tree_falling 130",
          "callobject=fall",
-         "animate=idle 2000",
+         "animate=hacking 2000",
          "createware=rubber",
          "return"
       },
@@ -54,7 +39,7 @@ tribes:new_worker_type {
          "animate=hacking 25000",
          "playsound=sound/woodcutting/tree_falling 130",
          "callobject=fall",
-         "animate=idle 2000",
+         "animate=hacking 2000",
          "createware=balsa",
          "return"
       },
@@ -65,12 +50,45 @@ tribes:new_worker_type {
          "animate=hacking 25000",
          "playsound=sound/woodcutting/tree_falling 130",
          "callobject=fall",
-         "animate=idle 2000",
+         "animate=hacking 2000",
          "createware=log",
          "return"
       },
    },
 
-   ware_hotspot = {0, 20},
-   animations = animations,
+   animation_directory = dirname,
+   ware_hotspot = {0, 29},
+   spritesheets = {
+      walk = {
+         directional = true,
+         hotspot = {17, 28},
+         fps = 15,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      },
+      walkload = {
+         directional = true,
+         hotspot = {17, 31},
+         fps = 15,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      },
+      idle = {
+         basename = "walk_se",
+         hotspot = {17, 28},
+         fps = 15,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      },
+      hacking = {
+         hotspot = {23, 37},
+         fps = 15,
+         frames = 15,
+         columns = 5,
+         rows = 3
+      },
+   }
 }

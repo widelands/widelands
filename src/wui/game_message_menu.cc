@@ -368,42 +368,79 @@ bool GameMessageMenu::handle_key(bool down, SDL_Keysym code) {
 			if (centerviewbtn_->enabled())
 				center_view();
 			return true;
+
+		case SDLK_KP_0:
+			if (!(code.mod & KMOD_NUM)) {
+				return false;
+			}
+			FALLS_THROUGH;
 		case SDLK_0:
 			if (code.mod & KMOD_ALT) {
 				filter_messages(Widelands::Message::Type::kAllMessages);
 				return true;
 			}
 			return false;
+
+		case SDLK_KP_1:
+			if (!(code.mod & KMOD_NUM)) {
+				return false;
+			}
+			FALLS_THROUGH;
 		case SDLK_1:
 			if (code.mod & KMOD_ALT) {
 				filter_messages(Widelands::Message::Type::kGeologists);
 				return true;
 			}
 			return false;
+
+		case SDLK_KP_2:
+			if (!(code.mod & KMOD_NUM)) {
+				return false;
+			}
+			FALLS_THROUGH;
 		case SDLK_2:
 			if (code.mod & KMOD_ALT) {
 				filter_messages(Widelands::Message::Type::kEconomy);
 				return true;
 			}
 			return false;
+
+		case SDLK_KP_3:
+			if (!(code.mod & KMOD_NUM)) {
+				return false;
+			}
+			FALLS_THROUGH;
 		case SDLK_3:
 			if (code.mod & KMOD_ALT) {
 				filter_messages(Widelands::Message::Type::kSeafaring);
 				return true;
 			}
 			return false;
+
+		case SDLK_KP_4:
+			if (!(code.mod & KMOD_NUM)) {
+				return false;
+			}
+			FALLS_THROUGH;
 		case SDLK_4:
 			if (code.mod & KMOD_ALT) {
 				filter_messages(Widelands::Message::Type::kWarfare);
 				return true;
 			}
 			return false;
+
+		case SDLK_KP_5:
+			if (!(code.mod & KMOD_NUM)) {
+				return false;
+			}
+			FALLS_THROUGH;
 		case SDLK_5:
 			if (code.mod & KMOD_ALT) {
 				filter_messages(Widelands::Message::Type::kScenario);
 				return true;
 			}
 			return false;
+
 		case SDLK_DELETE:
 			archive_or_restore();
 			return true;

@@ -1,20 +1,5 @@
 dirname = path.dirname (__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files (dirname .. "idle_??.png"),
-      hotspot = {23, 22},
-      fps = 10
-   },
-   fishing = {
-      pictures = path.list_files (dirname .. "fishing_??.png"),
-      hotspot = { 9, 23 },
-      fps = 10
-   },
-}
-add_directional_animation(animations, "walk", dirname, "walk", {10, 23}, 15)
-add_directional_animation(animations, "walkload", dirname, "walkload", {11, 26}, 15)
-
 tribes:new_worker_type {
    msgctxt = "amazons_worker",
    name = "amazons_hunter_gatherer",
@@ -43,13 +28,45 @@ tribes:new_worker_type {
          "walk=coords",
          "playsound=sound/fisher/fisher_throw_net 192",
          "mine=fish 1",
-         "animate=fishing 9500",
+         "animate=fishing 1000",
          "playsound=sound/fisher/fisher_pull_net 192",
          "createware=fish",
          "return"
       }
    },
 
-   ware_hotspot = {0, 20},
-   animations = animations,
+   animation_directory = dirname,
+   ware_hotspot = {0, 29},
+   spritesheets = {
+      walk = {
+         directional = true,
+         hotspot = {17, 28},
+         fps = 15,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      },
+      walkload = {
+         directional = true,
+         hotspot = {17, 31},
+         fps = 15,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      },
+      idle = {
+         hotspot = {31, 26},
+         fps = 15,
+         frames = 15,
+         columns = 5,
+         rows = 3
+      },
+      fishing = {
+         hotspot = {16, 31},
+         fps = 15,
+         frames = 15,
+         columns = 5,
+         rows = 3
+      },
+   },
 }

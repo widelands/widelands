@@ -26,7 +26,8 @@ function init_player()
          workers = {
             barbarians_builder = 3,
             barbarians_ox = 15,
-            barbarians_trainer = 2
+            barbarians_trainer = 2,
+            barbarians_scout = 1
          },
          wares = {
             log = 40,
@@ -36,6 +37,7 @@ function init_player()
             grout = 30,
             granite = 30,
             reed = 40,
+            ration = 20,
 
             -- wares for training
             ax_sharp = 20,
@@ -60,10 +62,10 @@ function init_player()
 
    -- Build the roads
    local map = wl.Game().map
-   connected_road(plr,map:get_field(29,58).immovable,"br,r|r,r|r,tr")
-   connected_road(plr,map:get_field(38,62).immovable,"l,l|l,bl|tl,tl|tl,tl")
-   connected_road(plr,map:get_field(32,63).immovable,"tr,tr|")
-   connected_road(plr,map:get_field(25,2).immovable,"tr,tr|tr,tr|tr,tr|tr,tr")
+   connected_road("normal", plr,map:get_field(29,58).immovable,"br,r|r,r|r,tr")
+   connected_road("normal", plr,map:get_field(38,62).immovable,"l,l|l,bl|tl,tl|tl,tl")
+   connected_road("normal", plr,map:get_field(32,63).immovable,"tr,tr|")
+   connected_road("normal", plr,map:get_field(25,2).immovable,"tr,tr|tr,tr|tr,tr|tr,tr")
 end
 
 run(init_player)
