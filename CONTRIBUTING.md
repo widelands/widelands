@@ -1,1 +1,1 @@
-See [Widekands Wiki](https://www.widelands.org/wiki/Contribute/)
+See [Widelands Wiki](https://www.widelands.org/wiki/Contribute/)
