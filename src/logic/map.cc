@@ -540,344 +540,194 @@ void Map::set_origin(const Coords& new_origin) {
 	log("Map origin was shifted by (%d, %d)\n", new_origin.x, new_origin.y);
 }
 
-// TODO(Nordfriese): These three functions have lots of code duplication and other redundancies.
-// Not to mention that they are very very ugly. They could do with some general refactoring.
-
 void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, const int32_t h) {
 	if (w == width_ && h == height_) {
 		return;
 	}
 
-	Field::Terrains default_terrains;
-	default_terrains.r = 0;
-	default_terrains.d = 0;
-
-	std::unique_ptr<Field[]> new_fields(new Field[w * h]);
-	clear_array<>(&new_fields, w * h);
-	std::unique_ptr<bool[]> was_preserved(new bool[width_ * height_]);
-	clear_array<bool>(&was_preserved, width_ * height_);
-	PortSpacesSet new_port_spaces;
 	const int16_t dx = w - width_;
 	const int16_t dy = h - height_;
+	const int16_t xoff = split.x - w;
+	const int16_t yoff = split.y - h;
 
-	// Many slightly different cases. This contains MASSES of code duplication.
+	// returns the old coords for the given new coords
+	std::function<Coords(int, int)> lambda_co;
+	// transform the given player starting pos or port space to new coordinate space
+	std::function<Coords(Coords)> lambda_cn;
+
+	// Nine different cases needed to handle geometry.
+	// This is the least code-duplication-heavy design I can think of.
 	if (dx < 0) {
 		if (dy < 0) {
 			if (split.x > w) {
 				if (split.y > h) {
 					// shrink both, one single block
-					const int16_t xoff = split.x - w;
-					const int16_t yoff = split.y - h;
-					for (int16_t x = 0; x < w; ++x) {
-						for (int16_t y = 0; y < h; ++y) {
-							Coords cn(x, y);
-							Coords co(x + xoff, y + yoff);
-							new_fields[get_index(cn, w)] = operator[](co);
-							assert(!was_preserved[get_index(co)]);
-							was_preserved[get_index(co)] = true;
-						}
-					}
-					for (Coords& c : starting_pos_) {
-						if (c) {
-							if (c.x >= split.x || c.x < xoff || c.y >= split.y || c.y < yoff) {
-								c = Coords::null();
-							} else {
-								c.x -= xoff;
-								c.y -= yoff;
-							}
-						}
-					}
-					for (Coords c : port_spaces_) {
+					lambda_co = [xoff, yoff](int x, int y) {
+						return Coords(x + xoff, y + yoff);
+					};
+					lambda_cn = [split, xoff, yoff](Coords c) {
 						if (c.x >= xoff && c.x < split.x && c.y >= yoff && c.y < split.y) {
-							new_port_spaces.insert(Coords(c.x - xoff, c.y - yoff));
+							return Coords(c.x - xoff, c.y - yoff);
 						}
-					}
+						return Coords::null();
+					};
 				} else {
 					// shrink both, single block horz and upper/lower strip
-					const int16_t xoff = split.x - w;
-					for (int16_t x = 0; x < w; ++x) {
-						for (int16_t y = 0; y < h; ++y) {
-							Coords cn(x, y);
-							Coords co(x + xoff, y < split.y ? y : y - dy);
-							new_fields[get_index(cn, w)] = operator[](co);
-							assert(!was_preserved[get_index(co)]);
-							was_preserved[get_index(co)] = true;
-						}
-					}
-					for (Coords& c : starting_pos_) {
-						if (c) {
-							if (c.x >= split.x || c.x < xoff || (c.y >= split.y && c.y < split.y - dy)) {
-								c = Coords::null();
-							} else {
-								c.x -= xoff;
-								if (c.y >= split.y) {
-									c.y += dy;
-								}
-							}
-						}
-					}
-					for (Coords c : port_spaces_) {
+					lambda_co = [split, dy, xoff](int x, int y) {
+						return Coords(x + xoff, y < split.y ? y : y - dy);
+					};
+					lambda_cn = [split, xoff, dy](Coords c) {
 						if (c.x >= xoff && c.x < split.x && (c.y < split.y || c.y >= split.y - dy)) {
-							new_port_spaces.insert(Coords(c.x - xoff, c.y < split.y ? c.y : c.y + dy));
+							return Coords(c.x - xoff, c.y < split.y ? c.y : c.y + dy);
 						}
-					}
+						return Coords::null();
+					};
 				}
 			} else {
 				if (split.y > h) {
 					// shrink both, single block vert and left/right strip
-					const int16_t yoff = split.y - h;
-					for (int16_t x = 0; x < w; ++x) {
-						for (int16_t y = 0; y < h; ++y) {
-							Coords cn(x, y);
-							Coords co(x < split.x ? x : x - dx, y + yoff);
-							new_fields[get_index(cn, w)] = operator[](co);
-							assert(!was_preserved[get_index(co)]);
-							was_preserved[get_index(co)] = true;
-						}
-					}
-					for (Coords& c : starting_pos_) {
-						if (c) {
-							if (c.y >= split.y || c.y < yoff || (c.x >= split.x && c.x < split.x - dx)) {
-								c = Coords::null();
-							} else {
-								c.y -= yoff;
-								if (c.x >= split.x) {
-									c.x += dx;
-								}
-							}
-						}
-					}
-					for (Coords c : port_spaces_) {
+					lambda_co = [split, yoff, dx](int x, int y) {
+						return Coords(x < split.x ? x : x - dx, y + yoff);
+					};
+					lambda_cn = [split, yoff, dx](Coords c) {
 						if (c.y >= yoff && c.y < split.y && (c.x < split.x || c.x >= split.x - dx)) {
-							new_port_spaces.insert(Coords(c.x < split.x ? c.x : c.x + dx, c.y - yoff));
+							return Coords(c.x < split.x ? c.x : c.x + dx, c.y - yoff);
 						}
-					}
+						return Coords::null();
+					};
 				} else {
 					// shrink both, upper/lower and left/right strips
-					for (int16_t x = 0; x < w; ++x) {
-						for (int16_t y = 0; y < h; ++y) {
-							Coords cn(x, y);
-							Coords co(x < split.x ? x : x - dx, y < split.y ? y : y - dy);
-							new_fields[get_index(cn, w)] = operator[](co);
-							assert(!was_preserved[get_index(co)]);
-							was_preserved[get_index(co)] = true;
-						}
-					}
-					for (Coords& c : starting_pos_) {
-						if (c) {
-							if ((c.x >= split.x && c.x < split.x - dx) ||
-							    (c.y >= split.y && c.y < split.y - dy)) {
-								c = Coords::null();
-							} else {
-								if (c.x >= split.x) {
-									c.x += dx;
-								}
-								if (c.y >= split.y) {
-									c.y += dy;
-								}
-							}
-						}
-					}
-					for (Coords c : port_spaces_) {
+					lambda_co = [split, dx, dy](int x, int y) {
+						return Coords(x < split.x ? x : x - dx, y < split.y ? y : y - dy);
+					};
+					lambda_cn = [split, dx, dy](Coords c) {
 						if ((c.x < split.x || c.x >= split.x - dx) &&
 						    (c.y < split.y || c.y >= split.y - dy)) {
-							new_port_spaces.insert(
-							   Coords(c.x < split.x ? c.x : c.x + dx, c.y < split.y ? c.y : c.y + dy));
+							return Coords(c.x < split.x ? c.x : c.x + dx, c.y < split.y ? c.y : c.y + dy);
 						}
-					}
+						return Coords::null();
+					};
 				}
 			}
 		} else {
 			if (split.x > w) {
 				// shrink horz, increase vert; one single block to pick the new data from
-				const int16_t xoff = split.x - w;
-				for (int16_t x = 0; x < w; ++x) {
-					for (int16_t y = 0; y < h; ++y) {
-						Coords cn(x, y);
-						if (y >= split.y && y < split.y + dy) {
-							Field& field = new_fields[get_index(cn, w)];
-							field.set_height(10);
-							field.set_terrains(default_terrains);
-						} else {
-							Coords co(x + xoff, y < split.y ? y : y - dy);
-							new_fields[get_index(cn, w)] = operator[](co);
-							assert(!was_preserved[get_index(co)]);
-							was_preserved[get_index(co)] = true;
-						}
+				lambda_co = [split, dy, xoff](int x, int y) {
+					if (y >= split.y && y < split.y + dy) {
+						return Coords::null();
 					}
-				}
-				for (Coords& c : starting_pos_) {
-					if (c) {
-						if (c.x >= split.x || c.x < xoff) {
-							c = Coords::null();
-						} else {
-							if (c.y >= split.y) {
-								c.y += dy;
-							}
-							c.x -= xoff;
-						}
-					}
-				}
-				for (Coords c : port_spaces_) {
+					return Coords(x + xoff, y < split.y ? y : y - dy);
+				};
+				lambda_cn = [split, dy, xoff](Coords c) {
 					if (c.x >= xoff && c.x < split.x) {
-						new_port_spaces.insert(Coords(c.x - xoff, c.y < split.y ? c.y : c.y + dy));
+						return Coords(c.x - xoff, c.y < split.y ? c.y : c.y + dy);
 					}
-				}
+					return Coords::null();
+				};
 			} else {
 				// shrink horz, increase vert; one left and one right strip
-				for (int16_t x = 0; x < w; ++x) {
-					for (int16_t y = 0; y < h; ++y) {
-						Coords cn(x, y);
-						if (y >= split.y && y < split.y + dy) {
-							Field& field = new_fields[get_index(cn, w)];
-							field.set_height(10);
-							field.set_terrains(default_terrains);
-						} else {
-							Coords co(x < split.x ? x : x - dx, y < split.y ? y : y - dy);
-							new_fields[get_index(cn, w)] = operator[](co);
-							assert(!was_preserved[get_index(co)]);
-							was_preserved[get_index(co)] = true;
-						}
+				lambda_co = [split, dx, dy](int x, int y) {
+					if (y >= split.y && y < split.y + dy) {
+						return Coords::null();
 					}
-				}
-				for (Coords& c : starting_pos_) {
-					if (c) {
-						if (c.x >= split.x && c.x < split.x - dx) {
-							c = Coords::null();
-						} else {
-							if (c.x >= split.x) {
-								c.x += dx;
-							}
-							if (c.y >= split.y) {
-								c.y += dy;
-							}
-						}
-					}
-				}
-				for (Coords c : port_spaces_) {
+					return Coords(x < split.x ? x : x - dx, y < split.y ? y : y - dy);
+				};
+				lambda_cn = [split, dx, dy](Coords c) {
 					if (c.x < split.x || c.x >= split.x - dx) {
-						new_port_spaces.insert(
-						   Coords(c.x < split.x ? c.x : c.x + dx, c.y < split.y ? c.y : c.y + dy));
+						return Coords(c.x < split.x ? c.x : c.x + dx, c.y < split.y ? c.y : c.y + dy);
 					}
-				}
+					return Coords::null();
+				};
 			}
 		}
 	} else {
 		if (dy < 0) {
 			if (split.y > h) {
 				// shrink vert, increase horz; one single block to pick the new data from
-				const int16_t yoff = split.y - h;
-				for (int16_t x = 0; x < w; ++x) {
-					for (int16_t y = 0; y < h; ++y) {
-						Coords cn(x, y);
-						if (x >= split.x && x < split.x + dx) {
-							Field& field = new_fields[get_index(cn, w)];
-							field.set_height(10);
-							field.set_terrains(default_terrains);
-						} else {
-							Coords co(x < split.x ? x : x - dx, y + yoff);
-							new_fields[get_index(cn, w)] = operator[](co);
-							assert(!was_preserved[get_index(co)]);
-							was_preserved[get_index(co)] = true;
-						}
+				lambda_co = [split, dx, yoff](int x, int y) {
+					if (x >= split.x && x < split.x + dx) {
+						return Coords::null();
 					}
-				}
-				for (Coords& c : starting_pos_) {
-					if (c) {
-						if (c.y >= split.y || c.y < yoff) {
-							c = Coords::null();
-						} else {
-							if (c.x >= split.x) {
-								c.x += dx;
-							}
-							c.y -= yoff;
-						}
-					}
-				}
-				for (Coords c : port_spaces_) {
+					return Coords(x < split.x ? x : x - dx, y + yoff);
+				};
+				lambda_cn = [split, yoff, dx](Coords c) {
 					if (c.y >= yoff && c.y < split.y) {
-						new_port_spaces.insert(Coords(c.x < split.x ? c.x : c.x + dx, c.y - yoff));
+						return Coords(c.x < split.x ? c.x : c.x + dx, c.y - yoff);
 					}
-				}
+					return Coords::null();
+				};
 			} else {
 				// shrink vert, increase horz; one lower and one upper strip
-				for (int16_t x = 0; x < w; ++x) {
-					for (int16_t y = 0; y < h; ++y) {
-						Coords cn(x, y);
-						if (x >= split.x && x < split.x + dx) {
-							Field& field = new_fields[get_index(cn, w)];
-							field.set_height(10);
-							field.set_terrains(default_terrains);
-						} else {
-							Coords co(x < split.x ? x : x - dx, y < split.y ? y : y - dy);
-							new_fields[get_index(cn, w)] = operator[](co);
-							assert(!was_preserved[get_index(co)]);
-							was_preserved[get_index(co)] = true;
-						}
+				lambda_co = [split, dx, dy](int x, int y) {
+					if (x >= split.x && x < split.x + dx) {
+						return Coords::null();
 					}
-				}
-				for (Coords& c : starting_pos_) {
-					if (c) {
-						if (c.y >= split.y && c.y < split.y - dy) {
-							c = Coords::null();
-						} else {
-							if (c.x >= split.x) {
-								c.x += dx;
-							}
-							if (c.y >= split.y) {
-								c.y += dy;
-							}
-						}
-					}
-				}
-				for (Coords c : port_spaces_) {
+					return Coords(x < split.x ? x : x - dx, y < split.y ? y : y - dy);
+				};
+				lambda_cn = [split, dx, dy](Coords c) {
 					if (c.y < split.y || c.y >= split.y - dy) {
-						new_port_spaces.insert(
-						   Coords(c.x < split.x ? c.x : c.x + dx, c.y < split.y ? c.y : c.y + dy));
+						return Coords(c.x < split.x ? c.x : c.x + dx, c.y < split.y ? c.y : c.y + dy);
 					}
-				}
+					return Coords::null();
+				};
 			}
 		} else {
 			// increase both
-			for (int16_t x = 0; x < w; ++x) {
-				for (int16_t y = 0; y < h; ++y) {
-					Coords co;
-					if (x < split.x && y < split.y) {
-						co = Coords(x, y);
-					} else if (x >= split.x + dx && y < split.y) {
-						co = Coords(x - dx, y);
-					} else if (y >= split.y + dy && x < split.x) {
-						co = Coords(x, y - dy);
-					} else if (x >= split.x + dx && y >= split.y + dy) {
-						co = Coords(x - dx, y - dy);
-					} else {
-						co = Coords::null();
-					}
-					Coords cn(x, y);
-					if (co) {
-						new_fields[get_index(cn, w)] = operator[](co);
-						assert(!was_preserved[get_index(co)]);
-						was_preserved[get_index(co)] = true;
-					} else {
-						Field& field = new_fields[get_index(cn, w)];
-						field.set_height(10);
-						field.set_terrains(default_terrains);
-					}
+			lambda_co = [split, dx, dy](int x, int y) {
+				if (x < split.x && y < split.y) {
+					return Coords(x, y);
+				} else if (x >= split.x + dx && y < split.y) {
+					return Coords(x - dx, y);
+				} else if (y >= split.y + dy && x < split.x) {
+					return Coords(x, y - dy);
+				} else if (x >= split.x + dx && y >= split.y + dy) {
+					return Coords(x - dx, y - dy);
 				}
-			}
-			for (Coords& c : starting_pos_) {
-				if (c && c.x >= split.x) {
-					c.x += dx;
-				}
-				if (c && c.y >= split.y) {
-					c.y += dy;
-				}
-			}
-			for (Coords c : port_spaces_) {
-				new_port_spaces.insert(
-				   Coords(c.x < split.x ? c.x : c.x + dx, c.y < split.y ? c.y : c.y + dy));
+				return Coords::null();
+			};
+			lambda_cn = [split, dx, dy](Coords c) {
+				return Coords(c.x < split.x ? c.x : c.x + dx, c.y < split.y ? c.y : c.y + dy);
+			};
+		}
+	}
+
+	std::unique_ptr<Field[]> new_fields(new Field[w * h]);
+	clear_array<>(&new_fields, w * h);
+	std::unique_ptr<bool[]> was_preserved(new bool[width_ * height_]);
+	clear_array<bool>(&was_preserved, width_ * height_);
+
+	Field::Terrains default_terrains;
+	default_terrains.r = 0;
+	default_terrains.d = 0;
+
+	for (int16_t x = 0; x < w; ++x) {
+		for (int16_t y = 0; y < h; ++y) {
+			Coords cn(x, y);
+			if (Coords co = lambda_co(x, y)) {
+				new_fields[get_index(cn, w)] = operator[](co);
+				assert(!was_preserved[get_index(co)]);
+				was_preserved[get_index(co)] = true;
+			} else {
+				Field& field = new_fields[get_index(cn, w)];
+				field.set_height(10);
+				field.set_terrains(default_terrains);
 			}
 		}
+	}
+	for (Coords& c : starting_pos_) {
+		if (c) {
+			c = lambda_cn(c);
+		}
+	}
+
+	{
+		PortSpacesSet new_port_spaces;
+		for (const Coords& c : port_spaces_) {
+			if (Coords cn = lambda_cn(c)) {
+				new_port_spaces.insert(cn);
+			}
+		}
+		port_spaces_ = new_port_spaces;
 	}
 
 	for (int16_t x = 0; x < width_; ++x) {
@@ -894,11 +744,12 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 			}
 		}
 	}
+
 	width_ = w;
 	height_ = h;
 	fields_.reset(new_fields.release());
-	port_spaces_ = new_port_spaces;
 	recalc_whole_map(egbase);
+
 	for (int16_t x = 0; x < width_; ++x) {
 		for (int16_t y = 0; y < height_; ++y) {
 			Field& f = operator[](Coords(x, y));
@@ -915,6 +766,7 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 			}
 		}
 	}
+
 	log("Map was resized to %d×%d\n", width_, height_);
 }
 
