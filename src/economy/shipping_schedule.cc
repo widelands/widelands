@@ -573,16 +573,78 @@ void ShippingSchedule::update(Game& game) {
 	
 	#nocom
 	
-	
-	/* SIXTH PASS:
-	 * Make a list of all ships that are idle, and distribute them more or less evenly among ports:
-	 * For each port, count how many ships are heading there or already located close by.
-	 * Distribute the number of idle ships among the ports with the fewest ships.
-	 * Send each ship to one of these ports (preferably a close by one).
-	 */
 
-	#nocom
-	
+	/* SIXTH PASS:
+	 * Make a list of all ships that are idle, and distribute them more or less evenly
+	 * among ports: For each port, count how many ships are heading there or already
+	 * located close by. Distribute the idle ships among the ports with the fewest
+	 * ships: Send each ship to one of these ports (preferably a close by one).
+	 */
+	constexpr int16_t kNearbyDockMaxDistanceFactor = 3;
+	std::list<Ship*> idle_ships;
+	std::list<std::pair<PortDock*, uint32_t>> ships_per_port;
+	auto increment_ships_per_port = [](std::list<std::pair<PortDock*, uint32_t>>& s, PortDock* pd) {
+		for (auto& pair : s) {
+			if (pair.first == pd) {
+				++pair.second;
+				return;
+			}
+		}
+		s[pd] = 1;
+	};
+	for (auto& plan : plans_) {
+		if (plan.second.empty()) {
+			idle_ships.push_back(plan.first);
+			for (PortDock* dock : fleet_.get_ports()) {
+				Path path;
+				if (game.map().findpath(plan.first->get_position(), dock->get_positions(game).back(),
+					kNearbyDockMaxDistanceFactor, path, CheckStepDefault(MOVECAPS_SWIM)) >= 0) {
+					increment_ships_per_port(ships_per_port, dock);
+				}
+			}
+		} else {
+			for (const SchedulingState& ss : plan.second) {
+				increment_ships_per_port(ships_per_port, ss.dock);
+			}
+		}
+	}
+	for (Ship* ship : idle_ships) {
+		std::list<PortDock*> candidates;
+		uint32_t fewest = std::numeric_limits<uint32_t>::max();
+		for (const auto& pair : ships_per_port) {
+			if (pair.second < fewest) {
+				fewest = pair.second;
+				candidates.clear();
+			}
+			if (pair.second == fewest) {
+				candidates.push_back(pair.first);
+			}
+		}
+		assert(!candidates.empty());
+		PortDock* closest = nullptr;
+		uint32_t dist = 0;
+		for (PortDock* dock : candidates) {
+			Path path;
+			uint32_t d;
+			ship->calculate_sea_route(game, *dock, &path);
+			game.map().calc_cost(path, &d, nullptr);
+			if (!closest || d < dist) {
+				dist = d;
+				closest = dock;
+			}
+		}
+		assert(closest);
+		plans_[ship].push_back(SchedulingState(*closest, false, dist));
+		ship->set_destination(game, closest);
+		auto it = ships_per_port.find(closest);
+		assert(it != ships_per_port.end());
+		assert(it->second > 0);
+		if (it->second > 1) {
+			--it->second;
+		} else {
+			ships_per_port.erase(it);
+		}
+	}
 }
 
 }
