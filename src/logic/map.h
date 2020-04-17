@@ -97,7 +97,9 @@ struct FindBobAlwaysTrue : public FindBob {
 
 // Helper struct to save certain elemental data of a field without an actual instance of Field
 struct FieldData {
-	FieldData(const Field& f);
+	explicit FieldData(const Field& f);
+	~FieldData() {
+	}
 
 	std::string immovable;
 	std::list<std::string> bobs;
@@ -108,6 +110,9 @@ struct FieldData {
 };
 // used for undoing map resize
 struct ResizeHistory {
+	~ResizeHistory() {
+	}
+
 	Extent size = Extent(0, 0);
 	std::list<FieldData> fields;
 	std::set<Coords> port_spaces;
