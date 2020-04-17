@@ -97,7 +97,9 @@ struct FindBobAlwaysTrue : public FindBob {
 
 // Helper struct to save certain elemental data of a field without an actual instance of Field
 struct FieldData {
-	explicit FieldData(const Field& f);
+	FieldData(const Field& f);
+	FieldData(const FieldData&) = default;
+	FieldData& operator=(const FieldData&) = default;
 	~FieldData() {
 	}
 
@@ -110,6 +112,9 @@ struct FieldData {
 };
 // used for undoing map resize
 struct ResizeHistory {
+	ResizeHistory() = default;
+	ResizeHistory(const ResizeHistory&) = default;
+	ResizeHistory& operator=(const ResizeHistory&) = default;
 	~ResizeHistory() {
 	}
 
