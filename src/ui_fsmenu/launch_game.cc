@@ -53,7 +53,9 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
                              UI::DropdownType::kTextual,
                              UI::PanelStyle::kFsMenu,
                              UI::ButtonStyle::kFsMenuMenu),
-     peaceful_(this, Vector2i(get_w() * 7 / 10, get_h() * 19 / 40 + buth_), _("Peaceful mode")),
+     //     peaceful_(this, Vector2i(get_w() * 7 / 10, get_h() * 19 / 40 + buth_), _("Peaceful
+     //     mode")),
+     peaceful_(this, Vector2i::zero(), _("Peaceful mode")),
      ok_(this, "ok", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuPrimary, _("Start game")),
      back_(this, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
      // Text labels
@@ -73,9 +75,10 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
 	win_condition_dropdown_.selected.connect(
 	   boost::bind(&FullscreenMenuLaunchGame::win_condition_selected, this));
 	peaceful_.changed.connect(boost::bind(&FullscreenMenuLaunchGame::toggle_peaceful, this));
-	back_.sigclicked.connect(
+	back_button().sigclicked.connect(
 	   boost::bind(&FullscreenMenuLaunchGame::clicked_back, boost::ref(*this)));
-	ok_.sigclicked.connect(boost::bind(&FullscreenMenuLaunchGame::clicked_ok, boost::ref(*this)));
+	ok_button().sigclicked.connect(
+	   boost::bind(&FullscreenMenuLaunchGame::clicked_ok, boost::ref(*this)));
 
 	lua_ = new LuaInterface();
 
@@ -228,4 +231,10 @@ void FullscreenMenuLaunchGame::clicked_ok() {
 // Implemented by subclasses
 void FullscreenMenuLaunchGame::clicked_back() {
 	NEVER_HERE();
+}
+UI::Button& FullscreenMenuLaunchGame::ok_button() {
+	return ok_;
+}
+UI::Button& FullscreenMenuLaunchGame::back_button() {
+	return back_;
 }

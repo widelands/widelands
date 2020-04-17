@@ -76,6 +76,7 @@
 #include "ui_fsmenu/internet_lobby.h"
 #include "ui_fsmenu/intro.h"
 #include "ui_fsmenu/launch_spg.h"
+#include "ui_fsmenu/launch_spg2.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/main.h"
 #include "ui_fsmenu/mapselect.h"
@@ -1327,7 +1328,8 @@ void WLApplication::mainmenu_multiplayer() {
  */
 bool WLApplication::new_game() {
 	SinglePlayerGameSettingsProvider sp;
-	FullscreenMenuLaunchSPG lgm(&sp);
+	//	FullscreenMenuLaunchSPG lgm(&sp);
+	FullscreenMenuLaunchSPG2 lgm(&sp);
 	const FullscreenMenuBase::MenuTarget code = lgm.run<FullscreenMenuBase::MenuTarget>();
 
 	if (code == FullscreenMenuBase::MenuTarget::kBack) {
