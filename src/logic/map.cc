@@ -744,6 +744,7 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 	width_ = w;
 	height_ = h;
 	fields_.reset(new_fields.release());
+	egbase.allocate_player_maps();
 	recalc_whole_map(egbase);
 
 	for (int16_t x = 0; x < width_; ++x) {
@@ -794,6 +795,7 @@ void Map::set_to(EditorGameBase& egbase, ResizeHistory rh) {
 	width_ = rh.size.w;
 	height_ = rh.size.h;
 	fields_.reset(new Field[width_ * height_]);
+	egbase.allocate_player_maps();
 	port_spaces_ = rh.port_spaces;
 	starting_pos_ = rh.starting_positions;
 	// first pass
