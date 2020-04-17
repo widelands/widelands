@@ -235,7 +235,7 @@ void Player::allocate_map() {
 	const Map& map = egbase().map();
 	assert(map.get_width());
 	assert(map.get_height());
-	fields_.reset(new Field[map.max_index());
+	fields_.reset(new Field[map.max_index()]);
 }
 
 /**
