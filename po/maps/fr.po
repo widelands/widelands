@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-03-16 06:59+0000\n"
-"PO-Revision-Date: 2020-03-16 10:14+0000\n"
+"POT-Creation-Date: 2020-04-15 14:44+0000\n"
+"PO-Revision-Date: 2020-04-06 15:54+0000\n"
 "Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -54,6 +54,135 @@ msgid ""
 "This tutorial explains the handling of military and training site buildings "
 "and will introduce fighting."
 msgstr "Ce tutoriel explique la gestion des bâtiments militaires et d'entraînement et vous présentera le combat."
+
+#. TRANSLATORS: The difficulty level of a campaign
+#: ../../data/campaigns/campaigns.lua:14
+msgid "Easy."
+msgstr "Facile."
+
+#. TRANSLATORS: The difficulty level of a campaign
+#: ../../data/campaigns/campaigns.lua:20
+msgid "Medium."
+msgstr "Moyen."
+
+#. TRANSLATORS: The difficulty level of a campaign
+#: ../../data/campaigns/campaigns.lua:25
+msgid "Hard."
+msgstr "Difficile."
+
+#. TRANSLATORS: The difficulty level of a campaign
+#: ../../data/campaigns/campaigns.lua:30
+msgid "Challenging."
+msgstr "Challenge."
+
+#. TRANSLATORS: The name of a Barbarian campaign
+#: ../../data/campaigns/campaigns.lua:43
+msgid "The Second Empire"
+msgstr "Le Second Empire"
+
+#. TRANSLATORS: A short description of a campaign
+#: ../../data/campaigns/campaigns.lua:49
+msgid "Introduces the Barbarians."
+msgstr "Présentation des Barbares"
+
+#. TRANSLATORS: A long description of a campaign
+#: ../../data/campaigns/campaigns.lua:52
+msgid ""
+"When Chat’Karuth died, he was an old man, father to three strong and "
+"ambitious sons, and warlord to an army that could match any enemy willing to"
+" rise against the ancient forests. Though at the end of his glorious reign, "
+"Chat’Karuth chose his eldest son, Thron, to succeed him as the tribe’s "
+"warlord – a decision that left his two brothers unsatisfied. The old warlord"
+" knew that. As his father instructed him, Thron left the capital of "
+"Al’thunran, the home of the Throne Among the Trees, and withdrew his forces "
+"to the high hills where he buried the corpse of his father. There he swore "
+"to the gods and his father’s spirit that he’d return to re-established "
+"order. While his brothers have raged blind war against Thron and the few "
+"forces he left to secure the borders of Al’thunran, the young warlord seeks "
+"to reunite his ambitious brothers and force the tribes to march once again "
+"under a common banner."
+msgstr "Lorsque Chat'Karuth est mort, c'était un vieil homme, père de trois fils forts et ambitieux, et chef de guerre d'une armée qui pourrait s'opposer à un ennemi prêt à se soulever contre les forêts anciennes. Bien qu'à la fin de son règne glorieux, Chat'Karuth ait choisi son fils aîné, Thron, pour lui succéder comme chef de guerre de la tribu – cette décision a laissé ses deux frères insatisfait. L'ancien chef de guerre le savait. Comme son père lui a demandé, Thron quitta la capitale de Al'thunran, la maison du Trône entre les arbres, et retira ses forces sur les hautes collines où il enterra le corps de son père. Il jura aux dieux et à l'esprit de son père qu'il reviendrait pour rétablir l'ordre. Tandis que ses frères ont engagé une guerre aveugle contre Thron et les quelques forces qu'il a laissé pour sécuriser les frontières de Al'thunran, le jeune chef de guerre cherche à réunir ses frères ambitieux et forcer les tribus à marcher une fois de plus sous une bannière commune."
+
+#. TRANSLATORS: The name of an Empire campaign
+#: ../../data/campaigns/campaigns.lua:70
+msgid "The Months of Exile"
+msgstr "Les mois d'exil"
+
+#. TRANSLATORS: A short description of a campaign
+#: ../../data/campaigns/campaigns.lua:73
+msgid "Introduces the Empire."
+msgstr "Présentation de l'Empire."
+
+#. TRANSLATORS: A long description of a campaign
+#: ../../data/campaigns/campaigns.lua:75
+msgid ""
+"Six months ago, Lutius – a young general of the Empire – was sent with 150 "
+"soldiers to the frontier beyond the northern forests where Barbarian tribes "
+"were crossing onto land held by the Empire. His task was to defend the "
+"Empire’s land. At first, everything was calm. He even talked to a few "
+"Barbarian children and thought about a peaceful life – side by side with "
+"this archaic folk. He began to feel safer and his army began to drop their "
+"attention off the potential enemy. That was their undoing. One night in "
+"March his unprepared army was attacked by 100 Barbarian footmen and was "
+"completely scattered. Only with his bare life he and a handful of his "
+"soldiers survived."
+msgstr "Il y a six mois, Lutius – un jeune général de l'Empire – a été envoyé avec 150 soldats à la frontière au-delà des forêts du nord où les tribus barbares traversaient sur des terres détenues par l'Empire. Sa tâche était de défendre la terre de l'Empire. Au début, tout était calme. Il a même parlé à quelques enfants barbares et pensa à une vie paisible - côte à côte avec ce peuple archaïque. Il a commencé à se sentir en sécurité et son armée a commencé à baisser sa garde. Ceci les conduit à leur perte. Une nuit de mars, son armée mal préparée a été attaquée par 100 fantassins barbares et a été complètement dispersée. Seul Lutius et une poignée de ses soldats ont survécu."
+
+#. TRANSLATORS: The name of an Atlantean campaign
+#: ../../data/campaigns/campaigns.lua:93
+msgid "The Run for the Fire"
+msgstr "La course pour le feu"
+
+#. TRANSLATORS: A short description of a campaign
+#: ../../data/campaigns/campaigns.lua:96
+msgid "Introduces the Atlanteans."
+msgstr "Présentation des Atlantes."
+
+#. TRANSLATORS: A long description of a campaign
+#: ../../data/campaigns/campaigns.lua:98
+msgid ""
+"When their God lost faith in the Atlanteans and drowned their island, one "
+"woman’s struggle for justice and a second chance for her people would become"
+" the stuff of legends. Leading the remaining Atlanteans into a new future in"
+" a new part of the World, Jundlina became the most powerful human of her "
+"time, but at a high cost: her humanity and soul."
+msgstr "Lorsque leur Dieu a perdu sa foi dans les Atlantes et noyé leur île, la lutte d'une femme pour la justice et une seconde chance pour son peuple deviendra légendaire. Dirigeant les Atlantes restants vers un nouvel avenir dans une nouvelle partie du monde, Jundlina est devenue la femme la plus puissante de son temps, mais à un coût élevé : son humanité et son âme."
+
+#. TRANSLATORS: The name of a Frisian campaign
+#: ../../data/campaigns/campaigns.lua:107
+msgid "From Water to Ice"
+msgstr "De l'eau à la glace"
+
+#. TRANSLATORS: A short description of a campaign
+#: ../../data/campaigns/campaigns.lua:110
+msgid "Introduces the Frisians."
+msgstr "Présentation des Frisons."
+
+#. TRANSLATORS: A campaign difficulty (easiest of three options)
+#: ../../data/campaigns/campaigns.lua:115
+msgid "Sailor (Tricky)"
+msgstr "Marin (Délicat)"
+
+#. TRANSLATORS: A campaign difficulty (medium of three options)
+#: ../../data/campaigns/campaigns.lua:117
+msgid "Steersman (Very Hard)"
+msgstr "Officier de navigation (Très difficile)"
+
+#. TRANSLATORS: A campaign difficulty (hardest of three options)
+#: ../../data/campaigns/campaigns.lua:119
+msgid "Captain (Unreasonable)"
+msgstr "Capitaine (Déraisonnable)"
+
+#. TRANSLATORS: A long description of a campaign
+#: ../../data/campaigns/campaigns.lua:124
+msgid ""
+"Living off the ocean is a constant struggle, and even more so for the "
+"inhabitants of the Frisian North Sea shore. Was the last storm flood, the "
+"most devastating one in human memory, really nothing more than yet another "
+"example for the hardships all Frisians have to face – or a sign from the "
+"gods that a tribe that only just settled here must seek out an entirely new "
+"home?"
+msgstr "Vivre sur les océans est un lutte constante, et encore plus pour les habitants de la rive Nord de Frison. Depuis la dernière tempête, la plus dévastatrice de mémoire d'homme, rien d'autre qu'un autre exemple des épreuves que les Frisons ont à endurer – ou un signe des dieux qu'une tribu s'étant installée ici doive chercher un nouvel abri ?"
 
 #: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
@@ -155,8 +284,9 @@ msgstr "Guerre"
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
-"soldiers, how to train them and how to lead them in battle."
-msgstr "Dans ce tutoriel, vous apprendrez les secrets de l'art de la guerre : comment recruter des soldats, les entraîner et les diriger au combat."
+"soldiers, how to train them and how to lead them in battle. Scouting will be"
+" also covered."
+msgstr "Dans ce tutoriel, vous apprendrez les secrets de l'art de la guerre: comment créer des soldats, les entraîner et les diriger au combat. Les éclaireurs seront aussi abordés."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
 msgid "Seafaring"

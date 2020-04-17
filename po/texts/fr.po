@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-03-16 06:59+0000\n"
-"PO-Revision-Date: 2020-03-16 10:17+0000\n"
+"POT-Creation-Date: 2020-04-15 14:44+0000\n"
+"PO-Revision-Date: 2020-04-06 15:40+0000\n"
 "Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -762,47 +762,53 @@ msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
 msgstr "Zoomez/Dézoomez avec la roulette de la souris ou %1%. Appuyez sur %2% pour revenir à la position de départ."
 
 #: ../../data/txts/tips/general_game.lua:75
+msgid ""
+"Use the ‘,’ (comma) and ‘.’ (period) keys to quickly jump between recently "
+"visited locations."
+msgstr "Utilisez les touches ',' (virgule) et '.' (point) pour sauter  rapidement entre les endroits récemment visités."
+
+#: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
 msgid "Ctrl+(Page Up/Page Down)"
 msgstr "Ctrl+(Page Haut/Page Bas)"
 
-#: ../../data/txts/tips/general_game.lua:75
+#: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
 msgid "Page Up/Page Down"
 msgstr "Page Haut/Page Bas"
 
-#: ../../data/txts/tips/general_game.lua:75
+#: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
 msgid "Shift+(Page Up/Page Down)"
 msgstr "Shift+(Page Haut/Page Bas)"
 
-#: ../../data/txts/tips/general_game.lua:75
+#: ../../data/txts/tips/general_game.lua:79
 msgid ""
 "Speed up or slow down the game with %1%. Use %2% for rapid change, %3% will "
 "adjust speed smoothly."
 msgstr "Accélérez ou ralentissez le jeu avec %1%. Utilisez %2% pour un changement rapide, %3% ajustera la vitesse doucement."
 
-#: ../../data/txts/tips/general_game.lua:79
+#: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
 msgid "Arrow keys"
 msgstr "Touches fléchées"
 
-#: ../../data/txts/tips/general_game.lua:79
+#: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
 msgid "Ctrl+Arrow keys"
 msgstr "Ctrl+Touches fléchées"
 
-#: ../../data/txts/tips/general_game.lua:79
+#: ../../data/txts/tips/general_game.lua:83
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
 msgstr "Bouges la vue de la carte en utilisant %1%. %2% bougera la vue plus vite, %3% bougera moins vite."
 
-#: ../../data/txts/tips/general_game.lua:79
+#: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
 msgid "Shift+Arrow keys"
 msgstr "Shift+Touches fléchées"
 
-#: ../../data/txts/tips/general_game.lua:83
+#: ../../data/txts/tips/general_game.lua:87
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"

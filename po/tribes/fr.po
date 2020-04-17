@@ -20,9 +20,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-02-21 18:05+0000\n"
-"PO-Revision-Date: 2020-02-21 18:09+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-04-15 14:44+0000\n"
+"PO-Revision-Date: 2020-04-06 15:14+0000\n"
+"Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -548,7 +548,7 @@ msgstr "Forgeron d'armures"
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:56
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:68
-#: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:85
+#: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:84
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:56
 #: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:58
 #: ../../data/tribes/buildings/productionsites/atlanteans/spiderfarm/init.lua:53
@@ -567,7 +567,7 @@ msgstr "Forgeron d'armures"
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:53
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:50
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:56
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:73
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:72
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:60
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:71
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:54
@@ -578,7 +578,7 @@ msgstr "Forgeron d'armures"
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:66
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:47
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:67
-#: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:84
+#: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:83
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:61
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:64
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:56
@@ -601,7 +601,7 @@ msgstr "Forgeron d'armures"
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:69
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:74
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:68
-#: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:85
+#: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:84
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:76
 #: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:73
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:76
@@ -833,7 +833,7 @@ msgstr "Le fermier qui travaille à cette ferme n'a pas dégagé le sol pour pla
 #: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "Chantier naval"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:7
@@ -1600,7 +1600,7 @@ msgstr "Le fermier qui travaille à cette ferme n'a pas nettoyé le sol pour pla
 #: ../../data/tribes/buildings/productionsites/barbarians/ferry_yard/init.lua:7
 msgctxt "barbarians_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "Chantier naval"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:7
@@ -2074,7 +2074,7 @@ msgstr "Le fermier qui travaille à cette ferme n'a pas nettoyé le sol pour pla
 #: ../../data/tribes/buildings/productionsites/empire/ferry_yard/init.lua:7
 msgctxt "empire_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "Chantier naval"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:7
@@ -2588,22 +2588,22 @@ msgstr "cuit des briques"
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:7
 msgctxt "frisians_building"
 msgid "Charcoal Burner’s House"
-msgstr ""
+msgstr "Maison de charbonnier"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a charcoal stack
 #. because ...
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:79
 msgid "making a charcoal stack"
-msgstr ""
+msgstr "Fait une pile de charbon"
 
 #. TRANSLATORS: Completed/Skipped/Did not start collecting coal because ...
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:90
 msgid "collecting coal"
-msgstr ""
+msgstr "Ramasse du charbon"
 
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:101
 msgid "Out of Clay Ponds"
-msgstr ""
+msgstr "Plus de bassins d'argile"
 
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:102
 msgctxt "frisians_building"
@@ -2612,7 +2612,7 @@ msgid ""
 "clay ponds in his work area. Please make sure there is a working clay pit "
 "nearby and the charcoal burner’s house is supplied with all needed wares, or"
 " consider dismantling or destroying this building."
-msgstr ""
+msgstr "Le charbonnier qui travaille dans cette maison de charbonnier ne peut plus trouver de bassins d'argile dans son périmètre de travail. Assurez-vous d'avoir une argilière fonctionnelle pas loin et que la maison du charbonnier soit approvisionnée avec les marchandises nécessaires, ou considérez le démantèlement ou la destruction de ce bâtiment."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:7
@@ -2734,7 +2734,7 @@ msgstr "Le fermier qui travaille dans cette ferme n'a pas de sol dégagé pour s
 #: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:7
 msgctxt "frisians_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "Chantier naval"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:7
@@ -3430,6 +3430,20 @@ msgctxt "frisians_building"
 msgid "Warehouse"
 msgstr "Entrepôt"
 
+#: ../../data/tribes/economy_profiles/atlanteans:4
+#: ../../data/tribes/economy_profiles/barbarians:4
+#: ../../data/tribes/economy_profiles/empire:4
+#: ../../data/tribes/economy_profiles/frisians:4
+msgid "Efficiency"
+msgstr "Efficacité"
+
+#: ../../data/tribes/economy_profiles/atlanteans:5
+#: ../../data/tribes/economy_profiles/barbarians:5
+#: ../../data/tribes/economy_profiles/empire:5
+#: ../../data/tribes/economy_profiles/frisians:5
+msgid "Stockpile"
+msgstr "Stock"
+
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/ashes/init.lua:42
 msgctxt "immovable"
@@ -3580,19 +3594,19 @@ msgstr "Argousier (mûr)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:13
 msgid "Stink Shepherd’s Tree (tiny)"
-msgstr ""
+msgstr "Arbre Bois-puant (minuscule)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:40
 msgid "Stink Shepherd’s Tree (small)"
-msgstr ""
+msgstr "Arbre Bois-puant (petit)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:67
 msgid "Stink Shepherd’s Tree (medium)"
-msgstr ""
+msgstr "Arbre Bois-puant (moyen)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:94
 msgid "Stink Shepherd’s Tree (ripe)"
-msgstr ""
+msgstr "Arbre Bois-puant (mûr)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:13
 msgid "Strawberries (tiny)"
@@ -3704,13 +3718,13 @@ msgstr "Vigne (minuscule)"
 #: ../../data/tribes/immovables/pond/burning/init.lua:7
 msgctxt "immovable"
 msgid "Burning Charcoal Stack"
-msgstr ""
+msgstr "Pile de charbon ardente"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/pond/coal/init.lua:7
 msgctxt "immovable"
 msgid "Pond With Charcoal"
-msgstr ""
+msgstr "Étang de charbon"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/pond/dry/init.lua:7
@@ -3909,7 +3923,7 @@ msgstr "Chargement des tribus: %1$s (%2$d/%3$d)"
 
 #: ../../data/tribes/init.lua:33
 msgid "Ships"
-msgstr ""
+msgstr "Navires"
 
 #: ../../data/tribes/init.lua:45 ../../data/tribes/scripting/help/init.lua:85
 msgid "Wares"
@@ -3926,15 +3940,15 @@ msgstr "Travailleurs Atlantes"
 
 #: ../../data/tribes/init.lua:254
 msgid "Barbarian workers"
-msgstr ""
+msgstr "Ouvriers barbares"
 
 #: ../../data/tribes/init.lua:289
 msgid "Empire workers"
-msgstr ""
+msgstr "Ouvriers de l'Empire"
 
 #: ../../data/tribes/init.lua:325
 msgid "Frisian workers"
-msgstr ""
+msgstr "Ouvriers Frisons"
 
 #: ../../data/tribes/init.lua:369
 msgid "Warehouses"
@@ -3942,34 +3956,34 @@ msgstr "Entrepôts"
 
 #: ../../data/tribes/init.lua:391
 msgid "Atlantean productionsites"
-msgstr ""
+msgstr "Sites de production Atlantes"
 
 #: ../../data/tribes/init.lua:429
 msgid "Barbarian productionsites"
-msgstr ""
+msgstr "Sites de production barbares"
 
 #: ../../data/tribes/init.lua:474
 msgid "Empire productionsites"
-msgstr ""
+msgstr "Sites de production de l'Empire"
 
 #: ../../data/tribes/init.lua:518
 msgid "Frisian productionsites"
-msgstr ""
+msgstr "Sites de production des Frisons"
 
 #: ../../data/tribes/init.lua:573
 msgid "Trainingsites"
-msgstr ""
+msgstr "Sites d'entrainement "
 
 #: ../../data/tribes/init.lua:590
 msgid "Militarysites"
-msgstr ""
+msgstr "Sites militaires"
 
 #: ../../data/tribes/init.lua:624
 msgid "Finishing"
-msgstr ""
+msgstr "Finition"
 
-#: ../../data/tribes/preload.lua:15 ../../data/tribes/preload.lua:32
-#: ../../data/tribes/preload.lua:49 ../../data/tribes/preload.lua:66
+#: ../../data/tribes/preload.lua:15 ../../data/tribes/preload.lua:36
+#: ../../data/tribes/preload.lua:57 ../../data/tribes/preload.lua:78
 msgid "The Widelands Development Team"
 msgstr "L'équipe de développement de Widelands"
 
@@ -3983,33 +3997,33 @@ msgid "The mighty tribes of the east-lands."
 msgstr "Les puissantes tribus des terres de l'est."
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:34
+#: ../../data/tribes/preload.lua:38
 msgid "Empire"
 msgstr "L'Empire"
 
-#: ../../data/tribes/preload.lua:35
+#: ../../data/tribes/preload.lua:39
 msgid "This is the culture of the Roman Empire."
 msgstr "Voici la culture de l'Empire Romain."
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:51
+#: ../../data/tribes/preload.lua:59
 msgid "Atlanteans"
 msgstr "Les Atlantes"
 
-#: ../../data/tribes/preload.lua:52
+#: ../../data/tribes/preload.lua:60
 msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
 msgstr "Cette tribu est connue par les plus vieux récits. Les fils et les filles d'Altlantis."
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:68
+#: ../../data/tribes/preload.lua:80
 msgid "Frisians"
-msgstr ""
+msgstr "Les Frisons"
 
-#: ../../data/tribes/preload.lua:69
+#: ../../data/tribes/preload.lua:81
 msgid "The inhabitants of the rough North Sea shore."
-msgstr ""
+msgstr "Les habitants des rudes rivages de la Mer du Nord."
 
 #: ../../data/tribes/scripting/help/init.lua:54
 msgid "Tribal Encyclopedia"
@@ -4038,6 +4052,23 @@ msgstr "Ouvriers"
 #: ../../data/tribes/scripting/help/init.lua:99
 msgid "Buildings"
 msgstr "Bâtiments"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/discovery.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/discovery.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/discovery.lua:11
+#: ../../data/tribes/scripting/starting_conditions/frisians/discovery.lua:11
+msgid "Discovery"
+msgstr "Découverte"
+
+#. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/discovery.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/discovery.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/discovery.lua:13
+#: ../../data/tribes/scripting/starting_conditions/frisians/discovery.lua:13
+msgid ""
+"Start the game with three ships on the ocean and only a handful of supplies"
+msgstr "Commencez le jeu avec trois navires sur l'océan et seulement une poignée de provision"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:11
@@ -4071,6 +4102,75 @@ msgstr "Quartier Général"
 #: ../../data/tribes/scripting/starting_conditions/frisians/headquarters.lua:13
 msgid "Start the game with your headquarters only"
 msgstr "Démarrer le jeu avec votre quartier-général seulement"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/new_world.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/new_world.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/new_world.lua:11
+#: ../../data/tribes/scripting/starting_conditions/frisians/new_world.lua:11
+msgid "New World"
+msgstr "Nouveau monde"
+
+#. TRANSLATORS: This is the tooltip for the "New World" starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/new_world.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/new_world.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/new_world.lua:13
+#: ../../data/tribes/scripting/starting_conditions/frisians/new_world.lua:13
+msgid "Start the game with seven ships full of wares on the ocean"
+msgstr "Commencez le jeu avec sept navires pleins de marchandises sur l'océan"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:11
+#: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:11
+msgid "Poor Hamlet"
+msgstr "Pauvre Hamlet"
+
+#. TRANSLATORS: This is the tooltip for the "Poor Hamlet" (minimum) starting
+#. condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:13
+#: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:13
+msgid ""
+"Start the game with just a warehouse and the bare minimum for bootstrapping "
+"an economy. Warning: the AI can't successfully start from this"
+msgstr "Commencez le jeu avec juste un dépôt et le strict minimum pour démarrer une économie. Avertissement: L'IA n'arrive pas à démarrer depuis ceci"
+
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:45
+#: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:43
+#: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:44
+#: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:45
+msgid "Be careful"
+msgstr "Soyez prudent"
+
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:45
+#: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:43
+#: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:44
+#: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:45
+msgid ""
+"You have only one iron for each tool you will need to start your economy. "
+"Make sure no unneeded tool is created."
+msgstr "Vous avez seulement une morceau de fer pour chaque outil donc vous aurez besoin pour démarrer votre économie. Assurez vous qu'aucun outil inutile ne soit produit."
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/struggling_outpost.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/struggling_outpost.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/struggling_outpost.lua:11
+#: ../../data/tribes/scripting/starting_conditions/frisians/struggling_outpost.lua:11
+msgid "Struggling Outpost"
+msgstr "Avant-poste luttant"
+
+#. TRANSLATORS: This is the tooltip for the "Hardcore" starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/struggling_outpost.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/struggling_outpost.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/struggling_outpost.lua:13
+#: ../../data/tribes/scripting/starting_conditions/frisians/struggling_outpost.lua:13
+msgid ""
+"Start the game with just your headquarters and very few wares for "
+"bootstrapping an economy. Warning: the AI can't successfully start from this"
+msgstr "Commencez le jeu avec juste vos quartiers-généraux et quelques marchandises pour démarrer votre économie. Avertissement: L'IA n'arrive pas à démarrer depuis ceci"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:11
@@ -4798,7 +4898,7 @@ msgstr "Fermier"
 #: ../../data/tribes/workers/atlanteans/ferry/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "Ferry"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/fishbreeder/init.lua:20
@@ -4939,37 +5039,37 @@ msgid "Woodcutter"
 msgstr "Bûcheron"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/baker/init.lua:17
+#: ../../data/tribes/workers/barbarians/baker/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Baker"
 msgstr "Boulanger"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/blacksmith/init.lua:17
+#: ../../data/tribes/workers/barbarians/blacksmith/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Blacksmith"
 msgstr "Forgeron"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/blacksmith_master/init.lua:17
+#: ../../data/tribes/workers/barbarians/blacksmith_master/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Master Blacksmith"
 msgstr "Maître forgeron"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/brewer/init.lua:17
+#: ../../data/tribes/workers/barbarians/brewer/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Brewer"
 msgstr "Brasseur"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/brewer_master/init.lua:17
+#: ../../data/tribes/workers/barbarians/brewer_master/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Master Brewer"
 msgstr "Maître brasseur"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/builder/init.lua:18
+#: ../../data/tribes/workers/barbarians/builder/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Builder"
 msgstr "Bâtisseur"
@@ -4987,13 +5087,13 @@ msgid "Cattle Breeder"
 msgstr "Éleveur de bétail"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/charcoal_burner/init.lua:17
+#: ../../data/tribes/workers/barbarians/charcoal_burner/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Charcoal Burner"
 msgstr "Charbonnier"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/farmer/init.lua:32
+#: ../../data/tribes/workers/barbarians/farmer/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Farmer"
 msgstr "Fermier"
@@ -5002,76 +5102,76 @@ msgstr "Fermier"
 #: ../../data/tribes/workers/barbarians/ferry/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "Ferry"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/fisher/init.lua:22
+#: ../../data/tribes/workers/barbarians/fisher/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Fisher"
 msgstr "Pêcheur"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/gamekeeper/init.lua:27
+#: ../../data/tribes/workers/barbarians/gamekeeper/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Gamekeeper"
 msgstr "Garde-chasse"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/gardener/init.lua:27
+#: ../../data/tribes/workers/barbarians/gardener/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Gardener"
 msgstr "Horticulteur"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/geologist/init.lua:23
+#: ../../data/tribes/workers/barbarians/geologist/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Geologist"
 msgstr "Géologue"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/helmsmith/init.lua:17
+#: ../../data/tribes/workers/barbarians/helmsmith/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Helmsmith"
 msgstr "Forgeron de casques"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/hunter/init.lua:18
+#: ../../data/tribes/workers/barbarians/hunter/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Hunter"
 msgstr "Chasseur"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/innkeeper/init.lua:17
+#: ../../data/tribes/workers/barbarians/innkeeper/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Innkeeper"
 msgstr "Aubergiste"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/lime_burner/init.lua:17
+#: ../../data/tribes/workers/barbarians/lime_burner/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Lime-Burner"
 msgstr "Brûleur de chaux"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/lumberjack/init.lua:23
+#: ../../data/tribes/workers/barbarians/lumberjack/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Lumberjack"
 msgstr "Bûcheron"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/miner/init.lua:17
+#: ../../data/tribes/workers/barbarians/miner/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Miner"
 msgstr "Mineur"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/miner_chief/init.lua:17
+#: ../../data/tribes/workers/barbarians/miner_chief/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Chief Miner"
 msgstr "Chef mineur"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/miner_master/init.lua:17
+#: ../../data/tribes/workers/barbarians/miner_master/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Master Miner"
 msgstr "Maître Mineur"
@@ -5083,31 +5183,31 @@ msgid "Ox"
 msgstr "Bœuf"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/ranger/init.lua:32
+#: ../../data/tribes/workers/barbarians/ranger/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Ranger"
 msgstr "Garde forestier"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/recruit/init.lua:12
+#: ../../data/tribes/workers/barbarians/recruit/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Recruit"
 msgstr "Recrue"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/scout/init.lua:17
+#: ../../data/tribes/workers/barbarians/scout/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Scout"
 msgstr "Éclaireur"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/shipwright/init.lua:18
+#: ../../data/tribes/workers/barbarians/shipwright/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Shipwright"
 msgstr "Constructeur de navires"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/smelter/init.lua:17
+#: ../../data/tribes/workers/barbarians/smelter/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Smelter"
 msgstr "Fondeur"
@@ -5119,19 +5219,19 @@ msgid "Soldier"
 msgstr "Soldat"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/stonemason/init.lua:23
+#: ../../data/tribes/workers/barbarians/stonemason/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Stonemason"
 msgstr "Tailleur de pierre"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/trainer/init.lua:16
+#: ../../data/tribes/workers/barbarians/trainer/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Trainer"
 msgstr "Entraîneur"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/weaver/init.lua:17
+#: ../../data/tribes/workers/barbarians/weaver/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Weaver"
 msgstr "Tisserand"
@@ -5200,7 +5300,7 @@ msgstr "Fermier"
 #: ../../data/tribes/workers/empire/ferry/init.lua:7
 msgctxt "empire_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "Ferry"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/fisher/init.lua:22
@@ -5428,7 +5528,7 @@ msgstr "Fermier"
 #: ../../data/tribes/workers/frisians/ferry/init.lua:7
 msgctxt "frisians_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "Ferry"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/fisher/init.lua:7

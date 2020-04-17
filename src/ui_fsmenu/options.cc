@@ -426,6 +426,11 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 	language_dropdown_.add(_("Try system language"), "", nullptr, current_locale == "");
 	language_dropdown_.add("English", "en", nullptr, current_locale == "en");
 
+	// Handle non-standard setups where the locale directory might be missing
+	if (!g_fs->is_directory(i18n::get_localedir())) {
+		return;
+	}
+
 	// Add translation directories to the list. Using the LanguageEntries' sortnames as a key for
 	// getting a sorted result.
 	std::map<std::string, LanguageEntry> entries;
