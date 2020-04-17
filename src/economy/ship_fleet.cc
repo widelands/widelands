@@ -864,7 +864,7 @@ void ShipFleet::log_general_info(const EditorGameBase& egbase) const {
 	molog("%" PRIuS " ships and %" PRIuS " ports\n", ships_.size(), ports_.size());
 }
 
-constexpr uint8_t kCurrentPacketVersion = 4;
+constexpr uint8_t kCurrentPacketVersion = 5;
 
 ShipFleet::Loader::Loader() {
 }
@@ -887,6 +887,13 @@ void ShipFleet::Loader::load(FileRead& fr) {
 	}
 
 	fleet.act_pending_ = fr.unsigned_8();
+
+	if (packet_version_ >= 5) {
+		fleet.schedule_.load(fr);
+	} else {
+		// TODO(Nordfriese): Savegame compatibility
+		throw wexception("Savegame compatibility for ShipFleet not yet implemented");
+	}
 }
 
 void ShipFleet::Loader::load_pointers() {
@@ -910,6 +917,8 @@ void ShipFleet::Loader::load_pointers() {
 	fleet.portpaths_.resize((fleet.ports_.size() * (fleet.ports_.size() - 1)) / 2);
 
 	fleet.act_pending_ = save_act_pending;
+
+	fleet.schedule_.load_pointers(mol());
 }
 
 void ShipFleet::Loader::load_finish() {
@@ -932,8 +941,9 @@ MapObject::Loader* ShipFleet::load(EditorGameBase& egbase, MapObjectLoader& mol,
 
 	try {
 		// The header has been peeled away by the caller
-		uint8_t const packet_version = fr.unsigned_8();
-		if (packet_version == kCurrentPacketVersion) {
+		packet_version_ = fr.unsigned_8();
+		// TODO(Nordfriese): Savegame compatibility
+		if (packet_version_ <= kCurrentPacketVersion && packet_version_ >= 4) {
 			PlayerNumber owner_number = fr.unsigned_8();
 			if (!owner_number || owner_number > egbase.map().get_nrplayers())
 				throw GameDataError("owner number is %u but there are only %u players", owner_number,
@@ -973,6 +983,8 @@ void ShipFleet::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 	}
 
 	fw.unsigned_8(act_pending_);
+
+	schedule_.save(egbase, mos, fw);
 }
 
 }  // namespace Widelands

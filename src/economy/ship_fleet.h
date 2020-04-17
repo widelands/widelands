@@ -157,6 +157,7 @@ protected:
 		void load_finish() override;
 
 	private:
+		uint8_t packet_version_;
 		std::vector<uint32_t> ships_;
 		std::vector<uint32_t> ports_;
 	};

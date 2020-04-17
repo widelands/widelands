@@ -997,7 +997,7 @@ void Ship::draw(const EditorGameBase& egbase,
 	if (info_to_draw & InfoToDraw::kStatistics) {
 		switch (ship_state_) {
 		case (ShipStates::kTransport):
-			if (!destinations_.empty()) {
+			if (destination_) {
 				/** TRANSLATORS: This is a ship state. The ship is currently transporting wares. */
 				statistics_string = pgettext("ship_state", "Shipping");
 			} else {
@@ -1046,18 +1046,18 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
 	            .str()
 	            .c_str() :
 	         "-");
-	molog("Has %" PRIuS " destination(s):\n", destinations_.size());
-	for (const auto& pair : destinations_) {
-		molog("    · %u (%3dx%3d) (priority %u)\n", pair.first.serial(),
-		      pair.first.get(egbase)->get_positions(egbase)[0].x,
-		      pair.first.get(egbase)->get_positions(egbase)[0].y, pair.second);
+	if (destination_) {
+		molog("Has destination %u (%3dx%3d)\n", destination_->serial(),
+				  destination_->get_positions(egbase)[0].x,
+				  destination_->get_positions(egbase)[0].y);
+	} else {
+		molog("No destination\n");
 	}
 
 	molog("In state: %u (%s)\n", static_cast<unsigned int>(ship_state_),
 	      (expedition_) ? "expedition" : "transportation");
 
-	if (!destinations_.empty() &&
-	    get_position().field->get_immovable() == destinations_.front().first.get(egbase)) {
+	if (destination_ && get_position().field->get_immovable() == destination_) {
 		molog("Currently in destination portdock\n");
 	}
 
@@ -1118,7 +1118,7 @@ Load / Save implementation
 ==============================
 */
 
-constexpr uint8_t kCurrentPacketVersion = 11;
+constexpr uint8_t kCurrentPacketVersion = 12;
 
 const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	if (name == "shipidle" || name == "ship")
@@ -1174,17 +1174,20 @@ void Ship::Loader::load(FileRead& fr, uint8_t pw) {
 
 	lastdock_ = fr.unsigned_32();
 
-	if (packet_version_ >= 9) {
+	if (packet_version_ >= 12 || packet_version_ < 9) {
+		// This is how we do it now, and how we did it in build20 as well
+		destination_ = fr.unsigned_32();
+	} else {
+		// …and this is how we did it for some months between b20 and b21.
+		// TODO(Nordfriese): Remove when we break savegame compatibility
 		const uint32_t nr_dest = fr.unsigned_32();
+		destination_ = 0;
 		for (uint32_t i = 0; i < nr_dest; ++i) {
 			const uint32_t s = fr.unsigned_32();
 			const uint32_t p = fr.unsigned_32();
-			destinations_.push_back(std::make_pair(s, p));
-		}
-	} else {
-		// TODO(Nordfriese): Remove when we break savegame compatibility
-		if (uint32_t serial = fr.unsigned_32()) {
-			destinations_.push_back(std::make_pair(serial, 1));
+			if (i == 0) {
+				destination_ = s;
+			}
 		}
 	}
 
@@ -1202,9 +1205,7 @@ void Ship::Loader::load_pointers() {
 	if (lastdock_) {
 		ship.lastdock_ = &mol().get<PortDock>(lastdock_);
 	}
-	for (const auto& pair : destinations_) {
-		ship.destinations_.push_back(std::make_pair(&mol().get<PortDock>(pair.first), pair.second));
-	}
+	ship.destination_ = destination_ ? &mol().get<PortDock>(destination_) : nullptr;
 
 	ship.items_.resize(items_.size());
 	for (uint32_t i = 0; i < items_.size(); ++i) {
@@ -1326,11 +1327,7 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	fw.string(shipname_);
 	fw.unsigned_32(capacity_);
 	fw.unsigned_32(mos.get_object_file_index_or_zero(lastdock_.get(egbase)));
-	fw.unsigned_32(destinations_.size());
-	for (const auto& pair : destinations_) {
-		fw.unsigned_32(mos.get_object_file_index_or_zero(pair.first.get(egbase)));
-		fw.unsigned_32(pair.second);
-	}
+	fw.unsigned_32(mos.get_object_file_index_or_zero(destination_);
 
 	fw.unsigned_32(items_.size());
 	for (ShippingItem& shipping_item : items_) {

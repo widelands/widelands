@@ -28,20 +28,26 @@
 
 namespace Widelands {
 
+class EditorGameBase;
+class FileRead;
+class FileWrite;
 class Game;
+struct MapObjectSaver;
 class PortDock;
 class Ship;
 struct ShipFleet;
 
 using CargoList = std::vector<std::pair<PortDock*, uint32_t>>;
+using CargoListLoader = std::vector<std::pair<Serial, uint32_t>>;
 
+template <typename DockT = PortDock*, typename CargosT = CargoList>
 struct SchedulingState {
-	PortDock* dock;
+	DockT dock;
 	bool expedition;
-	CargoList load_there;
+	CargosT load_there;
 	Duration duration_from_previous_location;
 
-	SchedulingState(PortDock& pd, bool exp = false, Duration d = 0) : dock(&pd), expedition(exp), duration_from_previous_location(d) {
+	SchedulingState(DockT pd, bool exp = false, Duration d = 0) : dock(pd), expedition(exp), duration_from_previous_location(d) {
 	}
 	SchedulingState(const SchedulingState&) = default;
 	SchedulingState& operator=(const SchedulingState&) = default;
@@ -83,12 +89,19 @@ public:
 		return plans_.empty();
 	}
 
+	void save(const EditorGameBase&, MapObjectSaver&, FileWrite&) const;
+	void load(FileRead&);
+	void load_pointers(MapObjectLoader&);
+
 private:
 	ShipFleet& fleet_;
 	std::map<Ship*, ShipPlan> plans_;
 
 	uint32_t last_updated_;
 	uint32_t last_actual_durations_recalculation_;
+
+	using ScheduleLoader = std::map<Serial, std::list<SchedulingState<Serial, CargoListLoader>>>;
+	std::unique_ptr<ScheduleLoader> loader_;
 
 	DISALLOW_COPY_AND_ASSIGN(ShippingSchedule);
 };

@@ -324,44 +324,8 @@ bool PortDock::load_one_item(Game& game, Ship& ship, const PortDock& dest) {
  * A ship has arrived at the dock. Set its next destination and load it accordingly.
  */
 void PortDock::ship_arrived(Game& game, Ship& ship) {
+	// The schedule handles everything
 	fleet_->get_schedule().ship_arrived(game, ship, *this);
-	/* PortState plan = fleet_->get_schedule().get(game, ship, *this);
-	ship.set_destination(game, plan.dock);
-	if (plan.expedition) {
-		assert(expedition_ready_);
-		assert(!plan.dock);
-		assert(plan.waiting.empty());
-		assert(ship.get_nritems() == 0);
-
-		std::vector<Worker*> workers;
-		std::vector<WareInstance*> wares;
-		expedition_bootstrap_->get_waiting_workers_and_wares(
-		   game, owner().tribe(), &workers, &wares);
-		for (Worker* worker : workers) {
-			ship.add_item(game, ShippingItem(*worker));
-		}
-		for (WareInstance* ware : wares) {
-			ship.add_item(game, ShippingItem(*ware));
-		}
-
-		ship.start_task_expedition(game);
-
-		// The expedition goods are now on the ship, so from now on it is independent from the port
-		// and thus we switch the port to normal, so we could even start a new expedition,
-		cancel_expedition(game);
-		fleet_->update(game);
-		return;
-	}
-
-	for (auto& pair : plan.waiting) {
-		assert(pair.first);
-		assert(pair.first != this);
-		assert(pair.second > 0);
-		for (; pair.second; --pair.second) {
-			load_one_item(game, ship, *pair.first);
-		}
-	}
-	fleet_->update(game); */
 }
 
 /**

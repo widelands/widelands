@@ -22,12 +22,14 @@
 #include <set>
 
 #include "economy/portdock.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "logic/game.h"
 #include "logic/map_objects/tribes/ship.h"
 
 namespace Widelands {
 
-ShippingSchedule::ShippingSchedule(ShipFleet& f) : fleet_(f), last_updated_(0), last_actual_durations_recalculation_(0) {
+ShippingSchedule::ShippingSchedule(ShipFleet& f) : fleet_(f), last_updated_(0), last_actual_durations_recalculation_(0), loader_(nullptr) {
 	assert(!fleet_.active());
 }
 
@@ -519,7 +521,7 @@ void ShippingSchedule::update(Game& game) {
 				}
 			}
 			plans_[ship].clear();
-			plans_[ship].push_back(SchedulingState(**closest, true, dist));
+			plans_[ship].push_back(SchedulingState(*closest, true, dist));
 			ports_with_unserviced_expeditions.erase(closest);
 			ships_for_expeditions.pop_front();
 		}
@@ -634,7 +636,7 @@ void ShippingSchedule::update(Game& game) {
 			}
 		}
 		assert(closest);
-		plans_[ship].push_back(SchedulingState(*closest, false, dist));
+		plans_[ship].push_back(SchedulingState(closest, false, dist));
 		ship->set_destination(game, closest);
 		auto it = ships_per_port.find(closest);
 		assert(it != ships_per_port.end());
@@ -645,6 +647,82 @@ void ShippingSchedule::update(Game& game) {
 			ships_per_port.erase(it);
 		}
 	}
+}
+
+constexpr uint16_t kCurrentPacketVersion = 1;
+void ShippingSchedule::save(const EditorGameBase&, MapObjectSaver& mos, FileWrite& fw) const {
+	fw.unsigned_16(kCurrentPacketVersion);
+
+	fw.unsigned_32(last_updated_);
+	fw.unsigned_32(last_actual_durations_recalculation_);
+
+	fw.unsigned_32(plans_.size());
+	for (const auto& pair : plans_) {
+		fw.unsigned_32(mos.get_object_file_index(*pair.first));
+		fw.unsigned_32(pair.second.size());
+		for (const SchedulingState& ss : pair.second) {
+			fw.unsigned_32(mos.get_object_file_index(*ss.dock));
+			fw.unsigned_32(ss.duration_from_previous_location);
+			fw.unsigned_8(ss.expedition ? 1 : 0);
+			fw.unsigned_32(ss.load_there.size());
+			for (const auto& cargo : ss.load_there) {
+				fw.unsigned_32(mos.get_object_file_index(*cargo.first));
+				fw.unsigned_32(cargo.second);
+			}
+		}
+	}
+}
+
+void ShippingSchedule::load(FileRead& fr) {
+	assert(!loader_);
+	loader_.reset(new ScheduleLoader());
+	try {
+		packet_version_ = fr.unsigned_16();
+		if (packet_version_ == kCurrentPacketVersion) {
+			last_updated_ = fr.unsigned_32();
+			last_actual_durations_recalculation_ = fr.unsigned_32();
+			for (uint32_t nr_plans = fr.unsigned_32(); nr_plans; --nr_plans) {
+				const Serial ship = fr.unsigned_32();
+				std::list<SchedulingState<Serial, CargoListLoader>> states_for_this_ship;
+				for (uint32_t nr_states = fr.unsigned_32(); nr_states; --nr_states) {
+					const Serial dock = fr.unsigned_32();
+					const Duration time = fr.unsigned_32();
+					const bool exp = fr.unsigned_8();
+					SchedulingState<Serial, CargoListLoader> state(dock, exp, time);
+					for (uint32_t nr_cargo = fr.unsigned_32(); nr_cargo; --nr_cargo) {
+						const Serial dest = fr.unsigned_32();
+						const Quantity nr = fr.unsigned_32();
+						state.load_there.push_back(std::make_pair(dest, nr));
+					}
+					states_for_this_ship.push_back(state);
+				}
+				(*loader_)[ship] = states_for_this_ship;
+			}
+		} else {
+			throw UnhandledVersionError("ShippingSchedule", packet_version, kCurrentPacketVersion);
+		}
+	} catch (const std::exception& e) {
+		throw wexception("loading shipping schedule: %s", e.what());
+	}
+}
+
+void ShippingSchedule::load_pointers(MapObjectLoader& mol) {
+	assert(loader_);
+	for (const auto& plan : *loader_) {
+		ShipPlan plan_for_this_ship;
+		for (const auto& state_loader : plan.second) {
+			SchedulingState state(&mol.get<PortDock>(state_loader.dock), state_loader.expedition, state_loader.duration_from_previous_location);
+			const size_t cargo = state_loader.load_there.size();
+			state.load_there.resize(cargo);
+			for (size_t s = 0; s < cargo; ++s) {
+				state.load_there[s].first = &mol.get<PortDock>(state_loader.load_there[s].first);
+				state.load_there[s].second = state_loader.load_there[s].second;
+			}
+			plan_for_this_ship.push_back(state);
+		}
+		plans_[&mol.get<Ship>(plan.first)] = plan_for_this_ship;
+	}
+	loader_.reset(nullptr);
 }
 
 }
