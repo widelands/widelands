@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2019 by the Widelands Development Team
+ * Copyright (C) 2019-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -141,7 +141,7 @@ void ShippingSchedule::port_removed(Game& game, PortDock* dock) {
 				// points now to the dock after the deleted dock
 				if (iterator_to_deleted_dock != pair.second.end()) {
 					Path path;
-					fleet_.get_path(*iterator_before_deleted_dock->dock, *iterator_to_deleted_dock->dock, path)
+					fleet_.get_path(*iterator_before_deleted_dock->dock, *iterator_to_deleted_dock->dock, path);
 					game.map().calc_cost(path, iterator_to_deleted_dock->duration_from_previous_location, nullptr);
 				}
 			}
@@ -183,6 +183,23 @@ void ShippingSchedule::ship_removed(const Game&, Ship* ship) {
 	// is deferred to the next call to update()
 }
 
+void ShippingSchedule::port_added(Game& game, PortDock& dock) {
+	if (fleet_.count_ports() > 1) {
+		// nothing to do currently
+		return;
+	}
+	// All ships are most likely panicking because they have
+	// no destination. Send them all to the new port.
+	for (Ship* ship : fleet_.get_ships()) {
+		assert(!ship->get_destination());
+		ship->set_destination(game, &dock);
+		for (ShippingItem& si : ship->items_) {
+			assert(!si.destination_dock_.is_set());
+			si.destination_dock_ = &dock;
+		}
+	}
+}
+
 void ShippingSchedule::update(Game& game) {
 	/*
 	 * This function is the heart of the shipping system.
@@ -194,7 +211,9 @@ void ShippingSchedule::update(Game& game) {
 	 * on every call every single port whether it has wares that will not be
 	 * transported anytime soon. If so, we can tell a nearby idle ship to pick up
 	 * wares, or order a ship that is already heading there to pick them up (if it
-	 * makes sense), or leave them for now for lack of capacity.
+	 * makes sense), or leave them for now for lack of capacity. We may also cancel
+	 * coming ships if transfers were cancelled so we need less capacity than
+	 * previously planned.
 	 * Additionally, we will distribute idle ships more or less equally among ports
 	 * so that every port will have a ship at hand immediately when it requires one
 	 * (provided that we have enough ships, of course).
@@ -203,7 +222,7 @@ void ShippingSchedule::update(Game& game) {
 	 * is far away. We used to have such an algorithm, but it was shown to
 	 * necessarily be a performance killer (I only say Travelling Salesman Problem),
 	 * so we dropped support for this approach and instead prefer the GOLDEN RULE that
-	 * a ship should never service too many destinations at once, regardless of their
+	 * a ship should never service too many destinations at once, REGARDLESS of their
 	 * relative distances. One ship from B to A plus one ship from B to C are better
 	 * than one ship from B to both A and C. Instead we prefer to distribute tasks
 	 * among many ships. This produces the best results when the player builds a large
@@ -236,8 +255,9 @@ void ShippingSchedule::update(Game& game) {
 					pair.second.front().duration_from_previous_location -= time_since_last_update;
 				} else {
 					// She said five more seconds, and that was ten seconds ago…
-					// The ship is behind schedule, so this is an
-					// arbitrary estimate about the arrival time.
+					// The ship is behind schedule, so this is an arbitrary estimate
+					// about the arrival time. Doesn't matter if it's inaccurate,
+					// the ship will most likely arrive within a few seconds.
 					pair.second.front().duration_from_previous_location /= 2;
 				}
 			}
@@ -248,8 +268,9 @@ void ShippingSchedule::update(Game& game) {
 	/* SECOND PASS:
 	 * Scan all ports. Make lists of waiting items.
 	 * Figure out when the items will be picked up.
-	 * Also cancel orders where we provided more capacity than is actually needed.
-	 * (This can happen when a transfer is cancelled when the item is still in the portdock.)
+	 * Also cancel orders where we provided more capacity than is actually needed (which
+	 * can happen when a transfer is cancelled when the item is still in the portdock),
+	 * and cancel expedition ships in spe whose expeditions were cancelled.
 	 */
 	const size_t nr_ports = fleet_.get_ports().size();
 
@@ -264,6 +285,7 @@ void ShippingSchedule::update(Game& game) {
 		return;
 	}
 	std::list<Ship*> ships_with_reduced_orders;
+	std::list<PortDock*> ports_with_unserviced_expeditions;
 	// Don't even think about trying to cache any of this. It is impossible to maintain.
 	std::map<PortDock* /* start */,
 	         std::map<PortDock* /* dest */,
@@ -273,13 +295,21 @@ void ShippingSchedule::update(Game& game) {
 	                            int32_t /* capacity missing (-) or extra (+) */
 	        >>>>> items_in_ports;
 	for (PortDock& dock : fleet_.get_ports()) {
+		const bool expedition_ready = dock.is_expedition_ready();
+		Ship* expedition_ship_coming = nullptr;
 		std::map<PortDock*, std::pair<std::map<Ship*, std::pair<Duration, Quantity>>, int32_t>> map;
 		for (const auto& plan : plans_) {
 			Duration eta = 0;
 			CargoList* load = nullptr;
+			bool expedition_ship_coming
 			for (const SchedulingState& ss : plan.second) {
 				eta += ss.duration_from_previous_location;
 				if (ss.dock == &dock) {
+					if (ss.expedition) {
+						assert(!expedition_ship_coming);
+						expedition_ship_coming = plan.first;
+						assert(ss.load_there.empty());
+					}
 					load = &ss.load_there;
 					break;
 				}
@@ -289,6 +319,21 @@ void ShippingSchedule::update(Game& game) {
 				for (const auto& cargo : *load) {
 					map[cargo.first].first[plan.first] = std::make_pair(eta, cargo.second);
 				}
+			}
+		}
+
+		if (expedition_ready && !expedition_ship_coming) {
+			ports_with_unserviced_expeditions.push_back(&dock);
+		} else if (expedition_ship_coming && !expedition_ready) {
+			for (ShipPlan::iterator it = plans_[expedition_ship_coming].begin(); it != plans_[expedition_ship_coming].end(); ++it) {
+				if (it->dock == &dock) {
+					assert(it->expedition);
+					plans_[expedition_ship_coming].erase(it);
+					break;
+				}
+			}
+			if (std::find(ships_with_reduced_orders.begin(), ships_with_reduced_orders.end(), expedition_ship_coming) == ships_with_reduced_orders.end()) {
+				ships_with_reduced_orders.push_back(expedition_ship_coming);
 			}
 		}
 
@@ -354,7 +399,9 @@ void ShippingSchedule::update(Game& game) {
 							}
 						}
 						assert(found);
-						ships_with_reduced_orders.push_back(pair_it->first);
+						if (std::find(ships_with_reduced_orders.begin(), ships_with_reduced_orders.end(), pair_it->first) == ships_with_reduced_orders.end()) {
+							ships_with_reduced_orders.push_back(pair_it->first);
+						}
 						if (erase) {
 							map[&dest].first.first.erase(pair_it);
 						}
@@ -371,40 +418,163 @@ void ShippingSchedule::update(Game& game) {
 	 * Go through the list of ships that had orders cancelled, and check whether we might
 	 * even skip some of their destinations altogether.
 	 */
-
-	
-	#nocom
-	
+	for (Ship* ship : ships_with_reduced_orders) {
+		assert(plans_.find(ship) != plans_.end());
+		ShipPlan::iterator previt = plans_[ship].end();
+		for (auto it = plans_[ship].begin(); it != plans_[ship].end();) {
+			if (ss.load_there.empty() && !ss.expedition) {
+				it = plans_[ship].erase(it);
+				if (it != plans_[ship].end()) {
+					if (previt == plans_[ship].end()) {
+						Path path;
+						ship->calculate_sea_route(game, it->dock, &path);
+						game.map().calc_cost(path, &it->duration_from_previous_location, nullptr);
+					} else {
+						Path path;
+						fleet_.get_path(*previt->dock, *it->dock, path);
+						game.map().calc_cost(path, &it->duration_from_previous_location, nullptr);
+					}
+				}
+			} else {
+				previt = it;
+				++it;
+			}
+		}
+	}
 
 	/* FOURTH PASS:
-	 * Go through the lists of start-end pairs where we need more capacity.
-	 * For each pair, check it a ship is coming that will visit the destination
-	 * shortly afterwards and still has capacity for more items.
-	 * If so, we'll assign the extra capacity to this ship – but only if the ship
-	 * will go straight or with a very little detour from here to there, and the
-	 * time from now to this ship's arrival here is not too high. If this
-	 * condition is not met, make a note of the ship and the expected arrival
-	 * time at the destination anyway.
-	 * If we didn't assign the entire required capacity yet, look for idle ships
-	 * and assign one or more of them (preferably the closest ones) the task of
-	 * transporting those items.
-	 * If we still have open demand for capacity then, also accept the ships we
-	 * didn't like at first.
-	 * And if that still isn't enough, check if there are other ports within a
-	 * low radius of the start and end ports, and also accept ships that have
-	 * a destination in the start group *directly followed by* a destination in
-	 * the end group, and has free capacity between these destinations, and tell
-	 * such a ship to additionally visit the start and end port between its two
-	 * existing targets.
+	 * First of all, check the waiting unserviced expeditions. If a ship is
+	 * heading for such a port and will not pick up anything there, and
+	 * has no plans beyond, make it an expedition ship there.
+	 * Then go through all ports with still unserviced expeditions ready,
+	 * and make a list of all idle or trivial ships. (A ship is called
+	 * trivial if it is not planning to pick up any wares or service an
+	 * expedition.) Assign every idle/trivial ship the closest unserviced
+	 * expedition, until we run out of idle ships or all expeditions are
+	 * serviced.
 	 */
+	for (auto dock = ports_with_unserviced_expeditions.begin(); dock != ports_with_unserviced_expeditions.end();) {
+		bool assigned = false;
+		for (auto& plan : plans_) {
+			bool has_further_plans = false;
+			SchedulingState* heading_there = nullptr;
+			for (SchedulingState& ss : plan.second) {
+				if (ss.dock == *dock) {
+					assert(!heading_there);
+					heading_there = &ss;
+					if (ss.expedition || !ss.load_there.empty()) {
+						has_further_plans = true;
+						break;
+					}
+				} else if (heading_there) {
+					has_further_plans = true;
+					break;
+				}
+			}
+			if (heading_there && !has_further_plans) {
+				// success
+				heading_there->expedition = true;
+				assigned = true;
+				break;
+			}
+		}
+		if (assigned) {
+			dock = ports_with_unserviced_expeditions.erase(dock);
+		} else {
+			++dock;
+		}
+	}
+	if (!ports_with_unserviced_expeditions.empty()) {
+		std::list<Ship*> ships_for_expeditions;
+		for (auto& plan : plans_) {
+			bool trivial = plan.second.empty();
+			if (!trivial) {
+				if (plan.first.get_nritems() == 0) {
+					trivial = true;
+					for (const SchedulingState& ss : plan.second) {
+						if (ss.expedition || !ss.load_there.empty()) {
+							trivial = false;
+							break;
+						}
+					}
+				}
+			}
+			if (trivial) {
+				assert(plan.first.get_nritems() == 0);
+				ships_for_expeditions.push_back(plan.first);
+			}
+		}
+		for (size_t matches = std::min(ports_with_unserviced_expeditions.size(), ships_for_expeditions.size()); matches; --matches) {
+			Ship* ship = ships_for_expeditions.front();
+			std::list<PortDock*>::iterator closest = ports_with_unserviced_expeditions.end();
+			uint32_t dist = 0;
+			for (PortDock* dock : ports_with_unserviced_expeditions) {
+				Path path;
+				uint32_t d;
+				ship->calculate_sea_route(game, *dock, &path);
+				game.map().calc_cost(path, &d, nullptr);
+				if (d < dist || closest == ports_with_unserviced_expeditions.end()) {
+					dist = d;
+					closest = dock;
+				}
+			}
+			plans_[ship].clear();
+			plans_[ship].push_back(SchedulingState(**closest, true, dist));
+			ports_with_unserviced_expeditions.erase(closest);
+			ships_for_expeditions.pop_front();
+		}
+	}
 
+	/* FIFTH PASS:
+	 * Go through the lists of start-end pairs where we need more capacity.
+	 * Assign each pair a priority based on the sum of the priorities of
+	 * the individual wares (workers have a very high priority).
+	 * 1) For each pair, check it a ship is coming that will visit the
+	 *    destination shortly afterwards and still has capacity for more
+	 *    items.
+	 *    a) If so, we'll assign the extra capacity to this ship – but only
+	 *       if the ship will go straight or with a very little detour from
+	 *       here to there, and the time from now to this ship's arrival
+	 *       here is not too high.
+	 *    b) If this condition is not met, make a note of the ship and the
+	 *       expected arrival time at the destination anyway for later use.
+	 * 2) If we didn't assign the entire required capacity yet, look for idle
+	 *    ships and assign one or more of them (preferably the closest ones)
+	 *    the task of transporting those items.
+	 * 3) If we still have open demand for capacity then, also accept the
+	 *    ships we didn't like at first (1b).
+	 * 4) And if that still isn't enough, check if there are other ports
+	 *    within a low radius of the start and end ports, and also accept
+	 *    ships that have a destination in the start group *directly followed
+	 *    by* a destination in the end group, and has free capacity between
+	 *    these destinations, and tell such a ship to additionally visit the
+	 *    start and end port between its two existing targets.
+	 */
+	constexpr uint32_t kWorkerPriority = 30;
+	struct PrioritisedPair {
+		PortDock* start;
+		PortDock* end;
+		uint32_t priority;
+		Quantity open_count;
+		// allow deterministic sorting in sets
+		bool operator<(const PrioritisedPair& pp) {
+			if (priority == pp.priority) {
+				if (start != pp.start) {
+					return start->serial() < pp.start->serial();
+				} 
+				return end->serial() < pp.end->serial();
+			}
+			return priority < pp.priority;
+		};
+	};
+	std::set<PrioritisedPair> open_count;
 	
 
 	
 	#nocom
 	
 	
-	/* FIFTH PASS:
+	/* SIXTH PASS:
 	 * Make a list of all ships that are idle, and distribute them more or less evenly among ports:
 	 * For each port, count how many ships are heading there or already located close by.
 	 * Distribute the number of idle ships among the ports with the fewest ships.

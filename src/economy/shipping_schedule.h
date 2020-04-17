@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2019 by the Widelands Development Team
+ * Copyright (C) 2019-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,6 +40,13 @@ struct SchedulingState {
 	bool expedition;
 	CargoList load_there;
 	Duration duration_from_previous_location;
+
+	SchedulingState(PortDock& pd, bool exp = false, Duration d = 0) : dock(&pd), expedition(exp), duration_from_previous_location(d) {
+	}
+	SchedulingState(const SchedulingState&) = default;
+	SchedulingState& operator=(const SchedulingState&) = default;
+	~SchedulingState() {
+	}
 };
 
 using ShipPlan = std::list<SchedulingState>;
@@ -53,12 +60,10 @@ public:
 	// called by ShipFleet::act()
 	void update(Game&);
 
-	void ship_added(const Game&, Ship&) {
+	void ship_added(Game&, Ship&) {
 		// Nothing to do currently
 	}
-	void port_added(const Game&, PortDock&) {
-		// Nothing to do currently
-	}
+	void port_added(Game&, PortDock&);
 	/**
 	  * Forget the plans for this ship. Disappointed items will be
 	  * taken care of again by the next update().
