@@ -49,6 +49,8 @@ Campaigns::Campaigns() {
 	campvis.reset(new Profile(kCampVisFile.c_str()));
 	Section& campvis_scenarios = campvis->get_safe_section("scenarios");
 
+	/** TRANSLATORS: A campaign difficulty */
+	const std::string default_difficulty_name = _("Default");
 	i18n::Textdomain td("maps");
 
 	// Now load the campaign info
@@ -90,8 +92,7 @@ Campaigns::Campaigns() {
 			   get_positive_int(*campaign_table, "default_difficulty");
 		} else {
 			assert(!campaign_table->has_key("default_difficulty"));
-			/** TRANSLATORS: A campaign difficulty */
-			campaign_data->difficulties.push_back(_("Default"));
+			campaign_data->difficulties.push_back(default_difficulty_name);
 			campaign_data->default_difficulty = 1;
 		}
 
