@@ -373,6 +373,29 @@ uint32_t PortDock::count_waiting(const PortDock* dest) const {
 	return waiting_.size();
 }
 
+uint32_t PortDock::calc_max_priority(const EditorGameBase& egbase, const PortDock& dest) const {
+	uint32_t p = 0;
+	for (const ShippingItem& si : waiting_) {
+		if (si.destination_dock_.serial() == dest.serial()) {
+			WareInstance* ware = nullptr;
+			Worker* worker = nullptr;
+			si.get(egbase, &ware, &worker);
+			if (ware) {
+				assert(!worker);
+				assert(ware->get_transfer());
+				assert(ware->get_transfer()->get_request());
+				p += ware->get_transfer()->get_request()->get_transfer_priority();
+			} else {
+				assert(worker);
+				assert(worker->get_transfer());
+				assert(worker->get_transfer()->get_request());
+				p += worker->get_transfer()->get_request()->get_transfer_priority();
+			}
+		}
+	}
+	return p;
+}
+
 /// \returns whether an expedition was started or is even ready
 bool PortDock::expedition_started() const {
 	return (expedition_bootstrap_ != nullptr) || expedition_ready_;

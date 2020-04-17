@@ -146,6 +146,8 @@ private:
 
 	bool load_one_item(Game&, Ship&, const PortDock& dest);
 
+	uint32_t calc_max_priority(const EditorGameBase&, const PortDock& dest) const;
+
 	ShipFleet* fleet_;
 	Warehouse* warehouse_;
 	PositionList dockpoints_;

@@ -238,7 +238,7 @@ void ShippingSchedule::update(Game& game) {
 	 * Now and then (every 20s), we calculate the exact time though to account for
 	 * delays resulting e.g. from ships stopping to let another ship pass.
 	 */
-	constexpr uint32_t kActualDurationsRecalculationInterval = 20000;
+	constexpr uint32_t kActualDurationsRecalculationInterval = 20 * 1000;
 	const uint32_t time = game.get_gametime();
 	const uint32_t time_since_last_update = time - last_updated_;
 	if (time - last_actual_durations_recalculation_ > kActualDurationsRecalculationInterval) {
@@ -529,22 +529,19 @@ void ShippingSchedule::update(Game& game) {
 
 	/* FIFTH PASS:
 	 * Go through the lists of start-end pairs where we need more capacity.
-	 * Assign each pair a priority based on the sum of the priorities of
-	 * the individual wares (workers have a very high priority).
+	 * Assign each pair a priority based on the sum of the transfer
+	 * priorities of the individual wares and workers.
 	 * 1) For each pair, check it a ship is coming that will visit the
 	 *    destination shortly afterwards and still has capacity for more
 	 *    items.
-	 *    a) If so, we'll assign the extra capacity to this ship – but only
-	 *       if the ship will go straight or with a very little detour from
-	 *       here to there, and the time from now to this ship's arrival
-	 *       here is not too high.
-	 *    b) If this condition is not met, make a note of the ship and the
-	 *       expected arrival time at the destination anyway for later use.
+	 *    If so, we'll assign the extra capacity to this ship, but only
+	 *    if the ship will go straight from here to there – and the time
+	 *    from now to this ship's arrival here is not too high.
+	 *    If the latter condition is not met, make a note of this ship.
 	 * 2) If we didn't assign the entire required capacity yet, look for idle
 	 *    ships and assign one or more of them (preferably the closest ones)
 	 *    the task of transporting those items.
-	 * 3) If we still have open demand for capacity then, also accept the
-	 *    ships we didn't like at first (1b).
+	 * 3) Still capacity left? Also accept the ships we noted in step 1.
 	 * 4) And if that still isn't enough, check if there are other ports
 	 *    within a low radius of the start and end ports, and also accept
 	 *    ships that have a destination in the start group *directly followed
@@ -552,29 +549,301 @@ void ShippingSchedule::update(Game& game) {
 	 *    these destinations, and tell such a ship to additionally visit the
 	 *    start and end port between its two existing targets.
 	 */
-	constexpr uint32_t kWorkerPriority = 30;
-	struct PrioritisedPair {
+	constexpr Duration kWonderfullyShortDuration = 10 * 1000; // 10 s
+	constexpr Duration kHorriblyLongDuration = 10 * 60 * 1000; // 10 min
+	constexpr uint16_t kMinScoreForImmediateAccept = 20;
+	struct ScoredShip {
+		Ship* ship;
+		uint32_t score;
+		uint32_t capacity;
+		Duration eta;
+
+		static inline uint32_t calc_score(uint32_t c, Duration eta) {
+			return eta > kHorriblyLongDuration ? 0 : c * kHorriblyLongDuration / std::max(eta, kWonderfullyShortDuration);
+		}
+		ScoredShip(Ship* s, uint32_t c, Duration d) : ship(s), score(calc_score(c, d)), capacity(c), eta(d) {
+		}
+		ScoredShip(const ScoredShip&) = default;
+		ScoredShip& operator=(const ScoredShip&) = default;
+		// "smaller" comparison means "better"
+		bool operator<(const ScoredShip& ss) const {
+			if (score != ss.score) {
+				return score > ss.score;
+			}
+			if (eta != ss.eta) {
+				return eta < ss.eta;
+			}
+			if (capacity != ss.capacity) {
+				return capacity > ss.capacity;
+			}
+			return ship->serial() < ss.ship->serial();
+		}
+		~ScoredShip() {
+		}
+	};
+	struct PrioritisedPortPair {
+		PrioritisedPortPair(PortDock* p1, PortDock* p2, uint32_t o, uint32_t p) : start(p1), end(p2), open_count(o), priority(p) {
+			assert(open_count > 0);
+			assert(start);
+			assert(end);
+		}
+		PrioritisedPortPair(const PrioritisedPortPair&) = default;
+		PrioritisedPortPair& operator=(const PrioritisedPortPair&) = default;
+		~PrioritisedPortPair() {
+		}
+
 		PortDock* start;
 		PortDock* end;
+		uint32_t open_count;
 		uint32_t priority;
-		Quantity open_count;
+
+		// cache for the functions below
+		std::set<ScoredShip> ships;
+
 		// allow deterministic sorting in sets
-		bool operator<(const PrioritisedPair& pp) {
+		// "smaller" comparison means "higher importance"
+		bool operator<(const PrioritisedPortPair& pp) {
 			if (priority == pp.priority) {
-				if (start != pp.start) {
-					return start->serial() < pp.start->serial();
-				} 
-				return end->serial() < pp.end->serial();
+				if (open_count == pp.open_count) {
+					if (start != pp.start) {
+						return start->serial() < pp.start->serial();
+					} 
+					return end->serial() < pp.end->serial();
+				}
+				return open_count > pp.open_count;
 			}
-			return priority < pp.priority;
+			return priority > pp.priority;
 		};
 	};
-	std::set<PrioritisedPair> open_count;
-	
+	std::set<PrioritisedPortPair> open_pairs;
+	for (auto& start__map : items_in_ports) {
+		for (auto& dest__shipsinfos : start__map.second) {
+			assert(dest__shipsinfos.second <= 0);
+			if (dest__shipsinfos.second < 0) {
+				const uint32_t maxprio = start__map.first->calc_max_priority(game, *dest__shipsinfos.first);
+				const int32_t total_waiting = start__map.first->count_waiting(*dest__shipsinfos.first);
+				const int32_t open = -dest__shipsinfos.second;
+				assert(total_waiting >= open);
+				assert(maxprio >= total_waiting); // a priority of at least 1 per item
+				const int32_t prio = maxprio * open / total_waiting;
+				assert(prio >= 0);
+				open_pairs.insert(PrioritisedPortPair(start__map.first, dest__shipsinfos.first, open, prio));
+			}
+		}
+	}
 
-	
-	#nocom
-	
+	// shared logic for steps 1 and 3, pulled out as a lambda function
+	auto load_on_ship = [this, &game](PrioritisedPortPair& ppp) {
+		const uint32_t take = std::min(ppp.open_count, ppp.ships.begin()->capacity);
+		assert(take);
+		for (ShippingState& ss : plans_[ppp.ships.begin()->ship]) {
+			assert(!ss.expedition);
+			if (ss.dock == ppp.start) {
+				bool found = false;
+				for (auto& pair : ss.load_there) {
+					if (pair.first == ppp.end) {
+						pair.second += take;
+						found = true;
+						break;
+					}
+				}
+				if (!found) {
+					ss.load_there[ppp.end] = take;
+				}
+				break;
+			}
+		}
+		ppp.ships.begin()->capacity -= take;
+		ppp.open_count -= take;
+		if (!ppp.ships.begin()->capacity) {
+			ppp.ships.erase(ppp.ships.begin());
+		}
+	};
+	// Helper function to determine how much capacity the given ship will have
+	// after at the given port. Returns 0 if the ship is not planning to go
+	// there or will launch an expedition from there.
+	auto get_free_capacity_at = [this](Ship& ship, Port& dock) {
+		assert(plans_.find(&ship) != plans_.end());
+		Cargo cargo_tracker;
+		for (const ShippingItem& si : ship.items_) {
+			PortDock* dest = si.get_destination(game);
+			bool found = false;
+			for (auto& pair : cargo_tracker) {
+				if (pair.first == dest) {
+					++pair.second;
+					found = true;
+					break;
+				}
+			}
+			if (!found) {
+				cargo_tracker.push_back(std::make_pair(dest, 1));
+			}
+		}
+		for (const SchedulingState& ss : plans_[&ship]) {
+			if (ss.expedition) {
+				return 0;
+			}
+			auto unload = std::find(cargo_tracker.begin(); cargo_tracker.end(); ss.dock);
+			if (unload != cargo_tracker.end()) {
+				cargo_tracker.erase(unload);
+			}
+			for (const auto& load : ss.load_there) {
+				bool found = false;
+				for (auto& pair : cargo_tracker) {
+					if (pair.first == load.first) {
+						pair.second += load.second;
+						found = true;
+						break;
+					}
+				}
+				if (!found) {
+					cargo_tracker.push_back(load);
+				}
+			}
+			if (ss.dock == &dock) {
+				uint32_t cap = ship.get_capacity();
+				for (const auto& pair : cargo_tracker) {
+					assert(cap >= pair.second);
+					cap -= pair.second;
+				}
+				return cap;
+			}
+		}
+		return 0;
+	};
+
+	// 1) check for coming ships already going there, or planning to go nowhere after here
+	for (PrioritisedPortPair& ppp : open_pairs) {
+		assert(ppp.ships.empty());
+		for (auto& plan : plans_) {
+			bool found_start = false;
+			bool found_end = false;
+			bool found_wrong_end = false;
+			Duration arrival_time = 0;
+			for (ShippingState& ss : plan.second) {
+				if (found_start) {
+					if (ss.dock == ppp.end) {
+						found_end = true;
+					} else {
+						found_wrong_end = true;
+					}
+					break;
+				} else {
+					if (ss.dock == ppp.end) {
+						// goes to the end point before visiting the start point :(
+						break;
+					}
+					arrival_time += ss.duration_from_previous_location;
+				}
+				if (ss.dock == ppp.start) {
+					found_start = true;
+				}
+			}
+			const uint32_t free_capacity = get_free_capacity_at(*pair.first, *ppp.start);
+			assert(free_capacity <= plan.first->get_capacity());
+			if (found_start && free_capacity && (found_end || !found_wrong_end)) {
+				ppp.ships.insert(ScoredShip(pair.first, free_capacity, arrival_time));
+			}
+		}
+		while (ppp.open_count > 0 && !ppp.ships.empty()) {
+			if (ppp.ships.begin()->score < kMinScoreForImmediateAccept * ppp.ships.begin()->capacity) {
+				break;
+			}
+			load_on_ship(ppp);
+		}
+	}
+
+	// 2) assign idle ships
+	std::list<Ship*> idle_ships;
+	for (auto& plan : plans_) {
+		if (plan.second.empty() || (plan.second.size() == 1 && !plan.second.front().expedition && plan.second.front().load_there.empty())) {
+			assert(plan.first.get_nritems() == 0);
+			idle_ships.push_back(plan.first);
+		}
+	}
+	for (PrioritisedPortPair& ppp : open_pairs) {
+		while (ppp.open_count) {
+			Ship* closest = nullptr;
+			uint32_t dist = 0;
+			for (Ship* ship : idle_ships) {
+				Path path;
+				uint32_t d;
+				ship->calculate_sea_route(game, *ppp.start, &path);
+				game.map().calc_cost(path, &d, nullptr);
+				if (!closest || d < dist) {
+					dist = d;
+					closest = ship;
+				}
+			}
+			assert(closest);
+			const uint32_t take = std::min(ppp.open_count, closest->get_capacity());
+			assert(take);
+			plans_[closest].clear();
+			plans_[closest].push_front(SchedulingState(ppp.start, false, dist);
+			plans_[closest].front().load_there.push_back(std::make_pair(ppp.end, take));
+			closest->set_destination(game, ppp.start);
+			ppp.open_count -= take;
+		}
+	}
+
+	// 3) accept suboptimal ships already heading here
+	std::list<PortDock*> open_count_left;
+	for (PrioritisedPortPair& ppp : open_pairs) {
+		while (ppp.open_count && !ppp.ships.empty()) {
+			load_on_ship(ppp);
+		}
+		if (ppp.open_count) {
+			bool found1 = false;
+			bool found2 = false;
+			for (const PortDock* pd : open_count_left) {
+				found1 |= pd == ppp.start;
+				found2 |= pd == ppp.end;
+				if (found1 && found2) { break; }
+			}
+			if (!found1) { open_count_left.push_back(ppp.start) }
+			if (!found2) { open_count_left.push_back(ppp.end) }
+		}
+	}
+
+	// 4) Make lists of all docks within a certain radius of the start and end docks,
+	//    and search for all ships that will service any port in the start group and
+	//    then either nothing, or any port in the end group (the latter only if the
+	//    ship has free capacity in-between). Sort all candidates using SortedShip
+	//    functionality, and then assign as many items as possible.
+	constexpr int16_t kDockGroupMaxDistanceFactor = 16;
+	if (!open_count_left.empty()) {
+		std::map<PortDock*, std::list<PortDock*>> groups;
+		// only calculate the groups for those docks where we need them
+		for (PortDock* dock : open_count_left) {
+			for (PortDock* other : fleet_.get_ports()) {
+				if (other == dock) {
+					groups[dock].push_back(other);
+					continue;
+				}
+				Path path;
+				fleet_.get_path(*dock, *other, path);
+				int32_t c1 = 0; int32_t c2 = 0;
+				game.map().calc_cost(path, &c1, &c2);
+				assert(c1 > 0); assert(c2 > 0);
+				if (c1 + c2 < 2 * kDockGroupMaxDistanceFactor) {
+					groups[dock].push_back(other);
+				}
+			}
+			assert(!groups.at(dock).empty());
+		}
+
+		for (PrioritisedPortPair& ppp : open_pairs) {
+			if (!ppp.open_count) { continue; }
+			
+			
+			
+			
+			#nocom
+			
+			
+			
+		}
+	}
 
 	/* SIXTH PASS:
 	 * Make a list of all ships that are idle, and distribute them more or less evenly
@@ -582,8 +851,8 @@ void ShippingSchedule::update(Game& game) {
 	 * located close by. Distribute the idle ships among the ports with the fewest
 	 * ships: Send each ship to one of these ports (preferably a close by one).
 	 */
-	constexpr int16_t kNearbyDockMaxDistanceFactor = 3;
-	std::list<Ship*> idle_ships;
+	constexpr int16_t kNearbyDockMaxDistanceFactor = 8;
+	idle_ships.clear();
 	std::list<std::pair<PortDock*, uint32_t>> ships_per_port;
 	auto increment_ships_per_port = [](std::list<std::pair<PortDock*, uint32_t>>& s, PortDock* pd) {
 		for (auto& pair : s) {
@@ -600,7 +869,7 @@ void ShippingSchedule::update(Game& game) {
 			for (PortDock* dock : fleet_.get_ports()) {
 				Path path;
 				if (game.map().findpath(plan.first->get_position(), dock->get_positions(game).back(),
-					kNearbyDockMaxDistanceFactor, path, CheckStepDefault(MOVECAPS_SWIM)) >= 0) {
+						kNearbyDockMaxDistanceFactor, path, CheckStepDefault(MOVECAPS_SWIM)) >= 0) {
 					increment_ships_per_port(ships_per_port, dock);
 				}
 			}
