@@ -101,6 +101,7 @@ struct FieldData {
 	FieldData(const FieldData&) = default;
 	FieldData& operator=(const FieldData&) = default;
 	~FieldData() {
+		bobs.clear();
 	}
 
 	std::string immovable;
@@ -112,13 +113,17 @@ struct FieldData {
 };
 // used for undoing map resize
 struct ResizeHistory {
-	ResizeHistory() = default;
+	ResizeHistory() : size(0, 0) {
+	}
 	ResizeHistory(const ResizeHistory&) = default;
 	ResizeHistory& operator=(const ResizeHistory&) = default;
 	~ResizeHistory() {
+		fields.clear();
+		port_spaces.clear();
+		starting_positions.clear();
 	}
 
-	Extent size = Extent(0, 0);
+	Extent size;
 	std::list<FieldData> fields;
 	std::set<Coords> port_spaces;
 	std::vector<Coords> starting_positions;
