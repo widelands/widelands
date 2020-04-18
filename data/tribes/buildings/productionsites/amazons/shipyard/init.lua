@@ -8,7 +8,7 @@ tribes:new_productionsite_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   needs_seafaring = true,
+   map_check = {"seafaring"},
 
    buildcost = {
       balsa = 2,
@@ -70,7 +70,6 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start constructing a ship because ...
          descname = _"constructing a ship",
          actions = {
-            "checkmap=seafaring",
             "construct=amazons_shipconstruction buildship 6",
             "sleep=20000",
          }

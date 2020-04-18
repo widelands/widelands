@@ -150,7 +150,7 @@ tribes:new_immovable_type{
       program = {
          "animate=idle 1535000",
          "transform=deadtree7 33",
-         "seed=balsa_amazons_sapling",
+         "seed=balsa_amazons_sapling 50",
       },
       fall = {
          "animate=fall 1000",
@@ -240,7 +240,7 @@ tribes:new_immovable_type{
       program = {
          "animate=idle 1535000",
          "transform=deadtree7 33",
-         "seed=balsa_black_amazons_sapling",
+         "seed=balsa_black_amazons_sapling 50",
       },
       fall = {
          "animate=fall 1000",
@@ -330,7 +330,7 @@ tribes:new_immovable_type{
       program = {
          "animate=idle 1535000",
          "transform=deadtree7 33",
-         "seed=balsa_desert_amazons_sapling",
+         "seed=balsa_desert_amazons_sapling 50",
       },
       fall = {
          "animate=fall 1000",
@@ -420,7 +420,7 @@ tribes:new_immovable_type{
       program = {
          "animate=idle 1535000",
          "transform=deadtree7 33",
-         "seed=balsa_winter_amazons_sapling",
+         "seed=balsa_winter_amazons_sapling 50",
       },
       fall = {
          "animate=fall 1000",
