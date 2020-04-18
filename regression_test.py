@@ -97,6 +97,12 @@ class WidelandsTestCase(unittest.TestCase):
                     '--language=en_US' ]
             args += [ "--{}={}".format(key, value) for key, value in iteritems(wlargs) ]
 
+            stdout_file.write("Running widelands binary: ")
+            for anarg in args:
+              stdout_file.write(anarg)
+              stdout_file.write(" ")
+            stdout_file.write("\n")
+
             widelands = subprocess.Popen(
                     args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             while 1:
@@ -106,6 +112,7 @@ class WidelandsTestCase(unittest.TestCase):
                 stdout_file.write(bytes_to_str(line))
                 stdout_file.flush()
             widelands.communicate()
+            stdout_file.write("\nReturned from Widelands, return code is %d\n" % widelands.returncode)
             self.widelands_returncode = widelands.returncode
         return stdout_filename
 
