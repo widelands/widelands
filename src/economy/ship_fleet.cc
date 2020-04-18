@@ -211,7 +211,7 @@ bool ShipFleet::merge(EditorGameBase& egbase, ShipFleet* other) {
 	while (!other->ships_.empty()) {
 		Ship* ship = other->ships_.back();
 		other->ships_.pop_back();
-		add_ship(ship);
+		add_ship(egbase, ship);
 	}
 
 	uint32_t old_nrports = ports_.size();
@@ -347,17 +347,6 @@ uint32_t ShipFleet::count_ships() const {
 	return ships_.size();
 }
 
-uint32_t ShipFleet::count_ships_heading_here(EditorGameBase& egbase, PortDock* port) const {
-	uint32_t ships_on_way = 0;
-	for (uint16_t s = 0; s < ships_.size(); ++s) {
-		if (ships_[s]->get_current_destination(egbase) == port) {
-			++ships_on_way;
-		}
-	}
-
-	return ships_on_way;
-}
-
 uint32_t ShipFleet::count_ports() const {
 	return ports_.size();
 }
@@ -420,11 +409,6 @@ void ShipFleet::remove_ship(EditorGameBase& egbase, Ship* ship) {
 		ship->set_economy(*game, nullptr, wwWARE);
 		ship->set_economy(*game, nullptr, wwWORKER);
 		schedule_.ship_removed(*game, ship);
-	}
-
-	if (ship->get_current_destination(egbase)) {
-		ship->get_current_destination(egbase)->ship_coming(*ship, false);
-		update(egbase);
 	}
 
 	if (ships_.empty()) {
@@ -613,7 +597,7 @@ void ShipFleet::remove_port(EditorGameBase& egbase, PortDock* port) {
 		// Some ship perhaps lose their destination now, so new a destination must be appointed (if
 		// any)
 		molog("Port removed from fleet, triggering fleet update\n");
-		schedule_.port_removed(*g, *port);
+		schedule_.port_removed(*g, port);
 		update(egbase);
 	}
 }
@@ -677,54 +661,6 @@ void ShipFleet::update(EditorGameBase& egbase) {
 	}
 }
 
-/*
- * Helper function for assigning ships to ports in need of a ship.
- * Penalizes the given ship if it is transporting wares.
- * A small detour to the given portdock is penalized very slightly, a longer detour drastically.
- * Returns false if the detour would be so long that this ship must not even be considered for
- * serving this port.
- */
-bool ShipFleet::penalize_route(Game& game, PortDock& p, const Ship& s, uint32_t* route_length) {
-	const uint32_t real_length = *route_length;
-	uint32_t malus = 1;
-	uint32_t index = 0;
-	PortDock* iterator = nullptr;
-	uint32_t shortest_detour = std::numeric_limits<uint32_t>::max();
-	uint32_t best_index = std::numeric_limits<uint32_t>::max();
-	for (const auto& pair : s.destinations_) {
-		PortDock* pd = pair.first.get(game);
-		Path path;
-		uint32_t detour;
-		if (iterator == &p) {
-			detour = 0;
-		} else if (iterator) {
-			get_path(*iterator, p, path);
-			detour = path.get_nsteps();
-		} else {
-			s.calculate_sea_route(game, p, &path);
-			detour = path.get_nsteps();
-		}
-		if (&p != pd) {
-			get_path(p, *pd, path);
-			detour += path.get_nsteps();
-		}
-		if (detour < shortest_detour) {
-			shortest_detour = detour;
-			best_index = index;
-		}
-		malus += pair.second;
-		iterator = pd;
-		++index;
-	}
-	*route_length += shortest_detour * best_index;
-	if (*route_length + shortest_detour > real_length * malus) {
-		// Unreasonably long detour
-		return false;
-	}
-	*route_length *= malus;
-	return true;
-}
-
 /**
  * Act callback updates ship scheduling of idle ships.
  *
@@ -751,111 +687,7 @@ void ShipFleet::act(Game& game, uint32_t) {
 	molog("ShipFleet::act\n");
 
 	// All the work is done by the schedule
-	schedule_.update(game, *this);
-}
-
-/**
- * Tell the given ship where to go next. May push any number of destinations.
- */
-
-void ShipFleet::push_next_destinations(Game& game, Ship& ship, const PortDock& from_port) {
-	std::vector<std::pair<PortDock*, uint32_t>>
-	   destinations;  // Destinations and the number of items waiting to go there
-	uint32_t total_items = ship.get_nritems();  // All waiting and shipping items
-	uint32_t waiting_items =
-	   0;  // Items that have a destination which this ship is not currently planning to visit
-	// Count how many items are waiting to go to each portdock
-	for (auto& it : from_port.waiting_) {
-		if (PortDock* pd = it.destination_dock_.get(game)) {
-			++total_items;
-			if (ship.has_destination(game, *pd)) {
-				continue;
-			}
-			++waiting_items;
-			bool found = false;
-			for (auto& pair : destinations) {
-				if (pair.first == pd) {
-					++pair.second;
-					found = true;
-					break;
-				}
-			}
-			if (!found) {
-				destinations.push_back(std::make_pair(pd, 1));
-			}
-		}
-	}
-	assert(waiting_items <= total_items);
-	if (waiting_items == 0) {
-		// Nothing to do
-		return;
-	}
-	total_items -= waiting_items;
-	// For each destination, decide whether to tell the ship to visit it
-	// or whether it would be better to wait for another ship
-	for (const auto& destpair : destinations) {
-		check_push_destination(game, ship, from_port, *destpair.first, destpair.second * total_items);
-	}
-}
-
-/*
- * Helper function for push_next_destinations():
- * Send the given ship to the given portdock (with the given penalty factor)
- * if the detour this would mean for the ship is not too long
- */
-void ShipFleet::check_push_destination(Game& game,
-                                       Ship& ship,
-                                       const PortDock& from_port,
-                                       PortDock& destination,
-                                       uint32_t penalty_factor) {
-	assert(!ship.has_destination(game, destination));
-	Path path;
-	get_path(from_port, destination, path);
-	const uint32_t direct_route = path.get_nsteps();
-	assert(direct_route);
-	uint32_t malus = 1;
-	uint32_t shortest_detour = std::numeric_limits<uint32_t>::max();
-	uint32_t best_index = std::numeric_limits<uint32_t>::max();
-	if (ship.destinations_.empty()) {
-		// Idle ships are preferred
-		best_index = 0;
-		malus = 0;
-		shortest_detour = 0;
-	} else {
-		const PortDock* iterator = &from_port;
-		uint32_t index = 0;
-		// This ship is going somewhere else, penalize it's priority for this order by
-		// the detour, the number of items it's shipping and the number of items waiting here
-		for (const auto& pair : ship.destinations_) {
-			const PortDock* pd = pair.first.get(game);
-			uint32_t detour = 0;
-
-			assert(iterator != pd);
-			get_path(*iterator, *pd, path);
-			const uint32_t base_length = path.get_nsteps();
-
-			assert(iterator != &destination);
-			get_path(*iterator, destination, path);
-			detour += path.get_nsteps();
-
-			assert(pd != &destination);
-			get_path(destination, *pd, path);
-			detour += path.get_nsteps();
-
-			detour -= std::min(detour, base_length);
-			if (detour < shortest_detour) {
-				shortest_detour = detour;
-				best_index = index;
-			}
-			malus += pair.second;
-			iterator = pd;
-			++index;
-		}
-	}
-	if (shortest_detour * malus * best_index <= direct_route * penalty_factor) {
-		// Send this ship if the penalty is not too high
-		ship.push_destination(game, destination);
-	}
+	schedule_.update(game);
 }
 
 void ShipFleet::log_general_info(const EditorGameBase& egbase) const {
@@ -941,18 +773,19 @@ MapObject::Loader* ShipFleet::load(EditorGameBase& egbase, MapObjectLoader& mol,
 
 	try {
 		// The header has been peeled away by the caller
-		packet_version_ = fr.unsigned_8();
+		const uint8_t packet_version = fr.unsigned_8();
 		// TODO(Nordfriese): Savegame compatibility
-		if (packet_version_ <= kCurrentPacketVersion && packet_version_ >= 4) {
+		if (packet_version <= kCurrentPacketVersion && packet_version >= 4) {
 			PlayerNumber owner_number = fr.unsigned_8();
 			if (!owner_number || owner_number > egbase.map().get_nrplayers())
 				throw GameDataError("owner number is %u but there are only %u players", owner_number,
 				                    egbase.map().get_nrplayers());
 
 			Player* owner = egbase.get_player(owner_number);
-			if (!owner)
+			if (!owner) {
 				throw GameDataError("owning player %u does not exist", owner_number);
-
+			}
+			loader->packet_version_ = packet_version;
 			loader->init(egbase, mol, *(new ShipFleet(owner)));
 			loader->load(fr);
 		} else {

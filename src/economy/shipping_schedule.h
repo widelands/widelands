@@ -20,18 +20,22 @@
 #ifndef WL_ECONOMY_SHIPPING_SCHEDULE_H
 #define WL_ECONOMY_SHIPPING_SCHEDULE_H
 
+#include <list>
 #include <map>
+#include <memory>
 #include <vector>
 
 #include "base/macros.h"
 #include "logic/widelands.h"
 
+class FileRead;
+class FileWrite;
+
 namespace Widelands {
 
 class EditorGameBase;
-class FileRead;
-class FileWrite;
 class Game;
+struct MapObjectLoader;
 struct MapObjectSaver;
 class PortDock;
 class Ship;
@@ -40,21 +44,22 @@ struct ShipFleet;
 using CargoList = std::vector<std::pair<PortDock*, uint32_t>>;
 using CargoListLoader = std::vector<std::pair<Serial, uint32_t>>;
 
-template <typename DockT = PortDock*, typename CargosT = CargoList>
-struct SchedulingState {
+template <typename DockT, typename CargosT>
+struct SchedulingStateT {
 	DockT dock;
 	bool expedition;
 	CargosT load_there;
 	Duration duration_from_previous_location;
 
-	SchedulingState(DockT pd, bool exp = false, Duration d = 0) : dock(pd), expedition(exp), duration_from_previous_location(d) {
+	SchedulingStateT(DockT pd, bool exp = false, Duration d = 0) : dock(pd), expedition(exp), duration_from_previous_location(d) {
 	}
-	SchedulingState(const SchedulingState&) = default;
-	SchedulingState& operator=(const SchedulingState&) = default;
-	~SchedulingState() {
+	SchedulingStateT(const SchedulingStateT&) = default;
+	SchedulingStateT& operator=(const SchedulingStateT&) = default;
+	~SchedulingStateT() {
 	}
 };
 
+using SchedulingState = SchedulingStateT<PortDock*, CargoList>;
 using ShipPlan = std::list<SchedulingState>;
 
 struct ShippingSchedule {
@@ -100,7 +105,7 @@ private:
 	uint32_t last_updated_;
 	uint32_t last_actual_durations_recalculation_;
 
-	using ScheduleLoader = std::map<Serial, std::list<SchedulingState<Serial, CargoListLoader>>>;
+	using ScheduleLoader = std::map<Serial, std::list<SchedulingStateT<Serial, CargoListLoader>>>;
 	std::unique_ptr<ScheduleLoader> loader_;
 
 	DISALLOW_COPY_AND_ASSIGN(ShippingSchedule);

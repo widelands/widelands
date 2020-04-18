@@ -257,7 +257,7 @@ SeafaringStatisticsMenu::create_shipinfo(const Widelands::Ship& ship) const {
 	ShipFilterStatus status = ShipFilterStatus::kAll;
 	switch (state) {
 	case Widelands::Ship::ShipStates::kTransport:
-		if (ship.get_current_destination(iplayer().game())) {
+		if (ship.get_destination()) {
 			status = ShipFilterStatus::kShipping;
 		} else {
 			status = ShipFilterStatus::kIdle;

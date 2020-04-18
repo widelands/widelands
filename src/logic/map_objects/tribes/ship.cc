@@ -1184,7 +1184,7 @@ void Ship::Loader::load(FileRead& fr, uint8_t pw) {
 		destination_ = 0;
 		for (uint32_t i = 0; i < nr_dest; ++i) {
 			const uint32_t s = fr.unsigned_32();
-			const uint32_t p = fr.unsigned_32();
+			fr.unsigned_32();
 			if (i == 0) {
 				destination_ = s;
 			}
@@ -1327,7 +1327,7 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	fw.string(shipname_);
 	fw.unsigned_32(capacity_);
 	fw.unsigned_32(mos.get_object_file_index_or_zero(lastdock_.get(egbase)));
-	fw.unsigned_32(mos.get_object_file_index_or_zero(destination_);
+	fw.unsigned_32(mos.get_object_file_index_or_zero(destination_));
 
 	fw.unsigned_32(items_.size());
 	for (ShippingItem& shipping_item : items_) {

@@ -23,6 +23,7 @@
 #include <memory>
 
 #include "base/macros.h"
+#include "economy/shipping_schedule.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "logic/path.h"
@@ -32,9 +33,7 @@ namespace Widelands {
 
 class Economy;
 struct Flag;
-class PortDock;
 struct RoutingNodeNeighbour;
-struct Ship;
 
 class ShipFleetDescr : public MapObjectDescr {
 public:
@@ -105,13 +104,12 @@ struct ShipFleet : MapObject {
 	void add_neighbours(PortDock& pd, std::vector<RoutingNodeNeighbour>& neighbours);
 
 	uint32_t count_ships() const;
-	uint32_t count_ships_heading_here(EditorGameBase& egbase, PortDock* port) const;
 	uint32_t count_ports() const;
 	bool get_act_pending() const;
 
 	bool empty() const;
 
-	ShippingSchedule get_schedule() {
+	ShippingSchedule& get_schedule() {
 		return schedule_;
 	}
 
@@ -156,8 +154,8 @@ protected:
 		void load_pointers() override;
 		void load_finish() override;
 
-	private:
 		uint8_t packet_version_;
+	private:
 		std::vector<uint32_t> ships_;
 		std::vector<uint32_t> ports_;
 	};
