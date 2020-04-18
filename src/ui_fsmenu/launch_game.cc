@@ -77,6 +77,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
 	peaceful_.changed.connect(boost::bind(&FullscreenMenuLaunchGame::toggle_peaceful, this));
 	back_button().sigclicked.connect(
 	   boost::bind(&FullscreenMenuLaunchGame::clicked_back, boost::ref(*this)));
+	log("connecting ok button...\n");
 	ok_button().sigclicked.connect(
 	   boost::bind(&FullscreenMenuLaunchGame::clicked_ok, boost::ref(*this)));
 
@@ -233,6 +234,7 @@ void FullscreenMenuLaunchGame::clicked_back() {
 	NEVER_HERE();
 }
 UI::Button& FullscreenMenuLaunchGame::ok_button() {
+	log("returning ok_\n");
 	return ok_;
 }
 UI::Button& FullscreenMenuLaunchGame::back_button() {
