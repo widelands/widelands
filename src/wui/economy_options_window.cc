@@ -88,8 +88,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	buttons->add_space(6);
 
 	b = new UI::Button(buttons, "toggle_infinite", 0, 0, 32, 28, UI::ButtonStyle::kWuiSecondary,
-	                   g_gr->images().get("images/ui_basic/infinity.png"),
-	                   _("Toggle infinite target"));
+	                   _("∞"), _("Toggle infinite target"));
 	b->sigclicked.connect([this] { toggle_infinite(); });
 	buttons->add(b);
 	b->set_repeating(false);
@@ -242,12 +241,12 @@ EconomyOptionsWindow::TargetWaresDisplay::info_for_ware(Widelands::DescriptionIn
 		die();
 		return *(new std::string());
 	}
-	const uint32_t a = economy->target_quantity(ware).permanent;
-	if (a == Widelands::kEconomyTargetInfinity) {
+	const Widelands::Quantity amount = economy->target_quantity(ware).permanent;
+	if (amount == Widelands::kEconomyTargetInfinity) {
 		/** TRANSLATORS: Infinite number of wares or workers */
 		return _("∞");
 	}
-	return boost::lexical_cast<std::string>(a);
+	return boost::lexical_cast<std::string>(amount);
 }
 
 /**
@@ -315,13 +314,13 @@ void EconomyOptionsWindow::EconomyOptionsPanel::toggle_infinite() {
 	for (const Widelands::DescriptionIndex& index : items) {
 		if (display_.ware_selected(index)) {
 			const Widelands::Economy::TargetQuantity& tq = economy->target_quantity(index);
-			uint32_t a;
+			Widelands::Quantity new_quantity;
 			if (tq.permanent == Widelands::kEconomyTargetInfinity) {
 				auto it = infinity_substitutes_.find(index);
 				if (it == infinity_substitutes_.end()) {
-					// The game was started with the target set to infinite, so we just use the default
-					// value
-					a = is_wares ?
+					// The window was opended with the target set to infinite,
+					// so we just use the default value
+					new_quantity = is_wares ?
 					       economy_options_window_->get_predefined_targets()
 					          .at(kDefaultEconomyProfile)
 					          .wares.at(index) :
@@ -330,20 +329,20 @@ void EconomyOptionsWindow::EconomyOptionsPanel::toggle_infinite() {
 					          .workers.at(index);
 				} else {
 					// Restore saved old value
-					a = it->second;
+					new_quantity = it->second;
 					infinity_substitutes_.erase(it);
 				}
 			} else {
-				a = Widelands::kEconomyTargetInfinity;
+				new_quantity = Widelands::kEconomyTargetInfinity;
 				// Save old target for when the infinity option is disabled again
 				infinity_substitutes_[index] = tq.permanent;
 			}
 			if (is_wares) {
 				game.send_player_command(new Widelands::CmdSetWareTargetQuantity(
-				   game.get_gametime(), player_->player_number(), serial_, index, a));
+				   game.get_gametime(), player_->player_number(), serial_, index, new_quantity));
 			} else {
 				game.send_player_command(new Widelands::CmdSetWorkerTargetQuantity(
-				   game.get_gametime(), player_->player_number(), serial_, index, a));
+				   game.get_gametime(), player_->player_number(), serial_, index, new_quantity));
 			}
 		}
 	}

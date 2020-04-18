@@ -53,7 +53,7 @@ struct EconomyOptionsWindow : public UI::Window {
 	~EconomyOptionsWindow() override;
 
 	struct PredefinedTargets {
-		using Targets = std::map<Widelands::DescriptionIndex, uint32_t>;
+		using Targets = std::map<Widelands::DescriptionIndex, Widelands::Quantity>;
 		Targets wares;
 		Targets workers;
 		bool undeletable = false;
@@ -124,7 +124,7 @@ private:
 		TargetWaresDisplay display_;
 		EconomyOptionsWindow* economy_options_window_;
 
-		std::map<Widelands::DescriptionIndex, uint32_t> infinity_substitutes_;
+		std::map<Widelands::DescriptionIndex, Widelands::Quantity> infinity_substitutes_;
 	};
 
 	/// Actions performed when a NoteEconomyWindow is received.
