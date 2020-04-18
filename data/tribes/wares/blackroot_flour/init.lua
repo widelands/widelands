@@ -9,7 +9,6 @@ tribes:new_ware_type {
    icon = dirname .. "menu.png",
    default_target_quantity = {
       atlanteans = 0
-
    },
    preciousness = {
       atlanteans = 2
