@@ -72,7 +72,7 @@ DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr,
                              bool loading,
                              FormerBuildings& former_buildings,
                              const std::map<DescriptionIndex, Quantity>& preserved_wares)
-   : PartiallyFinishedBuilding(gdescr), preserved_wares_(preserved_wares) {
+   : PartiallyFinishedBuilding(gdescr), preserved_wares_(preserved_wares), next_dropout_index_(0) {
 	position_ = c;
 	set_owner(plr);
 
@@ -200,15 +200,21 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
 		return true;
 	}
 
-	for (WaresQueue* q : dropout_wares_) {
-		if (q->get_filled()) {
-			q->set_filled(q->get_filled() - 1);
-			q->set_max_size(q->get_max_size() - 1);
-			const WareDescr& wd = *owner().tribe().get_ware_descr(q->get_index());
-			WareInstance& ware = *new WareInstance(q->get_index(), &wd);
-			ware.init(game);
-			worker.start_task_dropoff(game, ware);
-			return true;
+	// Drop out preserved wares round-robin
+	if (const size_t nr_dropout_queues = dropout_wares_.size()) {
+		bool first_round = true;
+		for (size_t i = next_dropout_index_; i != next_dropout_index_ || first_round; i = (i + 1) % nr_dropout_queues, first_round = false) {
+			WaresQueue& q = *dropout_wares_[i];
+			if (q.get_filled()) {
+				q.set_filled(q.get_filled() - 1);
+				q.set_max_size(q.get_max_size() - 1);
+				const WareDescr& wd = *owner().tribe().get_ware_descr(q.get_index());
+				WareInstance& ware = *new WareInstance(q.get_index(), &wd);
+				ware.init(game);
+				worker.start_task_dropoff(game, ware);
+				next_dropout_index_ = (i + 1) % nr_dropout_queues;
+				return true;
+			}
 		}
 	}
 

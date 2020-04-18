@@ -99,6 +99,7 @@ protected:
 
 private:
 	std::map<DescriptionIndex, Quantity> preserved_wares_;
+	size_t next_dropout_index_;
 };
 }  // namespace Widelands
 
