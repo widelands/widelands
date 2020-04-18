@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
+# Aba Baba <pietrodenicola2014@gmail.com>, 2020
 # Filippo Montano, 2020
 # GunChleoc, 2016
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
@@ -11,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-03-28 05:00+0000\n"
-"PO-Revision-Date: 2020-03-28 17:38+0000\n"
-"Last-Translator: Filippo Montano\n"
+"POT-Creation-Date: 2020-04-15 14:44+0000\n"
+"PO-Revision-Date: 2020-04-07 09:55+0000\n"
+"Last-Translator: Aba Baba <pietrodenicola2014@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -85,7 +86,7 @@ msgstr "Bisonte"
 msgid "Wolf"
 msgstr "Lupo"
 
-#: ../../data/world/immovables/bush1/init.lua:103
+#: ../../data/world/immovables/bush1/init.lua:105
 #: ../../data/world/immovables/bush2/init.lua:5
 #: ../../data/world/immovables/bush3/init.lua:5
 #: ../../data/world/immovables/bush4/init.lua:5
@@ -729,7 +730,7 @@ msgstr "Albero ad ombrello rosso"
 
 #: ../../data/world/init.lua:17
 msgid "Loading world: %1$s (%2$d/%3$d)"
-msgstr ""
+msgstr "Caricamento mondo: %1$s (%2$d/%3$d)"
 
 #: ../../data/world/init.lua:27
 msgid "Resources"
