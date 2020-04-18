@@ -203,7 +203,8 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
 	// Drop out preserved wares round-robin
 	if (const size_t nr_dropout_queues = dropout_wares_.size()) {
 		bool first_round = true;
-		for (size_t i = next_dropout_index_; i != next_dropout_index_ || first_round; i = (i + 1) % nr_dropout_queues, first_round = false) {
+		for (size_t i = next_dropout_index_; i != next_dropout_index_ || first_round;
+		     i = (i + 1) % nr_dropout_queues, first_round = false) {
 			WaresQueue& q = *dropout_wares_[i];
 			if (q.get_filled()) {
 				q.set_filled(q.get_filled() - 1);
