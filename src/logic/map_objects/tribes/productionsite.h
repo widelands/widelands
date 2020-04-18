@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -169,7 +169,6 @@ class ProductionSite : public Building {
 	friend struct ProductionProgram::ActCall;
 	friend struct ProductionProgram::ActCallWorker;
 	friend struct ProductionProgram::ActSleep;
-	friend struct ProductionProgram::ActCheckMap;
 	friend struct ProductionProgram::ActAnimate;
 	friend struct ProductionProgram::ActConsume;
 	friend struct ProductionProgram::ActProduce;

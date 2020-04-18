@@ -89,7 +89,6 @@ Command Types
 - `produce`_
 - `mine`_
 - `checksoldier`_
-- `checkmap`_
 - `train`_
 - `playsound`_
 
@@ -275,14 +274,6 @@ exhausted for a while already.
 checksoldier
 ------------
 Returns failure unless there are a specified amount of soldiers with specified level of specified properties. This command type is subject to change.
-
-checkmap
---------
-Checks the map for properties. At the moment, only 'seafaring' is available as parameter.
-
-Parameter syntax::
-
-  parameters ::= seafaring
 
 train
 -----

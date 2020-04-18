@@ -73,6 +73,7 @@ FIND_PATH(SDL2_INCLUDE_DIR SDL.h
   ~/Library/Frameworks
   /Library/Frameworks
   /usr/local/include/SDL2
+  /usr/include/x86_64-linux-gnu/SDL2 # Ubuntu Focal (?)
   /sw # Fink
   /opt/local # DarwinPorts
   /opt/csw # Blastwave
