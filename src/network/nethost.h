@@ -75,6 +75,7 @@ private:
 	 * If someone wants to connect, establish a connection
 	 * and add the connection to accept_queue_ and continue waiting.
 	 * @param acceptor The acceptor we should be listening on.
+	 * @param pair A pair of the BufferedConnection for the new client and its socket.
 	 */
 	void start_accepting(
 	   boost::asio::ip::tcp::acceptor& acceptor,
