@@ -22,8 +22,6 @@
 
 #include <cassert>
 
-#include <boost/signals2.hpp>
-
 #include "logic/widelands.h"
 
 namespace Widelands {
@@ -61,8 +59,6 @@ struct WareList {
 	bool operator!=(const WareList& wl) const {
 		return !(*this == wl);
 	}
-
-	mutable boost::signals2::signal<void()> changed;
 
 private:
 	std::vector<Quantity> wares_;
