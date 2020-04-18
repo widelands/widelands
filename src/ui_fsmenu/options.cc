@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -296,8 +296,9 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 		    (SDL_BITSPERPIXEL(mode.format) == 32 || SDL_BITSPERPIXEL(mode.format) == 24)) {
 			ScreenResolution this_res = {
 			   mode.w, mode.h, static_cast<int32_t>(SDL_BITSPERPIXEL(mode.format))};
-			if (this_res.depth == 24)
+			if (this_res.depth == 24) {
 				this_res.depth = 32;
+			}
 			if (resolutions_.empty() || this_res.xres != resolutions_.rbegin()->xres ||
 			    this_res.yres != resolutions_.rbegin()->yres) {
 				resolutions_.push_back(this_res);
@@ -424,6 +425,11 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 	// We want these two entries on top - the most likely user's choice and the default.
 	language_dropdown_.add(_("Try system language"), "", nullptr, current_locale == "");
 	language_dropdown_.add("English", "en", nullptr, current_locale == "en");
+
+	// Handle non-standard setups where the locale directory might be missing
+	if (!g_fs->is_directory(i18n::get_localedir())) {
+		return;
+	}
 
 	// Add translation directories to the list. Using the LanguageEntries' sortnames as a key for
 	// getting a sorted result.
@@ -609,8 +615,9 @@ OptionsCtrl::OptionsCtrl(Section& s)
 
 void OptionsCtrl::handle_menu() {
 	FullscreenMenuBase::MenuTarget i = opt_dialog_->run<FullscreenMenuBase::MenuTarget>();
-	if (i != FullscreenMenuBase::MenuTarget::kBack)
+	if (i != FullscreenMenuBase::MenuTarget::kBack) {
 		save_options();
+	}
 	if (i == FullscreenMenuBase::MenuTarget::kApplyOptions) {
 		uint32_t active_tab = opt_dialog_->get_values().active_tab;
 		g_gr->change_resolution(opt_dialog_->get_values().xres, opt_dialog_->get_values().yres);

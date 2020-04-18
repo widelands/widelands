@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -422,8 +422,9 @@ WLApplication::~WLApplication() {
 
 	TTF_Quit();  // TODO(unknown): not here
 
-	assert(g_fs);
-	delete g_fs;
+	if (g_fs) {
+		delete g_fs;
+	}
 	g_fs = nullptr;
 
 	if (redirected_stdio_) {
@@ -871,10 +872,26 @@ bool WLApplication::init_settings() {
  * Initialize language settings
  */
 void WLApplication::init_language() {
+	// Set the locale dir
+	i18n::set_localedir(g_fs->canonicalize_name(datadir_ + "/locale"));
+
+	// If locale dir is not a directory, barf. We can handle it not being there tough.
+	if (g_fs->file_exists(i18n::get_localedir()) && !g_fs->is_directory(i18n::get_localedir())) {
+		SDL_ShowSimpleMessageBox(
+		   SDL_MESSAGEBOX_ERROR, "'locale' directory not valid",
+		   std::string(i18n::get_localedir() + "\nis not a directory. Please fix this.").c_str(),
+		   NULL);
+		log("ERROR: %s is not a directory. Please fix this.\n", i18n::get_localedir().c_str());
+		exit(1);
+	}
+
+	if (!g_fs->is_directory(i18n::get_localedir()) ||
+	    g_fs->list_directory(i18n::get_localedir()).empty()) {
+		log("WARNING: No locale translations found in %s\n", i18n::get_localedir().c_str());
+	}
+
 	// Initialize locale and grab "widelands" textdomain
 	i18n::init_locale();
-
-	i18n::set_localedir(datadir_ + "/locale");
 	i18n::grab_textdomain("widelands");
 
 	// Set locale corresponding to selected language
