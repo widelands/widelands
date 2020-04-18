@@ -244,7 +244,7 @@ EconomyOptionsWindow::TargetWaresDisplay::info_for_ware(Widelands::DescriptionIn
 	const Widelands::Quantity amount = economy->target_quantity(ware).permanent;
 	if (amount == Widelands::kEconomyTargetInfinity) {
 		/** TRANSLATORS: Infinite number of wares or workers */
-		return _("∞");
+		return g_gr->styles().font_style(UI::FontStyle::kLabel).as_font_tag(_("∞"));
 	}
 	return boost::lexical_cast<std::string>(amount);
 }
