@@ -731,8 +731,9 @@ void Game::send_player_bulldoze(PlayerImmovable& pi, bool const recurse) {
 	send_player_command(new CmdBulldoze(get_gametime(), pi.owner().player_number(), pi, recurse));
 }
 
-void Game::send_player_dismantle(PlayerImmovable& pi) {
-	send_player_command(new CmdDismantleBuilding(get_gametime(), pi.owner().player_number(), pi));
+void Game::send_player_dismantle(PlayerImmovable& pi, bool kw) {
+	send_player_command(
+	   new CmdDismantleBuilding(get_gametime(), pi.owner().player_number(), pi, kw));
 }
 
 void Game::send_player_build(int32_t const pid, const Coords& coords, DescriptionIndex const id) {
@@ -772,11 +773,11 @@ void Game::send_player_start_or_cancel_expedition(Building& building) {
 	   new CmdStartOrCancelExpedition(get_gametime(), building.owner().player_number(), building));
 }
 
-void Game::send_player_enhance_building(Building& building, DescriptionIndex const id) {
+void Game::send_player_enhance_building(Building& building, DescriptionIndex const id, bool kw) {
 	assert(building.descr().type() == MapObjectType::CONSTRUCTIONSITE ||
 	       building.owner().tribe().has_building(id));
 	send_player_command(
-	   new CmdEnhanceBuilding(get_gametime(), building.owner().player_number(), building, id));
+	   new CmdEnhanceBuilding(get_gametime(), building.owner().player_number(), building, id, kw));
 }
 
 void Game::send_player_evict_worker(Worker& worker) {
