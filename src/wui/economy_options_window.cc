@@ -88,7 +88,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	buttons->add_space(6);
 
 	b = new UI::Button(buttons, "toggle_infinite", 0, 0, 32, 28, UI::ButtonStyle::kWuiSecondary,
-	                   _("∞"), _("Toggle infinite target"));
+	                   g_gr->images().get("images/wui/menus/infinity.png"), _("Toggle infinite target"));
 	b->sigclicked.connect([this] { toggle_infinite(); });
 	buttons->add(b);
 	b->set_repeating(false);
