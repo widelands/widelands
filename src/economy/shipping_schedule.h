@@ -44,14 +44,14 @@ struct ShipFleet;
 using CargoList = std::vector<std::pair<PortDock*, uint32_t>>;
 using CargoListLoader = std::vector<std::pair<Serial, uint32_t>>;
 
-template <typename DockT, typename CargosT>
-struct SchedulingStateT {
+template <typename DockT, typename CargosT> struct SchedulingStateT {
 	DockT dock;
 	bool expedition;
 	CargosT load_there;
 	Duration duration_from_previous_location;
 
-	SchedulingStateT(DockT pd, bool exp = false, Duration d = 0) : dock(pd), expedition(exp), duration_from_previous_location(d) {
+	SchedulingStateT(DockT pd, bool exp = false, Duration d = 0)
+	   : dock(pd), expedition(exp), duration_from_previous_location(d) {
 	}
 	SchedulingStateT(const SchedulingStateT&) = default;
 	SchedulingStateT& operator=(const SchedulingStateT&) = default;
@@ -111,6 +111,6 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(ShippingSchedule);
 };
 
-} // namespace Widelands
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_SHIPPING_SCHEDULE_H

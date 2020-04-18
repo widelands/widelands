@@ -1048,8 +1048,7 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
 	         "-");
 	if (destination_) {
 		molog("Has destination %u (%3dx%3d)\n", destination_->serial(),
-				  destination_->get_positions(egbase)[0].x,
-				  destination_->get_positions(egbase)[0].y);
+		      destination_->get_positions(egbase)[0].x, destination_->get_positions(egbase)[0].y);
 	} else {
 		molog("No destination\n");
 	}

@@ -113,8 +113,12 @@ struct ShipFleet : MapObject {
 		return schedule_;
 	}
 
-	std::vector<Ship*>& get_ships() { return ships_; }
-	std::vector<PortDock*>& get_ports() { return ports_; }
+	std::vector<Ship*>& get_ships() {
+		return ships_;
+	}
+	std::vector<PortDock*>& get_ports() {
+		return ports_;
+	}
 
 protected:
 	void act(Game&, uint32_t data) override;
@@ -155,6 +159,7 @@ protected:
 		void load_finish() override;
 
 		uint8_t packet_version_;
+
 	private:
 		std::vector<uint32_t> ships_;
 		std::vector<uint32_t> ports_;
