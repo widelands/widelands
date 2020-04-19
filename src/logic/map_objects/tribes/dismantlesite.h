@@ -71,7 +71,8 @@ public:
 	                       const Coords&,
 	                       Player*,
 	                       bool,
-	                       FormerBuildings& former_buildings);
+	                       FormerBuildings& former_buildings,
+	                       const std::map<DescriptionIndex, Quantity>& preserved_wares);
 
 	bool burn_on_destroy() override;
 	bool init(EditorGameBase&) override;
@@ -95,6 +96,10 @@ protected:
 	          const Widelands::Coords& coords,
 	          float scale,
 	          RenderTarget* dst) override;
+
+private:
+	std::map<DescriptionIndex, Quantity> preserved_wares_;
+	size_t next_dropout_index_;
 };
 }  // namespace Widelands
 
