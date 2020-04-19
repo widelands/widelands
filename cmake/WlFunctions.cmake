@@ -118,22 +118,22 @@ macro(_common_compile_tasks)
 
   if(ARG_USES_SDL2)
     wl_include_system_directories(${NAME} ${SDL2_INCLUDE_DIR})
-    target_link_libraries(${NAME} SDL2::Main)
+    target_link_libraries(${NAME} "-static" SDL2::Main intl iconv mingw32 dxerr8 dinput8 shell32 setupapi advapi32 uuid version oleaut32 ole32 imm32 winmm gdi32 user32)
   endif()
 
   if(ARG_USES_SDL2_MIXER)
     wl_include_system_directories(${NAME} ${SDL2_MIXER_INCLUDE_DIR})
-    target_link_libraries(${NAME} SDL2::Mixer)
+    target_link_libraries(${NAME} "-static" SDL2::Mixer opusfile opus FLAC vorbisfile vorbis ogg mpg123 shlwapi)
   endif()
 
   if(ARG_USES_SDL2_IMAGE)
     wl_include_system_directories(${NAME} ${SDL2_IMAGE_INCLUDE_DIR})
-    target_link_libraries(${NAME} SDL2::Image)
+    target_link_libraries(${NAME} "-static" SDL2::Image jpeg tiff webp lzma)
   endif()
 
   if(ARG_USES_SDL2_TTF)
     wl_include_system_directories(${NAME} ${SDL2_TTF_INCLUDE_DIR})
-    target_link_libraries(${NAME} SDL2::TTF)
+    target_link_libraries(${NAME} "-static" SDL2::TTF freetype bz2 harfbuzz zstd graphite2 freetype rpcrt4)
   endif()
 
   if (ARG_USES_Intl)
@@ -141,7 +141,7 @@ macro(_common_compile_tasks)
     # found it.
     if (Intl_FOUND)
       wl_include_system_directories(${NAME} ${Intl_INCLUDE_DIR})
-      target_link_libraries(${NAME} ${Intl_LIBRARY})
+      target_link_libraries(${NAME} ${Intl_LIBRARY} iconv)
     endif()
   endif()
 
@@ -151,7 +151,7 @@ macro(_common_compile_tasks)
 
   if(ARG_USES_ICU)
     wl_include_system_directories(${NAME} ${ICU_INCLUDE_DIRS})
-    target_link_libraries(${NAME} ICU::dt ICU::uc)
+    target_link_libraries(${NAME} ICU::uc ICU::dt)
   endif()
 
   foreach(DEPENDENCY ${ARG_DEPENDS})

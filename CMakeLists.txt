@@ -90,6 +90,7 @@ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Mod
 
 if (WIN32)
   set (Boost_USE_STATIC_LIBS  ON)
+  add_definitions(-DGLBINDING_STATIC_DEFINE)
   link_libraries(wsock32 ws2_32 bcrypt)
 else()
   set (Boost_USE_STATIC_LIBS  OFF)
@@ -233,6 +234,8 @@ else()
   if(WIN32)
     # This is needed for getenv().
     wl_add_flag(WL_GENERIC_CXX_FLAGS "-std=gnu++11")
+    set(CMAKE_CXX_STANDARD_LIBRARIES "-static-libgcc -static-libstdc++ -lwsock32 -lws2_32 ${CMAKE_CXX_STANDARD_LIBRARIES}")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-Bstatic,--whole-archive -lwinpthread -Wl,--no-whole-archive")
   else()
     # SDL and MinGW both declare 'unsigned int __builtin_ia32_crc32qi(unsigned int, unsigned char)', resulting in lots of warnings. So, we can't have this flag in Windows.
     wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wredundant-decls")
