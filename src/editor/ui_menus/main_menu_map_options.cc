@@ -145,14 +145,12 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	waterway_length_warning_ = new UI::Icon(ww_box, g_gr->images().get("images/ui_basic/stop.png"));
 	waterway_length_warning_->set_handle_mouse(true);
 	waterway_length_box_ =
-	   new UI::SpinBox(ww_box, 0, 0, max_w_ - waterway_length_warning_->get_w(), max_w_ * 2 / 3,
-	                   1, 1, std::numeric_limits<int32_t>::max(),
-	                   UI::PanelStyle::kWui, std::string(), UI::SpinBox::Units::kFields);
+	   new UI::SpinBox(ww_box, 0, 0, max_w_ - waterway_length_warning_->get_w(), max_w_ * 2 / 3, 1,
+	                   1, std::numeric_limits<int32_t>::max(), UI::PanelStyle::kWui, std::string(),
+	                   UI::SpinBox::Units::kFields);
 	/** TRANSLATORS: Map Options: Waterways are disabled */
 	waterway_length_box_->add_replacement(1, _("Disabled"));
-	waterway_length_box_->changed.connect([this](){
-		update_waterway_length_warning();
-	});
+	waterway_length_box_->changed.connect([this]() { update_waterway_length_warning(); });
 	ww_box->add(waterway_length_warning_, UI::Box::Resizing::kFullSize);
 	ww_box->add_inf_space();
 	ww_box->add(waterway_length_box_, UI::Box::Resizing::kFullSize);
@@ -206,7 +204,10 @@ void MainMenuMapOptions::update_waterway_length_warning() {
 	const uint32_t len = waterway_length_box_->get_value();
 	if (len > kMaxRecommendedWaterwayLengthLimit) {
 		waterway_length_warning_->set_icon(g_gr->images().get("images/ui_basic/stop.png"));
-		waterway_length_warning_->set_tooltip((boost::format(_("It is not recommended to permit waterway lengths greater than %u")) % kMaxRecommendedWaterwayLengthLimit).str());
+		waterway_length_warning_->set_tooltip(
+		   (boost::format(_("It is not recommended to permit waterway lengths greater than %u")) %
+		    kMaxRecommendedWaterwayLengthLimit)
+		      .str());
 	} else {
 		waterway_length_warning_->set_icon(nullptr);
 		waterway_length_warning_->set_tooltip("");
