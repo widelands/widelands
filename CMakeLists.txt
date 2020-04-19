@@ -1,7 +1,7 @@
 project (widelands)
 
-cmake_minimum_required (VERSION 2.8.7)
-cmake_policy(VERSION 2.8.7)
+cmake_minimum_required (VERSION 3.7)
+cmake_policy(VERSION 3.7)
 
 include("${CMAKE_SOURCE_DIR}/cmake/UseSystemInfo.cmake")
 
@@ -113,9 +113,9 @@ find_package(SDL2_image REQUIRED)
 find_package(SDL2_mixer REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 find_package(ZLIB REQUIRED)
-find_package(ICU REQUIRED)
+find_package(ICU REQUIRED COMPONENTS uc dt)
 if(OPTION_USE_GLBINDING)
-  find_package(glbinding REQUIRED)
+  find_package(GLBINDING REQUIRED)
 else()
   find_package(GLEW REQUIRED)
 endif()
@@ -124,7 +124,7 @@ if (APPLE OR WIN32 OR
     CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR
     CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
   if (NOT CMAKE_SYSTEM_NAME MATCHES "kFreeBSD")
-    find_package(intl REQUIRED)
+    find_package(Intl REQUIRED)
   endif()
 endif()
 

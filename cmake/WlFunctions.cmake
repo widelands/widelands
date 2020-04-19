@@ -136,12 +136,12 @@ macro(_common_compile_tasks)
     target_link_libraries(${NAME} ${SDL2TTF_LIBRARY})
   endif()
 
-  if (ARG_USES_INTL)
+  if (ARG_USES_Intl)
     # libintl is not used on all systems, so only include it, when we actually
     # found it.
-    if (INTL_FOUND)
-      wl_include_system_directories(${NAME} ${INTL_INCLUDE_DIR})
-      target_link_libraries(${NAME} ${INTL_LIBRARY})
+    if (Intl_FOUND)
+      wl_include_system_directories(${NAME} ${Intl_INCLUDE_DIR})
+      target_link_libraries(${NAME} ${Intl_LIBRARY})
     endif()
   endif()
 
