@@ -158,10 +158,30 @@ ObjectManager::~ObjectManager() {
  * Clear all objects
  */
 void ObjectManager::cleanup(EditorGameBase& egbase) {
+	// If all wares (read: flags) of an economy are gone, but some workers remain,
+	// the economy is destroyed before workers detach. This can cause segfault.
+	// Destruction happens in correct order after this dirty quickie.
+	// Run at the end of game, algorithmic efficiency may be what it is.
+	const std::vector<MapObjectType> killusfirst {MapObjectType::WATERWAY, MapObjectType::FERRY, MapObjectType::FERRY_FLEET,  MapObjectType::SHIP, MapObjectType::SHIP_FLEET, MapObjectType::PORTDOCK, MapObjectType::WORKER};
+	for (auto moi : killusfirst) {
+
+		bool go_on = true;
+		while (go_on && !objects_.empty()) {
+			MapObjectMap::iterator it = objects_.begin();
+			while (it != objects_.end() && (moi) != it->second->descr_->type())
+				it++;
+			if (it == objects_.end()) {
+				go_on = false;
+			} else {
+				it->second->remove(egbase);
+			}
+		}
+	}
 	while (!objects_.empty()) {
 		MapObjectMap::iterator it = objects_.begin();
 		it->second->remove(egbase);
 	}
+
 	lastserial_ = 0;
 }
 
