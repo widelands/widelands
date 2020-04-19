@@ -71,8 +71,8 @@ public:
 	// called by ShipFleet::act()
 	void update(Game&);
 
-	void ship_added(Game&, Ship&) {
-		// Nothing to do currently
+	void ship_added(Game&, Ship& s) {
+		plans_[&s] = ShipPlan();
 	}
 	void port_added(Game&, PortDock&);
 	/**
@@ -90,9 +90,7 @@ public:
 	// Load wares&workers onto the ship and set the destination
 	void ship_arrived(Game&, Ship&, PortDock&);
 
-	bool empty() const {
-		return plans_.empty();
-	}
+	bool empty() const;
 
 	void save(const EditorGameBase&, MapObjectSaver&, FileWrite&) const;
 	void load(FileRead&);

@@ -652,7 +652,7 @@ PortDock* ShipFleet::get_arbitrary_dock() const {
  * Trigger an update of ship scheduling
  */
 void ShipFleet::update(EditorGameBase& egbase) {
-	if (act_pending_) {
+	if (act_pending_ || !serial()) {
 		return;
 	}
 
@@ -668,6 +668,7 @@ void ShipFleet::update(EditorGameBase& egbase) {
  * @note Do not call this directly; instead, trigger it via @ref update
  */
 void ShipFleet::act(Game& game, uint32_t) {
+	assert(act_pending_);
 	act_pending_ = false;
 
 	if (empty()) {

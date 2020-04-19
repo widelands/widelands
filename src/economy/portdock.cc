@@ -155,10 +155,13 @@ bool PortDock::init(EditorGameBase& egbase) {
  * that we merge with a larger fleet when possible.
  */
 void PortDock::init_fleet(EditorGameBase& egbase) {
+	assert(!fleet_);
 	ShipFleet* fleet = new ShipFleet(get_owner());
 	fleet->add_port(egbase, this);
 	fleet->init(egbase);
 	// Note: the Fleet calls our set_fleet automatically
+	assert(fleet_);
+	fleet_->update(egbase);
 }
 
 void PortDock::cleanup(EditorGameBase& egbase) {
@@ -236,6 +239,7 @@ void PortDock::add_shippingitem(Game& game, WareInstance& ware) {
 	waiting_.push_back(ShippingItem(ware));
 	ware.set_location(game, this);
 	ware.update(game);
+	fleet_->update(game);
 }
 
 /**
@@ -259,6 +263,7 @@ void PortDock::add_shippingitem(Game& game, Worker& worker) {
 	waiting_.push_back(ShippingItem(worker));
 	worker.set_location(this);
 	update_shippingitem(game, worker);
+	fleet_->update(game);
 }
 
 /**

@@ -131,6 +131,7 @@ Ship::Ship(const ShipDescr& gdescr)
      ware_economy_(nullptr),
      worker_economy_(nullptr),
      ship_state_(ShipStates::kTransport),
+     destination_(nullptr),
      capacity_(gdescr.get_default_capacity()) {
 }
 
@@ -169,10 +170,14 @@ bool Ship::init(EditorGameBase& egbase) {
  */
 bool Ship::init_fleet(EditorGameBase& egbase) {
 	assert(get_owner() != nullptr);
+	assert(!fleet_);
 	ShipFleet* fleet = new ShipFleet(get_owner());
 	fleet->add_ship(egbase, this);
-	return fleet->init(egbase);
+	const bool result = fleet->init(egbase);
 	// fleet calls the set_fleet function appropriately
+	assert(fleet_);
+	fleet_->update(egbase);
+	return result;
 }
 
 void Ship::cleanup(EditorGameBase& egbase) {
