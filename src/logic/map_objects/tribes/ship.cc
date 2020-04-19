@@ -190,8 +190,11 @@ void Ship::cleanup(EditorGameBase& egbase) {
 	}
 
 	while (!items_.empty()) {
-		if (o != nullptr && ((ware_economy_ && o->has_economy(ware_economy_->serial())) ||
-		                     (worker_economy_ && o->has_economy(worker_economy_->serial())))) {
+		if ((ware_economy_ && o->has_economy(ware_economy_->serial())) ||
+		                     (worker_economy_ && o->has_economy(worker_economy_->serial()))) {
+			// TODO(tppq): Calling remove() when economy is gone is bad, as the call stack
+			// still assumes that economy is present, which leads to undefined things.
+			// Having to choose between segfault and memleak, I prefer the latter.
 			items_.back().remove(egbase);
 		}
 		items_.pop_back();
