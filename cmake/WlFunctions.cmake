@@ -118,22 +118,22 @@ macro(_common_compile_tasks)
 
   if(ARG_USES_SDL2)
     wl_include_system_directories(${NAME} ${SDL2_INCLUDE_DIR})
-    target_link_libraries(${NAME} ${SDL2_LIBRARY})
+    target_link_libraries(${NAME} SDL2::Main)
   endif()
 
   if(ARG_USES_SDL2_MIXER)
-    wl_include_system_directories(${NAME} ${SDL2MIXER_INCLUDE_DIR})
-    target_link_libraries(${NAME} ${SDL2MIXER_LIBRARY})
+    wl_include_system_directories(${NAME} ${SDL2_MIXER_INCLUDE_DIR})
+    target_link_libraries(${NAME} SDL2::Mixer)
   endif()
 
   if(ARG_USES_SDL2_IMAGE)
-    wl_include_system_directories(${NAME} ${SDL2IMAGE_INCLUDE_DIR})
-    target_link_libraries(${NAME} ${SDL2IMAGE_LIBRARY})
+    wl_include_system_directories(${NAME} ${SDL2_IMAGE_INCLUDE_DIR})
+    target_link_libraries(${NAME} SDL2::Image)
   endif()
 
   if(ARG_USES_SDL2_TTF)
-    wl_include_system_directories(${NAME} ${SDL2TTF_INCLUDE_DIR})
-    target_link_libraries(${NAME} ${SDL2TTF_LIBRARY})
+    wl_include_system_directories(${NAME} ${SDL2_TTF_INCLUDE_DIR})
+    target_link_libraries(${NAME} SDL2::TTF)
   endif()
 
   if (ARG_USES_Intl)
@@ -151,7 +151,7 @@ macro(_common_compile_tasks)
 
   if(ARG_USES_ICU)
     wl_include_system_directories(${NAME} ${ICU_INCLUDE_DIRS})
-    target_link_libraries(${NAME} ${ICU_LIBRARIES})
+    target_link_libraries(${NAME} ICU::dt ICU::uc)
   endif()
 
   foreach(DEPENDENCY ${ARG_DEPENDS})
@@ -196,9 +196,7 @@ function(wl_test NAME)
   target_link_libraries(${NAME} ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
 
   # Tests need to link with SDL2 library without main.
-  set(SDL2_LIBRARY_TEMP ${SDL2_LIBRARY})
-  list(REMOVE_ITEM SDL2_LIBRARY_TEMP ${SDL2MAIN_LIBRARY})
-  target_link_libraries(${NAME} ${SDL2_LIBRARY_TEMP})
+  target_link_libraries(${NAME} SDL2::Core)
 
   _common_compile_tasks()
 
