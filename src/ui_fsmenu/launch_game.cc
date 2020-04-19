@@ -41,6 +41,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
      // Values for alignment and size
      butw_(get_w() / 4),
      buth_(get_h() * 9 / 200),
+     padding_(4),
 
      win_condition_dropdown_(this,
                              "dropdown_wincondition",

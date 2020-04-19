@@ -98,6 +98,8 @@ wl_library(ui_fsmenu_gameloading
     loadgame.h
     launch_spg2.cc
     launch_spg2.h
+    mapdetailsbox.cc
+    mapdetailsbox.h
   DEPENDS
     base_exceptions
     base_i18n

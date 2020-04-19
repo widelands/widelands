@@ -78,6 +78,7 @@ protected:
 
 	uint32_t butw_;
 	uint32_t buth_;
+	uint32_t padding_;
 
 	UI::Dropdown<std::string> win_condition_dropdown_;
 	UI::Checkbox peaceful_;
