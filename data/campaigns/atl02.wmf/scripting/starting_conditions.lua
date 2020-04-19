@@ -2,15 +2,9 @@
 --                      Atlanteans Tutorial Mission 02
 -- =======================================================================
 
-include "map:scripting/init_Kalitath.lua"
-include "map:scripting/init_Maletus.lua"
-
 -- ===============
 -- Initialization
 -- ===============
-
-
-
 
 -- Initializing p1 (the scenario player)
    p1:allow_buildings("all")
@@ -80,8 +74,6 @@ include "map:scripting/init_Maletus.lua"
       }
    })
 
-
-
 -- Initialize Maletus (Player 2)
    maletus:allow_buildings("all")
 
@@ -89,12 +81,9 @@ include "map:scripting/init_Maletus.lua"
    maletus:place_flag(sf.brn,true)
    create_economy_for_plr_2()
 
-
-
 -- Initialize Kalitath (Player 3)
    kalitath:allow_buildings("all")
 
    sf = map.player_slots[3].starting_field
    kalitath:place_flag(sf.brn,true)
    create_economy_for_plr_3()
-

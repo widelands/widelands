@@ -98,7 +98,21 @@ function enemy()
    
    set_objective_done(explore)
    msg_boxes(allies)
+   run(allies)
+   run(maletus)
    run(check_defeat)
+end
+
+function allies()
+   p1:set_attack_forbidden(3, true)
+   kalitath:set_attack_forbidden(1, true)
+   sleep(300000)
+   msg_boxes(tribute)
+end
+
+function maletus()
+   while not maletus.defeated do sleep(6000) end
+   msg_boxes(maletus_defeated)
 end
 
 function infrastructure()

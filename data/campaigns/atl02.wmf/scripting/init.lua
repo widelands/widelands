@@ -21,10 +21,12 @@ kalitath = game.players[3]
 maletus = game.players[2]
 
 -- =================
--- global variables
+-- global variables and functions
 -- =================
 
 include "map:scripting/texts.lua"
+include "map:scripting/init_Kalitath.lua"
+include "map:scripting/init_Maletus.lua"
 
 -- =================
 -- Helper functions
