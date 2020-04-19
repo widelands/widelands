@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,6 +53,8 @@ struct NoteEconomy {
 	enum class Action { kMerged, kDeleted };
 	const Action action;
 };
+
+constexpr Quantity kEconomyTargetInfinity = std::numeric_limits<Quantity>::max();
 
 /**
  * Each Economy represents all building and flags, which are connected over the same

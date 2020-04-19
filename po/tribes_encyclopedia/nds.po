@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-03-16 06:59+0000\n"
-"PO-Revision-Date: 2020-03-16 07:06+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-04-15 14:44+0000\n"
+"PO-Revision-Date: 2020-03-29 19:14+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3681,44 +3681,44 @@ msgstr "Bill runner"
 #: ../../data/tribes/scripting/help/controls.lua:48
 msgctxt "hotkey"
 msgid "Ctrl + Page Up"
-msgstr ""
+msgstr "Strg + Bild rup"
 
 #: ../../data/tribes/scripting/help/controls.lua:48
 msgid "Increase game speed by 10x"
-msgstr ""
+msgstr "Speel-Gauheid um 10× verhogen"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:50
 msgctxt "hotkey"
 msgid "Ctrl + Page Down"
-msgstr ""
+msgstr "Strg + Bild runner"
 
 #: ../../data/tribes/scripting/help/controls.lua:50
 msgid "Decrease game speed by 10x"
-msgstr ""
+msgstr "Speel-Gauheid um 10× minnern"
 
 #: ../../data/tribes/scripting/help/controls.lua:52
 msgid "Increase game speed by 0.25x"
-msgstr ""
+msgstr "Speel-Gauheid um 0,25× verhogen"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:52
 msgctxt "hotkey"
 msgid "Shift + Page Up"
-msgstr ""
+msgstr "Umschalt + Bild rup"
 
 #: ../../data/tribes/scripting/help/controls.lua:54
 msgid "Decrease game speed by 0.25x"
-msgstr ""
+msgstr "Speel-Gauheid um 0,25× minnern"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:54
 msgctxt "hotkey"
 msgid "Shift + Page Down"
-msgstr ""
+msgstr "Umschalt + Bild runner"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -3782,33 +3782,33 @@ msgstr "Tahlen över Seefahrt wiesen of verbargen"
 #: ../../data/tribes/scripting/help/controls.lua:78
 msgctxt "hotkey"
 msgid "Arrow keys"
-msgstr ""
+msgstr "Pieltasten"
 
 #: ../../data/tribes/scripting/help/controls.lua:78
 msgid "Move the map"
-msgstr ""
+msgstr "De Kaart bewegen"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:80
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
-msgstr ""
+msgstr "Strg + Pieltasten"
 
 #: ../../data/tribes/scripting/help/controls.lua:80
 msgid "Move the map fast"
-msgstr ""
+msgstr "De Kaart fix bewegen"
 
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgid "Move the map slowly"
-msgstr ""
+msgstr "De Kaart sachte bewegen"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
-msgstr ""
+msgstr "Umschalt + Pieltasten"
 
 #: ../../data/tribes/scripting/help/controls.lua:84
 msgid "Center main mapview on starting location"
@@ -3845,199 +3845,211 @@ msgstr "To markter Stee gahn"
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:89
 msgctxt "hotkey"
+msgid ", (comma)"
+msgstr ", (Komma)"
+
+#: ../../data/tribes/scripting/help/controls.lua:89
+msgid "Go to previous location"
+msgstr "To de lesten Stee gahn"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:91
+msgctxt "hotkey"
+msgid ". (period)"
+msgstr ". (Punkt)"
+
+#: ../../data/tribes/scripting/help/controls.lua:91
+msgid "Go to next location"
+msgstr "To de anner Stee gahn"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:93
+msgctxt "hotkey"
 msgid "Ctrl + +"
 msgstr "Strg + +"
 
-#: ../../data/tribes/scripting/help/controls.lua:89
+#: ../../data/tribes/scripting/help/controls.lua:93
 msgid "Increase zoom"
 msgstr "Starker vergrotern"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:91
+#: ../../data/tribes/scripting/help/controls.lua:95
 msgctxt "hotkey"
 msgid "Ctrl + -"
 msgstr "Strg + -"
 
-#: ../../data/tribes/scripting/help/controls.lua:91
+#: ../../data/tribes/scripting/help/controls.lua:95
 msgid "Decrease zoom"
 msgstr "Minner vergrotern"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:93
+#: ../../data/tribes/scripting/help/controls.lua:97
 msgctxt "hotkey"
 msgid "Ctrl + 0"
 msgstr "Strg + 0"
 
-#: ../../data/tribes/scripting/help/controls.lua:93
+#: ../../data/tribes/scripting/help/controls.lua:97
 msgid "Reset zoom"
 msgstr "Vergrotern torüggsetten"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:95
+#: ../../data/tribes/scripting/help/controls.lua:99
 msgctxt "hotkey"
 msgid "Ctrl + F11"
 msgstr "Strg + F11"
 
-#: ../../data/tribes/scripting/help/controls.lua:95
+#: ../../data/tribes/scripting/help/controls.lua:99
 msgid "Take a screenshot"
 msgstr "Foto vum Billschirm maken"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:98
-msgctxt "hotkey"
-msgid "Ctrl + F10"
-msgstr "Strg + F10"
-
-#: ../../data/tribes/scripting/help/controls.lua:98
-msgid "Quit the game immediately"
-msgstr "Dat Speel stracks ofmaken"
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:100
+#: ../../data/tribes/scripting/help/controls.lua:102
 msgctxt "hotkey"
 msgid "F6"
 msgstr "F6"
 
-#: ../../data/tribes/scripting/help/controls.lua:100
+#: ../../data/tribes/scripting/help/controls.lua:102
 msgid "Show the debug console (only in debug-builds)"
 msgstr "Wies de Ingaav tum Fehler-Söken (blot in Debug-Versionen)"
 
 #. TRANSLATORS: Heading in "Controls" help
-#: ../../data/tribes/scripting/help/controls.lua:104
+#: ../../data/tribes/scripting/help/controls.lua:106
 msgid "Message Window"
 msgstr "Narichtenfenster"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:107
-#: ../../data/tribes/scripting/help/controls.lua:128
-msgctxt "hotkey"
-msgid "Alt + 0"
-msgstr "Alt + 0"
-
-#: ../../data/tribes/scripting/help/controls.lua:107
-msgid "Show all messages"
-msgstr "Alle Narichten wiesen"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:109
 #: ../../data/tribes/scripting/help/controls.lua:130
 msgctxt "hotkey"
-msgid "Alt + 1"
-msgstr "Alt + 1"
+msgid "Alt + 0"
+msgstr "Alt + 0"
 
 #: ../../data/tribes/scripting/help/controls.lua:109
-msgid "Show geologists’ messages only"
-msgstr "Blot Narichten vun Schattsökers wiesen"
+msgid "Show all messages"
+msgstr "Alle Narichten wiesen"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:111
 #: ../../data/tribes/scripting/help/controls.lua:132
 msgctxt "hotkey"
-msgid "Alt + 2"
-msgstr "Alt + 2"
+msgid "Alt + 1"
+msgstr "Alt + 1"
 
 #: ../../data/tribes/scripting/help/controls.lua:111
-msgid "Show economy messages only"
-msgstr "Blot Wirtschafts-Narichten wiesen"
+msgid "Show geologists’ messages only"
+msgstr "Blot Narichten vun Schattsökers wiesen"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:113
 #: ../../data/tribes/scripting/help/controls.lua:134
 msgctxt "hotkey"
-msgid "Alt + 3"
-msgstr "Alt + 3"
+msgid "Alt + 2"
+msgstr "Alt + 2"
 
 #: ../../data/tribes/scripting/help/controls.lua:113
-msgid "Show seafaring messages only"
-msgstr "Blot Seefahrt-Narichten wiesen"
+msgid "Show economy messages only"
+msgstr "Blot Wirtschafts-Narichten wiesen"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:115
 #: ../../data/tribes/scripting/help/controls.lua:136
 msgctxt "hotkey"
-msgid "Alt + 4"
-msgstr "Alt + 4"
+msgid "Alt + 3"
+msgstr "Alt + 3"
 
 #: ../../data/tribes/scripting/help/controls.lua:115
-msgid "Show warfare messages only"
-msgstr "Blot Soldateree-Narichten wiesen"
+msgid "Show seafaring messages only"
+msgstr "Blot Seefahrt-Narichten wiesen"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:117
 #: ../../data/tribes/scripting/help/controls.lua:138
 msgctxt "hotkey"
+msgid "Alt + 4"
+msgstr "Alt + 4"
+
+#: ../../data/tribes/scripting/help/controls.lua:117
+msgid "Show warfare messages only"
+msgstr "Blot Soldateree-Narichten wiesen"
+
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:119
+#: ../../data/tribes/scripting/help/controls.lua:140
+msgctxt "hotkey"
 msgid "Alt + 5"
 msgstr "Alt + 5"
 
-#: ../../data/tribes/scripting/help/controls.lua:117
+#: ../../data/tribes/scripting/help/controls.lua:119
 msgid "Show scenario messages only"
 msgstr "Blot Rutfödderungs-Narichten wiesen"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:119
+#: ../../data/tribes/scripting/help/controls.lua:121
 msgid "Jump to the location corresponding to the current message"
 msgstr "To de Stee springen, vun waar deese Naricht kummt"
 
-#: ../../data/tribes/scripting/help/controls.lua:121
+#: ../../data/tribes/scripting/help/controls.lua:123
 msgid "Archive/Restore the current message"
 msgstr "Deese Naricht wegdoon/torügghalen"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:121
+#: ../../data/tribes/scripting/help/controls.lua:123
 msgctxt "hotkey"
 msgid "Delete"
 msgstr "Entf"
 
 #. TRANSLATORS: Heading in "Controls" help
-#: ../../data/tribes/scripting/help/controls.lua:125
+#: ../../data/tribes/scripting/help/controls.lua:127
 msgid "Ship Statistics"
 msgstr "Tahlen över Schippen"
 
-#: ../../data/tribes/scripting/help/controls.lua:128
+#: ../../data/tribes/scripting/help/controls.lua:130
 msgid "Show all ships"
 msgstr "All Schippen wiesen"
 
-#: ../../data/tribes/scripting/help/controls.lua:130
+#: ../../data/tribes/scripting/help/controls.lua:132
 msgid "Show idle ships"
 msgstr "Lege Schippen wiesen"
 
-#: ../../data/tribes/scripting/help/controls.lua:132
+#: ../../data/tribes/scripting/help/controls.lua:134
 msgid "Show ships shipping wares and workers"
 msgstr "Schippen mit Waren un Arbeiders wiesen"
 
-#: ../../data/tribes/scripting/help/controls.lua:134
+#: ../../data/tribes/scripting/help/controls.lua:136
 msgid "Show waiting expeditions"
 msgstr "Söken bi’m Wachten wiesen"
 
-#: ../../data/tribes/scripting/help/controls.lua:136
+#: ../../data/tribes/scripting/help/controls.lua:138
 msgid "Show scouting expeditions"
 msgstr "Söken bi’m Utförsken wiesen"
 
-#: ../../data/tribes/scripting/help/controls.lua:138
+#: ../../data/tribes/scripting/help/controls.lua:140
 msgid "Show expeditions that have found a port space or are founding a colony"
 msgstr "Wies Söken wat Rüümte för Muden funnen hebben of een Dörp upsetten"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:140
+#: ../../data/tribes/scripting/help/controls.lua:142
 msgid "Center the map on the selected ship"
 msgstr "To deese Schipp springen"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:142
+#: ../../data/tribes/scripting/help/controls.lua:144
 msgid "Open the selected ship’s window"
 msgstr "De Schipp-Fenster för deeses Schipp wiesen"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:144
+#: ../../data/tribes/scripting/help/controls.lua:146
 msgid "Go to the selected ship and open its window"
 msgstr "To deese Schipp springen un sien Fenster wiesen"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:146
+#: ../../data/tribes/scripting/help/controls.lua:148
 msgid "Watch the selected ship"
 msgstr "Deese Schipp beluren"
 
@@ -4482,6 +4494,8 @@ msgid ""
 "inns to prepare meals."
 msgstr "Nix as deeses Beer is good genoog för Soldaten im Slachtenring. 't heet, all de Kracht vun de Willen Lüü kummt vun deesem Drank. 't helpt, de Utwieken-Stand vun Soldaten vun 0 över 1 na 2 to verbetern. Deftigs Beer word ok in Weertshusen bruukt, um Mahltieden torechttomaken."
 
+#. TRANSLATORS: Note helptext for a building
+#. TRANSLATORS: Performance helptext for a building
 #. TRANSLATORS: Helptext for a ware: Blackroot
 #: ../../data/tribes/wares/blackroot/helptexts.lua:4
 msgctxt "atlanteans_ware"
@@ -6413,8 +6427,6 @@ msgctxt "empire_worker"
 msgid "Works at the shipyard and constructs new ships."
 msgstr "Warkt in de Warft un baut neje Schippen."
 
-#. TRANSLATORS: Note helptext for a building
-#. TRANSLATORS: Performance helptext for a building
 #. TRANSLATORS: Helptext for a worker: Smelter
 #: ../../data/tribes/workers/empire/smelter/helptexts.lua:3
 msgctxt "empire_worker"
