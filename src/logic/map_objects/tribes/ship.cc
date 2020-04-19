@@ -190,7 +190,8 @@ void Ship::cleanup(EditorGameBase& egbase) {
 	}
 
 	while (!items_.empty()) {
-		if (o != nullptr && ((ware_economy_ && o->has_economy(ware_economy_->serial())) || (worker_economy_ && o->has_economy(worker_economy_->serial())))) {
+		if (o != nullptr && ((ware_economy_ && o->has_economy(ware_economy_->serial())) ||
+		                     (worker_economy_ && o->has_economy(worker_economy_->serial())))) {
 			items_.back().remove(egbase);
 		}
 		items_.pop_back();
