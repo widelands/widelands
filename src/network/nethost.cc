@@ -150,19 +150,19 @@ void NetHost::start_accepting(
 	}
 
 	acceptor.async_accept(
-		*(pair.second), [this, &acceptor, &pair](const boost::system::error_code& ec) {
-			if (!ec) {
-				// No error occurred, so we have establish a (TCP) connection.
-				// We can't say whether it is valid Widelands client yet
-				pair.first->notify_connected();
-				assert(pair.first->is_connected());
-				std::lock_guard<std::mutex> lock(mutex_accept_);
-				accept_queue_.push(std::move(pair.first));
-				// pair.first is cleared by the std::move
-				pair.second = nullptr;
-			}
-			// Wait for the next client
-			start_accepting(acceptor, pair);
+	   *(pair.second), [this, &acceptor, &pair](const boost::system::error_code& ec) {
+		   if (!ec) {
+			   // No error occurred, so we have establish a (TCP) connection.
+			   // We can't say whether it is valid Widelands client yet
+			   pair.first->notify_connected();
+			   assert(pair.first->is_connected());
+			   std::lock_guard<std::mutex> lock(mutex_accept_);
+			   accept_queue_.push(std::move(pair.first));
+			   // pair.first is cleared by the std::move
+			   pair.second = nullptr;
+		   }
+		   // Wait for the next client
+		   start_accepting(acceptor, pair);
 		});
 }
 

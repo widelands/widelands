@@ -81,7 +81,6 @@ private:
 	   boost::asio::ip::tcp::acceptor& acceptor,
 	   std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*>& pair);
 
-
 	/**
 	 * Tries to listen on the given port.
 	 * If it fails, is_listening() will return \c false.
