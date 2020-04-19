@@ -36,6 +36,9 @@ inline EditorInteractive& MainMenuMapOptions::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 
+// The highest waterway length limit players can set in the editor.
+// Players may still use arbitrarily high values by manually
+// editing the map/port_spaces file.
 constexpr uint16_t kMaxRecommendedWaterwayLengthLimit = 24;
 
 /**
@@ -206,10 +209,7 @@ void MainMenuMapOptions::update() {
 	size_.set_text((boost::format(_("Size: %1% x %2%")) % map.get_width() % map.get_height()).str());
 	descr_->set_text(map.get_description());
 	hint_->set_text(map.get_hint());
-	// map.get_waterway_max_length() defaults to 0 for older maps, and can be
-	// set to arbitrarily high values by manually editing the map files
-	waterway_length_box_->set_value(std::max<uint32_t>(
-	   1, std::min<uint32_t>(kMaxRecommendedWaterwayLengthLimit, map.get_waterway_max_length())));
+	waterway_length_box_->set_value(map.get_waterway_max_length());
 
 	std::set<std::string> tags = map.get_tags();
 	for (auto tag : tags_checkboxes_) {
