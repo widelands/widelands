@@ -717,11 +717,9 @@ void ShipFleet::Loader::load(FileRead& fr) {
 
 	fleet.act_pending_ = fr.unsigned_8();
 
+	// TODO(Nordfriese): Savegame compatibility
 	if (packet_version_ >= 5) {
 		fleet.schedule_.load(fr);
-	} else {
-		// TODO(Nordfriese): Savegame compatibility
-		throw wexception("Savegame compatibility for ShipFleet not yet implemented");
 	}
 }
 
@@ -747,7 +745,10 @@ void ShipFleet::Loader::load_pointers() {
 
 	fleet.act_pending_ = save_act_pending;
 
-	fleet.schedule_.load_pointers(mol());
+	// TODO(Nordfriese): Savegame compatibility
+	if (packet_version_ >= 5) {
+		fleet.schedule_.load_pointers(mol());
+	}
 }
 
 void ShipFleet::Loader::load_finish() {
@@ -762,6 +763,11 @@ void ShipFleet::Loader::load_finish() {
 
 		fleet.set_economy(fleet.ports_[0]->get_economy(wwWARE), wwWARE);
 		fleet.set_economy(fleet.ports_[0]->get_economy(wwWORKER), wwWORKER);
+	}
+
+	// TODO(Nordfriese): Savegame compatibility
+	if (packet_version_ < 5) {
+		fleet.schedule_.load_finish(egbase());
 	}
 }
 

@@ -111,6 +111,7 @@ void ShippingSchedule::ship_arrived(Game& game, Ship& ship, PortDock& port) {
 		for (WareInstance* ware : wares) {
 			ship.add_item(game, ShippingItem(*ware));
 		}
+		ship.set_destination(game, nullptr);
 		ship.start_task_expedition(game);
 		port.cancel_expedition(game);
 
@@ -1272,4 +1273,24 @@ void ShippingSchedule::load_pointers(MapObjectLoader& mol) {
 	}
 	loader_.reset(nullptr);
 }
+
+// TODO(Nordfriese): DELETE this function when we break savegame compatibility
+void ShippingSchedule::load_finish(EditorGameBase& egbase) {
+	log("Initializing ShippingSchedule from legacy game state. Pray to Lutas that your ships will sail more or less where you want them to go to.\n");
+	assert(!loader_);
+	assert(empty());
+	for (Ship* ship : fleet_.get_ships()) {
+		ShipPlan& sp = plans_[ship];
+		assert(sp.empty());
+		if (PortDock* pd = ship->get_destination()) {
+			Path path;
+			int32_t d = -1;
+			ship->calculate_sea_route(egbase, *pd, &path);
+			egbase.map().calc_cost(path, &d, nullptr);
+			assert(d >= 0);
+			sp.push_back(SchedulingState(pd, false, d));
+		}
+	}
+}
+
 }

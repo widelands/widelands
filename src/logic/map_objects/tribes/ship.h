@@ -116,7 +116,7 @@ struct Ship : Bob {
 	void start_task_movetodock(Game&, PortDock&);
 	void start_task_expedition(Game&);
 
-	uint32_t calculate_sea_route(Game& game, PortDock& pd, Path* finalpath = nullptr) const;
+	uint32_t calculate_sea_route(EditorGameBase&, PortDock&, Path* = nullptr) const;
 
 	void log_general_info(const EditorGameBase&) const override;
 

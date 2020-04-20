@@ -760,8 +760,8 @@ bool Ship::withdraw_item(Game& game, PortDock& pd) {
 /**
  * Find a path to the dock @p pd, returns its length, and the path optionally.
  */
-uint32_t Ship::calculate_sea_route(Game& game, PortDock& pd, Path* finalpath) const {
-	Map* map = game.mutable_map();
+uint32_t Ship::calculate_sea_route(EditorGameBase& egbase, PortDock& pd, Path* finalpath) const {
+	Map* map = egbase.mutable_map();
 	StepEvalAStar se(pd.get_warehouse()->get_position());
 	se.swim_ = true;
 	se.conservative_ = false;
