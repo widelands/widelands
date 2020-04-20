@@ -677,19 +677,14 @@ void ShipFleet::act(Game& game, uint32_t) {
 		return;
 	}
 
-	if (!active()) {
-		// If we are here, most likely act() was called by a port with waiting wares or
-		// with an expedition ready, although there are still no ships.
-		// We can't handle it now, so we reschedule the act()
-		schedule_act(game, kFleetInterval);  // retry in the next time
-		act_pending_ = true;
-		return;
-	}
-
 	molog("ShipFleet::act\n");
 
 	// All the work is done by the schedule
-	schedule_.update(game);
+	const Duration next = schedule_.update(game);
+	if (next < endless()) {
+		schedule_act(game, next);
+		act_pending_ = true;
+	}
 }
 
 void ShipFleet::log_general_info(const EditorGameBase& egbase) const {

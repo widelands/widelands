@@ -69,7 +69,8 @@ public:
 	}
 
 	// called by ShipFleet::act()
-	void update(Game&);
+	// returns the time until the next update
+	Duration update(Game&);
 
 	void ship_added(Game&, Ship& s) {
 		plans_[&s] = ShipPlan();

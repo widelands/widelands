@@ -37,6 +37,35 @@
 
 namespace Widelands {
 
+/*******************************************************************************
+              Weighting factors to tweak the algorithm's decisions
+*******************************************************************************/
+
+// Performance tradeoff in the First Pass
+constexpr uint32_t kActualDurationsRecalculationInterval = 20 * 1000;
+
+// Give a ship the highest score for assigning wares to it if it will
+// arrive at the port of interest within the next 10 s,
+// or the lowest score if this will take longer than 10 min
+constexpr Duration kWonderfullyShortDuration = 10 * 1000;   // 10 s
+constexpr Duration kHorriblyLongDuration = 10 * 60 * 1000;  // 10 min
+
+// Only assign wares to a ship in 5.1 if it's score is higher than this threshold.
+// Ships with lower scores will only be accepted if not enough idle ships are found.
+constexpr uint16_t kMinScoreForImmediateAccept = 20;
+
+// Average sailing-time distance for two ports to be considered "close by" in 5.4
+constexpr int16_t kDockGroupMaxDistanceFactor = 12 * 1800;
+
+// Distributing idle ships between ports in the Sixth Pass:
+// Sailing-time distance between a ship and a port so that the ship is considered
+// to be within convenient reach when the port needs a ship
+constexpr int16_t kNearbyDockMaxDistanceFactor = 8 * 1800;
+
+/*******************************************************************************
+                             Actual implementation
+*******************************************************************************/
+
 // #define sslog(...) if (g_verbose) log(__VA_ARGS__);
 #define sslog(...) log("NOCOM: " __VA_ARGS__);  // NOCOM
 
@@ -150,21 +179,26 @@ void ShippingSchedule::port_removed(Game& game, PortDock* dock) {
 							log("Ship %s is carrying %u items and there are no ports left\n",
 							    pair.first->get_shipname().c_str(), pair.first->get_nritems());
 							pair.first->set_destination(game, nullptr);
-						}
-						PortDock* closest = nullptr;
-						int32_t dist = 0;
-						for (PortDock* pd : fleet_.get_ports()) {
-							Path path;
-							int32_t d = -1;
-							pair.first->calculate_sea_route(game, *pd, &path);
-							game.map().calc_cost(path, &d, nullptr);
-							assert(d >= 0);
-							if (!closest || d < dist) {
-								dist = d;
-								closest = pd;
+						} else {
+							PortDock* closest = nullptr;
+							int32_t dist = 0;
+							for (PortDock* pd : fleet_.get_ports()) {
+								Path path;
+								int32_t d = -1;
+								pair.first->calculate_sea_route(game, *pd, &path);
+								game.map().calc_cost(path, &d, nullptr);
+								assert(d >= 0);
+								if (!closest || d < dist) {
+									dist = d;
+									closest = pd;
+								}
 							}
+							assert(closest);
+							log("Ship %s is carrying %u items, rerouting to NEW destination %u\n",
+							    pair.first->get_shipname().c_str(), pair.first->get_nritems(), closest->serial());
+							pair.second.push_back(SchedulingState(closest, false, dist));
+							pair.first->set_destination(game, closest);
 						}
-						assert(closest);
 					}
 				} else {
 					pair.first->set_destination(game, pair.second.front().dock);
@@ -202,7 +236,7 @@ void ShippingSchedule::port_removed(Game& game, PortDock* dock) {
 	// they will be unloaded there and then recalculate their route.
 
 	for (PortDock* pd : fleet_.get_ports()) {
-		for (auto it = pd->waiting_.begin(); it != dock->waiting_.end();) {
+		for (auto it = pd->waiting_.begin(); it != pd->waiting_.end();) {
 			if (it->destination_dock_.serial() == dock->serial()) {
 				sslog("found a shippingitem in port %u\n", pd->serial());
 				it->set_location(game, pd->warehouse_);
@@ -254,14 +288,7 @@ void ShippingSchedule::port_added(Game& game, PortDock& dock) {
 	sslog("--- port_added maintenance complete ---\n\n");
 }
 
-constexpr uint32_t kActualDurationsRecalculationInterval = 20 * 1000;
-constexpr Duration kWonderfullyShortDuration = 10 * 1000;   // 10 s
-constexpr Duration kHorriblyLongDuration = 10 * 60 * 1000;  // 10 min
-constexpr uint16_t kMinScoreForImmediateAccept = 20;
-constexpr int16_t kDockGroupMaxDistanceFactor = 16;
-constexpr int16_t kNearbyDockMaxDistanceFactor = 8;
-
-void ShippingSchedule::update(Game& game) {
+Duration ShippingSchedule::update(Game& game) {
 	/*
 	 * This function is the heart of the shipping system.
 	 * All decisions (except emergency decisions on port destruction) are made here.
@@ -290,6 +317,11 @@ void ShippingSchedule::update(Game& game) {
 	 * naval force. (When the player has few ships for many ports, this approach will
 	 * work suboptimally, but that is a bad strategy so the player deserves no more.)
 	 */
+
+	assert(plans_.size() == fleet_.get_ships().size());
+	if (fleet_.get_ships().empty()) {
+		return endless(); // wait until we get a ship
+	}
 
 	/* FIRST PASS:
 	 * Scan all ships. Refresh the prediction when they will arrive at the next port.
@@ -348,7 +380,7 @@ void ShippingSchedule::update(Game& game) {
 
 	if (nr_ports == 0) {
 		// Nothing to do. Ships stay where they are, or do whatever they want.
-		return;
+		return endless();
 	}
 	std::list<Ship*> ships_with_reduced_orders;
 	std::list<PortDock*> ports_with_unserviced_expeditions;
@@ -369,7 +401,7 @@ void ShippingSchedule::update(Game& game) {
 		std::map<PortDock*, std::pair<std::map<Ship*, std::pair<Duration, Quantity>>, int32_t>> map;
 		for (auto& plan : plans_) {
 			Duration eta = 0;
-			CargoList* load = nullptr;
+			CargoList* _load = nullptr;
 			for (SchedulingState& ss : plan.second) {
 				eta += ss.duration_from_previous_location;
 				if (ss.dock == dock) {
@@ -378,12 +410,12 @@ void ShippingSchedule::update(Game& game) {
 						expedition_ship_coming = plan.first;
 						assert(ss.load_there.empty());
 					}
-					load = &ss.load_there;
+					_load = &ss.load_there;
 					break;
 				}
 			}
-			if (load) {
-				for (const auto& cargo : *load) {
+			if (_load) {
+				for (const auto& cargo : *_load) {
 					map[cargo.first].first[plan.first] = std::make_pair(eta, cargo.second);
 				}
 			}
@@ -883,7 +915,7 @@ void ShippingSchedule::update(Game& game) {
 			ppp.ships.push_back(ss);
 		}
 		while (ppp.open_count > 0 && !ppp.ships.empty()) {
-			if (ppp.ships.front().score < kMinScoreForImmediateAccept * ppp.ships.front().capacity) {
+			if (ppp.ships.front().score < kMinScoreForImmediateAccept) {
 				break;
 			}
 			load_on_ship(ppp);
@@ -1160,6 +1192,7 @@ void ShippingSchedule::update(Game& game) {
 		}
 	}
 	sslog("--- End of ShippingSchedule::update ---\n\n");
+	return kFleetInterval;
 }
 
 constexpr uint16_t kCurrentPacketVersion = 1;
