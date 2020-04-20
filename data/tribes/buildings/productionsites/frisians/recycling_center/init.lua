@@ -92,7 +92,6 @@ tribes:new_productionsite_type {
             "call=smelt_mixed",
             "call=smelt_iron",
             "call=make_fur",
-            "return=no_stats"
          }
       },
       make_fur = {
