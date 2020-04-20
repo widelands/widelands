@@ -63,6 +63,7 @@ wl_library(ui_basic
     graphic_align
     graphic_color
     graphic_fonthandler
+    graphic_mouse_cursor
     graphic_styles
     graphic_surface
     graphic_text

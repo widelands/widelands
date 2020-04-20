@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -117,9 +117,9 @@ void FullscreenMenuMultiPlayer::internet_login() {
 	InternetGaming::ref().login(nickname_, auth, register_, meta, port);
 
 	// Check whether metaserver send some data
-	if (InternetGaming::ref().logged_in())
+	if (InternetGaming::ref().logged_in()) {
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kMetaserver);
-	else {
+	} else {
 		// something went wrong -> show the error message
 		ChatMessage msg = InternetGaming::ref().get_messages().back();
 		UI::WLMessageBox wmb(this, _("Error!"), msg.msg, UI::WLMessageBox::MBoxType::kOk);

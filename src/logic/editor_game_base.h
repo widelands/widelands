@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -143,11 +143,15 @@ public:
 	                                DescriptionIndex,
 	                                bool loading = false,
 	                                FormerBuildings former_buildings = FormerBuildings(),
-	                                const BuildingSettings* settings = nullptr);
+	                                const BuildingSettings* settings = nullptr,
+	                                std::map<DescriptionIndex, Quantity> preserved_wares =
+	                                   std::map<DescriptionIndex, Quantity>());
 	Building& warp_dismantlesite(const Coords&,
 	                             PlayerNumber,
 	                             bool loading = false,
-	                             FormerBuildings former_buildings = FormerBuildings());
+	                             FormerBuildings former_buildings = FormerBuildings(),
+	                             std::map<DescriptionIndex, Quantity> preserved_wares =
+	                                std::map<DescriptionIndex, Quantity>());
 	Bob& create_critter(const Coords&, DescriptionIndex bob_type_idx, Player* owner = nullptr);
 	Bob& create_critter(const Coords&, const std::string& name, Player* owner = nullptr);
 	Immovable&

@@ -308,6 +308,7 @@ wl_library(wui
     graphic_fonthandler
     graphic_game_renderer
     graphic_minimap_renderer
+    graphic_mouse_cursor
     graphic_playercolor
     graphic_surface
     graphic_text_layout

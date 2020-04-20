@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-02-21 18:05+0000\n"
-"PO-Revision-Date: 2020-02-26 16:08+0000\n"
+"POT-Creation-Date: 2020-04-15 14:44+0000\n"
+"PO-Revision-Date: 2020-04-02 14:56+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/elemental:9
 msgid "From Nemesis to Genesis"
-msgstr "Vun Nemesis tou Genesis"
+msgstr "Vun Nemesis na Genesis"
 
 #: ../../data/campaigns/atl01.wmf/elemental:11
 msgid ""
@@ -50,6 +50,135 @@ msgid ""
 "This tutorial explains the handling of military and training site buildings "
 "and will introduce fighting."
 msgstr "Deese Inföhren verklaart Soldateree- un Övens-Boen un Slachten."
+
+#. TRANSLATORS: The difficulty level of a campaign
+#: ../../data/campaigns/campaigns.lua:14
+msgid "Easy."
+msgstr "Licht."
+
+#. TRANSLATORS: The difficulty level of a campaign
+#: ../../data/campaigns/campaigns.lua:20
+msgid "Medium."
+msgstr "Middel."
+
+#. TRANSLATORS: The difficulty level of a campaign
+#: ../../data/campaigns/campaigns.lua:25
+msgid "Hard."
+msgstr "Stuur."
+
+#. TRANSLATORS: The difficulty level of a campaign
+#: ../../data/campaigns/campaigns.lua:30
+msgid "Challenging."
+msgstr "Slimm."
+
+#. TRANSLATORS: The name of a Barbarian campaign
+#: ../../data/campaigns/campaigns.lua:43
+msgid "The Second Empire"
+msgstr "Dat tweede Riek"
+
+#. TRANSLATORS: A short description of a campaign
+#: ../../data/campaigns/campaigns.lua:49
+msgid "Introduces the Barbarians."
+msgstr "Stellt de Willen Lüü vör."
+
+#. TRANSLATORS: A long description of a campaign
+#: ../../data/campaigns/campaigns.lua:52
+msgid ""
+"When Chat’Karuth died, he was an old man, father to three strong and "
+"ambitious sons, and warlord to an army that could match any enemy willing to"
+" rise against the ancient forests. Though at the end of his glorious reign, "
+"Chat’Karuth chose his eldest son, Thron, to succeed him as the tribe’s "
+"warlord – a decision that left his two brothers unsatisfied. The old warlord"
+" knew that. As his father instructed him, Thron left the capital of "
+"Al’thunran, the home of the Throne Among the Trees, and withdrew his forces "
+"to the high hills where he buried the corpse of his father. There he swore "
+"to the gods and his father’s spirit that he’d return to re-established "
+"order. While his brothers have raged blind war against Thron and the few "
+"forces he left to secure the borders of Al’thunran, the young warlord seeks "
+"to reunite his ambitious brothers and force the tribes to march once again "
+"under a common banner."
+msgstr "As Schatt-Karut stürv, was he een oller Mann, de Vader vun dree machtigen un streevsken Söhnen, un de Kummandant vun Soldaten, de all Feinde manntjen kunnen, de de steenollen Walden angrepen. Uplest vun sien golden Seggen keek Schatt-Karut sien ollsten Sohn, Troon, ut, dat he de neje Kummandant vun sienem Volk wese – een Beslutt, mit wat siene Bröörs nich tofree weren. Dat wuss de olle Kummandant. As sien Vater befohl, verleet Troon de Höövdstadt Alltunraan, wo de Bomen-Throon was, un truck sük mit sienen Soldaten up de Hogen Hövels torügg, wo he de Liek vun sienem Vater begroov. Dann swoor he bi de Gotten un de Geist vun sienem Vater, dat he weerkummt un de Örnung torechtmaakt. As siene Bröörs tegen Troon un de minnen Soldaten, de he tum Schuul för Alltunraan törüggleet, angahn, versöcht de junge Kummandant, dat sük siene streevsken Bröörs utsöhnen un de Völker weer unner eenem gemeensamen Fahne marskeren."
+
+#. TRANSLATORS: The name of an Empire campaign
+#: ../../data/campaigns/campaigns.lua:70
+msgid "The Months of Exile"
+msgstr "De Maanten im Exil"
+
+#. TRANSLATORS: A short description of a campaign
+#: ../../data/campaigns/campaigns.lua:73
+msgid "Introduces the Empire."
+msgstr "Stellt dat Latienske Riek vör."
+
+#. TRANSLATORS: A long description of a campaign
+#: ../../data/campaigns/campaigns.lua:75
+msgid ""
+"Six months ago, Lutius – a young general of the Empire – was sent with 150 "
+"soldiers to the frontier beyond the northern forests where Barbarian tribes "
+"were crossing onto land held by the Empire. His task was to defend the "
+"Empire’s land. At first, everything was calm. He even talked to a few "
+"Barbarian children and thought about a peaceful life – side by side with "
+"this archaic folk. He began to feel safer and his army began to drop their "
+"attention off the potential enemy. That was their undoing. One night in "
+"March his unprepared army was attacked by 100 Barbarian footmen and was "
+"completely scattered. Only with his bare life he and a handful of his "
+"soldiers survived."
+msgstr "Vör sess Maanten wurr Lutjus – een junger Offizeer vum Latiensken Riek – mit 150 Soldaten an de Grenz achtern de noordelken Walden schickt, wo de Willen Lüü ins Land vum Riek indrungen. Siene Upgaav was, dat Land vum Riek to verdedigen. Eerst was alls friedelk. He snackde mit Willen Kinners un wullt in Freden leven – Sied an Sied mit de steenolle Volk. He meende, seker to wesen, un siene Soldaten achtden nich mehr up de mögelk Feinde. Dat was een Fehler. In eener Määrtnacht wurren siene unrüsten Soldaten vun 100 Willen Stahfasten angrepen un heel un dall verjaggt. He un een paar vun sienen Suldaten överleevden mit nix as de blote Leven."
+
+#. TRANSLATORS: The name of an Atlantean campaign
+#: ../../data/campaigns/campaigns.lua:93
+msgid "The Run for the Fire"
+msgstr "Tum Füür rennen"
+
+#. TRANSLATORS: A short description of a campaign
+#: ../../data/campaigns/campaigns.lua:96
+msgid "Introduces the Atlanteans."
+msgstr "Stellt de Atlantinger vör."
+
+#. TRANSLATORS: A long description of a campaign
+#: ../../data/campaigns/campaigns.lua:98
+msgid ""
+"When their God lost faith in the Atlanteans and drowned their island, one "
+"woman’s struggle for justice and a second chance for her people would become"
+" the stuff of legends. Leading the remaining Atlanteans into a new future in"
+" a new part of the World, Jundlina became the most powerful human of her "
+"time, but at a high cost: her humanity and soul."
+msgstr "As ihr Gott sien Gloov in de Atlantinger verloor un ihre Insel överfloodde, wurr de Stried vun eener Froo na Gerechtigheid un eener annern Kans för hör Lüü de Stoff för Sagen. As se de övrigen Atlantinger to eener nejen Tokunft in eenem annern Part vun de Welt föhrt, word Jundlin' de machtigste Minsk in hör Tied, aver de Pries was düür: Hör Godigheid un hör Seel."
+
+#. TRANSLATORS: The name of a Frisian campaign
+#: ../../data/campaigns/campaigns.lua:107
+msgid "From Water to Ice"
+msgstr "Vum Water ins Ies"
+
+#. TRANSLATORS: A short description of a campaign
+#: ../../data/campaigns/campaigns.lua:110
+msgid "Introduces the Frisians."
+msgstr "Stellt de Fresen vör."
+
+#. TRANSLATORS: A campaign difficulty (easiest of three options)
+#: ../../data/campaigns/campaigns.lua:115
+msgid "Sailor (Tricky)"
+msgstr "Matroos (stuur)"
+
+#. TRANSLATORS: A campaign difficulty (medium of three options)
+#: ../../data/campaigns/campaigns.lua:117
+msgid "Steersman (Very Hard)"
+msgstr "Maat (bannig slimm)"
+
+#. TRANSLATORS: A campaign difficulty (hardest of three options)
+#: ../../data/campaigns/campaigns.lua:119
+msgid "Captain (Unreasonable)"
+msgstr "Käpten (nich tum Tomoden)"
+
+#. TRANSLATORS: A long description of a campaign
+#: ../../data/campaigns/campaigns.lua:124
+msgid ""
+"Living off the ocean is a constant struggle, and even more so for the "
+"inhabitants of the Frisian North Sea shore. Was the last storm flood, the "
+"most devastating one in human memory, really nothing more than yet another "
+"example for the hardships all Frisians have to face – or a sign from the "
+"gods that a tribe that only just settled here must seek out an entirely new "
+"home?"
+msgstr "Vun de See to leven is een unnerratts Halswark, besünners för de Inwohners vun de freesk Noordseeküste. Was de leste Störmflood, de verherendste in de Memoorje vun allen Lüü, würrelk nix as al weer een Bispööl för de Tegenstötten, mit de all Fresen torechtkomen mutten – oder een Teken vun de Gotten, dat een Volk, wat sük even eerst hier daallaten hett, een kumpleet nejes Heimaatland utfinnen mutt?"
 
 #: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
@@ -151,8 +280,9 @@ msgstr "Krieg"
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
-"soldiers, how to train them and how to lead them in battle."
-msgstr "In deese Inföhren lehrst du alls över Slachten: Wo dat Anhüren un Utbilden vun Soldaten gaht un wo man se in de Krieg föhrt."
+"soldiers, how to train them and how to lead them in battle. Scouting will be"
+" also covered."
+msgstr "In deese Inföhren lehrst du alls över Slachten: Wo dat Anhüren un Utbilden vun Soldaten gaht un wo man se in de Krieg föhrt. Ok dat Bespejen word verklaart."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
 msgid "Seafaring"
@@ -292,7 +422,7 @@ msgid ""
 "reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
 " to the death against your enemies, it may as well be in a beautiful place."
-msgstr ""
+msgstr "De Dolomiten, de Kroon vun de Alpen, sünd för hör unbannig Mooigheid eene Weltarve-Stee. Deese Kaart is so genau as mit Verstand mögelk na de Kuntrei baut, wat im Noordoost vun Cortina d’Ampezzo un im Südwest vun Canazei begrenzt word. Wenn du mit dienen Feinden bit tum Dood kämpen muttst, kannst du dat tominnst an eener ewigsmojen Stee doon."
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:11
 msgid ""

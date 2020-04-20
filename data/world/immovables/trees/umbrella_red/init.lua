@@ -75,7 +75,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 20000",
          "remove=30",
-         "seed=umbrella_red_wasteland_sapling",
+         "seed=umbrella_red_wasteland_sapling 50",
          "animate=idle 20000",
          "remove=20",
          "grow=umbrella_red_wasteland_old",
@@ -109,7 +109,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 1050000",
          "transform=deadtree2 32",
-         "seed=umbrella_red_wasteland_sapling",
+         "seed=umbrella_red_wasteland_sapling 90",
       },
       fall = {
          "remove=",

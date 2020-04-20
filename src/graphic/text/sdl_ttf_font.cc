@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,8 +52,11 @@ SdlTtfFont::~SdlTtfFont() {
 void SdlTtfFont::dimensions(const std::string& txt, int style, uint16_t* gw, uint16_t* gh) {
 	set_style(style);
 
+	// Getting height from TTF_SizeUTF8() was sometimes causing misaligned text,
+	// so use TTF_FontHeight() to get it instead
 	int w, h;
-	TTF_SizeUTF8(font_, txt.c_str(), &w, &h);
+	TTF_SizeUTF8(font_, txt.c_str(), &w, NULL);
+	h = TTF_FontHeight(font_);
 
 	if (style & SHADOW) {
 		w += SHADOW_OFFSET;
