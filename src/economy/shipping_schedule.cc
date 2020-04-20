@@ -1276,7 +1276,8 @@ void ShippingSchedule::load_pointers(MapObjectLoader& mol) {
 
 // TODO(Nordfriese): DELETE this function when we break savegame compatibility
 void ShippingSchedule::load_finish(EditorGameBase& egbase) {
-	log("Initializing ShippingSchedule from legacy game state. Pray to Lutas that your ships will sail more or less where you want them to go to.\n");
+	log("Initializing ShippingSchedule from legacy game state. Pray to Lutas that your ships will "
+	    "sail more or less where you want them to go to.\n");
 	assert(!loader_);
 	assert(empty());
 	for (Ship* ship : fleet_.get_ships()) {
@@ -1292,5 +1293,4 @@ void ShippingSchedule::load_finish(EditorGameBase& egbase) {
 		}
 	}
 }
-
 }
