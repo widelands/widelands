@@ -53,7 +53,7 @@ struct EditorActionArgs {
 	Widelands::Extent new_map_size;                        // resize tool
 
 	struct ResourceState {
-		Widelands::FCoords location;
+		Widelands::Coords location;
 		Widelands::DescriptionIndex idx;
 		Widelands::ResourceAmount amount;
 	};
