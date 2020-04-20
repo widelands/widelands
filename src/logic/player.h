@@ -521,8 +521,8 @@ public:
 	void military_site_set_soldier_preference(PlayerImmovable&,
 	                                          SoldierPreference soldier_preference);
 	void start_or_cancel_expedition(Warehouse&);
-	void enhance_building(Building*, DescriptionIndex index_of_new_building);
-	void dismantle_building(Building*);
+	void enhance_building(Building*, DescriptionIndex index_of_new_building, bool keep_wares);
+	void dismantle_building(Building*, bool keep_wares);
 
 	Economy* create_economy(WareWorker);
 	Economy* create_economy(Serial serial, WareWorker);  // For saveloading only
@@ -618,7 +618,7 @@ private:
 	void update_building_statistics(Building&, NoteImmovable::Ownership ownership);
 	void update_team_players();
 	void play_message_sound(const Message* message);
-	void enhance_or_dismantle(Building*, DescriptionIndex index_of_new_building);
+	void enhance_or_dismantle(Building*, DescriptionIndex index_of_new_building, bool keep_wares);
 
 	// Called when a node becomes seen or has changed.  Discovers the node and
 	// those of the 6 surrounding edges/triangles that are not seen from another

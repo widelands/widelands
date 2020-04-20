@@ -59,13 +59,14 @@ DescriptionIndex WareDescr::default_target_quantity(const std::string& tribename
 }
 
 bool WareDescr::has_demand_check(const std::string& tribename) const {
-	return default_target_quantity(tribename) != kInvalidWare;
+	return (default_target_quantity(tribename) != 0 &&
+	        default_target_quantity(tribename) != kInvalidWare);
 }
 
 void WareDescr::set_has_demand_check(const std::string& tribename) {
 	if (default_target_quantities_.count(tribename) > 0 &&
 	    default_target_quantities_.at(tribename) == kInvalidWare) {
-		default_target_quantities_.at(tribename) = 1;
+		default_target_quantities_.at(tribename) = 0;
 	}
 }
 
