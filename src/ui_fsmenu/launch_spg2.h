@@ -9,6 +9,7 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/launch_game.h"
+#include "ui_fsmenu/mapdetailsbox.h"
 
 struct PlayerDescriptionGroup;
 class FullscreenMenuLaunchSPG2 : public FullscreenMenuLaunchGame
@@ -34,7 +35,7 @@ private:
 	UI::Box button_box_;
 	UI::Box player_box_;
 	UI::Box map_box_;
-	UI::Box map_title_box_;
+	MapDetailsBox map_details;
 
 	UI::Textarea players_;
 	UI::Textarea map_;
@@ -45,9 +46,9 @@ private:
 	UI::Button back_own_;
 	UI::Textarea title_own_;
 	UI::Textarea player_name_;
-	UI::Textarea map_name_;
-	UI::Button select_map_;
-	UI::MultilineTextarea map_description_;
+
+	bool select_map();
+	void update(bool map_was_changed);
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_SPG2_H

@@ -27,7 +27,7 @@ FullscreenMenuLaunchSPG2::FullscreenMenuLaunchSPG2(GameSettingsProvider* const s
      button_box_(&main_box_, 0, 0, UI::Box::Horizontal),
      player_box_(&content_box_, 0, 0, UI::Box::Vertical),
      map_box_(&content_box_, 0, 0, UI::Box::Vertical),
-     map_title_box_(&map_box_, 0, 0, UI::Box::Horizontal),
+     map_details(&map_box_, 0, 0, 0, 0),
      players_(&player_box_,
               0,
               0,
@@ -79,7 +79,7 @@ FullscreenMenuLaunchSPG2::FullscreenMenuLaunchSPG2(GameSettingsProvider* const s
                 0,
                 0,
                 0,
-                "my Launch Game blabla",
+                _("Launch Game"),
                 UI::Align::kCenter,
                 g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
      player_name_(&player_box_,
@@ -89,32 +89,7 @@ FullscreenMenuLaunchSPG2::FullscreenMenuLaunchSPG2(GameSettingsProvider* const s
                   0,
                   "beispiel name von einem spieler",
                   UI::Align::kLeft,
-                  g_gr->styles().font_style(UI::FontStyle::kLabel)),
-     map_name_(&map_title_box_,
-               0,
-               0,
-               0,
-               0,
-               "Name der Map",
-               UI::Align::kLeft,
-               g_gr->styles().font_style(UI::FontStyle::kLabel)),
-     select_map_(&map_title_box_,
-                 "change_map_or_save2",
-                 0,
-                 0,
-                 20,
-                 20,
-                 UI::ButtonStyle::kFsMenuSecondary,
-                 g_gr->images().get("images/wui/menus/toggle_minimap.png"),
-                 _("Change map or saved game")),
-     map_description_(
-        &map_box_,
-        0,
-        0,
-        butw_,  // arbitrary, will be set while layouting boxes...
-        50,
-        UI::PanelStyle::kFsMenu,
-        "sample map description which might be a\n very long text so scrollbar is needed") {
+                  g_gr->styles().font_style(UI::FontStyle::kLabel)) {
 	main_box_.add_space(2 * padding_);
 	main_box_.add(&title_own_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
@@ -127,14 +102,15 @@ FullscreenMenuLaunchSPG2::FullscreenMenuLaunchSPG2(GameSettingsProvider* const s
 	content_box_.add_inf_space();
 	content_box_.add(&map_box_, UI::Box::Resizing::kExpandBoth);
 	map_box_.add(&map_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	map_box_.add(&map_title_box_, UI::Box::Resizing::kFullSize);
-	map_box_.add(&map_description_, UI::Box::Resizing::kFullSize);
+	map_box_.add(&map_details, UI::Box::Resizing::kFullSize);
+	//	map_box_.add(&map_title_box_, UI::Box::Resizing::kFullSize);
+	//	map_box_.add(&map_description_, UI::Box::Resizing::kFullSize);
 	map_box_.add(&peaceful_own_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	map_box_.add(&win_condition_type, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	map_box_.add(&win_condition_dropdown_own_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
-	map_title_box_.add(&map_name_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
+	//	map_title_box_.add(&map_name_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	// map_title_box_.add_inf_space();
-	map_title_box_.add(&select_map_, UI::Box::Resizing::kAlign, UI::Align::kRight);
+	//	map_title_box_.add(&select_map_, UI::Box::Resizing::kAlign, UI::Align::kRight);
 
 	//	main_box_.add_inf_space();
 
@@ -148,7 +124,7 @@ FullscreenMenuLaunchSPG2::FullscreenMenuLaunchSPG2(GameSettingsProvider* const s
 
 	players_.set_font_scale(scale_factor());
 	map_.set_font_scale(scale_factor());
-	map_name_.set_font_scale(scale_factor());
+	//	map_name_.set_font_scale(scale_factor());
 
 	// temporary...
 	title_.set_visible(false);
@@ -159,6 +135,11 @@ FullscreenMenuLaunchSPG2::FullscreenMenuLaunchSPG2(GameSettingsProvider* const s
 
 	layout();
 	layout();
+
+	// irrg violation of demeters law!!! please smbdy just teach me how to pass lambdas in c++
+	// I want to pass a Runnable like in Java:
+	// map_details.set_select_map_action(()->this.select_map());
+	map_details.select_map_button().sigclicked.connect([this] { select_map(); });
 }
 
 void FullscreenMenuLaunchSPG2::layout() {
@@ -186,7 +167,7 @@ void FullscreenMenuLaunchSPG2::layout() {
 	    peaceful_own_.get_x());
 	log("map w=%d, h=%d, x=%d\n", map_.get_w(), map_.get_h(), map_.get_x());
 	log("sehe ich nicht oder \n\n");
-	select_map_.set_desired_size(map_name_.get_h(), map_name_.get_h());
+	//	select_map_.set_desired_size(map_name_.get_h(), map_name_.get_h());
 }
 
 UI::Button& FullscreenMenuLaunchSPG2::ok_button() {
@@ -203,6 +184,72 @@ UI::Button& FullscreenMenuLaunchSPG2::back_button() {
 void FullscreenMenuLaunchSPG2::start() {
 	//	if (!select_map()) {
 	//	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+	//	}
+}
+
+/**
+ * Select a map and send all information to the user interface.
+ * Returns whether a map has been selected.
+ */
+bool FullscreenMenuLaunchSPG2::select_map() {
+	log("clicked the map button\n");
+	if (!settings_->can_change_map())
+		return false;
+
+	FullscreenMenuMapSelect msm(settings_, nullptr);
+	FullscreenMenuBase::MenuTarget code = msm.run<FullscreenMenuBase::MenuTarget>();
+
+	if (code == FullscreenMenuBase::MenuTarget::kBack) {
+		// Set scenario = false, else the menu might crash when back is pressed.
+		settings_->set_scenario(false);
+		return false;  // back was pressed
+	}
+
+	//	is_scenario_ = code == FullscreenMenuBase::MenuTarget::kScenarioGame;
+	//	settings_->set_scenario(is_scenario_);
+
+	const MapData& mapdata = *msm.get_map();
+	nr_players_ = mapdata.nrplayers;
+
+	//	safe_place_for_host(nr_players_);
+	settings_->set_map(mapdata.name, mapdata.filename, nr_players_);
+	update_win_conditions();
+	update_peaceful_mode();
+	update(true);
+	return true;
+}
+
+/**
+ * update the user interface and take care of the visibility of
+ * buttons and text.
+ */
+void FullscreenMenuLaunchSPG2::update(bool map_was_changed) {
+	const GameSettings& settings = settings_->settings();
+
+	map_details.update(settings_);
+	//		filename_ = settings.mapfilename;
+	nr_players_ = settings.players.size();
+
+	ok_own_.set_enabled(settings_->can_launch());
+
+	peaceful_own_.set_state(settings_->is_peaceful_mode());
+
+	//		set_player_names_and_tribes();
+	//}
+
+	//	// "Choose Position" Buttons in front of PlayerDescriptionGroups
+	//	for (uint8_t i = 0; i < nr_players_; ++i) {
+	//		pos_[i]->set_visible(true);
+	//		const PlayerSettings& player = settings.players[i];
+	//		pos_[i]->set_enabled(!is_scenario_ && (player.state == PlayerSettings::State::kOpen ||
+	//		                                       player.state == PlayerSettings::State::kComputer));
+	//	}
+	//	for (uint32_t i = nr_players_; i < kMaxPlayers; ++i)
+	//		pos_[i]->set_visible(false);
+
+	//	// update the player description groups
+	//	for (uint32_t i = 0; i < kMaxPlayers; ++i) {
+	//		players_[i]->update();
 	//	}
 }
 
