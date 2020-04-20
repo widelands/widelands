@@ -195,7 +195,8 @@ void ShippingSchedule::port_removed(Game& game, PortDock* dock) {
 							}
 							assert(closest);
 							log("Ship %s is carrying %u items, rerouting to NEW destination %u\n",
-							    pair.first->get_shipname().c_str(), pair.first->get_nritems(), closest->serial());
+							    pair.first->get_shipname().c_str(), pair.first->get_nritems(),
+							    closest->serial());
 							pair.second.push_back(SchedulingState(closest, false, dist));
 							pair.first->set_destination(game, closest);
 						}
@@ -320,7 +321,7 @@ Duration ShippingSchedule::update(Game& game) {
 
 	assert(plans_.size() == fleet_.get_ships().size());
 	if (fleet_.get_ships().empty()) {
-		return endless(); // wait until we get a ship
+		return endless();  // wait until we get a ship
 	}
 
 	/* FIRST PASS:
