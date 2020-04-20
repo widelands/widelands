@@ -48,8 +48,6 @@ void WareList::add(DescriptionIndex const i, const Quantity count) {
 		wares_.resize(i + 1, 0);
 	wares_[i] += count;
 	assert(wares_[i] >= count);
-
-	changed();
 }
 
 void WareList::add(const WareList& wl) {
@@ -71,8 +69,6 @@ void WareList::remove(DescriptionIndex const i, const Quantity count) {
 	assert(i < wares_.size());
 	assert(wares_[i] >= count);
 	wares_[i] -= count;
-
-	changed();
 }
 
 void WareList::remove(const WareList& wl) {
