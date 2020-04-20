@@ -328,13 +328,11 @@ private:
 };
 
 struct CmdEnhanceBuilding : public PlayerCommand {
-	CmdEnhanceBuilding() : PlayerCommand(), serial(0) {
+	CmdEnhanceBuilding() : PlayerCommand(), serial_(0), keep_wares_(false) {
 	}  // For savegame loading
-	CmdEnhanceBuilding(const uint32_t init_duetime,
-	                   const int32_t p,
-	                   Building& b,
-	                   const DescriptionIndex i)
-	   : PlayerCommand(init_duetime, p), serial(b.serial()), bi(i) {
+	CmdEnhanceBuilding(
+	   const uint32_t init_duetime, const int32_t p, Building& b, const DescriptionIndex i, bool kw)
+	   : PlayerCommand(init_duetime, p), serial_(b.serial()), bi_(i), keep_wares_(kw) {
 	}
 
 	// Write these commands to a file (for savegames)
@@ -351,15 +349,16 @@ struct CmdEnhanceBuilding : public PlayerCommand {
 	void serialize(StreamWrite&) override;
 
 private:
-	Serial serial;
-	DescriptionIndex bi;
+	Serial serial_;
+	DescriptionIndex bi_;
+	bool keep_wares_;
 };
 
 struct CmdDismantleBuilding : public PlayerCommand {
-	CmdDismantleBuilding() : PlayerCommand(), serial(0) {
+	CmdDismantleBuilding() : PlayerCommand(), serial_(0), keep_wares_(false) {
 	}  // For savegame loading
-	CmdDismantleBuilding(const uint32_t t, const int32_t p, PlayerImmovable& pi)
-	   : PlayerCommand(t, p), serial(pi.serial()) {
+	CmdDismantleBuilding(const uint32_t t, const int32_t p, PlayerImmovable& pi, bool kw)
+	   : PlayerCommand(t, p), serial_(pi.serial()), keep_wares_(kw) {
 	}
 
 	// Write these commands to a file (for savegames)
@@ -376,7 +375,8 @@ struct CmdDismantleBuilding : public PlayerCommand {
 	void serialize(StreamWrite&) override;
 
 private:
-	Serial serial;
+	Serial serial_;
+	bool keep_wares_;
 };
 
 struct CmdEvictWorker : public PlayerCommand {
