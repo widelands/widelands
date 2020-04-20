@@ -211,7 +211,7 @@ tribes:new_trainingsite_type {
       },
       upgrade_soldier_defense_0 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = pgettext ("amazons_building", "upgrading soldier defense from level 1 to level 2"),
+         descname = pgettext ("amazons_building", "upgrading soldier defense from level 0 to level 1"),
          actions = {
             "checksoldier=soldier defense 0",
             "return=failed unless site has vest_padded",
@@ -225,7 +225,7 @@ tribes:new_trainingsite_type {
       },
       upgrade_soldier_defense_1 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = pgettext ("amazons_building", "upgrading soldier health from level 1 to level 2"),
+         descname = pgettext ("amazons_building", "upgrading soldier defense from level 1 to level 2"),
          actions = {
             "checksoldier=soldier defense 1",
             "return=failed unless site has protector_padded",
