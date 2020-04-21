@@ -121,6 +121,13 @@ void Request::read(FileRead& fr,
 					throw wexception("Request::read: unknown type '%s'.\n", type_name);
 				}
 			}
+
+			if (economy_) {
+				economy_->remove_request(*this);
+			}
+			economy_ = target_.get_economy(type_);
+			assert(economy_);
+
 			count_ = fr.unsigned_32();
 			required_time_ = fr.unsigned_32();
 			required_interval_ = fr.unsigned_32();
@@ -160,8 +167,9 @@ void Request::read(FileRead& fr,
 					throw wexception("transfer %u: %s", i, e.what());
 				}
 			requirements_.read(fr, game, mol);
-			if (!is_open() && economy_)
-				economy_->remove_request(*this);
+			if (is_open()) {
+				economy_->add_request(*this);
+			}
 		} else {
 			throw UnhandledVersionError("Request", packet_version, kCurrentPacketVersion);
 		}
