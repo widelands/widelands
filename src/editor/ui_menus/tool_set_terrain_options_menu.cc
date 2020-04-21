@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <SDL_keycode.h>
-
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/set_terrain_tool.h"

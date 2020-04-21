@@ -21,6 +21,8 @@
 
 #include <memory>
 
+#include <SDL_mouse.h>
+
 #include "base/macros.h"
 #include "graphic/text_layout.h"
 #include "logic/map_objects/tribes/soldier.h"
