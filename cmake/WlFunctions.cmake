@@ -117,8 +117,8 @@ macro(_common_compile_tasks)
   endif()
 
   if(ARG_USES_SDL2)
-    wl_include_system_directories(${NAME} ${SDL2_INCLUDE_DIR})
-    target_link_libraries(${NAME} ${SDL2_LIBRARY})
+    wl_include_system_directories(${NAME} ${SDL2_INCLUDE_DIRS})
+    target_link_libraries(${NAME} ${SDL2_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
   endif()
 
   if(ARG_USES_SDL2_MIXER)
@@ -196,9 +196,9 @@ function(wl_test NAME)
   target_link_libraries(${NAME} ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
 
   # Tests need to link with SDL2 library without main.
-  set(SDL2_LIBRARY_TEMP ${SDL2_LIBRARY})
-  list(REMOVE_ITEM SDL2_LIBRARY_TEMP ${SDL2MAIN_LIBRARY})
-  target_link_libraries(${NAME} ${SDL2_LIBRARY_TEMP})
+  set(SDL2_LIBRARIES_TEMP ${SDL2_LIBRARIES})
+  list(REMOVE_ITEM SDL2_LIBRARIES_TEMP -lSDL2main)
+  target_link_libraries(${NAME} ${SDL2_LIBRARIES_TEMP})
 
   _common_compile_tasks()
 
