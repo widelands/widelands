@@ -39,6 +39,7 @@ return {
       for idx, plr in ipairs(game.players) do
          plr:reveal_fields(fields)
       end
+      fields = nil
 
       -- Iterate all players, if one is defeated, remove him
       -- from the list, send him a defeated message and give him full vision

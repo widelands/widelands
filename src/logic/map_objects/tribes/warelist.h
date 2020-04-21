@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,8 +21,6 @@
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_WARELIST_H
 
 #include <cassert>
-
-#include <boost/signals2.hpp>
 
 #include "logic/widelands.h"
 
@@ -61,8 +59,6 @@ struct WareList {
 	bool operator!=(const WareList& wl) const {
 		return !(*this == wl);
 	}
-
-	mutable boost::signals2::signal<void()> changed;
 
 private:
 	std::vector<Quantity> wares_;

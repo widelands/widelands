@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,6 +52,9 @@ StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registr
 	   new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWORKER, false);
 	tabs->add("workers_in_warehouses", g_gr->images().get(pic_tab_workers_warehouse),
 	          warehouse_workers_, _("Workers in warehouses"));
+
+	// Preselect the wares_in_warehouses tab
+	tabs->activate(2);
 }
 
 /*
