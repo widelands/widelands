@@ -286,6 +286,7 @@ private:
 	uint8_t trainee_general_lower_bound_;   // This is the acceptance threshold currently in use.
 	uint8_t repeated_layoff_ctr_;      // increases when soldier is prematurely releases, reset when
 	                                   // training succeeds.
+	bool repeated_layoff_inc_;
 	bool latest_trainee_was_kickout_;  // If soldier was not dropped, requesting new soldier.
 	bool requesting_weak_trainees_;    // Value of the previous after incorporate.
 	const uint8_t kUpperBoundThreshold_ =

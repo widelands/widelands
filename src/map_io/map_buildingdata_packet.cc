@@ -876,6 +876,7 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 				uint8_t somebits = fr.unsigned_8();
 				trainingsite.latest_trainee_was_kickout_ = 0 < (somebits & 1);
 				trainingsite.requesting_weak_trainees_ = 0 < (somebits & 2);
+				trainingsite.repeated_layoff_inc_ = 0 < (somebits & 4);
 				assert(4 > somebits);
 				trainingsite.repeated_layoff_ctr_ = fr.unsigned_8();
 				trainingsite.request_open_since_ = fr.unsigned_32();
@@ -1348,6 +1349,9 @@ void MapBuildingdataPacket::write_trainingsite(const TrainingSite& trainingsite,
 	}
 	if (trainingsite.requesting_weak_trainees_) {
 		somebits += 2;
+	}
+	if (trainingsite.repeated_layoff_inc_) {
+		somebits += 4;
 	}
 	fw.unsigned_8(somebits);
 	fw.unsigned_8(trainingsite.repeated_layoff_ctr_);
