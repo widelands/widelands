@@ -23,8 +23,6 @@ public:
 protected:
 	void clicked_ok() override;
 	void clicked_back() override;
-	UI::Button& ok_button() override;
-	UI::Button& back_button() override;
 
 private:
 	void layout() override;
@@ -47,6 +45,9 @@ private:
 	UI::Textarea title_own_;
 	UI::Textarea player_name_;
 
+	void add_all_widgets();
+	void disable_parent_widgets();
+	void add_behaviour_to_widgets();
 	bool select_map();
 	void update(bool map_was_changed);
 };

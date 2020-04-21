@@ -104,6 +104,6 @@ void MapDetailsBox::load_map_info(GameSettingsProvider* settings) {
 	map_description_.set_text(infotext);
 }
 
-UI::Button& MapDetailsBox::select_map_button() {
-	return select_map_;
+void MapDetailsBox::set_select_map_action(std::function<void()> action) {
+	select_map_.sigclicked.connect(action);
 }

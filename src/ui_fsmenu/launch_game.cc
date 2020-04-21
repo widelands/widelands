@@ -76,11 +76,10 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
 	win_condition_dropdown_.selected.connect(
 	   boost::bind(&FullscreenMenuLaunchGame::win_condition_selected, this));
 	peaceful_.changed.connect(boost::bind(&FullscreenMenuLaunchGame::toggle_peaceful, this));
-	back_button().sigclicked.connect(
+	back_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuLaunchGame::clicked_back, boost::ref(*this)));
 	log("connecting ok button...\n");
-	ok_button().sigclicked.connect(
-	   boost::bind(&FullscreenMenuLaunchGame::clicked_ok, boost::ref(*this)));
+	ok_.sigclicked.connect(boost::bind(&FullscreenMenuLaunchGame::clicked_ok, boost::ref(*this)));
 
 	lua_ = new LuaInterface();
 
@@ -233,11 +232,4 @@ void FullscreenMenuLaunchGame::clicked_ok() {
 // Implemented by subclasses
 void FullscreenMenuLaunchGame::clicked_back() {
 	NEVER_HERE();
-}
-UI::Button& FullscreenMenuLaunchGame::ok_button() {
-	log("returning ok_\n");
-	return ok_;
-}
-UI::Button& FullscreenMenuLaunchGame::back_button() {
-	return back_;
 }

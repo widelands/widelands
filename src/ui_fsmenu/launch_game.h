@@ -46,8 +46,6 @@ public:
 protected:
 	void clicked_ok() override;
 	void clicked_back() override;
-	virtual UI::Button& ok_button();
-	virtual UI::Button& back_button();
 
 	LuaInterface* lua_;
 

@@ -90,6 +90,16 @@ FullscreenMenuLaunchSPG2::FullscreenMenuLaunchSPG2(GameSettingsProvider* const s
                   "beispiel name von einem spieler",
                   UI::Align::kLeft,
                   g_gr->styles().font_style(UI::FontStyle::kLabel)) {
+
+	add_all_widgets();
+	disable_parent_widgets();
+
+	layout();
+
+	add_behaviour_to_widgets();
+}
+
+void FullscreenMenuLaunchSPG2::add_all_widgets() {
 	main_box_.add_space(2 * padding_);
 	main_box_.add(&title_own_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
@@ -100,48 +110,48 @@ FullscreenMenuLaunchSPG2::FullscreenMenuLaunchSPG2(GameSettingsProvider* const s
 	player_box_.add(&players_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	player_box_.add(&player_name_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	content_box_.add_inf_space();
+
 	content_box_.add(&map_box_, UI::Box::Resizing::kExpandBoth);
 	map_box_.add(&map_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	map_box_.add(&map_details, UI::Box::Resizing::kFullSize);
-	//	map_box_.add(&map_title_box_, UI::Box::Resizing::kFullSize);
-	//	map_box_.add(&map_description_, UI::Box::Resizing::kFullSize);
 	map_box_.add(&peaceful_own_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	map_box_.add(&win_condition_type, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	map_box_.add(&win_condition_dropdown_own_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
-	//	map_title_box_.add(&map_name_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
-	// map_title_box_.add_inf_space();
-	//	map_title_box_.add(&select_map_, UI::Box::Resizing::kAlign, UI::Align::kRight);
 
 	//	main_box_.add_inf_space();
 
 	main_box_.add(&button_box_, UI::Box::Resizing::kFullSize);
 	button_box_.add_inf_space();
-	button_box_.add(UI::g_fh->fontset()->is_rtl() ? &ok_button() : &back_button(),
-	                UI::Box::Resizing::kExpandBoth);
+	button_box_.add(
+	   UI::g_fh->fontset()->is_rtl() ? &ok_own_ : &back_own_, UI::Box::Resizing::kExpandBoth);
 	button_box_.add_space(10);
-	button_box_.add(UI::g_fh->fontset()->is_rtl() ? &back_button() : &ok_button(),
-	                UI::Box::Resizing::kExpandBoth);
+	button_box_.add(
+	   UI::g_fh->fontset()->is_rtl() ? &back_own_ : &ok_own_, UI::Box::Resizing::kExpandBoth);
 
 	players_.set_font_scale(scale_factor());
 	map_.set_font_scale(scale_factor());
 	//	map_name_.set_font_scale(scale_factor());
+}
 
+void FullscreenMenuLaunchSPG2::disable_parent_widgets() {
 	// temporary...
 	title_.set_visible(false);
 	ok_.set_visible(false);
 	back_.set_visible(false);
 	peaceful_.set_visible(false);
 	win_condition_dropdown_.set_visible(false);
-
-	layout();
-	layout();
-
-	// irrg violation of demeters law!!! please smbdy just teach me how to pass lambdas in c++
-	// I want to pass a Runnable like in Java:
-	// map_details.set_select_map_action(()->this.select_map());
-	map_details.select_map_button().sigclicked.connect([this] { select_map(); });
 }
 
+void FullscreenMenuLaunchSPG2::add_behaviour_to_widgets() {
+	map_details.set_select_map_action([this]() { select_map(); });
+	win_condition_dropdown_own_.selected.connect([this]() { win_condition_selected(); });
+	ok_own_.sigclicked.connect([this]() { clicked_ok(); });
+	back_own_.sigclicked.connect([this]() { clicked_back(); });
+
+	// subscriber_ =
+	Notifications::subscribe<NoteGameSettings>(
+	   [this](const NoteGameSettings& note) { update(false); });
+}
 void FullscreenMenuLaunchSPG2::layout() {
 	log("w=%d, h=%d\n", get_w(), get_h());
 	//	main_box_.set_desired_size(get_w(), get_h());
@@ -170,20 +180,13 @@ void FullscreenMenuLaunchSPG2::layout() {
 	//	select_map_.set_desired_size(map_name_.get_h(), map_name_.get_h());
 }
 
-UI::Button& FullscreenMenuLaunchSPG2::ok_button() {
-	log("return ok_own\n");
-	return ok_own_;
-}
-UI::Button& FullscreenMenuLaunchSPG2::back_button() {
-	return back_own_;
-}
 /**
  * Select a map as a first step in launching a game, before
  * showing the actual setup menu.
  */
 void FullscreenMenuLaunchSPG2::start() {
 	//	if (!select_map()) {
-	//	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+	//		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
 	//	}
 }
 
@@ -223,11 +226,11 @@ bool FullscreenMenuLaunchSPG2::select_map() {
  * update the user interface and take care of the visibility of
  * buttons and text.
  */
-void FullscreenMenuLaunchSPG2::update(bool map_was_changed) {
+void FullscreenMenuLaunchSPG2::update(bool) {
 	const GameSettings& settings = settings_->settings();
 
 	map_details.update(settings_);
-	//		filename_ = settings.mapfilename;
+	//			filename_ = settings.mapfilename;
 	nr_players_ = settings.players.size();
 
 	ok_own_.set_enabled(settings_->can_launch());

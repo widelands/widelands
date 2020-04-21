@@ -19,8 +19,7 @@ public:
 
 	void update(GameSettingsProvider* settings);
 
-	// irrg I do not want to do this!!!
-	UI::Button& select_map_button();
+	void set_select_map_action(std::function<void()> action);
 
 private:
 	UI::Box title_box_;
