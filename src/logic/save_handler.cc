@@ -19,6 +19,7 @@
 
 #include "logic/save_handler.h"
 
+#include <SDL_timer.h>
 #include <boost/algorithm/string.hpp>
 
 #include "base/log.h"
