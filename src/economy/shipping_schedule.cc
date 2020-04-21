@@ -1178,9 +1178,13 @@ Duration ShippingSchedule::update(Game& game) {
 			}
 		}
 		assert(closest);
-		plans_[ship].push_back(SchedulingState(closest, false, dist));
-		ship->set_destination(game, closest);
-		sslog("Sending %s to %u\n", ship->get_shipname().c_str(), closest->serial());
+		if (dist < kNearbyDockMaxDistanceFactor) {
+			sslog("%s is already near %u\n", ship->get_shipname().c_str(), closest->serial());
+		} else {
+			plans_[ship].push_back(SchedulingState(closest, false, dist));
+			ship->set_destination(game, closest);
+			sslog("Sending %s to %u\n", ship->get_shipname().c_str(), closest->serial());
+		}
 		for (auto it = ships_per_port.begin(); it != ships_per_port.end(); ++it) {
 			if (it->first == closest) {
 				assert(it->second > 0);
