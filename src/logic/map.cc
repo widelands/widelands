@@ -711,7 +711,7 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 		}
 	}
 	for (Coords& c : starting_pos_) {
-		if (c) {
+		if (c) {  // only if set (!= Coords::null())
 			c = lambda_cn(c);
 		}
 	}

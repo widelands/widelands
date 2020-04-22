@@ -26,10 +26,10 @@ int32_t EditorResizeTool::handle_click_impl(const Widelands::NodeAndTriangle<>& 
                                             EditorInteractive& eia,
                                             EditorActionArgs* args,
                                             Widelands::Map* map) {
-	args->resized = map->dump_state(eia.egbase());
+	args->resized = map->dump_state(eia.egbase()); // save old state for undo
 	map->resize(eia.egbase(), center.node, args->new_map_size.w, args->new_map_size.h);
 
-	// fix for issue #3754
+	// fix for issue #3754 (remove selection markers from deleted fields to prevent a crash)
 	Widelands::NodeAndTriangle<> sel = eia.get_sel_pos();
 	map->normalize_coords(sel.node);
 	map->normalize_coords(sel.triangle.node);
@@ -44,7 +44,7 @@ int32_t EditorResizeTool::handle_undo_impl(const Widelands::NodeAndTriangle<Wide
                                            Widelands::Map* map) {
 	map->set_to(eia.egbase(), args->resized);
 
-	// fix for issue #3754
+	// fix for issue #3754 (same as above)
 	Widelands::NodeAndTriangle<> sel = eia.get_sel_pos();
 	map->normalize_coords(sel.node);
 	map->normalize_coords(sel.triangle.node);
