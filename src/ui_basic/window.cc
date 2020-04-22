@@ -21,7 +21,7 @@
 
 #include <memory>
 
-#include <SDL_keycode.h>
+#include <SDL_mouse.h>
 
 #include "base/i18n.h"
 #include "base/log.h"

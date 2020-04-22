@@ -19,8 +19,6 @@
 
 #include <memory>
 
-#include <SDL.h>
-
 #include "base/log.h"
 #include "config.h"
 #include "graphic/graphic.h"

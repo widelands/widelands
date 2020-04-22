@@ -22,8 +22,6 @@
 
 #include <memory>
 
-#include <SDL_keyboard.h>
-
 #include "graphic/styles/font_style.h"
 #include "ui_basic/panel.h"
 
