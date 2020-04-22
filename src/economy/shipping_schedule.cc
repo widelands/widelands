@@ -269,6 +269,42 @@ void ShippingSchedule::ship_removed(const Game&, Ship* ship) {
 	// is deferred to the next call to update()
 }
 
+void ShippingSchedule::ship_added(Game& game, Ship& s) {
+	sslog("\nShippingSchedule::ship_added (%s)\n", s.get_shipname().c_str());
+	assert(!s.get_destination());
+	plans_[&s] = ShipPlan();
+	if (fleet_.get_ports().empty()) {
+#ifndef NDEBUG
+		for (ShippingItem& si : s.items_) {
+			assert(!si.destination_dock_.is_set());
+		}
+#endif
+		sslog("No ports!\n\n");
+		return;
+	}
+
+	PortDock* closest = nullptr;
+	int32_t dist = 0;
+	for (PortDock* dock : fleet_.get_ports()) {
+		Path path;
+		int32_t d = -1;
+		s.calculate_sea_route(game, *dock, &path);
+		game.map().calc_cost(path, &d, nullptr);
+		assert(d >= 0);
+		if (!closest || d < dist) {
+			dist = d;
+			closest = dock;
+		}
+	}
+	assert(closest);
+	for (ShippingItem& si : s.items_) {
+		si.destination_dock_ = closest;
+	}
+	plans_[&s].push_back(SchedulingState(closest, false, dist));
+	s.set_destination(game, closest);
+	sslog("Sent to %u\n\n", closest->serial());
+}
+
 void ShippingSchedule::port_added(Game& game, PortDock& dock) {
 	sslog("\nShippingSchedule::port_added (%u)\n", dock.serial());
 	if (fleet_.count_ports() > 1) {

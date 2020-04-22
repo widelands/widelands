@@ -72,9 +72,7 @@ public:
 	// returns the time until the next update
 	Duration update(Game&);
 
-	void ship_added(Game&, Ship& s) {
-		plans_[&s] = ShipPlan();
-	}
+	void ship_added(Game&, Ship& s);
 	void port_added(Game&, PortDock&);
 	/**
 	  * Forget the plans for this ship. Disappointed items will be
