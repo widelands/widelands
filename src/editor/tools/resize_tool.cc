@@ -26,7 +26,7 @@ int32_t EditorResizeTool::handle_click_impl(const Widelands::NodeAndTriangle<>& 
                                             EditorInteractive& eia,
                                             EditorActionArgs* args,
                                             Widelands::Map* map) {
-	args->resized = map->dump_state(eia.egbase()); // save old state for undo
+	args->resized = map->dump_state(eia.egbase());  // save old state for undo
 	map->resize(eia.egbase(), center.node, args->new_map_size.w, args->new_map_size.h);
 
 	// fix for issue #3754 (remove selection markers from deleted fields to prevent a crash)
