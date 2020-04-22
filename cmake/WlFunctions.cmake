@@ -208,6 +208,9 @@ function(wl_test NAME)
   # Tests need to link with SDL2 library without main.
   set(SDL2_LIBRARIES_TEMP ${SDL2_LIBRARIES})
   list(REMOVE_ITEM SDL2_LIBRARIES_TEMP -lSDL2main)
+  message(STATUS "SDL2_LIBRARIES_TEMP: <${SDL2_LIBRARIES_TEMP}>")
+  string(STRIP ${SDL2_LIBRARIES_TEMP} SDL2_LIBRARIES_TEMP)
+  message(STATUS "SDL2_LIBRARIES_TEMP (stripped): <${SDL2_LIBRARIES_TEMP}>")
   target_link_libraries(${NAME} ${SDL2_LIBRARIES_TEMP})
 
   _common_compile_tasks()
