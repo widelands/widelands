@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include <SDL_timer.h>
 #include <boost/algorithm/string/join.hpp>
 
 #include "base/log.h"

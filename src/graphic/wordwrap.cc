@@ -25,7 +25,6 @@
 
 #include <memory>
 
-#include <SDL_ttf.h>
 #include <unicode/unistr.h>
 
 #include "base/log.h"

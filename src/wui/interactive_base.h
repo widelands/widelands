@@ -22,8 +22,6 @@
 
 #include <memory>
 
-#include <SDL_keycode.h>
-
 #include "graphic/toolbar_imageset.h"
 #include "io/profile.h"
 #include "logic/editor_game_base.h"

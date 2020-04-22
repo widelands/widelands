@@ -21,6 +21,9 @@
 
 #include <functional>
 
+#include <SDL_mouse.h>
+#include <SDL_timer.h>
+
 #include "base/macros.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
