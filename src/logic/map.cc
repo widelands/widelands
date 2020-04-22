@@ -573,29 +573,41 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 	 */
 	if (dx >= 0) {
 		// horz: increase
-		lambda_co_x = [split, dx](int x) { return x < split.x ? x : x >= split.x + dx ? x - dx : kInvalidCoords; };
+		lambda_co_x = [split, dx](int x) {
+			return x < split.x ? x : x >= split.x + dx ? x - dx : kInvalidCoords;
+		};
 		lambda_cn_x = [split, dx](int x) { return x < split.x ? x : x + dx; };
 	} else if (split.x > w) {
 		// horz: shrink, single block
 		lambda_co_x = [xoff](int x) { return x + xoff; };
-		lambda_cn_x = [xoff, split](int x) { return x >= xoff && x < split.x ? x - xoff : kInvalidCoords; };
+		lambda_cn_x = [xoff, split](int x) {
+			return x >= xoff && x < split.x ? x - xoff : kInvalidCoords;
+		};
 	} else {
 		// horz: shrink, left/right stripes
 		lambda_co_x = [split, dx](int x) { return x < split.x ? x : x - dx; };
-		lambda_cn_x = [dx, split](int x) { return x < split.x ? x : x >= split.x - dx ? x + dx : kInvalidCoords; };
+		lambda_cn_x = [dx, split](int x) {
+			return x < split.x ? x : x >= split.x - dx ? x + dx : kInvalidCoords;
+		};
 	}
 	if (dy >= 0) {
 		// vert: increase
-		lambda_co_y = [split, dy](int y) { return y < split.y ? y : y >= split.y + dy ? y - dy : kInvalidCoords; };
+		lambda_co_y = [split, dy](int y) {
+			return y < split.y ? y : y >= split.y + dy ? y - dy : kInvalidCoords;
+		};
 		lambda_cn_y = [split, dy](int y) { return y < split.y ? y : y + dy; };
 	} else if (split.y > h) {
 		// vert: shrink, single block
 		lambda_co_y = [yoff](int y) { return y + yoff; };
-		lambda_cn_y = [yoff, split](int y) { return y >= yoff && y < split.y ? y - yoff : kInvalidCoords; };
+		lambda_cn_y = [yoff, split](int y) {
+			return y >= yoff && y < split.y ? y - yoff : kInvalidCoords;
+		};
 	} else {
 		// vert: shrink, upper/lower stripes
 		lambda_co_y = [split, dy](int y) { return y < split.y ? y : y - dy; };
-		lambda_cn_y = [dy, split](int y) { return y < split.y ? y : y >= split.y - dy ? y + dy : kInvalidCoords; };
+		lambda_cn_y = [dy, split](int y) {
+			return y < split.y ? y : y >= split.y - dy ? y + dy : kInvalidCoords;
+		};
 	}
 
 	// Generate the new fields. Does not modify the actual map yet.
