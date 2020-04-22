@@ -228,14 +228,11 @@ void Window::layout() {
 		center_panel_->set_size(get_inner_w(), get_inner_h());
 	}
 	button_close_->set_pos(Vector2i(
-	   get_w() + kWindowTitlebarButtonsYPos - TP_B_PIXMAP_THICKNESS,
+	   get_w() + kWindowTitlebarButtonsYPos - TP_B_PIXMAP_THICKNESS, kWindowTitlebarButtonsYPos));
+	button_pin_->set_pos(Vector2i(kWindowTitlebarButtonsYPos, kWindowTitlebarButtonsYPos));
+	button_minimize_->set_pos(Vector2i(
+	   kWindowTitlebarButtonsYPos + kWindowTitlebarButtonsSize + kWindowTitlebarButtonsSpacing,
 	   kWindowTitlebarButtonsYPos));
-	button_pin_->set_pos(
-	   Vector2i(kWindowTitlebarButtonsYPos,
-	            kWindowTitlebarButtonsYPos));
-	button_minimize_->set_pos(Vector2i(kWindowTitlebarButtonsYPos + kWindowTitlebarButtonsSize +
-	                                      kWindowTitlebarButtonsSpacing,
-	                                   kWindowTitlebarButtonsYPos));
 }
 
 /**
