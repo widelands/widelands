@@ -148,6 +148,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		}
 
 		site->second.last_tested = gametime;
+		uint16_t enemy_military_presence_in_region_ = 0;
+		uint16_t enemy_military_sites_in_region_ = 0;
 		uint8_t defenders_strength = 0;
 		bool is_warehouse = false;
 		bool is_attackable = false;
@@ -159,6 +161,50 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		// testing if we can attack the building - result is a flag
 		// if we dont get a flag, we remove the building from observers list
 		FCoords f = map.get_fcoords(Coords::unhash(site->first));
+
+		static std::vector<ImmovableFound> immovables;
+		immovables.reserve(50);
+		immovables.clear();
+		map.find_immovables(game(), Area<FCoords>(f, 10), &immovables);
+		static std::set<uint32_t> unique_serials;
+		unique_serials.clear();
+
+		for (uint32_t k = 0; k < immovables.size(); ++k) {
+			const BaseImmovable& base_immovable = *immovables.at(k).object;
+
+			if (!unique_serials.insert(base_immovable.serial()).second) {
+				continue;  // serial was not inserted in the set, so this is duplicate
+			}
+
+			// testing if immovable is owned by someone else and collecting some statistics
+			if (upcast(Building const, building, &base_immovable)) {
+
+				const PlayerNumber bpn = building->owner().player_number();
+				if (player_statistics.get_is_enemy(bpn)) {  // owned by enemy
+					assert(!player_statistics.players_in_same_team(bpn, pn));
+					if (upcast(MilitarySite const, militarysite, building)) {
+						enemy_military_presence_in_region_ +=
+						   militarysite->soldier_control()->stationed_soldiers().size();
+						++enemy_military_sites_in_region_;
+					}
+					if (upcast(ConstructionSite const, constructionsite, building)) {
+						const BuildingDescr& target_descr = constructionsite->building();
+						if (target_descr.type() == MapObjectType::MILITARYSITE) {
+							++enemy_military_sites_in_region_;
+						}
+					}
+
+					// Warehouses are counted here too as they can host soldiers as well
+					if (upcast(Warehouse const, warehouse, building)) {
+						enemy_military_presence_in_region_ +=
+						   warehouse->soldier_control()->stationed_soldiers().size();
+						++enemy_military_sites_in_region_;
+					}
+				}
+			}
+		}
+		site->second.enemy_military_presence_in_region = enemy_military_presence_in_region_;
+		site->second.enemy_military_sites_in_region = enemy_military_sites_in_region_;
 
 		Flag* flag = nullptr;
 
@@ -254,36 +300,36 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				}
 				uint16_t own_power_growth = 10;
 				if (player_statistics.get_old60_player_land(pn)) {
-					enemys_power_growth = player_statistics.get_player_power(pn) * 100 /
+					own_power_growth = player_statistics.get_player_power(pn) * 100 /
 					                      player_statistics.get_old60_player_land(pn);
 				}
 
-				static int16_t inputs[3 * kFNeuronBitSize] = {0};
+				static int16_t inputs[4 * kFNeuronBitSize] = {0};
 				// Reseting values as the variable is static
-				for (int j = 0; j < 3 * kFNeuronBitSize; j++) {
+				for (int j = 0; j < 4 * kFNeuronBitSize; j++) {
 					inputs[j] = 0;
 				}
 				inputs[0] = (site->second.attack_soldiers_strength - site->second.defenders_strength) *
-				            std::abs(management_data.get_military_number_at(114)) / 30;
+				            std::abs(management_data.get_military_number_at(114)) / 20;
 				inputs[1] = (site->second.attack_soldiers_strength - site->second.defenders_strength) *
-				            std::abs(management_data.get_military_number_at(115)) / 30;
+				            std::abs(management_data.get_military_number_at(115)) / 20;
 				inputs[2] = (is_warehouse) ? 4 : 0;
 				inputs[3] = (is_warehouse) ? 2 : 0;
 				inputs[4] = (site->second.attack_soldiers_competency > 15) ? 2 : 0;
 				inputs[5] = (site->second.attack_soldiers_competency > 25) ? 4 : 0;
 				inputs[6] =
 				   (2 * site->second.defenders_strength > 3 * site->second.attack_soldiers_strength) ?
-				      2 :
+				      -8 :
 				      0;
 				inputs[7] =
 				   (3 * site->second.defenders_strength > 2 * site->second.attack_soldiers_strength) ?
-				      2 :
+				      -4 :
 				      0;
 				inputs[8] = (soldier_status_ == SoldiersStatus::kBadShortage ||
 				             soldier_status_ == SoldiersStatus::kShortage) ?
 				               -2 :
 				               0;
-				inputs[8] = (soldier_status_ == SoldiersStatus::kBadShortage) ? -2 : 0;
+				inputs[96] = (soldier_status_ == SoldiersStatus::kBadShortage) ? -2 : 0;
 				inputs[9] = (soldier_status_ == SoldiersStatus::kBadShortage ||
 				             soldier_status_ == SoldiersStatus::kShortage) ?
 				               -3 :
@@ -321,7 +367,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				inputs[22] = (my_to_enemy_power_ratio > 80) ? 2 : -2;
 				inputs[23] = (my_to_enemy_power_ratio > 90) ? 2 : -2;
 				inputs[24] = (my_to_enemy_power_ratio > 110) ? 2 : -2;
-				inputs[55] = (my_to_enemy_power_ratio > 120) ? 2 : -2;
+				inputs[25] = (my_to_enemy_power_ratio > 120) ? 2 : -2;
 				inputs[26] = management_data.get_military_number_at(62) / 10;
 				inputs[27] = (ts_finished_count_ - ts_without_trainers_) * 2;
 				inputs[28] = general_score * 3;
@@ -380,7 +426,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				inputs[75] = (own_power_growth > 120) ? 2 : 0;
 				inputs[76] = (own_power_growth < 95) ? -1 : 0;
 				inputs[77] = (own_power_growth < 90) ? -2 : 0;
-				inputs[77] = (own_power_growth < 85) ? -1 : 0;
+				inputs[97] = (own_power_growth < 85) ? -1 : 0;
 				inputs[78] = (own_power_growth < 80) ? -2 : 0;
 				inputs[79] = ((gametime - last_attack_time_) < kCampaignDuration) ? +2 : -2;
 				inputs[80] = -1;
@@ -403,12 +449,21 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				inputs[88] = (site->second.attack_soldiers_strength < 2) ? -3 : 0;
 				inputs[89] = (site->second.attack_soldiers_strength < 4) ? -2 : 0;
 				inputs[90] = (site->second.attack_soldiers_strength < 5) ? -3 : 0;
-				inputs[90] = (site->second.attack_soldiers_strength < 7) ? -3 : 0;
-				inputs[91] = (site->second.attack_soldiers_competency < 15) ? -4 : 0;
-				inputs[92] = (site->second.attack_soldiers_competency < 20) ? -2 : 0;
-				inputs[93] = ((gametime - last_attack_time_) < kCampaignDuration) ? +2 : -2;
+				inputs[91] = (site->second.attack_soldiers_strength < 7) ? -3 : 0;
+				inputs[92] = (site->second.attack_soldiers_competency < 15) ? -4 : 0;
+				inputs[93] = (site->second.attack_soldiers_competency < 20) ? -2 : 0;
 				inputs[94] = ((gametime - last_attack_time_) < kCampaignDuration) ? +2 : -2;
-				inputs[95] = -player_statistics.enemies_seen_lately_count(gametime);
+				inputs[95] = ((gametime - last_attack_time_) < kCampaignDuration) ? +2 : -2;
+				inputs[98] = -player_statistics.enemies_seen_lately_count(gametime);
+				inputs[99] = (site->second.enemy_military_sites_in_region > 2) ? 2 : 6;
+				inputs[100] = (site->second.enemy_military_sites_in_region > 4) ? 1 : 3;
+				inputs[101] = (site->second.enemy_military_sites_in_region > 5) ? -3 : 0;
+				inputs[102] = (site->second.enemy_military_sites_in_region > 7) ? -6 : -4;
+				inputs[103] = (site->second.enemy_military_presence_in_region > 5) ? 2 : 6;
+				inputs[104] = (site->second.enemy_military_presence_in_region > 10) ? -1 : 1;
+				inputs[105] = (site->second.enemy_military_presence_in_region > 15) ? -6 : -2;
+				inputs[106] = (site->second.attack_soldiers_strength > 3 * site->second.enemy_military_presence_in_region) ? 3 : -1;
+				inputs[107] = (site->second.attack_soldiers_strength > 4 * site->second.enemy_military_presence_in_region) ? 6 : 0;
 
 				site->second.score = 0;
 				for (uint8_t j = 0; j < kFNeuronBitSize; ++j) {
@@ -430,6 +485,14 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 						    inputs[j + 2 * kFNeuronBitSize] > 10) {
 							log(" pos: %d - value %d\n", j + 2 * kFNeuronBitSize,
 							    inputs[j + 2 * kFNeuronBitSize]);
+						}
+					}
+					if (management_data.f_neuron_pool[18].get_position(j)) {
+						site->second.score += inputs[j + 3 * kFNeuronBitSize];
+						if (inputs[j + 3 * kFNeuronBitSize] < -10 ||
+						    inputs[j + 3 * kFNeuronBitSize] > 10) {
+							log(" pos: %d - value %d\n", j + 3 * kFNeuronBitSize,
+							    inputs[j + 3 * kFNeuronBitSize]);
 						}
 					}
 				}
