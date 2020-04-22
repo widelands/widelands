@@ -242,7 +242,7 @@ void TrainingSite::SoldierControl::set_soldier_capacity(Quantity const capacity)
 			training_site_->latest_trainee_was_kickout_ = false;
 		} else {
 			// Now the player just wants soldier. Any soldiers.
-			 training_site_->recent_capacity_increase_ = true;
+			training_site_->recent_capacity_increase_ = true;
 		}
 	}
 	training_site_->capacity_ = capacity;
