@@ -529,8 +529,13 @@ public:
 
 	// Change the map size. Must not be used outside the editor.
 	void resize(EditorGameBase&, Coords, int32_t w, int32_t h);
-	ResizeHistory dump_state(const EditorGameBase&) const;
+	// Used only to undo a resize() operation.
+	// Force-resets the entire map's state to the given preserved state.
 	void set_to(EditorGameBase&, ResizeHistory);
+	// Creates a ResizeHistory that can be passed to set_to() later.
+	// This has to save the entire map's state because resize operations
+	// may affect all fields when resolving height differences etc.
+	ResizeHistory dump_state(const EditorGameBase&) const;
 
 	uint32_t get_waterway_max_length() const;
 	void set_waterway_max_length(uint32_t max_length);

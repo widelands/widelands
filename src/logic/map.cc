@@ -545,147 +545,60 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 		return;
 	}
 
+	// Some invariants for geometry calculations below
 	const int16_t dx = w - width_;
 	const int16_t dy = h - height_;
 	const int16_t xoff = split.x - w;
 	const int16_t yoff = split.y - h;
 
-	// returns the old coords for the given new coords
-	std::function<Coords(int, int)> lambda_co;
-	// transform the given player starting pos or port space to new coordinate space
-	std::function<Coords(Coords)> lambda_cn;
+	constexpr int kInvalidCoords = -1;
+	using ConversionFn = std::function<int(int)>;
+	// Returns the old x coordinate for the given new x coordinate in the range [0, width_-1],
+	// or kInvalidCoords if the column needs to be newly created.
+	ConversionFn lambda_co_x;
+	// Returns the old y coordinate for the given new y coordinate in the range [0, height_-1],
+	// or kInvalidCoords if the row needs to be newly created.
+	ConversionFn lambda_co_y;
+	// Returns the new x coordinate for the given old x coordinate in the range [0, w-1],
+	// or kInvalidCoords if the column will be deleted.
+	ConversionFn lambda_cn_x;
+	// Returns the new y coordinate for the given old y coordinate in the range [0, h-1],
+	// or kInvalidCoords if the row will be deleted.
+	ConversionFn lambda_cn_y;
 
-	// Nine different cases needed to handle geometry.
-	// This is the least code-duplication-heavy design I can think of.
-	if (dx < 0) {
-		if (dy < 0) {
-			if (split.x > w) {
-				if (split.y > h) {
-					// shrink both, one single block
-					lambda_co = [xoff, yoff](int x, int y) { return Coords(x + xoff, y + yoff); };
-					lambda_cn = [split, xoff, yoff](Coords c) {
-						if (c.x >= xoff && c.x < split.x && c.y >= yoff && c.y < split.y) {
-							return Coords(c.x - xoff, c.y - yoff);
-						}
-						return Coords::null();
-					};
-				} else {
-					// shrink both, single block horz and upper/lower strip
-					lambda_co = [split, dy, xoff](
-					   int x, int y) { return Coords(x + xoff, y < split.y ? y : y - dy); };
-					lambda_cn = [split, xoff, dy](Coords c) {
-						if (c.x >= xoff && c.x < split.x && (c.y < split.y || c.y >= split.y - dy)) {
-							return Coords(c.x - xoff, c.y < split.y ? c.y : c.y + dy);
-						}
-						return Coords::null();
-					};
-				}
-			} else {
-				if (split.y > h) {
-					// shrink both, single block vert and left/right strip
-					lambda_co = [split, yoff, dx](
-					   int x, int y) { return Coords(x < split.x ? x : x - dx, y + yoff); };
-					lambda_cn = [split, yoff, dx](Coords c) {
-						if (c.y >= yoff && c.y < split.y && (c.x < split.x || c.x >= split.x - dx)) {
-							return Coords(c.x < split.x ? c.x : c.x + dx, c.y - yoff);
-						}
-						return Coords::null();
-					};
-				} else {
-					// shrink both, upper/lower and left/right strips
-					lambda_co = [split, dx, dy](int x, int y) {
-						return Coords(x < split.x ? x : x - dx, y < split.y ? y : y - dy);
-					};
-					lambda_cn = [split, dx, dy](Coords c) {
-						if ((c.x < split.x || c.x >= split.x - dx) &&
-						    (c.y < split.y || c.y >= split.y - dy)) {
-							return Coords(c.x < split.x ? c.x : c.x + dx, c.y < split.y ? c.y : c.y + dy);
-						}
-						return Coords::null();
-					};
-				}
-			}
-		} else {
-			if (split.x > w) {
-				// shrink horz, increase vert; one single block to pick the new data from
-				lambda_co = [split, dy, xoff](int x, int y) {
-					if (y >= split.y && y < split.y + dy) {
-						return Coords::null();
-					}
-					return Coords(x + xoff, y < split.y ? y : y - dy);
-				};
-				lambda_cn = [split, dy, xoff](Coords c) {
-					if (c.x >= xoff && c.x < split.x) {
-						return Coords(c.x - xoff, c.y < split.y ? c.y : c.y + dy);
-					}
-					return Coords::null();
-				};
-			} else {
-				// shrink horz, increase vert; one left and one right strip
-				lambda_co = [split, dx, dy](int x, int y) {
-					if (y >= split.y && y < split.y + dy) {
-						return Coords::null();
-					}
-					return Coords(x < split.x ? x : x - dx, y < split.y ? y : y - dy);
-				};
-				lambda_cn = [split, dx, dy](Coords c) {
-					if (c.x < split.x || c.x >= split.x - dx) {
-						return Coords(c.x < split.x ? c.x : c.x + dx, c.y < split.y ? c.y : c.y + dy);
-					}
-					return Coords::null();
-				};
-			}
-		}
+	/* We have 3*3 different cases:
+	 * Increasing map size,
+	 * shrinking map in block (origin deleted), or
+	 * shrinking map in stripes (origin preserved).
+	 */
+	if (dx >= 0) {
+		// horz: increase
+		lambda_co_x = [split, dx](int x) { return x < split.x ? x : x >= split.x + dx ? x - dx : kInvalidCoords; };
+		lambda_cn_x = [split, dx](int x) { return x < split.x ? x : x + dx; };
+	} else if (split.x > w) {
+		// horz: shrink, single block
+		lambda_co_x = [xoff](int x) { return x + xoff; };
+		lambda_cn_x = [xoff, split](int x) { return x >= xoff && x < split.x ? x - xoff : kInvalidCoords; };
 	} else {
-		if (dy < 0) {
-			if (split.y > h) {
-				// shrink vert, increase horz; one single block to pick the new data from
-				lambda_co = [split, dx, yoff](int x, int y) {
-					if (x >= split.x && x < split.x + dx) {
-						return Coords::null();
-					}
-					return Coords(x < split.x ? x : x - dx, y + yoff);
-				};
-				lambda_cn = [split, yoff, dx](Coords c) {
-					if (c.y >= yoff && c.y < split.y) {
-						return Coords(c.x < split.x ? c.x : c.x + dx, c.y - yoff);
-					}
-					return Coords::null();
-				};
-			} else {
-				// shrink vert, increase horz; one lower and one upper strip
-				lambda_co = [split, dx, dy](int x, int y) {
-					if (x >= split.x && x < split.x + dx) {
-						return Coords::null();
-					}
-					return Coords(x < split.x ? x : x - dx, y < split.y ? y : y - dy);
-				};
-				lambda_cn = [split, dx, dy](Coords c) {
-					if (c.y < split.y || c.y >= split.y - dy) {
-						return Coords(c.x < split.x ? c.x : c.x + dx, c.y < split.y ? c.y : c.y + dy);
-					}
-					return Coords::null();
-				};
-			}
-		} else {
-			// increase both
-			lambda_co = [split, dx, dy](int x, int y) {
-				if (x < split.x && y < split.y) {
-					return Coords(x, y);
-				} else if (x >= split.x + dx && y < split.y) {
-					return Coords(x - dx, y);
-				} else if (y >= split.y + dy && x < split.x) {
-					return Coords(x, y - dy);
-				} else if (x >= split.x + dx && y >= split.y + dy) {
-					return Coords(x - dx, y - dy);
-				}
-				return Coords::null();
-			};
-			lambda_cn = [split, dx, dy](Coords c) {
-				return Coords(c.x < split.x ? c.x : c.x + dx, c.y < split.y ? c.y : c.y + dy);
-			};
-		}
+		// horz: shrink, left/right stripes
+		lambda_co_x = [split, dx](int x) { return x < split.x ? x : x - dx; };
+		lambda_cn_x = [dx, split](int x) { return x < split.x ? x : x >= split.x - dx ? x + dx : kInvalidCoords; };
 	}
+	if (dy >= 0) {
+		// vert: increase
+		lambda_co_y = [split, dy](int y) { return y < split.y ? y : y >= split.y + dy ? y - dy : kInvalidCoords; };
+		lambda_cn_y = [split, dy](int y) { return y < split.y ? y : y + dy; };
+	} else if (split.y > h) {
+		// vert: shrink, single block
+		lambda_co_y = [yoff](int y) { return y + yoff; };
+		lambda_cn_y = [yoff, split](int y) { return y >= yoff && y < split.y ? y - yoff : kInvalidCoords; };
+	} else {
+		// vert: shrink, upper/lower stripes
+		lambda_co_y = [split, dy](int y) { return y < split.y ? y : y - dy; };
+		lambda_cn_y = [dy, split](int y) { return y < split.y ? y : y >= split.y - dy ? y + dy : kInvalidCoords; };
+	}
+
+	// Generate the new fields. Does not modify the actual map yet.
 
 	std::unique_ptr<Field[]> new_fields(new Field[w * h]);
 	clear_array<>(&new_fields, w * h);
@@ -699,7 +612,12 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 	for (int16_t x = 0; x < w; ++x) {
 		for (int16_t y = 0; y < h; ++y) {
 			Coords cn(x, y);
-			if (Coords co = lambda_co(x, y)) {
+			const int16_t oldx = lambda_co_x(x);
+			const int16_t oldy = lambda_co_y(y);
+			assert((oldx >= 0 && oldx < width_) || oldx == kInvalidCoords);
+			assert((oldy >= 0 && oldy < height_) || oldy == kInvalidCoords);
+			if (oldx != kInvalidCoords && oldy != kInvalidCoords) {
+				Coords co(oldx, oldy);
 				new_fields[get_index(cn, w)] = operator[](co);
 				assert(!was_preserved[get_index(co)]);
 				was_preserved[get_index(co)] = true;
@@ -710,22 +628,34 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 			}
 		}
 	}
+
+	// Now modify our starting positions and port spaces
+
 	for (Coords& c : starting_pos_) {
 		if (c) {  // only if set (!= Coords::null())
-			c = lambda_cn(c);
+			const int16_t x = lambda_cn_x(c.x);
+			const int16_t y = lambda_cn_y(c.y);
+			assert((x >= 0 && x < w) || x == kInvalidCoords);
+			assert((y >= 0 && y < h) || y == kInvalidCoords);
+			c = x == kInvalidCoords || y == kInvalidCoords ? Coords::null() : Coords(x, y);
 		}
 	}
 
 	{
 		PortSpacesSet new_port_spaces;
 		for (const Coords& c : port_spaces_) {
-			if (Coords cn = lambda_cn(c)) {
-				new_port_spaces.insert(cn);
+			const int16_t x = lambda_cn_x(c.x);
+			const int16_t y = lambda_cn_y(c.y);
+			assert((x >= 0 && x < w) || x == kInvalidCoords);
+			assert((y >= 0 && y < h) || y == kInvalidCoords);
+			if (x != kInvalidCoords && y != kInvalidCoords) {
+				new_port_spaces.insert(Coords(x, y));
 			}
 		}
 		port_spaces_ = new_port_spaces;
 	}
 
+	// Delete map objects whose position will be deleted.
 	for (int16_t x = 0; x < width_; ++x) {
 		for (int16_t y = 0; y < height_; ++y) {
 			Coords c(x, y);
@@ -741,14 +671,20 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 		}
 	}
 
+	// Replace all existing fields with the new values.
+
 	width_ = w;
 	height_ = h;
 	fields_.reset(new_fields.release());
+
 	// Always call allocate_player_maps() while changing the map's size. Forgetting to do so will
 	// result in random crashes.
 	egbase.allocate_player_maps();
+	// Recalculate nodecaps etc
 	recalc_whole_map(egbase);
 
+	// MapObjects keep pointers to the Field they are located on. These pointers
+	// need updating because the memory addresses of all fields changed now.
 	for (int16_t x = 0; x < width_; ++x) {
 		for (int16_t y = 0; y < height_; ++y) {
 			Field& f = operator[](Coords(x, y));
@@ -783,6 +719,8 @@ ResizeHistory Map::dump_state(const EditorGameBase&) const {
 
 void Map::set_to(EditorGameBase& egbase, ResizeHistory rh) {
 	std::list<FieldData> backup = rh.fields;
+
+	// Delete all map objects
 	for (int16_t x = 0; x < width_; ++x) {
 		for (int16_t y = 0; y < height_; ++y) {
 			Field& f = operator[](Coords(x, y));
@@ -794,13 +732,18 @@ void Map::set_to(EditorGameBase& egbase, ResizeHistory rh) {
 			}
 		}
 	}
+
+	// Reset the fields to blank
 	width_ = rh.size.w;
 	height_ = rh.size.h;
 	fields_.reset(new Field[width_ * height_]);
 	egbase.allocate_player_maps();
+
+	// Overwrite starting locations and port spaces
 	port_spaces_ = rh.port_spaces;
 	starting_pos_ = rh.starting_positions;
-	// first pass
+
+	// First pass: Initialize all fields with the saved basic data
 	for (MapIndex i = max_index(); i; --i) {
 		const FieldData& fd = rh.fields.front();
 		Field& f = fields_[i - 1];
@@ -811,8 +754,10 @@ void Map::set_to(EditorGameBase& egbase, ResizeHistory rh) {
 		f.res_amount = fd.resource_amount;
 		rh.fields.pop_front();
 	}
+	// Calculate nodecaps and stuff
 	recalc_whole_map(egbase);
-	// second pass
+
+	// Second pass: Re-create desired map objects
 	for (MapIndex i = max_index(); i; --i) {
 		const FieldData& fd = backup.front();
 		FCoords fc = get_fcoords(operator[](i - 1));
