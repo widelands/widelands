@@ -289,6 +289,7 @@ private:
 	bool repeated_layoff_inc_;
 	bool latest_trainee_was_kickout_;  // If soldier was not dropped, requesting new soldier.
 	bool requesting_weak_trainees_;    // Value of the previous after incorporate.
+	bool recent_capacity_increase_;    // If used explicitly asks for more folks
 	const uint8_t kUpperBoundThreshold_ =
 	   3;  // Higher value makes it less likely to get weak soldiers in.
 	const uint32_t acceptance_threshold_timeout =

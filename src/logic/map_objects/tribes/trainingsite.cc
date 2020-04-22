@@ -223,6 +223,28 @@ void TrainingSite::SoldierControl::set_soldier_capacity(Quantity const capacity)
 	assert(min_soldier_capacity() <= capacity);
 	assert(capacity <= max_soldier_capacity());
 	assert(training_site_->capacity_ != capacity);
+	// Said in github issue #3869 discussion:
+	//
+	// > the problem will always be if the capacity of a training site will be
+	// > increased AND you don't see soldiers leaving the warehouse while you
+	// > know they are there you will be confused. So we should keep this very
+	// > short anything more then 5 sec will cause confusion I believe.
+	//
+	// This piece implements this demand. If we add more control buttons to the
+	// UI later, side-effects like this could go away.
+	if (capacity > training_site_->capacity_) {
+		// This is the capacity increased part from above.
+		// Splitting a bit futher.
+		if (0 == training_site_->capacity_) {
+			// If the site had a capacity of zero, then the player probably micromanages
+			// and wants a partially trained soldier, if available. Resetting the state.
+			training_site_->repeated_layoff_ctr_ = 0;
+			training_site_->latest_trainee_was_kickout_ = false;
+		} else {
+			// Now the player just wants soldier. Any soldiers.
+			 training_site_->recent_capacity_increase_ = true;
+		}
+	}
 	training_site_->capacity_ = capacity;
 	training_site_->update_soldier_request(false);
 }
@@ -492,6 +514,14 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 				requesting_weak_trainees_ = false;
 				latest_trainee_was_kickout_ = false;
 			}
+			if (0 < repeated_layoff_ctr_ && 0 == soldiers_.size()) {
+				// Repeated layoff ctr breaks the cycle when same few soldiers pendle back and forth.
+				// If no soldiers are arriving and none are present, this cannot be the case.
+				// Trainingsites without soldiers for long confuse players, thus retracting.
+				repeated_layoff_ctr_ = 0;
+				requesting_weak_trainees_ = false;
+				latest_trainee_was_kickout_ = false;
+			}
 		}
 	}
 
@@ -507,6 +537,14 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 		}
 
 		assert(need_more_soldiers);
+		if (recent_capacity_increase_) {
+			// See comments in TrainingSite::SoldierControl::set_soldier_capacity() for details
+			// In short: If user interacts, I accept anybody regardless of state.
+			requesting_weak_trainees_ = false;
+			limit_upper_bound = false;
+			trainee_general_lower_bound_ = 0;
+			recent_capacity_increase_ = false;
+		}
 
 		soldier_request_ = new Request(
 		   *this, owner().tribe().soldier(), TrainingSite::request_soldier_callback, wwWORKER);
