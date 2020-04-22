@@ -228,14 +228,13 @@ void Window::layout() {
 		center_panel_->set_size(get_inner_w(), get_inner_h());
 	}
 	button_close_->set_pos(Vector2i(
-	   get_w() + kWindowTitlebarButtonsYPos - TP_B_PIXMAP_THICKNESS * (docked_right_ ? 2 : 1),
+	   get_w() + kWindowTitlebarButtonsYPos - TP_B_PIXMAP_THICKNESS,
 	   kWindowTitlebarButtonsYPos));
 	button_pin_->set_pos(
-	   Vector2i(kWindowTitlebarButtonsYPos + TP_B_PIXMAP_THICKNESS * (docked_left_ ? 1 : 0),
+	   Vector2i(kWindowTitlebarButtonsYPos,
 	            kWindowTitlebarButtonsYPos));
 	button_minimize_->set_pos(Vector2i(kWindowTitlebarButtonsYPos + kWindowTitlebarButtonsSize +
-	                                      kWindowTitlebarButtonsSpacing +
-	                                      TP_B_PIXMAP_THICKNESS * (docked_left_ ? 1 : 0),
+	                                      kWindowTitlebarButtonsSpacing,
 	                                   kWindowTitlebarButtonsYPos));
 }
 
@@ -284,19 +283,16 @@ void Window::move_inside_parent() {
 			py = 0;
 		}
 
-		bool side_docking_changed = false;
 		if (parent->get_inner_w() >= get_w()) {
 			if (px < 0) {
 				px = 0;
 				if (parent->get_dock_windows_to_edges() && !docked_left_) {
 					docked_left_ = true;
-					side_docking_changed = true;
 				}
 			} else if (px + get_w() >= parent->get_inner_w()) {
 				px = parent->get_inner_w() - get_w();
 				if (parent->get_dock_windows_to_edges() && !docked_right_) {
 					docked_right_ = true;
-					side_docking_changed = true;
 				}
 			}
 			if (docked_left_) {
@@ -319,9 +315,6 @@ void Window::move_inside_parent() {
 			}
 		}
 		set_pos(Vector2i(px, py));
-		if (side_docking_changed) {
-			layout();
-		}
 	}
 }
 
@@ -604,7 +597,6 @@ bool Window::handle_mousemove(const uint8_t, int32_t mx, int32_t my, int32_t, in
 		int32_t top = drag_start_win_y_ + mouse_y - drag_start_mouse_y_;
 		int32_t new_left = left, new_top = top;
 
-		bool side_docking_changed = false;
 		if (const Panel* const parent = get_parent()) {
 			const int32_t w = get_w();
 			const int32_t h = get_h();
@@ -718,18 +710,14 @@ bool Window::handle_mousemove(const uint8_t, int32_t mx, int32_t my, int32_t, in
 			if (parent->get_dock_windows_to_edges()) {
 				if (new_left <= 0 && new_left >= -VT_B_PIXMAP_THICKNESS) {
 					new_left = -VT_B_PIXMAP_THICKNESS;
-					side_docking_changed |= !docked_left_;
 					docked_left_ = true;
 				} else if (docked_left_) {
-					side_docking_changed = true;
 					docked_left_ = false;
 				}
 				if (new_left >= (max_x - w) && new_left <= (max_x - w) + VT_B_PIXMAP_THICKNESS) {
 					new_left = (max_x - w) + VT_B_PIXMAP_THICKNESS;
-					side_docking_changed |= !docked_right_;
 					docked_right_ = true;
 				} else if (docked_right_) {
-					side_docking_changed = true;
 					docked_right_ = false;
 				}
 				if (!is_minimal_) {  //  minimal windows can not be bottom-docked
@@ -743,9 +731,6 @@ bool Window::handle_mousemove(const uint8_t, int32_t mx, int32_t my, int32_t, in
 			}
 		}
 		set_pos(Vector2i(new_left, new_top));
-		if (side_docking_changed) {
-			layout();
-		}
 	}
 	return true;
 }
