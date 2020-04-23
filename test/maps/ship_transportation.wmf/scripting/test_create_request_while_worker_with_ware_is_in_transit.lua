@@ -25,13 +25,12 @@ run(function()
    np:set_warehouse_policies({"log", "barbarians_lumberjack"}, "remove")
 
    -- aaand action!
-
    -- sleep until the tree has been felled
    while (map:get_field(23,3).immovable.descr:has_attribute("tree")) do
       sleep(100)
    end
    -- some more sleep since "removal of tree" and "worker has log" are not at the same time
-   sleep(1000)
+   sleep(3000)
    -- now the worker should have the tree
 
 

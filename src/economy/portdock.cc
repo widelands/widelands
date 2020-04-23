@@ -385,16 +385,19 @@ uint32_t PortDock::calc_max_priority(const EditorGameBase& egbase, const PortDoc
 			WareInstance* ware = nullptr;
 			Worker* worker = nullptr;
 			si.get(egbase, &ware, &worker);
+			++p;
 			if (ware) {
 				assert(!worker);
-				assert(ware->get_transfer());
-				assert(ware->get_transfer()->get_request());
-				p += ware->get_transfer()->get_request()->get_transfer_priority();
+				if (ware->get_transfer() && ware->get_transfer()->get_request()) {
+					// I don't know when this shouldn't be true,
+					// but the regression tests assure me that it's possible…
+					p += ware->get_transfer()->get_request()->get_transfer_priority();
+				}
 			} else {
 				assert(worker);
-				assert(worker->get_transfer());
-				assert(worker->get_transfer()->get_request());
-				p += worker->get_transfer()->get_request()->get_transfer_priority();
+				if (worker->get_transfer() && worker->get_transfer()->get_request()) {
+					p += worker->get_transfer()->get_request()->get_transfer_priority();
+				}
 			}
 		}
 	}
