@@ -19,7 +19,7 @@
 
 #include "network/network.h"
 
-#include <SDL.h>
+#include <SDL_timer.h>
 
 #include "base/log.h"
 
