@@ -514,7 +514,7 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 				requesting_weak_trainees_ = false;
 				latest_trainee_was_kickout_ = false;
 			}
-			if (0 < repeated_layoff_ctr_ && 0 == soldiers_.size()) {
+			if (kUpperBoundThreshold_ <= repeated_layoff_ctr_ && 0 == soldiers_.size()) {
 				// Repeated layoff ctr breaks the cycle when same few soldiers pendle back and forth.
 				// If no soldiers are arriving and none are present, this cannot be the case.
 				// Trainingsites without soldiers for long confuse players, thus retracting.
