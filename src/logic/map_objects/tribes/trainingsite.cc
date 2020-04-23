@@ -235,7 +235,7 @@ void TrainingSite::SoldierControl::set_soldier_capacity(Quantity const capacity)
 	if (capacity > training_site_->capacity_) {
 		// This is the capacity increased part from above.
 		// Splitting a bit futher.
-		if (0 == training_site_->capacity_) {
+		if (0 == training_site_->capacity_ && 1 == capacity) {
 			// If the site had a capacity of zero, then the player probably micromanages
 			// and wants a partially trained soldier, if available. Resetting the state.
 			training_site_->repeated_layoff_ctr_ = 0;
@@ -455,7 +455,8 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 	}
 	// This boolean ensures that kicking out many soldiers in a row does not count as
 	// soldiers entering and leaving without training. We need to repeatedly incorporate
-	// and release for the last resort to kick in
+	// and release for the last resort to kick in. I need this boolean, to detect that
+	// a soldier was incorporated between soldiers leaving.
 	if (did_incorporate) {
 		repeated_layoff_inc_ = true;
 	}
