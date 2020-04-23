@@ -959,7 +959,6 @@ Duration ShippingSchedule::update(Game& game) {
 		game.map().calc_cost(path, &threshold, nullptr);
 		assert(threshold > 0);
 		while (ppp.open_count > 0 && !ppp.ships.empty()) {
-			log("NOCOM SCORE %u (direct dist %d)\n", ppp.ships.front().score, threshold);
 			if (ppp.ships.front().score < static_cast<unsigned>(threshold)) {
 				break;
 			}
@@ -1092,6 +1091,7 @@ Duration ShippingSchedule::update(Game& game) {
 						} else {
 							// goes there, but goes straight away again
 							dock1 = end;
+							break;
 						}
 					}
 				}
