@@ -301,7 +301,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				uint16_t own_power_growth = 10;
 				if (player_statistics.get_old60_player_land(pn)) {
 					own_power_growth = player_statistics.get_player_power(pn) * 100 /
-					                      player_statistics.get_old60_player_land(pn);
+					                   player_statistics.get_old60_player_land(pn);
 				}
 
 				static int16_t inputs[4 * kFNeuronBitSize] = {0};
@@ -462,8 +462,14 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				inputs[103] = (site->second.enemy_military_presence_in_region > 5) ? 2 : 6;
 				inputs[104] = (site->second.enemy_military_presence_in_region > 10) ? -1 : 1;
 				inputs[105] = (site->second.enemy_military_presence_in_region > 15) ? -6 : -2;
-				inputs[106] = (site->second.attack_soldiers_strength > 3 * site->second.enemy_military_presence_in_region) ? 3 : -1;
-				inputs[107] = (site->second.attack_soldiers_strength > 4 * site->second.enemy_military_presence_in_region) ? 6 : 0;
+				inputs[106] = (site->second.attack_soldiers_strength >
+				               3 * site->second.enemy_military_presence_in_region) ?
+				                 3 :
+				                 -1;
+				inputs[107] = (site->second.attack_soldiers_strength >
+				               4 * site->second.enemy_military_presence_in_region) ?
+				                 6 :
+				                 0;
 
 				site->second.score = 0;
 				for (uint8_t j = 0; j < kFNeuronBitSize; ++j) {
