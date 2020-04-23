@@ -452,6 +452,9 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 			   kUpperBoundThreshold_ + highest_trainee_level_seen_ - repeated_layoff_ctr_;
 			limit_upper_bound = true;
 		}
+		if (did_incorporate) {
+			rebuild_request = true;
+		 }
 	}
 	// This boolean ensures that kicking out many soldiers in a row does not count as
 	// soldiers entering and leaving without training. We need to repeatedly incorporate
