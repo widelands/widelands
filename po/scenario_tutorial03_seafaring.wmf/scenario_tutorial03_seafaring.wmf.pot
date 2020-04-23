@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-22 20:01+0000\n"
+"POT-Creation-Date: 2020-04-23 19:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -151,8 +151,8 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:76
 msgid ""
-"Ships are constructed in a shipyard by a shipwright. We have to build one "
-"somewhere close to the shore."
+"Ships are constructed at the coastline near a shipyard by a shipwright. We "
+"have to build one somewhere close to the shore."
 msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:82
@@ -160,7 +160,7 @@ msgid "Build a shipyard"
 msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:85
-msgid "Ships are produced in a shipyard. It is a medium building."
+msgid "Ships are produced by a shipyard. It is a medium building."
 msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:86
