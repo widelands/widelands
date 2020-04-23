@@ -171,36 +171,34 @@ void ShippingSchedule::port_removed(Game& game, PortDock* dock) {
 				// reroute to next dock
 				pair.second.pop_front();
 				if (pair.second.empty()) {
-					if (pair.first->get_nritems()) {
-						// no other docks to visit, but wares left, reroute to the closest one
-						if (fleet_.get_ports().empty()) {
-							// PANIC! There are no ports at all left!!
-							// But we still have cargo!!! What should we do????
-							// Stay calm. Just do nothing. Nothing at all.
-							log("Ship %s is carrying %u items and there are no ports left\n",
-							    pair.first->get_shipname().c_str(), pair.first->get_nritems());
-							pair.first->set_destination(game, nullptr);
-						} else {
-							PortDock* closest = nullptr;
-							int32_t dist = 0;
-							for (PortDock* pd : fleet_.get_ports()) {
-								Path path;
-								int32_t d = -1;
-								pair.first->calculate_sea_route(game, *pd, &path);
-								game.map().calc_cost(path, &d, nullptr);
-								assert(d >= 0);
-								if (!closest || d < dist) {
-									dist = d;
-									closest = pd;
-								}
+					// no other docks to visit, but wares left, reroute to the closest one
+					if (fleet_.get_ports().empty() || pair.first->get_nritems() == 0) {
+						// PANIC! There are no ports at all left!!
+						// But we still have cargo!!! What should we do????
+						// Stay calm. Just do nothing. Nothing at all.
+						log("Ship %s is carrying %u items OR there are no ports left, setting NO destination\n",
+						    pair.first->get_shipname().c_str(), pair.first->get_nritems());
+						pair.first->set_destination(game, nullptr);
+					} else {
+						PortDock* closest = nullptr;
+						int32_t dist = 0;
+						for (PortDock* pd : fleet_.get_ports()) {
+							Path path;
+							int32_t d = -1;
+							pair.first->calculate_sea_route(game, *pd, &path);
+							game.map().calc_cost(path, &d, nullptr);
+							assert(d >= 0);
+							if (!closest || d < dist) {
+								dist = d;
+								closest = pd;
 							}
-							assert(closest);
-							log("Ship %s is carrying %u items, rerouting to NEW destination %u\n",
-							    pair.first->get_shipname().c_str(), pair.first->get_nritems(),
-							    closest->serial());
-							pair.second.push_back(SchedulingState(closest, false, dist));
-							pair.first->set_destination(game, closest);
 						}
+						assert(closest);
+						log("Ship %s is carrying %u items, rerouting to NEW destination %u\n",
+						    pair.first->get_shipname().c_str(), pair.first->get_nritems(),
+						    closest->serial());
+						pair.second.push_back(SchedulingState(closest, false, dist));
+						pair.first->set_destination(game, closest);
 					}
 				} else {
 					pair.first->set_destination(game, pair.second.front().dock);
