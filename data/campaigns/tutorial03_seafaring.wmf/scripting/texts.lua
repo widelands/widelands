@@ -73,7 +73,7 @@ tell_about_shipyard = {
    body = (
       h1(_"Let’s build ships") ..
       p(_[[Great. While your port is being constructed, let’s build some ships.]]) ..
-      p(_[[Ships are constructed in a shipyard by a shipwright. We have to build one somewhere close to the shore.]])
+      p(_[[Ships are constructed at the coastline near a shipyard by a shipwright. We have to build one somewhere close to the shore.]])
    )
 }
 
@@ -82,7 +82,7 @@ obj_build_shipyard = {
    title = _"Build a shipyard",
    number = 1,
    body = objective_text("Build a shipyard close to the coast",
-      p(_[[Ships are produced in a shipyard. It is a medium building.]]) ..
+      p(_[[Ships are produced by a shipyard. It is a medium building.]]) ..
       li(_[[Build a shipyard close to the shore of the southern part of your territory.]]) ..
       li_arrow(_[[The shipyard is a medium building. Although it can be built everywhere on the map, the shipwright only works when he is close to the water and there are no trees or roads at the shoreline.]])
    )
