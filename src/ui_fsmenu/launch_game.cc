@@ -287,9 +287,9 @@ void FullscreenMenuLaunchGame::add_all_widgets() {
 	main_box_.add(&title_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	main_box_.add(&content_box_, UI::Box::Resizing::kExpandBoth);
-	content_box_.add(&individual_content_box, UI::Box::Resizing::kExpandBoth);
+	content_box_.add(&individual_content_box, UI::Box::Resizing::kFullSize);
 
-	content_box_.add(&map_box_, UI::Box::Resizing::kExpandBoth);
+	content_box_.add(&map_box_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	map_box_.add(&map_box_title, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	map_box_.add(&map_details, UI::Box::Resizing::kFullSize);
 	map_box_.add(&peaceful_, UI::Box::Resizing::kFillSpace);
