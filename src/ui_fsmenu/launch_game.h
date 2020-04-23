@@ -85,7 +85,7 @@ protected:
 	UI::Box individual_content_box;
 	UI::Box map_box_;
 
-	//	MapDetailsBox map_details;
+	MapDetailsBox map_details;
 	UI::Textarea map_box_title;
 	UI::Textarea win_condition_type;
 	UI::Dropdown<std::string> win_condition_dropdown_;

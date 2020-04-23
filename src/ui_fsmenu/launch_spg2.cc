@@ -42,9 +42,7 @@ FullscreenMenuLaunchSPG2::FullscreenMenuLaunchSPG2(GameSettingsProvider* const s
                   g_gr->styles().font_style(UI::FontStyle::kLabel)) {
 
 	//	add_all_widgets();
-	title_.set_text("my Launch game");
-
-	//	disable_parent_widgets();
+	title_.set_text("Launch game");
 
 	Notifications::subscribe<NoteGameSettings>(
 	   [this](const NoteGameSettings& note) { update(false); });
@@ -178,7 +176,7 @@ bool FullscreenMenuLaunchSPG2::clicked_select_map() {
 void FullscreenMenuLaunchSPG2::update(bool) {
 	const GameSettings& settings = settings_->settings();
 
-	//	map_details.update(settings_);
+	map_details.update(settings_);
 	//			filename_ = settings.mapfilename;
 	nr_players_ = settings.players.size();
 

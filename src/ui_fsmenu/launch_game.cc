@@ -47,6 +47,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
      content_box_(&main_box_, 0, 0, UI::Box::Horizontal),
      individual_content_box(&content_box_, 0, 0, UI::Box::Vertical),
      map_box_(&content_box_, 0, 0, UI::Box::Vertical),
+     map_details(&map_box_, 0, 0, 0, 0),
      map_box_title(&map_box_,
                    0,
                    0,
@@ -290,7 +291,7 @@ void FullscreenMenuLaunchGame::add_all_widgets() {
 
 	content_box_.add(&map_box_, UI::Box::Resizing::kExpandBoth);
 	map_box_.add(&map_box_title, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	// map_box_.add(&map_details, UI::Box::Resizing::kFullSize);
+	map_box_.add(&map_details, UI::Box::Resizing::kFullSize);
 	map_box_.add(&peaceful_, UI::Box::Resizing::kFillSpace);
 	map_box_.add(&win_condition_type, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	map_box_.add(&win_condition_dropdown_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
@@ -306,4 +307,5 @@ void FullscreenMenuLaunchGame::add_behaviour_to_widgets() {
 
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
 	back_.sigclicked.connect([this]() { clicked_back(); });
+	map_details.set_select_map_action([this]() { clicked_select_map(); });
 }
