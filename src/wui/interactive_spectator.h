@@ -20,8 +20,6 @@
 #ifndef WL_WUI_INTERACTIVE_SPECTATOR_H
 #define WL_WUI_INTERACTIVE_SPECTATOR_H
 
-#include <SDL_keyboard.h>
-
 #include "io/profile.h"
 #include "wui/interactive_gamebase.h"
 

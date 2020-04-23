@@ -25,7 +25,7 @@
 #include <map>
 #include <memory>
 
-#include <SDL.h>
+#include <SDL_timer.h>
 
 #include "base/macros.h"
 
