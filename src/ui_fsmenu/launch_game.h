@@ -28,6 +28,7 @@
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/base.h"
+#include "ui_fsmenu/mapdetailsbox.h"
 
 class GameController;
 struct GameSettingsProvider;
@@ -46,6 +47,7 @@ public:
 protected:
 	void clicked_ok() override;
 	void clicked_back() override;
+	virtual bool clicked_select_map();
 
 	LuaInterface* lua_;
 
@@ -78,6 +80,14 @@ protected:
 	uint32_t buth_;
 	uint32_t padding_;
 
+	UI::Box main_box_;
+	UI::Box content_box_;
+	UI::Box individual_content_box;
+	UI::Box map_box_;
+
+	//	MapDetailsBox map_details;
+	UI::Textarea map_box_title;
+	UI::Textarea win_condition_type;
 	UI::Dropdown<std::string> win_condition_dropdown_;
 	UI::Checkbox peaceful_;
 	std::string last_win_condition_;
@@ -89,6 +99,11 @@ protected:
 	bool peaceful_mode_forbidden_;
 
 	Widelands::PlayerNumber nr_players_;
+
+private:
+	void layout() override;
+	void add_all_widgets();
+	void add_behaviour_to_widgets();
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_GAME_H

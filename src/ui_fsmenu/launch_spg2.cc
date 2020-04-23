@@ -22,13 +22,8 @@
 FullscreenMenuLaunchSPG2::FullscreenMenuLaunchSPG2(GameSettingsProvider* const settings,
                                                    GameController* const ctrl)
    : FullscreenMenuLaunchGame(settings, ctrl),
-     main_box_(this, 0, 0, UI::Box::Vertical, get_w(), get_h()),
-     content_box_(&main_box_, 0, 0, UI::Box::Horizontal),
-     button_box_(&main_box_, 0, 0, UI::Box::Horizontal),
-     player_box_(&content_box_, 0, 0, UI::Box::Vertical),
-     map_box_(&content_box_, 0, 0, UI::Box::Vertical),
-     map_details(&map_box_, 0, 0, 0, 0),
-     players_(&player_box_,
+
+     players_(&individual_content_box,
               0,
               0,
               0,
@@ -36,53 +31,8 @@ FullscreenMenuLaunchSPG2::FullscreenMenuLaunchSPG2(GameSettingsProvider* const s
               "Players",
               UI::Align::kRight,
               g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
-     map_(&map_box_,
-          0,
-          0,
-          0,
-          0,
-          "Map",
-          UI::Align::kLeft,
-          g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
-     peaceful_own_(&map_box_, Vector2i::zero(), _("my Peaceful mode")),
-     win_condition_dropdown_own_(&map_box_,
-                                 "dropdown_wincondition2",
-                                 0,
-                                 0,
-                                 butw_,
-                                 10,  // max number of items
-                                 buth_,
-                                 "",
-                                 UI::DropdownType::kTextual,
-                                 UI::PanelStyle::kFsMenu,
-                                 UI::ButtonStyle::kFsMenuMenu),
-     win_condition_type(&map_box_,
-                        0,
-                        0,
-                        0,
-                        0,
-                        _("Type of game"),
-                        UI::Align::kCenter,
-                        g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
-     ok_own_(&button_box_,
-             "ok",
-             0,
-             0,
-             butw_,
-             buth_,
-             UI::ButtonStyle::kFsMenuPrimary,
-             _("my Start game")),
-     back_own_(
-        &button_box_, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuSecondary, _("my Back")),
-     title_own_(&main_box_,
-                0,
-                0,
-                0,
-                0,
-                _("Launch Game"),
-                UI::Align::kCenter,
-                g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
-     player_name_(&player_box_,
+
+     player_name_(&individual_content_box,
                   0,
                   0,
                   0,
@@ -91,94 +41,93 @@ FullscreenMenuLaunchSPG2::FullscreenMenuLaunchSPG2(GameSettingsProvider* const s
                   UI::Align::kLeft,
                   g_gr->styles().font_style(UI::FontStyle::kLabel)) {
 
-	add_all_widgets();
-	disable_parent_widgets();
+	//	add_all_widgets();
+	title_.set_text("my Launch game");
 
-	layout();
+	//	disable_parent_widgets();
 
-	add_behaviour_to_widgets();
-}
-
-void FullscreenMenuLaunchSPG2::add_all_widgets() {
-	main_box_.add_space(2 * padding_);
-	main_box_.add(&title_own_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-
-	main_box_.add(&content_box_, UI::Box::Resizing::kExpandBoth);
-
-	main_box_.add_space(get_w() / 3);
-	content_box_.add(&player_box_, UI::Box::Resizing::kExpandBoth);
-	player_box_.add(&players_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	player_box_.add(&player_name_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
-	content_box_.add_inf_space();
-
-	content_box_.add(&map_box_, UI::Box::Resizing::kExpandBoth);
-	map_box_.add(&map_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	map_box_.add(&map_details, UI::Box::Resizing::kFullSize);
-	map_box_.add(&peaceful_own_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
-	map_box_.add(&win_condition_type, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	map_box_.add(&win_condition_dropdown_own_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
-
-	//	main_box_.add_inf_space();
-
-	main_box_.add(&button_box_, UI::Box::Resizing::kFullSize);
-	button_box_.add_inf_space();
-	button_box_.add(
-	   UI::g_fh->fontset()->is_rtl() ? &ok_own_ : &back_own_, UI::Box::Resizing::kExpandBoth);
-	button_box_.add_space(10);
-	button_box_.add(
-	   UI::g_fh->fontset()->is_rtl() ? &back_own_ : &ok_own_, UI::Box::Resizing::kExpandBoth);
-
-	players_.set_font_scale(scale_factor());
-	map_.set_font_scale(scale_factor());
-	//	map_name_.set_font_scale(scale_factor());
-}
-
-void FullscreenMenuLaunchSPG2::disable_parent_widgets() {
-	// temporary...
-	title_.set_visible(false);
-	ok_.set_visible(false);
-	back_.set_visible(false);
-	peaceful_.set_visible(false);
-	win_condition_dropdown_.set_visible(false);
-}
-
-void FullscreenMenuLaunchSPG2::add_behaviour_to_widgets() {
-	map_details.set_select_map_action([this]() { select_map(); });
-	win_condition_dropdown_own_.selected.connect([this]() { win_condition_selected(); });
-	ok_own_.sigclicked.connect([this]() { clicked_ok(); });
-	back_own_.sigclicked.connect([this]() { clicked_back(); });
-
-	// subscriber_ =
 	Notifications::subscribe<NoteGameSettings>(
 	   [this](const NoteGameSettings& note) { update(false); });
 }
-void FullscreenMenuLaunchSPG2::layout() {
-	log("w=%d, h=%d\n", get_w(), get_h());
-	//	main_box_.set_desired_size(get_w(), get_h());
-	main_box_.set_size(get_w(), get_h());
-	log("main box: w=%d, h=%d, x=%d\n", main_box_.get_w(), main_box_.get_h(), main_box_.get_x());
-	//	title_own_.set_text(_("my Start game blabla"));
-	log("title: w=%d, h=%d, x=%d\n", title_own_.get_w(), title_own_.get_h(), title_own_.get_x());
-	//	content_box_.set_desired_size(
-	//	   main_box_.get_w(), main_box_.get_h() - title_own_.get_h() - 2 * ok_own_.get_h());
-	log("content box: w=%d, h=%d, x=%d\n", content_box_.get_w(), content_box_.get_h(),
-	    content_box_.get_x());
-	//	player_box_.set_desired_size(content_box_.get_w() / 2, content_box_.get_h());
-	log("player box: w=%d, h=%d, x=%d\n", player_box_.get_w(), player_box_.get_h(),
-	    player_box_.get_x());
-	//	map_box_.set_desired_size(content_box_.get_w() / 2, content_box_.get_h());
-	log("map box: w=%d, h=%d, x=%d\n", map_box_.get_w(), map_box_.get_h(), map_box_.get_x());
-	// map_.set_desired_size(map_box_.get_w(), 0);
 
-	//	button_box_.set_desired_size(
-	//	   main_box_.get_w(), main_box_.get_h() - title_own_.get_h() - content_box_.get_h());
-	log("button box: w=%d, h=%d\n", button_box_.get_w(), button_box_.get_h());
-	log("peaceful w=%d, h=%d, x=%d\n", peaceful_own_.get_w(), peaceful_own_.get_h(),
-	    peaceful_own_.get_x());
-	log("map w=%d, h=%d, x=%d\n", map_.get_w(), map_.get_h(), map_.get_x());
-	log("sehe ich nicht oder \n\n");
-	//	select_map_.set_desired_size(map_name_.get_h(), map_name_.get_h());
+// void FullscreenMenuLaunchSPG2::add_all_widgets() {
+//	main_box_.add_space(2 * padding_);
+//	main_box_.add(&title_own_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+
+//	main_box_.add(&content_box_, UI::Box::Resizing::kExpandBoth);
+
+//	main_box_.add_space(get_w() / 3);
+//	content_box_.add(&player_box_, UI::Box::Resizing::kExpandBoth);
+//	player_box_.add(&players_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+//	player_box_.add(&player_name_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
+//	content_box_.add_inf_space();
+
+//	content_box_.add(&map_box_, UI::Box::Resizing::kExpandBoth);
+//	map_box_.add(&map_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+//	map_box_.add(&map_details, UI::Box::Resizing::kFullSize);
+//	map_box_.add(&peaceful_own_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
+//	map_box_.add(&win_condition_type, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+//	map_box_.add(&win_condition_dropdown_own_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
+
+//	//	main_box_.add_inf_space();
+
+//	main_box_.add(&button_box_, UI::Box::Resizing::kFullSize);
+//	button_box_.add_inf_space();
+//	button_box_.add(
+//	   UI::g_fh->fontset()->is_rtl() ? &ok_own_ : &back_own_, UI::Box::Resizing::kExpandBoth);
+//	button_box_.add_space(10);
+//	button_box_.add(
+//	   UI::g_fh->fontset()->is_rtl() ? &back_own_ : &ok_own_, UI::Box::Resizing::kExpandBoth);
+
+//	players_.set_font_scale(scale_factor());
+//	map_.set_font_scale(scale_factor());
+//	map_name_.set_font_scale(scale_factor());
+//}
+
+// void FullscreenMenuLaunchSPG2::disable_parent_widgets() {
+//	// temporary...
+//	title_.set_visible(false);
+//	ok_.set_visible(false);
+//	back_.set_visible(false);
+//	peaceful_.set_visible(false);
+//	win_condition_dropdown_.set_visible(false);
+//}
+
+void FullscreenMenuLaunchSPG2::add_behaviour_to_widgets() {
+	//	map_details.set_select_map_action([this]() { select_map(); });
+	//	win_condition_dropdown_own_.selected.connect([this]() { win_condition_selected(); });
+	//	ok_.sigclicked.connect([this]() { clicked_ok(); });
+	//	back_.sigclicked.connect([this]() { clicked_back(); });
+
+	// subscriber_ =
 }
+// void FullscreenMenuLaunchSPG2::layout() {
+//	log("w=%d, h=%d\n", get_w(), get_h());
+//	//	main_box_.set_desired_size(get_w(), get_h());
+//	main_box_.set_size(get_w(), get_h());
+//	log("main box: w=%d, h=%d, x=%d\n", main_box_.get_w(), main_box_.get_h(), main_box_.get_x());
+//	//	title_own_.set_text(_("my Start game blabla"));
+//	log("title: w=%d, h=%d, x=%d\n", title_own_.get_w(), title_own_.get_h(), title_own_.get_x());
+//	//	content_box_.set_desired_size(
+//	//	   main_box_.get_w(), main_box_.get_h() - title_own_.get_h() - 2 * ok_own_.get_h());
+//	log("content box: w=%d, h=%d, x=%d\n", content_box_.get_w(), content_box_.get_h(),
+//	    content_box_.get_x());
+//	//	player_box_.set_desired_size(content_box_.get_w() / 2, content_box_.get_h());
+//	log("player box: w=%d, h=%d, x=%d\n", player_box_.get_w(), player_box_.get_h(),
+//	    player_box_.get_x());
+//	//	map_box_.set_desired_size(content_box_.get_w() / 2, content_box_.get_h());
+//	log("map box: w=%d, h=%d, x=%d\n", map_box_.get_w(), map_box_.get_h(), map_box_.get_x());
+//	// map_.set_desired_size(map_box_.get_w(), 0);
+
+//	//	button_box_.set_desired_size(
+//	//	   main_box_.get_w(), main_box_.get_h() - title_own_.get_h() - content_box_.get_h());
+//	log("button box: w=%d, h=%d\n", button_box_.get_w(), button_box_.get_h());
+//	log("peaceful w=%d, h=%d, x=%d\n", peaceful_own_.get_w(), peaceful_own_.get_h(),
+//	    peaceful_own_.get_x());
+//	log("map w=%d, h=%d, x=%d\n", map_.get_w(), map_.get_h(), map_.get_x());
+//	log("sehe ich nicht oder \n\n");
+//	//	select_map_.set_desired_size(map_name_.get_h(), map_name_.get_h());
+//}
 
 /**
  * Select a map as a first step in launching a game, before
@@ -194,7 +143,7 @@ void FullscreenMenuLaunchSPG2::start() {
  * Select a map and send all information to the user interface.
  * Returns whether a map has been selected.
  */
-bool FullscreenMenuLaunchSPG2::select_map() {
+bool FullscreenMenuLaunchSPG2::clicked_select_map() {
 	log("clicked the map button\n");
 	if (!settings_->can_change_map())
 		return false;
@@ -229,13 +178,13 @@ bool FullscreenMenuLaunchSPG2::select_map() {
 void FullscreenMenuLaunchSPG2::update(bool) {
 	const GameSettings& settings = settings_->settings();
 
-	map_details.update(settings_);
+	//	map_details.update(settings_);
 	//			filename_ = settings.mapfilename;
 	nr_players_ = settings.players.size();
 
-	ok_own_.set_enabled(settings_->can_launch());
+	ok_.set_enabled(settings_->can_launch());
 
-	peaceful_own_.set_state(settings_->is_peaceful_mode());
+	peaceful_.set_state(settings_->is_peaceful_mode());
 
 	//		set_player_names_and_tribes();
 	//}

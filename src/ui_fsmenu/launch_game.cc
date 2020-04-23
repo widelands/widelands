@@ -43,10 +43,30 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
      buth_(get_h() * 9 / 200),
      padding_(4),
 
-     win_condition_dropdown_(this,
+     main_box_(this, 0, 0, UI::Box::Vertical, get_w(), get_h()),
+     content_box_(&main_box_, 0, 0, UI::Box::Horizontal),
+     individual_content_box(&content_box_, 0, 0, UI::Box::Vertical),
+     map_box_(&content_box_, 0, 0, UI::Box::Vertical),
+     map_box_title(&map_box_,
+                   0,
+                   0,
+                   0,
+                   0,
+                   _("Map"),
+                   UI::Align::kCenter,
+                   g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
+     win_condition_type(&map_box_,
+                        0,
+                        0,
+                        0,
+                        0,
+                        _("Type of game"),
+                        UI::Align::kCenter,
+                        g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
+     win_condition_dropdown_(&map_box_,
                              "dropdown_wincondition",
-                             get_w() * 7 / 10,
-                             get_h() * 4 / 10 + buth_,
+                             0,
+                             0,
                              butw_,
                              10,  // max number of items
                              buth_,
@@ -56,13 +76,13 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
                              UI::ButtonStyle::kFsMenuMenu),
      //     peaceful_(this, Vector2i(get_w() * 7 / 10, get_h() * 19 / 40 + buth_), _("Peaceful
      //     mode")),
-     peaceful_(this, Vector2i::zero(), _("Peaceful mode")),
-     ok_(this, "ok", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuPrimary, _("Start game")),
-     back_(this, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
+     peaceful_(&map_box_, Vector2i::zero(), _("Peaceful mode")),
+     ok_(&map_box_, "ok", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuPrimary, _("Start game")),
+     back_(&map_box_, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
      // Text labels
-     title_(this,
-            get_w() / 2,
-            get_h() / 25,
+     title_(&main_box_,
+            0,
+            0,
             0,
             0,
             "",
@@ -73,17 +93,12 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
      ctrl_(ctrl),
      peaceful_mode_forbidden_(false),
      nr_players_(0) {
-	win_condition_dropdown_.selected.connect(
-	   boost::bind(&FullscreenMenuLaunchGame::win_condition_selected, this));
-	peaceful_.changed.connect(boost::bind(&FullscreenMenuLaunchGame::toggle_peaceful, this));
-	back_.sigclicked.connect(
-	   boost::bind(&FullscreenMenuLaunchGame::clicked_back, boost::ref(*this)));
-	log("connecting ok button...\n");
-	ok_.sigclicked.connect(boost::bind(&FullscreenMenuLaunchGame::clicked_ok, boost::ref(*this)));
 
 	lua_ = new LuaInterface();
+	add_all_widgets();
+	add_behaviour_to_widgets();
 
-	title_.set_font_scale(scale_factor());
+	layout();
 }
 
 FullscreenMenuLaunchGame::~FullscreenMenuLaunchGame() {
@@ -232,4 +247,63 @@ void FullscreenMenuLaunchGame::clicked_ok() {
 // Implemented by subclasses
 void FullscreenMenuLaunchGame::clicked_back() {
 	NEVER_HERE();
+}
+
+bool FullscreenMenuLaunchGame::clicked_select_map() {
+	NEVER_HERE();
+}
+
+void FullscreenMenuLaunchGame::layout() {
+	log("w=%d, h=%d\n", get_w(), get_h());
+	//	main_box_.set_desired_size(get_w(), get_h());
+	main_box_.set_size(get_w(), get_h());
+	log("main box: w=%d, h=%d, x=%d\n", main_box_.get_w(), main_box_.get_h(), main_box_.get_x());
+	//	title_own_.set_text(_("my Start game blabla"));
+	log("title: w=%d, h=%d, x=%d\n", title_.get_w(), title_.get_h(), title_.get_x());
+	//	content_box_.set_desired_size(
+	//	   main_box_.get_w(), main_box_.get_h() - title_own_.get_h() - 2 * ok_own_.get_h());
+	log("content box: w=%d, h=%d, x=%d\n", content_box_.get_w(), content_box_.get_h(),
+	    content_box_.get_x());
+	//	player_box_.set_desired_size(content_box_.get_w() / 2, content_box_.get_h());
+	log("player box: w=%d, h=%d, x=%d\n", individual_content_box.get_w(),
+	    individual_content_box.get_h(), individual_content_box.get_x());
+	//	map_box_.set_desired_size(content_box_.get_w() / 2, content_box_.get_h());
+	log("map box: w=%d, h=%d, x=%d\n", map_box_.get_w(), map_box_.get_h(), map_box_.get_x());
+	// map_.set_desired_size(map_box_.get_w(), 0);
+
+	//	log("peaceful w=%d, h=%d, x=%d\n", peaceful_own_.get_w(), peaceful_own_.get_h(),
+	//	    peaceful_own_.get_x());
+	//	log("map w=%d, h=%d, x=%d\n", map_.get_w(), map_.get_h(), map_.get_x());
+	log("sehe ich nicht oder \n\n");
+	//	select_map_.set_desired_size(map_name_.get_h(), map_name_.get_h());
+}
+
+void FullscreenMenuLaunchGame::add_all_widgets() {
+	title_.set_font_scale(scale_factor());
+	map_box_title.set_font_scale(scale_factor());
+
+	main_box_.add_space(2 * padding_);
+	main_box_.add(&title_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+
+	main_box_.add(&content_box_, UI::Box::Resizing::kExpandBoth);
+	content_box_.add(&individual_content_box, UI::Box::Resizing::kExpandBoth);
+
+	content_box_.add(&map_box_, UI::Box::Resizing::kExpandBoth);
+	map_box_.add(&map_box_title, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	// map_box_.add(&map_details, UI::Box::Resizing::kFullSize);
+	map_box_.add(&peaceful_, UI::Box::Resizing::kFillSpace);
+	map_box_.add(&win_condition_type, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	map_box_.add(&win_condition_dropdown_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
+
+	map_box_.add_inf_space();
+	map_box_.add(&ok_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	map_box_.add(&back_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+}
+
+void FullscreenMenuLaunchGame::add_behaviour_to_widgets() {
+	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
+	peaceful_.changed.connect([this]() { toggle_peaceful(); });
+
+	ok_.sigclicked.connect([this]() { clicked_ok(); });
+	back_.sigclicked.connect([this]() { clicked_back(); });
 }
