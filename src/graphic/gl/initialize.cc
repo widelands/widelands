@@ -51,6 +51,8 @@ SDL_GLContext initialize(
 	SDL_GLContext gl_context = SDL_GL_CreateContext(sdl_window);
 	SDL_GL_MakeCurrent(sdl_window, gl_context);
 
+	SDL_GL_SetSwapInterval(0);
+
 #ifdef USE_GLBINDING
 #ifndef GLBINDING3
 	glbinding::Binding::initialize();
