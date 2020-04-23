@@ -454,7 +454,7 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 		}
 		if (did_incorporate) {
 			rebuild_request = true;
-		 }
+		}
 	}
 	// This boolean ensures that kicking out many soldiers in a row does not count as
 	// soldiers entering and leaving without training. We need to repeatedly incorporate
