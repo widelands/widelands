@@ -488,14 +488,17 @@ Duration ShippingSchedule::update(Game& game) {
 			}
 
 			const int32_t planned_capacity = arrival_times.size();
+			int32_t delta = planned_capacity - waiting_items;
+			sslog("Iteration: Iteration: planned_capacity %d, delta %d\n", planned_capacity, delta);
 #ifndef NDEBUG
 			if (dock == dest) {
 				assert(waiting_items == 0);
-				assert(planned_capacity == 0);
+				// assert(planned_capacity == 0);
+				if (planned_capacity != 0) {
+					NEVER_HERE();
+				}
 			}
 #endif
-			int32_t delta = planned_capacity - waiting_items;
-			sslog("Iteration: Iteration: planned_capacity %d, delta %d\n", planned_capacity, delta);
 			while (delta > 0) {
 				// reduce or cancel the last order in the queue
 				const uint32_t last_arrival = *arrival_times.crbegin();
@@ -989,7 +992,7 @@ Duration ShippingSchedule::update(Game& game) {
 			assert(closest);
 			const uint32_t take = std::min(ppp.open_count, closest->get_capacity());
 			assert(take);
-			sslog("Phase 5.2: PPP %u→%u (open_count %u): assigning %u items to %s\n",
+			sslog("Phase 5.2: PPP %u –> %u (open_count %u): assigning %u items to %s\n",
 			      ppp.start->serial(), ppp.end->serial(), ppp.open_count, take,
 			      closest->get_shipname().c_str());
 			plans_[closest].clear();
@@ -1011,7 +1014,7 @@ Duration ShippingSchedule::update(Game& game) {
 	std::list<PortDock*> open_count_left;
 	for (PrioritisedPortPair& ppp : open_pairs) {
 		while (ppp.open_count && !ppp.ships.empty()) {
-			sslog("Phase 5.3: PPP %u→%u (open_count %u): assigning items…\n", ppp.start->serial(),
+			sslog("Phase 5.3: PPP %u –> %u (open_count %u): assigning items…\n", ppp.start->serial(),
 			      ppp.end->serial(), ppp.open_count);
 			load_on_ship(ppp);
 		}
@@ -1097,55 +1100,86 @@ Duration ShippingSchedule::update(Game& game) {
 					continue;
 				}
 				const uint32_t take = std::min(capacity, ppp.open_count);
-				sslog("Phase 5.4: PPP %u→%u (open_count %u): assigning %u items to %s\n",
+				sslog("Phase 5.4: PPP %u –> %u (open_count %u): assigning %u items to %s\n",
 				      ppp.start->serial(), ppp.end->serial(), ppp.open_count, take,
 				      plan.first->get_shipname().c_str());
 				ppp.open_count -= take;
 
-				// Prepare the plan from start to end. It will be inserted into the list later.
-				Path _path;
-				fleet_.get_path(*ppp.start, *ppp.end, _path);
-				int32_t _d = -1;
-				game.map().calc_cost(_path, &_d, nullptr);
-				assert(_d >= 0);
-				SchedulingState state__start_end(ppp.end, false, _d);
-				state__start_end.load_there.push_back(std::make_pair(ppp.end, take));
-				// Prepare the plan from dock1 to start if needed
-				std::unique_ptr<SchedulingState> state__dock1_start(nullptr);
-				if (dock1->dock != ppp.start) {
+				std::unique_ptr<SchedulingState> state__start(nullptr);
+				std::unique_ptr<SchedulingState> state__end(nullptr);
+				int32_t update_dock2_time = -1;
+				// Four cases
+				if (dock1->dock == ppp.start) {
+					assert(dock2 != end);
+					assert(dock2->dock != ppp.end);
+
 					Path path;
-					fleet_.get_path(*dock1->dock, *ppp.start, path);
+					fleet_.get_path(*ppp.end, *dock2->dock, path);
+					game.map().calc_cost(path, &update_dock2_time, nullptr);
+					assert(update_dock2_time >= 0);
+
 					int32_t d = -1;
+					fleet_.get_path(*ppp.start, *ppp.end, path);
 					game.map().calc_cost(path, &d, nullptr);
 					assert(d >= 0);
-					state__dock1_start.reset(new SchedulingState(ppp.start, false, d));
-				}
+					state__end.reset(new SchedulingState(ppp.end, false, d));
 
-				assert(!dock1->expedition);
-				if (dock2 != end) {
-					// Add another one or two stations in-between
-					assert(dock1->dock != ppp.start ||
-					       dock2->dock !=
-					          ppp.end);  // otherwise it should have been handled much earlier
-					if (dock2->dock != ppp.end) {
-						// update the duration for dock2 first
+					bool found = false;
+					for (auto& cargo : dock1->load_there) {
+						if (cargo.first == ppp.end) {
+							cargo.second += take;
+							found = true;
+							break;
+						}
+					}
+					if (!found) {
+						dock1->load_there.push_back(std::make_pair(ppp.end, take));
+					}
+				} else if (dock2 != end && dock2->dock == ppp.end) {
+					Path path;
+					fleet_.get_path(*ppp.start, *ppp.end, path);
+					game.map().calc_cost(path, &update_dock2_time, nullptr);
+					assert(update_dock2_time >= 0);
+
+					int32_t d = -1;
+					fleet_.get_path(*dock1->dock, *ppp.start, path);
+					game.map().calc_cost(path, &d, nullptr);
+					assert(d >= 0);
+					state__start.reset(new SchedulingState(ppp.start, false, d));
+					state__start->load_there.push_back(std::make_pair(ppp.end, take));
+				} else {
+					if (dock2 != end) {
 						Path path;
 						fleet_.get_path(*ppp.end, *dock2->dock, path);
-						int32_t d = -1;
-						game.map().calc_cost(path, &d, nullptr);
-						assert(d >= 0);
-						dock2->duration_from_previous_location = d;
+						game.map().calc_cost(path, &update_dock2_time, nullptr);
+						assert(update_dock2_time >= 0);
 					}
-					plan.second.insert(dock1, state__start_end);
-					if (dock1->dock != ppp.start) {
-						plan.second.insert(dock1, *state__dock1_start);
-					}
-				} else {
-					// This is the last station, add another destination(s)
-					if (dock1->dock != ppp.start) {
-						plan.second.push_back(*state__dock1_start);
-					}
-					plan.second.push_back(state__start_end);
+
+					int32_t d = -1;
+					Path path;
+					fleet_.get_path(*dock1->dock, *ppp.start, path);
+					game.map().calc_cost(path, &d, nullptr);
+					assert(d >= 0);
+					state__start.reset(new SchedulingState(ppp.start, false, d));
+					state__start->load_there.push_back(std::make_pair(ppp.end, take));
+
+					d = -1;
+					fleet_.get_path(*ppp.start, *ppp.end, path);
+					game.map().calc_cost(path, &d, nullptr);
+					assert(d >= 0);
+					state__end.reset(new SchedulingState(ppp.end, false, d));
+				}
+
+				assert(state__start || state__end);
+				if (update_dock2_time >= 0) {
+					assert(dock2 != end);
+					dock2->duration_from_previous_location = update_dock2_time;
+				}
+				if (state__end) {
+					plan.second.insert(dock1, *state__end);
+				}
+				if (state__start) {
+					plan.second.insert(dock1, *state__start);
 				}
 			}
 		}
