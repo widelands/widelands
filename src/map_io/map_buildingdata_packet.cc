@@ -878,7 +878,7 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 				trainingsite.requesting_weak_trainees_ = 0 < (somebits & 2);
 				trainingsite.repeated_layoff_inc_ = 0 < (somebits & 4);
 				trainingsite.recent_capacity_increase_ = 0 < (somebits & 8);
-				assert(4 > somebits);
+				assert(16 > somebits);
 				trainingsite.repeated_layoff_ctr_ = fr.unsigned_8();
 				trainingsite.request_open_since_ = fr.unsigned_32();
 			} else {
