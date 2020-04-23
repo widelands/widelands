@@ -719,7 +719,8 @@ Duration ShippingSchedule::update(Game& game) {
 		Duration eta;
 
 		static inline uint32_t calc_score(uint32_t c, Duration eta) {
-			return eta > kHorriblyLongDuration ? 0 : kMinScoreForImmediateAcceptFactor * c * kHorriblyLongDuration /
+			return eta > kHorriblyLongDuration ? 0 : kMinScoreForImmediateAcceptFactor * c *
+			                                            kHorriblyLongDuration /
 			                                            std::max(eta, kWonderfullyShortDuration);
 		}
 		ScoredShip(Ship* s, uint32_t c, Duration d)
