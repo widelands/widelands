@@ -50,9 +50,10 @@ constexpr uint32_t kActualDurationsRecalculationInterval = 20 * 1000;
 constexpr Duration kWonderfullyShortDuration = 10 * 1000;   // 10 s
 constexpr Duration kHorriblyLongDuration = 10 * 60 * 1000;  // 10 min
 
-// Only assign wares to a ship in 5.1 if it's score is higher than this threshold.
-// Ships with lower scores will only be accepted if not enough idle ships are found.
-constexpr uint16_t kMinScoreForImmediateAccept = 20;
+// Only assign wares to a ship in 5.1 if it's score is higher than a certain
+// threshold based on minimal distance. Ships with lower scores will only be
+// accepted if not enough idle ships are found.
+constexpr uint16_t kMinScoreForImmediateAcceptFactor = 100;
 
 // Average sailing-time distance for two ports to be considered "close by" in 5.4
 constexpr int16_t kDockGroupMaxDistanceFactor = 12 * 1800;
@@ -493,10 +494,7 @@ Duration ShippingSchedule::update(Game& game) {
 #ifndef NDEBUG
 			if (dock == dest) {
 				assert(waiting_items == 0);
-				// assert(planned_capacity == 0);
-				if (planned_capacity != 0) {
-					NEVER_HERE();
-				}
+				assert(planned_capacity == 0);
 			}
 #endif
 			while (delta > 0) {
@@ -721,7 +719,7 @@ Duration ShippingSchedule::update(Game& game) {
 		Duration eta;
 
 		static inline uint32_t calc_score(uint32_t c, Duration eta) {
-			return eta > kHorriblyLongDuration ? 0 : c * kHorriblyLongDuration /
+			return eta > kHorriblyLongDuration ? 0 : kMinScoreForImmediateAcceptFactor * c * kHorriblyLongDuration /
 			                                            std::max(eta, kWonderfullyShortDuration);
 		}
 		ScoredShip(Ship* s, uint32_t c, Duration d)
@@ -954,8 +952,14 @@ Duration ShippingSchedule::update(Game& game) {
 		for (const ScoredShip& ss : _ships) {
 			ppp.ships.push_back(ss);
 		}
+		int32_t threshold = -1;
+		Path path;
+		fleet_.get_path(*ppp.start, *ppp.end, path);
+		game.map().calc_cost(path, &threshold, nullptr);
+		assert(threshold > 0);
 		while (ppp.open_count > 0 && !ppp.ships.empty()) {
-			if (ppp.ships.front().score < kMinScoreForImmediateAccept) {
+			log("NOCOM SCORE %u (direct dist %d)\n", ppp.ships.front().score, threshold);
+			if (ppp.ships.front().score < static_cast<unsigned>(threshold)) {
 				break;
 			}
 			load_on_ship(ppp);

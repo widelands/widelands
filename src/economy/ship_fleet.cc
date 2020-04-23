@@ -573,10 +573,8 @@ void ShipFleet::remove_port(EditorGameBase& egbase, PortDock* port) {
 			if (portpath(gap, i).path)
 				portpath(gap, i).path->reverse();
 		}
+		ports_.erase(it);
 		portpaths_.resize((ports_.size() * (ports_.size() - 1)) / 2);
-
-		*it = ports_.back();
-		ports_.pop_back();
 	}
 	port->set_fleet(nullptr);
 
