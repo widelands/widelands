@@ -176,7 +176,8 @@ void ShippingSchedule::port_removed(Game& game, PortDock* dock) {
 						// PANIC! There are no ports at all left!!
 						// But we still have cargo!!! What should we do????
 						// Stay calm. Just do nothing. Nothing at all.
-						log("Ship %s is carrying %u items OR there are no ports left, setting NO destination\n",
+						log("Ship %s is carrying %u items OR there are no ports left, setting NO "
+						    "destination\n",
 						    pair.first->get_shipname().c_str(), pair.first->get_nritems());
 						pair.first->set_destination(game, nullptr);
 					} else {
