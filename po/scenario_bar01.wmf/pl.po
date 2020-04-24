@@ -7,13 +7,14 @@
 # GunChleoc, 2014
 # Wesmania <ikk_pl@yahoo.co.uk>, 2016
 # Sylwia Studzińska <sanuspg@gmail.com>, 2019
+# tombox <wptom@wp.pl>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-15 14:44+0000\n"
-"PO-Revision-Date: 2020-04-12 17:32+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-04-22 20:01+0000\n"
+"PO-Revision-Date: 2020-04-22 23:02+0000\n"
+"Last-Translator: tombox <wptom@wp.pl>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -162,7 +163,7 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well. For the "
 "best productivity, build it on a spot where your geologists have found a "
 "water source."
-msgstr ""
+msgstr "Innymi sposobami produkcji żywności – innego rodzaju – są farmy i chaty rybaka. Pszenica z farm musi zostać przetworzona razem z wodą w piekarni, zanim nada się do spożycia. Wodę pozyskasz budując studnię. Aby uzyskać najlepszą wydajność, zbuduj ją w miejscu, w którym geolodzy znaleźli źródło wody."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Refine your mined resources"
