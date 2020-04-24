@@ -510,10 +510,9 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					}
 				}
 				site->second.score += (management_data.get_military_number_at(138) +
-					   management_data.get_military_number_at(159)) /
-					  8;
+				                       management_data.get_military_number_at(159)) /
+				                      8;
 			}
-
 
 			if (site->second.score > 0) {
 				assert(is_visible);
