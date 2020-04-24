@@ -35,6 +35,14 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	iterate_players_existing_novar(p, nr_players, game())++ plr_in_game;
 
 	update_player_stat(gametime);
+	// defining treshold ratio of own_strength/enemy's strength
+	uint32_t treshold_ratio = 90 + management_data.get_military_number_at(5) / 5;
+	if (type_ == Widelands::AiType::kNormal) {
+		treshold_ratio -= 15;
+	}
+	if (type_ == Widelands::AiType::kVeryWeak) {
+		treshold_ratio += 20;
+	}
 
 	const uint32_t my_power = player_statistics.get_modified_player_power(pn);
 
@@ -146,6 +154,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		    count > 12) {
 			continue;
 		}
+		++count;
 
 		site->second.last_tested = gametime;
 		uint16_t enemy_military_presence_in_region_ = 0;
@@ -272,7 +281,6 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					site->second.attack_soldiers_strength = 0;
 				} else {
 					int32_t strength = calculate_strength(attackers);
-
 					site->second.attack_soldiers_strength = strength;
 					assert(!attackers.empty());
 					site->second.attack_soldiers_competency = strength * 10 / attackers.size();
@@ -284,15 +292,14 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			site->second.defenders_strength = defenders_strength;
 
 			site->second.score = 0;
-
+			const uint16_t enemys_power = player_statistics.get_modified_player_power(owner_number);
+			uint16_t my_to_enemy_power_ratio = 100;
+			if (enemys_power) {
+				my_to_enemy_power_ratio = my_power * 100 / enemys_power;
+			}
 			if (site->second.attack_soldiers_strength > 0 &&
-			    !player_statistics.players_in_same_team(pn, owner_number)) {
-
-				const uint16_t enemys_power = player_statistics.get_modified_player_power(owner_number);
-				uint16_t my_to_enemy_power_ratio = 100;
-				if (enemys_power) {
-					my_to_enemy_power_ratio = my_power * 100 / enemys_power;
-				}
+			    !player_statistics.players_in_same_team(pn, owner_number) &&
+			    (my_to_enemy_power_ratio > treshold_ratio)) {
 				uint16_t enemys_power_growth = 10;
 				if (player_statistics.get_old60_player_land(owner_number)) {
 					enemys_power_growth = player_statistics.get_player_power(owner_number) * 100 /
@@ -310,9 +317,9 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					inputs[j] = 0;
 				}
 				inputs[0] = (site->second.attack_soldiers_strength - site->second.defenders_strength) *
-				            std::abs(management_data.get_military_number_at(114)) / 20;
+				            std::abs(management_data.get_military_number_at(114)) / 10;
 				inputs[1] = (site->second.attack_soldiers_strength - site->second.defenders_strength) *
-				            std::abs(management_data.get_military_number_at(115)) / 20;
+				            std::abs(management_data.get_military_number_at(115)) / 10;
 				inputs[2] = (is_warehouse) ? 4 : 0;
 				inputs[3] = (is_warehouse) ? 2 : 0;
 				inputs[4] = (site->second.attack_soldiers_competency > 15) ? 2 : 0;
@@ -496,10 +503,11 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 						}
 					}
 				}
+				site->second.score += (management_data.get_military_number_at(138) +
+					   management_data.get_military_number_at(159)) /
+					  8;
 			}
-			site->second.score += (management_data.get_military_number_at(138) +
-			                       management_data.get_military_number_at(159)) /
-			                      8;
+
 
 			if (site->second.score > 0) {
 				assert(is_visible);
@@ -1020,11 +1028,10 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*>& so
 	                          descr.get_max_health_level() * descr.get_health_incr_per_level()));
 
 	// We divide the result by the aproximate strength of one unpromoted soldier
-	const int average_unpromoted_strength =
+	const uint16_t average_unpromoted_strength =
 	   (descr.get_base_min_attack() +
 	    (descr.get_base_max_attack() - descr.get_base_min_attack()) / 2) *
-	   descr.get_base_health() / (descr.get_base_defense() * descr.get_base_evade());
-
+	   descr.get_base_health() / (100 - descr.get_base_defense()) / (100 - descr.get_base_evade());
 	return static_cast<int32_t>(final / average_unpromoted_strength);
 }
 
