@@ -671,8 +671,10 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			send_signal(game, "cancel_expedition");
 		}
 
-		if (items_.empty() || !baim) {            // we are done, either way
-			set_ship_state_and_notify(ShipStates::kTransport, NoteShip::Action::kDestinationChanged);  // That's it, expedition finished
+		if (items_.empty() || !baim) {  // we are done, either way
+			set_ship_state_and_notify(
+			   ShipStates::kTransport,
+			   NoteShip::Action::kDestinationChanged);  // That's it, expedition finished
 
 			// Bring us back into a fleet and a economy.
 			init_fleet(game);
@@ -953,7 +955,8 @@ void Ship::exp_cancel(Game& game) {
 	init_fleet(game);
 	if (!get_fleet() || !get_fleet()->has_ports()) {
 		// We lost our last reachable port, so we reset the expedition's state
-		set_ship_state_and_notify(ShipStates::kExpeditionWaiting, NoteShip::Action::kDestinationChanged);
+		set_ship_state_and_notify(
+		   ShipStates::kExpeditionWaiting, NoteShip::Action::kDestinationChanged);
 		set_economy(game, expedition_->ware_economy, wwWARE);
 		set_economy(game, expedition_->worker_economy, wwWORKER);
 

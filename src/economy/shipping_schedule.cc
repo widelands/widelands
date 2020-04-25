@@ -179,7 +179,8 @@ void ShippingSchedule::port_removed(Game& game, PortDock* dock) {
 						// Stay calm. Just do nothing. Nothing at all.
 						log("Ship %s is carrying %u items OR there are no ports left, setting NO "
 						    "destination\n",
-						    pair.first.get(game)->get_shipname().c_str(), pair.first.get(game)->get_nritems());
+						    pair.first.get(game)->get_shipname().c_str(),
+						    pair.first.get(game)->get_nritems());
 						pair.first.get(game)->set_destination(game, nullptr);
 					} else {
 						PortDock* closest = nullptr;
@@ -197,8 +198,8 @@ void ShippingSchedule::port_removed(Game& game, PortDock* dock) {
 						}
 						assert(closest);
 						log("Ship %s is carrying %u items, rerouting to NEW destination %u\n",
-						    pair.first.get(game)->get_shipname().c_str(), pair.first.get(game)->get_nritems(),
-						    closest->serial());
+						    pair.first.get(game)->get_shipname().c_str(),
+						    pair.first.get(game)->get_nritems(), closest->serial());
 						pair.second.push_back(SchedulingState(closest, false, dist));
 						pair.first.get(game)->set_destination(game, closest);
 					}
@@ -214,8 +215,8 @@ void ShippingSchedule::port_removed(Game& game, PortDock* dock) {
 					pair.second.front().duration_from_previous_location = d;
 				}
 			} else {
-				sslog(
-				   "no rerouting for %s, only recalc schedule\n", pair.first.get(game)->get_shipname().c_str());
+				sslog("no rerouting for %s, only recalc schedule\n",
+				      pair.first.get(game)->get_shipname().c_str());
 				// no rerouting needed, just recalc the schedule time
 				iterator_to_deleted_dock = pair.second.erase(iterator_to_deleted_dock);
 				// points now to the dock after the deleted dock
@@ -1215,9 +1216,9 @@ Duration ShippingSchedule::update(Game& game) {
 			idle_ships.push_back(plan.first.get(game));
 			for (PortDock* dock : fleet_.get_ports()) {
 				Path path;
-				if (game.map().findpath(plan.first.get(game)->get_position(), dock->get_positions(game).back(),
-				                        kNearbyDockMaxDistanceFactor, path,
-				                        CheckStepDefault(MOVECAPS_SWIM)) >= 0) {
+				if (game.map().findpath(plan.first.get(game)->get_position(),
+				                        dock->get_positions(game).back(), kNearbyDockMaxDistanceFactor,
+				                        path, CheckStepDefault(MOVECAPS_SWIM)) >= 0) {
 					increment_ships_per_port(ships_per_port, dock);
 				}
 			}
@@ -1279,7 +1280,9 @@ Duration ShippingSchedule::update(Game& game) {
 }
 
 constexpr uint16_t kCurrentPacketVersion = 1;
-void ShippingSchedule::save(const EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) const {
+void ShippingSchedule::save(const EditorGameBase& egbase,
+                            MapObjectSaver& mos,
+                            FileWrite& fw) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 
 	fw.unsigned_32(last_updated_);
