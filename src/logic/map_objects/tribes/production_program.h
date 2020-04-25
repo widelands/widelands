@@ -106,7 +106,7 @@ struct ProductionProgram : public MapObjectProgram {
 	///
 	/// Parameter syntax:
 	///    parameters         ::= return_value [condition_part]
-	///    return_value       ::= Failed | Completed | Skipped | None
+	///    return_value       ::= Failed | Completed | Skipped
 	///    Failed             ::= "failed"
 	///    Completed          ::= "completed"
 	///    Skipped            ::= "skipped"
