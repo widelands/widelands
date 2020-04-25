@@ -26,7 +26,7 @@
 #include <vector>
 
 #include "base/macros.h"
-#include "logic/widelands.h"
+#include "logic/map_objects/tribes/ship.h"
 
 class FileRead;
 class FileWrite;
@@ -38,8 +38,6 @@ class Game;
 struct MapObjectLoader;
 struct MapObjectSaver;
 class PortDock;
-class Ship;
-struct ShipFleet;
 
 using CargoList = std::vector<std::pair<PortDock*, uint32_t>>;
 using CargoListLoader = std::vector<std::pair<Serial, uint32_t>>;
@@ -99,7 +97,7 @@ public:
 
 private:
 	ShipFleet& fleet_;
-	std::map<Ship*, ShipPlan> plans_;
+	std::map<OPtr<Ship>, ShipPlan> plans_;
 
 	uint32_t last_updated_;
 	uint32_t last_actual_durations_recalculation_;

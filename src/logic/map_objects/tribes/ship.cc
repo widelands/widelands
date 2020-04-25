@@ -672,7 +672,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 		}
 
 		if (items_.empty() || !baim) {            // we are done, either way
-			ship_state_ = ShipStates::kTransport;  // That's it, expedition finished
+			set_ship_state_and_notify(ShipStates::kTransport, NoteShip::Action::kDestinationChanged);  // That's it, expedition finished
 
 			// Bring us back into a fleet and a economy.
 			init_fleet(game);
@@ -726,6 +726,7 @@ void Ship::set_economy(Game& game, Economy* e, WareWorker type) {
 void Ship::set_destination(Game& game, PortDock* dock) {
 	destination_ = dock;
 	send_signal(game, "wakeup");
+	Notifications::publish(NoteShip(this, NoteShip::Action::kDestinationChanged));
 }
 
 void Ship::add_item(Game& game, const ShippingItem& item) {
@@ -817,7 +818,7 @@ void Ship::start_task_movetodock(Game& game, PortDock& pd) {
 /// Prepare everything for the coming exploration
 void Ship::start_task_expedition(Game& game) {
 	// Now we are waiting
-	ship_state_ = ShipStates::kExpeditionWaiting;
+	set_ship_state_and_notify(ShipStates::kExpeditionWaiting, NoteShip::Action::kDestinationChanged);
 	// Initialize a new, yet empty expedition
 	expedition_.reset(new Expedition());
 	expedition_->seen_port_buildspaces.clear();
@@ -944,7 +945,7 @@ void Ship::exp_cancel(Game& game) {
 			worker->start_task_shipping(game, nullptr);
 		}
 	}
-	ship_state_ = ShipStates::kTransport;
+	set_ship_state_and_notify(ShipStates::kTransport, NoteShip::Action::kDestinationChanged);
 
 	// Bring us back into a fleet and a economy.
 	set_economy(game, nullptr, wwWARE);
@@ -952,7 +953,7 @@ void Ship::exp_cancel(Game& game) {
 	init_fleet(game);
 	if (!get_fleet() || !get_fleet()->has_ports()) {
 		// We lost our last reachable port, so we reset the expedition's state
-		ship_state_ = ShipStates::kExpeditionWaiting;
+		set_ship_state_and_notify(ShipStates::kExpeditionWaiting, NoteShip::Action::kDestinationChanged);
 		set_economy(game, expedition_->ware_economy, wwWARE);
 		set_economy(game, expedition_->worker_economy, wwWORKER);
 
