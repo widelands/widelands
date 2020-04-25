@@ -439,6 +439,11 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 	uint8_t trainee_general_upper_bound = std::numeric_limits<uint8_t>::max() - 1;
 	bool limit_upper_bound = false;
 
+	if (soldiers_.size() < capacity_) {
+		// If not full, I need more soldiers.
+		need_more_soldiers = true;
+	}
+
 	// Usually, we prefer already partially trained soldiers here.
 	// In some conditions, this can lead to same soldiers walking back and forth.
 	// this tries to break that cycle. The goal is that this code only kicks in
@@ -453,7 +458,7 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 			limit_upper_bound = true;
 		}
 		if (did_incorporate) {
-			rebuild_request = true;
+			rebuild_request = need_more_soldiers;
 		}
 	}
 	// This boolean ensures that kicking out many soldiers in a row does not count as
@@ -464,10 +469,6 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 		repeated_layoff_inc_ = true;
 	}
 
-	if (soldiers_.size() < capacity_) {
-		// If not full, I need more soldiers.
-		need_more_soldiers = true;
-	}
 	const uint32_t timeofgame = game ? game->get_gametime() : 0;
 
 	if (did_incorporate && latest_trainee_was_kickout_ != requesting_weak_trainees_) {
