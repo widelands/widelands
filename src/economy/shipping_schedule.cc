@@ -424,9 +424,9 @@ Duration ShippingSchedule::update(Game& game) {
 	std::list<PortDock*> ports_with_unserviced_expeditions;
 	// Don't even think about trying to cache any of this. It is impossible to maintain.
 	std::map<
-	   PortDock* /* start */,
-	   std::map<PortDock* /* dest */,
-	            std::pair<std::map<Ship* /* by whom */,
+	   OPtr<PortDock> /* start */,
+	   std::map<OPtr<PortDock> /* dest */,
+	            std::pair<std::map<OPtr<Ship> /* by whom */,
 	                               std::pair<Duration /* when at `start` */,
 	                                         Quantity /* accept how much from `start` to `dest` */>>,
 	                      int32_t /* capacity missing (-) or extra (+) */>>>
@@ -436,7 +436,7 @@ Duration ShippingSchedule::update(Game& game) {
 		sslog("Iteration: dock %u (expedition ready %s)\n", dock->serial(),
 		      expedition_ready ? "true" : "false");
 		Ship* expedition_ship_coming = nullptr;
-		std::map<PortDock*, std::pair<std::map<Ship*, std::pair<Duration, Quantity>>, int32_t>> map;
+		std::map<OPtr<PortDock>, std::pair<std::map<OPtr<Ship>, std::pair<Duration, Quantity>>, int32_t>> map;
 		for (auto& plan : plans_) {
 			Duration eta = 0;
 			CargoList* _load = nullptr;
@@ -518,14 +518,14 @@ Duration ShippingSchedule::update(Game& game) {
 							erase = true;
 						}
 						sslog("Iteration: Iteration: planned_capacity reduced by %d (ship %s)\n",
-						      reducedby, pair_it->first->get_shipname().c_str());
+						      reducedby, pair_it->first.get(game)->get_shipname().c_str());
 						for (uint32_t i = reducedby; i; --i) {
 							assert(*std::prev(arrival_times.end()) == last_arrival);
 							arrival_times.erase(std::prev(arrival_times.end()));
 						}
 						// …and in the schedule
 						bool found = false;
-						for (SchedulingState& ss : plans_.at(pair_it->first)) {
+						for (SchedulingState& ss : plans_.at(pair_it->first.get(game))) {
 							if (ss.dock == dock) {
 								for (auto it = ss.load_there.begin(); it != ss.load_there.end(); ++it) {
 									if (it->first == dest) {
@@ -545,8 +545,8 @@ Duration ShippingSchedule::update(Game& game) {
 						}
 						assert(found);
 						if (std::find(ships_with_reduced_orders.begin(), ships_with_reduced_orders.end(),
-						              pair_it->first) == ships_with_reduced_orders.end()) {
-							ships_with_reduced_orders.push_back(pair_it->first);
+						              pair_it->first.get(game)) == ships_with_reduced_orders.end()) {
+							ships_with_reduced_orders.push_back(pair_it->first.get(game));
 						}
 						if (erase) {
 							map[dest].first.erase(pair_it);
@@ -785,15 +785,15 @@ Duration ShippingSchedule::update(Game& game) {
 			assert(dest__shipsinfos.second.second <= 0);
 			if (dest__shipsinfos.second.second < 0) {
 				const int32_t maxprio =
-				   start__map.first->calc_max_priority(game, *dest__shipsinfos.first);
-				const int32_t total_waiting = start__map.first->count_waiting(dest__shipsinfos.first);
+				   start__map.first.get(game)->calc_max_priority(game, *dest__shipsinfos.first.get(game));
+				const int32_t total_waiting = start__map.first.get(game)->count_waiting(dest__shipsinfos.first.get(game));
 				const int32_t open = -dest__shipsinfos.second.second;
 				assert(total_waiting >= open);
 				assert(maxprio >= total_waiting);  // a priority of at least 1 per item
 				const int32_t prio = maxprio * open / total_waiting;
 				assert(prio >= 0);
 				_open_pairs.insert(
-				   PrioritisedPortPair(start__map.first, dest__shipsinfos.first, open, prio));
+				   PrioritisedPortPair(start__map.first.get(game), dest__shipsinfos.first.get(game), open, prio));
 			}
 		}
 	}
@@ -911,7 +911,7 @@ Duration ShippingSchedule::update(Game& game) {
 	for (const PrioritisedPortPair& ppp : _open_pairs) {
 		open_pairs.push_back(ppp);
 	}
-	sslog("FIFTH PASS: Found %" PRIuS "open pairs\n", open_pairs.size());
+	sslog("FIFTH PASS: Found %" PRIuS " open pairs\n", open_pairs.size());
 
 	// 1) check for coming ships already going there, or planning to go nowhere after here
 	for (PrioritisedPortPair& ppp : open_pairs) {
@@ -1048,7 +1048,7 @@ Duration ShippingSchedule::update(Game& game) {
 	//    ship has free capacity in-between). Sort all candidates using SortedShip
 	//    functionality, and then assign as many items as possible.
 	if (!open_count_left.empty()) {
-		std::map<PortDock*, std::set<PortDock*>> groups;
+		std::map<OPtr<PortDock>, std::set<OPtr<PortDock>>> groups;
 		// only calculate the groups for those docks where we need them
 		for (PortDock* dock : open_count_left) {
 			for (PortDock* other : fleet_.get_ports()) {
