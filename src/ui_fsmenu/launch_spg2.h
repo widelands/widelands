@@ -9,8 +9,7 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/launch_game.h"
-
-struct PlayerDescriptionGroup;
+#include "ui_fsmenu/singleplayersetupbox.h"
 
 class FullscreenMenuLaunchSPG2 : public FullscreenMenuLaunchGame {
 public:
@@ -28,7 +27,7 @@ private:
 	void win_condition_selected() override;
 
 	UI::Textarea players_;
-	UI::Textarea player_name_;
+	SinglePlayerSetupBox player_setup;
 
 	void add_behaviour_to_widgets();
 	bool select_map();

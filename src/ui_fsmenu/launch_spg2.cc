@@ -32,14 +32,10 @@ FullscreenMenuLaunchSPG2::FullscreenMenuLaunchSPG2(GameSettingsProvider* const s
               UI::Align::kRight,
               g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
 
-     player_name_(&individual_content_box,
-                  0,
-                  0,
-                  0,
-                  0,
-                  "beispiel name von einem spieler",
-                  UI::Align::kLeft,
-                  g_gr->styles().font_style(UI::FontStyle::kLabel)) {
+     player_setup(&individual_content_box, 0, 0, get_w() / 5, 0, settings, 50) {
+
+	individual_content_box.add(&players_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	individual_content_box.add(&player_setup, UI::Box::Resizing::kExpandBoth);
 
 	//	add_all_widgets();
 	title_.set_text("Launch game");

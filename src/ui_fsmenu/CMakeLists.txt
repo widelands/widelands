@@ -100,6 +100,10 @@ wl_library(ui_fsmenu_gameloading
     launch_spg2.h
     mapdetailsbox.cc
     mapdetailsbox.h
+    singleplayersetupbox.cc
+    singleplayersetupbox.h
+    dropdownsupport.cc
+    dropdownsupport.h
   DEPENDS
     base_exceptions
     base_i18n
