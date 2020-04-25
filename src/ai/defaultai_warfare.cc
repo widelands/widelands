@@ -264,7 +264,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				uint16_t own_power_growth = 10;
 				if (player_statistics.get_old60_player_land(pn)) {
 					own_power_growth = player_statistics.get_player_power(pn) * 100 /
-					                      player_statistics.get_old60_player_land(pn);
+					                   player_statistics.get_old60_player_land(pn);
 				}
 
 				static std::vector<ImmovableFound> immovables;
@@ -272,7 +272,9 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				immovables.clear();
 				static std::set<uint32_t> unique_serials;
 				unique_serials.clear();
-				map.find_immovables(game(), Area<FCoords>(map.get_fcoords(Coords::unhash(site->first)), 10), &immovables);
+				map.find_immovables(game(),
+				                    Area<FCoords>(map.get_fcoords(Coords::unhash(site->first)), 10),
+				                    &immovables);
 				for (uint32_t k = 0; k < immovables.size(); ++k) {
 					const BaseImmovable& base_immovable = *immovables.at(k).object;
 
@@ -468,13 +470,24 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				inputs[103] = (site->second.enemy_military_presence_in_region > 5) ? 2 : 6;
 				inputs[104] = (site->second.enemy_military_presence_in_region > 10) ? -1 : 1;
 				inputs[105] = (site->second.enemy_military_presence_in_region > 15) ? -6 : -2;
-				inputs[106] = (site->second.attack_soldiers_strength > 2 * site->second.enemy_military_presence_in_region) ? 1 : -1;
-				inputs[107] = (site->second.attack_soldiers_strength > 3 * site->second.enemy_military_presence_in_region) ? 3 : 0;
-				inputs[108] = (site->second.attack_soldiers_strength > 4 * site->second.enemy_military_presence_in_region) ? 6 : 0;
-				inputs[109] = (site->second.attack_soldiers_strength - site->second.defenders_strength) *
-				            std::abs(management_data.get_military_number_at(116)) / 15;
-				inputs[110] = (site->second.attack_soldiers_strength - site->second.defenders_strength) *
-				            std::abs(management_data.get_military_number_at(30)) / 20;
+				inputs[106] = (site->second.attack_soldiers_strength >
+				               2 * site->second.enemy_military_presence_in_region) ?
+				                 1 :
+				                 -1;
+				inputs[107] = (site->second.attack_soldiers_strength >
+				               3 * site->second.enemy_military_presence_in_region) ?
+				                 3 :
+				                 0;
+				inputs[108] = (site->second.attack_soldiers_strength >
+				               4 * site->second.enemy_military_presence_in_region) ?
+				                 6 :
+				                 0;
+				inputs[109] =
+				   (site->second.attack_soldiers_strength - site->second.defenders_strength) *
+				   std::abs(management_data.get_military_number_at(116)) / 15;
+				inputs[110] =
+				   (site->second.attack_soldiers_strength - site->second.defenders_strength) *
+				   std::abs(management_data.get_military_number_at(30)) / 20;
 				site->second.score = 0;
 				for (uint8_t j = 0; j < kFNeuronBitSize; ++j) {
 					if (management_data.f_neuron_pool[47].get_position(j)) {
@@ -584,9 +597,9 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	for (int a = 0; a < attackers; ++a) {
 		// TODO(Nordfriese): We could now choose the soldiers we want to send
 		if (soldiers[a]->get_current_health() <
-		   (descr.get_base_health() + descr.get_health_incr_per_level() *
-		    soldiers[a]->get_health_level() *
-			(66 + std::abs(management_data.get_military_number_at(20)) / 3) / 100)) {
+		    (descr.get_base_health() +
+		     descr.get_health_incr_per_level() * soldiers[a]->get_health_level() *
+		        (66 + std::abs(management_data.get_military_number_at(20)) / 3) / 100)) {
 			continue;
 		}
 		attacking_soldiers.push_back(soldiers[a]->serial());
