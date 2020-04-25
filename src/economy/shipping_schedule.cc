@@ -436,7 +436,9 @@ Duration ShippingSchedule::update(Game& game) {
 		sslog("Iteration: dock %u (expedition ready %s)\n", dock->serial(),
 		      expedition_ready ? "true" : "false");
 		Ship* expedition_ship_coming = nullptr;
-		std::map<OPtr<PortDock>, std::pair<std::map<OPtr<Ship>, std::pair<Duration, Quantity>>, int32_t>> map;
+		std::map<OPtr<PortDock>,
+		         std::pair<std::map<OPtr<Ship>, std::pair<Duration, Quantity>>, int32_t>>
+		   map;
 		for (auto& plan : plans_) {
 			Duration eta = 0;
 			CargoList* _load = nullptr;
@@ -784,16 +786,17 @@ Duration ShippingSchedule::update(Game& game) {
 		for (auto& dest__shipsinfos : start__map.second) {
 			assert(dest__shipsinfos.second.second <= 0);
 			if (dest__shipsinfos.second.second < 0) {
-				const int32_t maxprio =
-				   start__map.first.get(game)->calc_max_priority(game, *dest__shipsinfos.first.get(game));
-				const int32_t total_waiting = start__map.first.get(game)->count_waiting(dest__shipsinfos.first.get(game));
+				const int32_t maxprio = start__map.first.get(game)->calc_max_priority(
+				   game, *dest__shipsinfos.first.get(game));
+				const int32_t total_waiting =
+				   start__map.first.get(game)->count_waiting(dest__shipsinfos.first.get(game));
 				const int32_t open = -dest__shipsinfos.second.second;
 				assert(total_waiting >= open);
 				assert(maxprio >= total_waiting);  // a priority of at least 1 per item
 				const int32_t prio = maxprio * open / total_waiting;
 				assert(prio >= 0);
-				_open_pairs.insert(
-				   PrioritisedPortPair(start__map.first.get(game), dest__shipsinfos.first.get(game), open, prio));
+				_open_pairs.insert(PrioritisedPortPair(
+				   start__map.first.get(game), dest__shipsinfos.first.get(game), open, prio));
 			}
 		}
 	}
