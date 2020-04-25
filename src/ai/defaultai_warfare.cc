@@ -171,50 +171,6 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		// if we dont get a flag, we remove the building from observers list
 		FCoords f = map.get_fcoords(Coords::unhash(site->first));
 
-		static std::vector<ImmovableFound> immovables;
-		immovables.reserve(50);
-		immovables.clear();
-		map.find_immovables(game(), Area<FCoords>(f, 10), &immovables);
-		static std::set<uint32_t> unique_serials;
-		unique_serials.clear();
-
-		for (uint32_t k = 0; k < immovables.size(); ++k) {
-			const BaseImmovable& base_immovable = *immovables.at(k).object;
-
-			if (!unique_serials.insert(base_immovable.serial()).second) {
-				continue;  // serial was not inserted in the set, so this is duplicate
-			}
-
-			// testing if immovable is owned by someone else and collecting some statistics
-			if (upcast(Building const, building, &base_immovable)) {
-
-				const PlayerNumber bpn = building->owner().player_number();
-				if (player_statistics.get_is_enemy(bpn)) {  // owned by enemy
-					assert(!player_statistics.players_in_same_team(bpn, pn));
-					if (upcast(MilitarySite const, militarysite, building)) {
-						enemy_military_presence_in_region_ +=
-						   militarysite->soldier_control()->stationed_soldiers().size();
-						++enemy_military_sites_in_region_;
-					}
-					if (upcast(ConstructionSite const, constructionsite, building)) {
-						const BuildingDescr& target_descr = constructionsite->building();
-						if (target_descr.type() == MapObjectType::MILITARYSITE) {
-							++enemy_military_sites_in_region_;
-						}
-					}
-
-					// Warehouses are counted here too as they can host soldiers as well
-					if (upcast(Warehouse const, warehouse, building)) {
-						enemy_military_presence_in_region_ +=
-						   warehouse->soldier_control()->stationed_soldiers().size();
-						++enemy_military_sites_in_region_;
-					}
-				}
-			}
-		}
-		site->second.enemy_military_presence_in_region = enemy_military_presence_in_region_;
-		site->second.enemy_military_sites_in_region = enemy_military_sites_in_region_;
-
 		Flag* flag = nullptr;
 
 		if (upcast(MilitarySite, bld, f.field->get_immovable())) {
@@ -308,8 +264,51 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				uint16_t own_power_growth = 10;
 				if (player_statistics.get_old60_player_land(pn)) {
 					own_power_growth = player_statistics.get_player_power(pn) * 100 /
-					                   player_statistics.get_old60_player_land(pn);
+					                      player_statistics.get_old60_player_land(pn);
 				}
+
+				static std::vector<ImmovableFound> immovables;
+				immovables.reserve(50);
+				immovables.clear();
+				static std::set<uint32_t> unique_serials;
+				unique_serials.clear();
+				map.find_immovables(game(), Area<FCoords>(map.get_fcoords(Coords::unhash(site->first)), 10), &immovables);
+				for (uint32_t k = 0; k < immovables.size(); ++k) {
+					const BaseImmovable& base_immovable = *immovables.at(k).object;
+
+					if (!unique_serials.insert(base_immovable.serial()).second) {
+						continue;  // serial was not inserted in the set, so this is duplicate
+					}
+
+					// testing vicinity of the enemy building
+					if (upcast(Building const, building, &base_immovable)) {
+
+						const PlayerNumber bpn = building->owner().player_number();
+						if (player_statistics.get_is_enemy(bpn)) {  // owned by enemy
+							assert(!player_statistics.players_in_same_team(bpn, pn));
+							if (upcast(MilitarySite const, militarysite, building)) {
+								enemy_military_presence_in_region_ +=
+								   militarysite->soldier_control()->stationed_soldiers().size();
+								++enemy_military_sites_in_region_;
+							}
+							if (upcast(ConstructionSite const, constructionsite, building)) {
+								const BuildingDescr& target_descr = constructionsite->building();
+								if (target_descr.type() == MapObjectType::MILITARYSITE) {
+									++enemy_military_sites_in_region_;
+								}
+							}
+
+							// Warehouses are counted here too as they can host soldiers as well
+							if (upcast(Warehouse const, warehouse, building)) {
+								enemy_military_presence_in_region_ +=
+								   warehouse->soldier_control()->stationed_soldiers().size();
+								++enemy_military_sites_in_region_;
+							}
+						}
+					}
+				}
+				site->second.enemy_military_presence_in_region = enemy_military_presence_in_region_;
+				site->second.enemy_military_sites_in_region = enemy_military_sites_in_region_;
 
 				static int16_t inputs[4 * kFNeuronBitSize] = {0};
 				// Reseting values as the variable is static
@@ -326,11 +325,11 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				inputs[5] = (site->second.attack_soldiers_competency > 25) ? 4 : 0;
 				inputs[6] =
 				   (2 * site->second.defenders_strength > 3 * site->second.attack_soldiers_strength) ?
-				      -8 :
+				      -6 :
 				      0;
 				inputs[7] =
 				   (3 * site->second.defenders_strength > 2 * site->second.attack_soldiers_strength) ?
-				      -4 :
+				      -3 :
 				      0;
 				inputs[8] = (soldier_status_ == SoldiersStatus::kBadShortage ||
 				             soldier_status_ == SoldiersStatus::kShortage) ?
@@ -469,15 +468,13 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				inputs[103] = (site->second.enemy_military_presence_in_region > 5) ? 2 : 6;
 				inputs[104] = (site->second.enemy_military_presence_in_region > 10) ? -1 : 1;
 				inputs[105] = (site->second.enemy_military_presence_in_region > 15) ? -6 : -2;
-				inputs[106] = (site->second.attack_soldiers_strength >
-				               3 * site->second.enemy_military_presence_in_region) ?
-				                 3 :
-				                 -1;
-				inputs[107] = (site->second.attack_soldiers_strength >
-				               4 * site->second.enemy_military_presence_in_region) ?
-				                 6 :
-				                 0;
-
+				inputs[106] = (site->second.attack_soldiers_strength > 2 * site->second.enemy_military_presence_in_region) ? 1 : -1;
+				inputs[107] = (site->second.attack_soldiers_strength > 3 * site->second.enemy_military_presence_in_region) ? 3 : 0;
+				inputs[108] = (site->second.attack_soldiers_strength > 4 * site->second.enemy_military_presence_in_region) ? 6 : 0;
+				inputs[109] = (site->second.attack_soldiers_strength - site->second.defenders_strength) *
+				            std::abs(management_data.get_military_number_at(116)) / 15;
+				inputs[110] = (site->second.attack_soldiers_strength - site->second.defenders_strength) *
+				            std::abs(management_data.get_military_number_at(30)) / 20;
 				site->second.score = 0;
 				for (uint8_t j = 0; j < kFNeuronBitSize; ++j) {
 					if (management_data.f_neuron_pool[47].get_position(j)) {
@@ -567,8 +564,9 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	int32_t attackers = player_->find_attack_soldiers(*flag, &soldiers);
 	assert(attackers < 500);
 
-	if (attackers > 5) {
-		attackers = 5 + std::rand() % (attackers - 5);
+	const uint8_t attack_group = std::abs(management_data.get_military_number_at(6)) / 10;
+	if (attackers > attack_group) {
+		attackers = attack_group + std::rand() % (attackers - attack_group);
 	}
 
 	assert(attackers < 500);
@@ -583,8 +581,15 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	    enemy_sites[best_target].attack_counter + 1,
 	    (gametime - enemy_sites[best_target].last_time_attacked) / 1000);
 	std::vector<Serial> attacking_soldiers;
+	const SoldierDescr& descr = soldiers.front()->descr();
 	for (int a = 0; a < attackers; ++a) {
 		// TODO(Nordfriese): We could now choose the soldiers we want to send
+		if (soldiers[a]->get_current_health() <
+		   (descr.get_base_health() + descr.get_health_incr_per_level() *
+		    soldiers[a]->get_health_level() *
+			(66 + std::abs(management_data.get_military_number_at(20)) / 3) / 100)) {
+			continue;
+		}
 		attacking_soldiers.push_back(soldiers[a]->serial());
 	}
 	game().send_player_enemyflagaction(*flag, player_number(), attacking_soldiers);
