@@ -16,17 +16,10 @@ tribes:new_productionsite_type {
       log = 3
    },
 
+   animation_directory = dirname,
    animations = {
-      idle = {
-         directory = dirname,
-         basename = "idle",
-         hotspot = {39, 45}
-      },
-      unoccupied = {
-         directory = dirname,
-         basename = "unoccupied",
-         hotspot = {39, 45}
-      }
+      idle = {hotspot = {39, 45}},
+      unoccupied = {hotspot = {39, 45}}
    },
 
    indicate_workarea_overlaps = {

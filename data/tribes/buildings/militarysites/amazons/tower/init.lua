@@ -22,18 +22,12 @@ tribes:new_militarysite_type {
       granite = 1,
       log = 1,
       ironwood = 1
-
    },
+
+   animation_directory = dirname,
    animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {90, 127},
-         fps = 10,
-      },
-      unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {90, 127},
-      },
+      idle = {hotspot = {45, 59}},
+      unoccupied = {hotspot = {45, 59}},
    },
 
    aihints = {

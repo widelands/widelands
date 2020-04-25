@@ -20,10 +20,9 @@ tribes:new_productionsite_type {
       rope = 1,
    },
 
+   animation_directory = dirname,
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {49, 50},
          fps = 4,
          frames = 4,
@@ -31,13 +30,7 @@ tribes:new_productionsite_type {
          rows = 2
       }
    },
-   animations = {
-      unoccupied = {
-         directory = dirname,
-         basename = "unoccupied",
-         hotspot = {48, 50}
-      }
-   },
+   animations = {unoccupied = {hotspot = {48, 50}}},
 
    aihints = {
       supports_production_of = { "balsa", "rubber", },
