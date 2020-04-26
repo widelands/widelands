@@ -115,7 +115,7 @@ SinglePlayerPlayerGroup::SinglePlayerPlayerGroup(UI::Panel* const parent,
 }
 
 void SinglePlayerPlayerGroup::subscribe_to_game_settings() {
-	Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& note) {
+	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& note) {
 		log("going to update?\n");
 		if (settings_->settings().players.empty()) {
 			// No map/savegame yet

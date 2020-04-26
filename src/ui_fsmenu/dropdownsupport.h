@@ -1,8 +1,10 @@
 #ifndef WL_UI_FSMENU_DROPDOWNSUPPORT_H
 #define WL_UI_FSMENU_DROPDOWNSUPPORT_H
 
+#include <memory>
 #include <string>
 
+#include "logic/game_settings.h"
 #include "ui_basic/dropdown.h"
 class GameSettings;
 
@@ -18,17 +20,45 @@ public:
 	                const std::string& label,
 	                const UI::DropdownType type,
 	                UI::PanelStyle style,
-	                UI::ButtonStyle button_style);
-	virtual ~DropDownSupport();
+	                UI::ButtonStyle button_style,
+	                GameSettingsProvider* const settings,
+	                PlayerSlot id)
+	   : dropdown_(parent,
+	               name,
+	               x,
+	               y,
+	               w,
+	               max_list_items,
+	               button_dimension,
+	               label,
+	               type,
+	               style,
+	               button_style),
+	     settings_(settings),
+	     id_(id) {
+	}
+	virtual ~DropDownSupport() {
+	}
 
-	UI::Dropdown<T>& get_dropdown();
+	//	UI::Dropdown<T>* get_dropdown() {
+	//		return dropdown_;
+	//	}
 
-	virtual void rebuild(const GameSettings& settings);
-	virtual void fill(const GameSettings& settings);
-	virtual void select_entry(const GameSettings& settings);
+	virtual void rebuild() = 0;
+	virtual void fill() = 0;
+	virtual void select_entry() = 0;
 
-private:
+	void set_visible(bool visible) {
+		dropdown_.set_visible(visible);
+	}
+	void set_enabled(bool enable) {
+		dropdown_.set_enabled(enable);
+	}
+
+protected:
 	UI::Dropdown<T> dropdown_;
+	GameSettingsProvider* const settings_;
+	PlayerSlot const id_;
 };
 
 class TribeDropdownSupport : DropDownSupport<std::string> {
@@ -40,10 +70,29 @@ public:
 	                     uint32_t w,
 	                     uint32_t max_list_items,
 	                     int button_dimension,
-	                     const std::string& label);
-	void rebuild(const GameSettings& settings) override;
-	void fill(const GameSettings& settings) override;
-	void select_entry(const GameSettings& settings) override;
+	                     const std::string& label,
+	                     GameSettingsProvider* const settings,
+	                     PlayerSlot id);
+	void rebuild() override;
+	void fill() override;
+	void select_entry() override;
+};
+
+class TypeDropdownSupport : DropDownSupport<std::string> {
+public:
+	TypeDropdownSupport(UI::Panel* parent,
+	                    const std::string& name,
+	                    int32_t x,
+	                    int32_t y,
+	                    uint32_t w,
+	                    uint32_t max_list_items,
+	                    int button_dimension,
+	                    const std::string& label,
+	                    GameSettingsProvider* const settings,
+	                    PlayerSlot id);
+	void rebuild() override;
+	void fill() override;
+	void select_entry() override;
 };
 
 #endif  // WL_UI_FSMENU_DROPDOWNSUPPORT_H

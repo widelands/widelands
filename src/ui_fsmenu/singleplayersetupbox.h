@@ -26,6 +26,7 @@ private:
 	UI::Dropdown<uintptr_t>
 	   init_dropdown_;  /// Select the initialization (Headquarters, Fortified Village etc.)
 	UI::Dropdown<uintptr_t> team_dropdown_;  /// Select the team number
+	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 
 	void subscribe_to_game_settings();
 	void update();
