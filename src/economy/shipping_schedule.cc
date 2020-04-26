@@ -907,17 +907,17 @@ Duration ShippingSchedule::update(Game& game) {
 					break;
 				}
 			}
-			for (const auto& load : ss.load_there) {
+			for (const auto& _load : ss.load_there) {
 				bool found = false;
 				for (auto& pair : cargo_tracker) {
-					if (pair.first == load.first) {
-						pair.second += load.second;
+					if (pair.first == _load.first) {
+						pair.second += _load.second;
 						found = true;
 						break;
 					}
 				}
 				if (!found) {
-					cargo_tracker.push_back(load);
+					cargo_tracker.push_back(_load);
 				}
 			}
 			if (ss.dock == &dock) {
@@ -971,24 +971,24 @@ Duration ShippingSchedule::update(Game& game) {
 						break;
 					}
 				}
-				for (const auto& load : ss.load_there) {
+				for (const auto& _load : ss.load_there) {
 					bool found = false;
 					for (auto& pair : cargo_tracker) {
-						if (pair.first == load.first) {
-							pair.second += load.second;
+						if (pair.first == _load.first) {
+							pair.second += _load.second;
 							found = true;
 							break;
 						}
 					}
 					if (!found) {
-						cargo_tracker.push_back(load);
+						cargo_tracker.push_back(_load);
 					}
 				}
-				uint32_t load = 0;
+				uint32_t _load = 0;
 				for (const auto& pair : cargo_tracker) {
-					load += pair.second;
+					_load += pair.second;
 				}
-				max_load = std::max(max_load, load);
+				max_load = std::max(max_load, _load);
 				if (found_start) {
 					assert(!found_end);
 					assert(ss.dock != ppp.start);
@@ -1200,9 +1200,9 @@ Duration ShippingSchedule::update(Game& game) {
 						}
 						{
 							bool found = false;
-							for (auto& load : it_start->load_there) {
-								if (load.first == ppp.end) {
-									load.second += take;
+							for (auto& _load : it_start->load_there) {
+								if (_load.first == ppp.end) {
+									_load.second += take;
 									found = true;
 									break;
 								}
