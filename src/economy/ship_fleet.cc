@@ -677,6 +677,10 @@ void ShipFleet::act(Game& game, uint32_t) {
 
 	molog("ShipFleet::act\n");
 
+	log("\n\n--- NOCOM ---\n");
+	log_general_info(game);
+	log("\n--- NOCOM ---\n\n");
+
 	// All the work is done by the schedule
 	const Duration next = schedule_.update(game);
 	if (next < endless()) {
@@ -689,6 +693,9 @@ void ShipFleet::log_general_info(const EditorGameBase& egbase) const {
 	MapObject::log_general_info(egbase);
 
 	molog("%" PRIuS " ships and %" PRIuS " ports\n", ships_.size(), ports_.size());
+	molog("Schedule:\n");
+	schedule_.log_general_info(egbase);
+	molog("\n");
 }
 
 constexpr uint8_t kCurrentPacketVersion = 5;

@@ -35,7 +35,7 @@ namespace Widelands {
 
 class EditorGameBase;
 class Game;
-struct MapObjectLoader;
+class MapObjectLoader;
 struct MapObjectSaver;
 class PortDock;
 
@@ -88,6 +88,8 @@ public:
 	void ship_arrived(Game&, Ship&, PortDock&);
 
 	bool empty() const;
+
+	void log_general_info(const EditorGameBase&) const;
 
 	void save(const EditorGameBase&, MapObjectSaver&, FileWrite&) const;
 	void load(FileRead&);
