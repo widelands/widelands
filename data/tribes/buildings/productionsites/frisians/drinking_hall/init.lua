@@ -76,7 +76,6 @@ tribes:new_productionsite_type {
          actions = {
             "call=produce_ration",
             "call=produce_meal",
-            "return=no_stats"
          }
       },
       produce_ration = {

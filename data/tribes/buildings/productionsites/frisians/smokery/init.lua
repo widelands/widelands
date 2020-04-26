@@ -77,7 +77,6 @@ tribes:new_productionsite_type {
          actions = {
             "call=smoke_meat",
             "call=smoke_fish",
-            "return=no_stats"
          },
       },
       smoke_fish = {

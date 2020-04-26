@@ -106,11 +106,10 @@ struct ProductionProgram : public MapObjectProgram {
 	///
 	/// Parameter syntax:
 	///    parameters         ::= return_value [condition_part]
-	///    return_value       ::= Failed | Completed | Skipped | None
+	///    return_value       ::= Failed | Completed | Skipped
 	///    Failed             ::= "failed"
 	///    Completed          ::= "completed"
 	///    Skipped            ::= "skipped"
-	///    None               ::= "no_stats"
 	///    condition_part     ::= when_condition | unless_conition
 	///    when_condition     ::= "when" condition {"and" condition}
 	///    unless_condition   ::= "unless" condition {"or" condition}
@@ -125,10 +124,9 @@ struct ProductionProgram : public MapObjectProgram {
 	///    workers_need_experience ::= "need experience"
 	/// Parameter semantics:
 	///    return_value:
-	///       If return_value is Failed or Completed, the productionsite's
-	///       statistics is updated accordingly. If return_value is Skipped or
-	///       None, the statistics are not affected. But Skipped adds a 10s delay
-	///       before the program is executed again.
+	///       If return_value is Failed, Skipped or Completed, the productionsite's
+	///       statistics is updated accordingly. Failed and Skipped add a 10s delay
+	///       from the time of failure before the same program is attempted again.
 	///    condition:
 	///       A boolean condition that can be evaluated to true or false.
 	///    condition_part:
@@ -247,12 +245,11 @@ struct ProductionProgram : public MapObjectProgram {
 	/// Parameter syntax:
 	///    parameters         ::= program {handling_directive}
 	///    handling_directive ::= "on" Result handling_method
-	///    Result             ::= "failure" | "completion" | "skip" | "no_stats"
+	///    Result             ::= "failure" | "completion" | "skip"
 	///    handling_method    ::= Fail | Complete | Skip | Repeat
 	///    Fail               ::= "fail"
 	///    Ignore             ::= "ignore"
 	///    Repeat             ::= "repeat"
-	///    None               ::= "no_stats"
 	/// Parameter semantics:
 	///    program:
 	///       The name of a program defined in the productionsite.
@@ -274,8 +271,7 @@ struct ProductionProgram : public MapObjectProgram {
 	///         program (with the same effect as executing "return=skipped").
 	///       * If handling_method is "repeat", the command is repeated.
 	///       * If handling_method is None the called program continues normal,
-	///         but no statistics are calculated (with the same effect as
-	///         executing "return=no_stats")
+	///         but no statistics are calculated
 	struct ActCall : public Action {
 		ActCall(const std::vector<std::string>& arguments, const ProductionSiteDescr&);
 		void execute(Game&, ProductionSite&) const override;

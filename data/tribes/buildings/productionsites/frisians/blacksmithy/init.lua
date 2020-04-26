@@ -97,7 +97,6 @@ tribes:new_productionsite_type {
             "call=produce_8",
             "call=produce_7",
             "call=produce_6",
-            "return=no_stats",
          },
       },
       produce_1 = {
