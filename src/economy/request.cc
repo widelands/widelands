@@ -122,6 +122,7 @@ void Request::read(FileRead& fr,
 				}
 			}
 
+			// Overwrite initial economy because our WareWorker type may have changed
 			if (economy_) {
 				economy_->remove_request(*this);
 			}

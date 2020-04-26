@@ -458,6 +458,9 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 
 				uint32_t nr_requests = fr.unsigned_32();
 				while (nr_requests--) {
+					// We habe no information regarding the index or WareWorker type yet.
+					// Initialize with default values which will be overridden by read().
+					// read() will also take care of adding the request to the correct economy.
 					pw.requests.push_back(new Request(warehouse, 0, &Warehouse::request_cb, wwWORKER));
 					pw.requests.back()->read(fr, game, mol, tribes_lookup_table);
 				}
