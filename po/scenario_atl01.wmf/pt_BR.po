@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
+# Cássio Gabriel <p8promo@gmail.com>, 2020
 # Daniel San <daniel1977.br@gmail.com>, 2017
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
@@ -14,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-15 14:44+0000\n"
-"PO-Revision-Date: 2020-04-12 17:32+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-04-22 20:01+0000\n"
+"PO-Revision-Date: 2020-04-19 23:12+0000\n"
+"Last-Translator: Cássio Gabriel <p8promo@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -103,7 +104,7 @@ msgstr "Construa uma fazenda e uma fazenda de raiz escura"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:58
 msgid "Build a mill to make cornmeal and blackroot flour"
-msgstr "Construa um moinho para fazer farinha de milho e de raiz escura"
+msgstr "Construa um moinho para fazer farinha de milho e farinha de raiz escura"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:59
 msgid "Build a well"
@@ -111,7 +112,7 @@ msgstr "Construa um poço"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:60
 msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
-msgstr "Construa uma Padaria para assar pães com farinha de milho, farinha de raiz escura e água"
+msgstr "Construa uma padaria para assar pães com farinha de milho, farinha de raiz escura e água"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:61
 msgid "Build a hunter’s house to get raw meat"
@@ -146,7 +147,7 @@ msgid ""
 "tabards are the uniforms of soldiers. The weaving mill needs gold thread and"
 " spider silk as raw material. Spider silk is produced by the spider farm, "
 "while gold thread is produced by the gold spinning mill out of gold."
-msgstr "Os tecelões produzem tecidos e e panos na tecelagem. Tecido é necessário para a construção de alguns edifícios e vestuário, enquanto panos são os uniformes dos soldados. A tecelagem necessita de fio de ouro e teia de aranha como matéria-prima. A teia de aranha é produzido pela fazenda de aranha, enquanto fio de ouro é produzido pela fábrica de fiação de ouro."
+msgstr "Os tecelões produzem tecidos e tabardos na tecelagem. Tecido é necessário para a construção de alguns edifícios e vestuário, enquanto mantos são os uniformes dos soldados. A tecelagem necessita de fio de ouro e teia de aranha como matéria-prima. A teia de aranha é produzida pela fazenda de aranhas, enquanto o fio de ouro é produzido pela fábrica de fiação de ouro."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:74
 msgid "Build a weaving mill"
@@ -174,7 +175,7 @@ msgid ""
 "mine will dig for quartz and diamonds – all of them are precious materials "
 "and very rarely found. It will produce a lot of granite while searching for "
 "them."
-msgstr "Minério de ferro, de ouro e carvão são minerados em suas respectivas minas. A mina de cristal produz quartzo e diamantes – ambos materiais preciosos e encontrados muito raramente. Irá obter muito granito na busca por esses materiais."
+msgstr "Minério de ferro, de ouro e carvão são minerados em suas respectivas minas. A mina de cristal produz quartzo e diamantes – ambos materiais preciosos e encontrados muito raramente. Irá obter-se muito granito na busca por esses materiais."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:86
 msgid ""
@@ -478,7 +479,7 @@ msgid ""
 "swiftly. I will not feel safe on this island as long as we have not seen all"
 " its shores. I brought plenty of good men from Atlantis. The military might "
 "is available. We only need some housing to live in."
-msgstr ""
+msgstr "Que Satul a aqueça, Jundlina! Concordo com a proposta de Loftomor. Precisamos uma boa quantidade de materiais de construção pois necessitamos expandir nosso território rapidamente. Não me sentirei seguro nesta ilha enquanto não tivermos visto todas as suas costas. Eu trouxe vários bons homens de Atlântida. A força militar está pronta. Precisamos somente de algumas casas para viver."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:214
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:254
@@ -550,7 +551,7 @@ msgid ""
 "the bread is tedious and boring; I feel a more industrial approach would be "
 "helpful here. I for one would love to just have fresh bread delivered to my "
 "house every day."
-msgstr ""
+msgstr "Para mim, fazer pão é uma tarefa difícil. Moer as raízes escuras e o milho para fazer a farinha e então fazer o pão é entediante e cansativo. Acho que devíamos procurar uma solução mais industrial, pois não devo ser só eu a gostar de pão recém-feito entregue em minha casa todos os dias."
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:241
@@ -649,7 +650,7 @@ msgid ""
 "find an ample supply of those commodities, we could start producing weapons "
 "and tools; this would help enormously. Of course, we would need smelters, a "
 "weapon smithy, an armor smithy and a toolsmithy. And maybe even more."
-msgstr ""
+msgstr "Que Satul a aqueça, Jundlina. Você já pensou em cavar por recursos nas montanhas que nos cercam? Estamos ficando com pouco quartzo, cristal e diamantes para nossos edifícios. Também seria bom termos mais ferro, ouro e, especialmente, carvão. Se acharmos uma ampla fonte dessas mercadorias, poderemos começar a produzir armas e ferramentas. Isto seria de muita valia. Obviamente, precisaremos de fundidores, de um armeiro, de uma forja de armaduras e de uma ferraria, e talvez de mais coisas."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:305
 msgid "Jundlina Nods"
@@ -660,11 +661,11 @@ msgstr "Jundlina acena"
 msgid ""
 "I have considered this, Sidolus. I think it is about time. We will make this"
 " a priority for now. You shall get your industry soon!"
-msgstr ""
+msgstr "Eu estive considerando isso, Sidolus. Eu acho que já é hora. Vamos fazer disso uma prioridade. Você deve preparar sua indústria logo!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:314
 msgid "Jundlina Writes a Letter"
-msgstr ""
+msgstr "Jundlina escreve uma carta"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:317
@@ -672,14 +673,14 @@ msgid ""
 "I have received word that our mining industry started working. Now that we "
 "are forging weapons, I will send a letter to Sidolus informing him that it’s"
 " time to build a barracks and start recruiting soldiers."
-msgstr ""
+msgstr "Eu recebi a informação de que nossa indústria de mineração começou a funcionar. Agora que estamos forjando armas, enviarei uma carta a Sidolus o informando que é hora de construir um quartel e começar a recrutar soldados."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:327
 msgid ""
 "Today I saw the first recruits gathering in front of the new barracks. If "
 "everything goes well, they should receive their training soon."
-msgstr ""
+msgstr "Hoje vi os primeiros recrutas ajuntando-se na frente do novo quartel. Se tudo ocorrer bem, eles muito em breve já estarão recebendo seu treinamento."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:333
 msgid "Jundlina Summons Sidolus"
@@ -901,7 +902,7 @@ msgid ""
 "some wares too. And this rescue came just in time: Lutas is about to swallow"
 " the rest of this island, the water rises faster by the hour. But we can "
 "make our escape now and start over in some country farther away…"
-msgstr ""
+msgstr "Glória a Satul! O jovem construtor de barcos Ostur conseguiu. Nós temos três embarcações – nunca vi embarcações mais magnificas – com espaço o suficiente para carregar todos nós e algumas mercadorias também. E essa ajuda veio bem a tempo: Lutas está prestes a engolir o resto da ilha, e o mar está em um turbilhão no momento. Porém, podemos escapar e recomeçar em alguma terra bem longe daqui..."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:475
@@ -934,4 +935,4 @@ msgstr "Nós perdemos uma construção para o oceano!"
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
