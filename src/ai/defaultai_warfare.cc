@@ -46,7 +46,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 	const uint32_t my_power = player_statistics.get_modified_player_power(pn);
 
-	// first we scan vicitnity of couple of militarysites to get new enemy sites
+	// first we scan vicinity of couple of militarysites to get new enemy sites
 	// Militarysites rotate (see check_militarysites())
 	int32_t i = 0;
 	for (MilitarySiteObserver mso : militarysites) {
@@ -82,6 +82,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					}
 				}
 			}
+			// TODO(hessenfarmer): we should only include attackable warehouses in the list
 			if (upcast(Warehouse const, wh, immovables.at(j).object)) {
 				const PlayerNumber opn = wh->owner().player_number();
 				if (player_statistics.get_is_enemy(opn)) {
@@ -149,14 +150,15 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			continue;
 		}
 
+		++count;
 		// we test max 12 sites and prefer ones tested more then 1 min ago
 		if (((site->second.last_tested + (enemysites_check_delay_ * 1000)) > gametime && count > 4) ||
 		    count > 12) {
 			continue;
 		}
-		++count;
 
 		site->second.last_tested = gametime;
+		// resetting some values
 		uint16_t enemy_military_presence_in_region_ = 0;
 		uint16_t enemy_military_sites_in_region_ = 0;
 		uint8_t defenders_strength = 0;
@@ -202,7 +204,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			}
 		}
 
-		// if flag is defined it is a good taget
+		// if flag is defined it is a good target
 		if (flag) {
 
 			// Site is still there but not visible for us
@@ -229,7 +231,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 			site->second.is_warehouse = is_warehouse;
 
-			// can we attack:
+			// can we attack (only sites that conquer are attackable):
 			if (is_attackable) {
 				std::vector<Soldier*> attackers;
 				player_->find_attack_soldiers(*flag, &attackers);
@@ -272,6 +274,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				immovables.clear();
 				static std::set<uint32_t> unique_serials;
 				unique_serials.clear();
+				// find militarysites near our target (radius 10) to check enemies power in region
 				map.find_immovables(game(),
 				                    Area<FCoords>(map.get_fcoords(Coords::unhash(site->first)), 10),
 				                    &immovables);
@@ -289,17 +292,13 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 						if (player_statistics.get_is_enemy(bpn)) {  // owned by enemy
 							assert(!player_statistics.players_in_same_team(bpn, pn));
 							if (upcast(MilitarySite const, militarysite, building)) {
+								// adding up enemies soldiers in region but not the one that can't move
+								// out to intercept our attackers
 								enemy_military_presence_in_region_ +=
-								   militarysite->soldier_control()->stationed_soldiers().size();
+								   (militarysite->soldier_control()->stationed_soldiers().size() - 1);
+								// counting enemies buildings
 								++enemy_military_sites_in_region_;
 							}
-							if (upcast(ConstructionSite const, constructionsite, building)) {
-								const BuildingDescr& target_descr = constructionsite->building();
-								if (target_descr.type() == MapObjectType::MILITARYSITE) {
-									++enemy_military_sites_in_region_;
-								}
-							}
-
 							// Warehouses are counted here too as they can host soldiers as well
 							if (upcast(Warehouse const, warehouse, building)) {
 								enemy_military_presence_in_region_ +=
@@ -488,6 +487,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				inputs[110] =
 				   (site->second.attack_soldiers_strength - site->second.defenders_strength) *
 				   std::abs(management_data.get_military_number_at(30)) / 20;
+
+				// add up all scores according to neuronvalues
 				site->second.score = 0;
 				for (uint8_t j = 0; j < kFNeuronBitSize; ++j) {
 					if (management_data.f_neuron_pool[47].get_position(j)) {
@@ -576,6 +577,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	int32_t attackers = player_->find_attack_soldiers(*flag, &soldiers);
 	assert(attackers < 500);
 
+	// we dont want to send all of them so we limit the surplus value above attackgroup
 	const uint8_t attack_group = std::abs(management_data.get_military_number_at(6)) / 10;
 	if (attackers > attack_group) {
 		attackers = attack_group + std::rand() % (attackers - attack_group);
@@ -587,23 +589,26 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		return false;
 	}
 
-	log("%2d: attacking site at %3dx%3d, score %3d, with %2d soldiers, attacking %2d times, after "
-	    "%5d seconds\n",
-	    player_number(), flag->get_position().x, flag->get_position().y, best_score, attackers,
-	    enemy_sites[best_target].attack_counter + 1,
-	    (gametime - enemy_sites[best_target].last_time_attacked) / 1000);
 	std::vector<Serial> attacking_soldiers;
 	const SoldierDescr& descr = soldiers.front()->descr();
-	for (int a = 0; a < attackers; ++a) {
-		// TODO(Nordfriese): We could now choose the soldiers we want to send
-		if (soldiers[a]->get_current_health() <
-		    (descr.get_base_health() +
-		     descr.get_health_incr_per_level() * soldiers[a]->get_health_level() *
-		        (66 + std::abs(management_data.get_military_number_at(20)) / 3) / 100)) {
-			continue;
+	int a = 0; // counter of chosen soldiers
+	int b = 0; // counter of attempts to choose
+	while (a < attackers && b < soldiers.size()) { //choose soldiers until enough or all evaluated
+		// only healthy soldiers are chosen
+		uint32_t maxhealth = ((descr.get_base_health() + descr.get_health_incr_per_level() *
+		                      soldiers[b]->get_health_level()) *
+							  (66 + std::abs(management_data.get_military_number_at(20)) / 3) / 100);
+		if (soldiers[b]->get_current_health() > maxhealth) {
+			attacking_soldiers.push_back(soldiers[b]->serial());
+			++a;
 		}
-		attacking_soldiers.push_back(soldiers[a]->serial());
+		++b;
 	}
+	log("%2d: attacking site at %3dx%3d, score %3d, with %2d soldiers, attacking %2d times, after "
+	    "%5d seconds\n",player_number(), flag->get_position().x, flag->get_position().y, best_score,
+	     a, enemy_sites[best_target].attack_counter + 1,
+	    (gametime - enemy_sites[best_target].last_time_attacked) / 1000);
+
 	game().send_player_enemyflagaction(*flag, player_number(), attacking_soldiers);
 	assert(1 <
 	       player_->vision(Map::get_index(flag->get_building()->get_position(), map.get_width())));
