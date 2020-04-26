@@ -282,6 +282,7 @@
 - Hide economy setting when default target quantity is 0 (#3855) (for atlantean blackroot flour)
 - Allow preserving wares left in buildings when dismantling or enhancing (#3844)
 - Allow setting economy targets to ∞ (#3837)
+- Removed `return=no_stats` from productionsite programs (#3865)
 
 
 ### User Interface
@@ -449,6 +450,7 @@
 - Add missing entries to buildcat.py (#3814)
 - Fix wrong textdomain for some strings (#3853)
 - Handle missing locale dir on Windows (#3757)
+- Fix transifex issues (#3875)
 
 
 ### Help and Documentation
@@ -633,6 +635,7 @@
 - Fix packaging for Focal and #3783
 - Fix travis MacOS builds (#3848): On Travis MacOS, gettext needs to be added to the PATH and some CMake CXX and linker flags have to be set because brew force-linking is no longer allowed for whatever reason
 - Fix travis failure on gcc-9.1_debug (#3861)
+- Improve SDL2 detection on modern systems (#3872)
 
 
 ### Other Issues
