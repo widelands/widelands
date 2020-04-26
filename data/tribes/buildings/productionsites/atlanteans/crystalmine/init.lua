@@ -165,7 +165,7 @@ tribes:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Crystal",
+      title = _"No Crystals",
       heading = _"Main Crystal Vein Exhausted",
       message =
          pgettext("atlanteans_building", "This crystal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it."),

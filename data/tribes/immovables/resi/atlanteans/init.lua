@@ -134,7 +134,7 @@ tribes:new_immovable_type {
    msgctxt = "resource_indicator",
    name = "atlanteans_resi_stones_1",
    -- TRANSLATORS: This is a resource name used in lists of resources
-   descname = pgettext("resource_indicator", "Some Precious Stones"),
+   descname = pgettext("resource_indicator", "Some Crystals"),
    helptext_script = dirname .. "../helptexts/stones_1.lua",
    icon = dirname .. "pics/stone_few.png",
    attributes = { "resi" },
@@ -238,7 +238,7 @@ tribes:new_immovable_type {
    msgctxt = "resource_indicator",
    name = "atlanteans_resi_stones_2",
    -- TRANSLATORS: This is a resource name used in lists of resources
-   descname = pgettext("resource_indicator", "A Lot of Precious Stones"),
+   descname = pgettext("resource_indicator", "A Lot of Crystals"),
    helptext_script = dirname .. "../helptexts/stones_2.lua",
    icon = dirname .. "pics/stone_much.png",
    attributes = { "resi" },
