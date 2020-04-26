@@ -73,7 +73,6 @@ tribes:new_productionsite_type {
             "call=brew_mead",
             "call=brew_beer",
             "call=brew_mead_2",
-            "return=no_stats"
          }
       },
       -- 2 identical programs for mead to prevent unnecessary skipping penalty

@@ -60,7 +60,6 @@ tribes:new_productionsite_type {
             "call=smoke_fish",
             "call=smoke_meat",
             "call=smoke_fish_2",
-            "return=no_stats"
          }
       },
       smoke_meat = {
