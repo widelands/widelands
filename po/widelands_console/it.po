@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-22 20:01+0000\n"
-"PO-Revision-Date: 2020-03-27 21:34+0000\n"
+"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"PO-Revision-Date: 2020-04-24 21:23+0000\n"
 "Last-Translator: Filippo Montano\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -107,13 +107,13 @@ msgstr "--rolling_autosave=[...]\nUtilizza tutti questi file per avere dei salva
 msgid ""
 " --metaserver=[...]\n"
 "                      Connect to a different metaserver for internet gaming."
-msgstr "--metaserver=[...]\nConnetti a un metaserver differente per giocare su Internet"
+msgstr "--metaserver=[...]\nConnetti a un metaserver differente per giocare su Internet."
 
 #: ../../src/wlapplication_messages.cc:83
 msgid ""
 " --metaserverport=[...]\n"
 "                      Port number of the metaserver for internet gaming."
-msgstr "--metaserverport=[...]\nPorta del metaserver per giocare su Internet"
+msgstr "--metaserverport=[...]\nPorta del metaserver per giocare su Internet."
 
 #: ../../src/wlapplication_messages.cc:87
 msgid " --nosound            Starts the game with sound disabled."
