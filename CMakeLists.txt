@@ -273,6 +273,28 @@ wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=return-type")
 wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=shadow")
 wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=uninitialized")
 
+# Cross-compile-unit optimization not supported by gcc with debug on!
+# Therefore, this may only be done with Release builds.
+if(CMAKE_BUILD_TYPE STREQUAL "Release")
+  # Only tested on Linux. Might work also on other platforms.
+  # If tested and found good, remove this check
+  if (CMAKE_SYSTEM MATCHES "Linux")
+    # Usage of -flto tested only with gcc 8.3 and 9.3 (2020-04); when in doubt, leaving it out..
+    if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 8.0))
+      #
+      # The execution jumps between compile units rather often. -flot allows optimization across
+      # comple units. Binary size reduced by >15% on tested environments. This does not directly
+      # translate to execution speed, but might still be noticeable.
+      #
+      # This is not related to -O2 or -O3 discussion, and not enable by either.
+      #
+      # If using lto, it needs to happen both during compile and link, else no benefits.
+      wl_add_flag(WL_GENERIC_CXX_FLAGS "-flto")
+      SET(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -flto")
+    endif()
+  endif(CMAKE_SYSTEM MATCHES "Linux")
+endif(CMAKE_BUILD_TYPE STREQUAL "Release")
+
 IF (WIN32)
   add_definitions(-DMINGW_HAS_SECURE_API -DWIN32_LEAN_AND_MEAN -D__STDC_FORMAT_MACROS -D__USE_MINGW_ANSI_STDIO)
   if (CMAKE_SIZEOF_VOID_P EQUAL 4)
