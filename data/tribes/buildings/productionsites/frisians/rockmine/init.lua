@@ -92,7 +92,6 @@ tribes:new_productionsite_type {
             "sleep=38000",
             "call=mine_produce",
             "call=mine_produce",
-            "return=no_stats"
          }
       },
       mine_produce = {

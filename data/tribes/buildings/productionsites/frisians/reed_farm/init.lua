@@ -70,7 +70,6 @@ tribes:new_productionsite_type {
          actions = {
             "call=plant_reed",
             "call=harvest_reed",
-            "return=no_stats"
          }
       },
       plant_reed = {
