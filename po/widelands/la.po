@@ -6,14 +6,15 @@
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Leonard Noack, 2016
-# Mark F <radick334@yahoo.com>, 2016
+# mfluehr <radick334@yahoo.com>, 2016
+# mfluehr <radick334@yahoo.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-22 20:01+0000\n"
-"PO-Revision-Date: 2020-04-22 20:03+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"PO-Revision-Date: 2020-04-25 00:49+0000\n"
+"Last-Translator: mfluehr <radick334@yahoo.com>\n"
 "Language-Team: Latin (http://www.transifex.com/widelands/widelands/language/la/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -88,23 +89,23 @@ msgstr "Non satis spatium"
 
 #: ../../data/scripting/infrastructure.lua:246
 msgid "No rocks nearby"
-msgstr ""
+msgstr "Nulla saxa in proximo"
 
 #: ../../data/scripting/infrastructure.lua:246
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr ""
+msgstr "Nulla saxa prope locum initiale tuum sunt. Itaque suscipis materias additas oeconomiae tuae."
 
 #: ../../data/scripting/infrastructure.lua:251
 msgid "No trees nearby"
-msgstr ""
+msgstr "Nullae arbores in proximo"
 
 #: ../../data/scripting/infrastructure.lua:251
 msgid ""
 "There are no trees near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr ""
+msgstr "Nullae arbores prope locum initiale tuum sunt. Itaque suscipis materias additas oeconomiae tuae."
 
 #: ../../data/scripting/messages.lua:51 ../../data/scripting/messages.lua:53
 #: ../../src/wui/game_message_menu.cc:68 ../../src/wui/game_summary.cc:104
@@ -113,11 +114,11 @@ msgstr "Status"
 
 #: ../../data/scripting/messages.lua:186
 msgid "New Objective"
-msgstr ""
+msgstr "Propositum Novum"
 
 #: ../../data/scripting/messages.lua:188
 msgid "New Objectives"
-msgstr ""
+msgstr "Proposita Nova"
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
@@ -300,11 +301,11 @@ msgstr "Instrumenta"
 #: ../../src/editor/editorinteractive.cc:119
 #: ../../src/wui/interactive_gamebase.cc:83
 msgid "Show / Hide"
-msgstr ""
+msgstr "Ostende / Occulta"
 
 #: ../../src/editor/editorinteractive.cc:132
 msgid "Tool size"
-msgstr ""
+msgstr "Spatium instrumenti"
 
 #: ../../src/editor/editorinteractive.cc:144
 msgid "Undo"
@@ -368,23 +369,23 @@ msgstr "Editorem finire"
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:247
 msgid "Change height"
-msgstr ""
+msgstr "Muta altitudinem"
 
 #. * TRANSLATORS: Tooltip for the change height tool in the editor
 #: ../../src/editor/editorinteractive.cc:250
 msgid "Change the terrain height"
-msgstr ""
+msgstr "Muta altitudinem agri"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:256
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:92
 msgid "Random height"
-msgstr ""
+msgstr "Altitudo fortuita"
 
 #. * TRANSLATORS: Tooltip for the random height tool in the editor
 #: ../../src/editor/editorinteractive.cc:259
 msgid "Set the terrain height to random values"
-msgstr ""
+msgstr "Statue altitudinem agri fortuitam"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:265
@@ -392,34 +393,34 @@ msgstr ""
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:86
 #: ../../src/wui/minimap.cc:131
 msgid "Terrain"
-msgstr ""
+msgstr "Ager"
 
 #. * TRANSLATORS: Tooltip for the terrain tool in the editor
 #: ../../src/editor/editorinteractive.cc:268
 msgid "Change the map’s terrain"
-msgstr ""
+msgstr "Muta agrem tabulae"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:275
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:47
 msgid "Immovables"
-msgstr ""
+msgstr "Immobiles"
 
 #. * TRANSLATORS: Tooltip for the immovables tool in the editor
 #: ../../src/editor/editorinteractive.cc:278
 msgid "Add or remove immovables"
-msgstr ""
+msgstr "Adde vel remove immobiles"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:284
 #: ../../src/editor/ui_menus/tool_place_critter_options_menu.cc:46
 msgid "Animals"
-msgstr "Animales"
+msgstr "Animalia"
 
 #. * TRANSLATORS: Tooltip for the animals tool in the editor
 #: ../../src/editor/editorinteractive.cc:287
 msgid "Add or remove animals"
-msgstr ""
+msgstr "Adde vel remove animalia"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:294
@@ -433,17 +434,17 @@ msgstr "Materies"
 #. * TRANSLATORS: Tooltip for the resources tool in the editor
 #: ../../src/editor/editorinteractive.cc:297
 msgid "Set or change resources"
-msgstr ""
+msgstr "Statue vel muta materies"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:300
 msgid "Port spaces"
-msgstr ""
+msgstr "Spatia portuum"
 
 #. * TRANSLATORS: Tooltip for the port spaces tool in the editor
 #: ../../src/editor/editorinteractive.cc:303
 msgid "Add or remove port spaces"
-msgstr ""
+msgstr "Adde vel remove spatia portuum"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:309
@@ -459,7 +460,7 @@ msgstr ""
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:315
 msgid "Map origin"
-msgstr ""
+msgstr "Origo tabulae"
 
 #. * TRANSLATORS: Tooltip for the map origin tool in the editor
 #: ../../src/editor/editorinteractive.cc:318
@@ -471,17 +472,17 @@ msgstr "Pone positionem cui (0,0) coordinatae erint. Ibi superior sinister angul
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:325
 msgid "Map size"
-msgstr ""
+msgstr "Spacium tabulae"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
 #: ../../src/editor/editorinteractive.cc:328
 msgid "Change the map’s size"
-msgstr ""
+msgstr "Muta spatium tabulae"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:331
 msgid "Information"
-msgstr ""
+msgstr "Nuntiatio"
 
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
 #: ../../src/editor/editorinteractive.cc:334
@@ -497,12 +498,12 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:392
 #: ../../src/wui/interactive_gamebase.cc:215
 msgid "Hide Building Spaces"
-msgstr ""
+msgstr "Occulta spatia aedificationem"
 
 #: ../../src/editor/editorinteractive.cc:392
 #: ../../src/wui/interactive_gamebase.cc:215
 msgid "Show Building Spaces"
-msgstr ""
+msgstr "Ostende spatia aedificationem"
 
 #: ../../src/editor/editorinteractive.cc:395
 #: ../../src/wui/interactive_gamebase.cc:218
@@ -514,11 +515,11 @@ msgstr ""
 #. the map grid is shown
 #: ../../src/editor/editorinteractive.cc:399
 msgid "Hide Grid"
-msgstr ""
+msgstr "Occulta reticulum"
 
 #: ../../src/editor/editorinteractive.cc:399
 msgid "Show Grid"
-msgstr ""
+msgstr "Ostende reticulum"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables (trees,
@@ -2853,7 +2854,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:41
 msgid "Choose a campaign"
-msgstr ""
+msgstr "Elige contentionem"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:48
 #: ../../src/ui_fsmenu/loadgame.cc:86
@@ -2888,7 +2889,7 @@ msgstr ""
 #. * TRANSLATORS: Header for campaign name
 #: ../../src/ui_fsmenu/campaigndetails.cc:47
 msgid "Campaign"
-msgstr ""
+msgstr "Contentio"
 
 #. * TRANSLATORS: Header for campaign description
 #: ../../src/ui_fsmenu/campaigndetails.cc:69
@@ -3258,7 +3259,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:52
 msgid "Choose a map"
-msgstr ""
+msgstr "Elige tabulam"
 
 #: ../../src/ui_fsmenu/mapselect.cc:91
 msgid "Show all maps"
@@ -3283,11 +3284,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/multiplayer.cc:40
 msgid "Choose game type"
-msgstr ""
+msgstr "Elige formam ludi"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:46
 msgid "Online Game"
-msgstr ""
+msgstr "Ludus interretialis"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:47
 msgid "LAN / Direct IP"
@@ -3295,11 +3296,11 @@ msgstr "LAN / Direct IP"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:49 ../../src/wui/login_box.cc:32
 msgid "Online Game Settings"
-msgstr ""
+msgstr "Optiones ludi interretialis"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:37
 msgid "Begin Network Game"
-msgstr ""
+msgstr "Incipe ludum reticulationis"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:46
 msgid "List of games in your local network:"
@@ -3327,7 +3328,7 @@ msgstr "nemo"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:124
 msgid "Host"
-msgstr ""
+msgstr "Susceptor"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:126
 msgid "State"
@@ -3349,7 +3350,7 @@ msgstr "Clausum"
 #: ../../src/ui_fsmenu/netsetup_lan.cc:236
 msgctxt "game_state"
 msgid "Unknown"
-msgstr ""
+msgstr "Ignotum"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:285 ../../src/wui/login_box.cc:166
 msgid ""
@@ -3367,11 +3368,11 @@ msgstr "Lingua"
 
 #: ../../src/ui_fsmenu/options.cc:122
 msgid "Window Size"
-msgstr ""
+msgstr "Spatium fenestrae"
 
 #: ../../src/ui_fsmenu/options.cc:127
 msgid "Fullscreen"
-msgstr ""
+msgstr "Fenestra maxima"
 
 #: ../../src/ui_fsmenu/options.cc:128
 msgid "Grab Input"
@@ -3455,7 +3456,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:238
 msgid "Sound"
-msgstr ""
+msgstr "Sonores"
 
 #: ../../src/ui_fsmenu/options.cc:239
 msgid "Saving"
@@ -3526,7 +3527,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/scenario_select.cc:137
 msgid "Tutorial Name"
-msgstr ""
+msgstr "Nomen tutorialis"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:139
 msgid "The number of this scenario in the campaign"
@@ -3548,13 +3549,13 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/scenariodetails.cc:46
 msgid "Tutorial"
-msgstr ""
+msgstr "Tutorial"
 
 #. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:55 ../../src/wui/mapdetails.cc:125
 msgid "Author"
-msgstr ""
+msgstr "Auctor"
 
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
@@ -3564,7 +3565,7 @@ msgstr ""
 #. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:58 ../../src/wui/mapdetails.cc:128
 msgid "Authors"
-msgstr ""
+msgstr "Auctores"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:38
 msgid "New Game"
@@ -3599,7 +3600,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1319
 msgid "Invalid Address"
-msgstr ""
+msgstr "Litterae electronicae inefficaces"
 
 #: ../../src/wlapplication.cc:1320
 msgid "The entered hostname or address is invalid and can’t be connected to."
@@ -3611,15 +3612,15 @@ msgstr "Aedificium deleatur?"
 
 #: ../../src/wui/actionconfirm.cc:187
 msgid "Do you really want to destroy this building?"
-msgstr ""
+msgstr "Num vis aedifium delere?"
 
 #: ../../src/wui/actionconfirm.cc:244
 msgid "Dismantle building?"
-msgstr ""
+msgstr "Aedificium exarmatur?"
 
 #: ../../src/wui/actionconfirm.cc:245
 msgid "Do you really want to dismantle this building?"
-msgstr ""
+msgstr "Num vis aedificium exarmare?"
 
 #: ../../src/wui/actionconfirm.cc:247 ../../src/wui/actionconfirm.cc:306
 msgid "Preserve wares"
@@ -3633,7 +3634,7 @@ msgstr ""
 
 #: ../../src/wui/actionconfirm.cc:298
 msgid "Enhance building?"
-msgstr ""
+msgstr "Aedificium cumuletur?"
 
 #: ../../src/wui/actionconfirm.cc:300 ../../src/wui/actionconfirm.cc:304
 msgid "Do you really want to enhance this building?"
@@ -3643,7 +3644,7 @@ msgstr ""
 #. building
 #: ../../src/wui/actionconfirm.cc:302
 msgid "Be careful if the enemy is near!"
-msgstr ""
+msgstr "Cave! Inimicus est proximus!"
 
 #: ../../src/wui/actionconfirm.cc:310
 msgid ""
@@ -3653,17 +3654,17 @@ msgstr ""
 
 #: ../../src/wui/actionconfirm.cc:360
 msgid "Sink the ship?"
-msgstr ""
+msgstr "Navis caedeatur?"
 
 #. * TRANSLATORS: %s is a ship name
 #: ../../src/wui/actionconfirm.cc:362
 #, c-format
 msgid "Do you really want to sink %s?"
-msgstr ""
+msgstr "Num vis navem %s caedeatur?"
 
 #: ../../src/wui/actionconfirm.cc:398
 msgid "Cancel expedition?"
-msgstr ""
+msgstr "Expeditio dimitteatur?"
 
 #: ../../src/wui/actionconfirm.cc:399
 msgid "Do you really want to cancel the active expedition?"
@@ -3688,7 +3689,7 @@ msgstr "Impetum incipere"
 
 #: ../../src/wui/attack_box.cc:226
 msgid "Attackers:"
-msgstr ""
+msgstr "Oppugnatores:"
 
 #: ../../src/wui/attack_box.cc:233
 msgid "Click on a soldier to remove him from the list of attackers"
@@ -3755,33 +3756,33 @@ msgstr ""
 #: ../../src/wui/building_statistics_menu.cc:150
 #: ../../src/wui/building_statistics_menu.cc:160
 msgid "Show previous building"
-msgstr ""
+msgstr "Ostende aedificium praeteritum"
 
 #: ../../src/wui/building_statistics_menu.cc:145
 #: ../../src/wui/building_statistics_menu.cc:155
 #: ../../src/wui/building_statistics_menu.cc:165
 msgid "Show next building"
-msgstr ""
+msgstr "Ostende aedificium proximum"
 
 #: ../../src/wui/building_statistics_menu.cc:298
 msgid "Small buildings"
-msgstr ""
+msgstr "Aedifica parva"
 
 #: ../../src/wui/building_statistics_menu.cc:300
 msgid "Medium buildings"
-msgstr ""
+msgstr "Aedifica mediocra"
 
 #: ../../src/wui/building_statistics_menu.cc:302
 msgid "Big buildings"
-msgstr ""
+msgstr "Aedificia magna"
 
 #: ../../src/wui/building_statistics_menu.cc:304
 msgid "Mines"
-msgstr ""
+msgstr "Metalla"
 
 #: ../../src/wui/building_statistics_menu.cc:306
 msgid "Ports"
-msgstr ""
+msgstr "Portus"
 
 #. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
@@ -3801,7 +3802,7 @@ msgstr ""
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
 #: ../../src/wui/buildingwindow.cc:230
 msgid "Continue"
-msgstr ""
+msgstr "Perge"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
 #: ../../src/wui/buildingwindow.cc:232
@@ -3824,7 +3825,7 @@ msgstr "Delere"
 #: ../../src/wui/buildingwindow.cc:292 ../../src/wui/buildingwindow.cc:293
 #: ../../src/wui/buildingwindow.cc:299
 msgid "Dismantle"
-msgstr ""
+msgstr "Exarma"
 
 #: ../../src/wui/buildingwindow.cc:293 ../../src/wui/buildingwindow.cc:303
 msgid "Returns:"
