@@ -1,12 +1,10 @@
 #ifndef WL_UI_FSMENU_DROPDOWNSUPPORT_H
 #define WL_UI_FSMENU_DROPDOWNSUPPORT_H
-
 #include <memory>
 #include <string>
 
 #include "logic/game_settings.h"
 #include "ui_basic/dropdown.h"
-class GameSettings;
 
 template <typename T> class DropDownSupport {
 public:
@@ -40,13 +38,11 @@ public:
 	virtual ~DropDownSupport() {
 	}
 
-	//	UI::Dropdown<T>* get_dropdown() {
-	//		return dropdown_;
-	//	}
+	UI::Dropdown<T>* get_dropdown() {
+		return &dropdown_;
+	}
 
 	virtual void rebuild() = 0;
-	virtual void fill() = 0;
-	virtual void select_entry() = 0;
 
 	void set_visible(bool visible) {
 		dropdown_.set_visible(visible);
@@ -61,7 +57,7 @@ protected:
 	PlayerSlot const id_;
 };
 
-class TribeDropdownSupport : DropDownSupport<std::string> {
+class TribeDropdownSupport : public DropDownSupport<std::string> {
 public:
 	TribeDropdownSupport(UI::Panel* parent,
 	                     const std::string& name,
@@ -74,11 +70,9 @@ public:
 	                     GameSettingsProvider* const settings,
 	                     PlayerSlot id);
 	void rebuild() override;
-	void fill() override;
-	void select_entry() override;
 };
 
-class TypeDropdownSupport : DropDownSupport<std::string> {
+class TypeDropdownSupport : public DropDownSupport<std::string> {
 public:
 	TypeDropdownSupport(UI::Panel* parent,
 	                    const std::string& name,
@@ -91,8 +85,26 @@ public:
 	                    GameSettingsProvider* const settings,
 	                    PlayerSlot id);
 	void rebuild() override;
-	void fill() override;
-	void select_entry() override;
+
+private:
+	void fill();
+	void select_entry();
+};
+
+class InitDropdownSupport : public DropDownSupport<uintptr_t> {
+public:
+	InitDropdownSupport(UI::Panel* parent,
+	                    const std::string& name,
+	                    int32_t x,
+	                    int32_t y,
+	                    uint32_t w,
+	                    uint32_t max_list_items,
+	                    int button_dimension,
+	                    const std::string& label,
+	                    GameSettingsProvider* const settings,
+	                    PlayerSlot id);
+
+	void rebuild() override;
 };
 
 #endif  // WL_UI_FSMENU_DROPDOWNSUPPORT_H

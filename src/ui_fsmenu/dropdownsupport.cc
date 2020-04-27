@@ -2,7 +2,9 @@
 
 #include "ai/computer_player.h"
 #include "base/i18n.h"
+#include "graphic/playercolor.h"
 #include "logic/game_settings.h"
+#include "map_io/map_loader.h"
 
 #define AI_NAME_PREFIX "ai" AI_NAME_SEPARATOR
 
@@ -30,11 +32,67 @@ TribeDropdownSupport::TribeDropdownSupport(UI::Panel* parent,
                                   settings,
                                   id) {
 }
+
+/// Rebuild the tribes dropdown from the server settings. This will keep the host and client UIs
+/// in sync.
+
 void TribeDropdownSupport::rebuild() {
-}
-void TribeDropdownSupport::fill() {
-}
-void TribeDropdownSupport::select_entry() {
+	const GameSettings& settings = settings_->settings();
+	//	if (tribe_selection_locked_) {
+	//		return;
+	//	}
+	const PlayerSettings& player_setting = settings.players[id_];
+	dropdown_.clear();
+	if (player_setting.state == PlayerSettings::State::kShared) {
+		for (size_t i = 0; i < settings.players.size(); ++i) {
+			if (i != id_) {
+				// Do not add players that are also shared_in or closed.
+				const PlayerSettings& other_setting = settings.players[i];
+				if (!PlayerSettings::can_be_shared(other_setting.state)) {
+					continue;
+				}
+
+				const Image* player_image =
+				   playercolor_image(i, "images/players/player_position_menu.png");
+				assert(player_image);
+				const std::string player_name =
+				   /** TRANSLATORS: This is an option in multiplayer setup for sharing
+				         another player's starting position. */
+				   (boost::format(_("Shared in Player %u")) % static_cast<unsigned int>(i + 1)).str();
+				dropdown_.add(player_name,
+				              boost::lexical_cast<std::string>(static_cast<unsigned int>(i + 1)),
+				              player_image, (i + 1) == player_setting.shared_in, player_name);
+			}
+		}
+		dropdown_.set_enabled(dropdown_.size() > 1);
+	} else {
+		{
+			i18n::Textdomain td("tribes");
+			for (const Widelands::TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
+				dropdown_.add(_(tribeinfo.descname), tribeinfo.name, g_gr->images().get(tribeinfo.icon),
+				              false, tribeinfo.tooltip);
+			}
+		}
+		dropdown_.add(pgettext("tribe", "Random"), "random",
+		              g_gr->images().get("images/ui_fsmenu/random.png"), false,
+		              _("The tribe will be selected at random"));
+		if (player_setting.random_tribe) {
+			dropdown_.select("random");
+		} else {
+			dropdown_.select(player_setting.tribe);
+		}
+	}
+	const bool has_access = true;  // has_tribe_access();
+	if (dropdown_.is_enabled() != has_access) {
+		dropdown_.set_enabled(has_access && dropdown_.size() > 1);
+	}
+	if (player_setting.state == PlayerSettings::State::kClosed ||
+	    player_setting.state == PlayerSettings::State::kOpen) {
+		return;
+	}
+	if (!dropdown_.is_visible()) {
+		dropdown_.set_visible(true);
+	}
 }
 
 TypeDropdownSupport::TypeDropdownSupport(UI::Panel* parent,
@@ -128,4 +186,78 @@ void TypeDropdownSupport::select_entry() {
 			}
 		}
 	}
+}
+
+InitDropdownSupport::InitDropdownSupport(UI::Panel* parent,
+                                         const std::string& name,
+                                         int32_t x,
+                                         int32_t y,
+                                         uint32_t w,
+                                         uint32_t max_list_items,
+                                         int button_dimension,
+                                         const std::string& label,
+                                         GameSettingsProvider* const settings,
+                                         PlayerSlot id)
+   : DropDownSupport<uintptr_t>(parent,
+                                name,
+                                x,
+                                y,
+                                w,
+                                max_list_items,
+                                button_dimension,
+                                label,
+                                UI::DropdownType::kTextualNarrow,
+                                UI::PanelStyle::kFsMenu,
+                                UI::ButtonStyle::kFsMenuSecondary,
+                                settings,
+                                id) {
+}
+
+/// Rebuild the init dropdown from the server settings. This will keep the host and client UIs in
+/// sync.
+void InitDropdownSupport::rebuild() {
+	const GameSettings& settings = settings_->settings();
+	//	if (init_selection_locked_) {
+	//		return;
+	//	}
+
+	dropdown_.clear();
+	const PlayerSettings& player_setting = settings.players[id_];
+	if (settings.scenario) {
+		dropdown_.set_label(_("Scenario"));
+		dropdown_.set_tooltip(_("Start type is set via the scenario"));
+	} else if (settings.savegame) {
+		/** Translators: This is a game type */
+		dropdown_.set_label(_("Saved Game"));
+	} else {
+		dropdown_.set_label("");
+		i18n::Textdomain td("tribes");  // for translated initialisation
+		const Widelands::TribeBasicInfo tribeinfo = Widelands::get_tribeinfo(player_setting.tribe);
+		std::set<std::string> tags;
+		if (!settings.mapfilename.empty()) {
+			Widelands::Map map;
+			std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(settings.mapfilename);
+			if (ml) {
+				ml->preload_map(true);
+				tags = map.get_tags();
+			}
+		}
+		for (size_t i = 0; i < tribeinfo.initializations.size(); ++i) {
+			const Widelands::TribeBasicInfo::Initialization& addme = tribeinfo.initializations[i];
+			bool matches_tags = true;
+			for (const std::string& tag : addme.required_map_tags) {
+				if (!tags.count(tag)) {
+					matches_tags = false;
+					break;
+				}
+			}
+			if (matches_tags) {
+				dropdown_.add(_(addme.descname), i, nullptr, i == player_setting.initialization_index,
+				              _(addme.tooltip));
+			}
+		}
+	}
+
+	dropdown_.set_visible(true);
+	dropdown_.set_enabled(settings_->can_change_player_init(id_));
 }

@@ -3,6 +3,7 @@
 
 #include <vector>
 
+#include "dropdownsupport.h"
 #include "logic/game_settings.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
@@ -20,11 +21,14 @@ private:
 	PlayerSlot id_;
 	GameSettingsProvider* const settings_;
 	UI::Button player;
-	UI::Dropdown<std::string>
-	   type_dropdown_;  /// Select who owns the slot (human, AI, open, closed, shared-in).
-	UI::Dropdown<std::string> tribes_dropdown_;  /// Select the tribe or shared_in player.
-	UI::Dropdown<uintptr_t>
-	   init_dropdown_;  /// Select the initialization (Headquarters, Fortified Village etc.)
+	//	UI::Dropdown<std::string>
+	//	   type_dropdown_;  /// Select who owns the slot (human, AI, open, closed, shared-in).
+	TypeDropdownSupport type_;
+	//	UI::Dropdown<std::string> tribes_dropdown_;  /// Select the tribe or shared_in player.
+	TribeDropdownSupport tribe_;
+	//	UI::Dropdown<uintptr_t>
+	//	   init_dropdown_;  /// Select the initialization (Headquarters, Fortified Village etc.)
+	InitDropdownSupport init_;
 	UI::Dropdown<uintptr_t> team_dropdown_;  /// Select the team number
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 
