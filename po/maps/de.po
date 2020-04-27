@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-22 20:01+0000\n"
-"PO-Revision-Date: 2020-04-22 20:02+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"PO-Revision-Date: 2020-04-23 20:04+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -333,15 +333,15 @@ msgstr "Große Bauflächen sind auf diesen kleinen Inseln selten. Setze auf dies
 
 #: ../../data/maps/Astoria 2.R.wmf/elemental:8
 msgid "Astoria 2.R"
-msgstr ""
+msgstr "Astoria 2.R"
 
 #: ../../data/maps/Astoria 2.R.wmf/elemental:10
 msgid "Long, economic play in beautyfull land, try every player!!"
-msgstr ""
+msgstr "Langes, wirtschaftliches Spiel in schöner Landschaft, probiere jeden Spieler aus!"
 
 #: ../../data/maps/Astoria 2.R.wmf/elemental:9
 msgid "pbuczny@gmail.com – edited by Nordfriese"
-msgstr ""
+msgstr "pbuczny@gmail.com – edited by Nordfriese"
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
@@ -430,7 +430,7 @@ msgstr "Vier Stämme  kämpfen jeweils mit ihrem nächstgelegenen Nachbarn, um a
 
 #: ../../data/maps/Dolomites_v3.wmf/elemental:8
 msgid "Dolomites 3.0"
-msgstr ""
+msgstr "Dolomiten 3.0"
 
 #: ../../data/maps/Dolomites_v3.wmf/elemental:10
 msgid ""
@@ -439,7 +439,7 @@ msgid ""
 "reasonable reconstruction of the area delimited by Cortina d'Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
 " to the death with your enemies, it may as well be in a beautiful place."
-msgstr ""
+msgstr "Das Juwel der Alpen, die Dolomiten Berglandschaft wurde für Ihre ursprüngliche Schönheit zum Weltkulturerbe erklärt. Diese Karte ist eine so genau wie mögliche Rekonstruktion der Gegend zwischen Cortina d'Ampezzo im Nordosten und Canazei im Südwesten. Wenn du dich deinen Feinden in einem Duell auf Leben und Tod stellen musst, darf das auch an einem schönen Ort sein."
 
 #: ../../data/maps/Dolomites_v3.wmf/elemental:11
 msgid ""
@@ -449,7 +449,7 @@ msgid ""
 " army. Use the terrain to your advantage - chop all trees and expand "
 "wherever you can; it's the only way to find all the precious farm spaces - "
 "suggested teams: red+orange+blue+violet"
-msgstr ""
+msgstr "- Es gibt eine Menge ebene Flächen  in den Bergen. Unglücklicherweise sind die meisten davon senkrecht. Nutze den wenigen zur Verfügung stehenden Platz weise. - Eine Festung am Beginn eines engen Bergpasses kann ein formidables Hindernis für eine gegenerische  Armee sein. Nutze das Gelände zu deinem Vorteil - Fälle alle Bäume und expandiere wo immer du kannst; das ist der einzige Weg alle kostbaren Bauernhofplätze zu finden. - Vorgeschlagene Teams: rot + orange + blau + violet"
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -467,21 +467,21 @@ msgstr ""
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:10
 msgid "Equal starting conditions for three players."
-msgstr ""
+msgstr "Identische Startposition für 3 Spieler. "
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:11
 msgid "v0.2"
-msgstr ""
+msgstr "v0.2"
 
 #: ../../data/maps/Europa 1.1.wmf/elemental:10
 msgid ""
 "A huge europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
 "Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
-msgstr ""
+msgstr "Eine große Europa Karte. Blau = Schweden, Rot = Italien, Gelb = Spanien, Grün = Türkei, Schwarz = Russland, Orange = England, Lila = Frankreich, Weiß = Polen"
 
 #: ../../data/maps/Europa 1.1.wmf/elemental:8
 msgid "Europa 1.1"
-msgstr ""
+msgstr "Europa 1.1"
 
 #: ../../data/maps/Fellowships_v2.wmf/elemental:8
 msgid "Fellowships"
@@ -674,7 +674,7 @@ msgstr ""
 
 #: ../../data/maps/Long, long v2.wmf/elemental:8 way
 msgid "Long, long way v2"
-msgstr ""
+msgstr "Ein langer, langer Weg v2"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
 msgid "Island Hopping"
@@ -711,7 +711,7 @@ msgstr "Zwei Geheimnisse umwehen diese Landschaft: Wer hat dieses unglaublich gr
 
 #: ../../data/maps/No challenge metal v2.wmf/elemental:8
 msgid "No metal challenge v2"
-msgstr ""
+msgstr "Kein Metall Herrausforderung v2"
 
 #: ../../data/maps/No challenge metal v2.wmf/elemental:10
 msgid ""
