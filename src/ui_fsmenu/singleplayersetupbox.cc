@@ -110,38 +110,33 @@ SinglePlayerPlayerGroup::SinglePlayerPlayerGroup(UI::Panel* const parent,
 	add(&init_dropdown_, UI::Box::Resizing::kFillSpace);
 	add(&team_dropdown_);
 	add_space(0);
-
-	subscribe_to_game_settings();
+	subscriber_ = Notifications::subscribe<NoteGameSettings>(
+	   [this](const NoteGameSettings& note) { on_gamesettings_updated(note); });
 }
 
-void SinglePlayerPlayerGroup::subscribe_to_game_settings() {
-	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& note) {
-		log("going to update?\n");
-		if (settings_->settings().players.empty()) {
-			// No map/savegame yet
-			return;
-		}
-		log("yes\n");
-		switch (note.action) {
-		case NoteGameSettings::Action::kMap:
-			// We don't care about map updates, since we receive enough notifications for the
-			// slots.
-			log("map\n");
+void SinglePlayerPlayerGroup::on_gamesettings_updated(const NoteGameSettings& note) {
+	if (settings_->settings().players.empty()) {
+		// No map/savegame yet
+		return;
+	}
+	switch (note.action) {
+	case NoteGameSettings::Action::kMap:
+		// We don't care about map updates, since we receive enough notifications for the
+		// slots. JM: maybe need to change this back...
+		update();
+		break;
+	case NoteGameSettings::Action::kUser:
+		// We might have moved away from a slot, so we need to update the previous slot too.
+		// Since we can't track the slots here, we just update everything.
+		update();
+		break;
+	default:
+		if (id_ == note.position ||
+		    (id_ < settings_->settings().players.size() &&
+		     settings_->settings().players.at(id_).state == PlayerSettings::State::kShared)) {
 			update();
-			break;
-		case NoteGameSettings::Action::kUser:
-			// We might have moved away from a slot, so we need to update the previous slot too.
-			// Since we can't track the slots here, we just update everything.
-			update();
-			break;
-		default:
-			if (id_ == note.position ||
-			    (id_ < settings_->settings().players.size() &&
-			     settings_->settings().players.at(id_).state == PlayerSettings::State::kShared)) {
-				update();
-			}
 		}
-	});
+	}
 }
 
 /// Refresh all user interfaces

@@ -28,6 +28,7 @@ private:
 
 	UI::Textarea players_;
 	SinglePlayerSetupBox player_setup;
+	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 
 	void add_behaviour_to_widgets();
 	bool select_map();

@@ -28,8 +28,8 @@ private:
 	UI::Dropdown<uintptr_t> team_dropdown_;  /// Select the team number
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 
-	void subscribe_to_game_settings();
 	void update();
+	void on_gamesettings_updated(const NoteGameSettings& note);
 	// own class?!
 	void rebuild_type_dropdown(const GameSettings& settings);
 	void fill_type_dropdown(const GameSettings& settings);
