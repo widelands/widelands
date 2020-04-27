@@ -331,6 +331,7 @@ TrainingSite::TrainingSite(const TrainingSiteDescr& d)
 	trainee_general_lower_bound_ = 2;
 	repeated_layoff_ctr_ = 0;
 	repeated_layoff_inc_ = false;
+	recent_capacity_increase_ = false;
 
 	if (d.get_train_health())
 		init_kick_state(TrainingAttribute::kHealth, d);
