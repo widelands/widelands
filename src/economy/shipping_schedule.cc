@@ -736,13 +736,16 @@ Duration ShippingSchedule::update(Game& game) {
 		Ship* ship;
 		uint32_t score;
 		uint32_t capacity;
-		Duration eta, detour;
+		Duration eta;
+		Duration detour;
 
 		static inline uint32_t calc_score(uint32_t c, Duration eta, Duration detour) {
-			return eta > kHorriblyLongDuration ? 0 : kMinScoreForImmediateAcceptFactor * c *
-			                                            kHorriblyLongDuration * kHorriblyLongDuration /
-			                                            (std::max(eta, kWonderfullyShortDuration) *
-			                                             std::max(detour, kWonderfullyShortDuration));
+			if (eta > kHorriblyLongDuration) { return 0; }
+			uint64_t result = c * kMinScoreForImmediateAcceptFactor;  // NOCOM needs testing
+			result *= kHorriblyLongDuration;
+			result *= kHorriblyLongDuration;
+			result /= (std::max(eta, kWonderfullyShortDuration) * std::max(detour, kWonderfullyShortDuration));
+			return result;
 		}
 		ScoredShip(Ship* s, uint32_t c, Duration e, Duration d)
 		   : ship(s), score(calc_score(c, e, d)), capacity(c), eta(e), detour(d) {
@@ -946,6 +949,7 @@ Duration ShippingSchedule::update(Game& game) {
 		for (auto& plan : plans_) {
 			bool found_start = false;
 			bool found_end = false;
+			bool expedition = false;
 			Duration arrival_time = 0;
 			Duration detour_start_end = 0;
 			uint32_t max_load = 0;
@@ -965,6 +969,7 @@ Duration ShippingSchedule::update(Game& game) {
 				}
 			}
 			for (SchedulingState& ss : plan.second) {
+				if (ss.expedition) { expedition = true; break; }
 				for (auto it = cargo_tracker.begin(); it != cargo_tracker.end(); ++it) {
 					if (it->first == ss.dock) {
 						cargo_tracker.erase(it);
@@ -1006,7 +1011,7 @@ Duration ShippingSchedule::update(Game& game) {
 					}
 				}
 			}
-			if (!found_start) {
+			if (!found_start || expedition) {
 				continue;
 			}
 			assert(max_load <= plan.first.get(game)->get_capacity());
@@ -1029,6 +1034,8 @@ Duration ShippingSchedule::update(Game& game) {
 		game.map().calc_cost(path, &threshold, nullptr);
 		assert(threshold > 0);
 		while (ppp.open_count > 0 && !ppp.ships.empty()) {
+			sslog("NOCOM Found a ScoredShip with score ___ %u ___ (%u –> %u with real distance ___ %i ___)\n",
+					ppp.ships.front().score, ppp.start->serial(), ppp.end->serial(), threshold);
 			if (ppp.ships.front().score < static_cast<unsigned>(threshold)) {
 				break;
 			}
