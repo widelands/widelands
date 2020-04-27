@@ -740,11 +740,14 @@ Duration ShippingSchedule::update(Game& game) {
 		Duration detour;
 
 		static inline uint32_t calc_score(uint32_t c, Duration eta, Duration detour) {
-			if (eta > kHorriblyLongDuration) { return 0; }
+			if (eta > kHorriblyLongDuration) {
+				return 0;
+			}
 			uint64_t result = c * kMinScoreForImmediateAcceptFactor;  // NOCOM needs testing
 			result *= kHorriblyLongDuration;
 			result *= kHorriblyLongDuration;
-			result /= (std::max(eta, kWonderfullyShortDuration) * std::max(detour, kWonderfullyShortDuration));
+			result /= (std::max(eta, kWonderfullyShortDuration) *
+			           std::max(detour, kWonderfullyShortDuration));
 			return result;
 		}
 		ScoredShip(Ship* s, uint32_t c, Duration e, Duration d)
@@ -969,7 +972,10 @@ Duration ShippingSchedule::update(Game& game) {
 				}
 			}
 			for (SchedulingState& ss : plan.second) {
-				if (ss.expedition) { expedition = true; break; }
+				if (ss.expedition) {
+					expedition = true;
+					break;
+				}
 				for (auto it = cargo_tracker.begin(); it != cargo_tracker.end(); ++it) {
 					if (it->first == ss.dock) {
 						cargo_tracker.erase(it);
@@ -1034,8 +1040,9 @@ Duration ShippingSchedule::update(Game& game) {
 		game.map().calc_cost(path, &threshold, nullptr);
 		assert(threshold > 0);
 		while (ppp.open_count > 0 && !ppp.ships.empty()) {
-			sslog("NOCOM Found a ScoredShip with score ___ %u ___ (%u –> %u with real distance ___ %i ___)\n",
-					ppp.ships.front().score, ppp.start->serial(), ppp.end->serial(), threshold);
+			sslog("NOCOM Found a ScoredShip with score ___ %u ___ (%u –> %u with real distance ___ %i "
+			      "___)\n",
+			      ppp.ships.front().score, ppp.start->serial(), ppp.end->serial(), threshold);
 			if (ppp.ships.front().score < static_cast<unsigned>(threshold)) {
 				break;
 			}
