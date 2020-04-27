@@ -414,8 +414,7 @@ ProductionProgram::ActReturn::ActReturn(const std::vector<std::string>& argument
                                         const ProductionSiteDescr& descr,
                                         const Tribes& tribes) {
 	if (arguments.empty()) {
-		throw GameDataError(
-		   "Usage: return=failed|completed|skipped|no_stats [when|unless <conditions>]");
+		throw GameDataError("Usage: return=failed|completed|skipped [when|unless <conditions>]");
 	}
 	auto begin = arguments.begin();
 
@@ -425,11 +424,8 @@ ProductionProgram::ActReturn::ActReturn(const std::vector<std::string>& argument
 		result_ = ProgramResult::kCompleted;
 	} else if (match_and_skip(arguments, begin, "skipped")) {
 		result_ = ProgramResult::kSkipped;
-	} else if (match_and_skip(arguments, begin, "no_stats")) {
-		result_ = ProgramResult::kNone;
 	} else {
-		throw GameDataError(
-		   "Usage: return=failed|completed|skipped|no_stats [when|unless <conditions>]");
+		throw GameDataError("Usage: return=failed|completed|skipped [when|unless <conditions>]");
 	}
 
 	// Parse all arguments starting from the given iterator into our 'conditions_', splitting

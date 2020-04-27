@@ -69,7 +69,6 @@ tribes:new_productionsite_type {
          actions = {
             "call=ship on failure fail",
             "call=ship_preparation",
-            "return=no_stats"
          }
       },
       ship = {
