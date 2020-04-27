@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-22 20:01+0000\n"
-"PO-Revision-Date: 2020-04-04 18:57+0000\n"
+"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"PO-Revision-Date: 2020-04-23 19:36+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -782,7 +782,7 @@ msgid "mining diamonds"
 msgstr "Edelstenen oftoboen"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:168
-msgid "No Crystal"
+msgid "No Crystals"
 msgstr "Keen Edelflint"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:169
@@ -3805,8 +3805,8 @@ msgstr "Een bietje Iesen"
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:137
 msgctxt "resource_indicator"
-msgid "Some Precious Stones"
-msgstr "Een bietje Gesteen"
+msgid "Some Crystals"
+msgstr "Een bietje Edelflint"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:163
@@ -3838,8 +3838,8 @@ msgstr "Een Bült vun Iesen"
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:241
 msgctxt "resource_indicator"
-msgid "A Lot of Precious Stones"
-msgstr "Een Bült vun Gesteen"
+msgid "A Lot of Crystals"
+msgstr "Een Bült vun Edelflint"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/barbarians/init.lua:122

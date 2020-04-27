@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-22 20:01+0000\n"
-"PO-Revision-Date: 2020-03-29 19:01+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"PO-Revision-Date: 2020-04-24 17:27+0000\n"
+"Last-Translator: Karl Vest\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -784,7 +784,7 @@ msgid "mining diamonds"
 msgstr "ťaženie diamantov"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:168
-msgid "No Crystal"
+msgid "No Crystals"
 msgstr "Došli kryštály"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:169
@@ -824,7 +824,7 @@ msgstr "Farmár pracujúci na tejto farme nemá k dispozícii čistú pôdu, na 
 #: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "Trajektový dvor"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:7
@@ -1591,7 +1591,7 @@ msgstr "Farmár pracujúci na tejto farme nemá k dispozícii čistú pôdu, na 
 #: ../../data/tribes/buildings/productionsites/barbarians/ferry_yard/init.lua:7
 msgctxt "barbarians_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "Trajektový dvor"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:7
@@ -2065,7 +2065,7 @@ msgstr "Farmár pracujúci na tejto farme nemá k dispozícii čistú pôdu, na 
 #: ../../data/tribes/buildings/productionsites/empire/ferry_yard/init.lua:7
 msgctxt "empire_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "Trajektový dvor"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:7
@@ -2551,7 +2551,7 @@ msgstr "kutie drevorubačskej sekery"
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:116
 msgid "forging a pick"
-msgstr ""
+msgstr "kutie krompáča"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:226
@@ -2725,7 +2725,7 @@ msgstr "Farmár pracujúci na tejto farme nemá k dispozícii čistú pôdu, na 
 #: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:7
 msgctxt "frisians_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "Trajektový dvor"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:7
@@ -3426,14 +3426,14 @@ msgstr "Sklad"
 #: ../../data/tribes/economy_profiles/empire:4
 #: ../../data/tribes/economy_profiles/frisians:4
 msgid "Efficiency"
-msgstr ""
+msgstr "Efektivita"
 
 #: ../../data/tribes/economy_profiles/atlanteans:5
 #: ../../data/tribes/economy_profiles/barbarians:5
 #: ../../data/tribes/economy_profiles/empire:5
 #: ../../data/tribes/economy_profiles/frisians:5
 msgid "Stockpile"
-msgstr ""
+msgstr "Zásoby"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/ashes/init.lua:42
@@ -3807,8 +3807,8 @@ msgstr "Trochu železa"
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:137
 msgctxt "resource_indicator"
-msgid "Some Precious Stones"
-msgstr "Trochu vzácnych kameňov"
+msgid "Some Crystals"
+msgstr "Trochu kryštálov"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:163
@@ -3840,8 +3840,8 @@ msgstr "Veľa železa"
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:241
 msgctxt "resource_indicator"
-msgid "A Lot of Precious Stones"
-msgstr "Veľa vzácnych kameňov"
+msgid "A Lot of Crystals"
+msgstr "Veľa kryštálov"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/barbarians/init.lua:122
@@ -4151,7 +4151,7 @@ msgstr "Pre každý nástroj, ktorý potrebuješ pre rozbeh ekonomiky máš iba 
 #: ../../data/tribes/scripting/starting_conditions/empire/struggling_outpost.lua:11
 #: ../../data/tribes/scripting/starting_conditions/frisians/struggling_outpost.lua:11
 msgid "Struggling Outpost"
-msgstr ""
+msgstr "Vojenská základňa pod tlakom"
 
 #. TRANSLATORS: This is the tooltip for the "Hardcore" starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/struggling_outpost.lua:13
@@ -4889,7 +4889,7 @@ msgstr "Farmár"
 #: ../../data/tribes/workers/atlanteans/ferry/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "Trajekt"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/fishbreeder/init.lua:20
@@ -5093,7 +5093,7 @@ msgstr "Farmár"
 #: ../../data/tribes/workers/barbarians/ferry/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "Trajekt"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/fisher/init.lua:7
@@ -5291,7 +5291,7 @@ msgstr "Farmár"
 #: ../../data/tribes/workers/empire/ferry/init.lua:7
 msgctxt "empire_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "Trajekt"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/fisher/init.lua:22
@@ -5519,7 +5519,7 @@ msgstr "Farmár"
 #: ../../data/tribes/workers/frisians/ferry/init.lua:7
 msgctxt "frisians_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "Trajekt"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/fisher/init.lua:7
@@ -5621,7 +5621,7 @@ msgstr "Tavič"
 #: ../../data/tribes/workers/frisians/smoker/init.lua:7
 msgctxt "frisians_worker"
 msgid "Smoker"
-msgstr ""
+msgstr "Údenár"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/soldier/init.lua:492

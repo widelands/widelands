@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-22 20:01+0000\n"
-"PO-Revision-Date: 2020-01-10 13:02+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"PO-Revision-Date: 2020-04-24 11:56+0000\n"
+"Last-Translator: Viktor S <awsswa59@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -734,15 +734,15 @@ msgstr "Красная акация"
 
 #: ../../data/world/init.lua:17
 msgid "Loading world: %1$s (%2$d/%3$d)"
-msgstr ""
+msgstr "Загрузка мира: %1$s (%2$d/%3$d)"
 
 #: ../../data/world/init.lua:27
 msgid "Resources"
-msgstr ""
+msgstr "Ресурсы"
 
 #: ../../data/world/init.lua:32
 msgid "Terrains"
-msgstr ""
+msgstr "Местности"
 
 #: ../../data/world/init.lua:42
 msgid "Summer"
@@ -762,7 +762,7 @@ msgstr "Пустыня"
 
 #: ../../data/world/init.lua:69
 msgid "Immovables"
-msgstr ""
+msgstr "Недвижимость"
 
 #: ../../data/world/init.lua:78
 msgid "Miscellaneous"
@@ -810,7 +810,7 @@ msgstr "Деревья пустоши"
 
 #: ../../data/world/init.lua:276
 msgid "Animals"
-msgstr ""
+msgstr "Животные"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
 #: ../../data/world/init.lua:287
