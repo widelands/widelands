@@ -152,6 +152,7 @@
   - Improve performance for `BuildingSettings` by using switch statements
 - Rework economy savegame compatibility (#3721): Reworked the way old-style economies from b20 savegames are split into new-style economies
 - Faster game saving with endless_game_fogless win condition (#3858)
+- Fix economy mismatch in Request loading (#3870)
 
 
 ### AI
