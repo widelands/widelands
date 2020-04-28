@@ -39,8 +39,8 @@ namespace UI {
 /// Height the top border must have
 #define TP_B_PIXMAP_THICKNESS 20
 
-constexpr int16_t kWindowTitlebarButtonsSize = 16;
-constexpr int16_t kWindowTitlebarButtonsSpacing = 2;
+constexpr int16_t kWindowTitlebarButtonsSize = 18;
+constexpr int16_t kWindowTitlebarButtonsSpacing = 1;
 constexpr int16_t kWindowTitlebarButtonsYPos =
    (TP_B_PIXMAP_THICKNESS + kWindowTitlebarButtonsSize) / -2;
 
