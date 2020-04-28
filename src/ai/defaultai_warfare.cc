@@ -591,9 +591,11 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 	std::vector<Serial> attacking_soldiers;
 	const SoldierDescr& descr = soldiers.front()->descr();
-	int a = 0; // counter of chosen soldiers
-	int b = 0; // counter of attempts to choose
-	while (a < attackers && b < static_cast<int32_t>(soldiers.size())) { //choose soldiers until enough or all evaluated
+	int a = 0;  // counter of chosen soldiers
+	int b = 0;  // counter of attempts to choose
+	while (
+	   a < attackers &&
+	   b < static_cast<int32_t>(soldiers.size())) {  // choose soldiers until enough or all evaluated
 		// only healthy soldiers are chosen
 		uint32_t maxhealth = ((descr.get_base_health() +
 		                       descr.get_health_incr_per_level() * soldiers[b]->get_health_level()) *
