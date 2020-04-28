@@ -78,7 +78,6 @@ tribes:new_productionsite_type {
             "call=produce_hg",
             "call=produce_s3",
             "call=produce_s4",
-            "return=no_stats",
          },
       },
       produce_s3 = {

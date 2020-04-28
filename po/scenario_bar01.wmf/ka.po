@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-15 14:44+0000\n"
-"PO-Revision-Date: 2020-04-12 17:32+0000\n"
+"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"PO-Revision-Date: 2020-04-23 19:21+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Georgian (http://www.transifex.com/widelands/widelands/language/ka/)\n"
 "MIME-Version: 1.0\n"
@@ -72,7 +72,7 @@ msgid ""
 msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
-msgid "a bit of coal"
+msgid "some coal"
 msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:45
@@ -80,7 +80,7 @@ msgid "a lot of coal"
 msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:46
-msgid "a bit of iron"
+msgid "some iron"
 msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:47
@@ -88,7 +88,7 @@ msgid "a lot of iron"
 msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:48
-msgid "a bit of gold"
+msgid "some gold"
 msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:49
@@ -96,7 +96,7 @@ msgid "a lot of gold"
 msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:50
-msgid "a bit of granite"
+msgid "some granite"
 msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:51

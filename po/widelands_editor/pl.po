@@ -5,13 +5,14 @@
 # Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
 # Patryk, 2016
 # tombox <wptom@wp.pl>, 2018
+# tombox <wptom@wp.pl>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-15 14:44+0000\n"
-"PO-Revision-Date: 2019-10-09 08:04+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"PO-Revision-Date: 2020-04-22 23:08+0000\n"
+"Last-Translator: tombox <wptom@wp.pl>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,7 +39,7 @@ msgstr "Pomoc"
 #: ../../data/scripting/editor/editor_controls.lua:18
 msgctxt "hotkey"
 msgid "Esc"
-msgstr ""
+msgstr "Esc"
 
 #: ../../data/scripting/editor/editor_controls.lua:18
 msgid "Toggle main menu"
@@ -198,13 +199,13 @@ msgstr "Surowce"
 #. TRANSLATORS: A header in the editor help if there is 1 valid resource
 #: ../../data/scripting/editor/terrain_help.lua:25
 msgid "Valid Resource:"
-msgstr ""
+msgstr "Dozwolone surowce:"
 
 #. TRANSLATORS: A header in the editor help if there is more than 1 valid
 #. resource
 #: ../../data/scripting/editor/terrain_help.lua:28
 msgid "Valid Resources:"
-msgstr ""
+msgstr "Dozwolone surowce:"
 
 #: ../../data/scripting/editor/terrain_help.lua:39
 msgid "Default:"

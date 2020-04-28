@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-15 14:44+0000\n"
+"POT-Creation-Date: 2020-04-23 19:30+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
 "Last-Translator: Karl Vest, 2020\n"
 "Language-Team: Slovak (https://www.transifex.com/widelands/teams/35159/sk/)\n"
@@ -58,7 +58,7 @@ msgstr "Získajte stavebné materiály"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:43
 msgid "Stockpile Building Materials"
-msgstr ""
+msgstr "Vytvorte zásoby stavebných materiálov"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:44
 msgid ""
@@ -151,19 +151,19 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:88
 msgid "Discover more of the island"
-msgstr ""
+msgstr "Preskúmajte ostrov"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:90
 msgid "Expand and Discover"
-msgstr ""
+msgstr "Expandujte a objavujte"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:91
 msgid "Expand further and discover more of the island."
-msgstr ""
+msgstr "Expandujte ešte viac a objavte z ostrova ešte viac"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:96
 msgid "Train your soldiers"
-msgstr ""
+msgstr "Vycvičte svojich vojakov"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:98
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:309
@@ -173,7 +173,7 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:352
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:358
 msgid "Training Soldiers"
-msgstr ""
+msgstr "Cvičenie vojakov"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:99
 msgid ""
@@ -185,29 +185,31 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:104
 msgid "Defeat the enemy!"
-msgstr ""
+msgstr "Porazte nepriateľa"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:106
 msgid "Defeat the Enemy!"
-msgstr ""
+msgstr "Porazte nepriateľa"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:107
 msgid "Destroy the enemy tribe’s headquarters."
-msgstr ""
+msgstr "Zničte hlavný stan nepriateľského kmeňa"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:112
 msgid "Escape from the floods"
-msgstr ""
+msgstr "Uniknite pred potopami"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:114
 msgid "Flee from the Floods"
-msgstr ""
+msgstr "Utekajte pred potopami"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:115
 msgid ""
 "Build a port, a weaving mill and a shipyard, then start an expedition to "
 "flee before the storm flood drowns the island."
 msgstr ""
+"Postavte prístav, tkáčovňu a lodenicu. Potom pripravte expedíciu, aby ste "
+"unikli skôr ako potopa zaplaví ostrov."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:116
 msgid ""
@@ -228,11 +230,11 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:160
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:176
 msgid "Introduction"
-msgstr ""
+msgstr "Úvod"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:127
 msgid "Welcome!"
-msgstr ""
+msgstr "Vitajte!"
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:129
@@ -240,6 +242,8 @@ msgid ""
 "Welcome to the beautiful isle of Langeness! I am Reebaud, the chieftain of "
 "this pristine island."
 msgstr ""
+"Vitajte na krásnom ostrove Langeness! Som Reebaud, náčelník tohto panenského"
+" ostrova."
 
 #. TRANSLATORS: Reebaud – Introduction 1. Schauenburg and Holstein are
 #. dukedoms
@@ -250,10 +254,14 @@ msgid ""
 "South… So I decided to lead my tribe away to start a quiet, peaceful life on"
 " this untouched island."
 msgstr ""
+"Môj kmeň a ja sme odišli z pevniny a práve sme dorazili. Bojovali sme tam s "
+"Dánmi na severe, so Schauenburgerskými a Holsteinerskými na východe... "
+"rozhodol som sa preto môj kmeň odtiaľ odviesť  a začať tichý a pokojný život"
+" na tomto nedotknutom ostrove."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:136
 msgid "A new home"
-msgstr ""
+msgstr "Nový domov"
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:138
@@ -271,7 +279,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:145
 msgid "The first buildings"
-msgstr ""
+msgstr "Prvé budovy"
 
 #. TRANSLATORS: Hauke – Introduction 3. "Peace" is the traditional frisian
 #. greeting
@@ -280,6 +288,7 @@ msgid ""
 "Peace, Chieftain Reebaud! I will start with the colonization of the island "
 "straight away."
 msgstr ""
+"Pokoj tebe, náčelník Reebaud! S kolonizáciou ostrova začnem hneď teraz."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:150
@@ -288,6 +297,9 @@ msgid ""
 "by adding some logs and granite. The roofs are thatched with reed, "
 "naturally. Nothing is better suited to keep the rain out."
 msgstr ""
+"Ako všetcí Frížania, staviame svoje domy hlavne z tehiel. Vylepšujeme ich "
+"pridaním dreva a žuly. Strechy sú, prirodzene, z trstiny. Nie je nič lepšie,"
+" čo by odolalo dažďu."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:153
@@ -296,6 +308,9 @@ msgid ""
 "grow well on this island; better build at least two houses for foresters and"
 " one for a woodcutter."
 msgstr ""
+"Mali by sme začať tým, že sa postaráme o produkciu dreva. Zdá sa, že na "
+"tomto ostrove stromy celkom dobre nerastú. Lepšie bude, keď postavíme dva "
+"domy pre lesníkov a jeden pre drevorubača."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:156
@@ -308,7 +323,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:161
 msgid "Building our new home"
-msgstr ""
+msgstr "Stavanie nášho nového domova"
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:163
@@ -343,10 +358,12 @@ msgid ""
 "Also, build a well – nobody likes to drink salt water, and it is no good for"
 " making clay."
 msgstr ""
+"Postav tiež studňu – slaná voda nechutí nikomu a ani na výrobu hliny nie je "
+"dobrá."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:177
 msgid "Our first settlement"
-msgstr ""
+msgstr "Naša prvá osada"
 
 #. TRANSLATORS: Reebaud – Introduction 5
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:179
@@ -882,15 +899,17 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:413
 #, lua-format
 msgid ""
-"I almost forgot in this haste – whereever we will land, we’ll need soldiers "
+"I almost forgot in this haste – wherever we will land, we’ll need soldiers "
 "to secure and expand our new colony. There’s space for up to %d soldier on "
-"our ship, if they don’t mind being all crammed together. Let’s send some to "
-"the port when it’s completed, so they can embark when we set sail!"
+"our ship, if nobody minds being all crammed together. Let’s send our best "
+"men to the port when it’s completed, to get ready to embark when we set "
+"sail!"
 msgid_plural ""
-"I almost forgot in this haste – whereever we will land, we’ll need soldiers "
+"I almost forgot in this haste – wherever we will land, we’ll need soldiers "
 "to secure and expand our new colony. There’s space for up to %d soldiers on "
-"our ship, if they don’t mind being all crammed together. Let’s send some to "
-"the port when it’s completed, so they can embark when we set sail!"
+"our ship, if nobody minds being all crammed together. Let’s send our best "
+"men to the port when it’s completed, to get ready to embark when we set "
+"sail!"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""

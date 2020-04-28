@@ -12,13 +12,14 @@
 # nicolas jardin <niko472006@sfr.fr>, 2016
 # Renaud Bouchard, 2015-2020
 # syl_, 2016
+# zecas <jjorge@free.fr>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-15 14:44+0000\n"
-"PO-Revision-Date: 2020-04-15 14:46+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"PO-Revision-Date: 2020-04-26 08:39+0000\n"
+"Last-Translator: zecas <jjorge@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -72,7 +73,7 @@ msgstr "Vous allez être guidé à travers ce tutoriel par des objectifs"
 msgid ""
 "Follow the intructions in the objective below so that I can show you where "
 "to find them."
-msgstr ""
+msgstr "Suis les instructions de l'objectif ci-dessous pour que je puisse te montrer où les trouver."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:48
 msgid "Objectives and how to close this window"
@@ -86,25 +87,25 @@ msgstr "Fermeture de la fenêtre"
 msgid ""
 "This is the ‘Objectives’ window. You can return to this window for "
 "instructions at any time."
-msgstr ""
+msgstr "Ceci est la fenêtre 'Objectifs'. Tu peux y revenir à tout moment."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:52
 msgid ""
 " You can open and close this window by clicking on the ‘Objectives’ button "
 "in the toolbar on the bottom of the screen."
-msgstr ""
+msgstr "Tu peux ouvrir et fermer en cliquant sur le bouton 'Objectifs' dans la barre du bas de l'écran. "
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid ""
 "Like any other window, you can also close the ‘Objectives’ window by right-"
 "clicking on it."
-msgstr ""
+msgstr "Comme tout autre fenêtre, tu peux aussi la fermer avec un clic droit dessus."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:54
 msgid ""
 "When you have accomplished an objective, it will disappear from the list "
 "above."
-msgstr ""
+msgstr "Quand tu as accompli un objectif, il va disparaître de la liste ci-dessous."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:55
 msgid "Try it out."
@@ -119,13 +120,13 @@ msgstr "Affichez les espaces de construction"
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show Building Spaces’. There are two ways you can do this:"
-msgstr ""
+msgstr "Nous devons trouver un endroit approprié pour construire la cabane de bûcheron. Pour que ce soit plus facile, nous pouvons activer 'Montrer les espaces de construction'. Vous pouvez le faire de deux manières :"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:65
 msgid ""
 "Press the Space bar to toggle them, or select ‘Show Building Spaces’ in the "
 "‘Show / Hide’ menu."
-msgstr ""
+msgstr "Appuyer sur la touche Espace, ou choisir 'Montrer les espaces de construction' dans le menu 'Montrer / Cacher'."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:66
 msgid "Show the building spaces now."
@@ -147,7 +148,7 @@ msgid ""
 "the Atlanteans and the Frisians. All tribes have a different economy, "
 "strength and weaknesses, but the general gameplay is the same for all. We "
 "will play the Barbarians for now."
-msgstr ""
+msgstr "Il y a quatre différentes tribus dans Widelands: Les Barbares, L'Empire, les Atlantes et les Frisons. Toutes les tribus ont une économie différente, des forces et des faiblesses, mais la jouabilité générale est la même pour tous. Nous jouerons avec les Barbares pour le moment."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:78
 msgid ""
@@ -165,25 +166,25 @@ msgstr "Vous commencez habituellement la partie avec un quartier général. C'es
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show Building Spaces’."
-msgstr ""
+msgstr "Nous devons trouver un endroit approprié pour construire la cabane de bûcheron. Pour que ce soit plus facile, nous pouvons activer 'Montrer les espaces de construction'."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:80
 msgid ""
 "Left-click the ‘OK’ button to close this window so that I can show you how."
-msgstr ""
+msgstr "Clic-gauche sur le bouton 'OK' pour fermer cette fenêtre que je puisse te montrer."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:81
 msgid ""
 "Note that you cannot close this window by right-clicking on it. I have "
 "blocked this so that you will not close it by accident and miss important "
 "information."
-msgstr ""
+msgstr "Note que tu ne peux pas fermer cette fenêtre avec un clic droit. Je l'ai bloquée pour que tu ne le fermes pas par mégarde et rates ainsi une information importante."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:91
 msgid ""
 "Now that I have shown you how to show and hide the building spaces, please "
 "switch them on again so that we can place our first building."
-msgstr ""
+msgstr "Maintenant que je t'ai montré comment montrer et cacher les espaces de construction, active-les à nouveau que nous puissions placer notre premier bâtiment."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:100
 msgid "Lumberjack’s Spot"
@@ -279,7 +280,7 @@ msgstr "Placez un drapeau bleu dès maintenant sur la route qui relie votre quar
 msgid ""
 "To build the flag, click on the yellow flag symbol in between the two blue "
 "flags we just placed and then click on the build flag symbol."
-msgstr ""
+msgstr "Pour créer le drapeau, cliquez sur le symbole de drapeau jaune entre les deux drapeaux bleus que nous venons juste de placer puis sur l'icône de construction de drapeau."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:173
 msgid "Placing Another Flag"
@@ -290,7 +291,7 @@ msgid ""
 "Nice how they are working, isn’t it? But the poor carrier has a very long "
 "way to go. We can make it easier for him (and more efficient for us) by "
 "placing another blue flag on the road. You try it this time."
-msgstr ""
+msgstr "Joli de voir comment il travaille, non ? Mais le pauvre porteur à un très long chemin à faire. Nous pouvons lui faciliter le travail (et le rendre plus efficace) en plaçant un autre drapeau bleu sur la route. A toi ce coup-ci."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:188
 msgid ""
@@ -313,7 +314,7 @@ msgstr "Voyons voir les progrès"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:201
 msgid "Click on the construction site to have a look at it."
-msgstr ""
+msgstr "Clique sur le chantier pour y jeter un œil."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:207
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:218
@@ -336,7 +337,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:223
 msgid "Close the construction site window when you have seen enough."
-msgstr ""
+msgstr "Ferme la fenêtre du chantier lorsque tu en auras assez vu."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:234
 msgid "Well done! Let’s wait till the hut is finished."
@@ -351,7 +352,7 @@ msgstr "Si vous voulez aller plus vite, appuyez simplement sur la touche P. PRÉ
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:237
 msgid "Change is rapid with pressed Ctrl and smooth with pressed Shift."
-msgstr ""
+msgstr "Le changement est rapide quand Ctrl est appuyée et lent que c'est Shift. "
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:244
 msgid "The Lumberjack’s Hut is Done"
@@ -458,7 +459,7 @@ msgid ""
 "When you are ready to continue, close the minimap by selecting ‘Hide "
 "Minimap’ in the ‘Map View’ menu or by pressing ‘m’. Of course, a right-click"
 " also works."
-msgstr ""
+msgstr "Quand tu es prêt à continuer, ferme la mini-carte en utilisant le même bouton ou bien \"m\". Bien sur, un Clic-droit marche aussi."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:314
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:329

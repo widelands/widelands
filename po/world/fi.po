@@ -6,13 +6,14 @@
 # Jukka Pakarinen, 2016-2017,2019
 # Markus Hällfors <markus@hallfors.com>, 2015
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007,2015
+# Teppo Mäenpää <teppo@runbox.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-15 14:44+0000\n"
-"PO-Revision-Date: 2020-01-10 13:02+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"PO-Revision-Date: 2020-04-20 15:37+0000\n"
+"Last-Translator: Teppo Mäenpää <teppo@runbox.com>\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -728,15 +729,15 @@ msgstr "Punainen Sateenvarjomainen Puu"
 
 #: ../../data/world/init.lua:17
 msgid "Loading world: %1$s (%2$d/%3$d)"
-msgstr ""
+msgstr "Lataan maailmaa: %1$s(%2$d/%3$d)"
 
 #: ../../data/world/init.lua:27
 msgid "Resources"
-msgstr ""
+msgstr "Resurssit"
 
 #: ../../data/world/init.lua:32
 msgid "Terrains"
-msgstr ""
+msgstr "Maastotyypit"
 
 #: ../../data/world/init.lua:42
 msgid "Summer"
@@ -756,7 +757,7 @@ msgstr "Aavikko"
 
 #: ../../data/world/init.lua:69
 msgid "Immovables"
-msgstr ""
+msgstr "Kohteet"
 
 #: ../../data/world/init.lua:78
 msgid "Miscellaneous"
@@ -804,7 +805,7 @@ msgstr "Joutomaa"
 
 #: ../../data/world/init.lua:276
 msgid "Animals"
-msgstr ""
+msgstr "Eläimet"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
 #: ../../data/world/init.lua:287

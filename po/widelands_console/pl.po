@@ -7,13 +7,14 @@
 # Wesmania <ikk_pl@yahoo.co.uk>, 2015
 # Wesmania <ikk_pl@yahoo.co.uk>, 2016
 # tombox <wptom@wp.pl>, 2016,2018-2019
+# tombox <wptom@wp.pl>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-15 14:44+0000\n"
-"PO-Revision-Date: 2020-01-14 00:47+0000\n"
-"Last-Translator: Be Trzy <byaqya@gmail.com>\n"
+"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"PO-Revision-Date: 2020-04-22 23:07+0000\n"
+"Last-Translator: tombox <wptom@wp.pl>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -133,7 +134,7 @@ msgid ""
 " --ai_training        Enables AI training mode. See\n"
 "                      https://www.widelands.org/wiki/Ai%20Training/\n"
 "                      for a full description of the AI training logic."
-msgstr ""
+msgstr "--ai_training Włącza tryb treningowy SI. Skocz pod adres \nhttps://www.widelands.org/wiki/Ai%20Training/\n po pełny opis logiki treningowej SI. "
 
 #: ../../src/wlapplication_messages.cc:99
 msgid ""

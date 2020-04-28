@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
+# Cássio Gabriel <p8promo@gmail.com>, 2020
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
@@ -11,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-15 14:44+0000\n"
-"PO-Revision-Date: 2020-04-12 17:32+0000\n"
+"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"PO-Revision-Date: 2020-04-23 19:21+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -52,7 +53,7 @@ msgstr "Construa instalações militares (como sentinelas ou barreiras) para exp
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:34
 msgid "Get to the rocks north-east from you and build a quarry there."
-msgstr ""
+msgstr "Vá até as pedras a Noroeste de você e construa uma pedreira lá."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:39
 msgid "Start building mines on the mountain"
@@ -60,11 +61,11 @@ msgstr "Comece a construir minas na montanha"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:41
 msgid "Build coal and iron mines"
-msgstr ""
+msgstr "Construa minas de carvão e de ferro"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:42
 msgid "Build a coal mine and an iron mine."
-msgstr ""
+msgstr "Construa uma mina de carvão e uma mina de ferro."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:43
 msgid ""
@@ -74,35 +75,35 @@ msgid ""
 " will search for ores; otherwise, they would search for water. Then build a "
 "mine for both kinds of resources that they will find, choosing the "
 "appropriate mine to be built:"
-msgstr ""
+msgstr "Para fazê-lo, ice uma bandeira no flanco da montanha ao lado leste (mas no terreno da montanha, não no pasto). Quando se clica na nova bandeira, é possível enviar para lá geólogos. Pelo fato da bandeira estar em uma montanha, os geólogos irão procurar por minérios. Caso contrário, procurariam por água. Então, construa uma mina para os dois tipos de recursos que encontrarão, escolhendo a mina apropriada a ser construída:"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
-msgid "a bit of coal"
-msgstr "Um pouco de carvão"
+msgid "some coal"
+msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "a lot of coal"
 msgstr "Muito carvão"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:46
-msgid "a bit of iron"
-msgstr "Um pouco de ferro"
+msgid "some iron"
+msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:47
 msgid "a lot of iron"
 msgstr "Muito ferro"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:48
-msgid "a bit of gold"
-msgstr "Um pouco de ouro"
+msgid "some gold"
+msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:49
 msgid "a lot of gold"
 msgstr "Muito ouro"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:50
-msgid "a bit of granite"
-msgstr "Um pouco de granito"
+msgid "some granite"
+msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:51
 msgid "a lot of granite"
