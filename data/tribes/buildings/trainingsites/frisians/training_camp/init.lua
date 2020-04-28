@@ -123,7 +123,6 @@ tribes:new_trainingsite_type {
          descname = _"sleeping",
          actions = {
             "sleep=5000",
-            "return=no_stats",
          }
       },
       upgrade_soldier_attack_0 = {
@@ -178,6 +177,7 @@ tribes:new_trainingsite_type {
          descname = pgettext ("frisians_building", "upgrading soldier health from level 0 to level 1"),
          actions = {
             "checksoldier=soldier health 0",
+            "return=failed unless site has helmet",
             "return=failed unless site has bread_frisians,beer",
             "return=failed unless site has smoked_fish,smoked_meat",
             "sleep=15000",

@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-22 20:01+0000\n"
-"PO-Revision-Date: 2020-04-12 17:32+0000\n"
+"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"PO-Revision-Date: 2020-04-23 19:21+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -76,32 +76,32 @@ msgid ""
 msgstr "Per fer-ho, situeu una bandera al vessant est de la muntanya (en terreny muntanyós, no escolliu un prat). Cliqueu la bandera i envieu-hi geòlegs. Com que la bandera està en una muntanya, els geòlegs buscaran minerals; si no, buscarien aigua. Llavors, construïu una mina per als dos tipus de recursos que hi trobin, escollint la mina corresponent:"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
-msgid "a bit of coal"
-msgstr "una mica de carbó"
+msgid "some coal"
+msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "a lot of coal"
 msgstr "un muntó de carbó"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:46
-msgid "a bit of iron"
-msgstr "una mica de ferro"
+msgid "some iron"
+msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:47
 msgid "a lot of iron"
 msgstr "un muntó de ferro"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:48
-msgid "a bit of gold"
-msgstr "una mica d'or"
+msgid "some gold"
+msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:49
 msgid "a lot of gold"
 msgstr "un muntó d'or"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:50
-msgid "a bit of granite"
-msgstr "una mica de granit"
+msgid "some granite"
+msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:51
 msgid "a lot of granite"

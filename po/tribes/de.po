@@ -22,8 +22,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-22 20:01+0000\n"
-"PO-Revision-Date: 2020-04-02 11:00+0000\n"
+"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"PO-Revision-Date: 2020-04-23 19:49+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -795,7 +795,7 @@ msgid "mining diamonds"
 msgstr "Das Abbauen von Diamanten"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:168
-msgid "No Crystal"
+msgid "No Crystals"
 msgstr "Keine Edelsteine"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:169
@@ -3818,8 +3818,8 @@ msgstr "Wenig Eisen"
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:137
 msgctxt "resource_indicator"
-msgid "Some Precious Stones"
-msgstr "Wenig wertvolles Gestein"
+msgid "Some Crystals"
+msgstr "Wenig Edelsteine"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:163
@@ -3851,8 +3851,8 @@ msgstr "Viel Eisen"
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:241
 msgctxt "resource_indicator"
-msgid "A Lot of Precious Stones"
-msgstr "Viel wertvolles Gestein"
+msgid "A Lot of Crystals"
+msgstr "Viele Edelsteine"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/barbarians/init.lua:122

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-22 20:01+0000\n"
+"POT-Creation-Date: 2020-04-23 19:30+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: Karl Vest, 2020\n"
 "Language-Team: Slovak (https://www.transifex.com/widelands/teams/35159/sk/)\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:45
 msgid "Build your first outpost"
-msgstr ""
+msgstr "Postavte vašu prvú vojenskú základňu"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:47
 msgid "First Outpost"
