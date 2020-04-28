@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-22 20:01+0000\n"
-"PO-Revision-Date: 2020-04-12 17:32+0000\n"
+"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"PO-Revision-Date: 2020-04-23 19:21+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Greek (http://www.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
@@ -73,32 +73,32 @@ msgid ""
 msgstr "Για να το κάνετε, βάλτε μια σημαία στην πλευρά του βουνού στα ανατολικά (αλλά σε ορεινό έδαφος, όχι σε ορεινό λιβάδι). Όταν κάνετε κλικ στη νέα σημαία, μπορείτε να στείλετε εκεί γεωλόγους. Επειδή η σημαία είναι σε βουνό, οι γεωλόγοι θα ψάξουν για ορυκτά, διαφορετικά θα ψάξουν για νερό. Μετά φτιάξτε ένα ορυχείο για τα δύο είδη πόρων που θα βρουν, επιλέγοντας να φτιαχτεί το κατάλληλο ορυχείο:"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
-msgid "a bit of coal"
-msgstr "λίγος άνθρακας"
+msgid "some coal"
+msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "a lot of coal"
 msgstr "πολύς άνθρακας"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:46
-msgid "a bit of iron"
-msgstr "λίγος σίδηρος"
+msgid "some iron"
+msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:47
 msgid "a lot of iron"
 msgstr "πολύς σίδηρος"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:48
-msgid "a bit of gold"
-msgstr "λίγος χρυσός"
+msgid "some gold"
+msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:49
 msgid "a lot of gold"
 msgstr "πολύς χρυσός"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:50
-msgid "a bit of granite"
-msgstr "λίγος γρανίτης"
+msgid "some granite"
+msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:51
 msgid "a lot of granite"

@@ -77,7 +77,6 @@ tribes:new_productionsite_type {
             "call=produce_s2",
             "call=produce_h",
             "call=produce_s2",
-            "return=no_stats",
          },
       },
       produce_s1 = {
