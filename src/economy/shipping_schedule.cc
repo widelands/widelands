@@ -53,7 +53,7 @@ constexpr Duration kHorriblyLongDuration = 10 * 60 * 1000;  // 10 min
 // Only assign wares to a ship in 5.1 if it's score is higher than a certain
 // threshold based on minimal distance. Ships with lower scores will only be
 // accepted if not enough idle ships are found.
-constexpr uint16_t kMinScoreForImmediateAcceptFactor = 100;
+constexpr uint16_t kMinScoreForImmediateAcceptFactor = 1;  // NOCOM needs testing
 
 // Average sailing-time distance for two ports to be considered "close by" in 5.4
 constexpr int16_t kDockGroupMaxDistanceFactor = 12 * 1800;
@@ -743,7 +743,7 @@ Duration ShippingSchedule::update(Game& game) {
 			if (eta > kHorriblyLongDuration) {
 				return 0;
 			}
-			uint64_t result = c * kMinScoreForImmediateAcceptFactor;  // NOCOM needs testing
+			uint64_t result = c * kMinScoreForImmediateAcceptFactor;
 			result *= kHorriblyLongDuration;
 			result *= kHorriblyLongDuration;
 			result /= (std::max(eta, kWonderfullyShortDuration) *
@@ -1232,9 +1232,8 @@ Duration ShippingSchedule::update(Game& game) {
 						assert(d >= 0);
 						plan.second.insert(it_after_end, SchedulingState(ppp.end, false, d));
 					} else if (static_cast<unsigned>(index_of_start + 1) == plan.second.size()) {
-						// ship will visit a port close to start and nothing after that (but never start
-						// or end)
-						// → a) insert a new state with items for start and b) push a State to end
+						// ship will visit start and nothing after that (but never end)
+						// → a) add items for start and b) push a State to end
 						const uint32_t take =
 						   std::min(plan.first.get(game)->get_capacity(), ppp.open_count);
 						sslog("Phase 5.4.B: PPP %u –> %u (open_count %u): assigning %u items to %s\n",
@@ -1243,20 +1242,42 @@ Duration ShippingSchedule::update(Game& game) {
 						assert(take);
 						ppp.open_count -= take;
 						// a
-						Path path;
-						int32_t d = -1;
-						fleet_.get_path(*plan.second.back().dock, *ppp.start, path);
-						game.map().calc_cost(path, &d, nullptr);
-						assert(d >= 0);
-						plan.second.push_back(SchedulingState(ppp.start, false, d));
+						assert(plan.second.back().dock == ppp.start);
+						assert(!plan.second.back().expedition);
+						assert(plan.second.back().load_there.empty());
 						plan.second.back().load_there.push_back(std::make_pair(ppp.end, take));
 						// b
-						d = -1;
+						int32_t d = -1; Path path;
 						fleet_.get_path(*ppp.start, *ppp.end, path);
 						game.map().calc_cost(path, &d, nullptr);
 						assert(d >= 0);
 						plan.second.push_back(SchedulingState(ppp.end, false, d));
 					}
+				} else if (index_of_start < 0 && index_of_end < 0) {
+					// ship will visit a port close to start and nothing after that (but never start
+					// or end)
+					// → a) insert a new state with items for start and b) push a State to end
+					const uint32_t take =
+					   std::min(plan.first.get(game)->get_capacity(), ppp.open_count);
+					sslog("Phase 5.4.C: PPP %u –> %u (open_count %u): assigning %u items to %s\n",
+					      ppp.start->serial(), ppp.end->serial(), ppp.open_count, take,
+					      plan.first.get(game)->get_shipname().c_str());
+					assert(take);
+					ppp.open_count -= take;
+					// a
+					Path path;
+					int32_t d = -1;
+					fleet_.get_path(*plan.second.back().dock, *ppp.start, path);
+					game.map().calc_cost(path, &d, nullptr);
+					assert(d >= 0);
+					plan.second.push_back(SchedulingState(ppp.start, false, d));
+					plan.second.back().load_there.push_back(std::make_pair(ppp.end, take));
+					// b
+					d = -1;
+					fleet_.get_path(*ppp.start, *ppp.end, path);
+					game.map().calc_cost(path, &d, nullptr);
+					assert(d >= 0);
+					plan.second.push_back(SchedulingState(ppp.end, false, d));
 				} else if (index_of_start < 0 && index_of_end > 0 &&
 				           indices_near_start.count(index_of_end - 1)) {
 					// ship will visit a port close to start and directly afterwards end (but never
@@ -1276,7 +1297,7 @@ Duration ShippingSchedule::update(Game& game) {
 						continue;
 					}
 					const uint32_t take = std::min(capacity, ppp.open_count);
-					sslog("Phase 5.4.C: PPP %u –> %u (open_count %u): assigning %u items to %s\n",
+					sslog("Phase 5.4.D: PPP %u –> %u (open_count %u): assigning %u items to %s\n",
 					      ppp.start->serial(), ppp.end->serial(), ppp.open_count, take,
 					      plan.first.get(game)->get_shipname().c_str());
 					assert(take);
@@ -1316,7 +1337,7 @@ Duration ShippingSchedule::update(Game& game) {
 								continue;
 							}
 							const uint32_t take = std::min(capacity, ppp.open_count);
-							sslog("Phase 5.4.D: PPP %u –> %u (open_count %u): assigning %u items to %s\n",
+							sslog("Phase 5.4.E: PPP %u –> %u (open_count %u): assigning %u items to %s\n",
 							      ppp.start->serial(), ppp.end->serial(), ppp.open_count, take,
 							      plan.first.get(game)->get_shipname().c_str());
 							assert(take);
