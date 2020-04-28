@@ -34,6 +34,7 @@ public:
 	               button_style),
 	     settings_(settings),
 	     id_(id) {
+		dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 	}
 	virtual ~DropDownSupport() {
 	}
@@ -64,9 +65,7 @@ public:
 	                     int32_t x,
 	                     int32_t y,
 	                     uint32_t w,
-	                     uint32_t max_list_items,
 	                     int button_dimension,
-	                     const std::string& label,
 	                     GameSettingsProvider* const settings,
 	                     PlayerSlot id);
 	void rebuild() override;
@@ -79,9 +78,7 @@ public:
 	                    int32_t x,
 	                    int32_t y,
 	                    uint32_t w,
-	                    uint32_t max_list_items,
 	                    int button_dimension,
-	                    const std::string& label,
 	                    GameSettingsProvider* const settings,
 	                    PlayerSlot id);
 	void rebuild() override;
@@ -98,13 +95,14 @@ public:
 	                    int32_t x,
 	                    int32_t y,
 	                    uint32_t w,
-	                    uint32_t max_list_items,
 	                    int button_dimension,
-	                    const std::string& label,
 	                    GameSettingsProvider* const settings,
 	                    PlayerSlot id);
 
 	void rebuild() override;
+
+private:
+	void fill();
 };
 
 class TeamDropdown : public DropDownSupport<uintptr_t> {
@@ -114,9 +112,7 @@ public:
 	             int32_t x,
 	             int32_t y,
 	             uint32_t w,
-	             uint32_t max_list_items,
 	             int button_dimension,
-	             const std::string& label,
 	             GameSettingsProvider* const settings,
 	             PlayerSlot id);
 

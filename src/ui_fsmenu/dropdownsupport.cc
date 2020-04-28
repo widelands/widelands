@@ -13,9 +13,7 @@ TribeDropdownSupport::TribeDropdownSupport(UI::Panel* parent,
                                            int32_t x,
                                            int32_t y,
                                            uint32_t w,
-                                           uint32_t max_list_items,
                                            int button_dimension,
-                                           const std::string& label,
                                            GameSettingsProvider* const settings,
                                            PlayerSlot id)
    : DropDownSupport<std::string>(parent,
@@ -23,9 +21,9 @@ TribeDropdownSupport::TribeDropdownSupport(UI::Panel* parent,
                                   x,
                                   y,
                                   w,
-                                  max_list_items,
+                                  16,
                                   button_dimension,
-                                  label,
+                                  _("Tribe"),
                                   UI::DropdownType::kPictorial,
                                   UI::PanelStyle::kFsMenu,
                                   UI::ButtonStyle::kFsMenuSecondary,
@@ -33,14 +31,12 @@ TribeDropdownSupport::TribeDropdownSupport(UI::Panel* parent,
                                   id) {
 }
 
-/// Rebuild the tribes dropdown from the server settings. This will keep the host and client UIs
-/// in sync.
-
 void TribeDropdownSupport::rebuild() {
-	const GameSettings& settings = settings_->settings();
+
 	//	if (tribe_selection_locked_) {
 	//		return;
 	//	}
+	const GameSettings& settings = settings_->settings();
 	const PlayerSettings& player_setting = settings.players[id_];
 	dropdown_.clear();
 	if (player_setting.state == PlayerSettings::State::kShared) {
@@ -100,9 +96,8 @@ TypeDropdownSupport::TypeDropdownSupport(UI::Panel* parent,
                                          int32_t x,
                                          int32_t y,
                                          uint32_t w,
-                                         uint32_t max_list_items,
+
                                          int button_dimension,
-                                         const std::string& label,
                                          GameSettingsProvider* const settings,
                                          PlayerSlot id)
    : DropDownSupport<std::string>(parent,
@@ -110,9 +105,9 @@ TypeDropdownSupport::TypeDropdownSupport(UI::Panel* parent,
                                   x,
                                   y,
                                   w,
-                                  max_list_items,
+                                  16,
                                   button_dimension,
-                                  label,
+                                  _("Type"),
                                   UI::DropdownType::kPictorial,
                                   UI::PanelStyle::kFsMenu,
                                   UI::ButtonStyle::kFsMenuSecondary,
@@ -193,9 +188,7 @@ InitDropdownSupport::InitDropdownSupport(UI::Panel* parent,
                                          int32_t x,
                                          int32_t y,
                                          uint32_t w,
-                                         uint32_t max_list_items,
                                          int button_dimension,
-                                         const std::string& label,
                                          GameSettingsProvider* const settings,
                                          PlayerSlot id)
    : DropDownSupport<uintptr_t>(parent,
@@ -203,9 +196,9 @@ InitDropdownSupport::InitDropdownSupport(UI::Panel* parent,
                                 x,
                                 y,
                                 w,
-                                max_list_items,
+                                16,
                                 button_dimension,
-                                label,
+                                "",
                                 UI::DropdownType::kTextualNarrow,
                                 UI::PanelStyle::kFsMenu,
                                 UI::ButtonStyle::kFsMenuSecondary,
@@ -216,13 +209,13 @@ InitDropdownSupport::InitDropdownSupport(UI::Panel* parent,
 /// Rebuild the init dropdown from the server settings. This will keep the host and client UIs in
 /// sync.
 void InitDropdownSupport::rebuild() {
-	const GameSettings& settings = settings_->settings();
+
 	//	if (init_selection_locked_) {
 	//		return;
 	//	}
-
+	const GameSettings& settings = settings_->settings();
 	dropdown_.clear();
-	const PlayerSettings& player_setting = settings.players[id_];
+
 	if (settings.scenario) {
 		dropdown_.set_label(_("Scenario"));
 		dropdown_.set_tooltip(_("Start type is set via the scenario"));
@@ -231,44 +224,48 @@ void InitDropdownSupport::rebuild() {
 		dropdown_.set_label(_("Saved Game"));
 	} else {
 		dropdown_.set_label("");
-		i18n::Textdomain td("tribes");  // for translated initialisation
-		const Widelands::TribeBasicInfo tribeinfo = Widelands::get_tribeinfo(player_setting.tribe);
-		std::set<std::string> tags;
-		if (!settings.mapfilename.empty()) {
-			Widelands::Map map;
-			std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(settings.mapfilename);
-			if (ml) {
-				ml->preload_map(true);
-				tags = map.get_tags();
-			}
-		}
-		for (size_t i = 0; i < tribeinfo.initializations.size(); ++i) {
-			const Widelands::TribeBasicInfo::Initialization& addme = tribeinfo.initializations[i];
-			bool matches_tags = true;
-			for (const std::string& tag : addme.required_map_tags) {
-				if (!tags.count(tag)) {
-					matches_tags = false;
-					break;
-				}
-			}
-			if (matches_tags) {
-				dropdown_.add(_(addme.descname), i, nullptr, i == player_setting.initialization_index,
-				              _(addme.tooltip));
-			}
-		}
+		fill();
 	}
 
 	dropdown_.set_visible(true);
 	dropdown_.set_enabled(settings_->can_change_player_init(id_));
+}
+
+void InitDropdownSupport::fill() {
+	const GameSettings& settings = settings_->settings();
+	const PlayerSettings& player_setting = settings.players[id_];
+	i18n::Textdomain td("tribes");  // for translated initialisation
+	const Widelands::TribeBasicInfo tribeinfo = Widelands::get_tribeinfo(player_setting.tribe);
+	std::set<std::string> tags;
+	if (!settings.mapfilename.empty()) {
+		Widelands::Map map;
+		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(settings.mapfilename);
+		if (ml) {
+			ml->preload_map(true);
+			tags = map.get_tags();
+		}
+	}
+	for (size_t i = 0; i < tribeinfo.initializations.size(); ++i) {
+		const Widelands::TribeBasicInfo::Initialization& addme = tribeinfo.initializations[i];
+		bool matches_tags = true;
+		for (const std::string& tag : addme.required_map_tags) {
+			if (!tags.count(tag)) {
+				matches_tags = false;
+				break;
+			}
+		}
+		if (matches_tags) {
+			dropdown_.add(_(addme.descname), i, nullptr, i == player_setting.initialization_index,
+			              _(addme.tooltip));
+		}
+	}
 }
 TeamDropdown::TeamDropdown(UI::Panel* parent,
                            const std::string& name,
                            int32_t x,
                            int32_t y,
                            uint32_t w,
-                           uint32_t max_list_items,
                            int button_dimension,
-                           const std::string& label,
                            GameSettingsProvider* const settings,
                            PlayerSlot id)
    : DropDownSupport<uintptr_t>(parent,
@@ -276,9 +273,9 @@ TeamDropdown::TeamDropdown(UI::Panel* parent,
                                 x,
                                 y,
                                 w,
-                                max_list_items,
+                                16,
                                 button_dimension,
-                                label,
+                                _("Team"),
                                 UI::DropdownType::kTextualNarrow,
                                 UI::PanelStyle::kFsMenu,
                                 UI::ButtonStyle::kFsMenuSecondary,
@@ -289,10 +286,11 @@ TeamDropdown::TeamDropdown(UI::Panel* parent,
 /// sync.
 
 void TeamDropdown::rebuild() {
-	const GameSettings& settings = settings_->settings();
+
 	//	if (team_selection_locked_) {
 	//		return;
 	//	}
+	const GameSettings& settings = settings_->settings();
 	const PlayerSettings& player_setting = settings.players[id_];
 	if (player_setting.state == PlayerSettings::State::kShared) {
 		dropdown_.set_visible(false);

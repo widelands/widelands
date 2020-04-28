@@ -81,7 +81,7 @@ bool FullscreenMenuLaunchSPG2::clicked_select_map() {
 	}
 
 	//	is_scenario_ = code == FullscreenMenuBase::MenuTarget::kScenarioGame;
-	//	settings_->set_scenario(is_scenario_);
+	settings_->set_scenario(code == FullscreenMenuBase::MenuTarget::kScenarioGame);
 
 	const MapData& mapdata = *msm.get_map();
 	nr_players_ = mapdata.nrplayers;
