@@ -1,5 +1,7 @@
 #include "dropdownsupport.h"
 
+#include <boost/algorithm/string.hpp>
+
 #include "ai/computer_player.h"
 #include "base/i18n.h"
 #include "graphic/playercolor.h"
@@ -33,9 +35,9 @@ TribeDropdownSupport::TribeDropdownSupport(UI::Panel* parent,
 
 void TribeDropdownSupport::rebuild() {
 
-	//	if (tribe_selection_locked_) {
-	//		return;
-	//	}
+	if (selection_locked_) {
+		return;
+	}
 	const GameSettings& settings = settings_->settings();
 	const PlayerSettings& player_setting = settings.players[id_];
 	dropdown_.clear();
@@ -115,12 +117,10 @@ TypeDropdownSupport::TypeDropdownSupport(UI::Panel* parent,
                                   id) {
 }
 void TypeDropdownSupport::rebuild() {
-	/// Rebuild the type dropdown from the server settings. This will keep the host and client UIs in
-	/// sync.
 
-	//	if (type_selection_locked_) {
-	//		return;
-	//	}
+	if (selection_locked_) {
+		return;
+	}
 	fill();
 	dropdown_.set_enabled(settings_->can_change_player_state(id_));
 	select_entry();
@@ -183,6 +183,39 @@ void TypeDropdownSupport::select_entry() {
 	}
 }
 
+void TypeDropdownSupport::selection_action() {
+	if (!settings_->can_change_player_state(id_)) {
+		return;
+	}
+	selection_locked_ = true;
+	if (dropdown_.has_selection()) {
+		const std::string& selected = dropdown_.get_selected();
+		PlayerSettings::State state = PlayerSettings::State::kComputer;
+		if (selected == "closed") {
+			state = PlayerSettings::State::kClosed;
+		} else if (selected == "open") {
+			state = PlayerSettings::State::kOpen;
+		} else if (selected == "shared_in") {
+			state = PlayerSettings::State::kShared;
+		} else {
+			if (selected == AI_NAME_PREFIX "random") {
+				settings_->set_player_ai(id_, "", true);
+			} else {
+				if (boost::starts_with(selected, AI_NAME_PREFIX)) {
+					std::vector<std::string> parts;
+					boost::split(parts, selected, boost::is_any_of(AI_NAME_SEPARATOR));
+					assert(parts.size() == 2);
+					settings_->set_player_ai(id_, parts[1], false);
+				} else {
+					throw wexception("Unknown player state: %s\n", selected.c_str());
+				}
+			}
+		}
+		settings_->set_player_state(id_, state);
+	}
+	selection_locked_ = false;
+}
+
 InitDropdownSupport::InitDropdownSupport(UI::Panel* parent,
                                          const std::string& name,
                                          int32_t x,
@@ -210,9 +243,9 @@ InitDropdownSupport::InitDropdownSupport(UI::Panel* parent,
 /// sync.
 void InitDropdownSupport::rebuild() {
 
-	//	if (init_selection_locked_) {
-	//		return;
-	//	}
+	if (selection_locked_) {
+		return;
+	}
 	const GameSettings& settings = settings_->settings();
 	dropdown_.clear();
 
@@ -282,14 +315,12 @@ TeamDropdown::TeamDropdown(UI::Panel* parent,
                                 settings,
                                 id) {
 }
-/// Rebuild the team dropdown from the server settings. This will keep the host and client UIs in
-/// sync.
 
 void TeamDropdown::rebuild() {
 
-	//	if (team_selection_locked_) {
-	//		return;
-	//	}
+	if (selection_locked_) {
+		return;
+	}
 	const GameSettings& settings = settings_->settings();
 	const PlayerSettings& player_setting = settings.players[id_];
 	if (player_setting.state == PlayerSettings::State::kShared) {
@@ -311,4 +342,12 @@ void TeamDropdown::rebuild() {
 	dropdown_.select(player_setting.team);
 	dropdown_.set_visible(true);
 	dropdown_.set_enabled(settings_->can_change_player_team(id_));
+}
+/// This will update the team settings with the value currently selected in the teams dropdown.
+void TeamDropdown::selection_action() {
+	selection_locked_ = true;
+	if (dropdown_.has_selection()) {
+		settings_->set_player_team(id_, dropdown_.get_selected());
+	}
+	selection_locked_ = false;
 }

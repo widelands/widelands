@@ -33,14 +33,18 @@ public:
 	               style,
 	               button_style),
 	     settings_(settings),
-	     id_(id) {
+	     id_(id),
+	     selection_locked_(false) {
 		dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
+		dropdown_.selected.connect([this]() { selection_action(); });
 	}
 	virtual ~DropDownSupport() {
 	}
 
 	UI::Dropdown<T>* get_dropdown() {
 		return &dropdown_;
+	}
+	virtual void selection_action() {
 	}
 
 	virtual void rebuild() = 0;
@@ -56,6 +60,7 @@ protected:
 	UI::Dropdown<T> dropdown_;
 	GameSettingsProvider* const settings_;
 	PlayerSlot const id_;
+	bool selection_locked_;
 };
 
 class TribeDropdownSupport : public DropDownSupport<std::string> {
@@ -86,6 +91,7 @@ public:
 private:
 	void fill();
 	void select_entry();
+	void selection_action() override;
 };
 
 class InitDropdownSupport : public DropDownSupport<uintptr_t> {
@@ -117,6 +123,9 @@ public:
 	             PlayerSlot id);
 
 	void rebuild() override;
+
+private:
+	void selection_action() override;
 };
 
 #endif  // WL_UI_FSMENU_DROPDOWNSUPPORT_H
