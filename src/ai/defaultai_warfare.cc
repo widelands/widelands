@@ -595,9 +595,9 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	int b = 0; // counter of attempts to choose
 	while (a < attackers && b < static_cast<int32_t>(soldiers.size())) { //choose soldiers until enough or all evaluated
 		// only healthy soldiers are chosen
-		uint32_t maxhealth = ((descr.get_base_health() + descr.get_health_incr_per_level() *
-		                      soldiers[b]->get_health_level()) *
-							  (66 + std::abs(management_data.get_military_number_at(20)) / 3) / 100);
+		uint32_t maxhealth = ((descr.get_base_health() +
+		                       descr.get_health_incr_per_level() * soldiers[b]->get_health_level()) *
+		                      (66 + std::abs(management_data.get_military_number_at(20)) / 3) / 100);
 		if (soldiers[b]->get_current_health() > maxhealth) {
 			attacking_soldiers.push_back(soldiers[b]->serial());
 			++a;
@@ -605,8 +605,9 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		++b;
 	}
 	log("%2d: attacking site at %3dx%3d, score %3d, with %2d soldiers, attacking %2d times, after "
-	    "%5d seconds\n",player_number(), flag->get_position().x, flag->get_position().y, best_score,
-	     a, enemy_sites[best_target].attack_counter + 1,
+	    "%5d seconds\n",
+	    player_number(), flag->get_position().x, flag->get_position().y, best_score, a,
+	    enemy_sites[best_target].attack_counter + 1,
 	    (gametime - enemy_sites[best_target].last_time_attacked) / 1000);
 
 	game().send_player_enemyflagaction(*flag, player_number(), attacking_soldiers);
