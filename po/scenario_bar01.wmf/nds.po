@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-22 20:01+0000\n"
-"PO-Revision-Date: 2020-04-12 17:32+0000\n"
+"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"PO-Revision-Date: 2020-04-23 19:38+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -73,15 +73,15 @@ msgid ""
 msgstr "Daarto mutt du eene Fahn up de Sied vun de Barg im Oosten upstellen (up eener Barg-Landskupp, nich eener Bargmede). Wenn du de neje Fahn anklickst, kannst du daar Schattsökers henschicken. Wenn de Fahn up eenem Barg is, söcht de Schattsöker na Mineraalen, anners Water. Bau dann een Bargwark för elkeen vun de beiden Mineraale, wat se finnen. Um de rechte Aard vun Bargwark uttokören:"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
-msgid "a bit of coal"
-msgstr "een bietje Köhle"
+msgid "some coal"
+msgstr "een bietje Köhl"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "a lot of coal"
 msgstr "Een Bült Köhl"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:46
-msgid "a bit of iron"
+msgid "some iron"
 msgstr "een bietje Iesen"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:47
@@ -89,7 +89,7 @@ msgid "a lot of iron"
 msgstr "Een Bült Iesen"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:48
-msgid "a bit of gold"
+msgid "some gold"
 msgstr "een bietje Gold"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:49
@@ -97,7 +97,7 @@ msgid "a lot of gold"
 msgstr "Een Bült Gold"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:50
-msgid "a bit of granite"
+msgid "some granite"
 msgstr "een bietje Flint"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:51
@@ -292,7 +292,7 @@ msgid ""
 "The third material necessary for improved buildings is reed, used to cover "
 "roofs. Reed fields are planted by a gardener around his building, the reed "
 "yard."
-msgstr ""
+msgstr "Dat darde Baumaterial för gode Husen is Reit, wat man för Reitdacken bruukt. Reit word vun eenem Gaardner in de Naberskupp vun sienem Huus, de Reitplanteree, anplant."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:127
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:129

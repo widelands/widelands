@@ -24,9 +24,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-22 20:01+0000\n"
-"PO-Revision-Date: 2020-04-22 20:03+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"PO-Revision-Date: 2020-04-23 19:45+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -919,7 +919,7 @@ msgstr "Teams"
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:208
 #, c-format
 msgid "It is not recommended to permit waterway lengths greater than %u"
-msgstr ""
+msgstr "Es wird nicht empfohlen Wasserweglängen größer als %u zu erlauben."
 
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:60
 msgid "Create Map"
@@ -1263,7 +1263,7 @@ msgid ""
 " the east/south of the selected point. When shrinking the map, the desired "
 "number of columns/rows will be removed from the east/south of the splitting "
 "location."
-msgstr ""
+msgstr "Wähle die neue Kartengröße, dann klicke in die Karte um sie an der gewählten Position zu ändern. Wenn die Karte vergrößert wird, werden neue Spalten und Zeilen im Osten und Süden des gewählten Punktes angefügt. Wenn die Karte verkleinert wird, wird die gewünschte Anzahl der Spalten und Zeilen von Osten und Süden des Trennungspunktes gelöscht.  "
 
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
@@ -3636,13 +3636,13 @@ msgstr "Möchtest du dieses Gebäude wirklich abreißen?"
 
 #: ../../src/wui/actionconfirm.cc:247 ../../src/wui/actionconfirm.cc:306
 msgid "Preserve wares"
-msgstr ""
+msgstr "Waren behalten"
 
 #: ../../src/wui/actionconfirm.cc:249
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the dismantling time"
-msgstr ""
+msgstr "Alle Waren, die noch im Gebäude sind, werden durch den Bauarbeiter herausgetragen, was die Abrisszeit erhöht"
 
 #: ../../src/wui/actionconfirm.cc:298
 msgid "Enhance building?"
@@ -3662,7 +3662,7 @@ msgstr "Sei vorsichtig, wenn ein Feind in der Nähe ist!"
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the enhancing time"
-msgstr ""
+msgstr "Alle Waren, die noch im Gebäude sind, werden durch den Bauarbeiter herausgetragen, was die Ausbauzeit erhöht"
 
 #: ../../src/wui/actionconfirm.cc:360
 msgid "Sink the ship?"
@@ -3975,7 +3975,7 @@ msgstr "Zielvorgabe verkleinern"
 
 #: ../../src/wui/economy_options_window.cc:92
 msgid "Toggle infinite target"
-msgstr ""
+msgstr "Zielwert unendlich an/aus"
 
 #: ../../src/wui/economy_options_window.cc:100
 msgid "Increase target"
@@ -3996,7 +3996,7 @@ msgstr "Speichere Zielvorgabeeinstellungen"
 #. * TRANSLATORS: Infinite number of wares or workers
 #: ../../src/wui/economy_options_window.cc:248
 msgid "∞"
-msgstr ""
+msgstr "∞"
 
 #: ../../src/wui/economy_options_window.cc:512
 msgid "The profile name cannot be empty"
