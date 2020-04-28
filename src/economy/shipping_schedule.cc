@@ -1247,7 +1247,8 @@ Duration ShippingSchedule::update(Game& game) {
 						assert(plan.second.back().load_there.empty());
 						plan.second.back().load_there.push_back(std::make_pair(ppp.end, take));
 						// b
-						int32_t d = -1; Path path;
+						int32_t d = -1;
+						Path path;
 						fleet_.get_path(*ppp.start, *ppp.end, path);
 						game.map().calc_cost(path, &d, nullptr);
 						assert(d >= 0);
@@ -1257,8 +1258,7 @@ Duration ShippingSchedule::update(Game& game) {
 					// ship will visit a port close to start and nothing after that (but never start
 					// or end)
 					// → a) insert a new state with items for start and b) push a State to end
-					const uint32_t take =
-					   std::min(plan.first.get(game)->get_capacity(), ppp.open_count);
+					const uint32_t take = std::min(plan.first.get(game)->get_capacity(), ppp.open_count);
 					sslog("Phase 5.4.C: PPP %u –> %u (open_count %u): assigning %u items to %s\n",
 					      ppp.start->serial(), ppp.end->serial(), ppp.open_count, take,
 					      plan.first.get(game)->get_shipname().c_str());
