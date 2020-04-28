@@ -107,4 +107,20 @@ public:
 	void rebuild() override;
 };
 
+class TeamDropdown : public DropDownSupport<uintptr_t> {
+public:
+	TeamDropdown(UI::Panel* parent,
+	             const std::string& name,
+	             int32_t x,
+	             int32_t y,
+	             uint32_t w,
+	             uint32_t max_list_items,
+	             int button_dimension,
+	             const std::string& label,
+	             GameSettingsProvider* const settings,
+	             PlayerSlot id);
+
+	void rebuild() override;
+};
+
 #endif  // WL_UI_FSMENU_DROPDOWNSUPPORT_H

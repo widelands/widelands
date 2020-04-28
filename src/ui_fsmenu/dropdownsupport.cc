@@ -261,3 +261,56 @@ void InitDropdownSupport::rebuild() {
 	dropdown_.set_visible(true);
 	dropdown_.set_enabled(settings_->can_change_player_init(id_));
 }
+TeamDropdown::TeamDropdown(UI::Panel* parent,
+                           const std::string& name,
+                           int32_t x,
+                           int32_t y,
+                           uint32_t w,
+                           uint32_t max_list_items,
+                           int button_dimension,
+                           const std::string& label,
+                           GameSettingsProvider* const settings,
+                           PlayerSlot id)
+   : DropDownSupport<uintptr_t>(parent,
+                                name,
+                                x,
+                                y,
+                                w,
+                                max_list_items,
+                                button_dimension,
+                                label,
+                                UI::DropdownType::kTextualNarrow,
+                                UI::PanelStyle::kFsMenu,
+                                UI::ButtonStyle::kFsMenuSecondary,
+                                settings,
+                                id) {
+}
+/// Rebuild the team dropdown from the server settings. This will keep the host and client UIs in
+/// sync.
+
+void TeamDropdown::rebuild() {
+	const GameSettings& settings = settings_->settings();
+	//	if (team_selection_locked_) {
+	//		return;
+	//	}
+	const PlayerSettings& player_setting = settings.players[id_];
+	if (player_setting.state == PlayerSettings::State::kShared) {
+		dropdown_.set_visible(false);
+		dropdown_.set_enabled(false);
+		return;
+	}
+
+	dropdown_.clear();
+	dropdown_.add(_("No Team"), 0, g_gr->images().get("images/players/no_team.png"));
+#ifndef NDEBUG
+	const size_t no_of_team_colors = sizeof(kTeamColors) / sizeof(kTeamColors[0]);
+#endif
+	for (Widelands::TeamNumber t = 1; t <= settings.players.size() / 2; ++t) {
+		assert(t < no_of_team_colors);
+		dropdown_.add((boost::format(_("Team %d")) % static_cast<unsigned int>(t)).str(), t,
+		              playercolor_image(kTeamColors[t], "images/players/team.png"));
+	}
+	dropdown_.select(player_setting.team);
+	dropdown_.set_visible(true);
+	dropdown_.set_enabled(settings_->can_change_player_team(id_));
+}

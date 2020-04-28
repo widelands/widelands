@@ -68,13 +68,6 @@ SinglePlayerPlayerGroup::SinglePlayerPlayerGroup(UI::Panel* const parent,
            _("Type"),
            settings,
            id),
-     //     tribes_dropdown_(this,
-     //                      (boost::format("dropdown_tribes%d") % static_cast<unsigned
-     //                      int>(id)).str(), 0, 0, 50, 16, h,
-     //                      _("Tribe"),
-     //                      UI::DropdownType::kPictorial,
-     //                      UI::PanelStyle::kFsMenu,
-     //                      UI::ButtonStyle::kFsMenuSecondary),
      tribe_(this,
             (boost::format("dropdown_type%d") % static_cast<unsigned int>(id)).str(),
             0,
@@ -85,17 +78,6 @@ SinglePlayerPlayerGroup::SinglePlayerPlayerGroup(UI::Panel* const parent,
             _("Tribe"),
             settings,
             id),
-     //     init_dropdown_(this,
-     //                    (boost::format("dropdown_init%d") % static_cast<unsigned int>(id)).str(),
-     //                    0,
-     //                    0,
-     //                    50,
-     //                    16,
-     //                    h,
-     //                    "",
-     //                    UI::DropdownType::kTextualNarrow,
-     //                    UI::PanelStyle::kFsMenu,
-     //                    UI::ButtonStyle::kFsMenuSecondary),
      init_(this,
            (boost::format("dropdown_init%d") % static_cast<unsigned int>(id)).str(),
            0,
@@ -106,26 +88,23 @@ SinglePlayerPlayerGroup::SinglePlayerPlayerGroup(UI::Panel* const parent,
            "",
            settings,
            id),
-     team_dropdown_(this,
-                    (boost::format("dropdown_team%d") % static_cast<unsigned int>(id)).str(),
-                    0,
-                    0,
-                    h,
-                    16,
-                    h,
-                    _("Team"),
-                    UI::DropdownType::kPictorial,
-                    UI::PanelStyle::kFsMenu,
-                    UI::ButtonStyle::kFsMenuSecondary) {
+     teams_(this,
+            (boost::format("dropdown_team%d") % static_cast<unsigned int>(id)).str(),
+            0,
+            0,
+            h,
+            16,
+            h,
+            _("Team"),
+            settings,
+            id) {
 
 	add_space(0);
 	add(&player);
 	add(type_.get_dropdown());
 	add(tribe_.get_dropdown());
-	//	add(&tribes_dropdown_);
 	add(init_.get_dropdown());
-	//	add(&init_dropdown_);
-	add(&team_dropdown_);
+	add(teams_.get_dropdown());
 	add_space(0);
 	subscriber_ = Notifications::subscribe<NoteGameSettings>(
 	   [this](const NoteGameSettings& note) { on_gamesettings_updated(note); });
@@ -163,30 +142,27 @@ void SinglePlayerPlayerGroup::update() {
 		set_visible(false);
 		return;
 	}
-	log("players available...\n");
 	const PlayerSettings& player_setting = settings.players[id_];
-	//	rebuild_type_dropdown(settings);
 	type_.rebuild();
 	set_visible(true);
 
 	if (player_setting.state == PlayerSettings::State::kClosed ||
 	    player_setting.state == PlayerSettings::State::kOpen) {
-		team_dropdown_.set_visible(false);
-		team_dropdown_.set_enabled(false);
-		//		tribes_dropdown_.set_visible(false);
-		//		tribes_dropdown_.set_enabled(false);
+
+		teams_.set_visible(false);
+		teams_.set_enabled(false);
+
 		tribe_.set_visible(false);
 		tribe_.set_enabled(false);
-		//		init_dropdown_.set_visible(false);
-		//		init_dropdown_.set_enabled(false);
+
 		init_.set_visible(false);
 		init_.set_enabled(false);
 	} else {  // kHuman, kShared, kComputer
-		       //		rebuild_tribes_dropdown(settings);
 		tribe_.rebuild();
-		//		rebuild_init_dropdown(settings);
+
 		init_.rebuild();
-		//		rebuild_team_dropdown(settings);
+
+		teams_.rebuild();
 	}
 
 	// Trigger update for the other players for shared_in mode when slots open and close
@@ -199,4 +175,3 @@ void SinglePlayerPlayerGroup::update() {
 	//		}
 	//	}
 }
-
