@@ -1187,7 +1187,9 @@ Duration ShippingSchedule::update(Game& game) {
 					++idx;
 				}
 				if (index_of_start >= 0 && index_of_end < 0) {
-					if (expedition >= 0 && expedition <= index_of_start) { continue; }
+					if (expedition >= 0 && expedition <= index_of_start) {
+						continue;
+					}
 					if (indices_near_end.count(index_of_start + 1)) {
 						// ship will visit start and directly afterwards a port close to end (but never
 						// end)
@@ -1261,8 +1263,11 @@ Duration ShippingSchedule::update(Game& game) {
 						assert(d >= 0);
 						plan.second.push_back(SchedulingState(ppp.end, false, d));
 					}
-				} else if (index_of_start < 0 && index_of_end < 0 && indices_near_start.count(plan.second.size() - 1)) {
-					if (expedition >= 0) { continue; }
+				} else if (index_of_start < 0 && index_of_end < 0 &&
+				           indices_near_start.count(plan.second.size() - 1)) {
+					if (expedition >= 0) {
+						continue;
+					}
 					// ship will visit a port close to start and nothing after that (but never start
 					// or end)
 					// → a) insert a new state with items for start and b) push a State to end
@@ -1288,7 +1293,9 @@ Duration ShippingSchedule::update(Game& game) {
 					plan.second.push_back(SchedulingState(ppp.end, false, d));
 				} else if (index_of_start < 0 && index_of_end > 0 &&
 				           indices_near_start.count(index_of_end - 1)) {
-					if (expedition >= 0 && expedition < index_of_end) { continue; }
+					if (expedition >= 0 && expedition < index_of_end) {
+						continue;
+					}
 					// ship will visit a port close to start and directly afterwards end (but never
 					// start)
 					// → a) insert a new state with items for start, and b) update time for end
@@ -1329,7 +1336,9 @@ Duration ShippingSchedule::update(Game& game) {
 				} else {
 					for (uint32_t i_s : indices_near_start) {
 						if (indices_near_end.count(i_s + 1)) {
-							if (expedition >= 0 && expedition <= i_s) { break; }
+							if (expedition >= 0 && expedition <= i_s) {
+								break;
+							}
 							// ship will visit a port close to start and directly afterwards a port close
 							// to end (but never start or end)
 							// → a) insert a new state with items for start and b) a new state for end, and
