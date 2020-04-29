@@ -93,6 +93,26 @@ void TribeDropdownSupport::rebuild() {
 	}
 }
 
+/// This will update the game settings for the tribe or shared_in with the value
+/// currently selected in the tribes dropdown.
+void TribeDropdownSupport::selection_action() {
+	//	if (!has_tribe_access()) {
+	//		return;
+	//	}
+	const PlayerSettings& player_settings = settings_->settings().players[id_];
+	dropdown_.set_disable_style(player_settings.state == PlayerSettings::State::kShared ?
+	                               UI::ButtonDisableStyle::kPermpressed :
+	                               UI::ButtonDisableStyle::kFlat);
+	if (dropdown_.has_selection()) {
+		if (player_settings.state == PlayerSettings::State::kShared) {
+			settings_->set_player_shared(
+			   id_, boost::lexical_cast<unsigned int>(dropdown_.get_selected()));
+		} else {
+			settings_->set_player_tribe(id_, dropdown_.get_selected());
+		}
+	}
+}
+
 TypeDropdownSupport::TypeDropdownSupport(UI::Panel* parent,
                                          const std::string& name,
                                          int32_t x,
@@ -187,7 +207,7 @@ void TypeDropdownSupport::selection_action() {
 	if (!settings_->can_change_player_state(id_)) {
 		return;
 	}
-	selection_locked_ = true;
+	//	selection_locked_ = true;
 	if (dropdown_.has_selection()) {
 		const std::string& selected = dropdown_.get_selected();
 		PlayerSettings::State state = PlayerSettings::State::kComputer;
@@ -213,7 +233,7 @@ void TypeDropdownSupport::selection_action() {
 		}
 		settings_->set_player_state(id_, state);
 	}
-	selection_locked_ = false;
+	//	selection_locked_ = false;
 }
 
 InitDropdownSupport::InitDropdownSupport(UI::Panel* parent,
@@ -293,6 +313,17 @@ void InitDropdownSupport::fill() {
 		}
 	}
 }
+
+/// This will update the game settings for the initialization with the value
+/// currently selected in the initialization dropdown.
+void InitDropdownSupport::selection_action() {
+	if (!settings_->can_change_player_init(id_)) {
+		return;
+	}
+	if (dropdown_.has_selection()) {
+		settings_->set_player_init(id_, dropdown_.get_selected());
+	}
+}
 TeamDropdown::TeamDropdown(UI::Panel* parent,
                            const std::string& name,
                            int32_t x,
@@ -345,9 +376,9 @@ void TeamDropdown::rebuild() {
 }
 /// This will update the team settings with the value currently selected in the teams dropdown.
 void TeamDropdown::selection_action() {
-	selection_locked_ = true;
+	//	selection_locked_ = true;
 	if (dropdown_.has_selection()) {
 		settings_->set_player_team(id_, dropdown_.get_selected());
 	}
-	selection_locked_ = false;
+	//	selection_locked_ = false;
 }

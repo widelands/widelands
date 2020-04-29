@@ -36,12 +36,12 @@ public:
 	     id_(id),
 	     selection_locked_(false) {
 		dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
-		dropdown_.selected.connect([this]() { selection_action(); });
+		dropdown_.selected.connect([this]() { on_dropdown_selected(); });
 	}
 	virtual ~DropDownSupport() {
 	}
 
-	UI::Dropdown<T>* get_dropdown() {
+	UI::Panel* get_dropdown() {
 		return &dropdown_;
 	}
 	virtual void selection_action() {
@@ -61,6 +61,13 @@ protected:
 	GameSettingsProvider* const settings_;
 	PlayerSlot const id_;
 	bool selection_locked_;
+
+private:
+	void on_dropdown_selected() {
+		selection_locked_ = true;
+		selection_action();
+		selection_locked_ = false;
+	}
 };
 
 class TribeDropdownSupport : public DropDownSupport<std::string> {
@@ -74,6 +81,9 @@ public:
 	                     GameSettingsProvider* const settings,
 	                     PlayerSlot id);
 	void rebuild() override;
+
+private:
+	void selection_action() override;
 };
 
 class TypeDropdownSupport : public DropDownSupport<std::string> {
@@ -109,6 +119,7 @@ public:
 
 private:
 	void fill();
+	void selection_action() override;
 };
 
 class TeamDropdown : public DropDownSupport<uintptr_t> {
