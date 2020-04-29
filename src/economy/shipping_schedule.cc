@@ -1336,7 +1336,7 @@ Duration ShippingSchedule::update(Game& game) {
 				} else {
 					for (uint32_t i_s : indices_near_start) {
 						if (indices_near_end.count(i_s + 1)) {
-							if (expedition >= 0 && expedition <= i_s) {
+							if (expedition >= 0 && expedition <= static_cast<int>(i_s)) {
 								break;
 							}
 							// ship will visit a port close to start and directly afterwards a port close
