@@ -70,8 +70,7 @@ constexpr int16_t kNearbyDockMaxDistanceFactor = 8 * 1800;
 // #define sslog(...) if (g_verbose) log(__VA_ARGS__);
 #define sslog(...) log("NOCOM: " __VA_ARGS__);  // NOCOM
 
-ShippingSchedule::ShippingSchedule(ShipFleet& f)
-   : fleet_(f), last_updated_(0), loader_(nullptr) {
+ShippingSchedule::ShippingSchedule(ShipFleet& f) : fleet_(f), last_updated_(0), loader_(nullptr) {
 	assert(!fleet_.active());
 }
 
@@ -402,8 +401,8 @@ Duration ShippingSchedule::update(Game& game) {
 	if (update_me) {
 		last_actual_duration_recalculation_[update_me] = time;
 	}
-	sslog("FIRST PASS at %u (last %u, delta %u); will recalc for %s\n",
-	      time, last_updated_, time_since_last_update, update_me ? update_me->get_shipname().c_str() : "(nil)");
+	sslog("FIRST PASS at %u (last %u, delta %u); will recalc for %s\n", time, last_updated_,
+	      time_since_last_update, update_me ? update_me->get_shipname().c_str() : "(nil)");
 	for (auto& pair : plans_) {
 		if (pair.second.empty()) {
 			sslog("%s is idle\n", pair.first.get(game)->get_shipname().c_str());
@@ -418,14 +417,16 @@ Duration ShippingSchedule::update(Game& game) {
 		} else {
 			if (pair.second.front().duration_from_previous_location > time_since_last_update) {
 				pair.second.front().duration_from_previous_location -= time_since_last_update;
-				sslog("Regular-type heuristic update for %s\n", pair.first.get(game)->get_shipname().c_str());
+				sslog("Regular-type heuristic update for %s\n",
+				      pair.first.get(game)->get_shipname().c_str());
 			} else {
 				// She said five more seconds, and that was ten seconds ago…
 				// The ship is behind schedule, so this is an arbitrary estimate
 				// about the arrival time. Doesn't matter if it's inaccurate,
 				// the ship will most likely arrive within a few seconds.
 				pair.second.front().duration_from_previous_location /= 2;
-				sslog("UNEXPECTED-type heuristic update for %s\n", pair.first.get(game)->get_shipname().c_str());
+				sslog("UNEXPECTED-type heuristic update for %s\n",
+				      pair.first.get(game)->get_shipname().c_str());
 			}
 		}
 	}
