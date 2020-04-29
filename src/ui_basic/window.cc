@@ -61,8 +61,9 @@ constexpr int16_t kWindowTitlebarButtonsYPos =
 
 #define VT_B_MIDDLE_PIXMAP_LEN (VT_B_TOTAL_PIXMAP_LEN - 2 * VT_B_THINGY_PIXMAP_LEN)
 
-static const std::string kWindowImagePinned = kTemplateDir + "wui/window_pinned.png";
-static const std::string kWindowImageUnpinned = kTemplateDir + "wui/window_unpinned.png";
+static const std::string kWindowImageClose = kTemplateDir + "wui/window_close.png";
+static const std::string kWindowImagePinned = kTemplateDir + "wui/window_unpin.png";
+static const std::string kWindowImageUnpinned = kTemplateDir + "wui/window_pin.png";
 static const std::string kWindowImageMinimize = kTemplateDir + "wui/window_minimize.png";
 static const std::string kWindowImageMaximize = kTemplateDir + "wui/window_maximize.png";
 
@@ -117,7 +118,7 @@ Window::Window(Panel* const parent,
                               kWindowTitlebarButtonsSize,
                               kWindowTitlebarButtonsSize,
                               ButtonStyle::kWuiSecondary,
-                              g_gr->images().get(kTemplateDir + "wui/window_close.png"),
+                              g_gr->images().get(kWindowImageClose),
                               _("Close"))),
      button_pin_(new Button(this,
                             "b_pin",
