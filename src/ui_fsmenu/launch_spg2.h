@@ -30,6 +30,8 @@ private:
 	SinglePlayerSetupBox player_setup;
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 
+	bool is_scenario_;
+
 	void add_behaviour_to_widgets();
 	bool select_map();
 	void update(bool map_was_changed);

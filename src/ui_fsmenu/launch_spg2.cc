@@ -80,8 +80,9 @@ bool FullscreenMenuLaunchSPG2::clicked_select_map() {
 		return false;  // back was pressed
 	}
 
-	//	is_scenario_ = code == FullscreenMenuBase::MenuTarget::kScenarioGame;
-	settings_->set_scenario(code == FullscreenMenuBase::MenuTarget::kScenarioGame);
+	// why can't I ask settings_ if it is a scenario?? stupid to provide an extra bool variable...
+	is_scenario_ = code == FullscreenMenuBase::MenuTarget::kScenarioGame;
+	settings_->set_scenario(is_scenario_);
 
 	const MapData& mapdata = *msm.get_map();
 	nr_players_ = mapdata.nrplayers;
@@ -158,26 +159,28 @@ void FullscreenMenuLaunchSPG2::win_condition_selected() {
 }
 
 void FullscreenMenuLaunchSPG2::clicked_ok() {
-	//	if (!g_fs->file_exists(filename_))
-	//		throw WLWarning(_("File not found"),
-	//		                _("Widelands tried to start a game with a file that could not be "
-	//		                  "found at the given path.\n"
-	//		                  "The file was: %s\n"
-	//		                  "If this happens in a network game, the host might have selected "
-	//		                  "a file that you do not own. Normally, such a file should be sent "
-	//		                  "from the host to you, but perhaps the transfer was not yet "
-	//		                  "finished!?!"),
-	//		                filename_.c_str());
-	//	if (settings_->can_launch()) {
-	//		if (is_scenario_) {
-	//			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kScenarioGame);
-	//		} else {
-	//			if (win_condition_dropdown_.has_selection()) {
-	//				settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
-	//			}
-	//			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNormalGame);
-	//		}
-	//	}
+	const std::string filename_ = settings_->settings().mapfilename;
+	if (!g_fs->file_exists(filename_))
+		throw WLWarning(_("File not found"),
+		                _("Widelands tried to start a game with a file that could not be "
+		                  "found at the given path.\n"
+		                  "The file was: %s\n"
+		                  "If this happens in a network game, the host might have selected "
+		                  "a file that you do not own. Normally, such a file should be sent "
+		                  "from the host to you, but perhaps the transfer was not yet "
+		                  "finished!?!"),
+		                filename_.c_str());
+	if (settings_->can_launch()) {
+		settings_->set_scenario(true);
+		if (is_scenario_) {
+			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kScenarioGame);
+		} else {
+			if (win_condition_dropdown_.has_selection()) {
+				settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
+			}
+			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNormalGame);
+		}
+	}
 }
 
 FullscreenMenuLaunchSPG2::~FullscreenMenuLaunchSPG2() {
