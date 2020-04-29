@@ -58,30 +58,30 @@ SinglePlayerPlayerGroup::SinglePlayerPlayerGroup(UI::Panel* const parent,
             playercolor_image(id, "images/players/player_position_menu.png"),
             (boost::format(_("Player %u")) % static_cast<unsigned int>(id_ + 1)).str(),
             UI::Button::VisualState::kFlat),
-     type_(this,
-           (boost::format("dropdown_type%d") % static_cast<unsigned int>(id)).str(),
-           0,
-           0,
-           50,
-           h,
-           settings,
-           id),
+     player_type(this,
+                 (boost::format("dropdown_type%d") % static_cast<unsigned int>(id)).str(),
+                 0,
+                 0,
+                 h,
+                 h,
+                 settings,
+                 id),
      tribe_(this,
             (boost::format("dropdown_type%d") % static_cast<unsigned int>(id)).str(),
             0,
             0,
-            50,
+            h,
             h,
             settings,
             id),
-     init_(this,
-           (boost::format("dropdown_init%d") % static_cast<unsigned int>(id)).str(),
-           0,
-           0,
-           50,
-           h,
-           settings,
-           id),
+     start_type(this,
+                (boost::format("dropdown_init%d") % static_cast<unsigned int>(id)).str(),
+                0,
+                0,
+                4 * h,
+                h,
+                settings,
+                id),
      teams_(this,
             (boost::format("dropdown_team%d") % static_cast<unsigned int>(id)).str(),
             0,
@@ -93,9 +93,9 @@ SinglePlayerPlayerGroup::SinglePlayerPlayerGroup(UI::Panel* const parent,
 
 	add_space(0);
 	add(&player);
-	add(type_.get_dropdown());
+	add(player_type.get_dropdown());
 	add(tribe_.get_dropdown());
-	add(init_.get_dropdown());
+	add(start_type.get_dropdown());
 	add(teams_.get_dropdown());
 	add_space(0);
 	subscriber_ = Notifications::subscribe<NoteGameSettings>(
@@ -135,7 +135,7 @@ void SinglePlayerPlayerGroup::update() {
 		return;
 	}
 	const PlayerSettings& player_setting = settings.players[id_];
-	type_.rebuild();
+	player_type.rebuild();
 	set_visible(true);
 
 	if (player_setting.state == PlayerSettings::State::kClosed ||
@@ -147,12 +147,12 @@ void SinglePlayerPlayerGroup::update() {
 		tribe_.set_visible(false);
 		tribe_.set_enabled(false);
 
-		init_.set_visible(false);
-		init_.set_enabled(false);
+		start_type.set_visible(false);
+		start_type.set_enabled(false);
 	} else {  // kHuman, kShared, kComputer
 		tribe_.rebuild();
 
-		init_.rebuild();
+		start_type.rebuild();
 
 		teams_.rebuild();
 	}

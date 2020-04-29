@@ -23,12 +23,12 @@ private:
 	UI::Button player;
 	//	UI::Dropdown<std::string>
 	//	   type_dropdown_;  /// Select who owns the slot (human, AI, open, closed, shared-in).
-	TypeDropdownSupport type_;
+	TypeDropdownSupport player_type;
 	//	UI::Dropdown<std::string> tribes_dropdown_;  /// Select the tribe or shared_in player.
 	TribeDropdownSupport tribe_;
 	//	UI::Dropdown<uintptr_t>
 	//	   init_dropdown_;  /// Select the initialization (Headquarters, Fortified Village etc.)
-	InitDropdownSupport init_;
+	InitDropdownSupport start_type;
 	//	UI::Dropdown<uintptr_t> team_dropdown_;  /// Select the team number
 	TeamDropdown teams_;
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;

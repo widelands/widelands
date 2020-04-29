@@ -32,7 +32,7 @@ FullscreenMenuLaunchSPG2::FullscreenMenuLaunchSPG2(GameSettingsProvider* const s
               UI::Align::kRight,
               g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
 
-     player_setup(&individual_content_box, 0, 0, get_w() / 5, 0, settings, 50) {
+     player_setup(&individual_content_box, 0, 0, 400, 0, settings, 50) {
 
 	individual_content_box.add(&players_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	individual_content_box.add(&player_setup, UI::Box::Resizing::kExpandBoth);
@@ -40,17 +40,10 @@ FullscreenMenuLaunchSPG2::FullscreenMenuLaunchSPG2(GameSettingsProvider* const s
 	//	add_all_widgets();
 	title_.set_text("Launch game");
 
+	ok_.set_enabled(settings_->can_launch());
+
 	subscriber_ = Notifications::subscribe<NoteGameSettings>(
 	   [this](const NoteGameSettings& note) { update(false); });
-}
-
-void FullscreenMenuLaunchSPG2::add_behaviour_to_widgets() {
-	//	map_details.set_select_map_action([this]() { select_map(); });
-	//	win_condition_dropdown_own_.selected.connect([this]() { win_condition_selected(); });
-	//	ok_.sigclicked.connect([this]() { clicked_ok(); });
-	//	back_.sigclicked.connect([this]() { clicked_back(); });
-
-	// subscriber_ =
 }
 
 /**
@@ -80,7 +73,7 @@ bool FullscreenMenuLaunchSPG2::clicked_select_map() {
 		return false;  // back was pressed
 	}
 
-	// why can't I ask settings_ if it is a scenario?? stupid to provide an extra bool variable...
+	// why can't I ask settings_ if it is a scenario?? stupid to provide an extra bool field...
 	is_scenario_ = code == FullscreenMenuBase::MenuTarget::kScenarioGame;
 	settings_->set_scenario(is_scenario_);
 
@@ -103,17 +96,17 @@ bool FullscreenMenuLaunchSPG2::clicked_select_map() {
  * buttons and text.
  */
 void FullscreenMenuLaunchSPG2::update(bool) {
+	log("update\n");
 	const GameSettings& settings = settings_->settings();
 
 	map_details.update(settings_);
-	//			filename_ = settings.mapfilename;
 	nr_players_ = settings.players.size();
 
 	ok_.set_enabled(settings_->can_launch());
 
 	peaceful_.set_state(settings_->is_peaceful_mode());
 
-	//		set_player_names_and_tribes();
+	set_player_names_and_tribes();
 	//}
 
 	//	// "Choose Position" Buttons in front of PlayerDescriptionGroups
@@ -130,6 +123,34 @@ void FullscreenMenuLaunchSPG2::update(bool) {
 	//	for (uint32_t i = 0; i < kMaxPlayers; ++i) {
 	//		players_[i]->update();
 	//	}
+}
+
+/**
+ * if map was selected to be loaded as scenario, set all values like
+ * player names and player tribes and take care about visibility
+ * and usability of all the parts of the UI.
+ */
+void FullscreenMenuLaunchSPG2::set_player_names_and_tribes() {
+	if (settings_->settings().mapfilename.empty()) {
+		throw wexception("settings()->scenario was set to true, but no map is available");
+	}
+	Widelands::Map map;  //  MapLoader needs a place to put its preload data
+	std::unique_ptr<Widelands::MapLoader> map_loader(
+	   map.get_correct_loader(settings_->settings().mapfilename));
+	map.set_filename(settings_->settings().mapfilename);
+	map_loader->preload_map(true);
+	Widelands::PlayerNumber const nrplayers = map.get_nrplayers();
+	for (uint8_t i = 0; i < nrplayers; ++i) {
+		settings_->set_player_name(i, map.get_scenario_player_name(i + 1));
+		const std::string playertribe = map.get_scenario_player_tribe(i + 1);
+		if (playertribe.empty()) {
+			// Set tribe selection to random
+			settings_->set_player_tribe(i, "", true);
+		} else {
+			// Set tribe selection from map
+			settings_->set_player_tribe(i, playertribe);
+		}
+	}
 }
 
 /**
@@ -159,8 +180,8 @@ void FullscreenMenuLaunchSPG2::win_condition_selected() {
 }
 
 void FullscreenMenuLaunchSPG2::clicked_ok() {
-	const std::string filename_ = settings_->settings().mapfilename;
-	if (!g_fs->file_exists(filename_))
+	const std::string filename = settings_->settings().mapfilename;
+	if (!g_fs->file_exists(filename))
 		throw WLWarning(_("File not found"),
 		                _("Widelands tried to start a game with a file that could not be "
 		                  "found at the given path.\n"
@@ -169,7 +190,7 @@ void FullscreenMenuLaunchSPG2::clicked_ok() {
 		                  "a file that you do not own. Normally, such a file should be sent "
 		                  "from the host to you, but perhaps the transfer was not yet "
 		                  "finished!?!"),
-		                filename_.c_str());
+		                filename.c_str());
 	if (settings_->can_launch()) {
 		settings_->set_scenario(true);
 		if (is_scenario_) {

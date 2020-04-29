@@ -32,9 +32,11 @@ private:
 
 	bool is_scenario_;
 
-	void add_behaviour_to_widgets();
 	bool select_map();
 	void update(bool map_was_changed);
+	void set_player_names_and_tribes();
+	void switch_to_position(uint8_t const pos);
+	void safe_place_for_host(uint8_t const newplayernumber);
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_SPG2_H
