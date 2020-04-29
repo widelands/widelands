@@ -51,7 +51,11 @@ PortdockDescr::PortdockDescr(char const* const init_name, char const* const init
 }
 
 PortDock::PortDock(Warehouse* wh)
-   : PlayerImmovable(g_portdock_descr), fleet_(nullptr), warehouse_(wh), expedition_ready_(false), expedition_cancelling_(false) {
+   : PlayerImmovable(g_portdock_descr),
+     fleet_(nullptr),
+     warehouse_(wh),
+     expedition_ready_(false),
+     expedition_cancelling_(false) {
 }
 
 PortDock::~PortDock() {

@@ -66,7 +66,8 @@ void ExpeditionBootstrap::input_callback(
 	// accidentally cancelled. The solution is to iterate ALL queues of this type and
 	// check whether their count and transfers still match up.
 	for (auto& pair : eb->queues_) {
-		if (pair.first->get_type() == queue->get_type() && pair.first->get_index() == queue->get_index()) {
+		if (pair.first->get_type() == queue->get_type() &&
+		    pair.first->get_index() == queue->get_index()) {
 			pair.first->set_max_fill(pair.first->get_max_fill());  // calls update()
 		}
 	}
