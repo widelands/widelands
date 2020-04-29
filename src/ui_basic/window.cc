@@ -51,7 +51,7 @@ constexpr int16_t kBottomBorderThickness = 20;
 /// Width to use as the corner. This must be >= kVerticalBorderThickness.
 constexpr int16_t kCornerWidth = 20;
 
-constexpr int16_t kHorizontalBorderMiddleLength (kHorizonalBorderTotalLength - 2 * kCornerWidth);
+constexpr int16_t kHorizontalBorderMiddleLength(kHorizonalBorderTotalLength - 2 * kCornerWidth);
 
 /// Width/height the vertical border graphics must have.
 constexpr int16_t kVerticalBorderThickness = 20;
@@ -61,7 +61,8 @@ constexpr int16_t kVerticalBorderTotalLength = 100;
 // TODO(Nordfriese): What is this?
 constexpr int16_t kVerticalBorderThingyHeight = 20;
 
-constexpr int16_t kVerticalBorderMiddleLength = (kVerticalBorderTotalLength - 2 * kVerticalBorderThingyHeight);
+constexpr int16_t kVerticalBorderMiddleLength =
+   (kVerticalBorderTotalLength - 2 * kVerticalBorderThingyHeight);
 
 static const std::string kWindowImageClose = kTemplateDir + "wui/window_close.png";
 static const std::string kWindowImagePinned = kTemplateDir + "wui/window_unpin.png";
@@ -160,8 +161,8 @@ Window::Window(Panel* const parent,
 	});
 	update_toolbar_buttons();
 
-	set_border(
-	   kVerticalBorderThickness, kVerticalBorderThickness, kTopBorderThickness, kBottomBorderThickness);
+	set_border(kVerticalBorderThickness, kVerticalBorderThickness, kTopBorderThickness,
+	           kBottomBorderThickness);
 	set_top_on_click(true);
 	set_layout_toplevel(true);
 	layout();
@@ -233,8 +234,9 @@ void Window::layout() {
 	button_close_->set_pos(Vector2i(
 	   get_w() + kWindowTitlebarButtonsPos - kTopBorderThickness, kWindowTitlebarButtonsPos));
 	button_pin_->set_pos(Vector2i(kWindowTitlebarButtonsPos, kWindowTitlebarButtonsPos));
-	button_minimize_->set_pos(Vector2i(button_pin_->get_x() + button_pin_->get_w() + kWindowTitlebarButtonsSpacing,
-	   kWindowTitlebarButtonsPos));
+	button_minimize_->set_pos(
+	   Vector2i(button_pin_->get_x() + button_pin_->get_w() + kWindowTitlebarButtonsSpacing,
+	            kWindowTitlebarButtonsPos));
 }
 
 /**
@@ -344,8 +346,8 @@ void Window::draw(RenderTarget& dst) {
  * Redraw the window frame
  */
 void Window::draw_border(RenderTarget& dst) {
-	static_assert(kCornerWidth >= kVerticalBorderThickness,
-	              "kCornerWidth < kVerticalBorderThickness");
+	static_assert(
+	   kCornerWidth >= kVerticalBorderThickness, "kCornerWidth < kVerticalBorderThickness");
 	static_assert(kHorizontalBorderMiddleLength > 0, "kHorizontalBorderMiddleLength <= 0");
 
 	const int32_t hz_bar_end = get_w() - kCornerWidth;
@@ -361,15 +363,16 @@ void Window::draw_border(RenderTarget& dst) {
 		static_assert(0 <= kCornerWidth, "assert(0 <= kCornerWidth) failed.");
 		for (; pos < hz_bar_end_minus_middle; pos += kHorizontalBorderMiddleLength) {
 			dst.blitrect(
-			   Vector2i(pos, 0), pic_top_, Recti(Vector2i(kCornerWidth, 0),
-			                                     kHorizontalBorderMiddleLength, kTopBorderThickness));
+			   Vector2i(pos, 0), pic_top_,
+			   Recti(Vector2i(kCornerWidth, 0), kHorizontalBorderMiddleLength, kTopBorderThickness));
 		}
 
 		// odd pixels of top bar and top right corner
 		const int32_t width = hz_bar_end - pos + kCornerWidth;
 		assert(0 <= kHorizonalBorderTotalLength - width);
-		dst.blitrect(Vector2i(pos, 0), pic_top_,
-		             Recti(Vector2i(kHorizonalBorderTotalLength - width, 0), width, kTopBorderThickness));
+		dst.blitrect(
+		   Vector2i(pos, 0), pic_top_,
+		   Recti(Vector2i(kHorizonalBorderTotalLength - width, 0), width, kTopBorderThickness));
 	}
 
 	// draw the title if we have one
@@ -392,7 +395,8 @@ void Window::draw_border(RenderTarget& dst) {
 
 		{  // Left border
 
-			static_assert(0 <= kVerticalBorderThickness, "assert(0 <= kVerticalBorderThickness) failed.");
+			static_assert(
+			   0 <= kVerticalBorderThickness, "assert(0 <= kVerticalBorderThickness) failed.");
 			dst.blitrect  // left top thingy
 			   (Vector2i(0, kTopBorderThickness), pic_lborder_,
 			    Recti(Vector2i::zero(), kVerticalBorderThickness, kVerticalBorderThingyHeight));
@@ -400,7 +404,8 @@ void Window::draw_border(RenderTarget& dst) {
 			int32_t pos = kTopBorderThickness + kVerticalBorderThingyHeight;
 
 			//  left bar
-			static_assert(0 <= kVerticalBorderThingyHeight, "assert(0 <= kVerticalBorderThingyHeight) failed.");
+			static_assert(
+			   0 <= kVerticalBorderThingyHeight, "assert(0 <= kVerticalBorderThingyHeight) failed.");
 			for (; pos < vt_bar_end_minus_middle; pos += kVerticalBorderMiddleLength) {
 				dst.blitrect(Vector2i(0, pos), pic_lborder_,
 				             Recti(Vector2i(0, kVerticalBorderThingyHeight), kVerticalBorderThickness,
@@ -411,8 +416,8 @@ void Window::draw_border(RenderTarget& dst) {
 			const int32_t height = vt_bar_end - pos + kVerticalBorderThingyHeight;
 			assert(0 <= kVerticalBorderTotalLength - height);
 			dst.blitrect(
-			   Vector2i(0, pos), pic_lborder_,
-			   Recti(Vector2i(0, kVerticalBorderTotalLength - height), kVerticalBorderThickness, height));
+			   Vector2i(0, pos), pic_lborder_, Recti(Vector2i(0, kVerticalBorderTotalLength - height),
+			                                         kVerticalBorderThickness, height));
 		}
 
 		{  // Right border
@@ -425,7 +430,8 @@ void Window::draw_border(RenderTarget& dst) {
 			int32_t pos = kTopBorderThickness + kVerticalBorderThingyHeight;
 
 			//  right bar
-			static_assert(0 <= kVerticalBorderThingyHeight, "assert(0 <= kVerticalBorderThingyHeight) failed.");
+			static_assert(
+			   0 <= kVerticalBorderThingyHeight, "assert(0 <= kVerticalBorderThingyHeight) failed.");
 			for (; pos < vt_bar_end_minus_middle; pos += kVerticalBorderMiddleLength) {
 				dst.blitrect(Vector2i(right_border_x, pos), pic_rborder_,
 				             Recti(Vector2i(0, kVerticalBorderThingyHeight), kVerticalBorderThickness,
@@ -434,9 +440,9 @@ void Window::draw_border(RenderTarget& dst) {
 
 			// odd pixels of right bar and right bottom thingy
 			const int32_t height = vt_bar_end - pos + kVerticalBorderThingyHeight;
-			dst.blitrect(
-			   Vector2i(right_border_x, pos), pic_rborder_,
-			   Recti(Vector2i(0, kVerticalBorderTotalLength - height), kVerticalBorderThickness, height));
+			dst.blitrect(Vector2i(right_border_x, pos), pic_rborder_,
+			             Recti(Vector2i(0, kVerticalBorderTotalLength - height),
+			                   kVerticalBorderThickness, height));
 		}
 
 		{  // Bottom border
