@@ -53,7 +53,7 @@ constexpr Duration kHorriblyLongDuration = 10 * 60 * 1000;  // 10 min
 // Only assign wares to a ship in 5.1 if it's score is higher than a certain
 // threshold based on minimal distance. Ships with lower scores will only be
 // accepted if not enough idle ships are found.
-constexpr uint16_t kMinScoreForImmediateAcceptFactor = 1;  // NOCOM needs testing
+constexpr uint16_t kMinScoreForImmediateAcceptFactor = 5;  // NOCOM needs testing
 
 // Average sailing-time distance for two ports to be considered "close by" in 5.4
 constexpr int16_t kDockGroupMaxDistanceFactor = 12 * 1800;
@@ -1165,7 +1165,13 @@ Duration ShippingSchedule::update(Game& game) {
 				std::set<uint32_t> indices_near_start;
 				std::set<uint32_t> indices_near_end;
 				uint32_t idx = 0;
+				int32_t expedition = -1;
+				assert(!plan.second.empty());
 				for (const SchedulingState& ss : plan.second) {
+					if (ss.expedition) {
+						assert(expedition < 0);
+						expedition = idx;
+					}
 					if (ss.dock == ppp.start) {
 						assert(index_of_start < 0);
 						index_of_start = idx;
@@ -1181,6 +1187,7 @@ Duration ShippingSchedule::update(Game& game) {
 					++idx;
 				}
 				if (index_of_start >= 0 && index_of_end < 0) {
+					if (expedition >= 0 && expedition <= index_of_start) { continue; }
 					if (indices_near_end.count(index_of_start + 1)) {
 						// ship will visit start and directly afterwards a port close to end (but never
 						// end)
@@ -1254,7 +1261,8 @@ Duration ShippingSchedule::update(Game& game) {
 						assert(d >= 0);
 						plan.second.push_back(SchedulingState(ppp.end, false, d));
 					}
-				} else if (index_of_start < 0 && index_of_end < 0) {
+				} else if (index_of_start < 0 && index_of_end < 0 && indices_near_start.count(plan.second.size() - 1)) {
+					if (expedition >= 0) { continue; }
 					// ship will visit a port close to start and nothing after that (but never start
 					// or end)
 					// → a) insert a new state with items for start and b) push a State to end
@@ -1280,6 +1288,7 @@ Duration ShippingSchedule::update(Game& game) {
 					plan.second.push_back(SchedulingState(ppp.end, false, d));
 				} else if (index_of_start < 0 && index_of_end > 0 &&
 				           indices_near_start.count(index_of_end - 1)) {
+					if (expedition >= 0 && expedition < index_of_end) { continue; }
 					// ship will visit a port close to start and directly afterwards end (but never
 					// start)
 					// → a) insert a new state with items for start, and b) update time for end
@@ -1320,6 +1329,7 @@ Duration ShippingSchedule::update(Game& game) {
 				} else {
 					for (uint32_t i_s : indices_near_start) {
 						if (indices_near_end.count(i_s + 1)) {
+							if (expedition >= 0 && expedition <= i_s) { break; }
 							// ship will visit a port close to start and directly afterwards a port close
 							// to end (but never start or end)
 							// → a) insert a new state with items for start and b) a new state for end, and
