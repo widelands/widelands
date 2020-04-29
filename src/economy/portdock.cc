@@ -51,7 +51,7 @@ PortdockDescr::PortdockDescr(char const* const init_name, char const* const init
 }
 
 PortDock::PortDock(Warehouse* wh)
-   : PlayerImmovable(g_portdock_descr), fleet_(nullptr), warehouse_(wh), expedition_ready_(false) {
+   : PlayerImmovable(g_portdock_descr), fleet_(nullptr), warehouse_(wh), expedition_ready_(false), expedition_cancelling_(false) {
 }
 
 PortDock::~PortDock() {
@@ -500,7 +500,7 @@ uint32_t PortDock::count_waiting(const PortDock* dest) const {
 
 /// \returns whether an expedition was started or is even ready
 bool PortDock::expedition_started() const {
-	return (expedition_bootstrap_ != nullptr) || expedition_ready_;
+	return !expedition_cancelling_ && ((expedition_bootstrap_ != nullptr) || expedition_ready_);
 }
 
 /// Start an expedition
@@ -523,10 +523,14 @@ void PortDock::set_expedition_bootstrap_complete(Game& game, bool complete) {
 
 void PortDock::cancel_expedition(Game& game) {
 	// Reset
+	assert(!expedition_cancelling_);
+	expedition_cancelling_ = true;
 	expedition_ready_ = false;
 
 	expedition_bootstrap_->cancel(game);
 	expedition_bootstrap_.reset(nullptr);
+
+	expedition_cancelling_ = false;
 }
 
 void PortDock::log_general_info(const EditorGameBase& egbase) const {
