@@ -42,7 +42,7 @@ namespace Widelands {
 *******************************************************************************/
 
 // Performance tradeoff in the First Pass
-constexpr uint32_t kActualDurationsRecalculationInterval = 20 * 1000;
+constexpr uint32_t kActualDurationsRecalculationInterval = 60 * 1000;
 
 // Give a ship the highest score for assigning wares to it if it will
 // arrive at the port of interest within the next 10 s,
@@ -71,7 +71,7 @@ constexpr int16_t kNearbyDockMaxDistanceFactor = 8 * 1800;
 #define sslog(...) log("NOCOM: " __VA_ARGS__);  // NOCOM
 
 ShippingSchedule::ShippingSchedule(ShipFleet& f)
-   : fleet_(f), last_updated_(0), last_actual_durations_recalculation_(0), loader_(nullptr) {
+   : fleet_(f), last_updated_(0), loader_(nullptr) {
 	assert(!fleet_.active());
 }
 
@@ -276,6 +276,12 @@ void ShippingSchedule::ship_removed(const Game&, Ship* ship) {
 	auto it = plans_.find(ship);
 	assert(it != plans_.end());
 	plans_.erase(it);
+
+	auto i = last_actual_duration_recalculation_.find(ship);
+	if (i != last_actual_duration_recalculation_.end()) {
+		last_actual_duration_recalculation_.erase(i);
+	}
+
 	// Handling any items that were intended to be transported by this ship
 	// is deferred to the next call to update()
 }
@@ -284,6 +290,7 @@ void ShippingSchedule::ship_added(Game& game, Ship& s) {
 	sslog("\nShippingSchedule::ship_added (%s)\n", s.get_shipname().c_str());
 	assert(!s.get_destination());
 	plans_[&s] = ShipPlan();
+	last_actual_duration_recalculation_[&s] = game.get_gametime();
 	if (fleet_.get_ports().empty()) {
 #ifndef NDEBUG
 		for (ShippingItem& si : s.items_) {
@@ -367,45 +374,58 @@ Duration ShippingSchedule::update(Game& game) {
 	 * work suboptimally, but that is a bad strategy so the player deserves no more.)
 	 */
 
+	sslog("\nShippingSchedule::update\n");
 	assert(plans_.size() == fleet_.get_ships().size());
 	if (fleet_.get_ships().empty()) {
+		sslog("No ships\n");
 		return endless();  // wait until we get a ship
 	}
 
 	/* FIRST PASS:
 	 * Scan all ships. Refresh the prediction when they will arrive at the next port.
 	 * Most of the time, a simple estimate is enough.
-	 * Now and then (every 20s), we calculate the exact time though to account for
+	 * Now and then (every 60s), we calculate the exact time though to account for
 	 * delays resulting e.g. from ships stopping to let another ship pass.
+	 * This can be very costly, so we do it for only one ship per update.
 	 */
 	const uint32_t time = game.get_gametime();
 	const uint32_t time_since_last_update = time - last_updated_;
-	sslog("\nShippingSchedule::update at %u (last %u, %u)\n", time, last_updated_,
-	      last_actual_durations_recalculation_);
-	if (time - last_actual_durations_recalculation_ > kActualDurationsRecalculationInterval) {
-		for (auto& pair : plans_) {
-			if (!pair.second.empty()) {
-				Path path;
-				pair.first.get(game)->calculate_sea_route(game, *pair.second.front().dock, &path);
-				int32_t d = -1;
-				game.map().calc_cost(path, &d, nullptr);
-				assert(d >= 0);
-				pair.second.front().duration_from_previous_location = d;
-			}
+
+	uint32_t earliest_real_update = time - std::min(time, kActualDurationsRecalculationInterval);
+	Ship* update_me = nullptr;
+	for (auto& pair : last_actual_duration_recalculation_) {
+		if (pair.second < earliest_real_update) {
+			earliest_real_update = pair.second;
+			update_me = pair.first.get(game);
 		}
-		last_actual_durations_recalculation_ = time;
-	} else {
-		for (auto& pair : plans_) {
-			if (!pair.second.empty()) {
-				if (pair.second.front().duration_from_previous_location > time_since_last_update) {
-					pair.second.front().duration_from_previous_location -= time_since_last_update;
-				} else {
-					// She said five more seconds, and that was ten seconds ago…
-					// The ship is behind schedule, so this is an arbitrary estimate
-					// about the arrival time. Doesn't matter if it's inaccurate,
-					// the ship will most likely arrive within a few seconds.
-					pair.second.front().duration_from_previous_location /= 2;
-				}
+	}
+	if (update_me) {
+		last_actual_duration_recalculation_[update_me] = time;
+	}
+	sslog("FIRST PASS at %u (last %u, delta %u); will recalc for %s\n",
+	      time, last_updated_, time_since_last_update, update_me ? update_me->get_shipname().c_str() : "(nil)");
+	for (auto& pair : plans_) {
+		if (pair.second.empty()) {
+			sslog("%s is idle\n", pair.first.get(game)->get_shipname().c_str());
+		} else if (update_me && update_me->serial() == pair.first.serial()) {
+			sslog("Recalculate for %s\n", pair.first.get(game)->get_shipname().c_str());
+			Path path;
+			pair.first.get(game)->calculate_sea_route(game, *pair.second.front().dock, &path);
+			int32_t d = -1;
+			game.map().calc_cost(path, &d, nullptr);
+			assert(d >= 0);
+			pair.second.front().duration_from_previous_location = d;
+		} else {
+			if (pair.second.front().duration_from_previous_location > time_since_last_update) {
+				pair.second.front().duration_from_previous_location -= time_since_last_update;
+				sslog("Regular-type heuristic update for %s\n", pair.first.get(game)->get_shipname().c_str());
+			} else {
+				// She said five more seconds, and that was ten seconds ago…
+				// The ship is behind schedule, so this is an arbitrary estimate
+				// about the arrival time. Doesn't matter if it's inaccurate,
+				// the ship will most likely arrive within a few seconds.
+				pair.second.front().duration_from_previous_location /= 2;
+				sslog("UNEXPECTED-type heuristic update for %s\n", pair.first.get(game)->get_shipname().c_str());
 			}
 		}
 	}
@@ -510,6 +530,7 @@ Duration ShippingSchedule::update(Game& game) {
 				assert(planned_capacity == 0);
 			}
 #endif
+
 			while (delta > 0) {
 				// reduce or cancel the last order in the queue
 				const uint32_t last_arrival = *arrival_times.crbegin();
@@ -568,7 +589,9 @@ Duration ShippingSchedule::update(Game& game) {
 					}
 				}
 			}
-			map[dest].second = delta;
+			if (delta < 0) {
+				map[dest].second = delta;
+			}
 		}
 		items_in_ports[dock] = map;
 	}
@@ -1516,11 +1539,16 @@ void ShippingSchedule::save(const EditorGameBase& egbase,
 	fw.unsigned_16(kCurrentPacketVersion);
 
 	fw.unsigned_32(last_updated_);
-	fw.unsigned_32(last_actual_durations_recalculation_);
 
 	fw.unsigned_32(plans_.size());
 	for (const auto& pair : plans_) {
 		fw.unsigned_32(mos.get_object_file_index(*pair.first.get(egbase)));
+
+		// TODO(Nordfriese): Replace with at() when we break savegame compatibility
+		// (can only be not-present in compatibility cases)
+		auto it = last_actual_duration_recalculation_.find(pair.first);
+		fw.unsigned_32(it == last_actual_duration_recalculation_.end() ? 0 : it->second);
+
 		fw.unsigned_32(pair.second.size());
 		for (const SchedulingState& ss : pair.second) {
 			fw.unsigned_32(mos.get_object_file_index(*ss.dock));
@@ -1542,9 +1570,9 @@ void ShippingSchedule::load(FileRead& fr) {
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
 			last_updated_ = fr.unsigned_32();
-			last_actual_durations_recalculation_ = fr.unsigned_32();
 			for (uint32_t nr_plans = fr.unsigned_32(); nr_plans; --nr_plans) {
 				const Serial ship = fr.unsigned_32();
+				loader_->recalc[ship] = fr.unsigned_32();
 				std::list<SchedulingStateT<Serial, CargoListLoader>> states_for_this_ship;
 				for (uint32_t nr_states = fr.unsigned_32(); nr_states; --nr_states) {
 					const Serial dock = fr.unsigned_32();
@@ -1558,7 +1586,7 @@ void ShippingSchedule::load(FileRead& fr) {
 					}
 					states_for_this_ship.push_back(state);
 				}
-				(*loader_)[ship] = states_for_this_ship;
+				loader_->plan[ship] = states_for_this_ship;
 			}
 		} else {
 			throw UnhandledVersionError("ShippingSchedule", packet_version, kCurrentPacketVersion);
@@ -1570,7 +1598,11 @@ void ShippingSchedule::load(FileRead& fr) {
 
 void ShippingSchedule::load_pointers(MapObjectLoader& mol) {
 	assert(loader_);
-	for (const auto& plan : *loader_) {
+	last_actual_duration_recalculation_.clear();
+	for (const auto& times : loader_->recalc) {
+		last_actual_duration_recalculation_[&mol.get<Ship>(times.first)] = times.second;
+	}
+	for (const auto& plan : loader_->plan) {
 		ShipPlan plan_for_this_ship;
 		for (const auto& state_loader : plan.second) {
 			SchedulingState state(&mol.get<PortDock>(state_loader.dock), state_loader.expedition,
@@ -1595,8 +1627,10 @@ void ShippingSchedule::load_finish(EditorGameBase& egbase) {
 	assert(!loader_);
 	assert(empty());
 	for (Ship* ship : fleet_.get_ships()) {
+		last_actual_duration_recalculation_[ship] = 0;
 		ShipPlan& sp = plans_[ship];
 		assert(sp.empty());
+		std::set<Serial> pushed;
 		if (PortDock* pd = ship->get_destination()) {
 			Path path;
 			int32_t d = -1;
@@ -1604,6 +1638,20 @@ void ShippingSchedule::load_finish(EditorGameBase& egbase) {
 			egbase.map().calc_cost(path, &d, nullptr);
 			assert(d >= 0);
 			sp.push_back(SchedulingState(pd, false, d));
+			pushed.insert(pd->serial());
+		}
+		for (const ShippingItem& si : ship->items_) {
+			if (!pushed.count(si.destination_dock_.serial())) {
+				if (PortDock* pd = si.destination_dock_.get(egbase)) {
+					Path path;
+					int32_t d = -1;
+					fleet_.get_path(*sp.back().dock, *pd, path);
+					egbase.map().calc_cost(path, &d, nullptr);
+					assert(d >= 0);
+					sp.push_back(SchedulingState(pd, false, d));
+					pushed.insert(pd->serial());
+				}
+			}
 		}
 	}
 }

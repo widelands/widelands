@@ -70,19 +70,19 @@ public:
 	// returns the time until the next update
 	Duration update(Game&);
 
-	void ship_added(Game&, Ship& s);
+	void ship_added(Game&, Ship&);
 	void port_added(Game&, PortDock&);
 	/**
 	  * Forget the plans for this ship. Disappointed items will be
 	  * taken care of again by the next update().
 	  */
-	void ship_removed(const Game&, Ship* dangling_pointer_to_deleted_ship);
+	void ship_removed(const Game&, Ship*);
 	/**
 	  * This one is more critical. Most of the consequences will be handled by update(),
 	  * but we also have to take some action (rerouting ships, updating
 	  * shippingitems, …) immediately or we risk segfaults.
 	  */
-	void port_removed(Game&, PortDock* dangling_pointer_to_deleted_portdock);
+	void port_removed(Game&, PortDock*);
 
 	// Load wares&workers onto the ship and set the destination
 	void ship_arrived(Game&, Ship&, PortDock&);
@@ -102,9 +102,12 @@ private:
 	std::map<OPtr<Ship>, ShipPlan> plans_;
 
 	uint32_t last_updated_;
-	uint32_t last_actual_durations_recalculation_;
+	std::map<OPtr<Ship>, uint32_t> last_actual_duration_recalculation_;
 
-	using ScheduleLoader = std::map<Serial, std::list<SchedulingStateT<Serial, CargoListLoader>>>;
+	struct ScheduleLoader {
+		std::map<Serial, std::list<SchedulingStateT<Serial, CargoListLoader>>> plan;
+		std::map<Serial, uint32_t> recalc;
+	};
 	std::unique_ptr<ScheduleLoader> loader_;
 
 	DISALLOW_COPY_AND_ASSIGN(ShippingSchedule);
