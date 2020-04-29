@@ -105,6 +105,7 @@ void InputQueue::set_max_size(const Quantity size) {
 	// No update() since set_max_fill calls it anyway
 }
 
+// I assume elsewhere than no check for old size ?= new size takes place
 void InputQueue::set_max_fill(Quantity size) {
 	if (size > max_size_)
 		size = max_size_;
