@@ -908,7 +908,10 @@ Duration ShippingSchedule::update(Game& game) {
 		}
 		return 0u;
 	};
-	auto get_free_capacity_between = [this, &game](Ship& ship, ShipPlan& plan, PortDock& start, PortDock& end, bool& found_start, bool& found_end, bool& expedition, Duration& arrival_time, Duration& detour_start_end, uint32_t& free_capacity) {
+	auto get_free_capacity_between = [this, &game](
+	   Ship& ship, ShipPlan& plan, PortDock& start, PortDock& end, bool& found_start,
+	   bool& found_end, bool& expedition, Duration& arrival_time, Duration& detour_start_end,
+	   uint32_t& free_capacity) {
 		found_start = false;
 		found_end = false;
 		expedition = false;
@@ -984,7 +987,8 @@ Duration ShippingSchedule::update(Game& game) {
 		}
 	};
 	// Shared logic for steps 1 and 3, pulled out as a lambda function.
-	auto load_on_ship = [this, &game, get_free_capacity_between](PrioritisedPortPair& ppp, std::list<PrioritisedPortPair>& all_ppps) {
+	auto load_on_ship = [this, &game, get_free_capacity_between](
+	   PrioritisedPortPair& ppp, std::list<PrioritisedPortPair>& all_ppps) {
 		const uint32_t take = std::min(ppp.open_count, ppp.ships.front().capacity);
 		Ship* ship = ppp.ships.front().ship;
 		sslog("load_on_ship: PPP %u –> %u (open_count %u): assigning %u items (capacity %u) to %s\n",
@@ -1054,11 +1058,13 @@ Duration ShippingSchedule::update(Game& game) {
 			Duration arrival_time = 0;
 			Duration detour_start_end = 0;
 			uint32_t free_capacity = 0;
-			get_free_capacity_between(*ship, plans_.at(ship), *p.start, *p.end, found_start, found_end, expedition, arrival_time, detour_start_end, free_capacity);
+			get_free_capacity_between(*ship, plans_.at(ship), *p.start, *p.end, found_start, found_end,
+			                          expedition, arrival_time, detour_start_end, free_capacity);
 			p.ships.erase(ship_it);
 			if (free_capacity && (found_end || detour_start_end == 0)) {
 				ScoredShip updated_ship(ship, free_capacity, arrival_time, detour_start_end);
-				sslog("load_on_ship: PPP %u –> %u (open_count %u) UPDATED: may assign up to %u items to %s (score "
+				sslog("load_on_ship: PPP %u –> %u (open_count %u) UPDATED: may assign up to %u items "
+				      "to %s (score "
 				      "%u)\n",
 				      p.start->serial(), p.end->serial(), ppp.open_count, free_capacity,
 				      ship->get_shipname().c_str(), updated_ship.score);
@@ -1069,8 +1075,8 @@ Duration ShippingSchedule::update(Game& game) {
 					}
 				}
 			} else {
-				sslog("load_on_ship: PPP %u –> %u (open_count %u) REMOVED %s",
-				      p.start->serial(), p.end->serial(), ppp.open_count, ship->get_shipname().c_str());
+				sslog("load_on_ship: PPP %u –> %u (open_count %u) REMOVED %s", p.start->serial(),
+				      p.end->serial(), ppp.open_count, ship->get_shipname().c_str());
 			}
 		}
 	};
@@ -1093,7 +1099,9 @@ Duration ShippingSchedule::update(Game& game) {
 			Duration arrival_time = 0;
 			Duration detour_start_end = 0;
 			uint32_t free_capacity = 0;
-			get_free_capacity_between(*plan.first.get(game), plan.second, *ppp.start, *ppp.end, found_start, found_end, expedition, arrival_time, detour_start_end, free_capacity);
+			get_free_capacity_between(*plan.first.get(game), plan.second, *ppp.start, *ppp.end,
+			                          found_start, found_end, expedition, arrival_time,
+			                          detour_start_end, free_capacity);
 			if (free_capacity && (found_end || detour_start_end == 0)) {
 				ScoredShip ss(plan.first.get(game), free_capacity, arrival_time, detour_start_end);
 				sslog("Phase 5.0: PPP %u –> %u (open_count %u): may assign up to %u items to %s (score "
