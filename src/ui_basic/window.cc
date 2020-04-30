@@ -223,8 +223,8 @@ void Window::update_desired_size() {
 }
 
 /**
- * Change the center panel's size so that it fills the window entirely, but
- * only if not minimized.
+ * Update the titlebar buttons' locations, and change the center panel's size
+ * so that it fills the window entirely (the latter only if not minimized).
  */
 void Window::layout() {
 	if (center_panel_ && !is_minimal_) {
