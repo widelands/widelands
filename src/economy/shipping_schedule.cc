@@ -910,8 +910,8 @@ Duration ShippingSchedule::update(Game& game) {
 	};
 	auto get_free_capacity_between = [this, &game](
 	   Ship& ship, ShipPlan& plan, PortDock& start, PortDock& end, bool& found_start,
-	   bool& found_end, bool& expedition, bool& start_is_last, Duration& arrival_time, Duration& detour_start_end,
-	   uint32_t& free_capacity) {
+	   bool& found_end, bool& expedition, bool& start_is_last, Duration& arrival_time,
+	   Duration& detour_start_end, uint32_t& free_capacity) {
 		found_start = false;
 		found_end = false;
 		start_is_last = false;
@@ -1062,7 +1062,8 @@ Duration ShippingSchedule::update(Game& game) {
 			Duration detour_start_end = 0;
 			uint32_t free_capacity = 0;
 			get_free_capacity_between(*ship, plans_.at(ship), *p.start, *p.end, found_start, found_end,
-			                          expedition, start_is_last, arrival_time, detour_start_end, free_capacity);
+			                          expedition, start_is_last, arrival_time, detour_start_end,
+			                          free_capacity);
 			p.ships.erase(ship_it);
 			if (free_capacity && found_start && !expedition && (found_end || start_is_last)) {
 				ScoredShip updated_ship(ship, free_capacity, arrival_time, detour_start_end);
