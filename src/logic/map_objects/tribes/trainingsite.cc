@@ -795,13 +795,6 @@ void TrainingSite::act(Game& game, uint32_t const data) {
 
 void TrainingSite::program_end(Game& game, ProgramResult const result) {
 	result_ = result;
-	if (ProgramResult::kCompleted == result) {
-		// I try to already somewhat trained soldiers here, except when
-		// no training happens. Now some training has happened, hence zero.
-		// read in update_soldier_request
-		repeated_layoff_ctr_ = 0;
-		repeated_layoff_inc_ = false;
-	}
 	ProductionSite::program_end(game, result);
 	// For unknown reasons sometimes there is a fully upgraded soldier
 	// that failed to be send away, so at the end of this function
@@ -815,6 +808,12 @@ void TrainingSite::program_end(Game& game, ProgramResult const result) {
 			leftover_soldiers_check = false;
 			current_upgrade_->lastsuccess = true;
 			current_upgrade_->failures = 0;
+
+			// I try to already somewhat trained soldiers here, except when
+			// no training happens. Now some training has happened, hence zero.
+			// read in update_soldier_request
+			repeated_layoff_ctr_ = 0;
+			repeated_layoff_inc_ = false;
 		} else {
 			current_upgrade_->failures++;
 			drop_stalled_soldiers(game);
