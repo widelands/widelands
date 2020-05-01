@@ -1164,7 +1164,7 @@ Duration ShippingSchedule::update(Game& game) {
 			plans_[closest].push_back(SchedulingState(ppp.end, false, dist));
 			idle_ships.erase(std::find(idle_ships.begin(), idle_ships.end(), closest));
 			for (PrioritisedPortPair& p : open_pairs) {
-				for (auto it = ppp.ships.begin(); it != p.ships.end(); ++it) {
+				for (auto it = p.ships.begin(); it != p.ships.end(); ++it) {
 					if (it->ship == closest) {
 						p.ships.erase(it);
 						break;
