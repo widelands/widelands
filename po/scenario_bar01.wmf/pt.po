@@ -7,14 +7,14 @@
 # GunChleoc, 2014-2015
 # GunChleoc, 2014
 # Rui <xymarior@yandex.com>, 2018
-# zecas <jjorge@free.fr>, 2016-2018
+# zecas <jjorge@free.fr>, 2016-2018,2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-04-23 19:21+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"PO-Revision-Date: 2020-04-27 08:16+0000\n"
+"Last-Translator: zecas <jjorge@free.fr>\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -79,7 +79,7 @@ msgstr "Para as construir, primeiro coloca uma bandeira no flanco Este da montan
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
 msgid "some coal"
-msgstr ""
+msgstr "algum carvão"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "a lot of coal"
@@ -87,7 +87,7 @@ msgstr "muito carvão"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:46
 msgid "some iron"
-msgstr ""
+msgstr "algum ferro"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:47
 msgid "a lot of iron"
@@ -95,7 +95,7 @@ msgstr "muito ferro"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:48
 msgid "some gold"
-msgstr ""
+msgstr "algum ouro"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:49
 msgid "a lot of gold"
@@ -103,7 +103,7 @@ msgstr "muito ouro"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:50
 msgid "some granite"
-msgstr ""
+msgstr "algum granito"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:51
 msgid "a lot of granite"
@@ -163,7 +163,7 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well. For the "
 "best productivity, build it on a spot where your geologists have found a "
 "water source."
-msgstr ""
+msgstr "Outras formas de produzir alimentos e de diferentes tipos, é o recurso aos pescadores e aos quintas. O trigo das quintas pode ser processado na padaria, juntando-lhe água para ser comestível. Podes obter água construindo um poço. Para melhorar a produtividade, escolhe um sítio onde os geólogos encontraram água."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Refine your mined resources"
@@ -297,7 +297,7 @@ msgid ""
 "The third material necessary for improved buildings is reed, used to cover "
 "roofs. Reed fields are planted by a gardener around his building, the reed "
 "yard."
-msgstr ""
+msgstr "O terceiro material necessário para melhorar os edifícios é o colmo que é usado para cobrir os telhados. O colmo é plantado pelo horticultor à volta do seu edifício, a quinta."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:127
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:129
@@ -1036,4 +1036,4 @@ msgstr "Mas temem que a guerra cerca de Al'thunran vai acabar com esta vida. Por
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
