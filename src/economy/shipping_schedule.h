@@ -23,7 +23,6 @@
 #include <list>
 #include <map>
 #include <memory>
-#include <vector>
 
 #include "base/macros.h"
 #include "logic/map_objects/tribes/ship.h"
@@ -39,8 +38,8 @@ class MapObjectLoader;
 struct MapObjectSaver;
 class PortDock;
 
-using CargoList = std::vector<std::pair<PortDock*, uint32_t>>;
-using CargoListLoader = std::vector<std::pair<Serial, uint32_t>>;
+using CargoList = std::map<OPtr<PortDock>, uint32_t>;
+using CargoListLoader = std::map<Serial, uint32_t>;
 
 template <typename DockT, typename CargosT> struct SchedulingStateT {
 	DockT dock;
@@ -57,7 +56,7 @@ template <typename DockT, typename CargosT> struct SchedulingStateT {
 	}
 };
 
-using SchedulingState = SchedulingStateT<PortDock*, CargoList>;
+using SchedulingState = SchedulingStateT<OPtr<PortDock>, CargoList>;
 using ShipPlan = std::list<SchedulingState>;
 
 struct ShippingSchedule {
