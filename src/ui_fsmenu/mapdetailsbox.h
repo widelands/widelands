@@ -22,8 +22,8 @@ public:
 	void set_select_map_action(std::function<void()> action);
 
 private:
+	UI::Textarea title_;
 	UI::Box title_box_;
-
 	UI::Textarea map_name_;
 	UI::Button select_map_;
 	UI::MultilineTextarea map_description_;

@@ -26,7 +26,6 @@ protected:
 private:
 	void win_condition_selected() override;
 
-	UI::Textarea players_;
 	SinglePlayerSetupBox player_setup;
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 
@@ -36,7 +35,7 @@ private:
 	void update(bool map_was_changed);
 	void set_player_names_and_tribes();
 	void switch_to_position(uint8_t const pos);
-	void safe_place_for_host(uint8_t const newplayernumber);
+	void ensure_valid_host_position(uint8_t const newplayernumber);
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_SPG2_H

@@ -13,31 +13,19 @@
 #include "logic/map_objects/map_object.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
+#include "mapselect.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui_fsmenu/loadgame.h"
-#include "ui_fsmenu/mapselect.h"
-#include "wui/playerdescrgroup.h"
 
 FullscreenMenuLaunchSPG2::FullscreenMenuLaunchSPG2(GameSettingsProvider* const settings,
                                                    GameController* const ctrl)
    : FullscreenMenuLaunchGame(settings, ctrl),
 
-     players_(&individual_content_box,
-              0,
-              0,
-              0,
-              0,
-              "Players",
-              UI::Align::kRight,
-              g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
-
      player_setup(&individual_content_box, 0, 0, 400, 0, settings, 50) {
 
-	individual_content_box.add(&players_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	individual_content_box.add(&player_setup, UI::Box::Resizing::kExpandBoth);
 
-	//	add_all_widgets();
 	title_.set_text("Launch game");
 
 	ok_.set_enabled(settings_->can_launch());
@@ -80,7 +68,7 @@ bool FullscreenMenuLaunchSPG2::clicked_select_map() {
 	const MapData& mapdata = *msm.get_map();
 	nr_players_ = mapdata.nrplayers;
 
-	//	safe_place_for_host(nr_players_);
+	ensure_valid_host_position(nr_players_);
 	settings_->set_map(mapdata.name, mapdata.filename, nr_players_);
 	update_win_conditions();
 	update_peaceful_mode();
@@ -89,6 +77,41 @@ bool FullscreenMenuLaunchSPG2::clicked_select_map() {
 	// settings_#set_map()...
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 	return true;
+}
+
+/**
+ * Called when a position-button was clicked.
+ */
+void FullscreenMenuLaunchSPG2::switch_to_position(uint8_t const pos) {
+	settings_->set_player_number(pos);
+	update(false);
+}
+
+/**
+ * Check to avoid segfaults, if the player changes a map with less player
+ * positions while being on a later invalid position.
+ */
+void FullscreenMenuLaunchSPG2::ensure_valid_host_position(uint8_t const newplayernumber) {
+	GameSettings settings = settings_->settings();
+
+	// Check whether the host would still keep a valid position and return if
+	// yes.
+	if (settings.playernum == UserSettings::none() || settings.playernum < newplayernumber)
+		return;
+
+	// Check if a still valid place is open.
+	for (uint8_t i = 0; i < newplayernumber; ++i) {
+		PlayerSettings position = settings.players.at(i);
+		if (position.state == PlayerSettings::State::kOpen) {
+			switch_to_position(i);
+			return;
+		}
+	}
+
+	// Kick player 1 and take the position
+	settings_->set_player_state(0, PlayerSettings::State::kClosed);
+	settings_->set_player_state(0, PlayerSettings::State::kOpen);
+	switch_to_position(0);
 }
 
 /**

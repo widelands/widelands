@@ -86,9 +86,9 @@ private:
 	void selection_action() override;
 };
 
-class TypeDropdownSupport : public DropDownSupport<std::string> {
+class PlayerTypeDropdownSupport : public DropDownSupport<std::string> {
 public:
-	TypeDropdownSupport(UI::Panel* parent,
+	PlayerTypeDropdownSupport(UI::Panel* parent,
 	                    const std::string& name,
 	                    int32_t x,
 	                    int32_t y,
@@ -104,9 +104,9 @@ private:
 	void selection_action() override;
 };
 
-class InitDropdownSupport : public DropDownSupport<uintptr_t> {
+class StartTypeDropdownSupport : public DropDownSupport<uintptr_t> {
 public:
-	InitDropdownSupport(UI::Panel* parent,
+	StartTypeDropdownSupport(UI::Panel* parent,
 	                    const std::string& name,
 	                    int32_t x,
 	                    int32_t y,

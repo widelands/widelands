@@ -48,14 +48,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
      individual_content_box(&content_box_, 0, 0, UI::Box::Vertical),
      map_box_(&content_box_, 0, 0, UI::Box::Vertical),
      map_details(&map_box_, 0, 0, 0, 0),
-     map_box_title(&map_box_,
-                   0,
-                   0,
-                   0,
-                   0,
-                   _("Map"),
-                   UI::Align::kCenter,
-                   g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
+
      win_condition_type(&map_box_,
                         0,
                         0,
@@ -259,7 +252,9 @@ void FullscreenMenuLaunchGame::layout() {
 	//	main_box_.set_desired_size(get_w(), get_h());
 	main_box_.set_size(get_w(), get_h());
 	log("main box: w=%d, h=%d, x=%d\n", main_box_.get_w(), main_box_.get_h(), main_box_.get_x());
-	//	title_own_.set_text(_("my Start game blabla"));
+	individual_content_box.set_desired_size(3 / 4 * main_box_.get_w(), main_box_.get_h());
+	log("individual_content_box: w=%d, h=%d, x=%d\n", individual_content_box.get_w(),
+	    individual_content_box.get_h(), individual_content_box.get_x());
 	log("title: w=%d, h=%d, x=%d\n", title_.get_w(), title_.get_h(), title_.get_x());
 	//	content_box_.set_desired_size(
 	//	   main_box_.get_w(), main_box_.get_h() - title_own_.get_h() - 2 * ok_own_.get_h());
@@ -281,16 +276,14 @@ void FullscreenMenuLaunchGame::layout() {
 
 void FullscreenMenuLaunchGame::add_all_widgets() {
 	title_.set_font_scale(scale_factor());
-	map_box_title.set_font_scale(scale_factor());
 
 	main_box_.add_space(2 * padding_);
 	main_box_.add(&title_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	main_box_.add(&content_box_, UI::Box::Resizing::kExpandBoth);
-	content_box_.add(&individual_content_box, UI::Box::Resizing::kFullSize);
+	content_box_.add(&individual_content_box, UI::Box::Resizing::kExpandBoth);
 
-	content_box_.add(&map_box_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
-	map_box_.add(&map_box_title, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	content_box_.add(&map_box_, UI::Box::Resizing::kAlign, UI::Align::kRight);
 	map_box_.add(&map_details, UI::Box::Resizing::kFullSize);
 	map_box_.add(&peaceful_, UI::Box::Resizing::kFillSpace);
 	map_box_.add(&win_condition_type, UI::Box::Resizing::kAlign, UI::Align::kCenter);

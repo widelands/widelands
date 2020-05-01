@@ -13,6 +13,14 @@ MapDetailsBox::MapDetailsBox(Panel* parent,
                              int32_t max_x,
                              int32_t max_y)
    : UI::Box(parent, x, y, UI::Box::Vertical, max_x, max_y),
+     title_(this,
+            0,
+            0,
+            0,
+            0,
+            _("Map"),
+            UI::Align::kCenter,
+            g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
      title_box_(this, 0, 0, UI::Box::Horizontal),
      map_name_(&title_box_,
                0,
@@ -23,7 +31,7 @@ MapDetailsBox::MapDetailsBox(Panel* parent,
                UI::Align::kLeft,
                g_gr->styles().font_style(UI::FontStyle::kLabel)),
      select_map_(&title_box_,
-                 "change_map_or_save2",
+                 "change_map_or_save",
                  0,
                  0,
                  20,
@@ -39,14 +47,14 @@ MapDetailsBox::MapDetailsBox(Panel* parent,
         50,
         UI::PanelStyle::kFsMenu,
         "sample map description which might be a\n very long text so scrollbar is needed") {
-
+	add(&title_, Resizing::kAlign, UI::Align::kCenter);
 	title_box_.add(&map_name_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	title_box_.add_inf_space();
 	title_box_.add(&select_map_, UI::Box::Resizing::kAlign, UI::Align::kRight);
 	add(&title_box_, UI::Box::Resizing::kFullSize);
 	add(&map_description_, UI::Box::Resizing::kFullSize);
 
-	map_name_.set_font_scale(2);
+	//	map_name_.set_font_scale(2);
 }
 MapDetailsBox::~MapDetailsBox() {
 }

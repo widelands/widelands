@@ -5,7 +5,6 @@
 #include "ai/computer_player.h"
 #include "base/i18n.h"
 #include "graphic/playercolor.h"
-#include "logic/game_settings.h"
 #include "map_io/map_loader.h"
 
 #define AI_NAME_PREFIX "ai" AI_NAME_SEPARATOR
@@ -113,15 +112,15 @@ void TribeDropdownSupport::selection_action() {
 	}
 }
 
-TypeDropdownSupport::TypeDropdownSupport(UI::Panel* parent,
-                                         const std::string& name,
-                                         int32_t x,
-                                         int32_t y,
-                                         uint32_t w,
+PlayerTypeDropdownSupport::PlayerTypeDropdownSupport(UI::Panel* parent,
+                                                     const std::string& name,
+                                                     int32_t x,
+                                                     int32_t y,
+                                                     uint32_t w,
 
-                                         int button_dimension,
-                                         GameSettingsProvider* const settings,
-                                         PlayerSlot id)
+                                                     int button_dimension,
+                                                     GameSettingsProvider* const settings,
+                                                     PlayerSlot id)
    : DropDownSupport<std::string>(parent,
                                   name,
                                   x,
@@ -136,7 +135,7 @@ TypeDropdownSupport::TypeDropdownSupport(UI::Panel* parent,
                                   settings,
                                   id) {
 }
-void TypeDropdownSupport::rebuild() {
+void PlayerTypeDropdownSupport::rebuild() {
 
 	if (selection_locked_) {
 		return;
@@ -145,7 +144,7 @@ void TypeDropdownSupport::rebuild() {
 	dropdown_.set_enabled(settings_->can_change_player_state(id_));
 	select_entry();
 }
-void TypeDropdownSupport::fill() {
+void PlayerTypeDropdownSupport::fill() {
 	const GameSettings& settings = settings_->settings();
 	dropdown_.clear();
 	// AIs
@@ -173,7 +172,7 @@ void TypeDropdownSupport::fill() {
 	   _("Open"), "open", g_gr->images().get("images/ui_basic/continue.png"), false, _("Open"));
 }
 
-void TypeDropdownSupport::select_entry() {
+void PlayerTypeDropdownSupport::select_entry() {
 	const GameSettings& settings = settings_->settings();
 	// Now select the entry according to server settings
 	const PlayerSettings& player_setting = settings.players[id_];
@@ -203,11 +202,10 @@ void TypeDropdownSupport::select_entry() {
 	}
 }
 
-void TypeDropdownSupport::selection_action() {
+void PlayerTypeDropdownSupport::selection_action() {
 	if (!settings_->can_change_player_state(id_)) {
 		return;
 	}
-	//	selection_locked_ = true;
 	if (dropdown_.has_selection()) {
 		const std::string& selected = dropdown_.get_selected();
 		PlayerSettings::State state = PlayerSettings::State::kComputer;
@@ -233,10 +231,9 @@ void TypeDropdownSupport::selection_action() {
 		}
 		settings_->set_player_state(id_, state);
 	}
-	//	selection_locked_ = false;
 }
 
-InitDropdownSupport::InitDropdownSupport(UI::Panel* parent,
+StartTypeDropdownSupport::StartTypeDropdownSupport(UI::Panel* parent,
                                          const std::string& name,
                                          int32_t x,
                                          int32_t y,
@@ -261,7 +258,7 @@ InitDropdownSupport::InitDropdownSupport(UI::Panel* parent,
 
 /// Rebuild the init dropdown from the server settings. This will keep the host and client UIs in
 /// sync.
-void InitDropdownSupport::rebuild() {
+void StartTypeDropdownSupport::rebuild() {
 
 	if (selection_locked_) {
 		return;
@@ -284,7 +281,7 @@ void InitDropdownSupport::rebuild() {
 	dropdown_.set_enabled(settings_->can_change_player_init(id_));
 }
 
-void InitDropdownSupport::fill() {
+void StartTypeDropdownSupport::fill() {
 	const GameSettings& settings = settings_->settings();
 	const PlayerSettings& player_setting = settings.players[id_];
 	i18n::Textdomain td("tribes");  // for translated initialisation
@@ -316,7 +313,7 @@ void InitDropdownSupport::fill() {
 
 /// This will update the game settings for the initialization with the value
 /// currently selected in the initialization dropdown.
-void InitDropdownSupport::selection_action() {
+void StartTypeDropdownSupport::selection_action() {
 	if (!settings_->can_change_player_init(id_)) {
 		return;
 	}
@@ -376,9 +373,7 @@ void TeamDropdown::rebuild() {
 }
 /// This will update the team settings with the value currently selected in the teams dropdown.
 void TeamDropdown::selection_action() {
-	//	selection_locked_ = true;
 	if (dropdown_.has_selection()) {
 		settings_->set_player_team(id_, dropdown_.get_selected());
 	}
-	//	selection_locked_ = false;
 }

@@ -1,6 +1,7 @@
 #ifndef WL_UI_FSMENU_SINGLEPLAYERSETUPBOX_H
 #define WL_UI_FSMENU_SINGLEPLAYERSETUPBOX_H
 
+#include <ui_basic/textarea.h>
 #include <vector>
 
 #include "dropdownsupport.h"
@@ -21,15 +22,9 @@ private:
 	PlayerSlot id_;
 	GameSettingsProvider* const settings_;
 	UI::Button player;
-	//	UI::Dropdown<std::string>
-	//	   type_dropdown_;  /// Select who owns the slot (human, AI, open, closed, shared-in).
-	TypeDropdownSupport player_type;
-	//	UI::Dropdown<std::string> tribes_dropdown_;  /// Select the tribe or shared_in player.
+	PlayerTypeDropdownSupport player_type;
 	TribeDropdownSupport tribe_;
-	//	UI::Dropdown<uintptr_t>
-	//	   init_dropdown_;  /// Select the initialization (Headquarters, Fortified Village etc.)
-	InitDropdownSupport start_type;
-	//	UI::Dropdown<uintptr_t> team_dropdown_;  /// Select the team number
+	StartTypeDropdownSupport start_type;
 	TeamDropdown teams_;
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 
@@ -39,6 +34,38 @@ private:
 	void rebuild_type_dropdown(const GameSettings& settings);
 	void fill_type_dropdown(const GameSettings& settings);
 	void select_entry(const GameSettings& settings);
+};
+
+class SinglePlayerActivePlayerSetupBox : public UI::Box {
+
+public:
+	SinglePlayerActivePlayerSetupBox(UI::Panel* const parent,
+	                                 int32_t const x,
+	                                 int32_t const y,
+	                                 int32_t const w,
+	                                 int32_t const h,
+	                                 GameSettingsProvider* const settings,
+	                                 uint32_t buth);
+
+private:
+	UI::Textarea title_;
+	GameSettingsProvider* const settings_;
+	std::vector<SinglePlayerPlayerGroup*> single_player_player_groups;  // not owned
+};
+
+class SinglePlayerPossiblePlayerBox : public UI::Box {
+
+public:
+	SinglePlayerPossiblePlayerBox(UI::Panel* const parent,
+	                              int32_t const x,
+	                              int32_t const y,
+	                              int32_t const w,
+	                              int32_t const h,
+	                              GameSettingsProvider* const settings,
+	                              uint32_t buth);
+
+private:
+	UI::Textarea title_;
 };
 
 class SinglePlayerSetupBox : public UI::Box {
@@ -53,7 +80,7 @@ public:
 	                     uint32_t buth);
 
 private:
-	GameSettingsProvider* const settings_;
-	std::vector<SinglePlayerPlayerGroup*> single_player_player_groups;  // not owned
+	SinglePlayerPossiblePlayerBox inactive_players;
+	SinglePlayerActivePlayerSetupBox active_players_setup;
 };
 #endif  // WL_UI_FSMENU_SINGLEPLAYERSETUPBOX_H
