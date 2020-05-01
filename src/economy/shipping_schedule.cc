@@ -218,7 +218,8 @@ void ShippingSchedule::port_removed(Game& game, PortDock* dock) {
 				sslog("Rerouted %s to %u\n", pair.first.get(game)->get_shipname().c_str(),
 				      pair.second.front().dock.serial());
 				Path path;
-				pair.first.get(game)->calculate_sea_route(game, *pair.second.front().dock.get(game), &path);
+				pair.first.get(game)->calculate_sea_route(
+				   game, *pair.second.front().dock.get(game), &path);
 				int32_t d = -1;
 				game.map().calc_cost(path, &d, nullptr);
 				assert(d >= 0);
@@ -420,7 +421,8 @@ Duration ShippingSchedule::update(Game& game) {
 		} else if (update_me && update_me->serial() == pair.first.serial()) {
 			sslog("Recalculate for %s\n", pair.first.get(game)->get_shipname().c_str());
 			Path path;
-			pair.first.get(game)->calculate_sea_route(game, *pair.second.front().dock.get(game), &path);
+			pair.first.get(game)->calculate_sea_route(
+			   game, *pair.second.front().dock.get(game), &path);
 			int32_t d = -1;
 			game.map().calc_cost(path, &d, nullptr);
 			assert(d >= 0);
@@ -874,17 +876,29 @@ Duration ShippingSchedule::update(Game& game) {
 		for (const ShippingItem& si : ship.items_) {
 			PortDock* dest = si.destination_dock_.get(game);
 			auto it = cargo_tracker.find(dest);
-			if (it == cargo_tracker.end()) { cargo_tracker[dest] = 1; } else { ++it->second; }
+			if (it == cargo_tracker.end()) {
+				cargo_tracker[dest] = 1;
+			} else {
+				++it->second;
+			}
 		}
 		for (const SchedulingState& ss : plans_[&ship]) {
 			if (ss.expedition) {
 				return 0u;
 			}
-			{ auto it = cargo_tracker.find(ss.dock);
-			if (it != cargo_tracker.end()) { cargo_tracker.erase(it); } }
+			{
+				auto it = cargo_tracker.find(ss.dock);
+				if (it != cargo_tracker.end()) {
+					cargo_tracker.erase(it);
+				}
+			}
 			for (const auto& _load : ss.load_there) {
 				auto it = cargo_tracker.find(_load.first);
-				if (it == cargo_tracker.end()) { cargo_tracker[_load.first] = _load.second; } else { it->second += _load.second; }
+				if (it == cargo_tracker.end()) {
+					cargo_tracker[_load.first] = _load.second;
+				} else {
+					it->second += _load.second;
+				}
 			}
 			if (ss.dock == &dock) {
 				uint32_t cap = ship.get_capacity();
@@ -914,7 +928,11 @@ Duration ShippingSchedule::update(Game& game) {
 		for (const ShippingItem& si : ship.items_) {
 			PortDock* dest = si.destination_dock_.get(game);
 			auto it = cargo_tracker.find(dest);
-			if (it == cargo_tracker.end()) { cargo_tracker[dest] = 1; } else { ++it->second; }
+			if (it == cargo_tracker.end()) {
+				cargo_tracker[dest] = 1;
+			} else {
+				++it->second;
+			}
 		}
 		for (SchedulingState& ss : plan) {
 			start_is_last = ss.dock == &start;
@@ -922,10 +940,19 @@ Duration ShippingSchedule::update(Game& game) {
 				expedition = true;
 				break;
 			}
-			{auto unload = cargo_tracker.find(ss.dock); if (unload != cargo_tracker.end()) { cargo_tracker.erase(unload); }}
+			{
+				auto unload = cargo_tracker.find(ss.dock);
+				if (unload != cargo_tracker.end()) {
+					cargo_tracker.erase(unload);
+				}
+			}
 			for (const auto& _load : ss.load_there) {
 				auto it = cargo_tracker.find(_load.first);
-				if (it == cargo_tracker.end()) { cargo_tracker[_load.first] = _load.second; } else { it->second += _load.second; }
+				if (it == cargo_tracker.end()) {
+					cargo_tracker[_load.first] = _load.second;
+				} else {
+					it->second += _load.second;
+				}
 			}
 			uint32_t _load = 0;
 			for (const auto& pair : cargo_tracker) {
@@ -968,7 +995,11 @@ Duration ShippingSchedule::update(Game& game) {
 		if (plans_[ship].back().dock == ppp.start) {
 			assert(!plans_[ship].back().expedition);
 			auto it = plans_[ship].back().load_there.find(ppp.end);
-			if (it != plans_[ship].back().load_there.end()) { it->second += take; } else { plans_[ship].back().load_there[ppp.end] = take; }
+			if (it != plans_[ship].back().load_there.end()) {
+				it->second += take;
+			} else {
+				plans_[ship].back().load_there[ppp.end] = take;
+			}
 			Path path;
 			int32_t d = -1;
 			fleet_.get_path(*ppp.start, *ppp.end, path);
@@ -979,7 +1010,11 @@ Duration ShippingSchedule::update(Game& game) {
 			for (SchedulingState& ss : plans_[ship]) {
 				if (ss.dock == ppp.start) {
 					auto it = ss.load_there.find(ppp.end);
-					if (it != ss.load_there.end()) { it->second += take; } else { ss.load_there[ppp.end] = take; }
+					if (it != ss.load_there.end()) {
+						it->second += take;
+					} else {
+						ss.load_there[ppp.end] = take;
+					}
 					break;
 				}
 			}
@@ -1255,7 +1290,11 @@ Duration ShippingSchedule::update(Game& game) {
 							++it_start;
 						}
 						auto cargoit = it_start->load_there.find(ppp.end);
-						if (cargoit != it_start->load_there.end()) { cargoit->second += take; } else { it_start->load_there[ppp.end] = take; }
+						if (cargoit != it_start->load_there.end()) {
+							cargoit->second += take;
+						} else {
+							it_start->load_there[ppp.end] = take;
+						}
 						// b
 						d = -1;
 						fleet_.get_path(*ppp.start, *ppp.end, path);
