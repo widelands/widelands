@@ -53,7 +53,7 @@ constexpr Duration kHorriblyLongDuration = 10 * 60 * 1000;  // 10 min
 // Only assign wares to a ship in 5.1 if it's score is higher than a certain
 // threshold based on minimal distance. Ships with lower scores will only be
 // accepted if not enough idle ships are found.
-constexpr uint16_t kMinScoreForImmediateAcceptFactor = 8;  // NOCOM needs testing
+constexpr uint16_t kMinScoreForImmediateAcceptFactor = 14;  // NOCOM needs testing
 
 // Average sailing-time distance for two ports to be considered "close by" in 5.4
 constexpr int16_t kDockGroupMaxDistanceFactor = 12 * 1800;
@@ -845,7 +845,7 @@ Duration ShippingSchedule::update(Game& game) {
 				return open_count > pp.open_count;
 			}
 			return priority > pp.priority;
-		};
+		}
 	};
 	std::set<PrioritisedPortPair> _open_pairs;
 	for (auto& start__map : items_in_ports) {
@@ -911,7 +911,7 @@ Duration ShippingSchedule::update(Game& game) {
 		}
 		return 0u;
 	};
-	auto get_free_capacity_between = [this, &game](
+	auto get_free_capacity_between = [&game](
 	   Ship& ship, ShipPlan& plan, PortDock& start, PortDock& end, bool& found_start,
 	   bool& found_end, bool& expedition, bool& start_is_last, Duration& arrival_time,
 	   Duration& detour_start_end, uint32_t& free_capacity) {
@@ -1163,6 +1163,14 @@ Duration ShippingSchedule::update(Game& game) {
 			assert(dist >= 0);
 			plans_[closest].push_back(SchedulingState(ppp.end, false, dist));
 			idle_ships.erase(std::find(idle_ships.begin(), idle_ships.end(), closest));
+			for (PrioritisedPortPair& p : open_pairs) {
+				for (auto it = ppp.ships.begin(); it != p.ships.end(); ++it) {
+					if (it->ship == closest) {
+						p.ships.erase(it);
+						break;
+					}
+				}
+			}
 		}
 	}
 
