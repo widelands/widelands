@@ -77,8 +77,8 @@ tribes:new_productionsite_type {
          descname = _"working",
          actions = {
             "call=produce_bread_paddle",
-            "call=produce_felling_ax",
             "call=produce_fire_tongs",
+            "call=produce_felling_ax",
             "call=produce_fishing_rod",
             "call=produce_hammer",
             "call=produce_hunting_spear",
