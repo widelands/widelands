@@ -79,7 +79,6 @@ tribes:new_productionsite_type {
             "call=produce_boots_swift",
             "call=produce_boots_hero",
             "call=produce_protector_padded",
-            "return=no_stats",
          },
       },
       produce_tunic = {

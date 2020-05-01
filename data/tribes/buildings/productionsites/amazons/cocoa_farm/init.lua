@@ -60,7 +60,6 @@ tribes:new_productionsite_type {
          actions = {
             "call=plant_cocoa",
             "call=harvest_cocoa",
-            "return=no_stats"
          }
       },
       plant_cocoa = {

@@ -60,7 +60,6 @@ tribes:new_productionsite_type {
             "call=harvest_balsa",
             "call=harvest_rubber",
             "call=harvest_ironwood",
-            "return=no_stats"
          },
       },
       harvest_balsa = {

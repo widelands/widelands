@@ -59,7 +59,6 @@ tribes:new_productionsite_type {
          actions = {
             "call=hunt",
             "call=fish",
-            "return=no_stats",
          }
       },
       hunt = {

@@ -59,7 +59,6 @@ tribes:new_productionsite_type {
          descname = _"working",
          actions = {
             "call=produce_bread",
-            "return=no_stats"
          }
       },
       produce_bread = {

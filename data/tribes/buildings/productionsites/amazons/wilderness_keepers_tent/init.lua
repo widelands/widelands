@@ -51,7 +51,6 @@ tribes:new_productionsite_type {
          actions = {
             "call=breed",
             "call=release",
-            "return=no_stats",
          },
       },
       breed = {

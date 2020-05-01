@@ -64,7 +64,6 @@ tribes:new_productionsite_type {
             "call=terraform",
             "call=terraform",
             "call=terraform",
-            "return=no_stats"
          }
       },
       terraform = {

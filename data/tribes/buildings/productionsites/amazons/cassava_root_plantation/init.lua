@@ -68,7 +68,6 @@ tribes:new_productionsite_type {
          actions = {
             "call=plant_cassava",
             "call=harvest_cassava",
-            "return=no_stats"
          }
       },
       plant_cassava = {
