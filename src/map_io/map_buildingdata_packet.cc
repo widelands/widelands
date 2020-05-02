@@ -789,6 +789,7 @@ void MapBuildingdataPacket::read_productionsite(
 				if (fr.unsigned_8()) {
 					const Worker& worker = mol.get<Worker>(fr.unsigned_32());
 					int32_t i = 0;
+					// Determine main worker's index as this may change during saveloading (#3891)
 					for (const auto* wp = productionsite.working_positions();; ++wp) {
 						if (wp->worker == &worker) {
 							productionsite.main_worker_ = i;
@@ -798,6 +799,9 @@ void MapBuildingdataPacket::read_productionsite(
 					}
 				}
 			} else if (packet_version >= 7) {
+				// May be buggy for workers whose type is present in the building
+				// multiple times (issue #3538). Fortunately the packet versions
+				// with this problem are newer than b20 and older than b21.
 				productionsite.main_worker_ = fr.signed_32();
 			} else {
 				productionsite.main_worker_ = productionsite.working_positions_[0].worker ? 0 : -1;
