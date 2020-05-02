@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
-# Alexander Jansen <bornxlo@gmail.com>, 2017
+# Alexander Mackinnon Jansen <bornxlo@gmail.com>, 2017
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014

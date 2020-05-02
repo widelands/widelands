@@ -9,6 +9,7 @@
 # GunChleoc, 2014
 # Samuël Weber/GwendalD <samuel.weber@normalesup.org>, 2017
 # Jaypad <ju-ju@nataju.fr>, 2015-2016
+# Julien Schneider <schneider.julien@gmail.com>, 2020
 # Nicolas Auvray <na.itms76@gmail.com>, 2016
 # nicolas jardin <niko472006@sfr.fr>, 2016
 # Papa Ben <ben-oni@hotmail.fr>, 2019
@@ -21,8 +22,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-04-23 19:22+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"PO-Revision-Date: 2020-05-01 13:03+0000\n"
+"Last-Translator: Julien Schneider <schneider.julien@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -794,7 +795,7 @@ msgstr "mine des diamands"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:168
 msgid "No Crystals"
-msgstr ""
+msgstr "Pas de cristal"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:169
 msgid "Main Crystal Vein Exhausted"
@@ -833,7 +834,7 @@ msgstr "Le fermier qui travaille à cette ferme n'a pas dégagé le sol pour pla
 #: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Ferry Yard"
-msgstr "Chantier naval"
+msgstr "Chantier de ferrys"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:7
@@ -1600,7 +1601,7 @@ msgstr "Le fermier qui travaille à cette ferme n'a pas nettoyé le sol pour pla
 #: ../../data/tribes/buildings/productionsites/barbarians/ferry_yard/init.lua:7
 msgctxt "barbarians_building"
 msgid "Ferry Yard"
-msgstr "Chantier naval"
+msgstr "Chantier de ferrys"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:7
@@ -2074,7 +2075,7 @@ msgstr "Le fermier qui travaille à cette ferme n'a pas nettoyé le sol pour pla
 #: ../../data/tribes/buildings/productionsites/empire/ferry_yard/init.lua:7
 msgctxt "empire_building"
 msgid "Ferry Yard"
-msgstr "Chantier naval"
+msgstr "Chantier de ferrys"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:7
@@ -2734,7 +2735,7 @@ msgstr "Le fermier qui travaille dans cette ferme n'a pas de sol dégagé pour s
 #: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:7
 msgctxt "frisians_building"
 msgid "Ferry Yard"
-msgstr "Chantier naval"
+msgstr "Chantier de ferrys"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:7
@@ -3817,7 +3818,7 @@ msgstr "Du fer"
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:137
 msgctxt "resource_indicator"
 msgid "Some Crystals"
-msgstr ""
+msgstr "Quelques cristaux"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:163
@@ -3850,7 +3851,7 @@ msgstr "Beaucoup de fer"
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:241
 msgctxt "resource_indicator"
 msgid "A Lot of Crystals"
-msgstr ""
+msgstr "Beaucoup de cristaux"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/barbarians/init.lua:122
