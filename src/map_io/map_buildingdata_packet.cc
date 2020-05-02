@@ -1312,7 +1312,8 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 		fw.unsigned_8(0);
 	} else {
 		fw.unsigned_8(1);
-		fw.unsigned_32(mos.get_object_file_index(*productionsite.working_positions_[productionsite.main_worker_].worker));
+		fw.unsigned_32(mos.get_object_file_index(
+		   *productionsite.working_positions_[productionsite.main_worker_].worker));
 	}
 }
 
