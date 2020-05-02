@@ -193,6 +193,7 @@
     when upgrading a trainingsite
   - Attempt to fix Ai unnecessary dismantling Militarysites
 - about 90 rounds of training
+- Fixed bugs in the AI's attack decision algorithm and exposed some weighting factors to the genetic algorithm (#3873)
 
 
 ### Gameplay
@@ -503,6 +504,7 @@
   - Shift definition of animation directory from individual animations to the
     map object in order to declutter the Lua tables.
   - Add mipmaps to Barbarian Carrier to test the changes
+- Fix wrong colors on Big Endian systems (#3890)
 
 
 ### Networking
