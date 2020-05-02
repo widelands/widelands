@@ -512,8 +512,9 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 			rebuild_request = need_more_soldiers;
 			if (0 < trainee_general_lower_bound_) {
 				trainee_general_lower_bound_--;
-				dynamic_timeout = acceptance_threshold_timeout /
-					std::max<uint32_t>(1, static_cast<unsigned>(trainee_general_lower_bound_));
+				dynamic_timeout =
+				   acceptance_threshold_timeout /
+				   std::max<uint32_t>(1, static_cast<unsigned>(trainee_general_lower_bound_));
 			} else if (requesting_weak_trainees_) {
 				// If requesting weak trainees, and no people show up:
 				// set the state back to request_strong, which will allow everybody in
