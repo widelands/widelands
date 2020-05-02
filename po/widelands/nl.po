@@ -4,6 +4,7 @@
 # Translators:
 # GunChleoc, 2016,2018
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR., 2009
+# Foppe Benedictus <foppe.benedictus@gmail.com>, 2020
 # GunChleoc, 2016,2018
 # Nora Ghaoui, 2016
 # Nora Ghaoui, 2016
@@ -13,8 +14,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-04-22 20:03+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"PO-Revision-Date: 2020-04-28 04:31+0000\n"
+"Last-Translator: Foppe Benedictus <foppe.benedictus@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -89,23 +90,23 @@ msgstr "Onvoldoende ruimte"
 
 #: ../../data/scripting/infrastructure.lua:246
 msgid "No rocks nearby"
-msgstr ""
+msgstr "Geen rotsen dichtbij"
 
 #: ../../data/scripting/infrastructure.lua:246
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr ""
+msgstr "Er zijn geen rotsen dicht bij je startpositie. Daarom ontvang je meer grondstoffen om je economie een zetje te geven."
 
 #: ../../data/scripting/infrastructure.lua:251
 msgid "No trees nearby"
-msgstr ""
+msgstr "Geen bomen dichtbij"
 
 #: ../../data/scripting/infrastructure.lua:251
 msgid ""
 "There are no trees near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr ""
+msgstr "Er zijn geen bomen dicht bij je startpositie. Daarom ontvang je meer grondstoffen om je economie een zetje te geven."
 
 #: ../../data/scripting/messages.lua:51 ../../data/scripting/messages.lua:53
 #: ../../src/wui/game_message_menu.cc:68 ../../src/wui/game_summary.cc:104
@@ -114,11 +115,11 @@ msgstr "Status"
 
 #: ../../data/scripting/messages.lua:186
 msgid "New Objective"
-msgstr ""
+msgstr "Nieuwe doelstelling"
 
 #: ../../data/scripting/messages.lua:188
 msgid "New Objectives"
-msgstr ""
+msgstr "Nieuwe doelstellingen"
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
@@ -161,7 +162,7 @@ msgstr "Zeer Zwakke AI"
 #: ../../src/base/i18n.cc:373
 msgctxt "sentence_separator"
 msgid "%1% %2%"
-msgstr ""
+msgstr "%1% %2%"
 
 #. * TRANSLATORS: January. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -278,7 +279,7 @@ msgstr "Stammen laden…"
 #: ../../src/wui/interactive_gamebase.cc:95
 msgctxt "hotkey"
 msgid "Esc"
-msgstr ""
+msgstr "Esc"
 
 #. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
@@ -301,7 +302,7 @@ msgstr "Gereedschap"
 #: ../../src/editor/editorinteractive.cc:119
 #: ../../src/wui/interactive_gamebase.cc:83
 msgid "Show / Hide"
-msgstr ""
+msgstr "Toon/verberg"
 
 #: ../../src/editor/editorinteractive.cc:132
 msgid "Tool size"
@@ -341,7 +342,7 @@ msgstr "Laad kaart"
 #: ../../src/editor/editorinteractive.cc:193
 msgctxt "hotkey"
 msgid "Ctrl+L"
-msgstr ""
+msgstr "Ctrl+L"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:199
@@ -352,7 +353,7 @@ msgstr "Sla kaart op"
 #: ../../src/editor/editorinteractive.cc:201
 msgctxt "hotkey"
 msgid "Ctrl+S"
-msgstr ""
+msgstr "Ctrl+S"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:207
@@ -374,7 +375,7 @@ msgstr "Verander hoogte"
 #. * TRANSLATORS: Tooltip for the change height tool in the editor
 #: ../../src/editor/editorinteractive.cc:250
 msgid "Change the terrain height"
-msgstr ""
+msgstr "Verander de terreinhoogte"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:256
@@ -385,7 +386,7 @@ msgstr "Willekeurige hoogte"
 #. * TRANSLATORS: Tooltip for the random height tool in the editor
 #: ../../src/editor/editorinteractive.cc:259
 msgid "Set the terrain height to random values"
-msgstr ""
+msgstr "Stel de terreinhoogte in met willekeurige waarden"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:265
@@ -398,7 +399,7 @@ msgstr "Terrein"
 #. * TRANSLATORS: Tooltip for the terrain tool in the editor
 #: ../../src/editor/editorinteractive.cc:268
 msgid "Change the map’s terrain"
-msgstr ""
+msgstr "Verander het terrein van de kaart"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:275
@@ -409,7 +410,7 @@ msgstr "Immobiele objecten"
 #. * TRANSLATORS: Tooltip for the immovables tool in the editor
 #: ../../src/editor/editorinteractive.cc:278
 msgid "Add or remove immovables"
-msgstr ""
+msgstr "Toevoegen of verwijderen van niet verplaatsbare objecten"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:284
@@ -420,7 +421,7 @@ msgstr "Dieren"
 #. * TRANSLATORS: Tooltip for the animals tool in the editor
 #: ../../src/editor/editorinteractive.cc:287
 msgid "Add or remove animals"
-msgstr ""
+msgstr "Toevoegen of verwijderen van dieren"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:294
@@ -434,17 +435,17 @@ msgstr "Grondstoffen"
 #. * TRANSLATORS: Tooltip for the resources tool in the editor
 #: ../../src/editor/editorinteractive.cc:297
 msgid "Set or change resources"
-msgstr ""
+msgstr "Instellen of wijzigen van grondstoffen"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:300
 msgid "Port spaces"
-msgstr ""
+msgstr "Havenlocaties"
 
 #. * TRANSLATORS: Tooltip for the port spaces tool in the editor
 #: ../../src/editor/editorinteractive.cc:303
 msgid "Add or remove port spaces"
-msgstr ""
+msgstr "Toevoegen of verwijderen van havenlocaties"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:309
@@ -455,12 +456,12 @@ msgstr "Spelers"
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
 #: ../../src/editor/editorinteractive.cc:312
 msgid "Set number of players and their names, tribes and starting positions"
-msgstr ""
+msgstr "Instellen van aantal spelers en hun namen, stammen en startposities"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:315
 msgid "Map origin"
-msgstr ""
+msgstr "Kaartoorsprong"
 
 #. * TRANSLATORS: Tooltip for the map origin tool in the editor
 #: ../../src/editor/editorinteractive.cc:318
@@ -472,22 +473,22 @@ msgstr "Bepaal de positie voor de coördinaten (0,0). Dit zal de linkerbovenhoek
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:325
 msgid "Map size"
-msgstr ""
+msgstr "Kaartgrootte"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
 #: ../../src/editor/editorinteractive.cc:328
 msgid "Change the map’s size"
-msgstr ""
+msgstr "Verander de kaartgrootte"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:331
 msgid "Information"
-msgstr ""
+msgstr "Informatie"
 
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
 #: ../../src/editor/editorinteractive.cc:334
 msgid "Click on a field to show information about it"
-msgstr ""
+msgstr "Klik op een veld om er informatie over te tonen"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
@@ -1274,7 +1275,7 @@ msgstr "Huidige grootte: %u"
 #: ../../src/game_io/game_loader.cc:69
 #, c-format
 msgid "Loading game: %1$s (%2$u/%3$d)"
-msgstr ""
+msgstr "Laadt spel: %1$s (%2$u/%3$d)"
 
 #: ../../src/game_io/game_loader.cc:71 ../../src/game_io/game_saver.cc:59
 #: ../../src/map_io/map_saver.cc:103
@@ -1288,7 +1289,7 @@ msgstr ""
 
 #: ../../src/game_io/game_loader.cc:124 ../../src/game_io/game_saver.cc:96
 msgid "AI"
-msgstr ""
+msgstr "AI"
 
 #: ../../src/game_io/game_loader.cc:132 ../../src/game_io/game_saver.cc:104
 msgid "Command queue"
@@ -4586,7 +4587,7 @@ msgstr ""
 #: ../../src/wui/interactive_base.cc:291
 msgctxt "hotkey"
 msgid "Ctrl++"
-msgstr ""
+msgstr "Ctrl++"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:294
@@ -4596,7 +4597,7 @@ msgstr "Zoom herstellen naar standaard"
 #: ../../src/wui/interactive_base.cc:296
 msgctxt "hotkey"
 msgid "Ctrl+0"
-msgstr ""
+msgstr "Ctrl+0"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:299
@@ -4606,7 +4607,7 @@ msgstr ""
 #: ../../src/wui/interactive_base.cc:301
 msgctxt "hotkey"
 msgid "Ctrl+-"
-msgstr ""
+msgstr "Ctrl+-"
 
 #: ../../src/wui/interactive_gamebase.cc:57
 msgid "PAUSE"
@@ -4622,7 +4623,7 @@ msgstr ""
 #: ../../src/wui/interactive_gamebase.cc:153
 msgctxt "hotkey"
 msgid "F6"
-msgstr ""
+msgstr "F6"
 
 #. * TRANSLATORS: Tooltip for Sound Options in the game's main menu
 #: ../../src/wui/interactive_gamebase.cc:163
@@ -4671,7 +4672,7 @@ msgstr ""
 #: ../../src/wui/interactive_gamebase.cc:279
 msgctxt "hotkey"
 msgid "Page Up"
-msgstr ""
+msgstr "Page Up"
 
 #: ../../src/wui/interactive_gamebase.cc:281
 msgid "Speed -"
@@ -4685,7 +4686,7 @@ msgstr ""
 #: ../../src/wui/interactive_gamebase.cc:284
 msgctxt "hotkey"
 msgid "Page Down"
-msgstr ""
+msgstr "Page Down"
 
 #: ../../src/wui/interactive_gamebase.cc:288
 msgid "Resume"
@@ -5066,12 +5067,12 @@ msgstr ""
 
 #: ../../src/wui/portdockwaresdisplay.cc:96
 msgid "(Empty)"
-msgstr ""
+msgstr "(Leeg)"
 
 #. * TRANSLATORS: Tooltip for a ware that is present in the building
 #: ../../src/wui/portdockwaresdisplay.cc:141
 msgid "Present"
-msgstr ""
+msgstr "Aanwezig"
 
 #. * TRANSLATORS: Tooltip for a ware that is neither present in the
 #. building nor being transported there
@@ -5368,7 +5369,7 @@ msgstr "Naar het geselecteerde schip gaan en het venster openen"
 #: ../../src/wui/seafaring_statistics_menu.cc:117
 msgctxt "hotkey"
 msgid "CTRL+o"
-msgstr ""
+msgstr "CTRL+o"
 
 #. * TRANSLATORS: Tooltip in the seafaring statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:129
