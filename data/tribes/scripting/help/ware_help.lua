@@ -100,7 +100,7 @@ function ware_help_producers_string(tribe, ware_description)
          -- check for doubled entries
          for j, program_name in ipairs(producing_programs) do
             for i, prog_name in ipairs(producing_programs) do
-               if (produced_wares_strings[program_name] == produced_wares_strings[prog_name] and prog_name ~= program_name) then 
+               if (produced_wares_strings[program_name] == produced_wares_strings[prog_name] and prog_name ~= program_name) then
                   if (help_consumed_wares_workers(tribe, building, program_name) == help_consumed_wares_workers(tribe, building, prog_name)) then
                      table.remove(producing_programs, i)
                   end
