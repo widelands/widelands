@@ -50,6 +50,10 @@ protected:
 	/// Handle keypresses for the OK button.
 	bool handle_key(bool down, SDL_Keysym code) override;
 
+	void clicked_button_close() override {
+		clicked_ok();
+	}
+
 private:
 	/// Get the game running again and close the window.
 	void clicked_ok();
