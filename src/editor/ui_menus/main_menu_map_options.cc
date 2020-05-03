@@ -148,14 +148,16 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 		                                       (l < 2 ? _("Disabled") : std::to_string(l)))
 		                                         .str()));
 	} else {
-		tags_box_.add(new UI::Textarea(&tags_box_, 0, 0, max_w_, labelh_, _("Waterway length limit:")));
+		tags_box_.add(
+		   new UI::Textarea(&tags_box_, 0, 0, max_w_, labelh_, _("Waterway length limit:")));
 		UI::Box* ww_box = new UI::Box(&tags_box_, 0, 0, UI::Box::Horizontal, max_w_);
-		waterway_length_warning_ = new UI::Icon(ww_box, g_gr->images().get("images/ui_basic/stop.png"));
+		waterway_length_warning_ =
+		   new UI::Icon(ww_box, g_gr->images().get("images/ui_basic/stop.png"));
 		waterway_length_warning_->set_handle_mouse(true);
 		waterway_length_box_ =
-		   new UI::SpinBox(ww_box, 0, 0, max_w_ - waterway_length_warning_->get_w(), max_w_ * 2 / 3, 1,
-			               1, std::numeric_limits<int32_t>::max(), UI::PanelStyle::kWui, std::string(),
-			               UI::SpinBox::Units::kFields);
+		   new UI::SpinBox(ww_box, 0, 0, max_w_ - waterway_length_warning_->get_w(), max_w_ * 2 / 3,
+		                   1, 1, std::numeric_limits<int32_t>::max(), UI::PanelStyle::kWui,
+		                   std::string(), UI::SpinBox::Units::kFields);
 		/** TRANSLATORS: Map Options: Waterways are disabled */
 		waterway_length_box_->add_replacement(1, _("Disabled"));
 		waterway_length_box_->changed.connect([this]() { update_waterway_length_warning(); });

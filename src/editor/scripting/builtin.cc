@@ -773,11 +773,12 @@ const std::map<std::string, BuiltinFunctionInfo*> kBuiltinFunctions = {
    // Building
 
    {"dismantle",
-    new BuiltinFunctionInfo([]() { return _("Immediately dismantle this building."); },
-                            new FunctionBase("dismantle",
-                                             VariableType(VariableTypeID::Building),  // call on
-                                             VariableType(VariableTypeID::Nil),       // returns
-                                             {std::make_pair("keep_wares", VariableType(VariableTypeID::Boolean))}))},
+    new BuiltinFunctionInfo(
+       []() { return _("Immediately dismantle this building."); },
+       new FunctionBase("dismantle",
+                        VariableType(VariableTypeID::Building),  // call on
+                        VariableType(VariableTypeID::Nil),       // returns
+                        {std::make_pair("keep_wares", VariableType(VariableTypeID::Boolean))}))},
 
    // ConstructionSite
 
