@@ -622,18 +622,18 @@ void ProductionSite::remove_worker(Worker& w) {
 	for (const auto& temp_wp : descr().working_positions()) {
 		DescriptionIndex const worker_index = temp_wp.first;
 		for (uint32_t j = temp_wp.second; j; --j, ++wp, ++wp_index) {
-			Worker* const worker = wp->worker;
-			if (worker && worker == &w) {
-				// do not request the type of worker that is currently assigned - maybe a trained worker
-				// was
-				// evicted to make place for a level 0 worker.
+			if (wp->worker == &w) {
+				// do not request the type of worker that is currently assigned – maybe a
+				// trained worker was evicted to make place for a level 0 worker.
 				// Therefore we again request the worker from the WorkingPosition of descr()
 				if (main_worker_ == wp_index) {
 					main_worker_ = -1;
 				}
 				*wp = WorkingPosition(&request_worker(worker_index), nullptr);
 				Building::remove_worker(w);
-				return;
+				// If the main worker was evicted, perhaps another worker is
+				// still there to perform basic tasks
+				return try_start_working(dynamic_cast<Game&>(get_owner()->egbase()));
 			}
 		}
 	}
@@ -830,7 +830,7 @@ bool ProductionSite::can_start_working() const {
 }
 
 void ProductionSite::try_start_working(Game& game) {
-	const size_t nr_workers = descr().working_positions().size();
+	const size_t nr_workers = descr().nr_working_positions();
 	for (uint32_t i = 0; i < nr_workers; ++i) {
 		if (main_worker_ == static_cast<int>(i) || main_worker_ < 0) {
 			if (Worker* worker = working_positions_[i].worker) {
