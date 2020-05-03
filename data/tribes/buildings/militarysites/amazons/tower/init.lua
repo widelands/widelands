@@ -26,8 +26,8 @@ tribes:new_militarysite_type {
 
    animation_directory = dirname,
    animations = {
-      idle = {hotspot = {44, 67}},
-      unoccupied = {hotspot = {44, 67}},
+      idle = {hotspot = {50, 81}},
+      unoccupied = {hotspot = {50, 81}},
    },
 
    aihints = {
