@@ -633,7 +633,10 @@ void ProductionSite::remove_worker(Worker& w) {
 				Building::remove_worker(w);
 				// If the main worker was evicted, perhaps another worker is
 				// still there to perform basic tasks
-				return try_start_working(dynamic_cast<Game&>(get_owner()->egbase()));
+				if (upcast(Game, game, &get_owner()->egbase())) {
+					try_start_working(*game);
+				}
+				return;
 			}
 		}
 	}
