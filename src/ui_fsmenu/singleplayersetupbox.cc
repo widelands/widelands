@@ -42,19 +42,19 @@ SinglePlayerActivePlayerSetupBox::SinglePlayerActivePlayerSetupBox(
             g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
      settings_(settings) {
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
-	single_player_player_groups.resize(kMaxPlayers);
-	for (PlayerSlot i = 0; i < single_player_player_groups.size(); ++i) {
-		single_player_player_groups.at(i) =
-		   new SinglePlayerPlayerGroup(this, 0 /*get_w() - UI::Scrollbar::kSize*/, buth, i, settings);
-		add(single_player_player_groups.at(i));
+	active_player_groups.resize(kMaxPlayers);
+	for (PlayerSlot i = 0; i < active_player_groups.size(); ++i) {
+		active_player_groups.at(i) = new SinglePlayerActivePlayerGroup(
+		   this, 0 /*get_w() - UI::Scrollbar::kSize*/, buth, i, settings);
+		add(active_player_groups.at(i));
 	}
 }
 
-SinglePlayerPlayerGroup::SinglePlayerPlayerGroup(UI::Panel* const parent,
-                                                 int32_t const w,
-                                                 int32_t const h,
-                                                 PlayerSlot id,
-                                                 GameSettingsProvider* const settings)
+SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const parent,
+                                                             int32_t const w,
+                                                             int32_t const h,
+                                                             PlayerSlot id,
+                                                             GameSettingsProvider* const settings)
    : UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h),
      id_(id),
      settings_(settings),
@@ -108,11 +108,15 @@ SinglePlayerPlayerGroup::SinglePlayerPlayerGroup(UI::Panel* const parent,
 	add(start_type.get_dropdown());
 	add(teams_.get_dropdown());
 	add_space(0);
+
 	subscriber_ = Notifications::subscribe<NoteGameSettings>(
 	   [this](const NoteGameSettings& note) { on_gamesettings_updated(note); });
+
+	player.set_disable_style(UI::ButtonDisableStyle::kFlat);
+	player.set_enabled(false);
 }
 
-void SinglePlayerPlayerGroup::on_gamesettings_updated(const NoteGameSettings& note) {
+void SinglePlayerActivePlayerGroup::on_gamesettings_updated(const NoteGameSettings& note) {
 	if (settings_->settings().players.empty()) {
 		// No map/savegame yet
 		return;
@@ -123,7 +127,7 @@ void SinglePlayerPlayerGroup::on_gamesettings_updated(const NoteGameSettings& no
 		// slots. JM: maybe need to change this back...
 		update();
 		break;
-	case NoteGameSettings::Action::kUser:
+	case NoteGameSettings::Action::kPlayer:  // JM: was kUser for multiplayer...
 		// We might have moved away from a slot, so we need to update the previous slot too.
 		// Since we can't track the slots here, we just update everything.
 		update();
@@ -137,8 +141,8 @@ void SinglePlayerPlayerGroup::on_gamesettings_updated(const NoteGameSettings& no
 	}
 }
 
-/// Refresh all user interfaces
-void SinglePlayerPlayerGroup::update() {
+void SinglePlayerActivePlayerGroup::update() {
+	log("SinglePlayerActivePlayerGroup::update\n");
 	const GameSettings& settings = settings_->settings();
 	if (id_ >= settings.players.size()) {
 		set_visible(false);
@@ -161,9 +165,7 @@ void SinglePlayerPlayerGroup::update() {
 		start_type.set_enabled(false);
 	} else {  // kHuman, kShared, kComputer
 		tribe_.rebuild();
-
 		start_type.rebuild();
-
 		teams_.rebuild();
 	}
 
@@ -178,14 +180,47 @@ void SinglePlayerPlayerGroup::update() {
 	//	}
 }
 
-SinglePlayerPossiblePlayerBox::SinglePlayerPossiblePlayerBox(UI::Panel* const parent,
-                                                             int32_t const x,
-                                                             int32_t const y,
-                                                             int32_t const w,
-                                                             int32_t const h,
-                                                             GameSettingsProvider* const settings,
-                                                             uint32_t buth)
-   : UI::Box(parent, x, y, UI::Box::Horizontal, w, h),
+SinglePlayerPossiblePlayerGroup::SinglePlayerPossiblePlayerGroup(
+   UI::Panel* const parent,
+   int32_t const w,
+   int32_t const h,
+   PlayerSlot id,
+   GameSettingsProvider* const settings)
+   : UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h),
+     id_(id),
+     role_(this,
+           (boost::format("dropdown_slot%d") % static_cast<unsigned int>(id)).str(),
+           0,
+           0,
+           h,
+           h,
+           settings,
+           id),
+     // Name needs to be initialized after the dropdown, otherwise the layout function will
+     // crash.
+     name_(this, 0, 0, 50, 50),
+     settings_(settings) {
+	add(role_.get_dropdown());
+	add(&name_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+
+	name_.set_text(settings->settings().players.at(id).name);
+
+	subscriber_ = Notifications::subscribe<NoteGameSettings>(
+	   [this](const NoteGameSettings& note) { update(); });
+}
+void SinglePlayerPossiblePlayerGroup::update() {
+	role_.rebuild();
+}
+
+SinglePlayerPossiblePlayerSetupBox::SinglePlayerPossiblePlayerSetupBox(
+   UI::Panel* const parent,
+   int32_t const x,
+   int32_t const y,
+   int32_t const w,
+   int32_t const h,
+   GameSettingsProvider* const settings,
+   uint32_t buth)
+   : UI::Box(parent, x, y, UI::Box::Vertical, w, h),
      title_(this,
             0,
             0,
@@ -193,8 +228,31 @@ SinglePlayerPossiblePlayerBox::SinglePlayerPossiblePlayerBox(UI::Panel* const pa
             0,
             _("Available Players"),
             UI::Align::kRight,
-            g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)) {
+            g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
+     settings_(settings) {
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
+
+	subscriber_ = Notifications::subscribe<NoteGameSettings>(
+	   [this](const NoteGameSettings& note) { update(); });
+}
+void SinglePlayerPossiblePlayerSetupBox::update() {
+	const GameSettings& settings = settings_->settings();
+	const size_t number_of_users = settings.players.size();
+	log("number of users: %d\n", settings.users.size());
+	log("number of players: %d\n", settings.players.size());
+	// Update / initialize client groups
+
+	possible_player_groups.resize(number_of_users);
+	for (uint32_t i = 0; i < number_of_users; ++i) {
+		if (!possible_player_groups.at(i)) {
+			possible_player_groups.at(i) =
+			   new SinglePlayerPossiblePlayerGroup(this, 100, 50, i, settings_);
+			add(possible_player_groups.at(i), UI::Box::Resizing::kFullSize);
+			//         possible_player_groups.at(i)->layout();
+			possible_player_groups.at(i)->set_visible(settings.players.at(i).state ==
+			                                          PlayerSettings::State::kHuman);
+		}
+	}
 }
 
 SinglePlayerSetupBox::SinglePlayerSetupBox(UI::Panel* const parent,

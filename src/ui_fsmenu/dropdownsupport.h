@@ -36,7 +36,7 @@ public:
 	     id_(id),
 	     selection_locked_(false) {
 		dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
-		dropdown_.selected.connect([this]() { on_dropdown_selected(); });
+		dropdown_.selected.connect([this]() { on_selection_changed(); });
 	}
 	virtual ~DropDownSupport() {
 	}
@@ -63,7 +63,7 @@ protected:
 	bool selection_locked_;
 
 private:
-	void on_dropdown_selected() {
+	void on_selection_changed() {
 		selection_locked_ = true;
 		selection_action();
 		selection_locked_ = false;
@@ -89,13 +89,13 @@ private:
 class PlayerTypeDropdownSupport : public DropDownSupport<std::string> {
 public:
 	PlayerTypeDropdownSupport(UI::Panel* parent,
-	                    const std::string& name,
-	                    int32_t x,
-	                    int32_t y,
-	                    uint32_t w,
-	                    int button_dimension,
-	                    GameSettingsProvider* const settings,
-	                    PlayerSlot id);
+	                          const std::string& name,
+	                          int32_t x,
+	                          int32_t y,
+	                          uint32_t w,
+	                          int button_dimension,
+	                          GameSettingsProvider* const settings,
+	                          PlayerSlot id);
 	void rebuild() override;
 
 private:
@@ -107,13 +107,13 @@ private:
 class StartTypeDropdownSupport : public DropDownSupport<uintptr_t> {
 public:
 	StartTypeDropdownSupport(UI::Panel* parent,
-	                    const std::string& name,
-	                    int32_t x,
-	                    int32_t y,
-	                    uint32_t w,
-	                    int button_dimension,
-	                    GameSettingsProvider* const settings,
-	                    PlayerSlot id);
+	                         const std::string& name,
+	                         int32_t x,
+	                         int32_t y,
+	                         uint32_t w,
+	                         int button_dimension,
+	                         GameSettingsProvider* const settings,
+	                         PlayerSlot id);
 
 	void rebuild() override;
 
@@ -133,6 +133,22 @@ public:
 	             GameSettingsProvider* const settings,
 	             PlayerSlot id);
 
+	void rebuild() override;
+
+private:
+	void selection_action() override;
+};
+
+class RoleDropdownSupport : public DropDownSupport<uintptr_t> {
+public:
+	RoleDropdownSupport(UI::Panel* parent,
+	                    const std::string& name,
+	                    int32_t x,
+	                    int32_t y,
+	                    uint32_t w,
+	                    int button_dimension,
+	                    GameSettingsProvider* const settings,
+	                    PlayerSlot id);
 	void rebuild() override;
 
 private:

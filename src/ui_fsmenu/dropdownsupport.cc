@@ -234,13 +234,13 @@ void PlayerTypeDropdownSupport::selection_action() {
 }
 
 StartTypeDropdownSupport::StartTypeDropdownSupport(UI::Panel* parent,
-                                         const std::string& name,
-                                         int32_t x,
-                                         int32_t y,
-                                         uint32_t w,
-                                         int button_dimension,
-                                         GameSettingsProvider* const settings,
-                                         PlayerSlot id)
+                                                   const std::string& name,
+                                                   int32_t x,
+                                                   int32_t y,
+                                                   uint32_t w,
+                                                   int button_dimension,
+                                                   GameSettingsProvider* const settings,
+                                                   PlayerSlot id)
    : DropDownSupport<uintptr_t>(parent,
                                 name,
                                 x,
@@ -345,7 +345,6 @@ TeamDropdown::TeamDropdown(UI::Panel* parent,
 }
 
 void TeamDropdown::rebuild() {
-
 	if (selection_locked_) {
 		return;
 	}
@@ -375,5 +374,66 @@ void TeamDropdown::rebuild() {
 void TeamDropdown::selection_action() {
 	if (dropdown_.has_selection()) {
 		settings_->set_player_team(id_, dropdown_.get_selected());
+	}
+}
+
+RoleDropdownSupport::RoleDropdownSupport(UI::Panel* parent,
+                                         const std::string& name,
+                                         int32_t x,
+                                         int32_t y,
+                                         uint32_t w,
+                                         int button_dimension,
+                                         GameSettingsProvider* const settings,
+                                         PlayerSlot id)
+   : DropDownSupport<uintptr_t>(parent,
+                                name,
+                                x,
+                                y,
+                                w,
+                                16,
+                                button_dimension,
+                                _("Role"),
+                                UI::DropdownType::kPictorial,
+                                UI::PanelStyle::kFsMenu,
+                                UI::ButtonStyle::kFsMenuSecondary,
+                                settings,
+                                id) {
+}
+void RoleDropdownSupport::rebuild() {
+	if (selection_locked_) {
+		return;
+	}
+	dropdown_.clear();
+	const GameSettings& settings = settings_->settings();
+	if (id_ >= settings.players.size()) {
+		return;
+	}
+	const PlayerSettings& user_setting = settings.players.at(id_);
+
+	for (PlayerSlot slot = 0; slot < settings.players.size(); ++slot) {
+		if (settings.players.at(slot).state == PlayerSettings::State::kHuman ||
+		    settings.players.at(slot).state == PlayerSettings::State::kClosed ||
+		    settings.players.at(slot).state == PlayerSettings::State::kComputer) {
+			dropdown_.add((boost::format(_("Player %u")) % static_cast<unsigned int>(slot + 1)).str(),
+			              slot, playercolor_image(slot, "images/players/genstats_player.png"),
+			              slot == user_setting.initialization_index);
+		}
+	}
+	dropdown_.add(_("Spectator"), UserSettings::none(),
+	              g_gr->images().get("images/wui/fieldaction/menu_tab_watch.png"), false);
+	dropdown_.set_visible(true);
+	dropdown_.set_enabled(id_ == settings.playernum);
+}
+void RoleDropdownSupport::selection_action() {
+	const GameSettings& settings = settings_->settings();
+	if (id_ != settings.playernum) {
+		return;
+	}
+	if (dropdown_.has_selection()) {
+		const uint8_t new_slot = dropdown_.get_selected();
+		//		if (new_slot != settings.) {
+		settings_->set_player_number(new_slot);
+		Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer));
+		//		}
 	}
 }
