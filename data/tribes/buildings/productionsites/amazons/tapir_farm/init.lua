@@ -57,7 +57,6 @@ tribes:new_productionsite_type {
          descname = _"working",
          actions = {
             "call=recruit_tapir",
-            "return=no_stats",
          }
       },
       recruit_tapir = {

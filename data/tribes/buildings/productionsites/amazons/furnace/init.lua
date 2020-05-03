@@ -60,7 +60,6 @@ tribes:new_productionsite_type {
          descname = _"working",
          actions = {
             "call=smelt_gold",
-            "return=no_stats",
          },
       },
       smelt_gold = {

@@ -93,7 +93,6 @@ tribes:new_productionsite_type {
             "call=produce_spear_stone_tipped",
             "call=produce_stonebowl",
             "call=produce_spear_hardened",
-            "return=no_stats",
          },
       },
       produce_shovel = {

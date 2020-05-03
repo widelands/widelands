@@ -64,7 +64,6 @@ tribes:new_productionsite_type {
             "call=plant_balsa",
             "call=plant_rubber",
             "call=plant_ironwood",
-            "return=no_stats"
          },
       },
       plant_balsa = {

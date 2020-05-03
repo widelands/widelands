@@ -65,7 +65,6 @@ tribes:new_productionsite_type {
          descname = _"working",
          actions = {
             "call=produce_ration",
-            "return=no_stats"
          },
       },
       produce_ration = {
