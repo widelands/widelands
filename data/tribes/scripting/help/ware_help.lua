@@ -97,16 +97,23 @@ function ware_help_producers_string(tribe, ware_description)
             end
             produced_wares_strings[program_name] = produced_wares_string
          end
-         -- check for doubled entries
-         for j, program_name in ipairs(producing_programs) do
-            for i, prog_name in ipairs(producing_programs) do
-               if (produced_wares_strings[program_name] == produced_wares_strings[prog_name] and prog_name ~= program_name) then
-                  if (help_consumed_wares_workers(tribe, building, program_name) == help_consumed_wares_workers(tribe, building, prog_name)) then
-                     table.remove(producing_programs, i)
-                  end
+         -- check for doubled entries (identical consumed and produced wares)
+         local deduplicated_programs = {}
+         for j, prog1_name in ipairs(producing_programs) do
+            local duplicate = false
+            for i, prog2_name in ipairs(deduplicated_programs) do
+               if produced_wares_strings[prog1_name] == produced_wares_strings[prog2_name] and
+                     help_consumed_wares_workers(tribe, building, prog1_name) ==
+                     help_consumed_wares_workers(tribe, building, prog2_name) then
+                  duplicate = true
+                  break
                end
             end
+            if not duplicate then
+               table.insert(deduplicated_programs, prog1_name)
+            end
          end
+         producing_programs = deduplicated_programs
 
          -- Now collect the consumed wares for each filtered program and print the program info
          for j, program_name in ipairs(producing_programs) do
