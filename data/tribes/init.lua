@@ -245,7 +245,7 @@ print_loading_message("┗━ took", function()
       include "tribes/immovables/cassavafield/tiny/init.lua"
       include "tribes/immovables/resi/amazons/init.lua"
       include "tribes/immovables/shipconstruction_amazons/init.lua"
-      include "tribes/immovables/cocoafield/init.lua"
+      include "tribes/immovables/trees/cocoa/init.lua"
       include "tribes/immovables/trees/balsa/init.lua"
       include "tribes/immovables/trees/ironwood/init.lua"
       include "tribes/immovables/trees/rubber/init.lua"
