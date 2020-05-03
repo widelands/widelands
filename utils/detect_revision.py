@@ -111,7 +111,7 @@ def detect_bzr_revision():
             commit_message = run_bzr('log', '--limit=1', '--short')
             git_hash = extract_git_hash(commit_message)
             return 'bzr{revno}[{git_hash}@{nick}]'.format(
-                    revno=revno, git_hash=git_hash, nick=nick)
+                revno=revno, git_hash=git_hash, nick=nick)
         except (OSError, subprocess.CalledProcessError):
             return None
     return None
