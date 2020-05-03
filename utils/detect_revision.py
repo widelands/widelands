@@ -83,15 +83,12 @@ def detect_bzr_revision():
     def extract_git_hash(commit_message):
         # Get the last string in the commit message
         git_hash = commit_message.split()[-1]
-        try:
-            # Does it look like a git hash?
-            assert len(git_hash) == 40 and int(git_hash, 16)
-        except (AssertionError, ValueError):
-            # It doesn't :(
-            return 'NO_HASH'
-        else:
+        # Does it look like a git hash?
+        if re.search(r'^[0-9A-Fa-f]{40}$', git_hash) is not None:
             # It does; shorten it
             return git_hash[:7]
+        else:
+            return 'NO_HASH'
 
     if __has_bzrlib:
         try:
