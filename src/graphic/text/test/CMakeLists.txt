@@ -8,6 +8,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/paths.h.cmake ${CMAKE_CURRENT_BINARY_
 wl_binary(wl_render_richtext
   SRCS
     render_richtext.cc
+  USES_SDL2_TTF
   DEPENDS
     base_log
     graphic

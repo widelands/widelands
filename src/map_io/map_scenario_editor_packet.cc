@@ -195,7 +195,7 @@ void MapScenarioEditorPacket::read(FileSystem& fs, EditorGameBase& egbase, bool,
 								former.push_back(std::make_pair(idx, ""));
 								Widelands::Building& temp_bld =
 								   egbase.get_player(field.get_owned_by())->force_building(coords, former);
-								temp_bld.get_owner()->dismantle_building(&temp_bld);
+								temp_bld.get_owner()->dismantle_building(&temp_bld, true);
 								pfb = dynamic_cast<Widelands::PartiallyFinishedBuilding*>(
 								   coords.field->get_immovable());
 							}
@@ -206,6 +206,18 @@ void MapScenarioEditorPacket::read(FileSystem& fs, EditorGameBase& egbase, bool,
 								q.set_max_fill(fr.unsigned_32());
 								q.set_filled(fr.unsigned_32());
 								pfb->set_priority(Widelands::wwWARE, di, fr.signed_32());
+							}
+							for (Widelands::WaresQueue* q : pfb->dropout_wares_) {
+								q->set_max_size(0);
+							}
+							for (size_t n = fr.unsigned_32(); n; --n) {
+								const Widelands::DescriptionIndex di = fr.unsigned_32();
+								const Quantity f = fr.unsigned_32();
+								try {
+									pfb->inputqueue(di, Widelands::wwWARE).set_filled(f);
+								} catch (const WException&) {
+									// building description must have been changed – ignore
+								}
 							}
 							if (fr.unsigned_8()) {
 								pfb->builder_request_ = nullptr;
@@ -461,15 +473,23 @@ void MapScenarioEditorPacket::write(FileSystem& fs, EditorGameBase& egbase, MapO
 						const Widelands::PartiallyFinishedBuilding& pfb =
 						   dynamic_cast<const Widelands::PartiallyFinishedBuilding&>(*f.get_immovable());
 						fw.unsigned_32(egbase.tribes().safe_building_index(pfb.building().name()));
-						size_t n = pfb.get_nrwaresqueues();
+						size_t n = pfb.nr_consume_waresqueues();
 						fw.unsigned_32(n);
 						for (; n; --n) {
-							const WaresQueue& q = *pfb.get_waresqueue(n - 1);
+							const WaresQueue& q = *pfb.get_consume_waresqueue(n - 1);
 							assert(q.get_type() == Widelands::wwWARE);
 							fw.unsigned_32(q.get_index());
 							fw.unsigned_32(q.get_max_fill());
 							fw.unsigned_32(q.get_filled());
 							fw.signed_32(pfb.get_priority(Widelands::wwWARE, q.get_index(), false));
+						}
+						n = pfb.nr_dropout_waresqueues();
+						fw.unsigned_32(n);
+						for (; n; --n) {
+							const WaresQueue& q = *pfb.get_dropout_waresqueue(n - 1);
+							assert(q.get_type() == Widelands::wwWARE);
+							fw.unsigned_32(q.get_index());
+							fw.unsigned_32(q.get_filled());
 						}
 						fw.unsigned_8(pfb.builder_request_ ? 0 : 1);  // whether the site has a builder
 						fw.unsigned_32(pfb.work_completed_);

@@ -521,8 +521,8 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 							      autogen_map_name, cs.get_position().x, cs.get_position().y);
 							write("%s.has_builder = %s", var, cs.has_builder(egbase()) ? "true" : "false");
 							std::map<const char*, uint32_t> filled;
-							for (size_t i = cs.get_nrwaresqueues(); i; --i) {
-								const Widelands::InputQueue& q = *cs.get_waresqueue(i - 1);
+							for (size_t i = cs.nr_consume_waresqueues(); i; --i) {
+								const Widelands::InputQueue& q = *cs.get_consume_waresqueue(i - 1);
 								const char* name =
 								   egbase().tribes().get_ware_descr(q.get_index())->name().c_str();
 								write("%s:set_desired_fill(\"%s\", %u)", var, name, q.get_max_fill());
@@ -584,7 +584,7 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 							      "%s:get_field(%d, %d), false, true)",
 							      var, pvar[ds.owner().player_number() - 1], ds.building().name().c_str(),
 							      autogen_map_name, xpos, ypos);
-							write("%s:dismantle()", var);
+							write("%s:dismantle(%s)", var, ds.nr_dropout_waresqueues() ? "true" : "false");
 							write("%s:get_field(%d, %d).immovable.has_builder = %s", autogen_map_name,
 							      xpos, ypos, ds.has_builder(egbase()) ? "true" : "false");
 						} break;

@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include <SDL_mouse.h>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"

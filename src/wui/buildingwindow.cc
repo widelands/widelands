@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -420,14 +420,14 @@ void BuildingWindow::act_dismantle() {
 	if (ibase()->get_game()) {
 		if (SDL_GetModState() & KMOD_CTRL) {
 			if (building->get_playercaps() & Widelands::Building::PCap_Dismantle) {
-				ibase()->game().send_player_dismantle(*building);
+				ibase()->game().send_player_dismantle(*building, false);
 				hide_workarea(true);
 			}
 		} else {
 			show_dismantle_confirm(dynamic_cast<InteractivePlayer&>(*ibase()), *building);
 		}
 	} else {
-		building->get_owner()->dismantle_building(building);
+		building->get_owner()->dismantle_building(building, (SDL_GetModState() & KMOD_CTRL) == 0);
 	}
 }
 
@@ -494,7 +494,7 @@ void BuildingWindow::act_enhance(Widelands::DescriptionIndex id, bool csite) {
 		if (ibase()->get_game()) {
 			if (SDL_GetModState() & KMOD_CTRL) {
 				ibase()->game().send_player_enhance_building(
-				   *construction_site, Widelands::INVALID_INDEX);
+				   *construction_site, Widelands::INVALID_INDEX, false);
 			} else {
 				show_enhance_confirm(dynamic_cast<InteractivePlayer&>(*ibase()), *construction_site,
 				                     construction_site->get_info().becomes->enhancement(), true);
@@ -508,12 +508,12 @@ void BuildingWindow::act_enhance(Widelands::DescriptionIndex id, bool csite) {
 	if (ibase()->get_game()) {
 		if (SDL_GetModState() & KMOD_CTRL) {
 			if (building->get_playercaps() & Widelands::Building::PCap_Enhancable)
-				ibase()->game().send_player_enhance_building(*building, id);
+				ibase()->game().send_player_enhance_building(*building, id, false);
 		} else {
 			show_enhance_confirm(dynamic_cast<InteractivePlayer&>(*ibase()), *building, id);
 		}
 	} else {
-		building->get_owner()->enhance_building(building, id);
+		building->get_owner()->enhance_building(building, id, (SDL_GetModState() & KMOD_CTRL) == 0);
 	}
 }
 

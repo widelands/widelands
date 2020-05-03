@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -128,6 +128,8 @@ public:
 	void apply_settings(const BuildingSettings&);
 
 	void enhance();
+
+	void add_dropout_wares(const std::map<DescriptionIndex, Quantity>&);
 
 protected:
 	void update_statistics_string(std::string* statistics_string) override;

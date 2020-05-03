@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-03-20 06:16+0000\n"
-"PO-Revision-Date: 2020-03-26 19:51+0000\n"
+"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"PO-Revision-Date: 2020-04-24 17:27+0000\n"
 "Last-Translator: Karl Vest\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -539,7 +539,7 @@ msgstr "Vyhňa na zbroje"
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:56
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:68
-#: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:85
+#: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:84
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:56
 #: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:58
 #: ../../data/tribes/buildings/productionsites/atlanteans/spiderfarm/init.lua:53
@@ -558,7 +558,7 @@ msgstr "Vyhňa na zbroje"
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:53
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:50
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:56
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:73
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:72
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:60
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:71
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:54
@@ -569,7 +569,7 @@ msgstr "Vyhňa na zbroje"
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:66
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:47
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:67
-#: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:84
+#: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:83
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:61
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:64
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:56
@@ -592,7 +592,7 @@ msgstr "Vyhňa na zbroje"
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:69
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:74
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:68
-#: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:85
+#: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:84
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:76
 #: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:73
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:76
@@ -784,7 +784,7 @@ msgid "mining diamonds"
 msgstr "ťaženie diamantov"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:168
-msgid "No Crystal"
+msgid "No Crystals"
 msgstr "Došli kryštály"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:169
@@ -824,7 +824,7 @@ msgstr "Farmár pracujúci na tejto farme nemá k dispozícii čistú pôdu, na 
 #: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "Trajektový dvor"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:7
@@ -1591,7 +1591,7 @@ msgstr "Farmár pracujúci na tejto farme nemá k dispozícii čistú pôdu, na 
 #: ../../data/tribes/buildings/productionsites/barbarians/ferry_yard/init.lua:7
 msgctxt "barbarians_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "Trajektový dvor"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:7
@@ -2065,7 +2065,7 @@ msgstr "Farmár pracujúci na tejto farme nemá k dispozícii čistú pôdu, na 
 #: ../../data/tribes/buildings/productionsites/empire/ferry_yard/init.lua:7
 msgctxt "empire_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "Trajektový dvor"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:7
@@ -2551,7 +2551,7 @@ msgstr "kutie drevorubačskej sekery"
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:116
 msgid "forging a pick"
-msgstr ""
+msgstr "kutie krompáča"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:226
@@ -2725,7 +2725,7 @@ msgstr "Farmár pracujúci na tejto farme nemá k dispozícii čistú pôdu, na 
 #: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:7
 msgctxt "frisians_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "Trajektový dvor"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:7
@@ -3421,6 +3421,20 @@ msgctxt "frisians_building"
 msgid "Warehouse"
 msgstr "Sklad"
 
+#: ../../data/tribes/economy_profiles/atlanteans:4
+#: ../../data/tribes/economy_profiles/barbarians:4
+#: ../../data/tribes/economy_profiles/empire:4
+#: ../../data/tribes/economy_profiles/frisians:4
+msgid "Efficiency"
+msgstr "Efektivita"
+
+#: ../../data/tribes/economy_profiles/atlanteans:5
+#: ../../data/tribes/economy_profiles/barbarians:5
+#: ../../data/tribes/economy_profiles/empire:5
+#: ../../data/tribes/economy_profiles/frisians:5
+msgid "Stockpile"
+msgstr "Zásoby"
+
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/ashes/init.lua:42
 msgctxt "immovable"
@@ -3793,8 +3807,8 @@ msgstr "Trochu železa"
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:137
 msgctxt "resource_indicator"
-msgid "Some Precious Stones"
-msgstr "Trochu vzácnych kameňov"
+msgid "Some Crystals"
+msgstr "Trochu kryštálov"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:163
@@ -3826,8 +3840,8 @@ msgstr "Veľa železa"
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:241
 msgctxt "resource_indicator"
-msgid "A Lot of Precious Stones"
-msgstr "Veľa vzácnych kameňov"
+msgid "A Lot of Crystals"
+msgstr "Veľa kryštálov"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/barbarians/init.lua:122
@@ -4137,7 +4151,7 @@ msgstr "Pre každý nástroj, ktorý potrebuješ pre rozbeh ekonomiky máš iba 
 #: ../../data/tribes/scripting/starting_conditions/empire/struggling_outpost.lua:11
 #: ../../data/tribes/scripting/starting_conditions/frisians/struggling_outpost.lua:11
 msgid "Struggling Outpost"
-msgstr ""
+msgstr "Vojenská základňa pod tlakom"
 
 #. TRANSLATORS: This is the tooltip for the "Hardcore" starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/struggling_outpost.lua:13
@@ -4193,7 +4207,7 @@ msgid "Ship"
 msgstr "Loď"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../data/tribes/wares/armor/init.lua:53
+#: ../../data/tribes/wares/armor/init.lua:58
 msgctxt "ware"
 msgid "Armor"
 msgstr "Zbroj"
@@ -4875,7 +4889,7 @@ msgstr "Farmár"
 #: ../../data/tribes/workers/atlanteans/ferry/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "Trajekt"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/fishbreeder/init.lua:20
@@ -5016,37 +5030,37 @@ msgid "Woodcutter"
 msgstr "Drevorubač"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/baker/init.lua:17
+#: ../../data/tribes/workers/barbarians/baker/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Baker"
 msgstr "Pekár"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/blacksmith/init.lua:17
+#: ../../data/tribes/workers/barbarians/blacksmith/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Blacksmith"
 msgstr "Kováč"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/blacksmith_master/init.lua:17
+#: ../../data/tribes/workers/barbarians/blacksmith_master/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Master Blacksmith"
 msgstr "Kováčsky majster"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/brewer/init.lua:17
+#: ../../data/tribes/workers/barbarians/brewer/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Brewer"
 msgstr "Pivovarník"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/brewer_master/init.lua:17
+#: ../../data/tribes/workers/barbarians/brewer_master/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Master Brewer"
 msgstr "Pivovarnícky majster"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/builder/init.lua:18
+#: ../../data/tribes/workers/barbarians/builder/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Builder"
 msgstr "Stavbár"
@@ -5064,13 +5078,13 @@ msgid "Cattle Breeder"
 msgstr "Chovateľ dobytka"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/charcoal_burner/init.lua:17
+#: ../../data/tribes/workers/barbarians/charcoal_burner/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Charcoal Burner"
 msgstr "Uhliar"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/farmer/init.lua:32
+#: ../../data/tribes/workers/barbarians/farmer/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Farmer"
 msgstr "Farmár"
@@ -5079,76 +5093,76 @@ msgstr "Farmár"
 #: ../../data/tribes/workers/barbarians/ferry/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "Trajekt"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/fisher/init.lua:22
+#: ../../data/tribes/workers/barbarians/fisher/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Fisher"
 msgstr "Rybár"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/gamekeeper/init.lua:27
+#: ../../data/tribes/workers/barbarians/gamekeeper/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Gamekeeper"
 msgstr "Hájnik"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/gardener/init.lua:27
+#: ../../data/tribes/workers/barbarians/gardener/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Gardener"
 msgstr "Záhradník"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/geologist/init.lua:23
+#: ../../data/tribes/workers/barbarians/geologist/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Geologist"
 msgstr "Geológ"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/helmsmith/init.lua:17
+#: ../../data/tribes/workers/barbarians/helmsmith/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Helmsmith"
 msgstr "Kováč heliem"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/hunter/init.lua:18
+#: ../../data/tribes/workers/barbarians/hunter/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Hunter"
 msgstr "Lovec"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/innkeeper/init.lua:17
+#: ../../data/tribes/workers/barbarians/innkeeper/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Innkeeper"
 msgstr "Krčmár"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/lime_burner/init.lua:17
+#: ../../data/tribes/workers/barbarians/lime_burner/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Lime-Burner"
 msgstr "Vápenník"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/lumberjack/init.lua:23
+#: ../../data/tribes/workers/barbarians/lumberjack/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Lumberjack"
 msgstr "Drevorubač"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/miner/init.lua:17
+#: ../../data/tribes/workers/barbarians/miner/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Miner"
 msgstr "Baník"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/miner_chief/init.lua:17
+#: ../../data/tribes/workers/barbarians/miner_chief/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Chief Miner"
 msgstr "Hlavný baník"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/miner_master/init.lua:17
+#: ../../data/tribes/workers/barbarians/miner_master/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Master Miner"
 msgstr "Banský majster"
@@ -5160,31 +5174,31 @@ msgid "Ox"
 msgstr "Vôl"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/ranger/init.lua:32
+#: ../../data/tribes/workers/barbarians/ranger/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Ranger"
 msgstr "Lesník"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/recruit/init.lua:12
+#: ../../data/tribes/workers/barbarians/recruit/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Recruit"
 msgstr "Verbovanec"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/scout/init.lua:17
+#: ../../data/tribes/workers/barbarians/scout/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Scout"
 msgstr "Prieskumník"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/shipwright/init.lua:18
+#: ../../data/tribes/workers/barbarians/shipwright/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Shipwright"
 msgstr "Lodiar"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/smelter/init.lua:17
+#: ../../data/tribes/workers/barbarians/smelter/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Smelter"
 msgstr "Tavič"
@@ -5196,19 +5210,19 @@ msgid "Soldier"
 msgstr "Vojak"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/stonemason/init.lua:23
+#: ../../data/tribes/workers/barbarians/stonemason/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Stonemason"
 msgstr "Kamenár"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/trainer/init.lua:16
+#: ../../data/tribes/workers/barbarians/trainer/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Trainer"
 msgstr "Cvičiteľ"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/weaver/init.lua:17
+#: ../../data/tribes/workers/barbarians/weaver/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Weaver"
 msgstr "Tkáč"
@@ -5277,7 +5291,7 @@ msgstr "Farmár"
 #: ../../data/tribes/workers/empire/ferry/init.lua:7
 msgctxt "empire_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "Trajekt"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/fisher/init.lua:22
@@ -5505,7 +5519,7 @@ msgstr "Farmár"
 #: ../../data/tribes/workers/frisians/ferry/init.lua:7
 msgctxt "frisians_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "Trajekt"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/fisher/init.lua:7
@@ -5607,7 +5621,7 @@ msgstr "Tavič"
 #: ../../data/tribes/workers/frisians/smoker/init.lua:7
 msgctxt "frisians_worker"
 msgid "Smoker"
-msgstr ""
+msgstr "Údenár"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/soldier/init.lua:492

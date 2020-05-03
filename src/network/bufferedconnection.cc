@@ -97,24 +97,12 @@ std::unique_ptr<BufferedConnection> BufferedConnection::connect(const NetAddress
 	return ptr;
 }
 
-#if BOOST_VERSION >= 106600
-std::unique_ptr<BufferedConnection>
-BufferedConnection::accept(boost::asio::ip::tcp::acceptor& acceptor) {
-	assert(acceptor.is_open());
-	std::unique_ptr<BufferedConnection> ptr(new BufferedConnection(acceptor));
-	if (!ptr->is_connected()) {
-		ptr.reset();
-	}
-	return ptr;
-}
-#else
 std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*>
 BufferedConnection::create_unconnected() {
 	std::unique_ptr<BufferedConnection> ptr(new BufferedConnection());
 	assert(!ptr->is_connected());
 	return std::make_pair(std::move(ptr), &(ptr->socket_));
 }
-#endif
 
 BufferedConnection::~BufferedConnection() {
 	close();
@@ -351,36 +339,6 @@ BufferedConnection::BufferedConnection(const NetAddress& host)
 	}
 }
 
-#if BOOST_VERSION >= 106600
-BufferedConnection::BufferedConnection(boost::asio::ip::tcp::acceptor& acceptor)
-   : io_service_(), socket_(io_service_), receive_buffer_(), currently_sending_(false) {
-
-	boost::system::error_code ec;
-	acceptor.accept(socket_, ec);
-	assert(ec != boost::asio::error::would_block);
-	if (ec) {
-		// Some error
-		log("[BufferedConnection] Error when trying to accept connection: %s.\n",
-		    ec.message().c_str());
-		assert(!is_connected());
-		return;
-	}
-	assert(is_connected());
-
-	log("[BufferedConnection] Accepting connection from %s.\n",
-	    socket_.remote_endpoint().address().to_string().c_str());
-
-	reduce_send_buffer(socket_);
-
-	start_receiving();
-	asio_thread_ = std::thread([this]() {
-		// The output might actually be messed up if it collides with the main thread...
-		log("[BufferedConnection] Starting networking thread\n");
-		io_service_.run();
-		log("[BufferedConnection] Stopping networking thread\n");
-	});
-}
-#else
 BufferedConnection::BufferedConnection()
    : io_service_(), socket_(io_service_), receive_buffer_(), currently_sending_(false) {
 }
@@ -401,7 +359,6 @@ void BufferedConnection::notify_connected() {
 		log("[BufferedConnection] Stopping networking thread\n");
 	});
 }
-#endif
 
 void BufferedConnection::ignore_rtt_response() {
 

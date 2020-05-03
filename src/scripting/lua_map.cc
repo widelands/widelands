@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -4855,13 +4855,13 @@ int LuaBuilding::get_flag(lua_State* L) {
  */
 
 /* RST
-   .. method:: dismantle()
+   .. method:: dismantle([keep_wares = false])
 
       Instantly turn this building into a dismantlesite.
 */
 int LuaBuilding::dismantle(lua_State* L) {
 	Widelands::Building* bld = get(L, get_egbase(L));
-	bld->get_owner()->dismantle_building(bld);
+	bld->get_owner()->dismantle_building(bld, lua_gettop(L) > 1 && luaL_checkboolean(L, 2));
 	return 0;
 }
 

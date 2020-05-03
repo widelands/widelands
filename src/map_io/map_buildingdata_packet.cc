@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,11 +57,11 @@ constexpr uint16_t kCurrentPacketVersion = 5;
 // Building type package versions
 constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
 constexpr uint16_t kCurrentPacketVersionConstructionsite = 4;
-constexpr uint16_t kCurrentPacketPFBuilding = 1;
+constexpr uint16_t kCurrentPacketPFBuilding = 2;
 // Responsible for warehouses and expedition bootstraps
 constexpr uint16_t kCurrentPacketVersionWarehouse = 8;
 constexpr uint16_t kCurrentPacketVersionMilitarysite = 6;
-constexpr uint16_t kCurrentPacketVersionProductionsite = 8;
+constexpr uint16_t kCurrentPacketVersionProductionsite = 9;
 constexpr uint16_t kCurrentPacketVersionTrainingsite = 6;
 
 void MapBuildingdataPacket::read(FileSystem& fs,
@@ -229,7 +229,7 @@ void MapBuildingdataPacket::read_partially_finished_building(
    const TribesLegacyLookupTable& tribes_lookup_table) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketPFBuilding) {
+		if (packet_version <= kCurrentPacketPFBuilding && packet_version >= 1) {
 			const TribeDescr& tribe = pfb.owner().tribe();
 			pfb.building_ = tribe.get_building_descr(tribe.safe_building_index(fr.c_string()));
 
@@ -253,11 +253,18 @@ void MapBuildingdataPacket::read_partially_finished_building(
 			}
 
 			try {
-				uint16_t const size = fr.unsigned_16();
-				pfb.wares_.resize(size);
-				for (uint16_t i = 0; i < pfb.wares_.size(); ++i) {
-					pfb.wares_[i] = new WaresQueue(pfb, INVALID_INDEX, 0);
-					pfb.wares_[i]->read(fr, egbase, mol, tribes_lookup_table);
+				uint16_t size = fr.unsigned_16();
+				pfb.consume_wares_.resize(size);
+				for (uint16_t i = 0; i < pfb.consume_wares_.size(); ++i) {
+					pfb.consume_wares_[i] = new WaresQueue(pfb, INVALID_INDEX, 0);
+					pfb.consume_wares_[i]->read(fr, egbase, mol, tribes_lookup_table);
+				}
+				// TODO(Nordfriese): Savegame compatibility
+				size = packet_version >= 2 ? fr.unsigned_16() : 0;
+				pfb.dropout_wares_.resize(size);
+				for (uint16_t i = 0; i < pfb.dropout_wares_.size(); ++i) {
+					pfb.dropout_wares_[i] = new WaresQueue(pfb, INVALID_INDEX, 0);
+					pfb.dropout_wares_[i]->read(fr, egbase, mol, tribes_lookup_table);
 				}
 			} catch (const WException& e) {
 				throw GameDataError("wares: %s", e.what());
@@ -287,8 +294,9 @@ void MapBuildingdataPacket::read_constructionsite(
 		if (packet_version >= 3) {
 			read_partially_finished_building(constructionsite, fr, egbase, mol, tribes_lookup_table);
 
-			for (ConstructionSite::Wares::iterator wares_iter = constructionsite.wares_.begin();
-			     wares_iter != constructionsite.wares_.end(); ++wares_iter) {
+			for (ConstructionSite::Wares::iterator wares_iter =
+			        constructionsite.consume_wares_.begin();
+			     wares_iter != constructionsite.consume_wares_.end(); ++wares_iter) {
 
 				(*wares_iter)->set_callback(ConstructionSite::wares_queue_callback, &constructionsite);
 			}
@@ -448,6 +456,9 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 
 				uint32_t nr_requests = fr.unsigned_32();
 				while (nr_requests--) {
+					// We have no information regarding the index or WareWorker type yet.
+					// Initialize with default values which will be overridden by read().
+					// read() will also take care of adding the request to the correct economy.
 					pw.requests.push_back(new Request(warehouse, 0, &Warehouse::request_cb, wwWORKER));
 					pw.requests.back()->read(fr, egbase, mol, tribes_lookup_table);
 				}
@@ -770,8 +781,25 @@ void MapBuildingdataPacket::read_productionsite(
 			productionsite.statistics_string_on_changed_statistics_ = fr.c_string();
 			productionsite.production_result_ = fr.c_string();
 
-			// TODO(GunChleoc): Savegame compatibility, remove after Build 21.
-			if (packet_version >= 7) {
+			// TODO(GunChleoc & Nordfriese): Savegame compatibility, remove after Build 21.
+			if (packet_version >= 9) {
+				productionsite.main_worker_ = -1;
+				if (fr.unsigned_8()) {
+					const Worker& worker = mol.get<Worker>(fr.unsigned_32());
+					int32_t i = 0;
+					// Determine main worker's index as this may change during saveloading (#3891)
+					for (const auto* wp = productionsite.working_positions();; ++wp) {
+						if (wp->worker == &worker) {
+							productionsite.main_worker_ = i;
+							break;
+						}
+						++i;
+					}
+				}
+			} else if (packet_version >= 7) {
+				// May be buggy for workers whose type is present in the building
+				// multiple times (issue #3538). Fortunately the packet versions
+				// with this problem are newer than b20 and older than b21.
 				productionsite.main_worker_ = fr.signed_32();
 			} else {
 				productionsite.main_worker_ = productionsite.working_positions_[0].worker ? 0 : -1;
@@ -1021,10 +1049,15 @@ void MapBuildingdataPacket::write_partially_finished_building(const PartiallyFin
 		fw.unsigned_32(0);
 	}
 
-	const uint16_t wares_size = pfb.wares_.size();
+	uint16_t wares_size = pfb.consume_wares_.size();
 	fw.unsigned_16(wares_size);
 	for (uint16_t i = 0; i < wares_size; ++i) {
-		pfb.wares_[i]->write(fw, egbase, mos);
+		pfb.consume_wares_[i]->write(fw, egbase, mos);
+	}
+	wares_size = pfb.dropout_wares_.size();
+	fw.unsigned_16(wares_size);
+	for (uint16_t i = 0; i < wares_size; ++i) {
+		pfb.dropout_wares_[i]->write(fw, egbase, mos);
 	}
 
 	fw.unsigned_8(pfb.working_);
@@ -1275,7 +1308,13 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 	fw.string(productionsite.statistics_string_on_changed_statistics_);
 	fw.string(productionsite.production_result());
 
-	fw.signed_32(productionsite.main_worker_);
+	if (productionsite.main_worker_ < 0) {
+		fw.unsigned_8(0);
+	} else {
+		fw.unsigned_8(1);
+		fw.unsigned_32(mos.get_object_file_index(
+		   *productionsite.working_positions_[productionsite.main_worker_].worker));
+	}
 }
 
 /*

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-02-21 18:05+0000\n"
-"PO-Revision-Date: 2020-02-21 20:19+0000\n"
+"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"PO-Revision-Date: 2020-04-23 19:36+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -537,7 +537,7 @@ msgstr "Panzersmee"
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:56
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:68
-#: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:85
+#: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:84
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:56
 #: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:58
 #: ../../data/tribes/buildings/productionsites/atlanteans/spiderfarm/init.lua:53
@@ -556,7 +556,7 @@ msgstr "Panzersmee"
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:53
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:50
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:56
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:73
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:72
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:60
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:71
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:54
@@ -567,7 +567,7 @@ msgstr "Panzersmee"
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:66
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:47
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:67
-#: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:84
+#: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:83
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:61
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:64
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:56
@@ -590,7 +590,7 @@ msgstr "Panzersmee"
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:69
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:74
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:68
-#: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:85
+#: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:84
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:76
 #: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:73
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:76
@@ -747,7 +747,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
-msgstr "De Ader vun deese Köhle-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark ofbrannen of plattrieten willt."
+msgstr "De Ader vun deese Köhle-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark ofbrannen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:7
@@ -782,7 +782,7 @@ msgid "mining diamonds"
 msgstr "Edelstenen oftoboen"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:168
-msgid "No Crystal"
+msgid "No Crystals"
 msgstr "Keen Edelflint"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:169
@@ -794,7 +794,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This crystal mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. You should consider dismantling or destroying it."
-msgstr "De Ader vun deese Edelflint-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark ofbrannen of plattrieten willt."
+msgstr "De Ader vun deese Edelflint-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark ofbrannen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:7
@@ -858,7 +858,7 @@ msgid ""
 "The fish breeder working out of this fish breeder’s house can’t find any "
 "fish in his work area. Remember that you can only regenerate your fish "
 "resources if there are some fish left to breed."
-msgstr "De Fiss-Tüchter dat warkt bi deese Fisstüchteree hett keene Fiske tum Tüchten. Du kannst de Fiske blot dann vermehren, wenn du een poor overlettst."
+msgstr "De Fiss-Tüchter dat warkt bi deese Fisstüchteree hett keene Fiske tum Tüchten. Du kannst de Fiske blot dann vermehren, wenn du een paar överlettst."
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:63
 msgid "The fishing grounds are full"
@@ -963,7 +963,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
-msgstr "De Ader vun deese Gold-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark ofbrannen of plattrieten willt."
+msgstr "De Ader vun deese Gold-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark ofbrannen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:7
@@ -1065,7 +1065,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
-msgstr "De Ader vun deese Iesen-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark ofbrannen of plattrieten willt."
+msgstr "De Ader vun deese Iesen-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark ofbrannen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:7
@@ -1418,7 +1418,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "De Boomslager dat warkt bi deese Boomslageree hett keene Bomen tum Osslaan. Överlegg di, of du dat Huus plattrieten of ofbrannen willt, of bau een Försterhuus."
+msgstr "De Boomslager dat warkt bi deese Boomslageree hett keene Bomen tum Osslaan. Överlegg di, of du dat Huus plattrieten of ofbrannen willst, of bau een Försterhuus."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:7
@@ -1539,7 +1539,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "De Ader vun deese Köhle-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark utbauen of plattrieten willt."
+msgstr "De Ader vun deese Köhle-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark utbauen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:7
@@ -1559,7 +1559,7 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "De Ader vun deese Köhle-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. De Bargwark kann nich utbaut werden, also överlegg di, of du de Mine ofbrannen of plattrieten willt."
+msgstr "De Ader vun deese Köhle-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. De Bargwark kann nich utbaut werden, also överlegg di, of du de Mine ofbrannen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:7
@@ -1622,7 +1622,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "De Ader vun deese Gold-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark utbauen of plattrieten willt."
+msgstr "De Ader vun deese Gold-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark utbauen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:7
@@ -1642,7 +1642,7 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "De Ader vun deese Gold-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. De Bargwark kann nich utbaut werden, also överlegg di, of du de Mine ofbrannen of plattrieten willt."
+msgstr "De Ader vun deese Gold-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. De Bargwark kann nich utbaut werden, also överlegg di, of du de Mine ofbrannen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:7
@@ -1668,7 +1668,7 @@ msgid ""
 "This granite mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
-msgstr "De Ader vun deese Flint-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. De Bargwark kann nich utbaut werden, also överlegg di, of du de Mine ofbrannen of plattrieten willt."
+msgstr "De Ader vun deese Flint-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. De Bargwark kann nich utbaut werden, also överlegg di, of du de Mine ofbrannen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:7
@@ -1726,7 +1726,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "De Ader vun deese Iesen-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark utbauen of plattrieten willt."
+msgstr "De Ader vun deese Iesen-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark utbauen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:7
@@ -1746,7 +1746,7 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "De Ader vun deese Iesen-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. De Bargwark kann nich utbaut werden, also överlegg di, of du de Mine ofbrannen of plattrieten willt."
+msgstr "De Ader vun deese Iesen-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. De Bargwark kann nich utbaut werden, also överlegg di, of du de Mine ofbrannen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/init.lua:7
@@ -1771,7 +1771,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
 "work area. You should consider dismantling or destroying the building or "
 "building a ranger’s hut."
-msgstr "De Boomhauer dat warkt bi deese Boomhaueree hett keene Bomen tum Osslaan. Överlegg di, of du dat Huus plattrieten of ofbrannen willt, of bau een Boomplanteree."
+msgstr "De Boomhauer dat warkt bi deese Boomhaueree hett keene Bomen tum Osslaan. Överlegg di, of du dat Huus plattrieten of ofbrannen willst, of bau een Boomplanteree."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:7
@@ -2019,7 +2019,7 @@ msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "De Ader vun deese Köhle-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark utbauen of plattrieten willt."
+msgstr "De Ader vun deese Köhle-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark utbauen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:7
@@ -2033,7 +2033,7 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "De Ader vun deese Köhle-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. De Bargwark kann nich utbaut werden, also överlegg di, of du de Mine ofbrannen of plattrieten willt."
+msgstr "De Ader vun deese Köhle-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. De Bargwark kann nich utbaut werden, also överlegg di, of du de Mine ofbrannen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:7
@@ -2095,7 +2095,7 @@ msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "De Ader vun deese Gold-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark utbauen of plattrieten willt."
+msgstr "De Ader vun deese Gold-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark utbauen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:7
@@ -2109,7 +2109,7 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "De Ader vun deese Gold-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. De Bargwark kann nich utbaut werden, also överlegg di, of du de Mine ofbrannen of plattrieten willt."
+msgstr "De Ader vun deese Gold-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. De Bargwark kann nich utbaut werden, also överlegg di, of du de Mine ofbrannen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:7
@@ -2142,7 +2142,7 @@ msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "De Ader vun deese Iesen-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark utbauen of plattrieten willt."
+msgstr "De Ader vun deese Iesen-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark utbauen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:7
@@ -2156,7 +2156,7 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "De Ader vun deese Iesen-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. De Bargwark kann nich utbaut werden, also överlegg di, of du de Mine ofbrannen of plattrieten willt."
+msgstr "De Ader vun deese Iesen-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. De Bargwark kann nich utbaut werden, also överlegg di, of du de Mine ofbrannen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:7
@@ -2170,7 +2170,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "De Boomhauer dat warkt bi deese Boomhaueree hett keene Bomen tum Osslaan. Överlegg di, of du dat Huus plattrieten of ofbrannen willt, of bau een Försterhuus."
+msgstr "De Boomhauer dat warkt bi deese Boomhaueree hett keene Bomen tum Osslaan. Överlegg di, of du dat Huus plattrieten of ofbrannen willst, of bau een Försterhuus."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:7
@@ -2203,7 +2203,7 @@ msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. You should consider enhancing, dismantling or "
 "destroying it."
-msgstr "De Ader vun deese Marmel-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark utbauen of plattrieten willt."
+msgstr "De Ader vun deese Marmel-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark utbauen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:7
@@ -2217,7 +2217,7 @@ msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
-msgstr "De Ader vun deese Marmel-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. De Bargwark kann nich utbaut werden, also överlegg di, of du de Mine ofbrannen of plattrieten willt."
+msgstr "De Ader vun deese Marmel-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. De Bargwark kann nich utbaut werden, also överlegg di, of du de Mine ofbrannen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/mill/init.lua:7
@@ -2433,7 +2433,7 @@ msgid ""
 "area. Please make sure there is a working clay pit nearby and the aqua farm "
 "is supplied with all needed wares, or consider dismantling or destroying "
 "this building."
-msgstr "De Fisker dat warkt bi deese Fissbuurderee hett keene Polen mehr. Bidde pass up dat eene Lehmkuhl in de Naberskupp arbeidt un de Fissbuurderee all’s hett wat se tum Arbeiden bruukt. Of överlegg di, of du dat Huus ofbrannen of plattrieten willt."
+msgstr "De Fisker dat warkt bi deese Fissbuurderee hett keene Polen mehr. Bidde pass up dat eene Lehmkuhl in de Naberskupp arbeidt un de Fissbuurderee all’s hett wat se tum Arbeiden bruukt. Of överlegg di, of du dat Huus ofbrannen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:7
@@ -2521,7 +2521,7 @@ msgid ""
 "The beekeeper working at this beekeepers’s house can’t find any flowering "
 "fields or bushes in his work area. You should consider building another farm"
 " or berry farm nearby, or dismantling or destroying this building."
-msgstr "De Imker dat warkt bi deese Imkeree hett keene Felden of Busken mit Blössems in de Naberskupp. Bau een Buurderee of Buskenplanteree of överlegg di, of du dat Huus plattrieten of ofbrannen willt."
+msgstr "De Imker dat warkt bi deese Imkeree hett keene Felden of Busken mit Blössems in de Naberskupp. Bau een Buurderee of Buskenplanteree of överlegg di, of du dat Huus plattrieten of ofbrannen willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:7
@@ -2601,7 +2601,7 @@ msgid ""
 "clay ponds in his work area. Please make sure there is a working clay pit "
 "nearby and the charcoal burner’s house is supplied with all needed wares, or"
 " consider dismantling or destroying this building."
-msgstr "De Holtköhlbranner dat warkt bi deese Köhleree hett keene Kuhlen mehr. Bidde pass up dat eene Lehmkuhl in de Naberskupp arbeidt un de Köhleree all’s hett wat se tum Arbeiden bruukt. Of överlegg di, of du dat Huus ofbrannen of plattrieten willt."
+msgstr "De Holtköhlbranner dat warkt bi deese Köhleree hett keene Kuhlen mehr. Bidde pass up dat eene Lehmkuhl in de Naberskupp arbeidt un de Köhleree all’s hett wat se tum Arbeiden bruukt. Of överlegg di, of du dat Huus ofbrannen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:7
@@ -2635,7 +2635,7 @@ msgid ""
 "The clay digger working at this clay pit can’t find any level ground in his "
 "work area. Consider dismantling this clay pit and rebuilding it somewhere "
 "else."
-msgstr "De Lehmgraver dat warkt bi deese Lehmkuhl hett keen Klei tum utbuddeln. Överlegg di, of du dat Huus plattrieten of ofbrannen un annerwegens wedde hensetten willt."
+msgstr "De Lehmgraver dat warkt bi deese Lehmkuhl hett keen Klei tum utbuddeln. Överlegg di, of du dat Huus plattrieten of ofbrannen un annerwegens wedde hensetten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:7
@@ -2648,7 +2648,7 @@ msgctxt "frisians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "De Ader vun deese Köhle-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark utbauen of plattrieten willt."
+msgstr "De Ader vun deese Köhle-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark utbauen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:7
@@ -2662,7 +2662,7 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "De Ader vun deese Köhle-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. De Bargwark kann nich utbaut werden, also överlegg di, of du de Mine ofbrannen of plattrieten willt."
+msgstr "De Ader vun deese Köhle-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. De Bargwark kann nich utbaut werden, also överlegg di, of du de Mine ofbrannen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:7
@@ -2689,7 +2689,7 @@ msgid ""
 "The fruit collector working at this fruit collector’s house can’t find any "
 "berry bushes in his work area. You should consider building another berry "
 "farm, or dismantling or destroying this building."
-msgstr "De Früchtenpottjer dat warkt bi deese Früchtenpottjeree hett keene Busken mit Früchten in de Naberskupp. Bau een Buskenplanteree of överlegg di, of du dat Huus plattrieten of ofbrannen willt."
+msgstr "De Früchtenpottjer dat warkt bi deese Früchtenpottjeree hett keene Busken mit Früchten in de Naberskupp. Bau een Buskenplanteree of överlegg di, of du dat Huus plattrieten of ofbrannen willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:7
@@ -2761,7 +2761,7 @@ msgctxt "frisians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "De Ader vun deese Gold-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark utbauen of plattrieten willt."
+msgstr "De Ader vun deese Gold-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark utbauen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:7
@@ -2775,7 +2775,7 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "De Ader vun deese Gold-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. De Bargwark kann nich utbaut werden, also överlegg di, of du de Mine ofbrannen of plattrieten willt."
+msgstr "De Ader vun deese Gold-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. De Bargwark kann nich utbaut werden, also överlegg di, of du de Mine ofbrannen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:7
@@ -2814,7 +2814,7 @@ msgctxt "frisians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "De Ader vun deese Iesen-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark utbauen of plattrieten willt."
+msgstr "De Ader vun deese Iesen-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark utbauen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:7
@@ -2828,7 +2828,7 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "De Ader vun deese Iesen-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. De Bargwark kann nich utbaut werden, also överlegg di, of du de Mine ofbrannen of plattrieten willt."
+msgstr "De Ader vun deese Iesen-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. De Bargwark kann nich utbaut werden, also överlegg di, of du de Mine ofbrannen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:7
@@ -2922,7 +2922,7 @@ msgctxt "frisians_building"
 msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "De Ader vun deese Stenen-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark utbauen of plattrieten willt."
+msgstr "De Ader vun deese Stenen-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. Överlegg di, of du dat Bargwark utbauen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:7
@@ -2936,7 +2936,7 @@ msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "De Ader vun deese Stenen-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. De Bargwark kann nich utbaut werden, also överlegg di, of du de Mine ofbrannen of plattrieten willt."
+msgstr "De Ader vun deese Stenen-Bargwark is leeg. De Mine produzeert vun nu an vööl dürer as normaal. De Bargwark kann nich utbaut werden, also överlegg di, of du de Mine ofbrannen of plattrieten willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:7
@@ -3036,7 +3036,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "De Boomslager dat warkt bi deese Boomslageree hett keene Bomen tum Ofslaan. Överlegg di, of du dat Huus plattrieten of ofbrannen willt, of bau een Försterhuus."
+msgstr "De Boomslager dat warkt bi deese Boomslageree hett keene Bomen tum Ofslaan. Överlegg di, of du dat Huus plattrieten of ofbrannen willst, of bau een Försterhuus."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:84
@@ -3419,6 +3419,20 @@ msgctxt "frisians_building"
 msgid "Warehouse"
 msgstr "Kraamhuus"
 
+#: ../../data/tribes/economy_profiles/atlanteans:4
+#: ../../data/tribes/economy_profiles/barbarians:4
+#: ../../data/tribes/economy_profiles/empire:4
+#: ../../data/tribes/economy_profiles/frisians:4
+msgid "Efficiency"
+msgstr "Trimmt Wirtschaft"
+
+#: ../../data/tribes/economy_profiles/atlanteans:5
+#: ../../data/tribes/economy_profiles/barbarians:5
+#: ../../data/tribes/economy_profiles/empire:5
+#: ../../data/tribes/economy_profiles/frisians:5
+msgid "Stockpile"
+msgstr "Vööl up Lager"
+
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/ashes/init.lua:42
 msgctxt "immovable"
@@ -3791,8 +3805,8 @@ msgstr "Een bietje Iesen"
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:137
 msgctxt "resource_indicator"
-msgid "Some Precious Stones"
-msgstr "Een bietje Gesteen"
+msgid "Some Crystals"
+msgstr "Een bietje Edelflint"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:163
@@ -3824,8 +3838,8 @@ msgstr "Een Bült vun Iesen"
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:241
 msgctxt "resource_indicator"
-msgid "A Lot of Precious Stones"
-msgstr "Een Bült vun Gesteen"
+msgid "A Lot of Crystals"
+msgstr "Een Bült vun Edelflint"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/barbarians/init.lua:122
@@ -3957,8 +3971,8 @@ msgstr "Soldateree-Boen"
 msgid "Finishing"
 msgstr "Klaarmaken"
 
-#: ../../data/tribes/preload.lua:15 ../../data/tribes/preload.lua:32
-#: ../../data/tribes/preload.lua:49 ../../data/tribes/preload.lua:66
+#: ../../data/tribes/preload.lua:15 ../../data/tribes/preload.lua:36
+#: ../../data/tribes/preload.lua:57 ../../data/tribes/preload.lua:78
 msgid "The Widelands Development Team"
 msgstr "De Widelands Entwickeln-Klottje"
 
@@ -3972,31 +3986,31 @@ msgid "The mighty tribes of the east-lands."
 msgstr "De furchtbaaren Lüü vun de Lannen im Oosten."
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:34
+#: ../../data/tribes/preload.lua:38
 msgid "Empire"
 msgstr "Latienskes Riek"
 
-#: ../../data/tribes/preload.lua:35
+#: ../../data/tribes/preload.lua:39
 msgid "This is the culture of the Roman Empire."
 msgstr "Dat is de Kultuur vun de Latiensken Riek."
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:51
+#: ../../data/tribes/preload.lua:59
 msgid "Atlanteans"
 msgstr "Atlantinger"
 
-#: ../../data/tribes/preload.lua:52
+#: ../../data/tribes/preload.lua:60
 msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
 msgstr "Deeses Volk kennt man vun de ollsten Vertellsels: De Söhnen un Dochters vun Atlantis."
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:68
+#: ../../data/tribes/preload.lua:80
 msgid "Frisians"
 msgstr "Fresen"
 
-#: ../../data/tribes/preload.lua:69
+#: ../../data/tribes/preload.lua:81
 msgid "The inhabitants of the rough North Sea shore."
 msgstr "De Lüü vun de wööste Noordseeküst!"
 
@@ -4027,6 +4041,23 @@ msgstr "Arbeiders"
 #: ../../data/tribes/scripting/help/init.lua:99
 msgid "Buildings"
 msgstr "Husen"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/discovery.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/discovery.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/discovery.lua:11
+#: ../../data/tribes/scripting/starting_conditions/frisians/discovery.lua:11
+msgid "Discovery"
+msgstr "Utförsken"
+
+#. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/discovery.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/discovery.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/discovery.lua:13
+#: ../../data/tribes/scripting/starting_conditions/frisians/discovery.lua:13
+msgid ""
+"Start the game with three ships on the ocean and only a handful of supplies"
+msgstr "Begünn dat Speel mit dree Schippen up de See un blot een paar Materialien"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:11
@@ -4060,6 +4091,75 @@ msgstr "Raadhuus"
 #: ../../data/tribes/scripting/starting_conditions/frisians/headquarters.lua:13
 msgid "Start the game with your headquarters only"
 msgstr "Begünn dat Speel mit nix as dien Raadhuus"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/new_world.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/new_world.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/new_world.lua:11
+#: ../../data/tribes/scripting/starting_conditions/frisians/new_world.lua:11
+msgid "New World"
+msgstr "Neje Welt"
+
+#. TRANSLATORS: This is the tooltip for the "New World" starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/new_world.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/new_world.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/new_world.lua:13
+#: ../../data/tribes/scripting/starting_conditions/frisians/new_world.lua:13
+msgid "Start the game with seven ships full of wares on the ocean"
+msgstr "Begünn dat Speel mit seven Schippen vull mit Waren up de See"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:11
+#: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:11
+msgid "Poor Hamlet"
+msgstr "Nares Dörp"
+
+#. TRANSLATORS: This is the tooltip for the "Poor Hamlet" (minimum) starting
+#. condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:13
+#: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:13
+msgid ""
+"Start the game with just a warehouse and the bare minimum for bootstrapping "
+"an economy. Warning: the AI can't successfully start from this"
+msgstr "Begünn dat Speel mit nix as eenem Kraamhuus un so minn Waren as würrelk nödig, um eene Wirtschaft uptobauen. Wahrschau: Künstelk Spelers könen daar nich mit spölen"
+
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:45
+#: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:43
+#: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:44
+#: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:45
+msgid "Be careful"
+msgstr "Pass up"
+
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:45
+#: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:43
+#: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:44
+#: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:45
+msgid ""
+"You have only one iron for each tool you will need to start your economy. "
+"Make sure no unneeded tool is created."
+msgstr "Du hest blot een Deel Iesen för elkeen Warktüüg, wat du för eene Wirtschaft bruukst. Pass up, dat keen Warktüüg daarto maakt word."
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/struggling_outpost.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/struggling_outpost.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/struggling_outpost.lua:11
+#: ../../data/tribes/scripting/starting_conditions/frisians/struggling_outpost.lua:11
+msgid "Struggling Outpost"
+msgstr "Bedröövte Butenstee"
+
+#. TRANSLATORS: This is the tooltip for the "Hardcore" starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/struggling_outpost.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/struggling_outpost.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/struggling_outpost.lua:13
+#: ../../data/tribes/scripting/starting_conditions/frisians/struggling_outpost.lua:13
+msgid ""
+"Start the game with just your headquarters and very few wares for "
+"bootstrapping an economy. Warning: the AI can't successfully start from this"
+msgstr "Begünn dat Speel mit dienem Raadhuus un blot een paar Waren, um eene Wirtschaft uptobauen. Wahrschau: Künstelk Spelers könen daar nich mit spölen"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:11
@@ -4105,7 +4205,7 @@ msgid "Ship"
 msgstr "Schipp"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../data/tribes/wares/armor/init.lua:53
+#: ../../data/tribes/wares/armor/init.lua:58
 msgctxt "ware"
 msgid "Armor"
 msgstr "Wapenrock"
@@ -4928,37 +5028,37 @@ msgid "Woodcutter"
 msgstr "Boomslager"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/baker/init.lua:17
+#: ../../data/tribes/workers/barbarians/baker/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Baker"
 msgstr "Backer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/blacksmith/init.lua:17
+#: ../../data/tribes/workers/barbarians/blacksmith/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Blacksmith"
 msgstr "Smidd"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/blacksmith_master/init.lua:17
+#: ../../data/tribes/workers/barbarians/blacksmith_master/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Master Blacksmith"
 msgstr "Meistersmidd"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/brewer/init.lua:17
+#: ../../data/tribes/workers/barbarians/brewer/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Brewer"
 msgstr "Broer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/brewer_master/init.lua:17
+#: ../../data/tribes/workers/barbarians/brewer_master/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Master Brewer"
 msgstr "Meisterbroer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/builder/init.lua:18
+#: ../../data/tribes/workers/barbarians/builder/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Builder"
 msgstr "Baukeerl"
@@ -4976,13 +5076,13 @@ msgid "Cattle Breeder"
 msgstr "Ossentüchter"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/charcoal_burner/init.lua:17
+#: ../../data/tribes/workers/barbarians/charcoal_burner/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Charcoal Burner"
 msgstr "Holtköhlbranner"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/farmer/init.lua:32
+#: ../../data/tribes/workers/barbarians/farmer/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Farmer"
 msgstr "Buur"
@@ -4994,73 +5094,73 @@ msgid "Ferry"
 msgstr "Fähr"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/fisher/init.lua:22
+#: ../../data/tribes/workers/barbarians/fisher/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Fisher"
 msgstr "Fisker"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/gamekeeper/init.lua:27
+#: ../../data/tribes/workers/barbarians/gamekeeper/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Gamekeeper"
 msgstr "Deertentüchter"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/gardener/init.lua:27
+#: ../../data/tribes/workers/barbarians/gardener/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Gardener"
 msgstr "Gaardner"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/geologist/init.lua:23
+#: ../../data/tribes/workers/barbarians/geologist/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Geologist"
 msgstr "Schattsöker"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/helmsmith/init.lua:17
+#: ../../data/tribes/workers/barbarians/helmsmith/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Helmsmith"
 msgstr "Helmsmidd"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/hunter/init.lua:18
+#: ../../data/tribes/workers/barbarians/hunter/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Hunter"
 msgstr "Jäger"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/innkeeper/init.lua:17
+#: ../../data/tribes/workers/barbarians/innkeeper/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Innkeeper"
 msgstr "Weert"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/lime_burner/init.lua:17
+#: ../../data/tribes/workers/barbarians/lime_burner/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Lime-Burner"
 msgstr "Kalkbranner"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/lumberjack/init.lua:23
+#: ../../data/tribes/workers/barbarians/lumberjack/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Lumberjack"
 msgstr "Boomhauer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/miner/init.lua:17
+#: ../../data/tribes/workers/barbarians/miner/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Miner"
 msgstr "Bargwarkskeerl"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/miner_chief/init.lua:17
+#: ../../data/tribes/workers/barbarians/miner_chief/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Chief Miner"
 msgstr "Künniger Bargwarkskeerl"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/miner_master/init.lua:17
+#: ../../data/tribes/workers/barbarians/miner_master/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Master Miner"
 msgstr "Bester Bargwarkskeerl"
@@ -5072,31 +5172,31 @@ msgid "Ox"
 msgstr "Oss"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/ranger/init.lua:32
+#: ../../data/tribes/workers/barbarians/ranger/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Ranger"
 msgstr "Boomplanter"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/recruit/init.lua:12
+#: ../../data/tribes/workers/barbarians/recruit/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Recruit"
 msgstr "Lehrwicht"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/scout/init.lua:17
+#: ../../data/tribes/workers/barbarians/scout/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Scout"
 msgstr "Bespejer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/shipwright/init.lua:18
+#: ../../data/tribes/workers/barbarians/shipwright/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Shipwright"
 msgstr "Schippebauer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/smelter/init.lua:17
+#: ../../data/tribes/workers/barbarians/smelter/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Smelter"
 msgstr "Smelter"
@@ -5108,19 +5208,19 @@ msgid "Soldier"
 msgstr "Soldat"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/stonemason/init.lua:23
+#: ../../data/tribes/workers/barbarians/stonemason/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Stonemason"
 msgstr "Flintslager"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/trainer/init.lua:16
+#: ../../data/tribes/workers/barbarians/trainer/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Trainer"
 msgstr "Mester"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/weaver/init.lua:17
+#: ../../data/tribes/workers/barbarians/weaver/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Weaver"
 msgstr "Spinner"

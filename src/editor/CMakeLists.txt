@@ -41,6 +41,7 @@ wl_library(editor
     logic
     base_i18n
     io_fileread
+  USES_SDL2
 )
 
 wl_library(editor_scripting
@@ -270,4 +271,5 @@ wl_library(editor_scenario_tools_ui
     ui_basic
     economy
     ui_basic
+  USES_SDL2
 )

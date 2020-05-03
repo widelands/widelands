@@ -410,8 +410,8 @@ rising_water_5 = {
    title =_ "Don’t Forget the Soldiers",
    body=reebaud(_"Soldiers to the port!",
       -- TRANSLATORS: Reebaud – rising water
-      ngettext([[I almost forgot in this haste – whereever we will land, we’ll need soldiers to secure and expand our new colony. There’s space for up to %d soldier on our ship, if they don’t mind being all crammed together. Let’s send some to the port when it’s completed, so they can embark when we set sail!]],
-      [[I almost forgot in this haste – whereever we will land, we’ll need soldiers to secure and expand our new colony. There’s space for up to %d soldiers on our ship, if they don’t mind being all crammed together. Let’s send some to the port when it’s completed, so they can embark when we set sail!]],
+      ngettext([[I almost forgot in this haste – wherever we will land, we’ll need soldiers to secure and expand our new colony. There’s space for up to %d soldier on our ship, if nobody minds being all crammed together. Let’s send our best men to the port when it’s completed, to get ready to embark when we set sail!]],
+      [[I almost forgot in this haste – wherever we will land, we’ll need soldiers to secure and expand our new colony. There’s space for up to %d soldiers on our ship, if nobody minds being all crammed together. Let’s send our best men to the port when it’s completed, to get ready to embark when we set sail!]],
       nr_transfer_soldiers):bformat(nr_transfer_soldiers))
 }
 

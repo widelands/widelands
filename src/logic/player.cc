@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,6 +30,7 @@
 #include "base/warning.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
+#include "economy/expedition_bootstrap.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "economy/waterway.h"
@@ -830,35 +831,83 @@ void Player::military_site_set_soldier_preference(PlayerImmovable& imm,
  * enhance this building, remove it, but give the constructionsite
  * an idea of enhancing
  */
-void Player::enhance_building(Building* building, DescriptionIndex const index_of_new_building) {
-	enhance_or_dismantle(building, index_of_new_building);
+void Player::enhance_building(Building* building,
+                              DescriptionIndex const index_of_new_building,
+                              bool keep_wares) {
+	enhance_or_dismantle(building, index_of_new_building, keep_wares);
 }
 
 /*
  * rip this building down, but slowly: a builder will take it gradually
  * apart.
  */
-void Player::dismantle_building(Building* building) {
-	enhance_or_dismantle(building, INVALID_INDEX);
+void Player::dismantle_building(Building* building, bool keep_wares) {
+	enhance_or_dismantle(building, INVALID_INDEX, keep_wares);
 }
 void Player::enhance_or_dismantle(Building* building,
-                                  DescriptionIndex const index_of_new_building) {
+                                  DescriptionIndex const index_of_new_building,
+                                  bool keep_wares) {
 	if (building->get_owner() == this &&
 	    (index_of_new_building == INVALID_INDEX ||
 	     building->descr().enhancement() == index_of_new_building)) {
 		FormerBuildings former_buildings = building->get_former_buildings();
 		const Coords position = building->get_position();
 
-		//  Get workers and soldiers
+		//  Get wares, workers, and soldiers
 		//  Make copies of the vectors, because the originals are destroyed with
 		//  the building.
 		std::vector<Worker*> workers;
-		upcast(Warehouse, wh, building);
-		if (wh) {
+		std::map<DescriptionIndex, Quantity> wares;
+		auto add_to_wares = [&wares](DescriptionIndex di, Quantity add) {
+			if (add == 0) {
+				return;
+			}
+			auto it = wares.find(di);
+			if (it == wares.end()) {
+				wares[di] = add;
+			} else {
+				it->second += add;
+			}
+		};
+
+		if (upcast(Warehouse, wh, building)) {
 			workers = wh->get_incorporated_workers();
+			if (keep_wares) {
+				for (DescriptionIndex di = wh->get_wares().get_nrwareids(); di; --di) {
+					wares[di - 1] = wh->get_wares().stock(di - 1);
+				}
+				if (PortDock* pd = wh->get_portdock()) {
+					for (DescriptionIndex di : tribe().wares()) {
+						add_to_wares(di, pd->count_waiting(wwWARE, di));
+					}
+					if (ExpeditionBootstrap* x = pd->expedition_bootstrap()) {
+						for (const InputQueue* q : x->queues(true)) {
+							if (q->get_type() == wwWARE) {
+								add_to_wares(q->get_index(), q->get_filled());
+							}
+						}
+					}
+				}
+			}
 		} else {
 			workers = building->get_workers();
+			if (keep_wares) {
+				// TODO(Nordfriese): Add support for markets?
+				if (upcast(ProductionSite, ps, building)) {
+					for (const InputQueue* q : ps->inputqueues()) {
+						if (q->get_type() == wwWARE) {
+							auto it = wares.find(q->get_index());
+							if (it == wares.end()) {
+								wares[q->get_index()] = q->get_filled();
+							} else {
+								it->second += q->get_filled();
+							}
+						}
+					}
+				}
+			}
 		}
+		assert(keep_wares || wares.empty());
 
 		const BuildingSettings* settings = nullptr;
 		if (index_of_new_building != INVALID_INDEX) {
@@ -872,10 +921,11 @@ void Player::enhance_or_dismantle(Building* building,
 		//  pointer.
 
 		if (index_of_new_building != INVALID_INDEX) {
-			building = &egbase().warp_constructionsite(
-			   position, player_number_, index_of_new_building, false, former_buildings, settings);
+			building = &egbase().warp_constructionsite(position, player_number_, index_of_new_building,
+			                                           false, former_buildings, settings, wares);
 		} else {
-			building = &egbase().warp_dismantlesite(position, player_number_, false, former_buildings);
+			building =
+			   &egbase().warp_dismantlesite(position, player_number_, false, former_buildings, wares);
 		}
 
 		// Open the new building window if needed
