@@ -72,9 +72,6 @@ void CampaignDetails::update(const CampaignData& campaigndata) {
 		               as_content(campaigndata.description, UI::PanelStyle::kFsMenu))
 		                 .str();
 	}
-	description = (boost::format("%s%s") % description %
-	               as_content(campaigndata.description, UI::PanelStyle::kFsMenu))
-	                 .str();
 
 	description = (boost::format("<rt>%s</rt>") % description).str();
 	descr_.set_text(description);
