@@ -104,11 +104,11 @@ def detect_bzr_revision():
         # Windows stand alone installer do not come with bzrlib. We try to
         # parse the output of bzr then directly
         try:
-            def run_bzr(*args):
-                return _communicate_utf8(['bzr', *args], cwd=base_path).strip()
-            revno = run_bzr('revno')
-            nick = run_bzr('nick')
-            commit_message = run_bzr('log', '--limit=1', '--short')
+            def run_bzr(args):
+                return _communicate_utf8(['bzr'] + args, cwd=base_path).strip()
+            revno = run_bzr(['revno'])
+            nick = run_bzr(['nick'])
+            commit_message = run_bzr(['log', '--limit=1', '--short'])
             git_hash = extract_git_hash(commit_message)
             return 'bzr{revno}[{git_hash}@{nick}]'.format(
                     revno=revno, git_hash=git_hash, nick=nick)
