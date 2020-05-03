@@ -97,7 +97,8 @@ def detect_bzr_revision():
         try:
             b = BzrDir.open(base_path).open_branch()
             revno, nick = b.revno(), b.nick
-            commit_message = b.repository.get_revision(b.last_revision()).message
+            commit_message = b.repository.get_revision(
+                b.last_revision()).message
             git_hash = extract_git_hash(commit_message)
             return 'bzr{revno}[{git_hash}@{nick}]'.format(
                 revno=revno, git_hash=git_hash, nick=nick)
