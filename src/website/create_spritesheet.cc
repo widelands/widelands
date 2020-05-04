@@ -20,7 +20,6 @@
 #include <cassert>
 #include <memory>
 
-#include <SDL.h>
 #include <boost/algorithm/string.hpp>
 
 #include "base/log.h"

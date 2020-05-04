@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <SDL.h>
-#include <SDL_ttf.h>
 #include <boost/format.hpp>
 
 #include "graphic/sdl_utils.h"
@@ -52,8 +50,11 @@ SdlTtfFont::~SdlTtfFont() {
 void SdlTtfFont::dimensions(const std::string& txt, int style, uint16_t* gw, uint16_t* gh) {
 	set_style(style);
 
+	// Getting height from TTF_SizeUTF8() was sometimes causing misaligned text,
+	// so use TTF_FontHeight() to get it instead
 	int w, h;
-	TTF_SizeUTF8(font_, txt.c_str(), &w, &h);
+	TTF_SizeUTF8(font_, txt.c_str(), &w, NULL);
+	h = TTF_FontHeight(font_);
 
 	if (style & SHADOW) {
 		w += SHADOW_OFFSET;

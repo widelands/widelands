@@ -22,8 +22,6 @@
 
 #include <memory>
 
-#include <SDL_keyboard.h>
-
 #include "io/profile.h"
 #include "logic/message_id.h"
 #include "logic/note_map_options.h"

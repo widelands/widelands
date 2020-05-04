@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-15 14:44+0000\n"
-"PO-Revision-Date: 2020-04-13 09:59+0000\n"
+"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"PO-Revision-Date: 2020-04-23 19:47+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -159,17 +159,17 @@ msgstr "Großartig. Während dein Hafen fertiggestellt wird, lass uns einige Sch
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:76
 msgid ""
-"Ships are constructed in a shipyard by a shipwright. We have to build one "
-"somewhere close to the shore."
-msgstr "Schiffe werden von einem Schiffbauer in einer Werft gebaut. Wir brauchen eine in der Nähe der Küste."
+"Ships are constructed at the coastline near a shipyard by a shipwright. We "
+"have to build one somewhere close to the shore."
+msgstr "Schiffe werden von einem Schiffbauer an der Küstenlinie in der Nähe einer Werft gebaut. Wir brauchen eine in der Nähe der Küste."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:82
 msgid "Build a shipyard"
 msgstr "Baue eine Werft"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:85
-msgid "Ships are produced in a shipyard. It is a medium building."
-msgstr "Schiffe werden von der Werft produziert. Sie ist ein mittleres Gebäude."
+msgid "Ships are produced by a shipyard. It is a medium building."
+msgstr "Schiffe werden von einer Werft produziert. Sie ist ein mittleres Gebäude."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:86
 msgid ""

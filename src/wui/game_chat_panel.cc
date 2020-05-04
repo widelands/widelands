@@ -19,6 +19,8 @@
 
 #include "wui/game_chat_panel.h"
 
+#include <SDL_mouse.h>
+
 #include "sound/sound_handler.h"
 #include "wui/chat_msg_layout.h"
 

@@ -22,7 +22,7 @@
 
 #include <memory>
 
-#include <SDL.h>
+#include <SDL_video.h>
 
 #include "graphic/image_cache.h"
 #include "graphic/style_manager.h"

@@ -3,6 +3,7 @@
 # 
 # Translators:
 # GunChleoc, 2016,2018
+# Foppe Benedictus <foppe.benedictus@gmail.com>, 2020
 # GunChleoc, 2014,2016,2018
 # Nora Ghaoui, 2016
 # Nora Ghaoui, 2016
@@ -11,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-15 14:44+0000\n"
-"PO-Revision-Date: 2020-03-29 19:01+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"PO-Revision-Date: 2020-04-28 04:19+0000\n"
+"Last-Translator: Foppe Benedictus <foppe.benedictus@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -784,8 +785,8 @@ msgid "mining diamonds"
 msgstr "diamant delven"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:168
-msgid "No Crystal"
-msgstr "Geen Kristal"
+msgid "No Crystals"
+msgstr ""
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:169
 msgid "Main Crystal Vein Exhausted"
@@ -1104,14 +1105,14 @@ msgstr "graniet houwen"
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:82
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:81
 msgid "No Rocks"
-msgstr "Geen Rotsen"
+msgstr "Geen rotsen"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:68
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:75
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:83
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:82
 msgid "Out of Rocks"
-msgstr "Geen Rotsen meer"
+msgstr "Geen rotsen meer"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:69
 msgctxt "atlanteans_building"
@@ -1405,7 +1406,7 @@ msgstr "bomen vellen"
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:57
 #: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:70
 msgid "No Trees"
-msgstr "Geen Bomen"
+msgstr "Geen bomen"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:58
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:65
@@ -3807,7 +3808,7 @@ msgstr ""
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:137
 msgctxt "resource_indicator"
-msgid "Some Precious Stones"
+msgid "Some Crystals"
 msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
@@ -3840,7 +3841,7 @@ msgstr ""
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:241
 msgctxt "resource_indicator"
-msgid "A Lot of Precious Stones"
+msgid "A Lot of Crystals"
 msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
@@ -4207,7 +4208,7 @@ msgid "Ship"
 msgstr "Schip"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../data/tribes/wares/armor/init.lua:53
+#: ../../data/tribes/wares/armor/init.lua:58
 msgctxt "ware"
 msgid "Armor"
 msgstr "Kuras"

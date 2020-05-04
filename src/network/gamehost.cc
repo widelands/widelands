@@ -22,6 +22,7 @@
 #include <algorithm>
 #include <memory>
 
+#include <SDL_timer.h>
 #ifndef _WIN32
 #include <unistd.h>  // for usleep
 #endif
