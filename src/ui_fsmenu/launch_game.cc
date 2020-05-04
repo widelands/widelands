@@ -46,8 +46,8 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
      main_box_(this, 0, 0, UI::Box::Vertical, get_w(), get_h()),
      content_box_(&main_box_, 0, 0, UI::Box::Horizontal),
      individual_content_box(&content_box_, 0, 0, UI::Box::Vertical),
-     map_box_(&content_box_, 0, 0, UI::Box::Vertical),
-     map_details(&map_box_, 0, 0, 0, 0),
+     map_box_(&content_box_, 0, 0, UI::Box::Vertical, butw_),
+     map_details(&map_box_, 0, 0, 0, 0, butw_),
 
      win_condition_type(&map_box_,
                         0,
@@ -281,7 +281,7 @@ void FullscreenMenuLaunchGame::add_all_widgets() {
 	content_box_.add_inf_space();
 	content_box_.add(&map_box_, UI::Box::Resizing::kFillSpace);
 	map_box_.add(&map_details, UI::Box::Resizing::kFullSize);
-	map_box_.add(&peaceful_, UI::Box::Resizing::kFillSpace);
+	map_box_.add(&peaceful_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	map_box_.add(&win_condition_type, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	map_box_.add(&win_condition_dropdown_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	content_box_.add_space(0);

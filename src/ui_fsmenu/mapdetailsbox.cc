@@ -21,7 +21,7 @@ MapDetailsBox::MapDetailsBox(Panel* parent,
             _("Map"),
             UI::Align::kCenter,
             g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
-     title_box_(this, 0, 0, UI::Box::Horizontal),
+     title_box_(this, 0, 0, UI::Box::Horizontal, max_x),
      map_name_(&title_box_,
                0,
                0,
@@ -43,8 +43,8 @@ MapDetailsBox::MapDetailsBox(Panel* parent,
         this,
         0,
         0,
-        50,  // arbitrary, will be set while layouting boxes...
-        50,
+        max_x,  // arbitrary, will be set while layouting boxes...
+        100,
         UI::PanelStyle::kFsMenu,
         "sample map description which might be a\n very long text so scrollbar is needed") {
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
@@ -52,7 +52,7 @@ MapDetailsBox::MapDetailsBox(Panel* parent,
 	title_box_.add_inf_space();
 	title_box_.add(&select_map_, UI::Box::Resizing::kAlign, UI::Align::kRight);
 	add(&title_box_, UI::Box::Resizing::kFullSize);
-	add(&map_description_, UI::Box::Resizing::kFillSpace);
+	add(&map_description_, UI::Box::Resizing::kExpandBoth);
 
 	//	map_name_.set_font_scale(2);
 }
