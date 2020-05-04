@@ -278,7 +278,7 @@ void FullscreenMenuLaunchGame::add_all_widgets() {
 	main_box_.add(&content_box_, UI::Box::Resizing::kExpandBoth);
 	content_box_.add_space(0);
 	content_box_.add(&individual_content_box, UI::Box::Resizing::kExpandBoth);
-
+	content_box_.add_inf_space();
 	content_box_.add(&map_box_, UI::Box::Resizing::kFillSpace);
 	map_box_.add(&map_details, UI::Box::Resizing::kFullSize);
 	map_box_.add(&peaceful_, UI::Box::Resizing::kFillSpace);
@@ -286,9 +286,9 @@ void FullscreenMenuLaunchGame::add_all_widgets() {
 	map_box_.add(&win_condition_dropdown_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	content_box_.add_space(0);
 
-	//	map_box_.add_inf_space();
-	map_box_.add(&ok_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	map_box_.add(&back_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	map_box_.add_inf_space();
+	map_box_.add(&ok_, UI::Box::Resizing::kAlign, UI::Align::kBottom);
+	map_box_.add(&back_, UI::Box::Resizing::kAlign, UI::Align::kBottom);
 }
 
 void FullscreenMenuLaunchGame::add_behaviour_to_widgets() {

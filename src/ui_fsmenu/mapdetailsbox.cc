@@ -52,7 +52,7 @@ MapDetailsBox::MapDetailsBox(Panel* parent,
 	title_box_.add_inf_space();
 	title_box_.add(&select_map_, UI::Box::Resizing::kAlign, UI::Align::kRight);
 	add(&title_box_, UI::Box::Resizing::kFullSize);
-	add(&map_description_, UI::Box::Resizing::kFullSize);
+	add(&map_description_, UI::Box::Resizing::kFillSpace);
 
 	//	map_name_.set_font_scale(2);
 }
