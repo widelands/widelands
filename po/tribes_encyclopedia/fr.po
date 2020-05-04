@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-04-25 08:17+0000\n"
+"PO-Revision-Date: 2020-05-01 14:11+0000\n"
 "Last-Translator: Julien Schneider <schneider.julien@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -122,7 +122,7 @@ msgstr "La Citadelle d'Adlen est certainement le plus beau chef-d'œuvre de l'ar
 msgctxt "barbarians_building"
 msgid ""
 "Colintan, chief planner of the Citadel of Adlen,<br>at its opening ceremony"
-msgstr ""
+msgstr "Colintan, urbaniste en chef de la Citadelle d'Adlen,<br>lors de sa cérémonie d'ouverture"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/helptexts.lua:3
@@ -145,7 +145,7 @@ msgid ""
 "‘The log cabin was so small that two men could hardly live there. But we "
 "were young and carefree. We just relished our freedom and the responsibility"
 " as an outpost.’"
-msgstr ""
+msgstr "«La cabane en rondins était si petite que deux hommes pouvaient à peine y vivre. Mais nous étions jeunes et insouciants. Nous avons juste savouré notre liberté et notre responsabilité d’avant-poste. »"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/helptexts.lua:9
@@ -303,7 +303,7 @@ msgid ""
 "‘Only after the last duck has been shot down<br>Only after the last deer has"
 " been put to death<br>Only after the last fish has been caught<br>Then will "
 "you find that spiders are not to be eaten.’"
-msgstr ""
+msgstr "\"Uniquement après l'abattage du dernier canard<br>Uniquement après la mise à mort du dernier cerf<br>Uniquement après la capture du dernier poisson<br>Vous constaterez alors que les araignées ne doivent pas être mangées.\""
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/helptexts.lua:14
@@ -656,7 +656,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Khantarakh, ‘The Modern Barbarian Economy’,<br>3ʳᵈ cowhide ‘Craftsmanship "
 "and Trade’"
-msgstr ""
+msgstr "Khantarakh, « L'économie Barbare moderne »,<br>3ème tome « Artisanat et commerce »"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:13
@@ -699,7 +699,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Seasonal fish and game specialties served with pitta bread.<br>Choose from "
 "a prime selection of regional craft beer brands.’"
-msgstr ""
+msgstr "\"Spécialités saisonnières de poisson et de gibier servies avec du pain pitta.<br>Choisissez parmi une sélection de marques de bières artisanales régionales.\""
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/helptexts.lua:12
@@ -722,7 +722,7 @@ msgid ""
 "‘When the Barbarian was created,<br>this was the first thing that he "
 "stated:<br>“You want me fighting without fear?<br>Then you should create "
 "some beer!”’"
-msgstr ""
+msgstr "'Quand le Barbare a été créé,<br>c'était la première chose qu'il a déclaré :<br>\" Vous voulez que je me batte sans peur ?<br>Alors vous devriez créer de la bière !\"'"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/brewery/helptexts.lua:14
@@ -750,7 +750,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Khantarakh, ‘The Modern Barbarian Economy’,<br> 5ᵗʰ cowhide ‘Traffic and "
 "Logistics’"
-msgstr ""
+msgstr "Khantarakh, « L'économie Barbare moderne »,<br>5ème tome « Trafics et Logistiques »"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:13
@@ -776,7 +776,7 @@ msgid ""
 "sky.<br>He sets the fire, sees it smolder<br>The logs he carried on his "
 "shoulder.<br>Burnt down to just one single coal<br>This troubles much a "
 "burner’s soul.’"
-msgstr ""
+msgstr "'Quel est le travail d'un brûleur de charbon de bois ?<br>Il est le plus gros gagne-pain de la tribu !<br>Des bûches qu'il empile haut,<br>Jusqu'à ce que le four atteigne le ciel.<br>Il allume le feu, le voit cuire plus lentement <br>Les bûches qu'il portait sur son épaule.<br> Brûlées en un seul charbon,<br>cela trouble beaucoup l'âme d'un brûleur."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/helptexts.lua:18
@@ -855,7 +855,7 @@ msgid ""
 "‘See the crop fields from here to the horizons. They are a huge, heaving, "
 "golden sea.<br>Oh wheat, source of wealth, soul of beer, strength of our "
 "warriors!’"
-msgstr ""
+msgstr "« Voir les champs de cultures d'ici à l'horizon. C’est une mer immense, houleuse et dorée.<br>Oh blé, source de richesse, âme de bière, force de nos guerriers ! »"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:9
@@ -1417,13 +1417,13 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Behind the next hill there might be wealth and happiness but also hostility"
 " and doom.<br>He who will not explore it commits the crime of stupidity.’"
-msgstr ""
+msgstr "« Derrière la prochaine colline, il peut y avoir de la richesse et du bonheur, mais aussi de l'hostilité et du destin.<br>Celui qui ne l'explorera pas commet le crime de la stupidité. »"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/helptexts.lua:12
 msgctxt "barbarians_building"
 msgid "Chat’Karuth<br>at the oath taking ceremony of the first scout troupe"
-msgstr ""
+msgstr "Chat’Karuthat<br>à la cérémonie du serment de la première troupe d'éclaireurs"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/helptexts.lua:6
@@ -1432,7 +1432,7 @@ msgid ""
 "‘When I saw the Saxnot for the first time, her majestic dragon head already "
 "looked up to the skies and the master was about to install the square "
 "sail.<br>It was the most noble ship I ever saw.’"
-msgstr ""
+msgstr "« Quand j'ai vu le Saxnot pour la première fois, sa majestueuse tête de dragon levait déjà les yeux au ciel et le capitaine était sur le point d'installer la voile carrée.<br>C'était le navire le plus noble que j'aie jamais vu. »"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/helptexts.lua:13
@@ -1447,7 +1447,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘From inferior looking rubble they form shiny gold and gleaming iron.<br>The"
 " smelters are real magicians among our craftsmen.’"
-msgstr ""
+msgstr "« A partir de gravats d'aspect inférieur, ils forment de l'or brillant et du fer brillant.<br>Les fonderies sont de véritables magiciens parmi nos artisans. »"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/helptexts.lua:12
@@ -1501,7 +1501,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Fine cloth and jewelry mean nothing to a true Barbarian.<br>But a noble "
 "sail in the wind will please his eyes.’"
-msgstr ""
+msgstr "« Les beaux tissus et les bijoux ne signifient rien pour un vrai barbare.<br>Mais une noble voile dans le vent plaira à ses yeux. »"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:12
@@ -1509,7 +1509,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Khantarakh, ‘The Modern Barbarian Economy’,<br>9ᵗʰ cowhide ‘Seafaring and "
 "Conquest’"
-msgstr ""
+msgstr "Khantarakh, « L'économie Barbare moderne »,<br>9ème tome « Navigation et Conquête »"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:17
@@ -1546,7 +1546,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Then he hit the door with his ax and, behold,<br>the door only trembled, "
 "but the shaft of the ax burst into a thousand pieces.’"
-msgstr ""
+msgstr "« Puis il a frappé la porte avec sa hache et, voici,<br>la porte a seulement tremblé, mais le manche de la hache a éclaté en mille morceaux. »"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/helptexts.lua:12
@@ -1554,7 +1554,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Legend about a quarrel between the brothers Harthor and Manthor,<br>Manthor "
 "is said to be the inventor of blackwood"
-msgstr ""
+msgstr "Légende d'une querelle entre les frères Harthor et Manthor,<br>Manthor serait l'inventeur du bois noir"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/helptexts.lua:18
@@ -2039,14 +2039,14 @@ msgctxt "building"
 msgid ""
 "The charcoal burner's house needs holes in the ground that were dug by a "
 "clay pit’s worker nearby to erect charcoal stacks in them."
-msgstr ""
+msgstr "La maison du brûleur à charbon a besoin de trous dans le sol qui ont été creusés par un travailleur d'une fosse d'argile à proximité pour y ériger des piles de charbon."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The charcoal burner's house needs %s on average to produce one coal."
-msgstr ""
+msgstr "La maison du brûleur à charbon a besoin de %s en moyenne pour produire un charbon."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/helptexts.lua:23
@@ -2402,7 +2402,7 @@ msgctxt "building"
 msgid ""
 "Brews beer out of barley and water. It also brews mead, which is beer "
 "refined with honey. Mead is consumed by experienced soldiers."
-msgstr ""
+msgstr "Brasse de la bière à partir d'orge et d'eau. Il brasse également l'hydromel, qui est une bière raffinée avec du miel. L'hydromel est consommé par des soldats expérimentés."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/helptexts.lua:3
@@ -3001,7 +3001,7 @@ msgid ""
 "‘Steep like the slopes of Kal’mavrath, shiny like the most delicate armor "
 "and strong like our ancestors, that’s how the headquarters of Chat’Karuth "
 "presented itself to us.’"
-msgstr ""
+msgstr "« Raides comme les pentes de Kal’mavrath, brillantes comme les armures les plus délicates et fortes comme nos ancêtres, voilà comment le quartier général de Chat’Karuth s'est présenté à nous. »"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/barbarians/headquarters/helptexts.lua:13
@@ -3044,7 +3044,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Berthron, chief military adviser of Chat’Karuth,<br>when they lost the "
 "headquarters in the battle around the heights of Kal’Megarath"
-msgstr ""
+msgstr "Berthron, conseiller militaire en chef de Chat’Karuth,<br>quand ils ont perdu le quartier général dans la bataille autour des hauteurs de Kal’Megarath"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/empire/headquarters/helptexts.lua:16
@@ -3857,22 +3857,22 @@ msgstr "Aller à l'emplacement mémorisé précédemment"
 #: ../../data/tribes/scripting/help/controls.lua:89
 msgctxt "hotkey"
 msgid ", (comma)"
-msgstr ""
+msgstr ", (comma)"
 
 #: ../../data/tribes/scripting/help/controls.lua:89
 msgid "Go to previous location"
-msgstr ""
+msgstr "Aller au lieu précédent"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:91
 msgctxt "hotkey"
 msgid ". (period)"
-msgstr ""
+msgstr ". (period)"
 
 #: ../../data/tribes/scripting/help/controls.lua:91
 msgid "Go to next location"
-msgstr ""
+msgstr "Aller au lieu suivant"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -4566,7 +4566,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Bread is made out of barley and water and is used in the taverns to prepare "
 "rations. It is also consumed by training soldiers."
-msgstr ""
+msgstr "Le pain est fait d'orge et d'eau et est utilisé dans les tavernes pour préparer les rations. Il est également consommé pour la formation des soldats."
 
 #. TRANSLATORS: Helptext for a ware: Bread Paddle
 #: ../../data/tribes/wares/bread_paddle/helptexts.lua:4
@@ -4607,7 +4607,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Bricks are the best and most important building material. They are made out "
 "of a mix of clay and granite dried in a coal fire."
-msgstr ""
+msgstr "Les briques sont le meilleur et le plus important matériau de construction. Ils sont fabriqués à partir d'un mélange d'argile et de granit séché au feu de charbon."
 
 #. TRANSLATORS: Helptext for a ware: Buckets
 #: ../../data/tribes/wares/buckets/helptexts.lua:4
@@ -4721,25 +4721,25 @@ msgid ""
 "Felling axes are used by lumberjacks and produced in the metal workshop (but"
 " cease to be produced by the building if it is enhanced to an ax workshop "
 "and war mill)."
-msgstr ""
+msgstr "Les haches sont utilisées par les bûcherons et produites dans l'atelier de métal (mais cessent d'être produites par le bâtiment s'il est transformé en atelier de hache et en moulin de guerre)."
 
 #. TRANSLATORS: Helptext for a ware: Felling Ax
 #: ../../data/tribes/wares/felling_ax/helptexts.lua:8
 msgctxt "frisians_ware"
 msgid "Felling axes are used by woodcutters and produced by the blacksmithy."
-msgstr ""
+msgstr "Les haches sont utilisées par les bûcherons et produites par la forge."
 
 #. TRANSLATORS: Helptext for a ware: Felling Ax
 #: ../../data/tribes/wares/felling_ax/helptexts.lua:10
 msgctxt "empire_ware"
 msgid "Felling axes are used by lumberjacks and produced by the toolsmithy."
-msgstr ""
+msgstr "Les haches sont utilisées par les bûcherons et produites par le forgeron d'outils."
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:4
 msgctxt "ware"
 msgid "Fire tongs are the tools for smelting ores."
-msgstr ""
+msgstr "Les pinces à feu sont les outils pour la fonte des minerais."
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:6
@@ -4753,7 +4753,7 @@ msgctxt "frisians_ware"
 msgid ""
 "They are used in the furnace and the brick kiln and produced by the "
 "blacksmithy."
-msgstr ""
+msgstr "Ils sont utilisés dans le four et le four à briques et produits par le forgeron."
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:10
@@ -4762,13 +4762,13 @@ msgid ""
 "They are used in the smelting works and produced by the metal workshop (but "
 "they cease to be produced by the building if it is enhanced to an ax "
 "workshop and war mill)."
-msgstr ""
+msgstr "Ils sont utilisés dans les fonderies et produits par la forge (mais ils cessent d'être produits par le bâtiment s'il est transformé en atelier de haches et en moulin de guerre)."
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:12
 msgctxt "empire_ware_fire_tongs"
 msgid "They are used in the smelting works and produced by the toolsmith."
-msgstr ""
+msgstr "Ils sont utilisés dans les travaux de la fonte et produits par le forgeron d'outils."
 
 #. TRANSLATORS: Helptext for a ware: Fish
 #: ../../data/tribes/wares/fish/helptexts.lua:4
@@ -4851,7 +4851,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Fruit are berries gathered from berry bushes by a fruit collector. They are "
 "used for rations and for feeding the fish at the aqua farms."
-msgstr ""
+msgstr "Les fruits sont des baies cueillies dans des arbustes à baies par un collecteur de fruits. Ils sont utilisés pour les rations et pour nourrir les poissons dans les fermes aquatiques."
 
 #. TRANSLATORS: Helptext for a ware: Fur
 #: ../../data/tribes/wares/fur/helptexts.lua:4
@@ -4896,7 +4896,7 @@ msgstr "Les vêtements de fourrure ordinaires peuvent être décorés avec du fe
 msgctxt "ware"
 msgid ""
 "Gold is the most valuable of all metals, and it is smelted out of gold ore."
-msgstr ""
+msgstr "L'or est le plus précieux de tous les métaux et il est fondu à partir de minerai d'or."
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:6
@@ -4904,7 +4904,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "It is produced by the smelting works and used by the armor smithy, the "
 "weapon smithy and the gold spinning mill."
-msgstr ""
+msgstr "Il est produit par les fonderies et utilisé par la forge d'armures, la forge d'armes et la filature d'or."
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:8
@@ -4914,7 +4914,7 @@ msgid ""
 "smelting works and used as a precious building material and to produce "
 "different axes (in the war mill) and different parts of armor (in the helm "
 "smithy)."
-msgstr ""
+msgstr "Seules les choses très importantes sont ornées d'or. Il est produit par les fonderies et utilisé comme matériau de construction précieux et pour produire différente haches (dans le moulin de guerre) et différentes pièces d'armure (dans la fabrique de casques)."
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:10
@@ -4923,7 +4923,7 @@ msgid ""
 "Only very important things are embellished with gold. It is produced by the "
 "furnace and is used to produce better swords and the best helmets. The best "
 "armor is also decorated with gold."
-msgstr ""
+msgstr "Seules les choses très importantes sont ornées d'or. Il est produit par le four et est utilisé pour produire de meilleures épées et les meilleurs casques. La meilleure armure est également décorée d'or."
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:12
@@ -4931,7 +4931,7 @@ msgctxt "empire_ware"
 msgid ""
 "It is produced by the smelting works. Armor and weapons are embellished with"
 " gold in the armor smithy and the weapon smithy."
-msgstr ""
+msgstr "Il est produit par les fonderies. L'armure et les armes sont ornées d'or dans la forge d'armure et la forge d'arme."
 
 #. TRANSLATORS: Helptext for a ware: Gold Ore
 #: ../../data/tribes/wares/gold_ore/helptexts.lua:4
@@ -4945,7 +4945,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Smelted in a smelting works, it turns into gold which is used as a precious "
 "building material and to produce weapons and armor."
-msgstr ""
+msgstr "Fondu dans une fonderie, il se transforme en or qui est utilisé comme précieux matériau de construction et pour produire des armes et des armures."
 
 #. TRANSLATORS: Helptext for a ware: Gold Ore
 #: ../../data/tribes/wares/gold_ore/helptexts.lua:8
@@ -4953,7 +4953,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Smelted in a smelting works, it turns into gold which is used as a precious "
 "building material and to produce weapons and armor."
-msgstr ""
+msgstr "Fondu dans une fonderie, il se transforme en or qui est utilisé comme précieux matériau de construction et pour produire des armes et des armures."
 
 #. TRANSLATORS: Helptext for a ware: Gold Ore
 #: ../../data/tribes/wares/gold_ore/helptexts.lua:10
@@ -4961,7 +4961,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Smelted in a furnace, it turns into gold which is used as a precious "
 "building material and to produce weapons and armor."
-msgstr ""
+msgstr "Fondu dans un four, il se transforme en or qui est utilisé comme matériau de construction précieux et pour produire des armes et des armures."
 
 #. TRANSLATORS: Helptext for a ware: Gold Ore
 #: ../../data/tribes/wares/gold_ore/helptexts.lua:12
@@ -4969,7 +4969,7 @@ msgctxt "empire_ware"
 msgid ""
 "Smelted in a smelting works, it turns into gold which is used as a precious "
 "building material and to produce weapons and armor."
-msgstr ""
+msgstr "Fondu dans une fonderie, il se transforme en or qui est utilisé comme précieux matériau de construction et pour produire des armes et des armures."
 
 #. TRANSLATORS: Helptext for a ware: Gold Thread
 #: ../../data/tribes/wares/gold_thread/helptexts.lua:4
@@ -5181,7 +5181,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "It is produced by the smelting works and used in the toolsmithy, armor "
 "smithy and weapon smithy."
-msgstr ""
+msgstr "Il est produit par les fonderies et utilisé dans la fabrique d'outils, la forge d'armures et la forge d'armes."
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:8
@@ -5189,7 +5189,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "It is produced by the smelting works and used to produce weapons and tools "
 "in the metal workshop, ax workshop, war mill and helm smithy."
-msgstr ""
+msgstr "Il est produit par les fonderies et utilisé pour produire des armes et des outils dans la forge, la fabrique de haches, le moulin de guerre et la fabrique de casques."
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:10
@@ -5205,7 +5205,7 @@ msgctxt "frisians_ware"
 msgid ""
 "It is produced by the furnace. Tools and weapons are made of iron. It is "
 "also used as jewellery for fur garment armor to give it a silver shine."
-msgstr ""
+msgstr "Il est produit par le four. Les outils et les armes sont en fer. Il est également utilisé comme bijoux pour les armures de vêtements en fourrure pour lui donner un éclat argenté."
 
 #. TRANSLATORS: Helptext for a ware: Iron Ore
 #: ../../data/tribes/wares/iron_ore/helptexts.lua:4
@@ -5332,7 +5332,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Mead is produced by mead breweries. Soldiers drink mead during advanced "
 "training."
-msgstr ""
+msgstr "L'hydromel est produite par les brasseries d'hydromel. Les soldats boivent de l'hydromel pendant l’entraînement avancé."
 
 #. TRANSLATORS: Helptext for a ware: Meal
 #: ../../data/tribes/wares/meal/helptexts.lua:4
@@ -5961,7 +5961,7 @@ msgstr "Sème et récolte les champs de maïs."
 #: ../../data/tribes/workers/frisians/ferry/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Ships wares across narrow rivers."
-msgstr ""
+msgstr "Transporte des marchandises le long des rivières étroites."
 
 #. TRANSLATORS: Helptext for a worker: Fish Breeder
 #: ../../data/tribes/workers/atlanteans/fishbreeder/helptexts.lua:3

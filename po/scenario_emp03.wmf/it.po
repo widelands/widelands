@@ -451,6 +451,10 @@ msgid ""
 "new ship or even have some basic infrastructure to make our lives more "
 "comfortable?"
 msgstr ""
+"Sebbene sia un buon passo in avanti, non vedo gran spazio per le "
+"costruzioni. L'intera isola è disseminata di rocce. Come potremo mai "
+"costruire una nuova nave o anche solo avere le infrastrutture di base per "
+"rendere confortevoli le nostre vite? "
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:269
 msgid "Amalea’s Plan"
@@ -466,6 +470,9 @@ msgid ""
 "Lutius, this may seem very tricky, but we can do it. First of all, we need "
 "patience as well as speed and a plan to succeed in this part of the world."
 msgstr ""
+"Lutius, questo potrebbe sembrare uno scherzo, ma dobbiamo farlo. Innanzi "
+"tutto, abbiamo bisogno sia di pazienza sia di velocità e di un piano per "
+"aver successo in questa parte del mondo."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:275
@@ -473,6 +480,8 @@ msgid ""
 "I think we should try to reveal some building space by cutting up all the "
 "rocks in a quarry."
 msgstr ""
+"Penso dovremo ricavare spazio per costruire cavando tutte le rocce di una "
+"cava."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:278
@@ -481,6 +490,8 @@ msgid ""
 "our new world. We can use them as soon as there will finally be enough space"
 " for buildings."
 msgstr ""
+"Inoltre, questo ci garantirebbe granito e marmo per costruire i nostro nuovo"
+" mondo. Potremo usarli non appena ci sarà spazio per costruire."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:286
 msgid "Amalea’s New Instructions"
@@ -497,6 +508,8 @@ msgid ""
 "Good news from the people, Lutius. I got the message that our first quarry "
 "has started its work today."
 msgstr ""
+"Buone notize dal popolo, Lutius. Ho ricevuto la notizia che il nostro primo "
+"cavapietre ha inizato a lavorare oggi."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:292
@@ -504,6 +517,9 @@ msgid ""
 "Perhaps it would be a good idea to wait until it has cleared some space and "
 "then build up a basic construction material industry."
 msgstr ""
+"Forse potrebbe essere una buona idea attendere finché non sarà stato "
+"ricavato dello spazio e quindi costruire una catena base di produzione dei "
+"materiali di costruzione."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:300
 msgid "Amalea’s Recommendations"
@@ -517,7 +533,7 @@ msgstr "Amalea entra..."
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:303
 msgid "I’ve got important things to talk about… First the good news:"
-msgstr ""
+msgstr "Ho alcune importanti cose di cui parlare... Prima le buone nuove:"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:306
@@ -525,6 +541,9 @@ msgid ""
 "I noticed that our stonemason has started his work, finally. He will cut the"
 " number of marble columns that we request in our basic economy settings."
 msgstr ""
+"Ho visto che il nostro tagliapietre ha finalmente iniziato a lavorare. "
+"Taglierà le colonne di marmo di cui abbiamo bisogno per la nostra economia "
+"di base."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:309
