@@ -46,8 +46,8 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
      main_box_(this, 0, 0, UI::Box::Vertical, get_w(), get_h()),
      content_box_(&main_box_, 0, 0, UI::Box::Horizontal),
      individual_content_box(&content_box_, 0, 0, UI::Box::Vertical),
-     map_box_(&content_box_, 0, 0, UI::Box::Vertical, butw_),
-     map_details(&map_box_, 0, 0, 0, 0, butw_),
+     map_box_(&content_box_, 0, 0, UI::Box::Vertical, butw_, get_h()),
+     map_details(&map_box_, 0, 0, 0, 0, butw_, get_h()),
 
      win_condition_type(&map_box_,
                         0,
@@ -68,8 +68,6 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
                              UI::DropdownType::kTextual,
                              UI::PanelStyle::kFsMenu,
                              UI::ButtonStyle::kFsMenuMenu),
-     //     peaceful_(this, Vector2i(get_w() * 7 / 10, get_h() * 19 / 40 + buth_), _("Peaceful
-     //     mode")),
      peaceful_(&map_box_, Vector2i::zero(), _("Peaceful mode")),
      ok_(&map_box_, "ok", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuPrimary, _("Start game")),
      back_(&map_box_, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
@@ -262,8 +260,10 @@ void FullscreenMenuLaunchGame::layout() {
 	log("map box: w=%d, h=%d, x=%d\n", map_box_.get_w(), map_box_.get_h(), map_box_.get_x());
 	// map_.set_desired_size(map_box_.get_w(), 0);
 
-	//	log("peaceful w=%d, h=%d, x=%d\n", peaceful_own_.get_w(), peaceful_own_.get_h(),
-	//	    peaceful_own_.get_x());
+	log("peaceful w=%d, h=%d, x=%d\n", peaceful_.get_w(), peaceful_.get_h(), peaceful_.get_x());
+	log("ok button w=%d, h=%d, x=%d\n", ok_.get_w(), ok_.get_h(), ok_.get_x());
+	log("wincondition_dd w=%d, h=%d, x=%d\n", win_condition_dropdown_.get_w(),
+	    win_condition_dropdown_.get_h(), win_condition_dropdown_.get_x());
 	//	log("map w=%d, h=%d, x=%d\n", map_.get_w(), map_.get_h(), map_.get_x());
 	log("sehe ich nicht oder \n\n");
 	//	select_map_.set_desired_size(map_name_.get_h(), map_name_.get_h());
@@ -281,7 +281,9 @@ void FullscreenMenuLaunchGame::add_all_widgets() {
 	content_box_.add_inf_space();
 	content_box_.add(&map_box_, UI::Box::Resizing::kFillSpace);
 	map_box_.add(&map_details, UI::Box::Resizing::kFullSize);
+	main_box_.add_space(10 * padding_);
 	map_box_.add(&peaceful_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
+	main_box_.add_space(5 * padding_);
 	map_box_.add(&win_condition_type, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	map_box_.add(&win_condition_dropdown_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	content_box_.add_space(0);

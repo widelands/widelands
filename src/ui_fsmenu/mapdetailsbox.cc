@@ -44,7 +44,7 @@ MapDetailsBox::MapDetailsBox(Panel* parent,
         0,
         0,
         max_x,  // arbitrary, will be set while layouting boxes...
-        100,
+        max_y / 3,
         UI::PanelStyle::kFsMenu,
         "sample map description which might be a\n very long text so scrollbar is needed") {
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
@@ -54,6 +54,8 @@ MapDetailsBox::MapDetailsBox(Panel* parent,
 	add(&title_box_, UI::Box::Resizing::kFullSize);
 	add(&map_description_, UI::Box::Resizing::kExpandBoth);
 
+	log("max_y: %d\n", max_y);
+	log("max_x: %d\n", max_x);
 	//	map_name_.set_font_scale(2);
 }
 MapDetailsBox::~MapDetailsBox() {
