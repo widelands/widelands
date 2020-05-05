@@ -67,6 +67,7 @@ tribes:new_trainingsite_type {
          descname = _"sleeping",
          actions = {
             "sleep=5000",
+            "return=failed",
          }
       },
       upgrade_soldier_evade_0 = {
