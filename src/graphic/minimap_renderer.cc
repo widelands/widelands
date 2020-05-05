@@ -48,8 +48,8 @@ int round_up_to_nearest_even(int number) {
 // Returns whether the field at the coords was/is visible to the player.
 // See Player::Field::Vision: 1 if seen once, > 1 if seen right now.
 Vision check_vision(const Widelands::Coords& coords,
-					const Widelands::Player* player,
-					const Widelands::EditorGameBase& egbase) {
+                    const Widelands::Player* player,
+                    const Widelands::EditorGameBase& egbase) {
 	const Widelands::Map& map = egbase.map();
 	const int32_t mapwidth = map.get_width();
 	Widelands::FCoords f = map.get_fcoords(coords);
@@ -209,7 +209,8 @@ void do_draw_minimap(Texture* texture,
 			}
 
 			if (vision > 0) {
-				texture->set_pixel(x, y, calc_minimap_color(egbase, f, layers, owner, player, vision > 1));
+				texture->set_pixel(
+				   x, y, calc_minimap_color(egbase, f, layers, owner, player, vision > 1));
 			}
 		}
 	}
