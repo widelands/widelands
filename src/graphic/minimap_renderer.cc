@@ -57,8 +57,7 @@ uint16_t check_vision(const Widelands::Coords& coords,
 	if (player == nullptr || player->see_all()) {
 		return 2;
 	} else if (player != nullptr) {
-		const auto& field = player->fields()[i];
-		return field.vision;
+		return player->fields()[i].vision;
 	}
 	return 0;
 }
@@ -92,9 +91,9 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 				color = blend_color(color, kWhite);
 			}
 
-			if (((layers & MiniMapLayer::Flag) && dynamic_cast<Flag const*>(immovable)) ||
+			if (((layers & MiniMapLayer::Flag) && immovable->descr().type() == Widelands::MapObjectType::FLAG)) ||
 			    ((layers & MiniMapLayer::Building) &&
-			     dynamic_cast<Widelands::Building const*>(immovable) &&
+			     immovable->descr().type() >= Widelands::MapObjectType::BUILDING &&
 			     check_vision(immovable->get_positions(egbase).front(), player, egbase) > 1)) {
 				color = kWhite;
 			}
