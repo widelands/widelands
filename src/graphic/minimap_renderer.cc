@@ -45,9 +45,11 @@ int round_up_to_nearest_even(int number) {
 	return number % 2 == 0 ? number : number + 1;
 }
 
-uint16_t check_vision(const Widelands::Coords& coords,
-					  const Widelands::Player* player,
-					  const Widelands::EditorGameBase& egbase) {
+// Returns whether the field at the coords was/is visible to the player.
+// See Player::Field::Vision: 1 if seen once, > 1 if seen right now.
+Vision check_vision(const Widelands::Coords& coords,
+					const Widelands::Player* player,
+					const Widelands::EditorGameBase& egbase) {
 	const Widelands::Map& map = egbase.map();
 	const int32_t mapwidth = map.get_width();
 	Widelands::FCoords f = map.get_fcoords(coords);
@@ -56,10 +58,9 @@ uint16_t check_vision(const Widelands::Coords& coords,
 
 	if (player == nullptr || player->see_all()) {
 		return 2;
-	} else if (player != nullptr) {
+	} else {
 		return player->fields()[i].vision;
 	}
-	return 0;
 }
 
 // Returns the color to be used in the minimap for the given field.
@@ -87,15 +88,17 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 		// visualize objects using white color.
 
 		if (upcast(PlayerImmovable const, immovable, f.field->get_immovable())) {
-			if ((layers & MiniMapLayer::Road) && dynamic_cast<RoadBase const*>(immovable)) {
-				color = blend_color(color, kWhite);
-			}
-
-			if (((layers & MiniMapLayer::Flag) && immovable->descr().type() == Widelands::MapObjectType::FLAG)) ||
+			// Buildings can occupy multiple positions but are only visible
+			// in the main view if their primary position is visible.
+			// We mimic that behavior here for consistency.
+			if (((layers & MiniMapLayer::Flag) &&
+			      immovable->descr().type() == Widelands::MapObjectType::FLAG) ||
 			    ((layers & MiniMapLayer::Building) &&
-			     immovable->descr().type() >= Widelands::MapObjectType::BUILDING &&
-			     check_vision(immovable->get_positions(egbase).front(), player, egbase) > 1)) {
+			      immovable->descr().type() >= Widelands::MapObjectType::BUILDING &&
+			      check_vision(immovable->get_positions(egbase).front(), player, egbase) > 1)) {
 				color = kWhite;
+			} else if ((layers & MiniMapLayer::Road) && dynamic_cast<RoadBase const*>(immovable)) {
+				color = blend_color(color, kWhite);
 			}
 		}
 	}
@@ -187,7 +190,7 @@ void do_draw_minimap(Texture* texture,
 			Widelands::MapIndex i = Widelands::Map::get_index(f, mapwidth);
 			move_r(mapwidth, f, i);
 
-			uint16_t vision = 0;  // See Player::Field::Vision: 1 if seen once, > 1 if seen right now.
+			Vision vision = 0;  // See Player::Field::Vision: 1 if seen once, > 1 if seen right now.
 			Widelands::PlayerNumber owner = 0;
 			if (player == nullptr || player->see_all()) {
 				// This player has omnivision - show the field like it is in reality.
@@ -200,7 +203,7 @@ void do_draw_minimap(Texture* texture,
 				// otherwise this shows reality as it was the last time she had
 				// vision on the field.
 				// If she never had vision, field.vision will be 0.
-				const auto& field = player->fields()[i];
+				const Player::Field& field = player->fields()[i];
 				vision = field.vision;
 				owner = field.owner;
 			}
