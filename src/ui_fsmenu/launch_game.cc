@@ -107,6 +107,7 @@ void FullscreenMenuLaunchGame::add_all_widgets() {
 	content_box_.add_space(0);
 	content_box_.add(&individual_content_box, UI::Box::Resizing::kExpandBoth);
 	content_box_.add_inf_space();
+	//	content_box_.add_space(50);
 	content_box_.add(&map_box_, UI::Box::Resizing::kFillSpace);
 	map_box_.add(&map_details, UI::Box::Resizing::kFullSize);
 	map_box_.add_space(10 * padding_);
@@ -128,6 +129,30 @@ void FullscreenMenuLaunchGame::add_behaviour_to_widgets() {
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
 	back_.sigclicked.connect([this]() { clicked_back(); });
 	map_details.set_select_map_action([this]() { clicked_select_map(); });
+}
+void FullscreenMenuLaunchGame::layout() {
+	log("w=%d, h=%d\n", get_w(), get_h());
+	//	main_box_.set_desired_size(get_w(), get_h());
+	main_box_.set_size(get_w(), get_h());
+	log("main box: w=%d, h=%d, x=%d\n", main_box_.get_w(), main_box_.get_h(), main_box_.get_x());
+	log("content box: w=%d, h=%d, x=%d\n", content_box_.get_w(), content_box_.get_h(),
+	    content_box_.get_x());
+	individual_content_box.set_desired_size(3 / 4 * content_box_.get_w(), content_box_.get_h());
+	log("individual_content_box: w=%d, h=%d, x=%d\n", individual_content_box.get_w(),
+	    individual_content_box.get_h(), individual_content_box.get_x());
+
+	map_box_.set_desired_size(1 / 4 * content_box_.get_w(), content_box_.get_h());
+	//	map_box_.set_desired_size(get_w() / 4, content_box_.get_h());
+	log("map box: w=%d, h=%d, x=%d\n", map_box_.get_w(), map_box_.get_h(), map_box_.get_x());
+	// map_.set_desired_size(map_box_.get_w(), 0);
+
+	log("peaceful w=%d, h=%d, x=%d\n", peaceful_.get_w(), peaceful_.get_h(), peaceful_.get_x());
+	log("ok button w=%d, h=%d, x=%d\n", ok_.get_w(), ok_.get_h(), ok_.get_x());
+	log("wincondition_dd w=%d, h=%d, x=%d\n", win_condition_dropdown_.get_w(),
+	    win_condition_dropdown_.get_h(), win_condition_dropdown_.get_x());
+	//	log("map w=%d, h=%d, x=%d\n", map_.get_w(), map_.get_h(), map_.get_x());
+	log("sehe ich nicht oder \n\n");
+	//	select_map_.set_desired_size(map_name_.get_h(), map_name_.get_h());
 }
 
 void FullscreenMenuLaunchGame::update_peaceful_mode() {
@@ -276,29 +301,4 @@ void FullscreenMenuLaunchGame::clicked_back() {
 
 bool FullscreenMenuLaunchGame::clicked_select_map() {
 	NEVER_HERE();
-}
-
-void FullscreenMenuLaunchGame::layout() {
-	log("w=%d, h=%d\n", get_w(), get_h());
-	//	main_box_.set_desired_size(get_w(), get_h());
-	main_box_.set_size(get_w(), get_h());
-	log("main box: w=%d, h=%d, x=%d\n", main_box_.get_w(), main_box_.get_h(), main_box_.get_x());
-	log("content box: w=%d, h=%d, x=%d\n", content_box_.get_w(), content_box_.get_h(),
-	    content_box_.get_x());
-	individual_content_box.set_desired_size(3 / 4 * content_box_.get_w(), content_box_.get_h());
-	log("individual_content_box: w=%d, h=%d, x=%d\n", individual_content_box.get_w(),
-	    individual_content_box.get_h(), individual_content_box.get_x());
-
-	map_box_.set_desired_size(1 / 4 * content_box_.get_w(), content_box_.get_h());
-	//	map_box_.set_desired_size(get_w() / 4, content_box_.get_h());
-	log("map box: w=%d, h=%d, x=%d\n", map_box_.get_w(), map_box_.get_h(), map_box_.get_x());
-	// map_.set_desired_size(map_box_.get_w(), 0);
-
-	log("peaceful w=%d, h=%d, x=%d\n", peaceful_.get_w(), peaceful_.get_h(), peaceful_.get_x());
-	log("ok button w=%d, h=%d, x=%d\n", ok_.get_w(), ok_.get_h(), ok_.get_x());
-	log("wincondition_dd w=%d, h=%d, x=%d\n", win_condition_dropdown_.get_w(),
-	    win_condition_dropdown_.get_h(), win_condition_dropdown_.get_x());
-	//	log("map w=%d, h=%d, x=%d\n", map_.get_w(), map_.get_h(), map_.get_x());
-	log("sehe ich nicht oder \n\n");
-	//	select_map_.set_desired_size(map_name_.get_h(), map_name_.get_h());
 }
