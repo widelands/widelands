@@ -98,8 +98,6 @@ FullscreenMenuLaunchGame::~FullscreenMenuLaunchGame() {
 }
 
 void FullscreenMenuLaunchGame::add_all_widgets() {
-	title_.set_font_scale(scale_factor());
-
 	main_box_.add_space(10 * padding_);
 	main_box_.add(&title_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
@@ -109,18 +107,15 @@ void FullscreenMenuLaunchGame::add_all_widgets() {
 	content_box_.add_space(10 * padding_);
 	content_box_.add(&individual_content_box, UI::Box::Resizing::kExpandBoth);
 	content_box_.add_inf_space();
-	//	content_box_.add_space(50);
 	content_box_.add(&map_box_, UI::Box::Resizing::kFillSpace);
-	map_box_.add(&map_details, UI::Box::Resizing::kFullSize);
+	content_box_.add_space(10 * padding_);
 
+	map_box_.add(&map_details, UI::Box::Resizing::kFullSize);
 	map_box_.add(&peaceful_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	map_box_.add_space(5 * padding_);
-
 	map_box_.add(&win_condition_type, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	map_box_.add_space(2 * padding_);
 	map_box_.add(&win_condition_dropdown_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
-	content_box_.add_space(10 * padding_);
-
 	map_box_.add_inf_space();
 	map_box_.add(&ok_, UI::Box::Resizing::kAlign, UI::Align::kBottom);
 	map_box_.add(&back_, UI::Box::Resizing::kAlign, UI::Align::kBottom);
@@ -136,6 +131,7 @@ void FullscreenMenuLaunchGame::add_behaviour_to_widgets() {
 }
 void FullscreenMenuLaunchGame::layout() {
 	log("w=%d, h=%d\n", get_w(), get_h());
+	title_.set_font_scale(scale_factor());
 	//	main_box_.set_desired_size(get_w(), get_h());
 	main_box_.set_size(get_w(), get_h());
 	log("main box: w=%d, h=%d, x=%d\n", main_box_.get_w(), main_box_.get_h(), main_box_.get_x());
