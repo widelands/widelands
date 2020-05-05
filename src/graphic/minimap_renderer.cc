@@ -46,8 +46,8 @@ int round_up_to_nearest_even(int number) {
 }
 
 uint16_t check_vision(const Widelands::Coords& coords,
-					  const Widelands::Player* player,
-					  const Widelands::EditorGameBase& egbase) {
+                      const Widelands::Player* player,
+                      const Widelands::EditorGameBase& egbase) {
 	const Widelands::Map& map = egbase.map();
 	const int32_t mapwidth = map.get_width();
 	Widelands::FCoords f = map.get_fcoords(coords);
@@ -91,12 +91,13 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 				color = blend_color(color, kWhite);
 			}
 
-			if (((layers & MiniMapLayer::Flag) && immovable->descr().type() == Widelands::MapObjectType::FLAG)) ||
+			if (((layers & MiniMapLayer::Flag) &&
+			     immovable->descr().type() == Widelands::MapObjectType::FLAG)) ||
 			    ((layers & MiniMapLayer::Building) &&
 			     immovable->descr().type() >= Widelands::MapObjectType::BUILDING &&
 			     check_vision(immovable->get_positions(egbase).front(), player, egbase) > 1)) {
-				color = kWhite;
-			}
+					color = kWhite;
+				}
 		}
 	}
 
@@ -206,7 +207,8 @@ void do_draw_minimap(Texture* texture,
 			}
 
 			if (vision > 0) {
-				texture->set_pixel(x, y, calc_minimap_color(egbase, f, layers, owner, player, vision > 1));
+				texture->set_pixel(
+				   x, y, calc_minimap_color(egbase, f, layers, owner, player, vision > 1));
 			}
 		}
 	}
