@@ -91,10 +91,10 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 			// in the main view if their primary position is visible.
 			// We mimic that behavior here for consistency.
 			if (((layers & MiniMapLayer::Flag) &&
-			      immovable->descr().type() == Widelands::MapObjectType::FLAG) ||
+			     immovable->descr().type() == Widelands::MapObjectType::FLAG) ||
 			    ((layers & MiniMapLayer::Building) &&
-			      immovable->descr().type() >= Widelands::MapObjectType::BUILDING &&
-			      check_vision(immovable->get_positions(egbase).front(), player, egbase) > 1)) {
+			     immovable->descr().type() >= Widelands::MapObjectType::BUILDING &&
+			     check_vision(immovable->get_positions(egbase).front(), player, egbase) > 1)) {
 				color = kWhite;
 			} else if ((layers & MiniMapLayer::Road) && dynamic_cast<RoadBase const*>(immovable)) {
 				color = blend_color(color, kWhite);
