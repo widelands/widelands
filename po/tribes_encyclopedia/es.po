@@ -7,7 +7,7 @@
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2015-2016
 # GunChleoc, 2016,2018
 # Javier Mora <morehash@gmail.com>, 2015
-# Gontzal Manuel Pujana Onaindia <juchuf@gmail.com>, 2015
+# Thadah D. Denyse <juchuf@gmail.com>, 2015
 # Kiba Gasteiz, 2015
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015
@@ -15,8 +15,8 @@
 # Miguel de Dios Matias <tres.14159@gmail.com>, 2015
 # Raul Ferriz <raul.ferriz@gmail.com>, 2009
 # Stephan Lutz <stephan-lutz@gmx.de>, 2019
-# Gontzal Manuel Pujana Onaindia <juchuf@gmail.com>, 2017
-# Gontzal Manuel Pujana Onaindia <juchuf@gmail.com>, 2015
+# Thadah D. Denyse <juchuf@gmail.com>, 2017
+# Thadah D. Denyse <juchuf@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"

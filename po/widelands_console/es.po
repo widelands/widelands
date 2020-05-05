@@ -4,7 +4,7 @@
 # Translators:
 # Facundo Gomez <facundogomez15@gmail.com>, 2019
 # Gastón <gastbr@gmail.com>, 2016
-# Gontzal Manuel Pujana Onaindia <juchuf@gmail.com>, 2018
+# Thadah D. Denyse <juchuf@gmail.com>, 2018
 # Madkat Here, 2015
 # Stephan Lutz <stephan-lutz@gmx.de>, 2019
 msgid ""

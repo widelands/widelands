@@ -5,7 +5,7 @@
 # GunChleoc, 2018
 # Juanjo Cb <jjcabrejas@gmail.com>, 2019
 # Madkat Here, 2016
-# Gontzal Manuel Pujana Onaindia <juchuf@gmail.com>, 2017
+# Thadah D. Denyse <juchuf@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
