@@ -54,7 +54,6 @@ Vision check_vision(const Widelands::Coords& coords,
 	const int32_t mapwidth = map.get_width();
 	Widelands::FCoords f = map.get_fcoords(coords);
 	Widelands::MapIndex i = Widelands::Map::get_index(f, mapwidth);
-	move_r(mapwidth, f, i);
 
 	if (player == nullptr || player->see_all()) {
 		return 2;
