@@ -65,7 +65,7 @@ void ExpeditionBootstrap::input_callback(
 	// causes both queues to cancel their requests so that some transfers are
 	// accidentally cancelled. The solution is to iterate ALL queues of this type and
 	// check whether their count and transfers still match up.
-	for (auto& pair : eb->queues_) {
+	for (std::pair<std::unique_ptr<InputQueue>, bool>& pair : eb->queues_) {
 		if (pair.first->get_type() == queue->get_type() &&
 		    pair.first->get_index() == queue->get_index()) {
 			pair.first->set_max_fill(pair.first->get_max_fill());  // calls update()
