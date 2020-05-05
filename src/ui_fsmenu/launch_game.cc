@@ -132,6 +132,9 @@ void FullscreenMenuLaunchGame::add_behaviour_to_widgets() {
 void FullscreenMenuLaunchGame::layout() {
 	log("w=%d, h=%d\n", get_w(), get_h());
 	title_.set_font_scale(scale_factor());
+	map_details.set_font_scale(scale_factor());
+	win_condition_type.set_font_scale(scale_factor());
+	
 	//	main_box_.set_desired_size(get_w(), get_h());
 	main_box_.set_size(get_w(), get_h());
 	log("main box: w=%d, h=%d, x=%d\n", main_box_.get_w(), main_box_.get_h(), main_box_.get_x());

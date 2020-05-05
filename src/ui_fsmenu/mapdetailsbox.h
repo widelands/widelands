@@ -21,6 +21,8 @@ public:
 
 	void set_select_map_action(std::function<void()> action);
 
+	void set_font_scale(float scale);
+
 private:
 	UI::Textarea title_;
 	UI::Box title_box_;

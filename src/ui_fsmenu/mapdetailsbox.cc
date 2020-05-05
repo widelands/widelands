@@ -117,3 +117,7 @@ void MapDetailsBox::load_map_info(GameSettingsProvider* settings) {
 void MapDetailsBox::set_select_map_action(std::function<void()> action) {
 	select_map_.sigclicked.connect(action);
 }
+void MapDetailsBox::set_font_scale(float scale) {
+	title_.set_font_scale(scale);
+	UI::Box::layout();
+}
