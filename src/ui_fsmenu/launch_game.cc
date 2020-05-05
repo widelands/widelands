@@ -97,6 +97,39 @@ FullscreenMenuLaunchGame::~FullscreenMenuLaunchGame() {
 	delete lua_;
 }
 
+void FullscreenMenuLaunchGame::add_all_widgets() {
+	title_.set_font_scale(scale_factor());
+
+	main_box_.add_space(2 * padding_);
+	main_box_.add(&title_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+
+	main_box_.add(&content_box_, UI::Box::Resizing::kExpandBoth);
+	content_box_.add_space(0);
+	content_box_.add(&individual_content_box, UI::Box::Resizing::kExpandBoth);
+	content_box_.add_inf_space();
+	content_box_.add(&map_box_, UI::Box::Resizing::kFillSpace);
+	map_box_.add(&map_details, UI::Box::Resizing::kFullSize);
+	map_box_.add_space(10 * padding_);
+	map_box_.add(&peaceful_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
+	map_box_.add_space(5 * padding_);
+	map_box_.add(&win_condition_type, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	map_box_.add(&win_condition_dropdown_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
+	content_box_.add_space(0);
+
+	map_box_.add_inf_space();
+	map_box_.add(&ok_, UI::Box::Resizing::kAlign, UI::Align::kBottom);
+	map_box_.add(&back_, UI::Box::Resizing::kAlign, UI::Align::kBottom);
+}
+
+void FullscreenMenuLaunchGame::add_behaviour_to_widgets() {
+	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
+	peaceful_.changed.connect([this]() { toggle_peaceful(); });
+
+	ok_.sigclicked.connect([this]() { clicked_ok(); });
+	back_.sigclicked.connect([this]() { clicked_back(); });
+	map_details.set_select_map_action([this]() { clicked_select_map(); });
+}
+
 void FullscreenMenuLaunchGame::update_peaceful_mode() {
 	bool forbidden =
 	   peaceful_mode_forbidden_ || settings_->settings().scenario || settings_->settings().savegame;
@@ -257,6 +290,7 @@ void FullscreenMenuLaunchGame::layout() {
 	    individual_content_box.get_h(), individual_content_box.get_x());
 
 	map_box_.set_desired_size(1 / 4 * content_box_.get_w(), content_box_.get_h());
+	//	map_box_.set_desired_size(get_w() / 4, content_box_.get_h());
 	log("map box: w=%d, h=%d, x=%d\n", map_box_.get_w(), map_box_.get_h(), map_box_.get_x());
 	// map_.set_desired_size(map_box_.get_w(), 0);
 
@@ -267,37 +301,4 @@ void FullscreenMenuLaunchGame::layout() {
 	//	log("map w=%d, h=%d, x=%d\n", map_.get_w(), map_.get_h(), map_.get_x());
 	log("sehe ich nicht oder \n\n");
 	//	select_map_.set_desired_size(map_name_.get_h(), map_name_.get_h());
-}
-
-void FullscreenMenuLaunchGame::add_all_widgets() {
-	title_.set_font_scale(scale_factor());
-
-	main_box_.add_space(2 * padding_);
-	main_box_.add(&title_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-
-	main_box_.add(&content_box_, UI::Box::Resizing::kExpandBoth);
-	content_box_.add_space(0);
-	content_box_.add(&individual_content_box, UI::Box::Resizing::kExpandBoth);
-	content_box_.add_inf_space();
-	content_box_.add(&map_box_, UI::Box::Resizing::kFillSpace);
-	map_box_.add(&map_details, UI::Box::Resizing::kFullSize);
-	main_box_.add_space(10 * padding_);
-	map_box_.add(&peaceful_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
-	main_box_.add_space(5 * padding_);
-	map_box_.add(&win_condition_type, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	map_box_.add(&win_condition_dropdown_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
-	content_box_.add_space(0);
-
-	map_box_.add_inf_space();
-	map_box_.add(&ok_, UI::Box::Resizing::kAlign, UI::Align::kBottom);
-	map_box_.add(&back_, UI::Box::Resizing::kAlign, UI::Align::kBottom);
-}
-
-void FullscreenMenuLaunchGame::add_behaviour_to_widgets() {
-	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
-	peaceful_.changed.connect([this]() { toggle_peaceful(); });
-
-	ok_.sigclicked.connect([this]() { clicked_ok(); });
-	back_.sigclicked.connect([this]() { clicked_back(); });
-	map_details.set_select_map_action([this]() { clicked_select_map(); });
 }
