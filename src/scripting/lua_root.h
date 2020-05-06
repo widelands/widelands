@@ -135,6 +135,8 @@ public:
 	int new_resource_type(lua_State* L);
 	int new_terrain_type(lua_State* L);
 
+	int modify_unit(lua_State* L);
+
 	/*
 	 * C methods
 	 */

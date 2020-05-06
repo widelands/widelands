@@ -29,6 +29,7 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/world/critter.h"
+#include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
 #include "scripting/globals.h"
 #include "scripting/lua_coroutine.h"
@@ -364,6 +365,7 @@ const MethodType<LuaWorld> LuaWorld::Methods[] = {
    METHOD(LuaWorld, new_immovable_type),
    METHOD(LuaWorld, new_resource_type),
    METHOD(LuaWorld, new_terrain_type),
+   METHOD(LuaWorld, modify_unit),
    {0, 0},
 };
 const PropertyType<LuaWorld> LuaWorld::Properties[] = {
@@ -537,6 +539,32 @@ int LuaWorld::new_editor_immovable_category(lua_State* L) {
 		get_egbase(L).mutable_world()->add_editor_immovable_category(table);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
+   .. method:: modify_unit(type, name, property, value)
+
+      TODO(Nordfriese): Document
+
+      Meant to be used by add-ons of the `world` category from their init.lua.
+*/
+int LuaWorld::modify_unit(lua_State* L) {
+	EditorGameBase& egbase = get_egbase(L);
+	const std::string type = luaL_checkstring(L, 2);
+	const std::string unit = luaL_checkstring(L, 3);
+	const std::string property = luaL_checkstring(L, 4);
+
+	if (type == "resource") {
+		ResourceDescription& descr = *egbase.mutable_world()->get_mutable_resource(egbase.mutable_world()->safe_resource_index(unit.c_str()));
+		if (property == "max_amount") {
+			descr.set_max_amount(luaL_checkuint32(L, 5));
+		} else {
+			report_error(L, "modify_unit not supported yet for resource property '%s'", property.c_str());
+		}
+	} else {
+		report_error(L, "modify_unit not supported yet for type '%s'", type.c_str());
 	}
 	return 0;
 }
@@ -1043,7 +1071,7 @@ int LuaTribes::add_custom_worker(lua_State* L) {
 
       TODO(Nordfriese): Document
 
-      Meant to be used by add-ons of the tribe category from their init.lua.
+      Meant to be used by add-ons of the `tribes` category from their init.lua.
 */
 int LuaTribes::modify_unit(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);

@@ -193,6 +193,9 @@ ResourceDescription const* World::get_resource(DescriptionIndex const res) const
 	assert(res < resources_->size() || res == Widelands::kNoResource);
 	return resources_->get_mutable(res);
 }
+ResourceDescription* World::get_mutable_resource(DescriptionIndex const res) const {
+	return resources_->get_mutable(res);
+}
 
 DescriptionIndex World::get_nr_resources() const {
 	return resources_->size();
