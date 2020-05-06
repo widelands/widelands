@@ -29,8 +29,9 @@
 const std::map<std::string, AddOnCategory> kAddOnCategories = {
 	{"tribes", AddOnCategory {"tribes", []() { return _("Tribes"); }, "images/wui/stats/menu_tab_wares_warehouse.png", true}},
 	{"world", AddOnCategory {"world", []() { return _("World"); }, "images/wui/menus/toggle_immovables.png", true}},
+	{"script", AddOnCategory {"script", []() { return _("Script"); }, "images/logos/WL-Editor-32.png", true}},
 	{"maps", AddOnCategory {"maps", []() { return _("Map Set"); }, "images/wui/menus/toggle_minimap.png", false}},
-	{"campaign", AddOnCategory {"campaign", []() { return _("Campaign"); }, "images/logos/WL-Editor-32.png", false}},
+	{"campaign", AddOnCategory {"campaign", []() { return _("Campaign"); }, "images/wui/menus/chat.png", false}},
 	{"win_condition", AddOnCategory {"win_condition", []() { return _("Win Condition"); }, "images/wui/menus/objectives.png", false}},
 	{"starting_condition", AddOnCategory {"starting_condition", []() { return _("Starting Condition"); }, "images/players/player_position_menu.png", false}}
 };

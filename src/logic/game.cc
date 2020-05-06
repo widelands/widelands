@@ -43,6 +43,7 @@
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
+#include "logic/addons.h"
 #include "logic/cmd_calculate_statistics.h"
 #include "logic/cmd_luacoroutine.h"
 #include "logic/cmd_luascript.h"
@@ -522,6 +523,14 @@ bool Game::run(StartGameType const start_game_type,
 
 	if (!script_to_run.empty() && (start_game_type == NewSPScenario || start_game_type == Loaded)) {
 		enqueue_command(new CmdLuaScript(get_gametime() + 1, script_to_run));
+	}
+
+	// Add-on scripts
+	for (const auto& pair : g_addons) {
+		if (pair.second && pair.first.category->name == "script") {
+			enqueue_command(new CmdLuaScript(get_gametime() + 1,
+					kAddOnDir + g_fs->file_separator() + pair.first.internal_name + g_fs->file_separator() + "init.lua"));
+		}
 	}
 
 	if (writereplay_ || writesyncstream_) {
