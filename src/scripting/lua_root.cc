@@ -576,9 +576,11 @@ const MethodType<LuaTribes> LuaTribes::Methods[] = {
    METHOD(LuaTribes, new_worker_type),
    METHOD(LuaTribes, add_custom_building),
    METHOD(LuaTribes, add_custom_worker),
+   METHOD(LuaTribes, modify_unit),
    {0, 0},
 };
 const PropertyType<LuaTribes> LuaTribes::Properties[] = {
+   PROP_RO(LuaTribes, all_workers),
    {0, 0, 0},
 };
 
@@ -599,6 +601,23 @@ void LuaTribes::__unpersist(lua_State*) {
  PROPERTIES
  ==========================================================
  */
+
+/* RST
+   .. attribute:: all_workers
+
+      (RO) An array of all known worker names.
+*/
+int LuaTribes::get_all_workers(lua_State* L) {
+	lua_newtable(L);
+	int index = 1;
+	EditorGameBase& egbase = get_egbase(L);
+	for (DescriptionIndex i = 0; i < egbase.tribes().nrworkers(); ++i) {
+		lua_pushint32(L, index++);
+		lua_pushstring(L, egbase.tribes().get_worker_descr(i)->name().c_str());
+		lua_settable(L, -3);
+	}
+	return 1;
+}
 
 /*
  ==========================================================
@@ -1015,6 +1034,32 @@ int LuaTribes::add_custom_worker(lua_State* L) {
 		egbase.mutable_tribes()->add_custom_worker(table);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
+   .. method:: modify_unit(type, name, property, value)
+
+      TODO(Nordfriese): Document
+
+      Meant to be used by add-ons of the tribe category from their init.lua.
+*/
+int LuaTribes::modify_unit(lua_State* L) {
+	EditorGameBase& egbase = get_egbase(L);
+	const std::string type = luaL_checkstring(L, 2);
+	const std::string unit = luaL_checkstring(L, 3);
+	const std::string property = luaL_checkstring(L, 4);
+
+	if (type == "worker") {
+		WorkerDescr& descr = *egbase.mutable_tribes()->get_mutable_worker_descr(egbase.mutable_tribes()->safe_worker_index(unit));
+		if (property == "experience") {
+			descr.set_needed_experience(luaL_checkuint32(L, 5));
+		} else {
+			report_error(L, "modify_unit not supported yet for worker property '%s'", property.c_str());
+		}
+	} else {
+		report_error(L, "modify_unit not supported yet for type '%s'", type.c_str());
 	}
 	return 0;
 }

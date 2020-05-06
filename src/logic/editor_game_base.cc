@@ -31,6 +31,7 @@
 #include "economy/waterway.h"
 #include "graphic/color.h"
 #include "graphic/road_segments.h"
+#include "logic/addons.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -292,14 +293,29 @@ void EditorGameBase::allocate_player_maps() {
  * the graphics are loaded.
  */
 void EditorGameBase::postload() {
-	create_tempfile_and_save_mapdata(FileSystem::ZIP);
-
 	// Postload tribes and world
 	step_loader_ui(_("Postloading world and tribes…"));
 
 	assert(tribes_);
-	tribes_->postload();
 	assert(world_);
+
+	// Just before postloading, allow add-ons to kick in and modify stuff
+	for (const auto& pair : g_addons) {
+		if (pair.second) {
+			if (pair.first.category->name == "world" || pair.first.category->name == "tribes") {
+				try {
+					lua_->run_script(kAddOnDir + g_fs->file_separator() + pair.first.internal_name + g_fs->file_separator() + "init.lua");
+				} catch (const WException& e) {
+					log("ERROR: Could not read %s add-on '%s': %s\n", pair.first.category->name.c_str(), pair.first.internal_name.c_str(), e.what());
+					throw;
+				}
+			}
+		}
+	}
+
+	create_tempfile_and_save_mapdata(FileSystem::ZIP);
+
+	tribes_->postload();
 	world_->postload();
 
 	for (DescriptionIndex i = 0; i < tribes_->nrtribes(); i++) {

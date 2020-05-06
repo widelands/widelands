@@ -53,6 +53,7 @@
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/addons.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -71,6 +72,7 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/about.h"
+#include "ui_fsmenu/addons.h"
 #include "ui_fsmenu/campaign_select.h"
 #include "ui_fsmenu/campaigns.h"
 #include "ui_fsmenu/internet_lobby.h"
@@ -396,6 +398,40 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	g_sh->register_songs("music", "intro");
 	g_sh->register_songs("music", "menu");
 	g_sh->register_songs("music", "ingame");
+
+	if (g_fs->is_directory(kAddOnDir)) {
+		std::set<std::string> found;
+		for (std::string desired_addons = get_config_string("addons", ""); !desired_addons.empty();) {
+			const size_t commapos = desired_addons.find(',');
+			const std::string substring = desired_addons.substr(0, commapos);
+			const size_t colonpos = desired_addons.find(':');
+			if (colonpos == std::string::npos) {
+				log("WARNING: Ignoring malformed add-ons config substring '%s'\n", substring.c_str());
+			} else {
+				const std::string name = substring.substr(0, colonpos);
+				if (name.find(kAddOnExtension) != name.length() - kAddOnExtension.length()) {
+					log("WARNING: Not loading add-on '%s' (wrong file name extension)\n", name.c_str());
+				} else {
+					if (g_fs->file_exists(kAddOnDir + g_fs->file_separator() + name)) {
+						found.insert(name);
+						g_addons.push_back(std::make_pair(preload_addon(name), substring.substr(colonpos) == ":true"));
+					} else {
+						log("WARNING: Not loading add-on '%s' (not found)\n", name.c_str());
+					}
+				}
+			}
+			if (commapos == std::string::npos) {
+				break;
+			}
+			desired_addons = desired_addons.substr(commapos + 1);
+		}
+		for (std::string name : g_fs->list_directory(kAddOnDir)) {
+			std::string addon_name(g_fs->fs_filename(name.c_str()));
+			if (!found.count(addon_name) && addon_name.find(kAddOnExtension) == addon_name.length() - kAddOnExtension.length()) {
+				g_addons.push_back(std::make_pair(preload_addon(addon_name), false));
+			}
+		}
+	}
 
 	// Register the click sound for UI::Panel.
 	// We do it here to ensure that the sound handler has been created first, and we only want to
@@ -846,6 +882,7 @@ bool WLApplication::init_settings() {
 	// Undocumented, checkbox appears on "Watch Replay" screen
 	get_config_bool("display_replay_filenames", false);
 	get_config_bool("editor_player_menu_warn_too_many_players", false);
+	get_config_string("addons", "");
 	// Undocumented, on command line, appears in game options
 	get_config_bool("sound", "enable_ambient", true);
 	get_config_bool("sound", "enable_chat", true);
@@ -1159,6 +1196,10 @@ void WLApplication::mainmenu() {
 			case FullscreenMenuBase::MenuTarget::kReplay:
 				replay();
 				break;
+			case FullscreenMenuBase::MenuTarget::kAddOns: {
+				AddOnsCtrl a;
+				a.run<FullscreenMenuBase::MenuTarget>();
+			} break;
 			case FullscreenMenuBase::MenuTarget::kOptions: {
 				Section& s = get_config_section();
 				OptionsCtrl om(s);

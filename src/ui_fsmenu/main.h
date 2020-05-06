@@ -45,6 +45,7 @@ private:
 	UI::Button multiplayer;
 	UI::Button replay;
 	UI::Button editor;
+	UI::Button addons;
 	UI::Button options;
 	UI::Button about;
 	UI::Button exit;

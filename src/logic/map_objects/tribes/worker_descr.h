@@ -119,11 +119,15 @@ public:
 		return ai_hints_.get();
 	}
 
+	void set_needed_experience(int32_t x) {
+		needed_experience_ = x;
+	}
+
 protected:
 	Programs programs_;
 
 private:
-	const Vector2i ware_hotspot_;
+	Vector2i ware_hotspot_;
 
 	DirAnimations walk_anims_;
 	DirAnimations walkload_anims_;
@@ -136,13 +140,13 @@ private:
 	 * Type that this worker can become, i.e. level up to, or INVALID_INDEX if the worker cannot
 	 * level up.
 	 */
-	const DescriptionIndex becomes_;
+	DescriptionIndex becomes_;
 
 	/**
 	 * Number of experience points required for leveling up,
 	 * or INVALID_INDEX if the worker cannot level up.
 	 */
-	const int32_t needed_experience_;
+	int32_t needed_experience_;
 
 	/// Buildings where this worker can work
 	std::set<DescriptionIndex> employers_;

@@ -319,6 +319,10 @@ const WorkerDescr* Tribes::get_worker_descr(DescriptionIndex workerindex) const 
 	return workers_->get_mutable(workerindex);
 }
 
+WorkerDescr* Tribes::get_mutable_worker_descr(DescriptionIndex workerindex) const {
+	return workers_->get_mutable(workerindex);
+}
+
 const TribeDescr* Tribes::get_tribe_descr(DescriptionIndex tribeindex) const {
 	return tribes_->get_mutable(tribeindex);
 }

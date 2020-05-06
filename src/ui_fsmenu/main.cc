@@ -48,6 +48,7 @@ FullscreenMenuMain::FullscreenMenuMain()
         &vbox_, "multi_player", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Multiplayer")),
      replay(&vbox_, "replay", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Watch Replay")),
      editor(&vbox_, "editor", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Editor")),
+     addons(&vbox_, "addons", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Add-Ons")),
      options(&vbox_, "options", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Options")),
      about(&vbox_, "about", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("About Widelands")),
      exit(&vbox_, "exit", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Exit Widelands")),
@@ -87,6 +88,9 @@ FullscreenMenuMain::FullscreenMenuMain()
 	editor.sigclicked.connect(
 	   boost::bind(&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
 	               FullscreenMenuBase::MenuTarget::kEditor));
+	addons.sigclicked.connect(
+	   boost::bind(&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
+	               FullscreenMenuBase::MenuTarget::kAddOns));
 	options.sigclicked.connect(
 	   boost::bind(&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
 	               FullscreenMenuBase::MenuTarget::kOptions));
@@ -104,6 +108,8 @@ FullscreenMenuMain::FullscreenMenuMain()
 	vbox_.add(&replay, UI::Box::Resizing::kFullSize);
 	vbox_.add_inf_space();
 	vbox_.add(&editor, UI::Box::Resizing::kFullSize);
+	vbox_.add_inf_space();
+	vbox_.add(&addons, UI::Box::Resizing::kFullSize);
 	vbox_.add_inf_space();
 	vbox_.add(&options, UI::Box::Resizing::kFullSize);
 	vbox_.add_inf_space();
@@ -134,6 +140,7 @@ void FullscreenMenuMain::layout() {
 	multiplayer.set_desired_size(butw_, buth_);
 	replay.set_desired_size(butw_, buth_);
 	editor.set_desired_size(butw_, buth_);
+	addons.set_desired_size(butw_, buth_);
 	options.set_desired_size(butw_, buth_);
 	about.set_desired_size(butw_, buth_);
 	exit.set_desired_size(butw_, buth_);

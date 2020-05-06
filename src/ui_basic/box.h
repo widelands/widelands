@@ -68,6 +68,11 @@ struct Box : public Panel {
 	/// Sets the maximum dimensions and calls set_desired_size()
 	void set_max_size(int w, int h);
 
+	// Forget all our entries. Does not delete or even remove them.
+	void clear() {
+		items_.clear();
+	}
+
 protected:
 	void layout() override;
 	void update_desired_size() override;

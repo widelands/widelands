@@ -1,5 +1,7 @@
 wl_library(ui_fsmenu_options
   SRCS
+    addons.cc
+    addons.h
     options.cc
     options.h
   DEPENDS
@@ -12,6 +14,8 @@ wl_library(ui_fsmenu_options
     graphic_text
     graphic_text_layout
     io_filesystem
+    io_profile
+    logic_addons
     logic_filesystem_constants
     scripting_lua_interface
     scripting_lua_table

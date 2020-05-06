@@ -158,6 +158,8 @@ public:
 	 * Properties
 	 */
 
+	int get_all_workers(lua_State* L);
+
 	/*
 	 * Lua methods
 	 */
@@ -178,6 +180,8 @@ public:
 	int new_worker_type(lua_State* L);
 	int add_custom_building(lua_State* L);
 	int add_custom_worker(lua_State* L);
+
+	int modify_unit(lua_State* L);
 
 	/*
 	 * C methods

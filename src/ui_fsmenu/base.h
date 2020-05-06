@@ -44,6 +44,7 @@ public:
 		kReplay,
 		kEditor,
 		kOptions,
+		kAddOns,
 		kAbout,
 		kExit,
 

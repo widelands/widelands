@@ -71,6 +71,11 @@ constexpr int kDefaultAutosaveInterval = 15;
 const std::string kCampaignDataDir = "campaigns";
 const std::string kCampaignDataExtension = ".wcd";
 
+// Filesystem names for add-ons
+const std::string kAddOnDir = "addons";
+const std::string kAddOnExtension = ".wad";
+const std::string kAddOnMainFile = "addon";
+
 /// Filesystem names for screenshots
 const std::string kScreenshotsDir = "screenshots";
 

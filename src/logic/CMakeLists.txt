@@ -80,6 +80,17 @@ wl_library(logic_filesystem_constants
     filesystem_constants.cc
 )
 
+wl_library(logic_addons
+  SRCS
+    addons.cc
+    addons.h
+  DEPENDS
+    base_i18n
+    io_filesystem
+    io_profile
+    logic_filesystem_constants
+)
+
 wl_library(logic_objectives
   SRCS
     objective.cc
@@ -235,6 +246,7 @@ wl_library(logic
     io_filesystem
     io_profile
     io_stream
+    logic_addons
     logic_commands
     logic_constants
     logic_exceptions

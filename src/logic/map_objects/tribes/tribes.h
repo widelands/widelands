@@ -124,6 +124,7 @@ public:
 	const ShipDescr* get_ship_descr(DescriptionIndex ship_index) const;
 	const WareDescr* get_ware_descr(DescriptionIndex ware_index) const;
 	const WorkerDescr* get_worker_descr(DescriptionIndex worker_index) const;
+	WorkerDescr* get_mutable_worker_descr(DescriptionIndex worker_index) const;
 	const TribeDescr* get_tribe_descr(DescriptionIndex tribe_index) const;
 
 	/// Load tribes' graphics
