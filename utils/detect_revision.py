@@ -80,22 +80,39 @@ def check_for_explicit_version():
 
 
 def detect_bzr_revision():
+    def extract_git_hash(commit_message):
+        # Get the last string in the commit message
+        git_hash = commit_message.split()[-1]
+        # Does it look like a git hash?
+        if re.search(r'^[0-9A-Fa-f]{40}$', git_hash) is not None:
+            # It does; shorten it
+            return git_hash[:7]
+        else:
+            return 'NO_HASH'
+
     if __has_bzrlib:
         try:
             b = BzrDir.open(base_path).open_branch()
             revno, nick = b.revno(), b.nick
-            return 'bzr%s[%s]' % (revno, nick)
+            commit_message = b.repository.get_revision(
+                b.last_revision()).message
+            git_hash = extract_git_hash(commit_message)
+            return 'bzr{revno}[{git_hash}@{nick}]'.format(
+                revno=revno, git_hash=git_hash, nick=nick)
         except:
             return None
     else:
         # Windows stand alone installer do not come with bzrlib. We try to
         # parse the output of bzr then directly
         try:
-            def run_bzr(subcmd):
-                return _communicate_utf8(['bzr', subcmd], cwd=base_path).strip()
-            revno = run_bzr('revno')
-            nick = run_bzr('nick')
-            return 'bzr%s[%s]' % (revno, nick)
+            def run_bzr(args):
+                return _communicate_utf8(['bzr'] + args, cwd=base_path).strip()
+            revno = run_bzr(['revno'])
+            nick = run_bzr(['nick'])
+            commit_message = run_bzr(['log', '--limit=1', '--short'])
+            git_hash = extract_git_hash(commit_message)
+            return 'bzr{revno}[{git_hash}@{nick}]'.format(
+                revno=revno, git_hash=git_hash, nick=nick)
         except (OSError, subprocess.CalledProcessError):
             return None
     return None

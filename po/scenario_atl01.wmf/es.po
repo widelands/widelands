@@ -8,7 +8,7 @@
 # Juanjo Cb <jjcabrejas@gmail.com>, 2019
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015-2016
-# Gontzal Manuel Pujana Onaindia <juchuf@gmail.com>, 2017
+# Thadah D. Denyse <juchuf@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"

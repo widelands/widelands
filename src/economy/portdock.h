@@ -153,6 +153,7 @@ private:
 	PositionList dockpoints_;
 	std::list<ShippingItem> waiting_;
 	bool expedition_ready_;
+	bool expedition_cancelling_;
 
 	std::unique_ptr<ExpeditionBootstrap> expedition_bootstrap_;
 

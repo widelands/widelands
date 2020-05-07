@@ -1358,6 +1358,9 @@ void Warehouse::check_remove_stock(Game& game) {
 	}
 }
 
+// TODO(Nordfriese): Called by a Request/Transfer/WareInstance/whatever that enters
+// the expedition bootstrap. Should instead return the InputQueue that requested
+// this particular item. See discussion in PR #3884.
 InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type) {
 	assert(portdock_ != nullptr);
 	assert(portdock_->expedition_bootstrap() != nullptr);

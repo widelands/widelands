@@ -4,7 +4,7 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # Javier Mora <morehash@gmail.com>, 2015
-# Gontzal Manuel Pujana Onaindia <juchuf@gmail.com>, 2017
+# Thadah D. Denyse <juchuf@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"

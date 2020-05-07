@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-04-22 20:02+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"PO-Revision-Date: 2020-05-04 13:16+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -52,7 +52,7 @@ msgstr "Denne øvelse forklarer håndteringen af militære anlæg og træningsan
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:14
 msgid "Easy."
-msgstr ""
+msgstr "Nem."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:20
@@ -62,22 +62,22 @@ msgstr ""
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:25
 msgid "Hard."
-msgstr ""
+msgstr "Svær."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:30
 msgid "Challenging."
-msgstr ""
+msgstr "Udfordrende."
 
 #. TRANSLATORS: The name of a Barbarian campaign
 #: ../../data/campaigns/campaigns.lua:43
 msgid "The Second Empire"
-msgstr ""
+msgstr "Det andet emperium"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:49
 msgid "Introduces the Barbarians."
-msgstr ""
+msgstr "Introducerer barbarerne"
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:52
@@ -95,17 +95,17 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr ""
+msgstr "Da Chat'Karuth døde var han en gammel mand, far til tre stærke og ambitiøse sønner, og krigsherre for en hær som kunne matche enhver fjende villig til at gå imod de gamle skove. I slutningen af sit glorværdige styre valgte Chat'Karuth sin ældste søn, Thron, som sin efterfølger som stammens krigsherre - en beslutning som efterlod hans to brødre utilfredse. Den gamle krigsherre viste dette. Som sin far instruerede ham i forlod Thron hovedstaden Al'thunran, hjem for Tronen blandt træerne, og trak sine tropper tilbage til de høje bakker, hvor han begravede sin fars lig. Der svor han til guderne og sin fars ånd, at han ville vende tilbage og genetablere orden. Mens hans brødre har ført blind krig mod Thron og de få styrker han efterlod for at sikre Al'thunrans grænser, førsøger den unge krigsherre at genforene sine ambitiøse brødre og tvinge stammerne til igen at marchere under en fælles banner."
 
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../data/campaigns/campaigns.lua:70
 msgid "The Months of Exile"
-msgstr ""
+msgstr "Månederne i eksil"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:73
 msgid "Introduces the Empire."
-msgstr ""
+msgstr "Introducerer imperiet."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:75
@@ -120,7 +120,7 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr ""
+msgstr "For seks måneder siden blev Lutius – en ung general fra imperiet – sendt af sted med 150 soldater til fronten bag de nordlige skove hvor barbarstammer krydsede ind i land ejet af imperiet. Hans opgave var at forsvare imperiets land. Først var alt roligt. Han talte endda med nogle få barbarbørn og tænke på et fredeligt liv - side om side med dette arkaisk folk. Han begyndte at føle sig sikker og hans hær begyndte at tabe opmærksomheden på den potentielle fjende. Det blev deres undergang. En nat i marts blev hans hær, der manglede forberedelse, angrebet af 100 fodfolk og blev fuldstændig spredt. Kun med livet i behold og en håndfuld mænd blandt soldaterne overlevede."
 
 #. TRANSLATORS: The name of an Atlantean campaign
 #: ../../data/campaigns/campaigns.lua:93
@@ -130,7 +130,7 @@ msgstr ""
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:96
 msgid "Introduces the Atlanteans."
-msgstr ""
+msgstr "Introducerer atlantere."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:98
@@ -140,17 +140,17 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr ""
+msgstr "Da deres gud mistede troen på atlanterne og lod deres ø forsvinde i havet, blev en kvindes kamp for retfærdighed og en ekstra chance for hendes folk en legende. Som anfører for de resterende atlantere førte hun dem til en ny fremtid i en ny del af verden, Jundlina blev det mægtigste menneske i hendes tid, men til en høj pris: hendes menneskelighed og sjæl."
 
 #. TRANSLATORS: The name of a Frisian campaign
 #: ../../data/campaigns/campaigns.lua:107
 msgid "From Water to Ice"
-msgstr ""
+msgstr "Fra vand til is"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:110
 msgid "Introduces the Frisians."
-msgstr ""
+msgstr "Introducerer friserne"
 
 #. TRANSLATORS: A campaign difficulty (easiest of three options)
 #: ../../data/campaigns/campaigns.lua:115
@@ -165,7 +165,7 @@ msgstr ""
 #. TRANSLATORS: A campaign difficulty (hardest of three options)
 #: ../../data/campaigns/campaigns.lua:119
 msgid "Captain (Unreasonable)"
-msgstr ""
+msgstr "Kaptajn (urimelig)"
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:124
@@ -280,7 +280,7 @@ msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
 "soldiers, how to train them and how to lead them in battle. Scouting will be"
 " also covered."
-msgstr ""
+msgstr "I denne introduktion vil du lære hemmelighederne ved krig: Hvordan du skaber soldater, hvordan du træner dem og fører dem i kamp. Spejdere vil også blive dækket."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
 msgid "Seafaring"
@@ -334,7 +334,7 @@ msgstr ""
 
 #: ../../data/maps/Astoria 2.R.wmf/elemental:9
 msgid "pbuczny@gmail.com – edited by Nordfriese"
-msgstr ""
+msgstr "pbuczny@gmail.com – redigeret af Nordfriese"
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
