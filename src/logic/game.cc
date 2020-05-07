@@ -434,6 +434,20 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
  * AI and the \ref InteractivePlayer if any).
  */
 void Game::postload() {
+	// Allow add-ons to kick in and modify stuff (only in games, not in the editor)
+	for (const auto& pair : g_addons) {
+		if (pair.second) {
+			if (pair.first.category->name == "world" || pair.first.category->name == "tribes") {
+				try {
+					lua().run_script(kAddOnDir + g_fs->file_separator() + pair.first.internal_name + g_fs->file_separator() + "init.lua");
+				} catch (const WException& e) {
+					log("ERROR: Could not read %s add-on '%s': %s\n", pair.first.category->name.c_str(), pair.first.internal_name.c_str(), e.what());
+					throw;
+				}
+			}
+		}
+	}
+
 	EditorGameBase::postload();
 	get_ibase()->postload();
 }
@@ -517,20 +531,20 @@ bool Game::run(StartGameType const start_game_type,
 		else if (start_game_type == NewMPScenario)
 			enqueue_command(new CmdLuaScript(get_gametime(), "map:scripting/multiplayer_init.lua"));
 
+		// Run all selected add-on scripts
+		for (const auto& pair : g_addons) {
+			if (pair.second && pair.first.category->name == "script") {
+				enqueue_command(new CmdLuaScript(get_gametime() + 1,
+						kAddOnDir + g_fs->file_separator() + pair.first.internal_name + g_fs->file_separator() + "init.lua"));
+			}
+		}
+
 		// Queue first statistics calculation
 		enqueue_command(new CmdCalculateStatistics(get_gametime() + 1));
 	}
 
 	if (!script_to_run.empty() && (start_game_type == NewSPScenario || start_game_type == Loaded)) {
 		enqueue_command(new CmdLuaScript(get_gametime() + 1, script_to_run));
-	}
-
-	// Add-on scripts
-	for (const auto& pair : g_addons) {
-		if (pair.second && pair.first.category->name == "script") {
-			enqueue_command(new CmdLuaScript(get_gametime() + 1,
-					kAddOnDir + g_fs->file_separator() + pair.first.internal_name + g_fs->file_separator() + "init.lua"));
-		}
 	}
 
 	if (writereplay_ || writesyncstream_) {

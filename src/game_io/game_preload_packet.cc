@@ -25,6 +25,7 @@
 #include "graphic/image_io.h"
 #include "graphic/minimap_renderer.h"
 #include "io/profile.h"
+#include "logic/addons.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
@@ -66,6 +67,24 @@ void GamePreloadPacket::read(FileSystem& fs, Game&, MapObjectLoader* const) {
 			}
 			savetimestamp_ = static_cast<time_t>(s.get_natural("savetimestamp"));
 			gametype_ = static_cast<GameController::GameType>(s.get_natural("gametype"));
+
+			required_addons_.clear();
+			for (std::string addons = s.get_string("addons", ""); !addons.empty();) {
+				const size_t commapos = addons.find(',');
+				const std::string substring = addons.substr(0, commapos);
+				const size_t colonpos = addons.find(':');
+				if (colonpos == std::string::npos) {
+					log("WARNING: Ignoring malformed add-on requirement substring '%s'\n", substring.c_str());
+				} else {
+					const std::string version = substring.substr(colonpos + 1);
+					required_addons_.push_back(std::make_pair(substring.substr(0, colonpos),
+							std::strtol(version.c_str(), nullptr, 10)));
+				}
+				if (commapos == std::string::npos) {
+					break;
+				}
+				addons = addons.substr(commapos + 1);
+			}
 		} else {
 			throw UnhandledVersionError("GamePreloadPacket", packet_version, kCurrentPacketVersion);
 		}
@@ -107,6 +126,17 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 	s.set_int("gametype", static_cast<int32_t>(game.game_controller() != nullptr ?
 	                                              game.game_controller()->get_game_type() :
 	                                              GameController::GameType::kReplay));
+
+	std::string addons;
+	for (const auto& pair : g_addons) {
+		if (pair.first.category->name == "tribes" || pair.first.category->name == "world") {
+			if (!addons.empty()) {
+				addons += ',';
+			}
+			addons += pair.first.internal_name + ':' + std::to_string(static_cast<unsigned>(pair.first.version));
+		}
+	}
+	s.set_string("addons", addons);
 
 	prof.write("preload", false, fs);
 

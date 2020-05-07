@@ -20,6 +20,8 @@
 #ifndef WL_GAME_IO_GAME_PRELOAD_PACKET_H
 #define WL_GAME_IO_GAME_PRELOAD_PACKET_H
 
+#include <vector>
+
 #include "game_io/game_data_packet.h"
 #include "logic/game_controller.h"
 
@@ -68,6 +70,10 @@ struct GamePreloadPacket : public GameDataPacket {
 		return gametype_;
 	}
 
+	const std::vector<std::pair<std::string, uint16_t>> required_addons() const {
+		return required_addons_;
+	}
+
 private:
 	std::string minimap_path_;
 	std::string mapname_;
@@ -80,6 +86,8 @@ private:
 	std::string version_;
 	time_t savetimestamp_ = 0;
 	GameController::GameType gametype_ = GameController::GameType::kUndefined;
+	// Required add-ons with the recommended version
+	std::vector<std::pair<std::string, uint16_t>> required_addons_;
 };
 }  // namespace Widelands
 

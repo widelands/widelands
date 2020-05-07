@@ -32,6 +32,7 @@
 #include "game_io/game_player_info_packet.h"
 #include "game_io/game_preload_packet.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/addons.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
@@ -70,11 +71,43 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	};
 	set_progress_message(_("Elemental data"), 1);
 	log("Game: Reading Preload Data ... ");
-	{
-		GamePreloadPacket p;
-		p.read(fs_, game_);
-	}
+	GamePreloadPacket preload;
+	preload.read(fs_, game_);
 	log("took %ums\n", timer.ms_since_last_query());
+
+	// Now that the preload data was read, we apply the add-ons.
+	// Note: Only world- and tribes-type add-ons are saved in savegames because those are the
+	// only ones where it makes a difference whether they are enabled during loading or not.
+	// First, we disable them all…
+	for (auto& pair : g_addons) {
+		if (pair.first.category->name == "world" || pair.first.category->name == "tribes") {
+			pair.second = false;
+		}
+	}
+	// …and now enable the ones we need.
+	// TODO(Nordfriese): We have to put the required add-ons in the correct order
+	for (const auto& requirement : preload.required_addons()) {
+		bool found = false;
+		for (auto& pair : g_addons) {
+			if (pair.first.internal_name == requirement.first) {
+				found = true;
+				if (pair.first.version != requirement.second) {
+					log("WARNING: Savegame requires add-on '%s' at version %u but version %u is installed. "
+							"They might be compatible, but this is not necessarily the case.\n",
+							requirement.first.c_str(),
+							requirement.second,
+							pair.first.version);
+				}
+				assert(pair.first.category->name == "world" || pair.first.category->name == "tribes");
+				assert(!pair.second);
+				pair.second = true;  // enable this add-on
+				break;
+			}
+		}
+		if (!found) {
+			throw GameDataError("Add-on '%s' (version %u) required but not installed", requirement.first.c_str(), requirement.second);
+		}
+	}
 
 	log("Game: Reading Game Class Data ... ");
 	{
