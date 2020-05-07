@@ -31,7 +31,9 @@ wl_library(logic_game_settings
     player_end_result.h
   DEPENDS
     io_filesystem
+    logic_addons
     logic_constants
+    logic_filesystem_constants
     logic_tribe_basic_info
     notifications
     scripting_lua_interface
