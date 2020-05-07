@@ -1262,6 +1262,11 @@ Duration ShippingSchedule::update(Game& game) {
 					}
 					++idx;
 				}
+				if (index_of_start >= 0 && index_of_end >= 0) {
+					assert(index_of_start != index_of_end);
+					assert(index_of_start > index_of_end);  // else it should have been picked up before
+					continue;  // give illegal A-B-A plans no chance
+				}
 				if (index_of_start >= 0 && index_of_end < 0) {
 					if (expedition >= 0 && expedition <= index_of_start) {
 						continue;
