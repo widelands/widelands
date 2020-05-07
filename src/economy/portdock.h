@@ -150,6 +150,7 @@ private:
 	std::list<ShippingItem> waiting_;
 	std::set<OPtr<Ship>> ships_coming_;
 	bool expedition_ready_;
+	bool expedition_cancelling_;
 
 	std::unique_ptr<ExpeditionBootstrap> expedition_bootstrap_;
 
