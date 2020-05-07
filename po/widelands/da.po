@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-04-22 20:03+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"PO-Revision-Date: 2020-05-05 08:59+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -906,7 +906,7 @@ msgstr "Hold"
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:208
 #, c-format
 msgid "It is not recommended to permit waterway lengths greater than %u"
-msgstr ""
+msgstr "Det anbefales ikke at tillade vandveje længere end %u"
 
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:60
 msgid "Create Map"
@@ -2833,19 +2833,19 @@ msgstr "Luk"
 
 #: ../../src/ui_basic/window.cc:168
 msgid "Minimize"
-msgstr ""
+msgstr "Minimer"
 
 #: ../../src/ui_basic/window.cc:168
 msgid "Restore"
-msgstr ""
+msgstr "Gendan"
 
 #: ../../src/ui_basic/window.cc:172
 msgid "Pin"
-msgstr ""
+msgstr "Fastgør"
 
 #: ../../src/ui_basic/window.cc:172
 msgid "Unpin"
-msgstr ""
+msgstr "Frigør"
 
 #: ../../src/ui_fsmenu/about.cc:31 ../../src/ui_fsmenu/main.cc:52
 msgid "About Widelands"
@@ -2901,7 +2901,7 @@ msgstr "Beskrivelse"
 #. * TRANSLATORS: A campaign difficulty
 #: ../../src/ui_fsmenu/campaigns.cc:53
 msgid "Default"
-msgstr ""
+msgstr "Standard"
 
 #: ../../src/ui_fsmenu/helpwindow.cc:41 ../../src/wui/helpwindow.cc:44
 #, c-format
@@ -3379,7 +3379,7 @@ msgstr "Overtag mus"
 
 #: ../../src/ui_fsmenu/options.cc:129
 msgid "Use system mouse cursor"
-msgstr ""
+msgstr "Brug systemets musemarkør"
 
 #: ../../src/ui_fsmenu/options.cc:139
 msgid "Maximum FPS:"
@@ -3983,7 +3983,7 @@ msgstr "Gem målindstillinger"
 #. * TRANSLATORS: Infinite number of wares or workers
 #: ../../src/wui/economy_options_window.cc:248
 msgid "∞"
-msgstr ""
+msgstr "∞"
 
 #: ../../src/wui/economy_options_window.cc:512
 msgid "The profile name cannot be empty"
@@ -4439,20 +4439,20 @@ msgstr "Holdpoint"
 #, c-format
 msgid "%d file:"
 msgid_plural "%d files:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d fil:"
+msgstr[1] "%d filer:"
 
 #. * TRANSLATORS: %1% = number of selected directories, %2% = number of
 #. selected files
 #: ../../src/wui/gamedetails.cc:112
 msgid "Selected %1% directory and %2%"
 msgid_plural "Selected %1% directories and %2%"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Valgt %1% mappe og %2%"
+msgstr[1] "Valgt %1% mapper og %2%"
 
 #: ../../src/wui/gamedetails.cc:132
 msgid "Directory Name:"
-msgstr ""
+msgstr "Mappenavn:"
 
 #: ../../src/wui/gamedetails.cc:140
 msgid "Error:"
