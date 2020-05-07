@@ -27,6 +27,9 @@
 #include "logic/addons.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
+#include "ui_basic/checkbox.h"
+#include "ui_basic/dropdown.h"
+#include "ui_basic/editbox.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/tabpanel.h"
@@ -54,7 +57,10 @@ struct RemoteAddOnRow : public UI::Panel {
 	~RemoteAddOnRow() override {
 	}
 	void layout() override;
+	bool upgradeable() const;
+	const AddOnInfo& info() const { return info_; }
 private:
+	AddOnInfo info_;
 	UI::Button install_;
 	UI::Button upgrade_;
 	UI::Button uninstall_;
@@ -77,13 +83,18 @@ protected:
 private:
 	UI::Textarea title_;
 	UI::TabPanel tabs_;
-	UI::Box installed_addons_wrapper_, browse_addons_wrapper_, installed_addons_box_, browse_addons_box_;
+	UI::Box installed_addons_wrapper_, browse_addons_wrapper_, installed_addons_box_, browse_addons_box_,
+			filter_settings_, filter_name_box_, filter_buttons_box_;
 	std::vector<InstalledAddOnRow*> installed_;
 	std::vector<RemoteAddOnRow*> browse_;
-	UI::Button ok_, refresh_;
+	UI::EditBox filter_name_;
+	UI::Dropdown<std::string> filter_category_;
+	UI::Checkbox filter_verified_;
+	UI::Button ok_, filter_apply_, filter_reset_, upgrade_all_, refresh_;
 
 	std::vector<AddOnInfo> remotes_;
 	void refresh_remotes();
+	bool matches_filter(const AddOnInfo&, bool local);
 
 };
 

@@ -41,21 +41,96 @@ AddOnsCtrl::AddOnsCtrl() : FullscreenMenuBase(),
 		browse_addons_wrapper_(&tabs_, 0, 0, UI::Box::Vertical),
 		installed_addons_box_(&installed_addons_wrapper_, 0, 0, UI::Box::Vertical, kHugeSize, kHugeSize),
 		browse_addons_box_(&browse_addons_wrapper_, 0, 0, UI::Box::Vertical, kHugeSize, kHugeSize),
+		filter_settings_(&tabs_, 0, 0, UI::Box::Vertical),
+		filter_name_box_(&filter_settings_, 0, 0, UI::Box::Horizontal),
+		filter_buttons_box_(&filter_settings_, 0, 0, UI::Box::Horizontal),
+		filter_name_(&filter_settings_, 0, 0, 100, UI::PanelStyle::kFsMenu),
+		filter_category_(&filter_settings_, "filter_cat", 0, 0, 100, 8, kRowButtonSize, _("Filter by category"),
+				UI::DropdownType::kTextual, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
+		filter_verified_(&filter_settings_, Vector2i(0, 0), _("Verified only"), _("Show only verified add-ons in the Browse tab")),
 		ok_(this, "ok", 0, 0, get_w() / 2, get_h() / 12, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
-		refresh_(this, "refresh", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary,
-				_("↺"), _("Refresh the list of add-ons available from the server")) {
+		filter_apply_(&filter_buttons_box_, "f_apply", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuPrimary, _("Apply")),
+		filter_reset_(&filter_buttons_box_, "f_reset", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, _("Reset")),
+		upgrade_all_(&filter_buttons_box_, "upgrade_all", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, _("Upgrade all"),
+				_("Upgrade all installed add-ons for which a newer version is available")),
+		refresh_(&filter_buttons_box_, "refresh", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary,
+				_("Refresh"), _("Refresh the list of add-ons available from the server")) {
 	installed_addons_wrapper_.set_scrolling(true);
 	browse_addons_wrapper_.set_scrolling(true);
 	installed_addons_wrapper_.add(&installed_addons_box_, UI::Box::Resizing::kExpandBoth);
 	browse_addons_wrapper_.add(&browse_addons_box_, UI::Box::Resizing::kExpandBoth);
 	tabs_.add("my", _("Installed"), &installed_addons_wrapper_);
 	tabs_.add("all", _("Browse"), &browse_addons_wrapper_);
+	tabs_.add("filter", _("Filter"), &filter_settings_);
+
+	filter_name_box_.add(new UI::Textarea(&filter_name_box_, _("Filter by text:"), UI::Align::kRight), UI::Box::Resizing::kFullSize);
+	filter_name_box_.add(&filter_name_, UI::Box::Resizing::kExpandBoth);
+
+	filter_buttons_box_.add(&filter_apply_, UI::Box::Resizing::kExpandBoth);
+	filter_buttons_box_.add_space(2 * kRowButtonSpacing);
+	filter_buttons_box_.add(&filter_reset_, UI::Box::Resizing::kExpandBoth);
+	filter_buttons_box_.add_space(2 * kRowButtonSpacing);
+	filter_buttons_box_.add(&upgrade_all_, UI::Box::Resizing::kExpandBoth);
+	filter_buttons_box_.add_space(2 * kRowButtonSpacing);
+	filter_buttons_box_.add(&refresh_, UI::Box::Resizing::kExpandBoth);
+
+	filter_settings_.add(&filter_name_box_, UI::Box::Resizing::kFullSize);
+	filter_settings_.add_space(2 * kRowButtonSpacing);
+	filter_settings_.add(&filter_category_, UI::Box::Resizing::kFullSize);
+	filter_settings_.add_space(2 * kRowButtonSpacing);
+	filter_settings_.add(&filter_verified_, UI::Box::Resizing::kFullSize);
+	filter_settings_.add_space(2 * kRowButtonSpacing);
+	filter_settings_.add(&filter_buttons_box_, UI::Box::Resizing::kFullSize);
+
+	filter_verified_.set_state(true);
+	filter_category_.add(_("Any"), "", nullptr, true);
+	for (const auto& pair : kAddOnCategories) {
+		filter_category_.add(pair.second.descname(), pair.first);
+	}
 
 	ok_.sigclicked.connect([this]() {
 		clicked_ok();
 	});
 	refresh_.sigclicked.connect([this]() {
 		refresh_remotes();
+	});
+	upgrade_all_.sigclicked.connect([this]() {
+		std::vector<AddOnInfo> upgrades;
+		bool all_verified = true;
+		for (const RemoteAddOnRow* r : browse_) {
+			if (r->upgradeable()) {
+				upgrades.push_back(r->info());
+				all_verified &= r->info().verified;
+			}
+		}
+		assert(!upgrades.empty());
+		if (!all_verified || !(SDL_GetModState() & KMOD_CTRL)) {
+			std::string text = (boost::format(ngettext("Are you certain that you want to upgrade this %u add-on?\n",
+					"Are you certain that you want to upgrade these %u add-ons?\n", upgrades.size())) % upgrades.size()).str();
+			for (const AddOnInfo& i : upgrades) {
+				text += (boost::format(_("\n· %1$s (%2$s) by %3$s"))
+						% i.descname % (i.verified ? _("verified") : _("NOT VERIFIED")) % i.author).str();
+			}
+			UI::WLMessageBox w(this, _("Upgrade All"), text, UI::WLMessageBox::MBoxType::kOkCancel);
+			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) { return; }
+		}
+
+		// TODO(Nordfriese): Download all requested add-ons from the server, then replace
+		// each of ~/.widelands/addons/xyz.wad with the appropriate fetched ZIP-file,
+		// and update the entry in g_addons
+		log("NOCOM: Upgrading all not yet implemented\n");
+
+		rebuild();
+	});
+	filter_apply_.sigclicked.connect([this]() {
+		rebuild();
+		tabs_.activate(1);  // back to Browse
+	});
+	filter_reset_.sigclicked.connect([this]() {
+		filter_name_.set_text("");
+		filter_category_.select("");
+		filter_verified_.set_state(true);
+		rebuild();
 	});
 
 	// prevent assert failures
@@ -97,6 +172,25 @@ void AddOnsCtrl::refresh_remotes() {
 	rebuild();
 }
 
+bool AddOnsCtrl::matches_filter(const AddOnInfo& info, bool local) {
+	if (!filter_category_.get_selected().empty() && filter_category_.get_selected() != info.category->name) {
+		return false;
+	}
+	if (!local && filter_verified_.get_state() && !info.verified) {
+		return false;
+	}
+
+	if (filter_name_.text().empty()) {
+		return true;
+	}
+	for (const std::string& text : {info.descname, info.author, info.internal_name, info.description}) {
+		if (text.find(filter_name_.text()) != std::string::npos) {
+			return true;
+		}
+	}
+	return false;
+}
+
 void AddOnsCtrl::rebuild() {
 	installed_addons_box_.free_children();
 	browse_addons_box_.free_children();
@@ -110,6 +204,9 @@ void AddOnsCtrl::rebuild() {
 	const size_t nr_installed = g_addons.size();
 	size_t index = 0;
 	for (const auto& pair : g_addons) {
+		if (!matches_filter(pair.first, true)) {
+			continue;
+		}
 		if (index > 0) {
 			installed_addons_box_.add_space(kRowButtonSize);
 		}
@@ -118,7 +215,11 @@ void AddOnsCtrl::rebuild() {
 		++index;
 	}
 	index = 0;
+	bool has_upgrades = false;
 	for (const AddOnInfo& a : remotes_) {
+		if (!matches_filter(a, false)) {
+			continue;
+		}
 		if (0 < index++) {
 			browse_addons_box_.add_space(kRowButtonSize);
 		}
@@ -131,8 +232,10 @@ void AddOnsCtrl::rebuild() {
 		}
 		RemoteAddOnRow* r = new RemoteAddOnRow(&browse_addons_box_, this, a, installed);
 		browse_addons_box_.add(r, UI::Box::Resizing::kFullSize);
+		has_upgrades |= r->upgradeable();
 	}
 
+	upgrade_all_.set_enabled(has_upgrades);
 	layout();
 }
 
@@ -144,7 +247,6 @@ void AddOnsCtrl::layout() {
 	ok_.set_pos(Vector2i(get_w() / 4, get_h() * 14 / 16));
 	tabs_.set_size(get_w() * 2 / 3, get_h() * 2 / 3);
 	tabs_.set_pos(Vector2i(get_w() / 6, get_h() / 6));
-	refresh_.set_pos(Vector2i(tabs_.get_x() + tabs_.get_w(), tabs_.get_y() - refresh_.get_h()));
 	installed_addons_wrapper_.set_max_size(tabs_.get_w(), tabs_.get_h() - kRowButtonSize);
 	browse_addons_wrapper_.set_max_size(tabs_.get_w(), tabs_.get_h() - kRowButtonSize);
 }
@@ -261,6 +363,7 @@ void InstalledAddOnRow::layout() {
 
 RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo& info, uint32_t installed)
 	: UI::Panel(parent, 0, 0, 3 * kRowButtonSize, 3 * kRowButtonSize),
+	info_(info),
 	install_(this, "install", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_gr->images().get("images/ui_basic/continue.png"), _("Install")),
 	upgrade_(this, "upgrade", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_gr->images().get("images/ui_basic/different.png"), _("Upgrade")),
 	uninstall_(this, "uninstall", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_gr->images().get("images/wui/menus/exit.png"), _("Uninstall")),
@@ -295,9 +398,13 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo&
 				).str(), UI::WLMessageBox::MBoxType::kOkCancel);
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) { return; }
 		}
+
 		// TODO(Nordfriese): Download this add-on from the server and save
-		// the fetched ZIP-file as ~/.widelands/addons/my_new_addon.wad
+		// the fetched ZIP-file as ~/.widelands/addons/my_new_addon.wad,
+		// and update the entry in g_addons
 		log("NOCOM: Installing not yet implemented\n");
+
+		ctrl->rebuild();
 	});
 	upgrade_.sigclicked.connect([this, ctrl, info, installed]() {
 		if (!info.verified || !(SDL_GetModState() & KMOD_CTRL)) {
@@ -320,9 +427,13 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo&
 				).str(), UI::WLMessageBox::MBoxType::kOkCancel);
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) { return; }
 		}
+
 		// TODO(Nordfriese): Download this add-on from the server, then replace
-		// ~/.widelands/addons/my_new_addon.wad with the fetched ZIP-file
+		// ~/.widelands/addons/my_new_addon.wad with the fetched ZIP-file,
+		// and update the entry in g_addons
 		log("NOCOM: Upgrading not yet implemented\n");
+
+		ctrl->rebuild();
 	});
 	if (installed == kNotInstalled) {
 		uninstall_.set_enabled(false);
@@ -359,4 +470,8 @@ void RemoteAddOnRow::layout() {
 	verified_.set_pos(Vector2i(get_w() - kRowButtonSize * 2 - kRowButtonSpacing, 2 * kRowButtonSize));
 	txt_.set_size(get_w() - 2 * kRowButtonSize - 2 * kRowButtonSpacing, 3 * kRowButtonSize);
 	txt_.set_pos(Vector2i(0, 0));
+}
+
+bool RemoteAddOnRow::upgradeable() const {
+	return upgrade_.enabled();
 }

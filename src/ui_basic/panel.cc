@@ -308,7 +308,7 @@ void Panel::set_desired_size(int w, int h) {
 		return;
 	}
 
-	// TODO(Nordfriese): I uncommented these asserts because the Boxes used in the
+	// TODO(Nordfriese): I commented these asserts out because the Boxes used in the
 	// add-ons selection screen can get very large. Might there be a safer way?
 	// assert(w < 3000);
 	// assert(h < 3000);
