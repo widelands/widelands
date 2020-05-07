@@ -77,6 +77,9 @@ public:
 
 	void rebuild();
 
+	void install(const std::string&);
+	void upgrade(const std::string&);
+
 protected:
 	void layout() override;
 
@@ -94,8 +97,9 @@ private:
 
 	std::vector<AddOnInfo> remotes_;
 	void refresh_remotes();
-	bool matches_filter(const AddOnInfo&, bool local);
 
+	bool matches_filter(const AddOnInfo&, bool local);
+	std::string download(const std::string&);
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_H
