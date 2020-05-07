@@ -22,6 +22,9 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "io/filesystem/layered_filesystem.h"
+#include "logic/addons.h"
+#include "logic/filesystem_constants.h"
 #include "logic/game_data_error.h"
 #include "scripting/lua_interface.h"
 
@@ -50,6 +53,25 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table) {
 			}
 			initializations.push_back(Initialization(script_path, script_table->get_string("descname"),
 			                                         script_table->get_string("tooltip"), tags));
+		}
+		for (const auto& pair : g_addons) {
+			if (pair.first.category->name == "starting_condition") {
+				const std::string script_path = kAddOnDir + g_fs->file_separator() + pair.first.internal_name + g_fs->file_separator() + name + ".lua";
+				if (!g_fs->file_exists(script_path)) {
+					continue;
+				}
+				std::unique_ptr<LuaTable> script_table = lua.run_script(script_path);
+				script_table->do_not_warn_about_unaccessed_keys();
+				std::set<std::string> tags;
+				if (script_table->has_key("map_tags")) {
+					std::unique_ptr<LuaTable> t = script_table->get_table("map_tags");
+					for (int key : t->keys<int>()) {
+						tags.insert(t->get_string(key));
+					}
+				}
+				initializations.push_back(Initialization(script_path, script_table->get_string("descname"),
+					                                     script_table->get_string("tooltip"), tags));
+			}
 		}
 	} catch (const WException& e) {
 		throw Widelands::GameDataError(

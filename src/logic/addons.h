@@ -33,6 +33,8 @@ struct AddOnCategory {
 	bool can_disable_addons;
 };
 
+constexpr uint32_t kNotInstalled = 0;
+
 struct AddOnInfo {
 	std::string internal_name;          // "cool_feature.wad"
 	std::string descname;               // "Cool Feature"
@@ -40,7 +42,7 @@ struct AddOnInfo {
 	std::string author;                 // "The Widelands Bunnybot"
 	uint32_t version;
 	const AddOnCategory* category;
-	std::vector<std::string> requires;  // (unused, not yet implemented)
+	std::vector<std::string> requires;  // TODO(Nordfriese): unused, not yet implemented
 	bool verified;
 };
 

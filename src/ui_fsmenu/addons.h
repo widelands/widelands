@@ -35,8 +35,6 @@
 
 class AddOnsCtrl;
 
-constexpr uint32_t kNotInstalled = 0;
-
 struct InstalledAddOnRow : public UI::Panel {
 	InstalledAddOnRow(Panel*, AddOnsCtrl*, const AddOnInfo&, bool enabled, bool is_first, bool is_last);
 	~InstalledAddOnRow() override {
@@ -46,7 +44,7 @@ private:
 	UI::Button move_up_;
 	UI::Button move_down_;
 	UI::Button uninstall_;
-	UI::Button* toggle_enabled_;
+	std::unique_ptr<UI::Button> toggle_enabled_;
 	UI::Icon category_;
 	UI::Textarea version_;
 	UI::MultilineTextarea txt_;
@@ -79,7 +77,7 @@ protected:
 private:
 	UI::Textarea title_;
 	UI::TabPanel tabs_;
-	UI::Box installed_addons_box_, browse_addons_box_;
+	UI::Box installed_addons_wrapper_, browse_addons_wrapper_, installed_addons_box_, browse_addons_box_;
 	std::vector<InstalledAddOnRow*> installed_;
 	std::vector<RemoteAddOnRow*> browse_;
 	UI::Button ok_, refresh_;

@@ -33,15 +33,19 @@ constexpr int16_t kRowButtonSpacing = 4;
 AddOnsCtrl::AddOnsCtrl() : FullscreenMenuBase(),
 		title_(this, 0, 0, get_w(), get_h() / 12, _("Add-Ons"), UI::Align::kCenter, g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
 		tabs_(this, UI::TabPanelStyle::kFsMenu),
-		installed_addons_box_(&tabs_, 0, 0, UI::Box::Vertical),
-		browse_addons_box_(&tabs_, 0, 0, UI::Box::Vertical),
+		installed_addons_wrapper_(&tabs_, 0, 0, UI::Box::Vertical),
+		browse_addons_wrapper_(&tabs_, 0, 0, UI::Box::Vertical),
+		installed_addons_box_(&installed_addons_wrapper_, 0, 0, UI::Box::Vertical),
+		browse_addons_box_(&browse_addons_wrapper_, 0, 0, UI::Box::Vertical),
 		ok_(this, "ok", 0, 0, get_w() / 2, get_h() / 12, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
 		refresh_(this, "refresh", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary,
 				_("↺"), _("Refresh the list of add-ons available from the server")) {
-	installed_addons_box_.set_scrolling(true);
-	browse_addons_box_.set_scrolling(true);
-	tabs_.add("my", _("Installed"), &installed_addons_box_);
-	tabs_.add("all", _("Browse"), &browse_addons_box_);
+	installed_addons_wrapper_.set_scrolling(true);
+	browse_addons_wrapper_.set_scrolling(true);
+	installed_addons_wrapper_.add(&installed_addons_box_, UI::Box::Resizing::kExpandBoth);
+	browse_addons_wrapper_.add(&browse_addons_box_, UI::Box::Resizing::kExpandBoth);
+	tabs_.add("my", _("Installed"), &installed_addons_wrapper_);
+	tabs_.add("all", _("Browse"), &browse_addons_wrapper_);
 	ok_.sigclicked.connect([this]() {
 		clicked_ok();
 	});
@@ -94,12 +98,18 @@ void AddOnsCtrl::rebuild() {
 	const size_t nr_installed = g_addons.size();
 	size_t index = 0;
 	for (const auto& pair : g_addons) {
+		if (index > 0) {
+			installed_addons_box_.add_space(kRowButtonSize);
+		}
 		InstalledAddOnRow* i = new InstalledAddOnRow(&installed_addons_box_, this, pair.first, pair.second, index == 0, index + 1 == nr_installed);
 		installed_addons_box_.add(i, UI::Box::Resizing::kFullSize);
-		installed_addons_box_.add_space(kRowButtonSize);
 		++index;
 	}
+	index = 0;
 	for (const AddOnInfo& a : remotes_) {
+		if (0 < index++) {
+			browse_addons_box_.add_space(kRowButtonSize);
+		}
 		uint32_t installed = kNotInstalled;
 		for (const auto& pair : g_addons) {
 			if (pair.first.internal_name == a.internal_name) {
@@ -109,7 +119,6 @@ void AddOnsCtrl::rebuild() {
 		}
 		RemoteAddOnRow* r = new RemoteAddOnRow(&browse_addons_box_, this, a, installed);
 		browse_addons_box_.add(r, UI::Box::Resizing::kFullSize);
-		browse_addons_box_.add_space(kRowButtonSize);
 	}
 
 	layout();
@@ -124,6 +133,8 @@ void AddOnsCtrl::layout() {
 	tabs_.set_size(get_w() * 2 / 3, get_h() * 2 / 3);
 	tabs_.set_pos(Vector2i(get_w() / 6, get_h() / 6));
 	refresh_.set_pos(Vector2i(tabs_.get_x() + tabs_.get_w(), tabs_.get_y() - refresh_.get_h()));
+	installed_addons_wrapper_.set_max_size(tabs_.get_w(), tabs_.get_h() - kRowButtonSize);
+	browse_addons_wrapper_.set_max_size(tabs_.get_w(), tabs_.get_h() - kRowButtonSize);
 }
 
 static void uninstall(AddOnsCtrl* ctrl, const AddOnInfo& info) {
