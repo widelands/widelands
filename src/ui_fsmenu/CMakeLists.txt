@@ -154,6 +154,7 @@ wl_library(ui_fsmenu_maploading
     graphic_text_layout
     io_filesystem
     io_profile
+    logic_addons
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings

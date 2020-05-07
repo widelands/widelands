@@ -30,13 +30,17 @@
 constexpr int16_t kRowButtonSize = 32;
 constexpr int16_t kRowButtonSpacing = 4;
 
+// UI::Box by defaults limits its size to the window resolution. We use scrollbars,
+// so we can and need to allow somewhat larger dimensions.
+constexpr int32_t kHugeSize = std::numeric_limits<int32_t>::max() / 2;
+
 AddOnsCtrl::AddOnsCtrl() : FullscreenMenuBase(),
 		title_(this, 0, 0, get_w(), get_h() / 12, _("Add-Ons"), UI::Align::kCenter, g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
 		tabs_(this, UI::TabPanelStyle::kFsMenu),
 		installed_addons_wrapper_(&tabs_, 0, 0, UI::Box::Vertical),
 		browse_addons_wrapper_(&tabs_, 0, 0, UI::Box::Vertical),
-		installed_addons_box_(&installed_addons_wrapper_, 0, 0, UI::Box::Vertical),
-		browse_addons_box_(&browse_addons_wrapper_, 0, 0, UI::Box::Vertical),
+		installed_addons_box_(&installed_addons_wrapper_, 0, 0, UI::Box::Vertical, kHugeSize, kHugeSize),
+		browse_addons_box_(&browse_addons_wrapper_, 0, 0, UI::Box::Vertical, kHugeSize, kHugeSize),
 		ok_(this, "ok", 0, 0, get_w() / 2, get_h() / 12, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
 		refresh_(this, "refresh", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary,
 				_("↺"), _("Refresh the list of add-ons available from the server")) {
@@ -46,12 +50,20 @@ AddOnsCtrl::AddOnsCtrl() : FullscreenMenuBase(),
 	browse_addons_wrapper_.add(&browse_addons_box_, UI::Box::Resizing::kExpandBoth);
 	tabs_.add("my", _("Installed"), &installed_addons_wrapper_);
 	tabs_.add("all", _("Browse"), &browse_addons_wrapper_);
+
 	ok_.sigclicked.connect([this]() {
 		clicked_ok();
 	});
 	refresh_.sigclicked.connect([this]() {
 		refresh_remotes();
 	});
+
+	// prevent assert failures
+	installed_addons_box_.set_size(100, 100);
+	browse_addons_box_.set_size(100, 100);
+	installed_addons_wrapper_.set_size(100, 100);
+	browse_addons_wrapper_.set_size(100, 100);
+
 	refresh_remotes();
 }
 

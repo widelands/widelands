@@ -25,6 +25,7 @@
 #include "graphic/graphic.h"
 #include "io/filesystem/filesystem.h"
 #include "io/profile.h"
+#include "logic/addons.h"
 #include "logic/filesystem_constants.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "scripting/lua_interface.h"
@@ -55,7 +56,14 @@ Campaigns::Campaigns() {
 
 	// Now load the campaign info
 	LuaInterface lua;
-	std::unique_ptr<LuaTable> table(lua.run_script("campaigns/campaigns.lua"));
+	std::vector<std::string> campaign_config_scripts = {"campaigns/campaigns.lua"};
+	for (const auto& pair : g_addons) {
+		if (pair.first.category->name == "campaign") {
+			campaign_config_scripts.push_back(kAddOnDir + g_fs->file_separator() + pair.first.internal_name + g_fs->file_separator() + "campaigns.lua");
+		}
+	}
+	for (const std::string& script : campaign_config_scripts) {
+	std::unique_ptr<LuaTable> table(lua.run_script(script));
 
 	// Read difficulty images
 	std::unique_ptr<LuaTable> difficulties_table(table->get_table("difficulties"));
@@ -128,6 +136,7 @@ Campaigns::Campaigns() {
 		}
 
 		campaigns_.push_back(std::unique_ptr<CampaignData>(std::move(campaign_data)));
+	}
 	}
 
 	// Finally, calculate the visibility
