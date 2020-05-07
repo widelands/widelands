@@ -64,6 +64,7 @@ AddOnsCtrl::AddOnsCtrl() : FullscreenMenuBase(),
 	tabs_.add("filter", _("Filter"), &filter_settings_);
 
 	filter_name_box_.add(new UI::Textarea(&filter_name_box_, _("Filter by text:"), UI::Align::kRight), UI::Box::Resizing::kFullSize);
+	filter_name_box_.add_space(kRowButtonSpacing);
 	filter_name_box_.add(&filter_name_, UI::Box::Resizing::kExpandBoth);
 
 	filter_buttons_box_.add(&filter_apply_, UI::Box::Resizing::kExpandBoth);
@@ -90,12 +91,47 @@ AddOnsCtrl::AddOnsCtrl() : FullscreenMenuBase(),
 		}
 	}
 
+	filter_apply_.set_enabled(false);
+	filter_reset_.set_enabled(false);
+	filter_name_.changed.connect([this]() {
+		filter_apply_.set_enabled(true);
+		filter_reset_.set_enabled(true);
+	});
+	filter_category_.selected.connect([this]() {
+		filter_apply_.set_enabled(true);
+		filter_reset_.set_enabled(true);
+	});
+	filter_verified_.clickedto.connect([this](bool) {
+		filter_apply_.set_enabled(true);
+		filter_reset_.set_enabled(true);
+	});
+
 	ok_.sigclicked.connect([this]() {
 		clicked_ok();
 	});
 	refresh_.sigclicked.connect([this]() {
 		refresh_remotes();
 		tabs_.activate(1);
+	});
+
+	filter_name_.ok.connect([this]() {
+		rebuild();
+		filter_apply_.set_enabled(false);
+		filter_reset_.set_enabled(true);
+	});
+	filter_apply_.sigclicked.connect([this]() {
+		rebuild();
+		filter_apply_.set_enabled(false);
+		filter_reset_.set_enabled(true);
+	});
+
+	filter_reset_.sigclicked.connect([this]() {
+		filter_name_.set_text("");
+		filter_category_.select("");
+		filter_verified_.set_state(true);
+		rebuild();
+		filter_apply_.set_enabled(false);
+		filter_reset_.set_enabled(false);
 	});
 	upgrade_all_.sigclicked.connect([this]() {
 		std::vector<AddOnInfo> upgrades;
@@ -120,15 +156,6 @@ AddOnsCtrl::AddOnsCtrl() : FullscreenMenuBase(),
 		for (const AddOnInfo& i : upgrades) {
 			upgrade(i.internal_name);
 		}
-		rebuild();
-	});
-	filter_apply_.sigclicked.connect([this]() {
-		rebuild();
-	});
-	filter_reset_.sigclicked.connect([this]() {
-		filter_name_.set_text("");
-		filter_category_.select("");
-		filter_verified_.set_state(true);
 		rebuild();
 	});
 
@@ -361,7 +388,7 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddO
 	toggle_enabled_(info.category->can_disable_addons ? new UI::Button(this, "on-off", 0, 0, 24, 24,
 			UI::ButtonStyle::kFsMenuSecondary, g_gr->images().get(
 					enabled ? "images/ui_basic/checkbox_checked.png" : "images/ui_basic/checkbox_empty.png"),
-					enabled ? _("Disable") : _("Enable")) : nullptr),
+					enabled ? _("Disable") : _("Enable"), UI::Button::VisualState::kFlat) : nullptr),
 	category_(this, g_gr->images().get(info.category->icon)),
 	version_(this, 0, 0, 0, 0, std::to_string(static_cast<int>(info.version)), UI::Align::kCenter, g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
 	txt_(this, 0, 0, 24, 24, UI::PanelStyle::kFsMenu, (boost::format("<rt>%s<p>%s</p><p>%s</p></rt>")
@@ -516,7 +543,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo&
 	version_.set_handle_mouse(true);
 	version_.set_tooltip(_("Version"));
 	verified_.set_handle_mouse(true);
-	verified_.set_tooltip(info.internal_name.empty() ? "" : info.verified ? _("Verified by the Widelands Development Team") :
+	verified_.set_tooltip(info.internal_name.empty() ? _("Error") : info.verified ? _("Verified by the Widelands Development Team") :
 		_("This add-on was not checked by the Widelands Development Team yet. We cannot guarantee that it does not contain harmful or offensive content."));
 	layout();
 }
