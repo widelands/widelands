@@ -85,7 +85,9 @@ AddOnsCtrl::AddOnsCtrl() : FullscreenMenuBase(),
 	filter_verified_.set_state(true);
 	filter_category_.add(_("Any"), "", nullptr, true);
 	for (const auto& pair : kAddOnCategories) {
-		filter_category_.add(pair.second.descname(), pair.first);
+		if (!pair.first.empty()) {
+			filter_category_.add(pair.second.descname(), pair.first);
+		}
 	}
 
 	ok_.sigclicked.connect([this]() {
@@ -165,7 +167,7 @@ void AddOnsCtrl::refresh_remotes() {
 				% e.what()).str(),
 			/** TRANSLATORS: This will be inserted into the string "Server Connection Error \n by %s" */
 			_("a networking bug"),
-			1, &kAddOnCategories.at("maps"), {}, false
+			0, &kAddOnCategories.at(""), {}, false
 		});
 	}
 	rebuild();
@@ -438,7 +440,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo&
 	: UI::Panel(parent, 0, 0, 3 * kRowButtonSize, 3 * kRowButtonSize),
 	info_(info),
 	install_(this, "install", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_gr->images().get("images/ui_basic/continue.png"), _("Install")),
-	upgrade_(this, "upgrade", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_gr->images().get("images/ui_basic/different.png"), _("Upgrade")),
+	upgrade_(this, "upgrade", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_gr->images().get("images/wui/buildings/menu_up_train.png"), _("Upgrade")),
 	uninstall_(this, "uninstall", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_gr->images().get("images/wui/menus/exit.png"), _("Uninstall")),
 	category_(this, g_gr->images().get(info.category->icon)),
 	verified_(this, g_gr->images().get(info.verified ? "images/ui_basic/list_selected.png" : "images/ui_basic/stop.png")),
@@ -514,7 +516,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo&
 	version_.set_handle_mouse(true);
 	version_.set_tooltip(_("Version"));
 	verified_.set_handle_mouse(true);
-	verified_.set_tooltip(info.verified ? _("Verified by the Widelands Development Team") :
+	verified_.set_tooltip(info.internal_name.empty() ? "" : info.verified ? _("Verified by the Widelands Development Team") :
 		_("This add-on was not checked by the Widelands Development Team yet. We cannot guarantee that it does not contain harmful or offensive content."));
 	layout();
 }

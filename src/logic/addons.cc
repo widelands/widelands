@@ -27,6 +27,7 @@
 #include "logic/filesystem_constants.h"
 
 const std::map<std::string, AddOnCategory> kAddOnCategories = {
+	{"", AddOnCategory {"", []() { return _("Error"); }, "images/ui_basic/stop.png", false}},
 	{"tribes", AddOnCategory {"tribes", []() { return _("Tribes"); }, "images/wui/stats/menu_tab_wares_warehouse.png", true}},
 	{"world", AddOnCategory {"world", []() { return _("World"); }, "images/wui/menus/toggle_immovables.png", true}},
 	{"script", AddOnCategory {"script", []() { return _("Script"); }, "images/logos/WL-Editor-32.png", true}},
