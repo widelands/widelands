@@ -105,9 +105,9 @@ void FullscreenMenuLaunchGame::add_all_widgets() {
 	main_box_.add_space(10 * padding_);
 
 	content_box_.add_space(10 * padding_);
-	content_box_.add(&individual_content_box, UI::Box::Resizing::kExpandBoth);
+	content_box_.add(&individual_content_box, UI::Box::Resizing::kFillSpace);
 	content_box_.add_inf_space();
-	content_box_.add(&map_box_, UI::Box::Resizing::kFillSpace);
+	content_box_.add(&map_box_, UI::Box::Resizing::kFullSize);
 	content_box_.add_space(10 * padding_);
 
 	map_box_.add(&map_details, UI::Box::Resizing::kFullSize);
@@ -118,6 +118,7 @@ void FullscreenMenuLaunchGame::add_all_widgets() {
 	map_box_.add(&win_condition_dropdown_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	map_box_.add_inf_space();
 	map_box_.add(&ok_, UI::Box::Resizing::kAlign, UI::Align::kBottom);
+	map_box_.add_space(2 * padding_);
 	map_box_.add(&back_, UI::Box::Resizing::kAlign, UI::Align::kBottom);
 }
 
@@ -134,17 +135,17 @@ void FullscreenMenuLaunchGame::layout() {
 	title_.set_font_scale(scale_factor());
 	map_details.set_font_scale(scale_factor());
 	win_condition_type.set_font_scale(scale_factor());
-	
+
 	//	main_box_.set_desired_size(get_w(), get_h());
 	main_box_.set_size(get_w(), get_h());
 	log("main box: w=%d, h=%d, x=%d\n", main_box_.get_w(), main_box_.get_h(), main_box_.get_x());
 	log("content box: w=%d, h=%d, x=%d\n", content_box_.get_w(), content_box_.get_h(),
 	    content_box_.get_x());
-	individual_content_box.set_desired_size(3 / 4 * content_box_.get_w(), content_box_.get_h());
+	//	individual_content_box.set_desired_size(3 / 4 * content_box_.get_w(), content_box_.get_h());
 	log("individual_content_box: w=%d, h=%d, x=%d\n", individual_content_box.get_w(),
 	    individual_content_box.get_h(), individual_content_box.get_x());
 
-	map_box_.set_desired_size(1 / 4 * content_box_.get_w(), content_box_.get_h());
+	//	map_box_.set_desired_size(1 / 4 * content_box_.get_w(), content_box_.get_h());
 	//	map_box_.set_desired_size(get_w() / 4, content_box_.get_h());
 	log("map box: w=%d, h=%d, x=%d\n", map_box_.get_w(), map_box_.get_h(), map_box_.get_x());
 	// map_.set_desired_size(map_box_.get_w(), 0);
