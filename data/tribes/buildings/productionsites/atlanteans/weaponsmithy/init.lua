@@ -65,7 +65,6 @@ tribes:new_productionsite_type {
             "call=produce_trident_steel",
             "call=produce_trident_double",
             "call=produce_trident_heavy_double",
-            "return=no_stats"
          }
       },
       produce_trident_light = {

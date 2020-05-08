@@ -62,7 +62,6 @@ tribes:new_productionsite_type {
             "call=smelt_iron",
             "call=smelt_gold",
             "call=smelt_iron_2",
-            "return=no_stats"
          }
       },
       -- 2 identical programs for iron to prevent unnecessary skipping penalty

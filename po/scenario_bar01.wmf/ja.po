@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-15 14:44+0000\n"
-"PO-Revision-Date: 2020-04-12 17:32+0000\n"
+"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"PO-Revision-Date: 2020-04-23 19:21+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -74,32 +74,32 @@ msgid ""
 msgstr "そのためには、まず東の山の斜面 (山裾の草地ではダメです) に旗を立てて道をつなぎましょう。次に山の斜面に立てた旗をクリックして、地質学者を派遣しましょう。山にある旗に地質学者を派遣した場合は鉱石を探してくれます。それ以外の場所ならば彼らは水を探します。後は彼らが見つけてくれた資源に合わせて炭鉱や鉄鉱を建設しましょう。"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
-msgid "a bit of coal"
-msgstr "少量の石炭"
+msgid "some coal"
+msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "a lot of coal"
 msgstr "大量の石炭"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:46
-msgid "a bit of iron"
-msgstr "少量の鉄"
+msgid "some iron"
+msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:47
 msgid "a lot of iron"
 msgstr "大量の鉄"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:48
-msgid "a bit of gold"
-msgstr "少量の金"
+msgid "some gold"
+msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:49
 msgid "a lot of gold"
 msgstr "大量の金"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:50
-msgid "a bit of granite"
-msgstr "少量の花崗岩"
+msgid "some granite"
+msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:51
 msgid "a lot of granite"

@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-15 14:44+0000\n"
-"PO-Revision-Date: 2020-04-12 17:32+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"PO-Revision-Date: 2020-04-23 19:25+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -82,7 +82,7 @@ msgid ""
 msgstr "Platziere dazu eine Flagge auf dem Berg im Osten (nicht auf der Bergwiese). Wenn du auf die neue Flagge klickst, kannst du dort Geologen hinschicken. Da sich die Flagge auf einem Berg befindet, werden die Geologen nach Erzen suchen; ansonsten würden sie nach Wasser suchen. Baue anschließend eine Mine für beide Rohstofftypen, die gefunden werden. Wähle dabei die richtige Mine:"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
-msgid "a bit of coal"
+msgid "some coal"
 msgstr "wenig Kohle"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:45
@@ -90,7 +90,7 @@ msgid "a lot of coal"
 msgstr "viel Kohle"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:46
-msgid "a bit of iron"
+msgid "some iron"
 msgstr "wenig Eisen"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:47
@@ -98,7 +98,7 @@ msgid "a lot of iron"
 msgstr "viel Eisen"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:48
-msgid "a bit of gold"
+msgid "some gold"
 msgstr "wenig Gold"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:49
@@ -106,7 +106,7 @@ msgid "a lot of gold"
 msgstr "viel Gold"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:50
-msgid "a bit of granite"
+msgid "some granite"
 msgstr "wenig Stein"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:51

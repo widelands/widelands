@@ -77,8 +77,9 @@ tribes:new_productionsite_type {
          descname = _"working",
          actions = {
             "call=produce_bread_paddle",
-            "call=produce_felling_ax",
+            -- firetongs before felling ax to make poor hamlet work without dismantle
             "call=produce_fire_tongs",
+            "call=produce_felling_ax",
             "call=produce_fishing_rod",
             "call=produce_hammer",
             "call=produce_hunting_spear",
@@ -86,7 +87,6 @@ tribes:new_productionsite_type {
             "call=produce_pick",
             "call=produce_scythe",
             "call=produce_shovel",
-            "return=no_stats"
          }
       },
       produce_bread_paddle = {

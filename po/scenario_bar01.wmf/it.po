@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-15 14:44+0000\n"
-"PO-Revision-Date: 2020-04-12 17:32+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"PO-Revision-Date: 2020-04-30 19:53+0000\n"
+"Last-Translator: Filippo Montano\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -81,32 +81,32 @@ msgid ""
 msgstr "Per fare ciò, pianta una bandiera sul fianco sinistro della montagna (ma sul terreno montuoso, non sul prato di montagna). Quando clicchi sulla nuova bandiera, puoi inviare geologi in quel punto. Poiché la bandiera è su una montagna, i geologi cercheranno minerali; altrimenti, cercherebbero acqua. Poi edifica una miniera per entrambi i tipi di risorse che troverai, scegliendo la miniera adatta:"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
-msgid "a bit of coal"
-msgstr "un po' di carbone"
+msgid "some coal"
+msgstr "del carbone"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "a lot of coal"
 msgstr "molto carbone"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:46
-msgid "a bit of iron"
-msgstr "un po' di ferro"
+msgid "some iron"
+msgstr "del ferro"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:47
 msgid "a lot of iron"
 msgstr "molto ferro"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:48
-msgid "a bit of gold"
-msgstr "un po' di oro"
+msgid "some gold"
+msgstr "dell'oro"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:49
 msgid "a lot of gold"
 msgstr "molto oro"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:50
-msgid "a bit of granite"
-msgstr "un po' di granito"
+msgid "some granite"
+msgstr "del granito"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:51
 msgid "a lot of granite"

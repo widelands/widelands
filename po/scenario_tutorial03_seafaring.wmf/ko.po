@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-15 14:44+0000\n"
-"PO-Revision-Date: 2020-04-12 17:33+0000\n"
+"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"PO-Revision-Date: 2020-04-23 19:22+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -154,16 +154,16 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:76
 msgid ""
-"Ships are constructed in a shipyard by a shipwright. We have to build one "
-"somewhere close to the shore."
-msgstr "선박은 조선소에서 조선공에 의해 건조됩니다. 우리는 조선소 하나를 해안 가까운 어딘가에 건조해야 합니다."
+"Ships are constructed at the coastline near a shipyard by a shipwright. We "
+"have to build one somewhere close to the shore."
+msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:82
 msgid "Build a shipyard"
 msgstr "조선소를 건설하십시오"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:85
-msgid "Ships are produced in a shipyard. It is a medium building."
+msgid "Ships are produced by a shipyard. It is a medium building."
 msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:86
