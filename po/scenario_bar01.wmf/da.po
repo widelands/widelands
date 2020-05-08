@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-05-04 12:59+0000\n"
+"PO-Revision-Date: 2020-05-05 08:59+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -75,7 +75,7 @@ msgstr "Plant et flag på bjergets side mod øst - på bjergterræn, ikke bjerge
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
 msgid "some coal"
-msgstr ""
+msgstr "lidt kul"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "a lot of coal"
@@ -83,7 +83,7 @@ msgstr "en masse kul"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:46
 msgid "some iron"
-msgstr ""
+msgstr "lidt jern"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:47
 msgid "a lot of iron"
@@ -91,7 +91,7 @@ msgstr "en masse jern"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:48
 msgid "some gold"
-msgstr ""
+msgstr "lidt guld"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:49
 msgid "a lot of gold"
@@ -99,7 +99,7 @@ msgstr "en masse guld"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:50
 msgid "some granite"
-msgstr ""
+msgstr "lidt granit"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:51
 msgid "a lot of granite"
