@@ -37,10 +37,6 @@ class SinglePlayerActivePlayerSetupBox : public UI::Box {
 
 public:
 	SinglePlayerActivePlayerSetupBox(UI::Panel* const parent,
-	                                 int32_t const x,
-	                                 int32_t const y,
-	                                 int32_t const w,
-	                                 int32_t const h,
 	                                 GameSettingsProvider* const settings,
 	                                 uint32_t buth);
 
@@ -62,7 +58,6 @@ public:
 
 private:
 	PlayerSlot id_;
-	//	UI::Dropdown<uintptr_t> slot_dropdown_;  /// Select the player slot.
 	RoleDropdownSupport role_;
 	UI::Textarea name_;  /// Client nick name
 	GameSettingsProvider* const settings_;
@@ -75,10 +70,6 @@ class SinglePlayerPossiblePlayerSetupBox : public UI::Box {
 
 public:
 	SinglePlayerPossiblePlayerSetupBox(UI::Panel* const parent,
-	                                   int32_t const x,
-	                                   int32_t const y,
-	                                   int32_t const w,
-	                                   int32_t const h,
 	                                   GameSettingsProvider* const settings,
 	                                   uint32_t buth);
 	void update();
@@ -94,10 +85,6 @@ class SinglePlayerSetupBox : public UI::Box {
 
 public:
 	SinglePlayerSetupBox(UI::Panel* const parent,
-	                     int32_t const x,
-	                     int32_t const y,
-	                     int32_t const w,
-	                     int32_t const h,
 	                     GameSettingsProvider* const settings,
 	                     uint32_t buth);
 

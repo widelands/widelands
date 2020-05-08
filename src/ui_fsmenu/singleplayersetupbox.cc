@@ -24,14 +24,8 @@
 #define AI_NAME_PREFIX "ai" AI_NAME_SEPARATOR
 
 SinglePlayerActivePlayerSetupBox::SinglePlayerActivePlayerSetupBox(
-   UI::Panel* const parent,
-   int32_t const x,
-   int32_t const y,
-   int32_t const w,
-   int32_t const h,
-   GameSettingsProvider* const settings,
-   uint32_t buth)
-   : UI::Box(parent, x, y, UI::Box::Vertical, w, h),
+   UI::Panel* const parent, GameSettingsProvider* const settings, uint32_t buth)
+   : UI::Box(parent, 0, 0, UI::Box::Vertical, 0, 0),
      title_(this,
             0,
             0,
@@ -221,14 +215,8 @@ void SinglePlayerPossiblePlayerGroup::update() {
 }
 
 SinglePlayerPossiblePlayerSetupBox::SinglePlayerPossiblePlayerSetupBox(
-   UI::Panel* const parent,
-   int32_t const x,
-   int32_t const y,
-   int32_t const w,
-   int32_t const h,
-   GameSettingsProvider* const settings,
-   uint32_t buth)
-   : UI::Box(parent, x, y, UI::Box::Vertical, w, h),
+   UI::Panel* const parent, GameSettingsProvider* const settings, uint32_t buth)
+   : UI::Box(parent, 0, 0, UI::Box::Vertical, 0, 0),
      title_(this,
             0,
             0,
@@ -264,15 +252,11 @@ void SinglePlayerPossiblePlayerSetupBox::update() {
 }
 
 SinglePlayerSetupBox::SinglePlayerSetupBox(UI::Panel* const parent,
-                                           int32_t const x,
-                                           int32_t const y,
-                                           int32_t const w,
-                                           int32_t const h,
                                            GameSettingsProvider* const settings,
                                            uint32_t buth)
-   : UI::Box(parent, x, y, UI::Box::Horizontal, w, h),
-     inactive_players(this, x, y, w, h, settings, buth),
-     active_players_setup(this, x, y, w, h, settings, buth) {
+   : UI::Box(parent, 0, 0, UI::Box::Horizontal, 0, 0),
+     inactive_players(this, settings, buth),
+     active_players_setup(this, settings, buth) {
 	add(&inactive_players);
 	add_space(50);
 	add(&active_players_setup);
