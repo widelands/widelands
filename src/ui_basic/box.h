@@ -73,6 +73,8 @@ struct Box : public Panel {
 		items_.clear();
 	}
 
+	Scrollbar* get_scrollbar() { return scrollbar_.get(); }
+
 protected:
 	void layout() override;
 	void update_desired_size() override;

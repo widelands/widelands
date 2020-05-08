@@ -229,6 +229,8 @@ bool AddOnsCtrl::matches_filter(const AddOnInfo& info, bool local) {
 }
 
 void AddOnsCtrl::rebuild() {
+	const uint32_t scrollpos_i = installed_addons_wrapper_.get_scrollbar() ? installed_addons_wrapper_.get_scrollbar()->get_scrollpos() : 0;
+	const uint32_t scrollpos_b = browse_addons_wrapper_.get_scrollbar() ? browse_addons_wrapper_.get_scrollbar()->get_scrollpos() : 0;
 	installed_addons_box_.free_children();
 	browse_addons_box_.free_children();
 	installed_addons_box_.clear();
@@ -278,6 +280,13 @@ void AddOnsCtrl::rebuild() {
 		RemoteAddOnRow* r = new RemoteAddOnRow(&browse_addons_box_, this, a, installed);
 		browse_addons_box_.add(r, UI::Box::Resizing::kFullSize);
 		has_upgrades |= r->upgradeable();
+	}
+
+	if (installed_addons_wrapper_.get_scrollbar() && scrollpos_i) {
+		installed_addons_wrapper_.get_scrollbar()->set_scrollpos(scrollpos_i);
+	}
+	if (browse_addons_wrapper_.get_scrollbar() && scrollpos_b) {
+		browse_addons_wrapper_.get_scrollbar()->set_scrollpos(scrollpos_b);
 	}
 
 	upgrade_all_.set_enabled(has_upgrades);
