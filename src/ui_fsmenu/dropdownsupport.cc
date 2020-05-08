@@ -76,6 +76,7 @@ void TribeDropdownSupport::rebuild() {
 		if (player_setting.random_tribe) {
 			dropdown_.select("random");
 		} else {
+			log("selecting tribe %s for player %d\n", player_setting.tribe.c_str(), id_);
 			dropdown_.select(player_setting.tribe);
 		}
 	}
@@ -426,13 +427,15 @@ void RoleDropdownSupport::rebuild() {
 }
 void RoleDropdownSupport::selection_action() {
 	const GameSettings& settings = settings_->settings();
-	if (id_ != settings.playernum) {
-		return;
-	}
+	//	if (id_ != settings.playernum) {
+	//		log("exiting because id=%d but playernum=%d\n", id_, settings.playernum);
+	//		return;
+	//	}
 	if (dropdown_.has_selection()) {
 		const uint8_t new_slot = dropdown_.get_selected();
 		//		if (new_slot != settings.) {
 		settings_->set_player_number(new_slot);
+		log("RoleDropdownSupport::notify because position has changed\n");
 		Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer));
 		//		}
 	}

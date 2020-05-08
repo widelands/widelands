@@ -18,6 +18,8 @@ public:
 	                              PlayerSlot id,
 	                              GameSettingsProvider* const settings);
 
+	void update();
+
 private:
 	PlayerSlot id_;
 	GameSettingsProvider* const settings_;
@@ -28,7 +30,6 @@ private:
 	TeamDropdown teams_;
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 
-	void update();
 	void on_gamesettings_updated(const NoteGameSettings& note);
 };
 
@@ -47,6 +48,8 @@ private:
 	UI::Textarea title_;
 	GameSettingsProvider* const settings_;
 	std::vector<SinglePlayerActivePlayerGroup*> active_player_groups;  // not owned
+	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
+	void update();
 };
 
 class SinglePlayerPossiblePlayerGroup : public UI::Box {

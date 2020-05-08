@@ -48,6 +48,15 @@ SinglePlayerActivePlayerSetupBox::SinglePlayerActivePlayerSetupBox(
 		   this, 0 /*get_w() - UI::Scrollbar::kSize*/, buth, i, settings);
 		add(active_player_groups.at(i));
 	}
+
+	subscriber_ =
+	   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings&) { update(); });
+}
+void SinglePlayerActivePlayerSetupBox::update() {
+
+	for (auto& active_player_group : active_player_groups) {
+		active_player_group->update();
+	}
 }
 
 SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const parent,
@@ -109,14 +118,12 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
 	add(teams_.get_dropdown());
 	add_space(0);
 
-	subscriber_ = Notifications::subscribe<NoteGameSettings>(
-	   [this](const NoteGameSettings& note) { on_gamesettings_updated(note); });
-
 	player.set_disable_style(UI::ButtonDisableStyle::kFlat);
 	player.set_enabled(false);
 }
 
 void SinglePlayerActivePlayerGroup::on_gamesettings_updated(const NoteGameSettings& note) {
+	log("%d got notified for playerpos %d\n", id_, note.position);
 	if (settings_->settings().players.empty()) {
 		// No map/savegame yet
 		return;
@@ -142,7 +149,7 @@ void SinglePlayerActivePlayerGroup::on_gamesettings_updated(const NoteGameSettin
 }
 
 void SinglePlayerActivePlayerGroup::update() {
-	log("SinglePlayerActivePlayerGroup::update\n");
+	// log("SinglePlayerActivePlayerGroup::update id: %d\n", id_);
 	const GameSettings& settings = settings_->settings();
 	if (id_ >= settings.players.size()) {
 		set_visible(false);
@@ -164,6 +171,7 @@ void SinglePlayerActivePlayerGroup::update() {
 		start_type.set_visible(false);
 		start_type.set_enabled(false);
 	} else {  // kHuman, kShared, kComputer
+		log("actually rebuilding\n");
 		tribe_.rebuild();
 		start_type.rebuild();
 		teams_.rebuild();
@@ -241,7 +249,7 @@ void SinglePlayerPossiblePlayerSetupBox::update() {
 	log("number of users: %d\n", settings.users.size());
 	log("number of players: %d\n", settings.players.size());
 	// Update / initialize client groups
-
+	//	possible_player_groups.clear();
 	possible_player_groups.resize(number_of_users);
 	for (uint32_t i = 0; i < number_of_users; ++i) {
 		if (!possible_player_groups.at(i)) {
@@ -249,8 +257,8 @@ void SinglePlayerPossiblePlayerSetupBox::update() {
 			   new SinglePlayerPossiblePlayerGroup(this, 100, 50, i, settings_);
 			add(possible_player_groups.at(i), UI::Box::Resizing::kFullSize);
 			//         possible_player_groups.at(i)->layout();
-			possible_player_groups.at(i)->set_visible(settings.players.at(i).state ==
-			                                          PlayerSettings::State::kHuman);
+			possible_player_groups.at(i)->set_visible(true /*settings.players.at(i).state ==
+			                                          PlayerSettings::State::kHuman*/);
 		}
 	}
 }
