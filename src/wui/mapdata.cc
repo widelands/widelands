@@ -34,7 +34,8 @@ MapData::MapData(const std::string& init_filename,
      width(0),
      height(0),
      maptype(init_maptype),
-     displaytype(init_displaytype) {
+     displaytype(init_displaytype),
+     required_addons({{"Dummy to test this feature", 1}}) {
 }
 
 MapData::MapData(const Widelands::Map& map,
@@ -54,6 +55,7 @@ MapData::MapData(const Widelands::Map& map,
 	}
 	description = map.get_description().empty() ? "" : _(map.get_description());
 	hint = map.get_hint().empty() ? "" : _(map.get_hint());
+	required_addons = map.required_addons();
 	nrplayers = map.get_nrplayers();
 	width = map.get_width();
 	height = map.get_height();

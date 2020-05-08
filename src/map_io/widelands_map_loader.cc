@@ -24,6 +24,7 @@
 #include "base/log.h"
 #include "base/scoped_timer.h"
 #include "io/filesystem/filesystem.h"
+#include "logic/addons.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -83,6 +84,38 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario) {
 		MapElementalPacket mp;
 		mp.pre_read(*fs_, &map_);
 		old_world_name_ = mp.old_world_name();
+
+		// disable add-ons
+		if (get_load_addons()) {
+			for (auto& pair : g_addons) {
+				if (pair.first.category->name == "world") {
+					pair.second = false;
+				}
+			}
+			// TODO(Nordfriese): We have to put the required add-ons in the correct order
+			for (const auto& requirement : map_.required_addons()) {
+				bool found = false;
+				for (auto& pair : g_addons) {
+					if (pair.first.internal_name == requirement.first) {
+						found = true;
+						if (pair.first.version != requirement.second) {
+							log("WARNING: Map file requires add-on '%s' at version %u but version %u is installed. "
+									"They might be compatible, but this is not necessarily the case.\n",
+									requirement.first.c_str(),
+									requirement.second,
+									pair.first.version);
+						}
+						assert(pair.first.category->name == "world" || pair.first.category->name == "tribes");
+						assert(!pair.second);
+						pair.second = true;  // enable this add-on
+						break;
+					}
+				}
+				if (!found) {
+					throw GameDataError("Add-on '%s' (version %u) required but not installed", requirement.first.c_str(), requirement.second);
+				}
+			}
+		}
 	}
 	{
 		MapVersionPacket version_packet;

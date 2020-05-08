@@ -50,6 +50,7 @@
 #include "graphic/mouse_cursor.h"
 #include "graphic/playercolor.h"
 #include "graphic/text_layout.h"
+#include "logic/addons.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/world/resource_description.h"
@@ -445,11 +446,13 @@ void EditorInteractive::load(const std::string& filename) {
 	cleanup_for_load();
 
 	std::unique_ptr<Widelands::MapLoader> ml(map->get_correct_loader(filename));
-	if (!ml.get())
+	if (!ml.get()) {
 		throw WLWarning(
 		   _("Unsupported Format"),
 		   _("Widelands could not load the file \"%s\". The file format seems to be incompatible."),
 		   filename.c_str());
+	}
+	ml->set_load_addons(true);
 	ml->preload_map(true);
 
 	load_all_tribes(&egbase());
@@ -950,6 +953,14 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	Widelands::EditorGameBase egbase(nullptr);
 	EditorInteractive& eia = *new EditorInteractive(egbase);
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
+
+	// we need to disable tribes add-ons in the editor
+	for (auto& pair : g_addons) {
+		if (pair.first.category->name == "tribes") {
+			pair.second = false;
+		}
+	}
+
 	{
 		egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
 

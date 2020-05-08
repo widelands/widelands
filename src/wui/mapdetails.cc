@@ -153,6 +153,81 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 			   (boost::format("%s%s") % description % as_content(mapdata.hint, style_)).str();
 		}
 
+		// TODO(Nordfriese): Display a detailed list of *all* add-ons used by the map
+		{
+			std::set<std::string> addons_missing;
+			std::map<std::string, std::pair<uint16_t, uint16_t>> addons_wrong_version;
+			for (const auto& requirement : mapdata.required_addons) {
+				bool found = false;
+				for (const auto& pair : g_addons) {
+					if (pair.first.internal_name == requirement.first) {
+						found = true;
+						if (pair.first.version != requirement.second) {
+							addons_wrong_version[requirement.first] = std::make_pair(pair.first.version, requirement.second);
+						}
+						break;
+					}
+				}
+				if (!found) {
+					addons_missing.insert(requirement.first);
+				}
+			}
+			std::string status;
+			if (addons_missing.empty()) {
+				if (addons_wrong_version.empty()) {
+					status = _("No conflicts");
+				} else {
+					std::string list;
+					for (const auto& a : addons_wrong_version) {
+						if (list.empty()) {
+							list = (boost::format(_("%1$s (expected version %2$u, found %3$u)"))
+									% a.first % a.second.second % a.second.first).str();
+						} else {
+							list = (boost::format(_("%1$s, %2$s (expected version %3$u, found %4$u)"))
+									% list % a.first % a.second.second % a.second.first).str();
+						}
+					}
+					status = (boost::format(ngettext("%1$u add-on with wrong version: %2$s", "%1$u add-ons with wrong version: %2$s",
+							addons_wrong_version.size())) % addons_wrong_version.size() % list).str();
+				}
+			} else {
+				if (addons_wrong_version.empty()) {
+					std::string list;
+					for (const std::string& a : addons_missing) {
+						if (list.empty()) {
+							list = a;
+						} else {
+							list = (boost::format(_("%1$s, %2$s")) % list % a).str();
+						}
+					}
+					status = (boost::format(ngettext("%1$u missing add-on: %2$s", "%1$u missing add-ons: %2$s",
+							addons_missing.size())) % addons_missing.size() % list).str();
+				} else {
+					std::string list;
+					for (const std::string& a : addons_missing) {
+						if (list.empty()) {
+							list = (boost::format(_("%s (missing)")) % a).str();
+						} else {
+							list = (boost::format(_("%1$s, %2$s (missing)")) % list % a).str();
+						}
+					}
+					for (const auto& a : addons_wrong_version) {
+						list = (boost::format(_("%1$s, %2$s (expected version %3$u, found %4$u)"))
+								% list % a.first % a.second.second % a.second.first).str();
+					}
+					status = (boost::format(_("%1$s and %2$s: %3$s"))
+							% (boost::format(ngettext(_("%u missing add-on"), _("%u missing add-ons"),
+									addons_missing.size())) % addons_missing.size()).str()
+							% (boost::format(ngettext(_("%u add-on with wrong version"), _("%u add-ons with wrong version"),
+									addons_missing.size())) % addons_missing.size()).str()
+							% list).str();
+				}
+			}
+			description = (boost::format("%s%s") % description %
+					       as_heading_with_content(_("Add-Ons:"), status, style_))
+					         .str();
+		}
+
 		descr_.set_text(as_richtext(description));
 
 		// Show / hide suggested teams

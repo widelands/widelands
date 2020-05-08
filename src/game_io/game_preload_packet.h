@@ -70,6 +70,19 @@ struct GamePreloadPacket : public GameDataPacket {
 		return gametype_;
 	}
 
+	/* NOTE: Info about enabled *world* add-ons is saved in the Map by MapElemental
+	 * packet, and additionally info about enabled *tribes and world* add-ons is
+	 * saved in the GamePreload packet.
+	 * On game loading, the game loader will dis- or enable *tribe and world* add-ons
+	 * as requested by the GamePreload packet. That packet is also used to display
+	 * compatibility warnings in the game loading screens.
+	 * The add-on info stored in the Map(Elemental packet) is ignored during loading.
+	 * The map selection screens in main menu and editor will need to take care
+	 * to use the info stored there to dis- and enable *world* add-ons as required.
+	 * As a side effect, the choice of *world* add-ons is left to the map maker,
+	 * and players can not influence the world of existing maps.
+	 * Tribes add-ons however are selected when starting a new game.
+	 */
 	const std::vector<std::pair<std::string, uint16_t>> required_addons() const {
 		return required_addons_;
 	}

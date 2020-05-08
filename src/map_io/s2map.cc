@@ -30,6 +30,7 @@
 #include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/addons.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/game.h"
@@ -373,6 +374,15 @@ int32_t S2MapLoader::preload_map(bool const scenario) {
 	assert(get_state() != STATE_LOADED);
 
 	map_.cleanup();
+
+	// disable add-ons
+	if (get_load_addons()) {
+		for (auto& pair : g_addons) {
+			if (pair.first.category->name == "world") {
+				pair.second = false;
+			}
+		}
+	}
 
 	FileRead fr;
 	fr.open(*g_fs, filename_.c_str());

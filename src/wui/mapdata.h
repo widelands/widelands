@@ -81,6 +81,8 @@ public:
 	std::set<std::string> tags;
 	MapData::MapType maptype;
 	MapData::DisplayType displaytype;
+	// Required add-ons with the recommended version
+	std::vector<std::pair<std::string, uint16_t>> required_addons;
 };
 
 #endif  // end of include guard: WL_WUI_MAPDATA_H

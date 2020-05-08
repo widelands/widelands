@@ -36,7 +36,7 @@ class MapLoader {
 public:
 	enum class LoadType { kGame, kScenario, kEditor };
 
-	MapLoader(const std::string& filename, Map& M) : map_(M), state_(STATE_INIT) {
+	MapLoader(const std::string& filename, Map& M) : map_(M), state_(STATE_INIT), load_addons_(false) {
 		map_.set_filename(filename);
 	}
 	virtual ~MapLoader() {
@@ -48,6 +48,9 @@ public:
 	Map& map() {
 		return map_;
 	}
+
+	void set_load_addons(bool l) { load_addons_ = l; };
+	bool get_load_addons() { return load_addons_; };
 
 protected:
 	enum State { STATE_INIT, STATE_PRELOADED, STATE_LOADED };
@@ -61,6 +64,7 @@ protected:
 
 private:
 	State state_;
+	bool load_addons_;
 };
 }  // namespace Widelands
 

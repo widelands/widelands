@@ -21,6 +21,7 @@
 #define WL_MAP_IO_MAP_ELEMENTAL_PACKET_H
 
 #include <string>
+#include <vector>
 
 #include "map_io/map_data_packet.h"
 
@@ -55,6 +56,8 @@ struct MapElementalPacket {
 private:
 	std::string old_world_name_;
 	uint32_t version_ = 0;
+	// Required add-ons with the recommended version
+	std::vector<std::pair<std::string, uint16_t>> required_addons_;
 };
 }  // namespace Widelands
 

@@ -266,7 +266,6 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 
 /**
  * Initialize the game based on the given settings.
- *
  */
 void Game::init_newgame(const GameSettings& settings) {
 	assert(has_loader_ui());
@@ -275,6 +274,7 @@ void Game::init_newgame(const GameSettings& settings) {
 
 	std::unique_ptr<MapLoader> maploader(mutable_map()->get_correct_loader(settings.mapfilename));
 	assert(maploader != nullptr);
+	maploader->set_load_addons(true);
 	maploader->preload_map(settings.scenario);
 	change_loader_ui_background(map().get_background());
 

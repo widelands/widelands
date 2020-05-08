@@ -175,16 +175,17 @@ void GameDetails::show_game_description(const SavegameData& gamedata) {
 	               as_heading_with_content(_("Win Condition:"), gamedata.wincondition, style_))
 	                 .str();
 
+	// TODO(Nordfriese): Display a detailed list of *all* add-ons used by the savegame
 	{
 		std::set<std::string> addons_missing;
-		std::map<std::string, std::pair<uint16_t /* required */, uint16_t /* found */>> addons_wrong_version;
+		std::map<std::string, std::pair<uint16_t, uint16_t>> addons_wrong_version;
 		for (const auto& requirement : gamedata.required_addons) {
 			bool found = false;
 			for (const auto& pair : g_addons) {
 				if (pair.first.internal_name == requirement.first) {
 					found = true;
 					if (pair.first.version != requirement.second) {
-						addons_wrong_version[requirement.first] = std::make_pair(requirement.second, pair.first.version);
+						addons_wrong_version[requirement.first] = std::make_pair(pair.first.version, requirement.second);
 					}
 					break;
 				}

@@ -100,6 +100,7 @@ wl_library(editor
     graphic_text_layout
     io_filesystem
     logic
+    logic_addons
     logic_constants
     logic_filesystem_constants
     logic_generic_save_handler

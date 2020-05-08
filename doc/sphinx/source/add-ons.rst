@@ -104,11 +104,11 @@ which must follow the same conventions as the files in ``data/tribes/scripting/s
 Restrictions
 ------------
 
-The order of add-ons matters. Add-ons can be reordered in the in-game add-ons manager. Enabled add-ons will be exectuted from top to bottom. If you enable one add-on A that adds a new worker type that requires experience and another add-on B that modifies all workers' experience thresholds, the new worker's experience will be modified by B if and only if B is loaded after A.
+The order of add-ons matters. Add-ons can be reordered in the in-game add-ons manager. Enabled add-ons will be executed from top to bottom. If you enable one add-on A that adds a new worker type that requires experience and another add-on B that modifies all workers' experience thresholds, the new worker's experience will be modified by B if and only if B is loaded later than A.
 
-In the editor, world and tribes script will be run, allowing you to create maps with new worlds. Note that such maps will only work correctly if the required add-ons are enabled when starting the game. This information is not being saved yet.
+In the editor, world (but not tribes) add-ons will be run, allowing you to create maps with new worlds. The information which add-ons a map was created with is stored in the map file. When opening a map in the editor or starting a new game, the world add-ons required by the map will be enabled and all other world add-ons disabled. Therefore map designers need to choose the add-ons they want to use prior to launching the editor; the choice can not be modified later. Their choice of world add-ons will also be enforced whenever someone starts a game on that map. Script add-ons are ignored by the editor. Tribes add-ons are also ignored; therefore it is not possible to recommend an add-on-defined tribe as the default tribe for a player.
 
-When loading a game, the game will activate the tribes- and world add-ons the game was originally started with, and disable all others. Enabled script add-ons will be ignored. Starting and win conditions as well as maps and campaigns are stored in the savegame independently from the add-on that defines them.
+When loading a game, the game will activate the tribes- and world add-ons the game was originally started with, and disable all others. Script add-ons are ignored on loading. Starting and win conditions as well as maps and campaign/scenario scripts are stored in the savegame independently from the add-on that defines them.
 
 In multiplayer games, all players need to enable the same add-ons at the same version in the same order for the game to work without desyncs. No checks for this are implemented so far.
 
@@ -118,7 +118,7 @@ Support for map sets is not yet implemented.
 Upgrading
 ---------
 
-Add-ons newly uploaded to the server (when we have one…) will have to define their version number as 1. It will be possible for users to upload new versions of their add-ons to the server, where the new version number needs to be 1 greater than the version present on the server. The in-game add-ons manager allows users to upgrade installed add-ons with one click when a new version is available.
+Add-ons newly uploaded to the server (when we have one…) will have to define their version number as 1. It will be possible for users to upload new versions of their add-ons to the server, where the new version number needs to be 1 greater than the version present on the server. The version previously stored on the server will be replaced with the new one. The in-game add-ons manager allows users to upgrade installed add-ons with one click when a new version is available.
 
 Add-on upgrades may break compatibility between versions; therefore, savegames and replays warn when the game was started with a different add-on version than the installed one. In such cases, the game will often still work correctly, but this can not be guaranteed.
 
