@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-05-05 08:55+0000\n"
+"PO-Revision-Date: 2020-05-05 09:01+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -783,7 +783,7 @@ msgstr "udvinding af diamanter"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:168
 msgid "No Crystals"
-msgstr ""
+msgstr "Ingen krystaller"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:169
 msgid "Main Crystal Vein Exhausted"
@@ -3806,7 +3806,7 @@ msgstr "Lidt jern"
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:137
 msgctxt "resource_indicator"
 msgid "Some Crystals"
-msgstr ""
+msgstr "Nogle krystaller"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:163
@@ -3839,7 +3839,7 @@ msgstr "En masse jern"
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:241
 msgctxt "resource_indicator"
 msgid "A Lot of Crystals"
-msgstr ""
+msgstr "En masse krystaller"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/barbarians/init.lua:122

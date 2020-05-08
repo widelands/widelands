@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-05-05 08:59+0000\n"
+"PO-Revision-Date: 2020-05-05 09:17+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -1250,7 +1250,7 @@ msgid ""
 " the east/south of the selected point. When shrinking the map, the desired "
 "number of columns/rows will be removed from the east/south of the splitting "
 "location."
-msgstr ""
+msgstr "Vælg den nye kortstørrelse, klik så på kortet for at opdele det på den ønskede placering. Når kortstørrelsen øges vil nye kolonner/rækker blive indsat mod øst/syd for det valgte punkt. Når kortet mindskes vil det ønskede antal kolonner/rækker blive fjernet fra øst/syd for opdelingspunktet."
 
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
@@ -3623,13 +3623,13 @@ msgstr "Ønsker du at rive denne bygning ned?"
 
 #: ../../src/wui/actionconfirm.cc:247 ../../src/wui/actionconfirm.cc:306
 msgid "Preserve wares"
-msgstr ""
+msgstr "Bevar varer"
 
 #: ../../src/wui/actionconfirm.cc:249
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the dismantling time"
-msgstr ""
+msgstr "Eventuelle varer tilbage i bygningen vil blive smidt ud af byggearbejderen, hvilket øger nedrivningsperioden"
 
 #: ../../src/wui/actionconfirm.cc:298
 msgid "Enhance building?"
@@ -3649,7 +3649,7 @@ msgstr "Vær forsigtig hvis fjenden er nær!"
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the enhancing time"
-msgstr ""
+msgstr "Eventuelle varer tilbage i bygningen vil blive smidt ud af byggearbejderen, hvilket øger udvidelsesperioden."
 
 #: ../../src/wui/actionconfirm.cc:360
 msgid "Sink the ship?"
@@ -3962,7 +3962,7 @@ msgstr "Sænk mål"
 
 #: ../../src/wui/economy_options_window.cc:92
 msgid "Toggle infinite target"
-msgstr ""
+msgstr "Vis/skjul uendelig mål"
 
 #: ../../src/wui/economy_options_window.cc:100
 msgid "Increase target"
