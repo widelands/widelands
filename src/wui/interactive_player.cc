@@ -94,11 +94,18 @@ void draw_immovables_for_visible_field(const Widelands::EditorGameBase& egbase,
                                        const float scale,
                                        const InfoToDraw info_to_draw,
                                        const Widelands::Player& player,
-                                       RenderTarget* dst) {
+                                       RenderTarget* dst,
+                                       std::vector<Widelands::Coords>& deferred_coords) {
 	Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
-	if (imm != nullptr && imm->get_positions(egbase).front() == field.fcoords) {
+	if (imm == nullptr) {
+		return;
+	}
+	if (imm->get_positions(egbase).front() == field.fcoords) {
 		imm->draw(egbase.get_gametime(), filter_info_to_draw(info_to_draw, imm, player),
 		          field.rendertarget_pixel, field.fcoords, scale, dst);
+	} else {
+		//log("-- Adding deferred coords: \n", imm->get_positions(egbase).front());
+		deferred_coords.push_back(imm->get_positions(egbase).front());
 	}
 }
 
@@ -379,18 +386,20 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 	assert(!get_sel_triangles());
 
 	const Widelands::Player& plr = player();
-	const auto& gbase = egbase();
+	const Widelands::EditorGameBase& gbase = egbase();
 	const Widelands::Map& map = gbase.map();
 	const uint32_t gametime = gbase.get_gametime();
 
 	Workareas workareas = get_workarea_overlays(map);
-	auto* fields_to_draw = given_map_view->draw_terrain(gbase, &plr, workareas, false, dst);
+	FieldsToDraw* fields_to_draw = given_map_view->draw_terrain(gbase, &plr, workareas, false, dst);
 	const auto& road_building_s = road_building_steepness_overlays();
 
 	const float scale = 1.f / given_map_view->view().zoom;
 
+	std::vector<Widelands::Coords> deferred_coords;
+
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
-		auto* f = fields_to_draw->mutable_field(idx);
+		FieldsToDraw::Field* f = fields_to_draw->mutable_field(idx);
 
 		const Widelands::Player::Field& player_field =
 		   plr.fields()[map.get_index(f->fcoords, map.get_width())];
@@ -409,6 +418,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 		}
 
 		// Add road building overlays if applicable.
+		const InfoToDraw info_to_draw = get_info_to_draw(!given_map_view->is_animating());
 		if (f->vision > 0) {
 			draw_road_building(*f);
 
@@ -416,14 +426,18 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			draw_border_markers(*f, scale, *fields_to_draw, dst);
 
 			// Render stuff that belongs to the node.
-			const auto info_to_draw = get_info_to_draw(!given_map_view->is_animating());
 			if (f->vision > 1) {
-				draw_immovables_for_visible_field(gbase, *f, scale, info_to_draw, plr, dst);
+				draw_immovables_for_visible_field(gbase, *f, scale, info_to_draw, plr, dst, deferred_coords);
 				draw_bobs_for_visible_field(gbase, *f, scale, info_to_draw, plr, dst);
-			} else if (f->vision == 1) {
+			} else {
 				// We never show census or statistics for objects in the fog.
 				draw_immovable_for_formerly_visible_field(*f, info_to_draw, player_field, scale, dst);
 			}
+		} else if (std::find(deferred_coords.begin(), deferred_coords.end(), f->fcoords) != deferred_coords.end()) {
+			log("-- Drawing deferred coords!\n");
+			draw_immovables_for_visible_field(gbase, *f, scale, info_to_draw, plr, dst, deferred_coords);
+		} else {
+			draw_immovable_for_formerly_visible_field(*f, info_to_draw, player_field, scale, dst);
 		}
 
 		// Draw work area markers.

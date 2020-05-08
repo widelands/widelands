@@ -347,7 +347,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 					f_player_field.time_node_last_unseen = gametime;
 
-					if (f_vision) {  //  node
+					if (f_vision) {  //  node //?
 						//  owner
 						f_player_field.owner = f.field->get_owned_by();
 						assert(f_player_field.owner < 0x20);
@@ -359,7 +359,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 							if (Road::is_road_descr(map_object_descr) ||
 							    Waterway::is_waterway_descr(map_object_descr)) {
 								map_object_descr = nullptr;
-							} else if (upcast(Building const, building, base_immovable)) {
+							} else if (upcast(Building const, building, base_immovable)) { //?
 								if (building->get_position() != f) {
 									//  TODO(unknown): This is not the building's main position
 									//  so we can not see it. But it should be
@@ -530,7 +530,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 				//  temporary variables and save it in the player when set.
 				PlayerNumber owner = 0;
 
-				switch (f_vision) {  //  owner and map_object_descr
+				switch (f_vision) {  //  owner and map_object_descr //?
 				case 0:
 					//  The player has never seen this node, so he has no
 					//  information about it. Neither should he be informed about
@@ -612,7 +612,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						if (Road::is_road_descr(map_object_descr) ||
 						    Waterway::is_waterway_descr(map_object_descr)) {
 							map_object_descr = nullptr;
-						} else if (upcast(Building const, building, base_immovable)) {
+						} else if (upcast(Building const, building, base_immovable)) { //?
 							if (building->get_position() != f) {
 								//  TODO(unknown): This is not the building's main position so
 								//  we can not see it. But it should be possible

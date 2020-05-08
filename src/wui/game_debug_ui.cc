@@ -297,7 +297,7 @@ void FieldDebugWindow::think() {
 		switch (vision) {
 		case 0:
 			str += "  never seen\n";
-			break;
+			//break;
 		case 1: {
 			std::string animation_name = "(no animation)";
 			if (player_field.map_object_descr) {
@@ -310,7 +310,7 @@ void FieldDebugWindow::think() {
 			        player_field.time_node_last_unseen %
 			        static_cast<unsigned int>(player_field.owner) % animation_name.c_str())
 			          .str();
-			break;
+			//break;
 		}
 		default:
 			str += (boost::format("  seen %u times\n") % (vision - 1)).str();
