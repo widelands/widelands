@@ -53,6 +53,8 @@ A script that modifies tribe units, such as wares, workers, or buildings. You ca
 The add-on needs to contain a script called ``init.lua`` which will be run after the default tribes were loaded.
 For details compare to the official tribe loading scripts in ``data/tribes/**/init.lua``.
 
+If the add-on introduces one or more new tribes, it will additionally need to contain a scipt called ``preload.lua``.
+For details compare to the official tribe preload script ``data/tribes/preload.lua``.
 
 world
 ~~~~~
@@ -104,7 +106,7 @@ Restrictions
 
 The order of add-ons matters. Add-ons can be reordered in the in-game add-ons manager. Enabled add-ons will be exectuted from top to bottom. If you enable one add-on A that adds a new worker type that requires experience and another add-on B that modifies all workers' experience thresholds, the new worker's experience will be modified by B if and only if B is loaded after A.
 
-In the editor, all scripts are currently disabled. Therefore it is not possible to use add-ons to create new worlds which can be saved in maps.
+In the editor, world and tribes script will be run, allowing you to create maps with new worlds. Note that such maps will only work correctly if the required add-ons are enabled when starting the game. This information is not being saved yet.
 
 When loading a game, the game will activate the tribes- and world add-ons the game was originally started with, and disable all others. Enabled script add-ons will be ignored. Starting and win conditions as well as maps and campaigns are stored in the savegame independently from the add-on that defines them.
 

@@ -434,20 +434,6 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
  * AI and the \ref InteractivePlayer if any).
  */
 void Game::postload() {
-	// Allow add-ons to kick in and modify stuff (only in games, not in the editor)
-	for (const auto& pair : g_addons) {
-		if (pair.second) {
-			if (pair.first.category->name == "world" || pair.first.category->name == "tribes") {
-				try {
-					lua().run_script(kAddOnDir + g_fs->file_separator() + pair.first.internal_name + g_fs->file_separator() + "init.lua");
-				} catch (const WException& e) {
-					log("ERROR: Could not read %s add-on '%s': %s\n", pair.first.category->name.c_str(), pair.first.internal_name.c_str(), e.what());
-					throw;
-				}
-			}
-		}
-	}
-
 	EditorGameBase::postload();
 	get_ibase()->postload();
 }

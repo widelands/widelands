@@ -31,6 +31,7 @@
 #include "economy/waterway.h"
 #include "graphic/color.h"
 #include "graphic/road_segments.h"
+#include "logic/addons.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -197,6 +198,19 @@ World* EditorGameBase::mutable_world() {
 			throw;
 		}
 
+		for (const auto& pair : g_addons) {
+			if (pair.second) {
+				if (pair.first.category->name == "world") {
+					try {
+						lua().run_script(kAddOnDir + g_fs->file_separator() + pair.first.internal_name + g_fs->file_separator() + "init.lua");
+					} catch (const WException& e) {
+						log("ERROR: Could not read world add-on '%s': %s\n", pair.first.internal_name.c_str(), e.what());
+						throw;
+					}
+				}
+			}
+		}
+
 		world_->load_graphics();
 	}
 	return world_.get();
@@ -225,6 +239,19 @@ Tribes* EditorGameBase::mutable_tribes() {
 		} catch (const WException& e) {
 			log("Could not read tribes information: %s", e.what());
 			throw;
+		}
+
+		for (const auto& pair : g_addons) {
+			if (pair.second) {
+				if (pair.first.category->name == "tribes") {
+					try {
+						lua().run_script(kAddOnDir + g_fs->file_separator() + pair.first.internal_name + g_fs->file_separator() + "init.lua");
+					} catch (const WException& e) {
+						log("ERROR: Could not read tribes add-on '%s': %s\n", pair.first.internal_name.c_str(), e.what());
+						throw;
+					}
+				}
+			}
 		}
 	}
 	return tribes_.get();
