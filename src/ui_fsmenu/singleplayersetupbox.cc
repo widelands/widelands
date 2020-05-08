@@ -64,7 +64,7 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
                                                              int32_t const h,
                                                              PlayerSlot id,
                                                              GameSettingsProvider* const settings)
-   : UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h),
+   : UI::Box(parent, 0, 0, UI::Box::Horizontal),
      id_(id),
      settings_(settings),
      player(this,
@@ -97,7 +97,7 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
                 (boost::format("dropdown_init%d") % static_cast<unsigned int>(id)).str(),
                 0,
                 0,
-                4 * h,
+                8 * h,
                 h,
                 settings,
                 id),
