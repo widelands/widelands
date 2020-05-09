@@ -21,8 +21,6 @@
 
 #include <map>
 
-#include <boost/bind.hpp>
-
 #include "base/log.h"
 #include "chat/chat.h"
 
