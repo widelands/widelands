@@ -153,6 +153,7 @@ void FullscreenMenuLaunchGame::layout() {
 	win_condition_dropdown_.set_desired_size(standard_element_width_, standard_element_height_);
 	log("res %d x %d\n", g_gr->get_xres(), g_gr->get_yres());
 	log("w=%d, h=%d\n", get_w(), get_h());
+	log("standard_w=%d, standard_h=%d\n", standard_element_width_, standard_element_height_);
 	title_.set_font_scale(scale_factor());
 	map_details.force_new_dimensions(scale_factor(), standard_element_height_);
 	win_condition_type.set_font_scale(scale_factor());

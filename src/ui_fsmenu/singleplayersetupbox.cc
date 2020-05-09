@@ -24,8 +24,8 @@
 #define AI_NAME_PREFIX "ai" AI_NAME_SEPARATOR
 
 SinglePlayerActivePlayerSetupBox::SinglePlayerActivePlayerSetupBox(
-   UI::Panel* const parent, GameSettingsProvider* const settings, uint32_t buth)
-   : UI::Box(parent, 0, 0, UI::Box::Vertical, 0, 0),
+   UI::Panel* const parent, GameSettingsProvider* const settings, uint32_t standard_element_height)
+   : UI::Box(parent, 0, 0, UI::Box::Vertical),
      title_(this,
             0,
             0,
@@ -39,7 +39,7 @@ SinglePlayerActivePlayerSetupBox::SinglePlayerActivePlayerSetupBox(
 	active_player_groups.resize(kMaxPlayers);
 	for (PlayerSlot i = 0; i < active_player_groups.size(); ++i) {
 		active_player_groups.at(i) = new SinglePlayerActivePlayerGroup(
-		   this, 0 /*get_w() - UI::Scrollbar::kSize*/, buth, i, settings);
+		   this, 0 /*get_w() - UI::Scrollbar::kSize*/, standard_element_height, i, settings);
 		add(active_player_groups.at(i));
 	}
 
@@ -53,6 +53,14 @@ void SinglePlayerActivePlayerSetupBox::update() {
 	}
 }
 
+void SinglePlayerActivePlayerSetupBox::force_new_dimensions(float scale,
+                                                            uint32_t standard_element_height) {
+
+	for (auto& active_player_group : active_player_groups) {
+		active_player_group->force_new_dimensions(scale, standard_element_height);
+	}
+}
+
 SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const parent,
                                                              int32_t const w,
                                                              int32_t const h,
@@ -61,24 +69,24 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
    : UI::Box(parent, 0, 0, UI::Box::Horizontal),
      id_(id),
      settings_(settings),
-     player(this,
-            "player",
-            0,
-            0,
-            h,
-            h,
-            UI::ButtonStyle::kFsMenuSecondary,
-            playercolor_image(id, "images/players/player_position_menu.png"),
-            (boost::format(_("Player %u")) % static_cast<unsigned int>(id_ + 1)).str(),
-            UI::Button::VisualState::kFlat),
-     player_type(this,
-                 (boost::format("dropdown_type%d") % static_cast<unsigned int>(id)).str(),
-                 0,
-                 0,
-                 h,
-                 h,
-                 settings,
-                 id),
+     player_(this,
+             "player",
+             0,
+             0,
+             h,
+             h,
+             UI::ButtonStyle::kFsMenuSecondary,
+             playercolor_image(id, "images/players/player_position_menu.png"),
+             (boost::format(_("Player %u")) % static_cast<unsigned int>(id_ + 1)).str(),
+             UI::Button::VisualState::kFlat),
+     player_type_(this,
+                  (boost::format("dropdown_type%d") % static_cast<unsigned int>(id)).str(),
+                  0,
+                  0,
+                  h,
+                  h,
+                  settings,
+                  id),
      tribe_(this,
             (boost::format("dropdown_type%d") % static_cast<unsigned int>(id)).str(),
             0,
@@ -105,15 +113,23 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
             id) {
 
 	add_space(0);
-	add(&player);
-	add(player_type.get_dropdown());
+	add(&player_);
+	add(player_type_.get_dropdown());
 	add(tribe_.get_dropdown());
 	add(start_type.get_dropdown());
 	add(teams_.get_dropdown());
 	add_space(0);
 
-	player.set_disable_style(UI::ButtonDisableStyle::kFlat);
-	player.set_enabled(false);
+	player_.set_disable_style(UI::ButtonDisableStyle::kFlat);
+	player_.set_enabled(false);
+}
+void SinglePlayerActivePlayerGroup::force_new_dimensions(float scale,
+                                                         uint32_t standard_element_height) {
+	player_.set_desired_size(standard_element_height, standard_element_height);
+	player_type_.set_desired_size(standard_element_height, standard_element_height);
+	tribe_.set_desired_size(standard_element_height, standard_element_height);
+	start_type.set_desired_size(8 * standard_element_height, standard_element_height);
+	teams_.set_desired_size(standard_element_height, standard_element_height);
 }
 
 void SinglePlayerActivePlayerGroup::on_gamesettings_updated(const NoteGameSettings& note) {
@@ -150,7 +166,7 @@ void SinglePlayerActivePlayerGroup::update() {
 		return;
 	}
 	const PlayerSettings& player_setting = settings.players[id_];
-	player_type.rebuild();
+	player_type_.rebuild();
 	set_visible(true);
 
 	if (player_setting.state == PlayerSettings::State::kClosed ||
@@ -253,11 +269,15 @@ void SinglePlayerPossiblePlayerSetupBox::update() {
 
 SinglePlayerSetupBox::SinglePlayerSetupBox(UI::Panel* const parent,
                                            GameSettingsProvider* const settings,
-                                           uint32_t buth)
+                                           uint32_t standard_element_height)
    : UI::Box(parent, 0, 0, UI::Box::Horizontal),
-     inactive_players(this, settings, buth),
-     active_players_setup(this, settings, buth) {
+     inactive_players(this, settings, standard_element_height),
+     active_players_setup(this, settings, standard_element_height) {
 	add(&inactive_players);
-	add_space(1 * buth);
+	add_space(1 * standard_element_height);
 	add(&active_players_setup);
+}
+
+void SinglePlayerSetupBox::force_new_dimensions(float scale, uint32_t standard_element_height) {
+	active_players_setup.force_new_dimensions(scale, standard_element_height);
 }

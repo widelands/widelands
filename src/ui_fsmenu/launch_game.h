@@ -76,6 +76,8 @@ protected:
 
 	void toggle_peaceful();
 
+	void layout() override;
+
 	uint32_t standard_element_width_;
 	uint32_t standard_element_height_;
 	uint32_t padding_;
@@ -100,7 +102,6 @@ protected:
 	Widelands::PlayerNumber nr_players_;
 
 private:
-	void layout() override;
 	void add_all_widgets();
 	void add_behaviour_to_widgets();
 };

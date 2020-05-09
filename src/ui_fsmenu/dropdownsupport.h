@@ -55,6 +55,9 @@ public:
 	void set_enabled(bool enable) {
 		dropdown_.set_enabled(enable);
 	}
+	void set_desired_size(int w, int h) {
+		dropdown_.set_desired_size(w, h);
+	}
 
 protected:
 	UI::Dropdown<T> dropdown_;

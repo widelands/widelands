@@ -19,12 +19,13 @@ public:
 	                              GameSettingsProvider* const settings);
 
 	void update();
+	void force_new_dimensions(float scale, uint32_t standard_element_height);
 
 private:
 	PlayerSlot id_;
 	GameSettingsProvider* const settings_;
-	UI::Button player;
-	PlayerTypeDropdownSupport player_type;
+	UI::Button player_;
+	PlayerTypeDropdownSupport player_type_;
 	TribeDropdownSupport tribe_;
 	StartTypeDropdownSupport start_type;
 	TeamDropdown teams_;
@@ -38,7 +39,9 @@ class SinglePlayerActivePlayerSetupBox : public UI::Box {
 public:
 	SinglePlayerActivePlayerSetupBox(UI::Panel* const parent,
 	                                 GameSettingsProvider* const settings,
-	                                 uint32_t buth);
+	                                 uint32_t standard_element_height);
+
+	void force_new_dimensions(float scale, uint32_t standard_element_height);
 
 private:
 	UI::Textarea title_;
@@ -86,7 +89,9 @@ class SinglePlayerSetupBox : public UI::Box {
 public:
 	SinglePlayerSetupBox(UI::Panel* const parent,
 	                     GameSettingsProvider* const settings,
-	                     uint32_t buth);
+	                     uint32_t standard_element_height);
+
+	void force_new_dimensions(float scale, uint32_t standard_element_height);
 
 private:
 	SinglePlayerPossiblePlayerSetupBox inactive_players;

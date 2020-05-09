@@ -25,6 +25,7 @@ protected:
 
 private:
 	void win_condition_selected() override;
+	void layout() override;
 
 	SinglePlayerSetupBox player_setup;
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
