@@ -42,7 +42,7 @@ MapDetailsBox::MapDetailsBox(Panel* parent,
         0,
         0,
         0,
-        6 * standard_element_height,
+        0,
         UI::PanelStyle::kFsMenu,
         "sample map description which might be a\n very long text so scrollbar is needed") {
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
@@ -115,7 +115,10 @@ void MapDetailsBox::load_map_info(GameSettingsProvider* settings) {
 void MapDetailsBox::set_select_map_action(std::function<void()> action) {
 	select_map_.sigclicked.connect(action);
 }
-void MapDetailsBox::set_font_scale(float scale) {
+void MapDetailsBox::set_font_scale(float scale, uint32_t standard_element_height) {
 	title_.set_font_scale(scale);
+	map_name_.set_font_scale(scale);
+	select_map_.set_desired_size(standard_element_height, standard_element_height);
+	map_description_.set_desired_size(0, 6 * standard_element_height);
 	UI::Box::layout();
 }
