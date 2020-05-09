@@ -39,15 +39,15 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
    : FullscreenMenuBase(),
 
      // Values for alignment and size
-     butw_(get_w() / 4),
-     buth_(get_h() * 9 / 200),
+     standard_element_width_(get_w() / 4),
+     standard_element_height_(get_h() * 9 / 200),
      padding_(4),
 
      main_box_(this, 0, 0, UI::Box::Vertical, get_w(), get_h()),
      content_box_(&main_box_, 0, 0, UI::Box::Horizontal),
      individual_content_box(&content_box_, 0, 0, UI::Box::Vertical),
-     map_box_(&content_box_, 0, 0, UI::Box::Vertical, butw_, get_h()),
-     map_details(&map_box_, 0, 0, 0, 0, butw_, get_h()),
+     map_box_(&content_box_, 0, 0, UI::Box::Vertical, standard_element_width_),
+     map_details(&map_box_, standard_element_width_, standard_element_height_),
 
      win_condition_type(&map_box_,
                         0,
@@ -61,16 +61,30 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
                              "dropdown_wincondition",
                              0,
                              0,
-                             butw_,
+                             standard_element_width_,
                              10,  // max number of items
-                             buth_,
+                             standard_element_height_,
                              "",
                              UI::DropdownType::kTextual,
                              UI::PanelStyle::kFsMenu,
                              UI::ButtonStyle::kFsMenuMenu),
      peaceful_(&map_box_, Vector2i::zero(), _("Peaceful mode")),
-     ok_(&map_box_, "ok", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuPrimary, _("Start game")),
-     back_(&map_box_, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
+     ok_(&map_box_,
+         "ok",
+         0,
+         0,
+         standard_element_width_,
+         standard_element_height_,
+         UI::ButtonStyle::kFsMenuPrimary,
+         _("Start game")),
+     back_(&map_box_,
+           "back",
+           0,
+           0,
+           standard_element_width_,
+           standard_element_height_,
+           UI::ButtonStyle::kFsMenuSecondary,
+           _("Back")),
      // Text labels
      title_(&main_box_,
             0,
@@ -131,6 +145,12 @@ void FullscreenMenuLaunchGame::add_behaviour_to_widgets() {
 	map_details.set_select_map_action([this]() { clicked_select_map(); });
 }
 void FullscreenMenuLaunchGame::layout() {
+	standard_element_width_ = get_w() / 4;
+	standard_element_height_ = get_h() * 9 / 200;
+	ok_.set_desired_size(standard_element_width_, standard_element_height_);
+	back_.set_desired_size(standard_element_width_, standard_element_height_);
+	win_condition_dropdown_.set_desired_size(standard_element_width_, standard_element_height_);
+	log("res %d x %d\n", g_gr->get_xres(), g_gr->get_yres());
 	log("w=%d, h=%d\n", get_w(), get_h());
 	title_.set_font_scale(scale_factor());
 	map_details.set_font_scale(scale_factor());

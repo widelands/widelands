@@ -254,10 +254,10 @@ void SinglePlayerPossiblePlayerSetupBox::update() {
 SinglePlayerSetupBox::SinglePlayerSetupBox(UI::Panel* const parent,
                                            GameSettingsProvider* const settings,
                                            uint32_t buth)
-   : UI::Box(parent, 0, 0, UI::Box::Horizontal, 0, 0),
+   : UI::Box(parent, 0, 0, UI::Box::Horizontal),
      inactive_players(this, settings, buth),
      active_players_setup(this, settings, buth) {
 	add(&inactive_players);
-	add_space(50);
+	add_space(1 * buth);
 	add(&active_players_setup);
 }

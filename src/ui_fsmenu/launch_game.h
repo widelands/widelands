@@ -76,8 +76,8 @@ protected:
 
 	void toggle_peaceful();
 
-	uint32_t butw_;
-	uint32_t buth_;
+	uint32_t standard_element_width_;
+	uint32_t standard_element_height_;
 	uint32_t padding_;
 
 	UI::Box main_box_;

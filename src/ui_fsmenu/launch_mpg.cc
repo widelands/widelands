@@ -108,17 +108,17 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                          "change_map_or_save",
                          right_column_x_,
                          get_h() * 3 / 20,
-                         butw_,
-                         buth_,
+                         standard_element_width_,
+                         standard_element_height_,
                          UI::ButtonStyle::kFsMenuSecondary,
                          _("(no map)"),
                          _("Change map or saved game")),
      help_button_(this,
                   "help",
-                  right_column_x_ + butw_ - buth_,
+                  right_column_x_ + standard_element_width_ - standard_element_height_,
                   get_h() / 100,
-                  buth_,
-                  buth_,
+                  standard_element_height_,
+                  standard_element_height_,
                   UI::ButtonStyle::kFsMenuSecondary,
                   g_gr->images().get("images/ui_basic/menu_help.png"),
                   _("Show the help window")),
@@ -144,13 +144,13 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
      map_(this,
           right_column_x_,
           get_h() / 10,
-          butw_,
+          standard_element_width_,
           get_h() / 10,
           _("Map"),
           UI::Align::kCenter,
           g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
      wincondition_type_(this,
-                        right_column_x_ + (butw_ / 2),
+                        right_column_x_ + (standard_element_width_ / 2),
                         get_h() * 15 / 20 - 9 * label_height_,
                         0,
                         0,
@@ -160,7 +160,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
      map_info_(this,
                right_column_x_,
                get_h() * 2 / 10,
-               butw_,
+               standard_element_width_,
                get_h() * 15 / 20 - 9.25 * label_height_ - get_h() * 2 / 10,
                UI::PanelStyle::kFsMenu),
      help_(nullptr),
@@ -171,7 +171,8 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	   Vector2i(right_column_x_, get_h() * 4 / 5 - 9.5 * label_height_));
 	peaceful_.set_pos(Vector2i(right_column_x_, get_h() * 4 / 5 - 9.5 * label_height_ +
 	                                               win_condition_dropdown_.get_h() + padding_));
-	back_.set_pos(Vector2i(right_column_x_, get_h() * 218 / 240 - buth_ - padding_));
+	back_.set_pos(
+	   Vector2i(right_column_x_, get_h() * 218 / 240 - standard_element_height_ - padding_));
 	ok_.set_pos(Vector2i(right_column_x_, get_h() * 218 / 240));
 
 	title_.set_text(_("Multiplayer Game Setup"));
@@ -194,7 +195,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 
 	mpsg_ = new MultiPlayerSetupGroup(
 	   this, get_w() * 3 / 80, change_map_or_save_.get_y(), get_w() * 53 / 80,
-	   get_h() * 17 / 30 - change_map_or_save_.get_y(), settings, buth_);
+	   get_h() * 17 / 30 - change_map_or_save_.get_y(), settings, standard_element_height_);
 
 	// If we are the host, open the map or save selection menu at startup
 	if (settings_->settings().usernum == 0 && settings_->settings().mapname.empty()) {

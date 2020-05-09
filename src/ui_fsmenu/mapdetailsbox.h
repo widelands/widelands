@@ -9,16 +9,15 @@ struct GameSettingsProvider;
 class MapDetailsBox : public UI::Box {
 public:
 	MapDetailsBox(Panel* parent,
-	              int32_t x,
-	              int32_t y,
-	              int32_t padding,
-	              int32_t indent,
+	              uint32_t standard_element_width,
+	              uint32_t standard_element_height,
 	              int32_t max_x = 0,
 	              int32_t max_y = 0);
 	~MapDetailsBox();
 
 	void update(GameSettingsProvider* settings);
 
+	/// passed callback is called when the select map button is clicked
 	void set_select_map_action(std::function<void()> action);
 
 	void set_font_scale(float scale);
