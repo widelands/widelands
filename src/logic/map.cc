@@ -555,14 +555,14 @@ static inline int32_t resize_coordinates_conversion(const int32_t old_coord,
 	} else if (split_point > new_dimension) {
 		// shrink, origin deleted
 		return (old_coord >= split_point || old_coord < split_point - new_dimension) ?
-				kInvalidCoords : old_coord - split_point + new_dimension;
+		          kInvalidCoords :
+		          old_coord - split_point + new_dimension;
 	} else {
 		// shrink, origin preserved
-		return old_coord < split_point ?
-				old_coord :
-				old_coord < split_point + old_dimension - new_dimension ?
-						kInvalidCoords :
-						old_coord + new_dimension - old_dimension;
+		return old_coord < split_point ? old_coord :
+		                                 old_coord < split_point + old_dimension - new_dimension ?
+		                                 kInvalidCoords :
+		                                 old_coord + new_dimension - old_dimension;
 	}
 }
 
