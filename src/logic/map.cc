@@ -540,74 +540,35 @@ void Map::set_origin(const Coords& new_origin) {
 	log("Map origin was shifted by (%d, %d)\n", new_origin.x, new_origin.y);
 }
 
+// Helper function for resize()
+constexpr int32_t kInvalidCoords = -1;
+static inline int32_t resize_coordinates_conversion(const int32_t old_coord,
+                                                    const int32_t split_point,
+                                                    const int32_t old_dimension,
+                                                    const int32_t new_dimension) {
+	if (new_dimension == old_dimension) {
+		// trivial
+		return old_coord;
+	} else if (new_dimension > old_dimension) {
+		// enlarge
+		return old_coord > split_point ? old_coord + new_dimension - old_dimension : old_coord;
+	} else if (split_point > new_dimension) {
+		// shrink, origin deleted
+		return (old_coord >= split_point || old_coord < split_point - new_dimension) ?
+				kInvalidCoords : old_coord - split_point + new_dimension;
+	} else {
+		// shrink, origin preserved
+		return old_coord < split_point ?
+				old_coord :
+				old_coord < split_point + old_dimension - new_dimension ?
+						kInvalidCoords :
+						old_coord + new_dimension - old_dimension;
+	}
+}
+
 void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, const int32_t h) {
 	if (w == width_ && h == height_) {
 		return;
-	}
-
-	// Some invariants for geometry calculations below
-	const int16_t dx = w - width_;
-	const int16_t dy = h - height_;
-	const int16_t xoff = split.x - w;
-	const int16_t yoff = split.y - h;
-
-	constexpr int kInvalidCoords = -1;
-	using ConversionFn = std::function<int(int)>;
-	// Returns the old x coordinate for the given new x coordinate in the range [0, width_-1],
-	// or kInvalidCoords if the column needs to be newly created.
-	ConversionFn lambda_co_x;
-	// Returns the old y coordinate for the given new y coordinate in the range [0, height_-1],
-	// or kInvalidCoords if the row needs to be newly created.
-	ConversionFn lambda_co_y;
-	// Returns the new x coordinate for the given old x coordinate in the range [0, w-1],
-	// or kInvalidCoords if the column will be deleted.
-	ConversionFn lambda_cn_x;
-	// Returns the new y coordinate for the given old y coordinate in the range [0, h-1],
-	// or kInvalidCoords if the row will be deleted.
-	ConversionFn lambda_cn_y;
-
-	/* We have 3*3 different cases:
-	 * Increasing map size,
-	 * shrinking map in block (origin deleted), or
-	 * shrinking map in stripes (origin preserved).
-	 */
-	if (dx >= 0) {
-		// horz: increase
-		lambda_co_x = [split, dx](int x) {
-			return x < split.x ? x : x >= split.x + dx ? x - dx : kInvalidCoords;
-		};
-		lambda_cn_x = [split, dx](int x) { return x < split.x ? x : x + dx; };
-	} else if (split.x > w) {
-		// horz: shrink, single block
-		lambda_co_x = [xoff](int x) { return x + xoff; };
-		lambda_cn_x = [xoff, split](int x) {
-			return x >= xoff && x < split.x ? x - xoff : kInvalidCoords;
-		};
-	} else {
-		// horz: shrink, left/right stripes
-		lambda_co_x = [split, dx](int x) { return x < split.x ? x : x - dx; };
-		lambda_cn_x = [dx, split](int x) {
-			return x < split.x ? x : x >= split.x - dx ? x + dx : kInvalidCoords;
-		};
-	}
-	if (dy >= 0) {
-		// vert: increase
-		lambda_co_y = [split, dy](int y) {
-			return y < split.y ? y : y >= split.y + dy ? y - dy : kInvalidCoords;
-		};
-		lambda_cn_y = [split, dy](int y) { return y < split.y ? y : y + dy; };
-	} else if (split.y > h) {
-		// vert: shrink, single block
-		lambda_co_y = [yoff](int y) { return y + yoff; };
-		lambda_cn_y = [yoff, split](int y) {
-			return y >= yoff && y < split.y ? y - yoff : kInvalidCoords;
-		};
-	} else {
-		// vert: shrink, upper/lower stripes
-		lambda_co_y = [split, dy](int y) { return y < split.y ? y : y - dy; };
-		lambda_cn_y = [dy, split](int y) {
-			return y < split.y ? y : y >= split.y - dy ? y + dy : kInvalidCoords;
-		};
 	}
 
 	// Generate the new fields. Does not modify the actual map yet.
@@ -615,49 +576,60 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 	std::unique_ptr<Field[]> new_fields(new Field[w * h]);
 	clear_array<>(&new_fields, w * h);
 	std::unique_ptr<bool[]> was_preserved(new bool[width_ * height_]);
+	std::unique_ptr<bool[]> was_created(new bool[w * h]);
 	clear_array<bool>(&was_preserved, width_ * height_);
+	clear_array<bool>(&was_created, w * h);
 
+	for (int16_t x = 0; x < width_; ++x) {
+		for (int16_t y = 0; y < height_; ++y) {
+			const int16_t new_x = resize_coordinates_conversion(x, split.x, width_, w);
+			const int16_t new_y = resize_coordinates_conversion(y, split.y, height_, h);
+			assert((new_x >= 0 && new_x < w) || new_x == kInvalidCoords);
+			assert((new_y >= 0 && new_y < h) || new_y == kInvalidCoords);
+			if (new_x != kInvalidCoords && new_y != kInvalidCoords) {
+				Coords old_coords(x, y);
+				Coords new_coords(new_x, new_y);
+				const MapIndex old_index = get_index(old_coords);
+				const MapIndex new_index = get_index(new_coords, w);
+
+				assert(!was_preserved[old_index]);
+				was_preserved[old_index] = true;
+
+				assert(!was_created[new_index]);
+				was_created[new_index] = true;
+
+				new_fields[new_index] = (*this)[old_coords];
+			}
+		}
+	}
 	Field::Terrains default_terrains;
 	default_terrains.r = 0;
 	default_terrains.d = 0;
-
-	for (int16_t x = 0; x < w; ++x) {
-		for (int16_t y = 0; y < h; ++y) {
-			Coords cn(x, y);
-			const int16_t oldx = lambda_co_x(x);
-			const int16_t oldy = lambda_co_y(y);
-			assert((oldx >= 0 && oldx < width_) || oldx == kInvalidCoords);
-			assert((oldy >= 0 && oldy < height_) || oldy == kInvalidCoords);
-			if (oldx != kInvalidCoords && oldy != kInvalidCoords) {
-				Coords co(oldx, oldy);
-				new_fields[get_index(cn, w)] = operator[](co);
-				assert(!was_preserved[get_index(co)]);
-				was_preserved[get_index(co)] = true;
-			} else {
-				Field& field = new_fields[get_index(cn, w)];
-				field.set_height(10);
-				field.set_terrains(default_terrains);
-			}
+	for (MapIndex index = w * h; index; --index) {
+		if (!was_created[index - 1]) {
+			Field& field = new_fields[index - 1];
+			field.set_height(10);
+			field.set_terrains(default_terrains);
 		}
 	}
 
 	// Now modify our starting positions and port spaces
 
 	for (Coords& c : starting_pos_) {
-		if (c) {  // only if set (!= Coords::null())
-			const int16_t x = lambda_cn_x(c.x);
-			const int16_t y = lambda_cn_y(c.y);
+		if (c) {  // only if set (c != Coords::null())
+			const int16_t x = resize_coordinates_conversion(c.x, split.x, width_, w);
+			const int16_t y = resize_coordinates_conversion(c.y, split.y, height_, h);
 			assert((x >= 0 && x < w) || x == kInvalidCoords);
 			assert((y >= 0 && y < h) || y == kInvalidCoords);
-			c = x == kInvalidCoords || y == kInvalidCoords ? Coords::null() : Coords(x, y);
+			c = ((x == kInvalidCoords || y == kInvalidCoords) ? Coords::null() : Coords(x, y));
 		}
 	}
 
 	{
 		PortSpacesSet new_port_spaces;
 		for (const Coords& c : port_spaces_) {
-			const int16_t x = lambda_cn_x(c.x);
-			const int16_t y = lambda_cn_y(c.y);
+			const int16_t x = resize_coordinates_conversion(c.x, split.x, width_, w);
+			const int16_t y = resize_coordinates_conversion(c.y, split.y, height_, h);
 			assert((x >= 0 && x < w) || x == kInvalidCoords);
 			assert((y >= 0 && y < h) || y == kInvalidCoords);
 			if (x != kInvalidCoords && y != kInvalidCoords) {
@@ -672,7 +644,7 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 		for (int16_t y = 0; y < height_; ++y) {
 			Coords c(x, y);
 			if (!was_preserved[get_index(c)]) {
-				Field& f = operator[](c);
+				Field& f = (*this)[c];
 				if (upcast(Immovable, i, f.get_immovable())) {
 					i->remove(egbase);
 				}
@@ -683,14 +655,14 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 		}
 	}
 
-	// Replace all existing fields with the new values.
+	// Now replace all existing fields with the new values.
 
 	width_ = w;
 	height_ = h;
 	fields_.reset(new_fields.release());
 
-	// Always call allocate_player_maps() while changing the map's size. Forgetting to do so will
-	// result in random crashes.
+	// Always call allocate_player_maps() while changing the map's size.
+	// Forgetting to do so will result in random crashes.
 	egbase.allocate_player_maps();
 	// Recalculate nodecaps etc
 	recalc_whole_map(egbase);
@@ -699,17 +671,16 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 	// need updating because the memory addresses of all fields changed now.
 	for (int16_t x = 0; x < width_; ++x) {
 		for (int16_t y = 0; y < height_; ++y) {
-			Field& f = operator[](Coords(x, y));
+			Field& f = (*this)[Coords(x, y)];
+			FCoords fc(Coords(x, y), &f);
 			if (upcast(Immovable, imm, f.get_immovable())) {
-				imm->position_ = get_fcoords(f);
+				imm->position_ = fc;
 			}
 			if (Bob* b = f.get_first_bob()) {
 				b->linkpprev_ = &f.bobs;
 			}
 			for (Bob* b = f.get_first_bob(); b; b = b->get_next_bob()) {
-				b->position_.x = x;
-				b->position_.y = y;
-				b->position_.field = &f;
+				b->position_ = fc;
 			}
 		}
 	}
