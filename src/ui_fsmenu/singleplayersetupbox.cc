@@ -230,6 +230,11 @@ void SinglePlayerPossiblePlayerGroup::update() {
 	role_.rebuild();
 }
 
+void SinglePlayerPossiblePlayerGroup::force_new_dimensions(float scale,
+                                                           uint32_t standard_element_height) {
+	role_.set_desired_size(standard_element_height, standard_element_height);
+}
+
 SinglePlayerPossiblePlayerSetupBox::SinglePlayerPossiblePlayerSetupBox(
    UI::Panel* const parent, GameSettingsProvider* const settings, uint32_t buth)
    : UI::Box(parent, 0, 0, UI::Box::Vertical, 0, 0),
@@ -266,6 +271,13 @@ void SinglePlayerPossiblePlayerSetupBox::update() {
 		}
 	}
 }
+void SinglePlayerPossiblePlayerSetupBox::force_new_dimensions(float scale,
+                                                              uint32_t standard_element_height) {
+	for (auto& possible_player_group : possible_player_groups) {
+		possible_player_group->force_new_dimensions(scale, standard_element_height);
+	}
+	UI::Box::layout();
+}
 
 SinglePlayerSetupBox::SinglePlayerSetupBox(UI::Panel* const parent,
                                            GameSettingsProvider* const settings,
@@ -280,4 +292,5 @@ SinglePlayerSetupBox::SinglePlayerSetupBox(UI::Panel* const parent,
 
 void SinglePlayerSetupBox::force_new_dimensions(float scale, uint32_t standard_element_height) {
 	active_players_setup.force_new_dimensions(scale, standard_element_height);
+	inactive_players.force_new_dimensions(scale, standard_element_height);
 }

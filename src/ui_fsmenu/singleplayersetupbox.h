@@ -59,6 +59,8 @@ public:
 	                                PlayerSlot id,
 	                                GameSettingsProvider* const settings);
 
+	void force_new_dimensions(float scale, uint32_t standard_element_height);
+
 private:
 	PlayerSlot id_;
 	RoleDropdownSupport role_;
@@ -76,6 +78,7 @@ public:
 	                                   GameSettingsProvider* const settings,
 	                                   uint32_t buth);
 	void update();
+	void force_new_dimensions(float scale, uint32_t standard_element_height);
 
 private:
 	UI::Textarea title_;
