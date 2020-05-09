@@ -118,12 +118,9 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
      password_(pwd),
      is_registered_(registered) {
 
-	joingame_.sigclicked.connect(
-	   boost::bind(&FullscreenMenuInternetLobby::clicked_joingame, boost::ref(*this)));
-	hostgame_.sigclicked.connect(
-	   boost::bind(&FullscreenMenuInternetLobby::clicked_hostgame, boost::ref(*this)));
-	back_.sigclicked.connect(
-	   boost::bind(&FullscreenMenuInternetLobby::clicked_back, boost::ref(*this)));
+	joingame_.sigclicked.connect([this]() { clicked_joingame();});
+	hostgame_.sigclicked.connect([this]() { clicked_hostgame();});
+	back_.sigclicked.connect([this]() { clicked_back();});
 
 	// Set the texts and style of UI elements
 	title.set_font_scale(scale_factor());
@@ -135,8 +132,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
 	std::string server = get_config_string("servername", "");
 	edit_servername_.set_font_scale(scale_factor());
 	edit_servername_.set_text(server);
-	edit_servername_.changed.connect(
-	   boost::bind(&FullscreenMenuInternetLobby::change_servername, this));
+	edit_servername_.changed.connect([this]() { change_servername();});
 
 	// Prepare the lists
 	const std::string t_tip =
@@ -155,14 +151,10 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
 	clientsonline_list_.add_column((lisw_ - 22) * 2 / 8, _("Version"));
 	clientsonline_list_.add_column(
 	   (lisw_ - 22) * 3 / 8, _("Game"), "", UI::Align::kLeft, UI::TableColumnType::kFlexible);
-	clientsonline_list_.set_column_compare(
-	   0, boost::bind(&FullscreenMenuInternetLobby::compare_clienttype, this, _1, _2));
-	clientsonline_list_.double_clicked.connect(
-	   boost::bind(&FullscreenMenuInternetLobby::client_doubleclicked, this, _1));
-	opengames_list_.selected.connect(
-	   boost::bind(&FullscreenMenuInternetLobby::server_selected, this));
-	opengames_list_.double_clicked.connect(
-	   boost::bind(&FullscreenMenuInternetLobby::server_doubleclicked, this));
+	clientsonline_list_.set_column_compare(0, [this](uint32_t a, uint32_t b) { return compare_clienttype(a, b); });
+	clientsonline_list_.double_clicked.connect([this](uint32_t a) { return client_doubleclicked(a);});
+	opengames_list_.selected.connect([this](uint32_t) { server_selected();});
+	opengames_list_.double_clicked.connect([this](uint32_t) { server_doubleclicked();});
 
 	// try to connect to the metaserver
 	if (!InternetGaming::ref().error() && !InternetGaming::ref().logged_in()) {

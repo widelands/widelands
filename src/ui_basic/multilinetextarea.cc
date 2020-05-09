@@ -50,7 +50,7 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
      scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style, false) {
 	set_thinks(false);
 
-	scrollbar_.moved.connect(boost::bind(&MultilineTextarea::scrollpos_changed, this, _1));
+	scrollbar_.moved.connect([this](int32_t a) { scrollpos_changed(a);});
 
 	scrollbar_.set_singlestepsize(text_height(*style_, font_scale_));
 	scrollbar_.set_steps(1);

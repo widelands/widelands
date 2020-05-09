@@ -114,7 +114,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 		UI::Button& cb =
 		   *new UI::Button(hbox1, "playerbutton", 0, 0, 25, 25, UI::ButtonStyle::kWuiMenu,
 		                   player_image, player->get_name().c_str());
-		cb.sigclicked.connect(boost::bind(&GeneralStatisticsMenu::cb_changed_to, this, p));
+		cb.sigclicked.connect([this, p]() { cb_changed_to(p);});
 		cb.set_perm_pressed(my_registry_->selected_players[p - 1]);
 
 		cbs_[p - 1] = &cb;
@@ -190,12 +190,12 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	}
 
 	radiogroup_.set_state(selected_information_);
-	radiogroup_.changedto.connect(boost::bind(&GeneralStatisticsMenu::radiogroup_changed, this, _1));
+	radiogroup_.changedto.connect([this](int32_t i) { radiogroup_changed(i);});
 
 	box_.add(hbox2, UI::Box::Resizing::kFullSize);
 
 	WuiPlotAreaSlider* slider = new WuiPlotAreaSlider(&box_, plot_, 0, 0, 100, 45);
-	slider->changedto.connect(boost::bind(&WuiPlotArea::set_time_id, &plot_, _1));
+	slider->changedto.connect([this](int32_t i) { plot_.set_time_id(i);});
 	box_.add(slider, UI::Box::Resizing::kFullSize);
 }
 

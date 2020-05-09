@@ -139,8 +139,7 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 	b = new UI::Button(                                                                             \
 	   buttons, #policy, 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,                                   \
 	   g_gr->images().get("images/wui/buildings/stock_policy_button_" #policy ".png"), tooltip),    \
-	b->sigclicked.connect(                                                                          \
-	   boost::bind(&WarehouseWaresPanel::set_policy, this, Widelands::StockPolicy::k##policyname)), \
+	b->sigclicked.connect([this]() { set_policy(Widelands::StockPolicy::k##policyname); }),        \
 	buttons->add(b);
 
 		ADD_POLICY_BUTTON(normal, Normal, _("Normal policy"))

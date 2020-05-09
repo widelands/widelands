@@ -77,9 +77,9 @@ private:
 
 BuildGrid::BuildGrid(UI::Panel* parent, Widelands::Player* plr, int32_t x, int32_t y, int32_t cols)
    : UI::IconGrid(parent, x, y, kBuildGridCellSize, kBuildGridCellSize, cols), plr_(plr) {
-	icon_clicked.connect(boost::bind(&BuildGrid::click_slot, this, _1));
-	mouseout.connect(boost::bind(&BuildGrid::mouseout_slot, this, _1));
-	mousein.connect(boost::bind(&BuildGrid::mousein_slot, this, _1));
+	icon_clicked.connect([this](Widelands::DescriptionIndex i) { click_slot(i);});
+	mouseout.connect([this](Widelands::DescriptionIndex i) { mouseout_slot(i);});
+	mousein.connect([this](Widelands::DescriptionIndex i) { mousein_slot(i);});
 }
 
 /*
@@ -431,7 +431,7 @@ void FieldActionWindow::add_buttons_attack() {
 				a_box.add(attack_box_);
 
 				UI::Button* attack_button = attack_box_->get_attack_button();
-				attack_button->sigclicked.connect(boost::bind(&FieldActionWindow::act_attack, this));
+				attack_button->sigclicked.connect([this]() { act_attack();});
 				set_fastclick_panel(attack_button);
 			}
 		}
@@ -533,12 +533,9 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 		// Allocate the tab's grid if necessary
 		if (!*ppgrid) {
 			*ppgrid = new BuildGrid(&tabpanel_, player_, 0, 0, 5);
-			(*ppgrid)->buildclicked.connect(boost::bind(&FieldActionWindow::act_build, this, _1));
-			(*ppgrid)->buildmouseout.connect(
-			   boost::bind(&FieldActionWindow::building_icon_mouse_out, this, _1));
-
-			(*ppgrid)->buildmousein.connect(
-			   boost::bind(&FieldActionWindow::building_icon_mouse_in, this, _1));
+			(*ppgrid)->buildclicked.connect([this](Widelands::DescriptionIndex i) { act_build(i);});
+			(*ppgrid)->buildmouseout.connect([this](Widelands::DescriptionIndex i) { building_icon_mouse_out(i);});
+			(*ppgrid)->buildmousein.connect([this](Widelands::DescriptionIndex i) { building_icon_mouse_in(i);});
 		}
 
 		// Add it to the grid
@@ -622,7 +619,7 @@ UI::Button& FieldActionWindow::add_button(UI::Box* const box,
                                           bool repeating) {
 	UI::Button& button = *new UI::Button(box, name, 0, 0, 34, 34, UI::ButtonStyle::kWuiPrimary,
 	                                     g_gr->images().get(picname), tooltip_text);
-	button.sigclicked.connect(boost::bind(fn, this));
+	button.sigclicked.connect([this, fn]() { (this->*fn)();});
 	button.set_repeating(repeating);
 	box->add(&button);
 

@@ -76,27 +76,25 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
 	table_footer_box_.add_space(0);
 	table_footer_box_.add(&make_directory_);
 
-	table_.selected.connect(boost::bind(&MainMenuSaveMap::clicked_item, boost::ref(*this)));
-	table_.double_clicked.connect(
-	   boost::bind(&MainMenuSaveMap::double_clicked_item, boost::ref(*this)));
-	table_.cancel.connect(boost::bind(&MainMenuSaveMap::die, this));
+	table_.selected.connect([this](unsigned) { clicked_item(); });
+	table_.double_clicked.connect([this](unsigned) { double_clicked_item(); });
+	table_.cancel.connect([this]() { die();});
 	table_.set_can_focus(true);
 
 	editbox_.set_text(parent.egbase().map().get_name());
 
-	editbox_.changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));
+	editbox_.changed.connect([this]() { edit_box_changed();});
 	edit_box_changed();
-	editbox_.ok.connect(boost::bind(&MainMenuSaveMap::clicked_ok, boost::ref(*this)));
-	editbox_.cancel.connect(boost::bind(
-	   &MainMenuSaveMap::reset_editbox_or_die, boost::ref(*this), parent.egbase().map().get_name()));
+	editbox_.ok.connect([this]() { clicked_ok(); });
+	editbox_.cancel.connect([this, &parent]() { reset_editbox_or_die(parent.egbase().map().get_name());});
 
-	ok_.sigclicked.connect(boost::bind(&MainMenuSaveMap::clicked_ok, boost::ref(*this)));
-	cancel_.sigclicked.connect(boost::bind(&MainMenuSaveMap::die, boost::ref(*this)));
+	ok_.sigclicked.connect([this]() { clicked_ok(); });
+	cancel_.sigclicked.connect([this]() { die(); });
 
 	make_directory_.sigclicked.connect(
-	   boost::bind(&MainMenuSaveMap::clicked_make_directory, boost::ref(*this)));
+	   [this]() { clicked_make_directory(); });
 	edit_options_.sigclicked.connect(
-	   boost::bind(&MainMenuSaveMap::clicked_edit_options, boost::ref(*this)));
+	   [this]() { clicked_edit_options(); });
 
 	// We always want the current map's data here
 	const Widelands::Map& map = parent.egbase().map();

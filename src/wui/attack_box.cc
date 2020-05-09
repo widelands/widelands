@@ -90,7 +90,7 @@ std::unique_ptr<UI::Button> AttackBox::add_button(UI::Box& parent,
                                                   const std::string& tooltip_text) {
 	std::unique_ptr<UI::Button> button(new UI::Button(
 	   &parent, text, 8, 8, 34, 34, UI::ButtonStyle::kWuiPrimary, text, tooltip_text));
-	button->sigclicked.connect(boost::bind(fn, boost::ref(*this)));
+	button->sigclicked.connect([this, fn]() { (this->*fn)();});
 	parent.add(button.get());
 	return button;
 }

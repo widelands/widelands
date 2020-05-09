@@ -105,7 +105,7 @@ public:
 				   w.descname(), std::make_pair(Widelands::wwWORKER, i), w.icon(), false, w.descname());
 			}
 			d.set_enabled(can_act);
-			d.selected.connect(boost::bind(&PortDockAdditionalItemsDisplay::select, this, c));
+			d.selected.connect([this, c]() { select(c);});
 
 			UI::Icon* icon = new UI::Icon(box, g_gr->images().get(kNoWare));
 			icon->set_handle_mouse(true);

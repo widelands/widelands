@@ -278,11 +278,10 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	box_game_.add(&game_clock_);
 
 	// Bind actions
-	language_dropdown_.selected.connect(
-	   boost::bind(&FullscreenMenuOptions::update_language_stats, this, false));
-	cancel_.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_cancel, this));
-	apply_.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_apply, this));
-	ok_.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_ok, this));
+	language_dropdown_.selected.connect([this]() { update_language_stats(false);});
+	cancel_.sigclicked.connect([this]() { clicked_cancel();});
+	apply_.sigclicked.connect([this]() { clicked_apply();});
+	ok_.sigclicked.connect([this]() { clicked_ok();});
 
 	/** TRANSLATORS: Options: Save game automatically every: */
 	sb_autosave_.add_replacement(0, _("Off"));

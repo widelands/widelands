@@ -52,10 +52,8 @@ EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
                UI::ButtonStyle::kWuiSecondary,
                g_gr->images().get("images/ui_basic/scrollbar_down.png")),
      value_(0) {
-	increase_.sigclicked.connect(
-	   boost::bind(&EditorToolsizeMenu::increase_radius, boost::ref(*this)));
-	decrease_.sigclicked.connect(
-	   boost::bind(&EditorToolsizeMenu::decrease_radius, boost::ref(*this)));
+	increase_.sigclicked.connect([this]() { increase_radius();});
+	decrease_.sigclicked.connect([this]() { decrease_radius();});
 
 	increase_.set_repeating(true);
 	decrease_.set_repeating(true);

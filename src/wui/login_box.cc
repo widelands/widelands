@@ -63,10 +63,10 @@ LoginBox::LoginBox(Panel& parent)
 	                                     (get_inner_w() / 2 - 200) / 2,
 	                  loginbtn->get_y(), 200, 20, UI::ButtonStyle::kWuiSecondary, _("Cancel"));
 
-	loginbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_ok, boost::ref(*this)));
-	cancelbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_back, boost::ref(*this)));
-	eb_nickname->changed.connect(boost::bind(&LoginBox::change_playername, this));
-	cb_register->clickedto.connect(boost::bind(&LoginBox::clicked_register, this));
+	loginbtn->sigclicked.connect([this]() { clicked_ok();});
+	cancelbtn->sigclicked.connect([this]() { clicked_back();});
+	eb_nickname->changed.connect([this]() { change_playername();});
+	cb_register->clickedto.connect([this](bool) { clicked_register();});
 
 	eb_nickname->set_text(get_config_string("nickname", _("nobody")));
 	cb_register->set_state(get_config_bool("registered", false));
@@ -82,8 +82,8 @@ LoginBox::LoginBox(Panel& parent)
 
 	eb_nickname->focus();
 
-	eb_nickname->cancel.connect(boost::bind(&LoginBox::clicked_back, boost::ref(*this)));
-	eb_password->cancel.connect(boost::bind(&LoginBox::clicked_back, boost::ref(*this)));
+	eb_nickname->cancel.connect([this]() { clicked_back();});
+	eb_password->cancel.connect([this]() { clicked_back();});
 }
 
 /// think function of the UI (main loop)

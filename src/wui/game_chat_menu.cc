@@ -41,8 +41,8 @@ GameChatMenu::GameChatMenu(UI::Panel* parent,
 	}
 	set_can_focus(true);
 
-	chat_.sent.connect(boost::bind(&GameChatMenu::acknowledge, this));
-	chat_.aborted.connect(boost::bind(&GameChatMenu::acknowledge, this));
+	chat_.sent.connect([this]() { acknowledge();});
+	chat_.aborted.connect([this]() { acknowledge();});
 
 	enter_chat_message(close_on_send_);
 }
