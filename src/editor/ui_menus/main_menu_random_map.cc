@@ -212,7 +212,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent,
 	box_.add_space(margin_);
 	box_height += margin_;
 
-	players_.changed.connect([this]() { button_clicked(ButtonId::kPlayers);});
+	players_.changed.connect([this]() { button_clicked(ButtonId::kPlayers); });
 
 	// ---------- Worlds ----------
 
@@ -221,7 +221,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent,
 		world_box_.add_space(resources_label_.get_w() - world_label_.get_w() - margin_);
 	}
 
-	world_.sigclicked.connect([this]() { button_clicked(ButtonId::kWorld);});
+	world_.sigclicked.connect([this]() { button_clicked(ButtonId::kWorld); });
 	world_box_.add(&world_);
 	box_.add(&world_box_);
 	box_height += margin_ + world_box_.get_h();
@@ -235,7 +235,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent,
 		resources_box_.add_space(world_label_.get_w() - resources_label_.get_w() - margin_);
 	}
 
-	resources_.sigclicked.connect([this]() { button_clicked(ButtonId::kResources);});
+	resources_.sigclicked.connect([this]() { button_clicked(ButtonId::kResources); });
 	resources_box_.add(&resources_);
 	box_.add(&resources_box_);
 	box_height += margin_ + resources_box_.get_h();
@@ -243,24 +243,26 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent,
 	box_height += margin_;
 
 	// ---------- Water -----------
-	water_.get_buttons()[0]->sigclicked.connect([this]() { button_clicked(ButtonId::kWater);});
-	water_.get_buttons()[1]->sigclicked.connect([this]() { button_clicked(ButtonId::kWater);});
+	water_.get_buttons()[0]->sigclicked.connect([this]() { button_clicked(ButtonId::kWater); });
+	water_.get_buttons()[1]->sigclicked.connect([this]() { button_clicked(ButtonId::kWater); });
 
 	box_.add(&water_);
 	box_height += margin_ + water_.get_h();
 
 	// ---------- Land -----------
 
-	land_.get_buttons()[0]->sigclicked.connect([this]() { button_clicked(ButtonId::kLand);});
-	land_.get_buttons()[1]->sigclicked.connect([this]() { button_clicked(ButtonId::kLand);});
+	land_.get_buttons()[0]->sigclicked.connect([this]() { button_clicked(ButtonId::kLand); });
+	land_.get_buttons()[1]->sigclicked.connect([this]() { button_clicked(ButtonId::kLand); });
 
 	box_.add(&land_);
 	box_height += margin_ + land_.get_h();
 
 	// ---------- Wasteland -----------
 
-	wasteland_.get_buttons()[0]->sigclicked.connect([this]() { button_clicked(ButtonId::kWasteland);});
-	wasteland_.get_buttons()[1]->sigclicked.connect([this]() { button_clicked(ButtonId::kWasteland);});
+	wasteland_.get_buttons()[0]->sigclicked.connect(
+	   [this]() { button_clicked(ButtonId::kWasteland); });
+	wasteland_.get_buttons()[1]->sigclicked.connect(
+	   [this]() { button_clicked(ButtonId::kWasteland); });
 
 	box_.add(&wasteland_);
 	box_height += margin_ + wasteland_.get_h();
@@ -289,13 +291,13 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent,
 	box_.add_space(margin_);
 	box_height += margin_;
 
-	island_mode_.changed.connect([this]() { button_clicked(ButtonId::kIslandMode);});
+	island_mode_.changed.connect([this]() { button_clicked(ButtonId::kIslandMode); });
 
 	// ---------- Random map number edit ----------
 
 	map_number_box_.add(&map_number_label_);
 
-	map_number_edit_.changed.connect([this]() { nr_edit_box_changed();});
+	map_number_edit_.changed.connect([this]() { nr_edit_box_changed(); });
 	RNG rng;
 	rng.seed(clock());
 	rng.rand();
@@ -313,7 +315,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent,
 	map_id_box_.add(&map_id_label_);
 
 	map_id_edit_.set_text("abcd-efgh-ijkl-mnop");
-	map_id_edit_.changed.connect([this]() { id_edit_box_changed();});
+	map_id_edit_.changed.connect([this]() { id_edit_box_changed(); });
 	map_id_box_.add(&map_id_edit_);
 	box_.add(&map_id_box_);
 	box_height += margin_ + map_id_edit_.get_h();
@@ -321,8 +323,8 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent,
 	box_height += margin_;
 
 	// ---------- "Generate Map" button ----------
-	cancel_button_.sigclicked.connect([this]() { clicked_cancel();});
-	ok_button_.sigclicked.connect([this]() { clicked_create_map();});
+	cancel_button_.sigclicked.connect([this]() { clicked_cancel(); });
+	ok_button_.sigclicked.connect([this]() { clicked_create_map(); });
 	if (UI::g_fh->fontset()->is_rtl()) {
 		button_box_.add(&ok_button_);
 		button_box_.add(&cancel_button_);

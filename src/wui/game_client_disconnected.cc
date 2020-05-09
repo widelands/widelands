@@ -152,7 +152,7 @@ void GameClientDisconnected::clicked_exit_game() {
 		igb_->end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 	} else {
 		GameExitConfirmBox* gecb = new GameExitConfirmBox(*get_parent(), *igb_);
-		gecb->cancel.connect([this, gecb]() { exit_game_aborted(gecb);});
+		gecb->cancel.connect([this, gecb]() { exit_game_aborted(gecb); });
 
 		set_visible(false);
 	}

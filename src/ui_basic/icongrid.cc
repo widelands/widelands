@@ -98,7 +98,7 @@ int32_t IconGrid::add(const std::string& name,
 
 	UI::Button* btn =
 	   new IconGridButton(*this, name, x, y, cell_width_, cell_height_, pic, idx, tooltip_text);
-	btn->sigclicked.connect([this, idx]() { clicked_button(idx);});
+	btn->sigclicked.connect([this, idx]() { clicked_button(idx); });
 
 	return idx;
 }

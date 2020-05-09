@@ -199,7 +199,7 @@ FieldDebugWindow::FieldDebugWindow(InteractiveBase& parent, Widelands::Coords co
      ui_immovable_(this, "immovable", 0, 280, 300, 24, UI::ButtonStyle::kWuiMenu, ""),
 
      ui_bobs_(this, 0, 304, 300, 96, UI::PanelStyle::kWui) {
-	ui_immovable_.sigclicked.connect([this]() { open_immovable();});
+	ui_immovable_.sigclicked.connect([this]() { open_immovable(); });
 
 	assert(0 <= coords_.x);
 	assert(coords_.x < map_.get_width());
@@ -207,7 +207,7 @@ FieldDebugWindow::FieldDebugWindow(InteractiveBase& parent, Widelands::Coords co
 	assert(coords_.y < map_.get_height());
 	assert(&map_[0] <= coords_.field);
 	assert(coords_.field < &map_[0] + map_.max_index());
-	ui_bobs_.selected.connect([this](uint32_t a) { open_bob(a);});
+	ui_bobs_.selected.connect([this](uint32_t a) { open_bob(a); });
 }
 
 /*

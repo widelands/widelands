@@ -205,7 +205,8 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	finalize_toolbar();
 
 #ifndef NDEBUG  //  only in debug builds
-	addCommand("switchplayer", [this](const std::vector<std::string>& str) { cmdSwitchPlayer(str);});
+	addCommand(
+	   "switchplayer", [this](const std::vector<std::string>& str) { cmdSwitchPlayer(str); });
 #endif
 
 	map_options_subscriber_ = Notifications::subscribe<NoteMapOptions>(

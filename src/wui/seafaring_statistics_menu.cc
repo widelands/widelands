@@ -152,13 +152,14 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 	main_box_.set_size(get_inner_w() - 2 * kPadding, get_inner_h() - 2 * kPadding);
 
 	// Configure actions
-	idle_btn_.sigclicked.connect(
-	   [this]() { filter_ships(ShipFilterStatus::kIdle);});
-	shipping_btn_.sigclicked.connect(
-	   [this]() { filter_ships(ShipFilterStatus::kShipping);});
-	waiting_btn_.sigclicked.connect([this]() { filter_ships(ShipFilterStatus::kExpeditionWaiting);});
-	scouting_btn_.sigclicked.connect([this]() { filter_ships(ShipFilterStatus::kExpeditionScouting);});
-	portspace_btn_.sigclicked.connect([this]() { filter_ships(ShipFilterStatus::kExpeditionPortspaceFound);});
+	idle_btn_.sigclicked.connect([this]() { filter_ships(ShipFilterStatus::kIdle); });
+	shipping_btn_.sigclicked.connect([this]() { filter_ships(ShipFilterStatus::kShipping); });
+	waiting_btn_.sigclicked.connect(
+	   [this]() { filter_ships(ShipFilterStatus::kExpeditionWaiting); });
+	scouting_btn_.sigclicked.connect(
+	   [this]() { filter_ships(ShipFilterStatus::kExpeditionScouting); });
+	portspace_btn_.sigclicked.connect(
+	   [this]() { filter_ships(ShipFilterStatus::kExpeditionPortspaceFound); });
 	ship_filter_ = ShipFilterStatus::kAll;
 	set_filter_ships_tooltips();
 

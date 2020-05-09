@@ -72,14 +72,30 @@ FullscreenMenuMain::FullscreenMenuMain()
                 kWidelandsCopyrightStart % kWidelandsCopyrightEnd)
                   .str()),
      gpl(this, 0, 0, 0, 0, _("Licensed under the GNU General Public License V2.0")) {
-	playtutorial.sigclicked.connect([this]() { end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kTutorial);});
-	singleplayer.sigclicked.connect([this]() { end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kSinglePlayer);});
-	multiplayer.sigclicked.connect([this]() { end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kMultiplayer);});
-	replay.sigclicked.connect([this]() { end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kReplay);});
-	editor.sigclicked.connect([this]() { end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kEditor);});
-	options.sigclicked.connect([this]() { end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOptions);});
-	about.sigclicked.connect([this]() { end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kAbout);});
-	exit.sigclicked.connect([this]() { end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kExit);});
+	playtutorial.sigclicked.connect([this]() {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kTutorial);
+	});
+	singleplayer.sigclicked.connect([this]() {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kSinglePlayer);
+	});
+	multiplayer.sigclicked.connect([this]() {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kMultiplayer);
+	});
+	replay.sigclicked.connect([this]() {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kReplay);
+	});
+	editor.sigclicked.connect([this]() {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kEditor);
+	});
+	options.sigclicked.connect([this]() {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOptions);
+	});
+	about.sigclicked.connect([this]() {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kAbout);
+	});
+	exit.sigclicked.connect([this]() {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kExit);
+	});
 
 	vbox_.add(&playtutorial, UI::Box::Resizing::kFullSize);
 	vbox_.add(&singleplayer, UI::Box::Resizing::kFullSize);

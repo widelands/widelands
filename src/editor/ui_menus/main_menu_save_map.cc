@@ -78,23 +78,22 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
 
 	table_.selected.connect([this](unsigned) { clicked_item(); });
 	table_.double_clicked.connect([this](unsigned) { double_clicked_item(); });
-	table_.cancel.connect([this]() { die();});
+	table_.cancel.connect([this]() { die(); });
 	table_.set_can_focus(true);
 
 	editbox_.set_text(parent.egbase().map().get_name());
 
-	editbox_.changed.connect([this]() { edit_box_changed();});
+	editbox_.changed.connect([this]() { edit_box_changed(); });
 	edit_box_changed();
 	editbox_.ok.connect([this]() { clicked_ok(); });
-	editbox_.cancel.connect([this, &parent]() { reset_editbox_or_die(parent.egbase().map().get_name());});
+	editbox_.cancel.connect(
+	   [this, &parent]() { reset_editbox_or_die(parent.egbase().map().get_name()); });
 
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
 	cancel_.sigclicked.connect([this]() { die(); });
 
-	make_directory_.sigclicked.connect(
-	   [this]() { clicked_make_directory(); });
-	edit_options_.sigclicked.connect(
-	   [this]() { clicked_edit_options(); });
+	make_directory_.sigclicked.connect([this]() { clicked_make_directory(); });
+	edit_options_.sigclicked.connect([this]() { clicked_edit_options(); });
 
 	// We always want the current map's data here
 	const Widelands::Map& map = parent.egbase().map();

@@ -132,15 +132,15 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 
 	list_->set_visible(false);
 	button_box_.add(&display_button_, UI::Box::Resizing::kExpandBoth);
-	display_button_.sigclicked.connect([this]() { toggle_list();});
+	display_button_.sigclicked.connect([this]() { toggle_list(); });
 	if (push_button_ != nullptr) {
 		display_button_.set_perm_pressed(true);
 		button_box_.add(push_button_, UI::Box::Resizing::kFullSize);
-		push_button_->sigclicked.connect([this]() { toggle_list();});
+		push_button_->sigclicked.connect([this]() { toggle_list(); });
 	}
 	button_box_.set_size(w, get_h());
-	list_->clicked.connect([this]() { set_value();});
-	list_->clicked.connect([this]() { toggle_list();});
+	list_->clicked.connect([this]() { set_value(); });
+	list_->clicked.connect([this]() { toggle_list(); });
 	set_can_focus(true);
 	set_value();
 

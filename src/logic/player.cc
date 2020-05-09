@@ -350,7 +350,7 @@ MessageId Player::add_message(Game& game, std::unique_ptr<Message> new_message, 
 	// MapObject connection
 	if (message->serial() > 0) {
 		MapObject* mo = egbase().objects().get_object(message->serial());
-		mo->removed.connect([this, id](unsigned) { message_object_removed(id);});
+		mo->removed.connect([this, id](unsigned) { message_object_removed(id); });
 	}
 
 	// Sound & popup

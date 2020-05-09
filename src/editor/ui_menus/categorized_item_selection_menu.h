@@ -119,7 +119,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 
 			UI::Checkbox* cb = create_checkbox(horizontal, descriptions_.get(i));
 			cb->set_state(tool_->is_enabled(i));
-			cb->changedto.connect([this, i](bool b) { selected(i, b);});
+			cb->changedto.connect([this, i](bool b) { selected(i, b); });
 			checkboxes_[i] = cb;
 			horizontal->add(cb);
 			horizontal->add_space(kSpacing);
@@ -128,7 +128,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 		tab_panel_.add(category.name(), category.picture(), vertical, category.descname());
 	}
 	add(&current_selection_names_, UI::Box::Resizing::kFullSize);
-	tab_panel_.sigclicked.connect([this]() { update_label();});
+	tab_panel_.sigclicked.connect([this]() { update_label(); });
 	update_label();
 }
 

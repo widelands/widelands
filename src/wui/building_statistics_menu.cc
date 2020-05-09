@@ -164,12 +164,18 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	   3 * kButtonRowHeight, kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
 	   g_gr->images().get("images/ui_basic/scrollbar_right.png"), _("Show next building"));
 
-	navigation_buttons_[NavigationButton::PrevOwned]->sigclicked.connect([this]() { jump_building(JumpTarget::kOwned, true);});
-	navigation_buttons_[NavigationButton::NextOwned]->sigclicked.connect([this]() { jump_building(JumpTarget::kOwned, false);});
-	navigation_buttons_[NavigationButton::PrevConstruction]->sigclicked.connect([this]() { jump_building(JumpTarget::kConstruction, true);});
-	navigation_buttons_[NavigationButton::NextConstruction]->sigclicked.connect([this]() { jump_building(JumpTarget::kConstruction, false);});
-	navigation_buttons_[NavigationButton::PrevUnproductive]->sigclicked.connect([this]() { jump_building(JumpTarget::kUnproductive, true);});
-	navigation_buttons_[NavigationButton::NextUnproductive]->sigclicked.connect([this]() { jump_building(JumpTarget::kUnproductive, false);});
+	navigation_buttons_[NavigationButton::PrevOwned]->sigclicked.connect(
+	   [this]() { jump_building(JumpTarget::kOwned, true); });
+	navigation_buttons_[NavigationButton::NextOwned]->sigclicked.connect(
+	   [this]() { jump_building(JumpTarget::kOwned, false); });
+	navigation_buttons_[NavigationButton::PrevConstruction]->sigclicked.connect(
+	   [this]() { jump_building(JumpTarget::kConstruction, true); });
+	navigation_buttons_[NavigationButton::NextConstruction]->sigclicked.connect(
+	   [this]() { jump_building(JumpTarget::kConstruction, false); });
+	navigation_buttons_[NavigationButton::PrevUnproductive]->sigclicked.connect(
+	   [this]() { jump_building(JumpTarget::kUnproductive, true); });
+	navigation_buttons_[NavigationButton::NextUnproductive]->sigclicked.connect(
+	   [this]() { jump_building(JumpTarget::kUnproductive, false); });
 
 	unproductive_percent_.changed.connect([this]() { low_production_changed(); });
 	unproductive_percent_.ok.connect([this]() { low_production_reset_focus(); });
@@ -407,7 +413,7 @@ void BuildingStatisticsMenu::add_button(DescriptionIndex id,
 
 	row->add(button_box);
 
-	building_buttons_[id]->sigclicked.connect([this, id]() { set_current_building_type(id);});
+	building_buttons_[id]->sigclicked.connect([this, id]() { set_current_building_type(id); });
 }
 
 void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {

@@ -109,10 +109,10 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(CampaignData* camp)
 	                                 _("Return to campaign selection"));
 	ok_.set_tooltip(is_tutorial_ ? _("Play this tutorial") : _("Play this scenario"));
 
-	ok_.sigclicked.connect([this]() { clicked_ok();});
-	back_.sigclicked.connect([this]() { clicked_back();});
-	table_.selected.connect([this](unsigned) { entry_selected();});
-	table_.double_clicked.connect([this](unsigned) { clicked_ok();});
+	ok_.sigclicked.connect([this]() { clicked_ok(); });
+	back_.sigclicked.connect([this]() { clicked_back(); });
+	table_.selected.connect([this](unsigned) { entry_selected(); });
+	table_.double_clicked.connect([this](unsigned) { clicked_ok(); });
 
 	if (is_tutorial_) {
 		scenario_difficulty_.set_visible(false);
@@ -146,7 +146,7 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(CampaignData* camp)
 	fill_table();
 	layout();
 
-	table_.cancel.connect([this]() { clicked_back();});
+	table_.cancel.connect([this]() { clicked_back(); });
 }
 
 void FullscreenMenuScenarioSelect::layout() {

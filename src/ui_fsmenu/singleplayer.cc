@@ -41,10 +41,18 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer()
      load_game(
         &vbox_, "load_game", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Load Game")),
      back(&vbox_, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Back")) {
-	new_game.sigclicked.connect([this]() { end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNewGame); });
-	campaign.sigclicked.connect([this]() { end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kCampaign); });
-	load_game.sigclicked.connect([this]() { end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kLoadGame); });
-	back.sigclicked.connect([this]() { end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack); });
+	new_game.sigclicked.connect([this]() {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNewGame);
+	});
+	campaign.sigclicked.connect([this]() {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kCampaign);
+	});
+	load_game.sigclicked.connect([this]() {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kLoadGame);
+	});
+	back.sigclicked.connect([this]() {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+	});
 
 	title.set_font_scale(scale_factor());
 

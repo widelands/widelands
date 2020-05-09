@@ -278,10 +278,10 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	box_game_.add(&game_clock_);
 
 	// Bind actions
-	language_dropdown_.selected.connect([this]() { update_language_stats(false);});
-	cancel_.sigclicked.connect([this]() { clicked_cancel();});
-	apply_.sigclicked.connect([this]() { clicked_apply();});
-	ok_.sigclicked.connect([this]() { clicked_ok();});
+	language_dropdown_.selected.connect([this]() { update_language_stats(false); });
+	cancel_.sigclicked.connect([this]() { clicked_cancel(); });
+	apply_.sigclicked.connect([this]() { clicked_apply(); });
+	ok_.sigclicked.connect([this]() { clicked_ok(); });
 
 	/** TRANSLATORS: Options: Save game automatically every: */
 	sb_autosave_.add_replacement(0, _("Off"));

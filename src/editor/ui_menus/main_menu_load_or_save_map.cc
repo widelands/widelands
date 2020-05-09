@@ -91,9 +91,9 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	show_mapnames_box_.add(cb_dont_localize_mapnames_, UI::Box::Resizing::kFullSize);
 	show_mapnames_box_.add_inf_space();
 
-	table_.set_column_compare(0, [this](uint32_t a, uint32_t b) { return compare_players(a, b);});
-	table_.set_column_compare(1, [this](uint32_t a, uint32_t b) { return compare_mapnames(a, b);});
-	table_.set_column_compare(2, [this](uint32_t a, uint32_t b) { return compare_size(a, b);});
+	table_.set_column_compare(0, [this](uint32_t a, uint32_t b) { return compare_players(a, b); });
+	table_.set_column_compare(1, [this](uint32_t a, uint32_t b) { return compare_mapnames(a, b); });
+	table_.set_column_compare(2, [this](uint32_t a, uint32_t b) { return compare_size(a, b); });
 
 	table_and_details_box_.add(&table_, UI::Box::Resizing::kExpandBoth);
 	table_and_details_box_.add_space(0);

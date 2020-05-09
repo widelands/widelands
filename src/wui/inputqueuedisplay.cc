@@ -306,8 +306,8 @@ void InputQueueDisplay::update_priority_buttons() {
 		NEVER_HERE();
 	}
 
-	priority_radiogroup_->changedto.connect([this](int32_t i) { radiogroup_changed(i);});
-	priority_radiogroup_->clicked.connect([this]() { radiogroup_clicked();});
+	priority_radiogroup_->changedto.connect([this](int32_t i) { radiogroup_changed(i); });
+	priority_radiogroup_->clicked.connect([this]() { radiogroup_clicked(); });
 
 	bool const can_act = igb_.can_act(building_.owner().player_number());
 	if (!can_act)

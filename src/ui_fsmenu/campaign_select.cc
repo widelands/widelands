@@ -50,7 +50,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(Campaigns* campvis)
 
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
 	back_.sigclicked.connect([this]() { clicked_back(); });
-	table_.selected.connect([this](unsigned) { entry_selected();});
+	table_.selected.connect([this](unsigned) { entry_selected(); });
 	table_.double_clicked.connect([this](unsigned) { clicked_ok(); });
 
 	/** TRANSLATORS: Campaign difficulty table header */
@@ -59,7 +59,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(Campaigns* campvis)
 	table_.add_column(
 	   0, _("Campaign Name"), _("Campaign Name"), UI::Align::kLeft, UI::TableColumnType::kFlexible);
 	table_.set_column_compare(
-	   0, [this](uint32_t a, uint32_t b) { return compare_difficulty(a, b);});
+	   0, [this](uint32_t a, uint32_t b) { return compare_difficulty(a, b); });
 	table_.set_sort_column(0);
 	table_.focus();
 	fill_table();

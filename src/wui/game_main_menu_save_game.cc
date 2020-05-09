@@ -99,12 +99,13 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 
 	ok_.set_enabled(false);
 
-	filename_editbox_.changed.connect([this]() { edit_box_changed();});
-	filename_editbox_.ok.connect([this]() { ok();});
-	filename_editbox_.cancel.connect([this, &parent]() { reset_editbox_or_die(parent.game().save_handler().get_cur_filename());});
+	filename_editbox_.changed.connect([this]() { edit_box_changed(); });
+	filename_editbox_.ok.connect([this]() { ok(); });
+	filename_editbox_.cancel.connect(
+	   [this, &parent]() { reset_editbox_or_die(parent.game().save_handler().get_cur_filename()); });
 
-	ok_.sigclicked.connect([this]() { ok();});
-	cancel_.sigclicked.connect([this]() { die();});
+	ok_.sigclicked.connect([this]() { ok(); });
+	cancel_.sigclicked.connect([this]() { die(); });
 
 	load_or_save_.table().selected.connect([this](unsigned) { entry_selected(); });
 	load_or_save_.table().double_clicked.connect([this](unsigned) { ok(); });

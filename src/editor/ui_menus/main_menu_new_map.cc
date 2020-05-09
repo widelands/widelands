@@ -75,8 +75,8 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent, Registry& registry)
 	box_.add(&list_);
 	box_.add_space(2 * margin_);
 
-	cancel_button_.sigclicked.connect([this]() { clicked_cancel();});
-	ok_button_.sigclicked.connect([this]() { clicked_create_map();});
+	cancel_button_.sigclicked.connect([this]() { clicked_cancel(); });
+	ok_button_.sigclicked.connect([this]() { clicked_create_map(); });
 	if (UI::g_fh->fontset()->is_rtl()) {
 		button_box_.add(&ok_button_);
 		button_box_.add(&cancel_button_);

@@ -132,8 +132,10 @@ SpinBox::SpinBox(Panel* const parent,
 		              g_gr->images().get("images/ui_basic/scrollbar_right_fast.png"),
 		              _("Increase the value by 10"));
 
-		sbi_->button_ten_plus->sigclicked.connect([this, big_step_size]() { change_value(big_step_size); });
-		sbi_->button_ten_minus->sigclicked.connect([this, big_step_size]() { change_value(-big_step_size); });
+		sbi_->button_ten_plus->sigclicked.connect(
+		   [this, big_step_size]() { change_value(big_step_size); });
+		sbi_->button_ten_minus->sigclicked.connect(
+		   [this, big_step_size]() { change_value(-big_step_size); });
 		sbi_->button_ten_plus->set_repeating(true);
 		sbi_->button_ten_minus->set_repeating(true);
 		buttons_.push_back(sbi_->button_ten_minus);

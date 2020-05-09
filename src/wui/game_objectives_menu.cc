@@ -50,7 +50,7 @@ GameObjectivesMenu::GameObjectivesMenu(UI::Panel* parent, UI::UniqueWindow::Regi
                    "",
                    UI::Align::kLeft,
                    UI::MultilineTextarea::ScrollMode::kScrollNormalForced) {
-	list.selected.connect([this](uint32_t a) { selected(a);});
+	list.selected.connect([this](uint32_t a) { selected(a); });
 	if (get_usedefaultpos()) {
 		center_to_parent();
 	}

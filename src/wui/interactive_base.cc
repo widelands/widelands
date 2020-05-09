@@ -255,8 +255,8 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 	//  funny results.
 	unset_sel_picture();
 
-	setDefaultCommand([this](const std::vector<std::string>& str) { cmd_lua(str);});
-	addCommand("mapobject", [this](const std::vector<std::string>& str) { cmd_map_object(str);});
+	setDefaultCommand([this](const std::vector<std::string>& str) { cmd_lua(str); });
+	addCommand("mapobject", [this](const std::vector<std::string>& str) { cmd_map_object(str); });
 }
 
 InteractiveBase::~InteractiveBase() {

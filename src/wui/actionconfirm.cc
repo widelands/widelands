@@ -144,12 +144,12 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
 
 	UI::Button* okbtn = new UI::Button(button_box, "ok", 0, 0, 80, 34, UI::ButtonStyle::kWuiMenu,
 	                                   g_gr->images().get("images/wui/menu_okay.png"));
-	okbtn->sigclicked.connect([this]() { ok();});
+	okbtn->sigclicked.connect([this]() { ok(); });
 
 	UI::Button* cancelbtn =
 	   new UI::Button(button_box, "abort", 0, 0, 80, 34, UI::ButtonStyle::kWuiMenu,
 	                  g_gr->images().get("images/wui/menu_abort.png"));
-	cancelbtn->sigclicked.connect([this]() { die();});
+	cancelbtn->sigclicked.connect([this]() { die(); });
 
 	button_box->add(
 	   UI::g_fh->fontset()->is_rtl() ? okbtn : cancelbtn, UI::Box::Resizing::kFillSpace);

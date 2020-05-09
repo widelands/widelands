@@ -74,7 +74,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 		add(&name, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 		slot_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
-		slot_dropdown_.selected.connect([this]() { set_slot();});
+		slot_dropdown_.selected.connect([this]() { set_slot(); });
 
 		update();
 		layout();

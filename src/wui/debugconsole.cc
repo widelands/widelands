@@ -36,9 +36,9 @@ struct Console : public ChatProvider, public Handler {
 	Handler::HandlerFn default_handler;
 
 	Console() {
-		addCommand("help", [this](const std::vector<std::string>& str) { cmdHelp(str);});
-		addCommand("ls", [this](const std::vector<std::string>& str) { cmdLs(str);});
-		default_handler = [this](const std::vector<std::string>& str) { cmdErr(str);};
+		addCommand("help", [this](const std::vector<std::string>& str) { cmdHelp(str); });
+		addCommand("ls", [this](const std::vector<std::string>& str) { cmdLs(str); });
+		default_handler = [this](const std::vector<std::string>& str) { cmdErr(str); };
 	}
 
 	~Console() override {

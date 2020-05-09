@@ -76,10 +76,10 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 
 	back_.sigclicked.connect([this]() { clicked_back(); });
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
-	table_.selected.connect([this](uint32_t) { entry_selected();});
+	table_.selected.connect([this](uint32_t) { entry_selected(); });
 	table_.double_clicked.connect([this](uint32_t) { clicked_ok(); });
-	table_.set_column_compare(0, [this](uint32_t a, uint32_t b) { return compare_players(a, b);});
-	table_.set_column_compare(1, [this](uint32_t a, uint32_t b) { return compare_mapnames(a, b);});
+	table_.set_column_compare(0, [this](uint32_t a, uint32_t b) { return compare_players(a, b); });
+	table_.set_column_compare(1, [this](uint32_t a, uint32_t b) { return compare_mapnames(a, b); });
 	table_.set_column_compare(2, [this](uint32_t a, uint32_t b) { return compare_size(a, b); });
 
 	UI::Box* hbox = new UI::Box(&checkboxes_, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
@@ -375,7 +375,7 @@ void FullscreenMenuMapSelect::fill_table() {
 		table_.select(0);
 	}
 	set_has_selection();
-	table_.cancel.connect([this]() { clicked_back();});
+	table_.cancel.connect([this]() { clicked_back(); });
 
 	if (unspecified_balancing_found != unspecified_balancing_found_) {
 		unspecified_balancing_found_ = unspecified_balancing_found;

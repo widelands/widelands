@@ -48,13 +48,17 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
      showloginbox(
         &vbox_, "lan", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Online Game Settings")),
      back(&vbox_, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Back")) {
-	metaserver.sigclicked.connect([this]() { internet_login();});
+	metaserver.sigclicked.connect([this]() { internet_login(); });
 
-	lan.sigclicked.connect([this]() { end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kLan);});
+	lan.sigclicked.connect([this]() {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kLan);
+	});
 
-	showloginbox.sigclicked.connect([this]() { show_internet_login();});
+	showloginbox.sigclicked.connect([this]() { show_internet_login(); });
 
-	back.sigclicked.connect([this]() { end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);});
+	back.sigclicked.connect([this]() {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+	});
 
 	title.set_font_scale(scale_factor());
 

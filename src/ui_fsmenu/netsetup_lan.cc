@@ -114,14 +114,14 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
 	playername_.set_font_scale(scale_factor());
 	hostname_.set_font_scale(scale_factor());
 
-	hostname_.changed.connect([this]() { change_hostname();});
+	hostname_.changed.connect([this]() { change_hostname(); });
 	playername_.set_text(get_config_string("nickname", (_("nobody"))));
-	playername_.changed.connect([this]() { change_playername();});
+	playername_.changed.connect([this]() { change_playername(); });
 	table_.add_column(190, _("Host"));
 	table_.add_column(0, _("Map"), "", UI::Align::kLeft, UI::TableColumnType::kFlexible);
 	table_.add_column(90, _("State"));
-	table_.selected.connect([this](int32_t i) { game_selected(i);});
-	table_.double_clicked.connect([this](int32_t i) { game_doubleclicked(i);});
+	table_.selected.connect([this](int32_t i) { game_selected(i); });
+	table_.double_clicked.connect([this](int32_t i) { game_doubleclicked(i); });
 	discovery_.set_callback(discovery_callback, this);
 
 	joingame_.set_enabled(false);

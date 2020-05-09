@@ -204,7 +204,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 				   capsbuttons, "start_or_cancel_expedition", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 				   g_gr->images().get("images/wui/buildings/start_expedition.png"));
 				update_expedition_button(!pd->expedition_started());
-				expeditionbtn_->sigclicked.connect([this]() { act_start_or_cancel_expedition();});
+				expeditionbtn_->sigclicked.connect([this]() { act_start_or_cancel_expedition(); });
 				capsbuttons->add(expeditionbtn_);
 
 				expedition_canceled_subscriber_ =
@@ -229,7 +229,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 				      _("Continue") :
 				      /** TRANSLATORS: Stop/Continue toggle button for production sites. */
 				      _("Stop"));
-				stopbtn->sigclicked.connect([this]() { act_start_stop();});
+				stopbtn->sigclicked.connect([this]() { act_start_stop(); });
 				capsbuttons->add(stopbtn);
 
 				// Add a fixed width separator rather than infinite space so the

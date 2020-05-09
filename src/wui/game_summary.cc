@@ -105,9 +105,9 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	players_table_->add_column(100, _("Time"), "", UI::Align::kCenter);
 
 	// Connections
-	continue_button_->sigclicked.connect([this]() { continue_clicked();});
-	stop_button_->sigclicked.connect([this]() { stop_clicked();});
-	players_table_->selected.connect([this](uint32_t i) { player_selected(i);});
+	continue_button_->sigclicked.connect([this]() { continue_clicked(); });
+	stop_button_->sigclicked.connect([this]() { stop_clicked(); });
+	players_table_->selected.connect([this](uint32_t i) { player_selected(i); });
 
 	// Window
 	center_to_parent();

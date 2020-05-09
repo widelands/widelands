@@ -63,7 +63,7 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UI::Panel* const parent,
 	int32_t xplayerinit = w * 55 / 125;
 	d->plr_name = new UI::Textarea(this, xplrname, 0, xplayertype - xplrname, h);
 	d->btnEnablePlayer = new UI::Checkbox(this, Vector2i(xplayertype - 23, 0), "");
-	d->btnEnablePlayer->changedto.connect([this](bool b) { enable_player(b);});
+	d->btnEnablePlayer->changedto.connect([this](bool b) { enable_player(b); });
 	d->btnPlayerType =
 	   new UI::Button(this, "player_type", xplayertype, 0, xplayertribe - xplayertype - 2, h / 2,
 	                  UI::ButtonStyle::kFsMenuSecondary, "");
