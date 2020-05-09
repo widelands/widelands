@@ -125,6 +125,7 @@ void FullscreenMenuLaunchGame::add_all_widgets() {
 	content_box_.add_space(10 * padding_);
 
 	map_box_.add(&map_details, UI::Box::Resizing::kFullSize);
+	map_box_.add_space(5 * padding_);
 	map_box_.add(&peaceful_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	map_box_.add_space(5 * padding_);
 	map_box_.add(&win_condition_type, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -153,7 +154,7 @@ void FullscreenMenuLaunchGame::layout() {
 	log("res %d x %d\n", g_gr->get_xres(), g_gr->get_yres());
 	log("w=%d, h=%d\n", get_w(), get_h());
 	title_.set_font_scale(scale_factor());
-	map_details.set_font_scale(scale_factor(), standard_element_height_);
+	map_details.force_new_dimensions(scale_factor(), standard_element_height_);
 	win_condition_type.set_font_scale(scale_factor());
 
 	//	main_box_.set_desired_size(get_w(), get_h());

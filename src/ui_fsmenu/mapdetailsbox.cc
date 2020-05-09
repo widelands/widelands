@@ -54,7 +54,6 @@ MapDetailsBox::MapDetailsBox(Panel* parent,
 
 	log("max_y: %d\n", max_y);
 	log("max_x: %d\n", max_x);
-	//	map_name_.set_font_scale(2);
 }
 MapDetailsBox::~MapDetailsBox() {
 }
@@ -115,7 +114,7 @@ void MapDetailsBox::load_map_info(GameSettingsProvider* settings) {
 void MapDetailsBox::set_select_map_action(std::function<void()> action) {
 	select_map_.sigclicked.connect(action);
 }
-void MapDetailsBox::set_font_scale(float scale, uint32_t standard_element_height) {
+void MapDetailsBox::force_new_dimensions(float scale, uint32_t standard_element_height) {
 	title_.set_font_scale(scale);
 	map_name_.set_font_scale(scale);
 	select_map_.set_desired_size(standard_element_height, standard_element_height);

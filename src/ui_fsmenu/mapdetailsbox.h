@@ -20,7 +20,7 @@ public:
 	/// passed callback is called when the select map button is clicked
 	void set_select_map_action(std::function<void()> action);
 
-	void set_font_scale(float scale, uint32_t standard_element_height);
+	void force_new_dimensions(float scale, uint32_t standard_element_height);
 
 private:
 	UI::Textarea title_;
