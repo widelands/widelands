@@ -40,13 +40,14 @@ namespace Widelands {
 /*******************************************************************************
               Weighting factors to tweak the algorithm's decisions
 *******************************************************************************/
+// All times in this file are given in milliseconds of gametime.
 
 // Performance tradeoff in the First Pass
 constexpr uint32_t kActualDurationsRecalculationInterval = 60 * 1000;
 
 // Give a ship the highest score for assigning wares to it if it will
-// arrive at the port of interest within the next 10 s,
-// or the lowest score if this will take longer than 10 min
+// arrive at the port of interest within the next 10 s gametime,
+// or the lowest score if this will take longer than 10 min gametime
 constexpr Duration kWonderfullyShortDuration = 10 * 1000;   // 10 s
 constexpr Duration kHorriblyLongDuration = 10 * 60 * 1000;  // 10 min
 
@@ -55,12 +56,15 @@ constexpr Duration kHorriblyLongDuration = 10 * 60 * 1000;  // 10 min
 // accepted if not enough idle ships are found.
 constexpr uint16_t kMinScoreForImmediateAcceptFactor = 14;  // NOCOM needs testing
 
-// Average sailing-time distance for two ports to be considered "close by" in 5.4
+// Average sailing-time distance for two ports to be considered "close by" in 5.4.
+// Needs to be int16_t rather than uint16_t to avoid a signed-unsigned-comparison.
 constexpr int16_t kDockGroupMaxDistanceFactor = 12 * 1800;
 
 // Distributing idle ships between ports in the Sixth Pass:
 // Sailing-time distance between a ship and a port so that the ship is considered
-// to be within convenient reach when the port needs a ship
+// to be within convenient reach when the port needs a ship. Used to ensure that
+// idle ships will always stay close to a dock.
+// Signed for the same reason as the previous constant.
 constexpr int16_t kNearbyDockMaxDistanceFactor = 8 * 1800;
 
 /*******************************************************************************
@@ -83,6 +87,31 @@ bool ShippingSchedule::empty() const {
 	return true;
 }
 
+void ShippingSchedule::start_expedition(Game& game, Ship& ship, PortDock& port) {
+	sslog("Loading expedition\n\n");
+	assert(port.expedition_ready_);
+	assert(ship.get_nritems() == 0);
+
+	std::vector<Worker*> workers;
+	std::vector<WareInstance*> wares;
+	port.expedition_bootstrap_->get_waiting_workers_and_wares(
+	   game, port.owner().tribe(), &workers, &wares);
+	for (Worker* worker : workers) {
+		ship.add_item(game, ShippingItem(*worker));
+	}
+	for (WareInstance* ware : wares) {
+		ship.add_item(game, ShippingItem(*ware));
+	}
+
+	ship.set_destination(game, nullptr);
+	ship.start_task_expedition(game);
+	port.cancel_expedition(game);
+
+	// The ship is technically not a part of the fleet any more.
+	// It will call ship_removed() now, erasing its plan from `plans_`.
+	// The ship will re-add itself when the expedition is completed or cancelled.
+}
+
 void ShippingSchedule::ship_arrived(Game& game, Ship& ship, PortDock& port) {
 	sslog(
 	   "\nShippingSchedule::ship_arrived(%s at %u)\n", ship.get_shipname().c_str(), port.serial());
@@ -91,41 +120,20 @@ void ShippingSchedule::ship_arrived(Game& game, Ship& ship, PortDock& port) {
 	const size_t plan_size = plan->second.size();
 	assert(plan_size);
 
-	const SchedulingState& ss = plan->second.front();
-	assert(ss.dock == &port);
+	const SchedulingState& scheduling_state = plan->second.front();
+	assert(scheduling_state.dock == &port);
 
-	if (ss.expedition) {
-		sslog("Loading expedition\n\n");
-		assert(port.expedition_ready_);
-		assert(ship.get_nritems() == 0);
+	if (scheduling_state.expedition) {
 		assert(plan_size == 1);  // no planning beyond the expedition
-		assert(ss.load_there.empty());
-
-		std::vector<Worker*> workers;
-		std::vector<WareInstance*> wares;
-		port.expedition_bootstrap_->get_waiting_workers_and_wares(
-		   game, port.owner().tribe(), &workers, &wares);
-		for (Worker* worker : workers) {
-			ship.add_item(game, ShippingItem(*worker));
-		}
-		for (WareInstance* ware : wares) {
-			ship.add_item(game, ShippingItem(*ware));
-		}
-		ship.set_destination(game, nullptr);
-		ship.start_task_expedition(game);
-		port.cancel_expedition(game);
-
-		// The ship is technically not a part of the fleet any more.
-		// It will call ship_removed() now, erasing `plan` from `plans_`.
-		// The ship will re-add itself when the expedition is completed or cancelled.
-		return;
+		assert(scheduling_state.load_there.empty());
+		return start_expedition(game, ship, port);
 	}
 
-	assert(plan_size >= 1 + ss.load_there.size());  // besides the current portdock we
-	                                                // should at least visit all the
-	                                                // destinations for which we are
-	                                                // loading wares
-	for (const auto& pair : ss.load_there) {
+	assert(plan_size >= 1 + scheduling_state.load_there.size());  // besides the current portdock
+	                                                              // we should at least visit all
+	                                                              // the destinations for which
+	                                                              // we are loading wares
+	for (const auto& pair : scheduling_state.load_there) {
 		assert(pair.first.get(game));
 		assert(pair.first != &port);
 		assert(pair.second > 0);
@@ -149,108 +157,115 @@ void ShippingSchedule::ship_arrived(Game& game, Ship& ship, PortDock& port) {
 	}
 }
 
+// Helper function for port_removed().
+// Returns whether this ship was planning to visit this dock at all.
+bool ShippingSchedule::do_remove_port_from_plan(Game& game, PortDock* dock, Ship& ship, ShipPlan& ship_plan) {
+	size_t index_of_deleted_dock = 0;
+	const size_t nr_entries = ship_plan.size();
+	bool dock_found = false;
+	for (auto& ss : ship_plan) {
+		if (ss.dock == dock) {
+			dock_found = true;
+		}
+		auto it = ss.load_there.find(dock);
+		if (it != ss.load_there.end()) {
+			assert(!dock_found);
+			ss.load_there.erase(it);
+			// TODO(Nordfriese): Perhaps the ship could now skip some destinations
+			// (like in the third pass)
+		}
+		if (!dock_found) {
+			++index_of_deleted_dock;
+		}
+	}
+	if (!dock_found) {
+		return false;
+	}
+	if (index_of_deleted_dock == 0) {
+		// reroute to next dock
+		ship_plan.pop_front();
+		if (ship_plan.empty()) {
+			// no other docks to visit, but possibly wares left, reroute to the closest dock
+			PortDock* closest = nullptr;
+			int32_t dist = 0;
+			for (PortDock* pd : fleet_.get_ports()) {
+				Path path;
+				int32_t d = -1;
+				ship.calculate_sea_route(game, *pd, &path);
+				game.map().calc_cost(path, &d, nullptr);
+				assert(d >= 0);
+				if (!closest || d < dist) {
+					dist = d;
+					closest = pd;
+				}
+			}
+			if (closest) {
+				log("Ship %s is carrying %u items, rerouting to NEW destination %u\n",
+				    ship.get_shipname().c_str(),
+				    ship.get_nritems(), closest->serial());
+				ship_plan.push_back(SchedulingState(closest, false, dist));
+				ship.set_destination(game, closest);
+			} else {
+				// PANIC! There are no ports at all left!!
+				// But we might still have cargo!!! What should we do????
+				// Stay calm. Just do nothing. Nothing at all.
+				log("Ship %s is carrying %u items and there are no ports left, setting NO "
+				    "destination\n",
+				    ship.get_shipname().c_str(),
+				    ship.get_nritems());
+				ship.set_destination(game, nullptr);
+			}
+		} else {  // the ships has more destinations in its plan, just reroute to the next one
+			ship.set_destination(game, ship_plan.front().dock.get(game));
+			sslog("Rerouted %s to %u\n", ship.get_shipname().c_str(),
+			      ship_plan.front().dock.serial());
+			Path path;
+			ship.calculate_sea_route(
+			   game, *ship_plan.front().dock.get(game), &path);
+			int32_t d = -1;
+			game.map().calc_cost(path, &d, nullptr);
+			assert(d >= 0);
+			ship_plan.front().duration_from_previous_location = d;
+		}
+	} else {  // the deleted dock is not the next one, this is a bit easier to handle
+		sslog("no rerouting for %s, only recalc schedule\n",
+		      ship.get_shipname().c_str());
+		// no rerouting needed, just recalc the schedule time
+		auto deleteme = ship_plan.begin();
+		for (size_t i = index_of_deleted_dock; i; --i) {
+			++deleteme;
+		}
+		ship_plan.erase(deleteme);
+		if (index_of_deleted_dock + 1 < nr_entries) {
+			auto i1 = ship_plan.begin();
+			auto i2 = ship_plan.begin();
+			for (size_t i = index_of_deleted_dock; i; --i) {
+				if (i != index_of_deleted_dock) {
+					++i1;
+				}
+				++i2;
+			}
+			assert(i1 != i2);
+			Path path;
+			fleet_.get_path(*i1->dock.get(game), *i2->dock.get(game), path);
+			int32_t d = -1;
+			game.map().calc_cost(path, &d, nullptr);
+			assert(d >= 0);
+			i2->duration_from_previous_location = d;
+		}
+	}
+	return true;
+}
+
 // `dock` is not a dangling reference yet, but this function is called
 // via `ShipFleet::remove_port()` from `PortDock::cleanup()`
 void ShippingSchedule::port_removed(Game& game, PortDock* dock) {
 	sslog("\nShippingSchedule::port_removed (%u)\n", dock->serial());
 	// Find all ships planning to visit this dock and reroute them.
 	std::vector<Ship*> ships_heading_there;
-	for (auto& pair : plans_) {
-		size_t index_of_deleted_dock = 0;
-		const size_t nr_entries = pair.second.size();
-		bool dock_found = false;
-		for (auto& ss : pair.second) {
-			if (ss.dock == dock) {
-				dock_found = true;
-			}
-			auto it = ss.load_there.find(dock);
-			if (it != ss.load_there.end()) {
-				assert(!dock_found);
-				ss.load_there.erase(it);
-				// TODO(Nordfriese): Perhaps the ship could not skip some destinations
-				// (like in the third pass)
-			}
-			if (!dock_found) {
-				++index_of_deleted_dock;
-			}
-		}
-		if (!dock_found) {
-			continue;
-		}
-		ships_heading_there.push_back(pair.first.get(game));
-		if (index_of_deleted_dock == 0) {
-			// reroute to next dock
-			pair.second.pop_front();
-			if (pair.second.empty()) {
-				// no other docks to visit, but wares left, reroute to the closest one
-				if (fleet_.get_ports().empty() || pair.first.get(game)->get_nritems() == 0) {
-					// PANIC! There are no ports at all left!!
-					// But we still have cargo!!! What should we do????
-					// Stay calm. Just do nothing. Nothing at all.
-					log("Ship %s is carrying %u items OR there are no ports left, setting NO "
-					    "destination\n",
-					    pair.first.get(game)->get_shipname().c_str(),
-					    pair.first.get(game)->get_nritems());
-					pair.first.get(game)->set_destination(game, nullptr);
-				} else {
-					PortDock* closest = nullptr;
-					int32_t dist = 0;
-					for (PortDock* pd : fleet_.get_ports()) {
-						Path path;
-						int32_t d = -1;
-						pair.first.get(game)->calculate_sea_route(game, *pd, &path);
-						game.map().calc_cost(path, &d, nullptr);
-						assert(d >= 0);
-						if (!closest || d < dist) {
-							dist = d;
-							closest = pd;
-						}
-					}
-					assert(closest);
-					log("Ship %s is carrying %u items, rerouting to NEW destination %u\n",
-					    pair.first.get(game)->get_shipname().c_str(),
-					    pair.first.get(game)->get_nritems(), closest->serial());
-					pair.second.push_back(SchedulingState(closest, false, dist));
-					pair.first.get(game)->set_destination(game, closest);
-				}
-			} else {
-				pair.first.get(game)->set_destination(game, pair.second.front().dock.get(game));
-				sslog("Rerouted %s to %u\n", pair.first.get(game)->get_shipname().c_str(),
-				      pair.second.front().dock.serial());
-				Path path;
-				pair.first.get(game)->calculate_sea_route(
-				   game, *pair.second.front().dock.get(game), &path);
-				int32_t d = -1;
-				game.map().calc_cost(path, &d, nullptr);
-				assert(d >= 0);
-				pair.second.front().duration_from_previous_location = d;
-			}
-		} else {
-			sslog("no rerouting for %s, only recalc schedule\n",
-			      pair.first.get(game)->get_shipname().c_str());
-			// no rerouting needed, just recalc the schedule time
-			auto deleteme = pair.second.begin();
-			for (size_t i = index_of_deleted_dock; i; --i) {
-				++deleteme;
-			}
-			pair.second.erase(deleteme);
-			if (index_of_deleted_dock + 1 < nr_entries) {
-				auto i1 = pair.second.begin();
-				auto i2 = pair.second.begin();
-				for (size_t i = index_of_deleted_dock; i; --i) {
-					if (i != index_of_deleted_dock) {
-						++i1;
-					}
-					++i2;
-				}
-				assert(i1 != i2);
-				Path path;
-				fleet_.get_path(*i1->dock.get(game), *i2->dock.get(game), path);
-				int32_t d = -1;
-				game.map().calc_cost(path, &d, nullptr);
-				assert(d >= 0);
-				i2->duration_from_previous_location = d;
-			}
+	for (auto& ship_and_plan : plans_) {
+		if (do_remove_port_from_plan(game, dock, *ship_and_plan.first.get(game), ship_and_plan.second)) {
+			ships_heading_there.push_back(ship_and_plan.first.get(game));
 		}
 	}
 

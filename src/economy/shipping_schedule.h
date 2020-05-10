@@ -72,8 +72,8 @@ public:
 	void ship_added(Game&, Ship&);
 	void port_added(Game&, PortDock&);
 	/**
-	  * Forget the plans for this ship. Disappointed items will be
-	  * taken care of again by the next update().
+	  * Forget the plans for this ship. Items which this ship was supposed to
+	  * pick up later will be taken care of again by the next update().
 	  */
 	void ship_removed(const Game&, Ship*);
 	/**
@@ -83,9 +83,15 @@ public:
 	  */
 	void port_removed(Game&, PortDock*);
 
-	// Load wares&workers onto the ship and set the destination
+	// Load wares and workers onto the ship and set the destination.
+	// Unloading was previously performed by the ship in ship_update_transport().
 	void ship_arrived(Game&, Ship&, PortDock&);
 
+	/**
+	 * Check if there is any ship with a plan.
+	 * We may have ships and/or ports but no plans to carry anything.
+	 * @return true when no plans for any ship exist
+	 */
 	bool empty() const;
 
 	void log_general_info(const EditorGameBase&) const;
@@ -100,8 +106,14 @@ private:
 	ShipFleet& fleet_;
 	std::map<OPtr<Ship>, ShipPlan> plans_;
 
+	// Absolute gametime of last update
 	uint32_t last_updated_;
+	// Absolute gametimes of last recalculation update
+	// (we only perform such updates once in a while because they are very costly)
 	std::map<OPtr<Ship>, uint32_t> last_actual_duration_recalculation_;
+
+	void start_expedition(Game&, Ship&, PortDock&);
+	bool do_remove_port_from_plan(Game&, PortDock*, Ship&, ShipPlan&);
 
 	struct ScheduleLoader {
 		std::map<Serial, std::list<SchedulingStateT<Serial, CargoListLoader>>> plan;
