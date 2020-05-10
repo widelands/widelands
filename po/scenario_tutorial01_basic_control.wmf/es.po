@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-05-07 08:59+0000\n"
+"POT-Creation-Date: 2020-05-07 19:37+0000\n"
+"PO-Revision-Date: 2020-05-08 13:39+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -467,7 +467,7 @@ msgstr "Utilizar el minimapa"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:316
 msgid "Very good. And now about the minimap. "
-msgstr ""
+msgstr "Muy bien. Y ahora acerca del minimapa."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:318
 msgid ""
@@ -701,7 +701,7 @@ msgid ""
 "It seems like you destroyed a construction site for a quarry we wanted to "
 "build. Luckily, we still have enough logs left this time, so you can simply "
 "build another one."
-msgstr ""
+msgstr "Parece que has destruido la obra de la cantera que queríamos construir. Por suerte nos sobran bastante troncos esta vez, por eso puedes construir otra facilmente."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
 msgid ""
@@ -1064,17 +1064,17 @@ msgstr "Sin embargo, dado que ya conoces cómo se controla Widelands, también p
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:651
 msgid "To leave this game and return to the main menu:"
-msgstr ""
+msgstr "Para abandonar esta partida y volver al menú principal:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:652
 msgid ""
 "Click on the ‘Main Menu’ button on the very left at the bottom of the "
 "screen."
-msgstr ""
+msgstr "Haz clic en el botón \"Menú Principal\" en el extremo inferior izquierdo de la pantalla."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:653
 msgid "Then click on the ‘Exit Game’ entry."
-msgstr ""
+msgstr "Luego haz clic en la entrada ‘Salir del juego’."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:654
 msgid ""

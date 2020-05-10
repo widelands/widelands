@@ -3,14 +3,14 @@
 # 
 # Translators:
 # GunChleoc, 2016
-# Juanjo, 2015-2019
+# Juanjo, 2015-2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-04-12 17:33+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-05-07 19:37+0000\n"
+"PO-Revision-Date: 2020-05-09 21:28+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,7 +30,7 @@ msgstr "Economia"
 msgid ""
 "Welcome back. In this tutorial, I’ll tell you what you can do to check how "
 "well your economy works."
-msgstr "Benvingut de nou. En aquest tutorial us explicaré com comprovar la salut de la vostra economia."
+msgstr "Us donem la benvinguda de nou. En aquest tutorial us explicaré com comprovar la salut de la vostra economia."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:14
 msgid ""
@@ -93,7 +93,7 @@ msgstr "Obriu la finestra d'estadístiques d'edificis"
 msgid ""
 "Open the building statistics window for an overview over the buildings you "
 "have."
-msgstr ""
+msgstr "Obriu la finestra d'estadístiques dels edificis per tenir una visió general dels edificis que teniu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:51
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:125
@@ -289,14 +289,14 @@ msgstr "Doneu una mirada a les dues primeres pestanyes de la finestra d'estoc. M
 msgid ""
 "When you have seen enough, switch back to the third tab (‘Wares in "
 "warehouses’)."
-msgstr ""
+msgstr "Quan hi hagueu donat un cop d'ull, passeu a la tercera pestanya, «Béns en els magatzems»."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:155
 msgid ""
 "The stock window has four tabs. The first one shows you all your current "
 "wares, including those on roads, at flags and inside buildings waiting for "
 "processing."
-msgstr ""
+msgstr "La finestra d'estoc té quatre pestanyes. La primera mostra els béns actuals, incloent-hi els que hi ha en els camins, banderes i dins dels edificis esperant ser processats."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:156
 msgid ""
@@ -336,7 +336,7 @@ msgstr "Heu tancat la finestra d'estoc!"
 msgid ""
 "You have closed the stock window, but I have not yet finished with my "
 "explanation. Would you please reopen it and choose the first tab?"
-msgstr ""
+msgstr "Heu tancat la finestra d'estoc, però no he acabat l'explicació. Si us plau, podeu tornar a obrir-la i escollir la primera pestanya?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:189
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:191
@@ -356,7 +356,7 @@ msgstr "Heu tancat la finestra d'estoc abans que acabés d'explicar-vos-ho tot. 
 #. TRANSLATORS: "it" refers to the "Stock" window.
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:195
 msgid "Otherwise, please reopen it and have a look at all its tabs."
-msgstr ""
+msgstr "Si no, torneu a obrir-la i mireu totes les pestanyes."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:203
 msgid ""
@@ -503,13 +503,13 @@ msgid ""
 "The ‘Wares’ tab shows information about the wares that your tribe needs, "
 "including a short help text, a list of buildings that produce each ware, the"
 " needed wares to produce it and where the ware is consumed."
-msgstr "La pestanya «Béns» mostra informació sobre els béns que necessita la vostra cultura, incloent un petit text d'ajuda, una llista dels edificis que produeixen cada bé, els béns necessaris per obtenir altres béns més elaborats i on es consumeix cada bé."
+msgstr "La pestanya «Béns» mostra informació sobre els béns que necessita la vostra cultura, incloent-hi un petit text d'ajuda, una llista dels edificis que produeixen cada bé, els béns necessaris per obtenir altres béns més elaborats i on es consumeix cada bé."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:285
 msgid ""
 "The ‘Workers’ tab shows information about your tribe’s workers in a similar "
 "manner to the wares in the second tab."
-msgstr "La pestanya «Treballadors» mostra informació sobre els treballadors de la vostra cultura d'una manera pareguda a la que es fa servir a la segona pestanya."
+msgstr "La pestanya «Treballadors» mostra informació sobre els treballadors de la vostra cultura d'una manera pareguda a la de la segona pestanya."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:286
 msgid ""
@@ -583,21 +583,21 @@ msgstr "Quan feu clic en el punt roig (prioritat baixa), el bé corresponent es 
 msgid ""
 "The actual supply state is indicated by varying colors of the ware icons "
 "themselves:"
-msgstr ""
+msgstr "L'estat actual del subministrament s'indica amb diversos colors dels béns:"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:323
 msgid "Wares stored in the building are shown in full color."
-msgstr ""
+msgstr "Si hi ha béns emmagatzemats a l'edifici, es mostren en color."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:324
 msgid "Missing wares are greyed out."
-msgstr ""
+msgstr "Els béns que fan falta estan pintats en gris."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:325
 msgid ""
 "Wares not present in the building yet but already being transported there "
 "are shown in a darker grey."
-msgstr ""
+msgstr "Si no hi ha béns a l'edifici però estan de camí a l'edifici, la icona corresponent es mostrarà en un gris més fosc."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:326
 msgid ""
@@ -605,7 +605,7 @@ msgid ""
 "because they supply our taverns, so you could set water to the highest "
 "priority for them. The other buildings (for example the donkey farm) would "
 "then get less water, but the bakery could work faster."
-msgstr "En el nostre cas, potser voleu que les fleques funcionin tan de pressa com sigui possible perquè donen subministrament a les tavernes. Així que hauríeu de donar la màxima prioritat a que es destini aigua cap a les fleques. Els altres edificis, com per exemple la granja d'ases, rebran menys poals d'aigua, però almenys les fleques treballaran més ràpidament."
+msgstr "En el nostre cas, potser voleu que les fleques funcionin tan de pressa com sigui possible perquè donen subministrament a les tavernes. Així que hauríeu de donar la màxima prioritat al fet que es destini aigua cap a les fleques. Els altres edificis, com per exemple la granja d'ases, rebran menys poals d'aigua, però almenys les fleques treballaran més ràpidament."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:334
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:336
@@ -625,7 +625,7 @@ msgstr "Estadístiques de béns"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:343
 msgid "Let’s have a look at how our wares production is doing."
-msgstr "Fem una ullada a la producció de béns."
+msgstr "Donem una ullada a la producció de béns."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:350
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:352
@@ -773,7 +773,7 @@ msgid ""
 "Now I’ll tell you how you can determine how many wares you want to have. The"
 " window for this purpose can be accessed via any flag and is called "
 "‘Configure economy’."
-msgstr ""
+msgstr "Ara us contaré com podeu determinar quants béns voleu tenir. La finestra per aquest propòsit és accessible a través de qualsevol bandera i s'anomena «Configura l'economia»."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:473
 msgid "This is the icon."

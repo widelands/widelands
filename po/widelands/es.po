@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"POT-Creation-Date: 2020-05-07 19:37+0000\n"
 "PO-Revision-Date: 2020-05-06 19:09+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
@@ -148,17 +148,17 @@ msgid "No AI"
 msgstr "No IA"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:93
+#: ../../src/ai/defaultai.h:94
 msgid "Normal AI"
 msgstr "IA normal"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:108
+#: ../../src/ai/defaultai.h:109
 msgid "Weak AI"
 msgstr "IA débil"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:123
+#: ../../src/ai/defaultai.h:124
 msgid "Very Weak AI"
 msgstr "IA muy débil"
 
@@ -1489,7 +1489,7 @@ msgid "Initializing game…"
 msgstr ""
 
 #: ../../src/logic/game.cc:372 ../../src/logic/game.cc:408
-#: ../../src/ui_basic/progresswindow.cc:52 ../../src/wlapplication.cc:1489
+#: ../../src/ui_basic/progresswindow.cc:52 ../../src/wlapplication.cc:1495
 msgid "Loading…"
 msgstr "Cargando…"
 
@@ -1705,9 +1705,9 @@ msgstr "la economía no necesita el trabajador '%s'"
 #. * TRANSLATORS:    %2$s = "Ox"
 #: ../../src/logic/map_objects/tribes/production_program.cc:320
 #: ../../src/logic/map_objects/tribes/production_program.cc:344
-#: ../../src/logic/map_objects/tribes/production_program.cc:788
-#: ../../src/logic/map_objects/tribes/production_program.cc:863
-#: ../../src/logic/map_objects/tribes/production_program.cc:914
+#: ../../src/logic/map_objects/tribes/production_program.cc:784
+#: ../../src/logic/map_objects/tribes/production_program.cc:859
+#: ../../src/logic/map_objects/tribes/production_program.cc:910
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$ix %2$s"
@@ -1749,21 +1749,21 @@ msgstr "los trabajadores no necesitan más experiencia"
 #. * TRANSLATORS: on a development build if you can, and let us know if there
 #. are any issues
 #. * TRANSLATORS: we need to address for your language.
-#: ../../src/logic/map_objects/tribes/production_program.cc:500
-#: ../../src/logic/map_objects/tribes/production_program.cc:812
+#: ../../src/logic/map_objects/tribes/production_program.cc:496
+#: ../../src/logic/map_objects/tribes/production_program.cc:808
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr "No ha comenzado %1$s porque %2$s"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware '%s'"
-#: ../../src/logic/map_objects/tribes/production_program.cc:506
+#: ../../src/logic/map_objects/tribes/production_program.cc:502
 #, c-format
 msgid "Completed %1$s because %2$s"
 msgstr "Completado %1$s porque %2$s"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware '%s'"
-#: ../../src/logic/map_objects/tribes/production_program.cc:512
-#: ../../src/logic/map_objects/tribes/production_program.cc:518
+#: ../../src/logic/map_objects/tribes/production_program.cc:508
+#: ../../src/logic/map_objects/tribes/production_program.cc:514
 #, c-format
 msgid "Skipped %1$s because %2$s"
 msgstr "Saltado %1$s porque %2$s"
@@ -1772,7 +1772,7 @@ msgstr "Saltado %1$s porque %2$s"
 #. are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
 #. bread is missing'
-#: ../../src/logic/map_objects/tribes/production_program.cc:798
+#: ../../src/logic/map_objects/tribes/production_program.cc:794
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -1782,7 +1782,7 @@ msgstr[1] "%s hacen falta"
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
 #. wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:874
+#: ../../src/logic/map_objects/tribes/production_program.cc:870
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -1792,19 +1792,19 @@ msgstr[1] "Producidos %s"
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
 #. workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:925
+#: ../../src/logic/map_objects/tribes/production_program.cc:921
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] "%s reclutado"
 msgstr[1] "%s reclutados"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1085
+#: ../../src/logic/map_objects/tribes/production_program.cc:1081
 msgid "No soldier to train!"
 msgstr "¡No hay soldados para entrenar!"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1094
-#: ../../src/logic/map_objects/tribes/production_program.cc:1152
+#: ../../src/logic/map_objects/tribes/production_program.cc:1090
+#: ../../src/logic/map_objects/tribes/production_program.cc:1148
 msgid "No soldier found for this training level!"
 msgstr "¡No se han encontrado soldados para este nivel de entrenamiento!"
 
@@ -1812,7 +1812,7 @@ msgstr "¡No se han encontrado soldados para este nivel de entrenamiento!"
 #. description of the
 #. * training program, e.g. Completed upgrading soldier evade from level 0 to
 #. level 1
-#: ../../src/logic/map_objects/tribes/production_program.cc:1194
+#: ../../src/logic/map_objects/tribes/production_program.cc:1190
 #, c-format
 msgid "Completed %s"
 msgstr "Completado %s"
@@ -1855,7 +1855,7 @@ msgstr "(detenido)"
 msgid "%i%%"
 msgstr "%i %%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:1051
+#: ../../src/logic/map_objects/tribes/productionsite.cc:1054
 msgid "Can’t find any more resources!"
 msgstr "¡No se encuentran más recursos!"
 
@@ -2227,7 +2227,7 @@ msgid "Checking map"
 msgstr ""
 
 #: ../../src/network/gameclient.cc:151 ../../src/network/gamehost.cc:663
-#: ../../src/wlapplication.cc:1380
+#: ../../src/wlapplication.cc:1386
 msgid "Preparing game"
 msgstr "Preparando la partida"
 
@@ -2834,24 +2834,24 @@ msgid_plural "%d fields"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_basic/window.cc:115 ../../src/ui_fsmenu/about.cc:34
+#: ../../src/ui_basic/window.cc:125 ../../src/ui_fsmenu/about.cc:34
 #: ../../src/wui/watchwindow.cc:75
 msgid "Close"
 msgstr "Cerrar"
 
-#: ../../src/ui_basic/window.cc:168
+#: ../../src/ui_basic/window.cc:178
 msgid "Minimize"
 msgstr ""
 
-#: ../../src/ui_basic/window.cc:168
+#: ../../src/ui_basic/window.cc:178
 msgid "Restore"
 msgstr ""
 
-#: ../../src/ui_basic/window.cc:172
+#: ../../src/ui_basic/window.cc:182
 msgid "Pin"
 msgstr ""
 
-#: ../../src/ui_basic/window.cc:172
+#: ../../src/ui_basic/window.cc:182
 msgid "Unpin"
 msgstr ""
 
@@ -3586,11 +3586,11 @@ msgstr "Campañas"
 msgid "Load Game"
 msgstr "Cargar juego"
 
-#: ../../src/wlapplication.cc:1177
+#: ../../src/wlapplication.cc:1183
 msgid "Game data error"
 msgstr "Error de datos de juego"
 
-#: ../../src/wlapplication.cc:1185
+#: ../../src/wlapplication.cc:1191
 #, c-format
 msgid ""
 "Please report this problem to help us improve Widelands. You will find "
@@ -3598,18 +3598,18 @@ msgid ""
 "using build %1$s (%2$s)."
 msgstr "Por favor informa de este problema para ayudarnos a mejorar Widelands. Encontrarás mensajes relacionados en la salida estándar (stdout.txt en windows). Estas usando la build %1$s (%2$s)."
 
-#: ../../src/wlapplication.cc:1192
+#: ../../src/wlapplication.cc:1198
 msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Widelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing."
 msgstr "Por favor añade esta información a tu informe.\n\nWidelands intenta crear un archivo de guardado cuando ocurren errores durante la partida. Es normalmente – aunque no siempre – posible cargarlo y seguir jugando."
 
-#: ../../src/wlapplication.cc:1319
+#: ../../src/wlapplication.cc:1325
 msgid "Invalid Address"
 msgstr "Dirección Invalida"
 
-#: ../../src/wlapplication.cc:1320
+#: ../../src/wlapplication.cc:1326
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr "El nombre de host o dirección es inválida y no se puede conectar."
 
