@@ -163,7 +163,7 @@ void PortDock::init_fleet(EditorGameBase& egbase) {
 	ShipFleet* fleet = new ShipFleet(get_owner());
 	fleet->add_port(egbase, this);
 	fleet->init(egbase);
-	// Note: the Fleet calls our set_fleet automatically
+	// Note: the Fleet calls our set_fleet automatically, setting fleet_ to a valid ShipFleet*
 	assert(fleet_);
 	fleet_->update(egbase);
 }
@@ -383,29 +383,29 @@ uint32_t PortDock::count_waiting(const PortDock* dest) const {
 }
 
 uint32_t PortDock::calc_max_priority(const EditorGameBase& egbase, const PortDock& dest) const {
-	uint32_t p = 0;
+	uint32_t priority = 0;
 	for (const ShippingItem& si : waiting_) {
 		if (si.destination_dock_.serial() == dest.serial()) {
 			WareInstance* ware = nullptr;
 			Worker* worker = nullptr;
 			si.get(egbase, &ware, &worker);
-			++p;
+			++priority;
 			if (ware) {
 				assert(!worker);
 				if (ware->get_transfer() && ware->get_transfer()->get_request()) {
 					// I don't know when this shouldn't be true,
 					// but the regression tests assure me that it's possible…
-					p += ware->get_transfer()->get_request()->get_transfer_priority();
+					priority += ware->get_transfer()->get_request()->get_transfer_priority();
 				}
 			} else {
 				assert(worker);
 				if (worker->get_transfer() && worker->get_transfer()->get_request()) {
-					p += worker->get_transfer()->get_request()->get_transfer_priority();
+					priority += worker->get_transfer()->get_request()->get_transfer_priority();
 				}
 			}
 		}
 	}
-	return p;
+	return priority;
 }
 
 /// \returns whether an expedition was started or is even ready
@@ -464,6 +464,8 @@ void PortDock::log_general_info(const EditorGameBase& egbase) const {
 	}
 }
 
+// Changelog of version 5 → 6: deleted the list with the serials of ships heading
+// to this port as this information was moved to the ShippingSchedule
 constexpr uint8_t kCurrentPacketVersion = 6;
 
 PortDock::Loader::Loader() : warehouse_(0) {
@@ -484,6 +486,7 @@ void PortDock::Loader::load(FileRead& fr, uint8_t packet_version) {
 	}
 
 	// TODO(GunChleoc&Nordfriese): Savegame compatibility Build 20
+	// (remove when we break savegame compatibility)
 	if (packet_version == 5) {
 		for (uint32_t i = fr.unsigned_32(); i; --i) {
 			fr.unsigned_32();
@@ -504,6 +507,8 @@ void PortDock::Loader::load(FileRead& fr, uint8_t packet_version) {
 	pd.expedition_ready_ = (fr.unsigned_8() == 1) ? true : false;
 }
 
+// During the first loading phase we only loaded the serials.
+// Now all MapObjects have been created and we can load the actual pointers.
 void PortDock::Loader::load_pointers() {
 	PlayerImmovable::Loader::load_pointers();
 

@@ -698,6 +698,7 @@ void ShipFleet::log_general_info(const EditorGameBase& egbase) const {
 	molog("\n");
 }
 
+// Changelog of version 4 → 5: Added ShippingSchedule
 constexpr uint8_t kCurrentPacketVersion = 5;
 
 ShipFleet::Loader::Loader() {
@@ -737,12 +738,14 @@ void ShipFleet::Loader::load_pointers() {
 	// changes to the pending state.
 	bool save_act_pending = fleet.act_pending_;
 
+	MapObjectLoader& map_object_loader = mol();
+
 	for (const uint32_t& temp_ship : ships_) {
-		fleet.ships_.push_back(&mol().get<Ship>(temp_ship));
+		fleet.ships_.push_back(&map_object_loader.get<Ship>(temp_ship));
 		fleet.ships_.back()->set_fleet(&fleet);
 	}
 	for (const uint32_t& temp_port : ports_) {
-		fleet.ports_.push_back(&mol().get<PortDock>(temp_port));
+		fleet.ports_.push_back(&map_object_loader.get<PortDock>(temp_port));
 		fleet.ports_.back()->set_fleet(&fleet);
 	}
 
@@ -752,7 +755,7 @@ void ShipFleet::Loader::load_pointers() {
 
 	// TODO(Nordfriese): Savegame compatibility
 	if (packet_version_ >= 5) {
-		fleet.schedule_.load_pointers(mol());
+		fleet.schedule_.load_pointers(map_object_loader);
 	}
 }
 
