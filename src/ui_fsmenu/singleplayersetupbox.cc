@@ -204,7 +204,7 @@ SinglePlayerPossiblePlayerGroup::SinglePlayerPossiblePlayerGroup(
    int32_t const h,
    PlayerSlot id,
    GameSettingsProvider* const settings)
-   : UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h),
+   : UI::Box(parent, 0, 0, UI::Box::Horizontal),
      id_(id),
      role_(this,
            (boost::format("dropdown_slot%d") % static_cast<unsigned int>(id)).str(),
@@ -236,8 +236,8 @@ void SinglePlayerPossiblePlayerGroup::force_new_dimensions(float scale,
 }
 
 SinglePlayerPossiblePlayerSetupBox::SinglePlayerPossiblePlayerSetupBox(
-   UI::Panel* const parent, GameSettingsProvider* const settings, uint32_t buth)
-   : UI::Box(parent, 0, 0, UI::Box::Vertical, 0, 0),
+   UI::Panel* const parent, GameSettingsProvider* const settings, uint32_t standard_element_height)
+   : UI::Box(parent, 0, 0, UI::Box::Vertical),
      title_(this,
             0,
             0,
@@ -263,7 +263,7 @@ void SinglePlayerPossiblePlayerSetupBox::update() {
 	for (uint32_t i = 0; i < number_of_users; ++i) {
 		if (!possible_player_groups.at(i)) {
 			possible_player_groups.at(i) =
-			   new SinglePlayerPossiblePlayerGroup(this, 100, 50, i, settings_);
+			   new SinglePlayerPossiblePlayerGroup(this, 0, 50, i, settings_);
 			add(possible_player_groups.at(i), UI::Box::Resizing::kFullSize);
 			//         possible_player_groups.at(i)->layout();
 			possible_player_groups.at(i)->set_visible(true /*settings.players.at(i).state ==
@@ -276,7 +276,6 @@ void SinglePlayerPossiblePlayerSetupBox::force_new_dimensions(float scale,
 	for (auto& possible_player_group : possible_player_groups) {
 		possible_player_group->force_new_dimensions(scale, standard_element_height);
 	}
-	UI::Box::layout();
 }
 
 SinglePlayerSetupBox::SinglePlayerSetupBox(UI::Panel* const parent,

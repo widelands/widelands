@@ -32,7 +32,6 @@ private:
 
 	bool is_scenario_;
 
-	bool select_map();
 	void update(bool map_was_changed);
 	void set_player_names_and_tribes();
 	void switch_to_position(uint8_t const pos);

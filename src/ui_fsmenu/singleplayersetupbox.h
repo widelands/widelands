@@ -76,7 +76,7 @@ class SinglePlayerPossiblePlayerSetupBox : public UI::Box {
 public:
 	SinglePlayerPossiblePlayerSetupBox(UI::Panel* const parent,
 	                                   GameSettingsProvider* const settings,
-	                                   uint32_t buth);
+	                                   uint32_t standard_element_height);
 	void update();
 	void force_new_dimensions(float scale, uint32_t standard_element_height);
 

@@ -39,9 +39,9 @@ FullscreenMenuLaunchSPG2::FullscreenMenuLaunchSPG2(GameSettingsProvider* const s
  * showing the actual setup menu.
  */
 void FullscreenMenuLaunchSPG2::start() {
-	//	if (!select_map()) {
-	//		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
-	//	}
+	if (!clicked_select_map()) {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+	}
 }
 
 /**

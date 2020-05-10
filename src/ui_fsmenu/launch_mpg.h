@@ -72,10 +72,9 @@ private:
 	int32_t const label_height_;
 	int32_t const right_column_x_;
 
-	UI::Button change_map_or_save_;
+	//	UI::Button change_map_or_save_;
 	UI::Button help_button_;
-	UI::Textarea clients_, players_, map_, wincondition_type_;
-	UI::MultilineTextarea map_info_;
+	UI::Textarea clients_, players_;
 	std::unique_ptr<UI::FullscreenHelpWindow> help_;
 	GameChatPanel* chat_;
 	MultiPlayerSetupGroup* mpsg_;
