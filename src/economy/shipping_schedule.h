@@ -119,10 +119,18 @@ private:
 	// Some helper functions for update()
 	uint32_t get_free_capacity_at(Game&, Ship&, PortDock&);
 	void load_on_ship(Game&, PrioritisedPortPair&, std::list<PrioritisedPortPair>&);
-	void get_free_capacity_between(
-			Game&, Ship&, ShipPlan&, PortDock& start, PortDock& end, bool& found_start,
-			bool& found_end, bool& expedition, bool& start_is_last, Duration& arrival_time,
-			Duration& detour_start_end, uint32_t& free_capacity);
+	void get_free_capacity_between(Game&,
+	                               Ship&,
+	                               ShipPlan&,
+	                               PortDock& start,
+	                               PortDock& end,
+	                               bool& found_start,
+	                               bool& found_end,
+	                               bool& expedition,
+	                               bool& start_is_last,
+	                               Duration& arrival_time,
+	                               Duration& detour_start_end,
+	                               uint32_t& free_capacity);
 
 	struct ScheduleLoader {
 		std::map<Serial, std::list<SchedulingStateT<Serial, CargoListLoader>>> plan;
