@@ -402,9 +402,12 @@ Duration ShippingSchedule::update(Game& game) {
 
 	sslog("\nShippingSchedule::update\n");
 	assert(plans_.size() == fleet_.get_ships().size());
-	if (fleet_.get_ships().empty()) {
-		sslog("No ships\n");
-		return endless();  // wait until we get a ship
+	const size_t nr_ports = fleet_.get_ports().size();
+	if (fleet_.get_ships().empty() || nr_ports == 0) {
+		sslog("No ships or no ports\n");
+		// Nothing to do. Ships stay where they are, or do whatever they want.
+		// Ports have to wait until we have ships.
+		return endless();
 	}
 
 	/* FIRST PASS:
@@ -418,25 +421,26 @@ Duration ShippingSchedule::update(Game& game) {
 	const uint32_t time_since_last_update = time - last_updated_;
 
 	uint32_t earliest_real_update = time - std::min(time, kActualDurationsRecalculationInterval);
-	Ship* update_me = nullptr;
+	Ship* ship_to_update = nullptr;
 	for (auto& pair : last_actual_duration_recalculation_) {
 		if (pair.second < earliest_real_update) {
 			earliest_real_update = pair.second;
-			update_me = pair.first.get(game);
+			ship_to_update = pair.first.get(game);
 		}
 	}
-	if (update_me) {
-		last_actual_duration_recalculation_[update_me] = time;
+	if (ship_to_update) {
+		last_actual_duration_recalculation_[ship_to_update] = time;
 	}
 	sslog("FIRST PASS at %u (last %u, delta %u); will recalc for %s\n", time, last_updated_,
-	      time_since_last_update, update_me ? update_me->get_shipname().c_str() : "(nil)");
+	      time_since_last_update, ship_to_update ? ship_to_update->get_shipname().c_str() : "(nil)");
 	for (auto& pair : plans_) {
+		Ship& ship = *pair.first.get(game);
 		if (pair.second.empty()) {
-			sslog("%s is idle\n", pair.first.get(game)->get_shipname().c_str());
-		} else if (update_me && update_me->serial() == pair.first.serial()) {
-			sslog("Recalculate for %s\n", pair.first.get(game)->get_shipname().c_str());
+			sslog("%s is idle\n", ship.get_shipname().c_str());
+		} else if (ship_to_update && ship_to_update->serial() == pair.first.serial()) {
+			sslog("Recalculate for %s\n", ship.get_shipname().c_str());
 			Path path;
-			pair.first.get(game)->calculate_sea_route(
+			ship.calculate_sea_route(
 			   game, *pair.second.front().dock.get(game), &path);
 			int32_t d = -1;
 			game.map().calc_cost(path, &d, nullptr);
@@ -446,7 +450,7 @@ Duration ShippingSchedule::update(Game& game) {
 			if (pair.second.front().duration_from_previous_location > time_since_last_update) {
 				pair.second.front().duration_from_previous_location -= time_since_last_update;
 				sslog("Regular-type heuristic update for %s\n",
-				      pair.first.get(game)->get_shipname().c_str());
+				      ship.get_shipname().c_str());
 			} else {
 				// She said five more seconds, and that was ten seconds ago…
 				// The ship is behind schedule, so this is an arbitrary estimate
@@ -454,7 +458,7 @@ Duration ShippingSchedule::update(Game& game) {
 				// the ship will most likely arrive within a few seconds.
 				pair.second.front().duration_from_previous_location /= 2;
 				sslog("UNEXPECTED-type heuristic update for %s\n",
-				      pair.first.get(game)->get_shipname().c_str());
+				      ship.get_shipname().c_str());
 			}
 		}
 	}
@@ -467,7 +471,6 @@ Duration ShippingSchedule::update(Game& game) {
 	 * can happen when a transfer is cancelled when the item is still in the portdock),
 	 * and cancel expedition ships in spe whose expeditions were cancelled.
 	 */
-	const size_t nr_ports = fleet_.get_ports().size();
 	sslog("SECOND PASS: %" PRIuS " ports\n", nr_ports);
 
 #ifndef NDEBUG
@@ -476,16 +479,12 @@ Duration ShippingSchedule::update(Game& game) {
 	}
 #endif
 
-	if (nr_ports == 0) {
-		// Nothing to do. Ships stay where they are, or do whatever they want.
-		return endless();
-	}
 	std::list<Ship*> ships_with_reduced_orders;
 	std::list<PortDock*> ports_with_unserviced_expeditions;
-	// Don't even think about trying to cache any of this. It is impossible to maintain.
+	// Don't even think about trying to cache any of these. It is impossible to maintain.
 	std::map<
 	   OPtr<PortDock> /* start */,
-	   std::map<OPtr<PortDock> /* dest */,
+	   std::map<OPtr<PortDock> /* destination */,
 	            std::pair<std::map<OPtr<Ship> /* by whom */,
 	                               std::pair<Duration /* when at `start` */,
 	                                         Quantity /* accept how much from `start` to `dest` */>>,
