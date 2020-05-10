@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
+# F vZ <anoniemadres2@yahoo.nl>, 2020
 # Nora Ghaoui, 2016
 # Nora Ghaoui, 2016
 # Rob Snelders <programming@ertai.nl>, 2006
@@ -9,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-01-10 13:02+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-05-07 19:37+0000\n"
+"PO-Revision-Date: 2020-05-08 23:03+0000\n"
+"Last-Translator: F vZ <anoniemadres2@yahoo.nl>\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -57,7 +58,7 @@ msgstr "Marter"
 
 #: ../../data/world/critters/moose/init.lua:19
 msgid "Moose"
-msgstr ""
+msgstr "Eland"
 
 #: ../../data/world/critters/reindeer/init.lua:16
 msgid "Reindeer"
@@ -727,15 +728,15 @@ msgstr "Rode Regenscherm"
 
 #: ../../data/world/init.lua:17
 msgid "Loading world: %1$s (%2$d/%3$d)"
-msgstr ""
+msgstr "Wereld laden: %1$s (%2$d/%3$d)"
 
 #: ../../data/world/init.lua:27
 msgid "Resources"
-msgstr ""
+msgstr "Grondstoffen"
 
 #: ../../data/world/init.lua:32
 msgid "Terrains"
-msgstr ""
+msgstr "Terreinen"
 
 #: ../../data/world/init.lua:42
 msgid "Summer"
@@ -755,7 +756,7 @@ msgstr "Woestijn"
 
 #: ../../data/world/init.lua:69
 msgid "Immovables"
-msgstr ""
+msgstr "Onbeweeglijke Objecten"
 
 #: ../../data/world/init.lua:78
 msgid "Miscellaneous"
@@ -803,7 +804,7 @@ msgstr "Ruiglandbomen"
 
 #: ../../data/world/init.lua:276
 msgid "Animals"
-msgstr ""
+msgstr "Dieren"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
 #: ../../data/world/init.lua:287

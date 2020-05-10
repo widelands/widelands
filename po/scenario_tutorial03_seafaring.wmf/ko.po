@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-04-23 19:22+0000\n"
+"POT-Creation-Date: 2020-05-07 19:37+0000\n"
+"PO-Revision-Date: 2020-05-07 19:38+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -118,6 +118,10 @@ msgstr "이미 당신의 성 옆에 그 기호가 있다는 것을 보셨을 지
 msgid "Build a port"
 msgstr "항구를 건설하십시오"
 
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:61
+msgid "Build a port in the northern part of your camp"
+msgstr ""
+
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:62
 msgid "You always need a port when you want to transport wares with a ship."
 msgstr "선박으로 용품을 수송하고 싶을 때에는 언제나 항구가 필요합니다."
@@ -162,6 +166,10 @@ msgstr ""
 msgid "Build a shipyard"
 msgstr "조선소를 건설하십시오"
 
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:84
+msgid "Build a shipyard close to the coast"
+msgstr ""
+
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:85
 msgid "Ships are produced by a shipyard. It is a medium building."
 msgstr ""
@@ -202,6 +210,10 @@ msgstr "우리는 선박 두 척이 생길 때까지 기다려야 합니다. 그
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:104
 msgid "Ships"
+msgstr ""
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:106
+msgid "Construct two ships"
 msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:107
@@ -313,6 +325,10 @@ msgstr "당신 항구 중 아무데로나 탐험을 시작하십시오."
 msgid "Expedition"
 msgstr ""
 
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:158
+msgid "Start an expedition"
+msgstr ""
+
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:159
 msgid "Start an expedition."
 msgstr "탐험을 시작하십시오."
@@ -364,6 +380,10 @@ msgid "Explore"
 msgstr ""
 
 #. TRANSLATORS: "Found" as in "founding", NOT as in "finding"
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:182
+msgid "Found a settlement"
+msgstr ""
+
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:183
 msgid "Navigate your ship to an island that could contain iron ore."
 msgstr "철광석을 보유했을 수도 있는 섬을 찾아 선박을 보내십시오."
@@ -439,6 +459,10 @@ msgstr ""
 msgid "Iron Mine"
 msgstr ""
 
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:217
+msgid "Build an iron mine on the island"
+msgstr ""
+
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:218
 msgid "Our economy lacks resources."
 msgstr ""
@@ -508,6 +532,10 @@ msgstr ""
 msgid "Build a ferry yard"
 msgstr ""
 
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:253
+msgid "Build a ferry yard close to the shore"
+msgstr ""
+
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:254
 msgid "Ferries are constructed by a ferry yard."
 msgstr ""
@@ -571,6 +599,10 @@ msgstr ""
 msgid ""
 "Now it’s your turn: Build a gold mine on the mountain in the south and "
 "connect it to the main land by building waterways over the streams."
+msgstr ""
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:297
+msgid "Build a gold mine and waterways"
 msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:298

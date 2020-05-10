@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-05-07 08:13+0000\n"
+"POT-Creation-Date: 2020-05-07 19:37+0000\n"
+"PO-Revision-Date: 2020-05-08 12:48+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -149,27 +149,27 @@ msgstr "Cuando su Dios pierde la fe en los atlantes y hundió su isla, la lucha 
 #. TRANSLATORS: The name of a Frisian campaign
 #: ../../data/campaigns/campaigns.lua:107
 msgid "From Water to Ice"
-msgstr ""
+msgstr "De Aqua a Hielo"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:110
 msgid "Introduces the Frisians."
-msgstr ""
+msgstr "Introduce los Frisones."
 
 #. TRANSLATORS: A campaign difficulty (easiest of three options)
 #: ../../data/campaigns/campaigns.lua:115
 msgid "Sailor (Tricky)"
-msgstr ""
+msgstr "Marinero (Complicado)"
 
 #. TRANSLATORS: A campaign difficulty (medium of three options)
 #: ../../data/campaigns/campaigns.lua:117
 msgid "Steersman (Very Hard)"
-msgstr ""
+msgstr "Timonero (Muy Difícil)"
 
 #. TRANSLATORS: A campaign difficulty (hardest of three options)
 #: ../../data/campaigns/campaigns.lua:119
 msgid "Captain (Unreasonable)"
-msgstr ""
+msgstr "Capitán (Irrazonable)"
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:124
@@ -227,7 +227,7 @@ msgstr "En su camino a casa para defender el Imperio, el equipo de Lucio fue sor
 
 #: ../../data/campaigns/emp04.wmf/elemental:8
 msgid "Surprise, Surprise!"
-msgstr ""
+msgstr "¡Qué Sorpresa!"
 
 #: ../../data/campaigns/emp04.wmf/elemental:10
 msgid ""
@@ -238,7 +238,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/elemental:8
 msgid "The Great Stormflood"
-msgstr ""
+msgstr "La Grande Marea Viva"
 
 #: ../../data/campaigns/fri01.wmf/elemental:10
 msgid ""
@@ -257,7 +257,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/elemental:8
 msgid "An Icy Welcome"
-msgstr ""
+msgstr "Una Bienvenida Frígida"
 
 #: ../../data/campaigns/fri02.wmf/elemental:10
 msgid ""
@@ -446,7 +446,7 @@ msgid ""
 " army. Use the terrain to your advantage - chop all trees and expand "
 "wherever you can; it's the only way to find all the precious farm spaces - "
 "suggested teams: red+orange+blue+violet"
-msgstr ""
+msgstr "- hay mucho terreno plano en las montañas. Por desgracia, la mayor parte es vertical. Utiliza sabiamente el poco espacio de construcción que tienes. -  Una fortaleza en la desembocadura de un estrecho paso de montaña puede ser un obstáculo formidable para un ejército enemigo. Utiliza el terreno para tu ventaja. - tala todos los árboles y expandir dondequiera tu puedes; es el único modo para encontrar todos los espacios preciosos por las granjas - equipos sugeridos: rojo+naranja+azul+violeta"
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -474,7 +474,7 @@ msgstr "v0.2"
 msgid ""
 "A huge europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
 "Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
-msgstr ""
+msgstr "Un mapa grande de Europa. Azul = Suecia, Rojo = Italia, Amarillo = España, Verde = Turquía, Negro = Rusia, Naranja = Inglaterra, Violeta = Francia, Blanco = Polonia"
 
 #: ../../data/maps/Europa 1.1.wmf/elemental:8
 msgid "Europa 1.1"
@@ -671,7 +671,7 @@ msgstr ""
 
 #: ../../data/maps/Long, long v2.wmf/elemental:8 way
 msgid "Long, long way v2"
-msgstr ""
+msgstr "Largo, largo camino v2"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
 msgid "Island Hopping"
@@ -708,7 +708,7 @@ msgstr "Hay dos grandes preguntas en el aire. ¿Quién creó este increíblement
 
 #: ../../data/maps/No challenge metal v2.wmf/elemental:8
 msgid "No metal challenge v2"
-msgstr ""
+msgstr "Reto de no metales v2"
 
 #: ../../data/maps/No challenge metal v2.wmf/elemental:10
 msgid ""
