@@ -19,7 +19,7 @@ An add-on contains a plain-text ini-style file called ``addons`` with the follow
 * ``author``: The add-on's author name
 * ``version``: The version number (1 for new add-ons)
 * ``category``: One of "tribes", "world", "script", "maps", "campaign", "win_condition", "starting_condition"
-* ``requires``: A comma-separated list of the filenames of add-ons required by this add-on. Every name is followed by a colon and the version of the required add-on. Currently requirements are not yet implemented and this value is ignored.
+* ``requires``: A comma-separated list of the filenames of add-ons required by this add-on. Currently requirements are not yet implemented and this value is ignored.
 
 Example:
 

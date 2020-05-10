@@ -183,9 +183,11 @@ AddOnsCtrl::~AddOnsCtrl() {
 void AddOnsCtrl::refresh_remotes() {
 	remotes_.clear();
 	try {
+
 		// TODO(Nordfriese): Connect to the add-on server when we have one
 		// and fetch a list of all available add-ons
 		throw wexception("Not yet implemented");
+
 	} catch (const std::exception& e) {
 		remotes_.push_back(AddOnInfo {
 			"",
@@ -309,18 +311,17 @@ void AddOnsCtrl::install(const std::string& name) {
 	const std::string path = download(name);
 	if (!path.empty()) {
 		const std::string new_path = kAddOnDir + g_fs->file_separator() + name;
+
 		assert(g_fs->file_exists(path));
 		assert(!g_fs->file_exists(new_path));
 		assert(!g_fs->is_directory(new_path));
+
 		g_fs->fs_rename(path, new_path);
+
 		assert(!g_fs->file_exists(path));
-		for (auto& pair : g_addons) {
-			if (pair.first.internal_name == name) {
-				pair.first = preload_addon(name);
-				return;
-			}
-		}
-		NEVER_HERE();
+		assert(g_fs->file_exists(new_path));
+
+		g_addons.push_back(std::make_pair(preload_addon(name), true));
 	}
 }
 
@@ -328,13 +329,19 @@ void AddOnsCtrl::upgrade(const std::string& name) {
 	const std::string path = download(name);
 	if (!path.empty()) {
 		const std::string new_path = kAddOnDir + g_fs->file_separator() + name;
+
 		assert(g_fs->file_exists(path));
 		assert(g_fs->file_exists(new_path) ^ g_fs->is_directory(new_path));
+
 		g_fs->fs_unlink(new_path);  // Uninstall the old version…
+
 		assert(!g_fs->file_exists(new_path));
 		assert(!g_fs->is_directory(new_path));
+
 		g_fs->fs_rename(path, new_path);  // …and replace with the new one.
+
 		assert(!g_fs->file_exists(path));
+
 		for (auto& pair : g_addons) {
 			if (pair.first.internal_name == name) {
 				pair.first = preload_addon(name);

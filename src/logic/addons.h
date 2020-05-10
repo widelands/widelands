@@ -17,7 +17,6 @@
  *
  */
 
-
 #ifndef WL_LOGIC_ADDONS_H
 #define WL_LOGIC_ADDONS_H
 
@@ -44,8 +43,8 @@ struct AddOnInfo {
 	const AddOnCategory* category;
 	std::vector<std::string> requires;  // TODO(Nordfriese): unused, not yet implemented
 	bool verified;
-	// TODO(Nordfriese): in the future, we might also want to include
-	// uploader name, upload date, average rating, number of votes, (what else?)
+	// TODO(Nordfriese): in the future, we might also want to include:
+	// uploader username, upload date&time, average rating, number of votes, (what else?)
 };
 
 // Sorted list of all add-ons mapped to whether they are currently enabled
