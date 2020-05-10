@@ -71,7 +71,9 @@ constexpr int16_t kNearbyDockMaxDistanceFactor = 8 * 1800;
                              Actual implementation
 *******************************************************************************/
 
-#define sslog(...) if (g_verbose) log(__VA_ARGS__);
+#define sslog(...)                                                                                 \
+	if (g_verbose)                                                                                  \
+		log(__VA_ARGS__);
 
 ShippingSchedule::ShippingSchedule(ShipFleet& f) : fleet_(f), last_updated_(0), loader_(nullptr) {
 	assert(!fleet_.active());
