@@ -677,10 +677,6 @@ void ShipFleet::act(Game& game, uint32_t) {
 
 	molog("ShipFleet::act\n");
 
-	log("\n\n--- NOCOM ---\n");
-	log_general_info(game);
-	log("\n--- NOCOM ---\n\n");
-
 	// All the work is done by the schedule
 	const Duration next = schedule_.update(game);
 	if (next < endless()) {

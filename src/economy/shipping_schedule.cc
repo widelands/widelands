@@ -54,7 +54,7 @@ constexpr Duration kHorriblyLongDuration = 10 * 60 * 1000;  // 10 min
 // Only assign wares to a ship in 5.1 if it's score is higher than a certain
 // threshold based on minimal distance. Ships with lower scores will only be
 // accepted if not enough idle ships are found.
-constexpr uint16_t kMinScoreForImmediateAcceptFactor = 14;  // NOCOM needs testing
+constexpr uint16_t kMinScoreForImmediateAcceptFactor = 14;
 
 // Average sailing-time distance for two ports to be considered "close by" in 5.4.
 // Needs to be int16_t rather than uint16_t to avoid a signed-unsigned-comparison.
@@ -71,8 +71,7 @@ constexpr int16_t kNearbyDockMaxDistanceFactor = 8 * 1800;
                              Actual implementation
 *******************************************************************************/
 
-// #define sslog(...) if (g_verbose) log(__VA_ARGS__);
-#define sslog(...) log("NOCOM: " __VA_ARGS__);  // NOCOM
+#define sslog(...) if (g_verbose) log(__VA_ARGS__);
 
 ShippingSchedule::ShippingSchedule(ShipFleet& f) : fleet_(f), last_updated_(0), loader_(nullptr) {
 	assert(!fleet_.active());
@@ -803,7 +802,6 @@ Duration ShippingSchedule::update(Game& game) {
 		}
 		ScoredShip(Ship* s, uint32_t c, Duration e, Duration d)
 		   : ship(s), score(calc_score(c, e, d)), capacity(c), eta(e), detour(d) {
-			sslog("NOCOM ScoredShip(cap %u, eta %u, det %u) scored %u\n", c, e, d, score);
 		}
 		ScoredShip(const ScoredShip&) = default;
 		ScoredShip& operator=(const ScoredShip&) = default;
@@ -1122,9 +1120,6 @@ Duration ShippingSchedule::update(Game& game) {
 		game.map().calc_cost(path, &threshold, nullptr);
 		assert(threshold > 0);
 		while (ppp.open_count > 0 && !ppp.ships.empty()) {
-			sslog("NOCOM Found a ScoredShip with score ___ %u ___ (%u –> %u with real distance ___ %i "
-			      "___)\n",
-			      ppp.ships.front().score, ppp.start->serial(), ppp.end->serial(), threshold);
 			if (ppp.ships.front().score < static_cast<unsigned>(threshold)) {
 				break;
 			}
