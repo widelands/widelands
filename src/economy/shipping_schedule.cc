@@ -440,8 +440,7 @@ Duration ShippingSchedule::update(Game& game) {
 		} else if (ship_to_update && ship_to_update->serial() == pair.first.serial()) {
 			sslog("Recalculate for %s\n", ship.get_shipname().c_str());
 			Path path;
-			ship.calculate_sea_route(
-			   game, *pair.second.front().dock.get(game), &path);
+			ship.calculate_sea_route(game, *pair.second.front().dock.get(game), &path);
 			int32_t d = -1;
 			game.map().calc_cost(path, &d, nullptr);
 			assert(d >= 0);
@@ -449,16 +448,14 @@ Duration ShippingSchedule::update(Game& game) {
 		} else {
 			if (pair.second.front().duration_from_previous_location > time_since_last_update) {
 				pair.second.front().duration_from_previous_location -= time_since_last_update;
-				sslog("Regular-type heuristic update for %s\n",
-				      ship.get_shipname().c_str());
+				sslog("Regular-type heuristic update for %s\n", ship.get_shipname().c_str());
 			} else {
 				// She said five more seconds, and that was ten seconds ago…
 				// The ship is behind schedule, so this is an arbitrary estimate
 				// about the arrival time. Doesn't matter if it's inaccurate,
 				// the ship will most likely arrive within a few seconds.
 				pair.second.front().duration_from_previous_location /= 2;
-				sslog("UNEXPECTED-type heuristic update for %s\n",
-				      ship.get_shipname().c_str());
+				sslog("UNEXPECTED-type heuristic update for %s\n", ship.get_shipname().c_str());
 			}
 		}
 	}
