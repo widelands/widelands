@@ -27,12 +27,14 @@
 #include "graphic/font_handler.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/addons.h"
 #include "map_io/widelands_map_loader.h"
 
 MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
                                              Registry& registry,
                                              const std::string& name,
                                              const std::string& title,
+                                             bool addons,
                                              const std::string& basedir)
    : UI::UniqueWindow(&parent, name, &registry, parent.get_w(), parent.get_h(), title),
 
@@ -69,7 +71,8 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
      // Options
      basedir_(basedir),
      has_translated_mapname_(false),
-     showing_mapnames_(false) {
+     showing_mapnames_(false),
+     include_addon_maps_(addons) {
 
 	g_fs->ensure_directory_exists(basedir_);
 	curdir_ = basedir_;
@@ -168,8 +171,21 @@ void MainMenuLoadOrSaveMap::fill_table() {
 	// about the absolute filesystem top!) we manually add ".."
 	if (curdir_ != basedir_) {
 		maps_data_.push_back(MapData::create_parent_dir(curdir_));
-	} else if (files.empty()) {
-		maps_data_.push_back(MapData::create_empty_dir(curdir_));
+	} else {
+		if (files.empty()) {
+			maps_data_.push_back(MapData::create_empty_dir(curdir_));
+		}
+		// In the toplevel directory we also need to include add-on maps –
+		// but only in the load screen, not in the save screen!
+		if (include_addon_maps_) {
+			for (auto& addon : g_addons) {
+				if (addon.first.category->name == "maps") {
+					for (const std::string& mapname : g_fs->list_directory(kAddOnDir + g_fs->file_separator() + addon.first.internal_name)) {
+						files.insert(mapname);
+					}
+				}
+			}
+		}
 	}
 
 	MapData::DisplayType display_type;

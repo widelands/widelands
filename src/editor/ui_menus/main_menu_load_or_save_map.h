@@ -37,6 +37,7 @@ struct MainMenuLoadOrSaveMap : public UI::UniqueWindow {
 	                      UI::UniqueWindow::Registry& registry,
 	                      const std::string& name,
 	                      const std::string& title,
+	                      bool addons,
 	                      const std::string& basedir = kMapsDir);
 
 protected:
@@ -92,6 +93,7 @@ protected:
 	bool has_translated_mapname_;
 	UI::Checkbox* cb_dont_localize_mapnames_;
 	bool showing_mapnames_;
+	bool include_addon_maps_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_MAIN_MENU_LOAD_OR_SAVE_MAP_H

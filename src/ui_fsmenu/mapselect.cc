@@ -284,6 +284,15 @@ void FullscreenMenuMapSelect::fill_table() {
 	// about the absolute filesystem top!) we manually add ".."
 	if (curdir_ != basedir_) {
 		maps_data_.push_back(MapData::create_parent_dir(curdir_));
+	} else {
+		// In the toplevel directory we also need to include add-on maps
+		for (auto& addon : g_addons) {
+			if (addon.first.category->name == "maps") {
+				for (const std::string& mapname : g_fs->list_directory(kAddOnDir + g_fs->file_separator() + addon.first.internal_name)) {
+					files.insert(mapname);
+				}
+			}
+		}
 	}
 
 	Widelands::Map map;  //  MapLoader needs a place to put its preload data

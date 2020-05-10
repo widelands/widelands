@@ -75,7 +75,7 @@ maps
 ~~~~
 A set of maps and/or standalone scenarios.
 
-All map files and directories contained in the add-on will be included in map selection screens.
+All valid map files (including those in subdirectories) contained in the add-on will be offered in map selection screens.
 
 
 campaign

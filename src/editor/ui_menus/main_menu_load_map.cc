@@ -30,7 +30,7 @@
  * Create all the buttons etc...
  */
 MainMenuLoadMap::MainMenuLoadMap(EditorInteractive& parent, UI::UniqueWindow::Registry& registry)
-   : MainMenuLoadOrSaveMap(parent, registry, "load_map_menu", _("Load Map")) {
+   : MainMenuLoadOrSaveMap(parent, registry, "load_map_menu", _("Load Map"), true) {
 	set_current_directory(curdir_);
 
 	table_.selected.connect(boost::bind(&MainMenuLoadMap::entry_selected, this));
