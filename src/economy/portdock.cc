@@ -168,6 +168,7 @@ void PortDock::init_fleet(EditorGameBase& egbase) {
 	fleet_->update(egbase);
 }
 
+// Called directly before deletion to perform destructor duties that require an EditorGameBase
 void PortDock::cleanup(EditorGameBase& egbase) {
 
 	Warehouse* wh = nullptr;
@@ -319,6 +320,9 @@ void PortDock::shipping_item_returned(Game& game, ShippingItem& si) {
 }
 
 bool PortDock::load_one_item(Game& game, Ship& ship, const PortDock& dest) {
+	// TODO(Nordfriese): Linear search, we should make waiting_ an
+	// std::map<OPtr<PortDock>, std::vector<ShippingItem>>
+	// for performance reasons (same for Ship::items_)
 	for (auto it = waiting_.begin(); it != waiting_.end(); ++it) {
 		if (it->get_destination(game) == &dest) {
 			ship.add_item(game, *it);
