@@ -86,8 +86,8 @@ AddOnsCtrl::AddOnsCtrl() : FullscreenMenuBase(),
 	filter_verified_.set_state(true);
 	filter_category_.add(_("Any"), "", nullptr, true);
 	for (const auto& pair : kAddOnCategories) {
-		if (!pair.first.empty()) {
-			filter_category_.add(pair.second.descname(), pair.first);
+		if (pair.first != AddOnCategory::kNone) {
+			filter_category_.add(pair.second.descname(), pair.second.internal_name);
 		}
 	}
 
@@ -196,7 +196,7 @@ void AddOnsCtrl::refresh_remotes() {
 				% e.what()).str(),
 			/** TRANSLATORS: This will be inserted into the string "Server Connection Error \n by %s" */
 			_("a networking bug"),
-			0, &kAddOnCategories.at(""), {}, false
+			0, get_category(""), {}, false
 		});
 	}
 	rebuild();
@@ -207,7 +207,7 @@ bool AddOnsCtrl::matches_filter(const AddOnInfo& info, bool local) {
 		// always show error messages
 		return true;
 	}
-	if (!filter_category_.get_selected().empty() && filter_category_.get_selected() != info.category->name) {
+	if (!filter_category_.get_selected().empty() && filter_category_.get_selected() != kAddOnCategories.at(info.category).internal_name) {
 		// wrong category
 		return false;
 	}
@@ -381,7 +381,7 @@ static void uninstall(AddOnsCtrl* ctrl, const AddOnInfo& info) {
 			% info.descname
 			% info.author
 			% info.version
-			% info.category->descname()
+			% kAddOnCategories.at(info.category).descname()
 			% info.description
 			).str(), UI::WLMessageBox::MBoxType::kOkCancel);
 		if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) { return; }
@@ -401,11 +401,11 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddO
 	move_up_(this, "up", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_gr->images().get("images/ui_basic/scrollbar_up.png"), _("Move up")),
 	move_down_(this, "down", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_gr->images().get("images/ui_basic/scrollbar_down.png"), _("Move down")),
 	uninstall_(this, "uninstall", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_gr->images().get("images/wui/menus/exit.png"), _("Uninstall")),
-	toggle_enabled_(info.category->can_disable_addons ? new UI::Button(this, "on-off", 0, 0, 24, 24,
+	toggle_enabled_(kAddOnCategories.at(info.category).can_disable_addons ? new UI::Button(this, "on-off", 0, 0, 24, 24,
 			UI::ButtonStyle::kFsMenuSecondary, g_gr->images().get(
 					enabled ? "images/ui_basic/checkbox_checked.png" : "images/ui_basic/checkbox_empty.png"),
 					enabled ? _("Disable") : _("Enable"), UI::Button::VisualState::kFlat) : nullptr),
-	category_(this, g_gr->images().get(info.category->icon)),
+	category_(this, g_gr->images().get(kAddOnCategories.at(info.category).icon)),
 	version_(this, 0, 0, 0, 0, std::to_string(static_cast<int>(info.version)), UI::Align::kCenter, g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
 	txt_(this, 0, 0, 24, 24, UI::PanelStyle::kFsMenu, (boost::format("<rt>%s<p>%s</p><p>%s</p></rt>")
 		% g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(info.descname)
@@ -450,7 +450,7 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddO
 	move_up_.set_enabled(!is_first);
 	move_down_.set_enabled(!is_last);
 	category_.set_handle_mouse(true);
-	category_.set_tooltip((boost::format(_("Category: %s")) % info.category->descname()).str());
+	category_.set_tooltip((boost::format(_("Category: %s")) % kAddOnCategories.at(info.category).descname()).str());
 	version_.set_handle_mouse(true);
 	version_.set_tooltip(_("Version"));
 	layout();
@@ -485,7 +485,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo&
 	install_(this, "install", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_gr->images().get("images/ui_basic/continue.png"), _("Install")),
 	upgrade_(this, "upgrade", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_gr->images().get("images/wui/buildings/menu_up_train.png"), _("Upgrade")),
 	uninstall_(this, "uninstall", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_gr->images().get("images/wui/menus/exit.png"), _("Uninstall")),
-	category_(this, g_gr->images().get(info.category->icon)),
+	category_(this, g_gr->images().get(kAddOnCategories.at(info.category).icon)),
 	verified_(this, g_gr->images().get(info.verified ? "images/ui_basic/list_selected.png" : "images/ui_basic/stop.png")),
 	version_(this, 0, 0, 0, 0, std::to_string(static_cast<int>(info.version)), UI::Align::kCenter, g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
 	txt_(this, 0, 0, 24, 24, UI::PanelStyle::kFsMenu, (boost::format("<rt>%s<p>%s</p><p>%s</p></rt>")
@@ -511,7 +511,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo&
 				% info.author
 				% (info.verified ? _("Verified") : _("NOT VERIFIED"))
 				% info.version
-				% info.category->descname()
+				% kAddOnCategories.at(info.category).descname()
 				% info.description
 				).str(), UI::WLMessageBox::MBoxType::kOkCancel);
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) { return; }
@@ -535,7 +535,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo&
 				% (info.verified ? _("Verified") : _("NOT VERIFIED"))
 				% installed
 				% info.version
-				% info.category->descname()
+				% kAddOnCategories.at(info.category).descname()
 				% info.description
 				).str(), UI::WLMessageBox::MBoxType::kOkCancel);
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) { return; }
@@ -555,7 +555,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo&
 		upgrade_.set_enabled(installed < info.version);
 	}
 	category_.set_handle_mouse(true);
-	category_.set_tooltip((boost::format(_("Category: %s")) % info.category->descname()).str());
+	category_.set_tooltip((boost::format(_("Category: %s")) % kAddOnCategories.at(info.category).descname()).str());
 	version_.set_handle_mouse(true);
 	version_.set_tooltip(_("Version"));
 	verified_.set_handle_mouse(true);

@@ -25,7 +25,6 @@
 #include "graphic/image_io.h"
 #include "graphic/minimap_renderer.h"
 #include "io/profile.h"
-#include "logic/addons.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
@@ -129,7 +128,7 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 
 	std::string addons;
 	for (const auto& pair : g_addons) {
-		if (pair.first.category->name == "tribes" || pair.first.category->name == "world") {
+		if (pair.first.category == AddOnCategory::kTribes || pair.first.category == AddOnCategory::kWorld) {
 			if (!addons.empty()) {
 				addons += ',';
 			}

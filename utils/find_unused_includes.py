@@ -38,9 +38,7 @@ HEADER_LOG_REGEX = re.compile(r'(void|bool)\s+(\w+)\(.*\);')
 
 # Header files with contents that are too hard to detect by regex
 FILE_EXCLUDES = {'graphic/gl/system_headers.h', 'scripting/lua.h',
-                 'third_party/eris/lua.hpp', 'scripting/eris.h',
-                 # TODO(Nordfriese): Should not be necessary (bug #3899)
-                 'logic/addons.h'}
+                 'third_party/eris/lua.hpp', 'scripting/eris.h'}
 
 # Headers files with contents that need to be detected by functions
 DIFFICULT_FILES = {'graphic/build_texture_atlas.h',

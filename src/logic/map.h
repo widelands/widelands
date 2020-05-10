@@ -24,6 +24,7 @@
 
 #include "base/i18n.h"
 #include "economy/itransport_cost_calculator.h"
+#include "logic/addons.h"
 #include "logic/field.h"
 #include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/tribes/wareworker.h"
@@ -524,7 +525,7 @@ public:
 	uint32_t get_waterway_max_length() const;
 	void set_waterway_max_length(uint32_t max_length);
 
-	const std::vector<std::pair<std::string, uint16_t>>& required_addons() const {
+	const AddOnRequirements& required_addons() const {
 		return required_addons_;
 	}
 
@@ -599,7 +600,7 @@ private:
 
 	MapVersion map_version_;
 
-	std::vector<std::pair<std::string, uint16_t>> required_addons_;
+	AddOnRequirements required_addons_;
 };
 
 /*

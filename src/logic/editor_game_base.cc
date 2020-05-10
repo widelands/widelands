@@ -200,7 +200,7 @@ World* EditorGameBase::mutable_world() {
 
 		for (const auto& pair : g_addons) {
 			if (pair.second) {
-				if (pair.first.category->name == "world") {
+				if (pair.first.category == AddOnCategory::kWorld) {
 					try {
 						lua().run_script(kAddOnDir + g_fs->file_separator() + pair.first.internal_name + g_fs->file_separator() + "init.lua");
 					} catch (const WException& e) {
@@ -243,7 +243,7 @@ Tribes* EditorGameBase::mutable_tribes() {
 
 		for (const auto& pair : g_addons) {
 			if (pair.second) {
-				if (pair.first.category->name == "tribes") {
+				if (pair.first.category == AddOnCategory::kTribes) {
 					try {
 						lua().run_script(kAddOnDir + g_fs->file_separator() + pair.first.internal_name + g_fs->file_separator() + "init.lua");
 					} catch (const WException& e) {

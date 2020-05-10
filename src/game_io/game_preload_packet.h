@@ -23,6 +23,7 @@
 #include <vector>
 
 #include "game_io/game_data_packet.h"
+#include "logic/addons.h"
 #include "logic/game_controller.h"
 
 namespace Widelands {
@@ -83,7 +84,7 @@ struct GamePreloadPacket : public GameDataPacket {
 	 * and players can not influence the world of existing maps.
 	 * Tribes add-ons however are selected when starting a new game.
 	 */
-	const std::vector<std::pair<std::string, uint16_t>> required_addons() const {
+	const AddOnRequirements& required_addons() const {
 		return required_addons_;
 	}
 
@@ -100,7 +101,7 @@ private:
 	time_t savetimestamp_ = 0;
 	GameController::GameType gametype_ = GameController::GameType::kUndefined;
 	// Required add-ons with the recommended version
-	std::vector<std::pair<std::string, uint16_t>> required_addons_;
+	AddOnRequirements required_addons_;
 };
 }  // namespace Widelands
 

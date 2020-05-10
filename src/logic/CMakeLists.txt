@@ -88,6 +88,7 @@ wl_library(logic_addons
     addons.h
   DEPENDS
     base_i18n
+    base_exceptions
     io_filesystem
     io_profile
     logic_filesystem_constants
@@ -152,6 +153,7 @@ wl_library(logic_map
     graphic_playercolor
     io_fileread
     io_filesystem
+    logic_addons
     logic_constants
     logic_exceptions
     logic_filesystem_constants

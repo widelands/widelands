@@ -80,7 +80,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	// only ones where it makes a difference whether they are enabled during loading or not.
 	// First, we disable them all…
 	for (auto& pair : g_addons) {
-		if (pair.first.category->name == "world" || pair.first.category->name == "tribes") {
+		if (pair.first.category == AddOnCategory::kWorld || pair.first.category == AddOnCategory::kTribes) {
 			pair.second = false;
 		}
 	}
@@ -98,7 +98,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 							requirement.second,
 							pair.first.version);
 				}
-				assert(pair.first.category->name == "world" || pair.first.category->name == "tribes");
+				assert(pair.first.category == AddOnCategory::kWorld || pair.first.category == AddOnCategory::kTribes);
 				assert(!pair.second);
 				pair.second = true;  // enable this add-on
 				break;

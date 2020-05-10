@@ -25,8 +25,19 @@
 #include <string>
 #include <vector>
 
-struct AddOnCategory {
-	std::string name;
+enum class AddOnCategory {
+	kNone,
+	kWorld,
+	kTribes,
+	kScript,
+	kMaps,
+	kCampaign,
+	kWinCondition,
+	kStartingCondition
+};
+
+struct AddOnCategoryInfo {
+	std::string internal_name;
 	std::function<std::string()> descname;
 	std::string icon;
 	bool can_disable_addons;
@@ -34,14 +45,17 @@ struct AddOnCategory {
 
 constexpr uint32_t kNotInstalled = 0;
 
+// Required add-ons for an add-on, map, or savegame with the recommended version
+using AddOnRequirements = std::vector<std::pair<std::string, uint32_t>>;
+
 struct AddOnInfo {
-	std::string internal_name;          // "cool_feature.wad"
-	std::string descname;               // "Cool Feature"
-	std::string description;            // "This add-on is a really cool feature."
-	std::string author;                 // "The Widelands Bunnybot"
+	std::string internal_name;  // "cool_feature.wad"
+	std::string descname;       // "Cool Feature"
+	std::string description;    // "This add-on is a really cool feature."
+	std::string author;         // "The Widelands Bunnybot"
 	uint32_t version;
-	const AddOnCategory* category;
-	std::vector<std::string> requires;  // TODO(Nordfriese): unused, not yet implemented
+	AddOnCategory category;
+	AddOnRequirements requires;  // TODO(Nordfriese): unused, not yet implemented
 	bool verified;
 	// TODO(Nordfriese): in the future, we might also want to include:
 	// uploader username, upload date&time, average rating, number of votes, (what else?)
@@ -50,7 +64,12 @@ struct AddOnInfo {
 // Sorted list of all add-ons mapped to whether they are currently enabled
 extern std::vector<std::pair<AddOnInfo, bool>> g_addons;
 
-extern const std::map<std::string, AddOnCategory> kAddOnCategories;
+extern const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories;
+AddOnCategory get_category(const std::string&);
+
+// Creates a string informing about missing or wrong-version add-ons
+// for use in map- and savegame selection screens
+std::string check_requirements(const AddOnRequirements&);
 
 AddOnInfo preload_addon(const std::string&);
 

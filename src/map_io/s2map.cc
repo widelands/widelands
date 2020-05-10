@@ -378,7 +378,7 @@ int32_t S2MapLoader::preload_map(bool const scenario) {
 	// disable add-ons
 	if (get_load_addons()) {
 		for (auto& pair : g_addons) {
-			if (pair.first.category->name == "world") {
+			if (pair.first.category == AddOnCategory::kWorld) {
 				pair.second = false;
 			}
 		}

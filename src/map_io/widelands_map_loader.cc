@@ -88,7 +88,7 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario) {
 		// disable add-ons
 		if (get_load_addons()) {
 			for (auto& pair : g_addons) {
-				if (pair.first.category->name == "world") {
+				if (pair.first.category == AddOnCategory::kWorld) {
 					pair.second = false;
 				}
 			}
@@ -105,7 +105,7 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario) {
 									requirement.second,
 									pair.first.version);
 						}
-						assert(pair.first.category->name == "world" || pair.first.category->name == "tribes");
+						assert(pair.first.category == AddOnCategory::kWorld || pair.first.category == AddOnCategory::kTribes);
 						assert(!pair.second);
 						pair.second = true;  // enable this add-on
 						break;

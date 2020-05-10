@@ -22,7 +22,6 @@
 #include <boost/algorithm/string.hpp>
 
 #include "io/profile.h"
-#include "logic/addons.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
@@ -162,7 +161,7 @@ void MapElementalPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObject
 
 	std::string addons;
 	for (const auto& pair : g_addons) {
-		if (pair.first.category->name == "world") {
+		if (pair.first.category == AddOnCategory::kWorld) {
 			if (!addons.empty()) {
 				addons += ',';
 			}

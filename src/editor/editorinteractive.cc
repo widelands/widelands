@@ -956,7 +956,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 
 	// we need to disable tribes add-ons in the editor
 	for (auto& pair : g_addons) {
-		if (pair.first.category->name == "tribes") {
+		if (pair.first.category == AddOnCategory::kTribes) {
 			pair.second = false;
 		}
 	}

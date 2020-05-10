@@ -133,6 +133,7 @@ wl_library(wui_common_mapdetails
     graphic
     graphic_text_layout
     io_filesystem
+    logic_filesystem_constants
     logic_game_settings
     logic_map
     ui_basic

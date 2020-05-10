@@ -20,6 +20,7 @@
 #include "wui/mapdata.h"
 
 #include "io/filesystem/filesystem.h"
+#include "logic/filesystem_constants.h"
 
 MapData::MapData(const std::string& init_filename,
                  const std::string& init_localized_name,
@@ -34,8 +35,7 @@ MapData::MapData(const std::string& init_filename,
      width(0),
      height(0),
      maptype(init_maptype),
-     displaytype(init_displaytype),
-     required_addons({{"Dummy to test this feature", 1}}) {
+     displaytype(init_displaytype) {
 }
 
 MapData::MapData(const Widelands::Map& map,
@@ -137,6 +137,17 @@ MapData MapData::create_parent_dir(const std::string& current_dir) {
 	if (!filename.empty()) {
 		// fs_dirname always returns a directory with a separator at the end.
 		filename.pop_back();
+
+		// If the parent is an add-on, use the maps directory as parent instead.
+		// Whether this is the case is determined by checking whether the parent
+		// directory's parent is the add-ons directory.
+		std::string parent = FileSystem::fs_dirname(filename);
+		if (!parent.empty()) {
+			parent.pop_back();
+			if (parent == kAddOnDir) {
+				filename = kMapsDir;
+			}
+		}
 	}
 	return MapData(filename, parent_name());
 }

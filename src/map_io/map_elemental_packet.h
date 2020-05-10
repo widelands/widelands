@@ -23,6 +23,7 @@
 #include <string>
 #include <vector>
 
+#include "logic/addons.h"
 #include "map_io/map_data_packet.h"
 
 namespace Widelands {
@@ -56,8 +57,7 @@ struct MapElementalPacket {
 private:
 	std::string old_world_name_;
 	uint32_t version_ = 0;
-	// Required add-ons with the recommended version
-	std::vector<std::pair<std::string, uint16_t>> required_addons_;
+	AddOnRequirements required_addons_;
 };
 }  // namespace Widelands
 

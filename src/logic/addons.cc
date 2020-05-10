@@ -20,24 +20,117 @@
 #include "logic/addons.h"
 
 #include <memory>
+#include <set>
+
+#include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/wexception.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
 
-const std::map<std::string, AddOnCategory> kAddOnCategories = {
-	{"", AddOnCategory {"", []() { return _("Error"); }, "images/ui_basic/stop.png", false}},
-	{"tribes", AddOnCategory {"tribes", []() { return _("Tribes"); }, "images/wui/stats/menu_tab_wares_warehouse.png", true}},
-	{"world", AddOnCategory {"world", []() { return _("World"); }, "images/wui/menus/toggle_immovables.png", true}},
-	{"script", AddOnCategory {"script", []() { return _("Script"); }, "images/logos/WL-Editor-32.png", true}},
-	{"maps", AddOnCategory {"maps", []() { return _("Map Set"); }, "images/wui/menus/toggle_minimap.png", false}},
-	{"campaign", AddOnCategory {"campaign", []() { return _("Campaign"); }, "images/wui/menus/chat.png", false}},
-	{"win_condition", AddOnCategory {"win_condition", []() { return _("Win Condition"); }, "images/wui/menus/objectives.png", false}},
-	{"starting_condition", AddOnCategory {"starting_condition", []() { return _("Starting Condition"); }, "images/players/player_position_menu.png", false}}
+const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories = {
+	{AddOnCategory::kNone, AddOnCategoryInfo {"",
+			[]() { return _("Error"); }, "images/ui_basic/stop.png", false}},
+	{AddOnCategory::kTribes, AddOnCategoryInfo {"tribes",
+			[]() { return _("Tribes"); }, "images/wui/stats/menu_tab_wares_warehouse.png", true}},
+	{AddOnCategory::kWorld, AddOnCategoryInfo {"world",
+			[]() { return _("World"); }, "images/wui/menus/toggle_immovables.png", true}},
+	{AddOnCategory::kScript, AddOnCategoryInfo {"script",
+			[]() { return _("Script"); }, "images/logos/WL-Editor-32.png", true}},
+	{AddOnCategory::kMaps, AddOnCategoryInfo {"maps",
+			[]() { return _("Map Set"); }, "images/wui/menus/toggle_minimap.png", false}},
+	{AddOnCategory::kCampaign, AddOnCategoryInfo {"campaign",
+			[]() { return _("Campaign"); }, "images/wui/menus/chat.png", false}},
+	{AddOnCategory::kWinCondition, AddOnCategoryInfo {"win_condition",
+			[]() { return _("Win Condition"); }, "images/wui/menus/objectives.png", false}},
+	{AddOnCategory::kStartingCondition, AddOnCategoryInfo {"starting_condition",
+			[]() { return _("Starting Condition"); }, "images/players/player_position_menu.png", false}}
 };
 
 std::vector<std::pair<AddOnInfo, bool>> g_addons;
+
+std::string check_requirements(const AddOnRequirements& required_addons) {
+	// TODO(Nordfriese): Display a detailed list of *all* add-ons used by the map/savegame/whatever
+	std::set<std::string> addons_missing;
+	std::map<std::string, std::pair<uint16_t, uint16_t>> addons_wrong_version;
+	for (const auto& requirement : required_addons) {
+		bool found = false;
+		for (const auto& pair : g_addons) {
+			if (pair.first.internal_name == requirement.first) {
+				found = true;
+				if (pair.first.version != requirement.second) {
+					addons_wrong_version[requirement.first] = std::make_pair(pair.first.version, requirement.second);
+				}
+				break;
+			}
+		}
+		if (!found) {
+			addons_missing.insert(requirement.first);
+		}
+	}
+
+	if (addons_missing.empty()) {
+		if (addons_wrong_version.empty()) {
+			return _("No conflicts");
+		} else {
+			std::string list;
+			for (const auto& a : addons_wrong_version) {
+				if (list.empty()) {
+					list = (boost::format(_("%1$s (expected version %2$u, found %3$u)"))
+							% a.first % a.second.second % a.second.first).str();
+				} else {
+					list = (boost::format(_("%1$s, %2$s (expected version %3$u, found %4$u)"))
+							% list % a.first % a.second.second % a.second.first).str();
+				}
+			}
+			return (boost::format(ngettext("%1$u add-on with wrong version: %2$s", "%1$u add-ons with wrong version: %2$s",
+					addons_wrong_version.size())) % addons_wrong_version.size() % list).str();
+		}
+	} else {
+		if (addons_wrong_version.empty()) {
+			std::string list;
+			for (const std::string& a : addons_missing) {
+				if (list.empty()) {
+					list = a;
+				} else {
+					list = (boost::format(_("%1$s, %2$s")) % list % a).str();
+				}
+			}
+			return (boost::format(ngettext("%1$u missing add-on: %2$s", "%1$u missing add-ons: %2$s",
+					addons_missing.size())) % addons_missing.size() % list).str();
+		} else {
+			std::string list;
+			for (const std::string& a : addons_missing) {
+				if (list.empty()) {
+					list = (boost::format(_("%s (missing)")) % a).str();
+				} else {
+					list = (boost::format(_("%1$s, %2$s (missing)")) % list % a).str();
+				}
+			}
+			for (const auto& a : addons_wrong_version) {
+				list = (boost::format(_("%1$s, %2$s (expected version %3$u, found %4$u)"))
+						% list % a.first % a.second.second % a.second.first).str();
+			}
+			return (boost::format(_("%1$s and %2$s: %3$s"))
+					% (boost::format(ngettext(_("%u missing add-on"), _("%u missing add-ons"),
+							addons_missing.size())) % addons_missing.size()).str()
+					% (boost::format(ngettext(_("%u add-on with wrong version"), _("%u add-ons with wrong version"),
+							addons_missing.size())) % addons_missing.size()).str()
+					% list).str();
+		}
+	}
+}
+
+AddOnCategory get_category(const std::string& name) {
+	for (const auto& pair : kAddOnCategories) {
+		if (pair.second.internal_name == name) {
+			return pair.first;
+		}
+	}
+	throw wexception("Invalid add-on category %s", name.c_str());
+}
 
 AddOnInfo preload_addon(const std::string& name) {
 	std::unique_ptr<FileSystem> fs(g_fs->make_sub_file_system(kAddOnDir + g_fs->file_separator() + name));
@@ -50,10 +143,11 @@ AddOnInfo preload_addon(const std::string& name) {
 		s.get_safe_string("description"),
 		s.get_safe_string("author"),
 		s.get_safe_positive("version"),
-		&kAddOnCategories.at(s.get_safe_string("category")),
+		get_category(s.get_safe_string("category")),
 		{}, false
 	};
-	for (std::string req(s.get_safe_string("requires")); !req.empty();) {
+	// TODO(Nordfriese): Implement code to parse requirements
+	/* for (std::string req(s.get_safe_string("requires")); !req.empty();) {
 		const size_t commapos = req.find(',');
 		if (commapos == std::string::npos) {
 			i.requires.push_back(req);
@@ -62,6 +156,6 @@ AddOnInfo preload_addon(const std::string& name) {
 			i.requires.push_back(req.substr(0, commapos));
 			req = req.substr(commapos);
 		}
-	}
+	} */
 	return i;
 }

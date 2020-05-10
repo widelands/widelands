@@ -55,7 +55,7 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table) {
 			                                         script_table->get_string("tooltip"), tags));
 		}
 		for (const auto& pair : g_addons) {
-			if (pair.first.category->name == "starting_condition") {
+			if (pair.first.category == AddOnCategory::kStartingCondition) {
 				const std::string script_path = kAddOnDir + g_fs->file_separator() + pair.first.internal_name + g_fs->file_separator() + name + ".lua";
 				if (!g_fs->file_exists(script_path)) {
 					continue;
@@ -82,7 +82,7 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table) {
 static std::vector<std::string> preload_scripts() {
 	std::vector<std::string> v = {"tribes/preload.lua"};
 	for (const auto& pair : g_addons) {
-		if (pair.first.category->name == "tribes") {
+		if (pair.first.category == AddOnCategory::kTribes) {
 			const std::string script_path = kAddOnDir + g_fs->file_separator() + pair.first.internal_name + g_fs->file_separator() + "preload.lua";
 			if (g_fs->file_exists(script_path)) {
 				v.push_back(script_path);

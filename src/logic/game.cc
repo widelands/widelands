@@ -519,7 +519,7 @@ bool Game::run(StartGameType const start_game_type,
 
 		// Run all selected add-on scripts
 		for (const auto& pair : g_addons) {
-			if (pair.second && pair.first.category->name == "script") {
+			if (pair.second && pair.first.category == AddOnCategory::kScript) {
 				enqueue_command(new CmdLuaScript(get_gametime() + 1,
 						kAddOnDir + g_fs->file_separator() + pair.first.internal_name + g_fs->file_separator() + "init.lua"));
 			}
