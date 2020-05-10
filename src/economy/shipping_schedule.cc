@@ -48,13 +48,13 @@ constexpr uint32_t kActualDurationsRecalculationInterval = 60 * 1000;
 // Give a ship the highest score for assigning wares to it if it will
 // arrive at the port of interest within the next 10 s gametime,
 // or the lowest score if this will take longer than 10 min gametime
-constexpr Duration kWonderfullyShortDuration = 10 * 1000;   // 10 s
-constexpr Duration kHorriblyLongDuration = 10 * 60 * 1000;  // 10 min
+constexpr uint64_t kWonderfullyShortDuration = 10 * 1000;   // 10 s
+constexpr uint64_t kHorriblyLongDuration = 10 * 60 * 1000;  // 10 min
 
 // Only assign wares to a ship in 5.1 if it's score is higher than a certain
 // threshold based on minimal distance. Ships with lower scores will only be
 // accepted if not enough idle ships are found.
-constexpr uint16_t kMinScoreForImmediateAcceptFactor = 14;
+constexpr uint64_t kMinScoreForImmediateAcceptFactor = 14;
 
 // Average sailing-time distance for two ports to be considered "close by" in 5.4.
 // Needs to be int16_t rather than uint16_t to avoid a signed-unsigned-comparison.
@@ -370,6 +370,288 @@ void ShippingSchedule::port_added(Game& game, PortDock& dock) {
 	sslog("--- port_added maintenance complete ---\n\n");
 }
 
+// Helper struct used by a PrioritisedPortPair
+struct ScoredShip {
+	Ship* ship;
+	uint64_t score;     // higher scores are good, lower scores bad
+	uint32_t capacity;  // number of items that can be loaded onto the ship
+	Duration eta;       // time of arrival at the starting port
+	Duration detour;    // the total time the ship will need from the starting port to the
+	                    // destination minus the minimum time required for the direct route
+
+	static inline uint64_t calc_score(uint64_t capacity, uint64_t eta, uint64_t detour) {
+		// This needs to use uint64_t because the intermediate results will overflow uint32_t
+		return eta > kHorriblyLongDuration ? 0 :
+			capacity * kMinScoreForImmediateAcceptFactor *
+			kHorriblyLongDuration * kHorriblyLongDuration /
+			(std::max(eta, kWonderfullyShortDuration) * std::max(detour, kWonderfullyShortDuration));
+	}
+
+	ScoredShip(Ship* s, uint32_t c, Duration e, Duration d)
+	   : ship(s), score(calc_score(c, e, d)), capacity(c), eta(e), detour(d) {
+	}
+	ScoredShip(const ScoredShip&) = default;
+	ScoredShip& operator=(const ScoredShip&) = default;
+	~ScoredShip() {
+	}
+
+	// allow deterministic sorting in sets
+	// "smaller" comparison means "better"
+	bool operator<(const ScoredShip& ss) const {
+		if (score != ss.score) {
+			return score > ss.score;
+		}
+		if (eta != ss.eta) {
+			return eta < ss.eta;
+		}
+		if (detour != ss.detour) {
+			return detour < ss.detour;
+		}
+		if (capacity != ss.capacity) {
+			return capacity > ss.capacity;
+		}
+		return ship->serial() < ss.ship->serial();
+	}
+};
+
+struct PrioritisedPortPair {
+	PrioritisedPortPair(PortDock* p1, PortDock* p2, uint32_t o, uint32_t p)
+	   : start(p1), end(p2), open_count(o), priority(p) {
+		assert(open_count > 0);
+		assert(start);
+		assert(end);
+	}
+	PrioritisedPortPair(const PrioritisedPortPair&) = default;
+	PrioritisedPortPair& operator=(const PrioritisedPortPair&) = default;
+	~PrioritisedPortPair() {
+	}
+
+	PortDock* start;      // starting port
+	PortDock* end;        // destination port
+	uint32_t open_count;  // number of wares waiting at `start` and heading for
+	                      // `end` that have not been assigned to a ship yet
+	uint32_t priority;    // higher priority means that this PPP should be serviced as soon as possible
+
+	// cache for the functions in update()
+	std::list<ScoredShip> ships;
+
+	// allow deterministic sorting in sets
+	// "smaller" comparison means "higher importance"
+	bool operator<(const PrioritisedPortPair& pp) const {
+		if (priority == pp.priority) {
+			if (open_count == pp.open_count) {
+				if (start != pp.start) {
+					return start->serial() < pp.start->serial();
+				}
+				return end->serial() < pp.end->serial();
+			}
+			return open_count > pp.open_count;
+		}
+		return priority > pp.priority;
+	}
+};
+
+// Helper functions to determine how much capacity the given ship will have
+// after at the given port. Returns 0 if the ship is not planning to go
+// there or will launch an expedition from there.
+uint32_t ShippingSchedule::get_free_capacity_at(Game& game, Ship& ship, PortDock& dock) {
+	assert(plans_.find(&ship) != plans_.end());
+	CargoList cargo_tracker;
+	for (const ShippingItem& si : ship.items_) {
+		PortDock* dest = si.destination_dock_.get(game);
+		auto it = cargo_tracker.find(dest);
+		if (it == cargo_tracker.end()) {
+			cargo_tracker[dest] = 1;
+		} else {
+			++it->second;
+		}
+	}
+	for (const SchedulingState& ss : plans_[&ship]) {
+		if (ss.expedition) {
+			return 0;
+		}
+		{
+			auto it = cargo_tracker.find(ss.dock);
+			if (it != cargo_tracker.end()) {
+				cargo_tracker.erase(it);
+			}
+		}
+		for (const auto& _load : ss.load_there) {
+			auto it = cargo_tracker.find(_load.first);
+			if (it == cargo_tracker.end()) {
+				cargo_tracker[_load.first] = _load.second;
+			} else {
+				it->second += _load.second;
+			}
+		}
+		if (ss.dock == &dock) {
+			uint32_t cap = ship.get_capacity();
+			for (const auto& pair : cargo_tracker) {
+				assert(cap >= pair.second);
+				cap -= pair.second;
+			}
+			return cap;
+		}
+	}
+	return 0;
+}
+
+void ShippingSchedule::get_free_capacity_between(
+   Game& game, Ship& ship, ShipPlan& plan, PortDock& start, PortDock& end, bool& found_start,
+   bool& found_end, bool& expedition, bool& start_is_last, Duration& arrival_time,
+   Duration& detour_start_end, uint32_t& free_capacity) {
+	found_start = false;
+	found_end = false;
+	start_is_last = false;
+	expedition = false;
+	arrival_time = 0;
+	detour_start_end = 0;
+	free_capacity = 0;
+
+	uint32_t max_load = 0;
+	CargoList cargo_tracker;
+	for (const ShippingItem& si : ship.items_) {
+		PortDock* dest = si.destination_dock_.get(game);
+		auto it = cargo_tracker.find(dest);
+		if (it == cargo_tracker.end()) {
+			cargo_tracker[dest] = 1;
+		} else {
+			++it->second;
+		}
+	}
+	for (SchedulingState& ss : plan) {
+		start_is_last = ss.dock == &start;
+		if (ss.expedition) {
+			expedition = true;
+			break;
+		}
+		{
+			auto unload = cargo_tracker.find(ss.dock);
+			if (unload != cargo_tracker.end()) {
+				cargo_tracker.erase(unload);
+			}
+		}
+		for (const auto& _load : ss.load_there) {
+			auto it = cargo_tracker.find(_load.first);
+			if (it == cargo_tracker.end()) {
+				cargo_tracker[_load.first] = _load.second;
+			} else {
+				it->second += _load.second;
+			}
+		}
+		uint32_t _load = 0;
+		for (const auto& pair : cargo_tracker) {
+			_load += pair.second;
+		}
+		max_load = std::max(max_load, _load);
+		if (found_start) {
+			assert(!found_end);
+			assert(ss.dock != &start);
+			if (ss.dock == &end) {
+				found_end = true;
+				break;
+			}
+			detour_start_end += ss.duration_from_previous_location;
+		} else if (ss.dock == &end) {
+			break;  // give A-B-A plans no chance
+		} else {
+			arrival_time += ss.duration_from_previous_location;
+			if (ss.dock == &start) {
+				found_start = true;
+			}
+		}
+	}
+	if (found_start && !expedition) {
+		assert(max_load <= ship.get_capacity());
+		free_capacity = ship.get_capacity() - max_load;
+	}
+}
+
+// Shared logic for steps 5.1 and 5.3
+void ShippingSchedule::load_on_ship(Game& game, PrioritisedPortPair& ppp, std::list<PrioritisedPortPair>& all_ppps) {
+	const uint32_t take = std::min(ppp.open_count, ppp.ships.front().capacity);
+	Ship* ship = ppp.ships.front().ship;
+	sslog("load_on_ship: PPP %u –> %u (open_count %u): assigning %u items (capacity %u) to %s\n",
+	      ppp.start->serial(), ppp.end->serial(), ppp.open_count, take,
+	      ppp.ships.front().capacity, ship->get_shipname().c_str());
+	assert(take);
+	// We assume that EITHER both end points are already part of the plan,
+	// or that the start point is the last entry in the plan
+	if (plans_[ship].back().dock == ppp.start) {
+		assert(!plans_[ship].back().expedition);
+		auto it = plans_[ship].back().load_there.find(ppp.end);
+		if (it != plans_[ship].back().load_there.end()) {
+			it->second += take;
+		} else {
+			plans_[ship].back().load_there[ppp.end] = take;
+		}
+		Path path;
+		int32_t d = -1;
+		fleet_.get_path(*ppp.start, *ppp.end, path);
+		game.map().calc_cost(path, &d, nullptr);
+		assert(d >= 0);
+		plans_[ship].push_back(SchedulingState(ppp.end, false, d));
+	} else {
+		for (SchedulingState& ss : plans_[ship]) {
+			if (ss.dock == ppp.start) {
+				auto it = ss.load_there.find(ppp.end);
+				if (it != ss.load_there.end()) {
+					it->second += take;
+				} else {
+					ss.load_there[ppp.end] = take;
+				}
+				break;
+			}
+		}
+	}
+	ppp.ships.front().capacity -= take;
+	ppp.open_count -= take;
+	if (!ppp.ships.front().capacity) {
+		ppp.ships.erase(ppp.ships.begin());
+	}
+	// update all other PPPs that were considering to load wares onto this ship
+	for (PrioritisedPortPair& p : all_ppps) {
+		auto ship_it = p.ships.end();
+		for (auto it = p.ships.begin(); it != p.ships.end(); ++it) {
+			if (it->ship == ship) {
+				ship_it = it;
+				break;
+			}
+		}
+		if (ship_it == p.ships.end()) {
+			continue;
+		}
+		// recalc capacity and score for this ship and reorder list
+		bool found_start = false;
+		bool found_end = false;
+		bool expedition = false;
+		bool start_is_last = false;
+		Duration arrival_time = 0;
+		Duration detour_start_end = 0;
+		uint32_t free_capacity = 0;
+		get_free_capacity_between(game, *ship, plans_.at(ship), *p.start, *p.end, found_start, found_end,
+		                          expedition, start_is_last, arrival_time, detour_start_end,
+		                          free_capacity);
+		p.ships.erase(ship_it);
+		if (free_capacity && found_start && !expedition && (found_end || start_is_last)) {
+			ScoredShip updated_ship(ship, free_capacity, arrival_time, detour_start_end);
+			sslog("load_on_ship: PPP %u –> %u (open_count %u) UPDATED: may assign up to %u items "
+			      "to %s (score %lu)\n",
+			      p.start->serial(), p.end->serial(), ppp.open_count, free_capacity,
+			      ship->get_shipname().c_str(), updated_ship.score);
+			for (auto it = p.ships.begin();; ++it) {
+				if (it == p.ships.end() || updated_ship < *it) {
+					p.ships.insert(it, updated_ship);
+					break;
+				}
+			}
+		} else {
+			sslog("load_on_ship: PPP %u –> %u (open_count %u) REMOVED %s\n", p.start->serial(),
+			      p.end->serial(), ppp.open_count, ship->get_shipname().c_str());
+		}
+	}
+}
+
 Duration ShippingSchedule::update(Game& game) {
 	/*
 	 * This function is the heart of the shipping system.
@@ -478,23 +760,21 @@ Duration ShippingSchedule::update(Game& game) {
 
 	std::list<Ship*> ships_with_reduced_orders;
 	std::list<PortDock*> ports_with_unserviced_expeditions;
+
 	// Don't even think about trying to cache any of these. It is impossible to maintain.
-	std::map<
-	   OPtr<PortDock> /* start */,
-	   std::map<OPtr<PortDock> /* destination */,
-	            std::pair<std::map<OPtr<Ship> /* by whom */,
-	                               std::pair<Duration /* when at `start` */,
-	                                         Quantity /* accept how much from `start` to `dest` */>>,
-	                      int32_t /* capacity missing (-) or extra (+) */>>>
-	   items_in_ports;
+	using Pair_DurationAndQuantity = std::pair<Duration /* when at `start` */, Quantity /* accept how much from `start` to `dest` */>;
+	using Map_ShipsAndInfo = std::map<OPtr<Ship> /* by whom */, Pair_DurationAndQuantity>;
+	using Pair_ShipsWithInfoAndCapacity = std::pair<Map_ShipsAndInfo, int32_t /* capacity missing (-) or extra (+) */>;
+	using Map_ToDestination_ShipsWithInfoAndCapacity = std::map<OPtr<PortDock> /* destination */, Pair_ShipsWithInfoAndCapacity>;
+	using Map_FromStartToDestination_ShipsWithInfoAndCapacity = std::map<OPtr<PortDock> /* start */, Map_ToDestination_ShipsWithInfoAndCapacity>;
+	Map_FromStartToDestination_ShipsWithInfoAndCapacity items_in_ports;
+
 	for (PortDock* dock : fleet_.get_ports()) {
 		const bool expedition_ready = dock->is_expedition_ready();
 		sslog("Iteration: dock %u (expedition ready %s)\n", dock->serial(),
 		      expedition_ready ? "true" : "false");
 		Ship* expedition_ship_coming = nullptr;
-		std::map<OPtr<PortDock>,
-		         std::pair<std::map<OPtr<Ship>, std::pair<Duration, Quantity>>, int32_t>>
-		   map;
+		Map_ToDestination_ShipsWithInfoAndCapacity map;
 		for (auto& plan : plans_) {
 			Duration eta = 0;
 			CargoList* _load = nullptr;
@@ -780,83 +1060,6 @@ Duration ShippingSchedule::update(Game& game) {
 	 *    these destinations, and tell such a ship to additionally visit the
 	 *    start and end port between its two existing targets.
 	 */
-	struct ScoredShip {
-		Ship* ship;
-		uint32_t score;
-		uint32_t capacity;
-		Duration eta;
-		Duration detour;
-
-		static inline uint32_t calc_score(uint32_t c, Duration eta, Duration detour) {
-			if (eta > kHorriblyLongDuration) {
-				return 0;
-			}
-			uint64_t result = c * kMinScoreForImmediateAcceptFactor;
-			result *= kHorriblyLongDuration;
-			result *= kHorriblyLongDuration;
-			result /= (std::max(eta, kWonderfullyShortDuration) *
-			           std::max(detour, kWonderfullyShortDuration));
-			return result;
-		}
-		ScoredShip(Ship* s, uint32_t c, Duration e, Duration d)
-		   : ship(s), score(calc_score(c, e, d)), capacity(c), eta(e), detour(d) {
-		}
-		ScoredShip(const ScoredShip&) = default;
-		ScoredShip& operator=(const ScoredShip&) = default;
-		// "smaller" comparison means "better"
-		bool operator<(const ScoredShip& ss) const {
-			if (score != ss.score) {
-				return score > ss.score;
-			}
-			if (eta != ss.eta) {
-				return eta < ss.eta;
-			}
-			if (detour != ss.detour) {
-				return detour < ss.detour;
-			}
-			if (capacity != ss.capacity) {
-				return capacity > ss.capacity;
-			}
-			return ship->serial() < ss.ship->serial();
-		}
-		~ScoredShip() {
-		}
-	};
-	struct PrioritisedPortPair {
-		PrioritisedPortPair(PortDock* p1, PortDock* p2, uint32_t o, uint32_t p)
-		   : start(p1), end(p2), open_count(o), priority(p) {
-			assert(open_count > 0);
-			assert(start);
-			assert(end);
-		}
-		PrioritisedPortPair(const PrioritisedPortPair&) = default;
-		PrioritisedPortPair& operator=(const PrioritisedPortPair&) = default;
-		~PrioritisedPortPair() {
-		}
-
-		PortDock* start;
-		PortDock* end;
-		uint32_t open_count;
-		uint32_t priority;
-
-		// cache for the functions below
-		std::list<ScoredShip> ships;
-
-		// allow deterministic sorting in sets
-		// "smaller" comparison means "higher importance"
-		bool operator<(const PrioritisedPortPair& pp) const {
-			if (priority == pp.priority) {
-				if (open_count == pp.open_count) {
-					if (start != pp.start) {
-						return start->serial() < pp.start->serial();
-					}
-					return end->serial() < pp.end->serial();
-				}
-				return open_count > pp.open_count;
-			}
-			return priority > pp.priority;
-		}
-	};
 	std::set<PrioritisedPortPair> _open_pairs;
 	for (auto& start__map : items_in_ports) {
 		for (auto& dest__shipsinfos : start__map.second) {
@@ -877,207 +1080,6 @@ Duration ShippingSchedule::update(Game& game) {
 		}
 	}
 
-	// Helper functions to determine how much capacity the given ship will have
-	// after at the given port. Returns 0 if the ship is not planning to go
-	// there or will launch an expedition from there.
-	auto get_free_capacity_at = [this, &game](Ship& ship, PortDock& dock) {
-		assert(plans_.find(&ship) != plans_.end());
-		CargoList cargo_tracker;
-		for (const ShippingItem& si : ship.items_) {
-			PortDock* dest = si.destination_dock_.get(game);
-			auto it = cargo_tracker.find(dest);
-			if (it == cargo_tracker.end()) {
-				cargo_tracker[dest] = 1;
-			} else {
-				++it->second;
-			}
-		}
-		for (const SchedulingState& ss : plans_[&ship]) {
-			if (ss.expedition) {
-				return 0u;
-			}
-			{
-				auto it = cargo_tracker.find(ss.dock);
-				if (it != cargo_tracker.end()) {
-					cargo_tracker.erase(it);
-				}
-			}
-			for (const auto& _load : ss.load_there) {
-				auto it = cargo_tracker.find(_load.first);
-				if (it == cargo_tracker.end()) {
-					cargo_tracker[_load.first] = _load.second;
-				} else {
-					it->second += _load.second;
-				}
-			}
-			if (ss.dock == &dock) {
-				uint32_t cap = ship.get_capacity();
-				for (const auto& pair : cargo_tracker) {
-					assert(cap >= pair.second);
-					cap -= pair.second;
-				}
-				return cap;
-			}
-		}
-		return 0u;
-	};
-	auto get_free_capacity_between = [&game](
-	   Ship& ship, ShipPlan& plan, PortDock& start, PortDock& end, bool& found_start,
-	   bool& found_end, bool& expedition, bool& start_is_last, Duration& arrival_time,
-	   Duration& detour_start_end, uint32_t& free_capacity) {
-		found_start = false;
-		found_end = false;
-		start_is_last = false;
-		expedition = false;
-		arrival_time = 0;
-		detour_start_end = 0;
-		free_capacity = 0;
-
-		uint32_t max_load = 0;
-		CargoList cargo_tracker;
-		for (const ShippingItem& si : ship.items_) {
-			PortDock* dest = si.destination_dock_.get(game);
-			auto it = cargo_tracker.find(dest);
-			if (it == cargo_tracker.end()) {
-				cargo_tracker[dest] = 1;
-			} else {
-				++it->second;
-			}
-		}
-		for (SchedulingState& ss : plan) {
-			start_is_last = ss.dock == &start;
-			if (ss.expedition) {
-				expedition = true;
-				break;
-			}
-			{
-				auto unload = cargo_tracker.find(ss.dock);
-				if (unload != cargo_tracker.end()) {
-					cargo_tracker.erase(unload);
-				}
-			}
-			for (const auto& _load : ss.load_there) {
-				auto it = cargo_tracker.find(_load.first);
-				if (it == cargo_tracker.end()) {
-					cargo_tracker[_load.first] = _load.second;
-				} else {
-					it->second += _load.second;
-				}
-			}
-			uint32_t _load = 0;
-			for (const auto& pair : cargo_tracker) {
-				_load += pair.second;
-			}
-			max_load = std::max(max_load, _load);
-			if (found_start) {
-				assert(!found_end);
-				assert(ss.dock != &start);
-				if (ss.dock == &end) {
-					found_end = true;
-					break;
-				}
-				detour_start_end += ss.duration_from_previous_location;
-			} else if (ss.dock == &end) {
-				break;  // give A-B-A plans no chance
-			} else {
-				arrival_time += ss.duration_from_previous_location;
-				if (ss.dock == &start) {
-					found_start = true;
-				}
-			}
-		}
-		if (found_start && !expedition) {
-			assert(max_load <= ship.get_capacity());
-			free_capacity = ship.get_capacity() - max_load;
-		}
-	};
-	// Shared logic for steps 1 and 3, pulled out as a lambda function.
-	auto load_on_ship = [this, &game, get_free_capacity_between](
-	   PrioritisedPortPair& ppp, std::list<PrioritisedPortPair>& all_ppps) {
-		const uint32_t take = std::min(ppp.open_count, ppp.ships.front().capacity);
-		Ship* ship = ppp.ships.front().ship;
-		sslog("load_on_ship: PPP %u –> %u (open_count %u): assigning %u items (capacity %u) to %s\n",
-		      ppp.start->serial(), ppp.end->serial(), ppp.open_count, take,
-		      ppp.ships.front().capacity, ship->get_shipname().c_str());
-		assert(take);
-		// We assume that EITHER both end points are already part of the plan,
-		// or that the start point is the last entry in the plan
-		if (plans_[ship].back().dock == ppp.start) {
-			assert(!plans_[ship].back().expedition);
-			auto it = plans_[ship].back().load_there.find(ppp.end);
-			if (it != plans_[ship].back().load_there.end()) {
-				it->second += take;
-			} else {
-				plans_[ship].back().load_there[ppp.end] = take;
-			}
-			Path path;
-			int32_t d = -1;
-			fleet_.get_path(*ppp.start, *ppp.end, path);
-			game.map().calc_cost(path, &d, nullptr);
-			assert(d >= 0);
-			plans_[ship].push_back(SchedulingState(ppp.end, false, d));
-		} else {
-			for (SchedulingState& ss : plans_[ship]) {
-				if (ss.dock == ppp.start) {
-					auto it = ss.load_there.find(ppp.end);
-					if (it != ss.load_there.end()) {
-						it->second += take;
-					} else {
-						ss.load_there[ppp.end] = take;
-					}
-					break;
-				}
-			}
-		}
-		ppp.ships.front().capacity -= take;
-		ppp.open_count -= take;
-		if (!ppp.ships.front().capacity) {
-			ppp.ships.erase(ppp.ships.begin());
-		}
-		// update all other PPPs that were considering to load wares onto this ship
-		for (PrioritisedPortPair& p : all_ppps) {
-			auto ship_it = p.ships.end();
-			for (auto it = p.ships.begin(); it != p.ships.end(); ++it) {
-				if (it->ship == ship) {
-					ship_it = it;
-					break;
-				}
-			}
-			if (ship_it == p.ships.end()) {
-				continue;
-			}
-			// recalc capacity and score for this ship and reorder list
-			bool found_start = false;
-			bool found_end = false;
-			bool expedition = false;
-			bool start_is_last = false;
-			Duration arrival_time = 0;
-			Duration detour_start_end = 0;
-			uint32_t free_capacity = 0;
-			get_free_capacity_between(*ship, plans_.at(ship), *p.start, *p.end, found_start, found_end,
-			                          expedition, start_is_last, arrival_time, detour_start_end,
-			                          free_capacity);
-			p.ships.erase(ship_it);
-			if (free_capacity && found_start && !expedition && (found_end || start_is_last)) {
-				ScoredShip updated_ship(ship, free_capacity, arrival_time, detour_start_end);
-				sslog("load_on_ship: PPP %u –> %u (open_count %u) UPDATED: may assign up to %u items "
-				      "to %s (score "
-				      "%u)\n",
-				      p.start->serial(), p.end->serial(), ppp.open_count, free_capacity,
-				      ship->get_shipname().c_str(), updated_ship.score);
-				for (auto it = p.ships.begin();; ++it) {
-					if (it == p.ships.end() || updated_ship < *it) {
-						p.ships.insert(it, updated_ship);
-						break;
-					}
-				}
-			} else {
-				sslog("load_on_ship: PPP %u –> %u (open_count %u) REMOVED %s\n", p.start->serial(),
-				      p.end->serial(), ppp.open_count, ship->get_shipname().c_str());
-			}
-		}
-	};
-
 	// ensure the order stays constant from now on
 	std::list<PrioritisedPortPair> open_pairs;
 	for (const PrioritisedPortPair& ppp : _open_pairs) {
@@ -1097,13 +1099,13 @@ Duration ShippingSchedule::update(Game& game) {
 			Duration arrival_time = 0;
 			Duration detour_start_end = 0;
 			uint32_t free_capacity = 0;
-			get_free_capacity_between(*plan.first.get(game), plan.second, *ppp.start, *ppp.end,
+			get_free_capacity_between(game, *plan.first.get(game), plan.second, *ppp.start, *ppp.end,
 			                          found_start, found_end, expedition, start_is_last, arrival_time,
 			                          detour_start_end, free_capacity);
 			if (free_capacity && found_start && !expedition && (found_end || start_is_last)) {
 				ScoredShip ss(plan.first.get(game), free_capacity, arrival_time, detour_start_end);
 				sslog("Phase 5.0: PPP %u –> %u (open_count %u): may assign up to %u items to %s (score "
-				      "%u)\n",
+				      "%lu)\n",
 				      ppp.start->serial(), ppp.end->serial(), ppp.open_count, free_capacity,
 				      plan.first.get(game)->get_shipname().c_str(), ss.score);
 				_ships.insert(ss);
@@ -1121,7 +1123,7 @@ Duration ShippingSchedule::update(Game& game) {
 			if (ppp.ships.front().score < static_cast<unsigned>(threshold)) {
 				break;
 			}
-			load_on_ship(ppp, open_pairs);
+			load_on_ship(game, ppp, open_pairs);
 		}
 		sslog("Phase 5.1: PPP %u –> %u: %u open_count remaining\n", ppp.start->serial(),
 		      ppp.end->serial(), ppp.open_count);
@@ -1187,7 +1189,7 @@ Duration ShippingSchedule::update(Game& game) {
 		while (ppp.open_count && !ppp.ships.empty()) {
 			sslog("Phase 5.3: PPP %u –> %u (open_count %u): assigning items…\n", ppp.start->serial(),
 			      ppp.end->serial(), ppp.open_count);
-			load_on_ship(ppp, open_pairs);
+			load_on_ship(game, ppp, open_pairs);
 		}
 		sslog("%u open_count remaining\n", ppp.open_count);
 		if (ppp.open_count) {
@@ -1281,7 +1283,7 @@ Duration ShippingSchedule::update(Game& game) {
 						// end)
 						// → a) insert items at start, b) push a State to end, and c) update time for the
 						// state after that
-						const uint32_t capacity = get_free_capacity_at(*plan.first.get(game), *ppp.start);
+						const uint32_t capacity = get_free_capacity_at(game, *plan.first.get(game), *ppp.start);
 						if (!capacity) {
 							continue;
 						}
@@ -1387,7 +1389,7 @@ Duration ShippingSchedule::update(Game& game) {
 						}
 					}
 					const uint32_t capacity =
-					   get_free_capacity_at(*plan.first.get(game), *it_before_end->dock.get(game));
+					   get_free_capacity_at(game, *plan.first.get(game), *it_before_end->dock.get(game));
 					if (!capacity) {
 						continue;
 					}
@@ -1430,7 +1432,7 @@ Duration ShippingSchedule::update(Game& game) {
 								++it_near_start;
 							}
 							const uint32_t capacity =
-							   get_free_capacity_at(*plan.first.get(game), *it_near_start->dock.get(game));
+							   get_free_capacity_at(game, *plan.first.get(game), *it_near_start->dock.get(game));
 							if (!capacity) {
 								continue;
 							}
