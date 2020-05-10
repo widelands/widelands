@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-05-06 10:06+0000\n"
+"POT-Creation-Date: 2020-05-07 19:37+0000\n"
+"PO-Revision-Date: 2020-05-08 13:20+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -765,7 +765,7 @@ msgstr "Aumenta o reduce el zoom usando la rueda del ratón o %1%. Pulsa %2% par
 msgid ""
 "Use the ‘,’ (comma) and ‘.’ (period) keys to quickly jump between recently "
 "visited locations."
-msgstr ""
+msgstr "Usa la \",\" (coma) y el \".\" (punto) para saltar rapido entre los lugares recientemente visitados."
 
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
@@ -791,12 +791,12 @@ msgstr ""
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
 msgid "Arrow keys"
-msgstr ""
+msgstr "Teclas de flecha"
 
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
 msgid "Ctrl+Arrow keys"
-msgstr ""
+msgstr "Ctrl+Teclas de flecha"
 
 #: ../../data/txts/tips/general_game.lua:83
 msgid ""
@@ -806,7 +806,7 @@ msgstr ""
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
 msgid "Shift+Arrow keys"
-msgstr ""
+msgstr "Shift+Teclas de flecha"
 
 #: ../../data/txts/tips/general_game.lua:87
 msgid ""
