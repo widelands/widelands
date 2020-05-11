@@ -102,7 +102,7 @@ void Box::update_desired_size() {
 	int maxbreadth = mindesiredbreadth_;
 
 	for (uint32_t idx = 0; idx < items_.size(); ++idx) {
-		int depth, breadth = 0;
+		int depth = 0, breadth = 0;
 		get_item_desired_size(idx, &depth, &breadth);
 
 		totaldepth += depth;

@@ -10,15 +10,16 @@
 # Jaypad <ju-ju@nataju.fr>, 2015-2016
 # Pierre Salagnac <pierre.salagnac@free.fr>, 2007
 # Renaud Bouchard, 2016-2020
+# Stephan Lutz <stephan-lutz@gmx.de>, 2020
 # Tubuntu <tubuntu@testimonium.be>, 2015
 # zecas <jjorge@free.fr>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-05-05 11:33+0000\n"
-"Last-Translator: E V <edwvig@outlook.fr>\n"
+"POT-Creation-Date: 2020-05-07 19:37+0000\n"
+"PO-Revision-Date: 2020-05-09 13:12+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -333,7 +334,7 @@ msgstr "Les grands espaces sont rares sur ces petites îles. Construisez dessus 
 
 #: ../../data/maps/Astoria 2.R.wmf/elemental:8
 msgid "Astoria 2.R"
-msgstr ""
+msgstr "Astoria 2.R"
 
 #: ../../data/maps/Astoria 2.R.wmf/elemental:10
 msgid "Long, economic play in beautyfull land, try every player!!"
@@ -430,7 +431,7 @@ msgstr "Quatre tribus luttent avec leur plus proche voisin pour être le premier
 
 #: ../../data/maps/Dolomites_v3.wmf/elemental:8
 msgid "Dolomites 3.0"
-msgstr ""
+msgstr "Dolomites 3.0"
 
 #: ../../data/maps/Dolomites_v3.wmf/elemental:10
 msgid ""
@@ -439,7 +440,7 @@ msgid ""
 "reasonable reconstruction of the area delimited by Cortina d'Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
 " to the death with your enemies, it may as well be in a beautiful place."
-msgstr ""
+msgstr "Le joyau des Alpes, la chaine des montagnes Dolomites a été déclaré au patrimoine mondial de l'humanité pour sa beauté primaire. Cette carte est une reproduction aussi fidèle que possible de la région découverte par Cortina d’Ampezzo au nord-est et Canazel au sud-ouest. Si vous devez être jeté dans un duel à mort avec vos ennemis, autant que cela soit dans un cadre de rêve."
 
 #: ../../data/maps/Dolomites_v3.wmf/elemental:11
 msgid ""
@@ -471,7 +472,7 @@ msgstr "Des conditions de départ égales pour trois joueurs."
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:11
 msgid "v0.2"
-msgstr ""
+msgstr "v0.2"
 
 #: ../../data/maps/Europa 1.1.wmf/elemental:10
 msgid ""
@@ -481,7 +482,7 @@ msgstr ""
 
 #: ../../data/maps/Europa 1.1.wmf/elemental:8
 msgid "Europa 1.1"
-msgstr ""
+msgstr "Europa 1.1"
 
 #: ../../data/maps/Fellowships_v2.wmf/elemental:8
 msgid "Fellowships"
@@ -674,7 +675,7 @@ msgstr ">Où çà ? A un millier de lieues d'ici.< [Porgy et Bess] Tu vas devoir
 
 #: ../../data/maps/Long, long v2.wmf/elemental:8 way
 msgid "Long, long way v2"
-msgstr ""
+msgstr "Long, long chemin v2"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
 msgid "Island Hopping"
