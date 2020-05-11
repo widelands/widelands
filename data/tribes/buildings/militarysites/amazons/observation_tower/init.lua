@@ -20,16 +20,10 @@ tribes:new_militarysite_type {
       balsa = 1
    },
 
+   animation_directory = dirname,
    animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "idle_?.png"),
-         hotspot = {31, 93},
-         fps = 10,
-      },
-      unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {31, 93},
-      },
+      idle = {hotspot = {50, 94}},
+      unoccupied = {hotspot = {50, 94}},
    },
 
    aihints = {

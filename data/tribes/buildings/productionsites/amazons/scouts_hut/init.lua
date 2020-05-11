@@ -19,17 +19,10 @@ tribes:new_productionsite_type {
       log = 1
    },
 
+   animation_directory = dirname,
    animations = {
-      idle = {
-         directory = dirname,
-         basename = "idle",
-         hotspot = {43, 57}
-      },
-      unoccupied = {
-         directory = dirname,
-         basename = "unoccupied",
-         hotspot = {43, 57}
-      }
+      idle = {hotspot = {43, 57}},
+      unoccupied = {hotspot = {43, 57}}
    },
 
    aihints = {},

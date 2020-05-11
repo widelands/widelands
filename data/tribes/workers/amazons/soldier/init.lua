@@ -1,67 +1,5 @@
 dirname = path.dirname (__file__)
 
-animations = {
-   -- normal
-   idle = {
-      pictures = path.list_files (dirname .. "rookie/idle_??.png"),
-      hotspot = {20, 24},
-      fps = 10
-   },
-   atk_ok_e = {
-      pictures = path.list_files (dirname .. "rookie/atk_ok_e_??.png"),
-      hotspot = {23, 24},
-      fps = 10
-   },
-   atk_fail_e = {
-      pictures = path.list_files (dirname .. "rookie/atk_fail_e_??.png"),
-      hotspot = {23, 23},
-      fps = 10
-   },
-   atk_ok_w = {
-      pictures = path.list_files (dirname .. "rookie/atk_ok_w_??.png"),
-      hotspot = {-1, 22},
-      fps = 10
-   },
-   atk_fail_w = {
-      pictures = path.list_files (dirname .. "rookie/atk_fail_w_??.png"),
-      hotspot = {-1, 22},
-      fps = 10
-   },
-   eva_ok_e = {
-      pictures = path.list_files (dirname .. "rookie/eva_ok_e_??.png"),
-      hotspot = {11, 23},
-      fps = 10
-   },
-   eva_fail_e = {
-      pictures = path.list_files (dirname .. "rookie/eva_fail_e_??.png"),
-      hotspot = {12, 23},
-      fps = 10
-   },
-   eva_ok_w = {
-      pictures = path.list_files (dirname .. "rookie/eva_ok_w_??.png"),
-      hotspot = {-1, 22},
-      fps = 10
-   },
-   eva_fail_w = {
-      pictures = path.list_files (dirname .. "rookie/eva_fail_w_??.png"),
-      hotspot = {-1, 22},
-      fps = 10
-   },
-   die_w = {
-      pictures = path.list_files (dirname .. "rookie/die_w_??.png"),
-      hotspot = {15, 25},
-      fps = 10
-   },
-   die_e = {
-      pictures = path.list_files (dirname .. "rookie/die_e_??.png"),
-      hotspot = {12, 23},
-      fps = 10
-   },
-
-}
-add_directional_animation(animations, "walk", dirname .. "rookie", "walk", {7, 24}, 15)
-
-
 -- convenience definitions so we don´t have to repeat this table for every single entry below
 all_levels_ama = {
    min_health = 0,
@@ -82,9 +20,6 @@ tribes:new_soldier_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    vision_range = 2,
-
-   animation_directory = dirname .. "rookie",
-   animations = animations,
 
    default_target_quantity = 10,
 
@@ -147,10 +82,10 @@ tribes:new_soldier_type {
       eva_fail_e = all_levels_ama,
    },
    die_w = {
-      die_w = all_levels_ama,
+      die_e = all_levels_ama,
    },
    die_e = {
-      die_e = all_levels_ama,
+      die_w = all_levels_ama,
    },
    idle = {
       idle = all_levels_ama,
@@ -164,6 +99,94 @@ tribes:new_soldier_type {
          ne = "walk_ne",
          w = "walk_w",
          e = "walk_e",
+      },
+   },
+   animation_directory = dirname,
+   spritesheets = {
+      walk = {
+         directional = true,
+         hotspot = {17, 28},
+         fps = 15,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      },
+      idle = {
+         hotspot = {17, 28},
+         fps = 15,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      },
+      die_w = {
+         hotspot = {16, 30},
+         fps = 28,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      },
+      die_e = {
+         hotspot = {11, 38},
+         fps = 28,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      },
+      atk_fail_w = {
+         hotspot = {33, 30},
+         fps = 30,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      },
+      atk_fail_e = {
+         hotspot = {11, 35},
+         fps = 30,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      },
+      atk_ok_w = {
+         hotspot = {33, 30},
+         fps = 30,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      },
+      atk_ok_e = {
+         hotspot = {11, 35},
+         fps = 30,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      },
+      eva_fail_w = {
+         hotspot = {8, 30},
+         fps = 30,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      },
+      eva_fail_e = {
+         hotspot = {12, 32},
+         fps = 30,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      },
+      eva_ok_w = {
+         hotspot = {8, 30},
+         fps = 30,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      },
+      eva_ok_e = {
+         hotspot = {23, 32},
+         fps = 30,
+         frames = 30,
+         columns = 6,
+         rows = 5
       },
    },
 }
