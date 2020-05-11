@@ -195,6 +195,7 @@
   - Attempt to fix Ai unnecessary dismantling Militarysites
 - about 90 rounds of training
 - Fixed bugs in the AI's attack decision algorithm and exposed some weighting factors to the genetic algorithm (#3873)
+- result of about 120 rounds of training (#3906)
 
 
 ### Gameplay
@@ -455,6 +456,7 @@
 - Fix wrong textdomain for some strings (#3853)
 - Handle missing locale dir on Windows (#3757)
 - Fix transifex issues (#3875)
+- Marked tut03 objective headings for translation (#3901)
 
 
 ### Help and Documentation
@@ -644,6 +646,8 @@
 - Fix travis failure on gcc-9.1_debug (#3861)
 - Improve SDL2 detection on modern systems (#3872)
 - Add Git hash to AppVeyor and bzr version numbers (#3894)
+- updated innosetup file to reflect new Icu filenames (#3903)
+- gcc-10 compatibility (#3908)
 
 
 ### Other Issues
