@@ -307,6 +307,7 @@ void AddOnsCtrl::layout() {
 	browse_addons_wrapper_.set_max_size(tabs_.get_w(), tabs_.get_h() - kRowButtonSize);
 }
 
+// TODO(Nordfriese): install() and upgrade() should also (recursively) install the add-on's requirements
 void AddOnsCtrl::install(const std::string& name) {
 	const std::string path = download(name);
 	if (!path.empty()) {

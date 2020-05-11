@@ -518,10 +518,10 @@ bool Game::run(StartGameType const start_game_type,
 			enqueue_command(new CmdLuaScript(get_gametime(), "map:scripting/multiplayer_init.lua"));
 
 		// Run all selected add-on scripts
-		for (const auto& pair : g_addons) {
-			if (pair.second && pair.first.category == AddOnCategory::kScript) {
+		for (const AddOnInfo& addon : enabled_addons()) {
+			if (addon.category == AddOnCategory::kScript) {
 				enqueue_command(new CmdLuaScript(get_gametime() + 1,
-						kAddOnDir + g_fs->file_separator() + pair.first.internal_name + g_fs->file_separator() + "init.lua"));
+						kAddOnDir + g_fs->file_separator() + addon.internal_name + g_fs->file_separator() + "init.lua"));
 			}
 		}
 

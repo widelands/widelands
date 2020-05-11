@@ -14,7 +14,6 @@ wl_library(map_io_map_loader
     io_fileread
     io_filesystem
     logic
-    logic_addons
     logic_filesystem_constants
     logic_map
     logic_map_objects

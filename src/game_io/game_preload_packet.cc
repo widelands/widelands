@@ -127,12 +127,12 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 	                                              GameController::GameType::kReplay));
 
 	std::string addons;
-	for (const auto& pair : g_addons) {
-		if (pair.first.category == AddOnCategory::kTribes || pair.first.category == AddOnCategory::kWorld) {
+	for (const AddOnInfo& addon : game.enabled_addons()) {
+		if (addon.category == AddOnCategory::kTribes || addon.category == AddOnCategory::kWorld || addon.category == AddOnCategory::kScript) {
 			if (!addons.empty()) {
 				addons += ',';
 			}
-			addons += pair.first.internal_name + ':' + std::to_string(static_cast<unsigned>(pair.first.version));
+			addons += addon.internal_name + ':' + std::to_string(static_cast<unsigned>(addon.version));
 		}
 	}
 	s.set_string("addons", addons);

@@ -24,7 +24,6 @@
 #include "base/log.h"
 #include "base/scoped_timer.h"
 #include "io/filesystem/filesystem.h"
-#include "logic/addons.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -84,38 +83,6 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario) {
 		MapElementalPacket mp;
 		mp.pre_read(*fs_, &map_);
 		old_world_name_ = mp.old_world_name();
-
-		// disable add-ons
-		if (get_load_addons()) {
-			for (auto& pair : g_addons) {
-				if (pair.first.category == AddOnCategory::kWorld) {
-					pair.second = false;
-				}
-			}
-			// TODO(Nordfriese): We have to put the required add-ons in the correct order
-			for (const auto& requirement : map_.required_addons()) {
-				bool found = false;
-				for (auto& pair : g_addons) {
-					if (pair.first.internal_name == requirement.first) {
-						found = true;
-						if (pair.first.version != requirement.second) {
-							log("WARNING: Map file requires add-on '%s' at version %u but version %u is installed. "
-									"They might be compatible, but this is not necessarily the case.\n",
-									requirement.first.c_str(),
-									requirement.second,
-									pair.first.version);
-						}
-						assert(pair.first.category == AddOnCategory::kWorld || pair.first.category == AddOnCategory::kTribes);
-						assert(!pair.second);
-						pair.second = true;  // enable this add-on
-						break;
-					}
-				}
-				if (!found) {
-					throw GameDataError("Add-on '%s' (version %u) required but not installed", requirement.first.c_str(), requirement.second);
-				}
-			}
-		}
 	}
 	{
 		MapVersionPacket version_packet;
@@ -173,6 +140,41 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	egbase.allocate_player_maps();  //  Can do this now that map size is known.
+
+	if (get_load_addons()) {
+		// first, clear all world add-ons…
+		for (auto it = egbase.enabled_addons().begin(); it != egbase.enabled_addons().end();) {
+			if (it->category == AddOnCategory::kWorld) {
+				it = egbase.enabled_addons().erase(it);
+			} else {
+				++it;
+			}
+		}
+		// …and now enable the ones we want
+		auto insert_before = egbase.enabled_addons().begin();
+		for (const auto& requirement : elemental_data_packet.required_addons()) {
+			bool found = false;
+			for (auto& pair : g_addons) {
+				if (pair.first.internal_name == requirement.first) {
+					found = true;
+					if (pair.first.version != requirement.second) {
+						log("WARNING: Map requires add-on '%s' at version %u but version %u is installed. "
+								"They might be compatible, but this is not necessarily the case.\n",
+								requirement.first.c_str(),
+								requirement.second,
+								pair.first.version);
+					}
+					assert(pair.first.category == AddOnCategory::kWorld);
+					egbase.enabled_addons().insert(insert_before, pair.first);
+					++insert_before;
+					break;
+				}
+			}
+			if (!found) {
+				throw GameDataError("Add-on '%s' (version %u) required but not installed", requirement.first.c_str(), requirement.second);
+			}
+		}
+	}
 
 	//  now player names and tribes
 	log("Reading Player Names And Tribe Data ... ");

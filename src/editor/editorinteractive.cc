@@ -955,9 +955,11 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
 
 	// we need to disable tribes add-ons in the editor
-	for (auto& pair : g_addons) {
-		if (pair.first.category == AddOnCategory::kTribes) {
-			pair.second = false;
+	for (auto it = egbase.enabled_addons().begin(); it != egbase.enabled_addons().end();) {
+		if (it->category != AddOnCategory::kWorld) {
+			it = egbase.enabled_addons().erase(it);
+		} else {
+			++it;
 		}
 	}
 

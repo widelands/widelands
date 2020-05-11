@@ -78,14 +78,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	// Now that the preload data was read, we apply the add-ons.
 	// Note: Only world- and tribes-type add-ons are saved in savegames because those are the
 	// only ones where it makes a difference whether they are enabled during loading or not.
-	// First, we disable them all…
-	for (auto& pair : g_addons) {
-		if (pair.first.category == AddOnCategory::kWorld || pair.first.category == AddOnCategory::kTribes) {
-			pair.second = false;
-		}
-	}
-	// …and now enable the ones we need.
-	// TODO(Nordfriese): We have to put the required add-ons in the correct order
+	game_.enabled_addons().clear();
 	for (const auto& requirement : preload.required_addons()) {
 		bool found = false;
 		for (auto& pair : g_addons) {
@@ -98,9 +91,10 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 							requirement.second,
 							pair.first.version);
 				}
-				assert(pair.first.category == AddOnCategory::kWorld || pair.first.category == AddOnCategory::kTribes);
-				assert(!pair.second);
-				pair.second = true;  // enable this add-on
+				assert(pair.first.category == AddOnCategory::kWorld ||
+						pair.first.category == AddOnCategory::kTribes ||
+						pair.first.category == AddOnCategory::kScript);
+				game_.enabled_addons().push_back(pair.first);
 				break;
 			}
 		}

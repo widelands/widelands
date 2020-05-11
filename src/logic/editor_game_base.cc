@@ -31,7 +31,6 @@
 #include "economy/waterway.h"
 #include "graphic/color.h"
 #include "graphic/road_segments.h"
-#include "logic/addons.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -60,6 +59,10 @@
 
 namespace Widelands {
 
+static inline bool addon_initially_enabled(AddOnCategory c) {
+	return c == AddOnCategory::kTribes || c == AddOnCategory::kWorld || c == AddOnCategory::kScript;
+}
+
 /*
 ============
 EditorGameBase::EditorGameBase()
@@ -75,8 +78,16 @@ EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
      loader_ui_(nullptr),
      game_tips_(nullptr),
      tmp_fs_(nullptr) {
-	if (!lua_)  // TODO(SirVer): this is sooo ugly, I can't say
+
+	if (!lua_) {  // TODO(SirVer): this is sooo ugly, I can't say
 		lua_.reset(new LuaEditorInterface(this));
+	}
+
+	for (const auto& pair : g_addons) {
+		if (pair.second && addon_initially_enabled(pair.first.category)) {
+			enabled_addons_.push_back(pair.first);
+		}
+	}
 }
 
 EditorGameBase::~EditorGameBase() {
@@ -198,15 +209,13 @@ World* EditorGameBase::mutable_world() {
 			throw;
 		}
 
-		for (const auto& pair : g_addons) {
-			if (pair.second) {
-				if (pair.first.category == AddOnCategory::kWorld) {
-					try {
-						lua().run_script(kAddOnDir + g_fs->file_separator() + pair.first.internal_name + g_fs->file_separator() + "init.lua");
-					} catch (const WException& e) {
-						log("ERROR: Could not read world add-on '%s': %s\n", pair.first.internal_name.c_str(), e.what());
-						throw;
-					}
+		for (const AddOnInfo& addon : enabled_addons_) {
+			if (addon.category == AddOnCategory::kWorld) {
+				try {
+					lua().run_script(kAddOnDir + g_fs->file_separator() + addon.internal_name + g_fs->file_separator() + "init.lua");
+				} catch (const WException& e) {
+					log("ERROR: Could not read world add-on '%s': %s\n", addon.internal_name.c_str(), e.what());
+					throw;
 				}
 			}
 		}
@@ -241,15 +250,13 @@ Tribes* EditorGameBase::mutable_tribes() {
 			throw;
 		}
 
-		for (const auto& pair : g_addons) {
-			if (pair.second) {
-				if (pair.first.category == AddOnCategory::kTribes) {
-					try {
-						lua().run_script(kAddOnDir + g_fs->file_separator() + pair.first.internal_name + g_fs->file_separator() + "init.lua");
-					} catch (const WException& e) {
-						log("ERROR: Could not read tribes add-on '%s': %s\n", pair.first.internal_name.c_str(), e.what());
-						throw;
-					}
+		for (const AddOnInfo& addon : enabled_addons_) {
+			if (addon.category == AddOnCategory::kTribes) {
+				try {
+					lua().run_script(kAddOnDir + g_fs->file_separator() + addon.internal_name + g_fs->file_separator() + "init.lua");
+				} catch (const WException& e) {
+					log("ERROR: Could not read tribes add-on '%s': %s\n", addon.internal_name.c_str(), e.what());
+					throw;
 				}
 			}
 		}

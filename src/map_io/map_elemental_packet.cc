@@ -160,12 +160,12 @@ void MapElementalPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObject
 	global_section.set_string("tags", boost::algorithm::join(map.get_tags(), ","));
 
 	std::string addons;
-	for (const auto& pair : g_addons) {
-		if (pair.first.category == AddOnCategory::kWorld) {
+	for (const AddOnInfo& addon : egbase.enabled_addons()) {
+		if (addon.category == AddOnCategory::kWorld) {
 			if (!addons.empty()) {
 				addons += ',';
 			}
-			addons += pair.first.internal_name + ':' + std::to_string(static_cast<unsigned>(pair.first.version));
+			addons += addon.internal_name + ':' + std::to_string(static_cast<unsigned>(addon.version));
 		}
 	}
 	global_section.set_string("addons", addons);

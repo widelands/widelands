@@ -62,7 +62,8 @@ struct AddOnInfo {
 };
 
 // Sorted list of all add-ons mapped to whether they are currently enabled
-extern std::vector<std::pair<AddOnInfo, bool>> g_addons;
+using AddOnState = std::pair<AddOnInfo, bool>;
+extern std::vector<AddOnState> g_addons;
 
 extern const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories;
 AddOnCategory get_category(const std::string&);

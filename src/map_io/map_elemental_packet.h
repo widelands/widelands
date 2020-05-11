@@ -54,6 +54,10 @@ struct MapElementalPacket {
 		return old_world_name_;
 	}
 
+	const AddOnRequirements& required_addons() const {
+		return required_addons_;
+	}
+
 private:
 	std::string old_world_name_;
 	uint32_t version_ = 0;

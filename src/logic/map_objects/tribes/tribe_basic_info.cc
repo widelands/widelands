@@ -79,10 +79,10 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table) {
 	}
 }
 
-static std::vector<std::string> preload_scripts() {
+static std::vector<std::string> get_preload_scripts() {
 	std::vector<std::string> v = {"tribes/preload.lua"};
 	for (const auto& pair : g_addons) {
-		if (pair.first.category == AddOnCategory::kTribes) {
+		if (pair.first.category == AddOnCategory::kTribes && pair.second) {
 			const std::string script_path = kAddOnDir + g_fs->file_separator() + pair.first.internal_name + g_fs->file_separator() + "preload.lua";
 			if (g_fs->file_exists(script_path)) {
 				v.push_back(script_path);
@@ -95,7 +95,7 @@ static std::vector<std::string> preload_scripts() {
 std::vector<std::string> get_all_tribenames() {
 	std::vector<std::string> tribenames;
 	LuaInterface lua;
-	for (std::string script : preload_scripts()) {
+	for (std::string script : get_preload_scripts()) {
 		std::unique_ptr<LuaTable> table(lua.run_script(script));
 		for (const int key : table->keys<int>()) {
 			std::unique_ptr<LuaTable> info = table->get_table(key);
@@ -109,7 +109,7 @@ std::vector<std::string> get_all_tribenames() {
 std::vector<TribeBasicInfo> get_all_tribeinfos() {
 	std::vector<TribeBasicInfo> tribeinfos;
 	LuaInterface lua;
-	for (std::string script : preload_scripts()) {
+	for (std::string script : get_preload_scripts()) {
 		std::unique_ptr<LuaTable> table(lua.run_script(script));
 		for (const int key : table->keys<int>()) {
 			tribeinfos.push_back(TribeBasicInfo(table->get_table(key)));

@@ -30,7 +30,6 @@
 #include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/addons.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/game.h"
@@ -375,15 +374,6 @@ int32_t S2MapLoader::preload_map(bool const scenario) {
 
 	map_.cleanup();
 
-	// disable add-ons
-	if (get_load_addons()) {
-		for (auto& pair : g_addons) {
-			if (pair.first.category == AddOnCategory::kWorld) {
-				pair.second = false;
-			}
-		}
-	}
-
 	FileRead fr;
 	fr.open(*g_fs, filename_.c_str());
 
@@ -421,6 +411,18 @@ int32_t S2MapLoader::load_map_complete(Widelands::EditorGameBase& egbase, MapLoa
 	timer_message += map_.get_name();
 	timer_message += "' took %ums";
 	ScopedTimer timer(timer_message);
+
+	// s2 maps don't have world add-ons
+	// (UNTESTED because I don't have an s2 map to test this with)
+	if (get_load_addons()) {
+		for (auto it = egbase.enabled_addons().begin(); it != egbase.enabled_addons().end();) {
+			if (it->category == AddOnCategory::kWorld) {
+				it = egbase.enabled_addons().erase(it);
+			} else {
+				++it;
+			}
+		}
+	}
 
 	load_s2mf(egbase);
 
