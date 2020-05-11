@@ -19,6 +19,7 @@
 #ifndef WL_ECONOMY_ROUTER_H
 #define WL_ECONOMY_ROUTER_H
 
+#include <cstdint>
 #include <functional>
 
 #include "logic/map_objects/tribes/wareworker.h"
