@@ -3,15 +3,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Juanjo, 2019
+# Juanjo, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"POT-Creation-Date: 2020-05-07 19:37+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Juanjo, 2019\n"
+"Last-Translator: Juanjo, 2020\n"
 "Language-Team: Catalan (https://www.transifex.com/widelands/teams/35159/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -120,7 +120,7 @@ msgstr "Construïu un port per navegar més enllà de l'illa."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:95
 msgid "Build a shipyard to produce the ships to sail on."
-msgstr "Construïu una drassana per produir vaixells amb els que navegar."
+msgstr "Construïu una drassana per produir vaixells amb els quals navegar."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:100
 msgid "Produce wheat"
@@ -257,7 +257,7 @@ msgstr "El camí cap a casa"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:619
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:648
 msgid "Diary of Lutius"
-msgstr "Diari d'en Lutius"
+msgstr "Agenda d'en Lutius"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:185
@@ -404,7 +404,7 @@ msgid ""
 "building."
 msgstr ""
 "Senyor, l'Amalea té raó pel que fa als recursos. Cal que construïm un post "
-"avançat ja que és l'edifici militar més efectiu."
+"avançat, ja que és l'edifici militar més efectiu."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:257
 msgid "Rocks, Nothing but Rocks"
@@ -544,7 +544,7 @@ msgstr "L'Amalea pareix contenta"
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:320
 msgid "I have excellent progress to report now."
-msgstr "Tinc que informar-vos de l'excel·lent progrés que hem fet."
+msgstr "He d'informar-vos de l'excel·lent progrés que hem fet."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:323
@@ -589,7 +589,7 @@ msgid ""
 "further to discover the whole island. Let’s try to find such a valuable "
 "construction site."
 msgstr ""
-"El problema és que un port és un edifici que necessita d'un espai molt "
+"El problema és que un port és un edifici que necessita un espai molt "
 "especial per construir-lo. Així que mentre aixequem la nostra economia, "
 "hauríem d'expandir-nos més enllà i descobrir l'illa sencera. Busquem aquest "
 "lloc de construcció."
@@ -838,9 +838,9 @@ msgid ""
 msgstr ""
 "Si hi ha problemes per construir tots els edificis que necessitem, hauríem "
 "de pensar en tot el que hem après. Podem tallar totes les roques. O potser "
-"hauríem d'optimitzar els nostres camins per alliberar llocs de construcció. "
-"O fins i tot desmantellar alguns edificis militars per obtenir més espai per"
-" a la nostra economia."
+"hauríem d'optimitzar els nostres camins per alliberar espais de construcció."
+" O fins i tot desmantellar alguns edificis militars per obtenir més espai "
+"per a la nostra economia."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:455
 msgid "We Should Conquer All the Islands"
@@ -884,8 +884,8 @@ msgid ""
 "I’m just kidding. Of course we should spare as much gold as we can for "
 "building an arena and other buildings to train our soldiers."
 msgstr ""
-"Estic fent broma. Hem d'administrar bé l'or tant bé com puguem per construir"
-" una palestra i altres edificis per entrenar els nostres soldats."
+"Estic fent broma. Hem d'administrar bé l'or tan bé com puguem per construir "
+"una palestra i altres edificis per entrenar els nostres soldats."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:480
 msgid "Amalea is Pleased"
@@ -893,7 +893,7 @@ msgstr "L'Amalea està satisfeta"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:481
 msgid "Amalea is content that we will manage all our challenges"
-msgstr "L'Amalea està conforme amb que dirigim nosaltres mateixos els reptes"
+msgstr "L'Amalea està conforme amb què dirigim nosaltres mateixos els reptes"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:483
@@ -906,7 +906,7 @@ msgstr ""
 "Ben fet fins ara! Ja no produirem més columnes de marbre de les que "
 "necessitem. Crec que necessitarem aquesta funció d'administració de "
 "l'economia bastantes vegades. Recordeu que la nostra indústria només "
-"produirà fins aconseguir que a l'economia hi hagi disponible la quantitat "
+"produirà fins a aconseguir que a l'economia hi hagi disponible la quantitat "
 "especificada."
 
 #. TRANSLATORS: Amalea
@@ -955,7 +955,7 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:501
 msgid "But be careful not to waste any bigger building spots."
 msgstr ""
-"Però aneu amb compte de no malgastar cap dels llocs de construcció grans."
+"Però aneu amb compte de no malgastar cap dels espais de construcció grans."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:507
 msgid "Amalea’s Excited"
@@ -971,7 +971,7 @@ msgid ""
 "Lutius. We have made so much progress so far. I am glad to hear that we have"
 " many ships now."
 msgstr ""
-"Lutius. Hem fet molt progrès fins ara. Estic molt contenta d'escoltar que "
+"Lutius. Hem fet molt progrés fins ara. Estic molt contenta de sentir que "
 "tenim prou vaixells."
 
 #. TRANSLATORS: Amalea
@@ -1024,7 +1024,7 @@ msgid ""
 "you that ship production is not the only industry that needs cloth."
 msgstr ""
 "Salve, Lutius. Hem acabat el taller de teixir. Ara ja estem molt prop de "
-"tornar al mar. No obstant, he pensat que aniria bé recordar-vos que la "
+"tornar al mar. No obstant això, he pensat que aniria bé recordar-vos que la "
 "producció de vaixells no és l'única indústria que necessita teles."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:538
@@ -1086,7 +1086,7 @@ msgid ""
 " is one thing I need to talk about:"
 msgstr ""
 "Senyor, estem progressant en el nostre camí cap a casa. Però encara hi ha "
-"una cosa de la que hem de parlar:"
+"una cosa de la qual hem de parlar:"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:562
 msgid ""

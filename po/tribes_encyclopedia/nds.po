@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-03-29 19:14+0000\n"
+"POT-Creation-Date: 2020-05-07 19:37+0000\n"
+"PO-Revision-Date: 2020-05-04 12:58+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -87,7 +87,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘When we looked down to the valley from our newly established barrier, we "
 "felt that the spirit of our fathers was with us.’"
-msgstr ""
+msgstr "»As wi ut uns' nejen Uppass na unnern in de Leegden kiekten, hebben wi föhlt, dat de Geist vun uns Vaders mit uns is.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/helptexts.lua:8
@@ -104,14 +104,14 @@ msgid ""
 "‘The Citadel of Adlen surely is the finest masterpiece of Barbarian "
 "craftsmanship. Nothing as strong and big and beautiful has ever been built "
 "in such a short time.’"
-msgstr ""
+msgstr "»Dat Kasteel vun Adlen is dat beste Deel vun Willer Baukünst. Nix wat so fast uns groot un mooi is, is jemaals in so körter Tied baut worden.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/helptexts.lua:9
 msgctxt "barbarians_building"
 msgid ""
 "Colintan, chief planner of the Citadel of Adlen,<br>at its opening ceremony"
-msgstr ""
+msgstr "Kolintan, eerster Bauheer vun de Kasteel vun Adlen,<br>bi de Openmaken-Fier"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/helptexts.lua:3
@@ -125,7 +125,7 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "Berthron,<br>chief military adviser of Chat’Karuth"
-msgstr ""
+msgstr "Berthron,<br>eerster Soldateree-Berader vun Schatt-Karut"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/helptexts.lua:3
@@ -149,13 +149,13 @@ msgid ""
 "‘From the height of our tower we could see far into enemy territory. The "
 "enemy was well prepared, but we also noticed some weak points in their "
 "defense.’"
-msgstr ""
+msgstr "»Vun de Höchten vun uns' Toorn kunn wi wied in dat feindelke Gewest kieken. De Feind waar good vörbereidt, aver wi kunnen de Swackden in siener Verteidigung sehn.«"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/partially_finished/constructionsite/helptexts.lua:3
 msgctxt "building"
 msgid "‘Don’t swear at the builder who is short of building materials.’"
-msgstr ""
+msgstr "»Schimp nich tegen de Baukeerl, well keene Baumaterialien hett.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/partially_finished/constructionsite/helptexts.lua:8
@@ -173,7 +173,7 @@ msgstr "An deeser Baustee word een nejes Huus baut."
 #: ../../data/tribes/buildings/partially_finished/dismantlesite/helptexts.lua:3
 msgctxt "building"
 msgid "‘New paths will appear when you are willing to tear down the old.’"
-msgstr ""
+msgstr "»Neje Padden kummen ut, wenn du de ollen ok mal plattrietst.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/partially_finished/dismantlesite/helptexts.lua:8
@@ -298,7 +298,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/helptexts.lua:14
 msgctxt "atlanteans_building"
 msgid "Prophecy of the fishbreeders"
-msgstr ""
+msgstr "Wahrschau vun de Fisstüchters"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/helptexts.lua:19
@@ -637,7 +637,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘He who has enough bread will never be too tired to dig the ore and wield "
 "the ax.’"
-msgstr ""
+msgstr "»Well genoog Brood hett, word nie to sluff, na Kluten to graven un de Ext to swingen.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:8
@@ -645,7 +645,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Khantarakh, ‘The Modern Barbarian Economy’,<br>3ʳᵈ cowhide ‘Craftsmanship "
 "and Trade’"
-msgstr ""
+msgstr "Khantarakh, »De modeerne Wille Wirtschaft«, <br>3. Kohhuud »Künstbau un Hannel«"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:13
@@ -668,13 +668,13 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Don't ask what your tribe can do for you, ask what you can do for your "
 "tribe!’"
-msgstr ""
+msgstr "»Fraag nich, wat dien  Volkför dich doon kann, fraag, wat du för dien Volk doon kannst!«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/barracks/helptexts.lua:11
 msgctxt "barbarians_building"
 msgid "Famous barbarian recruitment poster"
-msgstr ""
+msgstr "Bekenntes Willes Anhüür-Plakaat"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/barracks/helptexts.lua:16
@@ -688,13 +688,13 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Seasonal fish and game specialties served with pitta bread.<br>Choose from "
 "a prime selection of regional craft beer brands.’"
-msgstr ""
+msgstr "»Fiss- un Deerten- Gerichten na Jahrestied mit Pitta-Brood daarto.<br>Köör ut eenem Angebood vun de besten stedenwies Beer-Sorten ut.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/helptexts.lua:12
 msgctxt "barbarians_building"
 msgid "Menu of ‘The Laughing Barbarian’"
-msgstr ""
+msgstr "Menü vun »Tum Willen Lachen«"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/helptexts.lua:17
@@ -731,7 +731,7 @@ msgstr "Produzeert Beer, um de Bargwarkskeerls manns un tofree to hollen."
 msgctxt "barbarians_building"
 msgid ""
 "‘The smart leader builds roads, while the really wise leader breeds cattle.’"
-msgstr ""
+msgstr "»De kloke Anföhrer baut Straten, aver de würrelk wiese Anföhrer tücht Ossen.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:8
@@ -739,7 +739,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Khantarakh, ‘The Modern Barbarian Economy’,<br> 5ᵗʰ cowhide ‘Traffic and "
 "Logistics’"
-msgstr ""
+msgstr "Khantarakh, »De modeerne Wille Wirtschaft«, <br>5. Kohhuud »Verkehr un Planen«"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:13
@@ -3025,7 +3025,7 @@ msgstr "Deent tum Begünnen vun Hannel un Söken över Seefahrt. Brengt ok diene
 #: ../../data/tribes/buildings/warehouses/barbarians/warehouse/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘Who still owns a warehouse is not yet defeated!’"
-msgstr ""
+msgstr "»Well noch een Kraamhuus hett, is noch nich manntjet!«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/warehouses/barbarians/warehouse/helptexts.lua:8
@@ -3033,7 +3033,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Berthron, chief military adviser of Chat’Karuth,<br>when they lost the "
 "headquarters in the battle around the heights of Kal’Megarath"
-msgstr ""
+msgstr "Berthron, eerster Soldateree-Berader vun Schatt-Karut,<br>as se in de Slacht um Kal-Megarath dat Raadhuus verloren hebben"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/empire/headquarters/helptexts.lua:16
@@ -4211,25 +4211,25 @@ msgid "Producer"
 msgstr "Produzeert vun"
 
 #. TRANSLATORS: Ware Encyclopedia: 1 ware produced by a productionsite
-#: ../../data/tribes/scripting/help/ware_help.lua:107
+#: ../../data/tribes/scripting/help/ware_help.lua:124
 msgid "Ware produced:"
 msgstr "Produzeerte Waar:"
 
 #. TRANSLATORS: Ware Encyclopedia: More than 1 ware produced by a
 #. productionsite
-#: ../../data/tribes/scripting/help/ware_help.lua:110
+#: ../../data/tribes/scripting/help/ware_help.lua:127
 msgid "Wares produced:"
 msgstr "Produzeerte Waren:"
 
 #. TRANSLATORS: Ware Encyclopedia: Heading for 1 building and / or worker that
 #. consumes a ware
-#: ../../data/tribes/scripting/help/ware_help.lua:172
+#: ../../data/tribes/scripting/help/ware_help.lua:189
 msgid "Consumer"
 msgstr "Verbruuker"
 
 #. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
 #. consume a ware
-#: ../../data/tribes/scripting/help/ware_help.lua:175
+#: ../../data/tribes/scripting/help/ware_help.lua:192
 msgid "Consumers"
 msgstr "Verbruukers"
 
