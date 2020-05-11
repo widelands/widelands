@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-04-30 14:20+0000\n"
+"POT-Creation-Date: 2020-05-07 19:37+0000\n"
+"PO-Revision-Date: 2020-05-05 19:46+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -122,7 +122,7 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr "Vör sess Maanten wurr Lutjus – een junger Offizeer vum Latiensken Riek – mit 150 Soldaten an de Grenz achtern de noordelken Walden schickt, wo de Willen Lüü ins Land vum Riek indrungen. Siene Upgaav was, dat Land vum Riek to verdedigen. Eerst was alls friedelk. He snackde mit Willen Kinners un wullt in Freden leven – Sied an Sied mit de steenolle Volk. He meende, seker to wesen, un siene Soldaten achtden nich mehr up de mögelk Feinde. Dat was een Fehler. In eener Määrtnacht wurren siene unrüsten Soldaten vun 100 Willen Stahfasten angrepen un heel un dall verjaggt. He un een paar vun sienen Suldaten överleevden mit nix as de blote Leven."
+msgstr "Vör sess Maanten wurr Lutjus – een junger Offizeer vum Latiensken Riek – mit 150 Soldaten an de Grenz achtern de noordelken Walden schickt, waar de Willen Lüü ins Land vum Riek indrungen. Siene Upgaav weer, dat Land vum Riek to verdedigen. Eerst weer all friedelk. He snackde mit Willen Kinners un wullt in Freden leven – Sied an Sied mit de steenolle Volk. He meende, seker to wesen, un siene Soldaten achtden nich mehr up de mögelk Feinden. Dat weer een Fehler. In eener Määrtnacht wurren siene unrüsten Soldaten vun 100 Willen Stahfasten angrepen un heel un dall verjaggt. He un een paar vun sienen Soldaten överleevden mit nix as de blote Leven."
 
 #. TRANSLATORS: The name of an Atlantean campaign
 #: ../../data/campaigns/campaigns.lua:93
@@ -178,7 +178,7 @@ msgid ""
 "example for the hardships all Frisians have to face – or a sign from the "
 "gods that a tribe that only just settled here must seek out an entirely new "
 "home?"
-msgstr "Vun de See to leven is een unnerratts Halswark, besünners för de Inwohners vun de freesk Noordseeküste. Was de leste Störmflood, de verherendste in de Memoorje vun allen Lüü, würrelk nix as al weer een Bispööl för de Tegenstötten, mit de all Fresen torechtkomen mutten – oder een Teken vun de Gotten, dat een Volk, wat sük even eerst hier daallaten hett, een kumpleet nejes Heimaatland utfinnen mutt?"
+msgstr "Vun de See to leven is een unnerratts Halswark, besünners för de Inwohners vun de freesk Noordseeküste. Weer de leste Störmflood, de verherendste in de Memoorje vun allen Lüü, würrelk nix as al weer een Bispööl för de Tegenstötten, mit de all Fresen torechtkomen mutten – of een Teken vun de Gotten, dat een Volk, wat sük even eerst hier daallaten hett, een kumpleet nejes Heimaatland utfinnen mutt?"
 
 #: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"

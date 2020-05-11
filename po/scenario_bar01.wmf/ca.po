@@ -4,15 +4,15 @@
 # Translators:
 # GunChleoc, 2016
 # Juanjo, 2015
-# Juanjo, 2015-2019
+# Juanjo, 2015-2020
 # Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-04-23 19:21+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-05-07 19:37+0000\n"
+"PO-Revision-Date: 2020-05-09 21:05+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -77,7 +77,7 @@ msgstr "Per fer-ho, situeu una bandera al vessant est de la muntanya (en terreny
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
 msgid "some coal"
-msgstr ""
+msgstr "una mica de carbó"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "a lot of coal"
@@ -85,7 +85,7 @@ msgstr "un muntó de carbó"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:46
 msgid "some iron"
-msgstr ""
+msgstr "una mica de ferro"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:47
 msgid "a lot of iron"
@@ -93,7 +93,7 @@ msgstr "un muntó de ferro"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:48
 msgid "some gold"
-msgstr ""
+msgstr "una mica d'or"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:49
 msgid "a lot of gold"
@@ -101,7 +101,7 @@ msgstr "un muntó d'or"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:50
 msgid "some granite"
-msgstr ""
+msgstr "una mica de granit"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:51
 msgid "a lot of granite"
@@ -161,7 +161,7 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well. For the "
 "best productivity, build it on a spot where your geologists have found a "
 "water source."
-msgstr ""
+msgstr "Altres formes d'obtenir menjar són els pescadors i les masoveries. El blat de les masoveries s'ha de processar amb aigua en una fleca abans de ser comestible. Per obtenir aigua, necessiteu enviar un geòleg a buscar aigua en algun lloc i, si trobeu aigua, construir-hi un pou. Com més a prop construïu el pou de l'aigua trobada pel geòleg, millor productivitat obtindreu."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Refine your mined resources"
@@ -894,7 +894,7 @@ msgstr "En Khantrukh sembla alleujat…"
 msgid ""
 "Wonderful! Our roofs are not dripping anymore, and we have all the material "
 "we need for, well, whichever monumental building we see fit!"
-msgstr "Magnífic! Les nostres teulades ja no gotegen més i tenim tot els materials que necessitem per fer qualsevol edifici monumental que vulguem!"
+msgstr "Magnífic! Les nostres teulades ja no gotegen més i tenim tots els materials que necessitem per fer qualsevol edifici monumental que vulguem!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:475
 msgid "We Need Oxen!"
