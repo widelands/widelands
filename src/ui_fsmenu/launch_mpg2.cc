@@ -153,8 +153,7 @@ FullscreenMenuLaunchMPG2::FullscreenMenuLaunchMPG2(GameSettingsProvider* const s
 	}
 
 	mpsg_ = new MultiPlayerSetupGroup(
-	   this, get_w() * 3 / 80, 100 /*change_map_or_save_.get_y()*/, get_w() * 53 / 80,
-	   get_h() * 17 / 30 - 100 /*change_map_or_save_.get_y()*/, settings, standard_element_height_);
+	   &individual_content_box, 0, 0, 0, 0, settings, standard_element_height_);
 
 	// If we are the host, open the map or save selection menu at startup
 	if (settings_->settings().usernum == 0 && settings_->settings().mapname.empty()) {
@@ -167,8 +166,11 @@ FullscreenMenuLaunchMPG2::FullscreenMenuLaunchMPG2(GameSettingsProvider* const s
 
 	// Y coordinate will be set later, when we know how high this box will get.
 	suggested_teams_box_ =
-	   new UI::SuggestedTeamsBox(this, right_column_x_, 0, UI::Box::Vertical, padding_, indent_,
-	                             get_w() - right_column_x_, 4 * label_height_);
+	   new UI::SuggestedTeamsBox(&individual_content_box, right_column_x_, 0, UI::Box::Vertical,
+	                             padding_, indent_, get_w() - right_column_x_, 4 * label_height_);
+
+	individual_content_box.add(mpsg_, UI::Box::Resizing::kExpandBoth);
+	individual_content_box.add(suggested_teams_box_, UI::Box::Resizing::kExpandBoth);
 }
 
 FullscreenMenuLaunchMPG2::~FullscreenMenuLaunchMPG2() {
@@ -177,9 +179,12 @@ FullscreenMenuLaunchMPG2::~FullscreenMenuLaunchMPG2() {
 }
 
 void FullscreenMenuLaunchMPG2::layout() {
-	// TODO(GunChleoc): Implement when we have redesigned this
-}
+	standard_element_width_ = get_w() / 4;
+	standard_element_height_ = get_h() * 9 / 200;
+	//   player_setup.force_new_dimensions(scale_factor(), standard_element_height_);
 
+	FullscreenMenuLaunchGame::layout();
+}
 /**
  * Set a new chat provider.
  *
