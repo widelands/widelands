@@ -146,8 +146,7 @@ AddOnInfo preload_addon(const std::string& name) {
 		get_category(s.get_safe_string("category")),
 		{}, false
 	};
-	// TODO(Nordfriese): Implement code to parse requirements
-	/* for (std::string req(s.get_safe_string("requires")); !req.empty();) {
+	for (std::string req(s.get_safe_string("requires")); !req.empty();) {
 		const size_t commapos = req.find(',');
 		if (commapos == std::string::npos) {
 			i.requires.push_back(req);
@@ -156,6 +155,6 @@ AddOnInfo preload_addon(const std::string& name) {
 			i.requires.push_back(req.substr(0, commapos));
 			req = req.substr(commapos);
 		}
-	} */
+	}
 	return i;
 }

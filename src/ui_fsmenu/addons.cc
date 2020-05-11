@@ -36,6 +36,7 @@ constexpr int32_t kHugeSize = std::numeric_limits<int32_t>::max() / 2;
 
 AddOnsCtrl::AddOnsCtrl() : FullscreenMenuBase(),
 		title_(this, 0, 0, get_w(), get_h() / 12, _("Add-Ons"), UI::Align::kCenter, g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+		warn_requirements_(this, 0, 0, get_w(), get_h() / 12, UI::PanelStyle::kFsMenu, "", UI::Align::kCenter),
 		tabs_(this, UI::TabPanelStyle::kFsMenu),
 		installed_addons_wrapper_(&tabs_, 0, 0, UI::Box::Vertical),
 		browse_addons_wrapper_(&tabs_, 0, 0, UI::Box::Vertical),
@@ -292,17 +293,83 @@ void AddOnsCtrl::rebuild() {
 	}
 
 	upgrade_all_.set_enabled(has_upgrades);
+	update_dependency_errors();
+}
+
+void AddOnsCtrl::update_dependency_errors() {
+	std::vector<std::string> warn_requirements;
+	for (auto addon = g_addons.begin(); addon != g_addons.end(); ++addon) {
+		if (!addon->second && kAddOnCategories.at(addon->first.category).can_disable_addons) {
+			// Disabled, so we don't care about dependencies
+			continue;
+		}
+		// TODO(Nordfriese): Also warn if the add-on's requirements are present in the wrong order
+		// (e.g. when A requires B,C but they are ordered C,B,A)
+		for (const std::string& requirement : addon->first.requires) {
+			std::vector<AddOnState>::iterator search_result = g_addons.end();
+			bool too_late = false;
+			for (auto search = g_addons.begin(); search != g_addons.end(); ++search) {
+				if (search->first.internal_name == requirement) {
+					search_result = search;
+					break;
+				}
+				if (search == addon) {
+					assert(!too_late);
+					too_late = true;
+				}
+			}
+			if (search_result == g_addons.end()) {
+				warn_requirements.push_back((boost::format(_("· ‘%1$s’ requires ‘%2$s’ which could not be found"))
+						% addon->first.descname % requirement).str());
+			} else {
+				if (!search_result->second && kAddOnCategories.at(search_result->first.category).can_disable_addons) {
+					warn_requirements.push_back((boost::format(_("· ‘%1$s’ requires ‘%2$s’ which is disabled"))
+							% addon->first.descname % search_result->first.descname).str());
+				}
+				if (too_late) {
+					warn_requirements.push_back((boost::format(_("· ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"))
+							% addon->first.descname % search_result->first.descname).str());
+				}
+			}
+		}
+	}
+	if (warn_requirements.empty()) {
+		warn_requirements_.set_text("");
+		warn_requirements_.set_tooltip("");
+	} else {
+		const unsigned nr_warnings = warn_requirements.size();
+		std::string list;
+		for (const std::string& msg : warn_requirements) {
+			if (!list.empty()) {
+				list += "<br>";
+			}
+			list += msg;
+		}
+		warn_requirements_.set_text((boost::format("<rt><p>%s</p><p>%s</p></rt>")
+				% g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(
+						(boost::format(ngettext(_("%u Dependency Error"), _("%u Dependency Errors"),
+								nr_warnings)) % nr_warnings).str())
+				% g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(list)).str());
+		warn_requirements_.set_tooltip(_("Add-Ons with dependency errors may work incorrectly or prevent games and maps from loading."));
+	}
 	layout();
 }
 
 void AddOnsCtrl::layout() {
 	FullscreenMenuBase::layout();
+
 	title_.set_size(get_w(), get_h() / 16);
 	title_.set_pos(Vector2i(0, get_h() / 16));
-	ok_.set_size(get_w() / 2, get_h() / 16);
+
+	ok_.set_size(get_w() / 2, get_h() / 20);
 	ok_.set_pos(Vector2i(get_w() / 4, get_h() * 14 / 16));
-	tabs_.set_size(get_w() * 2 / 3, get_h() * 2 / 3);
+
+	const bool has_warnings = !warn_requirements_.get_text().empty();
+	warn_requirements_.set_size(get_w() * 2 / 3, has_warnings ? get_h() / 8 : 0);
+	warn_requirements_.set_pos(Vector2i(get_w() / 6, get_h() * 12 / 16));
+	tabs_.set_size(get_w() * 2 / 3, has_warnings ? get_h() * 9 / 16 : get_h() * 2 / 3);
 	tabs_.set_pos(Vector2i(get_w() / 6, get_h() / 6));
+
 	installed_addons_wrapper_.set_max_size(tabs_.get_w(), tabs_.get_h() - kRowButtonSize);
 	browse_addons_wrapper_.set_max_size(tabs_.get_w(), tabs_.get_h() - kRowButtonSize);
 }
@@ -435,14 +502,14 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddO
 		ctrl->rebuild();
 	});
 	if (toggle_enabled_) {
-		toggle_enabled_->sigclicked.connect([this, info]() {
+		toggle_enabled_->sigclicked.connect([this, ctrl, info]() {
 			for (auto& pair : g_addons) {
 				if (pair.first.internal_name == info.internal_name) {
 					pair.second = !pair.second;
 					toggle_enabled_->set_pic(g_gr->images().get(
 							pair.second ? "images/ui_basic/checkbox_checked.png" : "images/ui_basic/checkbox_empty.png"));
 					toggle_enabled_->set_tooltip(pair.second ? _("Disable") : _("Enable"));
-					return;
+					return ctrl->update_dependency_errors();
 				}
 			}
 			NEVER_HERE();

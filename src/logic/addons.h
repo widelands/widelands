@@ -55,7 +55,7 @@ struct AddOnInfo {
 	std::string author;         // "The Widelands Bunnybot"
 	uint32_t version;
 	AddOnCategory category;
-	AddOnRequirements requires;  // TODO(Nordfriese): unused, not yet implemented
+	std::vector<std::string> requires;  // TODO(Nordfriese): unused, not yet implemented
 	bool verified;
 	// TODO(Nordfriese): in the future, we might also want to include:
 	// uploader username, upload date&time, average rating, number of votes, (what else?)

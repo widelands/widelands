@@ -76,6 +76,7 @@ public:
 	~AddOnsCtrl() override;
 
 	void rebuild();
+	void update_dependency_errors();
 
 	void install(const std::string&);
 	void upgrade(const std::string&);
@@ -85,6 +86,7 @@ protected:
 
 private:
 	UI::Textarea title_;
+	UI::MultilineTextarea warn_requirements_;
 	UI::TabPanel tabs_;
 	UI::Box installed_addons_wrapper_, browse_addons_wrapper_, installed_addons_box_, browse_addons_box_,
 			filter_settings_, filter_name_box_, filter_buttons_box_;
