@@ -92,6 +92,8 @@ wl_library(ui_fsmenu_gameloading
     launch_game.h
     launch_mpg.cc
     launch_mpg.h
+	launch_mpg2.cc
+    launch_mpg2.h
     launch_spg.cc
     launch_spg.h
     loadgame.cc

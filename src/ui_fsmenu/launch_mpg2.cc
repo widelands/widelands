@@ -17,7 +17,7 @@
  *
  */
 
-#include "ui_fsmenu/launch_mpg.h"
+#include "ui_fsmenu/launch_mpg2.h"
 
 #include <memory>
 
@@ -92,8 +92,8 @@ private:
 	GameController* ctrl_;
 };
 
-FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const settings,
-                                                 GameController* const ctrl)
+FullscreenMenuLaunchMPG2::FullscreenMenuLaunchMPG2(GameSettingsProvider* const settings,
+                                                   GameController* const ctrl)
    : FullscreenMenuLaunchGame(settings, ctrl),
      // Values for alignment and size
      // TODO(GunChleoc): We still need to use these consistently. Just getting them in for now
@@ -103,16 +103,6 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
      label_height_(20),
      right_column_x_(get_w() * 57 / 80),
 
-     //     Buttons
-     change_map_or_save_(this,
-                         "change_map_or_save",
-                         right_column_x_,
-                         get_h() * 3 / 20,
-                         standard_element_width_,
-                         standard_element_height_,
-                         UI::ButtonStyle::kFsMenuSecondary,
-                         _("(no map)"),
-                         _("Change map or saved game")),
      help_button_(this,
                   "help",
                   right_column_x_ + standard_element_width_ - standard_element_height_,
@@ -141,61 +131,30 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
               _("Players"),
               UI::Align::kCenter,
               g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
-     map_(this,
-          right_column_x_,
-          get_h() / 10,
-          standard_element_width_,
-          get_h() / 10,
-          _("Map"),
-          UI::Align::kCenter,
-          g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
-     wincondition_type_(this,
-                        right_column_x_ + (standard_element_width_ / 2),
-                        get_h() * 15 / 20 - 9 * label_height_,
-                        0,
-                        0,
-                        _("Type of game"),
-                        UI::Align::kCenter,
-                        g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
-     map_info_(this,
-               right_column_x_,
-               get_h() * 2 / 10,
-               standard_element_width_,
-               get_h() * 15 / 20 - 9.25 * label_height_ - get_h() * 2 / 10,
-               UI::PanelStyle::kFsMenu),
      help_(nullptr),
 
      // Variables and objects used in the menu
      chat_(nullptr) {
-	win_condition_dropdown_.set_pos(
-	   Vector2i(right_column_x_, get_h() * 4 / 5 - 9.5 * label_height_));
-	peaceful_.set_pos(Vector2i(right_column_x_, get_h() * 4 / 5 - 9.5 * label_height_ +
-	                                               win_condition_dropdown_.get_h() + padding_));
-	back_.set_pos(
-	   Vector2i(right_column_x_, get_h() * 218 / 240 - standard_element_height_ - padding_));
-	ok_.set_pos(Vector2i(right_column_x_, get_h() * 218 / 240));
 
 	title_.set_text(_("Multiplayer Game Setup"));
-	change_map_or_save_.sigclicked.connect(
-	   boost::bind(&FullscreenMenuLaunchMPG::change_map_or_save, boost::ref(*this)));
+	//	change_map_or_save_.sigclicked.connect(
+	//	   boost::bind(&FullscreenMenuLaunchMPG::change_map_or_save, boost::ref(*this)));
 	help_button_.sigclicked.connect(
-	   boost::bind(&FullscreenMenuLaunchMPG::help_clicked, boost::ref(*this)));
+	   boost::bind(&FullscreenMenuLaunchMPG2::help_clicked, boost::ref(*this)));
 
 	clients_.set_font_scale(scale_factor());
 	players_.set_font_scale(scale_factor());
-	map_.set_font_scale(scale_factor());
-	wincondition_type_.set_font_scale(scale_factor());
 
 	if (settings_->can_change_map()) {
-		map_info_.set_text(_("Please select a map or saved game."));
+		//		map_info_.set_text(_("Please select a map or saved game."));
 	} else {
-		change_map_or_save_.set_enabled(settings_->can_change_map());
-		map_info_.set_text(_("The host has not yet selected a map or saved game."));
+		//		change_map_or_save_.set_enabled(settings_->can_change_map());
+		//		map_info_.set_text(_("The host has not yet selected a map or saved game."));
 	}
 
 	mpsg_ = new MultiPlayerSetupGroup(
-	   this, get_w() * 3 / 80, change_map_or_save_.get_y(), get_w() * 53 / 80,
-	   get_h() * 17 / 30 - change_map_or_save_.get_y(), settings, standard_element_height_);
+	   this, get_w() * 3 / 80, 100 /*change_map_or_save_.get_y()*/, get_w() * 53 / 80,
+	   get_h() * 17 / 30 - 100 /*change_map_or_save_.get_y()*/, settings, standard_element_height_);
 
 	// If we are the host, open the map or save selection menu at startup
 	if (settings_->settings().usernum == 0 && settings_->settings().mapname.empty()) {
@@ -212,12 +171,12 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	                             get_w() - right_column_x_, 4 * label_height_);
 }
 
-FullscreenMenuLaunchMPG::~FullscreenMenuLaunchMPG() {
+FullscreenMenuLaunchMPG2::~FullscreenMenuLaunchMPG2() {
 	delete mpsg_;
 	delete chat_;
 }
 
-void FullscreenMenuLaunchMPG::layout() {
+void FullscreenMenuLaunchMPG2::layout() {
 	// TODO(GunChleoc): Implement when we have redesigned this
 }
 
@@ -226,7 +185,7 @@ void FullscreenMenuLaunchMPG::layout() {
  *
  * This automatically creates and displays a chat panel when appropriate.
  */
-void FullscreenMenuLaunchMPG::set_chat_provider(ChatProvider& chat) {
+void FullscreenMenuLaunchMPG2::set_chat_provider(ChatProvider& chat) {
 	delete chat_;
 	chat_ = new GameChatPanel(
 	   this, get_w() * 3 / 80, mpsg_->get_y() + mpsg_->get_h() + padding_, get_w() * 53 / 80,
@@ -237,11 +196,11 @@ void FullscreenMenuLaunchMPG::set_chat_provider(ChatProvider& chat) {
 /**
  * back-button has been pressed
  */
-void FullscreenMenuLaunchMPG::clicked_back() {
+void FullscreenMenuLaunchMPG2::clicked_back() {
 	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
 }
 
-void FullscreenMenuLaunchMPG::win_condition_selected() {
+void FullscreenMenuLaunchMPG2::win_condition_selected() {
 	if (settings_->can_change_map() && win_condition_dropdown_.has_selection()) {
 		settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
 		last_win_condition_ = win_condition_dropdown_.get_selected();
@@ -254,7 +213,7 @@ void FullscreenMenuLaunchMPG::win_condition_selected() {
 }
 
 /// Opens a popup window to select a map or saved game
-void FullscreenMenuLaunchMPG::change_map_or_save() {
+void FullscreenMenuLaunchMPG2::change_map_or_save() {
 	MapOrSaveSelectionWindow selection_window(this, ctrl_, get_w() / 3, get_h() / 4);
 	auto result = selection_window.run<FullscreenMenuBase::MenuTarget>();
 	assert(result == FullscreenMenuBase::MenuTarget::kNormalGame ||
@@ -271,7 +230,7 @@ void FullscreenMenuLaunchMPG::change_map_or_save() {
 /**
  * Select a map and send all information to the user interface.
  */
-void FullscreenMenuLaunchMPG::select_map() {
+void FullscreenMenuLaunchMPG2::select_map() {
 	if (!settings_->can_change_map())
 		return;
 
@@ -303,7 +262,7 @@ void FullscreenMenuLaunchMPG::select_map() {
  * Select a multi player saved game and send all information to the user
  * interface.
  */
-void FullscreenMenuLaunchMPG::select_saved_game() {
+void FullscreenMenuLaunchMPG2::select_saved_game() {
 	if (!settings_->can_change_map())
 		return;
 
@@ -352,7 +311,7 @@ void FullscreenMenuLaunchMPG::select_saved_game() {
 /**
  * start-button has been pressed
  */
-void FullscreenMenuLaunchMPG::clicked_ok() {
+void FullscreenMenuLaunchMPG2::clicked_ok() {
 	if (!g_fs->file_exists(settings_->settings().mapfilename))
 		throw WLWarning(_("File not found"),
 		                _("Widelands tried to start a game with a file that could not be "
@@ -371,7 +330,7 @@ void FullscreenMenuLaunchMPG::clicked_ok() {
 	}
 }
 
-void FullscreenMenuLaunchMPG::think() {
+void FullscreenMenuLaunchMPG2::think() {
 	if (ctrl_) {
 		ctrl_->think();
 	}
@@ -387,19 +346,21 @@ void FullscreenMenuLaunchMPG::think() {
  * update the user interface and take care about the visibility of
  * buttons and text.
  */
-void FullscreenMenuLaunchMPG::refresh() {
+void FullscreenMenuLaunchMPG2::refresh() {
 	// TODO(GunChleoc): Investigate what we can handle with NoteGameSettings. Maybe we can get rid of
 	// refresh() and thus think().
 	const GameSettings& settings = settings_->settings();
 
 	if (settings.mapfilename != filename_proof_) {
 		if (!g_fs->file_exists(settings.mapfilename)) {
-			map_info_.set_style(g_gr->styles().font_style(UI::FontStyle::kWarning));
-			map_info_.set_text(_("The selected file can not be found. If it is not automatically "
-			                     "transferred to you, please write to the host about this problem."));
+			//			map_info_.set_style(g_gr->styles().font_style(UI::FontStyle::kWarning));
+			//			map_info_.set_text(_("The selected file can not be found. If it is not
+			// automatically
+			//" 			                     "transferred to you, please write to the host about this
+			// problem."));
 		} else {
-			//			Reset font color
-			map_info_.set_style(g_gr->styles().font_style(UI::FontStyle::kLabel));
+			// Reset font color
+			//			map_info_.set_style(g_gr->styles().font_style(UI::FontStyle::kLabel));
 
 			// Update local nr of players - needed for the client UI
 			nr_players_ = settings.players.size();
@@ -425,7 +386,7 @@ void FullscreenMenuLaunchMPG::refresh() {
 	}
 
 	ok_.set_enabled(settings_->can_launch());
-	change_map_or_save_.set_enabled(settings_->can_change_map());
+	//	change_map_or_save_.set_enabled(settings_->can_change_map());
 
 	update_peaceful_mode();
 	peaceful_.set_state(settings_->is_peaceful_mode());
@@ -460,7 +421,7 @@ void FullscreenMenuLaunchMPG::refresh() {
  * player names and player tribes and take care about visibility
  * and usability of all the parts of the UI.
  */
-void FullscreenMenuLaunchMPG::set_scenario_values() {
+void FullscreenMenuLaunchMPG2::set_scenario_values() {
 	const GameSettings& settings = settings_->settings();
 	if (settings.mapfilename.empty())
 		throw wexception("settings()->scenario was set to true, but no map is available");
@@ -491,7 +452,7 @@ void FullscreenMenuLaunchMPG::set_scenario_values() {
 /**
  * load all playerdata from savegame and update UI accordingly
  */
-void FullscreenMenuLaunchMPG::load_previous_playerdata() {
+void FullscreenMenuLaunchMPG2::load_previous_playerdata() {
 	std::unique_ptr<FileSystem> l_fs(
 	   g_fs->make_sub_file_system(settings_->settings().mapfilename.c_str()));
 	Profile prof;
@@ -569,14 +530,14 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata() {
 			}
 		}
 	}
-	map_info_.set_text(infotext);
+	//	map_info_.set_text(infotext);
 	filename_proof_ = settings_->settings().mapfilename;
 }
 
 /**
  * load map information and update the UI
  */
-void FullscreenMenuLaunchMPG::load_map_info() {
+void FullscreenMenuLaunchMPG2::load_map_info() {
 	Widelands::Map map;  //  MapLoader needs a place to put its preload data
 
 	std::unique_ptr<Widelands::MapLoader> ml =
@@ -608,7 +569,7 @@ void FullscreenMenuLaunchMPG::load_map_info() {
 	infotext += "\n";
 	infotext += map.get_hint();
 
-	map_info_.set_text(infotext);
+	//	map_info_.set_text(infotext);
 	filename_proof_ = settings_->settings().mapfilename;
 
 	suggested_teams_box_->hide();
@@ -618,7 +579,7 @@ void FullscreenMenuLaunchMPG::load_map_info() {
 }
 
 /// Show help
-void FullscreenMenuLaunchMPG::help_clicked() {
+void FullscreenMenuLaunchMPG2::help_clicked() {
 	if (help_) {
 		help_->set_visible(true);
 	} else {

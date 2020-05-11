@@ -47,7 +47,7 @@
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
-#include "ui_fsmenu/launch_mpg.h"
+#include "ui_fsmenu/launch_mpg2.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
@@ -125,7 +125,7 @@ void GameClientImpl::send_player_command(Widelands::PlayerCommand* pc) {
  *  @return true to indicate that run is done.
  */
 bool GameClientImpl::run_map_menu(GameClient* parent) {
-	FullscreenMenuLaunchMPG lgm(parent, parent);
+	FullscreenMenuLaunchMPG2 lgm(parent, parent);
 	lgm.set_chat_provider(*parent);
 	modal = &lgm;
 	FullscreenMenuBase::MenuTarget code = lgm.run<FullscreenMenuBase::MenuTarget>();
@@ -178,9 +178,9 @@ void GameClientImpl::run_game(InteractiveGameBase* igb) {
 
 	modal = igb;
 
-	game->run(settings.savegame ? Widelands::Game::Loaded : settings.scenario ?
-	                              Widelands::Game::NewMPScenario :
-	                              Widelands::Game::NewNonScenario,
+	game->run(settings.savegame ? Widelands::Game::Loaded :
+	                              settings.scenario ? Widelands::Game::NewMPScenario :
+	                                                  Widelands::Game::NewNonScenario,
 	          "", false, (boost::format("netclient_%d") % static_cast<int>(settings.usernum)).str());
 
 	// if this is an internet game, tell the metaserver that the game is done.

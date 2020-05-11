@@ -53,7 +53,7 @@
 #include "network/network_player_settings_backend.h"
 #include "network/network_protocol.h"
 #include "ui_basic/progresswindow.h"
-#include "ui_fsmenu/launch_mpg.h"
+#include "ui_fsmenu/launch_mpg2.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
@@ -618,7 +618,7 @@ void GameHost::init_computer_players() {
 void GameHost::run() {
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
-	FullscreenMenuLaunchMPG lm(&d->hp, this);
+	FullscreenMenuLaunchMPG2 lm(&d->hp, this);
 	lm.set_chat_provider(d->chat);
 	const FullscreenMenuBase::MenuTarget code = lm.run<FullscreenMenuBase::MenuTarget>();
 	if (code == FullscreenMenuBase::MenuTarget::kBack) {
@@ -704,9 +704,9 @@ void GameHost::run() {
 		// wait mode when there are no clients
 		check_hung_clients();
 		init_computer_players();
-		game.run(d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
-		                                Widelands::Game::NewMPScenario :
-		                                Widelands::Game::NewNonScenario,
+		game.run(d->settings.savegame ? Widelands::Game::Loaded :
+		                                d->settings.scenario ? Widelands::Game::NewMPScenario :
+		                                                       Widelands::Game::NewNonScenario,
 		         "", false, "nethost");
 
 		// if this is an internet game, tell the metaserver that the game is done.
