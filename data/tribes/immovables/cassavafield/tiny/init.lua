@@ -16,10 +16,14 @@ tribes:new_immovable_type {
       }
    },
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 26, 16 },
-      },
+         hotspot = {3, 7},
+         frames = 4,
+         columns = 2,
+         rows = 2,
+         fps = 2
+      }
    }
 }
