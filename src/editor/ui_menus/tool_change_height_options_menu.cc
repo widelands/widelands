@@ -63,10 +63,8 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
 	   /** TRANSLATORS: Editor set height access key. **/
 	   _("Ctrl + Click on the map to set terrain height"));
 
-	change_by_.changed.connect(
-	   boost::bind(&EditorToolChangeHeightOptionsMenu::update_change_by, boost::ref(*this)));
-	set_to_.changed.connect(
-	   boost::bind(&EditorToolChangeHeightOptionsMenu::update_set_to, boost::ref(*this)));
+	change_by_.changed.connect([this]() { update_change_by(); });
+	set_to_.changed.connect([this]() { update_set_to(); });
 
 	box_.add(&change_by_);
 	box_.add(&set_to_);

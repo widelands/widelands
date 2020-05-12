@@ -178,19 +178,19 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	tabs_.add("map_teams", g_gr->images().get("images/wui/editor/tools/players.png"), &teams_box_,
 	          _("Teams"));
 
-	name_.changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
-	author_.changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
-	descr_->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
-	hint_->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
-	waterway_length_box_->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
+	name_.changed.connect([this]() { changed(); });
+	author_.changed.connect([this]() { changed(); });
+	descr_->changed.connect([this]() { changed(); });
+	hint_->changed.connect([this]() { changed(); });
+	waterway_length_box_->changed.connect([this]() { changed(); });
 	for (const auto& tag : tags_checkboxes_) {
-		tag.second->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
+		tag.second->changed.connect([this]() { changed(); });
 	}
 
 	balancing_dropdown_.selected.connect([this] { changed(); });
 
-	ok_.sigclicked.connect(boost::bind(&MainMenuMapOptions::clicked_ok, boost::ref(*this)));
-	cancel_.sigclicked.connect(boost::bind(&MainMenuMapOptions::clicked_cancel, boost::ref(*this)));
+	ok_.sigclicked.connect([this]() { clicked_ok(); });
+	cancel_.sigclicked.connect([this]() { clicked_cancel(); });
 
 	update();
 	ok_.set_enabled(true);
