@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-06 18:39+0000\n"
+"PO-Revision-Date: 2020-05-13 09:21+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -190,7 +190,7 @@ msgstr ""
 #: ../../data/tribes/buildings/partially_finished/dismantlesite/helptexts.lua:8
 msgctxt "building"
 msgid "Proverb"
-msgstr ""
+msgstr "Proverbio"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/partially_finished/dismantlesite/helptexts.lua:13
@@ -285,7 +285,7 @@ msgstr "El granjero necesita %1% de rendimiento para sembrar y cosechar un fajo 
 #: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/helptexts.lua:16
 msgctxt "building"
 msgid "Builds ferries."
-msgstr ""
+msgstr "Construye ferris. "
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/helptexts.lua:21
@@ -294,7 +294,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/helptexts.lua:21
 msgctxt "building"
 msgid "Needs water nearby."
-msgstr ""
+msgstr "Necesita agua en la cercanía."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/helptexts.lua:6
@@ -334,7 +334,7 @@ msgstr "Construye una casa de piscicultor cerca de la casa de pescador para aseg
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/helptexts.lua:21
 msgctxt "atlanteans_building"
 msgid "The fisher’s house needs water full of fish within the work area."
-msgstr "La cantera necesita rocas que tallar en el área de trabajo."
+msgstr "La cabaña de pescador necesita aguas llenas de pescado dentro de su zona de trabajo."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/helptexts.lua:16
@@ -1042,7 +1042,7 @@ msgstr "Esta mina explota todo el recuso hasta el nivel más profundo. Pero incl
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:26
 msgctxt "barbarians_building"
 msgid "It cannot be enhanced."
-msgstr ""
+msgstr "No puede ser mejorado."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:31
@@ -1409,7 +1409,7 @@ msgstr "La caña es el material tradicional para techar, y se teje en tela extre
 #, lua-format
 msgctxt "barbarians_building"
 msgid "A reed yard can produce a sheaf of reed in about %s on average."
-msgstr ""
+msgstr "Una plantación de caña puede producir un manojo de caña en aproximadamente %s en promedio."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/helptexts.lua:6
@@ -1770,7 +1770,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/helptexts.lua:16
 msgctxt "building"
 msgid "Breeds fish as food for soldiers and miners."
-msgstr ""
+msgstr "Cría peces para alimentar los soldados y los mineros."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/helptexts.lua:21
@@ -1800,7 +1800,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/helptexts.lua:16
 msgctxt "building"
 msgid "Produces advanced weapons and golden helmets for the soldiers."
-msgstr ""
+msgstr "Produce armas avanzadas y yelmos oros para los soldados."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/helptexts.lua:6
@@ -1820,7 +1820,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/helptexts.lua:16
 msgctxt "building"
 msgid "Produces basic weapons and helmets for the soldiers."
-msgstr ""
+msgstr "Produce armas y yelmos para los soldados."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/helptexts.lua:3
@@ -1832,7 +1832,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "A baker"
-msgstr ""
+msgstr "Un panadero"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/helptexts.lua:13
@@ -1845,7 +1845,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The bakery needs %s on average to produce one loaf of bread."
-msgstr ""
+msgstr "La panadería necesita %s de rendimiento para hornear una hogaza de pan."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:3
@@ -1875,7 +1875,7 @@ msgstr "Equipa a reclutas y los entrena como soldados."
 #, lua-format
 msgctxt "frisians_building"
 msgid "The barracks needs %s on average to recruit one soldier."
-msgstr ""
+msgstr "El cuartel necesita %s de rendimiento para reclutar un soldado."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/helptexts.lua:3
@@ -1903,7 +1903,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The beekeeper pauses %s before going to work again."
-msgstr ""
+msgstr "El apicultor se detiene %s antes de ir a trabajar de nuevo."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/helptexts.lua:3
@@ -1923,21 +1923,21 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/helptexts.lua:13
 msgctxt "building"
 msgid "Plants berry bushes in the surrounding area."
-msgstr ""
+msgstr "Planta arbustos de bayas en la zona circundante."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/helptexts.lua:18
 msgctxt "frisians_building"
 msgid ""
 "The berry farm needs free space within the work area to plant the bushes."
-msgstr ""
+msgstr "La granja de bayas necesita espacio libre dentro del área de trabajo para plantar los arbustos."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The berry farmer pauses %s before going to work again."
-msgstr ""
+msgstr "El cultivador de bayas se detiene %s antes de ir a trabajar de nuevo."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:3
@@ -1955,14 +1955,14 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:13
 msgctxt "building"
 msgid "Forges tools to equip new workers."
-msgstr ""
+msgstr "Forja herramientas para equipar trabajadores nuevos."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The blacksmith needs %s on average to produce one tool."
-msgstr ""
+msgstr "La herrería necesita %s de rendimiento para producir una herramienta."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/brewery/helptexts.lua:3
@@ -1981,14 +1981,14 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/brewery/helptexts.lua:13
 msgctxt "building"
 msgid "Brews beer for miners and soldier training."
-msgstr ""
+msgstr "Hace cerveza para mineros y para entrenar soldados."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/brewery/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The brewery needs %s on average to brew one mug of beer."
-msgstr ""
+msgstr "La cervecería necesita %s de rendimiento para elaborar una jarra de cerveza."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/brick_kiln/helptexts.lua:3
@@ -2017,7 +2017,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The brick kiln needs %s on average to produce two bricks."
-msgstr ""
+msgstr "El horno de ladrillos necesita %s de rendimiento para producir tres ladrillos."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/helptexts.lua:3
@@ -2046,14 +2046,14 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The charcoal burner's house needs %s on average to produce one coal."
-msgstr ""
+msgstr "La casa de carbonero necesita %s de rendimiento para producir un carbón."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The charcoal kiln needs %s on average to produce one coal."
-msgstr ""
+msgstr "La fosa de carbonización necesita %s de rendimiento para producir un carbón."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/helptexts.lua:6
@@ -2091,7 +2091,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the coal mine can produce two pieces of coal "
 "in %s on average."
-msgstr ""
+msgstr "Si la reserva de comida es estable, la mina de carbón puede producir dos piezas de carbón %s en promedio."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/helptexts.lua:21
@@ -2110,7 +2110,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep coal mine can produce four pieces of "
 "coal in %s on average."
-msgstr ""
+msgstr "Si la reserva de comida es estable, la mina de carbón profunda puede producir cuatros piezas de carbón %s en promedio."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/helptexts.lua:3
@@ -2141,7 +2141,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The fruit collector pauses %s before going to work again."
-msgstr ""
+msgstr "El recolector de bayas se detiene %s antes de ir a trabajar de nuevo."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/helptexts.lua:6

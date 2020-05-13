@@ -3,13 +3,14 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
+# Mantas Kriaučiūnas <mantas@akl.lt>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-04-22 20:03+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"PO-Revision-Date: 2020-05-13 05:28+0000\n"
+"Last-Translator: Mantas Kriaučiūnas <mantas@akl.lt>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/widelands/widelands/language/lt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -80,7 +81,7 @@ msgstr ""
 
 #: ../../data/scripting/infrastructure.lua:175
 msgid "Not enough space"
-msgstr ""
+msgstr "Nepakanka vietos"
 
 #: ../../data/scripting/infrastructure.lua:246
 msgid "No rocks nearby"
@@ -138,17 +139,17 @@ msgstr ""
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:94
 msgid "Normal AI"
-msgstr ""
+msgstr "Įprastas DI"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:109
 msgid "Weak AI"
-msgstr ""
+msgstr "Silpas DI"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:124
 msgid "Very Weak AI"
-msgstr ""
+msgstr "Labai silpnas DI"
 
 #. * TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably
@@ -165,7 +166,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:93
 msgid "Jan"
-msgstr ""
+msgstr "Saus"
 
 #. * TRANSLATORS: February. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -174,7 +175,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:99
 msgid "Feb"
-msgstr ""
+msgstr "Vas"
 
 #. * TRANSLATORS: March. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -183,7 +184,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:105
 msgid "Mar"
-msgstr ""
+msgstr "Kov"
 
 #. * TRANSLATORS: April. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -192,7 +193,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:111
 msgid "Apr"
-msgstr ""
+msgstr "Bal"
 
 #. * TRANSLATORS: May. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -201,7 +202,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:117
 msgid "May"
-msgstr ""
+msgstr "Geg"
 
 #. * TRANSLATORS: June. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -210,7 +211,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:123
 msgid "Jun"
-msgstr ""
+msgstr "Bir"
 
 #. * TRANSLATORS: July. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -219,7 +220,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:129
 msgid "Jul"
-msgstr ""
+msgstr "Liep"
 
 #. * TRANSLATORS: August. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -228,7 +229,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:135
 msgid "Aug"
-msgstr ""
+msgstr "Rugp"
 
 #. * TRANSLATORS: September. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -237,7 +238,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:141
 msgid "Sep"
-msgstr ""
+msgstr "Rugs"
 
 #. * TRANSLATORS: October. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -246,7 +247,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:147
 msgid "Oct"
-msgstr ""
+msgstr "Spal"
 
 #. * TRANSLATORS: November. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -255,7 +256,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:153
 msgid "Nov"
-msgstr ""
+msgstr "Lap"
 
 #. * TRANSLATORS: December. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -263,7 +264,7 @@ msgstr ""
 #. * TRANSLATORS: definition if there is one for your language.
 #: ../../src/base/time_string.cc:158
 msgid "Dec"
-msgstr ""
+msgstr "Gruo"
 
 #: ../../src/editor/editorinteractive.cc:75
 msgid "Loading tribes"
@@ -296,7 +297,7 @@ msgstr "Įrankiai"
 #: ../../src/editor/editorinteractive.cc:119
 #: ../../src/wui/interactive_gamebase.cc:83
 msgid "Show / Hide"
-msgstr ""
+msgstr "Rodyti / Slėpti"
 
 #: ../../src/editor/editorinteractive.cc:132
 msgid "Tool size"

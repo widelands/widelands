@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-06 19:09+0000\n"
+"PO-Revision-Date: 2020-05-11 12:31+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -1058,17 +1058,17 @@ msgstr "sin nombre"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:172
 msgid "A file or directory with that name already exists."
-msgstr ""
+msgstr "Un archivo o un directorio con este nombre ya existe."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:174
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:189
 msgid "Error Creating Directory!"
-msgstr ""
+msgstr "¡Error Creando Directorio!"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:187
 #, c-format
 msgid "Error while creating directory ‘%s’."
-msgstr ""
+msgstr "Error creando directorio ‘%s’."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:309
 #: ../../src/wui/game_main_menu_save_game.cc:234
@@ -1834,14 +1834,14 @@ msgstr "Faltan trabajadores"
 #. missing
 #: ../../src/logic/map_objects/tribes/productionsite.cc:359
 msgid "Worker is coming"
-msgstr ""
+msgstr "Trabajador viniendo"
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1
 #. worker
 #. missing. If you need plural forms here, please let us know.
 #: ../../src/logic/map_objects/tribes/productionsite.cc:362
 msgid "Workers are coming"
-msgstr ""
+msgstr "Trabajadores viniendos"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:369
 msgid "(stopped)"
@@ -2106,7 +2106,7 @@ msgstr "Terrenos"
 #: ../../src/map_io/map_saver.cc:142
 #: ../../src/map_io/widelands_map_loader.cc:189
 msgid "Starting positions"
-msgstr ""
+msgstr "Posiciones iniciales"
 
 #: ../../src/map_io/map_saver.cc:173
 #: ../../src/map_io/widelands_map_loader.cc:220
@@ -2220,7 +2220,7 @@ msgstr ""
 
 #: ../../src/map_io/widelands_map_loader.cc:326
 msgid "Initializing map objects"
-msgstr ""
+msgstr "Inicializando objetos de mapa"
 
 #: ../../src/map_io/widelands_map_loader.cc:398
 msgid "Checking map"
