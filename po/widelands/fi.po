@@ -4,7 +4,7 @@
 # Translators:
 # GunChleoc, 2016,2018
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016-2019
+# Jukka Pakarinen, 2016-2020
 # Markus Hällfors <markus@hallfors.com>, 2015
 # Max Ihalempia, 2015
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007,2015
@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-04-22 20:03+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-05-07 19:37+0000\n"
+"PO-Revision-Date: 2020-05-11 19:43+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -143,17 +143,17 @@ msgid "No AI"
 msgstr "Ei ohjausta"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:93
+#: ../../src/ai/defaultai.h:94
 msgid "Normal AI"
 msgstr "Tavallinen tietokonepelaaja"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:108
+#: ../../src/ai/defaultai.h:109
 msgid "Weak AI"
 msgstr "Heikko tietokonepelaaja"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:123
+#: ../../src/ai/defaultai.h:124
 msgid "Very Weak AI"
 msgstr "Hyvin heikko tietokonevastustaja"
 
@@ -1484,7 +1484,7 @@ msgid "Initializing game…"
 msgstr "Peliä valmistellaan…"
 
 #: ../../src/logic/game.cc:372 ../../src/logic/game.cc:408
-#: ../../src/ui_basic/progresswindow.cc:52 ../../src/wlapplication.cc:1489
+#: ../../src/ui_basic/progresswindow.cc:52 ../../src/wlapplication.cc:1495
 msgid "Loading…"
 msgstr "Lataa…"
 
@@ -1700,9 +1700,9 @@ msgstr "talous ei tarvitse työtekijää '%s'"
 #. * TRANSLATORS:    %2$s = "Ox"
 #: ../../src/logic/map_objects/tribes/production_program.cc:320
 #: ../../src/logic/map_objects/tribes/production_program.cc:344
-#: ../../src/logic/map_objects/tribes/production_program.cc:788
-#: ../../src/logic/map_objects/tribes/production_program.cc:863
-#: ../../src/logic/map_objects/tribes/production_program.cc:914
+#: ../../src/logic/map_objects/tribes/production_program.cc:784
+#: ../../src/logic/map_objects/tribes/production_program.cc:859
+#: ../../src/logic/map_objects/tribes/production_program.cc:910
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$ix %2$s"
@@ -1744,21 +1744,21 @@ msgstr "työntekijät eivät tarvitse kokemusta"
 #. * TRANSLATORS: on a development build if you can, and let us know if there
 #. are any issues
 #. * TRANSLATORS: we need to address for your language.
-#: ../../src/logic/map_objects/tribes/production_program.cc:500
-#: ../../src/logic/map_objects/tribes/production_program.cc:812
+#: ../../src/logic/map_objects/tribes/production_program.cc:496
+#: ../../src/logic/map_objects/tribes/production_program.cc:808
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr "Väliin jätetty %1$s, koska %2$s"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware '%s'"
-#: ../../src/logic/map_objects/tribes/production_program.cc:506
+#: ../../src/logic/map_objects/tribes/production_program.cc:502
 #, c-format
 msgid "Completed %1$s because %2$s"
 msgstr "%1$s valmistui, koska %2$s"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware '%s'"
-#: ../../src/logic/map_objects/tribes/production_program.cc:512
-#: ../../src/logic/map_objects/tribes/production_program.cc:518
+#: ../../src/logic/map_objects/tribes/production_program.cc:508
+#: ../../src/logic/map_objects/tribes/production_program.cc:514
 #, c-format
 msgid "Skipped %1$s because %2$s"
 msgstr "Ohitettu %1$s, koska %2$s"
@@ -1767,7 +1767,7 @@ msgstr "Ohitettu %1$s, koska %2$s"
 #. are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
 #. bread is missing'
-#: ../../src/logic/map_objects/tribes/production_program.cc:798
+#: ../../src/logic/map_objects/tribes/production_program.cc:794
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -1777,7 +1777,7 @@ msgstr[1] "%s puuttuvat"
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
 #. wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:874
+#: ../../src/logic/map_objects/tribes/production_program.cc:870
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -1787,19 +1787,19 @@ msgstr[1] "Tuotettu %s"
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
 #. workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:925
+#: ../../src/logic/map_objects/tribes/production_program.cc:921
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] "Rekrytoitu %s"
 msgstr[1] "Rektytoitu %s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1085
+#: ../../src/logic/map_objects/tribes/production_program.cc:1081
 msgid "No soldier to train!"
 msgstr "Ei koulutettavia sotilaita!"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1094
-#: ../../src/logic/map_objects/tribes/production_program.cc:1152
+#: ../../src/logic/map_objects/tribes/production_program.cc:1090
+#: ../../src/logic/map_objects/tribes/production_program.cc:1148
 msgid "No soldier found for this training level!"
 msgstr "Tämän tason harjoitteluun sopivaa sotilasta ei löytynyt!"
 
@@ -1807,7 +1807,7 @@ msgstr "Tämän tason harjoitteluun sopivaa sotilasta ei löytynyt!"
 #. description of the
 #. * training program, e.g. Completed upgrading soldier evade from level 0 to
 #. level 1
-#: ../../src/logic/map_objects/tribes/production_program.cc:1194
+#: ../../src/logic/map_objects/tribes/production_program.cc:1190
 #, c-format
 msgid "Completed %s"
 msgstr "%svalmis"
@@ -1850,7 +1850,7 @@ msgstr "(pysäytetty)"
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:1051
+#: ../../src/logic/map_objects/tribes/productionsite.cc:1054
 msgid "Can’t find any more resources!"
 msgstr "Resurssit lopussa!"
 
@@ -2222,7 +2222,7 @@ msgid "Checking map"
 msgstr "Tarkistan kartan"
 
 #: ../../src/network/gameclient.cc:151 ../../src/network/gamehost.cc:663
-#: ../../src/wlapplication.cc:1380
+#: ../../src/wlapplication.cc:1386
 msgid "Preparing game"
 msgstr "Valmistelen peliä"
 
@@ -2829,24 +2829,24 @@ msgid_plural "%d fields"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_basic/window.cc:115 ../../src/ui_fsmenu/about.cc:34
+#: ../../src/ui_basic/window.cc:125 ../../src/ui_fsmenu/about.cc:34
 #: ../../src/wui/watchwindow.cc:75
 msgid "Close"
 msgstr "Sulje"
 
-#: ../../src/ui_basic/window.cc:168
+#: ../../src/ui_basic/window.cc:178
 msgid "Minimize"
 msgstr "Minimoi"
 
-#: ../../src/ui_basic/window.cc:168
+#: ../../src/ui_basic/window.cc:178
 msgid "Restore"
 msgstr "Palauta"
 
-#: ../../src/ui_basic/window.cc:172
+#: ../../src/ui_basic/window.cc:182
 msgid "Pin"
 msgstr "Kiinnitä"
 
-#: ../../src/ui_basic/window.cc:172
+#: ../../src/ui_basic/window.cc:182
 msgid "Unpin"
 msgstr "Vapauta"
 
@@ -3581,11 +3581,11 @@ msgstr "Kampanjat"
 msgid "Load Game"
 msgstr "Lataa peli"
 
-#: ../../src/wlapplication.cc:1177
+#: ../../src/wlapplication.cc:1183
 msgid "Game data error"
 msgstr "Pelitietovirhe"
 
-#: ../../src/wlapplication.cc:1185
+#: ../../src/wlapplication.cc:1191
 #, c-format
 msgid ""
 "Please report this problem to help us improve Widelands. You will find "
@@ -3593,18 +3593,18 @@ msgid ""
 "using build %1$s (%2$s)."
 msgstr "Ole hyvä ja raportoi tämä ongelma auttaaksesi meitä parantamaan Widelandsia. Löydät asiaankuuluvat viestit ohjelman standarditulosteesta (stdout.txt tiedosto Windowsissa). Käytät koontiversiota  %1$s (%2$s)."
 
-#: ../../src/wlapplication.cc:1192
+#: ../../src/wlapplication.cc:1198
 msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Widelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing."
 msgstr "Ole hyvä ja liitä tämä tieto raporttiisi.\n\nWidelands pyrkii tallentamaan pelin automaattisesti virheiden sattuessa. Pelin voi usein – mutta ei aina – ladata ja jatkaa taas pelaamista."
 
-#: ../../src/wlapplication.cc:1319
+#: ../../src/wlapplication.cc:1325
 msgid "Invalid Address"
 msgstr "Virheellinen Osoite"
 
-#: ../../src/wlapplication.cc:1320
+#: ../../src/wlapplication.cc:1326
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr "Annettu isäntänimi tai osoite on virheellinen, eikä siihen voida ottaa yhteyttä."
 
@@ -4018,7 +4018,7 @@ msgstr ""
 
 #: ../../src/wui/economy_options_window.cc:597
 msgid "Save Profile"
-msgstr ""
+msgstr "Tallenna Profiili"
 
 #: ../../src/wui/economy_options_window.cc:604 ../../src/wui/login_box.cc:58
 msgid "Save"
@@ -4031,7 +4031,7 @@ msgstr "Poista"
 
 #: ../../src/wui/economy_options_window.cc:607
 msgid "Existing Profiles"
-msgstr ""
+msgstr "Olemassaolevat Profiilit"
 
 #: ../../src/wui/fieldaction.cc:229
 msgid "Build small building"
@@ -4248,7 +4248,7 @@ msgstr "Keskitä päänäkymä tähän"
 #: ../../src/wui/seafaring_statistics_menu.cc:533
 msgctxt "hotkey"
 msgid "Alt+0"
-msgstr ""
+msgstr "Alt+0"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:565
@@ -4259,7 +4259,7 @@ msgstr "Näytä kaikki viestit"
 #: ../../src/wui/seafaring_statistics_menu.cc:541
 msgctxt "hotkey"
 msgid "Alt+1"
-msgstr ""
+msgstr "Alt+1"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:575
@@ -4270,7 +4270,7 @@ msgstr "Näytä vain geologien viestit"
 #: ../../src/wui/seafaring_statistics_menu.cc:544
 msgctxt "hotkey"
 msgid "Alt+2"
-msgstr ""
+msgstr "Alt+2"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:578
@@ -4281,7 +4281,7 @@ msgstr "Näytä vain talouden viestit"
 #: ../../src/wui/seafaring_statistics_menu.cc:547
 msgctxt "hotkey"
 msgid "Alt+3"
-msgstr ""
+msgstr "Alt+3"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:581
@@ -4292,7 +4292,7 @@ msgstr "Näytä vain merenkäynnin viestit"
 #: ../../src/wui/seafaring_statistics_menu.cc:550
 msgctxt "hotkey"
 msgid "Alt+4"
-msgstr ""
+msgstr "Alt+4"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:584
@@ -4303,7 +4303,7 @@ msgstr "Näytä vain sotimisen viestit"
 #: ../../src/wui/seafaring_statistics_menu.cc:554
 msgctxt "hotkey"
 msgid "Alt+5"
-msgstr ""
+msgstr "Alt+5"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:587
@@ -4354,7 +4354,7 @@ msgstr "Arkistoi valittu viesti"
 #: ../../src/wui/game_message_menu.cc:684
 msgctxt "hotkey"
 msgid "Del"
-msgstr ""
+msgstr "Del"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_options_sound_menu.cc:29
@@ -4442,20 +4442,20 @@ msgstr "Pisteet"
 #, c-format
 msgid "%d file:"
 msgid_plural "%d files:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d tiedosto:"
+msgstr[1] "%d tiedostoa:"
 
 #. * TRANSLATORS: %1% = number of selected directories, %2% = number of
 #. selected files
 #: ../../src/wui/gamedetails.cc:112
 msgid "Selected %1% directory and %2%"
 msgid_plural "Selected %1% directories and %2%"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Valittu %1% hakemisto ja %2%"
+msgstr[1] "Valittu %1% hakemistoa ja %2%"
 
 #: ../../src/wui/gamedetails.cc:132
 msgid "Directory Name:"
-msgstr ""
+msgstr "Hakemiston Nimi:"
 
 #: ../../src/wui/gamedetails.cc:140
 msgid "Error:"
@@ -4583,12 +4583,12 @@ msgstr "Näytä pienkartta"
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:289
 msgid "Zoom +"
-msgstr ""
+msgstr "Zoom +"
 
 #: ../../src/wui/interactive_base.cc:291
 msgctxt "hotkey"
 msgid "Ctrl++"
-msgstr ""
+msgstr "Ctrl++"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:294
@@ -4598,17 +4598,17 @@ msgstr "Resetoi suurennus"
 #: ../../src/wui/interactive_base.cc:296
 msgctxt "hotkey"
 msgid "Ctrl+0"
-msgstr ""
+msgstr "Ctrl+0"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:299
 msgid "Zoom -"
-msgstr ""
+msgstr "Zoom -"
 
 #: ../../src/wui/interactive_base.cc:301
 msgctxt "hotkey"
 msgid "Ctrl+-"
-msgstr ""
+msgstr "Ctrl+-"
 
 #: ../../src/wui/interactive_gamebase.cc:57
 msgid "PAUSE"
@@ -4624,7 +4624,7 @@ msgstr "Pelinopeus"
 #: ../../src/wui/interactive_gamebase.cc:153
 msgctxt "hotkey"
 msgid "F6"
-msgstr ""
+msgstr "F6"
 
 #. * TRANSLATORS: Tooltip for Sound Options in the game's main menu
 #: ../../src/wui/interactive_gamebase.cc:163
@@ -4645,11 +4645,11 @@ msgstr ""
 #. * building statistics are shown
 #: ../../src/wui/interactive_gamebase.cc:229
 msgid "Hide Statistics"
-msgstr ""
+msgstr "Piilota Tilastot"
 
 #: ../../src/wui/interactive_gamebase.cc:230
 msgid "Show Statistics"
-msgstr ""
+msgstr "Näytä Tilastot"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. * level information is shown above soldiers' heads
@@ -4668,12 +4668,12 @@ msgstr ""
 #. * TRANSLATORS: Tooltip for Speed + in the game's game speed menu
 #: ../../src/wui/interactive_gamebase.cc:279
 msgid "Increase the game speed"
-msgstr ""
+msgstr "Nopeuta pelin kulkua"
 
 #: ../../src/wui/interactive_gamebase.cc:279
 msgctxt "hotkey"
 msgid "Page Up"
-msgstr ""
+msgstr "Page Up"
 
 #: ../../src/wui/interactive_gamebase.cc:281
 msgid "Speed -"
@@ -4682,36 +4682,36 @@ msgstr ""
 #. * TRANSLATORS: Tooltip for Speed - in the game's game speed menu
 #: ../../src/wui/interactive_gamebase.cc:284
 msgid "Decrease the game speed"
-msgstr ""
+msgstr "Hidasta pelin kulkua"
 
 #: ../../src/wui/interactive_gamebase.cc:284
 msgctxt "hotkey"
 msgid "Page Down"
-msgstr ""
+msgstr "Page Down"
 
 #: ../../src/wui/interactive_gamebase.cc:288
 msgid "Resume"
-msgstr ""
+msgstr "Jatka"
 
 #: ../../src/wui/interactive_gamebase.cc:291
 #: ../../src/wui/interactive_gamebase.cc:296
 msgctxt "hotkey"
 msgid "Pause"
-msgstr ""
+msgstr "Pysäytä"
 
 #. * TRANSLATORS: Tooltip for Pause in the game's game speed menu
 #: ../../src/wui/interactive_gamebase.cc:291
 msgid "Resume the Game"
-msgstr ""
+msgstr "Jatka Peliä"
 
 #: ../../src/wui/interactive_gamebase.cc:293
 msgid "Pause"
-msgstr ""
+msgstr "Pysäytä"
 
 #. * TRANSLATORS: Tooltip for Pause in the game's game speed menu
 #: ../../src/wui/interactive_gamebase.cc:296
 msgid "Pause the Game"
-msgstr ""
+msgstr "Pysäytä Peli"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
 #: ../../src/wui/interactive_gamebase.cc:452
@@ -4740,7 +4740,7 @@ msgstr "Varasto"
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:269
 msgid "General"
-msgstr ""
+msgstr "Yleistä"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
@@ -4827,12 +4827,12 @@ msgstr "Virallinen"
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:32
 msgid "Unofficial"
-msgstr ""
+msgstr "Epävirallinen"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:34
 msgid "Balanced"
-msgstr ""
+msgstr "Tasapuolinen"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:36
@@ -4842,7 +4842,7 @@ msgstr "Epätasapainossa"
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:40
 msgid "Ferries"
-msgstr ""
+msgstr "Lautat"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:42
@@ -4890,7 +4890,7 @@ msgstr "tyhjä"
 
 #: ../../src/wui/mapdetails.cc:88
 msgid "Directory"
-msgstr ""
+msgstr "Hakemisto"
 
 #. * TRANSLATORS: Tooltip in map description when translated map names are
 #. being
@@ -4913,7 +4913,7 @@ msgstr "Tämän kartan nimi äidinkielelläsi: %s"
 #. * TRANSLATORS: Map hint header when selecting a map.
 #: ../../src/wui/mapdetails.cc:151
 msgid "Hint"
-msgstr ""
+msgstr "Vihje"
 
 #. * TRANSLATORS: Column title for number of players in map list
 #: ../../src/wui/maptable.cc:30
@@ -5064,28 +5064,28 @@ msgstr "peli"
 
 #: ../../src/wui/portdockwaresdisplay.cc:94
 msgid "Additional item"
-msgstr ""
+msgstr "Vaihtoehtoinen tavara"
 
 #: ../../src/wui/portdockwaresdisplay.cc:96
 msgid "(Empty)"
-msgstr ""
+msgstr "(Tyhjä)"
 
 #. * TRANSLATORS: Tooltip for a ware that is present in the building
 #: ../../src/wui/portdockwaresdisplay.cc:141
 msgid "Present"
-msgstr ""
+msgstr "Olemassa"
 
 #. * TRANSLATORS: Tooltip for a ware that is neither present in the
 #. building nor being transported there
 #: ../../src/wui/portdockwaresdisplay.cc:145
 msgid "Missing"
-msgstr ""
+msgstr "Puuttuu"
 
 #. * TRANSLATORS: Tooltip for a ware that is not present in the
 #. building, but already being transported there
 #: ../../src/wui/portdockwaresdisplay.cc:148
 msgid "Coming"
-msgstr ""
+msgstr "Tulossa"
 
 #: ../../src/wui/productionsitewindow.cc:106
 msgid "Exp"
@@ -5301,7 +5301,7 @@ msgstr "Tallentunut peli arkistoitui tiedostonimellä, jonka perässä on kartan
 #. load.
 #: ../../src/wui/savegametable.cc:157 ../../src/wui/savegametable.cc:222
 msgid "Game Mode"
-msgstr ""
+msgstr "Pelimoodi"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
@@ -5370,7 +5370,7 @@ msgstr "Mene valittuun laivaan ja avaa sen ruutu"
 #: ../../src/wui/seafaring_statistics_menu.cc:117
 msgctxt "hotkey"
 msgid "CTRL+o"
-msgstr ""
+msgstr "CTRL+o"
 
 #. * TRANSLATORS: Tooltip in the seafaring statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:129
@@ -5492,38 +5492,38 @@ msgstr "Lähetä sotilas pois napsauttamalla sotilasta"
 #. * TRANSLATORS: Tooltip for volume slider in sound options
 #: ../../src/wui/sound_options.cc:63
 msgid "Changes the volume. Click to hear a sample."
-msgstr ""
+msgstr "Muuta äänenvoimakkuutta. Klikkaa kuullaksesi näytteen."
 
 #: ../../src/wui/sound_options.cc:125
 msgctxt "sound_options"
 msgid "Music"
-msgstr ""
+msgstr "Musiikki"
 
 #: ../../src/wui/sound_options.cc:127
 msgctxt "sound_options"
 msgid "Chat Messages"
-msgstr ""
+msgstr "Chattiviestit"
 
 #: ../../src/wui/sound_options.cc:130
 msgctxt "sound_options"
 msgid "Game Messages"
-msgstr ""
+msgstr "Peliviestit"
 
 #: ../../src/wui/sound_options.cc:134
 msgctxt "sound_options"
 msgid "User Interface"
-msgstr ""
+msgstr "Käyttöliittymä"
 
 #: ../../src/wui/sound_options.cc:136
 msgctxt "sound_options"
 msgid "Ambient Sounds"
-msgstr ""
+msgstr "Taustaäänet"
 
 #: ../../src/wui/sound_options.cc:150
 msgid ""
 "Sound is disabled either due to a problem with the sound driver, or because "
 "it was switched off at the command line."
-msgstr ""
+msgstr "Äänet poistettu käytöstä joko ääniajurin ongelman vuoksi tai koska ne on käännetty pois päältä komentorivillä."
 
 #: ../../src/wui/stock_menu.cc:41
 msgid "Wares (total)"
@@ -5544,7 +5544,7 @@ msgstr "Työläiset varastoissa"
 #. * TRANSLATORS: Label for the list of suggested teams when choosing a map
 #: ../../src/wui/suggested_teams_box.cc:86
 msgid "Suggested Teams"
-msgstr ""
+msgstr "Ehdotetut Joukkueet"
 
 #: ../../src/wui/trainingsitewindow.cc:47
 msgid "Soldiers in training"
