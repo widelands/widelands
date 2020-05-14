@@ -216,7 +216,7 @@ SinglePlayerPossiblePlayerGroup::SinglePlayerPossiblePlayerGroup(
            id),
      // Name needs to be initialized after the dropdown, otherwise the layout function will
      // crash.
-     name_(this, 0, 0, 50, 50),
+     name_(this, 0, 0, 0, 0),
      settings_(settings) {
 	add(role_.get_dropdown());
 	add(&name_, UI::Box::Resizing::kAlign, UI::Align::kCenter);

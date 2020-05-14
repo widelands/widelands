@@ -73,7 +73,7 @@ private:
 	int32_t const right_column_x_;
 
 	UI::Button help_button_;
-	UI::Textarea clients_, players_;
+
 	std::unique_ptr<UI::FullscreenHelpWindow> help_;
 	GameChatPanel* chat_;
 	MultiPlayerSetupGroup* mpsg_;

@@ -113,24 +113,6 @@ FullscreenMenuLaunchMPG2::FullscreenMenuLaunchMPG2(GameSettingsProvider* const s
                   g_gr->images().get("images/ui_basic/menu_help.png"),
                   _("Show the help window")),
 
-     // Text labels
-     clients_(this,
-              // the width of the MultiPlayerSetupGroup is (get_w() * 53 / 80)
-              get_w() * 3 / 80,
-              get_h() / 10,
-              get_w() * 19 / 80,
-              get_h() / 10,
-              _("Clients"),
-              UI::Align::kCenter,
-              g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
-     players_(this,
-              get_w() / 4,
-              get_h() / 10,
-              get_w() * 9 / 20,
-              get_h() / 10,
-              _("Players"),
-              UI::Align::kCenter,
-              g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
      help_(nullptr),
 
      // Variables and objects used in the menu
@@ -141,9 +123,6 @@ FullscreenMenuLaunchMPG2::FullscreenMenuLaunchMPG2(GameSettingsProvider* const s
 	//	   boost::bind(&FullscreenMenuLaunchMPG::change_map_or_save, boost::ref(*this)));
 	help_button_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuLaunchMPG2::help_clicked, boost::ref(*this)));
-
-	clients_.set_font_scale(scale_factor());
-	players_.set_font_scale(scale_factor());
 
 	if (settings_->can_change_map()) {
 		//		map_info_.set_text(_("Please select a map or saved game."));
@@ -181,6 +160,7 @@ FullscreenMenuLaunchMPG2::~FullscreenMenuLaunchMPG2() {
 void FullscreenMenuLaunchMPG2::layout() {
 	standard_element_width_ = get_w() / 4;
 	standard_element_height_ = get_h() * 9 / 200;
+	mpsg_->force_new_dimensions(scale_factor(), standard_element_height_);
 	//   player_setup.force_new_dimensions(scale_factor(), standard_element_height_);
 
 	FullscreenMenuLaunchGame::layout();
