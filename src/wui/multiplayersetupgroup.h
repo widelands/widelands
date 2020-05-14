@@ -25,6 +25,7 @@
 #include "network/network_player_settings_backend.h"
 #include "ui_basic/box.h"
 #include "ui_basic/panel.h"
+#include "ui_basic/textarea.h"
 
 struct GameSettingsProvider;
 struct MultiPlayerClientGroup;
@@ -47,6 +48,8 @@ struct MultiPlayerSetupGroup : public UI::Box {
 	                      uint32_t buth);
 	~MultiPlayerSetupGroup() override;
 
+	void force_new_dimensions(float scale, uint32_t standard_element_height);
+
 private:
 	void update();
 	void draw(RenderTarget& dst) override;
@@ -58,7 +61,7 @@ private:
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 
 	UI::Box clientbox, playerbox;
-
+	UI::Textarea clients_, players_;
 	uint32_t buth_;
 
 	std::map<std::string, const Image*> tribepics_;
