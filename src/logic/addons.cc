@@ -42,11 +42,11 @@ const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories = {
 	{AddOnCategory::kMaps, AddOnCategoryInfo {"maps",
 			[]() { return _("Map Set"); }, "images/wui/menus/toggle_minimap.png", false}},
 	{AddOnCategory::kCampaign, AddOnCategoryInfo {"campaign",
-			[]() { return _("Campaign"); }, "images/wui/menus/chat.png", false}},
+			[]() { return _("Campaign"); }, "images/wui/messages/messages_warfare.png", false}},
 	{AddOnCategory::kWinCondition, AddOnCategoryInfo {"win_condition",
 			[]() { return _("Win Condition"); }, "images/wui/menus/objectives.png", false}},
 	{AddOnCategory::kStartingCondition, AddOnCategoryInfo {"starting_condition",
-			[]() { return _("Starting Condition"); }, "images/players/player_position_menu.png", false}}
+			[]() { return _("Starting Condition"); }, "tribes/buildings/warehouses/atlanteans/headquarters/menu.png", false}}
 };
 
 std::vector<std::pair<AddOnInfo, bool>> g_addons;
@@ -129,7 +129,7 @@ AddOnCategory get_category(const std::string& name) {
 			return pair.first;
 		}
 	}
-	throw wexception("Invalid add-on category %s", name.c_str());
+	throw wexception("Invalid add-on category '%s'", name.c_str());
 }
 
 AddOnInfo preload_addon(const std::string& name) {
@@ -137,6 +137,7 @@ AddOnInfo preload_addon(const std::string& name) {
 	Profile profile;
 	profile.read("addon", nullptr, *fs);
 	Section& s = profile.get_safe_section("global");
+
 	AddOnInfo i = {
 		name,
 		s.get_safe_string("name"),
@@ -146,6 +147,14 @@ AddOnInfo preload_addon(const std::string& name) {
 		get_category(s.get_safe_string("category")),
 		{}, false
 	};
+
+	if (i.category == AddOnCategory::kNone) {
+		throw wexception("preload_addon (%s): category is None", name.c_str());
+	}
+	if (i.version == 0) {
+		throw wexception("preload_addon (%s): version is 0", name.c_str());
+	}
+
 	for (std::string req(s.get_safe_string("requires")); !req.empty();) {
 		const size_t commapos = req.find(',');
 		if (commapos == std::string::npos) {
@@ -153,8 +162,9 @@ AddOnInfo preload_addon(const std::string& name) {
 			break;
 		} else {
 			i.requires.push_back(req.substr(0, commapos));
-			req = req.substr(commapos);
+			req = req.substr(commapos + 1);
 		}
 	}
+
 	return i;
 }

@@ -252,10 +252,16 @@ const std::vector<DescriptionIndex>& TribeDescr::buildings() const {
 const std::set<DescriptionIndex>& TribeDescr::wares() const {
 	return wares_;
 }
+std::set<DescriptionIndex>& TribeDescr::mutable_wares() {
+	return wares_;
+}
 const std::set<DescriptionIndex>& TribeDescr::workers() const {
 	return workers_;
 }
 const std::set<DescriptionIndex>& TribeDescr::immovables() const {
+	return immovables_;
+}
+std::set<DescriptionIndex>& TribeDescr::mutable_immovables() {
 	return immovables_;
 }
 const ResourceIndicatorSet& TribeDescr::resource_indicators() const {

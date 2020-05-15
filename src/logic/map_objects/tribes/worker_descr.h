@@ -113,6 +113,9 @@ public:
 	const Programs& programs() const {
 		return programs_;
 	}
+	Programs& mutable_programs() {
+		return programs_;
+	}
 
 	/// AI hints for this worker type. Can be nullptr.
 	const WorkerHints* ai_hints() const {

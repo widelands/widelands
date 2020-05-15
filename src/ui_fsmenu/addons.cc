@@ -197,7 +197,7 @@ void AddOnsCtrl::refresh_remotes() {
 				% e.what()).str(),
 			/** TRANSLATORS: This will be inserted into the string "Server Connection Error \n by %s" */
 			_("a networking bug"),
-			0, get_category(""), {}, false
+			0, AddOnCategory::kNone, {}, false
 		});
 	}
 	rebuild();

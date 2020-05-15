@@ -126,6 +126,7 @@ public:
 	const WorkerDescr* get_worker_descr(DescriptionIndex worker_index) const;
 	WorkerDescr* get_mutable_worker_descr(DescriptionIndex worker_index) const;
 	const TribeDescr* get_tribe_descr(DescriptionIndex tribe_index) const;
+	TribeDescr* get_mutable_tribe_descr(DescriptionIndex tribe_index) const;
 
 	/// Load tribes' graphics
 	void load_graphics();

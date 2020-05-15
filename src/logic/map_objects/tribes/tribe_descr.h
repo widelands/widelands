@@ -76,6 +76,9 @@ public:
 	const std::set<DescriptionIndex>& immovables() const;
 	const ResourceIndicatorSet& resource_indicators() const;
 
+	std::set<DescriptionIndex>& mutable_wares();
+	std::set<DescriptionIndex>& mutable_immovables();
+
 	bool has_building(const DescriptionIndex& index) const;
 	bool has_ware(const DescriptionIndex& index) const;
 	bool has_worker(const DescriptionIndex& index) const;
@@ -144,6 +147,9 @@ public:
 
 	using WaresOrder = std::vector<std::vector<Widelands::DescriptionIndex>>;
 	const WaresOrder& wares_order() const {
+		return wares_order_;
+	}
+	WaresOrder& mutable_wares_order() {
 		return wares_order_;
 	}
 

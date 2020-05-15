@@ -26,8 +26,10 @@
 #include "logic/game_controller.h"
 #include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/immovable.h"
+#include "logic/map_objects/tribes/production_program.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/tribes.h"
+#include "logic/map_objects/tribes/worker_program.h"
 #include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
@@ -1067,7 +1069,7 @@ int LuaTribes::add_custom_worker(lua_State* L) {
 }
 
 /* RST
-   .. method:: modify_unit(type, name, property, value)
+   .. method:: modify_unit(type, name, property ... , value)
 
       TODO(Nordfriese): Document
 
@@ -1075,16 +1077,114 @@ int LuaTribes::add_custom_worker(lua_State* L) {
 */
 int LuaTribes::modify_unit(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
+	Tribes& tribes = *egbase.mutable_tribes();
 	const std::string type = luaL_checkstring(L, 2);
 	const std::string unit = luaL_checkstring(L, 3);
 	const std::string property = luaL_checkstring(L, 4);
 
-	if (type == "worker") {
-		WorkerDescr& descr = *egbase.mutable_tribes()->get_mutable_worker_descr(egbase.mutable_tribes()->safe_worker_index(unit));
+	if (type == "tribe") {
+		TribeDescr& descr = *tribes.get_mutable_tribe_descr(tribes.safe_tribe_index(unit));
+		if (property == "add_ware") {
+			const std::string warename = luaL_checkstring(L, 5);
+			const size_t column = luaL_checkuint32(L, 6);
+			const DescriptionIndex di = tribes.safe_ware_index(warename);
+			descr.mutable_wares().insert(di);
+			descr.mutable_wares_order()[column].push_back(di);
+		} else if (property == "add_immovable") {
+			const std::string immo_name = luaL_checkstring(L, 5);
+			const DescriptionIndex di = tribes.safe_immovable_index(immo_name);
+			descr.mutable_immovables().insert(di);
+		} else {
+			report_error(L, "modify_unit not supported yet for tribe property '%s'", property.c_str());
+		}
+	} else if (type == "worker") {
+		WorkerDescr& descr = *tribes.get_mutable_worker_descr(tribes.safe_worker_index(unit));
 		if (property == "experience") {
 			descr.set_needed_experience(luaL_checkuint32(L, 5));
+		} else if (property == "programs") {
+			const std::string cmd = luaL_checkstring(L, 5);
+			const std::string prog_name = luaL_checkstring(L, 6);
+			if (cmd == "set") {
+				LuaTable t(L);
+				descr.mutable_programs()[prog_name] = std::unique_ptr<WorkerProgram>(new WorkerProgram(
+						prog_name, t, descr, tribes));
+			} else {
+				report_error(L, "modify_unit - worker - programs: invalid command '%s'", cmd.c_str());
+			}
 		} else {
 			report_error(L, "modify_unit not supported yet for worker property '%s'", property.c_str());
+		}
+	} else if (type == "productionsite") {
+		ProductionSiteDescr& descr = dynamic_cast<ProductionSiteDescr&>(
+				*tribes.get_mutable_building_descr(tribes.safe_building_index(unit)));
+		if (property == "input") {
+			const std::string cmd = luaL_checkstring(L, 5);
+			const std::string input_name = luaL_checkstring(L, 6);
+			if (cmd == "add_ware") {
+				const DescriptionIndex di = tribes.safe_ware_index(input_name);
+				const Quantity amount = luaL_checkuint32(L, 7);
+				assert(amount);
+				descr.mutable_input_wares().push_back(WareAmount(di, amount));
+			} else if (cmd == "modify_ware") {
+				const DescriptionIndex di = tribes.safe_ware_index(input_name);
+				const Quantity amount = luaL_checkuint32(L, 7);
+				assert(amount);
+				for (WareAmount& w : descr.mutable_input_wares()) {
+					if (w.first == di) {
+						w.second = amount;
+						return 0;
+					}
+				}
+				report_error(L, "modify_unit - productionsite - input - modify_ware: %s not found", input_name.c_str());
+			} else if (cmd == "remove_ware") {
+				const DescriptionIndex di = tribes.safe_ware_index(input_name);
+				for (auto it = descr.mutable_input_wares().begin(); it != descr.mutable_input_wares().end();) {
+					if (it->first == di) {
+						descr.mutable_input_wares().erase(it);
+						return 0;
+					}
+				}
+				report_error(L, "modify_unit - productionsite - input - remove_ware: %s not found", input_name.c_str());
+			} else if (cmd == "add_worker") {
+				const DescriptionIndex di = tribes.safe_worker_index(input_name);
+				const Quantity amount = luaL_checkuint32(L, 7);
+				assert(amount);
+				descr.mutable_input_workers().push_back(WareAmount(di, amount));
+			} else if (cmd == "modify_worker") {
+				const DescriptionIndex di = tribes.safe_worker_index(input_name);
+				const Quantity amount = luaL_checkuint32(L, 7);
+				assert(amount);
+				for (WareAmount& w : descr.mutable_input_workers()) {
+					if (w.first == di) {
+						w.second = amount;
+						return 0;
+					}
+				}
+				report_error(L, "modify_unit - productionsite - input - modify_worker: %s not found", input_name.c_str());
+			} else if (cmd == "remove_worker") {
+				const DescriptionIndex di = tribes.safe_worker_index(input_name);
+				for (auto it = descr.mutable_input_workers().begin(); it != descr.mutable_input_workers().end();) {
+					if (it->first == di) {
+						descr.mutable_input_workers().erase(it);
+						return 0;
+					}
+				}
+				report_error(L, "modify_unit - productionsite - input - remove_worker: %s not found", input_name.c_str());
+			} else {
+				report_error(L, "modify_unit - productionsite - input: invalid command '%s'", cmd.c_str());
+			}
+		} else if (property == "programs") {
+			const std::string cmd = luaL_checkstring(L, 5);
+			const std::string prog_name = luaL_checkstring(L, 6);
+			if (cmd == "set") {
+				const std::string descname = luaL_checkstring(L, 7);
+				descr.mutable_programs()[prog_name] = std::unique_ptr<ProductionProgram>(new ProductionProgram(
+						prog_name, descname, std::unique_ptr<LuaTable>(new LuaTable(L)), tribes, egbase.world(), &descr));
+			} else {
+				report_error(L, "modify_unit - productionsite - programs: invalid command '%s'", cmd.c_str());
+			}
+		} else {
+			report_error(L, "modify_unit not supported yet for productionsite property '%s'", property.c_str());
 		}
 	} else {
 		report_error(L, "modify_unit not supported yet for type '%s'", type.c_str());

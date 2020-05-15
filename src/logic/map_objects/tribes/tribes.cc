@@ -327,6 +327,10 @@ const TribeDescr* Tribes::get_tribe_descr(DescriptionIndex tribeindex) const {
 	return tribes_->get_mutable(tribeindex);
 }
 
+TribeDescr* Tribes::get_mutable_tribe_descr(DescriptionIndex tribeindex) const {
+	return tribes_->get_mutable(tribeindex);
+}
+
 void Tribes::load_graphics() {
 	for (size_t tribeindex = 0; tribeindex < nrtribes(); ++tribeindex) {
 		TribeDescr* tribe = tribes_->get_mutable(tribeindex);
