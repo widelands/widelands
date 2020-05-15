@@ -117,8 +117,7 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 			   new UI::Button(worker_caps_, "evict", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 			                  g_gr->images().get("images/wui/buildings/menu_drop_soldier.png"),
 			                  _("Terminate the employment of the selected worker"));
-			evict_button->sigclicked.connect(
-			   boost::bind(&ProductionSiteWindow::evict_worker, boost::ref(*this)));
+			evict_button->sigclicked.connect([this]() { evict_worker(); });
 			worker_caps_->add(evict_button);
 		}
 

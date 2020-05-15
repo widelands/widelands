@@ -21,8 +21,6 @@
 
 #include <map>
 
-#include <boost/bind.hpp>
-
 #include "base/log.h"
 #include "chat/chat.h"
 
@@ -36,9 +34,9 @@ struct Console : public ChatProvider, public Handler {
 	Handler::HandlerFn default_handler;
 
 	Console() {
-		addCommand("help", boost::bind(&Console::cmdHelp, this, _1));
-		addCommand("ls", boost::bind(&Console::cmdLs, this, _1));
-		default_handler = boost::bind(&Console::cmdErr, this, _1);
+		addCommand("help", [this](const std::vector<std::string>& str) { cmdHelp(str); });
+		addCommand("ls", [this](const std::vector<std::string>& str) { cmdLs(str); });
+		default_handler = [this](const std::vector<std::string>& str) { cmdErr(str); };
 	}
 
 	~Console() override {

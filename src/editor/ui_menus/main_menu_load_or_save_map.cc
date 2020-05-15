@@ -94,10 +94,9 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	show_mapnames_box_.add(cb_dont_localize_mapnames_, UI::Box::Resizing::kFullSize);
 	show_mapnames_box_.add_inf_space();
 
-	table_.set_column_compare(0, boost::bind(&MainMenuLoadOrSaveMap::compare_players, this, _1, _2));
-	table_.set_column_compare(
-	   1, boost::bind(&MainMenuLoadOrSaveMap::compare_mapnames, this, _1, _2));
-	table_.set_column_compare(2, boost::bind(&MainMenuLoadOrSaveMap::compare_size, this, _1, _2));
+	table_.set_column_compare(0, [this](uint32_t a, uint32_t b) { return compare_players(a, b); });
+	table_.set_column_compare(1, [this](uint32_t a, uint32_t b) { return compare_mapnames(a, b); });
+	table_.set_column_compare(2, [this](uint32_t a, uint32_t b) { return compare_size(a, b); });
 
 	table_and_details_box_.add(&table_, UI::Box::Resizing::kExpandBoth);
 	table_and_details_box_.add_space(0);
@@ -116,10 +115,8 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	// We don't need the unlocalizing option if there is nothing to unlocalize.
 	// We know this after the list is filled.
 	cb_dont_localize_mapnames_->set_visible(has_translated_mapname_);
-	cb_dont_localize_mapnames_->changedto.connect(
-	   boost::bind(&MainMenuLoadOrSaveMap::fill_table, boost::ref(*this)));
-	show_mapnames_.sigclicked.connect(
-	   boost::bind(&MainMenuLoadOrSaveMap::toggle_mapnames, boost::ref(*this)));
+	cb_dont_localize_mapnames_->changedto.connect([this](bool) { fill_table(); });
+	show_mapnames_.sigclicked.connect([this]() { toggle_mapnames(); });
 
 	move_to_top();
 	layout();

@@ -49,8 +49,8 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
      chat_message_counter(0),
      chat_sound(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {
 
-	editbox.ok.connect(boost::bind(&GameChatPanel::key_enter, this));
-	editbox.cancel.connect(boost::bind(&GameChatPanel::key_escape, this));
+	editbox.ok.connect([this]() { key_enter(); });
+	editbox.cancel.connect([this]() { key_escape(); });
 	editbox.activate_history(true);
 
 	set_handle_mouse(true);

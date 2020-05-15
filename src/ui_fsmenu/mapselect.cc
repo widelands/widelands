@@ -74,16 +74,13 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 		back_.set_tooltip(_("Return to the single player menu"));
 	}
 
-	back_.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_back, boost::ref(*this)));
-	ok_.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_ok, boost::ref(*this)));
-	table_.selected.connect(boost::bind(&FullscreenMenuMapSelect::entry_selected, this));
-	table_.double_clicked.connect(
-	   boost::bind(&FullscreenMenuMapSelect::clicked_ok, boost::ref(*this)));
-	table_.set_column_compare(
-	   0, boost::bind(&FullscreenMenuMapSelect::compare_players, this, _1, _2));
-	table_.set_column_compare(
-	   1, boost::bind(&FullscreenMenuMapSelect::compare_mapnames, this, _1, _2));
-	table_.set_column_compare(2, boost::bind(&FullscreenMenuMapSelect::compare_size, this, _1, _2));
+	back_.sigclicked.connect([this]() { clicked_back(); });
+	ok_.sigclicked.connect([this]() { clicked_ok(); });
+	table_.selected.connect([this](uint32_t) { entry_selected(); });
+	table_.double_clicked.connect([this](uint32_t) { clicked_ok(); });
+	table_.set_column_compare(0, [this](uint32_t a, uint32_t b) { return compare_players(a, b); });
+	table_.set_column_compare(1, [this](uint32_t a, uint32_t b) { return compare_mapnames(a, b); });
+	table_.set_column_compare(2, [this](uint32_t a, uint32_t b) { return compare_size(a, b); });
 
 	UI::Box* hbox = new UI::Box(&checkboxes_, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
 
@@ -157,12 +154,10 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 	// We know this after the list is filled.
 	cb_dont_localize_mapnames_->set_visible(has_translated_mapname_);
 
-	cb_dont_localize_mapnames_->changedto.connect(
-	   boost::bind(&FullscreenMenuMapSelect::fill_table, boost::ref(*this)));
+	cb_dont_localize_mapnames_->changedto.connect([this](unsigned) { fill_table(); });
 
 	for (size_t i = 0; i < tags_checkboxes_.size(); ++i) {
-		tags_checkboxes_.at(i)->changedto.connect(
-		   boost::bind(&FullscreenMenuMapSelect::tagbox_changed, this, i, _1));
+		tags_checkboxes_.at(i)->changedto.connect([this, i](bool b) { tagbox_changed(i, b); });
 	}
 
 	balancing_tags_dropdown_->selected.connect([this] { fill_table(); });
@@ -389,7 +384,7 @@ void FullscreenMenuMapSelect::fill_table() {
 		table_.select(0);
 	}
 	set_has_selection();
-	table_.cancel.connect(boost::bind(&FullscreenMenuMapSelect::clicked_back, boost::ref(*this)));
+	table_.cancel.connect([this]() { clicked_back(); });
 
 	if (unspecified_balancing_found != unspecified_balancing_found_) {
 		unspecified_balancing_found_ = unspecified_balancing_found;
