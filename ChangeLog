@@ -196,6 +196,7 @@
 - about 90 rounds of training
 - Fixed bugs in the AI's attack decision algorithm and exposed some weighting factors to the genetic algorithm (#3873)
 - result of about 120 rounds of training (#3906)
+- preventing zero division in Check_building_necesity (#3910)
 
 
 ### Gameplay
@@ -288,6 +289,7 @@
 - Allow setting economy targets to ∞ (#3837)
 - Removed `return=no_stats` from productionsite programs (#3865)
 - Barbarian Poor Hamlet fix (#3888): Changed tool order in barbarian metal workshop
+- Fixes issue #3869: No training in camp for Empire (#3871)
 
 
 ### User Interface
@@ -648,6 +650,7 @@
 - Add Git hash to AppVeyor and bzr version numbers (#3894)
 - updated innosetup file to reflect new Icu filenames (#3903)
 - gcc-10 compatibility (#3908)
+- Replaced all uses of boost::bind with lambda functions and added a codecheck rule to deprecate boost::bind() and boost::ref()
 
 
 ### Other Issues
