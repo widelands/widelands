@@ -25,7 +25,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-04-23 19:45+0000\n"
+"PO-Revision-Date: 2020-05-14 14:50+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -107,7 +107,7 @@ msgstr "Keine Felsen in der Nähe"
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr "Es gibt keine Felsen in der Nähe deiner Startposition. Daher erhältst du zusätzliche Rohstoffe zum Aufbau deiner Wirtschaft."
+msgstr "Es gibt keine Felsen in der Nähe deiner Ausgangsposition. Daher erhältst du zusätzliche Rohstoffe zum Aufbau deiner Wirtschaft."
 
 #: ../../data/scripting/infrastructure.lua:251
 msgid "No trees nearby"
@@ -117,7 +117,7 @@ msgstr "Keine Bäume in der Nähe"
 msgid ""
 "There are no trees near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr "Es gibt keine Bäume in der Nähe deiner Startposition. Daher erhältst du zusätzliche Rohstoffe zum Aufbau deiner Wirtschaft."
+msgstr "Es gibt keine Bäume in der Nähe deiner Ausgangsposition. Daher erhältst du zusätzliche Rohstoffe zum Aufbau deiner Wirtschaft."
 
 #: ../../data/scripting/messages.lua:51 ../../data/scripting/messages.lua:53
 #: ../../src/wui/game_message_menu.cc:68 ../../src/wui/game_summary.cc:104
@@ -467,7 +467,7 @@ msgstr "Spieler"
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
 #: ../../src/editor/editorinteractive.cc:312
 msgid "Set number of players and their names, tribes and starting positions"
-msgstr "Setze die Spielerzahl sowie ihre Namen, Stämme und Startpunkte"
+msgstr "Setze die Spielerzahl sowie ihre Namen, Stämme und Ausgangspositionen"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:315
@@ -1092,7 +1092,7 @@ msgstr "Karte gespeichert"
 
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:43
 msgid "Enter Directory Name:"
-msgstr "Ordnernamen eingeben:"
+msgstr "Verzeichnisnamen eingeben:"
 
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:100
 msgid "This extension is reserved!"
@@ -1504,14 +1504,14 @@ msgstr "Erzeuge Spielerinfrastruktur…"
 
 #: ../../src/logic/game.cc:479 ../../src/logic/player.cc:225
 msgid "Missing starting position"
-msgstr "Fehlender Startpunkt"
+msgstr "Fehlende Ausgangsposition"
 
 #: ../../src/logic/game.cc:480 ../../src/logic/player.cc:226
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
-msgstr "Widelands konnte das Spiel nicht starten, da Spieler %u keinen Startpunkt besitzt.\nDu kannst manuell mit dem Widelands-Editor einen Startpunkt setzen, um das Problem zu lösen."
+msgstr "Widelands konnte das Spiel nicht starten, da Spieler %u keine Ausgangsposition besitzt.\nDu kannst manuell mit dem Widelands-Editor eine Ausgangsposition setzen, um das Problem zu lösen."
 
 #: ../../src/logic/game.cc:895
 msgid "Trade Offer"
@@ -1806,12 +1806,12 @@ msgstr[1] "%s ausgebildet"
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:1081
 msgid "No soldier to train!"
-msgstr "Kein Soldat zum Trainieren vorhanden!"
+msgstr "Kein Soldat zur Ausbildung vorhanden!"
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:1090
 #: ../../src/logic/map_objects/tribes/production_program.cc:1148
 msgid "No soldier found for this training level!"
-msgstr "Kein Soldat für diese Trainingsstufe gefunden!"
+msgstr "Kein Soldat für diese Ausbildungsstufe gefunden!"
 
 #. * TRANSLATORS: Success message of a trainingsite '%s' stands for the
 #. description of the
@@ -4461,11 +4461,11 @@ msgstr[1] "%d Dateien"
 msgid "Selected %1% directory and %2%"
 msgid_plural "Selected %1% directories and %2%"
 msgstr[0] "%1% Ordner und %2% ausgewählt:"
-msgstr[1] "%1% Ordner und %2% ausgewählt:"
+msgstr[1] "%1% Verzeichnis und %2% ausgewählt:"
 
 #: ../../src/wui/gamedetails.cc:132
 msgid "Directory Name:"
-msgstr "Ordnername:"
+msgstr "Verzeichnisname:"
 
 #: ../../src/wui/gamedetails.cc:140
 msgid "Error:"
@@ -4900,7 +4900,7 @@ msgstr "leer"
 
 #: ../../src/wui/mapdetails.cc:88
 msgid "Directory"
-msgstr "Ordner"
+msgstr "Verzeichnis"
 
 #. * TRANSLATORS: Tooltip in map description when translated map names are
 #. being
@@ -5558,7 +5558,7 @@ msgstr "Vorgeschlagene Teams"
 
 #: ../../src/wui/trainingsitewindow.cc:47
 msgid "Soldiers in training"
-msgstr "Trainierende Soldaten"
+msgstr "Soldaten in Ausbildung"
 
 #: ../../src/wui/ware_statistics_menu.cc:105
 msgid "Ware Statistics"
