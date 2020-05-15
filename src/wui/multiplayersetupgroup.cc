@@ -51,7 +51,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 	                       int32_t const h,
 	                       PlayerSlot id,
 	                       GameSettingsProvider* const settings)
-	   : UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h, kPadding),
+	   : UI::Box(parent, 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
 	     slot_dropdown_(this,
 	                    (boost::format("dropdown_slot%d") % static_cast<unsigned int>(id)).str(),
 	                    0,
@@ -183,7 +183,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	                       PlayerSlot id,
 	                       GameSettingsProvider* const settings,
 	                       NetworkPlayerSettingsBackend* const npsb)
-	   : UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h, kPadding / 2),
+	   : UI::Box(parent, 0, 0, UI::Box::Horizontal, 0, 0, kPadding / 2),
 	     settings_(settings),
 	     n(npsb),
 	     id_(id),
@@ -201,7 +201,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	                    (boost::format("dropdown_type%d") % static_cast<unsigned int>(id)).str(),
 	                    0,
 	                    0,
-	                    50,
+	                    h,
 	                    16,
 	                    h,
 	                    _("Type"),
@@ -212,7 +212,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	                      (boost::format("dropdown_tribes%d") % static_cast<unsigned int>(id)).str(),
 	                      0,
 	                      0,
-	                      50,
+	                      h,
 	                      16,
 	                      h,
 	                      _("Tribe"),
@@ -223,7 +223,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	                    (boost::format("dropdown_init%d") % static_cast<unsigned int>(id)).str(),
 	                    0,
 	                    0,
-	                    w - 4 * h - 3 * kPadding,
+	                    h,
 	                    16,
 	                    h,
 	                    "",
@@ -303,7 +303,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	}
 
 	void force_new_dimensions(float scale, uint32_t standard_element_height) {
-		//		player_.set_desired_size(standard_element_height, standard_element_height);
+		player.set_desired_size(standard_element_height, standard_element_height);
 		type_dropdown_.set_desired_size(standard_element_height, standard_element_height);
 		tribes_dropdown_.set_desired_size(standard_element_height, standard_element_height);
 		init_dropdown_.set_desired_size(8 * standard_element_height, standard_element_height);

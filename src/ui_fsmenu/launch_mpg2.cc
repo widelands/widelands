@@ -161,7 +161,6 @@ void FullscreenMenuLaunchMPG2::layout() {
 	standard_element_width_ = get_w() / 4;
 	standard_element_height_ = get_h() * 9 / 200;
 	mpsg_->force_new_dimensions(scale_factor(), standard_element_height_);
-	//   player_setup.force_new_dimensions(scale_factor(), standard_element_height_);
 
 	FullscreenMenuLaunchGame::layout();
 }
@@ -172,10 +171,12 @@ void FullscreenMenuLaunchMPG2::layout() {
  */
 void FullscreenMenuLaunchMPG2::set_chat_provider(ChatProvider& chat) {
 	delete chat_;
-	chat_ = new GameChatPanel(
-	   this, get_w() * 3 / 80, mpsg_->get_y() + mpsg_->get_h() + padding_, get_w() * 53 / 80,
-	   ok_.get_y() + ok_.get_h() - mpsg_->get_y() - mpsg_->get_h() - padding_ - 1, chat,
-	   UI::PanelStyle::kFsMenu);
+	//	chat_ = new GameChatPanel(
+	//	   this, get_w() * 3 / 80, mpsg_->get_y() + mpsg_->get_h() + padding_, get_w() * 53 / 80,
+	//	   ok_.get_y() + ok_.get_h() - mpsg_->get_y() - mpsg_->get_h() - padding_ - 1, chat,
+	//	   UI::PanelStyle::kFsMenu);
+	chat_ = new GameChatPanel(&individual_content_box, 0, 0, 0, 0, chat, UI::PanelStyle::kFsMenu);
+	individual_content_box.add(chat_, UI::Box::Resizing::kExpandBoth);
 }
 
 /**
@@ -241,6 +242,8 @@ void FullscreenMenuLaunchMPG2::select_map() {
 		filename_proof_ = filename_proof_ + "new";
 
 	settings_->set_map(mapdata.name, mapdata.filename, nr_players_);
+	// force layout so all boxes and textareas are forced to update
+	layout();
 }
 
 /**
