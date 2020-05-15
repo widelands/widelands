@@ -9,13 +9,14 @@
 # Jakub Magnowski <qoiutek@gmail.com>, 2018
 # tombox <wptom@wp.pl>, 2016,2018-2019
 # tombox <wptom@wp.pl>, 2015
+# tombox <wptom@wp.pl>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-04-22 20:02+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-05-07 19:37+0000\n"
+"PO-Revision-Date: 2020-05-15 15:38+0000\n"
+"Last-Translator: tombox <wptom@wp.pl>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -56,32 +57,32 @@ msgstr "Ten samouczek wyjaśnia działanie budynków wojskowych i treningowych, 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:14
 msgid "Easy."
-msgstr ""
+msgstr "Łatwy."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:20
 msgid "Medium."
-msgstr ""
+msgstr "Średni."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:25
 msgid "Hard."
-msgstr ""
+msgstr "Trudny."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:30
 msgid "Challenging."
-msgstr ""
+msgstr "Ambitny."
 
 #. TRANSLATORS: The name of a Barbarian campaign
 #: ../../data/campaigns/campaigns.lua:43
 msgid "The Second Empire"
-msgstr ""
+msgstr "Drugie Imperium"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:49
 msgid "Introduces the Barbarians."
-msgstr ""
+msgstr "Prezentuje Barbarzyńców."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:52
@@ -104,12 +105,12 @@ msgstr ""
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../data/campaigns/campaigns.lua:70
 msgid "The Months of Exile"
-msgstr ""
+msgstr "Miesiące Wygnania"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:73
 msgid "Introduces the Empire."
-msgstr ""
+msgstr "Prezentuje Imperium."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:75
@@ -129,12 +130,12 @@ msgstr ""
 #. TRANSLATORS: The name of an Atlantean campaign
 #: ../../data/campaigns/campaigns.lua:93
 msgid "The Run for the Fire"
-msgstr ""
+msgstr "Bieg po ogień"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:96
 msgid "Introduces the Atlanteans."
-msgstr ""
+msgstr "Prezentuje Atlantydów."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:98
@@ -154,7 +155,7 @@ msgstr ""
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:110
 msgid "Introduces the Frisians."
-msgstr ""
+msgstr "Prezentuje Fryzyjczyków."
 
 #. TRANSLATORS: A campaign difficulty (easiest of three options)
 #: ../../data/campaigns/campaigns.lua:115
@@ -169,7 +170,7 @@ msgstr ""
 #. TRANSLATORS: A campaign difficulty (hardest of three options)
 #: ../../data/campaigns/campaigns.lua:119
 msgid "Captain (Unreasonable)"
-msgstr ""
+msgstr "Kapitan (Niemożliwy)"
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:124
@@ -247,7 +248,7 @@ msgid ""
 "Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
 " a sign from the Gods that the Frisian community on the island of Langeness "
 "is not wanted here?"
-msgstr "W 1362r. ciche, spokojne życie mieszkańców Wysp Północnofryzyjskich zostało przerwane przez jedną z największych powodzi w historii: Powódź Świętego Marcellusa. Czy to naprawdę nic innego jak kolejna burza, czy znak od bogów, że wspólnota fryzyjską na wyspie Langeness nie jest mile widziana?"
+msgstr "W 1362r. ciche, spokojne życie mieszkańców Wysp Północnofryzyjskich zostało przerwane przez jedną z największych powodzi w historii: Powódź Świętego Marcellusa. Czy to naprawdę nic innego jak kolejna burza, czy znak od bogów, że wspólnota fryzyjska na wyspie Langeness nie jest mile widziana?"
 
 #: ../../data/campaigns/fri01.wmf/elemental:11
 msgid ""
@@ -468,7 +469,7 @@ msgstr ""
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:11
 msgid "v0.2"
-msgstr ""
+msgstr "v0.2"
 
 #: ../../data/maps/Europa 1.1.wmf/elemental:10
 msgid ""

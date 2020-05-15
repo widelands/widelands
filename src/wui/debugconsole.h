@@ -21,6 +21,7 @@
 #define WL_WUI_DEBUGCONSOLE_H
 
 #include <functional>
+#include <string>
 #include <vector>
 
 struct ChatProvider;

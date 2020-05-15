@@ -7,15 +7,15 @@
 # Wuzzy <almikes@aol.com>, 2018
 # Elisabeth Jäger, 2018
 # Simon S. <sim.sta@icloud.com>, 2019
-# Stephan Lutz <stephan-lutz@gmx.de>, 2019
+# Stephan Lutz <stephan-lutz@gmx.de>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"POT-Creation-Date: 2020-05-07 19:37+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2019\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -206,7 +206,7 @@ msgstr "Entschlüssele das Gedicht"
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:90
 msgid "Understand the Poem the Scout has Found in the Empire"
 msgstr ""
-"Verstehe die Bedeutung des Gedichts, das der Kunschafter beim Imperium "
+"Verstehe die Bedeutung des Gedichts, das der Kundschafter beim Imperium "
 "gefunden hat"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 1
@@ -813,9 +813,9 @@ msgid ""
 "war if we refuse to be his slaves?"
 msgstr ""
 "Das ist doch wohl die Höhe! Wie kann er es wagen, uns zu befehlen unser "
-"Territorium nicht weiter zu vergrößern, wenn wir nichts weiter wollen, als "
-"uns ein neues Zuhause zu errichten und uns dann noch mit Krieg zu drohen, "
-"wenn wir nicht seine Sklaven sein wollen?"
+"Gebiet nicht weiter zu vergrößern, wenn wir nichts weiter wollen, als uns "
+"ein neues Zuhause zu errichten und uns dann noch mit Krieg zu drohen, wenn "
+"wir nicht seine Sklaven sein wollen?"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:319

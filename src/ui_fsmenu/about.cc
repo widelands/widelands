@@ -37,7 +37,7 @@ FullscreenMenuAbout::FullscreenMenuAbout()
 	tabs_.add_tab("txts/LICENSE.lua");
 	tabs_.add_tab("txts/AUTHORS.lua");
 	tabs_.add_tab("txts/TRANSLATORS.lua");
-	close_.sigclicked.connect(boost::bind(&FullscreenMenuAbout::clicked_back, this));
+	close_.sigclicked.connect([this]() { clicked_back(); });
 	layout();
 }
 
