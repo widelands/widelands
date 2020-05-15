@@ -89,7 +89,7 @@ BaseListselect::BaseListselect(Panel* const parent,
      notify_on_delete_(nullptr) {
 	set_thinks(false);
 
-	scrollbar_.moved.connect(boost::bind(&BaseListselect::set_scrollpos, this, _1));
+	scrollbar_.moved.connect([this](int32_t a) { set_scrollpos(a); });
 
 	if (selection_mode_ == ListselectLayout::kShowCheck) {
 		check_pic_ = g_gr->images().get("images/ui_basic/list_selected.png");

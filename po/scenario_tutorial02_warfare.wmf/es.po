@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-06 11:30+0000\n"
+"PO-Revision-Date: 2020-05-11 12:13+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -364,7 +364,7 @@ msgstr "Explorador"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:166
 msgid "Explore the map"
-msgstr ""
+msgstr "Explorar el mapa"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:167
 msgid "Wait for the scout to explore unseen areas."
