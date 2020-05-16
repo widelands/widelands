@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-07 21:10+0000\n"
+"PO-Revision-Date: 2020-05-14 08:12+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -34,7 +34,7 @@ msgstr "Seefahrt-Einführungsspiel"
 msgid ""
 "Welcome back. In this tutorial, you are going to learn the most important "
 "things about seafaring, that is ships, ports, and expedition."
-msgstr "Willkommen zurück. In dieser Einführung lernst du die wichtigsten Sachen über die Seefahrt, das heißt Schiffe, Häfen und Expeditionen."
+msgstr "Willkommen zurück. In diesem Einführungsspiel lernst du die wichtigsten Sachen über die Seefahrt, das heißt Schiffe, Häfen und Expeditionen."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:16
 msgid ""
@@ -182,7 +182,7 @@ msgstr "Schiffe werden von einer Werft produziert. Sie ist ein mittleres Gebäud
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:86
 msgid ""
 "Build a shipyard close to the shore of the southern part of your territory."
-msgstr "Baue eine Werft nahe der Küste des südlichen Teils deines Lagers."
+msgstr "Baue eine Werft nahe der Küste des südlichen Teils deines Gebiets."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:87
 msgid ""
@@ -466,7 +466,7 @@ msgstr "Eisenerzmine"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:217
 msgid "Build an iron mine on the island"
-msgstr "Baue eine Eisenmine auf der Insel"
+msgstr "Baue eine Eisenerzmine auf der Insel"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:218
 msgid "Our economy lacks resources."
@@ -571,7 +571,7 @@ msgid ""
 "the water is too shallow for big ships. The only rule is that the two "
 "triangles directly adjacent to each segment of the waterway have to be "
 "water, and the entire path needs to be within your territory."
-msgstr "Wasserwege können über offenes Gewässer gebaut werden, aber auch am Strand entlang, wo das Wasser zu flach für große Schiffe ist. Die einzige Regel ist, dass mindestens zwei Dreieckfelder, die an ein Wasserwegsegment angrenzen Wasser sein müssen, und der gesamte Pfad innerhalb deines Territoriums liegen muss. "
+msgstr "Wasserwege können über offenes Gewässer gebaut werden, aber auch am Strand entlang, wo das Wasser zu flach für große Schiffe ist. Die einzige Regel ist, dass mindestens zwei Dreieckfelder, die an ein Wasserwegsegment angrenzen Wasser sein müssen, und der gesamte Pfad innerhalb deines Gebiets liegen muss. "
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:266
 msgid ""
@@ -628,7 +628,7 @@ msgid ""
 "The only rule for waterway placement is that the two triangles directly "
 "adjacent to each segment of the waterway have to be water, and the entire "
 "path needs to be within your territory."
-msgstr "Die einzige Regel für das Bauen von Wasserwegen ist, dass mindestens zwei Dreieckfelder, die an ein Wasserwegsegment angrenzen Wasser sein müssen, und der gesamte Pfad innerhalb deines Territoriums liegen muss."
+msgstr "Die einzige Regel für das Bauen von Wasserwegen ist, dass mindestens zwei Dreieckfelder, die an ein Wasserwegsegment angrenzen Wasser sein müssen, und der gesamte Pfad innerhalb deines Gebiets liegen muss."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:306
 msgid "Conclusion"

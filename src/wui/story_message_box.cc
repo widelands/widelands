@@ -65,7 +65,7 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
 	button_box_.add(&ok_);
 	button_box_.add_inf_space();
 
-	ok_.sigclicked.connect(boost::bind(&StoryMessageBox::clicked_ok, boost::ref(*this)));
+	ok_.sigclicked.connect([this]() { clicked_ok(); });
 
 	if (x == -1 && y == -1) {
 		center_to_parent();

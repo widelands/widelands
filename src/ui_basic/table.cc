@@ -74,7 +74,7 @@ Table<void*>::Table(Panel* const parent,
 	scrollbar_filler_button_->set_visible(false);
 	scrollbar_ = new Scrollbar(this, get_w() - Scrollbar::kSize, headerheight_, Scrollbar::kSize,
 	                           get_h() - headerheight_, style);
-	scrollbar_->moved.connect(boost::bind(&Table::set_scrollpos, this, _1));
+	scrollbar_->moved.connect([this](int32_t a) { set_scrollpos(a); });
 	scrollbar_->set_steps(1);
 	scrollbar_->set_singlestepsize(lineheight_);
 	scrollbar_->set_pagesize(get_h() - lineheight_);
@@ -121,11 +121,11 @@ void Table<void*>::add_column(uint32_t const width,
 		// The title text can be empty.
 		c.btn = new Button(this, title, complete_width, 0, width, headerheight_, button_style_, title,
 		                   tooltip_string);
-		c.btn->sigclicked.connect(
-		   boost::bind(&Table::header_button_clicked, boost::ref(*this), columns_.size()));
+		c.btn->sigclicked.connect([this]() { header_button_clicked(columns_.size()); });
 		c.width = width;
 		c.alignment = alignment;
-		c.compare = boost::bind(&Table<void*>::default_compare_string, this, columns_.size(), _1, _2);
+		c.compare = [this](
+		   uint32_t a, uint32_t b) { return default_compare_string(columns_.size(), a, b); };
 		columns_.push_back(c);
 		if (column_type == TableColumnType::kFlexible) {
 			assert(flexible_column_ == std::numeric_limits<size_t>::max());
@@ -707,7 +707,7 @@ void Table<void*>::sort(const uint32_t lower_bound, uint32_t upper_bound) {
 	}
 
 	std::stable_sort(
-	   indices.begin(), indices.end(), boost::bind(&Table<void*>::sort_helper, this, _1, _2));
+	   indices.begin(), indices.end(), [this](uint32_t a, uint32_t b) { return sort_helper(a, b); });
 
 	uint32_t newselection = selection_;
 	std::set<uint32_t> new_multiselect;

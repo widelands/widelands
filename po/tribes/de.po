@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-04-23 19:49+0000\n"
+"PO-Revision-Date: 2020-05-15 13:53+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -651,7 +651,7 @@ msgstr "Das Rekrutieren von Soldaten"
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Blackroot Farm"
-msgstr "Dunkelrübenfarm"
+msgstr "Dunkelrübenhof"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting blackroot because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:62
@@ -691,7 +691,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The blackroot farmer working at this blackroot farm has no cleared soil to "
 "plant his seeds."
-msgstr "Der Dunkelrübenbauer dieser Dunkelrübenfarm hat keinen freien Platz, um Dunkelrüben zu säen."
+msgstr "Der Dunkelrübenbauer dieses Dunkelrübenhofs hat keinen freien Platz, um Dunkelrüben zu säen."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/init.lua:7
@@ -4025,7 +4025,7 @@ msgstr "Friesen"
 
 #: ../../data/tribes/preload.lua:81
 msgid "The inhabitants of the rough North Sea shore."
-msgstr "Die Einwohner der rauen Nordseeküste. Dieser Stamm wird noch entwickelt."
+msgstr "Die Einwohner der rauen Nordseeküste."
 
 #: ../../data/tribes/scripting/help/init.lua:54
 msgid "Tribal Encyclopedia"
