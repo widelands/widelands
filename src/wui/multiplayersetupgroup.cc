@@ -662,11 +662,11 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
                                              int32_t const h,
                                              GameSettingsProvider* const settings,
                                              uint32_t buth)
-   : UI::Box(parent, x, y, UI::Box::Horizontal, w, h, 8 * kPadding),
+   : UI::Box(parent, x, y, UI::Box::Horizontal, 0, 0, 8 * kPadding),
      settings_(settings),
      npsb(new NetworkPlayerSettingsBackend(settings_)),
      clientbox(this, 0, 0, UI::Box::Vertical),
-     playerbox(this, 0, 0, UI::Box::Vertical, w * 36 / 53, h, kPadding),
+     playerbox(this, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
      clients_(&clientbox,
               // the width of the MultiPlayerSetupGroup is (get_w() * 53 / 80)
               0,
@@ -687,14 +687,15 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
      buth_(buth) {
 
 	clientbox.add(&clients_, Resizing::kAlign, UI::Align::kCenter);
-	clientbox.set_size(w * 16 / 53, h);
+	//	clientbox.set_size(w * 16 / 53, h);
 	clientbox.set_scrolling(true);
 
-	add(&clientbox, UI::Box::Resizing::kExpandBoth);
+	add(&clientbox);
+	add_space(1 * h);
 	add(&playerbox);
 
 	// Playerbox
-	playerbox.set_size(w * 36 / 53, h);
+	//	playerbox.set_size(w * 36 / 53, h);
 	playerbox.add_space(0);
 	playerbox.add(&players_, Resizing::kAlign, UI::Align::kCenter);
 
@@ -708,7 +709,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 
 	subscriber_ =
 	   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings&) { update(); });
-	set_size(w, h);
+	//	set_size(w, h);
 	update();
 }
 
