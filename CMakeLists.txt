@@ -1,7 +1,7 @@
 project (widelands)
 
-cmake_minimum_required (VERSION 2.8.7)
-cmake_policy(VERSION 2.8.7)
+cmake_minimum_required (VERSION 3.7)
+cmake_policy(VERSION 3.7)
 
 include("${CMAKE_SOURCE_DIR}/cmake/UseSystemInfo.cmake")
 
@@ -90,6 +90,7 @@ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Mod
 
 if (WIN32)
   set (Boost_USE_STATIC_LIBS  ON)
+  add_definitions(-DGLBINDING_STATIC_DEFINE)
   link_libraries(wsock32 ws2_32 bcrypt)
 else()
   set (Boost_USE_STATIC_LIBS  OFF)
@@ -108,43 +109,14 @@ find_package (PythonInterp REQUIRED)
 find_package(Gettext REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(PNG REQUIRED)
-
-find_package(Threads REQUIRED)
-find_package(SDL2 CONFIG)
-if(SDL2_FOUND)
-  message(STATUS "Found SDL2 configuration file")
-  if(TARGET SDL2::SDL2)
-    # SDL2 was built with CMake (e.g. Arch Linux)
-    message(STATUS "Target SDL2::SDL2 found")
-  elseif(SDL2_INCLUDE_DIRS AND SDL2_LIBRARIES)
-    # SDL2 was built with Autotools (e.g. Debian)
-    message(STATUS "SDL2_INCLUDE_DIRS: ${SDL2_INCLUDE_DIRS}")
-    message(STATUS "SDL2_LIBRARIES: ${SDL2_LIBRARIES}")
-    # Workaround for trailing whitespace problem (CMP0004) in some SDL2 versions
-    # See: https://hg.libsdl.org/SDL/rev/28be2719184c
-    string(STRIP ${SDL2_LIBRARIES} SDL2_LIBRARIES)
-  else()
-    # This should not happen but try to recover anyway
-    message(STATUS "SDL2 variables not set! Falling back to FindSDL2 module")
-    find_package(SDL2 REQUIRED MODULE)
-    SET(SDL2_LIBRARIES ${SDL2_LIBRARY})
-    SET(SDL2_INCLUDE_DIRS ${SDL2_INCLUDE_DIR})
-  endif()
-else()
-  # Fallback for old SDL2 versions that don't provide a CMake configuration file
-  message(STATUS "SDL2 configuration file not found - falling back to FindSDL2 module")
-  find_package(SDL2 REQUIRED MODULE)
-  SET(SDL2_LIBRARIES ${SDL2_LIBRARY})
-  SET(SDL2_INCLUDE_DIRS ${SDL2_INCLUDE_DIR})
-endif()
-
+find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 find_package(SDL2_mixer REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 find_package(ZLIB REQUIRED)
-find_package(ICU REQUIRED)
+find_package(ICU REQUIRED COMPONENTS uc dt)
 if(OPTION_USE_GLBINDING)
-  find_package(glbinding REQUIRED)
+  find_package(GLBINDING REQUIRED)
 else()
   find_package(GLEW REQUIRED)
 endif()
@@ -153,7 +125,7 @@ if (APPLE OR WIN32 OR
     CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR
     CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
   if (NOT CMAKE_SYSTEM_NAME MATCHES "kFreeBSD")
-    find_package(intl REQUIRED)
+    find_package(Intl REQUIRED)
   endif()
 endif()
 
@@ -262,6 +234,8 @@ else()
   if(WIN32)
     # This is needed for getenv().
     wl_add_flag(WL_GENERIC_CXX_FLAGS "-std=gnu++11")
+    set(CMAKE_CXX_STANDARD_LIBRARIES "-static-libgcc -static-libstdc++ -lwsock32 -lws2_32 ${CMAKE_CXX_STANDARD_LIBRARIES}")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-Bstatic,--whole-archive -lwinpthread -Wl,--no-whole-archive")
   else()
     # SDL and MinGW both declare 'unsigned int __builtin_ia32_crc32qi(unsigned int, unsigned char)', resulting in lots of warnings. So, we can't have this flag in Windows.
     wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wredundant-decls")
