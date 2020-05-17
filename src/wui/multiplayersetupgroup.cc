@@ -662,7 +662,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
                                              int32_t const h,
                                              GameSettingsProvider* const settings,
                                              uint32_t buth)
-   : UI::Box(parent, x, y, UI::Box::Horizontal, 0, 0, 8 * kPadding),
+   : UI::Box(parent, x, y, UI::Box::Horizontal, 0, h, 8 * kPadding),
      settings_(settings),
      npsb(new NetworkPlayerSettingsBackend(settings_)),
      clientbox(this, 0, 0, UI::Box::Vertical),
@@ -691,7 +691,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 	clientbox.set_scrolling(true);
 
 	add(&clientbox);
-	add_space(1 * h);
+	add_space(1 * buth);
 	add(&playerbox);
 
 	// Playerbox
