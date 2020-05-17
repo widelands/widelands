@@ -7,7 +7,7 @@
 # Jonas Richardsen <jonas.richardsen@isdas.de>, 2017
 # Daniel Hahn <giggeler53@gmail.com>, 2018
 # Elisabeth Jäger, 2018
-# Stephan Lutz <stephan-lutz@gmx.de>, 2019
+# Stephan Lutz <stephan-lutz@gmx.de>, 2020
 # 
 msgid ""
 msgstr ""
@@ -15,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-07 19:37+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2019\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -174,7 +174,7 @@ msgstr "Bilde mindestens 3 Helden aus"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:127
 msgid "Hero Training"
-msgstr "Heldentraining"
+msgstr "Heldenausbildung"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:128
 msgid ""
@@ -253,11 +253,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:175
 msgid "Training is Important"
-msgstr "Training ist wichtig"
+msgstr "Ausbildung ist wichtig"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:176
 msgid "Train your soldiers hard and train them fast."
-msgstr "Trainiere deine Soldaten hart und schnell."
+msgstr "Bilde deine Soldaten hart und schnell aus."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:177
 msgid "You need to increase your military strength."
@@ -269,7 +269,7 @@ msgstr "Baue ein Ausbildungslager und erweitere die Arena"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:185
 msgid "More Efficient Training Buildings"
-msgstr "Effizientere Trainingsgebäude"
+msgstr "Effizientere Ausbildungsgebäude"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:186
 msgid "Build a training camp and enhance your arena to a colosseum."
@@ -1360,7 +1360,7 @@ msgstr ""
 "Herr, ich gebe zu, dass sich das als guter Handel erwiesen hat, auch wenn "
 "wir die Pläne wesentlich früher hätten haben können. Wie dem auch sei, wir "
 "werden kaum mit den Barbaren verhandeln können, daher sollten wir unsere "
-"Soldaten besser in guter Stimmung halten und sie angemessen trainieren."
+"Soldaten besser in guter Stimmung halten und sie angemessen ausbilden."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:640
 msgid "Pride"
@@ -1378,7 +1378,7 @@ msgstr ""
 "gezogen haben, aber in Kriegszeiten heiligt der Zweck manchmal die Mittel. "
 "Und da wir nicht mit den Barbaren werden verhandeln können, sollten wir "
 "unsere Soldaten besser in guter Stimmung halten und sie angemessen "
-"trainieren."
+"ausbilden."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:650
 msgid "Saledus asks for a stronger army…"
@@ -1416,7 +1416,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:665
 msgid "Training is Needed"
-msgstr "Training ist nötig"
+msgstr "Ausbildung ist nötig"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:666
 msgid "Saledus still has security concerns…"
@@ -1460,9 +1460,9 @@ msgid ""
 "builders and developed better and more efficient training buildings "
 "together."
 msgstr ""
-"Herr, unsere Ausbilder haben sich nach den ersten Trainingseinheiten mit "
+"Herr, unsere Ausbilder haben sich nach den ersten Ausbildungseinheiten mit "
 "unseren Bauarbeitern zusammengesetzt und gemeinsam bessere und effizientere "
-"Trainingsgebäude entwickelt."
+"Ausbildungsgebäude entwickelt."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:682
 msgid ""
@@ -1488,8 +1488,9 @@ msgid ""
 "can. I really would consider them heroes after that."
 msgstr ""
 "General, wir haben nun mehr und besseres Bier sowie erweiterte "
-"Trainingseinrichtungen und sollten nun so viele voll ausgebildete Soldaten "
-"wie möglich trainieren. Diese würde ich dann sogar als Helden bezeichnen."
+"Ausbildungseinrichtungen und sollten nun so viele Soldaten wie möglich bis "
+"zu den höchsten Stufen ausbilden. Diese würde ich dann sogar als Helden "
+"bezeichnen."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:694
 msgid ""
