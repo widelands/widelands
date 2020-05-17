@@ -114,21 +114,18 @@ FullscreenMenuLaunchMPG2::FullscreenMenuLaunchMPG2(GameSettingsProvider* const s
                   _("Show the help window")),
 
      help_(nullptr),
-
      // Variables and objects used in the menu
      chat_(nullptr) {
 
 	title_.set_text(_("Multiplayer Game Setup"));
-	//	change_map_or_save_.sigclicked.connect(
-	//	   boost::bind(&FullscreenMenuLaunchMPG::clicked_select_map, boost::ref(*this)));
 	help_button_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuLaunchMPG2::help_clicked, boost::ref(*this)));
 
 	if (settings_->can_change_map()) {
-		//		map_info_.set_text(_("Please select a map or saved game."));
+		map_details.set_map_description_text(_("Please select a map or saved game."));
 	} else {
 		//		change_map_or_save_.set_enabled(settings_->can_change_map());
-		//		map_info_.set_text(_("The host has not yet selected a map or saved game."));
+		map_details.set_map_description_text(_("The host has not yet selected a map or saved game."));
 	}
 
 	mpsg_ = new MultiPlayerSetupGroup(
@@ -546,30 +543,14 @@ void FullscreenMenuLaunchMPG2::load_map_info() {
 		ml->preload_map(true);
 	}
 
-	std::string infotext;
-	infotext += std::string(_("Map details:")) + "\n";
-	infotext += std::string("• ") +
-	            (boost::format(_("Size: %1% x %2%")) % map.get_width() % map.get_height()).str() +
-	            "\n";
-	infotext += std::string("• ") +
-	            (boost::format(ngettext("%u Player", "%u Players", nr_players_)) %
-	             static_cast<unsigned int>(nr_players_))
-	               .str() +
-	            "\n";
-	if (settings_->settings().scenario)
-		infotext += std::string("• ") + (boost::format(_("Scenario mode selected"))).str() + "\n";
-	infotext += "\n";
-	infotext += map.get_description();
-	infotext += "\n";
-	infotext += map.get_hint();
-
-	//	map_info_.set_text(infotext);
+	map_details.update(settings_);
 	filename_proof_ = settings_->settings().mapfilename;
 
 	suggested_teams_box_->hide();
 	suggested_teams_box_->show(map.get_suggested_teams());
-	suggested_teams_box_->set_pos(Vector2i(
-	   suggested_teams_box_->get_x(), back_.get_y() - padding_ - suggested_teams_box_->get_h()));
+	
+	log("suggested box: %dx%d at x:%d, y:%d\n", suggested_teams_box_->get_w(),
+	    suggested_teams_box_->get_h(), suggested_teams_box_->get_x(), suggested_teams_box_->get_y());
 }
 
 /// Show help
