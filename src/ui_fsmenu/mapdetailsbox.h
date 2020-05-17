@@ -22,6 +22,9 @@ public:
 
 	void force_new_dimensions(float scale, uint32_t standard_element_height);
 
+	// TODO(JM) only used by multiplayer screen...
+	void set_map_description_text(const std::string& text);
+
 private:
 	UI::Textarea title_;
 	UI::Box title_box_;

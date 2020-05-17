@@ -121,3 +121,6 @@ void MapDetailsBox::force_new_dimensions(float scale, uint32_t standard_element_
 	map_description_.set_desired_size(0, 6 * standard_element_height);
 	UI::Box::layout();
 }
+void MapDetailsBox::set_map_description_text(const std::string& text) {
+	map_description_.set_text(text);
+}
