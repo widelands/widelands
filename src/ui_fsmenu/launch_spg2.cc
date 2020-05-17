@@ -76,6 +76,9 @@ bool FullscreenMenuLaunchSPG2::clicked_select_map() {
 	// is this ok? actually I don't understand why this is not automatically sent in
 	// settings_#set_map()...
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
+
+	// force layout so all boxes and textareas are forced to update
+	layout();
 	return true;
 }
 

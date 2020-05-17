@@ -55,7 +55,7 @@ void SinglePlayerActivePlayerSetupBox::update() {
 
 void SinglePlayerActivePlayerSetupBox::force_new_dimensions(float scale,
                                                             uint32_t standard_element_height) {
-
+	title_.set_font_scale(scale);
 	for (auto& active_player_group : active_player_groups) {
 		active_player_group->force_new_dimensions(scale, standard_element_height);
 	}
@@ -273,6 +273,7 @@ void SinglePlayerPossiblePlayerSetupBox::update() {
 }
 void SinglePlayerPossiblePlayerSetupBox::force_new_dimensions(float scale,
                                                               uint32_t standard_element_height) {
+	title_.set_font_scale(scale);
 	for (auto& possible_player_group : possible_player_groups) {
 		possible_player_group->force_new_dimensions(scale, standard_element_height);
 	}

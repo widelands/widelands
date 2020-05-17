@@ -120,7 +120,7 @@ FullscreenMenuLaunchMPG2::FullscreenMenuLaunchMPG2(GameSettingsProvider* const s
 
 	title_.set_text(_("Multiplayer Game Setup"));
 	//	change_map_or_save_.sigclicked.connect(
-	//	   boost::bind(&FullscreenMenuLaunchMPG::change_map_or_save, boost::ref(*this)));
+	//	   boost::bind(&FullscreenMenuLaunchMPG::clicked_select_map, boost::ref(*this)));
 	help_button_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuLaunchMPG2::help_clicked, boost::ref(*this)));
 
@@ -136,7 +136,7 @@ FullscreenMenuLaunchMPG2::FullscreenMenuLaunchMPG2(GameSettingsProvider* const s
 
 	// If we are the host, open the map or save selection menu at startup
 	if (settings_->settings().usernum == 0 && settings_->settings().mapname.empty()) {
-		change_map_or_save();
+		clicked_select_map();
 		// Try to associate the host with the first player
 		if (!settings_->settings().players.empty()) {
 			settings_->set_player_number(0);
@@ -148,7 +148,7 @@ FullscreenMenuLaunchMPG2::FullscreenMenuLaunchMPG2(GameSettingsProvider* const s
 	   new UI::SuggestedTeamsBox(&individual_content_box, right_column_x_, 0, UI::Box::Vertical,
 	                             padding_, indent_, get_w() - right_column_x_, 4 * label_height_);
 
-	individual_content_box.add(mpsg_, UI::Box::Resizing::kExpandBoth);
+	individual_content_box.add(mpsg_, UI::Box::Resizing::kFullSize);
 	individual_content_box.add(suggested_teams_box_, UI::Box::Resizing::kExpandBoth);
 }
 
@@ -161,6 +161,9 @@ void FullscreenMenuLaunchMPG2::layout() {
 	standard_element_width_ = get_w() / 4;
 	standard_element_height_ = get_h() * 9 / 200;
 	mpsg_->force_new_dimensions(scale_factor(), standard_element_height_);
+	if (chat_) {
+		chat_->set_desired_size(mpsg_->get_w(), get_h() / 2);
+	}
 
 	FullscreenMenuLaunchGame::layout();
 }
@@ -171,12 +174,14 @@ void FullscreenMenuLaunchMPG2::layout() {
  */
 void FullscreenMenuLaunchMPG2::set_chat_provider(ChatProvider& chat) {
 	delete chat_;
+	chat_ = new GameChatPanel(
+	   this, get_w() * 3 / 80, mpsg_->get_y() + mpsg_->get_h() + padding_, get_w() * 53 / 80,
+	   ok_.get_y() + ok_.get_h() - mpsg_->get_y() - mpsg_->get_h() - padding_ - 1, chat,
+	   UI::PanelStyle::kFsMenu);
 	//	chat_ = new GameChatPanel(
-	//	   this, get_w() * 3 / 80, mpsg_->get_y() + mpsg_->get_h() + padding_, get_w() * 53 / 80,
-	//	   ok_.get_y() + ok_.get_h() - mpsg_->get_y() - mpsg_->get_h() - padding_ - 1, chat,
-	//	   UI::PanelStyle::kFsMenu);
-	chat_ = new GameChatPanel(&individual_content_box, 0, 0, 0, 0, chat, UI::PanelStyle::kFsMenu);
-	individual_content_box.add(chat_, UI::Box::Resizing::kExpandBoth);
+	//	   &individual_content_box, 0, 0, mpsg_->get_w(), get_h() / 2, chat, UI::PanelStyle::kFsMenu);
+	//	individual_content_box.add(chat_, UI::Box::Resizing::kAlign, UI::Align::kBottom);
+	//	layout();
 }
 
 /**
@@ -199,7 +204,7 @@ void FullscreenMenuLaunchMPG2::win_condition_selected() {
 }
 
 /// Opens a popup window to select a map or saved game
-void FullscreenMenuLaunchMPG2::change_map_or_save() {
+bool FullscreenMenuLaunchMPG2::clicked_select_map() {
 	MapOrSaveSelectionWindow selection_window(this, ctrl_, get_w() / 3, get_h() / 4);
 	auto result = selection_window.run<FullscreenMenuBase::MenuTarget>();
 	assert(result == FullscreenMenuBase::MenuTarget::kNormalGame ||
@@ -211,6 +216,9 @@ void FullscreenMenuLaunchMPG2::change_map_or_save() {
 		select_saved_game();
 	}
 	update_win_conditions();
+	// force layout so all boxes and textareas are forced to update
+	layout();
+	return true;
 }
 
 /**
@@ -242,8 +250,6 @@ void FullscreenMenuLaunchMPG2::select_map() {
 		filename_proof_ = filename_proof_ + "new";
 
 	settings_->set_map(mapdata.name, mapdata.filename, nr_players_);
-	// force layout so all boxes and textareas are forced to update
-	layout();
 }
 
 /**

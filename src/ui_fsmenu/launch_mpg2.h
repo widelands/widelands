@@ -55,7 +55,7 @@ protected:
 private:
 	void layout() override;
 
-	void change_map_or_save();
+	bool clicked_select_map() override;
 	void select_map();
 	void select_saved_game();
 	void win_condition_selected() override;
