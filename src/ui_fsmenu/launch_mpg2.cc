@@ -548,7 +548,7 @@ void FullscreenMenuLaunchMPG2::load_map_info() {
 
 	suggested_teams_box_->hide();
 	suggested_teams_box_->show(map.get_suggested_teams());
-	
+
 	log("suggested box: %dx%d at x:%d, y:%d\n", suggested_teams_box_->get_w(),
 	    suggested_teams_box_->get_h(), suggested_teams_box_->get_x(), suggested_teams_box_->get_y());
 }
