@@ -7,13 +7,14 @@
 # Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
 # Mateusz Pu <mateusz.pudlo@poczta.onet.pl>, 2020
 # tombox <wptom@wp.pl>, 2015-2019
+# tombox <wptom@wp.pl>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-04-28 07:45+0000\n"
-"Last-Translator: Mateusz Pu <mateusz.pudlo@poczta.onet.pl>\n"
+"PO-Revision-Date: 2020-05-16 00:04+0000\n"
+"Last-Translator: tombox <wptom@wp.pl>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -85,14 +86,14 @@ msgstr "Na MacOSie plik COPYING znajdziesz w archiwum pobranym ze strony."
 
 #: ../../data/txts/LICENSE.lua:23
 msgid "This game comes as-is and without any warranty."
-msgstr "Ta gra dostarczana w stanie jak-jest i wez żadnej gwarancji."
+msgstr "Ta gra dostarczona jest w stanie takim jak widać i bez żadnej gwarancji."
 
 #: ../../data/txts/LICENSE.lua:24
 msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
 "(Translations)."
-msgstr ""
+msgstr "Aby uzyskać więcej informacji i wsparcie, możesz nas znaleźć na  stronie %1%(witryna, wiki, forum pytań lub ogólne wsparcie),%2% (śledzenie błędów) i %3% (tłumaczenia)."
 
 #: ../../data/txts/README.lua:6
 msgid "Readme"
@@ -203,7 +204,7 @@ msgstr "Tłumacze Widelands"
 
 #: ../../data/txts/developers.lua:3
 msgid "Atlanteans"
-msgstr "Atlantydzi"
+msgstr "Atlantowie"
 
 #: ../../data/txts/developers.lua:3
 msgid "Barbarians"
@@ -255,7 +256,7 @@ msgstr "FreeBSD"
 
 #: ../../data/txts/developers.lua:3
 msgid "Frisians"
-msgstr "Fryzjanie"
+msgstr "Fryzowie"
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphicians"

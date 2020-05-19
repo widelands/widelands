@@ -7,13 +7,14 @@
 # Jukka Pakarinen, 2016-2018,2020
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
 # Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009
+# Teppo Mäenpää <teppo@runbox.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-11 19:08+0000\n"
-"Last-Translator: Jukka Pakarinen\n"
+"PO-Revision-Date: 2020-05-16 14:10+0000\n"
+"Last-Translator: Teppo Mäenpää <teppo@runbox.com>\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -97,7 +98,7 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr ""
+msgstr "Chat’Karuthin kuollessa hän oli jo vanha mies, kolmen vahvan ja kunnianhimoisen pojan isä sekä sotaherra armeijalle, joka voisi peitota minkä tahansa viholisen, joka haluaisi tulla muinaisiin metsiin. Vaikka hänen mahtavan valtakauden lopussa Chat’Karuth valitsi vanhimman poikansa, Thornin, seuraavaksi heimon sotaherraksi – päätös jätti hänen muut poikaansa pettyneiksi. Ja vanha sotaherra tiesi sen. Kuten hänen isänsä opasti häntä, Thorn jätti Al’thunran pääkaupungin, Thronen kodin metsän keskellä ja vetäyty joukkoineen kukkuloille, missä hän hautasi isänsä ruumiin. Siellä hän vannoi jumalan nimeen ja hänen isän henkeen, että hän tulisi palauttamaan järjestyksen. Sillä aikaa hänen veljensä ovat raivonneet sokeasti Thornia ja muutamia Al’thunran rajoja turvaamaan jätettyjä joukkoja vastaan, nuori sotaherra etsi tapaa koota jälleen hänen kunnianhimoiset veljensä ja pakottaa heimot marssimaan yhteisen lipun alla."
 
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../data/campaigns/campaigns.lua:70
@@ -122,7 +123,7 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr ""
+msgstr "Kuusi vuotta sitten, Lutius – nuori Keisarikunnan kenraali – lähetettiin etulinjaan pohjoisten metsien taakse 150 sotilaan kera, missä Barbaariheimot olivat ylittämässä Keisarikunnan maita. Hänen tehtävänä oli puolustaa Keisarikunnan maita. Aluksi kaikkialla oli rauhallista. Hän jopa jutteli muutamien Barbaarilasten kanssa ja ajatteli rauhallisesta elämästä – rintarinnan muinaisten ihmisen kanssa. Hän alkoi tuntea olonsa turvalliseksi ja hänen armeijan tarkkaavaisuus alkoi horjua, pois mahdollisesta vihollisesta. Se oli heidän virheensä. Eräänä maaliskuisena yönä, hänen valmistautumatonta armeijaansa vastaan hyökkää 100 Barbaarin vahvuinen jalkaväki, täysin hajaantuneesti. Vain hän ja kourallinen hänen sotilaistaan selviytyi."
 
 #. TRANSLATORS: The name of an Atlantean campaign
 #: ../../data/campaigns/campaigns.lua:93
@@ -142,7 +143,7 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr ""
+msgstr "Kun heidän Jumalansa menetti uskonsa Atlantislaisiin ja upotti heidän saarensa, eräs nainen kamppaili oikeuden puolesta ja hänen kansan saamasta toisesta mahdollisuudesta, mistä tulisi legendojen aihe. Johtaen jäljelle pääneet Atlantislaiset uuteen tulevaisuuteen, maailman toiseen osaan, Jundlinasta tuli hänen aikansa kaikkein mahtavin ihminen, mutta kalliilla hinnalla: hänen inhimillisyydellä ja sielulla."
 
 #. TRANSLATORS: The name of a Frisian campaign
 #: ../../data/campaigns/campaigns.lua:107
@@ -178,7 +179,7 @@ msgid ""
 "example for the hardships all Frisians have to face – or a sign from the "
 "gods that a tribe that only just settled here must seek out an entirely new "
 "home?"
-msgstr ""
+msgstr "Merestä eläminen on yhtä taistelua ja vielä enemmän se on sitä Pohjoisella Vapaamielenmeren rannikolla. Oliko viimeisin myrskytulva, yksi tuhoisimmista miesmuistiin, mitään muuta kuin taas yksi esimerkki vastoinkäymisistä, joita kaikkien Vapaamielisten täytyy kohdata – tai oliko se jumalten muistutus siitä, että heimo, joka vasta asettui tänne, täytyy etsiä kokonaan uusi koti?"
 
 #: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
@@ -282,7 +283,7 @@ msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
 "soldiers, how to train them and how to lead them in battle. Scouting will be"
 " also covered."
-msgstr ""
+msgstr "Tässä opetuspelissä sinulle opetaan sodankäynnin salaisuudet: kuinka luoda sotilaita, kouluttaa ja johtaa heitä taistelussa."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
 msgid "Seafaring"
@@ -292,7 +293,7 @@ msgstr "Merenkäynti"
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports, and how to use ferries and waterways."
-msgstr ""
+msgstr "Tässä opetuspelissä opit merenkäynnistä, mikä tarkoittaa kuinka käsitellä laivoja ja satamia sekä lauttoja ja lauttareittejä."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy"
@@ -434,7 +435,7 @@ msgid ""
 "reasonable reconstruction of the area delimited by Cortina d'Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
 " to the death with your enemies, it may as well be in a beautiful place."
-msgstr ""
+msgstr "Alppien jalokivi, Dolomittien vuorijono on julistettu Maailmanperintökohteeksi sen koskemattoman luonnon vuoksi. Tämä kartta on rekonstruoitu alueesta niin-luotettavasti-kuin-mahdollista rajattuna Cortina d’Ampezzoon koillisessa ja Canazeihin lounaassa. Jos sinun täytyy ryhtyä kaksintaisteluun viholisesi kanssa kuolemaan asti, se on myös kaiken lisäksi kaunis paikka."
 
 #: ../../data/maps/Dolomites_v3.wmf/elemental:11
 msgid ""
@@ -444,7 +445,7 @@ msgid ""
 " army. Use the terrain to your advantage - chop all trees and expand "
 "wherever you can; it's the only way to find all the precious farm spaces - "
 "suggested teams: red+orange+blue+violet"
-msgstr ""
+msgstr "Vuorilla on paljon tasaista maata. Valitettavasti suurin osa siitä on pystysuuntainsta. Käytä vähäinen rakennusmaasi viisaasti. Linnoituksen ohittamienn kapean vuoren suulla voi olla hyvin pelottava este vihollisen armeijalle. Käytä maaston muodot eduksesi. Käytä metsureita löytääksesi maatiloille sopivat tasanteet."
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -462,7 +463,7 @@ msgstr ""
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:10
 msgid "Equal starting conditions for three players."
-msgstr ""
+msgstr "Yhtäläinen aloituspaikka kullakin kolmella pelaajalla."
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:11
 msgid "v0.2"
@@ -706,7 +707,7 @@ msgstr "Ilmassa on kaksi iso kysymystä: Kuka loi tämän uskomattoman suuren la
 
 #: ../../data/maps/No challenge metal v2.wmf/elemental:8
 msgid "No metal challenge v2"
-msgstr ""
+msgstr "Metallipula-haastekartta (v.2)"
 
 #: ../../data/maps/No challenge metal v2.wmf/elemental:10
 msgid ""
@@ -715,7 +716,7 @@ msgid ""
 "of iron to kickstart your economy), so you have to rely on the 5% production"
 " of an empty mine. And you're still 1v6 (though of course you can remove "
 "some AI players to make it a bit easier). Good luck"
-msgstr ""
+msgstr "Tämä kartta on tarkoitettu yksinpelihaasteeksi taitaville pelaajille. Sininen pelaaja voi löytää vain hieman rautaa lähiseudultaan. Sinisenä pelaajana joudut turvautumaan tyhjien kaivosten vähäiseen malminlöytömahdollisuuteen. Valitse sininen pelaaja, laita muut liittoon keskenään. Onnea matkaan!"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"
