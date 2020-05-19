@@ -23,6 +23,7 @@ install:
   # - cmd: "bash --login -c \"sed -i 7d C:/msys64/etc/pacman.d/mirrorlist.mingw32\""
   # - cmd: "bash --login -c \"sed -i 7d C:/msys64/etc/pacman.d/mirrorlist.mingw64\""
   # Update msys2 system (twice, first run does system packages)
+  - cmd: "bash --login -c \"pacman -S mingw-w64-x86_64-zstd --noconfirm\""
   - cmd: "bash --login -c \"pacman -Suuyy --noconfirm\""
   # deleting broken repo from mirrorlist again
   # - cmd: "bash --login -c \"sed -i 7d C:/msys64/etc/pacman.d/mirrorlist.msys\""
