@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-06 11:22+0000\n"
+"PO-Revision-Date: 2020-05-13 14:06+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -221,11 +221,11 @@ msgid ""
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes. If the peaceful mode is selected, the game ends if one "
 "player has more land than any other player could gain."
-msgstr ""
+msgstr "Cada jugador o equipo intentará conseguir más de la mitad del área del mapa. El ganador será el jugador o equipo que sea capaz de mantener ese área por al menos 20 minutos. Si el modo pacífico es seleccionado la partida  termina cuando un jugador tiene mas territorio que cada otro jugador puede ganar."
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:58
 msgid "Currently no faction owns more than half of the map’s area."
-msgstr ""
+msgstr "Hasta ahora ninguna facción posee más de la mitad del área del mapa."
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:21
 msgid "Territorial Time"
@@ -238,7 +238,7 @@ msgid ""
 "least 20 minutes, or the one with the most territory after 4 hours, "
 "whichever comes first.If the peaceful mode is selected, the game ends if one"
 " player has more land than any other player could gain."
-msgstr ""
+msgstr "Cada jugador o equipo intentará conseguir más de la mitad del área del mapa. El ganador será el jugador o equipo que sea capaz de mantener ese área por al menos 20 minutos, o el que tenga más territorio tras 4 horas, cualquiera que ocurra primero. Si el modo pacífico es seleccionado la partida termina cuando un jugador tiene mas territorio que cada otro jugador puede ganar. "
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #. TRANSLATORS: Context: 'The game will end in 30 minutes.'

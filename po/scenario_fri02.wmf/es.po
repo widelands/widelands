@@ -506,6 +506,9 @@ msgid ""
 "You are right – we should build more berry farms, fruit collector’s houses "
 "and taverns as well as a drinking hall, and advanced bakeries and breweries."
 msgstr ""
+"Tienes razón – deberíamos construir mas granjas de baya, casas de "
+"recolectores de fruta y tabernas igual que un mesón, y panaderías y "
+"cervecerías avanzadas."
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:247
