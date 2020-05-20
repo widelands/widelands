@@ -43,8 +43,7 @@ branches:
 build_script:
   # copy modified libintl.h to solve an issue with boost
   - cmd: patch %MINGWINCLUDE%\libintl.h %APPVEYOR_BUILD_FOLDER%\utils\appveyor\libintl.patch
-  - cmd: mv C:/msys64/mingw64/lib/libglew32.dll.a C:/msys64/mingw64/lib/_libglew32.dll.a
-  - cmd: mv C:/msys64/mingw32/lib/libglew32.dll.a C:/msys64/mingw32/lib/_libglew32.dll.a
+  - cmd: "IF \"%PLATFORM%\" == \"x86\" (mv C:/msys64/mingw32/lib/libglew32.dll.a C:/msys64/mingw32/lib/_libglew32.dll.a) ELSE (mv C:/msys64/mingw64/lib/libglew32.dll.a C:/msys64/mingw64/lib/_libglew32.dll.a)"
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
   - cmd: md build
   - cmd: cd build
