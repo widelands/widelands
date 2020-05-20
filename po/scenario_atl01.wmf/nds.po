@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-17 11:34+0000\n"
+"PO-Revision-Date: 2020-05-19 13:42+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -805,7 +805,7 @@ msgid ""
 "before and obviously it was militarized. I have to check on our military "
 "status with my generals. I will not allow that a potential enemy will find "
 "us unprepared."
-msgstr ""
+msgstr "Wi hebben noch een Huus funnen, wat up deese komiske Aard baut is. Wi hebben de Baukeerls immer noch nich to sehn kregen. Aver dat hett openbaar maal eene Klottje up deeser Insel geven, wat openbaar ok Soldateree harr. Ick mutt mit mienen Offizeren över de Tostand vun uns' Soldateree reden. Een mögelker Feind düür uns nich unklaar finnen."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:410
 msgid "One More Building"
@@ -820,7 +820,7 @@ msgid ""
 "no trace of this old economy to be found. I am starting to relax, but I will"
 " not let our guard down as we continue to explore this beautiful island. But"
 " without obvious dangers, I am feeling very much at home here already."
-msgstr ""
+msgstr "Un noch eens vun deesen Husen. Wi weten nu, dat de Lüü, well se baut hebben, maal de kumplete Insel kuntrolleert hebben. Aver ick bün nich mehr bang vör mögelken Feinden. Wi hebben al so vööl vun de Insel sehn un dat gifft keene Spoor vun deeser ollen Wirtschaft. Ick bün verlichtert, aber natürelk mutten wir immer noch uppassen, as wi deese moje Insel wieder utförsken. Aver sünner grote Gefahren föhl ick mi hier al as tohuus."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:424
 msgid "The Water is Rising!"
@@ -833,7 +833,7 @@ msgid ""
 "that the ocean is rising quickly. We have to reach higher ground and "
 "evacuate everybody and as much wares as we can from the headquarters up the "
 "mountains. How can we escape?"
-msgstr ""
+msgstr "Satuul sall uns retten! Luutas versöcht immer noch, uns to halen. Een Bespejer hett mi seggt, dat de See fix uplöppt. Wi mutten in de Bargen gahn un all Lüü, un ok so völe Waren ut de Raadhuus as mögelk, mitnöhmen. Aver wo könen wi dann flüchten?"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:430
 msgid "A Young Man Approaches"
@@ -846,7 +846,7 @@ msgid ""
 " invented a new kind of ship: smaller than those we are used to, but much "
 "sturdier. If we build them correctly, I am confident that we can sail a much"
 " longer distance with them and maybe escape from Lutas’ influence."
-msgstr ""
+msgstr "Satuul sall Jo warmen, Jundlin'. Mien Naam is Ostuur un ick bau Schippen. Ick hebb eene neje Aard vun Schipp utdacht: Lütter as de Schippen, wat wi sünst bruken, aver faster. Wenn wi se good bauen, könen wi wiss eene vööl grotere Streck daarmit seilen un villicht vun Luutas sien Macht utnaihen."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:439
@@ -854,7 +854,7 @@ msgid ""
 "Ostur, we have no time. The water rises too fast, and if we build the ships "
 "on the shore they will vanish in the sea before they can float. I fear we "
 "are doomed!"
-msgstr ""
+msgstr "Ostuur, wi hebben keene Tied. Dat Water löppt bannig fix up, un wenn wi de Schippen bi de Küst bauen, worden se in de See unnergahn ehr se swemmen könen. Ick gloov, wi sünd verdoomt!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:444
 msgid "Ostur Seems Confident"
@@ -867,14 +867,14 @@ msgid ""
 " at the top of the mountain. I suggest we build the ships in this lake and "
 "wait until the island drowns beneath us. Then we can sail away. It is a bold"
 " plan, but I think it could work."
-msgstr ""
+msgstr "Een Fründ vun mi hett de Insel sülvst utförsket un mi vun eenem groten Meer vertellt, wat hoog in de Bargen liggt. Ick slaag vör, dat wi de Schippen in deesem Meer bauen un wachten, bit de Insel unnergahn is. Dann könen wi wegseilen. Dat is een driester Plaan, aver ick gloov, dat word so gahn."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:459
 msgid ""
 "Your red hair is a signal from the fire god. I will trust you and support "
 "your plan. Our survival lies in your hands now, Ostur."
-msgstr ""
+msgstr "Dien rodes Haar is een Teken vun de Füür-Gott. Ick will Jo trauen un dienen Plaan unnerstütten. Uns' Överleven liggt nu in dienen Hannen, Ostuur."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:462
@@ -883,7 +883,7 @@ msgid ""
 "logs and spidercloth for the construction there. Forget about everything "
 "else, we need those wares on top of the mountain before our warehouses are "
 "all swallowed by the sea."
-msgstr ""
+msgstr "Nu fix, wi bruken för Ostuur een Huus tegen de Meer, un wi bruken Planken, Boomstammen un Spinnenstoff, um Schippen to bauen. Vergeet all anner Dingen, wi bruken deese Waren hoog in de Bargen ehr uns' Kraamhusen all in dee See verswunnen sünd."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:469
 msgid "Jundlina is Relieved"
@@ -897,14 +897,14 @@ msgid ""
 "some wares too. And this rescue came just in time: Lutas is about to swallow"
 " the rest of this island, the water rises faster by the hour. But we can "
 "make our escape now and start over in some country farther away…"
-msgstr ""
+msgstr "Satuul wees Pries! Ostuur, de Schippebauer, hett 't daankregen. Wi hebben dree Schippen – un ick hebb nie hardere sehn – wat jüüst groot genoog sünd, um uns all to dragen. Un dat weer jüüst bi Tied: Luutas word nu bold de Insel kumpleet versluken, dat Water löppt alltied fixer up. Aver wi könen nu utnaihen un in eenem anner Land, wied weg, neei begünnen …"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:475
 msgid ""
 "I expect a long journey, but we will find the land of Satul in the end. This"
 " is what I promised my people. And myself."
-msgstr ""
+msgstr "De Fahrt word wull lang, aver am Enn worden wi dat Land vun Satuul finnen. Dat hebb ick mienen Lüü versprocken. Un mi sülvst."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:476
 msgid "Congratulations"

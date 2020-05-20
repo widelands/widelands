@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-08 13:20+0000\n"
+"PO-Revision-Date: 2020-05-18 09:29+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -515,7 +515,7 @@ msgid ""
 " side. A button next to the map name allows the host to change to a "
 "different map. Furthermore, the host is able to set a specific win "
 "condition, and finally can start the game as soon as all players are set up."
-msgstr "Puedes ver información sobre el mapa o partida salvada seleccionados en el lado derecho. Un botón junto al nombre del mapa permite al anfitrión cambiar a un mapa diferente. Adicionalmente, el anfitrión puede marcar una condición de victoria específica y finalmente iniciar la partida en cuanto todos los jugadores estén listos."
+msgstr "Puedes ver información sobre el mapa o partido guardado seleccionados en el lado derecho. Un botón junto al nombre del mapa permite al anfitrión cambiar a un mapa diferente. Adicionalmente, el anfitrión puede marcar una condición de victoria específica y finalmente iniciar el partido en cuanto todos los jugadores estén listos."
 
 #: ../../data/txts/tips/atlanteans.lua:4
 msgid ""
@@ -838,7 +838,7 @@ msgstr "Usa \"@name\" al principio de un mensaje de chat para enviarlo solo a es
 msgid ""
 "If the game should crash, don't worry! The game will be saved automatically "
 "so that you can reload it afterwards."
-msgstr "Si el juego se cierra inesperadamente, no te preocupes! La partida se guardará automáticamente para que puedas cargarla."
+msgstr "Si el juego se cierra inesperadamente, no te preocupes! El partido se guardará automáticamente para que puedas cargarla."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/singleplayer.lua:7
