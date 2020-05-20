@@ -17,6 +17,7 @@ install:
   - cmd: "set CC=%MINGWPATH%\\gcc.exe"
   - cmd: "set CXX=%MINGWPATH%\\g++.exe"
   # Update mirrors
+  - cmd: "bash --login -c \"pacman --noconfirm -Sy zstd bash\""
   - cmd: "bash --login -c \"pacman --noconfirm -Sy pacman pacman-mirrors\""
   # deleting broken repo from mirrorlist
   # - cmd: "bash --login -c \"sed -i 7d C:/msys64/etc/pacman.d/mirrorlist.msys\""
