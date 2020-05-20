@@ -23,15 +23,15 @@ install:
   # - cmd: "bash --login -c \"sed -i 7d C:/msys64/etc/pacman.d/mirrorlist.mingw32\""
   # - cmd: "bash --login -c \"sed -i 7d C:/msys64/etc/pacman.d/mirrorlist.mingw64\""
   # Workaround for https://github.com/msys2/MSYS2-packages/issues/1962
-  - cmd: "bash --login -c \"pacman -Su zstd --noconfirm\""
-  - cmd: "bash --login -c \"pacman -Syu pacman --noconfirm\""
+  #- cmd: "bash --login -c \"pacman -Su zstd --noconfirm\""
+  #- cmd: "bash --login -c \"pacman -Syu pacman --noconfirm\""
   # Update msys2 system (twice, first run does system packages)
-  - cmd: "bash --login -c \"pacman -Syu --noconfirm\""
+  #- cmd: "bash --login -c \"pacman -Syu --noconfirm\""
   # deleting broken repo from mirrorlist again
   # - cmd: "bash --login -c \"sed -i 7d C:/msys64/etc/pacman.d/mirrorlist.msys\""
   # - cmd: "bash --login -c \"sed -i 7d C:/msys64/etc/pacman.d/mirrorlist.mingw32\""
   # - cmd: "bash --login -c \"sed -i 7d C:/msys64/etc/pacman.d/mirrorlist.mingw64\""
-  - cmd: "bash --login -c \"pacman -Su --noconfirm\""
+  #- cmd: "bash --login -c \"pacman -Su --noconfirm\""
   # Installed required libs
   - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-ninja mingw-w64-%MINGWSUFFIX%-boost mingw-w64-%MINGWSUFFIX%-SDL2_ttf mingw-w64-%MINGWSUFFIX%-SDL2_mixer mingw-w64-%MINGWSUFFIX%-SDL2_image mingw-w64-%MINGWSUFFIX%-glbinding\""
 
