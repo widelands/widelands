@@ -41,7 +41,6 @@ branches:
 
 build_script:
   # copy modified libintl.h to solve an issue with boost
-  - cmd: patch %MINGWINCLUDE%\libintl.h %APPVEYOR_BUILD_FOLDER%\utils\appveyor\libintl.patch
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
   - cmd: md build
   - cmd: cd build
