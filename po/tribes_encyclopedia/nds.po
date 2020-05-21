@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-04 12:58+0000\n"
+"PO-Revision-Date: 2020-05-19 16:06+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -95,7 +95,7 @@ msgstr "»As wi ut uns' nejen Uppass na unnern in de Leegden kiekten, hebben wi 
 #: ../../data/tribes/buildings/warehouses/barbarians/headquarters/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "Ballad ‘The Battle of Kal’mavrath’ by Hakhor the Bard"
-msgstr ""
+msgstr "Lied »De Slacht vun Kaal-Maavrat« vun Haakor de Singer"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/helptexts.lua:3
@@ -119,7 +119,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘This stronghold made from blackwood and stones will be a hard nut to crack "
 "for them.’"
-msgstr ""
+msgstr "»Deese Börg ut Haartholt un Stenen is för se eene harde Nööt tum Knacken!«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/helptexts.lua:8
@@ -134,7 +134,7 @@ msgid ""
 "‘The log cabin was so small that two men could hardly live there. But we "
 "were young and carefree. We just relished our freedom and the responsibility"
 " as an outpost.’"
-msgstr ""
+msgstr "»De Boomstamm-Kamer weer so lütt, dat twee Lüü kuum daarin leven kunnen. Aver wi weren jung un sünner Sörg. Wi hebben eenfach uns' Freeiheid genoten un uns' Verantwoorden as eene Butenstee.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/helptexts.lua:9
@@ -292,7 +292,7 @@ msgid ""
 "‘Only after the last duck has been shot down<br>Only after the last deer has"
 " been put to death<br>Only after the last fish has been caught<br>Then will "
 "you find that spiders are not to be eaten.’"
-msgstr ""
+msgstr "»Eerst wenn de leste Aant daalscheten worden is,<br>Eerst wenn dat leste Reh doodmaakt worden is,<br>Eerst wenn de leste Fiss fangen worden is,<br>Dann sallst du marken, dat Spinnen nich tum Eten sünd.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/helptexts.lua:14
@@ -711,13 +711,13 @@ msgid ""
 "‘When the Barbarian was created,<br>this was the first thing that he "
 "stated:<br>“You want me fighting without fear?<br>Then you should create "
 "some beer!”’"
-msgstr ""
+msgstr "»As de Wille maakt is worden,<br>Dat weren siene eersten Woorden:<br>›Sall ick strieden as een Deer?<br>Dann giff mi fix een Glaske Beer!‹«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/brewery/helptexts.lua:14
 msgctxt "barbarians_building"
 msgid "First verse of the drinking song ‘Way of the Barbarian’"
-msgstr ""
+msgstr "Eerste Stroph vun de Drinklied »De Wille Aard«"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/brewery/helptexts.lua:19
@@ -765,13 +765,13 @@ msgid ""
 "sky.<br>He sets the fire, sees it smolder<br>The logs he carried on his "
 "shoulder.<br>Burnt down to just one single coal<br>This troubles much a "
 "burner’s soul.’"
-msgstr ""
+msgstr "»Wat maakt man wull een Holtköhlbranner?<br>He warket mehr as elkeen anner!<br>Bomen völe schicht he up,<br>bit tum hogen Hemel rup.<br>He brannt se an un sücht se swelen,<br>de he daar dragen hett, de Delen.<br>To eener Köhl blot daal dann brannt,<br>so word sien Halswark anerkannt.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/helptexts.lua:18
 msgctxt "barbarians_building"
 msgid "Song of the charcoal burners"
-msgstr ""
+msgstr "Lied vun de Holtköhlbranners"
 
 #. TRANSLATORS: Lore helptext for a coal mine building, part 1
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:4
@@ -844,13 +844,13 @@ msgid ""
 "‘See the crop fields from here to the horizons. They are a huge, heaving, "
 "golden sea.<br>Oh wheat, source of wealth, soul of beer, strength of our "
 "warriors!’"
-msgstr ""
+msgstr "»Kiek up de Felden vun hier bit tum Kimm.<br>Se sünd eene gülden-baldadig See.<br>Weit, Weit – Quell vun Riekdoom, Quell vun Beer, Quell vun Soldaten hör Macht!«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:9
 msgctxt "barbarians_building"
 msgid "Line from the harvesting song ‘The Wealth of the Fields’"
-msgstr ""
+msgstr "Rieg ut de Arntlied »De Riekdoom vun de Felden«"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:14
@@ -877,7 +877,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Frequent response of a barbarian fisherman,<br>often followed by an "
 "enjoyable brawl"
-msgstr ""
+msgstr "Wat Wille Fiskers faaktieden seggen;<br>daarna gifft dat faak eene dülle Haueree"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:13
@@ -1047,13 +1047,13 @@ msgstr "Wenn de Spiesen to rechter Tied ankomen, produzeert deeses Bargwark dör
 msgctxt "barbarians_building"
 msgid ""
 "‘The helmets forgéd by this smithy<br>Are widely known for looking pithy.’"
-msgstr ""
+msgstr "»De Helmen, wat dees' Smede maakt<br>Worden nie im Stried verlacht.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/helptexts.lua:11
 msgctxt "barbarians_building"
 msgid "Slogan of ‘Harrath’s Handsome Helmets’ in Al’thunran"
-msgstr ""
+msgstr "Motto vun »Harraat siene hellen Helms« in Alltunraan"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/helptexts.lua:16
@@ -1094,13 +1094,13 @@ msgstr "De Jäger wacht %s ehr he weer arbeidt."
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/helptexts.lua:6
 msgctxt "barbarians_building"
 msgid "‘Miner’s Delight: Pitta bread with fish or meat, comes with one beer.’"
-msgstr ""
+msgstr "»Bargwarkskeerl-Freide: Pitta-Brood mit Fiss of Fleesk, daarto een Beer.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/helptexts.lua:11
 msgctxt "barbarians_building"
 msgid "Chef’s recommendation in ‘The Singing Master Miner’"
-msgstr ""
+msgstr "Kock-Rekumderen im »Bargwarkskeerls-Sang«"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/helptexts.lua:16
@@ -1309,13 +1309,13 @@ msgstr "Wenn alle nödigen Waren to rechter Tied ankomen, produzeert deeses Huus
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘We open up roads and make houses from mountains.’"
-msgstr ""
+msgstr "»Wi maken Rüümte för Straten un Husen ut Bargen.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "Slogan of the stonemasons’ guild"
-msgstr ""
+msgstr "Motto vun de Flintslagers"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:13
@@ -1406,13 +1406,13 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Behind the next hill there might be wealth and happiness but also hostility"
 " and doom.<br>He who will not explore it commits the crime of stupidity.’"
-msgstr ""
+msgstr "»Achter de anner Höcht könen Riekdoom un Freide liggen, aver ok Feinde un Verdarv.<br>Well dat nich nakiekt, begaht de Undaad: Dummheid.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/helptexts.lua:12
 msgctxt "barbarians_building"
 msgid "Chat’Karuth<br>at the oath taking ceremony of the first scout troupe"
-msgstr ""
+msgstr "Schatt-Karut<br>bi de Inweei-Fier vun de eerste Bespejer-Klottje"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/helptexts.lua:6
@@ -1421,14 +1421,14 @@ msgid ""
 "‘When I saw the Saxnot for the first time, her majestic dragon head already "
 "looked up to the skies and the master was about to install the square "
 "sail.<br>It was the most noble ship I ever saw.’"
-msgstr ""
+msgstr "»As ick de ›Saxnot‹ tum eersten Maal sehn hebb, hett hör machtiger Draak al tu de Hemel kiekt un de Baukeelr hett jüüst dat Quadraat-Seil inbaut.<br>Dat weer dat mooiste Schipp, wat ick jemaals sehn hebb.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/helptexts.lua:13
 #: ../../data/tribes/buildings/warehouses/barbarians/port/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "Captain Thanlas the Elder,<br>Explorer"
-msgstr ""
+msgstr "Käpten Taanlas de Olle,<br>Utförsker"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/helptexts.lua:6
@@ -1436,25 +1436,25 @@ msgctxt "barbarians_building"
 msgid ""
 "‘From inferior looking rubble they form shiny gold and gleaming iron.<br>The"
 " smelters are real magicians among our craftsmen.’"
-msgstr ""
+msgstr "»Ut bemegen Stenen maken se glennen Gold un blinken Iesen.<br>De Smelters sünd de Künstenmakers unner uns Warklüü.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/helptexts.lua:12
 msgctxt "barbarians_building"
 msgid "Chat’Karuth<br>at the 5ᵗʰ conference of master craftsmen"
-msgstr ""
+msgstr "Schatt-Karut<br>bi de 5. Tosamenkunft vun de besten Warklüü"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/tavern/helptexts.lua:6
 msgctxt "barbarians_building"
 msgid "‘Fresh from the countryside: Bread, fish or game to go.’"
-msgstr ""
+msgstr "»Frisk ut de Lannen: Brood, Fiss of Fleesk tum Mitnehmen.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/tavern/helptexts.lua:11
 msgctxt "barbarians_building"
 msgid "Menu of the tavern ‘Ye Ol’ Bronze Axe’"
-msgstr ""
+msgstr "Menü vun de Kneipe »Tur ollen Koperext«"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/tavern/helptexts.lua:16
@@ -1490,7 +1490,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Fine cloth and jewelry mean nothing to a true Barbarian.<br>But a noble "
 "sail in the wind will please his eyes.’"
-msgstr ""
+msgstr "»Goder Stoff un Smuck sünd för eenen echten Willen nix weert.<br>Aver een godes Fock im Wind verbliedt siene Oogen.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:12
@@ -1498,7 +1498,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Khantarakh, ‘The Modern Barbarian Economy’,<br>9ᵗʰ cowhide ‘Seafaring and "
 "Conquest’"
-msgstr ""
+msgstr "Khantarakh, »De modeerne Wille Wirtschaft«, <br>9. Kohhuud »Seefahrt un Innehmen«"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:17
@@ -1535,7 +1535,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Then he hit the door with his ax and, behold,<br>the door only trembled, "
 "but the shaft of the ax burst into a thousand pieces.’"
-msgstr ""
+msgstr "»Dann hett he mit siener Ext tegen de Döör slagen, un jau,<br>de Döör hett blot bevert, aver de Ext-Greep is in dusend Delen splittert.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/helptexts.lua:12
@@ -1543,7 +1543,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Legend about a quarrel between the brothers Harthor and Manthor,<br>Manthor "
 "is said to be the inventor of blackwood"
-msgstr ""
+msgstr "Vertellsel vun eenem Stried tüsken de Bröörs Haartor un Manntor,<br>Manntor sall de Utfinner vun Haartholt sien"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/helptexts.lua:18
@@ -2990,7 +2990,7 @@ msgid ""
 "‘Steep like the slopes of Kal’mavrath, shiny like the most delicate armor "
 "and strong like our ancestors, that’s how the headquarters of Chat’Karuth "
 "presented itself to us.’"
-msgstr ""
+msgstr "»Stuuv as de Schüünten vun Kaal-Maavrat, mit Blinken as de beste Wapenrocken, machtig as uns' Vörvaders – so hett sik Schatt-Karut sien Raadhuus uns wiest.«"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/barbarians/headquarters/helptexts.lua:13
@@ -3011,7 +3011,7 @@ msgstr "Dat Raadhuus is dien wichtigstes Huus."
 msgctxt "barbarians_building"
 msgid ""
 "‘I prefer the planks of a ship to any fortress, no matter how strong it is.’"
-msgstr ""
+msgstr "»Ick maag de Planken vun eenem Schipp lever as elkeen Schanz, wo machtig se ok is.«"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/barbarians/port/helptexts.lua:13
