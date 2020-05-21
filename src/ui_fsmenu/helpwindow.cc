@@ -49,7 +49,7 @@ FullscreenHelpWindow::FullscreenHelpWindow(Panel* const parent,
 	Button* btn =
 	   new Button(this, "ok", width / 3, 0, width / 3, 0, UI::ButtonStyle::kWuiPrimary, _("OK"));
 
-	btn->sigclicked.connect(boost::bind(&FullscreenHelpWindow::clicked_ok, boost::ref(*this)));
+	btn->sigclicked.connect([this]() { clicked_ok(); });
 	btn->set_pos(Vector2i(btn->get_x(), height - margin - btn->get_h()));
 
 	std::string helptext;

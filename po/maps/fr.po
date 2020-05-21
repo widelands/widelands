@@ -4,6 +4,7 @@
 # Translators:
 # adrien vigneron <adrienvigneron@ml1.net>, 2015
 # Bouchard Renaud <renaud.bouchard@gmail.com>, 2014
+# Drisse Atek <dageneration@live.fr>, 2020
 # E V <edwvig@outlook.fr>, 2020
 # GunChleoc, 2016-2018
 # Samuël Weber/GwendalD <samuel.weber@normalesup.org>, 2017
@@ -18,8 +19,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-09 13:12+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
+"PO-Revision-Date: 2020-05-16 07:55+0000\n"
+"Last-Translator: Drisse Atek <dageneration@live.fr>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -338,11 +339,11 @@ msgstr "Astoria 2.R"
 
 #: ../../data/maps/Astoria 2.R.wmf/elemental:10
 msgid "Long, economic play in beautyfull land, try every player!!"
-msgstr ""
+msgstr "Long jeu économique dans un pays magnifique, essayez tous les joueurs !!\n "
 
 #: ../../data/maps/Astoria 2.R.wmf/elemental:9
 msgid "pbuczny@gmail.com – edited by Nordfriese"
-msgstr ""
+msgstr "pbuczny@gmail.com - édité par Nordfriese"
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
@@ -450,7 +451,7 @@ msgid ""
 " army. Use the terrain to your advantage - chop all trees and expand "
 "wherever you can; it's the only way to find all the precious farm spaces - "
 "suggested teams: red+orange+blue+violet"
-msgstr ""
+msgstr "Il y a beaucoup de terrain plat sur les montagnes. \nMalheureusement, la majeure partie est verticale. \nUtilisez judicieusement le petit espace de construction dont vous disposez. \nUne forteresse à l'embouchure d'un col étroit peut être un formidable obstacle pour une armée ennemie. Utilisez le terrain à votre avantage. \nCoupez tous les arbres pour vous étendre où vous le pouvez; c'est le seul moyen de trouver tous les précieux espaces agricoles. \néquipes suggérées: rouge + orange + bleu + violet"
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -464,7 +465,7 @@ msgstr "La beauté à couper le souffle de ces terres d'émeraude a attiré de n
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:8
 msgid "Escher_Goose_Fish"
-msgstr ""
+msgstr "Escher_Goose_Fish"
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:10
 msgid "Equal starting conditions for three players."
@@ -478,7 +479,7 @@ msgstr "v0.2"
 msgid ""
 "A huge europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
 "Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
-msgstr ""
+msgstr "Une immense carte de l'Europe. Bleu = Suède, Rouge = Italie, Jaune = Espagne, Vert = Turquie, Noir = Russie, Orange = Angleterre, Violet = France, Blanc = Pologne"
 
 #: ../../data/maps/Europa 1.1.wmf/elemental:8
 msgid "Europa 1.1"
@@ -712,7 +713,7 @@ msgstr "Il y a deux grandes questions qui se posent : qui a créé ce labyrinthe
 
 #: ../../data/maps/No challenge metal v2.wmf/elemental:8
 msgid "No metal challenge v2"
-msgstr ""
+msgstr "Challenge sans métal v2"
 
 #: ../../data/maps/No challenge metal v2.wmf/elemental:10
 msgid ""
@@ -721,7 +722,7 @@ msgid ""
 "of iron to kickstart your economy), so you have to rely on the 5% production"
 " of an empty mine. And you're still 1v6 (though of course you can remove "
 "some AI players to make it a bit easier). Good luck"
-msgstr ""
+msgstr "Cette carte est conçue comme un défi solo pour les joueurs très qualifiés qui trouvent le 1v6 contre l'IA trop facile. Le joueur bleu n'a pas de métal (sauf un peu de fer pour relancer votre économie), vous devez donc compter sur la production de 5% d'une mine vide. Et vous êtes toujours en 1v6 (bien que vous puissiez bien sûr supprimer certains joueurs IA pour le rendre un peu plus facile). Bonne chance\n "
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"

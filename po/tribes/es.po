@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-08 12:15+0000\n"
+"PO-Revision-Date: 2020-05-18 09:24+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -3595,19 +3595,19 @@ msgstr "Espino Amarillo (maduro)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:13
 msgid "Stink Shepherd’s Tree (tiny)"
-msgstr ""
+msgstr "Árbol de los pastores maloliente (minúsculo)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:40
 msgid "Stink Shepherd’s Tree (small)"
-msgstr ""
+msgstr "Árbol de los pastores maloliente (pequeño)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:67
 msgid "Stink Shepherd’s Tree (medium)"
-msgstr ""
+msgstr "Árbol de los pastores maloliente (mediano)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:94
 msgid "Stink Shepherd’s Tree (ripe)"
-msgstr ""
+msgstr "Árbol de los pastores maloliente (maduro)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:13
 msgid "Strawberries (tiny)"
@@ -3981,7 +3981,7 @@ msgstr "Sitios militares"
 
 #: ../../data/tribes/init.lua:624
 msgid "Finishing"
-msgstr ""
+msgstr "Finalizando"
 
 #: ../../data/tribes/preload.lua:15 ../../data/tribes/preload.lua:36
 #: ../../data/tribes/preload.lua:57 ../../data/tribes/preload.lua:78
@@ -4069,7 +4069,7 @@ msgstr "Descubrimiento"
 #: ../../data/tribes/scripting/starting_conditions/frisians/discovery.lua:13
 msgid ""
 "Start the game with three ships on the ocean and only a handful of supplies"
-msgstr "Empieza el partido con tres barcos en el océan y solo un pocom de mercancias"
+msgstr "Empieza el partido con tres barcos en el océan y solo un poquito de mercancías"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:11
@@ -4118,7 +4118,7 @@ msgstr "Mundo Nuevo"
 #: ../../data/tribes/scripting/starting_conditions/empire/new_world.lua:13
 #: ../../data/tribes/scripting/starting_conditions/frisians/new_world.lua:13
 msgid "Start the game with seven ships full of wares on the ocean"
-msgstr ""
+msgstr "Empieza el partido con siete barcos agobiados de mercancías en el océan"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:11
@@ -4137,14 +4137,14 @@ msgstr "Aldea Pobra"
 msgid ""
 "Start the game with just a warehouse and the bare minimum for bootstrapping "
 "an economy. Warning: the AI can't successfully start from this"
-msgstr ""
+msgstr "Empieza el partido con solo un almacén y el mínimo pelado para montar una economía. Aviso: la IA no puede empezar afortunada de esta condición"
 
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:45
 #: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:43
 #: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:44
 #: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:45
 msgid "Be careful"
-msgstr ""
+msgstr "Ten cuidado"
 
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:45
 #: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:43
@@ -4153,7 +4153,7 @@ msgstr ""
 msgid ""
 "You have only one iron for each tool you will need to start your economy. "
 "Make sure no unneeded tool is created."
-msgstr ""
+msgstr "Tienes solo un hierro para cada herramienta que necesitas para empezar tu economía. Asegura que no herramienta innecesaria sea generado."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/struggling_outpost.lua:11
@@ -4171,7 +4171,7 @@ msgstr "Puesto Bregado"
 msgid ""
 "Start the game with just your headquarters and very few wares for "
 "bootstrapping an economy. Warning: the AI can't successfully start from this"
-msgstr ""
+msgstr "Empieza el partido con solo tu cuartel general y un poquito de mercancías para montar una economía. Aviso: la IA no puede empezar afortunada de esta condición"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:11

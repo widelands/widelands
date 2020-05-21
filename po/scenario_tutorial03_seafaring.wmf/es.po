@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-07 21:14+0000\n"
+"PO-Revision-Date: 2020-05-15 12:23+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -553,7 +553,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:276
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:295
 msgid "Waterways"
-msgstr ""
+msgstr "Vías acuáticas"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:264
 msgid ""
@@ -606,7 +606,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:297
 msgid "Build a gold mine and waterways"
-msgstr ""
+msgstr "Construye una mina de oro y traza vías acuáticas"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:298
 msgid ""
