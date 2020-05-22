@@ -121,15 +121,16 @@ void Table<void*>::add_column(uint32_t const width,
 		// The title text can be empty.
 		c.btn = new Button(this, title, complete_width, 0, width, headerheight_, button_style_, title,
 		                   tooltip_string);
-		c.btn->sigclicked.connect([this]() { header_button_clicked(columns_.size()); });
+		const size_t col_index = columns_.size();
+		c.btn->sigclicked.connect([this, col_index]() { header_button_clicked(col_index); });
 		c.width = width;
 		c.alignment = alignment;
-		c.compare = [this](
-		   uint32_t a, uint32_t b) { return default_compare_string(columns_.size(), a, b); };
+		c.compare = [this, col_index](
+		   uint32_t a, uint32_t b) { return default_compare_string(col_index, a, b); };
 		columns_.push_back(c);
 		if (column_type == TableColumnType::kFlexible) {
 			assert(flexible_column_ == std::numeric_limits<size_t>::max());
-			flexible_column_ = columns_.size() - 1;
+			flexible_column_ = col_index;
 		}
 	}
 }

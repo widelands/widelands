@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-19 18:08+0000\n"
+"PO-Revision-Date: 2020-05-21 10:20+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -329,15 +329,15 @@ msgstr "Laajat maapalat ovat harvinaisia noilla pienillä saarilla. Priorisoi su
 
 #: ../../data/maps/Astoria 2.R.wmf/elemental:8
 msgid "Astoria 2.R"
-msgstr ""
+msgstr "Astoria 2.R"
 
 #: ../../data/maps/Astoria 2.R.wmf/elemental:10
 msgid "Long, economic play in beautyfull land, try every player!!"
-msgstr ""
+msgstr "Pitkä, taloudellinen peli kauniissa maassa, kokeile jokaista pelaajaa!!"
 
 #: ../../data/maps/Astoria 2.R.wmf/elemental:9
 msgid "pbuczny@gmail.com – edited by Nordfriese"
-msgstr ""
+msgstr "pbuczny@gmail.com – editoija Nordfriese"
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
@@ -459,7 +459,7 @@ msgstr "Nämä henkeä salpaavan kauniita smaragdisaaret ovat houkutelleet monia
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:8
 msgid "Escher_Goose_Fish"
-msgstr ""
+msgstr "Escher_Goose_Fish"
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:10
 msgid "Equal starting conditions for three players."
@@ -473,7 +473,7 @@ msgstr "v0.2"
 msgid ""
 "A huge europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
 "Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
-msgstr ""
+msgstr "Valtava eurooppakartta. Sininen = Ruotsi, Punainen = Italia, Keltainen = Espanja, Vihreä = Turkki, Musta = Venäjä, Oranssi = Englanti, Violetti = Ranska, Valkoinen = Puola"
 
 #: ../../data/maps/Europa 1.1.wmf/elemental:8
 msgid "Europa 1.1"
@@ -666,11 +666,11 @@ msgstr "Neljä heimoa taistelee karun alueen hallinnasta. Resurssit ovat pirstou
 msgid ""
 ">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go "
 "long, long way to conquere all the islands. Good luck!"
-msgstr ""
+msgstr ">Missä dat? Kaukana täältä.< [Porgy and Bess] Sinun täytyy kulkea hyvin pitkä matka valloittaaksesi kaikki saaret. Onnea matkaan!"
 
 #: ../../data/maps/Long, long v2.wmf/elemental:8 way
 msgid "Long, long way v2"
-msgstr ""
+msgstr "Hyvin kaukana v2"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
 msgid "Island Hopping"
