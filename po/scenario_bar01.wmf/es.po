@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-06 09:16+0000\n"
+"PO-Revision-Date: 2020-05-15 09:47+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -235,7 +235,7 @@ msgstr "Es posible, por supuesto, mejorar todas las minas a minas profundas inst
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:99
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:101
 msgid "Build a wood hardener"
-msgstr "COnstruye un endurecedor de madera"
+msgstr "Construye un endurecedor de madera"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:100
 msgid ""
