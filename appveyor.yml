@@ -33,7 +33,7 @@ install:
   - cmd: "bash --login -c \"pacman -Suuyy --nodeps --noconfirm\""
   # Installed required libs
   - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-ninja mingw-w64-%MINGWSUFFIX%-boost mingw-w64-%MINGWSUFFIX%-SDL2_ttf mingw-w64-%MINGWSUFFIX%-SDL2_mixer mingw-w64-%MINGWSUFFIX%-SDL2_image mingw-w64-%MINGWSUFFIX%-glew\""
-  - cmd: "bash --login -c \"pacman --noconfirm -U http://repo.msys2.org/msys/x86_64/mingw-w64-%MINGWSUFFIX%-harfbuzz-2.6.6-1-any.pkg.tar.zst\""
+  - cmd: "bash --login -c \"pacman --noconfirm -U http://repo.msys2.org/mingw/x86_64/mingw-w64-%MINGWSUFFIX%-harfbuzz-2.6.6-1-any.pkg.tar.zst\""
 
 shallow_clone: true
 
