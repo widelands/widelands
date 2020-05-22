@@ -651,6 +651,7 @@
 - updated innosetup file to reflect new Icu filenames (#3903)
 - gcc-10 compatibility (#3908)
 - Replaced all uses of boost::bind with lambda functions and added a codecheck rule to deprecate boost::bind() and boost::ref()
+- Added missing DLLs to appveyor builds (#3917)
 
 
 ### Other Issues
@@ -711,6 +712,7 @@
 - Add optional braces to ui_fsmenu (#3809)
 - Removing signal from warelist. (#3845): Removed some dead code, exit more cleanly in some cases, and be more verbose in regression tests. Fixes a GCC9-release regression test failure.
 - Cleanup SDL headers (#3743)
+- Fix table column index mismatch regression (#3915)
 
 
 ## Build 20
