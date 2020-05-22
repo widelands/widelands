@@ -186,18 +186,12 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                  _("Zoom"),
                  UI::Button::VisualState::kRaised,
                  UI::Button::ImageMode::kUnscaled) {
-	button_terrn.sigclicked.connect(
-	   boost::bind(&MiniMap::toggle, boost::ref(*this), MiniMapLayer::Terrain));
-	button_owner.sigclicked.connect(
-	   boost::bind(&MiniMap::toggle, boost::ref(*this), MiniMapLayer::Owner));
-	button_flags.sigclicked.connect(
-	   boost::bind(&MiniMap::toggle, boost::ref(*this), MiniMapLayer::Flag));
-	button_roads.sigclicked.connect(
-	   boost::bind(&MiniMap::toggle, boost::ref(*this), MiniMapLayer::Road));
-	button_bldns.sigclicked.connect(
-	   boost::bind(&MiniMap::toggle, boost::ref(*this), MiniMapLayer::Building));
-	button_zoom.sigclicked.connect(
-	   boost::bind(&MiniMap::toggle, boost::ref(*this), MiniMapLayer::Zoom2));
+	button_terrn.sigclicked.connect([this]() { toggle(MiniMapLayer::Terrain); });
+	button_owner.sigclicked.connect([this]() { toggle(MiniMapLayer::Owner); });
+	button_flags.sigclicked.connect([this]() { toggle(MiniMapLayer::Flag); });
+	button_roads.sigclicked.connect([this]() { toggle(MiniMapLayer::Road); });
+	button_bldns.sigclicked.connect([this]() { toggle(MiniMapLayer::Building); });
+	button_zoom.sigclicked.connect([this]() { toggle(MiniMapLayer::Zoom2); });
 
 	check_boundaries();
 

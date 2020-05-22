@@ -382,8 +382,8 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
 
 	add(&infotext_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
-	soldierpanel_.set_mouseover(boost::bind(&SoldierList::mouseover, this, _1));
-	soldierpanel_.set_click(boost::bind(&SoldierList::eject, this, _1));
+	soldierpanel_.set_mouseover([this](const Soldier* s) { mouseover(s); });
+	soldierpanel_.set_click([this](const Soldier* s) { eject(s); });
 
 	// We don't want translators to translate this twice, so it's a bit involved.
 	int w = UI::g_fh
@@ -422,8 +422,7 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
 			soldier_preference_.set_state(1);
 		}
 		if (can_act) {
-			soldier_preference_.changedto.connect(
-			   boost::bind(&SoldierList::set_soldier_preference, this, _1));
+			soldier_preference_.changedto.connect([this](int32_t a) { set_soldier_preference(a); });
 		} else {
 			soldier_preference_.set_enabled(false);
 		}

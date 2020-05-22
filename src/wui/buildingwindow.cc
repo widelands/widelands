@@ -204,8 +204,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 				   capsbuttons, "start_or_cancel_expedition", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 				   g_gr->images().get("images/wui/buildings/start_expedition.png"));
 				update_expedition_button(!pd->expedition_started());
-				expeditionbtn_->sigclicked.connect(
-				   boost::bind(&BuildingWindow::act_start_or_cancel_expedition, boost::ref(*this)));
+				expeditionbtn_->sigclicked.connect([this]() { act_start_or_cancel_expedition(); });
 				capsbuttons->add(expeditionbtn_);
 
 				expedition_canceled_subscriber_ =
@@ -230,8 +229,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 				      _("Continue") :
 				      /** TRANSLATORS: Stop/Continue toggle button for production sites. */
 				      _("Stop"));
-				stopbtn->sigclicked.connect(
-				   boost::bind(&BuildingWindow::act_start_stop, boost::ref(*this)));
+				stopbtn->sigclicked.connect([this]() { act_start_stop(); });
 				capsbuttons->add(stopbtn);
 
 				// Add a fixed width separator rather than infinite space so the
@@ -276,8 +274,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			UI::Button* destroybtn =
 			   new UI::Button(capsbuttons, "destroy", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 			                  g_gr->images().get(pic_bulldoze), _("Destroy"));
-			destroybtn->sigclicked.connect(
-			   boost::bind(&BuildingWindow::act_bulldoze, boost::ref(*this)));
+			destroybtn->sigclicked.connect([this]() { act_bulldoze(); });
 			capsbuttons->add(destroybtn);
 
 			requires_destruction_separator = true;
@@ -302,8 +299,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 				                        .header_font()
 				                        .as_font_tag(_("Returns:")) +
 				                     "<br>" + waremap_to_richtext(owner.tribe(), wares));
-				dismantlebtn->sigclicked.connect(
-				   boost::bind(&BuildingWindow::act_dismantle, boost::ref(*this)));
+				dismantlebtn->sigclicked.connect([this]() { act_dismantle(); });
 				capsbuttons->add(dismantlebtn);
 				requires_destruction_separator = true;
 			}
@@ -329,8 +325,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			toggle_workarea_ =
 			   new UI::Button(capsbuttons, "workarea", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 			                  g_gr->images().get("images/wui/buildings/toggle_workarea.png"));
-			toggle_workarea_->sigclicked.connect(
-			   boost::bind(&BuildingWindow::toggle_workarea, boost::ref(*this)));
+			toggle_workarea_->sigclicked.connect([this]() { toggle_workarea(); });
 
 			capsbuttons->add(toggle_workarea_);
 			configure_workarea_button();
@@ -341,14 +336,14 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			UI::Button* debugbtn =
 			   new UI::Button(capsbuttons, "debug", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 			                  g_gr->images().get(pic_debug), _("Show Debug Window"));
-			debugbtn->sigclicked.connect(boost::bind(&BuildingWindow::act_debug, boost::ref(*this)));
+			debugbtn->sigclicked.connect([this]() { act_debug(); });
 			capsbuttons->add(debugbtn);
 		}
 
 		UI::Button* gotobtn =
 		   new UI::Button(capsbuttons, "goto", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 		                  g_gr->images().get("images/wui/menus/goto.png"), _("Center view on this"));
-		gotobtn->sigclicked.connect(boost::bind(&BuildingWindow::clicked_goto, boost::ref(*this)));
+		gotobtn->sigclicked.connect([this]() { clicked_goto(); });
 		capsbuttons->add(gotobtn);
 
 		if (!requires_destruction_separator) {
@@ -375,8 +370,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			}
 		};
 
-		helpbtn->sigclicked.connect(
-		   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(registry)));
+		helpbtn->sigclicked.connect([&registry]() { registry.toggle(); });
 		capsbuttons->add(helpbtn);
 	}
 }

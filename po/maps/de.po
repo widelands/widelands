@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-04-27 11:11+0000\n"
+"PO-Revision-Date: 2020-05-14 14:48+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -329,7 +329,7 @@ msgid ""
 "Large plots are rare on those small islands. Prioritize construction of "
 "large buildings on them. Sometimes you will need big military buildings to "
 "expand all the way to the next island. The AI will perform poorly."
-msgstr "Große Bauflächen sind auf diesen kleinen Inseln selten. Setze auf diese Punkte vorrangig große Gebäude. Manchmal brauchst du große Militärgebäude um zur nächsten Insel vorzudringen. Die KI hat auf dieser Karte große Probleme."
+msgstr "Große Bauplätze sind auf diesen kleinen Inseln selten. Setze auf diese Punkte vorrangig große Gebäude. Manchmal brauchst du große Militärgebäude um zur nächsten Insel vorzudringen. Die KI hat auf dieser Karte große Probleme."
 
 #: ../../data/maps/Astoria 2.R.wmf/elemental:8
 msgid "Astoria 2.R"
@@ -596,7 +596,7 @@ msgstr "Nach dem Herbst kam der Winter. Manche Dinge sind gefroren, doch nicht d
 #: ../../data/maps/Ice_wars.wmf/elemental:11
 #: ../../data/maps/Sun_of_Fire.wmf/elemental:11
 msgid "Start positions are clockwise"
-msgstr "Die Startpositionen sind im Uhrzeigersinn verteilt"
+msgstr "Die Ausgangspositionen sind im Uhrzeigersinn verteilt"
 
 #: ../../data/maps/Islands_at_War.wmf/elemental:8
 msgid "Islands at War"

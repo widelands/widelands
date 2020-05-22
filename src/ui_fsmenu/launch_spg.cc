@@ -114,8 +114,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 	win_condition_dropdown_.set_size(select_map_.get_w(), win_condition_dropdown_.get_h());
 
 	title_.set_text(_("Launch Game"));
-	select_map_.sigclicked.connect(
-	   boost::bind(&FullscreenMenuLaunchSPG::select_map, boost::ref(*this)));
+	select_map_.sigclicked.connect([this]() { select_map(); });
 
 	// We want to redesign this screen, so we won't bother defining a font size in the style manager.
 	const int small_scale_factor = scale_factor() * 4 / 5;
@@ -134,8 +133,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 		   new UI::Button(this, "switch_to_position", get_w() / 100, y += buth_, get_h() * 17 / 500,
 		                  get_h() * 17 / 500, UI::ButtonStyle::kFsMenuSecondary, player_image,
 		                  _("Switch to position"));
-		pos_[i]->sigclicked.connect(
-		   boost::bind(&FullscreenMenuLaunchSPG::switch_to_position, boost::ref(*this), i));
+		pos_[i]->sigclicked.connect([this, i]() { switch_to_position(i); });
 		players_[i] = new PlayerDescriptionGroup(
 		   this, get_w() / 25, y, get_w() * 16 / 25, get_h() * 17 / 500 * 2, settings, i);
 		y += buth_ / 1.17;

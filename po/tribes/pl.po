@@ -8,13 +8,14 @@
 # Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
 # Jacek Wolszczak <shutdownrunner@o2.pl>, 2008
 # tombox <wptom@wp.pl>, 2019
+# tombox <wptom@wp.pl>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-04-23 19:22+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"PO-Revision-Date: 2020-05-16 00:10+0000\n"
+"Last-Translator: tombox <wptom@wp.pl>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3928,7 +3929,7 @@ msgstr ""
 
 #: ../../data/tribes/init.lua:221
 msgid "Atlantean workers"
-msgstr ""
+msgstr "Pracownicy atlantydzcy"
 
 #: ../../data/tribes/init.lua:254
 msgid "Barbarian workers"
@@ -3948,7 +3949,7 @@ msgstr ""
 
 #: ../../data/tribes/init.lua:391
 msgid "Atlantean productionsites"
-msgstr ""
+msgstr "Atlantydzkie zakłady produkcyjne"
 
 #: ../../data/tribes/init.lua:429
 msgid "Barbarian productionsites"
