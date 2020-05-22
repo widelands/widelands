@@ -17,7 +17,6 @@ install:
   - cmd: "set CC=%MINGWPATH%\\gcc.exe"
   - cmd: "set CXX=%MINGWPATH%\\g++.exe"
   # Update mirrors
-  # - cmd: "bash --login -c \"pacman --noconfirm -U http://repo.msys2.org/msys/x86_64/pacman-5.2.1-6-x86_64.pkg.tar.xz\""
   - cmd: "bash --login -c \"pacman --noconfirm -Sy pacman pacman-mirrors\""
   # deleting broken repo from mirrorlist
   # - cmd: "bash --login -c \"sed -i 7d C:/msys64/etc/pacman.d/mirrorlist.msys\""
@@ -38,7 +37,6 @@ shallow_clone: true
 branches:
   only:
     - master
-    - appveyor_cleanup
 
 build_script:
   # copy modified libintl.h to solve an issue with boost
