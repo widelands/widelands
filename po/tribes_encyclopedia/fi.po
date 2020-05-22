@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-16 20:09+0000\n"
+"PO-Revision-Date: 2020-05-21 10:25+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -3690,7 +3690,7 @@ msgstr "Ctrl + Page Up"
 
 #: ../../data/tribes/scripting/help/controls.lua:48
 msgid "Increase game speed by 10x"
-msgstr ""
+msgstr "Nopeuta pelin kulkua 10x"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -3701,29 +3701,29 @@ msgstr "Ctrl + Page Down"
 
 #: ../../data/tribes/scripting/help/controls.lua:50
 msgid "Decrease game speed by 10x"
-msgstr ""
+msgstr "Hidastaapelin kulkua 10x"
 
 #: ../../data/tribes/scripting/help/controls.lua:52
 msgid "Increase game speed by 0.25x"
-msgstr ""
+msgstr "Nopeuta pelin kulkua 0.25x"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:52
 msgctxt "hotkey"
 msgid "Shift + Page Up"
-msgstr ""
+msgstr "Shift + Page Up"
 
 #: ../../data/tribes/scripting/help/controls.lua:54
 msgid "Decrease game speed by 0.25x"
-msgstr ""
+msgstr "Hidastaapelin kulkua 0.25x"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:54
 msgctxt "hotkey"
 msgid "Shift + Page Down"
-msgstr ""
+msgstr "Shift + Page Down"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -3787,33 +3787,33 @@ msgstr "Merenkulkutilastot päälle/pois"
 #: ../../data/tribes/scripting/help/controls.lua:78
 msgctxt "hotkey"
 msgid "Arrow keys"
-msgstr ""
+msgstr "Nuolinäppäimet"
 
 #: ../../data/tribes/scripting/help/controls.lua:78
 msgid "Move the map"
-msgstr ""
+msgstr "Siirrä karttaa"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:80
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
-msgstr ""
+msgstr "Ctrl + Nuolinäppäimet"
 
 #: ../../data/tribes/scripting/help/controls.lua:80
 msgid "Move the map fast"
-msgstr ""
+msgstr "Siirrä karttaa nopeasti"
 
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgid "Move the map slowly"
-msgstr ""
+msgstr "Siirrä karttaa hitaasti"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
-msgstr ""
+msgstr "Shift + Nuolinäppäimet"
 
 #: ../../data/tribes/scripting/help/controls.lua:84
 msgid "Center main mapview on starting location"
@@ -3851,22 +3851,22 @@ msgstr "Mene aiemmin muistiin painettuun paikkaan"
 #: ../../data/tribes/scripting/help/controls.lua:89
 msgctxt "hotkey"
 msgid ", (comma)"
-msgstr ""
+msgstr ", (pilkku)"
 
 #: ../../data/tribes/scripting/help/controls.lua:89
 msgid "Go to previous location"
-msgstr ""
+msgstr "Mene edelliseen kohteeseen"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:91
 msgctxt "hotkey"
 msgid ". (period)"
-msgstr ""
+msgstr ". (piste)"
 
 #: ../../data/tribes/scripting/help/controls.lua:91
 msgid "Go to next location"
-msgstr ""
+msgstr "Mene seuraavaan kohteeseen"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
