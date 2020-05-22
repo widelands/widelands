@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-19 15:29+0000\n"
+"PO-Revision-Date: 2020-05-20 19:36+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -1338,7 +1338,7 @@ msgstr "ERROR: %s\n"
 msgid ""
 "Widelands won't work because we were unable to detect the shading language "
 "version."
-msgstr ""
+msgstr "Widelands no va a functionar porque no podemos detectar la versión del lenguaje de sombreado."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1347,7 +1347,7 @@ msgstr ""
 msgid ""
 "There is an unknown problem with reading the information from the graphics "
 "driver."
-msgstr ""
+msgstr "Hace un problema desconocido con encontrar las informaciónes del controlador de la tarjeta gráfica."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1355,7 +1355,7 @@ msgstr ""
 #: ../../src/graphic/gl/initialize.cc:249
 #: ../../src/graphic/gl/initialize.cc:268
 msgid "Widelands won’t work because your graphics driver is too old."
-msgstr ""
+msgstr "Widelands no va a functionar porque tu controlador de la tarjeta gráfica es demasiado viejo."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1363,7 +1363,7 @@ msgstr ""
 #: ../../src/graphic/gl/initialize.cc:252
 #: ../../src/graphic/gl/initialize.cc:271
 msgid "The shading language needs to be version 1.20 or newer."
-msgstr ""
+msgstr "El lenguaje de sombreado tengo que ser 1.20 o mas actual"
 
 #. * TRANSLATORS: Part of tooltip entry for characters in illegal filenames.
 #. replaces tha
@@ -1572,7 +1572,7 @@ msgstr "El archivo ‘%s’ había restaurado de copia de seguridad."
 
 #: ../../src/logic/generic_save_handler.cc:293
 msgid "An unexpected error occurred:"
-msgstr ""
+msgstr "Un error inesperado ha occurido:"
 
 #: ../../src/logic/map.h:165
 msgid "No description defined"
@@ -2505,7 +2505,7 @@ msgstr "ERROR: %s"
 
 #: ../../src/network/internet_gaming.cc:712
 msgid "An unexpected error message has been received about command %1%: %2%"
-msgstr ""
+msgstr "Un mensaje de error inesperado fue recibido de instrucción %1% :%2%"
 
 #: ../../src/network/internet_gaming.cc:725
 #, c-format
@@ -3451,7 +3451,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:225
 msgid "Display game time in the top left corner"
-msgstr ""
+msgstr "Mostrar el tiempo de juego al lado superior izquierdo "
 
 #: ../../src/ui_fsmenu/options.cc:236
 msgid "Interface"
@@ -4806,7 +4806,7 @@ msgstr "Contraseña:"
 
 #: ../../src/wui/login_box.cc:42
 msgid "Log in to a registered account."
-msgstr ""
+msgstr "Iniciar sesión a una cuenta registrada."
 
 #: ../../src/wui/login_box.cc:47
 #, c-format
