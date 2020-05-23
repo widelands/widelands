@@ -290,6 +290,7 @@
 - Removed `return=no_stats` from productionsite programs (#3865)
 - Barbarian Poor Hamlet fix (#3888): Changed tool order in barbarian metal workshop
 - Fixes issue #3869: No training in camp for Empire (#3871)
+- Refactor Ship Scheduling (#3857): Reimplements the new planning-ahead shipping algorithm
 
 
 ### User Interface
@@ -486,6 +487,7 @@
 - Escape richtext in editor info tool (#3798): Fixes broken info tool texts when the map description or author contains '<' or '>'
 - Suggested teams truncated (#3839): Set suggested teams box width to correct calculated parent width and remove superfluous `set_size()`
 - Restrict waterway length limit (#3842): Show a warning when the waterway length limit is set to > 20 in the editor map options
+- Fix editor resize tool (#3850): Reimplements the map's `resize()` function
 
 
 ### Graphics Engine
@@ -652,6 +654,7 @@
 - gcc-10 compatibility (#3908)
 - Replaced all uses of boost::bind with lambda functions and added a codecheck rule to deprecate boost::bind() and boost::ref()
 - Added missing DLLs to appveyor builds (#3917)
+- Appveyor cleanup (#3919)
 
 
 ### Other Issues
