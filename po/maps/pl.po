@@ -7,6 +7,7 @@
 # Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
 # Jacek Wolszczak <shutdownrunner@o2.pl>, 2008
 # Jakub Magnowski <qoiutek@gmail.com>, 2018
+# Niektóry <niektory@gmail.com>, 2020
 # tombox <wptom@wp.pl>, 2016,2018-2019
 # tombox <wptom@wp.pl>, 2015
 # tombox <wptom@wp.pl>, 2020
@@ -14,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-16 10:29+0000\n"
-"Last-Translator: tombox <wptom@wp.pl>\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-05-22 19:05+0000\n"
+"Last-Translator: Niektóry <niektory@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -219,6 +220,10 @@ msgid ""
 "land on a green, Mediterranean island, looking like paradise. Overjoyed, "
 "they set out to explore this new living space."
 msgstr "Wreszcie statek został naprawiony, więc Lucjusz i jego ludzie wyruszyli w poszukiwaniu dobrego miejsca na nowy początek. Kilka dni później wylądowali na zielonej, śródziemnomorskiej wyspie, wyglądającej niczym raj. Szczęśliwi ruszyli poznawać swój nowy dom."
+
+#: ../../data/campaigns/emp03.wmf/elemental:8
+msgid "Neptune’s Revenge"
+msgstr "Zemsta Neptuna"
 
 #: ../../data/campaigns/emp03.wmf/elemental:10
 msgid ""
