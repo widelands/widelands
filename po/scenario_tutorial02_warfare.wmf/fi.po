@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-19 18:02+0000\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-05-23 04:19+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -562,14 +562,14 @@ msgstr "Hyvin tehty. Nyt tiedät kuinka vetää sotilaasi takaisin paikoista, jo
 msgid ""
 "Your fortress is already quite strong and conquers a lot of space. But there"
 " is an even bigger building: the citadel."
-msgstr "Linnoituksesi on jo melko vahva ja valloittaa paljon tilaa. Mutta on olemassa vielä suurempi rakennus: kastelli."
+msgstr "Linnoituksesi on jo melko vahva ja valloittaa paljon tilaa. Mutta on olemassa vielä suurempi rakennus: sitadelliksi."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:240
 msgid ""
 "Citadels can’t be built directly. Instead, you’ll have to construct a "
 "fortress first and then enhance it to a citadel. To do so, click on the "
 "fortress, then choose the ‘Enhance to Citadel’ button."
-msgstr "Kastelleja ei voi suoraan rakentaa. Sen sijaan sinun täytyy tehdä ensin linnoitus ja sitten laajentaa se kastelliksi. Tehdäksesi sellaisen klikkaa linnoitusta ja sitten valitse 'Laajenna Kastelliksi' painike."
+msgstr "Kastelleja ei voi suoraan rakentaa. Sen sijaan sinun täytyy tehdä ensin linnoitus ja sitten laajentaa se kastelliksi. Tehdäksesi sellaisen klikkaa linnoitusta ja sitten valitse 'Laajenna Sitadelliksi' painike."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:241
 msgid ""
@@ -580,15 +580,15 @@ msgstr "Sotilaasi poistuvat linnoituksesta, kun rakentaminen alkaa. Se tarkoitta
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:242
 msgid "Enhance your fortress to a citadel now."
-msgstr "Laajenna linnoituksesi nyt kastelliksi."
+msgstr "Laajenna linnoituksesi nyt sitadelliksi."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:250
 msgid "Enhance your fortress to a citadel"
-msgstr "Laajenn linnoituksesi kastelliksi"
+msgstr "Laajenn linnoituksesi sitadelliksi"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:251
 msgid "Enhance your fortress to a mighty citadel."
-msgstr "Laajenna linnoituksesi mahtavaksi valtavaksi kastelliksi."
+msgstr "Laajenna linnoituksesi mahtavaksi valtavaksi sitadelliksi."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:252
 msgid ""
@@ -596,7 +596,7 @@ msgid ""
 "the Barbarians can build. It also costs a lot of resources and takes a long "
 "time to build. It is most suited to guard strategically important points "
 "like constricted points or mountains."
-msgstr "Kastelli voi majoittaa 12 sotilasta ja se on kaikkein suurin sotilasrakennus, minkä Barbaarit voivat rakentaa. Se on kaikkein sopivin suojelemaan strategisesti tärkeitä paikkoja kuten ahtaissa paikoissa ja vuorilla."
+msgstr "Sitadelli voi majoittaa 12 sotilasta ja se on kaikkein suurin sotilasrakennus, minkä Barbaarit voivat rakentaa. Se on kaikkein sopivin suojelemaan strategisesti tärkeitä paikkoja kuten ahtaissa paikoissa ja vuorilla."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:259
 msgid "Defeat your Enemy"
@@ -613,7 +613,7 @@ msgid ""
 "they took away a part of our land? And our lumberjack has now lost his place"
 " of work. This is what I was talking about. Let’s take our land back and "
 "defeat the enemy!"
-msgstr "Loistavaa työtä, kastelli on valmistunut. Mutta mikä tuo on? Vihollisheimo on asettunut aivan viereemme sillä aikaa kun kastellimme oli rakenteilla! Näetkö kuinka he kaappasivat osan maastamme? Ja meidän puunhakkaaja on nyt menettänyt työpaikkansa. Tämä on juuri sitä mistä puhuin. Otetaampas maamme takaisin ja kukistetaan vihollinen."
+msgstr "Loistavaa työtä, sitadelli on valmistunut. Mutta mikä tuo on? Vihollisheimo on asettunut aivan viereemme sillä aikaa kun sitadellimme oli rakenteilla! Näetkö kuinka he kaappasivat osan maastamme? Ja meidän puunhakkaaja on nyt menettänyt työpaikkansa. Tämä on juuri sitä mistä puhuin. Otetaampas maamme takaisin ja kukistetaan vihollinen."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:263
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:274

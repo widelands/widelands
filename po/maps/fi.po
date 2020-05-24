@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-21 10:20+0000\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-05-23 03:41+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -217,6 +217,10 @@ msgid ""
 "land on a green, Mediterranean island, looking like paradise. Overjoyed, "
 "they set out to explore this new living space."
 msgstr "Lopulta laiva korjattiin, joten Lutius ja hänen kansansa palasivat etsimään hyvää paikkaa uuden elämän aloittamiselle. Vain muutama pävä myöhemmin he rantautuvat vihreälle, Välimeren saarelle, joka näyttää paratiisilta. Ikionnellisena he ryhtyivät tutkimaan tätä uutta asuinpaikkaa."
+
+#: ../../data/campaigns/emp03.wmf/elemental:8
+msgid "Neptune’s Revenge"
+msgstr "Neptunuksen Kosto"
 
 #: ../../data/campaigns/emp03.wmf/elemental:10
 msgid ""
