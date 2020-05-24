@@ -158,7 +158,7 @@
 
 
 ### AI
-- Many rounds of AI training
+- Many hundreds of rounds of AI training
 - Performance improvements
 - AI is now able to adopt to scenarios to a certain extent
 - Implemented AI hints for workers
@@ -180,9 +180,6 @@
   - implemented a worker management for AI Productionsites and mines.
   - added a malus for unoccupied sites to the build decisions.
   - some small improvements for upgradehandling of buildings
-- About 100 rounds of training
-- Results of about 100 rounds of training
-- Used crude percent from AI for performance statistics strineg in productionsites
 - Added 1 empire toolsmithy to basic economy
 - Added barbarian charcoal kiln to basic economy
 - Allow ware preciousness of 50 in AI hints. (#3725)
@@ -194,9 +191,7 @@
   - Fix an issue where trainingsite proportion was not taken into account
     when upgrading a trainingsite
   - Attempt to fix Ai unnecessary dismantling Militarysites
-- about 90 rounds of training
 - Fixed bugs in the AI's attack decision algorithm and exposed some weighting factors to the genetic algorithm (#3873)
-- result of about 120 rounds of training (#3906)
 - preventing zero division in Check_building_necesity (#3910)
 
 
@@ -228,15 +223,15 @@
   "built_over_immovable" = <immovable attribute>
 - Fixed bug #1642882: Port should clear enough land to build
 - Fixed bug #1827033: Fix an assert fail because of nullptr destinations in the shipping algorithm
-- Change Barbarian evade increase per level from 15 to 16.
-- Make Empire Piggery work 20% faster
-- Empire Vineyards plant a bit faster
-- Made piggeries work as fast as donkeybreeders
 - Tweak trainingsites' sleep/work cycle. Split animation times in half where possible to make the screen less "noisy".
 - New planning-ahead ship scheduling algorithm (#3483): Redesigned ship transport algorithm
 - When enhancing constructionsite, soldier and inptqueue capacities are subtracted instead of preserved (#3593)
 - Ferry (#3481): Rowboats to transport wares over streams
 - Balancing tweaks:
+  - Change Barbarian evade increase per level from 15 to 16.
+  - Make Empire Piggery work 20% faster
+  - Empire Vineyards plant a bit faster
+  - Made piggeries work as fast as donkeybreeders
   - Sped up empire vineyard to deliver approx every 40 secs
   - Increased basic amount of vineyards to 2
   - Made empire weaving mill and weapon smith medium buildings
@@ -431,6 +426,7 @@
   - Handle quick navigation with numpad keys
 - Fix visual glitches and division by zero in WuiPlotArea (#3838)
 - Fix text alignment problem (#3854)
+- Use crude percent from AI for performance statistics string in productionsites
 
 
 ### Internationalization
@@ -655,8 +651,7 @@
 - updated innosetup file to reflect new Icu filenames (#3903)
 - gcc-10 compatibility (#3908)
 - Replaced all uses of boost::bind with lambda functions and added a codecheck rule to deprecate boost::bind() and boost::ref()
-- Added missing DLLs to appveyor builds (#3917)
-- Appveyor cleanup (#3919)
+- Several AppVeyor/MSYS2 build environment fixes (#3917, #3919)
 
 
 ### Other Issues
