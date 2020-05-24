@@ -29,6 +29,7 @@
 - Added 'X' signpost to frisian empty mine anims (#3676)
 - Create spritesheets for trees (#3702)
 - Spritesheets & MipMaps for Barbarian workers (#3779)
+- Fix recycling center hotspot (#3922)
 
 
 ### Sounds and Music
@@ -476,6 +477,7 @@
 - Sphinx documentation: Corrected typo in documentation of PlayerBase::get_workers() method (#3781)
 - Immovable program documentation (#3829)
 - Fix duplicated ware help entries (#3889)
+- Add missing include in building_help.lua (#3924)
 
 
 ### Editor
