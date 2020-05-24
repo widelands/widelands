@@ -21,8 +21,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-15 13:50+0000\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-05-22 19:45+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -861,7 +861,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:9
 msgctxt "barbarians_building"
 msgid "Line from the harvesting song ‘The Wealth of the Fields’"
-msgstr ""
+msgstr "Línea de la canción de cosecha ‘El Valor de los Campos’"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:14
@@ -2171,7 +2171,7 @@ msgctxt "frisians_building"
 msgid ""
 "No frost, no heat; no rain, no draught; no rats, no locusts; naught can "
 "destroy my harvest."
-msgstr ""
+msgstr "Ni helada, ni calor; ni lluvia, ni aridez; ni ratas, ni cigarrónes; ningun puede destrozar mi cosecha."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/farm/helptexts.lua:11
@@ -3111,7 +3111,7 @@ msgstr ""
 #: ../../data/tribes/immovables/cornfield/harvested/helptexts.lua:4
 #: ../../data/tribes/immovables/wheatfield/harvested/helptexts.lua:4
 msgid "This field has been harvested."
-msgstr ""
+msgstr "Este campo esta cosechado."
 
 #. TRANSLATORS: Helptext for a field
 #: ../../data/tribes/immovables/blackrootfield/medium/helptexts.lua:4
@@ -3121,21 +3121,21 @@ msgstr ""
 #: ../../data/tribes/immovables/wheatfield/medium/helptexts.lua:4
 #: ../../data/tribes/immovables/wheatfield/small/helptexts.lua:4
 msgid "This field is growing."
-msgstr ""
+msgstr "Este campo esta creciendo."
 
 #. TRANSLATORS: Helptext for a field
 #: ../../data/tribes/immovables/blackrootfield/ripe/helptexts.lua:4
 #: ../../data/tribes/immovables/cornfield/ripe/helptexts.lua:4
 #: ../../data/tribes/immovables/wheatfield/ripe/helptexts.lua:4
 msgid "This field is ready for harvesting."
-msgstr ""
+msgstr "Este campo esta presto a cosechar."
 
 #. TRANSLATORS: Helptext for a field
 #: ../../data/tribes/immovables/blackrootfield/tiny/helptexts.lua:4
 #: ../../data/tribes/immovables/cornfield/tiny/helptexts.lua:4
 #: ../../data/tribes/immovables/wheatfield/tiny/helptexts.lua:4
 msgid "This field has just been planted."
-msgstr ""
+msgstr "Este campo esta justamente plantado."
 
 #. TRANSLATORS: Helptext for a grapevine
 #: ../../data/tribes/immovables/grapevine/medium/helptexts.lua:4
@@ -3146,7 +3146,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for a grapevine
 #: ../../data/tribes/immovables/grapevine/ripe/helptexts.lua:4
 msgid "This grapevine is ready for harvesting."
-msgstr ""
+msgstr "Esta vid esta presto a cosechar."
 
 #. TRANSLATORS: Helptext for a grapevine
 #: ../../data/tribes/immovables/grapevine/tiny/helptexts.lua:4
@@ -3157,17 +3157,17 @@ msgstr ""
 #: ../../data/tribes/immovables/reedfield/medium/helptexts.lua:4
 #: ../../data/tribes/immovables/reedfield/small/helptexts.lua:4
 msgid "This reed field is growing."
-msgstr ""
+msgstr "Este campo de junco esta creciendo."
 
 #. TRANSLATORS: Helptext for a reed field
 #: ../../data/tribes/immovables/reedfield/ripe/helptexts.lua:4
 msgid "This reed field is ready for harvesting."
-msgstr ""
+msgstr "Este campo de junco esta presto a cosechar."
 
 #. TRANSLATORS: Helptext for a reed field
 #: ../../data/tribes/immovables/reedfield/tiny/helptexts.lua:4
 msgid "This reed field has just been planted."
-msgstr ""
+msgstr "Este campo de junco esta justamente plantado."
 
 #. TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably want to lose the blank space here.
@@ -3696,7 +3696,7 @@ msgstr "Ctrl + Re. Pág."
 
 #: ../../data/tribes/scripting/help/controls.lua:48
 msgid "Increase game speed by 10x"
-msgstr ""
+msgstr "Aumentar la velocidad del juego en 10x"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -3707,11 +3707,11 @@ msgstr "Ctrl + Av. Pág."
 
 #: ../../data/tribes/scripting/help/controls.lua:50
 msgid "Decrease game speed by 10x"
-msgstr ""
+msgstr "Reducir la velocidad del juego en 10x"
 
 #: ../../data/tribes/scripting/help/controls.lua:52
 msgid "Increase game speed by 0.25x"
-msgstr ""
+msgstr "Aumentar la velocidad del juego en 0.25x"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -3722,7 +3722,7 @@ msgstr "Shift + Re. Pág. "
 
 #: ../../data/tribes/scripting/help/controls.lua:54
 msgid "Decrease game speed by 0.25x"
-msgstr ""
+msgstr "Reducir la velocidad del juego en 0.25x"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -4154,7 +4154,7 @@ msgstr "%1% y %2%"
 
 #: ../../data/tribes/scripting/help/immovable_help.lua:48
 msgid "Requirements"
-msgstr ""
+msgstr "Exigencias"
 
 #: ../../data/tribes/scripting/help/immovable_help.lua:59
 msgid "Preferred Terrains"
