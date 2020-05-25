@@ -133,7 +133,7 @@ macro(_common_compile_tasks)
 
   if(ARG_USES_SDL2_TTF)
     wl_include_system_directories(${NAME} ${SDL2_TTF_INCLUDE_DIR})
-    target_link_libraries(${NAME} "-static" SDL2::TTF freetype bz2 graphite2 harfbuzz zstd freetype rpcrt4)
+    target_link_libraries(${NAME} "-static" SDL2::TTF freetype bz2 graphite2 usp10 harfbuzz zstd freetype rpcrt4)
   endif()
 
   if (ARG_USES_Intl)
