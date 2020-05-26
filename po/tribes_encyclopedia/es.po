@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-05-22 19:45+0000\n"
+"PO-Revision-Date: 2020-05-25 09:15+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -3627,7 +3627,7 @@ msgstr "Seleccionar un rango de entradas"
 #: ../../data/tribes/scripting/help/controls.lua:30
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr "Mayús + Click"
+msgstr "Shift + Clic"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -3804,7 +3804,7 @@ msgstr "Mover el mapa"
 #: ../../data/tribes/scripting/help/controls.lua:80
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
-msgstr ""
+msgstr "Ctrl + Teclas de flecha"
 
 #: ../../data/tribes/scripting/help/controls.lua:80
 msgid "Move the map fast"
@@ -3819,7 +3819,7 @@ msgstr "Mover lento el mapa"
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
-msgstr ""
+msgstr "Shift + Teclas de flecha"
 
 #: ../../data/tribes/scripting/help/controls.lua:84
 msgid "Center main mapview on starting location"
