@@ -4,19 +4,19 @@
 # Translators:
 # GunChleoc, 2016
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016-2019
+# Jukka Pakarinen, 2016-2020
 # Markus Hällfors <markus@hallfors.com>, 2015
 # Max, 2015
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
 # Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009
-# Teppo Mäenpää <teppo@runbox.com>, 2015-2017
+# Teppo Mäenpää <teppo@runbox.com>, 2015-2017,2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-04-23 19:22+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-05-23 04:21+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -235,27 +235,27 @@ msgstr "Tärkeä voitto rajalinnoituksella."
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:7
 msgctxt "barbarians_building"
 msgid "Citadel"
-msgstr "Kastelli"
+msgstr "Sitadelli"
 
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:49
 msgid "Your soldiers have occupied your citadel."
-msgstr "Sotilaasi ovat miehittäneet kastelliisi."
+msgstr "Sotilaasi ovat miehittäneet sitadellisi."
 
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:50
 msgid "Your citadel discovered an aggressor."
-msgstr "Linnakompleksin lähitienoilla vihollisia."
+msgstr "Sitadellisi lähitienoilla vihollisia."
 
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:51
 msgid "Your citadel is under attack."
-msgstr "Linnakompleksisi sodan jaloissa."
+msgstr "Sitadellisi sodan jaloissa."
 
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:52
 msgid "The enemy defeated your soldiers at the citadel."
-msgstr "Murskaava tappio linnakompleksilla."
+msgstr "Murskaava tappio sitadellilla."
 
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:53
 msgid "Your soldiers defeated the enemy at the citadel."
-msgstr "Verinen voitto linnakompleksilla."
+msgstr "Verinen voitto sitadellilla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:7
@@ -788,7 +788,7 @@ msgstr "louhii timantteja"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:164
 msgid "No Crystals"
-msgstr ""
+msgstr "Kvartsikide puuttuu"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:165
 msgid "Main Crystal Vein Exhausted"
@@ -827,7 +827,7 @@ msgstr "Maanviljelijällä ei ole viljelyskelpoista maata käytössään."
 #: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "veneveistämö"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:7
@@ -1594,7 +1594,7 @@ msgstr "Maanviljelijällä ei ole viljelyskelpoista maata käytössään."
 #: ../../data/tribes/buildings/productionsites/barbarians/ferry_yard/init.lua:7
 msgctxt "barbarians_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "Veneveistämö"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:7
@@ -2068,7 +2068,7 @@ msgstr "Maanviljelijällä ei ole viljelyskelpoista maata käytössään."
 #: ../../data/tribes/buildings/productionsites/empire/ferry_yard/init.lua:7
 msgctxt "empire_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "Veneveistämö"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:7
@@ -2582,22 +2582,22 @@ msgstr "polttaa tiiliä"
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:7
 msgctxt "frisians_building"
 msgid "Charcoal Burner’s House"
-msgstr ""
+msgstr "Miilu"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a charcoal stack
 #. because ...
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:78
 msgid "making a charcoal stack"
-msgstr ""
+msgstr "hiillyttää  puuta"
 
 #. TRANSLATORS: Completed/Skipped/Did not start collecting coal because ...
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:89
 msgid "collecting coal"
-msgstr ""
+msgstr "kerää puuta"
 
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:100
 msgid "Out of Clay Ponds"
-msgstr ""
+msgstr "Ei savipaikkoja"
 
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:101
 msgctxt "frisians_building"
@@ -2606,7 +2606,7 @@ msgid ""
 "clay ponds in his work area. Please make sure there is a working clay pit "
 "nearby and the charcoal burner’s house is supplied with all needed wares, or"
 " consider dismantling or destroying this building."
-msgstr ""
+msgstr "Tällä miilulla työskentelevä puuhiilen tislaaja ei löydä yhtään savipaikkoja työskentelyalueeltaan. Varmistathan, että lähistöllä on toimiva savikaivanto ja miilulle toimitetaan sen tarvitsemia tuotteita tai voit myös harkita rakennuksen purkamista tai tuhoamista."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:7
@@ -2728,7 +2728,7 @@ msgstr "Maanviljelijällä ei ole viljelyskelpoista maata käytössään."
 #: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:7
 msgctxt "frisians_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "Veneveistämö"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:7
@@ -3429,14 +3429,14 @@ msgstr "Varasto"
 #: ../../data/tribes/economy_profiles/empire:4
 #: ../../data/tribes/economy_profiles/frisians:4
 msgid "Efficiency"
-msgstr ""
+msgstr "Tehokkuus"
 
 #: ../../data/tribes/economy_profiles/atlanteans:5
 #: ../../data/tribes/economy_profiles/barbarians:5
 #: ../../data/tribes/economy_profiles/empire:5
 #: ../../data/tribes/economy_profiles/frisians:5
 msgid "Stockpile"
-msgstr ""
+msgstr "Varasto"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/ashes/init.lua:42
@@ -3588,19 +3588,19 @@ msgstr "Tyrni (kypsä)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:13
 msgid "Stink Shepherd’s Tree (tiny)"
-msgstr ""
+msgstr "boscia foetida -verso"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:40
 msgid "Stink Shepherd’s Tree (small)"
-msgstr ""
+msgstr "boscia foetida (pieni)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:67
 msgid "Stink Shepherd’s Tree (medium)"
-msgstr ""
+msgstr "boscia foetida (kasvava)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:94
 msgid "Stink Shepherd’s Tree (ripe)"
-msgstr ""
+msgstr "boscia foetida (täysikasvuinen)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:13
 msgid "Strawberries (tiny)"
@@ -3712,13 +3712,13 @@ msgstr "Viiniköynnös (hyvin pieni)"
 #: ../../data/tribes/immovables/pond/burning/init.lua:7
 msgctxt "immovable"
 msgid "Burning Charcoal Stack"
-msgstr ""
+msgstr "hillyttää"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/pond/coal/init.lua:7
 msgctxt "immovable"
 msgid "Pond With Charcoal"
-msgstr ""
+msgstr "Allas Puuhiilillä"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/pond/dry/init.lua:7
@@ -3742,25 +3742,25 @@ msgstr "Allas kaloilla"
 #: ../../data/tribes/immovables/reedfield/medium/init.lua:7
 msgctxt "immovable"
 msgid "Reed Field (medium)"
-msgstr ""
+msgstr "Kasvava ruoikko"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/reedfield/ripe/init.lua:7
 msgctxt "immovable"
 msgid "Reed Field (ripe)"
-msgstr ""
+msgstr "Täyskasvuinen ruoikko"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/reedfield/small/init.lua:7
 msgctxt "immovable"
 msgid "Reed Field (small)"
-msgstr ""
+msgstr "nuori ruoikko"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/reedfield/tiny/init.lua:7
 msgctxt "immovable"
 msgid "Reed Field (tiny)"
-msgstr ""
+msgstr "orastava ruoikko"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:7
@@ -3769,7 +3769,7 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/frisians/init.lua:7
 msgctxt "resource_indicator"
 msgid "No Resources"
-msgstr ""
+msgstr "Ei resursseja"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:33
@@ -3778,7 +3778,7 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/frisians/init.lua:33
 msgctxt "resource_indicator"
 msgid "Water"
-msgstr ""
+msgstr "Vesi"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:59
@@ -3787,7 +3787,7 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/frisians/init.lua:59
 msgctxt "resource_indicator"
 msgid "Some Coal"
-msgstr ""
+msgstr "hieman hiiltä"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:85
@@ -3796,7 +3796,7 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/frisians/init.lua:85
 msgctxt "resource_indicator"
 msgid "Some Gold"
-msgstr ""
+msgstr "hieman kultaa"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:111
@@ -3805,13 +3805,13 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/frisians/init.lua:111
 msgctxt "resource_indicator"
 msgid "Some Iron"
-msgstr ""
+msgstr "hieman rautaa"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:137
 msgctxt "resource_indicator"
 msgid "Some Crystals"
-msgstr ""
+msgstr "Hieman kiteitä"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:163
@@ -3820,7 +3820,7 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/frisians/init.lua:163
 msgctxt "resource_indicator"
 msgid "A Lot of Coal"
-msgstr ""
+msgstr "Runsaasti hiiltä"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:189
@@ -3829,7 +3829,7 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/frisians/init.lua:189
 msgctxt "resource_indicator"
 msgid "A Lot of Gold"
-msgstr ""
+msgstr "Runsaasti kultaa"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:215
@@ -3838,39 +3838,39 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/frisians/init.lua:215
 msgctxt "resource_indicator"
 msgid "A Lot of Iron"
-msgstr ""
+msgstr "Runsaasti rautaa"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:241
 msgctxt "resource_indicator"
 msgid "A Lot of Crystals"
-msgstr ""
+msgstr "Runsaasti kiteitä"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/barbarians/init.lua:122
 #: ../../data/tribes/immovables/resi/frisians/init.lua:137
 msgctxt "resource_indicator"
 msgid "Some Granite"
-msgstr ""
+msgstr "Hieman käyttökelpoista kiveä"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/barbarians/init.lua:214
 #: ../../data/tribes/immovables/resi/frisians/init.lua:241
 msgctxt "resource_indicator"
 msgid "A Lot of Granite"
-msgstr ""
+msgstr "Runsaasti käyttökelpoista kiveä"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/empire/init.lua:122
 msgctxt "resource_indicator"
 msgid "Some Marble"
-msgstr ""
+msgstr "Hieman marmoria"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/empire/init.lua:214
 msgctxt "resource_indicator"
 msgid "A Lot of Marble"
-msgstr ""
+msgstr "Runsaasti marmoria"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/shipconstruction_atlanteans/init.lua:7
@@ -3885,39 +3885,39 @@ msgstr "Telakka-alue"
 #: ../../data/tribes/immovables/wheatfield/harvested/init.lua:7
 msgctxt "immovable"
 msgid "Wheat Field (harvested)"
-msgstr ""
+msgstr "Puitu vehnäpelto"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/medium/init.lua:7
 msgctxt "immovable"
 msgid "Wheat Field (medium)"
-msgstr ""
+msgstr "Kasvava vehnäpelto"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/ripe/init.lua:7
 msgctxt "immovable"
 msgid "Wheat Field (ripe)"
-msgstr ""
+msgstr "Puintivalmis vehnäpelto"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/small/init.lua:7
 msgctxt "immovable"
 msgid "Wheat Field (small)"
-msgstr ""
+msgstr "Nuori vehnäpelto"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/tiny/init.lua:7
 msgctxt "immovable"
 msgid "Wheat Field (tiny)"
-msgstr ""
+msgstr "Orastava vehnäpelto"
 
 #: ../../data/tribes/init.lua:19
 msgid "Loading tribes: %1$s (%2$d/%3$d)"
-msgstr ""
+msgstr "Lataan heimoja: %1$s (%2$d/%3$d)"
 
 #: ../../data/tribes/init.lua:33
 msgid "Ships"
-msgstr ""
+msgstr "Laivoja"
 
 #: ../../data/tribes/init.lua:45 ../../data/tribes/scripting/help/init.lua:85
 msgid "Wares"
@@ -3930,51 +3930,51 @@ msgstr "Kiinteät esineet"
 
 #: ../../data/tribes/init.lua:221
 msgid "Atlantean workers"
-msgstr ""
+msgstr "Atlantislaiset työntekijät"
 
 #: ../../data/tribes/init.lua:254
 msgid "Barbarian workers"
-msgstr ""
+msgstr "Barbaarien työntekijät"
 
 #: ../../data/tribes/init.lua:289
 msgid "Empire workers"
-msgstr ""
+msgstr "Keisarikunnan työntekijät"
 
 #: ../../data/tribes/init.lua:325
 msgid "Frisian workers"
-msgstr ""
+msgstr "Vapaamielisten työntekijät"
 
 #: ../../data/tribes/init.lua:369
 msgid "Warehouses"
-msgstr ""
+msgstr "Varastot"
 
 #: ../../data/tribes/init.lua:391
 msgid "Atlantean productionsites"
-msgstr ""
+msgstr "Atlantislaisten tuotantopaikat"
 
 #: ../../data/tribes/init.lua:429
 msgid "Barbarian productionsites"
-msgstr ""
+msgstr "Barbaarien tuotantopaikat"
 
 #: ../../data/tribes/init.lua:474
 msgid "Empire productionsites"
-msgstr ""
+msgstr "Keisarikunnan tuotantopaikat"
 
 #: ../../data/tribes/init.lua:518
 msgid "Frisian productionsites"
-msgstr ""
+msgstr "Vapaamielisten tuotantopaikat"
 
 #: ../../data/tribes/init.lua:573
 msgid "Trainingsites"
-msgstr ""
+msgstr "Harjoittelupaikat"
 
 #: ../../data/tribes/init.lua:590
 msgid "Militarysites"
-msgstr ""
+msgstr "Sotilaalliset paikat"
 
 #: ../../data/tribes/init.lua:624
 msgid "Finishing"
-msgstr ""
+msgstr "Lopputoimet"
 
 #: ../../data/tribes/preload.lua:15 ../../data/tribes/preload.lua:36
 #: ../../data/tribes/preload.lua:57 ../../data/tribes/preload.lua:78
@@ -4013,11 +4013,11 @@ msgstr "Tämä heimo tunnetaan jo vanhimmista taruista: Atlantiksen pojat ja tyt
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/preload.lua:80
 msgid "Frisians"
-msgstr ""
+msgstr "Vapaamieliset"
 
 #: ../../data/tribes/preload.lua:81
 msgid "The inhabitants of the rough North Sea shore."
-msgstr ""
+msgstr "Pohjoisen Meren karun rannikon asukkaat."
 
 #: ../../data/tribes/scripting/help/init.lua:54
 msgid "Tribal Encyclopedia"
@@ -4053,7 +4053,7 @@ msgstr "Rakennukset"
 #: ../../data/tribes/scripting/starting_conditions/empire/discovery.lua:11
 #: ../../data/tribes/scripting/starting_conditions/frisians/discovery.lua:11
 msgid "Discovery"
-msgstr ""
+msgstr "Löytö"
 
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/discovery.lua:13
@@ -4062,7 +4062,7 @@ msgstr ""
 #: ../../data/tribes/scripting/starting_conditions/frisians/discovery.lua:13
 msgid ""
 "Start the game with three ships on the ocean and only a handful of supplies"
-msgstr ""
+msgstr "Aloita peli kolmella aluksella merellä ja vain kourallisella tavaroita"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:11
@@ -4103,7 +4103,7 @@ msgstr "Aloita peli vain yhdellä rakennuksella"
 #: ../../data/tribes/scripting/starting_conditions/empire/new_world.lua:11
 #: ../../data/tribes/scripting/starting_conditions/frisians/new_world.lua:11
 msgid "New World"
-msgstr ""
+msgstr "Uusi Maailma"
 
 #. TRANSLATORS: This is the tooltip for the "New World" starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/new_world.lua:13
@@ -4111,7 +4111,7 @@ msgstr ""
 #: ../../data/tribes/scripting/starting_conditions/empire/new_world.lua:13
 #: ../../data/tribes/scripting/starting_conditions/frisians/new_world.lua:13
 msgid "Start the game with seven ships full of wares on the ocean"
-msgstr ""
+msgstr "Aloita peli merellä seitsemällä aluksella täynnä tavaroita "
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:11
@@ -4119,7 +4119,7 @@ msgstr ""
 #: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:11
 #: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:11
 msgid "Poor Hamlet"
-msgstr ""
+msgstr "Kurja Kyläpahanen"
 
 #. TRANSLATORS: This is the tooltip for the "Poor Hamlet" (minimum) starting
 #. condition
@@ -4130,14 +4130,14 @@ msgstr ""
 msgid ""
 "Start the game with just a warehouse and the bare minimum for bootstrapping "
 "an economy. Warning: the AI can't successfully start from this"
-msgstr ""
+msgstr "Aloita peli ainoastaan varastolla ja tyhjähköllä taloudella. Varoitus: Tekoäly ei pysty aloittamaan tätä menestyksellisesti"
 
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:45
 #: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:43
 #: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:44
 #: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:45
 msgid "Be careful"
-msgstr ""
+msgstr "Ole varovainen"
 
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:45
 #: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:43
@@ -4146,7 +4146,7 @@ msgstr ""
 msgid ""
 "You have only one iron for each tool you will need to start your economy. "
 "Make sure no unneeded tool is created."
-msgstr ""
+msgstr "Sinulla on talouden aloittamiseen vain yksi rauta jokaista tarvitsemaasi työkalua kohden. Varmista ettet luo tarpeettomia työkaluja."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/struggling_outpost.lua:11
@@ -4154,7 +4154,7 @@ msgstr ""
 #: ../../data/tribes/scripting/starting_conditions/empire/struggling_outpost.lua:11
 #: ../../data/tribes/scripting/starting_conditions/frisians/struggling_outpost.lua:11
 msgid "Struggling Outpost"
-msgstr ""
+msgstr "Ponnistuksien Etuvartioasema"
 
 #. TRANSLATORS: This is the tooltip for the "Hardcore" starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/struggling_outpost.lua:13
@@ -4164,7 +4164,7 @@ msgstr ""
 msgid ""
 "Start the game with just your headquarters and very few wares for "
 "bootstrapping an economy. Warning: the AI can't successfully start from this"
-msgstr ""
+msgstr "Aloita peli ainoastaan päämajalla ja muutamalla tavaralla talouden pystyttämiseksi. Varoitus: Tekoäly ei pysty aloittamaan tätä menestyksellisesti"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:11
@@ -4892,7 +4892,7 @@ msgstr "Maanviljelijä"
 #: ../../data/tribes/workers/atlanteans/ferry/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "Lautturi"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/fishbreeder/init.lua:20
@@ -5096,7 +5096,7 @@ msgstr "Maanviljelijä"
 #: ../../data/tribes/workers/barbarians/ferry/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "Lautturi"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/fisher/init.lua:7
@@ -5294,7 +5294,7 @@ msgstr "Maanviljelijä"
 #: ../../data/tribes/workers/empire/ferry/init.lua:7
 msgctxt "empire_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "Lautturi"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/fisher/init.lua:22
@@ -5522,7 +5522,7 @@ msgstr "Maanviljelijä"
 #: ../../data/tribes/workers/frisians/ferry/init.lua:7
 msgctxt "frisians_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "Lautturi"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/fisher/init.lua:7

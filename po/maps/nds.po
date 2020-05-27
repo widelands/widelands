@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-05 19:46+0000\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-05-22 17:26+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -97,7 +97,7 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr "As Schatt-Karut stürv, was he een oller Mann, de Vader vun dree machtigen un streevsken Söhnen, un de Kummandant vun Soldaten, de all Feinde manntjen kunnen, de de steenollen Walden angrepen. Uplest vun sien golden Seggen keek Schatt-Karut sien ollsten Sohn, Troon, ut, dat he de neje Kummandant vun sienem Volk wese – een Beslutt, mit wat siene Bröörs nich tofree weren. Dat wuss de olle Kummandant. As sien Vater befohl, verleet Troon de Höövdstadt Alltunraan, wo de Bomen-Throon was, un truck sük mit sienen Soldaten up de Hogen Hövels torügg, wo he de Liek vun sienem Vater begroov. Dann swoor he bi de Gotten un de Geist vun sienem Vater, dat he weerkummt un de Örnung torechtmaakt. As siene Bröörs tegen Troon un de minnen Soldaten, de he tum Schuul för Alltunraan törüggleet, angahn, versöcht de junge Kummandant, dat sük siene streevsken Bröörs utsöhnen un de Völker weer unner eenem gemeensamen Fahne marskeren."
+msgstr "As Schatt-Karut stürv, was he een oller Mann, de Vader vun dree machtigen un streevsken Söhnen, un de Kummandant vun Soldaten, de all Feinde manntjen kunnen, de de steenollen Walden angrepen. Uplest vun sien golden Seggen keek Schatt-Karut sien ollsten Sohn, Troon, ut, dat he de neje Kummandant vun sienem Volk wese – een Beslutt, mit wat siene Bröörs nich tofree weren. Dat wuss de olle Kummandant. As sien Vater befohl, verleet Troon de Höövdstadt Alltunraan, waar de Bomen-Throon was, un truck sük mit sienen Soldaten up de Hogen Hövels torügg, waar he de Liek vun sienem Vater begroov. Dann swoor he bi de Gotten un de Geist vun sienem Vater, dat he weerkummt un de Örnung torechtmaakt. As siene Bröörs tegen Troon un de minnen Soldaten, de he tum Schuul för Alltunraan törüggleet, angahn, versöcht de junge Kummandant, dat sük siene streevsken Bröörs utsöhnen un de Völker weer unner eener gemeensamen Fahne marskeren."
 
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../data/campaigns/campaigns.lua:70
@@ -216,6 +216,10 @@ msgid ""
 "land on a green, Mediterranean island, looking like paradise. Overjoyed, "
 "they set out to explore this new living space."
 msgstr "Ennelk is de Schipp weer heel, un Lutjus un siene Lüü versöken wieder, eene gode Stee för eenen nejen Anfang to finnen. Blot een paar Dagen naher lannen se up eene gröne Insel in de Latienske See, de hör wie dat Paradies vörkummt. Överglückelk gahn se de neje Heimaat utförsken."
+
+#: ../../data/campaigns/emp03.wmf/elemental:8
+msgid "Neptune’s Revenge"
+msgstr "Neptun in Wut"
 
 #: ../../data/campaigns/emp03.wmf/elemental:10
 msgid ""
@@ -821,7 +825,7 @@ msgid ""
 "constructors. Nobody knows why they (have) disappeared. Nobody knows why. "
 "People say that now nothing is blocking the road to wealth. But many will "
 "die pulled apart by wolves, engulfed by swamp… encircled by hostile tribes."
-msgstr ""
+msgstr "Eenige seggen, dat de unbetredtbaren Lannen wied im Noorden sülvst de modigsten Siedlers un de dappersten vun all dappern Kriegers ofschricken. Grote, olle Walden, vull vun groten wilden Deerten; daartüsken Broken un Höchten vull vun Geheemnissen. De minnen, well torügg komen sünd, hebben vun machtigen Husen vertellt, updaan mit Sniddjereen un Gold vun baldadigen Bargen in de Midde vun de Wildernis. Hunnerte Jahre daarna sünd vun deesen goden ollen Tieden nix as grusige Ruinen över, bedeckt vun Moss un Bomen. Hör Formen laten de Künst vun de ollen Baukeerls blot ahnen. Nüms weet, waarum se nich mehr daar sünd. Nüms weet dat. De Lüü seggen, dat nu nix mehr up de Straat tum Riekdoom liggt. Aver völe mutten vun Wulfen freten worden, vun Broken verslungen … vun feindelk Völkers umringt."
 
 #: ../../data/maps/The_Green_Plateau.wmf/elemental:8
 msgid "The Green Plateau"
@@ -924,7 +928,7 @@ msgid ""
 "exclusive trade alliance, forcing the other two to do the same. Suddenly, it"
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
-msgstr ""
+msgstr "De feer machtigen Muden vun de Kraw-Insels hebben ewig lang hör Waren tüskeneenanner hannelt. Se bruken all Mineraale, wat se nich in hör eegen Gewest produzeren könen, un hebben daarför anner Mineraale liefert an de, well deese nich produzeren könen. Um deesen Hannel weren all de Muden un de Lüü up de Kraw-Insels fründelk miteenanner umgahn – bit vör körter Tied twee vun de Muden een Hannels-Ofmaken truffen hebben, wat de anner twee dwungen hett, dat ok to maken. Nu is dat up eenmaal nich mehr tum Ofwennen, dat de eersten Kriegen tüsken de Muden dat freedsame Leven verneelen, wat so lang anhollen hett …"
 
 #: ../../data/maps/Trident_of_Fire.wmf/elemental:8
 msgid "Trident of Fire"
@@ -949,7 +953,7 @@ msgid ""
 "desperately searching for more resources to support their endlessly ongoing "
 "wars, would end up in this forgotten place at the same time and for the same"
 " well-known reason."
-msgstr ""
+msgstr "As de Wind tonohmen hett un de eersten Dünen in deesen verlaten Twennel-Meren bildt hett, daar hett sik nüms vörstellen könen, dat twee Völkers, wat vertwiefelt na mehr Mineralen söken, um hör ewig Krieg antodrieven, in deeser vergetten Stee to de glieken Tied ankomen – un woll för de glieken, good bekennten Grund."
 
 #: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:11
 msgid ""

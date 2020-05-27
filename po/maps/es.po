@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-15 09:22+0000\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-05-22 17:22+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -218,6 +218,10 @@ msgid ""
 "land on a green, Mediterranean island, looking like paradise. Overjoyed, "
 "they set out to explore this new living space."
 msgstr "Finalmente el barco fue reparado, Lutius y su pueblo volvieron a la búsqueda de un buen lugar para un nuevo comienzo. Unos pocos días más tarde, desembarcaron en una isla mediterránea verde, parecía el paraíso. Rebosantes de alegría, se dispusieron a explorar este nuevo espacio de vida."
+
+#: ../../data/campaigns/emp03.wmf/elemental:8
+msgid "Neptune’s Revenge"
+msgstr "La venganza de Neptuno"
 
 #: ../../data/campaigns/emp03.wmf/elemental:10
 msgid ""
@@ -511,7 +515,7 @@ msgstr "Estas son las bellas tierras finlandesas de lagos, ríos, bosques antigu
 msgid ""
 "Yellow player has a much easier starting position than the other two; this "
 "map is suited for 1v2."
-msgstr "El jugador amarillo tiene una posición de partida mucho más fácil que los otros dos; este mapa es adecuado para jugar 1 contra 2."
+msgstr "El jugador amarillo tiene una posición de partido mucho más fácil que los otros dos; este mapa es adecuado para jugar 1 contra 2."
 
 #: ../../data/maps/Firegames.wmf/elemental:8
 msgid "Firegames"
@@ -1006,4 +1010,4 @@ msgid ""
 " 4 players’ map, with a black AI to add a complication to the expansion of "
 "the other players, or you can play as a challenge with the black player "
 "against the other 4 (VERY difficult)."
-msgstr "El jugador negro está rodeado en el centro sin recursos, por lo que hay tres maneras diferentes de utilizar este mapa: sin el jugador negro para una partida normal de 4 jugadores, con una IA negra para añadir una complicación a la expansión de los otros jugadores , o se puede jugar como un desafío con el jugador negro contra los otros 4 (muy difícil)."
+msgstr "El jugador negro está rodeado en el centro sin recursos, por lo que hay tres maneras diferentes de utilizar este mapa: sin el jugador negro para un partido normal de 4 jugadores, con una IA negra para añadir una complicación a la expansión de los otros jugadores , o se puede jugar como un desafío con el jugador negro contra los otros 4 (muy difícil)."
