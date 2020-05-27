@@ -100,7 +100,7 @@ win_condition
 ~~~~~~~~~~~~~
 A win condition script.
 
-The add-on needs to contain a script called ``init.lua`` which must follow the same conventions as the files in ``data/scripting/win_conditions/*.lua``.
+The add-on needs to contain a script called ``init.lua`` which must follow the same conventions as the files in ``data/scripting/win_conditions/*.lua`` with one exception: The win condition table should specify the optional ``textdomain`` field which should be equal to the add-ons internal name (see `Translating`_).
 
 
 starting_condition

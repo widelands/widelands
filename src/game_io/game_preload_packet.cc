@@ -41,6 +41,8 @@ constexpr const char* kMinimapFilename = "minimap.png";
 // Win condition localization can come from the 'widelands' or 'win_conditions' textdomain.
 std::string GamePreloadPacket::get_localized_win_condition() const {
 	const std::string result = _(win_condition_);
+	// TODO(Nordfriese): If the win condition is defined in an add-on, we should store that
+	// add-on's textdomain in the file and use it instead for retrieving the translation
 	i18n::Textdomain td("win_conditions");
 	return _(result);
 }
