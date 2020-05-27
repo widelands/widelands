@@ -26,6 +26,7 @@
 #include "base/i18n.h"
 #include "build_info.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/filesystem_constants.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "scripting/report_error.h"
@@ -120,6 +121,8 @@ static int L_string_bformat(lua_State* L) {
 
       Sets the textdomain for all further calls to :func:`_`.
 
+      NOTE: If your script is part of an add-on, use :func:`set_addon_textdomain()` instead.
+
       :arg domain: The textdomain
       :type domain: :class:`string`
       :returns: :const:`nil`
@@ -127,6 +130,28 @@ static int L_string_bformat(lua_State* L) {
 static int L_set_textdomain(lua_State* L) {
 	luaL_checkstring(L, -1);
 	lua_setglobal(L, "__TEXTDOMAIN");
+	lua_pushboolean(L, true);
+	lua_setglobal(L, "__TEXTDOMAIN_OFFICIAL");
+	return 0;
+}
+
+/* RST
+   .. function:: set_addon_textdomain(domain)
+
+      Sets the textdomain for all further calls to :func:`_`.
+
+      NOTE: This function must be used only by add-ons. Use :func:`set_textdomain()`
+      instead if this is not the case.
+
+      :arg domain: The textdomain
+      :type domain: :class:`string`
+      :returns: :const:`nil`
+*/
+static int L_set_addon_textdomain(lua_State* L) {
+	luaL_checkstring(L, -1);
+	lua_setglobal(L, "__TEXTDOMAIN");
+	lua_pushboolean(L, false);
+	lua_setglobal(L, "__TEXTDOMAIN_OFFICIAL");
 	return 0;
 }
 
@@ -148,11 +173,18 @@ static int L_set_textdomain(lua_State* L) {
       :returns: The translated string.
 */
 static int L__(lua_State* L) {
+	lua_getglobal(L, "__TEXTDOMAIN_OFFICIAL");
+	const bool td_official = lua_isnil(L, -1) || luaL_checkboolean(L, -1);
 	lua_getglobal(L, "__TEXTDOMAIN");
 
 	if (!lua_isnil(L, -1)) {
-		i18n::Textdomain dom(luaL_checkstring(L, -1));
-		lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
+		if (td_official) {
+			i18n::Textdomain dom(luaL_checkstring(L, -1));
+			lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
+		} else {
+			i18n::Textdomain dom(luaL_checkstring(L, -1), g_fs->canonicalize_name(kAddOnLocaleDir));
+			lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
+		}
 	} else {
 		lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
 	}
@@ -275,6 +307,7 @@ const static struct luaL_Reg globals[] = {{"_", &L__},
                                           {"ngettext", &L_ngettext},
                                           {"pgettext", &L_pgettext},
                                           {"set_textdomain", &L_set_textdomain},
+                                          {"set_addon_textdomain", &L_set_addon_textdomain},
                                           {"ticks", &L_ticks},
                                           {nullptr, nullptr}};
 

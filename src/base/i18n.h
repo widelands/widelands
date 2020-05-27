@@ -35,20 +35,8 @@ namespace i18n {
 char const* translate(char const*) __attribute__((format_arg(1)));
 char const* translate(const std::string&);
 
-void grab_textdomain(const std::string&);
+void grab_textdomain(const std::string&, const char* localedir);
 void release_textdomain();
-
-/// Create an object of this type to grab a textdomain and make sure that it is
-/// released when the object goes out of scope. This is exception-safe, unlike
-/// calling grab_textdomain and release_textdomain directly.
-struct Textdomain {
-	explicit Textdomain(const std::string& name) {
-		grab_textdomain(name);
-	}
-	~Textdomain() {
-		release_textdomain();
-	}
-};
 
 void init_locale();
 void set_locale(const std::string&);
@@ -56,6 +44,25 @@ const std::string& get_locale();
 
 void set_localedir(const std::string&);
 const std::string& get_localedir();
+
+/// Create an object of this type to grab a textdomain and make sure that it is
+/// released when the object goes out of scope. This is exception-safe, unlike
+/// calling grab_textdomain and release_textdomain directly.
+struct Textdomain {
+	// Default constructor for nearly all common purposes
+	explicit Textdomain(const std::string& name) {
+		grab_textdomain(name, get_localedir().c_str());
+	}
+
+	// Use this constructor only if you know what you are doing
+	Textdomain(const std::string& name, const std::string& localedir) {
+		grab_textdomain(name, localedir.c_str());
+	}
+
+	~Textdomain() {
+		release_textdomain();
+	}
+};
 
 enum class ConcatenateWith { AND, OR, AMPERSAND, COMMA };
 /**

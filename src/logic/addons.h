@@ -53,7 +53,8 @@ struct AddOnInfo {
 	std::string descname;       // "Cool Feature"
 	std::string description;    // "This add-on is a really cool feature."
 	std::string author;         // "The Widelands Bunnybot"
-	uint32_t version;
+	uint32_t version;           // Add-on version
+	uint32_t i18n_version;      // Translations version (see doc/sphinx/source/add-ons.rst)
 	AddOnCategory category;
 	std::vector<std::string> requires;  // TODO(Nordfriese): unused, not yet implemented
 	bool verified;

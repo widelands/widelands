@@ -53,12 +53,13 @@ private:
 	UI::MultilineTextarea txt_;
 };
 struct RemoteAddOnRow : public UI::Panel {
-	RemoteAddOnRow(Panel*, AddOnsCtrl*, const AddOnInfo&, uint32_t installed_version);
+	RemoteAddOnRow(Panel*, AddOnsCtrl*, const AddOnInfo&, uint32_t installed_version, uint32_t installed_i18n_version);
 	~RemoteAddOnRow() override {
 	}
 	void layout() override;
-	bool upgradeable() const;
 	const AddOnInfo& info() const { return info_; }
+	bool upgradeable() const;
+	bool full_upgrade_possible() const { return full_upgrade_possible_; }
 private:
 	AddOnInfo info_;
 	UI::Button install_;
@@ -68,6 +69,8 @@ private:
 	UI::Icon verified_;
 	UI::Textarea version_;
 	UI::MultilineTextarea txt_;
+
+	const bool full_upgrade_possible_;
 };
 
 class AddOnsCtrl : public FullscreenMenuBase {
@@ -78,8 +81,8 @@ public:
 	void rebuild();
 	void update_dependency_errors();
 
-	void install(const std::string&);
-	void upgrade(const std::string&);
+	void install(const std::string&, uint32_t i18n_version);
+	void upgrade(const std::string&, bool full_upgrade, uint32_t i18n_version);
 
 protected:
 	void layout() override;
@@ -101,7 +104,9 @@ private:
 	void refresh_remotes();
 
 	bool matches_filter(const AddOnInfo&, bool local);
-	std::string download(const std::string&);
+
+	std::string download_addon(const std::string&);
+	std::set<std::string> download_i18n(const std::string&, uint32_t i18n_version);
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_H

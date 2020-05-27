@@ -90,9 +90,8 @@ const std::string& get_localedir() {
  * it -> we're back in widelands domain. Negative: We can't translate error
  * messages. Who cares?
  */
-void grab_textdomain(const std::string& domain) {
+void grab_textdomain(const std::string& domain, const char* ldir) {
 	char const* const dom = domain.c_str();
-	char const* const ldir = localedir.c_str();
 
 	bindtextdomain(dom, ldir);
 	bind_textdomain_codeset(dom, "UTF-8");

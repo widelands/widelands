@@ -85,6 +85,8 @@ One or more complete campaigns.
 The add-on needs to contain a script called ``campaigns.lua`` containing the campaign definition.
 For details compare to the official campaign script ``data/campaigns/campaigns.lua``.
 
+The campaign scenarios is by default assumed to be located in the official ``data/campaigns`` directory. To specify that it is located in an add-on, prefix the name with the add-on's internal name followed by a colon (e.g. "example-campaign.wad:example.wmf").
+
 
 win_condition
 ~~~~~~~~~~~~~
@@ -127,3 +129,19 @@ Verification
 ------------
 
 Add-ons can potentially contain harmful or offensive content. The Widelands development team will attempt to moderate add-ons uploaded to the server: Add-ons containing malicious content will be deleted, the other add-ons will be marked as "verified". The in-game add-ons manager displays an indicator next to each add-on whether it was verified by the developers yet. By default, only verified add-ons are displayed; users can change this behaviour in the add-on manager's Filter tab.
+
+
+Translating
+-----------
+
+In order to not have to release a new version whenever translations change, translation files will be provided by the server independently from the add-ons. There will be a project "Widelands Add-Ons" on Transifex which will contain one resource for every add-on present on the server. The Transifex catalogue for each add-on will be updated automatically whenever a new version is uploaded to the server.
+
+The textdomain for an add-on is called ``internal-addon-name.wad``. The strings in the add-on config file, as well as map elemental data for Map Set add-ons, will be fetched from this textdomain. All Lua scripts shipped with the add-on will need to explicitly set the said textdomain. NOTE that you need to use the special function ``set_addon_textdomain("internal-addon-name.wad")`` to ensure that the textdomain will be looked for among the add-ons-specific translation files rather than in the locale directory shipped with the official game.
+
+The server will keep a repository of all add-on MO files which will be automatically compiled from the latest Transifex translations weekly. Downloading or upgrading an add-on will automatically download and install the latest translations files for this add-on for all languages. Each add-on has a translations version number in addition to the add-on version number; this allows the game to figure out whether the translations for an installed add-on can be upgraded.
+
+
+License
+-------
+
+Unless a license is explictly specified, all add-ons are released under the same license as Widelands itself, that is, the GNU General Public License (GPL) v2. An add-on may specify a different license by including a file called LICENSE and mentioning the license in the description text.

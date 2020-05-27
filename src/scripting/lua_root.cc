@@ -552,6 +552,10 @@ int LuaWorld::new_editor_immovable_category(lua_State* L) {
 
       Meant to be used by add-ons of the `world` category from their init.lua.
 */
+// TODO(Nordfriese): I only added functions I need for my own add-ons.
+// If anyone requests the possibility to modify any other world-related properties
+// through add-ons, the changes need to go here.
+// See also LuaTribes::modify_unit()
 int LuaWorld::modify_unit(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	const std::string type = luaL_checkstring(L, 2);
@@ -1075,6 +1079,9 @@ int LuaTribes::add_custom_worker(lua_State* L) {
 
       Meant to be used by add-ons of the `tribes` category from their init.lua.
 */
+// TODO(Nordfriese): I only added functions I need for my own add-ons.
+// If anyone requests the possibility to modify any other tribe-related properties
+// through add-ons, the changes need to go here.
 int LuaTribes::modify_unit(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	Tribes& tribes = *egbase.mutable_tribes();
