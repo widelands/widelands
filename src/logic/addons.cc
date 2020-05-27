@@ -139,13 +139,22 @@ AddOnInfo preload_addon(const std::string& name) {
 	Section& s = profile.get_safe_section("global");
 
 	// Fetch strings from the correct textdomain
-	i18n::Textdomain addon_textdomain(name, g_fs->canonicalize_name(kAddOnLocaleDir));
+	i18n::AddOnTextdomain addon_textdomain(name);
 	Profile i18n_profile(kAddOnLocaleVersions.c_str());
+
+	const std::string unlocalized_descname = s.get_safe_string("name");
+	const std::string unlocalized_description = s.get_safe_string("description");
 
 	AddOnInfo i = {
 		name,
-		s.get_safe_string("name"),
-		s.get_safe_string("description"),
+		[name, unlocalized_descname]() {
+			i18n::AddOnTextdomain td(name);
+			return i18n::translate(unlocalized_descname);
+		},
+		[name, unlocalized_description]() {
+			i18n::AddOnTextdomain td(name);
+			return i18n::translate(unlocalized_description);
+		},
 		s.get_safe_string("author"),
 		s.get_safe_positive("version"),
 		i18n_profile.get_safe_section("global").get_safe_positive(name.c_str()),

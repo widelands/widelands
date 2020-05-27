@@ -156,7 +156,7 @@ AddOnsCtrl::AddOnsCtrl() : FullscreenMenuBase(),
 			for (const auto& pair : upgrades) {
 				if (pair.second.first) {
 					text += (boost::format(_("\n· %1$s (%2$s) by %3$s"))
-							% pair.first.descname % (pair.first.verified ? _("verified") : _("NOT VERIFIED")) % pair.first.author).str();
+							% pair.first.descname() % (pair.first.verified ? _("verified") : _("NOT VERIFIED")) % pair.first.author).str();
 				}
 			}
 			UI::WLMessageBox w(this, _("Upgrade All"), text, UI::WLMessageBox::MBoxType::kOkCancel);
@@ -200,9 +200,9 @@ void AddOnsCtrl::refresh_remotes() {
 	} catch (const std::exception& e) {
 		remotes_.push_back(AddOnInfo {
 			"",
-			_("Server Connection Error"),
-			(boost::format(_("Unable to fetch the list of available add-ons from the server!<br>Error Message: %s"))
-				% e.what()).str(),
+			[]() { return _("Server Connection Error");},
+			[e]() { return (boost::format(_("Unable to fetch the list of available add-ons from the server!<br>Error Message: %s"))
+				% e.what()).str();},
 			/** TRANSLATORS: This will be inserted into the string "Server Connection Error \n by %s" */
 			_("a networking bug"),
 			0, 0, AddOnCategory::kNone, {}, false
@@ -229,7 +229,7 @@ bool AddOnsCtrl::matches_filter(const AddOnInfo& info, bool local) {
 		// no text filter given, so we accept it
 		return true;
 	}
-	for (const std::string& text : {info.descname, info.author, info.internal_name, info.description}) {
+	for (const std::string& text : {info.descname(), info.author, info.internal_name, info.description()}) {
 		if (text.find(filter_name_.text()) != std::string::npos) {
 			// text filter found
 			return true;
@@ -330,15 +330,15 @@ void AddOnsCtrl::update_dependency_errors() {
 			}
 			if (search_result == g_addons.end()) {
 				warn_requirements.push_back((boost::format(_("· ‘%1$s’ requires ‘%2$s’ which could not be found"))
-						% addon->first.descname % requirement).str());
+						% addon->first.descname() % requirement).str());
 			} else {
 				if (!search_result->second && kAddOnCategories.at(search_result->first.category).can_disable_addons) {
 					warn_requirements.push_back((boost::format(_("· ‘%1$s’ requires ‘%2$s’ which is disabled"))
-							% addon->first.descname % search_result->first.descname).str());
+							% addon->first.descname() % search_result->first.descname()).str());
 				}
 				if (too_late) {
 					warn_requirements.push_back((boost::format(_("· ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"))
-							% addon->first.descname % search_result->first.descname).str());
+							% addon->first.descname() % search_result->first.descname()).str());
 				}
 			}
 		}
@@ -398,7 +398,7 @@ static void install_translation(const std::string& temp_locale_path, const std::
 	const std::string locale = temp_filename.substr(0, temp_filename.find('.'));    // nds
 
 	const std::string new_locale_dir =
-	   kAddOnLocaleDir + g_fs->file_separator() + locale +
+	   i18n::kAddOnLocaleDir + g_fs->file_separator() + locale +
 	   g_fs->file_separator() + "LC_MESSAGES";  // addons_i18n/nds/LC_MESSAGES
 	g_fs->ensure_directory_exists(new_locale_dir);
 
@@ -550,18 +550,18 @@ static void uninstall(AddOnsCtrl* ctrl, const AddOnInfo& info) {
 			"Category: %4$s\n"
 			"%5$s\n"
 			))
-			% info.descname
+			% info.descname()
 			% info.author
 			% info.version
 			% kAddOnCategories.at(info.category).descname()
-			% info.description
+			% info.description()
 			).str(), UI::WLMessageBox::MBoxType::kOkCancel);
 		if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) { return; }
 	}
 
 	// Delete the add-on and its translations
 	g_fs->fs_unlink(kAddOnDir + g_fs->file_separator() + info.internal_name);
-	g_fs->fs_unlink(kAddOnLocaleDir + g_fs->file_separator() + info.internal_name);
+	g_fs->fs_unlink(i18n::kAddOnLocaleDir + g_fs->file_separator() + info.internal_name);
 
 	for (auto it = g_addons.begin(); it != g_addons.end(); ++it) {
 		if (it->first.internal_name == info.internal_name) {
@@ -584,9 +584,9 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddO
 	category_(this, g_gr->images().get(kAddOnCategories.at(info.category).icon)),
 	version_(this, 0, 0, 0, 0, std::to_string(static_cast<int>(info.version)), UI::Align::kCenter, g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
 	txt_(this, 0, 0, 24, 24, UI::PanelStyle::kFsMenu, (boost::format("<rt>%s<p>%s</p><p>%s</p></rt>")
-		% g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(info.descname)
+		% g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(info.descname())
 		% g_gr->styles().font_style(UI::FontStyle::kChatWhisper).as_font_tag((boost::format(_("by %s")) % info.author).str())
-		% g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(info.description)).str()) {
+		% g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(info.description())).str()) {
 
 	uninstall_.sigclicked.connect([this, ctrl, info]() {
 		uninstall(ctrl, info);
@@ -665,9 +665,9 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo&
 	verified_(this, g_gr->images().get(info.verified ? "images/ui_basic/list_selected.png" : "images/ui_basic/stop.png")),
 	version_(this, 0, 0, 0, 0, std::to_string(static_cast<int>(info.version)), UI::Align::kCenter, g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
 	txt_(this, 0, 0, 24, 24, UI::PanelStyle::kFsMenu, (boost::format("<rt>%s<p>%s</p><p>%s</p></rt>")
-		% g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(info.descname)
+		% g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(info.descname())
 		% g_gr->styles().font_style(UI::FontStyle::kChatWhisper).as_font_tag((boost::format(_("by %s")) % info.author).str())
-		% g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(info.description)).str()),
+		% g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(info.description())).str()),
 	full_upgrade_possible_(installed_version < info.version) {
 
 	assert(installed_version <= info.version);
@@ -687,12 +687,12 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo&
 				"Category: %5$s\n"
 				"%6$s\n"
 				))
-				% info.descname
+				% info.descname()
 				% info.author
 				% (info.verified ? _("Verified") : _("NOT VERIFIED"))
 				% info.version
 				% kAddOnCategories.at(info.category).descname()
-				% info.description
+				% info.description()
 				).str(), UI::WLMessageBox::MBoxType::kOkCancel);
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) { return; }
 		}
@@ -710,13 +710,13 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo&
 				"Category: %6$s\n"
 				"%7$s\n"
 				))
-				% info.descname
+				% info.descname()
 				% info.author
 				% (info.verified ? _("Verified") : _("NOT VERIFIED"))
 				% installed_version
 				% info.version
 				% kAddOnCategories.at(info.category).descname()
-				% info.description
+				% info.description()
 				).str(), UI::WLMessageBox::MBoxType::kOkCancel);
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) { return; }
 		}

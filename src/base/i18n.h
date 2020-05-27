@@ -45,21 +45,28 @@ const std::string& get_locale();
 void set_localedir(const std::string&);
 const std::string& get_localedir();
 
+const std::string kAddOnLocaleDir = "addons_i18n";
+void initialize_addons_locale_dir(const std::string&);
+const std::string& get_addon_locale_dir();
+
 /// Create an object of this type to grab a textdomain and make sure that it is
 /// released when the object goes out of scope. This is exception-safe, unlike
 /// calling grab_textdomain and release_textdomain directly.
 struct Textdomain {
-	// Default constructor for nearly all common purposes
+	// For all common purposes
 	explicit Textdomain(const std::string& name) {
 		grab_textdomain(name, get_localedir().c_str());
 	}
-
-	// Use this constructor only if you know what you are doing
-	Textdomain(const std::string& name, const std::string& localedir) {
-		grab_textdomain(name, localedir.c_str());
-	}
-
 	~Textdomain() {
+		release_textdomain();
+	}
+};
+struct AddOnTextdomain {
+	// For strings defined in an add-on
+	explicit AddOnTextdomain(const std::string& name) {
+		grab_textdomain(name, get_addon_locale_dir().c_str());
+	}
+	~AddOnTextdomain() {
 		release_textdomain();
 	}
 };

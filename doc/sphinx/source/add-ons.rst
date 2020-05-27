@@ -14,8 +14,10 @@ The ``addons`` File
 
 An add-on contains a plain-text ini-style file called ``addons`` with the following entries in the ``global`` section:
 
-* ``name``: The localized name of the add-on
-* ``description``: The localized long description
+* ``name``: The untranslated name of the add-on
+* ``i18n_name``: Identical to ``name`` but marked for translation with '_'
+* ``description``: The untranslated long description
+* ``i18n_description``: Identical to ``description`` but marked for translation with '_'
 * ``author``: The add-on's author name
 * ``version``: The version number (1 for new add-ons)
 * ``category``: One of "tribes", "world", "script", "maps", "campaign", "win_condition", "starting_condition"
@@ -26,12 +28,16 @@ Example:
 .. code-block:: ini
 
    [global]
-   name=_"Fishy"
-   description=_"Adds the highest amount of fish to every map node that can hold fish."
+   name="Fishy"
+   i18n_name=_"Fishy"
+   description="Adds the highest amount of fish to every map node that can hold fish."
+   i18n_description=_"Adds the highest amount of fish to every map node that can hold fish."
    author="Nordfriese"
    version="1"
    category="script"
    requires=
+
+Note: Only ``name`` and ``description`` can be marked for translation.
 
 .. highlight:: default
 
@@ -77,6 +83,8 @@ A set of maps and/or standalone scenarios.
 
 All valid map files (including those in subdirectories) contained in the add-on will be offered in map selection screens.
 
+Note that it is not possible to mark the names of subdirectories for translation.
+
 
 campaign
 ~~~~~~~~
@@ -113,8 +121,6 @@ In the editor, world (but not tribes) add-ons will be run, allowing you to creat
 When loading a game, the game will activate the tribes- and world add-ons the game was originally started with, and disable all others. Script add-ons are ignored on loading. Starting and win conditions as well as maps and campaign/scenario scripts are stored in the savegame independently from the add-on that defines them.
 
 In multiplayer games, all players need to enable the same add-ons at the same version in the same order for the game to work without desyncs. No checks for this are implemented so far.
-
-Support for map sets is not yet implemented.
 
 
 Upgrading

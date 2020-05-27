@@ -276,6 +276,8 @@ void WLApplication::setup_homedir() {
 #else
 	set_config_directory(homedir_);
 #endif
+
+	i18n::initialize_addons_locale_dir(homedir_);
 }
 
 WLApplication* WLApplication::the_singleton = nullptr;

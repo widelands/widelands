@@ -29,6 +29,7 @@
 
 #include "base/log.h"
 #include "config.h"
+#include "io/filesystem/layered_filesystem.h"
 
 #ifdef __APPLE__
 #if LIBINTL_VERSION >= 0x001201
@@ -150,6 +151,20 @@ void init_locale() {
 	SETLOCALE(LC_ALL, "C");
 	SETLOCALE(LC_MESSAGES, "");
 #endif
+}
+
+// Note: The cat bites its tail here.
+// While setting up Widelands, the WLApplication ctor will call preload_addon() for all
+// detected add-ons, which needs to know the absolute path for the WL homedir because
+// gettext demands that. So the WLApplication ctor calls our initialize_addons_locale_dir()
+// function so the add-ons have access to this info a few moments later already.
+// This is an ugly design, but it works.
+std::string canonical_addon_locale_dir = "";
+void initialize_addons_locale_dir(const std::string& homedir) {
+	canonical_addon_locale_dir = g_fs->canonicalize_name(homedir + "/" + kAddOnLocaleDir);
+}
+const std::string& get_addon_locale_dir() {
+	return canonical_addon_locale_dir;
 }
 
 /**

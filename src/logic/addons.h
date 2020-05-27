@@ -36,6 +36,12 @@ enum class AddOnCategory {
 	kStartingCondition
 };
 
+// Note: Below you will see some lines like `std::function<std::string()> descname`.
+// The reason why we implement trabslatable texts as functions here is that the encapsulating
+// objects will stick around a long time and we don't want to have to re-create them when we
+// change languages. The values implemented as one-liner functions are used only rarely so
+// that this does not matter performance-wise.
+
 struct AddOnCategoryInfo {
 	std::string internal_name;
 	std::function<std::string()> descname;
@@ -49,12 +55,12 @@ constexpr uint32_t kNotInstalled = 0;
 using AddOnRequirements = std::vector<std::pair<std::string, uint32_t>>;
 
 struct AddOnInfo {
-	std::string internal_name;  // "cool_feature.wad"
-	std::string descname;       // "Cool Feature"
-	std::string description;    // "This add-on is a really cool feature."
-	std::string author;         // "The Widelands Bunnybot"
-	uint32_t version;           // Add-on version
-	uint32_t i18n_version;      // Translations version (see doc/sphinx/source/add-ons.rst)
+	std::string internal_name;                 // "cool_feature.wad"
+	std::function<std::string()> descname;     // "Cool Feature"
+	std::function<std::string()> description;  // "This add-on is a really cool feature."
+	std::string author;                        // "The Widelands Bunnybot"
+	uint32_t version;                          // Add-on version
+	uint32_t i18n_version;                     // (see doc/sphinx/source/add-ons.rst)
 	AddOnCategory category;
 	std::vector<std::string> requires;  // TODO(Nordfriese): unused, not yet implemented
 	bool verified;

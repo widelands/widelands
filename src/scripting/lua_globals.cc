@@ -182,7 +182,7 @@ static int L__(lua_State* L) {
 			i18n::Textdomain dom(luaL_checkstring(L, -1));
 			lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
 		} else {
-			i18n::Textdomain dom(luaL_checkstring(L, -1), g_fs->canonicalize_name(kAddOnLocaleDir));
+			i18n::AddOnTextdomain dom(luaL_checkstring(L, -1));
 			lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
 		}
 	} else {
