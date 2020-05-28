@@ -298,7 +298,7 @@ void FullscreenMenuMapSelect::fill_table() {
 		if (ml != nullptr) {
 			try {
 				map.set_filename(mapfilename);
-				ml->preload_map(true);
+				ml->preload_map(true, nullptr);
 
 				if (!map.get_width() || !map.get_height()) {
 					continue;

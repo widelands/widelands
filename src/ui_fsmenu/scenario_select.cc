@@ -258,7 +258,7 @@ void FullscreenMenuScenarioSelect::fill_table() {
 		}
 
 		map.set_filename(full_path);
-		ml->preload_map(true);
+		ml->preload_map(true, nullptr);
 
 		{
 			i18n::Textdomain td("maps");

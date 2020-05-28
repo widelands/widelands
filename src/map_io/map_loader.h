@@ -36,21 +36,20 @@ class MapLoader {
 public:
 	enum class LoadType { kGame, kScenario, kEditor };
 
-	MapLoader(const std::string& filename, Map& M) : map_(M), state_(STATE_INIT), load_addons_(false) {
+	MapLoader(const std::string& filename, Map& M) : map_(M), state_(STATE_INIT) {
 		map_.set_filename(filename);
 	}
 	virtual ~MapLoader() {
 	}
 
-	virtual int32_t preload_map(bool as_scenario) = 0;
+	// If `addons` is not null, this function will also disable all world add-ons
+	// in that vector and enable the ones required by the map.
+	virtual int32_t preload_map(bool as_scenario, std::vector<AddOnInfo>* addons) = 0;
 	virtual int32_t load_map_complete(EditorGameBase&, MapLoader::LoadType) = 0;
 
 	Map& map() {
 		return map_;
 	}
-
-	void set_load_addons(bool l) { load_addons_ = l; };
-	bool get_load_addons() { return load_addons_; };
 
 protected:
 	enum State { STATE_INIT, STATE_PRELOADED, STATE_LOADED };
@@ -64,7 +63,6 @@ protected:
 
 private:
 	State state_;
-	bool load_addons_;
 };
 }  // namespace Widelands
 

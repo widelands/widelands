@@ -134,7 +134,7 @@ void FullscreenMenuLaunchGame::update_win_conditions() {
 			std::unique_ptr<Widelands::MapLoader> ml =
 			   map.get_correct_loader(settings_->settings().mapfilename);
 			if (ml != nullptr) {
-				ml->preload_map(true);
+				ml->preload_map(true, nullptr);
 				tags = map.get_tags();
 			}
 		}

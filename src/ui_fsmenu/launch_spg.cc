@@ -301,7 +301,7 @@ void FullscreenMenuLaunchSPG::set_player_names_and_tribes() {
 	std::unique_ptr<Widelands::MapLoader> map_loader(
 	   map.get_correct_loader(settings_->settings().mapfilename));
 	map.set_filename(settings_->settings().mapfilename);
-	map_loader->preload_map(true);
+	map_loader->preload_map(true, nullptr);
 	Widelands::PlayerNumber const nrplayers = map.get_nrplayers();
 	for (uint8_t i = 0; i < nrplayers; ++i) {
 		settings_->set_player_name(i, map.get_scenario_player_name(i + 1));

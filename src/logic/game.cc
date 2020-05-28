@@ -215,7 +215,7 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	create_loader_ui({"general_game"}, false);
 
 	step_loader_ui(_("Preloading map…"));
-	maploader->preload_map(true);
+	maploader->preload_map(true, &enabled_addons());
 	change_loader_ui_background(map().get_background());
 
 	step_loader_ui(_("Loading world…"));
@@ -274,8 +274,7 @@ void Game::init_newgame(const GameSettings& settings) {
 
 	std::unique_ptr<MapLoader> maploader(mutable_map()->get_correct_loader(settings.mapfilename));
 	assert(maploader != nullptr);
-	maploader->set_load_addons(true);
-	maploader->preload_map(settings.scenario);
+	maploader->preload_map(settings.scenario, &enabled_addons());
 	change_loader_ui_background(map().get_background());
 
 	step_loader_ui(_("Loading world…"));

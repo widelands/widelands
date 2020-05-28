@@ -452,8 +452,7 @@ void EditorInteractive::load(const std::string& filename) {
 		   _("Widelands could not load the file \"%s\". The file format seems to be incompatible."),
 		   filename.c_str());
 	}
-	ml->set_load_addons(true);
-	ml->preload_map(true);
+	ml->preload_map(true, &egbase().enabled_addons());
 
 	load_all_tribes(&egbase());
 

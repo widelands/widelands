@@ -369,8 +369,20 @@ S2MapLoader::S2MapLoader(const std::string& filename, Widelands::Map& M)
 
 /// Load the header. The map will then return valid information when
 /// get_width(), get_nrplayers(), get_author() and so on are called.
-int32_t S2MapLoader::preload_map(bool const scenario) {
+int32_t S2MapLoader::preload_map(bool const scenario, std::vector<AddOnInfo>* addons) {
 	assert(get_state() != STATE_LOADED);
+
+	// s2 maps don't have world add-ons
+	// (UNTESTED because I don't have an s2 map to test this with)
+	if (addons) {
+		for (auto it = addons->begin(); it != addons->end();) {
+			if (it->category == AddOnCategory::kWorld) {
+				it = addons->erase(it);
+			} else {
+				++it;
+			}
+		}
+	}
 
 	map_.cleanup();
 
@@ -411,18 +423,6 @@ int32_t S2MapLoader::load_map_complete(Widelands::EditorGameBase& egbase, MapLoa
 	timer_message += map_.get_name();
 	timer_message += "' took %ums";
 	ScopedTimer timer(timer_message);
-
-	// s2 maps don't have world add-ons
-	// (UNTESTED because I don't have an s2 map to test this with)
-	if (get_load_addons()) {
-		for (auto it = egbase.enabled_addons().begin(); it != egbase.enabled_addons().end();) {
-			if (it->category == AddOnCategory::kWorld) {
-				it = egbase.enabled_addons().erase(it);
-			} else {
-				++it;
-			}
-		}
-	}
 
 	load_s2mf(egbase);
 

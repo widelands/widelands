@@ -1,8 +1,7 @@
 Add-Ons
 =======
 
-The Widelands add-on system is still under development. In particular, Widelands does not yet have a server where add-ons can be up- and downloaded.
-This document describes how to create your own add-ons.
+The Widelands add-on system is still under development. In particular, Widelands does not yet have a server where add-ons can be up- and downloaded. This document describes how to create and package your own add-ons.
 
 Structure
 ---------
@@ -56,18 +55,15 @@ tribes
 ~~~~~~
 A script that modifies tribe units, such as wares, workers, or buildings. You can modify existing units and create new ones.
 
-The add-on needs to contain a script called ``init.lua`` which will be run after the default tribes were loaded.
-For details compare to the official tribe loading scripts in ``data/tribes/**/init.lua``.
+The add-on needs to contain a script called ``init.lua`` which will be run after the default tribes were loaded. For details see the official tribe loading scripts in ``data/tribes/**/init.lua``.
 
-If the add-on introduces one or more new tribes, it will additionally need to contain a scipt called ``preload.lua``.
-For details compare to the official tribe preload script ``data/tribes/preload.lua``.
+If the add-on introduces one or more new tribes, it will additionally need to contain a script called ``preload.lua``. For details see the official tribe preload script ``data/tribes/preload.lua``.
 
 world
 ~~~~~
 A script that modifies world units, such as terrains and resources. You can modify existing units and create new ones.
 
-The add-on needs to contain a script called ``init.lua`` which will be run after the default world was loaded.
-For details compare to the official world loading scripts in ``data/world/**/init.lua``.
+The add-on needs to contain a script called ``init.lua`` which will be run after the default world was loaded. For details see the official world loading scripts in ``data/world/**/init.lua``.
 
 
 script
@@ -90,8 +86,7 @@ campaign
 ~~~~~~~~
 One or more complete campaigns.
 
-The add-on needs to contain a script called ``campaigns.lua`` containing the campaign definition.
-For details compare to the official campaign script ``data/campaigns/campaigns.lua``.
+The add-on needs to contain a script called ``campaigns.lua`` containing the campaign definition. For details see the official campaign script ``data/campaigns/campaigns.lua``.
 
 The campaign scenarios is by default assumed to be located in the official ``data/campaigns`` directory. To specify that it is located in an add-on, prefix the name with the add-on's internal name followed by a colon (e.g. "example-campaign.wad:example.wmf").
 
@@ -100,15 +95,14 @@ win_condition
 ~~~~~~~~~~~~~
 A win condition script.
 
-The add-on needs to contain a script called ``init.lua`` which must follow the same conventions as the files in ``data/scripting/win_conditions/*.lua`` with one exception: The win condition table should specify the optional ``textdomain`` field which should be equal to the add-ons internal name (see `Translating`_).
+The add-on needs to contain a script called ``init.lua`` which must follow the same conventions as the files in ``data/scripting/win_conditions/*.lua`` with one exception: The win condition table should specify the optional ``textdomain`` field which should be equal to the add-on's internal name (see `Translating`_).
 
 
 starting_condition
 ~~~~~~~~~~~~~~~~~~
 A starting condition script. May define the same starting conditions for any number of tribes.
 
-The add-on needs to contain one or more scripts called ``<tribename>.lua``
-which must follow the same conventions as the files in ``data/tribes/scripting/starting_conditions/*/*.lua``.
+The add-on needs to contain one or more scripts called ``<tribename>.lua`` which must follow the same conventions as the files in ``data/tribes/scripting/starting_conditions/*/*.lua``.
 
 
 Restrictions
@@ -145,6 +139,8 @@ In order to not have to release a new version whenever translations change, tran
 The textdomain for an add-on is called ``internal-addon-name.wad``. The strings in the add-on config file, as well as map elemental data for Map Set add-ons, will be fetched from this textdomain. All Lua scripts shipped with the add-on will need to explicitly set the said textdomain. NOTE that you need to use the special function ``set_addon_textdomain("internal-addon-name.wad")`` to ensure that the textdomain will be looked for among the add-ons-specific translation files rather than in the locale directory shipped with the official game.
 
 The server will keep a repository of all add-on MO files which will be automatically compiled from the latest Transifex translations weekly. Downloading or upgrading an add-on will automatically download and install the latest translations files for this add-on for all languages. Each add-on has a translations version number in addition to the add-on version number; this allows the game to figure out whether the translations for an installed add-on can be upgraded.
+
+If you want to translate an add-on as long as we don't have a server yet, you will need to manually create a ``.po`` file for the add-on, populate it with all source strings found in the add-on, translate them, compile the file into a ``.mo`` file, and move that to ``~/.widelands/addons_i18n/nds/LC_MESSAGES/internal-addon-name.wad.mo`` (replacing ``nds`` and ``internal-addon-name.wad`` appropriately).
 
 
 License

@@ -201,7 +201,7 @@ void MainMenuLoadOrSaveMap::fill_table() {
 		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(mapfilename);
 		if (ml != nullptr) {
 			try {
-				ml->preload_map(true);
+				ml->preload_map(true, nullptr);
 
 				if (!map.get_width() || !map.get_height()) {
 					continue;

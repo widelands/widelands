@@ -74,15 +74,50 @@ WidelandsMapLoader::~WidelandsMapLoader() {
  * Preloads a map so that the map class returns valid data for all it's
  * get_info() functions (width, nrplayers..)
  */
-int32_t WidelandsMapLoader::preload_map(bool const scenario) {
+int32_t WidelandsMapLoader::preload_map(bool const scenario, std::vector<AddOnInfo>* addons) {
 	assert(get_state() != STATE_LOADED);
 
 	map_.cleanup();
 
 	{
-		MapElementalPacket mp;
-		mp.pre_read(*fs_, &map_);
-		old_world_name_ = mp.old_world_name();
+		MapElementalPacket elemental_data_packet;
+		elemental_data_packet.pre_read(*fs_, &map_);
+		old_world_name_ = elemental_data_packet.old_world_name();
+
+		if (addons) {
+			// first, clear all world add-ons…
+			for (auto it = addons->begin(); it != addons->end();) {
+				if (it->category == AddOnCategory::kWorld) {
+					it = addons->erase(it);
+				} else {
+					++it;
+				}
+			}
+			// …and now enable the ones we want
+			auto insert_before = addons->begin();
+			for (const auto& requirement : elemental_data_packet.required_addons()) {
+				bool found = false;
+				for (auto& pair : g_addons) {
+					if (pair.first.internal_name == requirement.first) {
+						found = true;
+						if (pair.first.version != requirement.second) {
+							log("WARNING: Map requires add-on '%s' at version %u but version %u is installed. "
+									"They might be compatible, but this is not necessarily the case.\n",
+									requirement.first.c_str(),
+									requirement.second,
+									pair.first.version);
+						}
+						assert(pair.first.category == AddOnCategory::kWorld);
+						addons->insert(insert_before, pair.first);
+						++insert_before;
+						break;
+					}
+				}
+				if (!found) {
+					throw GameDataError("Add-on '%s' (version %u) required but not installed", requirement.first.c_str(), requirement.second);
+				}
+			}
+		}
 	}
 	{
 		MapVersionPacket version_packet;
@@ -121,7 +156,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 	const bool is_game = load_type == MapLoader::LoadType::kGame;
 	const bool is_editor = load_type == MapLoader::LoadType::kEditor;
 
-	preload_map(!is_game);
+	preload_map(!is_game, nullptr /* add-ons have been loaded previously by the caller */);
 	map_.set_size(map_.width_, map_.height_);
 	mol_.reset(new MapObjectLoader());
 
@@ -140,41 +175,6 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	egbase.allocate_player_maps();  //  Can do this now that map size is known.
-
-	if (get_load_addons()) {
-		// first, clear all world add-ons…
-		for (auto it = egbase.enabled_addons().begin(); it != egbase.enabled_addons().end();) {
-			if (it->category == AddOnCategory::kWorld) {
-				it = egbase.enabled_addons().erase(it);
-			} else {
-				++it;
-			}
-		}
-		// …and now enable the ones we want
-		auto insert_before = egbase.enabled_addons().begin();
-		for (const auto& requirement : elemental_data_packet.required_addons()) {
-			bool found = false;
-			for (auto& pair : g_addons) {
-				if (pair.first.internal_name == requirement.first) {
-					found = true;
-					if (pair.first.version != requirement.second) {
-						log("WARNING: Map requires add-on '%s' at version %u but version %u is installed. "
-								"They might be compatible, but this is not necessarily the case.\n",
-								requirement.first.c_str(),
-								requirement.second,
-								pair.first.version);
-					}
-					assert(pair.first.category == AddOnCategory::kWorld);
-					egbase.enabled_addons().insert(insert_before, pair.first);
-					++insert_before;
-					break;
-				}
-			}
-			if (!found) {
-				throw GameDataError("Add-on '%s' (version %u) required but not installed", requirement.first.c_str(), requirement.second);
-			}
-		}
-	}
 
 	//  now player names and tribes
 	log("Reading Player Names And Tribe Data ... ");
