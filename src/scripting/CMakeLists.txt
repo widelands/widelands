@@ -71,7 +71,6 @@ wl_library(scripting_lua_interface
     base_macros
     build_info
     io_filesystem
-    logic_filesystem_constants
     scripting_base
     scripting_errors
     scripting_lua_table

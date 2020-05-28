@@ -141,6 +141,10 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 		               as_content(i18n::localize_list(tags, i18n::ConcatenateWith::COMMA), style_))
 		                 .str();
 
+		description = (boost::format("%s%s") % description %
+				       as_heading_with_content(_("Add-Ons:"), check_requirements(mapdata.required_addons), style_, false, true))
+				         .str();
+
 		description =
 		   (boost::format("%s%s") % description % as_heading(_("Description"), style_)).str();
 		description =
@@ -152,10 +156,6 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 			description =
 			   (boost::format("%s%s") % description % as_content(mapdata.hint, style_)).str();
 		}
-
-		description = (boost::format("%s%s") % description %
-				       as_heading_with_content(_("Add-Ons:"), check_requirements(mapdata.required_addons), style_))
-				         .str();
 
 		descr_.set_text(as_richtext(description));
 

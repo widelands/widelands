@@ -26,7 +26,6 @@
 #include "base/i18n.h"
 #include "build_info.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/filesystem_constants.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "scripting/report_error.h"

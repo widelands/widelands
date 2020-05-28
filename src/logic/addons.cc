@@ -51,8 +51,7 @@ const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories = {
 
 std::vector<std::pair<AddOnInfo, bool>> g_addons;
 
-std::string check_requirements(const AddOnRequirements& required_addons) {
-	// TODO(Nordfriese): Display a detailed list of *all* add-ons used by the map/savegame/whatever
+static std::string check_requirements_conflicts(const AddOnRequirements& required_addons) {
 	std::set<std::string> addons_missing;
 	std::map<std::string, std::pair<uint16_t, uint16_t>> addons_wrong_version;
 	for (const auto& requirement : required_addons) {
@@ -121,6 +120,19 @@ std::string check_requirements(const AddOnRequirements& required_addons) {
 					% list).str();
 		}
 	}
+}
+
+std::string check_requirements(const AddOnRequirements& required_addons) {
+	const size_t nr_req = required_addons.size();
+	if (nr_req == 0) {
+		/** TRANSLATORS: This map or savegame uses no add-ons */
+		return _("None");
+	}
+	std::string result = check_requirements_conflicts(required_addons);
+	for (const auto& pair : required_addons) {
+		result = (boost::format(_("%1$s<br>· %2$s (version %3$u)")) % result % pair.first % pair.second).str();
+	}
+	return result;
 }
 
 AddOnCategory get_category(const std::string& name) {
