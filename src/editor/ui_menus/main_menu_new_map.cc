@@ -99,6 +99,10 @@ void MainMenuNewMap::clicked_create_map() {
 	egbase.step_loader_ui(_("Creating empty map…"));
 
 	parent.cleanup_for_load();
+	egbase.init_addons(true);
+	// cleanup_for_load() deleted the world and tribes – reload them now
+	egbase.world();
+	egbase.tribes();
 
 	map->create_empty_map(egbase, map_size_box_.selected_width(), map_size_box_.selected_height(),
 	                      list_.get_selected(), _("No Name"),

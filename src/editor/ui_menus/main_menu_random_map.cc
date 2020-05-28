@@ -459,6 +459,14 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
 	eia.cleanup_for_load();
 
+	// TODO(Nordfriese): Perhaps support add-ons in the future?
+	// For now, we just disable them all…
+	egbase.enabled_addons().clear();
+	// egbase.init_addons(true);
+
+	egbase.world();
+	egbase.tribes();
+
 	UniqueRandomMapInfo map_info;
 	set_map_info(map_info);
 

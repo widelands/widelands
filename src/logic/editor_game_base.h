@@ -106,6 +106,9 @@ public:
 	virtual void postload();
 	void load_graphics();
 	virtual void cleanup_for_load();
+	void delete_world_and_tribes();
+
+	void init_addons(bool world_only);
 
 	/// Create a new loader UI and register which type of gametips to select from.
 	/// If 'show_game_tips' is true, game tips will be shown immediately.

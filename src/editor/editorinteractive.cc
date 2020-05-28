@@ -475,7 +475,11 @@ void EditorInteractive::load(const std::string& filename) {
 void EditorInteractive::cleanup_for_load() {
 	// TODO(unknown): get rid of cleanup_for_load, it tends to be very messy
 	// Instead, delete and re-create the egbase.
+	// TODO(Nordfriese): …and then we can get rid of delete_world_and_tribes() as well
 	egbase().cleanup_for_load();
+	// This is needed so add-ons are configured correctly if current
+	// and previous map had different world add-on settings
+	egbase().delete_world_and_tribes();
 }
 
 /// Called just before the editor starts, after postload, init and gfxload.

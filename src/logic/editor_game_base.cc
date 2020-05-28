@@ -59,10 +59,6 @@
 
 namespace Widelands {
 
-static inline bool addon_initially_enabled(AddOnCategory c) {
-	return c == AddOnCategory::kTribes || c == AddOnCategory::kWorld || c == AddOnCategory::kScript;
-}
-
 /*
 ============
 EditorGameBase::EditorGameBase()
@@ -83,17 +79,25 @@ EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
 		lua_.reset(new LuaEditorInterface(this));
 	}
 
-	for (const auto& pair : g_addons) {
-		if (pair.second && addon_initially_enabled(pair.first.category)) {
-			enabled_addons_.push_back(pair.first);
-		}
-	}
+	init_addons(false);
 }
 
 EditorGameBase::~EditorGameBase() {
 	delete_tempfile();
 	if (g_sh != nullptr) {
 		g_sh->remove_fx_set(SoundType::kAmbient);
+	}
+}
+
+static inline bool addon_initially_enabled(AddOnCategory c) {
+	return c == AddOnCategory::kTribes || c == AddOnCategory::kWorld || c == AddOnCategory::kScript;
+}
+void EditorGameBase::init_addons(bool world_only) {
+	enabled_addons_.clear();
+	for (const auto& pair : g_addons) {
+		if (pair.second && (world_only ? pair.first.category == AddOnCategory::kWorld : addon_initially_enabled(pair.first.category))) {
+			enabled_addons_.push_back(pair.first);
+		}
 	}
 }
 
@@ -186,6 +190,11 @@ void EditorGameBase::create_tempfile_and_save_mapdata(FileSystem::Type const typ
 void EditorGameBase::think() {
 	// TODO(unknown): Get rid of this; replace by a function that just advances gametime
 	// by a given number of milliseconds
+}
+
+void EditorGameBase::delete_world_and_tribes() {
+	tribes_.reset(nullptr);
+	world_.reset(nullptr);
 }
 
 const World& EditorGameBase::world() const {
