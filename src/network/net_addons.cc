@@ -19,6 +19,7 @@
 
 #include "network/net_addons.h"
 
+#include <cassert>
 #include <cstring>
 #include <memory>
 
@@ -35,6 +36,20 @@ CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
 
 // all cURL-related code is inspired by
 // https://stackoverflow.com/questions/1636333/download-file-using-libcurl-in-c-c
+
+static CURL* curl = nullptr;
+void open_curl_connection() {
+	assert(!curl);
+	curl = curl_easy_init();
+	if (!curl) {
+		throw wexception("Unable to initialize cURL");
+	}
+}
+void close_curl_connection() {
+	assert(curl);
+	curl_easy_cleanup(curl);
+	curl = nullptr;
+}
 
 static size_t refresh_remotes_callback(char* received_data, size_t, const size_t char_count, std::string* out) {
 	for (size_t i = 0; i < char_count; ++i) {
@@ -55,11 +70,6 @@ std::vector<AddOnInfo> refresh_remotes() {
 
 	std::vector<AddOnInfo> result_vector;
 
-	CURL* curl = curl_easy_init();
-	if (!curl) {
-		throw wexception("Unable to initialize cURL");
-	}
-
 	curl_easy_setopt(curl, CURLOPT_URL, "https://raw.githubusercontent.com/Noordfrees/wl_addons_server/master/list");
 
 	std::string output;
@@ -68,8 +78,6 @@ std::vector<AddOnInfo> refresh_remotes() {
 	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &refresh_remotes_callback);
 
 	const CURLcode res = curl_easy_perform(curl);
-
-	curl_easy_cleanup(curl);
 
 	if (res != CURLE_OK) {
 		throw wexception("cURL terminated with error code %d", res);
@@ -97,35 +105,41 @@ std::vector<AddOnInfo> refresh_remotes() {
 	const size_t nr_addons = next_number(output);
 	for (size_t i = 0; i < nr_addons; ++i) {
 		AddOnInfo info;
+
 		info.internal_name = next_word(output);
+
 		const std::string descname = next_word(output);
 		const std::string descr = next_word(output);
 		info.descname = [descname]() { return descname; };
 		info.description = [descr]() { return descr; };
+
 		info.author = next_word(output);
+
 		info.version = next_number(output);
 		info.i18n_version = next_number(output);
+
 		info.category = get_category(next_word(output));
+
 		for (size_t req = next_number(output); req; --req) {
 			info.requirements.push_back(next_word(output));
 		}
+
+		for (size_t dirs = next_number(output); dirs; --dirs) {
+			info.file_list.directories.push_back(next_word(output));
+		}
+		for (size_t files = next_number(output); files; --files) {
+			info.file_list.files.push_back(next_word(output));
+		}
+
 		info.verified = next_word(output) == "verified";
+
 		result_vector.push_back(info);
 	}
 
 	return result_vector;
 }
 
-std::string download_addon(const std::string& name) {
-	CURL* curl = curl_easy_init();
-	if (!curl) {
-		throw wexception("Unable to initialize cURL");
-	}
-
-	g_fs->ensure_directory_exists(kTempFileDir);
-	const std::string output = g_fs->canonicalize_name(
-			g_fs->get_userdatadir() + "/" + kTempFileDir + "/" + name + kTempFileExtension);
-
+void download_addon_file(const std::string& name, const std::string& output) {
 	const std::string url = "https://raw.githubusercontent.com/Noordfrees/wl_addons_server/master/addons/" + name;
 	curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
 
@@ -137,22 +151,14 @@ std::string download_addon(const std::string& name) {
 
 	const CURLcode res = curl_easy_perform(curl);
 
-	curl_easy_cleanup(curl);
 	fclose(out_file);
 
 	if (res != CURLE_OK) {
 		throw wexception("cURL terminated with error code %d", res);
 	}
-
-	return output;
 }
 
 std::string download_i18n(const std::string& name, const std::string& locale) {
-	CURL* curl = curl_easy_init();
-	if (!curl) {
-		throw wexception("Unable to initialize cURL");
-	}
-
 	const std::string temp_dirname = kTempFileDir + g_fs->file_separator() + name + ".mo";
 	g_fs->ensure_directory_exists(temp_dirname);
 
@@ -203,8 +209,6 @@ std::string download_i18n(const std::string& name, const std::string& locale) {
 		log("ERROR: Downloading add-on translation %s for %s to %s: cURL returned error code %d\n",
 				locale.c_str(), name.c_str(), canonical_output.c_str(), res);
 	}
-
-	curl_easy_cleanup(curl);
 
 	return success ? canonical_output : "";
 }

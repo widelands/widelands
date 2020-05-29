@@ -42,6 +42,7 @@ constexpr int32_t kHugeSize = std::numeric_limits<int32_t>::max() / 2;
 struct ProgressIndicatorWindow : public UI::Window {
 	ProgressIndicatorWindow(AddOnsCtrl* parent, const std::string& title) :
 			UI::Window(parent, "progress", 0, 0, parent->get_w() / 2, 2 * kRowButtonSize, title),
+			die_after_last_action(false),
 			box_(this, 0, 0, UI::Box::Vertical),
 			txt_(&box_, "", UI::Align::kCenter),
 			progress_(&box_, 0, 0, get_w(), kRowButtonSize, UI::ProgressBar::Horizontal) {
@@ -67,8 +68,11 @@ struct ProgressIndicatorWindow : public UI::Window {
 		return progress_;
 	}
 
+	// Bit complex design for the two download_xxx functions to ensure the
+	// progress indicator window stays responsive during downloading
 	std::function<void(const std::string&)> action_when_thinking;
 	std::vector<std::string> action_params;
+	bool die_after_last_action;
 	void think() override {
 		UI::Window::think();
 
@@ -78,7 +82,7 @@ struct ProgressIndicatorWindow : public UI::Window {
 			action_when_thinking(*action_params.begin());
 
 			action_params.erase(action_params.begin());
-			if (action_params.empty()) {
+			if (action_params.empty() && die_after_last_action) {
 				die();
 			}
 		}
@@ -89,6 +93,13 @@ private:
 	UI::Textarea txt_;
 	UI::ProgressBar progress_;
 };
+
+static std::set<std::string> get_all_locales() {
+	LuaInterface lua;
+	std::unique_ptr<LuaTable> all_locales_table(lua.run_script("i18n/locales.lua"));
+	all_locales_table->do_not_warn_about_unaccessed_keys();
+	return all_locales_table->keys<std::string>();
+}
 
 AddOnsCtrl::AddOnsCtrl() : FullscreenMenuBase(),
 		title_(this, 0, 0, get_w(), get_h() / 12, _("Add-Ons"), UI::Align::kCenter, g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
@@ -230,10 +241,14 @@ AddOnsCtrl::AddOnsCtrl() : FullscreenMenuBase(),
 	installed_addons_wrapper_.set_size(100, 100);
 	browse_addons_wrapper_.set_size(100, 100);
 
+	open_curl_connection();
+
 	refresh_remotes();
 }
 
 AddOnsCtrl::~AddOnsCtrl() {
+	close_curl_connection();
+
 	std::string text;
 	for (const auto& pair : g_addons) {
 		if (!text.empty()) {
@@ -257,7 +272,7 @@ void AddOnsCtrl::refresh_remotes() {
 				% error).str();},
 			/** TRANSLATORS: This will be inserted into the string "Server Connection Error \n by %s" */
 			_("a networking bug"),
-			0, 0, AddOnCategory::kNone, {}, false
+			0, 0, AddOnCategory::kNone, {}, false, {{}, {}}
 		}};
 	}
 	rebuild();
@@ -473,8 +488,10 @@ static void install_translation(const std::string& temp_locale_path, const std::
 void AddOnsCtrl::install(const AddOnInfo& remote) {
 	g_fs->ensure_directory_exists(kAddOnDir);
 
+	const Locales all_locales = get_all_locales();
+
 	ProgressIndicatorWindow piw(this, remote.descname());
-	const std::string path = download_addon(piw, remote);
+	const std::string path = download_addon(piw, remote, all_locales);
 
 	if (path.empty()) {
 		// downloading failed
@@ -496,7 +513,7 @@ void AddOnsCtrl::install(const AddOnInfo& remote) {
 	}
 
 	// Now download the translations
-	for (const std::string& temp_locale_path : download_i18n(piw, remote)) {
+	for (const std::string& temp_locale_path : download_i18n(piw, remote, all_locales)) {
 		install_translation(temp_locale_path, remote.internal_name, false);
 	}
 
@@ -507,10 +524,12 @@ void AddOnsCtrl::install(const AddOnInfo& remote) {
 void AddOnsCtrl::upgrade(const AddOnInfo& remote, bool full_upgrade) {
 	ProgressIndicatorWindow piw(this, remote.descname());
 
+	const Locales all_locales = get_all_locales();
+
 	if (full_upgrade) {
 		g_fs->ensure_directory_exists(kAddOnDir);
 
-		const std::string path = download_addon(piw, remote);
+		const std::string path = download_addon(piw, remote, all_locales);
 		if (path.empty()) {
 			// downloading failed
 			return;
@@ -534,7 +553,7 @@ void AddOnsCtrl::upgrade(const AddOnInfo& remote, bool full_upgrade) {
 	}
 
 	// Now download the translations
-	for (const std::string& temp_locale_path : download_i18n(piw, remote)) {
+	for (const std::string& temp_locale_path : download_i18n(piw, remote, all_locales)) {
 		install_translation(temp_locale_path, remote.internal_name, true);
 	}
 
@@ -547,31 +566,38 @@ void AddOnsCtrl::upgrade(const AddOnInfo& remote, bool full_upgrade) {
 	NEVER_HERE();
 }
 
-std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw, const AddOnInfo& info) {
+std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw, const AddOnInfo& info, const Locales& locales) {
 	try {
 		piw.progressbar().set_state(0);
-		piw.progressbar().set_total(1);
+		piw.progressbar().set_total(info.file_list.files.size() + locales.size());
 		piw.set_message((boost::format(_("Downloading %s…")) % info.descname()).str());
 
-		// TODO(Nordfriese): Use the progress bar to display the actual download state?
-		// Perhaps even display download speed, remaining time estimate, and other stats?
-		// Not as long as I don't know for certain that we'll really stick with cURL…
+		const std::string temp_dir = g_fs->canonicalize_name(
+				g_fs->get_userdatadir() + "/" + kTempFileDir + "/" + info.internal_name + kTempFileExtension);
+		g_fs->ensure_directory_exists(temp_dir);
+		for (const std::string& subdir : info.file_list.directories) {
+			g_fs->ensure_directory_exists(g_fs->canonicalize_name(temp_dir + "/" + subdir));
+		}
 
-		piw.run<UI::Panel::Returncodes>();  // for drawing
-		const std::string result = ::download_addon(info.internal_name);
-		piw.run<UI::Panel::Returncodes>();  // for drawing
+		piw.action_params = info.file_list.files;
+		piw.action_when_thinking = [&info, &piw, temp_dir](const std::string& file_to_download) {
+			piw.set_message((boost::format(_("Downloading file ‘%s’…")) % file_to_download).str());
+			::download_addon_file(info.internal_name + "/" + file_to_download, g_fs->canonicalize_name(temp_dir + "/" + file_to_download));
+			piw.progressbar().set_state(piw.progressbar().get_state() + 1);
+		};
+		piw.run<UI::Panel::Returncodes>();
 
-		return result;
+		return temp_dir;
 	} catch (const std::exception& e) {
 		UI::WLMessageBox w(this, _("Error"), (boost::format(
-				_("The add-on '%1$s' could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n\nError Message:\n%2$s"))
+				_("The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n\nError Message:\n%2$s"))
 				% info.internal_name.c_str() % e.what()).str(), UI::WLMessageBox::MBoxType::kOk);
 		w.run<UI::Panel::Returncodes>();
 	}
 	return "";
 }
 
-std::set<std::string> AddOnsCtrl::download_i18n(ProgressIndicatorWindow& piw, const AddOnInfo& info) {
+std::set<std::string> AddOnsCtrl::download_i18n(ProgressIndicatorWindow& piw, const AddOnInfo& info, const Locales& all_locales) {
 	try {
 		piw.set_message((boost::format(_("Downloading translations for %s…")) % info.descname()).str());
 
@@ -583,24 +609,16 @@ std::set<std::string> AddOnsCtrl::download_i18n(ProgressIndicatorWindow& piw, co
 		// the others take about one minute extra, which could be avoided.
 		// In net_addons.cc, we can then also fail with a wexception if downloading one of them
 		// fails, instead of only logging the error as we do now.
-		LuaInterface lua;
-		std::unique_ptr<LuaTable> all_locales_table(lua.run_script("i18n/locales.lua"));
-		const std::set<std::string> all_locales = all_locales_table->keys<std::string>();
-		all_locales_table->do_not_warn_about_unaccessed_keys();
-
-		piw.progressbar().set_state(1);
-		piw.progressbar().set_total(all_locales.size() + 1);
 
 		std::set<std::string> result;
-		// Bit complex design to ensure the progress indicator window stays responsive during downloading
+		piw.die_after_last_action = true;
 		for (const std::string& locale : all_locales) {
 			piw.action_params.push_back(locale);
 		}
 		piw.action_when_thinking = [&info, &result, &piw](const std::string& locale_to_download) {
 			piw.set_message((boost::format(
 					/** TRANSLATORS: The first placeholder will extend to a language ISO code (e.g. nds, de, en_GB) */
-					_("Downloading '%1$s' translation for %2$s…"))
-					% locale_to_download % info.descname()).str());
+					_("Downloading ‘%s’ translation…")) % locale_to_download).str());
 			const std::string str = ::download_i18n(info.internal_name, locale_to_download);
 			assert(!result.count(str));
 			if (!str.empty()) {
@@ -620,7 +638,7 @@ std::set<std::string> AddOnsCtrl::download_i18n(ProgressIndicatorWindow& piw, co
 		return result;
 	} catch (const std::exception& e) {
 		UI::WLMessageBox w(this, _("Error"), (boost::format(
-				_("The translation files for the add-on '%1$s' could not be downloaded from the server. "
+				_("The translation files for the add-on ‘%1$s’ could not be downloaded from the server. "
 				"Installing/upgrading the translations for this add-on will be skipped.\n\nError Message:\n%2$s"))
 				% info.internal_name.c_str() % e.what()).str(), UI::WLMessageBox::MBoxType::kOk);
 		w.run<UI::Panel::Returncodes>();

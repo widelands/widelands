@@ -106,8 +106,10 @@ private:
 
 	bool matches_filter(const AddOnInfo&, bool local);
 
-	std::string download_addon(ProgressIndicatorWindow&, const AddOnInfo&);
-	std::set<std::string> download_i18n(ProgressIndicatorWindow&, const AddOnInfo&);
+	using Locales = std::set<std::string>;
+
+	std::string download_addon(ProgressIndicatorWindow&, const AddOnInfo&, const Locales&);
+	std::set<std::string> download_i18n(ProgressIndicatorWindow&, const AddOnInfo&, const Locales&);
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_H

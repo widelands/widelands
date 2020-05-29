@@ -171,7 +171,7 @@ AddOnInfo preload_addon(const std::string& name) {
 		s.get_safe_positive("version"),
 		i18n_profile.get_safe_section("global").get_safe_positive(name.c_str()),
 		get_category(s.get_safe_string("category")),
-		{}, false
+		{}, false, {{}, {}}
 	};
 
 	if (i.category == AddOnCategory::kNone) {

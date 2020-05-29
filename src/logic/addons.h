@@ -54,6 +54,11 @@ constexpr uint32_t kNotInstalled = 0;
 // Required add-ons for an add-on, map, or savegame with the recommended version
 using AddOnRequirements = std::vector<std::pair<std::string, uint32_t>>;
 
+// TODO(Nordfriese): Ugly hack required for the dummy server. Can go when we have a real server.
+struct AddOnFileList {
+	std::vector<std::string> directories, files;
+};
+
 struct AddOnInfo {
 	std::string internal_name;                 // "cool_feature.wad"
 	std::function<std::string()> descname;     // "Cool Feature"
@@ -65,6 +70,7 @@ struct AddOnInfo {
 	std::vector<std::string> requirements;  // This add-on will only work correctly if these
 	                                        // add-ons are present in this order and active
 	bool verified;                          // Only valid for Remote add-ons
+	AddOnFileList file_list;                // Get rid of this ASAP
 	// TODO(Nordfriese): in the future, we might also want to include:
 	// uploader username, upload date&time, average rating, number of votes, user comments, …
 };

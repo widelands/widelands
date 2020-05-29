@@ -31,10 +31,8 @@
 // Fetch the list of all available add-ons from the server
 std::vector<AddOnInfo> refresh_remotes();
 
-// Requests the ZIP-file with the given name (e.g. "cool_feature.wad") from the server,
-// downloads it into a temporary location (e.g. ~/.widelands/temp/cool_feature.wad.tmp),
-// and returns the canonical path to the downloaded file.
-std::string download_addon(const std::string&);
+// Requests the file with the given name server and downloads it into thr given location.
+void download_addon_file(const std::string& name, const std::string& save_as);
 
 // Requests the MO file for the given add-on and locale from the server,
 // downloads it into a temporary location (e.g. ~/.widelands/temp/nds.mo.tmp),
@@ -43,5 +41,8 @@ std::string download_addon(const std::string&);
 // "nds.mo.tmp" (where 'nds' is the language's abbreviation).
 // Returns "" on failure.
 std::string download_i18n(const std::string& addon, const std::string& locale);
+
+void open_curl_connection();
+void close_curl_connection();
 
 #endif  // end of include guard: WL_NETWORK_NET_ADDONS_H
