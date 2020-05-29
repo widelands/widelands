@@ -36,11 +36,12 @@ std::vector<AddOnInfo> refresh_remotes();
 // and returns the canonical path to the downloaded file.
 std::string download_addon(const std::string&);
 
-// Requests the MO files for the given add-on in all languages from the server,
-// downloads them into temporary locations (e.g. ~/.widelands/temp/nds.mo.tmp),
-// and returns the canonical paths to the downloaded files.
-// Every temp file's filename is guaranteed to be in the format
+// Requests the MO file for the given add-on and locale from the server,
+// downloads it into a temporary location (e.g. ~/.widelands/temp/nds.mo.tmp),
+// and returns the canonical path to the downloaded file.
+// The temp file's filename is guaranteed to be in the format
 // "nds.mo.tmp" (where 'nds' is the language's abbreviation).
-std::set<std::string> download_i18n(const std::string&);
+// Returns "" on failure.
+std::string download_i18n(const std::string& addon, const std::string& locale);
 
 #endif  // end of include guard: WL_NETWORK_NET_ADDONS_H

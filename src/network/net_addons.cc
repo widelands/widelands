@@ -19,6 +19,7 @@
 
 #include "network/net_addons.h"
 
+#include <cstring>
 #include <memory>
 
 #include <curl/curl.h>
@@ -28,8 +29,6 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamread.h"
 #include "logic/filesystem_constants.h"
-#include "scripting/lua_interface.h"
-#include "scripting/lua_table.h"
 
 // silence warnings triggered by curl.h
 CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
@@ -148,7 +147,7 @@ std::string download_addon(const std::string& name) {
 	return output;
 }
 
-std::set<std::string> download_i18n(const std::string& name) {
+std::string download_i18n(const std::string& name, const std::string& locale) {
 	CURL* curl = curl_easy_init();
 	if (!curl) {
 		throw wexception("Unable to initialize cURL");
@@ -157,76 +156,57 @@ std::set<std::string> download_i18n(const std::string& name) {
 	const std::string temp_dirname = kTempFileDir + g_fs->file_separator() + name + ".mo";
 	g_fs->ensure_directory_exists(temp_dirname);
 
-	std::set<std::string> results;
-	// Download all known locales one by one.
-	// TODO(Nordfriese): When we have a real server, we should let the server provide us with info
-	// which locales are actually present on the server rather than trying to fetch all we know
-	// about. Then we can also fail with a wexception if downloading one of them fails, instead of
-	// only logging the error as we do now.
-	LuaInterface lua;
-	std::unique_ptr<LuaTable> all_locales(lua.run_script("i18n/locales.lua"));
-	all_locales->do_not_warn_about_unaccessed_keys();
+	const std::string relative_output = temp_dirname + g_fs->file_separator() + locale + ".mo" + kTempFileExtension;
+	const std::string canonical_output = g_fs->canonicalize_name(g_fs->get_userdatadir() + "/" + relative_output);
 
-	for (const std::string& locale : all_locales->keys<std::string>()) {
+	const std::string url = "https://raw.githubusercontent.com/Noordfrees/wl_addons_server/master/i18n/" + name + "/" + locale + ".mo";
+	curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
 
-		const std::string relative_output = temp_dirname + g_fs->file_separator() + locale + ".mo" + kTempFileExtension;
-		const std::string canonical_output = g_fs->canonicalize_name(g_fs->get_userdatadir() + "/" + relative_output);
+	std::FILE* out_file = std::fopen(canonical_output.c_str(), "wb");
+	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, [](void* ptr, size_t size, size_t nmemb, std::FILE* stream) {
+		return std::fwrite(ptr, size, nmemb, stream);
+	});
+	curl_easy_setopt(curl, CURLOPT_WRITEDATA, out_file);
 
-		const std::string url = "https://raw.githubusercontent.com/Noordfrees/wl_addons_server/master/i18n/" + name + "/" + locale + ".mo";
-		curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+	const CURLcode res = curl_easy_perform(curl);
 
-		std::FILE* out_file = std::fopen(canonical_output.c_str(), "wb");
-		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, [](void* ptr, size_t size, size_t nmemb, std::FILE* stream) {
-			return std::fwrite(ptr, size, nmemb, stream);
-		});
-		curl_easy_setopt(curl, CURLOPT_WRITEDATA, out_file);
+	fclose(out_file);
 
-		const CURLcode res = curl_easy_perform(curl);
-
-		fclose(out_file);
-
-		bool success = true;
-		if (res == CURLE_OK) {
-			// If the locale does not exist, we may get a valid file containing the text "404: Not Found".
-			// So we open the file, read the first 14 characters, and check whether this is the case.
-			// Another problem we can forget about when we have a real server…
-			try {
-				std::unique_ptr<StreamRead> checker(g_fs->open_stream_read(relative_output));
-				if (!checker) {
-					success = false;
-					log("ERROR: Downloading add-on translation %s for %s to %s: Unable to open output file\n",
-							locale.c_str(), name.c_str(), canonical_output.c_str());
-				} else {
-					char buffer[15];
-					checker->data(&buffer, 14);
-					buffer[14] = '\0';
-					if (std::strcmp(buffer, "404: Not Found") == 0) {
-						success = false;
-						log("WARNING: Downloading add-on translation %s for %s to %s was skipped due to '404: Not Found'\n",
-								locale.c_str(), name.c_str(), canonical_output.c_str());
-					}
-				}
-			} catch (const std::exception& e) {
+	bool success = true;
+	if (res == CURLE_OK) {
+		// If the locale does not exist, we may get a valid file containing the text "404: Not Found".
+		// So we open the file, read the first 14 characters, and check whether this is the case.
+		// Another problem we can forget about when we have a real server…
+		try {
+			std::unique_ptr<StreamRead> checker(g_fs->open_stream_read(relative_output));
+			if (!checker) {
 				success = false;
-				log("ERROR: Downloading add-on translation %s for %s to %s: Invalid output file (%s)\n",
-						locale.c_str(), name.c_str(), canonical_output.c_str(), e.what());
+				log("ERROR: Downloading add-on translation %s for %s to %s: Unable to open output file\n",
+						locale.c_str(), name.c_str(), canonical_output.c_str());
+			} else {
+				char buffer[15];
+				checker->data(&buffer, 14);
+				buffer[14] = '\0';
+				if (std::strcmp(buffer, "404: Not Found") == 0) {
+					success = false;
+					log("WARNING: Downloading add-on translation %s for %s to %s was skipped due to '404: Not Found'\n",
+							locale.c_str(), name.c_str(), canonical_output.c_str());
+				}
 			}
-		} else {
+		} catch (const std::exception& e) {
 			success = false;
-			log("ERROR: Downloading add-on translation %s for %s to %s: cURL returned error code %d\n",
-					locale.c_str(), name.c_str(), canonical_output.c_str(), res);
+			log("ERROR: Downloading add-on translation %s for %s to %s: Invalid output file (%s)\n",
+					locale.c_str(), name.c_str(), canonical_output.c_str(), e.what());
 		}
-
-		if (success) {
-			results.insert(canonical_output);
-		} else {
-			std::remove(canonical_output.c_str());
-		}
+	} else {
+		success = false;
+		log("ERROR: Downloading add-on translation %s for %s to %s: cURL returned error code %d\n",
+				locale.c_str(), name.c_str(), canonical_output.c_str(), res);
 	}
 
 	curl_easy_cleanup(curl);
 
-	return results;
+	return success ? canonical_output : "";
 }
 
 CLANG_DIAG_ON("-Wdisabled-macro-expansion")

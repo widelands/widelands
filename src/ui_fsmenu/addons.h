@@ -37,6 +37,7 @@
 #include "ui_fsmenu/base.h"
 
 class AddOnsCtrl;
+struct ProgressIndicatorWindow;
 
 struct InstalledAddOnRow : public UI::Panel {
 	InstalledAddOnRow(Panel*, AddOnsCtrl*, const AddOnInfo&, bool enabled, bool is_first, bool is_last);
@@ -81,8 +82,8 @@ public:
 	void rebuild();
 	void update_dependency_errors();
 
-	void install(const std::string&, uint32_t i18n_version);
-	void upgrade(const std::string&, bool full_upgrade, uint32_t i18n_version);
+	void install(const AddOnInfo&);
+	void upgrade(const AddOnInfo&, bool full_upgrade);
 
 protected:
 	void layout() override;
@@ -105,8 +106,8 @@ private:
 
 	bool matches_filter(const AddOnInfo&, bool local);
 
-	std::string download_addon(const std::string&);
-	std::set<std::string> download_i18n(const std::string&, uint32_t i18n_version);
+	std::string download_addon(ProgressIndicatorWindow&, const AddOnInfo&);
+	std::set<std::string> download_i18n(ProgressIndicatorWindow&, const AddOnInfo&);
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_H

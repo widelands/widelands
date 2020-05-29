@@ -25,7 +25,11 @@
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
 #include "network/net_addons.h"
+#include "scripting/lua_interface.h"
+#include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
+#include "ui_basic/progressbar.h"
+#include "wlapplication.h"
 #include "wlapplication_options.h"
 
 constexpr int16_t kRowButtonSize = 32;
@@ -34,6 +38,57 @@ constexpr int16_t kRowButtonSpacing = 4;
 // UI::Box by defaults limits its size to the window resolution. We use scrollbars,
 // so we can and need to allow somewhat larger dimensions.
 constexpr int32_t kHugeSize = std::numeric_limits<int32_t>::max() / 2;
+
+struct ProgressIndicatorWindow : public UI::Window {
+	ProgressIndicatorWindow(AddOnsCtrl* parent, const std::string& title) :
+			UI::Window(parent, "progress", 0, 0, parent->get_w() / 2, 2 * kRowButtonSize, title),
+			box_(this, 0, 0, UI::Box::Vertical),
+			txt_(&box_, "", UI::Align::kCenter),
+			progress_(&box_, 0, 0, get_w(), kRowButtonSize, UI::ProgressBar::Horizontal) {
+
+		box_.add(&txt_, UI::Box::Resizing::kFullSize);
+		box_.add_space(kRowButtonSpacing);
+		box_.add(&progress_, UI::Box::Resizing::kFullSize);
+
+		// The user must not close this window
+		get_button_pin()->set_enabled(false);
+		set_pinned(true);
+
+		set_center_panel(&box_);
+		center_to_parent();
+	}
+	~ProgressIndicatorWindow() override {
+	}
+
+	void set_message(const std::string& msg) {
+		txt_.set_text(msg);
+	}
+	UI::ProgressBar& progressbar() {
+		return progress_;
+	}
+
+	std::function<void(const std::string&)> action_when_thinking;
+	std::vector<std::string> action_params;
+	void think() override {
+		UI::Window::think();
+
+		if (action_params.empty()) {
+			end_modal(UI::Panel::Returncodes::kOk);
+		} else {
+			action_when_thinking(*action_params.begin());
+
+			action_params.erase(action_params.begin());
+			if (action_params.empty()) {
+				die();
+			}
+		}
+	}
+
+private:
+	UI::Box box_;
+	UI::Textarea txt_;
+	UI::ProgressBar progress_;
+};
 
 AddOnsCtrl::AddOnsCtrl() : FullscreenMenuBase(),
 		title_(this, 0, 0, get_w(), get_h() / 12, _("Add-Ons"), UI::Align::kCenter, g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
@@ -136,13 +191,13 @@ AddOnsCtrl::AddOnsCtrl() : FullscreenMenuBase(),
 		filter_reset_.set_enabled(false);
 	});
 	upgrade_all_.sigclicked.connect([this]() {
-		std::vector<std::pair<AddOnInfo, std::pair<bool /* full upgrade */, uint32_t /* remote i18n version */>>> upgrades;
+		std::vector<std::pair<AddOnInfo, bool /* full upgrade */>> upgrades;
 		bool all_verified = true;
 		size_t nr_full_updates = 0;
 		for (const RemoteAddOnRow* r : browse_) {
 			if (r->upgradeable()) {
 				const bool full_upgrade = r->full_upgrade_possible();
-				upgrades.push_back(std::make_pair(r->info(), std::make_pair(full_upgrade, r->info().i18n_version)));
+				upgrades.push_back(std::make_pair(r->info(), full_upgrade));
 				if (full_upgrade) {
 					all_verified &= r->info().verified;
 					++nr_full_updates;
@@ -155,7 +210,7 @@ AddOnsCtrl::AddOnsCtrl() : FullscreenMenuBase(),
 			std::string text = (boost::format(ngettext("Are you certain that you want to upgrade this %u add-on?\n",
 					"Are you certain that you want to upgrade these %u add-ons?\n", nr_full_updates)) % nr_full_updates).str();
 			for (const auto& pair : upgrades) {
-				if (pair.second.first) {
+				if (pair.second) {
 					text += (boost::format(_("\n· %1$s (%2$s) by %3$s"))
 							% pair.first.descname() % (pair.first.verified ? _("verified") : _("NOT VERIFIED")) % pair.first.author).str();
 				}
@@ -164,7 +219,7 @@ AddOnsCtrl::AddOnsCtrl() : FullscreenMenuBase(),
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) { return; }
 		}
 		for (const auto& pair : upgrades) {
-			upgrade(pair.first.internal_name, pair.second.first, pair.second.second);
+			upgrade(pair.first, pair.second);
 		}
 		rebuild();
 	});
@@ -415,9 +470,12 @@ static void install_translation(const std::string& temp_locale_path, const std::
 }
 
 // TODO(Nordfriese): install() and upgrade() should also (recursively) install the add-on's requirements
-void AddOnsCtrl::install(const std::string& name, const uint32_t i18n_version) {
+void AddOnsCtrl::install(const AddOnInfo& remote) {
 	g_fs->ensure_directory_exists(kAddOnDir);
-	const std::string path = download_addon(name);
+
+	ProgressIndicatorWindow piw(this, remote.descname());
+	const std::string path = download_addon(piw, remote);
+
 	if (path.empty()) {
 		// downloading failed
 		return;
@@ -425,7 +483,7 @@ void AddOnsCtrl::install(const std::string& name, const uint32_t i18n_version) {
 
 	// Install the add-on
 	{
-		const std::string new_path = kAddOnDir + g_fs->file_separator() + name;
+		const std::string new_path = kAddOnDir + g_fs->file_separator() + remote.internal_name;
 
 		assert(g_fs->file_exists(path));
 		assert(!g_fs->file_exists(new_path));
@@ -438,27 +496,28 @@ void AddOnsCtrl::install(const std::string& name, const uint32_t i18n_version) {
 	}
 
 	// Now download the translations
-	for (const std::string& temp_locale_path : download_i18n(name, i18n_version)) {
-		install_translation(temp_locale_path, name, false);
+	for (const std::string& temp_locale_path : download_i18n(piw, remote)) {
+		install_translation(temp_locale_path, remote.internal_name, false);
 	}
 
-	g_addons.push_back(std::make_pair(preload_addon(name), true));
+	g_addons.push_back(std::make_pair(preload_addon(remote.internal_name), true));
 }
 
-// TODO(Nordfriese): A progress bar for the downloads would be nice
-
 // Upgrades the specified add-on. If `full_upgrade` is `false`, only translations will be updated.
-void AddOnsCtrl::upgrade(const std::string& name, bool full_upgrade, const uint32_t i18n_version) {
+void AddOnsCtrl::upgrade(const AddOnInfo& remote, bool full_upgrade) {
+	ProgressIndicatorWindow piw(this, remote.descname());
+
 	if (full_upgrade) {
 		g_fs->ensure_directory_exists(kAddOnDir);
-		const std::string path = download_addon(name);
+
+		const std::string path = download_addon(piw, remote);
 		if (path.empty()) {
 			// downloading failed
 			return;
 		}
 
 		// Upgrade the add-on
-		const std::string new_path = kAddOnDir + g_fs->file_separator() + name;
+		const std::string new_path = kAddOnDir + g_fs->file_separator() + remote.internal_name;
 
 		assert(g_fs->file_exists(path));
 		assert(g_fs->file_exists(new_path) ^ g_fs->is_directory(new_path));
@@ -475,49 +534,95 @@ void AddOnsCtrl::upgrade(const std::string& name, bool full_upgrade, const uint3
 	}
 
 	// Now download the translations
-	for (const std::string& temp_locale_path : download_i18n(name, i18n_version)) {
-		install_translation(temp_locale_path, name, true);
+	for (const std::string& temp_locale_path : download_i18n(piw, remote)) {
+		install_translation(temp_locale_path, remote.internal_name, true);
 	}
 
 	for (auto& pair : g_addons) {
-		if (pair.first.internal_name == name) {
-			pair.first = preload_addon(name);
+		if (pair.first.internal_name == remote.internal_name) {
+			pair.first = preload_addon(remote.internal_name);
 			return;
 		}
 	}
 	NEVER_HERE();
 }
 
-// Requests the ZIP-file with the given name (e.g. "cool_feature.wad") from the server,
-// downloads it into a temporary location (e.g. ~/.widelands/temp/cool_feature.wad.tmp),
-// and returns the path to the downloaded file.
-std::string AddOnsCtrl::download_addon(const std::string& name) {
+std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw, const AddOnInfo& info) {
 	try {
-		return ::download_addon(name);
+		piw.progressbar().set_state(0);
+		piw.progressbar().set_total(1);
+		piw.set_message((boost::format(_("Downloading %s…")) % info.descname()).str());
+
+		// TODO(Nordfriese): Use the progress bar to display the actual download state?
+		// Perhaps even display download speed, remaining time estimate, and other stats?
+		// Not as long as I don't know for certain that we'll really stick with cURL…
+
+		piw.run<UI::Panel::Returncodes>();  // for drawing
+		const std::string result = ::download_addon(info.internal_name);
+		piw.run<UI::Panel::Returncodes>();  // for drawing
+
+		return result;
 	} catch (const std::exception& e) {
 		UI::WLMessageBox w(this, _("Error"), (boost::format(
 				_("The add-on '%1$s' could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n\nError Message:\n%2$s"))
-				% name.c_str() % e.what()).str(), UI::WLMessageBox::MBoxType::kOk);
+				% info.internal_name.c_str() % e.what()).str(), UI::WLMessageBox::MBoxType::kOk);
 		w.run<UI::Panel::Returncodes>();
 	}
 	return "";
 }
 
-std::set<std::string> AddOnsCtrl::download_i18n(const std::string& name, const uint32_t i18n_version) {
+std::set<std::string> AddOnsCtrl::download_i18n(ProgressIndicatorWindow& piw, const AddOnInfo& info) {
 	try {
-		std::set<std::string> result = ::download_i18n(name);
+		piw.set_message((boost::format(_("Downloading translations for %s…")) % info.descname()).str());
+
+		// Download all known locales one by one.
+		// TODO(Nordfriese): When we have a real server, we should let the server provide us
+		// with info which locales are actually present on the server rather than trying to
+		// fetch all we know about.
+		// My dummy "server" currently has only 'nds' translations, and the attempts to download
+		// the others take about one minute extra, which could be avoided.
+		// In net_addons.cc, we can then also fail with a wexception if downloading one of them
+		// fails, instead of only logging the error as we do now.
+		LuaInterface lua;
+		std::unique_ptr<LuaTable> all_locales_table(lua.run_script("i18n/locales.lua"));
+		const std::set<std::string> all_locales = all_locales_table->keys<std::string>();
+		all_locales_table->do_not_warn_about_unaccessed_keys();
+
+		piw.progressbar().set_state(1);
+		piw.progressbar().set_total(all_locales.size() + 1);
+
+		std::set<std::string> result;
+		// Bit complex design to ensure the progress indicator window stays responsive during downloading
+		for (const std::string& locale : all_locales) {
+			piw.action_params.push_back(locale);
+		}
+		piw.action_when_thinking = [&info, &result, &piw](const std::string& locale_to_download) {
+			piw.set_message((boost::format(
+					/** TRANSLATORS: The first placeholder will extend to a language ISO code (e.g. nds, de, en_GB) */
+					_("Downloading '%1$s' translation for %2$s…"))
+					% locale_to_download % info.descname()).str());
+			const std::string str = ::download_i18n(info.internal_name, locale_to_download);
+			assert(!result.count(str));
+			if (!str.empty()) {
+				result.insert(str);
+			}
+			piw.progressbar().set_state(piw.progressbar().get_state() + 1);
+		};
+		piw.run<UI::Panel::Returncodes>();
 
 		// If the translations were downloaded correctly, we also update the i18n version info
-		Profile prof(kAddOnLocaleVersions.c_str());
-		prof.pull_section("global").set_natural(name.c_str(), i18n_version);
-		prof.write(kAddOnLocaleVersions.c_str(), false);
+		if (!result.empty()) {
+			Profile prof(kAddOnLocaleVersions.c_str());
+			prof.pull_section("global").set_natural(info.internal_name.c_str(), info.i18n_version);
+			prof.write(kAddOnLocaleVersions.c_str(), false);
+		}
 
 		return result;
 	} catch (const std::exception& e) {
 		UI::WLMessageBox w(this, _("Error"), (boost::format(
 				_("The translation files for the add-on '%1$s' could not be downloaded from the server. "
 				"Installing/upgrading the translations for this add-on will be skipped.\n\nError Message:\n%2$s"))
-				% name.c_str() % e.what()).str(), UI::WLMessageBox::MBoxType::kOk);
+				% info.internal_name.c_str() % e.what()).str(), UI::WLMessageBox::MBoxType::kOk);
 		w.run<UI::Panel::Returncodes>();
 	}
 	return {};
@@ -683,7 +788,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo&
 				).str(), UI::WLMessageBox::MBoxType::kOkCancel);
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) { return; }
 		}
-		ctrl->install(info.internal_name, info.i18n_version);
+		ctrl->install(info);
 		ctrl->rebuild();
 	});
 	upgrade_.sigclicked.connect([this, ctrl, info, installed_version]() {
@@ -707,7 +812,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo&
 				).str(), UI::WLMessageBox::MBoxType::kOkCancel);
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) { return; }
 		}
-		ctrl->upgrade(info.internal_name, full_upgrade_possible_, info.i18n_version);
+		ctrl->upgrade(info, full_upgrade_possible_);
 		ctrl->rebuild();
 	});
 	if (info.internal_name.empty()) {
