@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-05-22 11:55+0000\n"
+"PO-Revision-Date: 2020-05-25 09:36+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -1323,7 +1323,7 @@ msgstr "Guardando automatico partido..."
 
 #: ../../src/game_io/game_saver.cc:112
 msgid "Interactive player"
-msgstr ""
+msgstr "Jugador interactivo"
 
 #. * TRANSLATORS: Error message printed to console/command line/log file
 #: ../../src/graphic/gl/initialize.cc:203
@@ -2567,7 +2567,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:45
 msgid "The game no longer exists, maybe it has just been closed."
-msgstr ""
+msgstr "El partido no existe más, puede que haya sido cerrado."
 
 #: ../../src/network/internet_gaming_messages.cc:46
 msgid "Wrong password, please try again."
@@ -2943,7 +2943,7 @@ msgstr "Empezar juego nuevo"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:96
 msgid "Leave Lobby"
-msgstr ""
+msgstr "Deje el Vestíbulo"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:143
 msgid "User Status"
@@ -3278,7 +3278,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:119
 msgid "Any Teams"
-msgstr ""
+msgstr "Cualquieres Equipos"
 
 #: ../../src/ui_fsmenu/mapselect.cc:431
 msgid "Balanced & Unbalanced"
@@ -3287,7 +3287,7 @@ msgstr "Equilibrado & Desequilibrado"
 #: ../../src/ui_fsmenu/mapselect.cc:436
 msgctxt "balancing"
 msgid "Unspecified"
-msgstr ""
+msgstr "No especificado"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:40
 msgid "Choose game type"
@@ -3447,7 +3447,7 @@ msgstr "Usar modo de mapa único"
 #. * TRANSLATORS: This refers to to zooming with the scrollwheel.
 #: ../../src/ui_fsmenu/options.cc:224
 msgid "Zoom only when Ctrl is pressed"
-msgstr ""
+msgstr "Haz \"zoom\" solo cuando Ctrl está presionado"
 
 #: ../../src/ui_fsmenu/options.cc:225
 msgid "Display game time in the top left corner"
@@ -3679,7 +3679,7 @@ msgstr "¿Realmente quieres cancelar la expedición activa?"
 
 #: ../../src/wui/attack_box.cc:193
 msgid "Send less soldiers. Hold down Ctrl to send no soldiers"
-msgstr ""
+msgstr "Envía menos soldados. Mantén Ctrl para enviar ninguno soldado"
 
 #: ../../src/wui/attack_box.cc:202
 msgid "Number of soldiers"
@@ -3688,7 +3688,7 @@ msgstr "Número de soldados"
 #: ../../src/wui/attack_box.cc:207
 msgid ""
 "Send more soldiers. Hold down Ctrl to send as many soldiers as possible"
-msgstr ""
+msgstr "Envía más soldados. Mantén Ctrl sin para enviar tan muchos soldados como posible"
 
 #: ../../src/wui/attack_box.cc:212
 msgid "Start attack"
@@ -3700,16 +3700,16 @@ msgstr "Atacadores:"
 
 #: ../../src/wui/attack_box.cc:233
 msgid "Click on a soldier to remove him from the list of attackers"
-msgstr ""
+msgstr "Haz clic en un soldado para remover lo de la lista de atacadores"
 
 #: ../../src/wui/attack_box.cc:235
 msgid "Hold down Ctrl to remove all soldiers from the list"
-msgstr ""
+msgstr "Mantén Ctrl para remover todos los soldados de la lista"
 
 #: ../../src/wui/attack_box.cc:236
 msgid ""
 "Hold down Shift to remove all soldiers up to the one you’re pointing at"
-msgstr ""
+msgstr "Mantén Shift para remover todos los saldos hasta lo en que muestras"
 
 #: ../../src/wui/attack_box.cc:244
 msgid "Not attacking:"
@@ -3717,15 +3717,15 @@ msgstr ""
 
 #: ../../src/wui/attack_box.cc:250
 msgid "Click on a soldier to add him to the list of attackers"
-msgstr ""
+msgstr "Haz clic en un soldado para añadir lo a la lista de atacadores"
 
 #: ../../src/wui/attack_box.cc:252
 msgid "Hold down Ctrl to add all soldiers to the list"
-msgstr ""
+msgstr "Mantén Ctrl para añadir todos los soldados a la lista"
 
 #: ../../src/wui/attack_box.cc:253
 msgid "Hold down Shift to add all soldiers up to the one you’re pointing at"
-msgstr ""
+msgstr "Mantén Shift para añadir todos los saldos hasta lo en que muestras"
 
 #. * TRANSLATORS: Health, Attack, Defense, Evade
 #: ../../src/wui/attack_box.cc:339 ../../src/wui/soldierlist.cc:394
@@ -3874,14 +3874,14 @@ msgstr "Materiales de construcción"
 #: ../../src/wui/soldiercapacitycontrol.cc:71
 msgid ""
 "Decrease capacity. Hold down Ctrl to set the capacity to the lowest value"
-msgstr ""
+msgstr "Disminuye la capacidad. Mantén Ctrl para fichar la capacidad al mínimo"
 
 #: ../../src/wui/constructionsitewindow.cc:191
 #: ../../src/wui/constructionsitewindow.cc:238
 #: ../../src/wui/soldiercapacitycontrol.cc:80
 msgid ""
 "Increase capacity. Hold down Ctrl to set the capacity to the highest value"
-msgstr ""
+msgstr "Aumenta la capacidad. Mantén Ctrl para fichar la capacidad al máximo"
 
 #: ../../src/wui/constructionsitewindow.cc:215
 msgid "Stopped"
@@ -3995,11 +3995,11 @@ msgstr "∞"
 
 #: ../../src/wui/economy_options_window.cc:512
 msgid "The profile name cannot be empty"
-msgstr ""
+msgstr "El nombre del perfil no puede ser vacío"
 
 #: ../../src/wui/economy_options_window.cc:513
 msgid "The default profile cannot be overwritten"
-msgstr ""
+msgstr "El perfil predeterminado no puede ser sobrescrito"
 
 #: ../../src/wui/economy_options_window.cc:516
 msgid "Save the profile under this name"
@@ -4015,11 +4015,11 @@ msgstr "Borrar los perfiles seleccionados"
 
 #: ../../src/wui/economy_options_window.cc:553
 msgid "Overwrite?"
-msgstr ""
+msgstr "¿Sobrescribir?"
 
 #: ../../src/wui/economy_options_window.cc:554
 msgid "A profile with this name already exists. Do you wish to replace it?"
-msgstr ""
+msgstr "Un perfil con este nombre ya existe. ¿Desea sustituirlo?"
 
 #: ../../src/wui/economy_options_window.cc:597
 msgid "Save Profile"
@@ -4546,13 +4546,13 @@ msgstr "Disminuye el número de artículos que deseas que se almacenen aquí"
 #. explanation
 #: ../../src/wui/inputqueuedisplay.cc:348
 msgid "Hold down Shift to decrease all ware types at the same time"
-msgstr ""
+msgstr "Mantén Shift para disminuir todas las mercancías al mismo tiempo"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue - option
 #. explanation
 #: ../../src/wui/inputqueuedisplay.cc:353
 msgid "Hold down Ctrl to allow none of this ware"
-msgstr ""
+msgstr "Mantén Ctrl para permitir ninguna de esta mercancía"
 
 #. * TRANSLATORS: Button tooltip in a building's wares input queue
 #: ../../src/wui/inputqueuedisplay.cc:369
@@ -4563,13 +4563,13 @@ msgstr "Aumenta el número de mercancías que quieres que se almacenen aquí"
 #. explanation
 #: ../../src/wui/inputqueuedisplay.cc:375
 msgid "Hold down Shift to increase all ware types at the same time"
-msgstr ""
+msgstr "Mantén Shift para aumentar todas las mercancías al mismo tiempo"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue - option
 #. explanation
 #: ../../src/wui/inputqueuedisplay.cc:380
 msgid "Hold down Ctrl to allow all of this ware"
-msgstr ""
+msgstr "Mantén Ctrl para permitir todas de esta mercancía"
 
 #. * TRANSLATORS: Title for the map view menu button in the game
 #: ../../src/wui/interactive_base.cc:172
@@ -4588,7 +4588,7 @@ msgstr "Mostrar Minimapa"
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:289
 msgid "Zoom +"
-msgstr "Ampliación +"
+msgstr "Zoom +"
 
 #: ../../src/wui/interactive_base.cc:291
 msgctxt "hotkey"
@@ -4608,7 +4608,7 @@ msgstr "Ctrl+0"
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:299
 msgid "Zoom -"
-msgstr "Ampliación -"
+msgstr "Zoom -"
 
 #: ../../src/wui/interactive_base.cc:301
 msgctxt "hotkey"
@@ -4959,7 +4959,7 @@ msgstr "Caminos"
 
 #: ../../src/wui/minimap.cc:186
 msgid "Zoom"
-msgstr "Ampliación"
+msgstr "Zoom"
 
 #: ../../src/wui/multiplayersetupgroup.cc:62
 msgid "Role"

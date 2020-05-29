@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-05-24 00:44+0000\n"
+"PO-Revision-Date: 2020-05-24 20:10+0000\n"
 "Last-Translator: Niektóry <niektory@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -2440,7 +2440,7 @@ msgid ""
 "area. Please make sure there is a working clay pit nearby and the aqua farm "
 "is supplied with all needed wares, or consider dismantling or destroying "
 "this building."
-msgstr ""
+msgstr "Rybak pracujący na tej hodowli ryb nie może znaleźć żadnych stawów z rybami na swoim obszarze pracy. Upewnij się, że w pobliżu działa kopalnia gliny oraz hodowla ryb jest zaopatrzona we wszystkie potrzebne towary, albo rozważ rozbiórkę lub zniszczenie tego budynku."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:7
@@ -2528,7 +2528,7 @@ msgid ""
 "The beekeeper working at this beekeepers’s house can’t find any flowering "
 "fields or bushes in his work area. You should consider building another farm"
 " or berry farm nearby, or dismantling or destroying this building."
-msgstr ""
+msgstr "Pszczelarz mieszkający w tym domu pszczelarza nie może znaleźć żadnych kwitnących pól lub krzaków na swoim obszarze pracy. Rozważ zbudowanie kolejnej farmy bądź plantacji jagód w pobliżu, albo rozbiórkę lub zniszczenie tego budynku."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:7
@@ -2599,7 +2599,7 @@ msgstr "zbieranie węgla"
 
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:100
 msgid "Out of Clay Ponds"
-msgstr ""
+msgstr "Nie ma już suchych stawów"
 
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:101
 msgctxt "frisians_building"
@@ -2608,7 +2608,7 @@ msgid ""
 "clay ponds in his work area. Please make sure there is a working clay pit "
 "nearby and the charcoal burner’s house is supplied with all needed wares, or"
 " consider dismantling or destroying this building."
-msgstr ""
+msgstr "Węglarz mieszkający w tym domu węglarza nie może znaleźć żadnych suchych stawów na swoim obszarze pracy. Upewnij się, że w pobliżu działa kopalnia gliny oraz dom węglarza jest zaopatrzony we wszystkie potrzebne towary, albo rozważ rozbiórkę lub zniszczenie tego budynku. "
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:7
@@ -2642,7 +2642,7 @@ msgid ""
 "The clay digger working at this clay pit can’t find any level ground in his "
 "work area. Consider dismantling this clay pit and rebuilding it somewhere "
 "else."
-msgstr ""
+msgstr "Kopacz gliny pracujący w tej kopalni gliny nie może znaleźć równego gruntu na swoim obszarze pracy. Rozważ rozbiórkę tej kopalni gliny i zbudowanie jej w innym miejscu."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:7
@@ -2696,7 +2696,7 @@ msgid ""
 "The fruit collector working at this fruit collector’s house can’t find any "
 "berry bushes in his work area. You should consider building another berry "
 "farm, or dismantling or destroying this building."
-msgstr ""
+msgstr "Zbieracz owoców mieszkający w tym domu zbieracza owoców nie może znaleźć żadnych krzaków z owocami na swoim obszarze pracy. Rozważ budowę kolejnej plantacji jagód albo rozbiórkę lub zniszczenie tego budynku."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:7
@@ -2897,7 +2897,7 @@ msgctxt "frisians_building"
 msgid ""
 "The reed farmer working at this reed farm has no cleared soil to plant his "
 "seeds."
-msgstr ""
+msgstr "Plantator trzciny pracujący na tej plantacji trzciny nie ma terenu do obsiania."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:7
@@ -3478,67 +3478,67 @@ msgstr "Pole jęczmienia (malutkie)"
 
 #: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:15
 msgid "Blueberry Bush (tiny)"
-msgstr ""
+msgstr "Czarna jagoda (malutka)"
 
 #: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:42
 msgid "Blueberry Bush (small)"
-msgstr ""
+msgstr "Czarna jagoda (mała)"
 
 #: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:69
 msgid "Blueberry Bush (medium)"
-msgstr ""
+msgstr "Czarna jagoda (średnia)"
 
 #: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:96
 msgid "Blueberry Bush (ripe)"
-msgstr ""
+msgstr "Czarna jagoda (dojrzała)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:13
 msgid "Black Currant (tiny)"
-msgstr ""
+msgstr "Czarna porzeczka (malutka)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:40
 msgid "Black Currant (small)"
-msgstr ""
+msgstr "Czarna porzeczka (mała)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:67
 msgid "Black Currant (medium)"
-msgstr ""
+msgstr "Czarna porzeczka (średnia)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:94
 msgid "Black Currant (ripe)"
-msgstr ""
+msgstr "Czarna porzeczka (dojrzała)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:13
 msgid "Red Currant (tiny)"
-msgstr ""
+msgstr "Czerwona porzeczka (malutka)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:40
 msgid "Red Currant (small)"
-msgstr ""
+msgstr "Czerwona porzeczka (mała)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:67
 msgid "Red Currant (medium)"
-msgstr ""
+msgstr "Czerwona porzeczka (średnia)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:94
 msgid "Red Currant (ripe)"
-msgstr ""
+msgstr "Czerwona porzeczka (dojrzała)"
 
 #: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:13
 msgid "Desert Hackberry (tiny)"
-msgstr ""
+msgstr "Wiązowiec pustynny (malutki)"
 
 #: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:40
 msgid "Desert Hackberry (small)"
-msgstr ""
+msgstr "Wiązowiec pustynny (mały)"
 
 #: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:67
 msgid "Desert Hackberry (medium)"
-msgstr ""
+msgstr "Wiązowiec pustynny (średni)"
 
 #: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:94
 msgid "Desert Hackberry (ripe)"
-msgstr ""
+msgstr "Wiązowiec pustynny (dojrzały)"
 
 #: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:13
 msgid "Juniper (tiny)"
@@ -3558,51 +3558,51 @@ msgstr "Jałowiec (dojrzały)"
 
 #: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:13
 msgid "Raspberry Bush (tiny)"
-msgstr ""
+msgstr "Malina (malutka)"
 
 #: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:40
 msgid "Raspberry Bush (small)"
-msgstr ""
+msgstr "Malina (mała)"
 
 #: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:67
 msgid "Raspberry Bush (medium)"
-msgstr ""
+msgstr "Malina (średnia)"
 
 #: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:94
 msgid "Raspberry Bush (ripe)"
-msgstr ""
+msgstr "Malina (dojrzała)"
 
 #: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:13
 msgid "Sea Buckthorn (tiny)"
-msgstr ""
+msgstr "Rokitnik (malutki)"
 
 #: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:40
 msgid "Sea Buckthorn (small)"
-msgstr ""
+msgstr "Rokitnik (mały)"
 
 #: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:67
 msgid "Sea Buckthorn (medium)"
-msgstr ""
+msgstr "Rokitnik (średni)"
 
 #: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:94
 msgid "Sea Buckthorn (ripe)"
-msgstr ""
+msgstr "Rokitnik (dojrzały)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:13
 msgid "Stink Shepherd’s Tree (tiny)"
-msgstr ""
+msgstr "Boscia foetida (malutka)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:40
 msgid "Stink Shepherd’s Tree (small)"
-msgstr ""
+msgstr "Boscia foetida (mała)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:67
 msgid "Stink Shepherd’s Tree (medium)"
-msgstr ""
+msgstr "Boscia foetida (średnia)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:94
 msgid "Stink Shepherd’s Tree (ripe)"
-msgstr ""
+msgstr "Boscia foetida (dojrzała)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:13
 msgid "Strawberries (tiny)"
@@ -3714,31 +3714,31 @@ msgstr "Winorośl (malutka)"
 #: ../../data/tribes/immovables/pond/burning/init.lua:7
 msgctxt "immovable"
 msgid "Burning Charcoal Stack"
-msgstr ""
+msgstr "Wypalany stos węgla drzewnego"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/pond/coal/init.lua:7
 msgctxt "immovable"
 msgid "Pond With Charcoal"
-msgstr ""
+msgstr "Staw z węglem drzewnym"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/pond/dry/init.lua:7
 msgctxt "immovable"
 msgid "Dry Pond"
-msgstr ""
+msgstr "Suchy staw"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/pond/growing/init.lua:7
 msgctxt "immovable"
 msgid "Pond With Fish Spawn"
-msgstr ""
+msgstr "Staw z ikrą"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/pond/mature/init.lua:7
 msgctxt "immovable"
 msgid "Pond With Fish"
-msgstr ""
+msgstr "Staw z rybami"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/reedfield/medium/init.lua:7
@@ -4132,7 +4132,7 @@ msgstr "Biedna osada"
 msgid ""
 "Start the game with just a warehouse and the bare minimum for bootstrapping "
 "an economy. Warning: the AI can't successfully start from this"
-msgstr ""
+msgstr "Zaczniesz grę jedynie z magazynem i niezbędnym minimum towarów potrzebnym do zapoczątkowania gospodarki. Uwaga: SI nie jest w stanie pomyślnie rozpocząć w tych warunkach"
 
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:45
 #: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:43
@@ -4148,7 +4148,7 @@ msgstr "Bądź ostrożny"
 msgid ""
 "You have only one iron for each tool you will need to start your economy. "
 "Make sure no unneeded tool is created."
-msgstr ""
+msgstr "Posiadasz tylko tyle żelaza ile jest niezbędne do wytworzenia narzędzi potrzebnych do zapoczątkowania gospodarki. Uważaj, żeby nie wytwarzać żadnych zbędnych narzędzi."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/struggling_outpost.lua:11
@@ -4166,7 +4166,7 @@ msgstr "Podupadła placówka"
 msgid ""
 "Start the game with just your headquarters and very few wares for "
 "bootstrapping an economy. Warning: the AI can't successfully start from this"
-msgstr ""
+msgstr "Zaczniesz grę jedynie z kwaterą główną i bardzo małą ilością towarów do zapoczątkowania gospodarki. Uwaga: SI nie jest w stanie pomyślnie rozpocząć w tych warunkach"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:11
@@ -5446,7 +5446,7 @@ msgstr "Piekarz"
 #: ../../data/tribes/workers/frisians/baker_master/init.lua:7
 msgctxt "frisians_worker"
 msgid "Master Baker"
-msgstr ""
+msgstr "Mistrz piekarzy"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/beekeeper/init.lua:7
@@ -5608,7 +5608,7 @@ msgstr "Szwaczka"
 #: ../../data/tribes/workers/frisians/seamstress_master/init.lua:7
 msgctxt "frisians_worker"
 msgid "Master Seamstress"
-msgstr ""
+msgstr "Mistrzyni szwaczek"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/shipwright/init.lua:7
