@@ -14,6 +14,8 @@ wl_library(network
     gameclient.h
     gamehost.cc
     gamehost.h
+    net_addons.cc
+    net_addons.h
     netclient_interface.h
     netclient.cc
     netclient.h
@@ -49,6 +51,7 @@ wl_library(network
     io_filesystem
     io_stream
     logic
+    logic_addons
     logic_commands
     logic_filesystem_constants
     logic_game_controller
@@ -62,4 +65,5 @@ wl_library(network
     widelands_ball_of_mud
     widelands_options
     wui
+  curl
 )

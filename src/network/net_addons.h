@@ -1,0 +1,46 @@
+/*
+ * Copyright (C) 2020-2020 by the Widelands Development Team
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ */
+
+#ifndef WL_NETWORK_NET_ADDONS_H
+#define WL_NETWORK_NET_ADDONS_H
+
+#include <set>
+
+#include "logic/addons.h"
+
+// The three add-on related networking functions defined here use the cURL lib.
+// Pro: I created a functional dummy server with no knowledge of the metaserver backend ;)
+// Con: Additional dependency – this is the only place in our code where libcurl is used
+
+// Fetch the list of all available add-ons from the server
+std::vector<AddOnInfo> refresh_remotes();
+
+// Requests the ZIP-file with the given name (e.g. "cool_feature.wad") from the server,
+// downloads it into a temporary location (e.g. ~/.widelands/temp/cool_feature.wad.tmp),
+// and returns the canonical path to the downloaded file.
+std::string download_addon(const std::string&);
+
+// Requests the MO files for the given add-on in all languages from the server,
+// downloads them into temporary locations (e.g. ~/.widelands/temp/nds.mo.tmp),
+// and returns the canonical paths to the downloaded files.
+// Every temp file's filename is guaranteed to be in the format
+// "nds.mo.tmp" (where 'nds' is the language's abbreviation).
+std::set<std::string> download_i18n(const std::string&);
+
+#endif  // end of include guard: WL_NETWORK_NET_ADDONS_H

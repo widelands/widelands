@@ -21,11 +21,10 @@
 
 #include <memory>
 
-#include <curl/curl.h>
-
 #include "base/i18n.h"
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
+#include "network/net_addons.h"
 #include "ui_basic/messagebox.h"
 #include "wlapplication_options.h"
 
@@ -191,92 +190,12 @@ AddOnsCtrl::~AddOnsCtrl() {
 	write_config();
 }
 
-static size_t refresh_remotes_write_callback(char* received_data, size_t, const size_t char_count, void* p_output) {
-	std::string* output = static_cast<std::string*>(p_output);
-	assert(output);
-
-	// cURL is invoking this function multiple times to save the received bytes.
-	// The first argument contains the raw data received, the third argument the number of characters.
-	// Note that cURL does not null-terminate the data!!!
-	// The fourth argument is the userdata string we want to append the output to.
-
-	for (size_t i = 0; i < char_count; ++i) {
-		(*output) += received_data[i];
-	}
-
-	// cURL wants to know how many bytes we took care of. We took care of all we were given.
-	return char_count;
-}
-
 void AddOnsCtrl::refresh_remotes() {
-	remotes_.clear();
 	try {
-
-		// TODO(Nordfriese): This connects to my personal dummy add-ons repo for demonstration.
-		// A GitHub repo is NOT SUITED as an add-ons server because the list of add-ons needs
-		// to be maintained by hand there which is exceedlingly fragile and messy.
-		// Not to mention that non-devs cannot upload stuff to the repo.
-		// Also, we could theoretically tell the server which language we are speaking,
-		// so the server would send localized add-on names and descriptions.
-		// Not possible with this dummy server.
-
-		// code taken from https://stackoverflow.com/questions/1636333/download-file-using-libcurl-in-c-c
-		CURL* curl = nullptr;
-		curl = curl_easy_init();
-		if (!curl) {
-			throw wexception("Unable to initialize cURL");
-		}
-		std::string output;
-		curl_easy_setopt(curl, CURLOPT_URL, "https://raw.githubusercontent.com/Noordfrees/wl_addons_server/master/list");
-		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &refresh_remotes_write_callback);
-		curl_easy_setopt(curl, CURLOPT_WRITEDATA, &output);
-		const CURLcode res = curl_easy_perform(curl);
-		curl_easy_cleanup(curl);
-
-		if (res != CURLE_OK) {
-			throw wexception("cURL terminated with error code %d", res);
-		}
-		if (output.empty()) {
-			throw wexception("cURL output is empty");
-		}
-
-		// Great! We now have a list of the stuff we are interested in.
-		// TODO(Nordfriese): The list uses an ugly dummy format designed to be easily modified manually.
-		// We want a real (compact) binary format when we have a real server.
-
-		auto next_word = [](std::string& str) {
-			const size_t l = str.find('\n');
-			std::string result = str.substr(0, l);
-			str = str.substr(l + 1);
-			return result;
-		};
-		auto next_number = [next_word](std::string& str) {
-			const std::string word = next_word(str);
-			return std::strtol(word.c_str(), nullptr, 10);
-		};
-
-		const size_t nr_addons = next_number(output);
-		for (size_t i = 0; i < nr_addons; ++i) {
-			AddOnInfo info;
-			info.internal_name = next_word(output);
-			const std::string descname = next_word(output);
-			const std::string descr = next_word(output);
-			info.descname = [descname]() { return descname; };
-			info.description = [descr]() { return descr; };
-			info.author = next_word(output);
-			info.version = next_number(output);
-			info.i18n_version = next_number(output);
-			info.category = get_category(next_word(output));
-			for (size_t req = next_number(output); req; --req) {
-				info.requirements.push_back(next_word(output));
-			}
-			info.verified = next_word(output) == "verified";
-			remotes_.push_back(info);
-		}
-
+		remotes_ = ::refresh_remotes();
 	} catch (const std::exception& e) {
 		std::string error = e.what();
-		remotes_.push_back(AddOnInfo {
+		remotes_ = { AddOnInfo {
 			"",
 			[]() { return _("Server Connection Error");},
 			[error]() { return (boost::format(_("Unable to fetch the list of available add-ons from the server!<br>Error Message: %s"))
@@ -284,7 +203,7 @@ void AddOnsCtrl::refresh_remotes() {
 			/** TRANSLATORS: This will be inserted into the string "Server Connection Error \n by %s" */
 			_("a networking bug"),
 			0, 0, AddOnCategory::kNone, {}, false
-		});
+		}};
 	}
 	rebuild();
 }
@@ -462,7 +381,6 @@ void AddOnsCtrl::layout() {
 	browse_addons_wrapper_.set_max_size(tabs_.get_w(), tabs_.get_h() - kRowButtonSize);
 }
 
-// UNTESTED
 static void install_translation(const std::string& temp_locale_path, const std::string& addon_name, bool is_upgrade) {
 	assert(g_fs->file_exists(temp_locale_path));
 
@@ -472,7 +390,7 @@ static void install_translation(const std::string& temp_locale_path, const std::
 	// where "nds" is the language abbreviation and "addon_name.wad" the add-on's name.
 	// If we use a different structure, gettext will not find the translations!
 
-	const std::string temp_filename = g_fs->fs_filename(temp_locale_path.c_str());  // nds.mo
+	const std::string temp_filename = g_fs->fs_filename(temp_locale_path.c_str());  // nds.mo.tmp
 	const std::string locale = temp_filename.substr(0, temp_filename.find('.'));    // nds
 
 	const std::string new_locale_dir =
@@ -496,7 +414,6 @@ static void install_translation(const std::string& temp_locale_path, const std::
 	assert(!g_fs->file_exists(temp_locale_path));
 }
 
-// UNTESTED
 // TODO(Nordfriese): install() and upgrade() should also (recursively) install the add-on's requirements
 void AddOnsCtrl::install(const std::string& name, const uint32_t i18n_version) {
 	g_fs->ensure_directory_exists(kAddOnDir);
@@ -528,7 +445,8 @@ void AddOnsCtrl::install(const std::string& name, const uint32_t i18n_version) {
 	g_addons.push_back(std::make_pair(preload_addon(name), true));
 }
 
-// UNTESTED
+// TODO(Nordfriese): A progress bar for the downloads would be nice
+
 // Upgrades the specified add-on. If `full_upgrade` is `false`, only translations will be updated.
 void AddOnsCtrl::upgrade(const std::string& name, bool full_upgrade, const uint32_t i18n_version) {
 	if (full_upgrade) {
@@ -570,42 +488,12 @@ void AddOnsCtrl::upgrade(const std::string& name, bool full_upgrade, const uint3
 	NEVER_HERE();
 }
 
-// UNTESTED
 // Requests the ZIP-file with the given name (e.g. "cool_feature.wad") from the server,
 // downloads it into a temporary location (e.g. ~/.widelands/temp/cool_feature.wad.tmp),
 // and returns the path to the downloaded file.
 std::string AddOnsCtrl::download_addon(const std::string& name) {
 	try {
-
-		// code taken from https://stackoverflow.com/questions/1636333/download-file-using-libcurl-in-c-c
-		CURL* curl = nullptr;
-		curl = curl_easy_init();
-		if (!curl) {
-			throw wexception("Unable to initialize cURL");
-		}
-		g_fs->ensure_directory_exists(kAddOnDir);
-		const std::string output = g_fs->canonicalize_name(
-				g_fs->get_userdatadir() + "/" + kTempFileDir + "/" + name + kTempFileExtension);
-		const std::string url = (boost::format(
-				"https://github.com/Noordfrees/wl_addons_server/blob/master/addons/%s?raw=true")
-				% name).str();
-		curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-		curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);  // GitHub hides its contents behind several redirects
-		std::FILE* out_file = std::fopen(output.c_str(), "wb");
-		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, [](void* ptr, size_t size, size_t nmemb, std::FILE* stream) {
-			log("NOCOM Received %lu×%lu bytes\n", size, nmemb);
-			return std::fwrite(ptr, size, nmemb, stream);
-		});
-		curl_easy_setopt(curl, CURLOPT_WRITEDATA, out_file);
-		const CURLcode res = curl_easy_perform(curl);
-		curl_easy_cleanup(curl);
-		fclose(out_file);
-
-		if (res != CURLE_OK) {
-			throw wexception("cURL terminated with error code %d", res);
-		}
-		return output;
-
+		return ::download_addon(name);
 	} catch (const std::exception& e) {
 		UI::WLMessageBox w(this, _("Error"), (boost::format(
 				_("The add-on '%1$s' could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n\nError Message:\n%2$s"))
@@ -615,27 +503,16 @@ std::string AddOnsCtrl::download_addon(const std::string& name) {
 	return "";
 }
 
-// UNTESTED
-// NOTE: I expect elsewhere that every file's filename will be called
-// "nds.mo" (where nds is the language's abbreviation).
-// I don't care about the path of the temp file.
 std::set<std::string> AddOnsCtrl::download_i18n(const std::string& name, const uint32_t i18n_version) {
 	try {
-
-		// TODO(Nordfriese): Request the MO files for the given add-on in all languages from the server,
-		// download them into temporary locations (e.g. ~/.widelands/temp/nds.mo),
-		// and return the paths to the downloaded files.
-		throw wexception("Not yet implemented");
-
-
-
-
+		std::set<std::string> result = ::download_i18n(name);
 
 		// If the translations were downloaded correctly, we also update the i18n version info
 		Profile prof(kAddOnLocaleVersions.c_str());
 		prof.pull_section("global").set_natural(name.c_str(), i18n_version);
 		prof.write(kAddOnLocaleVersions.c_str(), false);
 
+		return result;
 	} catch (const std::exception& e) {
 		UI::WLMessageBox w(this, _("Error"), (boost::format(
 				_("The translation files for the add-on '%1$s' could not be downloaded from the server. "
@@ -664,9 +541,14 @@ static void uninstall(AddOnsCtrl* ctrl, const AddOnInfo& info) {
 		if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) { return; }
 	}
 
-	// Delete the add-on and its translations
+	// Delete the add-on…
 	g_fs->fs_unlink(kAddOnDir + g_fs->file_separator() + info.internal_name);
-	g_fs->fs_unlink(i18n::kAddOnLocaleDir + g_fs->file_separator() + info.internal_name);
+
+	// …and its translations
+	for (const std::string& locale : g_fs->list_directory(i18n::kAddOnLocaleDir)) {
+		g_fs->fs_unlink(locale + g_fs->file_separator() + "LC_MESSAGES" +
+				g_fs->file_separator() + info.internal_name + ".mo");
+	}
 
 	for (auto it = g_addons.begin(); it != g_addons.end(); ++it) {
 		if (it->first.internal_name == info.internal_name) {

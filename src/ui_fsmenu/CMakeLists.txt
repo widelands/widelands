@@ -17,6 +17,7 @@ wl_library(ui_fsmenu_options
     io_profile
     logic_addons
     logic_filesystem_constants
+    network
     scripting_lua_interface
     scripting_lua_table
     ui_basic
@@ -25,7 +26,6 @@ wl_library(ui_fsmenu_options
     widelands_ball_of_mud
     widelands_options
     wui_sound_options
-  curl
 )
 
 wl_library(ui_fsmenu_base
