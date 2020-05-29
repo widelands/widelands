@@ -184,10 +184,10 @@ AddOnInfo preload_addon(const std::string& name) {
 	for (std::string req(s.get_safe_string("requires")); !req.empty();) {
 		const size_t commapos = req.find(',');
 		if (commapos == std::string::npos) {
-			i.requires.push_back(req);
+			i.requirements.push_back(req);
 			break;
 		} else {
-			i.requires.push_back(req.substr(0, commapos));
+			i.requirements.push_back(req.substr(0, commapos));
 			req = req.substr(commapos + 1);
 		}
 	}

@@ -36,7 +36,7 @@ Example:
    category="script"
    requires=
 
-Note: Only ``name`` and ``description`` can be marked for translation.
+Note: Only ``name`` and ``description`` can be marked for translation. They may also contain richtext tags.
 
 .. highlight:: default
 

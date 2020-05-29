@@ -21,6 +21,8 @@
 
 #include <memory>
 
+#include <curl/curl.h>
+
 #include "base/i18n.h"
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
@@ -189,20 +191,96 @@ AddOnsCtrl::~AddOnsCtrl() {
 	write_config();
 }
 
+static size_t refresh_remotes_write_callback(char* received_data, size_t, const size_t char_count, void* p_output) {
+	std::string* output = static_cast<std::string*>(p_output);
+	assert(output);
+
+	// cURL is invoking this function multiple times to save the received bytes.
+	// The first argument contains the raw data received, the third argument the number of characters.
+	// Note that cURL does not null-terminate the data!!!
+	// The fourth argument is the userdata string we want to append the output to.
+
+	for (size_t i = 0; i < char_count; ++i) {
+		(*output) += received_data[i];
+	}
+
+	// cURL wants to know how many bytes we took care of. We took care of all we were given.
+	return char_count;
+}
+
 void AddOnsCtrl::refresh_remotes() {
 	remotes_.clear();
 	try {
 
-		// TODO(Nordfriese): Connect to the add-on server when we have one
-		// and fetch a list of all available add-ons
-		throw wexception("Not yet implemented");
+		// TODO(Nordfriese): This connects to my personal dummy add-ons repo for demonstration.
+		// A GitHub repo is NOT SUITED as an add-ons server because the list of add-ons needs
+		// to be maintained by hand there which is exceedlingly fragile and messy.
+		// Not to mention that non-devs cannot upload stuff to the repo.
+		// Also, we could theoretically tell the server which language we are speaking,
+		// so the server would send localized add-on names and descriptions.
+		// Not possible with this dummy server.
+
+		// code taken from https://stackoverflow.com/questions/1636333/download-file-using-libcurl-in-c-c
+		CURL* curl = nullptr;
+		curl = curl_easy_init();
+		if (!curl) {
+			throw wexception("Unable to initialize cURL");
+		}
+		std::string output;
+		curl_easy_setopt(curl, CURLOPT_URL, "https://raw.githubusercontent.com/Noordfrees/wl_addons_server/master/list");
+		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &refresh_remotes_write_callback);
+		curl_easy_setopt(curl, CURLOPT_WRITEDATA, &output);
+		const CURLcode res = curl_easy_perform(curl);
+		curl_easy_cleanup(curl);
+
+		if (res != CURLE_OK) {
+			throw wexception("cURL terminated with error code %d", res);
+		}
+		if (output.empty()) {
+			throw wexception("cURL output is empty");
+		}
+
+		// Great! We now have a list of the stuff we are interested in.
+		// TODO(Nordfriese): The list uses an ugly dummy format designed to be easily modified manually.
+		// We want a real (compact) binary format when we have a real server.
+
+		auto next_word = [](std::string& str) {
+			const size_t l = str.find('\n');
+			std::string result = str.substr(0, l);
+			str = str.substr(l + 1);
+			return result;
+		};
+		auto next_number = [next_word](std::string& str) {
+			const std::string word = next_word(str);
+			return std::strtol(word.c_str(), nullptr, 10);
+		};
+
+		const size_t nr_addons = next_number(output);
+		for (size_t i = 0; i < nr_addons; ++i) {
+			AddOnInfo info;
+			info.internal_name = next_word(output);
+			const std::string descname = next_word(output);
+			const std::string descr = next_word(output);
+			info.descname = [descname]() { return descname; };
+			info.description = [descr]() { return descr; };
+			info.author = next_word(output);
+			info.version = next_number(output);
+			info.i18n_version = next_number(output);
+			info.category = get_category(next_word(output));
+			for (size_t req = next_number(output); req; --req) {
+				info.requirements.push_back(next_word(output));
+			}
+			info.verified = next_word(output) == "verified";
+			remotes_.push_back(info);
+		}
 
 	} catch (const std::exception& e) {
+		std::string error = e.what();
 		remotes_.push_back(AddOnInfo {
 			"",
 			[]() { return _("Server Connection Error");},
-			[e]() { return (boost::format(_("Unable to fetch the list of available add-ons from the server!<br>Error Message: %s"))
-				% e.what()).str();},
+			[error]() { return (boost::format(_("Unable to fetch the list of available add-ons from the server!<br>Error Message: %s"))
+				% error).str();},
 			/** TRANSLATORS: This will be inserted into the string "Server Connection Error \n by %s" */
 			_("a networking bug"),
 			0, 0, AddOnCategory::kNone, {}, false
@@ -315,7 +393,7 @@ void AddOnsCtrl::update_dependency_errors() {
 		}
 		// TODO(Nordfriese): Also warn if the add-on's requirements are present in the wrong order
 		// (e.g. when A requires B,C but they are ordered C,B,A)
-		for (const std::string& requirement : addon->first.requires) {
+		for (const std::string& requirement : addon->first.requirements) {
 			std::vector<AddOnState>::iterator search_result = g_addons.end();
 			bool too_late = false;
 			for (auto search = g_addons.begin(); search != g_addons.end(); ++search) {
@@ -493,13 +571,40 @@ void AddOnsCtrl::upgrade(const std::string& name, bool full_upgrade, const uint3
 }
 
 // UNTESTED
+// Requests the ZIP-file with the given name (e.g. "cool_feature.wad") from the server,
+// downloads it into a temporary location (e.g. ~/.widelands/temp/cool_feature.wad.tmp),
+// and returns the path to the downloaded file.
 std::string AddOnsCtrl::download_addon(const std::string& name) {
 	try {
 
-		// TODO(Nordfriese): Request the ZIP-file with the given name (e.g. "cool_feature.wad") from
-		// the server, download it into a temporary location (e.g. ~/.widelands/temp/cool_feature.wad),
-		// and return the path to the downloaded file.
-		throw wexception("Not yet implemented");
+		// code taken from https://stackoverflow.com/questions/1636333/download-file-using-libcurl-in-c-c
+		CURL* curl = nullptr;
+		curl = curl_easy_init();
+		if (!curl) {
+			throw wexception("Unable to initialize cURL");
+		}
+		g_fs->ensure_directory_exists(kAddOnDir);
+		const std::string output = g_fs->canonicalize_name(
+				g_fs->get_userdatadir() + "/" + kTempFileDir + "/" + name + kTempFileExtension);
+		const std::string url = (boost::format(
+				"https://github.com/Noordfrees/wl_addons_server/blob/master/addons/%s?raw=true")
+				% name).str();
+		curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+		curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);  // GitHub hides its contents behind several redirects
+		std::FILE* out_file = std::fopen(output.c_str(), "wb");
+		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, [](void* ptr, size_t size, size_t nmemb, std::FILE* stream) {
+			log("NOCOM Received %lu×%lu bytes\n", size, nmemb);
+			return std::fwrite(ptr, size, nmemb, stream);
+		});
+		curl_easy_setopt(curl, CURLOPT_WRITEDATA, out_file);
+		const CURLcode res = curl_easy_perform(curl);
+		curl_easy_cleanup(curl);
+		fclose(out_file);
+
+		if (res != CURLE_OK) {
+			throw wexception("cURL terminated with error code %d", res);
+		}
+		return output;
 
 	} catch (const std::exception& e) {
 		UI::WLMessageBox w(this, _("Error"), (boost::format(
@@ -588,10 +693,10 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddO
 		% g_gr->styles().font_style(UI::FontStyle::kChatWhisper).as_font_tag((boost::format(_("by %s")) % info.author).str())
 		% g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(info.description())).str()) {
 
-	uninstall_.sigclicked.connect([this, ctrl, info]() {
+	uninstall_.sigclicked.connect([ctrl, info]() {
 		uninstall(ctrl, info);
 	});
-	move_up_.sigclicked.connect([this, ctrl, info]() {
+	move_up_.sigclicked.connect([ctrl, info]() {
 		auto it = g_addons.begin();
 		for (; it->first.internal_name != info.internal_name; ++it);
 		const bool state = it->second;
@@ -600,7 +705,7 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddO
 		g_addons.insert(it, std::make_pair(info, state));
 		ctrl->rebuild();
 	});
-	move_down_.sigclicked.connect([this, ctrl, info]() {
+	move_down_.sigclicked.connect([ctrl, info]() {
 		auto it = g_addons.begin();
 		for (; it->first.internal_name != info.internal_name; ++it);
 		const bool state = it->second;
@@ -673,10 +778,10 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo&
 	assert(installed_version <= info.version);
 	assert(installed_i18n_version <= info.i18n_version);
 
-	uninstall_.sigclicked.connect([this, ctrl, info]() {
+	uninstall_.sigclicked.connect([ctrl, info]() {
 		uninstall(ctrl, info);
 	});
-	install_.sigclicked.connect([this, ctrl, info]() {
+	install_.sigclicked.connect([ctrl, info]() {
 		// Ctrl-click skips the confirmation. Never skip for non-verified stuff though.
 		if (!info.verified || !(SDL_GetModState() & KMOD_CTRL)) {
 			UI::WLMessageBox w(ctrl, _("Install"), (boost::format(_("Are you certain that you want to install this add-on?\n\n"

@@ -62,10 +62,11 @@ struct AddOnInfo {
 	uint32_t version;                          // Add-on version
 	uint32_t i18n_version;                     // (see doc/sphinx/source/add-ons.rst)
 	AddOnCategory category;
-	std::vector<std::string> requires;  // TODO(Nordfriese): unused, not yet implemented
-	bool verified;
+	std::vector<std::string> requirements;  // This add-on will only work correctly if these
+	                                        // add-ons are present in this order and active
+	bool verified;                          // Only valid for Remote add-ons
 	// TODO(Nordfriese): in the future, we might also want to include:
-	// uploader username, upload date&time, average rating, number of votes, (what else?)
+	// uploader username, upload date&time, average rating, number of votes, user comments, …
 };
 
 // Sorted list of all add-ons mapped to whether they are currently enabled

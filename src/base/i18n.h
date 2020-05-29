@@ -46,7 +46,6 @@ void set_localedir(const std::string&);
 const std::string& get_localedir();
 
 const std::string kAddOnLocaleDir = "addons_i18n";
-void initialize_addons_locale_dir(const std::string&);
 const std::string& get_addon_locale_dir();
 
 /// Create an object of this type to grab a textdomain and make sure that it is
@@ -63,8 +62,8 @@ struct Textdomain {
 };
 struct AddOnTextdomain {
 	// For strings defined in an add-on
-	explicit AddOnTextdomain(const std::string& name) {
-		grab_textdomain(name, get_addon_locale_dir().c_str());
+	explicit AddOnTextdomain(const std::string& addon) {
+		grab_textdomain(addon, get_addon_locale_dir().c_str());
 	}
 	~AddOnTextdomain() {
 		release_textdomain();
