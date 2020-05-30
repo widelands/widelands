@@ -37,7 +37,7 @@ enum class AddOnCategory {
 };
 
 // Note: Below you will see some lines like `std::function<std::string()> descname`.
-// The reason why we implement trabslatable texts as functions here is that the encapsulating
+// The reason why we implement translatable texts as functions here is that the encapsulating
 // objects will stick around a long time and we don't want to have to re-create them when we
 // change languages. The values implemented as one-liner functions are used only rarely so
 // that this does not matter performance-wise.
@@ -73,6 +73,7 @@ struct AddOnInfo {
 	AddOnFileList file_list;                // Get rid of this ASAP
 	// TODO(Nordfriese): in the future, we might also want to include:
 	// uploader username, upload date&time, average rating, number of votes, user comments, …
+	// (but it would be pointless to implement that as long as we don't even have a real server)
 };
 
 // Sorted list of all add-ons mapped to whether they are currently enabled

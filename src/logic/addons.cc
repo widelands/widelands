@@ -180,6 +180,9 @@ AddOnInfo preload_addon(const std::string& name) {
 	if (i.version == 0) {
 		throw wexception("preload_addon (%s): version is 0", name.c_str());
 	}
+	if (i.i18n_version == 0) {
+		throw wexception("preload_addon (%s): i18n_version is 0", name.c_str());
+	}
 
 	for (std::string req(s.get_safe_string("requires")); !req.empty();) {
 		const size_t commapos = req.find(',');

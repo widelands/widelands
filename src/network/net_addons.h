@@ -38,7 +38,8 @@ struct NetAddons {
 	// Fetch the list of all available add-ons from the server
 	std::vector<AddOnInfo> refresh_remotes();
 
-	// Requests the file with the given name server and downloads it into thr given location.
+	// Requests the file with the given name (e.g. "cool_feature.wad/init.lua")
+	// from the server and downloads it to the given canonical location.
 	void download_addon_file(const std::string& name, const std::string& save_as);
 
 	// Requests the MO file for the given add-on and locale from the server,
