@@ -68,7 +68,8 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 	//
 	// Also, we could theoretically tell the server which language we are speaking,
 	// so the server would send localized add-on names and descriptions.
-	// Not possible with this dummy server.
+	// And we would not need to store a list of all files contained in every add-on
+	// in the global catalogue. Both is not possible with such a dummy server.
 
 	init();
 
@@ -90,10 +91,10 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 		throw wexception("cURL output is empty");
 	}
 
-	// Great! We now have a list of the stuff we are interested in.
-	// TODO(Nordfriese): The list uses an ugly dummy format designed to be easily modified manually.
-	// We want a real (compact) binary format when we have a real server.
-	// The following ugly helper code can then also be deleted.
+	// We now have a list of the stuff we are interested in.
+	// TODO(Nordfriese): The list uses an ugly dummy format designed to be manually
+	// moddable (more or less). We want a real (compact) binary format when we have
+	// a real server. The following ugly helper code can then also be deleted.
 
 	auto next_word = [](std::string& str) {
 		const size_t l = str.find('\n');
@@ -142,6 +143,10 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 
 	return result_vector;
 }
+
+// TODO(Nordfriese): Add-on downloading speed would benefit greatly from storing
+// the files as ZIPs on the server. Similar for translation bundles. Perhaps
+// someone would like to write code to uncompress downloaded ZIP file some day…
 
 void NetAddons::download_addon_file(const std::string& name, const std::string& output) {
 	init();

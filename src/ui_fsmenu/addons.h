@@ -112,7 +112,7 @@ private:
 
 	using Locales = std::set<std::string>;
 
-	std::string download_addon(ProgressIndicatorWindow&, const AddOnInfo&, const Locales&);
+	std::string download_addon(ProgressIndicatorWindow&, const AddOnInfo&);
 	std::set<std::string> download_i18n(ProgressIndicatorWindow&, const AddOnInfo&, const Locales&);
 };
 

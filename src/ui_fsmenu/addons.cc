@@ -43,11 +43,14 @@ struct ProgressIndicatorWindow : public UI::Window {
 			UI::Window(parent, "progress", 0, 0, parent->get_w() / 2, 2 * kRowButtonSize, title),
 			die_after_last_action(false),
 			box_(this, 0, 0, UI::Box::Vertical),
-			txt_(&box_, "", UI::Align::kCenter),
+			txt1_(&box_, "", UI::Align::kCenter),
+			txt2_(&box_, "", UI::Align::kLeft),
 			progress_(&box_, 0, 0, get_w(), kRowButtonSize, UI::ProgressBar::Horizontal) {
 
-		box_.add(&txt_, UI::Box::Resizing::kFullSize);
+		box_.add(&txt1_, UI::Box::Resizing::kFullSize);
 		box_.add_space(kRowButtonSpacing);
+		box_.add(&txt2_, UI::Box::Resizing::kFullSize);
+		box_.add_space(2 * kRowButtonSpacing);
 		box_.add(&progress_, UI::Box::Resizing::kFullSize);
 
 		// The user must not close this window
@@ -60,8 +63,11 @@ struct ProgressIndicatorWindow : public UI::Window {
 	~ProgressIndicatorWindow() override {
 	}
 
-	void set_message(const std::string& msg) {
-		txt_.set_text(msg);
+	void set_message_1(const std::string& msg) {
+		txt1_.set_text(msg);
+	}
+	void set_message_2(const std::string& msg) {
+		txt2_.set_text(msg);
 	}
 	UI::ProgressBar& progressbar() {
 		return progress_;
@@ -89,7 +95,7 @@ struct ProgressIndicatorWindow : public UI::Window {
 
 private:
 	UI::Box box_;
-	UI::Textarea txt_;
+	UI::Textarea txt1_, txt2_;
 	UI::ProgressBar progress_;
 };
 
@@ -513,12 +519,15 @@ static void install_translation(const std::string& temp_locale_path, const std::
 
 // TODO(Nordfriese): install() and upgrade() should also (recursively) install the add-on's requirements
 void AddOnsCtrl::install(const AddOnInfo& remote) {
+	ProgressIndicatorWindow piw(this, remote.descname());
+
 	g_fs->ensure_directory_exists(kAddOnDir);
 
 	const Locales all_locales = get_all_locales();
 
-	ProgressIndicatorWindow piw(this, remote.descname());
-	const std::string path = download_addon(piw, remote, all_locales);
+	piw.progressbar().set_total(remote.file_list.files.size() + all_locales.size());
+
+	const std::string path = download_addon(piw, remote);
 
 	if (path.empty()) {
 		// downloading failed
@@ -548,15 +557,16 @@ void AddOnsCtrl::install(const AddOnInfo& remote) {
 }
 
 // Upgrades the specified add-on. If `full_upgrade` is `false`, only translations will be updated.
-void AddOnsCtrl::upgrade(const AddOnInfo& remote, bool full_upgrade) {
+void AddOnsCtrl::upgrade(const AddOnInfo& remote, const bool full_upgrade) {
 	ProgressIndicatorWindow piw(this, remote.descname());
 
 	const Locales all_locales = get_all_locales();
+	piw.progressbar().set_total(all_locales.size() + (full_upgrade ? remote.file_list.files.size() : 0));
 
 	if (full_upgrade) {
 		g_fs->ensure_directory_exists(kAddOnDir);
 
-		const std::string path = download_addon(piw, remote, all_locales);
+		const std::string path = download_addon(piw, remote);
 		if (path.empty()) {
 			// downloading failed
 			return;
@@ -593,11 +603,9 @@ void AddOnsCtrl::upgrade(const AddOnInfo& remote, bool full_upgrade) {
 	NEVER_HERE();
 }
 
-std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw, const AddOnInfo& info, const Locales& locales) {
+std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw, const AddOnInfo& info) {
 	try {
-		piw.progressbar().set_state(0);
-		piw.progressbar().set_total(info.file_list.files.size() + locales.size());
-		piw.set_message((boost::format(_("Downloading %s…")) % info.descname()).str());
+		piw.set_message_1((boost::format(_("Downloading %s…")) % info.descname()).str());
 
 		const std::string temp_dir = g_fs->canonicalize_name(
 				g_fs->get_userdatadir() + "/" + kTempFileDir + "/" + info.internal_name + kTempFileExtension);
@@ -608,7 +616,7 @@ std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw, const AddOn
 
 		piw.action_params = info.file_list.files;
 		piw.action_when_thinking = [this, &info, &piw, temp_dir](const std::string& file_to_download) {
-			piw.set_message((boost::format(_("Downloading file ‘%s’…")) % file_to_download).str());
+			piw.set_message_2(file_to_download);
 			network_handler_.download_addon_file(info.internal_name + "/" + file_to_download, g_fs->canonicalize_name(temp_dir + "/" + file_to_download));
 			piw.progressbar().set_state(piw.progressbar().get_state() + 1);
 		};
@@ -626,7 +634,7 @@ std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw, const AddOn
 
 std::set<std::string> AddOnsCtrl::download_i18n(ProgressIndicatorWindow& piw, const AddOnInfo& info, const Locales& all_locales) {
 	try {
-		piw.set_message((boost::format(_("Downloading translations for %s…")) % info.descname()).str());
+		piw.set_message_1((boost::format(_("Downloading translations for %s…")) % info.descname()).str());
 
 		// Download all known locales one by one.
 		// TODO(Nordfriese): When we have a real server, we should let the server provide us
@@ -643,9 +651,7 @@ std::set<std::string> AddOnsCtrl::download_i18n(ProgressIndicatorWindow& piw, co
 			piw.action_params.push_back(locale);
 		}
 		piw.action_when_thinking = [this, &info, &result, &piw](const std::string& locale_to_download) {
-			piw.set_message((boost::format(
-					/** TRANSLATORS: The first placeholder will extend to a language ISO code (e.g. nds, de, en_GB) */
-					_("Downloading ‘%s’ translation…")) % locale_to_download).str());
+			piw.set_message_2(locale_to_download);
 			const std::string str = network_handler_.download_i18n(info.internal_name, locale_to_download);
 			assert(!result.count(str));
 			if (!str.empty()) {
