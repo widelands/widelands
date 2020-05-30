@@ -24,7 +24,6 @@
 #include "base/i18n.h"
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
-#include "network/net_addons.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
@@ -241,14 +240,10 @@ AddOnsCtrl::AddOnsCtrl() : FullscreenMenuBase(),
 	installed_addons_wrapper_.set_size(100, 100);
 	browse_addons_wrapper_.set_size(100, 100);
 
-	open_curl_connection();
-
 	refresh_remotes();
 }
 
 AddOnsCtrl::~AddOnsCtrl() {
-	close_curl_connection();
-
 	std::string text;
 	for (const auto& pair : g_addons) {
 		if (!text.empty()) {
@@ -262,7 +257,7 @@ AddOnsCtrl::~AddOnsCtrl() {
 
 void AddOnsCtrl::refresh_remotes() {
 	try {
-		remotes_ = ::refresh_remotes();
+		remotes_ = network_handler_.refresh_remotes();
 	} catch (const std::exception& e) {
 		std::string error = e.what();
 		remotes_ = { AddOnInfo {
@@ -580,9 +575,9 @@ std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw, const AddOn
 		}
 
 		piw.action_params = info.file_list.files;
-		piw.action_when_thinking = [&info, &piw, temp_dir](const std::string& file_to_download) {
+		piw.action_when_thinking = [this, &info, &piw, temp_dir](const std::string& file_to_download) {
 			piw.set_message((boost::format(_("Downloading file ‘%s’…")) % file_to_download).str());
-			::download_addon_file(info.internal_name + "/" + file_to_download, g_fs->canonicalize_name(temp_dir + "/" + file_to_download));
+			network_handler_.download_addon_file(info.internal_name + "/" + file_to_download, g_fs->canonicalize_name(temp_dir + "/" + file_to_download));
 			piw.progressbar().set_state(piw.progressbar().get_state() + 1);
 		};
 		piw.run<UI::Panel::Returncodes>();
@@ -615,11 +610,11 @@ std::set<std::string> AddOnsCtrl::download_i18n(ProgressIndicatorWindow& piw, co
 		for (const std::string& locale : all_locales) {
 			piw.action_params.push_back(locale);
 		}
-		piw.action_when_thinking = [&info, &result, &piw](const std::string& locale_to_download) {
+		piw.action_when_thinking = [this, &info, &result, &piw](const std::string& locale_to_download) {
 			piw.set_message((boost::format(
 					/** TRANSLATORS: The first placeholder will extend to a language ISO code (e.g. nds, de, en_GB) */
 					_("Downloading ‘%s’ translation…")) % locale_to_download).str());
-			const std::string str = ::download_i18n(info.internal_name, locale_to_download);
+			const std::string str = network_handler_.download_i18n(info.internal_name, locale_to_download);
 			assert(!result.count(str));
 			if (!str.empty()) {
 				result.insert(str);

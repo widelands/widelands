@@ -23,8 +23,6 @@
 #include <cstring>
 #include <memory>
 
-#include <curl/curl.h>
-
 #include "base/log.h"
 #include "base/wexception.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -37,18 +35,22 @@ CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
 // all cURL-related code is inspired by
 // https://stackoverflow.com/questions/1636333/download-file-using-libcurl-in-c-c
 
-static CURL* curl = nullptr;
-void open_curl_connection() {
-	assert(!curl);
-	curl = curl_easy_init();
-	if (!curl) {
+void NetAddons::init() {
+	if (curl_) {
+		// already initialized
+		return;
+	}
+	curl_ = curl_easy_init();
+	if (!curl_) {
 		throw wexception("Unable to initialize cURL");
 	}
 }
-void close_curl_connection() {
-	assert(curl);
-	curl_easy_cleanup(curl);
-	curl = nullptr;
+
+NetAddons::~NetAddons() {
+	if (curl_) {
+		curl_easy_cleanup(curl_);
+		curl_ = nullptr;
+	}
 }
 
 static size_t refresh_remotes_callback(char* received_data, size_t, const size_t char_count, std::string* out) {
@@ -58,7 +60,7 @@ static size_t refresh_remotes_callback(char* received_data, size_t, const size_t
 	return char_count;
 }
 
-std::vector<AddOnInfo> refresh_remotes() {
+std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 	// TODO(Nordfriese): This connects to my personal dummy add-ons repo for demonstration.
 	// A GitHub repo is NOT SUITED as an add-ons server because the list of add-ons needs
 	// to be maintained by hand there which is exceedlingly fragile and messy.
@@ -68,16 +70,18 @@ std::vector<AddOnInfo> refresh_remotes() {
 	// so the server would send localized add-on names and descriptions.
 	// Not possible with this dummy server.
 
+	init();
+
 	std::vector<AddOnInfo> result_vector;
 
-	curl_easy_setopt(curl, CURLOPT_URL, "https://raw.githubusercontent.com/Noordfrees/wl_addons_server/master/list");
+	curl_easy_setopt(curl_, CURLOPT_URL, "https://raw.githubusercontent.com/Noordfrees/wl_addons_server/master/list");
 
 	std::string output;
-	curl_easy_setopt(curl, CURLOPT_WRITEDATA, &output);
+	curl_easy_setopt(curl_, CURLOPT_WRITEDATA, &output);
 
-	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &refresh_remotes_callback);
+	curl_easy_setopt(curl_, CURLOPT_WRITEFUNCTION, &refresh_remotes_callback);
 
-	const CURLcode res = curl_easy_perform(curl);
+	const CURLcode res = curl_easy_perform(curl_);
 
 	if (res != CURLE_OK) {
 		throw wexception("cURL terminated with error code %d", res);
@@ -139,17 +143,19 @@ std::vector<AddOnInfo> refresh_remotes() {
 	return result_vector;
 }
 
-void download_addon_file(const std::string& name, const std::string& output) {
+void NetAddons::download_addon_file(const std::string& name, const std::string& output) {
+	init();
+
 	const std::string url = "https://raw.githubusercontent.com/Noordfrees/wl_addons_server/master/addons/" + name;
-	curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+	curl_easy_setopt(curl_, CURLOPT_URL, url.c_str());
 
 	std::FILE* out_file = std::fopen(output.c_str(), "wb");
-	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, [](void* ptr, size_t size, size_t nmemb, std::FILE* stream) {
+	curl_easy_setopt(curl_, CURLOPT_WRITEFUNCTION, [](void* ptr, size_t size, size_t nmemb, std::FILE* stream) {
 		return std::fwrite(ptr, size, nmemb, stream);
 	});
-	curl_easy_setopt(curl, CURLOPT_WRITEDATA, out_file);
+	curl_easy_setopt(curl_, CURLOPT_WRITEDATA, out_file);
 
-	const CURLcode res = curl_easy_perform(curl);
+	const CURLcode res = curl_easy_perform(curl_);
 
 	fclose(out_file);
 
@@ -158,7 +164,9 @@ void download_addon_file(const std::string& name, const std::string& output) {
 	}
 }
 
-std::string download_i18n(const std::string& name, const std::string& locale) {
+std::string NetAddons::download_i18n(const std::string& name, const std::string& locale) {
+	init();
+
 	const std::string temp_dirname = kTempFileDir + g_fs->file_separator() + name + ".mo";
 	g_fs->ensure_directory_exists(temp_dirname);
 
@@ -166,15 +174,15 @@ std::string download_i18n(const std::string& name, const std::string& locale) {
 	const std::string canonical_output = g_fs->canonicalize_name(g_fs->get_userdatadir() + "/" + relative_output);
 
 	const std::string url = "https://raw.githubusercontent.com/Noordfrees/wl_addons_server/master/i18n/" + name + "/" + locale + ".mo";
-	curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+	curl_easy_setopt(curl_, CURLOPT_URL, url.c_str());
 
 	std::FILE* out_file = std::fopen(canonical_output.c_str(), "wb");
-	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, [](void* ptr, size_t size, size_t nmemb, std::FILE* stream) {
+	curl_easy_setopt(curl_, CURLOPT_WRITEFUNCTION, [](void* ptr, size_t size, size_t nmemb, std::FILE* stream) {
 		return std::fwrite(ptr, size, nmemb, stream);
 	});
-	curl_easy_setopt(curl, CURLOPT_WRITEDATA, out_file);
+	curl_easy_setopt(curl_, CURLOPT_WRITEDATA, out_file);
 
-	const CURLcode res = curl_easy_perform(curl);
+	const CURLcode res = curl_easy_perform(curl_);
 
 	fclose(out_file);
 

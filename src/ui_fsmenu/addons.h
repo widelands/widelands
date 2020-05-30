@@ -25,6 +25,7 @@
 #include <vector>
 
 #include "logic/addons.h"
+#include "network/net_addons.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
@@ -100,6 +101,8 @@ private:
 	UI::Dropdown<std::string> filter_category_;
 	UI::Checkbox filter_verified_;
 	UI::Button ok_, filter_apply_, filter_reset_, upgrade_all_, refresh_;
+
+	NetAddons network_handler_;
 
 	std::vector<AddOnInfo> remotes_;
 	void refresh_remotes();

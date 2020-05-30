@@ -22,27 +22,38 @@
 
 #include <set>
 
+#include <curl/curl.h>
+
 #include "logic/addons.h"
 
-// The three add-on related networking functions defined here use the cURL lib.
+// The add-on related networking functions defined here use the cURL lib.
 // Pro: I created a functional dummy server with no knowledge of the metaserver backend ;)
 // Con: Additional dependency – this is the only place in our code where libcurl is used
 
-// Fetch the list of all available add-ons from the server
-std::vector<AddOnInfo> refresh_remotes();
+struct NetAddons {
+	NetAddons() : curl_(nullptr) {
+	}
+	~NetAddons();
 
-// Requests the file with the given name server and downloads it into thr given location.
-void download_addon_file(const std::string& name, const std::string& save_as);
+	// Fetch the list of all available add-ons from the server
+	std::vector<AddOnInfo> refresh_remotes();
 
-// Requests the MO file for the given add-on and locale from the server,
-// downloads it into a temporary location (e.g. ~/.widelands/temp/nds.mo.tmp),
-// and returns the canonical path to the downloaded file.
-// The temp file's filename is guaranteed to be in the format
-// "nds.mo.tmp" (where 'nds' is the language's abbreviation).
-// Returns "" on failure.
-std::string download_i18n(const std::string& addon, const std::string& locale);
+	// Requests the file with the given name server and downloads it into thr given location.
+	void download_addon_file(const std::string& name, const std::string& save_as);
 
-void open_curl_connection();
-void close_curl_connection();
+	// Requests the MO file for the given add-on and locale from the server,
+	// downloads it into a temporary location (e.g. ~/.widelands/temp/nds.mo.tmp),
+	// and returns the canonical path to the downloaded file.
+	// The temp file's filename is guaranteed to be in the format
+	// "nds.mo.tmp" (where 'nds' is the language's abbreviation).
+	// Returns "" on failure.
+	std::string download_i18n(const std::string& addon, const std::string& locale);
+
+private:
+	// Open the connection if it was not open yet; throws an error if this fails
+	void init();
+
+	CURL* curl_;
+};
 
 #endif  // end of include guard: WL_NETWORK_NET_ADDONS_H
