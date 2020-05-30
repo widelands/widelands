@@ -95,12 +95,13 @@ private:
 	UI::TabPanel tabs_;
 	UI::Box installed_addons_wrapper_, browse_addons_wrapper_, installed_addons_box_, browse_addons_box_,
 			filter_settings_, filter_name_box_, filter_buttons_box_;
-	std::vector<InstalledAddOnRow*> installed_;
 	std::vector<RemoteAddOnRow*> browse_;
 	UI::EditBox filter_name_;
 	UI::Dropdown<std::string> filter_category_;
 	UI::Checkbox filter_verified_;
-	UI::Button ok_, filter_apply_, filter_reset_, upgrade_all_, refresh_;
+	UI::Button ok_, filter_apply_, filter_reset_, upgrade_all_, refresh_, autofix_dependencies_;
+
+	void autofix_dependencies();
 
 	NetAddons network_handler_;
 

@@ -121,7 +121,9 @@ AddOnsCtrl::AddOnsCtrl() : FullscreenMenuBase(),
 		upgrade_all_(&filter_buttons_box_, "upgrade_all", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, _("Upgrade all"),
 				_("Upgrade all installed add-ons for which a newer version is available")),
 		refresh_(&filter_buttons_box_, "refresh", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary,
-				_("Refresh"), _("Refresh the list of add-ons available from the server")) {
+				_("Refresh"), _("Refresh the list of add-ons available from the server")),
+		autofix_dependencies_(this, "autofix", 0, 0, 2 * kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary,
+				_("Fix…"), _("Automatically fix the dependency errors")) {
 	installed_addons_wrapper_.set_scrolling(true);
 	browse_addons_wrapper_.set_scrolling(true);
 	installed_addons_wrapper_.add(&installed_addons_box_, UI::Box::Resizing::kExpandBoth);
@@ -179,6 +181,9 @@ AddOnsCtrl::AddOnsCtrl() : FullscreenMenuBase(),
 	refresh_.sigclicked.connect([this]() {
 		refresh_remotes();
 		tabs_.activate(1);
+	});
+	autofix_dependencies_.sigclicked.connect([this]() {
+		autofix_dependencies();
 	});
 
 	filter_name_.ok.connect([this]() {
@@ -308,7 +313,6 @@ void AddOnsCtrl::rebuild() {
 	browse_addons_box_.free_children();
 	installed_addons_box_.clear();
 	browse_addons_box_.clear();
-	installed_.clear();
 	browse_.clear();
 	assert(installed_addons_box_.get_nritems() == 0);
 	assert(browse_addons_box_.get_nritems() == 0);
@@ -355,6 +359,7 @@ void AddOnsCtrl::rebuild() {
 		RemoteAddOnRow* r = new RemoteAddOnRow(&browse_addons_box_, this, a, installed, installed_i18n);
 		browse_addons_box_.add(r, UI::Box::Resizing::kFullSize);
 		has_upgrades |= r->upgradeable();
+		browse_.push_back(r);
 	}
 
 	if (installed_addons_wrapper_.get_scrollbar() && scrollpos_i) {
@@ -375,8 +380,6 @@ void AddOnsCtrl::update_dependency_errors() {
 			// Disabled, so we don't care about dependencies
 			continue;
 		}
-		// TODO(Nordfriese): Also warn if the add-on's requirements are present in the wrong order
-		// (e.g. when A requires B,C but they are ordered C,B,A)
 		for (const std::string& requirement : addon->first.requirements) {
 			std::vector<AddOnState>::iterator search_result = g_addons.end();
 			bool too_late = false;
@@ -401,6 +404,32 @@ void AddOnsCtrl::update_dependency_errors() {
 				if (too_late) {
 					warn_requirements.push_back((boost::format(_("· ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"))
 							% addon->first.descname() % search_result->first.descname()).str());
+				}
+			}
+			// Also warn if the add-on's requirements are present in the wrong order
+			// (e.g. when A requires B,C but they are ordered C,B,A)
+			for (const std::string& previous_requirement : addon->first.requirements) {
+				if (previous_requirement == requirement) { break; }
+				// check if `previous_requirement` comes before `requirement`
+				bool found_prev = false;
+				bool wrong_order = false;
+				std::string prev_descname;
+				for (const AddOnState& a : g_addons) {
+					if (a.first.internal_name == previous_requirement) {
+						found_prev = true;
+						prev_descname = a.first.descname();
+						break;
+					} else if (a.first.internal_name == requirement) {
+						if (!found_prev) {
+							wrong_order = true;
+						} else {
+							break;
+						}
+					}
+				}
+				if (wrong_order) {
+					warn_requirements.push_back((boost::format(_("· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the wrong order"))
+							% addon->first.descname() % prev_descname % search_result->first.descname()).str());
 				}
 			}
 		}
@@ -441,6 +470,9 @@ void AddOnsCtrl::layout() {
 	warn_requirements_.set_pos(Vector2i(get_w() / 6, get_h() * 12 / 16));
 	tabs_.set_size(get_w() * 2 / 3, has_warnings ? get_h() * 9 / 16 : get_h() * 2 / 3);
 	tabs_.set_pos(Vector2i(get_w() / 6, get_h() / 6));
+	autofix_dependencies_.set_visible(has_warnings);
+	autofix_dependencies_.set_size(get_w() / 8, get_h() / 16);
+	autofix_dependencies_.set_pos(Vector2i(get_w() * 2 / 3, get_h() * 13 / 16));
 
 	installed_addons_wrapper_.set_max_size(tabs_.get_w(), tabs_.get_h() - kRowButtonSize);
 	browse_addons_wrapper_.set_max_size(tabs_.get_w(), tabs_.get_h() - kRowButtonSize);
@@ -677,6 +709,80 @@ static void uninstall(AddOnsCtrl* ctrl, const AddOnInfo& info) {
 	NEVER_HERE();
 }
 
+// UNTESTED
+// Automatically fix all dependency errors by reordering add-ons and downloading missing ones.
+// We make no guarantees inhowfar the existing order is preserved
+// (e.g. if A currently comes before B, it may come after B after reordering even if
+// there is no direct or indirect dependency relation between A and B).
+void AddOnsCtrl::autofix_dependencies() {
+	std::set<std::string> missing_requirements;
+
+	// Step 1: Enable all dependencies
+	step1:
+	for (const AddOnState& addon_to_fix : g_addons) {
+		if (addon_to_fix.second || !kAddOnCategories.at(addon_to_fix.first.category).can_disable_addons) {
+			bool anything_changed = false;
+			bool found = false;
+			for (const std::string& requirement : addon_to_fix.first.requirements) {
+				for (AddOnState& a : g_addons) {
+					if (a.first.internal_name == requirement) {
+						found = true;
+						if (!a.second) {
+							a.second = true;
+							anything_changed = true;
+						}
+						break;
+					}
+				}
+				if (!found) {
+					missing_requirements.insert(requirement);
+				}
+			}
+			if (anything_changed) {
+				// concurrent modification – we need to start over
+				goto step1;
+			}
+		}
+	}
+
+	// Step 2: Download missing add-ons
+	for (const std::string& addon_to_install : missing_requirements) {
+		bool found = false;
+		for (const AddOnInfo& info : remotes_) {
+			if (info.internal_name == addon_to_install) {
+				install(info);
+				found = true;
+				break;
+			}
+		}
+		if (!found) {
+			UI::WLMessageBox w(this, _("Error"), (boost::format(_("The required add-on ‘%s’ could not be found on the server."))
+					% addon_to_install).str(), UI::WLMessageBox::MBoxType::kOk);
+			w.run<UI::Panel::Returncodes>();
+		}
+	}
+
+	// Step 3: Get all add-ons into the correct order
+	std::map<std::string, AddOnState> all_addons;
+
+	for (const AddOnState& aos : g_addons) {
+		all_addons[aos.first.internal_name] = aos;
+	}
+
+	std::multimap<unsigned /* number of dependencies */, AddOnState> addons_tree;
+	for (const auto& pair : all_addons) {
+		addons_tree.emplace(std::make_pair(count_all_dependencies(pair.first, all_addons), pair.second));
+	}
+	// The addons_tree now contains a list of all add-ons sorted by number
+	// of (direct plus indirect) dependencies
+	g_addons.clear();
+	for (const auto& pair : addons_tree) {
+		g_addons.push_back(AddOnState(pair.second));
+	}
+
+	rebuild();
+}
+
 InstalledAddOnRow::InstalledAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo& info, bool enabled, bool is_first, bool is_last)
 	: UI::Panel(parent, 0, 0, 3 * kRowButtonSize, 3 * kRowButtonSize),
 	move_up_(this, "up", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_gr->images().get("images/ui_basic/scrollbar_up.png"), _("Move up")),
@@ -687,7 +793,10 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddO
 					enabled ? "images/ui_basic/checkbox_checked.png" : "images/ui_basic/checkbox_empty.png"),
 					enabled ? _("Disable") : _("Enable"), UI::Button::VisualState::kFlat) : nullptr),
 	category_(this, g_gr->images().get(kAddOnCategories.at(info.category).icon)),
-	version_(this, 0, 0, 0, 0, std::to_string(static_cast<int>(info.version)), UI::Align::kCenter, g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+	version_(this, 0, 0, 0, 0,
+		/** TRANSLATORS: (MajorVersion).(MinorVersion) */
+		(boost::format(_("%1$u.%2$u")) % info.version % info.i18n_version).str(),
+		UI::Align::kCenter, g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelHeading)),
 	txt_(this, 0, 0, 24, 24, UI::PanelStyle::kFsMenu, (boost::format("<rt>%s<p>%s</p><p>%s</p></rt>")
 		% g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(info.descname())
 		% g_gr->styles().font_style(UI::FontStyle::kChatWhisper).as_font_tag((boost::format(_("by %s")) % info.author).str())
@@ -768,7 +877,10 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo&
 	uninstall_(this, "uninstall", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_gr->images().get("images/wui/menus/exit.png"), _("Uninstall")),
 	category_(this, g_gr->images().get(kAddOnCategories.at(info.category).icon)),
 	verified_(this, g_gr->images().get(info.verified ? "images/ui_basic/list_selected.png" : "images/ui_basic/stop.png")),
-	version_(this, 0, 0, 0, 0, std::to_string(static_cast<int>(info.version)), UI::Align::kCenter, g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+	version_(this, 0, 0, 0, 0,
+		/** TRANSLATORS: (MajorVersion).(MinorVersion) */
+		(boost::format(_("%1$u.%2$u")) % info.version % info.i18n_version).str(),
+		UI::Align::kCenter, g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelHeading)),
 	txt_(this, 0, 0, 24, 24, UI::PanelStyle::kFsMenu, (boost::format("<rt>%s<p>%s</p><p>%s</p></rt>")
 		% g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(info.descname())
 		% g_gr->styles().font_style(UI::FontStyle::kChatWhisper).as_font_tag((boost::format(_("by %s")) % info.author).str())

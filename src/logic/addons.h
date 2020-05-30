@@ -87,6 +87,8 @@ AddOnCategory get_category(const std::string&);
 // for use in map- and savegame selection screens
 std::string check_requirements(const AddOnRequirements&);
 
+unsigned count_all_dependencies(const std::string&, const std::map<std::string, AddOnState>&);
+
 AddOnInfo preload_addon(const std::string&);
 
 #endif  // end of include guard: WL_LOGIC_ADDONS_H

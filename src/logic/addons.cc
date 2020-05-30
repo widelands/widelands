@@ -135,6 +135,14 @@ std::string check_requirements(const AddOnRequirements& required_addons) {
 	return result;
 }
 
+unsigned count_all_dependencies(const std::string& info, const std::map<std::string, AddOnState>& all) {
+	unsigned deps = 0;
+	for (const std::string& req : all.at(info).first.requirements) {
+		deps += count_all_dependencies(req, all);
+	}
+	return deps;
+}
+
 AddOnCategory get_category(const std::string& name) {
 	for (const auto& pair : kAddOnCategories) {
 		if (pair.second.internal_name == name) {
