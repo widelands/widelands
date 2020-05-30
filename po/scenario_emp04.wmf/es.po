@@ -3,8 +3,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Walter Benkel <dkqbtclcnhxz@opayq.com>, 2020
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020
+# Walter Benkel <dkqbtclcnhxz@opayq.com>, 2020
 # 
 msgid ""
 msgstr ""
@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-22 17:14+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020\n"
+"Last-Translator: Walter Benkel <dkqbtclcnhxz@opayq.com>, 2020\n"
 "Language-Team: Spanish (https://www.transifex.com/widelands/teams/35159/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,35 +22,40 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:43
 msgid "Dismantle the unproductive buildings"
-msgstr ""
+msgstr "Desmantelar edificios no productivos"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:45
 msgid "Dismantle Buildings"
-msgstr "Desmantelar edificios"
+msgstr "Desmantelar Edificios"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:46
 msgid ""
 "Dismantle all unproductive small buildings to get some resources for new "
 "buildings."
 msgstr ""
+"Desmantelar todos los edificio pequeños no productivos para tener algunos "
+"recursos para nuevos edificios."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:47
 msgid ""
 "Remember to check the messages and the building statistics for unproductive "
 "buildings."
 msgstr ""
+"Recuerda revisar los mensajes y las estadísticas de construcción de los "
+"edificios no productivos."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:53
 msgid "Clear all unnecessary roads"
-msgstr "Despejar rutas innecesarias"
+msgstr "Despejar todas las rutas innecesarias"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:55
 msgid "Clear Road Network"
-msgstr ""
+msgstr "Despejar Red de Rutas"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:56
 msgid "Resolve the chaotic road network by clearing all unnecessary roads."
 msgstr ""
+"Resuelve la caótica red de rutas despejando todas las rutas innecesarias."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:62
 msgid "Click on one of the farms"
@@ -58,31 +63,35 @@ msgstr "Haga clic en una de las granjas"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:64
 msgid "Open the Building Window of a Farm"
-msgstr ""
+msgstr "Abra la Ventana de Construcción de una Granja"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:65
 msgid ""
 "Click on a farm building to open its building window. This will let you "
 "analyze the building."
 msgstr ""
+"Haga clic en un edificio de una granja para abrir su ventana de "
+"construcción. Esto le permite analizar el edificio."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:71
 msgid "Find the construction plans for the farms"
-msgstr ""
+msgstr "Encuentre los planos de construcción para las granjas"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:73
 msgid "Find Farm Construction Plans"
-msgstr ""
+msgstr "Encontrar Planos de Construcción de Granjas"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:74
 msgid ""
 "Recover the construction plans for the farms. Search for them in the hills "
 "east of your border."
 msgstr ""
+"Recupere los planos de construcción para las granjas. Búsquelos en las "
+"colinas al este de su frontera."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:80
 msgid "Build at least 3 lumberjack’s houses and 2 quarries"
-msgstr ""
+msgstr "Construya al menos 3 casas de leñadores y 2 canteras"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:82
 msgid "Quarries and Lumberjacks"
@@ -93,31 +102,37 @@ msgid ""
 "Build at least three lumberjack’s houses and two quarries to renew your "
 "building material supply chain."
 msgstr ""
+"Construya al menos tres casas de leñadores y dos canteras para renovar su "
+"cadena de abastecimiento de material de construcción."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:89
 msgid "Produce fish and rations"
-msgstr ""
+msgstr "Produzca pescado y raciones"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:91
 msgid "Food Production"
-msgstr "Produccion de la Comida"
+msgstr "Producción de Alimento"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:92
 msgid "Find and catch some fish. Afterwards, produce rations for your miners."
 msgstr ""
+"Encuentre y pesque algunos pescados. Después produzca raciones para sus "
+"mineros."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:98
 msgid "Replace the old and ineffective forester’s houses"
-msgstr ""
+msgstr "Reemplace las viejas e ineficaces casas de leñadores"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:100
 msgid "Build Two New Forester’s Houses"
-msgstr "Construye Dos Casas del Silvicultor Nuevas"
+msgstr "Construye Dos Casas de Silvicultor Nuevas"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:101
 msgid ""
 "Replace the two forester’s houses by new ones to increase productivity."
 msgstr ""
+"Reemplace las dos casas de silvicultor por nuevas para aumentar la "
+"productividad."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:107
 msgid "Find the monastery in the north"
@@ -132,6 +147,8 @@ msgid ""
 "Find the monastery in the north to obtain the improved technology for your "
 "wheat production chain."
 msgstr ""
+"Encuentra el monasterio en el norte para obtener la tecnología mejorada para"
+" tu cadena de producción de trigo."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:116
 msgid "Deal with Julia to get the technology"
@@ -146,14 +163,16 @@ msgid ""
 "Decide: Either collect 35 sheaves of wheat and 15 amphoras of wine for the "
 "goddess in your headquarters or conquer the monastery."
 msgstr ""
+"Decide: Almacena 35 gavillas de trigo y 15 ánforas de vino para la diosa en "
+"tu cuartel central, o conquista el monasterio."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:125
 msgid "Train at least 3 heroes"
-msgstr ""
+msgstr "Entrena al menos a 3 héroes"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:127
 msgid "Hero Training"
-msgstr ""
+msgstr "Entrenamiento de Héroes"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:128
 msgid ""
@@ -191,7 +210,7 @@ msgstr "Recluta al menos diez soldados nuevos en tus cuarteles."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:148
 msgid "Don’t forget to forge weapons and armor for them."
-msgstr ""
+msgstr "No olvides forjar armas y corazas para ellos."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:154
 msgid "Defeat the Barbarians"

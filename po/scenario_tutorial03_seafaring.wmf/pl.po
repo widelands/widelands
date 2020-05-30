@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-05-27 19:06+0000\n"
+"PO-Revision-Date: 2020-05-28 19:30+0000\n"
 "Last-Translator: Niektóry <niektory@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -601,7 +601,7 @@ msgstr "Jak widzisz, to nie takie trudne. Gdy zbudujesz drogę wodną, zostanie 
 msgid ""
 "Now it’s your turn: Build a gold mine on the mountain in the south and "
 "connect it to the main land by building waterways over the streams."
-msgstr ""
+msgstr "Teraz twoja kolej: Zbuduj kopalnię złota na południowej górze i połącz ją z resztą terytorium budując drogi wodne przez strumienie."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:297
 msgid "Build a gold mine and waterways"
@@ -611,21 +611,21 @@ msgstr "Zbuduj kopalnię złota i drogi wodne"
 msgid ""
 "Build a gold mine on the mountain in the south, and connect it to the "
 "mainland by building waterways over the streams."
-msgstr ""
+msgstr "Zbuduj kopalnię złota na południowej górze i połącz ją z resztą terytorium budując drogi wodne przez strumienie."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:299
 msgid ""
 "A waterway is built just like a road: You click on a flag near the shore, "
 "choose ‘Build a waterway’, and select the path for the waterway just as you "
 "would do for a road."
-msgstr ""
+msgstr "Budowa dróg wodnych przebiega analogicznie do budowa dróg: należy kliknąć flagę na wybrzeżu, wybrać „zbuduj drogę wodną”, po czym poprowadzić trasę drogi wodnej, tak jak przy budowie drogi."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:300
 msgid ""
 "The only rule for waterway placement is that the two triangles directly "
 "adjacent to each segment of the waterway have to be water, and the entire "
 "path needs to be within your territory."
-msgstr ""
+msgstr "Dla poprowadzenia drogi wodnej muszą jedynie być spełnione warunki, że dwa trójkąty przylegające do każdego segmentu drogi wodnej muszą być wodą, a także cała trasa musi znajdować się wewnątrz twojego terytorium."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:306
 msgid "Conclusion"
@@ -639,7 +639,7 @@ msgstr "O promach"
 msgid ""
 "Now there are only a few more things I would like you to keep in mind "
 "whenever using ferries."
-msgstr ""
+msgstr "Chciałbym jeszcze zwrócić uwagę na kilka rzeczy związanych z używaniem promów."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:310
 msgid ""
@@ -648,7 +648,7 @@ msgid ""
 "not to claim regions you can reach neither by road nor by ship. Never cut "
 "all your roads between two places connected by waterways unless you are "
 "certain no worker will ever have to walk there."
-msgstr ""
+msgstr "Nie zapomnij, że te łódki są zbyt małe do przewozu pracowników. Mogą być użyte do skrócenia drogi przewozu towarów wewnątrz twego terytorium, ale nie do zagospodarowania terenów, do których nie dotarłeś drogą lądową lub statkiem. Nigdy nie niszcz wszystkich dróg pomiędzy dwoma rejonami połączonymi drogami wodnymi, chyba że jesteś pewien, że żadni pracownicy nie będą musieli pomiędzy nimi przechodzić."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:311
 msgid ""
@@ -660,7 +660,7 @@ msgid ""
 "of waterways becoming severe bottlenecks in your economy. Try to build "
 "several of them in parallel to distribute the strain. If this is not "
 "possible, it is in some cases even more efficient not to use waterways."
-msgstr ""
+msgstr "Jeśli twoja droga wodna pozwala na istotne skrócenie drogi towarów pomiędzy sieciami dróg, wiele towarów zostanie przez nią przesłane. Każda droga wodna może pomieścić tylko jeden prom (w odróżnieniu od dróg, które mogą otrzymać drugiego tragarza, kiedy są zatłoczone) i ponieważ często musi być dłuższa niż zalecana długość segmentów dróg (2-3 pola), istnieje ryzyko, że stanie się wąskim gardłem twojej ekonomii. Spróbuj budować kilka równoległych dróg wodnych, aby rozdzielić obciążenie. Jeśli nie jest to możliwe, w niektórych przypadkach nie używanie dróg wodnych może okazać się bardziej wydajne."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:318
 msgid "Ferry yard production"
@@ -675,7 +675,7 @@ msgid ""
 "Do remember to stop your ferry yard when you don’t need any new ferries to "
 "be produced. As long as a ferry services a waterway, its lifetime is "
 "unlimited, but unemployed ferries will rot away and eventually sink."
-msgstr ""
+msgstr "Pamiętaj, aby zatrzymać produkcję w twojej stoczni promów, kiedy nie potrzebujesz już więcej promów. Jeśli prom obsługuje drogę wodną, będzie utrzymywany przez cały czas jej istnienia, ale niewykorzystane promy po jakimś czasie zbutwieją i zatoną."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:329
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:331
@@ -684,20 +684,20 @@ msgstr "Gratulacje"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:332
 msgid "You have learnt all there is to learn about ships and ferries!"
-msgstr ""
+msgstr "Wiesz już wszystko na temat statków i promów!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:333
 msgid ""
 "There is also another island where you can build a port if you wish to try "
 "launching another expedition."
-msgstr ""
+msgstr "Jeśli chcesz spróbować wysłać kolejną ekspedycję, jest jeszcze jedna wyspa, na której można zbudować port."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:334
 msgid ""
 "As always, you can continue playing and practice a bit more on this map if "
 "you like, or get your captain’s license ready and try out your new skills in"
 " a real game…"
-msgstr ""
+msgstr "Jak zawsze możesz grać dalej i poćwiczyć jeszcze trochę na tej mapie lub odebrać swój patent kapitana i sprawdzić świeżo zdobyte umiejętności w prawdziwej grze..."
 
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
