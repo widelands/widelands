@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,8 +18,6 @@
  */
 
 #include "ui_fsmenu/main.h"
-
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "build_info.h"
@@ -74,30 +72,30 @@ FullscreenMenuMain::FullscreenMenuMain()
                 kWidelandsCopyrightStart % kWidelandsCopyrightEnd)
                   .str()),
      gpl(this, 0, 0, 0, 0, _("Licensed under the GNU General Public License V2.0")) {
-	playtutorial.sigclicked.connect(
-	   boost::bind(&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
-	               FullscreenMenuBase::MenuTarget::kTutorial));
-	singleplayer.sigclicked.connect(
-	   boost::bind(&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
-	               FullscreenMenuBase::MenuTarget::kSinglePlayer));
-	multiplayer.sigclicked.connect(
-	   boost::bind(&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
-	               FullscreenMenuBase::MenuTarget::kMultiplayer));
-	replay.sigclicked.connect(
-	   boost::bind(&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
-	               FullscreenMenuBase::MenuTarget::kReplay));
-	editor.sigclicked.connect(
-	   boost::bind(&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
-	               FullscreenMenuBase::MenuTarget::kEditor));
-	options.sigclicked.connect(
-	   boost::bind(&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
-	               FullscreenMenuBase::MenuTarget::kOptions));
-	about.sigclicked.connect(
-	   boost::bind(&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
-	               FullscreenMenuBase::MenuTarget::kAbout));
-	exit.sigclicked.connect(
-	   boost::bind(&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
-	               FullscreenMenuBase::MenuTarget::kExit));
+	playtutorial.sigclicked.connect([this]() {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kTutorial);
+	});
+	singleplayer.sigclicked.connect([this]() {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kSinglePlayer);
+	});
+	multiplayer.sigclicked.connect([this]() {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kMultiplayer);
+	});
+	replay.sigclicked.connect([this]() {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kReplay);
+	});
+	editor.sigclicked.connect([this]() {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kEditor);
+	});
+	options.sigclicked.connect([this]() {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOptions);
+	});
+	about.sigclicked.connect([this]() {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kAbout);
+	});
+	exit.sigclicked.connect([this]() {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kExit);
+	});
 
 	vbox_.add(&playtutorial, UI::Box::Resizing::kFullSize);
 	vbox_.add(&singleplayer, UI::Box::Resizing::kFullSize);

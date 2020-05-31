@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2019 by the Widelands Development Team
+ * Copyright (C) 2007-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 
 #include "base/log.h"
 #include "base/md5.h"
+#include "base/random.h"
 #include "base/wexception.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
@@ -33,7 +34,6 @@
 #include "logic/game_data_error.h"
 #include "logic/playercommand.h"
 #include "logic/save_handler.h"
-#include "random/random.h"
 
 namespace Widelands {
 

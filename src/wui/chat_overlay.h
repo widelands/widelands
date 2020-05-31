@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2019 by the Widelands Development Team
+ * Copyright (C) 2011-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,7 +39,7 @@ struct ChatOverlay : public UI::Panel {
 	void draw(RenderTarget&) override;
 	void think() override;
 
-	// Check is position and size is still correct.
+	// Check if position and size is still correct.
 	void recompute();
 
 private:

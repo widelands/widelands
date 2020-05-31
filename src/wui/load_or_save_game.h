@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,9 @@
 #include "ui_basic/panel.h"
 #include "ui_basic/table.h"
 #include "wui/gamedetails.h"
+#include "wui/savegamedeleter.h"
+#include "wui/savegameloader.h"
+#include "wui/savegametable.h"
 
 /// Common functions for loading or saving a game or replay.
 class LoadOrSaveGame {
@@ -63,7 +66,7 @@ protected:
 	void set_show_filenames(bool);
 
 	/// The table panel
-	UI::Table<uintptr_t const>& table();
+	SavegameTable& table();
 
 	/// A vertical box wrapping the table. This can be used to add UI elements above/below the table.
 	UI::Box* table_box();
@@ -77,29 +80,37 @@ protected:
 	/// Show confirmation window and delete the selected file(s)
 	void clicked_delete();
 
-private:
-	/// Returns the filename for the table entry at 'index'
-	const std::string get_filename(int index) const;
+	void change_directory_to(std::string& directory);
 
-	/// Formats the current table selection as a list of filenames with savedate information.
-	const std::string filename_list_string() const;
-	/// Formats a given table selection as a list of filenames with savedate information.
-	const std::string filename_list_string(const std::set<uint32_t>& selections) const;
+private:
+	/// Returns the savegame for the table entry at 'index'
+	const SavegameData& get_savegame(uint32_t index) const;
 
 	/// Reverse default sort order for save date column
-	bool compare_date_descending(uint32_t, uint32_t) const;
+	bool compare_save_time(uint32_t, uint32_t) const;
+	bool compare_map_name(uint32_t, uint32_t) const;
 
 	UI::Panel* parent_;
 	UI::Box* table_box_;
-	UI::Table<uintptr_t const> table_;
 	FileType filetype_;
-	bool show_filenames_;
-	bool localize_autosave_;
+
+	std::unique_ptr<SavegameDeleter> savegame_deleter_;
+	std::unique_ptr<SavegameLoader> savegame_loader_;
+
+	SavegameTable* table_;
 	std::vector<SavegameData> games_data_;
 	GameDetails game_details_;
 	UI::Button* delete_;
 
+	const std::string basedir_;
+	std::string curdir_;
+
 	Widelands::Game& game_;
+
+	bool selection_contains_directory() const;
+	const std::vector<SavegameData> get_selected_savegames() const;
+	void set_tooltips_of_buttons(size_t nr_of_selected_items) const;
+	void select_item_and_scroll_to_it(std::set<uint32_t>& selections);
 };
 
 #endif  // end of include guard: WL_WUI_LOAD_OR_SAVE_GAME_H

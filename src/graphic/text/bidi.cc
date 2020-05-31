@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,9 +19,6 @@
 
 #include "graphic/text/bidi.h"
 
-#include <map>
-#include <string>
-
 #include <unicode/utypes.h>
 
 #include "base/log.h"
@@ -33,7 +30,7 @@ namespace {
 // there.
 // TODO(GunChleoc): Arabic: Turn this into a proper class
 
-// http://www.w3.org/TR/jlreq/#characters_not_starting_a_line
+// https://www.w3.org/TR/jlreq/#characters_not_starting_a_line
 const std::set<UChar> kCannottStartLineJapanese = {
    0x2019,  // RIGHT SINGLE QUOTATION MARK
    0x201D,  // RIGHT DOUBLE QUOTATION MARK
@@ -118,7 +115,7 @@ const std::set<UChar> kCannottStartLineJapanese = {
    0x31FF,  // KATAKANA LETTER SMALL RO
 };
 
-// http://www.w3.org/TR/jlreq/#characters_not_ending_a_line
+// https://www.w3.org/TR/jlreq/#characters_not_ending_a_line
 const std::set<UChar> kCannotEndLineJapanese = {
    0x2018,  // LEFT SINGLE QUOTATION MARK
    0x201C,  // LEFT DOUBLE QUOTATION MARK
@@ -190,7 +187,7 @@ bool is_punctuation_char(UChar c) {
 }
 
 // TODO(GunChleoc): Presentation forms A on demand
-// http://unicode-table.com/en/blocks/arabic-presentation-forms-a/
+// https://unicode-table.com/en/blocks/arabic-presentation-forms-a/
 const std::map<UChar, UChar> kArabicFinalChars = {
    {0x0622, 0xFE82},  // ʾalif maddah
    {0x0623, 0xFE84},  // ʾalif with hamza above
@@ -413,11 +410,10 @@ const std::map<UChar, UChar> kArabicLegacyDiacritics = {
 
 const std::set<UI::FontSets::Selector> kLTRScripts = {
    // We omit the default fontset, because we won't define code blocks for it - it's a catch-all.
-   UI::FontSets::Selector::kCJK, UI::FontSets::Selector::kMyanmar,
-   UI::FontSets::Selector::kSinhala};
+   UI::FontSets::Selector::kCJK};
 
-// http://unicode.org/faq/blocks_ranges.html
-// http://unicode-table.com/en/blocks/
+// https://unicode.org/faq/blocks_ranges.html
+// https://unicode-table.com/en/blocks/
 const std::map<UI::FontSets::Selector, std::set<UBlockCode>> kLTRCodeBlocks = {
    {UI::FontSets::Selector::kCJK,
     {
@@ -442,40 +438,27 @@ const std::map<UI::FontSets::Selector, std::set<UBlockCode>> kLTRCodeBlocks = {
        UBlockCode::UBLOCK_HANGUL_JAMO_EXTENDED_A,
        UBlockCode::UBLOCK_HANGUL_JAMO_EXTENDED_B,
        UBlockCode::UBLOCK_HANGUL_SYLLABLES,
-    }},
-   {UI::FontSets::Selector::kMyanmar,
-    {
-       UBlockCode::UBLOCK_MYANMAR,
-       UBlockCode::UBLOCK_MYANMAR_EXTENDED_A,
-    }},
-   {UI::FontSets::Selector::kSinhala,
-    {
-       UBlockCode::UBLOCK_SINHALA,
-    }},
-};
+    }}};
 
 const std::set<UI::FontSets::Selector> kRTLScripts = {
    // Add "mandaic", "nko", "samaritan", "syriac", "thaana" if we get these languages.
    UI::FontSets::Selector::kArabic, UI::FontSets::Selector::kDevanagari,
    UI::FontSets::Selector::kHebrew};
 
-// http://unicode.org/faq/blocks_ranges.html
-// http://unicode-table.com/en/blocks/
+// https://unicode.org/faq/blocks_ranges.html
+// https://unicode-table.com/en/blocks/
 // TODO(GunChleoc): We might need some more here - let's see how this goes.
 const std::map<UI::FontSets::Selector, std::set<UBlockCode>> kRTLCodeBlocks = {
    {UI::FontSets::Selector::kArabic,
     {
-       UBlockCode::UBLOCK_ARABIC,
-       UBlockCode::UBLOCK_ARABIC_SUPPLEMENT,
-       UBlockCode::UBLOCK_ARABIC_EXTENDED_A,
-       UBlockCode::UBLOCK_ARABIC_PRESENTATION_FORMS_A,
+       UBlockCode::UBLOCK_ARABIC, UBlockCode::UBLOCK_ARABIC_SUPPLEMENT,
+       UBlockCode::UBLOCK_ARABIC_EXTENDED_A, UBlockCode::UBLOCK_ARABIC_PRESENTATION_FORMS_A,
        UBlockCode::UBLOCK_ARABIC_PRESENTATION_FORMS_B,
        UBlockCode::UBLOCK_ARABIC_MATHEMATICAL_ALPHABETIC_SYMBOLS,
     }},
    {UI::FontSets::Selector::kDevanagari,
     {
-       UBlockCode::UBLOCK_DEVANAGARI,
-       UBlockCode::UBLOCK_DEVANAGARI_EXTENDED,
+       UBlockCode::UBLOCK_DEVANAGARI, UBlockCode::UBLOCK_DEVANAGARI_EXTENDED,
        UBlockCode::UBLOCK_VEDIC_EXTENSIONS,
     }},
    {UI::FontSets::Selector::kHebrew,
@@ -745,10 +728,6 @@ UI::FontSet const* find_fontset(const char* word, const UI::FontSets& fontsets) 
 		selector = UI::FontSets::Selector::kDevanagari;
 	} else if (has_script_character(word, UI::FontSets::Selector::kHebrew)) {
 		selector = UI::FontSets::Selector::kHebrew;
-	} else if (has_script_character(word, UI::FontSets::Selector::kMyanmar)) {
-		selector = UI::FontSets::Selector::kMyanmar;
-	} else if (has_script_character(word, UI::FontSets::Selector::kSinhala)) {
-		selector = UI::FontSets::Selector::kSinhala;
 	} else {
 		selector = UI::FontSets::Selector::kDefault;
 	}

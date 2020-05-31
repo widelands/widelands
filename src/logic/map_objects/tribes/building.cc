@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,13 +19,9 @@
 
 #include "logic/map_objects/tribes/building.h"
 
-#include <cstdio>
-#include <cstring>
 #include <memory>
-#include <sstream>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 
 #include "base/macros.h"
 #include "base/wexception.h"
@@ -167,7 +163,21 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 		return_enhanced_ = Buildcost(table.get_table("return_on_dismantle_on_enhanced"), tribes_);
 	}
 
-	needs_seafaring_ = table.has_key("needs_seafaring") ? table.get_bool("needs_seafaring") : false;
+	needs_seafaring_ = false;
+	needs_waterways_ = false;
+	if (table.has_key("map_check")) {
+		for (const std::string& map_check :
+		     table.get_table("map_check")->array_entries<std::string>()) {
+			if (map_check == "seafaring") {
+				needs_seafaring_ = true;
+			} else if (map_check == "waterways") {
+				needs_waterways_ = true;
+			} else {
+				throw GameDataError(
+				   "Unexpected map_check item '%s' in building description", map_check.c_str());
+			}
+		}
+	}
 
 	if (table.has_key("vision_range")) {
 		vision_range_ = table.get_int("vision_range");
@@ -254,6 +264,18 @@ void BuildingDescr::set_hints_trainingsites_max_percent(int percent) {
 
 uint32_t BuildingDescr::get_unoccupied_animation() const {
 	return get_animation(is_animation_known("unoccupied") ? "unoccupied" : "idle", nullptr);
+}
+
+bool BuildingDescr::is_useful_on_map(bool seafaring_allowed, bool waterways_allowed) const {
+	if (needs_seafaring_ && needs_waterways_) {
+		return seafaring_allowed || waterways_allowed;
+	} else if (needs_seafaring_) {
+		return seafaring_allowed;
+	} else if (needs_waterways_) {
+		return waterways_allowed;
+	} else {
+		return true;
+	}
 }
 
 /**
@@ -673,7 +695,7 @@ bool Building::fetch_from_flag(Game&) {
 }
 
 void Building::draw(uint32_t gametime,
-                    const TextToDraw draw_text,
+                    const InfoToDraw info_to_draw,
                     const Vector2f& point_on_dst,
                     const Widelands::Coords& coords,
                     const float scale,
@@ -689,7 +711,7 @@ void Building::draw(uint32_t gametime,
 	//  door animation?
 
 	//  overlay strings (draw when enabled)
-	draw_info(draw_text, point_on_dst, scale, dst);
+	draw_info(info_to_draw, point_on_dst, scale, dst);
 }
 
 /*
@@ -697,16 +719,14 @@ void Building::draw(uint32_t gametime,
 Draw overlay help strings when enabled.
 ===============
 */
-void Building::draw_info(const TextToDraw draw_text,
+void Building::draw_info(const InfoToDraw info_to_draw,
                          const Vector2f& point_on_dst,
                          const float scale,
                          RenderTarget* dst) {
 	const std::string statistics_string =
-	   ((draw_text & TextToDraw::kStatistics) != TextToDraw::kNone) ?
-	      info_string(InfoStringFormat::kStatistics) :
-	      "";
-	do_draw_info(draw_text, info_string(InfoStringFormat::kCensus), statistics_string, point_on_dst,
-	             scale, dst);
+	   (info_to_draw & InfoToDraw::kStatistics) ? info_string(InfoStringFormat::kStatistics) : "";
+	do_draw_info(info_to_draw, info_string(InfoStringFormat::kCensus), statistics_string,
+	             point_on_dst, scale, dst);
 }
 
 int32_t

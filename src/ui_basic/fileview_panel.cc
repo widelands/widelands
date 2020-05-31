@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2019 by the Widelands Development Team
+ * Copyright (C) 2016-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +20,6 @@
 #include "ui_basic/fileview_panel.h"
 
 #include <memory>
-
-#include <boost/format.hpp>
 
 #include "base/macros.h"
 #include "scripting/lua_interface.h"

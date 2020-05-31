@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,8 +26,6 @@
 
 namespace Widelands {
 class Economy;
-class Game;
-class MapObjectLoader;
 
 struct CmdCallEconomyBalance : public GameLogicCommand {
 	CmdCallEconomyBalance() : GameLogicCommand(0), timerid_(0) {
@@ -46,6 +44,7 @@ struct CmdCallEconomyBalance : public GameLogicCommand {
 
 private:
 	OPtr<Flag> flag_;
+	WareWorker type_;
 	uint32_t timerid_;
 };
 }  // namespace Widelands

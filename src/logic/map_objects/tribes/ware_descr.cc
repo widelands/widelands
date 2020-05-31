@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,10 +21,7 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
-#include "graphic/animation.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 
@@ -36,7 +33,7 @@ namespace Widelands {
  */
 WareDescr::WareDescr(const std::string& init_descname, const LuaTable& table)
    : MapObjectDescr(MapObjectType::WARE, table.get_string("name"), init_descname, table),
-     ai_hints_(new WareHints(*table.get_table("preciousness"))) {
+     ai_hints_(new WareHints(table.get_string("name"), *table.get_table("preciousness"))) {
 	if (helptext_script().empty()) {
 		throw GameDataError("Ware %s has no helptext script", name().c_str());
 	}
@@ -62,13 +59,14 @@ DescriptionIndex WareDescr::default_target_quantity(const std::string& tribename
 }
 
 bool WareDescr::has_demand_check(const std::string& tribename) const {
-	return default_target_quantity(tribename) != kInvalidWare;
+	return (default_target_quantity(tribename) != 0 &&
+	        default_target_quantity(tribename) != kInvalidWare);
 }
 
 void WareDescr::set_has_demand_check(const std::string& tribename) {
 	if (default_target_quantities_.count(tribename) > 0 &&
 	    default_target_quantities_.at(tribename) == kInvalidWare) {
-		default_target_quantities_.at(tribename) = 1;
+		default_target_quantities_.at(tribename) = 0;
 	}
 }
 

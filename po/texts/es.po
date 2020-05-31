@@ -1,23 +1,24 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007,2009
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2015-2016
 # GunChleoc, 2016
-# Gontzal M. Pujana <juchuf@gmail.com>, 2015
+# Juanjo Cb <jjcabrejas@gmail.com>, 2019
+# Thadah D. Denyse <juchuf@gmail.com>, 2015
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015-2016
 # Raul Ferriz <raul.ferriz@gmail.com>, 2009
-# Stephan Lutz <stephan-lutz@gmx.de>, 2019
-# Gontzal M. Pujana <juchuf@gmail.com>, 2017
+# Stephan Lutz <stephan-lutz@gmx.de>, 2019-2020
+# Thadah D. Denyse <juchuf@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-01 12:45+0000\n"
-"PO-Revision-Date: 2019-03-01 12:46+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-05-25 08:09+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,7 +45,7 @@ msgstr "Información de licencia para Widelands"
 #. TRANSLATORS: Placeholder is copyright end year
 #: ../../data/txts/LICENSE.lua:10
 msgid "Copyright 2002 - %1% by the Widelands Development Team."
-msgstr ""
+msgstr "Copyright 2002 - %1%por el equipo de desarrollo de Widelands."
 
 #: ../../data/txts/LICENSE.lua:12
 msgid ""
@@ -247,7 +248,7 @@ msgstr "Fedora Linux"
 
 #: ../../data/txts/developers.lua:3
 msgid "Flatpak"
-msgstr ""
+msgstr "Flatpak"
 
 #: ../../data/txts/developers.lua:3
 msgid "Former Elders"
@@ -259,7 +260,7 @@ msgstr "FreeBSD"
 
 #: ../../data/txts/developers.lua:3
 msgid "Frisians"
-msgstr ""
+msgstr "Frisones"
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphicians"
@@ -327,11 +328,11 @@ msgstr "ZetaOS"
 
 #: ../../data/txts/developers.lua:3
 msgid "and many, many more (thank you for everything you've done)"
-msgstr ""
+msgstr "y muchos, muchos más (gracias por todo lo que habéis hecho)"
 
 #: ../../data/txts/developers.lua:3
 msgid "vacant"
-msgstr ""
+msgstr "libre"
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
@@ -416,7 +417,12 @@ msgstr "Espacio"
 msgid "Toggle building spaces"
 msgstr "Mostrar u ocultar Zonas de Construcción"
 
-#. TRANSLATORS: This is an access key combination. The hotkey is 'f'
+#. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
+#: ../../data/txts/help/common_helptexts.lua:49
+msgctxt "hotkey"
+msgid "Ctrl + F"
+msgstr "Ctrl + F"
+
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"
 msgstr "Cambia a pantalla completa (si es soportado por el S.O.)"
@@ -509,7 +515,7 @@ msgid ""
 " side. A button next to the map name allows the host to change to a "
 "different map. Furthermore, the host is able to set a specific win "
 "condition, and finally can start the game as soon as all players are set up."
-msgstr "Puedes ver información sobre el mapa o partida salvada seleccionados en el lado derecho. Un botón junto al nombre del mapa permite al anfitrión cambiar a un mapa diferente. Adicionalmente, el anfitrión puede marcar una condición de victoria específica y finalmente iniciar la partida en cuanto todos los jugadores estén listos."
+msgstr "Puedes ver información sobre el mapa o partido guardado seleccionados en el lado derecho. Un botón junto al nombre del mapa permite al anfitrión cambiar a un mapa diferente. Adicionalmente, el anfitrión puede marcar una condición de victoria específica y finalmente iniciar el partido en cuanto todos los jugadores estén listos."
 
 #: ../../data/txts/tips/atlanteans.lua:4
 msgid ""
@@ -632,7 +638,7 @@ msgid ""
 "To produce bricks, you need granite; to produce granite, you need a quarry "
 "or rock mine; to build those, you need bricks. Take care not to get "
 "deadlocked!"
-msgstr ""
+msgstr "Para producir ladrillos, es necesario granito; para producir granito, es necesaria una cantera o una mina de roca; para construirlas, necesitas ladrillos. ¡Ten cuidado para que el proceso no quede bloqueado!"
 
 #: ../../data/txts/tips/frisians.lua:8
 msgid "Always build a forester’s house, so you will not run out of logs."
@@ -678,7 +684,7 @@ msgstr "¿Alguna otra pregunta? Nuestras PFs, la wiki y por supuesto nuestros fo
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
 "specific ware. Pressing Ctrl while clicking will adjust all wares at once."
-msgstr ""
+msgstr "Utiliza los botones de prioridad en la ventana de cada edificio para ajustar la entrega de una mercancia determinada. Si pulsas Ctrl mientras haces clic, todas las mercancías quedarán ajustadas simultáneamente."
 
 #: ../../data/txts/tips/general_game.lua:35
 msgid ""
@@ -757,6 +763,53 @@ msgstr "Aumenta o reduce el zoom usando la rueda del ratón o %1%. Pulsa %2% par
 
 #: ../../data/txts/tips/general_game.lua:75
 msgid ""
+"Use the ‘,’ (comma) and ‘.’ (period) keys to quickly jump between recently "
+"visited locations."
+msgstr "Usa la \",\" (coma) y el \".\" (punto) para saltar rapido entre los lugares recientemente visitados."
+
+#: ../../data/txts/tips/general_game.lua:79
+msgctxt "hotkey"
+msgid "Ctrl+(Page Up/Page Down)"
+msgstr "Ctrl+(RePág/AvPág)"
+
+#: ../../data/txts/tips/general_game.lua:79
+msgctxt "hotkey"
+msgid "Page Up/Page Down"
+msgstr "Re. Pág/Av. Pág"
+
+#: ../../data/txts/tips/general_game.lua:79
+msgctxt "hotkey"
+msgid "Shift+(Page Up/Page Down)"
+msgstr "Shift+(RePág/AvPág)"
+
+#: ../../data/txts/tips/general_game.lua:79
+msgid ""
+"Speed up or slow down the game with %1%. Use %2% for rapid change, %3% will "
+"adjust speed smoothly."
+msgstr "Aumenta o reduce la velocidad del juego con %1%. Utiliza %2% para cambios rapidos, %3% va cambiar la velocidad suavemente."
+
+#: ../../data/txts/tips/general_game.lua:83
+msgctxt "hotkey"
+msgid "Arrow keys"
+msgstr "Teclas de flecha"
+
+#: ../../data/txts/tips/general_game.lua:83
+msgctxt "hotkey"
+msgid "Ctrl+Arrow keys"
+msgstr "Ctrl+Teclas de flecha"
+
+#: ../../data/txts/tips/general_game.lua:83
+msgid ""
+"Move map view using %1%. %2% will move the view faster, %3% moves slowly."
+msgstr "Mueve la vista del mapa utilizando %1%. %2% va mover la vista rapidamente, %3% la mueve lento."
+
+#: ../../data/txts/tips/general_game.lua:83
+msgctxt "hotkey"
+msgid "Shift+Arrow keys"
+msgstr "Shift+Teclas de flecha"
+
+#: ../../data/txts/tips/general_game.lua:87
+msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"
 " no such flags in the vicinity, they will keep wandering around and "
@@ -785,7 +838,7 @@ msgstr "Usa \"@name\" al principio de un mensaje de chat para enviarlo solo a es
 msgid ""
 "If the game should crash, don't worry! The game will be saved automatically "
 "so that you can reload it afterwards."
-msgstr "Si el juego se cierra inesperadamente, no te preocupes! La partida se guardará automáticamente para que puedas cargarla."
+msgstr "Si el juego se cierra inesperadamente, no te preocupes! El partido se guardará automáticamente para que puedas cargarla."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/singleplayer.lua:7

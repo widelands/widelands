@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,6 @@
 #ifndef WL_LOGIC_FILESYSTEM_CONSTANTS_H
 #define WL_LOGIC_FILESYSTEM_CONSTANTS_H
 
-#include <cstdint>
 #include <string>
 
 /// Stop writing screenshots or syncstreams if we have less disk space left than this

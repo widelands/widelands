@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2019 by the Widelands Development Team
+ * Copyright (C) 2007-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +20,9 @@
 #include "map_io/map_object_packet.h"
 
 #include "base/wexception.h"
-#include "economy/fleet.h"
+#include "economy/ferry_fleet.h"
 #include "economy/portdock.h"
+#include "economy/ship_fleet.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
@@ -60,7 +61,7 @@ void MapObjectPacket::read(FileSystem& fs,
 		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
 
 			// Initial loading stage
-			for (;;)
+			for (;;) {
 				switch (uint8_t const header = fr.unsigned_8()) {
 				case 0:
 					return;
@@ -96,13 +97,18 @@ void MapObjectPacket::read(FileSystem& fs,
 					loaders.insert(PortDock::load(egbase, mol, fr));
 					break;
 
-				case MapObject::HeaderFleet:
-					loaders.insert(Fleet::load(egbase, mol, fr));
+				case MapObject::HeaderShipFleet:
+					loaders.insert(ShipFleet::load(egbase, mol, fr));
+					break;
+
+				case MapObject::HeaderFerryFleet:
+					loaders.insert(FerryFleet::load(egbase, mol, fr));
 					break;
 
 				default:
 					throw GameDataError("unknown object header %u", header);
 				}
+			}
 		} else {
 			throw UnhandledVersionError("MapObjectPacket", packet_version, kCurrentPacketVersion);
 		}
@@ -147,13 +153,15 @@ void MapObjectPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSav
 
 		// These checks can be eliminated and the object saver simplified
 		// once all MapObjects are saved using the new system
-		if (mos.is_object_known(obj))
+		if (mos.is_object_known(obj)) {
 			continue;
+		}
 
-		if (!obj.has_new_save_support())
+		if (!obj.has_new_save_support()) {
 			throw GameDataError("MO(%u of type %s) without new style save support not saved "
 			                    "explicitly",
 			                    obj.serial(), obj.descr().name().c_str());
+		}
 
 		mos.register_object(obj);
 		obj.save(egbase, mos, fw);

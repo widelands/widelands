@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005-2019 by the Widelands Development Team
+ * Copyright (C) 2005-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,11 +20,9 @@
 #ifndef WL_SOUND_SOUND_HANDLER_H
 #define WL_SOUND_SOUND_HANDLER_H
 
-#include <cstring>
+#include <cassert>
 #include <map>
 #include <memory>
-#include <string>
-#include <vector>
 
 #ifndef _MSC_VER
 #include <unistd.h>
@@ -32,7 +30,7 @@
 
 #include <SDL_mutex.h>
 
-#include "random/random.h"
+#include "base/random.h"
 #include "sound/constants.h"
 #include "sound/fxset.h"
 #include "sound/songset.h"

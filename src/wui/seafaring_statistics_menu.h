@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2019 by the Widelands Development Team
+ * Copyright (C) 2017-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,11 +21,9 @@
 #define WL_WUI_SEAFARING_STATISTICS_MENU_H
 
 #include <memory>
-#include <unordered_map>
 
 #include "base/i18n.h"
 #include "logic/map_objects/tribes/ship.h"
-#include "notifications/notifications.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/table.h"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2019 by the Widelands Development Team
+ * Copyright (C) 2010-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +20,6 @@
 #include "map_io/map_players_messages_packet.h"
 
 #include <memory>
-
-#include <boost/format.hpp>
 
 #include "io/profile.h"
 #include "logic/game_data_error.h"
@@ -87,25 +85,28 @@ void MapPlayersMessagesPacket::read(FileSystem& fs,
 			while (Section* const s = prof.get_next_section()) {
 				try {
 					uint32_t const sent = s->get_safe_int("sent");
-					if (sent < previous_message_sent)
+					if (sent < previous_message_sent) {
 						throw GameDataError("messages are not ordered: sent at %u but previous "
 						                    "message sent at %u",
 						                    sent, previous_message_sent);
-					if (gametime < sent)
+					}
+					if (gametime < sent) {
 						throw GameDataError("message is sent in the future: sent at %u but "
 						                    "gametime is only %u",
 						                    sent, gametime);
+					}
 
 					Message::Status status = Message::Status::kArchived;  //  default status
 					if (char const* const status_string = s->get_string("status")) {
 						try {
-							if (!strcmp(status_string, "new"))
+							if (!strcmp(status_string, "new")) {
 								status = Message::Status::kNew;
-							else if (!strcmp(status_string, "read"))
+							} else if (!strcmp(status_string, "read")) {
 								status = Message::Status::kRead;
-							else
+							} else {
 								throw GameDataError(
 								   "expected %s but found \"%s\"", "{new|read}", status_string);
+							}
 						} catch (const WException& e) {
 							throw GameDataError("status: %s", e.what());
 						}
@@ -166,8 +167,9 @@ void MapPlayersMessagesPacket::write(FileSystem& fs, EditorGameBase& egbase, Map
 			s.set_string("icon", message.icon_filename());
 			s.set_int("sent", message.sent());
 			s.set_string("body", message.body());
-			if (Coords const c = message.position())
+			if (Coords const c = message.position()) {
 				set_coords("position", c, &s);
+			}
 			switch (message.status()) {
 			case Message::Status::kNew:
 				s.set_string("status", "new");

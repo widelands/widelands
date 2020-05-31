@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,6 @@
 #include "base/macros.h"
 #include "logic/map_objects/description_maintainer.h"
 
-class LuaInterface;
 class LuaTable;
 
 namespace Widelands {
@@ -61,7 +60,7 @@ public:
 	DescriptionIndex get_nr_immovables() const;
 	ImmovableDescr const* get_immovable_descr(DescriptionIndex index) const;
 
-	DescriptionIndex get_resource(const char* const name) const;
+	DescriptionIndex resource_index(const char* const name) const;
 	ResourceDescription const* get_resource(DescriptionIndex res) const;
 	DescriptionIndex get_nr_resources() const;
 	DescriptionIndex safe_resource_index(const char* const warename) const;

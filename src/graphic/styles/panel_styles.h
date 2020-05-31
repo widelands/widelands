@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2019 by the Widelands Development Team
+ * Copyright (C) 2017-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,12 +20,8 @@
 #ifndef WL_GRAPHIC_STYLES_PANEL_STYLES_H
 #define WL_GRAPHIC_STYLES_PANEL_STYLES_H
 
-#include <map>
-#include <memory>
-
 #include "graphic/color.h"
 #include "graphic/image.h"
-#include "graphic/styles/font_style.h"
 
 namespace UI {
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2019 by the Widelands Development Team
+ * Copyright (C) 2009-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,22 +48,24 @@ bool CheckStepRoadAI::allowed(
 	}
 
 	// Calculate cost and passability
-	if (!(endcaps & movecaps))
+	if (!(endcaps & movecaps)) {
 		return false;
+	}
 
 	// Check for blocking immovables
-	if (BaseImmovable const* const imm = map.get_immovable(end))
+	if (BaseImmovable const* const imm = map.get_immovable(end)) {
 		if (imm->get_size() >= BaseImmovable::SMALL) {
-			if (id != CheckStep::stepLast && !open_end)
+			if (id != CheckStep::stepLast && !open_end) {
 				return false;
-
-			if (dynamic_cast<Flag const*>(imm))
+			}
+			if (dynamic_cast<Flag const*>(imm)) {
 				return true;
-
-			if (!dynamic_cast<Road const*>(imm) || !(endcaps & BUILDCAPS_FLAG))
+			}
+			if (!dynamic_cast<Road const*>(imm) || !(endcaps & BUILDCAPS_FLAG)) {
 				return false;
+			}
 		}
-
+	}
 	return true;
 }
 
@@ -71,11 +73,12 @@ bool CheckStepRoadAI::reachable_dest(const Map& map, const FCoords& dest) const 
 	NodeCaps const caps = dest.field->nodecaps();
 
 	if (!(caps & movecaps)) {
-		if (!((movecaps & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK)))
+		if (!((movecaps & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK))) {
 			return false;
-
-		if (!map.can_reach_by_water(dest))
+		}
+		if (!map.can_reach_by_water(dest)) {
 			return false;
+		}
 	}
 
 	return true;
@@ -237,9 +240,10 @@ bool FindNodeOpenWater::accept(const EditorGameBase&, const FCoords& coord) cons
 
 // FindNodeWithFlagOrRoad
 bool FindNodeWithFlagOrRoad::accept(const EditorGameBase&, FCoords fc) const {
-	if (upcast(PlayerImmovable const, pimm, fc.field->get_immovable()))
+	if (upcast(PlayerImmovable const, pimm, fc.field->get_immovable())) {
 		return (dynamic_cast<Flag const*>(pimm) ||
 		        (dynamic_cast<Road const*>(pimm) && (fc.field->nodecaps() & BUILDCAPS_FLAG)));
+	}
 	return false;
 }
 
@@ -271,7 +275,7 @@ uint32_t EventTimeQueue::count(const uint32_t current_time, const uint32_t addit
 		uint32_t cnt = 0;
 		for (auto item : queue) {
 			if (item.second == additional_id) {
-				cnt += 1;
+				++cnt;
 			}
 		}
 		return cnt;
@@ -390,7 +394,7 @@ DescriptionIndex BuildingObserver::get_collected_map_resource() const {
 	}
 }
 
-Widelands::AiModeBuildings BuildingObserver::aimode_limit_status() {
+Widelands::AiModeBuildings BuildingObserver::aimode_limit_status() const {
 	if (total_count() > cnt_limit_by_aimode) {
 		return Widelands::AiModeBuildings::kLimitExceeded;
 	} else if (total_count() == cnt_limit_by_aimode) {
@@ -418,7 +422,7 @@ void MineFieldsObserver::zero() {
 
 // Increase counter by one for specific ore/minefield type
 void MineFieldsObserver::add(const Widelands::DescriptionIndex idx) {
-	stat[idx] += 1;
+	++stat[idx];
 }
 
 // Add ore into critical_ores
@@ -449,7 +453,7 @@ uint8_t MineFieldsObserver::count_types() {
 	uint16_t count = 0;
 	for (auto material : stat) {
 		if (material.second > 0) {
-			count += 1;
+			++count;
 		}
 	}
 	return count;
@@ -483,7 +487,7 @@ void Neuron::set_weight(int8_t w) {
 // This has to be recalculated when the weight or curve type change
 void Neuron::recalculate() {
 	assert(neuron_curves.size() > type);
-	for (uint8_t i = 0; i <= kNeuronMaxPosition; i += 1) {
+	for (uint8_t i = 0; i <= kNeuronMaxPosition; ++i) {
 		results[i] = weight * neuron_curves[type][i] / kNeuronWeightLimit;
 	}
 }
@@ -843,17 +847,17 @@ void ManagementData::mutate(const uint8_t pn) {
 				uint8_t changed_bits = 0;
 				// is this a preferred neuron
 				if (preferred_f_neurons.count(item.get_id()) > 0) {
-					for (uint8_t i = 0; i < kFNeuronBitSize; i += 1) {
+					for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
 						if (std::rand() % 5 == 0) {
 							item.flip_bit(i);
-							changed_bits += 1;
+							++changed_bits;
 						}
 					}
 				} else {  // normal mutation
-					for (uint8_t i = 0; i < kFNeuronBitSize; i += 1) {
+					for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
 						if (std::rand() % (probability * 3) == 0) {
 							item.flip_bit(i);
-							changed_bits += 1;
+							++changed_bits;
 						}
 					}
 				}
@@ -1101,7 +1105,7 @@ uint8_t PlayersStrengths::enemies_seen_lately_count(const uint32_t gametime) {
 	uint8_t count = 0;
 	for (auto& item : all_stats) {
 		if (get_is_enemy(item.first) && player_seen_lately(item.first, gametime)) {
-			count += 1;
+			++count;
 		}
 	}
 	return count;
@@ -1492,7 +1496,7 @@ void FlagCandidates::sort_by_air_distance() {
 	std::sort(flags_.begin(), flags_.end(),
 	          [](const FlagCandidates::Candidate& lf, const FlagCandidates::Candidate& rf) {
 		          return lf.air_distance < rf.air_distance;
-	          });
+		       });
 }
 
 void FlagCandidates::add_flag(const uint32_t coords,

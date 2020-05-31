@@ -57,6 +57,7 @@ wl_library(logic_game_controller
     replay_game_controller.cc
     single_player_game_controller.h
     single_player_game_controller.cc
+  USES_SDL2
   DEPENDS
     ai
     logic
@@ -69,11 +70,8 @@ wl_library(logic_game_controller
 
 wl_library(logic_constants
   SRCS
-    roadtype.h
     widelands.cc
     widelands.h
-  DEPENDS
-    base_macros
 )
 
 wl_library(logic_filesystem_constants
@@ -137,6 +135,7 @@ wl_library(logic_map
     base_scoped_timer
     build_info
     economy
+    graphic
     graphic_playercolor
     io_fileread
     io_filesystem
@@ -145,13 +144,11 @@ wl_library(logic_map
     logic_filesystem_constants
     logic_map_objects
     logic_objectives
-    logic_tribe_basic_info
     logic_widelands_geometry
     logic_widelands_geometry_io
     map_io_map_loader
     notifications
-    random
-    wui_mapview_pixelfunctions # TODO(GunChleoc): Circular dependency
+    wui_mapview_pixelconstants
 )
 
 wl_library(logic_commands
@@ -183,6 +180,7 @@ wl_library(logic_commands
     io_fileread
     io_stream
     logic # TODO(GunChleoc): Circular dependency
+    logic_constants
     logic_exceptions
     logic_game_controller
     logic_map
@@ -224,6 +222,7 @@ wl_library(logic
     base_log
     base_macros
     base_md5
+    base_random
     base_scoped_timer
     base_time_string
     build_info
@@ -251,7 +250,6 @@ wl_library(logic
     map_io_map_loader
     note_sound
     notifications
-    random
     scripting_logic # TODO(GunChleoc): Circular dependency
     scripting_lua_interface
     scripting_lua_table
@@ -260,6 +258,7 @@ wl_library(logic
     ui_basic
     widelands_options
     wui # TODO(GunChleoc): Circular dependency
+    wui_game_tips
 )
 
 add_subdirectory(map_objects)

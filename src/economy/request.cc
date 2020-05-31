@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,7 +57,7 @@ Request::Request(PlayerImmovable& init_target,
      target_productionsite_(dynamic_cast<ProductionSite*>(&init_target)),
      target_warehouse_(dynamic_cast<Warehouse*>(&init_target)),
      target_constructionsite_(dynamic_cast<ConstructionSite*>(&init_target)),
-     economy_(init_target.get_economy()),
+     economy_(init_target.get_economy(w)),
      index_(index),
      count_(1),
      exact_match_(false),
@@ -121,6 +121,14 @@ void Request::read(FileRead& fr,
 					throw wexception("Request::read: unknown type '%s'.\n", type_name);
 				}
 			}
+
+			// Overwrite initial economy because our WareWorker type may have changed
+			if (economy_) {
+				economy_->remove_request(*this);
+			}
+			economy_ = target_.get_economy(type_);
+			assert(economy_);
+
 			count_ = fr.unsigned_32();
 			required_time_ = fr.unsigned_32();
 			required_interval_ = fr.unsigned_32();
@@ -160,8 +168,9 @@ void Request::read(FileRead& fr,
 					throw wexception("transfer %u: %s", i, e.what());
 				}
 			requirements_.read(fr, game, mol);
-			if (!is_open() && economy_)
-				economy_->remove_request(*this);
+			if (is_open()) {
+				economy_->add_request(*this);
+			}
 		} else {
 			throw UnhandledVersionError("Request", packet_version, kCurrentPacketVersion);
 		}
@@ -179,12 +188,15 @@ void Request::write(FileWrite& fw, Game& game, MapObjectSaver& mos) const {
 	//  Target and economy should be set. Same is true for callback stuff.
 
 	assert(type_ == wwWARE || type_ == wwWORKER);
-	if (type_ == wwWARE) {
+	switch (type_) {
+	case wwWARE:
 		assert(game.tribes().ware_exists(index_));
 		fw.c_string(game.tribes().get_ware_descr(index_)->name());
-	} else if (type_ == wwWORKER) {
+		break;
+	case wwWORKER:
 		assert(game.tribes().worker_exists(index_));
 		fw.c_string(game.tribes().get_worker_descr(index_)->name());
+		break;
 	}
 
 	fw.unsigned_32(count_);
@@ -389,20 +401,25 @@ void Request::start_transfer(Game& game, Supply& supp) {
 	ss.unsigned_32(supp.get_position(game)->serial());
 
 	Transfer* t;
-	if (get_type() == wwWORKER) {
+	switch (get_type()) {
+	case wwWORKER: {
 		//  Begin the transfer of a soldier or worker.
 		//  launch_worker() creates or starts the worker
 		Worker& s = supp.launch_worker(game, *this);
 		ss.unsigned_32(s.serial());
 		t = new Transfer(game, *this, s);
-	} else {
-		//  Begin the transfer of an ware. The ware itself is passive.
+		break;
+	}
+	case wwWARE: {
+		//  Begin the transfer of n ware. The ware itself is passive.
 		//  launch_ware() ensures the WareInstance is transported out of the
 		//  warehouse. Once it's on the flag, the flag code will decide what to
 		//  do with it.
 		WareInstance& ware = supp.launch_ware(game, *this);
 		ss.unsigned_32(ware.serial());
 		t = new Transfer(game, *this, ware);
+		break;
+	}
 	}
 
 	transfers_.push_back(t);

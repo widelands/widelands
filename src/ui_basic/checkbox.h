@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,9 +20,9 @@
 #ifndef WL_UI_BASIC_CHECKBOX_H
 #define WL_UI_BASIC_CHECKBOX_H
 
-#include <boost/signals2.hpp>
+#include <memory>
 
-#include "graphic/color.h"
+#include "graphic/text/rendered_text.h"
 #include "ui_basic/panel.h"
 
 constexpr int kStateboxSize = 20;

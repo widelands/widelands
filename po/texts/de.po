@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # Elisabeth Jäger, 2016-2019
@@ -8,15 +8,15 @@
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
-# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2019
+# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2020
 # Elisabeth Jäger, 2015-2016
 # wl-zocker, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-04-05 04:54+0000\n"
-"PO-Revision-Date: 2019-04-07 18:51+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-05-14 14:48+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -416,7 +416,12 @@ msgstr "LEERTASTE"
 msgid "Toggle building spaces"
 msgstr "Schaltet die Bauhilfe ein und aus"
 
-#. TRANSLATORS: This is an access key combination. The hotkey is 'f'
+#. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
+#: ../../data/txts/help/common_helptexts.lua:49
+msgctxt "hotkey"
+msgid "Ctrl + F"
+msgstr "STRG + F"
+
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"
 msgstr "Schaltet die Vollbilddarstellung an/aus (falls dies das Betriebssystem erlaubt)"
@@ -479,7 +484,7 @@ msgstr "Mit einem Computerspieler verknüpft (das Gesicht und der Hovertext deut
 
 #: ../../data/txts/help/multiplayer_help.lua:19
 msgid "Set as shared in starting position for another player."
-msgstr "Als weiterer Startpunkt für einen anderen Spieler gesetzt."
+msgstr "Als gemeinsame Ausgangsposition für einen anderen Spieler gesetzt."
 
 #: ../../data/txts/help/multiplayer_help.lua:20
 msgid "Closed."
@@ -617,7 +622,7 @@ msgid ""
 "You can place a big building on any node where you could place a medium "
 "building if there is no obstacle or non-arable terrain towards the west, "
 "northwest and northeast."
-msgstr "Ein großes Gebäude kannst du überall hinbauen, wo auch ein mittleres Gebäude stehen kann, sofern es keine Hindernisse oder unbebaubares Land in Richtung Westen, Nordwesten oder Nordosten gibt."
+msgstr "Ein großes Gebäude kannst du überall hinbauen, wo auch ein mittleres Gebäude stehen kann, sofern es keine Hindernisse oder unbebaubares Gelände in Richtung Westen, Nordwesten oder Nordosten gibt."
 
 #: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
@@ -658,7 +663,7 @@ msgstr "Dein Gebiet kannst du durch Errichten verschiedener Militärgebäude wie
 
 #: ../../data/txts/tips/general_game.lua:18
 msgid "Miners will work only if supplied with food."
-msgstr "Bergarbeiter arbeiten nur, wenn sie mit genügend Nahrung versorgt werden."
+msgstr "Bergleute arbeiten nur, wenn sie mit genügend Nahrung versorgt werden."
 
 #: ../../data/txts/tips/general_game.lua:22
 msgid ""
@@ -711,13 +716,13 @@ msgstr "Drücke %1%, um wichtige Orte zu speichern, und drücke dann %2%, um sie
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first"
 " junction."
-msgstr "Durch das Drücken der STRG-Taste beim Entfernen einer Straße werden alle Fahnen bis zur nächsten Kreuzung entfernt."
+msgstr "Durch das Drücken der STRG-Taste beim Entfernen einer Straße werden alle Flaggen bis zur nächsten Kreuzung entfernt."
 
 #: ../../data/txts/tips/general_game.lua:51
 msgid ""
 "New soldiers are recruited in a barracks. Their abilities can then be "
 "improved in training sites."
-msgstr "Neue Soldaten werden in Kasernen rekrutiert. Ihre Fertigkeiten können sie dann in den Trainingsgebäuden verbessern."
+msgstr "Neue Soldaten werden in Kasernen rekrutiert. Ihre Fertigkeiten können sie dann in den Ausbildungsgebäuden verbessern."
 
 #: ../../data/txts/tips/general_game.lua:55
 msgid ""
@@ -756,6 +761,53 @@ msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
 msgstr "Du kannst mit dem Mausrad oder %1% rein- und rauszoomen. Drücke %2%, um den Zoomfaktor zurückzusetzen."
 
 #: ../../data/txts/tips/general_game.lua:75
+msgid ""
+"Use the ‘,’ (comma) and ‘.’ (period) keys to quickly jump between recently "
+"visited locations."
+msgstr "Verwende die ‘,’ (Komma) und ‘.’ (Punkt) Tasten um schnell zwischen den zuletzt besuchten Orten hin und her zu springen. "
+
+#: ../../data/txts/tips/general_game.lua:79
+msgctxt "hotkey"
+msgid "Ctrl+(Page Up/Page Down)"
+msgstr "STRG+(BILD AUF/BILD AB)"
+
+#: ../../data/txts/tips/general_game.lua:79
+msgctxt "hotkey"
+msgid "Page Up/Page Down"
+msgstr "BILD AUF/BILD AB"
+
+#: ../../data/txts/tips/general_game.lua:79
+msgctxt "hotkey"
+msgid "Shift+(Page Up/Page Down)"
+msgstr "UMSCHALT+(BILD AUF/BILD AB)"
+
+#: ../../data/txts/tips/general_game.lua:79
+msgid ""
+"Speed up or slow down the game with %1%. Use %2% for rapid change, %3% will "
+"adjust speed smoothly."
+msgstr "Erhöhe oder verringere die Spielgeschwindigkeit mit %1%. Nutze %2% für große Änderungen, %3% wird die Geschwindigkeit langsam ändern."
+
+#: ../../data/txts/tips/general_game.lua:83
+msgctxt "hotkey"
+msgid "Arrow keys"
+msgstr "Pfeiltasten"
+
+#: ../../data/txts/tips/general_game.lua:83
+msgctxt "hotkey"
+msgid "Ctrl+Arrow keys"
+msgstr "STRG+Pfeiltasten"
+
+#: ../../data/txts/tips/general_game.lua:83
+msgid ""
+"Move map view using %1%. %2% will move the view faster, %3% moves slowly."
+msgstr "Bewege die Kartenansicht mit %1%. Mit %2% wird die Bewegung schneller, mit %3% wird die Bewegung langsamer."
+
+#: ../../data/txts/tips/general_game.lua:83
+msgctxt "hotkey"
+msgid "Shift+Arrow keys"
+msgstr "UMSCHALT+Pfeiltasten"
+
+#: ../../data/txts/tips/general_game.lua:87
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"

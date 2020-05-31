@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,7 +39,6 @@
 #include "logic/mapregion.h"
 #include "map_io/map_loader.h"
 #include "map_io/world_legacy_lookup_table.h"
-#include "scripting/lua_interface.h"
 
 using std::cerr;
 using std::endl;
@@ -209,12 +208,14 @@ load_s2mf_section(FileRead& fr, int32_t const width, int32_t const height) {
 
 	{
 		uint16_t const one = fr.unsigned_16();
-		if (one != 1)
+		if (one != 1) {
 			throw wexception("expected 1 but found %u", one);
+		}
 	}
 	int32_t const size = fr.signed_32();
-	if (size != dw * dh)
+	if (size != dw * dh) {
 		throw wexception("expected %u but found %u", dw * dh, size);
+	}
 
 	if (dw < width || dh < height) {
 		cerr << "Section not big enough" << endl;
@@ -290,7 +291,7 @@ TerrainConverter::TerrainConverter(const Widelands::World& world,
 Widelands::DescriptionIndex TerrainConverter::lookup(S2MapLoader::WorldType world, int8_t c) const {
 	switch (c) {
 	// the following comments are valid for greenland - blackland and winterland have equivalents
-	// source: http://bazaar.launchpad.net/~xaser/s25rttr/s25edit/view/head:/WLD_reference.txt
+	// source: https://settlers2.net/documentation/world-map-file-format-wldswd/
 	case 0x00:
 		c = 0;
 		break;  // steppe meadow1
@@ -477,19 +478,23 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 
 	//  SWD-SECTION 1: Heights
 	std::unique_ptr<uint8_t[]> section(load_s2mf_section(fr, mapwidth, mapheight));
-	if (!section)
+	if (!section) {
 		throw wexception("Section 1 (Heights) not found");
+	}
 
 	Widelands::Field* f = map_.fields_.get();
 	pc = section.get();
-	for (int16_t y = 0; y < mapheight; ++y)
-		for (int16_t x = 0; x < mapwidth; ++x, ++f, ++pc)
+	for (int16_t y = 0; y < mapheight; ++y) {
+		for (int16_t x = 0; x < mapwidth; ++x, ++f, ++pc) {
 			f->set_height(*pc);
+		}
+	}
 
 	//  SWD-SECTION 2: Terrain 1
 	section = load_s2mf_section(fr, mapwidth, mapheight);
-	if (!section)
+	if (!section) {
 		throw wexception("Section 2 (Terrain 1) not found");
+	}
 
 	std::unique_ptr<WorldLegacyLookupTable> lookup_table(
 	   create_world_legacy_lookup_table(get_world_name(worldtype_)));
@@ -499,7 +504,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 
 	f = map_.fields_.get();
 	pc = section.get();
-	for (int16_t y = 0; y < mapheight; ++y)
+	for (int16_t y = 0; y < mapheight; ++y) {
 		for (int16_t x = 0; x < mapwidth; ++x, ++f, ++pc) {
 			uint8_t c = *pc;
 			// Harbour buildspace & textures - Information taken from:
@@ -508,36 +513,41 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 			}
 			f->set_terrain_d(terrain_converter.lookup(worldtype_, c & 0x1f));
 		}
+	}
 
 	//  SWD-SECTION 3: Terrain 2
 	section = load_s2mf_section(fr, mapwidth, mapheight);
-	if (!section)
+	if (!section) {
 		throw wexception("Section 3 (Terrain 2) not found");
+	}
 
 	f = map_.fields_.get();
 	pc = section.get();
-	for (int16_t y = 0; y < mapheight; ++y)
+	for (int16_t y = 0; y < mapheight; ++y) {
 		for (int16_t x = 0; x < mapwidth; ++x, ++f, ++pc) {
 			uint8_t c = *pc;
 			// Harbour buildspace & textures - Information taken from:
-			// http://bazaar.launchpad.net/~xaser/s25rttr/s25edit/view/head:/WLD_reference.txt
+			// https://settlers2.net/documentation/world-map-file-format-wldswd/
 			if (c & 0x40) {
 				port_spaces_to_set_.insert(Widelands::Coords(x, y));
 			}
 			f->set_terrain_r(terrain_converter.lookup(worldtype_, c & 0x1f));
 		}
+	}
 
 	//  SWD-SECTION 4: Existing Roads
 	//  As loading of Roads at game-start is not supported, yet - we simply
 	//  skip it.
 	section = load_s2mf_section(fr, mapwidth, mapheight);
-	if (!section)
+	if (!section) {
 		throw wexception("Section 4 (Existing Roads) not found");
+	}
 
 	//  SWD-SECTION 5: Bobs
 	std::unique_ptr<uint8_t[]> bobs(load_s2mf_section(fr, mapwidth, mapheight));
-	if (!bobs)
+	if (!bobs) {
 		throw wexception("Section 5 (Bobs) not found");
+	}
 
 	//  SWD-SECTION 6: Ways
 	//  This describes where you can put ways
@@ -551,16 +561,18 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	//   owner == 6 -> green
 	//   owner == 6 -> orange
 	section = load_s2mf_section(fr, mapwidth, mapheight);
-	if (!section)
+	if (!section) {
 		throw wexception("Section 6 (Ways) not found");
+	}
 
 	for (int16_t y = 0; y < mapheight; ++y) {
 		uint32_t i = y * mapwidth;
 		for (int16_t x = 0; x < mapwidth; ++x, ++i) {
 			// ignore everything but HQs
 			if (section[i] == 0x80) {
-				if (bobs[i] < map_.get_nrplayers())
+				if (bobs[i] < map_.get_nrplayers()) {
 					map_.set_starting_pos(bobs[i] + 1, Widelands::Coords(x, y));
+				}
 			}
 		}
 	}
@@ -574,8 +586,9 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	//  0x06        == sheep
 	//  0x09        == donkey
 	section = load_s2mf_section(fr, mapwidth, mapheight);
-	if (!section)
+	if (!section) {
 		throw wexception("Section 7 (Animals) not found");
+	}
 
 	for (uint16_t y = 0; y < mapheight; ++y) {
 		uint32_t i = y * mapwidth;
@@ -630,8 +643,9 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	//  SWD-SECTION 8: Unknown
 	//  Skipped
 	section = load_s2mf_section(fr, mapwidth, mapheight);
-	if (!section)
+	if (!section) {
 		throw wexception("Section 8 (Unknown) not found");
+	}
 
 	//  SWD-SECTION 9: Buildings
 	//  What kind of buildings can be build?
@@ -645,22 +659,25 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	//  0x68 == trees
 	//  0x78 == no buildings
 	std::unique_ptr<uint8_t[]> buildings(load_s2mf_section(fr, mapwidth, mapheight));
-	if (!buildings)
+	if (!buildings) {
 		throw wexception("Section 9 (Buildings) not found");
+	}
 
 	//  SWD-SECTION 10: Unknown
 	//  Skipped
 	section = load_s2mf_section(fr, mapwidth, mapheight);
-	if (!section)
+	if (!section) {
 		throw wexception("Section 10 (Unknown) not found");
+	}
 
 	//  SWD-SECTION 11: Settlers2 Mapeditor tool position
 	//  In this section the positions of the Mapeditor tools seem to be
 	//  saved. But as this is unusable for playing or the WL-Editor, we just
 	//  skip it!
 	section = load_s2mf_section(fr, mapwidth, mapheight);
-	if (!section)
+	if (!section) {
 		throw wexception("Section 11 (Tool Position) not found");
+	}
 
 	//  SWD-SECTION 12: Resources
 	//  0x00 == Water
@@ -672,8 +689,9 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	//  0x41-47 == coal 1-7
 	//  0x59-5f == granite 1-7
 	section = load_s2mf_section(fr, mapwidth, mapheight);
-	if (!section)
+	if (!section) {
 		throw wexception("Section 12 (Resources) not found");
+	}
 
 	pc = section.get();
 	char const* res;
@@ -708,11 +726,12 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 
 			Widelands::DescriptionIndex nres = 0;
 			if (*res) {
-				nres = world.get_resource(res);
-				if (nres == Widelands::INVALID_INDEX)
+				nres = world.resource_index(res);
+				if (nres == Widelands::INVALID_INDEX) {
 					throw wexception("world does not define resource type %s, you can not "
 					                 "play settler maps here",
 					                 res);
+				}
 			}
 			const Widelands::ResourceAmount real_amount =
 			   static_cast<Widelands::ResourceAmount>(2.86f * amount);
@@ -725,8 +744,9 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	//  shadows from slopes to this section.
 	//  But as this is unusable for the WL engine, we just skip it.
 	section = load_s2mf_section(fr, mapwidth, mapheight);
-	if (!section)
+	if (!section) {
 		throw wexception("Section 13 (Highlights and Shadows) not found");
+	}
 
 	//  SWD-SECTION 14: Fieldcount
 	//  Describes to which island the field sticks
@@ -739,8 +759,9 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	//  Unusable (and if it was needed, it would have to be recomputed anyway
 	//  to verify it) so we simply skip it.
 	section = load_s2mf_section(fr, mapwidth, mapheight);
-	if (!section)
+	if (!section) {
 		throw wexception("Section 14 (Island id) not found");
+	}
 
 	fr.close();
 
@@ -750,8 +771,8 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	//  conversion. We will then convert them using the
 	//  OneWorldLegacyLookupTable.
 	// Puts an immovable with the 'old_immovable_name' onto the field 'locations'.
-	auto place_immovable = [&egbase, &lookup_table, &world](const Widelands::Coords& location,
-	                                                        const std::string& old_immovable_name) {
+	auto place_immovable = [&egbase, &lookup_table, &world](
+	   const Widelands::Coords& location, const std::string& old_immovable_name) {
 		const std::string new_immovable_name = lookup_table->lookup_immovable(old_immovable_name);
 		Widelands::DescriptionIndex const idx = world.get_immovable_index(new_immovable_name.c_str());
 		if (idx == Widelands::INVALID_INDEX) {
@@ -762,7 +783,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	};
 
 	uint8_t c;
-	for (uint16_t y = 0; y < mapheight; ++y)
+	for (uint16_t y = 0; y < mapheight; ++y) {
 		for (uint16_t x = 0; x < mapwidth; ++x) {
 			const Widelands::Coords location(x, y);
 			Widelands::MapIndex const index = Widelands::Map::get_index(location, mapwidth);
@@ -1018,7 +1039,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 				place_immovable(location, bobname);
 			}
 		}
-
+	}
 	//  WORKAROUND:
 	//  Unfortunately the Widelands engine is not completely compatible with
 	//  the Settlers 2; space for buildings is defined differently. To allow
@@ -1058,9 +1079,9 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 			} while (mr.advance(map_));
 
 			// check whether starting position was fixed.
-			if (fixed)
+			if (fixed) {
 				log("Fixed!\n");
-			else {
+			} else {
 				//  Do not throw exception, else map will not be loadable in
 				//  the editor. Player initialization will keep track of
 				//  wrong starting positions.
@@ -1068,8 +1089,9 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 				log("   Invalid starting position, that could not be fixed.\n");
 				log("   Please try to fix it manually in the editor.\n");
 			}
-		} else
+		} else {
 			log("OK\n");
+		}
 	}
 }
 

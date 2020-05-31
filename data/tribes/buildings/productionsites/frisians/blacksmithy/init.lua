@@ -21,21 +21,32 @@ tribes:new_productionsite_type {
       reed = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 84},
-         fps = 10,
-      },
-      unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 66},
+         directory = dirname,
+         basename = "idle",
+         hotspot = {50, 73},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 83},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "working",
+         hotspot = {50, 72}, -- one pixel higher
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
+      unoccupied = {
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {50, 58}
+      }
    },
 
    aihints = {
@@ -52,7 +63,7 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "iron", amount = 7 },
       { name = "log", amount = 7 },
-      { name = "reed", amount = 7 }
+      { name = "reed", amount = 4 }
    },
    outputs = {
       "felling_ax",
@@ -86,7 +97,6 @@ tribes:new_productionsite_type {
             "call=produce_8",
             "call=produce_7",
             "call=produce_6",
-            "return=no_stats",
          },
       },
       produce_1 = {

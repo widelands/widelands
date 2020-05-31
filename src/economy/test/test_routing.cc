@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2019 by the Widelands Development Team
+ * Copyright (C) 2007-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,9 +17,6 @@
  *
  */
 
-#include <exception>
-
-#include <boost/bind.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include "base/macros.h"
@@ -90,8 +87,9 @@ void TestingRoutingNode::get_neighbours(WareWorker type, RoutingNodeNeighbours& 
 	}
 }
 bool TestingRoutingNode::all_members_zeroed() {
-	bool integers_zero = !mpf_cycle && !mpf_realcost && !mpf_estimate;
-	bool pointers_zero = (mpf_backlink == nullptr);
+	bool integers_zero = !mpf_cycle_ware && !mpf_realcost_ware && !mpf_estimate_ware &&
+	                     !mpf_cycle_worker && !mpf_realcost_worker && !mpf_estimate_worker;
+	bool pointers_zero = (mpf_backlink_ware == nullptr) && (mpf_backlink_worker == nullptr);
 
 	return pointers_zero && integers_zero;
 }
@@ -230,7 +228,7 @@ BOOST_AUTO_TEST_CASE(RoutingNode_InitializeMemberVariables) {
 }
 
 struct SimpleRouterFixture {
-	SimpleRouterFixture() : r(boost::bind(&SimpleRouterFixture::reset, this)) {
+	SimpleRouterFixture() : r([this]() { reset(); }) {
 		d0 = new TestingRoutingNode();
 		d1 = new TestingRoutingNode(1, Coords(15, 0));
 		vec.push_back(d0);
@@ -245,10 +243,14 @@ struct SimpleRouterFixture {
 	 * cycle wraps around.
 	 */
 	void reset() {
-		if (d0)
-			d0->reset_path_finding_cycle();
-		if (d1)
-			d1->reset_path_finding_cycle();
+		if (d0) {
+			d0->reset_path_finding_cycle(wwWARE);
+			d0->reset_path_finding_cycle(wwWORKER);
+		}
+		if (d1) {
+			d1->reset_path_finding_cycle(wwWARE);
+			d1->reset_path_finding_cycle(wwWORKER);
+		}
 	}
 	TestingRoutingNode* d0;
 	TestingRoutingNode* d1;
@@ -379,7 +381,7 @@ BOOST_FIXTURE_TEST_CASE(router_findroute_connectedNodes_exceptSuccess, SimpleRou
 struct ComplexRouterFixture {
 	using Nodes = std::vector<RoutingNode*>;
 
-	ComplexRouterFixture() : r(boost::bind(&ComplexRouterFixture::reset, this)) {
+	ComplexRouterFixture() : r([this]() { reset(); }) {
 		d0 = new TestingRoutingNode();
 		nodes.push_back(d0);
 	}
@@ -478,7 +480,8 @@ struct ComplexRouterFixture {
 	 */
 	void reset() {
 		for (RoutingNode* node : nodes) {
-			node->reset_path_finding_cycle();
+			node->reset_path_finding_cycle(wwWARE);
+			node->reset_path_finding_cycle(wwWORKER);
 		}
 	}
 	TestingRoutingNode* d0;

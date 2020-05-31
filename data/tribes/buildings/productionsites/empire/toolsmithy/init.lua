@@ -32,7 +32,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      prohibited_till = 460
+      basic_amount = 1
    },
 
    working_positions = {
@@ -75,7 +75,6 @@ tribes:new_productionsite_type {
             "call=produce_saw",
             "call=produce_scythe",
             "call=produce_shovel",
-            "return=no_stats"
          }
       },
       produce_felling_ax = {

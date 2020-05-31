@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2019 by the Widelands Development Team
+ * Copyright (C) 2003-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,12 +20,7 @@
 #ifndef WL_UI_BASIC_ICONGRID_H
 #define WL_UI_BASIC_ICONGRID_H
 
-#include <vector>
-
-#include <boost/signals2.hpp>
-
 #include "ui_basic/panel.h"
-#include "ui_basic/textarea.h"
 
 namespace UI {
 

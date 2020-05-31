@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2019 by the Widelands Development Team
+ * Copyright (C) 2007-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,8 +19,8 @@
 
 #include "wui/game_summary.h"
 
+#include <SDL_mouse.h>
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 
 #include "base/time_string.h"
 #include "graphic/graphic.h"
@@ -105,9 +105,9 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	players_table_->add_column(100, _("Time"), "", UI::Align::kCenter);
 
 	// Connections
-	continue_button_->sigclicked.connect(boost::bind(&GameSummaryScreen::continue_clicked, this));
-	stop_button_->sigclicked.connect(boost::bind(&GameSummaryScreen::stop_clicked, this));
-	players_table_->selected.connect(boost::bind(&GameSummaryScreen::player_selected, this, _1));
+	continue_button_->sigclicked.connect([this]() { continue_clicked(); });
+	stop_button_->sigclicked.connect([this]() { stop_clicked(); });
+	players_table_->selected.connect([this](uint32_t i) { player_selected(i); });
 
 	// Window
 	center_to_parent();

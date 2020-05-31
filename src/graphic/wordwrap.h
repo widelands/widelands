@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2019 by the Widelands Development Team
+ * Copyright (C) 2010-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,14 +20,12 @@
 #define WL_GRAPHIC_WORDWRAP_H
 
 #include <memory>
-#include <string>
+
 #include <unicode/uchar.h>
-#include <vector>
 
 #include "base/vector.h"
 #include "graphic/align.h"
 #include "graphic/color.h"
-#include "graphic/graphic.h"
 #include "graphic/text/sdl_ttf_font.h"
 
 class RenderTarget;

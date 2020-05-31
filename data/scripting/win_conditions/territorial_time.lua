@@ -24,13 +24,15 @@ local wc_desc = _ (
    "Each player or team tries to obtain more than half of the map’s " ..
    "area. The winner will be the player or the team that is able to keep " ..
    "that area for at least 20 minutes, or the one with the most territory " ..
-   "after 4 hours, whichever comes first."
+   "after 4 hours, whichever comes first." ..
+   "If the peaceful mode is selected, the game ends if one player has more " ..
+   "land than any other player could gain."
 )
 
 return {
    name = wc_name,
    description = wc_desc,
-   peaceful_mode_allowed = false,
+   peaceful_mode_allowed = true,
    init = function()
       fields = wl.Game().map:count_conquerable_fields()
    end,
@@ -75,7 +77,7 @@ return {
          while game.time <= ((max_time - 5) * 60 * 1000) and count_factions(plrs) > 1 and territory_points.remaining_time > 0 do
             remaining_time, show_popup = notification_remaining_time(max_time, remaining_time)
             if territory_points.remaining_time == 1201 then
-               msg = msg .. format_remaining_time(remaining_time) .. vspace(8) .. game_status.body .. territory_status(fields, "has")
+               msg = format_remaining_time(remaining_time) .. vspace(8) .. game_status.body .. territory_status(fields, "has")
                broadcast(plrs, game_status.title, msg, {popup = show_popup})
             end
          end

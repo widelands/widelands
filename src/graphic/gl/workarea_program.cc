@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,6 @@
 #include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
-#include "graphic/texture.h"
 #include "wui/mapviewpixelconstants.h"
 
 WorkareaProgram::WorkareaProgram() : cache_(nullptr) {
@@ -74,6 +73,7 @@ static RGBAColor workarea_colors[]  // Comment to prevent clang-format from brea
       RGBAColor(63, 0, 127, kWorkareaTransparency),   // Inner and medium circle
       RGBAColor(127, 0, 0, kWorkareaTransparency),    // Medium circle
       RGBAColor(0, 0, 127, kWorkareaTransparency),    // Inner circle
+      RGBAColor(0, 0, 0, 0),
    };
 static inline RGBAColor apply_color(RGBAColor c1, RGBAColor c2) {
 	if (c1.a == 0 && c2.a == 0) {
@@ -194,8 +194,7 @@ void WorkareaProgram::draw(uint32_t texture_id,
 	}
 
 	auto emplace_triangle = [this, workarea, fields_to_draw](
-	                           const FieldsToDraw::Field& field,
-	                           Widelands::TriangleIndex triangle_index) {
+	   const FieldsToDraw::Field& field, Widelands::TriangleIndex triangle_index) {
 		RGBAColor color(0, 0, 0, 0);
 		for (const WorkareasEntry& wa_map : workarea) {
 			for (const WorkareaPreviewData& data : wa_map.first) {

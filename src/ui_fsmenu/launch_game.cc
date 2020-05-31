@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/algorithm/string/predicate.hpp>
-
 #include "base/i18n.h"
 #include "base/warning.h"
 #include "base/wexception.h"
@@ -30,7 +28,6 @@
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "logic/map_objects/map_object.h"
-#include "logic/player.h"
 #include "map_io/map_loader.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
@@ -73,12 +70,10 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
      ctrl_(ctrl),
      peaceful_mode_forbidden_(false),
      nr_players_(0) {
-	win_condition_dropdown_.selected.connect(
-	   boost::bind(&FullscreenMenuLaunchGame::win_condition_selected, this));
-	peaceful_.changed.connect(boost::bind(&FullscreenMenuLaunchGame::toggle_peaceful, this));
-	back_.sigclicked.connect(
-	   boost::bind(&FullscreenMenuLaunchGame::clicked_back, boost::ref(*this)));
-	ok_.sigclicked.connect(boost::bind(&FullscreenMenuLaunchGame::clicked_ok, boost::ref(*this)));
+	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
+	peaceful_.changed.connect([this]() { toggle_peaceful(); });
+	back_.sigclicked.connect([this]() { clicked_back(); });
+	ok_.sigclicked.connect([this]() { clicked_ok(); });
 
 	lua_ = new LuaInterface();
 

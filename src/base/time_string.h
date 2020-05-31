@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2019 by the Widelands Development Team
+ * Copyright (C) 2008-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,8 +21,6 @@
 #define WL_BASE_TIME_STRING_H
 
 #include <string>
-
-#include <stdint.h>
 
 /// Get a string representation conforming to ISO 8601 of the current time (in
 /// seconds since the Epoch). The return value points to a statically allocated

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2019 by the Widelands Development Team
+ * Copyright (C) 2017-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,6 @@
 #define WL_GRAPHIC_TEXT_RENDERED_TEXT_H
 
 #include <memory>
-#include <vector>
 
 #include "base/rect.h"
 #include "base/vector.h"

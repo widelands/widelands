@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,11 +20,9 @@
 #include "graphic/gl/initialize.h"
 
 #include <csignal>
-#include <cstdlib>
 
-#include <SDL.h>
+#include <SDL_messagebox.h>
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 #include <boost/regex.hpp>
 
 #include "base/i18n.h"
@@ -188,8 +186,8 @@ SDL_GLContext initialize(
 
 	// Show a basic SDL window with an error message, and log it too, then exit 1. Since font support
 	// does not exist for all languages, we show both the original and a localized text.
-	auto show_opengl_error_and_exit = [](const std::string& message,
-	                                     const std::string& localized_message) {
+	auto show_opengl_error_and_exit = [](
+	   const std::string& message, const std::string& localized_message) {
 		std::string display_message = "";
 		if (message != localized_message) {
 			display_message =
@@ -206,6 +204,29 @@ SDL_GLContext initialize(
 		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "OpenGL Error", display_message.c_str(), NULL);
 		exit(1);
 	};
+
+	// Exit because we couldn't detect the shading language version, so there must be a problem
+	// communicating with the graphics adapter.
+	auto handle_unreadable_opengl_shading_language = [show_opengl_error_and_exit]() {
+		show_opengl_error_and_exit(
+		   "Widelands won't work because we were unable to detect the shading language version.\n"
+		   "There is an unknown problem with reading the information from the graphics driver.",
+		   (boost::format("%s\n%s") %
+		    /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
+		       support is limited here, so do not use advanced typography **/
+		    _("Widelands won't work because we were unable to detect the shading language "
+		      "version.") %
+		    /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
+		       support is limited here, so do not use advanced typography **/
+		    _("There is an unknown problem with reading the information from the graphics "
+		      "driver."))
+		      .str());
+	};
+
+	// glGetString returned an error for the shading language
+	if (glGetString(GL_SHADING_LANGUAGE_VERSION) == 0) {
+		handle_unreadable_opengl_shading_language();
+	}
 
 	std::vector<std::string> shading_language_version_vector;
 	boost::split(
@@ -251,21 +272,8 @@ SDL_GLContext initialize(
 				      .str());
 			}
 		} else {
-			// Exit because we couldn't detect the shading language version, so there must be a problem
-			// communicating with the graphics adapter.
-			show_opengl_error_and_exit(
-			   "Widelands won't work because we were unable to detect the shading language version.\n"
-			   "There is an unknown problem with reading the information from the graphics driver.",
-			   (boost::format("%s\n%s") %
-			    /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
-			       support is limited here, so do not use advanced typography **/
-			    _("Widelands won't work because we were unable to detect the shading language "
-			      "version.") %
-			    /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
-			       support is limited here, so do not use advanced typography **/
-			    _("There is an unknown problem with reading the information from the graphics "
-			      "driver."))
-			      .str());
+			// We don't know how to interpret the shading language info
+			handle_unreadable_opengl_shading_language();
 		}
 	}
 

@@ -2,8 +2,6 @@
 -- Some formating functions
 -- =========================
 
-include "scripting/richtext_scenarios.lua"
-
 function reebaud(title, text)
    return speech("map:reebaud.png", "55BB55", title, text)
 end

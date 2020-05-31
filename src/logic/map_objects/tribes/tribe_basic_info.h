@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,10 +21,6 @@
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_TRIBE_BASIC_INFO_H
 
 #include <memory>
-#include <string>
-#include <vector>
-
-#include <stdint.h>
 
 #include "scripting/lua_table.h"
 
@@ -38,12 +34,17 @@ struct TribeBasicInfo {
 	struct Initialization {
 		Initialization(const std::string& init_script,
 		               const std::string& init_descname,
-		               const std::string& init_tooltip)
-		   : script(init_script), descname(init_descname), tooltip(init_tooltip) {
+		               const std::string& init_tooltip,
+		               const std::set<std::string>& tags)
+		   : script(init_script),
+		     descname(init_descname),
+		     tooltip(init_tooltip),
+		     required_map_tags(tags) {
 		}
 		std::string script;
 		std::string descname;
 		std::string tooltip;
+		std::set<std::string> required_map_tags;
 	};
 
 	explicit TribeBasicInfo(std::unique_ptr<LuaTable> table);

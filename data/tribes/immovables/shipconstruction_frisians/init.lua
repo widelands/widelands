@@ -12,7 +12,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "construct=idle 5000 210000",
-         "transform=bob tribe:frisians_ship",
+         "transform=bob frisians_ship",
       }
    },
    buildcost = {
@@ -20,11 +20,14 @@ tribes:new_immovable_type {
       clay = 2,
       cloth = 6
    },
-
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "build_??.png"),
-         hotspot = { 75, 141 },
+         directory = dirname,
+         basename = "build",
+         hotspot = {75, 141},
+         frames = 6,
+         columns = 3,
+         rows = 2,
          fps = 1,
          representative_frame = 3
       },

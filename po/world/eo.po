@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # fenris <fenris@folksprak.org>, 2015-2016
@@ -8,9 +8,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-06-23 11:24+0000\n"
-"PO-Revision-Date: 2019-06-23 11:25+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-01-10 13:02+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Esperanto (http://www.transifex.com/widelands/widelands/language/eo/)\n"
 "MIME-Version: 1.0\n"
@@ -83,7 +83,7 @@ msgstr "Bizono"
 msgid "Wolf"
 msgstr "Lupo"
 
-#: ../../data/world/immovables/bush1/init.lua:103
+#: ../../data/world/immovables/bush1/init.lua:105
 #: ../../data/world/immovables/bush2/init.lua:5
 #: ../../data/world/immovables/bush3/init.lua:5
 #: ../../data/world/immovables/bush4/init.lua:5
@@ -236,19 +236,19 @@ msgstr "Spuro"
 msgid "Alder (Sapling)"
 msgstr "Alno eta"
 
-#: ../../data/world/immovables/trees/alder/init.lua:43
+#: ../../data/world/immovables/trees/alder/init.lua:47
 msgid "Alder (Pole)"
 msgstr "Alno juna"
 
-#: ../../data/world/immovables/trees/alder/init.lua:66
+#: ../../data/world/immovables/trees/alder/init.lua:74
 msgid "Alder (Mature)"
 msgstr "Alno matura"
 
-#: ../../data/world/immovables/trees/alder/init.lua:89
+#: ../../data/world/immovables/trees/alder/init.lua:101
 msgid "Alder (Old)"
 msgstr "Alno maljuna"
 
-#: ../../data/world/immovables/trees/alder/init.lua:90
+#: ../../data/world/immovables/trees/alder/init.lua:102
 msgid "Alder"
 msgstr "Alno"
 
@@ -256,19 +256,19 @@ msgstr "Alno"
 msgid "Aspen (Sapling)"
 msgstr "Tremolo eta"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:35
+#: ../../data/world/immovables/trees/aspen/init.lua:39
 msgid "Aspen (Pole)"
 msgstr "Tremolo juna"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:58
+#: ../../data/world/immovables/trees/aspen/init.lua:66
 msgid "Aspen (Mature)"
 msgstr "Tremolo matura"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:84
+#: ../../data/world/immovables/trees/aspen/init.lua:96
 msgid "Aspen (Old)"
 msgstr "Tremolo maljuna"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:85
+#: ../../data/world/immovables/trees/aspen/init.lua:97
 msgid "Aspen"
 msgstr "Tremolo"
 
@@ -276,19 +276,19 @@ msgstr "Tremolo"
 msgid "Beech (Sapling)"
 msgstr "Fago eta"
 
-#: ../../data/world/immovables/trees/beech/init.lua:35
+#: ../../data/world/immovables/trees/beech/init.lua:39
 msgid "Beech (Pole)"
 msgstr "Fago juna"
 
-#: ../../data/world/immovables/trees/beech/init.lua:58
+#: ../../data/world/immovables/trees/beech/init.lua:66
 msgid "Beech (Mature)"
 msgstr "Fago matura"
 
-#: ../../data/world/immovables/trees/beech/init.lua:81
+#: ../../data/world/immovables/trees/beech/init.lua:93
 msgid "Beech (Old)"
 msgstr "Fago maljuna"
 
-#: ../../data/world/immovables/trees/beech/init.lua:82
+#: ../../data/world/immovables/trees/beech/init.lua:94
 msgid "Beech"
 msgstr "Fago"
 
@@ -296,19 +296,19 @@ msgstr "Fago"
 msgid "Birch (Sapling)"
 msgstr "Betulo eta"
 
-#: ../../data/world/immovables/trees/birch/init.lua:35
+#: ../../data/world/immovables/trees/birch/init.lua:39
 msgid "Birch (Pole)"
 msgstr "Betulo juna"
 
-#: ../../data/world/immovables/trees/birch/init.lua:58
+#: ../../data/world/immovables/trees/birch/init.lua:66
 msgid "Birch (Mature)"
 msgstr "Betulo matura"
 
-#: ../../data/world/immovables/trees/birch/init.lua:84
+#: ../../data/world/immovables/trees/birch/init.lua:96
 msgid "Birch (Old)"
 msgstr "Betulo maljuna"
 
-#: ../../data/world/immovables/trees/birch/init.lua:85
+#: ../../data/world/immovables/trees/birch/init.lua:97
 msgid "Birch"
 msgstr "Betulo"
 
@@ -318,22 +318,22 @@ msgid "Cirrus Tree (Sapling)"
 msgstr "Ĉir-arbo eta"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:37
+#: ../../data/world/immovables/trees/cirrus/init.lua:41
 msgid "Cirrus Tree (Pole)"
 msgstr "Ĉir-arbo juna"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:61
+#: ../../data/world/immovables/trees/cirrus/init.lua:69
 msgid "Cirrus Tree (Mature)"
 msgstr "Ĉir-arbo matura"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:85
+#: ../../data/world/immovables/trees/cirrus/init.lua:97
 msgid "Cirrus Tree (Old)"
 msgstr "Ĉir-arbo maljuna"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:87
+#: ../../data/world/immovables/trees/cirrus/init.lua:99
 msgid "Cirrus Tree"
 msgstr "Ĉir-arbo"
 
@@ -354,19 +354,19 @@ msgstr "Falinta arbo"
 msgid "Larch (Sapling)"
 msgstr "Lariko eta"
 
-#: ../../data/world/immovables/trees/larch/init.lua:35
+#: ../../data/world/immovables/trees/larch/init.lua:39
 msgid "Larch (Pole)"
 msgstr "Lariko juna"
 
-#: ../../data/world/immovables/trees/larch/init.lua:58
+#: ../../data/world/immovables/trees/larch/init.lua:66
 msgid "Larch (Mature)"
 msgstr "Lariko matura"
 
-#: ../../data/world/immovables/trees/larch/init.lua:81
+#: ../../data/world/immovables/trees/larch/init.lua:93
 msgid "Larch (Old)"
 msgstr "Lariko maljuna"
 
-#: ../../data/world/immovables/trees/larch/init.lua:82
+#: ../../data/world/immovables/trees/larch/init.lua:94
 msgid "Larch"
 msgstr "Lariko"
 
@@ -376,22 +376,22 @@ msgid "Liana Tree (Sapling)"
 msgstr "Lian-arbo eta"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:37
+#: ../../data/world/immovables/trees/liana/init.lua:41
 msgid "Liana Tree (Pole)"
 msgstr "Lian-arbo juna"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:61
+#: ../../data/world/immovables/trees/liana/init.lua:69
 msgid "Liana Tree (Mature)"
 msgstr "Lian-arbo matura"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:88
+#: ../../data/world/immovables/trees/liana/init.lua:100
 msgid "Liana Tree (Old)"
 msgstr "Lian-arbo maljuna"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:90
+#: ../../data/world/immovables/trees/liana/init.lua:102
 msgid "Liana Tree"
 msgstr "Lian-arbo"
 
@@ -399,19 +399,19 @@ msgstr "Lian-arbo"
 msgid "Maple (Sapling)"
 msgstr "Acero eta"
 
-#: ../../data/world/immovables/trees/maple/init.lua:35
+#: ../../data/world/immovables/trees/maple/init.lua:39
 msgid "Maple (Pole)"
 msgstr "Acero juna"
 
-#: ../../data/world/immovables/trees/maple/init.lua:58
+#: ../../data/world/immovables/trees/maple/init.lua:66
 msgid "Maple (Mature)"
 msgstr "Acero matura"
 
-#: ../../data/world/immovables/trees/maple/init.lua:81
+#: ../../data/world/immovables/trees/maple/init.lua:93
 msgid "Maple (Old)"
 msgstr "Acero maljuna"
 
-#: ../../data/world/immovables/trees/maple/init.lua:82
+#: ../../data/world/immovables/trees/maple/init.lua:94
 msgid "Maple"
 msgstr "Acero"
 
@@ -421,22 +421,22 @@ msgid "Dark Mushroom Tree (Sapling)"
 msgstr "Fungo-arbo malhela eta"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:37
+#: ../../data/world/immovables/trees/mushroom_dark/init.lua:41
 msgid "Dark Mushroom Tree (Pole)"
 msgstr "Fungo-arbo malhela juna"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:61
+#: ../../data/world/immovables/trees/mushroom_dark/init.lua:69
 msgid "Dark Mushroom Tree (Mature)"
 msgstr "Fungo-arbo malhela matura"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:85
+#: ../../data/world/immovables/trees/mushroom_dark/init.lua:97
 msgid "Dark Mushroom Tree (Old)"
 msgstr "Fungo-arbo malhela maljuna"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:87
+#: ../../data/world/immovables/trees/mushroom_dark/init.lua:99
 msgid "Dark Mushroom Tree"
 msgstr "Fungo-arbo malhela"
 
@@ -446,22 +446,22 @@ msgid "Green Mushroom Tree (Sapling)"
 msgstr "Fungo-arbo verda eta"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:37
+#: ../../data/world/immovables/trees/mushroom_green/init.lua:41
 msgid "Green Mushroom Tree (Pole)"
 msgstr "Fungo-arbo verda juna"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:61
+#: ../../data/world/immovables/trees/mushroom_green/init.lua:69
 msgid "Green Mushroom Tree (Mature)"
 msgstr "Fungo-arbo verda matura"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:85
+#: ../../data/world/immovables/trees/mushroom_green/init.lua:97
 msgid "Green Mushroom Tree (Old)"
 msgstr "Fungo-arbo verda maljuna"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:87
+#: ../../data/world/immovables/trees/mushroom_green/init.lua:99
 msgid "Green Mushroom Tree"
 msgstr "Fungo-arbo verda"
 
@@ -471,22 +471,22 @@ msgid "Red Mushroom Tree (Sapling)"
 msgstr "Fungo-arbo ruĝa eta"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:37
+#: ../../data/world/immovables/trees/mushroom_red/init.lua:41
 msgid "Red Mushroom Tree (Pole)"
 msgstr "Fungo-arbo ruĝa juna"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:61
+#: ../../data/world/immovables/trees/mushroom_red/init.lua:69
 msgid "Red Mushroom Tree (Mature)"
 msgstr "Fungo-arbo ruĝa matura"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:88
+#: ../../data/world/immovables/trees/mushroom_red/init.lua:100
 msgid "Red Mushroom Tree (Old)"
 msgstr "Fungo-arbo ruĝa maljuna"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:90
+#: ../../data/world/immovables/trees/mushroom_red/init.lua:102
 msgid "Red Mushroom Tree"
 msgstr "Fungo-arbo ruĝa"
 
@@ -494,19 +494,19 @@ msgstr "Fungo-arbo ruĝa"
 msgid "Oak (Sapling)"
 msgstr "Kverko eta"
 
-#: ../../data/world/immovables/trees/oak/init.lua:35
+#: ../../data/world/immovables/trees/oak/init.lua:39
 msgid "Oak (Pole)"
 msgstr "Kverko juna"
 
-#: ../../data/world/immovables/trees/oak/init.lua:58
+#: ../../data/world/immovables/trees/oak/init.lua:66
 msgid "Oak (Mature)"
 msgstr "Kverko matura"
 
-#: ../../data/world/immovables/trees/oak/init.lua:81
+#: ../../data/world/immovables/trees/oak/init.lua:93
 msgid "Oak (Old)"
 msgstr "Kverko maljuna"
 
-#: ../../data/world/immovables/trees/oak/init.lua:82
+#: ../../data/world/immovables/trees/oak/init.lua:94
 msgid "Oak"
 msgstr "Kverko"
 
@@ -514,19 +514,19 @@ msgstr "Kverko"
 msgid "Borassus Palm (Sapling)"
 msgstr "Palmir-palmo eta"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:35
+#: ../../data/world/immovables/trees/palm_borassus/init.lua:39
 msgid "Borassus Palm (Pole)"
 msgstr "Palmir-palmo juna"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:58
+#: ../../data/world/immovables/trees/palm_borassus/init.lua:66
 msgid "Borassus Palm (Mature)"
 msgstr "Palmir-palmo matura"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:81
+#: ../../data/world/immovables/trees/palm_borassus/init.lua:93
 msgid "Borassus Palm (Old)"
 msgstr "Palmir-palmo maljuna"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:82
+#: ../../data/world/immovables/trees/palm_borassus/init.lua:94
 msgid "Borassus Palm"
 msgstr "Palmir-palmo"
 
@@ -534,19 +534,19 @@ msgstr "Palmir-palmo"
 msgid "Coconut Palm (Sapling)"
 msgstr "Kokos-palmo eta"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:35
+#: ../../data/world/immovables/trees/palm_coconut/init.lua:39
 msgid "Coconut Palm (Pole)"
 msgstr "Kokos-palmo juna"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:58
+#: ../../data/world/immovables/trees/palm_coconut/init.lua:66
 msgid "Coconut Palm (Mature)"
 msgstr "Kokos-palmo matura"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:81
+#: ../../data/world/immovables/trees/palm_coconut/init.lua:93
 msgid "Coconut Palm (Old)"
 msgstr "Kokos-palmo maljuna"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:82
+#: ../../data/world/immovables/trees/palm_coconut/init.lua:94
 msgid "Coconut Palm"
 msgstr "Kokos-palmo"
 
@@ -554,19 +554,19 @@ msgstr "Kokos-palmo"
 msgid "Date Palm (Sapling)"
 msgstr "Daktil-palmo eta"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:35
+#: ../../data/world/immovables/trees/palm_date/init.lua:39
 msgid "Date Palm (Pole)"
 msgstr "Daktil-palmo juna"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:58
+#: ../../data/world/immovables/trees/palm_date/init.lua:66
 msgid "Date Palm (Mature)"
 msgstr "Daktil-palmo matura"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:84
+#: ../../data/world/immovables/trees/palm_date/init.lua:96
 msgid "Date Palm (Old)"
 msgstr "Daktil-palmo maljuna"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:85
+#: ../../data/world/immovables/trees/palm_date/init.lua:97
 msgid "Date Palm"
 msgstr "Daktil-palmo"
 
@@ -574,19 +574,19 @@ msgstr "Daktil-palmo"
 msgid "Oil Palm (Sapling)"
 msgstr "Ole-palmo eta"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:35
+#: ../../data/world/immovables/trees/palm_oil/init.lua:39
 msgid "Oil Palm (Pole)"
 msgstr "Ole-palmo juna"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:58
+#: ../../data/world/immovables/trees/palm_oil/init.lua:66
 msgid "Oil Palm (Mature)"
 msgstr "Ole-palmo matura"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:85
+#: ../../data/world/immovables/trees/palm_oil/init.lua:97
 msgid "Oil Palm (Old)"
 msgstr "Ole-palmo maljuna"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:86
+#: ../../data/world/immovables/trees/palm_oil/init.lua:98
 msgid "Oil Palm"
 msgstr "Ole-palmo"
 
@@ -594,19 +594,19 @@ msgstr "Ole-palmo"
 msgid "Roystonea regia Palm (Sapling)"
 msgstr "Reĝ-palmo eta"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:35
+#: ../../data/world/immovables/trees/palm_roystonea/init.lua:39
 msgid "Roystonea regia Palm (Pole)"
 msgstr "Reĝ-palmo juna"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:58
+#: ../../data/world/immovables/trees/palm_roystonea/init.lua:66
 msgid "Roystonea regia Palm (Mature)"
 msgstr "Reĝ-palmo matura"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:81
+#: ../../data/world/immovables/trees/palm_roystonea/init.lua:93
 msgid "Roystonea regia Palm (Old)"
 msgstr "Reĝ-palmo maljuna"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:82
+#: ../../data/world/immovables/trees/palm_roystonea/init.lua:94
 msgid "Roystonea regia Palm"
 msgstr "Reĝ-palmo"
 
@@ -614,19 +614,19 @@ msgstr "Reĝ-palmo"
 msgid "Rowan (Sapling)"
 msgstr "Sorbuso birdokaptista eta"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:35
+#: ../../data/world/immovables/trees/rowan/init.lua:39
 msgid "Rowan (Pole)"
 msgstr "Sorbuso birdokaptista juna"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:58
+#: ../../data/world/immovables/trees/rowan/init.lua:66
 msgid "Rowan (Mature)"
 msgstr "Sorbuso birdokaptista matura"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:84
+#: ../../data/world/immovables/trees/rowan/init.lua:96
 msgid "Rowan (Old)"
 msgstr "Sorbuso birdokaptista maljuna"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:85
+#: ../../data/world/immovables/trees/rowan/init.lua:97
 msgid "Rowan"
 msgstr "Sorbuso birdokaptista"
 
@@ -634,19 +634,19 @@ msgstr "Sorbuso birdokaptista"
 msgid "Spruce (Sapling)"
 msgstr "Piceo eta"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:35
+#: ../../data/world/immovables/trees/spruce/init.lua:39
 msgid "Spruce (Pole)"
 msgstr "Piceo juna"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:58
+#: ../../data/world/immovables/trees/spruce/init.lua:66
 msgid "Spruce (Mature)"
 msgstr "Piceo matura"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:81
+#: ../../data/world/immovables/trees/spruce/init.lua:93
 msgid "Spruce (Old)"
 msgstr "Piceo maljuna"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:82
+#: ../../data/world/immovables/trees/spruce/init.lua:94
 msgid "Spruce"
 msgstr "Piceo"
 
@@ -656,22 +656,22 @@ msgid "Twine Tree (Sapling)"
 msgstr "Plekt-arbo eta"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:37
+#: ../../data/world/immovables/trees/twine/init.lua:41
 msgid "Twine Tree (Pole)"
 msgstr "Plekt-arbo juna"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:61
+#: ../../data/world/immovables/trees/twine/init.lua:69
 msgid "Twine Tree (Mature)"
 msgstr "Plekt-arbo matura"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:85
+#: ../../data/world/immovables/trees/twine/init.lua:97
 msgid "Twine Tree (Old)"
 msgstr "Plekt-arbo maljuna"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:87
+#: ../../data/world/immovables/trees/twine/init.lua:99
 msgid "Twine Tree"
 msgstr "Plekt-arbo"
 
@@ -681,22 +681,22 @@ msgid "Green Umbrella Tree (Sapling)"
 msgstr "Ombrel-arbo verda eta"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:37
+#: ../../data/world/immovables/trees/umbrella_green/init.lua:41
 msgid "Green Umbrella Tree (Pole)"
 msgstr "Ombrel-arbo verda juna"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:61
+#: ../../data/world/immovables/trees/umbrella_green/init.lua:69
 msgid "Green Umbrella Tree (Mature)"
 msgstr "Ombrel-arbo verda matura"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:85
+#: ../../data/world/immovables/trees/umbrella_green/init.lua:97
 msgid "Green Umbrella Tree (Old)"
 msgstr "Ombrel-arbo verda maljuna"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:87
+#: ../../data/world/immovables/trees/umbrella_green/init.lua:99
 msgid "Green Umbrella Tree"
 msgstr "Ombrel-arbo verda"
 
@@ -706,342 +706,362 @@ msgid "Red Umbrella Tree (Sapling)"
 msgstr "Ombrel-arbo ruĝa eta"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:37
+#: ../../data/world/immovables/trees/umbrella_red/init.lua:41
 msgid "Red Umbrella Tree (Pole)"
 msgstr "Ombrel-arbo ruĝa juna"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:61
+#: ../../data/world/immovables/trees/umbrella_red/init.lua:69
 msgid "Red Umbrella Tree (Mature)"
 msgstr "Ombrel-arbo ruĝa matura"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:88
+#: ../../data/world/immovables/trees/umbrella_red/init.lua:100
 msgid "Red Umbrella Tree (Old)"
 msgstr "Ombrel-arbo ruĝa maljuna"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:90
+#: ../../data/world/immovables/trees/umbrella_red/init.lua:102
 msgid "Red Umbrella Tree"
 msgstr "Ombrel-arbo ruĝa"
 
-#: ../../data/world/init.lua:35
+#: ../../data/world/init.lua:17
+msgid "Loading world: %1$s (%2$d/%3$d)"
+msgstr ""
+
+#: ../../data/world/init.lua:27
+msgid "Resources"
+msgstr ""
+
+#: ../../data/world/init.lua:32
+msgid "Terrains"
+msgstr ""
+
+#: ../../data/world/init.lua:42
 msgid "Summer"
 msgstr "Somero"
 
-#: ../../data/world/init.lua:41
+#: ../../data/world/init.lua:48
 msgid "Wasteland"
 msgstr "Arida lando"
 
-#: ../../data/world/init.lua:47
+#: ../../data/world/init.lua:54
 msgid "Winter"
 msgstr "Vintro"
 
-#: ../../data/world/init.lua:53
+#: ../../data/world/init.lua:60
 msgid "Desert"
 msgstr "Dezerto"
 
-#: ../../data/world/init.lua:70
+#: ../../data/world/init.lua:69
+msgid "Immovables"
+msgstr ""
+
+#: ../../data/world/init.lua:78
 msgid "Miscellaneous"
 msgstr "Diversaĵoj"
 
-#: ../../data/world/init.lua:105
+#: ../../data/world/init.lua:113
 msgid "Artifacts"
 msgstr "Artefaktoj"
 
-#: ../../data/world/init.lua:105
+#: ../../data/world/init.lua:113
 msgid "These immovables are used by the win condition “Artifacts”."
 msgstr "Tiuj nemoveblaĵoj estas uzataj de la vink-kondiĉo \"Artefaktoj\"."
 
-#: ../../data/world/init.lua:118
+#: ../../data/world/init.lua:126
 msgid "Plants"
 msgstr "Vegetaĵoj"
 
-#: ../../data/world/init.lua:139
+#: ../../data/world/init.lua:147
 msgid "Standing Stones"
 msgstr "Starantaj ŝtonoj"
 
-#: ../../data/world/init.lua:170
+#: ../../data/world/init.lua:178
 msgid "Rocks"
 msgstr "Roko"
 
-#: ../../data/world/init.lua:203
+#: ../../data/world/init.lua:211
 msgid "Dead Trees"
 msgstr "Mortaj arbo"
 
-#: ../../data/world/init.lua:210
+#: ../../data/world/init.lua:218
 msgid "Coniferous Trees"
 msgstr "Pinaloj"
 
-#: ../../data/world/init.lua:217
+#: ../../data/world/init.lua:225
 msgid "Deciduous Trees"
 msgstr "Foliaj arboj"
 
-#: ../../data/world/init.lua:224
+#: ../../data/world/init.lua:232
 msgid "Palm Trees"
 msgstr "Palma arboj"
 
-#: ../../data/world/init.lua:231
+#: ../../data/world/init.lua:239
 msgid "Wasteland Trees"
 msgstr "Arboj de arida lando"
 
+#: ../../data/world/init.lua:276
+msgid "Animals"
+msgstr ""
+
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:278
+#: ../../data/world/init.lua:287
 msgid "Herbivores"
 msgstr ""
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:297
+#: ../../data/world/init.lua:306
 msgid "Carnivores"
 msgstr ""
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:313
+#: ../../data/world/init.lua:322
 msgid "Aquatic"
 msgstr ""
 
-#: ../../data/world/resources/init.lua:84
+#: ../../data/world/resources/init.lua:81
 msgid "Coal"
 msgstr "Karbo"
 
-#: ../../data/world/resources/init.lua:100
+#: ../../data/world/resources/init.lua:97
 msgid "Gold"
 msgstr "Oro"
 
-#: ../../data/world/resources/init.lua:116
+#: ../../data/world/resources/init.lua:113
 msgid "Iron"
 msgstr "Fero"
 
-#: ../../data/world/resources/init.lua:132
+#: ../../data/world/resources/init.lua:129
 msgid "Stones"
 msgstr "Ŝtonoj"
 
-#: ../../data/world/resources/init.lua:148
-#: ../../data/world/terrains/init.lua:450
-#: ../../data/world/terrains/init.lua:759
-#: ../../data/world/terrains/init.lua:1055
-#: ../../data/world/terrains/init.lua:1350
+#: ../../data/world/resources/init.lua:145
+#: ../../data/world/terrains/init.lua:469
+#: ../../data/world/terrains/init.lua:792
+#: ../../data/world/terrains/init.lua:1102
+#: ../../data/world/terrains/init.lua:1413
 msgid "Water"
 msgstr "Akvo"
 
-#: ../../data/world/resources/init.lua:164
+#: ../../data/world/resources/init.lua:161
 msgid "Fish"
 msgstr "Fiŝoj"
 
-#: ../../data/world/terrains/init.lua:152
+#: ../../data/world/terrains/init.lua:158
 msgid "Meadow 1"
 msgstr "Paŝtlando 1"
 
 #. TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if
 #. possible.
-#: ../../data/world/terrains/init.lua:157
-#: ../../data/world/terrains/init.lua:181
-#: ../../data/world/terrains/init.lua:202
-#: ../../data/world/terrains/init.lua:222
-#: ../../data/world/terrains/init.lua:290
-#: ../../data/world/terrains/init.lua:310
-#: ../../data/world/terrains/init.lua:476
-#: ../../data/world/terrains/init.lua:496
-#: ../../data/world/terrains/init.lua:516
-#: ../../data/world/terrains/init.lua:536
-#: ../../data/world/terrains/init.lua:556
-#: ../../data/world/terrains/init.lua:576
-#: ../../data/world/terrains/init.lua:612
-#: ../../data/world/terrains/init.lua:631
-#: ../../data/world/terrains/init.lua:786
-#: ../../data/world/terrains/init.lua:806
-#: ../../data/world/terrains/init.lua:826
-#: ../../data/world/terrains/init.lua:894
-#: ../../data/world/terrains/init.lua:913
-#: ../../data/world/terrains/init.lua:1110
-#: ../../data/world/terrains/init.lua:1130
-#: ../../data/world/terrains/init.lua:1150
-#: ../../data/world/terrains/init.lua:1170
-#: ../../data/world/terrains/init.lua:1190
-#: ../../data/world/terrains/init.lua:1209
+#: ../../data/world/terrains/init.lua:163
+#: ../../data/world/terrains/init.lua:187
+#: ../../data/world/terrains/init.lua:207
+#: ../../data/world/terrains/init.lua:227
+#: ../../data/world/terrains/init.lua:301
+#: ../../data/world/terrains/init.lua:321
+#: ../../data/world/terrains/init.lua:495
+#: ../../data/world/terrains/init.lua:517
+#: ../../data/world/terrains/init.lua:539
+#: ../../data/world/terrains/init.lua:559
+#: ../../data/world/terrains/init.lua:579
+#: ../../data/world/terrains/init.lua:599
+#: ../../data/world/terrains/init.lua:637
+#: ../../data/world/terrains/init.lua:656
+#: ../../data/world/terrains/init.lua:819
+#: ../../data/world/terrains/init.lua:839
+#: ../../data/world/terrains/init.lua:859
+#: ../../data/world/terrains/init.lua:933
+#: ../../data/world/terrains/init.lua:952
+#: ../../data/world/terrains/init.lua:1161
+#: ../../data/world/terrains/init.lua:1181
+#: ../../data/world/terrains/init.lua:1201
+#: ../../data/world/terrains/init.lua:1223
+#: ../../data/world/terrains/init.lua:1245
+#: ../../data/world/terrains/init.lua:1264
 msgid "likes trees"
 msgstr "arboza"
 
-#: ../../data/world/terrains/init.lua:176
+#: ../../data/world/terrains/init.lua:182
 msgid "Meadow 2"
 msgstr "Paŝtlando 2"
 
-#: ../../data/world/terrains/init.lua:197
+#: ../../data/world/terrains/init.lua:202
 msgid "Meadow 3"
 msgstr "Paŝtlando 3"
 
-#: ../../data/world/terrains/init.lua:217
+#: ../../data/world/terrains/init.lua:222
 msgid "Meadow 4"
 msgstr "Paŝtlando 4"
 
-#: ../../data/world/terrains/init.lua:237
-#: ../../data/world/terrains/init.lua:1105
+#: ../../data/world/terrains/init.lua:242
+#: ../../data/world/terrains/init.lua:1156
 msgid "Steppe"
 msgstr "Stepo"
 
-#: ../../data/world/terrains/init.lua:253
+#: ../../data/world/terrains/init.lua:260
 msgid "Barren Steppe"
 msgstr "Stepo senfrukta"
 
-#: ../../data/world/terrains/init.lua:269
-#: ../../data/world/terrains/init.lua:1145
+#: ../../data/world/terrains/init.lua:278
+#: ../../data/world/terrains/init.lua:1196
 msgid "Mountain Meadow"
 msgstr "Monto paŝta"
 
-#: ../../data/world/terrains/init.lua:284
-#: ../../data/world/terrains/init.lua:607
-#: ../../data/world/terrains/init.lua:889
-#: ../../data/world/terrains/init.lua:1185
+#: ../../data/world/terrains/init.lua:295
+#: ../../data/world/terrains/init.lua:632
+#: ../../data/world/terrains/init.lua:928
+#: ../../data/world/terrains/init.lua:1240
 msgid "Forested Mountain 1"
 msgstr "Monto arbara 1"
 
-#: ../../data/world/terrains/init.lua:304
-#: ../../data/world/terrains/init.lua:626
-#: ../../data/world/terrains/init.lua:908
-#: ../../data/world/terrains/init.lua:1204
+#: ../../data/world/terrains/init.lua:315
+#: ../../data/world/terrains/init.lua:651
+#: ../../data/world/terrains/init.lua:947
+#: ../../data/world/terrains/init.lua:1259
 msgid "Forested Mountain 2"
 msgstr "Monto arbara 2"
 
-#: ../../data/world/terrains/init.lua:324
-#: ../../data/world/terrains/init.lua:645
-#: ../../data/world/terrains/init.lua:927
-#: ../../data/world/terrains/init.lua:1224
+#: ../../data/world/terrains/init.lua:335
+#: ../../data/world/terrains/init.lua:670
+#: ../../data/world/terrains/init.lua:966
+#: ../../data/world/terrains/init.lua:1279
 msgid "Mountain 1"
 msgstr "Monto 1"
 
-#: ../../data/world/terrains/init.lua:340
-#: ../../data/world/terrains/init.lua:661
-#: ../../data/world/terrains/init.lua:943
-#: ../../data/world/terrains/init.lua:1240
+#: ../../data/world/terrains/init.lua:353
+#: ../../data/world/terrains/init.lua:688
+#: ../../data/world/terrains/init.lua:984
+#: ../../data/world/terrains/init.lua:1297
 msgid "Mountain 2"
 msgstr "Monto 2"
 
-#: ../../data/world/terrains/init.lua:356
-#: ../../data/world/terrains/init.lua:677
-#: ../../data/world/terrains/init.lua:959
-#: ../../data/world/terrains/init.lua:1256
+#: ../../data/world/terrains/init.lua:371
+#: ../../data/world/terrains/init.lua:706
+#: ../../data/world/terrains/init.lua:1002
+#: ../../data/world/terrains/init.lua:1315
 msgid "Mountain 3"
 msgstr "Monto 3"
 
-#: ../../data/world/terrains/init.lua:372
-#: ../../data/world/terrains/init.lua:693
-#: ../../data/world/terrains/init.lua:975
-#: ../../data/world/terrains/init.lua:1272
+#: ../../data/world/terrains/init.lua:389
+#: ../../data/world/terrains/init.lua:724
+#: ../../data/world/terrains/init.lua:1020
+#: ../../data/world/terrains/init.lua:1333
 msgid "Mountain 4"
 msgstr "Monto 4"
 
-#: ../../data/world/terrains/init.lua:387
-#: ../../data/world/terrains/init.lua:709
-#: ../../data/world/terrains/init.lua:1005
-#: ../../data/world/terrains/init.lua:1334
+#: ../../data/world/terrains/init.lua:406
+#: ../../data/world/terrains/init.lua:742
+#: ../../data/world/terrains/init.lua:1052
+#: ../../data/world/terrains/init.lua:1397
 msgid "Beach"
 msgstr "Plaĝo"
 
-#: ../../data/world/terrains/init.lua:402
+#: ../../data/world/terrains/init.lua:421
 msgid "Swamp"
 msgstr "Marĉo"
 
-#: ../../data/world/terrains/init.lua:417
-#: ../../data/world/terrains/init.lua:873
+#: ../../data/world/terrains/init.lua:436
+#: ../../data/world/terrains/init.lua:910
 msgid "Snow"
 msgstr "Neĝo"
 
-#: ../../data/world/terrains/init.lua:433
+#: ../../data/world/terrains/init.lua:452
 msgid "Lava"
 msgstr "Lafo"
 
-#: ../../data/world/terrains/init.lua:471
+#: ../../data/world/terrains/init.lua:490
 msgid "Ashes 1"
 msgstr "Cindro 1"
 
-#: ../../data/world/terrains/init.lua:491
+#: ../../data/world/terrains/init.lua:512
 msgid "Ashes 2"
 msgstr "Cindro 2"
 
-#: ../../data/world/terrains/init.lua:511
+#: ../../data/world/terrains/init.lua:534
 msgid "Hard Ground 1"
 msgstr "Tero malmola 1"
 
-#: ../../data/world/terrains/init.lua:531
+#: ../../data/world/terrains/init.lua:554
 msgid "Hard Ground 2"
 msgstr "Tero malmola 2"
 
-#: ../../data/world/terrains/init.lua:551
+#: ../../data/world/terrains/init.lua:574
 msgid "Hard Ground 3"
 msgstr "Tero malmola 3"
 
-#: ../../data/world/terrains/init.lua:571
+#: ../../data/world/terrains/init.lua:594
 msgid "Hard Ground 4"
 msgstr "Tero malmola 4"
 
-#: ../../data/world/terrains/init.lua:591
+#: ../../data/world/terrains/init.lua:614
 msgid "Igneous Rocks"
 msgstr "Magmorokaĵo"
 
-#: ../../data/world/terrains/init.lua:725
+#: ../../data/world/terrains/init.lua:758
 msgid "Lava Rocks 1"
 msgstr "Rokoj lafaj 1"
 
-#: ../../data/world/terrains/init.lua:742
+#: ../../data/world/terrains/init.lua:775
 msgid "Lava Rocks 2"
 msgstr "Rokoj lafaj 2"
 
-#: ../../data/world/terrains/init.lua:781
+#: ../../data/world/terrains/init.lua:814
 msgid "Tundra 1"
 msgstr "Tundro 1"
 
-#: ../../data/world/terrains/init.lua:801
+#: ../../data/world/terrains/init.lua:834
 msgid "Tundra 2"
 msgstr "Tundro 2"
 
-#: ../../data/world/terrains/init.lua:821
+#: ../../data/world/terrains/init.lua:854
 msgid "Tundra 3"
 msgstr "Tundro 3"
 
-#: ../../data/world/terrains/init.lua:841
+#: ../../data/world/terrains/init.lua:874
 msgid "Tundra Taiga"
 msgstr "Tundro/Tajgo"
 
-#: ../../data/world/terrains/init.lua:857
+#: ../../data/world/terrains/init.lua:892
 msgid "Taiga"
 msgstr "Tajgo"
 
-#: ../../data/world/terrains/init.lua:989
+#: ../../data/world/terrains/init.lua:1036
 msgid "Ice"
 msgstr "Glacio"
 
-#: ../../data/world/terrains/init.lua:1021
+#: ../../data/world/terrains/init.lua:1068
 msgid "Ice Floes 1"
 msgstr "Plateso glacia 1"
 
-#: ../../data/world/terrains/init.lua:1038
+#: ../../data/world/terrains/init.lua:1085
 msgid "Ice Floes 2"
 msgstr "Plateso glacia 2"
 
-#: ../../data/world/terrains/init.lua:1076
+#: ../../data/world/terrains/init.lua:1123
 msgid "Desert 4"
 msgstr "Dezerto 4"
 
-#: ../../data/world/terrains/init.lua:1091
+#: ../../data/world/terrains/init.lua:1140
 msgid "Dry Soil"
 msgstr "Grundo seka"
 
-#: ../../data/world/terrains/init.lua:1125
+#: ../../data/world/terrains/init.lua:1176
 msgid "Meadow"
 msgstr "Paŝtlando"
 
-#: ../../data/world/terrains/init.lua:1165
+#: ../../data/world/terrains/init.lua:1218
 msgid "High Mountain Meadow"
 msgstr "Monto alta paŝta"
 
-#: ../../data/world/terrains/init.lua:1286
+#: ../../data/world/terrains/init.lua:1349
 msgid "Desert 1"
 msgstr "Dezerto 1"
 
-#: ../../data/world/terrains/init.lua:1302
+#: ../../data/world/terrains/init.lua:1365
 msgid "Desert 2"
 msgstr "Dezerto 2"
 
-#: ../../data/world/terrains/init.lua:1318
+#: ../../data/world/terrains/init.lua:1381
 msgid "Desert 3"
 msgstr "Dezerto 3"

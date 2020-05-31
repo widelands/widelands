@@ -21,12 +21,16 @@ except AttributeError:
         return iter(d.values())
     def iteritems(d):
         return iter(d.items())
+    def bytes_to_str(bytes):
+        return str(bytes, 'utf-8')
 else:
     # Python 2
     def itervalues(d):
         return d.itervalues()
     def iteritems(d):
         return d.iteritems()
+    def bytes_to_str(bytes):
+        return str(bytes)
 
 def datadir():
     return os.path.join(os.path.dirname(__file__), "data")
@@ -93,15 +97,22 @@ class WidelandsTestCase(unittest.TestCase):
                     '--language=en_US' ]
             args += [ "--{}={}".format(key, value) for key, value in iteritems(wlargs) ]
 
+            stdout_file.write("Running widelands binary: ")
+            for anarg in args:
+              stdout_file.write(anarg)
+              stdout_file.write(" ")
+            stdout_file.write("\n")
+
             widelands = subprocess.Popen(
                     args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             while 1:
                 line = widelands.stdout.readline()
                 if not line:
                     break
-                stdout_file.write(str(line))
+                stdout_file.write(bytes_to_str(line))
                 stdout_file.flush()
             widelands.communicate()
+            stdout_file.write("\nReturned from Widelands, return code is %d\n" % widelands.returncode)
             self.widelands_returncode = widelands.returncode
         return stdout_filename
 
@@ -129,18 +140,26 @@ class WidelandsTestCase(unittest.TestCase):
             self.verify_success(stdout, stdout_filename)
 
     def verify_success(self, stdout, stdout_filename):
-        common_msg = "Analyze the files in {} to see why this test case failed. Stdout is\n  {}\n\nstdout:\n{}".format(
-                self.run_dir, stdout_filename, stdout)
-        self.assertTrue(self.widelands_returncode == 0,
-            "Widelands exited abnormally. {}".format(common_msg)
-        )
-        self.assertTrue("All Tests passed" in stdout,
-            "Not all tests pass. {}.".format(common_msg)
-        )
-        self.assertFalse("lua_errors.cc" in stdout,
-            "Not all tests pass. {}.".format(common_msg)
-        )
-        out("done.\n")
+        # Catch instabilities with SDL in CI environment
+        if self.widelands_returncode == 2:
+            print("SDL initialization failed. TEST SKIPPED.")
+            with open(stdout_filename, 'r') as stdout_file:
+                for line in stdout_file.readlines():
+                    print(line.strip())
+            out("SKIPPED.\n")
+        else:
+            common_msg = "Analyze the files in {} to see why this test case failed. Stdout is\n  {}\n\nstdout:\n{}".format(
+                    self.run_dir, stdout_filename, stdout)
+            self.assertTrue(self.widelands_returncode == 0,
+                "Widelands exited abnormally. {}".format(common_msg)
+            )
+            self.assertTrue("All Tests passed" in stdout,
+                "Not all tests pass. {}.".format(common_msg)
+            )
+            self.assertFalse("lua_errors.cc" in stdout,
+                "Not all tests pass. {}.".format(common_msg)
+            )
+            out("done.\n")
         if self.keep_output_around:
             out("    stdout: {}\n".format(stdout_filename))
 

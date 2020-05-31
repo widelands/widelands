@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
 #ifndef WL_LOGIC_TRADE_AGREEMENT_H
 #define WL_LOGIC_TRADE_AGREEMENT_H
 
-#include "logic/map_objects/map_object.h"
+#include "logic/map_objects/tribes/bill_of_materials.h"
 
 namespace Widelands {
 

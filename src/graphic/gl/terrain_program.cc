@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,10 +24,8 @@
 #include "graphic/gl/utils.h"
 #include "graphic/texture.h"
 
-// QuickRef:
-// http://www.cs.unh.edu/~cs770/docs/glsl-1.20-quickref.pdf
 // Full specification:
-// http://www.opengl.org/registry/doc/GLSLangSpec.Full.1.20.8.pdf
+// https://www.khronos.org/registry/OpenGL/specs/gl/GLSLangSpec.1.20.pdf
 // We target OpenGL 2.1 for the desktop here.
 TerrainProgram::TerrainProgram() {
 	gl_program_.build("terrain");

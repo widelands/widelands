@@ -1,19 +1,19 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016,2018
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016-2019
+# Jukka Pakarinen, 2016-2020
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2015
-# Sampo Harjula <sahtor@sahtor.net>, 2015
-# Teppo Mäenpää <teppo@runbox.com>, 2016
+# Sampo Harjula <sahtor.transifex@sahtor.net>, 2015
+# Teppo Mäenpää <teppo@runbox.com>, 2016,2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-29 07:26+0000\n"
-"PO-Revision-Date: 2019-03-30 17:05+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-05-17 05:43+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -36,7 +36,7 @@ msgstr "Lisenssi"
 
 #: ../../data/txts/LICENSE.lua:8
 msgid "Licensing information for Widelands"
-msgstr "Widelands pelin lisenssi"
+msgstr "Widelands-pelin lisenssi"
 
 #. TRANSLATORS: Placeholder is copyright end year
 #: ../../data/txts/LICENSE.lua:10
@@ -361,7 +361,7 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an "
 "economic infrastructure, explore the land around you and face rivaling "
 "tribes."
-msgstr "Pelin alussa sinulla on pieni maa-alue sekä jonkin verran eri tarvikkeita.Niiden avulla voit laajentaa valtakuntaasi useiden tuhansien työntekijöiden kokoiseksi.Sinun pitää tehdä valtakuntaasi toimiva talous, ja selviytyä kohtaamisista kilpailevienheimojen kanssa."
+msgstr "Pelin alussa sinulla on pieni maa-alue sekä jonkin verran eri tarvikkeita. Niiden avulla voit laajentaa valtakuntaasi useiden tuhansien työntekijöiden kokoiseksi. Sinun pitää tehdä valtakuntaasi toimiva talous, ja selviytyä kohtaamisista kilpailevienheimojen kanssa."
 
 #: ../../data/txts/help/common_helptexts.lua:25
 msgid "Replays"
@@ -374,7 +374,7 @@ msgid ""
 ".wrpl extension and contains all commands that were issued by all players, "
 "such as building a road or attacking an enemy. The rest of the filenames "
 "will tell you the time you started the game."
-msgstr "Widelands tallentaa pelien kulun kahteen tiedostoon. Toinen näistä on nimeltään.wrpl.wgf, ja sisältää alkutilanteen. Toisen tiedostonnimen pääte on .wrpl, ja se sisltääkaikki pelin aikana annetut komennot, kuten rakennus- ja hyökkäyskomennot.Tiedostonnimen alkuosana on pelin aloittamisaika."
+msgstr "Widelands tallentaa pelien kulun kahteen tiedostoon. Toinen näistä on nimeltään.wrpl.wgf, ja sisältää alkutilanteen. Toisen tiedostonnimen pääte on .wrpl, ja se sisltääkaikki pelin aikana annetut komennot, kuten rakennus- ja hyökkäyskomennot. Tiedostonnimen alkuosana on pelin aloittamisaika."
 
 #: ../../data/txts/help/common_helptexts.lua:27
 msgid ""
@@ -384,7 +384,7 @@ msgid ""
 " replay to become incompatible and to ‘go out of sync’. This is similar to "
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
-msgstr "Voit katsoa pelin toiston päävalikon \"replay\" -toiminnolla.Huomaathan, että pienetkin muutokset peliohjelmassa voivat johtaa siihen, ettätallenteen seuraaminen keskeytyy synkroinointiongelmaan. Samoin verkkopelitvoivat epäonnistua, jos pelaajilla käytössään eri versiot pelistä."
+msgstr "Voit katsoa pelin toiston päävalikon \"replay\" -toiminnolla.Huomaathan, että pienetkin muutokset peliohjelmassa voivat johtaa siihen, ettätallenteen seuraaminen keskeytyy synkroinointiongelmaan. Samoin verkkopelit voivat epäonnistua, jos pelaajilla käytössään eri versiot pelistä."
 
 #: ../../data/txts/help/common_helptexts.lua:28
 #, lua-format
@@ -411,9 +411,14 @@ msgstr "Välilyönti"
 
 #: ../../data/txts/help/common_helptexts.lua:42
 msgid "Toggle building spaces"
-msgstr "Rakennusalueet päälle/pois"
+msgstr "Rakennuspaikat päälle/pois"
 
-#. TRANSLATORS: This is an access key combination. The hotkey is 'f'
+#. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
+#: ../../data/txts/help/common_helptexts.lua:49
+msgctxt "hotkey"
+msgid "Ctrl + F"
+msgstr "Ctrl + F"
+
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"
 msgstr "Kokoruutumoodi päälle/pois, jos käyttöjärjestelmä tukee toimintoa"
@@ -421,7 +426,7 @@ msgstr "Kokoruutumoodi päälle/pois, jos käyttöjärjestelmä tukee toimintoa"
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
 #: ../../data/txts/help/common_helptexts.lua:56
 msgid "Toggle minimap"
-msgstr "Minikartta päälle/pois"
+msgstr "Pienkartta päälle/pois"
 
 #: ../../data/txts/help/multiplayer_help.lua:7
 msgid "Multiplayer Game Setup"
@@ -589,7 +594,7 @@ msgstr "Numeronäppäimillä (0 - 9) voit suoraan asettaa valitun alueen koon hi
 msgid ""
 "Space key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
-msgstr "Välilyönti toimii samoin kuin tavallisessa pelissä. Se kytkee rakennusalueet näkymän päälle tai pois."
+msgstr "Välilyönti toimii samoin kuin tavallisessa pelissä. Se kytkee rakennuspaikat näkymän päälle tai pois."
 
 #: ../../data/txts/tips/editor.lua:35
 msgid ""
@@ -753,6 +758,53 @@ msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
 msgstr "Suurenna sisään/ulos hiiren rullalla tai %1%. Paina %2% resetoidaksesi suurennuksen."
 
 #: ../../data/txts/tips/general_game.lua:75
+msgid ""
+"Use the ‘,’ (comma) and ‘.’ (period) keys to quickly jump between recently "
+"visited locations."
+msgstr "Pilkku ',' ja piste '.' -näppäimillä hypit vikkelästi viimeisten kohteidesi välillä."
+
+#: ../../data/txts/tips/general_game.lua:79
+msgctxt "hotkey"
+msgid "Ctrl+(Page Up/Page Down)"
+msgstr "Ctrl+(Page Up/Page Down)"
+
+#: ../../data/txts/tips/general_game.lua:79
+msgctxt "hotkey"
+msgid "Page Up/Page Down"
+msgstr "Page Up/Page Down"
+
+#: ../../data/txts/tips/general_game.lua:79
+msgctxt "hotkey"
+msgid "Shift+(Page Up/Page Down)"
+msgstr "Shift+(Page Up/Page Down)"
+
+#: ../../data/txts/tips/general_game.lua:79
+msgid ""
+"Speed up or slow down the game with %1%. Use %2% for rapid change, %3% will "
+"adjust speed smoothly."
+msgstr "%1% vaihtaa pelin nopeutta. %2%askeltaa suuremmin, %3%pehmeämmin. "
+
+#: ../../data/txts/tips/general_game.lua:83
+msgctxt "hotkey"
+msgid "Arrow keys"
+msgstr "Nuolinäppäimet"
+
+#: ../../data/txts/tips/general_game.lua:83
+msgctxt "hotkey"
+msgid "Ctrl+Arrow keys"
+msgstr "Ctrl+Nuolinäppäimet"
+
+#: ../../data/txts/tips/general_game.lua:83
+msgid ""
+"Move map view using %1%. %2% will move the view faster, %3% moves slowly."
+msgstr "%1%siirtää karttanäkymää. %2%nopeuttaa siirtoa, %3% hidastaa sitä."
+
+#: ../../data/txts/tips/general_game.lua:83
+msgctxt "hotkey"
+msgid "Shift+Arrow keys"
+msgstr "Shift+Nuolinäppäimet"
+
+#: ../../data/txts/tips/general_game.lua:87
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"

@@ -61,17 +61,30 @@ tribes:new_productionsite_type {
          actions = {
             "call=smelt_iron",
             "call=smelt_gold",
-            "call=smelt_iron",
-            "return=no_stats"
+            "call=smelt_iron_2",
          }
       },
+      -- 2 identical programs for iron to prevent unnecessary skipping penalty
       smelt_iron = {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
          descname = _"smelting iron",
          actions = {
             "return=skipped unless economy needs iron",
             "consume=coal iron_ore",
-            "sleep=32000",
+            "sleep=29000",
+            "playsound=sound/metal/furnace 192",
+            "animate=working 35000",
+            "playsound=sound/metal/ironping 80",
+            "produce=iron"
+         }
+      },
+      smelt_iron_2 = {
+         -- TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
+         descname = _"smelting iron",
+         actions = {
+            "return=skipped unless economy needs iron",
+            "consume=coal iron_ore",
+            "sleep=29000",
             "playsound=sound/metal/furnace 192",
             "animate=working 35000",
             "playsound=sound/metal/ironping 80",
@@ -84,7 +97,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs gold",
             "consume=coal gold_ore",
-            "sleep=32000",
+            "sleep=29000",
             "playsound=sound/metal/furnace 192",
             "animate=working 35000",
             "playsound=sound/metal/goldping 80",

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2019 by the Widelands Development Team
+ * Copyright (C) 2007-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,9 +19,12 @@
 
 #include "ui_basic/progresswindow.h"
 
+#include <memory>
 #ifndef _MSC_VER
 #include <sys/time.h>
 #endif
+
+#include <SDL_events.h>
 
 #include "base/i18n.h"
 #include "graphic/font_handler.h"
@@ -63,8 +66,8 @@ void ProgressWindow::draw(RenderTarget& rt) {
 
 	const uint32_t h = text_height(style_.font());
 
-	label_rectangle_.x = get_w() / 4;
-	label_rectangle_.w = get_w() / 2;
+	label_rectangle_.x = get_w() / 6;
+	label_rectangle_.w = get_w() * 2 / 3;
 	label_rectangle_.y = label_center_.y - h / 2 - PROGRESS_STATUS_RECT_PADDING;
 	label_rectangle_.h = h + 2 * PROGRESS_STATUS_RECT_PADDING;
 
@@ -103,10 +106,8 @@ void ProgressWindow::step(const std::string& description) {
 	UI::center_vertically(rendered_text->height(), &label_center_);
 	rendered_text->draw(rt, label_center_, UI::Align::kCenter);
 
-#ifdef _WIN32
-	// Pump events to prevent "not responding" on windows
+	// Pump events to prevent "not responding" on windows & "beach ball" on macOS
 	SDL_PumpEvents();
-#endif
 	update(true);
 }
 

@@ -2,12 +2,6 @@
 --                      Texts for the tutorial mission
 -- =======================================================================
 
--- =========================
--- Some formating functions
--- =========================
-
-include "scripting/richtext_scenarios.lua"
-
 -- =============
 -- Texts below
 -- =============
@@ -150,7 +144,7 @@ obj_switch_stock_tab = {
    body = objective_text(_"Examine the first two tabs in the stock window",
       p(_[[Have a look at the first two tabs in the stock window. They show all the wares and workers you have.]]) ..
       li_image("images/wui/stats/menu_tab_wares_warehouse.png",
-         _[[When you have seen enough, switch to the third tab (‘Wares in warehouses’).]])
+         _[[When you have seen enough, switch back to the third tab (‘Wares in warehouses’).]])
    )
 }
 inventory2 = {
@@ -158,7 +152,7 @@ inventory2 = {
    title = _"Stock",
    body = (
       li_image("images/wui/buildings/menu_tab_wares.png",
-         _[[The stock window has four tabs. The first (and currently selected) one shows you all your current wares, including those on roads, at flags and inside buildings waiting for processing.]]) ..
+         _[[The stock window has four tabs. The first one shows you all your current wares, including those on roads, at flags and inside buildings waiting for processing.]]) ..
       p(_[[Looking at the rations, there are currently only five in total, probably on their way to somewhere. Five rations are not much for such a big economy.]]) ..
       li_image("images/wui/buildings/menu_tab_workers.png",
          _[[The second tab shows you all your workers, again those on roads and in buildings summed up.]])
@@ -183,7 +177,7 @@ reopen_stock_menu = {
    title = _"You closed the stock window!",
    body = (
       li_image("images/wui/menus/statistics_stock.png",
-         _[[You have closed the stock window, but I have not yet finished with my explanation. Would you please reopen it and choose the third tab?]])
+         _[[You have closed the stock window, but I have not yet finished with my explanation. Would you please reopen it and choose the first tab?]])
    ),
    show_instantly = true,
    w = 300,
@@ -192,6 +186,28 @@ reopen_stock_menu = {
 
 obj_reopen_stock_menu = {
    name = "open_stock_menu_again",
+   title = _"Open the stock window again",
+   number = 1,
+   body = objective_text(_"Open the stock window again",
+      li_image("images/wui/menus/statistics_stock.png",
+         _[[You closed the stock window before I finished telling you everything about it. If you already know everything, please feel free to leave this tutorial at any time.]]) ..
+      -- TRANSLATORS: "it" refers to the "Stock" window.
+      li(_[[Otherwise, please reopen it and have a look at all its tabs.]])
+   )
+}
+
+reopen_stock_menu2 = {
+   title = _"You closed the stock window!",
+   body = (
+      li_image("images/wui/menus/statistics_stock.png",
+         _[[You have closed the stock window, but I have not yet finished with my explanation. Would you please reopen it and choose the third tab?]])
+   ),
+   show_instantly = true,
+   w = 300,
+   h = 250
+}
+obj_reopen_stock_menu2 = {
+   name = "open_stock_menu_again2",
    title = _"Open the stock window again",
    number = 1,
    body = objective_text(_"Open the stock window again",
@@ -268,7 +284,7 @@ explain_encyclopedia = {
       div("width=100%", div("float=left padding_r=18 padding_t=15 padding_b=15 padding_l=4",p(img("images/wui/buildings/menu_tab_wares.png"))) .. p(_[[The ‘Wares’ tab shows information about the wares that your tribe needs, including a short help text, a list of buildings that produce each ware, the needed wares to produce it and where the ware is consumed.]])) ..
       div("width=100%", div("float=left padding_r=16",p(img("images/wui/buildings/menu_tab_workers.png"))) .. p(_[[The ‘Workers’ tab shows information about your tribe’s workers in a similar manner to the wares in the second tab.]])) ..
       div("width=100%", div("float=left padding_r=18 padding_t=5 padding_l=4",p(img("images/wui/stats/genstats_nrbuildings.png"))) .. p(_[[The ‘Buildings’ tab contains all the necessary information about the buildings of your tribe.]])) ..
-      div("width=100%", div("float=left padding_r=18 padding_t=5 padding_l=4",p(img("tribes/immovables/field_ripe/idle_00.png"))) .. p(_[[Finally, the ‘Immovables’ tab shows information about the specific immovables that your tribe’s workers can place on the map.]]))
+      div("width=100%", div("float=left padding_r=18 padding_t=5 padding_l=4",p(img("tribes/immovables/wheatfield/ripe/idle_00.png"))) .. p(_[[Finally, the ‘Immovables’ tab shows information about the specific immovables that your tribe’s workers can place on the map.]]))
    ),
    h = 500,
    show_instantly = true,
@@ -303,9 +319,13 @@ building_priority_settings = {
       li_object("empire_marblemine", p(_[[Great. Our taverns have now been built up and are supplying us with rations.]]) ..
          p(_[[At the moment, all mines are supplied with rations. If you want to prioritize a special mine, you simply have to open its window. In the wares tab, behind every ware, you can see ‘traffic lights’.]]) ..
          p(_[[When you click on the red dot (low priority), the corresponding ware gets delivered less frequently. Green means that as many wares as possible should be delivered to this building, maybe because it produces something important.]]) ..
+         p(_[[The actual supply state is indicated by varying colors of the ware icons themselves:]]) ..
+         li(_[[Wares stored in the building are shown in full color.]]) ..
+         li(_[[Missing wares are greyed out.]]) ..
+         li(_[[Wares not present in the building yet but already being transported there are shown in a darker grey.]]) ..
          p(_[[In our situation, you might want to work the bakeries as fast as possible because they supply our taverns, so you could set water to the highest priority for them. The other buildings (for example the donkey farm) would then get less water, but the bakery could work faster.]]), plr.color)
       -- we cannot check whether the user does this, so no objective
-      -- see bug https://bugs.launchpad.net/widelands/+bug/1380288
+      -- see https://github.com/widelands/widelands/issues/2012
    )
 }
 

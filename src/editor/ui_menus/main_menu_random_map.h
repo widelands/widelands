@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,13 +20,10 @@
 #ifndef WL_EDITOR_UI_MENUS_MAIN_MENU_RANDOM_MAP_H
 #define WL_EDITOR_UI_MENUS_MAIN_MENU_RANDOM_MAP_H
 
-#include <vector>
-
 #include "base/macros.h"
 #include "editor/ui_menus/map_size_box.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
-#include "ui_basic/dropdown.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/spinbox.h"
 #include "ui_basic/textarea.h"

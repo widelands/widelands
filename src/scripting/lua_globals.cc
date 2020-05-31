@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,11 +19,9 @@
 
 #include "scripting/lua_globals.h"
 
-#include <exception>
 #include <memory>
 
-#include <SDL.h>
-#include <boost/format.hpp>
+#include <SDL_timer.h>
 
 #include "base/i18n.h"
 #include "build_info.h"

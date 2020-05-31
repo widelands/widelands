@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2019 by the Widelands Development Team
+ * Copyright (C) 2008-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,6 @@
 
 #include <memory>
 #include <string>
-#include <vector>
 
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
@@ -58,6 +57,7 @@ struct PlayerSettings {
 };
 
 struct UserSettings {
+	// TODO(k.halfman): make this some const instead of calculating this every time
 	static uint8_t none() {
 		return std::numeric_limits<uint8_t>::max();
 	}

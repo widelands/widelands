@@ -7,7 +7,7 @@ local objective_to_explain_objectives = add_campaign_objective(obj_initial_close
 local function wait_for_quarry_road_connection(field, cs, objective)
    -- Wait till the construction site is connected to the headquarters
    sleep(10 * wl.Game().desired_speed)
-   while not field.immovable or field.brn.immovable.debug_economy ~= sf.brn.immovable.debug_economy do
+   while not field.immovable or field.brn.immovable.debug_worker_economy ~= sf.brn.immovable.debug_worker_economy do
       if not field.immovable then
          campaign_message_box(quarry_illegally_destroyed)
          scroll_to_field(field)
@@ -135,13 +135,21 @@ function build_lumberjack()
       campaign_message_box(lumberjack_message_06, 3 * 1000)
    end
 
-   local o = campaign_message_with_objective(lumberjack_message_07, obj_lumberjack_progress)
+   local o = campaign_message_with_objective(lumberjack_message_07a, obj_lumberjack_progress)
    scroll_to_field(first_lumberjack_field)
    mouse_to_field(first_lumberjack_field)
 
    while not wl.ui.MapView().windows.building_window do sleep(100) end
+   -- demonstrate work area button
+   blocker = UserInputDisabler:new()
+   sleep(1000)
+   campaign_message_box(lumberjack_message_07b, 1000)
+   click_on_panel(wl.ui.MapView().windows.building_window.buttons.workarea)
+   blocker:lift_blocks()
+
    while wl.ui.MapView().windows.building_window do sleep(100) end
    set_objective_done(o)
+   sleep(3000)
 
    campaign_message_box(lumberjack_message_08)
    wl.ui.MapView().dropdowns["dropdown_menu_gamespeed"]:open()
@@ -308,7 +316,6 @@ function second_quarry()
 
    -- Wait for the constructionsite to be placed
    while not cs do sleep(200) end
-
    wait_for_quarry_road_connection(second_quarry_field, cs, o)
 end
 

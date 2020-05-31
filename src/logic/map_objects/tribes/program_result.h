@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_PROGRAM_RESULT_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_PROGRAM_RESULT_H
 
-#include "base/macros.h"
+#include "base/wexception.h"
 
 namespace Widelands {
 // Don't change these values, they are used as hardcoded array indices

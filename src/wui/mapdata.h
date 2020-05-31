@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,13 +19,6 @@
 
 #ifndef WL_WUI_MAPDATA_H
 #define WL_WUI_MAPDATA_H
-
-#include <set>
-#include <string>
-#include <vector>
-
-#include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "io/filesystem/filesystem.h"

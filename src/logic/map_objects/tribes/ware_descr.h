@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,27 +20,17 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_WARE_DESCR_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_WARE_DESCR_H
 
-#include <cstring>
 #include <memory>
-#include <string>
-#include <unordered_map>
-
-#include <stdint.h>
 
 #include "ai/ai_hints.h"
 #include "base/macros.h"
 #include "logic/map_objects/map_object.h"
 #include "scripting/lua_table.h"
 
-class Image;
-class LuaTable;
-
 constexpr int kWareMenuPicWidth = 24;   //!< Default width for ware's menu icons
 constexpr int kWareMenuPicHeight = 24;  //!< Default height for ware's menu icons
 
 namespace Widelands {
-
-class TribeDescr;
 
 /**
  * Wares can be stored in warehouses. They can be transferred across an

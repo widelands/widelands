@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,10 +18,6 @@
  */
 
 #include "editor/ui_menus/toolsize_menu.h"
-
-#include <cstdio>
-
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
@@ -56,10 +52,8 @@ EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
                UI::ButtonStyle::kWuiSecondary,
                g_gr->images().get("images/ui_basic/scrollbar_down.png")),
      value_(0) {
-	increase_.sigclicked.connect(
-	   boost::bind(&EditorToolsizeMenu::increase_radius, boost::ref(*this)));
-	decrease_.sigclicked.connect(
-	   boost::bind(&EditorToolsizeMenu::decrease_radius, boost::ref(*this)));
+	increase_.sigclicked.connect([this]() { increase_radius(); });
+	decrease_.sigclicked.connect([this]() { decrease_radius(); });
 
 	increase_.set_repeating(true);
 	decrease_.set_repeating(true);

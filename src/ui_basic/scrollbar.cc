@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,7 +19,8 @@
 
 #include "ui_basic/scrollbar.h"
 
-#include <algorithm>
+#include <SDL_mouse.h>
+#include <SDL_timer.h>
 
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -70,11 +71,13 @@ Scrollbar::Scrollbar(Panel* const parent,
  * Change the number of steps of the scrollbar.
  */
 void Scrollbar::set_steps(int32_t steps) {
-	if (steps < 1)
+	if (steps < 1) {
 		steps = 1;
+	}
 
-	if (pos_ >= static_cast<uint32_t>(steps))
+	if (pos_ >= static_cast<uint32_t>(steps)) {
 		set_scrollpos(steps - 1);
+	}
 
 	steps_ = steps;
 	layout();
@@ -95,8 +98,9 @@ uint32_t Scrollbar::get_steps() const {
  * Change the number of steps one click on one of the arrow buttons will scroll.
  */
 void Scrollbar::set_singlestepsize(uint32_t singlestepsize) {
-	if (singlestepsize < 1)
+	if (singlestepsize < 1) {
 		singlestepsize = 1;
+	}
 
 	singlestepsize_ = singlestepsize;
 	layout();
@@ -117,13 +121,16 @@ void Scrollbar::set_pagesize(int32_t const pagesize) {
  *            get_steps() - 1]
  */
 void Scrollbar::set_scrollpos(int32_t pos) {
-	if (pos < 0)
+	if (pos < 0) {
 		pos = 0;
-	if (static_cast<uint32_t>(pos) >= steps_)
+	}
+	if (static_cast<uint32_t>(pos) >= steps_) {
 		pos = steps_ - 1;
+	}
 
-	if (pos_ == static_cast<uint32_t>(pos))
+	if (pos_ == static_cast<uint32_t>(pos)) {
 		return;
+	}
 
 	pos_ = pos;
 	moved(pos);
@@ -133,31 +140,37 @@ Scrollbar::Area Scrollbar::get_area_for_point(int32_t x, int32_t y) {
 	int32_t extent = 0;
 
 	// Out of panel
-	if (x < 0 || x >= static_cast<int32_t>(get_w()) || y < 0 || y >= static_cast<int32_t>(get_h()))
+	if (x < 0 || x >= static_cast<int32_t>(get_w()) || y < 0 || y >= static_cast<int32_t>(get_h())) {
 		return Area::None;
+	}
 
 	// Normalize coordinates
 	if (horizontal_) {
 		std::swap(x, y);
 		extent = get_w();
-	} else
+	} else {
 		extent = get_h();
+	}
 
 	// Determine the area
 	int32_t knob = get_knob_pos();
 	int32_t knobsize = get_knob_size();
 
-	if (y < static_cast<int32_t>(buttonsize_))
+	if (y < static_cast<int32_t>(buttonsize_)) {
 		return Area::Minus;
+	}
 
-	if (y < knob - knobsize / 2)
+	if (y < knob - knobsize / 2) {
 		return Area::MinusPage;
+	}
 
-	if (y < knob + knobsize / 2)
+	if (y < knob + knobsize / 2) {
 		return Area::Knob;
+	}
 
-	if (y < extent - static_cast<int32_t>(buttonsize_))
+	if (y < extent - static_cast<int32_t>(buttonsize_)) {
 		return Area::PlusPage;
+	}
 
 	return Area::Plus;
 }
@@ -168,8 +181,9 @@ Scrollbar::Area Scrollbar::get_area_for_point(int32_t x, int32_t y) {
 uint32_t Scrollbar::get_knob_pos() {
 	assert(0 != steps_);
 	uint32_t result = buttonsize_ + get_knob_size() / 2;
-	if (uint32_t const d = steps_ - 1)
+	if (uint32_t const d = steps_ - 1) {
 		result += pos_ * ((horizontal_ ? get_w() : get_h()) - 2 * result) / d;
+	}
 	return result;
 }
 
@@ -195,14 +209,16 @@ void Scrollbar::set_knob_pos(int32_t pos) {
 uint32_t Scrollbar::get_knob_size() {
 	uint32_t extent = horizontal_ ? get_w() : get_h();
 
-	if (extent <= 3 * buttonsize_)
+	if (extent <= 3 * buttonsize_) {
 		return buttonsize_;
+	}
 
 	uint32_t maxhalfsize = extent / 2 - buttonsize_;
 	uint32_t halfsize = (maxhalfsize * get_pagesize()) / (steps_ + get_pagesize());
 	uint32_t size = 2 * halfsize;
-	if (size < buttonsize_)
+	if (size < buttonsize_) {
 		size = buttonsize_;
+	}
 	return size;
 }
 
@@ -238,10 +254,11 @@ void Scrollbar::draw_button(RenderTarget& dst, Area area, const Recti& r) {
 
 	// Draw the picture
 	const Image* pic = nullptr;
-	if (area == Area::Minus)
+	if (area == Area::Minus) {
 		pic = pic_minus_;
-	else if (area == Area::Plus)
+	} else if (area == Area::Plus) {
 		pic = pic_plus_;
+	}
 
 	if (pic) {
 		double image_scale = std::min(1., std::min(static_cast<double>(r.w - 4) / pic->width(),
@@ -356,9 +373,8 @@ void Scrollbar::draw(RenderTarget& dst) {
 		draw_area(dst, Area::MinusPage,
 		          Recti(0, buttonsize_, get_w(), knobpos - buttonsize_ - knobsize / 2));
 		assert(knobpos + knobsize / 2 + buttonsize_ <= static_cast<uint32_t>(get_h()));
-		draw_area(
-		   dst, Area::PlusPage,
-		   Recti(0, knobpos + knobsize / 2, get_w(), get_h() - knobpos - knobsize / 2 - buttonsize_));
+		draw_area(dst, Area::PlusPage, Recti(0, knobpos + knobsize / 2, get_w(),
+		                                     get_h() - knobpos - knobsize / 2 - buttonsize_));
 	}
 }
 
@@ -368,19 +384,22 @@ void Scrollbar::draw(RenderTarget& dst) {
 void Scrollbar::think() {
 	Panel::think();
 
-	if (pressed_ == Area::None || pressed_ == Area::Knob)
+	if (pressed_ == Area::None || pressed_ == Area::Knob) {
 		return;
+	}
 
 	uint32_t const time = SDL_GetTicks();
-	if (time < time_nextact_)
+	if (time < time_nextact_) {
 		return;
+	}
 
 	action(pressed_);
 
 	// Schedule next tick
 	time_nextact_ += MOUSE_BUTTON_AUTOREPEAT_TICK;
-	if (time_nextact_ < time)
+	if (time_nextact_ < time) {
 		time_nextact_ = time;
+	}
 }
 
 bool Scrollbar::handle_mousewheel(uint32_t, int32_t, int32_t y) {
@@ -403,8 +422,9 @@ bool Scrollbar::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 			if (pressed_ != Area::Knob) {
 				action(pressed_);
 				time_nextact_ = SDL_GetTicks() + MOUSE_BUTTON_AUTOREPEAT_DELAY;
-			} else
+			} else {
 				knob_grabdelta_ = (horizontal_ ? x : y) - get_knob_pos();
+			}
 		}
 		result = true;
 		break;
@@ -436,8 +456,9 @@ bool Scrollbar::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
  * Move the knob while pressed.
  */
 bool Scrollbar::handle_mousemove(uint8_t, int32_t const mx, int32_t const my, int32_t, int32_t) {
-	if (pressed_ == Area::Knob)
+	if (pressed_ == Area::Knob) {
 		set_knob_pos((horizontal_ ? mx : my) - knob_grabdelta_);
+	}
 	return true;
 }
 
@@ -445,20 +466,9 @@ bool Scrollbar::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		if (horizontal_) {
 			switch (code.sym) {
-			case SDLK_KP_6:
-				if (code.mod & KMOD_NUM) {
-					break;
-				}
-				FALLS_THROUGH;
 			case SDLK_RIGHT:
 				action(Area::Plus);
 				return true;
-
-			case SDLK_KP_4:
-				if (code.mod & KMOD_NUM) {
-					break;
-				}
-				FALLS_THROUGH;
 			case SDLK_LEFT:
 				action(Area::Minus);
 				return true;
@@ -467,38 +477,15 @@ bool Scrollbar::handle_key(bool down, SDL_Keysym code) {
 			}
 		} else {
 			switch (code.sym) {
-			case SDLK_KP_2:
-				if (code.mod & KMOD_NUM) {
-					break;
-				}
-				FALLS_THROUGH;
 			case SDLK_DOWN:
 				action(Area::Plus);
 				return true;
-
-			case SDLK_KP_8:
-				if (code.mod & KMOD_NUM) {
-					break;
-				}
-				FALLS_THROUGH;
 			case SDLK_UP:
 				action(Area::Minus);
 				return true;
-
-			case SDLK_KP_3:
-				if (code.mod & KMOD_NUM) {
-					break;
-				}
-				FALLS_THROUGH;
 			case SDLK_PAGEDOWN:
 				action(Area::PlusPage);
 				return true;
-
-			case SDLK_KP_9:
-				if (code.mod & KMOD_NUM) {
-					break;
-				}
-				FALLS_THROUGH;
 			case SDLK_PAGEUP:
 				action(Area::MinusPage);
 				return true;

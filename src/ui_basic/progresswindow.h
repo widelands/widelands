@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2019 by the Widelands Development Team
+ * Copyright (C) 2007-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,14 +20,9 @@
 #ifndef WL_UI_BASIC_PROGRESSWINDOW_H
 #define WL_UI_BASIC_PROGRESSWINDOW_H
 
-#include <cstring>
-#include <string>
-#include <vector>
-
 #include "base/rect.h"
 #include "ui_basic/fullscreen_window.h"
 
-class Image;
 class RenderTarget;
 
 namespace UI {

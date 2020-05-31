@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,8 +24,10 @@
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/road.h"
+#include "economy/waterway.h"
 #include "graphic/graphic.h"
 #include "logic/cmd_queue.h"
+#include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/tribes/attack_target.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -36,7 +38,6 @@
 #include "ui_basic/button.h"
 #include "ui_basic/icongrid.h"
 #include "ui_basic/tabpanel.h"
-#include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "wui/actionconfirm.h"
 #include "wui/attack_box.h"
@@ -76,9 +77,9 @@ private:
 
 BuildGrid::BuildGrid(UI::Panel* parent, Widelands::Player* plr, int32_t x, int32_t y, int32_t cols)
    : UI::IconGrid(parent, x, y, kBuildGridCellSize, kBuildGridCellSize, cols), plr_(plr) {
-	icon_clicked.connect(boost::bind(&BuildGrid::click_slot, this, _1));
-	mouseout.connect(boost::bind(&BuildGrid::mouseout_slot, this, _1));
-	mousein.connect(boost::bind(&BuildGrid::mousein_slot, this, _1));
+	icon_clicked.connect([this](Widelands::DescriptionIndex i) { click_slot(i); });
+	mouseout.connect([this](Widelands::DescriptionIndex i) { mouseout_slot(i); });
+	mousein.connect([this](Widelands::DescriptionIndex i) { mousein_slot(i); });
 }
 
 /*
@@ -160,6 +161,7 @@ public:
 	void add_buttons_auto();
 	void add_buttons_build(int32_t buildcaps, int32_t max_nodecaps);
 	void add_buttons_road(bool flag);
+	void add_buttons_waterway(bool flag);
 	void add_buttons_attack();
 
 	void act_watch();
@@ -169,7 +171,12 @@ public:
 	void act_ripflag();
 	void act_buildroad();
 	void act_abort_buildroad();
+	void act_abort_buildroad_and_start_buildwaterway();
 	void act_removeroad();
+	void act_buildwaterway();
+	void act_abort_buildwaterway();
+	void act_abort_buildwaterway_and_start_buildroad();
+	void act_removewaterway();
 	void act_build(Widelands::DescriptionIndex);
 	void building_icon_mouse_out(Widelands::DescriptionIndex);
 	void building_icon_mouse_in(Widelands::DescriptionIndex);
@@ -212,6 +219,8 @@ private:
 };
 
 static const char* const pic_tab_buildroad = "images/wui/fieldaction/menu_tab_buildroad.png";
+static const char* const pic_tab_buildwaterway =
+   "images/wui/fieldaction/menu_tab_buildwaterway.png";
 static const char* const pic_tab_watch = "images/wui/fieldaction/menu_tab_watch.png";
 static const char* const pic_tab_buildhouse[] = {"images/wui/fieldaction/menu_tab_buildsmall.png",
                                                  "images/wui/fieldaction/menu_tab_buildmedium.png",
@@ -226,6 +235,8 @@ static const char* const pic_tab_buildmine = "images/wui/fieldaction/menu_tab_bu
 
 static const char* const pic_buildroad = "images/wui/fieldaction/menu_build_way.png";
 static const char* const pic_remroad = "images/wui/fieldaction/menu_rem_way.png";
+static const char* const pic_buildwaterway = "images/wui/fieldaction/menu_build_water.png";
+static const char* const pic_remwaterway = "images/wui/fieldaction/menu_rem_water.png";
 static const char* const pic_buildflag = "images/wui/fieldaction/menu_build_flag.png";
 static const char* const pic_ripflag = "images/wui/fieldaction/menu_rip_flag.png";
 static const char* const pic_watchfield = "images/wui/fieldaction/menu_watch_field.png";
@@ -307,7 +318,7 @@ void FieldActionWindow::init() {
 	move_out_of_the_way();
 
 	// Now force the mouse onto the first button
-	set_mouse_pos(Vector2i(17 + kBuildGridCellSize * best_tab_, fastclick_ ? 51 : 17));
+	set_mouse_pos(Vector2i(17 + 34 * best_tab_, fastclick_ ? 56 : 17));
 
 	// Will only do something if we explicitly set another fast click panel
 	// than the first button
@@ -340,6 +351,11 @@ void FieldActionWindow::add_buttons_auto() {
 			if (can_act) {
 				add_button(buildbox, "build_road", pic_buildroad, &FieldActionWindow::act_buildroad,
 				           _("Build road"));
+				if (map_.get_waterway_max_length() >= 2 &&
+				    Widelands::CheckStepFerry(igbase->egbase()).reachable_dest(map_, node_)) {
+					add_button(buildbox, "build_waterway", pic_buildwaterway,
+					           &FieldActionWindow::act_buildwaterway, _("Build waterway"));
+				}
 
 				Building* const building = flag->get_building();
 
@@ -360,24 +376,32 @@ void FieldActionWindow::add_buttons_auto() {
 			const int32_t nodecaps = map_.get_max_nodecaps(ibase().egbase(), node_);
 
 			// Add house building
-			const int32_t caps = buildcaps | nodecaps;
-			if (player_ &&
-			    ((caps & Widelands::BUILDCAPS_SIZEMASK) || (caps & Widelands::BUILDCAPS_MINE))) {
+			if (player_ && ((buildcaps & Widelands::BUILDCAPS_SIZEMASK) ||
+			                (buildcaps & Widelands::BUILDCAPS_MINE))) {
 				add_buttons_build(buildcaps, nodecaps);
 			}
 
 			// Add build actions
-			if ((fastclick_ = buildcaps & Widelands::BUILDCAPS_FLAG))
+			if (buildcaps & Widelands::BUILDCAPS_FLAG)
 				add_button(buildbox, "build_flag", pic_buildflag, &FieldActionWindow::act_buildflag,
 				           _("Place a flag"));
 
 			if (can_act && dynamic_cast<const Widelands::Road*>(imm))
 				add_button(buildbox, "destroy_road", pic_remroad, &FieldActionWindow::act_removeroad,
 				           _("Destroy a road"));
+
+			if (can_act && dynamic_cast<const Widelands::Waterway*>(imm))
+				add_button(buildbox, "destroy_waterway", pic_remwaterway,
+				           &FieldActionWindow::act_removewaterway, _("Destroy a waterway"));
 		}
-	} else if (player_ && 1 < player_->vision(Widelands::Map::get_index(
-	                             node_, ibase().egbase().map().get_width())))
-		add_buttons_attack();
+	} else if (player_) {
+		if (upcast(Building, building, map_.get_immovable(node_))) {
+			if (1 < player_->vision(Widelands::Map::get_index(
+			           building->get_position(), ibase().egbase().map().get_width()))) {
+				add_buttons_attack();
+			}
+		}
+	}
 
 	//  Watch actions, only when in game (no use in editor).
 	if (dynamic_cast<const Game*>(&ibase().egbase())) {
@@ -407,7 +431,7 @@ void FieldActionWindow::add_buttons_attack() {
 				a_box.add(attack_box_);
 
 				UI::Button* attack_button = attack_box_->get_attack_button();
-				attack_button->sigclicked.connect(boost::bind(&FieldActionWindow::act_attack, this));
+				attack_button->sigclicked.connect([this]() { act_attack(); });
 				set_fastclick_panel(attack_button);
 			}
 		}
@@ -455,7 +479,9 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 			    !player_->is_building_type_allowed(building_index)) {
 				continue;
 			}
-			if (building_descr->needs_seafaring() && !ibase().egbase().map().allows_seafaring()) {
+			if (!building_descr->is_useful_on_map(
+			       ibase().egbase().map().allows_seafaring(),
+			       ibase().egbase().map().get_waterway_max_length() >= 2)) {
 				continue;
 			}
 		} else if (!building_descr->is_buildable() && !building_descr->is_enhanced()) {
@@ -463,8 +489,9 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 		}
 
 		if (building_descr->get_built_over_immovable() != Widelands::INVALID_INDEX &&
-		    !(node_.field->get_immovable() && node_.field->get_immovable()->has_attribute(
-		                                         building_descr->get_built_over_immovable()))) {
+		    !(node_.field->get_immovable() &&
+		      node_.field->get_immovable()->has_attribute(
+		         building_descr->get_built_over_immovable()))) {
 			continue;
 		}
 		// Figure out if we can build it here, and in which tab it belongs
@@ -506,12 +533,11 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 		// Allocate the tab's grid if necessary
 		if (!*ppgrid) {
 			*ppgrid = new BuildGrid(&tabpanel_, player_, 0, 0, 5);
-			(*ppgrid)->buildclicked.connect(boost::bind(&FieldActionWindow::act_build, this, _1));
+			(*ppgrid)->buildclicked.connect([this](Widelands::DescriptionIndex i) { act_build(i); });
 			(*ppgrid)->buildmouseout.connect(
-			   boost::bind(&FieldActionWindow::building_icon_mouse_out, this, _1));
-
+			   [this](Widelands::DescriptionIndex i) { building_icon_mouse_out(i); });
 			(*ppgrid)->buildmousein.connect(
-			   boost::bind(&FieldActionWindow::building_icon_mouse_in, this, _1));
+			   [this](Widelands::DescriptionIndex i) { building_icon_mouse_in(i); });
 		}
 
 		// Add it to the grid
@@ -544,9 +570,35 @@ void FieldActionWindow::add_buttons_road(bool flag) {
 
 	add_button(&buildbox, "cancel_road", pic_abort, &FieldActionWindow::act_abort_buildroad,
 	           _("Cancel road"));
+	const Widelands::Map& map = ibase().egbase().map();
+	if (map.get_waterway_max_length() >= 2 &&
+	    Widelands::CheckStepFerry(ibase().egbase())
+	       .reachable_dest(map, map.get_fcoords(ibase().get_build_road_start()))) {
+		add_button(&buildbox, "cancel_road_build_waterway", pic_buildwaterway,
+		           &FieldActionWindow::act_abort_buildroad_and_start_buildwaterway,
+		           _("Cancel road and start building waterway"));
+	}
 
 	// Add the box as tab
 	add_tab("roads", pic_tab_buildroad, &buildbox, _("Build roads"));
+}
+
+void FieldActionWindow::add_buttons_waterway(bool flag) {
+	UI::Box& buildbox = *new UI::Box(&tabpanel_, 0, 0, UI::Box::Horizontal);
+
+	if (flag) {
+		add_button(&buildbox, "build_flag", pic_buildflag, &FieldActionWindow::act_buildflag,
+		           _("Build flag"));
+	}
+
+	add_button(&buildbox, "cancel_waterway", pic_abort, &FieldActionWindow::act_abort_buildwaterway,
+	           _("Cancel waterway"));
+	add_button(&buildbox, "cancel_waterway_build_road", pic_buildroad,
+	           &FieldActionWindow::act_abort_buildwaterway_and_start_buildroad,
+	           _("Cancel waterway and start building road"));
+
+	// Add the box as tab
+	add_tab("waterways", pic_tab_buildwaterway, &buildbox, _("Build waterways"));
 }
 
 /*
@@ -569,7 +621,7 @@ UI::Button& FieldActionWindow::add_button(UI::Box* const box,
                                           bool repeating) {
 	UI::Button& button = *new UI::Button(box, name, 0, 0, 34, 34, UI::ButtonStyle::kWuiPrimary,
 	                                     g_gr->images().get(picname), tooltip_text);
-	button.sigclicked.connect(boost::bind(fn, this));
+	button.sigclicked.connect([this, fn]() { (this->*fn)(); });
 	button.set_repeating(repeating);
 	box->add(&button);
 
@@ -619,9 +671,9 @@ void FieldActionWindow::act_buildflag() {
 	else
 		player_->build_flag(node_);
 
-	if (ibase().is_building_road())
+	if (ibase().in_road_building_mode()) {
 		ibase().finish_build_road();
-	else if (game) {
+	} else if (game) {
 		upcast(InteractivePlayer, iaplayer, &ibase());
 		iaplayer->set_flag_to_connect(node_);
 	}
@@ -631,18 +683,31 @@ void FieldActionWindow::act_buildflag() {
 
 void FieldActionWindow::act_configure_economy() {
 	if (upcast(const Widelands::Flag, flag, node_.field->get_immovable())) {
-		Widelands::Economy* economy = flag->get_economy();
-		if (economy->get_options_window()) {
+		Widelands::Economy* ware_economy = flag->get_economy(Widelands::wwWARE);
+		Widelands::Economy* worker_economy = flag->get_economy(Widelands::wwWORKER);
+		bool window_open = false;
+		if (ware_economy->get_options_window()) {
+			window_open = true;
 			EconomyOptionsWindow& window =
-			   *static_cast<EconomyOptionsWindow*>(economy->get_options_window());
+			   *static_cast<EconomyOptionsWindow*>(ware_economy->get_options_window());
 			if (window.is_minimal()) {
 				window.restore();
 			}
 			window.move_to_top();
-		} else {
-			bool can_act =
-			   dynamic_cast<InteractiveGameBase&>(ibase()).can_act(economy->owner().player_number());
-			new EconomyOptionsWindow(dynamic_cast<UI::Panel*>(&ibase()), economy, can_act);
+		}
+		if (worker_economy->get_options_window()) {
+			window_open = true;
+			EconomyOptionsWindow& window =
+			   *static_cast<EconomyOptionsWindow*>(worker_economy->get_options_window());
+			if (window.is_minimal()) {
+				window.restore();
+			}
+			window.move_to_top();
+		}
+		if (!window_open) {
+			new EconomyOptionsWindow(dynamic_cast<UI::Panel*>(&ibase()), ware_economy, worker_economy,
+			                         dynamic_cast<InteractiveGameBase&>(ibase()).can_act(
+			                            ware_economy->owner().player_number()));
 		}
 	}
 	die();
@@ -681,9 +746,17 @@ Start road building.
 ===============
 */
 void FieldActionWindow::act_buildroad() {
-	// If we area already building a road just ignore this
-	if (!ibase().is_building_road()) {
-		ibase().start_build_road(node_, player_->player_number());
+	// If we are already building a road just ignore this
+	if (!ibase().in_road_building_mode()) {
+		ibase().start_build_road(node_, player_->player_number(), RoadBuildingType::kRoad);
+		reset_mouse_and_die();
+	}
+}
+
+void FieldActionWindow::act_buildwaterway() {
+	// If we are already building a waterway just ignore this
+	if (!ibase().in_road_building_mode(RoadBuildingType::kWaterway)) {
+		ibase().start_build_road(node_, player_->player_number(), RoadBuildingType::kWaterway);
 		reset_mouse_and_die();
 	}
 }
@@ -694,10 +767,42 @@ Abort building a road.
 ===============
 */
 void FieldActionWindow::act_abort_buildroad() {
-	if (!ibase().is_building_road())
+	if (!ibase().in_road_building_mode(RoadBuildingType::kRoad)) {
 		return;
+	}
 
 	ibase().abort_build_road();
+	reset_mouse_and_die();
+}
+
+void FieldActionWindow::act_abort_buildwaterway() {
+	if (!ibase().in_road_building_mode(RoadBuildingType::kWaterway)) {
+		return;
+	}
+
+	ibase().abort_build_road();
+	reset_mouse_and_die();
+}
+
+void FieldActionWindow::act_abort_buildroad_and_start_buildwaterway() {
+	if (!ibase().in_road_building_mode(RoadBuildingType::kRoad) ||
+	    ibase().in_road_building_mode(RoadBuildingType::kWaterway)) {
+		return;
+	}
+	const Widelands::Coords c = ibase().get_build_road_start();
+	ibase().abort_build_road();
+	ibase().start_build_road(c, player_->player_number(), RoadBuildingType::kWaterway);
+	reset_mouse_and_die();
+}
+
+void FieldActionWindow::act_abort_buildwaterway_and_start_buildroad() {
+	if (ibase().in_road_building_mode(RoadBuildingType::kRoad) ||
+	    !ibase().in_road_building_mode(RoadBuildingType::kWaterway)) {
+		return;
+	}
+	const Widelands::Coords c = ibase().get_build_road_start();
+	ibase().abort_build_road();
+	ibase().start_build_road(c, player_->player_number(), RoadBuildingType::kRoad);
 	reset_mouse_and_die();
 }
 
@@ -711,6 +816,15 @@ void FieldActionWindow::act_removeroad() {
 	if (upcast(Widelands::Road, road, egbase.map().get_immovable(node_))) {
 		upcast(Game, game, &ibase().egbase());
 		game->send_player_bulldoze(*road, SDL_GetModState() & KMOD_CTRL);
+	}
+	reset_mouse_and_die();
+}
+
+void FieldActionWindow::act_removewaterway() {
+	Widelands::EditorGameBase& egbase = ibase().egbase();
+	if (upcast(Widelands::Waterway, waterway, egbase.map().get_immovable(node_))) {
+		upcast(Game, game, &ibase().egbase());
+		game->send_player_bulldoze(*waterway, SDL_GetModState() & KMOD_CTRL);
 	}
 	reset_mouse_and_die();
 }
@@ -782,14 +896,15 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 					if (imm_type == Widelands::MapObjectType::CONSTRUCTIONSITE) {
 						upcast(Widelands::ConstructionSite, cs, imm);
 						d = cs->get_info().becomes;
+						assert(d);
 						if ((descr.type() == Widelands::MapObjectType::PRODUCTIONSITE &&
 						     (d->type() != Widelands::MapObjectType::PRODUCTIONSITE ||
 						      !dynamic_cast<const Widelands::ProductionSiteDescr&>(descr)
 						          .highlight_overlapping_workarea_for(d->name(), &positive))) ||
 						    ((descr.type() == Widelands::MapObjectType::MILITARYSITE ||
 						      descr.type() == Widelands::MapObjectType::WAREHOUSE) &&
-						     imm_type != Widelands::MapObjectType::MILITARYSITE &&
-						     imm_type != Widelands::MapObjectType::WAREHOUSE)) {
+						     d->type() != Widelands::MapObjectType::MILITARYSITE &&
+						     d->type() != Widelands::MapObjectType::WAREHOUSE)) {
 							continue;
 						}
 					} else if (descr.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
@@ -887,51 +1002,70 @@ Bring up a field action window or continue road building.
 void show_field_action(InteractiveBase* const ibase,
                        Widelands::Player* const player,
                        UI::UniqueWindow::Registry* const registry) {
-	if (!ibase->is_building_road()) {
+	if (ibase->in_road_building_mode()) {
+		// we're building a road or waterway right now
+		const Widelands::Map& map = player->egbase().map();
+		const Widelands::FCoords target = map.get_fcoords(ibase->get_sel_pos().node);
+
+		// if user clicked on the same field again, build a flag
+		if (target == ibase->get_build_road_end()) {
+			FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
+			if (ibase->in_road_building_mode(RoadBuildingType::kRoad)) {
+				w.add_buttons_road(target != ibase->get_build_road_start() &&
+				                   (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG));
+			} else {
+				w.add_buttons_waterway(target != ibase->get_build_road_start() &&
+				                       (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG));
+			}
+			w.init();
+			return;
+		}
+
+		// append or take away from the road
+		if (!ibase->append_build_road(target) ||
+		    (ibase->in_road_building_mode(RoadBuildingType::kWaterway) &&
+		     target != ibase->get_build_road_end())) {
+			FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
+			if (ibase->in_road_building_mode(RoadBuildingType::kRoad)) {
+				w.add_buttons_road(false);
+			} else {
+				w.add_buttons_waterway(false);
+			}
+			w.init();
+			return;
+		}
+
+		// did he click on a flag or a road where a flag can be built?
+		if (upcast(const Widelands::PlayerImmovable, i, map.get_immovable(target))) {
+			bool finish = false;
+			if (dynamic_cast<const Widelands::Flag*>(i)) {
+				finish = true;
+			} else if (dynamic_cast<const Widelands::RoadBase*>(i)) {
+				if (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG) {
+					upcast(Game, game, &player->egbase());
+					game->send_player_build_flag(player->player_number(), target);
+					finish = true;
+				}
+			}
+			if (finish) {
+				ibase->finish_build_road();
+				// We are done, so we close the window.
+				registry->destroy();
+				return;
+			} else {
+				FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
+				if (ibase->in_road_building_mode(RoadBuildingType::kRoad)) {
+					w.add_buttons_road(false);
+				} else {
+					w.add_buttons_waterway(false);
+				}
+				w.init();
+				return;
+			}
+		}
+	} else {
 		FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
 		w.add_buttons_auto();
 		return w.init();
-	}
-
-	const Widelands::Map& map = player->egbase().map();
-
-	// we're building a road right now
-	const Widelands::FCoords target = map.get_fcoords(ibase->get_sel_pos().node);
-
-	// if user clicked on the same field again, build a flag
-	if (target == ibase->get_build_road_end()) {
-		FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
-		w.add_buttons_road(target != ibase->get_build_road_start() &&
-		                   (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG));
-		w.init();
-		return;
-	}
-
-	// append or take away from the road
-	if (!ibase->append_build_road(target)) {
-		FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
-		w.add_buttons_road(false);
-		w.init();
-		return;
-	}
-
-	// did he click on a flag or a road where a flag can be built?
-	if (upcast(const Widelands::PlayerImmovable, i, map.get_immovable(target))) {
-		bool finish = false;
-		if (dynamic_cast<const Widelands::Flag*>(i)) {
-			finish = true;
-		} else if (dynamic_cast<const Widelands::Road*>(i)) {
-			if (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG) {
-				upcast(Game, game, &player->egbase());
-				game->send_player_build_flag(player->player_number(), target);
-				finish = true;
-			}
-		}
-		if (finish) {
-			ibase->finish_build_road();
-			// We are done, so we close the window.
-			registry->destroy();
-			return;
-		}
 	}
 }

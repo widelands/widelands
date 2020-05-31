@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,17 +21,16 @@
 #define WL_WUI_CONSTRUCTIONSITEWINDOW_H
 
 #include <memory>
-#include <vector>
 
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/progressbar.h"
 #include "ui_basic/radiobutton.h"
-#include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "wui/buildingwindow.h"
 #include "wui/inputqueuedisplay.h"
+#include "wui/waresdisplay.h"
 
 /**
  * Status window for construction sites.
@@ -55,6 +54,7 @@ private:
 		                 bool can_act,
 		                 Widelands::ConstructionSite& cs,
 		                 Widelands::WareWorker type);
+		~FakeWaresDisplay() override;
 
 	protected:
 		void draw_ware(RenderTarget& dst, Widelands::DescriptionIndex ware) override;
@@ -62,13 +62,13 @@ private:
 	private:
 		Widelands::WarehouseSettings& settings_;
 		const Widelands::TribeDescr& tribe_;
+		std::unique_ptr<Widelands::WareList> warelist_;
 	};
 
 	Widelands::OPtr<Widelands::ConstructionSite> construction_site_;
 	UI::ProgressBar* progress_;
 
 	// BuildingSettings-related UI elements
-	UI::Button* cs_enhance_;
 	UI::Checkbox* cs_launch_expedition_;
 	std::unique_ptr<UI::Radiogroup> cs_prefer_heroes_rookies_;
 	UI::Button* cs_soldier_capacity_decrease_;

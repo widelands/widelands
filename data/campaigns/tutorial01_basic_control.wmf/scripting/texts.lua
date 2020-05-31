@@ -2,8 +2,6 @@
 --                      Texts for the tutorial mission
 -- =======================================================================
 
-include "scripting/richtext_scenarios.lua"
-
 -- ================
 -- General messages
 -- ================
@@ -16,7 +14,7 @@ scold_player = {
       p(_[[I am sorry, but will I have to tear this down again. We might need the space here later on. If I am too slow for you, you might want to play a real game and just find everything out for yourself. Otherwise, please bear with me, I am not the youngest and quickest anymore.]]
       )
    ),
-   h = 300,
+   h = 150,
    show_instantly = true
 }
 
@@ -200,13 +198,12 @@ obj_lumberjack_progress = {
    title=_"Let’s see the progress",
    number = 1,
    body = objective_text(_"Let’s see the progress",
-      li(_[[Click on the construction site to have a look at it, then close it again when you have seen enough.]]) ..
-      li_arrow(_[[To close the construction site’s window, simply right-click on it.]])
+      li(_[[Click on the construction site to have a look at it.]])
    ),
    h = 300,
    w = 350
 }
-lumberjack_message_07 = {
+lumberjack_message_07a = {
    title = _"The Construction Site",
    position = "topright",
    body = (
@@ -217,13 +214,27 @@ lumberjack_message_07 = {
    w = 350
 }
 
+lumberjack_message_07b = {
+   title = _"The Construction Site",
+   position = "topright",
+   body = (
+      li_image("images/wui/buildings/toggle_workarea.png",
+         _[[This button toggles showing the building’s work area. When the lumberjack leaves the building to look for trees to fell, he will only look for them within this area. Let me show you how perfect this spot is.]]) ..
+      p(_[[Close the construction site window when you have seen enough.]]) ..
+      li(close_story_window_instructions)
+   ),
+   h = 250,
+   w = 350
+}
+
 lumberjack_message_08 = {
    title = _"Waiting for the Lumberjack to Go Up",
    position = "topright",
    body = (
       p(_[[Well done! Let’s wait till the hut is finished.]]) ..
       li_image("images/wui/menus/gamespeed.png",
-   _[[If you want things to go faster, simply use the Page Up key on your keyboard to increase the game speed. You can use Page Down to make the game slower again.]])
+         _[[If you want things to go faster, simply use the Page Up key on your keyboard to increase the game speed. You can use Page Down to make the game slower again.]]) ..
+         p(_[[Change is rapid with pressed Ctrl and smooth with pressed Shift.]])
    ),
    h = 200,
    w = 350
@@ -415,9 +426,9 @@ talk_about_roadbuilding_02 = {
    title = _"Road Building",
    body = (
       li_image("images/wui/fieldaction/menu_tab_buildroad.png", _[[One more thing: around the field where your road would end, you can see different markers. They have the following meaning:]]) ..
-      li_image("images/wui/overlays/roadb_green.png", _[[The terrain is flat here. Your carriers will be very swift on this terrain.]]) ..
-      li_image("images/wui/overlays/roadb_yellow.png", _[[There is a small slope to climb to reach this field. This means that your workers will be faster walking downhill than they will be walking uphill.]]) ..
-      li_image("images/wui/overlays/roadb_red.png", _[[The connection between the fields is extremely steep. The speed increase in one direction is huge while the slowdown in the other is also substantial.]]) ..
+      li_image("images/wui/overlays/road_building_green.png", _[[The terrain is flat here. Your carriers will be very swift on this terrain.]]) ..
+      li_image("images/wui/overlays/road_building_yellow.png", _[[There is a small slope to climb to reach this field. This means that your workers will be faster walking downhill than they will be walking uphill.]]) ..
+      li_image("images/wui/overlays/road_building_red.png", _[[The connection between the fields is extremely steep. The speed increase in one direction is huge while the slowdown in the other is also substantial.]]) ..
       p(_[[Keep the slopes in mind while placing roads and use them to your advantage. Also, try to keep roads as short as possible and always remember to place as many flags as you can on road segments to share the load better.]])
    ),
    h = 450

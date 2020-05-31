@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,6 @@
 #ifndef WL_WUI_INTERACTIVE_GAMEBASE_H
 #define WL_WUI_INTERACTIVE_GAMEBASE_H
 
-#include <map>
 #include <memory>
 
 #include "io/profile.h"
@@ -38,16 +37,13 @@ class InteractiveGameBase : public InteractiveBase {
 public:
 	InteractiveGameBase(Widelands::Game&,
 	                    Section& global_s,
-	                    PlayerType pt = NONE,
-	                    bool multiplayer = false);
+	                    PlayerType pt,
+	                    bool multiplayer,
+	                    ChatProvider* chat_provider);
 	~InteractiveGameBase() override {
 	}
 	Widelands::Game* get_game() const;
 	Widelands::Game& game() const;
-
-	// Chat messages
-	void set_chat_provider(ChatProvider&);
-	ChatProvider* get_chat_provider();
 
 	virtual bool can_see(Widelands::PlayerNumber) const = 0;
 	virtual bool can_act(Widelands::PlayerNumber) const = 0;
@@ -71,7 +67,8 @@ public:
 
 	void add_wanted_building_window(const Widelands::Coords& coords,
 	                                const Vector2i point,
-	                                bool was_minimal);
+	                                bool was_minimal,
+	                                bool was_pinned);
 	UI::UniqueWindow* show_building_window(const Widelands::Coords& coords,
 	                                       bool avoid_fastclick,
 	                                       bool workarea_preview_wanted);
@@ -87,10 +84,17 @@ public:
 	bool show_game_client_disconnected();
 	void postload() override;
 	void start() override;
+	void toggle_mainmenu();
 
 protected:
 	// For referencing the items in showhidemenu_
-	enum class ShowHideEntry { kBuildingSpaces, kCensus, kStatistics, kWorkareaOverlap };
+	enum class ShowHideEntry {
+		kBuildingSpaces,
+		kCensus,
+		kStatistics,
+		kSoldierLevels,
+		kWorkareaOverlap
+	};
 
 	// Adds the mapviewmenu_ to the toolbar
 	void add_main_menu();
@@ -99,6 +103,9 @@ protected:
 	void rebuild_showhide_menu() override;
 	// Adds the gamespeedmenu_ to the toolbar
 	void add_gamespeed_menu();
+
+	// Adds a chat toolbar button and registers the chat console window
+	void add_chat_ui();
 
 	bool handle_key(bool down, SDL_Keysym code) override;
 
@@ -119,6 +126,7 @@ protected:
 	} menu_windows_;
 
 	ChatProvider* chat_provider_;
+	UI::UniqueWindow::Registry chat_;
 	bool multiplayer_;
 	PlayerType playertype_;
 
@@ -153,20 +161,27 @@ private:
 	void rebuild_gamespeed_menu();
 
 	// Increases the gamespeed
-	void increase_gamespeed();
+	void increase_gamespeed(uint16_t speed);
 	// Decreases the gamespeed
-	void decrease_gamespeed();
+	void decrease_gamespeed(uint16_t speed);
 	// Pauses / Unpauses the game and calls rebuild_gamespeed_menu
 	void toggle_game_paused();
+	// Resets the speed to 1x
+	void reset_gamespeed();
 
 	struct WantedBuildingWindow {
 		explicit WantedBuildingWindow(const Vector2i& pos,
 		                              bool was_minimized,
+		                              bool was_pinned,
 		                              bool was_showing_workarea)
-		   : window_position(pos), minimize(was_minimized), show_workarea(was_showing_workarea) {
+		   : window_position(pos),
+		     minimize(was_minimized),
+		     pin(was_pinned),
+		     show_workarea(was_showing_workarea) {
 		}
 		const Vector2i window_position;
 		const bool minimize;
+		const bool pin;
 		const bool show_workarea;
 	};
 

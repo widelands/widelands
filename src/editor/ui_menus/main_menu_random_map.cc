@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,15 +19,11 @@
 
 #include "editor/ui_menus/main_menu_random_map.h"
 
-#include <cstring>
 #include <sstream>
-#include <string>
-#include <vector>
-
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/random.h"
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/map_generator.h"
@@ -36,7 +32,6 @@
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/map_objects/world/world.h"
-#include "random/random.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "wlapplication_options.h"
@@ -217,8 +212,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent,
 	box_.add_space(margin_);
 	box_height += margin_;
 
-	players_.changed.connect(
-	   boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::kPlayers));
+	players_.changed.connect([this]() { button_clicked(ButtonId::kPlayers); });
 
 	// ---------- Worlds ----------
 
@@ -227,8 +221,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent,
 		world_box_.add_space(resources_label_.get_w() - world_label_.get_w() - margin_);
 	}
 
-	world_.sigclicked.connect(
-	   boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::kWorld));
+	world_.sigclicked.connect([this]() { button_clicked(ButtonId::kWorld); });
 	world_box_.add(&world_);
 	box_.add(&world_box_);
 	box_height += margin_ + world_box_.get_h();
@@ -242,8 +235,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent,
 		resources_box_.add_space(world_label_.get_w() - resources_label_.get_w() - margin_);
 	}
 
-	resources_.sigclicked.connect(
-	   boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::kResources));
+	resources_.sigclicked.connect([this]() { button_clicked(ButtonId::kResources); });
 	resources_box_.add(&resources_);
 	box_.add(&resources_box_);
 	box_height += margin_ + resources_box_.get_h();
@@ -251,20 +243,16 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent,
 	box_height += margin_;
 
 	// ---------- Water -----------
-	water_.get_buttons()[0]->sigclicked.connect(
-	   boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::kWater));
-	water_.get_buttons()[1]->sigclicked.connect(
-	   boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::kWater));
+	water_.get_buttons()[0]->sigclicked.connect([this]() { button_clicked(ButtonId::kWater); });
+	water_.get_buttons()[1]->sigclicked.connect([this]() { button_clicked(ButtonId::kWater); });
 
 	box_.add(&water_);
 	box_height += margin_ + water_.get_h();
 
 	// ---------- Land -----------
 
-	land_.get_buttons()[0]->sigclicked.connect(
-	   boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::kLand));
-	land_.get_buttons()[1]->sigclicked.connect(
-	   boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::kLand));
+	land_.get_buttons()[0]->sigclicked.connect([this]() { button_clicked(ButtonId::kLand); });
+	land_.get_buttons()[1]->sigclicked.connect([this]() { button_clicked(ButtonId::kLand); });
 
 	box_.add(&land_);
 	box_height += margin_ + land_.get_h();
@@ -272,9 +260,9 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent,
 	// ---------- Wasteland -----------
 
 	wasteland_.get_buttons()[0]->sigclicked.connect(
-	   boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::kWasteland));
+	   [this]() { button_clicked(ButtonId::kWasteland); });
 	wasteland_.get_buttons()[1]->sigclicked.connect(
-	   boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::kWasteland));
+	   [this]() { button_clicked(ButtonId::kWasteland); });
 
 	box_.add(&wasteland_);
 	box_height += margin_ + wasteland_.get_h();
@@ -303,14 +291,13 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent,
 	box_.add_space(margin_);
 	box_height += margin_;
 
-	island_mode_.changed.connect(
-	   boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::kIslandMode));
+	island_mode_.changed.connect([this]() { button_clicked(ButtonId::kIslandMode); });
 
 	// ---------- Random map number edit ----------
 
 	map_number_box_.add(&map_number_label_);
 
-	map_number_edit_.changed.connect(boost::bind(&MainMenuNewRandomMap::nr_edit_box_changed, this));
+	map_number_edit_.changed.connect([this]() { nr_edit_box_changed(); });
 	RNG rng;
 	rng.seed(clock());
 	rng.rand();
@@ -328,7 +315,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent,
 	map_id_box_.add(&map_id_label_);
 
 	map_id_edit_.set_text("abcd-efgh-ijkl-mnop");
-	map_id_edit_.changed.connect(boost::bind(&MainMenuNewRandomMap::id_edit_box_changed, this));
+	map_id_edit_.changed.connect([this]() { id_edit_box_changed(); });
 	map_id_box_.add(&map_id_edit_);
 	box_.add(&map_id_box_);
 	box_height += margin_ + map_id_edit_.get_h();
@@ -336,8 +323,8 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent,
 	box_height += margin_;
 
 	// ---------- "Generate Map" button ----------
-	cancel_button_.sigclicked.connect(boost::bind(&MainMenuNewRandomMap::clicked_cancel, this));
-	ok_button_.sigclicked.connect(boost::bind(&MainMenuNewRandomMap::clicked_create_map, this));
+	cancel_button_.sigclicked.connect([this]() { clicked_cancel(); });
+	ok_button_.sigclicked.connect([this]() { clicked_create_map(); });
 	if (UI::g_fh->fontset()->is_rtl()) {
 		button_box_.add(&ok_button_);
 		button_box_.add(&cancel_button_);
@@ -420,10 +407,10 @@ void MainMenuNewRandomMap::normalize_landmass(ButtonId clicked_button) {
 
 	// Prefer changing mountainsval to keep consistency with old behaviour
 	while (sum_without_mountainsval + mountainsval_ > 100) {
-		mountainsval_ -= 1;
+		--mountainsval_;
 	}
 	while (sum_without_mountainsval + mountainsval_ < 100) {
-		mountainsval_ += 1;
+		++mountainsval_;
 	}
 
 	// Compensate if mountainsval got above 100% / below 0%
@@ -469,8 +456,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	EditorInteractive& eia = dynamic_cast<EditorInteractive&>(*get_parent());
 	Widelands::EditorGameBase& egbase = eia.egbase();
 	Widelands::Map* map = egbase.mutable_map();
-	UI::ProgressWindow loader_ui;
-
+	egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
 	eia.cleanup_for_load();
 
 	UniqueRandomMapInfo map_info;
@@ -488,7 +474,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	map->create_empty_map(egbase, map_info.w, map_info.h, 0, _("No Name"),
 	                      get_config_string("realname", pgettext("author_name", "Unknown")),
 	                      sstrm.str().c_str());
-	loader_ui.step(_("Generating random map…"));
+	egbase.step_loader_ui(_("Generating random map…"));
 
 	log("============== Generating Map ==============\n");
 	log("ID:            %s\n", map_id_edit_.text().c_str());
@@ -516,8 +502,8 @@ void MainMenuNewRandomMap::clicked_create_map() {
 
 	gen.create_random_map();
 
-	egbase.postload();
-	egbase.load_graphics(loader_ui);
+	egbase.create_tempfile_and_save_mapdata(FileSystem::ZIP);
+	egbase.load_graphics();
 
 	map->recalc_whole_map(egbase);
 	eia.map_changed(EditorInteractive::MapWas::kReplaced);
@@ -536,6 +522,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	     "or be stuck on an island or on top of a mountain."),
 	   UI::WLMessageBox::MBoxType::kOk);
 	mbox.run<UI::Panel::Returncodes>();
+	egbase.remove_loader_ui();
 	die();
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,22 +21,20 @@
 
 #include <algorithm>
 #include <memory>
-#include <thread>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 
 #include "base/i18n.h"
 #include "base/log.h"
-#include "base/macros.h"
+#include "base/random.h"
 #include "base/warning.h"
+#include "build_info.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "network/constants.h"
 #include "network/crypto.h"
 #include "network/internet_gaming_messages.h"
-#include "random/random.h"
+#include "network/internet_gaming_protocol.h"
 
 /// Private constructor by purpose: NEVER call directly. Always call InternetGaming::ref(), this
 /// will ensure
@@ -95,8 +93,9 @@ static InternetGaming* ig = nullptr;
 
 /// \returns the one and only InternetGaming instance.
 InternetGaming& InternetGaming::ref() {
-	if (!ig)
+	if (!ig) {
 		ig = new InternetGaming();
+	}
 	return *ig;
 }
 
@@ -179,8 +178,9 @@ bool InternetGaming::do_login(bool should_relogin) {
 				}
 
 				return true;
-			} else if (error())
+			} else if (error()) {
 				return false;
+			}
 		}
 	}
 	log("InternetGaming: No answer from metaserver!\n");
@@ -200,9 +200,9 @@ bool InternetGaming::relogin() {
 
 	state_ = LOBBY;
 	// Client is reconnected, so let's try resend the timeouted command.
-	if (waitcmd_ == IGPCMD_GAME_CONNECT)
+	if (waitcmd_ == IGPCMD_GAME_CONNECT) {
 		join_game(gamename_);
-	else if (waitcmd_ == IGPCMD_GAME_OPEN) {
+	} else if (waitcmd_ == IGPCMD_GAME_OPEN) {
 		state_ = IN_GAME;
 		open_game();
 	} else if (waitcmd_ == IGPCMD_GAME_START) {
@@ -313,8 +313,9 @@ void InternetGaming::handle_failed_read() {
 
 /// handles all communication between the metaserver and the client
 void InternetGaming::handle_metaserver_communication(bool relogin_on_error) {
-	if (error())
+	if (error()) {
 		return;
+	}
 	try {
 		while (net != nullptr) {
 			// Check if the connection is still open
@@ -426,11 +427,11 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			format_and_add_chat("", "", true, _("Welcome to the Widelands Metaserver!"));
 			const std::string assigned_name = packet.string();
 			if (clientname_ != assigned_name) {
-				format_and_add_chat("", "", true,
-				                    (boost::format(_("You have been logged in as '%s' since your "
-				                                     "requested name is already in use or reserved.")) %
-				                     assigned_name)
-				                       .str());
+				format_and_add_chat(
+				   "", "", true, (boost::format(_("You have been logged in as '%s' since your "
+				                                  "requested name is already in use or reserved.")) %
+				                  assigned_name)
+				                    .str());
 			}
 			clientname_ = assigned_name;
 			clientrights_ = packet.string();
@@ -441,9 +442,9 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 				authenticator_ = crypto::sha1(clientname_ + authenticator_);
 			}
 			format_and_add_chat("", "", true, _("Our forums can be found at:"));
-			format_and_add_chat("", "", true, "https://wl.widelands.org/forum/");
+			format_and_add_chat("", "", true, "https://www.widelands.org/forum/");
 			format_and_add_chat("", "", true, _("For reporting bugs, visit:"));
-			format_and_add_chat("", "", true, "https://wl.widelands.org/wiki/ReportingBugs/");
+			format_and_add_chat("", "", true, "https://www.widelands.org/wiki/ReportingBugs/");
 			state_ = LOBBY;
 			// Append UTC time to login message to ease linking between client output and
 			// metaserver logs. The string returned by asctime is terminated by \n
@@ -514,9 +515,10 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			std::string message = packet.string();
 			std::string type = packet.string();
 
-			if (type != "public" && type != "private" && type != "system")
+			if (type != "public" && type != "private" && type != "system") {
 				throw WLWarning(
 				   _("Invalid message type"), _("Invalid chat message type \"%s\"."), type.c_str());
+			}
 
 			bool personal = type == "private";
 			bool system = type == "system";
@@ -614,7 +616,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			std::sort(clientlist_.begin(), clientlist_.end(),
 			          [](const InternetClient& left, const InternetClient& right) {
 				          return (left.name < right.name);
-			          });
+				       });
 
 			for (InternetClient& client : old) {
 				if (client.name.size()) {
@@ -762,8 +764,9 @@ const std::string InternetGaming::relay_password() {
 
 /// called by a client to join the game \arg gamename
 void InternetGaming::join_game(const std::string& gamename) {
-	if (!logged_in())
+	if (!logged_in()) {
 		return;
+	}
 
 	// Reset the game ips, we should receive new ones shortly
 	gameips_ = std::make_pair(NetAddress(), NetAddress());
@@ -783,8 +786,9 @@ void InternetGaming::join_game(const std::string& gamename) {
 
 /// called by a client to open a new game with name gamename_
 void InternetGaming::open_game() {
-	if (!logged_in())
+	if (!logged_in()) {
 		return;
+	}
 
 	// Reset the game ips, we should receive new ones shortly
 	gameips_ = std::make_pair(NetAddress(), NetAddress());
@@ -802,8 +806,9 @@ void InternetGaming::open_game() {
 
 /// called by a client that is host of a game to inform the metaserver, that the game started
 void InternetGaming::set_game_playing() {
-	if (!logged_in())
+	if (!logged_in()) {
 		return;
+	}
 
 	SendPacket s;
 	s.string(IGPCMD_GAME_START);
@@ -819,8 +824,9 @@ void InternetGaming::set_game_playing() {
 /// If this is called by the hosting client, this further informs the metaserver, that the game was
 /// closed.
 void InternetGaming::set_game_done() {
-	if (!logged_in())
+	if (!logged_in()) {
 		return;
+	}
 
 	SendPacket s;
 	s.string(IGPCMD_GAME_DISCONNECT);
@@ -911,15 +917,16 @@ void InternetGaming::send(const std::string& msg) {
 
 		if (msg == "/help") {
 			format_and_add_chat("", "", true, _("Supported admin commands:"));
-			format_and_add_chat("", "", true, _("/motd <msg> sets a permanent greeting message"));
-			format_and_add_chat("", "", true, _("/announce <msg> send a one time system message"));
-			format_and_add_chat(
-			   "", "", true, _("/warn <user> <msg> send a private system message to the given user"));
+			format_and_add_chat("", "", true, _("/motd <msg> - Set a permanent greeting message"));
+			format_and_add_chat("", "", true, _("/announce <msg> - Send a one time system message"));
 			format_and_add_chat(
 			   "", "", true,
-			   _("/kick <user|game> removes the given user or game from the metaserver"));
+			   _("/warn <user> <msg> - Send a private system message to the given user"));
 			format_and_add_chat(
-			   "", "", true, _("/ban <user> bans a user for 24 hours from the metaserver"));
+			   "", "", true,
+			   _("/kick <user|game> - Remove the given user or game from the metaserver"));
+			format_and_add_chat(
+			   "", "", true, _("/ban <user> - Ban a user for 24 hours from the metaserver"));
 			return;
 		}
 
@@ -994,12 +1001,12 @@ void InternetGaming::send(const std::string& msg) {
  * If conversion fails, it throws a \ref warning
  */
 bool InternetGaming::str2bool(std::string str) {
-	if ((str != "true") && (str != "false"))
+	if ((str != "true") && (str != "false")) {
 		throw WLWarning(_("Conversion error"),
 		                /** TRANSLATORS: Geeky message from the metaserver */
 		                /** TRANSLATORS: This message is shown if %s isn't "true" or "false" */
 		                _("Unable to determine truth value for \"%s\""), str.c_str());
-
+	}
 	return str == "true";
 }
 

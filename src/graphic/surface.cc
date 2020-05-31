@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,13 +19,6 @@
 
 #include "graphic/surface.h"
 
-#include <cassert>
-#include <cmath>
-#include <cstdlib>
-
-#include <SDL.h>
-
-#include "base/macros.h"
 #include "base/rect.h"
 #include "base/vector.h"
 #include "graphic/gl/coordinate_conversion.h"

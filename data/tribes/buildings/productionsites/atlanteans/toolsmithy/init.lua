@@ -32,7 +32,6 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      prohibited_till = 440
    },
 
    working_positions = {
@@ -76,7 +75,6 @@ tribes:new_productionsite_type {
             "call=produce_buckets",
             "call=produce_milking_tongs",
             "call=produce_fishing_net",
-            "return=no_stats"
          }
       },
       produce_bread_paddle = {

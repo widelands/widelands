@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,9 +19,7 @@
 
 #include "wui/playerdescrgroup.h"
 
-#include <string>
-
-#include <boost/format.hpp>
+#include <memory>
 
 #include "ai/computer_player.h"
 #include "base/i18n.h"
@@ -29,8 +27,10 @@
 #include "logic/game_settings.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
+#include "map_io/map_loader.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
 
 struct PlayerDescriptionGroupImpl {
@@ -42,7 +42,7 @@ struct PlayerDescriptionGroupImpl {
 	UI::Button* btnPlayerTeam;
 	UI::Button* btnPlayerType;
 	UI::Button* btnPlayerTribe;
-	UI::Button* btnPlayerInit;
+	UI::Dropdown<uint8_t>* btnPlayerInit;
 };
 
 PlayerDescriptionGroup::PlayerDescriptionGroup(UI::Panel* const parent,
@@ -63,34 +63,28 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UI::Panel* const parent,
 	int32_t xplayerinit = w * 55 / 125;
 	d->plr_name = new UI::Textarea(this, xplrname, 0, xplayertype - xplrname, h);
 	d->btnEnablePlayer = new UI::Checkbox(this, Vector2i(xplayertype - 23, 0), "");
-	d->btnEnablePlayer->changedto.connect(
-	   boost::bind(&PlayerDescriptionGroup::enable_player, this, _1));
+	d->btnEnablePlayer->changedto.connect([this](bool b) { enable_player(b); });
 	d->btnPlayerType =
 	   new UI::Button(this, "player_type", xplayertype, 0, xplayertribe - xplayertype - 2, h / 2,
 	                  UI::ButtonStyle::kFsMenuSecondary, "");
-	d->btnPlayerType->sigclicked.connect(
-	   boost::bind(&PlayerDescriptionGroup::toggle_playertype, boost::ref(*this)));
+	d->btnPlayerType->sigclicked.connect([this]() { toggle_playertype(); });
 	d->btnPlayerTeam =
 	   new UI::Button(this, "player_team", xplayerteam, h / 2, xplayerinit - xplayerteam - 2, h / 2,
 	                  UI::ButtonStyle::kFsMenuSecondary, "");
-	d->btnPlayerTeam->sigclicked.connect(
-	   boost::bind(&PlayerDescriptionGroup::toggle_playerteam, boost::ref(*this)));
+	d->btnPlayerTeam->sigclicked.connect([this]() { toggle_playerteam(); });
 	d->btnPlayerTribe = new UI::Button(this, "player_tribe", xplayertribe, 0, w - xplayertribe,
 	                                   h / 2, UI::ButtonStyle::kFsMenuSecondary, "");
-	d->btnPlayerTribe->sigclicked.connect(
-	   boost::bind(&PlayerDescriptionGroup::toggle_playertribe, boost::ref(*this)));
-	d->btnPlayerInit =
-	   new UI::Button(this, "player_initialization", xplayerinit, h / 2, w - xplayerinit, h / 2,
-	                  UI::ButtonStyle::kFsMenuSecondary, "", _("Initialization"));
-	d->btnPlayerInit->sigclicked.connect(
-	   boost::bind(&PlayerDescriptionGroup::toggle_playerinit, boost::ref(*this)));
+	d->btnPlayerTribe->sigclicked.connect([this]() { toggle_playertribe(); });
+	d->btnPlayerInit = new UI::Dropdown<uint8_t>(
+	   this, "player_initialization", xplayerinit, h / 2, w - xplayerinit, 6, h / 2, "",
+	   UI::DropdownType::kTextual, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary);
+	d->btnPlayerInit->selected.connect(
+	   [this]() { d->settings->set_player_init(d->plnum, d->btnPlayerInit->get_selected()); });
 
 	update();
 }
 
 PlayerDescriptionGroup::~PlayerDescriptionGroup() {
-	delete d;
-	d = nullptr;
 }
 
 /**
@@ -173,21 +167,6 @@ void PlayerDescriptionGroup::update() {
 				d->btnPlayerTribe->set_tooltip(info.tooltip);
 			}
 
-			if (settings.scenario) {
-				d->btnPlayerInit->set_title(_("Scenario"));
-				d->btnPlayerInit->set_tooltip(_("Start type is set via the scenario"));
-			} else {
-				i18n::Textdomain td("tribes");  // for translated initialisation
-				for (const Widelands::TribeBasicInfo& tribeinfo : settings.tribes) {
-					if (tribeinfo.name == player.tribe) {
-						d->btnPlayerInit->set_title(
-						   _(tribeinfo.initializations.at(player.initialization_index).descname));
-						d->btnPlayerInit->set_tooltip(
-						   _(tribeinfo.initializations.at(player.initialization_index).tooltip));
-						break;
-					}
-				}
-			}
 			d->plr_name->set_text(player.name);
 
 			if (player.team) {
@@ -204,6 +183,7 @@ void PlayerDescriptionGroup::update() {
 			d->btnPlayerInit->set_enabled(initaccess);
 		}
 	}
+	update_playerinit();
 }
 
 /**
@@ -291,22 +271,53 @@ void PlayerDescriptionGroup::toggle_playerteam() {
 	update();
 }
 
-/// Cycle through available initializations for the player's tribe.
-void PlayerDescriptionGroup::toggle_playerinit() {
+void PlayerDescriptionGroup::update_playerinit() {
+	const size_t selection =
+	   d->btnPlayerInit->has_selection() ? d->btnPlayerInit->get_selected() : -1;
+	d->btnPlayerInit->clear();
+
 	const GameSettings& settings = d->settings->settings();
 
 	if (d->plnum >= settings.players.size())
 		return;
 
-	const PlayerSettings& player = settings.players[d->plnum];
+	if (settings.scenario) {
+		d->btnPlayerInit->add(
+		   _("Scenario"), -1, nullptr, true, _("Start type is set via the scenario"));
+		return;
+	}
 
-	for (const Widelands::TribeBasicInfo& tribeinfo : settings.tribes) {
-		if (tribeinfo.name == player.tribe) {
-			d->settings->set_player_init(
-			   d->plnum, (player.initialization_index + 1) % tribeinfo.initializations.size());
-			update();
-			return;
+	const PlayerSettings& player = settings.players[d->plnum];
+	std::set<std::string> tags;
+	if (!settings.mapfilename.empty()) {
+		Widelands::Map map;
+		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(settings.mapfilename);
+		if (ml) {
+			ml->preload_map(true);
+			tags = map.get_tags();
 		}
 	}
-	NEVER_HERE();
+
+	i18n::Textdomain td("tribes");  // for translated initialisation
+	for (const Widelands::TribeBasicInfo& tribeinfo : settings.tribes) {
+		if (tribeinfo.name == player.tribe) {
+			const size_t nr_inits = tribeinfo.initializations.size();
+			for (size_t i = 0; i < nr_inits; ++i) {
+				bool matches_tags = true;
+				for (const std::string& tag : tribeinfo.initializations[i].required_map_tags) {
+					if (!tags.count(tag)) {
+						matches_tags = false;
+						break;
+					}
+				}
+				if (matches_tags) {
+					d->btnPlayerInit->add(tribeinfo.initializations[i].descname, i, nullptr,
+					                      i == selection, tribeinfo.initializations[i].tooltip);
+				}
+			}
+		}
+	}
+	if (!d->btnPlayerInit->has_selection()) {
+		d->btnPlayerInit->select(0);
+	}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,16 +19,13 @@
 
 #include "logic/game.h"
 
-#include <cstring>
-#include <limits>
 #include <memory>
 #include <string>
 
-#include <boost/format.hpp>
 #ifndef _WIN32
-#include <SDL.h>     // for a dirty hack.
 #include <unistd.h>  // for usleep
 #else
+#include <SDL_events.h>  // for a dirty hack.
 #include <windows.h>
 #endif
 
@@ -39,9 +36,11 @@
 #include "base/warning.h"
 #include "build_info.h"
 #include "economy/economy.h"
+#include "economy/portdock.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
 #include "io/fileread.h"
+#include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
 #include "logic/cmd_calculate_statistics.h"
@@ -62,12 +61,10 @@
 #include "logic/replay.h"
 #include "logic/single_player_game_controller.h"
 #include "map_io/widelands_map_loader.h"
-#include "scripting/logic.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
 #include "wlapplication_options.h"
-#include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 
 namespace Widelands {
@@ -138,6 +135,7 @@ Game::Game()
      auto_speed_(false),
      state_(gs_notrunning),
      cmdqueue_(*this),
+     scenario_difficulty_(kScenarioDifficultyNotSet),
      /** TRANSLATORS: Win condition for this game has not been set. */
      win_condition_displayname_(_("Not set")),
      replay_(false) {
@@ -209,19 +207,19 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	set_write_replay(false);
 
 	std::unique_ptr<MapLoader> maploader(mutable_map()->get_correct_loader(mapname));
-	if (!maploader)
+	if (!maploader) {
 		throw wexception("could not load \"%s\"", mapname.c_str());
-	UI::ProgressWindow loader_ui;
-
-	loader_ui.step(_("Preloading map"));
-	maploader->preload_map(true);
-	std::string const background = map().get_background();
-	if (!background.empty()) {
-		loader_ui.set_background(background);
 	}
-	loader_ui.step(_("Loading world"));
+
+	create_loader_ui({"general_game"}, false);
+
+	step_loader_ui(_("Preloading map…"));
+	maploader->preload_map(true);
+	change_loader_ui_background(map().get_background());
+
+	step_loader_ui(_("Loading world…"));
 	world();
-	loader_ui.step(_("Loading tribes"));
+	step_loader_ui(_("Loading tribes…"));
 	tribes();
 
 	// If the scenario has custrom tribe entites, load them.
@@ -231,7 +229,7 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	}
 
 	// We have to create the players here.
-	loader_ui.step(_("Creating players"));
+	step_loader_ui(_("Creating players…"));
 	PlayerNumber const nr_players = map().get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
 		// If tribe name is empty, pick a random tribe
@@ -248,13 +246,13 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 
 	set_ibase(new InteractivePlayer(*this, get_config_section(), 1, false));
 
-	loader_ui.step(_("Loading map…"));
+	step_loader_ui(_("Loading map…"));
 	maploader->load_map_complete(*this, Widelands::MapLoader::LoadType::kScenario);
 	maploader.reset();
 
 	set_game_controller(new SinglePlayerGameController(*this, true, 1));
 	try {
-		bool const result = run(&loader_ui, NewSPScenario, script_to_run, false, "single_player");
+		bool const result = run(NewSPScenario, script_to_run, false, "single_player");
 		delete ctrl_;
 		ctrl_ = nullptr;
 		return result;
@@ -269,26 +267,23 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
  * Initialize the game based on the given settings.
  *
  */
-void Game::init_newgame(UI::ProgressWindow* loader_ui, const GameSettings& settings) {
-	assert(loader_ui != nullptr);
+void Game::init_newgame(const GameSettings& settings) {
+	assert(has_loader_ui());
 
-	loader_ui->step(_("Preloading map"));
+	step_loader_ui(_("Preloading map…"));
 
 	std::unique_ptr<MapLoader> maploader(mutable_map()->get_correct_loader(settings.mapfilename));
 	assert(maploader != nullptr);
 	maploader->preload_map(settings.scenario);
+	change_loader_ui_background(map().get_background());
 
-	loader_ui->step(_("Loading world"));
+	step_loader_ui(_("Loading world…"));
 	world();
 
-	loader_ui->step(_("Loading tribes"));
+	step_loader_ui(_("Loading tribes…"));
 	tribes();
 
-	std::string const background = map().get_background();
-	if (!background.empty()) {
-		loader_ui->set_background(background);
-	}
-	loader_ui->step(_("Creating players"));
+	step_loader_ui(_("Creating players…"));
 
 	std::vector<PlayerSettings> shared;
 	std::vector<uint8_t> shared_num;
@@ -316,14 +311,14 @@ void Game::init_newgame(UI::ProgressWindow* loader_ui, const GameSettings& setti
 		   ->add_further_starting_position(shared_num.at(n), shared.at(n).initialization_index);
 	}
 
-	loader_ui->step(_("Loading map…"));
+	step_loader_ui(_("Loading map…"));
 	maploader->load_map_complete(*this, settings.scenario ?
 	                                       Widelands::MapLoader::LoadType::kScenario :
 	                                       Widelands::MapLoader::LoadType::kGame);
 
 	// Check for win_conditions
 	if (!settings.scenario) {
-		loader_ui->step(_("Initializing game…"));
+		step_loader_ui(_("Initializing game…"));
 		if (settings.peaceful) {
 			for (uint32_t i = 1; i < settings.players.size(); ++i) {
 				if (Player* p1 = get_player(i)) {
@@ -357,23 +352,24 @@ void Game::init_newgame(UI::ProgressWindow* loader_ui, const GameSettings& setti
  * Only difference is, that players are already initialized.
  * run<Returncode>() takes care about this difference.
  */
-void Game::init_savegame(UI::ProgressWindow* loader_ui, const GameSettings& settings) {
-	assert(loader_ui != nullptr);
+void Game::init_savegame(const GameSettings& settings) {
+	assert(has_loader_ui());
 
-	loader_ui->step(_("Preloading map"));
+	step_loader_ui(_("Preloading map…"));
 
 	try {
 		GameLoader gl(settings.mapfilename, *this);
 		Widelands::GamePreloadPacket gpdp;
 		gl.preload_game(gpdp);
+		change_loader_ui_background(gpdp.get_background());
+
 		win_condition_displayname_ = gpdp.get_win_condition();
 		if (win_condition_displayname_ == "Scenario") {
 			// Replays can't handle scenarios
 			set_write_replay(false);
 		}
-		std::string background(gpdp.get_background());
-		loader_ui->set_background(background);
-		loader_ui->step(_("Loading…"));
+
+		step_loader_ui(_("Loading…"));
 		gl.load_game(settings.multiplayer);
 		// Players might have selected a different AI type
 		for (uint8_t i = 0; i < settings.players.size(); ++i) {
@@ -388,31 +384,28 @@ void Game::init_savegame(UI::ProgressWindow* loader_ui, const GameSettings& sett
 }
 
 bool Game::run_load_game(const std::string& filename, const std::string& script_to_run) {
-	UI::ProgressWindow loader_ui;
-	std::vector<std::string> tipstext;
-	tipstext.push_back("general_game");
-	tipstext.push_back("singleplayer");
-	GameTips tips(loader_ui, tipstext);
+	create_loader_ui({"general_game", "singleplayer"}, false);
 	int8_t player_nr;
 
-	loader_ui.step(_("Preloading map"));
+	step_loader_ui(_("Preloading map…"));
 
 	{
 		GameLoader gl(filename, *this);
 
 		Widelands::GamePreloadPacket gpdp;
 		gl.preload_game(gpdp);
-		std::string background(gpdp.get_background());
+		change_loader_ui_background(gpdp.get_background());
+
 		win_condition_displayname_ = gpdp.get_win_condition();
 		if (win_condition_displayname_ == "Scenario") {
 			// Replays can't handle scenarios
 			set_write_replay(false);
 		}
-		loader_ui.set_background(background);
+
 		player_nr = gpdp.get_player_nr();
 		set_ibase(new InteractivePlayer(*this, get_config_section(), player_nr, false));
 
-		loader_ui.step(_("Loading…"));
+		step_loader_ui(_("Loading…"));
 		gl.load_game();
 	}
 
@@ -421,7 +414,7 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 
 	set_game_controller(new SinglePlayerGameController(*this, true, player_nr));
 	try {
-		bool const result = run(&loader_ui, Loaded, script_to_run, false, "single_player");
+		bool const result = run(Loaded, script_to_run, false, "single_player");
 		delete ctrl_;
 		ctrl_ = nullptr;
 		return result;
@@ -461,12 +454,11 @@ void Game::postload() {
  *
  * \return true if a game actually took place, false otherwise
  */
-bool Game::run(UI::ProgressWindow* loader_ui,
-               StartGameType const start_game_type,
+bool Game::run(StartGameType const start_game_type,
                const std::string& script_to_run,
                bool replay,
                const std::string& prefix_for_replays) {
-	assert(loader_ui != nullptr);
+	assert(has_loader_ui());
 
 	replay_ = replay;
 	postload();
@@ -474,9 +466,7 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 	if (start_game_type != Loaded) {
 		PlayerNumber const nr_players = map().get_nrplayers();
 		if (start_game_type == NewNonScenario) {
-			if (loader_ui) {
-				loader_ui->step(_("Creating player infrastructure"));
-			}
+			step_loader_ui(_("Creating player infrastructure…"));
 			iterate_players_existing(p, nr_players, *this, plr) {
 				plr->create_default_infrastructure();
 			}
@@ -553,7 +543,7 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 
 	sync_reset();
 
-	load_graphics(*loader_ui);
+	load_graphics();
 
 #ifdef _WIN32
 	//  Clear the event queue before starting game because we don't want
@@ -566,6 +556,8 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 	g_sh->change_music("ingame", 1000);
 
 	state_ = gs_running;
+
+	remove_loader_ui();
 
 	get_ibase()->run<UI::Panel::Returncodes>();
 
@@ -739,8 +731,9 @@ void Game::send_player_bulldoze(PlayerImmovable& pi, bool const recurse) {
 	send_player_command(new CmdBulldoze(get_gametime(), pi.owner().player_number(), pi, recurse));
 }
 
-void Game::send_player_dismantle(PlayerImmovable& pi) {
-	send_player_command(new CmdDismantleBuilding(get_gametime(), pi.owner().player_number(), pi));
+void Game::send_player_dismantle(PlayerImmovable& pi, bool kw) {
+	send_player_command(
+	   new CmdDismantleBuilding(get_gametime(), pi.owner().player_number(), pi, kw));
 }
 
 void Game::send_player_build(int32_t const pid, const Coords& coords, DescriptionIndex const id) {
@@ -754,6 +747,10 @@ void Game::send_player_build_flag(int32_t const pid, const Coords& coords) {
 
 void Game::send_player_build_road(int32_t pid, Path& path) {
 	send_player_command(new CmdBuildRoad(get_gametime(), pid, path));
+}
+
+void Game::send_player_build_waterway(int32_t pid, Path& path) {
+	send_player_command(new CmdBuildWaterway(get_gametime(), pid, path));
 }
 
 void Game::send_player_flagaction(Flag& flag) {
@@ -776,11 +773,11 @@ void Game::send_player_start_or_cancel_expedition(Building& building) {
 	   new CmdStartOrCancelExpedition(get_gametime(), building.owner().player_number(), building));
 }
 
-void Game::send_player_enhance_building(Building& building, DescriptionIndex const id) {
+void Game::send_player_enhance_building(Building& building, DescriptionIndex const id, bool kw) {
 	assert(building.descr().type() == MapObjectType::CONSTRUCTIONSITE ||
 	       building.owner().tribe().has_building(id));
 	send_player_command(
-	   new CmdEnhanceBuilding(get_gametime(), building.owner().player_number(), building, id));
+	   new CmdEnhanceBuilding(get_gametime(), building.owner().player_number(), building, id, kw));
 }
 
 void Game::send_player_evict_worker(Worker& worker) {
@@ -853,6 +850,14 @@ void Game::send_player_sink_ship(Ship& ship) {
 void Game::send_player_cancel_expedition_ship(Ship& ship) {
 	send_player_command(new CmdShipCancelExpedition(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial()));
+}
+
+void Game::send_player_expedition_config(PortDock& pd,
+                                         WareWorker ww,
+                                         DescriptionIndex di,
+                                         bool add) {
+	send_player_command(
+	   new CmdExpeditionConfig(get_gametime(), pd.get_owner()->player_number(), pd, ww, di, add));
 }
 
 void Game::send_player_propose_trade(const Trade& trade) {
@@ -1023,14 +1028,19 @@ void Game::sample_statistics() {
 		for (const auto& economy : plr->economies()) {
 			const TribeDescr& tribe = plr->tribe();
 
-			for (const DescriptionIndex& ware_index : tribe.wares()) {
-				wastock += economy.second->stock_ware(ware_index);
-			}
-
-			for (const DescriptionIndex& worker_index : tribe.workers()) {
-				if (tribe.get_worker_descr(worker_index)->type() != MapObjectType::CARRIER) {
-					wostock += economy.second->stock_worker(worker_index);
+			switch (economy.second->type()) {
+			case wwWARE:
+				for (const DescriptionIndex& ware_index : tribe.wares()) {
+					wastock += economy.second->stock_ware_or_worker(ware_index);
 				}
+				break;
+			case wwWORKER:
+				for (const DescriptionIndex& worker_index : tribe.workers()) {
+					if (tribe.get_worker_descr(worker_index)->type() != MapObjectType::CARRIER) {
+						wostock += economy.second->stock_ware_or_worker(worker_index);
+					}
+				}
+				break;
 			}
 		}
 		nr_wares[p - 1] = wastock;

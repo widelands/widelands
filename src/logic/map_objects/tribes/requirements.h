@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2019 by the Widelands Development Team
+ * Copyright (C) 2008-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,9 +22,8 @@
 
 #include <climits>
 #include <map>
+#include <memory>
 #include <vector>
-
-#include <boost/shared_ptr.hpp>
 
 #include "logic/map_objects/tribes/training_attribute.h"
 
@@ -93,7 +92,7 @@ public:
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) const;
 
 private:
-	boost::shared_ptr<BaseCapsule> m;
+	std::shared_ptr<BaseCapsule> m;
 };
 
 /**

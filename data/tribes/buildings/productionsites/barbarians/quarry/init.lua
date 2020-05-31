@@ -55,7 +55,6 @@ tribes:new_productionsite_type {
            -- This order is on purpose so that the productivity
            -- drops fast once all rocks are gone.
             "call=mine_stone",
-            "return=no_stats"
          },
       },
       mine_stone = {

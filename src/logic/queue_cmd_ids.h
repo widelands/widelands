@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,6 +19,8 @@
 
 #ifndef WL_LOGIC_QUEUE_CMD_IDS_H
 #define WL_LOGIC_QUEUE_CMD_IDS_H
+
+#include <cstdint>
 
 /*
  * This file contains the ids for the different
@@ -76,7 +78,8 @@ enum class QueueCommandTypes : uint8_t {
 	kEvictWorker,
 
 	kMilitarysiteSetSoldierPreference,
-	kProposeTrade,  // 27
+	kProposeTrade,
+	kBuildWaterway,  // 28
 
 	kShipSink = 121,
 	kShipCancelExpedition,
@@ -94,7 +97,8 @@ enum class QueueCommandTypes : uint8_t {
 	kIncorporate = 130,
 	kLuaScript,
 	kLuaCoroutine,
-	kCalculateStatistics,  // 133
+	kCalculateStatistics,
+	kExpeditionConfig,  // 134
 	kCallEconomyBalance = 200,
 
 	kDeleteMessage,  // 201

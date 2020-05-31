@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,9 +35,9 @@ struct GameChatMenu : public UI::UniqueWindow {
 	static GameChatMenu* create_chat_console(UI::Panel*, UI::UniqueWindow::Registry&, ChatProvider&);
 
 #ifndef NDEBUG  //  only in debug builds
-	/**
-	 * Creates a chat window only for scripting in debug mode
-	 */
+	             /**
+	              * Creates a chat window only for scripting in debug mode
+	              */
 	static GameChatMenu*
 	create_script_console(UI::Panel*, UI::UniqueWindow::Registry&, ChatProvider&);
 #endif

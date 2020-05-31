@@ -7,7 +7,7 @@ tribes:new_productionsite_type {
    descname = pgettext("empire_building", "Weapon Smithy"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   size = "big",
+   size = "medium",
 
    buildcost = {
       log = 2,
@@ -18,8 +18,8 @@ tribes:new_productionsite_type {
    return_on_dismantle = {
       log = 1,
       granite = 1,
-      marble = 2,
-      marble_column = 1
+      marble = 1,
+      marble_column = 2
    },
 
    animations = {
@@ -70,7 +70,6 @@ tribes:new_productionsite_type {
             "call=produce_spear_advanced",
             "call=produce_spear_heavy",
             "call=produce_spear_war",
-            "return=no_stats"
          }
       },
       produce_spear_wooden = {

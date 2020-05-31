@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -105,9 +105,12 @@ void InputQueue::set_max_size(const Quantity size) {
 	// No update() since set_max_fill calls it anyway
 }
 
+// I assume elsewhere that this function will call update()
+// even if old and new size are identical
 void InputQueue::set_max_fill(Quantity size) {
-	if (size > max_size_)
+	if (size > max_size_) {
 		size = max_size_;
+	}
 
 	max_fill_ = size;
 
@@ -179,8 +182,9 @@ void InputQueue::read(FileRead& fr,
 			throw UnhandledVersionError("InputQueue", packet_version, kCurrentPacketVersion);
 		}
 		//  Now Economy stuff. We have to add our filled items to the economy.
-		if (owner_.get_economy())
-			add_to_economy(*owner_.get_economy());
+		if (owner_.get_economy(type_)) {
+			add_to_economy(*owner_.get_economy(type_));
+		}
 	} catch (const GameDataError& e) {
 		throw GameDataError("inputqueue: %s", e.what());
 	}
@@ -190,12 +194,15 @@ void InputQueue::write(FileWrite& fw, Game& game, MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersion);
 
 	//  Owner and callback is not saved, but this should be obvious on load.
-	if (type_ == wwWARE) {
+	switch (type_) {
+	case wwWARE:
 		fw.unsigned_8(0);
 		fw.c_string(owner().tribe().get_ware_descr(index_)->name().c_str());
-	} else {
+		break;
+	case wwWORKER:
 		fw.unsigned_8(1);
 		fw.c_string(owner().tribe().get_worker_descr(index_)->name().c_str());
+		break;
 	}
 	fw.signed_32(max_size_);
 	fw.signed_32(max_fill_);

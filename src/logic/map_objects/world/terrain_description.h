@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,14 +20,9 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_WORLD_TERRAIN_DESCRIPTION_H
 #define WL_LOGIC_MAP_OBJECTS_WORLD_TERRAIN_DESCRIPTION_H
 
-#include <memory>
-#include <string>
-#include <vector>
-
 #include "base/macros.h"
 #include "graphic/color.h"
 #include "graphic/image.h"
-#include "logic/map_objects/world/resource_description.h"
 #include "logic/widelands.h"
 
 class LuaTable;

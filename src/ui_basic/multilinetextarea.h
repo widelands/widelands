@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,8 +23,9 @@
 #include <memory>
 
 #include "graphic/align.h"
+#include "graphic/styles/font_style.h"
 #include "graphic/styles/panel_styles.h"
-#include "graphic/text_layout.h"
+#include "graphic/text/rendered_text.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/scrollbar.h"
 

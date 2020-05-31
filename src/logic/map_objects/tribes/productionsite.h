@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,12 +20,7 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_PRODUCTIONSITE_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_PRODUCTIONSITE_H
 
-#include <cstring>
-#include <map>
 #include <memory>
-#include <set>
-#include <string>
-#include <vector>
 
 #include "base/macros.h"
 #include "logic/map_objects/tribes/bill_of_materials.h"
@@ -36,11 +31,8 @@
 
 namespace Widelands {
 
-struct ProductionProgram;
 class Request;
 class Soldier;
-class WareDescr;
-class WaresQueue;
 class WorkerDescr;
 
 enum class FailNotificationType { kDefault, kFull };
@@ -72,6 +64,15 @@ public:
 	                    const World& world);
 
 	Building& create_object() const override;
+
+	// List of wares to register having economy checks. Parsed by the tribes during postload and must
+	// be nullptr after loading has finished
+	std::set<DescriptionIndex>* ware_demand_checks() const;
+	// List of workers to register having economy checks. Parsed by the tribes during postload and
+	// must be nullptr after loading has finished
+	std::set<DescriptionIndex>* worker_demand_checks() const;
+	// Clear ware and worker demand check info
+	void clear_demand_checks();
 
 	uint32_t nr_working_positions() const {
 		uint32_t result = 0;
@@ -143,6 +144,8 @@ public:
 	}
 
 private:
+	std::unique_ptr<std::set<DescriptionIndex>> ware_demand_checks_;
+	std::unique_ptr<std::set<DescriptionIndex>> worker_demand_checks_;
 	BillOfMaterials working_positions_;
 	BillOfMaterials input_wares_;
 	BillOfMaterials input_workers_;
@@ -166,7 +169,6 @@ class ProductionSite : public Building {
 	friend struct ProductionProgram::ActCall;
 	friend struct ProductionProgram::ActCallWorker;
 	friend struct ProductionProgram::ActSleep;
-	friend struct ProductionProgram::ActCheckMap;
 	friend struct ProductionProgram::ActAnimate;
 	friend struct ProductionProgram::ActConsume;
 	friend struct ProductionProgram::ActProduce;
@@ -203,15 +205,15 @@ public:
 
 	virtual bool has_workers(DescriptionIndex targetSite, Game& game);
 	uint8_t get_statistics_percent() {
-		return last_stat_percent_;
+		return last_stat_percent_ / 10;
 	}
 
 	// receives the duration of the last period and the result (true if something was produced)
-	// and sets crude_percent_ to new value
-	void update_crude_statistics(uint32_t, bool);
+	// and sets actual_percent_ to new value
+	void update_actual_statistics(uint32_t, bool);
 
-	uint8_t get_crude_statistics() {
-		return crude_percent_ / 100;
+	uint8_t get_actual_statistics() {
+		return actual_percent_ / 10;
 	}
 
 	const std::string& production_result() const {
@@ -237,7 +239,7 @@ public:
 	bool fetch_from_flag(Game&) override;
 	bool get_building_work(Game&, Worker&, bool success) override;
 
-	void set_economy(Economy*) override;
+	void set_economy(Economy*, WareWorker) override;
 
 	using InputQueues = std::vector<InputQueue*>;
 	const InputQueues& inputqueues() const {
@@ -313,7 +315,7 @@ protected:
 	virtual void program_end(Game&, ProgramResult);
 	virtual void train_workers(Game&);
 
-	void calc_statistics();
+	void format_statistics_string();
 	void try_start_working(Game&);
 	void set_post_timer(int32_t const t) {
 		post_timer_ = t;
@@ -341,11 +343,10 @@ protected:  // TrainingSite must have access to this stuff
 	BillOfMaterials produced_wares_;
 	BillOfMaterials recruited_workers_;
 	InputQueues input_queues_;  ///< input queues for all inputs
-	std::vector<bool> statistics_;
-	uint8_t last_stat_percent_;
+	uint16_t last_stat_percent_;
 	// integer 0-10000000, to be divided by 10000 to get a percent, to avoid float (target range:
 	// 0-100)
-	uint32_t crude_percent_;  // basically this is percent * 100 to avoid floats
+	uint32_t actual_percent_;  // basically this is percent * 10 to avoid floats
 	uint32_t last_program_end_time;
 	bool is_stopped_;
 	std::string default_anim_;  // normally "idle", "empty", if empty mine.

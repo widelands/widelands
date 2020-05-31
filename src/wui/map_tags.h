@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2019 by the Widelands Development Team
+ * Copyright (C) 2016-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,6 @@
 #ifndef WL_WUI_MAP_TAGS_H
 #define WL_WUI_MAP_TAGS_H
 
-#include <map>
 #include <string>
 
 /// Functions for localizing the known map tags.

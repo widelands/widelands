@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,17 +20,15 @@
 #ifndef WL_WUI_BUILDINGWINDOW_H
 #define WL_WUI_BUILDINGWINDOW_H
 
-#include <cstdlib>
 #include <memory>
 
 #include "economy/expedition_bootstrap.h"
+#include "economy/input_queue.h"
 #include "logic/map_objects/tribes/building.h"
-#include "notifications/notifications.h"
 #include "ui_basic/button.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/unique_window.h"
 #include "wui/interactive_gamebase.h"
-#include "wui/waresdisplay.h"
 
 /**
  * Base class for all building windows.
@@ -85,7 +83,7 @@ protected:
 	void configure_workarea_button();
 	void act_start_stop();
 	void act_start_or_cancel_expedition();
-	void act_enhance(Widelands::DescriptionIndex);
+	void act_enhance(Widelands::DescriptionIndex, bool is_csite);
 	void clicked_goto();
 
 	void create_input_queue_panel(UI::Box*,

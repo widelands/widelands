@@ -10,7 +10,7 @@ tribes:new_productionsite_type {
    size = "medium",
 
    buildcost = {
-      brick = 4,
+      brick = 3,
       granite = 2,
       log = 2,
       reed = 2
@@ -22,26 +22,41 @@ tribes:new_productionsite_type {
       reed = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 80},
-         fps = 10,
-      },
-      working_fur = {
-         pictures = path.list_files (dirname .. "working_fur_??.png"),
-         hotspot = {56, 80},
-         fps = 10,
+         directory = dirname,
+         basename = "idle",
+         hotspot = {50, 70},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       working_metal = {
-         pictures = path.list_files (dirname .. "working_metal_??.png"),
-         hotspot = {56, 81},
-         fps = 10,
+         directory = dirname,
+         basename = "working_metal",
+         hotspot = {50, 71}, -- the whole animation is one pixel lower
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
+      working_fur = {
+         directory = dirname,
+         basename = "working_fur",
+         hotspot = {50, 70},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
       unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 66},
-      },
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {50, 58}
+      }
    },
 
    aihints = {
@@ -77,7 +92,6 @@ tribes:new_productionsite_type {
             "call=smelt_mixed",
             "call=smelt_iron",
             "call=make_fur",
-            "return=no_stats"
          }
       },
       make_fur = {

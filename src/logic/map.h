@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,17 +20,13 @@
 #ifndef WL_LOGIC_MAP_H
 #define WL_LOGIC_MAP_H
 
-#include <cstring>
-#include <map>
 #include <memory>
-#include <set>
-#include <string>
-#include <vector>
 
 #include "base/i18n.h"
 #include "economy/itransport_cost_calculator.h"
 #include "logic/field.h"
 #include "logic/map_objects/findimmovable.h"
+#include "logic/map_objects/tribes/wareworker.h"
 #include "logic/map_objects/walkingdir.h"
 #include "logic/map_revision.h"
 #include "logic/objective.h"
@@ -38,17 +34,13 @@
 #include "logic/widelands_geometry.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
-#include "random/random.h"
 
 class FileSystem;
-class Image;
 struct S2MapLoader;
 
 namespace Widelands {
 
 class MapLoader;
-class Objective;
-struct BaseImmovable;
 struct MapGenerator;
 struct PathfieldManager;
 class World;
@@ -402,7 +394,8 @@ public:
 	                 Path&,
 	                 const CheckStep&,
 	                 const uint32_t flags = 0,
-	                 const uint32_t caps_sensitivity = 0) const;
+	                 const uint32_t caps_sensitivity = 0,
+	                 WareWorker type = wwWORKER) const;
 
 	/**
 	 * We can reach a field by water either if it has MOVECAPS_SWIM or if it has
@@ -528,6 +521,9 @@ public:
 	std::map<Coords, FieldData>
 	resize(EditorGameBase& egbase, const Coords coords, int32_t w, int32_t h);
 
+	uint32_t get_waterway_max_length() const;
+	void set_waterway_max_length(uint32_t max_length);
+
 protected:
 	/// Calculate map compatibility information for the website if it wasn't defined in the map
 	/// packet. If is_post_one_world is true, this map wasn't created for a specific world (Widelands
@@ -589,6 +585,8 @@ private:
 
 	PortSpacesSet port_spaces_;
 	bool allows_seafaring_;
+
+	uint32_t waterway_max_length_;
 
 	Objectives objectives_;
 

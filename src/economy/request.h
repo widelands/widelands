@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,20 +26,13 @@
 #include "logic/widelands.h"
 #include "map_io/tribes_legacy_lookup_table.h"
 
-class FileRead;
-class FileWrite;
-
 namespace Widelands {
 
 class Economy;
-class EditorGameBase;
 struct Flag;
 class Game;
-class MapObjectLoader;
-struct MapObjectSaver;
 struct PlayerImmovable;
 class RequestList;
-struct Requirements;
 struct Supply;
 struct Transfer;
 class Worker;

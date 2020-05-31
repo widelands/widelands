@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,9 +30,6 @@
 #include "scripting/lua_table.h"
 
 namespace Widelands {
-
-class Soldier;
-class World;
 
 // I assume elsewhere, that enum SoldierPreference fits to uint8_t.
 enum class SoldierPreference : uint8_t {
@@ -85,7 +82,7 @@ public:
 	void act(Game&, uint32_t data) override;
 	void remove_worker(Worker&) override;
 
-	void set_economy(Economy*) override;
+	void set_economy(Economy*, WareWorker) override;
 	bool get_building_work(Game&, Worker&, bool success) override;
 
 	/// Launch the given soldier on an attack towards the given

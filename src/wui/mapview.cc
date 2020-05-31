@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,11 +19,13 @@
 
 #include "wui/mapview.h"
 
-#include <SDL.h>
+#include <SDL_timer.h>
 
 #include "base/macros.h"
 #include "base/math.h"
+#include "graphic/game_renderer.h"
 #include "graphic/rendertarget.h"
+#include "logic/map_objects/world/world.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 #include "wui/mapviewpixelfunctions.h"
@@ -126,7 +128,7 @@ void do_plan_map_transition(uint32_t start_time,
                             std::deque<MapView::TimestampedView>* plan) {
 	for (int i = 1; i < kNumKeyFrames - 2; i++) {
 		float dt = (duration_ms / kNumKeyFrames) * i;
-		// Using math::clamp as a workaround for https://bugs.launchpad.net/widelands/+bug/1818494
+		// Using math::clamp fixes crashes with leaning on the zoom keys and resetting zoom.
 		const float zoom = math::clamp(zoom_t.value(dt), 1.f / kMaxZoom, kMaxZoom);
 		const Vector2f center_point = center_point_t.value(dt);
 		const Vector2f viewpoint = center_point - Vector2f(width * zoom / 2.f, height * zoom / 2.f);
@@ -359,12 +361,12 @@ FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase,
 		}
 
 		// Linearly interpolate between the next and the last.
-		// Using std::max as a workaround for https://bugs.launchpad.net/widelands/+bug/1818494
+		// Using std::max fixes crashes with leaning on the zoom keys and resetting zoom.
 		const float t =
 		   (std::max(1U, now - plan[0].t)) / static_cast<float>(std::max(1U, plan[1].t - plan[0].t));
 		const View new_view = {
 		   mix(t, plan[0].view.viewpoint, plan[1].view.viewpoint),
-		   // Using math::clamp as a workaround for https://bugs.launchpad.net/widelands/+bug/1818494
+		   // Using math::clamp fixes crashes with leaning on the zoom keys and resetting zoom.
 		   math::clamp(mix(t, plan[0].view.zoom, plan[1].view.zoom), 1.f / kMaxZoom, kMaxZoom)};
 		set_view(new_view, Transition::Jump);
 		break;
@@ -389,7 +391,8 @@ FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase,
 
 	fields_to_draw_.reset(egbase, view_.viewpoint, view_.zoom, dst);
 	const float scale = 1.f / view_.zoom;
-	::draw_terrain(egbase, fields_to_draw_, scale, workarea, grid, dst);
+	::draw_terrain(
+	   egbase.get_gametime(), egbase.world(), fields_to_draw_, scale, workarea, grid, dst);
 	return &fields_to_draw_;
 }
 
@@ -402,7 +405,7 @@ void MapView::set_view(const View& target_view, const Transition& passed_transit
 			return;
 		}
 		view_ = target_view;
-		// Using math::clamp as a workaround for https://bugs.launchpad.net/widelands/+bug/1818494
+		// Using math::clamp fixes crashes with leaning on the zoom keys and resetting zoom.
 		view_.zoom = math::clamp(view_.zoom, 1.f / kMaxZoom, kMaxZoom);
 		MapviewPixelFunctions::normalize_pix(map_, &view_.viewpoint);
 		changeview();
@@ -436,6 +439,7 @@ void MapView::scroll_to_field(const Widelands::Coords& c, const Transition& tran
 }
 
 void MapView::scroll_to_map_pixel(const Vector2f& pos, const Transition& transition) {
+	jump();
 	const TimestampedView current = animation_target_view();
 	const Rectf area = get_view_area(current.view, get_w(), get_h());
 	const Vector2f target_view = pos - Vector2f(area.w / 2.f, area.h / 2.f);
@@ -450,12 +454,11 @@ const MapView::View& MapView::view() const {
 	return view_;
 }
 
-void MapView::pan_by(Vector2i delta_pixels) {
+void MapView::pan_by(Vector2i delta_pixels, const Transition& transition) {
 	if (is_animating()) {
 		return;
 	}
-	set_view(
-	   {view_.viewpoint + delta_pixels.cast<float>() * view_.zoom, view_.zoom}, Transition::Jump);
+	set_view({view_.viewpoint + delta_pixels.cast<float>() * view_.zoom, view_.zoom}, transition);
 }
 
 void MapView::stop_dragging() {
@@ -473,6 +476,7 @@ bool MapView::handle_mousepress(uint8_t const btn, int32_t const x, int32_t cons
 		// also handle the click.
 	}
 	if (btn == SDL_BUTTON_RIGHT) {
+		jump();
 		dragging_ = true;
 		grab_mouse(true);
 		WLApplication::get()->set_mouse_lock(true);
@@ -496,7 +500,7 @@ bool MapView::handle_mousemove(
 
 	if (dragging_) {
 		if (state & SDL_BUTTON(SDL_BUTTON_RIGHT)) {
-			pan_by(Vector2i(xdiff, ydiff));
+			pan_by(Vector2i(xdiff, ydiff), Transition::Jump);
 		} else {
 			stop_dragging();
 		}
@@ -510,7 +514,9 @@ bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {
 	if (which != 0) {
 		return false;
 	}
-
+	if ((get_config_bool("ctrl_zoom", false)) && !(SDL_GetModState() & KMOD_CTRL)) {
+		return false;
+	}
 	if (is_animating()) {
 		return true;
 	}
@@ -534,7 +540,7 @@ void MapView::zoom_around(float new_zoom,
 			return;
 		}
 		// Zoom around the current mouse position. See
-		// http://stackoverflow.com/questions/2916081/zoom-in-on-a-point-using-scale-and-translate
+		// https://stackoverflow.com/questions/2916081/zoom-in-on-a-point-using-scale-and-translate
 		// for a good explanation of this math.
 		set_view({current.view.viewpoint - panel_pixel * (new_zoom - current.view.zoom), new_zoom},
 		         Transition::Jump);
@@ -542,8 +548,12 @@ void MapView::zoom_around(float new_zoom,
 	}
 
 	case Transition::Smooth: {
+		if (view_plans_.empty() && view_.zoom_near(new_zoom)) {
+			// We're already at the target zoom...
+			return;
+		}
 		if (!view_plans_.empty() && view_plans_.back().back().view.zoom_near(new_zoom)) {
-			// We're already there
+			// ...or on the way there.
 			return;
 		}
 		const int w = get_w();
@@ -587,24 +597,81 @@ Widelands::NodeAndTriangle<> MapView::track_sel(const Vector2i& p) {
 	return node_and_triangle;
 }
 
+bool MapView::scroll_map() {
+	// arrow keys
+	const bool kUP = get_key_state(SDL_SCANCODE_UP);
+	const bool kDOWN = get_key_state(SDL_SCANCODE_DOWN);
+	const bool kLEFT = get_key_state(SDL_SCANCODE_LEFT);
+	const bool kRIGHT = get_key_state(SDL_SCANCODE_RIGHT);
+
+	// numpad keys
+	const bool kNumlockOff = !(SDL_GetModState() & KMOD_NUM);
+#define kNP(x) const bool kNP##x = kNumlockOff && get_key_state(SDL_SCANCODE_KP_##x);
+	kNP(1) kNP(2) kNP(3) kNP(4) kNP(6) kNP(7) kNP(8) kNP(9)
+#undef kNP
+
+	   // set the scrolling distance
+	   const uint8_t denominator =
+	      ((SDL_GetModState() & KMOD_CTRL) ? 4 : (SDL_GetModState() & KMOD_SHIFT) ? 16 : 8);
+	const uint16_t scroll_distance_y = g_gr->get_yres() / denominator;
+	const uint16_t scroll_distance_x = g_gr->get_xres() / denominator;
+	int32_t distance_to_scroll_x = 0;
+	int32_t distance_to_scroll_y = 0;
+
+	// check the directions
+	if (kUP || kNP7 || kNP8 || kNP9) {
+		distance_to_scroll_y -= scroll_distance_y;
+	}
+	if (kDOWN || kNP1 || kNP2 || kNP3) {
+		distance_to_scroll_y += scroll_distance_y;
+	}
+	if (kLEFT || kNP1 || kNP4 || kNP7) {
+		distance_to_scroll_x -= scroll_distance_x;
+	}
+	if (kRIGHT || kNP3 || kNP6 || kNP9) {
+		distance_to_scroll_x += scroll_distance_x;
+	}
+
+	// do the actual scrolling
+	if (distance_to_scroll_x == 0 && distance_to_scroll_y == 0) {
+		return false;
+	}
+	pan_by(Vector2i(distance_to_scroll_x, distance_to_scroll_y), Transition::Smooth);
+	return true;
+}
+
 bool MapView::handle_key(bool down, SDL_Keysym code) {
 	if (!down) {
 		return false;
+	}
+	if (scroll_map()) {
+		return true;
 	}
 	if (!(code.mod & KMOD_CTRL)) {
 		return false;
 	}
 
 	switch (code.sym) {
+	case SDLK_KP_PLUS:
 	case SDLK_PLUS:
+	case SDLK_EQUALS:
 		increase_zoom();
 		return true;
+
+	case SDLK_KP_MINUS:
 	case SDLK_MINUS:
 		decrease_zoom();
 		return true;
+
+	case SDLK_KP_0:
+		if (!(code.mod & KMOD_NUM)) {
+			return false;
+		}
+		FALLS_THROUGH;
 	case SDLK_0:
 		reset_zoom();
 		return true;
+
 	default:
 		return false;
 	}

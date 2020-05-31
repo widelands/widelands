@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,11 +19,6 @@
 
 #include "editor/ui_menus/tool_change_resources_options_menu.h"
 
-#include <cstdio>
-#include <string>
-
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
@@ -33,7 +28,6 @@
 #include "logic/map.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
-#include "logic/widelands_geometry.h"
 
 constexpr int kMaxValue = 63;
 
@@ -84,10 +78,8 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 	   _("Ctrl + Click on the map to set the amount of the selected resource. This will replace "
 	     "already set resources."));
 
-	change_by_.changed.connect(
-	   boost::bind(&EditorToolChangeResourcesOptionsMenu::update_change_by, boost::ref(*this)));
-	set_to_.changed.connect(
-	   boost::bind(&EditorToolChangeResourcesOptionsMenu::update_set_to, boost::ref(*this)));
+	change_by_.changed.connect([this]() { update_change_by(); });
+	set_to_.changed.connect([this]() { update_set_to(); });
 
 	box_.add(&change_by_);
 	box_.add(&set_to_);
@@ -111,10 +103,8 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 
 	radiogroup_.set_state(increase_tool_.get_cur_res());
 
-	radiogroup_.changed.connect(
-	   boost::bind(&EditorToolChangeResourcesOptionsMenu::change_resource, this));
-	radiogroup_.clicked.connect(
-	   boost::bind(&EditorToolChangeResourcesOptionsMenu::change_resource, this));
+	radiogroup_.changed.connect([this]() { change_resource(); });
+	radiogroup_.clicked.connect([this]() { change_resource(); });
 
 	// Add label
 	cur_selection_.set_fixed_width(box_.get_inner_w());

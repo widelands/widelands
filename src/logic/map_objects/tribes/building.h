@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,37 +20,21 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_BUILDING_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_BUILDING_H
 
-#include <cstring>
-#include <string>
-#include <vector>
-
-#include <boost/signals2.hpp>
-
 #include "ai/ai_hints.h"
 #include "base/macros.h"
 #include "logic/map_objects/buildcost.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/attack_target.h"
-#include "logic/map_objects/tribes/bill_of_materials.h"
 #include "logic/map_objects/tribes/building_settings.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "logic/map_objects/tribes/workarea_info.h"
 #include "logic/message.h"
-#include "notifications/notifications.h"
 #include "scripting/lua_table.h"
-
-struct BuildingHints;
-class Image;
 
 namespace Widelands {
 
-struct Flag;
-struct Message;
-class TribeDescr;
 class InputQueue;
-
-class Building;
 
 constexpr int32_t kPriorityLow = 2;
 constexpr int32_t kPriorityNormal = 4;
@@ -128,6 +112,11 @@ public:
 	bool needs_seafaring() const {
 		return needs_seafaring_;
 	}
+	bool needs_waterways() const {
+		return needs_waterways_;
+	}
+
+	bool is_useful_on_map(bool seafaring_allowed, bool waterways_allowed) const;
 
 	// Returns the enhancement this building can become or
 	// INVALID_INDEX if it cannot be enhanced.
@@ -195,6 +184,8 @@ private:
 	bool mine_;
 	bool port_;
 	bool needs_seafaring_;  // This building should only be built on seafaring maps.
+	bool needs_waterways_;  // This building should only be built on maps with waterways/ferries
+	                        // enabled
 	DescriptionIndex enhancement_;
 	DescriptionIndex
 	   enhanced_from_;        // The building this building was enhanced from, or INVALID_INDEX
@@ -353,13 +344,13 @@ protected:
 	void act(Game&, uint32_t data) override;
 
 	void draw(uint32_t gametime,
-	          TextToDraw draw_text,
+	          InfoToDraw info_to_draw,
 	          const Vector2f& point_on_dst,
 	          const Coords& coords,
 	          float scale,
 	          RenderTarget* dst) override;
 	void
-	draw_info(TextToDraw draw_text, const Vector2f& point_on_dst, float scale, RenderTarget* dst);
+	draw_info(InfoToDraw info_to_draw, const Vector2f& point_on_dst, float scale, RenderTarget* dst);
 
 	void set_seeing(bool see);
 	void set_attack_target(AttackTarget* new_attack_target);

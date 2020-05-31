@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,19 +20,12 @@
 #ifndef WL_MAP_IO_MAP_OBJECT_LOADER_H
 #define WL_MAP_IO_MAP_OBJECT_LOADER_H
 
-#include <map>
-#include <typeinfo>
-
-#include <stdint.h>
-
 #include "base/macros.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/map_object.h"
 
 namespace Widelands {
 class Bob;
-class MapObject;
-class EditorGameBase;
 
 /*
  * This class helps to
@@ -41,7 +34,7 @@ class EditorGameBase;
  */
 class MapObjectLoader {
 public:
-	bool is_object_known(uint32_t);
+	bool is_object_known(uint32_t) const;
 
 	/// Registers the object as a new one.
 	///
@@ -90,6 +83,9 @@ public:
 	void schedule_act(Bob&);
 
 	void load_finish_game(Game& g);
+
+	// TODO(Nordfriese): This is one exceedingly ugly hack for savegame compatibiliy.
+	Serial get_economy_savegame_compatibility(Serial ware_economy) const;
 
 private:
 	using ReverseMapObjectMap = std::map<Serial, MapObject*>;

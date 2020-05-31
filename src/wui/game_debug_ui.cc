@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,11 +19,6 @@
 // UI classes for real-time game debugging
 
 #include "wui/game_debug_ui.h"
-
-#include <cstdio>
-#include <string>
-
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "graphic/graphic.h"
@@ -90,21 +85,6 @@ void MapObjectDebugPanel::log(const std::string& str) {
 }
 
 /*
-===============
-Create tabs for the debugging UI.
-
-This is separated out of instances.cc here, so we don't have to include
-UI headers in the game logic code (same reason why we have a separate
-building_ui.cc).
-===============
-*/
-void Widelands::MapObject::create_debug_panels(const Widelands::EditorGameBase& egbase,
-                                               UI::TabPanel& tabs) {
-	tabs.add("debug", g_gr->images().get("images/wui/fieldaction/menu_debug.png"),
-	         new MapObjectDebugPanel(tabs, egbase, *this));
-}
-
-/*
 ==============================================================================
 
 MapObjectDebugWindow
@@ -143,7 +123,8 @@ MapObjectDebugWindow::MapObjectDebugWindow(InteractiveBase& parent, Widelands::M
 	serial_ = obj.serial();
 	set_title(std::to_string(serial_));
 
-	obj.create_debug_panels(parent.egbase(), tabs_);
+	tabs_.add("debug", g_gr->images().get("images/wui/fieldaction/menu_debug.png"),
+	          new MapObjectDebugPanel(tabs_, parent.egbase(), obj));
 
 	set_center_panel(&tabs_);
 }
@@ -218,7 +199,7 @@ FieldDebugWindow::FieldDebugWindow(InteractiveBase& parent, Widelands::Coords co
      ui_immovable_(this, "immovable", 0, 280, 300, 24, UI::ButtonStyle::kWuiMenu, ""),
 
      ui_bobs_(this, 0, 304, 300, 96, UI::PanelStyle::kWui) {
-	ui_immovable_.sigclicked.connect(boost::bind(&FieldDebugWindow::open_immovable, this));
+	ui_immovable_.sigclicked.connect([this]() { open_immovable(); });
 
 	assert(0 <= coords_.x);
 	assert(coords_.x < map_.get_width());
@@ -226,7 +207,7 @@ FieldDebugWindow::FieldDebugWindow(InteractiveBase& parent, Widelands::Coords co
 	assert(coords_.y < map_.get_height());
 	assert(&map_[0] <= coords_.field);
 	assert(coords_.field < &map_[0] + map_.max_index());
-	ui_bobs_.selected.connect(boost::bind(&FieldDebugWindow::open_bob, this, _1));
+	ui_bobs_.selected.connect([this](uint32_t a) { open_bob(a); });
 }
 
 /*

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2019 by the Widelands Development Team
+ * Copyright (C) 2015-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,8 +18,6 @@
  */
 
 #include "logic/single_player_game_settings_provider.h"
-
-#include <boost/format.hpp>
 
 #include "ai/computer_player.h"
 #include "base/i18n.h"

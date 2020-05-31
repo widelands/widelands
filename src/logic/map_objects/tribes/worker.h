@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,6 @@
 #include "map_io/tribes_legacy_lookup_table.h"
 
 namespace Widelands {
-class Building;
 
 /**
  * Worker is the base class for all humans (and actually potential non-humans,
@@ -83,8 +82,8 @@ public:
 	OPtr<PlayerImmovable> get_location() const {
 		return location_;
 	}
-	Economy* get_economy() const {
-		return economy_;
+	Economy* get_economy(WareWorker type) const {
+		return type == wwWARE ? ware_economy_ : worker_economy_;
 	}
 
 	/// Sets the location of the worker initially. It may not have a previous
@@ -94,13 +93,15 @@ public:
 	void set_location_initially(PlayerImmovable& location) {
 		assert(!location_.is_set());
 		assert(location.serial());
-		assert(economy_);
-		assert(economy_ == location.get_economy());
+		assert(worker_economy_);
+		assert(worker_economy_ == location.get_economy(wwWORKER));
+		assert(ware_economy_);
+		assert(ware_economy_ == location.get_economy(wwWARE));
 		location_ = &location;
 	}
 
 	void set_location(PlayerImmovable*);
-	void set_economy(Economy*);
+	void set_economy(Economy*, WareWorker);
 
 	WareInstance* get_carried_ware(EditorGameBase& egbase) {
 		return carried_ware_.get(egbase);
@@ -184,7 +185,7 @@ protected:
 	                        const float scale,
 	                        RenderTarget* dst) const;
 	void draw(const EditorGameBase&,
-	          const TextToDraw& draw_text,
+	          const InfoToDraw& info_to_draw,
 	          const Vector2f& field_on_dst,
 	          const Widelands::Coords& coords,
 	          float scale,
@@ -251,6 +252,7 @@ private:
 	bool run_callobject(Game&, State&, const Action&);
 	bool run_plant(Game&, State&, const Action&);
 	bool run_createbob(Game&, State&, const Action&);
+	bool run_buildferry(Game&, State&, const Action&);
 	bool run_removeobject(Game&, State&, const Action&);
 	bool run_repeatsearch(Game&, State&, const Action&);
 	bool run_findresources(Game&, State&, const Action&);
@@ -287,7 +289,8 @@ private:
 	bool scout_lurk_around(Game& game, const Map& map, struct Worker::PlaceToScout& scoutat);
 
 	OPtr<PlayerImmovable> location_;   ///< meta location of the worker
-	Economy* economy_;                 ///< economy this worker is registered in
+	Economy* worker_economy_;          ///< economy this worker is registered in
+	Economy* ware_economy_;            ///< economy this worker's wares are registered in
 	OPtr<WareInstance> carried_ware_;  ///< ware we are carrying
 	IdleWorkerSupply* supply_;         ///< supply while gowarehouse and not transfer
 	Transfer* transfer_;               ///< where we are currently being sent
@@ -305,7 +308,7 @@ protected:
 
 	protected:
 		const Task* get_task(const std::string& name) override;
-		const BobProgramBase* get_program(const std::string& name) override;
+		const MapObjectProgram* get_program(const std::string& name) override;
 
 	private:
 		uint32_t location_;

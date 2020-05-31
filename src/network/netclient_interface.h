@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2019 by the Widelands Development Team
+ * Copyright (C) 2008-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -69,7 +69,7 @@ public:
 	 * Calling this on a closed connection will silently fail.
 	 * \param packet The packet to send.
 	 */
-	virtual void send(const SendPacket& packet) = 0;
+	virtual void send(const SendPacket& packet, NetPriority priority = NetPriority::kNormal) = 0;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETCLIENT_INTERFACE_H

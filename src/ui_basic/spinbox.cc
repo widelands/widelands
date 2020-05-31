@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2019 by the Widelands Development Team
+ * Copyright (C) 2009-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,16 +19,9 @@
 
 #include "ui_basic/spinbox.h"
 
-#include <map>
-#include <vector>
-
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "base/log.h"
-#include "base/macros.h"
 #include "base/wexception.h"
-#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/text/font_set.h"
 #include "ui_basic/button.h"
@@ -140,9 +133,9 @@ SpinBox::SpinBox(Panel* const parent,
 		              _("Increase the value by 10"));
 
 		sbi_->button_ten_plus->sigclicked.connect(
-		   boost::bind(&SpinBox::change_value, boost::ref(*this), big_step_size));
+		   [this, big_step_size]() { change_value(big_step_size); });
 		sbi_->button_ten_minus->sigclicked.connect(
-		   boost::bind(&SpinBox::change_value, boost::ref(*this), -1 * big_step_size));
+		   [this, big_step_size]() { change_value(-big_step_size); });
 		sbi_->button_ten_plus->set_repeating(true);
 		sbi_->button_ten_minus->set_repeating(true);
 		buttons_.push_back(sbi_->button_ten_minus);
@@ -159,10 +152,8 @@ SpinBox::SpinBox(Panel* const parent,
 		box_->add(sbi_->button_plus);
 	}
 
-	sbi_->button_plus->sigclicked.connect(
-	   boost::bind(&SpinBox::change_value, boost::ref(*this), step_size));
-	sbi_->button_minus->sigclicked.connect(
-	   boost::bind(&SpinBox::change_value, boost::ref(*this), -1 * step_size));
+	sbi_->button_plus->sigclicked.connect([this, step_size]() { change_value(step_size); });
+	sbi_->button_minus->sigclicked.connect([this, step_size]() { change_value(-step_size); });
 	sbi_->button_plus->set_repeating(true);
 	sbi_->button_minus->set_repeating(true);
 	buttons_.push_back(sbi_->button_minus);
@@ -261,10 +252,11 @@ void SpinBox::change_value(int32_t const value) {
  */
 void SpinBox::set_value(int32_t const value) {
 	sbi_->value = value;
-	if (sbi_->value > sbi_->max)
+	if (sbi_->value > sbi_->max) {
 		sbi_->value = sbi_->max;
-	else if (sbi_->value < sbi_->min)
+	} else if (sbi_->value < sbi_->min) {
 		sbi_->value = sbi_->min;
+	}
 	update();
 }
 
@@ -281,10 +273,11 @@ void SpinBox::set_value_list(const std::vector<int32_t>& values) {
 void SpinBox::set_interval(int32_t const min, int32_t const max) {
 	sbi_->max = max;
 	sbi_->min = min;
-	if (sbi_->value > max)
+	if (sbi_->value > max) {
 		sbi_->value = max;
-	else if (sbi_->value < min)
+	} else if (sbi_->value < min) {
 		sbi_->value = min;
+	}
 	update();
 }
 
@@ -320,6 +313,9 @@ const std::string SpinBox::unit_text(int32_t value) const {
 	case (Units::kPixels):
 		/** TRANSLATORS: A spinbox unit */
 		return (boost::format(ngettext("%d pixel", "%d pixels", value)) % value).str();
+	case (Units::kFields):
+		/** TRANSLATORS: A spinbox unit */
+		return (boost::format(ngettext("%d field", "%d fields", value)) % value).str();
 	case (Units::kPercent):
 		/** TRANSLATORS: A spinbox unit */
 		return (boost::format(_("%i %%")) % value).str();

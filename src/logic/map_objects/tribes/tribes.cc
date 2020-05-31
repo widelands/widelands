@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,16 @@
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/tribes/carrier.h"
+#include "logic/map_objects/tribes/constructionsite.h"
+#include "logic/map_objects/tribes/dismantlesite.h"
+#include "logic/map_objects/tribes/ferry.h"
 #include "logic/map_objects/tribes/market.h"
+#include "logic/map_objects/tribes/militarysite.h"
+#include "logic/map_objects/tribes/productionsite.h"
+#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 
 namespace Widelands {
@@ -35,6 +44,7 @@ Tribes::Tribes()
      wares_(new DescriptionMaintainer<WareDescr>()),
      workers_(new DescriptionMaintainer<WorkerDescr>()),
      tribes_(new DescriptionMaintainer<TribeDescr>()),
+     legacy_lookup_table_(new TribesLegacyLookupTable()),
      largest_workarea_(0) {
 }
 
@@ -115,6 +125,13 @@ void Tribes::add_carrier_type(const LuaTable& table) {
 	   table, *this));
 }
 
+void Tribes::add_ferry_type(const LuaTable& table) {
+	i18n::Textdomain td("tribes");
+	workers_->add(new FerryDescr(
+	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+	   table, *this));
+}
+
 void Tribes::add_soldier_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
 	workers_->add(new SoldierDescr(
@@ -144,6 +161,16 @@ void Tribes::add_custom_building(const LuaTable& table) {
 		TribeDescr* descr = tribes_->get_mutable(tribe_index(tribename));
 		const std::string buildingname = table.get_string("buildingname");
 		descr->add_building(buildingname);
+	} else {
+		throw GameDataError("The tribe '%s'' has no preload file.", tribename.c_str());
+	}
+}
+
+void Tribes::add_custom_worker(const LuaTable& table) {
+	const std::string tribename = table.get_string("tribename");
+	if (Widelands::tribe_exists(tribename)) {
+		TribeDescr* descr = tribes_->get_mutable(tribe_index(tribename));
+		descr->add_worker(table.get_string("workername"));
 	} else {
 		throw GameDataError("The tribe '%s'' has no preload file.", tribename.c_str());
 	}
@@ -194,7 +221,8 @@ bool Tribes::tribe_exists(DescriptionIndex index) const {
 }
 
 DescriptionIndex Tribes::safe_building_index(const std::string& buildingname) const {
-	const DescriptionIndex result = building_index(buildingname);
+	const DescriptionIndex result =
+	   building_index(legacy_lookup_table_.get()->lookup_building(buildingname));
 	if (!building_exists(result)) {
 		throw GameDataError("Unknown building type \"%s\"", buildingname.c_str());
 	}
@@ -202,7 +230,8 @@ DescriptionIndex Tribes::safe_building_index(const std::string& buildingname) co
 }
 
 DescriptionIndex Tribes::safe_immovable_index(const std::string& immovablename) const {
-	const DescriptionIndex result = immovable_index(immovablename);
+	const DescriptionIndex result =
+	   immovable_index(legacy_lookup_table_.get()->lookup_immovable(immovablename));
 	if (!immovable_exists(result)) {
 		throw GameDataError("Unknown immovable type \"%s\"", immovablename.c_str());
 	}
@@ -210,7 +239,7 @@ DescriptionIndex Tribes::safe_immovable_index(const std::string& immovablename) 
 }
 
 DescriptionIndex Tribes::safe_ship_index(const std::string& shipname) const {
-	const DescriptionIndex result = ship_index(shipname);
+	const DescriptionIndex result = ship_index(legacy_lookup_table_.get()->lookup_ship(shipname));
 	if (!ship_exists(result)) {
 		throw GameDataError("Unknown ship type \"%s\"", shipname.c_str());
 	}
@@ -226,7 +255,7 @@ DescriptionIndex Tribes::safe_tribe_index(const std::string& tribename) const {
 }
 
 DescriptionIndex Tribes::safe_ware_index(const std::string& warename) const {
-	const DescriptionIndex result = ware_index(warename);
+	const DescriptionIndex result = ware_index(legacy_lookup_table_.get()->lookup_ware(warename));
 	if (!ware_exists(result)) {
 		throw GameDataError("Unknown ware type \"%s\"", warename.c_str());
 	}
@@ -234,7 +263,8 @@ DescriptionIndex Tribes::safe_ware_index(const std::string& warename) const {
 }
 
 DescriptionIndex Tribes::safe_worker_index(const std::string& workername) const {
-	const DescriptionIndex result = worker_index(workername);
+	const DescriptionIndex result =
+	   worker_index(legacy_lookup_table_.get()->lookup_worker(workername));
 	if (!worker_exists(result)) {
 		throw GameDataError("Unknown worker type \"%s\"", workername.c_str());
 	}
@@ -293,15 +323,6 @@ const TribeDescr* Tribes::get_tribe_descr(DescriptionIndex tribeindex) const {
 	return tribes_->get_mutable(tribeindex);
 }
 
-void Tribes::set_ware_type_has_demand_check(const DescriptionIndex& wareindex,
-                                            const std::string& tribename) const {
-	wares_->get_mutable(wareindex)->set_has_demand_check(tribename);
-}
-
-void Tribes::set_worker_type_has_demand_check(const DescriptionIndex& workerindex) const {
-	workers_->get_mutable(workerindex)->set_has_demand_check();
-}
-
 void Tribes::load_graphics() {
 	for (size_t tribeindex = 0; tribeindex < nrtribes(); ++tribeindex) {
 		TribeDescr* tribe = tribes_->get_mutable(tribeindex);
@@ -310,6 +331,9 @@ void Tribes::load_graphics() {
 		}
 		for (const std::string& texture_path : tribe->busy_road_paths()) {
 			tribe->add_busy_road_texture(g_gr->images().get(texture_path));
+		}
+		for (const std::string& texture_path : tribe->waterway_paths()) {
+			tribe->add_waterway_texture(g_gr->images().get(texture_path));
 		}
 	}
 }
@@ -366,6 +390,11 @@ void Tribes::postload() {
 	// Some final checks on the gamedata
 	for (DescriptionIndex i = 0; i < tribes_->size(); ++i) {
 		TribeDescr* tribe_descr = tribes_->get_mutable(i);
+
+		// Register which wares and workers have economy demand checks for each tribe
+		for (const DescriptionIndex bi : tribe_descr->buildings()) {
+			postload_register_economy_demand_checks(*buildings_->get_mutable(bi), *tribe_descr);
+		}
 		// Verify that the preciousness has been set for all of the tribe's wares
 		for (const DescriptionIndex wi : tribe_descr->wares()) {
 			if (tribe_descr->get_ware_descr(wi)->ai_hints().preciousness(tribe_descr->name()) ==
@@ -378,7 +407,36 @@ void Tribes::postload() {
 	}
 }
 
-// Set default trainingsites proportions for AI. Make sure that we get a sum of ca. 100
+/// Register wares and workers that have economy demand checks for a building
+void Tribes::postload_register_economy_demand_checks(BuildingDescr& building_descr,
+                                                     const TribeDescr& tribe_descr) {
+	if (upcast(ProductionSiteDescr, prodsite, &building_descr)) {
+		// This function can be called only once per loading of tribes
+		assert(prodsite->ware_demand_checks() != nullptr);
+
+		for (const DescriptionIndex wi : *prodsite->ware_demand_checks()) {
+			if (!tribe_descr.has_ware(wi)) {
+				throw GameDataError("Productionsite '%s' for tribe '%s' has an economy demand check "
+				                    "for ware '%s', but the tribe does not use this ware",
+				                    prodsite->name().c_str(), tribe_descr.name().c_str(),
+				                    get_ware_descr(wi)->name().c_str());
+			}
+			wares_->get_mutable(wi)->set_has_demand_check(tribe_descr.name());
+		}
+		for (const DescriptionIndex wi : *prodsite->worker_demand_checks()) {
+			if (!tribe_descr.has_worker(wi)) {
+				throw GameDataError("Productionsite '%s' for tribe '%s' has an economy demand check "
+				                    "for worker '%s', but the tribe does not use this worker",
+				                    prodsite->name().c_str(), tribe_descr.name().c_str(),
+				                    get_worker_descr(wi)->name().c_str());
+			}
+			workers_->get_mutable(wi)->set_has_demand_check();
+		}
+		prodsite->clear_demand_checks();
+	}
+}
+
+/// Set default trainingsites proportions for AI. Make sure that we get a sum of ca. 100
 void Tribes::postload_calculate_trainingsites_proportions() {
 	for (DescriptionIndex i = 0; i < tribes_->size(); ++i) {
 		TribeDescr* tribe_descr = tribes_->get_mutable(i);

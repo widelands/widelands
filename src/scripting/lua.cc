@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,8 @@ lua_State* luaL_checkthread(lua_State* L, int n) {
 }
 
 bool luaL_checkboolean(lua_State* L, int n) {
-	if (lua_isboolean(L, n))
+	if (lua_isboolean(L, n)) {
 		return lua_toboolean(L, n);
+	}
 	return luaL_checkinteger(L, n);
 }

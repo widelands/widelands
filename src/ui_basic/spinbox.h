@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2019 by the Widelands Development Team
+ * Copyright (C) 2009-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,12 +20,6 @@
 #ifndef WL_UI_BASIC_SPINBOX_H
 #define WL_UI_BASIC_SPINBOX_H
 
-#include <cstring>
-#include <list>
-
-#include <boost/signals2.hpp>
-
-#include "graphic/align.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 
@@ -45,7 +39,7 @@ public:
 		kValueList  // Uses the values that are set by set_value_list().
 	};
 
-	enum class Units { kNone, kPixels, kMinutes, kPercent };
+	enum class Units { kNone, kPixels, kMinutes, kPercent, kFields };
 
 	/**
 	 * Text conventions: Sentence case for the 'label_text' and for all values

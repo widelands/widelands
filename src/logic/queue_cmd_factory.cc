@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,6 +38,8 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 		return *new CmdBuildFlag();
 	case QueueCommandTypes::kBuildRoad:
 		return *new CmdBuildRoad();
+	case QueueCommandTypes::kBuildWaterway:
+		return *new CmdBuildWaterway();
 	case QueueCommandTypes::kFlagAction:
 		return *new CmdFlagAction();
 	case QueueCommandTypes::kStartStopBuilding:
@@ -86,6 +88,8 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 		return *new CmdShipCancelExpedition();
 	case QueueCommandTypes::kStartOrCancelExpedition:
 		return *new CmdStartOrCancelExpedition();
+	case QueueCommandTypes::kExpeditionConfig:
+		return *new CmdExpeditionConfig();
 	case QueueCommandTypes::kShipConstructPort:
 		return *new CmdShipConstructPort();
 	case QueueCommandTypes::kShipScoutDirection:

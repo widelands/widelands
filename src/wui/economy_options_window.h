@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2019 by the Widelands Development Team
+ * Copyright (C) 2008-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,12 +20,9 @@
 #ifndef WL_WUI_ECONOMY_OPTIONS_WINDOW_H
 #define WL_WUI_ECONOMY_OPTIONS_WINDOW_H
 
-#include <map>
 #include <memory>
-#include <string>
 
 #include "economy/economy.h"
-#include "logic/map_objects/tribes/tribe_descr.h"
 #include "notifications/notifications.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
@@ -40,18 +37,23 @@ const std::string kDefaultEconomyProfile = "Default";
 
 // Used to indicate that a profile has been saved or deleted, so all open windows can update it
 struct NoteEconomyProfile {
-	NoteEconomyProfile(Widelands::Serial s) : serial(s) {
+	NoteEconomyProfile(Widelands::Serial ware, Widelands::Serial worker)
+	   : ware_serial(ware), worker_serial(worker) {
 	}
-	Widelands::Serial serial;
+	Widelands::Serial ware_serial;
+	Widelands::Serial worker_serial;
 	CAN_BE_SENT_AS_NOTE(NoteId::EconomyProfile)
 };
 
 struct EconomyOptionsWindow : public UI::Window {
-	EconomyOptionsWindow(UI::Panel* parent, Widelands::Economy* economy, bool can_act);
+	EconomyOptionsWindow(UI::Panel* parent,
+	                     Widelands::Economy* ware_economy,
+	                     Widelands::Economy* worker_economy,
+	                     bool can_act);
 	~EconomyOptionsWindow() override;
 
 	struct PredefinedTargets {
-		using Targets = std::map<Widelands::DescriptionIndex, uint32_t>;
+		using Targets = std::map<Widelands::DescriptionIndex, Widelands::Quantity>;
 		Targets wares;
 		Targets workers;
 		bool undeletable = false;
@@ -70,6 +72,7 @@ struct EconomyOptionsWindow : public UI::Window {
 	}
 
 	void change_target(int amount);
+	void toggle_infinite();
 	void reset_target();
 
 	void layout() override;
@@ -110,6 +113,7 @@ private:
 
 		void set_economy(Widelands::Serial serial);
 		void change_target(int amount);
+		void toggle_infinite();
 		void reset_target();
 		void update_desired_size() override;
 
@@ -119,13 +123,16 @@ private:
 		Widelands::WareWorker type_;
 		TargetWaresDisplay display_;
 		EconomyOptionsWindow* economy_options_window_;
+
+		std::map<Widelands::DescriptionIndex, Widelands::Quantity> infinity_substitutes_;
 	};
 
 	/// Actions performed when a NoteEconomyWindow is received.
 	void on_economy_note(const Widelands::NoteEconomy& note);
 
 	UI::Box main_box_;
-	Widelands::Serial serial_;
+	Widelands::Serial ware_serial_;
+	Widelands::Serial worker_serial_;
 	Widelands::Player* player_;
 	UI::TabPanel tabpanel_;
 	EconomyOptionsPanel* ware_panel_;

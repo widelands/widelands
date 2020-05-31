@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,9 +19,6 @@
 
 #include "map_io/map_allowed_worker_types_packet.h"
 
-#include <boost/format.hpp>
-
-#include "base/macros.h"
 #include "io/profile.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -36,8 +33,9 @@ void MapAllowedWorkerTypesPacket::read(FileSystem& fs,
                                        EditorGameBase& egbase,
                                        bool skip,
                                        MapObjectLoader&) {
-	if (skip)
+	if (skip) {
 		return;
+	}
 
 	// Worker types that the tribe has are allowed by default - this is to make sure that old maps
 	// remain playable without change even if new worker types are introduced.
@@ -58,8 +56,9 @@ void MapAllowedWorkerTypesPacket::read(FileSystem& fs,
 				try {
 					Section* s = prof.get_section(
 					   (boost::format("player_%u") % static_cast<unsigned int>(p)).str());
-					if (s == nullptr)
+					if (s == nullptr) {
 						continue;
+					}
 
 					// Only allow workers that the player's tribe has.
 					for (size_t i = 0; i < egbase.tribes().nrworkers(); ++i) {

@@ -10,31 +10,43 @@ tribes:new_productionsite_type {
    size = "medium",
 
    buildcost = {
-      brick = 4,
+      brick = 2,
+      granite = 2,
       log = 1,
       reed = 2
    },
    return_on_dismantle = {
-      brick = 2,
-      log = 1,
+      brick = 1,
+      granite = 1,
       reed = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 82},
-         fps = 10,
+         directory = dirname,
+         basename = "idle",
+         hotspot = {50, 71},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 82},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "working",
+         hotspot = {50, 71},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
       unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 66},
-      },
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {50, 58}
+      }
    },
 
    aihints = {
@@ -65,7 +77,6 @@ tribes:new_productionsite_type {
          actions = {
             "call=smoke_meat",
             "call=smoke_fish",
-            "return=no_stats"
          },
       },
       smoke_fish = {

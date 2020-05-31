@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,24 +21,15 @@
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_WAREHOUSE_H
 
 #include "base/macros.h"
-#include "base/wexception.h"
 #include "economy/request.h"
-#include "economy/wares_queue.h"
+#include "economy/ware_instance.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/map_objects/tribes/wareworker.h"
 
-class InteractivePlayer;
-
 namespace Widelands {
 
-class EditorGameBase;
 class PortDock;
-class Request;
-struct Requirements;
-class Soldier;
-class TribeDescr;
-class WareInstance;
 struct WareList;
 
 /*
@@ -78,27 +69,27 @@ private:
  */
 enum class StockPolicy {
 	/**
-	 * The default policy allows stocking wares without any special priority.
-	 */
+    * The default policy allows stocking wares without any special priority.
+    */
 	kNormal = 0,
 
 	/**
-	 * As long as there are warehouses with this policy for a ware, all
-	 * available unstocked supplies will be transferred to warehouses
-	 * with this policy.
-	 */
+    * As long as there are warehouses with this policy for a ware, all
+    * available unstocked supplies will be transferred to warehouses
+    * with this policy.
+    */
 	kPrefer = 1,
 
 	/**
-	 * If a ware has this stock policy, no more of this ware will enter
-	 * the warehouse.
-	 */
+    * If a ware has this stock policy, no more of this ware will enter
+    * the warehouse.
+    */
 	kDontStock = 2,
 
 	/**
-	 * Like \ref kDontStock, but in addition, existing stock of this ware
-	 * will be transported out of the warehouse over time.
-	 */
+    * Like \ref kDontStock, but in addition, existing stock of this ware
+    * will be transported out of the warehouse over time.
+    */
 	kRemove = 3,
 };
 
@@ -114,14 +105,14 @@ public:
 	 */
 	enum class Match {
 		/**
-		 * Return the number of workers with matching indices.
-		 */
+	    * Return the number of workers with matching indices.
+	    */
 		kExact,
 
 		/**
-		 * Return the number of workers with matching indices or
-		 * which are more experienced workers of the given lower type.
-		 */
+	    * Return the number of workers with matching indices or
+	    * which are more experienced workers of the given lower type.
+	    */
 		kCompatible
 	};
 
@@ -154,7 +145,7 @@ public:
 
 	void act(Game& game, uint32_t data) override;
 
-	void set_economy(Economy*) override;
+	void set_economy(Economy*, WareWorker) override;
 
 	const WareList& get_wares() const;
 	const WareList& get_workers() const;
@@ -208,6 +199,9 @@ public:
 		return portdock_;
 	}
 
+	// Returns the first matching not completely filled waresqueue of the expedition if this is a
+	// port.
+	// Will throw an exception otherwise or if all queues of this type are full.
 	const BuildingSettings* create_building_settings() const override;
 
 	// Returns the waresqueue of the expedition if this is a port.

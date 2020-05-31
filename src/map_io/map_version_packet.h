@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2019 by the Widelands Development Team
+ * Copyright (C) 2013-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,8 +26,6 @@ namespace Widelands {
 
 class EditorGameBase;
 class Map;
-class MapObjectLoader;
-struct MapObjectSaver;
 
 /*
  * This packet contains the version information of the map.

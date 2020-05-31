@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,8 +23,6 @@
 #include "game_io/game_data_packet.h"
 
 namespace Widelands {
-
-class Game;
 
 /*
  * This contains all the preload data needed to identify

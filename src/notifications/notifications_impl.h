@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,8 +21,6 @@
 #define WL_NOTIFICATIONS_NOTIFICATIONS_IMPL_H
 
 #include "base/macros.h"
-
-#include <stdint.h>
 
 #include <algorithm>
 #include <cassert>
@@ -83,7 +81,7 @@ public:
 		auto subscribers_it = std::find_if(
 		   subscribers.begin(), subscribers.end(), [&subscriber](const void* p_subscriber) {
 			   return static_cast<const Subscriber<T>*>(p_subscriber)->id_ == subscriber->id_;
-		   });
+			});
 
 		assert(subscribers_it != subscribers.end());
 		subscribers.erase(subscribers_it);

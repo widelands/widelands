@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,9 +19,6 @@
 
 #include "wui/watchwindow.h"
 
-#include <string>
-#include <vector>
-
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "base/rect.h"
@@ -33,7 +30,6 @@
 #include "wlapplication_options.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/interactive_player.h"
-#include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
 
 #define REFRESH_TIME 5000
@@ -60,34 +56,34 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
 	UI::Button* followbtn =
 	   new UI::Button(this, "follow", 0, h - 34, 34, 34, UI::ButtonStyle::kWuiSecondary,
 	                  g_gr->images().get("images/wui/menus/watch_follow.png"), _("Follow"));
-	followbtn->sigclicked.connect(boost::bind(&WatchWindow::do_follow, this));
+	followbtn->sigclicked.connect([this]() { do_follow(); });
 
 	UI::Button* gotobtn = new UI::Button(
 	   this, "center_mainview_here", 34, h - 34, 34, 34, UI::ButtonStyle::kWuiSecondary,
 	   g_gr->images().get("images/wui/menus/goto.png"), _("Center the main view on this"));
-	gotobtn->sigclicked.connect(boost::bind(&WatchWindow::do_goto, this));
+	gotobtn->sigclicked.connect([this]() { do_goto(); });
 
 	if (init_single_window) {
 		for (uint8_t i = 0; i < kViews; ++i) {
 			view_btns_[i] = new UI::Button(
 			   this, "view", 74 + (17 * i), 200 - 34, 17, 34, UI::ButtonStyle::kWuiSecondary, "-");
-			view_btns_[i]->sigclicked.connect(boost::bind(&WatchWindow::view_button_clicked, this, i));
+			view_btns_[i]->sigclicked.connect([this, i]() { view_button_clicked(i); });
 		}
 
 		UI::Button* closebtn =
 		   new UI::Button(this, "close", w - 34, h - 34, 34, 34, UI::ButtonStyle::kWuiSecondary,
 		                  g_gr->images().get("images/wui/menu_abort.png"), _("Close"));
-		closebtn->sigclicked.connect(boost::bind(&WatchWindow::close_cur_view, this));
+		closebtn->sigclicked.connect([this]() { close_cur_view(); });
 	}
 
 	map_view_.field_clicked.connect(
 	   [&parent](const Widelands::NodeAndTriangle<>& node_and_triangle) {
 		   parent.map_view()->field_clicked(node_and_triangle);
-	   });
+		});
 	map_view_.track_selection.connect(
 	   [&parent](const Widelands::NodeAndTriangle<>& node_and_triangle) {
 		   parent.map_view()->track_selection(node_and_triangle);
-	   });
+		});
 	map_view_.changeview.connect([this] { stop_tracking_by_drag(); });
 	warp_mainview.connect([&parent](const Vector2f& map_pixel) {
 		parent.map_view()->scroll_to_map_pixel(map_pixel, MapView::Transition::Smooth);

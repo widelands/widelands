@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,14 +19,10 @@
 
 #include "editor/ui_menus/tool_resize_options_menu.h"
 
-#include <cstdio>
-#include <string>
-
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/resize_tool.h"
-#include "graphic/graphic.h"
 #include "logic/map.h"
 
 inline EditorInteractive& EditorToolResizeOptionsMenu::eia() {
@@ -51,7 +47,10 @@ EditorToolResizeOptionsMenu::EditorToolResizeOptionsMenu(EditorInteractive& pare
         get_inner_w() - 2 * hmargin(),
         48,
         UI::PanelStyle::kWui,
-        _("Select the new map size, then click the map to split it at the desired location."),
+        _("Select the new map size, then click the map to split it at the desired location. When "
+          "increasing the map size, new columns/rows will be inserted to the east/south of the "
+          "selected point. When shrinking the map, the desired number of columns/rows will be "
+          "removed from the east/south of the splitting location."),
         UI::Align::kCenter,
         UI::MultilineTextarea::ScrollMode::kNoScrolling) {
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,13 +21,10 @@
 #define WL_LOGIC_PLAYER_H
 
 #include <memory>
-#include <unordered_map>
-#include <unordered_set>
 
 #include "base/macros.h"
 #include "economy/economy.h"
 #include "graphic/color.h"
-#include "graphic/playercolor.h"
 #include "logic/editor_game_base.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/constructionsite.h"
@@ -44,12 +41,9 @@ namespace Widelands {
 
 struct Path;
 struct PlayerImmovable;
-class Soldier;
 class TrainingSite;
-struct Flag;
-class TribeDescr;
 struct Road;
-struct AttackController;
+struct Waterway;
 
 /**
  * Manage in-game aspects of players, such as tribe, team, fog-of-war, statistics,
@@ -224,7 +218,9 @@ public:
 		Field()
 		   : military_influence(0),
 		     vision(0),
-		     roads(0),
+		     r_e(RoadSegment::kNone),
+		     r_se(RoadSegment::kNone),
+		     r_sw(RoadSegment::kNone),
 		     owner(0),
 		     time_node_last_unseen(0),
 		     map_object_descr(nullptr),
@@ -303,7 +299,14 @@ public:
 		 */
 		Widelands::Field::Terrains terrains;
 
-		uint8_t roads;
+		/**
+		 * The road types of the 3 edges, as far as this player knows.
+		 * Each value is only valid when this player has seen this node
+		 * or the node to the the edge leads up to.
+		 */
+		RoadSegment r_e;
+		RoadSegment r_se;
+		RoadSegment r_sw;
 
 		/**
 		 * The owner of this node, as far as this player knows.
@@ -324,24 +327,24 @@ public:
 		/// east, as far as this player knows.
 		/// Only valid when this player has seen this node or the node to the
 		/// east.
-		uint8_t road_e() const {
-			return roads & RoadType::kMask;
+		RoadSegment road_e() const {
+			return r_e;
 		}
 
 		/// Whether there is a road between this node and the node to the
 		/// southeast, as far as this player knows.
 		/// Only valid when this player has seen this node or the node to the
 		/// southeast.
-		uint8_t road_se() const {
-			return roads >> RoadType::kSouthEast & RoadType::kMask;
+		RoadSegment road_se() const {
+			return r_se;
 		}
 
 		/// Whether there is a road between this node and the node to the
 		/// southwest, as far as this player knows.
 		/// Only valid when this player has seen this node or the node to the
 		/// southwest.
-		uint8_t road_sw() const {
-			return roads >> RoadType::kSouthWest & RoadType::kMask;
+		RoadSegment road_sw() const {
+			return r_sw;
 		}
 
 		/**
@@ -507,6 +510,8 @@ public:
 	Flag* build_flag(const Coords&);   /// Build a flag if it is allowed.
 	Road& force_road(const Path&);
 	Road* build_road(const Path&);  /// Build a road if it is allowed.
+	Waterway& force_waterway(const Path&);
+	Waterway* build_waterway(const Path&);  /// Build a waterway if it is allowed.
 	Building& force_building(Coords, const FormerBuildings&);
 	Building& force_csite(Coords, DescriptionIndex, const FormerBuildings& = FormerBuildings());
 	Building* build(Coords, DescriptionIndex, bool, FormerBuildings&);
@@ -516,11 +521,11 @@ public:
 	void military_site_set_soldier_preference(PlayerImmovable&,
 	                                          SoldierPreference soldier_preference);
 	void start_or_cancel_expedition(Warehouse&);
-	void enhance_building(Building*, DescriptionIndex index_of_new_building);
-	void dismantle_building(Building*);
+	void enhance_building(Building*, DescriptionIndex index_of_new_building, bool keep_wares);
+	void dismantle_building(Building*, bool keep_wares);
 
-	Economy* create_economy();
-	Economy* create_economy(Serial serial);  // For saveloading only
+	Economy* create_economy(WareWorker);
+	Economy* create_economy(Serial serial, WareWorker);  // For saveloading only
 	void remove_economy(Serial serial);
 	const std::map<Serial, std::unique_ptr<Economy>>& economies() const;
 	Economy* get_economy(Widelands::Serial serial) const;
@@ -613,7 +618,7 @@ private:
 	void update_building_statistics(Building&, NoteImmovable::Ownership ownership);
 	void update_team_players();
 	void play_message_sound(const Message* message);
-	void enhance_or_dismantle(Building*, DescriptionIndex index_of_new_building);
+	void enhance_or_dismantle(Building*, DescriptionIndex index_of_new_building, bool keep_wares);
 
 	// Called when a node becomes seen or has changed.  Discovers the node and
 	// those of the 6 surrounding edges/triangles that are not seen from another

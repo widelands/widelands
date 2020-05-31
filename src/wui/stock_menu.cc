@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,6 +52,9 @@ StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registr
 	   new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWORKER, false);
 	tabs->add("workers_in_warehouses", g_gr->images().get(pic_tab_workers_warehouse),
 	          warehouse_workers_, _("Workers in warehouses"));
+
+	// Preselect the wares_in_warehouses tab
+	tabs->activate(2);
 }
 
 /*
@@ -76,8 +79,9 @@ void StockMenu::fill_total_waresdisplay(WaresDisplay* waresdisplay, Widelands::W
 	waresdisplay->remove_all_warelists();
 	const Widelands::Player& player = *player_.get_player();
 	for (const auto& economy : player.economies()) {
-		waresdisplay->add_warelist(type == Widelands::wwWARE ? economy.second->get_wares() :
-		                                                       economy.second->get_workers());
+		if (economy.second->type() == type) {
+			waresdisplay->add_warelist(economy.second->get_wares_or_workers());
+		}
 	}
 }
 
@@ -89,9 +93,11 @@ void StockMenu::fill_warehouse_waresdisplay(WaresDisplay* waresdisplay,
                                             Widelands::WareWorker type) {
 	waresdisplay->remove_all_warelists();
 	for (const auto& economy : player_.player().economies()) {
-		for (const auto* warehouse : economy.second->warehouses()) {
-			waresdisplay->add_warelist(type == Widelands::wwWARE ? warehouse->get_wares() :
-			                                                       warehouse->get_workers());
+		if (economy.second->type() == type) {
+			for (const auto* warehouse : economy.second->warehouses()) {
+				waresdisplay->add_warelist(type == Widelands::wwWARE ? warehouse->get_wares() :
+				                                                       warehouse->get_workers());
+			}
 		}
 	}
 }

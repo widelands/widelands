@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,8 +22,6 @@
 
 #include <cmath>
 #include <limits>
-
-#include <stdint.h>
 
 template <typename T> struct Vector2 {
 	Vector2(const T& px, const T& py) : x(px), y(py) {

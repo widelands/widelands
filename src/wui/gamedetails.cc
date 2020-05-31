@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2019 by the Widelands Development Team
+ * Copyright (C) 2016-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,34 +23,14 @@
 
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 
 #include "base/i18n.h"
 #include "base/log.h"
-#include "base/time_string.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
 #include "graphic/text_layout.h"
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
-
-SavegameData::SavegameData()
-   : gametime(""),
-     nrplayers("0"),
-     savetimestamp(0),
-     gametype(GameController::GameType::kSingleplayer) {
-}
-
-void SavegameData::set_gametime(uint32_t input_gametime) {
-	gametime = gametimestring(input_gametime);
-}
-void SavegameData::set_nrplayers(Widelands::PlayerNumber input_nrplayers) {
-	nrplayers = boost::lexical_cast<std::string>(static_cast<unsigned int>(input_nrplayers));
-}
-void SavegameData::set_mapname(const std::string& input_mapname) {
-	i18n::Textdomain td("maps");
-	mapname = _(input_mapname);
-}
 
 GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
    : UI::Box(parent, 0, 0, UI::Box::Vertical),
@@ -99,80 +79,127 @@ void GameDetails::clear() {
 	minimap_image_.reset();
 }
 
-void GameDetails::update(const SavegameData& gamedata) {
+void GameDetails::display(const std::vector<SavegameData>& gamedata) {
+	if (gamedata.empty())
+		return;
+	else if (gamedata.size() > 1) {
+		show(gamedata);
+	} else {
+		show(gamedata[0]);
+	}
+}
+
+void GameDetails::show(const std::vector<SavegameData>& gamedata) {
+
+	size_t number_of_files = 0;
+	size_t number_of_directories = 0;
+	for (const SavegameData& g : gamedata) {
+		if (g.is_directory()) {
+			number_of_directories++;
+		} else {
+			number_of_files++;
+		}
+	}
+	std::string name_list = richtext_escape(as_filename_list(gamedata));
+	boost::replace_all(name_list, "\n", "<br> • ");
+
+	const std::string header_second_part(
+	   /** TRANSLATORS: This is the second part of "Selected %1% directory/directories and %2%" */
+	   (boost::format(ngettext("%d file:", "%d files:", number_of_files)) % number_of_files).str());
+
+	std::string combined_header = as_richtext(as_heading_with_content(
+	   /** TRANSLATORS: %1% = number of selected directories, %2% = number of selected files*/
+	   (boost::format(ngettext("Selected %1% directory and %2%", "Selected %1% directories and %2%",
+	                           number_of_directories)) %
+	    number_of_directories % header_second_part)
+	      .str(),
+	   "", style_, true));
+
+	name_label_.set_text(combined_header);
+
+	std::string combined_description =
+	   as_richtext(as_heading_with_content("", name_list, style_, true, true));
+
+	descr_.set_text(combined_description);
+	minimap_icon_.set_visible(false);
+}
+
+void GameDetails::show(const SavegameData& gamedata) {
 	clear();
-	// Do not display anything if gamedata is empty
-	if (gamedata.errormessage.empty() && gamedata.filename_list.empty() &&
-	    gamedata.mapname.empty()) {
+
+	if (gamedata.is_directory()) {
+		name_label_.set_text(as_richtext(
+		   as_heading_with_content(_("Directory Name:"), gamedata.filename, style_, true)));
+
+		layout();
 		return;
 	}
 
-	if (gamedata.errormessage.empty()) {
-		if (gamedata.filename_list.empty()) {
-			name_label_.set_text(
-			   as_richtext(as_heading_with_content(_("Map Name:"), gamedata.mapname, style_, true)));
-
-			// Show game information
-			std::string description = as_heading_with_content(
-			   mode_ == Mode::kReplay ?
-			      /** TRANSLATORS: The time a replay starts. Shown in the replay loading screen*/
-			      _("Start of Replay:") :
-			      /** TRANSLATORS: The current time of a savegame. Shown in the game saving and
-			         loading screens. */
-			      _("Game Time:"),
-			   gamedata.gametime, style_);
-
-			description = (boost::format("%s%s") % description %
-			               as_heading_with_content(_("Players:"), gamedata.nrplayers, style_))
-			                 .str();
-
-			description = (boost::format("%s%s") % description %
-			               as_heading_with_content(_("Widelands Version:"), gamedata.version, style_))
-			                 .str();
-
-			description = (boost::format("%s%s") % description %
-			               as_heading_with_content(_("Win Condition:"), gamedata.wincondition, style_))
-			                 .str();
-
-			std::string filename = gamedata.filename;
-			// Remove first directory from filename. This will be the save/ or replays/ folder
-			assert(filename.find('/') != std::string::npos);
-			filename.erase(0, filename.find('/') + 1);
-			assert(!filename.empty());
-			description = (boost::format("%s%s") % description %
-			               as_heading_with_content(_("Filename:"), filename, style_))
-			                 .str();
-
-			descr_.set_text(as_richtext(description));
-
-			std::string minimap_path = gamedata.minimap_path;
-			if (!minimap_path.empty()) {
-				try {
-					// Load the image
-					minimap_image_ = load_image(
-					   minimap_path,
-					   std::unique_ptr<FileSystem>(g_fs->make_sub_file_system(gamedata.filename)).get());
-					minimap_icon_.set_visible(true);
-					minimap_icon_.set_icon(minimap_image_.get());
-				} catch (const std::exception& e) {
-					log("Failed to load the minimap image : %s\n", e.what());
-				}
-			}
-		} else {
-			std::string filename_list = richtext_escape(gamedata.filename_list);
-			boost::replace_all(filename_list, "\n", "<br> • ");
-			name_label_.set_text(
-			   as_richtext(as_heading_with_content(gamedata.mapname, "", style_, true)));
-
-			descr_.set_text(
-			   as_richtext(as_heading_with_content("", filename_list, style_, true, true)));
-			minimap_icon_.set_visible(false);
-		}
-	} else {
+	if (!gamedata.errormessage.empty()) {
 		name_label_.set_text(as_richtext(
 		   as_heading_with_content(_("Error:"), gamedata.errormessage, style_, true, true)));
+		layout();
+		return;
 	}
+
+	name_label_.set_text(
+	   as_richtext(as_heading_with_content(_("Map Name:"), gamedata.mapname, style_, true)));
+
+	show_game_description(gamedata);
+
+	show_minimap(gamedata);
+
 	layout();
+}
+
+void GameDetails::show_game_description(const SavegameData& gamedata) {
+	std::string description = as_heading_with_content(
+	   mode_ == Mode::kReplay ?
+	      /** TRANSLATORS: The time a replay starts. Shown in the replay loading screen*/
+	      _("Start of Replay:") :
+	      /** TRANSLATORS: The current time of a savegame. Shown in the game saving and
+	         loading screens. */
+	      _("Game Time:"),
+	   gamedata.gametime, style_);
+
+	description = (boost::format("%s%s") % description %
+	               as_heading_with_content(_("Players:"), gamedata.nrplayers, style_))
+	                 .str();
+
+	description = (boost::format("%s%s") % description %
+	               as_heading_with_content(_("Widelands Version:"), gamedata.version, style_))
+	                 .str();
+
+	description = (boost::format("%s%s") % description %
+	               as_heading_with_content(_("Win Condition:"), gamedata.wincondition, style_))
+	                 .str();
+
+	std::string filename = gamedata.filename;
+	// Remove first directory from filename. This will be the save/ or replays/ folder
+	assert(filename.find('/') != std::string::npos);
+	filename.erase(0, filename.find('/') + 1);
+	assert(!filename.empty());
+	description = (boost::format("%s%s") % description %
+	               as_heading_with_content(_("Filename:"), filename, style_))
+	                 .str();
+
+	descr_.set_text(as_richtext(description));
+}
+
+void GameDetails::show_minimap(const SavegameData& gamedata) {
+	std::string minimap_path = gamedata.minimap_path;
+	if (!minimap_path.empty()) {
+		try {
+			// Load the image
+			minimap_image_ = load_image(
+			   minimap_path,
+			   std::unique_ptr<FileSystem>(g_fs->make_sub_file_system(gamedata.filename)).get());
+			minimap_icon_.set_visible(true);
+			minimap_icon_.set_icon(minimap_image_.get());
+		} catch (const std::exception& e) {
+			log("Failed to load the minimap image : %s\n", e.what());
+		}
+	}
 }
 
 void GameDetails::layout() {

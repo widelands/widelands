@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,15 +20,12 @@
 #ifndef WL_GRAPHIC_TEXT_LAYOUT_H
 #define WL_GRAPHIC_TEXT_LAYOUT_H
 
-#include <string>
+#include <memory>
 
 #include "graphic/align.h"
 #include "graphic/color.h"
-#include "graphic/font_handler.h"
-#include "graphic/image.h"
 #include "graphic/styles/font_style.h"
 #include "graphic/styles/panel_styles.h"
-#include "graphic/text/font_set.h"
 #include "graphic/text/rendered_text.h"
 
 /**

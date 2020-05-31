@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,18 +19,13 @@
 #include "wui/mapdetails.h"
 
 #include <algorithm>
-#include <cstdio>
-#include <memory>
-
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
+#include "graphic/text_layout.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/game_controller.h"
 #include "logic/game_settings.h"
-#include "map_io/widelands_map_loader.h"
 #include "ui_basic/box.h"
 #include "ui_basic/scrollbar.h"
 #include "wui/map_tags.h"
@@ -53,8 +48,7 @@ MapDetails::MapDetails(
                  UI::Align::kLeft,
                  UI::MultilineTextarea::ScrollMode::kNoScrolling),
      descr_(&main_box_, 0, 0, UI::Scrollbar::kSize, 0, style, ""),
-     suggested_teams_box_(
-        new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical, padding_, 0, w)) {
+     suggested_teams_box_(new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical, padding_, 0)) {
 
 	main_box_.add(&name_label_);
 	main_box_.add_space(padding_);
@@ -90,10 +84,10 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 	name_ = mapdata.name;
 	// Show directory information
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
-		name_label_.set_text(
-		   (boost::format("<rt>%s%s</rt>") % as_heading(_("Directory"), style_, true) %
-		    as_content(mapdata.localized_name, style_))
-		      .str());
+		name_label_.set_text((boost::format("<rt>%s%s</rt>") %
+		                      as_heading(_("Directory"), style_, true) %
+		                      as_content(mapdata.localized_name, style_))
+		                        .str());
 		main_box_.set_size(main_box_.get_w(), get_h());
 
 	} else {  // Show map information
@@ -165,6 +159,7 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 		if (mapdata.suggested_teams.empty()) {
 			suggested_teams_box_->hide();
 		} else {
+			suggested_teams_box_->set_size(get_parent()->get_w(), 0);
 			suggested_teams_box_->show(mapdata.suggested_teams);
 		}
 	}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,6 @@
 #include "graphic/render_queue.h"
 
 #include <algorithm>
-#include <limits>
 
 #include "base/rect.h"
 #include "base/wexception.h"

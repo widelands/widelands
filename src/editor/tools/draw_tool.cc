@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2019 by the Widelands Development Team
+ * Copyright (C) 2012-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,6 @@
 #include "editor/tools/draw_tool.h"
 
 #include "editor/tools/action_args.h"
-#include "editor/tools/history.h"
 
 // TODO(unknown): Saving every action in a list isn't very efficient.
 // A long list can take several seconds to undo/redo every action.

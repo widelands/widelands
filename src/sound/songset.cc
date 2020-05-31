@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,13 +19,9 @@
 
 #include "sound/songset.h"
 
-#include <utility>
-
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/regex.hpp>
+#include <cassert>
 
 #include "base/log.h"
-#include "helper.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 
@@ -44,8 +40,9 @@ Songset::Songset(const std::string& dir, const std::string& basename)
 Songset::~Songset() {
 	songs_.clear();
 
-	if (m_)
+	if (m_) {
 		Mix_FreeMusic(m_);
+	}
 
 	if (rwops_) {
 		SDL_FreeRW(rwops_);
@@ -102,15 +99,17 @@ Mix_Music* Songset::get_song(uint32_t random) {
 			fr_.close();  // fr_ should be Open iff rwops_ != 0
 			return nullptr;
 		}
-	} else
+	} else {
 		return nullptr;
+	}
 
-	if (rwops_)
+	if (rwops_) {
 		m_ = Mix_LoadMUS_RW(rwops_, 0);
+	}
 
-	if (m_)
+	if (m_) {
 		log("Songset: Loaded song \"%s\"\n", filename.c_str());
-	else {
+	} else {
 		log("Songset: Loading song \"%s\" failed!\n", filename.c_str());
 		log("Songset: %s\n", Mix_GetError());
 	}

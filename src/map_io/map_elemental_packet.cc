@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,6 @@
 #include "map_io/map_elemental_packet.h"
 
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 
 #include "io/profile.h"
 #include "logic/editor_game_base.h"
@@ -104,9 +103,10 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 				++team_section_id;
 				teamsection_key = (boost::format("teams%02i") % team_section_id).str().c_str();
 			}
-		} else
+		} else {
 			throw UnhandledVersionError(
 			   "MapElementalPacket", packet_version, kEightPlayersPacketVersion);
+		}
 	} catch (const WException& e) {
 		throw GameDataError("elemental data: %s", e.what());
 	}
@@ -136,8 +136,9 @@ void MapElementalPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObject
 	global_section.set_string("author", map.get_author());
 	global_section.set_string("descr", map.get_description());
 	global_section.set_string("hint", map.get_hint());
-	if (!map.get_background().empty())
+	if (!map.get_background().empty()) {
 		global_section.set_string("background", map.get_background());
+	}
 	global_section.set_string("tags", boost::algorithm::join(map.get_tags(), ","));
 
 	int counter = 0;

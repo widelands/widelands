@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,10 +19,8 @@
 #ifndef WL_ECONOMY_ROUTER_H
 #define WL_ECONOMY_ROUTER_H
 
-#include <vector>
-
-#include <boost/function.hpp>
-#include <stdint.h>
+#include <cstdint>
+#include <functional>
 
 #include "logic/map_objects/tribes/wareworker.h"
 
@@ -36,7 +34,7 @@ struct RoutingNode;
  * The functionality was split from Economy
  */
 struct Router {
-	using ResetCycleFn = boost::function<void()>;
+	using ResetCycleFn = std::function<void()>;
 
 	explicit Router(const ResetCycleFn& reset);
 

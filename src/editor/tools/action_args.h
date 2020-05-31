@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2019 by the Widelands Development Team
+ * Copyright (C) 2012-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,12 +19,6 @@
 
 #ifndef WL_EDITOR_TOOLS_ACTION_ARGS_H
 #define WL_EDITOR_TOOLS_ACTION_ARGS_H
-
-#include <list>
-#include <map>
-#include <set>
-#include <string>
-#include <vector>
 
 #include "logic/field.h"
 #include "logic/map.h"
@@ -70,11 +64,11 @@ struct EditorActionArgs {
 		std::vector<Widelands::Coords> starting_positions;
 	};
 
-	std::list<ResourceState> original_resource;                        // resources set tool
-	std::list<const Widelands::BobDescr*> old_bob_type, new_bob_type;  // bob change tools
-	std::list<std::string> old_immovable_types;                        // immovable change tools
-	std::list<Widelands::DescriptionIndex> new_immovable_types;        // immovable change tools
-	Widelands::HeightInterval interval;                                // noise height tool
+	std::list<ResourceState> original_resource;                         // resources set tool
+	std::list<const Widelands::BobDescr *> old_bob_type, new_bob_type;  // bob change tools
+	std::list<std::string> old_immovable_types;                         // immovable change tools
+	std::list<Widelands::DescriptionIndex> new_immovable_types;         // immovable change tools
+	Widelands::HeightInterval interval;                                 // noise height tool
 	std::list<Widelands::DescriptionIndex> terrain_type, original_terrain_type;  // set terrain tool
 	ResizeHistory resized;                                                       // resize tool
 

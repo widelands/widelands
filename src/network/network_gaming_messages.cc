@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2019 by the Widelands Development Team
+ * Copyright (C) 2012-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,6 @@
 #include <map>
 
 #include <boost/format.hpp>
-#include <stdint.h>
 
 #include "base/i18n.h"
 #include "base/log.h"
@@ -31,8 +30,9 @@ static std::map<std::string, std::string> ngmessages;
 
 /// Returns a translated message fitting to the message code \arg code
 const std::string NetworkGamingMessages::get_message(const std::string& code) {
-	if (ngmessages.find(code) != ngmessages.end())
+	if (ngmessages.find(code) != ngmessages.end()) {
 		return ngmessages[code];
+	}
 	// if no message for code was found, just return code
 	return code;
 }
@@ -55,8 +55,9 @@ const std::string NetworkGamingMessages::get_message(const std::string& code,
 		strings.push_back(get_message(arg1));
 		if (!arg2.empty()) {
 			strings.push_back(get_message(arg2));
-			if (!arg3.empty())
+			if (!arg3.empty()) {
 				strings.push_back(get_message(arg3));
+			}
 		}
 	}
 
@@ -73,8 +74,9 @@ const std::string NetworkGamingMessages::get_message(const std::string& code,
 			strings.resize(strings.size() - 2);
 			strings.push_back(temp);
 		} catch (...) {
-			if (last < 3)
+			if (last < 3) {
 				break;  // no way to merge the two strings;
+			}
 			try {
 				// try to merge last three strings
 				std::string temp = (boost::format(strings.at(strings.size() - 3)) %
@@ -83,8 +85,9 @@ const std::string NetworkGamingMessages::get_message(const std::string& code,
 				strings.resize(strings.size() - 3);
 				strings.push_back(temp);
 			} catch (...) {
-				if (last < 4)
+				if (last < 4) {
 					break;  // no way to merge the three strings;
+				}
 				try {
 					// try to merge all four strings
 					std::string temp =
@@ -101,8 +104,9 @@ const std::string NetworkGamingMessages::get_message(const std::string& code,
 	}
 
 	// Check if merging succeded
-	if (strings.size() == 1)
+	if (strings.size() == 1) {
 		return strings.at(0);
+	}
 
 	// No, it did not
 	return ((boost::format("%s, %s, %s, %s") % get_message(code) % get_message(arg1) %
@@ -155,14 +159,12 @@ void NetworkGamingMessages::fill_map() {
 	ngmessages["UNEXPECTED_SYNC_REP"] = _("Client sent unexpected synchronization report.");
 	ngmessages["REQUEST_OF_N_E_FILE"] =
 	   _("Client requests file although none is available to send.");
-	ngmessages["REQUEST_OF_N_E_FILEPART"] = _("Client requests file part that does not exist.");
 	ngmessages["SENT_PLAYER_TO_LOBBY"] = _("Host sent player %s to the lobby!");
 	ngmessages["DIFFERENT_WL_VERSION"] =
 	   _("WARNING: %1$s uses version: %2$s, while Host uses version: %3$s");
 	ngmessages["CLIENT_HAS_JOINED_GAME"] = _("%s has joined the game");
 	ngmessages["STARTED_SENDING_FILE"] = _("Started to send file %1$s to %2$s!");
 	ngmessages["COMPLETED_FILE_TRANSFER"] = _("Completed transfer of file %1$s to %2$s");
-	ngmessages["SENDING_FILE_PART"] = _("Sending part %1$s of file %2$s to %3$s");
 	ngmessages["PLAYER_DEFEATED"] = _("The player ‘%s’ was defeated and became a spectator.");
 	ngmessages["CLIENT_HUNG"] = _("Client %1$s did not answer for more than %2$s.");
 }

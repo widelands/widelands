@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,15 +20,8 @@
 #ifndef WL_WUI_MAPVIEW_H
 #define WL_WUI_MAPVIEW_H
 
-#include <memory>
-#include <queue>
-
-#include <boost/function.hpp>
-#include <boost/signals2.hpp>
-
 #include "base/rect.h"
 #include "base/vector.h"
-#include "graphic/game_renderer.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "logic/map.h"
 #include "logic/widelands_geometry.h"
@@ -86,6 +79,12 @@ public:
 			       std::abs(viewpoint.y - other.viewpoint.y) < epsilon;
 		}
 
+		bool view_roughly_near(const View& other) const {
+			return zoom_near(other.zoom) &&
+			       std::abs(viewpoint.x - other.viewpoint.x) < g_gr->get_xres() / 2 &&
+			       std::abs(viewpoint.y - other.viewpoint.y) < g_gr->get_yres() / 2;
+		}
+
 		// Mappixel of top-left pixel of this MapView.
 		Vector2f viewpoint;
 
@@ -121,6 +120,11 @@ public:
 	// Called whenever the view changed, also during automatic animations.
 	boost::signals2::signal<void()> changeview;
 
+	// Called whenever the view changed by a call to scroll_to_field or scroll_to_map_pixel, or by
+	// starting to drag the view.
+	// Note: This signal is called *before* the view actually starts to move.
+	boost::signals2::signal<void()> jump;
+
 	// Called when the user clicked on a field.
 	boost::signals2::signal<void(const Widelands::NodeAndTriangle<>&)> field_clicked;
 
@@ -150,7 +154,7 @@ public:
 	void mouse_to_pixel(const Vector2i& pixel, const Transition& transition);
 
 	// Move the view by 'delta_pixels'.
-	void pan_by(Vector2i delta_pixels);
+	void pan_by(Vector2i delta_pixels, const Transition& transition);
 
 	// The current view area visible in the MapView in map pixel coordinates.
 	// The returned value always has 'x' > 0 and 'y' > 0.
@@ -175,6 +179,9 @@ public:
 
 	// True if a 'Transition::Smooth' animation is playing.
 	bool is_animating() const;
+
+	// Scrolls the map and returns true if it did.
+	bool scroll_map();
 
 	// Schedules drawing of the terrain of this MapView. The returned value can
 	// be used to override contents of 'fields_to_draw' for player knowledge and

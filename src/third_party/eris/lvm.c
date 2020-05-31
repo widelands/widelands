@@ -100,7 +100,7 @@ int luaV_tointeger (const TValue *obj, lua_Integer *p, int mode) {
     if (n != f) {  /* not an integral value? */
       if (mode == 0) return 0;  /* fails if mode demands integral value */
       else if (mode > 1)  /* needs ceil? */
-        f += 1;  /* convert floor to ceil (remember: n != f) */
+        ++f;  /* convert floor to ceil (remember: n != f) */
     }
     return lua_numbertointeger(f, p);
   }
@@ -558,7 +558,7 @@ lua_Integer luaV_div (lua_State *L, lua_Integer m, lua_Integer n) {
   else {
     lua_Integer q = m / n;  /* perform C division */
     if ((m ^ n) < 0 && m % n != 0)  /* 'm/n' would be negative non-integer? */
-      q -= 1;  /* correct result for different rounding */
+      --q;  /* correct result for different rounding */
     return q;
   }
 }

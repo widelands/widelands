@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,10 +20,7 @@
 #ifndef WL_LOGIC_EDITOR_GAME_BASE_H
 #define WL_LOGIC_EDITOR_GAME_BASE_H
 
-#include <cstring>
 #include <memory>
-#include <string>
-#include <vector>
 
 #include "base/macros.h"
 #include "logic/map.h"
@@ -32,6 +29,7 @@
 #include "logic/player_area.h"
 #include "notifications/notifications.h"
 #include "scripting/lua_interface.h"
+#include "wui/game_tips.h"
 
 namespace UI {
 struct ProgressWindow;
@@ -43,19 +41,9 @@ class InteractiveGameBase;  // TODO(GunChleoc): Get rid
 namespace Widelands {
 
 class PlayersManager;
-
-class Battle;
-class Bob;
-class BuildingDescr;
-class Immovable;
-class Map;
 struct ObjectManager;
 class Player;
-struct PlayerImmovable;
 class Tribes;
-class TribeDescr;
-struct Flag;
-struct AttackController;
 struct BuildingSettings;
 
 struct NoteFieldPossession {
@@ -115,10 +103,35 @@ public:
 	// loading stuff
 	void allocate_player_maps();
 	virtual void postload();
-	void load_graphics(UI::ProgressWindow& loader_ui);
+	void load_graphics();
 	virtual void cleanup_for_load();
 
-	void set_road(const FCoords&, uint8_t direction, uint8_t roadtype);
+	/// Create a new loader UI and register which type of gametips to select from.
+	/// If 'show_game_tips' is true, game tips will be shown immediately.
+	/// Optionally sets a background image.
+	UI::ProgressWindow& create_loader_ui(const std::vector<std::string>& tipstexts,
+	                                     bool show_game_tips,
+	                                     const std::string& background = std::string());
+
+	/// If 'background' is not empty, change the background image for the loader UI.
+	/// If 'backgound' is empty, show game tips instead.
+	/// There must be a loader ui and no game tips.
+	void change_loader_ui_background(const std::string& background);
+
+	/// Set step text for the current loader UI if it's not nullptr.
+	void step_loader_ui(const std::string& text) const;
+
+#ifndef NDEBUG
+	/// Check whether we currently have a loader_ui. Used for asserts only.
+	bool has_loader_ui() const {
+		return loader_ui_ != nullptr;
+	}
+#endif
+
+	// Destroy the loader UI and game tips
+	void remove_loader_ui();
+
+	void set_road(const FCoords&, uint8_t direction, RoadSegment roadtype);
 
 	// warping stuff. instantly creating map_objects
 	Building& warp_building(const Coords&,
@@ -130,11 +143,15 @@ public:
 	                                DescriptionIndex,
 	                                bool loading = false,
 	                                FormerBuildings former_buildings = FormerBuildings(),
-	                                const BuildingSettings* settings = nullptr);
+	                                const BuildingSettings* settings = nullptr,
+	                                std::map<DescriptionIndex, Quantity> preserved_wares =
+	                                   std::map<DescriptionIndex, Quantity>());
 	Building& warp_dismantlesite(const Coords&,
 	                             PlayerNumber,
 	                             bool loading = false,
-	                             FormerBuildings former_buildings = FormerBuildings());
+	                             FormerBuildings former_buildings = FormerBuildings(),
+	                             std::map<DescriptionIndex, Quantity> preserved_wares =
+	                                std::map<DescriptionIndex, Quantity>());
 	Bob& create_critter(const Coords&, DescriptionIndex bob_type_idx, Player* owner = nullptr);
 	Bob& create_critter(const Coords&, const std::string& name, Player* owner = nullptr);
 	Immovable&
@@ -144,8 +161,9 @@ public:
 	                                      MapObjectDescr::OwnerType,
 	                                      Player* owner,
 	                                      const BuildingDescr* former_building);
-	Bob& create_ship(const Coords&, int ship_type_idx, Player* owner = nullptr);
+	Bob& create_ship(const Coords&, const DescriptionIndex ship_type_idx, Player* owner = nullptr);
 	Bob& create_ship(const Coords&, const std::string& name, Player* owner = nullptr);
+	Bob& create_ferry(const Coords&, Player* owner);
 
 	uint32_t get_gametime() const {
 		return gametime_;
@@ -158,6 +176,7 @@ public:
 	void inform_players_about_ownership(MapIndex, PlayerNumber);
 	void inform_players_about_immovable(MapIndex, MapObjectDescr const*);
 	void inform_players_about_road(FCoords, MapObjectDescr const*);
+	void inform_players_about_waterway(FCoords, MapObjectDescr const*);
 
 	void unconquer_area(PlayerArea<Area<FCoords>>, PlayerNumber destroying_player = 0);
 	void conquer_area(PlayerArea<Area<FCoords>>, bool conquer_guarded_location = false);
@@ -196,6 +215,8 @@ public:
 
 	// Returns the mutable tribes. Prefer tribes() whenever possible.
 	Tribes* mutable_tribes();
+
+	void create_tempfile_and_save_mapdata(FileSystem::Type type);
 
 private:
 	/// Common function for create_critter and create_ship.
@@ -254,6 +275,11 @@ private:
 	std::unique_ptr<InteractiveBase> ibase_;
 	Map map_;
 
+	// Shown while loading or saving a game/map
+	std::unique_ptr<UI::ProgressWindow> loader_ui_;
+	std::unique_ptr<GameTips> game_tips_;
+	std::vector<std::string> registered_game_tips_;
+
 	/// Even after a map is fully loaded, some static data (images, scripts)
 	/// will still be read from a filesystem whenever a map/game is saved.
 	/// To avoid potential filesystem conflicts when (pre)loading/saving/deleting
@@ -261,7 +287,6 @@ private:
 	/// a temporary file (in a special dir) is created for such data.
 	std::unique_ptr<FileSystem> tmp_fs_;
 	void delete_tempfile();
-	void create_tempfile_and_save_mapdata(FileSystem::Type type);
 
 	DISALLOW_COPY_AND_ASSIGN(EditorGameBase);
 };
