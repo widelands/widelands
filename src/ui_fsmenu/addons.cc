@@ -538,14 +538,13 @@ void AddOnsCtrl::install(const AddOnInfo& remote) {
 	{
 		const std::string new_path = kAddOnDir + g_fs->file_separator() + remote.internal_name;
 
-		assert(g_fs->file_exists(path));
+		assert(g_fs->is_directory(path));
 		assert(!g_fs->file_exists(new_path));
-		assert(!g_fs->is_directory(new_path));
 
 		g_fs->fs_rename(path, new_path);
 
 		assert(!g_fs->file_exists(path));
-		assert(g_fs->file_exists(new_path));
+		assert(g_fs->is_directory(new_path));
 	}
 
 	// Now download the translations
@@ -575,17 +574,16 @@ void AddOnsCtrl::upgrade(const AddOnInfo& remote, const bool full_upgrade) {
 		// Upgrade the add-on
 		const std::string new_path = kAddOnDir + g_fs->file_separator() + remote.internal_name;
 
-		assert(g_fs->file_exists(path));
-		assert(g_fs->file_exists(new_path) ^ g_fs->is_directory(new_path));
+		assert(g_fs->is_directory(path));
+		assert(g_fs->is_directory(new_path));
 
 		g_fs->fs_unlink(new_path);  // Uninstall the old version…
 
 		assert(!g_fs->file_exists(new_path));
-		assert(!g_fs->is_directory(new_path));
 
 		g_fs->fs_rename(path, new_path);  // …and replace with the new one.
 
-		assert(g_fs->file_exists(new_path));
+		assert(g_fs->is_directory(new_path));
 		assert(!g_fs->file_exists(path));
 	}
 
@@ -605,7 +603,7 @@ void AddOnsCtrl::upgrade(const AddOnInfo& remote, const bool full_upgrade) {
 
 std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw, const AddOnInfo& info) {
 	try {
-		piw.set_message_1((boost::format(_("Downloading %s…")) % info.descname()).str());
+		piw.set_message_1((boost::format(_("Downloading ‘%s’…")) % info.descname()).str());
 
 		const std::string temp_dir = g_fs->canonicalize_name(
 				g_fs->get_userdatadir() + "/" + kTempFileDir + "/" + info.internal_name + kTempFileExtension);
@@ -634,7 +632,7 @@ std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw, const AddOn
 
 std::set<std::string> AddOnsCtrl::download_i18n(ProgressIndicatorWindow& piw, const AddOnInfo& info, const Locales& all_locales) {
 	try {
-		piw.set_message_1((boost::format(_("Downloading translations for %s…")) % info.descname()).str());
+		piw.set_message_1((boost::format(_("Downloading translations for ‘%s’…")) % info.descname()).str());
 
 		// Download all known locales one by one.
 		// TODO(Nordfriese): When we have a real server, we should let the server provide us

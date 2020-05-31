@@ -146,7 +146,7 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 
 // TODO(Nordfriese): Add-on downloading speed would benefit greatly from storing
 // the files as ZIPs on the server. Similar for translation bundles. Perhaps
-// someone would like to write code to uncompress downloaded ZIP file some day…
+// someone would like to write code to uncompress a downloaded ZIP file some day…
 
 void NetAddons::download_addon_file(const std::string& name, const std::string& output) {
 	init();
@@ -172,7 +172,7 @@ void NetAddons::download_addon_file(const std::string& name, const std::string& 
 std::string NetAddons::download_i18n(const std::string& name, const std::string& locale) {
 	init();
 
-	const std::string temp_dirname = kTempFileDir + g_fs->file_separator() + name + ".mo";
+	const std::string temp_dirname = kTempFileDir + g_fs->file_separator() + name + ".mo" + kTempFileExtension;
 	g_fs->ensure_directory_exists(temp_dirname);
 
 	const std::string relative_output = temp_dirname + g_fs->file_separator() + locale + ".mo" + kTempFileExtension;
