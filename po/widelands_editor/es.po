@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-05-06 09:21+0000\n"
+"PO-Revision-Date: 2020-05-25 09:13+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -134,7 +134,7 @@ msgstr "Remover elementos del mapa, o disminuir los elementos del mapa por el va
 #: ../../data/scripting/editor/editor_controls.lua:45
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr "Shift + Click"
+msgstr "Shift + Clic"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
