@@ -64,7 +64,12 @@ int main(int argc, char** argv) {
 			return 1;
 		}
 
-		ml->preload_map(true);
+		ml->preload_map(true, nullptr);
+		if (!map->required_addons().empty()) {
+			log("This map depends on add-ons!\n");
+			return 1;
+		}
+
 		ml->load_map_complete(egbase, Widelands::MapLoader::LoadType::kScenario);
 
 		std::unique_ptr<Texture> minimap(
