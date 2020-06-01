@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-05-28 19:30+0000\n"
+"PO-Revision-Date: 2020-06-01 04:58+0000\n"
 "Last-Translator: Niektóry <niektory@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -479,7 +479,7 @@ msgstr "Rozpocznij wydobycie rudy żelaza z gór na wyspie."
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:274
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:285
 msgid "There is more to it…"
-msgstr "Jest jeszcze coś..."
+msgstr "Jest jeszcze coś…"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:228
 msgid "Another gold mountain"
@@ -560,7 +560,7 @@ msgid ""
 "fixed transport routes called waterways. A waterway is built just like a "
 "road: You click on a flag near the shore, choose ‘Build a waterway’, and "
 "select the path for the waterway just as you would do for a road."
-msgstr "W odróżnieniu od statków, które mogą popłynąć do dowolnego portu, w którym są potrzebne, promy płyną po sztywno ustalonych trasach zwanych drogami wodnymi. Budowa dróg wodnych przebiega analogicznie do budowa dróg: należy kliknąć flagę na wybrzeżu, wybrać „zbuduj drogę wodną”, po czym poprowadzić trasę drogi wodnej, tak jak przy budowie drogi."
+msgstr "W odróżnieniu od statków, które mogą popłynąć do dowolnego portu, w którym są potrzebne, promy płyną po sztywno ustalonych trasach zwanych drogami wodnymi. Budowa dróg wodnych przebiega analogicznie do budowa dróg: należy kliknąć flagę na wybrzeżu, wybrać ‘zbuduj drogę wodną’, po czym poprowadzić trasę drogi wodnej, tak jak przy budowie drogi."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:265
 msgid ""
@@ -618,7 +618,7 @@ msgid ""
 "A waterway is built just like a road: You click on a flag near the shore, "
 "choose ‘Build a waterway’, and select the path for the waterway just as you "
 "would do for a road."
-msgstr "Budowa dróg wodnych przebiega analogicznie do budowa dróg: należy kliknąć flagę na wybrzeżu, wybrać „zbuduj drogę wodną”, po czym poprowadzić trasę drogi wodnej, tak jak przy budowie drogi."
+msgstr "Budowa dróg wodnych przebiega analogicznie do budowa dróg: należy kliknąć flagę na wybrzeżu, wybrać ‘zbuduj drogę wodną’, po czym poprowadzić trasę drogi wodnej, tak jak przy budowie drogi."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:300
 msgid ""
@@ -660,7 +660,7 @@ msgid ""
 "of waterways becoming severe bottlenecks in your economy. Try to build "
 "several of them in parallel to distribute the strain. If this is not "
 "possible, it is in some cases even more efficient not to use waterways."
-msgstr "Jeśli twoja droga wodna pozwala na istotne skrócenie drogi towarów pomiędzy sieciami dróg, wiele towarów zostanie przez nią przesłane. Każda droga wodna może pomieścić tylko jeden prom (w odróżnieniu od dróg, które mogą otrzymać drugiego tragarza, kiedy są zatłoczone) i ponieważ często musi być dłuższa niż zalecana długość segmentów dróg (2-3 pola), istnieje ryzyko, że stanie się wąskim gardłem twojej ekonomii. Spróbuj budować kilka równoległych dróg wodnych, aby rozdzielić obciążenie. Jeśli nie jest to możliwe, w niektórych przypadkach nie używanie dróg wodnych może okazać się bardziej wydajne."
+msgstr "Jeśli twoja droga wodna pozwala na istotne skrócenie drogi towarów pomiędzy sieciami dróg, wiele towarów zostanie przez nią przesłane. Każda droga wodna może pomieścić tylko jeden prom (w odróżnieniu od dróg, które mogą otrzymać drugiego tragarza, kiedy są zatłoczone) i ponieważ często musi być dłuższa niż zalecana długość segmentów dróg (2–3 pola), istnieje ryzyko, że stanie się wąskim gardłem twojej ekonomii. Spróbuj budować kilka równoległych dróg wodnych, aby rozdzielić obciążenie. Jeśli nie jest to możliwe, w niektórych przypadkach nie używanie dróg wodnych może okazać się bardziej wydajne."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:318
 msgid "Ferry yard production"

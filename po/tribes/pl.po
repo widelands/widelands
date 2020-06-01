@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-05-24 20:10+0000\n"
+"PO-Revision-Date: 2020-06-01 04:41+0000\n"
 "Last-Translator: Niektóry <niektory@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -2669,7 +2669,7 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Główna żyła węgla tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Tej kopalni nie można już dalej ulepszać - rozważ jej rozbiórkę lub zniszczenie."
+msgstr "Główna żyła węgla tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Tej kopalni nie można już dalej ulepszać – rozważ jej rozbiórkę lub zniszczenie."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:7
@@ -2782,7 +2782,7 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Główna żyła złota tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Tej kopalni nie można już dalej ulepszać - rozważ jej rozbiórkę lub zniszczenie."
+msgstr "Główna żyła złota tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Tej kopalni nie można już dalej ulepszać – rozważ jej rozbiórkę lub zniszczenie."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:7
@@ -2835,7 +2835,7 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Główna żyła rudy żelaza tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Tej kopalni nie można już dalej ulepszać - rozważ jej rozbiórkę lub zniszczenie."
+msgstr "Główna żyła rudy żelaza tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Tej kopalni nie można już dalej ulepszać – rozważ jej rozbiórkę lub zniszczenie."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:7
@@ -2943,7 +2943,7 @@ msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Główna żyła kamieni tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Tej kopalni nie można już dalej ulepszać - rozważ jej rozbiórkę lub zniszczenie."
+msgstr "Główna żyła kamieni tej kopalni została wyczerpana. Spodziewaj się znacznego spadku produktywności. Tej kopalni nie można już dalej ulepszać – rozważ jej rozbiórkę lub zniszczenie."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:7

@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-05-24 08:24+0000\n"
+"PO-Revision-Date: 2020-06-01 06:47+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -109,14 +109,14 @@ msgid ""
 "‘The Citadel of Adlen surely is the finest masterpiece of Barbarian "
 "craftsmanship. Nothing as strong and big and beautiful has ever been built "
 "in such a short time.’"
-msgstr "‘Adlen sitadelli on tosiaankin Barbaarien käsityön mestariteos. Mitään noin suurta ja isoa ja kaunista ei ole koskaan rakennettu niin lyhyessä ajassa.’"
+msgstr "‘Adlen kastelli on tosiaankin Barbaarien käsityön mestariteos. Mitään noin suurta ja isoa ja kaunista ei ole koskaan rakennettu niin lyhyessä ajassa.’"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/helptexts.lua:9
 msgctxt "barbarians_building"
 msgid ""
 "Colintan, chief planner of the Citadel of Adlen,<br>at its opening ceremony"
-msgstr "Colintan, Adlen Sitadellin johtava suunnittelija, <br> avausseremoniassaan"
+msgstr "Colintan, Adlen Kastellin johtava suunnittelija, <br> avausseremoniassaan"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/helptexts.lua:3

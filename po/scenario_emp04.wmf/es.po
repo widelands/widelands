@@ -33,7 +33,7 @@ msgid ""
 "Dismantle all unproductive small buildings to get some resources for new "
 "buildings."
 msgstr ""
-"Desmantelar todos los edificio pequeños no productivos para tener algunos "
+"Desmantelar todos los edificios pequeños no productivos para tener algunos "
 "recursos para nuevos edificios."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:47
@@ -59,23 +59,23 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:62
 msgid "Click on one of the farms"
-msgstr "Haga clic en una de las granjas"
+msgstr "Haz clic en una de las granjas"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:64
 msgid "Open the Building Window of a Farm"
-msgstr "Abra la Ventana de Construcción de una Granja"
+msgstr "Abre la Ventana de Construcción de una Granja"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:65
 msgid ""
 "Click on a farm building to open its building window. This will let you "
 "analyze the building."
 msgstr ""
-"Haga clic en un edificio de una granja para abrir su ventana de "
-"construcción. Esto le permite analizar el edificio."
+"Haz clic en un edificio de una granja para abrir su ventana de construcción."
+" Esto te permite analizar el edificio."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:71
 msgid "Find the construction plans for the farms"
-msgstr "Encuentre los planos de construcción para las granjas"
+msgstr "Encuentra los planos de construcción para las granjas"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:73
 msgid "Find Farm Construction Plans"
@@ -86,12 +86,12 @@ msgid ""
 "Recover the construction plans for the farms. Search for them in the hills "
 "east of your border."
 msgstr ""
-"Recupere los planos de construcción para las granjas. Búsquelos en las "
-"colinas al este de su frontera."
+"Recupera los planos de construcción para las granjas. Búscalos en las "
+"colinas al este de tu frontera."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:80
 msgid "Build at least 3 lumberjack’s houses and 2 quarries"
-msgstr "Construya al menos 3 casas de leñadores y 2 canteras"
+msgstr "Construye al menos 3 casas de leñadores y 2 canteras"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:82
 msgid "Quarries and Lumberjacks"
@@ -102,12 +102,12 @@ msgid ""
 "Build at least three lumberjack’s houses and two quarries to renew your "
 "building material supply chain."
 msgstr ""
-"Construya al menos tres casas de leñadores y dos canteras para renovar su "
+"Construye al menos tres casas de leñadores y dos canteras para renovar tu "
 "cadena de abastecimiento de material de construcción."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:89
 msgid "Produce fish and rations"
-msgstr "Produzca pescado y raciones"
+msgstr "Produce pescado y raciones"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:91
 msgid "Food Production"
@@ -116,12 +116,12 @@ msgstr "Producción de Alimento"
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:92
 msgid "Find and catch some fish. Afterwards, produce rations for your miners."
 msgstr ""
-"Encuentre y pesque algunos pescados. Después produzca raciones para sus "
+"Encuentra y pesca algunos pescados. Después produce raciones para tus "
 "mineros."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:98
 msgid "Replace the old and ineffective forester’s houses"
-msgstr "Reemplace las viejas e ineficaces casas de leñadores"
+msgstr "Reemplaza las viejas e ineficaces casas de leñadores"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:100
 msgid "Build Two New Forester’s Houses"
@@ -131,7 +131,7 @@ msgstr "Construye Dos Casas de Silvicultor Nuevas"
 msgid ""
 "Replace the two forester’s houses by new ones to increase productivity."
 msgstr ""
-"Reemplace las dos casas de silvicultor por nuevas para aumentar la "
+"Reemplaza las dos casas de silvicultor por nuevas para aumentar la "
 "productividad."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:107
@@ -152,7 +152,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:116
 msgid "Deal with Julia to get the technology"
-msgstr ""
+msgstr "Trata con Julia para obtener la tecnología"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:118
 msgid "Diplomacy: Trade or War"
@@ -164,7 +164,7 @@ msgid ""
 "goddess in your headquarters or conquer the monastery."
 msgstr ""
 "Decide: Almacena 35 gavillas de trigo y 15 ánforas de vino para la diosa en "
-"tu cuartel central, o conquista el monasterio."
+"tu sede central, o conquista el monasterio."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:125
 msgid "Train at least 3 heroes"
@@ -178,6 +178,8 @@ msgstr "Entrenamiento de Héroes"
 msgid ""
 "Use your resources wisely to train at least three fully promoted heroes."
 msgstr ""
+"Utiliza tus recursos sabiamente para entrenar al menos a tres héroes "
+"completamente promovidos."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:134
 msgid "Produce at least 10 tools"
@@ -195,6 +197,8 @@ msgstr "Produce al menos diez herramientas para mejorar tu economía."
 msgid ""
 "Remember that you can control the production amount in the economy settings."
 msgstr ""
+"Recuerda que puedes controlar los montos de producción en los ajustes de "
+"economía."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:144
 msgid "Recruit new soldiers"
@@ -222,40 +226,39 @@ msgstr "Derrota al Enemigo"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:157
 msgid "End the Barbarian intrusion into your very own part of the world."
-msgstr ""
+msgstr "Termina con la intrusión Bárbara en tu propio rincón del mundo."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:163
 msgid "Build 2 charcoal kiln"
-msgstr "Construye 2 fosas de carbonización"
+msgstr "Construye 2 hornos de carbón"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:165
 msgid "Build Two Charcoal Kilns"
-msgstr "Construye Dos Fosas de Carbonización"
+msgstr "Construye Dos Hornos de Carbón"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:166
 msgid "Build two charcoal kilns to support the iron industry."
-msgstr ""
-"Construye 2 fosas de carbonización para consolidar la industria de hierro."
+msgstr "Construye 2 hornos de carbón para consolidar la industria de hierro."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:167
 msgid "Remember to ensure a constant log supply for them."
-msgstr ""
+msgstr "Recuerda asegurar un suministro constante de troncos para ellos."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:173
 msgid "Increase your military strength by training your soldiers"
-msgstr ""
+msgstr "Incrementa tu fuerza militar entrenando a tus soldados"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:175
 msgid "Training is Important"
-msgstr "Entrenamiento es Importante"
+msgstr "El Entrenamiento es Importante"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:176
 msgid "Train your soldiers hard and train them fast."
-msgstr ""
+msgstr "Entrena a tus soldados en forma dura y rápida."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:177
 msgid "You need to increase your military strength."
-msgstr ""
+msgstr "Necesitas incrementar tu fuerza militar."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:183
 msgid "Build a training camp and enhance the arena"
@@ -263,7 +266,7 @@ msgstr "Construye un campo de entrenamiento y mejora la arena"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:185
 msgid "More Efficient Training Buildings"
-msgstr ""
+msgstr "Edificios de Entrenamiento más Eficientes"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:186
 msgid "Build a training camp and enhance your arena to a colosseum."
@@ -271,7 +274,7 @@ msgstr "Construye un campo de entrenamiento y mejora tu arena al coliseo."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:197
 msgid "Home, Sweet Home"
-msgstr ""
+msgstr "Hogar, Dulce Hogar"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:198
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:209
@@ -287,15 +290,18 @@ msgid ""
 " again. I am really looking forward to a walk on our lovely coast and to "
 "hunting in our deep forests."
 msgstr ""
+"Finalmente logramos volver a casa. Estoy tan contento de ver nuevamente a "
+"nuestro hermoso país. Realmente deseo caminar otra vez por nuestra bella "
+"costa y cazar en nuestros profundos bosques."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:203
 msgid "I expect that Saledus and Amalea are deeply delighted as well."
-msgstr ""
+msgstr "Espero que Saledus y Amalea también estén profundamente encantados."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:208
 msgid "Tools, Tools, Tools"
-msgstr "Herramientos, Herramientos, Herramientos"
+msgstr "Herramientas, Herramientas, Herramientas"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:211
@@ -303,6 +309,8 @@ msgid ""
 "Praise the gods! We just ensured a constant tool supply. Now we should be "
 "able to expand our economy."
 msgstr ""
+"¡Alabados sean los dioses! Aseguramos un suministro continuo de "
+"herramientas. Ahora podremos expandir nuestra economía."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:216
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:603
@@ -373,7 +381,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:253
 msgid "Difficult Times"
-msgstr "Tiempos Difficiles"
+msgstr "Tiempos Difíciles"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:254
 msgid "Lutius accepts the challenge"
