@@ -4,7 +4,7 @@
 # Translators:
 # Elias Delakovias, 2015
 # erimitis, 2018
-# MasterWord, 2015
+# 77960155d0a4db79ed901e7c2ee242e7_4b8c532, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"

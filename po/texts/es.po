@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-05-22 19:24+0000\n"
+"PO-Revision-Date: 2020-05-25 08:09+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -801,7 +801,7 @@ msgstr "Ctrl+Teclas de flecha"
 #: ../../data/txts/tips/general_game.lua:83
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
-msgstr ""
+msgstr "Mueve la vista del mapa utilizando %1%. %2% va mover la vista rapidamente, %3% la mueve lento."
 
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"

@@ -8,13 +8,14 @@
 # Wesmania <ikk_pl@yahoo.co.uk>, 2016
 # Lech Lorens <lech.lorens@gmail.com>, 2019
 # Niektóry <niektory@gmail.com>, 2020
+# Niektóry <niektory@gmail.com>, 2020
 # tombox <wptom@wp.pl>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-05-22 15:57+0000\n"
+"PO-Revision-Date: 2020-06-01 05:23+0000\n"
 "Last-Translator: Niektóry <niektory@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -47,7 +48,7 @@ msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
 "bug report on %s and specify your Widelands version and the map you tried to"
 " load."
-msgstr "Nie ma żadnych artefaktów na tej mapie. To nie powinno się zdarzyć. Proszę wypełnić raport o błędzie w %si sprecyzować, którą wersję Widelands i którą mapę próbowałeś załadować."
+msgstr "Nie ma żadnych artefaktów na tej mapie. To nie powinno się zdarzyć. Proszę wypełnić raport o błędzie w %s i sprecyzować, którą wersją Widelands i którą mapę próbowałeś załadować."
 
 #. TRANSLATORS: Keep this as short as possible. You can also translate this as
 #. "New artifact"
