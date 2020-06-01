@@ -112,6 +112,8 @@ The order of add-ons matters. Add-ons can be reordered in the in-game add-ons ma
 
 In the editor, world (but not tribes) add-ons will be run, allowing you to create maps with new worlds. The information which add-ons a map was created with is stored in the map file. When opening a map in the editor or starting a new game, the world add-ons required by the map will be enabled and all other world add-ons disabled. Therefore map designers need to choose the add-ons they want to use prior to launching the editor; the choice can not be modified later. Their choice of world add-ons will also be enforced whenever someone starts a game on that map. Script add-ons are ignored by the editor. Tribes add-ons are also ignored; therefore it is not possible to recommend an add-on-defined tribe as the default tribe for a player.
 
+After installing an add-on that contains new terrain textures, the game needs to be restarted or the new terrains will not be rendered correctly.
+
 When loading a game, the game will activate the tribes- and world add-ons the game was originally started with, and disable all others. Script add-ons are ignored on loading. Starting and win conditions as well as maps and campaign/scenario scripts are stored in the savegame independently from the add-on that defines them.
 
 In multiplayer games, all players need to enable the same add-ons at the same version in the same order for the game to work without desyncs. No checks for this are implemented so far.

@@ -95,7 +95,7 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario, std::vector<AddOnIn
 			}
 			// …and now enable the ones we want
 			auto insert_before = addons->begin();
-			for (const auto& requirement : elemental_data_packet.required_addons()) {
+			for (const auto& requirement : map_.required_addons()) {
 				bool found = false;
 				for (auto& pair : g_addons) {
 					if (pair.first.internal_name == requirement.first) {
