@@ -23,6 +23,9 @@
 #include <cstring>
 #include <memory>
 
+#include <boost/format.hpp>
+
+#include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -144,6 +147,30 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 	return result_vector;
 }
 
+// If a file does not exist or some other error occurs, we may get a valid file
+// containing the text "404: Not Found". So we open the file, read the first 14
+// characters, and check whether this is the case.
+// Another problem we can forget about when we have a real server…
+// Returns "" if the file is OK, otherwise an error message as a string.
+static std::string check_downloaded_file(const std::string& path) {
+	try {
+		std::unique_ptr<StreamRead> checker(g_fs->open_stream_read(path));
+		if (!checker) {
+			return (boost::format(_("Downloaded file ‘%s’: Unable to open output file")) % path).str();
+		} else {
+			char buffer[15];
+			checker->data(&buffer, 14);
+			buffer[14] = '\0';
+			if (std::strcmp(buffer, "404: Not Found") == 0) {
+				return (boost::format(_("Downloaded file ‘%s’: ‘404: Not Found’")) % path).str();
+			}
+		}
+	} catch (const std::exception& e) {
+		return (boost::format(_("Downloaded file ‘%1$s’: Invalid output file: %2$s")) % path % e.what()).str();
+	}
+	return "";
+}
+
 // TODO(Nordfriese): Add-on downloading speed would benefit greatly from storing
 // the files as ZIPs on the server. Similar for translation bundles. Perhaps
 // someone would like to write code to uncompress a downloaded ZIP file some day…
@@ -166,6 +193,11 @@ void NetAddons::download_addon_file(const std::string& name, const std::string& 
 
 	if (res != CURLE_OK) {
 		throw wexception("cURL terminated with error code %d", res);
+	}
+	const std::string result = check_downloaded_file(output);
+	if (!result.empty()) {
+		log("ERROR: %s -> fail\n", result.c_str());
+		throw wexception("%s", result.c_str());
 	}
 }
 
@@ -191,39 +223,19 @@ std::string NetAddons::download_i18n(const std::string& name, const std::string&
 
 	fclose(out_file);
 
-	bool success = true;
-	if (res == CURLE_OK) {
-		// If the locale does not exist, we may get a valid file containing the text "404: Not Found".
-		// So we open the file, read the first 14 characters, and check whether this is the case.
-		// Another problem we can forget about when we have a real server…
-		try {
-			std::unique_ptr<StreamRead> checker(g_fs->open_stream_read(relative_output));
-			if (!checker) {
-				success = false;
-				log("ERROR: Downloading add-on translation %s for %s to %s: Unable to open output file\n",
-						locale.c_str(), name.c_str(), canonical_output.c_str());
-			} else {
-				char buffer[15];
-				checker->data(&buffer, 14);
-				buffer[14] = '\0';
-				if (std::strcmp(buffer, "404: Not Found") == 0) {
-					success = false;
-					log("WARNING: Downloading add-on translation %s for %s to %s was skipped due to '404: Not Found'\n",
-							locale.c_str(), name.c_str(), canonical_output.c_str());
-				}
-			}
-		} catch (const std::exception& e) {
-			success = false;
-			log("ERROR: Downloading add-on translation %s for %s to %s: Invalid output file (%s)\n",
-					locale.c_str(), name.c_str(), canonical_output.c_str(), e.what());
-		}
-	} else {
-		success = false;
+	if (res != CURLE_OK) {
 		log("ERROR: Downloading add-on translation %s for %s to %s: cURL returned error code %d\n",
 				locale.c_str(), name.c_str(), canonical_output.c_str(), res);
+		return "";
 	}
 
-	return success ? canonical_output : "";
+	const std::string result = check_downloaded_file(relative_output);
+	if (result.empty()) {
+		return canonical_output;
+	} else {
+		log("WARNING: %s -> skip\n", result.c_str());
+		return "";
+	}
 }
 
 CLANG_DIAG_ON("-Wdisabled-macro-expansion")

@@ -480,11 +480,11 @@ void AddOnsCtrl::layout() {
 	autofix_dependencies_.set_size(get_w() / 8, get_h() / 16);
 	autofix_dependencies_.set_pos(Vector2i(get_w() * 2 / 3, get_h() * 13 / 16));
 
-	installed_addons_wrapper_.set_max_size(tabs_.get_w(), tabs_.get_h() - kRowButtonSize);
-	browse_addons_wrapper_.set_max_size(tabs_.get_w(), tabs_.get_h() - kRowButtonSize);
+	installed_addons_wrapper_.set_max_size(tabs_.get_w(), tabs_.get_h() - 2 * kRowButtonSize);
+	browse_addons_wrapper_.set_max_size(tabs_.get_w(), tabs_.get_h() - 2 * kRowButtonSize);
 }
 
-static void install_translation(const std::string& temp_locale_path, const std::string& addon_name, bool is_upgrade) {
+static void install_translation(const std::string& temp_locale_path, const std::string& addon_name) {
 	assert(g_fs->file_exists(temp_locale_path));
 
 	// NOTE:
@@ -504,7 +504,7 @@ static void install_translation(const std::string& temp_locale_path, const std::
 	const std::string new_locale_path = new_locale_dir + g_fs->file_separator() + addon_name + ".mo";
 
 	assert(!g_fs->is_directory(new_locale_path));
-	if (is_upgrade && g_fs->file_exists(new_locale_path)) {
+	if (g_fs->file_exists(new_locale_path)) {
 		// delete the outdated translation if present
 		g_fs->fs_unlink(new_locale_path);
 	}
@@ -539,6 +539,10 @@ void AddOnsCtrl::install(const AddOnInfo& remote) {
 		const std::string new_path = kAddOnDir + g_fs->file_separator() + remote.internal_name;
 
 		assert(g_fs->is_directory(path));
+		if (g_fs->file_exists(new_path)) {
+			// erase leftovers from manual uninstallations
+			g_fs->fs_unlink(new_path);
+		}
 		assert(!g_fs->file_exists(new_path));
 
 		g_fs->fs_rename(path, new_path);
@@ -549,7 +553,7 @@ void AddOnsCtrl::install(const AddOnInfo& remote) {
 
 	// Now download the translations
 	for (const std::string& temp_locale_path : download_i18n(piw, remote, all_locales)) {
-		install_translation(temp_locale_path, remote.internal_name, false);
+		install_translation(temp_locale_path, remote.internal_name);
 	}
 
 	g_addons.push_back(std::make_pair(preload_addon(remote.internal_name), true));
@@ -589,7 +593,7 @@ void AddOnsCtrl::upgrade(const AddOnInfo& remote, const bool full_upgrade) {
 
 	// Now download the translations
 	for (const std::string& temp_locale_path : download_i18n(piw, remote, all_locales)) {
-		install_translation(temp_locale_path, remote.internal_name, true);
+		install_translation(temp_locale_path, remote.internal_name);
 	}
 
 	for (auto& pair : g_addons) {
@@ -607,6 +611,10 @@ std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw, const AddOn
 
 		const std::string temp_dir = g_fs->canonicalize_name(
 				g_fs->get_userdatadir() + "/" + kTempFileDir + "/" + info.internal_name + kTempFileExtension);
+		if (g_fs->file_exists(temp_dir)) {
+			// cleanse outdated cache
+			g_fs->fs_unlink(temp_dir);
+		}
 		g_fs->ensure_directory_exists(temp_dir);
 		for (const std::string& subdir : info.file_list.directories) {
 			g_fs->ensure_directory_exists(g_fs->canonicalize_name(temp_dir + "/" + subdir));
@@ -622,6 +630,7 @@ std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw, const AddOn
 
 		return temp_dir;
 	} catch (const std::exception& e) {
+		piw.end_modal(UI::Panel::Returncodes::kBack);
 		UI::WLMessageBox w(this, _("Error"), (boost::format(
 				_("The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n\nError Message:\n%2$s"))
 				% info.internal_name.c_str() % e.what()).str(), UI::WLMessageBox::MBoxType::kOk);
@@ -668,6 +677,7 @@ std::set<std::string> AddOnsCtrl::download_i18n(ProgressIndicatorWindow& piw, co
 
 		return result;
 	} catch (const std::exception& e) {
+		piw.end_modal(UI::Panel::Returncodes::kBack);
 		UI::WLMessageBox w(this, _("Error"), (boost::format(
 				_("The translation files for the add-on ‘%1$s’ could not be downloaded from the server. "
 				"Installing/upgrading the translations for this add-on will be skipped.\n\nError Message:\n%2$s"))
