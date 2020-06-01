@@ -7,7 +7,7 @@
 # Максим Дронь <dronmax@gmail.com>, 2015
 # Viktor S <awsswa59@gmail.com>, 2020
 # Yuriy Sokolov <lention@mail.ru>, 2015
-# Денис Шабанов <inactive+Dodolphin@transifex.com>, 2016
+# bcd998a534fa92d05529385de8735da7_84390ba <27ce5340b01d4cdb2226fa37a41159b9_403942>, 2016
 # Денис Шабанов <shadenis2015@gmail.com>, 2016
 # Олег Шевченко <olegrock@gmail.com>, 2017
 # Олег Шевченко <olegrock@gmail.com>, 2019
@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-07 19:37+0000\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
 "PO-Revision-Date: 2020-04-24 11:56+0000\n"
 "Last-Translator: Viktor S <awsswa59@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
