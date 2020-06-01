@@ -492,8 +492,8 @@ world:new_terrain_type{
    dither_layer = 180,
    fps = 14,
    temperature = 100,
-   humidity = 0.999,
-   fertility = 0.001,
+   humidity = 1,
+   fertility = 1,
 }
 
 
@@ -832,8 +832,8 @@ world:new_terrain_type{
    dither_layer = 171,
    fps = 14,
    temperature = 100,
-   humidity = 0.999,
-   fertility = 0.001,
+   humidity = 1,
+   fertility = 1,
 }
 
 
@@ -1469,6 +1469,6 @@ world:new_terrain_type{
    dither_layer = 201,
    fps = 5,
    temperature = 150,
-   humidity = 0.999,
-   fertility = 0.001,
+   humidity = 1,
+   fertility = 1,
 }
