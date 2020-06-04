@@ -22,18 +22,18 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:43
 msgid "Dismantle the unproductive buildings"
-msgstr "Desmantelar edificios no productivos"
+msgstr "Desarmar edificios no productivos"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:45
 msgid "Dismantle Buildings"
-msgstr "Desmantelar Edificios"
+msgstr "Desarmar Edificios"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:46
 msgid ""
 "Dismantle all unproductive small buildings to get some resources for new "
 "buildings."
 msgstr ""
-"Desmantelar todos los edificios pequeños no productivos para tener algunos "
+"Desarmar todos los edificios pequeños no productivos para tener algunos "
 "recursos para nuevos edificios."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:47
@@ -324,10 +324,13 @@ msgid ""
 "Thank the gods! Now we have everything prepared to fully train our soldiers."
 " We can increase our military strength at last."
 msgstr ""
+"¡Gracias a los dioses! Ahora tenemos todo preparado para entrenar "
+"completamente a nuestros soldados. Finalmente podemos aumentar nuestra "
+"fortaleza militar."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:224
 msgid "The Battle is Won"
-msgstr ""
+msgstr "La Batalla ha sido Ganada"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:227
@@ -337,6 +340,10 @@ msgid ""
 "our victory is only temporary, as this is still just the beginning of the "
 "war. Let’s see what the future still holds for us."
 msgstr ""
+"Gracias a los dioses, hemos tenido éxito. Cumplimos todos los desafíos que "
+"nos fueron impuestos. Incluso expulsamos a los Bárbaros de nuestro país. Sin"
+" embargo, nuestra victoria solo es temporal, ya que este es recién el "
+"comienzo de la guerra. Veremos que nos depara aún el futuro."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:228
 msgid "Victory"
@@ -356,7 +363,7 @@ msgstr "Caos"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:238
 msgid "Lutius is disappointed"
-msgstr ""
+msgstr "Lutius está decepcionado"
 
 #. TRANSLATORS: Lutius
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:240
@@ -365,19 +372,21 @@ msgid ""
 "the road network seems to be completely in shambles as well. Who might be "
 "responsible for this chaos?"
 msgstr ""
+"¡Oh no! Amalea tiene razón. De hecho no veo ninguna productividad. Y la red "
+"de rutas parece estar en ruinas. ¿Quién será el responsable de este caos?"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:245
 msgid "Explanation Needed"
-msgstr "Explicación Necesaria"
+msgstr "Se Necesita Explicación"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:246
 msgid "Lutius greets the official"
-msgstr ""
+msgstr "Lutius saluda al funcionario"
 
 #. TRANSLATORS: Lutius
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:248
 msgid "Ave! Who are you and what happened to our beautiful land?"
-msgstr ""
+msgstr "¡Ave! ¿Quién eres y qué le sucedió a nuestra hermosa tierra?"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:253
 msgid "Difficult Times"
@@ -385,7 +394,7 @@ msgstr "Tiempos Difíciles"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:254
 msgid "Lutius accepts the challenge"
-msgstr ""
+msgstr "Lutius acepta el desafío"
 
 #. TRANSLATORS: Lutius
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:256
