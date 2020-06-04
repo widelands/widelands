@@ -258,6 +258,7 @@
   - based the statistics period on average working time
   - switched back to common time base
   - fixed 3 program cycles
+  - Quarry Productivity Drop Fix (#3933)
 - Tribes fixes (#3682)
   - increased starting hammers for frisians to 10
   - charcoal burner consumes before making a stack, searches for a pond first.
