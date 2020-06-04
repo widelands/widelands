@@ -646,7 +646,7 @@ void ShippingSchedule::load_on_ship(Game& game,
 		if (free_capacity && found_start && !expedition && (found_end || start_is_last)) {
 			ScoredShip updated_ship(ship, free_capacity, arrival_time, detour_start_end);
 			sslog("load_on_ship: PPP %u –> %u (open_count %u) UPDATED: may assign up to %u items "
-			      "to %s (score %lu)\n",
+			      "to %s (score %" PRIu64 ")\n",
 			      p.start->serial(), p.end->serial(), ppp.open_count, free_capacity,
 			      ship->get_shipname().c_str(), updated_ship.score);
 			for (auto it = p.ships.begin();; ++it) {
@@ -1120,7 +1120,7 @@ Duration ShippingSchedule::update(Game& game) {
 			if (free_capacity && found_start && !expedition && (found_end || start_is_last)) {
 				ScoredShip ss(plan.first.get(game), free_capacity, arrival_time, detour_start_end);
 				sslog("Phase 5.0: PPP %u –> %u (open_count %u): may assign up to %u items to %s (score "
-				      "%lu)\n",
+				      "%" PRIu64 ")\n",
 				      ppp.start->serial(), ppp.end->serial(), ppp.open_count, free_capacity,
 				      plan.first.get(game)->get_shipname().c_str(), ss.score);
 				_ships.insert(ss);
