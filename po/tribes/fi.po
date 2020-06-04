@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-05-23 04:21+0000\n"
+"PO-Revision-Date: 2020-06-01 06:46+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -235,27 +235,27 @@ msgstr "Tärkeä voitto rajalinnoituksella."
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:7
 msgctxt "barbarians_building"
 msgid "Citadel"
-msgstr "Sitadelli"
+msgstr "Kastelli"
 
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:49
 msgid "Your soldiers have occupied your citadel."
-msgstr "Sotilaasi ovat miehittäneet sitadellisi."
+msgstr "Sotilaasi ovat miehittäneet kastellisi."
 
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:50
 msgid "Your citadel discovered an aggressor."
-msgstr "Sitadellisi lähitienoilla vihollisia."
+msgstr "Kastellisi lähitienoilla vihollisia."
 
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:51
 msgid "Your citadel is under attack."
-msgstr "Sitadellisi sodan jaloissa."
+msgstr "Kastellisi sodan jaloissa."
 
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:52
 msgid "The enemy defeated your soldiers at the citadel."
-msgstr "Murskaava tappio sitadellilla."
+msgstr "Murskaava tappio kastellilla."
 
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:53
 msgid "Your soldiers defeated the enemy at the citadel."
-msgstr "Verinen voitto sitadellilla."
+msgstr "Verinen voitto kastellilla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:7
