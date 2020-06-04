@@ -174,13 +174,10 @@ function count_owned_valuable_fields_for_all_players(players, attribute)
 
    -- Insert points for all players who are still in the game, and 0 points for defeated players.
    for idx,plr in ipairs(players) do
-      if (plr.defeated) then
+      if (plr.defeated) or (all_plrpoints[plr.number] == nil) then
          owned_fields[plr.number] = 0
       else
          owned_fields[plr.number] = all_plrpoints[plr.number]
-         if owned_fields[plr.number] == nil or owned_fields[plr.number] =='' then
-           owned_fields[plr.number] = 0
-         end
       end
    end
    return owned_fields
