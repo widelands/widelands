@@ -123,6 +123,7 @@
 - Territorial peaceful (#3717): In peaceful mode, end the territorial win conditions prematurely if no more land can be gained.
 - Fix trading outpost and village start condition (#3753)
 - Allow starting expeditions and changing a ship's capacity via Lua.
+- `count_owned_valuable_fields`: check for `nil` (#3932): assign 0 if player has no valuable fields
 
 
 ### Maps
