@@ -69,6 +69,7 @@ private:
 	friend class PortDock;
 	friend struct Ship;
 	friend struct ShipFleet;
+	friend struct ShippingSchedule;
 
 	// Called when a port is reached. The item will act again on its own.
 	void end_shipping(Game&);
