@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-18 09:29+0000\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-05-25 08:09+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -786,7 +786,7 @@ msgstr "Shift+(RePág/AvPág)"
 msgid ""
 "Speed up or slow down the game with %1%. Use %2% for rapid change, %3% will "
 "adjust speed smoothly."
-msgstr ""
+msgstr "Aumenta o reduce la velocidad del juego con %1%. Utiliza %2% para cambios rapidos, %3% va cambiar la velocidad suavemente."
 
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
@@ -801,7 +801,7 @@ msgstr "Ctrl+Teclas de flecha"
 #: ../../data/txts/tips/general_game.lua:83
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
-msgstr ""
+msgstr "Mueve la vista del mapa utilizando %1%. %2% va mover la vista rapidamente, %3% la mueve lento."
 
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"

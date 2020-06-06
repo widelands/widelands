@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-18 09:29+0000\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-05-22 17:26+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -97,7 +97,7 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr "As Schatt-Karut stürv, was he een oller Mann, de Vader vun dree machtigen un streevsken Söhnen, un de Kummandant vun Soldaten, de all Feinde manntjen kunnen, de de steenollen Walden angrepen. Uplest vun sien golden Seggen keek Schatt-Karut sien ollsten Sohn, Troon, ut, dat he de neje Kummandant vun sienem Volk wese – een Beslutt, mit wat siene Bröörs nich tofree weren. Dat wuss de olle Kummandant. As sien Vater befohl, verleet Troon de Höövdstadt Alltunraan, wo de Bomen-Throon was, un truck sük mit sienen Soldaten up de Hogen Hövels torügg, wo he de Liek vun sienem Vater begroov. Dann swoor he bi de Gotten un de Geist vun sienem Vater, dat he weerkummt un de Örnung torechtmaakt. As siene Bröörs tegen Troon un de minnen Soldaten, de he tum Schuul för Alltunraan törüggleet, angahn, versöcht de junge Kummandant, dat sük siene streevsken Bröörs utsöhnen un de Völker weer unner eenem gemeensamen Fahne marskeren."
+msgstr "As Schatt-Karut stürv, was he een oller Mann, de Vader vun dree machtigen un streevsken Söhnen, un de Kummandant vun Soldaten, de all Feinde manntjen kunnen, de de steenollen Walden angrepen. Uplest vun sien golden Seggen keek Schatt-Karut sien ollsten Sohn, Troon, ut, dat he de neje Kummandant vun sienem Volk wese – een Beslutt, mit wat siene Bröörs nich tofree weren. Dat wuss de olle Kummandant. As sien Vater befohl, verleet Troon de Höövdstadt Alltunraan, waar de Bomen-Throon was, un truck sük mit sienen Soldaten up de Hogen Hövels torügg, waar he de Liek vun sienem Vater begroov. Dann swoor he bi de Gotten un de Geist vun sienem Vater, dat he weerkummt un de Örnung torechtmaakt. As siene Bröörs tegen Troon un de minnen Soldaten, de he tum Schuul för Alltunraan törüggleet, angahn, versöcht de junge Kummandant, dat sük siene streevsken Bröörs utsöhnen un de Völker weer unner eener gemeensamen Fahne marskeren."
 
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../data/campaigns/campaigns.lua:70
@@ -216,6 +216,10 @@ msgid ""
 "land on a green, Mediterranean island, looking like paradise. Overjoyed, "
 "they set out to explore this new living space."
 msgstr "Ennelk is de Schipp weer heel, un Lutjus un siene Lüü versöken wieder, eene gode Stee för eenen nejen Anfang to finnen. Blot een paar Dagen naher lannen se up eene gröne Insel in de Latienske See, de hör wie dat Paradies vörkummt. Överglückelk gahn se de neje Heimaat utförsken."
+
+#: ../../data/campaigns/emp03.wmf/elemental:8
+msgid "Neptune’s Revenge"
+msgstr "Neptun in Wut"
 
 #: ../../data/campaigns/emp03.wmf/elemental:10
 msgid ""

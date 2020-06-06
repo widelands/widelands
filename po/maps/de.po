@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-14 14:48+0000\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-05-22 17:21+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -221,6 +221,10 @@ msgid ""
 "land on a green, Mediterranean island, looking like paradise. Overjoyed, "
 "they set out to explore this new living space."
 msgstr "Endlich war das Schiff repariert, sodass Lutius und seine Leute sich wieder der Aufgabe zuwandten, einen Ort für den Neuanfang zu finden. Nur einige Tage später landen sie an einer grünen, mediterranen Insel – anzusehen wie das Paradies. Heilfroh begannen sie die Erkundung des neu entdeckten Landes."
+
+#: ../../data/campaigns/emp03.wmf/elemental:8
+msgid "Neptune’s Revenge"
+msgstr "Neptuns Rache"
 
 #: ../../data/campaigns/emp03.wmf/elemental:10
 msgid ""

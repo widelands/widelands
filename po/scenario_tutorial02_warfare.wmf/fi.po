@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-19 18:02+0000\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-06-01 07:09+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -562,7 +562,7 @@ msgstr "Hyvin tehty. Nyt tiedät kuinka vetää sotilaasi takaisin paikoista, jo
 msgid ""
 "Your fortress is already quite strong and conquers a lot of space. But there"
 " is an even bigger building: the citadel."
-msgstr "Linnoituksesi on jo melko vahva ja valloittaa paljon tilaa. Mutta on olemassa vielä suurempi rakennus: kastelli."
+msgstr "Linnoituksesi on jo melko vahva ja valloittaa paljon tilaa. Mutta on olemassa vielä suurempi rakennus: kastelliksi."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:240
 msgid ""
@@ -584,7 +584,7 @@ msgstr "Laajenna linnoituksesi nyt kastelliksi."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:250
 msgid "Enhance your fortress to a citadel"
-msgstr "Laajenn linnoituksesi kastelliksi"
+msgstr "Laajenna linnoituksesi kastelliksi"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:251
 msgid "Enhance your fortress to a mighty citadel."
