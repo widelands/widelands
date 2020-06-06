@@ -46,6 +46,8 @@ end
 --    :type heading: :class:`string`
 --
 function send_to_all(text, heading)
+   local td = __TEXTDOMAIN
+   set_textdomain("widelands")
    for idx,plr in ipairs(game.players) do
       if (heading ~= nil and heading ~= "") then
          send_message(plr, _"Status", text, {popup=true, heading=heading})
@@ -53,6 +55,7 @@ function send_to_all(text, heading)
          send_message(plr, _"Status", text, {popup=true})
       end
    end
+   set_textdomain(td)
 end
 
 
