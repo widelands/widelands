@@ -17,14 +17,12 @@ install:
   - cmd: "set CC=%MINGWPATH%\\gcc.exe"
   - cmd: "set CXX=%MINGWPATH%\\g++.exe"
   # Update mirrors
-  - cmd: "bash --login -c \"pacman --noconfirm -U http://repo.msys2.org/msys/x86_64/pacman-5.2.1-6-x86_64.pkg.tar.xz\""
-  - cmd: "bash --login -c \"pacman --noconfirm -Sy zstd pacman pacman-mirrors\""
+  - cmd: "bash --login -c \"pacman --noconfirm -Sy pacman pacman-mirrors\""
   # deleting broken repo from mirrorlist
   # - cmd: "bash --login -c \"sed -i 7d C:/msys64/etc/pacman.d/mirrorlist.msys\""
   # - cmd: "bash --login -c \"sed -i 7d C:/msys64/etc/pacman.d/mirrorlist.mingw32\""
   # - cmd: "bash --login -c \"sed -i 7d C:/msys64/etc/pacman.d/mirrorlist.mingw64\""
   # Update msys2 system (twice, first run does system packages)
-  - cmd: "bash --login -c \"pacman -Sy zstd bash pacman-mirrors pacman --noconfirm\""
   - cmd: "bash --login -c \"pacman -Suuyy --noconfirm\""
   # deleting broken repo from mirrorlist again
   # - cmd: "bash --login -c \"sed -i 7d C:/msys64/etc/pacman.d/mirrorlist.msys\""
