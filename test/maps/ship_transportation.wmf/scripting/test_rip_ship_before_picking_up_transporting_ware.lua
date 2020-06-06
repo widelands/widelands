@@ -13,7 +13,7 @@ run(function()
       barbarians_builder = 1,
    }
 
-   sleep(12000)
+   sleep(6000)
 
    -- remove the ship while the ware is in transit.
    stable_save(game, "0_before_removing_ship", 1000)

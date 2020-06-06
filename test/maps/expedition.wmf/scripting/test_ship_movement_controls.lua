@@ -24,8 +24,8 @@ run(function()
    --ship has no wares on it
    assert_equal(0,ships[1]:get_wares())
 
-   --no destination is set
-   assert(not ships[1].destination)
+   --heading to the port
+   assert(ships[1].destination)
    --ships in transport state
    assert_equal("transport", ships[1].state)
 
