@@ -183,10 +183,13 @@ function new_objectives(...)
       sum = sum + obj.number
    end
 
+   local td = __TEXTDOMAIN
+   set_textdomain("widelands")
    local objectives_header = _"New Objective"
    if (sum > 1) then
       objectives_header = _"New Objectives"
    end
+   set_textdomain(td)
 
    return
       div("width=100%",
