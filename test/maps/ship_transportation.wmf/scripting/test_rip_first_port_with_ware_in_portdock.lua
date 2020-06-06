@@ -19,7 +19,6 @@ run(function()
    assert_equal(p1:get_wares("blackwood"), 1)
    sleep(8000)
 
-
    southern_port():remove()
 
    sleep(100)
