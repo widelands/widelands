@@ -437,7 +437,7 @@ public:
 	};
 
 	const Field* fields() const {
-		return fields_;
+		return fields_.get();
 	}
 
 	// See area
@@ -648,7 +648,7 @@ private:
 	// If we run out of ship names, we'll want to continue with unique numbers
 	uint32_t ship_name_counter_;
 
-	Field* fields_;
+	std::unique_ptr<Field[]> fields_;
 	std::vector<bool> allowed_worker_types_;
 	std::vector<bool> allowed_building_types_;
 	std::map<Serial, std::unique_ptr<Economy>> economies_;
