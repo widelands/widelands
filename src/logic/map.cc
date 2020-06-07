@@ -516,10 +516,15 @@ void Map::set_origin(const Coords& new_origin) {
 			if (upcast(Immovable, immovable, c.field->get_immovable())) {
 				immovable->position_ = c;
 			}
+			bool is_first_bob = true;
 			for (Bob* bob = c.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
 				bob->position_.x = c.x;
 				bob->position_.y = c.y;
 				bob->position_.field = c.field;
+				if (is_first_bob) {
+					bob->linkpprev_ = &c.field->bobs;
+					is_first_bob = false;
+				}
 			}
 		}
 	}
