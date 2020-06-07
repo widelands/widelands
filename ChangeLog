@@ -459,6 +459,7 @@
 - Handle missing locale dir on Windows (#3757)
 - Fix transifex issues (#3875)
 - Marked tut03 objective headings for translation (#3901)
+- Fix textdomain for »New Objective(s)« headers (#3936)
 
 
 ### Help and Documentation
