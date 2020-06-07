@@ -12,12 +12,13 @@
 # Madkat Here, 2015-2016
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020
 # Thadah D. Denyse <juchuf@gmail.com>, 2017
+# Walter Benkel <tromaster@gmail.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-05-25 09:15+0000\n"
+"PO-Revision-Date: 2020-06-06 19:30+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +31,7 @@ msgstr ""
 msgid ""
 "Click on the ‘OK’ button or press the ‘Enter ⏎’ key on the keyboard to close"
 " this window."
-msgstr ""
+msgstr "Haz clic en el botón 'OK' o presiona la tecla 'Enter' en el teclado para cerrar esta ventana."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:12
 msgid "Nice And Easy Does It All the Time"
@@ -51,7 +52,7 @@ msgstr "Cierra esta ventana"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:36
 msgid "Welcome to the Widelands Tutorial!"
-msgstr "Bienvenido al tutorial de Widelands!"
+msgstr "¡Bienvenido al tutorial de Widelands!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:38
 msgid "Welcome to Widelands!"
@@ -928,7 +929,7 @@ msgstr "Ya que nuestras canteras son inútiles ya puedes destruirlas y reutiliza
 msgid ""
 "There are two different ways of destroying a building: burning down and "
 "dismantling. Try them both out on your quarries."
-msgstr "Hay dos formas diferentes de destruir un edificio: quemarlo y desmantelarlo. Intenta las dos en tus canteras."
+msgstr "Hay dos formas diferentes de destruir un edificio: quemarlo y desarmarlo. Intenta las dos en tus canteras."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:588
 msgid ""
@@ -941,7 +942,7 @@ msgid ""
 "Dismantling the quarry: A builder will walk from the headquarters to "
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
-msgstr "Desmantelar la cantera: un constructor acudirá desde la sede para desmantelar la cantera pieza a pieza. Por tanto recuperas algunos de los recursos que utilizaste para su construcción."
+msgstr "Desarmar la cantera: un constructor acudirá desde la sede para desarmar la cantera pieza a pieza. Por tanto recuperas algunos de los recursos que utilizaste para su construcción."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:594
 msgid "Messages Arrived!"
