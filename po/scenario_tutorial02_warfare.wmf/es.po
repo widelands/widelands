@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-05-18 10:04+0000\n"
+"PO-Revision-Date: 2020-06-06 19:42+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -482,11 +482,11 @@ msgstr "El tercer número indica los soldados que faltan. De los 8 soldados (1 +
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
 msgid "Dismantle your sentry"
-msgstr "Desmantela tu centinela"
+msgstr "Desarma tu centinela"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:213
 msgid "Dismantling military buildings"
-msgstr "Desmantelando edificios militares"
+msgstr "Desarmando edificios militares"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:214
 msgid ""
@@ -494,7 +494,7 @@ msgid ""
 "building will never come out (unless this building is attacked). If you want"
 " to have your soldier elsewhere, you will have to dismantle or burn down the"
 " building."
-msgstr "Solo puedes reducir el número de soldados hasta uno. El último soldado de un edificio nunca saldrá de él (a no ser que el edificio esté siendo atacado). Si quieres tener a este soldado en otra parte tendrás que desmantelar el edificio o incendiarlo."
+msgstr "Solo puedes reducir el número de soldados hasta uno. El último soldado de un edificio nunca saldrá de él (a no ser que el edificio esté siendo atacado). Si quieres tener a este soldado en otra parte tendrás que desarmar el edificio o incendiarlo."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:215
 msgid ""
@@ -505,7 +505,7 @@ msgid ""
 " be hidden under the fog of war. You should therefore only dismantle "
 "military buildings deep inside your territory where you are safe from "
 "enemies."
-msgstr "Sin embargo destruir un edificio militar siempre conlleva un riesgo: la tierra sigue siendo tuya pero ya no está protegida. Cualquier enemigo que construya sus propios sitios militares puede tomar esta tierra sin luchar, haciendo que tus edificios estallen en llamas. Es más, algunas partes de tierra podrían ahora estar ocultas bajo la niebla de guerra. Solo deberías, por tanto, desmantelar edificios militares muy dentro de tu territorio, donde estés a salvo de los enemigos."
+msgstr "Sin embargo destruir un edificio militar siempre conlleva un riesgo: la tierra sigue siendo tuya pero ya no está protegida. Cualquier enemigo que construya sus propios sitios militares puede tomar esta tierra sin luchar, haciendo que tus edificios estallen en llamas. Es más, algunas partes de tierra podrían ahora estar ocultas bajo la niebla de guerra. Solo deberías, por tanto, desarmar edificios militares muy dentro de tu territorio, donde estés a salvo de los enemigos."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:216
 msgid ""
@@ -516,7 +516,7 @@ msgstr "¿Has visto tu centinela? Dado que no puede contener muchos soldados y e
 #. TRANSLATORS: 'it' refers to the Barbarian sentry
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:218
 msgid "Dismantle it."
-msgstr "Desmantélalo."
+msgstr "Desarmalo."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:219
 msgid ""
@@ -530,7 +530,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:227
 msgid "Dismantle your north-western sentry"
-msgstr "Desmantela el centinela del NorOeste"
+msgstr "Desarma el centinela del NorOeste"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:228
 msgid ""
@@ -542,7 +542,7 @@ msgstr "Puedes controlar el número de soldados guarnecidos en un sitio militar 
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:229
 msgid "Dismantle your sentry in the north-west, next to the barrier."
-msgstr "Desmantela tu centinela del NorOeste, junto a la muralla."
+msgstr "Desarma tu centinela del NorOeste, junto a la muralla."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:235
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:248
