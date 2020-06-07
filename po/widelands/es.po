@@ -15,12 +15,13 @@
 # Raul Ferriz <raul.ferriz@gmail.com>, 2009
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020
 # Thadah D. Denyse <juchuf@gmail.com>, 2017-2018
+# Walter Benkel <tromaster@gmail.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-05-25 09:36+0000\n"
+"PO-Revision-Date: 2020-06-06 19:42+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -96,23 +97,23 @@ msgstr "No hay espacio suficiente"
 
 #: ../../data/scripting/infrastructure.lua:246
 msgid "No rocks nearby"
-msgstr "Ningunas rocas próximas"
+msgstr "No hay rocas cerca"
 
 #: ../../data/scripting/infrastructure.lua:246
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr "No hace rocas cerca de tu posición inicial. Por eso recibes recursos adicionales para montar tu economía."
+msgstr "No hay rocas cerca de tu posición inicial. Por eso recibes recursos adicionales para iniciar tu economía."
 
 #: ../../data/scripting/infrastructure.lua:251
 msgid "No trees nearby"
-msgstr "Ningunos árboles próximos"
+msgstr "No hay árboles cerca"
 
 #: ../../data/scripting/infrastructure.lua:251
 msgid ""
 "There are no trees near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr "No hace árboles cerca de tu posición inicial. Por eso recibes recursos adicionales para montar tu economía."
+msgstr "No hay árboles cerca de tu posición inicial. Por eso recibes recursos adicionales para iniciar tu economía."
 
 #: ../../data/scripting/messages.lua:51 ../../data/scripting/messages.lua:53
 #: ../../src/wui/game_message_menu.cc:68 ../../src/wui/game_summary.cc:104
@@ -121,7 +122,7 @@ msgstr "Estado"
 
 #: ../../data/scripting/messages.lua:186
 msgid "New Objective"
-msgstr "Nuevo objetivo"
+msgstr "Nuevo Objetivo"
 
 #: ../../data/scripting/messages.lua:188
 msgid "New Objectives"
@@ -348,7 +349,7 @@ msgstr "Cargar mapa"
 #: ../../src/editor/editorinteractive.cc:193
 msgctxt "hotkey"
 msgid "Ctrl+L"
-msgstr "Ctrl + L"
+msgstr "Ctrl+L"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:199
@@ -359,7 +360,7 @@ msgstr "Guardar mapa"
 #: ../../src/editor/editorinteractive.cc:201
 msgctxt "hotkey"
 msgid "Ctrl+S"
-msgstr "Ctrl + S"
+msgstr "Ctrl+S"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:207
@@ -474,12 +475,12 @@ msgstr "Origen del mapa"
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the "
 "top-left corner of a generated minimap."
-msgstr "Elegir la posicion que tendrá las coordenadas (0, 0). Será la esquina superior izquierda del minimapa generado."
+msgstr "Elige la posicion que tendrá las coordenadas (0, 0). Esta será la esquina superior izquierda del minimapa generado."
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:325
 msgid "Map size"
-msgstr "Dimensión de mapa"
+msgstr "Tamaño del mapa"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
 #: ../../src/editor/editorinteractive.cc:328
@@ -494,7 +495,7 @@ msgstr "Información"
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
 #: ../../src/editor/editorinteractive.cc:334
 msgid "Click on a field to show information about it"
-msgstr "Haz clic en una casilla para mostrar información sobre ella."
+msgstr "Haz clic en una casilla para mostrar información sobre ella"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
@@ -522,22 +523,22 @@ msgstr "Espaciador"
 #. the map grid is shown
 #: ../../src/editor/editorinteractive.cc:399
 msgid "Hide Grid"
-msgstr "Ocultar Rejilla"
+msgstr "Ocultar Cuadrícula"
 
 #: ../../src/editor/editorinteractive.cc:399
 msgid "Show Grid"
-msgstr "Mostrar Rejilla"
+msgstr "Mostrar Cuadrícula"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables (trees,
 #. * rocks etc.) are shown
 #: ../../src/editor/editorinteractive.cc:404
 msgid "Hide Immovables"
-msgstr "Ocultar Inmóviles"
+msgstr "Ocultar Inamovibles"
 
 #: ../../src/editor/editorinteractive.cc:404
 msgid "Show Immovables"
-msgstr "Mostrar Inmóviles"
+msgstr "Mostrar Inamovibles"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. animals are shown
@@ -712,7 +713,7 @@ msgstr "Objetos"
 #: ../../src/editor/tools/info_tool.cc:145
 #, c-format
 msgid "Immovable: %s"
-msgstr "Inmóvil: %s"
+msgstr "Inamovible: %s"
 
 #: ../../src/editor/tools/info_tool.cc:175
 #, c-format
@@ -855,7 +856,7 @@ msgstr "Mostrar nombres originales de mapas"
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:138
 #: ../../src/ui_fsmenu/loadgame.cc:66
 msgid "Show Filenames"
-msgstr "Mostrar los nombres de archivo"
+msgstr "Mostrar los nombres de archivos"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:110
 msgid "Map name:"
@@ -884,7 +885,7 @@ msgstr "Limitación al largo de vías acuáticas:"
 #. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:152
 msgid "Disabled"
-msgstr "Bloqueado"
+msgstr "Deshabilitado"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:160
 msgid "Suggested Teams:"
@@ -914,7 +915,7 @@ msgstr "Equipos"
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:208
 #, c-format
 msgid "It is not recommended to permit waterway lengths greater than %u"
-msgstr "No es recomendable permitir vías acuáticas más largo que %u"
+msgstr "No es recomendable permitir vías acuáticas más largas que %u"
 
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:60
 msgid "Create Map"
@@ -1249,7 +1250,7 @@ msgstr "Altura preestablecida"
 
 #: ../../src/editor/ui_menus/tool_resize_options_menu.cc:35
 msgid "Resize"
-msgstr "Adaptar la dimensión"
+msgstr "Redimensionar"
 
 #: ../../src/editor/ui_menus/tool_resize_options_menu.cc:50
 msgid ""
@@ -1258,7 +1259,7 @@ msgid ""
 " the east/south of the selected point. When shrinking the map, the desired "
 "number of columns/rows will be removed from the east/south of the splitting "
 "location."
-msgstr ""
+msgstr "Selecciona el nuevo tamaño del mapa y después haz clic en la posición deseada para dividirlo. Al aumentar el tamaño, se insertarán nuevas columnas/filas al este/sur del punto seleccionado. Al reducir el mapa, el número deseado de columnas/filas serán removidas al este/sur de la posición divisoria."
 
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
@@ -1338,7 +1339,7 @@ msgstr "ERROR: %s\n"
 msgid ""
 "Widelands won't work because we were unable to detect the shading language "
 "version."
-msgstr "Widelands no va a functionar porque no podemos detectar la versión del lenguaje de sombreado."
+msgstr "Widelands no va a funcionar porque no podemos detectar la versión del lenguaje de sombreado."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1587,7 +1588,7 @@ msgstr "%i%% construido"
 #: ../../src/logic/map_objects/tribes/dismantlesite.cc:117
 #, c-format
 msgid "%u%% dismantled"
-msgstr "%u%% desmantelado"
+msgstr "%u%% desarmado"
 
 #. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
 #: ../../src/logic/map_objects/tribes/militarysite.cc:240
@@ -3623,11 +3624,11 @@ msgstr "Seguro que quieres destruir este edificio?"
 
 #: ../../src/wui/actionconfirm.cc:244
 msgid "Dismantle building?"
-msgstr "¿Desmantelar edificio?"
+msgstr "¿Desarmar edificio?"
 
 #: ../../src/wui/actionconfirm.cc:245
 msgid "Do you really want to dismantle this building?"
-msgstr "Seguro que quieres desmantelar este edificio?"
+msgstr "Seguro que quieres desarmar este edificio?"
 
 #: ../../src/wui/actionconfirm.cc:247 ../../src/wui/actionconfirm.cc:306
 msgid "Preserve wares"
@@ -3832,7 +3833,7 @@ msgstr "Destruir"
 #: ../../src/wui/buildingwindow.cc:289 ../../src/wui/buildingwindow.cc:290
 #: ../../src/wui/buildingwindow.cc:296
 msgid "Dismantle"
-msgstr "Desmantelar"
+msgstr "Desarmar"
 
 #: ../../src/wui/buildingwindow.cc:290 ../../src/wui/buildingwindow.cc:300
 msgid "Returns:"
