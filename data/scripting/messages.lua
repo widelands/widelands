@@ -46,6 +46,8 @@ end
 --    :type heading: :class:`string`
 --
 function send_to_all(text, heading)
+   local td = __TEXTDOMAIN
+   set_textdomain("widelands")
    for idx,plr in ipairs(game.players) do
       if (heading ~= nil and heading ~= "") then
          send_message(plr, _"Status", text, {popup=true, heading=heading})
@@ -53,6 +55,7 @@ function send_to_all(text, heading)
          send_message(plr, _"Status", text, {popup=true})
       end
    end
+   set_textdomain(td)
 end
 
 
@@ -183,10 +186,13 @@ function new_objectives(...)
       sum = sum + obj.number
    end
 
+   local td = __TEXTDOMAIN
+   set_textdomain("widelands")
    local objectives_header = _"New Objective"
    if (sum > 1) then
       objectives_header = _"New Objectives"
    end
+   set_textdomain(td)
 
    return
       div("width=100%",
