@@ -106,6 +106,16 @@ struct FieldData {
 	uint8_t resource_amount;
 	Field::Terrains terrains;
 };
+// used for undoing map resize
+struct ResizeHistory {
+	ResizeHistory() : size(0, 0) {
+	}
+
+	Extent size;
+	std::list<FieldData> fields;
+	std::set<Coords> port_spaces;
+	std::vector<Coords> starting_positions;
+};
 
 /** class Map
  *
@@ -517,9 +527,15 @@ public:
 	// Visible for testing.
 	void set_size(uint32_t w, uint32_t h);
 
-	// Change the map size
-	std::map<Coords, FieldData>
-	resize(EditorGameBase& egbase, const Coords coords, int32_t w, int32_t h);
+	// Change the map size. Must not be used outside the editor.
+	void resize(EditorGameBase&, Coords, int32_t w, int32_t h);
+	// Used only to undo a resize() operation.
+	// Force-resets the entire map's state to the given preserved state.
+	void set_to(EditorGameBase&, ResizeHistory);
+	// Creates a ResizeHistory that can be passed to set_to() later.
+	// This has to save the entire map's state because resize operations
+	// may affect all fields when resolving height differences etc.
+	ResizeHistory dump_state(const EditorGameBase&) const;
 
 	uint32_t get_waterway_max_length() const;
 	void set_waterway_max_length(uint32_t max_length);

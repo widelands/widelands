@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-05-25 09:15+0000\n"
+"PO-Revision-Date: 2020-06-06 19:45+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -199,7 +199,7 @@ msgid ""
 "A building is being dismantled at this dismantle site, returning some of the"
 " resources that were used during this building’s construction to your "
 "tribe’s stores."
-msgstr "Un edificio está siendo desmantelado en este sitio de desmantelado, regresando algunos de los recursos que se utilizaron en la construcción de este edificio a los almacenes de su tribu."
+msgstr "Un edificio está siendo desarmado en este sitio de desarmado, regresando algunos de los recursos que se utilizaron en la construcción de este edificio a los almacenes de su tribu."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/helptexts.lua:16
@@ -3502,18 +3502,18 @@ msgstr "Desconocido"
 
 #: ../../data/tribes/scripting/help/building_help.lua:543
 msgid "If built directly, dismantle yields:"
-msgstr "Si construido directamente, desmantelarlo proporciona:"
+msgstr "Si construido directamente, desarmarlo proporciona:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:548
 msgid "If enhanced, dismantle yields:"
-msgstr "Si mejorado, desmantelarlo proporciona:"
+msgstr "Si mejorado, desarmarlo proporciona:"
 
 #. TRANSLATORS: This is a heading for the resources that you will get back
 #. when you dismantle a building of this type. What dismantling will give you.
 #: ../../data/tribes/scripting/help/building_help.lua:551
 #: ../../data/tribes/scripting/help/building_help.lua:592
 msgid "Dismantle yields:"
-msgstr "Desmantelarlo proporciona:"
+msgstr "Desarmarlo proporciona:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:601
 msgid "Can be enhanced to:"
