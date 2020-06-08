@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-08 13:20+0000\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-06-06 19:34+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -515,7 +515,7 @@ msgid ""
 " side. A button next to the map name allows the host to change to a "
 "different map. Furthermore, the host is able to set a specific win "
 "condition, and finally can start the game as soon as all players are set up."
-msgstr "Puedes ver información sobre el mapa o partida salvada seleccionados en el lado derecho. Un botón junto al nombre del mapa permite al anfitrión cambiar a un mapa diferente. Adicionalmente, el anfitrión puede marcar una condición de victoria específica y finalmente iniciar la partida en cuanto todos los jugadores estén listos."
+msgstr "Puedes ver información sobre el mapa o partido guardado seleccionados en el lado derecho. Un botón junto al nombre del mapa permite al anfitrión cambiar a un mapa diferente. Adicionalmente, el anfitrión puede marcar una condición de victoria específica y finalmente iniciar el partido en cuanto todos los jugadores estén listos."
 
 #: ../../data/txts/tips/atlanteans.lua:4
 msgid ""
@@ -729,7 +729,7 @@ msgstr "Los nuevos soldados se reclutan en los barracones. Sus habilidades puede
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
-msgstr "Si te gusta vivir al límite, presionando Ctrl mientras haces click en el botón mejorar, desmantelar o destruir edificio saltarás la confirmación."
+msgstr "Si te gusta vivir al límite, presionando Ctrl mientras haces click en el botón mejorar, desarmar o destruir edificio saltarás la confirmación."
 
 #: ../../data/txts/tips/general_game.lua:59
 msgid "Press I to quickly toggle the display of your stock inventory."
@@ -786,7 +786,7 @@ msgstr "Shift+(RePág/AvPág)"
 msgid ""
 "Speed up or slow down the game with %1%. Use %2% for rapid change, %3% will "
 "adjust speed smoothly."
-msgstr ""
+msgstr "Aumenta o reduce la velocidad del juego con %1%. Utiliza %2% para cambios rapidos, %3% va cambiar la velocidad suavemente."
 
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
@@ -801,7 +801,7 @@ msgstr "Ctrl+Teclas de flecha"
 #: ../../data/txts/tips/general_game.lua:83
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
-msgstr ""
+msgstr "Mueve la vista del mapa utilizando %1%. %2% va mover la vista rapidamente, %3% la mueve lento."
 
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
@@ -838,7 +838,7 @@ msgstr "Usa \"@name\" al principio de un mensaje de chat para enviarlo solo a es
 msgid ""
 "If the game should crash, don't worry! The game will be saved automatically "
 "so that you can reload it afterwards."
-msgstr "Si el juego se cierra inesperadamente, no te preocupes! La partida se guardará automáticamente para que puedas cargarla."
+msgstr "Si el juego se cierra inesperadamente, no te preocupes! El partido se guardará automáticamente para que puedas cargarla."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/singleplayer.lua:7

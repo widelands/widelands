@@ -21,8 +21,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-11 12:12+0000\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-06-06 19:46+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -532,7 +532,7 @@ msgstr "Construcción"
 #: ../../data/tribes/buildings/partially_finished/dismantlesite/init.lua:30
 msgctxt "building"
 msgid "Dismantle Site"
-msgstr "Desmantelar Sitio"
+msgstr "Desarmar Sitio"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:106
@@ -759,7 +759,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
-msgstr "La veta principal de esta mina de carbón se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Deberías considerar desmantelarla o destruirla."
+msgstr "La veta principal de esta mina de carbón se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Deberías considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:7
@@ -806,7 +806,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This crystal mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. You should consider dismantling or destroying it."
-msgstr "La veta principal de esta mina de cristal se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Deberías considerar desmantelarla o destruirla."
+msgstr "La veta principal de esta mina de cristal se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Deberías considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:7
@@ -975,7 +975,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
-msgstr "La veta principal de esta mina de oro se ha agotado. Se esperan fuertes reducciones en el retorno de inversión. Deberías considerar desmantelarla o destruirla."
+msgstr "La veta principal de esta mina de oro se ha agotado. Se esperan fuertes reducciones en el retorno de inversión. Deberías considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:7
@@ -1077,7 +1077,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
-msgstr "La veta principal de esta mina de hierro se ha agotado. Se esperan fuertes reducciones en el retorno de inversión. Deberías considerar desmantelarla o destruirla."
+msgstr "La veta principal de esta mina de hierro se ha agotado. Se esperan fuertes reducciones en el retorno de inversión. Deberías considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:7
@@ -1430,7 +1430,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "El talador que trabaja en esta cabaña de talador no puede encontrar árboles en su zona de trabajo. Deberías considerar desmantelar o destruir el edificio o construir una casa del silvicultor."
+msgstr "El talador que trabaja en esta cabaña de talador no puede encontrar árboles en su zona de trabajo. Deberías considerar desarmar o destruir el edificio o construir una casa del silvicultor."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:7
@@ -1551,7 +1551,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "La veta principal de esta mina de carbón se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Deberías considerar desmantelarla o destruirla."
+msgstr "La veta principal de esta mina de carbón se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Deberías considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:7
@@ -1571,7 +1571,7 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "La veta principal de esta mina de carbón se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Deberías considerar desmantelarla o destruirla."
+msgstr "La veta principal de esta mina de carbón se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Deberías considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:7
@@ -1634,7 +1634,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "La veta principal de esta mina de oro se ha agotado. Se esperan fuertes reducciones en el retorno de inversión. Deberías considerar desmantelarla o destruirla."
+msgstr "La veta principal de esta mina de oro se ha agotado. Se esperan fuertes reducciones en el retorno de inversión. Deberías considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:7
@@ -1654,7 +1654,7 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "La veta principal de esta mina de carbón se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Deberías considerar desmantelarla o destruirla."
+msgstr "La veta principal de esta mina de carbón se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Deberías considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:7
@@ -1680,7 +1680,7 @@ msgid ""
 "This granite mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
-msgstr "La veta principal de esta mina de granito se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Deberías considerar desmantelarla o destruirla."
+msgstr "La veta principal de esta mina de granito se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Deberías considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:7
@@ -1738,7 +1738,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "La veta principal de esta mina de hierro se ha agotado. Se esperan fuertes reducciones en el retorno de inversión. Deberías considerar desmantelarla o destruirla."
+msgstr "La veta principal de esta mina de hierro se ha agotado. Se esperan fuertes reducciones en el retorno de inversión. Deberías considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:7
@@ -1758,7 +1758,7 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "La veta principal de esta mina de hierro se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Deberías considerar desmantelarla o destruirla."
+msgstr "La veta principal de esta mina de hierro se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Deberías considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/init.lua:7
@@ -1783,7 +1783,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
 "work area. You should consider dismantling or destroying the building or "
 "building a ranger’s hut."
-msgstr "El leñador que trabaja en esta cabaña de leñador no puede encontrar árboles en su área de trabajo. Debería considerar desmantelar o destruir el edificio o construir una cabaña forestal."
+msgstr "El leñador que trabaja en esta cabaña de leñador no puede encontrar árboles en su área de trabajo. Debería considerar desarmar o destruir el edificio o construir una cabaña forestal."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:7
@@ -2031,7 +2031,7 @@ msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "La veta principal de esta mina de carbón se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Deberías considerar desmantelarla o destruirla."
+msgstr "La veta principal de esta mina de carbón se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Deberías considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:7
@@ -2045,7 +2045,7 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "La veta principal de esta mina de carbón se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Deberías considerar desmantelarla o destruirla."
+msgstr "La veta principal de esta mina de carbón se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Deberías considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:7
@@ -2107,7 +2107,7 @@ msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "La veta principal de esta mina de oro se ha agotado. Se esperan fuertes reducciones en el retorno de inversión. Deberías considerar desmantelarla o destruirla."
+msgstr "La veta principal de esta mina de oro se ha agotado. Se esperan fuertes reducciones en el retorno de inversión. Deberías considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:7
@@ -2121,7 +2121,7 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "La veta principal de esta mina de carbón se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Deberías considerar desmantelarla o destruirla."
+msgstr "La veta principal de esta mina de carbón se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Deberías considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:7
@@ -2154,7 +2154,7 @@ msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "La veta principal de esta mina de hierro se ha agotado. Se esperan fuertes reducciones en el retorno de inversión. Deberías considerar desmantelarla o destruirla."
+msgstr "La veta principal de esta mina de hierro se ha agotado. Se esperan fuertes reducciones en el retorno de inversión. Deberías considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:7
@@ -2168,7 +2168,7 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "La veta principal de esta mina de hierro se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Deberías considerar desmantelarla o destruirla."
+msgstr "La veta principal de esta mina de hierro se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Deberías considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:7
@@ -2182,7 +2182,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "El leñador que trabaja en esta casa de leñador no puede encontrar árboles en su área de trabajo. Debería considerar desmantelar o destruir el edificio o construir una casa del silvicultor."
+msgstr "El leñador que trabaja en esta casa de leñador no puede encontrar árboles en su área de trabajo. Debería considerar desarmar o destruir el edificio o construir una casa del silvicultor."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:7
@@ -2215,7 +2215,7 @@ msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. You should consider enhancing, dismantling or "
 "destroying it."
-msgstr "La veta principal de esta mina de mármol se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Debería considerar mejorala, desmantelarla o destruirla."
+msgstr "La veta principal de esta mina de mármol se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Debería considerar mejorala, desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:7
@@ -2229,7 +2229,7 @@ msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
-msgstr "La veta principal de esta mina de mármol se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Esta mina no puede ser mejorada, por lo que debería considerar desmantelarla o destruirla."
+msgstr "La veta principal de esta mina de mármol se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Esta mina no puede ser mejorada, por lo que debería considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/mill/init.lua:7
@@ -2445,7 +2445,7 @@ msgid ""
 "area. Please make sure there is a working clay pit nearby and the aqua farm "
 "is supplied with all needed wares, or consider dismantling or destroying "
 "this building."
-msgstr "Los pescadores trabajando en esta granja marina no pueden encontrar estanques de peces en este área de trabajo. Por favor asegurate de que hay una barreda en funcionamiento cerca y que la granja marina está siendo suministrada con las mercancías necesarias, o considera desmantelar o destruir este edificio."
+msgstr "Los pescadores trabajando en esta granja marina no pueden encontrar estanques de peces en este área de trabajo. Por favor asegurate de que hay una barreda en funcionamiento cerca y que la granja marina está siendo suministrada con las mercancías necesarias, o considera desarmar o destruir este edificio."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:7
@@ -2533,7 +2533,7 @@ msgid ""
 "The beekeeper working at this beekeepers’s house can’t find any flowering "
 "fields or bushes in his work area. You should consider building another farm"
 " or berry farm nearby, or dismantling or destroying this building."
-msgstr "El apicultor trabajando en la casa de apicultura no puede encontrar ningún campo con flores o arbustos en su área de trabajo. Deberías considerar construir otra granja o granja de bayas cerca, o desmantelar o destruir este edificio."
+msgstr "El apicultor trabajando en la casa de apicultura no puede encontrar ningún campo con flores o arbustos en su área de trabajo. Deberías considerar construir otra granja o granja de bayas cerca, o desarmar o destruir este edificio."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:7
@@ -2613,7 +2613,7 @@ msgid ""
 "clay ponds in his work area. Please make sure there is a working clay pit "
 "nearby and the charcoal burner’s house is supplied with all needed wares, or"
 " consider dismantling or destroying this building."
-msgstr "Los carboneros trabajando en esta casa de carbonero no pueden encontrar estanques de arcilla en este área de trabajo. Por favor asegurate de que hay una barreda en funcionamiento cerca y que la casa de carbonero está siendo suministrada con las mercancías necesarias, o considera desmantelar o destruir este edificio."
+msgstr "Los carboneros trabajando en esta casa de carbonero no pueden encontrar estanques de arcilla en este área de trabajo. Por favor asegurate de que hay una barreda en funcionamiento cerca y que la casa de carbonero está siendo suministrada con las mercancías necesarias, o considera desarmar o destruir este edificio."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:7
@@ -2647,7 +2647,7 @@ msgid ""
 "The clay digger working at this clay pit can’t find any level ground in his "
 "work area. Consider dismantling this clay pit and rebuilding it somewhere "
 "else."
-msgstr "El excavador trabajando en esta barreda no puede encontrar ningún terreno nivelado en su área de trabajo. Considera desmantelar esta barreda y reconstruirla en otra parte."
+msgstr "El excavador trabajando en esta barreda no puede encontrar ningún terreno nivelado en su área de trabajo. Considera desarmar esta barreda y reconstruirla en otra parte."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:7
@@ -2660,7 +2660,7 @@ msgctxt "frisians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "La veta principal de esta mina de carbón está agotada. Espera una produccion fuertemente reducida sobre la inversión. Deberías considerar mejorarla, desmantelarla o destruirla."
+msgstr "La veta principal de esta mina de carbón está agotada. Espera una produccion fuertemente reducida sobre la inversión. Deberías considerar mejorarla, desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:7
@@ -2674,7 +2674,7 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "La veta principal de esta mina de carbón está agotada. Espera una produccion fuertemente reducida sobre la inversión. Esta mina no puede mejorarse más, así que deberías considerar desmantelarla o destruirla."
+msgstr "La veta principal de esta mina de carbón está agotada. Espera una produccion fuertemente reducida sobre la inversión. Esta mina no puede mejorarse más, así que deberías considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:7
@@ -2701,7 +2701,7 @@ msgid ""
 "The fruit collector working at this fruit collector’s house can’t find any "
 "berry bushes in his work area. You should consider building another berry "
 "farm, or dismantling or destroying this building."
-msgstr "El recolector de fruta trabajando en la casa del recolector de frutas no puede encontrar ningún arbusto de baya en su área de trabajo. Deberías considerar construir otra granja de bayas, o desmantelar o destruir este edificio."
+msgstr "El recolector de fruta trabajando en la casa del recolector de frutas no puede encontrar ningún arbusto de baya en su área de trabajo. Deberías considerar construir otra granja de bayas, o desarmar o destruir este edificio."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:7
@@ -2773,7 +2773,7 @@ msgctxt "frisians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "La veta principal de esta mina de oro está agotada. Espera una produccion fuertemente reducida sobre la inversión. Deberías considerar mejorarla, desmantelarla o destruirla."
+msgstr "La veta principal de esta mina de oro está agotada. Espera una produccion fuertemente reducida sobre la inversión. Deberías considerar mejorarla, desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:7
@@ -2787,7 +2787,7 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "La veta principal de esta mina de oro está agotada. Espera una produccion fuertemente reducida sobre la inversión. Esta mina no puede mejorarse más, así que deberías considerar desmantelarla o destruirla."
+msgstr "La veta principal de esta mina de oro está agotada. Espera una produccion fuertemente reducida sobre la inversión. Esta mina no puede mejorarse más, así que deberías considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:7
@@ -2826,7 +2826,7 @@ msgctxt "frisians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "La veta principal de esta mina de hierro está agotada. Espera una produccion fuertemente reducida sobre la inversión. Deberías considerar mejorarla, desmantelarla o destruirla."
+msgstr "La veta principal de esta mina de hierro está agotada. Espera una produccion fuertemente reducida sobre la inversión. Deberías considerar mejorarla, desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:7
@@ -2840,7 +2840,7 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "La veta principal de esta mina de hierro está agotada. Espera una produccion fuertemente reducida sobre la inversión. Esta mina no puede mejorarse más, así que deberías considerar desmantelarla o destruirla."
+msgstr "La veta principal de esta mina de hierro está agotada. Espera una produccion fuertemente reducida sobre la inversión. Esta mina no puede mejorarse más, así que deberías considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:7
@@ -2934,7 +2934,7 @@ msgctxt "frisians_building"
 msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "La veta principal de esta mina de roca está agotada. Espera una produccion fuertemente reducida sobre la inversión. Deberías considerar mejorarla, desmantelarla o destruirla."
+msgstr "La veta principal de esta mina de roca está agotada. Espera una produccion fuertemente reducida sobre la inversión. Deberías considerar mejorarla, desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:7
@@ -2948,7 +2948,7 @@ msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "La veta principal de esta mina de roca está agotada. Espera una produccion fuertemente reducida sobre la inversión. Esta mina no puede mejorarse más, así que deberías considerar desmantelarla o destruirla."
+msgstr "La veta principal de esta mina de roca está agotada. Espera una produccion fuertemente reducida sobre la inversión. Esta mina no puede mejorarse más, así que deberías considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:7
@@ -3048,7 +3048,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "El leñador que trabaja en esta casa del leñador no puede encontrar ningún árbol en su área de trabajo. Deberías considerar desmantelar o destruir el edificio o construir una casa del silvicultor."
+msgstr "El leñador que trabaja en esta casa del leñador no puede encontrar ningún árbol en su área de trabajo. Deberías considerar desarmar o destruir el edificio o construir una casa del silvicultor."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:84
@@ -4137,7 +4137,7 @@ msgstr "Aldea Pobra"
 msgid ""
 "Start the game with just a warehouse and the bare minimum for bootstrapping "
 "an economy. Warning: the AI can't successfully start from this"
-msgstr "Empieza la partida con solo un almacén y el mínimo pelado para montar una economía. Aviso: la IA no puede empezar afortunada de esta condición"
+msgstr "Empieza el partido con solo un almacén y el mínimo pelado para montar una economía. Aviso: la IA no puede empezar afortunada de esta condición"
 
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:45
 #: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:43
@@ -4171,7 +4171,7 @@ msgstr "Puesto Bregado"
 msgid ""
 "Start the game with just your headquarters and very few wares for "
 "bootstrapping an economy. Warning: the AI can't successfully start from this"
-msgstr "Empieza la partida con solo tu cuartel general y un poquito de mercancías para montar una economía. Aviso: la IA no puede empezar afortunada de esta condición"
+msgstr "Empieza el partido con solo tu cuartel general y un poquito de mercancías para montar una economía. Aviso: la IA no puede empezar afortunada de esta condición"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:11

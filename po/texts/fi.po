@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-11 19:14+0000\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-05-17 05:43+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -411,7 +411,7 @@ msgstr "Välilyönti"
 
 #: ../../data/txts/help/common_helptexts.lua:42
 msgid "Toggle building spaces"
-msgstr "Rakennusalueet päälle/pois"
+msgstr "Rakennuspaikat päälle/pois"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
 #: ../../data/txts/help/common_helptexts.lua:49
@@ -426,7 +426,7 @@ msgstr "Kokoruutumoodi päälle/pois, jos käyttöjärjestelmä tukee toimintoa"
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
 #: ../../data/txts/help/common_helptexts.lua:56
 msgid "Toggle minimap"
-msgstr "Minikartta päälle/pois"
+msgstr "Pienkartta päälle/pois"
 
 #: ../../data/txts/help/multiplayer_help.lua:7
 msgid "Multiplayer Game Setup"
@@ -594,7 +594,7 @@ msgstr "Numeronäppäimillä (0 - 9) voit suoraan asettaa valitun alueen koon hi
 msgid ""
 "Space key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
-msgstr "Välilyönti toimii samoin kuin tavallisessa pelissä. Se kytkee rakennusalueet näkymän päälle tai pois."
+msgstr "Välilyönti toimii samoin kuin tavallisessa pelissä. Se kytkee rakennuspaikat näkymän päälle tai pois."
 
 #: ../../data/txts/tips/editor.lua:35
 msgid ""

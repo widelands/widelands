@@ -7,6 +7,8 @@
 # Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
 # Jacek Wolszczak <shutdownrunner@o2.pl>, 2008
 # Jakub Magnowski <qoiutek@gmail.com>, 2018
+# Niektóry <niektory@gmail.com>, 2020
+# Niektóry <niektory@gmail.com>, 2020
 # tombox <wptom@wp.pl>, 2016,2018-2019
 # tombox <wptom@wp.pl>, 2015
 # tombox <wptom@wp.pl>, 2020
@@ -14,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-15 15:38+0000\n"
-"Last-Translator: tombox <wptom@wp.pl>\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-06-01 04:37+0000\n"
+"Last-Translator: Niektóry <niektory@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -100,7 +102,7 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr ""
+msgstr "W dniu śmierci Chat’Karuth był już starym człowiekiem, ojcem trzech silnych i ambitnych synów i watażką dowodzącym armią gotową stawić czoła każdemu, kto wystąpiłby przeciwko pradawnym lasom. Pod koniec jego wspaniałych rządów Chat’Karuth wyznaczył swojego najstarszego syna, Throna, jako następcę – co nie zaspokoiło ambicji reszty rodzeństwa. Stary watażka o tym wiedział. Za radą ojca Thron opuścił stolicę, Al’thunran, dom Tronu Pośród Drzew i wycofał swoje siły na wysokie wzgórza, gdzie pochował zwłoki swojego ojca. Tam przysiągł na bogów i ducha ojca, że powróci i przywróci porządek. Podczas gdy jego bracia walczą ślepo ze sobą, Thronem i siłami, które pozostawił, by strzegły granic Al’thunran, ten próbuje na nowo pojednać rodzeństwo i zmusić plemiona do ponownego marszu pod wspólnym sztandarem."
 
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../data/campaigns/campaigns.lua:70
@@ -125,7 +127,7 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr ""
+msgstr "Sześć miesięcy temu Lucjusz – młody dowódca w służbie Imperium – posłany został ze 150 żołnierzami na granicę za północnymi lasami, gdzie barbarzyńskie plemiona wkraczały na tereny należące do Imperium. Za zadanie miał obronę granic. Z początku panował spokój. Lucjusz rozmawiał nawet z paroma barbarzyńskimi dziećmi i rozważał życie w pokoju z tym prymitywnym ludem. Poczuł się bezpiecznie, zaś jego wojsko mniej czujnie pilnowało potencjalnego wroga. Przyniosło im to zgubę, gdy pewnej marcowej nocy jego nieprzygotowana jednostka została zaatakowana i rozgromiona przez 100 barbarzyńskich piechurów. Z bitwy Lucjusz uniósł wyłącznie swoje życie i garstkę swoich ludzi."
 
 #. TRANSLATORS: The name of an Atlantean campaign
 #: ../../data/campaigns/campaigns.lua:93
@@ -135,7 +137,7 @@ msgstr "Bieg po ogień"
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:96
 msgid "Introduces the Atlanteans."
-msgstr "Prezentuje Atlantydów."
+msgstr "Prezentuje Atlantów."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:98
@@ -145,27 +147,27 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr ""
+msgstr "Gdy bóg Atlantów stracił w nich wiarę i zatopił ich wyspę, starania jednej kobiety o sprawiedliwość i drugą szansę dla swojego ludu stały się przedmiotem legend. Jundlina, prowadząc ocalałych Atlantów do nowej przyszłości w nieznanym zakątku świata stała się najpotężniejszym człowiekiem swoich czasów, lecz zapłaciła za to wysoką cenę - swoje człowieczeństwo i duszę."
 
 #. TRANSLATORS: The name of a Frisian campaign
 #: ../../data/campaigns/campaigns.lua:107
 msgid "From Water to Ice"
-msgstr ""
+msgstr "Od Wody do Lodu"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:110
 msgid "Introduces the Frisians."
-msgstr "Prezentuje Fryzyjczyków."
+msgstr "Prezentuje Fryzów."
 
 #. TRANSLATORS: A campaign difficulty (easiest of three options)
 #: ../../data/campaigns/campaigns.lua:115
 msgid "Sailor (Tricky)"
-msgstr ""
+msgstr "Marynarz (zdradliwy)"
 
 #. TRANSLATORS: A campaign difficulty (medium of three options)
 #: ../../data/campaigns/campaigns.lua:117
 msgid "Steersman (Very Hard)"
-msgstr ""
+msgstr "Sternik (bardzo trudny)"
 
 #. TRANSLATORS: A campaign difficulty (hardest of three options)
 #: ../../data/campaigns/campaigns.lua:119
@@ -181,7 +183,7 @@ msgid ""
 "example for the hardships all Frisians have to face – or a sign from the "
 "gods that a tribe that only just settled here must seek out an entirely new "
 "home?"
-msgstr ""
+msgstr "Życie nad oceanem to ciągła walka, a tym bardziej dla mieszkańców wybrzeża fryzyjskiego Morza Północnego. Czy ostatnia sztormowa, najbardziej niszczycielska w ludzkiej pamięci, była niczym innym, jak tylko kolejnym przykładem trudności, z jakimi zmagają się wszyscy Fryzowie – lub znakiem od bogów, że plemię, które dopiero tu osiedliło, musi szukać całkowicie nowego domu?"
 
 #: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
@@ -219,6 +221,10 @@ msgid ""
 "land on a green, Mediterranean island, looking like paradise. Overjoyed, "
 "they set out to explore this new living space."
 msgstr "Wreszcie statek został naprawiony, więc Lucjusz i jego ludzie wyruszyli w poszukiwaniu dobrego miejsca na nowy początek. Kilka dni później wylądowali na zielonej, śródziemnomorskiej wyspie, wyglądającej niczym raj. Szczęśliwi ruszyli poznawać swój nowy dom."
+
+#: ../../data/campaigns/emp03.wmf/elemental:8
+msgid "Neptune’s Revenge"
+msgstr "Zemsta Neptuna"
 
 #: ../../data/campaigns/emp03.wmf/elemental:10
 msgid ""
@@ -285,7 +291,7 @@ msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
 "soldiers, how to train them and how to lead them in battle. Scouting will be"
 " also covered."
-msgstr ""
+msgstr "W tym scenariuszu poznasz sekrety prowadzenia wojny: tworzenia żołnierzy, trenowania ich i prowadzenia ich do boju. Uwzględnione jest również rozpoznanie."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
 msgid "Seafaring"
@@ -295,7 +301,7 @@ msgstr "Żeglarstwo"
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports, and how to use ferries and waterways."
-msgstr ""
+msgstr "W tym samouczku poznasz żeglarstwo, to jest budowę i wykorzystanie statków i portów oraz korzystanie z promów i dróg wodnych."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy"
@@ -331,15 +337,15 @@ msgstr "Trudno na tych wysepkach o dobre miejsce na większy budynek - nie marnu
 
 #: ../../data/maps/Astoria 2.R.wmf/elemental:8
 msgid "Astoria 2.R"
-msgstr ""
+msgstr "Astoria 2.R"
 
 #: ../../data/maps/Astoria 2.R.wmf/elemental:10
 msgid "Long, economic play in beautyfull land, try every player!!"
-msgstr ""
+msgstr "Długa, ekonomiczna gra w pięknej krainie, wypróbuj każdego gracza!!"
 
 #: ../../data/maps/Astoria 2.R.wmf/elemental:9
 msgid "pbuczny@gmail.com – edited by Nordfriese"
-msgstr ""
+msgstr "pbuczny@gmail.com – redagowane przez Nordfriese"
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
@@ -428,7 +434,7 @@ msgstr "Cztery plemiona pasują się ze swoimi najbliższymi sąsiadami o pierws
 
 #: ../../data/maps/Dolomites_v3.wmf/elemental:8
 msgid "Dolomites 3.0"
-msgstr ""
+msgstr "Dolomites 3.0"
 
 #: ../../data/maps/Dolomites_v3.wmf/elemental:10
 msgid ""
@@ -437,7 +443,7 @@ msgid ""
 "reasonable reconstruction of the area delimited by Cortina d'Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
 " to the death with your enemies, it may as well be in a beautiful place."
-msgstr ""
+msgstr "Łańcuch Dolomitów to klejnot Alp, wpisany na listę światowego dziedzictwa UNESCO z uwagi na ich nieskażoną urodę. Ta mapa jest możliwie wierną rekonstrukcją obszaru od Cortina d'Ampezzo na północnym wschodzie do Canazei na południowym zachodzie. Jeśli już musisz walczyć z wrogiem na śmierć i życie, możesz równie dobrze wybrać na to przepiękne miejsce."
 
 #: ../../data/maps/Dolomites_v3.wmf/elemental:11
 msgid ""
@@ -447,7 +453,7 @@ msgid ""
 " army. Use the terrain to your advantage - chop all trees and expand "
 "wherever you can; it's the only way to find all the precious farm spaces - "
 "suggested teams: red+orange+blue+violet"
-msgstr ""
+msgstr "W tych górach znajdziesz sporo równego terenu - na twoje nieszczęście większość jest pionowa. Z reszty korzystaj z dużą rozwagą. Forteca u wyjścia z wąskiej przełęczy może być poważną przeszkodą dla wrogiej armii. Wykorzystuj teren na swoją korzyść - rąb wszystkie drzewa i rozbudowuj się, gdzie możesz; to jedyny sposób na znalezienie wszystkich cennych miejsc na farmie - sugerowane drużyny: czerwony+pomarańczowy+niebieski+fioletowy"
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -461,11 +467,11 @@ msgstr "Zapierające dech w piersiach piękno tych szmaragdowych krain przywiod�
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:8
 msgid "Escher_Goose_Fish"
-msgstr ""
+msgstr "Escher_Goose_Fish"
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:10
 msgid "Equal starting conditions for three players."
-msgstr ""
+msgstr "Równe warunki początkowe dla trzech graczy."
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:11
 msgid "v0.2"
@@ -475,11 +481,11 @@ msgstr "v0.2"
 msgid ""
 "A huge europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
 "Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
-msgstr ""
+msgstr "Ogromna mapa Europy. Niebieski = Szwecja, Czerwony = Włochy, Żółty = Hiszpania, Zielony = Turcja, Czarny = Rosja, Pomarańczowy = Anglia, Fioletowy = Francja, Biały = Polska"
 
 #: ../../data/maps/Europa 1.1.wmf/elemental:8
 msgid "Europa 1.1"
-msgstr ""
+msgstr "Europa 1.1"
 
 #: ../../data/maps/Fellowships_v2.wmf/elemental:8
 msgid "Fellowships"
@@ -668,11 +674,11 @@ msgstr "Cztery plemiona walczą o władzę w tej ponurej krainie. Zasoby rozrzuc
 msgid ""
 ">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go "
 "long, long way to conquere all the islands. Good luck!"
-msgstr ""
+msgstr ">Dokąd? Tysiąc mil stąd.< [Porgy i Bess] Musisz przejść długą, długą drogę, aby podbić wszystkie wyspy. Powodzenia!"
 
 #: ../../data/maps/Long, long v2.wmf/elemental:8 way
 msgid "Long, long way v2"
-msgstr ""
+msgstr "Długa, długa droga v2"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
 msgid "Island Hopping"
@@ -709,7 +715,7 @@ msgstr "W powietrzu wiszą dwa pytania: kto stworzył ten niemożliwie wielki la
 
 #: ../../data/maps/No challenge metal v2.wmf/elemental:8
 msgid "No metal challenge v2"
-msgstr ""
+msgstr "Wyzwanie bez metalu v2"
 
 #: ../../data/maps/No challenge metal v2.wmf/elemental:10
 msgid ""
@@ -718,7 +724,7 @@ msgid ""
 "of iron to kickstart your economy), so you have to rely on the 5% production"
 " of an empty mine. And you're still 1v6 (though of course you can remove "
 "some AI players to make it a bit easier). Good luck"
-msgstr ""
+msgstr "Ta mapa jest przeznaczona jako wyzwanie dla tych bardzo zaawansowanych graczy, dla których walka 1 na 6 przeciwko SI jest zbyt łatwa. Niebieski gracz nie ma metalu (oprócz odrobiny żelaza, aby uruchomić gospodarkę), więc musisz polegać na 5% produkcji pustej kopalni. Nadal jesteś w trybie 1 na 6 (choć oczywiście możesz usunąć niektórych graczy SI, aby było to trochę łatwiejsze). Powodzenia"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"

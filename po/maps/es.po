@@ -9,13 +9,14 @@
 # Madkat Here, 2015-2017
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020
 # Thadah D. Denyse <juchuf@gmail.com>, 2017
+# Walter Benkel <tromaster@gmail.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-07 19:37+0000\n"
-"PO-Revision-Date: 2020-05-15 09:22+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-06-05 20:19+0000\n"
+"Last-Translator: Walter Benkel <tromaster@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,13 +36,13 @@ msgstr "Después de aterrizar en una misteriosa isla, cerca de la Atlántida, lo
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
 msgid "A Place to Call Home"
-msgstr "Un lugar al cual llamar hogar"
+msgstr "Un Lugar al Cual Llamar Hogar"
 
 #: ../../data/campaigns/bar01.wmf/elemental:10
 msgid ""
 "In this scenario, the higher production buildings including mining will be "
 "introduced."
-msgstr "En este escenario se introducirán los edificios de producción más alta, incluyendo la minería."
+msgstr "En este escenario se presentarán los edificios de producción superior, incluyendo la minería."
 
 #: ../../data/campaigns/bar02.wmf/elemental:7
 msgid "This Land is Our Land"
@@ -76,12 +77,12 @@ msgstr "Desafiante."
 #. TRANSLATORS: The name of a Barbarian campaign
 #: ../../data/campaigns/campaigns.lua:43
 msgid "The Second Empire"
-msgstr "El segundo Imperio"
+msgstr "El Segundo Imperio"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:49
 msgid "Introduces the Barbarians."
-msgstr "Introduce los Bárbaros."
+msgstr "Presenta a los Bárbaros."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:52
@@ -99,17 +100,17 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr "Cuando Chat'Karuth murió, él era un hombre de edad, padre de tres hijos fuertes y ambiciosos, y el señor de la guerra a un ejército que podría coincidir con cualquier enemigo dispuesto a levantarse contra los antiguos bosques. Aunque al final de su glorioso reinado, Chat'Karuth eligió a su hijo mayor, Thron, para sucederle como jefe militar de la tribu – una decisión que dejó a sus dos hermanos insatisfechos. El antiguo señor de la guerra lo sabía. Como su padre le enseñó, Thron dejó la capital de Al'thunran, el hogar del Trono Entre los árboles, y dirigió a sus fuerzas a las altas colinas donde enterró el cadáver de su padre. Allí juró a los dioses y al espíritu de su padre que él volvería a restablecer el orden. Mientras que sus hermanos han desatado una guerra ciega contra Thron y las pocas fuerzas que dejó para asegurar las fronteras de Al'thunran, el joven señor de la guerra busca reunir a sus ambiciosos hermanos y forzar a las tribus a marchar de nuevo bajo una misma bandera."
+msgstr "Cuando Chat'Karuth murió era un hombre de edad, padre de tres hijos fuertes y ambiciosos, y jefe militar de un ejército que podía enfrentar a cualquier enemigo dispuesto a sublevarse contra los antiguos bosques. Al final de su glorioso reinado, Chat'Karuth eligió a su hijo mayor, Thron, para sucederle como jefe militar de la tribu – una decisión que dejó insatisfechos a sus dos hermanos. El viejo señor de la guerra lo sabía. Como su padre le había indicado, Thron abandonó la capital de Al'thunran, el hogar del Trono Entre los Árboles, y retiró sus fuerzas a las altas colinas donde enterró el cadáver de su padre. Allí juró a los dioses y al espíritu de su padre que volvería a restablecer el orden. Mientras sus hermanos desatan una guerra ciega contra Thron y las pocas fuerzas que él dejó para asegurar las fronteras de Al'thunran, el joven jefe militar busca reconciliar a sus ambiciosos hermanos y forzar a las tribus a marchar nuevamente bajo una misma bandera."
 
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../data/campaigns/campaigns.lua:70
 msgid "The Months of Exile"
-msgstr "Los meses de exilio"
+msgstr "Los Meses de Exilio"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:73
 msgid "Introduces the Empire."
-msgstr "Introduce al Imperio."
+msgstr "Presenta al Imperio."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:75
@@ -149,12 +150,12 @@ msgstr "Cuando su Dios pierde la fe en los atlantes y hundió su isla, la lucha 
 #. TRANSLATORS: The name of a Frisian campaign
 #: ../../data/campaigns/campaigns.lua:107
 msgid "From Water to Ice"
-msgstr "De Aqua a Hielo"
+msgstr "De Agua a Hielo"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:110
 msgid "Introduces the Frisians."
-msgstr "Introduce los Frisones."
+msgstr "Presenta a los Frisones."
 
 #. TRANSLATORS: A campaign difficulty (easiest of three options)
 #: ../../data/campaigns/campaigns.lua:115
@@ -196,7 +197,7 @@ msgstr "Lo siento, este mapa no está todavía implementado."
 
 #: ../../data/campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
-msgstr "Las hebras de Malac 'Mor"
+msgstr "Las riberas de Malac' Mor"
 
 #: ../../data/campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -218,6 +219,10 @@ msgid ""
 "land on a green, Mediterranean island, looking like paradise. Overjoyed, "
 "they set out to explore this new living space."
 msgstr "Finalmente el barco fue reparado, Lutius y su pueblo volvieron a la búsqueda de un buen lugar para un nuevo comienzo. Unos pocos días más tarde, desembarcaron en una isla mediterránea verde, parecía el paraíso. Rebosantes de alegría, se dispusieron a explorar este nuevo espacio de vida."
+
+#: ../../data/campaigns/emp03.wmf/elemental:8
+msgid "Neptune’s Revenge"
+msgstr "La venganza de Neptuno"
 
 #: ../../data/campaigns/emp03.wmf/elemental:10
 msgid ""
@@ -511,7 +516,7 @@ msgstr "Estas son las bellas tierras finlandesas de lagos, ríos, bosques antigu
 msgid ""
 "Yellow player has a much easier starting position than the other two; this "
 "map is suited for 1v2."
-msgstr "El jugador amarillo tiene una posición de partida mucho más fácil que los otros dos; este mapa es adecuado para jugar 1 contra 2."
+msgstr "El jugador amarillo tiene una posición de partido mucho más fácil que los otros dos; este mapa es adecuado para jugar 1 contra 2."
 
 #: ../../data/maps/Firegames.wmf/elemental:8
 msgid "Firegames"
@@ -1006,4 +1011,4 @@ msgid ""
 " 4 players’ map, with a black AI to add a complication to the expansion of "
 "the other players, or you can play as a challenge with the black player "
 "against the other 4 (VERY difficult)."
-msgstr "El jugador negro está rodeado en el centro sin recursos, por lo que hay tres maneras diferentes de utilizar este mapa: sin el jugador negro para una partida normal de 4 jugadores, con una IA negra para añadir una complicación a la expansión de los otros jugadores , o se puede jugar como un desafío con el jugador negro contra los otros 4 (muy difícil)."
+msgstr "El jugador negro está rodeado en el centro sin recursos, por lo que hay tres maneras diferentes de utilizar este mapa: sin el jugador negro para un partido normal de 4 jugadores, con una IA negra para añadir una complicación a la expansión de los otros jugadores , o se puede jugar como un desafío con el jugador negro contra los otros 4 (muy difícil)."
