@@ -489,7 +489,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 				//  Add to map of military influence.
 				Area<FCoords> a(map.get_fcoords(warehouse.get_position()), conquer_radius);
 				const Field& first_map_field = map[0];
-				Player::Field* const player_fields = player->fields_;
+				Player::Field* const player_fields = player->fields_.get();
 				MapRegion<Area<FCoords>> mr(map, a);
 				do {
 					player_fields[mr.location().field - &first_map_field].military_influence +=
@@ -542,7 +542,7 @@ void MapBuildingdataPacket::read_militarysite(MilitarySite& militarysite,
 				Area<FCoords> a(
 				   map.get_fcoords(militarysite.get_position()), militarysite.descr().get_conquers());
 				const Field& first_map_field = map[0];
-				Player::Field* const player_fields = militarysite.owner().fields_;
+				Player::Field* const player_fields = militarysite.owner().fields_.get();
 				MapRegion<Area<FCoords>> mr(map, a);
 				do {
 					player_fields[mr.location().field - &first_map_field].military_influence +=
