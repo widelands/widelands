@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-04-23 19:25+0000\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-05-14 08:26+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -133,7 +133,7 @@ msgstr "Versorge deine Bergleute mit Nahrung"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:61
 msgid "Build a hunter’s hut, a gamekeeper’s hut and a tavern"
-msgstr "Baue eine Jägerhütte, eine Wildhüterhütte und eine Taverne"
+msgstr "Baue eine Jagdhütte, eine Wildhüterhütte und eine Taverne"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:62
 msgid "In order to work, your miners need food."
@@ -195,7 +195,7 @@ msgstr "Erweitere eine Mine und die Taverne und errichte eine Kleinbrauerei."
 msgid ""
 "Enhance the coal mine or the iron mine to a deep mine, and enhance the "
 "tavern to an inn."
-msgstr "Erweitere die Kohle- oder Eisenerzmine zu einer Tiefen Mine und die Taverne zu einem Wirtshaus."
+msgstr "Erweitere die Kohle- oder Eisenerzmine zu einer tiefen Mine und die Taverne zu einem Wirtshaus."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:88
 msgid "Also build a micro brewery."
@@ -207,7 +207,7 @@ msgid ""
 "beneath it; then it must be enhanced to a deep mine in order to keep it "
 "working properly. To enhance a building, choose it and then click the "
 "appropriate button in the appearing window."
-msgstr "Eine normale Mine kann nur etwa ein Drittel aller Rohstoffe ausbeuten, die in ihrem Bereich liegen; danach muss sie zur Tiefen Mine ausgebaut werden, um weiter arbeiten zu können. Um ein Gebäude auszubauen, wähle es aus und klicke auf die entsprechende Schaltfläche im dann erscheinenden Fenster."
+msgstr "Eine normale Mine kann nur etwa ein Drittel aller Rohstoffe ausbeuten, die in ihrem Bereich liegen; danach muss sie zur tiefen Mine ausgebaut werden, um weiter arbeiten zu können. Um ein Gebäude auszubauen, wähle es aus und klicke auf die entsprechende Schaltfläche im dann erscheinenden Fenster."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:90
 msgid ""
@@ -223,14 +223,14 @@ msgid ""
 "building – for instance, deep mines need snacks instead of rations. You will"
 " have to enhance your tavern to an inn in order to produce snacks out of "
 "pitta bread AND a second kind of food (meat or fish) AND beer."
-msgstr "Solche Gebäude haben normalerweise höhere Anforderungen als der Basistyp dieses Gebäudes - zum Beispiel brauchen Tiefe Minen Snacks statt Rationen. Du musst deine Taverne zu einem Wirtshaus ausbauen, um Snacks aus Fladenbrot UND einer zweiten Art von Nahrung (Fleisch oder Fisch) UND Bier herzustellen."
+msgstr "Solche Gebäude haben normalerweise höhere Anforderungen als der Basistyp dieses Gebäudes – zum Beispiel brauchen tiefe Minen Snacks statt Rationen. Du musst deine Taverne zu einem Wirtshaus ausbauen, um Snacks aus Fladenbrot UND einer zweiten Art von Nahrung (Fleisch oder Fisch) UND Bier herzustellen."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:92
 msgid ""
 "You may of course enhance all mines to deep mines instantly given you have "
 "the workers – bigger mines work a bit faster, smaller mines need cheaper "
 "food. It’s up to you which strategy you prefer."
-msgstr "Du kannst natürlich alle Minen sofort zu Tiefen Minen ausbauen, wenn du die benötigten Arbeiter hast. Größere Minen arbeiten ein bisschen schneller, kleinere Minen benötigen billigeres Essen. Es liegt an dir, welche Strategie du bevorzugst."
+msgstr "Du kannst natürlich alle Minen sofort zu tiefen Minen ausbauen, wenn du die benötigten Arbeiter hast. Größere Minen arbeiten ein bisschen schneller, kleinere Minen benötigen billigeres Essen. Es liegt an dir, welche Strategie du bevorzugst."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:97
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:99
@@ -650,7 +650,7 @@ msgid ""
 " to do! Thron, what would you say about my taking a few of our most restless"
 " warriors and venturing somewhat closer to the great mountain of Kal’mavrath"
 " – maybe we will find some more big rocks to please the old man?"
-msgstr "Auch wenn es sicherlich keine einem Krieger würdige Aufgabe ist – immerhin gibt es überhaupt etwas zu tun! Thron, was hältst du davon, wenn ich mit ein paar der ruhelosesten Kriegern etwas näher an den großen Berg Kal’mavrath heranziehe – vielleicht finden wir auch einige weitere Steinvorkommen, um den alten Mann zufriedenzustellen?"
+msgstr "Auch wenn es sicherlich keine einem Krieger würdige Aufgabe ist – immerhin gibt es überhaupt etwas zu tun! Thron, was hältst du davon, wenn ich mit ein paar der ruhelosesten Kriegern etwas näher an den großen Berg Kal’mavrath heranziehe – vielleicht finden wir auch ein paar weitere große Felsen, um den alten Mann zufriedenzustellen?"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:325
 msgid "Khantrukh grumbles…"
@@ -814,7 +814,7 @@ msgid ""
 "bring what our brave miners gain for us into a more useful state. The iron "
 "ore has to be melted into iron so that it is ready to be forged into "
 "whatever we want. And we need the coal to keep the smelter’s ovens burning."
-msgstr "Da wir nun sowohl Minen als auch Nahrung, um diese zu unterhalten, haben, sollten wir das, was unsere Bergarbeiter schürfen, in einen nützlicheren Zustand bringen. Das Eisenerz muss zu Eisen geschmolzen werden, damit es zu allem, was wir brauchen, geschmiedet werden kann. Außerdem brauchen wir Kohle, um den Ofen des Schmelzers am Brennen zu halten."
+msgstr "Da wir nun sowohl Minen als auch Nahrung, um diese zu unterhalten, haben, sollten wir das, was unsere Bergleute schürfen, in einen nützlicheren Zustand bringen. Das Eisenerz muss zu Eisen geschmolzen werden, damit es zu allem, was wir brauchen, geschmiedet werden kann. Außerdem brauchen wir Kohle, um den Ofen des Schmelzers am Brennen zu halten."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:425
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:476
@@ -826,7 +826,7 @@ msgstr "Khantrukh spricht …"
 msgid ""
 "Our miners are digging up less and less by the day! We have to go deeper, "
 "closer to the mountain’s core, if we want more of its treasures!"
-msgstr "Unsere Minenarbeiter fördern täglich weniger und weniger! Wir müssen tiefer graben, näher am Kern des Berges, wenn wir mehr seiner Schätze wollen!"
+msgstr "Unsere Bergleute fördern täglich weniger und weniger! Wir müssen tiefer graben, näher am Kern des Berges, wenn wir mehr seiner Schätze wollen!"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:430

@@ -3,15 +3,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Juanjo, 2019
+# Juanjo, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: Juanjo, 2019\n"
+"Last-Translator: Juanjo, 2020\n"
 "Language-Team: Catalan (https://www.transifex.com/widelands/teams/35159/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -98,8 +98,8 @@ msgid ""
 msgstr ""
 "Construïu una granja aqüícola per produir peix. La granja necessitarà que "
 "prop hi hagi forats deixats per una fossa de fang per poder-los utilitzar "
-"com a estanys per criar-hi peixos. Només hi podran pescar-hi els pescadors "
-"que visquin en granges aqüícoles."
+"com a estanys per criar-hi peixos. Només hi podran pescar els pescadors que "
+"visquin en granges aqüícoles."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:58
 msgid "Decide whether you want to cooperate with the Empire"
@@ -251,9 +251,9 @@ msgid ""
 "The only way to put an end to the Empire’s desire to steal our liberty is to"
 " destroy this outpost once and for all. Conquer its entire land."
 msgstr ""
-"L'única forma de posar punt i final als desitjos de l'Imperi de robar-nos la"
-" nostra llibertat és destruir el seu post avançat d'una vegada i per sempre."
-" Conqueriu tot el seu territori."
+"L'única forma de posar punt final als desitjos de l'Imperi de robar-nos la "
+"nostra llibertat és destruir el seu post avançat d'una vegada i per sempre. "
+"Conqueriu tot el seu territori."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:111
 msgid "Conquer every single field that still belongs to Murilius."
@@ -293,7 +293,7 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:144
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:153
 msgid "Welcome Back!"
-msgstr "Benvingut de nou!"
+msgstr "Us donem la benvinguda de nou!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:136
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:145
@@ -308,8 +308,8 @@ msgid ""
 "were on the sea, tossed about by envious storms… it must have been months."
 msgstr ""
 "Començo a pensar que el viatge no acabarà mai. No tinc ni idea de quant "
-"temps portem al mar, espentejats per fortes tempestes… Devem portar mesos "
-"navegant…"
+"temps portem al mar, espentejats per fortes tempestes… Fa mesos que "
+"naveguem…"
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:141
@@ -355,8 +355,8 @@ msgid ""
 "My scouts no longer report any signs of living creatures nearby. We will "
 "start building our new home here."
 msgstr ""
-"Es exploradors ja no porten notícies de que hi hagi criatures vives prop. "
-"Aquí començarem a construir una nova llar."
+"Els exploradors ja no porten notícies del fet que hi hagi criatures vives "
+"prop. Aquí començarem a construir una nova llar."
 
 #. TRANSLATORS: Reebaud – Introduction 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:162
@@ -467,8 +467,8 @@ msgid ""
 "battle, so it would not be a waste to smelt down those."
 msgstr ""
 "Tinc una idea: quan els soldats s'entrenen, se'ls equipa amb noves espases i"
-" les armes velles es llencen, ja que les velles estan fetes malbé com per "
-"usar-les en batalles. No seria una mala idea fondre aquestes armes."
+" les armes velles es llencen, ja que les velles estan fetes malbé per usar-"
+"les en batalles. No seria una mala idea fondre aquestes armes."
 
 #. TRANSLATORS: Hauke – Train and recycle 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:202
@@ -491,8 +491,8 @@ msgid ""
 "Of course, we will need to move all our wares to a warehouse before we can "
 "dismantle the port."
 msgstr ""
-"No tant de pressa! Per construir un camp d'entrenament, primer necessitem or"
-" i no en tenim. Primer desmantellarem el port, d'on recuperarem prou or pel "
+"No tan de pressa! Per construir un camp d'entrenament, primer necessitem or "
+"i no en tenim. Primer desmantellarem el port, d'on recuperarem prou or pel "
 "camp d'entrenament. No m'agrada, però és l'única opció. També haurem de "
 "moure els béns al magatzem abans de desmantellar el port."
 
@@ -556,7 +556,7 @@ msgid ""
 "fruit to feed the fish."
 msgstr ""
 "Afortunadament, un dels nostres pescadors ha pensat una solució. Les fosses "
-"d'argila deixen enormes forats al terra; un pescador els podria omplir amb "
+"d'argila deixen enormes forats a terra; un pescador els podria omplir amb "
 "aigua i fer-hi créixer peixos. Només li caldran molta aigua per als estanys "
 "i fruita per alimentar els peixos."
 
@@ -572,7 +572,7 @@ msgid ""
 " mines may run completely empty soon."
 msgstr ""
 "Ben fet. Hem construït una granja aqüícola i la producció minera és estable."
-" No obstant, els miners em diuen que continua havent-hi escassedat de "
+" Malgrat això, els miners em diuen que continua havent-hi escassedat de "
 "recursos i que les mines poden exhaurir-se aviat."
 
 #. TRANSLATORS: Hauke – Aqua Farms 3
@@ -712,7 +712,7 @@ msgid ""
 "driving them out."
 msgstr ""
 "Si voleu viure pacíficament en aquestes terres, no teniu altra opció que "
-"assistir a l'Imperi i expulsar-los d'aquestes terres."
+"ajudar l'Imperi i expulsar-los d'aquestes terres."
 
 #. TRANSLATORS: Murilius – Supply Murilius 6
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:291

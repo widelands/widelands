@@ -74,8 +74,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 		add(&name, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 		slot_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
-		slot_dropdown_.selected.connect(
-		   boost::bind(&MultiPlayerClientGroup::set_slot, boost::ref(*this)));
+		slot_dropdown_.selected.connect([this]() { set_slot(); });
 
 		update();
 		layout();
@@ -252,14 +251,10 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		init_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 		team_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 
-		type_dropdown_.selected.connect(
-		   boost::bind(&MultiPlayerPlayerGroup::set_type, boost::ref(*this)));
-		tribes_dropdown_.selected.connect(
-		   boost::bind(&MultiPlayerPlayerGroup::set_tribe_or_shared_in, boost::ref(*this)));
-		init_dropdown_.selected.connect(
-		   boost::bind(&MultiPlayerPlayerGroup::set_init, boost::ref(*this)));
-		team_dropdown_.selected.connect(
-		   boost::bind(&MultiPlayerPlayerGroup::set_team, boost::ref(*this)));
+		type_dropdown_.selected.connect([this]() { set_type(); });
+		tribes_dropdown_.selected.connect([this]() { set_tribe_or_shared_in(); });
+		init_dropdown_.selected.connect([this]() { set_init(); });
+		team_dropdown_.selected.connect([this]() { set_team(); });
 
 		add_space(0);
 		add(&player);

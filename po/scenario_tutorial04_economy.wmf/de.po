@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-04-13 10:06+0000\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-05-15 14:00+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -50,7 +50,7 @@ msgstr "Das Aufbauen einer Wirtschaft und dafür zu sorgen, dass sie funktionier
 msgid ""
 "This is what I’ll show you in this tutorial: what actions can you take to "
 "define those general conditions?"
-msgstr "Darum geht es in diesem Szenario: Wie kannst du diese grundlegenden Einstellungen verändern?"
+msgstr "Darum geht es in diesem Einführungsspiel: Wie kannst du diese grundlegenden Einstellungen verändern?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:23
 msgid "A Peaceful Land"
@@ -100,7 +100,7 @@ msgstr "Öffne das Gebäudestatistik-Fenster"
 msgid ""
 "Open the building statistics window for an overview over the buildings you "
 "have."
-msgstr "Öffne das Gebäudestatistik-Fenster für einen Überblick über deine Gebäude. "
+msgstr "Öffne das Gebäudestatistik-Fenster für einen Überblick über deine Gebäude."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:51
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:125
@@ -154,7 +154,7 @@ msgid ""
 " buildings you own and how many are under construction. The second line "
 "shows the average productivity if it is a production site or training site, "
 "or the stationed and desired soldiers in military buildings."
-msgstr "Unter jedem Gebäude befinden sich zwei Zeilen. Die erste zeigt die Anzahl der Gebäude, die du besitzt und wie viele sich im Bau befinden. Die zweite Zeile zeigt die durchschnittliche Produktivität im Falle einer Produktionsstätte oder eines Trainingsgebäudes bzw. die Anzahl der stationierten und gewünschten Soldaten in Militärgebäuden."
+msgstr "Unter jedem Gebäude befinden sich zwei Zeilen. Die erste zeigt die Anzahl der Gebäude, die du besitzt und wie viele sich im Bau befinden. Die zweite Zeile zeigt die durchschnittliche Produktivität im Falle einer Produktionsstätte oder eines Ausbildungsgebäudes bzw. die Anzahl der stationierten und gewünschten Soldaten in Militärgebäuden."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:75
 msgid "Close the building statistics window when you are done."
@@ -279,7 +279,7 @@ msgid ""
 "OK. In the list, you’ve seen that you have no more taverns or inns. That "
 "means that you’re not producing any rations. But let’s see what we still "
 "have in stock."
-msgstr "In der Liste hat du gesehen, dass du keine Tavernen oder Wirtshäuser mehr hast. Das heißt, du produzierst im Moment keine Rationen. Aber vielleicht haben wir noch welche auf Lager."
+msgstr "In der Liste hast du gesehen, dass du keine Tavernen oder Wirtshäuser mehr hast. Das heißt, du produzierst im Moment keine Rationen. Aber vielleicht haben wir noch welche auf Lager."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:142
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:144
@@ -358,7 +358,7 @@ msgid ""
 "You closed the stock window before I finished telling you everything about "
 "it. If you already know everything, please feel free to leave this tutorial "
 "at any time."
-msgstr "Du hast das Lagerfenster geschlossen, bevor ich dir alles darüber erzählt hatte. Wenn du schon alles weißt, darfst du diese Einführung gerne jederzeit verlassen."
+msgstr "Du hast das Lagerfenster geschlossen, bevor ich dir alles darüber erzählt hatte. Wenn du schon alles weißt, darfst du dieses Einführungsspiel gerne jederzeit verlassen."
 
 #. TRANSLATORS: "it" refers to the "Stock" window.
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:195
@@ -737,7 +737,7 @@ msgid ""
 "You closed the ware statistics window before I finished telling you "
 "everything about it. If you already know everything, please feel free to "
 "leave this tutorial at any time."
-msgstr "Du hast das Warenstatistik-Fenster geschlossen, bevor ich dir alles darüber erzählt hatte. Wenn du schon alles weißt, darfst du diese Einführung gerne jederzeit verlassen."
+msgstr "Du hast das Warenstatistik-Fenster geschlossen, bevor ich dir alles darüber erzählt hatte. Wenn du schon alles weißt, darfst du dieses Einführungsspiel gerne jederzeit verlassen."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:437
 msgid ""
@@ -886,7 +886,7 @@ msgid ""
 "To achieve this, you will have to do two things. First, set a preference for"
 " marble columns in the desired warehouse. All marble columns produced in the"
 " future will be brought there if possible."
-msgstr "Um das zu erreichen, muss du zwei Dinge tun. Bevorzuge zuerst Marmorsäulen in dem gewünschten Warenhaus. Alle von nun an produzierten Marmorsäulen werden dann, wenn möglich, dorthin transportiert."
+msgstr "Um das zu erreichen, muss du zwei Dinge tun. Bevorzuge zuerst Marmorsäulen in dem gewünschten Lagerhaus. Alle von nun an produzierten Marmorsäulen werden dann, wenn möglich, dorthin transportiert."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:526
 msgid ""
@@ -944,7 +944,7 @@ msgid ""
 "understood a few concepts, you mustn’t give up. Try them out in some games, "
 "become familiar with them and experience the possibilities. Then, return to "
 "this tutorial and learn the rest!"
-msgstr "Ich hoffe, ich konnte dir beibringen, wie du deine Wirtschaft in Widelands kontrollieren kannst. Es gibt viele Optionen, die zunächst verwirrend erscheinen mögen. Auch wenn du nicht alles verstanden hast, darfst du nicht aufgeben. Probiere die Einstellungen in einigen Spielen aus, mache dich mit ihnen vertraut und lerne die Möglichkeiten kennen. Dann komme zu dieser Einführung zurück und lerne den Rest!"
+msgstr "Ich hoffe, ich konnte dir beibringen, wie du deine Wirtschaft in Widelands kontrollieren kannst. Es gibt viele Optionen, die zunächst verwirrend erscheinen mögen. Auch wenn du nicht alles verstanden hast, darfst du nicht aufgeben. Probiere die Einstellungen in einigen Spielen aus, mache dich mit ihnen vertraut und lerne die Möglichkeiten kennen. Dann komme zu diesem Einführungsspiel zurück und lerne den Rest!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:551
 msgid ""

@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-04-23 19:47+0000\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-05-14 08:12+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -34,7 +34,7 @@ msgstr "Seefahrt-Einführungsspiel"
 msgid ""
 "Welcome back. In this tutorial, you are going to learn the most important "
 "things about seafaring, that is ships, ports, and expedition."
-msgstr "Willkommen zurück. In dieser Einführung lernst du die wichtigsten Sachen über die Seefahrt, das heißt Schiffe, Häfen und Expeditionen."
+msgstr "Willkommen zurück. In diesem Einführungsspiel lernst du die wichtigsten Sachen über die Seefahrt, das heißt Schiffe, Häfen und Expeditionen."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:16
 msgid ""
@@ -123,6 +123,10 @@ msgstr "Du hast vielleicht schon bemerkt, dass du ein solches Symbol neben deine
 msgid "Build a port"
 msgstr "Baue einen Hafen"
 
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:61
+msgid "Build a port in the northern part of your camp"
+msgstr "Baue einen Hafen in nördlichen Teil deines Lagers"
+
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:62
 msgid "You always need a port when you want to transport wares with a ship."
 msgstr "Du brauchst immer einen Hafen, wenn du Waren mit einem Schiff transportieren willst."
@@ -167,6 +171,10 @@ msgstr "Schiffe werden von einem Schiffbauer an der Küstenlinie in der Nähe ei
 msgid "Build a shipyard"
 msgstr "Baue eine Werft"
 
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:84
+msgid "Build a shipyard close to the coast"
+msgstr "Baue eine Werft nahe der Küste"
+
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:85
 msgid "Ships are produced by a shipyard. It is a medium building."
 msgstr "Schiffe werden von einer Werft produziert. Sie ist ein mittleres Gebäude."
@@ -174,7 +182,7 @@ msgstr "Schiffe werden von einer Werft produziert. Sie ist ein mittleres Gebäud
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:86
 msgid ""
 "Build a shipyard close to the shore of the southern part of your territory."
-msgstr "Baue eine Werft nahe der Küste des südlichen Teils deines Lagers."
+msgstr "Baue eine Werft nahe der Küste des südlichen Teils deines Gebiets."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:87
 msgid ""
@@ -208,6 +216,10 @@ msgstr "Wir sollten warten, bis wir zwei Schiffe haben. Das sollte vorerst genug
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:104
 msgid "Ships"
 msgstr "Schiffe"
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:106
+msgid "Construct two ships"
+msgstr "Baue zwei Schiffe"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:107
 msgid ""
@@ -318,6 +330,10 @@ msgstr "Starte eine Expedition in einem deiner Häfen."
 msgid "Expedition"
 msgstr "Expedition"
 
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:158
+msgid "Start an expedition"
+msgstr "Starte eine Expedition"
+
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:159
 msgid "Start an expedition."
 msgstr "Starte eine Expedition."
@@ -369,6 +385,10 @@ msgid "Explore"
 msgstr "Erkunde"
 
 #. TRANSLATORS: "Found" as in "founding", NOT as in "finding"
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:182
+msgid "Found a settlement"
+msgstr "Gründe eine Siedlung"
+
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:183
 msgid "Navigate your ship to an island that could contain iron ore."
 msgstr "Steuere dein Schiff zu einer Insel, die Eisenerz enthalten könnte."
@@ -444,6 +464,10 @@ msgstr "Beginne Eisenerz in den Bergen abzubauen."
 msgid "Iron Mine"
 msgstr "Eisenerzmine"
 
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:217
+msgid "Build an iron mine on the island"
+msgstr "Baue eine Eisenerzmine auf der Insel"
+
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:218
 msgid "Our economy lacks resources."
 msgstr "Unserer Wirtschaft fehlen Ressourcen."
@@ -513,6 +537,10 @@ msgstr "Lass uns eine Fährenwerft nahe am Ufer bauen, bevor wir fortfahren."
 msgid "Build a ferry yard"
 msgstr "Baue eine Fährenwerft"
 
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:253
+msgid "Build a ferry yard close to the shore"
+msgstr "Baue eine Fährenwerft nahe am Ufer"
+
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:254
 msgid "Ferries are constructed by a ferry yard."
 msgstr "Fähren werden in der Fährenwerft gebaut."
@@ -543,7 +571,7 @@ msgid ""
 "the water is too shallow for big ships. The only rule is that the two "
 "triangles directly adjacent to each segment of the waterway have to be "
 "water, and the entire path needs to be within your territory."
-msgstr "Wasserwege können über offenes Gewässer gebaut werden, aber auch am Strand entlang, wo das Wasser zu flach für große Schiffe ist. Die einzige Regel ist, dass mindestens zwei Dreieckfelder, die an ein Wasserwegsegment angrenzen Wasser sein müssen, und der gesamte Pfad innerhalb deines Territoriums liegen muss. "
+msgstr "Wasserwege können über offenes Gewässer gebaut werden, aber auch am Strand entlang, wo das Wasser zu flach für große Schiffe ist. Die einzige Regel ist, dass mindestens zwei Dreieckfelder, die an ein Wasserwegsegment angrenzen Wasser sein müssen, und der gesamte Pfad innerhalb deines Gebiets liegen muss. "
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:266
 msgid ""
@@ -578,6 +606,10 @@ msgid ""
 "connect it to the main land by building waterways over the streams."
 msgstr "Jetzt bist du am Zug: Baue eine Goldmine an dem Berg im Süden, und verbinde sie mit dem Hauptland durch Wasserwege über die Wasserströme. "
 
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:297
+msgid "Build a gold mine and waterways"
+msgstr "Baue eine Goldmine und Wasserwege"
+
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:298
 msgid ""
 "Build a gold mine on the mountain in the south, and connect it to the "
@@ -596,7 +628,7 @@ msgid ""
 "The only rule for waterway placement is that the two triangles directly "
 "adjacent to each segment of the waterway have to be water, and the entire "
 "path needs to be within your territory."
-msgstr "Die einzige Regel für das Bauen von Wasserwegen ist, dass mindestens zwei Dreieckfelder, die an ein Wasserwegsegment angrenzen Wasser sein müssen, und der gesamte Pfad innerhalb deines Territoriums liegen muss."
+msgstr "Die einzige Regel für das Bauen von Wasserwegen ist, dass mindestens zwei Dreieckfelder, die an ein Wasserwegsegment angrenzen Wasser sein müssen, und der gesamte Pfad innerhalb deines Gebiets liegen muss."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:306
 msgid "Conclusion"

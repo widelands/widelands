@@ -2,14 +2,14 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
-# Juanjo, 2015-2019
+# Juanjo, 2015-2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-04-15 14:46+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-05-09 21:38+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid ""
 "Click on the ‘OK’ button or press the ‘Enter ⏎’ key on the keyboard to close"
 " this window."
-msgstr ""
+msgstr "Feu clic al botó «D'acord» o premeu la tecla «Retorn» per tancar la finestra."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:12
 msgid "Nice And Easy Does It All the Time"
@@ -83,7 +83,7 @@ msgstr "Aquesta és la finestra d'objectius. Podeu tornar-hi quan vulgueu per co
 msgid ""
 " You can open and close this window by clicking on the ‘Objectives’ button "
 "in the toolbar on the bottom of the screen."
-msgstr ""
+msgstr "Podeu obrir i tancar la finestra fent clic en el botó «Objectius» de la barra d'eines de la part inferior de la pantalla."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid ""
@@ -116,7 +116,7 @@ msgstr "Necessitem un lloc per la cabana del llenyataire. Per fer-ho més fàcil
 msgid ""
 "Press the Space bar to toggle them, or select ‘Show Building Spaces’ in the "
 "‘Show / Hide’ menu."
-msgstr ""
+msgstr "Premeu la barra espaiadora o seleccioneu «Mostra els espais de construcció» al menú «Mostra/Amaga»."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:66
 msgid "Show the building spaces now."
@@ -156,7 +156,7 @@ msgstr "Generalment, cada jugador comença la partida amb un quarter general. É
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show Building Spaces’."
-msgstr ""
+msgstr "Necessitem un lloc per la cabana del llenyataire. Per fer-ho més fàcil, podeu activar el botó «Mostra els espais de construcció»."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:80
 msgid ""
@@ -168,13 +168,13 @@ msgid ""
 "Note that you cannot close this window by right-clicking on it. I have "
 "blocked this so that you will not close it by accident and miss important "
 "information."
-msgstr ""
+msgstr "Observeu que no podeu tancar la finestra fent-hi un clic amb el botó dret. Ho ho blocat per tal que no pugueu tancar-la per accident i perdre aquesta informació important."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:91
 msgid ""
 "Now that I have shown you how to show and hide the building spaces, please "
 "switch them on again so that we can place our first building."
-msgstr ""
+msgstr "Ara que us he mostrat com podeu mostrar i amagar els espais de construcció, mostreu-los de nou per tal de construir un edifici."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:100
 msgid "Lumberjack’s Spot"
@@ -270,7 +270,7 @@ msgstr "Ara planteu una bandera blava  al mig del camí que connecta el quarter 
 msgid ""
 "To build the flag, click on the yellow flag symbol in between the two blue "
 "flags we just placed and then click on the build flag symbol."
-msgstr ""
+msgstr "Per construir la bandera, feu clic en el símbol de bandera groga entre les dues blaves que acabem de plantar i llavors cliqueu el símbol de plantar-ne una de nova."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:173
 msgid "Placing Another Flag"
@@ -304,7 +304,7 @@ msgstr "Vegem-ne el progrés"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:201
 msgid "Click on the construction site to have a look at it."
-msgstr ""
+msgstr "Feu clic al lloc de construcció per veure'l."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:207
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:218
@@ -323,11 +323,11 @@ msgid ""
 "This button toggles showing the building’s work area. When the lumberjack "
 "leaves the building to look for trees to fell, he will only look for them "
 "within this area. Let me show you how perfect this spot is."
-msgstr ""
+msgstr "El botó mostra o amaga l'àrea de treball de l'edifici. Quan el llenyataire surt de l'edifici per buscar arbres que talar, només buscarà dins d'aquesta àrea. Deixeu-me mostrar-vos perquè aquest lloc és ideal."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:223
 msgid "Close the construction site window when you have seen enough."
-msgstr ""
+msgstr "Tanqueu la finestra del lloc de construcció quan ja n'hagueu observat la informació."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:234
 msgid "Well done! Let’s wait till the hut is finished."
@@ -342,7 +342,7 @@ msgstr "Si voleu que les coses passin més ràpidament, useu la tecla «Re Pàg�
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:237
 msgid "Change is rapid with pressed Ctrl and smooth with pressed Shift."
-msgstr ""
+msgstr "El canvi és ràpid quan es manté premuda la tecla Ctrl i suau si es prem Maj."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:244
 msgid "The Lumberjack’s Hut is Done"
@@ -449,7 +449,7 @@ msgid ""
 "When you are ready to continue, close the minimap by selecting ‘Hide "
 "Minimap’ in the ‘Map View’ menu or by pressing ‘m’. Of course, a right-click"
 " also works."
-msgstr ""
+msgstr "Tanqueu el minimapa quan esteu llest per continuar seleccionant «Amaga minimapa» del menú de «Vista del mapa» o bé prement la tecla «M». Un clic amb el botó dret també tancarà la finestra."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:314
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:329
@@ -598,7 +598,7 @@ msgstr "Ara, a fer el camí. Recordeu que ja estem en mode de construcció de ca
 msgid ""
 " Excellent! To enter road building mode for any flag, left-click on a flag "
 "and select the road building symbol."
-msgstr ""
+msgstr "Excel·lent! Per accedir al mode de construcció de camins, cliqueu amb el botó esquerre qualsevol bandera i seleccioneu el símbol corresponent."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:399
 msgid ""
@@ -692,7 +692,7 @@ msgid ""
 "It seems like you destroyed a construction site for a quarry we wanted to "
 "build. Luckily, we still have enough logs left this time, so you can simply "
 "build another one."
-msgstr ""
+msgstr "Sembla que heu destruït el lloc de construcció de la pedrera. Afortunadament, encara tenim prou troncs i en podeu construir una altra."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
 msgid ""
@@ -700,7 +700,7 @@ msgid ""
 "created from time to time. To do so, you will have to go back to the main "
 "menu and choose ‘Single Player’ → ‘Load Game’. And please be a bit more "
 "careful next time."
-msgstr ""
+msgstr "Podeu recarregar la partida des d'alguna desada anterior. Afortunadament, es creen desades automàtiques cada cert interval de temps. Per fer-ho, torneu al menú principal i escolliu «Un jugador» → «Carrega partida». I sigues una mica més curós el proper cop."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:458
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:460
@@ -747,7 +747,7 @@ msgid ""
 "In order to show or hide the building census labels, you can select the "
 "‘Show Census’ / ‘Hide Census’ entry from the ‘Show / Hide’ menu on the "
 "bottom, or press the ‘c’ key on the keyboard."
-msgstr ""
+msgstr "Per tal de mostrar o amagar les etiquetes de cens de construcció, podeu seleccionar l'entrada «Mostra/Amaga cens» del menú «Mostra/Amaga» que hi ha a la part inferior de la pantalla. També podeu prémer la tecla «C»."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:483
 msgid "Let me enable the census for you."

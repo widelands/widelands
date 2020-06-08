@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_WIDELANDS_GEOMETRY_H
 #define WL_LOGIC_WIDELANDS_GEOMETRY_H
 
+#include <cstdint>
 #include <tuple>
 
 namespace Widelands {

@@ -4,15 +4,15 @@
 # 
 # Translators:
 # GunChleoc, 2018
-# Juanjo, 2019
+# Juanjo, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-23 19:30+0000\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: Juanjo, 2019\n"
+"Last-Translator: Juanjo, 2020\n"
 "Language-Team: Catalan (https://www.transifex.com/widelands/teams/35159/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -71,7 +71,7 @@ msgid ""
 "Click on a farm building to open its building window. This will let you "
 "analyze the building."
 msgstr ""
-"Cliqueu una masoveria per obrir-ne la seva finestra de construcció. Això us "
+"Cliqueu una masoveria per obrir-ne la finestra de construcció. Això us "
 "permetrà analitzar l'edifici."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:71
@@ -281,7 +281,7 @@ msgstr "La nostra casa"
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:217
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:225
 msgid "Diary of Lutius"
-msgstr "Diari d'en Lutius"
+msgstr "Agenda d'en Lutius"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:200
@@ -341,8 +341,8 @@ msgid ""
 msgstr ""
 "Lloats siguin els déus! Hem tingut èxit! Hem aconseguit superar tots els "
 "reptes que se'ns han presentat. Fins i tot hem expulsat els bàrbars fora de "
-"la nostra terra. No obstant, només hem guanyat una batalla i estem a l'inici"
-" de la guerra. Ja veurem que ens deparà el futur."
+"la nostra terra. Tanmateix, només hem guanyat una batalla i estem a l'inici "
+"de la guerra. Ja veurem que ens depararà el futur."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:228
 msgid "Victory"
@@ -417,7 +417,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:267
 msgid "Welcome Back"
-msgstr "Benvingut de nou"
+msgstr "Us donem la benvinguda de nou"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:268
 msgid "A high Fremil official is welcoming you…"
@@ -430,7 +430,7 @@ msgid ""
 "Ave, Sire! The people and me are so glad to see you returning back home. We "
 "really need some good leadership around here."
 msgstr ""
-"Ave, senyor! La gent i jo estem contents de veure-vos tornar a casa. "
+"Ave, senyor! La gent i jo estem contents de veure-us tornar a casa. "
 "Necessitem de veritat que aquí hi hagi un bon lideratge."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:272
@@ -438,7 +438,7 @@ msgid ""
 "As you have already noticed, things have gone terribly wrong around here "
 "since you left."
 msgstr ""
-"Com haureu comprovat, la situació ha empitjorant terriblement per aquí des "
+"Com haureu comprovat, la situació ha empitjorat terriblement per aquí des "
 "que vau marxar."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:277
@@ -460,8 +460,8 @@ msgid ""
 msgstr ""
 "Senyor, deixeu que comenci pel principi. El rei va deixar Fremil fa molt "
 "temps per lluitar contra els bàrbars. Com que aquesta tasca demanava un "
-"compromís total, va delegar l'autoritat d'administrar la ciutat a el seu "
-"antic secretari i va establir que ell seria el seu substitut."
+"compromís total, va delegar l'autoritat d'administrar la ciutat al seu antic"
+" secretari i va establir que ell seria el seu substitut."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:282
 msgid ""
@@ -480,9 +480,9 @@ msgid ""
 "the chaos seems to be a task too big for my abilities."
 msgstr ""
 "Després d'un temps, la gent va descobrir la veritat i va expulsar al "
-"mentider. Més tard, em van elegir com a alcalde de la ciutat. No obstant, "
-"sembla que recuperar-nos del caos és una tasca massa gran per les meves "
-"habilitats."
+"mentider. Més tard, em van elegir com a alcalde de la ciutat. No obstant "
+"això, sembla que recuperar-nos del caos és una tasca massa gran per les "
+"meves habilitats."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:292
 msgid "Amalea Looks Puzzled"
@@ -562,6 +562,9 @@ msgid ""
 "need to closely monitor them when we are able to supply them. Until then we "
 "shouldn't do anything with them."
 msgstr ""
+"Encara no sabem si els altres edificis funcionen correctament. Quan tinguem "
+"béns per subministrar-los, comprovarem com funcionen. Fins llavors, no cal "
+"fer res amb ells."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:315
@@ -696,7 +699,8 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:366
 msgid "But I’m afraid that this problem hasn’t been the last in our economy."
 msgstr ""
-"Però em temo que aquest problema no ha estat l'últim al que ens enfrontarem."
+"Però em temo que aquest problema no ha estat l'últim al qual ens "
+"enfrontarem."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:372
 msgid "Amalea has Good News"
@@ -712,8 +716,8 @@ msgid ""
 "Lutius, well done so far. I just got the news that we have finished the "
 "basic buildings to obtain some construction materials."
 msgstr ""
-"Lutius, ben fet fins ara. Acabo de rebre notícies de que hem acabat els "
-"edificis bàsics per obtenir materials de construcció."
+"Lutius, ben fet fins ara. Acabo de rebre notícies del fet que hem acabat els"
+" edificis bàsics per obtenir materials de construcció."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:378
@@ -768,7 +772,7 @@ msgstr ""
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:400
 msgid "Now we can focus on rebuilding our economy."
-msgstr "Ara podem centrar-nos en reconstruir l'economia."
+msgstr "Ara podem centrar-nos a reconstruir l'economia."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:406
 msgid "Amalea Shakes Her Head"
@@ -807,8 +811,8 @@ msgid ""
 "for planting trees."
 msgstr ""
 "I, sabeu què? Les cases i les eines són velles i estan gastades. I les "
-"llavors que tenen estan fetes malbé. Per això plantar arbres els costa molt "
-"més temps de l'habitual."
+"llavors que tenen estan fetes malbé. Per això, plantar arbres els costa molt"
+" més temps de l'habitual."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:418
@@ -865,9 +869,9 @@ msgid ""
 "too many resources."
 msgstr ""
 "Molt bé, Lutius. Aquí teniu un altre problema: un cop hem produït una mica "
-"de cervesa i farina, m'he donat compte que la tecnologia que emprem als "
-"molins i cerveseries està una mica antiquada. Si continuen així, consumiran "
-"massa recursos."
+"de cervesa i farina, m'he adonat que la tecnologia que emprem als molins i "
+"cerveseries està una mica antiquada. Si continuen així, consumiran massa "
+"recursos."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:442
@@ -879,8 +883,8 @@ msgid ""
 msgstr ""
 "I no us ho creureu, però ningú sap com millorar-ne la tecnologia o construir"
 " edificis més eficients. L'únic que he sentit són rumors sobre un monestir "
-"del nord on les sacerdotesses sembla que tenen aquest coneixements sobre la "
-"millora d'aquestes tecnologies."
+"del nord on les sacerdotesses sembla que tenen aquests coneixements sobre la"
+" millora d'aquestes tecnologies."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:445
@@ -1021,7 +1025,7 @@ msgid ""
 "In the meantime, we can start raising the buildings that we need most "
 "urgently. I think we are still lacking a vineyard in our economy."
 msgstr ""
-"Tan aviat com haguem fos una mica de ferro, cal començar a produir eines. "
+"Tan aviat com hàgim fos una mica de ferro, cal començar a produir eines. "
 "Potser hauríem de controlar-ne la producció amb la configuració de "
 "l'economia. Mentrestant, podem aixecar els edificis que necessitem més "
 "urgentment. Crec que encara ens falta construir una vinya."
@@ -1087,8 +1091,8 @@ msgid ""
 "the goddess Vesta still being in a bad mood."
 msgstr ""
 "Estimat germà, tinc males notícies. Un dels nostres edificis acaba de ser "
-"destruït per un foc de cuina descontrolat. Em temo que sigui un signe de que"
-" la deessa Vesta continua de mal humor."
+"destruït per un foc de cuina descontrolat. Em temo que sigui un signe del "
+"fet que la deessa Vesta continua de mal humor."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:531
 msgid "Amalea is Positively Surprised"
@@ -1180,8 +1184,8 @@ msgid ""
 "Look Brother, I have just realized we haven’t cleared the road network yet. "
 "I think we should do so very quickly to free enough space for new buildings."
 msgstr ""
-"Mira, germà. Acabo de donar-me compte que encara no hem arreglat la xarxa de"
-" camins. Crec que ho hauríem de fer de pressa per disposar d'espai per "
+"Mira, germà. Acabo d'adonar-me que encara no hem arreglat la xarxa de "
+"camins. Crec que ho hauríem de fer de pressa per disposar d'espai per "
 "edificis nous."
 
 #. TRANSLATORS: Amalea
@@ -1607,9 +1611,9 @@ msgid ""
 " life and your land be cursed and may the wrath of the goddess scourge your "
 "family from the face of the earth!"
 msgstr ""
-"Maleït sigueu, Lutius, per matar les servents pacífiques de la nostra deessa"
-" Vesta! Que la vostra vida i la de la vostra terra sigui maleïda i que la "
-"ira de la deessa assoti i esborri la vostra família de la terra!"
+"Maleït sigueu, Lutius, per matar les serventes pacífiques de la nostra "
+"deessa Vesta! Que la vostra vida i la de la vostra terra sigui maleïda i que"
+" la ira de la deessa assoti i esborri la vostra família de la terra!"
 
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format

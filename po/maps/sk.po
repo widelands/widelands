@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-04-24 17:01+0000\n"
-"Last-Translator: Karl Vest\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-05-22 17:15+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -214,6 +214,10 @@ msgid ""
 "land on a green, Mediterranean island, looking like paradise. Overjoyed, "
 "they set out to explore this new living space."
 msgstr "Po opravení lode sa Lutius a jeho ľud vrátili k pátraniu po vhodnom mieste pre nový začiatok. Len o niekoľko dní neskôr sa vylodili na zelenom vnútrozemskom ostrove, ktorý vyzeral ako raj. Od radosti celí bez seba sa vybrali preskúmať tento nový životný priestor."
+
+#: ../../data/campaigns/emp03.wmf/elemental:8
+msgid "Neptune’s Revenge"
+msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/elemental:10
 msgid ""

@@ -6,14 +6,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
+# Stephan Lutz <stephan-lutz@gmx.de>, 2020
 # Elisabeth Jäger, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2017-09-23 20:46+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-05-14 08:06+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -97,7 +98,7 @@ msgstr "Vergiss nicht, dass die Karte punktsymmetrisch ist: Wenn du einen Punkt 
 msgid ""
 "You can see the number of wares traded at any time in the general statistics"
 " menu. Good luck!"
-msgstr "Du kannst die Anzahl der geschmuggelten Waren zu jedem Zeitpunkt im Menü „Allgemeinen Statistiken“ nachschauen. Viel Erfolg!"
+msgstr "Du kannst die Anzahl der geschmuggelten Waren zu jedem Zeitpunkt im Menü „Allgemeine Statistiken“ nachschauen. Viel Erfolg!"
 
 #. TRANSLATORS: the first 2 parameters are player names, the last parameter is
 #. '<number> points'

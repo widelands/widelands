@@ -4,6 +4,7 @@
 # Translators:
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# FvZ, 2020
 # GunChleoc, 2014,2016
 # GunChleoc, 2014
 # Nora Ghaoui, 2016
@@ -12,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-04-12 17:33+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-05-09 19:34+0000\n"
+"Last-Translator: FvZ\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -163,7 +164,7 @@ msgstr "Terwijl we wachten op de gevechtsarena zal je soldaten over en weer zien
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:74
 msgid "Battle Arena"
-msgstr ""
+msgstr "Gevechtsarena"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:76
 msgid "Build a battle arena"
@@ -245,7 +246,7 @@ msgstr "Bouw een trainingskamp."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:110
 msgid "Training Camp"
-msgstr ""
+msgstr "Trainingskamp"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:112
 msgid "Build a training camp"
@@ -290,112 +291,112 @@ msgstr "Denk eraan dat elk van de drie stammen in Widelands zijn eigen manier va
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143
 msgid "Scout’s Hut"
-msgstr ""
+msgstr "Verkennershut"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:133
 msgid "Explore Your Surroundings"
-msgstr ""
+msgstr "Verken je Omgeving"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:134
 msgid ""
 "Large parts of the map haven’t been explored yet. It might be a good idea to"
 " know which direction is best for expanding our empire."
-msgstr ""
+msgstr "Grote delen van de kaart zijn nog niet verkend. Het is misschien handig om te weten in welke richting we ons rijk het beste kunnen uitbreiden."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:135
 msgid ""
 "You can try your luck and expand randomly, but this is risky. A safer way is"
 " to use a scout to explore unseen parts of the map. What if he finds "
 "mountains overflowing with gold?"
-msgstr ""
+msgstr "Je kan op goed geluk in een willekeurige richting uitbreiden, maar dat is riskant. Een veiliger alternatief is om een verkenner te sturen naar onontdekte gebieden op de kaart. Wat als hij gouden bergen vindt?"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:136
 msgid "We will need a scout’s hut to start exploring. It is a small building."
-msgstr ""
+msgstr "We hebben om te beginnen een verkennershut nodig. Dat is een klein gebouw."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:137
 msgid "Build a scout’s hut."
-msgstr ""
+msgstr "Bouw een verkennershut."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:145
 msgid "Build a scout’s hut"
-msgstr ""
+msgstr "Bouw een verkennershut."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:146
 msgid ""
 "It’s good to know your surroundings. A scout will explore unseen parts of "
 "the map for you."
-msgstr ""
+msgstr "Het is goed om je omgeving te kennen. Een verkenner helpt je ontdekken wat zich bevindt op ongeziene plekken op de kaart."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:147
 msgid "Build a Scout’s Hut."
-msgstr ""
+msgstr "Bouw een Verkennershut."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:153
 msgid "Scout is ready"
-msgstr ""
+msgstr "Verkenner is klaar"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:155
 msgid "Ready to go!"
-msgstr ""
+msgstr "Klaar voor vertrek!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:156
 msgid ""
 "Well done, your scout’s hut has been built. While our scout is moving in, "
 "let’s learn a little bit more about him."
-msgstr ""
+msgstr "Goed zo, je verkennershut is gebouwd. Terwijl de verkenner zijn gebouw betrekt zal ik je wat meer over hem vertellen."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:157
 msgid ""
 "First of all, he will need to take some food with him on his scouting trips."
 " Fortunately, we have some rations in our warehouse."
-msgstr ""
+msgstr "Om te beginnen neemt hij altijd wat te eten mee op zijn verkenningstochten. Gelukkig liggen er rantsoenen in ons magazijn."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:158
 msgid ""
 "When provided with food, he will walk randomly around the area. You should "
 "follow his movement before fog of war hides what he saw."
-msgstr ""
+msgstr "Als het voedsel is aangekomen zal hij gaan verkennen op willekeurige plekken in de omgeving van zijn gebouw. Volg hem, zodat je kunt meekijken voordat de oorlogsmist het zicht belemmert."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:164
 msgid "Scout"
-msgstr ""
+msgstr "Verkenner"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:166
 msgid "Explore the map"
-msgstr ""
+msgstr "Verken de kaart"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:167
 msgid "Wait for the scout to explore unseen areas."
-msgstr ""
+msgstr "Wacht totdat de verkenner zich op onbekend terrein begeeft."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:168
 msgid "Observe your scout."
-msgstr ""
+msgstr "Volg je verkenner."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:174
 msgid "Scout made progress"
-msgstr ""
+msgstr "Verkenner heeft vooruitgang gemaakt"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:176
 msgid "New horizons?"
-msgstr ""
+msgstr "Nieuwe horizonten?"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:177
 msgid ""
 "As you can see, scouts can go quite far. The good news is that there are no "
 "enemies around."
-msgstr ""
+msgstr "Zoals je ziet kunnen verkenners een grote afstand afleggen. Gelukkig zijn er geen vijanden in de buurt."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:178
 msgid "You can use the minimap to see the exploration’s progress."
-msgstr ""
+msgstr "Op de minikaart kun je de vooruitgang volgen."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:179
 msgid ""
 "Don’t forget that scouting is hard work and as such cannot be done without "
 "provision of food."
-msgstr ""
+msgstr "Vergeet niet dat de verkenner hard werkt en daarbij voedsel nodig heeft."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:185
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:187
@@ -525,7 +526,7 @@ msgstr "Je kan meteen een kijkje nemen naar de instellingen waarover ik het zoju
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:225
 msgid "Soldiers, dismissed!"
-msgstr ""
+msgstr "Soldaten - ingerukt, mars!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:227
 msgid "Dismantle your north-western sentry"
@@ -678,4 +679,4 @@ msgstr "Nu ben je klaar om de campagnes te spelen.  Ze zullen je de bijzonderhed
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
