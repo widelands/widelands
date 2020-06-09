@@ -23,8 +23,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-05-16 08:02+0000\n"
-"Last-Translator: Drisse Atek <dageneration@live.fr>\n"
+"PO-Revision-Date: 2020-06-08 14:05+0000\n"
+"Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -545,7 +545,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘A new warrior’s ax brings forth the best in its wielder – or the worst in "
 "its maker.’"
-msgstr "«&nbsp;La hache d'une nouvelle recrue révèle le meilleur de celui qui la tient - ou le pire de celui qui l'a forgée.&nbsp;» "
+msgstr "'La hache d'une nouvelle recrue révèle le meilleur de celui qui la tient – ou le pire de celui qui l'a forgé.'"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:8
@@ -657,7 +657,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Khantarakh, ‘The Modern Barbarian Economy’,<br>3ʳᵈ cowhide ‘Craftsmanship "
 "and Trade’"
-msgstr "Khantarakh, « L'économie Barbare moderne »,<br>3ème tome « Artisanat et commerce »"
+msgstr "Khantarakh, 'L'économie Barbare moderne',<br>3ème tome 'Artisanat et commerce'"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:13
@@ -700,7 +700,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Seasonal fish and game specialties served with pitta bread.<br>Choose from "
 "a prime selection of regional craft beer brands.’"
-msgstr "\"Spécialités saisonnières de poisson et de gibier servies avec du pain pitta.<br>Choisissez parmi une sélection de marques de bières artisanales régionales.\""
+msgstr "'Spécialités saisonnières de poisson et de gibier servies avec du pain pita.<br>Choisissez parmi une sélection de marques de bières artisanales régionales.'"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/helptexts.lua:12
@@ -723,7 +723,7 @@ msgid ""
 "‘When the Barbarian was created,<br>this was the first thing that he "
 "stated:<br>“You want me fighting without fear?<br>Then you should create "
 "some beer!”’"
-msgstr "'Quand le Barbare a été créé,<br>c'était la première chose qu'il a déclaré :<br>\" Vous voulez que je me batte sans peur ?<br>Alors vous devriez créer de la bière !\"'"
+msgstr "'Quand le Barbare fut créé,<br>c'était la première chose qu'il a déclaré :<br>\"Vous voulez que je me batte sans peur ?<br>Alors vous devriez créer de la bière !\"'"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/brewery/helptexts.lua:14
@@ -1502,7 +1502,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Fine cloth and jewelry mean nothing to a true Barbarian.<br>But a noble "
 "sail in the wind will please his eyes.’"
-msgstr "« Les beaux tissus et les bijoux ne signifient rien pour un vrai barbare.<br>Mais une noble voile dans le vent plaira à ses yeux. »"
+msgstr "'Les beaux tissus et les bijoux ne signifient rien pour un vrai barbare.<br>Mais une noble voile dans le vent plaira à ses yeux.'"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:12
@@ -2018,7 +2018,7 @@ msgstr "Cuit des briques en utilisant du granit et de l'argile avec du charbon c
 #, lua-format
 msgctxt "frisians_building"
 msgid "The brick kiln needs %s on average to produce two bricks."
-msgstr "La briqueterie a besoin de %s en moyenne pour produire trois briques."
+msgstr "La briqueterie a besoin de %s en moyenne pour produire deux briques."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/helptexts.lua:3
@@ -4897,7 +4897,7 @@ msgstr "Les vêtements de fourrure ordinaires peuvent être décorés avec du fe
 msgctxt "ware"
 msgid ""
 "Gold is the most valuable of all metals, and it is smelted out of gold ore."
-msgstr "L'or est le plus précieux de tous les métaux et il est fondu à partir de minerai d'or."
+msgstr "L'or est le plus précieux de tous les métaux, et il est fondu à partir de minerai d'or."
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:6
