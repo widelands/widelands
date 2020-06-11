@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-06-08 17:46+0000\n"
+"PO-Revision-Date: 2020-06-09 18:58+0000\n"
 "Last-Translator: Danilo Augusto Capovilla <danilo.capovilla@hotmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -105,14 +105,14 @@ msgid ""
 "‘The Citadel of Adlen surely is the finest masterpiece of Barbarian "
 "craftsmanship. Nothing as strong and big and beautiful has ever been built "
 "in such a short time.’"
-msgstr ""
+msgstr "‘A Cidadela de Adlen certamente é a melhor obra-prima do artesanato Bárbaro. Nada tão forte, tão grande e tão bonito foi construído em tão pouco tempo.’"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/helptexts.lua:9
 msgctxt "barbarians_building"
 msgid ""
 "Colintan, chief planner of the Citadel of Adlen,<br>at its opening ceremony"
-msgstr ""
+msgstr "Colintan, chefe de planejamento da Cidadela de Adlen,<br>na cerimônia de abertura"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/helptexts.lua:3
@@ -189,7 +189,7 @@ msgid ""
 "A building is being dismantled at this dismantle site, returning some of the"
 " resources that were used during this building’s construction to your "
 "tribe’s stores."
-msgstr ""
+msgstr "Um edifício está sendo desmontado neste local de desmontagem, devolvendo alguns dos recursos usados durante a construção deste edifício aos armazéns da sua tribo."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/helptexts.lua:16
