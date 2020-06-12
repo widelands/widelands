@@ -3,7 +3,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Balázs Meskó <mesko.balazs@fsf.hu>, 2018
+# Balázs Meskó <meskobalazs@mailbox.org>, 2018
 # litoll <litoll@freemail.hu>, 2020
 # 
 msgid ""

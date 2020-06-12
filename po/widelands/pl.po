@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-06-01 05:21+0000\n"
+"PO-Revision-Date: 2020-06-10 12:18+0000\n"
 "Last-Translator: Niektóry <niektory@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -3310,7 +3310,7 @@ msgstr "Dowolne drużyny"
 
 #: ../../src/ui_fsmenu/mapselect.cc:431
 msgid "Balanced & Unbalanced"
-msgstr "Zbalansowane i niezrównoważone"
+msgstr "Zrównoważone i niezrównoważone"
 
 #: ../../src/ui_fsmenu/mapselect.cc:436
 msgctxt "balancing"
@@ -4875,7 +4875,7 @@ msgstr "Nieoficjalnie"
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:34
 msgid "Balanced"
-msgstr "Zbalansowane"
+msgstr "Zrównoważone"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:36
