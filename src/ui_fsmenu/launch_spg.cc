@@ -110,7 +110,8 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 
 	ok_.set_pos(Vector2i(get_w() * 7 / 10, get_h() * 9 / 10));
 	back_.set_pos(Vector2i(get_w() * 7 / 10, get_h() * 17 / 20));
-	win_condition_dropdown_.set_pos(Vector2i(get_w() * 7 / 10, get_h() * 4 / 10 + standard_element_height_));
+	win_condition_dropdown_.set_pos(
+	   Vector2i(get_w() * 7 / 10, get_h() * 4 / 10 + standard_element_height_));
 	win_condition_dropdown_.set_size(select_map_.get_w(), win_condition_dropdown_.get_h());
 
 	title_.set_text(_("Launch Game"));
@@ -130,9 +131,9 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 		assert(player_image);
 
 		pos_[i] =
-		   new UI::Button(this, "switch_to_position", get_w() / 100, y += standard_element_height_, get_h() * 17 / 500,
-		                  get_h() * 17 / 500, UI::ButtonStyle::kFsMenuSecondary, player_image,
-		                  _("Switch to position"));
+		   new UI::Button(this, "switch_to_position", get_w() / 100, y += standard_element_height_,
+		                  get_h() * 17 / 500, get_h() * 17 / 500, UI::ButtonStyle::kFsMenuSecondary,
+		                  player_image, _("Switch to position"));
 		pos_[i]->sigclicked.connect([this, i]() { switch_to_position(i); });
 		players_[i] = new PlayerDescriptionGroup(
 		   this, get_w() / 25, y, get_w() * 16 / 25, get_h() * 17 / 500 * 2, settings, i);
