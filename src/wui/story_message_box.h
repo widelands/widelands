@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,6 +49,10 @@ protected:
 
 	/// Handle keypresses for the OK button.
 	bool handle_key(bool down, SDL_Keysym code) override;
+
+	void clicked_button_close() override {
+		clicked_ok();
+	}
 
 private:
 	/// Get the game running again and close the window.

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,6 +18,9 @@
  */
 
 #include "ui_basic/scrollbar.h"
+
+#include <SDL_mouse.h>
+#include <SDL_timer.h>
 
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"

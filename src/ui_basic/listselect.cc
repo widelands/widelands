@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,6 +18,9 @@
  */
 
 #include "ui_basic/listselect.h"
+
+#include <SDL_mouse.h>
+#include <SDL_timer.h>
 
 #include "base/log.h"
 #include "graphic/align.h"
@@ -86,7 +89,7 @@ BaseListselect::BaseListselect(Panel* const parent,
      notify_on_delete_(nullptr) {
 	set_thinks(false);
 
-	scrollbar_.moved.connect(boost::bind(&BaseListselect::set_scrollpos, this, _1));
+	scrollbar_.moved.connect([this](int32_t a) { set_scrollpos(a); });
 
 	if (selection_mode_ == ListselectLayout::kShowCheck) {
 		check_pic_ = g_gr->images().get("images/ui_basic/list_selected.png");

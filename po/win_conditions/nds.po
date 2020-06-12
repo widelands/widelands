@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-03-03 09:07+0000\n"
-"PO-Revision-Date: 2020-03-03 13:54+0000\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-04-04 18:57+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -239,8 +239,8 @@ msgstr "All de Spelers of Klottjen versöken, tominnst de halvig Kaart intonehme
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #. TRANSLATORS: Context: 'The game will end in 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:293
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:298
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:300
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:305
 #, lua-format
 msgid "%i minute"
 msgid_plural "%i minutes"
@@ -248,21 +248,21 @@ msgstr[0] "%i Menüüt"
 msgstr[1] "%i Menüten"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:295
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:302
 msgid "%1% hour and %2%"
 msgid_plural "%1% hours and %2%"
 msgstr[0] "%1% Stunn un %2%"
 msgstr[1] "%1% Stünnen un %2%"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:301
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:308
 msgid "%1% hour"
 msgid_plural "%1% hours"
 msgstr[0] "%1% Stünne"
 msgstr[1] "%1% Stünnen"
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:304
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:311
 #, lua-format
 msgid "The game will end in %s."
 msgstr "Dat Speel düürt noch %s."
@@ -283,7 +283,7 @@ msgstr "Du hest dat Speel verlüst!"
 msgid ""
 "You lost your last warehouse and are therefore defeated. You may continue as"
 " spectator if you want."
-msgstr "Dien leste Kraamhuus is verneelt, also hest du dat Speel verlüst. Wenn du willt, kannst du as Tokieker biblieven."
+msgstr "Dien leste Kraamhuus is verneelt, also hest du dat Speel verlüst. Wenn du willst, kannst du as Tokieker biblieven."
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:14
 msgid "You won"

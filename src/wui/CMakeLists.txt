@@ -148,39 +148,41 @@ wl_library(wui_quicknavigation
         )
 
 wl_library(wui_mapview
-        SRCS
-        mapview.cc
-        mapview.h
-        DEPENDS
-        base_geometry
-        base_macros
-        base_math
-        graphic
-        graphic_fields_to_draw
-        graphic_game_renderer
-        logic_map
-        logic_map_objects
-        logic_widelands_geometry
-        ui_basic
-        widelands_ball_of_mud
-        widelands_options
-        wui_mapview_pixelfunctions
-        )
+  SRCS
+    mapview.cc
+    mapview.h
+  USES_SDL2
+  DEPENDS
+    base_geometry
+    base_macros
+    base_math
+    graphic
+    graphic_fields_to_draw
+    graphic_game_renderer
+    logic_map
+    logic_map_objects
+    logic_widelands_geometry
+    ui_basic
+    widelands_ball_of_mud
+    widelands_options
+    wui_mapview_pixelfunctions
+)
 
 wl_library(wui_waresdisplay
-        SRCS
-        waresdisplay.cc
-        waresdisplay.h
-        DEPENDS
-        base_exceptions
-        base_i18n
-        graphic
-        graphic_fonthandler
-        graphic_text_layout
-        logic
-        logic_map_objects
-        ui_basic
-        )
+  SRCS
+    waresdisplay.cc
+    waresdisplay.h
+  USES_SDL2
+  DEPENDS
+    base_exceptions
+    base_i18n
+    graphic
+    graphic_fonthandler
+    graphic_text_layout
+    logic
+    logic_map_objects
+    ui_basic
+)
 
 
 wl_library(wui_game_tips

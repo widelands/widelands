@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,8 +21,6 @@
 #define WL_WUI_INTERACTIVE_BASE_H
 
 #include <memory>
-
-#include <SDL_keycode.h>
 
 #include "graphic/toolbar_imageset.h"
 #include "io/profile.h"

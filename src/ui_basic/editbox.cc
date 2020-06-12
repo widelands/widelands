@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2019 by the Widelands Development Team
+ * Copyright (C) 2003-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,7 @@
 
 #include <memory>
 
-#include <SDL_keycode.h>
+#include <SDL_mouse.h>
 
 #include "graphic/color.h"
 #include "graphic/font_handler.h"

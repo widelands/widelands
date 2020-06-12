@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-02-26 18:51+0000\n"
-"PO-Revision-Date: 2020-03-01 17:09+0000\n"
-"Last-Translator: ks k\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-03-29 19:01+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -758,6 +758,53 @@ msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
 msgstr "마우스 휠 또는 %1% (으)로 확대/축소합니다. %2% (을)를 눌러 확대/축소를 다시 설정하십시오."
 
 #: ../../data/txts/tips/general_game.lua:75
+msgid ""
+"Use the ‘,’ (comma) and ‘.’ (period) keys to quickly jump between recently "
+"visited locations."
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:79
+msgctxt "hotkey"
+msgid "Ctrl+(Page Up/Page Down)"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:79
+msgctxt "hotkey"
+msgid "Page Up/Page Down"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:79
+msgctxt "hotkey"
+msgid "Shift+(Page Up/Page Down)"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:79
+msgid ""
+"Speed up or slow down the game with %1%. Use %2% for rapid change, %3% will "
+"adjust speed smoothly."
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:83
+msgctxt "hotkey"
+msgid "Arrow keys"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:83
+msgctxt "hotkey"
+msgid "Ctrl+Arrow keys"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:83
+msgid ""
+"Move map view using %1%. %2% will move the view faster, %3% moves slowly."
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:83
+msgctxt "hotkey"
+msgid "Shift+Arrow keys"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:87
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"

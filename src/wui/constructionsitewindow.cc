@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -139,9 +139,14 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 	box.add_space(8);
 
 	// Add the wares queue
-	for (uint32_t i = 0; i < construction_site->get_nrwaresqueues(); ++i)
+	for (uint32_t i = 0; i < construction_site->nr_dropout_waresqueues(); ++i) {
+		box.add(new InputQueueDisplay(&box, 0, 0, *igbase(), *construction_site,
+		                              *construction_site->get_dropout_waresqueue(i), true, true));
+	}
+	for (uint32_t i = 0; i < construction_site->nr_consume_waresqueues(); ++i) {
 		box.add(new InputQueueDisplay(
-		   &box, 0, 0, *igbase(), *construction_site, *construction_site->get_waresqueue(i)));
+		   &box, 0, 0, *igbase(), *construction_site, *construction_site->get_consume_waresqueue(i)));
+	}
 
 	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
 
@@ -302,14 +307,14 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				   &buttonsbox, "stock_policy_remove", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 				   g_gr->images().get(pic_stock_policy_button_remove),
 				   _("Remove selected wares from here"));
-				sp_remove.sigclicked.connect(boost::bind(
-				   &ConstructionSiteWindow::change_policy, this, ww, Widelands::StockPolicy::kRemove));
-				sp_dont.sigclicked.connect(boost::bind(&ConstructionSiteWindow::change_policy, this, ww,
-				                                       Widelands::StockPolicy::kDontStock));
-				sp_prefer.sigclicked.connect(boost::bind(
-				   &ConstructionSiteWindow::change_policy, this, ww, Widelands::StockPolicy::kPrefer));
-				sp_normal.sigclicked.connect(boost::bind(
-				   &ConstructionSiteWindow::change_policy, this, ww, Widelands::StockPolicy::kNormal));
+				sp_remove.sigclicked.connect(
+				   [this, ww]() { change_policy(ww, Widelands::StockPolicy::kRemove); });
+				sp_dont.sigclicked.connect(
+				   [this, ww]() { change_policy(ww, Widelands::StockPolicy::kDontStock); });
+				sp_prefer.sigclicked.connect(
+				   [this, ww]() { change_policy(ww, Widelands::StockPolicy::kPrefer); });
+				sp_normal.sigclicked.connect(
+				   [this, ww]() { change_policy(ww, Widelands::StockPolicy::kNormal); });
 				sp_normal.set_enabled(can_act);
 				sp_dont.set_enabled(can_act);
 				sp_remove.set_enabled(can_act);

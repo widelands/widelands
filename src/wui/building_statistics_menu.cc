@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -164,25 +164,22 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	   3 * kButtonRowHeight, kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
 	   g_gr->images().get("images/ui_basic/scrollbar_right.png"), _("Show next building"));
 
-	navigation_buttons_[NavigationButton::PrevOwned]->sigclicked.connect(boost::bind(
-	   &BuildingStatisticsMenu::jump_building, boost::ref(*this), JumpTarget::kOwned, true));
-	navigation_buttons_[NavigationButton::NextOwned]->sigclicked.connect(boost::bind(
-	   &BuildingStatisticsMenu::jump_building, boost::ref(*this), JumpTarget::kOwned, false));
-	navigation_buttons_[NavigationButton::PrevConstruction]->sigclicked.connect(boost::bind(
-	   &BuildingStatisticsMenu::jump_building, boost::ref(*this), JumpTarget::kConstruction, true));
-	navigation_buttons_[NavigationButton::NextConstruction]->sigclicked.connect(boost::bind(
-	   &BuildingStatisticsMenu::jump_building, boost::ref(*this), JumpTarget::kConstruction, false));
-	navigation_buttons_[NavigationButton::PrevUnproductive]->sigclicked.connect(boost::bind(
-	   &BuildingStatisticsMenu::jump_building, boost::ref(*this), JumpTarget::kUnproductive, true));
-	navigation_buttons_[NavigationButton::NextUnproductive]->sigclicked.connect(boost::bind(
-	   &BuildingStatisticsMenu::jump_building, boost::ref(*this), JumpTarget::kUnproductive, false));
+	navigation_buttons_[NavigationButton::PrevOwned]->sigclicked.connect(
+	   [this]() { jump_building(JumpTarget::kOwned, true); });
+	navigation_buttons_[NavigationButton::NextOwned]->sigclicked.connect(
+	   [this]() { jump_building(JumpTarget::kOwned, false); });
+	navigation_buttons_[NavigationButton::PrevConstruction]->sigclicked.connect(
+	   [this]() { jump_building(JumpTarget::kConstruction, true); });
+	navigation_buttons_[NavigationButton::NextConstruction]->sigclicked.connect(
+	   [this]() { jump_building(JumpTarget::kConstruction, false); });
+	navigation_buttons_[NavigationButton::PrevUnproductive]->sigclicked.connect(
+	   [this]() { jump_building(JumpTarget::kUnproductive, true); });
+	navigation_buttons_[NavigationButton::NextUnproductive]->sigclicked.connect(
+	   [this]() { jump_building(JumpTarget::kUnproductive, false); });
 
-	unproductive_percent_.changed.connect(
-	   boost::bind(&BuildingStatisticsMenu::low_production_changed, boost::ref(*this)));
-	unproductive_percent_.ok.connect(
-	   boost::bind(&BuildingStatisticsMenu::low_production_reset_focus, boost::ref(*this)));
-	unproductive_percent_.cancel.connect(
-	   boost::bind(&BuildingStatisticsMenu::low_production_reset_focus, boost::ref(*this)));
+	unproductive_percent_.changed.connect([this]() { low_production_changed(); });
+	unproductive_percent_.ok.connect([this]() { low_production_reset_focus(); });
+	unproductive_percent_.cancel.connect([this]() { low_production_reset_focus(); });
 
 	init();
 }
@@ -416,8 +413,7 @@ void BuildingStatisticsMenu::add_button(DescriptionIndex id,
 
 	row->add(button_box);
 
-	building_buttons_[id]->sigclicked.connect(
-	   boost::bind(&BuildingStatisticsMenu::set_current_building_type, boost::ref(*this), id));
+	building_buttons_[id]->sigclicked.connect([this, id]() { set_current_building_type(id); });
 }
 
 void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {

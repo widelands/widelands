@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2019 by the Widelands Development Team
+ * Copyright (C) 2016-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -132,15 +132,15 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 
 	list_->set_visible(false);
 	button_box_.add(&display_button_, UI::Box::Resizing::kExpandBoth);
-	display_button_.sigclicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
+	display_button_.sigclicked.connect([this]() { toggle_list(); });
 	if (push_button_ != nullptr) {
 		display_button_.set_perm_pressed(true);
 		button_box_.add(push_button_, UI::Box::Resizing::kFullSize);
-		push_button_->sigclicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
+		push_button_->sigclicked.connect([this]() { toggle_list(); });
 	}
 	button_box_.set_size(w, get_h());
-	list_->clicked.connect(boost::bind(&BaseDropdown::set_value, this));
-	list_->clicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
+	list_->clicked.connect([this]() { set_value(); });
+	list_->clicked.connect([this]() { toggle_list(); });
 	set_can_focus(true);
 	set_value();
 

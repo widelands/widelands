@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-02-21 18:05+0000\n"
-"PO-Revision-Date: 2020-02-21 18:09+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-04-23 19:22+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -536,7 +536,7 @@ msgstr "갑옷 만드는 곳"
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:56
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:68
-#: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:85
+#: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:83
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:56
 #: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:58
 #: ../../data/tribes/buildings/productionsites/atlanteans/spiderfarm/init.lua:53
@@ -555,7 +555,7 @@ msgstr "갑옷 만드는 곳"
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:53
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:50
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:56
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:73
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:71
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:60
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:71
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:54
@@ -566,7 +566,7 @@ msgstr "갑옷 만드는 곳"
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:66
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:47
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:67
-#: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:84
+#: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:82
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:61
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:64
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:56
@@ -589,7 +589,7 @@ msgstr "갑옷 만드는 곳"
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:69
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:74
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:68
-#: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:85
+#: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:83
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:76
 #: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:73
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:76
@@ -599,13 +599,13 @@ msgstr "작업"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a steel shield because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:164
+#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:163
 msgid "forging a steel shield"
 msgstr "강철 방패 벼리는 중"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an advanced shield
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:176
+#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:175
 msgid "forging an advanced shield"
 msgstr "고급 방패 벼리는 중"
 
@@ -640,15 +640,26 @@ msgid "Blackroot Farm"
 msgstr "검은뿌리 농장"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting blackroot because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:63
+#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:62
 msgid "planting blackroot"
 msgstr "검은뿌리 씨앗을 뿌리는 중"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting blackroot because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:71
+#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:70
 msgid "harvesting blackroot"
 msgstr "검은뿌리 수확 중"
+
+#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:79
+#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:83
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:93
+#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:75
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:82
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:81
+#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:114
+#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:94
+msgid "No Fields"
+msgstr "밭이 아님"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:80
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:84
@@ -658,21 +669,10 @@ msgstr "검은뿌리 수확 중"
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:82
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:115
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:95
-msgid "No Fields"
-msgstr "밭이 아님"
-
-#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:81
-#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:85
-#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:95
-#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:77
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:84
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:83
-#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:116
-#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:96
 msgid "Out of Fields"
 msgstr "밭이 부족"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:82
+#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:81
 msgctxt "atlanteans_building"
 msgid ""
 "The blackroot farmer working at this blackroot farm has no cleared soil to "
@@ -701,23 +701,34 @@ msgstr "석탄 광산"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:62
-#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:85
+#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:84
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:67
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:78
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:77
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:67
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:80
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:79
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:66
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:80
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:79
 #: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:64
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:76
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:75
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:62
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:76
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:75
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:86
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:97
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:96
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:85
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:101
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:100
 msgid "mining coal"
 msgstr "석탄 파는 중"
+
+#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:103
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:95
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:97
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:97
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:93
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:93
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:114
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:118
+msgid "No Coal"
+msgstr "석탄 없음"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:104
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:96
@@ -727,21 +738,10 @@ msgstr "석탄 파는 중"
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:94
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:115
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:119
-msgid "No Coal"
-msgstr "석탄 없음"
-
-#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:105
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:97
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:99
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:99
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:95
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:95
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:116
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:120
 msgid "Main Coal Vein Exhausted"
 msgstr "알짜 석탄 광맥 고갈됨"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:107
+#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:106
 msgctxt "atlanteans_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -755,40 +755,40 @@ msgid "Crystal Mine"
 msgstr "수정 광산"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:74
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:118
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:73
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:114
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:63
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:74
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:75
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:102
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:73
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:74
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:99
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:87
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:99
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:98
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:85
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:102
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:101
 msgid "mining granite"
 msgstr "화강암 캐는 중"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining quartz because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:90
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:126
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:88
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:122
 msgid "mining quartz"
 msgstr "석영 캐는 중"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining diamonds because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:106
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:134
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:103
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:130
 msgid "mining diamonds"
 msgstr "다이아몬드 캐는 중"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:168
-msgid "No Crystal"
-msgstr "수정 없음"
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:164
+msgid "No Crystals"
+msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:169
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:165
 msgid "Main Crystal Vein Exhausted"
 msgstr "알짜 광물 광맥 고갈됨"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:171
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:167
 msgctxt "atlanteans_building"
 msgid ""
 "This crystal mine’s main vein is exhausted. Expect strongly diminished "
@@ -802,16 +802,16 @@ msgid "Farm"
 msgstr "농장"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting corn because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:67
+#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:66
 msgid "planting corn"
 msgstr "옥수수 씨뿌리는 중"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting corn because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:75
+#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:74
 msgid "harvesting corn"
 msgstr "옥수수 수확 중"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:86
+#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:85
 msgctxt "atlanteans_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
@@ -831,7 +831,7 @@ msgstr "물고기 키우는 이의 집"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:42
-#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:78
+#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:77
 msgid "breeding fish"
 msgstr "물고기 키우는중"
 
@@ -873,7 +873,7 @@ msgstr "어부의 집"
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:52
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:57
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:49
-#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:90
+#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:89
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:62
 msgid "fishing"
 msgstr "물고기 잡는 중"
@@ -919,45 +919,45 @@ msgstr "금 광산"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:62
-#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:74
+#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:73
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:67
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:67
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:80
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:79
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:66
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:79
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:78
 #: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:64
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:75
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:74
 #: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:62
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:74
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:73
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:87
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:85
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:99
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:98
 msgid "mining gold"
 msgstr "금 캐고있음"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:92
+#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:91
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:80
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:97
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:96
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:92
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:91
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:100
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:116
+msgid "No Gold"
+msgstr "금 없음"
+
+#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:92
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:81
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:98
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:97
 #: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:93
 #: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:92
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:100
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:117
-msgid "No Gold"
-msgstr "금 없음"
-
-#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:93
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:81
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:99
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:98
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:94
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:93
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:101
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:118
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:117
 msgid "Main Gold Vein Exhausted"
 msgstr "알짜 금 광산맥 고갈"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:95
+#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:94
 msgctxt "atlanteans_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1021,45 +1021,45 @@ msgstr "철 광산"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:62
-#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:77
+#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:76
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:67
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:67
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:80
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:79
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:66
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:80
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:79
 #: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:64
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:76
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:75
 #: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:62
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:75
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:74
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:87
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:85
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:101
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:100
 msgid "mining iron"
 msgstr "철 캐는 중"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:96
+#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:95
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:80
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:97
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:97
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:93
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:92
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:100
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:118
+msgid "No Iron"
+msgstr "철 없음"
+
+#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:96
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:81
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:98
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:98
 #: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:94
 #: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:93
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:100
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:119
-msgid "No Iron"
-msgstr "철 없음"
-
-#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:97
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:81
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:99
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:99
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:95
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:94
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:101
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:120
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:119
 msgid "Main Iron Vein Exhausted"
 msgstr "알짜 철 광산맥 고갈"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:99
+#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:98
 msgctxt "atlanteans_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1073,12 +1073,12 @@ msgid "Mill"
 msgstr "방앗간"
 
 #. TRANSLATORS: Completed/Skipped/Did not start grinding corn because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:65
+#: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:64
 msgid "grinding corn"
 msgstr "옥수수 빻는 중"
 
 #. TRANSLATORS: Completed/Skipped/Did not start grinding blackroot because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:78
+#: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:77
 msgid "grinding blackroot"
 msgstr "검은뿌리 빻는 중"
 
@@ -1089,28 +1089,28 @@ msgid "Quarry"
 msgstr "채석장"
 
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:56
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:63
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:61
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:70
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:55
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:62
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:60
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:69
 msgid "quarrying granite"
 msgstr "화강암 캐는 중"
+
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:66
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:73
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:81
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:80
+msgid "No Rocks"
+msgstr "바위 없음"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:67
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:74
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:82
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:81
-msgid "No Rocks"
-msgstr "바위 없음"
-
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:68
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:75
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:83
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:82
 msgid "Out of Rocks"
 msgstr "바위 부족"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:69
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:68
 msgctxt "atlanteans_building"
 msgid ""
 "The stonecutter working at this quarry can’t find any rocks in his work "
@@ -1151,10 +1151,10 @@ msgstr "조선소"
 
 #. TRANSLATORS: Completed/Skipped/Did not start constructing a ship because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:77
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:65
-#: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:76
-#: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:77
+#: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:76
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:64
+#: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:75
+#: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:76
 msgid "constructing a ship"
 msgstr "배 만들고 있음"
 
@@ -1165,22 +1165,22 @@ msgid "Smelting Works"
 msgstr "제련소"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:67
-#: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:80
-#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:71
-#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:84
-#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:72
-#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:85
-#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:96
-#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:109
+#: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:66
+#: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:79
+#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:70
+#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:83
+#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:71
+#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:84
+#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:95
+#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:108
 msgid "smelting iron"
 msgstr "철 녹이는 중"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:93
-#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:97
-#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:98
-#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:122
+#: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:92
+#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:96
+#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:97
+#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:121
 msgid "smelting gold"
 msgstr "금 녹이는 중"
 
@@ -1191,15 +1191,15 @@ msgid "Smokery"
 msgstr "훈제소"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smoking meat because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:68
-#: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:96
+#: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:67
+#: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:95
 msgid "smoking meat"
 msgstr "고기 훈제를"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:81
-#: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:93
-#: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:85
+#: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:80
+#: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:92
+#: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:84
 msgid "smoking fish"
 msgstr "물고기 훈제 중"
 
@@ -1217,85 +1217,85 @@ msgstr "도구 제작소"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:83
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:82
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:94
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:107
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:182
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:106
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:181
 msgid "making a bread paddle"
 msgstr "빵 주걱 제작을"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pair of buckets
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:95
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:94
 msgid "making a pair of buckets"
 msgstr "한 쌍의 양동이 제작을"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making fire tongs because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:107
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:106
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:118
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:119
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:215
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:118
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:214
 msgid "making fire tongs"
 msgstr "부젓가락 제작을"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:119
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:171
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:118
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:170
 msgid "making a fishing net"
 msgstr "어부 그물 제작을"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:131
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:130
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:142
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:143
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:204
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:142
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:203
 msgid "making a hammer"
 msgstr "망치 제작을"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hook pole because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:143
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:142
 msgid "making a hook pole"
 msgstr "갈고리 장대 제작을"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting bow because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:155
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:154
 msgid "making a hunting bow"
 msgstr "사냥용 활 제작을"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making milking tongs because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:167
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:166
 msgid "making milking tongs"
 msgstr "착유 집게 제작을"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:179
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:178
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:178
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:179
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:178
 msgid "making a pick"
 msgstr "곡괭이 제작을"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a saw because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:191
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:191
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:190
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:190
 msgid "making a saw"
 msgstr "톱 제작을"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:203
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:202
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:190
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:203
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:127
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:202
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:126
 msgid "making a scythe"
 msgstr "큰 낫 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:215
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:214
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:202
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:215
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:138
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:214
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:137
 msgid "making a shovel"
 msgstr "삽 만들고 있음"
 
@@ -1307,31 +1307,31 @@ msgstr "무기 제작소"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a light trident
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:73
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:72
 msgid "forging a light trident"
 msgstr "가벼운 삼지창 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a long trident because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:88
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:87
 msgid "forging a long trident"
 msgstr "긴 삼지창 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a steel trident
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:103
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:102
 msgid "forging a steel trident"
 msgstr "강철 삼지창 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a double trident
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:118
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:117
 msgid "forging a double trident"
 msgstr "이중 삼지창 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a heavy double trident
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:133
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:132
 msgid "forging a heavy double trident"
 msgstr "대형 이중 삼지창 만들고 있음"
 
@@ -1343,18 +1343,18 @@ msgstr "직조 공장"
 
 #. TRANSLATORS: Completed/Skipped/Did not start weaving spidercloth because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:68
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:67
 msgid "weaving spidercloth"
 msgstr "거미천 직조를"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a tabard because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:81
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:80
 msgid "tailoring a tabard"
 msgstr "외투 재단을"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a golden tabard
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:94
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:93
 msgid "tailoring a golden tabard"
 msgstr "황금 외투 재단을"
 
@@ -1426,20 +1426,20 @@ msgid "Ax Workshop"
 msgstr "도끼 제작소"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an ax because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:77
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:84
+#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:76
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:83
 msgid "forging an ax"
 msgstr "도끼 단조"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a sharp ax because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:92
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:99
+#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:91
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:98
 msgid "forging a sharp ax"
 msgstr "날카로운 도끼 단조"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a broad ax because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:107
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:114
+#: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:106
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:113
 msgid "forging a broad ax"
 msgstr "넓은 도끼 단조"
 
@@ -1474,25 +1474,25 @@ msgid "Big Inn"
 msgstr "큰 여관"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:70
-#: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:67
+#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:69
+#: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:66
 #: ../../data/tribes/buildings/productionsites/barbarians/tavern/init.lua:61
-#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:63
+#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:62
 #: ../../data/tribes/buildings/productionsites/empire/tavern/init.lua:56
-#: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:84
+#: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:83
 msgid "preparing a ration"
 msgstr "야전식량 준비를"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a snack because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:83
-#: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:80
+#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:82
+#: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:79
 msgid "preparing a snack"
 msgstr "간식 준비하고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a meal because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:96
-#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:76
-#: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:97
+#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:95
+#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:75
+#: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:96
 msgid "preparing a meal"
 msgstr "식사 준비하고 있음"
 
@@ -1532,8 +1532,8 @@ msgctxt "barbarians_building"
 msgid "Coal Mine"
 msgstr "석탄 광산"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:99
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:101
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:98
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:100
 msgctxt "barbarians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1552,7 +1552,7 @@ msgctxt "barbarians_building"
 msgid "Deeper Coal Mine"
 msgstr "더 깊은 석탄 광산"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:101
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:100
 msgctxt "barbarians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1567,18 +1567,18 @@ msgid "Farm"
 msgstr "농장"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:75
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:66
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:74
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:65
 msgid "planting wheat"
 msgstr "밀 파종을"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:84
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:74
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:83
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:73
 msgid "harvesting wheat"
 msgstr "밀 수확을"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:96
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:95
 msgctxt "barbarians_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
@@ -1616,7 +1616,7 @@ msgid "Gold Mine"
 msgstr "금 광산"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:83
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:101
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:100
 msgctxt "barbarians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1635,7 +1635,7 @@ msgctxt "barbarians_building"
 msgid "Deeper Gold Mine"
 msgstr "더 깊은 금 광산"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:100
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:99
 msgctxt "barbarians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1649,19 +1649,19 @@ msgctxt "barbarians_building"
 msgid "Granite Mine"
 msgstr "화강암 광산"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:92
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:117
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:120
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:91
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:116
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:119
 msgid "No Granite"
 msgstr "화강암 없음"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:93
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:118
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:121
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:92
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:117
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:120
 msgid "Main Granite Vein Exhausted"
 msgstr "알짜 화강암 광산맥 고갈"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:95
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:94
 msgctxt "barbarians_building"
 msgid ""
 "This granite mine’s main vein is exhausted. Expect strongly diminished "
@@ -1676,19 +1676,19 @@ msgid "Helm Smithy"
 msgstr "투구 제작소"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:78
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:80
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:115
+#: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:77
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:79
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:114
 msgid "forging a helmet"
 msgstr "투구 제작을"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a mask because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:91
+#: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:90
 msgid "forging a mask"
 msgstr "가면 제작을"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a warhelm because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:104
+#: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:103
 msgid "forging a warhelm"
 msgstr "전쟁 투구 제작을"
 
@@ -1720,7 +1720,7 @@ msgid "Iron Mine"
 msgstr "철 광산"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:83
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:101
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:100
 msgctxt "barbarians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1739,7 +1739,7 @@ msgctxt "barbarians_building"
 msgid "Deeper Iron Mine"
 msgstr "더 깊은 철 광산"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:101
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:100
 msgctxt "barbarians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1781,30 +1781,30 @@ msgstr "금속 제작소"
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:106
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:83
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:82
 msgid "making a felling ax"
 msgstr "벌목 도끼 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing rod because
 #. ...
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:130
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:131
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:130
 msgid "making a fishing rod"
 msgstr "낚싯대 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:154
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:155
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:160
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:154
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:159
 msgid "making a hunting spear"
 msgstr "사냥용 창 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:166
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:167
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:193
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:166
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:192
 msgid "making kitchen tools"
 msgstr "부엌 도구 만들고 있음"
 
@@ -1818,7 +1818,7 @@ msgstr "소형 양조장"
 #: ../../data/tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:56
 #: ../../data/tribes/buildings/productionsites/empire/brewery/init.lua:54
 #: ../../data/tribes/buildings/productionsites/frisians/brewery/init.lua:72
-#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:104
+#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:103
 msgid "brewing beer"
 msgstr "보리 술 만들고 있음"
 
@@ -1828,7 +1828,7 @@ msgctxt "barbarians_building"
 msgid "Quarry"
 msgstr "채석장"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:76
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:75
 msgctxt "barbarians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
@@ -1847,18 +1847,18 @@ msgid "Reed Yard"
 msgstr "갈대 뜰"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:59
-#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:78
+#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:58
+#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:77
 msgid "planting reed"
 msgstr "갈대 파종을"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:67
-#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:86
+#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:66
+#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:85
 msgid "harvesting reed"
 msgstr "갈대 수확을"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:78
+#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:77
 msgctxt "barbarians_building"
 msgid ""
 "The gardener working at this reed yard has no cleared soil to plant his "
@@ -1897,19 +1897,19 @@ msgstr "전쟁 공장"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a bronze ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:129
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:128
 msgid "forging a bronze ax"
 msgstr "청동 도끼 제작을"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a battle ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:144
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:143
 msgid "forging a battle ax"
 msgstr "전투 도끼 제작을"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a warrior’s ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:159
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:158
 msgid "forging a warrior’s ax"
 msgstr "전사 도끼 제작을"
 
@@ -1955,19 +1955,19 @@ msgstr "갑옷 제작소"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of armor
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:92
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:91
 msgid "forging a suit of armor"
 msgstr "갑옷 한 벌 제작을"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of chain armor
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:104
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:103
 msgid "forging a suit of chain armor"
 msgstr "사슬갑옷 한 벌 제작을"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of gilded armor
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:116
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:115
 msgid "forging a suit of gilded armor"
 msgstr "찰갑 한 벌 제작을"
 
@@ -2013,7 +2013,7 @@ msgctxt "empire_building"
 msgid "Coal Mine"
 msgstr "석탄 광산"
 
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:97
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:96
 msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2026,7 +2026,7 @@ msgctxt "empire_building"
 msgid "Deep Coal Mine"
 msgstr "깊은 석탄 광산"
 
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:97
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:96
 msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2052,7 +2052,7 @@ msgctxt "empire_building"
 msgid "Farm"
 msgstr "농장"
 
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:85
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:84
 msgctxt "empire_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
@@ -2089,7 +2089,7 @@ msgctxt "empire_building"
 msgid "Gold Mine"
 msgstr "금 광산"
 
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:96
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:95
 msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2102,7 +2102,7 @@ msgctxt "empire_building"
 msgid "Deep Gold Mine"
 msgstr "깊은 금 광산"
 
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:95
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:94
 msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2136,7 +2136,7 @@ msgctxt "empire_building"
 msgid "Iron Mine"
 msgstr "철 광산"
 
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:97
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:96
 msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2149,7 +2149,7 @@ msgctxt "empire_building"
 msgid "Deep Iron Mine"
 msgstr "깊은 철 광산"
 
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:96
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:95
 msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2178,25 +2178,25 @@ msgid "Marble Mine"
 msgstr "대리석 광산"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:89
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:110
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:87
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:107
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:63
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:77
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:85
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:76
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:84
 msgid "mining marble"
 msgstr "대리석 캐고 있음"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:136
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:103
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:133
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:102
 msgid "No Marble"
 msgstr "대리석 없음"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:137
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:104
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:134
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:103
 msgid "Main Marble Vein Exhausted"
 msgstr "알짜 대리석 광산맥 고갈"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:139
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:136
 msgctxt "empire_building"
 msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
@@ -2210,7 +2210,7 @@ msgctxt "empire_building"
 msgid "Deep Marble Mine"
 msgstr "깊은 대리석 광산"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:106
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:105
 msgctxt "empire_building"
 msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
@@ -2247,11 +2247,11 @@ msgid "Quarry"
 msgstr "채석장"
 
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying marble because ...
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:71
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:70
 msgid "quarrying marble"
 msgstr "대리석 채석을"
 
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:84
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:83
 msgctxt "empire_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
@@ -2317,8 +2317,8 @@ msgid "Toolsmithy"
 msgstr "도구 제작소"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:95
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:149
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:94
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:148
 msgid "making a basket"
 msgstr "바구니 만들고 있음"
 
@@ -2330,17 +2330,17 @@ msgstr "포도원"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting grapevines because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:65
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:64
 msgid "planting grapevines"
 msgstr "포도 덩굴 씨뿌리고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting grapevines because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:73
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:72
 msgid "harvesting grapes"
 msgstr "포도 거두고 있음"
 
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:84
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:83
 msgctxt "empire_building"
 msgid ""
 "The vine farmer working at this vineyard has no cleared soil to plant his "
@@ -2355,30 +2355,30 @@ msgstr "무기 제작소"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a wooden spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:78
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:77
 msgid "forging a wooden spear"
 msgstr "나무 창 벼리고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a spear because ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:93
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:92
 msgid "forging a spear"
 msgstr "창 벼리고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an advanced spear
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:108
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:107
 msgid "forging an advanced spear"
 msgstr "고급 창 벼리고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a heavy spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:123
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:122
 msgid "forging a heavy spear"
 msgstr "대형 창 벼리고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a war spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:138
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:137
 msgid "forging a war spear"
 msgstr "전쟁 창 벼리고 있음"
 
@@ -2416,16 +2416,16 @@ msgctxt "frisians_building"
 msgid "Aqua Farm"
 msgstr "양어장"
 
-#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:101
-#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:100
+#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:100
+#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:99
 msgid "No Ponds"
 msgstr "연못 없음"
 
-#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:102
+#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:101
 msgid "Out of Fish Ponds"
 msgstr "연못에 물고기 없음"
 
-#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:103
+#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:102
 msgctxt "frisians_building"
 msgid ""
 "The fisher working at this aqua farm can’t find any fish ponds in his work "
@@ -2442,19 +2442,19 @@ msgstr "큰 방어구 대장간"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a broadsword because
 #. ...
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:86
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:85
 msgid "forging a broadsword"
 msgstr "날이 넓은 칼 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a double-edged sword
 #. because ...
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:101
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:100
 msgid "forging a double-edged sword"
 msgstr "양 날의 칼 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a golden helmet
 #. because ...
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:116
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:115
 msgid "forging a golden helmet"
 msgstr "황금 투구 만들고 있음"
 
@@ -2466,13 +2466,13 @@ msgstr "작은 방어구 대장간"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a short sword because
 #. ...
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:85
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:84
 msgid "forging a short sword"
 msgstr "작은 칼 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a long sword because
 #. ...
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:100
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:99
 msgid "forging a long sword"
 msgstr "긴 칼 만들고 있음"
 
@@ -2484,7 +2484,7 @@ msgstr "빵 집"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:73
-#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:106
+#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:105
 msgid "baking bread"
 msgstr "빵 굽는 중"
 
@@ -2541,17 +2541,17 @@ msgstr "대장장이"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:105
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:104
 msgid "forging a felling ax"
 msgstr "나무꾼 도끼를 벼리고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:116
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:115
 msgid "forging a pick"
 msgstr "굉이를 벼리고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:226
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:225
 msgid "making needles"
 msgstr "바느질용 바늘을 만들고 있음"
 
@@ -2580,20 +2580,20 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a charcoal stack
 #. because ...
-#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:79
+#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:78
 msgid "making a charcoal stack"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start collecting coal because ...
-#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:90
+#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:89
 msgid "collecting coal"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:101
+#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:100
 msgid "Out of Clay Ponds"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:102
+#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:101
 msgctxt "frisians_building"
 msgid ""
 "The charcoal burner working at this charcoal burner’s house can’t find any "
@@ -2642,7 +2642,7 @@ msgctxt "frisians_building"
 msgid "Coal Mine"
 msgstr "석탄 광산"
 
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:118
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:117
 msgctxt "frisians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2655,7 +2655,7 @@ msgctxt "frisians_building"
 msgid "Deep Coal Mine"
 msgstr "깊은 탄광"
 
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:122
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:121
 msgctxt "frisians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2703,16 +2703,16 @@ msgid "Farm"
 msgstr "심는 집"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
-#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:96
+#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:95
 msgid "planting barley"
 msgstr "보리 심고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
-#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:104
+#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:103
 msgid "harvesting barley"
 msgstr "보리 거두고 있음"
 
-#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:117
+#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:116
 msgctxt "frisians_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
@@ -2768,7 +2768,7 @@ msgctxt "frisians_building"
 msgid "Deep Gold Mine"
 msgstr "깊은 금광"
 
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:120
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:119
 msgctxt "frisians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2783,8 +2783,8 @@ msgid "Honey Bread Bakery"
 msgstr "꿀 빵 제과점"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking honey bread because ...
-#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:84
-#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:95
+#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:83
+#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:94
 msgid "baking honey bread"
 msgstr "꿀빵 굽고 있음"
 
@@ -2821,7 +2821,7 @@ msgctxt "frisians_building"
 msgid "Deep Iron Mine"
 msgstr "깊은 철 광산"
 
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:122
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:121
 msgctxt "frisians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2836,8 +2836,8 @@ msgid "Mead Brewery"
 msgstr "벌꿀술 양조장"
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing mead because ...
-#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:82
-#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:93
+#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:81
+#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:92
 msgid "brewing mead"
 msgstr "벌꿀 술 만드는 집"
 
@@ -2847,7 +2847,7 @@ msgctxt "frisians_building"
 msgid "Quarry"
 msgstr "채석장"
 
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:83
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:82
 msgctxt "frisians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
@@ -2860,20 +2860,20 @@ msgid "Recycling Center"
 msgstr "재활용 시설"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling fur because ...
-#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:100
+#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:99
 msgctxt "frisians_building"
 msgid "recycling fur"
 msgstr "재활용 모피"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling iron because ...
-#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:111
+#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:110
 msgctxt "frisians_building"
 msgid "recycling iron"
 msgstr "재활용 철"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling iron and gold
 #. because ...
-#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:122
+#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:121
 msgctxt "frisians_building"
 msgid "recycling iron and gold"
 msgstr "재활용 철과 금"
@@ -2884,7 +2884,7 @@ msgctxt "frisians_building"
 msgid "Reed Farm"
 msgstr "갈대 농장"
 
-#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:97
+#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:96
 msgctxt "frisians_building"
 msgid ""
 "The reed farmer working at this reed farm has no cleared soil to plant his "
@@ -2898,14 +2898,14 @@ msgid "Reindeer Farm"
 msgstr "순록 농장"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing reindeer because ...
-#: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:87
+#: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:86
 msgctxt "frisians_building"
 msgid "rearing reindeer"
 msgstr "순록 키우는중"
 
 #. TRANSLATORS: Completed/Skipped/Did not start producing fur because ...
-#: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:98
-#: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:109
+#: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:97
+#: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:108
 msgctxt "frisians_building"
 msgid "producing fur"
 msgstr "모피 만드는중"
@@ -2916,7 +2916,7 @@ msgctxt "frisians_building"
 msgid "Rock Mine"
 msgstr "암석 광산"
 
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:120
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:119
 msgctxt "frisians_building"
 msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2929,7 +2929,7 @@ msgctxt "frisians_building"
 msgid "Deep Rock Mine"
 msgstr "깊은 암석 광산"
 
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:123
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:122
 msgctxt "frisians_building"
 msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2974,13 +2974,13 @@ msgstr "재단사의 상점"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sewing studded fur garment
 #. because ...
-#: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:82
+#: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:81
 msgid "sewing studded fur garment"
 msgstr "금속단추 장식 모피옷을 만드는중"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sewing golden fur garment
 #. because ...
-#: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:94
+#: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:93
 msgid "sewing golden fur garment"
 msgstr "황금 모피옷을 만드는중"
 
@@ -2992,12 +2992,12 @@ msgstr "주막"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
-#: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:85
+#: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:84
 msgid "preparing only one ration"
 msgstr "오직 한개의 야전식량을 준비하는중"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing rations because ...
-#: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:99
+#: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:98
 msgid "preparing rations"
 msgstr "휴대용 식량을 준비하는중"
 
@@ -3334,7 +3334,7 @@ msgid "upgrading soldier health from level 0 to level 1"
 msgstr "군인 체력 훈련중:0→1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:192
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:193
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 0 to level 1"
 msgstr "군인 방어력 훈련중:0→1"
@@ -3417,6 +3417,20 @@ msgstr "항구"
 msgctxt "frisians_building"
 msgid "Warehouse"
 msgstr "창고"
+
+#: ../../data/tribes/economy_profiles/atlanteans:4
+#: ../../data/tribes/economy_profiles/barbarians:4
+#: ../../data/tribes/economy_profiles/empire:4
+#: ../../data/tribes/economy_profiles/frisians:4
+msgid "Efficiency"
+msgstr ""
+
+#: ../../data/tribes/economy_profiles/atlanteans:5
+#: ../../data/tribes/economy_profiles/barbarians:5
+#: ../../data/tribes/economy_profiles/empire:5
+#: ../../data/tribes/economy_profiles/frisians:5
+msgid "Stockpile"
+msgstr ""
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/ashes/init.lua:42
@@ -3790,7 +3804,7 @@ msgstr ""
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:137
 msgctxt "resource_indicator"
-msgid "Some Precious Stones"
+msgid "Some Crystals"
 msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
@@ -3823,7 +3837,7 @@ msgstr ""
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:241
 msgctxt "resource_indicator"
-msgid "A Lot of Precious Stones"
+msgid "A Lot of Crystals"
 msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
@@ -3956,8 +3970,8 @@ msgstr ""
 msgid "Finishing"
 msgstr ""
 
-#: ../../data/tribes/preload.lua:15 ../../data/tribes/preload.lua:32
-#: ../../data/tribes/preload.lua:49 ../../data/tribes/preload.lua:66
+#: ../../data/tribes/preload.lua:15 ../../data/tribes/preload.lua:36
+#: ../../data/tribes/preload.lua:57 ../../data/tribes/preload.lua:78
 msgid "The Widelands Development Team"
 msgstr "Widelands 개발 팀"
 
@@ -3971,31 +3985,31 @@ msgid "The mighty tribes of the east-lands."
 msgstr "동부 지대의 강력한 부족들."
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:34
+#: ../../data/tribes/preload.lua:38
 msgid "Empire"
 msgstr "제국"
 
-#: ../../data/tribes/preload.lua:35
+#: ../../data/tribes/preload.lua:39
 msgid "This is the culture of the Roman Empire."
 msgstr "로마 제국의 문화."
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:51
+#: ../../data/tribes/preload.lua:59
 msgid "Atlanteans"
 msgstr "아틀란티스인"
 
-#: ../../data/tribes/preload.lua:52
+#: ../../data/tribes/preload.lua:60
 msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
 msgstr "오래된 이야기로 전해진 부족. 아틀란티스의 아들딸들."
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:68
+#: ../../data/tribes/preload.lua:80
 msgid "Frisians"
 msgstr ""
 
-#: ../../data/tribes/preload.lua:69
+#: ../../data/tribes/preload.lua:81
 msgid "The inhabitants of the rough North Sea shore."
 msgstr ""
 
@@ -4026,6 +4040,23 @@ msgstr "일꾼"
 #: ../../data/tribes/scripting/help/init.lua:99
 msgid "Buildings"
 msgstr "건물"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/discovery.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/discovery.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/discovery.lua:11
+#: ../../data/tribes/scripting/starting_conditions/frisians/discovery.lua:11
+msgid "Discovery"
+msgstr ""
+
+#. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/discovery.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/discovery.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/discovery.lua:13
+#: ../../data/tribes/scripting/starting_conditions/frisians/discovery.lua:13
+msgid ""
+"Start the game with three ships on the ocean and only a handful of supplies"
+msgstr ""
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:11
@@ -4059,6 +4090,75 @@ msgstr "본부"
 #: ../../data/tribes/scripting/starting_conditions/frisians/headquarters.lua:13
 msgid "Start the game with your headquarters only"
 msgstr "오직 본부만 가지고 게임 시작"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/new_world.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/new_world.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/new_world.lua:11
+#: ../../data/tribes/scripting/starting_conditions/frisians/new_world.lua:11
+msgid "New World"
+msgstr ""
+
+#. TRANSLATORS: This is the tooltip for the "New World" starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/new_world.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/new_world.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/new_world.lua:13
+#: ../../data/tribes/scripting/starting_conditions/frisians/new_world.lua:13
+msgid "Start the game with seven ships full of wares on the ocean"
+msgstr ""
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:11
+#: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:11
+msgid "Poor Hamlet"
+msgstr ""
+
+#. TRANSLATORS: This is the tooltip for the "Poor Hamlet" (minimum) starting
+#. condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:13
+#: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:13
+msgid ""
+"Start the game with just a warehouse and the bare minimum for bootstrapping "
+"an economy. Warning: the AI can't successfully start from this"
+msgstr ""
+
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:45
+#: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:43
+#: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:44
+#: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:45
+msgid "Be careful"
+msgstr ""
+
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:45
+#: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:43
+#: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:44
+#: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:45
+msgid ""
+"You have only one iron for each tool you will need to start your economy. "
+"Make sure no unneeded tool is created."
+msgstr ""
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/struggling_outpost.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/struggling_outpost.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/struggling_outpost.lua:11
+#: ../../data/tribes/scripting/starting_conditions/frisians/struggling_outpost.lua:11
+msgid "Struggling Outpost"
+msgstr ""
+
+#. TRANSLATORS: This is the tooltip for the "Hardcore" starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/struggling_outpost.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/struggling_outpost.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/struggling_outpost.lua:13
+#: ../../data/tribes/scripting/starting_conditions/frisians/struggling_outpost.lua:13
+msgid ""
+"Start the game with just your headquarters and very few wares for "
+"bootstrapping an economy. Warning: the AI can't successfully start from this"
+msgstr ""
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:11
@@ -4104,7 +4204,7 @@ msgid "Ship"
 msgstr "선박"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../data/tribes/wares/armor/init.lua:53
+#: ../../data/tribes/wares/armor/init.lua:58
 msgctxt "ware"
 msgid "Armor"
 msgstr "갑옷"
@@ -4927,37 +5027,37 @@ msgid "Woodcutter"
 msgstr "벌목꾼"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/baker/init.lua:17
+#: ../../data/tribes/workers/barbarians/baker/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Baker"
 msgstr "제빵사"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/blacksmith/init.lua:17
+#: ../../data/tribes/workers/barbarians/blacksmith/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Blacksmith"
 msgstr "대장장이"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/blacksmith_master/init.lua:17
+#: ../../data/tribes/workers/barbarians/blacksmith_master/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Master Blacksmith"
 msgstr "달인 대장장이"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/brewer/init.lua:17
+#: ../../data/tribes/workers/barbarians/brewer/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Brewer"
 msgstr "양조사"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/brewer_master/init.lua:17
+#: ../../data/tribes/workers/barbarians/brewer_master/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Master Brewer"
 msgstr "전문 양조사"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/builder/init.lua:18
+#: ../../data/tribes/workers/barbarians/builder/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Builder"
 msgstr "건축업자"
@@ -4975,13 +5075,13 @@ msgid "Cattle Breeder"
 msgstr "소 사육사"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/charcoal_burner/init.lua:17
+#: ../../data/tribes/workers/barbarians/charcoal_burner/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Charcoal Burner"
 msgstr "목탄 굽는 이"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/farmer/init.lua:32
+#: ../../data/tribes/workers/barbarians/farmer/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Farmer"
 msgstr "열음지기"
@@ -4993,73 +5093,73 @@ msgid "Ferry"
 msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/fisher/init.lua:22
+#: ../../data/tribes/workers/barbarians/fisher/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Fisher"
 msgstr "어부"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/gamekeeper/init.lua:27
+#: ../../data/tribes/workers/barbarians/gamekeeper/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Gamekeeper"
 msgstr "사냥터지기"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/gardener/init.lua:27
+#: ../../data/tribes/workers/barbarians/gardener/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Gardener"
 msgstr "정원사"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/geologist/init.lua:23
+#: ../../data/tribes/workers/barbarians/geologist/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Geologist"
 msgstr "지질학자"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/helmsmith/init.lua:17
+#: ../../data/tribes/workers/barbarians/helmsmith/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Helmsmith"
 msgstr "투구 대장장이"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/hunter/init.lua:18
+#: ../../data/tribes/workers/barbarians/hunter/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Hunter"
 msgstr "사냥꾼"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/innkeeper/init.lua:17
+#: ../../data/tribes/workers/barbarians/innkeeper/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Innkeeper"
 msgstr "여관 주인"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/lime_burner/init.lua:17
+#: ../../data/tribes/workers/barbarians/lime_burner/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Lime-Burner"
 msgstr "석회 끓이는 이"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/lumberjack/init.lua:23
+#: ../../data/tribes/workers/barbarians/lumberjack/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Lumberjack"
 msgstr "나무꾼"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/miner/init.lua:17
+#: ../../data/tribes/workers/barbarians/miner/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Miner"
 msgstr "쇳돌 캐는 이"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/miner_chief/init.lua:17
+#: ../../data/tribes/workers/barbarians/miner_chief/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Chief Miner"
 msgstr "대장 쇳돌 캐는 이"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/miner_master/init.lua:17
+#: ../../data/tribes/workers/barbarians/miner_master/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Master Miner"
 msgstr "달인 쇳돌 캐는 이"
@@ -5071,31 +5171,31 @@ msgid "Ox"
 msgstr "황소"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/ranger/init.lua:32
+#: ../../data/tribes/workers/barbarians/ranger/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Ranger"
 msgstr "숲 레인저?"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/recruit/init.lua:12
+#: ../../data/tribes/workers/barbarians/recruit/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Recruit"
 msgstr "신병"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/scout/init.lua:17
+#: ../../data/tribes/workers/barbarians/scout/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Scout"
 msgstr "정찰병"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/shipwright/init.lua:18
+#: ../../data/tribes/workers/barbarians/shipwright/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Shipwright"
 msgstr "조선공"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/smelter/init.lua:17
+#: ../../data/tribes/workers/barbarians/smelter/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Smelter"
 msgstr "제련공"
@@ -5107,19 +5207,19 @@ msgid "Soldier"
 msgstr "군인"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/stonemason/init.lua:23
+#: ../../data/tribes/workers/barbarians/stonemason/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Stonemason"
 msgstr "석공"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/trainer/init.lua:16
+#: ../../data/tribes/workers/barbarians/trainer/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Trainer"
 msgstr "훈련사"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/weaver/init.lua:17
+#: ../../data/tribes/workers/barbarians/weaver/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Weaver"
 msgstr "직조공"

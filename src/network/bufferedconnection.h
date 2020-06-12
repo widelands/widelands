@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2019 by the Widelands Development Team
+ * Copyright (C) 2008-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -118,14 +118,6 @@ public:
 	 */
 	static std::unique_ptr<BufferedConnection> connect(const NetAddress& host);
 
-#if BOOST_VERSION >= 106600
-	/**
-	 * Tries to create a connection offered by the given acceptor.
-	 * \param host An acceptor which might have a pending connection.
-	 * \return A pointer to a connected \c BufferedConnection object or a \c nullptr.
-	 */
-	static std::unique_ptr<BufferedConnection> accept(boost::asio::ip::tcp::acceptor& acceptor);
-#else
 	/**
 	 * Prepares a socket but does not connect anywhere.
 	 * Connecting the socket has to be done by the caller, afterwards \c notify_connected() has to be
@@ -140,7 +132,6 @@ public:
 	 * by the caller.
 	 */
 	void notify_connected();
-#endif
 
 	/**
 	 * Closes the connection.
@@ -288,21 +279,12 @@ private:
 	 */
 	explicit BufferedConnection(const NetAddress& host);
 
-#if BOOST_VERSION >= 106600
-	/**
-	 * Tries to create a connection offered by the given acceptor.
-	 * If the connection attempt failed, is_connected() will return \c false.
-	 * \param host An acceptor which might have a pending connection.
-	 */
-	explicit BufferedConnection(boost::asio::ip::tcp::acceptor& acceptor);
-#else
 	/**
 	 * Prepares a socket but does not connect anywhere.
-	 * Connecting the socket has to be done by the caller, afterwards \c notify_connected() has to be
-	 * called.
+	 * Connecting the socket has to be done by the caller,
+	 * afterwards \c notify_connected() must be called.
 	 */
 	explicit BufferedConnection();
-#endif
 
 	/**
 	 * Tries to send some data.

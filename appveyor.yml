@@ -17,7 +17,7 @@ install:
   - cmd: "set CC=%MINGWPATH%\\gcc.exe"
   - cmd: "set CXX=%MINGWPATH%\\g++.exe"
   # Update mirrors
-  - cmd: "bash --login -c \"pacman --noconfirm --sync pacman pacman-mirrors\""
+  - cmd: "bash --login -c \"pacman --noconfirm -Sy pacman pacman-mirrors\""
   # deleting broken repo from mirrorlist
   # - cmd: "bash --login -c \"sed -i 7d C:/msys64/etc/pacman.d/mirrorlist.msys\""
   # - cmd: "bash --login -c \"sed -i 7d C:/msys64/etc/pacman.d/mirrorlist.mingw32\""
@@ -44,16 +44,17 @@ build_script:
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
   - cmd: md build
   - cmd: cd build
-  - cmd: echo %APPVEYOR_BUILD_VERSION%_%CONFIGURATION%_%PLATFORM% > %APPVEYOR_BUILD_FOLDER%\WL_RELEASE
+  - cmd: set WIDELANDS_VERSION_STRING=%APPVEYOR_BUILD_VERSION%-%CONFIGURATION%-%PLATFORM%[%APPVEYOR_REPO_COMMIT:~0,7%]
+  - cmd: echo %WIDELANDS_VERSION_STRING% > %APPVEYOR_BUILD_FOLDER%\WL_RELEASE
   - cmd: "IF \"%PLATFORM%\" == \"x86\" (cmake -G \"Ninja\" -DBoost_NO_BOOST_CMAKE=ON -DCMAKE_BUILD_TYPE=%CONFIGURATION% -DOPTION_USE_GLBINDING=ON -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DCMAKE_JOB_POOLS=\"linking=1\" -DCMAKE_JOB_POOL_LINK=linking %APPVEYOR_BUILD_FOLDER%) ELSE (cmake -G \"Ninja\" -DBoost_NO_BOOST_CMAKE=ON -DCMAKE_BUILD_TYPE=%CONFIGURATION% -DOPTION_USE_GLBINDING=ON -DOPTION_BUILD_CODECHECK=OFF -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_ASAN=OFF -DCMAKE_JOB_POOLS=\"linking=1\" -DCMAKE_JOB_POOL_LINK=linking %APPVEYOR_BUILD_FOLDER%)"
   - cmd: "cmake --build ."
 on_success:
   - cmd: strip -sv %APPVEYOR_BUILD_FOLDER%\build\src\widelands.exe
-  - cmd: ISCC /q /o%APPVEYOR_BUILD_FOLDER% /fWidelands-%APPVEYOR_BUILD_VERSION%-%CONFIGURATION%-%PLATFORM% c:\projects\widelands\utils\win32\innosetup\Widelands.iss
-  - appveyor PushArtifact %APPVEYOR_BUILD_FOLDER%\Widelands-%APPVEYOR_BUILD_VERSION%-%CONFIGURATION%-%PLATFORM%.exe
+  - cmd: ISCC /q /o%APPVEYOR_BUILD_FOLDER% /fWidelands-%WIDELANDS_VERSION_STRING% c:\projects\widelands\utils\win32\innosetup\Widelands.iss
+  - appveyor PushArtifact %APPVEYOR_BUILD_FOLDER%\Widelands-%WIDELANDS_VERSION_STRING%.exe
 
 artifacts:
-  - path: Widelands-$(APPVEYOR_BUILD_VERSION)-$(CONFIGURATION)-$(PLATFORM).exe
+  - path: Widelands-$(WIDELANDS_VERSION_STRING).exe
     name: Widelands Setup
 
 platform:

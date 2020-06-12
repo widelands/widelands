@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -205,7 +205,8 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	finalize_toolbar();
 
 #ifndef NDEBUG  //  only in debug builds
-	addCommand("switchplayer", boost::bind(&InteractivePlayer::cmdSwitchPlayer, this, _1));
+	addCommand(
+	   "switchplayer", [this](const std::vector<std::string>& str) { cmdSwitchPlayer(str); });
 #endif
 
 	map_options_subscriber_ = Notifications::subscribe<NoteMapOptions>(

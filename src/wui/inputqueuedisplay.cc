@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -306,9 +306,8 @@ void InputQueueDisplay::update_priority_buttons() {
 		NEVER_HERE();
 	}
 
-	priority_radiogroup_->changedto.connect(
-	   boost::bind(&InputQueueDisplay::radiogroup_changed, this, _1));
-	priority_radiogroup_->clicked.connect(boost::bind(&InputQueueDisplay::radiogroup_clicked, this));
+	priority_radiogroup_->changedto.connect([this](int32_t i) { radiogroup_changed(i); });
+	priority_radiogroup_->clicked.connect([this]() { radiogroup_clicked(); });
 
 	bool const can_act = igb_.can_act(building_.owner().player_number());
 	if (!can_act)
@@ -353,8 +352,7 @@ void InputQueueDisplay::update_max_fill_buttons() {
 	            explanation */
 	         _("Hold down Ctrl to allow none of this ware"), UI::FontStyle::kTooltip))
 	      .str());
-	decrease_max_fill_->sigclicked.connect(
-	   boost::bind(&InputQueueDisplay::decrease_max_fill_clicked, boost::ref(*this)));
+	decrease_max_fill_->sigclicked.connect([this]() { decrease_max_fill_clicked(); });
 
 	x = Border + (cache_size_ + 1) * (CellWidth + CellSpacing);
 
@@ -381,8 +379,7 @@ void InputQueueDisplay::update_max_fill_buttons() {
 	            explanation */
 	         _("Hold down Ctrl to allow all of this ware"), UI::FontStyle::kTooltip))
 	      .str());
-	increase_max_fill_->sigclicked.connect(
-	   boost::bind(&InputQueueDisplay::increase_max_fill_clicked, boost::ref(*this)));
+	increase_max_fill_->sigclicked.connect([this]() { increase_max_fill_clicked(); });
 
 	increase_max_fill_->set_repeating(true);
 	decrease_max_fill_->set_repeating(true);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -80,7 +80,7 @@ Economy::Economy(Player& player, Serial init_serial, WareWorker wwtype)
 		target_quantities_[i] = tq;
 	}
 
-	router_.reset(new Router(boost::bind(&Economy::reset_all_pathfinding_cycles, this)));
+	router_.reset(new Router([this]() { reset_all_pathfinding_cycles(); }));
 }
 
 Economy::~Economy() {
@@ -1013,8 +1013,9 @@ void Economy::handle_active_supplies(Game& game) {
 		} else {
 			wh = find_closest_warehouse(
 			   supply.get_position(game)->base_flag(), nullptr, 0,
-			   (!havenormal) ? WarehouseAcceptFn() : boost::bind(&accept_warehouse_if_policy, _1,
-			                                                     type_, ware, StockPolicy::kNormal));
+			   (!havenormal) ? WarehouseAcceptFn() : [this, ware](Warehouse& w) {
+				   return accept_warehouse_if_policy(w, type_, ware, StockPolicy::kNormal);
+				});
 		}
 		if (!wh) {
 			log("Warning: Economy::handle_active_supplies "

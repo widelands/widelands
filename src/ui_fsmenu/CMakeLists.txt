@@ -35,6 +35,7 @@ wl_library(ui_fsmenu_helpwindow
   SRCS
     helpwindow.cc
     helpwindow.h
+  USES_SDL2
   DEPENDS
     base_i18n
     graphic

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -109,13 +109,10 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(CampaignData* camp)
 	                                 _("Return to campaign selection"));
 	ok_.set_tooltip(is_tutorial_ ? _("Play this tutorial") : _("Play this scenario"));
 
-	ok_.sigclicked.connect(
-	   boost::bind(&FullscreenMenuScenarioSelect::clicked_ok, boost::ref(*this)));
-	back_.sigclicked.connect(
-	   boost::bind(&FullscreenMenuScenarioSelect::clicked_back, boost::ref(*this)));
-	table_.selected.connect(boost::bind(&FullscreenMenuScenarioSelect::entry_selected, this));
-	table_.double_clicked.connect(
-	   boost::bind(&FullscreenMenuScenarioSelect::clicked_ok, boost::ref(*this)));
+	ok_.sigclicked.connect([this]() { clicked_ok(); });
+	back_.sigclicked.connect([this]() { clicked_back(); });
+	table_.selected.connect([this](unsigned) { entry_selected(); });
+	table_.double_clicked.connect([this](unsigned) { clicked_ok(); });
 
 	if (is_tutorial_) {
 		scenario_difficulty_.set_visible(false);
@@ -149,8 +146,7 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(CampaignData* camp)
 	fill_table();
 	layout();
 
-	table_.cancel.connect(
-	   boost::bind(&FullscreenMenuScenarioSelect::clicked_back, boost::ref(*this)));
+	table_.cancel.connect([this]() { clicked_back(); });
 }
 
 void FullscreenMenuScenarioSelect::layout() {
