@@ -99,7 +99,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 			   case NoteGameSettings::Action::kPlayer:
 				   break;
 			   }
-		   });
+			});
 	}
 
 	/// Update dropdown sizes
@@ -297,7 +297,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					   update();
 				   }
 			   }
-		   });
+			});
 
 		// Init dropdowns
 		update();
