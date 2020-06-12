@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include <bits/stl_algobase.h>
 #include <boost/algorithm/string.hpp>
 
 #include "ai/computer_player.h"
@@ -98,7 +99,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 			   case NoteGameSettings::Action::kPlayer:
 				   break;
 			   }
-			});
+		   });
 	}
 
 	/// Update dropdown sizes
@@ -107,7 +108,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 	//		slot_dropdown_.set_height(g_gr->get_yres() * 3 / 4);
 	//	}
 
-	void force_new_dimensions(float scale, uint32_t standard_element_height) {
+	void force_new_dimensions(float, uint32_t standard_element_height) {
 		slot_dropdown_.set_desired_size(standard_element_height, standard_element_height);
 	}
 
@@ -178,12 +179,12 @@ struct MultiPlayerClientGroup : public UI::Box {
 /// Holds the dropdown menus for a player slot
 struct MultiPlayerPlayerGroup : public UI::Box {
 	MultiPlayerPlayerGroup(UI::Panel* const parent,
-	                       int32_t const w,
+	                       int32_t const,
 	                       int32_t const h,
 	                       PlayerSlot id,
 	                       GameSettingsProvider* const settings,
 	                       NetworkPlayerSettingsBackend* const npsb)
-	   : UI::Box(parent, 0, 0, UI::Box::Horizontal, 0, 0, kPadding / 2),
+	   : UI::Box(parent, 0, 0, UI::Box::Horizontal, 0, 0),
 	     settings_(settings),
 	     n(npsb),
 	     id_(id),
@@ -296,13 +297,13 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					   update();
 				   }
 			   }
-			});
+		   });
 
 		// Init dropdowns
 		update();
 	}
 
-	void force_new_dimensions(float scale, uint32_t standard_element_height) {
+	void force_new_dimensions(float, uint32_t standard_element_height) {
 		player.set_desired_size(standard_element_height, standard_element_height);
 		type_dropdown_.set_desired_size(standard_element_height, standard_element_height);
 		tribes_dropdown_.set_desired_size(standard_element_height, standard_element_height);
@@ -658,17 +659,17 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
                                              int32_t const x,
                                              int32_t const y,
-                                             int32_t const w,
+                                             int32_t const,
                                              int32_t const h,
                                              GameSettingsProvider* const settings,
                                              uint32_t buth)
-   : UI::Box(parent, x, y, UI::Box::Horizontal, 0, h, 8 * kPadding),
+   : UI::Box(parent, x, y, UI::Box::Horizontal, 0, h),
      settings_(settings),
      npsb(new NetworkPlayerSettingsBackend(settings_)),
      clientbox(this, 0, 0, UI::Box::Vertical),
-     playerbox(this, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     playerbox(this, 0, 0, UI::Box::Vertical, 0, h, kPadding),
+     scrollable_playerbox(&playerbox, 0, 0, UI::Box::Vertical, 0, h - 50),
      clients_(&clientbox,
-              // the width of the MultiPlayerSetupGroup is (get_w() * 53 / 80)
               0,
               0,
               0,
@@ -687,29 +688,27 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
      buth_(buth) {
 
 	clientbox.add(&clients_, Resizing::kAlign, UI::Align::kCenter);
-	//	clientbox.set_size(w * 16 / 53, h);
 	clientbox.set_scrolling(true);
 
 	add(&clientbox);
 	add_space(1 * buth);
 	add(&playerbox);
 
-	// Playerbox
-	//	playerbox.set_size(w * 36 / 53, h);
 	playerbox.add_space(0);
 	playerbox.add(&players_, Resizing::kAlign, UI::Align::kCenter);
 
 	multi_player_player_groups.resize(kMaxPlayers);
 	for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
-		multi_player_player_groups.at(i) = new MultiPlayerPlayerGroup(
-		   &playerbox, playerbox.get_w() - UI::Scrollbar::kSize, buth_, i, settings, npsb.get());
-		playerbox.add(multi_player_player_groups.at(i));
+		multi_player_player_groups.at(i) =
+		   new MultiPlayerPlayerGroup(&scrollable_playerbox, playerbox.get_w() - UI::Scrollbar::kSize,
+		                              buth_, i, settings, npsb.get());
+		scrollable_playerbox.add(multi_player_player_groups.at(i));
 	}
 	playerbox.add_space(0);
+	playerbox.add(&scrollable_playerbox, Resizing::kExpandBoth);
 
 	subscriber_ =
 	   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings&) { update(); });
-	//	set_size(w, h);
 	update();
 }
 
@@ -730,13 +729,13 @@ void MultiPlayerSetupGroup::update() {
 			multi_player_client_groups.at(i) =
 			   new MultiPlayerClientGroup(&clientbox, clientbox.get_w(), buth_, i, settings_);
 			clientbox.add(multi_player_client_groups.at(i), UI::Box::Resizing::kFullSize);
-			//			multi_player_client_groups.at(i)->layout();
+			//						multi_player_client_groups.at(i)->layout();
 		}
 		multi_player_client_groups.at(i)->set_visible(true);
 	}
 
 	const size_t number_of_players = settings.players.size();
-	playerbox.set_scrolling(number_of_players * buth_ > playerbox.get_h());
+	scrollable_playerbox.set_scrolling(number_of_players * buth_ > scrollable_playerbox.get_h());
 
 	// Keep track of which player slots are visible
 	for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
@@ -748,12 +747,22 @@ void MultiPlayerSetupGroup::update() {
 }
 
 void MultiPlayerSetupGroup::draw(RenderTarget& dst) {
+	int32_t H = scrollable_playerbox.get_y() + scrollable_playerbox.get_h();
 	for (MultiPlayerPlayerGroup* player_group : multi_player_player_groups) {
 		if (player_group->is_visible()) {
-			dst.brighten_rect(
-			   Recti(playerbox.get_x(), playerbox.get_y() + player_group->get_y() - kPadding / 2,
-			         playerbox.get_w() + kPadding, player_group->get_h() + kPadding),
-			   -MOUSE_OVER_BRIGHT_FACTOR);
+			if (player_group->get_y() < 0 && player_group->get_y() > -player_group->get_h()) {
+				dst.brighten_rect(
+				   Recti(playerbox.get_x(), scrollable_playerbox.get_y(), scrollable_playerbox.get_w(),
+				         player_group->get_h() + player_group->get_y()),
+				   -MOUSE_OVER_BRIGHT_FACTOR);
+			} else if (player_group->get_y() > 0) {
+				auto rect_height = std::min(
+				   H - (scrollable_playerbox.get_y() + player_group->get_y()), player_group->get_h());
+				dst.brighten_rect(
+				   Recti(playerbox.get_x(), scrollable_playerbox.get_y() + player_group->get_y(),
+				         scrollable_playerbox.get_w(), rect_height < 0 ? 0 : rect_height),
+				   -MOUSE_OVER_BRIGHT_FACTOR);
+			}
 		}
 	}
 }
@@ -764,8 +773,8 @@ void MultiPlayerSetupGroup::force_new_dimensions(float scale, uint32_t standard_
 	for (auto& multiPlayerClientGroup : multi_player_client_groups) {
 		multiPlayerClientGroup->force_new_dimensions(scale, standard_element_height);
 	}
-	for (auto& bla : multi_player_player_groups) {
-		bla->force_new_dimensions(scale, standard_element_height);
+	for (auto& multiPlayerPlayerGroup : multi_player_player_groups) {
+		multiPlayerPlayerGroup->force_new_dimensions(scale, standard_element_height);
 	}
 	//	inactive_players.force_new_dimensions(scale, standard_element_height);
 }

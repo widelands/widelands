@@ -32,10 +32,8 @@ private:
 
 	bool is_scenario_;
 
-	void update(bool map_was_changed);
-	void set_player_names_and_tribes();
-	void switch_to_position(uint8_t const pos);
-	void ensure_valid_host_position(uint8_t const newplayernumber);
+	void update();
+	void set_player_names_and_tribes(Widelands::Map& map);
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_SPG2_H

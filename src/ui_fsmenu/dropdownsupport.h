@@ -142,20 +142,4 @@ private:
 	void selection_action() override;
 };
 
-class RoleDropdownSupport : public DropDownSupport<uintptr_t> {
-public:
-	RoleDropdownSupport(UI::Panel* parent,
-	                    const std::string& name,
-	                    int32_t x,
-	                    int32_t y,
-	                    uint32_t w,
-	                    int button_dimension,
-	                    GameSettingsProvider* const settings,
-	                    PlayerSlot id);
-	void rebuild() override;
-
-private:
-	void selection_action() override;
-};
-
 #endif  // WL_UI_FSMENU_DROPDOWNSUPPORT_H

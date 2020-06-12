@@ -5,11 +5,8 @@
 #include "logic/map.h"
 #include "map_io/map_loader.h"
 
-MapDetailsBox::MapDetailsBox(Panel* parent,
-                             uint32_t standard_element_width,
-                             uint32_t standard_element_height,
-                             int32_t max_x,
-                             int32_t max_y)
+MapDetailsBox::MapDetailsBox(
+   Panel* parent, uint32_t, uint32_t standard_element_height, int32_t max_x, int32_t max_y)
    : UI::Box(parent, 0, 0, UI::Box::Vertical),
      title_(this,
             0,
@@ -41,7 +38,7 @@ MapDetailsBox::MapDetailsBox(Panel* parent,
         this,
         0,
         0,
-        0,
+        UI::Scrollbar::kSize,  // min width must be set to avoid assertion failure...
         0,
         UI::PanelStyle::kFsMenu,
         "sample map description which might be a\n very long text so scrollbar is needed") {
@@ -58,7 +55,7 @@ MapDetailsBox::MapDetailsBox(Panel* parent,
 MapDetailsBox::~MapDetailsBox() {
 }
 
-void MapDetailsBox::update(GameSettingsProvider* settings) {
+void MapDetailsBox::update(GameSettingsProvider* settings, Widelands::Map& map) {
 	const GameSettings& game_settings = settings->settings();
 	{
 		// Translate the map's name
@@ -70,27 +67,27 @@ void MapDetailsBox::update(GameSettingsProvider* settings) {
 	select_map_.set_visible(settings->can_change_map());
 	select_map_.set_enabled(settings->can_change_map());
 
-	load_map_info(settings);
+	show_map_description(map, settings);
 }
 
-/**
- * load map information and update the UI
- */
-void MapDetailsBox::load_map_info(GameSettingsProvider* settings) {
+void MapDetailsBox::set_select_map_action(std::function<void()> action) {
+	select_map_.sigclicked.connect(action);
+}
+void MapDetailsBox::force_new_dimensions(float scale,
+                                         uint32_t standard_element_width,
+                                         uint32_t standard_element_height) {
+	title_.set_font_scale(scale);
+	map_name_.set_font_scale(scale);
+	map_name_.set_fixed_width(standard_element_width - standard_element_height);
+	select_map_.set_desired_size(standard_element_height, standard_element_height);
+	map_description_.set_desired_size(0, 4 * standard_element_height);
+	UI::Box::layout();
+}
+void MapDetailsBox::set_map_description_text(const std::string& text) {
+	map_description_.set_text(text);
+}
+void MapDetailsBox::show_map_description(Widelands::Map& map, GameSettingsProvider* settings) {
 	const GameSettings& game_settings = settings->settings();
-	Widelands::Map map;  //  MapLoader needs a place to put its preload data
-
-	std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(game_settings.mapfilename);
-	//	if (!ml) {
-	//		throw WLWarning("There was an error!", "The map file seems to be invalid!");
-	//	}
-
-	map.set_filename(game_settings.mapfilename);
-	{
-		i18n::Textdomain td("maps");
-		ml->preload_map(true);
-	}
-
 	std::string infotext;
 	infotext += std::string(_("Map details:")) + "\n";
 	infotext += std::string("• ") +
@@ -109,18 +106,4 @@ void MapDetailsBox::load_map_info(GameSettingsProvider* settings) {
 	infotext += map.get_hint();
 
 	map_description_.set_text(infotext);
-}
-
-void MapDetailsBox::set_select_map_action(std::function<void()> action) {
-	select_map_.sigclicked.connect(action);
-}
-void MapDetailsBox::force_new_dimensions(float scale, uint32_t standard_element_height) {
-	title_.set_font_scale(scale);
-	map_name_.set_font_scale(scale);
-	select_map_.set_desired_size(standard_element_height, standard_element_height);
-	map_description_.set_desired_size(0, 6 * standard_element_height);
-	UI::Box::layout();
-}
-void MapDetailsBox::set_map_description_text(const std::string& text) {
-	map_description_.set_text(text);
 }

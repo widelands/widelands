@@ -21,6 +21,8 @@
 #define WL_UI_FSMENU_LAUNCH_MPG2_H
 
 #include <memory>
+#include <wui/game_chat_panel2.h>
+#include <wui/multiplayersetupgroup.h>
 
 #include "logic/game_settings.h"
 #include "ui_basic/button.h"
@@ -31,8 +33,6 @@
 #include "wui/suggested_teams_box.h"
 
 struct ChatProvider;
-struct GameChatPanel;
-struct MultiPlayerSetupGroup;
 
 /**
  * Fullscreen menu for setting map and mapsettings for single and multi player
@@ -41,10 +41,9 @@ struct MultiPlayerSetupGroup;
  */
 class FullscreenMenuLaunchMPG2 : public FullscreenMenuLaunchGame {
 public:
-	FullscreenMenuLaunchMPG2(GameSettingsProvider*, GameController*);
+	FullscreenMenuLaunchMPG2(GameSettingsProvider*, GameController*, ChatProvider&);
 	~FullscreenMenuLaunchMPG2() override;
 
-	void set_chat_provider(ChatProvider&);
 	void think() override;
 	void refresh();
 
@@ -54,7 +53,7 @@ protected:
 
 private:
 	void layout() override;
-
+	void draw(RenderTarget& dst) override;
 	bool clicked_select_map() override;
 	void select_map();
 	void select_saved_game();
@@ -75,11 +74,9 @@ private:
 	UI::Button help_button_;
 
 	std::unique_ptr<UI::FullscreenHelpWindow> help_;
-	GameChatPanel* chat_;
-	MultiPlayerSetupGroup* mpsg_;
+	MultiPlayerSetupGroup mpsg_;
+	GameChatPanel2 chat_;
 	std::string filename_proof_;  // local variable to check state
-
-	UI::SuggestedTeamsBox* suggested_teams_box_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_MPG2_H

@@ -108,8 +108,10 @@ void TribeDropdownSupport::selection_action() {
 			settings_->set_player_shared(
 			   id_, boost::lexical_cast<unsigned int>(dropdown_.get_selected()));
 		} else {
-			settings_->set_player_tribe(id_, dropdown_.get_selected());
+			const std::string& selected = dropdown_.get_selected();
+			settings_->set_player_tribe(id_, selected, selected == "random");
 		}
+		// Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer));
 	}
 }
 
@@ -137,7 +139,6 @@ PlayerTypeDropdownSupport::PlayerTypeDropdownSupport(UI::Panel* parent,
                                   id) {
 }
 void PlayerTypeDropdownSupport::rebuild() {
-
 	if (selection_locked_) {
 		return;
 	}
@@ -156,21 +157,15 @@ void PlayerTypeDropdownSupport::fill() {
 	/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 	dropdown_.add(_("Random AI"), AI_NAME_PREFIX "random",
 	              g_gr->images().get("images/ai/ai_random.png"), false, _("Random AI"));
-
-	// Slot state. Only add shared_in if there are viable slots
-	if (settings.is_shared_usable(id_, settings.find_shared(id_))) {
-		dropdown_.add(_("Shared in"), "shared_in",
-		              g_gr->images().get("images/ui_fsmenu/shared_in.png"), false, _("Shared in"));
-	}
+	dropdown_.add(
+	   /** TRANSLATORS: This is the "name" of the single player */
+	   _("You"), "human_player", g_gr->images().get("images/wui/stats/genstats_nrworkers.png"));
 
 	// Do not close a player in savegames or scenarios
 	if (!settings.uncloseable(id_)) {
 		dropdown_.add(
 		   _("Closed"), "closed", g_gr->images().get("images/ui_basic/stop.png"), false, _("Closed"));
 	}
-
-	dropdown_.add(
-	   _("Open"), "open", g_gr->images().get("images/ui_basic/continue.png"), false, _("Open"));
 }
 
 void PlayerTypeDropdownSupport::select_entry() {
@@ -180,6 +175,7 @@ void PlayerTypeDropdownSupport::select_entry() {
 	if (player_setting.state == PlayerSettings::State::kHuman) {
 		dropdown_.set_image(g_gr->images().get("images/wui/stats/genstats_nrworkers.png"));
 		dropdown_.set_tooltip((boost::format(_("%1%: %2%")) % _("Type") % _("Human")).str());
+		dropdown_.set_enabled(false);
 	} else if (player_setting.state == PlayerSettings::State::kClosed) {
 		dropdown_.select("closed");
 	} else if (player_setting.state == PlayerSettings::State::kOpen) {
@@ -188,16 +184,14 @@ void PlayerTypeDropdownSupport::select_entry() {
 		dropdown_.select("shared_in");
 	} else {
 		if (player_setting.state == PlayerSettings::State::kComputer) {
-			if (player_setting.ai.empty()) {
+			if (player_setting.random_ai) {
+				dropdown_.select(AI_NAME_PREFIX "random");
+			} else if (player_setting.ai.empty()) {
 				dropdown_.set_errored(_("No AI"));
 			} else {
-				if (player_setting.random_ai) {
-					dropdown_.select(AI_NAME_PREFIX "random");
-				} else {
-					const ComputerPlayer::Implementation* impl =
-					   ComputerPlayer::get_implementation(player_setting.ai);
-					dropdown_.select((boost::format(AI_NAME_PREFIX "%s") % impl->name).str());
-				}
+				const ComputerPlayer::Implementation* impl =
+				   ComputerPlayer::get_implementation(player_setting.ai);
+				dropdown_.select((boost::format(AI_NAME_PREFIX "%s") % impl->name).str());
 			}
 		}
 	}
@@ -216,6 +210,10 @@ void PlayerTypeDropdownSupport::selection_action() {
 			state = PlayerSettings::State::kOpen;
 		} else if (selected == "shared_in") {
 			state = PlayerSettings::State::kShared;
+		} else if (selected == "human_player") {
+			settings_->set_player_number(id_);
+			state = PlayerSettings::State::kHuman;
+			//			dropdown_.set_enabled(false);
 		} else {
 			if (selected == AI_NAME_PREFIX "random") {
 				settings_->set_player_ai(id_, "", true);
@@ -230,7 +228,9 @@ void PlayerTypeDropdownSupport::selection_action() {
 				}
 			}
 		}
+
 		settings_->set_player_state(id_, state);
+		Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer));
 	}
 }
 
@@ -375,68 +375,5 @@ void TeamDropdown::rebuild() {
 void TeamDropdown::selection_action() {
 	if (dropdown_.has_selection()) {
 		settings_->set_player_team(id_, dropdown_.get_selected());
-	}
-}
-
-RoleDropdownSupport::RoleDropdownSupport(UI::Panel* parent,
-                                         const std::string& name,
-                                         int32_t x,
-                                         int32_t y,
-                                         uint32_t w,
-                                         int button_dimension,
-                                         GameSettingsProvider* const settings,
-                                         PlayerSlot id)
-   : DropDownSupport<uintptr_t>(parent,
-                                name,
-                                x,
-                                y,
-                                w,
-                                16,
-                                button_dimension,
-                                _("Role"),
-                                UI::DropdownType::kPictorial,
-                                UI::PanelStyle::kFsMenu,
-                                UI::ButtonStyle::kFsMenuSecondary,
-                                settings,
-                                id) {
-}
-void RoleDropdownSupport::rebuild() {
-	if (selection_locked_) {
-		return;
-	}
-	dropdown_.clear();
-	const GameSettings& settings = settings_->settings();
-	if (id_ >= settings.players.size()) {
-		return;
-	}
-	const PlayerSettings& user_setting = settings.players.at(id_);
-
-	for (PlayerSlot slot = 0; slot < settings.players.size(); ++slot) {
-		if (settings.players.at(slot).state == PlayerSettings::State::kHuman ||
-		    settings.players.at(slot).state == PlayerSettings::State::kClosed ||
-		    settings.players.at(slot).state == PlayerSettings::State::kComputer) {
-			dropdown_.add((boost::format(_("Player %u")) % static_cast<unsigned int>(slot + 1)).str(),
-			              slot, playercolor_image(slot, "images/players/genstats_player.png"),
-			              slot == user_setting.initialization_index);
-		}
-	}
-	dropdown_.add(_("Spectator"), UserSettings::none(),
-	              g_gr->images().get("images/wui/fieldaction/menu_tab_watch.png"), false);
-	dropdown_.set_visible(true);
-	dropdown_.set_enabled(id_ == settings.playernum);
-}
-void RoleDropdownSupport::selection_action() {
-	const GameSettings& settings = settings_->settings();
-	//	if (id_ != settings.playernum) {
-	//		log("exiting because id=%d but playernum=%d\n", id_, settings.playernum);
-	//		return;
-	//	}
-	if (dropdown_.has_selection()) {
-		const uint8_t new_slot = dropdown_.get_selected();
-		//		if (new_slot != settings.) {
-		settings_->set_player_number(new_slot);
-		log("RoleDropdownSupport::notify because position has changed\n");
-		Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer));
-		//		}
 	}
 }

@@ -21,6 +21,7 @@
 #define WL_UI_FSMENU_LAUNCH_GAME_H
 
 #include <memory>
+#include <wui/suggested_teams_box.h>
 
 #include "logic/widelands.h"
 #include "ui_basic/button.h"
@@ -94,6 +95,7 @@ protected:
 	std::string last_win_condition_;
 	UI::Button ok_, back_;
 	UI::Textarea title_;
+	UI::SuggestedTeamsBox suggested_teams_box_;
 	GameSettingsProvider* settings_;
 	GameController* ctrl_;
 

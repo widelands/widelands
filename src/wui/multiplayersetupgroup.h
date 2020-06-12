@@ -60,7 +60,7 @@ private:
 	std::vector<MultiPlayerPlayerGroup*> multi_player_player_groups;  // not owned
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 
-	UI::Box clientbox, playerbox;
+	UI::Box clientbox, playerbox, scrollable_playerbox;
 	UI::Textarea clients_, players_;
 	uint32_t buth_;
 

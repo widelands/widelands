@@ -94,6 +94,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
             "",
             UI::Align::kCenter,
             g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+     suggested_teams_box_(&map_box_, 0, 0, UI::Box::Vertical, padding_, 0, 0, 0),
      // Variables and objects used in the menu
      settings_(settings),
      ctrl_(ctrl),
@@ -131,6 +132,8 @@ void FullscreenMenuLaunchGame::add_all_widgets() {
 	map_box_.add(&win_condition_type, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	map_box_.add_space(2 * padding_);
 	map_box_.add(&win_condition_dropdown_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
+	map_box_.add_space(5 * padding_);
+	map_box_.add(&suggested_teams_box_, UI::Box::Resizing::kExpandBoth);
 	map_box_.add_inf_space();
 	map_box_.add(&ok_, UI::Box::Resizing::kAlign, UI::Align::kBottom);
 	map_box_.add_space(2 * padding_);
@@ -155,10 +158,10 @@ void FullscreenMenuLaunchGame::layout() {
 	log("w=%d, h=%d\n", get_w(), get_h());
 	log("standard_w=%d, standard_h=%d\n", standard_element_width_, standard_element_height_);
 	title_.set_font_scale(scale_factor());
-	map_details.force_new_dimensions(scale_factor(), standard_element_height_);
+	map_details.force_new_dimensions(
+	   scale_factor(), standard_element_width_, standard_element_height_);
 	win_condition_type.set_font_scale(scale_factor());
 
-	//	main_box_.set_desired_size(get_w(), get_h());
 	main_box_.set_size(get_w(), get_h());
 	log("main box: w=%d, h=%d, x=%d\n", main_box_.get_w(), main_box_.get_h(), main_box_.get_x());
 	log("content box: w=%d, h=%d, x=%d\n", content_box_.get_w(), content_box_.get_h(),
@@ -173,12 +176,14 @@ void FullscreenMenuLaunchGame::layout() {
 	// map_.set_desired_size(map_box_.get_w(), 0);
 
 	log("peaceful w=%d, h=%d, x=%d\n", peaceful_.get_w(), peaceful_.get_h(), peaceful_.get_x());
-	log("ok button w=%d, h=%d, x=%d\n", ok_.get_w(), ok_.get_h(), ok_.get_x());
-	log("wincondition_dd w=%d, h=%d, x=%d\n", win_condition_dropdown_.get_w(),
-	    win_condition_dropdown_.get_h(), win_condition_dropdown_.get_x());
-	//	log("map w=%d, h=%d, x=%d\n", map_.get_w(), map_.get_h(), map_.get_x());
-	log("sehe ich nicht oder \n\n");
-	//	select_map_.set_desired_size(map_name_.get_h(), map_name_.get_h());
+	log("ok button w=%d, h=%d, x=%d, y=%d\n", ok_.get_w(), ok_.get_h(), ok_.get_x(), ok_.get_y());
+	log("suggested teams %dx%d, x=%d, y=%d\n", suggested_teams_box_.get_w(),
+	    suggested_teams_box_.get_h(), suggested_teams_box_.get_x(), suggested_teams_box_.get_y());
+	log("wincondition_dd %dx%d, x=%d, y=%d\n", win_condition_dropdown_.get_w(),
+	    win_condition_dropdown_.get_h(), win_condition_dropdown_.get_x(),
+	    win_condition_dropdown_.get_y());
+
+	//	suggested_teams_box_.set_pos(Vector2i(0, 300));
 }
 
 void FullscreenMenuLaunchGame::update_peaceful_mode() {

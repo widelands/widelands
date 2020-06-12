@@ -4,6 +4,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
+#include <logic/map.h>
 
 struct GameSettingsProvider;
 class MapDetailsBox : public UI::Box {
@@ -15,14 +16,14 @@ public:
 	              int32_t max_y = 0);
 	~MapDetailsBox();
 
-	void update(GameSettingsProvider* settings);
+	void update(GameSettingsProvider* settings, Widelands::Map& map);
 
 	/// passed callback is called when the select map button is clicked
 	void set_select_map_action(std::function<void()> action);
 
-	void force_new_dimensions(float scale, uint32_t standard_element_height);
+	void force_new_dimensions(float scale, uint32_t standard_element_height, uint32_t i);
 
-	// TODO(JM) only used by multiplayer screen...
+	// TODO(jmoerschbach): only used by multiplayer screen...
 	void set_map_description_text(const std::string& text);
 
 private:
@@ -32,7 +33,7 @@ private:
 	UI::Button select_map_;
 	UI::MultilineTextarea map_description_;
 
-	void load_map_info(GameSettingsProvider* settings);
+	void show_map_description(Widelands::Map& map, GameSettingsProvider* settings);
 };
 
 #endif  // WL_UI_FSMENU_MAPDETAILSBOX_H

@@ -38,6 +38,7 @@
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
+#include "ui_basic/mouse_constants.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
 #include "wui/game_chat_panel.h"
@@ -93,7 +94,8 @@ private:
 };
 
 FullscreenMenuLaunchMPG2::FullscreenMenuLaunchMPG2(GameSettingsProvider* const settings,
-                                                   GameController* const ctrl)
+                                                   GameController* const ctrl,
+                                                   ChatProvider& chat)
    : FullscreenMenuLaunchGame(settings, ctrl),
      // Values for alignment and size
      // TODO(GunChleoc): We still need to use these consistently. Just getting them in for now
@@ -115,7 +117,21 @@ FullscreenMenuLaunchMPG2::FullscreenMenuLaunchMPG2(GameSettingsProvider* const s
 
      help_(nullptr),
      // Variables and objects used in the menu
-     chat_(nullptr) {
+
+     mpsg_(&individual_content_box,
+           0,
+           0,
+           individual_content_box.get_w(),
+           individual_content_box.get_h() / 3,
+           settings,
+           standard_element_height_),
+     chat_(&individual_content_box,
+           0,
+           0,
+           individual_content_box.get_w(),
+           individual_content_box.get_h() / 3,
+           chat,
+           UI::PanelStyle::kFsMenu) {
 
 	title_.set_text(_("Multiplayer Game Setup"));
 	help_button_.sigclicked.connect(
@@ -128,9 +144,19 @@ FullscreenMenuLaunchMPG2::FullscreenMenuLaunchMPG2(GameSettingsProvider* const s
 		map_details.set_map_description_text(_("The host has not yet selected a map or saved game."));
 	}
 
-	mpsg_ = new MultiPlayerSetupGroup(
-	   &individual_content_box, 0, 0, 0, 0, settings, standard_element_height_);
+	//	chat_ = new GameChatPanel();
 
+	// Y coordinate will be set later, when we know how high this box will get.
+	//	suggested_teams_box_ =
+	//	   new UI::SuggestedTeamsBox(&individual_content_box, right_column_x_, 0, UI::Box::Vertical,
+	//	                             padding_, indent_, get_w() - right_column_x_, 4 * label_height_);
+
+	individual_content_box.add(&mpsg_, UI::Box::Resizing::kFullSize);
+	//	individual_content_box.add(suggested_teams_box_, UI::Box::Resizing::kExpandBoth);
+	individual_content_box.add_inf_space();
+	individual_content_box.add(&chat_, UI::Box::Resizing::kAlign, UI::Align::kBottom);
+	//	individual_content_box.add_space(2 * standard_element_height_);
+	layout();
 	// If we are the host, open the map or save selection menu at startup
 	if (settings_->settings().usernum == 0 && settings_->settings().mapname.empty()) {
 		clicked_select_map();
@@ -139,46 +165,25 @@ FullscreenMenuLaunchMPG2::FullscreenMenuLaunchMPG2(GameSettingsProvider* const s
 			settings_->set_player_number(0);
 		}
 	}
-
-	// Y coordinate will be set later, when we know how high this box will get.
-	suggested_teams_box_ =
-	   new UI::SuggestedTeamsBox(&individual_content_box, right_column_x_, 0, UI::Box::Vertical,
-	                             padding_, indent_, get_w() - right_column_x_, 4 * label_height_);
-
-	individual_content_box.add(mpsg_, UI::Box::Resizing::kFullSize);
-	individual_content_box.add(suggested_teams_box_, UI::Box::Resizing::kExpandBoth);
 }
 
 FullscreenMenuLaunchMPG2::~FullscreenMenuLaunchMPG2() {
-	delete mpsg_;
-	delete chat_;
+	//	delete mpsg_;
+	//	delete chat_;
 }
 
 void FullscreenMenuLaunchMPG2::layout() {
 	standard_element_width_ = get_w() / 4;
 	standard_element_height_ = get_h() * 9 / 200;
-	mpsg_->force_new_dimensions(scale_factor(), standard_element_height_);
-	if (chat_) {
-		chat_->set_desired_size(mpsg_->get_w(), get_h() / 2);
-	}
+	mpsg_.set_max_size(0, get_h() / 3);
+	mpsg_.force_new_dimensions(scale_factor(), standard_element_height_);
+	chat_.force_new_dimensions(scale_factor(), get_w() * 2 / 3, get_h() / 3);
 
 	FullscreenMenuLaunchGame::layout();
-}
-/**
- * Set a new chat provider.
- *
- * This automatically creates and displays a chat panel when appropriate.
- */
-void FullscreenMenuLaunchMPG2::set_chat_provider(ChatProvider& chat) {
-	delete chat_;
-	chat_ = new GameChatPanel(
-	   this, get_w() * 3 / 80, mpsg_->get_y() + mpsg_->get_h() + padding_, get_w() * 53 / 80,
-	   ok_.get_y() + ok_.get_h() - mpsg_->get_y() - mpsg_->get_h() - padding_ - 1, chat,
-	   UI::PanelStyle::kFsMenu);
-	//	chat_ = new GameChatPanel(
-	//	   &individual_content_box, 0, 0, mpsg_->get_w(), get_h() / 2, chat, UI::PanelStyle::kFsMenu);
-	//	individual_content_box.add(chat_, UI::Box::Resizing::kAlign, UI::Align::kBottom);
-	//	layout();
+
+	log("mpsg %dx%d at x:%d, y:%d\n", mpsg_.get_w(), mpsg_.get_h(), mpsg_.get_x(), mpsg_.get_y());
+	log("chatpanel %dx%d at x:%d, y:%d\n", chat_.get_w(), chat_.get_h(), chat_.get_x(),
+	    chat_.get_y());
 }
 
 /**
@@ -328,9 +333,9 @@ void FullscreenMenuLaunchMPG2::think() {
 	refresh();
 
 	// unfocus chat window when other UI element has focus
-	if (!chat_->has_focus()) {
-		chat_->unfocus_edit();
-	}
+	//	if (!chat_.has_focus()) {
+	//		chat_.unfocus_edit();
+	//	}
 }
 
 /**
@@ -543,14 +548,10 @@ void FullscreenMenuLaunchMPG2::load_map_info() {
 		ml->preload_map(true);
 	}
 
-	map_details.update(settings_);
+	map_details.update(settings_, map);
 	filename_proof_ = settings_->settings().mapfilename;
 
-	suggested_teams_box_->hide();
-	suggested_teams_box_->show(map.get_suggested_teams());
-
-	log("suggested box: %dx%d at x:%d, y:%d\n", suggested_teams_box_->get_w(),
-	    suggested_teams_box_->get_h(), suggested_teams_box_->get_x(), suggested_teams_box_->get_y());
+	suggested_teams_box_.show(map.get_suggested_teams());
 }
 
 /// Show help
@@ -563,4 +564,11 @@ void FullscreenMenuLaunchMPG2::help_clicked() {
 		                                /** TRANSLATORS: This is a heading for a help window */
 		                                _("Multiplayer Game Setup")));
 	}
+}
+
+void FullscreenMenuLaunchMPG2::draw(RenderTarget& dst) {
+	FullscreenMenuLaunchGame::draw(dst);
+	//	log("chat %dx%d (%d,%d)\n", chat_.get_x(), chat_.get_y(), chat_.get_w(), chat_.get_h());
+	dst.brighten_rect(
+	   Recti(chat_.get_x(), chat_.get_y(), chat_.get_w(), chat_.get_h()), -MOUSE_OVER_BRIGHT_FACTOR);
 }

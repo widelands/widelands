@@ -2,21 +2,12 @@
 
 #include <memory>
 
-#include "base/i18n.h"
 #include "base/warning.h"
-#include "base/wexception.h"
-#include "graphic/font_handler.h"
-#include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
-#include "logic/game_settings.h"
-#include "logic/map_objects/map_object.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
 #include "mapselect.h"
-#include "scripting/lua_interface.h"
-#include "scripting/lua_table.h"
-#include "ui_fsmenu/loadgame.h"
 
 FullscreenMenuLaunchSPG2::FullscreenMenuLaunchSPG2(GameSettingsProvider* const settings,
                                                    GameController* const ctrl)
@@ -31,7 +22,7 @@ FullscreenMenuLaunchSPG2::FullscreenMenuLaunchSPG2(GameSettingsProvider* const s
 	ok_.set_enabled(settings_->can_launch());
 
 	subscriber_ = Notifications::subscribe<NoteGameSettings>(
-	   [this](const NoteGameSettings& note) { update(false); });
+	   [this](const NoteGameSettings& note) { update(); });
 }
 
 /**
@@ -68,13 +59,11 @@ bool FullscreenMenuLaunchSPG2::clicked_select_map() {
 	const MapData& mapdata = *msm.get_map();
 	nr_players_ = mapdata.nrplayers;
 
-	ensure_valid_host_position(nr_players_);
+	//	ensure_valid_host_position(nr_players_);
 	settings_->set_map(mapdata.name, mapdata.filename, nr_players_);
 	update_win_conditions();
 	update_peaceful_mode();
 
-	// is this ok? actually I don't understand why this is not automatically sent in
-	// settings_#set_map()...
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 
 	// force layout so all boxes and textareas are forced to update
@@ -82,73 +71,22 @@ bool FullscreenMenuLaunchSPG2::clicked_select_map() {
 	return true;
 }
 
-/**
- * Called when a position-button was clicked.
- */
-void FullscreenMenuLaunchSPG2::switch_to_position(uint8_t const pos) {
-	settings_->set_player_number(pos);
-	update(false);
-}
-
-/**
- * Check to avoid segfaults, if the player changes a map with less player
- * positions while being on a later invalid position.
- */
-void FullscreenMenuLaunchSPG2::ensure_valid_host_position(uint8_t const newplayernumber) {
-	GameSettings settings = settings_->settings();
-
-	// Check whether the host would still keep a valid position and return if
-	// yes.
-	if (settings.playernum == UserSettings::none() || settings.playernum < newplayernumber)
-		return;
-
-	// Check if a still valid place is open.
-	for (uint8_t i = 0; i < newplayernumber; ++i) {
-		PlayerSettings position = settings.players.at(i);
-		if (position.state == PlayerSettings::State::kOpen) {
-			switch_to_position(i);
-			return;
-		}
-	}
-
-	// Kick player 1 and take the position
-	settings_->set_player_state(0, PlayerSettings::State::kClosed);
-	settings_->set_player_state(0, PlayerSettings::State::kOpen);
-	switch_to_position(0);
-}
-
-/**
- * update the user interface and take care of the visibility of
- * buttons and text.
- */
-void FullscreenMenuLaunchSPG2::update(bool) {
-	log("update\n");
+void FullscreenMenuLaunchSPG2::update() {
 	const GameSettings& settings = settings_->settings();
+	Widelands::Map map;  //  MapLoader needs a place to put its preload data
+	std::unique_ptr<Widelands::MapLoader> map_loader(
+	   map.get_correct_loader(settings_->settings().mapfilename));
+	map.set_filename(settings_->settings().mapfilename);
+	map_loader->preload_map(true);
 
-	map_details.update(settings_);
+	map_details.update(settings_, map);
 	nr_players_ = settings.players.size();
 
 	ok_.set_enabled(settings_->can_launch());
 
 	peaceful_.set_state(settings_->is_peaceful_mode());
 
-	set_player_names_and_tribes();
-	//}
-
-	//	// "Choose Position" Buttons in front of PlayerDescriptionGroups
-	//	for (uint8_t i = 0; i < nr_players_; ++i) {
-	//		pos_[i]->set_visible(true);
-	//		const PlayerSettings& player = settings.players[i];
-	//		pos_[i]->set_enabled(!is_scenario_ && (player.state == PlayerSettings::State::kOpen ||
-	//		                                       player.state == PlayerSettings::State::kComputer));
-	//	}
-	//	for (uint32_t i = nr_players_; i < kMaxPlayers; ++i)
-	//		pos_[i]->set_visible(false);
-
-	//	// update the player description groups
-	//	for (uint32_t i = 0; i < kMaxPlayers; ++i) {
-	//		players_[i]->update();
-	//	}
+	//	set_player_names_and_tribes(map);
 }
 
 /**
@@ -156,15 +94,11 @@ void FullscreenMenuLaunchSPG2::update(bool) {
  * player names and player tribes and take care about visibility
  * and usability of all the parts of the UI.
  */
-void FullscreenMenuLaunchSPG2::set_player_names_and_tribes() {
+void FullscreenMenuLaunchSPG2::set_player_names_and_tribes(Widelands::Map& map) {
 	if (settings_->settings().mapfilename.empty()) {
 		throw wexception("settings()->scenario was set to true, but no map is available");
 	}
-	Widelands::Map map;  //  MapLoader needs a place to put its preload data
-	std::unique_ptr<Widelands::MapLoader> map_loader(
-	   map.get_correct_loader(settings_->settings().mapfilename));
-	map.set_filename(settings_->settings().mapfilename);
-	map_loader->preload_map(true);
+
 	Widelands::PlayerNumber const nrplayers = map.get_nrplayers();
 	for (uint8_t i = 0; i < nrplayers; ++i) {
 		settings_->set_player_name(i, map.get_scenario_player_name(i + 1));

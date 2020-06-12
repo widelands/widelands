@@ -82,10 +82,10 @@ void SinglePlayerGameSettingsProvider::set_map(const std::string& mapname,
 	s.mapname = mapname;
 	s.mapfilename = mapfilename;
 	s.savegame = savegame;
-
-	uint32_t oldplayers = s.players.size();
 	s.players.resize(maxplayers);
 
+	set_player_number(0);
+	uint32_t oldplayers = 0;  // s.players.size();
 	while (oldplayers < maxplayers) {
 		PlayerSettings& player = s.players[oldplayers];
 		player.state =
@@ -228,6 +228,7 @@ void SinglePlayerGameSettingsProvider::set_player_number(uint8_t const number) {
 	PlayerSettings const position = settings().players.at(number);
 	PlayerSettings const player = settings().players.at(settings().playernum);
 	if (number < settings().players.size() && (position.state == PlayerSettings::State::kOpen ||
+	                                           position.state == PlayerSettings::State::kClosed ||
 	                                           position.state == PlayerSettings::State::kComputer)) {
 		set_player(number, player);
 		set_player(settings().playernum, position);

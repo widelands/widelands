@@ -125,8 +125,7 @@ void GameClientImpl::send_player_command(Widelands::PlayerCommand* pc) {
  *  @return true to indicate that run is done.
  */
 bool GameClientImpl::run_map_menu(GameClient* parent) {
-	FullscreenMenuLaunchMPG2 lgm(parent, parent);
-	lgm.set_chat_provider(*parent);
+	FullscreenMenuLaunchMPG2 lgm(parent, parent, *parent);
 	modal = &lgm;
 	FullscreenMenuBase::MenuTarget code = lgm.run<FullscreenMenuBase::MenuTarget>();
 	modal = nullptr;
@@ -178,9 +177,9 @@ void GameClientImpl::run_game(InteractiveGameBase* igb) {
 
 	modal = igb;
 
-	game->run(settings.savegame ? Widelands::Game::Loaded : settings.scenario ?
-	                              Widelands::Game::NewMPScenario :
-	                              Widelands::Game::NewNonScenario,
+	game->run(settings.savegame ? Widelands::Game::Loaded :
+	                              settings.scenario ? Widelands::Game::NewMPScenario :
+	                                                  Widelands::Game::NewNonScenario,
 	          "", false, (boost::format("netclient_%d") % static_cast<int>(settings.usernum)).str());
 
 	// if this is an internet game, tell the metaserver that the game is done.
