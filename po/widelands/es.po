@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-06-08 21:44+0000\n"
+"PO-Revision-Date: 2020-06-09 13:22+0000\n"
 "Last-Translator: Walter Benkel <tromaster@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -1564,7 +1564,7 @@ msgstr "¡El archivo ‘%s’ no pudo ser restaurado!"
 #: ../../src/logic/generic_save_handler.cc:274
 #, c-format
 msgid "Backup file ‘%s’ will be available for some time."
-msgstr ""
+msgstr "Archivo de respaldo ‘%s’ estará disponible por algún tiempo."
 
 #: ../../src/logic/generic_save_handler.cc:285
 #, c-format
@@ -2564,7 +2564,7 @@ msgstr "Desconocido"
 
 #: ../../src/network/internet_gaming_messages.cc:44
 msgid "There is no user with this name logged in."
-msgstr ""
+msgstr "No hay ningún usuario conectado con este nombre."
 
 #: ../../src/network/internet_gaming_messages.cc:45
 msgid "The game no longer exists, maybe it has just been closed."
@@ -2576,7 +2576,7 @@ msgstr "Contraseña incorrecta, por favor intenta otra vez."
 
 #: ../../src/network/internet_gaming_messages.cc:47
 msgid "You have been temporarily banned from online gaming."
-msgstr ""
+msgstr "Has sido temporalmente suspendido de jugar en línea."
 
 #: ../../src/network/internet_gaming_messages.cc:48
 msgid "The protocol version you are using is not supported!"
@@ -2777,7 +2777,7 @@ msgstr "¡Fallo al utilizar la red local!"
 msgid ""
 "Widelands was unable to use the local network. Maybe some other process is "
 "already running a server on port %s or your network setup is broken."
-msgstr ""
+msgstr "Widelands no pudo usar la red local. Quizás otro proceso está ejecutando un servidor en el puerto %s o tu configuración de red tiene un fallo."
 
 #: ../../src/ui_basic/dropdown.cc:109
 msgctxt "dropdown"
@@ -2980,7 +2980,7 @@ msgstr "Partida"
 #: ../../src/ui_fsmenu/internet_lobby.cc:383
 #, c-format
 msgid "The game %s is already running. Please choose a different name."
-msgstr ""
+msgstr "La partida %s ya se está ejecutando. Por favor escoge un nombre diferente."
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:397
 msgid ""
@@ -3021,11 +3021,11 @@ msgstr "Atrás"
 
 #: ../../src/ui_fsmenu/launch_game.cc:95
 msgid "The relations between players are set by the scenario"
-msgstr ""
+msgstr "Las relaciones entre los jugadores son establecidas por el escenario."
 
 #: ../../src/ui_fsmenu/launch_game.cc:97
 msgid "The relations between players are set by the saved game"
-msgstr ""
+msgstr "Las relaciones entre los jugadores son establecidas por la partida guardada."
 
 #: ../../src/ui_fsmenu/launch_game.cc:99
 msgid "The selected win condition does not allow peaceful matches"
@@ -3275,7 +3275,7 @@ msgstr "Mostrar todos los mapas"
 
 #: ../../src/ui_fsmenu/mapselect.cc:107
 msgid "Official & Unofficial"
-msgstr ""
+msgstr "Oficial & No Oficial"
 
 #: ../../src/ui_fsmenu/mapselect.cc:119
 msgid "Any Teams"
@@ -3364,7 +3364,7 @@ msgstr "Desconocido"
 msgid ""
 "Enter a valid nickname. This value may contain only English letters, "
 "numbers, and @ . + - _ characters."
-msgstr ""
+msgstr "Ingresa un apodo válido. Éste sólo puede contener letras en inglés, números, y los caracteres @ . + - _."
 
 #: ../../src/ui_fsmenu/options.cc:90
 msgid "Apply"
@@ -3510,7 +3510,7 @@ msgstr "Elige un tutorial"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:89
 msgid "Pick a tutorial from the list, then hit “OK”."
-msgstr ""
+msgstr "Escoge un tutorial de la lista, y presiona “OK”."
 
 #: ../../src/ui_fsmenu/scenario_select.cc:91
 msgid ""
@@ -3553,7 +3553,7 @@ msgstr "Nº"
 #: ../../src/ui_fsmenu/scenario_select.cc:245
 #, c-format
 msgid "Invalid path to file in campaigns.lua of tutorials.lua: %s"
-msgstr ""
+msgstr "Ruta a archivo no válida en campaigns.lua de tutorials.lua: %s"
 
 #: ../../src/ui_fsmenu/scenariodetails.cc:46
 msgid "Tutorial"
@@ -3714,7 +3714,7 @@ msgstr "Mantén presionado Shift para remover todos los soldados hasta el que es
 
 #: ../../src/wui/attack_box.cc:244
 msgid "Not attacking:"
-msgstr ""
+msgstr "No atacando:"
 
 #: ../../src/wui/attack_box.cc:250
 msgid "Click on a soldier to add him to the list of attackers"
@@ -3890,7 +3890,7 @@ msgstr "Detenido"
 
 #: ../../src/wui/constructionsitewindow.cc:216
 msgid "Stop this building’s work after completion"
-msgstr ""
+msgstr "Para el trabajo de este edificio después de terminarlo"
 
 #: ../../src/wui/constructionsitewindow.cc:270
 #: ../../src/wui/soldierlist.cc:413
@@ -3932,7 +3932,7 @@ msgstr "Configuración de trabajadores para aplicar después de la construcción
 
 #: ../../src/wui/constructionsitewindow.cc:339
 msgid "Start an expedition from this port after completion"
-msgstr ""
+msgstr "Comienza una expedición desde este puerto después de terminarlo"
 
 #: ../../src/wui/constructionsitewindow.cc:359
 msgid "Settings to apply after construction"
@@ -4144,7 +4144,7 @@ msgstr "Conversar"
 #: ../../src/wui/game_chat_menu.cc:60
 #: ../../src/wui/interactive_gamebase.cc:150
 msgid "Script Console"
-msgstr ""
+msgstr "Consola de Instrucciones"
 
 #. * TRANSLATORS: Window label
 #: ../../src/wui/game_client_disconnected.cc:47
@@ -4360,7 +4360,7 @@ msgstr "Archivar mensaje seleccionado"
 #: ../../src/wui/game_message_menu.cc:686
 msgctxt "hotkey"
 msgid "Del"
-msgstr ""
+msgstr "Supr"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_options_sound_menu.cc:29
@@ -4766,7 +4766,7 @@ msgstr "Mostrar Solapos de Áreas de trabajo"
 msgid ""
 "Toggle whether overlapping workareas are indicated when placing a "
 "constructionsite"
-msgstr ""
+msgstr "Alterna la indicación de áreas de trabajo sobrepuestas al situar sitios de construcción"
 
 #: ../../src/wui/interactive_player.cc:345
 #, c-format
@@ -4833,7 +4833,7 @@ msgstr "Oficial"
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:32
 msgid "Unofficial"
-msgstr ""
+msgstr "No oficial"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:34
@@ -5070,7 +5070,7 @@ msgstr "juego"
 
 #: ../../src/wui/portdockwaresdisplay.cc:94
 msgid "Additional item"
-msgstr ""
+msgstr "Ítem adicional"
 
 #: ../../src/wui/portdockwaresdisplay.cc:96
 msgid "(Empty)"
@@ -5529,7 +5529,7 @@ msgstr "Sonidos del Ambiente"
 msgid ""
 "Sound is disabled either due to a problem with the sound driver, or because "
 "it was switched off at the command line."
-msgstr ""
+msgstr "El sonido está deshabilitado debido a un problema con la tarjeta de sonido, o porque fue desactivado en la línea de comandos."
 
 #: ../../src/wui/stock_menu.cc:41
 msgid "Wares (total)"

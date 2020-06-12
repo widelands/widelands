@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
-# Balázs Meskó <mesko.balazs@fsf.hu>, 2017-2018
+# Balázs Meskó <meskobalazs@mailbox.org>, 2017-2018
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # GunChleoc, 2014
