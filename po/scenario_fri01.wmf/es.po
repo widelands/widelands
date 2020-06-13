@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020
+# Walter Benkel <tromaster@gmail.com>, 2020
 # 
 msgid ""
 msgstr ""
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-22 17:14+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020\n"
+"Last-Translator: Walter Benkel <tromaster@gmail.com>, 2020\n"
 "Language-Team: Spanish (https://www.transifex.com/widelands/teams/35159/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +23,7 @@ msgstr ""
 #. TRANSLATORS: Name of a backup autosave
 #: ../../data/campaigns/fri01.wmf/scripting/mission_thread.lua:129
 msgid "The Great Stormflood (Backup Autosave)"
-msgstr ""
+msgstr "La Gran Tormenta (copia de seguridad autoguardada)"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:25
 msgid "Build a wood economy and a reed farm"
@@ -37,10 +38,12 @@ msgid ""
 "Build at least one woodcutter’s house and two forester’s houses to start "
 "producing logs, and a reed farm to start growing reed."
 msgstr ""
+"Construye al menos una casa de talador y dos casas de silvicultores para "
+"comenzar a producir troncos, y una granja de juncos para producir cañas."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:33
 msgid "Start producing bricks"
-msgstr ""
+msgstr "Comienza a producir ladrillos"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:35
 msgid "Brick Economy"
@@ -51,53 +54,59 @@ msgid ""
 "Build a brick kiln, a coal mine, a rock mine, a clay pit and a well to start"
 " producing bricks."
 msgstr ""
+"Construye un horno de ladrillos, una mina de carbón, una mina de rocas, un "
+"pozo de arcilla y un pozo de agua para comenzar a producir ladrillos."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:41
 msgid "Gather building materials"
-msgstr ""
+msgstr "Reúne materiales de construcción"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:43
 msgid "Stockpile Building Materials"
-msgstr ""
+msgstr "Acumula Materiales de Construcción"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:44
 msgid ""
 "Stockpile some building materials in your headquarters. Gather at least:"
 msgstr ""
+"Acumula algunos materiales de construcción en tu cuartel general. Reúne al "
+"menos:"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:45
 msgid "30 × Log"
-msgstr ""
+msgstr "30 x Tronco"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:46
 msgid "30 × Granite"
-msgstr ""
+msgstr "30 x Granito"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:47
 msgid "10 × Clay"
-msgstr ""
+msgstr "10 x Arcilla"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:48
 msgid "40 × Brick"
-msgstr ""
+msgstr "40 x Ladrillo"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:49
 msgid "20 × Coal"
-msgstr ""
+msgstr "20 x Carbón"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:50
 msgid "30 × Reed"
-msgstr ""
+msgstr "30 x Caña"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:51
 msgid ""
 "Remember that you can set target quantities for most of these wares in your "
 "economy settings."
 msgstr ""
+"Recuerda que puedes fijar las metas de producción para la mayoría de estos "
+"materiales en los  ajustes de la economía."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:56
 msgid "Produce food for the miners"
-msgstr ""
+msgstr "Produce alimentos para los mineros"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:58
 msgid "Food Economy"
@@ -108,6 +117,8 @@ msgid ""
 "Build a tavern, a fisher’s house, a smokery, a berry farm and a fruit "
 "collector’s house."
 msgstr ""
+"Construye una taberna, una casa de pescador, un ahumadero, una granja de "
+"bayas y una casa del recolector de frutas."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:64
 msgid "Enhance your food economy"
@@ -122,10 +133,12 @@ msgid ""
 "Build at least two farms, a beekeeper’s house (next to the berry farm), a "
 "bakery, a brewery, and another tavern."
 msgstr ""
+"Construye al menos dos granjas, una casa de apicultor (cerca de una granja "
+"de bayas), una panadería, una cervezería, y otra taberna."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:72
 msgid "Build an iron mine and a mining infrastructure"
-msgstr ""
+msgstr "Construye una mina de hierro y una infraestructura minera"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:74
 msgid "Build Mines and Mining Infrastructure"
@@ -134,6 +147,8 @@ msgstr "Construye minas y una infraestructura minera"
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:75
 msgid "Build an iron mine, a furnace, a blacksmithy and a small armor smithy."
 msgstr ""
+"Construye una mina de hierro, un horno, una herrería y un pequeño taller de "
+"armaduras."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:80
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:255
@@ -147,11 +162,11 @@ msgstr "Reclutar Soldados"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:83
 msgid "Build a barracks, a reindeer farm and a sewing room."
-msgstr ""
+msgstr "Construye un cuartel, una granja de renos y un cuarto de costura."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:88
 msgid "Discover more of the island"
-msgstr ""
+msgstr "Descubre más de la isla"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:90
 msgid "Expand and Discover"
