@@ -53,7 +53,6 @@ protected:
 
 private:
 	void layout() override;
-	void draw(RenderTarget& dst) override;
 	bool clicked_select_map() override;
 	void select_map();
 	void select_saved_game();
@@ -64,11 +63,6 @@ private:
 	void load_map_info();
 	void help_clicked();
 
-	// TODO(GunChleoc): We still need to use these consistently. Just getting them in for now
-	// so we can have the SuggestedTeamsBox
-	int32_t const padding_;  // Common padding between panels
-	int32_t const indent_;   // Indent for elements below labels
-	int32_t const label_height_;
 	int32_t const right_column_x_;
 
 	UI::Button help_button_;

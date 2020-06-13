@@ -20,6 +20,7 @@
 #include "wui/game_chat_panel2.h"
 
 #include <SDL_mouse.h>
+#include <ui_basic/mouse_constants.h>
 
 #include "sound/sound_handler.h"
 #include "wui/chat_msg_layout.h"
@@ -138,3 +139,11 @@ void GameChatPanel2::force_new_dimensions(float, uint32_t width, uint32_t height
 	chatbox.set_desired_size(width, height);
 	UI::Box::layout();
 }
+
+void GameChatPanel2::draw(RenderTarget& dst) {
+   UI::Box::draw(dst);
+   log("chat %dx%d (%d,%d)\n", chatbox.get_x(), chatbox.get_y(), chatbox.get_w(), chatbox.get_h());
+   dst.brighten_rect(
+      Recti(chatbox.get_x(), chatbox.get_y(), chatbox.get_w(), chatbox.get_h()), -MOUSE_OVER_BRIGHT_FACTOR);
+}
+

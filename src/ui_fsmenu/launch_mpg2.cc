@@ -97,12 +97,7 @@ FullscreenMenuLaunchMPG2::FullscreenMenuLaunchMPG2(GameSettingsProvider* const s
                                                    GameController* const ctrl,
                                                    ChatProvider& chat)
    : FullscreenMenuLaunchGame(settings, ctrl),
-     // Values for alignment and size
-     // TODO(GunChleoc): We still need to use these consistently. Just getting them in for now
-     // so we can have the SuggestedTeamsBox
-     padding_(4),
-     indent_(10),
-     label_height_(20),
+
      right_column_x_(get_w() * 57 / 80),
 
      help_button_(this,
@@ -564,11 +559,4 @@ void FullscreenMenuLaunchMPG2::help_clicked() {
 		                                /** TRANSLATORS: This is a heading for a help window */
 		                                _("Multiplayer Game Setup")));
 	}
-}
-
-void FullscreenMenuLaunchMPG2::draw(RenderTarget& dst) {
-	FullscreenMenuLaunchGame::draw(dst);
-	//	log("chat %dx%d (%d,%d)\n", chat_.get_x(), chat_.get_y(), chat_.get_w(), chat_.get_h());
-	dst.brighten_rect(
-	   Recti(chat_.get_x(), chat_.get_y(), chat_.get_w(), chat_.get_h()), -MOUSE_OVER_BRIGHT_FACTOR);
 }

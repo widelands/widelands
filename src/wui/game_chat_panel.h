@@ -29,6 +29,7 @@
 /**
  * Provides a panel that contains chat message scrollbar and a chat message
  * entry field.
+ * TODO(jmoerschbach) replace with gamechatpanel2 once internetlobby is using boxlayout also
  */
 struct GameChatPanel : public UI::Panel {
 	GameChatPanel(UI::Panel*,
