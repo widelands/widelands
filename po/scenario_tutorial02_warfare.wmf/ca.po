@@ -3,14 +3,14 @@
 # 
 # Translators:
 # GunChleoc, 2016
-# Juanjo, 2015-2019
+# Juanjo, 2015-2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-22 20:01+0000\n"
-"PO-Revision-Date: 2020-04-12 17:33+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-05-09 21:06+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,7 +40,7 @@ msgid ""
 "I’ve set up a small village that contains the most important buildings. You "
 "also have enough wares, so you do not have to take care of your weapons "
 "production. In a real game, you will not have this luxury."
-msgstr "He aixecat una petita aldea que conté els edificis més importants. També hi ha prou béns com per no haver-vos de preocupar de la producció d'armament. En una partida real no tindreu aquest luxe."
+msgstr "He aixecat una petita aldea que conté els edificis més importants. També hi ha prou béns per no haver-vos de preocupar de la producció d'armament. En una partida real no tindreu aquest luxe."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:37
 msgid "Soldiers’ abilities"
@@ -93,7 +93,7 @@ msgid ""
 "successful. A Barbarian soldier with attack level 0 inflicts ~%1% points of "
 "health damage when he succeeds in hitting an enemy. For each attack level, "
 "he gains %2% damage points."
-msgstr "El dany que un soldat infringeix a l'enemic quan l'atac té èxit depèn del seu nivell d'atac. Si un soldat bàrbar amb nivell 0 d'atac ataca amb èxit un enemic, li farà perdre a aquest enemic uns %1% punts de salut. Per cada nivell d'atac addicional, cal afegir %2% punts més al dany que s'infringeix."
+msgstr "El dany que un soldat infligeix a l'enemic quan l'atac té èxit depèn del seu nivell d'atac. Si un soldat bàrbar amb nivell 0 d'atac ataca amb èxit un enemic, li farà perdre a aquest enemic uns %1% punts de salut. Per cada nivell d'atac addicional, cal afegir %2% punts més al dany que s'infligeix."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:50
 msgid "Defense:"
@@ -159,7 +159,7 @@ msgstr "Mentre esperàvem que s'acabés de construir la palestra d'entrenament, 
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:74
 msgid "Battle Arena"
-msgstr ""
+msgstr "Palestra d'entrenament"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:76
 msgid "Build a battle arena"
@@ -241,7 +241,7 @@ msgstr "Construïu un camp d'entrenament."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:110
 msgid "Training Camp"
-msgstr ""
+msgstr "Camp d'entrenament"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:112
 msgid "Build a training camp"
@@ -286,112 +286,112 @@ msgstr "També heu de tenir en compte que cadascuna de les tres cultures del Wid
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143
 msgid "Scout’s Hut"
-msgstr ""
+msgstr "Cabana de l'explorador"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:133
 msgid "Explore Your Surroundings"
-msgstr ""
+msgstr "Exploreu els voltants"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:134
 msgid ""
 "Large parts of the map haven’t been explored yet. It might be a good idea to"
 " know which direction is best for expanding our empire."
-msgstr ""
+msgstr "Encara hi ha grans parts del mapa que no s'han explorat. Caldria saber quina és la millor direcció per expandir l'imperi."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:135
 msgid ""
 "You can try your luck and expand randomly, but this is risky. A safer way is"
 " to use a scout to explore unseen parts of the map. What if he finds "
 "mountains overflowing with gold?"
-msgstr ""
+msgstr "Podeu provar la vostra sort i expandir-vos aleatòriament, però és arriscat. Una manera més segura és usar un explorador per descobrir parts desconegudes del mapa. I si troba muntanyes repletes d'or?"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:136
 msgid "We will need a scout’s hut to start exploring. It is a small building."
-msgstr ""
+msgstr "Necessitarem una cabana de l'explorador per començar. És un edifici petit."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:137
 msgid "Build a scout’s hut."
-msgstr ""
+msgstr "Construïu una cabana de l'explorador."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:145
 msgid "Build a scout’s hut"
-msgstr ""
+msgstr "Construïu una cabana de l'explorador"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:146
 msgid ""
 "It’s good to know your surroundings. A scout will explore unseen parts of "
 "the map for you."
-msgstr ""
+msgstr "Està bé conèixer l'entorn. Un explorador descobrirà parts desconegudes del mapa."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:147
 msgid "Build a Scout’s Hut."
-msgstr ""
+msgstr "Construïu una cabana de l'explorador."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:153
 msgid "Scout is ready"
-msgstr ""
+msgstr "L'explorador està preparat."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:155
 msgid "Ready to go!"
-msgstr ""
+msgstr "Preparat per arrencar!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:156
 msgid ""
 "Well done, your scout’s hut has been built. While our scout is moving in, "
 "let’s learn a little bit more about him."
-msgstr ""
+msgstr "Ben fet. La cabana ja s'ha construït i l'explorador ja s'hi està mudant. Mentrestant, n'aprendrem algunes coses."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:157
 msgid ""
 "First of all, he will need to take some food with him on his scouting trips."
 " Fortunately, we have some rations in our warehouse."
-msgstr ""
+msgstr "Primer, necessitarà agafar menjar per fer la seva ruta d'exploració. Afortunadament, tenim unes quantes racions al magatzem."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:158
 msgid ""
 "When provided with food, he will walk randomly around the area. You should "
 "follow his movement before fog of war hides what he saw."
-msgstr ""
+msgstr "Quan se li proporciona menjar, caminarà per l'àrea. Hauríeu de seguir el seu moviment abans que la boira de guerra amagui el que ha vist."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:164
 msgid "Scout"
-msgstr ""
+msgstr "Explorador"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:166
 msgid "Explore the map"
-msgstr ""
+msgstr "Exploreu el mapa"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:167
 msgid "Wait for the scout to explore unseen areas."
-msgstr ""
+msgstr "S'està esperant que l'explorador descobreixi noves àrees."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:168
 msgid "Observe your scout."
-msgstr ""
+msgstr "Observeu el vostre explorador."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:174
 msgid "Scout made progress"
-msgstr ""
+msgstr "L'explorador va fent la seva feina"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:176
 msgid "New horizons?"
-msgstr ""
+msgstr "Nous horitzons?"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:177
 msgid ""
 "As you can see, scouts can go quite far. The good news is that there are no "
 "enemies around."
-msgstr ""
+msgstr "Com podeu veure, els exploradors poden arribar lluny. La bona notícia és que no hi ha enemics a prop."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:178
 msgid "You can use the minimap to see the exploration’s progress."
-msgstr ""
+msgstr "Podeu usar el minimapa per veure el progrés de l'exploració."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:179
 msgid ""
 "Don’t forget that scouting is hard work and as such cannot be done without "
 "provision of food."
-msgstr ""
+msgstr "No us oblideu que l'exploració és una tasca difícil i que no es pot fer sense una provisió de menjar."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:185
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:187
@@ -521,7 +521,7 @@ msgstr "Aprofiteu aquesta oportunitat per familiaritzar-vos amb les altres opcio
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:225
 msgid "Soldiers, dismissed!"
-msgstr ""
+msgstr "Soldats, poden retirar-se!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:227
 msgid "Dismantle your north-western sentry"

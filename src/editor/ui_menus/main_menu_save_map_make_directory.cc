@@ -66,16 +66,14 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
 	vbox_.set_size(get_inner_w() - 2 * padding_, get_inner_h() - 3 * padding_ - buth_);
 
 	edit_.set_text(dirname_);
-	edit_.changed.connect(boost::bind(&MainMenuSaveMapMakeDirectory::edit_changed, this));
-	edit_.ok.connect(boost::bind(&MainMenuSaveMapMakeDirectory::clicked_ok, this));
+	edit_.changed.connect([this]() { edit_changed(); });
+	edit_.ok.connect([this]() { clicked_ok(); });
 	edit_.cancel.connect(
-	   boost::bind(&MainMenuSaveMapMakeDirectory::end_modal<UI::Panel::Returncodes>,
-	               boost::ref(*this), UI::Panel::Returncodes::kBack));
-	ok_button_.sigclicked.connect(boost::bind(&MainMenuSaveMapMakeDirectory::clicked_ok, this));
+	   [this]() { end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack); });
+	ok_button_.sigclicked.connect([this]() { clicked_ok(); });
 	ok_button_.set_enabled(!dirname_.empty());
 	cancel_button_.sigclicked.connect(
-	   boost::bind(&MainMenuSaveMapMakeDirectory::end_modal<UI::Panel::Returncodes>,
-	               boost::ref(*this), UI::Panel::Returncodes::kBack));
+	   [this]() { end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack); });
 	center_to_parent();
 }
 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-22 20:01+0000\n"
-"PO-Revision-Date: 2020-04-12 17:38+0000\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-05-07 19:41+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -118,6 +118,10 @@ msgstr "Villicht hest du so een Teken al tegen dienem Slött sehn."
 msgid "Build a port"
 msgstr "Bau eene Muu"
 
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:61
+msgid "Build a port in the northern part of your camp"
+msgstr "Bau eene Muu in de noordelke Part vun dienem Gewest"
+
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:62
 msgid "You always need a port when you want to transport wares with a ship."
 msgstr "Wenn du mit eenem Schipp Waren transporteren willst, bruukst du immer eene Muu."
@@ -154,17 +158,21 @@ msgstr "Hunnert. As diene Muu beschickt word, laat uns een paart Schippen bauen.
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:76
 msgid ""
-"Ships are constructed in a shipyard by a shipwright. We have to build one "
-"somewhere close to the shore."
-msgstr "Schippen worden vun eenem Schippebauer in eener Warft timmert. Wi mutten eene dicht bi de Waterkant bauen."
+"Ships are constructed at the coastline near a shipyard by a shipwright. We "
+"have to build one somewhere close to the shore."
+msgstr "Schippen worden vun eenem Schippebauer an de Küst dicht bi eener Warft timmert. Wi mutten eene dicht bi de Waterkant bauen."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:82
 msgid "Build a shipyard"
 msgstr "Bau eene Warft"
 
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:84
+msgid "Build a shipyard close to the coast"
+msgstr "Bau eene Warft dicht bi de Küst"
+
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:85
-msgid "Ships are produced in a shipyard. It is a medium building."
-msgstr "Schippen worden in eener Warft baut. Dat is een middelmatigs Huus."
+msgid "Ships are produced by a shipyard. It is a medium building."
+msgstr "Schippen worden vun eener Warft baut. Dat is een middelmatigs Huus."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:86
 msgid ""
@@ -203,6 +211,10 @@ msgstr "Laat uns wachten, bit wi twee Schippen hebben. Dat is eerst maal genoog.
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:104
 msgid "Ships"
 msgstr "Schippen"
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:106
+msgid "Construct two ships"
+msgstr "Bau twee Schippen"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:107
 msgid ""
@@ -313,6 +325,10 @@ msgstr "Begünn eene Söke in elkeen Muu."
 msgid "Expedition"
 msgstr "Söök"
 
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:158
+msgid "Start an expedition"
+msgstr "Söke anfangen"
+
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:159
 msgid "Start an expedition."
 msgstr "Begünn eene Söke."
@@ -364,6 +380,10 @@ msgid "Explore"
 msgstr "Försk ut"
 
 #. TRANSLATORS: "Found" as in "founding", NOT as in "finding"
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:182
+msgid "Found a settlement"
+msgstr "Een Dörp gründen"
+
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:183
 msgid "Navigate your ship to an island that could contain iron ore."
 msgstr "Stüür dien Schipp to eener Insel, de Iesenkluut hebben kann."
@@ -439,6 +459,10 @@ msgstr "Fang an, Iesenkluut ut de Barg oftoboen."
 msgid "Iron Mine"
 msgstr "Iesen-Bargwark"
 
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:217
+msgid "Build an iron mine on the island"
+msgstr "Bau een Iesen-Bargwark up de Insel"
+
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:218
 msgid "Our economy lacks resources."
 msgstr "Uns' Wirtschaft bruukt Mineraale."
@@ -508,6 +532,10 @@ msgstr "Laat uns eene Fährenwarft dicht bi de Küst bauen, ehr wi wiedermaken."
 msgid "Build a ferry yard"
 msgstr "Bau eene Fährenwarft"
 
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:253
+msgid "Build a ferry yard close to the shore"
+msgstr "Bau eene Fährenwarft dicht bi de Küst"
+
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:254
 msgid "Ferries are constructed by a ferry yard."
 msgstr "Fähren worden in eener Fährenwarft baut."
@@ -572,6 +600,10 @@ msgid ""
 "Now it’s your turn: Build a gold mine on the mountain in the south and "
 "connect it to the main land by building waterways over the streams."
 msgstr "Nu büst du dran: Bau een Gold-Bargwark up de Barg im Süden un verbinn 't mit de Höövdland, indeem du Prielen över de Beken baust."
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:297
+msgid "Build a gold mine and waterways"
+msgstr "Bau een Gold-Bargwark un Prielen"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:298
 msgid ""

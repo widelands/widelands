@@ -102,7 +102,7 @@ void Box::update_desired_size() {
 	int maxbreadth = mindesiredbreadth_;
 
 	for (uint32_t idx = 0; idx < items_.size(); ++idx) {
-		int depth, breadth = 0;
+		int depth = 0, breadth = 0;
 		get_item_desired_size(idx, &depth, &breadth);
 
 		totaldepth += depth;
@@ -198,7 +198,7 @@ void Box::layout() {
 			// TODO(GunChleoc): Implement styling if we ever use the scrollbar function.
 			scrollbar_.reset(new Scrollbar(
 			   this, sb_x, sb_y, sb_w, sb_h, UI::PanelStyle::kFsMenu, orientation_ == Horizontal));
-			scrollbar_->moved.connect(boost::bind(&Box::scrollbar_moved, this, _1));
+			scrollbar_->moved.connect([this](int32_t a) { scrollbar_moved(a); });
 		} else {
 			scrollbar_->set_pos(Vector2i(sb_x, sb_y));
 			scrollbar_->set_size(sb_w, sb_h);

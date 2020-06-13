@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
+# FvZ, 2020
 # Nora Ghaoui, 2016
 # Nora Ghaoui, 2016
 # Rob Snelders <programming@ertai.nl>, 2006
@@ -9,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-22 20:01+0000\n"
-"PO-Revision-Date: 2020-04-12 17:33+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-05-09 22:16+0000\n"
+"Last-Translator: FvZ\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -62,7 +63,7 @@ msgid ""
 "the east. A strange aura came from there, and no one wanted to set foot "
 "there. But the border could not be left undefended, and so you constructed "
 "three fortresses."
-msgstr ""
+msgstr "Maar op een dag ontdekte je een schral ruigland met verlaten gebouwen in het oosten. Er kwam een vreemde aura vandaan en niemand wilde het gebied betreden. Maar de grens kon niet onverdedigd blijven en daarom bouwde je drie vestingen."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:28
 msgid ""
@@ -94,18 +95,18 @@ msgstr "Open het venster met gebouwstatistieken"
 msgid ""
 "Open the building statistics window for an overview over the buildings you "
 "have."
-msgstr ""
+msgstr "Het venster met gebouwstatistieken geeft een overzicht van je gebouwen."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:51
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:125
 msgid ""
 "First, you will have to open the ‘Statistics’ menu at the bottom of the "
 "screen."
-msgstr ""
+msgstr "Eerst zal je het menu ‘Statistieken’ aan de onderkant van het scherm moeten openen."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:52
 msgid "Afterwards, choose ‘Buildings’."
-msgstr ""
+msgstr "Kies daarna ‘Gebouwen’."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:53
 msgid "You can also use the hotkey ‘b’."
@@ -132,7 +133,7 @@ msgstr "Zoek op hoeveel tavernes je hebt"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:70
 msgid "We want to know whether we still have taverns."
-msgstr ""
+msgstr "We willen weten of we nog tavernes hebben."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:72
 msgid "Choose the ‘Medium buildings’ tab in the building statistics window."
@@ -209,7 +210,7 @@ msgstr "Als je geen gebouwen van een bepaalde type hebt, dan zal dat in het grij
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:91
 msgid "This is enough explanation for now. Now try it out yourself."
-msgstr ""
+msgstr "Dat is voor dit moment voldoende uitleg. Probeer het nu zelf."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:97
 msgid "You closed the building statistics window!"
@@ -246,11 +247,11 @@ msgstr "Open het voorraadvenster"
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:124
 msgid ""
 "The stock window gives you an overview over the wares you currently have."
-msgstr ""
+msgstr "In het voorraadvenster vind je een overzicht van de goederen die je op dit moment hebt."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:126
 msgid "Afterwards, choose ‘Stock’."
-msgstr ""
+msgstr "Kies daarna ‘Voorraad’."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:127
 msgid ""
@@ -278,26 +279,26 @@ msgstr "OK. In de lijst zag je dat je geen tavernes of herbergen meer hebt. Dat 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:142
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:144
 msgid "Examine the first two tabs in the stock window"
-msgstr ""
+msgstr "Bekijk de eeste twee tabbladen in het voorraadvenster."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:145
 msgid ""
 "Have a look at the first two tabs in the stock window. They show all the "
 "wares and workers you have."
-msgstr ""
+msgstr "Neem een kijkje op de eerste twee tabbladen van het voorraadvenster.  Ze geven alle waren en werkers weer."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:147
 msgid ""
 "When you have seen enough, switch back to the third tab (‘Wares in "
 "warehouses’)."
-msgstr ""
+msgstr "Als je genoeg hebt gezien, ga dan terug naar het derde tabblad (‘Goederen in magazijnen’)."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:155
 msgid ""
 "The stock window has four tabs. The first one shows you all your current "
 "wares, including those on roads, at flags and inside buildings waiting for "
 "processing."
-msgstr ""
+msgstr "Er zijn vier tabbladen in het voorraadvenster. Het eerste toont alle waren die je nu hebt, ook degene die onderweg zijn, bij een vlag liggen of in een gebouw ter beschikking zijn voor verwerking."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:156
 msgid ""
@@ -337,7 +338,7 @@ msgstr "Je hebt het voorraadvenster gesloten!"
 msgid ""
 "You have closed the stock window, but I have not yet finished with my "
 "explanation. Would you please reopen it and choose the first tab?"
-msgstr ""
+msgstr "Je hebt het voorraadvenster gesloten, maar ik was nog niet klaar met mijn uitleg. Wil je het weer openen op het eerste tabblad?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:189
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:191
@@ -352,18 +353,18 @@ msgid ""
 "You closed the stock window before I finished telling you everything about "
 "it. If you already know everything, please feel free to leave this tutorial "
 "at any time."
-msgstr ""
+msgstr "Je hebt het voorraadvenster gesloten voor het einde van de volledige uitleg. Als je het allemaal al doorhebt kan je deze oefencampagne uiteraard verlaten."
 
 #. TRANSLATORS: "it" refers to the "Stock" window.
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:195
 msgid "Otherwise, please reopen it and have a look at all its tabs."
-msgstr ""
+msgstr "In het andere geval: open het voorraadvenster opnieuw en kijk naar alle tabbladen."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:203
 msgid ""
 "You have closed the stock window, but I have not yet finished with my "
 "explanation. Would you please reopen it and choose the third tab?"
-msgstr ""
+msgstr "Je hebt het voorraadvenster gesloten, maar ik was nog niet klaar met mijn uitleg. Wil je het weer openen op het derde tabblad?"
 
 #. TRANSLATORS: "it" refers to the "Stock" window.
 #. TRANSLATORS: "it" refers to the ware statistics window.
@@ -385,7 +386,7 @@ msgstr "Bouw minstens twee tavernes."
 msgid ""
 "As long as we don’t produce rations, our miners won’t dig for ore. And "
 "without iron, we cannot forge a single helm."
-msgstr ""
+msgstr "Zolang we geen rantsoenen produceren, zullen onze mijnwerkers geen grondstoffen delven. En zonder ijzer kunnen we geen enkele helm maken."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:232
 msgid "New taverns"
@@ -399,7 +400,7 @@ msgstr "We hebben nieuwe tavernes nodig"
 msgid ""
 "Now that you have an overview, you should act. I think we should build more "
 "than one tavern – two or three are better."
-msgstr ""
+msgstr "Nu je het overzicht gezien hebt is het tijd voor actie. Ik denk dat het best is om meer dan één taverne te bouwen – twee of drie zou beter zijn."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:243
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:245
@@ -458,7 +459,7 @@ msgstr "Een soldaat van het Imperium heeft een houten speer en een helm nodig. V
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:270
 msgid "Use the encyclopedia to find out how to create new soldiers."
-msgstr ""
+msgstr "Kijk nu eens rond in de encyclopedie of je kan vinden hoe je nieuwe soldaten moet maken."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:271
 msgid "Choose the ‘Wares’ tab in the encyclopedia window."
@@ -584,21 +585,21 @@ msgstr "Als je klikt op het rode bolletje (lage prioriteit) zal het overeenkomst
 msgid ""
 "The actual supply state is indicated by varying colors of the ware icons "
 "themselves:"
-msgstr ""
+msgstr "De huidige leveringstoestand wordt aangegeven door verschillende kleuren van de goedereniconen zelf:"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:323
 msgid "Wares stored in the building are shown in full color."
-msgstr ""
+msgstr "Waren die in het gebouw worden bewaard, worden in kleur afgebeeld."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:324
 msgid "Missing wares are greyed out."
-msgstr ""
+msgstr "Ontbrekende waren worden in het grijs getoond."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:325
 msgid ""
 "Wares not present in the building yet but already being transported there "
 "are shown in a darker grey."
-msgstr ""
+msgstr "Waren die nog niet aanwezig zijn in het gebouw, maar wel onderweg zijn, worden in donkerder grijs getoond."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:326
 msgid ""
@@ -615,7 +616,7 @@ msgstr "Open het venster met goederenstatistieken"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:337
 msgid "Select the ‘Wares’ entry from the ‘Statistics’ menu."
-msgstr ""
+msgstr "Selecteer ‘Waren’ in het menu ‘Statistieken’."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:341
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:359
@@ -626,12 +627,12 @@ msgstr "Goederenstatistieken"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:343
 msgid "Let’s have a look at how our wares production is doing."
-msgstr ""
+msgstr "Laten we eens zien hoe het gaat met de productie van waren."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:350
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:352
 msgid "Examine your ware production and consumption"
-msgstr ""
+msgstr "Bestudeer je goederenproductie en consumptie."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:353
 msgid ""
@@ -641,23 +642,23 @@ msgstr "De eerste twee tabbladen tonen de productie en consumptie van de verschi
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:354
 msgid "When you have seen enough, switch to the third tab (‘Economy health’)."
-msgstr ""
+msgstr "Als je genoeg hebt gezien, schakel dan over naar het derde tabblad (‘Economische gezondheid’)."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:361
 msgid ""
 "In this window, you can select wares to see how their production or "
 "consumption has changed over time. Try it out with some wares."
-msgstr ""
+msgstr "In dit venster kan je waren selecteren om te zien hoe hun productie of consumptie in de tijd evolueert. Probeer het eens uit met enkele waren."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:362
 msgid ""
 "I’ll continue as soon as you click on the third tab (‘Economy health’)."
-msgstr ""
+msgstr "Ik zal verdergaan zodra je klikt op het derde tabblad (‘Economische gezondheid’)."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:370
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:372
 msgid "Examine your economy’s health"
-msgstr ""
+msgstr "Onderzoek de gezondheid van je economie"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:373
 msgid ""
@@ -671,7 +672,7 @@ msgstr "Probeer het nu uit. Je kunt deze grafiek ook vergelijken met de vorige t
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:375
 msgid "When you have seen enough, switch to the fourth tab (‘Stock’)."
-msgstr ""
+msgstr "Als je genoeg hebt gezien, schakel dan naar het vierde tabblad (‘Voorraad’)."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:383
 msgid ""
@@ -684,7 +685,7 @@ msgstr "In dit tabblad kan je het verschil tussen productie en consumptie bekijk
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:391
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:393
 msgid "Examine your stock"
-msgstr ""
+msgstr "Onderzoek je voorraad"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:394
 msgid ""
@@ -718,7 +719,7 @@ msgstr "Je hebt de goederenstatistieken gesloten!"
 msgid ""
 "You have closed the ware statistics window, but I have not yet finished with"
 " my explanation. Would you please reopen it and choose the third tab?"
-msgstr ""
+msgstr "Je hebt het venster met goederenstatistieken gesloten, maar ik ben nog niet klaar met mijn uitleg. Kun je het alsjeblieft heropenen en het derde tabblad kiezen?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:423
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:446
@@ -731,13 +732,13 @@ msgid ""
 "You closed the ware statistics window before I finished telling you "
 "everything about it. If you already know everything, please feel free to "
 "leave this tutorial at any time."
-msgstr ""
+msgstr "Je hebt het venster met goederenstatistieken gesloten voordat ik klaar was met je er alles over te vertellen. Als je alles al weet, kun je deze oefencampagne op elk moment verlaten."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:437
 msgid ""
 "You have closed the ware statistics window, but I have not yet finished with"
 " my explanation. Would you please reopen it and choose the fourth tab?"
-msgstr ""
+msgstr "Je hebt het venster met goederenstatistieken gesloten, maar ik ben nog niet klaar met mijn uitleg. Kun je het alsjeblieft heropenen en het vierde tabblad kiezen?"
 
 #. TRANSLATORS: "it" refers to the ware statistics window.
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:452
@@ -767,18 +768,18 @@ msgstr "Economieopties"
 msgid ""
 "I’ve shown you our stock window, where you could see which wares are at the "
 "warehouses. You remember?"
-msgstr ""
+msgstr "Weet je nog dat ik het voorraadvenster liet zien? Je kon er ontdekken hoeveel van alle waren in de magazijnen liggen."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:471
 msgid ""
 "Now I’ll tell you how you can determine how many wares you want to have. The"
 " window for this purpose can be accessed via any flag and is called "
 "‘Configure economy’."
-msgstr ""
+msgstr "Nu zal ik je vertellen hoe je kan bepalen hoeveel waren je wilt hebben. In het menu van elke vlag kan je het venster daarvoor openen, het heet ‘Configureer economie’."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:473
 msgid "This is the icon."
-msgstr "Zo ziet de knop eruit."
+msgstr "Zo ziet het icoon eruit."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:483
 msgid ""
@@ -836,7 +837,7 @@ msgstr "Je steenhouwer zal geen marmerzuilen maken als er geen nodig zijn. Je mo
 msgid ""
 "To do so, click on any flag and choose ‘Configure economy’. In this window, "
 "you can decide how many wares of each type you wish to have in stock."
-msgstr ""
+msgstr "Klik daartoe op een willekeurige vlag en kies ‘Configureer economie’. In dit venster kan je van alle soorten waren bepalen hoeveel je er op voorraad wilt hebben."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:501
 msgid ""
@@ -952,4 +953,4 @@ msgstr "Dit was de laatste oefencampagne die ik voor jou had voorbereid. Ik heb 
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"

@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-22 20:01+0000\n"
-"PO-Revision-Date: 2020-04-12 17:32+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-04-24 16:45+0000\n"
+"Last-Translator: Karl Vest\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -77,7 +77,7 @@ msgid ""
 msgstr "Umiestnite vlajku na úbočí hory na východe (na horskom teréne, nie horskej lúke). Keď kliknete na novú vlajku, budete mať možnosť vyslať tam geológov. Pretože sa vlajka nachádza na hore, geológovia budú hľadať rudy; inak by hľadali vodu. Potom pre obe druhy nájdených zdrojov postavte príslušné bane podľa týchto značiek:"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
-msgid "a bit of coal"
+msgid "some coal"
 msgstr "trochu uhlia"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:45
@@ -85,7 +85,7 @@ msgid "a lot of coal"
 msgstr "veľa uhlia"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:46
-msgid "a bit of iron"
+msgid "some iron"
 msgstr "trochu železa"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:47
@@ -93,7 +93,7 @@ msgid "a lot of iron"
 msgstr "veľa železa"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:48
-msgid "a bit of gold"
+msgid "some gold"
 msgstr "trochu zlata"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:49
@@ -101,7 +101,7 @@ msgid "a lot of gold"
 msgstr "veľa zlata"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:50
-msgid "a bit of granite"
+msgid "some granite"
 msgstr "trochu žuly"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:51
@@ -162,7 +162,7 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well. For the "
 "best productivity, build it on a spot where your geologists have found a "
 "water source."
-msgstr ""
+msgstr "Ďalšie spôsoby výroby jedla – rôznych druhov jedla – sú rybolov a pestovanie pšenice. Pšenica z fariem sa najprv musí spracovať s vodou v pekárni a až potom sa bude dať jesť. Vodu môžete získať postavením studne. Aby studňa mala najvyššiu produktivitu, postavte ju na mieste, kde geológovia našli zdroj vody."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Refine your mined resources"

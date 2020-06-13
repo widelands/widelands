@@ -6,15 +6,16 @@
 # GunChleoc, 2014
 # GunChleoc, 2014
 # Wesmania <ikk_pl@yahoo.co.uk>, 2016
+# Niektóry <niektory@gmail.com>, 2020
 # Sylwia Studzińska <sanuspg@gmail.com>, 2019
 # tombox <wptom@wp.pl>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-22 20:01+0000\n"
-"PO-Revision-Date: 2020-04-22 23:02+0000\n"
-"Last-Translator: tombox <wptom@wp.pl>\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-06-01 04:07+0000\n"
+"Last-Translator: Niektóry <niektory@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -78,32 +79,32 @@ msgid ""
 msgstr "Aby to zrobić, umieść flagę na zboczu wzgórza na wschodzie (na terenie górskim, nie na hali). Kliknąwszy na fladze możesz wysłać do niej geologów. Ponieważ flaga jest na terenie górskim, geologowie będą szukać rud; w przeciwnym przypadku szukaliby wody. Zbuduj następnie kopalnię obu rodzajów surowców jakie znajdzie, dobierając odpowiedni typ kopalni:"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
-msgid "a bit of coal"
-msgstr "odrobina węgla"
+msgid "some coal"
+msgstr "trochę węgla"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "a lot of coal"
 msgstr "mnóstwo węgla"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:46
-msgid "a bit of iron"
-msgstr "odrobina żelaza"
+msgid "some iron"
+msgstr "trochę żelaza"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:47
 msgid "a lot of iron"
 msgstr "mnóstwo żelaza"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:48
-msgid "a bit of gold"
-msgstr "odrobina złota"
+msgid "some gold"
+msgstr "trochę złota"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:49
 msgid "a lot of gold"
 msgstr "mnóstwo złota"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:50
-msgid "a bit of granite"
-msgstr "odrobina granitu"
+msgid "some granite"
+msgstr "trochę granitu"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:51
 msgid "a lot of granite"
@@ -1036,4 +1037,4 @@ msgstr "Boją się jednak, że wojna wokół Al’thunran przyniesie koniec ich 
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "\"%s\""
+msgstr "„%s”"

@@ -23,7 +23,6 @@
 #include <memory>
 
 #include "ai/ai_hints.h"
-#include "base/log.h"
 #include "base/macros.h"
 #include "base/time_string.h"
 #include "base/wexception.h"
@@ -5820,7 +5819,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[33] = -(bo.cnt_under_construction + bo.unoccupied_count) * 4;
 			if (bo.cnt_built > 0 && !bo.ware_outputs.empty() && !bo.inputs.empty()) {
 				inputs[34] +=
-				   bo.current_stats / std::abs(management_data.get_military_number_at(192)) * 10;
+				   bo.current_stats / (std::abs(management_data.get_military_number_at(192)) + 1) * 10;
 			}
 			inputs[35] = (!bo.ware_outputs.empty() && !bo.inputs.empty() &&
 			              bo.current_stats > 10 + 70 / bo.ware_outputs.size()) ?

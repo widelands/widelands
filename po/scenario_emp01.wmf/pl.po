@@ -5,14 +5,15 @@
 # GunChleoc, 2014
 # Wesmania <ikk_pl@yahoo.co.uk>, 2016
 # Jacek Wolszczak <shutdownrunner@o2.pl>, 2008
+# Niektóry <niektory@gmail.com>, 2020
 # tombox <wptom@wp.pl>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-22 20:01+0000\n"
-"PO-Revision-Date: 2020-04-22 23:08+0000\n"
-"Last-Translator: tombox <wptom@wp.pl>\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-06-01 04:28+0000\n"
+"Last-Translator: Niektóry <niektory@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -432,4 +433,4 @@ msgstr "Panie, uczyniłeś półwysep bardzo bezpiecznym miejscem. Czas iść da
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "“%s”"
+msgstr "„%s”"

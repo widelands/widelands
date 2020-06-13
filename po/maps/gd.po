@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-22 20:01+0000\n"
-"PO-Revision-Date: 2020-04-22 20:02+0000\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-05-22 17:15+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -214,6 +214,10 @@ msgid ""
 "land on a green, Mediterranean island, looking like paradise. Overjoyed, "
 "they set out to explore this new living space."
 msgstr "Bha an long air a càradh mu dheireadh thall agus lean Lutius ’s a chuideachd orra a’ sireadh àite math far an tòisicheadh iad beatha ùr. Cha dug e ach beagan làithean gus an do ràinig iad eilean blàth uaine le coltas a’ phàrrais air. Thòisich iad air an àite-chòmhnaidh ùr aca a rùrachadh le deagh shunnd."
+
+#: ../../data/campaigns/emp03.wmf/elemental:8
+msgid "Neptune’s Revenge"
+msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/elemental:10
 msgid ""

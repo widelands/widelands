@@ -190,7 +190,6 @@ Player::Player(EditorGameBase& the_egbase,
 }
 
 Player::~Player() {
-	delete[] fields_;
 }
 
 void Player::create_default_infrastructure() {
@@ -237,7 +236,7 @@ void Player::allocate_map() {
 	const Map& map = egbase().map();
 	assert(map.get_width());
 	assert(map.get_height());
-	fields_ = new Field[map.max_index()];
+	fields_.reset(new Field[map.max_index()]);
 }
 
 /**
@@ -350,7 +349,7 @@ MessageId Player::add_message(Game& game, std::unique_ptr<Message> new_message, 
 	// MapObject connection
 	if (message->serial() > 0) {
 		MapObject* mo = egbase().objects().get_object(message->serial());
-		mo->removed.connect(boost::bind(&Player::message_object_removed, this, id));
+		mo->removed.connect([this, id](unsigned) { message_object_removed(id); });
 	}
 
 	// Sound & popup
@@ -1137,8 +1136,8 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 
 	Field& field = fields_[f.field - &first_map_field];
 
-	assert(fields_ <= &field);
-	assert(&field < fields_ + map.max_index());
+	assert(fields_.get() <= &field);
+	assert(&field < fields_.get() + map.max_index());
 
 	{  // discover everything (above the ground) in this field
 		field.terrains = f.field->get_terrains();
@@ -1252,8 +1251,8 @@ Vision Player::see_node(const Map& map, const FCoords& f, Time const gametime, b
 	}
 
 	Field& field = fields_[f.field - &first_map_field];
-	assert(fields_ <= &field);
-	assert(&field < fields_ + map.max_index());
+	assert(fields_.get() <= &field);
+	assert(&field < fields_.get() + map.max_index());
 
 	if (field.vision == 0) {
 		field.vision = 1;

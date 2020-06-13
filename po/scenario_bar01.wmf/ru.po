@@ -8,7 +8,7 @@
 # Anton Khabarov <2233009@gmail.com>, 2015-2016
 # Максим Дронь <dronmax@gmail.com>, 2015
 # GunChleoc, 2018
-# Viktor S <awsswa59@gmail.com>, 2019
+# Viktor S <awsswa59@gmail.com>, 2019-2020
 # Yuriy Sokolov <lention@mail.ru>, 2015
 # 6da4f49c4b78e697e34b24b2a66289f5, 2016
 # Олег Шевченко <olegrock@gmail.com>, 2017
@@ -18,9 +18,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-22 20:01+0000\n"
-"PO-Revision-Date: 2020-04-12 17:32+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-04-24 12:09+0000\n"
+"Last-Translator: Viktor S <awsswa59@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -84,7 +84,7 @@ msgid ""
 msgstr "Чтобы сделать это, установите флаг в горах на востоке (именно на горном ландшафте, а не у подножия). Потом, щелчком на установленный флаг, вы можете послать туда геологов. Поскольку флаг находится на горе, геологи будут искать руды; иначе, они будут искать воду. Потом постройте шахту для обоих видов ресурсов, в местах которые они найдут, выбирая соответствующую шахту для постройки:"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
-msgid "a bit of coal"
+msgid "some coal"
 msgstr "немного угля"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:45
@@ -92,7 +92,7 @@ msgid "a lot of coal"
 msgstr "много угля"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:46
-msgid "a bit of iron"
+msgid "some iron"
 msgstr "немного железа"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:47
@@ -100,7 +100,7 @@ msgid "a lot of iron"
 msgstr "много железа"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:48
-msgid "a bit of gold"
+msgid "some gold"
 msgstr "немного золота"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:49
@@ -108,7 +108,7 @@ msgid "a lot of gold"
 msgstr "много золота"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:50
-msgid "a bit of granite"
+msgid "some granite"
 msgstr "немного гранита"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:51
@@ -169,7 +169,7 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well. For the "
 "best productivity, build it on a spot where your geologists have found a "
 "water source."
-msgstr ""
+msgstr "Другой путь производства пайков – переработка различных видов еды, которые поставляются рыбаками и фермерами. Пшеница с ферм и вода, должны быть доставлены в пекарню, чтобы пекарь мог приготовить что-нибудь съедобное. Вы можете получить воду построив колодец на участке. Для лучшей производительности постройте его там, где ваши геологи нашли источник воды."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Refine your mined resources"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-22 20:01+0000\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
 "PO-Revision-Date: 2020-03-29 19:01+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
@@ -4211,25 +4211,25 @@ msgid "Producer"
 msgstr "생산 주체"
 
 #. TRANSLATORS: Ware Encyclopedia: 1 ware produced by a productionsite
-#: ../../data/tribes/scripting/help/ware_help.lua:107
+#: ../../data/tribes/scripting/help/ware_help.lua:124
 msgid "Ware produced:"
 msgstr ""
 
 #. TRANSLATORS: Ware Encyclopedia: More than 1 ware produced by a
 #. productionsite
-#: ../../data/tribes/scripting/help/ware_help.lua:110
+#: ../../data/tribes/scripting/help/ware_help.lua:127
 msgid "Wares produced:"
 msgstr ""
 
 #. TRANSLATORS: Ware Encyclopedia: Heading for 1 building and / or worker that
 #. consumes a ware
-#: ../../data/tribes/scripting/help/ware_help.lua:172
+#: ../../data/tribes/scripting/help/ware_help.lua:189
 msgid "Consumer"
 msgstr ""
 
 #. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
 #. consume a ware
-#: ../../data/tribes/scripting/help/ware_help.lua:175
+#: ../../data/tribes/scripting/help/ware_help.lua:192
 msgid "Consumers"
 msgstr ""
 

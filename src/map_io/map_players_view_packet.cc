@@ -308,7 +308,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 	Field& first_field = map[0];
 	const PlayerNumber nr_players = map.get_nrplayers();
 	iterate_players_existing(plnum, nr_players, egbase, player) {
-		Player::Field* const player_fields = player->fields_;
+		Player::Field* const player_fields = player->fields_.get();
 		uint32_t const gametime = egbase.get_gametime();
 
 		char unseen_times_filename[FILENAME_SIZE];
@@ -899,7 +899,7 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 	const PlayerNumber nr_players = map.get_nrplayers();
 	iterate_players_existing_const(
 	   plnum, nr_players, egbase,
-	   player) if (const Player::Field* const player_fields = player->fields_) {
+	   player) if (const Player::Field* const player_fields = player->fields_.get()) {
 		FileWrite unseen_times_file;
 		FileWrite node_immovable_kinds_file;
 		FileWrite node_immovables_file;

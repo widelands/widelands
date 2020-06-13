@@ -2,15 +2,15 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
-# Juanjo, 2015-2017,2019
+# Juanjo, 2015-2017,2019-2020
 # Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-22 20:01+0000\n"
-"PO-Revision-Date: 2020-04-12 17:32+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-05-09 16:47+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -99,7 +99,7 @@ msgstr "Un cavaller fosc"
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:109
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:222
 msgid "Diary of Lutius"
-msgstr "Diari d'en Lutius"
+msgstr "Agenda d'en Lutius"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:78
@@ -117,7 +117,7 @@ msgid ""
 "forest. Soon, we met a Barbarian tribe, which at first was friendly. A few "
 "of my men even traded with them and their children came to us, to admire our"
 " clean and tidy uniforms and weapons."
-msgstr "Amb un exèrcit de 150 homes, se'm va assignar la patrulla en la frontera nord, prop de les muntanyes Galdin en un gran, preciós i antic bosc. Aviat vam trobar una tribu bàrbara, que primer era amistosa. Uns quants dels meus homes fins i tot van comerciar-hi. Els seus nens se'ns apropaven i admiraven els nostres nets i pulcres uniformes i armes."
+msgstr "Amb un exèrcit de 150 homes, se'm va assignar la patrulla en la frontera nord, prop de les muntanyes Galdin en un gran, preciós i antic bosc. Aviat vam trobar una tribu bàrbara, que primer era amistosa. Uns quants dels meus homes fins i tot van comerciar-hi. Els seus infants se'ns apropaven i admiraven els nostres nets i pulcres uniformes i armes."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:84

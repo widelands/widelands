@@ -61,7 +61,7 @@ constexpr uint16_t kCurrentPacketPFBuilding = 2;
 // Responsible for warehouses and expedition bootstraps
 constexpr uint16_t kCurrentPacketVersionWarehouse = 8;
 constexpr uint16_t kCurrentPacketVersionMilitarysite = 6;
-constexpr uint16_t kCurrentPacketVersionProductionsite = 8;
+constexpr uint16_t kCurrentPacketVersionProductionsite = 9;
 constexpr uint16_t kCurrentPacketVersionTrainingsite = 6;
 
 void MapBuildingdataPacket::read(FileSystem& fs,
@@ -458,6 +458,9 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 
 				uint32_t nr_requests = fr.unsigned_32();
 				while (nr_requests--) {
+					// We have no information regarding the index or WareWorker type yet.
+					// Initialize with default values which will be overridden by read().
+					// read() will also take care of adding the request to the correct economy.
 					pw.requests.push_back(new Request(warehouse, 0, &Warehouse::request_cb, wwWORKER));
 					pw.requests.back()->read(fr, game, mol, tribes_lookup_table);
 				}
@@ -486,7 +489,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 				//  Add to map of military influence.
 				Area<FCoords> a(map.get_fcoords(warehouse.get_position()), conquer_radius);
 				const Field& first_map_field = map[0];
-				Player::Field* const player_fields = player->fields_;
+				Player::Field* const player_fields = player->fields_.get();
 				MapRegion<Area<FCoords>> mr(map, a);
 				do {
 					player_fields[mr.location().field - &first_map_field].military_influence +=
@@ -539,7 +542,7 @@ void MapBuildingdataPacket::read_militarysite(MilitarySite& militarysite,
 				Area<FCoords> a(
 				   map.get_fcoords(militarysite.get_position()), militarysite.descr().get_conquers());
 				const Field& first_map_field = map[0];
-				Player::Field* const player_fields = militarysite.owner().fields_;
+				Player::Field* const player_fields = militarysite.owner().fields_.get();
 				MapRegion<Area<FCoords>> mr(map, a);
 				do {
 					player_fields[mr.location().field - &first_map_field].military_influence +=
@@ -780,8 +783,25 @@ void MapBuildingdataPacket::read_productionsite(
 			productionsite.statistics_string_on_changed_statistics_ = fr.c_string();
 			productionsite.production_result_ = fr.c_string();
 
-			// TODO(GunChleoc): Savegame compatibility, remove after Build 21.
-			if (packet_version >= 7) {
+			// TODO(GunChleoc & Nordfriese): Savegame compatibility, remove after Build 21.
+			if (packet_version >= 9) {
+				productionsite.main_worker_ = -1;
+				if (fr.unsigned_8()) {
+					const Worker& worker = mol.get<Worker>(fr.unsigned_32());
+					int32_t i = 0;
+					// Determine main worker's index as this may change during saveloading (#3891)
+					for (const auto* wp = productionsite.working_positions();; ++wp) {
+						if (wp->worker == &worker) {
+							productionsite.main_worker_ = i;
+							break;
+						}
+						++i;
+					}
+				}
+			} else if (packet_version >= 7) {
+				// May be buggy for workers whose type is present in the building
+				// multiple times (issue #3538). Fortunately the packet versions
+				// with this problem are newer than b20 and older than b21.
 				productionsite.main_worker_ = fr.signed_32();
 			} else {
 				productionsite.main_worker_ = productionsite.working_positions_[0].worker ? 0 : -1;
@@ -876,7 +896,9 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 				uint8_t somebits = fr.unsigned_8();
 				trainingsite.latest_trainee_was_kickout_ = 0 < (somebits & 1);
 				trainingsite.requesting_weak_trainees_ = 0 < (somebits & 2);
-				assert(4 > somebits);
+				trainingsite.repeated_layoff_inc_ = 0 < (somebits & 4);
+				trainingsite.recent_capacity_increase_ = 0 < (somebits & 8);
+				assert(16 > somebits);
 				trainingsite.repeated_layoff_ctr_ = fr.unsigned_8();
 				trainingsite.request_open_since_ = fr.unsigned_32();
 			} else {
@@ -1292,7 +1314,13 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 	fw.string(productionsite.statistics_string_on_changed_statistics_);
 	fw.string(productionsite.production_result());
 
-	fw.signed_32(productionsite.main_worker_);
+	if (productionsite.main_worker_ < 0) {
+		fw.unsigned_8(0);
+	} else {
+		fw.unsigned_8(1);
+		fw.unsigned_32(mos.get_object_file_index(
+		   *productionsite.working_positions_[productionsite.main_worker_].worker));
+	}
 }
 
 /*
@@ -1348,6 +1376,12 @@ void MapBuildingdataPacket::write_trainingsite(const TrainingSite& trainingsite,
 	}
 	if (trainingsite.requesting_weak_trainees_) {
 		somebits += 2;
+	}
+	if (trainingsite.repeated_layoff_inc_) {
+		somebits += 4;
+	}
+	if (trainingsite.recent_capacity_increase_) {
+		somebits += 8;
 	}
 	fw.unsigned_8(somebits);
 	fw.unsigned_8(trainingsite.repeated_layoff_ctr_);

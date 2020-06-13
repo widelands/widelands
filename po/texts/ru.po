@@ -7,10 +7,10 @@
 # Anton Khabarov <2233009@gmail.com>, 2015-2016,2018
 # Максим Дронь <dronmax@gmail.com>, 2015
 # CupIvan <mail@cupivan.ru>, 2015
-# Viktor S <awsswa59@gmail.com>, 2018-2019
+# Viktor S <awsswa59@gmail.com>, 2018-2020
 # Yuriy Sokolov <lention@mail.ru>, 2015,2018
 # 6da4f49c4b78e697e34b24b2a66289f5, 2016
-# Денис Шабанов <inactive+Dodolphin@transifex.com>, 2016
+# bcd998a534fa92d05529385de8735da7_84390ba <27ce5340b01d4cdb2226fa37a41159b9_403942>, 2016
 # Олег Шевченко <olegrock@gmail.com>, 2017
 # Олег Шевченко <olegrock@gmail.com>, 2017-2019
 # Fede4ka, 2015
@@ -18,9 +18,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-22 20:01+0000\n"
-"PO-Revision-Date: 2020-03-29 19:01+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-04-24 12:05+0000\n"
+"Last-Translator: Viktor S <awsswa59@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -423,7 +423,7 @@ msgstr "Переключить показ мест строительства"
 #: ../../data/txts/help/common_helptexts.lua:49
 msgctxt "hotkey"
 msgid "Ctrl + F"
-msgstr ""
+msgstr "Ctrl + F"
 
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"
@@ -767,48 +767,48 @@ msgstr "Изменить масштаб можно колесом мыши ил�
 msgid ""
 "Use the ‘,’ (comma) and ‘.’ (period) keys to quickly jump between recently "
 "visited locations."
-msgstr ""
+msgstr "Используйте клавиши ‘,’ (запятая) и ‘.’ (Точка) для быстрого перехода между недавно посещенными местами."
 
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
 msgid "Ctrl+(Page Up/Page Down)"
-msgstr ""
+msgstr "Ctrl+(Page Up/Page Down)"
 
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
 msgid "Page Up/Page Down"
-msgstr ""
+msgstr "Page Up/Page Down"
 
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
 msgid "Shift+(Page Up/Page Down)"
-msgstr ""
+msgstr "Shift+(Page Up/Page Down)"
 
 #: ../../data/txts/tips/general_game.lua:79
 msgid ""
 "Speed up or slow down the game with %1%. Use %2% for rapid change, %3% will "
 "adjust speed smoothly."
-msgstr ""
+msgstr "Ускорьте или замедлите игру с помощью %1%. Используйте %2% для ускорения, %3% для замедления."
 
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
 msgid "Arrow keys"
-msgstr ""
+msgstr "Клавиши со стрелками"
 
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
 msgid "Ctrl+Arrow keys"
-msgstr ""
+msgstr "Ctrl+Клавиши со стрелками"
 
 #: ../../data/txts/tips/general_game.lua:83
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
-msgstr ""
+msgstr "Перемешаться по карте, используя %1%. %2% будет перемещаться быстрее, %3% перемещается медленно."
 
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
 msgid "Shift+Arrow keys"
-msgstr ""
+msgstr "Shift+Клавиши со стрелками"
 
 #: ../../data/txts/tips/general_game.lua:87
 msgid ""

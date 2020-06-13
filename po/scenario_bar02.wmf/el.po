@@ -3,15 +3,15 @@
 # 
 # Translators:
 # erimitis, 2018
-# Panos Ioannidis <panos.ioannidis@gmail.com>, 2018
+# Panos Ioannidis <panos.ioannidis@gmail.com>, 2018,2020
 # Philip Prescott-Decie <presdec@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-22 20:01+0000\n"
-"PO-Revision-Date: 2020-04-12 17:32+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-04-29 17:15+0000\n"
+"Last-Translator: Panos Ioannidis <panos.ioannidis@gmail.com>\n"
 "Language-Team: Greek (http://www.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -203,7 +203,7 @@ msgid ""
 " battle arena are used for training soldiers in their different attributes. "
 "These attributes are important in fights and the better a soldier is, the "
 "higher is the chance to win a fight."
-msgstr "Οι στρατώνες εκπαιδεύουν τους βασικούς στρατιώτες, ενώ οι τόποι εκπαίδευσης (όπως ένα στρατόπεδο εκπαίδευσης ή μια αρένα μάχης) χρησιμοποιούνται για την εκπαίδευση των στρατιωτών στις διάφορες ιδιότητές τους. Αυτές είναι σημαντικές στις μάχες, επειδή όσο καλύτερος είναι ένας στρατιώτης, τόσο μεγαλύτερη η πιθανότητα να κερδίσει μια μάχη."
+msgstr "Οι στρατώνες εκπαιδεύουν τους βασικούς στρατιώτες, ενώ οι τόποι εκπαίδευσης, όπως ένα στρατόπεδο εκπαίδευσης ή μια αρένα μάχης, χρησιμοποιούνται για την εκπαίδευση των στρατιωτών στις διάφορες ιδιότητές τους. Αυτές είναι σημαντικές στις μάχες, επειδή όσο καλύτερος είναι ένας στρατιώτης, τόσο μεγαλύτερη η πιθανότητα να κερδίσει μια μάχη."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:114
 msgid "The attributes are: health, attack, defense and evade."
@@ -362,7 +362,7 @@ msgid ""
 "ring is intact. Until now, he has not answered any of my messages. But the "
 "time I spend waiting won’t be lost. I will train my soldiers further and "
 "prepare for battle."
-msgstr ""
+msgstr "Έχω στείλει άντρες για να συναντηθούν με τον Kalitath στο φρούριό του. Έχει οχυρώσει την πρώην κύρια είσοδο στην πρωτεύουσα και προσπαθεί να στήσει έναν πολιορκητικό δακτύλιο γύρω από την Al'thunran. Δεν θα αφήσει κανέναν να μπει ή να βγει από την πόλη όσο παραμένει αυτός ο δακτύλιος. Μέχρι στιγμής, δεν έχει απαντήσει σε κανένα από τα μηνύματά μου. Αλλά ο χρόνος που ξοδεύω περιμένοντας δεν θα πάει χαμένος. Θα εκπαιδεύσω τους στρατιώτες μου ακόμα περισσότερο και θα προετοιμαστώ για μάχη."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:206
 msgid "Your Loyal Companion"
@@ -379,7 +379,7 @@ msgid ""
 " a message from Kalitath, telling us that he will punish every move of our "
 "troops with their own blood! We cannot accept this behavior. From now on, "
 "there is war between Kalitath and us!"
-msgstr ""
+msgstr "Τον ΜΠΑΣΤΑΡΔΟ! Μόνο ένας άντρας από την εμπροσθοφυλακή μας γύρισε πίσω ζωντανός. Έφερε ένα μήνυμα από τον Kalitath, το οποίο λέει ότι θα τιμωρήσει κάθε κίνηση των στρατιωτών μας με αίμα! Δεν μπορούμε να αποδεχτούμε αυτήν την συμπεριφορά. Από δω και στο εξής, έχουμε πόλεμο με τον Kalitath!"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:217
 msgid "Renegade Fortification"

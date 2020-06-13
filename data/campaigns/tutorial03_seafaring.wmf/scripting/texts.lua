@@ -58,7 +58,7 @@ obj_build_port = {
    name = "build_port",
    title = _"Build a port",
    number = 1,
-   body = objective_text("Build a port in the northern part of your camp",
+   body = objective_text(_"Build a port in the northern part of your camp",
       p(_[[You always need a port when you want to transport wares with a ship.]]) ..
       li(_[[Build a port next to your castle, on the blue port space icon.]]) ..
       li_arrow(_[[Ports are built like normal buildings, but are only available on blue port spaces. Just click on a field with the icon and the building menu automatically offers you to build a port.]]) ..
@@ -81,7 +81,7 @@ obj_build_shipyard = {
    name = "build_shipyard",
    title = _"Build a shipyard",
    number = 1,
-   body = objective_text("Build a shipyard close to the coast",
+   body = objective_text(_"Build a shipyard close to the coast",
       p(_[[Ships are produced by a shipyard. It is a medium building.]]) ..
       li(_[[Build a shipyard close to the shore of the southern part of your territory.]]) ..
       li_arrow(_[[The shipyard is a medium building. Although it can be built everywhere on the map, the shipwright only works when he is close to the water and there are no trees or roads at the shoreline.]])
@@ -103,7 +103,7 @@ obj_make_ships = {
    name = "wait_for_ships",
    title = _"Ships",
    number = 1,
-   body = objective_text("Construct two ships",
+   body = objective_text(_"Construct two ships",
       p(_[[Ships are constructed automatically when the shipyard is complete and the needed wares have been delivered.]]) ..
       li(_[[Wait until the shipwright has constructed two ships.]]) ..
       li_arrow(_[[Do not forget to stop your shipyard when you have enough ships.]])
@@ -155,7 +155,7 @@ obj_expedition_start = {
    name = "start_expedition",
    title = _"Expedition",
    number = 1,
-   body = objective_text("Start an expedition",
+   body = objective_text(_"Start an expedition",
       li(_[[Start an expedition.]]) ..
       li_image("images/wui/buildings/start_expedition.png", _[[To do so, click on the ‘Start Expedition’ button in any port. A new tab where you can see the needed wares will appear.]])
    )
@@ -179,7 +179,7 @@ obj_expedition_sail = {
    title = _"Explore",
    number = 1,
    -- TRANSLATORS: "Found" as in "founding", NOT as in "finding"
-   body = objective_text("Found a settlement",
+   body = objective_text(_"Found a settlement",
       li(_[[Navigate your ship to an island that could contain iron ore.]]) ..
       li_arrow(_[[When you click on the expedition ship, a window opens where you can control your ship.]]) ..
       li(_[[When you have found a suitable port space, build a port there.]])
@@ -214,7 +214,7 @@ obj_expedition_iron = {
    name = "build_iron_mine",
    title = _"Iron Mine",
    number = 1,
-   body = objective_text("Build an iron mine on the island",
+   body = objective_text(_"Build an iron mine on the island",
       p(_[[Our economy lacks resources.]]) ..
       li_arrow(_[[Start mining iron ore in mountains on the island.]])
    )
@@ -250,7 +250,7 @@ obj_ferry_yard = {
    name = "build_ferry_yard",
    title = _"Build a ferry yard",
    number = 1,
-   body = objective_text("Build a ferry yard close to the shore",
+   body = objective_text(_"Build a ferry yard close to the shore",
       p(_[[Ferries are constructed by a ferry yard.]]) ..
       li_arrow(_[[You need to build the ferry yard close to the shore, otherwise it won’t be able to build ferries there.]])
    )
@@ -294,7 +294,7 @@ obj_waterways = {
    name = "build_waterways",
    title = _"Waterways",
    number = 1,
-   body = objective_text("Build a gold mine and waterways",
+   body = objective_text(_"Build a gold mine and waterways",
       p(_[[Build a gold mine on the mountain in the south, and connect it to the mainland by building waterways over the streams.]]) ..
       li_arrow(_[[A waterway is built just like a road: You click on a flag near the shore, choose ‘Build a waterway’, and select the path for the waterway just as you would do for a road.]]) ..
       li_arrow(_[[The only rule for waterway placement is that the two triangles directly adjacent to each segment of the waterway have to be water, and the entire path needs to be within your territory.]])
