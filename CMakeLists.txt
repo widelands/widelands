@@ -323,6 +323,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
       # If using lto, it needs to happen both during compile and link, else no benefits.
       wl_add_flag(WL_GENERIC_CXX_FLAGS "-flto")
       SET(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -flto")
+      message(STATUS "Enabling link-time optimizations")
     endif()
   endif(CMAKE_SYSTEM MATCHES "Linux")
 endif(CMAKE_BUILD_TYPE STREQUAL "Release")
