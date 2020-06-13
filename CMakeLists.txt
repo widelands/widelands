@@ -302,6 +302,9 @@ wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=return-type")
 wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=shadow")
 wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=uninitialized")
 
+# Cross-compile-unit optimization slows linking significantly.
+# Therefore, impatient user may want to prevent that.
+if(USE_FLTO_IF_AVAILABLE STREQUAL "yes")
 # Cross-compile-unit optimization not supported by gcc with debug on!
 # Therefore, this may only be done with Release builds.
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
@@ -323,6 +326,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
     endif()
   endif(CMAKE_SYSTEM MATCHES "Linux")
 endif(CMAKE_BUILD_TYPE STREQUAL "Release")
+endif(USE_FLTO_IF_AVAILABLE STREQUAL  "yes")
 
 IF (WIN32)
   add_definitions(-DMINGW_HAS_SECURE_API -DWIN32_LEAN_AND_MEAN -D__STDC_FORMAT_MACROS -D__USE_MINGW_ANSI_STDIO)
