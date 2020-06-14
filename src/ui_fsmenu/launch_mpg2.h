@@ -21,16 +21,13 @@
 #define WL_UI_FSMENU_LAUNCH_MPG2_H
 
 #include <memory>
-#include <ui_fsmenu/multiplayersetupgroup.h>
-#include <wui/game_chat_panel2.h>
 
 #include "logic/game_settings.h"
 #include "ui_basic/button.h"
-#include "ui_basic/multilinetextarea.h"
-#include "ui_basic/textarea.h"
 #include "ui_fsmenu/helpwindow.h"
 #include "ui_fsmenu/launch_game.h"
-#include "wui/suggested_teams_box.h"
+#include "ui_fsmenu/multiplayersetupgroup.h"
+#include "wui/game_chat_panel2.h"
 
 struct ChatProvider;
 

@@ -38,11 +38,8 @@
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
-#include "ui_basic/mouse_constants.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
-#include "ui_fsmenu/multiplayersetupgroup.h"
-#include "wui/game_chat_panel.h"
 
 /// Simple user interaction window for selecting either map, save or cancel
 struct MapOrSaveSelectionWindow : public UI::Window {

@@ -21,7 +21,6 @@
 #define WL_UI_FSMENU_LAUNCH_GAME_H
 
 #include <memory>
-#include <wui/suggested_teams_box.h>
 
 #include "logic/widelands.h"
 #include "ui_basic/button.h"
@@ -30,9 +29,9 @@
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/base.h"
 #include "ui_fsmenu/mapdetailsbox.h"
+#include "wui/suggested_teams_box.h"
 
 class GameController;
-struct GameSettingsProvider;
 class LuaInterface;
 
 /**
