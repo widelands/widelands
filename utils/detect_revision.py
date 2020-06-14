@@ -59,7 +59,7 @@ def detect_git_revision():
             ['git', 'rev-parse', '--short=7', 'HEAD'], cwd=base_path)
         git_revnum = stdout.rstrip()
         stdout = _communicate_utf8(
-            ['git', 'symbolic-ref', '--short', 'HEAD'], cwd=base_path)
+            ['git', 'rev-parse', '--abbrev-ref', 'HEAD'], cwd=base_path)
         git_abbrev = stdout.rstrip()
         if git_count and git_revnum and git_abbrev:
             return 'r%s[%s@%s]' % (git_count, git_revnum, git_abbrev)
