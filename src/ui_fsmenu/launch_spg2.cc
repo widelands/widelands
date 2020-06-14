@@ -21,8 +21,8 @@ FullscreenMenuLaunchSPG2::FullscreenMenuLaunchSPG2(GameSettingsProvider* const s
 
 	ok_.set_enabled(settings_->can_launch());
 
-	subscriber_ = Notifications::subscribe<NoteGameSettings>(
-	   [this](const NoteGameSettings& ) { update(); });
+	subscriber_ =
+	   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings&) { update(); });
 }
 
 /**
@@ -78,7 +78,7 @@ void FullscreenMenuLaunchSPG2::update() {
 	map_loader->preload_map(true);
 
 	map_details.update(settings_, map);
-   suggested_teams_box_.show(map.get_suggested_teams());
+	suggested_teams_box_.show(map.get_suggested_teams());
 	ok_.set_enabled(settings_->can_launch());
 
 	peaceful_.set_state(settings_->is_peaceful_mode());

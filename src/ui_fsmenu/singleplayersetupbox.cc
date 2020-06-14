@@ -103,7 +103,6 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
 	add(start_type.get_dropdown());
 	add(teams_.get_dropdown());
 
-
 	player_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 	player_.set_enabled(false);
 }
