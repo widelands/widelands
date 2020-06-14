@@ -168,9 +168,9 @@ FullscreenMenuLaunchMPG2::~FullscreenMenuLaunchMPG2() {
 void FullscreenMenuLaunchMPG2::layout() {
 	standard_element_width_ = get_w() / 4;
 	standard_element_height_ = get_h() * 9 / 200;
-	mpsg_.set_max_size(0, get_h() / 3);
+	mpsg_.set_max_size(0, get_h() / 2);
 	mpsg_.force_new_dimensions(scale_factor(), get_w() * 1/2,standard_element_height_);
-	chat_.force_new_dimensions(scale_factor(), get_w() * 1/2, get_h() / 3);
+	chat_.force_new_dimensions(scale_factor(), get_w() * 1/2, get_h() / 4);
 
 	FullscreenMenuLaunchGame::layout();
 

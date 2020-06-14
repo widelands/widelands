@@ -97,13 +97,12 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
             settings,
             id) {
 
-	add_space(0);
 	add(&player_);
 	add(player_type_.get_dropdown());
 	add(tribe_.get_dropdown());
 	add(start_type.get_dropdown());
 	add(teams_.get_dropdown());
-	add_space(0);
+
 
 	player_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 	player_.set_enabled(false);
