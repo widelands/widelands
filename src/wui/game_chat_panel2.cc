@@ -49,9 +49,8 @@ GameChatPanel2::GameChatPanel2(UI::Panel* parent,
      editbox(this, 0, 0, 0, style),
      chat_message_counter(0),
      chat_sound(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {
-
-	editbox.ok.connect(boost::bind(&GameChatPanel2::key_enter, this));
-	editbox.cancel.connect(boost::bind(&GameChatPanel2::key_escape, this));
+	editbox.ok.connect([this]() { key_enter(); });
+	editbox.cancel.connect([this]() { key_escape(); });
 	editbox.activate_history(true);
 
 	add(&chatbox, Resizing::kExpandBoth);
@@ -139,8 +138,7 @@ void GameChatPanel2::force_new_dimensions(float, uint32_t width, uint32_t height
 }
 
 void GameChatPanel2::draw(RenderTarget& dst) {
-   UI::Box::draw(dst);
-   dst.brighten_rect(
-      Recti(chatbox.get_x(), chatbox.get_y(), chatbox.get_w(), chatbox.get_h()), -MOUSE_OVER_BRIGHT_FACTOR);
+	UI::Box::draw(dst);
+	dst.brighten_rect(Recti(chatbox.get_x(), chatbox.get_y(), chatbox.get_w(), chatbox.get_h()),
+	                  -MOUSE_OVER_BRIGHT_FACTOR);
 }
-

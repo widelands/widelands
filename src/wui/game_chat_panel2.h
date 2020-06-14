@@ -26,12 +26,11 @@
 #include "ui_basic/box.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilinetextarea.h"
-
+//TODO(jmoerschbach): implement box layout in internet lobby so this can be used also in there
 /**
  * Provides a box panel that contains chat message scrollbar and a chat message
  * entry field. This will replace GameChatPanel as soon as all users of gamechatpanel
  * actually support box layouting...
- * TODO(jmoerschbach) implement box layout in internet lobby so this can be used also in there
  */
 struct GameChatPanel2 : public UI::Box {
 	GameChatPanel2(UI::Panel*,

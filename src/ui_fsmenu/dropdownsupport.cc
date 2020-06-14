@@ -1,6 +1,7 @@
-#include "dropdownsupport.h"
+#include "ui_fsmenu/dropdownsupport.h"
 
 #include <boost/algorithm/string.hpp>
+#include <memory>
 
 #include "ai/computer_player.h"
 #include "base/i18n.h"

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_WUI_MULTIPLAYERSETUPGROUP_H
-#define WL_WUI_MULTIPLAYERSETUPGROUP_H
+#ifndef WL_UI_FSMENU_MULTIPLAYERSETUPGROUP_H
+#define WL_UI_FSMENU_MULTIPLAYERSETUPGROUP_H
 
 #include <memory>
 
@@ -48,7 +48,7 @@ struct MultiPlayerSetupGroup : public UI::Box {
 	                      uint32_t buth);
 	~MultiPlayerSetupGroup() override;
 
-	void force_new_dimensions(float scale, uint32_t  max_width,uint32_t standard_element_height);
+	void force_new_dimensions(float scale, uint32_t max_width, uint32_t standard_element_height);
 
 private:
 	void update();
@@ -68,4 +68,4 @@ private:
 	std::map<std::string, std::string> tribenames_;
 };
 
-#endif  // end of include guard: WL_WUI_MULTIPLAYERSETUPGROUP_H
+#endif  // end of include guard: WL_UI_FSMENU_MULTIPLAYERSETUPGROUP_H

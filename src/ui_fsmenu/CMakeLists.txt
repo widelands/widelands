@@ -105,9 +105,12 @@ wl_library(ui_fsmenu_gameloading
     mapdetailsbox.h
     singleplayersetupbox.cc
     singleplayersetupbox.h
+		multiplayersetupgroup.cc
+		multiplayersetupgroup.h
     dropdownsupport.cc
     dropdownsupport.h
   DEPENDS
+		ai
     base_exceptions
     base_i18n
     graphic

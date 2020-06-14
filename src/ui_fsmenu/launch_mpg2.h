@@ -21,8 +21,8 @@
 #define WL_UI_FSMENU_LAUNCH_MPG2_H
 
 #include <memory>
+#include <ui_fsmenu/multiplayersetupgroup.h>
 #include <wui/game_chat_panel2.h>
-#include <wui/multiplayersetupgroup.h>
 
 #include "logic/game_settings.h"
 #include "ui_basic/button.h"

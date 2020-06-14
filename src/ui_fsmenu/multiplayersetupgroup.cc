@@ -17,29 +17,21 @@
  *
  */
 
-#include "wui/multiplayersetupgroup.h"
+#include "ui_fsmenu/multiplayersetupgroup.h"
 
 #include <memory>
 
-#include <bits/stl_algobase.h>
 #include <boost/algorithm/string.hpp>
 
 #include "ai/computer_player.h"
 #include "base/i18n.h"
-#include "base/log.h"
-#include "base/wexception.h"
-#include "graphic/graphic.h"
 #include "graphic/playercolor.h"
 #include "logic/game.h"
-#include "logic/game_settings.h"
-#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/mouse_constants.h"
-#include "ui_basic/scrollbar.h"
-#include "ui_basic/textarea.h"
 
 #define AI_NAME_PREFIX "ai" AI_NAME_SEPARATOR
 
@@ -98,7 +90,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 			   case NoteGameSettings::Action::kPlayer:
 				   break;
 			   }
-			});
+		   });
 	}
 
 	/// Update dropdown sizes
@@ -292,17 +284,18 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					   update();
 				   }
 			   }
-			});
+		   });
 
 		// Init dropdowns
 		update();
 	}
 
-	void force_new_dimensions(float, uint32_t max_width,uint32_t standard_element_height) {
+	void force_new_dimensions(float, uint32_t max_width, uint32_t standard_element_height) {
 		player.set_desired_size(standard_element_height, standard_element_height);
 		type_dropdown_.set_desired_size(standard_element_height, standard_element_height);
 		tribes_dropdown_.set_desired_size(standard_element_height, standard_element_height);
-		init_dropdown_.set_desired_size(max_width-4*standard_element_height, standard_element_height);
+		init_dropdown_.set_desired_size(
+		   max_width - 4 * standard_element_height, standard_element_height);
 		team_dropdown_.set_desired_size(standard_element_height, standard_element_height);
 	}
 
@@ -762,13 +755,16 @@ void MultiPlayerSetupGroup::draw(RenderTarget& dst) {
 	}
 }
 
-void MultiPlayerSetupGroup::force_new_dimensions(float scale, uint32_t max_width,uint32_t standard_element_height) {
+void MultiPlayerSetupGroup::force_new_dimensions(float scale,
+                                                 uint32_t max_width,
+                                                 uint32_t standard_element_height) {
 	players_.set_font_scale(scale);
 	clients_.set_font_scale(scale);
 	for (auto& multiPlayerClientGroup : multi_player_client_groups) {
 		multiPlayerClientGroup->force_new_dimensions(scale, standard_element_height);
 	}
 	for (auto& multiPlayerPlayerGroup : multi_player_player_groups) {
-		multiPlayerPlayerGroup->force_new_dimensions(scale, max_width-clientbox.get_w(),standard_element_height);
+		multiPlayerPlayerGroup->force_new_dimensions(
+		   scale, max_width - clientbox.get_w(), standard_element_height);
 	}
 }

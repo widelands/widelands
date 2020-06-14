@@ -3,8 +3,9 @@
 
 #include <ui_basic/textarea.h>
 #include <vector>
+#include <memory>
 
-#include "dropdownsupport.h"
+#include "ui_fsmenu/dropdownsupport.h"
 #include "logic/game_settings.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"

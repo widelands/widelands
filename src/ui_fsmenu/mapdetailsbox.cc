@@ -1,8 +1,6 @@
-#include "mapdetailsbox.h"
+#include "ui_fsmenu/mapdetailsbox.h"
 
-#include "base/i18n.h"
 #include "logic/game_settings.h"
-#include "logic/map.h"
 #include "map_io/map_loader.h"
 
 MapDetailsBox::MapDetailsBox(

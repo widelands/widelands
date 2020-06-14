@@ -1,4 +1,4 @@
-#include "singleplayersetupbox.h"
+#include "ui_fsmenu/singleplayersetupbox.h"
 
 #include <memory>
 

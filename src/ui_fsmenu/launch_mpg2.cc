@@ -41,8 +41,8 @@
 #include "ui_basic/mouse_constants.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
+#include "ui_fsmenu/multiplayersetupgroup.h"
 #include "wui/game_chat_panel.h"
-#include "wui/multiplayersetupgroup.h"
 
 /// Simple user interaction window for selecting either map, save or cancel
 struct MapOrSaveSelectionWindow : public UI::Window {
@@ -60,24 +60,20 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		UI::Button* btn =
 		   new UI::Button(this, "map", space, y, butw, buth, UI::ButtonStyle::kFsMenuSecondary,
 		                  _("Map"), _("Select a map"));
-		btn->sigclicked.connect(boost::bind(&MapOrSaveSelectionWindow::pressedButton,
-		                                    boost::ref(*this),
-		                                    FullscreenMenuBase::MenuTarget::kNormalGame));
+		btn->sigclicked.connect(
+		   [this]() { pressedButton(FullscreenMenuBase::MenuTarget::kNormalGame); });
 
 		btn = new UI::Button(this, "saved_game", space, y + buth + space, butw, buth,
 		                     UI::ButtonStyle::kFsMenuSecondary,
 		                     /** Translators: This is a button to select a savegame */
 		                     _("Saved Game"), _("Select a saved game"));
-		btn->sigclicked.connect(boost::bind(&MapOrSaveSelectionWindow::pressedButton,
-		                                    boost::ref(*this),
-		                                    FullscreenMenuBase::MenuTarget::kScenarioGame));
+		btn->sigclicked.connect(
+		   [this]() { pressedButton(FullscreenMenuBase::MenuTarget::kScenarioGame); });
 
 		btn =
 		   new UI::Button(this, "cancel", space + butw / 4, y + 3 * buth + 2 * space, butw / 2, buth,
 		                  UI::ButtonStyle::kFsMenuSecondary, _("Cancel"), _("Cancel selection"));
-		btn->sigclicked.connect(boost::bind(&MapOrSaveSelectionWindow::pressedButton,
-		                                    boost::ref(*this),
-		                                    FullscreenMenuBase::MenuTarget::kBack));
+		btn->sigclicked.connect([this]() { pressedButton(FullscreenMenuBase::MenuTarget::kBack); });
 	}
 
 	void think() override {
@@ -129,8 +125,7 @@ FullscreenMenuLaunchMPG2::FullscreenMenuLaunchMPG2(GameSettingsProvider* const s
            UI::PanelStyle::kFsMenu) {
 
 	title_.set_text(_("Multiplayer Game Setup"));
-	help_button_.sigclicked.connect(
-	   boost::bind(&FullscreenMenuLaunchMPG2::help_clicked, boost::ref(*this)));
+	help_button_.sigclicked.connect([this]() { help_clicked(); });
 
 	if (settings_->can_change_map()) {
 		map_details.set_map_description_text(_("Please select a map or saved game."));
@@ -138,7 +133,6 @@ FullscreenMenuLaunchMPG2::FullscreenMenuLaunchMPG2(GameSettingsProvider* const s
 		//		change_map_or_save_.set_enabled(settings_->can_change_map());
 		map_details.set_map_description_text(_("The host has not yet selected a map or saved game."));
 	}
-
 
 	individual_content_box.add(&mpsg_, UI::Box::Resizing::kFullSize);
 	individual_content_box.add_inf_space();
@@ -161,8 +155,8 @@ void FullscreenMenuLaunchMPG2::layout() {
 	standard_element_width_ = get_w() / 4;
 	standard_element_height_ = get_h() * 9 / 200;
 	mpsg_.set_max_size(0, get_h() / 2);
-	mpsg_.force_new_dimensions(scale_factor(), get_w() * 1/2,standard_element_height_);
-	chat_.force_new_dimensions(scale_factor(), get_w() * 1/2, get_h() / 4);
+	mpsg_.force_new_dimensions(scale_factor(), get_w() * 1 / 2, standard_element_height_);
+	chat_.force_new_dimensions(scale_factor(), get_w() * 1 / 2, get_h() / 4);
 
 	FullscreenMenuLaunchGame::layout();
 

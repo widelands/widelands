@@ -1,4 +1,4 @@
-#include "launch_spg2.h"
+#include "ui_fsmenu/launch_spg2.h"
 
 #include <memory>
 
@@ -7,7 +7,7 @@
 #include "logic/game_controller.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
-#include "mapselect.h"
+#include "ui_fsmenu/mapselect.h"
 
 FullscreenMenuLaunchSPG2::FullscreenMenuLaunchSPG2(GameSettingsProvider* const settings,
                                                    GameController* const ctrl)
@@ -71,7 +71,6 @@ bool FullscreenMenuLaunchSPG2::clicked_select_map() {
 }
 
 void FullscreenMenuLaunchSPG2::update() {
-	const GameSettings& settings = settings_->settings();
 	Widelands::Map map;  //  MapLoader needs a place to put its preload data
 	std::unique_ptr<Widelands::MapLoader> map_loader(
 	   map.get_correct_loader(settings_->settings().mapfilename));
