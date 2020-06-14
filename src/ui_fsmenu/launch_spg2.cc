@@ -17,12 +17,12 @@ FullscreenMenuLaunchSPG2::FullscreenMenuLaunchSPG2(GameSettingsProvider* const s
 
 	individual_content_box.add(&player_setup, UI::Box::Resizing::kExpandBoth);
 
-	title_.set_text("Launch game");
+	title_.set_text(_("Launch game"));
 
 	ok_.set_enabled(settings_->can_launch());
 
 	subscriber_ = Notifications::subscribe<NoteGameSettings>(
-	   [this](const NoteGameSettings& note) { update(); });
+	   [this](const NoteGameSettings& ) { update(); });
 }
 
 /**
@@ -57,10 +57,9 @@ bool FullscreenMenuLaunchSPG2::clicked_select_map() {
 	settings_->set_scenario(is_scenario_);
 
 	const MapData& mapdata = *msm.get_map();
-	nr_players_ = mapdata.nrplayers;
 
 	//	ensure_valid_host_position(nr_players_);
-	settings_->set_map(mapdata.name, mapdata.filename, nr_players_);
+	settings_->set_map(mapdata.name, mapdata.filename, mapdata.nrplayers);
 	update_win_conditions();
 	update_peaceful_mode();
 
@@ -80,8 +79,7 @@ void FullscreenMenuLaunchSPG2::update() {
 	map_loader->preload_map(true);
 
 	map_details.update(settings_, map);
-	nr_players_ = settings.players.size();
-
+   suggested_teams_box_.show(map.get_suggested_teams());
 	ok_.set_enabled(settings_->can_launch());
 
 	peaceful_.set_state(settings_->is_peaceful_mode());

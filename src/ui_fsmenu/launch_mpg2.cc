@@ -139,18 +139,10 @@ FullscreenMenuLaunchMPG2::FullscreenMenuLaunchMPG2(GameSettingsProvider* const s
 		map_details.set_map_description_text(_("The host has not yet selected a map or saved game."));
 	}
 
-	//	chat_ = new GameChatPanel();
-
-	// Y coordinate will be set later, when we know how high this box will get.
-	//	suggested_teams_box_ =
-	//	   new UI::SuggestedTeamsBox(&individual_content_box, right_column_x_, 0, UI::Box::Vertical,
-	//	                             padding_, indent_, get_w() - right_column_x_, 4 * label_height_);
 
 	individual_content_box.add(&mpsg_, UI::Box::Resizing::kFullSize);
-	//	individual_content_box.add(suggested_teams_box_, UI::Box::Resizing::kExpandBoth);
 	individual_content_box.add_inf_space();
 	individual_content_box.add(&chat_, UI::Box::Resizing::kExpandBoth);
-	//	individual_content_box.add_space(2 * standard_element_height_);
 	layout();
 	// If we are the host, open the map or save selection menu at startup
 	if (settings_->settings().usernum == 0 && settings_->settings().mapname.empty()) {
