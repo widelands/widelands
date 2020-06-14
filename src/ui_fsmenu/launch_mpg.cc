@@ -397,7 +397,7 @@ void FullscreenMenuLaunchMPG::refresh() {
 			map_info_.set_text(_("The selected file can not be found. If it is not automatically "
 			                     "transferred to you, please write to the host about this problem."));
 		} else {
-			//			Reset font color
+			// Reset font color
 			map_info_.set_style(g_gr->styles().font_style(UI::FontStyle::kLabel));
 
 			// Update local nr of players - needed for the client UI
@@ -420,7 +420,7 @@ void FullscreenMenuLaunchMPG::refresh() {
 			// It will also translate 'false-positively' on any user-made map which shares a name with
 			// the official maps, but this should not be a problem to worry about.
 			i18n::Textdomain td("maps");
-			//			change_map_or_save_.set_title(_(settings.mapname));
+			// change_map_or_save_.set_title(_(settings.mapname));
 		}
 	}
 

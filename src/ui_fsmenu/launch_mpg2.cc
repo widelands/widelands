@@ -130,7 +130,7 @@ FullscreenMenuLaunchMPG2::FullscreenMenuLaunchMPG2(GameSettingsProvider* const s
 	if (settings_->can_change_map()) {
 		map_details.set_map_description_text(_("Please select a map or saved game."));
 	} else {
-		//		change_map_or_save_.set_enabled(settings_->can_change_map());
+		// change_map_or_save_.set_enabled(settings_->can_change_map());
 		map_details.set_map_description_text(_("The host has not yet selected a map or saved game."));
 	}
 
@@ -159,10 +159,6 @@ void FullscreenMenuLaunchMPG2::layout() {
 	chat_.force_new_dimensions(scale_factor(), get_w() * 1 / 2, get_h() / 4);
 
 	FullscreenMenuLaunchGame::layout();
-
-	log("mpsg %dx%d at x:%d, y:%d\n", mpsg_.get_w(), mpsg_.get_h(), mpsg_.get_x(), mpsg_.get_y());
-	log("chatpanel %dx%d at x:%d, y:%d\n", chat_.get_w(), chat_.get_h(), chat_.get_x(),
-	    chat_.get_y());
 }
 
 /**
@@ -312,9 +308,9 @@ void FullscreenMenuLaunchMPG2::think() {
 	refresh();
 
 	// unfocus chat window when other UI element has focus
-	//	if (!chat_.has_focus()) {
-	//		chat_.unfocus_edit();
-	//	}
+	if (!chat_.has_focus()) {
+		chat_.unfocus_edit();
+	}
 }
 
 /**
@@ -328,15 +324,11 @@ void FullscreenMenuLaunchMPG2::refresh() {
 
 	if (settings.mapfilename != filename_proof_) {
 		if (!g_fs->file_exists(settings.mapfilename)) {
-			//			map_info_.set_style(g_gr->styles().font_style(UI::FontStyle::kWarning));
-			//			map_info_.set_text(_("The selected file can not be found. If it is not
-			// automatically
-			//" 			                     "transferred to you, please write to the host about this
+			// map_info_.set_style(g_gr->styles().font_style(UI::FontStyle::kWarning));
+			// map_info_.set_text(_("The selected file can not be found. If it is not
+			// automatically transferred to you, please write to the host about this
 			// problem."));
 		} else {
-			// Reset font color
-			//			map_info_.set_style(g_gr->styles().font_style(UI::FontStyle::kLabel));
-
 			// Update local nr of players - needed for the client UI
 			nr_players_ = settings.players.size();
 
@@ -356,12 +348,11 @@ void FullscreenMenuLaunchMPG2::refresh() {
 			// It will also translate 'false-positively' on any user-made map which shares a name with
 			// the official maps, but this should not be a problem to worry about.
 			i18n::Textdomain td("maps");
-			//			change_map_or_save_.set_title(_(settings.mapname));
 		}
 	}
 
 	ok_.set_enabled(settings_->can_launch());
-	//	change_map_or_save_.set_enabled(settings_->can_change_map());
+	// change_map_or_save_.set_enabled(settings_->can_change_map());
 
 	update_peaceful_mode();
 	peaceful_.set_state(settings_->is_peaceful_mode());
@@ -505,7 +496,6 @@ void FullscreenMenuLaunchMPG2::load_previous_playerdata() {
 			}
 		}
 	}
-	//	map_info_.set_text(infotext);
 	filename_proof_ = settings_->settings().mapfilename;
 }
 
@@ -513,7 +503,7 @@ void FullscreenMenuLaunchMPG2::load_previous_playerdata() {
  * load map information and update the UI
  */
 void FullscreenMenuLaunchMPG2::load_map_info() {
-	Widelands::Map map;  //  MapLoader needs a place to put its preload data
+	Widelands::Map map;  // MapLoader needs a place to put its preload data
 
 	std::unique_ptr<Widelands::MapLoader> ml =
 	   map.get_correct_loader(settings_->settings().mapfilename);

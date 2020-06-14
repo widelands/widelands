@@ -1351,7 +1351,6 @@ void WLApplication::mainmenu_multiplayer() {
  */
 bool WLApplication::new_game() {
 	SinglePlayerGameSettingsProvider sp;
-	//	FullscreenMenuLaunchSPG lgm(&sp);
 	FullscreenMenuLaunchSPG2 lgm(&sp);
 	const FullscreenMenuBase::MenuTarget code = lgm.run<FullscreenMenuBase::MenuTarget>();
 

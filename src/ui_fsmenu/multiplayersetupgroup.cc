@@ -62,7 +62,6 @@ struct MultiPlayerClientGroup : public UI::Box {
 	     settings_(settings),
 	     id_(id),
 	     slot_selection_locked_(false) {
-		//		set_size(w, h);
 		add(&slot_dropdown_);
 		add(&name, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
@@ -70,7 +69,6 @@ struct MultiPlayerClientGroup : public UI::Box {
 		slot_dropdown_.selected.connect([this]() { set_slot(); });
 
 		update();
-		//		layout();
 
 		subscriber_ =
 		   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& note) {
@@ -92,12 +90,6 @@ struct MultiPlayerClientGroup : public UI::Box {
 			   }
 			});
 	}
-
-	/// Update dropdown sizes
-	//	void layout() override {
-	//		UI::Box::layout();
-	//		slot_dropdown_.set_height(g_gr->get_yres() * 3 / 4);
-	//	}
 
 	void force_new_dimensions(float, uint32_t standard_element_height) {
 		slot_dropdown_.set_desired_size(standard_element_height, standard_element_height);
@@ -717,7 +709,6 @@ void MultiPlayerSetupGroup::update() {
 			multi_player_client_groups.at(i) =
 			   new MultiPlayerClientGroup(&clientbox, clientbox.get_w(), buth_, i, settings_);
 			clientbox.add(multi_player_client_groups.at(i), UI::Box::Resizing::kFullSize);
-			//						multi_player_client_groups.at(i)->layout();
 		}
 		multi_player_client_groups.at(i)->set_visible(true);
 	}

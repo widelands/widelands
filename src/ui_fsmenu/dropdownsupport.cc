@@ -1,7 +1,8 @@
 #include "ui_fsmenu/dropdownsupport.h"
 
-#include <boost/algorithm/string.hpp>
 #include <memory>
+
+#include <boost/algorithm/string.hpp>
 
 #include "ai/computer_player.h"
 #include "base/i18n.h"
@@ -97,9 +98,6 @@ void TribeDropdownSupport::rebuild() {
 /// This will update the game settings for the tribe or shared_in with the value
 /// currently selected in the tribes dropdown.
 void TribeDropdownSupport::selection_action() {
-	//	if (!has_tribe_access()) {
-	//		return;
-	//	}
 	const PlayerSettings& player_settings = settings_->settings().players[id_];
 	dropdown_.set_disable_style(player_settings.state == PlayerSettings::State::kShared ?
 	                               UI::ButtonDisableStyle::kPermpressed :
@@ -214,7 +212,7 @@ void PlayerTypeDropdownSupport::selection_action() {
 		} else if (selected == "human_player") {
 			settings_->set_player_number(id_);
 			state = PlayerSettings::State::kHuman;
-			//			dropdown_.set_enabled(false);
+			// dropdown_.set_enabled(false);
 		} else {
 			if (selected == AI_NAME_PREFIX "random") {
 				settings_->set_player_ai(id_, "", true);

@@ -58,7 +58,7 @@ bool FullscreenMenuLaunchSPG2::clicked_select_map() {
 
 	const MapData& mapdata = *msm.get_map();
 
-	//	ensure_valid_host_position(nr_players_);
+	// ensure_valid_host_position(nr_players_);
 	settings_->set_map(mapdata.name, mapdata.filename, mapdata.nrplayers);
 	update_win_conditions();
 	update_peaceful_mode();
@@ -83,7 +83,7 @@ void FullscreenMenuLaunchSPG2::update() {
 
 	peaceful_.set_state(settings_->is_peaceful_mode());
 
-	//	set_player_names_and_tribes(map);
+	// set_player_names_and_tribes(map);
 }
 
 /**
@@ -118,10 +118,10 @@ void FullscreenMenuLaunchSPG2::clicked_back() {
 	//  user it seems as if the launchgame-menu is a child of mapselect and
 	//  not the other way around - just end_modal(0); will be seen as bug
 	//  from user point of view, so we reopen the mapselect-menu.
-	//	if (!select_map()) {
+	// if (!select_map()) {
 	// No map has been selected: Go back to main menu
 	return end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
-	//	}
+	// }
 	// update(true);
 }
 
