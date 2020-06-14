@@ -89,6 +89,8 @@ wl_library(ui_fsmenu_loading_common
 
 wl_library(ui_fsmenu_gameloading
   SRCS
+    dropdownsupport.cc
+    dropdownsupport.h
     launch_game.cc
     launch_game.h
     launch_mpg.cc
@@ -97,20 +99,18 @@ wl_library(ui_fsmenu_gameloading
     launch_mpg2.h
     launch_spg.cc
     launch_spg.h
+	launch_spg2.cc
+    launch_spg2.h
     loadgame.cc
     loadgame.h
-    launch_spg2.cc
-    launch_spg2.h
     mapdetailsbox.cc
     mapdetailsbox.h
+	multiplayersetupgroup.cc
+	multiplayersetupgroup.h
     singleplayersetupbox.cc
     singleplayersetupbox.h
-		multiplayersetupgroup.cc
-		multiplayersetupgroup.h
-    dropdownsupport.cc
-    dropdownsupport.h
   DEPENDS
-		ai
+	ai
     base_exceptions
     base_i18n
     graphic
@@ -125,6 +125,7 @@ wl_library(ui_fsmenu_gameloading
     logic_map_objects
     logic_tribe_basic_info
     map_io_map_loader
+	network
     scripting_lua_interface
     scripting_lua_table
     ui_basic

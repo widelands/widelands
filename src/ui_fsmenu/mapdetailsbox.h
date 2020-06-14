@@ -1,10 +1,11 @@
 #ifndef WL_UI_FSMENU_MAPDETAILSBOX_H
 #define WL_UI_FSMENU_MAPDETAILSBOX_H
+
+#include "logic/map.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
-#include <logic/map.h>
 
 struct GameSettingsProvider;
 class MapDetailsBox : public UI::Box {
