@@ -298,11 +298,11 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		update();
 	}
 
-	void force_new_dimensions(float, uint32_t standard_element_height) {
+	void force_new_dimensions(float, uint32_t max_width,uint32_t standard_element_height) {
 		player.set_desired_size(standard_element_height, standard_element_height);
 		type_dropdown_.set_desired_size(standard_element_height, standard_element_height);
 		tribes_dropdown_.set_desired_size(standard_element_height, standard_element_height);
-		init_dropdown_.set_desired_size(8 * standard_element_height, standard_element_height);
+		init_dropdown_.set_desired_size(max_width-4*standard_element_height, standard_element_height);
 		team_dropdown_.set_desired_size(standard_element_height, standard_element_height);
 	}
 
@@ -686,7 +686,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 	clientbox.set_scrolling(true);
 
 	add(&clientbox);
-	add_space(1 * buth);
+	add_inf_space();
 	add(&playerbox);
 
 	playerbox.add_space(0);
@@ -762,14 +762,13 @@ void MultiPlayerSetupGroup::draw(RenderTarget& dst) {
 	}
 }
 
-void MultiPlayerSetupGroup::force_new_dimensions(float scale, uint32_t standard_element_height) {
+void MultiPlayerSetupGroup::force_new_dimensions(float scale, uint32_t max_width,uint32_t standard_element_height) {
 	players_.set_font_scale(scale);
 	clients_.set_font_scale(scale);
 	for (auto& multiPlayerClientGroup : multi_player_client_groups) {
 		multiPlayerClientGroup->force_new_dimensions(scale, standard_element_height);
 	}
 	for (auto& multiPlayerPlayerGroup : multi_player_player_groups) {
-		multiPlayerPlayerGroup->force_new_dimensions(scale, standard_element_height);
+		multiPlayerPlayerGroup->force_new_dimensions(scale, max_width-clientbox.get_w(),standard_element_height);
 	}
-	//	inactive_players.force_new_dimensions(scale, standard_element_height);
 }

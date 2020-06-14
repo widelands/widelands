@@ -55,8 +55,8 @@ GameChatPanel2::GameChatPanel2(UI::Panel* parent,
 	editbox.activate_history(true);
 
 	add(&chatbox, Resizing::kExpandBoth);
-	add(&editbox, Resizing::kFillSpace);
-	//	layout();
+	add(&editbox, Resizing::kFullSize);
+
 	set_handle_mouse(true);
 	set_can_focus(true);
 
@@ -135,14 +135,11 @@ bool GameChatPanel2::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 	return false;
 }
 void GameChatPanel2::force_new_dimensions(float, uint32_t width, uint32_t height) {
-	editbox.set_desired_size(width, 25);
 	chatbox.set_desired_size(width, height);
-	UI::Box::layout();
 }
 
 void GameChatPanel2::draw(RenderTarget& dst) {
    UI::Box::draw(dst);
-   log("chat %dx%d (%d,%d)\n", chatbox.get_x(), chatbox.get_y(), chatbox.get_w(), chatbox.get_h());
    dst.brighten_rect(
       Recti(chatbox.get_x(), chatbox.get_y(), chatbox.get_w(), chatbox.get_h()), -MOUSE_OVER_BRIGHT_FACTOR);
 }

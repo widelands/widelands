@@ -149,7 +149,7 @@ FullscreenMenuLaunchMPG2::FullscreenMenuLaunchMPG2(GameSettingsProvider* const s
 	individual_content_box.add(&mpsg_, UI::Box::Resizing::kFullSize);
 	//	individual_content_box.add(suggested_teams_box_, UI::Box::Resizing::kExpandBoth);
 	individual_content_box.add_inf_space();
-	individual_content_box.add(&chat_, UI::Box::Resizing::kAlign, UI::Align::kBottom);
+	individual_content_box.add(&chat_, UI::Box::Resizing::kExpandBoth);
 	//	individual_content_box.add_space(2 * standard_element_height_);
 	layout();
 	// If we are the host, open the map or save selection menu at startup
@@ -163,16 +163,14 @@ FullscreenMenuLaunchMPG2::FullscreenMenuLaunchMPG2(GameSettingsProvider* const s
 }
 
 FullscreenMenuLaunchMPG2::~FullscreenMenuLaunchMPG2() {
-	//	delete mpsg_;
-	//	delete chat_;
 }
 
 void FullscreenMenuLaunchMPG2::layout() {
 	standard_element_width_ = get_w() / 4;
 	standard_element_height_ = get_h() * 9 / 200;
 	mpsg_.set_max_size(0, get_h() / 3);
-	mpsg_.force_new_dimensions(scale_factor(), standard_element_height_);
-	chat_.force_new_dimensions(scale_factor(), get_w() * 2 / 3, get_h() / 3);
+	mpsg_.force_new_dimensions(scale_factor(), get_w() * 1/2,standard_element_height_);
+	chat_.force_new_dimensions(scale_factor(), get_w() * 1/2, get_h() / 3);
 
 	FullscreenMenuLaunchGame::layout();
 
