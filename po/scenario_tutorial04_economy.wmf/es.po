@@ -9,13 +9,14 @@
 # Madkat Here, 2015-2016
 # Raul Ferriz <raul.ferriz@gmail.com>, 2009
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020
+# Walter Benkel <tromaster@gmail.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-05-18 10:03+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
+"PO-Revision-Date: 2020-06-11 18:53+0000\n"
+"Last-Translator: Walter Benkel <tromaster@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -105,7 +106,7 @@ msgstr "Abre la ventana de estadísticas de edificios para ganar un resumen de l
 msgid ""
 "First, you will have to open the ‘Statistics’ menu at the bottom of the "
 "screen."
-msgstr ""
+msgstr "Para comenzar, abre el menú 'Estadísticas' en la parte inferior de la pantalla."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:52
 msgid "Afterwards, choose ‘Buildings’."
@@ -136,7 +137,7 @@ msgstr "Mira cuántas tabernas tienes"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:70
 msgid "We want to know whether we still have taverns."
-msgstr ""
+msgstr "Queremos saber si aún tenemos tabernas."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:72
 msgid "Choose the ‘Medium buildings’ tab in the building statistics window."
@@ -213,7 +214,7 @@ msgstr "Si no tienes ninguna construcción de ningún tipo en concreto, se mostr
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:91
 msgid "This is enough explanation for now. Now try it out yourself."
-msgstr ""
+msgstr "Suficientes explicaciones por ahora. Ahora inténtalo por ti mismo."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:97
 msgid "You closed the building statistics window!"
@@ -282,7 +283,7 @@ msgstr "De acuerdo. En la lista habrás visto que no tienes más tabernas o posa
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:142
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:144
 msgid "Examine the first two tabs in the stock window"
-msgstr ""
+msgstr "Revisa las dos primeras pestañas en la ventana de existencias"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:145
 msgid ""
@@ -294,7 +295,7 @@ msgstr "Echa un vistazo a las dos primeras pestañas en la ventana de existencia
 msgid ""
 "When you have seen enough, switch back to the third tab (‘Wares in "
 "warehouses’)."
-msgstr ""
+msgstr "Cuando hayas terminado de revisar vuelve a la tercera pestaña ('Mercancías en almacenes')."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:155
 msgid ""
@@ -414,16 +415,16 @@ msgstr "Abre la ventana de ayuda"
 msgid ""
 "The encyclopedia window contains the in-game help and an encyclopedia of the"
 " tribe you’re currently playing."
-msgstr ""
+msgstr "La página de enciclopedia contiene la ayuda en línea para el juego y una enciclopedia de la tribu que estás jugando actualmente."
 
 #. TRANSLATORS: "it" refers to the encyclopedia window
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:248
 msgid "Open it. You can access it via the button at the bottom of the screen."
-msgstr ""
+msgstr "Ábrela. Puedes accesarla mediante el botón en la parte inferior de la pantalla."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:249
 msgid "Alternatively, you can access it directly with the ‘F1’ key."
-msgstr ""
+msgstr "También puedes accesarla directamente con la tecla 'F1'."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:253
 msgid "Encyclopedia"
@@ -431,13 +432,13 @@ msgstr "Enciclopedia"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:255
 msgid "How to get help"
-msgstr ""
+msgstr "Cómo obtener ayuda"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:257
 msgid ""
 "Of course, it is difficult to remember all of my remarks and advice. For "
 "example, you might ask yourself: ‘Why do we need rations to get soldiers?’"
-msgstr ""
+msgstr "Por supuesto que es difícil recordar todos mis comentarios y consejos. Por ejemplo, podrás preguntarte: '¿Por qué necesitamos raciones para conseguir soldados?'"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:258
 msgid ""
@@ -445,12 +446,12 @@ msgid ""
 " then or if you’re unsure about your tribe’s needs and abilities and how its"
 " buildings and workers operate, you can look it up easily in our tribe-"
 "specific in-game help and encyclopedia."
-msgstr ""
+msgstr "Cuando hayas jugado lo suficiente sabrás todas estas cosas de memoria. Pero hasta entonces, o si no estás seguro acerca de las necesidades y habilidades de tu tribu o cómo operan sus edificios y trabajadores, puedes fácilmente buscarlo en nuestra ayuda en línea y en la enciclopedia."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:266
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:268
 msgid "Look up which wares are needed to recruit soldiers"
-msgstr ""
+msgstr "Averigua cuáles mercancías se necesitan para reclutar soldados"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:269
 msgid ""
@@ -458,11 +459,11 @@ msgid ""
 "search backwards to find the wares and the buildings you need to supply your"
 " barracks where the soldier is recruited. When you are finished, just close "
 "the encyclopedia window."
-msgstr ""
+msgstr "Un soldado necesita una lanza de madera y un yelmo – desde ahí puedes buscar hacia atrás para encontrar las mercancías y los edificios que necesitas para proveer tus cuarteles, que es donde se reclutan los soldados. Cuando hayas terminado sólo cierra la ventana de la enciclopedia."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:270
 msgid "Use the encyclopedia to find out how to create new soldiers."
-msgstr ""
+msgstr "Usa la enciclopedia para averiguar cómo se crean nuevos soldados."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:271
 msgid "Choose the ‘Wares’ tab in the encyclopedia window."
@@ -472,13 +473,13 @@ msgstr "Selecciona la pestaña de 'Mercancías' en la ventana de la enciclopedia
 msgid ""
 "Look up what is needed to produce a helmet and what is needed to produce a "
 "wooden spear."
-msgstr ""
+msgstr "Averigua qué se necesita para producir un yelmo y para producir una lanza de madera."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:273
 msgid ""
 "If you want, you may further look up what is needed to produce the wares you"
 " just looked up."
-msgstr ""
+msgstr "Si quieres puedes seguir y averiguar qué se necesita para producir las mercancías que acabas de investigar."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:274
 msgid "Close the encyclopedia window when you are done."
@@ -486,58 +487,58 @@ msgstr "Cierra la ventana de la enciclopedia cuando hayas terminado."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:279
 msgid "Encyclopedia details"
-msgstr ""
+msgstr "Detalles de la enciclopedia"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:281
 msgid "The Encyclopedia Categories"
-msgstr ""
+msgstr "Las Categorías de la Enciclopedia"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:282
 msgid "The encyclopedia has five tabs:"
-msgstr ""
+msgstr "La enciclopedia tiene cinco pestañas:"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:283
 msgid ""
 "The ‘General’ tab contains information about all the basic interface "
 "controls for Widelands. Furthermore, you can find tips that are relevant for"
 " your tribe there."
-msgstr ""
+msgstr "La pestaña 'General' contiene información sobre todos los controles básicos de la interfaz de Widelands. Además puedes encontrar consejos que son relevantes para tu tribu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:284
 msgid ""
 "The ‘Wares’ tab shows information about the wares that your tribe needs, "
 "including a short help text, a list of buildings that produce each ware, the"
 " needed wares to produce it and where the ware is consumed."
-msgstr ""
+msgstr "La pestaña 'Mercancías' muestra información acerca de la mercancías que necesita tu tribu, incluyendo un breve texto de ayuda, una lista de los edificios que producen cada mercancía, las mercancías que necesitan para producirlas, y dónde son consumidas."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:285
 msgid ""
 "The ‘Workers’ tab shows information about your tribe’s workers in a similar "
 "manner to the wares in the second tab."
-msgstr ""
+msgstr "La pestaña 'Trabajadores' entrega información sobre los trabajadores de tu tribu, de un modo similar a las mercancías de la segunda pestaña."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:286
 msgid ""
 "The ‘Buildings’ tab contains all the necessary information about the "
 "buildings of your tribe."
-msgstr ""
+msgstr "La pestaña 'Edificios' contiene toda la información necesaria acerca de los edificios de tu tribu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:287
 msgid ""
 "Finally, the ‘Immovables’ tab shows information about the specific "
 "immovables that your tribe’s workers can place on the map."
-msgstr ""
+msgstr "Finalmente, la pestaña 'Inamovibles' muestra información acerca de los objetos inamovibles específicos que tus trabajadores pueden situar en el mapa."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:294
 msgid "You closed the encyclopedia!"
-msgstr ""
+msgstr "¡Has cerrado la enciclopedia!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:297
 msgid ""
 "You have closed the encyclopedia window, but I didn’t notice that you were "
 "trying to find out which wares are needed to recruit a soldier. Would you "
 "please reopen it and do so?"
-msgstr ""
+msgstr "Has cerrado la ventana de la enciclopedia, pero no notaste que estabas tratando de averiguar qué mercancías se necesitan para reclutar a un soldado. ¿Puedes por favor reabrirla y hacerlo?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:306
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:308
@@ -549,12 +550,12 @@ msgid ""
 "You closed the encyclopedia window without searching for the information we "
 "need. If you already know everything, please feel free to leave this "
 "tutorial at any time."
-msgstr ""
+msgstr "Cerraste la ventana de la enciclopedia sin buscar la información que necesitamos. Si ya lo sabes todo, por favor siéntete libre de abandonar este tutorial cuando lo desees."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:311
 msgid ""
 "Otherwise, please reopen the encyclopedia window and choose the second tab."
-msgstr ""
+msgstr "De otro modo, por favor reabre la ventana de la enciclopedia y selecciona la segunda pestaña."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:316
 msgid "Priority Settings"
@@ -588,21 +589,21 @@ msgstr "Cuando haces clic en el punto rojo (baja prioridad), la mercancía corre
 msgid ""
 "The actual supply state is indicated by varying colors of the ware icons "
 "themselves:"
-msgstr ""
+msgstr "El estado actual de suministro se indica con varios colores en los mismos íconos de las mercancías:"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:323
 msgid "Wares stored in the building are shown in full color."
-msgstr ""
+msgstr "Mercancías almacenadas en el edificio se muestran en color lleno."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:324
 msgid "Missing wares are greyed out."
-msgstr ""
+msgstr "Mercancías faltantes están en gris."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:325
 msgid ""
 "Wares not present in the building yet but already being transported there "
 "are shown in a darker grey."
-msgstr ""
+msgstr "Mercancías aún no presentes pero que vienen en camino se muestran en un gris más oscuro."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:326
 msgid ""
@@ -619,7 +620,7 @@ msgstr "Abre la ventana de estadísticas de mercancías"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:337
 msgid "Select the ‘Wares’ entry from the ‘Statistics’ menu."
-msgstr ""
+msgstr "Selecciona la opción 'Mercancías' del menú 'Estadísticas'."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:341
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:359
@@ -630,12 +631,12 @@ msgstr "Estadísticas de mercancías"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:343
 msgid "Let’s have a look at how our wares production is doing."
-msgstr ""
+msgstr "Echemos un vistazo a cómo se comporta la producción de nuestras mercancías."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:350
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:352
 msgid "Examine your ware production and consumption"
-msgstr ""
+msgstr "Examina la producción y el consumo de tu mercancía"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:353
 msgid ""
@@ -661,7 +662,7 @@ msgstr "Continuaré en cuanto hagas clic en la tercera pestaña (‘Salud Econó
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:370
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:372
 msgid "Examine your economy’s health"
-msgstr ""
+msgstr "Examina la salud de tu economía"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:373
 msgid ""
@@ -688,7 +689,7 @@ msgstr "En esta pestaña puedes ver la diferencia entre producción y consumo, l
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:391
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:393
 msgid "Examine your stock"
-msgstr ""
+msgstr "Examina tus existencias"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:394
 msgid ""

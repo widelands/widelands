@@ -17,13 +17,14 @@
 # Stephan Lutz <stephan-lutz@gmx.de>, 2019-2020
 # Thadah D. Denyse <juchuf@gmail.com>, 2017
 # Thadah D. Denyse <juchuf@gmail.com>, 2015
+# Walter Benkel <tromaster@gmail.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-06-06 19:45+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
+"PO-Revision-Date: 2020-06-11 19:04+0000\n"
+"Last-Translator: Walter Benkel <tromaster@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -98,7 +99,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘When we looked down to the valley from our newly established barrier, we "
 "felt that the spirit of our fathers was with us.’"
-msgstr ""
+msgstr "'Cuando bajamos la vista hacia el valle desde nuestra barrera recién establecida, sentimos que el espíritu de nuestros ancestros estaba con nosotros.'"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/helptexts.lua:8
@@ -106,7 +107,7 @@ msgstr ""
 #: ../../data/tribes/buildings/warehouses/barbarians/headquarters/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "Ballad ‘The Battle of Kal’mavrath’ by Hakhor the Bard"
-msgstr ""
+msgstr "Balada 'La Batalla de Kal'mavrath' de Hakhor el Bardo"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/helptexts.lua:3
@@ -115,14 +116,14 @@ msgid ""
 "‘The Citadel of Adlen surely is the finest masterpiece of Barbarian "
 "craftsmanship. Nothing as strong and big and beautiful has ever been built "
 "in such a short time.’"
-msgstr ""
+msgstr "'La Ciudadela de Adlen es, con toda seguridad, la mayor obra maestra de la artesanía Bárbara. Nada tan fuerte y grande y hermoso ha sido nunca construido en tan corto tiempo.'"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/helptexts.lua:9
 msgctxt "barbarians_building"
 msgid ""
 "Colintan, chief planner of the Citadel of Adlen,<br>at its opening ceremony"
-msgstr ""
+msgstr "Colintan, planificador en jefe de la Citadela de Adlen,<br>en su ceremonia inaugural"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/helptexts.lua:3
@@ -130,13 +131,13 @@ msgctxt "barbarians_building"
 msgid ""
 "‘This stronghold made from blackwood and stones will be a hard nut to crack "
 "for them.’"
-msgstr ""
+msgstr "'Este baluarte hecho de maderas negras y piedras será un duro desafío para ellos.'"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "Berthron,<br>chief military adviser of Chat’Karuth"
-msgstr ""
+msgstr "Berthron,<br>principal consejero militar de Chat’Karuth"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/helptexts.lua:3
@@ -145,13 +146,13 @@ msgid ""
 "‘The log cabin was so small that two men could hardly live there. But we "
 "were young and carefree. We just relished our freedom and the responsibility"
 " as an outpost.’"
-msgstr ""
+msgstr "'La cabaña de troncos era tan pequeña que apenas podían vivir dos hombres en ella. Pero éramos jóvenes y despreocupados. Sólo gozábamos de nuestra libertad y de la responsabilidad de un puesto de avanzada."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/helptexts.lua:9
 msgctxt "barbarians_building"
 msgid "Boldreth,<br>about his time as young soldier"
-msgstr ""
+msgstr "Boldreth,<br>sobre sus tiempos de joven soldado"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/helptexts.lua:3

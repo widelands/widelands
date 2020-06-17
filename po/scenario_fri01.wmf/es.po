@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020
+# Walter Benkel <tromaster@gmail.com>, 2020
 # 
 msgid ""
 msgstr ""
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-22 17:14+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020\n"
+"Last-Translator: Walter Benkel <tromaster@gmail.com>, 2020\n"
 "Language-Team: Spanish (https://www.transifex.com/widelands/teams/35159/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +23,7 @@ msgstr ""
 #. TRANSLATORS: Name of a backup autosave
 #: ../../data/campaigns/fri01.wmf/scripting/mission_thread.lua:129
 msgid "The Great Stormflood (Backup Autosave)"
-msgstr ""
+msgstr "La Gran Tormenta (copia de seguridad autoguardada)"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:25
 msgid "Build a wood economy and a reed farm"
@@ -37,10 +38,12 @@ msgid ""
 "Build at least one woodcutter’s house and two forester’s houses to start "
 "producing logs, and a reed farm to start growing reed."
 msgstr ""
+"Construye al menos una casa de talador y dos casas de silvicultores para "
+"comenzar a producir troncos, y una granja de juncos para producir cañas."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:33
 msgid "Start producing bricks"
-msgstr ""
+msgstr "Comienza a producir ladrillos"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:35
 msgid "Brick Economy"
@@ -51,53 +54,59 @@ msgid ""
 "Build a brick kiln, a coal mine, a rock mine, a clay pit and a well to start"
 " producing bricks."
 msgstr ""
+"Construye un horno de ladrillos, una mina de carbón, una mina de rocas, un "
+"pozo de arcilla y un pozo de agua para comenzar a producir ladrillos."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:41
 msgid "Gather building materials"
-msgstr ""
+msgstr "Reúne materiales de construcción"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:43
 msgid "Stockpile Building Materials"
-msgstr ""
+msgstr "Acumula Materiales de Construcción"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:44
 msgid ""
 "Stockpile some building materials in your headquarters. Gather at least:"
 msgstr ""
+"Acumula algunos materiales de construcción en tu cuartel general. Reúne al "
+"menos:"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:45
 msgid "30 × Log"
-msgstr ""
+msgstr "30 x Tronco"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:46
 msgid "30 × Granite"
-msgstr ""
+msgstr "30 x Granito"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:47
 msgid "10 × Clay"
-msgstr ""
+msgstr "10 x Arcilla"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:48
 msgid "40 × Brick"
-msgstr ""
+msgstr "40 x Ladrillo"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:49
 msgid "20 × Coal"
-msgstr ""
+msgstr "20 x Carbón"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:50
 msgid "30 × Reed"
-msgstr ""
+msgstr "30 x Caña"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:51
 msgid ""
 "Remember that you can set target quantities for most of these wares in your "
 "economy settings."
 msgstr ""
+"Recuerda que puedes fijar las metas de producción para la mayoría de estos "
+"materiales en los  ajustes de la economía."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:56
 msgid "Produce food for the miners"
-msgstr ""
+msgstr "Produce alimentos para los mineros"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:58
 msgid "Food Economy"
@@ -108,6 +117,8 @@ msgid ""
 "Build a tavern, a fisher’s house, a smokery, a berry farm and a fruit "
 "collector’s house."
 msgstr ""
+"Construye una taberna, una casa de pescador, un ahumadero, una granja de "
+"bayas y una casa del recolector de frutas."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:64
 msgid "Enhance your food economy"
@@ -122,10 +133,12 @@ msgid ""
 "Build at least two farms, a beekeeper’s house (next to the berry farm), a "
 "bakery, a brewery, and another tavern."
 msgstr ""
+"Construye al menos dos granjas, una casa de apicultor (cerca de una granja "
+"de bayas), una panadería, una cervezería, y otra taberna."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:72
 msgid "Build an iron mine and a mining infrastructure"
-msgstr ""
+msgstr "Construye una mina de hierro y una infraestructura minera"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:74
 msgid "Build Mines and Mining Infrastructure"
@@ -134,6 +147,8 @@ msgstr "Construye minas y una infraestructura minera"
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:75
 msgid "Build an iron mine, a furnace, a blacksmithy and a small armor smithy."
 msgstr ""
+"Construye una mina de hierro, un horno, una herrería y un pequeño taller de "
+"armaduras."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:80
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:255
@@ -147,23 +162,23 @@ msgstr "Reclutar Soldados"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:83
 msgid "Build a barracks, a reindeer farm and a sewing room."
-msgstr ""
+msgstr "Construye un cuartel, una granja de renos y un cuarto de costura."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:88
 msgid "Discover more of the island"
-msgstr ""
+msgstr "Descubre más de la isla"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:90
 msgid "Expand and Discover"
-msgstr ""
+msgstr "Expandir y Descubrir"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:91
 msgid "Expand further and discover more of the island."
-msgstr ""
+msgstr "Expándete más lejos y descubre más de la isla"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:96
 msgid "Train your soldiers"
-msgstr ""
+msgstr "Entrena a tus soldados"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:98
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:309
@@ -182,6 +197,10 @@ msgid ""
 "shop to sew sturdier garments, and a large armor smithy for better weapons "
 "and helmets."
 msgstr ""
+"Entrena un soldado al mayor nivel posible. Los soldados se entrenan en "
+"campos y arenas de entrenamiento. Necesitaremos una mina de oro, una "
+"sastrería para coser prendas más resistentes y un gran taller de armaduras "
+"para tener mejores armas y yelmos."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:104
 msgid "Defeat the enemy!"
@@ -193,27 +212,31 @@ msgstr "¡Derrota al Enemigo!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:107
 msgid "Destroy the enemy tribe’s headquarters."
-msgstr ""
+msgstr "Destruye el cuartel general del enemigo."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:112
 msgid "Escape from the floods"
-msgstr ""
+msgstr "Escapa de las inundaciones"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:114
 msgid "Flee from the Floods"
-msgstr ""
+msgstr "Huye de las Inundaciones"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:115
 msgid ""
 "Build a port, a weaving mill and a shipyard, then start an expedition to "
 "flee before the storm flood drowns the island."
 msgstr ""
+"Construye un puerto, un telar y un astillero, y después comienza una "
+"expedición para huir antes de que la inundación cubra la isla."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:116
 msgid ""
 "You can build the port either on the easternmost tip of the island or in the"
 " place where the enemy’s headquarters stood."
 msgstr ""
+"Puedes construir el puerto en la punta más oriental de la isla, o en el "
+"lugar que ocupaba el cuartel general del enemigo."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:117
 msgid ""
@@ -221,6 +244,9 @@ msgid ""
 " reload the scenario from the backup savegame automatically created for you "
 "shortly before you reached the enemy’s headquarters."
 msgstr ""
+"Si no te preparaste lo suficiente para dominar el desafío a tiempo, puedes "
+"volver a cargar el escenario desde el respaldo guardado automáticamente "
+"justo antes de alcanzar el cuartel general del enemigo."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:126
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:135
@@ -232,7 +258,7 @@ msgstr "Introducción"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:127
 msgid "Welcome!"
-msgstr ""
+msgstr "¡Bienvenido!"
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:129
@@ -240,6 +266,8 @@ msgid ""
 "Welcome to the beautiful isle of Langeness! I am Reebaud, the chieftain of "
 "this pristine island."
 msgstr ""
+"¡Bienvenido a la hermosa isla de Langeness! Yo soy Reebaud, el caudillo de "
+"esta prístina isla."
 
 #. TRANSLATORS: Reebaud – Introduction 1. Schauenburg and Holstein are
 #. dukedoms
@@ -250,10 +278,14 @@ msgid ""
 "South… So I decided to lead my tribe away to start a quiet, peaceful life on"
 " this untouched island."
 msgstr ""
+"Mi tribu y yo acabamos de llegar de tierra firme. Allí hubo luchas con los "
+"Daneses en el Norte, con los Schauenburgers y los Holsteiners en el Este y "
+"el Sur... Por eso decidí alejar a mi tribu para comenzar una vida tranquila "
+"y pacífica en esta isla intacta."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:136
 msgid "A new home"
-msgstr ""
+msgstr "Un nuevo hogar"
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:138
@@ -261,6 +293,9 @@ msgid ""
 "This is as good a place as any to start building our new home. First of all,"
 " we must ensure a stable supply of basic building materials."
 msgstr ""
+"Este es un lugar tan bueno como cualquier otro para comenzar a construir un "
+"nuevo hogar. Antes que nada debemos asegurar un suministro estable de "
+"materiales de construcción básicos."
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:141
@@ -268,10 +303,12 @@ msgid ""
 "I have asked Hauke, one of my advisors, to oversee the construction of our "
 "settlement."
 msgstr ""
+"Le he pedido a Hauke, uno de mis asesores, que supervise la construcción de "
+"nuestro asentamiento."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:145
 msgid "The first buildings"
-msgstr ""
+msgstr "Los primeros edificios"
 
 #. TRANSLATORS: Hauke – Introduction 3. "Peace" is the traditional frisian
 #. greeting
@@ -280,6 +317,8 @@ msgid ""
 "Peace, Chieftain Reebaud! I will start with the colonization of the island "
 "straight away."
 msgstr ""
+"¡Paz, Caudillo Reebaud! Comenzaré de inmediato con la colonización de la "
+"isla."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:150
@@ -288,6 +327,10 @@ msgid ""
 "by adding some logs and granite. The roofs are thatched with reed, "
 "naturally. Nothing is better suited to keep the rain out."
 msgstr ""
+"Como todos los frisios, construimos nuestras casas principalmente con "
+"ladrillos, y las mejoramos con algunos troncos y granito. Los techos están "
+"cubiertos de paja, naturalmente. Nada se presta mejor para mantener fuera la"
+" lluvia."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:153
@@ -296,6 +339,9 @@ msgid ""
 "grow well on this island; better build at least two houses for foresters and"
 " one for a woodcutter."
 msgstr ""
+"Deberíamos comenzar cuidando nuestra producción de madera. Los árboles no "
+"parecen crecer muy bien en esta isla; mejor construye al menos dos casas de "
+"silvicultores y una de leñador."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:156
@@ -305,10 +351,14 @@ msgid ""
 "Reed is easily cultivated, so the reed farmer doesn’t need anything more to "
 "start growing reed fields."
 msgstr ""
+"Además, mejor construimos pronto una granja de caña. Incluso éstas necesitan"
+" caña para ser construidas, por lo que debemos intentar no quedarnos cortos "
+"antes de que podamos cultivar la nuestra. La caña se cultiva fácilmente, por"
+" lo que el granjero no necesita nada más para comenzar a producirla."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:161
 msgid "Building our new home"
-msgstr ""
+msgstr "Construyendo nuestro nuevo hogar"
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:163
@@ -319,6 +369,11 @@ msgid ""
 "rocks, but I don’t see any here. Perhaps these hills contain enough stones "
 "to mine some granite."
 msgstr ""
+"Nuestros suministros de madera y caña están asegurados. Ahora debemos cuidar"
+" el suministro de ladrillos. Éstos son quemados en un horno de ladrillos con"
+" granito y arcilla, por lo que primero debemos producirlos. En tierra firme "
+"cortábamos el granito de las rocas, las cuales no veo por aquí. Quizás estas"
+" colinas contengan suficientes piedras para producir algo de granito."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:166
@@ -328,6 +383,10 @@ msgid ""
 "space for digging around his clay pit. It might be a good idea to build some"
 " sentinels to expand."
 msgstr ""
+"Es fácil hacer arcilla: un excavador trabajando en un pozo de arcilla "
+"simplemente excava algo de tierra y la mezcla con agua. Sólo asegúrate que "
+"tenga mucho espacio para excavar alrededor de su pozo. Puede ser una buena "
+"idea construir algunos centinelas para expandirte."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:169
@@ -336,6 +395,10 @@ msgid ""
 "Build a coal mine to make sure we don’t run out. No coal means no bricks, no"
 " bricks means no mines, no mines mean no coal… you can see the problem."
 msgstr ""
+"Para quemar ladrillos el horno de ladrillos necesita de un fuego, y para "
+"ello usamos carbón como combustible. Construye una mina de carbón para "
+"asegurar el suministro. Sin carbón no hay ladrillos, sin ladrillos no hay "
+"minas, sin minas no hay carbón... puedes ver el problema."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:172
@@ -343,10 +406,12 @@ msgid ""
 "Also, build a well – nobody likes to drink salt water, and it is no good for"
 " making clay."
 msgstr ""
+"También construye un pozo de agua – a nadie le gusta beber agua salada, y no"
+" es buena para hacer arcilla."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:177
 msgid "Our first settlement"
-msgstr ""
+msgstr "Nuestro primer asentamiento"
 
 #. TRANSLATORS: Reebaud – Introduction 5
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:179
@@ -355,10 +420,14 @@ msgid ""
 "wait until we have gathered some more materials. We could expand our "
 "territory some more, to see what else can be found on this island."
 msgstr ""
+"Bien hecho. Toda nuestra producción de materiales de contrucción está "
+"funcionando. Esperemos hasta haber reunido más materiales. Podríamos "
+"expandir algo más nuestro territorio para ver qué más podemos encontrar en "
+"nuestra isla."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:184
 msgid "Reed Shortages"
-msgstr ""
+msgstr "Escasez de Caña"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:185
 msgid "Build another reed farm"
@@ -372,20 +441,27 @@ msgid ""
 "also used for making fishing nets and other tools; therefore, resolving this"
 " shortage should be a priority."
 msgstr ""
+"He notado que hemos estado escasos de caña por algún tiempo. Nuestros "
+"edificios parecen necesitar bastante. Deberíamos construir una o dos granjas"
+" de caña adicionales. La caña también se utiliza para fabricar redes de "
+"pesca y otras herramientas; por lo tanto, resolver esta escasez debería ser "
+"una prioridad."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:188
 msgid ""
 "You should assign the new reed farm the highest priority for reed in the "
 "construction site window."
 msgstr ""
+"Deberíamos asignarle a la granja de caña la más alta prioridad en la ventana"
+" de obras de construcción."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:191
 msgid "Clay Shortages"
-msgstr ""
+msgstr "Escasez de Arcilla"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:192
 msgid "Build another clay pit"
-msgstr "Construye una otra barreda"
+msgstr "Construye otro pozo de arcilla"
 
 #. TRANSLATORS: Hauke – no clay
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:194
@@ -395,6 +471,10 @@ msgid ""
 " down a lot. It would be better to build one or two more clay pits, and "
 "wells to supply them with water."
 msgstr ""
+"Por algún tiempo nuestros productores de ladrillos se han estado quejando "
+"por una escasez de arcilla. Sin arcilla no se pueden producir ladrillos, por"
+" lo que esto nos atrasa bastante. Sería mejor construir uno o dos pozos de "
+"arcilla adicionales, y pozos para proveerlos de agua."
 
 #. TRANSLATORS: Hauke – no clay
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:197
@@ -403,14 +483,18 @@ msgid ""
 "need to build a ship, or the mines cannot provide us with enough coal, we "
 "will need more clay, so the shortage must be resolved."
 msgstr ""
+"La arcilla también se utiliza en la construcción de barcos y para mejorar "
+"los hornos de carbonización. Si necesitamos construir un barco, o si las "
+"minas no nos proveen de suficiente carbón, necesitaremos más arcilla, por lo"
+" que esta escasez debe ser resuelta."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:200
 msgid "Brick Shortages"
-msgstr ""
+msgstr "Escasez de Ladrillos"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:201
 msgid "Build another brick kiln"
-msgstr ""
+msgstr "Construye otro horno de ladrillos"
 
 #. TRANSLATORS: Hauke – no bricks
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:203
@@ -421,12 +505,19 @@ msgid ""
 "in the construction site window so as to resolve the shortage as soon as "
 "possible."
 msgstr ""
+"He notado que nos están faltando ladrillos. Esto atrasa bastante la "
+"construcción de nuestros edificios ya que necesitamos muchos ladrillos. "
+"Realmente deberíamos comenzar a construir otro horno de ladrillos, y "
+"asignarle la más alta prioridad para ladrillos en la ventana de obras de "
+"construcción, para resolver esta escasez lo antes posible."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:204
 msgid ""
 "You should assign the new brick kiln the highest priority for bricks in the "
 "construction site window."
 msgstr ""
+"Deberías asignar al horno de ladrillos la más alta prioridad para ladrillos "
+"en la ventana de obras de construcción."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:207
 msgid "Warehouses"
@@ -445,14 +536,20 @@ msgid ""
 "construction materials in the easternmost one. Our headquarters is too far "
 "in the west to be useful for long-time ware storage."
 msgstr ""
+"Estamos expandiendo nuestro territorio más y más hacia el este, y las "
+"mercancías deben ser transportadas por largas distancias. Deberíamos "
+"construir almacenes cerca de nuestra frontera este a ciertos intervalos, y "
+"preferiblemente almacenar los materiales de construcción en el más oriental."
+" Nuestro cuartel general está demasiado lejos al oeste para ser útil como "
+"almacenamiento a largo plazo."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:214
 msgid "Hungry Miners"
-msgstr ""
+msgstr "Mineros Hambrientos"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:215
 msgid "The miners are protesting…"
-msgstr ""
+msgstr "Los mineros están protestando..."
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:217
@@ -461,6 +558,9 @@ msgid ""
 "they have no time to prepare their own food. They demand to be supplied with"
 " it."
 msgstr ""
+"¡Caudillo Reebaud! Traigo malas noticias. Los mineros trabajan tan duro que "
+"no tienen tiempo para prepararse su propia comida, y demandan que se les "
+"suministre."
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:220
@@ -470,6 +570,11 @@ msgid ""
 "smoke it. Furthermore, build a berry farm which will plant berry bushes, and"
 " a fruit collector’s house so the bushes will be harvested."
 msgstr ""
+"Debemos construir una taberna para preparar raciones. Para conseguir los "
+"alimentos crudos debemos construir una casa de pescador, y como a nadie le "
+"gusta el pescado crudo, un ahumadero para ahumarlo. Además, construye una "
+"granja de bayas que plantará arbustos de bayas, y una casa de recolector de "
+"frutas para que los arbustos sean cosechados."
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:223
@@ -477,6 +582,8 @@ msgid ""
 "We should start expanding our territory faster in order to have enough space"
 " for many berry farms, and a longer coastline for fishing."
 msgstr ""
+"Deberíamos expandir nuestro territorio más rápidamente para tener espacio "
+"suficiente para más granjas de bayas, y una costa más larga para pescar."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:227
 msgid "Enhancing the Food Economy"
@@ -484,12 +591,12 @@ msgstr "Mejorando la Economía de Comida"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:228
 msgid "Feeding the soldiers"
-msgstr ""
+msgstr "Alimentando a los soldados"
 
 #. TRANSLATORS: Hauke – better food
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:230
 msgid "Well done. The miners are satisfied and have started working again."
-msgstr ""
+msgstr "Bien hecho. Los mineros están satisfechos y han vuelto a trabajar."
 
 #. TRANSLATORS: Hauke – better food
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:233
@@ -498,6 +605,9 @@ msgid ""
 "happy. Better take precautions – build a second tavern, then consider "
 "enhancing one to a drinking hall."
 msgstr ""
+"Pero cuando tengamos que mejorar las minas, las raciones no mantendrán "
+"contentos a los mineros. Mejor toma precauciones – construye una segunda "
+"taberna, y considera mejorar una a un hostal."
 
 #. TRANSLATORS: Hauke – better food
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:236
@@ -508,6 +618,11 @@ msgid ""
 "bread and beer. We should keep expanding quickly to have more space for "
 "farming."
 msgstr ""
+"Un hostal necesita mejor comida. Construye una panadería, una cervecería, y "
+"dos o tres granjas para comenzar a cultivar cebada. Recuerda que la cebada "
+"crece muy lentamente, por lo tanto estas nuevas granjas no serán suficientes"
+" cuando realmente necesitemos el pan y la cerveza. Deberíamos seguir "
+"expandiéndonos con rapidez para tener más espacio de cultivo."
 
 #. TRANSLATORS: Hauke – better food
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:239
@@ -517,6 +632,11 @@ msgid ""
 "Build a beekeeper’s house next to the berry farm to produce some honey, "
 "which we can store until we need it."
 msgstr ""
+"La panadería y la cervecería deberían ser mejoradas en cuanto sus "
+"trabajadores tengan suficiente experiencia. Entonces podrán producir "
+"hidromiel y pan endulzado con miel. Construye una casa de apicultor cerca de"
+" la granja de bayas para producir algo de miel, la cual podemos almacenar "
+"hasta que la necesitemos."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:244
 msgid "Build a Mining Economy"
