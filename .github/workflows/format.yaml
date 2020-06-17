@@ -14,7 +14,6 @@ on:
 jobs:
   run_formatting:
     name: Run fix_formatting.py
-    # clang-format has broken dependencies on ubuntu-latest
     runs-on: ubuntu-20.04
     steps:
     - name: Checkout
