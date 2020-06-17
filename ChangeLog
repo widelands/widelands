@@ -655,6 +655,7 @@
 - gcc-10 compatibility (#3908)
 - Replaced all uses of boost::bind with lambda functions and added a codecheck rule to deprecate boost::bind() and boost::ref()
 - Several AppVeyor/MSYS2 build environment fixes (#3917, #3919)
+- Use `detect_revision.py` on AppVeyor
 
 
 ### Other Issues
