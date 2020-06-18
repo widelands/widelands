@@ -143,6 +143,7 @@ void PlayerTypeDropdownSupport::rebuild() {
 	}
 	fill();
 	dropdown_.set_enabled(settings_->can_change_player_state(id_));
+	dropdown_.set_list_visibility(false);
 	select_entry();
 }
 void PlayerTypeDropdownSupport::fill() {
@@ -212,7 +213,7 @@ void PlayerTypeDropdownSupport::selection_action() {
 		} else if (selected == "human_player") {
 			settings_->set_player_number(id_);
 			state = PlayerSettings::State::kHuman;
-			// dropdown_.set_enabled(false);
+			dropdown_.set_enabled(false);
 		} else {
 			if (selected == AI_NAME_PREFIX "random") {
 				settings_->set_player_ai(id_, "", true);
