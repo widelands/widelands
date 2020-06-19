@@ -105,7 +105,7 @@ return {
       starting_conditions = {
          dirname .. "scripting/starting_conditions/amazons/headquarters.lua";
          dirname .. "scripting/starting_conditions/amazons/fortified_village.lua";
-         -- dirname .. "scripting/starting_conditions/amazons/trading_outpost.lua";
+         dirname .. "scripting/starting_conditions/amazons/trading_outpost.lua";
          dirname .. "scripting/starting_conditions/amazons/village.lua";
          dirname .. "scripting/starting_conditions/amazons/poor_hamlet.lua";
          dirname .. "scripting/starting_conditions/amazons/struggling_outpost.lua";
