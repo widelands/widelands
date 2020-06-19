@@ -18,21 +18,23 @@ tribes:new_productionsite_type {
       ironwood = 1
    },
 
-   animations = {
+   animation_directory = dirname,
+   animations = {unoccupied = {hotspot = {43, 44}}},
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 80},
-         fps = 10,
+         hotspot = {43, 44},
+         fps = 4,
+         frames = 4,
+         columns = 2,
+         rows = 2
       },
-      unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 66},
-      },
-      working_gold = {
-         pictures = path.list_files (dirname .. "working_gold_??.png"),
-         hotspot = {56, 80},
-         fps = 10,
-      },
+      working = {
+         hotspot = {43, 44},
+         fps = 15,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      }
    },
 
    aihints = {
@@ -56,20 +58,13 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
-         actions = {
-            "call=smelt_gold",
-         },
-      },
-      smelt_gold = {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
          descname = _"smelting gold",
          actions = {
             "return=skipped unless economy needs gold",
             "consume=charcoal gold_dust",
             "sleep=30000",
-            "animate=working_gold 42000",
+            "animate=working 42000",
             "produce=gold"
          },
       },
