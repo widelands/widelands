@@ -36,7 +36,7 @@ return {
          water = 20,
          cassavaroot = 15,
          ration = 5,
-         coal = 5,
+         charcoal = 5,
          gold = 1,
          hammer = 10,
          shovel = 5,
@@ -122,4 +122,5 @@ return {
             liana = 8,
          }
       })
+   end
 }

@@ -34,7 +34,7 @@ return {
          meat = 10,
          cassavaroot = 15,
          ration = 5,
-         coal = 5,
+         charcoal = 5,
          gold = 4,
          bread_amazons = 5,
          chocolate = 6,
@@ -77,10 +77,10 @@ return {
 
       place_building_in_region(player, "amazons_stonecarvery", sf:region(11), {
          inputs = {
-            granite = 6
+            granite = 6,
             log = 5,
             ironwood = 4,
-         }
+         },
       })
 
       place_building_in_region(plr, "amazons_charcoal_kiln", sf:region(10), {
