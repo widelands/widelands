@@ -321,8 +321,5 @@ tribes:new_tribe {
    ship = "amazons_ship",
    ferry = "amazons_ferry",
    port = "amazons_port",
-   ironore = "gold_dust",
-   rawlog = "log",
-   refinedlog = "rope",
-   granite = "granite",
+
 }
