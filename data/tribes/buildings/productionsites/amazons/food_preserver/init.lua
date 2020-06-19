@@ -21,21 +21,19 @@ tribes:new_productionsite_type {
       rope = 1,
    },
 
+   animation_directory = dirname,
    animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 84},
-         fps = 10,
-      },
+      idle = {hotspot = {43, 44}},
+      unoccupied = {hotspot = {43, 44}},
+   },
+   spritesheets = {
       working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 84},
-         fps = 10,
-      },
-      unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 66},
-      },
+         hotspot = {43, 44},
+         fps = 15,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      }
    },
 
    aihints = {
@@ -61,14 +59,7 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
-         actions = {
-            "call=produce_ration",
-         },
-      },
-      produce_ration = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
+         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
          descname = _"preparing a ration",
          actions = {
             -- time total: 33
