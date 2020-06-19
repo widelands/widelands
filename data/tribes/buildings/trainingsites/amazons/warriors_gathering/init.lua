@@ -58,7 +58,7 @@ tribes:new_trainingsite_type {
    inputs = {
       { name = "fish", amount = 5 },
       { name = "meat", amount = 5 },
-      { name = "bread_amazons", amount = 2 },
+      { name = "amazons_bread", amount = 2 },
       { name = "chocolate", amount = 5 },
       { name = "spear_stone_tipped", amount = 3 },
       { name = "spear_hardened", amount = 3 },
@@ -73,7 +73,7 @@ tribes:new_trainingsite_type {
       food = {
          {"fish", "meat"},
          {"chocolate"},
-         {"bread_amazons"}
+         {"amazons_bread"}
       },
       weapons = {
          "spear_stone_tipped",
@@ -109,13 +109,13 @@ tribes:new_trainingsite_type {
          descname = pgettext("amazons_building", "upgrading soldier attack from level 1 to level 2"),
          actions = {
             "checksoldier=soldier attack 1", -- Fails when aren't any soldier of level 1 attack
-            "return=failed unless site has bread_amazons",
+            "return=failed unless site has amazons_bread",
             "return=failed unless site has fish,meat",
             "return=failed unless site has chocolate",
             "return=failed unless site has spear_hardened",
             "animate=working 30000",
             "checksoldier=soldier attack 1", -- Because the soldier can be expulsed by the player
-            "consume=bread_amazons fish,meat chocolate spear_hardened",
+            "consume=amazons_bread fish,meat chocolate spear_hardened",
             "train=soldier attack 1 2"
          }
       },

@@ -36,7 +36,7 @@ return {
          ration = 5,
          charcoal = 5,
          gold = 4,
-         bread_amazons = 5,
+         amazons_bread = 5,
          chocolate = 6,
          hammer = 10,
          shovel = 5,
@@ -75,7 +75,7 @@ return {
       }
    })
 
-      place_building_in_region(player, "amazons_stonecarvery", sf:region(11), {
+      place_building_in_region(plr, "amazons_stonecarvery", sf:region(11), {
          inputs = {
             granite = 6,
             log = 5,
@@ -89,7 +89,7 @@ return {
          },
       })
 
-      place_building_in_region(player, "amazons_rope_weaver_booth", sf:region(11), {
+      place_building_in_region(plr, "amazons_rope_weaver_booth", sf:region(11), {
          inputs = {
             liana = 6,
          }

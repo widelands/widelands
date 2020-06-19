@@ -37,7 +37,7 @@ return {
          ration = 5,
          charcoal = 5,
          gold = 14,
-         bread_amazons = 5,
+         amazons_bread = 5,
          chocolate = 6,
          hammer = 10,
          shovel = 5,
@@ -94,7 +94,7 @@ return {
          }
       })
 
-      place_building_in_region(player, "amazons_hunter_gatherer_hut", sf:region(11), {
+      place_building_in_region(player, "amazons_hunter_gatherers_hut", sf:region(11), {
          inputs = {}
       })
 
@@ -170,8 +170,8 @@ return {
             wh:set_wares("gold", wh:get_wares("gold") + 1)
             added = added + 1
          end
-         if player:get_wares("cassava_root") < 60 then
-            wh:set_wares("cassava_root", wh:get_wares("cassava_root") + 10)
+         if player:get_wares("cassavaroot") < 60 then
+            wh:set_wares("cassavaroot", wh:get_wares("cassavaroot") + 10)
             added = added + 1
          end
 

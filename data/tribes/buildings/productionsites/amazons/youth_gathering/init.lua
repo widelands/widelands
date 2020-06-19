@@ -50,7 +50,7 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "spear_wooden", amount = 5 },
       { name = "tunic", amount = 5 },
-      { name = "bread_amazons", amount = 5 },
+      { name = "amazons_bread", amount = 5 },
       { name = "fish", amount = 3 },
       { name = "meat", amount = 3 },
       { name = "amazons_carrier", amount = 8 }
@@ -65,7 +65,7 @@ tribes:new_productionsite_type {
          descname = pgettext("amazons_building", "recruiting soldier"),
          actions = {
             "return=skipped unless economy needs amazons_soldier",
-            "consume=spear_wooden tunic bread_amazons fish,meat amazons_carrier",
+            "consume=spear_wooden tunic amazons_bread fish,meat amazons_carrier",
             "sleep=15000",
             "animate=working 15000",
             "recruit=amazons_soldier"

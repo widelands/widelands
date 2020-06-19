@@ -82,7 +82,7 @@ tribes:new_tribe {
           "water",
           "cassavaroot",
           "cocoa_beans",
-          "bread_amazons",
+          "amazons_bread",
           "chocolate",
           "fish",
           "meat",
