@@ -205,14 +205,14 @@ MultiPlayerLoader::MultiPlayerLoader(Widelands::Game& game) : SavegameLoader(gam
 }
 
 bool MultiPlayerLoader::is_valid_gametype(const SavegameData& gamedata) const {
-	return gamedata.is_multiplayer();
+	return gamedata.is_multiplayer() || gamedata.is_replay();
 }
 
 SinglePlayerLoader::SinglePlayerLoader(Widelands::Game& game) : SavegameLoader(game) {
 }
 
 bool SinglePlayerLoader::is_valid_gametype(const SavegameData& gamedata) const {
-	return gamedata.is_singleplayer();
+	return gamedata.is_singleplayer() || gamedata.is_replay();
 }
 
 EverythingLoader::EverythingLoader(Widelands::Game& game) : SavegameLoader(game) {
