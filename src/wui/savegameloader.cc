@@ -205,6 +205,7 @@ MultiPlayerLoader::MultiPlayerLoader(Widelands::Game& game) : SavegameLoader(gam
 }
 
 bool MultiPlayerLoader::is_valid_gametype(const SavegameData& gamedata) const {
+	// TODO(jmoerschbach): workaround to be able to load replays in multiplayer loading screen
 	return gamedata.is_multiplayer() || gamedata.is_replay();
 }
 
@@ -212,7 +213,7 @@ SinglePlayerLoader::SinglePlayerLoader(Widelands::Game& game) : SavegameLoader(g
 }
 
 bool SinglePlayerLoader::is_valid_gametype(const SavegameData& gamedata) const {
-	return gamedata.is_singleplayer() || gamedata.is_replay();
+	return gamedata.is_singleplayer();
 }
 
 EverythingLoader::EverythingLoader(Widelands::Game& game) : SavegameLoader(game) {
