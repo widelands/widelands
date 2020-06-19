@@ -32,7 +32,7 @@ install:
   # Installed required libs
   - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-ninja mingw-w64-%MINGWSUFFIX%-boost mingw-w64-%MINGWSUFFIX%-SDL2_ttf mingw-w64-%MINGWSUFFIX%-SDL2_mixer mingw-w64-%MINGWSUFFIX%-SDL2_image mingw-w64-%MINGWSUFFIX%-glew\""
 
-shallow_clone: true
+shallow_clone: false
 
 branches:
   only:
@@ -46,16 +46,18 @@ build_script:
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
   - cmd: md build
   - cmd: cd build
-  - cmd: echo %APPVEYOR_BUILD_VERSION%_%CONFIGURATION%_%PLATFORM% > %APPVEYOR_BUILD_FOLDER%\WL_RELEASE
+  # detect revision
+  - cmd: python %APPVEYOR_BUILD_FOLDER%\utils\detect_revision.py > %APPVEYOR_BUILD_FOLDER%\WL_RELEASE
+  - cmd: set /p WIDELANDS_VERSION_STRING=<%APPVEYOR_BUILD_FOLDER%\WL_RELEASE
   - cmd: "IF \"%PLATFORM%\" == \"x86\" (cmake -G \"Ninja\" -DBoost_NO_BOOST_CMAKE=ON -DCMAKE_BUILD_TYPE=%CONFIGURATION% -DOPTION_USE_GLBINDING=OFF -DOPTION_GLEW_STATIC=ON -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DCMAKE_JOB_POOLS=\"linking=1\" -DCMAKE_JOB_POOL_LINK=linking -DPNG_LIBRARY_RELEASE=\"C:/msys64/mingw32/lib/libpng.a\" -DSDL2_IMAGE_LIBRARY=\"C:/msys64/mingw32/lib/libSDL2_image.a\" -DZLIB_LIBRARY_RELEASE=\"C:/msys64/mingw32/lib/libz.a\" -DSDL2_TTF_LIBRARY=\"C:/msys64/mingw32/lib/libSDL2_ttf.a\" -DSDL2_MIXER_LIBRARY=\"C:/msys64/mingw32/lib/libSDL2_mixer.a\" -DSDL2MAIN_LIBRARY=\"C:/msys64/mingw32/lib/libSDL2main.a\" -DSDL2_LIBRARY=\"C:/msys64/mingw32/lib/libSDL2.a\" -DICU_UC_LIBRARY_RELEASE=\"C:/msys64/mingw32/lib/libicuuc.a\" -DICU_DT_LIBRARY_RELEASE=\"C:/msys64/mingw32/lib/libicudt.a\" -DIntl_LIBRARY=\"C:/msys64/mingw32/lib/libintl.a\" %APPVEYOR_BUILD_FOLDER%) ELSE (cmake -G \"Ninja\" -DBoost_NO_BOOST_CMAKE=ON -DCMAKE_BUILD_TYPE=%CONFIGURATION% -DOPTION_USE_GLBINDING=OFF -DOPTION_GLEW_STATIC=ON -DOPTION_BUILD_CODECHECK=OFF -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_ASAN=OFF -DCMAKE_JOB_POOLS=\"linking=1\" -DCMAKE_JOB_POOL_LINK=linking -DPNG_LIBRARY_RELEASE=\"C:/msys64/mingw64/lib/libpng.a\" -DSDL2_IMAGE_LIBRARY=\"C:/msys64/mingw64/lib/libSDL2_image.a\" -DZLIB_LIBRARY_RELEASE=\"C:/msys64/mingw64/lib/libz.a\" -DSDL2_TTF_LIBRARY=\"C:/msys64/mingw64/lib/libSDL2_ttf.a\" -DSDL2_MIXER_LIBRARY=\"C:/msys64/mingw64/lib/libSDL2_mixer.a\" -DSDL2MAIN_LIBRARY=\"C:/msys64/mingw64/lib/libSDL2main.a\" -DSDL2_LIBRARY=\"C:/msys64/mingw64/lib/libSDL2.a\" -DICU_UC_LIBRARY_RELEASE=\"C:/msys64/mingw64/lib/libicuuc.a\" -DICU_DT_LIBRARY_RELEASE=\"C:/msys64/mingw64/lib/libicudt.a\" -DIntl_LIBRARY=\"C:/msys64/mingw64/lib/libintl.a\" %APPVEYOR_BUILD_FOLDER%)"
   - cmd: "cmake --build ."
 on_success:
   - cmd: strip -sv %APPVEYOR_BUILD_FOLDER%\build\src\widelands.exe
-  - cmd: ISCC /q /o%APPVEYOR_BUILD_FOLDER% /fWidelands-%APPVEYOR_BUILD_VERSION%-%CONFIGURATION%-%PLATFORM% c:\projects\widelands\utils\win32\innosetup\Widelands.iss
-  - appveyor PushArtifact %APPVEYOR_BUILD_FOLDER%\Widelands-%APPVEYOR_BUILD_VERSION%-%CONFIGURATION%-%PLATFORM%.exe
+  - cmd: ISCC /q /o%APPVEYOR_BUILD_FOLDER% /fWidelands-%CONFIGURATION%-%PLATFORM%-%WIDELANDS_VERSION_STRING% c:\projects\widelands\utils\win32\innosetup\Widelands.iss
+  - appveyor PushArtifact %APPVEYOR_BUILD_FOLDER%\Widelands-%CONFIGURATION%-%PLATFORM%-%WIDELANDS_VERSION_STRING%.exe
 
 artifacts:
-  - path: Widelands-$(APPVEYOR_BUILD_VERSION)-$(CONFIGURATION)-$(PLATFORM).exe
+  - path: Widelands-$(CONFIGURATION)-$(PLATFORM)-$(WIDELANDS_VERSION_STRING).exe
     name: Widelands Setup
 
 platform:
