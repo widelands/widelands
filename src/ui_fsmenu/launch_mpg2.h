@@ -60,8 +60,6 @@ private:
 	void load_map_info();
 	void help_clicked();
 
-	int32_t const right_column_x_;
-
 	UI::Button help_button_;
 
 	std::unique_ptr<UI::FullscreenHelpWindow> help_;

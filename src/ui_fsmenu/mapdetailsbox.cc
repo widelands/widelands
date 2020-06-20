@@ -3,8 +3,12 @@
 #include "logic/game_settings.h"
 #include "map_io/map_loader.h"
 
-MapDetailsBox::MapDetailsBox(
-   Panel* parent, uint32_t, uint32_t standard_element_height, int32_t max_x, int32_t max_y)
+MapDetailsBox::MapDetailsBox(Panel* parent,
+                             uint32_t,
+                             uint32_t standard_element_height,
+                             uint32_t padding,
+                             int32_t max_x,
+                             int32_t max_y)
    : UI::Box(parent, 0, 0, UI::Box::Vertical),
      title_(this,
             0,
@@ -41,14 +45,12 @@ MapDetailsBox::MapDetailsBox(
         UI::PanelStyle::kFsMenu,
         "sample map description which might be a\n very long text so scrollbar is needed") {
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
+	add_space(3 * padding);
 	title_box_.add(&map_name_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	title_box_.add_inf_space();
 	title_box_.add(&select_map_, UI::Box::Resizing::kAlign, UI::Align::kRight);
 	add(&title_box_, UI::Box::Resizing::kFullSize);
 	add(&map_description_, UI::Box::Resizing::kExpandBoth);
-
-	log("max_y: %d\n", max_y);
-	log("max_x: %d\n", max_x);
 }
 MapDetailsBox::~MapDetailsBox() {
 }

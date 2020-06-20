@@ -13,6 +13,7 @@ public:
 	MapDetailsBox(Panel* parent,
 	              uint32_t standard_element_width,
 	              uint32_t standard_element_height,
+	              uint32_t padding,
 	              int32_t max_x = 0,
 	              int32_t max_y = 0);
 	~MapDetailsBox();

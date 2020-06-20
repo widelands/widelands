@@ -13,7 +13,7 @@ FullscreenMenuLaunchSPG2::FullscreenMenuLaunchSPG2(GameSettingsProvider* const s
                                                    GameController* const ctrl)
    : FullscreenMenuLaunchGame(settings, ctrl),
 
-     player_setup(&individual_content_box, settings, standard_element_height_) {
+     player_setup(&individual_content_box, settings, standard_element_height_, padding_) {
 
 	individual_content_box.add(&player_setup, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 

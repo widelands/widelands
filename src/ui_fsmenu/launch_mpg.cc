@@ -190,7 +190,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 
 	mpsg_ = new MultiPlayerSetupGroup(
 	   this, get_w() * 3 / 80, change_map_or_save_.get_y(), get_w() * 53 / 80,
-	   get_h() * 17 / 30 - change_map_or_save_.get_y(), settings, standard_element_height_);
+	   get_h() * 17 / 30 - change_map_or_save_.get_y(), settings, standard_element_height_,4);
 
 	// If we are the host, open the map or save selection menu at startup
 	if (settings_->settings().usernum == 0 && settings_->settings().mapname.empty()) {

@@ -9,7 +9,10 @@
 #include "map_io/map_loader.h"
 
 SinglePlayerActivePlayerSetupBox::SinglePlayerActivePlayerSetupBox(
-   UI::Panel* const parent, GameSettingsProvider* const settings, uint32_t standard_element_height)
+   UI::Panel* const parent,
+   GameSettingsProvider* const settings,
+   uint32_t standard_element_height,
+   uint32_t padding)
    : UI::Box(parent, 0, 0, UI::Box::Vertical),
      title_(this,
             0,
@@ -21,6 +24,7 @@ SinglePlayerActivePlayerSetupBox::SinglePlayerActivePlayerSetupBox(
             g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
      settings_(settings) {
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
+	add_space(3 * padding);
 	active_player_groups.resize(kMaxPlayers);
 	for (PlayerSlot i = 0; i < active_player_groups.size(); ++i) {
 		active_player_groups.at(i) =
@@ -145,9 +149,10 @@ void SinglePlayerActivePlayerGroup::update() {
 
 SinglePlayerSetupBox::SinglePlayerSetupBox(UI::Panel* const parent,
                                            GameSettingsProvider* const settings,
-                                           uint32_t standard_element_height)
+                                           uint32_t standard_element_height,
+                                           uint32_t padding)
    : UI::Box(parent, 0, 0, UI::Box::Horizontal),
-     active_players_setup(this, settings, standard_element_height) {
+     active_players_setup(this, settings, standard_element_height, padding) {
 	add(&active_players_setup);
 }
 

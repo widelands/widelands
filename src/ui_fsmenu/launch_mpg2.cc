@@ -91,11 +91,9 @@ FullscreenMenuLaunchMPG2::FullscreenMenuLaunchMPG2(GameSettingsProvider* const s
                                                    ChatProvider& chat)
    : FullscreenMenuLaunchGame(settings, ctrl),
 
-     right_column_x_(get_w() * 57 / 80),
-
      help_button_(this,
                   "help",
-                  right_column_x_ + standard_element_width_ - standard_element_height_,
+                  (get_w() * 57 / 80) + standard_element_width_ - standard_element_height_,
                   get_h() / 100,
                   standard_element_height_,
                   standard_element_height_,
@@ -112,7 +110,7 @@ FullscreenMenuLaunchMPG2::FullscreenMenuLaunchMPG2(GameSettingsProvider* const s
            individual_content_box.get_w(),
            individual_content_box.get_h() / 3,
            settings,
-           standard_element_height_),
+           standard_element_height_, padding_),
      chat_(&individual_content_box,
            0,
            0,

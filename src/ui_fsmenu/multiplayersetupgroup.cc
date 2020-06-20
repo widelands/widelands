@@ -88,7 +88,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 			   case NoteGameSettings::Action::kPlayer:
 				   break;
 			   }
-			});
+		   });
 	}
 
 	void force_new_dimensions(float, uint32_t standard_element_height) {
@@ -276,7 +276,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					   update();
 				   }
 			   }
-			});
+		   });
 
 		// Init dropdowns
 		update();
@@ -642,7 +642,8 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
                                              int32_t const,
                                              int32_t const h,
                                              GameSettingsProvider* const settings,
-                                             uint32_t buth)
+                                             uint32_t buth,
+                                             uint32_t padding)
    : UI::Box(parent, x, y, UI::Box::Horizontal, 0, h),
      settings_(settings),
      npsb(new NetworkPlayerSettingsBackend(settings_)),
@@ -668,14 +669,15 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
      buth_(buth) {
 
 	clientbox.add(&clients_, Resizing::kAlign, UI::Align::kCenter);
+	clientbox.add_space(3 * padding);
 	clientbox.set_scrolling(true);
 
 	add(&clientbox);
 	add_inf_space();
 	add(&playerbox);
 
-	playerbox.add_space(0);
 	playerbox.add(&players_, Resizing::kAlign, UI::Align::kCenter);
+	playerbox.add_space(padding);
 
 	multi_player_player_groups.resize(kMaxPlayers);
 	for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
