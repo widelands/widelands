@@ -37,7 +37,8 @@ class SinglePlayerActivePlayerSetupBox : public UI::Box {
 public:
 	SinglePlayerActivePlayerSetupBox(UI::Panel* const parent,
 	                                 GameSettingsProvider* const settings,
-	                                 uint32_t standard_element_height, uint32_t padding);
+	                                 uint32_t standard_element_height,
+	                                 uint32_t padding);
 
 	void force_new_dimensions(float scale, uint32_t standard_element_height);
 
@@ -54,7 +55,8 @@ class SinglePlayerSetupBox : public UI::Box {
 public:
 	SinglePlayerSetupBox(UI::Panel* const parent,
 	                     GameSettingsProvider* const settings,
-	                     uint32_t standard_element_height, uint32_t  padding);
+	                     uint32_t standard_element_height,
+	                     uint32_t padding);
 
 	void force_new_dimensions(float scale, uint32_t standard_element_height);
 
