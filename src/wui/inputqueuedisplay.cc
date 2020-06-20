@@ -514,7 +514,7 @@ void InputQueueDisplay::update_siblings_fill(int32_t delta) {
 			continue;
 		}
 		InputQueueDisplay* display = dynamic_cast<InputQueueDisplay*>(sibling);
-		if (display == nullptr) {
+		if (display == nullptr || display->no_capacity_buttons_) {
 			// Cast failed. Sibling is no InputQueueDisplay
 			continue;
 		}
