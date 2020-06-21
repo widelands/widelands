@@ -20,16 +20,18 @@ tribes:new_productionsite_type {
       rope = 1,
    },
 
+   animation_directory = dirname,
    animations = {
+      unoccupied = {hotspot = {43, 44}},
+   },
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {49, 90},
-         fps = 10,
-      },
-      unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {49, 68},
-      },
+         hotspot = {43, 44},
+         fps = 4,
+         frames = 4,
+         columns = 2,
+         rows = 2
+      }
    },
 
    aihints = {
@@ -53,7 +55,7 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start planting bushes because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start enhancing the fertility of land because ...
          descname = _"enhancing the fertility of land",
          actions = {
             "callworker=check",
@@ -67,7 +69,7 @@ tribes:new_productionsite_type {
          }
       },
       terraform = {
-         -- TRANSLATORS: Completed/Skipped/Did not start planting bushes because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start enhancing the fertility of land because ...
          descname = _"enhancing the fertility of land",
          actions = {
             "callworker=terraform",
