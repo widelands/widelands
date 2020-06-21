@@ -18,21 +18,19 @@ tribes:new_productionsite_type {
       granite = 3,
    },
 
+   animation_directory = dirname,
    animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 94},
-         fps = 10,
-      },
+      unoccupied = {hotspot = {43, 44}},
+      idle = {hotspot = {43, 44}},
+   },
+   spritesheets = {
       working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 94},
-         fps = 10,
-      },
-      unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 72},
-      },
+         hotspot = {43, 45},
+         fps = 15,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      }
    },
 
    aihints = {
@@ -51,8 +49,8 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start producing coal because ...
-         descname = _"producing coal",
+         -- TRANSLATORS: Completed/Skipped/Did not start producing charcoal because ...
+         descname = _"producing charcoal",
          actions = {
             "return=skipped unless economy needs charcoal",
             "consume=log:6",
