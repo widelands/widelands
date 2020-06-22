@@ -3,7 +3,7 @@
 # 
 # Translators:
 # ks k, 2018
-# ks k, 2018-2019
+# ks k, 2018-2020
 # TaeMin An, 2019
 # wig sejo <sejojun@gmail.com>, 2019
 msgid ""
@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-04-12 17:32+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"PO-Revision-Date: 2020-06-21 08:01+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -99,7 +99,7 @@ msgstr "농장과 blackroot 밭을 건설하세요"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:58
 msgid "Build a mill to make cornmeal and blackroot flour"
-msgstr ""
+msgstr "옥수수 가루와 냉초 가루를 만들기 위해 방앗간을 만드십시오"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:59
 msgid "Build a well"
@@ -121,7 +121,7 @@ msgstr "날 물고기를 얻기위해 물고기 잡이의 집을 물가 가까�
 msgid ""
 "Build a fish breeder’s house close to the fisher to make sure the fish do "
 "not die out"
-msgstr ""
+msgstr "물고기가 죽지 않도록 어부 가까이에 물고기 양식업자의 집을 지으십시오"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build two smokeries to smoke raw meat and fish"
@@ -183,7 +183,7 @@ msgstr "광석들은 사용될 수 있기 전에 제련소에서 제련되어야
 msgid ""
 "Build a mine of each type. Make sure to send geologists to the mountain "
 "first."
-msgstr ""
+msgstr "각 유형의 광산을 만드십시오. 먼저 지질학자를 산으로 보내십시오."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:88
 msgid "Build a smelting works"
@@ -279,11 +279,11 @@ msgstr "호숫가에 조선소를 건설하여 선박 건조 착수하십시오"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:142
 msgid "Proud to the Death"
-msgstr ""
+msgstr "자랑스러운 죽음"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:144
 msgid "Favored by the God"
-msgstr ""
+msgstr "하느님의 총애를 받습니다"
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:146
@@ -308,7 +308,7 @@ msgstr "이 이야기는 Ajanthul왕의 43대 손, Askandor왕의 치세동안 �
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:152
 msgid "Disgraced Before the God"
-msgstr ""
+msgstr "하나님 앞에서 망신을 당했습니다"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:154
 msgid "The God’s Punishment"
@@ -335,11 +335,11 @@ msgstr "성직자들은 명상에 들어갔고 물이 범람한 이유는 곧 �
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:162
 msgid "Uproar and Confusion"
-msgstr ""
+msgstr "소란과 혼란"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:164
 msgid "Emerging Chaos…"
-msgstr ""
+msgstr "혼란이 드러나고 있습니다..."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:166
@@ -381,11 +381,11 @@ msgstr "죽어가는 아틀란티스와 그들의 과거를 뒤로 하고, 그�
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:179
 msgid "The Princess’ Memoir"
-msgstr ""
+msgstr "공주의 회고록"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:180
 msgid "Jundlina Writes Down Her Memories"
-msgstr ""
+msgstr "준드리나는 그녀의 기억을 적는다"
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:182
@@ -419,7 +419,7 @@ msgstr "우리는 이 섬에 자리를 잡았다.\n다음 단계는 이 섬에 �
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:191
 msgid "Loftomor and Sidolus Arrive"
-msgstr ""
+msgstr "로프토머와 시도루스가 도착한다"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:192
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:227
@@ -435,7 +435,7 @@ msgstr ""
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:457
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:470
 msgid "Jundlina"
-msgstr ""
+msgstr "준드리나"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:194
@@ -448,7 +448,7 @@ msgstr "Satul이 너희 둘을 다 따듯하게 해주길. Loftomor, 당신은 �
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:197
 msgid "Loftomor Speaks"
-msgstr ""
+msgstr "로프토머가 말한다"
 
 #. TRANSLATORS: Loftomor
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:200
@@ -464,7 +464,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:204
 msgid "Sidolus Speaks"
-msgstr ""
+msgstr "시도루스가 말한다"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:207
@@ -480,11 +480,11 @@ msgstr ""
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:254
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:324
 msgid "Jundlina is Satisfied"
-msgstr ""
+msgstr "준드리나가 만족해 했다"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:215
 msgid "Jundlina’s Memoirs"
-msgstr ""
+msgstr "준드리나의 기억"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:217
@@ -497,13 +497,13 @@ msgstr "우리 건물의 기반 시설이 완성 되었고 나는 모두가 서�
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:220
 msgid "Colionder Arrives"
-msgstr ""
+msgstr "코리온더가 도착했다"
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:223
 msgid ""
 "May Satul warm you, Jundlina. Can I be of any service to you or the god?"
-msgstr ""
+msgstr "사툴이 당신을 따뜻하게 해주길 빕니다, 준드리나. 제가 당신이나 신에게 무슨 도움이 될 수 있을까요?"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:226
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:272
@@ -513,7 +513,7 @@ msgstr ""
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:436
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:456
 msgid "Jundlina Replies"
-msgstr ""
+msgstr "준드리나가 대답했다"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:229
@@ -527,7 +527,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:232
 msgid "Colionder is in Thought"
-msgstr ""
+msgstr "코리온더는 생각에 잠겼다"
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:235
@@ -562,27 +562,27 @@ msgstr ""
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:244
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:245
 msgid "Jundlina Agrees"
-msgstr ""
+msgstr "준드리나는 동의했다"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:247
 msgid "Your words sound wise to me, Colionder. So be it then."
-msgstr ""
+msgstr "당신의 말이 현명하게 들리네요, 코리온더. 그럼 그렇게 하세요."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:255
 msgid "Jundlina is Reviewing the Reports"
-msgstr ""
+msgstr "준드리나는 보고서를 검토하고 있었다"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:257
 msgid ""
 "Seems like our food production is finished and everybody is working together"
 " nicely. It is really starting to feel like home here."
-msgstr ""
+msgstr "우리 식량 생산은 끝나고 모두가 잘 협력하고 있는 것 같아요. 여기는 진짜 고향처럼 느껴지기 시작했어요."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:263
 msgid "A Man Comes to Jundlina"
-msgstr ""
+msgstr "한 남자가 준드리나를 찾아왔다"
 
 #. TRANSLATORS: Opol
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:266
@@ -614,7 +614,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:282
 msgid "Opol Seeks Out Jundlina"
-msgstr ""
+msgstr "오폴은 준드리나를 찾고있었다"
 
 #. TRANSLATORS: Opol
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:285
@@ -634,7 +634,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:298
 msgid "Sidolus Seeks Out Jundlina"
-msgstr ""
+msgstr "시도루스가 준드리나를 찾고 있었다"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:301
@@ -649,7 +649,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:305
 msgid "Jundlina Nods"
-msgstr ""
+msgstr "준들리나는 고개를 끄덕였다"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:307
