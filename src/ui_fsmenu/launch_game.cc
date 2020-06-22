@@ -160,6 +160,7 @@ void FullscreenMenuLaunchGame::layout() {
 	title_.set_font_scale(scale_factor());
 	map_details.force_new_dimensions(
 	   scale_factor(), standard_element_width_, standard_element_height_);
+	map_box_.set_desired_size(standard_element_width_,0);
 	win_condition_type.set_font_scale(scale_factor());
 
 	main_box_.set_size(get_w(), get_h());
