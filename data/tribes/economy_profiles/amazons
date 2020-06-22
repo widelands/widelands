@@ -9,7 +9,7 @@
 1="true"
 
 [0]
-bread_amazons="20"
+amazons_bread="20"
 chocolate="15"
 tunic="15"
 vest_padded="2"
@@ -42,7 +42,7 @@ amazons_tapir="1"
 amazons_soldier="10"
 
 [1]
-bread_amazons="20"
+amazons_bread="20"
 chocolate="15"
 tunic="30"
 vest_padded="3"

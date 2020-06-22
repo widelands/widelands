@@ -17,25 +17,20 @@ tribes:new_productionsite_type {
       log = 2
    },
 
+   animation_directory = dirname,
    animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {38, 94},
-         fps = 10,
-      },
+      idle = {hotspot = {39, 46}},
+      empty = {hotspot = {39, 46}},
+      unoccupied = {hotspot = {39, 46}},
+   },
+   spritesheets = {
       working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {38, 94},
-         fps = 10,
-      },
-      empty = {
-         pictures = path.list_files (dirname .. "empty_??.png"),
-         hotspot = {38, 94},
-      },
-      unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {38, 72},
-      },
+         hotspot = {39, 46},
+         fps = 15,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      }
    },
 
    indicate_workarea_overlaps = {
