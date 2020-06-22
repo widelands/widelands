@@ -146,8 +146,8 @@ return {
             wh:set_wares("granite", wh:get_wares("granite") + 5)
             added = added + 1
          end
-         if wh:get_wares("coal") < 100 then
-            wh:set_wares("coal", wh:get_wares("coal") + 10)
+         if wh:get_wares("charcoal") < 100 then
+            wh:set_wares("charcoal", wh:get_wares("charcoal") + 10)
             added = added + 1
          end
          if wh:get_wares("ironwood") < 30 then
