@@ -1,6 +1,6 @@
 function ware_helptext(tribe)
    local helptext = {
-      -- TRANSLATORS: Helptext for a ware: Coal
+      -- TRANSLATORS: Helptext for a ware: Charcoal
       amazons = pgettext("amazons_ware", "Charcoal produced out of logs by a charcoal burner. The Amazons use charcoal for drying their food and smelting gold."),
    }
    local result = ""
