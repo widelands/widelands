@@ -4,7 +4,7 @@ tribes:new_productionsite_type {
    msgctxt = "amazons_building",
    name = "amazons_wilderness_keepers_tent",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("amazons_building", "Wilderness Keepers Tent"),
+   descname = pgettext("amazons_building", "Wilderness Keeper’s Tent"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
@@ -17,17 +17,14 @@ tribes:new_productionsite_type {
       rope = 1
    },
 
-   animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {49, 88},
-         fps = 10,
-      },
-      unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {49, 66},
-      },
-   },
+   animation_directory = dirname,
+   spritesheets = { idle = {
+      hotspot = {34, 38},
+      fps = 5,
+      frames = 10,
+      columns = 5,
+      rows = 2
+   }},
 
    aihints = {
       supports_production_of = { "fish", "meat" },
