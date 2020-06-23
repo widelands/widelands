@@ -191,7 +191,7 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
                                 bool loading,
                                 FormerBuildings const former_buildings) const {
 	std::pair<DescriptionIndex, std::string> immovable = std::make_pair(INVALID_INDEX, "");
-	if (built_over_immovable_ != INVALID_INDEX) {
+	if (built_over_immovable_ != INVALID_INDEX && !loading) {
 		bool immovable_previously_found = false;
 		for (const auto& pair : former_buildings) {
 			if (!pair.second.empty()) {
