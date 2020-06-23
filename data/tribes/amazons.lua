@@ -14,8 +14,6 @@ tribes:new_tribe {
    },
    spritesheets = {
       flag = {
-         directory = image_dirname,
-         basename = "flag",
          hotspot = {26, 39},
          frames = 10,
          columns = 5,
