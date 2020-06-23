@@ -24,7 +24,32 @@ tribes:new_carrier_type {
 
    animation_directory = dirname,
    ware_hotspot = { 0, 18 },
-   animations = animations,
+   spritesheets = {
+      walkload = {
+         basename = "walk",
+         fps = 20,
+         frames = 20,
+         columns = 5,
+         rows = 4,
+         directional = true,
+         hotspot = {15, 31}
+      },
+      walk = {
+         fps = 20,
+         frames = 20,
+         columns = 5,
+         rows = 4,
+         directional = true,
+         hotspot = {15, 31}
+      },
+      idle = {
+         fps = 20,
+         frames = 20,
+         columns = 5,
+         rows = 4,
+         hotspot = {22, 15}
+      },
+   },
 
    aihints = {
       preciousness = {
