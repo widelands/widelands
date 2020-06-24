@@ -22,17 +22,17 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:45
 msgid "Build your first outpost"
-msgstr ""
+msgstr "당신의 첫번째 전초기지를 지으십시오"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:47
 msgid "First Outpost"
-msgstr ""
+msgstr "첫번째 전초기지"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:48
 msgid ""
 "Build an outpost at the yellow house symbol to the east of your provisional "
 "headquarters."
-msgstr ""
+msgstr "임시 본부 동쪽에 있는 노란 집 기호에 전초기지를 지으십시오"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:54
 msgid "Build a quarry"
@@ -46,15 +46,15 @@ msgstr "채석장"
 msgid ""
 "Build a quarry close to the abundant rocks to free some building plots and "
 "get some valuable resources."
-msgstr ""
+msgstr "풍부한 바위 근처에 채석장을 짓고 건물 부지를 없애고 귀중한 자원을 얻을 수 있습니다."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:63
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
-msgstr ""
+msgstr "나무꾼의 집과 제재소, 석공 집을 지으십시오"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:65
 msgid "Lumberjack, Sawmill and Stonemason"
-msgstr ""
+msgstr "나무꾼과 목수, 석수"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:66
 msgid ""
@@ -62,20 +62,21 @@ msgid ""
 "there is enough space for them. This will complete the basic building "
 "material supply chain."
 msgstr ""
+"충분한 공간이 확보되면 즉시 나무꾼의 집과 제재소, 석공 집을 지으십시오. 이렇게 하면 기본적인 건축 자재 공급망이 완성됩니다."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:72
 msgid "Lower the demand for marble columns to 4"
-msgstr ""
+msgstr "대리석 기둥에 대한 수요를 4로 낮추십시오"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:74
 msgid "Lower Demand for Marble Columns"
-msgstr ""
+msgstr "대리석 기둥에 대한 수요가 낮습니다"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:75
 msgid ""
 "Lower the demand for marble columns in the economy settings to four. This "
 "will help to save some marble for buildings."
-msgstr ""
+msgstr "경제 설정에서 대리석 기둥에 대한 수요를 4 개로 줄입니다. 이것은 건물의 대리석을 절약하는 데 도움이 될 것입니다."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:76
 msgid ""
