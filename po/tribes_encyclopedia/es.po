@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-06-19 18:02+0000\n"
+"PO-Revision-Date: 2020-06-23 19:48+0000\n"
 "Last-Translator: Walter Benkel <tromaster@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -700,7 +700,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Seasonal fish and game specialties served with pitta bread.<br>Choose from "
 "a prime selection of regional craft beer brands.’"
-msgstr ""
+msgstr "‘Pescado de temporada y especialidades de caza servidos con pan pita.<br>Elija de una selección de cervezas artesanales regionales de primera calidad.’"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/helptexts.lua:12
@@ -723,13 +723,13 @@ msgid ""
 "‘When the Barbarian was created,<br>this was the first thing that he "
 "stated:<br>“You want me fighting without fear?<br>Then you should create "
 "some beer!”’"
-msgstr ""
+msgstr "‘Cuando el Bárbaro se creó,<br>esto fue lo primero que exclamó:<br>“¿Quieres que luche sin temor?<br>¡Entonces prepara cerveza, será mejor!”’"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/brewery/helptexts.lua:14
 msgctxt "barbarians_building"
 msgid "First verse of the drinking song ‘Way of the Barbarian’"
-msgstr ""
+msgstr "Primer verso de la canción de beber 'Manera del Bárbaro'"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/brewery/helptexts.lua:19
@@ -751,7 +751,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Khantarakh, ‘The Modern Barbarian Economy’,<br> 5ᵗʰ cowhide ‘Traffic and "
 "Logistics’"
-msgstr ""
+msgstr "Khantarakh, ‘La Moderna Economía Bárbara',<br> 5ª piel de vacuno ‘Tráfico y Logística’"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:13
@@ -777,7 +777,7 @@ msgid ""
 "sky.<br>He sets the fire, sees it smolder<br>The logs he carried on his "
 "shoulder.<br>Burnt down to just one single coal<br>This troubles much a "
 "burner’s soul.’"
-msgstr ""
+msgstr "‘¿Cuál es la labor del carbonero?<br>¡Es el más laborioso ganador de la tribu!<br>Tronco sobre tronco apila en alto,<br>Hasta que el horno alcanza al cielo.<br>Enciende el fuego, ve la brasa arder<br>Los troncos que acarreó en su espaldo.<br>Quemados hasta ser un único carbón<br>Esto mucho atormenta el alma del carbonero.’"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/helptexts.lua:18
@@ -856,7 +856,7 @@ msgid ""
 "‘See the crop fields from here to the horizons. They are a huge, heaving, "
 "golden sea.<br>Oh wheat, source of wealth, soul of beer, strength of our "
 "warriors!’"
-msgstr ""
+msgstr "‘Mira los campos de aquí a los horizontes. Son un mar inmenso, agitado y dorado.<br>¡Oh trigo, fuente de riqueza, alma de la cerveza, fortaleza de nuestros guerreros!’"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:9
@@ -889,7 +889,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Frequent response of a barbarian fisherman,<br>often followed by an "
 "enjoyable brawl"
-msgstr ""
+msgstr "Frecuente respuesta de un pescador bárbaro,<br>a menudo seguida por una agradable riña"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:13
@@ -1059,13 +1059,13 @@ msgstr "Si la reserva de comida es estable, esta mina puede producir granito %s 
 msgctxt "barbarians_building"
 msgid ""
 "‘The helmets forgéd by this smithy<br>Are widely known for looking pithy.’"
-msgstr ""
+msgstr "‘Los yelmos fraguados por este herrero<br>Son ampliamente conocidos por parecer expresivos.’"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/helptexts.lua:11
 msgctxt "barbarians_building"
 msgid "Slogan of ‘Harrath’s Handsome Helmets’ in Al’thunran"
-msgstr ""
+msgstr "Consigna de 'Bellos Yelmos de Harrath' en Al'thunran"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/helptexts.lua:16
@@ -1418,13 +1418,13 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Behind the next hill there might be wealth and happiness but also hostility"
 " and doom.<br>He who will not explore it commits the crime of stupidity.’"
-msgstr ""
+msgstr "‘Detrás de la siguiente colina puede haber riqueza y felicidad pero también hostilidad y condena.<br>Aquel que no la explora comete el crimen de la estupidez.’"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/helptexts.lua:12
 msgctxt "barbarians_building"
 msgid "Chat’Karuth<br>at the oath taking ceremony of the first scout troupe"
-msgstr ""
+msgstr "Chat’Karuth<br>en la ceremonia de toma de juramento de la primera compañía de exploradores"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/helptexts.lua:6
@@ -1433,7 +1433,7 @@ msgid ""
 "‘When I saw the Saxnot for the first time, her majestic dragon head already "
 "looked up to the skies and the master was about to install the square "
 "sail.<br>It was the most noble ship I ever saw.’"
-msgstr ""
+msgstr "‘Cuando vi al Saxnot por vez primera, su majestuosa cabeza de dragón ya miraba hacia el cielo y el patrón estaba por izar la vela cuadrada.<br>Era el barco más noble que he visto jamás.’"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/helptexts.lua:13
@@ -1448,13 +1448,13 @@ msgctxt "barbarians_building"
 msgid ""
 "‘From inferior looking rubble they form shiny gold and gleaming iron.<br>The"
 " smelters are real magicians among our craftsmen.’"
-msgstr ""
+msgstr "‘De escombros de inferior apariencia ellos forman reluciente oro y brillante hierro.<br>Los forjadores son verdaderos magos entre nuestros artesanos.’"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/helptexts.lua:12
 msgctxt "barbarians_building"
 msgid "Chat’Karuth<br>at the 5ᵗʰ conference of master craftsmen"
-msgstr ""
+msgstr "Chat’Karuth<br>en la 5ª conferencia de maestros artesanos"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/tavern/helptexts.lua:6
@@ -1487,7 +1487,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The Barbarian war mill is their most advanced production site for weapons. "
 "As such you will need to enhance an ax workshop in order to get one."
-msgstr ""
+msgstr "El taller de guerra es el sitio bárbaro de producción más avanzado para armas. Para obtenerlo necesitarás mejorar un taller de hachas."
 
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:26
 msgctxt "barbarians_building"
@@ -1502,7 +1502,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Fine cloth and jewelry mean nothing to a true Barbarian.<br>But a noble "
 "sail in the wind will please his eyes.’"
-msgstr ""
+msgstr "‘Finas ropas y joyas nada significan para un verdadero Bárbaro.<br>Pero una noble vela al viento complacerá sus ojos.’"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:12
@@ -1510,7 +1510,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Khantarakh, ‘The Modern Barbarian Economy’,<br>9ᵗʰ cowhide ‘Seafaring and "
 "Conquest’"
-msgstr ""
+msgstr "Khantarakh, ‘La Moderna Economía Bárbara’,<br>9ª piel de vacuno ‘Viajes Marítimos y Conquista’"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:17
@@ -1547,7 +1547,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Then he hit the door with his ax and, behold,<br>the door only trembled, "
 "but the shaft of the ax burst into a thousand pieces.’"
-msgstr ""
+msgstr "‘Entonces golpeó la puerta con su hacha y, mirad,<br>la puerta sólo se estremeció, pero el mango del hacha estalló en mil pedazos.’"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/helptexts.lua:12
@@ -1555,7 +1555,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Legend about a quarrel between the brothers Harthor and Manthor,<br>Manthor "
 "is said to be the inventor of blackwood"
-msgstr ""
+msgstr "Leyenda acerca de un pleito entre los hermanos Harthor y Manthor,<br>Se dice que Manthor es el inventor de las vigas"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/helptexts.lua:18
@@ -1759,13 +1759,13 @@ msgstr "Produce vino."
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/helptexts.lua:6
 msgctxt "frisians_building"
 msgid "Why on earth shouldn’t we be able to catch fish even in the desert?"
-msgstr ""
+msgstr "¿Por qué no deberíamos ser capaces de capturar peces incluso en el desierto?"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "The fisherman who invented aqua farming"
-msgstr ""
+msgstr "El pescador que inventó las granjas marinas"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/helptexts.lua:16
@@ -1779,7 +1779,7 @@ msgctxt "building"
 msgid ""
 "The aqua farm needs holes in the ground that were dug by a clay pit’s worker"
 " nearby to use as fishing ponds."
-msgstr ""
+msgstr "Para sus estanques de pesca la granja marina necesita agujeros en el suelo que fueron cavados por el trabajador del pozo de arcilla cercano."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/helptexts.lua:6
@@ -1787,7 +1787,7 @@ msgctxt "frisians_building"
 msgid ""
 "Of course I could still forge short and long swords, but it is beneath my "
 "honor to bother with such basic equipment now."
-msgstr ""
+msgstr "Por supuesto que aún podría forjar espadas cortas y largas, pero es indigno de mi honor ocuparme ahora de pertrechos tan básicos."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/helptexts.lua:11
@@ -1795,7 +1795,7 @@ msgctxt "frisians_building"
 msgid ""
 "A master blacksmith refusing to forge anything but the most sophisticated "
 "helmets and weapons"
-msgstr ""
+msgstr "Un maestro herrero rehusándose a forjar algo que no sean los yelmos y armas más sofisticados"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/helptexts.lua:16
@@ -1809,13 +1809,13 @@ msgctxt "frisians_building"
 msgid ""
 "I don’t forge swords because soldiers need ’em, but soldiers get ’em because"
 " I forge ’em."
-msgstr ""
+msgstr "No forjo espadas porque los soldados las necesiten, sino que los soldados las obtienen porque yo las forjo."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "A blacksmith pointing out his influence on soldier training"
-msgstr ""
+msgstr "Un herrero señalando su influencia en el entrenamiento militar"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/helptexts.lua:16
@@ -1827,7 +1827,7 @@ msgstr "Produce armas y yelmos para los soldados."
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/helptexts.lua:3
 msgctxt "frisians_building"
 msgid "Why shouldn’t my bread taste good? It’s only barley and water!"
-msgstr ""
+msgstr "¿Por qué no debiera saber bien mi pan? ¡Es sólo cebada y agua!"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/helptexts.lua:8
@@ -1857,7 +1857,7 @@ msgid ""
 "alone! You’d better pay close attention to me in order to make the most of "
 "it. Now here is your new short sword, forged just for you by our best "
 "blacksmiths. Time’s up everyone, now go occupy your sentinels!"
-msgstr ""
+msgstr "Tienes treinta segundos para aprender lo básico de la lucha con espadas y cómo sobrevivir en combate. ¡Un tercio de ese tiempo ya ha pasado con esta introducción! Mejor préstame mucha atención para aprovecharlo al máximo. Acá está tu nueva espada corta, forjada sólo para ti por nuestros mejores herreros. ¡Se acabó el tiempo, ahora vayan a ocupar sus centinelas!"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:8
@@ -1884,19 +1884,19 @@ msgctxt "frisians_building"
 msgid ""
 "If my honey tastes bitter, I must have left some bee stings in it. There are"
 " never any bee stings in my honey, therefore, it is not bitter."
-msgstr ""
+msgstr "Si mi miel sabe amarga es porque debo haber dejado algunos aguijones en ella. Nunca hay aguijones de abejas en mi miel, por lo tanto no está amarga."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "A beekeeper ignoring a customer’s complaint"
-msgstr ""
+msgstr "Un apicultor ignorando las quejas de un cliente"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/helptexts.lua:13
 msgctxt "frisians_building"
 msgid "Keeps bees and lets them swarm over flowering fields to produce honey."
-msgstr ""
+msgstr "Mantiene abejas y deja que vuelen sobre campos floridos para producir miel."
 
 #. TRANSLATORS: Note helptext for a building
 #. TRANSLATORS: Performance helptext for a building
@@ -1912,7 +1912,7 @@ msgctxt "frisians_building"
 msgid ""
 "My bushes may not be as tall as your trees, but I don’t know anybody who "
 "likes to eat bark!"
-msgstr ""
+msgstr "¡Mis arbustos pueden no ser tan altos como tus árboles, pero no conozco a nadie que le guste comer corteza!"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/helptexts.lua:8
@@ -1944,7 +1944,7 @@ msgstr "El cultivador de bayas se detiene %s antes de ir a trabajar de nuevo."
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:3
 msgctxt "frisians_building"
 msgid "If you don’t have iron, change your name from blacksmith to lacksmith!"
-msgstr ""
+msgstr "¡Si no tienes hierro, cambia tu nombre de herrero a latero!"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:8
@@ -1970,13 +1970,13 @@ msgstr "La herrería necesita %s de rendimiento para producir una herramienta."
 msgctxt "frisians_building"
 msgid ""
 "I know no single master miner who’ll ever work without a nice pint of beer!"
-msgstr ""
+msgstr "¡No conozco a ningún maestro minero que haga su trabajo sin una buena cerveza!"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/brewery/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "A brewer boasting about the importance of his profession"
-msgstr ""
+msgstr "Un cervecero presumiendo de la importancia de su profesión"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/brewery/helptexts.lua:13
@@ -1997,13 +1997,13 @@ msgctxt "frisians_building"
 msgid ""
 "If there is not enough coal, only the most foolish of leaders would deprive "
 "his brick kilns of it first."
-msgstr ""
+msgstr "Si no hay suficiente carbón, sólo el más necio de los líderes privará a sus hornos de ladrillos de usarlo primero."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/brick_kiln/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "A brickmaker arguing with his chieftain who was doing just that"
-msgstr ""
+msgstr "Un productor de ladrillos discutiendo con su caudillo quien estaba haciendo justamente eso"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/brick_kiln/helptexts.lua:13
@@ -2011,7 +2011,7 @@ msgctxt "building"
 msgid ""
 "Burns bricks using granite and clay, and coal as fuel. Bricks are the most "
 "important building material."
-msgstr ""
+msgstr "Quema ladrillos usando granito y arcilla, y carbón como combustible. Los ladrillos son el material de construcción más importante."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/brick_kiln/helptexts.lua:23
@@ -2026,7 +2026,7 @@ msgstr "El horno de ladrillos necesita %s de rendimiento para producir tres ladr
 msgctxt "frisians_building"
 msgid ""
 "No other tribe has ever mastered the art of charcoal burning as we have!"
-msgstr ""
+msgstr "¡Ninguna tribu ha dominado el arte de quemar carbón vegetal como nosotros!"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/helptexts.lua:8
@@ -2040,7 +2040,7 @@ msgctxt "building"
 msgid ""
 "The charcoal burner's house needs holes in the ground that were dug by a "
 "clay pit’s worker nearby to erect charcoal stacks in them."
-msgstr ""
+msgstr "La casa del carbonero necesita agujeros en el suelo, que fueron cavados por el trabajador del pozo de arcilla cercano, para apilar montones de carbón vegetal en ellos."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/helptexts.lua:23
@@ -2060,13 +2060,13 @@ msgstr "La fosa de carbonización necesita %s de rendimiento para producir un ca
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/helptexts.lua:6
 msgctxt "frisians_building"
 msgid "You think you can build a house without my help?"
-msgstr ""
+msgstr "¿Crees que puedes construir una casa sin mi ayuda?"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "A clay digger arguing with a builder"
-msgstr ""
+msgstr "Un excavador de arcilla discutiendo con un constructor"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/helptexts.lua:16
@@ -2074,7 +2074,7 @@ msgctxt "building"
 msgid ""
 "Digs up mud from the ground and uses water to turn it into clay. Clay is "
 "used to make bricks, reinforce the charcoal kiln and to build ships."
-msgstr ""
+msgstr "Saca barro del suelo y usa agua para convertirlo en arcilla. La arcilla se usa para hacer ladrillos, reforzar el horno de carbonización y construir barcos."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/helptexts.lua:21
@@ -2117,7 +2117,7 @@ msgstr "Si la reserva de comida es estable, la mina de carbón profunda puede pr
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/helptexts.lua:3
 msgctxt "frisians_building"
 msgid "Meat doesn’t grow on bushes. Fruit does."
-msgstr ""
+msgstr "La carne no crece en arbustos. La fruta sí."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/helptexts.lua:8
@@ -2150,13 +2150,13 @@ msgctxt "frisians_building"
 msgid ""
 "All I need to be happy is a slice of honey bread with some smoked meat and a"
 " beer."
-msgstr ""
+msgstr "Todo lo que necesito para ser feliz es un trozo de pan de miel con algo de carne ahumada y una cerveza."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "A master miner to the landlady"
-msgstr ""
+msgstr "Un maestro minero a la tabernera"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/helptexts.lua:16
@@ -2180,7 +2180,7 @@ msgctxt "frisians_building"
 msgid ""
 "A farmer’s reply when asked by his chieftain why he was planting such a "
 "slow-growing grain."
-msgstr ""
+msgstr "La respuesta de un granjero cuando su caudillo le preguntó por qué plantaba cereales de tan lento crecimiento."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/farm/helptexts.lua:16
@@ -2200,13 +2200,13 @@ msgctxt "frisians_building"
 msgid ""
 "Hunters can’t sell anything on a Friday, but fishers don’t have such "
 "problems."
-msgstr ""
+msgstr "Los cazadores no venden nada los días viernes, pero los pescadores no tienen esos problemas."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "A hunter admiring a fisher"
-msgstr ""
+msgstr "Un cazador admirando a un pescador"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/helptexts.lua:13
@@ -2233,13 +2233,13 @@ msgctxt "frisians_building"
 msgid ""
 "What can ever be more beautiful than the brilliant sun’s beams shining "
 "through the glistering canopy of leaves?"
-msgstr ""
+msgstr "¿Qué puede ser más hermoso que los rayos de sol brillando a través de la reluciente capa de hojas?"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/foresters_house/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "A forester explaining his choice of profession"
-msgstr ""
+msgstr "Un silvicultor explicando su elección de profesión"
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/foresters_house/helptexts.lua:18
@@ -2262,19 +2262,19 @@ msgctxt "frisians_building"
 msgid ""
 "Miners get ores from the depths of the hills; but without our work, their "
 "labour is in vain."
-msgstr ""
+msgstr "Los mineros extraen minerales de las profundidades de las colinas; pero sin nuestro trabajo, su labor es en vano."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/furnace/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "Slogan of the Smelters’ Guild"
-msgstr ""
+msgstr "Consigna del Gremio de los Forjadores"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/furnace/helptexts.lua:16
 msgctxt "building"
 msgid "Smelts iron ore and gold ore into iron and gold ingots using coal."
-msgstr ""
+msgstr "Funde mineral de hierro y de oro en hierro y lingotes de oro usando carbón."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/helptexts.lua:21
@@ -2292,7 +2292,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the gold mine can produce one piece of gold "
 "ore in %s on average."
-msgstr ""
+msgstr "Si el suministro de comida es estable, la mina de oro puede producir una pieza de mineral de oro en %s en promedio."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/helptexts.lua:21
@@ -2311,7 +2311,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep gold mine can produce two pieces of "
 "gold ore in %s on average."
-msgstr ""
+msgstr "Si el suministro de comida es estable, la mina de oro profunda puede producir dos piezas de mineral de oro en %s en promedio."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/helptexts.lua:6
@@ -2319,13 +2319,13 @@ msgctxt "frisians_building"
 msgid ""
 "Rookies will say that vengeance is sweet. Heroes will say that honey bread "
 "is sweeter."
-msgstr ""
+msgstr "Los novatos dirán que la venganza es dulce. Los héroes dirán que el pan de miel es más dulce."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "A trainer in conversation with a baker"
-msgstr ""
+msgstr "Un entrenador en conversación con un panadero"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/helptexts.lua:16
@@ -2333,7 +2333,7 @@ msgctxt "building"
 msgid ""
 "Bakes honey bread out of barley, water and honey to feed miners in deep "
 "mines and soldiers in advanced training."
-msgstr ""
+msgstr "Hornea pan de miel hecho de cebada, agua y miel para alimentar a los mineros de las minas profundas y a los soldados en entrenamiento avanzado."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/hunters_house/helptexts.lua:21
@@ -2364,7 +2364,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the iron mine can produce one piece of iron "
 "ore in %s on average."
-msgstr ""
+msgstr "Si el suministro de comida es estable, la mina de hierro puede producir una pieza de mineral de hierro en %s en promedio."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/helptexts.lua:21
@@ -2383,19 +2383,19 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep iron mine can produce two pieces of "
 "iron ore in %s on average."
-msgstr ""
+msgstr "Si el suministro de comida es estable, la mina de hierro profunda puede producir dos piezas de mineral de hierro en %s en promedio."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/helptexts.lua:6
 msgctxt "frisians_building"
 msgid "If you like beer, you’ve never tasted mead."
-msgstr ""
+msgstr "Si te gusta la cerveza, es que nunca has saboreado hidromiel."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "Slogan over a mead brewery"
-msgstr ""
+msgstr "Consigna de una cervecería de hidromiel"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/helptexts.lua:16
@@ -2403,13 +2403,13 @@ msgctxt "building"
 msgid ""
 "Brews beer out of barley and water. It also brews mead, which is beer "
 "refined with honey. Mead is consumed by experienced soldiers."
-msgstr ""
+msgstr "Elabora cerveza con cebada y agua. También elabora hidromiel, que es cerveza refinada con miel. La hidromiel es consumida por soldados experimentados."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/helptexts.lua:3
 msgctxt "frisians_building"
 msgid "When I swing my pick, whole mountains fall before me!"
-msgstr ""
+msgstr "¡Cuando blando mi pico, montañas enteras caen ante mi!"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/helptexts.lua:8
@@ -2443,13 +2443,13 @@ msgid ""
 "Of course these weapons could be used by other soldiers again without being "
 "smelted down first! The only drawback is that they’d break in two at the "
 "first blow."
-msgstr ""
+msgstr "¡Por supuesto que estas armas podrían ser usadas por otros soldados sin ser fundidas previamente! El único inconveniente es que se quebrarían en dos al primer golpe."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/recycling_center/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "A smelter explaining the need for recycling to his impatient chieftain"
-msgstr ""
+msgstr "Un forjador explicando a su caudillo la necesidad de reciclar"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/recycling_center/helptexts.lua:16
@@ -2457,26 +2457,26 @@ msgctxt "frisians_building"
 msgid ""
 "Recycles old armor and weapon parts that have been discarded by training "
 "sites into fur, iron and gold."
-msgstr ""
+msgstr "Recicla partes de viejas armaduras y armas que han sido descartadas por sitios de entrenamiento, obteniendo piel, hierro y oro."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/helptexts.lua:6
 msgctxt "frisians_building"
 msgid ""
 "No worse fortune can befall a reed farmer than to see his roof leaking."
-msgstr ""
+msgstr "No hay peor fortuna para un granjero de caña que una filtración en su techo."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "Anonymous reed farmer"
-msgstr ""
+msgstr "Granjero de caña anónimo"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/helptexts.lua:16
 msgctxt "frisians_building"
 msgid "Cultivates reed that serves three different purposes for the Frisians."
-msgstr ""
+msgstr "Cultiva caña que para los Frisios cumple tres propósitos distintos"
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/helptexts.lua:21
@@ -2485,21 +2485,21 @@ msgid ""
 "Reed is the traditional material for roofing. It is also needed for "
 "producing buckets and fishing nets, and it is woven – together with reindeer"
 " fur – into the cloth used for ships’ sails."
-msgstr ""
+msgstr "La caña es el material tradicional para las techumbres. También se necesita para producir baldes y redes de pesca, y es tejido – junto a piel de reno – en la tela usada para las velas de los barcos."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/helptexts.lua:6
 msgctxt "frisians_building"
 msgid ""
 "Who says a beast of burden cannot be useful for other things than transport?"
-msgstr ""
+msgstr "¿Quién dice que la bestia de carga no puede ser útil para otras cosas aparte del transporte?"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/helptexts.lua:11
 msgctxt "frisians_building"
 msgid ""
 "The reindeer breeder who first proposed using reindeer fur for clothing"
-msgstr ""
+msgstr "El criador de renos que primero propuso usar la piel de renos para vestimenta"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/helptexts.lua:16
