@@ -224,12 +224,11 @@ void BaseDropdown::set_size(int nw, int nh) {
 	layout();
 }
 void BaseDropdown::set_desired_size(int nw, int nh) {
-	if(push_button_ == nullptr) {
+	if (push_button_ == nullptr) {
 		display_button_.set_desired_size(nw, nh);
-	}
-	else {
-      display_button_.set_desired_size(nw-nh, nh);
-      push_button_->set_desired_size(nh, nh);
+	} else {
+		display_button_.set_desired_size(nw - nh, nh);
+		push_button_->set_desired_size(nh, nh);
 	}
 	Panel::set_desired_size(nw, nh);
 	layout();
