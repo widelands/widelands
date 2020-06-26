@@ -7,7 +7,7 @@
 # Anton Khabarov <2233009@gmail.com>, 2015-2018
 # CupIvan <mail@cupivan.ru>, 2019
 # Максим Дронь <dronmax@gmail.com>, 2015
-# Fede4ka, 2019
+# 66c17387c1d6640720971b8ab706da27_0feead1, 2019
 # GunChleoc, 2016,2018
 # George Matsune <georg29387878@gmail.com>, 2017
 # Viktor S <awsswa59@gmail.com>, 2018-2020
