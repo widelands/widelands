@@ -5,8 +5,8 @@
 # Translators:
 # Airina Santonocito <airina.santonocito@gmail.com>, 2017
 # Mat V <enthusedquill6@gmail.com>, 2017
-# Guybrush88 <erpizzo@alice.it>, 2019
 # Filippo Montano, 2020
+# Guybrush88 <erpizzo@alice.it>, 2020
 # 
 msgid ""
 msgstr ""
@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-22 17:14+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Filippo Montano, 2020\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2020\n"
 "Language-Team: Italian (https://www.transifex.com/widelands/teams/35159/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -561,7 +561,7 @@ msgstr "Amalea sembra felice"
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:320
 msgid "I have excellent progress to report now."
-msgstr ""
+msgstr "Ho dei progressi eccellenti di cui parlare ora."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:323
@@ -603,7 +603,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:346
 msgid "A Step Closer to Getting Home"
-msgstr ""
+msgstr "Un passo più vicini a raggiungere casa"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:347
 msgid "Saledus looks excited…"
@@ -686,7 +686,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:395
 msgid "Amalea is Proud"
-msgstr ""
+msgstr "Amalea è orgogliosa"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:396
 msgid "Amalea cheers…"
@@ -757,7 +757,7 @@ msgstr "Amalea consiglia"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:433
 msgid "Amalea looks thoughtful…"
-msgstr ""
+msgstr "Amalea sembra pensierosa..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:435
@@ -1062,7 +1062,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:595
 msgid "Saledus is demanding some discipline"
-msgstr ""
+msgstr "Saledus sta esigendo un po' di disciplina"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:597
@@ -1084,7 +1084,7 @@ msgstr "È richiesta un'infrastruttura di addestramento"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:606
 msgid "Saledus has security concerns"
-msgstr ""
+msgstr "Saledus ha delle preoccupazioni relative alla sicurezza"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:608
@@ -1103,7 +1103,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:618
 msgid "Time to get Home Again"
-msgstr ""
+msgstr "Ora di ritornare a casa"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:621
@@ -1115,13 +1115,15 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:622
 msgid "Victory"
-msgstr ""
+msgstr "Vittoria"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:623
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Hai completato questa missione. Puoi continuare a giocare, se lo desideri, "
+"altrimenti passa alla prossima missione."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:633
@@ -1155,4 +1157,4 @@ msgstr "Trovato un artefatto"
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
