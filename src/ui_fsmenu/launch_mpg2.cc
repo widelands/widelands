@@ -93,8 +93,8 @@ FullscreenMenuLaunchMPG2::FullscreenMenuLaunchMPG2(GameSettingsProvider* const s
 
      help_button_(this,
                   "help",
-                  (get_w() * 57 / 80) + standard_element_width_ - standard_element_height_,
-                  get_h() / 100,
+                 0,
+                  0,
                   standard_element_height_,
                   standard_element_height_,
                   UI::ButtonStyle::kFsMenuSecondary,
@@ -150,6 +150,10 @@ FullscreenMenuLaunchMPG2::~FullscreenMenuLaunchMPG2() {
 void FullscreenMenuLaunchMPG2::layout() {
 	standard_element_width_ = get_w() / 4;
 	standard_element_height_ = get_h() * 9 / 200;
+	// hardcode help button because it does not fit in any box, align it to the map button...
+	help_button_.set_size(standard_element_height_, standard_element_height_);
+	help_button_.set_pos(Vector2i(get_w()-10*padding_-standard_element_height_, 10 * padding_));
+
 	mpsg_.set_max_size(0, get_h() / 2);
 	mpsg_.force_new_dimensions(scale_factor(), get_w() * 1 / 2, standard_element_height_);
 	chat_.force_new_dimensions(scale_factor(), get_w() * 1 / 2, get_h() / 4);
