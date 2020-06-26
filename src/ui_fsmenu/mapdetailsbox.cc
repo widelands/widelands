@@ -24,7 +24,7 @@ MapDetailsBox::MapDetailsBox(Panel* parent,
                0,
                0,
                0,
-               "Name der Map",
+               _("No map selected"),
                UI::Align::kLeft,
                g_gr->styles().font_style(UI::FontStyle::kLabel)),
      select_map_(&title_box_,
@@ -36,20 +36,20 @@ MapDetailsBox::MapDetailsBox(Panel* parent,
                  UI::ButtonStyle::kFsMenuSecondary,
                  g_gr->images().get("images/wui/menus/toggle_minimap.png"),
                  _("Change map or saved game")),
-     map_description_(
-        this,
-        0,
-        0,
-        UI::Scrollbar::kSize,  // min width must be set to avoid assertion failure...
-        0,
-        UI::PanelStyle::kFsMenu,
-        "sample map description which might be a\n very long text so scrollbar is needed") {
+     map_description_(this,
+                      0,
+                      0,
+                      UI::Scrollbar::kSize,  // min width must be set to avoid assertion failure...
+                      0,
+                      UI::PanelStyle::kFsMenu,
+                      "") {
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
 	add_space(3 * padding);
 	title_box_.add(&map_name_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	title_box_.add_inf_space();
 	title_box_.add(&select_map_, UI::Box::Resizing::kAlign, UI::Align::kRight);
 	add(&title_box_, UI::Box::Resizing::kFullSize);
+	add_space(3 * padding);
 	add(&map_description_, UI::Box::Resizing::kExpandBoth);
 }
 MapDetailsBox::~MapDetailsBox() {

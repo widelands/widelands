@@ -115,6 +115,7 @@ FullscreenMenuLaunchGame::~FullscreenMenuLaunchGame() {
 void FullscreenMenuLaunchGame::add_all_widgets() {
 	main_box_.add_space(10 * padding_);
 	main_box_.add(&title_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	main_box_.add_space(2 * padding_);
 
 	main_box_.add(&content_box_, UI::Box::Resizing::kExpandBoth);
 	main_box_.add_space(10 * padding_);
