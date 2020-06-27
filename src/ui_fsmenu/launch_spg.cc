@@ -52,9 +52,7 @@ bool FullscreenMenuLaunchSPG::clicked_select_map() {
 		return false;  // back was pressed
 	}
 
-	// why can't I ask settings_ if it is a scenario?? stupid to provide an extra bool field...
-	is_scenario_ = code == FullscreenMenuBase::MenuTarget::kScenarioGame;
-	settings_->set_scenario(is_scenario_);
+	settings_->set_scenario(code == FullscreenMenuBase::MenuTarget::kScenarioGame);
 
 	const MapData& mapdata = *msm.get_map();
 
@@ -83,7 +81,9 @@ void FullscreenMenuLaunchSPG::update() {
 
 	peaceful_.set_state(settings_->is_peaceful_mode());
 
-	// set_player_names_and_tribes(map);
+	if (settings_->settings().scenario) {
+		enforce_player_names_and_tribes(map);
+	}
 }
 
 /**
@@ -91,7 +91,7 @@ void FullscreenMenuLaunchSPG::update() {
  * player names and player tribes and take care about visibility
  * and usability of all the parts of the UI.
  */
-void FullscreenMenuLaunchSPG::set_player_names_and_tribes(Widelands::Map& map) {
+void FullscreenMenuLaunchSPG::enforce_player_names_and_tribes(Widelands::Map& map) {
 	if (settings_->settings().mapfilename.empty()) {
 		throw wexception("settings()->scenario was set to true, but no map is available");
 	}
@@ -118,11 +118,10 @@ void FullscreenMenuLaunchSPG::clicked_back() {
 	//  user it seems as if the launchgame-menu is a child of mapselect and
 	//  not the other way around - just end_modal(0); will be seen as bug
 	//  from user point of view, so we reopen the mapselect-menu.
-	// if (!select_map()) {
-	// No map has been selected: Go back to main menu
-	return end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
-	// }
-	// update(true);
+	if (!clicked_select_map()) {
+		// No map has been selected: Go back to main menu
+		return end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+	}
 }
 
 void FullscreenMenuLaunchSPG::win_condition_selected() {
@@ -149,8 +148,7 @@ void FullscreenMenuLaunchSPG::clicked_ok() {
 		                  "finished!?!"),
 		                filename.c_str());
 	if (settings_->can_launch()) {
-		settings_->set_scenario(true);
-		if (is_scenario_) {
+		if (settings_->settings().scenario) {
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kScenarioGame);
 		} else {
 			if (win_condition_dropdown_.has_selection()) {

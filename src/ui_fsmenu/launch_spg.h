@@ -26,10 +26,8 @@ private:
 	SinglePlayerSetupBox player_setup;
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 
-	bool is_scenario_;
-
 	void update();
-	void set_player_names_and_tribes(Widelands::Map& map);
+	void enforce_player_names_and_tribes(Widelands::Map& map);
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_SPG_H
