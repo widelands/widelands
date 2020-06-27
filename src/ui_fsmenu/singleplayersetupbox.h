@@ -26,10 +26,10 @@ private:
 	PlayerSlot id_;
 	GameSettingsProvider* const settings_;
 	UI::Button player_;
-	PlayerTypeDropdownSupport player_type_;
-	TribeDropdownSupport tribe_;
-	StartTypeDropdownSupport start_type;
-	TeamDropdown teams_;
+	SinglePlayerPlayerTypeDropdown player_type_;
+	SinglePlayerTribeDropdown tribe_;
+	SinglePlayerStartTypeDropdown start_type;
+	SinglePlayerTeamDropdown teams_;
 };
 
 class SinglePlayerActivePlayerSetupBox : public UI::Box {

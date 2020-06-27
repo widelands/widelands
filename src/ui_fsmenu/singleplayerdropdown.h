@@ -7,21 +7,21 @@
 #include "logic/game_settings.h"
 #include "ui_basic/dropdown.h"
 
-template <typename T> class DropDownSupport {
+template <typename T> class SinglePlayerDropDown {
 public:
-	DropDownSupport(UI::Panel* parent,
-	                const std::string& name,
-	                int32_t x,
-	                int32_t y,
-	                uint32_t w,
-	                uint32_t max_list_items,
-	                int button_dimension,
-	                const std::string& label,
-	                const UI::DropdownType type,
-	                UI::PanelStyle style,
-	                UI::ButtonStyle button_style,
-	                GameSettingsProvider* const settings,
-	                PlayerSlot id)
+	SinglePlayerDropDown(UI::Panel* parent,
+	                     const std::string& name,
+	                     int32_t x,
+	                     int32_t y,
+	                     uint32_t w,
+	                     uint32_t max_list_items,
+	                     int button_dimension,
+	                     const std::string& label,
+	                     const UI::DropdownType type,
+	                     UI::PanelStyle style,
+	                     UI::ButtonStyle button_style,
+	                     GameSettingsProvider* const settings,
+	                     PlayerSlot id)
 	   : dropdown_(parent,
 	               name,
 	               x,
@@ -39,7 +39,7 @@ public:
 		dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 		dropdown_.selected.connect([this]() { on_selection_changed(); });
 	}
-	virtual ~DropDownSupport() {
+	virtual ~SinglePlayerDropDown() {
 	}
 
 	UI::Panel* get_dropdown() {
@@ -74,25 +74,9 @@ private:
 	}
 };
 
-class TribeDropdownSupport : public DropDownSupport<std::string> {
+class SinglePlayerTribeDropdown : public SinglePlayerDropDown<std::string> {
 public:
-	TribeDropdownSupport(UI::Panel* parent,
-	                     const std::string& name,
-	                     int32_t x,
-	                     int32_t y,
-	                     uint32_t w,
-	                     int button_dimension,
-	                     GameSettingsProvider* const settings,
-	                     PlayerSlot id);
-	void rebuild() override;
-
-private:
-	void selection_action() override;
-};
-
-class PlayerTypeDropdownSupport : public DropDownSupport<std::string> {
-public:
-	PlayerTypeDropdownSupport(UI::Panel* parent,
+	SinglePlayerTribeDropdown(UI::Panel* parent,
 	                          const std::string& name,
 	                          int32_t x,
 	                          int32_t y,
@@ -103,21 +87,37 @@ public:
 	void rebuild() override;
 
 private:
+	void selection_action() override;
+};
+
+class SinglePlayerPlayerTypeDropdown : public SinglePlayerDropDown<std::string> {
+public:
+	SinglePlayerPlayerTypeDropdown(UI::Panel* parent,
+	                               const std::string& name,
+	                               int32_t x,
+	                               int32_t y,
+	                               uint32_t w,
+	                               int button_dimension,
+	                               GameSettingsProvider* const settings,
+	                               PlayerSlot id);
+	void rebuild() override;
+
+private:
 	void fill();
 	void select_entry();
 	void selection_action() override;
 };
 
-class StartTypeDropdownSupport : public DropDownSupport<uintptr_t> {
+class SinglePlayerStartTypeDropdown : public SinglePlayerDropDown<uintptr_t> {
 public:
-	StartTypeDropdownSupport(UI::Panel* parent,
-	                         const std::string& name,
-	                         int32_t x,
-	                         int32_t y,
-	                         uint32_t w,
-	                         int button_dimension,
-	                         GameSettingsProvider* const settings,
-	                         PlayerSlot id);
+	SinglePlayerStartTypeDropdown(UI::Panel* parent,
+	                              const std::string& name,
+	                              int32_t x,
+	                              int32_t y,
+	                              uint32_t w,
+	                              int button_dimension,
+	                              GameSettingsProvider* const settings,
+	                              PlayerSlot id);
 
 	void rebuild() override;
 
@@ -126,16 +126,16 @@ private:
 	void selection_action() override;
 };
 
-class TeamDropdown : public DropDownSupport<uintptr_t> {
+class SinglePlayerTeamDropdown : public SinglePlayerDropDown<uintptr_t> {
 public:
-	TeamDropdown(UI::Panel* parent,
-	             const std::string& name,
-	             int32_t x,
-	             int32_t y,
-	             uint32_t w,
-	             int button_dimension,
-	             GameSettingsProvider* const settings,
-	             PlayerSlot id);
+	SinglePlayerTeamDropdown(UI::Panel* parent,
+	                         const std::string& name,
+	                         int32_t x,
+	                         int32_t y,
+	                         uint32_t w,
+	                         int button_dimension,
+	                         GameSettingsProvider* const settings,
+	                         PlayerSlot id);
 
 	void rebuild() override;
 

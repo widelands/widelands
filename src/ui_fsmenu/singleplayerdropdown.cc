@@ -14,30 +14,30 @@
 #define RANDOM "random"
 #define CLOSED "closed"
 
-TribeDropdownSupport::TribeDropdownSupport(UI::Panel* parent,
-                                           const std::string& name,
-                                           int32_t x,
-                                           int32_t y,
-                                           uint32_t w,
-                                           int button_dimension,
-                                           GameSettingsProvider* const settings,
-                                           PlayerSlot id)
-   : DropDownSupport<std::string>(parent,
-                                  name,
-                                  x,
-                                  y,
-                                  w,
-                                  16,
-                                  button_dimension,
-                                  _("Tribe"),
-                                  UI::DropdownType::kPictorial,
-                                  UI::PanelStyle::kFsMenu,
-                                  UI::ButtonStyle::kFsMenuSecondary,
-                                  settings,
-                                  id) {
+SinglePlayerTribeDropdown::SinglePlayerTribeDropdown(UI::Panel* parent,
+                                                     const std::string& name,
+                                                     int32_t x,
+                                                     int32_t y,
+                                                     uint32_t w,
+                                                     int button_dimension,
+                                                     GameSettingsProvider* const settings,
+                                                     PlayerSlot id)
+   : SinglePlayerDropDown<std::string>(parent,
+                                       name,
+                                       x,
+                                       y,
+                                       w,
+                                       16,
+                                       button_dimension,
+                                       _("Tribe"),
+                                       UI::DropdownType::kPictorial,
+                                       UI::PanelStyle::kFsMenu,
+                                       UI::ButtonStyle::kFsMenuSecondary,
+                                       settings,
+                                       id) {
 }
 
-void TribeDropdownSupport::rebuild() {
+void SinglePlayerTribeDropdown::rebuild() {
 
 	if (selection_locked_) {
 		return;
@@ -97,7 +97,7 @@ void TribeDropdownSupport::rebuild() {
 	}
 }
 
-void TribeDropdownSupport::selection_action() {
+void SinglePlayerTribeDropdown::selection_action() {
 	const PlayerSettings& player_settings = settings_->settings().players[id_];
 	dropdown_.set_disable_style(player_settings.state == PlayerSettings::State::kShared ?
 	                               UI::ButtonDisableStyle::kPermpressed :
@@ -113,30 +113,30 @@ void TribeDropdownSupport::selection_action() {
 	}
 }
 
-PlayerTypeDropdownSupport::PlayerTypeDropdownSupport(UI::Panel* parent,
-                                                     const std::string& name,
-                                                     int32_t x,
-                                                     int32_t y,
-                                                     uint32_t w,
+SinglePlayerPlayerTypeDropdown::SinglePlayerPlayerTypeDropdown(UI::Panel* parent,
+                                                               const std::string& name,
+                                                               int32_t x,
+                                                               int32_t y,
+                                                               uint32_t w,
 
-                                                     int button_dimension,
-                                                     GameSettingsProvider* const settings,
-                                                     PlayerSlot id)
-   : DropDownSupport<std::string>(parent,
-                                  name,
-                                  x,
-                                  y,
-                                  w,
-                                  16,
-                                  button_dimension,
-                                  _("Type"),
-                                  UI::DropdownType::kPictorial,
-                                  UI::PanelStyle::kFsMenu,
-                                  UI::ButtonStyle::kFsMenuSecondary,
-                                  settings,
-                                  id) {
+                                                               int button_dimension,
+                                                               GameSettingsProvider* const settings,
+                                                               PlayerSlot id)
+   : SinglePlayerDropDown<std::string>(parent,
+                                       name,
+                                       x,
+                                       y,
+                                       w,
+                                       16,
+                                       button_dimension,
+                                       _("Type"),
+                                       UI::DropdownType::kPictorial,
+                                       UI::PanelStyle::kFsMenu,
+                                       UI::ButtonStyle::kFsMenuSecondary,
+                                       settings,
+                                       id) {
 }
-void PlayerTypeDropdownSupport::rebuild() {
+void SinglePlayerPlayerTypeDropdown::rebuild() {
 	if (selection_locked_) {
 		return;
 	}
@@ -145,7 +145,7 @@ void PlayerTypeDropdownSupport::rebuild() {
 	dropdown_.set_list_visibility(false);
 	select_entry();
 }
-void PlayerTypeDropdownSupport::fill() {
+void SinglePlayerPlayerTypeDropdown::fill() {
 	const GameSettings& settings = settings_->settings();
 	dropdown_.clear();
 	// AIs
@@ -167,7 +167,7 @@ void PlayerTypeDropdownSupport::fill() {
 	}
 }
 
-void PlayerTypeDropdownSupport::select_entry() {
+void SinglePlayerPlayerTypeDropdown::select_entry() {
 	const GameSettings& settings = settings_->settings();
 	const PlayerSettings& player_setting = settings.players[id_];
 	if (player_setting.state == PlayerSettings::State::kHuman) {
@@ -191,7 +191,7 @@ void PlayerTypeDropdownSupport::select_entry() {
 	}
 }
 
-void PlayerTypeDropdownSupport::selection_action() {
+void SinglePlayerPlayerTypeDropdown::selection_action() {
 	if (!settings_->can_change_player_state(id_)) {
 		return;
 	}
@@ -224,30 +224,30 @@ void PlayerTypeDropdownSupport::selection_action() {
 	}
 }
 
-StartTypeDropdownSupport::StartTypeDropdownSupport(UI::Panel* parent,
-                                                   const std::string& name,
-                                                   int32_t x,
-                                                   int32_t y,
-                                                   uint32_t w,
-                                                   int button_dimension,
-                                                   GameSettingsProvider* const settings,
-                                                   PlayerSlot id)
-   : DropDownSupport<uintptr_t>(parent,
-                                name,
-                                x,
-                                y,
-                                w,
-                                16,
-                                button_dimension,
-                                "",
-                                UI::DropdownType::kTextualNarrow,
-                                UI::PanelStyle::kFsMenu,
-                                UI::ButtonStyle::kFsMenuSecondary,
-                                settings,
-                                id) {
+SinglePlayerStartTypeDropdown::SinglePlayerStartTypeDropdown(UI::Panel* parent,
+                                                             const std::string& name,
+                                                             int32_t x,
+                                                             int32_t y,
+                                                             uint32_t w,
+                                                             int button_dimension,
+                                                             GameSettingsProvider* const settings,
+                                                             PlayerSlot id)
+   : SinglePlayerDropDown<uintptr_t>(parent,
+                                     name,
+                                     x,
+                                     y,
+                                     w,
+                                     16,
+                                     button_dimension,
+                                     "",
+                                     UI::DropdownType::kTextualNarrow,
+                                     UI::PanelStyle::kFsMenu,
+                                     UI::ButtonStyle::kFsMenuSecondary,
+                                     settings,
+                                     id) {
 }
 
-void StartTypeDropdownSupport::rebuild() {
+void SinglePlayerStartTypeDropdown::rebuild() {
 
 	if (selection_locked_) {
 		return;
@@ -270,7 +270,7 @@ void StartTypeDropdownSupport::rebuild() {
 	dropdown_.set_enabled(settings_->can_change_player_init(id_));
 }
 
-void StartTypeDropdownSupport::fill() {
+void SinglePlayerStartTypeDropdown::fill() {
 	const GameSettings& settings = settings_->settings();
 	const PlayerSettings& player_setting = settings.players[id_];
 	i18n::Textdomain td("tribes");  // for translated initialisation
@@ -300,7 +300,7 @@ void StartTypeDropdownSupport::fill() {
 	}
 }
 
-void StartTypeDropdownSupport::selection_action() {
+void SinglePlayerStartTypeDropdown::selection_action() {
 	if (!settings_->can_change_player_init(id_)) {
 		return;
 	}
@@ -308,30 +308,30 @@ void StartTypeDropdownSupport::selection_action() {
 		settings_->set_player_init(id_, dropdown_.get_selected());
 	}
 }
-TeamDropdown::TeamDropdown(UI::Panel* parent,
-                           const std::string& name,
-                           int32_t x,
-                           int32_t y,
-                           uint32_t w,
-                           int button_dimension,
-                           GameSettingsProvider* const settings,
-                           PlayerSlot id)
-   : DropDownSupport<uintptr_t>(parent,
-                                name,
-                                x,
-                                y,
-                                w,
-                                16,
-                                button_dimension,
-                                _("Team"),
-                                UI::DropdownType::kPictorial,
-                                UI::PanelStyle::kFsMenu,
-                                UI::ButtonStyle::kFsMenuSecondary,
-                                settings,
-                                id) {
+SinglePlayerTeamDropdown::SinglePlayerTeamDropdown(UI::Panel* parent,
+                                                   const std::string& name,
+                                                   int32_t x,
+                                                   int32_t y,
+                                                   uint32_t w,
+                                                   int button_dimension,
+                                                   GameSettingsProvider* const settings,
+                                                   PlayerSlot id)
+   : SinglePlayerDropDown<uintptr_t>(parent,
+                                     name,
+                                     x,
+                                     y,
+                                     w,
+                                     16,
+                                     button_dimension,
+                                     _("Team"),
+                                     UI::DropdownType::kPictorial,
+                                     UI::PanelStyle::kFsMenu,
+                                     UI::ButtonStyle::kFsMenuSecondary,
+                                     settings,
+                                     id) {
 }
 
-void TeamDropdown::rebuild() {
+void SinglePlayerTeamDropdown::rebuild() {
 	if (selection_locked_) {
 		return;
 	}
@@ -358,7 +358,7 @@ void TeamDropdown::rebuild() {
 	dropdown_.set_enabled(settings_->can_change_player_team(id_));
 }
 
-void TeamDropdown::selection_action() {
+void SinglePlayerTeamDropdown::selection_action() {
 	if (dropdown_.has_selection()) {
 		settings_->set_player_team(id_, dropdown_.get_selected());
 	}
