@@ -10,6 +10,9 @@
 #include "map_io/map_loader.h"
 
 #define AI_NAME_PREFIX "ai" AI_NAME_SEPARATOR
+#define HUMAN_PLAYER "human_player"
+#define RANDOM "random"
+#define CLOSED "closed"
 
 TribeDropdownSupport::TribeDropdownSupport(UI::Panel* parent,
                                            const std::string& name,
@@ -72,13 +75,12 @@ void TribeDropdownSupport::rebuild() {
 				              false, tribeinfo.tooltip);
 			}
 		}
-		dropdown_.add(pgettext("tribe", "Random"), "random",
+		dropdown_.add(pgettext("tribe", "Random"), RANDOM,
 		              g_gr->images().get("images/ui_fsmenu/random.png"), false,
 		              _("The tribe will be selected at random"));
 		if (player_setting.random_tribe) {
-			dropdown_.select("random");
+			dropdown_.select(RANDOM);
 		} else {
-			log("selecting tribe %s for player %d\n", player_setting.tribe.c_str(), id_);
 			dropdown_.select(player_setting.tribe);
 		}
 	}
@@ -95,8 +97,6 @@ void TribeDropdownSupport::rebuild() {
 	}
 }
 
-/// This will update the game settings for the tribe or shared_in with the value
-/// currently selected in the tribes dropdown.
 void TribeDropdownSupport::selection_action() {
 	const PlayerSettings& player_settings = settings_->settings().players[id_];
 	dropdown_.set_disable_style(player_settings.state == PlayerSettings::State::kShared ?
@@ -108,9 +108,8 @@ void TribeDropdownSupport::selection_action() {
 			   id_, boost::lexical_cast<unsigned int>(dropdown_.get_selected()));
 		} else {
 			const std::string& selected = dropdown_.get_selected();
-			settings_->set_player_tribe(id_, selected, selected == "random");
+			settings_->set_player_tribe(id_, selected, selected == RANDOM);
 		}
-		// Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer));
 	}
 }
 
@@ -155,37 +154,32 @@ void PlayerTypeDropdownSupport::fill() {
 		              g_gr->images().get(impl->icon_filename), false, _(impl->descname));
 	}
 	/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-	dropdown_.add(_("Random AI"), AI_NAME_PREFIX "random",
+	dropdown_.add(_("Random AI"), AI_NAME_PREFIX RANDOM,
 	              g_gr->images().get("images/ai/ai_random.png"), false, _("Random AI"));
 	dropdown_.add(
 	   /** TRANSLATORS: This is the "name" of the single player */
-	   _("You"), "human_player", g_gr->images().get("images/wui/stats/genstats_nrworkers.png"));
+	   _("You"), HUMAN_PLAYER, g_gr->images().get("images/wui/stats/genstats_nrworkers.png"));
 
 	// Do not close a player in savegames or scenarios
 	if (!settings.uncloseable(id_)) {
 		dropdown_.add(
-		   _("Closed"), "closed", g_gr->images().get("images/ui_basic/stop.png"), false, _("Closed"));
+		   _("Closed"), CLOSED, g_gr->images().get("images/ui_basic/stop.png"), false, _("Closed"));
 	}
 }
 
 void PlayerTypeDropdownSupport::select_entry() {
 	const GameSettings& settings = settings_->settings();
-	// Now select the entry according to server settings
 	const PlayerSettings& player_setting = settings.players[id_];
 	if (player_setting.state == PlayerSettings::State::kHuman) {
 		dropdown_.set_image(g_gr->images().get("images/wui/stats/genstats_nrworkers.png"));
 		dropdown_.set_tooltip((boost::format(_("%1%: %2%")) % _("Type") % _("Human")).str());
 		dropdown_.set_enabled(false);
 	} else if (player_setting.state == PlayerSettings::State::kClosed) {
-		dropdown_.select("closed");
-	} else if (player_setting.state == PlayerSettings::State::kOpen) {
-		dropdown_.select("open");
-	} else if (player_setting.state == PlayerSettings::State::kShared) {
-		dropdown_.select("shared_in");
+		dropdown_.select(CLOSED);
 	} else {
 		if (player_setting.state == PlayerSettings::State::kComputer) {
 			if (player_setting.random_ai) {
-				dropdown_.select(AI_NAME_PREFIX "random");
+				dropdown_.select(AI_NAME_PREFIX RANDOM);
 			} else if (player_setting.ai.empty()) {
 				dropdown_.set_errored(_("No AI"));
 			} else {
@@ -204,18 +198,14 @@ void PlayerTypeDropdownSupport::selection_action() {
 	if (dropdown_.has_selection()) {
 		const std::string& selected = dropdown_.get_selected();
 		PlayerSettings::State state = PlayerSettings::State::kComputer;
-		if (selected == "closed") {
+		if (selected == CLOSED) {
 			state = PlayerSettings::State::kClosed;
-		} else if (selected == "open") {
-			state = PlayerSettings::State::kOpen;
-		} else if (selected == "shared_in") {
-			state = PlayerSettings::State::kShared;
-		} else if (selected == "human_player") {
+		} else if (selected == HUMAN_PLAYER) {
 			settings_->set_player_number(id_);
 			state = PlayerSettings::State::kHuman;
 			dropdown_.set_enabled(false);
 		} else {
-			if (selected == AI_NAME_PREFIX "random") {
+			if (selected == AI_NAME_PREFIX RANDOM) {
 				settings_->set_player_ai(id_, "", true);
 			} else {
 				if (boost::starts_with(selected, AI_NAME_PREFIX)) {
@@ -257,8 +247,6 @@ StartTypeDropdownSupport::StartTypeDropdownSupport(UI::Panel* parent,
                                 id) {
 }
 
-/// Rebuild the init dropdown from the server settings. This will keep the host and client UIs in
-/// sync.
 void StartTypeDropdownSupport::rebuild() {
 
 	if (selection_locked_) {
@@ -312,8 +300,6 @@ void StartTypeDropdownSupport::fill() {
 	}
 }
 
-/// This will update the game settings for the initialization with the value
-/// currently selected in the initialization dropdown.
 void StartTypeDropdownSupport::selection_action() {
 	if (!settings_->can_change_player_init(id_)) {
 		return;
@@ -371,7 +357,7 @@ void TeamDropdown::rebuild() {
 	dropdown_.set_visible(true);
 	dropdown_.set_enabled(settings_->can_change_player_team(id_));
 }
-/// This will update the team settings with the value currently selected in the teams dropdown.
+
 void TeamDropdown::selection_action() {
 	if (dropdown_.has_selection()) {
 		settings_->set_player_team(id_, dropdown_.get_selected());
