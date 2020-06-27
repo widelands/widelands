@@ -9,7 +9,7 @@
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
-#include "ui_fsmenu/dropdownsupport.h"
+#include "ui_fsmenu/singleplayerdropdown.h"
 
 class SinglePlayerActivePlayerGroup : public UI::Box {
 public:

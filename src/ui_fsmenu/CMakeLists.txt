@@ -89,8 +89,6 @@ wl_library(ui_fsmenu_loading_common
 
 wl_library(ui_fsmenu_gameloading
   SRCS
-    dropdownsupport.cc
-    dropdownsupport.h
     launch_game.cc
     launch_game.h
     launch_mpg.cc
@@ -103,6 +101,8 @@ wl_library(ui_fsmenu_gameloading
     mapdetailsbox.h
 	multiplayersetupgroup.cc
 	multiplayersetupgroup.h
+    singleplayerdropdown.cc
+    singleplayerdropdown.h
     singleplayersetupbox.cc
     singleplayersetupbox.h
   DEPENDS

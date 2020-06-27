@@ -1,5 +1,5 @@
-#ifndef WL_UI_FSMENU_DROPDOWNSUPPORT_H
-#define WL_UI_FSMENU_DROPDOWNSUPPORT_H
+#ifndef WL_UI_FSMENU_SINGLEPLAYERDROPDOWN_H
+#define WL_UI_FSMENU_SINGLEPLAYERDROPDOWN_H
 
 #include <memory>
 #include <string>
@@ -143,4 +143,4 @@ private:
 	void selection_action() override;
 };
 
-#endif  // WL_UI_FSMENU_DROPDOWNSUPPORT_H
+#endif  // WL_UI_FSMENU_SINGLEPLAYERDROPDOWN_H
