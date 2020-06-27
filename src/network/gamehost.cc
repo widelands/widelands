@@ -54,7 +54,7 @@
 #include "network/network_player_settings_backend.h"
 #include "network/network_protocol.h"
 #include "ui_basic/progresswindow.h"
-#include "ui_fsmenu/launch_mpg2.h"
+#include "ui_fsmenu/launch_mpg.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
@@ -619,7 +619,7 @@ void GameHost::init_computer_players() {
 void GameHost::run() {
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
-	FullscreenMenuLaunchMPG2 lm(&d->hp, this, d->chat);
+	FullscreenMenuLaunchMPG lm(&d->hp, this, d->chat);
 	const FullscreenMenuBase::MenuTarget code = lm.run<FullscreenMenuBase::MenuTarget>();
 	if (code == FullscreenMenuBase::MenuTarget::kBack) {
 		// if this is an internet game, tell the metaserver that client is back in the lobby.

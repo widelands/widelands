@@ -3,12 +3,8 @@
 #include "logic/game_settings.h"
 #include "map_io/map_loader.h"
 
-MapDetailsBox::MapDetailsBox(Panel* parent,
-                             uint32_t,
-                             uint32_t standard_element_height,
-                             uint32_t padding,
-                             int32_t max_x,
-                             int32_t max_y)
+MapDetailsBox::MapDetailsBox(
+   Panel* parent, uint32_t, uint32_t standard_element_height, uint32_t padding, int32_t, int32_t)
    : UI::Box(parent, 0, 0, UI::Box::Vertical),
      title_(this,
             0,

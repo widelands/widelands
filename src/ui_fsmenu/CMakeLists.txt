@@ -95,12 +95,8 @@ wl_library(ui_fsmenu_gameloading
     launch_game.h
     launch_mpg.cc
     launch_mpg.h
-	launch_mpg2.cc
-    launch_mpg2.h
     launch_spg.cc
     launch_spg.h
-	launch_spg2.cc
-    launch_spg2.h
     loadgame.cc
     loadgame.h
     mapdetailsbox.cc
@@ -134,7 +130,6 @@ wl_library(ui_fsmenu_gameloading
     ui_fsmenu_loading_common
     ui_fsmenu_maploading
     widelands_options
-    wui
     wui_chat_ui
     wui_common_gamedetails
     wui_common_suggested_teams
