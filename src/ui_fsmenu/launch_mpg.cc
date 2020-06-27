@@ -87,8 +87,8 @@ private:
 };
 
 FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const settings,
-                                                   GameController* const ctrl,
-                                                   ChatProvider& chat)
+                                                 GameController* const ctrl,
+                                                 ChatProvider& chat)
    : FullscreenMenuLaunchGame(settings, ctrl),
 
      help_button_(this,
