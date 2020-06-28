@@ -23,16 +23,10 @@ tribes:new_productionsite_type {
       rope = 1,
    },
 
+   animation_directory = dirname,
    animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 87},
-         fps = 10,
-      },
-      unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 66},
-      },
+      idle = {hotspot = {43, 44}},
+      unoccupied = {hotspot = {43, 44}}
    },
 
    aihints = {},
