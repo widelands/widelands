@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-06-23 19:48+0000\n"
+"PO-Revision-Date: 2020-06-25 19:07+0000\n"
 "Last-Translator: Walter Benkel <tromaster@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -200,7 +200,7 @@ msgid ""
 "A building is being dismantled at this dismantle site, returning some of the"
 " resources that were used during this building’s construction to your "
 "tribe’s stores."
-msgstr "Un edificio está siendo desarmado en este sitio de desarmado, regresando algunos de los recursos que se utilizaron en la construcción de este edificio a los almacenes de su tribu."
+msgstr "Un edificio está siendo desarmado en este sitio de desarmado, y algunos de los recursos utilizados en la construcción del edificio son regresados a los almacenes de tu tribu."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/helptexts.lua:16
@@ -286,7 +286,7 @@ msgstr "El granjero necesita %1% de rendimiento para sembrar y cosechar un fajo 
 #: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/helptexts.lua:16
 msgctxt "building"
 msgid "Builds ferries."
-msgstr "Construye ferris. "
+msgstr "Construye transbordadores. "
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/helptexts.lua:21
@@ -2123,7 +2123,7 @@ msgstr "La carne no crece en arbustos. La fruta sí."
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "A fruit collector advertising his harvest to a landlady"
-msgstr "Un recolector de fruta dando publicidad de su cosecha a una tabernera"
+msgstr "Un recolector de fruta publicitando su cosecha a una tabernera"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/helptexts.lua:13
@@ -2515,7 +2515,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the supply is steady, the reindeer farm produces one meat after producing"
 " three pieces of fur."
-msgstr ""
+msgstr "Si el suministro es estable, la granja de renos produce un trozo de carne después de producir tres piezas de piel."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/helptexts.lua:16
@@ -2540,7 +2540,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the rock mine can produce two blocks of "
 "granite in %s on average."
-msgstr ""
+msgstr "Si el suministro de comida es estable, la mina de rocas puede producir dos bloques de granito en %s en promedio."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/helptexts.lua:21
@@ -2550,7 +2550,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "granite."
-msgstr ""
+msgstr "Esta mina extrae todos los recursos hasta el nivel más bajo. Sin embargo, después de eso aún tiene una posibilidad de %s de encontrar más granito."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/helptexts.lua:26
@@ -2559,7 +2559,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep rock mine can produce three blocks of"
 " granite in %s on average."
-msgstr ""
+msgstr "Si el suministro de comida es estable, la mina de rocas profunda puede producir tres bloques de granito en %s en promedio."
 
 #. TRANSLATORS: Lore helptext for a building. Reference to frequent
 #. discussions about good scouting algorithms
@@ -2569,13 +2569,13 @@ msgid ""
 "Everyone has their own ideas on how exactly we should explore the enemy’s "
 "territory… One more ‘improvement’ suggestion and we’ll demand meals instead "
 "of rations!"
-msgstr ""
+msgstr "Cada uno tiene sus propias ideas de cómo deberíamos explorar el territorio enemigo... ¡Una sugerencia más de 'mejora' y demandaremos comidas en vez de raciones!"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/scouts_house/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "The spokesman of the scouts’ labor union"
-msgstr ""
+msgstr "El vocero del sindicato de exploradores"
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/scouts_house/helptexts.lua:23
@@ -2590,26 +2590,26 @@ msgctxt "frisians_building"
 msgid ""
 "You soldiers think a good sword is everything, but where would you be if you"
 " had no garments?"
-msgstr ""
+msgstr "Ustedes soldados piensan que una buena espada lo es todo, ¿pero dónde estarían sin una buena prenda de ropa?"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/sewing_room/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "A seamstress scolding a soldier for disrespecting her profession"
-msgstr ""
+msgstr "Una costurera regañando a un soldado por menospreciar su profesión"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/sewing_room/helptexts.lua:13
 msgctxt "building"
 msgid "Sews fur garments out of reindeer fur."
-msgstr ""
+msgstr "Cose prendas de piel de reno"
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/sewing_room/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The sewing room needs %s on average to produce one fur garment."
-msgstr ""
+msgstr "El cuarto de costura necesita %s en promedio para producir una prenda de piel."
 
 #. TRANSLATORS: Lore helptext for a building. "Yard" is a wordplay with the
 #. measurement unit
@@ -2618,7 +2618,7 @@ msgctxt "frisians_building"
 msgid ""
 "This house may be called a shipyard, but my ships are rather longer than one"
 " yard!"
-msgstr ""
+msgstr "¡Esta casa es llamada astillero, aunque mis barcos son bastante más largos que una yarda!"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/helptexts.lua:11
@@ -2626,7 +2626,7 @@ msgctxt "frisians_building"
 msgid ""
 "A shipwright who only constructed toy ships after being chid that his ships "
 "were too small"
-msgstr ""
+msgstr "Un constructor naval que sólo construía barcos de juguete después de ser reprendido porque sus barcos eran demasiado pequeños"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/helptexts.lua:3
@@ -2634,13 +2634,13 @@ msgctxt "frisians_building"
 msgid ""
 "Miners and soldiers are so picky… But who am I to complain, as I make my "
 "living from it?"
-msgstr ""
+msgstr "Los mineros y los soldados son tan quisquillosos... ¿pero quién soy yo para quejarme, si me gano la vida con ello?"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "A smoker explaining his profession"
-msgstr ""
+msgstr "Un ahumador explicando su profesión"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/helptexts.lua:13
@@ -2648,14 +2648,14 @@ msgctxt "building"
 msgid ""
 "Smokes fish and meat using logs. Only smoked meat and fish are good enough "
 "to be eaten by miners and soldiers."
-msgstr ""
+msgstr "Ahuma pescado y carne usando troncos. Sólo la carne y el pescado ahumados son lo suficientemente buenos para ser comidos por los mineros y soldados."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The smokery needs %s on average to smoke two fish or two meat."
-msgstr ""
+msgstr "El ahumadero requiere %s en promedio para ahumar dos pescados o dos trozos de carne."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/helptexts.lua:6
@@ -2663,31 +2663,31 @@ msgctxt "frisians_building"
 msgid ""
 "Don’t complain if these garments are too heavy – they’re not supposed to be "
 "light but to keep you alive a bit longer!"
-msgstr ""
+msgstr "No te quejes si estas prendas son demasiado pesadas – ¡no se supone que sean livianas sino mantenerte con vida por algo más de tiempo!"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "A trainer scolding a soldier"
-msgstr ""
+msgstr "Un entrenador regañando a un soldado"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/helptexts.lua:16
 msgctxt "building"
 msgid "Equips fur garments with iron or gold to produce good armor."
-msgstr ""
+msgstr "Equipa prendas de piel con hierro u oro para producir una buena armadura."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/helptexts.lua:3
 msgctxt "frisians_building"
 msgid "Nothing but fruit all day… Couldn’t you hurry up a bit?"
-msgstr ""
+msgstr "Nada más que fruta durante todo el día... ¿no podrías apurarte un poco?"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "Hungry customers in times of a shortage of smoked fish and meat"
-msgstr ""
+msgstr "Clientes hambrientos en tiempos de escasez de pescado y carne ahumados"
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/helptexts.lua:23
@@ -2696,7 +2696,7 @@ msgctxt "frisians_building"
 msgid ""
 "The tavern can produce one ration in %s on average if the supply is steady; "
 "otherwise, it will take 50%% longer."
-msgstr ""
+msgstr "La taberna puede producir en promedio una ración en %s si el suministro es estable; de lo contrario demorará 50 %% más."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:3
@@ -2704,32 +2704,32 @@ msgctxt "frisians_building"
 msgid ""
 "Reindeer’s fur and roofing reed<br>These items two make up the seed<br>For "
 "ships of wood to chain the gales<br>In sturdy, beautious, blowing sails!"
-msgstr ""
+msgstr "¡Piel de reno y caña de techumbres<br>Estas dos cosas son el germen<br>De barcos de madera para vencer el vendaval<br>Con robustas y hermosas velas!"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "A seamstress’ work song"
-msgstr ""
+msgstr "Canción de trabajo de una costurera"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:13
 msgctxt "building"
 msgid "Sews cloth for ship sails out of reed and reindeer fur."
-msgstr ""
+msgstr "Cose tela para velas de barco con caña y piel de reno."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The weaving mill needs %s on average to produce one piece of cloth."
-msgstr ""
+msgstr "El telar necesita %s en promedio para producir una pieza de tela."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:3
 msgctxt "frisians_building"
 msgid "We love the sea so much that we don’t want to drink it empty!"
-msgstr ""
+msgstr "¡Amamos tanto el mar que no queremos beberlo hasta que se seque!"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:8
@@ -2737,7 +2737,7 @@ msgctxt "frisians_building"
 msgid ""
 "Chieftain Arldor’s retort when he was asked why his tribe can’t drink salt "
 "water"
-msgstr ""
+msgstr "Réplica del Caudillo Arldor cuando se le preguntó por qué su tribu no podía beber agua salada"
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:23
@@ -2752,13 +2752,13 @@ msgctxt "frisians_building"
 msgid ""
 "I cannot see a tree without imagining what it would look like in terms of "
 "furniture."
-msgstr ""
+msgstr "No puedo mirar un árbol sin imaginarme cómo se vería en términos de mobiliario."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "An over-enthusiastic woodcutter"
-msgstr ""
+msgstr "Un talador de madera excesivamente entusiasta"
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/helptexts.lua:21
@@ -2915,14 +2915,14 @@ msgid ""
 "Now that you have two swords, there’s more of a risk you’ll accidently stab "
 "yourself, but if you got this far, you’ll likely master this challenge as "
 "well."
-msgstr ""
+msgstr "Ahora que tienes dos espadas corres mayor riesgo de apuñalarte accidentalmente; pero si has logrado llegar hasta acá seguramente también vencerás este desafío."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/helptexts.lua:11
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "A trainer training a soldier"
-msgstr ""
+msgstr "Un entrenador entrenando a un soldado"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/helptexts.lua:16
@@ -2930,7 +2930,7 @@ msgctxt "frisians_building"
 msgid ""
 "Trains soldiers in Attack, Defense and Health to the final level. Equips the"
 " soldiers with all necessary weapons and armor parts."
-msgstr ""
+msgstr "Entrena soldados en Ataque, Defensa y Vida hasta el nivel más alto, y los equipa con todas las armas y partes de armadura necesarias."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/helptexts.lua:21
@@ -2938,7 +2938,7 @@ msgctxt "frisians_building"
 msgid ""
 "Trains only soldiers who have been trained to the maximum level by the "
 "Training Camp."
-msgstr ""
+msgstr "Sólo entrena a soldados que han sido entrenados en el Campo de Entrenamiento hasta el máximo nivel."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/helptexts.lua:6
@@ -2946,7 +2946,7 @@ msgctxt "frisians_building"
 msgid ""
 "Just be quiet, listen carefully, and do try not to stab yourself until I’ve "
 "explained to you how to hold a broadsword."
-msgstr ""
+msgstr "Sólo quédate tranquilo, escucha atentamente, e intenta no apuñalarte hasta que te haya explicado cómo empuñar un sable."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/helptexts.lua:16
@@ -2954,7 +2954,7 @@ msgctxt "frisians_building"
 msgid ""
 "Trains soldiers in Attack up to level 3 as well as in Defense and Health to "
 "level 1. Equips the soldiers with all necessary weapons and armor parts."
-msgstr ""
+msgstr "Entrena soldados en Ataque hasta el nivel 3 y en Defensa y Vida hasta el nivel 1, y los equipa con todas las armas y partes de armadura necesarias."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/helptexts.lua:21
@@ -2962,7 +2962,7 @@ msgctxt "frisians_building"
 msgid ""
 "Frisian soldiers cannot train in Evade and will remain at their initial "
 "level."
-msgstr ""
+msgstr "Los soldados frisios no pueden entrenarse en Evasión y permanecerán en su nivel inicial."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/atlanteans/headquarters/helptexts.lua:16
@@ -3002,7 +3002,7 @@ msgid ""
 "‘Steep like the slopes of Kal’mavrath, shiny like the most delicate armor "
 "and strong like our ancestors, that’s how the headquarters of Chat’Karuth "
 "presented itself to us.’"
-msgstr ""
+msgstr "Escarpado como las laderas de Kal'mavrath, brillante como la más delicada armadura y fuerte como nuestros ancestros, así es como se presentó ante nosotros el cuartel general de Chat'Karuth.'"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/barbarians/headquarters/helptexts.lua:13
@@ -3023,7 +3023,7 @@ msgstr "La sede es tu edificio principal."
 msgctxt "barbarians_building"
 msgid ""
 "‘I prefer the planks of a ship to any fortress, no matter how strong it is.’"
-msgstr ""
+msgstr "'Prefiero los tablones de un barco a cualquier fortaleza, sin importar lo firme que sea.'"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/barbarians/port/helptexts.lua:13
@@ -3037,7 +3037,7 @@ msgstr "Sirve como base para colonizaciones de ultramar y comerciar. Además alm
 #: ../../data/tribes/buildings/warehouses/barbarians/warehouse/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘Who still owns a warehouse is not yet defeated!’"
-msgstr ""
+msgstr "'¡Quien todavía posee un almacén aún no ha sido derrotado!'"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/warehouses/barbarians/warehouse/helptexts.lua:8
@@ -3045,7 +3045,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Berthron, chief military adviser of Chat’Karuth,<br>when they lost the "
 "headquarters in the battle around the heights of Kal’Megarath"
-msgstr ""
+msgstr "Berthron, principal consejero militar de Chat’Karuth,<br>cuando perdieron el cuartel general en la batalla cerca de las alturas de Kal’Megarath"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/empire/headquarters/helptexts.lua:16
@@ -3105,7 +3105,7 @@ msgstr "Sirve como base para colonizaciones de ultramar y comerciar. Además alm
 #: ../../data/tribes/immovables/ashes/helptexts.lua:4
 #: ../../data/tribes/immovables/destroyed_building/helptexts.lua:4
 msgid "The remains of a destroyed building."
-msgstr ""
+msgstr "Los restos de un edificio destruido."
 
 #. TRANSLATORS: Helptext for a field
 #: ../../data/tribes/immovables/blackrootfield/harvested/helptexts.lua:4
@@ -3142,7 +3142,7 @@ msgstr "Este campo esta justamente plantado."
 #: ../../data/tribes/immovables/grapevine/medium/helptexts.lua:4
 #: ../../data/tribes/immovables/grapevine/small/helptexts.lua:4
 msgid "This grapevine is growing."
-msgstr ""
+msgstr "Esta vid está creciendo."
 
 #. TRANSLATORS: Helptext for a grapevine
 #: ../../data/tribes/immovables/grapevine/ripe/helptexts.lua:4
@@ -3152,7 +3152,7 @@ msgstr "Esta vid esta presto a cosechar."
 #. TRANSLATORS: Helptext for a grapevine
 #: ../../data/tribes/immovables/grapevine/tiny/helptexts.lua:4
 msgid "This grapevine has just been planted."
-msgstr ""
+msgstr "Esta vid ha sido recién plantada."
 
 #. TRANSLATORS: Helptext for a reed field
 #: ../../data/tribes/immovables/reedfield/medium/helptexts.lua:4
@@ -3197,54 +3197,54 @@ msgstr "%s %s"
 #: ../../data/tribes/immovables/resi/helptexts/coal_1.lua:5
 #: ../../data/tribes/immovables/resi/helptexts/coal_2.lua:5
 msgid "Coal veins contain coal that can be dug up by coal mines."
-msgstr ""
+msgstr "Las vetas de carbón contienen carbón que puede ser extraído por minas de carbón."
 
 #. TRANSLATORS: Helptext for a resource: Coal
 #: ../../data/tribes/immovables/resi/helptexts/coal_1.lua:7
 msgid "There is only a little bit of coal here."
-msgstr ""
+msgstr "Acá hay sólo un poco de carbón."
 
 #. TRANSLATORS: Helptext for a resource: Coal
 #: ../../data/tribes/immovables/resi/helptexts/coal_2.lua:7
 msgid "There is a lot of coal here."
-msgstr ""
+msgstr "Hay mucho carbón acá."
 
 #. TRANSLATORS: Helptext for a resource: Gold
 #: ../../data/tribes/immovables/resi/helptexts/gold_1.lua:5
 #: ../../data/tribes/immovables/resi/helptexts/gold_2.lua:5
 msgid "Gold veins contain gold ore that can be dug up by gold mines."
-msgstr ""
+msgstr "Las vetas de oro contienen mineral de oro que puede ser extraído por minas de oro."
 
 #. TRANSLATORS: Helptext for a resource: Gold
 #: ../../data/tribes/immovables/resi/helptexts/gold_1.lua:7
 msgid "There is only a little bit of gold here."
-msgstr ""
+msgstr "Acá hay sólo un poco de oro."
 
 #. TRANSLATORS: Helptext for a resource: Gold
 #: ../../data/tribes/immovables/resi/helptexts/gold_2.lua:7
 msgid "There is a lot of gold here."
-msgstr ""
+msgstr "Hay mucho oro acá."
 
 #. TRANSLATORS: Helptext for a resource: Iron
 #: ../../data/tribes/immovables/resi/helptexts/iron_1.lua:5
 #: ../../data/tribes/immovables/resi/helptexts/iron_2.lua:5
 msgid "Iron veins contain iron ore that can be dug up by iron mines."
-msgstr ""
+msgstr "Las vetas de hierro contienen mineral de hierro que puede ser extraído por minas de hierro."
 
 #. TRANSLATORS: Helptext for a resource: Iron
 #: ../../data/tribes/immovables/resi/helptexts/iron_1.lua:7
 msgid "There is only a little bit of iron here."
-msgstr ""
+msgstr "Acá hay sólo un poco de hierro."
 
 #. TRANSLATORS: Helptext for a resource: Iron
 #: ../../data/tribes/immovables/resi/helptexts/iron_2.lua:7
 msgid "There is a lot of iron here."
-msgstr ""
+msgstr "Hay mucho hierro acá."
 
 #. TRANSLATORS: Helptext for a resource: No resources
 #: ../../data/tribes/immovables/resi/helptexts/none.lua:4
 msgid "There are no resources in the ground here."
-msgstr ""
+msgstr "Acá no hay recursos en el suelo."
 
 #. TRANSLATORS: Helptext for an Atlantean resource: Stones
 #: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:5
@@ -3252,26 +3252,26 @@ msgstr ""
 msgid ""
 "Precious stones are used in the construction of big buildings. They can be "
 "dug up by a crystal mine. You will also get granite from the mine."
-msgstr ""
+msgstr "Las piedras preciosas se utilizan en la construcción de grandes edificios, y pueden ser extraídas por una mina de cristal. También obtendrás granito de la mina."
 
 #. TRANSLATORS: Helptext for an Atlantean resource: Stones
 #: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:7
 msgid "There are only a few precious stones here."
-msgstr ""
+msgstr "Acá hay sólo unas pocas piedras preciosas."
 
 #. TRANSLATORS: Helptext for a Barbarian resource: Stones
 #: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:10
 #: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:10
 msgid ""
 "Granite is a basic building material and can be dug up by a granite mine."
-msgstr ""
+msgstr "El granito es un material de construcción básico y puede ser extraído por una mina de granito."
 
 #. TRANSLATORS: Helptext for a Barbarian resource: Stones
 #. TRANSLATORS: Helptext for a Frisian resource: Stones
 #: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:12
 #: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:22
 msgid "There is only a little bit of granite here."
-msgstr ""
+msgstr "Acá hay sólo un poco de granito."
 
 #. TRANSLATORS: Helptext for an Empire resource: Stones
 #: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:15
@@ -3279,40 +3279,40 @@ msgstr ""
 msgid ""
 "Marble is a basic building material and can be dug up by a marble mine. You "
 "will also get granite from the mine."
-msgstr ""
+msgstr "El mármol es un material de construcción básico y puede ser extraído por una mina de mármol. También obtendrás granito de la mina."
 
 #. TRANSLATORS: Helptext for an Empire resource: Stones
 #: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:17
 msgid "There is only a little bit of marble here."
-msgstr ""
+msgstr "Acá hay sólo un poco de mármol."
 
 #. TRANSLATORS: Helptext for a Frisian resource: Stones
 #: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:20
 #: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:20
 msgid "Granite is a basic building material and can be dug up by a rock mine."
-msgstr ""
+msgstr "El granito es un material de construcción básico y puede ser extraído por una mina de rocas."
 
 #. TRANSLATORS: Helptext for an Atlantean resource: Stones
 #: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:7
 msgid "There are many precious stones here."
-msgstr ""
+msgstr "Hay muchas piedras preciosas aquí."
 
 #. TRANSLATORS: Helptext for a Barbarian resource: Stones
 #. TRANSLATORS: Helptext for a Frisian resource: Stones
 #: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:12
 #: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:22
 msgid "There is a lot of granite here."
-msgstr ""
+msgstr "Hay mucho granito aquí."
 
 #. TRANSLATORS: Helptext for an Empire resource: Stones
 #: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:17
 msgid "There is a lot of marble here."
-msgstr ""
+msgstr "Hay mucho mármol aquí."
 
 #. TRANSLATORS: Helptext for a resource: Water
 #: ../../data/tribes/immovables/resi/helptexts/water.lua:4
 msgid "There is water in the ground here that can be pulled up by a well."
-msgstr ""
+msgstr "Aquí hay agua en el suelo que puede ser extraída por un pozo."
 
 #. TRANSLATORS: Helptext for a ship construction site.
 #: ../../data/tribes/immovables/shipconstruction_atlanteans/helptexts.lua:4
@@ -3320,7 +3320,7 @@ msgstr ""
 #: ../../data/tribes/immovables/shipconstruction_empire/helptexts.lua:4
 #: ../../data/tribes/immovables/shipconstruction_frisians/helptexts.lua:4
 msgid "A ship is being constructed at this site."
-msgstr ""
+msgstr "Un barco está siendo construido en este sitio."
 
 #: ../../data/tribes/scripting/help/building_help.lua:93
 #: ../../data/tribes/scripting/help/format_help.lua:232
@@ -3756,7 +3756,7 @@ msgstr "Alterna la visibilidad de las estadísticas"
 #. TRANSLATORS: This is an access key combination. The hotkey is 'l'
 #: ../../data/tribes/scripting/help/controls.lua:62
 msgid "Toggle soldier health bars and level icons"
-msgstr ""
+msgstr "Alterna barras de vida e íconos de nivel de los soldados"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'o'
 #: ../../data/tribes/scripting/help/controls.lua:66
@@ -3794,7 +3794,7 @@ msgstr "Alterna la visibilidad de las estadísticas marítimas"
 #: ../../data/tribes/scripting/help/controls.lua:78
 msgctxt "hotkey"
 msgid "Arrow keys"
-msgstr ""
+msgstr "Teclas de flecha"
 
 #: ../../data/tribes/scripting/help/controls.lua:78
 msgid "Move the map"
@@ -4455,7 +4455,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Barley is a slow-growing grain that is used for baking bread and brewing "
 "beer. It is also eaten by reindeer."
-msgstr ""
+msgstr "La cebada es un cereal de lento crecimiento que es usado para hornear pan y fabricar cerveza. También es un alimento de los renos."
 
 #. TRANSLATORS: Helptext for a ware: Basket
 #: ../../data/tribes/wares/basket/helptexts.lua:4
@@ -4470,7 +4470,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Baskets are needed by the fruit collector to gather berries. They are woven "
 "from reed and wood by the blacksmith."
-msgstr ""
+msgstr "Las cestas son utilizadas por el recolector de fruta para recoger bayas. Son tejidas de caña y madera por un herrero."
 
 #. TRANSLATORS: Helptext for a ware: Beer
 #: ../../data/tribes/wares/beer/helptexts.lua:4
@@ -4486,7 +4486,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Beer is produced in breweries and used in drinking halls to produce meals. "
 "Soldiers drink beer while receiving basic training."
-msgstr ""
+msgstr "La cerveza es preparada en cervecerías y utilizada en hostales para producir comidas. Los soldados beben cerveza mientras reciben entrenamiento básico."
 
 #. TRANSLATORS: Helptext for a ware: Beer
 #: ../../data/tribes/wares/beer/helptexts.lua:8
@@ -4567,7 +4567,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Bread is made out of barley and water and is used in the taverns to prepare "
 "rations. It is also consumed by training soldiers."
-msgstr ""
+msgstr "El pan es hecho de cebada y agua y utilizado en las tabernas para preparar raciones. También es consumido por soldados en entrenamiento."
 
 #. TRANSLATORS: Helptext for a ware: Bread Paddle
 #: ../../data/tribes/wares/bread_paddle/helptexts.lua:4
@@ -4594,7 +4594,7 @@ msgstr "Las palas de horno son producidas en el taller del metal como las demás
 #: ../../data/tribes/wares/bread_paddle/helptexts.lua:10
 msgctxt "frisians_ware"
 msgid "Bread paddles are produced by the blacksmithy."
-msgstr ""
+msgstr "Las palas de horno son producidos en la herrería."
 
 #. TRANSLATORS: Helptext for a ware: Bread Paddle
 #: ../../data/tribes/wares/bread_paddle/helptexts.lua:12
@@ -4608,7 +4608,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Bricks are the best and most important building material. They are made out "
 "of a mix of clay and granite dried in a coal fire."
-msgstr ""
+msgstr "Los ladrillos son el mejor y más importante material de construcción. Son hechos de una mezcla de arcilla y granito secada en un fuego de carbón."
 
 #. TRANSLATORS: Helptext for a ware: Buckets
 #: ../../data/tribes/wares/buckets/helptexts.lua:4
@@ -4622,20 +4622,20 @@ msgctxt "frisians_ware"
 msgid ""
 "Clay is made out of water and mud to be turned into bricks, used in ship "
 "construction and to improve the charcoal kiln."
-msgstr ""
+msgstr "La arcilla está hecha de agua y barro para ser convertida en ladrillos, utilizada en la construcción de barcos y para mejorar el horno de carbonización."
 
 #. TRANSLATORS: Helptext for a ware: Cloth
 #: ../../data/tribes/wares/cloth/helptexts.lua:4
 msgctxt "barbarians_ware"
 msgid "Cloth is needed for Barbarian ships. It is produced out of reed."
-msgstr ""
+msgstr "La tela se necesita para los barcos Bárbaros, y se fabrica de la caña."
 
 #. TRANSLATORS: Helptext for a ware: Cloth
 #: ../../data/tribes/wares/cloth/helptexts.lua:6
 msgctxt "frisians_ware"
 msgid ""
 "Cloth is needed for ships. It is produced out of reindeer fur and reed."
-msgstr ""
+msgstr "La tela se necesita para los barcos, y se fabrica de piel de reno y caña."
 
 #. TRANSLATORS: Helptext for a ware: Cloth
 #: ../../data/tribes/wares/cloth/helptexts.lua:8
@@ -4682,7 +4682,7 @@ msgstr "El fuego de las forjas, talleres de armadura y armerías Imperiales, nor
 msgctxt "frisians_ware"
 msgid ""
 "The fires of the brick kilns, furnaces and armor smithies are fed with coal."
-msgstr ""
+msgstr "Los fuegos del horno de ladrillos, alto horno y taller de armaduras se alimentan con carbón."
 
 #. TRANSLATORS: Helptext for a ware: Corn
 #: ../../data/tribes/wares/corn/helptexts.lua:4
@@ -4728,7 +4728,7 @@ msgstr "Las hachas de talar son usados por leñadores y son producidas en el tal
 #: ../../data/tribes/wares/felling_ax/helptexts.lua:8
 msgctxt "frisians_ware"
 msgid "Felling axes are used by woodcutters and produced by the blacksmithy."
-msgstr ""
+msgstr "Las hachas de talar son usadas por los taladores y producidas en la herrería."
 
 #. TRANSLATORS: Helptext for a ware: Felling Ax
 #: ../../data/tribes/wares/felling_ax/helptexts.lua:10
@@ -4740,13 +4740,13 @@ msgstr "Las hachas de talar son usados por leñadores y son producidas en el tal
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:4
 msgctxt "ware"
 msgid "Fire tongs are the tools for smelting ores."
-msgstr ""
+msgstr "Las tenazas son las herramientas para fundir minerales."
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:6
 msgctxt "atlanteans_ware_fire_tongs"
 msgid "They are used in the smelting works and produced by the toolsmith."
-msgstr ""
+msgstr "Se usan en las forjas y son producidas por el fabricante de herramientas."
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:8
@@ -4754,7 +4754,7 @@ msgctxt "frisians_ware"
 msgid ""
 "They are used in the furnace and the brick kiln and produced by the "
 "blacksmithy."
-msgstr ""
+msgstr "Son usadas en el alto horno y en el horno de ladrillos y son producidas en la herrería."
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:10
@@ -4763,13 +4763,13 @@ msgid ""
 "They are used in the smelting works and produced by the metal workshop (but "
 "they cease to be produced by the building if it is enhanced to an ax "
 "workshop and war mill)."
-msgstr ""
+msgstr "Son usadas en las forjas y producidas por el taller de metal (pero dejan de ser producidas si el edificio es mejorado a un taller de hachas y taller de guerra)."
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:12
 msgctxt "empire_ware_fire_tongs"
 msgid "They are used in the smelting works and produced by the toolsmith."
-msgstr ""
+msgstr "Son usadas en las forjas y producidas por el fabricante de herramientas."
 
 #. TRANSLATORS: Helptext for a ware: Fish
 #: ../../data/tribes/wares/fish/helptexts.lua:4
@@ -4803,7 +4803,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Fish is a very important food resource for the Frisians. It is fished from "
 "the shore or reared in aqua farms."
-msgstr ""
+msgstr "El pescado es un recurso alimenticio muy importante para los frisios. Es capturado en la costa o criado en granjas marinas."
 
 #. TRANSLATORS: Helptext for a ware: Fishing Net
 #: ../../data/tribes/wares/fishing_net/helptexts.lua:4
@@ -4815,7 +4815,7 @@ msgstr "La red de pesca es utilizada por el pescador y producida por el fabrican
 #: ../../data/tribes/wares/fishing_net/helptexts.lua:6
 msgctxt "frisians_ware"
 msgid "Fishing nets are the tool used by fishers."
-msgstr ""
+msgstr "Las redes de pesca son las herramientas usadas por los pescadores."
 
 #. TRANSLATORS: Helptext for a ware: Fishing Rod
 #: ../../data/tribes/wares/fishing_rod/helptexts.lua:4
@@ -4852,7 +4852,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Fruit are berries gathered from berry bushes by a fruit collector. They are "
 "used for rations and for feeding the fish at the aqua farms."
-msgstr ""
+msgstr "Las frutas son bayas recogidas por recolectores de fruta en arbustos de bayas. Se utilizan para raciones y para alimentar a los peces en las granjas marinas."
 
 #. TRANSLATORS: Helptext for a ware: Fur
 #: ../../data/tribes/wares/fur/helptexts.lua:4
@@ -4860,7 +4860,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Fur is won from reindeer in a reindeer farm. It is woven into cloth or "
 "turned into fur garments for soldiers."
-msgstr ""
+msgstr "La piel se obtiene de renos en las granjas de renos. Se teje en telas o en prendas de piel para los soldados."
 
 #. TRANSLATORS: Helptext for a ware: Fur Garment
 #: ../../data/tribes/wares/fur_garment/helptexts.lua:4
@@ -4868,7 +4868,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Fur can be sewn into garments. They are used as basic armor. All new "
 "soldiers are clothed in a fur garment."
-msgstr ""
+msgstr "La piel se puede coser en prendas, que se usa como armadura básica. Todos los soldados nuevos se visten con prendas de piel."
 
 #. TRANSLATORS: Helptext for a ware: Golden Fur Garment
 #: ../../data/tribes/wares/fur_garment_golden/helptexts.lua:4
@@ -4876,13 +4876,13 @@ msgctxt "frisians_ware"
 msgid ""
 "Ordinary fur garments can be decorated with iron and gold. Such clothes are "
 "the best armor."
-msgstr ""
+msgstr "Las prendas de piel corrientes pueden ser decoradas con hierro y oro. Esas vestimentas son las mejores armaduras."
 
 #. TRANSLATORS: Helptext for a ware: Old Fur Garment
 #: ../../data/tribes/wares/fur_garment_old/helptexts.lua:4
 msgctxt "frisians_ware"
 msgid "Old garments can be turned into fur in a recycling center."
-msgstr ""
+msgstr "Las prendas viejas pueden ser transformadas en piel en los centros de reciclaje."
 
 #. TRANSLATORS: Helptext for a ware: Studded Fur Garment
 #: ../../data/tribes/wares/fur_garment_studded/helptexts.lua:4
@@ -4890,7 +4890,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Ordinary fur garments can be decorated with iron to give them a silvery "
 "shine. These clothes make good armor."
-msgstr ""
+msgstr "Las prendas de piel corrientes pueden ser decoradas con hierro para darles un brillo plateado. Estas vestimentas son una buena armadura."
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:4
@@ -4915,7 +4915,7 @@ msgid ""
 "smelting works and used as a precious building material and to produce "
 "different axes (in the war mill) and different parts of armor (in the helm "
 "smithy)."
-msgstr ""
+msgstr "Sólo cosas muy importantes son embellecidas con oro. Éste es producido por las forjas y usado como un material de construcción valioso y para producir distintas hachas (en el taller de guerra) y diferentes partes de armadura (en el taller de yelmos)."
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:10
@@ -4924,7 +4924,7 @@ msgid ""
 "Only very important things are embellished with gold. It is produced by the "
 "furnace and is used to produce better swords and the best helmets. The best "
 "armor is also decorated with gold."
-msgstr ""
+msgstr "Sólo cosas muy importantes son embellecidas con oro. Éste es producido por el alto horno y usado para fabricar mejores espadas y los mejores yelmos. La mejor armadura también es decorada con oro."
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:12
@@ -4932,7 +4932,7 @@ msgctxt "empire_ware"
 msgid ""
 "It is produced by the smelting works. Armor and weapons are embellished with"
 " gold in the armor smithy and the weapon smithy."
-msgstr ""
+msgstr "Es producido por las forjas. Armaduras y armas son embellecidas con oro en el taller de armaduras y en la armería."
 
 #. TRANSLATORS: Helptext for a ware: Gold Ore
 #: ../../data/tribes/wares/gold_ore/helptexts.lua:4
@@ -4946,7 +4946,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Smelted in a smelting works, it turns into gold which is used as a precious "
 "building material and to produce weapons and armor."
-msgstr ""
+msgstr "Fundido en una forja, se convierte en oro que es usado como un material de construcción valioso y para producir armas y armaduras."
 
 #. TRANSLATORS: Helptext for a ware: Gold Ore
 #: ../../data/tribes/wares/gold_ore/helptexts.lua:8
@@ -4954,7 +4954,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Smelted in a smelting works, it turns into gold which is used as a precious "
 "building material and to produce weapons and armor."
-msgstr ""
+msgstr "Fundido en una forja, se convierte en oro que es usado como un material de construcción valioso y para producir armas y armaduras."
 
 #. TRANSLATORS: Helptext for a ware: Gold Ore
 #: ../../data/tribes/wares/gold_ore/helptexts.lua:10
@@ -4962,7 +4962,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Smelted in a furnace, it turns into gold which is used as a precious "
 "building material and to produce weapons and armor."
-msgstr ""
+msgstr "Fundido en un alto horno, se convierte en oro que es usado como un material de construcción valioso y para producir armas y armaduras."
 
 #. TRANSLATORS: Helptext for a ware: Gold Ore
 #: ../../data/tribes/wares/gold_ore/helptexts.lua:12
@@ -4970,7 +4970,7 @@ msgctxt "empire_ware"
 msgid ""
 "Smelted in a smelting works, it turns into gold which is used as a precious "
 "building material and to produce weapons and armor."
-msgstr ""
+msgstr "Fundido en una forja, se convierte en oro que es usado como un material de construcción valioso y para producir armas y armaduras."
 
 #. TRANSLATORS: Helptext for a ware: Gold Thread
 #: ../../data/tribes/wares/gold_thread/helptexts.lua:4
@@ -5004,7 +5004,7 @@ msgctxt "frisians_ware"
 msgid ""
 "The Frisians produce granite blocks in quarries and rock mines. They can be "
 "refined in a brick kiln."
-msgstr ""
+msgstr "Los frisios producen bloques de granito en canteras y minas de rocas. Pueden ser refinados en un horno de ladrillos."
 
 #. TRANSLATORS: Helptext for a ware: Granite
 #: ../../data/tribes/wares/granite/helptexts.lua:12
@@ -5066,7 +5066,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Geologists, builders and blacksmiths all need a hammer. Make sure you’ve "
 "always got some in reserve! They are produced by the blacksmithy."
-msgstr ""
+msgstr "Geólogos, constructores y herreros necesitan un martillo. ¡Asegúrate de tener siempre algunos en reserva! Éstos son producidos por el herrero."
 
 #. TRANSLATORS: Helptext for a ware: Helmet
 #: ../../data/tribes/wares/helmet/helptexts.lua:4
@@ -5083,7 +5083,7 @@ msgctxt "frisians_ware"
 msgid ""
 "A helmet is a basic tool to protect soldiers. It is produced in the small "
 "armor smithy and used to train soldiers from health level 0 to level 1."
-msgstr ""
+msgstr "Un yelmo es una herramienta básica para proteger a los soldados. Es producido en el taller de armaduras pequeño, y usado para entrenar soldados del nivel de vida 0 al nivel 1."
 
 #. TRANSLATORS: Helptext for a ware: Golden Helmet
 #: ../../data/tribes/wares/helmet_golden/helptexts.lua:4
@@ -5091,7 +5091,7 @@ msgctxt "frisians_ware"
 msgid ""
 "A golden helmet protects soldiers. It is produced in the large armor smithy "
 "and used to train soldiers from health level 1 to level 2."
-msgstr ""
+msgstr "Un yelmo dorado proteje a los soldados. Es producido en el taller de armaduras grande, y usado para entrenar soldados del nivel de vida 1 al nivel 2."
 
 #. TRANSLATORS: Helptext for a ware: Mask
 #: ../../data/tribes/wares/helmet_mask/helptexts.lua:4
@@ -5117,7 +5117,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Honey is produced by bees belonging to a beekeeper. It is used to bake honey"
 " bread and brew mead."
-msgstr ""
+msgstr "La miel es producida por abejas pertenecientes a un apicultor. Es usado para hornear pan de miel y elaborar hidromiel."
 
 #. TRANSLATORS: Helptext for a ware: Honey Bread
 #: ../../data/tribes/wares/honey_bread/helptexts.lua:4
@@ -5125,7 +5125,7 @@ msgctxt "frisians_ware"
 msgid ""
 "This bread is sweetened with honey. It is consumed by the most experienced "
 "miners and in advanced soldier training."
-msgstr ""
+msgstr "Este pan es endulzado con miel, y es consumido por los mineros más experimentados y en el entrenamiento avanzado de soldados."
 
 #. TRANSLATORS: Helptext for a ware: Hook Pole
 #: ../../data/tribes/wares/hook_pole/helptexts.lua:4
@@ -5162,7 +5162,7 @@ msgstr "Las lanzas de caza son producidas en el taller del metal (pero dejará d
 #: ../../data/tribes/wares/hunting_spear/helptexts.lua:8
 msgctxt "frisians_ware"
 msgid "Hunting spears are produced by the blacksmithy"
-msgstr ""
+msgstr "Las lanzas de caza son producidas por la herrería."
 
 #. TRANSLATORS: Helptext for a ware: Hunting Spear
 #: ../../data/tribes/wares/hunting_spear/helptexts.lua:10
@@ -5174,7 +5174,7 @@ msgstr "Son producidas por el fabricante de herramientas."
 #: ../../data/tribes/wares/iron/helptexts.lua:4
 msgctxt "ware"
 msgid "Iron is smelted out of iron ores."
-msgstr ""
+msgstr "El hierro es fundido de mineral de hierro."
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:6
@@ -5182,7 +5182,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "It is produced by the smelting works and used in the toolsmithy, armor "
 "smithy and weapon smithy."
-msgstr ""
+msgstr "Es producido por las forjas y utilizado en los talleres de herramientas y de armaduras, y en la  armería."
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:8
@@ -5190,7 +5190,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "It is produced by the smelting works and used to produce weapons and tools "
 "in the metal workshop, ax workshop, war mill and helm smithy."
-msgstr ""
+msgstr "Es producido por las forjas y utilizado para producir armas y herramientas en los talleres de metal, de hachas, de guerra y de yelmos."
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:10
@@ -5198,7 +5198,7 @@ msgctxt "empire_ware"
 msgid ""
 "It is produced by the smelting works. Weapons, armor and tools are made of "
 "iron."
-msgstr ""
+msgstr "Es producido por las forjas. Armas, armaduras y herramientas son fabricadas de hierro."
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:12
@@ -5206,7 +5206,7 @@ msgctxt "frisians_ware"
 msgid ""
 "It is produced by the furnace. Tools and weapons are made of iron. It is "
 "also used as jewellery for fur garment armor to give it a silver shine."
-msgstr ""
+msgstr "Es producido por el alto horno. Herramientas y armas son hechas de hierro. También se utiliza como joyería en armaduras de prendas de piel para darles un brillo plateado."
 
 #. TRANSLATORS: Helptext for a ware: Iron Ore
 #: ../../data/tribes/wares/iron_ore/helptexts.lua:4
@@ -5245,7 +5245,7 @@ msgid ""
 "Kitchen tools are needed for preparing rations, snacks and meals. Be sure to"
 " have a metal workshop to produce this basic tool (but it ceases to be "
 "produced by the building if it is enhanced to an ax workshop and war mill)."
-msgstr ""
+msgstr "Las herramientas de cocina se necesitan para preparar raciones, bocadillos y comidas. Asegúrate de tener un taller de metal para producir esta herramienta básica (pero cesa de ser producida si el edificio es mejorado a un taller de hachas y taller de guerra)."
 
 #. TRANSLATORS: Helptext for a ware: Kitchen Tools
 #: ../../data/tribes/wares/kitchen_tools/helptexts.lua:6
@@ -5253,7 +5253,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Kitchen tools are needed for preparing rations and meals. The smoker also "
 "needs them."
-msgstr ""
+msgstr "Las herramientas de cocina se necesitan para preparar raciones y comidas. El ahumador también las necesita."
 
 #. TRANSLATORS: Helptext for a ware: Kitchen Tools
 #: ../../data/tribes/wares/kitchen_tools/helptexts.lua:8
@@ -5261,7 +5261,7 @@ msgctxt "empire_ware"
 msgid ""
 "Kitchen tools are needed for preparing rations and meals. They are produced "
 "in a toolsmithy and used in taverns and inns."
-msgstr ""
+msgstr "Las herramientas de cocina se necesitan para preparar raciones y comidas. Son producidas en un taller de herramientas y usadas en tabernas y posadas."
 
 #. TRANSLATORS: Helptext for a ware: Log
 #: ../../data/tribes/wares/log/helptexts.lua:4
@@ -5298,7 +5298,7 @@ msgid ""
 " are also used in the blacksmithy to build basic tools, and in the charcoal "
 "kiln for the production of coal. Smokeries use logs as fuel for smoking meat"
 " and fish."
-msgstr ""
+msgstr "Los leñadores talan los árboles; los silvicultores se encargan de que vuelvan a crecer. Los troncos también son usados en la herrería para fabricar herramientas básicas, y en el horno de carbonización para la producción de carbón vegetal. Los ahumaderos usan troncos como combustible para ahumar carne y pescados."
 
 #. TRANSLATORS: Helptext for a ware: Log
 #: ../../data/tribes/wares/log/helptexts.lua:12
@@ -5333,7 +5333,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Mead is produced by mead breweries. Soldiers drink mead during advanced "
 "training."
-msgstr ""
+msgstr "El hidromiel es producido por cervecerías de hidromiel. Los soldados lo beben durante el entrenamiento avanzado."
 
 #. TRANSLATORS: Helptext for a ware: Meal
 #: ../../data/tribes/wares/meal/helptexts.lua:4
@@ -5357,7 +5357,7 @@ msgctxt "frisians_ware"
 msgid ""
 "A meal is made out of honey bread and beer and either smoked fish or meat. "
 "It is consumed by miners in deep mines."
-msgstr ""
+msgstr "Una comida consiste de pan de miel, cerveza, y pescado o carne ahumados. Es consumida por los mineros en minas profundas."
 
 #. TRANSLATORS: Helptext for a ware: Meat
 #: ../../data/tribes/wares/meat/helptexts.lua:4
@@ -5381,7 +5381,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Meat has to be smoked in a smokery before being delivered to taverns, "
 "drinking halls and training sites."
-msgstr ""
+msgstr "La carne debe ser ahumada en un ahumadero antes de ser entregada a tabernas, hostales y sitios de entrenamiento."
 
 #. TRANSLATORS: Helptext for a ware: Meat
 #: ../../data/tribes/wares/meat/helptexts.lua:10
@@ -5413,7 +5413,7 @@ msgstr "Las pinzas de ordeñar las utiliza el criador de arañas para ordeñar a
 #: ../../data/tribes/wares/needles/helptexts.lua:4
 msgctxt "frisians_ware"
 msgid "Needles are used by seamstresses to sew cloth and fur garments."
-msgstr ""
+msgstr "Las agujas son usadas por las costureras para coser telas y prendas de piel."
 
 #. TRANSLATORS: Helptext for a ware: Pick
 #: ../../data/tribes/wares/pick/helptexts.lua:4
@@ -5512,7 +5512,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Rations are produced in taverns and drinking halls out of something to eat: "
 "Fruit, bread or smoked meat or fish."
-msgstr ""
+msgstr "Las raciones son producidas en tabernas y hostales y consisten en algo para comer: frutas, pan, o carne o pescado ahumados."
 
 #. TRANSLATORS: Helptext for a ware: Reed
 #: ../../data/tribes/wares/reed/helptexts.lua:4
@@ -5520,7 +5520,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Reed is produced in a reed yard and used to make the roofs of buildings "
 "waterproof."
-msgstr ""
+msgstr "La caña es producida en una plantación de caña y se usa para impermeabilizar los techos de los edificios."
 
 #. TRANSLATORS: Helptext for a ware: Reed
 #: ../../data/tribes/wares/reed/helptexts.lua:6
@@ -5529,7 +5529,7 @@ msgid ""
 "Reed is grown in a reed farm. Nothing is better suited to make roofs "
 "waterproof. It is also used to make buckets and fishing nets as well as "
 "cloth."
-msgstr ""
+msgstr "La caña es cultivada en una granja de caña. Nada se presta mejor para impermeabilizar los techos. También se usa para hacer baldes, redes de pesca y tela."
 
 #. TRANSLATORS: Helptext for a ware: Saw
 #: ../../data/tribes/wares/saw/helptexts.lua:4
@@ -5553,7 +5553,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Discarded weapons and armor can be recycled in a recycling center to produce"
 " new tools, weapon and armor."
-msgstr ""
+msgstr "Las armas descartadas pueden ser recicladas en centros de reciclaje para producir nuevas herramientas, armas y armaduras."
 
 #. TRANSLATORS: Helptext for a ware: Scythe
 #: ../../data/tribes/wares/scythe/helptexts.lua:4
@@ -5641,7 +5641,7 @@ msgctxt "frisians_ware"
 msgid ""
 "They are used by berry and reed farmers as well as foresters. Clay diggers "
 "also need them to dig mud out of hard soil."
-msgstr ""
+msgstr "Son usadas por granjeros de bayas y de caña, así como por silvicultores. Los excavadores de arcilla también las necesitan para extraer barro del suelo duro."
 
 #. TRANSLATORS: Helptext for a ware: Smoked Fish
 #: ../../data/tribes/wares/smoked_fish/helptexts.lua:4
@@ -5657,7 +5657,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Fish is smoked in a smokery. Smoked fish is then consumed by soldiers in "
 "training or turned into rations and meals for miners and scouts."
-msgstr ""
+msgstr "El pescado es ahumado en ahumaderos. El pescado ahumado es consumido por soldados en entrenamiento, o convertido en raciones y comidas para mineros y exploradores."
 
 #. TRANSLATORS: Helptext for a ware: Smoked Meat
 #: ../../data/tribes/wares/smoked_meat/helptexts.lua:4
@@ -5674,7 +5674,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Meat is smoked in a smokery. Smoked meat is then consumed by soldiers in "
 "training or turned into rations and meals for miners and scouts."
-msgstr ""
+msgstr "La carne es ahumada en ahumaderos. La carne ahumada es consumida por soldados en entrenamiento, o convertida en raciones y comidas para mineros y exploradores."
 
 #. TRANSLATORS: Helptext for a ware: Snack
 #: ../../data/tribes/wares/snack/helptexts.lua:4
@@ -5752,7 +5752,7 @@ msgctxt "frisians_ware"
 msgid ""
 "The broadsword is the weapon used by level 2 soldiers. Level 5 soldiers are "
 "equipped with a broadsword and a double-edged sword."
-msgstr ""
+msgstr "El sable es la arma usada por soldados de nivel 2. Los soldados de nivel 5 son equipados con un sable y una espada de doble filo."
 
 #. TRANSLATORS: Helptext for a ware: Double-edged Sword
 #: ../../data/tribes/wares/sword_double/helptexts.lua:4
@@ -5760,7 +5760,7 @@ msgctxt "frisians_ware"
 msgid ""
 "The double-edged sword is the weapon used by level 3 soldiers. Level 6 "
 "soldiers are equipped with two of these ferocious swords."
-msgstr ""
+msgstr "La espada de doble filo es la arma usada por soldados de nivel 3. Los soldados de nivel 6 son equipados con dos de estas feroces espadas."
 
 #. TRANSLATORS: Helptext for a ware: Long Sword
 #: ../../data/tribes/wares/sword_long/helptexts.lua:4
@@ -5768,7 +5768,7 @@ msgctxt "frisians_ware"
 msgid ""
 "The long sword is the weapon used by level 1 soldiers. Level 4 soldiers are "
 "equipped with a long and a double-edged sword."
-msgstr ""
+msgstr "La espada larga es la arma usada por soldados de nivel 1. Los soldados de nivel 4 son equipados con una espada larga y una de doble filo."
 
 #. TRANSLATORS: Helptext for a ware: Short sword
 #: ../../data/tribes/wares/sword_short/helptexts.lua:4
@@ -5777,7 +5777,7 @@ msgid ""
 "This is the basic weapon of the Frisian soldiers. Together with a fur "
 "garment, it makes up the equipment of young soldiers. Short swords are "
 "produced by the small armor smithy."
-msgstr ""
+msgstr "Este es el arma básico del soldado frisio. Junto con una prenda de piel son el equipamiento de los soldados jóvenes. La espada corta es producida por el taller de armaduras pequeño."
 
 #. TRANSLATORS: Helptext for a ware: Tabard
 #: ../../data/tribes/wares/tabard/helptexts.lua:4
@@ -5860,7 +5860,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Water is used to bake bread and brew beer. Reindeer farms and aqua farms "
 "also consume it."
-msgstr ""
+msgstr "El agua se utiliza para hornear pan y preparar cerveza. También la consumen las granjas marinas y las granjas de renos."
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../data/tribes/wares/water/helptexts.lua:10
@@ -5962,7 +5962,7 @@ msgstr "Planta y cosecha maizales."
 #: ../../data/tribes/workers/frisians/ferry/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Ships wares across narrow rivers."
-msgstr ""
+msgstr "Transporta mercancías a través de ríos angostos."
 
 #. TRANSLATORS: Helptext for a worker: Fish Breeder
 #: ../../data/tribes/workers/atlanteans/fishbreeder/helptexts.lua:3
@@ -6505,13 +6505,13 @@ msgstr "Hornea pan para mineros y soldados."
 #: ../../data/tribes/workers/frisians/baker_master/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "This baker is skilled enough to bake bread sweetened with honey."
-msgstr ""
+msgstr "Este panadero es lo suficientemente hábil para hornear pan endulzado con miel."
 
 #. TRANSLATORS: Helptext for a worker: Bee-keeper
 #: ../../data/tribes/workers/frisians/beekeeper/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Lets bees swarm over flowers, then gathers the honey."
-msgstr ""
+msgstr "Permite que las abejas sobrevuelen las flores, y después recoge la miel."
 
 #. TRANSLATORS: Helptext for a worker: Berry farmer
 #: ../../data/tribes/workers/frisians/berry_farmer/helptexts.lua:3
@@ -6654,13 +6654,13 @@ msgstr "Explora territorio desconocido."
 #: ../../data/tribes/workers/frisians/seamstress/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Produces cloth and sews fur garments."
-msgstr ""
+msgstr "Produce tela y cose prendas de piel."
 
 #. TRANSLATORS: Helptext for a worker: Master Seamstress
 #: ../../data/tribes/workers/frisians/seamstress_master/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Sews armor out of fur garments and metal."
-msgstr ""
+msgstr "Cose armaduras de prendas de piel y metal."
 
 #. TRANSLATORS: Helptext for a worker: Shipwright
 #: ../../data/tribes/workers/frisians/shipwright/helptexts.lua:3
@@ -6678,7 +6678,7 @@ msgstr "Funde hierro y oro en hornos o centros de reciclaje."
 #: ../../data/tribes/workers/frisians/smoker/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Refines meat and fish by smoking them."
-msgstr ""
+msgstr "Refina carne y pescado ahumándolos."
 
 #. TRANSLATORS: Helptext for a worker: Soldier
 #: ../../data/tribes/workers/frisians/soldier/helptexts.lua:3

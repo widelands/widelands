@@ -5,7 +5,7 @@
 # Translators:
 # Anton Khabarov <2233009@gmail.com>, 2017
 # Олег Шевченко <olegrock@gmail.com>, 2018
-# Fede4ka, 2019
+# 66c17387c1d6640720971b8ab706da27_0feead1, 2019
 # Viktor S <awsswa59@gmail.com>, 2019
 # 
 msgid ""
