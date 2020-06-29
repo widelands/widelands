@@ -12,13 +12,14 @@
 # Raul Ferriz <raul.ferriz@gmail.com>, 2009
 # Stephan Lutz <stephan-lutz@gmx.de>, 2019-2020
 # Thadah D. Denyse <juchuf@gmail.com>, 2017
+# Walter Benkel <tromaster@gmail.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-06-06 19:34+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
+"POT-Creation-Date: 2020-06-28 07:45+0000\n"
+"PO-Revision-Date: 2020-06-28 17:01+0000\n"
+"Last-Translator: Walter Benkel <tromaster@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -729,7 +730,7 @@ msgstr "Los nuevos soldados se reclutan en los barracones. Sus habilidades puede
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
-msgstr "Si te gusta vivir al límite, presionando Ctrl mientras haces click en el botón mejorar, desarmar o destruir edificio saltarás la confirmación."
+msgstr "Si te gusta vivir peligrosamente, presionando Ctrl mientras haces clic en los botones mejorar, desarmar o destruir edificio, omitirás la confirmación."
 
 #: ../../data/txts/tips/general_game.lua:59
 msgid "Press I to quickly toggle the display of your stock inventory."

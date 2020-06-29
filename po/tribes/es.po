@@ -17,13 +17,14 @@
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020
 # Thadah D. Denyse <juchuf@gmail.com>, 2017
 # Thadah D. Denyse <juchuf@gmail.com>, 2015
+# Walter Benkel <tromaster@gmail.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-06-06 19:46+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
+"POT-Creation-Date: 2020-06-28 07:45+0000\n"
+"PO-Revision-Date: 2020-06-28 17:09+0000\n"
+"Last-Translator: Walter Benkel <tromaster@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -547,7 +548,6 @@ msgstr "Taller de Armaduras"
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:58
 #: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:52
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:56
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:68
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:83
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:56
@@ -565,7 +565,6 @@ msgstr "Taller de Armaduras"
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:68
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:58
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:77
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:53
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:50
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:56
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:71
@@ -597,7 +596,6 @@ msgstr "Taller de Armaduras"
 #: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:73
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:71
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:60
 #: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:87
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:69
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:74
@@ -759,7 +757,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
-msgstr "La veta principal de esta mina de carbón se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Deberías considerar desarmarla o destruirla."
+msgstr "La veta principal de esta mina de carbón se ha agotado. Se esperan fuertes reducciones del retorno a la inversión. Deberías considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:7
@@ -1102,28 +1100,28 @@ msgid "Quarry"
 msgstr "Cantera"
 
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:55
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:62
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:46
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:53
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:60
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:69
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:60
 msgid "quarrying granite"
 msgstr "excavando granito"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:66
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:73
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:81
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:80
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:55
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:62
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:77
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:69
 msgid "No Rocks"
 msgstr "Sin Rocas"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:67
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:74
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:82
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:81
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:56
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:63
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:78
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:70
 msgid "Out of Rocks"
 msgstr "Sin rocas"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:68
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:57
 msgctxt "atlanteans_building"
 msgid ""
 "The stonecutter working at this quarry can’t find any rocks in his work "
@@ -1841,7 +1839,7 @@ msgctxt "barbarians_building"
 msgid "Quarry"
 msgstr "Cantera"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:75
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:64
 msgctxt "barbarians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
@@ -2260,11 +2258,11 @@ msgid "Quarry"
 msgstr "Cantera"
 
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying marble because ...
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:70
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:68
 msgid "quarrying marble"
 msgstr "excavando mármol"
 
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:83
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:79
 msgctxt "empire_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
@@ -2860,7 +2858,7 @@ msgctxt "frisians_building"
 msgid "Quarry"
 msgstr "Cantera"
 
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:82
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:71
 msgctxt "frisians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."

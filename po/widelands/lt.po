@@ -4,13 +4,14 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 # Mantas Kriaučiūnas Baltix <mantas@akl.lt>, 2020
+# Tachionas Neonas <tachionexas@gmail.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-05-13 05:28+0000\n"
-"Last-Translator: Mantas Kriaučiūnas Baltix <mantas@akl.lt>\n"
+"POT-Creation-Date: 2020-06-28 07:45+0000\n"
+"PO-Revision-Date: 2020-06-28 19:39+0000\n"
+"Last-Translator: Tachionas Neonas <tachionexas@gmail.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/widelands/widelands/language/lt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -85,7 +86,7 @@ msgstr "Nepakanka vietos"
 
 #: ../../data/scripting/infrastructure.lua:246
 msgid "No rocks nearby"
-msgstr ""
+msgstr "Netoliese nėra akmens"
 
 #: ../../data/scripting/infrastructure.lua:246
 msgid ""
@@ -95,7 +96,7 @@ msgstr ""
 
 #: ../../data/scripting/infrastructure.lua:251
 msgid "No trees nearby"
-msgstr ""
+msgstr "Netoliese nėra medžių"
 
 #: ../../data/scripting/infrastructure.lua:251
 msgid ""
@@ -103,16 +104,16 @@ msgid ""
 "extra resources for bootstrapping your economy."
 msgstr ""
 
-#: ../../data/scripting/messages.lua:51 ../../data/scripting/messages.lua:53
+#: ../../data/scripting/messages.lua:53 ../../data/scripting/messages.lua:55
 #: ../../src/wui/game_message_menu.cc:68 ../../src/wui/game_summary.cc:104
 msgid "Status"
 msgstr "Būsena"
 
-#: ../../data/scripting/messages.lua:186
+#: ../../data/scripting/messages.lua:191
 msgid "New Objective"
 msgstr ""
 
-#: ../../data/scripting/messages.lua:188
+#: ../../data/scripting/messages.lua:193
 msgid "New Objectives"
 msgstr ""
 
@@ -268,7 +269,7 @@ msgstr "Gruo"
 
 #: ../../src/editor/editorinteractive.cc:75
 msgid "Loading tribes"
-msgstr ""
+msgstr "Įkraunamos gentys"
 
 #: ../../src/editor/editorinteractive.cc:94
 #: ../../src/wui/interactive_gamebase.cc:95
@@ -301,7 +302,7 @@ msgstr "Rodyti / Slėpti"
 
 #: ../../src/editor/editorinteractive.cc:132
 msgid "Tool size"
-msgstr ""
+msgstr "Įrankių dydis"
 
 #: ../../src/editor/editorinteractive.cc:144
 msgid "Undo"
@@ -320,13 +321,13 @@ msgstr "Pagalba"
 #: ../../src/editor/editorinteractive.cc:177
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:41
 msgid "New Map"
-msgstr ""
+msgstr "Naujas žemėlapis"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:184
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:48
 msgid "New Random Map"
-msgstr ""
+msgstr "Naujas atsitiktinis žemėlapis"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:191
@@ -360,28 +361,28 @@ msgstr "Žemėlapio nustatymai"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:211
 msgid "Exit Editor"
-msgstr ""
+msgstr "Išeiti iš redagavimo programos"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:247
 msgid "Change height"
-msgstr ""
+msgstr "Keisti aukštį"
 
 #. * TRANSLATORS: Tooltip for the change height tool in the editor
 #: ../../src/editor/editorinteractive.cc:250
 msgid "Change the terrain height"
-msgstr ""
+msgstr "Keisti reljefo aukštį"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:256
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:89
 msgid "Random height"
-msgstr ""
+msgstr "Atsitiktinis aukštis"
 
 #. * TRANSLATORS: Tooltip for the random height tool in the editor
 #: ../../src/editor/editorinteractive.cc:259
 msgid "Set the terrain height to random values"
-msgstr ""
+msgstr "Nustatyti reljefo aukščiui atsitiktinę vertę"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:265
@@ -389,12 +390,12 @@ msgstr ""
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:86
 #: ../../src/wui/minimap.cc:131
 msgid "Terrain"
-msgstr ""
+msgstr "Reljefas"
 
 #. * TRANSLATORS: Tooltip for the terrain tool in the editor
 #: ../../src/editor/editorinteractive.cc:268
 msgid "Change the map’s terrain"
-msgstr ""
+msgstr "Pakeisti žemėlapio reljefą"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:275
@@ -411,12 +412,12 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:284
 #: ../../src/editor/ui_menus/tool_place_critter_options_menu.cc:46
 msgid "Animals"
-msgstr ""
+msgstr "Gyvūnai"
 
 #. * TRANSLATORS: Tooltip for the animals tool in the editor
 #: ../../src/editor/editorinteractive.cc:287
 msgid "Add or remove animals"
-msgstr ""
+msgstr "Pridėti ar pašalinti gyvūnus"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:294
@@ -425,12 +426,12 @@ msgstr ""
 #: ../../src/map_io/map_saver.cc:164
 #: ../../src/map_io/widelands_map_loader.cc:209
 msgid "Resources"
-msgstr ""
+msgstr "Ištekliai"
 
 #. * TRANSLATORS: Tooltip for the resources tool in the editor
 #: ../../src/editor/editorinteractive.cc:297
 msgid "Set or change resources"
-msgstr ""
+msgstr "Nustatyti ar pakeisti išteklius"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:300
@@ -468,17 +469,17 @@ msgstr ""
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:325
 msgid "Map size"
-msgstr ""
+msgstr "Žemėlapio dydis"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
 #: ../../src/editor/editorinteractive.cc:328
 msgid "Change the map’s size"
-msgstr ""
+msgstr "Pakeisti žemėlapio dydį"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:331
 msgid "Information"
-msgstr ""
+msgstr "Informacija"
 
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
 #: ../../src/editor/editorinteractive.cc:334
@@ -532,21 +533,21 @@ msgstr ""
 #. animals are shown
 #: ../../src/editor/editorinteractive.cc:409
 msgid "Hide Animals"
-msgstr ""
+msgstr "Slėpti gyvūnus"
 
 #: ../../src/editor/editorinteractive.cc:409
 msgid "Show Animals"
-msgstr ""
+msgstr "Rodyti gyvūnus"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. resources are shown
 #: ../../src/editor/editorinteractive.cc:413
 msgid "Hide Resources"
-msgstr ""
+msgstr "Slėpti išteklius"
 
 #: ../../src/editor/editorinteractive.cc:413
 msgid "Show Resources"
-msgstr ""
+msgstr "Rodyti išteklius"
 
 #: ../../src/editor/editorinteractive.cc:450
 msgid "Unsupported Format"
@@ -581,7 +582,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:104
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:474
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:141
-#: ../../src/logic/map.h:163 ../../src/wui/mapdata.cc:45
+#: ../../src/logic/map.h:173 ../../src/wui/mapdata.cc:45
 msgid "No Name"
 msgstr "Be pavadinimo"
 
@@ -589,10 +590,10 @@ msgstr "Be pavadinimo"
 #: ../../src/editor/editorinteractive.cc:965
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:105
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:475
-#: ../../src/logic/map.h:164
+#: ../../src/logic/map.h:174
 msgctxt "author_name"
 msgid "Unknown"
-msgstr ""
+msgstr "Nežinomas"
 
 #: ../../src/editor/editorinteractive.cc:972
 #, c-format
@@ -601,7 +602,7 @@ msgstr ""
 
 #: ../../src/editor/map_generator.cc:713
 msgid "Random Player"
-msgstr ""
+msgstr "Atsitiktinis žaidėjas"
 
 #: ../../src/editor/tools/info_tool.cc:43
 msgid "Field Information"
@@ -619,22 +620,22 @@ msgstr ""
 #. * TRANSLATORS: Editor terrain property: small building plot
 #: ../../src/editor/tools/info_tool.cc:61
 msgid "small"
-msgstr ""
+msgstr "nedidelis"
 
 #. * TRANSLATORS: Editor terrain property: medium building plot
 #: ../../src/editor/tools/info_tool.cc:66
 msgid "medium"
-msgstr ""
+msgstr "vidutinis"
 
 #. * TRANSLATORS: Editor terrain property: big building plot
 #: ../../src/editor/tools/info_tool.cc:70
 msgid "big"
-msgstr ""
+msgstr "didelis"
 
 #. * TRANSLATORS: Editor terrain property: space for a flag
 #: ../../src/editor/tools/info_tool.cc:78
 msgid "flag"
-msgstr ""
+msgstr "vėliava"
 
 #. * TRANSLATORS: Editor terrain property: mine building plot
 #: ../../src/editor/tools/info_tool.cc:82
@@ -644,7 +645,7 @@ msgstr "kasykla"
 #. * TRANSLATORS: Editor terrain property: port space
 #: ../../src/editor/tools/info_tool.cc:86
 msgid "port"
-msgstr ""
+msgstr "uostas"
 
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
@@ -706,17 +707,17 @@ msgstr ""
 #: ../../src/editor/tools/info_tool.cc:175
 #, c-format
 msgid "Animals: %s"
-msgstr ""
+msgstr "Gyvūnai: %s"
 
 #: ../../src/editor/tools/info_tool.cc:181
 #, c-format
 msgid "Workers: %s"
-msgstr ""
+msgstr "Darbininkai: %s"
 
 #: ../../src/editor/tools/info_tool.cc:187
 #, c-format
 msgid "Ships: %s"
-msgstr ""
+msgstr "Laivai: %s"
 
 #: ../../src/editor/tools/info_tool.cc:200
 msgctxt "resources"
@@ -734,22 +735,22 @@ msgstr "Žemėlapis"
 #, c-format
 msgctxt "map_name"
 msgid "Name: %s"
-msgstr ""
+msgstr "Pavadinimas: %s"
 
 #: ../../src/editor/tools/info_tool.cc:212
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:225
 #: ../../src/ui_fsmenu/launch_mpg.cc:599
 msgid "Size: %1% x %2%"
-msgstr ""
+msgstr "Dydis:%1% x %2%"
 
 #: ../../src/editor/tools/info_tool.cc:217
 #, c-format
 msgid "Players: %u"
-msgstr ""
+msgstr "Žaidėjai: %u"
 
 #: ../../src/editor/tools/info_tool.cc:220
 msgid "Players: –"
-msgstr ""
+msgstr "Žaidėjai: –"
 
 #: ../../src/editor/tools/info_tool.cc:224
 #, c-format
@@ -759,7 +760,7 @@ msgstr "Autorius: %s"
 #: ../../src/editor/tools/info_tool.cc:226
 #, c-format
 msgid "Description: %s"
-msgstr ""
+msgstr "Aprašymas: %s"
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:184
@@ -783,7 +784,7 @@ msgstr ""
 #: ../../src/wui/encyclopedia_window.cc:137 ../../src/wui/login_box.cc:196
 #: ../../src/wui/tribal_encyclopedia.cc:54
 msgid "Error!"
-msgstr ""
+msgstr "Klaida!"
 
 #. * TRANSLATORS: Directory name for user maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:68
@@ -1488,11 +1489,11 @@ msgstr ""
 msgid "Creating player infrastructure…"
 msgstr ""
 
-#: ../../src/logic/game.cc:479 ../../src/logic/player.cc:225
+#: ../../src/logic/game.cc:479 ../../src/logic/player.cc:224
 msgid "Missing starting position"
 msgstr ""
 
-#: ../../src/logic/game.cc:480 ../../src/logic/player.cc:226
+#: ../../src/logic/game.cc:480 ../../src/logic/player.cc:225
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
@@ -1565,7 +1566,7 @@ msgstr ""
 msgid "An unexpected error occurred:"
 msgstr ""
 
-#: ../../src/logic/map.h:165
+#: ../../src/logic/map.h:175
 msgid "No description defined"
 msgstr ""
 
@@ -1864,76 +1865,76 @@ msgstr ""
 msgid "Can’t find any more resources!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:436
+#: ../../src/logic/map_objects/tribes/ship.cc:434
 msgid "Port Space"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:436
+#: ../../src/logic/map_objects/tribes/ship.cc:434
 msgid "Port Space Found"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:437
+#: ../../src/logic/map_objects/tribes/ship.cc:435
 msgid "An expedition ship found a new port build space."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:555
+#: ../../src/logic/map_objects/tribes/ship.cc:553
 msgid "Island Circumnavigated"
 msgstr ""
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../src/logic/map_objects/tribes/ship.cc:555
+#: ../../src/logic/map_objects/tribes/ship.cc:553
 msgctxt "ship"
 msgid "Waiting"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:556
+#: ../../src/logic/map_objects/tribes/ship.cc:554
 msgid "An expedition ship sailed around its island without any events."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:618
+#: ../../src/logic/map_objects/tribes/ship.cc:616
 msgid "Coast Reached"
 msgstr ""
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:618
+#: ../../src/logic/map_objects/tribes/ship.cc:616
 msgid "Land Ahoy!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:619
+#: ../../src/logic/map_objects/tribes/ship.cc:617
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:670
+#: ../../src/logic/map_objects/tribes/ship.cc:668
 msgid "New port construction site is gone"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:670
+#: ../../src/logic/map_objects/tribes/ship.cc:668
 msgid "Port Lost!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:671
+#: ../../src/logic/map_objects/tribes/ship.cc:669
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr ""
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:1063
+#: ../../src/logic/map_objects/tribes/ship.cc:857
 msgctxt "ship"
 msgid "Expedition"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:1063
+#: ../../src/logic/map_objects/tribes/ship.cc:857
 msgid "Expedition Ready"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:1064
+#: ../../src/logic/map_objects/tribes/ship.cc:858
 msgid "An expedition ship is waiting for your commands."
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. The ship is currently transporting
 #. wares.
-#: ../../src/logic/map_objects/tribes/ship.cc:1216
+#: ../../src/logic/map_objects/tribes/ship.cc:1011
 #: ../../src/wui/seafaring_statistics_menu.cc:209
 msgctxt "ship_state"
 msgid "Shipping"
@@ -1942,7 +1943,7 @@ msgstr ""
 #. * TRANSLATORS: This is a ship state. The ship is ready to transport wares,
 #. but has
 #. * nothing to do.
-#: ../../src/logic/map_objects/tribes/ship.cc:1220
+#: ../../src/logic/map_objects/tribes/ship.cc:1015
 #: ../../src/wui/seafaring_statistics_menu.cc:207
 msgctxt "ship_state"
 msgid "Idle"
@@ -1950,7 +1951,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:1225
+#: ../../src/logic/map_objects/tribes/ship.cc:1020
 #: ../../src/wui/seafaring_statistics_menu.cc:211
 msgctxt "ship_state"
 msgid "Waiting"
@@ -1958,14 +1959,14 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:1229
+#: ../../src/logic/map_objects/tribes/ship.cc:1024
 #: ../../src/wui/seafaring_statistics_menu.cc:213
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:1233
+#: ../../src/logic/map_objects/tribes/ship.cc:1028
 #: ../../src/wui/seafaring_statistics_menu.cc:215
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -1974,7 +1975,7 @@ msgstr ""
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1238
+#: ../../src/logic/map_objects/tribes/ship.cc:1033
 #: ../../src/wui/seafaring_statistics_menu.cc:217
 msgctxt "ship_state"
 msgid "Founding a Colony"
@@ -2059,7 +2060,7 @@ msgstr ""
 msgid "This objective has no description."
 msgstr ""
 
-#: ../../src/logic/player.cc:1523
+#: ../../src/logic/player.cc:1522
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -4123,7 +4124,7 @@ msgstr "Statyti kasyklas"
 
 #: ../../src/wui/fieldaction.cc:569 ../../src/wui/fieldaction.cc:591
 msgid "Build flag"
-msgstr "Pasatyti vėliavą"
+msgstr "Pastatyti vėliavą"
 
 #: ../../src/wui/fieldaction.cc:572
 msgid "Cancel road"

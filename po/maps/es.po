@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-06-10 15:19+0000\n"
+"POT-Creation-Date: 2020-06-28 07:45+0000\n"
+"PO-Revision-Date: 2020-06-28 16:40+0000\n"
 "Last-Translator: Walter Benkel <tromaster@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -339,7 +339,7 @@ msgstr "Astoria 2.R"
 
 #: ../../data/maps/Astoria 2.R.wmf/elemental:10
 msgid "Long, economic play in beautyfull land, try every player!!"
-msgstr "¡Juego prolongado y económico en un país hermoso; intenta con todos los jugadores!"
+msgstr "Juego prolongado y económico en un país hermoso. ¡Intenta con todos los jugadores!"
 
 #: ../../data/maps/Astoria 2.R.wmf/elemental:9
 msgid "pbuczny@gmail.com – edited by Nordfriese"
