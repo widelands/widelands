@@ -150,7 +150,7 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 	b = new UI::Button(buttons, "real_storage_" img, 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,  \
 	                   g_gr->images().get("images/ui_basic/scrollbar_" img ".png"), tt);            \
 	b->set_repeating(true);                                                                         \
-	b->sigclicked.connect([this]() { change_real_amount(delta);});      \
+	b->sigclicked.connect([this]() { change_real_amount(delta); });                                 \
 	buttons->add(b);
 
 		ADD_POLICY_BUTTON(normal, Normal, _("Normal policy"))

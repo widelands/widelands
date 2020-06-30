@@ -449,8 +449,7 @@ void InputQueueDisplay::update_max_fill_buttons() {
 		         _("Hold down Ctrl to store as much of this ware as possible"),
 		         UI::FontStyle::kTooltip))
 		      .str());
-		increase_real_fill_->sigclicked.connect(
-		   [this]() { increase_real_fill_clicked(); });
+		increase_real_fill_->sigclicked.connect([this]() { increase_real_fill_clicked(); });
 	}
 
 	if (increase_max_fill_) {

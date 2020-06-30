@@ -100,8 +100,8 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(
 			UI::IconGrid* ig_port = new UI::IconGrid(buildingtabs, 0, 0, 50, 50, kIconGridColumns);
 			UI::IconGrid* ig_mine = new UI::IconGrid(buildingtabs, 0, 0, 50, 50, kIconGridColumns);
 			for (UI::IconGrid* i : {ig_small, ig_medium, ig_big, ig_port, ig_mine}) {
-				i->icon_clicked.connect([this, i](int32_t x) { toggle_selected(i,
-				               Widelands::MapObjectType::BUILDING, x);});
+				i->icon_clicked.connect(
+				   [this, i](int32_t x) { toggle_selected(i, Widelands::MapObjectType::BUILDING, x); });
 			}
 
 			std::set<Widelands::DescriptionIndex> buildings;
@@ -189,8 +189,8 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(
 			const Image* icon = g_gr->images().get("images/wui/fieldaction/menu_build_flag.png");
 			UI::IconGrid* i = new UI::IconGrid(tab, 0, 0, kIconGridCellSize, kIconGridCellSize, 1);
 			i->add("flag", icon, reinterpret_cast<void*>(Widelands::INVALID_INDEX), _("Flag"));
-			i->icon_clicked.connect([this, i](int32_t x) { toggle_selected(i,
-			               Widelands::MapObjectType::FLAG, x);});
+			i->icon_clicked.connect(
+			   [this, i](int32_t x) { toggle_selected(i, Widelands::MapObjectType::FLAG, x); });
 			tab->add("flag", icon, i, _("Flag"));
 		}
 		{
@@ -200,15 +200,15 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(
 				const Widelands::ImmovableDescr* d = tribe.get_immovable_descr(di);
 				i->add(d->name(), d->icon(), reinterpret_cast<void*>(di), d->descname());
 			}
-			i->icon_clicked.connect([this, i](int32_t x) { toggle_selected(i,
-			               Widelands::MapObjectType::IMMOVABLE, x);});
+			i->icon_clicked.connect(
+			   [this, i](int32_t x) { toggle_selected(i, Widelands::MapObjectType::IMMOVABLE, x); });
 			tab->add("immovables", g_gr->images().get("images/wui/menus/toggle_immovables.png"), i,
 			         _("Immovables"));
 		}
 		tabs_.add("player_" + std::to_string(static_cast<unsigned>(p)),
 		          map.get_scenario_player_name(p), tab);
 	}
-	tabs_.sigclicked.connect([this]() { select_tab();});
+	tabs_.sigclicked.connect([this]() { select_tab(); });
 
 	force_.set_state(tool_.get_force());
 	force_.changed.connect([this]() {

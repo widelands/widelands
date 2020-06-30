@@ -145,8 +145,8 @@ ShipCfg::ShipCfg(InteractiveBase& ib, Ship& s)
 		}
 	}
 
-	ok_.sigclicked.connect([this]() { clicked_ok();});
-	cancel_.sigclicked.connect([this]() { die();});
+	ok_.sigclicked.connect([this]() { clicked_ok(); });
+	cancel_.sigclicked.connect([this]() { die(); });
 
 	main_box_.add(&capacity_, UI::Box::Resizing::kFullSize);
 	main_box_.add(&shipname_, UI::Box::Resizing::kFullSize);
@@ -273,8 +273,8 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Ship* s
 	vbox_.add(buttons, UI::Box::Resizing::kFullSize);
 
 	if (ibase_.get_game()) {
-		btn_sink_ = make_button(
-		   buttons, "sink", _("Sink the ship"), pic_sink, [this]() { act_sink(); });
+		btn_sink_ =
+		   make_button(buttons, "sink", _("Sink the ship"), pic_sink, [this]() { act_sink(); });
 		buttons->add(btn_sink_);
 	} else {
 		// Use the Delete Workers tool to remove the ship
@@ -289,8 +289,8 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Ship* s
 	buttons->add_inf_space();
 
 	if (ibase_.get_display_flag(InteractiveBase::dfDebug)) {
-		btn_debug_ = make_button(buttons, "debug", _("Show Debug Window"), pic_debug,
-		                         [this]() { act_debug(); });
+		btn_debug_ = make_button(
+		   buttons, "debug", _("Show Debug Window"), pic_debug, [this]() { act_debug(); });
 		btn_debug_->set_enabled(true);
 		buttons->add(btn_debug_);
 	} else {
@@ -307,9 +307,8 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Ship* s
 	}
 
 	if (ibase_.get_game()) {
-		btn_destination_ =
-		   make_button(buttons, "destination", _("Go to destination"), pic_destination,
-		               [this]() { act_destination(); });
+		btn_destination_ = make_button(buttons, "destination", _("Go to destination"),
+		                               pic_destination, [this]() { act_destination(); });
 		btn_destination_->set_enabled(false);
 		buttons->add(btn_destination_);
 	} else {

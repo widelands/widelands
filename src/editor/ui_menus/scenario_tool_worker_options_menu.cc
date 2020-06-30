@@ -88,8 +88,8 @@ ScenarioToolWorkerOptionsMenu::ScenarioToolWorkerOptionsMenu(EditorInteractive& 
 		tabs_.add(
 		   "player_" + std::to_string(static_cast<unsigned>(p)), map.get_scenario_player_name(p), i);
 	}
-	tabs_.sigclicked.connect([this]() { select_tab();});
-	ware_.clicked.connect([this]() { select_ware();});
+	tabs_.sigclicked.connect([this]() { select_tab(); });
+	ware_.clicked.connect([this]() { select_ware(); });
 
 	bottombox_.add(&experience_, UI::Box::Resizing::kFullSize);
 	bottombox_.add_inf_space();

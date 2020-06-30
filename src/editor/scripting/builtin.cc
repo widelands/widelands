@@ -149,10 +149,10 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
    // Game
 
    {"game", BuiltinFunctionInfo([]() { return _("Returns the running game instance."); },
-                                    new FunctionBase("wl.Game",
-                                                     VariableType(VariableTypeID::Nil),   // call on
-                                                     VariableType(VariableTypeID::Game),  // returns
-                                                     {}))},
+                                new FunctionBase("wl.Game",
+                                                 VariableType(VariableTypeID::Nil),   // call on
+                                                 VariableType(VariableTypeID::Game),  // returns
+                                                 {}))},
    {"save", BuiltinFunctionInfo(
                []() { return _("Saves the game under the given name."); },
                new FunctionBase("save",
@@ -1113,16 +1113,16 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
 
    {"ship_get_wares",
     BuiltinFunctionInfo([]() { return _("Returns the number of wares on this ship."); },
-                            new FunctionBase("get_wares",
-                                             VariableType(VariableTypeID::Ship),     // call on
-                                             VariableType(VariableTypeID::Integer),  // returns
-                                             {}))},
+                        new FunctionBase("get_wares",
+                                         VariableType(VariableTypeID::Ship),     // call on
+                                         VariableType(VariableTypeID::Integer),  // returns
+                                         {}))},
    {"ship_get_workers",
     BuiltinFunctionInfo([]() { return _("Returns the number of workers on this ship."); },
-                            new FunctionBase("get_workers",
-                                             VariableType(VariableTypeID::Ship),     // call on
-                                             VariableType(VariableTypeID::Integer),  // returns
-                                             {}))},
+                        new FunctionBase("get_workers",
+                                         VariableType(VariableTypeID::Ship),     // call on
+                                         VariableType(VariableTypeID::Integer),  // returns
+                                         {}))},
    {"ship_buildport",
     BuiltinFunctionInfo(
        []() {
@@ -1158,11 +1158,11 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
    // Game
 
    {"map", BuiltinPropertyInfo([]() { return _("The map instance."); },
-                                   new Property("map",
-                                                Property::Access::RO,
-                                                VariableType(VariableTypeID::Game),  // class
-                                                VariableType(VariableTypeID::Map)    // type
-                                                ))},
+                               new Property("map",
+                                            Property::Access::RO,
+                                            VariableType(VariableTypeID::Game),  // class
+                                            VariableType(VariableTypeID::Map)    // type
+                                            ))},
    {"real_speed",
     BuiltinPropertyInfo(
        []() {
@@ -1226,42 +1226,39 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                     ))},
    {"players",
     BuiltinPropertyInfo([]() { return _("An array with the player instances."); },
-                            new Property("players",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::Game),  // class
-                                         VariableType(VariableType(VariableTypeID::Integer),
-                                                      VariableType(VariableTypeID::Player))  // type
-                                         ))},
+                        new Property("players",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::Game),  // class
+                                     VariableType(VariableType(VariableTypeID::Integer),
+                                                  VariableType(VariableTypeID::Player))  // type
+                                     ))},
 
    // Player
 
-   {"pl_number",
-    BuiltinPropertyInfo([]() { return _("The player’s player number."); },
-                            new Property("number",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::Player),  // class
-                                         VariableType(VariableTypeID::Integer)  // type
-                                         ))},
+   {"pl_number", BuiltinPropertyInfo([]() { return _("The player’s player number."); },
+                                     new Property("number",
+                                                  Property::Access::RO,
+                                                  VariableType(VariableTypeID::Player),  // class
+                                                  VariableType(VariableTypeID::Integer)  // type
+                                                  ))},
    {"pl_name", BuiltinPropertyInfo([]() { return _("The player’s name."); },
-                                       new Property("name",
-                                                    Property::Access::RO,
-                                                    VariableType(VariableTypeID::Player),  // class
-                                                    VariableType(VariableTypeID::String)   // type
-                                                    ))},
-   {"pl_tribename",
-    BuiltinPropertyInfo([]() { return _("The name of the player’s tribe."); },
-                            new Property("tribe_name",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::Player),  // class
-                                         VariableType(VariableTypeID::String)   // type
-                                         ))},
-   {"pl_tribe",
-    BuiltinPropertyInfo([]() { return _("The player’s tribe."); },
-                            new Property("tribe",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::Player),     // class
-                                         VariableType(VariableTypeID::TribeDescr)  // type
-                                         ))},
+                                   new Property("name",
+                                                Property::Access::RO,
+                                                VariableType(VariableTypeID::Player),  // class
+                                                VariableType(VariableTypeID::String)   // type
+                                                ))},
+   {"pl_tribename", BuiltinPropertyInfo([]() { return _("The name of the player’s tribe."); },
+                                        new Property("tribe_name",
+                                                     Property::Access::RO,
+                                                     VariableType(VariableTypeID::Player),  // class
+                                                     VariableType(VariableTypeID::String)   // type
+                                                     ))},
+   {"pl_tribe", BuiltinPropertyInfo([]() { return _("The player’s tribe."); },
+                                    new Property("tribe",
+                                                 Property::Access::RO,
+                                                 VariableType(VariableTypeID::Player),     // class
+                                                 VariableType(VariableTypeID::TribeDescr)  // type
+                                                 ))},
    {"pl_color", BuiltinPropertyInfo(
                    []() { return _("The playercolor assigned to this Player), in hex notation."); },
                    new Property("color",
@@ -1271,18 +1268,17 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                                 ))},
    {"pl_team",
     BuiltinPropertyInfo([]() { return _("The player’s team number), 0 meaning no team."); },
-                            new Property("team",
-                                         Property::Access::RW,
-                                         VariableType(VariableTypeID::Player),  // class
-                                         VariableType(VariableTypeID::Integer)  // type
-                                         ))},
-   {"pl_defeated",
-    BuiltinPropertyInfo([]() { return _("Whether this player was defeated."); },
-                            new Property("defeated",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::Player),  // class
-                                         VariableType(VariableTypeID::Boolean)  // type
-                                         ))},
+                        new Property("team",
+                                     Property::Access::RW,
+                                     VariableType(VariableTypeID::Player),  // class
+                                     VariableType(VariableTypeID::Integer)  // type
+                                     ))},
+   {"pl_defeated", BuiltinPropertyInfo([]() { return _("Whether this player was defeated."); },
+                                       new Property("defeated",
+                                                    Property::Access::RO,
+                                                    VariableType(VariableTypeID::Player),  // class
+                                                    VariableType(VariableTypeID::Boolean)  // type
+                                                    ))},
    {"pl_see_all",
     BuiltinPropertyInfo(
        []() {
@@ -1354,13 +1350,12 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                     VariableType(VariableTypeID::Objective),  // class
                     VariableType(VariableTypeID::String)      // type
                     ))},
-   {"obj_title",
-    BuiltinPropertyInfo([]() { return _("The localized objective title."); },
-                            new Property("title",
-                                         Property::Access::RW,
-                                         VariableType(VariableTypeID::Objective),  // class
-                                         VariableType(VariableTypeID::String)      // type
-                                         ))},
+   {"obj_title", BuiltinPropertyInfo([]() { return _("The localized objective title."); },
+                                     new Property("title",
+                                                  Property::Access::RW,
+                                                  VariableType(VariableTypeID::Objective),  // class
+                                                  VariableType(VariableTypeID::String)      // type
+                                                  ))},
    {"obj_body",
     BuiltinPropertyInfo(
        []() { return _("The complete localized objective text. May use richtext markup."); },
@@ -1391,27 +1386,24 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 
    // Message
 
-   {"msg_title",
-    BuiltinPropertyInfo([]() { return _("The message’s title."); },
-                            new Property("title",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::Message),  // class
-                                         VariableType(VariableTypeID::String)    // type
-                                         ))},
-   {"msg_heading",
-    BuiltinPropertyInfo([]() { return _("The extended title."); },
-                            new Property("heading",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::Message),  // class
-                                         VariableType(VariableTypeID::String)    // type
-                                         ))},
-   {"msg_body",
-    BuiltinPropertyInfo([]() { return _("The message’s full text."); },
-                            new Property("body",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::Message),  // class
-                                         VariableType(VariableTypeID::String)    // type
-                                         ))},
+   {"msg_title", BuiltinPropertyInfo([]() { return _("The message’s title."); },
+                                     new Property("title",
+                                                  Property::Access::RO,
+                                                  VariableType(VariableTypeID::Message),  // class
+                                                  VariableType(VariableTypeID::String)    // type
+                                                  ))},
+   {"msg_heading", BuiltinPropertyInfo([]() { return _("The extended title."); },
+                                       new Property("heading",
+                                                    Property::Access::RO,
+                                                    VariableType(VariableTypeID::Message),  // class
+                                                    VariableType(VariableTypeID::String)    // type
+                                                    ))},
+   {"msg_body", BuiltinPropertyInfo([]() { return _("The message’s full text."); },
+                                    new Property("body",
+                                                 Property::Access::RO,
+                                                 VariableType(VariableTypeID::Message),  // class
+                                                 VariableType(VariableTypeID::String)    // type
+                                                 ))},
    {"msg_sent", BuiltinPropertyInfo(
                    []() { return _("The game time in milliseconds when this message was sent."); },
                    new Property("sent",
@@ -1421,11 +1413,11 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                                 ))},
    {"msg_field",
     BuiltinPropertyInfo([]() { return _("The field attached to this message), or nil."); },
-                            new Property("field",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::Message),  // class
-                                         VariableType(VariableTypeID::Field)     // type
-                                         ))},
+                        new Property("field",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::Message),  // class
+                                     VariableType(VariableTypeID::Field)     // type
+                                     ))},
    {"msg_icon_name",
     BuiltinPropertyInfo(
        []() { return _("The filename for the icon that is shown with the message title."); },
@@ -1434,31 +1426,29 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                     VariableType(VariableTypeID::Message),  // class
                     VariableType(VariableTypeID::String)    // type
                     ))},
-   {"msg_status",
-    BuiltinPropertyInfo([]() { return _("May be 'new', 'read', or 'archived'."); },
-                            new Property(
-                               "status",
-                               Property::Access::RW,
-                               VariableType(VariableTypeID::Message),  // class
-                               VariableType(VariableTypeID::String)    // type
-                               ))},
+   {"msg_status", BuiltinPropertyInfo([]() { return _("May be 'new', 'read', or 'archived'."); },
+                                      new Property(
+                                         "status",
+                                         Property::Access::RW,
+                                         VariableType(VariableTypeID::Message),  // class
+                                         VariableType(VariableTypeID::String)    // type
+                                         ))},
 
    // Map
 
    {"map_allows_seafaring",
     BuiltinPropertyInfo([]() { return _("Whether seafaring is possible on this map."); },
-                            new Property("allows_seafaring",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::Map),     // class
-                                         VariableType(VariableTypeID::Boolean)  // type
-                                         ))},
-   {"map_nrports",
-    BuiltinPropertyInfo([]() { return _("The number of port spaces on this map."); },
-                            new Property("number_of_port_spaces",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::Map),     // class
-                                         VariableType(VariableTypeID::Integer)  // type
-                                         ))},
+                        new Property("allows_seafaring",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::Map),     // class
+                                     VariableType(VariableTypeID::Boolean)  // type
+                                     ))},
+   {"map_nrports", BuiltinPropertyInfo([]() { return _("The number of port spaces on this map."); },
+                                       new Property("number_of_port_spaces",
+                                                    Property::Access::RO,
+                                                    VariableType(VariableTypeID::Map),     // class
+                                                    VariableType(VariableTypeID::Integer)  // type
+                                                    ))},
    {"map_ports",
     BuiltinPropertyInfo(
        []() {
@@ -1472,35 +1462,34 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                                               VariableType(VariableTypeID::Integer)))  // type
                     ))},
    {"map_w", BuiltinPropertyInfo([]() { return _("The map’s width."); },
-                                     new Property("width",
-                                                  Property::Access::RO,
-                                                  VariableType(VariableTypeID::Map),     // class
-                                                  VariableType(VariableTypeID::Integer)  // type
-                                                  ))},
+                                 new Property("width",
+                                              Property::Access::RO,
+                                              VariableType(VariableTypeID::Map),     // class
+                                              VariableType(VariableTypeID::Integer)  // type
+                                              ))},
    {"map_h", BuiltinPropertyInfo([]() { return _("The map’s height."); },
-                                     new Property(
-                                        "height",
-                                        Property::Access::RO,
-                                        VariableType(VariableTypeID::Map),     // class
-                                        VariableType(VariableTypeID::Integer)  // type
-                                        ))},
+                                 new Property(
+                                    "height",
+                                    Property::Access::RO,
+                                    VariableType(VariableTypeID::Map),     // class
+                                    VariableType(VariableTypeID::Integer)  // type
+                                    ))},
 
    // TribeDescr
 
-   {"td_name",
-    BuiltinPropertyInfo([]() { return _("The tribe’s internal name"); },
-                            new Property("name",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::TribeDescr),  // class
-                                         VariableType(VariableTypeID::String)       // type
-                                         ))},
+   {"td_name", BuiltinPropertyInfo([]() { return _("The tribe’s internal name"); },
+                                   new Property("name",
+                                                Property::Access::RO,
+                                                VariableType(VariableTypeID::TribeDescr),  // class
+                                                VariableType(VariableTypeID::String)       // type
+                                                ))},
    {"td_descname",
     BuiltinPropertyInfo([]() { return _("The tribe’s localized name"); },
-                            new Property("descname",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::TribeDescr),  // class
-                                         VariableType(VariableTypeID::String)       // type
-                                         ))},
+                        new Property("descname",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::TribeDescr),  // class
+                                     VariableType(VariableTypeID::String)       // type
+                                     ))},
    {"td_carrier",
     BuiltinPropertyInfo(
        []() { return _("The internal name of the carrier type that this tribe uses"); },
@@ -1525,27 +1514,27 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                     VariableType(VariableTypeID::TribeDescr),  // class
                     VariableType(VariableTypeID::String)       // type
                     ))},
-   {"td_soldier", BuiltinPropertyInfo(
-                     []() { return _("The internal name of the soldier that this tribe uses"); },
-                     new Property("soldier",
-                                  Property::Access::RO,
-                                  VariableType(VariableTypeID::TribeDescr),  // class
-                                  VariableType(VariableTypeID::String)       // type
-                                  ))},
-   {"td_ship", BuiltinPropertyInfo(
-                  []() { return _("The internal name of the ship that this tribe uses"); },
-                  new Property("ship",
-                               Property::Access::RO,
-                               VariableType(VariableTypeID::TribeDescr),  // class
-                               VariableType(VariableTypeID::String)       // type
-                               ))},
-   {"td_port", BuiltinPropertyInfo(
-                  []() { return _("The internal name of the port that this tribe uses"); },
-                  new Property("port",
-                               Property::Access::RO,
-                               VariableType(VariableTypeID::TribeDescr),  // class
-                               VariableType(VariableTypeID::String)       // type
-                               ))},
+   {"td_soldier",
+    BuiltinPropertyInfo([]() { return _("The internal name of the soldier that this tribe uses"); },
+                        new Property("soldier",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::TribeDescr),  // class
+                                     VariableType(VariableTypeID::String)       // type
+                                     ))},
+   {"td_ship",
+    BuiltinPropertyInfo([]() { return _("The internal name of the ship that this tribe uses"); },
+                        new Property("ship",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::TribeDescr),  // class
+                                     VariableType(VariableTypeID::String)       // type
+                                     ))},
+   {"td_port",
+    BuiltinPropertyInfo([]() { return _("The internal name of the port that this tribe uses"); },
+                        new Property("port",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::TribeDescr),  // class
+                                     VariableType(VariableTypeID::String)       // type
+                                     ))},
    {"td_buildings",
     BuiltinPropertyInfo(
        []() { return _("An array with all the BuildingDescriptions this tribe uses"); },
@@ -1593,32 +1582,32 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 
    {"mo_d_name",
     BuiltinPropertyInfo([]() { return _("The map object’s internal name"); },
-                            new Property("name",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::MapObjectDescr),  // class
-                                         VariableType(VariableTypeID::String)           // type
-                                         ))},
+                        new Property("name",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::MapObjectDescr),  // class
+                                     VariableType(VariableTypeID::String)           // type
+                                     ))},
    {"mo_d_descname",
     BuiltinPropertyInfo([]() { return _("The map object’s localized name"); },
-                            new Property("descname",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::MapObjectDescr),  // class
-                                         VariableType(VariableTypeID::String)           // type
-                                         ))},
+                        new Property("descname",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::MapObjectDescr),  // class
+                                     VariableType(VariableTypeID::String)           // type
+                                     ))},
    {"mo_d_type",
     BuiltinPropertyInfo([]() { return _("The map object’s type"); },
-                            new Property("type_name",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::MapObjectDescr),  // class
-                                         VariableType(VariableTypeID::String)           // type
-                                         ))},
+                        new Property("type_name",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::MapObjectDescr),  // class
+                                     VariableType(VariableTypeID::String)           // type
+                                     ))},
    {"mo_d_icon_name",
     BuiltinPropertyInfo([]() { return _("The filename for the menu icon"); },
-                            new Property("icon_name",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::MapObjectDescr),  // class
-                                         VariableType(VariableTypeID::String)           // type
-                                         ))},
+                        new Property("icon_name",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::MapObjectDescr),  // class
+                                     VariableType(VariableTypeID::String)           // type
+                                     ))},
    {"mo_d_help",
     BuiltinPropertyInfo(
        []() { return _("The path and filename to the helptext script. Can be empty."); },
@@ -1685,18 +1674,18 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 
    {"bld_d_conquers",
     BuiltinPropertyInfo([]() { return _("The conquer radius"); },
-                            new Property("conquers",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::BuildingDescr),  // class
-                                         VariableType(VariableTypeID::Integer)         // type
-                                         ))},
+                        new Property("conquers",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::BuildingDescr),  // class
+                                     VariableType(VariableTypeID::Integer)         // type
+                                     ))},
    {"bld_d_vision_range",
     BuiltinPropertyInfo([]() { return _("The building’s vision range"); },
-                            new Property("vision_range",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::BuildingDescr),  // class
-                                         VariableType(VariableTypeID::Integer)         // type
-                                         ))},
+                        new Property("vision_range",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::BuildingDescr),  // class
+                                     VariableType(VariableTypeID::Integer)         // type
+                                     ))},
    {"bld_d_workarea_radius", BuiltinPropertyInfo(
                                 []() {
 	                                return _("The first workarea radius of the building), or nil in "
@@ -1732,13 +1721,12 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                     VariableType(VariableTypeID::Boolean)         // type
                     ))},
    {"bld_d_destructible",
-    BuiltinPropertyInfo(
-       []() { return _("Whether the building can be burnt down by the player"); },
-       new Property("destructible",
-                    Property::Access::RO,
-                    VariableType(VariableTypeID::BuildingDescr),  // class
-                    VariableType(VariableTypeID::Boolean)         // type
-                    ))},
+    BuiltinPropertyInfo([]() { return _("Whether the building can be burnt down by the player"); },
+                        new Property("destructible",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::BuildingDescr),  // class
+                                     VariableType(VariableTypeID::Boolean)         // type
+                                     ))},
    {"bld_d_enhanced_from", BuiltinPropertyInfo(
                               []() {
 	                              return _("The building type that can be enhanced to this "
@@ -1760,23 +1748,21 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                                          VariableType(VariableTypeID::BuildingDescr)   // type
                                          ))},
    {"bld_d_enhancement_cost",
-    BuiltinPropertyInfo(
-       []() { return _("The cost for enhancing this building"); },
-       new Property("enhancement_cost",
-                    Property::Access::RO,
-                    VariableType(VariableTypeID::BuildingDescr),  // class
-                    VariableType(VariableType(VariableTypeID::String),
-                                 VariableType(VariableTypeID::Integer))  // type
-                    ))},
+    BuiltinPropertyInfo([]() { return _("The cost for enhancing this building"); },
+                        new Property("enhancement_cost",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::BuildingDescr),  // class
+                                     VariableType(VariableType(VariableTypeID::String),
+                                                  VariableType(VariableTypeID::Integer))  // type
+                                     ))},
    {"bld_d_returned_wares",
-    BuiltinPropertyInfo(
-       []() { return _("The list of wares returned upon dismantling"); },
-       new Property("returned_wares",
-                    Property::Access::RO,
-                    VariableType(VariableTypeID::BuildingDescr),  // class
-                    VariableType(VariableType(VariableTypeID::String),
-                                 VariableType(VariableTypeID::Integer))  // type
-                    ))},
+    BuiltinPropertyInfo([]() { return _("The list of wares returned upon dismantling"); },
+                        new Property("returned_wares",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::BuildingDescr),  // class
+                                     VariableType(VariableType(VariableTypeID::String),
+                                                  VariableType(VariableTypeID::Integer))  // type
+                                     ))},
    {"bld_d_returned_wares_enhanced",
     BuiltinPropertyInfo(
        []() { return _("The list of wares returned upon dismantling an enhanced building"); },
@@ -1826,14 +1812,13 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                                  VariableType(VariableTypeID::WorkerDescr))  // type
                     ))},
    {"pd_d_production_programs",
-    BuiltinPropertyInfo(
-       []() { return _("An array with the production program names as string"); },
-       new Property("production_programs",
-                    Property::Access::RO,
-                    VariableType(VariableTypeID::ProductionSiteDescr),  // class
-                    VariableType(VariableType(VariableTypeID::Integer),
-                                 VariableType(VariableTypeID::String))  // type
-                    ))},
+    BuiltinPropertyInfo([]() { return _("An array with the production program names as string"); },
+                        new Property("production_programs",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::ProductionSiteDescr),  // class
+                                     VariableType(VariableType(VariableTypeID::Integer),
+                                                  VariableType(VariableTypeID::String))  // type
+                                     ))},
    {"pd_d_working_positions",
     BuiltinPropertyInfo(
        []() {
@@ -1910,20 +1895,20 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                                   VariableType(VariableTypeID::TrainingSiteDescr),  // class
                                   VariableType(VariableTypeID::Integer)             // type
                                   ))},
-   {"ts_d_max_a", BuiltinPropertyInfo(
-                     []() { return _("The attack level up to which a soldier can train here"); },
-                     new Property("max_attack",
-                                  Property::Access::RO,
-                                  VariableType(VariableTypeID::TrainingSiteDescr),  // class
-                                  VariableType(VariableTypeID::Integer)             // type
-                                  ))},
-   {"ts_d_max_h", BuiltinPropertyInfo(
-                     []() { return _("The health level up to which a soldier can train here"); },
-                     new Property("max_health",
-                                  Property::Access::RO,
-                                  VariableType(VariableTypeID::TrainingSiteDescr),  // class
-                                  VariableType(VariableTypeID::Integer)             // type
-                                  ))},
+   {"ts_d_max_a",
+    BuiltinPropertyInfo([]() { return _("The attack level up to which a soldier can train here"); },
+                        new Property("max_attack",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::TrainingSiteDescr),  // class
+                                     VariableType(VariableTypeID::Integer)             // type
+                                     ))},
+   {"ts_d_max_h",
+    BuiltinPropertyInfo([]() { return _("The health level up to which a soldier can train here"); },
+                        new Property("max_health",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::TrainingSiteDescr),  // class
+                                     VariableType(VariableTypeID::Integer)             // type
+                                     ))},
    {"ts_d_max_d", BuiltinPropertyInfo(
                      []() { return _("The defense level up to which a soldier can train here"); },
                      new Property("max_defense",
@@ -1931,13 +1916,13 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                                   VariableType(VariableTypeID::TrainingSiteDescr),  // class
                                   VariableType(VariableTypeID::Integer)             // type
                                   ))},
-   {"ts_d_max_e", BuiltinPropertyInfo(
-                     []() { return _("The evade level up to which a soldier can train here"); },
-                     new Property("max_evade",
-                                  Property::Access::RO,
-                                  VariableType(VariableTypeID::TrainingSiteDescr),  // class
-                                  VariableType(VariableTypeID::Integer)             // type
-                                  ))},
+   {"ts_d_max_e",
+    BuiltinPropertyInfo([]() { return _("The evade level up to which a soldier can train here"); },
+                        new Property("max_evade",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::TrainingSiteDescr),  // class
+                                     VariableType(VariableTypeID::Integer)             // type
+                                     ))},
 
    // WorkerDescr
 
@@ -1961,11 +1946,11 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                     ))},
    {"wd_buildable",
     BuiltinPropertyInfo([]() { return _("Whether this worker can be built in warehouses"); },
-                            new Property("buildable",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::WorkerDescr),  // class
-                                         VariableType(VariableTypeID::Boolean)       // type
-                                         ))},
+                        new Property("buildable",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::WorkerDescr),  // class
+                                     VariableType(VariableTypeID::Boolean)       // type
+                                     ))},
    {"wd_buildcost",
     BuiltinPropertyInfo(
        []() {
@@ -1994,46 +1979,46 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 
    {"sd_h_max",
     BuiltinPropertyInfo([]() { return _("The maximum health level this soldier can have"); },
-                            new Property("max_health_level",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::SoldierDescr),  // class
-                                         VariableType(VariableTypeID::Integer)        // type
-                                         ))},
+                        new Property("max_health_level",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::SoldierDescr),  // class
+                                     VariableType(VariableTypeID::Integer)        // type
+                                     ))},
    {"sd_a_max",
     BuiltinPropertyInfo([]() { return _("The maximum attack level this soldier can have"); },
-                            new Property("max_attack_level",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::SoldierDescr),  // class
-                                         VariableType(VariableTypeID::Integer)        // type
-                                         ))},
+                        new Property("max_attack_level",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::SoldierDescr),  // class
+                                     VariableType(VariableTypeID::Integer)        // type
+                                     ))},
    {"sd_d_max",
     BuiltinPropertyInfo([]() { return _("The maximum defense level this soldier can have"); },
-                            new Property("max_defense_level",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::SoldierDescr),  // class
-                                         VariableType(VariableTypeID::Integer)        // type
-                                         ))},
+                        new Property("max_defense_level",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::SoldierDescr),  // class
+                                     VariableType(VariableTypeID::Integer)        // type
+                                     ))},
    {"sd_e_max",
     BuiltinPropertyInfo([]() { return _("The maximum evade level this soldier can have"); },
-                            new Property("max_evade_level",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::SoldierDescr),  // class
-                                         VariableType(VariableTypeID::Integer)        // type
-                                         ))},
-   {"sd_h_base", BuiltinPropertyInfo(
-                    []() { return _("The number of health points this soldier starts with"); },
-                    new Property("base_health",
-                                 Property::Access::RO,
-                                 VariableType(VariableTypeID::SoldierDescr),  // class
-                                 VariableType(VariableTypeID::Integer)        // type
-                                 ))},
+                        new Property("max_evade_level",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::SoldierDescr),  // class
+                                     VariableType(VariableTypeID::Integer)        // type
+                                     ))},
+   {"sd_h_base",
+    BuiltinPropertyInfo([]() { return _("The number of health points this soldier starts with"); },
+                        new Property("base_health",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::SoldierDescr),  // class
+                                     VariableType(VariableTypeID::Integer)        // type
+                                     ))},
    {"sd_a_base",
     BuiltinPropertyInfo([]() { return _("The attack strength this soldier starts with"); },
-                            new Property("base_attack",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::SoldierDescr),  // class
-                                         VariableType(VariableTypeID::Integer)        // type
-                                         ))},
+                        new Property("base_attack",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::SoldierDescr),  // class
+                                     VariableType(VariableTypeID::Integer)        // type
+                                     ))},
    {"sd_d_base", BuiltinPropertyInfo(
                     []() { return _("The blow absorption percentage this soldier starts with"); },
                     new Property("base_defense",
@@ -2041,27 +2026,27 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                                  VariableType(VariableTypeID::SoldierDescr),  // class
                                  VariableType(VariableTypeID::Integer)        // type
                                  ))},
-   {"sd_e_base", BuiltinPropertyInfo(
-                    []() { return _("The evade chance in percent this soldier starts with"); },
-                    new Property("base_evade",
-                                 Property::Access::RO,
-                                 VariableType(VariableTypeID::SoldierDescr),  // class
-                                 VariableType(VariableTypeID::Integer)        // type
-                                 ))},
+   {"sd_e_base",
+    BuiltinPropertyInfo([]() { return _("The evade chance in percent this soldier starts with"); },
+                        new Property("base_evade",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::SoldierDescr),  // class
+                                     VariableType(VariableTypeID::Integer)        // type
+                                     ))},
    {"sd_h_incr",
     BuiltinPropertyInfo([]() { return _("The number of hitpoints gained per health level"); },
-                            new Property("health_incr_per_level",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::SoldierDescr),  // class
-                                         VariableType(VariableTypeID::Integer)        // type
-                                         ))},
+                        new Property("health_incr_per_level",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::SoldierDescr),  // class
+                                     VariableType(VariableTypeID::Integer)        // type
+                                     ))},
    {"sd_a_incr",
     BuiltinPropertyInfo([]() { return _("The attack strength gained per attack level"); },
-                            new Property("attack_incr_per_level",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::SoldierDescr),  // class
-                                         VariableType(VariableTypeID::Integer)        // type
-                                         ))},
+                        new Property("attack_incr_per_level",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::SoldierDescr),  // class
+                                     VariableType(VariableTypeID::Integer)        // type
+                                     ))},
    {"sd_d_incr",
     BuiltinPropertyInfo(
        []() {
@@ -2085,25 +2070,25 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 
    {"rd_name",
     BuiltinPropertyInfo([]() { return _("The resource’s internal name"); },
-                            new Property("name",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::ResourceDescr),  // class
-                                         VariableType(VariableTypeID::String)          // type
-                                         ))},
+                        new Property("name",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::ResourceDescr),  // class
+                                     VariableType(VariableTypeID::String)          // type
+                                     ))},
    {"rd_descname",
     BuiltinPropertyInfo([]() { return _("The resource’s localized name"); },
-                            new Property("descname",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::ResourceDescr),  // class
-                                         VariableType(VariableTypeID::String)          // type
-                                         ))},
+                        new Property("descname",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::ResourceDescr),  // class
+                                     VariableType(VariableTypeID::String)          // type
+                                     ))},
    {"rd_dect",
     BuiltinPropertyInfo([]() { return _("Whether geologists can find this resource"); },
-                            new Property("is_detectable",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::ResourceDescr),  // class
-                                         VariableType(VariableTypeID::Boolean)         // type
-                                         ))},
+                        new Property("is_detectable",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::ResourceDescr),  // class
+                                     VariableType(VariableTypeID::Boolean)         // type
+                                     ))},
    {"rd_max_amount",
     BuiltinPropertyInfo(
        []() { return _("The highest amount of this resource that can be contained on a field"); },
@@ -2125,18 +2110,18 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 
    {"terrd_name",
     BuiltinPropertyInfo([]() { return _("The terrain’s internal name"); },
-                            new Property("name",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::TerrainDescr),  // class
-                                         VariableType(VariableTypeID::String)         // type
-                                         ))},
+                        new Property("name",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::TerrainDescr),  // class
+                                     VariableType(VariableTypeID::String)         // type
+                                     ))},
    {"terrd_descname",
     BuiltinPropertyInfo([]() { return _("The terrain’s localized name"); },
-                            new Property("descname",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::TerrainDescr),  // class
-                                         VariableType(VariableTypeID::String)         // type
-                                         ))},
+                        new Property("descname",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::TerrainDescr),  // class
+                                     VariableType(VariableTypeID::String)         // type
+                                     ))},
    {"terrd_default_resource", BuiltinPropertyInfo(
                                  []() {
 	                                 return _("The resource that can be found here unless another "
@@ -2168,11 +2153,11 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                     ))},
    {"terrd_representative_image",
     BuiltinPropertyInfo([]() { return _("The file path to the representative image"); },
-                            new Property("representative_image",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::TerrainDescr),  // class
-                                         VariableType(VariableTypeID::String)         // type
-                                         ))},
+                        new Property("representative_image",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::TerrainDescr),  // class
+                                     VariableType(VariableTypeID::String)         // type
+                                     ))},
    {"terrd_temperature",
     BuiltinPropertyInfo(
        []() {
@@ -2219,7 +2204,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 #define DESCR_FOR(type)                                                                            \
 	{                                                                                               \
 		"descr_" #type,                                                                              \
-		   BuiltinPropertyInfo(                                                                  \
+		   BuiltinPropertyInfo(                                                                      \
 		      []() { return _("The MapObjectDescr associated with this map object"); },              \
 		      new Property("descr", Property::Access::RO, VariableType(VariableTypeID::type),        \
 		                   VariableType(VariableTypeID::type##Descr), false))                        \
@@ -2269,11 +2254,11 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 
    {"plimmo_owner",
     BuiltinPropertyInfo([]() { return _("The player owning this player immovable"); },
-                            new Property("owner",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::PlayerImmovable),  // class
-                                         VariableType(VariableTypeID::Player)            // type
-                                         ))},
+                        new Property("owner",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::PlayerImmovable),  // class
+                                     VariableType(VariableTypeID::Player)            // type
+                                     ))},
 
    // Flag
 
@@ -2305,11 +2290,11 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                     ))},
    {"flag_building",
     BuiltinPropertyInfo([]() { return _("The building attached to this flag."); },
-                            new Property("building",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::Flag),     // class
-                                         VariableType(VariableTypeID::Building)  // type
-                                         ))},
+                        new Property("building",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::Flag),     // class
+                                     VariableType(VariableTypeID::Building)  // type
+                                     ))},
    {"flag_roads", BuiltinPropertyInfo(
                      []() {
 	                     return _("The roads leading to the flag. Directions can be 'tr', 'r', "
@@ -2324,34 +2309,32 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 
    // Road
 
-   {"road_length",
-    BuiltinPropertyInfo([]() { return _("The number of edges this road covers."); },
-                            new Property(
-                               "length",
-                               Property::Access::RO,
-                               VariableType(VariableTypeID::Road),    // class
-                               VariableType(VariableTypeID::Integer)  // type
-                               ))},
+   {"road_length", BuiltinPropertyInfo([]() { return _("The number of edges this road covers."); },
+                                       new Property(
+                                          "length",
+                                          Property::Access::RO,
+                                          VariableType(VariableTypeID::Road),    // class
+                                          VariableType(VariableTypeID::Integer)  // type
+                                          ))},
    {"road_start_flag",
     BuiltinPropertyInfo([]() { return _("The flag where this road starts"); },
-                            new Property("start_flag",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::Road),  // class
-                                         VariableType(VariableTypeID::Flag)   // type
-                                         ))},
-   {"road_end_flag",
-    BuiltinPropertyInfo([]() { return _("The flag where this road ends"); },
-                            new Property("end_flag",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::Road),  // class
-                                         VariableType(VariableTypeID::Flag)   // type
-                                         ))},
-   {"road_type", BuiltinPropertyInfo([]() { return _("'normal', 'busy', or 'waterway'"); },
-                                         new Property("road_type",
+                        new Property("start_flag",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::Road),  // class
+                                     VariableType(VariableTypeID::Flag)   // type
+                                     ))},
+   {"road_end_flag", BuiltinPropertyInfo([]() { return _("The flag where this road ends"); },
+                                         new Property("end_flag",
                                                       Property::Access::RO,
-                                                      VariableType(VariableTypeID::Road),   // class
-                                                      VariableType(VariableTypeID::String)  // type
+                                                      VariableType(VariableTypeID::Road),  // class
+                                                      VariableType(VariableTypeID::Flag)   // type
                                                       ))},
+   {"road_type", BuiltinPropertyInfo([]() { return _("'normal', 'busy', or 'waterway'"); },
+                                     new Property("road_type",
+                                                  Property::Access::RO,
+                                                  VariableType(VariableTypeID::Road),   // class
+                                                  VariableType(VariableTypeID::String)  // type
+                                                  ))},
    {"road_valid_workers",
     BuiltinPropertyInfo(
        []() {
@@ -2367,33 +2350,32 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 
    // Building
 
-   {"bld_flag",
-    BuiltinPropertyInfo([]() { return _("The flag this building belongs to"); },
-                            new Property("flag",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::Building),  // class
-                                         VariableType(VariableTypeID::Flag)       // type
-                                         ))},
+   {"bld_flag", BuiltinPropertyInfo([]() { return _("The flag this building belongs to"); },
+                                    new Property("flag",
+                                                 Property::Access::RO,
+                                                 VariableType(VariableTypeID::Building),  // class
+                                                 VariableType(VariableTypeID::Flag)       // type
+                                                 ))},
 
    // DismantleSite
 
    {"ds_has_builder",
     BuiltinPropertyInfo([]() { return _("Whether this site has a builder"); },
-                            new Property("has_builder",
-                                         Property::Access::RW,
-                                         VariableType(VariableTypeID::DismantleSite),  // class
-                                         VariableType(VariableTypeID::Boolean)         // type
-                                         ))},
+                        new Property("has_builder",
+                                     Property::Access::RW,
+                                     VariableType(VariableTypeID::DismantleSite),  // class
+                                     VariableType(VariableTypeID::Boolean)         // type
+                                     ))},
 
    // ConstructionSite
 
    {"cs_has_builder",
     BuiltinPropertyInfo([]() { return _("Whether this site has a builder"); },
-                            new Property("has_builder",
-                                         Property::Access::RW,
-                                         VariableType(VariableTypeID::ConstructionSite),  // class
-                                         VariableType(VariableTypeID::Boolean)            // type
-                                         ))},
+                        new Property("has_builder",
+                                     Property::Access::RW,
+                                     VariableType(VariableTypeID::ConstructionSite),  // class
+                                     VariableType(VariableTypeID::Boolean)            // type
+                                     ))},
    {"cs_setting_soldier_capacity",
     BuiltinPropertyInfo(
        []() {
@@ -2442,11 +2424,11 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                     ))},
    {"ms_prefer_heroes",
     BuiltinPropertyInfo([]() { return _("Whether this site prefers heroes"); },
-                            new Property("prefer_heroes",
-                                         Property::Access::RW,
-                                         VariableType(VariableTypeID::MilitarySite),  // class
-                                         VariableType(VariableTypeID::Boolean)        // type
-                                         ))},
+                        new Property("prefer_heroes",
+                                     Property::Access::RW,
+                                     VariableType(VariableTypeID::MilitarySite),  // class
+                                     VariableType(VariableTypeID::Boolean)        // type
+                                     ))},
 
    // TrainingSite
 
@@ -2463,11 +2445,11 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 
    {"cs_building",
     BuiltinPropertyInfo([]() { return _("The name of the building under construction"); },
-                            new Property("building",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::ConstructionSite),  // class
-                                         VariableType(VariableTypeID::String)             // type
-                                         ))},
+                        new Property("building",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::ConstructionSite),  // class
+                                     VariableType(VariableTypeID::String)             // type
+                                     ))},
 
    // Warehouse
 
@@ -2495,11 +2477,11 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 
    {"ps_stopped",
     BuiltinPropertyInfo([]() { return _("Whether this productionsite is currently stopped"); },
-                            new Property("is_stopped",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::ProductionSite),  // class
-                                         VariableType(VariableTypeID::Boolean)          // type
-                                         ))},
+                        new Property("is_stopped",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::ProductionSite),  // class
+                                     VariableType(VariableTypeID::Boolean)          // type
+                                     ))},
    {"ps_valid_workers",
     BuiltinPropertyInfo(
        []() {
@@ -2517,21 +2499,20 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 
    {"bob_field",
     BuiltinPropertyInfo([]() { return _("The field this bob is currently located on"); },
-                            new Property("field",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::Bob),   // class
-                                         VariableType(VariableTypeID::Field)  // type
-                                         ))},
+                        new Property("field",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::Bob),   // class
+                                     VariableType(VariableTypeID::Field)  // type
+                                     ))},
 
    // Ship
 
-   {"ship_shipname",
-    BuiltinPropertyInfo([]() { return _("The ship’s name"); },
-                            new Property("shipname",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::Ship),   // class
-                                         VariableType(VariableTypeID::String)  // type
-                                         ))},
+   {"ship_shipname", BuiltinPropertyInfo([]() { return _("The ship’s name"); },
+                                         new Property("shipname",
+                                                      Property::Access::RO,
+                                                      VariableType(VariableTypeID::Ship),   // class
+                                                      VariableType(VariableTypeID::String)  // type
+                                                      ))},
    {"ship_destination",
     BuiltinPropertyInfo(
        []() { return _("The port dock this ship is heading to, or nil if it has no destination"); },
@@ -2540,13 +2521,12 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                     VariableType(VariableTypeID::Ship),     // class
                     VariableType(VariableTypeID::PortDock)  // type
                     ))},
-   {"ship_capacity",
-    BuiltinPropertyInfo([]() { return _("The ship's capacity"); },
-                            new Property("capacity",
-                                         Property::Access::RW,
-                                         VariableType(VariableTypeID::Ship),    // class
-                                         VariableType(VariableTypeID::Integer)  // type
-                                         ))},
+   {"ship_capacity", BuiltinPropertyInfo([]() { return _("The ship's capacity"); },
+                                         new Property("capacity",
+                                                      Property::Access::RW,
+                                                      VariableType(VariableTypeID::Ship),  // class
+                                                      VariableType(VariableTypeID::Integer)  // type
+                                                      ))},
    {"ship_last_portdock",
     BuiltinPropertyInfo(
        []() {
@@ -2583,13 +2563,12 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 
    // Worker
 
-   {"worker_owner",
-    BuiltinPropertyInfo([]() { return _("The player this worker belongs to"); },
-                            new Property("owner",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::Worker),  // class
-                                         VariableType(VariableTypeID::Player)   // type
-                                         ))},
+   {"worker_owner", BuiltinPropertyInfo([]() { return _("The player this worker belongs to"); },
+                                        new Property("owner",
+                                                     Property::Access::RO,
+                                                     VariableType(VariableTypeID::Worker),  // class
+                                                     VariableType(VariableTypeID::Player)   // type
+                                                     ))},
    {"worker_location",
     BuiltinPropertyInfo(
        []() {
@@ -2610,54 +2589,54 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 
    {"soldier_level_h",
     BuiltinPropertyInfo([]() { return _("The soldier’s current health level"); },
-                            new Property("health_level",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::Soldier),  // class
-                                         VariableType(VariableTypeID::Integer)   // type
-                                         ))},
+                        new Property("health_level",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::Soldier),  // class
+                                     VariableType(VariableTypeID::Integer)   // type
+                                     ))},
    {"soldier_level_a",
     BuiltinPropertyInfo([]() { return _("The soldier’s current attack level"); },
-                            new Property("attack_level",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::Soldier),  // class
-                                         VariableType(VariableTypeID::Integer)   // type
-                                         ))},
+                        new Property("attack_level",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::Soldier),  // class
+                                     VariableType(VariableTypeID::Integer)   // type
+                                     ))},
    {"soldier_level_d",
     BuiltinPropertyInfo([]() { return _("The soldier’s current defense level"); },
-                            new Property("defense_level",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::Soldier),  // class
-                                         VariableType(VariableTypeID::Integer)   // type
-                                         ))},
+                        new Property("defense_level",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::Soldier),  // class
+                                     VariableType(VariableTypeID::Integer)   // type
+                                     ))},
    {"soldier_level_e",
     BuiltinPropertyInfo([]() { return _("The soldier’s current evade level"); },
-                            new Property("evade_level",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::Soldier),  // class
-                                         VariableType(VariableTypeID::Integer)   // type
-                                         ))},
+                        new Property("evade_level",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::Soldier),  // class
+                                     VariableType(VariableTypeID::Integer)   // type
+                                     ))},
    {"soldier_curhealth",
     BuiltinPropertyInfo([]() { return _("The soldier’s current total health"); },
-                            new Property("current_health",
-                                         Property::Access::RW,
-                                         VariableType(VariableTypeID::Soldier),  // class
-                                         VariableType(VariableTypeID::Integer)   // type
-                                         ))},
+                        new Property("current_health",
+                                     Property::Access::RW,
+                                     VariableType(VariableTypeID::Soldier),  // class
+                                     VariableType(VariableTypeID::Integer)   // type
+                                     ))},
 
    // Field
 
    {"f_x", BuiltinPropertyInfo([]() { return _("The x coordinate of this field"); },
-                                   new Property("x",
-                                                Property::Access::RO,
-                                                VariableType(VariableTypeID::Field),   // class
-                                                VariableType(VariableTypeID::Integer)  // type
-                                                ))},
+                               new Property("x",
+                                            Property::Access::RO,
+                                            VariableType(VariableTypeID::Field),   // class
+                                            VariableType(VariableTypeID::Integer)  // type
+                                            ))},
    {"f_y", BuiltinPropertyInfo([]() { return _("The y coordinate of this field"); },
-                                   new Property("y",
-                                                Property::Access::RO,
-                                                VariableType(VariableTypeID::Field),   // class
-                                                VariableType(VariableTypeID::Integer)  // type
-                                                ))},
+                               new Property("y",
+                                            Property::Access::RO,
+                                            VariableType(VariableTypeID::Field),   // class
+                                            VariableType(VariableTypeID::Integer)  // type
+                                            ))},
    {"f_height",
     BuiltinPropertyInfo(
        []() {
@@ -2705,35 +2684,34 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                                      VariableType(VariableTypeID::Field),   // class
                                      VariableType(VariableTypeID::Integer)  // type
                                      ))},
-   {"f_resource", BuiltinPropertyInfo(
-                     []() { return _("The name of the resource on this field. May be nil."); },
-                     new Property("resource",
-                                  Property::Access::RW,
-                                  VariableType(VariableTypeID::Field),  // class
-                                  VariableType(VariableTypeID::String)  // type
-                                  ))},
+   {"f_resource",
+    BuiltinPropertyInfo([]() { return _("The name of the resource on this field. May be nil."); },
+                        new Property("resource",
+                                     Property::Access::RW,
+                                     VariableType(VariableTypeID::Field),  // class
+                                     VariableType(VariableTypeID::String)  // type
+                                     ))},
    {"f_resource_amount",
     BuiltinPropertyInfo([]() { return _("The resource amount left on this field."); },
-                            new Property("resource_amount",
-                                         Property::Access::RW,
-                                         VariableType(VariableTypeID::Field),   // class
-                                         VariableType(VariableTypeID::Integer)  // type
-                                         ))},
+                        new Property("resource_amount",
+                                     Property::Access::RW,
+                                     VariableType(VariableTypeID::Field),   // class
+                                     VariableType(VariableTypeID::Integer)  // type
+                                     ))},
    {"f_initial_resource_amount",
-    BuiltinPropertyInfo(
-       []() { return _("The resource amount originally present on this field."); },
-       new Property("initial_resource_amount",
-                    Property::Access::RO,
-                    VariableType(VariableTypeID::Field),   // class
-                    VariableType(VariableTypeID::Integer)  // type
-                    ))},
+    BuiltinPropertyInfo([]() { return _("The resource amount originally present on this field."); },
+                        new Property("initial_resource_amount",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::Field),   // class
+                                     VariableType(VariableTypeID::Integer)  // type
+                                     ))},
    {"f_immovable",
     BuiltinPropertyInfo([]() { return _("The immovable occupying this field. May be nil."); },
-                            new Property("immovable",
-                                         Property::Access::RO,
-                                         VariableType(VariableTypeID::Field),         // class
-                                         VariableType(VariableTypeID::BaseImmovable)  // type
-                                         ))},
+                        new Property("immovable",
+                                     Property::Access::RO,
+                                     VariableType(VariableTypeID::Field),         // class
+                                     VariableType(VariableTypeID::BaseImmovable)  // type
+                                     ))},
    {"f_bobs", BuiltinPropertyInfo(
                  []() { return _("An array with all bobs currently located on this field"); },
                  new Property("bobs",
@@ -2759,11 +2737,11 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                     VariableType(VariableTypeID::String)  // type
                     ))},
    {"f_owner", BuiltinPropertyInfo([]() { return _("The player owning this field"); },
-                                       new Property("owner",
-                                                    Property::Access::RO,
-                                                    VariableType(VariableTypeID::Field),  // class
-                                                    VariableType(VariableTypeID::Player)  // type
-                                                    ))},
+                                   new Property("owner",
+                                                Property::Access::RO,
+                                                VariableType(VariableTypeID::Field),  // class
+                                                VariableType(VariableTypeID::Player)  // type
+                                                ))},
    {"f_claimers",
     BuiltinPropertyInfo(
        []() {
@@ -2781,38 +2759,38 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                                  VariableType(VariableTypeID::Player))  // type
                     ))},
    {"f_bln", BuiltinPropertyInfo([]() { return _("The southwestern neighbour of this field"); },
-                                     new Property("bln",
-                                                  Property::Access::RO,
-                                                  VariableType(VariableTypeID::Field),  // class
-                                                  VariableType(VariableTypeID::Field)   // type
-                                                  ))},
+                                 new Property("bln",
+                                              Property::Access::RO,
+                                              VariableType(VariableTypeID::Field),  // class
+                                              VariableType(VariableTypeID::Field)   // type
+                                              ))},
    {"f_ln", BuiltinPropertyInfo([]() { return _("The western neighbour of this field"); },
-                                    new Property("ln",
-                                                 Property::Access::RO,
-                                                 VariableType(VariableTypeID::Field),  // class
-                                                 VariableType(VariableTypeID::Field)   // type
-                                                 ))},
+                                new Property("ln",
+                                             Property::Access::RO,
+                                             VariableType(VariableTypeID::Field),  // class
+                                             VariableType(VariableTypeID::Field)   // type
+                                             ))},
    {"f_tln", BuiltinPropertyInfo([]() { return _("The northwestern neighbour of this field"); },
-                                     new Property("tln",
-                                                  Property::Access::RO,
-                                                  VariableType(VariableTypeID::Field),  // class
-                                                  VariableType(VariableTypeID::Field)   // type
-                                                  ))},
+                                 new Property("tln",
+                                              Property::Access::RO,
+                                              VariableType(VariableTypeID::Field),  // class
+                                              VariableType(VariableTypeID::Field)   // type
+                                              ))},
    {"f_brn", BuiltinPropertyInfo([]() { return _("The southeastern neighbour of this field"); },
-                                     new Property("brn",
-                                                  Property::Access::RO,
-                                                  VariableType(VariableTypeID::Field),  // class
-                                                  VariableType(VariableTypeID::Field)   // type
-                                                  ))},
+                                 new Property("brn",
+                                              Property::Access::RO,
+                                              VariableType(VariableTypeID::Field),  // class
+                                              VariableType(VariableTypeID::Field)   // type
+                                              ))},
    {"f_rn", BuiltinPropertyInfo([]() { return _("The eastern neighbour of this field"); },
-                                    new Property("rn",
-                                                 Property::Access::RO,
-                                                 VariableType(VariableTypeID::Field),  // class
-                                                 VariableType(VariableTypeID::Field)   // type
-                                                 ))},
+                                new Property("rn",
+                                             Property::Access::RO,
+                                             VariableType(VariableTypeID::Field),  // class
+                                             VariableType(VariableTypeID::Field)   // type
+                                             ))},
    {"f_trn", BuiltinPropertyInfo([]() { return _("The northeastern neighbour of this field"); },
-                                     new Property("trn",
-                                                  Property::Access::RO,
-                                                  VariableType(VariableTypeID::Field),  // class
-                                                  VariableType(VariableTypeID::Field)   // type
-                                                  ))}};
+                                 new Property("trn",
+                                              Property::Access::RO,
+                                              VariableType(VariableTypeID::Field),  // class
+                                              VariableType(VariableTypeID::Field)   // type
+                                              ))}};

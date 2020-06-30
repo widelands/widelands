@@ -389,7 +389,8 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
 	add(&infotext_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	soldierpanel_.set_mouseover([this](const Soldier* s) { mouseover(s); });
-	soldierpanel_.set_click([this](Soldier* s) { ibase_.omnipotent() ? show_soldier_options(s) : eject(s); });
+	soldierpanel_.set_click(
+	   [this](Soldier* s) { ibase_.omnipotent() ? show_soldier_options(s) : eject(s); });
 
 	// We don't want translators to translate this twice, so it's a bit involved.
 	int w = UI::g_fh
@@ -655,7 +656,7 @@ SoldierSettings::SoldierSettings(InteractiveBase& ib, Widelands::Soldier& s, boo
 	defense_.set_enabled(defense_.get_max_value() > 0);
 	evade_.set_enabled(evade_.get_max_value() > 0);
 
-	health_.changed.connect([this]() { health_slider_changed();});
+	health_.changed.connect([this]() { health_slider_changed(); });
 	attack_.changed.connect([this]() { update_label_a(); });
 	defense_.changed.connect([this]() { update_label_d(); });
 	evade_.changed.connect([this]() { update_label_e(); });

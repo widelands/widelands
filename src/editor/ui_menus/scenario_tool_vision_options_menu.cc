@@ -57,8 +57,8 @@ ScenarioToolVisionOptionsMenu::ScenarioToolVisionOptionsMenu(EditorInteractive& 
             UI::PanelStyle::kWui,
             UI::ButtonStyle::kWuiSecondary) {
 
-	players_.selected.connect([this]() { select_player();});
-	modes_.selected.connect([this]() { select_mode();});
+	players_.selected.connect([this]() { select_player(); });
+	modes_.selected.connect([this]() { select_mode(); });
 	const Widelands::Map& map = parent.egbase().map();
 	const Widelands::PlayerNumber max = map.get_nrplayers();
 	const Widelands::PlayerNumber sel = tool_.get_player();

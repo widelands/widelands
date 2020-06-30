@@ -215,7 +215,9 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 }
 
 void MainMenuMapOptions::update_waterway_length_warning() {
-	if (!waterway_length_warning_) { return; }
+	if (!waterway_length_warning_) {
+		return;
+	}
 	const uint32_t len = waterway_length_box_ ? waterway_length_box_->get_value() : 0;
 	if (len > kMaxRecommendedWaterwayLengthLimit) {
 		waterway_length_warning_->set_icon(g_gr->images().get("images/ui_basic/stop.png"));
