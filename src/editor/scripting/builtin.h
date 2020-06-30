@@ -36,6 +36,8 @@ struct BuiltinFunctionInfo {
 	BuiltinFunctionInfo(std::function<std::string()> d, FunctionBase* f, std::string i = "")
 	   : function(f), description(d), included_from(i) {
 	}
+	BuiltinFunctionInfo(const BuiltinFunctionInfo&) = default;
+	BuiltinFunctionInfo& operator=(const BuiltinFunctionInfo&) = default;
 	~BuiltinFunctionInfo() {
 	}
 
@@ -106,6 +108,8 @@ private:
 struct BuiltinPropertyInfo {
 	BuiltinPropertyInfo(std::function<std::string()> d, Property* p) : property(p), description(d) {
 	}
+	BuiltinPropertyInfo(const BuiltinPropertyInfo&) = default;
+	BuiltinPropertyInfo& operator=(const BuiltinPropertyInfo&) = default;
 	~BuiltinPropertyInfo() {
 	}
 
