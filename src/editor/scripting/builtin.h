@@ -39,17 +39,15 @@ struct BuiltinFunctionInfo {
 	~BuiltinFunctionInfo() {
 	}
 
-	const std::unique_ptr<FunctionBase> function;
+	const std::shared_ptr<FunctionBase> function;
 	// Implemented as a function to make it translatable
 	const std::function<std::string()> description;
 
 	const std::string included_from;
-
-	DISALLOW_COPY_AND_ASSIGN(BuiltinFunctionInfo);
 };
 
 // All supported builtin functions.
-const extern std::map<std::string, BuiltinFunctionInfo*> kBuiltinFunctions;
+const extern std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions;
 // Quick access to a builtin by its unique name
 const BuiltinFunctionInfo& builtin_f(const std::string&);
 std::string builtin_f(const FunctionBase&);
@@ -111,15 +109,13 @@ struct BuiltinPropertyInfo {
 	~BuiltinPropertyInfo() {
 	}
 
-	const std::unique_ptr<Property> property;
+	const std::shared_ptr<Property> property;
 	// Implemented as a function to make it translatable
 	const std::function<std::string()> description;
-
-	DISALLOW_COPY_AND_ASSIGN(BuiltinPropertyInfo);
 };
 
 // All supported builtin properties.
-const extern std::map<std::string, BuiltinPropertyInfo*> kBuiltinProperties;
+const extern std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties;
 // Quick access to a builtin by its unique name
 const BuiltinPropertyInfo& builtin_p(const std::string&);
 std::string builtin_p(const Property&);

@@ -147,6 +147,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 		   &tags_box_, 0, 0, max_w_, labelh_, (boost::format(_("Waterway length limit: %s")) %
 		                                       (l < 2 ? _("Disabled") : std::to_string(l)))
 		                                         .str()));
+		waterway_length_warning_ = nullptr;
 	} else {
 		tags_box_.add(
 		   new UI::Textarea(&tags_box_, 0, 0, max_w_, labelh_, _("Waterway length limit:")));
@@ -189,18 +190,21 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	tabs_.add("map_teams", g_gr->images().get("images/wui/editor/tools/players.png"), &teams_box_,
 	          _("Teams"));
 
-	name_.changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
-	author_.changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
-	descr_->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
-	hint_->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
+	name_.changed.connect([this]() { changed(); });
+	author_.changed.connect([this]() { changed(); });
+	descr_->changed.connect([this]() { changed(); });
+	hint_->changed.connect([this]() { changed(); });
+	if (waterway_length_box_) {
+		waterway_length_box_->changed.connect([this]() { changed(); });
+	}
 	for (const auto& tag : tags_checkboxes_) {
-		tag.second->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
+		tag.second->changed.connect([this]() { changed(); });
 	}
 
 	balancing_dropdown_.selected.connect([this] { changed(); });
 
-	ok_.sigclicked.connect(boost::bind(&MainMenuMapOptions::clicked_ok, boost::ref(*this)));
-	cancel_.sigclicked.connect(boost::bind(&MainMenuMapOptions::clicked_cancel, boost::ref(*this)));
+	ok_.sigclicked.connect([this]() { clicked_ok(); });
+	cancel_.sigclicked.connect([this]() { clicked_cancel(); });
 
 	update();
 	ok_.set_enabled(true);
@@ -211,6 +215,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 }
 
 void MainMenuMapOptions::update_waterway_length_warning() {
+	if (!waterway_length_warning_) { return; }
 	const uint32_t len = waterway_length_box_ ? waterway_length_box_->get_value() : 0;
 	if (len > kMaxRecommendedWaterwayLengthLimit) {
 		waterway_length_warning_->set_icon(g_gr->images().get("images/ui_basic/stop.png"));

@@ -522,10 +522,15 @@ void Map::set_origin(const Coords& new_origin) {
 					b->position_ = c;
 				}
 			}
+			bool is_first_bob = true;
 			for (Bob* bob = c.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
 				bob->position_.x = c.x;
 				bob->position_.y = c.y;
 				bob->position_.field = c.field;
+				if (is_first_bob) {
+					bob->linkpprev_ = &c.field->bobs;
+					is_first_bob = false;
+				}
 			}
 		}
 	}
@@ -546,161 +551,219 @@ void Map::set_origin(const Coords& new_origin) {
 	log("Map origin was shifted by (%d, %d)\n", new_origin.x, new_origin.y);
 }
 
-/* Helper function for resize():
- * Calculates the coords of 'c' after resizing the map from the given old size to the given new size
- * at 'split'.
- */
-static Coords transform_coords(const Coords& c,
-                               const Coords& split,
-                               int16_t w_new,
-                               int16_t h_new,
-                               int16_t w_old,
-                               int16_t h_old) {
-	const int16_t delta_w = w_new - w_old;
-	const int16_t delta_h = h_new - h_old;
-	if (c.x < split.x && c.y < split.y) {
-		// Nothing to shift
-		Coords result(c);
-		Map::normalize_coords(result, w_new, h_new);
-		return result;
-	} else if ((w_new < w_old && c.x >= split.x && c.x < split.x - delta_w) ||
-	           (h_new < h_old && c.y >= split.y && c.y < split.y - delta_h)) {
-		// Field removed
-		return Coords::null();
+// Helper function for resize()
+constexpr int32_t kInvalidCoords = -1;
+static inline int32_t resize_coordinates_conversion(const int32_t old_coord,
+                                                    const int32_t split_point,
+                                                    const int32_t old_dimension,
+                                                    const int32_t new_dimension) {
+	if (new_dimension == old_dimension) {
+		// trivial
+		return old_coord;
+	} else if (new_dimension > old_dimension) {
+		// enlarge
+		return old_coord > split_point ? old_coord + new_dimension - old_dimension : old_coord;
+	} else if (split_point > new_dimension) {
+		// shrink, origin deleted
+		return (old_coord >= split_point || old_coord < split_point - new_dimension) ?
+		          kInvalidCoords :
+		          old_coord - split_point + new_dimension;
+	} else {
+		// shrink, origin preserved
+		return old_coord < split_point ? old_coord :
+		                                 old_coord < split_point + old_dimension - new_dimension ?
+		                                 kInvalidCoords :
+		                                 old_coord + new_dimension - old_dimension;
 	}
-	Coords result(c.x, c.y);
-	if (c.x >= split.x) {
-		result.x += delta_w;
-	}
-	if (c.y >= split.y) {
-		result.y += delta_h;
-	}
-	Map::normalize_coords(result, w_new, h_new);
-	return result;
 }
 
-/* Change the size of the (already initialized) map to 'w'×'h' by inserting/deleting fields south
- * and east of 'split'. Returns the data of fields that were deleted during resizing. This function
- * will notify all players of the change in map size, but not of anything else. This is because the
- * editor may want to do some post-resize cleanup first, and this function is intended to be used
- * only by the editor anyway. You should call recalc_whole_map() afterwards to resolve height
- * differences etc.
- */
-std::map<Coords, FieldData>
-Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, const int32_t h) {
-	assert(w > 0);
-	assert(h > 0);
-
-	std::map<Coords, FieldData> deleted;
+void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, const int32_t h) {
 	if (w == width_ && h == height_) {
-		return deleted;
+		return;
 	}
 
-	const uint32_t field_size = w * h;
-	const uint32_t old_field_size = width_ * height_;
+	// Generate the new fields. Does not modify the actual map yet.
 
-	std::unique_ptr<Field[]> new_fields(new Field[field_size]);
-	clear_array<>(&new_fields, field_size);
+	std::unique_ptr<Field[]> new_fields(new Field[w * h]);
+	clear_array<>(&new_fields, w * h);
+	std::unique_ptr<bool[]> was_preserved(new bool[width_ * height_]);
+	std::unique_ptr<bool[]> was_created(new bool[w * h]);
+	clear_array<bool>(&was_preserved, width_ * height_);
+	clear_array<bool>(&was_created, w * h);
 
-	// Take care of starting positions and port spaces
-	for (uint8_t i = get_nrplayers(); i > 0; --i) {
-		if (starting_pos_[i - 1]) {
-			starting_pos_[i - 1] =
-			   transform_coords(starting_pos_[i - 1], split, w, h, width_, height_);
+	for (int16_t x = 0; x < width_; ++x) {
+		for (int16_t y = 0; y < height_; ++y) {
+			const int16_t new_x = resize_coordinates_conversion(x, split.x, width_, w);
+			const int16_t new_y = resize_coordinates_conversion(y, split.y, height_, h);
+			assert((new_x >= 0 && new_x < w) || new_x == kInvalidCoords);
+			assert((new_y >= 0 && new_y < h) || new_y == kInvalidCoords);
+			if (new_x != kInvalidCoords && new_y != kInvalidCoords) {
+				Coords old_coords(x, y);
+				Coords new_coords(new_x, new_y);
+				const MapIndex old_index = get_index(old_coords);
+				const MapIndex new_index = get_index(new_coords, w);
+
+				assert(!was_preserved[old_index]);
+				was_preserved[old_index] = true;
+
+				assert(!was_created[new_index]);
+				was_created[new_index] = true;
+
+				new_fields[new_index] = (*this)[old_coords];
+			}
 		}
 	}
-
-	PortSpacesSet new_port_spaces;
-	for (Coords it : port_spaces_) {
-		if (Coords c = transform_coords(it, split, w, h, width_, height_)) {
-			new_port_spaces.insert(c);
-		}
-	}
-	port_spaces_ = new_port_spaces;
-
 	Field::Terrains default_terrains;
 	default_terrains.r = 0;
 	default_terrains.d = 0;
+	for (MapIndex index = w * h; index; --index) {
+		if (!was_created[index - 1]) {
+			Field& field = new_fields[index - 1];
+			field.set_height(10);
+			field.set_terrains(default_terrains);
+		}
+	}
 
-	std::unique_ptr<bool[]> preserved_coords(new bool[old_field_size]);
-	clear_array<bool>(&preserved_coords, old_field_size);
+	// Now modify our starting positions and port spaces
 
-	const int16_t w_max = w > width_ ? w : width_;
-	const int16_t h_max = h > height_ ? h : height_;
-	for (int16_t x = 0; x < w_max; ++x) {
-		for (int16_t y = 0; y < h_max; ++y) {
-			Coords c_new = Coords(x, y);
-			if (x < width_ && y < height_ && !preserved_coords[get_index(c_new, width_)]) {
-				// Save the data of fields that will be deleted
-				Field& field = operator[](c_new);
-				deleted.insert(std::make_pair(c_new, FieldData(field)));
-				// ...and now we delete stuff that needs removing when the field is destroyed
-				if (BaseImmovable* imm = field.get_immovable()) {
-					imm->remove(egbase);
-				}
-				while (Bob* bob = field.get_first_bob()) {
-					bob->remove(egbase);
-				}
+	for (Coords& c : starting_pos_) {
+		if (c) {  // only if set (c != Coords::null())
+			const int16_t x = resize_coordinates_conversion(c.x, split.x, width_, w);
+			const int16_t y = resize_coordinates_conversion(c.y, split.y, height_, h);
+			assert((x >= 0 && x < w) || x == kInvalidCoords);
+			assert((y >= 0 && y < h) || y == kInvalidCoords);
+			c = ((x == kInvalidCoords || y == kInvalidCoords) ? Coords::null() : Coords(x, y));
+		}
+	}
+
+	{
+		PortSpacesSet new_port_spaces;
+		for (const Coords& c : port_spaces_) {
+			const int16_t x = resize_coordinates_conversion(c.x, split.x, width_, w);
+			const int16_t y = resize_coordinates_conversion(c.y, split.y, height_, h);
+			assert((x >= 0 && x < w) || x == kInvalidCoords);
+			assert((y >= 0 && y < h) || y == kInvalidCoords);
+			if (x != kInvalidCoords && y != kInvalidCoords) {
+				new_port_spaces.insert(Coords(x, y));
 			}
-			if (x < w && y < h) {
-				if (Coords c_old = transform_coords(c_new, split, width_, height_, w, h)) {
-					bool& entry = preserved_coords[get_index(c_old, width_)];
-					if (!entry) {
-						// Copy existing field
-						entry = true;
-						new_fields[get_index(c_new, w)] = operator[](c_old);
-						continue;
-					}
+		}
+		port_spaces_ = new_port_spaces;
+	}
+
+	// Delete map objects whose position will be deleted.
+	for (int16_t x = 0; x < width_; ++x) {
+		for (int16_t y = 0; y < height_; ++y) {
+			Coords c(x, y);
+			if (!was_preserved[get_index(c)]) {
+				Field& f = (*this)[c];
+				if (upcast(Immovable, i, f.get_immovable())) {
+					i->remove(egbase);
 				}
-				// Init new field
-				Field& field = new_fields[get_index(c_new, w)];
-				field.set_height(10);
-				field.set_terrains(default_terrains);
+				while (Bob* b = f.get_first_bob()) {
+					b->remove(egbase);
+				}
 			}
 		}
 	}
 
-	// Replace all fields
-	fields_.reset(new Field[field_size]);
-	clear_array<>(&fields_, field_size);
-	for (size_t ind = 0; ind < field_size; ++ind) {
-		fields_[ind] = new_fields[ind];
-	}
-	log("Resized map from (%d, %d) to (%u, %u) at (%d, %d)\n", width_, height_, w, h, split.x,
-	    split.y);
+	// Now replace all existing fields with the new values.
+
 	width_ = w;
 	height_ = h;
+	fields_.reset(new_fields.release());
 
-	// Inform immovables and bobs about their new position
-	for (MapIndex idx = 0; idx < field_size; ++idx) {
-		Field& f = operator[](idx);
-		const FCoords fc = get_fcoords(f);
-		if (BaseImmovable* imm = f.get_immovable()) {
-			if (imm->descr().type() == MapObjectType::FLAG) {
-				dynamic_cast<Flag&>(*imm).position_ = fc;
-			} else if (upcast(Immovable, immovable, imm)) {
-				immovable->position_ = fc;
-			} else if (upcast(Building, b, imm)) {
+	// Always call allocate_player_maps() while changing the map's size.
+	// Forgetting to do so will result in random crashes.
+	egbase.allocate_player_maps();
+	// Recalculate nodecaps etc
+	recalc_whole_map(egbase);
+
+	// MapObjects keep pointers to the Field they are located on. These pointers
+	// need updating because the memory addresses of all fields changed now.
+	for (int16_t x = 0; x < width_; ++x) {
+		for (int16_t y = 0; y < height_; ++y) {
+			Field& f = (*this)[Coords(x, y)];
+			FCoords fc(Coords(x, y), &f);
+			if (upcast(Immovable, imm, f.get_immovable())) {
+				imm->position_ = fc;
+			}
+			if (Bob* b = f.get_first_bob()) {
+				b->linkpprev_ = &f.bobs;
+			}
+			for (Bob* b = f.get_first_bob(); b; b = b->get_next_bob()) {
 				b->position_ = fc;
 			}
 		}
-		// Ensuring that all bob iterators are changed correctly is a bit hacky, but the more obvious
-		// solution of doing it like in set_origin() is highly problematic here, or so ASan tells me
-		std::vector<Bob*> bobs;
-		for (Bob* bob = f.get_first_bob(); bob; bob = bob->get_next_bob()) {
-			bobs.push_back(bob);
-		}
-		f.bobs = nullptr;
-		for (Bob* bob : bobs) {
-			bob->position_.field = nullptr;
-			bob->linknext_ = nullptr;
-			bob->linkpprev_ = nullptr;
-			bob->set_position(egbase, fc);
+	}
+
+	log("Map was resized to %d×%d\n", width_, height_);
+}
+
+ResizeHistory Map::dump_state(const EditorGameBase&) const {
+	ResizeHistory rh;
+	rh.size.w = width_;
+	rh.size.h = height_;
+	rh.port_spaces = port_spaces_;
+	rh.starting_positions = starting_pos_;
+	for (MapIndex i = max_index(); i; --i) {
+		rh.fields.push_back(FieldData(operator[](i - 1)));
+	}
+	return rh;
+}
+
+void Map::set_to(EditorGameBase& egbase, ResizeHistory rh) {
+	std::list<FieldData> backup = rh.fields;
+
+	// Delete all map objects
+	for (int16_t x = 0; x < width_; ++x) {
+		for (int16_t y = 0; y < height_; ++y) {
+			Field& f = operator[](Coords(x, y));
+			if (upcast(Immovable, i, f.get_immovable())) {
+				i->remove(egbase);
+			}
+			while (Bob* b = f.get_first_bob()) {
+				b->remove(egbase);
+			}
 		}
 	}
 
+	// Reset the fields to blank
+	width_ = rh.size.w;
+	height_ = rh.size.h;
+	fields_.reset(new Field[width_ * height_]);
 	egbase.allocate_player_maps();
-	return deleted;
+
+	// Overwrite starting locations and port spaces
+	port_spaces_ = rh.port_spaces;
+	starting_pos_ = rh.starting_positions;
+
+	// First pass: Initialize all fields with the saved basic data
+	for (MapIndex i = max_index(); i; --i) {
+		const FieldData& fd = rh.fields.front();
+		Field& f = fields_[i - 1];
+		f.set_terrains(fd.terrains);
+		f.set_height(fd.height);
+		f.resources = fd.resources;
+		f.initial_res_amount = fd.resource_amount;
+		f.res_amount = fd.resource_amount;
+		rh.fields.pop_front();
+	}
+	// Calculate nodecaps and stuff
+	recalc_whole_map(egbase);
+
+	// Second pass: Re-create desired map objects
+	for (MapIndex i = max_index(); i; --i) {
+		const FieldData& fd = backup.front();
+		FCoords fc = get_fcoords(operator[](i - 1));
+		if (!fd.immovable.empty()) {
+			egbase.create_immovable_with_name(
+			   fc, fd.immovable, Widelands::MapObjectDescr::OwnerType::kWorld, nullptr, nullptr);
+		}
+		for (const std::string& bob : fd.bobs) {
+			egbase.create_critter(fc, bob);
+		}
+		backup.pop_front();
+	}
 }
 
 /*

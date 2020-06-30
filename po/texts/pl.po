@@ -6,14 +6,17 @@
 # Wesmania <ikk_pl@yahoo.co.uk>, 2015
 # Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
 # Mateusz Pu <mateusz.pudlo@poczta.onet.pl>, 2020
+# Niektóry <niektory@gmail.com>, 2020
+# Niektóry <niektory@gmail.com>, 2020
 # tombox <wptom@wp.pl>, 2015-2019
+# tombox <wptom@wp.pl>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-04-28 07:45+0000\n"
-"Last-Translator: Mateusz Pu <mateusz.pudlo@poczta.onet.pl>\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-06-01 04:40+0000\n"
+"Last-Translator: Niektóry <niektory@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -85,14 +88,14 @@ msgstr "Na MacOSie plik COPYING znajdziesz w archiwum pobranym ze strony."
 
 #: ../../data/txts/LICENSE.lua:23
 msgid "This game comes as-is and without any warranty."
-msgstr "Ta gra dostarczana w stanie jak-jest i wez żadnej gwarancji."
+msgstr "Ta gra dostarczona jest w stanie takim jak widać i bez żadnej gwarancji."
 
 #: ../../data/txts/LICENSE.lua:24
 msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
 "(Translations)."
-msgstr ""
+msgstr "Aby uzyskać więcej informacji i wsparcie, możesz nas znaleźć na  stronie %1%(witryna, wiki, forum pytań lub ogólne wsparcie),%2% (śledzenie błędów) i %3% (tłumaczenia)."
 
 #: ../../data/txts/README.lua:6
 msgid "Readme"
@@ -203,7 +206,7 @@ msgstr "Tłumacze Widelands"
 
 #: ../../data/txts/developers.lua:3
 msgid "Atlanteans"
-msgstr "Atlantydzi"
+msgstr "Atlantowie"
 
 #: ../../data/txts/developers.lua:3
 msgid "Barbarians"
@@ -255,7 +258,7 @@ msgstr "FreeBSD"
 
 #: ../../data/txts/developers.lua:3
 msgid "Frisians"
-msgstr "Fryzjanie"
+msgstr "Fryzowie"
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphicians"
@@ -556,7 +559,7 @@ msgstr "Większość ulepszonych budynków wymaga doświadczonych pracowników. 
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at %s."
-msgstr ""
+msgstr "Możesz znaleźć pomoc dla edytora lub krótki samouczek w naszej wiki na %s."
 
 #: ../../data/txts/tips/editor.lua:11
 msgid ""
@@ -618,7 +621,7 @@ msgid ""
 "You can place a big building on any node where you could place a medium "
 "building if there is no obstacle or non-arable terrain towards the west, "
 "northwest and northeast."
-msgstr ""
+msgstr "Duży budynek może być postawiony na każdym polu, na którym można postawić średni budynek jeśli na zachodzie, północnym zachodzie i północnym wschodzie nie ma przeszkód ani terenu niezdatnego pod uprawę."
 
 #: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
@@ -633,11 +636,11 @@ msgid ""
 "To produce bricks, you need granite; to produce granite, you need a quarry "
 "or rock mine; to build those, you need bricks. Take care not to get "
 "deadlocked!"
-msgstr ""
+msgstr "Do produkcji cegieł potrzebny jest granit; granit jest wydobywany w kamieniołomie lub kopalni kamienia; aby je zbudować, potrzebne są cegły. Uważaj, żeby nie doprowadzić do wzajemnej blokady produkcji!"
 
 #: ../../data/txts/tips/frisians.lua:8
 msgid "Always build a forester’s house, so you will not run out of logs."
-msgstr ""
+msgstr "Zawsze buduj leśniczówkę, żeby zapewnić sobie stałe dostawy drewna."
 
 #: ../../data/txts/tips/general_game.lua:6
 msgid ""
@@ -673,7 +676,7 @@ msgstr "Dziel drogi na krótsze odcinki przy użyciu flag. W ten sposób przyspi
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found online at %s."
-msgstr ""
+msgstr "Jeszcze jakieś pytania? Na stronie %s znajdziesz listę najczęstszych pytań, wiki oraz fora dyskusyjne naszej społeczności."
 
 #: ../../data/txts/tips/general_game.lua:31
 msgid ""
@@ -760,7 +763,7 @@ msgstr "Przybliż/oddal widok kółkiem myszy lub %1%. Naciśnij %2%, aby zreset
 msgid ""
 "Use the ‘,’ (comma) and ‘.’ (period) keys to quickly jump between recently "
 "visited locations."
-msgstr ""
+msgstr "Klawisze ‘,’ (przecinek) i ‘.’ (kropka) pozwalają szybko przełączać się między ostatnio odwiedzanymi miejscami."
 
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
@@ -781,7 +784,7 @@ msgstr "Shift+(Page Up/Page Down)"
 msgid ""
 "Speed up or slow down the game with %1%. Use %2% for rapid change, %3% will "
 "adjust speed smoothly."
-msgstr ""
+msgstr "Przyspiesz lub spowolnij grę używając %1%. Użyj %2% dla większych zmian, %3% dla drobnych."
 
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
@@ -796,7 +799,7 @@ msgstr "Ctrl+Klawisze strzałek"
 #: ../../data/txts/tips/general_game.lua:83
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
-msgstr ""
+msgstr "Przesuń widok używając %1%. %2% przesunie widok szybciej, a %3% wolniej."
 
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
@@ -841,4 +844,4 @@ msgstr "Jeśli gra uległa awarii, nie przejmuj się! Gra zostanie zapisana auto
 msgid ""
 "Our computer players are too boring? Visit our website at %s and meet other "
 "players to play online."
-msgstr ""
+msgstr "Nasi gracze komputerowi są zbyt nudni? Odwiedź naszą stronę na %s (po angielsku) i spotkaj innych graczy, aby z nimi zagrać online."

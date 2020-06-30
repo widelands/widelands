@@ -75,15 +75,9 @@ struct EditorActionArgs {
 	bool force;                    // infrastructure and road tool
 
 	struct ResourceState {
-		Widelands::FCoords location;
+		Widelands::Coords location;
 		Widelands::DescriptionIndex idx;
 		Widelands::ResourceAmount amount;
-	};
-	struct ResizeHistory {
-		Widelands::Extent old_map_size = Widelands::Extent(0, 0);
-		std::map<Widelands::Coords, Widelands::FieldData> deleted_fields;
-		std::set<Widelands::Coords> port_spaces;
-		std::vector<Widelands::Coords> starting_positions;
 	};
 	struct WorkerHistory {
 		const Widelands::WorkerDescr* descr;
@@ -98,7 +92,7 @@ struct EditorActionArgs {
 	std::list<Widelands::DescriptionIndex> new_immovable_types;         // immovable change tools
 	Widelands::HeightInterval interval;                                 // noise height tool
 	std::list<Widelands::DescriptionIndex> terrain_type, original_terrain_type;  // set terrain tool
-	ResizeHistory resized;                                                       // resize tool
+	Widelands::ResizeHistory resized;                                            // resize tool
 
 	std::list<uint8_t> old_owners;                        // set owner tool
 	Widelands::Serial infrastructure_placed;              // infrastructure, and workers tool

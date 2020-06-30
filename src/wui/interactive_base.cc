@@ -288,8 +288,8 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 	//  funny results.
 	unset_sel_picture();
 
-	setDefaultCommand(boost::bind(&InteractiveBase::cmd_lua, this, _1));
-	addCommand("mapobject", boost::bind(&InteractiveBase::cmd_map_object, this, _1));
+	setDefaultCommand([this](const std::vector<std::string>& str) { cmd_lua(str); });
+	addCommand("mapobject", [this](const std::vector<std::string>& str) { cmd_map_object(str); });
 }
 
 InteractiveBase::~InteractiveBase() {
@@ -472,8 +472,7 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
 		window->closed.connect([button] { button->set_perm_pressed(false); });
 
 		if (bind_default_toggle) {
-			button->sigclicked.connect(
-			   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(*window)));
+			button->sigclicked.connect([window]() { window->toggle(); });
 		}
 	}
 	return button;

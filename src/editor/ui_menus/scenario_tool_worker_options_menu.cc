@@ -83,13 +83,13 @@ ScenarioToolWorkerOptionsMenu::ScenarioToolWorkerOptionsMenu(EditorInteractive& 
 			const Widelands::WorkerDescr* w = tribe.get_worker_descr(di);
 			i->add(w->name(), w->icon(), reinterpret_cast<void*>(di), w->descname());
 		}
-		i->icon_clicked.connect(boost::bind(&ScenarioToolWorkerOptionsMenu::toggle_item, this, _1));
+		i->icon_clicked.connect([this](int32_t x) { toggle_item(x); });
 		items_.push_back(std::unique_ptr<UI::IconGrid>(i));
 		tabs_.add(
 		   "player_" + std::to_string(static_cast<unsigned>(p)), map.get_scenario_player_name(p), i);
 	}
-	tabs_.sigclicked.connect(boost::bind(&ScenarioToolWorkerOptionsMenu::select_tab, this));
-	ware_.clicked.connect(boost::bind(&ScenarioToolWorkerOptionsMenu::select_ware, this));
+	tabs_.sigclicked.connect([this]() { select_tab();});
+	ware_.clicked.connect([this]() { select_ware();});
 
 	bottombox_.add(&experience_, UI::Box::Resizing::kFullSize);
 	bottombox_.add_inf_space();

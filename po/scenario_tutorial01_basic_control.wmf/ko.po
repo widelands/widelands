@@ -3,15 +3,15 @@
 # 
 # Translators:
 # ks k, 2018
-# ks k, 2018
+# ks k, 2018,2020
 # TaeMin An, 2017,2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-04-15 14:46+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-06-26 05:28+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid ""
 "Click on the ‘OK’ button or press the ‘Enter ⏎’ key on the keyboard to close"
 " this window."
-msgstr ""
+msgstr "‘확인’ 단추를 클릭하거나 키보드에서 ‘Enter ’ 키를 눌러 이 창을 닫습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:12
 msgid "Nice And Easy Does It All the Time"
@@ -40,7 +40,7 @@ msgstr "미안하지만, 다시 여기를 찢어버릴 생각이에요. 우리�
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:29
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:31
 msgid "Close this window"
-msgstr ""
+msgstr "이 창을 닫기"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:36
 msgid "Welcome to the Widelands Tutorial!"
@@ -59,75 +59,75 @@ msgstr "Widelands는 파괴보다는 건설에 중점을 두는 느린 속도의
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid "You will be guided through this tutorial by objectives"
-msgstr ""
+msgstr "이 자습서는 목표별로 안내됩니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:42
 msgid ""
 "Follow the intructions in the objective below so that I can show you where "
 "to find them."
-msgstr ""
+msgstr "다음 목표의 지침에 따라 내가 그것들을 어디에서 찾을 수 있는지 알려 드리겠습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:48
 msgid "Objectives and how to close this window"
-msgstr ""
+msgstr "목표와 이 창을 닫는 방법"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:50
 msgid "Closing this window"
-msgstr ""
+msgstr "이 창을 닫기"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:51
 msgid ""
 "This is the ‘Objectives’ window. You can return to this window for "
 "instructions at any time."
-msgstr ""
+msgstr "이것이 ‘목표’ 창입니다. 언제든지 지시사항을 보려면이  창으로 돌아갈 수 있습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:52
 msgid ""
 " You can open and close this window by clicking on the ‘Objectives’ button "
 "in the toolbar on the bottom of the screen."
-msgstr ""
+msgstr "화면 하단의 도구 모음에서 '목표' 단추를 누르고 이 창을 열고 닫을 수 있습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid ""
 "Like any other window, you can also close the ‘Objectives’ window by right-"
 "clicking on it."
-msgstr ""
+msgstr "다른 창과 마찬가지로 마우스 오른쪽 단추를 눌러서 '목표' 창을 닫을 수도 있습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:54
 msgid ""
 "When you have accomplished an objective, it will disappear from the list "
 "above."
-msgstr ""
+msgstr "목표를 달성하면 위의 목록에서 사라집니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:55
 msgid "Try it out."
-msgstr ""
+msgstr "한 번 해보십시오."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:61
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:63
 msgid "Show building spaces"
-msgstr ""
+msgstr "건물 공간을 표시"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:64
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show Building Spaces’. There are two ways you can do this:"
-msgstr ""
+msgstr "우리는 나무꾼의 오두막집을 위한 좋은 장소를 찾아야 합니다. 이를 쉽게 하기 위해 ‘건물 공간 표시’ 를 활성화할 수 있습니다. 이를 수행할 수 있는 두 가지 방법이 있습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:65
 msgid ""
 "Press the Space bar to toggle them, or select ‘Show Building Spaces’ in the "
 "‘Show / Hide’ menu."
-msgstr ""
+msgstr "스페이스 바를 눌러 전환하거나 ‘표시 / 숨기기’ 차림표에서 ‘건물 공간 표시’를 선택하십시오."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:66
 msgid "Show the building spaces now."
-msgstr ""
+msgstr "지금 건물 공간을 표시합니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:71
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:86
 msgid "Building Spaces"
-msgstr ""
+msgstr "건물 공간"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:75
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:90
@@ -140,7 +140,7 @@ msgid ""
 "the Atlanteans and the Frisians. All tribes have a different economy, "
 "strength and weaknesses, but the general gameplay is the same for all. We "
 "will play the Barbarians for now."
-msgstr ""
+msgstr "와이드랜드에는 야만족, 제국, 아틀란티스, 프리지아의 4가지 부족이 있습니다. 모든 부족은 경제, 강점, 약점이 다르지만 일반적인 놀이 방법은 모두 동일합니다. 우리는 일단 야만족을 진행 할 것입니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:78
 msgid ""
@@ -158,25 +158,25 @@ msgstr "당신은 보통 하나의 본부을 시작할 겁니다. 이 앞에 푸
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show Building Spaces’."
-msgstr ""
+msgstr "우리는 나무꾼의 오두막집을 위한 좋은 장소를 찾아야 합니다. 이를 쉽게 하기 위해 ‘건물 공간 표시’를 활성화할 수 있습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:80
 msgid ""
 "Left-click the ‘OK’ button to close this window so that I can show you how."
-msgstr ""
+msgstr "‘확인’ 단추를 마우스 왼쪽 단추로 눌러서 이 창을 닫으면 방법을 볼 수 있습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:81
 msgid ""
 "Note that you cannot close this window by right-clicking on it. I have "
 "blocked this so that you will not close it by accident and miss important "
 "information."
-msgstr ""
+msgstr "이 창을 마우스 오른쪽 단추로 눌러서 닫을 수 없습니다. 실수로 닫고 중요한 정보를 놓치지 않도록 막았습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:91
 msgid ""
 "Now that I have shown you how to show and hide the building spaces, please "
 "switch them on again so that we can place our first building."
-msgstr ""
+msgstr "이제 건물 공간을 보여주고 숨기는 방법을 보여드렸으니, 첫 번째 건물을 지을 수 있도록 다시켜십시오."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:100
 msgid "Lumberjack’s Spot"
@@ -253,7 +253,7 @@ msgstr "나무꾼에게 이어지는 길을 나누는 깃발 설치하기"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:164
 msgid "Build a Flag on the Road"
-msgstr "도로에 깃발 설치하기"
+msgstr "도로에 깃발 세우기"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:165
 msgid ""
@@ -272,7 +272,7 @@ msgstr "지금 본부에서 나무꾼의 오두막을 연결하는 길의 중간
 msgid ""
 "To build the flag, click on the yellow flag symbol in between the two blue "
 "flags we just placed and then click on the build flag symbol."
-msgstr ""
+msgstr "깃발을 세우려면 방금 배치한 두 개의 파란색 깃발 사이에 있는 노란색 깃발 기호를 누른 다음 건물 깃발 기호를 누르십시오."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:173
 msgid "Placing Another Flag"
@@ -283,7 +283,7 @@ msgid ""
 "Nice how they are working, isn’t it? But the poor carrier has a very long "
 "way to go. We can make it easier for him (and more efficient for us) by "
 "placing another blue flag on the road. You try it this time."
-msgstr ""
+msgstr "그들이 일하는 방식이 좋군요, 그렇죠? 하지만 그 불쌍한 운반선은 갈 길이 매우 멉니다. 우리는 도로에 또 다른 파란색 깃발을 꽂음으로써 그를 더 쉽게(그리고 우리를 위해 더 효율적으로) 만들 수 있습니다. 이번에는 당신이 해 보세요."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:188
 msgid ""
@@ -302,11 +302,11 @@ msgstr "이제 당신은 도로를 각각의 짐꾼이 있는 두 조각으로 �
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:200
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:210
 msgid "Let’s see the progress"
-msgstr ""
+msgstr "진행 상황을 봅시다"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:201
 msgid "Click on the construction site to have a look at it."
-msgstr ""
+msgstr "건설 현장을 눌러서 살펴보십시오."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:207
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:218
@@ -325,11 +325,11 @@ msgid ""
 "This button toggles showing the building’s work area. When the lumberjack "
 "leaves the building to look for trees to fell, he will only look for them "
 "within this area. Let me show you how perfect this spot is."
-msgstr ""
+msgstr "이 단추는 건물의 작업 영역을 표시하도록 전환합니다. 나무꾼이 쓰러질 나무를 찾기 위해 건물을 떠날 때, 그는 이 지역 내에서만 나무를 찾을 것입니다. 이 자리가 얼마나 완벽한지 보여드리겠습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:223
 msgid "Close the construction site window when you have seen enough."
-msgstr ""
+msgstr "충분히 보았으면 건설 현장 창을 닫으십시오."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:234
 msgid "Well done! Let’s wait till the hut is finished."
@@ -344,7 +344,7 @@ msgstr "빨리 진행하고 싶다면, 단순히 키보드에서 Page Up 키를 
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:237
 msgid "Change is rapid with pressed Ctrl and smooth with pressed Shift."
-msgstr ""
+msgstr "Ctrl 키를 누르면 변경이 빠르고 Shift 키를 누르면 부드럽게 변경됩니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:244
 msgid "The Lumberjack’s Hut is Done"
@@ -431,7 +431,7 @@ msgstr "시야를 이동하는 다른 방법들"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:296
 msgid "Excellent. Now there is a faster way to move, using the mouse instead."
-msgstr ""
+msgstr "좋습니다. 이제 마우스를 대신 사용하여 더 빠르게 이동할 수 있습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:303
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:305
@@ -440,7 +440,7 @@ msgstr "약도 사용을 배웁니다"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:306
 msgid "Try moving around by clicking on the minimap"
-msgstr ""
+msgstr "작은 지도를 눌러서 이동해보십시오"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:307
 msgid "Play around a bit with the different overlays (roads, flags, etc.)"
@@ -451,33 +451,33 @@ msgid ""
 "When you are ready to continue, close the minimap by selecting ‘Hide "
 "Minimap’ in the ‘Map View’ menu or by pressing ‘m’. Of course, a right-click"
 " also works."
-msgstr ""
+msgstr "계속할 준비가 되면 ‘지도 보기’ 차림표에서 ‘작은 지도 숨기기’를 선택하거나 ‘m’ 을 눌러 작은 지도를 닫으십시오. 물론 오른쪽 단추를 눌러도 가능합니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:314
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:329
 msgid "Using the Minimap"
-msgstr ""
+msgstr "작은 지도를 사용하기"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:316
 msgid "Very good. And now about the minimap. "
-msgstr ""
+msgstr "아주 좋아요. 이제 작은 지도에 대해 알아보겠습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:318
 msgid ""
 "You can open it by selecting the ‘Show Minimap’ entry in the ‘Map View’ menu"
 " at the bottom of the screen or simply by using the keyboard shortcut ‘m’."
-msgstr ""
+msgstr "화면 하단의 ‘지도보기’ 차림표에서 ‘작은 지도 표시’항목을 선택하거나 키보드 단축키 ‘m’ 을 사용하여 간단히 열 수 있습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:320
 msgid "I will open it for you."
-msgstr ""
+msgstr "제가 열어 줄게요."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:331
 msgid ""
 "The minimap shows the complete map in miniature. You can directly jump to "
 "any field by left-clicking on it. You can also toggle buildings, roads, "
 "flags and player indicators on and off inside the minimap."
-msgstr "약도는 지도 전체를 축소해서 보여줍니다. 어떤 지역이든 좌클릭을 해서 바로 넘어갈 수 있습니다. 또한 약도 안에서 건물, 도로, 깃발, 그리고 플레이어 지시자를 켜고 끌 수 있습니다."
+msgstr "약도는 지도 전체를 축소해서 보여줍니다. 어떤 지역이든 왼쪽 클릭을 해서 바로 넘어갈 수 있습니다. 또한 약도 안에서 건물, 도로, 깃발, 그리고 플레이어 지시자를 켜고 끌 수 있습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:339
 msgid "Onward to the Quarry"
@@ -529,7 +529,7 @@ msgid ""
 "space where you want the building to be, choose it from the window that "
 "appears, and it is placed. Maybe this is a good time to explain about all "
 "those building space symbols we activated earlier."
-msgstr ""
+msgstr "건물 공간을 표시하고 있는지 확인한 다음 건물이 있을 공간을 누르고 나타나는 창에서 해당공간을 선택하면됩니다. 아마도 지금이 우리가 앞서 활성화한 모든 건물 공간 기호에 대해 설명하기에 좋은 시기일 것입니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:367
 msgid ""
@@ -566,7 +566,7 @@ msgid ""
 "If you decide you do not want to build a road at this time, you can cancel "
 "road building by clicking on the starting flag of the road and selecting the"
 " abort symbol."
-msgstr ""
+msgstr "지금 도로를 건설하지 않으려는 경우 도로의 시작 깃발을 누르고 중단 기호를 선택하여 도로 건설을 취소 할 수 있습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:381
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:395
@@ -580,13 +580,13 @@ msgid ""
 "Excellent! Directly after placing the building, you have been switched into "
 "road building mode. The new road will start at the flag in front of your "
 "newly placed construction site."
-msgstr ""
+msgstr "잘 했어요! 건물을 배치한 직후 도로 건설 모드로 전환되었습니다. 새로운 도로는 새로 배치한 건설 현장 앞 깃발에서 시작됩니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:384
 msgid ""
 "You can enter road building mode for any flag by left-clicking on a flag and"
 " selecting the road building symbol."
-msgstr ""
+msgstr "깃발을 마우스 왼쪽 단추로 누르고 도로 건설 기호를 선택하여 모든 깃발에 대한 도로 건설 모드로 들어갈 수 있습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:386
 msgid ""
@@ -600,7 +600,7 @@ msgstr "이제, 도로를 살펴 봅시다. 기억하십시오: 우리는 채석
 msgid ""
 " Excellent! To enter road building mode for any flag, left-click on a flag "
 "and select the road building symbol."
-msgstr ""
+msgstr "잘 했어요 깃발에 대한 도로 건설 모드로 들어가려면 깃발을 마우스 왼쪽 단추로 클릭하고 도로 건설 기호를 선택하십시오."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:399
 msgid ""
@@ -694,7 +694,7 @@ msgid ""
 "It seems like you destroyed a construction site for a quarry we wanted to "
 "build. Luckily, we still have enough logs left this time, so you can simply "
 "build another one."
-msgstr ""
+msgstr "우리가 짓고 싶은 채석장의 건설 현장을 파괴 한 것 같습니다. 다행히도 이번에는 아직 충분한 통나무가 남았으니 간단히 다른 통나무를 만들 수 있습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
 msgid ""
@@ -702,7 +702,7 @@ msgid ""
 "created from time to time. To do so, you will have to go back to the main "
 "menu and choose ‘Single Player’ → ‘Load Game’. And please be a bit more "
 "careful next time."
-msgstr ""
+msgstr "이전에 저장한 놀이에서 놀이를 다시 불러올 수도 있습니다. 다행이도 이것들은 때때로 만들어집니다. 그렇게 하려면 기본 차림표로 돌아가서 '혼자 놀기'→ '놀이 불어오기'를 선택해야합니다. 그리고 다음부터는 좀 더 조심하십시오."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:458
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:460

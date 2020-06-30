@@ -143,15 +143,14 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 	b = new UI::Button(                                                                             \
 	   buttons, #policy, 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,                                   \
 	   g_gr->images().get("images/wui/buildings/stock_policy_button_" #policy ".png"), tooltip),    \
-	b->sigclicked.connect(                                                                          \
-	   boost::bind(&WarehouseWaresPanel::set_policy, this, Widelands::StockPolicy::k##policyname)), \
+	b->sigclicked.connect([this]() { set_policy(Widelands::StockPolicy::k##policyname); }),         \
 	buttons->add(b);
 
 #define ADD_REAL_STORAGE_BUTTON(delta, img, tt)                                                    \
 	b = new UI::Button(buttons, "real_storage_" img, 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,  \
 	                   g_gr->images().get("images/ui_basic/scrollbar_" img ".png"), tt);            \
 	b->set_repeating(true);                                                                         \
-	b->sigclicked.connect(boost::bind(&WarehouseWaresPanel::change_real_amount, this, delta));      \
+	b->sigclicked.connect([this]() { change_real_amount(delta);});      \
 	buttons->add(b);
 
 		ADD_POLICY_BUTTON(normal, Normal, _("Normal policy"))

@@ -77,14 +77,13 @@ ScenarioFlagSettingsWindow::ScenarioFlagSettingsWindow(EditorInteractive& parent
 			}
 		}
 		wares_box_.add(dropdowns_[i].get());
-		dropdowns_[i]->selected.connect(boost::bind(&ScenarioFlagSettingsWindow::select, this, i));
+		dropdowns_[i]->selected.connect([this, i]() { select(i); });
 	}
 
 	main_box_.add(&wares_box_, UI::Box::Resizing::kFullSize);
 	main_box_.add_space(8);
 	main_box_.add(&economy_options_, UI::Box::Resizing::kFullSize);
-	economy_options_.sigclicked.connect(
-	   boost::bind(&ScenarioFlagSettingsWindow::economy_options_clicked, this));
+	economy_options_.sigclicked.connect([this]() { economy_options_clicked(); });
 
 	set_center_panel(&main_box_);
 	update();

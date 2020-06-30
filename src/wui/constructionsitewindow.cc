@@ -336,14 +336,14 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				   &buttonsbox, "stock_policy_remove", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 				   g_gr->images().get(pic_stock_policy_button_remove),
 				   _("Remove selected wares from here"));
-				sp_remove.sigclicked.connect(boost::bind(
-				   &ConstructionSiteWindow::change_policy, this, ww, Widelands::StockPolicy::kRemove));
-				sp_dont.sigclicked.connect(boost::bind(&ConstructionSiteWindow::change_policy, this, ww,
-				                                       Widelands::StockPolicy::kDontStock));
-				sp_prefer.sigclicked.connect(boost::bind(
-				   &ConstructionSiteWindow::change_policy, this, ww, Widelands::StockPolicy::kPrefer));
-				sp_normal.sigclicked.connect(boost::bind(
-				   &ConstructionSiteWindow::change_policy, this, ww, Widelands::StockPolicy::kNormal));
+				sp_remove.sigclicked.connect(
+				   [this, ww]() { change_policy(ww, Widelands::StockPolicy::kRemove); });
+				sp_dont.sigclicked.connect(
+				   [this, ww]() { change_policy(ww, Widelands::StockPolicy::kDontStock); });
+				sp_prefer.sigclicked.connect(
+				   [this, ww]() { change_policy(ww, Widelands::StockPolicy::kPrefer); });
+				sp_normal.sigclicked.connect(
+				   [this, ww]() { change_policy(ww, Widelands::StockPolicy::kNormal); });
 				sp_normal.set_enabled(can_act);
 				sp_dont.set_enabled(can_act);
 				sp_remove.set_enabled(can_act);

@@ -35,7 +35,7 @@ tribes:new_productionsite_type {
       working_metal = {
          directory = dirname,
          basename = "working_metal",
-         hotspot = {50, 61}, -- the whole animation is one pixel lower
+         hotspot = {50, 71}, -- the whole animation is one pixel lower
          frames = 10,
          columns = 5,
          rows = 2,

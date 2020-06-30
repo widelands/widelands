@@ -35,6 +35,8 @@ wl_library(economy
     ship_fleet.h
     shippingitem.cc
     shippingitem.h
+    shipping_schedule.cc
+    shipping_schedule.h
     supply.h
     supply_list.cc
     supply_list.h

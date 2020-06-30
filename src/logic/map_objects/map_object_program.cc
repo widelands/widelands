@@ -49,7 +49,7 @@ unsigned int MapObjectProgram::read_int(const std::string& input, int min_value,
 	char* endp;
 	long int const value = strtol(input.c_str(), &endp, 0);
 	result = value;
-	if (*endp || result != value) {
+	if (*endp || static_cast<long>(result) != value) {
 		throw GameDataError("Expected a number but found \"%s\"", input.c_str());
 	}
 	if (value < min_value) {

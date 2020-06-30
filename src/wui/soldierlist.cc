@@ -388,9 +388,8 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
 
 	add(&infotext_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
-	soldierpanel_.set_mouseover(boost::bind(&SoldierList::mouseover, this, _1));
-	soldierpanel_.set_click(boost::bind(
-	   ibase_.omnipotent() ? &SoldierList::show_soldier_options : &SoldierList::eject, this, _1));
+	soldierpanel_.set_mouseover([this](const Soldier* s) { mouseover(s); });
+	soldierpanel_.set_click([this](Soldier* s) { ibase_.omnipotent() ? show_soldier_options(s) : eject(s); });
 
 	// We don't want translators to translate this twice, so it's a bit involved.
 	int w = UI::g_fh
@@ -428,8 +427,7 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
 			soldier_preference_.set_state(1);
 		}
 		if (can_act) {
-			soldier_preference_.changedto.connect(
-			   boost::bind(&SoldierList::set_soldier_preference, this, _1));
+			soldier_preference_.changedto.connect([this](int32_t a) { set_soldier_preference(a); });
 		} else {
 			soldier_preference_.set_enabled(false);
 		}
@@ -657,14 +655,14 @@ SoldierSettings::SoldierSettings(InteractiveBase& ib, Widelands::Soldier& s, boo
 	defense_.set_enabled(defense_.get_max_value() > 0);
 	evade_.set_enabled(evade_.get_max_value() > 0);
 
-	health_.changed.connect(boost::bind(&SoldierSettings::health_slider_changed, this));
-	attack_.changed.connect(boost::bind(&SoldierSettings::update_label_a, this));
-	defense_.changed.connect(boost::bind(&SoldierSettings::update_label_d, this));
-	evade_.changed.connect(boost::bind(&SoldierSettings::update_label_e, this));
-	current_health_.changed.connect(boost::bind(&SoldierSettings::update_label_c, this));
-	delete_.sigclicked.connect(boost::bind(&SoldierSettings::clicked_delete, this));
-	cancel_.sigclicked.connect(boost::bind(&SoldierSettings::die, this));
-	ok_.sigclicked.connect(boost::bind(&SoldierSettings::clicked_ok, this));
+	health_.changed.connect([this]() { health_slider_changed();});
+	attack_.changed.connect([this]() { update_label_a(); });
+	defense_.changed.connect([this]() { update_label_d(); });
+	evade_.changed.connect([this]() { update_label_e(); });
+	current_health_.changed.connect([this]() { update_label_c(); });
+	delete_.sigclicked.connect([this]() { clicked_delete(); });
+	cancel_.sigclicked.connect([this]() { die(); });
+	ok_.sigclicked.connect([this]() { clicked_ok(); });
 
 	health_slider_changed();
 	current_health_.set_value(soldier_.get_current_health());

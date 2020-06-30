@@ -133,9 +133,9 @@ SpinBox::SpinBox(Panel* const parent,
 		              _("Increase the value by 10"));
 
 		sbi_->button_ten_plus->sigclicked.connect(
-		   boost::bind(&SpinBox::change_value, boost::ref(*this), big_step_size));
+		   [this, big_step_size]() { change_value(big_step_size); });
 		sbi_->button_ten_minus->sigclicked.connect(
-		   boost::bind(&SpinBox::change_value, boost::ref(*this), -1 * big_step_size));
+		   [this, big_step_size]() { change_value(-big_step_size); });
 		sbi_->button_ten_plus->set_repeating(true);
 		sbi_->button_ten_minus->set_repeating(true);
 		buttons_.push_back(sbi_->button_ten_minus);
@@ -152,10 +152,8 @@ SpinBox::SpinBox(Panel* const parent,
 		box_->add(sbi_->button_plus);
 	}
 
-	sbi_->button_plus->sigclicked.connect(
-	   boost::bind(&SpinBox::change_value, boost::ref(*this), step_size));
-	sbi_->button_minus->sigclicked.connect(
-	   boost::bind(&SpinBox::change_value, boost::ref(*this), -1 * step_size));
+	sbi_->button_plus->sigclicked.connect([this, step_size]() { change_value(step_size); });
+	sbi_->button_minus->sigclicked.connect([this, step_size]() { change_value(-step_size); });
 	sbi_->button_plus->set_repeating(true);
 	sbi_->button_minus->set_repeating(true);
 	buttons_.push_back(sbi_->button_minus);

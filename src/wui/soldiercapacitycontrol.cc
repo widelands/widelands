@@ -77,10 +77,8 @@ SoldierCapacityControl::SoldierCapacityControl(UI::Panel* parent,
                g_gr->images().get("images/wui/buildings/menu_up_train.png"),
                _("Increase capacity. Hold down Ctrl to set the capacity to the highest value")),
      value_(this, "199", UI::Align::kCenter) {
-	decrease_.sigclicked.connect(
-	   boost::bind(&SoldierCapacityControl::click_decrease, boost::ref(*this)));
-	increase_.sigclicked.connect(
-	   boost::bind(&SoldierCapacityControl::click_increase, boost::ref(*this)));
+	decrease_.sigclicked.connect([this]() { click_decrease(); });
+	increase_.sigclicked.connect([this]() { click_increase(); });
 
 	add(new UI::Textarea(this, _("Capacity")), UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	add(&decrease_, UI::Box::Resizing::kAlign, UI::Align::kCenter);

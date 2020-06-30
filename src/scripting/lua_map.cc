@@ -6280,8 +6280,7 @@ int LuaShip::get_debug_worker_economy(lua_State* L) {
 */
 // UNTESTED
 int LuaShip::get_destination(lua_State* L) {
-	EditorGameBase& egbase = get_egbase(L);
-	return upcasted_map_object_to_lua(L, get(L, egbase)->get_current_destination(egbase));
+	return upcasted_map_object_to_lua(L, get(L, get_egbase(L))->get_destination());
 }
 
 /* RST
@@ -6585,7 +6584,7 @@ int LuaShip::make_expedition(lua_State* L) {
 			}
 		}
 	}
-	ship->clear_destinations(*game);
+	ship->set_destination(*game, nullptr);
 	ship->start_task_expedition(*game);
 
 	return 0;

@@ -316,9 +316,8 @@ void InputQueueDisplay::update_priority_buttons() {
 		NEVER_HERE();
 	}
 
-	priority_radiogroup_->changedto.connect(
-	   boost::bind(&InputQueueDisplay::radiogroup_changed, this, _1));
-	priority_radiogroup_->clicked.connect(boost::bind(&InputQueueDisplay::radiogroup_clicked, this));
+	priority_radiogroup_->changedto.connect([this](int32_t i) { radiogroup_changed(i); });
+	priority_radiogroup_->clicked.connect([this]() { radiogroup_clicked(); });
 
 	bool const can_act = check_can_act();
 	if (!can_act)
@@ -368,8 +367,7 @@ void InputQueueDisplay::update_max_fill_buttons() {
 		            explanation */
 		         _("Hold down Ctrl to allow none of this ware"), UI::FontStyle::kTooltip))
 		      .str());
-		decrease_max_fill_->sigclicked.connect(
-		   boost::bind(&InputQueueDisplay::decrease_max_fill_clicked, boost::ref(*this)));
+		decrease_max_fill_->sigclicked.connect([this]() { decrease_max_fill_clicked(); });
 
 		x = Border + (cache_size_ + 1) * (CellWidth + CellSpacing);
 
@@ -396,8 +394,7 @@ void InputQueueDisplay::update_max_fill_buttons() {
 		            explanation */
 		         _("Hold down Ctrl to allow all of this ware"), UI::FontStyle::kTooltip))
 		      .str());
-		increase_max_fill_->sigclicked.connect(
-		   boost::bind(&InputQueueDisplay::increase_max_fill_clicked, boost::ref(*this)));
+		increase_max_fill_->sigclicked.connect([this]() { increase_max_fill_clicked(); });
 	}
 
 	if (ib_.omnipotent() && queue_) {
@@ -424,8 +421,7 @@ void InputQueueDisplay::update_max_fill_buttons() {
 		            explanation */
 		         _("Hold down Ctrl to remove all of this ware"), UI::FontStyle::kTooltip))
 		      .str());
-		decrease_real_fill_->sigclicked.connect(
-		   boost::bind(&InputQueueDisplay::decrease_real_fill_clicked, boost::ref(*this)));
+		decrease_real_fill_->sigclicked.connect([this]() { decrease_real_fill_clicked(); });
 
 		x += CellWidth + CellSpacing;
 
@@ -454,7 +450,7 @@ void InputQueueDisplay::update_max_fill_buttons() {
 		         UI::FontStyle::kTooltip))
 		      .str());
 		increase_real_fill_->sigclicked.connect(
-		   boost::bind(&InputQueueDisplay::increase_real_fill_clicked, boost::ref(*this)));
+		   [this]() { increase_real_fill_clicked(); });
 	}
 
 	if (increase_max_fill_) {
@@ -660,7 +656,7 @@ void InputQueueDisplay::update_siblings_max_fill(int32_t delta) {
 			continue;
 		}
 		InputQueueDisplay* display = dynamic_cast<InputQueueDisplay*>(sibling);
-		if (display == nullptr) {
+		if (display == nullptr || display->no_capacity_buttons_) {
 			// Cast failed. Sibling is no InputQueueDisplay
 			continue;
 		}
@@ -685,10 +681,12 @@ void InputQueueDisplay::update_siblings_max_fill(int32_t delta) {
 void InputQueueDisplay::compute_max_fill_buttons_enabled_state() {
 	// Disable those buttons for replay watchers
 	if (!check_can_act()) {
-		if (increase_max_fill_)
+		if (increase_max_fill_) {
 			increase_max_fill_->set_enabled(false);
-		if (decrease_max_fill_)
+		}
+		if (decrease_max_fill_) {
 			decrease_max_fill_->set_enabled(false);
+		}
 	}
 }
 

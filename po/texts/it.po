@@ -9,16 +9,16 @@
 # FIRST AUTHOR <gabriel.rota@gmail.com>, 2009
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
-# Guybrush88 <erpizzo@alice.it>, 2015-2018
+# Guybrush88 <erpizzo@alice.it>, 2015-2018,2020
 # Luigi Lain <lainluigi86@tiscali.it>, 2015
 # Mat V <enthusedquill6@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-03-29 19:01+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-06-23 06:10+0000\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -45,7 +45,7 @@ msgstr "Informazioni sulla licenza di Widelands"
 #. TRANSLATORS: Placeholder is copyright end year
 #: ../../data/txts/LICENSE.lua:10
 msgid "Copyright 2002 - %1% by the Widelands Development Team."
-msgstr ""
+msgstr "Copyright 2002 - %1% del team di sviluppo di Widelands."
 
 #: ../../data/txts/LICENSE.lua:12
 msgid ""
@@ -58,7 +58,7 @@ msgstr "Questo gioco è Free and Open Source (FOSS), rilasciato sotto licenza GN
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
-msgstr ""
+msgstr "Puoi trovare maggiori informazioni sulla FOSS e sulla GPL visitando la seguente pagina web: %s"
 
 #: ../../data/txts/LICENSE.lua:16
 msgid ""
@@ -212,7 +212,7 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Barbarians"
-msgstr ""
+msgstr "Barbari"
 
 #: ../../data/txts/developers.lua:3
 msgid "Campaign Story"
@@ -248,7 +248,7 @@ msgstr "Fedora Linux"
 
 #: ../../data/txts/developers.lua:3
 msgid "Flatpak"
-msgstr ""
+msgstr "Flatpak"
 
 #: ../../data/txts/developers.lua:3
 msgid "Former Elders"
@@ -421,7 +421,7 @@ msgstr "Nascondi gli spazi per la costruzione"
 #: ../../data/txts/help/common_helptexts.lua:49
 msgctxt "hotkey"
 msgid "Ctrl + F"
-msgstr ""
+msgstr "Ctrl + F"
 
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"

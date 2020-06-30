@@ -4,15 +4,15 @@
 # Translators:
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
-# Juanjo, 2015-2016,2018-2019
+# Juanjo, 2015-2016,2018-2020
 # Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-04-23 19:30+0000\n"
-"PO-Revision-Date: 2020-03-03 09:10+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-05-09 16:14+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -216,7 +216,7 @@ msgid ""
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes. If the peaceful mode is selected, the game ends if one "
 "player has more land than any other player could gain."
-msgstr ""
+msgstr "El guanyador serà el jugador o equip que sigui capaç de mantenir més de la meitat de l'àrea del mapa sota control durant almenys 20 minuts seguits. Si es selecciona el mode pacífic, la partida acaba si un jugador té més territori que el que qualsevol altre jugador pugui aconseguir."
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:58
 msgid "Currently no faction owns more than half of the map’s area."
@@ -233,7 +233,7 @@ msgid ""
 "least 20 minutes, or the one with the most territory after 4 hours, "
 "whichever comes first.If the peaceful mode is selected, the game ends if one"
 " player has more land than any other player could gain."
-msgstr ""
+msgstr "El guanyador serà el jugador o equip que sigui capaç de mantenir més de la meitat de l'àrea del mapa sota control durant almenys 20 minuts seguits. O bé el que tingui més territori després de 4 hores de partida. Si es selecciona el mode pacífic, la partida acaba si un jugador té més territori que el que qualsevol altre jugador pugui aconseguir."
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #. TRANSLATORS: Context: 'The game will end in 30 minutes.'

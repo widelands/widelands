@@ -59,24 +59,20 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		UI::Button* btn =
 		   new UI::Button(this, "map", space, y, butw, buth, UI::ButtonStyle::kFsMenuSecondary,
 		                  _("Map"), _("Select a map"));
-		btn->sigclicked.connect(boost::bind(&MapOrSaveSelectionWindow::pressedButton,
-		                                    boost::ref(*this),
-		                                    FullscreenMenuBase::MenuTarget::kNormalGame));
+		btn->sigclicked.connect(
+		   [this]() { pressedButton(FullscreenMenuBase::MenuTarget::kNormalGame); });
 
 		btn = new UI::Button(this, "saved_game", space, y + buth + space, butw, buth,
 		                     UI::ButtonStyle::kFsMenuSecondary,
 		                     /** Translators: This is a button to select a savegame */
 		                     _("Saved Game"), _("Select a saved game"));
-		btn->sigclicked.connect(boost::bind(&MapOrSaveSelectionWindow::pressedButton,
-		                                    boost::ref(*this),
-		                                    FullscreenMenuBase::MenuTarget::kScenarioGame));
+		btn->sigclicked.connect(
+		   [this]() { pressedButton(FullscreenMenuBase::MenuTarget::kScenarioGame); });
 
 		btn =
 		   new UI::Button(this, "cancel", space + butw / 4, y + 3 * buth + 2 * space, butw / 2, buth,
 		                  UI::ButtonStyle::kFsMenuSecondary, _("Cancel"), _("Cancel selection"));
-		btn->sigclicked.connect(boost::bind(&MapOrSaveSelectionWindow::pressedButton,
-		                                    boost::ref(*this),
-		                                    FullscreenMenuBase::MenuTarget::kBack));
+		btn->sigclicked.connect([this]() { pressedButton(FullscreenMenuBase::MenuTarget::kBack); });
 	}
 
 	void think() override {
@@ -176,10 +172,8 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	ok_.set_pos(Vector2i(right_column_x_, get_h() * 218 / 240));
 
 	title_.set_text(_("Multiplayer Game Setup"));
-	change_map_or_save_.sigclicked.connect(
-	   boost::bind(&FullscreenMenuLaunchMPG::change_map_or_save, boost::ref(*this)));
-	help_button_.sigclicked.connect(
-	   boost::bind(&FullscreenMenuLaunchMPG::help_clicked, boost::ref(*this)));
+	change_map_or_save_.sigclicked.connect([this]() { change_map_or_save(); });
+	help_button_.sigclicked.connect([this]() { help_clicked(); });
 
 	clients_.set_font_scale(scale_factor());
 	players_.set_font_scale(scale_factor());

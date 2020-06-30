@@ -49,20 +49,9 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
-         actions = {
-           -- This order is on purpose so that the productivity
-           -- drops fast once all rocks are gone.
-            "call=mine_stone",
-         },
-      },
-      mine_stone = {
          -- TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
          descname = _"quarrying granite",
          actions = {
-           -- This order is on purpose so that the productivity
-           -- drops fast once all rocks are gone.
             "callworker=cut_granite",
             "sleep=17500"
          }
@@ -73,5 +62,6 @@ tribes:new_productionsite_type {
       title = _"No Rocks",
       heading = _"Out of Rocks",
       message = pgettext("barbarians_building", "The stonemason working at this quarry can’t find any rocks in his work area."),
+      productivity_threshold = 75
    },
 }

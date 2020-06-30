@@ -151,26 +151,19 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 			worker_caps_->add(worker_xp_increase_);
 			worker_caps_->add(worker_xp_increase_fast_);
 			worker_type_->set_enabled(false);
-			worker_table_->selected.connect(
-			   boost::bind(&ProductionSiteWindow::worker_table_selection_changed, this));
-			worker_type_->selected.connect(
-			   boost::bind(&ProductionSiteWindow::worker_table_dropdown_clicked, this));
-			worker_xp_decrease_fast_->sigclicked.connect(boost::bind(
-			   &ProductionSiteWindow::worker_table_xp_clicked, this, kDecreaseWorkerExperienceToZero));
-			worker_xp_decrease_->sigclicked.connect(
-			   boost::bind(&ProductionSiteWindow::worker_table_xp_clicked, this, -1));
-			worker_xp_increase_fast_->sigclicked.connect(boost::bind(
-			   &ProductionSiteWindow::worker_table_xp_clicked, this, kIncreaseWorkerExperienceToMax));
-			worker_xp_increase_->sigclicked.connect(
-			   boost::bind(&ProductionSiteWindow::worker_table_xp_clicked, this, 1));
+			worker_table_->selected.connect([this](uint32_t) { worker_table_selection_changed();});
+			worker_type_->selected.connect([this]() { worker_table_dropdown_clicked();});
+			worker_xp_decrease_fast_->sigclicked.connect([this]() { worker_table_xp_clicked(kDecreaseWorkerExperienceToZero);});
+			worker_xp_decrease_->sigclicked.connect([this]() { worker_table_xp_clicked(-1);});
+			worker_xp_increase_fast_->sigclicked.connect([this]() { worker_table_xp_clicked(kIncreaseWorkerExperienceToMax);});
+			worker_xp_increase_->sigclicked.connect([this]() { worker_table_xp_clicked(1);});
 		} else if (check_can_act(production_site->owner().player_number())) {
 			worker_caps_->add_inf_space();
 			UI::Button* evict_button =
 			   new UI::Button(worker_caps_, "evict", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 			                  g_gr->images().get("images/wui/buildings/menu_drop_soldier.png"),
 			                  _("Terminate the employment of the selected worker"));
-			evict_button->sigclicked.connect(
-			   boost::bind(&ProductionSiteWindow::evict_worker, boost::ref(*this)));
+			evict_button->sigclicked.connect([this]() { evict_worker(); });
 			worker_caps_->add(evict_button);
 		}
 
