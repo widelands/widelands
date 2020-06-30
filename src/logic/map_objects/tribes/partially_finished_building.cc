@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,11 +56,16 @@ void PartiallyFinishedBuilding::cleanup(EditorGameBase& egbase) {
 		builder_request_ = nullptr;
 	}
 
-	for (WaresQueue* temp_ware : wares_) {
+	for (WaresQueue* temp_ware : consume_wares_) {
 		temp_ware->cleanup();
 		delete temp_ware;
 	}
-	wares_.clear();
+	for (WaresQueue* temp_ware : dropout_wares_) {
+		temp_ware->cleanup();
+		delete temp_ware;
+	}
+	dropout_wares_.clear();
+	consume_wares_.clear();
 
 	Building::cleanup(egbase);
 }
@@ -84,7 +89,10 @@ Note that the workers are dealt with in the PlayerImmovable code.
 void PartiallyFinishedBuilding::set_economy(Economy* const e, WareWorker type) {
 	if (type == wwWARE) {
 		if (Economy* const old = get_economy(type)) {
-			for (WaresQueue* temp_ware : wares_) {
+			for (WaresQueue* temp_ware : dropout_wares_) {
+				temp_ware->remove_from_economy(*old);
+			}
+			for (WaresQueue* temp_ware : consume_wares_) {
 				temp_ware->remove_from_economy(*old);
 			}
 		}
@@ -94,7 +102,10 @@ void PartiallyFinishedBuilding::set_economy(Economy* const e, WareWorker type) {
 		builder_request_->set_economy(e);
 
 	if (e && type == wwWARE) {
-		for (WaresQueue* temp_ware : wares_) {
+		for (WaresQueue* temp_ware : dropout_wares_) {
+			temp_ware->add_to_economy(*e);
+		}
+		for (WaresQueue* temp_ware : consume_wares_) {
 			temp_ware->add_to_economy(*e);
 		}
 	}

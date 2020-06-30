@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,7 @@
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/editbox.h"
+#include "ui_basic/icon.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilineeditbox.h"
 #include "ui_basic/spinbox.h"
@@ -71,6 +72,8 @@ private:
 
 	UI::Listselect<std::string> teams_list_;
 	UI::SpinBox* waterway_length_box_;
+	UI::Icon* waterway_length_warning_;
+	void update_waterway_length_warning();
 
 	UI::UniqueWindow::Registry& registry_;
 };

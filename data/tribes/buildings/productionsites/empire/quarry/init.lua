@@ -46,22 +46,19 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=mine_granite",
-            "call=mine_granite",
-            "call=mine_granite",
-            "call=mine_marble", -- This will find marble 2 out of 7 times
-            "call=mine_granite",
-            "call=mine_granite",
-            "call=mine_marble", -- This will find marble 2 out of 7 times
-            "return=no_stats"
+            "call=mine_granite on failure fail",
+            "call=mine_granite on failure fail",
+            "call=mine_granite on failure fail",
+            "call=mine_marble on failure fail", -- This will find marble 2 out of 7 times
+            "call=mine_granite on failure fail",
+            "call=mine_granite on failure fail",
+            "call=mine_marble on failure fail", -- This will find marble 2 out of 7 times
          }
       },
       mine_granite = {
          -- TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
          descname = _"quarrying granite",
          actions = {
-           -- This order is on purpose so that the productivity
-           -- drops fast once all rocks are gone.
             "callworker=cut_granite",
             "sleep=17500"
          }
@@ -70,8 +67,6 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start quarrying marble because ...
          descname = _"quarrying marble",
          actions = {
-           -- This order is on purpose so that the productivity
-           -- drops fast once all rocks are gone.
             "callworker=cut_marble",
             "sleep=17500"
          }
@@ -82,5 +77,6 @@ tribes:new_productionsite_type {
       title = _"No Rocks",
       heading = _"Out of Rocks",
       message = pgettext("empire_building", "The stonemason working at this quarry can’t find any rocks in his work area."),
+      productivity_threshold = 75
    },
 }

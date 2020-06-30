@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2019 by the Widelands Development Team
+ * Copyright (C) 2007-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,8 @@
 #include "wui/game_tips.h"
 
 #include <memory>
+
+#include <SDL_timer.h>
 
 #include "base/i18n.h"
 #include "graphic/font_handler.h"

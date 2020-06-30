@@ -71,7 +71,6 @@ tribes:new_productionsite_type {
          actions = {
             "call=erect_stack",
             "call=collect_coal",
-            "return=no_stats",
          },
       },
       erect_stack = {

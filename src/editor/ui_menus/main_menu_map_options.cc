@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,6 +35,8 @@
 inline EditorInteractive& MainMenuMapOptions::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
+
+constexpr uint16_t kMaxRecommendedWaterwayLengthLimit = 20;
 
 /**
  * Create all the buttons etc...
@@ -139,15 +141,20 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	tags_box_.add_space(labelh_);
 
 	tags_box_.add(new UI::Textarea(&tags_box_, 0, 0, max_w_, labelh_, _("Waterway length limit:")));
-	UI::Box* ww_box = new UI::Box(&tags_box_, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
+	UI::Box* ww_box = new UI::Box(&tags_box_, 0, 0, UI::Box::Horizontal, max_w_);
+	waterway_length_warning_ = new UI::Icon(ww_box, g_gr->images().get("images/ui_basic/stop.png"));
+	waterway_length_warning_->set_handle_mouse(true);
 	waterway_length_box_ =
-	   new UI::SpinBox(ww_box, 0, 0, max_w_, max_w_ / 2, 1, 1, std::numeric_limits<int32_t>::max(),
-	                   UI::PanelStyle::kWui, std::string(), UI::SpinBox::Units::kFields);
+	   new UI::SpinBox(ww_box, 0, 0, max_w_ - waterway_length_warning_->get_w(), max_w_ * 2 / 3, 1,
+	                   1, std::numeric_limits<int32_t>::max(), UI::PanelStyle::kWui, std::string(),
+	                   UI::SpinBox::Units::kFields);
 	/** TRANSLATORS: Map Options: Waterways are disabled */
 	waterway_length_box_->add_replacement(1, _("Disabled"));
+	waterway_length_box_->changed.connect([this]() { update_waterway_length_warning(); });
+	ww_box->add(waterway_length_warning_, UI::Box::Resizing::kFullSize);
+	ww_box->add_inf_space();
 	ww_box->add(waterway_length_box_, UI::Box::Resizing::kFullSize);
-	ww_box->add_space(checkbox_space_);
-	tags_box_.add(ww_box);
+	tags_box_.add(ww_box, UI::Box::Resizing::kFullSize);
 	tags_box_.add_space(padding_);
 
 	teams_box_.add(new UI::Textarea(&teams_box_, 0, 0, max_w_, labelh_, _("Suggested Teams:")));
@@ -171,19 +178,19 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	tabs_.add("map_teams", g_gr->images().get("images/wui/editor/tools/players.png"), &teams_box_,
 	          _("Teams"));
 
-	name_.changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
-	author_.changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
-	descr_->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
-	hint_->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
-	waterway_length_box_->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
+	name_.changed.connect([this]() { changed(); });
+	author_.changed.connect([this]() { changed(); });
+	descr_->changed.connect([this]() { changed(); });
+	hint_->changed.connect([this]() { changed(); });
+	waterway_length_box_->changed.connect([this]() { changed(); });
 	for (const auto& tag : tags_checkboxes_) {
-		tag.second->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
+		tag.second->changed.connect([this]() { changed(); });
 	}
 
 	balancing_dropdown_.selected.connect([this] { changed(); });
 
-	ok_.sigclicked.connect(boost::bind(&MainMenuMapOptions::clicked_ok, boost::ref(*this)));
-	cancel_.sigclicked.connect(boost::bind(&MainMenuMapOptions::clicked_cancel, boost::ref(*this)));
+	ok_.sigclicked.connect([this]() { clicked_ok(); });
+	cancel_.sigclicked.connect([this]() { clicked_cancel(); });
 
 	update();
 	ok_.set_enabled(true);
@@ -191,6 +198,20 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	name_.focus();
 	center_to_parent();
 	move_to_top();
+}
+
+void MainMenuMapOptions::update_waterway_length_warning() {
+	const uint32_t len = waterway_length_box_->get_value();
+	if (len > kMaxRecommendedWaterwayLengthLimit) {
+		waterway_length_warning_->set_icon(g_gr->images().get("images/ui_basic/stop.png"));
+		waterway_length_warning_->set_tooltip(
+		   (boost::format(_("It is not recommended to permit waterway lengths greater than %u")) %
+		    kMaxRecommendedWaterwayLengthLimit)
+		      .str());
+	} else {
+		waterway_length_warning_->set_icon(nullptr);
+		waterway_length_warning_->set_tooltip("");
+	}
 }
 
 /**
@@ -204,8 +225,8 @@ void MainMenuMapOptions::update() {
 	size_.set_text((boost::format(_("Size: %1% x %2%")) % map.get_width() % map.get_height()).str());
 	descr_->set_text(map.get_description());
 	hint_->set_text(map.get_hint());
-	// map.get_waterway_max_length() defaults to 0 for older maps
-	waterway_length_box_->set_value(std::max<uint32_t>(1, map.get_waterway_max_length()));
+	waterway_length_box_->set_value(map.get_waterway_max_length());
+	update_waterway_length_warning();
 
 	std::set<std::string> tags = map.get_tags();
 	for (auto tag : tags_checkboxes_) {

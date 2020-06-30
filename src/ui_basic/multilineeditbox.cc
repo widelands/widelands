@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -102,7 +102,7 @@ MultilineEditbox::Data::Data(MultilineEditbox& o, const UI::TextPanelStyleInfo& 
      ww_valid(false),
      ww(style.font().size(), style.font().color(), o.get_w()),
      owner(o) {
-	scrollbar.moved.connect(boost::bind(&MultilineEditbox::scrollpos_changed, &o, _1));
+	scrollbar.moved.connect([&o](int32_t a) { o.scrollpos_changed(a); });
 
 	scrollbar.set_pagesize(owner.get_h() - 2 * lineheight);
 	scrollbar.set_singlestepsize(lineheight);

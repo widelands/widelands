@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,7 @@
 
 #include <memory>
 
-#include <SDL_keycode.h>
+#include <SDL_mouse.h>
 
 #include "base/i18n.h"
 #include "base/log.h"
@@ -34,30 +34,39 @@
 namespace UI {
 
 /// Width the horizontal border graphics must have.
-#define HZ_B_TOTAL_PIXMAP_LEN 100
+constexpr int16_t kHorizonalBorderTotalLength = 100;
 
 /// Height the top border must have
-#define TP_B_PIXMAP_THICKNESS 20
+constexpr int16_t kTopBorderThickness = 20;
+
+constexpr int16_t kWindowTitlebarButtonsSize = 18;
+constexpr int16_t kWindowTitlebarButtonsSpacing = 1;
+// Used for both vertical and horizontal position finetuning
+constexpr int16_t kWindowTitlebarButtonsPos =
+   (kTopBorderThickness + kWindowTitlebarButtonsSize) / -2;
 
 /// Height the bottom border must have
-#define BT_B_PIXMAP_THICKNESS 20
+constexpr int16_t kBottomBorderThickness = 20;
 
-/// Width to use as the corner. This must be >= VT_B_PIXMAP_THICKNESS.
-#define HZ_B_CORNER_PIXMAP_LEN 20
+/// Width to use as the corner. This must be >= kVerticalBorderThickness.
+constexpr int16_t kCornerWidth = 20;
 
-#define HZ_B_MIDDLE_PIXMAP_LEN (HZ_B_TOTAL_PIXMAP_LEN - 2 * HZ_B_CORNER_PIXMAP_LEN)
+constexpr int16_t kHorizontalBorderMiddleLength(kHorizonalBorderTotalLength - 2 * kCornerWidth);
 
 /// Width/height the vertical border graphics must have.
-#define VT_B_PIXMAP_THICKNESS 20
-#define VT_B_TOTAL_PIXMAP_LEN 100
+constexpr int16_t kVerticalBorderThickness = 20;
+constexpr int16_t kVerticalBorderTotalLength = 100;
 
 /// Height to use as the thingy.
-#define VT_B_THINGY_PIXMAP_LEN 20
+// TODO(Nordfriese): What is this?
+constexpr int16_t kVerticalBorderThingyHeight = 20;
 
-#define VT_B_MIDDLE_PIXMAP_LEN (VT_B_TOTAL_PIXMAP_LEN - 2 * VT_B_THINGY_PIXMAP_LEN)
+constexpr int16_t kVerticalBorderMiddleLength =
+   (kVerticalBorderTotalLength - 2 * kVerticalBorderThingyHeight);
 
-static const std::string kWindowImagePinned = kTemplateDir + "wui/window_pinned.png";
-static const std::string kWindowImageUnpinned = kTemplateDir + "wui/window_unpinned.png";
+static const std::string kWindowImageClose = kTemplateDir + "wui/window_close.png";
+static const std::string kWindowImagePinned = kTemplateDir + "wui/window_unpin.png";
+static const std::string kWindowImageUnpinned = kTemplateDir + "wui/window_pin.png";
 static const std::string kWindowImageMinimize = kTemplateDir + "wui/window_minimize.png";
 static const std::string kWindowImageMaximize = kTemplateDir + "wui/window_maximize.png";
 
@@ -84,10 +93,10 @@ Window::Window(Panel* const parent,
                 name,
                 x,
                 y,
-                w + VT_B_PIXMAP_THICKNESS * 2,
-                TP_B_PIXMAP_THICKNESS + h + BT_B_PIXMAP_THICKNESS),
+                w + kVerticalBorderThickness * 2,
+                kTopBorderThickness + h + kBottomBorderThickness),
      is_minimal_(false),
-     oldh_(TP_B_PIXMAP_THICKNESS + h + BT_B_PIXMAP_THICKNESS),
+     oldh_(kTopBorderThickness + h + kBottomBorderThickness),
      dragging_(false),
      docked_left_(false),
      docked_right_(false),
@@ -106,28 +115,29 @@ Window::Window(Panel* const parent,
      fastclick_panel_(nullptr),
      button_close_(new Button(this,
                               "b_close",
-                              get_w() - 2 * TP_B_PIXMAP_THICKNESS,
-                              -TP_B_PIXMAP_THICKNESS,
-                              TP_B_PIXMAP_THICKNESS,
-                              TP_B_PIXMAP_THICKNESS,
+                              // positions will be set by first call to layout()
+                              0,
+                              0,
+                              kWindowTitlebarButtonsSize,
+                              kWindowTitlebarButtonsSize,
                               ButtonStyle::kWuiSecondary,
-                              g_gr->images().get(kTemplateDir + "wui/window_close.png"),
+                              g_gr->images().get(kWindowImageClose),
                               _("Close"))),
      button_pin_(new Button(this,
                             "b_pin",
-                            -TP_B_PIXMAP_THICKNESS,
-                            -TP_B_PIXMAP_THICKNESS,
-                            TP_B_PIXMAP_THICKNESS,
-                            TP_B_PIXMAP_THICKNESS,
+                            0,
+                            0,
+                            kWindowTitlebarButtonsSize,
+                            kWindowTitlebarButtonsSize,
                             ButtonStyle::kWuiSecondary,
                             g_gr->images().get(kWindowImageUnpinned),
                             "")),
      button_minimize_(new Button(this,
                                  "b_minimize",
                                  0,
-                                 -TP_B_PIXMAP_THICKNESS,
-                                 TP_B_PIXMAP_THICKNESS,
-                                 TP_B_PIXMAP_THICKNESS,
+                                 0,
+                                 kWindowTitlebarButtonsSize,
+                                 kWindowTitlebarButtonsSize,
                                  ButtonStyle::kWuiSecondary,
                                  g_gr->images().get(kWindowImageMinimize),
                                  "")) {
@@ -151,8 +161,8 @@ Window::Window(Panel* const parent,
 	});
 	update_toolbar_buttons();
 
-	set_border(
-	   VT_B_PIXMAP_THICKNESS, VT_B_PIXMAP_THICKNESS, TP_B_PIXMAP_THICKNESS, BT_B_PIXMAP_THICKNESS);
+	set_border(kVerticalBorderThickness, kVerticalBorderThickness, kTopBorderThickness,
+	           kBottomBorderThickness);
 	set_top_on_click(true);
 	set_layout_toplevel(true);
 	layout();
@@ -213,15 +223,20 @@ void Window::update_desired_size() {
 }
 
 /**
- * Change the center panel's size so that it fills the window entirely, but
- * only if not minimized.
+ * Update the titlebar buttons' locations, and change the center panel's size
+ * so that it fills the window entirely (the latter only if not minimized).
  */
 void Window::layout() {
 	if (center_panel_ && !is_minimal_) {
 		center_panel_->set_pos(Vector2i::zero());
 		center_panel_->set_size(get_inner_w(), get_inner_h());
 	}
-	button_close_->set_pos(Vector2i(get_w() - 2 * TP_B_PIXMAP_THICKNESS, -TP_B_PIXMAP_THICKNESS));
+	button_close_->set_pos(Vector2i(
+	   get_w() + kWindowTitlebarButtonsPos - kTopBorderThickness, kWindowTitlebarButtonsPos));
+	button_pin_->set_pos(Vector2i(kWindowTitlebarButtonsPos, kWindowTitlebarButtonsPos));
+	button_minimize_->set_pos(
+	   Vector2i(button_pin_->get_x() + button_pin_->get_w() + kWindowTitlebarButtonsSpacing,
+	            kWindowTitlebarButtonsPos));
 }
 
 /**
@@ -282,9 +297,9 @@ void Window::move_inside_parent() {
 				}
 			}
 			if (docked_left_) {
-				px -= VT_B_PIXMAP_THICKNESS;
+				px -= kVerticalBorderThickness;
 			} else if (docked_right_) {
-				px += VT_B_PIXMAP_THICKNESS;
+				px += kVerticalBorderThickness;
 			}
 		}
 		if (parent->get_inner_h() >= get_h()) {
@@ -297,7 +312,7 @@ void Window::move_inside_parent() {
 				}
 			}
 			if (docked_bottom_) {
-				py += BT_B_PIXMAP_THICKNESS;
+				py += kBottomBorderThickness;
 			}
 		}
 		set_pos(Vector2i(px, py));
@@ -331,32 +346,33 @@ void Window::draw(RenderTarget& dst) {
  * Redraw the window frame
  */
 void Window::draw_border(RenderTarget& dst) {
-	static_assert(HZ_B_CORNER_PIXMAP_LEN >= VT_B_PIXMAP_THICKNESS,
-	              "HZ_B_CORNER_PIXMAP_LEN < VT_B_PIXMAP_THICKNESS");
-	static_assert(HZ_B_MIDDLE_PIXMAP_LEN > 0, "HZ_B_MIDDLE_PIXMAP_LEN <= 0");
+	static_assert(
+	   kCornerWidth >= kVerticalBorderThickness, "kCornerWidth < kVerticalBorderThickness");
+	static_assert(kHorizontalBorderMiddleLength > 0, "kHorizontalBorderMiddleLength <= 0");
 
-	const int32_t hz_bar_end = get_w() - HZ_B_CORNER_PIXMAP_LEN;
-	const int32_t hz_bar_end_minus_middle = hz_bar_end - HZ_B_MIDDLE_PIXMAP_LEN;
+	const int32_t hz_bar_end = get_w() - kCornerWidth;
+	const int32_t hz_bar_end_minus_middle = hz_bar_end - kHorizontalBorderMiddleLength;
 
 	{  //  Top border.
-		int32_t pos = HZ_B_CORNER_PIXMAP_LEN;
+		int32_t pos = kCornerWidth;
 
 		dst.blitrect  //  top left corner
-		   (Vector2i::zero(), pic_top_, Recti(Vector2i::zero(), pos, TP_B_PIXMAP_THICKNESS));
+		   (Vector2i::zero(), pic_top_, Recti(Vector2i::zero(), pos, kTopBorderThickness));
 
 		//  top bar
-		static_assert(0 <= HZ_B_CORNER_PIXMAP_LEN, "assert(0 <= HZ_B_CORNER_PIXMAP_LEN) failed.");
-		for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN) {
+		static_assert(0 <= kCornerWidth, "assert(0 <= kCornerWidth) failed.");
+		for (; pos < hz_bar_end_minus_middle; pos += kHorizontalBorderMiddleLength) {
 			dst.blitrect(
-			   Vector2i(pos, 0), pic_top_, Recti(Vector2i(HZ_B_CORNER_PIXMAP_LEN, 0),
-			                                     HZ_B_MIDDLE_PIXMAP_LEN, TP_B_PIXMAP_THICKNESS));
+			   Vector2i(pos, 0), pic_top_,
+			   Recti(Vector2i(kCornerWidth, 0), kHorizontalBorderMiddleLength, kTopBorderThickness));
 		}
 
 		// odd pixels of top bar and top right corner
-		const int32_t width = hz_bar_end - pos + HZ_B_CORNER_PIXMAP_LEN;
-		assert(0 <= HZ_B_TOTAL_PIXMAP_LEN - width);
-		dst.blitrect(Vector2i(pos, 0), pic_top_,
-		             Recti(Vector2i(HZ_B_TOTAL_PIXMAP_LEN - width, 0), width, TP_B_PIXMAP_THICKNESS));
+		const int32_t width = hz_bar_end - pos + kCornerWidth;
+		assert(0 <= kHorizonalBorderTotalLength - width);
+		dst.blitrect(
+		   Vector2i(pos, 0), pic_top_,
+		   Recti(Vector2i(kHorizonalBorderTotalLength - width, 0), width, kTopBorderThickness));
 	}
 
 	// draw the title if we have one
@@ -364,95 +380,98 @@ void Window::draw_border(RenderTarget& dst) {
 		// The title shouldn't be richtext, but we escape it just to make sure.
 		std::shared_ptr<const UI::RenderedText> text = autofit_text(
 		   richtext_escape(title_), g_gr->styles().font_style(UI::FontStyle::kWuiWindowTitle),
-		   get_inner_w() - TP_B_PIXMAP_THICKNESS);
+		   get_inner_w() - kTopBorderThickness);
 
 		Vector2i pos(
-		   get_lborder() + (get_inner_w() + TP_B_PIXMAP_THICKNESS) / 2, TP_B_PIXMAP_THICKNESS / 2);
+		   get_lborder() + (get_inner_w() + kTopBorderThickness) / 2, kTopBorderThickness / 2);
 		UI::center_vertically(text->height(), &pos);
 		text->draw(dst, pos, UI::Align::kCenter);
 	}
 
 	if (!is_minimal_) {
 		const int32_t vt_bar_end =
-		   get_h() - (docked_bottom_ ? 0 : BT_B_PIXMAP_THICKNESS) - VT_B_THINGY_PIXMAP_LEN;
-		const int32_t vt_bar_end_minus_middle = vt_bar_end - VT_B_MIDDLE_PIXMAP_LEN;
+		   get_h() - (docked_bottom_ ? 0 : kBottomBorderThickness) - kVerticalBorderThingyHeight;
+		const int32_t vt_bar_end_minus_middle = vt_bar_end - kVerticalBorderMiddleLength;
 
 		{  // Left border
 
-			static_assert(0 <= VT_B_PIXMAP_THICKNESS, "assert(0 <= VT_B_PIXMAP_THICKNESS) failed.");
+			static_assert(
+			   0 <= kVerticalBorderThickness, "assert(0 <= kVerticalBorderThickness) failed.");
 			dst.blitrect  // left top thingy
-			   (Vector2i(0, TP_B_PIXMAP_THICKNESS), pic_lborder_,
-			    Recti(Vector2i::zero(), VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN));
+			   (Vector2i(0, kTopBorderThickness), pic_lborder_,
+			    Recti(Vector2i::zero(), kVerticalBorderThickness, kVerticalBorderThingyHeight));
 
-			int32_t pos = TP_B_PIXMAP_THICKNESS + VT_B_THINGY_PIXMAP_LEN;
+			int32_t pos = kTopBorderThickness + kVerticalBorderThingyHeight;
 
 			//  left bar
-			static_assert(0 <= VT_B_THINGY_PIXMAP_LEN, "assert(0 <= VT_B_THINGY_PIXMAP_LEN) failed.");
-			for (; pos < vt_bar_end_minus_middle; pos += VT_B_MIDDLE_PIXMAP_LEN) {
+			static_assert(
+			   0 <= kVerticalBorderThingyHeight, "assert(0 <= kVerticalBorderThingyHeight) failed.");
+			for (; pos < vt_bar_end_minus_middle; pos += kVerticalBorderMiddleLength) {
 				dst.blitrect(Vector2i(0, pos), pic_lborder_,
-				             Recti(Vector2i(0, VT_B_THINGY_PIXMAP_LEN), VT_B_PIXMAP_THICKNESS,
-				                   VT_B_MIDDLE_PIXMAP_LEN));
+				             Recti(Vector2i(0, kVerticalBorderThingyHeight), kVerticalBorderThickness,
+				                   kVerticalBorderMiddleLength));
 			}
 
 			//  odd pixels of left bar and left bottom thingy
-			const int32_t height = vt_bar_end - pos + VT_B_THINGY_PIXMAP_LEN;
-			assert(0 <= VT_B_TOTAL_PIXMAP_LEN - height);
+			const int32_t height = vt_bar_end - pos + kVerticalBorderThingyHeight;
+			assert(0 <= kVerticalBorderTotalLength - height);
 			dst.blitrect(
-			   Vector2i(0, pos), pic_lborder_,
-			   Recti(Vector2i(0, VT_B_TOTAL_PIXMAP_LEN - height), VT_B_PIXMAP_THICKNESS, height));
+			   Vector2i(0, pos), pic_lborder_, Recti(Vector2i(0, kVerticalBorderTotalLength - height),
+			                                         kVerticalBorderThickness, height));
 		}
 
 		{  // Right border
-			const int32_t right_border_x = get_w() - VT_B_PIXMAP_THICKNESS;
+			const int32_t right_border_x = get_w() - kVerticalBorderThickness;
 
 			dst.blitrect  // right top thingy
-			   (Vector2i(right_border_x, TP_B_PIXMAP_THICKNESS), pic_rborder_,
-			    Recti(Vector2i::zero(), VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN));
+			   (Vector2i(right_border_x, kTopBorderThickness), pic_rborder_,
+			    Recti(Vector2i::zero(), kVerticalBorderThickness, kVerticalBorderThingyHeight));
 
-			int32_t pos = TP_B_PIXMAP_THICKNESS + VT_B_THINGY_PIXMAP_LEN;
+			int32_t pos = kTopBorderThickness + kVerticalBorderThingyHeight;
 
 			//  right bar
-			static_assert(0 <= VT_B_THINGY_PIXMAP_LEN, "assert(0 <= VT_B_THINGY_PIXMAP_LEN) failed.");
-			for (; pos < vt_bar_end_minus_middle; pos += VT_B_MIDDLE_PIXMAP_LEN) {
+			static_assert(
+			   0 <= kVerticalBorderThingyHeight, "assert(0 <= kVerticalBorderThingyHeight) failed.");
+			for (; pos < vt_bar_end_minus_middle; pos += kVerticalBorderMiddleLength) {
 				dst.blitrect(Vector2i(right_border_x, pos), pic_rborder_,
-				             Recti(Vector2i(0, VT_B_THINGY_PIXMAP_LEN), VT_B_PIXMAP_THICKNESS,
-				                   VT_B_MIDDLE_PIXMAP_LEN));
+				             Recti(Vector2i(0, kVerticalBorderThingyHeight), kVerticalBorderThickness,
+				                   kVerticalBorderMiddleLength));
 			}
 
 			// odd pixels of right bar and right bottom thingy
-			const int32_t height = vt_bar_end - pos + VT_B_THINGY_PIXMAP_LEN;
-			dst.blitrect(
-			   Vector2i(right_border_x, pos), pic_rborder_,
-			   Recti(Vector2i(0, VT_B_TOTAL_PIXMAP_LEN - height), VT_B_PIXMAP_THICKNESS, height));
+			const int32_t height = vt_bar_end - pos + kVerticalBorderThingyHeight;
+			dst.blitrect(Vector2i(right_border_x, pos), pic_rborder_,
+			             Recti(Vector2i(0, kVerticalBorderTotalLength - height),
+			                   kVerticalBorderThickness, height));
 		}
 
 		{  // Bottom border
-			int32_t pos = HZ_B_CORNER_PIXMAP_LEN;
+			int32_t pos = kCornerWidth;
 
 			dst.blitrect  //  bottom left corner
-			   (Vector2i(0, get_h() - BT_B_PIXMAP_THICKNESS), pic_bottom_,
-			    Recti(Vector2i::zero(), pos, BT_B_PIXMAP_THICKNESS));
+			   (Vector2i(0, get_h() - kBottomBorderThickness), pic_bottom_,
+			    Recti(Vector2i::zero(), pos, kBottomBorderThickness));
 
 			//  bottom bar
-			for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN) {
-				dst.blitrect(Vector2i(pos, get_h() - BT_B_PIXMAP_THICKNESS), pic_bottom_,
-				             Recti(Vector2i(HZ_B_CORNER_PIXMAP_LEN, 0), HZ_B_MIDDLE_PIXMAP_LEN,
-				                   BT_B_PIXMAP_THICKNESS));
+			for (; pos < hz_bar_end_minus_middle; pos += kHorizontalBorderMiddleLength) {
+				dst.blitrect(Vector2i(pos, get_h() - kBottomBorderThickness), pic_bottom_,
+				             Recti(Vector2i(kCornerWidth, 0), kHorizontalBorderMiddleLength,
+				                   kBottomBorderThickness));
 			}
 
 			// odd pixels of bottom bar and bottom right corner
-			const int32_t width = hz_bar_end - pos + HZ_B_CORNER_PIXMAP_LEN;
+			const int32_t width = hz_bar_end - pos + kCornerWidth;
 			dst.blitrect(
-			   Vector2i(pos, get_h() - BT_B_PIXMAP_THICKNESS), pic_bottom_,
-			   Recti(Vector2i(HZ_B_TOTAL_PIXMAP_LEN - width, 0), width, BT_B_PIXMAP_THICKNESS));
+			   Vector2i(pos, get_h() - kBottomBorderThickness), pic_bottom_,
+			   Recti(Vector2i(kHorizonalBorderTotalLength - width, 0), width, kBottomBorderThickness));
 		}
 	}
 
 	// draw them again so they aren't hidden by the border
 	for (Button* b : {button_close_, button_pin_, button_minimize_}) {
-		b->set_pos(Vector2i(b->get_x() + TP_B_PIXMAP_THICKNESS, b->get_y() + TP_B_PIXMAP_THICKNESS));
+		b->set_pos(Vector2i(b->get_x() + kTopBorderThickness, b->get_y() + kTopBorderThickness));
 		b->do_draw(dst);
-		b->set_pos(Vector2i(b->get_x() - TP_B_PIXMAP_THICKNESS, b->get_y() - TP_B_PIXMAP_THICKNESS));
+		b->set_pos(Vector2i(b->get_x() - kTopBorderThickness, b->get_y() - kTopBorderThickness));
 	}
 }
 
@@ -470,7 +489,7 @@ bool Window::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my) {
 	//  TODO(unknown): This code is erroneous. It checks the current key state. What it
 	//  needs is the key state at the time the mouse was clicked. See the
 	//  usage comment for get_key_state.
-	if ((SDL_GetModState() & KMOD_CTRL && btn == SDL_BUTTON_LEFT && my < VT_B_PIXMAP_THICKNESS) ||
+	if ((SDL_GetModState() & KMOD_CTRL && btn == SDL_BUTTON_LEFT && my < kVerticalBorderThickness) ||
 	    btn == SDL_BUTTON_MIDDLE) {
 		is_minimal() ? restore() : minimize();
 	} else if (btn == SDL_BUTTON_LEFT) {
@@ -545,7 +564,7 @@ void Window::die() {
 void Window::restore() {
 	assert(is_minimal_);
 	is_minimal_ = false;
-	set_border(get_lborder(), get_rborder(), get_tborder(), BT_B_PIXMAP_THICKNESS);
+	set_border(get_lborder(), get_rborder(), get_tborder(), kBottomBorderThickness);
 	set_inner_size(get_inner_w(), oldh_);
 	update_desired_size();
 	move_inside_parent();
@@ -556,7 +575,7 @@ void Window::minimize() {
 	assert(!is_minimal_);
 	int32_t y = get_y(), x = get_x();
 	if (docked_bottom_) {
-		y -= BT_B_PIXMAP_THICKNESS;  //  Minimal can not be bottom-docked.
+		y -= kBottomBorderThickness;  //  Minimal can not be bottom-docked.
 		docked_bottom_ = false;
 	}
 	if (y < 0) {
@@ -565,7 +584,7 @@ void Window::minimize() {
 	oldh_ = get_inner_h();
 	is_minimal_ = true;
 	set_border(get_lborder(), get_rborder(), get_tborder(), 0);
-	set_size(get_w(), TP_B_PIXMAP_THICKNESS);
+	set_size(get_w(), kTopBorderThickness);
 	set_pos(Vector2i(x, y));  // If on border, this feels more natural
 	set_handle_keypresses(false);
 	update_toolbar_buttons();
@@ -694,21 +713,21 @@ bool Window::handle_mousemove(const uint8_t, int32_t mx, int32_t my, int32_t, in
 			}
 
 			if (parent->get_dock_windows_to_edges()) {
-				if (new_left <= 0 && new_left >= -VT_B_PIXMAP_THICKNESS) {
-					new_left = -VT_B_PIXMAP_THICKNESS;
+				if (new_left <= 0 && new_left >= -kVerticalBorderThickness) {
+					new_left = -kVerticalBorderThickness;
 					docked_left_ = true;
 				} else if (docked_left_) {
 					docked_left_ = false;
 				}
-				if (new_left >= (max_x - w) && new_left <= (max_x - w) + VT_B_PIXMAP_THICKNESS) {
-					new_left = (max_x - w) + VT_B_PIXMAP_THICKNESS;
+				if (new_left >= (max_x - w) && new_left <= (max_x - w) + kVerticalBorderThickness) {
+					new_left = (max_x - w) + kVerticalBorderThickness;
 					docked_right_ = true;
 				} else if (docked_right_) {
 					docked_right_ = false;
 				}
 				if (!is_minimal_) {  //  minimal windows can not be bottom-docked
-					if (new_top >= (max_y - h) && new_top <= (max_y - h) + BT_B_PIXMAP_THICKNESS) {
-						new_top = (max_y - h) + BT_B_PIXMAP_THICKNESS;
+					if (new_top >= (max_y - h) && new_top <= (max_y - h) + kBottomBorderThickness) {
+						new_top = (max_y - h) + kBottomBorderThickness;
 						docked_bottom_ = true;
 					} else if (docked_bottom_) {
 						docked_bottom_ = false;

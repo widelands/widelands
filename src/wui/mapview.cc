@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@
 
 #include "wui/mapview.h"
 
-#include <SDL.h>
+#include <SDL_timer.h>
 
 #include "base/macros.h"
 #include "base/math.h"
@@ -652,15 +652,26 @@ bool MapView::handle_key(bool down, SDL_Keysym code) {
 	}
 
 	switch (code.sym) {
+	case SDLK_KP_PLUS:
 	case SDLK_PLUS:
+	case SDLK_EQUALS:
 		increase_zoom();
 		return true;
+
+	case SDLK_KP_MINUS:
 	case SDLK_MINUS:
 		decrease_zoom();
 		return true;
+
+	case SDLK_KP_0:
+		if (!(code.mod & KMOD_NUM)) {
+			return false;
+		}
+		FALLS_THROUGH;
 	case SDLK_0:
 		reset_zoom();
 		return true;
+
 	default:
 		return false;
 	}

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-02-21 18:05+0000\n"
-"PO-Revision-Date: 2020-02-25 20:48+0000\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-05-22 17:25+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -381,7 +381,7 @@ msgid ""
 " replay to become incompatible and to ‘go out of sync’. This is similar to "
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
-msgstr "Im Höövdmenü kannst du »Upteken ankieken« utkören, um een Speel, wat du maal spöölt hest, nipp un nau antokieken. Aver Achtung! Elkeen Ännerung in de Speeldaten of Widelands sülvst, ok heel lütte, könen daarför sörgen, dat dat Upteken nich mehr mit de Speel verdragelk is un sük »verschufft«. Dat is jüüst so, as wenn twee Spelers bi'm Spölen övr 't Internett verschedene Widelands-Versionen bruken un sük dann de Spelen verschuven."
+msgstr "Im Höövdmenü kannst du »Upteken ankieken« utkören, um een Speel, wat du maal spöölt hest, nipp un nau antokieken. Aver Achtung! Elkeen Ännerung in de Speeldaten of Widelands sülvst, ok heel lütte, könen daarför sörgen, dat dat Upteken nich mehr mit de Speel verdragelk is un sük »verschufft«. Dat is jüüst so, as wenn twee Spelers bi'm Spölen över dat Internett verschedene Widelands-Versionen bruken un sük dann de Spelen verschuven."
 
 #: ../../data/txts/help/common_helptexts.lua:28
 #, lua-format
@@ -755,6 +755,53 @@ msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
 msgstr "Maak de Sicht mit de Muusraad of %1% groter of lütter. Drück %2%, um dat Vergrotern torüggtosetten."
 
 #: ../../data/txts/tips/general_game.lua:75
+msgid ""
+"Use the ‘,’ (comma) and ‘.’ (period) keys to quickly jump between recently "
+"visited locations."
+msgstr "Bruuk de Tasten »,« (Komma) un ».« (Punkt), um fix tüsken Steden to hüppen, wat du in de lesten Tied besöcht hest."
+
+#: ../../data/txts/tips/general_game.lua:79
+msgctxt "hotkey"
+msgid "Ctrl+(Page Up/Page Down)"
+msgstr "Strg+(Bild rup/Bild runner)"
+
+#: ../../data/txts/tips/general_game.lua:79
+msgctxt "hotkey"
+msgid "Page Up/Page Down"
+msgstr "Bild rup/Bild runner"
+
+#: ../../data/txts/tips/general_game.lua:79
+msgctxt "hotkey"
+msgid "Shift+(Page Up/Page Down)"
+msgstr "Umschalt+(Bild rup/Bild runner)"
+
+#: ../../data/txts/tips/general_game.lua:79
+msgid ""
+"Speed up or slow down the game with %1%. Use %2% for rapid change, %3% will "
+"adjust speed smoothly."
+msgstr "Maak dat Speel mit %1% fixer of langsamer. Bruuk %2% tum fixen Ännern of %3%, um de Gauheid sachte to ännern."
+
+#: ../../data/txts/tips/general_game.lua:83
+msgctxt "hotkey"
+msgid "Arrow keys"
+msgstr "Pieltasten"
+
+#: ../../data/txts/tips/general_game.lua:83
+msgctxt "hotkey"
+msgid "Ctrl+Arrow keys"
+msgstr "Strg+Pieltasten"
+
+#: ../../data/txts/tips/general_game.lua:83
+msgid ""
+"Move map view using %1%. %2% will move the view faster, %3% moves slowly."
+msgstr "Verschuuv de Kaart-Sicht mit de %1%. %2% verschuuvt de Sicht fixer, %3% langsamer."
+
+#: ../../data/txts/tips/general_game.lua:83
+msgctxt "hotkey"
+msgid "Shift+Arrow keys"
+msgstr "Umschalt+Pieltasten"
+
+#: ../../data/txts/tips/general_game.lua:87
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"

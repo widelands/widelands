@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # Markus7cz <markus7cz@gmail.com>, 2008
@@ -8,9 +8,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-12-10 17:11+0000\n"
-"PO-Revision-Date: 2019-12-10 17:18+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"PO-Revision-Date: 2020-01-10 13:02+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -83,7 +83,7 @@ msgstr "Zubr"
 msgid "Wolf"
 msgstr "Vlk"
 
-#: ../../data/world/immovables/bush1/init.lua:103
+#: ../../data/world/immovables/bush1/init.lua:105
 #: ../../data/world/immovables/bush2/init.lua:5
 #: ../../data/world/immovables/bush3/init.lua:5
 #: ../../data/world/immovables/bush4/init.lua:5
@@ -236,19 +236,19 @@ msgstr "Cesta"
 msgid "Alder (Sapling)"
 msgstr "Olše (sazenice)"
 
-#: ../../data/world/immovables/trees/alder/init.lua:43
+#: ../../data/world/immovables/trees/alder/init.lua:47
 msgid "Alder (Pole)"
 msgstr "Olše (stromek)"
 
-#: ../../data/world/immovables/trees/alder/init.lua:66
+#: ../../data/world/immovables/trees/alder/init.lua:74
 msgid "Alder (Mature)"
 msgstr "Olše (vzrostlá)"
 
-#: ../../data/world/immovables/trees/alder/init.lua:89
+#: ../../data/world/immovables/trees/alder/init.lua:101
 msgid "Alder (Old)"
 msgstr "Olše (stará)"
 
-#: ../../data/world/immovables/trees/alder/init.lua:90
+#: ../../data/world/immovables/trees/alder/init.lua:102
 msgid "Alder"
 msgstr "Olše"
 
@@ -256,19 +256,19 @@ msgstr "Olše"
 msgid "Aspen (Sapling)"
 msgstr "Osika (sazenice)"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:35
+#: ../../data/world/immovables/trees/aspen/init.lua:39
 msgid "Aspen (Pole)"
 msgstr "Osika (stromek)"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:58
+#: ../../data/world/immovables/trees/aspen/init.lua:66
 msgid "Aspen (Mature)"
 msgstr "Osika (vzrostlá)"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:84
+#: ../../data/world/immovables/trees/aspen/init.lua:96
 msgid "Aspen (Old)"
 msgstr "Osika (stará)"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:85
+#: ../../data/world/immovables/trees/aspen/init.lua:97
 msgid "Aspen"
 msgstr "Osika"
 
@@ -276,19 +276,19 @@ msgstr "Osika"
 msgid "Beech (Sapling)"
 msgstr "Buk (sazenice)"
 
-#: ../../data/world/immovables/trees/beech/init.lua:35
+#: ../../data/world/immovables/trees/beech/init.lua:39
 msgid "Beech (Pole)"
 msgstr "Buk (stromek)"
 
-#: ../../data/world/immovables/trees/beech/init.lua:58
+#: ../../data/world/immovables/trees/beech/init.lua:66
 msgid "Beech (Mature)"
 msgstr "Buk (vzrostlý)"
 
-#: ../../data/world/immovables/trees/beech/init.lua:81
+#: ../../data/world/immovables/trees/beech/init.lua:93
 msgid "Beech (Old)"
 msgstr "Buk (starý)"
 
-#: ../../data/world/immovables/trees/beech/init.lua:82
+#: ../../data/world/immovables/trees/beech/init.lua:94
 msgid "Beech"
 msgstr "Buk"
 
@@ -296,19 +296,19 @@ msgstr "Buk"
 msgid "Birch (Sapling)"
 msgstr "Bříza (sazenice)"
 
-#: ../../data/world/immovables/trees/birch/init.lua:35
+#: ../../data/world/immovables/trees/birch/init.lua:39
 msgid "Birch (Pole)"
 msgstr "Bříza (stromek)"
 
-#: ../../data/world/immovables/trees/birch/init.lua:58
+#: ../../data/world/immovables/trees/birch/init.lua:66
 msgid "Birch (Mature)"
 msgstr "Bříza (vzrostlá)"
 
-#: ../../data/world/immovables/trees/birch/init.lua:84
+#: ../../data/world/immovables/trees/birch/init.lua:96
 msgid "Birch (Old)"
 msgstr "Bříza (stará)"
 
-#: ../../data/world/immovables/trees/birch/init.lua:85
+#: ../../data/world/immovables/trees/birch/init.lua:97
 msgid "Birch"
 msgstr "Bříza"
 
@@ -318,22 +318,22 @@ msgid "Cirrus Tree (Sapling)"
 msgstr "Oblakový strom (sazenice)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:37
+#: ../../data/world/immovables/trees/cirrus/init.lua:41
 msgid "Cirrus Tree (Pole)"
 msgstr "Oblakový strom (stromek)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:61
+#: ../../data/world/immovables/trees/cirrus/init.lua:69
 msgid "Cirrus Tree (Mature)"
 msgstr "Oblakový strom (vzrostlý)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:85
+#: ../../data/world/immovables/trees/cirrus/init.lua:97
 msgid "Cirrus Tree (Old)"
 msgstr "Oblakový strom (starý)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:87
+#: ../../data/world/immovables/trees/cirrus/init.lua:99
 msgid "Cirrus Tree"
 msgstr "Citrus"
 
@@ -354,19 +354,19 @@ msgstr "Spadlý strom"
 msgid "Larch (Sapling)"
 msgstr "Modřín (sazenice)"
 
-#: ../../data/world/immovables/trees/larch/init.lua:35
+#: ../../data/world/immovables/trees/larch/init.lua:39
 msgid "Larch (Pole)"
 msgstr "Modřín (stromek)"
 
-#: ../../data/world/immovables/trees/larch/init.lua:58
+#: ../../data/world/immovables/trees/larch/init.lua:66
 msgid "Larch (Mature)"
 msgstr "Modřín (vzrostlý)"
 
-#: ../../data/world/immovables/trees/larch/init.lua:81
+#: ../../data/world/immovables/trees/larch/init.lua:93
 msgid "Larch (Old)"
 msgstr "Modřín (starý)"
 
-#: ../../data/world/immovables/trees/larch/init.lua:82
+#: ../../data/world/immovables/trees/larch/init.lua:94
 msgid "Larch"
 msgstr "Modřín"
 
@@ -376,22 +376,22 @@ msgid "Liana Tree (Sapling)"
 msgstr "Liánový strom (sazenice)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:37
+#: ../../data/world/immovables/trees/liana/init.lua:41
 msgid "Liana Tree (Pole)"
 msgstr "Liánový strom (stromek)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:61
+#: ../../data/world/immovables/trees/liana/init.lua:69
 msgid "Liana Tree (Mature)"
 msgstr "Liánový strom (vzrostlý)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:88
+#: ../../data/world/immovables/trees/liana/init.lua:100
 msgid "Liana Tree (Old)"
 msgstr "Liánový strom (starý)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:90
+#: ../../data/world/immovables/trees/liana/init.lua:102
 msgid "Liana Tree"
 msgstr "Liánový strom"
 
@@ -399,19 +399,19 @@ msgstr "Liánový strom"
 msgid "Maple (Sapling)"
 msgstr "Javor (sazenice)"
 
-#: ../../data/world/immovables/trees/maple/init.lua:35
+#: ../../data/world/immovables/trees/maple/init.lua:39
 msgid "Maple (Pole)"
 msgstr "Javor (stromek)"
 
-#: ../../data/world/immovables/trees/maple/init.lua:58
+#: ../../data/world/immovables/trees/maple/init.lua:66
 msgid "Maple (Mature)"
 msgstr "Javor (vzrostlý)"
 
-#: ../../data/world/immovables/trees/maple/init.lua:81
+#: ../../data/world/immovables/trees/maple/init.lua:93
 msgid "Maple (Old)"
 msgstr "Javor (starý)"
 
-#: ../../data/world/immovables/trees/maple/init.lua:82
+#: ../../data/world/immovables/trees/maple/init.lua:94
 msgid "Maple"
 msgstr "Javor"
 
@@ -421,22 +421,22 @@ msgid "Dark Mushroom Tree (Sapling)"
 msgstr "Stromová černá houba (sazenice)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:37
+#: ../../data/world/immovables/trees/mushroom_dark/init.lua:41
 msgid "Dark Mushroom Tree (Pole)"
 msgstr "Stromová černá houba (stromek)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:61
+#: ../../data/world/immovables/trees/mushroom_dark/init.lua:69
 msgid "Dark Mushroom Tree (Mature)"
 msgstr "Stromová černá houba (vzrostlá)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:85
+#: ../../data/world/immovables/trees/mushroom_dark/init.lua:97
 msgid "Dark Mushroom Tree (Old)"
 msgstr "Stromová černá houba (stará)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:87
+#: ../../data/world/immovables/trees/mushroom_dark/init.lua:99
 msgid "Dark Mushroom Tree"
 msgstr "Černá stromová houba"
 
@@ -446,22 +446,22 @@ msgid "Green Mushroom Tree (Sapling)"
 msgstr "Stromová zelená houba (sazenice)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:37
+#: ../../data/world/immovables/trees/mushroom_green/init.lua:41
 msgid "Green Mushroom Tree (Pole)"
 msgstr "Stromová zelená houba (stromek)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:61
+#: ../../data/world/immovables/trees/mushroom_green/init.lua:69
 msgid "Green Mushroom Tree (Mature)"
 msgstr "Stromová zelená houba (vzrostlá)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:85
+#: ../../data/world/immovables/trees/mushroom_green/init.lua:97
 msgid "Green Mushroom Tree (Old)"
 msgstr "Stromová zelená houba (stará)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:87
+#: ../../data/world/immovables/trees/mushroom_green/init.lua:99
 msgid "Green Mushroom Tree"
 msgstr "Zelená stromová houba"
 
@@ -471,22 +471,22 @@ msgid "Red Mushroom Tree (Sapling)"
 msgstr "Stromová červená houba (sazenice)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:37
+#: ../../data/world/immovables/trees/mushroom_red/init.lua:41
 msgid "Red Mushroom Tree (Pole)"
 msgstr "Stromová červená houba (stromek)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:61
+#: ../../data/world/immovables/trees/mushroom_red/init.lua:69
 msgid "Red Mushroom Tree (Mature)"
 msgstr "Stromová červená houba (vzrostlá)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:88
+#: ../../data/world/immovables/trees/mushroom_red/init.lua:100
 msgid "Red Mushroom Tree (Old)"
 msgstr "Stromová červená houba (stará)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:90
+#: ../../data/world/immovables/trees/mushroom_red/init.lua:102
 msgid "Red Mushroom Tree"
 msgstr "Červená stromová houba"
 
@@ -494,19 +494,19 @@ msgstr "Červená stromová houba"
 msgid "Oak (Sapling)"
 msgstr "Dub (sazenice)"
 
-#: ../../data/world/immovables/trees/oak/init.lua:35
+#: ../../data/world/immovables/trees/oak/init.lua:39
 msgid "Oak (Pole)"
 msgstr "Dub (stromek)"
 
-#: ../../data/world/immovables/trees/oak/init.lua:58
+#: ../../data/world/immovables/trees/oak/init.lua:66
 msgid "Oak (Mature)"
 msgstr "Dub (vzrostlý)"
 
-#: ../../data/world/immovables/trees/oak/init.lua:81
+#: ../../data/world/immovables/trees/oak/init.lua:93
 msgid "Oak (Old)"
 msgstr "Dub (starý)"
 
-#: ../../data/world/immovables/trees/oak/init.lua:82
+#: ../../data/world/immovables/trees/oak/init.lua:94
 msgid "Oak"
 msgstr "Dub"
 
@@ -514,19 +514,19 @@ msgstr "Dub"
 msgid "Borassus Palm (Sapling)"
 msgstr "Lontarová palma (sazenice)"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:35
+#: ../../data/world/immovables/trees/palm_borassus/init.lua:39
 msgid "Borassus Palm (Pole)"
 msgstr "Lontarová palma (stromek)"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:58
+#: ../../data/world/immovables/trees/palm_borassus/init.lua:66
 msgid "Borassus Palm (Mature)"
 msgstr "Lontarová palma (vzrostlá)"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:81
+#: ../../data/world/immovables/trees/palm_borassus/init.lua:93
 msgid "Borassus Palm (Old)"
 msgstr "Lontarová palma (stará)"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:82
+#: ../../data/world/immovables/trees/palm_borassus/init.lua:94
 msgid "Borassus Palm"
 msgstr "Lontarová palma"
 
@@ -534,19 +534,19 @@ msgstr "Lontarová palma"
 msgid "Coconut Palm (Sapling)"
 msgstr "Kokosová palma (sazenice)"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:35
+#: ../../data/world/immovables/trees/palm_coconut/init.lua:39
 msgid "Coconut Palm (Pole)"
 msgstr "Kokosová palma (stromek)"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:58
+#: ../../data/world/immovables/trees/palm_coconut/init.lua:66
 msgid "Coconut Palm (Mature)"
 msgstr "Kokosová palma (vzrostlá)"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:81
+#: ../../data/world/immovables/trees/palm_coconut/init.lua:93
 msgid "Coconut Palm (Old)"
 msgstr "Kokosová palma (stará)"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:82
+#: ../../data/world/immovables/trees/palm_coconut/init.lua:94
 msgid "Coconut Palm"
 msgstr "Kokosová palma"
 
@@ -554,19 +554,19 @@ msgstr "Kokosová palma"
 msgid "Date Palm (Sapling)"
 msgstr "Datlová palma (sazenice)"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:35
+#: ../../data/world/immovables/trees/palm_date/init.lua:39
 msgid "Date Palm (Pole)"
 msgstr "Datlová palma (stromek)"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:58
+#: ../../data/world/immovables/trees/palm_date/init.lua:66
 msgid "Date Palm (Mature)"
 msgstr "Datlová palma (vzrostlá)"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:84
+#: ../../data/world/immovables/trees/palm_date/init.lua:96
 msgid "Date Palm (Old)"
 msgstr "Datlová palma (stará)"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:85
+#: ../../data/world/immovables/trees/palm_date/init.lua:97
 msgid "Date Palm"
 msgstr "Datlová palma"
 
@@ -574,19 +574,19 @@ msgstr "Datlová palma"
 msgid "Oil Palm (Sapling)"
 msgstr "Olejová palma (sazenice)"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:35
+#: ../../data/world/immovables/trees/palm_oil/init.lua:39
 msgid "Oil Palm (Pole)"
 msgstr "Olejová palma (stromek)"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:58
+#: ../../data/world/immovables/trees/palm_oil/init.lua:66
 msgid "Oil Palm (Mature)"
 msgstr "Olejová palma (vzrostlá)"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:85
+#: ../../data/world/immovables/trees/palm_oil/init.lua:97
 msgid "Oil Palm (Old)"
 msgstr "Olejová palma (stará)"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:86
+#: ../../data/world/immovables/trees/palm_oil/init.lua:98
 msgid "Oil Palm"
 msgstr "Olejná palma"
 
@@ -594,19 +594,19 @@ msgstr "Olejná palma"
 msgid "Roystonea regia Palm (Sapling)"
 msgstr "Palma královská (sazenice)"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:35
+#: ../../data/world/immovables/trees/palm_roystonea/init.lua:39
 msgid "Roystonea regia Palm (Pole)"
 msgstr "Palma královská (stromek)"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:58
+#: ../../data/world/immovables/trees/palm_roystonea/init.lua:66
 msgid "Roystonea regia Palm (Mature)"
 msgstr "Palma královská (vzrostlá)"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:81
+#: ../../data/world/immovables/trees/palm_roystonea/init.lua:93
 msgid "Roystonea regia Palm (Old)"
 msgstr "Palma královská (stará)"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:82
+#: ../../data/world/immovables/trees/palm_roystonea/init.lua:94
 msgid "Roystonea regia Palm"
 msgstr "Palma královská"
 
@@ -614,19 +614,19 @@ msgstr "Palma královská"
 msgid "Rowan (Sapling)"
 msgstr "Jeřabina (sazenice)"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:35
+#: ../../data/world/immovables/trees/rowan/init.lua:39
 msgid "Rowan (Pole)"
 msgstr "Jeřabina (stromek)"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:58
+#: ../../data/world/immovables/trees/rowan/init.lua:66
 msgid "Rowan (Mature)"
 msgstr "Jeřabina (vzrostlá)"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:84
+#: ../../data/world/immovables/trees/rowan/init.lua:96
 msgid "Rowan (Old)"
 msgstr "Jeřabina (stará)"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:85
+#: ../../data/world/immovables/trees/rowan/init.lua:97
 msgid "Rowan"
 msgstr "Jeřáb"
 
@@ -634,19 +634,19 @@ msgstr "Jeřáb"
 msgid "Spruce (Sapling)"
 msgstr "Smrk (sazenice)"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:35
+#: ../../data/world/immovables/trees/spruce/init.lua:39
 msgid "Spruce (Pole)"
 msgstr "Smrk (stromek)"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:58
+#: ../../data/world/immovables/trees/spruce/init.lua:66
 msgid "Spruce (Mature)"
 msgstr "Smrk (vzrostlý)"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:81
+#: ../../data/world/immovables/trees/spruce/init.lua:93
 msgid "Spruce (Old)"
 msgstr "Smrk (starý)"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:82
+#: ../../data/world/immovables/trees/spruce/init.lua:94
 msgid "Spruce"
 msgstr "Smrk"
 
@@ -656,22 +656,22 @@ msgid "Twine Tree (Sapling)"
 msgstr "Motouzový strom (sazenice)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:37
+#: ../../data/world/immovables/trees/twine/init.lua:41
 msgid "Twine Tree (Pole)"
 msgstr "Motouzový strom (stromek)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:61
+#: ../../data/world/immovables/trees/twine/init.lua:69
 msgid "Twine Tree (Mature)"
 msgstr "Motouzový strom (vzrostlý)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:85
+#: ../../data/world/immovables/trees/twine/init.lua:97
 msgid "Twine Tree (Old)"
 msgstr "Motouzový strom (starý)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:87
+#: ../../data/world/immovables/trees/twine/init.lua:99
 msgid "Twine Tree"
 msgstr "Motouzový strom"
 
@@ -681,22 +681,22 @@ msgid "Green Umbrella Tree (Sapling)"
 msgstr "Zelený deštníkový strom (sazenice)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:37
+#: ../../data/world/immovables/trees/umbrella_green/init.lua:41
 msgid "Green Umbrella Tree (Pole)"
 msgstr "Zelený deštníkový strom (stromek)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:61
+#: ../../data/world/immovables/trees/umbrella_green/init.lua:69
 msgid "Green Umbrella Tree (Mature)"
 msgstr "Zelený deštníkový strom (vzrostlý)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:85
+#: ../../data/world/immovables/trees/umbrella_green/init.lua:97
 msgid "Green Umbrella Tree (Old)"
 msgstr "Zelený deštníkový strom (starý)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:87
+#: ../../data/world/immovables/trees/umbrella_green/init.lua:99
 msgid "Green Umbrella Tree"
 msgstr "Zelený deštníkový strom"
 
@@ -706,133 +706,137 @@ msgid "Red Umbrella Tree (Sapling)"
 msgstr "Červený deštníkový strom (sazenice)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:37
+#: ../../data/world/immovables/trees/umbrella_red/init.lua:41
 msgid "Red Umbrella Tree (Pole)"
 msgstr "Červený deštníkový strom (stromek)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:61
+#: ../../data/world/immovables/trees/umbrella_red/init.lua:69
 msgid "Red Umbrella Tree (Mature)"
 msgstr "Červený deštníkový strom (vzrostlý)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:88
+#: ../../data/world/immovables/trees/umbrella_red/init.lua:100
 msgid "Red Umbrella Tree (Old)"
 msgstr "Červený deštníkový strom (starý)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:90
+#: ../../data/world/immovables/trees/umbrella_red/init.lua:102
 msgid "Red Umbrella Tree"
 msgstr "Červený deštníkový strom"
 
-#: ../../data/world/init.lua:24
-msgid "Loading world: Resources (1/4)"
+#: ../../data/world/init.lua:17
+msgid "Loading world: %1$s (%2$d/%3$d)"
 msgstr ""
 
-#: ../../data/world/init.lua:29
-msgid "Loading world: Terrains (2/4)"
+#: ../../data/world/init.lua:27
+msgid "Resources"
 msgstr ""
 
-#: ../../data/world/init.lua:39
+#: ../../data/world/init.lua:32
+msgid "Terrains"
+msgstr ""
+
+#: ../../data/world/init.lua:42
 msgid "Summer"
 msgstr "Léto"
 
-#: ../../data/world/init.lua:45
+#: ../../data/world/init.lua:48
 msgid "Wasteland"
 msgstr "Pustina"
 
-#: ../../data/world/init.lua:51
+#: ../../data/world/init.lua:54
 msgid "Winter"
 msgstr "Zima"
 
-#: ../../data/world/init.lua:57
+#: ../../data/world/init.lua:60
 msgid "Desert"
 msgstr "Poušť"
 
-#: ../../data/world/init.lua:66
-msgid "Loading world: Immovables (3/4)"
+#: ../../data/world/init.lua:69
+msgid "Immovables"
 msgstr ""
 
-#: ../../data/world/init.lua:75
+#: ../../data/world/init.lua:78
 msgid "Miscellaneous"
 msgstr "Různé"
 
-#: ../../data/world/init.lua:110
+#: ../../data/world/init.lua:113
 msgid "Artifacts"
 msgstr "Artefakty"
 
-#: ../../data/world/init.lua:110
+#: ../../data/world/init.lua:113
 msgid "These immovables are used by the win condition “Artifacts”."
 msgstr "Tyto nemovitosti jsou použity pro typ vítězství \"Artefakty\"."
 
-#: ../../data/world/init.lua:123
+#: ../../data/world/init.lua:126
 msgid "Plants"
 msgstr "Rostliny"
 
-#: ../../data/world/init.lua:144
+#: ../../data/world/init.lua:147
 msgid "Standing Stones"
 msgstr "Menhiry"
 
-#: ../../data/world/init.lua:175
+#: ../../data/world/init.lua:178
 msgid "Rocks"
 msgstr "Skály"
 
-#: ../../data/world/init.lua:208
+#: ../../data/world/init.lua:211
 msgid "Dead Trees"
 msgstr "Suché stromy"
 
-#: ../../data/world/init.lua:215
+#: ../../data/world/init.lua:218
 msgid "Coniferous Trees"
 msgstr "Jehličnany"
 
-#: ../../data/world/init.lua:222
+#: ../../data/world/init.lua:225
 msgid "Deciduous Trees"
 msgstr "Listnaté stromy"
 
-#: ../../data/world/init.lua:229
+#: ../../data/world/init.lua:232
 msgid "Palm Trees"
 msgstr "Palmy"
 
-#: ../../data/world/init.lua:236
+#: ../../data/world/init.lua:239
 msgid "Wasteland Trees"
 msgstr "Pustinné stromy"
 
-#: ../../data/world/init.lua:273
-msgid "Loading world: Animals (4/4)"
+#: ../../data/world/init.lua:276
+msgid "Animals"
 msgstr ""
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:284
+#: ../../data/world/init.lua:287
 msgid "Herbivores"
 msgstr "Býložravci"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:303
+#: ../../data/world/init.lua:306
 msgid "Carnivores"
 msgstr "Masožravci"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:319
+#: ../../data/world/init.lua:322
 msgid "Aquatic"
 msgstr "Vodní"
 
-#: ../../data/world/resources/init.lua:84
+#: ../../data/world/resources/init.lua:81
 msgid "Coal"
 msgstr "Uhlí"
 
-#: ../../data/world/resources/init.lua:100
+#: ../../data/world/resources/init.lua:97
 msgid "Gold"
 msgstr "Zlato"
 
-#: ../../data/world/resources/init.lua:116
+#: ../../data/world/resources/init.lua:113
 msgid "Iron"
 msgstr "Železo"
 
-#: ../../data/world/resources/init.lua:132
+#: ../../data/world/resources/init.lua:129
 msgid "Stones"
 msgstr "Kameny"
 
-#: ../../data/world/resources/init.lua:148
+#: ../../data/world/resources/init.lua:145
 #: ../../data/world/terrains/init.lua:469
 #: ../../data/world/terrains/init.lua:792
 #: ../../data/world/terrains/init.lua:1102
@@ -840,7 +844,7 @@ msgstr "Kameny"
 msgid "Water"
 msgstr "Voda"
 
-#: ../../data/world/resources/init.lua:164
+#: ../../data/world/resources/init.lua:161
 msgid "Fish"
 msgstr "Ryba"
 

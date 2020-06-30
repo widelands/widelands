@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -747,34 +747,38 @@ void CmdExpeditionConfig::write(FileWrite& fw, EditorGameBase& egbase, MapObject
 /*** Cmd_EnhanceBuilding ***/
 
 CmdEnhanceBuilding::CmdEnhanceBuilding(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
-	serial = des.unsigned_32();
-	bi = des.unsigned_16();
+	serial_ = des.unsigned_32();
+	bi_ = des.unsigned_16();
+	keep_wares_ = des.unsigned_8();
 }
 
 void CmdEnhanceBuilding::execute(Game& game) {
-	MapObject* mo = game.objects().get_object(serial);
+	MapObject* mo = game.objects().get_object(serial_);
 	if (upcast(ConstructionSite, cs, mo)) {
 		cs->enhance(game);
 	} else if (upcast(Building, building, mo)) {
-		game.get_player(sender())->enhance_building(building, bi);
+		game.get_player(sender())->enhance_building(building, bi_, keep_wares_);
 	}
 }
 
 void CmdEnhanceBuilding::serialize(StreamWrite& ser) {
 	write_id_and_sender(ser);
-	ser.unsigned_32(serial);
-	ser.unsigned_16(bi);
+	ser.unsigned_32(serial_);
+	ser.unsigned_16(bi_);
+	ser.unsigned_8(keep_wares_ ? 1 : 0);
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdEnhanceBuilding = 1;
+constexpr uint16_t kCurrentPacketVersionCmdEnhanceBuilding = 2;
 
 void CmdEnhanceBuilding::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionCmdEnhanceBuilding) {
+		if (packet_version <= kCurrentPacketVersionCmdEnhanceBuilding && packet_version >= 1) {
 			PlayerCommand::read(fr, egbase, mol);
-			serial = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
-			bi = fr.unsigned_16();
+			serial_ = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
+			bi_ = fr.unsigned_16();
+			// TODO(Nordfriese): Savegame compatibility
+			keep_wares_ = packet_version >= 2 && fr.unsigned_8();
 		} else {
 			throw UnhandledVersionError(
 			   "CmdEnhanceBuilding", packet_version, kCurrentPacketVersionCmdEnhanceBuilding);
@@ -784,41 +788,41 @@ void CmdEnhanceBuilding::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoa
 	}
 }
 void CmdEnhanceBuilding::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
-	// First, write version
 	fw.unsigned_16(kCurrentPacketVersionCmdEnhanceBuilding);
-	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
-
-	// Now serial
-	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
-
-	// Now id
-	fw.unsigned_16(bi);
+	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
+	fw.unsigned_16(bi_);
+	fw.unsigned_8(keep_wares_ ? 1 : 0);
 }
 
 /*** Cmd_DismantleBuilding ***/
 CmdDismantleBuilding::CmdDismantleBuilding(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
-	serial = des.unsigned_32();
+	serial_ = des.unsigned_32();
+	keep_wares_ = des.unsigned_8();
 }
 
 void CmdDismantleBuilding::execute(Game& game) {
-	if (upcast(Building, building, game.objects().get_object(serial)))
-		game.get_player(sender())->dismantle_building(building);
+	if (upcast(Building, building, game.objects().get_object(serial_))) {
+		game.get_player(sender())->dismantle_building(building, keep_wares_);
+	}
 }
 
 void CmdDismantleBuilding::serialize(StreamWrite& ser) {
 	write_id_and_sender(ser);
-	ser.unsigned_32(serial);
+	ser.unsigned_32(serial_);
+	ser.unsigned_8(keep_wares_ ? 1 : 0);
 }
 
-constexpr uint16_t kCurrentPacketVersionDismantleBuilding = 1;
+constexpr uint16_t kCurrentPacketVersionDismantleBuilding = 2;
 
 void CmdDismantleBuilding::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionDismantleBuilding) {
+		if (packet_version <= kCurrentPacketVersionDismantleBuilding && packet_version >= 1) {
 			PlayerCommand::read(fr, egbase, mol);
-			serial = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
+			serial_ = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
+			// TODO(Nordfriese): Savegame compatibility
+			keep_wares_ = packet_version >= 2 && fr.unsigned_8();
 		} else {
 			throw UnhandledVersionError(
 			   "CmdDismantleBuilding", packet_version, kCurrentPacketVersionDismantleBuilding);
@@ -834,7 +838,8 @@ void CmdDismantleBuilding::write(FileWrite& fw, EditorGameBase& egbase, MapObjec
 	PlayerCommand::write(fw, egbase, mos);
 
 	// Now serial
-	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
+	fw.unsigned_8(keep_wares_ ? 1 : 0);
 }
 
 /*** Cmd_EvictWorker ***/

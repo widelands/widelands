@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2019 by the Widelands Development Team
+ * Copyright (C) 2011-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 #include <memory>
 
 #include "base/macros.h"
+#include "economy/shipping_schedule.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "logic/path.h"
@@ -32,9 +33,7 @@ namespace Widelands {
 
 class Economy;
 struct Flag;
-class PortDock;
 struct RoutingNodeNeighbour;
-struct Ship;
 
 class ShipFleetDescr : public MapObjectDescr {
 public:
@@ -48,7 +47,7 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(ShipFleetDescr);
 };
 
-constexpr int32_t kFleetInterval = 5000;
+constexpr int32_t kFleetInterval = 4000;
 constexpr uint32_t kRouteNotCalculated = std::numeric_limits<uint32_t>::max();
 
 /**
@@ -93,7 +92,7 @@ struct ShipFleet : MapObject {
 	void cleanup(EditorGameBase&) override;
 	void update(EditorGameBase&);
 
-	void add_ship(Ship* ship);
+	void add_ship(EditorGameBase&, Ship* ship);
 	void remove_ship(EditorGameBase& egbase, Ship* ship);
 	void add_port(EditorGameBase& egbase, PortDock* port);
 	void remove_port(EditorGameBase& egbase, PortDock* port);
@@ -105,11 +104,21 @@ struct ShipFleet : MapObject {
 	void add_neighbours(PortDock& pd, std::vector<RoutingNodeNeighbour>& neighbours);
 
 	uint32_t count_ships() const;
-	uint32_t count_ships_heading_here(EditorGameBase& egbase, PortDock* port) const;
 	uint32_t count_ports() const;
 	bool get_act_pending() const;
 
 	bool empty() const;
+
+	ShippingSchedule& get_schedule() {
+		return schedule_;
+	}
+
+	std::vector<Ship*>& get_ships() {
+		return ships_;
+	}
+	std::vector<PortDock*>& get_ports() {
+		return ports_;
+	}
 
 protected:
 	void act(Game&, uint32_t data) override;
@@ -125,9 +134,6 @@ private:
 	PortPath& portpath_bidir(uint32_t i, uint32_t j, bool& reverse);
 	const PortPath& portpath_bidir(uint32_t i, uint32_t j, bool& reverse) const;
 
-	bool penalize_route(Game&, PortDock&, const Ship&, uint32_t*);
-	void check_push_destination(Game&, Ship&, const PortDock&, PortDock&, uint32_t);
-
 	std::vector<Ship*> ships_;
 	std::vector<PortDock*> ports_;
 
@@ -141,6 +147,8 @@ private:
 	 */
 	std::vector<PortPath> portpaths_;
 
+	ShippingSchedule schedule_;
+
 	// saving and loading
 protected:
 	struct Loader : MapObject::Loader {
@@ -149,6 +157,8 @@ protected:
 		void load(FileRead&);
 		void load_pointers() override;
 		void load_finish() override;
+
+		uint8_t packet_version_;
 
 	private:
 		std::vector<uint32_t> ships_;
@@ -162,7 +172,6 @@ public:
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 
 	static MapObject::Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);
-	void push_next_destinations(Game&, Ship&, const PortDock& from_port);
 };
 
 }  // namespace Widelands
