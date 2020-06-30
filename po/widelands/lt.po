@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-06-28 07:45+0000\n"
-"PO-Revision-Date: 2020-06-28 19:39+0000\n"
+"POT-Creation-Date: 2020-06-29 17:06+0000\n"
+"PO-Revision-Date: 2020-06-29 20:30+0000\n"
 "Last-Translator: Tachionas Neonas <tachionexas@gmail.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/widelands/widelands/language/lt/)\n"
 "MIME-Version: 1.0\n"
@@ -1075,11 +1075,11 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:356
 msgid "Map saved"
-msgstr ""
+msgstr "Žemėlapis išsaugotas"
 
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:43
 msgid "Enter Directory Name:"
-msgstr ""
+msgstr "Įvesk katalogo pavadinimą:"
 
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:98
 msgid "This extension is reserved!"
@@ -1087,18 +1087,18 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/map_size_box.cc:35
 msgid "Width"
-msgstr ""
+msgstr "Plotis"
 
 #: ../../src/editor/ui_menus/map_size_box.cc:46
 msgid "Height"
-msgstr ""
+msgstr "Aukštis"
 
 #. * TRANSLATORS: Window title in the editor when a player has selected more
 #. than the
 #. recommended number of players
 #: ../../src/editor/ui_menus/player_menu.cc:48
 msgid "Too Many Players"
-msgstr ""
+msgstr "Per daug žaidėjų"
 
 #. * TRANSLATORS: Info text in editor player menu when a player has selected
 #. more than the
@@ -1114,19 +1114,19 @@ msgstr ""
 #. testing purposes. Are you sure that you want more than 8 players?'
 #: ../../src/editor/ui_menus/player_menu.cc:65
 msgid "Do not remind me again"
-msgstr ""
+msgstr "Nebepriminti"
 
 #: ../../src/editor/ui_menus/player_menu.cc:68
 msgid "Abort"
-msgstr ""
+msgstr "Nutraukti"
 
 #: ../../src/editor/ui_menus/player_menu.cc:120
 msgid "Player Options"
-msgstr ""
+msgstr "Žaidėjo parinktys"
 
 #: ../../src/editor/ui_menus/player_menu.cc:129 ../../src/wui/maptable.cc:30
 msgid "Number of players"
-msgstr ""
+msgstr "Žaidėjų skaičius"
 
 #. * TRANSLATORS: Default player name, e.g. Player 1
 #: ../../src/editor/ui_menus/player_menu.cc:147
