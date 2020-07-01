@@ -17,7 +17,7 @@ An add-on contains a plain-text ini-style file called ``addons`` with the follow
 * ``i18n_name``: Identical to ``name`` but marked for translation with '_'
 * ``description``: The untranslated long description
 * ``i18n_description``: Identical to ``description`` but marked for translation with '_'
-* ``author``: The add-on's author name
+* ``author``: The add-on’s author name
 * ``version``: The version number (1 for new add-ons)
 * ``category``: One of "tribes", "world", "script", "maps", "campaign", "win_condition", "starting_condition"
 * ``requires``: A comma-separated list of the filenames of add-ons required by this add-on. Currently requirements are not yet implemented and this value is ignored.
@@ -88,14 +88,14 @@ One or more complete campaigns.
 
 The add-on needs to contain a script called ``campaigns.lua`` containing the campaign definition. For details see the official campaign script ``data/campaigns/campaigns.lua``.
 
-The campaign scenarios is by default assumed to be located in the official ``data/campaigns`` directory. To specify that it is located in an add-on, prefix the name with the add-on's internal name followed by a colon (e.g. "example-campaign.wad:example.wmf").
+The campaign scenarios is by default assumed to be located in the official ``data/campaigns`` directory. To specify that it is located in an add-on, prefix the name with the add-on’s internal name followed by a colon (e.g. "example-campaign.wad:example.wmf").
 
 
 win_condition
 ~~~~~~~~~~~~~
 A win condition script.
 
-The add-on needs to contain a script called ``init.lua`` which must follow the same conventions as the files in ``data/scripting/win_conditions/*.lua`` with one exception: The win condition table should specify the optional ``textdomain`` field which should be equal to the add-on's internal name (see `Translating`_).
+The add-on needs to contain a script called ``init.lua`` which must follow the same conventions as the files in ``data/scripting/win_conditions/*.lua`` with one exception: The win condition table should specify the optional ``textdomain`` field which should be equal to the add-on’s internal name (see `Translating`_).
 
 
 starting_condition
@@ -108,7 +108,7 @@ The add-on needs to contain one or more scripts called ``<tribename>.lua`` which
 Restrictions
 ------------
 
-The order of add-ons matters. Add-ons can be reordered in the in-game add-ons manager. Enabled add-ons will be executed from top to bottom. If you enable one add-on A that adds a new worker type that requires experience and another add-on B that modifies all workers' experience thresholds, the new worker's experience will be modified by B if and only if B is loaded later than A.
+The order of add-ons matters. Add-ons can be reordered in the in-game add-ons manager. Enabled add-ons will be executed from top to bottom. If you enable one add-on A that adds a new worker type that requires experience and another add-on B that modifies all workers’ experience thresholds, the new worker’s experience will be modified by B if and only if B is loaded later than A.
 
 In the editor, world (but not tribes) add-ons will be run, allowing you to create maps with new worlds. The information which add-ons a map was created with is stored in the map file. When opening a map in the editor or starting a new game, the world add-ons required by the map will be enabled and all other world add-ons disabled. Therefore map designers need to choose the add-ons they want to use prior to launching the editor; the choice can not be modified later. Their choice of world add-ons will also be enforced whenever someone starts a game on that map. Script add-ons are ignored by the editor. Tribes add-ons are also ignored; therefore it is not possible to recommend an add-on-defined tribe as the default tribe for a player.
 
@@ -130,7 +130,7 @@ Add-on upgrades may break compatibility between versions; therefore, savegames a
 Verification
 ------------
 
-Add-ons can potentially contain harmful or offensive content. The Widelands development team will attempt to moderate add-ons uploaded to the server: Add-ons containing malicious content will be deleted, the other add-ons will be marked as "verified". The in-game add-ons manager displays an indicator next to each add-on whether it was verified by the developers yet. By default, only verified add-ons are displayed; users can change this behaviour in the add-on manager's Filter tab.
+Add-ons can potentially contain harmful or offensive content. The Widelands development team will attempt to moderate add-ons uploaded to the server: Add-ons containing malicious content will be deleted, the other add-ons will be marked as "verified". The in-game add-ons manager displays an indicator next to each add-on whether it was verified by the developers yet. By default, only verified add-ons are displayed; users can change this behaviour in the add-on manager’s Filter tab.
 
 
 Translating
@@ -141,8 +141,6 @@ In order to not have to release a new version whenever translations change, tran
 The textdomain for an add-on is called ``internal-addon-name.wad``. The strings in the add-on config file, as well as map elemental data for Map Set add-ons, will be fetched from this textdomain. All Lua scripts shipped with the add-on will need to explicitly set the said textdomain. NOTE that you need to use the special function ``set_addon_textdomain("internal-addon-name.wad")`` to ensure that the textdomain will be looked for among the add-ons-specific translation files rather than in the locale directory shipped with the official game.
 
 The server will keep a repository of all add-on MO files which will be automatically compiled from the latest Transifex translations weekly. Downloading or upgrading an add-on will automatically download and install the latest translations files for this add-on for all languages. Each add-on has a translations version number in addition to the add-on version number; this allows the game to figure out whether the translations for an installed add-on can be upgraded.
-
-If you want to translate an add-on as long as we don't have a server yet, you will need to manually create a ``.po`` file for the add-on, populate it with all source strings found in the add-on, translate them, compile the file into a ``.mo`` file, and move that to ``~/.widelands/addons_i18n/nds/LC_MESSAGES/internal-addon-name.wad.mo`` (replacing ``nds`` and ``internal-addon-name.wad`` appropriately).
 
 
 License

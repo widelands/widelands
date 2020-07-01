@@ -848,13 +848,6 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 		}
 	}
 
-	if (best_suited_immovables_index.empty()) {
-		molog("  WARNING: No suitable immovable found!\n");
-		send_signal(game, "fail");
-		pop_task(game);
-		return true;
-	}
-
 	// Randomly pick one of the immovables to be planted.
 
 	// Each candidate is weighted by its probability to grow.
@@ -862,6 +855,13 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	for (const auto& bsii : best_suited_immovables_index) {
 		const int weight = std::get<0>(bsii);
 		total_weight += weight;
+	}
+
+	if (total_weight < 1) {
+		molog("  WARNING: No suitable immovable found!\n");
+		send_signal(game, "fail");
+		pop_task(game);
+		return true;
 	}
 
 	int choice = game.logic_rand() % total_weight;
