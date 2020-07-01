@@ -653,7 +653,7 @@ void EditorGameBase::set_road(const FCoords& f,
 	MapIndex const i = f.field - &first_field;
 	MapIndex const neighbour_i = neighbour.field - &first_field;
 	iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
-		Player::Field& first_player_field = *p->fields_;
+		Player::Field& first_player_field = *p->fields_.get();
 		Player::Field& player_field = (&first_player_field)[i];
 		if (1 < player_field.vision || 1 < (&first_player_field)[neighbour_i].vision) {
 			switch (direction) {

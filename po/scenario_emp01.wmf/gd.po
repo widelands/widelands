@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-04-12 17:32+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-06-30 14:48+0000\n"
+"PO-Revision-Date: 2020-06-27 06:10+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -109,7 +109,7 @@ msgid ""
 "What has become of our Empire? I really ask this question – why did my king "
 "forbid me from fighting against that monstrous Barbarian tribe, who first "
 "acted as a peaceful friend and then attacked my army in the darkest night?"
-msgstr "Dè dh’èirich air ar n-Impireachd? Tha mi ’ga fhaighneachd ann an da-rìribh – carson nach do leig an rìgh leam sabaid an aghaidh treubh uabhasach nan Tùsanach ud a chuir dreach a’ charaid shìtheil air an toiseach ’s a thug ionnsaigh air an fheachd agam air oidhche dhubh-dhorcha an uairsin?"
+msgstr "Dè dh’èirich air ar n-Ìmpireachd? Tha mi ’ga fhaighneachd ann an da-rìribh – carson nach do leig an rìgh leam sabaid an aghaidh treubh uabhasach nan Tùsanach ud a chuir dreach a’ charaid shìtheil air an toiseach ’s a thug ionnsaigh air an fheachd agam air oidhche dhubh-dhorcha an uairsin?"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:81
@@ -432,4 +432,4 @@ msgstr "A thighearna, rinn sibh àite glè thèarainte dhen rubha seo. Thàinig 
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"

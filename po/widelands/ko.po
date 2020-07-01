@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-04-22 20:03+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-06-30 14:48+0000\n"
+"PO-Revision-Date: 2020-06-24 04:27+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -96,7 +96,7 @@ msgstr "근처에 바위가 없습니다"
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr ""
+msgstr "시작 위치에 가까운 바위가 없습니다. 따라서 경제 성장을 위한 추가 자원을 받게 됩니다."
 
 #: ../../data/scripting/infrastructure.lua:251
 msgid "No trees nearby"
@@ -108,16 +108,16 @@ msgid ""
 "extra resources for bootstrapping your economy."
 msgstr "당신의 출발 위치 근처에 나무가 없습니다. 따라서 경제 성장하는데 필요한 추가 자원이 제공됩니다."
 
-#: ../../data/scripting/messages.lua:51 ../../data/scripting/messages.lua:53
+#: ../../data/scripting/messages.lua:53 ../../data/scripting/messages.lua:55
 #: ../../src/wui/game_message_menu.cc:68 ../../src/wui/game_summary.cc:104
 msgid "Status"
 msgstr "상태"
 
-#: ../../data/scripting/messages.lua:186
+#: ../../data/scripting/messages.lua:191
 msgid "New Objective"
 msgstr "새로운 목표"
 
-#: ../../data/scripting/messages.lua:188
+#: ../../data/scripting/messages.lua:193
 msgid "New Objectives"
 msgstr "새로운 목표들"
 
@@ -273,7 +273,7 @@ msgstr "12월"
 
 #: ../../src/editor/editorinteractive.cc:75
 msgid "Loading tribes"
-msgstr "부족들을 불러오는 중"
+msgstr "부족들을 불러오고 있음"
 
 #: ../../src/editor/editorinteractive.cc:94
 #: ../../src/wui/interactive_gamebase.cc:95
@@ -586,7 +586,7 @@ msgstr "빈 지도를 만드는 중…"
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:104
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:474
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:141
-#: ../../src/logic/map.h:163 ../../src/wui/mapdata.cc:45
+#: ../../src/logic/map.h:173 ../../src/wui/mapdata.cc:45
 msgid "No Name"
 msgstr "이름 없음"
 
@@ -594,7 +594,7 @@ msgstr "이름 없음"
 #: ../../src/editor/editorinteractive.cc:965
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:105
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:475
-#: ../../src/logic/map.h:164
+#: ../../src/logic/map.h:174
 msgctxt "author_name"
 msgid "Unknown"
 msgstr "알 수 없음"
@@ -907,7 +907,7 @@ msgstr "팀"
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:208
 #, c-format
 msgid "It is not recommended to permit waterway lengths greater than %u"
-msgstr ""
+msgstr "%u 보다 큰 물길 길이는 권장하지 않습니다"
 
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:60
 msgid "Create Map"
@@ -1251,7 +1251,7 @@ msgid ""
 " the east/south of the selected point. When shrinking the map, the desired "
 "number of columns/rows will be removed from the east/south of the splitting "
 "location."
-msgstr ""
+msgstr "새로운 지도 크기를 선택한 다음 지도를 눌러 원하는 위치로 지도를 분할하십시오. 지도 크기를 늘리면 선택한 지점의 동쪽/남쪽에 새 열/행들이 삽입됩니다. 지도를 축소하면 분할 위치의 동쪽/남쪽에서 원하는 수의 열/행 수가 제거됩니다."
 
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
@@ -1331,7 +1331,7 @@ msgstr "오류: %s\n"
 msgid ""
 "Widelands won't work because we were unable to detect the shading language "
 "version."
-msgstr ""
+msgstr "우리는 음영 언어 버전을 감지할 수 없었기 때문에 와이드랜드가 작동하지 않습니다."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1490,11 +1490,11 @@ msgstr "불러오는 중..."
 msgid "Creating player infrastructure…"
 msgstr ""
 
-#: ../../src/logic/game.cc:479 ../../src/logic/player.cc:225
+#: ../../src/logic/game.cc:479 ../../src/logic/player.cc:224
 msgid "Missing starting position"
 msgstr "시작 위치를 찾을 수 없음"
 
-#: ../../src/logic/game.cc:480 ../../src/logic/player.cc:226
+#: ../../src/logic/game.cc:480 ../../src/logic/player.cc:225
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
@@ -1567,7 +1567,7 @@ msgstr ""
 msgid "An unexpected error occurred:"
 msgstr ""
 
-#: ../../src/logic/map.h:165
+#: ../../src/logic/map.h:175
 msgid "No description defined"
 msgstr "정의된 설명이 없음"
 
@@ -1845,76 +1845,76 @@ msgstr "%i%%"
 msgid "Can’t find any more resources!"
 msgstr "더 이상 자원이 없어요!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:436
+#: ../../src/logic/map_objects/tribes/ship.cc:434
 msgid "Port Space"
 msgstr "항구 공간"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:436
+#: ../../src/logic/map_objects/tribes/ship.cc:434
 msgid "Port Space Found"
 msgstr "항구 공간 발견"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:437
+#: ../../src/logic/map_objects/tribes/ship.cc:435
 msgid "An expedition ship found a new port build space."
 msgstr "탐험선이 새로운 항구 건설 공간을 발견했습니다."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:555
+#: ../../src/logic/map_objects/tribes/ship.cc:553
 msgid "Island Circumnavigated"
 msgstr "섬 일주 완료"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../src/logic/map_objects/tribes/ship.cc:555
+#: ../../src/logic/map_objects/tribes/ship.cc:553
 msgctxt "ship"
 msgid "Waiting"
 msgstr "기다리는 중"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:556
+#: ../../src/logic/map_objects/tribes/ship.cc:554
 msgid "An expedition ship sailed around its island without any events."
 msgstr "탐험선이 별 일 없이 섬을 일주했습니다."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:618
+#: ../../src/logic/map_objects/tribes/ship.cc:616
 msgid "Coast Reached"
 msgstr "해안 도착"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:618
+#: ../../src/logic/map_objects/tribes/ship.cc:616
 msgid "Land Ahoy!"
 msgstr "육지 발견!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:619
+#: ../../src/logic/map_objects/tribes/ship.cc:617
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "탐헌선이 해안에 도착해서 향후 명령을 기다리는 중입니다."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:670
+#: ../../src/logic/map_objects/tribes/ship.cc:668
 msgid "New port construction site is gone"
 msgstr "새로운 항구 건설 위치가 사라졌습니다"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:670
+#: ../../src/logic/map_objects/tribes/ship.cc:668
 msgid "Port Lost!"
 msgstr "항구 손실!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:671
+#: ../../src/logic/map_objects/tribes/ship.cc:669
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "용품을 하적하는데 실패해서 탐험을 취소합니다."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:1063
+#: ../../src/logic/map_objects/tribes/ship.cc:857
 msgctxt "ship"
 msgid "Expedition"
 msgstr "탐험"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:1063
+#: ../../src/logic/map_objects/tribes/ship.cc:857
 msgid "Expedition Ready"
 msgstr "탐험 준비 완료"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:1064
+#: ../../src/logic/map_objects/tribes/ship.cc:858
 msgid "An expedition ship is waiting for your commands."
 msgstr "탐험선이 당신의 명령을 기다리는 중입니다."
 
 #. * TRANSLATORS: This is a ship state. The ship is currently transporting
 #. wares.
-#: ../../src/logic/map_objects/tribes/ship.cc:1216
+#: ../../src/logic/map_objects/tribes/ship.cc:1011
 #: ../../src/wui/seafaring_statistics_menu.cc:209
 msgctxt "ship_state"
 msgid "Shipping"
@@ -1923,7 +1923,7 @@ msgstr "선적하는 중"
 #. * TRANSLATORS: This is a ship state. The ship is ready to transport wares,
 #. but has
 #. * nothing to do.
-#: ../../src/logic/map_objects/tribes/ship.cc:1220
+#: ../../src/logic/map_objects/tribes/ship.cc:1015
 #: ../../src/wui/seafaring_statistics_menu.cc:207
 msgctxt "ship_state"
 msgid "Idle"
@@ -1931,7 +1931,7 @@ msgstr "대기중??"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:1225
+#: ../../src/logic/map_objects/tribes/ship.cc:1020
 #: ../../src/wui/seafaring_statistics_menu.cc:211
 msgctxt "ship_state"
 msgid "Waiting"
@@ -1939,14 +1939,14 @@ msgstr "대기하는 중"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:1229
+#: ../../src/logic/map_objects/tribes/ship.cc:1024
 #: ../../src/wui/seafaring_statistics_menu.cc:213
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "정찰하는 중"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:1233
+#: ../../src/logic/map_objects/tribes/ship.cc:1028
 #: ../../src/wui/seafaring_statistics_menu.cc:215
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -1955,7 +1955,7 @@ msgstr "항구 공간 발견"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1238
+#: ../../src/logic/map_objects/tribes/ship.cc:1033
 #: ../../src/wui/seafaring_statistics_menu.cc:217
 msgctxt "ship_state"
 msgid "Founding a Colony"
@@ -2040,7 +2040,7 @@ msgstr "통행 불가능"
 msgid "This objective has no description."
 msgstr "이 목표는 설명이 없습니다."
 
-#: ../../src/logic/player.cc:1523
+#: ../../src/logic/player.cc:1522
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"

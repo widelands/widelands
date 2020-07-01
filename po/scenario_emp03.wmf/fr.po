@@ -9,15 +9,15 @@
 # GunChleoc, 2018
 # Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
 # Christophe Quintard <christophe.quintard@gmail.com>, 2019
-# Renaud Bouchard, 2019
+# Renaud Bouchard, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"POT-Creation-Date: 2020-06-30 14:48+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Renaud Bouchard, 2019\n"
+"Last-Translator: Renaud Bouchard, 2020\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -145,7 +145,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:109
 msgid "Produce cloth for building our first ship"
-msgstr "Produisez du tissu pour construire notre premier bateau."
+msgstr "Produisez du tissu pour construire notre premier bateau"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:111
 msgid "Cloth Production"
@@ -161,7 +161,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:118
 msgid "Build 2 ports on distant islands"
-msgstr "Bâtissez 2 ports sur d'autres îles."
+msgstr "Bâtissez 2 ports sur de distantes îles."
 
 #. TRANSLATORS: Objective - create 2 expeditions and found new colonies with
 #. them
@@ -182,7 +182,7 @@ msgid ""
 "Send a ship northwards to gather some intelligence about the Barbarians. Try"
 " to build a port on the island and found an outpost."
 msgstr ""
-"Envoyez un navire au nord afin de quérir des informations sur les barbares. "
+"Envoyez un navire au nord afin de quérir des informations sur les Barbares. "
 "Essayez de construire un port sur l'île et trouvez un avant-poste."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:129
@@ -217,7 +217,7 @@ msgstr "Explorez plus loin et construisez des ports"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:149
 msgid "Explore Additional Islands and Search for Port Spaces"
-msgstr "Explorez d'autres îles et cherchez des zones portuaires"
+msgstr "Explorez les îles additionnelles et cherchez des zones portuaires"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:150
 msgid ""
@@ -258,7 +258,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:182
 msgid "The Journey Home"
-msgstr "Le voyage du retour"
+msgstr "Le voyage de retour"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:183
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:195
@@ -329,9 +329,9 @@ msgid ""
 msgstr ""
 "A nouveau, nous sommes échoués sur des côtes inconnues et avons dormis à "
 "l'ombre des palmiers jusqu'à ce que le soleil soit haut dans le ciel. J'ai "
-"peur que lorsque nous réveillerons au couchant, personne ne soit réellement "
-"étonné si nous ne voyons que du sable... Toutefois, le nombre de roches près"
-" de notre campement est étourdissant."
+"peur que lorsque nous nous réveillerons au couchant, personne ne soit "
+"réellement étonné si nous ne voyons que du sable... Toutefois, le nombre de "
+"roches près de notre campement est étourdissant."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:215
@@ -348,9 +348,9 @@ msgid ""
 "To make matters even worse, all the land we can see is blocked by rocks and "
 "trees. I fear we won’t find the resources we need to build a new ship."
 msgstr ""
-"Pour rendre les choses plus difficile encore, toute la terre que nous "
-"pouvons voir est couverte de rochers et d'arbres. Je crains que nous ne "
-"trouvions pas les ressources nécessaires pour construire un nouveau navire."
+"Pour rendre les choses encore pire , toute la terre que nous pouvons voir "
+"est couverte de rochers et d'arbres. Je crains que nous ne trouvions pas les"
+" ressources nécessaires pour construire un nouveau navire."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:221
@@ -368,7 +368,7 @@ msgstr "Sans Espoir"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:228
 msgid "Saledus looks around nervously…"
-msgstr "Saledus regarde nerveusement les environs"
+msgstr "Saledus regarde nerveusement les environs..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:230
@@ -378,8 +378,8 @@ msgid ""
 " island and add some military strength."
 msgstr ""
 "Sire, nous ne connaissons rien de cette île. Et je ne nous crois pas en "
-"sécurité. Il serait raisonnable de construire une tour pour explorer l'île "
-"et créer quelques forces militaires."
+"sécurité non plus. Il serait raisonnable de construire une tour pour "
+"explorer l'île et créer quelques forces militaires."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:236
 msgid "Amalea Interrupts"
@@ -397,8 +397,8 @@ msgid ""
 " careful."
 msgstr ""
 "Comme nous ne savons pas combien de ressources nous pourrons extraire, nous "
-"devrons être restrictifs dans leur utilisation. Même pour les bâtiments "
-"militaires, nous devrions être très attentifs."
+"devrons être très restrictifs dans leur utilisation. Même pour les bâtiments"
+" militaires, nous devrions être très attentifs."
 
 #. TRANSLATORS: Message header - Saledus is advising to save resources
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:246

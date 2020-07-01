@@ -2,14 +2,15 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
+# ks k, 2020
 # TaeMin An, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-05-07 19:38+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-06-30 14:48+0000\n"
+"PO-Revision-Date: 2020-06-30 14:09+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -120,7 +121,7 @@ msgstr "항구를 건설하십시오"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:61
 msgid "Build a port in the northern part of your camp"
-msgstr ""
+msgstr "당신의 캠프의 북쪽에 항구를 지으십시오."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:62
 msgid "You always need a port when you want to transport wares with a ship."
@@ -154,13 +155,13 @@ msgstr "선박을 건조합시다"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:75
 msgid "Great. While your port is being constructed, let’s build some ships."
-msgstr ""
+msgstr "좋아요. 항구가 지어지는 동안 배를 만들어 봅시다."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:76
 msgid ""
 "Ships are constructed at the coastline near a shipyard by a shipwright. We "
 "have to build one somewhere close to the shore."
-msgstr ""
+msgstr "배들은 조선소 근처의 해안선에 조선공에 의해 만들어집니다. 우리는 해안 근처에 하나 지어야 합니다."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:82
 msgid "Build a shipyard"
@@ -168,11 +169,11 @@ msgstr "조선소를 건설하십시오"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:84
 msgid "Build a shipyard close to the coast"
-msgstr ""
+msgstr "해안 가까이에 조선소를 짓기"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:85
 msgid "Ships are produced by a shipyard. It is a medium building."
-msgstr ""
+msgstr "배들은 조선소에서 만들어집니다. 가운데 크기의 건물입니다."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:86
 msgid ""
@@ -210,11 +211,11 @@ msgstr "우리는 선박 두 척이 생길 때까지 기다려야 합니다. 그
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:104
 msgid "Ships"
-msgstr ""
+msgstr "배들"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:106
 msgid "Construct two ships"
-msgstr ""
+msgstr "배 두척을 만들기"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:107
 msgid ""
@@ -232,15 +233,15 @@ msgstr "충분한 선박을 보유할 때 조선소를 중지시키는 것을 �
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:116
 msgid "Shipyard production"
-msgstr ""
+msgstr "번역확인-> 조선소 생산 또는 생산량"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:118
 msgid "We have enough ships"
-msgstr ""
+msgstr "배가 충분합니다"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:119
 msgid "Your second ship, \"%1%\", is ready now."
-msgstr ""
+msgstr "두 번째 배인 \"%1%\"가 준비되었습니다."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:120
 msgid ""
@@ -323,11 +324,11 @@ msgstr "당신 항구 중 아무데로나 탐험을 시작하십시오."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:156
 msgid "Expedition"
-msgstr ""
+msgstr "탐험"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:158
 msgid "Start an expedition"
-msgstr ""
+msgstr "탐험을 시작"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:159
 msgid "Start an expedition."
@@ -377,12 +378,12 @@ msgstr "산이 있는 섬을 찾아서, 항구 공간을 탐사하십시오. 섬
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:179
 msgid "Explore"
-msgstr ""
+msgstr "탐색"
 
 #. TRANSLATORS: "Found" as in "founding", NOT as in "finding"
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:182
 msgid "Found a settlement"
-msgstr ""
+msgstr "정착지를 찾았습니다"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:183
 msgid "Navigate your ship to an island that could contain iron ore."
@@ -400,11 +401,11 @@ msgstr "적합한 항구 공간을 찾았을 때, 항구를 건설하십시오."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:192
 msgid "New colony"
-msgstr ""
+msgstr "새로운 식민지"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:194
 msgid "Your colony has been founded"
-msgstr ""
+msgstr "당신의 식민지가 세워졌습니다"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:195
 msgid ""
@@ -419,7 +420,7 @@ msgid ""
 "ships and how to send out an expedition. Remember that expeditions are "
 "sometimes the fastest way to reach essential resources – and sometimes the "
 "only one."
-msgstr ""
+msgstr "지금까지 항해에 관한 모든 것을 배웠습니다. 항구와 배를 만드는 방법과 탐험대를 보내는 방법. 탐험이 때로는 필수 자원에 가장 빨리 도달할 수 있는 방법이며 때로는 유일한 방법이라는 점을 기억해야 합니다."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:197
 msgid ""
@@ -434,42 +435,42 @@ msgid ""
 "On this map, there is no enemy to fear. In other games, you should make "
 "building one or two military fortifications around your new colonies a "
 "priority."
-msgstr ""
+msgstr "이 지도에는 두려워할 적이 없습니다. 다른 놀이에서는 새로운 식민지를 중심으로 한두 개의 군사 요새를 짓는 것을 우선시해야 합니다."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:205
 msgid "Our mission"
-msgstr ""
+msgstr "우리의 임무"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:207
 msgid "Start mining"
-msgstr ""
+msgstr "채굴을 시작하기"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:208
 msgid ""
 "It was a long and expensive job to get here. The island has not much to "
 "offer, but there is some iron ore inside its mountain. Our economy needs "
 "iron ore, so we have to build an iron mine."
-msgstr ""
+msgstr "여기에 오는 것은 길고 비싼 일이었습니다. 그 섬은 제공할 것이 별로 없지만, 산 안에는 철광석이 몇 개 있습니다. 우리 경제에는 철광석이 필요하기 때문에 철광산을 만들어야 합니다."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:209
 msgid "Start mining iron ore in the mountain."
-msgstr ""
+msgstr "산에서 철광석을 채굴하기 시작하십시오."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:215
 msgid "Iron Mine"
-msgstr ""
+msgstr "철광산"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:217
 msgid "Build an iron mine on the island"
-msgstr ""
+msgstr "섬에 철광산을 짓기"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:218
 msgid "Our economy lacks resources."
-msgstr ""
+msgstr "우리 경제에는 자원이 부족합니다."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:219
 msgid "Start mining iron ore in mountains on the island."
-msgstr ""
+msgstr "섬의 산에서 철광석을 채굴하기 시작하십시오."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:226
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:239
@@ -477,25 +478,25 @@ msgstr ""
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:274
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:285
 msgid "There is more to it…"
-msgstr ""
+msgstr "더 많은 것이 있습니다..."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:228
 msgid "Another gold mountain"
-msgstr ""
+msgstr "또 다른 금 산"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:229
 msgid ""
 "It will take some time for your shipyard to build some ships. While we’re "
 "waiting for them, there is another way of water-based transport I would like"
 " to teach you."
-msgstr ""
+msgstr "당신네 조선소가 배를 만드는 데는 시간이 좀 걸릴 겁니다. 우리가 그것들을 기다리는 동안, 제가 여러분에게 알려드리고 싶은 다른 물을 바탕으로한 수송 방법이 있습니다."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:230
 msgid ""
 "Ships have the advantage that they can carry large quantities of wares and "
 "workers at a time, but unfortunately their destinations are limited to a "
 "handful of spaces suited for a port."
-msgstr ""
+msgstr "선박은 한 번에 대량의 물품과 일꾼을 실을 수 있다는 장점이 있지만, 안타깝게도 목적지는 항구에 적합한 몇 안 되는 공간으로 제한됩니다."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:231
 msgid ""
@@ -504,53 +505,53 @@ msgid ""
 "seperating it from our main colony are too wide to build bridges and too "
 "narrow for ships to pass them. Our roads would have to take long curves, "
 "which slows down ware transport a lot."
-msgstr ""
+msgstr "여기 남쪽 끝에 있는 이 계곡을 보세요. 우리는 이 산 아래에서 금을 발견했고, 그 산에서 광석을 채굴하려고 합니다. 하지만 우리의 주요 식민지에서 분리되어 나오는 개울은 너무 넓어서 다리를 지을 수 없고 배가 지나기엔 너무 좁습니다. 우리의 도로는 긴 곡선길을 가저야하는데  물품 운송 속도가 많이 느려집니다."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:241
 msgid "Rowboats & Ferry Yards"
-msgstr ""
+msgstr "노 젓는 배 & 연락선 뜰"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:243
 msgid ""
 "This is where ferries come in. Ferries are small rowboats that can carry "
 "only one ware at a time, and no workers (other than the one who rows it and "
 "who never leaves his boat)."
-msgstr ""
+msgstr "이곳은 연락선이 들어오는 곳입니다. 연락선또는여객선은 한 번에 하나의 물품만 실을 수 있는 작은 노 젓는 배이며, (노를 젓거나 배를 떠나지 않는) 일꾼은 없습니다."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:244
 msgid ""
 " Ferries are built in ferry yards, one rowboat costs two logs and one piece "
 "of cloth and is quickly constructed. A ferry yard is a medium-sized building"
 " that needs to be built close to the shore."
-msgstr ""
+msgstr "연락선은 연락선 뜰에 지어지며, 한 척의 노 젓는 배에는 2 개의 통나무와 1 개의 헝겊이 필요하며 빠르게 지어집니다. 연락선 뜰은 해안 가까이에 지을 필요가 있는 가운데 크기의 건물입니다."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:245
 msgid "Let’s build a ferry yard close to the shore before we will continue."
-msgstr ""
+msgstr "계속하기 전에 바닷가 가까이에 연락선 마당을 만들어 봅시다."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:251
 msgid "Build a ferry yard"
-msgstr ""
+msgstr "연락선 뜰을 짓기"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:253
 msgid "Build a ferry yard close to the shore"
-msgstr ""
+msgstr "바닷가 가까이에 연락선 뜰을 짓기"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:254
 msgid "Ferries are constructed by a ferry yard."
-msgstr ""
+msgstr "연락선은 연락선 뜰에 의해 만들어집니다."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:255
 msgid ""
 "You need to build the ferry yard close to the shore, otherwise it won’t be "
 "able to build ferries there."
-msgstr ""
+msgstr "연락선 뜰을 바닷가 가까이에 지어야 합니다. 그렇지 않으면 연락선을 만들 수 없습니다."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:263
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:276
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:295
 msgid "Waterways"
-msgstr ""
+msgstr "물길"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:264
 msgid ""
@@ -558,7 +559,7 @@ msgid ""
 "fixed transport routes called waterways. A waterway is built just like a "
 "road: You click on a flag near the shore, choose ‘Build a waterway’, and "
 "select the path for the waterway just as you would do for a road."
-msgstr ""
+msgstr "필요한 항구로 가는 배와는 달리, 연락선은 물길이라고 불리는 고정된 수송길을 가지고 있습니다. 물길은 도로와 같이 지어집니다. 바닷가 가까이에 있는 깃발을 누르고 ‘물길 만들기’를 선택한 다음 도로처럼 물길을 위한 길을 선택하십시오."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:265
 msgid ""
