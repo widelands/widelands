@@ -22,8 +22,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-06-29 17:06+0000\n"
-"PO-Revision-Date: 2020-06-30 13:26+0000\n"
+"POT-Creation-Date: 2020-06-30 14:48+0000\n"
+"PO-Revision-Date: 2020-06-30 16:51+0000\n"
 "Last-Translator: Walter Benkel <tromaster@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -1549,7 +1549,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "La veta principal de esta mina de carbón se ha agotado. Se esperan fuertes reducciones del retorno de la inversión. Deberías considerar desarmarla o destruirla."
+msgstr "La veta principal de esta mina de carbón se ha agotado. Se esperan fuertes reducciones del retorno de la inversión. Deberías considerar mejorarla, desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:7
@@ -1569,7 +1569,7 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "La veta principal de esta mina de carbón se ha agotado. Se esperan fuertes reducciones del retorno de la inversión. Deberías considerar desarmarla o destruirla."
+msgstr "La veta principal de esta mina de carbón se ha agotado. Se esperan fuertes reducciones del retorno de la inversión. Esta mina ya no puede ser mejorada, por lo que deberías considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:7
@@ -1632,7 +1632,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "La veta principal de esta mina de oro se ha agotado. Se esperan fuertes reducciones en el retorno de la inversión. Deberías considerar desarmarla o destruirla."
+msgstr "La veta principal de esta mina de oro se ha agotado. Se esperan fuertes reducciones en el retorno de la inversión. Deberías considerar mejorarla, desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:7
@@ -1652,7 +1652,7 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "La veta principal de esta mina de carbón se ha agotado. Se esperan fuertes reducciones del retorno de la inversión. Esta mina ya no puede ser mejorada, por lo que deberías considerar desarmarla o destruirla."
+msgstr "La veta principal de esta mina de oro se ha agotado. Se esperan fuertes reducciones del retorno de la inversión. Esta mina ya no puede ser mejorada, por lo que deberías considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:7
@@ -1678,7 +1678,7 @@ msgid ""
 "This granite mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
-msgstr "La veta principal de esta mina de granito se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Deberías considerar desarmarla o destruirla."
+msgstr "La veta principal de esta mina de granito se ha agotado. Se esperan fuertes reducciones del retorno de la inversión. Esta mina ya no puede ser mejorada, por lo que deberías considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:7
@@ -1736,7 +1736,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "La veta principal de esta mina de hierro se ha agotado. Se esperan fuertes reducciones en el retorno de inversión. Deberías considerar desarmarla o destruirla."
+msgstr "La veta principal de esta mina de hierro se ha agotado. Se esperan fuertes reducciones en el retorno de la inversión. Deberías considerar mejorarla, desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:7
@@ -1756,7 +1756,7 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "La veta principal de esta mina de hierro se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Deberías considerar desarmarla o destruirla."
+msgstr "La veta principal de esta mina de hierro se ha agotado. Se esperan fuertes reducciones del retorno de la inversión. Esta mina no puede ser mejorada, por lo que deberías considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/init.lua:7
@@ -2029,7 +2029,7 @@ msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "La veta principal de esta mina de carbón se ha agotado. Se esperan fuertes reducciones del retorno de la inversión. Deberías considerar desarmarla o destruirla."
+msgstr "La veta principal de esta mina de carbón se ha agotado. Se esperan fuertes reducciones del retorno de la inversión. Deberías considerar mejorarla, desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:7
@@ -2043,7 +2043,7 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "La veta principal de esta mina de carbón se ha agotado. Se esperan fuertes reducciones del retorno de la inversión. Deberías considerar desarmarla o destruirla."
+msgstr "La veta principal de esta mina de carbón se ha agotado. Se esperan fuertes reducciones del retorno de la inversión. Esta mina ya no puede ser mejorada, por lo que deberías considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:7
@@ -2105,7 +2105,7 @@ msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "La veta principal de esta mina de oro se ha agotado. Se esperan fuertes reducciones en el retorno de la inversión. Deberías considerar desarmarla o destruirla."
+msgstr "La veta principal de esta mina de oro se ha agotado. Se esperan fuertes reducciones en el retorno de la inversión. Deberías considerar mejorarla, desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:7
@@ -2119,7 +2119,7 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "La veta principal de esta mina de carbón se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Deberías considerar desarmarla o destruirla."
+msgstr "La veta principal de esta mina de oro se ha agotado. Se esperan fuertes reducciones del retorno de la inversión. Deberías considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:7
@@ -2152,7 +2152,7 @@ msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "La veta principal de esta mina de hierro se ha agotado. Se esperan fuertes reducciones en el retorno de inversión. Deberías considerar desarmarla o destruirla."
+msgstr "La veta principal de esta mina de hierro se ha agotado. Se esperan fuertes reducciones en el retorno de la inversión. Deberías considerar mejorarla, desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:7
@@ -2166,7 +2166,7 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "La veta principal de esta mina de hierro se ha agotado. Se esperan fuertes reducciones del retorno de inversión. Deberías considerar desarmarla o destruirla."
+msgstr "La veta principal de esta mina de hierro se ha agotado. Se esperan fuertes reducciones del retorno de la inversión. Esta mina ya no puede ser mejorada, por lo que deberías considerar desarmarla o destruirla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:7

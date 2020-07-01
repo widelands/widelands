@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-06-29 17:06+0000\n"
-"PO-Revision-Date: 2020-06-29 20:30+0000\n"
+"POT-Creation-Date: 2020-06-30 14:48+0000\n"
+"PO-Revision-Date: 2020-06-30 20:32+0000\n"
 "Last-Translator: Tachionas Neonas <tachionexas@gmail.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/widelands/widelands/language/lt/)\n"
 "MIME-Version: 1.0\n"
@@ -135,7 +135,7 @@ msgstr ""
 #: ../../src/ai/computer_player.cc:43
 #: ../../src/wui/multiplayersetupgroup.cc:392
 msgid "No AI"
-msgstr ""
+msgstr "Be DI"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:94
@@ -269,13 +269,13 @@ msgstr "Gruo"
 
 #: ../../src/editor/editorinteractive.cc:75
 msgid "Loading tribes"
-msgstr "Įkraunamos gentys"
+msgstr "Įkeliamos gentys"
 
 #: ../../src/editor/editorinteractive.cc:94
 #: ../../src/wui/interactive_gamebase.cc:95
 msgctxt "hotkey"
 msgid "Esc"
-msgstr ""
+msgstr "Išeiti"
 
 #. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
@@ -484,7 +484,7 @@ msgstr "Informacija"
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
 #: ../../src/editor/editorinteractive.cc:334
 msgid "Click on a field to show information about it"
-msgstr ""
+msgstr "Paspauskite ant laukelio, kad būtų rodoma informacija apie jį"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
@@ -512,11 +512,11 @@ msgstr ""
 #. the map grid is shown
 #: ../../src/editor/editorinteractive.cc:399
 msgid "Hide Grid"
-msgstr ""
+msgstr "Slėpti tinklelį"
 
 #: ../../src/editor/editorinteractive.cc:399
 msgid "Show Grid"
-msgstr ""
+msgstr "Rodyti tinklelį"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables (trees,
@@ -575,7 +575,7 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:958
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:99
 msgid "Creating empty map…"
-msgstr ""
+msgstr "Sukurti tuščią žemėlapį..."
 
 #. * TRANSLATORS: Default name for new map
 #: ../../src/editor/editorinteractive.cc:962
@@ -598,7 +598,7 @@ msgstr "Nežinomas"
 #: ../../src/editor/editorinteractive.cc:972
 #, c-format
 msgid "Loading map “%s”…"
-msgstr ""
+msgstr "Įkeliamas žemėlapis “%s”…"
 
 #: ../../src/editor/map_generator.cc:713
 msgid "Random Player"
@@ -606,7 +606,7 @@ msgstr "Atsitiktinis žaidėjas"
 
 #: ../../src/editor/tools/info_tool.cc:43
 msgid "Field Information"
-msgstr ""
+msgstr "Laukelio informacija"
 
 #: ../../src/editor/tools/info_tool.cc:50
 msgid "Node"
@@ -620,7 +620,7 @@ msgstr ""
 #. * TRANSLATORS: Editor terrain property: small building plot
 #: ../../src/editor/tools/info_tool.cc:61
 msgid "small"
-msgstr "nedidelis"
+msgstr "mažas"
 
 #. * TRANSLATORS: Editor terrain property: medium building plot
 #: ../../src/editor/tools/info_tool.cc:66
@@ -652,13 +652,13 @@ msgstr "uostas"
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:71
 msgid "walkable"
-msgstr ""
+msgstr "praeinamas"
 
 #. * TRANSLATORS: Editor terrain property: units can swim on this terrain
 #. (fish, ships)
 #: ../../src/editor/tools/info_tool.cc:94
 msgid "swimmable"
-msgstr ""
+msgstr "praplaukiamas"
 
 #: ../../src/editor/tools/info_tool.cc:97
 #, c-format
@@ -668,11 +668,11 @@ msgstr ""
 #: ../../src/editor/tools/info_tool.cc:104
 #, c-format
 msgid "Owned by: Player %u"
-msgstr ""
+msgstr "Priklauso: Žaidėjui %u"
 
 #: ../../src/editor/tools/info_tool.cc:108
 msgid "Owned by: —"
-msgstr ""
+msgstr "Priklauso: —"
 
 #: ../../src/editor/tools/info_tool.cc:119
 #, c-format
@@ -791,7 +791,7 @@ msgstr "Klaida!"
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:275
 #: ../../src/wui/mapdata.cc:162
 msgid "My Maps"
-msgstr ""
+msgstr "Mano žemėlapiai"
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:70
@@ -1273,7 +1273,7 @@ msgstr ""
 #: ../../src/game_io/game_loader.cc:69
 #, c-format
 msgid "Loading game: %1$s (%2$u/%3$d)"
-msgstr ""
+msgstr "Įkeliamas žaidimas: %1$s (%2$u/%3$d)"
 
 #: ../../src/game_io/game_loader.cc:71 ../../src/game_io/game_saver.cc:59
 #: ../../src/map_io/map_saver.cc:103
@@ -1436,7 +1436,7 @@ msgstr ""
 
 #: ../../src/logic/editor_game_base.cc:331
 msgid "Loading graphics"
-msgstr ""
+msgstr "Įkeliama grafika"
 
 #: ../../src/logic/editor_game_base.cc:565
 msgid "Cleaning up for loading: Map objects (1/3)"
@@ -1462,11 +1462,11 @@ msgstr ""
 
 #: ../../src/logic/game.cc:220 ../../src/logic/game.cc:280
 msgid "Loading world…"
-msgstr ""
+msgstr "Įkeliamas pasaulis..."
 
 #: ../../src/logic/game.cc:222 ../../src/logic/game.cc:283
 msgid "Loading tribes…"
-msgstr ""
+msgstr "Įkeliamos gentys..."
 
 #: ../../src/logic/game.cc:232 ../../src/logic/game.cc:286
 msgid "Creating players…"
@@ -1474,7 +1474,7 @@ msgstr ""
 
 #: ../../src/logic/game.cc:249 ../../src/logic/game.cc:314
 msgid "Loading map…"
-msgstr ""
+msgstr "Įkeliamas žemėlapis..."
 
 #: ../../src/logic/game.cc:321
 msgid "Initializing game…"
@@ -1483,7 +1483,7 @@ msgstr ""
 #: ../../src/logic/game.cc:372 ../../src/logic/game.cc:408
 #: ../../src/ui_basic/progresswindow.cc:52 ../../src/wlapplication.cc:1495
 msgid "Loading…"
-msgstr ""
+msgstr "Įkeliama..."
 
 #: ../../src/logic/game.cc:469
 msgid "Creating player infrastructure…"
@@ -1512,7 +1512,7 @@ msgstr ""
 msgid ""
 "This game was saved using an older version of Widelands and cannot be loaded"
 " anymore, or it's a new version that can't be handled yet."
-msgstr ""
+msgstr "Šis žaidimas buvo išsaugotas naudojant senesnę Widelands versiją ir jo nebegalima įkelti, arba naujesnę versiją, kurios dar negalima naudoti."
 
 #: ../../src/logic/generic_save_handler.cc:236
 #: ../../src/logic/generic_save_handler.cc:240
@@ -2014,7 +2014,7 @@ msgstr ""
 
 #: ../../src/logic/map_objects/tribes/worker.cc:1039
 msgid "A geologist found resources."
-msgstr ""
+msgstr "Geologas rado išteklių."
 
 #: ../../src/logic/map_objects/tribes/worker.cc:1951
 #, c-format
@@ -2025,7 +2025,7 @@ msgstr ""
 #: ../../src/logic/map_objects/tribes/worker.cc:1957
 #: ../../src/wui/productionsitewindow.cc:100
 msgid "Worker"
-msgstr ""
+msgstr "Darbininkas"
 
 #: ../../src/logic/map_objects/tribes/worker.cc:1958
 msgid "Worker got lost!"
@@ -2078,7 +2078,7 @@ msgstr ""
 
 #: ../../src/logic/save_handler.cc:127
 msgid "Saving game…"
-msgstr ""
+msgstr "Žaidimas įrašomas..."
 
 #: ../../src/logic/save_handler.cc:173
 #: ../../src/wui/game_main_menu_save_game.cc:281
@@ -2197,7 +2197,7 @@ msgstr ""
 
 #: ../../src/map_io/map_saver.cc:354
 msgid "Minimap"
-msgstr ""
+msgstr "Mini žemėlapis"
 
 #: ../../src/map_io/s2map.cc:455
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -2206,11 +2206,11 @@ msgstr ""
 #: ../../src/map_io/widelands_map_loader.cc:132
 #, c-format
 msgid "Loading map: %1$s (%2$u/%3$d)"
-msgstr ""
+msgstr "Įkeliamas žemėlapis: %1$s (%2$u/%3$d)"
 
 #: ../../src/map_io/widelands_map_loader.cc:242
 msgid "Territories"
-msgstr ""
+msgstr "Teritorijos"
 
 #: ../../src/map_io/widelands_map_loader.cc:295
 msgid "Initializing flags"
@@ -2581,7 +2581,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:46
 msgid "Wrong password, please try again."
-msgstr ""
+msgstr "Neteisingas slaptažodis, prašome bandyti iš naujo."
 
 #: ../../src/network/internet_gaming_messages.cc:47
 msgid "You have been temporarily banned from online gaming."
@@ -2660,7 +2660,7 @@ msgstr ""
 #: ../../src/network/network_gaming_messages.cc:134
 #, c-format
 msgid "%1$s has left the game (%2$s)"
-msgstr ""
+msgstr "%1$s paliko žaidimą (%2$s)"
 
 #: ../../src/network/network_gaming_messages.cc:135
 #, c-format
@@ -2715,7 +2715,7 @@ msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:153
 msgid "The game has already started."
-msgstr ""
+msgstr "Žaidimas jau prasidėjo."
 
 #: ../../src/network/network_gaming_messages.cc:154
 msgid "Client has no access to other player’s settings."
@@ -2754,7 +2754,7 @@ msgstr ""
 #: ../../src/network/network_gaming_messages.cc:165
 #, c-format
 msgid "%s has joined the game"
-msgstr ""
+msgstr "%s prisijungė prie žaidimo"
 
 #: ../../src/network/network_gaming_messages.cc:166
 #, c-format
@@ -2796,7 +2796,7 @@ msgstr ""
 #: ../../src/ui_basic/dropdown.cc:298 ../../src/ui_basic/dropdown.cc:300
 #: ../../src/ui_fsmenu/launch_mpg.cc:443
 msgid "Error"
-msgstr ""
+msgstr "Klaida"
 
 #. * TRANSLATORS: Selection in Dropdown menus.
 #: ../../src/ui_basic/dropdown.cc:361
@@ -2857,7 +2857,7 @@ msgstr "Užverti"
 
 #: ../../src/ui_basic/window.cc:178
 msgid "Minimize"
-msgstr ""
+msgstr "Sumažinti"
 
 #: ../../src/ui_basic/window.cc:178
 msgid "Restore"
@@ -2873,7 +2873,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/about.cc:31 ../../src/ui_fsmenu/main.cc:52
 msgid "About Widelands"
-msgstr ""
+msgstr "Apie Widelands"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:41
 msgid "Choose a campaign"
@@ -2903,7 +2903,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:58
 msgid "Tribe Name"
-msgstr ""
+msgstr "Genties pavadinimas"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:60
 msgid "Campaign Name"
@@ -2930,7 +2930,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/helpwindow.cc:41 ../../src/wui/helpwindow.cc:44
 #, c-format
 msgid "Help: %s"
-msgstr ""
+msgstr "Pagalba: %s"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:65
 msgid "Metaserver Lobby"
@@ -2951,11 +2951,11 @@ msgstr ""
 #: ../../src/ui_fsmenu/internet_lobby.cc:80
 #: ../../src/ui_fsmenu/netsetup_lan.cc:73
 msgid "Join this game"
-msgstr ""
+msgstr "Prisijungti prie šio žaidimo"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:88
 msgid "Open a new game"
-msgstr ""
+msgstr "Atidaryti naują žaidimą"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:96
 msgid "Leave Lobby"
@@ -2963,11 +2963,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:143
 msgid "User Status"
-msgstr ""
+msgstr "Naudotojo būsena"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:144
 msgid "Administrator"
-msgstr ""
+msgstr "Administratorius"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:145
 msgid "Registered"
@@ -3235,7 +3235,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:91
 msgid "Load this game"
-msgstr ""
+msgstr "Įkelti šį žaidimą"
 
 #: ../../src/ui_fsmenu/main.cc:38
 msgid "Play Tutorial"
@@ -5005,7 +5005,7 @@ msgstr ""
 #: ../../src/wui/multiplayersetupgroup.cc:358
 #: ../../src/wui/playerdescrgroup.cc:144
 msgid "Random AI"
-msgstr ""
+msgstr "Atsitiktinis DI"
 
 #: ../../src/wui/multiplayersetupgroup.cc:362
 #: ../../src/wui/multiplayersetupgroup.cc:364
@@ -5044,7 +5044,7 @@ msgstr "Kompiuteris"
 
 #: ../../src/wui/playerdescrgroup.cc:163
 msgid "The tribe will be set at random."
-msgstr ""
+msgstr "Gentis bus pasirinkta atsitiktinai."
 
 #. * TRANSLATORS: day(s). Keep this as short as possible. Used in statistics.
 #: ../../src/wui/plot_area.cc:105
@@ -5081,23 +5081,23 @@ msgstr[3] ""
 #: ../../src/wui/plot_area.cc:124
 msgctxt "unit_generic"
 msgid "days"
-msgstr ""
+msgstr "dienos"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
 #: ../../src/wui/plot_area.cc:127
 msgctxt "unit_generic"
 msgid "hours"
-msgstr ""
+msgstr "valandos"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
 #: ../../src/wui/plot_area.cc:130
 msgctxt "unit_generic"
 msgid "minutes"
-msgstr ""
+msgstr "minutės"
 
 #: ../../src/wui/plot_area.cc:357
 msgid "game"
-msgstr ""
+msgstr "žaidimas"
 
 #: ../../src/wui/portdockwaresdisplay.cc:94
 msgid "Additional item"
@@ -5105,7 +5105,7 @@ msgstr ""
 
 #: ../../src/wui/portdockwaresdisplay.cc:96
 msgid "(Empty)"
-msgstr ""
+msgstr "(tuščias)"
 
 #. * TRANSLATORS: Tooltip for a ware that is present in the building
 #: ../../src/wui/portdockwaresdisplay.cc:141
@@ -5130,7 +5130,7 @@ msgstr ""
 
 #: ../../src/wui/productionsitewindow.cc:107
 msgid "Next Level"
-msgstr ""
+msgstr "Kitas lygis"
 
 #: ../../src/wui/productionsitewindow.cc:119
 msgid "Terminate the employment of the selected worker"
@@ -5154,7 +5154,7 @@ msgstr ""
 
 #: ../../src/wui/savegamedeleter.cc:42
 msgid "Do you really want to delete this game?"
-msgstr ""
+msgstr "Ar tikrai norite ištrinti šį žaidimą?"
 
 #. * TRANSLATORS: Used with multiple games, 1 game has a separate
 #. string. DO NOT omit the placeholder in your translation.
@@ -5169,15 +5169,15 @@ msgstr[3] ""
 
 #: ../../src/wui/savegamedeleter.cc:79
 msgid "Error Deleting File!"
-msgstr ""
+msgstr "Klaida trinant failą!"
 
 #: ../../src/wui/savegamedeleter.cc:79
 msgid "Error Deleting Files!"
-msgstr ""
+msgstr "Klaida trinant failus!"
 
 #: ../../src/wui/savegamedeleter.cc:91
 msgid "The game could not be deleted."
-msgstr ""
+msgstr "Žaidimo nebuvo galima ištrinti."
 
 #: ../../src/wui/savegamedeleter.cc:96
 #, c-format
@@ -5229,35 +5229,35 @@ msgstr ""
 #. * TRANSLATORS: This text is on a separate line with an error message below
 #: ../../src/wui/savegameloader.cc:107
 msgid "Error message:"
-msgstr ""
+msgstr "Klaidos pranešimas:"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute
 #: ../../src/wui/savegameloader.cc:137
 msgid "Today, %1%:%2%"
-msgstr ""
+msgstr "Šiandien, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute. This is part of a list.
 #: ../../src/wui/savegameloader.cc:142
 msgid "saved today at %1%:%2%"
-msgstr ""
+msgstr "Šiandien išsaugota %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute
 #: ../../src/wui/savegameloader.cc:155
 msgid "Yesterday, %1%:%2%"
-msgstr ""
+msgstr "Vakar, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute. This is part of a list.
 #: ../../src/wui/savegameloader.cc:160
 msgid "saved yesterday at %1%:%2%"
-msgstr ""
+msgstr "Vakar išsaugota %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
@@ -5272,7 +5272,7 @@ msgstr ""
 #. year (number). This is part of a list.
 #: ../../src/wui/savegameloader.cc:172
 msgid "saved on %1% %2%, %3%"
-msgstr ""
+msgstr "išsaugota %1% %2%, %3%"
 
 #. * TRANSLATORS: %1% is a map's name.
 #: ../../src/wui/savegametable.cc:24

@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-04-15 14:46+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-06-30 14:48+0000\n"
+"PO-Revision-Date: 2020-06-27 09:06+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid ""
 "Click on the ‘OK’ button or press the ‘Enter ⏎’ key on the keyboard to close"
 " this window."
-msgstr ""
+msgstr "Briog air a’ phutan “Ceart ma-thà” no brùth air an iuchair “Enter ⏎” air a’ mheur-chlàr airson an uinneag seo a dhùnadh."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:12
 msgid "Nice And Easy Does It All the Time"
@@ -40,7 +40,7 @@ msgstr "Tha mi duilich, ach feumaidh mi seo a mhilleadh a-rithist. Dh’fhaoidte
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:29
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:31
 msgid "Close this window"
-msgstr ""
+msgstr "Dùin an uinneag seo"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:36
 msgid "Welcome to the Widelands Tutorial!"
@@ -59,75 +59,75 @@ msgstr "’S e geama ro-innleachd mhaille a th’ ann an Widelands far am bi d�
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid "You will be guided through this tutorial by objectives"
-msgstr ""
+msgstr "Thèid do stiùireadh tron oideachadh seo le amasan"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:42
 msgid ""
 "Follow the intructions in the objective below so that I can show you where "
 "to find them."
-msgstr ""
+msgstr "Lean ris an stiùireadh san amas gu h-ìosal ach an seall mi dhut far a bhail iad."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:48
 msgid "Objectives and how to close this window"
-msgstr ""
+msgstr "Na h-amasan is mar a dhùineas tu an uinneag seo"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:50
 msgid "Closing this window"
-msgstr ""
+msgstr "Dùnadh na h-uinneige seo"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:51
 msgid ""
 "This is the ‘Objectives’ window. You can return to this window for "
 "instructions at any time."
-msgstr ""
+msgstr "Seo uinneag nan “Amasan”. ’S urrainn dhut tilleadh dhan uinneag seo airson stiùireadh uair sam bith."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:52
 msgid ""
 " You can open and close this window by clicking on the ‘Objectives’ button "
 "in the toolbar on the bottom of the screen."
-msgstr ""
+msgstr " ’S urrainn dhut an uinneag seo fhosgladh ’s a dhùnadh le briogadh air a’ phutan “Amasan” air a’ bhàr-inneal aig bonn na sgrìn."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid ""
 "Like any other window, you can also close the ‘Objectives’ window by right-"
 "clicking on it."
-msgstr ""
+msgstr "Mar a nì thu le uinneag sam bith eile, ’s urrainn dhut uinneag nan “Amasan” a dhùnadh le briogadh deas oirre."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:54
 msgid ""
 "When you have accomplished an objective, it will disappear from the list "
 "above."
-msgstr ""
+msgstr "Nuair a bhios tu air amas a choileanadh, thèid a thoirt air falbh on liosta gu h-àrd."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:55
 msgid "Try it out."
-msgstr ""
+msgstr "Feuch e."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:61
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:63
 msgid "Show building spaces"
-msgstr ""
+msgstr "Nochd na h-ionadan togail"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:64
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show Building Spaces’. There are two ways you can do this:"
-msgstr ""
+msgstr "Feumaidh sinn àite ghoireasach a lorg airson bothan a’ choillteir. Nochdamaid na h-ionadan togail gus seo a dhèanamh nas fhasa. Tha dà dhòigh ann gus an gleus seo a chur air:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:65
 msgid ""
 "Press the Space bar to toggle them, or select ‘Show Building Spaces’ in the "
 "‘Show / Hide’ menu."
-msgstr ""
+msgstr "Brùth air an iuchair Space gus an cur air is dheth air neo tagh “Nochd na h-ionadan togail” sa chlàr-taice “Seall / Falaich”."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:66
 msgid "Show the building spaces now."
-msgstr ""
+msgstr "Nochd na h-ionadan togail a-nis."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:71
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:86
 msgid "Building Spaces"
-msgstr ""
+msgstr "Ionadan togail"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:75
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:90
@@ -140,7 +140,7 @@ msgid ""
 "the Atlanteans and the Frisians. All tribes have a different economy, "
 "strength and weaknesses, but the general gameplay is the same for all. We "
 "will play the Barbarians for now."
-msgstr ""
+msgstr "Tha ceithir treubhan diofraichte ann an Widelands: na Tùsanaich, an Impireachd, na h-Atlantaich agus na Frìoslannaich. Tha eaconamaidh, neartan is laigsean eadar-dhealaichte aig gach treubh, ach cluichidh tu an geama san aon dòigh le gach tè dhiubh. Bidh sinn ’nar Tùsanaich an-dràsta."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:78
 msgid ""
@@ -158,25 +158,25 @@ msgstr "Tòisichidh tu air geama le aon phrìomh-àras mar as trice. Seo an toga
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show Building Spaces’."
-msgstr ""
+msgstr "Feumaidh sinn àite ghoireasach a lorg airson bothan a’ choillteir. Nochdamaid na h-ionadan togail gus seo a dhèanamh nas fhasa."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:80
 msgid ""
 "Left-click the ‘OK’ button to close this window so that I can show you how."
-msgstr ""
+msgstr "Dèan briogadh clì air a’ phutan “Ceart ma-thà” a dhùnadh na h-uinneige seo ach an seall mi dhut mar a nì thu e."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:81
 msgid ""
 "Note that you cannot close this window by right-clicking on it. I have "
 "blocked this so that you will not close it by accident and miss important "
 "information."
-msgstr ""
+msgstr "Thoir an aire nach urrainn dhut an uinneag seo a dhùnadh le briogadh deas air. Bhac mi seo ach nach dùin thu le mearachd i air eagal ’s gun cailleadh tu fiosrachadh cudromach."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:91
 msgid ""
 "Now that I have shown you how to show and hide the building spaces, please "
 "switch them on again so that we can place our first building."
-msgstr ""
+msgstr "Nise on a sheall mi dhut mar a nochdas is mar a dh’fhalaicheas tu na h-ionadan togail, nochd iad a-rithist ach an urrainn dhuinn a’ chiad togalach againn a chur ann."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:100
 msgid "Lumberjack’s Spot"
@@ -272,7 +272,7 @@ msgstr "Tog bratach ghorm a-nis ann am meadhan an rathaid a cheanglas am prìomh
 msgid ""
 "To build the flag, click on the yellow flag symbol in between the two blue "
 "flags we just placed and then click on the build flag symbol."
-msgstr ""
+msgstr "Airson a’ bhratach a thogail, briog air an t-samhla brataich bhuidhe eadar an dà bhratach ghorm a tha sinn air a thogail is briog air an t-samhla togail brataich."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:173
 msgid "Placing Another Flag"
@@ -283,7 +283,7 @@ msgid ""
 "Nice how they are working, isn’t it? But the poor carrier has a very long "
 "way to go. We can make it easier for him (and more efficient for us) by "
 "placing another blue flag on the road. You try it this time."
-msgstr ""
+msgstr "Nach math mar a tha iad ag obair? Ach tha rathad fada ri siubhal aig a’ ghiùlanair bhochd. Nì sinn cùisean nas fhasa dha (agus nas èifeachdaiche dhuinne) ma chuireas sinn bratach ghorm eile air an rathad. Nach fheuch thu fhèin e an turas seo?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:188
 msgid ""
@@ -302,11 +302,11 @@ msgstr "Tha thu air an rathad a roinneadh ann an dà earrann le giùlanair air g
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:200
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:210
 msgid "Let’s see the progress"
-msgstr ""
+msgstr "Thoireamaid sùil air an adhartas"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:201
 msgid "Click on the construction site to have a look at it."
-msgstr ""
+msgstr "Briog air an làrach togail airson a sgrùdadh."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:207
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:218
@@ -325,11 +325,11 @@ msgid ""
 "This button toggles showing the building’s work area. When the lumberjack "
 "leaves the building to look for trees to fell, he will only look for them "
 "within this area. Let me show you how perfect this spot is."
-msgstr ""
+msgstr "Nochdaidh is falaichidh am putan seo raon obrach an togalaich. Nuair a dh’fhàgas an coilltear am bothan an toir air craobh a leaghadh e, cha lorg e gin ach am broinn an raoin seo. Seallaidh mi dhut dè cho foirfe ’s a tha am bad seo."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:223
 msgid "Close the construction site window when you have seen enough."
-msgstr ""
+msgstr "Dùin uinneag na làraich togail nuair a bhios tu air do leòr fhaicinn."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:234
 msgid "Well done! Let’s wait till the hut is finished."
@@ -344,7 +344,7 @@ msgstr "Ma tha thu airson cùisean a dhèanamh nas luaithe, cha leig thu leas ac
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:237
 msgid "Change is rapid with pressed Ctrl and smooth with pressed Shift."
-msgstr ""
+msgstr "Thèid atharrachadh gu luath le brùthadh air Ctrl agus gu rèidh le bruthadh air Shift."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:244
 msgid "The Lumberjack’s Hut is Done"
@@ -431,7 +431,7 @@ msgstr "Dòighean eile gus an sealladh a ghluasad"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:296
 msgid "Excellent. Now there is a faster way to move, using the mouse instead."
-msgstr ""
+msgstr "Taghta. Nise, tha dòigh nas luaithe ann airson gluasad ’s tu a’ cleachdadh na luchaige."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:303
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:305
@@ -440,7 +440,7 @@ msgstr "Ionnsaich mar a chleachdas tu am meanbh-mhapa"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:306
 msgid "Try moving around by clicking on the minimap"
-msgstr ""
+msgstr "Feuch gluasad mun cuairt le briogadh air a’ mheanbh-mhapa"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:307
 msgid "Play around a bit with the different overlays (roads, flags, etc.)"
@@ -451,26 +451,26 @@ msgid ""
 "When you are ready to continue, close the minimap by selecting ‘Hide "
 "Minimap’ in the ‘Map View’ menu or by pressing ‘m’. Of course, a right-click"
 " also works."
-msgstr ""
+msgstr "Nuair a bhios tu deiseil airson leantainn air adhart, dùin am meanbh-mhapa ’s tu a’ taghadh “Falaich am meanbh-mhapa” sa chlàr-taice “Sealladh a’ mhapa” no le brùthadh air “m”. Gu nàdarra, obraichidh briogadh deas cuideachd."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:314
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:329
 msgid "Using the Minimap"
-msgstr ""
+msgstr "Cleachdadh a’ mheanbh-mhapa"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:316
 msgid "Very good. And now about the minimap. "
-msgstr ""
+msgstr "Glè mhath. Nise, mun mheanbh-mhapa. "
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:318
 msgid ""
 "You can open it by selecting the ‘Show Minimap’ entry in the ‘Map View’ menu"
 " at the bottom of the screen or simply by using the keyboard shortcut ‘m’."
-msgstr ""
+msgstr "‘S urrainn dhut fhosgladh ’s tu a’ taghadh “Seall am meanbh-mhapa” sa chlàr-taice “Sealladh a’ mhapa” aig bonn na sgrìn no leis an iuchair “m” air a’ mheur-chlàr."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:320
 msgid "I will open it for you."
-msgstr ""
+msgstr "Fosglaidh mi dhut e."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:331
 msgid ""
@@ -566,7 +566,7 @@ msgid ""
 "If you decide you do not want to build a road at this time, you can cancel "
 "road building by clicking on the starting flag of the road and selecting the"
 " abort symbol."
-msgstr ""
+msgstr "Ma chuireas tu romhad nach tog thu rathad an-dràsta, ’s urrainn dhut sgur de thogail an rathaid ’s tu a’ briogadh air bratach tòiseachaidh an rathaid ’s a’ taghadh an samhla sguir dheth."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:381
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:395
@@ -580,13 +580,13 @@ msgid ""
 "Excellent! Directly after placing the building, you have been switched into "
 "road building mode. The new road will start at the flag in front of your "
 "newly placed construction site."
-msgstr ""
+msgstr "Taghta! Nuair a bhios tu air togalach a chur ann, bidh thu sa mhodh togail rathaidean. Tòisichidh an rathad ùr aig a’ bhratach air beulaibh na làraich togail ùire agad."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:384
 msgid ""
 "You can enter road building mode for any flag by left-clicking on a flag and"
 " selecting the road building symbol."
-msgstr ""
+msgstr "’S urrainn dhut tionndadh dhan mhodh togail rathaidean airson brataich sam bith ’s tu a’ briogadh leis a’ phutan clì air a’ bhratach is a’ taghadh an samhla togail rathaidean."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:386
 msgid ""
@@ -600,7 +600,7 @@ msgstr "Nise, tòisicheamaid air an rathad. Cuimhnich gu bheil sinn ann am modh 
 msgid ""
 " Excellent! To enter road building mode for any flag, left-click on a flag "
 "and select the road building symbol."
-msgstr ""
+msgstr " Sgoinneil! Gus dol a-steach dhan mhodh togail rathaidean airson bratach sam bith, dèan briogadh clì air a’ bhratach agus tagh an samhla togail rathaidean."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:399
 msgid ""
@@ -694,7 +694,7 @@ msgid ""
 "It seems like you destroyed a construction site for a quarry we wanted to "
 "build. Luckily, we still have enough logs left this time, so you can simply "
 "build another one."
-msgstr ""
+msgstr "Na mhill thu làrach togail a’ chuaraidh a bha sinn airson togail? Gu fortanach, tha fiodh gu leòr againn fhathast agus ’s urrainn dhut fear eile a thogail."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
 msgid ""
@@ -702,7 +702,7 @@ msgid ""
 "created from time to time. To do so, you will have to go back to the main "
 "menu and choose ‘Single Player’ → ‘Load Game’. And please be a bit more "
 "careful next time."
-msgstr ""
+msgstr "Mar roghainn eile, ’s urrainn dhut an geama a luchdadh às ùr o gheama air a shàbhaladh. Gu fortanach, cruthaichidh sinn fear dhut o àm gu àm. Gus geama a luchdadh, feumaidh tu tilleadh dhan phrìomh chlàr-taice agus “Aon chluicheadair” → “Luchdaich geama” a thaghadh an uairsin. Agus nach bi thu nas fhaiceallaiche an ath thuras?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:458
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:460
@@ -742,49 +742,49 @@ msgid ""
 "construction sites look the same, and some buildings look alike. It is "
 "sometimes hard to tell them apart. Widelands offers a feature to show label "
 "texts over the buildings. They are called the ‘census’."
-msgstr ""
+msgstr "Fhad ’s a tha sinn a’ feitheamh, seallaidh mi gleus feumail eile dhut. Tha an aon choltas aig gach làrach togail is tha cuid a thogalaichean uabhasach coltach ri chèile. Tha e doirbh aig amannan aithneachadh dè seòrsa togalaich a chì thu. Tairgidh Widelands gleus dhut a nochdas ainm os cionn gach togalaich. Chuir sinn “cunntas-sluaigh” air.."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:482
 msgid ""
 "In order to show or hide the building census labels, you can select the "
 "‘Show Census’ / ‘Hide Census’ entry from the ‘Show / Hide’ menu on the "
 "bottom, or press the ‘c’ key on the keyboard."
-msgstr ""
+msgstr "Airson leubailean cunntas-sluaigh nan togalaichean a nochdadh no fhalach, tagh “Seall an cunntas-sluaigh”/“Falaich an cunntas-sluaigh” sa chlàr-taice “Seall / Falaich” aig a’ bhonn no brùth air an iuchair “c” air a’ mheur-chlàr."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:483
 msgid "Let me enable the census for you."
-msgstr ""
+msgstr "Cuiridh mi an cunntas-sluaigh an comas dhut."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:492
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:494
 msgid "Show the building statistics"
-msgstr ""
+msgstr "Seall stadastaireachd nan togalach"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:495
 msgid ""
 "Show the building statistics labels, so that we can check the progress of "
 "our quarry construction more easily."
-msgstr ""
+msgstr "Seall leubailean stadastaireachd nan togalach ach am faic sinn an t-adhartas air togail a’ chuaraidh gun duilgheadas."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:496
 msgid ""
 "In order to show or hide the building statistics labels, you can select the "
 "‘Show Statistics’ entry from the ‘Show / Hide’ menu on the bottom, or press "
 "the ‘s’ key on the keyboard."
-msgstr ""
+msgstr "Airson leubailean stadastaireachd nan togalaichean a nochdadh no fhalach, tagh “Seall an stadastaireachd ”/“Falaich an stadastaireachd ” sa chlàr-taice “Seall / Falaich” aig a’ bhonn no brùth air an iuchair “s” air a’ mheur-chlàr."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:503
 msgid ""
 "Now, wouldn’t it be nice to check on our quarries’ progress without having "
 "to open their windows?"
-msgstr ""
+msgstr "Nise, nach biodh e taghta nam b’ urrainn dhuinn adhartas nan cuaraidhean fhaicinn gun fhosgladh nan uinneagan aca?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:504
 msgid ""
 "In addition to the buildings’ census, you can also activate statictics "
 "labels on them. This will display information about the productivity of "
 "buildings or the progress of construction sites."
-msgstr ""
+msgstr "A bharrachd air cunntas-sluaigh nan togalaichean, ’s urrainn dhut leubailean stadastaireachd a ghnìomhachadh orra cuideachd. Seallaidh seo fiosrachadh mu chinneasachadh nan togalach is adhartas nan làraichean togail."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:514
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."
@@ -806,7 +806,7 @@ msgstr "Cuir na h-uile teachdaireachd a tha sa bhogsa a-steach agad dhan tasglan
 msgid ""
 "Keep clicking the ‘Archive selected message’ button until all messages have "
 "been archived and the list is empty."
-msgstr ""
+msgstr "Briog air a’ phutan “Cuir an teachdaireachd a thagh thu dhan tasglann” a-rithist ’s a-rithist gus an deach a h-uile teachdaireachd a chur dhan tasglann agus an liosta falamh."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:532
 msgid ""
@@ -825,7 +825,7 @@ msgid ""
 "You can toggle the message window by pressing ‘n’ or clicking the second "
 "button from the right at the very bottom of the screen. The newest message "
 "will be marked for you automatically."
-msgstr ""
+msgstr "’S urrainn dhut uinneag nan teachdaireachd a thoglachadh ’s tu a’ brùthadh air “n” no a’ briogadh air an dàrna putan on taobh deas aig a bhonn. Thèid an teachdaireachd as ùire a thaghadh dhut gu fèin-obrachail."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:535
 msgid ""
@@ -862,7 +862,7 @@ msgid ""
 "You have two messages at the moment. This one, which you are currently "
 "reading, and the one that informed you that a new headquarters was added to "
 "your economy. Let’s learn how to archive messages:"
-msgstr ""
+msgstr "Tha dà theachdaireachd agad an-dràsta. An tè seo a tha thu a’ leughadh an-dràsta is an tè eile a dh’innis dhut gun robh prìomh-àras ùr air a chur ris an eaconamaidh agad. Ionnsaicheamaid mar a chuireas tu teachdaireachd dhan tasglann:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:552
 msgid "Close the messages window"
@@ -877,7 +877,7 @@ msgid ""
 "All windows in Widelands can be closed by right-clicking into them. Some "
 "windows can also be toggled with the buttons and menus at the very bottom of"
 " the screen."
-msgstr ""
+msgstr "’S urrainn dhut uinneag sam bith ann an Widelands a dhùnadh ’s tu a’ dèanamh briogadh deas air. Gabhaidh cuid a dh’uinneagan sealltainn is falach leis na putanan is clàran-taice aig bonn na sgrìn cuideachd."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:556
 msgid "Close the messages window now by right-clicking into it."
@@ -909,7 +909,7 @@ msgstr "Mill an dà chuaraidh"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:585
 msgid "Destroy the Quarries"
-msgstr ""
+msgstr "Mill na cuaraidhean"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:586
 msgid ""
@@ -944,7 +944,7 @@ msgstr "Thàinig teachdaireachdan a-steach!"
 msgid ""
 "You received some messages. See how the button at the bottom of the screen "
 "has changed appearance?"
-msgstr ""
+msgstr "Fhuair thu teachdaireachdan. Am faic thu mar a dh’atharraich dreach a’ phutain taobh deas aig bonn na sgrìn?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:608
 msgid "Expand your territory"
@@ -952,11 +952,11 @@ msgstr "Meudaich an ranntair agad"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:610
 msgid "Make your Territory Grow"
-msgstr ""
+msgstr "Cuir ris an ranntair agad"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:611
 msgid "Build a military building on your border."
-msgstr ""
+msgstr "Tog togalach an airm aig a’ chrìoch."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:612
 msgid ""
@@ -1015,7 +1015,7 @@ msgstr "Tha leudachadh an ranntair agad cho simplidh ri togail togalach an airm 
 msgid ""
 "As soon as a military building is manned, it will extend your land. I will "
 "tell you more about military buildings in another tutorial."
-msgstr ""
+msgstr "Cho luath ’s a bhios saighdear air còmhnaidh a ghabhail ann an togalach an airm agad, leudaichidh an ranntair agad. Innsidh mi barrachd dhut mu thogalaichean an airm ann an oideachadh eile."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:629
 msgid "Military Site Occupied"
@@ -1057,17 +1057,17 @@ msgstr "Co-dhiù no co-dheth, on a tha thu eòlach air stiùireadh Widelands a-n
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:651
 msgid "To leave this game and return to the main menu:"
-msgstr ""
+msgstr "Gus an geama seo fhàgail agus tilleadh dhan phrìomh chlàr-taice:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:652
 msgid ""
 "Click on the ‘Main Menu’ button on the very left at the bottom of the "
 "screen."
-msgstr ""
+msgstr "Briog air a’ phutan “Am prìomh chlàr-taice” taobh clì aig bonn na sgrìn."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:653
 msgid "Then click on the ‘Exit Game’ entry."
-msgstr ""
+msgstr "Briog air “Fàg an geama” an uairsin."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:654
 msgid ""
@@ -1078,4 +1078,4 @@ msgstr "Mòran taing airson an t-oideachadh seo a chluiche. Gabh tlachd à Widel
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
