@@ -50,6 +50,7 @@ struct Box : public Panel {
 	    uint32_t inner_spacing = 0);
 
 	void set_scrolling(bool scroll);
+	void set_force_scrolling(bool);
 
 	int32_t get_nritems() const {
 		return items_.size();
@@ -74,6 +75,7 @@ struct Box : public Panel {
 	}
 
 	Scrollbar* get_scrollbar() { return scrollbar_.get(); }
+	void set_scrollbar_style(UI::PanelStyle);
 
 protected:
 	void layout() override;
@@ -113,8 +115,9 @@ private:
 		int assigned_var_depth;
 	};
 
-	bool scrolling_;
+	bool scrolling_, force_scrolling_;
 	std::unique_ptr<Scrollbar> scrollbar_;
+	UI::PanelStyle scrollbar_style_;
 	uint32_t orientation_;
 	uint32_t mindesiredbreadth_;
 	uint32_t inner_spacing_;

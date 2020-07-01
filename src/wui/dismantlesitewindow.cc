@@ -58,6 +58,7 @@ void DismantleSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wante
 	}
 
 	subbox.set_max_size(500, 400);
+	subbox.set_scrollbar_style(UI::PanelStyle::kWui);
 	subbox.set_scrolling(true);
 	box.add(&subbox, UI::Box::Resizing::kFullSize);
 

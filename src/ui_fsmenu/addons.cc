@@ -130,8 +130,6 @@ AddOnsCtrl::AddOnsCtrl() : FullscreenMenuBase(),
 				_("Refresh"), _("Refresh the list of add-ons available from the server")),
 		autofix_dependencies_(this, "autofix", 0, 0, 2 * kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary,
 				_("Fix…"), _("Automatically fix the dependency errors")) {
-	installed_addons_wrapper_.set_scrolling(true);
-	browse_addons_wrapper_.set_scrolling(true);
 	installed_addons_wrapper_.add(&installed_addons_box_, UI::Box::Resizing::kExpandBoth);
 	browse_addons_wrapper_.add(&browse_addons_box_, UI::Box::Resizing::kExpandBoth);
 	tabs_.add("my", _("Installed"), &installed_addons_wrapper_);
@@ -250,6 +248,9 @@ AddOnsCtrl::AddOnsCtrl() : FullscreenMenuBase(),
 	browse_addons_box_.set_size(100, 100);
 	installed_addons_wrapper_.set_size(100, 100);
 	browse_addons_wrapper_.set_size(100, 100);
+
+	installed_addons_wrapper_.set_force_scrolling(true);
+	browse_addons_wrapper_.set_force_scrolling(true);
 
 	refresh_remotes();
 }
