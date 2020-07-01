@@ -9,13 +9,14 @@
 # Madkat Here, 2015-2016
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020
 # Thadah D. Denyse <juchuf@gmail.com>, 2017
+# Walter Benkel <tromaster@gmail.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-06-06 19:42+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
+"POT-Creation-Date: 2020-06-30 14:48+0000\n"
+"PO-Revision-Date: 2020-06-28 16:58+0000\n"
+"Last-Translator: Walter Benkel <tromaster@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -45,7 +46,7 @@ msgid ""
 "I’ve set up a small village that contains the most important buildings. You "
 "also have enough wares, so you do not have to take care of your weapons "
 "production. In a real game, you will not have this luxury."
-msgstr "He levantado un pequeño pueblo que contiene los edificios más importantes. Tienes también suficientes mercancías, así que no tienes que preocuparte de tu producción de armas. En un partido real no disfrutarás de este lujo."
+msgstr "He levantado un pequeño pueblo que contiene los edificios más importantes. También tienes suficientes mercancías, así que no tienes que preocuparte de tu producción de armas. En una partida real no disfrutarás de este lujo."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:37
 msgid "Soldiers’ abilities"
@@ -295,24 +296,24 @@ msgstr "Cabaña de Explorador"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:133
 msgid "Explore Your Surroundings"
-msgstr ""
+msgstr "Explora Tus Alrededores"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:134
 msgid ""
 "Large parts of the map haven’t been explored yet. It might be a good idea to"
 " know which direction is best for expanding our empire."
-msgstr ""
+msgstr "Grandes partes del mapa aún no han sido exploradas. Puede ser una buena idea saber cuál dirección es la mejor para expandir nuestro imperio."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:135
 msgid ""
 "You can try your luck and expand randomly, but this is risky. A safer way is"
 " to use a scout to explore unseen parts of the map. What if he finds "
 "mountains overflowing with gold?"
-msgstr ""
+msgstr "Puedes tentar tu suerte y expandirte al azar, pero puede ser riesgoso. Un modo más seguro es usar un explorador para explorar partes del mapa que no se ven. ¿Y si encuentra montañas rebosantes de oro?"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:136
 msgid "We will need a scout’s hut to start exploring. It is a small building."
-msgstr ""
+msgstr "Necesitaremos una cabaña de explorador para comenzar. Es un edificio pequeño."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:137
 msgid "Build a scout’s hut."
@@ -326,7 +327,7 @@ msgstr "Construye una cabaña de explorador"
 msgid ""
 "It’s good to know your surroundings. A scout will explore unseen parts of "
 "the map for you."
-msgstr ""
+msgstr "Es bueno conocer tus alrededores. Un explorador examinará partes no vistas del mapa para ti."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:147
 msgid "Build a Scout’s Hut."
@@ -334,29 +335,29 @@ msgstr "Construye una Cabaña de Explorador."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:153
 msgid "Scout is ready"
-msgstr ""
+msgstr "El explorador está listo"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:155
 msgid "Ready to go!"
-msgstr ""
+msgstr "¡Listo para salir!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:156
 msgid ""
 "Well done, your scout’s hut has been built. While our scout is moving in, "
 "let’s learn a little bit more about him."
-msgstr ""
+msgstr "Bien hecho, tu cabaña de explorador ha sido construida. Mientras llega tu explorador conozcamos algo más acerca de él."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:157
 msgid ""
 "First of all, he will need to take some food with him on his scouting trips."
 " Fortunately, we have some rations in our warehouse."
-msgstr ""
+msgstr "Antes que nada, tendrá que llevar consigo algo de alimento en sus viajes de exploración. Afortunadamente tenemos algunas raciones en nuestro almacén."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:158
 msgid ""
 "When provided with food, he will walk randomly around the area. You should "
 "follow his movement before fog of war hides what he saw."
-msgstr ""
+msgstr "Cuando tiene alimentación caminará aleatoriamente por el área. Deberías seguir sus movimientos antes que la niebla de guerra oculte lo que vio."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:164
 msgid "Scout"
@@ -368,35 +369,35 @@ msgstr "Explorar el mapa"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:167
 msgid "Wait for the scout to explore unseen areas."
-msgstr ""
+msgstr "Espera a que el explorador examine areas no vistas."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:168
 msgid "Observe your scout."
-msgstr ""
+msgstr "Observa a tu explorador."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:174
 msgid "Scout made progress"
-msgstr ""
+msgstr "El explorador ha progresado"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:176
 msgid "New horizons?"
-msgstr ""
+msgstr "¿Nuevos horizontes?"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:177
 msgid ""
 "As you can see, scouts can go quite far. The good news is that there are no "
 "enemies around."
-msgstr ""
+msgstr "Como puedes ver, el explorador puede ir bastante lejos. La buena noticia es que no hay enemigos en la cercanía."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:178
 msgid "You can use the minimap to see the exploration’s progress."
-msgstr ""
+msgstr "Puedes usar el minimapa para ver el progreso de la exploración."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:179
 msgid ""
 "Don’t forget that scouting is hard work and as such cannot be done without "
 "provision of food."
-msgstr ""
+msgstr "No olvides que la exploración es trabajo duro y por lo tanto necesita una buena provisión de alimento."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:185
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:187
@@ -505,7 +506,7 @@ msgid ""
 " be hidden under the fog of war. You should therefore only dismantle "
 "military buildings deep inside your territory where you are safe from "
 "enemies."
-msgstr "Sin embargo destruir un edificio militar siempre conlleva un riesgo: la tierra sigue siendo tuya pero ya no está protegida. Cualquier enemigo que construya sus propios sitios militares puede tomar esta tierra sin luchar, haciendo que tus edificios estallen en llamas. Es más, algunas partes de tierra podrían ahora estar ocultas bajo la niebla de guerra. Solo deberías, por tanto, desarmar edificios militares muy dentro de tu territorio, donde estés a salvo de los enemigos."
+msgstr "Sin embargo, destruir un edificio militar siempre conlleva un riesgo: la tierra sigue siendo tuya pero ya no está protegida. Cualquier enemigo que construya sus propios sitios militares puede ocupar esta tierra sin luchar, haciendo que tus edificios estallen en llamas. Es más, algunas partes de tierra podrían ahora estar ocultas bajo la niebla de guerra. Por lo tanto, sólo deberías desarmar edificios militares muy al interior de tu territorio, donde estés a salvo de los enemigos."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:216
 msgid ""
@@ -516,7 +517,7 @@ msgstr "¿Has visto tu centinela? Dado que no puede contener muchos soldados y e
 #. TRANSLATORS: 'it' refers to the Barbarian sentry
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:218
 msgid "Dismantle it."
-msgstr "Desarmalo."
+msgstr "Desármalo."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:219
 msgid ""
@@ -526,11 +527,11 @@ msgstr "También puedes aprovechar esta oportunidad para familiarizarte con el r
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:225
 msgid "Soldiers, dismissed!"
-msgstr ""
+msgstr "¡Soldados, están despedidos!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:227
 msgid "Dismantle your north-western sentry"
-msgstr "Desarma el centinela del NorOeste"
+msgstr "Desarma el centinela del noroeste"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:228
 msgid ""
@@ -542,7 +543,7 @@ msgstr "Puedes controlar el número de soldados guarnecidos en un sitio militar 
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:229
 msgid "Dismantle your sentry in the north-west, next to the barrier."
-msgstr "Desarma tu centinela del NorOeste, junto a la muralla."
+msgstr "Desarma tu centinela del noroeste, junto a la barrera."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:235
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:248
@@ -667,7 +668,7 @@ msgid ""
 "But a war is expensive, and not always the path leading to the goal. When "
 "setting up a new game, you can also choose peaceful win conditions. You "
 "should definitely try them out, they’re worth it."
-msgstr "Pero una guerra es cara, y no siempre es el camino. Cuando estés ajustando un nuevo partido siempre puedes elegir condiciones de victoria pacíficas. Deberías probarlas sin duda, merecen la pena."
+msgstr "Pero una guerra es cara, y no siempre es el camino a la meta. Cuando estés ajustando una nueva partida siempre puedes elegir condiciones de victoria pacíficas. Si duda deberías probarlas, merecen la pena."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:284
 msgid ""

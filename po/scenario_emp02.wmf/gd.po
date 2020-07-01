@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-04-12 17:33+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-06-30 14:48+0000\n"
+"PO-Revision-Date: 2020-06-27 06:10+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -507,7 +507,7 @@ msgid ""
 "that the Empire is at war with the Barbarians. They were attacked from the "
 "north by the tribe that I was forbidden to attack. It is clear to me what I "
 "must do…"
-msgstr "Chaidh an teachdaireachd a chur thugamsa, a’ guidhe gun tillinn gu Fremil. Tha i ag ràdh gu bheil an Impireachd a’ cogadh ris na Tùsanaich. Chaidh ionnsaigh a thoirt orra on taobh tuath leis an treubh nach d’ fhuair mi cead gus ionnsaigh a thoirt orra. Tha e follaiseach dè dh’fheumas mi dèanamh a-nis…"
+msgstr "Chaidh an teachdaireachd a chur thugamsa, a’ guidhe gun tillinn gu Fremil. Tha i ag ràdh gu bheil an Ìmpireachd a’ cogadh ris na Tùsanaich. Chaidh ionnsaigh a thoirt orra on taobh tuath leis an treubh nach d’ fhuair mi cead gus ionnsaigh a thoirt orra. Tha e follaiseach dè dh’fheumas mi dèanamh a-nis…"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:289
 msgid ""
@@ -518,4 +518,4 @@ msgstr "Tha thu air am misean seo a choileanadh. Faodaidh tu leantainn air adhar
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
