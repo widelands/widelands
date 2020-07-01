@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-06-27 10:34+0000\n"
-"PO-Revision-Date: 2020-06-27 15:43+0000\n"
+"POT-Creation-Date: 2020-06-30 14:48+0000\n"
+"PO-Revision-Date: 2020-06-28 17:06+0000\n"
 "Last-Translator: Walter Benkel <tromaster@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -2336,7 +2336,7 @@ msgstr "Si es así, escribe: /ack_kick %s"
 
 #: ../../src/network/gamehost.cc:346
 msgid "kick acknowledgement cancelled: No name given!"
-msgstr "expulsión cancelada: ¡nombre no informado!"
+msgstr "Expulsión cancelada: ¡nombre no informado!"
 
 #: ../../src/network/gamehost.cc:348
 msgid "Wrong use, should be: /ack_kick <name>"
@@ -5300,7 +5300,7 @@ msgstr "La fecha en el que la partida fue guardada"
 msgid ""
 "The filename that the game was saved under followed by the map’s name, or "
 "the map’s name followed by the last objective achieved."
-msgstr "El nombre del archivo en el que se guardó el partido seguido del nombre del mapa, o del nombre del mapa seguido del último objetivo conseguido."
+msgstr "El nombre del archivo con el que se guardó la partida seguido por el nombre del mapa, o el nombre del mapa seguido por el último objetivo conseguido."
 
 #. * TRANSLATORS: Tooltip header for the "Mode" column when choosing a
 #. game/replay to

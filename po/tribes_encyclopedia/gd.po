@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-06-27 10:34+0000\n"
-"PO-Revision-Date: 2020-06-27 17:30+0000\n"
+"POT-Creation-Date: 2020-06-30 14:48+0000\n"
+"PO-Revision-Date: 2020-06-28 09:29+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -149,19 +149,19 @@ msgid ""
 "‘From the height of our tower we could see far into enemy territory. The "
 "enemy was well prepared, but we also noticed some weak points in their "
 "defense.’"
-msgstr ""
+msgstr "“Chunnaic sinn raointean farsaing an nàmhad o àirde an tùir againn. Bha an nàmhaid air a h-ullachadh gu math ach mhothaich sinn do dh’uireasbhaidh no dhà ’na dìon.”"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/partially_finished/constructionsite/helptexts.lua:3
 msgctxt "building"
 msgid "‘Don’t swear at the builder who is short of building materials.’"
-msgstr ""
+msgstr "“Na càin am fear-togail air a bheil dìth stuthan togail.”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/partially_finished/constructionsite/helptexts.lua:8
 msgctxt "building"
 msgid "Proverb widely used for impossible tasks of any kind"
-msgstr ""
+msgstr "Seanfhacal cumanta mu shaothraichean do-dhèanta"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/partially_finished/constructionsite/helptexts.lua:13
@@ -173,7 +173,7 @@ msgstr "Tha togalach ùr ’ga thogail air an làrach togail seo."
 #: ../../data/tribes/buildings/partially_finished/dismantlesite/helptexts.lua:3
 msgctxt "building"
 msgid "‘New paths will appear when you are willing to tear down the old.’"
-msgstr ""
+msgstr "“Nochdaidh slighean ùra dhut le milleadh na seann-fheadhna.”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/partially_finished/dismantlesite/helptexts.lua:8
@@ -292,7 +292,7 @@ msgid ""
 "‘Only after the last duck has been shot down<br>Only after the last deer has"
 " been put to death<br>Only after the last fish has been caught<br>Then will "
 "you find that spiders are not to be eaten.’"
-msgstr ""
+msgstr "“Ma bhios an guga mu dheireadh air a ghlacadh<br>Ma bhios an damh mu dheireadh air a mharbhadh<br>Nuair a bhios an t-iasg mu dheireadh air a thoiteadh<br>’S ann an uairsin gun tuig thu nach bù chòir damhan-allaidh ithe.”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/helptexts.lua:14
@@ -639,7 +639,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘He who has enough bread will never be too tired to dig the ore and wield "
 "the ax.’"
-msgstr ""
+msgstr "“Am fear aig a bheil aran gu leòr, cha bhi e ro sgìth airson an clach a thochladh no an tuagh iomairt.”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:8
@@ -647,7 +647,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Khantarakh, ‘The Modern Barbarian Economy’,<br>3ʳᵈ cowhide ‘Craftsmanship "
 "and Trade’"
-msgstr ""
+msgstr "Kantaireach, “Nua-eaconamaidh nan Tùsanach”,<br>3ˢ bian-bà “Ceàrd ⁊ malart”"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:13
@@ -741,7 +741,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Khantarakh, ‘The Modern Barbarian Economy’,<br> 5ᵗʰ cowhide ‘Traffic and "
 "Logistics’"
-msgstr ""
+msgstr "Kantaireach, “Nua-eaconamaidh nan Tùsanach”,<br>5ᵐʰ bian-bà “Rathaidean ⁊ solar”"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:13
@@ -1444,7 +1444,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/helptexts.lua:12
 msgctxt "barbarians_building"
 msgid "Chat’Karuth<br>at the 5ᵗʰ conference of master craftsmen"
-msgstr ""
+msgstr "Cat’Charud<br>aig a’ 5ᵐʰ co-labhairt nan ceàrd"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/tavern/helptexts.lua:6
@@ -1500,7 +1500,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Khantarakh, ‘The Modern Barbarian Economy’,<br>9ᵗʰ cowhide ‘Seafaring and "
 "Conquest’"
-msgstr ""
+msgstr "Kantaireach, “Nua-eaconamaidh nan Tùsanach”,<br>9ᵐʰ bian-bà “Seòladaireachd ⁊ tuineachadh”"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:17
@@ -2994,7 +2994,7 @@ msgid ""
 "‘Steep like the slopes of Kal’mavrath, shiny like the most delicate armor "
 "and strong like our ancestors, that’s how the headquarters of Chat’Karuth "
 "presented itself to us.’"
-msgstr ""
+msgstr "“Cas mar sliabh Chal’mabhraid, gleansach mar an armachd as snasaile agus treun mar ur sinnsearan, seo an coltas a bha air prìomh-àras Chat’Charuid dhuinn.”"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/barbarians/headquarters/helptexts.lua:13
@@ -3015,7 +3015,7 @@ msgstr "’S e am prìomh thogalach agad a th’ anns a’ phrìomh-àras."
 msgctxt "barbarians_building"
 msgid ""
 "‘I prefer the planks of a ship to any fortress, no matter how strong it is.’"
-msgstr ""
+msgstr "“’S fheàrr leam long seach dùn is coma leat dè cho daingean ’s a tha e.”"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/barbarians/port/helptexts.lua:13
@@ -3029,7 +3029,7 @@ msgstr "Seo an t-ionad agad airson tuineachadh is malart thar chuain. Cumaidh tu
 #: ../../data/tribes/buildings/warehouses/barbarians/warehouse/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘Who still owns a warehouse is not yet defeated!’"
-msgstr ""
+msgstr "“Chan fhulaing am fear aig a bheil taigh-stòrais ruaig!”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/warehouses/barbarians/warehouse/helptexts.lua:8
@@ -3037,7 +3037,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Berthron, chief military adviser of Chat’Karuth,<br>when they lost the "
 "headquarters in the battle around the heights of Kal’Megarath"
-msgstr ""
+msgstr "Bearthron,<br>prìomh comhairle airm Chat’Charuid,<br>nuair a chiall iad am prìomh-àras ann am blàr Àird Chal’meagaraid"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/empire/headquarters/helptexts.lua:16
