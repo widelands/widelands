@@ -126,23 +126,19 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 			try {
 				// Check if ware/worker exists already and if not, try to load it. Will throw a
 				// GameDataError on failure.
-				tribes.try_load_ware_or_worker(output);
-				DescriptionIndex idx = tribes.ware_index(output);
-				if (tribes.ware_exists(idx)) {
-					if (output_ware_types_.count(idx)) {
-						throw wexception("this ware type has already been declared as an output");
+                const WareWorker wareworker = tribes.try_load_ware_or_worker(output);
+                if (wareworker == WareWorker::wwWARE) {
+                    const DescriptionIndex idx = tribes.ware_index(output);
+                    if (output_ware_types_.count(idx)) {
+						throw GameDataError("ware type '%s' was declared multiple times", output.c_str());
 					}
 					output_ware_types_.insert(idx);
-				} else {
-					idx = tribes.worker_index(output);
-					if (tribes.worker_exists(idx)) {
-						if (output_worker_types_.count(idx)) {
-							throw wexception("this worker type has already been declared as an output");
-						}
-						output_worker_types_.insert(idx);
-					} else {
-						throw wexception("tribes do not define a ware or worker type with this name");
-					}
+                } else {
+                    const DescriptionIndex idx = tribes.worker_index(output);
+                    if (output_worker_types_.count(idx)) {
+                        throw GameDataError("worker type '%s' was declared multiple times", output.c_str());
+                    }
+                    output_worker_types_.insert(idx);
 				}
 			} catch (const WException& e) {
 				throw wexception("output \"%s\": %s", output.c_str(), e.what());
@@ -157,33 +153,29 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 			const std::string& ware_or_worker_name = entry_table->get_string("name");
 			// Check if ware/worker exists already and if not, try to load it. Will throw a
 			// GameDataError on failure.
-			tribes.try_load_ware_or_worker(ware_or_worker_name);
+			const WareWorker wareworker = tribes.try_load_ware_or_worker(ware_or_worker_name);
 
 			int amount = entry_table->get_int("amount");
 			try {
 				if (amount < 1 || 255 < amount) {
-					throw wexception("amount is out of range 1 .. 255");
+					throw GameDataError("amount is out of range 1 .. 255");
 				}
-				DescriptionIndex idx = tribes.ware_index(ware_or_worker_name);
-				if (tribes.ware_exists(idx)) {
-					for (const auto& temp_inputs : input_wares()) {
+                if (wareworker == WareWorker::wwWARE) {
+                    const DescriptionIndex idx = tribes.ware_index(ware_or_worker_name);
+                    for (const auto& temp_inputs : input_wares()) {
 						if (temp_inputs.first == idx) {
-							throw wexception("duplicated");
+							throw GameDataError("ware type '%s' was declared multiple times", ware_or_worker_name.c_str());
 						}
 					}
-					input_wares_.push_back(WareAmount(idx, amount));
-				} else {
-					idx = tribes.worker_index(ware_or_worker_name);
-					if (tribes.worker_exists(idx)) {
-						for (const auto& temp_inputs : input_workers()) {
-							if (temp_inputs.first == idx) {
-								throw wexception("duplicated");
-							}
-						}
-						input_workers_.push_back(WareAmount(idx, amount));
-					} else {
-						throw wexception("tribes do not define a ware or worker type with this name");
-					}
+                    input_wares_.push_back(WareAmount(idx, amount));
+                } else {
+                    const DescriptionIndex idx = tribes.worker_index(ware_or_worker_name);
+                    for (const auto& temp_inputs : input_workers()) {
+                        if (temp_inputs.first == idx) {
+                            throw GameDataError("worker type '%s' was declared multiple times", ware_or_worker_name.c_str());
+                        }
+                    }
+                    input_workers_.push_back(WareAmount(idx, amount));
 				}
 			} catch (const WException& e) {
 				throw wexception("input \"%s=%d\": %s", ware_or_worker_name.c_str(), amount, e.what());

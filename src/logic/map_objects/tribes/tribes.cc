@@ -371,14 +371,17 @@ DescriptionIndex Tribes::load_worker(const std::string& workername) {
 	return safe_worker_index(workername);
 }
 
-void Tribes::try_load_ware_or_worker(const std::string& objectname) const {
+WareWorker Tribes::try_load_ware_or_worker(const std::string& objectname) const {
 	Notifications::publish(
 	   NoteMapObjectDescription(objectname, NoteMapObjectDescription::LoadType::kObject));
-	// Check if ware/worker exists already and if not, try to load it.
-	if (!ware_exists(ware_index(objectname)) && !worker_exists(worker_index(objectname))) {
-		throw GameDataError(
-		   "'%s' has not been registered as a ware/worker type", objectname.c_str());
-	}
+    if (ware_exists(ware_index(objectname))) {
+        return WareWorker::wwWARE;
+    }
+    if (worker_exists(worker_index(objectname))) {
+        return WareWorker::wwWORKER;
+    }
+    throw GameDataError(
+       "'%s' has not been registered as a ware/worker type", objectname.c_str());
 }
 
 uint32_t Tribes::get_largest_workarea() const {
