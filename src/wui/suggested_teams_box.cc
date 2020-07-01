@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2019 by the Widelands Development Team
+ * Copyright (C) 2015-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,7 +46,6 @@ SuggestedTeamsBox::SuggestedTeamsBox(Panel* parent,
                    padding),
      suggested_teams_box_label_(new UI::Textarea(this)),
      lineup_box_(nullptr) {
-	set_size(max_x, max_y);
 	add(suggested_teams_box_label_);
 }
 SuggestedTeamsBox::~SuggestedTeamsBox() {

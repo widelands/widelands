@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,6 +41,8 @@ namespace Widelands {
 constexpr uint32_t kStatisticsSampleTime = 30000;
 // See forester_cache_
 constexpr int16_t kInvalidForesterEntry = -1;
+
+constexpr uint32_t kScenarioDifficultyNotSet = 0;
 
 struct Flag;
 struct Path;
@@ -243,7 +245,7 @@ public:
 	void send_player_command(Widelands::PlayerCommand*);
 
 	void send_player_bulldoze(PlayerImmovable&, bool recurse = false);
-	void send_player_dismantle(PlayerImmovable&);
+	void send_player_dismantle(PlayerImmovable&, bool keep_wares);
 	void send_player_build(int32_t, const Coords&, DescriptionIndex);
 	void send_player_build_flag(int32_t, const Coords&);
 	void send_player_build_road(int32_t, Path&);
@@ -254,7 +256,7 @@ public:
 	void send_player_start_or_cancel_expedition(Building&);
 	void send_player_expedition_config(PortDock&, WareWorker, DescriptionIndex, bool);
 
-	void send_player_enhance_building(Building&, DescriptionIndex);
+	void send_player_enhance_building(Building&, DescriptionIndex, bool keep_wares);
 	void send_player_evict_worker(Worker&);
 	void send_player_set_stock_policy(Building&, WareWorker, DescriptionIndex, StockPolicy);
 	void send_player_set_ware_priority(
@@ -277,6 +279,15 @@ public:
 
 	SaveHandler& save_handler() {
 		return savehandler_;
+	}
+
+	uint32_t get_scenario_difficulty() const {
+		return scenario_difficulty_;
+	}
+	void set_scenario_difficulty(uint32_t d) {
+		assert(scenario_difficulty_ == kScenarioDifficultyNotSet);
+		assert(d != kScenarioDifficultyNotSet);
+		scenario_difficulty_ = d;
 	}
 
 	// Statistics
@@ -387,6 +398,8 @@ private:
 	SaveHandler savehandler_;
 
 	std::unique_ptr<ReplayWriter> replaywriter_;
+
+	uint32_t scenario_difficulty_;
 
 	GeneralStatsVector general_stats_;
 	int next_trade_agreement_id_ = 1;

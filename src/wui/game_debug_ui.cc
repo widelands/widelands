@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -199,7 +199,7 @@ FieldDebugWindow::FieldDebugWindow(InteractiveBase& parent, Widelands::Coords co
      ui_immovable_(this, "immovable", 0, 280, 300, 24, UI::ButtonStyle::kWuiMenu, ""),
 
      ui_bobs_(this, 0, 304, 300, 96, UI::PanelStyle::kWui) {
-	ui_immovable_.sigclicked.connect(boost::bind(&FieldDebugWindow::open_immovable, this));
+	ui_immovable_.sigclicked.connect([this]() { open_immovable(); });
 
 	assert(0 <= coords_.x);
 	assert(coords_.x < map_.get_width());
@@ -207,7 +207,7 @@ FieldDebugWindow::FieldDebugWindow(InteractiveBase& parent, Widelands::Coords co
 	assert(coords_.y < map_.get_height());
 	assert(&map_[0] <= coords_.field);
 	assert(coords_.field < &map_[0] + map_.max_index());
-	ui_bobs_.selected.connect(boost::bind(&FieldDebugWindow::open_bob, this, _1));
+	ui_bobs_.selected.connect([this](uint32_t a) { open_bob(a); });
 }
 
 /*

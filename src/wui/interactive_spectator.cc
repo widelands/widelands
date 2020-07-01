@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2019 by the Widelands Development Team
+ * Copyright (C) 2007-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 #include "base/macros.h"
 #include "chat/chat.h"
 #include "graphic/game_renderer.h"
+#include "graphic/mouse_cursor.h"
 #include "logic/game_controller.h"
 #include "logic/player.h"
 #include "ui_basic/textarea.h"
@@ -76,12 +77,6 @@ void InteractiveSpectator::draw(RenderTarget& dst) {
 }
 
 void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* dst) {
-	// A spectator cannot build roads.
-	assert(road_building_overlays().steepness_indicators.empty());
-	assert(road_building_overlays().road_previews.empty());
-	assert(waterway_building_overlays().steepness_indicators.empty());
-	assert(waterway_building_overlays().road_previews.empty());
-
 	// In-game, selection can never be on triangles or have a radius.
 	assert(get_sel_radius() == 0);
 	assert(!get_sel_triangles());
@@ -128,7 +123,7 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 		}
 
 		// Blit the selection marker.
-		if (field.fcoords == get_sel_pos().node) {
+		if (g_mouse_cursor->is_visible() && field.fcoords == get_sel_pos().node) {
 			const Image* pic = get_sel_picture();
 			blit_field_overlay(dst, field, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
 		}

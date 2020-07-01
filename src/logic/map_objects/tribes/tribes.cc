@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -217,15 +217,6 @@ const TribeDescr* Tribes::get_tribe_descr(DescriptionIndex tribeindex) const {
 	return tribes_->get_mutable(tribeindex);
 }
 
-void Tribes::set_ware_type_has_demand_check(DescriptionIndex wareindex,
-                                            const std::string& tribename) const {
-	wares_->get_mutable(wareindex)->set_has_demand_check(tribename);
-}
-
-void Tribes::set_worker_type_has_demand_check(DescriptionIndex workerindex) const {
-	workers_->get_mutable(workerindex)->set_has_demand_check();
-}
-
 // ************************ Loading *************************
 
 void Tribes::register_scenario_tribes(FileSystem* filesystem) {
@@ -380,13 +371,13 @@ DescriptionIndex Tribes::load_worker(const std::string& workername) {
 	return safe_worker_index(workername);
 }
 
-void Tribes::try_load_ware_or_worker(const std::string& objectname) {
+void Tribes::try_load_ware_or_worker(const std::string& objectname) const {
 	Notifications::publish(
 	   NoteMapObjectDescription(objectname, NoteMapObjectDescription::LoadType::kObject));
 	// Check if ware/worker exists already and if not, try to load it.
 	if (!ware_exists(ware_index(objectname)) && !worker_exists(worker_index(objectname))) {
 		throw GameDataError(
-		   "\"%s\" has not been registered as a ware/worker type", objectname.c_str());
+		   "'%s' has not been registered as a ware/worker type", objectname.c_str());
 	}
 }
 

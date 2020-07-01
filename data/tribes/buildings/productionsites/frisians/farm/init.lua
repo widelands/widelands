@@ -88,7 +88,6 @@ tribes:new_productionsite_type {
          actions = {
             "call=plant_barley",
             "call=harvest_barley",
-            "return=no_stats"
          }
       },
       plant_barley = {

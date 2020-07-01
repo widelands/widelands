@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2019 by the Widelands Development Team
+ * Copyright (C) 2015-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,6 +18,8 @@
  */
 
 #include "logic/replay_game_controller.h"
+
+#include <SDL_timer.h>
 
 #include "logic/game.h"
 #include "logic/replay.h"

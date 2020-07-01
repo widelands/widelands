@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2019 by the Widelands Development Team
+ * Copyright (C) 2007-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,6 +49,10 @@ Campaigns::Campaigns() {
 	campvis.reset(new Profile(kCampVisFile.c_str()));
 	Section& campvis_scenarios = campvis->get_safe_section("scenarios");
 
+	/** TRANSLATORS: A campaign difficulty */
+	const std::string default_difficulty_name = _("Default");
+	i18n::Textdomain td("maps");
+
 	// Now load the campaign info
 	LuaInterface lua;
 	std::unique_ptr<LuaTable> table(lua.run_script("campaigns/campaigns.lua"));
@@ -65,7 +69,6 @@ Campaigns::Campaigns() {
 
 	// Read the campaigns themselves
 	std::unique_ptr<LuaTable> campaigns_table(table->get_table("campaigns"));
-	i18n::Textdomain td("maps");
 
 	for (const auto& campaign_table : campaigns_table->array_entries<std::unique_ptr<LuaTable>>()) {
 		CampaignData* campaign_data = new CampaignData();
@@ -78,6 +81,19 @@ Campaigns::Campaigns() {
 			     campaign_table->get_table("prerequisites")->array_entries<std::string>()) {
 				campaign_data->prerequisites.insert(prerequisite);
 			}
+		}
+		if (campaign_table->has_key("difficulties")) {
+			for (const std::string& d :
+			     campaign_table->get_table("difficulties")->array_entries<std::string>()) {
+				campaign_data->difficulties.push_back(d);
+			}
+			assert(campaign_table->has_key("default_difficulty"));
+			campaign_data->default_difficulty =
+			   get_positive_int(*campaign_table, "default_difficulty");
+		} else {
+			assert(!campaign_table->has_key("default_difficulty"));
+			campaign_data->difficulties.push_back(default_difficulty_name);
+			campaign_data->default_difficulty = 1;
 		}
 
 		campaign_data->visible = false;

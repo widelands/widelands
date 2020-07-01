@@ -3,15 +3,15 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
-# Juanjo, 2015-2019
+# Juanjo, 2015-2020
 # Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-03-16 06:59+0000\n"
-"PO-Revision-Date: 2020-03-16 07:06+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-06-30 14:48+0000\n"
+"PO-Revision-Date: 2020-05-09 21:09+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -414,7 +414,7 @@ msgstr "Commuta entre mostrar o ocultar els espais de construcció"
 #: ../../data/txts/help/common_helptexts.lua:49
 msgctxt "hotkey"
 msgid "Ctrl + F"
-msgstr ""
+msgstr "Ctrl+F"
 
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"
@@ -616,7 +616,7 @@ msgid ""
 "You can place a big building on any node where you could place a medium "
 "building if there is no obstacle or non-arable terrain towards the west, "
 "northwest and northeast."
-msgstr "Podeu posar un edifici gran en qualsevol node on hi pugueu posar també un edifici mitjà, però cal que no hi hagi obstacles ni terreny no arable cap a l'oest, nord-est i nord-oest."
+msgstr "Podeu posar un edifici gran en qualsevol node on pugueu posar també un edifici mitjà, però cal que no hi hagi obstacles ni terreny no arable cap a l'oest, nord-est i nord-oest."
 
 #: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
@@ -755,53 +755,59 @@ msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
 msgstr "Apropa/Allunya la vista amb la roda del ratolí o %1%. Premeu %2% per reiniciar l'apropament de la vista."
 
 #: ../../data/txts/tips/general_game.lua:75
+msgid ""
+"Use the ‘,’ (comma) and ‘.’ (period) keys to quickly jump between recently "
+"visited locations."
+msgstr "Useu les tecles «,» (coma) i «.» (punt) per saltar ràpidament a alguns llocs visitats recentment."
+
+#: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
 msgid "Ctrl+(Page Up/Page Down)"
-msgstr ""
+msgstr "Ctrl+(Av/Re Pàg)"
 
-#: ../../data/txts/tips/general_game.lua:75
+#: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
 msgid "Page Up/Page Down"
-msgstr ""
+msgstr "Re/Av Pàg"
 
-#: ../../data/txts/tips/general_game.lua:75
+#: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
 msgid "Shift+(Page Up/Page Down)"
-msgstr ""
+msgstr "Maj+(Av/Re Pàg)"
 
-#: ../../data/txts/tips/general_game.lua:75
+#: ../../data/txts/tips/general_game.lua:79
 msgid ""
 "Speed up or slow down the game with %1%. Use %2% for rapid change, %3% will "
 "adjust speed smoothly."
-msgstr ""
-
-#: ../../data/txts/tips/general_game.lua:79
-msgctxt "hotkey"
-msgid "Arrow keys"
-msgstr ""
-
-#: ../../data/txts/tips/general_game.lua:79
-msgctxt "hotkey"
-msgid "Ctrl+Arrow keys"
-msgstr ""
-
-#: ../../data/txts/tips/general_game.lua:79
-msgid ""
-"Move map view using %1%. %2% will move the view faster, %3% moves slowly."
-msgstr ""
-
-#: ../../data/txts/tips/general_game.lua:79
-msgctxt "hotkey"
-msgid "Shift+Arrow keys"
-msgstr ""
+msgstr "Accelereu o alentiu la partida amb %1%. Useu %2% per accelerar-la més ràpidament. %3% ajustarà la velocitat més suaument."
 
 #: ../../data/txts/tips/general_game.lua:83
+msgctxt "hotkey"
+msgid "Arrow keys"
+msgstr "Tecles de cursor"
+
+#: ../../data/txts/tips/general_game.lua:83
+msgctxt "hotkey"
+msgid "Ctrl+Arrow keys"
+msgstr "Ctrl+Tecles de cursor"
+
+#: ../../data/txts/tips/general_game.lua:83
+msgid ""
+"Move map view using %1%. %2% will move the view faster, %3% moves slowly."
+msgstr "Moveu el mapa amb %1%. Amb %2% el moureu més de pressa i amb %3% el moureu més a poc a poc."
+
+#: ../../data/txts/tips/general_game.lua:83
+msgctxt "hotkey"
+msgid "Shift+Arrow keys"
+msgstr "Maj+Tecles de cursor"
+
+#: ../../data/txts/tips/general_game.lua:87
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"
 " no such flags in the vicinity, they will keep wandering around and "
 "eventually die."
-msgstr "Quan es destrueix un edifici, els seus treballadors buscaran una bandera que estigui prop i llavors es mouran pels camins cap a un magatzem connectat. Si no hi ha banderes prop, continuaran donant voltes fins trobar una bandera o fins que morin."
+msgstr "Quan es destrueix un edifici, els seus treballadors buscaran una bandera que estigui prop i llavors es mouran pels camins cap a un magatzem connectat. Si no hi ha banderes prop, continuaran donant voltes fins a trobar una bandera o fins que morin."
 
 #: ../../data/txts/tips/multiplayer.lua:4
 msgid ""

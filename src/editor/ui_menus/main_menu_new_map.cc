@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -74,8 +74,8 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent, Registry& registry)
 	box_.add(&list_);
 	box_.add_space(2 * margin_);
 
-	cancel_button_.sigclicked.connect(boost::bind(&MainMenuNewMap::clicked_cancel, this));
-	ok_button_.sigclicked.connect(boost::bind(&MainMenuNewMap::clicked_create_map, this));
+	cancel_button_.sigclicked.connect([this]() { clicked_cancel(); });
+	ok_button_.sigclicked.connect([this]() { clicked_create_map(); });
 	if (UI::g_fh->fontset()->is_rtl()) {
 		button_box_.add(&ok_button_);
 		button_box_.add(&cancel_button_);
@@ -103,7 +103,7 @@ void MainMenuNewMap::clicked_create_map() {
 	                      list_.get_selected(), _("No Name"),
 	                      get_config_string("realname", pgettext("author_name", "Unknown")));
 
-	egbase.postload();
+	egbase.create_tempfile_and_save_mapdata(FileSystem::ZIP);
 
 	map->recalc_whole_map(egbase);
 	parent.map_changed(EditorInteractive::MapWas::kReplaced);

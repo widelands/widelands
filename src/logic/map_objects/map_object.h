@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -77,6 +77,7 @@ struct MapObjectDescr {
 	}
 
 	virtual uint32_t get_animation(const std::string& animname, const MapObject* mo) const;
+
 	uint32_t main_animation() const;
 	std::string get_animation_name(uint32_t) const;  ///< needed for save, debug
 

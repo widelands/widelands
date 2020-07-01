@@ -200,7 +200,9 @@ hq2:set_workers {
    empire_weaponsmith = 1,
    empire_geologist = 2
 }
-hq2:set_soldiers({4,4,0,2}, 40)
+local nr_soldiers = {40, 40, 100}
+nr_soldiers = nr_soldiers[difficulty]
+hq2:set_soldiers({4,4,0,2}, nr_soldiers)
 
 -- =======================================================================
 --                                 Player 3
@@ -292,4 +294,6 @@ hq3:set_workers {
    barbarians_blacksmith_master = 1,
    barbarians_helmsmith = 1
 }
-hq3:set_soldiers({3,5,0,2}, 50)
+nr_soldiers = {30, 50, 80}
+nr_soldiers = nr_soldiers[difficulty]
+hq3:set_soldiers({3,5,0,2}, nr_soldiers)

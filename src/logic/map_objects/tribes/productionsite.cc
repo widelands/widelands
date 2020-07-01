@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -94,6 +94,8 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          Tribes& tribes,
                                          const World& world)
    : BuildingDescr(init_descname, init_type, table, tribes),
+     ware_demand_checks_(new std::set<DescriptionIndex>()),
+     worker_demand_checks_(new std::set<DescriptionIndex>()),
      out_of_resource_productivity_threshold_(100) {
 	if (msgctxt.empty()) {
 		throw Widelands::GameDataError(
@@ -195,10 +197,11 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 	items_table = table.get_table("programs");
 	for (std::string program_name : items_table->keys<std::string>()) {
 		std::transform(program_name.begin(), program_name.end(), program_name.begin(), tolower);
+		if (programs_.count(program_name)) {
+			throw GameDataError("Program '%s' has already been declared for productionsite '%s'",
+			                    program_name.c_str(), name().c_str());
+		}
 		try {
-			if (programs_.count(program_name)) {
-				throw wexception("this program has already been declared");
-			}
 			std::unique_ptr<LuaTable> program_table = items_table->get_table(program_name);
 
 			// Allow use of both gettext and pgettext. This way, we can have a lower workload on
@@ -212,7 +215,8 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 			   new ProductionProgram(program_name, program_descname,
 			                         program_table->get_table("actions"), tribes, world, this));
 		} catch (const std::exception& e) {
-			throw wexception("program %s: %s", program_name.c_str(), e.what());
+			throw GameDataError("%s: Error in productionsite program %s: %s", name().c_str(),
+			                    program_name.c_str(), e.what());
 		}
 	}
 
@@ -277,6 +281,19 @@ const ProductionProgram* ProductionSiteDescr::get_program(const std::string& pro
  */
 Building& ProductionSiteDescr::create_object() const {
 	return *new ProductionSite(*this);
+}
+
+std::set<DescriptionIndex>* ProductionSiteDescr::ware_demand_checks() const {
+	return ware_demand_checks_.get();
+}
+std::set<DescriptionIndex>* ProductionSiteDescr::worker_demand_checks() const {
+	return worker_demand_checks_.get();
+}
+void ProductionSiteDescr::clear_demand_checks() {
+	ware_demand_checks_->clear();
+	ware_demand_checks_.reset(nullptr);
+	worker_demand_checks_->clear();
+	worker_demand_checks_.reset(nullptr);
 }
 
 /*
@@ -616,17 +633,20 @@ void ProductionSite::remove_worker(Worker& w) {
 	for (const auto& temp_wp : descr().working_positions()) {
 		DescriptionIndex const worker_index = temp_wp.first;
 		for (uint32_t j = temp_wp.second; j; --j, ++wp, ++wp_index) {
-			Worker* const worker = wp->worker;
-			if (worker && worker == &w) {
-				// do not request the type of worker that is currently assigned - maybe a trained worker
-				// was
-				// evicted to make place for a level 0 worker.
+			if (wp->worker == &w) {
+				// do not request the type of worker that is currently assigned – maybe a
+				// trained worker was evicted to make place for a level 0 worker.
 				// Therefore we again request the worker from the WorkingPosition of descr()
 				if (main_worker_ == wp_index) {
 					main_worker_ = -1;
 				}
 				*wp = WorkingPosition(&request_worker(worker_index), nullptr);
 				Building::remove_worker(w);
+				// If the main worker was evicted, perhaps another worker is
+				// still there to perform basic tasks
+				if (upcast(Game, game, &get_owner()->egbase())) {
+					try_start_working(*game);
+				}
 				return;
 			}
 		}
@@ -824,7 +844,7 @@ bool ProductionSite::can_start_working() const {
 }
 
 void ProductionSite::try_start_working(Game& game) {
-	const size_t nr_workers = descr().working_positions().size();
+	const size_t nr_workers = descr().nr_working_positions();
 	for (uint32_t i = 0; i < nr_workers; ++i) {
 		if (main_worker_ == static_cast<int>(i) || main_worker_ < 0) {
 			if (Worker* worker = working_positions_[i].worker) {

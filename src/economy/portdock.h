@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2019 by the Widelands Development Team
+ * Copyright (C) 2011-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -85,7 +85,6 @@ public:
 		return fleet_;
 	}
 	PortDock* get_dock(Flag& flag) const;
-	uint32_t get_need_ship() const;
 
 	void set_economy(Economy*, WareWorker) override;
 
@@ -108,7 +107,6 @@ public:
 
 	void shipping_item_arrived(Game&, ShippingItem&);
 	void shipping_item_returned(Game&, ShippingItem&);
-	void ship_coming(Ship&, bool affirmative);
 	void ship_arrived(Game&, Ship&);
 
 	void log_general_info(const EditorGameBase&) const override;
@@ -127,11 +125,16 @@ public:
 	// expedition ship is already underway.
 	ExpeditionBootstrap* expedition_bootstrap() const;
 
+	bool is_expedition_ready() const {
+		return expedition_ready_;
+	}
+
 	// Gets called by the ExpeditionBootstrap as soon as all wares and workers are available.
 	void set_expedition_bootstrap_complete(Game& game, bool complete);
 
 private:
 	friend struct ShipFleet;
+	friend struct ShippingSchedule;
 
 	// Does nothing - we do not show them on the map
 	void draw(uint32_t, InfoToDraw, const Vector2f&, const Coords&, float, RenderTarget*) override {
@@ -139,17 +142,18 @@ private:
 
 	void init_fleet(EditorGameBase& egbase);
 	void set_fleet(ShipFleet* fleet);
-	std::list<ShippingItem>::iterator update_shippingitem(Game&, std::list<ShippingItem>::iterator);
-	void set_need_ship(Game&, bool need);
+	void update_shippingitem(Game&, std::list<ShippingItem>::iterator);
 
-	void load_wares(Game&, Ship&);
+	bool load_one_item(Game&, Ship&, const PortDock& dest);
+
+	uint32_t calc_max_priority(const EditorGameBase&, const PortDock& dest) const;
 
 	ShipFleet* fleet_;
 	Warehouse* warehouse_;
 	PositionList dockpoints_;
 	std::list<ShippingItem> waiting_;
-	std::set<OPtr<Ship>> ships_coming_;
 	bool expedition_ready_;
+	bool expedition_cancelling_;
 
 	std::unique_ptr<ExpeditionBootstrap> expedition_bootstrap_;
 
@@ -166,7 +170,6 @@ protected:
 	private:
 		uint32_t warehouse_;
 		std::vector<ShippingItem::Loader> waiting_;
-		std::set<Serial> ships_coming_;
 	};
 
 public:

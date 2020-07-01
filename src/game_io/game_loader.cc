@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -150,7 +150,8 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 			// Renew MapObject connections
 			if (message->serial() > 0) {
 				MapObject* mo = game_.objects().get_object(message->serial());
-				mo->removed.connect(boost::bind(&Player::message_object_removed, player, message_id));
+				mo->removed.connect(
+				   [player, message_id](unsigned) { player->message_object_removed(message_id); });
 			}
 		}
 	}

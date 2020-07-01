@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -437,7 +437,7 @@ public:
 	};
 
 	const Field* fields() const {
-		return fields_;
+		return fields_.get();
 	}
 
 	// See area
@@ -518,8 +518,8 @@ public:
 	void military_site_set_soldier_preference(PlayerImmovable&,
 	                                          SoldierPreference soldier_preference);
 	void start_or_cancel_expedition(Warehouse&);
-	void enhance_building(Building*, DescriptionIndex index_of_new_building);
-	void dismantle_building(Building*);
+	void enhance_building(Building*, DescriptionIndex index_of_new_building, bool keep_wares);
+	void dismantle_building(Building*, bool keep_wares);
 
 	Economy* create_economy(WareWorker);
 	Economy* create_economy(Serial serial, WareWorker);  // For saveloading only
@@ -616,7 +616,7 @@ private:
 	void update_building_statistics(Building&, NoteImmovable::Ownership ownership);
 	void update_team_players();
 	void play_message_sound(const Message* message);
-	void enhance_or_dismantle(Building*, DescriptionIndex index_of_new_building);
+	void enhance_or_dismantle(Building*, DescriptionIndex index_of_new_building, bool keep_wares);
 
 	// Called when a node becomes seen or has changed.  Discovers the node and
 	// those of the 6 surrounding edges/triangles that are not seen from another
@@ -646,7 +646,7 @@ private:
 	// If we run out of ship names, we'll want to continue with unique numbers
 	uint32_t ship_name_counter_;
 
-	Field* fields_;
+	std::unique_ptr<Field[]> fields_;
 	std::set<DescriptionIndex> allowed_worker_types_;
 	std::set<DescriptionIndex> allowed_building_types_;
 	std::map<Serial, std::unique_ptr<Economy>> economies_;

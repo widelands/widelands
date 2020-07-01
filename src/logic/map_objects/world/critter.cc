@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,6 @@
 #include <memory>
 
 #include "base/wexception.h"
-#include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/field.h"
@@ -35,8 +34,9 @@
 
 namespace Widelands {
 
-void CritterProgram::parse(const std::vector<std::string>& lines) {
-	for (const std::string& line : lines) {
+CritterProgram::CritterProgram(const std::string& program_name, const LuaTable& actions_table)
+   : MapObjectProgram(program_name) {
+	for (const std::string& line : actions_table.array_entries<std::string>()) {
 		try {
 			const std::vector<std::string> cmd(split_string(line, " \t\r\n"));
 			if (cmd.empty())
@@ -103,9 +103,8 @@ CritterDescr::CritterDescr(const std::string& init_descname,
 	std::unique_ptr<LuaTable> programs = table.get_table("programs");
 	for (const std::string& program_name : programs->keys<std::string>()) {
 		try {
-			std::unique_ptr<CritterProgram> prog(new CritterProgram(program_name));
-			prog->parse(programs->get_table(program_name)->array_entries<std::string>());
-			programs_[program_name] = prog.release();
+			programs_[program_name] = std::unique_ptr<CritterProgram>(
+			   new CritterProgram(program_name, *programs->get_table(program_name).get()));
 		} catch (const std::exception& e) {
 			throw wexception("Parse error in program %s: %s", program_name.c_str(), e.what());
 		}
@@ -120,9 +119,6 @@ CritterDescr::CritterDescr(const std::string& init_descname,
 }
 
 CritterDescr::~CritterDescr() {
-	for (auto program : programs_) {
-		delete program.second;
-	}
 }
 
 bool CritterDescr::is_swimming() const {
@@ -135,11 +131,11 @@ bool CritterDescr::is_swimming() const {
 Get a program from the workers description.
 ===============
 */
-CritterProgram const* CritterDescr::get_program(const std::string& programname) const {
-	Programs::const_iterator const it = programs_.find(programname);
+CritterProgram const* CritterDescr::get_program(const std::string& program_name) const {
+	Programs::const_iterator const it = programs_.find(program_name);
 	if (it == programs_.end())
-		throw wexception("%s has no program '%s'", name().c_str(), programname.c_str());
-	return it->second;
+		throw wexception("%s has no program '%s'", name().c_str(), program_name.c_str());
+	return it->second.get();
 }
 
 uint32_t CritterDescr::movecaps() const {
@@ -277,7 +273,7 @@ const Bob::Task* Critter::Loader::get_task(const std::string& name) {
 	return Bob::Loader::get_task(name);
 }
 
-const BobProgramBase* Critter::Loader::get_program(const std::string& name) {
+const MapObjectProgram* Critter::Loader::get_program(const std::string& name) {
 	Critter& critter = get<Critter>();
 	return critter.descr().get_program(name);
 }

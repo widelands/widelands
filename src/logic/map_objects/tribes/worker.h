@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -308,7 +308,7 @@ protected:
 
 	protected:
 		const Task* get_task(const std::string& name) override;
-		const BobProgramBase* get_program(const std::string& name) override;
+		const MapObjectProgram* get_program(const std::string& name) override;
 
 	private:
 		uint32_t location_;

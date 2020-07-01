@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -82,10 +82,6 @@ public:
 	WorkerDescr* get_mutable_worker_descr(DescriptionIndex worker_index) const;
 	const TribeDescr* get_tribe_descr(DescriptionIndex tribe_index) const;
 
-	void set_ware_type_has_demand_check(DescriptionIndex ware_index,
-	                                    const std::string& tribename) const;
-	void set_worker_type_has_demand_check(DescriptionIndex worker_index) const;
-
 	// ************************ Loading *************************
 
 	/// Define a scenario tribe directory, search it for 'register.lua' files and register their
@@ -112,7 +108,7 @@ public:
 	DescriptionIndex load_worker(const std::string& workername);
 	/// Try to load a ware/worker that has been registered previously with 'register_description'
 	/// when we don't know whether it's a ware or worker
-	void try_load_ware_or_worker(const std::string& objectname);
+	void try_load_ware_or_worker(const std::string& objectname) const;
 
 	uint32_t get_largest_workarea() const;
 	void increase_largest_workarea(uint32_t workarea);

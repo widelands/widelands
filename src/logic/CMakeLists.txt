@@ -57,6 +57,7 @@ wl_library(logic_game_controller
     replay_game_controller.cc
     single_player_game_controller.h
     single_player_game_controller.cc
+  USES_SDL2
   DEPENDS
     ai
     logic
