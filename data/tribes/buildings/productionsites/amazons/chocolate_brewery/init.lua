@@ -20,21 +20,19 @@ tribes:new_productionsite_type {
       granite = 1,
    },
 
+   animation_directory = dirname,
    animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 92},
-         fps = 10,
-      },
+      idle = {hotspot = {43, 44}},
+      unoccupied = {hotspot = {43, 44}},
+   },
+   spritesheets = {
       working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 92},
-         fps = 10,
-      },
-      unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 69},
-      },
+         hotspot = {43, 44},
+         fps = 15,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      }
    },
 
    aihints = {
@@ -56,10 +54,10 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start brewing chocolate because ...
          descname = _"brewing chocolate",
          actions = {
-            "return=skipped unless economy needs chocolate or workers need experience",
+            "return=skipped unless economy needs chocolate",
             "consume=water:2 cocoa_beans",
             "sleep=30000",
             "playsound=sound/empire/beerbubble 180",
