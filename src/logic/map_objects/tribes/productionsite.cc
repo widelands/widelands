@@ -126,19 +126,20 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 			try {
 				// Check if ware/worker exists already and if not, try to load it. Will throw a
 				// GameDataError on failure.
-                const WareWorker wareworker = tribes.try_load_ware_or_worker(output);
-                if (wareworker == WareWorker::wwWARE) {
-                    const DescriptionIndex idx = tribes.ware_index(output);
-                    if (output_ware_types_.count(idx)) {
+				const WareWorker wareworker = tribes.try_load_ware_or_worker(output);
+				if (wareworker == WareWorker::wwWARE) {
+					const DescriptionIndex idx = tribes.ware_index(output);
+					if (output_ware_types_.count(idx)) {
 						throw GameDataError("ware type '%s' was declared multiple times", output.c_str());
 					}
 					output_ware_types_.insert(idx);
-                } else {
-                    const DescriptionIndex idx = tribes.worker_index(output);
-                    if (output_worker_types_.count(idx)) {
-                        throw GameDataError("worker type '%s' was declared multiple times", output.c_str());
-                    }
-                    output_worker_types_.insert(idx);
+				} else {
+					const DescriptionIndex idx = tribes.worker_index(output);
+					if (output_worker_types_.count(idx)) {
+						throw GameDataError(
+						   "worker type '%s' was declared multiple times", output.c_str());
+					}
+					output_worker_types_.insert(idx);
 				}
 			} catch (const WException& e) {
 				throw wexception("output \"%s\": %s", output.c_str(), e.what());
@@ -160,22 +161,24 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 				if (amount < 1 || 255 < amount) {
 					throw GameDataError("amount is out of range 1 .. 255");
 				}
-                if (wareworker == WareWorker::wwWARE) {
-                    const DescriptionIndex idx = tribes.ware_index(ware_or_worker_name);
-                    for (const auto& temp_inputs : input_wares()) {
+				if (wareworker == WareWorker::wwWARE) {
+					const DescriptionIndex idx = tribes.ware_index(ware_or_worker_name);
+					for (const auto& temp_inputs : input_wares()) {
 						if (temp_inputs.first == idx) {
-							throw GameDataError("ware type '%s' was declared multiple times", ware_or_worker_name.c_str());
+							throw GameDataError(
+							   "ware type '%s' was declared multiple times", ware_or_worker_name.c_str());
 						}
 					}
-                    input_wares_.push_back(WareAmount(idx, amount));
-                } else {
-                    const DescriptionIndex idx = tribes.worker_index(ware_or_worker_name);
-                    for (const auto& temp_inputs : input_workers()) {
-                        if (temp_inputs.first == idx) {
-                            throw GameDataError("worker type '%s' was declared multiple times", ware_or_worker_name.c_str());
-                        }
-                    }
-                    input_workers_.push_back(WareAmount(idx, amount));
+					input_wares_.push_back(WareAmount(idx, amount));
+				} else {
+					const DescriptionIndex idx = tribes.worker_index(ware_or_worker_name);
+					for (const auto& temp_inputs : input_workers()) {
+						if (temp_inputs.first == idx) {
+							throw GameDataError("worker type '%s' was declared multiple times",
+							                    ware_or_worker_name.c_str());
+						}
+					}
+					input_workers_.push_back(WareAmount(idx, amount));
 				}
 			} catch (const WException& e) {
 				throw wexception("input \"%s=%d\": %s", ware_or_worker_name.c_str(), amount, e.what());

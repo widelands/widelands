@@ -114,8 +114,8 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 					throw wexception("this program has already been declared");
 				}
 
-				programs_[program_name] =
-				   std::unique_ptr<WorkerProgram>(new WorkerProgram(program_name, *programs_table->get_table(program_name), *this, tribes));
+				programs_[program_name] = std::unique_ptr<WorkerProgram>(new WorkerProgram(
+				   program_name, *programs_table->get_table(program_name), *this, tribes));
 			} catch (const std::exception& e) {
 				throw GameDataError("%s: Error in worker program %s: %s", name().c_str(),
 				                    program_name.c_str(), e.what());

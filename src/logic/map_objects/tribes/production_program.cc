@@ -66,17 +66,17 @@ bool match_and_skip(const std::vector<std::string>& args,
 ProductionProgram::ActReturn::Condition* create_economy_condition(const std::string& item,
                                                                   const ProductionSiteDescr& descr,
                                                                   const Tribes& tribes) {
-    try {
+	try {
 		const WareWorker wareworker = tribes.try_load_ware_or_worker(item);
-        if (wareworker == WareWorker::wwWARE) {
-            const DescriptionIndex index = tribes.ware_index(item);
-            descr.ware_demand_checks()->insert(index);
+		if (wareworker == WareWorker::wwWARE) {
+			const DescriptionIndex index = tribes.ware_index(item);
+			descr.ware_demand_checks()->insert(index);
 			return new ProductionProgram::ActReturn::EconomyNeedsWare(index);
-        } else {
-            const DescriptionIndex index = tribes.worker_index(item);
+		} else {
+			const DescriptionIndex index = tribes.worker_index(item);
 			descr.worker_demand_checks()->insert(index);
 			return new ProductionProgram::ActReturn::EconomyNeedsWorker(index);
-        }
+		}
 	} catch (const GameDataError& e) {
 		throw GameDataError("economy condition: %s", e.what());
 	}
@@ -180,9 +180,8 @@ ProductionProgram::parse_bill_of_materials(const std::vector<std::string>& argum
 	for (const std::string& argument : arguments) {
 		const std::pair<std::string, std::string> produceme = read_key_value_pair(argument, ':', "1");
 
-		const DescriptionIndex index = ww == WareWorker::wwWARE ?
-                                           tribes.load_ware(produceme.first) :
-                                           tribes.load_worker(produceme.first);
+		const DescriptionIndex index = ww == WareWorker::wwWARE ? tribes.load_ware(produceme.first) :
+		                                                          tribes.load_worker(produceme.first);
 
 		// Verify the building outputs
 		switch (ww) {
