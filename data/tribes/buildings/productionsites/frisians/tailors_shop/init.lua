@@ -74,7 +74,6 @@ tribes:new_productionsite_type {
          actions = {
             "call=weave_studded",
             "call=weave_gold",
-            "return=no_stats",
          },
       },
       weave_studded = {

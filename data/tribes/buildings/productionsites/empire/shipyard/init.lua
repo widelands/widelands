@@ -68,14 +68,12 @@ tribes:new_productionsite_type {
          actions = {
             "call=ship on failure fail",
             "call=ship_preparation",
-            "return=no_stats"
          }
       },
       ship = {
          -- TRANSLATORS: Completed/Skipped/Did not start constructing a ship because ...
          descname = _"constructing a ship",
          actions = {
-            "checkmap=seafaring",
             "construct=empire_shipconstruction buildship 6",
             "sleep=20000",
          }

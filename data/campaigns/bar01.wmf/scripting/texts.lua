@@ -2,8 +2,6 @@
 -- Some formating functions
 -- =========================
 
-include "scripting/richtext_scenarios.lua"
-
 function thron(title, text)
    return speech("map:chieftain.png", "2F9131", title, text)
 end
@@ -43,13 +41,13 @@ obj_build_mines = {
    body = objective_text(_"Build coal and iron mines",
       li(_"Build a coal mine and an iron mine.") ..
       li_arrow(_"To do so, place a flag up on the mountain’s flank to the east (on mountain terrain though, not mountain meadow). When you click on the new flag, you can send geologists there. Because the flag is on a mountain, the geologists will search for ores; otherwise, they would search for water. Then build a mine for both kinds of resources that they will find, choosing the appropriate mine to be built:") ..
-      li_object("barbarians_resi_coal_1", _"a bit of coal") ..
+      li_object("barbarians_resi_coal_1", _"some coal") ..
       li_object("barbarians_resi_coal_2", _"a lot of coal") ..
-      li_object("barbarians_resi_iron_1", _"a bit of iron") ..
+      li_object("barbarians_resi_iron_1", _"some iron") ..
       li_object("barbarians_resi_iron_2", _"a lot of iron") ..
-      li_object("barbarians_resi_gold_1", _"a bit of gold") ..
+      li_object("barbarians_resi_gold_1", _"some gold") ..
       li_object("barbarians_resi_gold_2", _"a lot of gold") ..
-      li_object("barbarians_resi_stones_1", _"a bit of granite") ..
+      li_object("barbarians_resi_stones_1", _"some granite") ..
       li_object("barbarians_resi_stones_2", _"a lot of granite") ..
       li_object("barbarians_resi_water", _"water") ..
       li_object("barbarians_resi_none", _"nothing was found here") ..

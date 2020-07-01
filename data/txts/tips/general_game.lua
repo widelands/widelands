@@ -72,6 +72,10 @@ tips = {
       seconds = 3
    },
    {
+      text = _"Use the ‘,’ (comma) and ‘.’ (period) keys to quickly jump between recently visited locations.",
+      seconds = 3
+   },
+   {
       text = _"Speed up or slow down the game with %1%. Use %2% for rapid change, %3% will adjust speed smoothly.":bformat(pgettext("hotkey", "Page Up/Page Down"), pgettext("hotkey", "Ctrl+(Page Up/Page Down)"), pgettext("hotkey", "Shift+(Page Up/Page Down)")),
       seconds = 7
    },

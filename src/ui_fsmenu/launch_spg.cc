@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -114,8 +114,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 	win_condition_dropdown_.set_size(select_map_.get_w(), win_condition_dropdown_.get_h());
 
 	title_.set_text(_("Launch Game"));
-	select_map_.sigclicked.connect(
-	   boost::bind(&FullscreenMenuLaunchSPG::select_map, boost::ref(*this)));
+	select_map_.sigclicked.connect([this]() { select_map(); });
 
 	// We want to redesign this screen, so we won't bother defining a font size in the style manager.
 	const int small_scale_factor = scale_factor() * 4 / 5;
@@ -134,8 +133,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 		   new UI::Button(this, "switch_to_position", get_w() / 100, y += buth_, get_h() * 17 / 500,
 		                  get_h() * 17 / 500, UI::ButtonStyle::kFsMenuSecondary, player_image,
 		                  _("Switch to position"));
-		pos_[i]->sigclicked.connect(
-		   boost::bind(&FullscreenMenuLaunchSPG::switch_to_position, boost::ref(*this), i));
+		pos_[i]->sigclicked.connect([this, i]() { switch_to_position(i); });
 		players_[i] = new PlayerDescriptionGroup(
 		   this, get_w() / 25, y, get_w() * 16 / 25, get_h() * 17 / 500 * 2, settings, i);
 		y += buth_ / 1.17;
@@ -191,7 +189,7 @@ void FullscreenMenuLaunchSPG::win_condition_selected() {
  * start-button has been pressed
  */
 void FullscreenMenuLaunchSPG::clicked_ok() {
-	if (!g_fs->file_exists(filename_))
+	if (!g_fs->file_exists(filename_)) {
 		throw WLWarning(_("File not found"),
 		                _("Widelands tried to start a game with a file that could not be "
 		                  "found at the given path.\n"
@@ -201,6 +199,7 @@ void FullscreenMenuLaunchSPG::clicked_ok() {
 		                  "from the host to you, but perhaps the transfer was not yet "
 		                  "finished!?!"),
 		                filename_.c_str());
+	}
 	if (settings_->can_launch()) {
 		if (is_scenario_) {
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kScenarioGame);
@@ -247,8 +246,9 @@ void FullscreenMenuLaunchSPG::update(bool map_was_changed) {
 		pos_[i]->set_enabled(!is_scenario_ && (player.state == PlayerSettings::State::kOpen ||
 		                                       player.state == PlayerSettings::State::kComputer));
 	}
-	for (uint32_t i = nr_players_; i < kMaxPlayers; ++i)
+	for (uint32_t i = nr_players_; i < kMaxPlayers; ++i) {
 		pos_[i]->set_visible(false);
+	}
 
 	// update the player description groups
 	for (uint32_t i = 0; i < kMaxPlayers; ++i) {
@@ -261,8 +261,9 @@ void FullscreenMenuLaunchSPG::update(bool map_was_changed) {
  * Returns whether a map has been selected.
  */
 bool FullscreenMenuLaunchSPG::select_map() {
-	if (!settings_->can_change_map())
+	if (!settings_->can_change_map()) {
 		return false;
+	}
 
 	FullscreenMenuMapSelect msm(settings_, nullptr);
 	FullscreenMenuBase::MenuTarget code = msm.run<FullscreenMenuBase::MenuTarget>();
@@ -332,8 +333,9 @@ void FullscreenMenuLaunchSPG::safe_place_for_host(uint8_t const newplayernumber)
 
 	// Check whether the host would still keep a valid position and return if
 	// yes.
-	if (settings.playernum == UserSettings::none() || settings.playernum < newplayernumber)
+	if (settings.playernum == UserSettings::none() || settings.playernum < newplayernumber) {
 		return;
+	}
 
 	// Check if a still valid place is open.
 	for (uint8_t i = 0; i < newplayernumber; ++i) {

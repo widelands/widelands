@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -121,6 +121,13 @@ void Road::link_into_flags(EditorGameBase& egbase, bool) {
 			}
 		}
 	}
+}
+
+void Road::set_busy(EditorGameBase& e, bool b) {
+	unmark_map(e);
+	wallet_ = b ? kRoadMaxWallet : 0;
+	busy_ = b;
+	mark_map(e);
 }
 
 void Road::set_economy(Economy* const e, WareWorker type) {

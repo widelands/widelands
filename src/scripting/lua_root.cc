@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -85,7 +85,8 @@ const PropertyType<LuaGame> LuaGame::Properties[] = {
    PROP_RO(LuaGame, real_speed),         PROP_RO(LuaGame, time),
    PROP_RW(LuaGame, desired_speed),      PROP_RW(LuaGame, allow_saving),
    PROP_RO(LuaGame, last_save_time),     PROP_RO(LuaGame, type),
-   PROP_RO(LuaGame, interactive_player), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaGame, interactive_player), PROP_RO(LuaGame, scenario_difficulty),
+   {nullptr, nullptr, nullptr},
 };
 
 LuaGame::LuaGame(lua_State* /* L */) {
@@ -208,6 +209,21 @@ int LuaGame::get_type(lua_State* L) {
 		lua_pushstring(L, "undefined");
 		break;
 	}
+	return 1;
+}
+
+/* RST
+   .. attribute:: scenario_difficulty
+      (RO) The difficulty level of the current scenario. Values range from 1 to the number
+      of levels specified in the campaign's configuration in campaigns.lua. By convention
+      higher values mean more difficult. Throws an error if used outside of a scenario.
+*/
+int LuaGame::get_scenario_difficulty(lua_State* L) {
+	const uint32_t d = get_game(L).get_scenario_difficulty();
+	if (d == kScenarioDifficultyNotSet) {
+		report_error(L, "Scenario difficulty not set");
+	}
+	lua_pushuint32(L, d);
 	return 1;
 }
 

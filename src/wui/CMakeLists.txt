@@ -19,6 +19,7 @@ wl_library(wui_chat_ui
     game_chat_panel.h
     chat_msg_layout.h
     chat_msg_layout.cc
+  USES_SDL2
   DEPENDS
     base_exceptions
     base_i18n
@@ -90,6 +91,12 @@ wl_library(wui_common_gamedetails
     load_or_save_game.h
     savegametable.cc
     savegametable.h
+    savegamedeleter.cc
+    savegamedeleter.h
+    savegamedata.cc
+    savegamedata.h
+    savegameloader.cc
+    savegameloader.h
   DEPENDS
     base_i18n
     base_log
@@ -104,7 +111,6 @@ wl_library(wui_common_gamedetails
     logic_constants
     logic_filesystem_constants
     logic_game_controller
-    logic_game_settings
     ui_basic
 )
 
@@ -144,6 +150,7 @@ wl_library(wui_mapview
   SRCS
     mapview.cc
     mapview.h
+  USES_SDL2
   DEPENDS
     base_geometry
     base_macros
@@ -164,6 +171,7 @@ wl_library(wui_waresdisplay
   SRCS
     waresdisplay.cc
     waresdisplay.h
+  USES_SDL2
   DEPENDS
     base_exceptions
     base_i18n
@@ -303,6 +311,7 @@ wl_library(wui
     graphic_fonthandler
     graphic_game_renderer
     graphic_minimap_renderer
+    graphic_mouse_cursor
     graphic_playercolor
     graphic_surface
     graphic_text_layout
