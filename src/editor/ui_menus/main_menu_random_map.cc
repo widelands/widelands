@@ -500,7 +500,8 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	log("\n");
 
 	gen.create_random_map();
-	egbase.create_tempfile_and_save_mapdata(FileSystem::ZIP);
+
+    egbase.create_tempfile_and_save_mapdata(FileSystem::ZIP);
 
 	map->recalc_whole_map(egbase);
 	eia.map_changed(EditorInteractive::MapWas::kReplaced);

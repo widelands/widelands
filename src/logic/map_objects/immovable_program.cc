@@ -126,9 +126,11 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 			} else if (argument[0] >= '0' && argument[0] <= '9') {
 				probability = read_positive(argument, 254);
 			} else {
-				// TODO(GunChleoc): If would be nice to check if target exists, but we can't guarantee
-				// the load order. Maybe in postload() one day.
 				type_name = argument;
+				// This ensures that the object we're transforming to is loaded and known. It does not
+				// ensure that it's an appropriate immovable.
+				Notifications::publish(
+				   NoteMapObjectDescription(type_name, NoteMapObjectDescription::LoadType::kObject));
 			}
 		}
 		if (type_name == descr.name()) {
@@ -166,9 +168,11 @@ ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments,
 		   "Immovable %s can 'grow', but has no terrain_affinity entry.", descr.name().c_str());
 	}
 
-	// TODO(GunChleoc): If would be nice to check if target exists, but we can't guarantee the load
-	// order. Maybe in postload() one day.
 	type_name = arguments.front();
+	// This ensures that the object we're transforming to is loaded and known. It does not ensure
+	// that it's an appropriate immovable.
+	Notifications::publish(
+	   NoteMapObjectDescription(type_name, NoteMapObjectDescription::LoadType::kObject));
 }
 
 void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const {
@@ -216,15 +220,19 @@ ImmovableProgram::ActSeed::ActSeed(std::vector<std::string>& arguments,
 		   "Immovable %s can 'seed', but has no terrain_affinity entry.", descr.name().c_str());
 	}
 
-	// TODO(GunChleoc): If would be nice to check if target exists, but we can't guarantee the load
-	// order. Maybe in postload() one day.
 	type_name = arguments.front();
+
 	const int p = std::stoi(arguments[1]);
 	if (p <= 0 || p >= 255) {
 		throw GameDataError("Immovable %s: Seeding radius range factor %i out of range [1,254]",
 		                    descr.name().c_str(), p);
 	}
 	probability = p;
+
+	// This ensures that the object we're transforming to is loaded and known. It does not ensure
+	// that it's an appropriate immovable.
+	Notifications::publish(
+	   NoteMapObjectDescription(type_name, NoteMapObjectDescription::LoadType::kObject));
 }
 
 void ImmovableProgram::ActSeed::execute(Game& game, Immovable& immovable) const {
