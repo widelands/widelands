@@ -43,6 +43,8 @@
 
 namespace Widelands {
 
+static const std::string kMainProgram = "work";
+
 namespace {
 
 // Parses the descriptions of the working positions from 'items_table' and
@@ -260,8 +262,14 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
  */
 const ProductionProgram* ProductionSiteDescr::get_program(const std::string& program_name) const {
 	Programs::const_iterator const it = programs().find(program_name);
-	if (it == programs_.end())
-		throw wexception("%s has no program '%s'", name().c_str(), program_name.c_str());
+	if (it == programs_.end()) {
+		if (program_name == kMainProgram) {
+			throw wexception("%s has no main program '%s'", name().c_str(), program_name.c_str());
+		} else {
+			log("ERROR: %s has no program '%s', starting main program\n", name().c_str(), program_name.c_str());
+			return get_program(kMainProgram);
+		}
+	}
 	return it->second.get();
 }
 
@@ -770,7 +778,7 @@ void ProductionSite::act(Game& game, uint32_t const data) {
 }
 
 void ProductionSite::find_and_start_next_program(Game& game) {
-	program_start(game, "work");
+	program_start(game, kMainProgram);
 }
 
 /**
