@@ -266,7 +266,8 @@ const ProductionProgram* ProductionSiteDescr::get_program(const std::string& pro
 		if (program_name == kMainProgram) {
 			throw wexception("%s has no main program '%s'", name().c_str(), program_name.c_str());
 		} else {
-			log("ERROR: %s has no program '%s', starting main program\n", name().c_str(), program_name.c_str());
+			log("ERROR: %s has no program '%s', starting main program\n", name().c_str(),
+			    program_name.c_str());
 			return get_program(kMainProgram);
 		}
 	}
