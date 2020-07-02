@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-06-30 14:48+0000\n"
-"PO-Revision-Date: 2020-06-24 04:27+0000\n"
+"PO-Revision-Date: 2020-07-01 15:11+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -1340,7 +1340,7 @@ msgstr "우리는 음영 언어 버전을 감지할 수 없었기 때문에 와�
 msgid ""
 "There is an unknown problem with reading the information from the graphics "
 "driver."
-msgstr ""
+msgstr "그래픽 드라이버에서 정보를 읽는 데 알 수 없는 문제가 있습니다."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1348,7 +1348,7 @@ msgstr ""
 #: ../../src/graphic/gl/initialize.cc:249
 #: ../../src/graphic/gl/initialize.cc:268
 msgid "Widelands won’t work because your graphics driver is too old."
-msgstr ""
+msgstr "그래픽 드라이버가 너무 오래되었기 때문에 와이드랜드가 작동하지 않습니다."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1356,7 +1356,7 @@ msgstr ""
 #: ../../src/graphic/gl/initialize.cc:252
 #: ../../src/graphic/gl/initialize.cc:271
 msgid "The shading language needs to be version 1.20 or newer."
-msgstr ""
+msgstr "음영 언어는 버전 1.20 이상이어야 합니다."
 
 #. * TRANSLATORS: Part of tooltip entry for characters in illegal filenames.
 #. replaces tha
@@ -1433,7 +1433,7 @@ msgstr "비활성"
 
 #: ../../src/logic/editor_game_base.cc:298
 msgid "Postloading world and tribes…"
-msgstr ""
+msgstr "세계와 부족을 후 불러오기하고 있습니다…"
 
 #: ../../src/logic/editor_game_base.cc:331
 msgid "Loading graphics"
@@ -1441,15 +1441,15 @@ msgstr "그래픽 불러오는 중"
 
 #: ../../src/logic/editor_game_base.cc:565
 msgid "Cleaning up for loading: Map objects (1/3)"
-msgstr ""
+msgstr "불러오기 위해 정리작업: 지도 객체 (1/3)"
 
 #: ../../src/logic/editor_game_base.cc:568
 msgid "Cleaning up for loading: Players (2/3)"
-msgstr ""
+msgstr "불러오기 위해 정리작업: 선수들 (2/3)"
 
 #: ../../src/logic/editor_game_base.cc:571
 msgid "Cleaning up for loading: Map (3/3)"
-msgstr ""
+msgstr "불러오기 위해 정리작업: 지도 (3/3)"
 
 #. * TRANSLATORS: Win condition for this game has not been set.
 #: ../../src/logic/game.cc:140
@@ -1459,19 +1459,19 @@ msgstr "설정되지 않음"
 #: ../../src/logic/game.cc:216 ../../src/logic/game.cc:273
 #: ../../src/logic/game.cc:358 ../../src/logic/game.cc:390
 msgid "Preloading map…"
-msgstr ""
+msgstr "지도를 먼저 불러오고 있음…"
 
 #: ../../src/logic/game.cc:220 ../../src/logic/game.cc:280
 msgid "Loading world…"
-msgstr ""
+msgstr "세계를 불러오고 있음…"
 
 #: ../../src/logic/game.cc:222 ../../src/logic/game.cc:283
 msgid "Loading tribes…"
-msgstr ""
+msgstr "부족들을 불러오고 있음…"
 
 #: ../../src/logic/game.cc:232 ../../src/logic/game.cc:286
 msgid "Creating players…"
-msgstr ""
+msgstr "선수들을 만들고 있음…"
 
 #: ../../src/logic/game.cc:249 ../../src/logic/game.cc:314
 msgid "Loading map…"
@@ -1479,7 +1479,7 @@ msgstr "지도 불러오는 중..."
 
 #: ../../src/logic/game.cc:321
 msgid "Initializing game…"
-msgstr ""
+msgstr "놀이를 초기화하고 있음…"
 
 #: ../../src/logic/game.cc:372 ../../src/logic/game.cc:408
 #: ../../src/ui_basic/progresswindow.cc:52 ../../src/wlapplication.cc:1495
@@ -1488,7 +1488,7 @@ msgstr "불러오는 중..."
 
 #: ../../src/logic/game.cc:469
 msgid "Creating player infrastructure…"
-msgstr ""
+msgstr "선수의 사회 기반 시설을 만들고 있음…"
 
 #: ../../src/logic/game.cc:479 ../../src/logic/player.cc:224
 msgid "Missing starting position"
@@ -1518,22 +1518,22 @@ msgstr "이 게임은 더 오래된 Widelands 버전에서 저장되어서 더 �
 #: ../../src/logic/generic_save_handler.cc:236
 #: ../../src/logic/generic_save_handler.cc:240
 msgid "File successfully saved!"
-msgstr ""
+msgstr "파일을 저장했습니다!"
 
 #: ../../src/logic/generic_save_handler.cc:241
 #, c-format
 msgid "Backup file ‘%s’ could not be deleted."
-msgstr ""
+msgstr "‘%s’ 백업 파일을 삭제할 수 없습니다."
 
 #: ../../src/logic/generic_save_handler.cc:245
 #, c-format
 msgid "Directory ‘%s’ could not be created!"
-msgstr ""
+msgstr "‘%s’ 디렉토리를 만들 수 없습니다!"
 
 #: ../../src/logic/generic_save_handler.cc:249
 #, c-format
 msgid "File ‘%s’ could not be removed!"
-msgstr ""
+msgstr "‘%s’ 파일을 제거 할 수 없습니다!"
 
 #: ../../src/logic/generic_save_handler.cc:251
 msgid "Try saving under a different name!"
@@ -1542,11 +1542,11 @@ msgstr "다른 이름으로 저장하십시오!"
 #: ../../src/logic/generic_save_handler.cc:257
 #, c-format
 msgid "Error writing data to file ‘%s’!"
-msgstr ""
+msgstr "‘%s’ 파일에 자료를 쓰는 동안 오류가 발생했습니다!"
 
 #: ../../src/logic/generic_save_handler.cc:264
 msgid "Saved file may be corrupt!"
-msgstr ""
+msgstr "저장된 파일이 손상되었을 수 있습니다!"
 
 #: ../../src/logic/generic_save_handler.cc:272
 #, c-format
