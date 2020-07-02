@@ -3,7 +3,7 @@
 # 
 # Translators:
 # GunChleoc, 2014,2017
-# GunChleoc, 2015-2019
+# GunChleoc, 2015-2020
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2014,2017
 # GunChleoc, 2013-2015
@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-06-30 14:48+0000\n"
-"PO-Revision-Date: 2020-06-27 07:14+0000\n"
+"PO-Revision-Date: 2020-07-01 06:06+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -502,7 +502,7 @@ msgstr "Falaich na h-ionadan togail"
 #: ../../src/editor/editorinteractive.cc:392
 #: ../../src/wui/interactive_gamebase.cc:215
 msgid "Show Building Spaces"
-msgstr "Nochd na h-ionadan togail"
+msgstr "Seall na h-ionadan togail"
 
 #: ../../src/editor/editorinteractive.cc:395
 #: ../../src/wui/interactive_gamebase.cc:218

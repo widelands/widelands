@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-06-30 14:48+0000\n"
-"PO-Revision-Date: 2020-06-30 14:09+0000\n"
+"PO-Revision-Date: 2020-07-01 12:14+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -567,64 +567,64 @@ msgid ""
 "the water is too shallow for big ships. The only rule is that the two "
 "triangles directly adjacent to each segment of the waterway have to be "
 "water, and the entire path needs to be within your territory."
-msgstr ""
+msgstr "물길은 넓고 탁 트인 바다뿐만 아니라 물이 너무 얕아서 큰 배들이 적합하지 않은 바닷가 가까이에 만들어질 수 있습니다. 유일한 규칙은 물길의 각 구간과 바로 인접한 두 개의 삼각형이 물이어야 하고, 전체 경로가 당신의 영역 내에 있어야 한다는 것입니다."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:266
 msgid ""
 "Also note that waterways, unlike roads, may not be built quite as long as "
 "you want them to. Every map has a length restriction for waterways. On this "
 "map, this is 5 tiles."
-msgstr ""
+msgstr "또한 물길은 도로와 달리 원하는 길이만큼 지어지지 않을 수도 있습니다. 모든지도에는 수로에 대한 길이 제한이 있습니다. 이 지도에서 이것은 5개의 타일입니다."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:267
 msgid ""
 "Always keep in mind that ferries do not transport workers. You can use them "
 "to speed up ware transport, but they can never entirely replace roads."
-msgstr ""
+msgstr "여객선은 일꾼을 수송하지 않는다는 것을 항상 명심하세요. 이를 사용하여 물품 수송 속도를 높이는 데 사용할 수는 있지만 도로를 완전히 대체할 수는 없습니다."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:277
 msgid "Allow me to show you how to build a waterway…"
-msgstr ""
+msgstr "물길을 만드는 방법을 보여 드리겠습니다…"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:287
 msgid "Golden waves"
-msgstr ""
+msgstr "황금 물결"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:288
 msgid ""
 "As you can see, it is not that hard. When you build a waterway, the closest "
 "idle ferry will assign itself to it."
-msgstr ""
+msgstr "보시다시피, 그렇게 어렵지 않습니다. 여러분이 물길을 만들면, 가장 가까운 대기중인 연락선이 물길에 배정될 것입니다."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:289
 msgid ""
 "Now it’s your turn: Build a gold mine on the mountain in the south and "
 "connect it to the main land by building waterways over the streams."
-msgstr ""
+msgstr "이제 당신 차례입니다: 남쪽 산에 금광을 짓고 개울 위에 수로를 만들어 본토와 연결하십시오."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:297
 msgid "Build a gold mine and waterways"
-msgstr ""
+msgstr "금광과 물길을 만들기"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:298
 msgid ""
 "Build a gold mine on the mountain in the south, and connect it to the "
 "mainland by building waterways over the streams."
-msgstr ""
+msgstr "남쪽 산에 금광을 짓고, 개울 위에 물길을 만들어 본토와 연결해야 합니다."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:299
 msgid ""
 "A waterway is built just like a road: You click on a flag near the shore, "
 "choose ‘Build a waterway’, and select the path for the waterway just as you "
 "would do for a road."
-msgstr ""
+msgstr "물길은 도로처럼 지어집니다. 바닷가 가까이의 깃발을 누르고 ‘물길 만들기’를 선택한 다음 도로처럼 물길을 위한 길을 선택합니다."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:300
 msgid ""
 "The only rule for waterway placement is that the two triangles directly "
 "adjacent to each segment of the waterway have to be water, and the entire "
 "path needs to be within your territory."
-msgstr ""
+msgstr "물길을 배치하기 위한 유일한 규칙은 물길의 각 구간과 바로 인접한 두 개의 삼각형이 물이어야 하고, 전체 경로가 당신의 영역 내에 있어야 한다는 것입니다."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:306
 msgid "Conclusion"
@@ -632,13 +632,13 @@ msgstr "결론"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:308
 msgid "About Ferries"
-msgstr ""
+msgstr "연락선 소개"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:309
 msgid ""
 "Now there are only a few more things I would like you to keep in mind "
 "whenever using ferries."
-msgstr ""
+msgstr "이제 연락선을 이용할 때마다 몇 가지 더 명심해야 할 것이 있습니다."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:310
 msgid ""
@@ -647,7 +647,7 @@ msgid ""
 "not to claim regions you can reach neither by road nor by ship. Never cut "
 "all your roads between two places connected by waterways unless you are "
 "certain no worker will ever have to walk there."
-msgstr ""
+msgstr "번역확인 -> 이 노 젓는 배는 너무 작아서 일꾼을 태울 수 없다는 것을 절대 잊지 마십시오. 당신은 당신의 영토의 일부 내에서 물품 운송을 위한 지름길로 사용할 수 있지만 도로나 배로 도달 할 수없는 지역을 주장하지는 않습니다. 일꾼이 걸어 다닐 필요가 없는 경우가 아니면 수로로 연결된 두 곳 사이의 모든 도로를 절단하지 마십시오."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:311
 msgid ""
@@ -659,22 +659,22 @@ msgid ""
 "of waterways becoming severe bottlenecks in your economy. Try to build "
 "several of them in parallel to distribute the strain. If this is not "
 "possible, it is in some cases even more efficient not to use waterways."
-msgstr ""
+msgstr "만약 여러분의 물길이 여러분의 도로망 사이에 중요한 지름길을 제공한다면, 여러분의 경제는 물길을 넘어 많은 물품들을 보내는 경향이 있을 것입니다. 수로가 – 매우 바쁜 경우 2 번째 운송배를 받는 도로와 달리 – 연락선은 단 하나 만 보유 할 수 있고, 도로용으로 권장되는 2~3 개의 필드보다 다소 긴 경향이 있기 때문에 항상 수로가 경제에서 심각한 병목 현상이 될 위험이 있습니다. 교통체증을 분산시키기 위해 여러 개를 병렬로 만드십시오. 이것이 가능하지 않다면, 어떤 경우에는 물길을 사용하지 않는 것이 훨씬 더 효율적입니다."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:318
 msgid "Ferry yard production"
-msgstr ""
+msgstr "연락선 뜰 생산"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:320
 msgid "More ferries needed?"
-msgstr ""
+msgstr "연락선이 더 필요하신가요?"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:321
 msgid ""
 "Do remember to stop your ferry yard when you don’t need any new ferries to "
 "be produced. As long as a ferry services a waterway, its lifetime is "
 "unlimited, but unemployed ferries will rot away and eventually sink."
-msgstr ""
+msgstr "새로운 연락선을 만들 필요가 없을 때는 연락선 마당을 막아야합니다. 나룻배가 물길을 운행하는 한, 그 수명은 무제한이지만, 실직한 나룻배들은 썩어서 결국 가라앉을 것입니다."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:329
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:331
@@ -683,22 +683,22 @@ msgstr "축하합니다"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:332
 msgid "You have learnt all there is to learn about ships and ferries!"
-msgstr ""
+msgstr "여러분은 배와 나룻배에 대해 알아야 할 모든 것을 배웠습니다!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:333
 msgid ""
 "There is also another island where you can build a port if you wish to try "
 "launching another expedition."
-msgstr ""
+msgstr "또 다른 탐험을 시작하려면 항구를 지을 수있는 또 다른 섬도 있습니다."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:334
 msgid ""
 "As always, you can continue playing and practice a bit more on this map if "
 "you like, or get your captain’s license ready and try out your new skills in"
 " a real game…"
-msgstr ""
+msgstr "언제든지 이 지도에서 계속 진행하고 조금 더 연습하거나 선장 허가서를 준비해서 실제 놀이에서 새로운 기술을 시험해 볼 수 있습니다…"
 
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
