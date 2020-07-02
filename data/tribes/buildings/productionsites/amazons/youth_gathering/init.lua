@@ -20,21 +20,19 @@ tribes:new_productionsite_type {
       rope = 1,
    },
 
+   animation_directory = dirname,
    animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {43, 84},
-         fps = 10,
-      },
+      idle = {hotspot = {43, 44}},
+      unoccupied = {hotspot = {43, 44}},
+   },
+   spritesheets = {
       working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {43, 84},
-         fps = 10,
-      },
-      unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {43, 69},
-      },
+         hotspot = {43, 44},
+         fps = 15,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      }
    },
 
    aihints = {
