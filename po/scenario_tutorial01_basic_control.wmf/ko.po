@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-06-26 05:28+0000\n"
+"POT-Creation-Date: 2020-06-30 14:48+0000\n"
+"PO-Revision-Date: 2020-06-26 17:29+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -742,49 +742,49 @@ msgid ""
 "construction sites look the same, and some buildings look alike. It is "
 "sometimes hard to tell them apart. Widelands offers a feature to show label "
 "texts over the buildings. They are called the ‘census’."
-msgstr ""
+msgstr "기다리는 동안 다른 유용한 기능을 빠르게 보여드리겠습니다. 모든 건설 현장은 똑같이 생겼고, 어떤 건물들은 비슷하게 생겼어요. 그것들을 구분하는 것은 어떨때는 어렵습니다. 와이드랜드는 건물에 딱지 글자를 표시하는 기능을 제공합니다. 그것들은 ‘실태 조사’ 라고 불립니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:482
 msgid ""
 "In order to show or hide the building census labels, you can select the "
 "‘Show Census’ / ‘Hide Census’ entry from the ‘Show / Hide’ menu on the "
 "bottom, or press the ‘c’ key on the keyboard."
-msgstr ""
+msgstr "건물 실태 조사 딱지를 표시하거나 숨기려면 아래쪽에 ‘표시 / 숨기기’ 차림표에서 ‘실태 조사 표시’ / ‘실태 조사 숨기기’ 항목을 선택하거나 키보드의 ‘c' 키를 누르십시오."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:483
 msgid "Let me enable the census for you."
-msgstr ""
+msgstr "제가 실태 조사를 할 수 있게 해줄게요."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:492
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:494
 msgid "Show the building statistics"
-msgstr ""
+msgstr "건물 통계 표시"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:495
 msgid ""
 "Show the building statistics labels, so that we can check the progress of "
 "our quarry construction more easily."
-msgstr ""
+msgstr "채석장 건설 진행 상황을보다 쉽게 확인할 수 있도록 건물 통계 딱지를 표시하십시오."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:496
 msgid ""
 "In order to show or hide the building statistics labels, you can select the "
 "‘Show Statistics’ entry from the ‘Show / Hide’ menu on the bottom, or press "
 "the ‘s’ key on the keyboard."
-msgstr ""
+msgstr "건물 통계 딱지를 표시하거나 숨기려면 아래쪽에 ‘표시 / 숨기기’메뉴에서 ‘통계 표시’ 항목을 선택하거나 키보드에서 ‘s’키를 누르십시오."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:503
 msgid ""
 "Now, wouldn’t it be nice to check on our quarries’ progress without having "
 "to open their windows?"
-msgstr ""
+msgstr "이제, 창문을 열지 않고도 우리 채석장의 진행 상황을 확인하면 좋지 않을까요?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:504
 msgid ""
 "In addition to the buildings’ census, you can also activate statictics "
 "labels on them. This will display information about the productivity of "
 "buildings or the progress of construction sites."
-msgstr ""
+msgstr "건물 실태 조사 외에도 건물의 통계 딱지를 활성화 할 수도 있습니다. 이것은 건물의 생산성 또는 건설 현장의 진행 상황에 대한 정보가 표시됩니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:514
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."
@@ -806,7 +806,7 @@ msgstr "지금 수신함에 있는 모든 메시지를 보관하십시오."
 msgid ""
 "Keep clicking the ‘Archive selected message’ button until all messages have "
 "been archived and the list is empty."
-msgstr ""
+msgstr "모든 알릴말이 보관되고 목록이 비워 질 때까지 '선택한 알릴말 보관' 단추를 계속 누릅니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:532
 msgid ""
@@ -825,7 +825,7 @@ msgid ""
 "You can toggle the message window by pressing ‘n’ or clicking the second "
 "button from the right at the very bottom of the screen. The newest message "
 "will be marked for you automatically."
-msgstr ""
+msgstr "'n'을 누르거나 화면 맨 아래 오른쪽에서 두 번째 단추를 눌러서 알릴말 창을 전환 할 수 있습니다. 최신 알릴말이 자동으로 표시됩니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:535
 msgid ""
@@ -862,7 +862,7 @@ msgid ""
 "You have two messages at the moment. This one, which you are currently "
 "reading, and the one that informed you that a new headquarters was added to "
 "your economy. Let’s learn how to archive messages:"
-msgstr ""
+msgstr "현재 두 개의 알릴말이 있습니다. 현재 읽고 있는 이 책과 새로운 본부가 여러분의 경제에 추가되었음을 알려주는 내용입니다. 알릴말을 보관하는 방법에 대해 알아봅니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:552
 msgid "Close the messages window"
@@ -877,7 +877,7 @@ msgid ""
 "All windows in Widelands can be closed by right-clicking into them. Some "
 "windows can also be toggled with the buttons and menus at the very bottom of"
 " the screen."
-msgstr ""
+msgstr "와이드랜드의 모든 창은 마우스 오른쪽 단추를 눌러서 닫을 수 있습니다. 일부 창은 화면 맨 아래에 있는 단추와 차림표를 사용하여 전환할 수도 있습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:556
 msgid "Close the messages window now by right-clicking into it."
@@ -909,7 +909,7 @@ msgstr "두 채석장을 파괴하십시오"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:585
 msgid "Destroy the Quarries"
-msgstr ""
+msgstr "채석장을 파괴하기"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:586
 msgid ""
@@ -944,7 +944,7 @@ msgstr "메시지가 도착했습니다!"
 msgid ""
 "You received some messages. See how the button at the bottom of the screen "
 "has changed appearance?"
-msgstr ""
+msgstr "몇 가지 알릴말을 받았습니다. 화면 하단에 있는 단추 모양이 어떻게 바뀌었는지 보이나요?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:608
 msgid "Expand your territory"
@@ -952,11 +952,11 @@ msgstr "영토를 확장하십시오."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:610
 msgid "Make your Territory Grow"
-msgstr ""
+msgstr "영역 확장"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:611
 msgid "Build a military building on your border."
-msgstr ""
+msgstr "국경 지역에 군사 건물을 지으십시오."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:612
 msgid ""
@@ -1015,7 +1015,7 @@ msgstr "확장은 영토 끝자락에 군사 건물을 건설하는 것이 끝�
 msgid ""
 "As soon as a military building is manned, it will extend your land. I will "
 "tell you more about military buildings in another tutorial."
-msgstr ""
+msgstr "군사 건물에 담당인원이 들어가자마자 당신의 땅이 확장 될 것입니다. 군사 건물에 대한 자세한 내용은 다른 자습서에서 알려 드리겠습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:629
 msgid "Military Site Occupied"
@@ -1057,17 +1057,17 @@ msgstr "하지만, Widelands를 제어하는 방법에 대해 알고 싶다면, 
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:651
 msgid "To leave this game and return to the main menu:"
-msgstr ""
+msgstr "이 놀이를 끝내고 기본 차림표로 돌아가려면 다음을 수행합니다:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:652
 msgid ""
 "Click on the ‘Main Menu’ button on the very left at the bottom of the "
 "screen."
-msgstr ""
+msgstr "화면 맨 아래, 맨 왼쪽에 있는  ‘기본 차림표’ 단추를 누르십시오."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:653
 msgid "Then click on the ‘Exit Game’ entry."
-msgstr ""
+msgstr "그런 다음 ‘놀이 끝내기’ 항목을 누르십시오."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:654
 msgid ""
@@ -1078,4 +1078,4 @@ msgstr "튜토리얼을 플레이해주셔서 감사합니다. Widelands를 즐�
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"

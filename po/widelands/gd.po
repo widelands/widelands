@@ -3,7 +3,7 @@
 # 
 # Translators:
 # GunChleoc, 2014,2017
-# GunChleoc, 2015-2019
+# GunChleoc, 2015-2020
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2014,2017
 # GunChleoc, 2013-2015
@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-04-22 20:03+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-06-30 14:48+0000\n"
+"PO-Revision-Date: 2020-07-01 06:06+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -88,34 +88,34 @@ msgstr "Chan eil rùm gu leòr ann"
 
 #: ../../data/scripting/infrastructure.lua:246
 msgid "No rocks nearby"
-msgstr ""
+msgstr "Chan eil carraig am fagas"
 
 #: ../../data/scripting/infrastructure.lua:246
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr ""
+msgstr "Chan eil carraigean faisg ort. Air an adhbhar sin, gheibh thu barrachd stòrais airson an eaconamaidh agad a stèidheachadh."
 
 #: ../../data/scripting/infrastructure.lua:251
 msgid "No trees nearby"
-msgstr ""
+msgstr "Chan eil craobh am fagas"
 
 #: ../../data/scripting/infrastructure.lua:251
 msgid ""
 "There are no trees near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr ""
+msgstr "Chan eil craobhan faisg ort. Air an adhbhar sin, gheibh thu barrachd stòrais airson an eaconamaidh agad a stèidheachadh."
 
-#: ../../data/scripting/messages.lua:51 ../../data/scripting/messages.lua:53
+#: ../../data/scripting/messages.lua:53 ../../data/scripting/messages.lua:55
 #: ../../src/wui/game_message_menu.cc:68 ../../src/wui/game_summary.cc:104
 msgid "Status"
 msgstr "Staid"
 
-#: ../../data/scripting/messages.lua:186
+#: ../../data/scripting/messages.lua:191
 msgid "New Objective"
 msgstr "Amas ùr"
 
-#: ../../data/scripting/messages.lua:188
+#: ../../data/scripting/messages.lua:193
 msgid "New Objectives"
 msgstr "Amasan ùra"
 
@@ -277,7 +277,7 @@ msgstr "A’ luchdadh nan treubhan"
 #: ../../src/wui/interactive_gamebase.cc:95
 msgctxt "hotkey"
 msgid "Esc"
-msgstr ""
+msgstr "Esc"
 
 #. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
@@ -300,7 +300,7 @@ msgstr "Innealan"
 #: ../../src/editor/editorinteractive.cc:119
 #: ../../src/wui/interactive_gamebase.cc:83
 msgid "Show / Hide"
-msgstr ""
+msgstr "Seall / Falaich"
 
 #: ../../src/editor/editorinteractive.cc:132
 msgid "Tool size"
@@ -340,7 +340,7 @@ msgstr "Luchdaich mapa"
 #: ../../src/editor/editorinteractive.cc:193
 msgctxt "hotkey"
 msgid "Ctrl+L"
-msgstr ""
+msgstr "Ctrl+L"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:199
@@ -351,7 +351,7 @@ msgstr "Sàbhail am mapa"
 #: ../../src/editor/editorinteractive.cc:201
 msgctxt "hotkey"
 msgid "Ctrl+S"
-msgstr ""
+msgstr "Ctrl+S"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:207
@@ -373,7 +373,7 @@ msgstr "Atharraich an àirde"
 #. * TRANSLATORS: Tooltip for the change height tool in the editor
 #: ../../src/editor/editorinteractive.cc:250
 msgid "Change the terrain height"
-msgstr ""
+msgstr "Atharraich àirde a’ chrutha-thìre"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:256
@@ -384,7 +384,7 @@ msgstr "Àirde thuaireamach"
 #. * TRANSLATORS: Tooltip for the random height tool in the editor
 #: ../../src/editor/editorinteractive.cc:259
 msgid "Set the terrain height to random values"
-msgstr ""
+msgstr "Suidhich àirde a’ chrutha-thìre air luachan tuaireamach"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:265
@@ -397,7 +397,7 @@ msgstr "Cruth-tìre"
 #. * TRANSLATORS: Tooltip for the terrain tool in the editor
 #: ../../src/editor/editorinteractive.cc:268
 msgid "Change the map’s terrain"
-msgstr ""
+msgstr "Atharraich cruth-tìre a’ mhapa"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:275
@@ -408,7 +408,7 @@ msgstr "Nithean do-ghluasad"
 #. * TRANSLATORS: Tooltip for the immovables tool in the editor
 #: ../../src/editor/editorinteractive.cc:278
 msgid "Add or remove immovables"
-msgstr ""
+msgstr "Cuir ris no thoir air falbh nithean do-ghluasad"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:284
@@ -419,7 +419,7 @@ msgstr "Beathaichean"
 #. * TRANSLATORS: Tooltip for the animals tool in the editor
 #: ../../src/editor/editorinteractive.cc:287
 msgid "Add or remove animals"
-msgstr ""
+msgstr "Cuir ris no thoir air falbh beathaichean"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:294
@@ -433,17 +433,17 @@ msgstr "Stòrasan"
 #. * TRANSLATORS: Tooltip for the resources tool in the editor
 #: ../../src/editor/editorinteractive.cc:297
 msgid "Set or change resources"
-msgstr ""
+msgstr "Suidhich no atharraich stòras"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:300
 msgid "Port spaces"
-msgstr ""
+msgstr "Raointean puirt"
 
 #. * TRANSLATORS: Tooltip for the port spaces tool in the editor
 #: ../../src/editor/editorinteractive.cc:303
 msgid "Add or remove port spaces"
-msgstr ""
+msgstr "Cuir ris no thoir air falbh raointean puirt"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:309
@@ -454,12 +454,12 @@ msgstr "Cluicheadairean"
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
 #: ../../src/editor/editorinteractive.cc:312
 msgid "Set number of players and their names, tribes and starting positions"
-msgstr ""
+msgstr "Suidhich an àireamh de chluicheadairean agus na h-ainmean, treubhan is ionadan tòiseachaidh aca"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:315
 msgid "Map origin"
-msgstr ""
+msgstr "Ionad tùsail a’ mhapa"
 
 #. * TRANSLATORS: Tooltip for the map origin tool in the editor
 #: ../../src/editor/editorinteractive.cc:318
@@ -471,7 +471,7 @@ msgstr "Suidhich an t-ionad aig am bi an càraid-àireimh (0, 0). ’S e seo a b
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:325
 msgid "Map size"
-msgstr ""
+msgstr "Meud a’ mhapa"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
 #: ../../src/editor/editorinteractive.cc:328
@@ -481,12 +481,12 @@ msgstr "Atharraich meud a’ mhapa"
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:331
 msgid "Information"
-msgstr ""
+msgstr "Fiosrachadh"
 
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
 #: ../../src/editor/editorinteractive.cc:334
 msgid "Click on a field to show information about it"
-msgstr ""
+msgstr "Briog air raon a dh’fhaighinn fiosrachadh mu dhèidhinn"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
@@ -497,59 +497,59 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:392
 #: ../../src/wui/interactive_gamebase.cc:215
 msgid "Hide Building Spaces"
-msgstr ""
+msgstr "Falaich na h-ionadan togail"
 
 #: ../../src/editor/editorinteractive.cc:392
 #: ../../src/wui/interactive_gamebase.cc:215
 msgid "Show Building Spaces"
-msgstr ""
+msgstr "Seall na h-ionadan togail"
 
 #: ../../src/editor/editorinteractive.cc:395
 #: ../../src/wui/interactive_gamebase.cc:218
 msgctxt "hotkey"
 msgid "Space"
-msgstr ""
+msgstr "Space"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
 #: ../../src/editor/editorinteractive.cc:399
 msgid "Hide Grid"
-msgstr ""
+msgstr "Falaich an griod"
 
 #: ../../src/editor/editorinteractive.cc:399
 msgid "Show Grid"
-msgstr ""
+msgstr "Seall an griod"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables (trees,
 #. * rocks etc.) are shown
 #: ../../src/editor/editorinteractive.cc:404
 msgid "Hide Immovables"
-msgstr ""
+msgstr "Falaich na nithean do-ghluasad"
 
 #: ../../src/editor/editorinteractive.cc:404
 msgid "Show Immovables"
-msgstr ""
+msgstr "Seall na nithean do-ghluasad"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. animals are shown
 #: ../../src/editor/editorinteractive.cc:409
 msgid "Hide Animals"
-msgstr ""
+msgstr "Falaich na beathaichean"
 
 #: ../../src/editor/editorinteractive.cc:409
 msgid "Show Animals"
-msgstr ""
+msgstr "Seall na beathaichean"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. resources are shown
 #: ../../src/editor/editorinteractive.cc:413
 msgid "Hide Resources"
-msgstr ""
+msgstr "Falaich na stòrasan"
 
 #: ../../src/editor/editorinteractive.cc:413
 msgid "Show Resources"
-msgstr ""
+msgstr "Seall na stòrasan"
 
 #: ../../src/editor/editorinteractive.cc:450
 msgid "Unsupported Format"
@@ -584,7 +584,7 @@ msgstr "A’ cruthachadh mapa falamh…"
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:104
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:474
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:141
-#: ../../src/logic/map.h:163 ../../src/wui/mapdata.cc:45
+#: ../../src/logic/map.h:173 ../../src/wui/mapdata.cc:45
 msgid "No Name"
 msgstr "Gun ainm"
 
@@ -592,7 +592,7 @@ msgstr "Gun ainm"
 #: ../../src/editor/editorinteractive.cc:965
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:105
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:475
-#: ../../src/logic/map.h:164
+#: ../../src/logic/map.h:174
 msgctxt "author_name"
 msgid "Unknown"
 msgstr "Gun urra"
@@ -871,12 +871,12 @@ msgstr "Tagaichean:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:143
 msgid "Waterway length limit:"
-msgstr ""
+msgstr "Slighe aiseig as fhaide:"
 
 #. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:152
 msgid "Disabled"
-msgstr ""
+msgstr "À comas"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:160
 msgid "Suggested Teams:"
@@ -908,7 +908,7 @@ msgstr "Sgiobaidhean"
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:208
 #, c-format
 msgid "It is not recommended to permit waterway lengths greater than %u"
-msgstr ""
+msgstr "Cha mholamaid gun ceadaich thu slighean aiseig nas fhaide na %u"
 
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:60
 msgid "Create Map"
@@ -1252,7 +1252,7 @@ msgid ""
 " the east/south of the selected point. When shrinking the map, the desired "
 "number of columns/rows will be removed from the east/south of the splitting "
 "location."
-msgstr ""
+msgstr "Tagh meud a’ mhapa is briog air a’ mhapa an uairsin ’ga sgoltadh air an ionad a thogras tu. Ma mheudaicheas tu am mapa, thèid colbhan ’s ràghan ùra a chur a-steach gu ear-dheas air an ionad a thaghas tu. Nuair a chrùbas tu am mapa, thèid an àireamh de cholbhan ’s ràghan a thagh thu a thoirt air falbh gu ear-dheas o ionad an sgoiltidh."
 
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
@@ -1275,25 +1275,25 @@ msgstr "Am meud làithreach: %u"
 #: ../../src/game_io/game_loader.cc:69
 #, c-format
 msgid "Loading game: %1$s (%2$u/%3$d)"
-msgstr ""
+msgstr "A’ luchdadh a’ gheama: %1$s (%2$u/%3$d)"
 
 #: ../../src/game_io/game_loader.cc:71 ../../src/game_io/game_saver.cc:59
 #: ../../src/map_io/map_saver.cc:103
 #: ../../src/map_io/widelands_map_loader.cc:136
 msgid "Elemental data"
-msgstr ""
+msgstr "Dàta bunasach"
 
 #: ../../src/game_io/game_loader.cc:116 ../../src/game_io/game_saver.cc:88
 msgid "Economies"
-msgstr ""
+msgstr "Eaconamaidhean"
 
 #: ../../src/game_io/game_loader.cc:124 ../../src/game_io/game_saver.cc:96
 msgid "AI"
-msgstr ""
+msgstr "IF"
 
 #: ../../src/game_io/game_loader.cc:132 ../../src/game_io/game_saver.cc:104
 msgid "Command queue"
-msgstr ""
+msgstr "Ciutha nan àitheantan"
 
 #: ../../src/game_io/game_loader.cc:141 ../../src/map_io/map_saver.cc:155
 #: ../../src/map_io/widelands_map_loader.cc:358
@@ -1304,20 +1304,20 @@ msgstr "Teachdaireachdan"
 
 #: ../../src/game_io/game_loader.cc:159
 msgid "Finishing"
-msgstr ""
+msgstr "’Ga choileanadh"
 
 #: ../../src/game_io/game_saver.cc:52
 #, c-format
 msgid "Saving game: %1$s (%2$d/%3$d)"
-msgstr ""
+msgstr "A’ sàbhaladh a’ gheama: %1$s (%2$d/%3$d)"
 
 #: ../../src/game_io/game_saver.cc:54
 msgid "Autosaving game…"
-msgstr ""
+msgstr "A’ sàbhaladh a’ gheama gu fèin-obrachail…"
 
 #: ../../src/game_io/game_saver.cc:112
 msgid "Interactive player"
-msgstr ""
+msgstr "An cluicheadair eadar-ghnìomhach"
 
 #. * TRANSLATORS: Error message printed to console/command line/log file
 #: ../../src/graphic/gl/initialize.cc:203
@@ -1434,7 +1434,7 @@ msgstr "dheth"
 
 #: ../../src/logic/editor_game_base.cc:298
 msgid "Postloading world and tribes…"
-msgstr ""
+msgstr "Ag iar-luchdadh an t-saoghail ’s nan treubhan…"
 
 #: ../../src/logic/editor_game_base.cc:331
 msgid "Loading graphics"
@@ -1442,15 +1442,15 @@ msgstr "A’ luchdadh na grafaigeachd"
 
 #: ../../src/logic/editor_game_base.cc:565
 msgid "Cleaning up for loading: Map objects (1/3)"
-msgstr ""
+msgstr "’Ga sgioblachadh a chùm luchdaidh: Nithean a’ mhapa (1/3)"
 
 #: ../../src/logic/editor_game_base.cc:568
 msgid "Cleaning up for loading: Players (2/3)"
-msgstr ""
+msgstr "’Ga sgioblachadh a chùm luchdaidh: Cluicheadairean (2/3)"
 
 #: ../../src/logic/editor_game_base.cc:571
 msgid "Cleaning up for loading: Map (3/3)"
-msgstr ""
+msgstr "’Ga sgioblachadh a chùm luchdaidh: Am mapa (3/3)"
 
 #. * TRANSLATORS: Win condition for this game has not been set.
 #: ../../src/logic/game.cc:140
@@ -1460,19 +1460,19 @@ msgstr "Gun chumha"
 #: ../../src/logic/game.cc:216 ../../src/logic/game.cc:273
 #: ../../src/logic/game.cc:358 ../../src/logic/game.cc:390
 msgid "Preloading map…"
-msgstr ""
+msgstr "A’ ro-luchdadh a’ mhapa…"
 
 #: ../../src/logic/game.cc:220 ../../src/logic/game.cc:280
 msgid "Loading world…"
-msgstr ""
+msgstr "A’ luchdadh an t-saoghail…"
 
 #: ../../src/logic/game.cc:222 ../../src/logic/game.cc:283
 msgid "Loading tribes…"
-msgstr ""
+msgstr "A’ luchdadh nan treubhan…"
 
 #: ../../src/logic/game.cc:232 ../../src/logic/game.cc:286
 msgid "Creating players…"
-msgstr ""
+msgstr "A’ cruthachadh nan cluicheadairean…"
 
 #: ../../src/logic/game.cc:249 ../../src/logic/game.cc:314
 msgid "Loading map…"
@@ -1489,13 +1489,13 @@ msgstr "’Ga luchdadh…"
 
 #: ../../src/logic/game.cc:469
 msgid "Creating player infrastructure…"
-msgstr ""
+msgstr "A’ cruthachadh bun-structar nan cluicheadairean…"
 
-#: ../../src/logic/game.cc:479 ../../src/logic/player.cc:225
+#: ../../src/logic/game.cc:479 ../../src/logic/player.cc:224
 msgid "Missing starting position"
 msgstr "Tha ionad tòiseachaidh a dhìth"
 
-#: ../../src/logic/game.cc:480 ../../src/logic/player.cc:226
+#: ../../src/logic/game.cc:480 ../../src/logic/player.cc:225
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
@@ -1568,7 +1568,7 @@ msgstr "Chaidham faidhle “%s” aiseag on lethbhreac-ghlèidhidh."
 msgid "An unexpected error occurred:"
 msgstr "Thachair mearachd air nach robh dùil:"
 
-#: ../../src/logic/map.h:165
+#: ../../src/logic/map.h:175
 msgid "No description defined"
 msgstr "Cha deach tuairisgeul a mhìneachadh"
 
@@ -1842,14 +1842,14 @@ msgstr "Tha luchd-obrach a dhìth"
 #. missing
 #: ../../src/logic/map_objects/tribes/productionsite.cc:359
 msgid "Worker is coming"
-msgstr ""
+msgstr "Tha neach-obrach a’ tighinn"
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1
 #. worker
 #. missing. If you need plural forms here, please let us know.
 #: ../../src/logic/map_objects/tribes/productionsite.cc:362
 msgid "Workers are coming"
-msgstr ""
+msgstr "Tha luchd-obrach a’ tighinn"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:369
 msgid "(stopped)"
@@ -1867,76 +1867,76 @@ msgstr "%i%%"
 msgid "Can’t find any more resources!"
 msgstr "Cha deach stòras a lorg tuilleadh!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:436
+#: ../../src/logic/map_objects/tribes/ship.cc:434
 msgid "Port Space"
 msgstr "Raon puirt"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:436
+#: ../../src/logic/map_objects/tribes/ship.cc:434
 msgid "Port Space Found"
 msgstr "Chaidh raon airson port a lorg"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:437
+#: ../../src/logic/map_objects/tribes/ship.cc:435
 msgid "An expedition ship found a new port build space."
 msgstr "Lorg triall luinge raon ùr gus port a thogail."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:555
+#: ../../src/logic/map_objects/tribes/ship.cc:553
 msgid "Island Circumnavigated"
 msgstr "Tha eilean air iom-sheòladh"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../src/logic/map_objects/tribes/ship.cc:555
+#: ../../src/logic/map_objects/tribes/ship.cc:553
 msgctxt "ship"
 msgid "Waiting"
 msgstr "A’ feitheamh"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:556
+#: ../../src/logic/map_objects/tribes/ship.cc:554
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Sheòl triall luinge timcheall air eilean gun tachartas sam bith."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:618
+#: ../../src/logic/map_objects/tribes/ship.cc:616
 msgid "Coast Reached"
 msgstr "Chaidh oirthir a ruigsinn"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:618
+#: ../../src/logic/map_objects/tribes/ship.cc:616
 msgid "Land Ahoy!"
 msgstr "Tìr air fàire!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:619
+#: ../../src/logic/map_objects/tribes/ship.cc:617
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Ràinig triall luinge oirthir is e a’ feitheamh air òrduighean ùra."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:670
+#: ../../src/logic/map_objects/tribes/ship.cc:668
 msgid "New port construction site is gone"
 msgstr "Chailleadh làrach togail puirt ùr"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:670
+#: ../../src/logic/map_objects/tribes/ship.cc:668
 msgid "Port Lost!"
 msgstr "Port air a chall!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:671
+#: ../../src/logic/map_objects/tribes/ship.cc:669
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Chaidh sgur dhen triall on a dh’fhàillig le dì-luchdadh a’ bhathair."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:1063
+#: ../../src/logic/map_objects/tribes/ship.cc:857
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Triall"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:1063
+#: ../../src/logic/map_objects/tribes/ship.cc:857
 msgid "Expedition Ready"
 msgstr "Tha triall deiseil"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:1064
+#: ../../src/logic/map_objects/tribes/ship.cc:858
 msgid "An expedition ship is waiting for your commands."
 msgstr "Tha triall luinge a’ feitheamh air d’ òrduighean."
 
 #. * TRANSLATORS: This is a ship state. The ship is currently transporting
 #. wares.
-#: ../../src/logic/map_objects/tribes/ship.cc:1216
+#: ../../src/logic/map_objects/tribes/ship.cc:1011
 #: ../../src/wui/seafaring_statistics_menu.cc:209
 msgctxt "ship_state"
 msgid "Shipping"
@@ -1945,7 +1945,7 @@ msgstr "Ag aiseag"
 #. * TRANSLATORS: This is a ship state. The ship is ready to transport wares,
 #. but has
 #. * nothing to do.
-#: ../../src/logic/map_objects/tribes/ship.cc:1220
+#: ../../src/logic/map_objects/tribes/ship.cc:1015
 #: ../../src/wui/seafaring_statistics_menu.cc:207
 msgctxt "ship_state"
 msgid "Idle"
@@ -1953,7 +1953,7 @@ msgstr "’Na tàmh"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:1225
+#: ../../src/logic/map_objects/tribes/ship.cc:1020
 #: ../../src/wui/seafaring_statistics_menu.cc:211
 msgctxt "ship_state"
 msgid "Waiting"
@@ -1961,14 +1961,14 @@ msgstr "A’ feitheamh"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:1229
+#: ../../src/logic/map_objects/tribes/ship.cc:1024
 #: ../../src/wui/seafaring_statistics_menu.cc:213
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "A’ rùrachadh"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:1233
+#: ../../src/logic/map_objects/tribes/ship.cc:1028
 #: ../../src/wui/seafaring_statistics_menu.cc:215
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -1977,7 +1977,7 @@ msgstr "Air raon puirt a lorg"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1238
+#: ../../src/logic/map_objects/tribes/ship.cc:1033
 #: ../../src/wui/seafaring_statistics_menu.cc:217
 msgctxt "ship_state"
 msgid "Founding a Colony"
@@ -2062,7 +2062,7 @@ msgstr "do-choiseach"
 msgid "This objective has no description."
 msgstr "Chan eil tuairisgeul aig an amas seo."
 
-#: ../../src/logic/player.cc:1523
+#: ../../src/logic/player.cc:1522
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -2080,7 +2080,7 @@ msgstr "Ràinig sinn deireadh na h-ath-chluiche is chaidh an geama a chur ’na 
 
 #: ../../src/logic/save_handler.cc:127
 msgid "Saving game…"
-msgstr ""
+msgstr "A’ sàbhaladh a’ gheama…"
 
 #: ../../src/logic/save_handler.cc:173
 #: ../../src/wui/game_main_menu_save_game.cc:281
@@ -2095,36 +2095,36 @@ msgstr "Chaidh an geama a shàbhaladh"
 #: ../../src/map_io/map_saver.cc:88
 #, c-format
 msgid "Saving map: %1$s (%2$d/%3$d)"
-msgstr ""
+msgstr "A’ sàbhaladh a’ mhapa: %1$s (%2$d/%3$d)"
 
 #: ../../src/map_io/map_saver.cc:90
 msgid "Autosaving map…"
-msgstr ""
+msgstr "A’ sàbhaladh a’ mhapa gu fèin-obrachail…"
 
 #: ../../src/map_io/map_saver.cc:126
 #: ../../src/map_io/widelands_map_loader.cc:163
 msgid "Heights"
-msgstr ""
+msgstr "Àirdean"
 
 #: ../../src/map_io/map_saver.cc:134
 #: ../../src/map_io/widelands_map_loader.cc:174
 msgid "Terrains"
-msgstr ""
+msgstr "Cruthan-tìre"
 
 #: ../../src/map_io/map_saver.cc:142
 #: ../../src/map_io/widelands_map_loader.cc:189
 msgid "Starting positions"
-msgstr ""
+msgstr "Ionadan tòiseachaidh"
 
 #: ../../src/map_io/map_saver.cc:173
 #: ../../src/map_io/widelands_map_loader.cc:220
 msgid "Map version"
-msgstr ""
+msgstr "Tionndadh a’ mhapa"
 
 #: ../../src/map_io/map_saver.cc:186
 #: ../../src/map_io/widelands_map_loader.cc:227
 msgid "Building restrictions"
-msgstr ""
+msgstr "Cuingeachaidhean togail"
 
 #: ../../src/map_io/map_saver.cc:212
 #: ../../src/map_io/widelands_map_loader.cc:263 ../../src/wui/minimap.cc:153
@@ -2134,7 +2134,7 @@ msgstr "Brataich"
 #: ../../src/map_io/map_saver.cc:220
 #: ../../src/map_io/widelands_map_loader.cc:271
 msgid "Roads and waterways"
-msgstr ""
+msgstr "Rathaidean agus slighean aiseig"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/map_io/map_saver.cc:235
@@ -2147,43 +2147,43 @@ msgstr "Togalaichean"
 #: ../../src/map_io/map_saver.cc:245
 #: ../../src/map_io/widelands_map_loader.cc:184
 msgid "Map objects"
-msgstr ""
+msgstr "Nithean a’ mhapa"
 
 #: ../../src/map_io/map_saver.cc:255
 #: ../../src/map_io/widelands_map_loader.cc:367
 msgid "Win condition"
-msgstr ""
+msgstr "Cumha na buaidhe"
 
 #: ../../src/map_io/map_saver.cc:265
 msgid "Flag details"
-msgstr ""
+msgstr "Fiosrachadh nam bratach"
 
 #: ../../src/map_io/map_saver.cc:275
 msgid "Road and waterway details"
-msgstr ""
+msgstr "Fiosrachadh nan rathaidean agus nan slighean aiseig"
 
 #: ../../src/map_io/map_saver.cc:294
 msgid "Building details"
-msgstr ""
+msgstr "Fiosrachadh nan togalaichean"
 
 #: ../../src/map_io/map_saver.cc:303
 msgid "Territory"
-msgstr ""
+msgstr "Cruth-tìre"
 
 #: ../../src/map_io/map_saver.cc:311
 #: ../../src/map_io/widelands_map_loader.cc:250
 msgid "Exploration"
-msgstr ""
+msgstr "Rùrachadh"
 
 #: ../../src/map_io/map_saver.cc:319
 #: ../../src/map_io/widelands_map_loader.cc:347
 msgid "Vision"
-msgstr ""
+msgstr "Lèirsinn"
 
 #: ../../src/map_io/map_saver.cc:329
 #: ../../src/map_io/widelands_map_loader.cc:386
 msgid "Scripting"
-msgstr ""
+msgstr "Sgriobtadh"
 
 #: ../../src/map_io/map_saver.cc:337
 #: ../../src/map_io/widelands_map_loader.cc:378
@@ -2195,11 +2195,11 @@ msgstr "Amasan"
 #: ../../src/map_io/map_saver.cc:342
 #: ../../src/map_io/widelands_map_loader.cc:394
 msgid "Images"
-msgstr ""
+msgstr "Dealbhan"
 
 #: ../../src/map_io/map_saver.cc:354
 msgid "Minimap"
-msgstr ""
+msgstr "Meanbh-mhapa"
 
 #: ../../src/map_io/s2map.cc:455
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -2208,31 +2208,31 @@ msgstr "Mapa Bluebyte Settlers II. Cha deach beachd a mhìneachadh!"
 #: ../../src/map_io/widelands_map_loader.cc:132
 #, c-format
 msgid "Loading map: %1$s (%2$u/%3$d)"
-msgstr ""
+msgstr "A’ luchdadh a’ mhapa: %1$s (%2$u/%3$d)"
 
 #: ../../src/map_io/widelands_map_loader.cc:242
 msgid "Territories"
-msgstr ""
+msgstr "Cruthan-tìre"
 
 #: ../../src/map_io/widelands_map_loader.cc:295
 msgid "Initializing flags"
-msgstr ""
+msgstr "A’ suidheachadh nam bratach"
 
 #: ../../src/map_io/widelands_map_loader.cc:303
 msgid "Initializing roads and waterways"
-msgstr ""
+msgstr "A’ suidheachadh nan rathaidean agus nan slighean aiseig"
 
 #: ../../src/map_io/widelands_map_loader.cc:318
 msgid "Initializing buildings"
-msgstr ""
+msgstr "A’ suidheachadh nan togalaichean"
 
 #: ../../src/map_io/widelands_map_loader.cc:326
 msgid "Initializing map objects"
-msgstr ""
+msgstr "A’ suidheachadh nithean a’ mhapa"
 
 #: ../../src/map_io/widelands_map_loader.cc:398
 msgid "Checking map"
-msgstr ""
+msgstr "A’ dearbhadh a’ mhapa"
 
 #: ../../src/network/gameclient.cc:151 ../../src/network/gamehost.cc:663
 #: ../../src/wlapplication.cc:1386
@@ -2539,23 +2539,23 @@ msgstr "Àitheantan rianaire ris an cuir sinn taic:"
 
 #: ../../src/network/internet_gaming.cc:920
 msgid "/motd <msg> - Set a permanent greeting message"
-msgstr ""
+msgstr "/motd <teachdaireachd> – Suidhich teachdaireachd fàilteachaidh buan"
 
 #: ../../src/network/internet_gaming.cc:921
 msgid "/announce <msg> - Send a one time system message"
-msgstr ""
+msgstr "/announce <teachdaireachd> – Cuir teachdaireachd siostaim aon turas"
 
 #: ../../src/network/internet_gaming.cc:924
 msgid "/warn <user> <msg> - Send a private system message to the given user"
-msgstr ""
+msgstr "/warn <cleachdaiche> <teachdaireachd> – Cuir teachdaireachd siostaim phrìobhaideach gun chleachdaiche ainmichte"
 
 #: ../../src/network/internet_gaming.cc:927
 msgid "/kick <user|game> - Remove the given user or game from the metaserver"
-msgstr ""
+msgstr "/kick <cleachdaiche|geama> – Thoir an cleachdaiche no an geama ainmichte air falbh on mheata-fhrithealaiche"
 
 #: ../../src/network/internet_gaming.cc:929
 msgid "/ban <user> - Ban a user for 24 hours from the metaserver"
-msgstr ""
+msgstr "/ban <cleachdaiche> – Toirmisg cleachdaiche on mheata-fhrithealaiche fad 24 uair a thìde"
 
 #: ../../src/network/internet_gaming.cc:1005
 msgid "Conversion error"
@@ -2847,10 +2847,10 @@ msgstr[3] "%d piogsail"
 #, c-format
 msgid "%d field"
 msgid_plural "%d fields"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d raon"
+msgstr[1] "%d raon"
+msgstr[2] "%d raointean"
+msgstr[3] "%d raon"
 
 #: ../../src/ui_basic/window.cc:125 ../../src/ui_fsmenu/about.cc:34
 #: ../../src/wui/watchwindow.cc:75
@@ -2859,19 +2859,19 @@ msgstr "Dùin"
 
 #: ../../src/ui_basic/window.cc:178
 msgid "Minimize"
-msgstr ""
+msgstr "Fìor-lùghdaich"
 
 #: ../../src/ui_basic/window.cc:178
 msgid "Restore"
-msgstr ""
+msgstr "Aisig"
 
 #: ../../src/ui_basic/window.cc:182
 msgid "Pin"
-msgstr ""
+msgstr "Prìnich"
 
 #: ../../src/ui_basic/window.cc:182
 msgid "Unpin"
-msgstr ""
+msgstr "Dì-phrìnich"
 
 #: ../../src/ui_fsmenu/about.cc:31 ../../src/ui_fsmenu/main.cc:52
 msgid "About Widelands"
@@ -2927,7 +2927,7 @@ msgstr "Tuairisgeul"
 #. * TRANSLATORS: A campaign difficulty
 #: ../../src/ui_fsmenu/campaigns.cc:53
 msgid "Default"
-msgstr ""
+msgstr "Bun-roghainn"
 
 #: ../../src/ui_fsmenu/helpwindow.cc:41 ../../src/wui/helpwindow.cc:44
 #, c-format
@@ -3126,7 +3126,7 @@ msgstr "Suidheachadh geama ioma-chluicheadair"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:184
 msgid "Please select a map or saved game."
-msgstr ""
+msgstr "Tagh mapa no geama air a shàbhaladh."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:187
 msgid "The host has not yet selected a map or saved game."
@@ -3292,20 +3292,20 @@ msgstr "Seall a h-uile mapa"
 
 #: ../../src/ui_fsmenu/mapselect.cc:107
 msgid "Official & Unofficial"
-msgstr ""
+msgstr "Oifigeil ⁊ neo-oifigeil"
 
 #: ../../src/ui_fsmenu/mapselect.cc:119
 msgid "Any Teams"
-msgstr ""
+msgstr "Sgioba sam bith"
 
 #: ../../src/ui_fsmenu/mapselect.cc:431
 msgid "Balanced & Unbalanced"
-msgstr ""
+msgstr "Cothromach ⁊ gun mheidh"
 
 #: ../../src/ui_fsmenu/mapselect.cc:436
 msgctxt "balancing"
 msgid "Unspecified"
-msgstr ""
+msgstr "Gun sònrachadh"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:40
 msgid "Choose game type"
@@ -3405,7 +3405,7 @@ msgstr "Glac an t-ion-chur"
 
 #: ../../src/ui_fsmenu/options.cc:129
 msgid "Use system mouse cursor"
-msgstr ""
+msgstr "Cleachd cùrsair luchaige an t-siostaim"
 
 #: ../../src/ui_fsmenu/options.cc:139
 msgid "Maximum FPS:"
@@ -3465,11 +3465,11 @@ msgstr "Na cleachd ach aon uinneag cumail sùil air"
 #. * TRANSLATORS: This refers to to zooming with the scrollwheel.
 #: ../../src/ui_fsmenu/options.cc:224
 msgid "Zoom only when Ctrl is pressed"
-msgstr ""
+msgstr "Na dèan sùmadh ach nuair a bhios Ctrl ’ga chumail sìos"
 
 #: ../../src/ui_fsmenu/options.cc:225
 msgid "Display game time in the top left corner"
-msgstr ""
+msgstr "Seall àm a’ gheama san oisean chlì aig a’ bhàrr"
 
 #: ../../src/ui_fsmenu/options.cc:236
 msgid "Interface"
@@ -3649,13 +3649,13 @@ msgstr "A bheil thu cinnteach gu bheil thu airson an togalach seo a thoirt às a
 
 #: ../../src/wui/actionconfirm.cc:247 ../../src/wui/actionconfirm.cc:306
 msgid "Preserve wares"
-msgstr ""
+msgstr "Glèidh na batharan"
 
 #: ../../src/wui/actionconfirm.cc:249
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the dismantling time"
-msgstr ""
+msgstr "Thèid gach bathar a tha air fhàgail san togalach a thogail a-mach leis an fhear-togail agus bheir an toirt às a chèile nas fhaide"
 
 #: ../../src/wui/actionconfirm.cc:298
 msgid "Enhance building?"
@@ -3675,7 +3675,7 @@ msgstr "Thoir an aire ma tha an nàmhaid faisg ort!"
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the enhancing time"
-msgstr ""
+msgstr "Thèid gach bathar a tha air fhàgail san togalach a thogail a-mach leis an fhear-togail agus bheir leasachadh nas fhaide"
 
 #: ../../src/wui/actionconfirm.cc:360
 msgid "Sink the ship?"
@@ -3903,11 +3903,11 @@ msgstr "Meudaich an rùm. Cum sìos Ctrl a shuidheachadh an rùm air an luach as
 
 #: ../../src/wui/constructionsitewindow.cc:215
 msgid "Stopped"
-msgstr ""
+msgstr "’Na stad"
 
 #: ../../src/wui/constructionsitewindow.cc:216
 msgid "Stop this building’s work after completion"
-msgstr ""
+msgstr "Cuir an togalach seo ’na stad nuair a bhios an obair deiseil"
 
 #: ../../src/wui/constructionsitewindow.cc:270
 #: ../../src/wui/soldierlist.cc:413
@@ -3941,19 +3941,19 @@ msgstr "Thoir am bathar air a thaghadh air falbh on a sheo"
 
 #: ../../src/wui/constructionsitewindow.cc:328
 msgid "Ware settings to apply after construction"
-msgstr ""
+msgstr "Roghainnean nam batharan a thèid a chur an sàs nuair a bhios seo air a thogail"
 
 #: ../../src/wui/constructionsitewindow.cc:331
 msgid "Worker settings to apply after construction"
-msgstr ""
+msgstr "Roghainnean an luchd-obrach a thèid a chur an sàs nuair a bhios seo air a thogail"
 
 #: ../../src/wui/constructionsitewindow.cc:339
 msgid "Start an expedition from this port after completion"
-msgstr ""
+msgstr "Tòisich air triall on phort seo nuair a bhios e air a thogail"
 
 #: ../../src/wui/constructionsitewindow.cc:359
 msgid "Settings to apply after construction"
-msgstr ""
+msgstr "Na roghainnean a thèid a chur an sàs nuair a bhios seo air a thogail"
 
 #: ../../src/wui/economy_options_window.cc:43
 msgid "Economy options"
@@ -3988,7 +3988,7 @@ msgstr "Lùghdaich an t-amas"
 
 #: ../../src/wui/economy_options_window.cc:92
 msgid "Toggle infinite target"
-msgstr ""
+msgstr "Toglaich amas gun crìoch"
 
 #: ../../src/wui/economy_options_window.cc:100
 msgid "Increase target"
@@ -4009,7 +4009,7 @@ msgstr "Sàbhail roghainnean nan amasan"
 #. * TRANSLATORS: Infinite number of wares or workers
 #: ../../src/wui/economy_options_window.cc:248
 msgid "∞"
-msgstr ""
+msgstr "∞"
 
 #: ../../src/wui/economy_options_window.cc:512
 msgid "The profile name cannot be empty"
@@ -4082,7 +4082,7 @@ msgstr "Tog rathad"
 
 #: ../../src/wui/fieldaction.cc:357
 msgid "Build waterway"
-msgstr ""
+msgstr "Tog slighe aiseig"
 
 #: ../../src/wui/fieldaction.cc:364
 msgid "Destroy this flag"
@@ -4106,7 +4106,7 @@ msgstr "Mill an rathad"
 
 #: ../../src/wui/fieldaction.cc:395
 msgid "Destroy a waterway"
-msgstr ""
+msgstr "Mill an slighe aiseig"
 
 #: ../../src/wui/fieldaction.cc:409
 msgid "Watch field in a separate window"
@@ -4134,7 +4134,7 @@ msgstr "Sguir dhen rathad"
 
 #: ../../src/wui/fieldaction.cc:579
 msgid "Cancel road and start building waterway"
-msgstr ""
+msgstr "Sguir dheth rathad agus tòisich air slighe aiseig a thogail"
 
 #: ../../src/wui/fieldaction.cc:583
 msgid "Build roads"
@@ -4142,15 +4142,15 @@ msgstr "Tog rathaidean"
 
 #: ../../src/wui/fieldaction.cc:595
 msgid "Cancel waterway"
-msgstr ""
+msgstr "Sguir dhen t-slighe aiseig"
 
 #: ../../src/wui/fieldaction.cc:598
 msgid "Cancel waterway and start building road"
-msgstr ""
+msgstr "Sguir dheth slighe aiseig agus tòisich air rathad a thogail"
 
 #: ../../src/wui/fieldaction.cc:601
 msgid "Build waterways"
-msgstr ""
+msgstr "Tog slighean aiseig"
 
 #: ../../src/wui/game_chat_menu.cc:53
 #: ../../src/wui/interactive_gamebase.cc:326
@@ -4161,7 +4161,7 @@ msgstr "Cabadaich"
 #: ../../src/wui/game_chat_menu.cc:60
 #: ../../src/wui/interactive_gamebase.cc:150
 msgid "Script Console"
-msgstr ""
+msgstr "Consoil sgriobtaidh"
 
 #. * TRANSLATORS: Window label
 #: ../../src/wui/game_client_disconnected.cc:47
@@ -4271,7 +4271,7 @@ msgstr "Meadhanaich sealladh a’ mhapa air an ionad"
 #: ../../src/wui/seafaring_statistics_menu.cc:531
 msgctxt "hotkey"
 msgid "Alt+0"
-msgstr ""
+msgstr "Alt+0"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:567
@@ -4282,7 +4282,7 @@ msgstr "Seall a h-uile teachdaireachd"
 #: ../../src/wui/seafaring_statistics_menu.cc:539
 msgctxt "hotkey"
 msgid "Alt+1"
-msgstr ""
+msgstr "Alt+1"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:577
@@ -4293,7 +4293,7 @@ msgstr "Na seall ach teachdaireachdan nan clach-eòlaichean"
 #: ../../src/wui/seafaring_statistics_menu.cc:542
 msgctxt "hotkey"
 msgid "Alt+2"
-msgstr ""
+msgstr "Alt+2"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:580
@@ -4304,7 +4304,7 @@ msgstr "Na seall ach teachdaireachdan na h-eaconamaidh"
 #: ../../src/wui/seafaring_statistics_menu.cc:545
 msgctxt "hotkey"
 msgid "Alt+3"
-msgstr ""
+msgstr "Alt+3"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:583
@@ -4315,7 +4315,7 @@ msgstr "Na seall ach teachdaireachdan na seòladaireachd"
 #: ../../src/wui/seafaring_statistics_menu.cc:548
 msgctxt "hotkey"
 msgid "Alt+4"
-msgstr ""
+msgstr "Alt+4"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:586
@@ -4326,7 +4326,7 @@ msgstr "Na seall ach teachdaireachdan a’ chogaidh"
 #: ../../src/wui/seafaring_statistics_menu.cc:552
 msgctxt "hotkey"
 msgid "Alt+5"
-msgstr ""
+msgstr "Alt+5"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:589
@@ -4381,7 +4381,7 @@ msgstr "Cuir an teachdaireachd a thagh thu dhan tasglann"
 #: ../../src/wui/game_message_menu.cc:686
 msgctxt "hotkey"
 msgid "Del"
-msgstr ""
+msgstr "Del"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_options_sound_menu.cc:29
@@ -4469,24 +4469,24 @@ msgstr "Sgòr an sgioba"
 #, c-format
 msgid "%d file:"
 msgid_plural "%d files:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d fhaidhle:"
+msgstr[1] "%d fhaidhle:"
+msgstr[2] "%d faidhlichean:"
+msgstr[3] "%d faidhle:"
 
 #. * TRANSLATORS: %1% = number of selected directories, %2% = number of
 #. selected files
 #: ../../src/wui/gamedetails.cc:112
 msgid "Selected %1% directory and %2%"
 msgid_plural "Selected %1% directories and %2%"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Thagh thu %1% phasgan is %2%"
+msgstr[1] "Thagh thu %1% phasgan is %2%"
+msgstr[2] "Thagh thu %1% pasganan is %2%"
+msgstr[3] "Thagh thu %1% pasgan is %2%"
 
 #: ../../src/wui/gamedetails.cc:132
 msgid "Directory Name:"
-msgstr ""
+msgstr "Ainm a’ phasgain:"
 
 #: ../../src/wui/gamedetails.cc:140
 msgid "Error:"
@@ -4600,26 +4600,26 @@ msgstr "Cum sìos Ctrl ach am bi a h-uile gin dhen bhathar seo ceadaichte"
 #. * TRANSLATORS: Title for the map view menu button in the game
 #: ../../src/wui/interactive_base.cc:172
 msgid "Map View"
-msgstr ""
+msgstr "Sealladh a’ mhapa"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:284
 msgid "Hide Minimap"
-msgstr ""
+msgstr "Falaich am meanbh-mhapa"
 
 #: ../../src/wui/interactive_base.cc:284
 msgid "Show Minimap"
-msgstr ""
+msgstr "Seall am meanbh-mhapa"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:289
 msgid "Zoom +"
-msgstr ""
+msgstr "Sùm +"
 
 #: ../../src/wui/interactive_base.cc:291
 msgctxt "hotkey"
 msgid "Ctrl++"
-msgstr ""
+msgstr "Ctrl++"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:294
@@ -4629,17 +4629,17 @@ msgstr "Ath-shuidhich an sùm"
 #: ../../src/wui/interactive_base.cc:296
 msgctxt "hotkey"
 msgid "Ctrl+0"
-msgstr ""
+msgstr "Ctrl+0"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:299
 msgid "Zoom -"
-msgstr ""
+msgstr "Zoom −"
 
 #: ../../src/wui/interactive_base.cc:301
 msgctxt "hotkey"
 msgid "Ctrl+-"
-msgstr ""
+msgstr "Ctrl+−"
 
 #: ../../src/wui/interactive_gamebase.cc:57
 msgid "PAUSE"
@@ -4649,13 +4649,13 @@ msgstr "’NA STAD"
 #. options o increase/decrease the gamespeed, and to pause the game
 #: ../../src/wui/interactive_gamebase.cc:108
 msgid "Game Speed"
-msgstr ""
+msgstr "Luaths a’ gheama"
 
 #. * TRANSLATORS: Tooltip for Script Console in the game's main menu
 #: ../../src/wui/interactive_gamebase.cc:153
 msgctxt "hotkey"
 msgid "F6"
-msgstr ""
+msgstr "F6"
 
 #. * TRANSLATORS: Tooltip for Sound Options in the game's main menu
 #: ../../src/wui/interactive_gamebase.cc:163
@@ -4666,83 +4666,83 @@ msgstr "Suidhich roghainnean na fuaime ’s a’ chiùil"
 #. building names are shown
 #: ../../src/wui/interactive_gamebase.cc:222
 msgid "Hide Census"
-msgstr ""
+msgstr "Falaich an cunntas-sluaigh"
 
 #: ../../src/wui/interactive_gamebase.cc:222
 msgid "Show Census"
-msgstr ""
+msgstr "Seall an cunntas-sluaigh"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. * building statistics are shown
 #: ../../src/wui/interactive_gamebase.cc:229
 msgid "Hide Statistics"
-msgstr ""
+msgstr "Falaich an stadastaireachd"
 
 #: ../../src/wui/interactive_gamebase.cc:230
 msgid "Show Statistics"
-msgstr ""
+msgstr "Seall an stadastaireachd"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. * level information is shown above soldiers' heads
 #: ../../src/wui/interactive_gamebase.cc:237
 msgid "Hide Soldier Levels"
-msgstr ""
+msgstr "Falaich leibheilean nan saighdearan"
 
 #: ../../src/wui/interactive_gamebase.cc:238
 msgid "Show Soldier Levels"
-msgstr ""
+msgstr "Seall leibheilean nan saighdearan"
 
 #: ../../src/wui/interactive_gamebase.cc:276
 msgid "Speed +"
-msgstr ""
+msgstr "Luaths +"
 
 #. * TRANSLATORS: Tooltip for Speed + in the game's game speed menu
 #: ../../src/wui/interactive_gamebase.cc:279
 msgid "Increase the game speed"
-msgstr ""
+msgstr "Dèan an geama nas luaithe"
 
 #: ../../src/wui/interactive_gamebase.cc:279
 msgctxt "hotkey"
 msgid "Page Up"
-msgstr ""
+msgstr "Page Up"
 
 #: ../../src/wui/interactive_gamebase.cc:281
 msgid "Speed -"
-msgstr ""
+msgstr "Luaths −"
 
 #. * TRANSLATORS: Tooltip for Speed - in the game's game speed menu
 #: ../../src/wui/interactive_gamebase.cc:284
 msgid "Decrease the game speed"
-msgstr ""
+msgstr "Dèan an geama nas maille"
 
 #: ../../src/wui/interactive_gamebase.cc:284
 msgctxt "hotkey"
 msgid "Page Down"
-msgstr ""
+msgstr "Page Down"
 
 #: ../../src/wui/interactive_gamebase.cc:288
 msgid "Resume"
-msgstr ""
+msgstr "Lean air"
 
 #: ../../src/wui/interactive_gamebase.cc:291
 #: ../../src/wui/interactive_gamebase.cc:296
 msgctxt "hotkey"
 msgid "Pause"
-msgstr ""
+msgstr "Pause"
 
 #. * TRANSLATORS: Tooltip for Pause in the game's game speed menu
 #: ../../src/wui/interactive_gamebase.cc:291
 msgid "Resume the Game"
-msgstr ""
+msgstr "Lean air a’ gheama"
 
 #: ../../src/wui/interactive_gamebase.cc:293
 msgid "Pause"
-msgstr ""
+msgstr "Cuir ’na stad"
 
 #. * TRANSLATORS: Tooltip for Pause in the game's game speed menu
 #: ../../src/wui/interactive_gamebase.cc:296
 msgid "Pause the Game"
-msgstr ""
+msgstr "Cuir an geama ’na stad"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
 #: ../../src/wui/interactive_gamebase.cc:452
@@ -4771,21 +4771,21 @@ msgstr "An stòras"
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:270
 msgid "General"
-msgstr ""
+msgstr "Coitcheann"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
 #: ../../src/wui/interactive_player.cc:305
 msgid "Hide Workarea Overlaps"
-msgstr ""
+msgstr "Falaich tar-iadhadh nan raointean-obrach"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
 #: ../../src/wui/interactive_player.cc:308
 msgid "Show Workarea Overlaps"
-msgstr ""
+msgstr "Seall tar-iadhadh nan raointean-obrach"
 
 #: ../../src/wui/interactive_player.cc:311
 msgid ""
@@ -4842,7 +4842,7 @@ msgid ""
 "In order to use a registered account, you need an account on the Widelands "
 "website. Please log in at %s and set an online gaming password on your "
 "profile page."
-msgstr ""
+msgstr "Mus cleachd thu cunntas clàraichte, feumaidh tu cunntas fhaighinn air làrach-lìn Widelands. Clàraich a-steach air %s agus suidhich facal-faire geamaireachd air loidhne (Online Gaming Password) air duilleag na pròifil agad."
 
 #: ../../src/wui/login_box.cc:162
 msgid "Please enter a nickname!"
@@ -4860,12 +4860,12 @@ msgstr "Oifigeil"
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:32
 msgid "Unofficial"
-msgstr ""
+msgstr "Neo-oifigeil"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:34
 msgid "Balanced"
-msgstr ""
+msgstr "Cothromach"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:36
@@ -4875,7 +4875,7 @@ msgstr "Gun mheidh"
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:40
 msgid "Ferries"
-msgstr ""
+msgstr "Bàtaichean-aiseig"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:42
@@ -5103,28 +5103,28 @@ msgstr "geama"
 
 #: ../../src/wui/portdockwaresdisplay.cc:94
 msgid "Additional item"
-msgstr ""
+msgstr "Nì a bharrachd"
 
 #: ../../src/wui/portdockwaresdisplay.cc:96
 msgid "(Empty)"
-msgstr ""
+msgstr "(falamh)"
 
 #. * TRANSLATORS: Tooltip for a ware that is present in the building
 #: ../../src/wui/portdockwaresdisplay.cc:141
 msgid "Present"
-msgstr ""
+msgstr "An làthair"
 
 #. * TRANSLATORS: Tooltip for a ware that is neither present in the
 #. building nor being transported there
 #: ../../src/wui/portdockwaresdisplay.cc:145
 msgid "Missing"
-msgstr ""
+msgstr "A dhìth"
 
 #. * TRANSLATORS: Tooltip for a ware that is not present in the
 #. building, but already being transported there
 #: ../../src/wui/portdockwaresdisplay.cc:148
 msgid "Coming"
-msgstr ""
+msgstr "A’ tighinn"
 
 #: ../../src/wui/productionsitewindow.cc:106
 msgid "Exp"
@@ -5417,7 +5417,7 @@ msgstr "Rach dhan long a thagh thu ’s fosgail a h-uinneag"
 #: ../../src/wui/seafaring_statistics_menu.cc:117
 msgctxt "hotkey"
 msgid "CTRL+o"
-msgstr ""
+msgstr "CTRL+o"
 
 #. * TRANSLATORS: Tooltip in the seafaring statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:129
