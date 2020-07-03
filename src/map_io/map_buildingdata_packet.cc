@@ -724,11 +724,12 @@ void MapBuildingdataPacket::read_productionsite(
 			for (uint16_t i = 0; i < nr_progs; ++i) {
 				std::string program_name = fr.c_string();
 				std::transform(program_name.begin(), program_name.end(), program_name.begin(), tolower);
-                if (!pr_descr.programs().count(program_name)) {
-                    log("WARNING: productionsite has unknown program \"%s\",replacing it with \"work\"\n",
-					    program_name.c_str());
-                    program_name = "work";
-                }
+				if (!pr_descr.programs().count(program_name)) {
+					log(
+					   "WARNING: productionsite has unknown program \"%s\",replacing it with \"work\"\n",
+					   program_name.c_str());
+					program_name = "work";
+				}
 
 				productionsite.stack_[i].program = productionsite.descr().get_program(program_name);
 				productionsite.stack_[i].ip = fr.signed_32();
