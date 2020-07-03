@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-06-30 14:48+0000\n"
-"PO-Revision-Date: 2020-06-22 05:11+0000\n"
+"POT-Creation-Date: 2020-07-02 07:43+0000\n"
+"PO-Revision-Date: 2020-07-02 12:18+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -503,7 +503,7 @@ msgstr "(관객이 아닌) 선수와 연결된 모든 손님들은 해당 선수
 
 #: ../../data/txts/help/multiplayer_help.lua:24
 msgid "Map details"
-msgstr "지도 세부 정보"
+msgstr "지도 상세 정보"
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
