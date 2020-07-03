@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-06-30 14:48+0000\n"
-"PO-Revision-Date: 2020-07-01 15:11+0000\n"
+"POT-Creation-Date: 2020-07-02 07:43+0000\n"
+"PO-Revision-Date: 2020-07-02 15:23+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -360,7 +360,7 @@ msgstr "Ctrl+S"
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:46
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:59
 msgid "Map Options"
-msgstr "지도 옵션"
+msgstr "지도 선택사항"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:211
@@ -1551,21 +1551,21 @@ msgstr "저장된 파일이 손상되었을 수 있습니다!"
 #: ../../src/logic/generic_save_handler.cc:272
 #, c-format
 msgid "File ‘%s’ could not be restored!"
-msgstr ""
+msgstr "‘%s’ 파일을 복원 할 수 없습니다!"
 
 #: ../../src/logic/generic_save_handler.cc:274
 #, c-format
 msgid "Backup file ‘%s’ will be available for some time."
-msgstr ""
+msgstr " ‘%s’ 백업 파일은 한동안 사용할 수 있습니다."
 
 #: ../../src/logic/generic_save_handler.cc:285
 #, c-format
 msgid "File ‘%s’ was restored from backup."
-msgstr ""
+msgstr "‘%s’ 파일이 백업에서 복원되었습니다."
 
 #: ../../src/logic/generic_save_handler.cc:293
 msgid "An unexpected error occurred:"
-msgstr ""
+msgstr "예기치 않은 오류가 발생했습니다:"
 
 #: ../../src/logic/map.h:175
 msgid "No description defined"
@@ -1801,33 +1801,33 @@ msgstr "훈련 수준에 걸맞는 군인이 없습니다!"
 #: ../../src/logic/map_objects/tribes/production_program.cc:1190
 #, c-format
 msgid "Completed %s"
-msgstr ""
+msgstr "%s를 완료했습니다"
 
 #. * TRANSLATORS: Productivity label on a building if there is 1 worker
 #. missing
 #: ../../src/logic/map_objects/tribes/productionsite.cc:347
 msgid "Worker missing"
-msgstr ""
+msgstr "일꾼이 없습니다"
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1
 #. worker
 #. missing. If you need plural forms here, please let us know.
 #: ../../src/logic/map_objects/tribes/productionsite.cc:350
 msgid "Workers missing"
-msgstr ""
+msgstr "일꾼들이 없습니다"
 
 #. * TRANSLATORS: Productivity label on a building if there is 1 worker
 #. missing
 #: ../../src/logic/map_objects/tribes/productionsite.cc:359
 msgid "Worker is coming"
-msgstr ""
+msgstr "일꾼이 오고 있습니다"
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1
 #. worker
 #. missing. If you need plural forms here, please let us know.
 #: ../../src/logic/map_objects/tribes/productionsite.cc:362
 msgid "Workers are coming"
-msgstr ""
+msgstr "일꾼들이 오고 있습니다"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:369
 msgid "(stopped)"
@@ -2005,7 +2005,7 @@ msgstr "당신의 %s이 집으로 가는 길을 찾을 수 없어서 죽을 것 
 #: ../../src/logic/map_objects/tribes/worker.cc:1957
 #: ../../src/wui/productionsitewindow.cc:100
 msgid "Worker"
-msgstr ""
+msgstr "일꾼"
 
 #: ../../src/logic/map_objects/tribes/worker.cc:1958
 msgid "Worker got lost!"
@@ -2058,7 +2058,7 @@ msgstr "리플레이 끝에 도달해서 게임이 일시정지했습니다. 원
 
 #: ../../src/logic/save_handler.cc:127
 msgid "Saving game…"
-msgstr ""
+msgstr "놀이를 저장하고 있습니다…"
 
 #: ../../src/logic/save_handler.cc:173
 #: ../../src/wui/game_main_menu_save_game.cc:281
@@ -2073,36 +2073,36 @@ msgstr "게임 저장됨"
 #: ../../src/map_io/map_saver.cc:88
 #, c-format
 msgid "Saving map: %1$s (%2$d/%3$d)"
-msgstr ""
+msgstr "지도를 저장하고 있음: %1$s (%2$d/%3$d)"
 
 #: ../../src/map_io/map_saver.cc:90
 msgid "Autosaving map…"
-msgstr ""
+msgstr "지도를 자동으로 저장하고 있음…"
 
 #: ../../src/map_io/map_saver.cc:126
 #: ../../src/map_io/widelands_map_loader.cc:163
 msgid "Heights"
-msgstr ""
+msgstr "높이"
 
 #: ../../src/map_io/map_saver.cc:134
 #: ../../src/map_io/widelands_map_loader.cc:174
 msgid "Terrains"
-msgstr ""
+msgstr "지형"
 
 #: ../../src/map_io/map_saver.cc:142
 #: ../../src/map_io/widelands_map_loader.cc:189
 msgid "Starting positions"
-msgstr ""
+msgstr "시작위치"
 
 #: ../../src/map_io/map_saver.cc:173
 #: ../../src/map_io/widelands_map_loader.cc:220
 msgid "Map version"
-msgstr ""
+msgstr "지도 버전"
 
 #: ../../src/map_io/map_saver.cc:186
 #: ../../src/map_io/widelands_map_loader.cc:227
 msgid "Building restrictions"
-msgstr ""
+msgstr "건물 구역"
 
 #: ../../src/map_io/map_saver.cc:212
 #: ../../src/map_io/widelands_map_loader.cc:263 ../../src/wui/minimap.cc:153
@@ -2112,7 +2112,7 @@ msgstr "깃발"
 #: ../../src/map_io/map_saver.cc:220
 #: ../../src/map_io/widelands_map_loader.cc:271
 msgid "Roads and waterways"
-msgstr ""
+msgstr "도로 및 물길"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/map_io/map_saver.cc:235
@@ -2125,43 +2125,43 @@ msgstr "건물"
 #: ../../src/map_io/map_saver.cc:245
 #: ../../src/map_io/widelands_map_loader.cc:184
 msgid "Map objects"
-msgstr ""
+msgstr "지도 객체"
 
 #: ../../src/map_io/map_saver.cc:255
 #: ../../src/map_io/widelands_map_loader.cc:367
 msgid "Win condition"
-msgstr ""
+msgstr "승리 조건"
 
 #: ../../src/map_io/map_saver.cc:265
 msgid "Flag details"
-msgstr ""
+msgstr "깃발 상세 정보"
 
 #: ../../src/map_io/map_saver.cc:275
 msgid "Road and waterway details"
-msgstr ""
+msgstr "길과 물길 상세 정보"
 
 #: ../../src/map_io/map_saver.cc:294
 msgid "Building details"
-msgstr ""
+msgstr "건물 상세 정보"
 
 #: ../../src/map_io/map_saver.cc:303
 msgid "Territory"
-msgstr ""
+msgstr "영토"
 
 #: ../../src/map_io/map_saver.cc:311
 #: ../../src/map_io/widelands_map_loader.cc:250
 msgid "Exploration"
-msgstr ""
+msgstr "탐험"
 
 #: ../../src/map_io/map_saver.cc:319
 #: ../../src/map_io/widelands_map_loader.cc:347
 msgid "Vision"
-msgstr ""
+msgstr "전망"
 
 #: ../../src/map_io/map_saver.cc:329
 #: ../../src/map_io/widelands_map_loader.cc:386
 msgid "Scripting"
-msgstr ""
+msgstr "스크립트를 하고 있음"
 
 #: ../../src/map_io/map_saver.cc:337
 #: ../../src/map_io/widelands_map_loader.cc:378
@@ -2173,11 +2173,11 @@ msgstr "목표"
 #: ../../src/map_io/map_saver.cc:342
 #: ../../src/map_io/widelands_map_loader.cc:394
 msgid "Images"
-msgstr ""
+msgstr "그림"
 
 #: ../../src/map_io/map_saver.cc:354
 msgid "Minimap"
-msgstr ""
+msgstr "작은지도"
 
 #: ../../src/map_io/s2map.cc:455
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -2186,31 +2186,31 @@ msgstr "Bluebyte Settlers II 지도. 아무런 코멘트 없음!"
 #: ../../src/map_io/widelands_map_loader.cc:132
 #, c-format
 msgid "Loading map: %1$s (%2$u/%3$d)"
-msgstr ""
+msgstr "지도를 불러오고 있음: %1$s (%2$u/%3$d)"
 
 #: ../../src/map_io/widelands_map_loader.cc:242
 msgid "Territories"
-msgstr ""
+msgstr "영토"
 
 #: ../../src/map_io/widelands_map_loader.cc:295
 msgid "Initializing flags"
-msgstr ""
+msgstr "깃발들을 초기화하고 있음"
 
 #: ../../src/map_io/widelands_map_loader.cc:303
 msgid "Initializing roads and waterways"
-msgstr ""
+msgstr "땅길과 물길을 초기화하고 있음"
 
 #: ../../src/map_io/widelands_map_loader.cc:318
 msgid "Initializing buildings"
-msgstr ""
+msgstr "건물을 초기화하고 있음"
 
 #: ../../src/map_io/widelands_map_loader.cc:326
 msgid "Initializing map objects"
-msgstr ""
+msgstr "지도 객체를 초기화하고 있음"
 
 #: ../../src/map_io/widelands_map_loader.cc:398
 msgid "Checking map"
-msgstr ""
+msgstr "지도를 검사하고 있음"
 
 #: ../../src/network/gameclient.cc:151 ../../src/network/gamehost.cc:663
 #: ../../src/wlapplication.cc:1386
@@ -2480,7 +2480,7 @@ msgstr "채팅 메시지가 전송되지 않습니다."
 
 #: ../../src/network/internet_gaming.cc:689
 msgid "Command could not be executed."
-msgstr ""
+msgstr "사용자쪽 명령을 실행할 수 없습니다."
 
 #: ../../src/network/internet_gaming.cc:709
 #, c-format
@@ -2507,11 +2507,11 @@ msgstr "메시지가 전송되지 않습니다. 개인 메시지인가요?"
 
 #: ../../src/network/internet_gaming.cc:919
 msgid "Supported admin commands:"
-msgstr ""
+msgstr "지원되는 관리 사용자쪽 명령:"
 
 #: ../../src/network/internet_gaming.cc:920
 msgid "/motd <msg> - Set a permanent greeting message"
-msgstr ""
+msgstr "/motd <msg> - 영구적인 인사말을 설정"
 
 #: ../../src/network/internet_gaming.cc:921
 msgid "/announce <msg> - Send a one time system message"
@@ -3139,7 +3139,7 @@ msgstr "닫힘"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:597
 msgid "Map details:"
-msgstr "지도 상세:"
+msgstr "지도 상세 정보:"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:607
 msgid "Scenario mode selected"
