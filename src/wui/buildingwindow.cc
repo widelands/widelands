@@ -475,9 +475,9 @@ void BuildingWindow::act_enhance(Widelands::DescriptionIndex id, bool csite) {
 	}
 
 	if (SDL_GetModState() & KMOD_CTRL) {
-        if (building->get_playercaps() & Widelands::Building::PCap_Enhancable) {
+		if (building->get_playercaps() & Widelands::Building::PCap_Enhancable) {
 			igbase()->game().send_player_enhance_building(*building, id, false);
-        }
+		}
 	} else {
 		show_enhance_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), *building, id);
 	}
