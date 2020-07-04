@@ -976,8 +976,9 @@ void InteractiveBase::abort_build_road() {
 		hide_workarea(road_building_mode_->path.get_start(), true);
 	}
 #ifndef NDEBUG
-	else
+    else {
 		assert(!road_building_mode_->work_area);
+    }
 #endif
 
 	road_building_remove_overlay();
@@ -997,8 +998,9 @@ void InteractiveBase::finish_build_road() {
 		hide_workarea(road_building_mode_->path.get_start(), true);
 	}
 #ifndef NDEBUG
-	else
+    else {
 		assert(!road_building_mode_->work_area);
+    }
 #endif
 
 	road_building_remove_overlay();

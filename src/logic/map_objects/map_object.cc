@@ -173,8 +173,9 @@ void ObjectManager::cleanup(EditorGameBase& egbase) {
 	for (auto moi : killusfirst) {
 		while (!objects_.empty()) {
 			MapObjectMap::iterator it = objects_.begin();
-			while (it != objects_.end() && (moi) != it->second->descr_->type())
+            while (it != objects_.end() && (moi) != it->second->descr_->type()) {
 				it++;
+            }
 			if (it == objects_.end()) {
 				break;
 			} else {
