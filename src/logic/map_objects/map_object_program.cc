@@ -119,20 +119,20 @@ MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(
 MapObjectProgram::PlaySoundParameters
 MapObjectProgram::parse_act_play_sound(const std::vector<std::string>& arguments,
                                        uint8_t default_priority) {
-    std::string filepath = "";
-    unsigned int priority = default_priority;
+	std::string filepath = "";
+	unsigned int priority = default_priority;
 
-    // TODO(GunChleoc): Savegame compabitility. Remove after Build 21.
-    if (arguments.size() == 3) {
-        filepath = arguments.at(0) + "/" + arguments.at(1);
-        priority = read_positive(arguments.at(2));
-    } else {
-        if (arguments.size() < 1 || arguments.size() > 2) {
-            throw GameDataError("Usage: playsound=<sound_dir/sound_name> [priority]");
-        }
-        filepath = arguments.at(0);
-        priority = read_positive(arguments.at(1));
-    }
+	// TODO(GunChleoc): Savegame compabitility. Remove after Build 21.
+	if (arguments.size() == 3) {
+		filepath = arguments.at(0) + "/" + arguments.at(1);
+		priority = read_positive(arguments.at(2));
+	} else {
+		if (arguments.size() < 1 || arguments.size() > 2) {
+			throw GameDataError("Usage: playsound=<sound_dir/sound_name> [priority]");
+		}
+		filepath = arguments.at(0);
+		priority = read_positive(arguments.at(1));
+	}
 
 	PlaySoundParameters result;
 	result.fx = SoundHandler::register_fx(SoundType::kAmbient, filepath);
