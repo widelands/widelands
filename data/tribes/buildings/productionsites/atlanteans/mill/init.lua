@@ -57,7 +57,6 @@ tribes:new_productionsite_type {
          actions = {
             "call=produce_cornmeal",
             "call=produce_blackroot_flour",
-            "return=no_stats"
          }
       },
       produce_cornmeal = {

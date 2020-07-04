@@ -27,7 +27,8 @@ if(POLICY CMP0072)
     # DISTRO_NAME is different on the build-servers.
     if ((DISTRO_NAME MATCHES "Ubuntu 18.10" OR DISTRO_NAME MATCHES "Cosmic"
          OR DISTRO_NAME MATCHES "Ubuntu 19.04" OR DISTRO_NAME MATCHES "Disco"
-         OR DISTRO_NAME MATCHES "Ubuntu 19.10" OR DISTRO_NAME MATCHES "Eoan")
+         OR DISTRO_NAME MATCHES "Ubuntu 19.10" OR DISTRO_NAME MATCHES "Eoan"
+         OR DISTRO_NAME MATCHES "Ubuntu 20.04" OR DISTRO_NAME MATCHES "Focal")
         AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
       cmake_policy(SET CMP0072 OLD)
     endif()
@@ -107,7 +108,36 @@ find_package (PythonInterp REQUIRED)
 find_package(Gettext REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(PNG REQUIRED)
-find_package(SDL2 REQUIRED)
+
+find_package(Threads REQUIRED)
+find_package(SDL2 CONFIG)
+if(SDL2_FOUND)
+  message(STATUS "Found SDL2 configuration file")
+  if(TARGET SDL2::SDL2)
+    # SDL2 was built with CMake (e.g. Arch Linux)
+    message(STATUS "Target SDL2::SDL2 found")
+  elseif(SDL2_INCLUDE_DIRS AND SDL2_LIBRARIES)
+    # SDL2 was built with Autotools (e.g. Debian)
+    message(STATUS "SDL2_INCLUDE_DIRS: ${SDL2_INCLUDE_DIRS}")
+    message(STATUS "SDL2_LIBRARIES: ${SDL2_LIBRARIES}")
+    # Workaround for trailing whitespace problem (CMP0004) in some SDL2 versions
+    # See: https://hg.libsdl.org/SDL/rev/28be2719184c
+    string(STRIP ${SDL2_LIBRARIES} SDL2_LIBRARIES)
+  else()
+    # This should not happen but try to recover anyway
+    message(STATUS "SDL2 variables not set! Falling back to FindSDL2 module")
+    find_package(SDL2 REQUIRED MODULE)
+    SET(SDL2_LIBRARIES ${SDL2_LIBRARY})
+    SET(SDL2_INCLUDE_DIRS ${SDL2_INCLUDE_DIR})
+  endif()
+else()
+  # Fallback for old SDL2 versions that don't provide a CMake configuration file
+  message(STATUS "SDL2 configuration file not found - falling back to FindSDL2 module")
+  find_package(SDL2 REQUIRED MODULE)
+  SET(SDL2_LIBRARIES ${SDL2_LIBRARY})
+  SET(SDL2_INCLUDE_DIRS ${SDL2_INCLUDE_DIR})
+endif()
+
 find_package(SDL2_image REQUIRED)
 find_package(SDL2_mixer REQUIRED)
 find_package(SDL2_ttf REQUIRED)

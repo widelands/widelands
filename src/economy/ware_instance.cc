@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -111,10 +111,9 @@ PlayerImmovable* IdleWareSupply::get_position(Game& game) {
 	}
 
 	if (upcast(Ship, ship, loc)) {
-		if (PortDock* pd = ship->get_current_destination(game)) {
+		if (PortDock* pd = ship->get_destination()) {
 			return pd;
 		}
-
 		return ship->get_fleet()->get_arbitrary_dock();
 	}
 

@@ -1,6 +1,3 @@
-include "scripting/messages.lua"
-include "scripting/field_animations.lua"
-
 show_warning_early_attack = true
 show_warning_reed = true
 show_warning_clay = true
@@ -462,7 +459,7 @@ function mission_thread()
    -- 2 soldiers with health-1/attack-2/defense-0.
    wl.Game():save_campaign_data("frisians", "fri01", persist)
    campaign_message_box(victory_1)
-   p1:reveal_scenario("frisians01")
+   p1:mark_scenario_as_solved("fri01.wmf")
    -- END OF MISSION 1
 end
 

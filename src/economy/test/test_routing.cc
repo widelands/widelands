@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2019 by the Widelands Development Team
+ * Copyright (C) 2007-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -230,7 +230,7 @@ BOOST_AUTO_TEST_CASE(RoutingNode_InitializeMemberVariables) {
 }
 
 struct SimpleRouterFixture {
-	SimpleRouterFixture() : r(boost::bind(&SimpleRouterFixture::reset, this)) {
+	SimpleRouterFixture() : r([this]() { reset(); }) {
 		d0 = new TestingRoutingNode();
 		d1 = new TestingRoutingNode(1, Coords(15, 0));
 		vec.push_back(d0);
@@ -383,7 +383,7 @@ BOOST_FIXTURE_TEST_CASE(router_findroute_connectedNodes_exceptSuccess, SimpleRou
 struct ComplexRouterFixture {
 	using Nodes = std::vector<RoutingNode*>;
 
-	ComplexRouterFixture() : r(boost::bind(&ComplexRouterFixture::reset, this)) {
+	ComplexRouterFixture() : r([this]() { reset(); }) {
 		d0 = new TestingRoutingNode();
 		nodes.push_back(d0);
 	}

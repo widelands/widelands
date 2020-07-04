@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -492,7 +492,13 @@ void WuiPlotArea::update() {
 void WuiPlotArea::draw(RenderTarget& dst) {
 	dst.tile(Recti(Vector2i::zero(), get_inner_w(), get_inner_h()), g_gr->images().get(BG_PIC),
 	         Vector2i::zero());
-	draw_plot(dst, get_inner_h() - kSpaceBottom, std::to_string(highest_scale_), highest_scale_);
+	if (needs_update_) {
+		update();
+		needs_update_ = false;
+	}
+	if (highest_scale_) {
+		draw_plot(dst, get_inner_h() - kSpaceBottom, std::to_string(highest_scale_), highest_scale_);
+	}
 	// Print the 0
 	draw_value((boost::format("%u") % (0)).str(),
 	           g_gr->styles().statistics_plot_style().x_tick_font(),

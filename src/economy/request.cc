@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -126,6 +126,14 @@ void Request::read(FileRead& fr,
 					throw wexception("Request::read: unknown type '%s'.\n", type_name);
 				}
 			}
+
+			// Overwrite initial economy because our WareWorker type may have changed
+			if (economy_) {
+				economy_->remove_request(*this);
+			}
+			economy_ = target_.get_economy(type_);
+			assert(economy_);
+
 			count_ = fr.unsigned_32();
 			required_time_ = fr.unsigned_32();
 			required_interval_ = fr.unsigned_32();
@@ -166,8 +174,8 @@ void Request::read(FileRead& fr,
 				}
 			}
 			requirements_.read(fr, game, mol);
-			if (!is_open() && economy_) {
-				economy_->remove_request(*this);
+			if (is_open()) {
+				economy_->add_request(*this);
 			}
 		} else {
 			throw UnhandledVersionError("Request", packet_version, kCurrentPacketVersion);

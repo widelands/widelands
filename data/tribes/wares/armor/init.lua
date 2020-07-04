@@ -39,6 +39,11 @@ dirname = path.dirname(__file__)
 --
 --    **default_target_quantity**: A table listing the default target quantity
 --    for each tribe's economy. For example, ``{ atlanteans = 3, empire = 1 }``
+--    This table does not need to have an entry for each tribe. (Can be completely empty)
+--    If not set for a tribe the economy will always demand this ware.
+--    If set to zero the economy will not demand this ware unless it is required in a
+--    production building. If not set or set to zero the actual target quantity will
+--    not be available in the economy settings window.
 --
 --    **preciousness**: How precious this ware is to each tribe. For example,
 --    ``{ atlanteans = 0, empire = 1 }``. We recommend not going higher than ``25``.

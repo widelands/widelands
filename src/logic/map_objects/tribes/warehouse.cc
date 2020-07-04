@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1395,6 +1395,9 @@ void Warehouse::check_remove_stock(Game& game) {
 	}
 }
 
+// TODO(Nordfriese): Called by a Request/Transfer/WareInstance/whatever that enters
+// the expedition bootstrap. Should instead return the InputQueue that requested
+// this particular item. See discussion in PR #3884.
 InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type) {
 	assert(portdock_ != nullptr);
 	assert(portdock_->expedition_bootstrap() != nullptr);
@@ -1419,7 +1422,6 @@ void Warehouse::log_general_info(const EditorGameBase& egbase) const {
 	if (descr().get_isport()) {
 		if (portdock_) {
 			molog("Port dock: %u\n", portdock_->serial());
-			molog("port needs ship: %s\n", (portdock_->get_need_ship()) ? "true" : "false");
 			molog("wares and workers waiting: %u\n", portdock_->count_waiting());
 			molog("exped. in progr.: %s\n", (portdock_->expedition_started()) ? "true" : "false");
 			ShipFleet* fleet = portdock_->get_fleet();

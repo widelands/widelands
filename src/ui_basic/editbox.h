@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2019 by the Widelands Development Team
+ * Copyright (C) 2003-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,8 +21,6 @@
 #define WL_UI_BASIC_EDITBOX_H
 
 #include <memory>
-
-#include <SDL_keyboard.h>
 
 #include "graphic/styles/font_style.h"
 #include "ui_basic/panel.h"

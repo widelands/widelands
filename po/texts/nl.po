@@ -3,6 +3,7 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR., 2009
+# FvZ, 2020
 # GunChleoc, 2014
 # GunChleoc, 2014
 # Nora Ghaoui, 2016
@@ -12,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-03-16 06:59+0000\n"
-"PO-Revision-Date: 2020-03-16 07:06+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-07-03 06:48+0000\n"
+"PO-Revision-Date: 2020-05-09 00:24+0000\n"
+"Last-Translator: FvZ\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -417,7 +418,7 @@ msgstr "Toon bouwlocaties (aan/uit)"
 #: ../../data/txts/help/common_helptexts.lua:49
 msgctxt "hotkey"
 msgid "Ctrl + F"
-msgstr ""
+msgstr "Ctrl + F"
 
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"
@@ -634,11 +635,11 @@ msgid ""
 "To produce bricks, you need granite; to produce granite, you need a quarry "
 "or rock mine; to build those, you need bricks. Take care not to get "
 "deadlocked!"
-msgstr ""
+msgstr "Om bakstenen te produceren heb je graniet nodig. Om graniet te produceren heb je een steengroeve of steenmijn nodig. Om die te bouwen heb je bakstenen nodig. Pas op dat je niet vastloopt!"
 
 #: ../../data/txts/tips/frisians.lua:8
 msgid "Always build a forester’s house, so you will not run out of logs."
-msgstr ""
+msgstr "Bouw altijd een boswachtershuis, zodat je altijd voorzien bent van boomstammen."
 
 #: ../../data/txts/tips/general_game.lua:6
 msgid ""
@@ -758,47 +759,53 @@ msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
 msgstr "Je kan in- en uitzoomen met het muiswiel of met %1%. Druk op %2% om de zoom te herstellen naar standaard."
 
 #: ../../data/txts/tips/general_game.lua:75
+msgid ""
+"Use the ‘,’ (comma) and ‘.’ (period) keys to quickly jump between recently "
+"visited locations."
+msgstr "Gebruik de ‘,’ (komma) en ‘.’ (punt) toetsen om snel te schakelen tussen recent bezochte locaties."
+
+#: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
 msgid "Ctrl+(Page Up/Page Down)"
-msgstr ""
+msgstr "Ctrl+(Page Up/Page Down)"
 
-#: ../../data/txts/tips/general_game.lua:75
+#: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
 msgid "Page Up/Page Down"
-msgstr ""
+msgstr "Page Up/Page Down"
 
-#: ../../data/txts/tips/general_game.lua:75
+#: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
 msgid "Shift+(Page Up/Page Down)"
-msgstr ""
+msgstr "Shift+(Page Up/Page Down)"
 
-#: ../../data/txts/tips/general_game.lua:75
+#: ../../data/txts/tips/general_game.lua:79
 msgid ""
 "Speed up or slow down the game with %1%. Use %2% for rapid change, %3% will "
 "adjust speed smoothly."
-msgstr ""
-
-#: ../../data/txts/tips/general_game.lua:79
-msgctxt "hotkey"
-msgid "Arrow keys"
-msgstr ""
-
-#: ../../data/txts/tips/general_game.lua:79
-msgctxt "hotkey"
-msgid "Ctrl+Arrow keys"
-msgstr ""
-
-#: ../../data/txts/tips/general_game.lua:79
-msgid ""
-"Move map view using %1%. %2% will move the view faster, %3% moves slowly."
-msgstr ""
-
-#: ../../data/txts/tips/general_game.lua:79
-msgctxt "hotkey"
-msgid "Shift+Arrow keys"
-msgstr ""
+msgstr "Versnel of vertraag het spel met %1%. Gebruik %2% om snel te veranderen, %3% zal de snelheid soepel aanpassen."
 
 #: ../../data/txts/tips/general_game.lua:83
+msgctxt "hotkey"
+msgid "Arrow keys"
+msgstr "Pijltjestoetsen"
+
+#: ../../data/txts/tips/general_game.lua:83
+msgctxt "hotkey"
+msgid "Ctrl+Arrow keys"
+msgstr "Ctrl+Pijltjestoetsen"
+
+#: ../../data/txts/tips/general_game.lua:83
+msgid ""
+"Move map view using %1%. %2% will move the view faster, %3% moves slowly."
+msgstr "Beweeg op de kaart met %1%. %2% beweegt de weergave sneller, %3% langzamer."
+
+#: ../../data/txts/tips/general_game.lua:83
+msgctxt "hotkey"
+msgid "Shift+Arrow keys"
+msgstr "Shift+Pijltjestoetsen"
+
+#: ../../data/txts/tips/general_game.lua:87
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"

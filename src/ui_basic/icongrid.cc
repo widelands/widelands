@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2019 by the Widelands Development Team
+ * Copyright (C) 2003-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -98,7 +98,7 @@ int32_t IconGrid::add(const std::string& name,
 
 	UI::Button* btn =
 	   new IconGridButton(*this, name, x, y, cell_width_, cell_height_, pic, idx, tooltip_text);
-	btn->sigclicked.connect(boost::bind(&IconGrid::clicked_button, this, idx));
+	btn->sigclicked.connect([this, idx]() { clicked_button(idx); });
 
 	return idx;
 }

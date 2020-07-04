@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,9 +57,20 @@ void ExpeditionBootstrap::is_ready(Game& game) {
 
 // static
 void ExpeditionBootstrap::input_callback(
-   Game& game, InputQueue*, DescriptionIndex, Worker*, void* data) {
+   Game& game, InputQueue* queue, DescriptionIndex, Worker*, void* data) {
 	ExpeditionBootstrap* eb = static_cast<ExpeditionBootstrap*>(data);
 	eb->is_ready(game);
+	// If we ask for several additional items of the same type, it may happen that a
+	// specific item was originally requested by queue B but is put into queue A. This
+	// causes both queues to cancel their requests so that some transfers are
+	// accidentally cancelled. The solution is to iterate ALL queues of this type and
+	// check whether their count and transfers still match up.
+	for (std::pair<std::unique_ptr<InputQueue>, bool>& pair : eb->queues_) {
+		if (pair.first->get_type() == queue->get_type() &&
+		    pair.first->get_index() == queue->get_index()) {
+			pair.first->set_max_fill(pair.first->get_max_fill());  // calls update()
+		}
+	}
 }
 
 void ExpeditionBootstrap::start() {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,22 +63,18 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UI::Panel* const parent,
 	int32_t xplayerinit = w * 55 / 125;
 	d->plr_name = new UI::Textarea(this, xplrname, 0, xplayertype - xplrname, h);
 	d->btnEnablePlayer = new UI::Checkbox(this, Vector2i(xplayertype - 23, 0), "");
-	d->btnEnablePlayer->changedto.connect(
-	   boost::bind(&PlayerDescriptionGroup::enable_player, this, _1));
+	d->btnEnablePlayer->changedto.connect([this](bool b) { enable_player(b); });
 	d->btnPlayerType =
 	   new UI::Button(this, "player_type", xplayertype, 0, xplayertribe - xplayertype - 2, h / 2,
 	                  UI::ButtonStyle::kFsMenuSecondary, "");
-	d->btnPlayerType->sigclicked.connect(
-	   boost::bind(&PlayerDescriptionGroup::toggle_playertype, boost::ref(*this)));
+	d->btnPlayerType->sigclicked.connect([this]() { toggle_playertype(); });
 	d->btnPlayerTeam =
 	   new UI::Button(this, "player_team", xplayerteam, h / 2, xplayerinit - xplayerteam - 2, h / 2,
 	                  UI::ButtonStyle::kFsMenuSecondary, "");
-	d->btnPlayerTeam->sigclicked.connect(
-	   boost::bind(&PlayerDescriptionGroup::toggle_playerteam, boost::ref(*this)));
+	d->btnPlayerTeam->sigclicked.connect([this]() { toggle_playerteam(); });
 	d->btnPlayerTribe = new UI::Button(this, "player_tribe", xplayertribe, 0, w - xplayertribe,
 	                                   h / 2, UI::ButtonStyle::kFsMenuSecondary, "");
-	d->btnPlayerTribe->sigclicked.connect(
-	   boost::bind(&PlayerDescriptionGroup::toggle_playertribe, boost::ref(*this)));
+	d->btnPlayerTribe->sigclicked.connect([this]() { toggle_playertribe(); });
 	d->btnPlayerInit = new UI::Dropdown<uint8_t>(
 	   this, "player_initialization", xplayerinit, h / 2, w - xplayerinit, 6, h / 2, "",
 	   UI::DropdownType::kTextual, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary);

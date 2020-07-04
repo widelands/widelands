@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -71,7 +71,7 @@ int32_t EditorSetResourcesTool::handle_undo_impl(
 			amount = max_amount;
 		}
 
-		map->initialize_resources(res.location, res.idx, amount);
+		map->initialize_resources(map->get_fcoords(res.location), res.idx, amount);
 	}
 
 	args->original_resource.clear();

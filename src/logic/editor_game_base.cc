@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -394,19 +394,22 @@ Building& EditorGameBase::warp_building(const Coords& c,
  * \li former_buildings : the former buildings. If it is not empty, this is
  * an enhancement.
  */
-Building& EditorGameBase::warp_constructionsite(const Coords& c,
-                                                PlayerNumber const owner,
-                                                DescriptionIndex idx,
-                                                bool loading,
-                                                FormerBuildings former_buildings,
-                                                const BuildingSettings* settings) {
+Building&
+EditorGameBase::warp_constructionsite(const Coords& c,
+                                      PlayerNumber const owner,
+                                      DescriptionIndex idx,
+                                      bool loading,
+                                      FormerBuildings former_buildings,
+                                      const BuildingSettings* settings,
+                                      std::map<DescriptionIndex, Quantity> preserved_wares) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
-	Building& b =
-	   tribe.get_building_descr(idx)->create(*this, plr, c, true, loading, former_buildings);
+	ConstructionSite& b = dynamic_cast<ConstructionSite&>(
+	   tribe.get_building_descr(idx)->create(*this, plr, c, true, loading, former_buildings));
 	if (settings) {
-		dynamic_cast<ConstructionSite&>(b).apply_settings(*settings);
+		b.apply_settings(*settings);
 	}
+	b.add_dropout_wares(preserved_wares);
 	return b;
 }
 
@@ -418,7 +421,8 @@ Building& EditorGameBase::warp_constructionsite(const Coords& c,
 Building& EditorGameBase::warp_dismantlesite(const Coords& c,
                                              PlayerNumber const owner,
                                              bool loading,
-                                             FormerBuildings former_buildings) {
+                                             FormerBuildings former_buildings,
+                                             std::map<DescriptionIndex, Quantity> preserved_wares) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
 
@@ -427,7 +431,7 @@ Building& EditorGameBase::warp_dismantlesite(const Coords& c,
 
 	upcast(const DismantleSiteDescr, ds_descr, descr);
 
-	return *new DismantleSite(*ds_descr, *this, c, plr, loading, former_buildings);
+	return *new DismantleSite(*ds_descr, *this, c, plr, loading, former_buildings, preserved_wares);
 }
 
 /**
@@ -610,7 +614,7 @@ void EditorGameBase::set_road(const FCoords& f,
 	MapIndex const i = f.field - &first_field;
 	MapIndex const neighbour_i = neighbour.field - &first_field;
 	iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
-		Player::Field& first_player_field = *p->fields_;
+		Player::Field& first_player_field = *p->fields_.get();
 		Player::Field& player_field = (&first_player_field)[i];
 		if (1 < player_field.vision || 1 < (&first_player_field)[neighbour_i].vision) {
 			switch (direction) {

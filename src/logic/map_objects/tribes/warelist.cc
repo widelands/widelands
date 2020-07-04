@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,8 +51,6 @@ void WareList::add(DescriptionIndex const i, const Quantity count) {
 	}
 	wares_[i] += count;
 	assert(wares_[i] >= count);
-
-	changed();
 }
 
 void WareList::add(const WareList& wl) {
@@ -78,8 +76,6 @@ void WareList::remove(DescriptionIndex const i, const Quantity count) {
 	assert(i < wares_.size());
 	assert(wares_[i] >= count);
 	wares_[i] -= count;
-
-	changed();
 }
 
 void WareList::remove(const WareList& wl) {

@@ -26,12 +26,10 @@ addons:
 before_script:
   - >
     if [ "$TRAVIS_OS_NAME" = osx ]; then \
-      # brew doesn't add a link by default
-      brew link --force gettext && \
       # icu4c cannot be forced
       export ICU_ROOT="$(brew --prefix icu4c)" && \
-      # add ccache to the PATH variable
-      export PATH="/usr/local/opt/ccache/libexec:$PATH"; \
+      # add ccache and brew to the PATH variable
+      export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH"; \
     fi
 
 branches:
@@ -83,7 +81,7 @@ jobs:
 
     - stage: compiler
       # Run this stage to test whether there are any error during compiling.
-      # We use macOS, since it is the fastest to build.
+      # We use macOS, since it is the fastest to build (but also the most susceptible to transient errors…)
       name: "DEBUG: macOS 10.14 with Xcode 11.3"
       os: osx
       osx_image: xcode11.3

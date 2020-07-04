@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,10 +19,14 @@
 
 #include "graphic/sdl_utils.h"
 
-#include <SDL.h>
+#include <SDL_surface.h>
 
 SDL_Surface* empty_sdl_surface(int16_t w, int16_t h) {
 	SDL_Surface* const surface =
+#if SDL_BYTEORDER == SDL_LIL_ENDIAN
 	   SDL_CreateRGBSurface(SDL_SWSURFACE, w, h, 32, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
+#else
+	   SDL_CreateRGBSurface(SDL_SWSURFACE, w, h, 32, 0xff000000, 0x00ff0000, 0x0000ff00, 0x000000ff);
+#endif
 	return surface;
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -165,7 +165,7 @@ InputQueue& ConstructionSite::inputqueue(DescriptionIndex const wi, WareWorker c
 		throw wexception("%s (%u) (building %s) has no WorkersQueues", descr().name().c_str(),
 		                 serial(), building_->name().c_str());
 	}
-	for (WaresQueue* ware : wares_) {
+	for (WaresQueue* ware : consume_wares_) {
 		if (ware->get_index() == wi) {
 			return *ware;
 		}
@@ -217,11 +217,11 @@ bool ConstructionSite::init(EditorGameBase& egbase) {
 
 	//  initialize the wares queues
 	size_t const buildcost_size = buildcost->size();
-	wares_.resize(buildcost_size);
+	consume_wares_.resize(buildcost_size);
 	std::map<DescriptionIndex, uint8_t>::const_iterator it = buildcost->begin();
 
 	for (size_t i = 0; i < buildcost_size; ++i, ++it) {
-		WaresQueue& wq = *(wares_[i] = new WaresQueue(*this, it->first, it->second));
+		WaresQueue& wq = *(consume_wares_[i] = new WaresQueue(*this, it->first, it->second));
 
 		wq.set_callback(ConstructionSite::wares_queue_callback, this);
 		wq.set_consume_interval(CONSTRUCTIONSITE_STEP_TIME);
@@ -250,6 +250,14 @@ void ConstructionSite::init_settings() {
 		// TODO(Nordfriese): Add support for markets when trading is implemented
 		log("WARNING: Created constructionsite for a %s, which is not of any known building type\n",
 		    building_->name().c_str());
+	}
+}
+
+void ConstructionSite::add_dropout_wares(const std::map<DescriptionIndex, Quantity>& w) {
+	for (const auto& pair : w) {
+		WaresQueue* q = new WaresQueue(*this, pair.first, pair.second);
+		q->set_filled(pair.second);
+		dropout_wares_.push_back(q);
 	}
 }
 
@@ -363,7 +371,7 @@ void ConstructionSite::enhance(Game&) {
 	std::set<DescriptionIndex> new_ware_types;
 	for (const auto& pair : buildcost) {
 		bool found = false;
-		for (const auto& queue : wares_) {
+		for (const auto& queue : consume_wares_) {
 			if (queue->get_index() == pair.first) {
 				found = true;
 				break;
@@ -374,20 +382,20 @@ void ConstructionSite::enhance(Game&) {
 		}
 	}
 
-	const size_t old_size = wares_.size();
-	wares_.resize(old_size + new_ware_types.size());
+	const size_t old_size = consume_wares_.size();
+	consume_wares_.resize(old_size + new_ware_types.size());
 
 	size_t new_index = 0;
 	for (const auto& pair : buildcost) {
 		if (new_ware_types.count(pair.first)) {
-			WaresQueue& wq =
-			   *(wares_[old_size + new_index] = new WaresQueue(*this, pair.first, pair.second));
+			WaresQueue& wq = *(consume_wares_[old_size + new_index] =
+			                      new WaresQueue(*this, pair.first, pair.second));
 			wq.set_callback(ConstructionSite::wares_queue_callback, this);
 			wq.set_consume_interval(CONSTRUCTIONSITE_STEP_TIME);
 			++new_index;
 		} else {
 			for (size_t i = 0; i < old_size; ++i) {
-				WaresQueue& wq = *wares_[i];
+				WaresQueue& wq = *consume_wares_[i];
 				if (wq.get_index() == pair.first) {
 					wq.set_max_size(wq.get_max_size() + pair.second);
 					wq.set_max_fill(wq.get_max_fill() + pair.second);
@@ -584,8 +592,18 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 	}
 
 	// Drop all the wares that are too much out to the flag.
-	for (WaresQueue* iqueue : wares_) {
-		WaresQueue* queue = iqueue;
+	for (WaresQueue* q : dropout_wares_) {
+		if (q->get_filled()) {
+			q->set_filled(q->get_filled() - 1);
+			q->set_max_size(q->get_max_size() - 1);
+			const WareDescr& wd = *owner().tribe().get_ware_descr(q->get_index());
+			WareInstance& ware = *new WareInstance(q->get_index(), &wd);
+			ware.init(game);
+			worker.start_task_dropoff(game, ware);
+			return true;
+		}
+	}
+	for (WaresQueue* queue : consume_wares_) {
 		if (queue->get_filled() > queue->get_max_fill()) {
 			queue->set_filled(queue->get_filled() - 1);
 			const WareDescr& wd = *owner().tribe().get_ware_descr(queue->get_index());
@@ -598,8 +616,8 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 
 	// Check if we've got wares to consume
 	if (work_completed_ < work_steps_) {
-		for (uint32_t i = 0; i < wares_.size(); ++i) {
-			WaresQueue& wq = *wares_[i];
+		for (uint32_t i = 0; i < consume_wares_.size(); ++i) {
+			WaresQueue& wq = *consume_wares_[i];
 
 			if (!wq.get_filled()) {
 				continue;

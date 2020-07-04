@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -74,10 +74,11 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 		break;
 	}
 
-	table_->set_column_compare(0, boost::bind(&LoadOrSaveGame::compare_save_time, this, _1, _2));
+	table_->set_column_compare(
+	   0, [this](uint32_t a, uint32_t b) { return compare_save_time(a, b); });
 
 	table_->set_column_compare(table_->number_of_columns() - 1,
-	                           boost::bind(&LoadOrSaveGame::compare_map_name, this, _1, _2));
+	                           [this](uint32_t a, uint32_t b) { return compare_map_name(a, b); });
 
 	table_box_->add(table_, UI::Box::Resizing::kExpandBoth);
 	game_details_.button_box()->add(delete_, UI::Box::Resizing::kAlign, UI::Align::kLeft);

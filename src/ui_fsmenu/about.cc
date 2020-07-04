@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2019 by the Widelands Development Team
+ * Copyright (C) 2016-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,7 +37,7 @@ FullscreenMenuAbout::FullscreenMenuAbout()
 	tabs_.add_tab("txts/LICENSE.lua");
 	tabs_.add_tab("txts/AUTHORS.lua");
 	tabs_.add_tab("txts/TRANSLATORS.lua");
-	close_.sigclicked.connect(boost::bind(&FullscreenMenuAbout::clicked_back, this));
+	close_.sigclicked.connect([this]() { clicked_back(); });
 	layout();
 }
 
