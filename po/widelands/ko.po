@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-02 07:43+0000\n"
-"PO-Revision-Date: 2020-07-02 15:23+0000\n"
+"POT-Creation-Date: 2020-07-03 06:48+0000\n"
+"PO-Revision-Date: 2020-07-04 06:07+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -2515,19 +2515,19 @@ msgstr "/motd <msg> - 영구적인 인사말을 설정"
 
 #: ../../src/network/internet_gaming.cc:921
 msgid "/announce <msg> - Send a one time system message"
-msgstr ""
+msgstr "/announce <msg> - 한번 시스템 메시지 보냄"
 
 #: ../../src/network/internet_gaming.cc:924
 msgid "/warn <user> <msg> - Send a private system message to the given user"
-msgstr ""
+msgstr "/warn <user> <msg> - 지정된 사용자에게 개인 시스템 메시지를 보냄"
 
 #: ../../src/network/internet_gaming.cc:927
 msgid "/kick <user|game> - Remove the given user or game from the metaserver"
-msgstr ""
+msgstr "/kick <user|game> - 메타 서버에서 지정된 사용자나 놀이를 제거함"
 
 #: ../../src/network/internet_gaming.cc:929
 msgid "/ban <user> - Ban a user for 24 hours from the metaserver"
-msgstr ""
+msgstr "/ban <user> - 메타 서버에서 24시간 동안 사용자를 접근금지함"
 
 #: ../../src/network/internet_gaming.cc:1005
 msgid "Conversion error"
@@ -2555,11 +2555,11 @@ msgstr "게임이 더 이상 존재하지 않습니다. 아마도 방금 닫아�
 
 #: ../../src/network/internet_gaming_messages.cc:46
 msgid "Wrong password, please try again."
-msgstr ""
+msgstr "암호가 틀렸습니다. 다시 시도하십시오."
 
 #: ../../src/network/internet_gaming_messages.cc:47
 msgid "You have been temporarily banned from online gaming."
-msgstr ""
+msgstr "통신 놀이가 일시적으로 접근 금지되었습니다."
 
 #: ../../src/network/internet_gaming_messages.cc:48
 msgid "The protocol version you are using is not supported!"
@@ -2760,7 +2760,7 @@ msgstr "로컬 네트워크를 사용하는데 실패했습니다!"
 msgid ""
 "Widelands was unable to use the local network. Maybe some other process is "
 "already running a server on port %s or your network setup is broken."
-msgstr ""
+msgstr "와이드랜드가 로컬 네트워크를 사용할 수 없습니다. 일부 다른 프로세스가 이미 %s 포트에서 서버를 실행 중이거나 네트워크 설정이 손상되었을 수 있습니다."
 
 #: ../../src/ui_basic/dropdown.cc:109
 msgctxt "dropdown"
@@ -2813,7 +2813,7 @@ msgstr[0] "%d 픽셀"
 #, c-format
 msgid "%d field"
 msgid_plural "%d fields"
-msgstr[0] ""
+msgstr[0] "%d 입력란"
 
 #: ../../src/ui_basic/window.cc:125 ../../src/ui_fsmenu/about.cc:34
 #: ../../src/wui/watchwindow.cc:75
@@ -2822,19 +2822,19 @@ msgstr "종료"
 
 #: ../../src/ui_basic/window.cc:178
 msgid "Minimize"
-msgstr ""
+msgstr "최소화"
 
 #: ../../src/ui_basic/window.cc:178
 msgid "Restore"
-msgstr ""
+msgstr "복원"
 
 #: ../../src/ui_basic/window.cc:182
 msgid "Pin"
-msgstr ""
+msgstr "고정"
 
 #: ../../src/ui_basic/window.cc:182
 msgid "Unpin"
-msgstr ""
+msgstr "고정 해제"
 
 #: ../../src/ui_fsmenu/about.cc:31 ../../src/ui_fsmenu/main.cc:52
 msgid "About Widelands"
@@ -2877,7 +2877,7 @@ msgstr "캠페인 이름"
 #. * TRANSLATORS: Header for campaign name
 #: ../../src/ui_fsmenu/campaigndetails.cc:47
 msgid "Campaign"
-msgstr ""
+msgstr "작전 수행"
 
 #. * TRANSLATORS: Header for campaign description
 #: ../../src/ui_fsmenu/campaigndetails.cc:69
@@ -2890,7 +2890,7 @@ msgstr "설명"
 #. * TRANSLATORS: A campaign difficulty
 #: ../../src/ui_fsmenu/campaigns.cc:53
 msgid "Default"
-msgstr ""
+msgstr "기본값"
 
 #: ../../src/ui_fsmenu/helpwindow.cc:41 ../../src/wui/helpwindow.cc:44
 #, c-format
@@ -2907,7 +2907,7 @@ msgstr "접속 중인 클라이언트:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:69
 msgid "Open Games:"
-msgstr ""
+msgstr "놀이 열기:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:70
 msgid "Name of your server:"
@@ -2924,7 +2924,7 @@ msgstr "새로운 게임 열기"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:96
 msgid "Leave Lobby"
-msgstr ""
+msgstr "앞마당 떠나기"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:143
 msgid "User Status"
@@ -2960,7 +2960,7 @@ msgstr "게임"
 #: ../../src/ui_fsmenu/internet_lobby.cc:383
 #, c-format
 msgid "The game %s is already running. Please choose a different name."
-msgstr ""
+msgstr "%s 놀이가 이미 실행 중입니다. 다른 이름을 선택하십시오."
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:397
 msgid ""
@@ -2978,7 +2978,7 @@ msgstr "연결 시간 초과"
 #: ../../src/ui_fsmenu/internet_lobby.cc:441
 #, c-format
 msgid "unnamed %u"
-msgstr ""
+msgstr "이름 없는 %u"
 
 #: ../../src/ui_fsmenu/intro.cc:33
 msgid "Press any key or click to continue…"
@@ -2986,7 +2986,7 @@ msgstr "계속하려면 아무 키나 입력하거나 클릭하세요..."
 
 #: ../../src/ui_fsmenu/launch_game.cc:56
 msgid "Peaceful mode"
-msgstr ""
+msgstr "평화 모드"
 
 #: ../../src/ui_fsmenu/launch_game.cc:57
 msgid "Start game"
@@ -3001,19 +3001,19 @@ msgstr "뒤로"
 
 #: ../../src/ui_fsmenu/launch_game.cc:95
 msgid "The relations between players are set by the scenario"
-msgstr ""
+msgstr "선수 간의 관계는 시나리오에 의해 설정됩니다"
 
 #: ../../src/ui_fsmenu/launch_game.cc:97
 msgid "The relations between players are set by the saved game"
-msgstr ""
+msgstr "선수 간의 관계는 저장된 놀이에 의해 설정됩니다"
 
 #: ../../src/ui_fsmenu/launch_game.cc:99
 msgid "The selected win condition does not allow peaceful matches"
-msgstr ""
+msgstr "선택한 승리 조건은 평화로운 경기를 허용하지 않습니다"
 
 #: ../../src/ui_fsmenu/launch_game.cc:101
 msgid "Forbid fighting between players"
-msgstr ""
+msgstr "선수들 간의 싸움을 금지합니다"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/ui_fsmenu/launch_game.cc:108
@@ -3089,7 +3089,7 @@ msgstr "멀티플레이어 게임 설정"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:184
 msgid "Please select a map or saved game."
-msgstr ""
+msgstr "지도 또는 저장된 놀이를 선택하십시오."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:187
 msgid "The host has not yet selected a map or saved game."
@@ -3255,20 +3255,20 @@ msgstr "모든 지도 보기"
 
 #: ../../src/ui_fsmenu/mapselect.cc:107
 msgid "Official & Unofficial"
-msgstr ""
+msgstr "공식 & 비공식"
 
 #: ../../src/ui_fsmenu/mapselect.cc:119
 msgid "Any Teams"
-msgstr ""
+msgstr "아무런 팀"
 
 #: ../../src/ui_fsmenu/mapselect.cc:431
 msgid "Balanced & Unbalanced"
-msgstr ""
+msgstr "균형 & 불균형"
 
 #: ../../src/ui_fsmenu/mapselect.cc:436
 msgctxt "balancing"
 msgid "Unspecified"
-msgstr ""
+msgstr "불특정"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:40
 msgid "Choose game type"
@@ -3276,7 +3276,7 @@ msgstr "게임 종류 선택"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:46
 msgid "Online Game"
-msgstr ""
+msgstr "통신 놀이"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:47
 msgid "LAN / Direct IP"
@@ -3284,7 +3284,7 @@ msgstr "랜 / 다이렉트 IP"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:49 ../../src/wui/login_box.cc:32
 msgid "Online Game Settings"
-msgstr ""
+msgstr "통신 놀이 설정"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:37
 msgid "Begin Network Game"
@@ -3344,7 +3344,7 @@ msgstr "알 수 없음"
 msgid ""
 "Enter a valid nickname. This value may contain only English letters, "
 "numbers, and @ . + - _ characters."
-msgstr ""
+msgstr "올바른 대화명을 입력하십시오. 이 값에는 영문자, 숫자 및 @ . + - _ 문자만 포함할 수 있습니다."
 
 #: ../../src/ui_fsmenu/options.cc:90
 msgid "Apply"
@@ -3368,7 +3368,7 @@ msgstr "입력 고정"
 
 #: ../../src/ui_fsmenu/options.cc:129
 msgid "Use system mouse cursor"
-msgstr ""
+msgstr "시스템 마우스 커서 사용"
 
 #: ../../src/ui_fsmenu/options.cc:139
 msgid "Maximum FPS:"
@@ -3428,11 +3428,11 @@ msgstr "단일 주시화면 모드 사용"
 #. * TRANSLATORS: This refers to to zooming with the scrollwheel.
 #: ../../src/ui_fsmenu/options.cc:224
 msgid "Zoom only when Ctrl is pressed"
-msgstr ""
+msgstr "Ctrl 키를 누른 경우에만 확대/축소"
 
 #: ../../src/ui_fsmenu/options.cc:225
 msgid "Display game time in the top left corner"
-msgstr ""
+msgstr "왼쪽 상단 모서리에 게임 시간을 표시"
 
 #: ../../src/ui_fsmenu/options.cc:236
 msgid "Interface"
@@ -3490,7 +3490,7 @@ msgstr "자습서 선택"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:89
 msgid "Pick a tutorial from the list, then hit “OK”."
-msgstr ""
+msgstr "목록에서 자습서를 선택한 다음 “확인” 을 누르십시오."
 
 #: ../../src/ui_fsmenu/scenario_select.cc:91
 msgid ""
