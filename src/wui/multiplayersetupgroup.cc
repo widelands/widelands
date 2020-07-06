@@ -466,7 +466,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		} else {
 			{
 				i18n::Textdomain td("tribes");
-				for (const Widelands::TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
+				for (const Widelands::TribeBasicInfo& tribeinfo : settings.tribes) {
 					tribes_dropdown_.add(_(tribeinfo.descname), tribeinfo.name,
 					                     g_gr->images().get(tribeinfo.icon), false, tribeinfo.tooltip);
 				}

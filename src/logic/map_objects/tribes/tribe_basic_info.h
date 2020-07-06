@@ -65,9 +65,6 @@ struct TribeBasicInfo {
 	std::vector<Initialization> initializations;
 };
 
-/// Returns a string vector with the names of all tribes.
-std::vector<std::string> get_all_tribenames();
-
 /// Returns a vector with the basic info for all tribes.
 std::vector<TribeBasicInfo> get_all_tribeinfos();
 

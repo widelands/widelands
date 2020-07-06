@@ -1,6 +1,6 @@
 tribes = wl.Tribes()
 
-image_dirname = path.dirname(__file__) .. "images/empire/"
+image_dirname = path.dirname(__file__) .. "images/"
 
 tribes:new_tribe {
    name = "empire",
@@ -29,7 +29,7 @@ tribes:new_tribe {
          image_dirname .. "roadt_normal_02.png",
       },
       waterway = {
-         "tribes/images/empire/waterway_0.png",
+         image_dirname .. "waterway_0.png",
       },
    },
 

@@ -65,10 +65,11 @@
 --          right_corner = dirname .. "images/atlanteans/toolbar_right_corner.png"
 --       }
 --
+-- NOCOM fix documentation
 
 tribes = wl.Tribes()
 
-image_dirname = path.dirname(__file__) .. "images/atlanteans/"
+image_dirname = path.dirname(__file__) .. "images/"
 
 tribes:new_tribe {
    name = "atlanteans",
@@ -96,7 +97,7 @@ tribes:new_tribe {
          image_dirname .. "roadt_normal_01.png",
       },
       waterway = {
-         "tribes/images/atlanteans/waterway_0.png",
+         image_dirname .. "waterway_0.png",
       },
    },
 

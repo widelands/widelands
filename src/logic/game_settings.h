@@ -117,7 +117,8 @@ struct GameSettings {
 	     scenario(false),
 	     multiplayer(false),
 	     savegame(false),
-	     peaceful(false) {
+	     peaceful(false),
+         tribes(Widelands::get_all_tribeinfos()) {
 		std::unique_ptr<LuaInterface> lua(new LuaInterface);
 		std::unique_ptr<LuaTable> win_conditions(
 		   lua->run_script("scripting/win_conditions/init.lua"));
