@@ -153,7 +153,7 @@ void PlayerDescriptionGroup::update() {
 			}
 			d->btnPlayerType->set_title(title);
 
-			Widelands::TribeBasicInfo info = Widelands::get_tribeinfo(player.tribe);
+			Widelands::TribeBasicInfo info = settings.get_tribeinfo(player.tribe);
 			if (!tribenames_[player.tribe].size()) {
 				// Tribe's localized name
 				tribenames_[player.tribe] = info.descname;

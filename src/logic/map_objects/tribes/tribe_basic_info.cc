@@ -77,13 +77,11 @@ std::vector<TribeBasicInfo> get_all_tribeinfos() {
 }
 
 TribeBasicInfo get_tribeinfo(const std::string& tribename) {
-	if (Widelands::tribe_exists(tribename)) {
-		for (const TribeBasicInfo& info : Widelands::get_all_tribeinfos()) {
-			if (info.name == tribename) {
-				return info;
-			}
-		}
-	}
+    for (const TribeBasicInfo& info : Widelands::get_all_tribeinfos()) {
+        if (info.name == tribename) {
+            return info;
+        }
+    }
 	throw GameDataError("The tribe '%s'' does not exist.", tribename.c_str());
 }
 

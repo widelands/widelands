@@ -32,6 +32,7 @@ wl_library(logic_game_settings
   DEPENDS
     io_filesystem
     logic_constants
+    logic_exceptions
     logic_tribe_basic_info
     notifications
     scripting_lua_interface

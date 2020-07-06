@@ -524,7 +524,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		} else {
 			init_dropdown_.set_label("");
 			i18n::Textdomain td("tribes");  // for translated initialisation
-			const Widelands::TribeBasicInfo tribeinfo = Widelands::get_tribeinfo(player_setting.tribe);
+			const Widelands::TribeBasicInfo tribeinfo = settings.get_tribeinfo(player_setting.tribe);
 			std::set<std::string> tags;
 			if (!settings.mapfilename.empty()) {
 				Widelands::Map map;
