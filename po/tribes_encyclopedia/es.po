@@ -22,8 +22,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-06-30 14:48+0000\n"
-"PO-Revision-Date: 2020-06-28 17:03+0000\n"
+"POT-Creation-Date: 2020-07-04 06:10+0000\n"
+"PO-Revision-Date: 2020-07-02 14:50+0000\n"
 "Last-Translator: Walter Benkel <tromaster@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -335,7 +335,7 @@ msgstr "Construye una casa de piscicultor cerca de la casa de pescador para aseg
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/helptexts.lua:21
 msgctxt "atlanteans_building"
 msgid "The fisher’s house needs water full of fish within the work area."
-msgstr "La cabaña de pescador necesita aguas llenas de pescado dentro de su zona de trabajo."
+msgstr "La cabaña de pescador necesita aguas llenas de peces en su área de trabajo."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/helptexts.lua:16
@@ -793,7 +793,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Ages ago, the Barbarians learned to delve into mountainsides for that black "
 "material that feeds their furnaces."
-msgstr "Años atrás, los Bárbaros aprendieron a cavar en  laderas de las montañas por ese material negro que alimenta sus hornos."
+msgstr "Años atrás, los Bárbaros aprendieron a cavar en las laderas de las montañas por ese material negro que alimenta sus hornos."
 
 #. TRANSLATORS: Lore helptext for a coal mine building, part 2
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:6
@@ -803,7 +803,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Wood may serve for a household fire and to keep you warm, but when it comes "
 "to working with iron or gold, there is no way around coal."
-msgstr "La madera puede servir para un fuego doméstico y para mantener el calor, pero cuando se trata de trabajar con el hierro o el oro, no hay camino alrededor del carbón."
+msgstr "La madera puede servir para un fuego doméstico y para mantener el calor, pero cuando se trata de trabajar con el hierro o el oro, no hay como el carbón."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:22
@@ -1013,7 +1013,7 @@ msgid ""
 "This phrase was the reply Rimbert the miner – later known as Rimbert the "
 "loner – gave, when he was asked to remain seated on an emergency meeting at "
 "Stonford in the year of the great flood."
-msgstr "Esta frase fue la respuesta que Rimbert el minero - más tarde conocido como el solitario Rimbert – dió, cuando se le pidió que permanezca sentado en una reunión de emergencia en Stonford en el año de la gran inundación."
+msgstr "Esta frase fue la respuesta que Rimbert el minero - más tarde conocido como el solitario Rimbert – dio cuando se le pidió que permaneciera sentado en una reunión de emergencia en Stonford en el año de la gran inundación."
 
 #. TRANSLATORS: Lore author helptext for a granite mine building, part 2
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:12
@@ -1021,7 +1021,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The same man had all the 244 granite blocks ready only a week later, and "
 "they still fortify the city’s levee."
-msgstr "El mismo hombre tenía todos los 244 bloques de granito listos sólo una semana más tarde y todavía fortifican los diques de la ciudad."
+msgstr "El mismo hombre tuvo listos todos los 244 bloques de granito sólo una semana después, y todavía fortifican el dique de la ciudad."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:18
@@ -1043,7 +1043,7 @@ msgstr "Esta mina explota todo el recuso hasta el nivel más profundo. Pero incl
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:26
 msgctxt "barbarians_building"
 msgid "It cannot be enhanced."
-msgstr "No puede ser mejorado."
+msgstr "No puede ser mejorada."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:31
@@ -3112,7 +3112,7 @@ msgstr "Los restos de un edificio destruido."
 #: ../../data/tribes/immovables/cornfield/harvested/helptexts.lua:4
 #: ../../data/tribes/immovables/wheatfield/harvested/helptexts.lua:4
 msgid "This field has been harvested."
-msgstr "Este campo esta cosechado."
+msgstr "Este campo ha sido cosechado."
 
 #. TRANSLATORS: Helptext for a field
 #: ../../data/tribes/immovables/blackrootfield/medium/helptexts.lua:4
@@ -3122,21 +3122,21 @@ msgstr "Este campo esta cosechado."
 #: ../../data/tribes/immovables/wheatfield/medium/helptexts.lua:4
 #: ../../data/tribes/immovables/wheatfield/small/helptexts.lua:4
 msgid "This field is growing."
-msgstr "Este campo esta creciendo."
+msgstr "Este campo está creciendo."
 
 #. TRANSLATORS: Helptext for a field
 #: ../../data/tribes/immovables/blackrootfield/ripe/helptexts.lua:4
 #: ../../data/tribes/immovables/cornfield/ripe/helptexts.lua:4
 #: ../../data/tribes/immovables/wheatfield/ripe/helptexts.lua:4
 msgid "This field is ready for harvesting."
-msgstr "Este campo esta presto a cosechar."
+msgstr "Este campo está listo para ser cosechado."
 
 #. TRANSLATORS: Helptext for a field
 #: ../../data/tribes/immovables/blackrootfield/tiny/helptexts.lua:4
 #: ../../data/tribes/immovables/cornfield/tiny/helptexts.lua:4
 #: ../../data/tribes/immovables/wheatfield/tiny/helptexts.lua:4
 msgid "This field has just been planted."
-msgstr "Este campo esta justamente plantado."
+msgstr "Este campo ha sido recién plantado."
 
 #. TRANSLATORS: Helptext for a grapevine
 #: ../../data/tribes/immovables/grapevine/medium/helptexts.lua:4
@@ -3147,7 +3147,7 @@ msgstr "Esta vid está creciendo."
 #. TRANSLATORS: Helptext for a grapevine
 #: ../../data/tribes/immovables/grapevine/ripe/helptexts.lua:4
 msgid "This grapevine is ready for harvesting."
-msgstr "Esta vid esta presto a cosechar."
+msgstr "Esta vid está lista para ser cosechada."
 
 #. TRANSLATORS: Helptext for a grapevine
 #: ../../data/tribes/immovables/grapevine/tiny/helptexts.lua:4
@@ -4155,7 +4155,7 @@ msgstr "%1% y %2%"
 
 #: ../../data/tribes/scripting/help/immovable_help.lua:48
 msgid "Requirements"
-msgstr "Exigencias"
+msgstr "Requerimientos"
 
 #: ../../data/tribes/scripting/help/immovable_help.lua:59
 msgid "Preferred Terrains"

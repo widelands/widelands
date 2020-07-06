@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-06-30 14:48+0000\n"
+"POT-Creation-Date: 2020-07-04 06:10+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Walter Benkel <tromaster@gmail.com>, 2020\n"
 "Language-Team: Spanish (https://www.transifex.com/widelands/teams/35159/es/)\n"
@@ -206,7 +206,7 @@ msgstr "Recluta nuevos soldados"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:146
 msgid "New Soldier Recruiting"
-msgstr "Reclutamiento de Soldados Nuevos"
+msgstr "Reclutamiento de Nuevos Soldados"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:147
 msgid "Recruit at least ten new soldiers in your barracks."
@@ -354,8 +354,8 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
-"Has completado esta misión. Puedes continuar jugando si quieres, de otro "
-"modo avanza a la siguiente misión."
+"Has completado esta misión. Puedes continuar jugando si quieres, o continúa "
+"con la siguiente misión."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:237
 msgid "Chaos"
@@ -962,7 +962,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:475
 msgid "Amalea is Very Content"
-msgstr "Amalea Está Muy Contenta"
+msgstr "Amalea está Muy Contenta"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:476
 msgid "Amalea claps her hands…"

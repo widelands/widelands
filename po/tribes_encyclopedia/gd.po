@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-06-30 14:48+0000\n"
-"PO-Revision-Date: 2020-06-28 09:29+0000\n"
+"POT-Creation-Date: 2020-07-04 06:10+0000\n"
+"PO-Revision-Date: 2020-07-04 06:16+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -670,13 +670,13 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Don't ask what your tribe can do for you, ask what you can do for your "
 "tribe!’"
-msgstr ""
+msgstr "“Na faighnich dè nì do threubh air do shon-sa, faighnich dè nì thusa airson do threubha!”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/barracks/helptexts.lua:11
 msgctxt "barbarians_building"
 msgid "Famous barbarian recruitment poster"
-msgstr ""
+msgstr "Postair trusaidh ainmeil nan Tùsanach"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/barracks/helptexts.lua:16
@@ -690,13 +690,13 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Seasonal fish and game specialties served with pitta bread.<br>Choose from "
 "a prime selection of regional craft beer brands.’"
-msgstr ""
+msgstr "“Iasg agus sitheann na ràithe le aran tur.<br>Tagh o shàr-roghainn de leann ionadail.”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/helptexts.lua:12
 msgctxt "barbarians_building"
 msgid "Menu of ‘The Laughing Barbarian’"
-msgstr ""
+msgstr "Clàr-bìdh an taighe-sheinnse “An Tùsanach toilichte”"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/helptexts.lua:17
@@ -713,13 +713,13 @@ msgid ""
 "‘When the Barbarian was created,<br>this was the first thing that he "
 "stated:<br>“You want me fighting without fear?<br>Then you should create "
 "some beer!”’"
-msgstr ""
+msgstr "“Nuair a chruthaicheadh an Tùsanach<br>seo a’ chiad rud a thuirt e ann:<br>‘An dèan mi sabaid gun eagal dhut?<br>Nì ma chuireas tu leann ’nam bhrù!’”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/brewery/helptexts.lua:14
 msgctxt "barbarians_building"
 msgid "First verse of the drinking song ‘Way of the Barbarian’"
-msgstr ""
+msgstr "A’ chiad rann dhen òran bhotail “Dòigh an Tùsanaich”"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/brewery/helptexts.lua:19
@@ -733,7 +733,7 @@ msgstr "Nì e leann ach am bi na mèinnearan làidir toilichte."
 msgctxt "barbarians_building"
 msgid ""
 "‘The smart leader builds roads, while the really wise leader breeds cattle.’"
-msgstr ""
+msgstr "“Togaidh an rìgh glic rathad agus an rìgh eòlach damh.”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:8
@@ -773,7 +773,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/helptexts.lua:18
 msgctxt "barbarians_building"
 msgid "Song of the charcoal burners"
-msgstr ""
+msgstr "Òran nan loisgeadairean fiodha"
 
 #. TRANSLATORS: Lore helptext for a coal mine building, part 1
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:4
@@ -852,7 +852,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:9
 msgctxt "barbarians_building"
 msgid "Line from the harvesting song ‘The Wealth of the Fields’"
-msgstr ""
+msgstr "Rann òrain buana “Toradh nan achaidhean”"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:14
@@ -879,7 +879,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Frequent response of a barbarian fisherman,<br>often followed by an "
 "enjoyable brawl"
-msgstr ""
+msgstr "Freagairt chumanta aig iasgair nan Tùsanach agus bi ’n dùil air dol a-mach ’na cois!"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:13
@@ -1055,7 +1055,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/helptexts.lua:11
 msgctxt "barbarians_building"
 msgid "Slogan of ‘Harrath’s Handsome Helmets’ in Al’thunran"
-msgstr ""
+msgstr "Facal-suaicheantais aig “Clogaidean smodaig” ann an Al’tùnran"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/helptexts.lua:16
@@ -1096,13 +1096,13 @@ msgstr "Gabhaidh an sealgair fois fad %s mus tòisich e air an obair a-rithist."
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/helptexts.lua:6
 msgctxt "barbarians_building"
 msgid "‘Miner’s Delight: Pitta bread with fish or meat, comes with one beer.’"
-msgstr ""
+msgstr "“Sòlas a’ mhèinneir: aran tur le iasg no sitheann agus leann.”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/helptexts.lua:11
 msgctxt "barbarians_building"
 msgid "Chef’s recommendation in ‘The Singing Master Miner’"
-msgstr ""
+msgstr "Monadh a’ chòcaire aig “An sàr-mhèinnear ceòlmhor”"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/helptexts.lua:16
@@ -1311,13 +1311,13 @@ msgstr "Ma thèid a h-uile bathar air a bheil feum a lìbhrigeadh ri àm, saothr
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘We open up roads and make houses from mountains.’"
-msgstr ""
+msgstr "“Fosglaidh sin rathaidean is nì sinn taighean às na beanntan.”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "Slogan of the stonemasons’ guild"
-msgstr ""
+msgstr "Facal-suaicheantais aig comann nan clachair"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:13
@@ -1408,13 +1408,13 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Behind the next hill there might be wealth and happiness but also hostility"
 " and doom.<br>He who will not explore it commits the crime of stupidity.’"
-msgstr ""
+msgstr "“Dh’fhaoidte gun lorg sinn saoibhreas is sìth taobh thall a’ chnuic no dh’fhaoidte gun lorg sinn nàimhdeas is bàs.<br>Is gòrach am fear nach dèan rùrachadh.”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/helptexts.lua:12
 msgctxt "barbarians_building"
 msgid "Chat’Karuth<br>at the oath taking ceremony of the first scout troupe"
-msgstr ""
+msgstr "Cat’Charud<br>aig deas-ghnàth bòide nan ciad rabhadairean"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/helptexts.lua:6
@@ -1423,14 +1423,14 @@ msgid ""
 "‘When I saw the Saxnot for the first time, her majestic dragon head already "
 "looked up to the skies and the master was about to install the square "
 "sail.<br>It was the most noble ship I ever saw.’"
-msgstr ""
+msgstr "“Nuair a chunnaic mi an Saxnot a’ chiad turas, bha a ceann-dràgoin mòrail a’ coimhead nan speuran mu thràth agus an sgiobair a’ togail a siùil cheàrnagaich.<b>B’ ise an long as uaisle a chunnaic mi a-riamh.”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/helptexts.lua:13
 #: ../../data/tribes/buildings/warehouses/barbarians/port/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "Captain Thanlas the Elder,<br>Explorer"
-msgstr ""
+msgstr "Seann-sgiobair Tanlas,<br>An Taisgealach"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/helptexts.lua:6
@@ -1438,7 +1438,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘From inferior looking rubble they form shiny gold and gleaming iron.<br>The"
 " smelters are real magicians among our craftsmen.’"
-msgstr ""
+msgstr "“Thèid creagan garbha ’nan òr dealrach is iarann gleansach for an làmhan.<br>’S e draoidhean am measg ar luchd-ciùird a th’ anns na leaghadairean.”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/helptexts.lua:12
@@ -1450,13 +1450,13 @@ msgstr "Cat’Charud<br>aig a’ 5ᵐʰ co-labhairt nan ceàrd"
 #: ../../data/tribes/buildings/productionsites/barbarians/tavern/helptexts.lua:6
 msgctxt "barbarians_building"
 msgid "‘Fresh from the countryside: Bread, fish or game to go.’"
-msgstr ""
+msgstr "“Ùr ’s ionadail: aran, iasg no sitheann blasta.”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/tavern/helptexts.lua:11
 msgctxt "barbarians_building"
 msgid "Menu of the tavern ‘Ye Ol’ Bronze Axe’"
-msgstr ""
+msgstr "Clàr-bìdh an taighe-tàirn “An tuagh umha”"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/tavern/helptexts.lua:16
@@ -1492,7 +1492,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Fine cloth and jewelry mean nothing to a true Barbarian.<br>But a noble "
 "sail in the wind will please his eyes.’"
-msgstr ""
+msgstr "“Is coma le fìor-Thùsanach aodach no usgar ach is fìor thoigh leis seòl uasail sa ghaoth.”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:12
@@ -1537,7 +1537,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Then he hit the door with his ax and, behold,<br>the door only trembled, "
 "but the shaft of the ax burst into a thousand pieces.’"
-msgstr ""
+msgstr "“Bhuail e ris an doras leis an tuagh aige agus gu sealladh sealbh ort!<br>Cha do chuir seo ach crith air an doras ach bhris làmh na tuaighe ’na mhìle mìrean.”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/helptexts.lua:12
@@ -1545,7 +1545,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Legend about a quarrel between the brothers Harthor and Manthor,<br>Manthor "
 "is said to be the inventor of blackwood"
-msgstr ""
+msgstr "Faoinsgeul mu dhol a-mach eadar an dithis bhràithrean Tarthor is Manthor,<br>Thathar ag ràdh gum b’ e Manthor a rinn a’ chiad fhiodh cruaidh"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/helptexts.lua:18

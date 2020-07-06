@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-06-30 14:48+0000\n"
-"PO-Revision-Date: 2020-06-28 17:06+0000\n"
+"POT-Creation-Date: 2020-07-04 06:10+0000\n"
+"PO-Revision-Date: 2020-07-02 14:05+0000\n"
 "Last-Translator: Walter Benkel <tromaster@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -1822,7 +1822,7 @@ msgstr "Completado %s"
 #. missing
 #: ../../src/logic/map_objects/tribes/productionsite.cc:347
 msgid "Worker missing"
-msgstr "Falta trabajador"
+msgstr "Trabajador ausente"
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1
 #. worker
@@ -4795,7 +4795,7 @@ msgstr "Borrar estas repeticiones"
 #. selected multiple files
 #: ../../src/wui/load_or_save_game.cc:154
 msgid "Delete these games"
-msgstr "Borrar estes partidos"
+msgstr "Borrar estas partidas"
 
 #: ../../src/wui/login_box.cc:37
 msgid "Nickname:"
@@ -5132,7 +5132,7 @@ msgstr "¿Realmente quieres borrar esta partida?"
 msgid "Do you really want to delete this %d game?"
 msgid_plural "Do you really want to delete these %d games?"
 msgstr[0] "Seguro que quieres borrar este %d partido?"
-msgstr[1] "Seguro que quieres borrar estes %d partidos?"
+msgstr[1] "¿Realmente quieres borrar estas %d partidas?"
 
 #: ../../src/wui/savegamedeleter.cc:79
 msgid "Error Deleting File!"
