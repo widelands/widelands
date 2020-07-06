@@ -11,13 +11,14 @@
 # Madkat Here, 2016
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020
 # Thadah D. Denyse <juchuf@gmail.com>, 2017
+# Walter Benkel <tromaster@gmail.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-05-18 10:03+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
+"POT-Creation-Date: 2020-07-04 06:10+0000\n"
+"PO-Revision-Date: 2020-06-28 17:05+0000\n"
+"Last-Translator: Walter Benkel <tromaster@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -197,7 +198,7 @@ msgstr "Posees más de la mitad del área del mapa."
 msgid "Keep it for %i more minute to win the game."
 msgid_plural "Keep it for %i more minutes to win the game."
 msgstr[0] "Mantenlo durante %i minuto más para ganar la partida."
-msgstr[1] "Mantenlo durante %i minutos más para ganar el partido."
+msgstr[1] "Manténlo durante %i minutos más para ganar la partida."
 
 #: ../../data/scripting/win_conditions/territorial_functions.lua:238
 #, lua-format
@@ -302,7 +303,7 @@ msgstr "Has perdido"
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:20
 msgid "You’ve lost this game!"
-msgstr "Has perdido este partido!"
+msgstr "¡Has perdido esta partida!"
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:24
 msgid "Status"
@@ -322,7 +323,7 @@ msgid ""
 "As wood gnome you like big forests, so your task is to have more trees on "
 "your territory than any other player. The game will end after 4 hours of "
 "playing. The one with the most trees at that point will win the game."
-msgstr "Como gnomo de madera que eres te gustan los bosques grandes, así que tu tarea es tener más arboles en tu territorio que cualquier otro jugador. El partido acabará tras 4 horas de juego. El que tenga más arboles llegados a ese punto ganará el partido."
+msgstr "Como gnomo de madera que eres te gustan los bosques grandes, así que tu tarea es tener más arboles en tu territorio que cualquier otro jugador. La partida terminará tras 4 horas de juego. El que tenga más arboles en ese momento ganará la partida."
 
 #: ../../data/scripting/win_conditions/wood_gnome.lua:22
 msgid "Trees owned"

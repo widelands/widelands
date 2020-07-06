@@ -3,15 +3,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# GunChleoc, 2019
+# GunChleoc, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"POT-Creation-Date: 2020-07-04 06:10+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: GunChleoc, 2019\n"
+"Last-Translator: GunChleoc, 2020\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +22,7 @@ msgstr ""
 #. TRANSLATORS: Name of a backup autosave
 #: ../../data/campaigns/fri01.wmf/scripting/mission_thread.lua:129
 msgid "The Great Stormflood (Backup Autosave)"
-msgstr ""
+msgstr "An tuil-ruadh (lethbhreac-glèidhidh fèin-obrachail)"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:25
 msgid "Build a wood economy and a reed farm"
@@ -243,6 +243,10 @@ msgid ""
 " reload the scenario from the backup savegame automatically created for you "
 "shortly before you reached the enemy’s headquarters."
 msgstr ""
+"Mura deach leat ullachadh airson seasamh an aghaidh an dùbhlain seo ri àm, "
+"’s urrainn dhut an cnàmh-sgeul ath-luchdadh on lethbhreac-ghlèidhidh a "
+"chaidh a chruthachadh dhut gu fèin-obrachail nuair a ràinig thu phrìomh-àras"
+" an nàmhad."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:126
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:135
@@ -1140,9 +1144,29 @@ msgid_plural ""
 "men to the port when it’s completed, to get ready to embark when we set "
 "sail!"
 msgstr[0] ""
+"Cha mhòr gun do dhìochuimhnich mi leis a’ chabhag a tha oirnn – ge b’ e "
+"càite an dèid sinn, feumaidh sinn saighdearan ach an gabh sinn greim air "
+"tuineachadh ùr ’s gun leudaich sinn e. Tha rùm dha %d shaighdear air an long"
+" againn ma tha iad coma gum bi e dùmhail ann. Cuireamaid ar gaisgich dhan "
+"phort nuair a bhios e deiseil ach an dig iad leinn dhan mhuir!"
 msgstr[1] ""
+"Cha mhòr gun do dhìochuimhnich mi leis a’ chabhag a tha oirnn – ge b’ e "
+"càite an dèid sinn, feumaidh sinn saighdearan ach an gabh sinn greim air "
+"tuineachadh ùr ’s gun leudaich sinn e. Tha rùm dha %d shaighdear air an long"
+" againn ma tha iad coma gum bi e dùmhail ann. Cuireamaid ar gaisgich dhan "
+"phort nuair a bhios e deiseil ach an dig iad leinn dhan mhuir!"
 msgstr[2] ""
+"Cha mhòr gun do dhìochuimhnich mi leis a’ chabhag a tha oirnn – ge b’ e "
+"càite an dèid sinn, feumaidh sinn saighdearan ach an gabh sinn greim air "
+"tuineachadh ùr ’s gun leudaich sinn e. Tha rùm dha %d saighdearan air an "
+"long againn ma tha iad coma gum bi e dùmhail ann. Cuireamaid ar gaisgich "
+"dhan phort nuair a bhios e deiseil ach an dig iad leinn dhan mhuir!"
 msgstr[3] ""
+"Cha mhòr gun do dhìochuimhnich mi leis a’ chabhag a tha oirnn – ge b’ e "
+"càite an dèid sinn, feumaidh sinn saighdearan ach an gabh sinn greim air "
+"tuineachadh ùr ’s gun leudaich sinn e. Tha rùm dha %d saighdear air an long "
+"againn ma tha iad coma gum bi e dùmhail ann. Cuireamaid ar gaisgich dhan "
+"phort nuair a bhios e deiseil ach an dig iad leinn dhan mhuir!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:419
 msgid "Victory"
@@ -1180,4 +1204,4 @@ msgstr ""
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"

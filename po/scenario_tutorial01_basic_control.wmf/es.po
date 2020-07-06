@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-06-09 17:22+0000\n"
+"POT-Creation-Date: 2020-07-04 06:10+0000\n"
+"PO-Revision-Date: 2020-07-02 14:53+0000\n"
 "Last-Translator: Walter Benkel <tromaster@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -43,7 +43,7 @@ msgid ""
 " here later on. If I am too slow for you, you might want to play a real game"
 " and just find everything out for yourself. Otherwise, please bear with me, "
 "I am not the youngest and quickest anymore."
-msgstr "Lo siento, pero voy a tener que bajar la velocidad de nuevo. Es posible que necesitemos el espacio aquí más adelante. Si soy demasiado lento para ti, es posible que desees jugar un partido real y aprender todo por ti mismo. De lo contrario, por favor ten paciencia conmigo, no soy tan joven y rápido como antes."
+msgstr "Lo siento, pero tendré que demoler esto nuevamente. Es posible que necesitemos el espacio más adelante. Si soy demasiado lento para tí, es posible que desees jugar una partida real y aprender todo por tí mismo. De lo contrario, por favor ten paciencia conmigo, ya no soy tan joven y rápido como antes."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:29
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:31
@@ -326,7 +326,7 @@ msgid ""
 "If you click on the construction site, a window will open. You can see the "
 "wares that are still missing grayed out. You can also see the progress of "
 "this construction site."
-msgstr "Si haces clic en la obra, una ventana va abrirse. Puedes ver las mercancías que aún faltan en gris. También puedes ver el progreso de esta obra."
+msgstr "Si haces clic en el sitio de construcción se abrirá una ventana. Las mercancías que aún faltan están marcadas en gris. También puedes ver el progreso de este sitio de construcción."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:222
 msgid ""
@@ -648,7 +648,7 @@ msgstr "Para construir una carretera completamente nueva simplemente haz clic en
 msgid ""
 "If you hold Ctrl or Shift+Ctrl while you finish the road, flags are placed "
 "automatically."
-msgstr "Si mantienes Ctrl o Shift+Ctrl cuando terminas la carretera las banderas se colocan automáticamente."
+msgstr "Si presionas Ctrl o Shift+Ctrl mientras terminas la carretera las banderas se colocan automáticamente."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:428
 msgid ""
@@ -826,7 +826,7 @@ msgstr "Una vez que hayas archivado un mensaje, otro mensaje se seleccionará au
 msgid ""
 "You can also hold down the Ctrl or Shift key to select multiple messages, or"
 " press Ctrl + A to select them all."
-msgstr "También puedes mantener la tecla Ctrl o Shift para seleccionar varios mensajes, o pulsar Ctrl + A para seleccionarlos todos."
+msgstr "También puedes mantener presionada la tecla Ctrl o Shift para seleccionar varios mensajes, o presionar Ctrl + A para seleccionarlos todos."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:534
 msgid ""
@@ -840,7 +840,7 @@ msgid ""
 "The message window is central to fully controlling your tribe’s fortune. "
 "However, you will get a lot of messages in a real game. To keep your head "
 "straight, you should try to keep the inbox empty."
-msgstr "La ventana de mensajes es clave para controlar totalmente la suerte de tu tribu. Sin embargo, recibirás un montón de mensajes en un partido real. Para mantener tu mente centrada, deberías intentar mantener tu bandeja de entrada vacía."
+msgstr "La ventana de mensajes es clave para controlar completamente la suerte de tu tribu. Sin embargo, en una partida real recibirás un montón de mensajes. Para mantener centrada tu mente centrada, deberías intentar mantener vacía tu bandeja de entrada."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:540
 msgid "Messages"
@@ -909,7 +909,7 @@ msgid ""
 "I’ll take all rocks away from the poor stonemasons in the quarries. They "
 "will then send a message each that they can’t find any in their work areas "
 "the next time they try to do some work."
-msgstr "¡Bien hecho! Vamos a ver cómo funcionan los mensajes en un partido real, ¿de acuerdo? Para verlo voy a quitarles todas las rocas a los pobres trabajadores de las canteras. Ellos mandarán entonces un mensaje cada uno indicando que no pueden encontrar más rocas en su zona de trabajo la próxima vez que intenten salir a trabajar."
+msgstr "¡Bien hecho! Veamos cómo funcionan los mensajes en una partida real, ¿de acuerdo? Para esto voy a quitarles todas las rocas a los pobres mamposteros en las canteras. La próxima vez que intenten salir a trabajar, ellos enviarán entonces un mensaje cada uno indicando que no pueden encontrar más rocas en su área de trabajo."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:583
 msgid "Destroy the two quarries"
@@ -942,7 +942,7 @@ msgid ""
 "Dismantling the quarry: A builder will walk from the headquarters to "
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
-msgstr "Desarmar la cantera: un constructor acudirá desde la sede para desarmar la cantera pieza a pieza. Por tanto recuperas algunos de los recursos que utilizaste para su construcción."
+msgstr "Desarmar la cantera: un constructor acudirá desde el cuartel general para desarmar la cantera pieza a pieza. Por lo tanto recuperas algunos de los recursos que utilizaste para su construcción."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:594
 msgid "Messages Arrived!"
@@ -1061,7 +1061,7 @@ msgstr "Esto concluye el primer tutorial. Para aprender más acerca del juego te
 msgid ""
 "However, since you now know how to control Widelands, you can also start a "
 "game (or continue this one) and discover more by yourself."
-msgstr "Sin embargo, dado que ya conoces cómo se controla Widelands, también puedes comenzar un partido (o continuar con éste) y descubrir más por ti mismo."
+msgstr "Sin embargo, dado que ya conoces cómo se controla Widelands, también puedes comenzar una partida (o continuar con ésta) y descubrir más por tí mismo."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:651
 msgid "To leave this game and return to the main menu:"

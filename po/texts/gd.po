@@ -2,15 +2,15 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2019
+# GunChleoc, 2015-2020
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2013-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-03-29 19:01+0000\n"
+"POT-Creation-Date: 2020-07-04 06:10+0000\n"
+"PO-Revision-Date: 2020-07-01 06:10+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -233,7 +233,7 @@ msgstr "Seanairean"
 
 #: ../../data/txts/developers.lua:3
 msgid "Empire"
-msgstr "An Impireachd"
+msgstr "An Ìmpireachd"
 
 #: ../../data/txts/developers.lua:3
 msgid "Fedora Linux"
@@ -358,7 +358,7 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an "
 "economic infrastructure, explore the land around you and face rivaling "
 "tribes."
-msgstr "Tòisichidh tu le cnap tìre beag le stòras beag sa gheama seo. Cruthaichidh tu impireachd le mìltean dhe shaoranaich àsta. Feumaidh tu bun-structar an eaconamaidh a stèidheachadh, an tìr timcheall ort a rùrachadh agus strì an aghaidh threubhan eile gus an t-amas seo a choileanadh."
+msgstr "Tòisichidh tu le cnap tìre beag le stòras beag sa gheama seo. Cruthaichidh tu ìmpireachd le mìltean dhe shaoranaich asta. Feumaidh tu bun-structar an eaconamaidh a stèidheachadh, an tìr timcheall ort a rùrachadh agus strì an aghaidh threubhan eile gus an t-amas seo a choileanadh."
 
 #: ../../data/txts/help/common_helptexts.lua:25
 msgid "Replays"
@@ -414,7 +414,7 @@ msgstr "Toglaich an dèid ionadan togail a shealltainn"
 #: ../../data/txts/help/common_helptexts.lua:49
 msgctxt "hotkey"
 msgid "Ctrl + F"
-msgstr ""
+msgstr "Ctrl + F"
 
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"
@@ -591,7 +591,7 @@ msgstr "’S urrainn dhut meud an raoin a thèid a thaghadh mu chùrsair na luch
 msgid ""
 "Space key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
-msgstr "Nì an iuchair Space na nì e ann an geama àbhaisteach. Nochdaidh no falaichidh e na h-ionadan togail."
+msgstr "Nì an iuchair Space na nì e ann an geama àbhaisteach. Seallaidh no falaichidh e na h-ionadan togail."
 
 #: ../../data/txts/tips/editor.lua:35
 msgid ""
@@ -624,7 +624,7 @@ msgstr "Tog taigh planntair-choille an-còmhnaidh ach nach ruith am fiodh ort."
 
 #: ../../data/txts/tips/empire.lua:16
 msgid "Empire needs a lot of marble. Keep looking for marble resources."
-msgstr "Tha an Impireachd feumach air grunn marmoir. Cùm a’ sireadh stòrasan marmoir."
+msgstr "Tha an Ìmpireachd feumach air grunn marmoir. Cùm a’ sireadh stòrasan marmoir."
 
 #: ../../data/txts/tips/frisians.lua:4
 msgid ""
@@ -758,48 +758,48 @@ msgstr "Sùm a-steach/a-mach le cuibhle na luchaige no le %1%. Brùth air %2% gu
 msgid ""
 "Use the ‘,’ (comma) and ‘.’ (period) keys to quickly jump between recently "
 "visited locations."
-msgstr ""
+msgstr "Cleachd iuchraichean “,” (cromag) agus “.” (puing-stad) airson leum a ghearradh eadar ionadan far an robh thu o chionn ghoirid."
 
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
 msgid "Ctrl+(Page Up/Page Down)"
-msgstr ""
+msgstr "Ctrl+(Page Up/Page Down)"
 
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
 msgid "Page Up/Page Down"
-msgstr ""
+msgstr "Page Up/Page Down"
 
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
 msgid "Shift+(Page Up/Page Down)"
-msgstr ""
+msgstr "Shift+(Page Up/Page Down)"
 
 #: ../../data/txts/tips/general_game.lua:79
 msgid ""
 "Speed up or slow down the game with %1%. Use %2% for rapid change, %3% will "
 "adjust speed smoothly."
-msgstr ""
+msgstr "Dèan an geama nas luaithe no nas maille le %1%. Cleachd %2% airson atharrachadh luath no %3% airson gleusadh rèidh."
 
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
 msgid "Arrow keys"
-msgstr ""
+msgstr "Iuchraichean saighde"
 
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
 msgid "Ctrl+Arrow keys"
-msgstr ""
+msgstr "Ctrl+Iuchraichean saighde"
 
 #: ../../data/txts/tips/general_game.lua:83
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
-msgstr ""
+msgstr "Gluais sealladh a’ mhapa le %1%. Gluaisidh %2% an sealladh nas luaithe agus %3% gu mall."
 
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
 msgid "Shift+Arrow keys"
-msgstr ""
+msgstr "Shift+Iuchraichean saighde"
 
 #: ../../data/txts/tips/general_game.lua:87
 msgid ""

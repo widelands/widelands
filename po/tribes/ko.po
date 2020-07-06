@@ -2,15 +2,15 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
-# ks k, 2017-2018
+# ks k, 2017-2018,2020
 # TaeMin An, 2017,2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-04-23 19:22+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-07-04 06:10+0000\n"
+"PO-Revision-Date: 2020-06-22 04:48+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -534,7 +534,6 @@ msgstr "갑옷 만드는 곳"
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:58
 #: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:52
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:56
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:68
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:83
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:56
@@ -552,7 +551,6 @@ msgstr "갑옷 만드는 곳"
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:68
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:58
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:77
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:53
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:50
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:56
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:71
@@ -584,7 +582,6 @@ msgstr "갑옷 만드는 곳"
 #: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:73
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:71
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:60
 #: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:87
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:69
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:74
@@ -782,7 +779,7 @@ msgstr "다이아몬드 캐는 중"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:164
 msgid "No Crystals"
-msgstr ""
+msgstr "수정 없음"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:165
 msgid "Main Crystal Vein Exhausted"
@@ -821,7 +818,7 @@ msgstr "해당 농장에서 일하는 열음지기들이 씨앗을 뿌릴 충분
 #: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "연락선 뜰"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:7
@@ -1089,28 +1086,28 @@ msgid "Quarry"
 msgstr "채석장"
 
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:55
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:62
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:46
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:53
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:60
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:69
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:60
 msgid "quarrying granite"
 msgstr "화강암 캐는 중"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:66
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:73
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:81
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:80
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:55
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:62
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:77
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:69
 msgid "No Rocks"
 msgstr "바위 없음"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:67
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:74
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:82
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:81
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:56
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:63
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:78
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:70
 msgid "Out of Rocks"
 msgstr "바위 부족"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:68
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:57
 msgctxt "atlanteans_building"
 msgid ""
 "The stonecutter working at this quarry can’t find any rocks in his work "
@@ -1588,7 +1585,7 @@ msgstr "해당 농장에서 일하는 열음지기들이 씨앗을 뿌릴 충분
 #: ../../data/tribes/buildings/productionsites/barbarians/ferry_yard/init.lua:7
 msgctxt "barbarians_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "연락선 뜰"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:7
@@ -1828,7 +1825,7 @@ msgctxt "barbarians_building"
 msgid "Quarry"
 msgstr "채석장"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:75
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:64
 msgctxt "barbarians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
@@ -2062,7 +2059,7 @@ msgstr "해당 농장에서 일하는 열음지기들이 씨앗을 뿌릴 충분
 #: ../../data/tribes/buildings/productionsites/empire/ferry_yard/init.lua:7
 msgctxt "empire_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "연락선 뜰"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:7
@@ -2247,11 +2244,11 @@ msgid "Quarry"
 msgstr "채석장"
 
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying marble because ...
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:70
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:68
 msgid "quarrying marble"
 msgstr "대리석 채석을"
 
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:83
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:79
 msgctxt "empire_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
@@ -2576,22 +2573,22 @@ msgstr "벽돌을 굽고 있음"
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:7
 msgctxt "frisians_building"
 msgid "Charcoal Burner’s House"
-msgstr ""
+msgstr "숯가마 장인의 집"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a charcoal stack
 #. because ...
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:78
 msgid "making a charcoal stack"
-msgstr ""
+msgstr "숯 더미를 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start collecting coal because ...
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:89
 msgid "collecting coal"
-msgstr ""
+msgstr "석탄을 모우고 있음"
 
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:100
 msgid "Out of Clay Ponds"
-msgstr ""
+msgstr "찰흙이 없음"
 
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:101
 msgctxt "frisians_building"
@@ -2600,7 +2597,7 @@ msgid ""
 "clay ponds in his work area. Please make sure there is a working clay pit "
 "nearby and the charcoal burner’s house is supplied with all needed wares, or"
 " consider dismantling or destroying this building."
-msgstr ""
+msgstr "이 숯가마 장인의 집에서 일하는 숯가마 장인은 그의 작업장에서 찰흙 연못을 찾을 수 없습니다.  근처에 작업용 찰흙 구덩이가 있는지 확인하고 숯가마 장인의 집에 필요한 물품을 모두 공급해 주거나, 아니면 이 건물을 해체하거나 파괴하는 것을 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:7
@@ -2722,7 +2719,7 @@ msgstr "이 심는 집에서 일하는 이가 씨앗을 심을 땅을 찾을 수
 #: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:7
 msgctxt "frisians_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "연락선 뜰"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:7
@@ -2847,7 +2844,7 @@ msgctxt "frisians_building"
 msgid "Quarry"
 msgstr "채석장"
 
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:82
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:71
 msgctxt "frisians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
@@ -3423,14 +3420,14 @@ msgstr "창고"
 #: ../../data/tribes/economy_profiles/empire:4
 #: ../../data/tribes/economy_profiles/frisians:4
 msgid "Efficiency"
-msgstr ""
+msgstr "효율"
 
 #: ../../data/tribes/economy_profiles/atlanteans:5
 #: ../../data/tribes/economy_profiles/barbarians:5
 #: ../../data/tribes/economy_profiles/empire:5
 #: ../../data/tribes/economy_profiles/frisians:5
 msgid "Stockpile"
-msgstr ""
+msgstr "비축"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/ashes/init.lua:42
@@ -3582,19 +3579,19 @@ msgstr "산자 나무 (익음)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:13
 msgid "Stink Shepherd’s Tree (tiny)"
-msgstr ""
+msgstr "냄새나는 목자나무 (새싹)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:40
 msgid "Stink Shepherd’s Tree (small)"
-msgstr ""
+msgstr "냄새나는 목자나무 (어림)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:67
 msgid "Stink Shepherd’s Tree (medium)"
-msgstr ""
+msgstr "냄새나는 목자나무 (가운데)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:94
 msgid "Stink Shepherd’s Tree (ripe)"
-msgstr ""
+msgstr "냄새나는 목자나무 (익음)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:13
 msgid "Strawberries (tiny)"
@@ -3706,13 +3703,13 @@ msgstr "포도덩굴 (새싹)"
 #: ../../data/tribes/immovables/pond/burning/init.lua:7
 msgctxt "immovable"
 msgid "Burning Charcoal Stack"
-msgstr ""
+msgstr "숯 더미를 태우고 있음"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/pond/coal/init.lua:7
 msgctxt "immovable"
 msgid "Pond With Charcoal"
-msgstr ""
+msgstr "숯 연못"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/pond/dry/init.lua:7
@@ -3736,25 +3733,25 @@ msgstr "연못 (물고기)"
 #: ../../data/tribes/immovables/reedfield/medium/init.lua:7
 msgctxt "immovable"
 msgid "Reed Field (medium)"
-msgstr ""
+msgstr "갈대 밭 (가운데)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/reedfield/ripe/init.lua:7
 msgctxt "immovable"
 msgid "Reed Field (ripe)"
-msgstr ""
+msgstr "갈대 밭 (익음)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/reedfield/small/init.lua:7
 msgctxt "immovable"
 msgid "Reed Field (small)"
-msgstr ""
+msgstr "갈대 밭 (작음)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/reedfield/tiny/init.lua:7
 msgctxt "immovable"
 msgid "Reed Field (tiny)"
-msgstr ""
+msgstr "갈대 밭 (새싹)"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:7
@@ -3763,7 +3760,7 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/frisians/init.lua:7
 msgctxt "resource_indicator"
 msgid "No Resources"
-msgstr ""
+msgstr "자원 없음"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:33
@@ -3772,7 +3769,7 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/frisians/init.lua:33
 msgctxt "resource_indicator"
 msgid "Water"
-msgstr ""
+msgstr "물"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:59
@@ -3781,7 +3778,7 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/frisians/init.lua:59
 msgctxt "resource_indicator"
 msgid "Some Coal"
-msgstr ""
+msgstr "약간의 석탄"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:85
@@ -3790,7 +3787,7 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/frisians/init.lua:85
 msgctxt "resource_indicator"
 msgid "Some Gold"
-msgstr ""
+msgstr "약간의 금"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:111
@@ -3799,13 +3796,13 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/frisians/init.lua:111
 msgctxt "resource_indicator"
 msgid "Some Iron"
-msgstr ""
+msgstr "약간의 철"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:137
 msgctxt "resource_indicator"
 msgid "Some Crystals"
-msgstr ""
+msgstr "약간의 수정"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:163
@@ -3814,7 +3811,7 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/frisians/init.lua:163
 msgctxt "resource_indicator"
 msgid "A Lot of Coal"
-msgstr ""
+msgstr "많은 석탄"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:189
@@ -3823,7 +3820,7 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/frisians/init.lua:189
 msgctxt "resource_indicator"
 msgid "A Lot of Gold"
-msgstr ""
+msgstr "많은 금"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:215
@@ -3832,39 +3829,39 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/frisians/init.lua:215
 msgctxt "resource_indicator"
 msgid "A Lot of Iron"
-msgstr ""
+msgstr "많은 철"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:241
 msgctxt "resource_indicator"
 msgid "A Lot of Crystals"
-msgstr ""
+msgstr "믾은 철"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/barbarians/init.lua:122
 #: ../../data/tribes/immovables/resi/frisians/init.lua:137
 msgctxt "resource_indicator"
 msgid "Some Granite"
-msgstr ""
+msgstr "약간의 화강암"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/barbarians/init.lua:214
 #: ../../data/tribes/immovables/resi/frisians/init.lua:241
 msgctxt "resource_indicator"
 msgid "A Lot of Granite"
-msgstr ""
+msgstr "많은 화강암"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/empire/init.lua:122
 msgctxt "resource_indicator"
 msgid "Some Marble"
-msgstr ""
+msgstr "약간의 대리석"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/empire/init.lua:214
 msgctxt "resource_indicator"
 msgid "A Lot of Marble"
-msgstr ""
+msgstr "많은 대리석"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/shipconstruction_atlanteans/init.lua:7
@@ -3879,39 +3876,39 @@ msgstr "건조 중인 선박"
 #: ../../data/tribes/immovables/wheatfield/harvested/init.lua:7
 msgctxt "immovable"
 msgid "Wheat Field (harvested)"
-msgstr ""
+msgstr "밀 밭 (수확됨)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/medium/init.lua:7
 msgctxt "immovable"
 msgid "Wheat Field (medium)"
-msgstr ""
+msgstr "밀 밭 (가운데)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/ripe/init.lua:7
 msgctxt "immovable"
 msgid "Wheat Field (ripe)"
-msgstr ""
+msgstr "밀 밭 (익음)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/small/init.lua:7
 msgctxt "immovable"
 msgid "Wheat Field (small)"
-msgstr ""
+msgstr "밀 밭 (작음)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/tiny/init.lua:7
 msgctxt "immovable"
 msgid "Wheat Field (tiny)"
-msgstr ""
+msgstr "밀 밭 (새싹)"
 
 #: ../../data/tribes/init.lua:19
 msgid "Loading tribes: %1$s (%2$d/%3$d)"
-msgstr ""
+msgstr "부족들을 불러오고 있음: %1$s (%2$d/%3$d)"
 
 #: ../../data/tribes/init.lua:33
 msgid "Ships"
-msgstr ""
+msgstr "배들"
 
 #: ../../data/tribes/init.lua:45 ../../data/tribes/scripting/help/init.lua:85
 msgid "Wares"
@@ -3924,51 +3921,51 @@ msgstr "고정물"
 
 #: ../../data/tribes/init.lua:221
 msgid "Atlantean workers"
-msgstr ""
+msgstr "아틀란티스 일꾼"
 
 #: ../../data/tribes/init.lua:254
 msgid "Barbarian workers"
-msgstr ""
+msgstr "야만족 일꾼"
 
 #: ../../data/tribes/init.lua:289
 msgid "Empire workers"
-msgstr ""
+msgstr "제국 일꾼"
 
 #: ../../data/tribes/init.lua:325
 msgid "Frisian workers"
-msgstr ""
+msgstr "프리지아 일꾼"
 
 #: ../../data/tribes/init.lua:369
 msgid "Warehouses"
-msgstr ""
+msgstr "창고들"
 
 #: ../../data/tribes/init.lua:391
 msgid "Atlantean productionsites"
-msgstr ""
+msgstr "아틀란티스 생산지"
 
 #: ../../data/tribes/init.lua:429
 msgid "Barbarian productionsites"
-msgstr ""
+msgstr "야만족 생산지"
 
 #: ../../data/tribes/init.lua:474
 msgid "Empire productionsites"
-msgstr ""
+msgstr "제국 생산지"
 
 #: ../../data/tribes/init.lua:518
 msgid "Frisian productionsites"
-msgstr ""
+msgstr "프리지아 생산지"
 
 #: ../../data/tribes/init.lua:573
 msgid "Trainingsites"
-msgstr ""
+msgstr "훈련소"
 
 #: ../../data/tribes/init.lua:590
 msgid "Militarysites"
-msgstr ""
+msgstr "군사기지"
 
 #: ../../data/tribes/init.lua:624
 msgid "Finishing"
-msgstr ""
+msgstr "마무리"
 
 #: ../../data/tribes/preload.lua:15 ../../data/tribes/preload.lua:36
 #: ../../data/tribes/preload.lua:57 ../../data/tribes/preload.lua:78
@@ -3978,7 +3975,7 @@ msgstr "Widelands 개발 팀"
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/preload.lua:17
 msgid "Barbarians"
-msgstr "야만인"
+msgstr "야만족"
 
 #: ../../data/tribes/preload.lua:18
 msgid "The mighty tribes of the east-lands."
@@ -4007,11 +4004,11 @@ msgstr "오래된 이야기로 전해진 부족. 아틀란티스의 아들딸들
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/preload.lua:80
 msgid "Frisians"
-msgstr ""
+msgstr "프리지아인"
 
 #: ../../data/tribes/preload.lua:81
 msgid "The inhabitants of the rough North Sea shore."
-msgstr ""
+msgstr "거친 북해 연안의 주민들입니다."
 
 #: ../../data/tribes/scripting/help/init.lua:54
 msgid "Tribal Encyclopedia"
@@ -4047,7 +4044,7 @@ msgstr "건물"
 #: ../../data/tribes/scripting/starting_conditions/empire/discovery.lua:11
 #: ../../data/tribes/scripting/starting_conditions/frisians/discovery.lua:11
 msgid "Discovery"
-msgstr ""
+msgstr "발견"
 
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/discovery.lua:13
@@ -4056,7 +4053,7 @@ msgstr ""
 #: ../../data/tribes/scripting/starting_conditions/frisians/discovery.lua:13
 msgid ""
 "Start the game with three ships on the ocean and only a handful of supplies"
-msgstr ""
+msgstr "바다 위의 3 척의 배와 소수의 보급품으로 게임을 시작하십시오"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:11
@@ -4097,7 +4094,7 @@ msgstr "오직 본부만 가지고 게임 시작"
 #: ../../data/tribes/scripting/starting_conditions/empire/new_world.lua:11
 #: ../../data/tribes/scripting/starting_conditions/frisians/new_world.lua:11
 msgid "New World"
-msgstr ""
+msgstr "새로운 세계"
 
 #. TRANSLATORS: This is the tooltip for the "New World" starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/new_world.lua:13
@@ -4105,7 +4102,7 @@ msgstr ""
 #: ../../data/tribes/scripting/starting_conditions/empire/new_world.lua:13
 #: ../../data/tribes/scripting/starting_conditions/frisians/new_world.lua:13
 msgid "Start the game with seven ships full of wares on the ocean"
-msgstr ""
+msgstr "7척의 배에 상품을 가득 싣고 바다 위에서 게임을 시작하십시오"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:11
@@ -4113,7 +4110,7 @@ msgstr ""
 #: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:11
 #: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:11
 msgid "Poor Hamlet"
-msgstr ""
+msgstr "불쌍한 햄릿"
 
 #. TRANSLATORS: This is the tooltip for the "Poor Hamlet" (minimum) starting
 #. condition
@@ -4124,14 +4121,14 @@ msgstr ""
 msgid ""
 "Start the game with just a warehouse and the bare minimum for bootstrapping "
 "an economy. Warning: the AI can't successfully start from this"
-msgstr ""
+msgstr "경제 성장을 위한 최소한의 창고와 최소 비용으로 게임을 시작할 수 있습니다. 경고: 여기는 인공지능이 원활하게 시작되지 않습니다"
 
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:45
 #: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:43
 #: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:44
 #: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:45
 msgid "Be careful"
-msgstr ""
+msgstr "조심하십시오"
 
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:45
 #: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:43
@@ -4140,7 +4137,7 @@ msgstr ""
 msgid ""
 "You have only one iron for each tool you will need to start your economy. "
 "Make sure no unneeded tool is created."
-msgstr ""
+msgstr "경제를 시작하기 위해 필요한 도구마다 하나의 철 만 있습니다. 불필요한 도구가 생성되지 않았는지 확인하십시오."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/struggling_outpost.lua:11
@@ -4148,7 +4145,7 @@ msgstr ""
 #: ../../data/tribes/scripting/starting_conditions/empire/struggling_outpost.lua:11
 #: ../../data/tribes/scripting/starting_conditions/frisians/struggling_outpost.lua:11
 msgid "Struggling Outpost"
-msgstr ""
+msgstr "고군분투 전초기지"
 
 #. TRANSLATORS: This is the tooltip for the "Hardcore" starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/struggling_outpost.lua:13
@@ -4158,7 +4155,7 @@ msgstr ""
 msgid ""
 "Start the game with just your headquarters and very few wares for "
 "bootstrapping an economy. Warning: the AI can't successfully start from this"
-msgstr ""
+msgstr "본부와 경제 성장을 위한 몇 가지 제품만으로 게임을 시작하십시오. 경고 : 인공지능은 여기서부터 성공적으로 시작할 수 없습니다"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:11
@@ -4646,7 +4643,7 @@ msgstr "야전식량"
 #: ../../data/tribes/wares/reed/init.lua:7
 msgctxt "ware"
 msgid "Reed"
-msgstr ""
+msgstr "갈대"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/saw/init.lua:7
@@ -4886,7 +4883,7 @@ msgstr "열음지기"
 #: ../../data/tribes/workers/atlanteans/ferry/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "연락선"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/fishbreeder/init.lua:20
@@ -5090,7 +5087,7 @@ msgstr "열음지기"
 #: ../../data/tribes/workers/barbarians/ferry/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "연락선"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/fisher/init.lua:7
@@ -5288,7 +5285,7 @@ msgstr "열음지기"
 #: ../../data/tribes/workers/empire/ferry/init.lua:7
 msgctxt "empire_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "연락선"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/fisher/init.lua:22
@@ -5516,7 +5513,7 @@ msgstr "열음지기"
 #: ../../data/tribes/workers/frisians/ferry/init.lua:7
 msgctxt "frisians_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "연락선"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/fisher/init.lua:7

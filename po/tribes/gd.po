@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-04-23 19:22+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-07-04 06:10+0000\n"
+"PO-Revision-Date: 2020-06-27 06:08+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -536,7 +536,6 @@ msgstr "Ceàrdach armachd"
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:58
 #: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:52
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:56
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:68
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:83
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:56
@@ -554,7 +553,6 @@ msgstr "Ceàrdach armachd"
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:68
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:58
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:77
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:53
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:50
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:56
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:71
@@ -586,7 +584,6 @@ msgstr "Ceàrdach armachd"
 #: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:73
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:71
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:60
 #: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:87
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:69
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:74
@@ -784,7 +781,7 @@ msgstr "daoimean a thochladh"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:164
 msgid "No Crystals"
-msgstr ""
+msgstr "Dìth criostail"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:165
 msgid "Main Crystal Vein Exhausted"
@@ -1091,28 +1088,28 @@ msgid "Quarry"
 msgstr "Cuaraidh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:55
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:62
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:46
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:53
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:60
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:69
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:60
 msgid "quarrying granite"
 msgstr "gaireal a thochladh"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:66
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:73
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:81
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:80
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:55
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:62
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:77
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:69
 msgid "No Rocks"
 msgstr "Dìth charraigean"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:67
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:74
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:82
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:81
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:56
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:63
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:78
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:70
 msgid "Out of Rocks"
 msgstr "Chan eil carraig ann"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:68
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:57
 msgctxt "atlanteans_building"
 msgid ""
 "The stonecutter working at this quarry can’t find any rocks in his work "
@@ -1830,7 +1827,7 @@ msgctxt "barbarians_building"
 msgid "Quarry"
 msgstr "Cuaraidh"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:75
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:64
 msgctxt "barbarians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
@@ -2249,11 +2246,11 @@ msgid "Quarry"
 msgstr "Cuaraidh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying marble because ...
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:70
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:68
 msgid "quarrying marble"
 msgstr "marmor a thochladh"
 
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:83
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:79
 msgctxt "empire_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
@@ -2578,22 +2575,22 @@ msgstr "breigichean a losgadh"
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:7
 msgctxt "frisians_building"
 msgid "Charcoal Burner’s House"
-msgstr ""
+msgstr "Taigh loisgeadair fiodha"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a charcoal stack
 #. because ...
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:78
 msgid "making a charcoal stack"
-msgstr ""
+msgstr "cruach guail a dhèanamh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start collecting coal because ...
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:89
 msgid "collecting coal"
-msgstr ""
+msgstr "gual a chruinneachadh"
 
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:100
 msgid "Out of Clay Ponds"
-msgstr ""
+msgstr "Chan eil poll-criadha ann"
 
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:101
 msgctxt "frisians_building"
@@ -2602,7 +2599,7 @@ msgid ""
 "clay ponds in his work area. Please make sure there is a working clay pit "
 "nearby and the charcoal burner’s house is supplied with all needed wares, or"
 " consider dismantling or destroying this building."
-msgstr ""
+msgstr "Chan urrainn dhan loisgeadair fiodha a tha ag obair aig an taigh loisgeadair fiodha seo poll-criadha a lorg taobh a-staigh an raoin-obrach tuilleadh. Dèan cinnteach gu bheil sùil-chriadha faisg air agus gu bheil an  taigh loisgeadair fiodha a’ faighinn nam batharan uile a dh’fheumas e no thoir às a chèile no mill e."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:7
@@ -2849,7 +2846,7 @@ msgctxt "frisians_building"
 msgid "Quarry"
 msgstr "Cuaraidh"
 
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:82
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:71
 msgctxt "frisians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
@@ -3425,14 +3422,14 @@ msgstr "Taigh-stòrais"
 #: ../../data/tribes/economy_profiles/empire:4
 #: ../../data/tribes/economy_profiles/frisians:4
 msgid "Efficiency"
-msgstr ""
+msgstr "Èifeachdas"
 
 #: ../../data/tribes/economy_profiles/atlanteans:5
 #: ../../data/tribes/economy_profiles/barbarians:5
 #: ../../data/tribes/economy_profiles/empire:5
 #: ../../data/tribes/economy_profiles/frisians:5
 msgid "Stockpile"
-msgstr ""
+msgstr "Stòras"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/ashes/init.lua:42
@@ -3584,19 +3581,19 @@ msgstr "Preas ràmh-dhroighinn (abaich)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:13
 msgid "Stink Shepherd’s Tree (tiny)"
-msgstr ""
+msgstr "Craobh cìobair tùdaidh (beag bìodach)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:40
 msgid "Stink Shepherd’s Tree (small)"
-msgstr ""
+msgstr "Craobh cìobair tùdaidh (beag)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:67
 msgid "Stink Shepherd’s Tree (medium)"
-msgstr ""
+msgstr "Craobh cìobair tùdaidh (meadhanach)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:94
 msgid "Stink Shepherd’s Tree (ripe)"
-msgstr ""
+msgstr "Craobh cìobair tùdaidh (abaich)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:13
 msgid "Strawberries (tiny)"
@@ -3708,13 +3705,13 @@ msgstr "Crann-fìona (beag bìodach)"
 #: ../../data/tribes/immovables/pond/burning/init.lua:7
 msgctxt "immovable"
 msgid "Burning Charcoal Stack"
-msgstr ""
+msgstr "Cruach guail ’na theine"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/pond/coal/init.lua:7
 msgctxt "immovable"
 msgid "Pond With Charcoal"
-msgstr ""
+msgstr "Poll le gual"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/pond/dry/init.lua:7
@@ -3807,7 +3804,7 @@ msgstr "Beagan iarainn"
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:137
 msgctxt "resource_indicator"
 msgid "Some Crystals"
-msgstr ""
+msgstr "Beagan chriostalan"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:163
@@ -3840,7 +3837,7 @@ msgstr "Mòran iarainn"
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:241
 msgctxt "resource_indicator"
 msgid "A Lot of Crystals"
-msgstr ""
+msgstr "Mòran chriostalan"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/barbarians/init.lua:122
@@ -3909,11 +3906,11 @@ msgstr "Achadh cruithneachd (beag bìodach)"
 
 #: ../../data/tribes/init.lua:19
 msgid "Loading tribes: %1$s (%2$d/%3$d)"
-msgstr ""
+msgstr "A’ luchdadh nan treubhan: %1$s (%2$d/%3$d)"
 
 #: ../../data/tribes/init.lua:33
 msgid "Ships"
-msgstr ""
+msgstr "Longan"
 
 #: ../../data/tribes/init.lua:45 ../../data/tribes/scripting/help/init.lua:85
 msgid "Wares"
@@ -3926,51 +3923,51 @@ msgstr "Nithean do-ghluasad"
 
 #: ../../data/tribes/init.lua:221
 msgid "Atlantean workers"
-msgstr ""
+msgstr "Luchd-obrach nan Atlantach"
 
 #: ../../data/tribes/init.lua:254
 msgid "Barbarian workers"
-msgstr ""
+msgstr "Luchd-obrach nan Tùsanach"
 
 #: ../../data/tribes/init.lua:289
 msgid "Empire workers"
-msgstr ""
+msgstr "Luchd-obrach na h-Ìmpireachd"
 
 #: ../../data/tribes/init.lua:325
 msgid "Frisian workers"
-msgstr ""
+msgstr "Luchd-obrach nam Frìoslannach"
 
 #: ../../data/tribes/init.lua:369
 msgid "Warehouses"
-msgstr ""
+msgstr "Taighean-stòrais"
 
 #: ../../data/tribes/init.lua:391
 msgid "Atlantean productionsites"
-msgstr ""
+msgstr "Togalaichean saothrachaidh nan Atlantach"
 
 #: ../../data/tribes/init.lua:429
 msgid "Barbarian productionsites"
-msgstr ""
+msgstr "Togalaichean saothrachaidh nan Tùsanach"
 
 #: ../../data/tribes/init.lua:474
 msgid "Empire productionsites"
-msgstr ""
+msgstr "Togalaichean saothrachaidh na h-Ìmpireachd"
 
 #: ../../data/tribes/init.lua:518
 msgid "Frisian productionsites"
-msgstr ""
+msgstr "Togalaichean saothrachaidh nam Frìoslannach"
 
 #: ../../data/tribes/init.lua:573
 msgid "Trainingsites"
-msgstr ""
+msgstr "Togalaichean oideachaidh"
 
 #: ../../data/tribes/init.lua:590
 msgid "Militarysites"
-msgstr ""
+msgstr "Togalaichean an airm"
 
 #: ../../data/tribes/init.lua:624
 msgid "Finishing"
-msgstr ""
+msgstr "’Ga choileanadh"
 
 #: ../../data/tribes/preload.lua:15 ../../data/tribes/preload.lua:36
 #: ../../data/tribes/preload.lua:57 ../../data/tribes/preload.lua:78
@@ -3989,11 +3986,11 @@ msgstr "Treubhan cumhachdach an taoibh an ear."
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/preload.lua:38
 msgid "Empire"
-msgstr "An Impireachd"
+msgstr "An Ìmpireachd"
 
 #: ../../data/tribes/preload.lua:39
 msgid "This is the culture of the Roman Empire."
-msgstr "Seo cultar na h-Impireachd Ròmanach."
+msgstr "Seo cultar na h-Ìmpireachd Ròmanach."
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/preload.lua:59
@@ -4049,7 +4046,7 @@ msgstr "Togalaichean"
 #: ../../data/tribes/scripting/starting_conditions/empire/discovery.lua:11
 #: ../../data/tribes/scripting/starting_conditions/frisians/discovery.lua:11
 msgid "Discovery"
-msgstr ""
+msgstr "Triall"
 
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/discovery.lua:13
@@ -4058,7 +4055,7 @@ msgstr ""
 #: ../../data/tribes/scripting/starting_conditions/frisians/discovery.lua:13
 msgid ""
 "Start the game with three ships on the ocean and only a handful of supplies"
-msgstr ""
+msgstr "Tòisich air a’ gheama le trì longan air a’ chuan agus stòras gann"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:11
@@ -4099,7 +4096,7 @@ msgstr "Tòisich an geama leis a’ phrìomh-àras agad a-mhàin"
 #: ../../data/tribes/scripting/starting_conditions/empire/new_world.lua:11
 #: ../../data/tribes/scripting/starting_conditions/frisians/new_world.lua:11
 msgid "New World"
-msgstr ""
+msgstr "Saoghal ùr"
 
 #. TRANSLATORS: This is the tooltip for the "New World" starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/new_world.lua:13
@@ -4107,7 +4104,7 @@ msgstr ""
 #: ../../data/tribes/scripting/starting_conditions/empire/new_world.lua:13
 #: ../../data/tribes/scripting/starting_conditions/frisians/new_world.lua:13
 msgid "Start the game with seven ships full of wares on the ocean"
-msgstr ""
+msgstr "Tòisich air a’ gheama le seachd longan làn stòrais air a’ chuan"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:11
@@ -4115,7 +4112,7 @@ msgstr ""
 #: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:11
 #: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:11
 msgid "Poor Hamlet"
-msgstr ""
+msgstr "Clachan bochd"
 
 #. TRANSLATORS: This is the tooltip for the "Poor Hamlet" (minimum) starting
 #. condition
@@ -4126,14 +4123,14 @@ msgstr ""
 msgid ""
 "Start the game with just a warehouse and the bare minimum for bootstrapping "
 "an economy. Warning: the AI can't successfully start from this"
-msgstr ""
+msgstr "Tòisich air a’ gheama le taigh-stòrais agus stòras èiginneach airson eaconamaidh a stèidheachadh. Rabhadh: Chan eil an IF comasach air seo"
 
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:45
 #: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:43
 #: ../../data/tribes/scripting/starting_conditions/empire/poor_hamlet.lua:44
 #: ../../data/tribes/scripting/starting_conditions/frisians/poor_hamlet.lua:45
 msgid "Be careful"
-msgstr ""
+msgstr "Thoir an aire"
 
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/poor_hamlet.lua:45
 #: ../../data/tribes/scripting/starting_conditions/barbarians/poor_hamlet.lua:43
@@ -4142,7 +4139,7 @@ msgstr ""
 msgid ""
 "You have only one iron for each tool you will need to start your economy. "
 "Make sure no unneeded tool is created."
-msgstr ""
+msgstr "Chan eil ach aon chnap iarainn agad airson gach acainn a dh’fheumas tu airson an eaconamaidh agad a stèidheachadh. Dèan cinnteach nach dèid acainn a shaothrachadh gun fheum oirre."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/struggling_outpost.lua:11
@@ -4150,7 +4147,7 @@ msgstr ""
 #: ../../data/tribes/scripting/starting_conditions/empire/struggling_outpost.lua:11
 #: ../../data/tribes/scripting/starting_conditions/frisians/struggling_outpost.lua:11
 msgid "Struggling Outpost"
-msgstr ""
+msgstr "Tuineachadh fo èiginn"
 
 #. TRANSLATORS: This is the tooltip for the "Hardcore" starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/struggling_outpost.lua:13
@@ -4160,7 +4157,7 @@ msgstr ""
 msgid ""
 "Start the game with just your headquarters and very few wares for "
 "bootstrapping an economy. Warning: the AI can't successfully start from this"
-msgstr ""
+msgstr "Tòisich air a’ gheama le prìomh-àras agus stòras gann airson eaconamaidh a stèidheachadh. Rabhadh: Chan eil an IF comasach air seo"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:11
