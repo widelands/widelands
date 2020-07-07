@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-04 06:10+0000\n"
-"PO-Revision-Date: 2020-06-30 20:32+0000\n"
+"POT-Creation-Date: 2020-07-06 06:30+0000\n"
+"PO-Revision-Date: 2020-07-06 16:49+0000\n"
 "Last-Translator: Tachionas Neonas <tachionexas@gmail.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/widelands/widelands/language/lt/)\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +25,7 @@ msgstr ""
 #: ../../data/scripting/richtext.lua:580 ../../src/base/i18n.cc:346
 #, c-format
 msgid "%1$s & %2$s"
-msgstr ""
+msgstr "%1$s & %2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -33,7 +33,7 @@ msgstr ""
 #: ../../data/scripting/richtext.lua:582 ../../src/base/i18n.cc:350
 #, c-format
 msgid "%1$s or %2$s"
-msgstr ""
+msgstr "%1$s arba %2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with a comma.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -45,7 +45,7 @@ msgstr ""
 #: ../../src/base/i18n.cc:354 ../../src/base/i18n.cc:363
 #, c-format
 msgid "%1$s, %2$s"
-msgstr ""
+msgstr "%1$s, %2$s"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -53,25 +53,25 @@ msgstr ""
 #: ../../data/scripting/richtext.lua:586 ../../src/base/i18n.cc:358
 #, c-format
 msgid "%1$s and %2$s"
-msgstr ""
+msgstr "%1$s ir %2$s"
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
 #. TRANSLATORS: Terrain name (Climate)
 #: ../../data/scripting/help.lua:46 ../../src/scripting/lua_game.cc:1086
 msgid "%1% (%2%)"
-msgstr ""
+msgstr "%1% (%2%)"
 
 #. TRANSLATORS: Help text - Probability to grow for an immovable
 #: ../../data/scripting/help.lua:48
 #, lua-format
 msgid "%2.1f%%"
-msgstr ""
+msgstr "%2.1f%%"
 
 #. TRANSLATORS: Short for "Not enough space"
 #: ../../data/scripting/infrastructure.lua:173
 msgid "No Space"
-msgstr ""
+msgstr "Nėra vietos"
 
 #: ../../data/scripting/infrastructure.lua:174
 msgid ""
@@ -92,7 +92,7 @@ msgstr "Netoliese nėra akmens"
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr ""
+msgstr "Šalia tavo pradinės padėties nėra akmens. Todėl ekonomikos vystymui gauni papildomų išteklių."
 
 #: ../../data/scripting/infrastructure.lua:251
 msgid "No trees nearby"
@@ -102,7 +102,7 @@ msgstr "Netoliese nėra medžių"
 msgid ""
 "There are no trees near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr ""
+msgstr "Šalia tavo pradinės padėties nėra medžių. Todėl ekonomikos vystymui gauni papildomų išteklių."
 
 #: ../../data/scripting/messages.lua:53 ../../data/scripting/messages.lua:55
 #: ../../src/wui/game_message_menu.cc:68 ../../src/wui/game_summary.cc:104
@@ -111,11 +111,11 @@ msgstr "Būsena"
 
 #: ../../data/scripting/messages.lua:191
 msgid "New Objective"
-msgstr ""
+msgstr "Naujas tikslas"
 
 #: ../../data/scripting/messages.lua:193
 msgid "New Objectives"
-msgstr ""
+msgstr "Nauji tikslai"
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
@@ -124,12 +124,12 @@ msgstr ""
 #, lua-format
 msgctxt "sentence_separator"
 msgid "%s %s"
-msgstr ""
+msgstr "%s %s"
 
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:43
@@ -158,7 +158,7 @@ msgstr "Labai silpnas DI"
 #: ../../src/base/i18n.cc:373
 msgctxt "sentence_separator"
 msgid "%1% %2%"
-msgstr ""
+msgstr "%1% %2%"
 
 #. * TRANSLATORS: January. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -338,7 +338,7 @@ msgstr "Įkelti žemėlapį"
 #: ../../src/editor/editorinteractive.cc:193
 msgctxt "hotkey"
 msgid "Ctrl+L"
-msgstr ""
+msgstr "Ctrl+L"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:199
@@ -349,7 +349,7 @@ msgstr "Įrašyti žemėlapį"
 #: ../../src/editor/editorinteractive.cc:201
 msgctxt "hotkey"
 msgid "Ctrl+S"
-msgstr ""
+msgstr "Ctrl+S"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:207
@@ -436,12 +436,12 @@ msgstr "Nustatyti ar pakeisti išteklius"
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:300
 msgid "Port spaces"
-msgstr ""
+msgstr "Erdvės uostui"
 
 #. * TRANSLATORS: Tooltip for the port spaces tool in the editor
 #: ../../src/editor/editorinteractive.cc:303
 msgid "Add or remove port spaces"
-msgstr ""
+msgstr "Pridėti ar pašalinti erdves uostui"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:309
@@ -452,7 +452,7 @@ msgstr "Žaidėjai"
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
 #: ../../src/editor/editorinteractive.cc:312
 msgid "Set number of players and their names, tribes and starting positions"
-msgstr ""
+msgstr "Nustatyti žaidėjų skaičių ir jų vardus, gentis ir pradines padėtis "
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:315
@@ -495,18 +495,18 @@ msgstr "Paspauskite ant laukelio, kad būtų rodoma informacija apie jį"
 #: ../../src/editor/editorinteractive.cc:392
 #: ../../src/wui/interactive_gamebase.cc:215
 msgid "Hide Building Spaces"
-msgstr ""
+msgstr "Paslėpti erdves statiniams"
 
 #: ../../src/editor/editorinteractive.cc:392
 #: ../../src/wui/interactive_gamebase.cc:215
 msgid "Show Building Spaces"
-msgstr ""
+msgstr "Rodyti erdves statiniams"
 
 #: ../../src/editor/editorinteractive.cc:395
 #: ../../src/wui/interactive_gamebase.cc:218
 msgctxt "hotkey"
 msgid "Space"
-msgstr ""
+msgstr "Erdvės"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
@@ -551,14 +551,14 @@ msgstr "Rodyti išteklius"
 
 #: ../../src/editor/editorinteractive.cc:450
 msgid "Unsupported Format"
-msgstr ""
+msgstr "Nepalaikomas formatas"
 
 #: ../../src/editor/editorinteractive.cc:451
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
-msgstr ""
+msgstr "Widelands negali paleisti failo \"%s\" . Failo formatas atrodo yra nesuderinamas."
 
 #: ../../src/editor/editorinteractive.cc:459
 msgid "Creating players"
@@ -570,7 +570,7 @@ msgstr "Neįrašytas žemėlapis"
 
 #: ../../src/editor/editorinteractive.cc:512
 msgid "The map has not been saved, do you really want to quit?"
-msgstr ""
+msgstr "Žemėlapis nebuvo išsaugotas. Ar tikrai norite išeiti? "
 
 #: ../../src/editor/editorinteractive.cc:958
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:99
@@ -615,7 +615,7 @@ msgstr ""
 #: ../../src/editor/tools/info_tool.cc:52
 #, c-format
 msgid "Coordinates: (%1$i, %2$i)"
-msgstr ""
+msgstr "Koordinatės: (%1$i, %2$i)"
 
 #. * TRANSLATORS: Editor terrain property: small building plot
 #: ../../src/editor/tools/info_tool.cc:61
@@ -678,7 +678,7 @@ msgstr "Priklauso: —"
 #, c-format
 msgctxt "terrain_name"
 msgid "Name: %s"
-msgstr ""
+msgstr "Vardas: %s"
 
 #. * TRANSLATORS: "Is" is a list of terrain properties, e.g. "arable,
 #. unreachable and
@@ -722,7 +722,7 @@ msgstr "Laivai: %s"
 #: ../../src/editor/tools/info_tool.cc:200
 msgctxt "resources"
 msgid "%1%x %2%"
-msgstr ""
+msgstr "%1% x %2%"
 
 #: ../../src/editor/tools/info_tool.cc:207
 #: ../../src/ui_fsmenu/launch_mpg.cc:61 ../../src/ui_fsmenu/launch_mpg.cc:146
@@ -809,7 +809,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:52
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:136
 msgid "Show Map Names"
-msgstr ""
+msgstr "Parodyti žemėlapio pavadinimus"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:66
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:60
@@ -849,11 +849,11 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:110
 msgid "Map name:"
-msgstr ""
+msgstr "Žemėlapio pavadinimas:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:114
 msgid "Authors:"
-msgstr ""
+msgstr "Autoriai:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:118
 msgid "Description:"
@@ -861,15 +861,15 @@ msgstr "Aprašymas:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:122
 msgid "Hint (optional):"
-msgstr ""
+msgstr "Užuomina (neprivaloma):"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:129
 msgid "Tags:"
-msgstr ""
+msgstr "Žymės:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:143
 msgid "Waterway length limit:"
-msgstr ""
+msgstr "Vandens kelio ilgio riba:"
 
 #. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:152
@@ -901,7 +901,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:179
 msgid "Teams"
-msgstr ""
+msgstr "Komandos"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:208
 #, c-format
@@ -910,7 +910,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:60
 msgid "Create Map"
-msgstr ""
+msgstr "Sukurti žemėlapį"
 
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:73
 msgid "Terrain:"
@@ -919,69 +919,69 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:70
 #: ../../src/wui/gamedetails.cc:166
 msgid "Players:"
-msgstr ""
+msgstr "Žaidėjai:"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:76
 msgid "Summer"
-msgstr ""
+msgstr "Vasara"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:78
 msgid "Winter"
-msgstr ""
+msgstr "Žiema"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:80
 msgid "Desert"
-msgstr ""
+msgstr "Dykuma"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:82
 msgid "Wasteland"
-msgstr ""
+msgstr "Dykvietė"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:87
 msgid "Low"
-msgstr ""
+msgstr "Žemas"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:89
 msgid "Medium"
-msgstr ""
+msgstr "Vidutinis"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:91
 msgid "High"
-msgstr ""
+msgstr "Aukštas"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:96
 msgid "Climate:"
-msgstr ""
+msgstr "Klimatas:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:97
 msgid "Resources:"
-msgstr ""
+msgstr "Ištekliai:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:128
 msgid "Water:"
-msgstr ""
+msgstr "Vanduo:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:141
 msgid "Land:"
-msgstr ""
+msgstr "Žemė:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:154
 msgid "Wasteland:"
-msgstr ""
+msgstr "Dykvietė:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:159
 msgid "Mountains:"
-msgstr ""
+msgstr "Kalnai:"
 
 #. * TRANSLATORS: A spinbox unit
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:165
@@ -989,7 +989,7 @@ msgstr ""
 #: ../../src/ui_basic/spinbox.cc:321
 #, c-format
 msgid "%i %%"
-msgstr ""
+msgstr "%i %%"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:167
 msgid "Island mode"
@@ -997,7 +997,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:170
 msgid "Random number:"
-msgstr ""
+msgstr "Atsitiktinis skaičius:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:177
 msgid "Map ID:"
@@ -1005,18 +1005,18 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:189
 msgid "Generate Map"
-msgstr ""
+msgstr "Sugeneruoti žemėlapį"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:477
 msgid "Generating random map…"
-msgstr ""
+msgstr "Generuojamas atsitiktinis žemėlapis..."
 
 #. * TRANSLATORS: Window title. This is shown after a random map has been
 #. created in the
 #. editor.
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:514
 msgid "Random Map"
-msgstr ""
+msgstr "Atsitiktinis žemėlapis"
 
 #. * TRANSLATORS: This is shown after a random map has been created in the
 #. editor.
@@ -1035,27 +1035,27 @@ msgstr ""
 #: ../../src/wui/game_main_menu_save_game.cc:66
 #: ../../src/wui/gamedetails.cc:183
 msgid "Filename:"
-msgstr ""
+msgstr "Failo pavadinimas:"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:69
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:31
 msgid "Make Directory"
-msgstr ""
+msgstr "Sukurti katalogą:"
 
 #. * TRANSLATORS: A folder that hasn't been given a name yet
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:160
 #: ../../src/ui_fsmenu/internet_lobby.cc:449
 msgid "unnamed"
-msgstr ""
+msgstr "be pavadinimo"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:169
 msgid "A file or directory with that name already exists."
-msgstr ""
+msgstr "Failas arba katalogas su tokiu pavadinimu jau naudojamas."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:171
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:186
 msgid "Error Creating Directory!"
-msgstr ""
+msgstr "Klaida kuriant katalogą!"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:184
 #, c-format
@@ -1071,7 +1071,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:309
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:362
 msgid "Error Saving Map!"
-msgstr ""
+msgstr "Klaida išsaugojant žemėlapį!"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:356
 msgid "Map saved"
@@ -1139,7 +1139,7 @@ msgstr "Žaidėjų skaičius"
 #: ../../src/wui/multiplayersetupgroup.cc:193
 #, c-format
 msgid "Player %u"
-msgstr ""
+msgstr "Žaidėjas %u"
 
 #. * TRANSLATORS: Header for campaign tribe
 #: ../../src/editor/ui_menus/player_menu.cc:172
@@ -1147,38 +1147,38 @@ msgstr ""
 #: ../../src/ui_fsmenu/campaigndetails.cc:56
 #: ../../src/wui/multiplayersetupgroup.cc:213
 msgid "Tribe"
-msgstr ""
+msgstr "Gentis"
 
 #: ../../src/editor/ui_menus/player_menu.cc:180
 #: ../../src/wui/multiplayersetupgroup.cc:474
 #: ../../src/wui/playerdescrgroup.cc:162
 msgctxt "tribe"
 msgid "Random"
-msgstr ""
+msgstr "Atsitiktinis"
 
 #: ../../src/editor/ui_menus/player_menu.cc:182
 #: ../../src/wui/multiplayersetupgroup.cc:476
 msgid "The tribe will be selected at random"
-msgstr ""
+msgstr "Gentis bus pasirinkta atsitiktinai"
 
 #. * TRANSLATORS: Button tooltip in the editor for using a player's starting
 #. position tool
 #: ../../src/editor/ui_menus/player_menu.cc:200
 msgid "Set this player’s starting position"
-msgstr ""
+msgstr "Nustatyti šio žaidėjo pradinę padėtį"
 
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:32
 msgid "Height Tools Options"
-msgstr ""
+msgstr "Aukščio nustatymo parinktys"
 
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:44
 msgid "Increase/Decrease height by:"
-msgstr ""
+msgstr "Padidinti/sumažinti aukštį:"
 
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:56
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:71
 msgid "Set height to:"
-msgstr ""
+msgstr "Nustatyti aukštį lygu:"
 
 #. * TRANSLATORS: Editor change height access keys. *
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:61
@@ -1221,11 +1221,11 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:47
 msgid "Minimum height:"
-msgstr ""
+msgstr "Mažiausias aukštis:"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:59
 msgid "Maximum height:"
-msgstr ""
+msgstr "Didžiausias aukštis:"
 
 #. * TRANSLATORS: Editor random height access key. *
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:76
@@ -1283,11 +1283,11 @@ msgstr ""
 
 #: ../../src/game_io/game_loader.cc:116 ../../src/game_io/game_saver.cc:88
 msgid "Economies"
-msgstr ""
+msgstr "Ekonomikos"
 
 #: ../../src/game_io/game_loader.cc:124 ../../src/game_io/game_saver.cc:96
 msgid "AI"
-msgstr ""
+msgstr "DI"
 
 #: ../../src/game_io/game_loader.cc:132 ../../src/game_io/game_saver.cc:104
 msgid "Command queue"
@@ -1321,7 +1321,7 @@ msgstr ""
 #: ../../src/graphic/gl/initialize.cc:203
 #, c-format
 msgid "ERROR: %s\n"
-msgstr ""
+msgstr "KLAIDA: %s\n"
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1400,7 +1400,7 @@ msgstr ""
 #. console
 #: ../../src/io/profile.cc:43
 msgid "yes"
-msgstr ""
+msgstr "taip"
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -1421,7 +1421,7 @@ msgstr ""
 #. console
 #: ../../src/io/profile.cc:56
 msgid "no"
-msgstr ""
+msgstr "Kuriami žaidėjai...  "
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -1470,7 +1470,7 @@ msgstr "Įkeliamos gentys..."
 
 #: ../../src/logic/game.cc:232 ../../src/logic/game.cc:286
 msgid "Creating players…"
-msgstr ""
+msgstr "Kuriami žaidėjai..."
 
 #: ../../src/logic/game.cc:249 ../../src/logic/game.cc:314
 msgid "Loading map…"
@@ -3199,7 +3199,7 @@ msgstr "Komanda"
 
 #: ../../src/ui_fsmenu/launch_spg.cc:80
 msgid "Player’s tribe"
-msgstr ""
+msgstr "Žaidėjo gentis"
 
 #: ../../src/ui_fsmenu/launch_spg.cc:86
 msgid "Start type"
@@ -3263,7 +3263,7 @@ msgstr "Nustatymai"
 
 #: ../../src/ui_fsmenu/main.cc:53
 msgid "Exit Widelands"
-msgstr ""
+msgstr "Išeiti iš Widelands"
 
 #. * TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release"
 #: ../../src/ui_fsmenu/main.cc:63
@@ -3286,7 +3286,7 @@ msgstr "Pasirinkite žemėlapį"
 
 #: ../../src/ui_fsmenu/mapselect.cc:88
 msgid "Show all maps"
-msgstr ""
+msgstr "Rodyti visus žemėlapius"
 
 #: ../../src/ui_fsmenu/mapselect.cc:107
 msgid "Official & Unofficial"
