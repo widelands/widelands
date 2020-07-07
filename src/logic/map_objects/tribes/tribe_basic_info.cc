@@ -65,13 +65,13 @@ std::vector<TribeBasicInfo> get_all_tribeinfos() {
     FilenameSet dirs = g_fs->list_directory("tribes/tribes");
     for (const std::string& dir : dirs) {
         for (const std::string& file :g_fs->list_directory(dir)) {
-            if (strcmp(g_fs->fs_filename(file.c_str()), "menu.lua") == 0) {
+            if (strcmp(g_fs->fs_filename(file.c_str()), "init.lua") == 0) {
                 tribeinfos.push_back(Widelands::TribeBasicInfo(lua.run_script(file)));
             }
         }
     }
     if (tribeinfos.empty()) {
-        throw GameDataError("No tribe infos found at 'tribes/tribes/<tribename>/menu.lua'");
+        throw GameDataError("No tribe infos found at 'tribes/tribes/<tribename>/init.lua'");
     }
 	return tribeinfos;
 }

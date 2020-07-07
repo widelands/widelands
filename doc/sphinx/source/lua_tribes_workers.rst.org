@@ -42,6 +42,8 @@ translations for strings in this table.
     *Optional*. An int defining the default target quantity for the worker's
     tribe's economy. Use this if the worker is produced by a production site
     rather than the warehouses. For example, ``default_target_quantity = 10``
+    **NOTE: This parameter has been shifted to tribes initialization in the current
+    development version.**
 
 **experience**
     *Optional*. The amount of experience that the worker needs to gather
@@ -82,6 +84,8 @@ translations for strings in this table.
         **preciousness**: How precious this worker is to each tribe. For example,
         ``{ atlanteans = 0, empire = 1 }``. You can use this for workers that are recruited.
 
+    **NOTE: This parameter has been shifted to tribes initialization in the current
+    development version.**
 
 .. _lua_tribes_workers_helptexts:
 

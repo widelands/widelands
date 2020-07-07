@@ -62,7 +62,7 @@ make sure that you don't combine any incompatible features (for example,
 ``shipyard`` and ``mines`` don't combine).
 
 With the exception of the barracks and the building that produces carrier2
-(see: :ref:`lua_tribes_<tribename>.lua`), production of workers in production sites
+(see: :ref:`lua_tribes_tribes_units`), production of workers in production sites
 is not supported at this time.
 
 .. _ai_hints_common:
