@@ -70,7 +70,7 @@
 --
 --       wares_order = {
 --          {
-             -- Building Materials
+--             -- Building Materials
 --             {
 --                name = "granite",
 --                default_target_quantity = 20,
