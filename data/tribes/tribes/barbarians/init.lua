@@ -71,58 +71,212 @@ tribes:new_tribe {
    wares_order = {
       {
          -- Building Materials
-         "granite",
-         "log",
-         "blackwood",
-         "grout",
-         "reed",
-         "cloth"
+         {
+            name = "granite",
+            default_target_quantity = 20,
+            preciousness = 5
+         },
+         {
+            name = "log",
+            preciousness = 14
+         },
+         {
+            name = "blackwood",
+            default_target_quantity = 40,
+            preciousness = 10
+         },
+         {
+            name = "grout",
+            default_target_quantity = 10,
+            preciousness = 5
+         },
+         {
+            name = "reed",
+            preciousness = 5
+         },
+         {
+            name = "cloth",
+            default_target_quantity = 10,
+            preciousness = 0
+         }
       },
       {
          -- Food
-          "fish",
-          "meat",
-          "water",
-          "wheat",
-          "barbarians_bread",
-          "beer",
-          "beer_strong",
-          "ration",
-          "snack",
-          "meal"
+         {
+            name = "fish",
+            preciousness = 3
+         },
+         {
+            name = "meat",
+            preciousness = 3
+         },
+         {
+            name = "water",
+            preciousness = 8
+         },
+         {
+            name = "wheat",
+            preciousness = 12
+         },
+         {
+            name = "barbarians_bread",
+            default_target_quantity = 20,
+            preciousness = 4
+         },
+         {
+            name = "beer",
+            default_target_quantity = 15,
+            preciousness =  2
+         },
+         {
+            name = "beer_strong",
+            default_target_quantity = 15,
+            preciousness = 2
+         },
+         {
+            name = "ration",
+            default_target_quantity = 20,
+            preciousness = 5
+         },
+         {
+            name = "snack",
+            default_target_quantity = 15,
+            preciousness = 5
+         },
+         {
+            name = "meal",
+            default_target_quantity = 10,
+            preciousness = 5
+         }
       },
       {
          -- Mining
-          "coal",
-          "iron_ore",
-          "iron",
-          "gold_ore",
-          "gold"
+         {
+            name = "coal",
+            default_target_quantity = 20,
+            preciousness = 20
+         },
+         {
+            name = "iron_ore",
+            default_target_quantity = 15,
+            preciousness = 4
+         },
+         {
+            name = "iron",
+            default_target_quantity = 20,
+            preciousness = 4
+         },
+         {
+            name = "gold_ore",
+            default_target_quantity = 15,
+            preciousness = 2
+         },
+         {
+            name = "gold",
+            default_target_quantity = 20,
+            preciousness = 2
+         }
       },
       {
          -- Tools
-          "pick",
-          "felling_ax",
-          "shovel",
-          "hammer",
-          "fishing_rod",
-          "hunting_spear",
-          "scythe",
-          "bread_paddle",
-          "kitchen_tools",
-          "fire_tongs"
+         {
+            name = "pick",
+            default_target_quantity = 2,
+            preciousness = 1
+         },
+         {
+            name = "felling_ax",
+            default_target_quantity = 5,
+            preciousness = 3
+         },
+         {
+            name = "shovel",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "hammer",
+            default_target_quantity = 2,
+            preciousness = 1
+         },
+         {
+            name = "fishing_rod",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "hunting_spear",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "scythe",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "bread_paddle",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "kitchen_tools",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "fire_tongs",
+            default_target_quantity = 1,
+            preciousness = 0,
+         }
       },
       {
          -- Weapons & Armor
-          "ax",
-          "ax_sharp",
-          "ax_broad",
-          "ax_bronze",
-          "ax_battle",
-          "ax_warriors",
-          "helmet",
-          "helmet_mask",
-          "helmet_warhelm"
+         {
+            name = "ax",
+            default_target_quantity = 30,
+            preciousness = 3
+         },
+         {
+            name = "ax_sharp",
+            default_target_quantity = 1,
+            preciousness = 1
+         },
+         {
+            name = "ax_broad",
+            default_target_quantity = 1,
+            preciousness = 1
+         },
+         {
+            name = "ax_bronze",
+            default_target_quantity = 1,
+            preciousness = 1
+         },
+         {
+            name = "ax_battle",
+            default_target_quantity = 1,
+            preciousness = 1
+         },
+         {
+            name = "ax_warriors",
+            default_target_quantity = 1,
+            preciousness = 1
+         },
+         {
+            name = "helmet",
+            default_target_quantity = 1,
+            preciousness = 1
+         },
+         {
+            name = "helmet_mask",
+            default_target_quantity = 1,
+            preciousness = 1
+         },
+         {
+            name = "helmet_warhelm",
+            default_target_quantity = 1,
+            preciousness = 2
+         }
       }
    },
 

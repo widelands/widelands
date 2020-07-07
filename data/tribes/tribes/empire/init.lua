@@ -64,62 +64,232 @@ tribes:new_tribe {
    wares_order = {
       {
          -- Building Materials
-         "granite",
-         "log",
-         "planks",
-         "wool",
-         "cloth"
+         {
+            name = "granite",
+            default_target_quantity = 30,
+            preciousness = 0
+         },
+         {
+            name = "log",
+            preciousness = 14
+         },
+         {
+            name = "planks",
+            default_target_quantity = 20,
+            preciousness = 10
+         },
+         {
+            name = "wool",
+            default_target_quantity = 10,
+            preciousness = 2
+         },
+         {
+            name = "cloth",
+            default_target_quantity = 15,
+            preciousness = 1
+         }
       },
       {
          -- Food
-         "fish",
-         "meat",
-         "water",
-         "wheat",
-         "flour",
-         "empire_bread",
-         "beer",
-         "grape",
-         "wine",
-         "ration",
-         "meal"
+         {
+            name = "fish",
+            preciousness = 3
+         },
+         {
+            name = "meat",
+            default_target_quantity = 20,
+            preciousness = 2
+         },
+         {
+            name = "water",
+            preciousness = 7
+         },
+         {
+            name = "wheat",
+            preciousness = 12
+         },
+         {
+            name = "flour",
+            default_target_quantity = 20,
+            preciousness = 9
+         },
+         {
+            name = "empire_bread",
+            default_target_quantity = 20,
+            preciousness = 7
+         },
+         {
+            name = "beer",
+            default_target_quantity = 15,
+            preciousness = 5
+         },
+         {
+            name = "grape",
+            preciousness = 10
+         },
+         {
+            name = "wine",
+            preciousness = 8
+         },
+         {
+            name = "ration",
+            default_target_quantity = 20,
+            preciousness = 4
+         },
+         {
+            name = "meal",
+            default_target_quantity = 20,
+            preciousness = 4
+         }
       },
       {
          -- Mining
-         "marble",
-         "marble_column",
-         "coal",
-         "iron_ore",
-         "iron",
-         "gold_ore",
-         "gold"
+         {
+            name = "marble",
+            default_target_quantity = 30,
+            preciousness = 3
+         },
+         {
+            name = "marble_column",
+            default_target_quantity = 10,
+            preciousness = 5
+         },
+         {
+            name = "coal",
+            default_target_quantity = 20,
+            preciousness = 10
+         },
+         {
+            name = "iron_ore",
+            default_target_quantity = 15,
+            preciousness = 4
+         },
+         {
+            name = "iron",
+            default_target_quantity = 20,
+            preciousness = 4
+         },
+         {
+            name = "gold_ore",
+            default_target_quantity = 15,
+            preciousness = 2
+         },
+         {
+            name = "gold",
+            default_target_quantity = 20,
+            preciousness = 2
+         }
       },
       {
          -- Tools
-         "pick",
-         "felling_ax",
-         "saw",
-         "shovel",
-         "hammer",
-         "fishing_rod",
-         "hunting_spear",
-         "scythe",
-         "bread_paddle",
-         "basket",
-         "kitchen_tools",
-         "fire_tongs"
+         {
+            name = "pick",
+            default_target_quantity = 2,
+            preciousness = 1
+         },
+         {
+            name = "felling_ax",
+            default_target_quantity = 3,
+            preciousness = 1
+         },
+         {
+            name = "saw",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "shovel",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "hammer",
+            default_target_quantity = 2,
+            preciousness = 1
+         },
+         {
+            name = "fishing_rod",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "hunting_spear",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "scythe",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "bread_paddle",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "basket",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "kitchen_tools",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "fire_tongs",
+            default_target_quantity = 1,
+            preciousness = 0
+         }
       },
       {
          -- Weapons & Armor
-         "spear_wooden",
-         "spear",
-         "spear_advanced",
-         "spear_heavy",
-         "spear_war",
-         "armor_helmet",
-         "armor",
-         "armor_chain",
-         "armor_gilded"
+         {
+            name = "spear_wooden",
+            default_target_quantity = 30,
+            preciousness = 1
+         },
+         {
+            name = "spear",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "spear_advanced",
+            default_target_quantity = 1,
+            preciousness = 1
+         },
+         {
+            name = "spear_heavy",
+            default_target_quantity = 1,
+            preciousness = 1
+         },
+         {
+            name = "spear_war",
+            default_target_quantity = 1,
+            preciousness = 1
+         },
+         {
+            name = "armor_helmet",
+            default_target_quantity = 30,
+            preciousness = 2
+         },
+         {
+            name = "armor",
+            default_target_quantity = 1,
+            preciousness = 0,
+         },
+         {
+            name = "armor_chain",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "armor_gilded",
+            default_target_quantity = 1,
+            preciousness = 1
+         }
       }
    },
    -- Workers positions in workers windows.

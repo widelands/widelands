@@ -7,18 +7,6 @@ tribes:new_ware_type {
    descname = pgettext("ware", "Fire Tongs"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      atlanteans = 1,
-      barbarians = 1,
-      empire = 1,
-      frisians = 2,
-   },
-   preciousness = {
-      atlanteans = 0,
-      barbarians = 0,
-      frisians = 0,
-      empire = 0
-   },
 
    animations = {
       idle = {

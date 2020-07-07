@@ -7,12 +7,6 @@ tribes:new_ware_type {
    descname = pgettext("ware", "Hook Pole"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      atlanteans = 1
-   },
-   preciousness = {
-      atlanteans = 0
-   },
 
    animations = {
       idle = {

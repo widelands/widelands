@@ -10,12 +10,6 @@ tribes:new_ware_type {
    descname = pgettext("ware", "Golden Fur Garment"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      frisians = 2,
-   },
-   preciousness = {
-      frisians = 3,
-   },
 
    animations = animations,
 }

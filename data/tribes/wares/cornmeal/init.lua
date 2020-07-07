@@ -7,12 +7,6 @@ tribes:new_ware_type {
    descname = pgettext("ware", "Cornmeal"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      atlanteans = 15
-   },
-   preciousness = {
-      atlanteans = 7
-   },
 
    animations = {
       idle = {

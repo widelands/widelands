@@ -231,22 +231,31 @@ void TribeDescr::load_ships(const LuaTable& table, Tribes& tribes) {
 void TribeDescr::load_wares(const LuaTable& table, Tribes& tribes) {
 	std::unique_ptr<LuaTable> items_table = table.get_table("wares_order");
 
-	for (const int key : items_table->keys<int>()) {
+	for (const int column_key : items_table->keys<int>()) {
 		std::vector<DescriptionIndex> column;
-		std::vector<std::string> warenames =
-		   items_table->get_table(key)->array_entries<std::string>();
-		for (size_t rowindex = 0; rowindex < warenames.size(); ++rowindex) {
+        std::unique_ptr<LuaTable> column_table = items_table->get_table(column_key);
+		for (const int ware_key : column_table->keys<int>()) {
+            std::unique_ptr<LuaTable> ware_table = column_table->get_table(ware_key);
+            std::string ware_name = ware_table->get_string("name");
 			try {
-				DescriptionIndex wareindex = tribes.load_ware(warenames[rowindex]);
+				DescriptionIndex wareindex = tribes.load_ware(ware_name);
 				if (has_ware(wareindex)) {
-					throw GameDataError(
-					   "Duplicate definition of ware '%s'", warenames[rowindex].c_str());
+					throw GameDataError("Duplicate definition of ware");
 				}
+
+                // Set default_target_quantity (optional) and preciousness
+                WareDescr* ware_descr = tribes.get_mutable_ware_descr(wareindex);
+                if (ware_table->has_key("default_target_quantity")) {
+                    ware_descr->set_default_target_quantity(name(), ware_table->get_int("default_target_quantity"));
+                }
+                ware_descr->set_preciousness(name(), ware_table->get_int("preciousness"));
+
+                // Add to tribe
 				wares_.insert(wareindex);
 				column.push_back(wareindex);
 			} catch (const WException& e) {
 				throw GameDataError(
-				   "Failed adding ware '%s: %s", warenames[rowindex].c_str(), e.what());
+				   "Failed adding ware '%s': %s", ware_name.c_str(), e.what());
 			}
 		}
 		if (!column.empty()) {

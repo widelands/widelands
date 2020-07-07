@@ -51,7 +51,12 @@ public:
 	/// The special value kInvalidWare means that the target quantity of this ware type will never be
 	/// checked
 	///  and should not be configurable.
-	DescriptionIndex default_target_quantity(const std::string& tribename) const;
+	Quantity default_target_quantity(const std::string& tribename) const;
+    /// Sets the default target quantity for the given tribe. Overwrites if it already exists.
+    void set_default_target_quantity(const std::string& tribename, int quantity);
+
+    /// This is an AI hint
+    void set_preciousness(const std::string& tribename, int preciousness);
 
 	bool has_demand_check(const std::string& tribename) const;
 
@@ -72,7 +77,7 @@ public:
 
 private:
 	// tribename, quantity. No default.
-	std::unordered_map<std::string, int> default_target_quantities_;
+	std::unordered_map<std::string, Quantity> default_target_quantities_;
 
 	// Hints for the AI
 	std::unique_ptr<WareHints> ai_hints_;

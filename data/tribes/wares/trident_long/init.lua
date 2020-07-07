@@ -7,12 +7,6 @@ tribes:new_ware_type {
    descname = pgettext("ware", "Long Trident"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      atlanteans = 1
-   },
-   preciousness = {
-      atlanteans = 1
-   },
 
    animations = {
       idle = {

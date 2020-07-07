@@ -7,12 +7,6 @@ tribes:new_ware_type {
    descname = pgettext("ware", "Spider Silk"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      atlanteans = 10
-   },
-   preciousness = {
-      atlanteans = 11
-   },
 
    animations = {
       idle = {

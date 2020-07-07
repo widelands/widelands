@@ -15,6 +15,8 @@
 -- the function out of ``data/tribes/wares/bread_paddle/helptexts.lua``
 -- and use it as a base for creating your ware's helptexts.
 
+-- NOCOM document tribe-specific helptexts, default_target_quantity & preciousness
+
 dirname = path.dirname(__file__)
 
 -- RST
@@ -58,12 +60,7 @@ tribes:new_ware_type {
    descname = pgettext("ware", "Armor"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      empire = 1
-   },
-   preciousness = {
-      empire = 0
-   },
+
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle.png"),

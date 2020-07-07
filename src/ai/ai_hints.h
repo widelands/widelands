@@ -140,16 +140,16 @@ struct WareWorkerHints {
 	int preciousness(const std::string& tribename) const;
 
 protected:
-	void read_preciousness(const std::string& name, const LuaTable& table);
+    void check_preciousness(const std::string& ware_worker, const std::string& tribe, int value);
 
-private:
 	// tribename, preciousness. No default.
 	std::unordered_map<std::string, int> preciousnesses_;
 };
 
 /// Hints for wares
 struct WareHints : WareWorkerHints {
-	explicit WareHints(const std::string& ware_name, const LuaTable& table);
+    WareHints();
+    void set_preciousness(const std::string& ware_name, const std::string& tribe_name, int preciousness);
 };
 
 /// Hints for workers

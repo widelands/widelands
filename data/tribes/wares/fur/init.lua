@@ -7,12 +7,6 @@ tribes:new_ware_type {
    descname = pgettext("ware", "Fur"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      frisians = 10,
-   },
-   preciousness = {
-      frisians = 1,
-   },
 
    animations = {
       idle = {

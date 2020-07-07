@@ -132,62 +132,232 @@ tribes:new_tribe {
    wares_order = {
       {
          -- Building Materials
-         "granite",
-         "log",
-         "planks",
-         "spider_silk",
-         "spidercloth"
+         {
+            name = "granite",
+            default_target_quantity = 20,
+            preciousness = 5
+         },
+         {
+            name = "log",
+            preciousness = 14
+         },
+         {
+            name = "planks",
+            default_target_quantity = 40,
+            preciousness = 10
+         },
+         {
+            name = "spider_silk",
+            default_target_quantity = 10,
+            preciousness = 11
+         },
+         {
+            name = "spidercloth",
+            default_target_quantity = 20,
+            preciousness = 7
+         },
       },
       {
          -- Food
-         "fish",
-         "smoked_fish",
-         "meat",
-         "smoked_meat",
-         "water",
-         "corn",
-         "cornmeal",
-         "blackroot",
-         "blackroot_flour",
-         "atlanteans_bread"
+         {
+            name = "fish",
+            preciousness = 4
+         },
+         {
+            name = "smoked_fish",
+            default_target_quantity = 30,
+            preciousness = 3
+         },
+         {
+            name = "meat",
+            preciousness = 2
+         },
+         {
+            name = "smoked_meat",
+            default_target_quantity = 20,
+            preciousness = 2
+         },
+         {
+            name = "water",
+            preciousness = 7
+         },
+         {
+            name = "corn",
+            preciousness = 12
+         },
+         {
+            name = "cornmeal",
+            default_target_quantity = 15,
+            preciousness = 7
+         },
+         {
+            name = "blackroot",
+            preciousness = 10
+         },
+         {
+            name = "blackroot_flour",
+            default_target_quantity = 0,
+            preciousness = 2
+         },
+         {
+            name = "atlanteans_bread",
+            default_target_quantity = 20,
+            preciousness = 5
+         }
       },
       {
          -- Mining
-         "quartz",
-         "diamond",
-         "coal",
-         "iron_ore",
-         "iron",
-         "gold_ore",
-         "gold"
+         {
+            name = "quartz",
+            default_target_quantity = 5,
+            preciousness = 1
+         },
+         {
+            name = "diamond",
+            default_target_quantity = 5,
+            preciousness = 2
+         },
+         {
+            name = "coal",
+            default_target_quantity = 20,
+            preciousness = 10
+         },
+         {
+            name = "iron_ore",
+            default_target_quantity = 15,
+            preciousness = 4
+         },
+         {
+            name = "iron",
+            default_target_quantity = 20,
+            preciousness = 4
+         },
+         {
+            name = "gold_ore",
+            default_target_quantity = 15,
+            preciousness = 2
+         },
+         {
+            name = "gold",
+            default_target_quantity = 20,
+            preciousness = 2
+         }
       },
       {
          -- Tools
-         "pick",
-         "saw",
-         "shovel",
-         "hammer",
-         "milking_tongs",
-         "fishing_net",
-         "buckets",
-         "hunting_bow",
-         "hook_pole",
-         "scythe",
-         "bread_paddle",
-         "fire_tongs"
+         {
+            name = "pick",
+            default_target_quantity = 3,
+            preciousness = 1
+         },
+         {
+            name = "saw",
+            default_target_quantity = 2,
+            preciousness = 0
+         },
+         {
+            name = "shovel",
+            default_target_quantity = 2,
+            preciousness = 0
+         },
+         {
+            name = "hammer",
+            default_target_quantity = 2,
+            preciousness = 1
+         },
+         {
+            name = "milking_tongs",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "fishing_net",
+            default_target_quantity = 2,
+            preciousness = 0
+         },
+         {
+            name = "buckets",
+            default_target_quantity = 2,
+            preciousness = 0
+         },
+         {
+            name = "hunting_bow",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "hook_pole",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "scythe",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "bread_paddle",
+            default_target_quantity = 1,
+            preciousness = 0
+         },
+         {
+            name = "fire_tongs",
+            default_target_quantity = 1,
+            preciousness = 0,
+         }
       },
       {
          -- Military
-         "trident_light",
-         "trident_long",
-         "trident_steel",
-         "trident_double",
-         "trident_heavy_double",
-         "shield_steel",
-         "shield_advanced",
-         "tabard",
-         "gold_thread",
-         "tabard_golden"
+         {
+            name = "trident_light",
+            default_target_quantity = 30,
+            preciousness = 1
+         },
+         {
+            name = "trident_long",
+            default_target_quantity = 1,
+            preciousness = 1
+         },
+         {
+            name = "trident_steel",
+            default_target_quantity = 1,
+            preciousness = 1
+         },
+         {
+            name = "trident_double",
+            default_target_quantity = 1,
+            preciousness = 1
+         },
+         {
+            name = "trident_heavy_double",
+            default_target_quantity = 1,
+            preciousness = 1
+         },
+         {
+            name = "shield_steel",
+            default_target_quantity = 1,
+            preciousness = 1
+         },
+         {
+            name = "shield_advanced",
+            default_target_quantity = 1,
+            preciousness = 1
+         },
+         {
+            name = "tabard",
+            default_target_quantity = 30,
+            preciousness = 1
+         },
+         {
+            name = "gold_thread",
+            default_target_quantity = 5,
+            preciousness = 2
+         },
+         {
+            name = "tabard_golden",
+            default_target_quantity = 1,
+            preciousness = 1
+         }
       }
    },
 
