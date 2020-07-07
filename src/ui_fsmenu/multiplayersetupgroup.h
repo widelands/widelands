@@ -63,7 +63,7 @@ private:
 
 	UI::Box clientbox, playerbox, scrollable_playerbox;
 	UI::Textarea clients_, players_;
-	uint32_t buth_;
+	int32_t buth_;
 
 	std::map<std::string, const Image*> tribepics_;
 	std::map<std::string, std::string> tribenames_;

@@ -715,7 +715,7 @@ void MultiPlayerSetupGroup::update() {
 		multi_player_client_groups.at(i)->set_visible(true);
 	}
 
-	const size_t number_of_players = settings.players.size();
+	const int number_of_players = settings.players.size();
 	scrollable_playerbox.set_scrolling(number_of_players * buth_ > scrollable_playerbox.get_h());
 
 	// Keep track of which player slots are visible
