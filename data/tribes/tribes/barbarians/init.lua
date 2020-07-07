@@ -286,54 +286,62 @@ tribes:new_tribe {
    workers_order = {
       {
          -- Carriers
-         "barbarians_carrier",
-         "barbarians_ferry",
-         "barbarians_ox",
-         "barbarians_cattlebreeder"
+         { name = "barbarians_carrier" },
+         { name = "barbarians_ferry" },
+         {
+            name = "barbarians_ox",
+            default_target_quantity = 10,
+            preciousness = 2
+         },
+         { name = "barbarians_cattlebreeder" }
       },
       {
          -- Building Materials
-         "barbarians_stonemason",
-         "barbarians_lumberjack",
-         "barbarians_ranger",
-         "barbarians_builder",
-         "barbarians_lime_burner",
-         "barbarians_gardener",
-         "barbarians_weaver",
-         "barbarians_shipwright"
+         { name = "barbarians_stonemason" },
+         { name = "barbarians_lumberjack" },
+         { name = "barbarians_ranger" },
+         { name = "barbarians_builder" },
+         { name = "barbarians_lime_burner" },
+         { name = "barbarians_gardener" },
+         { name = "barbarians_weaver" },
+         { name = "barbarians_shipwright" }
       },
       {
          -- Food
-         "barbarians_fisher",
-         "barbarians_hunter",
-         "barbarians_gamekeeper",
-         "barbarians_farmer",
-         "barbarians_baker",
-         "barbarians_brewer",
-         "barbarians_brewer_master",
-         "barbarians_innkeeper"
+         { name = "barbarians_fisher" },
+         { name = "barbarians_hunter" },
+         { name = "barbarians_gamekeeper" },
+         { name = "barbarians_farmer" },
+         { name = "barbarians_baker" },
+         { name = "barbarians_brewer" },
+         { name = "barbarians_brewer_master" },
+         { name = "barbarians_innkeeper" }
       },
       {
          -- Mining
-         "barbarians_geologist",
-         "barbarians_miner",
-         "barbarians_miner_chief",
-         "barbarians_miner_master",
-         "barbarians_charcoal_burner",
-         "barbarians_smelter"
+         { name = "barbarians_geologist" },
+         { name = "barbarians_miner" },
+         { name = "barbarians_miner_chief" },
+         { name = "barbarians_miner_master" },
+         { name = "barbarians_charcoal_burner" },
+         { name = "barbarians_smelter" }
       },
       {
          -- Tools
-         "barbarians_blacksmith",
-         "barbarians_blacksmith_master"
+         { name = "barbarians_blacksmith" },
+         { name = "barbarians_blacksmith_master" }
       },
       {
          -- Military
-         "barbarians_recruit",
-         "barbarians_soldier",
-         "barbarians_trainer",
-         "barbarians_helmsmith",
-         "barbarians_scout"
+         { name = "barbarians_recruit" },
+         {
+            name = "barbarians_soldier",
+            default_target_quantity = 10,
+            preciousness = 5
+         },
+         { name = "barbarians_trainer" },
+         { name = "barbarians_helmsmith" },
+         { name = "barbarians_scout" }
       }
    },
 

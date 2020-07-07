@@ -298,57 +298,64 @@ tribes:new_tribe {
    workers_order = {
       {
          -- Carriers
-         "empire_carrier",
-         "empire_ferry",
-         "empire_donkey",
-         "empire_donkeybreeder"
+         { name = "empire_carrier" },
+         { name = "empire_ferry" },
+         {
+            name = "empire_donkey",
+            default_target_quantity = 10,
+            preciousness = 2
+         },
+         { name = "empire_donkeybreeder" }
       },
       {
          -- Building Materials
-         "empire_stonemason",
-         "empire_carpenter",
-         "empire_lumberjack",
-         "empire_forester",
-         "empire_builder",
-         "empire_shepherd",
-         "empire_weaver",
-         "empire_shipwright"
+         { name = "empire_stonemason" },
+         { name = "empire_carpenter" },
+         { name = "empire_lumberjack" },
+         { name = "empire_forester" },
+         { name = "empire_builder" },
+         { name = "empire_shepherd" },
+         { name = "empire_weaver" },
+         { name = "empire_shipwright" }
       },
       {
          -- Food
-         "empire_fisher",
-         "empire_hunter",
-         "empire_farmer",
-         "empire_miller",
-         "empire_baker",
-         "empire_brewer",
-         "empire_vinefarmer",
-         "empire_vintner",
-         "empire_pigbreeder",
-         "empire_innkeeper"
+         { name = "empire_fisher" },
+         { name = "empire_hunter" },
+         { name = "empire_farmer" },
+         { name = "empire_miller" },
+         { name = "empire_baker" },
+         { name = "empire_brewer" },
+         { name = "empire_vinefarmer" },
+         { name = "empire_vintner" },
+         { name = "empire_pigbreeder" },
+         { name = "empire_innkeeper" }
       },
       {
          -- Mining
-         "empire_geologist",
-         "empire_miner",
-         "empire_miner_master",
-         "empire_charcoal_burner",
-         "empire_smelter"
+         { name = "empire_geologist" },
+         { name = "empire_miner" },
+         { name = "empire_miner_master" },
+         { name = "empire_charcoal_burner" },
+         { name = "empire_smelter" }
       },
       {
          -- Tools
-         "empire_toolsmith"
+         { name = "empire_toolsmith" }
       },
       {
          -- Military
-         "empire_recruit",
-         "empire_soldier",
-         "empire_trainer",
-         "empire_weaponsmith",
-         "empire_armorsmith",
-         "empire_scout"
-      },
-
+         { name = "empire_recruit" },
+         {
+            name = "empire_soldier",
+            default_target_quantity = 10,
+            preciousness = 5
+         },
+         { name = "empire_trainer" },
+         { name = "empire_weaponsmith" },
+         { name = "empire_armorsmith" },
+         { name = "empire_scout" }
+      }
    },
 
    immovables = {

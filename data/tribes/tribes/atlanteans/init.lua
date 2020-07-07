@@ -367,52 +367,61 @@ tribes:new_tribe {
    workers_order = {
       {
          -- Carriers
-         "atlanteans_carrier",
-         "atlanteans_ferry",
-         "atlanteans_horse",
-         "atlanteans_horsebreeder"
+         { name = "atlanteans_carrier" },
+         { name = "atlanteans_ferry" },
+         -- NOCOM document
+         {
+            name = "atlanteans_horse",
+            default_target_quantity = 10,
+            preciousness = 2
+         },
+         { name = "atlanteans_horsebreeder" }
       },
       {
          -- Building Materials
-         "atlanteans_stonecutter",
-         "atlanteans_woodcutter",
-         "atlanteans_sawyer",
-         "atlanteans_forester",
-         "atlanteans_builder",
-         "atlanteans_spiderbreeder",
-         "atlanteans_weaver",
-         "atlanteans_shipwright"
+         { name = "atlanteans_stonecutter" },
+         { name = "atlanteans_woodcutter" },
+         { name = "atlanteans_sawyer" },
+         { name = "atlanteans_forester" },
+         { name = "atlanteans_builder" },
+         { name = "atlanteans_spiderbreeder" },
+         { name = "atlanteans_weaver" },
+         { name = "atlanteans_shipwright" }
       },
       {
          -- Food
-         "atlanteans_fisher",
-         "atlanteans_fishbreeder",
-         "atlanteans_hunter",
-         "atlanteans_smoker",
-         "atlanteans_farmer",
-         "atlanteans_blackroot_farmer",
-         "atlanteans_miller",
-         "atlanteans_baker"
+         { name = "atlanteans_fisher" },
+         { name = "atlanteans_fishbreeder" },
+         { name = "atlanteans_hunter" },
+         { name = "atlanteans_smoker" },
+         { name = "atlanteans_farmer" },
+         { name = "atlanteans_blackroot_farmer" },
+         { name = "atlanteans_miller" },
+         { name = "atlanteans_baker" }
       },
       {
          -- Mining
-         "atlanteans_geologist",
-         "atlanteans_miner",
-         "atlanteans_charcoal_burner",
-         "atlanteans_smelter"
+         { name = "atlanteans_geologist" },
+         { name = "atlanteans_miner" },
+         { name = "atlanteans_charcoal_burner" },
+         { name = "atlanteans_smelter" }
       },
       {
          -- Tools
-         "atlanteans_toolsmith"
+         { name = "atlanteans_toolsmith" }
       },
       {
          -- Military
-         "atlanteans_recruit",
-         "atlanteans_soldier",
-         "atlanteans_trainer",
-         "atlanteans_weaponsmith",
-         "atlanteans_armorsmith",
-         "atlanteans_scout"
+         { name = "atlanteans_recruit" },
+         {
+            name = "atlanteans_soldier",
+            default_target_quantity = 10,
+            preciousness = 5
+         },
+         { name = "atlanteans_trainer" },
+         { name = "atlanteans_weaponsmith" },
+         { name = "atlanteans_armorsmith" },
+         { name = "atlanteans_scout" }
       }
    },
 

@@ -24,6 +24,7 @@
 --             "empire_well1",
 --             "empire_temple_of_vesta"
 --          }
+-- NOCOM update documentation
 --          workers_order = {
 --             {
 --                "empire_vesta_priestess"

@@ -81,8 +81,6 @@ tribes:new_soldier_type {
 
    animations = animations,
 
-   default_target_quantity = 10,
-
    -- Battle attributes - initial values and per level increase
    health = {
       max_level = 3,
@@ -108,12 +106,6 @@ tribes:new_soldier_type {
       base = 25,
       increase_per_level = 16,
       pictures = path.list_files(dirname .. "evade_level?.png"),
-   },
-
-   aihints = {
-      preciousness = {
-         barbarians = 5
-      },
    },
 
    -- Random animations for battle

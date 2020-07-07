@@ -10,12 +10,16 @@ return {
       },
       workers_order = {
          {
-            "barbarians_custom_worker"
+            {name = "barbarians_custom_worker" }
          },
       },
       wares_order = {
          {
-            "custom_ware"
+            {
+               name= "custom_ware",
+               default_target_quantity = 500,
+               preciousness = 14
+            }
          },
       }
    }

@@ -332,54 +332,62 @@ tribes:new_tribe {
    workers_order = {
       {
          -- Carriers
-         "frisians_carrier",
-         "frisians_ferry",
-         "frisians_reindeer",
-         "frisians_reindeer_breeder"
+         { name = "frisians_carrier" },
+         { name = "frisians_ferry" },
+         {
+            name = "frisians_reindeer",
+            default_target_quantity = 10,
+            preciousness = 2
+         },
+         { name = "frisians_reindeer_breeder" }
       },
       {
          -- Building Materials
-         "frisians_stonemason",
-         "frisians_woodcutter",
-         "frisians_forester",
-         "frisians_claydigger",
-         "frisians_brickmaker",
-         "frisians_builder",
-         "frisians_reed_farmer",
-         "frisians_seamstress",
-         "frisians_seamstress_master",
-         "frisians_shipwright"
+         { name = "frisians_stonemason" },
+         { name = "frisians_woodcutter" },
+         { name = "frisians_forester" },
+         { name = "frisians_claydigger" },
+         { name = "frisians_brickmaker" },
+         { name = "frisians_builder" },
+         { name = "frisians_reed_farmer" },
+         { name = "frisians_seamstress" },
+         { name = "frisians_seamstress_master" },
+         { name = "frisians_shipwright" }
       },
       {
          -- Food
-         "frisians_fisher",
-         "frisians_hunter",
-         "frisians_farmer",
-         "frisians_berry_farmer",
-         "frisians_fruit_collector",
-         "frisians_smoker",
-         "frisians_beekeeper",
-         "frisians_baker",
-         "frisians_baker_master",
-         "frisians_brewer",
-         "frisians_brewer_master",
-         "frisians_landlady"
+         { name = "frisians_fisher" },
+         { name = "frisians_hunter" },
+         { name = "frisians_farmer" },
+         { name = "frisians_berry_farmer" },
+         { name = "frisians_fruit_collector" },
+         { name = "frisians_smoker" },
+         { name = "frisians_beekeeper" },
+         { name = "frisians_baker" },
+         { name = "frisians_baker_master" },
+         { name = "frisians_brewer" },
+         { name = "frisians_brewer_master" },
+         { name = "frisians_landlady" }
       },
       {
          -- Mining
-         "frisians_geologist",
-         "frisians_miner",
-         "frisians_miner_master",
-         "frisians_charcoal_burner",
-         "frisians_smelter",
-         "frisians_blacksmith",
-         "frisians_blacksmith_master"
+         { name = "frisians_geologist" },
+         { name = "frisians_miner" },
+         { name = "frisians_miner_master" },
+         { name = "frisians_charcoal_burner" },
+         { name = "frisians_smelter" },
+         { name = "frisians_blacksmith" },
+         { name = "frisians_blacksmith_master" }
       },
       {
          -- Military
-         "frisians_soldier",
-         "frisians_trainer",
-         "frisians_scout"
+         {
+            name = "frisians_soldier",
+            default_target_quantity = 10,
+            preciousness = 5
+         },
+         { name = "frisians_trainer" },
+         { name = "frisians_scout" }
       }
    },
 
