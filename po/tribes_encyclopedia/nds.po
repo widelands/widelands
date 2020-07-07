@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-02 07:43+0000\n"
-"PO-Revision-Date: 2020-05-19 16:06+0000\n"
+"POT-Creation-Date: 2020-07-06 06:30+0000\n"
+"PO-Revision-Date: 2020-07-06 17:16+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -668,7 +668,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Don't ask what your tribe can do for you, ask what you can do for your "
 "tribe!’"
-msgstr "»Fraag nich, wat dien  Volkför dich doon kann, fraag, wat du för dien Volk doon kannst!«"
+msgstr "»Fraag nich, wat dien Volk för dich doon kann, fraag, wat du för dien Volk doon kannst!«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/barracks/helptexts.lua:11
@@ -1069,7 +1069,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘As silent as a panther,<br> as deft as a weasel,<br> as swift as an "
 "arrow,<br> as deadly as a viper.’"
-msgstr "»So still as eene Grootkatt,<br> so klüver as een Marder,<br> so fell as een Piel<br>, so doodelk as eene Slang.«"
+msgstr "»So still as eene Grootkatt,<br> so klüver as een Marder,<br> so fell as een Piel,<br> so doodelk as eene Slang.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:8
@@ -1421,7 +1421,7 @@ msgid ""
 "‘When I saw the Saxnot for the first time, her majestic dragon head already "
 "looked up to the skies and the master was about to install the square "
 "sail.<br>It was the most noble ship I ever saw.’"
-msgstr "»As ick de ›Saxnot‹ tum eersten Maal sehn hebb, hett hör machtiger Draak al tu de Hemel kiekt un de Baukeelr hett jüüst dat Quadraat-Seil inbaut.<br>Dat weer dat mooiste Schipp, wat ick jemaals sehn hebb.«"
+msgstr "»As ick de ›Saxnot‹ tum eersten Maal sehn hebb, hett hör machtiger Draak al tu de Hemel kiekt un de Baukeerl hett jüüst dat Quadraat-Seil inbaut.<br>Dat weer dat mooiste Schipp, wat ick jemaals sehn hebb.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/helptexts.lua:13
@@ -1436,7 +1436,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘From inferior looking rubble they form shiny gold and gleaming iron.<br>The"
 " smelters are real magicians among our craftsmen.’"
-msgstr "»Ut bemegen Stenen maken se glennen Gold un blinken Iesen.<br>De Smelters sünd de Künstenmakers unner uns Warklüü.«"
+msgstr "»Ut bemegen Stenen maken se glennen Gold un blinken Iesen.<br>De Smelters sünd de Künstenmakers unner uns' Warklüü.«"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/helptexts.lua:12

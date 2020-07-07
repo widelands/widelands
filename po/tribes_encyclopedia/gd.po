@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-02 07:43+0000\n"
-"PO-Revision-Date: 2020-07-02 08:25+0000\n"
+"POT-Creation-Date: 2020-07-06 06:30+0000\n"
+"PO-Revision-Date: 2020-07-04 06:16+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -1055,7 +1055,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/helptexts.lua:11
 msgctxt "barbarians_building"
 msgid "Slogan of ‘Harrath’s Handsome Helmets’ in Al’thunran"
-msgstr ""
+msgstr "Facal-suaicheantais aig “Clogaidean smodaig” ann an Al’tùnran"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/helptexts.lua:16
@@ -1096,13 +1096,13 @@ msgstr "Gabhaidh an sealgair fois fad %s mus tòisich e air an obair a-rithist."
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/helptexts.lua:6
 msgctxt "barbarians_building"
 msgid "‘Miner’s Delight: Pitta bread with fish or meat, comes with one beer.’"
-msgstr ""
+msgstr "“Sòlas a’ mhèinneir: aran tur le iasg no sitheann agus leann.”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/helptexts.lua:11
 msgctxt "barbarians_building"
 msgid "Chef’s recommendation in ‘The Singing Master Miner’"
-msgstr ""
+msgstr "Monadh a’ chòcaire aig “An sàr-mhèinnear ceòlmhor”"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/helptexts.lua:16
@@ -1311,13 +1311,13 @@ msgstr "Ma thèid a h-uile bathar air a bheil feum a lìbhrigeadh ri àm, saothr
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘We open up roads and make houses from mountains.’"
-msgstr ""
+msgstr "“Fosglaidh sin rathaidean is nì sinn taighean às na beanntan.”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "Slogan of the stonemasons’ guild"
-msgstr ""
+msgstr "Facal-suaicheantais aig comann nan clachair"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:13
