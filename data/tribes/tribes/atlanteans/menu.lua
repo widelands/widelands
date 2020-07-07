@@ -1,6 +1,5 @@
--- This file contains the basic information for all tribes that is
+-- This file contains the basic information for the Atlantean tribe that is
 -- needed before a game is loaded or the editor has been started.
-
 
 dirname = path.dirname(__file__)
 set_textdomain("tribes")
