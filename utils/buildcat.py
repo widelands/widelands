@@ -69,8 +69,8 @@ MAINPOTS = [
         '../../data/world/*/*/*/*/*/*.lua',
     ]),
     ('tribes/tribes', [
-        '../../data/tribes/scripting/starting_conditions/*/*.lua',
-        '../../data/tribes/*.lua',
+        '../../data/tribes/tribes/*/menu.lua',
+        '../../data/tribes/tribes/*/starting_conditions/*.lua',
         '../../data/tribes/economy_profiles/*',
         '../../data/tribes/*/init.lua',
         '../../data/tribes/*/*/init.lua',
