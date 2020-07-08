@@ -71,8 +71,9 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	std::unique_ptr<LuaTable> hook = game.lua().get_hook("custom_statistic");
 	std::string cs_name, cs_pic;
 	if (hook) {
+        i18n::Textdomain td("win_conditions");
 		hook->do_not_warn_about_unaccessed_keys();
-		cs_name = hook->get_string("name");
+		cs_name = _(hook->get_string("name"));
 		cs_pic = hook->get_string("pic");
 		ndatasets_++;
 	}
