@@ -92,7 +92,10 @@ void FullscreenMenuLaunchSPG::update() {
 	std::unique_ptr<Widelands::MapLoader> map_loader(
 	   map.get_correct_loader(settings_->settings().mapfilename));
 	map.set_filename(settings_->settings().mapfilename);
-	map_loader->preload_map(true);
+	{
+		i18n::Textdomain td("maps");
+		map_loader->preload_map(true);
+	}
 
 	map_details.update(settings_, map);
 	suggested_teams_box_.show(map.get_suggested_teams());
