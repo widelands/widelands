@@ -15,7 +15,7 @@ end
 
 function building_helptext_note()
    -- TRANSLATORS: Note helptext for a building
-   return "Needs medium-sized fields (barley, wheat, reed, corn or blackroot) or bushes (berry bushes or grapevines) nearby."
+   return pgettext("frisians_building", "Needs medium-sized fields (barley, wheat, reed, corn or blackroot) or bushes (berry bushes or grapevines) nearby.")
 end
 
 function building_helptext_performance()
