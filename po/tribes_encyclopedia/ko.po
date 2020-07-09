@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-07 09:09+0000\n"
-"PO-Revision-Date: 2020-07-06 04:17+0000\n"
+"POT-Creation-Date: 2020-07-08 06:04+0000\n"
+"PO-Revision-Date: 2020-07-08 21:08+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -1847,7 +1847,7 @@ msgid ""
 "alone! You’d better pay close attention to me in order to make the most of "
 "it. Now here is your new short sword, forged just for you by our best "
 "blacksmiths. Time’s up everyone, now go occupy your sentinels!"
-msgstr ""
+msgstr "칼싸움의 기본 사항과 전투에서 살아남는 방법을 배우려면 30 초가 걸립니다.  그 시간의 3 분의 1은 소개만으로 끝났습니다! 최대한 활용하기 위해  저에게 주의를 기울이는 것이 좋을것입니다. 이제 최고의 대장장이가 당신을 위해 만들어 낸 새로운 짧은 검이 있습니다. 시간이 다되었으니 이제 보초들을 점령하십시오!"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:8
@@ -1866,7 +1866,7 @@ msgstr "신병들을 무장시키고 군사 훈련을 시키십시오."
 #, lua-format
 msgctxt "frisians_building"
 msgid "The barracks needs %s on average to recruit one soldier."
-msgstr ""
+msgstr "병영 1명을 모집하려면 병영 평균 %s 명이 필요합니다."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/helptexts.lua:3
@@ -1874,7 +1874,7 @@ msgctxt "frisians_building"
 msgid ""
 "If my honey tastes bitter, I must have left some bee stings in it. There are"
 " never any bee stings in my honey, therefore, it is not bitter."
-msgstr ""
+msgstr "내 꿀이 쓴 맛이 나면 벌에 약간의 쏘인 것을 좀 남겨 놓았음에 틀림없어요. 내 꿀에는 벌의 쏘인 흔적이 전혀 없으므로 쓴 맛이 없습니다."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/helptexts.lua:8
@@ -1886,9 +1886,16 @@ msgstr "손님의 불만을 무시하는 벌키우는 이"
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/helptexts.lua:13
 msgctxt "frisians_building"
 msgid "Keeps bees and lets them swarm over flowering fields to produce honey."
-msgstr ""
+msgstr "벌들을 유지하고 꽃이 만발한 들판을 가로 질러 꿀을 생산합니다."
 
 #. TRANSLATORS: Note helptext for a building
+#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/helptexts.lua:18
+msgctxt "frisians_building"
+msgid ""
+"Needs medium-sized fields (barley, wheat, reed, corn or blackroot) or bushes"
+" (berry bushes or grapevines) nearby."
+msgstr "근처에 가운데 크기의 밭(보리, 밀, 갈대, 옥수수 또는 검은 뿌리) 또는 덤불(딸기 덤불 또는 포도나무)이 필요합니다."
+
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/helptexts.lua:23
 #, lua-format
@@ -1902,7 +1909,7 @@ msgctxt "frisians_building"
 msgid ""
 "My bushes may not be as tall as your trees, but I don’t know anybody who "
 "likes to eat bark!"
-msgstr ""
+msgstr "덤불은 나무만큼 키가 크지 않지만 나는 나무 껍질을 좋아하는 사람은 아무도 모른다!"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/helptexts.lua:8
@@ -1914,14 +1921,14 @@ msgstr "딸기 키우는 이가 숲지기에게 한 말"
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/helptexts.lua:13
 msgctxt "building"
 msgid "Plants berry bushes in the surrounding area."
-msgstr ""
+msgstr "주변에 베리 덤불을 심습니다."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/helptexts.lua:18
 msgctxt "frisians_building"
 msgid ""
 "The berry farm needs free space within the work area to plant the bushes."
-msgstr ""
+msgstr "베리 농장은 덤불을 심기 위해 작업 공간 내에 여유 공간이 필요합니다."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/helptexts.lua:23
