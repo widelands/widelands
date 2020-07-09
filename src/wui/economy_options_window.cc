@@ -165,13 +165,14 @@ EconomyOptionsWindow::~EconomyOptionsWindow() {
 }
 
 std::string EconomyOptionsWindow::localize_profile_name(const std::string& name) {
-    // Translation for the default profile is sourced from the widelands textdomain, and for the other profiles from the tribes.
-    std::string localized_name = _(name);
-    {
-        i18n::Textdomain td("tribes");
-        localized_name = _(localized_name);
-    }
-    return localized_name;
+	// Translation for the default profile is sourced from the widelands textdomain, and for the
+	// other profiles from the tribes.
+	std::string localized_name = _(name);
+	{
+		i18n::Textdomain td("tribes");
+		localized_name = _(localized_name);
+	}
+	return localized_name;
 }
 
 void EconomyOptionsWindow::on_economy_note(const Widelands::NoteEconomy& note) {

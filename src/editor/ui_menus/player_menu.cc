@@ -178,9 +178,9 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 				               g_gr->images().get(tribeinfo.icon), false, tribeinfo.tooltip);
 			}
 		}
-        plr_tribe->add(pgettext("tribe", "Random"), "",
-                       g_gr->images().get("images/ui_fsmenu/random.png"), false,
-                       _("The tribe will be selected at random"));
+		plr_tribe->add(pgettext("tribe", "Random"), "",
+		               g_gr->images().get("images/ui_fsmenu/random.png"), false,
+		               _("The tribe will be selected at random"));
 
 		plr_tribe->select(
 		   (p <= map.get_nrplayers() && Widelands::tribe_exists(map.get_scenario_player_tribe(p))) ?
