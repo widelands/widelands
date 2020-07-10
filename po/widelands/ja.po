@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-02 07:43+0000\n"
+"POT-Creation-Date: 2020-07-09 08:33+0000\n"
 "PO-Revision-Date: 2020-04-22 20:03+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
@@ -58,7 +58,7 @@ msgstr "%1$sと%2$s"
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
 #. TRANSLATORS: Terrain name (Climate)
-#: ../../data/scripting/help.lua:46 ../../src/scripting/lua_game.cc:1086
+#: ../../data/scripting/help.lua:46 ../../src/scripting/lua_game.cc:1117
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
@@ -1690,9 +1690,9 @@ msgstr "経済が労働者「%s」を必要としていないの"
 #. * TRANSLATORS:    %2$s = "Ox"
 #: ../../src/logic/map_objects/tribes/production_program.cc:320
 #: ../../src/logic/map_objects/tribes/production_program.cc:344
-#: ../../src/logic/map_objects/tribes/production_program.cc:784
-#: ../../src/logic/map_objects/tribes/production_program.cc:859
-#: ../../src/logic/map_objects/tribes/production_program.cc:910
+#: ../../src/logic/map_objects/tribes/production_program.cc:787
+#: ../../src/logic/map_objects/tribes/production_program.cc:862
+#: ../../src/logic/map_objects/tribes/production_program.cc:913
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%2$sx%1$i"
@@ -1734,21 +1734,21 @@ msgstr "労働者が経験を必要としていないの"
 #. * TRANSLATORS: on a development build if you can, and let us know if there
 #. are any issues
 #. * TRANSLATORS: we need to address for your language.
-#: ../../src/logic/map_objects/tribes/production_program.cc:496
-#: ../../src/logic/map_objects/tribes/production_program.cc:808
+#: ../../src/logic/map_objects/tribes/production_program.cc:499
+#: ../../src/logic/map_objects/tribes/production_program.cc:811
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr "%2$sで、%1$sを中止しました"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware '%s'"
-#: ../../src/logic/map_objects/tribes/production_program.cc:502
+#: ../../src/logic/map_objects/tribes/production_program.cc:505
 #, c-format
 msgid "Completed %1$s because %2$s"
 msgstr "%2$sで、%1$sを完了しました"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware '%s'"
-#: ../../src/logic/map_objects/tribes/production_program.cc:508
-#: ../../src/logic/map_objects/tribes/production_program.cc:514
+#: ../../src/logic/map_objects/tribes/production_program.cc:511
+#: ../../src/logic/map_objects/tribes/production_program.cc:517
 #, c-format
 msgid "Skipped %1$s because %2$s"
 msgstr "%2$sで、%1$sをスキップしました"
@@ -1757,7 +1757,7 @@ msgstr "%2$sで、%1$sをスキップしました"
 #. are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
 #. bread is missing'
-#: ../../src/logic/map_objects/tribes/production_program.cc:794
+#: ../../src/logic/map_objects/tribes/production_program.cc:797
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -1766,7 +1766,7 @@ msgstr[0] "%sが無いの"
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
 #. wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:870
+#: ../../src/logic/map_objects/tribes/production_program.cc:873
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -1775,18 +1775,18 @@ msgstr[0] "%sを生産"
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
 #. workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:921
+#: ../../src/logic/map_objects/tribes/production_program.cc:924
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] "%sを登用"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1081
+#: ../../src/logic/map_objects/tribes/production_program.cc:1084
 msgid "No soldier to train!"
 msgstr "訓練する兵士がいません！"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1090
-#: ../../src/logic/map_objects/tribes/production_program.cc:1148
+#: ../../src/logic/map_objects/tribes/production_program.cc:1093
+#: ../../src/logic/map_objects/tribes/production_program.cc:1151
 msgid "No soldier found for this training level!"
 msgstr "このレベルのトレーニングを必要とする兵士はいません！"
 
@@ -1794,7 +1794,7 @@ msgstr "このレベルのトレーニングを必要とする兵士はいませ
 #. description of the
 #. * training program, e.g. Completed upgrading soldier evade from level 0 to
 #. level 1
-#: ../../src/logic/map_objects/tribes/production_program.cc:1190
+#: ../../src/logic/map_objects/tribes/production_program.cc:1193
 #, c-format
 msgid "Completed %s"
 msgstr ""

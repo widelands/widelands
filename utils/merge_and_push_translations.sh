@@ -75,7 +75,7 @@ else
 fi
 
 # Update catalogs
-utils/buildcat.py
+# Deactivated for string freeze utils/buildcat.py
 
 # Update statistics
 utils/update_translation_stats.py
@@ -108,4 +108,4 @@ git commit -m "Fetched translations and updated catalogs."
 git push https://github.com/widelands/widelands.git master
 
 # Push catalogs to Transifex
-tx push -s
+# Deactivated for string freeze tx push -s

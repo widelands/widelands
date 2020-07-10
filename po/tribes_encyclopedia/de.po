@@ -23,8 +23,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-02 07:43+0000\n"
-"PO-Revision-Date: 2020-05-14 14:31+0000\n"
+"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"PO-Revision-Date: 2020-07-08 08:00+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -1900,6 +1900,13 @@ msgid "Keeps bees and lets them swarm over flowering fields to produce honey."
 msgstr "Hält Bienen und lässt sie über blühende Felder ausschwärmen, um Honig herzustellen."
 
 #. TRANSLATORS: Note helptext for a building
+#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/helptexts.lua:18
+msgctxt "frisians_building"
+msgid ""
+"Needs medium-sized fields (barley, wheat, reed, corn or blackroot) or bushes"
+" (berry bushes or grapevines) nearby."
+msgstr "Braucht mittelgroße Felder (Gerste, Weizen, Reet, Mais oder Dunkelrüben) oder Büsche (Beerenbüsche oder Weinreben) in der Nähe."
+
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/helptexts.lua:23
 #, lua-format
