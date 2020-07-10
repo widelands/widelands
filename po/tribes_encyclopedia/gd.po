@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2019
+# GunChleoc, 2015-2020
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013-2014
 # GunChleoc, 2014-2015
 # GunChleoc, 2014-2015
@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-06 06:30+0000\n"
-"PO-Revision-Date: 2020-07-04 06:16+0000\n"
+"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"PO-Revision-Date: 2020-07-08 07:53+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -767,7 +767,7 @@ msgid ""
 "sky.<br>He sets the fire, sees it smolder<br>The logs he carried on his "
 "shoulder.<br>Burnt down to just one single coal<br>This troubles much a "
 "burner’s soul.’"
-msgstr ""
+msgstr "“Dè obair an loisgeadair fiodha?<br>’S e seo an saothrachadh<br>as foighidinniche dhan treubh!<br><br>’S ann gu treun a chuireas e fiodh<br>os cionn fiodha dhuilich<br>gus an ruig an cruach an speur!”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/helptexts.lua:18
@@ -846,7 +846,7 @@ msgid ""
 "‘See the crop fields from here to the horizons. They are a huge, heaving, "
 "golden sea.<br>Oh wheat, source of wealth, soul of beer, strength of our "
 "warriors!’"
-msgstr ""
+msgstr "“Siud cuan òr-bhuidhe bòidheach na h-achaidhean mòra.<br>A  chruithneachd, a shaoibhreas torraich, anam an leanna, neart ar gaisgich!”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:9
@@ -1049,7 +1049,7 @@ msgstr "Ma thèid biadh a lìbhrigeadh dhi gu cunbhalach, saothraichidh a’ mh�
 msgctxt "barbarians_building"
 msgid ""
 "‘The helmets forgéd by this smithy<br>Are widely known for looking pithy.’"
-msgstr ""
+msgstr "“Clogaidean dhan fhoghainteach”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/helptexts.lua:11
@@ -1423,7 +1423,7 @@ msgid ""
 "‘When I saw the Saxnot for the first time, her majestic dragon head already "
 "looked up to the skies and the master was about to install the square "
 "sail.<br>It was the most noble ship I ever saw.’"
-msgstr "“Nuair a chunnaic mi an Saxnot a’ chiad turas, bha a ceann-dràgoin mòrail a’ coimhead nan speuran mu thràth agus an sgiobair a’ togail a siùil cheàrnagaich.<b>B’ ise an long as uaisle a chunnaic mi a-riamh.”"
+msgstr "“Nuair a chunnaic mi an Saxnot a’ chiad turas, bha a ceann-dràgoin mòrail a’ coimhead nan speuran mu thràth agus an sgiobair a’ togail a siùil cheàrnagaich.<br>B’ ise an long as uaisle a chunnaic mi a-riamh.”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/helptexts.lua:13
@@ -1545,7 +1545,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Legend about a quarrel between the brothers Harthor and Manthor,<br>Manthor "
 "is said to be the inventor of blackwood"
-msgstr "Faoinsgeul mu dhol a-mach eadar an dithis bhràithrean Tarthor is Manthor,<br>Thathar ag ràdh gum b’ e Manthor a rinn a’ chiad fhiodh cruaidh"
+msgstr "Faoinsgeul mu dhol a-mach eadar an dithis bhràithrean Tarthor is Manthor; thathar ag ràdh gum b’ e Manthor a rinn a’ chiad fhiodh cruaidh"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/helptexts.lua:18
@@ -1889,6 +1889,13 @@ msgid "Keeps bees and lets them swarm over flowering fields to produce honey."
 msgstr "Cumaidh e seilleanan faisg air achaidhean fo bhlàth ach an dèan iad mil."
 
 #. TRANSLATORS: Note helptext for a building
+#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/helptexts.lua:18
+msgctxt "frisians_building"
+msgid ""
+"Needs medium-sized fields (barley, wheat, reed, corn or blackroot) or bushes"
+" (berry bushes or grapevines) nearby."
+msgstr "Feumaidh e achaidhean (eòrna, cruithneachd, coirce no freumhaige) no preasan (preasan dhearcan no crainn-fhìona) ’s meud meadhanach orra am fagas."
+
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/helptexts.lua:23
 #, lua-format
