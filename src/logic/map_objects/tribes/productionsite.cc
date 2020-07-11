@@ -55,7 +55,7 @@ void parse_working_positions(Tribes& tribes,
 		int amount = items_table->get_int(worker_name);
 		try {
 			if (amount < 1 || 255 < amount) {
-				throw wexception("count is out of range 1 .. 255");
+				throw GameDataError("count is out of range 1 .. 255");
 			}
 			// Try to load the worker if an object with this name has been registered
 			Notifications::publish(
@@ -64,11 +64,11 @@ void parse_working_positions(Tribes& tribes,
 			// Ensure that we did indeed load a worker
 			DescriptionIndex const woi = tribes.worker_index(worker_name);
 			if (!tribes.worker_exists(woi)) {
-				throw wexception("invalid");
+				throw GameDataError("not a worker");
 			}
 			working_positions->push_back(std::pair<DescriptionIndex, uint32_t>(woi, amount));
 		} catch (const WException& e) {
-			throw wexception("%s=\"%d\": %s", worker_name.c_str(), amount, e.what());
+			throw GameDataError("%s=\"%d\": %s", worker_name.c_str(), amount, e.what());
 		}
 	}
 }
