@@ -453,7 +453,6 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WaresWorkersMap& val
 				}
 			}
 		} else if (d > 0) {
-			// NOCOM busy roads are broken
 			for (; d; --d) {
 				if (T::create_new_worker(*pi, egbase, wdes)) {
 					report_error(L, "No space left for worker '%s' at '%s'", wdes->name().c_str(),

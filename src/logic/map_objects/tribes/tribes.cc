@@ -308,7 +308,7 @@ void Tribes::add_tribe(const LuaTable& table, const World& world) {
 			tribes_->add(new TribeDescr(Widelands::get_tribeinfo(name), *this, world, table));
 		}
 	} else {
-		throw GameDataError("The tribe '%s'' is not listed in data/tribes/init.lua.", name.c_str());
+		throw GameDataError("The tribe '%s' is not listed in data/tribes/init.lua.", name.c_str());
 	}
 
 	// Mark as done
