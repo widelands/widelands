@@ -465,7 +465,7 @@ void BuildingWindow::act_enhance(Widelands::DescriptionIndex id, bool csite) {
 		assert(construction_site);
 		if (SDL_GetModState() & KMOD_CTRL) {
 			igbase()->game().send_player_enhance_building(
-			   *construction_site, Widelands::INVALID_INDEX, false);
+			   *construction_site, construction_site->building().enhancement(), false);
 		} else {
 			show_enhance_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), *construction_site,
 			                     construction_site->get_info().becomes->enhancement(), true);
