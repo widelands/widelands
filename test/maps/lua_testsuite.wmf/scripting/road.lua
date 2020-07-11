@@ -73,6 +73,11 @@ function road_tests:test_carrier_creation()
    assert_equal(1, _cnt(self.r:get_workers("all")))
    assert_equal(1, self.r:get_workers("barbarians_carrier"))
 end
+function road_tests:test_carrier2_creation()
+   self.r:set_workers("barbarians_ox",1)
+   assert_equal(1, _cnt(self.r:get_workers("all")))
+   assert_equal(1, self.r:get_workers("barbarians_ox"))
+end
 function road_tests:test_carrier_creation_and_deletion()
    self.r:set_workers("barbarians_carrier",1)
    assert_equal(1, _cnt(self.r:get_workers("all")))
