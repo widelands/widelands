@@ -38,6 +38,7 @@ shallow_clone: false
 branches:
   only:
     - master
+    - build-21
 
 build_script:
   # copy modified libintl.h to solve an issue with boost
