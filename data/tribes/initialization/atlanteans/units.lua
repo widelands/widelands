@@ -167,6 +167,7 @@ push_textdomain("tribes")
 
 tribes:new_tribe {
    name = "atlanteans",
+   helptext_script = path.dirname(__file__) .. "helptexts.lua",
    animation_directory = image_dirname,
    animations = {
       frontier = { hotspot = {3, 12} },

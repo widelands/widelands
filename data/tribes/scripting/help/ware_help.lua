@@ -23,16 +23,9 @@ include "tribes/scripting/help/format_help.lua"
 --    :returns: General info about the ware
 --
 function ware_help_general_string(tribe, ware_description)
-   local purpose_text = ware_helptext()
-   if (purpose_text ~= "") then
-      purpose_text = purpose_text .. " "
-   end
-   -- TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese script probably want to lose the blank space here.
-   purpose_text = pgettext("sentence_separator", "%s %s"):bformat(ware_helptext(), ware_helptext(tribe.name))
-
    -- TODO(GunChleoc): Split into purpose and note
    local result = h2(_"Purpose") ..
-      li_image(ware_description.icon_name, purpose_text)
+      li_image(ware_description.icon_name, ware_description:helptext(tribe.name))
    return result
 end
 
@@ -207,7 +200,6 @@ return {
       push_textdomain("tribes_encyclopedia")
       local tribe = wl.Game():get_tribe_description(tribename)
       local ware_description = wl.Game():get_ware_description(warename)
-      include(ware_description.helptext_script)
       local r = {
          title = ware_description.descname,
          text = ware_help_general_string(tribe, ware_description)

@@ -6,6 +6,7 @@ push_textdomain("tribes")
 
 tribes:new_tribe {
    name = "barbarians",
+   helptext_script = path.dirname(__file__) .. "helptexts.lua",
    animation_directory = image_dirname,
    animations = {
       frontier = { hotspot = {1, 19} },

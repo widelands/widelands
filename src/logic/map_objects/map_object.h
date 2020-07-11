@@ -102,6 +102,13 @@ public:
 	const MapObjectDescr::Attributes& attributes() const;
 	static AttributeIndex get_attribute_id(const std::string& name, bool add_if_not_exists = false);
 
+    /// Sets a tribe-specific ware or immovable helptext for this MapObject
+    void set_helptext(const std::string& tribename, const std::string& localized_helptext);
+    /// Gets the tribe-specific ware or immovable helptext for the given tribe. Fails if it doesn't exist.
+    const std::string& get_helptext(const std::string& tribename) const;
+    /// Returns whether a tribe-specific helptext exists for the given tribe
+    bool has_helptext(const std::string& tribename) const;
+
 protected:
 	// Add attributes to the attribute list
 	void add_attributes(const std::vector<std::string>& attribs);
@@ -130,6 +137,9 @@ private:
 	/// The path and filename to the helptext script. Can be empty, but some subtypes like buildings,
 	/// wares and workers require it.
 	const std::string helptext_script_;
+
+    /// Tribe-specific helptexts. Format: <tribename, localized_text>
+    std::map<std::string, std::string> helptexts_;
 	Anims anims_;
 	std::string icon_filename_;  // Filename for the menu icon
 

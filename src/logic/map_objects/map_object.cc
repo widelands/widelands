@@ -500,6 +500,20 @@ MapObjectDescr::AttributeIndex MapObjectDescr::get_attribute_id(const std::strin
 	}
 }
 
+void MapObjectDescr::set_helptext(const std::string& tribename, const std::string& localized_helptext) {
+    // Create or overwrite
+    helptexts_[tribename] = localized_helptext;
+}
+
+const std::string& MapObjectDescr::get_helptext(const std::string& tribename) const {
+    if (!has_helptext(tribename)) {
+        throw wexception("MapObject '%s' has no helptext for tribe '%s'", name().c_str(), tribename.c_str());
+    }
+    return helptexts_.at(tribename);
+}
+bool MapObjectDescr::has_helptext(const std::string& tribename) const {
+    return helptexts_.count(tribename) == 1;
+}
 /*
 ==============================================================================
 

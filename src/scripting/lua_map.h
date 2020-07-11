@@ -202,6 +202,7 @@ public:
 	/*
 	 * Lua methods
 	 */
+    int helptext(lua_State*);
 
 	/*
 	 * C methods

@@ -1939,6 +1939,7 @@ MapObjectDescription
 */
 const char LuaMapObjectDescription::className[] = "MapObjectDescription";
 const MethodType<LuaMapObjectDescription> LuaMapObjectDescription::Methods[] = {
+    METHOD(LuaImmovableDescription, helptext),
    {nullptr, nullptr},
 };
 const PropertyType<LuaMapObjectDescription> LuaMapObjectDescription::Properties[] = {
@@ -2083,6 +2084,29 @@ int LuaMapObjectDescription::get_name(lua_State* L) {
 */
 int LuaMapObjectDescription::get_type_name(lua_State* L) {
 	lua_pushstring(L, to_string(get()->type()));
+	return 1;
+}
+
+/* RST
+   .. method:: helptext
+
+      Returns the tribe-specific helptext for this object.
+
+      :arg tribename: The tribe for which we want to fetch the helptext.
+      :type tribename: :class:`string`
+
+         (RO) a helptext if it exists for the given tribe, an empty string otherwise.
+*/
+int LuaMapObjectDescription::helptext(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+    std::string tribename = luaL_checkstring(L, 2);
+    if (get()->has_helptext(tribename)) {
+        lua_pushstring(L, get()->get_helptext(tribename));
+    } else {
+        lua_pushstring(L, "");
+    }
 	return 1;
 }
 

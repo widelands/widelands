@@ -137,7 +137,7 @@ namespace Widelands {
  * The contents of 'table' are documented in
  * /data/tribes/atlanteans.lua
  */
-TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
+TribeDescr::TribeDescr(LuaInterface* lua, const Widelands::TribeBasicInfo& info,
                        Tribes& tribes,
                        const World& world,
                        const LuaTable& table,
@@ -153,11 +153,12 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
      soldier_(Widelands::INVALID_INDEX),
      ship_(Widelands::INVALID_INDEX),
      ferry_(Widelands::INVALID_INDEX),
-     port_(Widelands::INVALID_INDEX) {
+     port_(Widelands::INVALID_INDEX),
+     initializations_(info.initializations) {
 	log("┏━ Loading %s:\n", name_.c_str());
 	ScopedTimer timer("┗━ took: %ums");
 
-	initializations_ = info.initializations;
+    std::unique_ptr<LuaTable> helptexts = lua->run_script(table.get_string("helptext_script"));
 
 	auto set_progress_message = [this](const std::string& str, int i) {
 		Notifications::publish(UI::NoteLoadingMessage(
@@ -178,9 +179,9 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 
 		log("┃    Wares: ");
 		set_progress_message(_("Wares"), 3);
-		load_wares(table, tribes);
+		load_wares(table, tribes, helptexts->get_table("wares"));
 		if (scenario_table != nullptr && scenario_table->has_key("wares_order")) {
-			load_wares(*scenario_table, tribes);
+			load_wares(*scenario_table, tribes, helptexts->has_key("wares") ? helptexts->get_table("wares") : nullptr);
 		}
 		log("%ums\n", timer.ms_since_last_query());
 
@@ -320,8 +321,13 @@ void TribeDescr::load_ships(const LuaTable& table, Tribes& tribes) {
 	ship_names_ = table.get_table("ship_names")->array_entries<std::string>();
 }
 
-void TribeDescr::load_wares(const LuaTable& table, Tribes& tribes) {
+void TribeDescr::load_wares(const LuaTable& table, Tribes& tribes, std::unique_ptr<LuaTable> helptexts) {
 	std::unique_ptr<LuaTable> items_table = table.get_table("wares_order");
+
+    // NOCOM load helptexts for interactive player only?
+    // NOCOM test website encyclopedia
+    i18n::Textdomain td("tribes_encyclopedia");
+    const std::string ware_msgctxt(name() + "_ware");
 
 	for (const int column_key : items_table->keys<int>()) {
 		std::vector<DescriptionIndex> column;
@@ -343,7 +349,31 @@ void TribeDescr::load_wares(const LuaTable& table, Tribes& tribes) {
 				}
 				ware_descr->set_preciousness(name(), ware_table->get_int("preciousness"));
 
-				// Add to tribe
+                // Add helptext
+                if (helptexts) {
+                    if (helptexts->has_key(ware_name)) {
+                        // Assemble localized helptext
+                        std::unique_ptr<LuaTable> ware_helptext_table = helptexts->get_table(ware_name);
+                        std::set<int> helptext_keys = ware_helptext_table->keys<int>();
+                        if (!helptext_keys.empty()) {
+                            auto it = helptext_keys.begin();
+                            std::string helptext = pgettext_expr(ware_msgctxt.c_str(), ware_helptext_table->get_string(*it).c_str());
+                            ++it;
+                            for (; it != helptext_keys.end(); ++it) {
+                                helptext = i18n::join_sentences(helptext, pgettext_expr(ware_msgctxt.c_str(), ware_helptext_table->get_string(*it).c_str()));
+                            }
+                            ware_descr->set_helptext(name(), helptext);
+                        } else {
+                            log("WARNING: Empty helptext defined for ware %s", ware_name.c_str());
+                            ware_descr->set_helptext(name(), "");
+                        }
+                    } else {
+                        log("WARNING: No helptext defined for ware %s", ware_name.c_str());
+                        ware_descr->set_helptext(name(), "");
+                    }
+                }
+
+                // Add to tribe
 				wares_.insert(wareindex);
 				column.push_back(wareindex);
 			} catch (const WException& e) {
