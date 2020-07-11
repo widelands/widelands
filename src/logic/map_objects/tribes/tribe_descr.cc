@@ -178,8 +178,7 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 			                           directional_name, animation_directory, animation_type);
 		}
 	};
-	// Frontier and flag animations can be a mix of file and spritesheet animations
-	// Frontier and flag animations can be a mix of file and spritesheet animations
+	// Frontier and flag animations can be a mix of file and spritesheet animationss
 	const auto load_animations = [this, load_bridge_if_present](
 	                                const LuaTable& animations_table,
 	                                const std::string& animation_directory,
