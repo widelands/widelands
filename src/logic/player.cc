@@ -161,7 +161,7 @@ Player::Player(EditorGameBase& the_egbase,
 			   if (upcast(Building, building, note.pi))
 				   update_building_statistics(*building, note.ownership);
 		   }
-		});
+	   });
 
 	// Subscribe to NoteFieldTerrainChanged.
 	field_terrain_changed_subscriber_ = Notifications::subscribe<NoteFieldTerrainChanged>(
@@ -169,7 +169,7 @@ Player::Player(EditorGameBase& the_egbase,
 		   if (vision(note.map_index) > 1) {
 			   rediscover_node(egbase().map(), note.fc);
 		   }
-		});
+	   });
 
 	// Populating remaining_shipnames vector
 	for (const auto& shipname : tribe_descr.get_ship_names()) {
@@ -1693,7 +1693,6 @@ void Player::write_remaining_shipnames(FileWrite& fw) const {
 void Player::write_statistics(FileWrite& fw) const {
 	// Save stats as a single string to reduce number of hard disk write operations
 	const auto write_stats = [&fw](const StatisticsMap& stats, const DescriptionIndex ware_index) {
-
 		std::ostringstream oss("");
 		const int sizem = stats.at(ware_index).size() - 1;
 		if (sizem >= 0) {
