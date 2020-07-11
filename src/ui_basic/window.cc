@@ -415,9 +415,9 @@ void Window::draw_border(RenderTarget& dst) {
 			//  odd pixels of left bar and left bottom thingy
 			const int32_t height = vt_bar_end - pos + kVerticalBorderThingyHeight;
 			assert(0 <= kVerticalBorderTotalLength - height);
-			dst.blitrect(
-			   Vector2i(0, pos), pic_lborder_, Recti(Vector2i(0, kVerticalBorderTotalLength - height),
-			                                         kVerticalBorderThickness, height));
+			dst.blitrect(Vector2i(0, pos), pic_lborder_,
+			             Recti(Vector2i(0, kVerticalBorderTotalLength - height),
+			                   kVerticalBorderThickness, height));
 		}
 
 		{  // Right border
