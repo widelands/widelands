@@ -209,7 +209,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 		   if (n.map == &egbase().map()) {
 			   update_players();
 		   }
-		});
+	   });
 
 	update_players();
 }
@@ -818,10 +818,9 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		FieldsToDraw::Field& field = *fields_to_draw->mutable_field(idx);
 
 		Widelands::Player::Field const* const player_field =
-		   illustrating_vision_for_ ?
-		      &ebase.player(illustrating_vision_for_)
-		          .fields()[map.get_index(field.fcoords, map.get_width())] :
-		      nullptr;
+		   illustrating_vision_for_ ? &ebase.player(illustrating_vision_for_)
+		                                  .fields()[map.get_index(field.fcoords, map.get_width())] :
+		                              nullptr;
 		if (player_field) {
 			field.vision = player_field->vision;
 			if (field.vision <= 1) {

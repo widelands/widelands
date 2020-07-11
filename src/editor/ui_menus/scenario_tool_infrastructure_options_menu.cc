@@ -347,9 +347,8 @@ void ScenarioToolInfrastructureOptionsMenu::select_tab() {
 			erase = !tribe.has_immovable(it->second);
 			break;
 		case Widelands::MapObjectType::BUILDING:
-			erase =
-			   !tribe.has_building(it->second) &&
-			   tribe.get_building_descr(it->second)->type() != Widelands::MapObjectType::MILITARYSITE;
+			erase = !tribe.has_building(it->second) && tribe.get_building_descr(it->second)->type() !=
+			                                              Widelands::MapObjectType::MILITARYSITE;
 			break;
 		default:
 			NEVER_HERE();

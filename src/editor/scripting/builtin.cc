@@ -104,7 +104,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
        []() {
 	       return _(
 	          "Pauses the current thread and resumes it at the given gametime (in milliseconds).");
-	    },
+       },
        new FunctionBase("wake_me",
                         VariableType(VariableTypeID::Nil),  // call on
                         VariableType(VariableTypeID::Nil),  // returns
@@ -135,7 +135,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
 	          "layout has a format like e.g. 'r,r|br,r|r,r': Multiple directions (e, w, se, sw, ne, "
 	          "nw) "
 	          "separated by ','; '|' instead of ',' denotes flag placement.");
-	    },
+       },
        new FunctionBase("connected_road",
                         VariableType(VariableTypeID::Nil),  // call on
                         VariableType(VariableTypeID::Nil),  // returns
@@ -233,7 +233,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
        []() {
 	       return _("In an internet game, reports the ending of the game for a certain player to "
 	                "the metaserver. Valid result codes are 0 (lost), 1 (won), and 2 (resigned).");
-	    },
+       },
        new FunctionBase(
           "wl.game.report_result",
           VariableType(VariableTypeID::Nil),  // call on
@@ -321,7 +321,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
 	                " · 'icon' – path to the icon to show instead of the default message icon\n"
 	                " · 'heading' – Message header to show instead of 'title'\n"
 	                "All keys in args are optional. args may also be nil.");
-	    },
+       },
        new FunctionBase("send_message",
                         VariableType(VariableTypeID::Player),   // call on
                         VariableType(VariableTypeID::Message),  // returns
@@ -340,7 +340,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
 	                " · 'posx' – horizontal message box position in pixels (default: centered)\n"
 	                " · 'posy' – vertical message box position in pixels (default: centered)\n"
 	                "All keys in args are optional. args may also be nil.");
-	    },
+       },
        new FunctionBase("message_box",
                         VariableType(VariableTypeID::Player),  // call on
                         VariableType(VariableTypeID::Nil),     // returns
@@ -368,7 +368,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
        []() {
 	       return _(
 	          "Reveal the specified fields to the player until they are explicitly hidden again.");
-	    },
+       },
        new FunctionBase("reveal_fields",
                         VariableType(VariableTypeID::Player),  // call on
                         VariableType(VariableTypeID::Nil),     // returns
@@ -432,7 +432,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
        []() {
 	       return _(
 	          "Checks whether the player may build the specified building type on the given field.");
-	    },
+       },
        new FunctionBase(
           "get_suitability",
           VariableType(VariableTypeID::Player),  // call on
@@ -451,7 +451,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
        []() {
 	       return _("Returns the number of units the player produced of a given ware "
 	                "since the game was started.");
-	    },
+       },
        new FunctionBase(
           "switchplayer",
           VariableType(VariableTypeID::Player),   // call on
@@ -462,7 +462,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
        []() {
 	       return _("Returns whether the player is currently forbidden to attack the player "
 	                "with the given player number.");
-	    },
+       },
        new FunctionBase("is_attack_forbidden",
                         VariableType(VariableTypeID::Player),   // call on
                         VariableType(VariableTypeID::Boolean),  // returns
@@ -472,7 +472,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
        []() {
 	       return _("Sets whether the player is forbidden to attack the player with the given "
 	                "player number.");
-	    },
+       },
        new FunctionBase("set_attack_forbidden",
                         VariableType(VariableTypeID::Player),  // call on
                         VariableType(VariableTypeID::Nil),     // returns
@@ -503,7 +503,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
 	                     return _(
 	                        "Needs to be called after changing the raw_height of a field to update "
 	                        "slope steepness, buildcaps etc.");
-	                  },
+                     },
                      new FunctionBase("recalculate",
                                       VariableType(VariableTypeID::Map),  // call on
                                       VariableType(VariableTypeID::Nil),  // returns
@@ -513,7 +513,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
        []() {
 	       return _("Check again whether the maps allows seafaring. Needs to be called only "
 	                "after changing watery terrains.");
-	    },
+       },
        new FunctionBase("recalculate_seafaring",
                         VariableType(VariableTypeID::Map),  // call on
                         VariableType(VariableTypeID::Nil),  // returns
@@ -522,7 +522,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
                       []() {
 	                      return _("Sets whether a port may be built at the given coordinates. "
 	                               "Returns false if this could not be set.");
-	                   },
+                      },
                       new FunctionBase("set_port_space",
                                        VariableType(VariableTypeID::Map),      // call on
                                        VariableType(VariableTypeID::Boolean),  // returns
@@ -537,7 +537,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
     BuiltinFunctionInfo(
        []() {
 	       return _("Returns an array with all fields within a certain radius of this field.");
-	    },
+       },
        new FunctionBase("region",
                         VariableType(VariableTypeID::Field),  // call on
                         VariableType(VariableType(VariableTypeID::Integer),
@@ -548,7 +548,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
        []() {
 	       return _(
 	          "Returns an array with all fields inside a certain hollow area around this field.");
-	    },
+       },
        new FunctionBase("region",
                         VariableType(VariableTypeID::Field),  // call on
                         VariableType(VariableType(VariableTypeID::Integer),
@@ -567,7 +567,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
 	                " · 'flag' (suited for a flag)\n"
 	                " · 'walkable' (bobs can walk here)\n"
 	                " · 'swimmable' (bobs can swim here)");
-	    },
+       },
        new FunctionBase("has_caps",
                         VariableType(VariableTypeID::Field),    // call on
                         VariableType(VariableTypeID::Boolean),  // returns
@@ -577,7 +577,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
        []() {
 	       return _("Returns whether this field has the given caps when "
 	                "not taking nearby immovables into account.");
-	    },
+       },
        new FunctionBase("has_max_caps",
                         VariableType(VariableTypeID::Field),    // call on
                         VariableType(VariableTypeID::Boolean),  // returns
@@ -631,7 +631,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
        []() {
 	       return _("Returns which wares are produced by a certain production program of this "
 	                "productionsite as a table of {ware_name = ware_amount} pairs.");
-	    },
+       },
        new FunctionBase("produced_wares",
                         VariableType(VariableTypeID::ProductionSiteDescr),  // call on
                         VariableType(VariableType(VariableTypeID::String),
@@ -643,7 +643,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
        []() {
 	       return _("Returns which workers are recruited by a certain production program of this "
 	                "productionsite as a table of {worker_name = worker_amount} pairs.");
-	    },
+       },
        new FunctionBase("recruited_workers",
                         VariableType(VariableTypeID::ProductionSiteDescr),  // call on
                         VariableType(VariableType(VariableTypeID::String),
@@ -658,7 +658,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
        []() {
 	       return _("Returns an array with the BuildingDescriptions of all buildings "
 	                "of the given tribe that require this ware for production.");
-	    },
+       },
        new FunctionBase(
           "consumers",
           VariableType(VariableTypeID::WareDescr),  // call on
@@ -670,7 +670,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
        []() {
 	       return _("Returns an array with the BuildingDescriptions of all buildings "
 	                "of the given tribe that produce this ware.");
-	    },
+       },
        new FunctionBase(
           "producers",
           VariableType(VariableTypeID::WareDescr),  // call on
@@ -681,7 +681,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
     BuiltinFunctionInfo(
        []() {
 	       return _("Returns whether the given tribe needs this ware for any constructionsite.");
-	    },
+       },
        new FunctionBase(
           "is_construction_material",
           VariableType(VariableTypeID::WareDescr),  // call on
@@ -712,7 +712,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
                      []() {
 	                     return _("Destroy this map object immediately. May have special effects, "
 	                              "e.g. a building will go up in flames.");
-	                  },
+                     },
                      new FunctionBase("destroy",
                                       VariableType(VariableTypeID::MapObject),  // call on
                                       VariableType(VariableTypeID::Nil),        // returns
@@ -731,7 +731,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
     BuiltinFunctionInfo(
        []() {
 	       return _("Returns the number of wares of a certain type currently waiting on this flag.");
-	    },
+       },
        new FunctionBase("get_wares",
                         VariableType(VariableTypeID::Flag),     // call on
                         VariableType(VariableTypeID::Integer),  // returns
@@ -740,7 +740,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
     BuiltinFunctionInfo(
        []() {
 	       return _("Sets the number of wares of a certain type currently waiting in this flag.");
-	    },
+       },
        new FunctionBase("set_wares",
                         VariableType(VariableTypeID::Flag),  // call on
                         VariableType(VariableTypeID::Nil),   // returns
@@ -754,7 +754,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
        []() {
 	       return _(
 	          "Returns the number of workers of a certain type currently employed on this road.");
-	    },
+       },
        new FunctionBase("get_workers",
                         VariableType(VariableTypeID::Road),     // call on
                         VariableType(VariableTypeID::Integer),  // returns
@@ -763,7 +763,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
     BuiltinFunctionInfo(
        []() {
 	       return _("Sets the number of workers of a certain type currently employed on this road.");
-	    },
+       },
        new FunctionBase("set_workers",
                         VariableType(VariableTypeID::Road),  // call on
                         VariableType(VariableTypeID::Nil),   // returns
@@ -787,7 +787,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
        []() {
 	       return _("Returns the priority for the given ware inputqueue (one of 2 (low), 4 "
 	                "(normal), or 8 (high)).");
-	    },
+       },
        new FunctionBase(
           "get_priority",
           VariableType(VariableTypeID::ConstructionSite),  // call on
@@ -799,7 +799,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
        []() {
 	       return _("Sets the priority for the given ware inputqueue. Allowed values are one of 2 "
 	                "(low), 4 (normal), or 8 (high).");
-	    },
+       },
        new FunctionBase(
           "set_priority",
           VariableType(VariableTypeID::ConstructionSite),  // call on
@@ -831,7 +831,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
        []() {
 	       return _("Only valid for warehouses under construction: Returns the stock policy to "
 	                "apply to the given ware or worker after completion.");
-	    },
+       },
        new FunctionBase(
           "get_setting_warehouse_policy",
           VariableType(VariableTypeID::ConstructionSite),  // call on
@@ -842,7 +842,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
        []() {
 	       return _("Only valid for warehouses under construction: Sets the stock policy to apply "
 	                "to the given ware or worker after completion.");
-	    },
+       },
        new FunctionBase(
           "set_setting_warehouse_policy",
           VariableType(VariableTypeID::ConstructionSite),  // call on
@@ -864,7 +864,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
        []() {
 	       return _("Returns the number of workers of a certain type currently employed "
 	                "in this productionsite.");
-	    },
+       },
        new FunctionBase("get_workers",
                         VariableType(VariableTypeID::ProductionSite),  // call on
                         VariableType(VariableTypeID::Integer),         // returns
@@ -874,7 +874,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
        []() {
 	       return _("Sets the number of workers of a certain type currently "
 	                "employed in this productionsite.");
-	    },
+       },
        new FunctionBase("set_workers",
                         VariableType(VariableTypeID::ProductionSite),  // call on
                         VariableType(VariableTypeID::Nil),             // returns
@@ -885,7 +885,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
        []() {
 	       return _("Returns the priority for the given ware inputqueue (one of 2 (low), 4 "
 	                "(normal), or 8 (high)).");
-	    },
+       },
        new FunctionBase("get_priority",
                         VariableType(VariableTypeID::ConstructionSite),  // call on
                         VariableType(VariableTypeID::Integer),           // returns
@@ -895,7 +895,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
        []() {
 	       return _("Sets the priority for the given ware inputqueue. Allowed values are one of 2 "
 	                "(low), 4 (normal), or 8 (high).");
-	    },
+       },
        new FunctionBase("set_priority",
                         VariableType(VariableTypeID::ConstructionSite),  // call on
                         VariableType(VariableTypeID::Nil),               // returns
@@ -927,7 +927,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
 	       return _("Returns the number of soldiers matching the given soldier description "
 	                "currently garrisoned here. A soldier description is an array that contains "
 	                "the levels for health, attack, defense and evade (in this order).");
-	    },
+       },
        new FunctionBase(
           "get_soldiers",
           VariableType(VariableTypeID::MilitarySite),  // call on
@@ -943,7 +943,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
 	                "The argument is a table of soldier_description:amount pairs. "
 	                "A soldier description is an array that contains "
 	                "the levels for health, attack, defense and evade (in this order).");
-	    },
+       },
        new FunctionBase(
           "set_soldiers",
           VariableType(VariableTypeID::MilitarySite),  // call on
@@ -961,7 +961,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
 	       return _("Returns the number of soldiers matching the given soldier description "
 	                "in training here. A soldier description is an array that contains "
 	                "the levels for health, attack, defense and evade (in this order).");
-	    },
+       },
        new FunctionBase(
           "get_soldiers",
           VariableType(VariableTypeID::TrainingSite),  // call on
@@ -977,7 +977,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
 	                "The argument is a table of soldier_description:amount pairs. "
 	                "A soldier description is an array that contains "
 	                "the levels for health, attack, defense and evade (in this order).");
-	    },
+       },
        new FunctionBase(
           "set_soldiers",
           VariableType(VariableTypeID::TrainingSite),  // call on
@@ -994,7 +994,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
        []() {
 	       return _(
 	          "Returns the number of wares of a certain type currently stored in this warehouse.");
-	    },
+       },
        new FunctionBase("get_wares",
                         VariableType(VariableTypeID::Warehouse),  // call on
                         VariableType(VariableTypeID::Integer),    // returns
@@ -1004,7 +1004,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
        []() {
 	       return _(
 	          "Sets the number of wares of a certain type currently stored in this warehouse.");
-	    },
+       },
        new FunctionBase("set_wares",
                         VariableType(VariableTypeID::Warehouse),  // call on
                         VariableType(VariableTypeID::Nil),        // returns
@@ -1015,7 +1015,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
        []() {
 	       return _(
 	          "Returns the number of workers of a certain type currently stored in this warehouse.");
-	    },
+       },
        new FunctionBase("get_workers",
                         VariableType(VariableTypeID::Warehouse),  // call on
                         VariableType(VariableTypeID::Integer),    // returns
@@ -1025,7 +1025,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
        []() {
 	       return _(
 	          "Sets the number of workers of a certain type currently stored in this warehouse.");
-	    },
+       },
        new FunctionBase("set_workers",
                         VariableType(VariableTypeID::Warehouse),  // call on
                         VariableType(VariableTypeID::Nil),        // returns
@@ -1038,7 +1038,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
 	          "Returns the number of soldiers matching the given soldier description "
 	          "currently stored in this warehouse. A soldier description is an array that contains "
 	          "the levels for health, attack, defense and evade (in this order).");
-	    },
+       },
        new FunctionBase(
           "get_soldiers",
           VariableType(VariableTypeID::Warehouse),  // call on
@@ -1054,7 +1054,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
 	                "The argument is a table of soldier_description:amount pairs. "
 	                "A soldier description is an array that contains "
 	                "the levels for health, attack, defense and evade (in this order).");
-	    },
+       },
        new FunctionBase(
           "set_soldiers",
           VariableType(VariableTypeID::Warehouse),  // call on
@@ -1068,7 +1068,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
        []() {
 	       return _("Set this warehouse’s storage policy for the given ware or worker. "
 	                "Valid policies are 'normal', 'prefer', 'dontstock', and 'remove'.");
-	    },
+       },
        new FunctionBase("set_warehouse_policy",
                         VariableType(VariableTypeID::Warehouse),  // call on
                         VariableType(VariableTypeID::Nil),        // returns
@@ -1093,7 +1093,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
 	                        return _(
 	                           "Cancel the preparations for an expedition from this warehouse if it "
 	                           "is a port and an expedition is being prepared.");
-	                     },
+                        },
                         new FunctionBase("start_expedition",
                                          VariableType(VariableTypeID::Warehouse),  // call on
                                          VariableType(VariableTypeID::Nil),        // returns
@@ -1128,7 +1128,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
        []() {
 	       return _("If this ship is an expedition ship that has found a port space), start "
 	                "building a colonization port. Returns whether colonising was started.");
-	    },
+       },
        new FunctionBase("build_colonization_port",
                         VariableType(VariableTypeID::Ship),     // call on
                         VariableType(VariableTypeID::Boolean),  // returns
@@ -1140,7 +1140,7 @@ const std::map<std::string, BuiltinFunctionInfo> kBuiltinFunctions = {
 	          "Turns this ship into an expedition ship without a base port. Creates all necessary "
 	          "wares and a builder plus the specified additional items. "
 	          "The ship must be empty when this method is called.");
-	    },
+       },
        new FunctionBase("make_expedition",
                         VariableType(VariableTypeID::Ship),  // call on
                         VariableType(VariableTypeID::Nil),   // returns
@@ -1167,7 +1167,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
     BuiltinPropertyInfo(
        []() {
 	       return _("The speed the game is currently running at in milliseconds per real second.");
-	    },
+       },
        new Property("real_speed",
                     Property::Access::RO,
                     VariableType(VariableTypeID::Game),    // class
@@ -1178,7 +1178,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 	                        return _(
 	                           "Sets the desired speed of the game in milliseconds per real second. "
 	                           "Note that this will not work in network games as expected.");
-	                     },
+                        },
                         new Property("desired_speed",
                                      Property::Access::RW,
                                      VariableType(VariableTypeID::Game),    // class
@@ -1198,7 +1198,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 	       return _(
 	          "One string out of ‘undefined’, ‘singleplayer’, ‘netclient’, ‘nethost’, ‘replay’, "
 	          "describing the type of game that is played.");
-	    },
+       },
        new Property("type",
                     Property::Access::RO,
                     VariableType(VariableTypeID::Game),   // class
@@ -1210,7 +1210,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 	       return _("The difficulty level of the current scenario. Values range from 1 "
 	                "to the number of levels specified in the campaign's configuration in "
 	                "campaigns.lua. By convention higher values mean more difficult.");
-	    },
+       },
        new Property("scenario_difficulty",
                     Property::Access::RO,
                     VariableType(VariableTypeID::Game),    // class
@@ -1283,7 +1283,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
     BuiltinPropertyInfo(
        []() {
 	       return _("If you set this to true, the map will be completely visible for this player.");
-	    },
+       },
        new Property("see_all",
                     Property::Access::RO,
                     VariableType(VariableTypeID::Player),  // class
@@ -1296,7 +1296,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 	                "currently allowed for this player. Note that you can not enable/forbid "
 	                "a building by setting the value. Use allow_buildings() or forbid_buildings() "
 	                "for that.");
-	    },
+       },
        new Property("allowed_buildings",
                     Property::Access::RO,
                     VariableType(VariableTypeID::Player),  // class
@@ -1308,7 +1308,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
        []() {
 	       return _("A table of name:Objective. You can change the objectives in this table "
 	                "and it will be reflected in the game. To add a new item, use add_objective().");
-	    },
+       },
        new Property("objectives",
                     Property::Access::RO,
                     VariableType(VariableTypeID::Player),  // class
@@ -1320,7 +1320,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
        []() {
 	       return _("An array of all the messages sent to the player. Note that you can’t add "
 	                "messages to this array), use send_message() for that.");
-	    },
+       },
        new Property("messages",
                     Property::Access::RO,
                     VariableType(VariableTypeID::Player),  // class
@@ -1332,7 +1332,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 	                   return _(
 	                      "An array of the messages that are either read or new. Note that "
 	                      "you can’t add messages to this array), use send_message() for that.");
-	                },
+                   },
                    new Property("inbox",
                                 Property::Access::RO,
                                 VariableType(VariableTypeID::Player),  // class
@@ -1377,7 +1377,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 	                            "the objective will not be shown to the user), no matter what "
 	                            "visible is set to. A savegame will be created when this attribute "
 	                            "is changed to true.");
-	                },
+                   },
                    new Property("done",
                                 Property::Access::RW,
                                 VariableType(VariableTypeID::Objective),  // class
@@ -1453,7 +1453,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
     BuiltinPropertyInfo(
        []() {
 	       return _("An array of tables of {x, y} pairs with the coordinates of the port spaces.");
-	    },
+       },
        new Property("port_spaces",
                     Property::Access::RO,
                     VariableType(VariableTypeID::Map),  // class
@@ -1641,7 +1641,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 	       return _("A table containing numbers labeled as 'pickiness', "
 	                "'preferred_fertility', 'preferred_humidity', and 'preferred_temperature', "
 	                "or nil if the immovable has no terrain affinity");
-	    },
+       },
        new Property("terrain_affinity",
                     Property::Access::RO,
                     VariableType(VariableTypeID::ImmovableDescr),  // class
@@ -1652,7 +1652,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
     BuiltinPropertyInfo(
        []() {
 	       return _("The localized species name of a tree (empty if this immovable is not a tree)");
-	    },
+       },
        new Property("species",
                     Property::Access::RO,
                     VariableType(VariableTypeID::ImmovableDescr),  // class
@@ -1662,7 +1662,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
     BuiltinPropertyInfo(
        []() {
 	       return _("A table of ware-to-count pairs describing the buildcost for the immovable");
-	    },
+       },
        new Property("buildcost",
                     Property::Access::RO,
                     VariableType(VariableTypeID::ImmovableDescr),  // class
@@ -1690,7 +1690,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                                 []() {
 	                                return _("The first workarea radius of the building), or nil in "
 	                                         "case the building has no workarea");
-	                             },
+                                },
                                 new Property("workarea_radius",
                                              Property::Access::RO,
                                              VariableType(VariableTypeID::BuildingDescr),  // class
@@ -1731,7 +1731,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                               []() {
 	                              return _("The building type that can be enhanced to this "
 	                                       "building), or nil if this is not an enhanced building");
-	                           },
+                              },
                               new Property("enhanced_from",
                                            Property::Access::RO,
                                            VariableType(VariableTypeID::BuildingDescr),  // class
@@ -1741,7 +1741,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                             []() {
 	                            return _("The building type this building can be enhanced to, or "
 	                                     "nil if this building is not enhanceable");
-	                         },
+                            },
                             new Property("enhancement",
                                          Property::Access::RO,
                                          VariableType(VariableTypeID::BuildingDescr),  // class
@@ -1779,7 +1779,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                       []() {
 	                      return _("An array of WareDescriptions containing the wares this "
 	                               "productionsite needs for its production");
-	                   },
+                      },
                       new Property(
                          "inputs",
                          Property::Access::RO,
@@ -1792,7 +1792,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
        []() {
 	       return _(
 	          "An array with WareDescriptions containing the wares this productionsite can produce");
-	    },
+       },
        new Property("output_ware_types",
                     Property::Access::RO,
                     VariableType(VariableTypeID::ProductionSiteDescr),  // class
@@ -1804,7 +1804,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
        []() {
 	       return _("An array with WorkerDescriptions containing the workers this productionsite "
 	                "can recruit");
-	    },
+       },
        new Property("output_worker_types",
                     Property::Access::RO,
                     VariableType(VariableTypeID::ProductionSiteDescr),  // class
@@ -1826,7 +1826,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 	          "An array with WorkerDescriptions containing the workers that need to work here. "
 	          "If several instances of a certain worker type are required), this instance is "
 	          "contained several times.");
-	    },
+       },
        new Property("working_positions",
                     Property::Access::RO,
                     VariableType(VariableTypeID::ProductionSiteDescr),  // class
@@ -1930,7 +1930,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                      []() {
 	                     return _("The WorkerDescription of the worker this one will level up to or "
 	                              "nil if it never levels up.");
-	                  },
+                     },
                      new Property("becomes",
                                   Property::Access::RO,
                                   VariableType(VariableTypeID::WorkerDescr),  // class
@@ -1955,7 +1955,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
     BuiltinPropertyInfo(
        []() {
 	       return _("A table with the buildcost for this worker if it may be created in warehouses");
-	    },
+       },
        new Property("buildcost",
                     Property::Access::RO,
                     VariableType(VariableTypeID::WorkerDescr),  // class
@@ -1967,7 +1967,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
        []() {
 	       return _(
 	          "An array with BuildingDescriptions with buildings where this worker can be employed");
-	    },
+       },
        new Property("employers",
                     Property::Access::RO,
                     VariableType(VariableTypeID::WorkerDescr),  // class
@@ -2051,7 +2051,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
     BuiltinPropertyInfo(
        []() {
 	       return _("The blow absorption rate increase gained per defense level in percent points");
-	    },
+       },
        new Property("defense_incr_per_level",
                     Property::Access::RO,
                     VariableType(VariableTypeID::SoldierDescr),  // class
@@ -2126,7 +2126,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                                  []() {
 	                                 return _("The resource that can be found here unless another "
 	                                          "resource is explicitly placed here. Can be nil.");
-	                              },
+                                 },
                                  new Property("default_resource",
                                               Property::Access::RO,
                                               VariableType(VariableTypeID::TerrainDescr),  // class
@@ -2144,7 +2144,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
     BuiltinPropertyInfo(
        []() {
 	       return _("An array of ResourceDescriptions with all valid resources for this terrain");
-	    },
+       },
        new Property("valid_resources",
                     Property::Access::RO,
                     VariableType(VariableTypeID::TerrainDescr),  // class
@@ -2162,7 +2162,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
     BuiltinPropertyInfo(
        []() {
 	       return _("The temperature of this terrain (regarding immovables’ terrain affinity)");
-	    },
+       },
        new Property("temperature",
                     Property::Access::RO,
                     VariableType(VariableTypeID::TerrainDescr),  // class
@@ -2191,7 +2191,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                     []() {
 	                    return _("The unique serial number of this map object. "
 	                             "Note that this value may not stay constant after saving/loading.");
-	                 },
+                    },
                     new Property(
                        "serial",
                        Property::Access::RO,
@@ -2241,7 +2241,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 	       return _("An array of Field that is occupied by this Immovable. "
 	                "If the immovable occupies more than one field (roads or big buildings for "
 	                "example) the first entry in this list will be the main field");
-	    },
+       },
        new Property(
           "fields",
           Property::Access::RO,
@@ -2269,7 +2269,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 	                "can disappear when a player merges them through placing/deleting "
 	                "roads and flags, you must get a fresh economy object every time you call "
 	                "another function on the resulting economy object.");
-	    },
+       },
        new Property("ware_economy",
                     Property::Access::RO,
                     VariableType(VariableTypeID::Flag),    // class
@@ -2282,7 +2282,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 	                "can disappear when a player merges them through placing/deleting "
 	                "roads and flags, you must get a fresh economy object every time you call "
 	                "another function on the resulting economy object.");
-	    },
+       },
        new Property("worker_economy",
                     Property::Access::RO,
                     VariableType(VariableTypeID::Flag),    // class
@@ -2299,7 +2299,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                      []() {
 	                     return _("The roads leading to the flag. Directions can be 'tr', 'r', "
 	                              "'br', 'bl', 'l', and 'tl'.");
-	                  },
+                     },
                      new Property("roads",
                                   Property::Access::RO,
                                   VariableType(VariableTypeID::Flag),  // class
@@ -2340,7 +2340,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
        []() {
 	       return _("A table of the workers that can be employed on this road), "
 	                "in the format worker_name:number_of_working_positions");
-	    },
+       },
        new Property("valid_workers",
                     Property::Access::RO,
                     VariableType(VariableTypeID::Road),  // class
@@ -2381,7 +2381,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
        []() {
 	       return _(
 	          "The number of soldiers stationed at this military- or trainingsite after completion");
-	    },
+       },
        new Property("setting_soldier_capacity",
                     Property::Access::RW,
                     VariableType(VariableTypeID::ConstructionSite),  // class
@@ -2458,7 +2458,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
        []() {
 	       return _(
 	          "The PortDock associated with this port), or nil if this warehouse is not a port.");
-	    },
+       },
        new Property("portdock",
                     Property::Access::RO,
                     VariableType(VariableTypeID::Warehouse),  // class
@@ -2487,7 +2487,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
        []() {
 	       return _("A table of the workers that can be employed in this productionsite), "
 	                "in the format worker_name:number_of_working_positions");
-	    },
+       },
        new Property("valid_workers",
                     Property::Access::RO,
                     VariableType(VariableTypeID::ProductionSite),  // class
@@ -2532,7 +2532,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
        []() {
 	       return _("nil if no port was ever visited or the last portdock was destroyed; "
 	                "otherwise the port dock of the last visited port");
-	    },
+       },
        new Property("last_portdock",
                     Property::Access::RO,
                     VariableType(VariableTypeID::Ship),     // class
@@ -2543,7 +2543,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
        []() {
 	       return _("What this ship is currently doing: 'transport', 'exp_scouting', "
 	                "'exp_found_port_space', 'exp_colonizing', 'sink_request', or 'sink_animation'");
-	    },
+       },
        new Property("state",
                     Property::Access::RO,
                     VariableType(VariableTypeID::Ship),   // class
@@ -2554,7 +2554,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
        []() {
 	       return _("The direction if the ship is an expedition ship sailing "
 	                "around an island. Valid values are 'cw', 'ccw', and nil.");
-	    },
+       },
        new Property("island_explore_direction",
                     Property::Access::RW,
                     VariableType(VariableTypeID::Ship),   // class
@@ -2578,7 +2578,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 	                "A worker that is out working (e.g. hunter) has as a location his building. "
 	                "A stationed soldier has his military building as location. "
 	                "Workers on transit usually have the Road they are currently on as location.");
-	    },
+       },
        new Property("location",
                     Property::Access::RO,
                     VariableType(VariableTypeID::Worker),          // class
@@ -2644,7 +2644,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 	                "too much, all surrounding fields will also change their heights because "
 	                "the slope is constrained. If you are changing the height of many terrains "
 	                "at once), use raw_height instead and then call recalculate() afterwards.");
-	    },
+       },
        new Property(
           "height",
           Property::Access::RW,
@@ -2658,7 +2658,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 	                "of the surrounding fields. You can use this field to change the height "
 	                "of many fields on a map quickly), then use recalculate() to make sure that "
 	                "everything is in order.");
-	    },
+       },
        new Property("raw_height",
                     Property::Access::RW,
                     VariableType(VariableTypeID::Field),   // class
@@ -2668,7 +2668,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                         []() {
 	                        return _("Returns the position in pixels to move the view to to center "
 	                                 "this field for the current interactive player");
-	                     },
+                        },
                         new Property("viewpoint_x",
                                      Property::Access::RO,
                                      VariableType(VariableTypeID::Field),   // class
@@ -2678,7 +2678,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
                         []() {
 	                        return _("Returns the position in pixels to move the view to to center "
 	                                 "this field for the current interactive player");
-	                     },
+                        },
                         new Property("viewpoint_y",
                                      Property::Access::RO,
                                      VariableType(VariableTypeID::Field),   // class
@@ -2751,7 +2751,7 @@ const std::map<std::string, BuiltinPropertyInfo> kBuiltinProperties = {
 	          "not necessarily mean that claimers[1] is also the owner of the "
 	          "field), as a field that houses a surrounded military building is "
 	          "owned by the surrounded Player), but others have more military influence over it.");
-	    },
+       },
        new Property("claimers",
                     Property::Access::RO,
                     VariableType(VariableTypeID::Field),  // class

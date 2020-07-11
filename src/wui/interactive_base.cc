@@ -233,13 +233,14 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 	   });
 	sound_subscriber_ = Notifications::subscribe<NoteSound>(
 	   [this](const NoteSound& note) { play_sound_effect(note); });
-	shipnotes_subscriber_ = Notifications::subscribe<Widelands::NoteShip>([this](
-	   const Widelands::NoteShip& note) {
-		if (note.action == Widelands::NoteShip::Action::kWaitingForCommand &&
-		    note.ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
-			expedition_port_spaces_.emplace(note.ship, note.ship->exp_port_spaces().front());
-		}
-	});
+	shipnotes_subscriber_ =
+	   Notifications::subscribe<Widelands::NoteShip>([this](const Widelands::NoteShip& note) {
+		   if (note.action == Widelands::NoteShip::Action::kWaitingForCommand &&
+		       note.ship->get_ship_state() ==
+		          Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
+			   expedition_port_spaces_.emplace(note.ship, note.ship->exp_port_spaces().front());
+		   }
+	   });
 	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
 	   [this](const Widelands::NoteBuilding& note) {
 		   switch (note.action) {
@@ -265,7 +266,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 		   default:
 			   break;
 		   }
-		});
+	   });
 
 	toolbar_.set_layout_toplevel(true);
 	map_view_.changeview.connect([this] { mainview_move(); });

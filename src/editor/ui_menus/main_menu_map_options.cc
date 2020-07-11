@@ -143,10 +143,10 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 
 	if (parent.finalized()) {
 		const uint32_t l = parent.egbase().map().get_waterway_max_length();
-		tags_box_.add(new UI::Textarea(
-		   &tags_box_, 0, 0, max_w_, labelh_, (boost::format(_("Waterway length limit: %s")) %
-		                                       (l < 2 ? _("Disabled") : std::to_string(l)))
-		                                         .str()));
+		tags_box_.add(new UI::Textarea(&tags_box_, 0, 0, max_w_, labelh_,
+		                               (boost::format(_("Waterway length limit: %s")) %
+		                                (l < 2 ? _("Disabled") : std::to_string(l)))
+		                                  .str()));
 		waterway_length_warning_ = nullptr;
 	} else {
 		tags_box_.add(

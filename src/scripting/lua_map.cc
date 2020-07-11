@@ -1113,7 +1113,8 @@ HasInputs
       :arg ware: ware name
       :type ware: :class:`string`
       :arg prio: The new priority. One of "low", "normal", or "high".
-      :arg cs_setting: Only valid for productionsite-constructionsites. If `true`, refers to the settings to apply after construction.
+      :arg cs_setting: Only valid for productionsite-constructionsites. If `true`, refers to the
+   settings to apply after construction.
 */
 
 /* RST
@@ -1124,30 +1125,35 @@ HasInputs
       :arg ware: ware name
       :type ware: :class:`string`
       :returns: :class:`string`
-      :arg cs_setting: Only valid for productionsite-constructionsites. If `true`, refers to the settings to apply after construction.
+      :arg cs_setting: Only valid for productionsite-constructionsites. If `true`, refers to the
+   settings to apply after construction.
 */
 
 /* RST
    .. method:: set_desired_fill(item, fill [, cs_setting = false])
 
-      Sets the desired fill for the given ware or worker inputqueue, as if the player had clicked the increase/decrease buttons.
+      Sets the desired fill for the given ware or worker inputqueue, as if the player had clicked
+   the increase/decrease buttons.
 
       :arg item: ware or worker name
       :type ware: :class:`string`
       :arg fill: desired fill
       :type ware: :class:`integer`
-      :arg cs_setting: Only valid for productionsite-constructionsites. If `true`, refers to the settings to apply after construction.
+      :arg cs_setting: Only valid for productionsite-constructionsites. If `true`, refers to the
+   settings to apply after construction.
 */
 
 /* RST
    .. method:: get_desired_fill(item, fill [, cs_setting = false])
 
-      Returns the desired fill for the given ware or worker inputqueue. See also :meth:`set_desired_fill`.
+      Returns the desired fill for the given ware or worker inputqueue. See also
+   :meth:`set_desired_fill`.
 
       :arg item: ware or worker name
       :type ware: :class:`string`
       :returns: :class:`integer`
-      :arg cs_setting: Only valid for productionsite-constructionsites. If `true`, refers to the settings to apply after construction.
+      :arg cs_setting: Only valid for productionsite-constructionsites. If `true`, refers to the
+   settings to apply after construction.
 */
 
 /* RST
@@ -1207,12 +1213,14 @@ HasSoldiers
          kind in this building.
 
          A soldier description is a :class:`array` that contains the level for
-         health, attack, defense, and evade, and optionally the soldier's total current hitpoint number (in this order). A usage example:
+         health, attack, defense, and evade, and optionally the soldier's total current hitpoint
+   number (in this order). A usage example:
 
          .. code-block:: lua
 
             w:get_soldiers({0,0,0,0}) -- returns all level 0 soldiers
-            w:get_soldiers({0,0,0,0, 1000}) -- returns all level 0 soldiers with *exactly* 1000 HP left
+            w:get_soldiers({0,0,0,0, 1000}) -- returns all level 0 soldiers with *exactly* 1000 HP
+   left
 
          would return the number of soldiers of level 0 in this location.
 
@@ -4834,7 +4842,8 @@ Building
 */
 const char LuaBuilding::className[] = "Building";
 const MethodType<LuaBuilding> LuaBuilding::Methods[] = {
-   METHOD(LuaBuilding, dismantle), {nullptr, nullptr},
+   METHOD(LuaBuilding, dismantle),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaBuilding> LuaBuilding::Properties[] = {
    PROP_RO(LuaBuilding, flag),
@@ -4933,7 +4942,8 @@ int LuaConstructionSite::get_building(lua_State* L) {
 /* RST
    .. attribute:: has_builder
 
-      (RW) Whether this constructionsite has a builder. Changing this setting causes the worker to be instantly deleted or to be created from thin air.
+      (RW) Whether this constructionsite has a builder. Changing this setting causes the worker to
+   be instantly deleted or to be created from thin air.
 */
 int LuaConstructionSite::get_has_builder(lua_State* L) {
 	lua_pushboolean(L, get(L, get_egbase(L))->builder_.is_set());
@@ -4969,7 +4979,8 @@ int LuaConstructionSite::set_has_builder(lua_State* L) {
 /* RST
    .. attribute:: setting_launch_expedition
 
-      (RW) Only valid for ports under construction. Whether an expedition will be launched immediately upon completion.
+      (RW) Only valid for ports under construction. Whether an expedition will be launched
+   immediately upon completion.
 */
 int LuaConstructionSite::get_setting_launch_expedition(lua_State* L) {
 	upcast(Widelands::WarehouseSettings, ws, get(L, get_egbase(L))->get_settings());
@@ -4991,7 +5002,8 @@ int LuaConstructionSite::set_setting_launch_expedition(lua_State* L) {
 /* RST
    .. attribute:: setting_stopped
 
-      (RW) Only valid for productionsites and trainingsites under construction. Whether this building will be initially stopped after completion.
+      (RW) Only valid for productionsites and trainingsites under construction. Whether this
+   building will be initially stopped after completion.
 */
 int LuaConstructionSite::get_setting_stopped(lua_State* L) {
 	upcast(Widelands::ProductionsiteSettings, ws, get(L, get_egbase(L))->get_settings());
@@ -5013,7 +5025,8 @@ int LuaConstructionSite::set_setting_stopped(lua_State* L) {
 /* RST
    .. attribute:: setting_prefer_heroes
 
-      (RW) Only valid for militarysites under construction. Whether this building will prefer heroes or rookies after completion.
+      (RW) Only valid for militarysites under construction. Whether this building will prefer heroes
+   or rookies after completion.
 */
 int LuaConstructionSite::get_setting_prefer_heroes(lua_State* L) {
 	upcast(Widelands::MilitarysiteSettings, ms, get(L, get_egbase(L))->get_settings());
@@ -5035,7 +5048,8 @@ int LuaConstructionSite::set_setting_prefer_heroes(lua_State* L) {
 /* RST
    .. attribute:: setting_soldier_capacity
 
-      (RW) Only valid for militarysites and trainingsites under construction. The desired number of soldiers stationed here after completion.
+      (RW) Only valid for militarysites and trainingsites under construction. The desired number of
+   soldiers stationed here after completion.
 */
 int LuaConstructionSite::get_setting_soldier_capacity(lua_State* L) {
 	upcast(Widelands::MilitarysiteSettings, ms, get(L, get_egbase(L))->get_settings());
@@ -5162,7 +5176,8 @@ int LuaConstructionSite::set_desired_fill(lua_State* L) {
 /* RST
    .. method:: get_setting_warehouse_policy(wareworker)
 
-      Only valid for warehouses under construction. Returns the stock policy to apply to the given ware or worker after completion.
+      Only valid for warehouses under construction. Returns the stock policy to apply to the given
+   ware or worker after completion.
 */
 int LuaConstructionSite::get_setting_warehouse_policy(lua_State* L) {
 	upcast(Widelands::WarehouseSettings, ws, get(L, get_egbase(L))->get_settings());
@@ -5181,8 +5196,9 @@ int LuaConstructionSite::get_setting_warehouse_policy(lua_State* L) {
 /* RST
    .. method:: set_setting_warehouse_policy(wareworker, policystring)
 
-      Only valid for warehouses under construction. Sets the stock policy to apply to the given ware or worker after completion.
-      Valid argument strings are documented in `Warehouse.set_warehouse_policies`.
+      Only valid for warehouses under construction. Sets the stock policy to apply to the given ware
+   or worker after completion. Valid argument strings are documented in
+   `Warehouse.set_warehouse_policies`.
 */
 int LuaConstructionSite::set_setting_warehouse_policy(lua_State* L) {
 	upcast(Widelands::WarehouseSettings, ws, get(L, get_egbase(L))->get_settings());
@@ -5227,7 +5243,8 @@ DismantleSite
 const char LuaDismantleSite::className[] = "DismantleSite";
 const MethodType<LuaDismantleSite> LuaDismantleSite::Methods[] = {{nullptr, nullptr}};
 const PropertyType<LuaDismantleSite> LuaDismantleSite::Properties[] = {
-   PROP_RW(LuaDismantleSite, has_builder), {nullptr, nullptr, nullptr},
+   PROP_RW(LuaDismantleSite, has_builder),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -5238,7 +5255,8 @@ const PropertyType<LuaDismantleSite> LuaDismantleSite::Properties[] = {
 /* RST
    .. attribute:: has_builder
 
-      (RW) Whether this dismantlesite has a builder. Changing this setting causes the worker to be instantly deleted or to be created from thin air.
+      (RW) Whether this dismantlesite has a builder. Changing this setting causes the worker to be
+   instantly deleted or to be created from thin air.
 */
 int LuaDismantleSite::get_has_builder(lua_State* L) {
 	lua_pushboolean(L, get(L, get_egbase(L))->builder_.is_set());

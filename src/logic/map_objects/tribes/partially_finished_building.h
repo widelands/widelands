@@ -26,7 +26,7 @@
 namespace LuaMaps {
 class LuaConstructionSite;
 class LuaDismantleSite;
-}
+}  // namespace LuaMaps
 
 namespace Widelands {
 
