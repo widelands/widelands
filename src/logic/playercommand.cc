@@ -755,7 +755,9 @@ CmdEnhanceBuilding::CmdEnhanceBuilding(StreamRead& des) : PlayerCommand(0, des.u
 void CmdEnhanceBuilding::execute(Game& game) {
 	MapObject* mo = game.objects().get_object(serial_);
 	if (upcast(ConstructionSite, cs, mo)) {
-		cs->enhance();
+		if (bi_ == cs->building().enhancement()) {
+			cs->enhance();
+		}
 	} else if (upcast(Building, building, mo)) {
 		game.get_player(sender())->enhance_building(building, bi_, keep_wares_);
 	}

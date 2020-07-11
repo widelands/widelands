@@ -328,25 +328,25 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Ship* s
 	   Notifications::subscribe<Widelands::NoteShip>([this](const Widelands::NoteShip& note) {
 		   if (note.ship->serial() == ship_.serial()) {
 			   switch (note.action) {
-			   // Unable to cancel the expedition
+				// Unable to cancel the expedition
 			   case Widelands::NoteShip::Action::kNoPortLeft:
 				   no_port_error_message();
 				   break;
-			   // The ship is no more
+				// The ship is no more
 			   case Widelands::NoteShip::Action::kLost:
 				   // Stop this from thinking to avoid segfaults
 				   set_thinks(false);
 				   die();
 				   break;
-			   // If the ship state has changed, e.g. expedition started or scouting direction changed,
-			   // think() will take care of it.
+				// If the ship state has changed, e.g. expedition started or scouting direction changed,
+				// think() will take care of it.
 			   case Widelands::NoteShip::Action::kDestinationChanged:
 			   case Widelands::NoteShip::Action::kWaitingForCommand:
 			   case Widelands::NoteShip::Action::kGained:
 				   break;
 			   }
 		   }
-		});
+	   });
 
 	// Init button visibility
 	navigation_box_height_ = navigation_box_.get_h();
@@ -382,8 +382,9 @@ void ShipWindow::no_port_error_message() {
 			UI::WLMessageBox messagebox(
 			   get_parent(),
 			   /** TRANSLATORS: Window label when an expedition can't be canceled */
-			   _("Cancel Expedition"), _("This expedition can’t be canceled, because the "
-			                             "ship has no port to return to."),
+			   _("Cancel Expedition"),
+			   _("This expedition can’t be canceled, because the "
+			     "ship has no port to return to."),
 			   UI::WLMessageBox::MBoxType::kOk);
 			messagebox.run<UI::Panel::Returncodes>();
 		}

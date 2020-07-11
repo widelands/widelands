@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"POT-Creation-Date: 2020-07-09 08:33+0000\n"
 "PO-Revision-Date: 2020-04-22 20:03+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Malay (http://www.transifex.com/widelands/widelands/language/ms/)\n"
@@ -58,7 +58,7 @@ msgstr "%1$s dan %2$s"
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
 #. TRANSLATORS: Terrain name (Climate)
-#: ../../data/scripting/help.lua:46 ../../src/scripting/lua_game.cc:1086
+#: ../../data/scripting/help.lua:46 ../../src/scripting/lua_game.cc:1117
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
@@ -104,16 +104,16 @@ msgid ""
 "extra resources for bootstrapping your economy."
 msgstr ""
 
-#: ../../data/scripting/messages.lua:51 ../../data/scripting/messages.lua:53
+#: ../../data/scripting/messages.lua:53 ../../data/scripting/messages.lua:55
 #: ../../src/wui/game_message_menu.cc:68 ../../src/wui/game_summary.cc:104
 msgid "Status"
 msgstr "Status"
 
-#: ../../data/scripting/messages.lua:186
+#: ../../data/scripting/messages.lua:191
 msgid "New Objective"
 msgstr ""
 
-#: ../../data/scripting/messages.lua:188
+#: ../../data/scripting/messages.lua:193
 msgid "New Objectives"
 msgstr ""
 
@@ -582,7 +582,7 @@ msgstr "Mencipta peta kosong..."
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:104
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:474
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:141
-#: ../../src/logic/map.h:163 ../../src/wui/mapdata.cc:45
+#: ../../src/logic/map.h:173 ../../src/wui/mapdata.cc:45
 msgid "No Name"
 msgstr "Tanpa Nama"
 
@@ -590,7 +590,7 @@ msgstr "Tanpa Nama"
 #: ../../src/editor/editorinteractive.cc:965
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:105
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:475
-#: ../../src/logic/map.h:164
+#: ../../src/logic/map.h:174
 msgctxt "author_name"
 msgid "Unknown"
 msgstr "Tidak Diketahui"
@@ -1486,11 +1486,11 @@ msgstr "Memuatkan..."
 msgid "Creating player infrastructure…"
 msgstr ""
 
-#: ../../src/logic/game.cc:479 ../../src/logic/player.cc:225
+#: ../../src/logic/game.cc:479 ../../src/logic/player.cc:224
 msgid "Missing starting position"
 msgstr "Kedudukan permulaan hilang"
 
-#: ../../src/logic/game.cc:480 ../../src/logic/player.cc:226
+#: ../../src/logic/game.cc:480 ../../src/logic/player.cc:225
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
@@ -1563,7 +1563,7 @@ msgstr ""
 msgid "An unexpected error occurred:"
 msgstr ""
 
-#: ../../src/logic/map.h:165
+#: ../../src/logic/map.h:175
 msgid "No description defined"
 msgstr "Tiada keterangan ditakrif"
 
@@ -1690,9 +1690,9 @@ msgstr "ekonomi tidak memerlukan pekerja '%s'"
 #. * TRANSLATORS:    %2$s = "Ox"
 #: ../../src/logic/map_objects/tribes/production_program.cc:320
 #: ../../src/logic/map_objects/tribes/production_program.cc:344
-#: ../../src/logic/map_objects/tribes/production_program.cc:784
-#: ../../src/logic/map_objects/tribes/production_program.cc:859
-#: ../../src/logic/map_objects/tribes/production_program.cc:910
+#: ../../src/logic/map_objects/tribes/production_program.cc:787
+#: ../../src/logic/map_objects/tribes/production_program.cc:862
+#: ../../src/logic/map_objects/tribes/production_program.cc:913
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$ix %2$s"
@@ -1734,21 +1734,21 @@ msgstr "pekerja tidak memerlukan pengalaman"
 #. * TRANSLATORS: on a development build if you can, and let us know if there
 #. are any issues
 #. * TRANSLATORS: we need to address for your language.
-#: ../../src/logic/map_objects/tribes/production_program.cc:496
-#: ../../src/logic/map_objects/tribes/production_program.cc:808
+#: ../../src/logic/map_objects/tribes/production_program.cc:499
+#: ../../src/logic/map_objects/tribes/production_program.cc:811
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr "Tidak dapat memulakan %1$s kerana %2$s"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware '%s'"
-#: ../../src/logic/map_objects/tribes/production_program.cc:502
+#: ../../src/logic/map_objects/tribes/production_program.cc:505
 #, c-format
 msgid "Completed %1$s because %2$s"
 msgstr "%1$s selesai kerana %2$s"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware '%s'"
-#: ../../src/logic/map_objects/tribes/production_program.cc:508
-#: ../../src/logic/map_objects/tribes/production_program.cc:514
+#: ../../src/logic/map_objects/tribes/production_program.cc:511
+#: ../../src/logic/map_objects/tribes/production_program.cc:517
 #, c-format
 msgid "Skipped %1$s because %2$s"
 msgstr "%1$s dilangkau kerana %2$s"
@@ -1757,7 +1757,7 @@ msgstr "%1$s dilangkau kerana %2$s"
 #. are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
 #. bread is missing'
-#: ../../src/logic/map_objects/tribes/production_program.cc:794
+#: ../../src/logic/map_objects/tribes/production_program.cc:797
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -1766,7 +1766,7 @@ msgstr[0] "%s telah hilang"
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
 #. wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:870
+#: ../../src/logic/map_objects/tribes/production_program.cc:873
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -1775,18 +1775,18 @@ msgstr[0] "Hasilkan %s"
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
 #. workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:921
+#: ../../src/logic/map_objects/tribes/production_program.cc:924
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] "Kerahkan %s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1081
+#: ../../src/logic/map_objects/tribes/production_program.cc:1084
 msgid "No soldier to train!"
 msgstr "Tiada askar untuk dilatih!"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1090
-#: ../../src/logic/map_objects/tribes/production_program.cc:1148
+#: ../../src/logic/map_objects/tribes/production_program.cc:1093
+#: ../../src/logic/map_objects/tribes/production_program.cc:1151
 msgid "No soldier found for this training level!"
 msgstr "Tiada askar ditemui untuk tahap latihan ini!"
 
@@ -1794,7 +1794,7 @@ msgstr "Tiada askar ditemui untuk tahap latihan ini!"
 #. description of the
 #. * training program, e.g. Completed upgrading soldier evade from level 0 to
 #. level 1
-#: ../../src/logic/map_objects/tribes/production_program.cc:1190
+#: ../../src/logic/map_objects/tribes/production_program.cc:1193
 #, c-format
 msgid "Completed %s"
 msgstr ""
@@ -1841,76 +1841,76 @@ msgstr "%i%%"
 msgid "Can’t find any more resources!"
 msgstr "Tidak dapat cari sumber lagi!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:436
+#: ../../src/logic/map_objects/tribes/ship.cc:434
 msgid "Port Space"
 msgstr "Ruang Pelabuhan"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:436
+#: ../../src/logic/map_objects/tribes/ship.cc:434
 msgid "Port Space Found"
 msgstr "Ruang Pelabuhan Ditemui"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:437
+#: ../../src/logic/map_objects/tribes/ship.cc:435
 msgid "An expedition ship found a new port build space."
 msgstr "Sebuah kapal ekspedisi telah menemui ruang untuk pembinaan pelabuhan baharu."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:555
+#: ../../src/logic/map_objects/tribes/ship.cc:553
 msgid "Island Circumnavigated"
 msgstr "Sekeliling Pulau Dijelajahi"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../src/logic/map_objects/tribes/ship.cc:555
+#: ../../src/logic/map_objects/tribes/ship.cc:553
 msgctxt "ship"
 msgid "Waiting"
 msgstr "Menunggu"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:556
+#: ../../src/logic/map_objects/tribes/ship.cc:554
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Sebuah kapal ekspedisi berlayar mengelilingi pulay tanpa apa-apa arahan."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:618
+#: ../../src/logic/map_objects/tribes/ship.cc:616
 msgid "Coast Reached"
 msgstr "Pantai Dilabuhi"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:618
+#: ../../src/logic/map_objects/tribes/ship.cc:616
 msgid "Land Ahoy!"
 msgstr "Daratan Ditemui!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:619
+#: ../../src/logic/map_objects/tribes/ship.cc:617
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Sebuah kapal ekspedisi telah berlabuh dan menunggu arahan lanjut."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:670
+#: ../../src/logic/map_objects/tribes/ship.cc:668
 msgid "New port construction site is gone"
 msgstr "Tapak pembinaan pelabuhan baharu telah hilang"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:670
+#: ../../src/logic/map_objects/tribes/ship.cc:668
 msgid "Port Lost!"
 msgstr "Pelabuhan Ditawan!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:671
+#: ../../src/logic/map_objects/tribes/ship.cc:669
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Kerja-kerja memuat naik barangan telah gagal, ekspedisi dibatalkan sekarang."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:1063
+#: ../../src/logic/map_objects/tribes/ship.cc:857
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Ekspedisi"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:1063
+#: ../../src/logic/map_objects/tribes/ship.cc:857
 msgid "Expedition Ready"
 msgstr "Ekspedisi Sedia"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:1064
+#: ../../src/logic/map_objects/tribes/ship.cc:858
 msgid "An expedition ship is waiting for your commands."
 msgstr "Kapal ekspedisi menunggu arahan tuan."
 
 #. * TRANSLATORS: This is a ship state. The ship is currently transporting
 #. wares.
-#: ../../src/logic/map_objects/tribes/ship.cc:1216
+#: ../../src/logic/map_objects/tribes/ship.cc:1011
 #: ../../src/wui/seafaring_statistics_menu.cc:209
 msgctxt "ship_state"
 msgid "Shipping"
@@ -1919,7 +1919,7 @@ msgstr "Perkapalan"
 #. * TRANSLATORS: This is a ship state. The ship is ready to transport wares,
 #. but has
 #. * nothing to do.
-#: ../../src/logic/map_objects/tribes/ship.cc:1220
+#: ../../src/logic/map_objects/tribes/ship.cc:1015
 #: ../../src/wui/seafaring_statistics_menu.cc:207
 msgctxt "ship_state"
 msgid "Idle"
@@ -1927,7 +1927,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:1225
+#: ../../src/logic/map_objects/tribes/ship.cc:1020
 #: ../../src/wui/seafaring_statistics_menu.cc:211
 msgctxt "ship_state"
 msgid "Waiting"
@@ -1935,14 +1935,14 @@ msgstr "Menunggu"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:1229
+#: ../../src/logic/map_objects/tribes/ship.cc:1024
 #: ../../src/wui/seafaring_statistics_menu.cc:213
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Peninjauan"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:1233
+#: ../../src/logic/map_objects/tribes/ship.cc:1028
 #: ../../src/wui/seafaring_statistics_menu.cc:215
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -1951,7 +1951,7 @@ msgstr "Ruang Pelabuhan Ditemui"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1238
+#: ../../src/logic/map_objects/tribes/ship.cc:1033
 #: ../../src/wui/seafaring_statistics_menu.cc:217
 msgctxt "ship_state"
 msgid "Founding a Colony"
@@ -2036,7 +2036,7 @@ msgstr "tidak boleh dilalui"
 msgid "This objective has no description."
 msgstr "Objektif ini tidak mempunyai keterangan."
 
-#: ../../src/logic/player.cc:1523
+#: ../../src/logic/player.cc:1522
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"

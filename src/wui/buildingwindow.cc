@@ -220,7 +220,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 					      if (canceled.bootstrap == pd->expedition_bootstrap()) {
 						      update_expedition_button(true);
 					      }
-					   });
+				      });
 			}
 		} else if (upcast(const Widelands::ProductionSite, productionsite, building)) {
 			if (!is_a(Widelands::MilitarySite, productionsite)) {
@@ -488,7 +488,7 @@ void BuildingWindow::act_enhance(Widelands::DescriptionIndex id, bool csite) {
 		if (ibase()->get_game()) {
 			if (SDL_GetModState() & KMOD_CTRL) {
 				ibase()->game().send_player_enhance_building(
-				   *construction_site, Widelands::INVALID_INDEX, false);
+				   *construction_site, construction_site->building().enhancement(), false);
 			} else {
 				show_enhance_confirm(dynamic_cast<InteractivePlayer&>(*ibase()), *construction_site,
 				                     construction_site->get_info().becomes->enhancement(), true);

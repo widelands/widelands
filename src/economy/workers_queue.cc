@@ -102,9 +102,12 @@ void WorkersQueue::remove_from_economy(Economy&) {
 	}
 }
 
-void WorkersQueue::add_to_economy(Economy&) {
+void WorkersQueue::add_to_economy(Economy& e) {
 	if (index_ != INVALID_INDEX) {
 		update();
+		if (request_) {
+			request_->set_economy(&e);
+		}
 	}
 }
 

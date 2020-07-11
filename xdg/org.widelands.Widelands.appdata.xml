@@ -327,9 +327,7 @@ Widelands ayrıca size yapay zeka ile meydan okur.
     <release date="2002-08-27" version="Build 1"/>
   </releases>
   <languages>
-    <lang>af_ZA</lang>
     <lang>ar</lang>
-    <lang>ast</lang>
     <lang>bg</lang>
     <lang>br</lang>
     <lang>ca</lang>
@@ -342,7 +340,6 @@ Widelands ayrıca size yapay zeka ile meydan okur.
     <lang>en_US</lang>
     <lang>eo</lang>
     <lang>es</lang>
-    <lang>et</lang>
     <lang>eu</lang>
     <lang>fa</lang>
     <lang>fi</lang>
@@ -355,32 +352,25 @@ Widelands ayrıca size yapay zeka ile meydan okur.
     <lang>hi</lang>
     <lang>hr</lang>
     <lang>hu</lang>
-    <lang>ia</lang>
     <lang>id</lang>
     <lang>ig</lang>
     <lang>it</lang>
     <lang>ja</lang>
-    <lang>jv</lang>
     <lang>ka</lang>
     <lang>ko</lang>
     <lang>krl</lang>
     <lang>la</lang>
     <lang>lt</lang>
-    <lang>mr</lang>
     <lang>ms</lang>
-    <lang>my</lang>
     <lang>nb</lang>
     <lang>nds</lang>
     <lang>nl</lang>
     <lang>nn</lang>
-    <lang>oc</lang>
     <lang>pl</lang>
     <lang>pt</lang>
     <lang>pt_BR</lang>
     <lang>ro</lang>
     <lang>ru</lang>
-    <lang>rw</lang>
-    <lang>si</lang>
     <lang>sk</lang>
     <lang>sl</lang>
     <lang>sr</lang>
@@ -388,7 +378,6 @@ Widelands ayrıca size yapay zeka ile meydan okur.
     <lang>sv</lang>
     <lang>tr</lang>
     <lang>uk</lang>
-    <lang>vi</lang>
     <lang>zh_CN</lang>
     <lang>zh_TW</lang>
   </languages>
