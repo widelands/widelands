@@ -38,18 +38,17 @@ Buildcost::Buildcost(std::unique_ptr<LuaTable> table, Tribes& tribes)
 		try {
 			DescriptionIndex const idx = tribes.load_ware(warename);
 
-            // Read value
-            value = table->get_int(warename);
-            if (value < 1) {
-                throw GameDataError("Ware count needs to be > 0.\nEmpty buildcost "
-                                    "tables are allowed if you wish to have an amount of 0.");
-            } else if (value > 255) {
-                throw GameDataError(
-                   "Ware count needs to be <= 255.");
-            }
+			// Read value
+			value = table->get_int(warename);
+			if (value < 1) {
+				throw GameDataError("Ware count needs to be > 0.\nEmpty buildcost "
+				                    "tables are allowed if you wish to have an amount of 0.");
+			} else if (value > 255) {
+				throw GameDataError("Ware count needs to be <= 255.");
+			}
 
-            // Add
-            insert(std::pair<DescriptionIndex, uint8_t>(idx, value));
+			// Add
+			insert(std::pair<DescriptionIndex, uint8_t>(idx, value));
 		} catch (const WException& e) {
 			throw GameDataError("[buildcost] \"%s=%d\": %s", warename.c_str(), value, e.what());
 		}
