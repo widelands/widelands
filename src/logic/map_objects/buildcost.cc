@@ -37,33 +37,22 @@ Buildcost::Buildcost(std::unique_ptr<LuaTable> table, Tribes& tribes)
 		int32_t value = INVALID_INDEX;
 		try {
 			DescriptionIndex const idx = tribes.load_ware(warename);
-			if (count(idx)) {
-				throw GameDataError(
-				   "A buildcost item of this ware type has already been defined: %s", warename.c_str());
-			}
-			value = table->get_int(warename);
-			const uint8_t ware_count = value;
-			if (ware_count != value) {
-				throw GameDataError("Ware count is out of range 1 .. 255");
-			}
-			insert(std::pair<DescriptionIndex, uint8_t>(idx, ware_count));
+
+            // Read value
+            value = table->get_int(warename);
+            if (value < 1) {
+                throw GameDataError("Ware count needs to be > 0.\nEmpty buildcost "
+                                    "tables are allowed if you wish to have an amount of 0.");
+            } else if (value > 255) {
+                throw GameDataError(
+                   "Ware count needs to be <= 255.");
+            }
+
+            // Add
+            insert(std::pair<DescriptionIndex, uint8_t>(idx, value));
 		} catch (const WException& e) {
 			throw GameDataError("[buildcost] \"%s=%d\": %s", warename.c_str(), value, e.what());
 		}
-
-		// Read value
-		value = table->get_int(warename);
-		if (value < 1) {
-			throw GameDataError("Buildcost: Ware count needs to be > 0 in \"%s=%d\".\nEmpty buildcost "
-			                    "tables are allowed if you wish to have an amount of 0.",
-			                    warename.c_str(), value);
-		} else if (value > 255) {
-			throw GameDataError(
-			   "Buildcost: Ware count needs to be <= 255 in \"%s=%d\".", warename.c_str(), value);
-		}
-
-		// Add
-		insert(std::pair<DescriptionIndex, uint8_t>(tribes.safe_ware_index(warename), value));
 	}
 }
 
