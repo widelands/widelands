@@ -46,7 +46,7 @@ DescriptionManager::DescriptionManager(LuaInterface* lua) : lua_(lua) {
 			   }
 			   break;
 		   }
-		});
+	   });
 }
 
 DescriptionManager::~DescriptionManager() {
