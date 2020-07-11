@@ -289,18 +289,15 @@ void Critter::roam_update(Game& game, State& state) {
 		if (game.map().find_bobs(
 		       game, Area<FCoords>(get_position(), 2), nullptr, FindBobByName(descr().name())) > 4) {
 			// Too crowded here! Let's go further away
-			roaming_dist += 3 *
-			                game.map().find_bobs(game, Area<FCoords>(get_position(), 5), nullptr,
-			                                     FindBobByName(descr().name()));
+			roaming_dist += 3 * game.map().find_bobs(game, Area<FCoords>(get_position(), 5), nullptr,
+			                                         FindBobByName(descr().name()));
 		}
 		// move only a bit away from other animals of the same class
-		roaming_dist += 4 *
-		                game.map().find_bobs(game, Area<FCoords>(get_position(), 3), nullptr,
-		                                     FindCritterByClass(descr()));
+		roaming_dist += 4 * game.map().find_bobs(game, Area<FCoords>(get_position(), 3), nullptr,
+		                                         FindCritterByClass(descr()));
 		if (!descr().is_carnivore()) {
-			roaming_dist +=
-			   6 *
-			   game.map().find_bobs(game, Area<FCoords>(get_position(), 4), nullptr, FindCarnivores());
+			roaming_dist += 6 * game.map().find_bobs(
+			                       game, Area<FCoords>(get_position(), 4), nullptr, FindCarnivores());
 		}
 		roaming_dist /= 12;
 		assert(roaming_dist >= 2);
@@ -423,10 +420,11 @@ void Critter::roam_update(Game& game, State& state) {
 				                                                          // resulting chance is 1 if
 				                                                          // and only if S >= N
 				const double weighted_success_chance =
-				   S <= -N ? 0.0 : S >= N ? 1.0 :
-				                            -(std::log(S * S + 1) - 2 * S * std::atan(S) - M_PI * S -
-				                              std::log(N * N + 1) + N * (2 * std::atan(N) - M_PI)) /
-				                               (2 * N * M_PI);
+				   S <= -N ? 0.0 :
+				             S >= N ? 1.0 :
+				                      -(std::log(S * S + 1) - 2 * S * std::atan(S) - M_PI * S -
+				                        std::log(N * N + 1) + N * (2 * std::atan(N) - M_PI)) /
+				                         (2 * N * M_PI);
 				molog("    *** [total strength %d] vs [prey %d] *** success chance %lf\n", S,
 				      defender_strength, weighted_success_chance);
 				assert(weighted_success_chance >= 0.0);
