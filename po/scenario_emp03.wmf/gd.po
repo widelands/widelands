@@ -3,15 +3,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# GunChleoc, 2019
+# GunChleoc, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"POT-Creation-Date: 2020-07-09 08:33+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: GunChleoc, 2019\n"
+"Last-Translator: GunChleoc, 2020\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -132,7 +132,7 @@ msgstr "Saothrachadh cruithneachd"
 msgid ""
 "Produce at least 50 sheaves of wheat to get your wool production started."
 msgstr ""
-"Saothraich 50 sguab arbhair air a char as lugha ach an tòisich thu air "
+"Saothraich 50 raoid cruithneachd air a char as lugha ach an tòisich thu air "
 "clòimh a shaothrachadh."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:109
@@ -358,7 +358,7 @@ msgid ""
 msgstr ""
 "Chan eil for agam air ciamar a thilleas sinn dhachaigh idir a-nis. Agus tha "
 "an cogadh a’ dol air adhart às ar n-aonais. Tha mi ’n dòchas gun dìon ar co-"
-"shaighdearan ar n-impireachd gu math."
+"shaighdearan ar n-Ìmpireachd gu math."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:227
 msgid "No Sight"
@@ -709,8 +709,8 @@ msgid ""
 "I think a stock of 50 sheaves of wheat would be enough for starters. Perhaps"
 " we will have to adjust the target quantity for wheat to achieve this."
 msgstr ""
-"Saoilidh mi gum foghainn lethcheud sguab arbhair an toiseach. ’S dòcha gum "
-"feum sinn uiread-amais na cruithneachd a chur air gleus airson seo "
+"Saoilidh mi gum foghainn lethcheud raoid cruithneachd an toiseach. ’S dòcha "
+"gum feum sinn uiread-amais na cruithneachd a chur air gleus airson seo "
 "fhaighinn."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:386
@@ -886,7 +886,7 @@ msgid ""
 "our empire."
 msgstr ""
 "Cuireamaid às dha na Tùsanaich agus bheireamaid colonaidh ghrinn do Cheusar "
-"ar n-Impireachd."
+"ar n-Ìmpireachd."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:468
 msgid "Amalea’s Luck"
@@ -1101,7 +1101,7 @@ msgid ""
 "furthermore, we have built a nice colony for our empire."
 msgstr ""
 "A thighearna, tha sinn air na Tùsanaich a cheannsachadh san sgìre seo. Agus "
-"a bharrachd air sin, thog sinn colonaidh ghrinn airson ar n-Impireachd."
+"a bharrachd air sin, thog sinn colonaidh ghrinn airson ar n-Ìmpireachd."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:551
 msgid "The king will be very pleased with our victory."
@@ -1270,7 +1270,7 @@ msgid ""
 msgstr ""
 "Shoirbhich leinn, a chàirdean! Seas sinn an aghaidh nan dùbhlan uile a bha "
 "romhainn. Gidheadh, tha an cianalas orm. Bheir sinn an cuan oirnn cho luath "
-"’s a ghabhas ach an dìonamaid ar n-Impireachd an aghaidh treubh nan "
+"’s a ghabhas ach an dìonamaid ar n-Ìmpireachd an aghaidh treubh nan "
 "Tùsanach."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:622
@@ -1323,4 +1323,4 @@ msgstr "Lorg sinn ball-ealain"
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"

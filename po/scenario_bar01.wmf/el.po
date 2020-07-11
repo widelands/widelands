@@ -3,14 +3,15 @@
 # 
 # Translators:
 # erimitis, 2018
+# GunChleoc, 2020
 # Panos Ioannidis <panos.ioannidis@gmail.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-04-29 16:23+0000\n"
-"Last-Translator: Panos Ioannidis <panos.ioannidis@gmail.com>\n"
+"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"PO-Revision-Date: 2020-07-10 08:04+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Greek (http://www.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1032,4 +1033,4 @@ msgstr "Όμως φοβούνται ότι ο πόλεμος γύρω από τ�
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "\"1%σ\""
+msgstr "\"%s\""

@@ -91,10 +91,9 @@ ImmovableProgram::ActAnimate::ActAnimate(const std::vector<std::string>& argumen
 /// distribution and the configured time as the expected value.
 void ImmovableProgram::ActAnimate::execute(Game& game, Immovable& immovable) const {
 	immovable.start_animation(game, parameters.animation);
-	immovable.program_step(game, parameters.duration ?
-	                                1 + game.logic_rand() % parameters.duration +
-	                                   game.logic_rand() % parameters.duration :
-	                                0);
+	immovable.program_step(game, parameters.duration ? 1 + game.logic_rand() % parameters.duration +
+	                                                      game.logic_rand() % parameters.duration :
+	                                                   0);
 }
 
 ImmovableProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments) {
