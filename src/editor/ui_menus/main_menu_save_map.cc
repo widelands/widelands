@@ -335,7 +335,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	}
 
 	egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
-	egbase.step_loader_ui("Saving the map…");
+	egbase.step_loader_ui(_("Saving the map…"));
 
 	// Try saving the map.
 	GenericSaveHandler gsh(

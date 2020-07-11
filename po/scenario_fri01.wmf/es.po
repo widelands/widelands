@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"POT-Creation-Date: 2020-07-09 08:33+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
 "Last-Translator: Walter Benkel <tromaster@gmail.com>, 2020\n"
 "Language-Team: Spanish (https://www.transifex.com/widelands/teams/35159/es/)\n"
@@ -652,6 +652,9 @@ msgid ""
 "We can now produce all the kinds of food that we are used to. I wonder what "
 "treasures these hills might contain? We should find out."
 msgstr ""
+"Ahora podemos producir todos los alimentos a los que estamos acostumbrados. "
+"¿Me pregunto qué tesoros podrán albergar estas colinas? Deberíamos "
+"averiguarlo."
 
 #. TRANSLATORS: Reebaud – mining economy
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:250
@@ -662,11 +665,16 @@ msgid ""
 "helmets as well as swords. I hope we won’t meet enemies here, but it’s "
 "better to be prepared."
 msgstr ""
+"Construye una mina de hierro y quizás una de oro. Ya que sólo producen "
+"minerales necesitaremos un horno para fundirlos. También construye una "
+"herrería para asegurar el suministro de herramientas – y además un pequeño "
+"taller de armaduras. Este produce yelmos y espadas. Espero que no "
+"encontremos enemigos por acá, pero es mejor estar preparados."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:254
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:263
 msgid "Be Prepared"
-msgstr ""
+msgstr "Estar Preparado"
 
 #. TRANSLATORS: Reebaud – recruit 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:257
@@ -674,6 +682,8 @@ msgid ""
 "Our mines are working well. We can now produce all the tools we need, and "
 "some weapons as well."
 msgstr ""
+"Nuestras minas están trabajando bien. Ahora podemos producir todas las "
+"herramientas que necesitamos, y también algunas armas."
 
 #. TRANSLATORS: Reebaud – recruit 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:260
@@ -683,6 +693,10 @@ msgid ""
 "equipped in a barracks with a short sword and a fur garment, the uniform of "
 "all honorable warriors."
 msgstr ""
+"Podríamos usar esas armas para equipar algunos nuevos soldados. Espero no "
+"encontrar enemigos por acá, pero es mejor estar preparados. Los nuevos "
+"soldados se equipan en cuarteles con una espada corta y una prenda de piel, "
+"el uniforme de todos los honorables guerreros."
 
 #. TRANSLATORS: Hauke – recruit 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:266
@@ -692,6 +706,10 @@ msgid ""
 "meat as a by-product of fur, and it also trains reindeer to help our "
 "carriers on busy roads."
 msgstr ""
+"Necesitaremos cuarteles, por supuesto; una granja de renos para producir "
+"piel, y un cuarto de costura para coser las prendas. La granja de renos "
+"produce algo de carne como subproducto de la piel, y también entrena renos "
+"para ayudar a nuestros transportistas en los caminos concurridos."
 
 #. TRANSLATORS: Hauke – recruit 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:269
@@ -700,6 +718,10 @@ msgid ""
 " and to construct two warehouses nearby: One should be set to store only "
 "weapons, armor, ores, metal and coal; the other to store building materials."
 msgstr ""
+"Aconsejo construir todos esos edificios a corta distancia unos de otros, y "
+"dos almacenes en la cercanía: Uno deberá ajustarse para sólo almacenar "
+"armas, armaduras, minerales, metal y carbón; el otro para almacenar "
+"materiales de construcción."
 
 #. TRANSLATORS: Hauke – recruit 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:272
@@ -709,6 +731,11 @@ msgid ""
 "military economy more efficient, because it reduces the waiting time for "
 "wares in the processing buildings."
 msgstr ""
+"También deberíamos construir otros edificios relacionados en la cercanía, "
+"como un horno, y algunos pozos y granjas para abastecer la granja de renos. "
+"Este diseño hará que nuestra economía militar sea más eficiente, ya que "
+"reduce el tiempo de espera para las mercancías en los edificios de "
+"procesamiento."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:276
 msgid "Explore the Island"
@@ -716,13 +743,15 @@ msgstr "Explorar la Isla"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:277
 msgid "Expanding"
-msgstr ""
+msgstr "Expandiendo"
 
 #. TRANSLATORS: Reebaud – expand
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:279
 msgid ""
 "Our barracks has started working, and we are recruiting new soldiers now."
 msgstr ""
+"Nuestro cuartel está comenzando a trabajar, y ahora estamos reclutando "
+"nuevos soldados."
 
 #. TRANSLATORS: Reebaud – expand
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:282
@@ -730,6 +759,8 @@ msgid ""
 "But we can’t be sure we’re safe here yet. It would be better to expand "
 "further to the east to find out whether we really are alone here."
 msgstr ""
+"Pero aún no estamos seguros de estar a salvo aquí. Sería mejor expandirnos "
+"aún más hacia el este para averiguar si realmente estamos solos."
 
 #. TRANSLATORS: Reebaud – expand
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:285
@@ -737,6 +768,9 @@ msgid ""
 "Expanding would also provide more space for farming. We could use some extra"
 " barley to recruit more reindeer, as our roads are quite busy."
 msgstr ""
+"Expandirnos también nos provee más espacio para cultivar. Podríamos "
+"necesitar algo más de cebada para reclutar más renos, ya que nuestros "
+"caminos están bastante concurridos."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:290
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:296
@@ -748,12 +782,12 @@ msgstr "¡Enemigos!"
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:297
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:303
 msgid "Enemy sighted!"
-msgstr ""
+msgstr "¡Enemigo a la vista!"
 
 #. TRANSLATORS: Reebaud – enemy sighted
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:293
 msgid "Another tribe! On OUR island! What are you doing here, invaders?"
-msgstr ""
+msgstr "¡Otra tribu! ¡En NUESTRA isla! ¿Qué están haciendo acá, invasores?"
 
 #. TRANSLATORS: Maukor – enemy sighted. The great storm flood of 1362 was
 #. supposed to be a sign of the victory of the Christian God over the old
@@ -764,6 +798,9 @@ msgid ""
 "true God that we will kill you all, and your souls shall be tormented in "
 "hell for ever!"
 msgstr ""
+"¡Esta es MI isla! ¡TU eres el intruso aquí! ¡Rezo al único y verdadero Dios "
+"que los mataremos a todos, y que vuestras almas serán atormentadas en el "
+"infierno por siempre!"
 
 #. TRANSLATORS: Reebaud – enemy sighted
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:305
@@ -771,10 +808,12 @@ msgid ""
 "Unbelievers! I pray to OUR gods that this faithless tribe shall be utterly "
 "shattered! War upon them!"
 msgstr ""
+"¡Infieles! ¡Rezo a NUESTROS dioses que esta tribu desleal será absolutamente"
+" destrozada! ¡Guerra a ellos!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:310
 msgid "Stronger in battle"
-msgstr ""
+msgstr "Más fuerte en la batalla"
 
 #. TRANSLATORS: Reebaud – train soldiers 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:312
@@ -782,6 +821,8 @@ msgid ""
 "We are recruiting soldiers easily enough, but they are fairly weak. We must "
 "train our soldiers if they are to beat the enemy."
 msgstr ""
+"Estamos reclutando soldados fácilmente, pero son bastante débiles. Debemos "
+"entrenar a nuestros soldados si queremos derrotar al enemigo."
 
 #. TRANSLATORS: Reebaud – train soldiers 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:315
@@ -789,6 +830,9 @@ msgid ""
 "Soldiers are trained in basic attack, health and defense by a training camp."
 " They can learn the finer points in a training arena."
 msgstr ""
+"Los soldados son entrenados en ataque básico, vida y defensa, en un campo de"
+" entrenamiento. La enseñanza más detallada la pueden obtener en una arena de"
+" entrenamiento."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:319
 msgid "Frisian fighting"
@@ -801,6 +845,10 @@ msgid ""
 "garments studded with iron and also gold to cushion blows; and helmets "
 "forged from iron, and gold as well, to lengthen their life in battle."
 msgstr ""
+"Los soldados son entrenados en defensa y vida, en dos pasos. Obtienen "
+"prendas de piel reforzadas con hierro, y también oro, para amortiguar "
+"golpes; y yelmos forjados de hierro y oro, para prolongar su vida en "
+"batalla."
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:324
@@ -811,6 +859,12 @@ msgid ""
 "first double-edged sword, and are given various other swords to wield in "
 "their other hand. This makes six steps of attack training."
 msgstr ""
+"Aprenden a atacar con tres espadas diferentes: la espada larga, el sable, y "
+"la espada de doble filo. Las dos últimas contienen oro, y todas ellas "
+"hierro. Los soldados avanzados son enseñados a utilizar dos espadas al mismo"
+" tiempo: conservan su primera espada de doble filo, y obtienen otras espadas"
+" para blandir con su otra mano. Con esto el entrenamiento de ataque tiene "
+"seis pasos."
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:327
@@ -819,10 +873,13 @@ msgid ""
 "opponent’s blows with a skillful twist of the sword instead of jumping away "
 "like a coward."
 msgstr ""
+"No enseñamos a los soldados a evadir ataques; un verdadero guerrero puede "
+"bloquear los golpes de su adversario con un hábil giro de espada, en lugar "
+"de saltar lejos como un cobarde."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:331
 msgid "Planning a training center"
-msgstr ""
+msgstr "Planificando un centro de entrenamiento"
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:333
@@ -833,6 +890,12 @@ msgid ""
 "new small one so we will still get basic weapons. We need at least one gold "
 "mine now, because the best weapons and armor use gold."
 msgstr ""
+"Necesitaremos una sastrería para confeccionar más prendas protectoras, y "
+"otro cuarto de costura para seguir produciendo prendas de piel normales. "
+"Además deberías mejorar el pequeño taller de armaduras para que produzca "
+"mejores armas y yelmos, y construir otro pequeño para seguir obteniendo "
+"armas básicas. Ahora necesitamos al menos una mina de oro, porque las "
+"mejores armas y armaduras usan oro."
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:336
@@ -843,6 +906,11 @@ msgid ""
 " strewn out over a long distance. Build a third warehouse there which will "
 "store only the food needed for training."
 msgstr ""
+"Deberíamos construir estos edificios cerca de los cuarteles, ya que, como "
+"mencioné antes, es más eficiente centralizar todas nuestras instalaciones "
+"militares en un centro de reclutamiento y entrenamiento, que tenerlas "
+"dispersadas en una gran extensión. Construye allí un tercer almacén que "
+"guardará sólo el alimento necesario para el entrenamiento."
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:339
@@ -851,6 +919,9 @@ msgid ""
 "Take into account that the useless scraps will clutter up your roads until "
 "they are stored in a warehouse somewhere."
 msgstr ""
+"Cuando los soldados entrenan para usar nuevas armas, su equipamiento antiguo"
+" es descartado. Ten en cuenta que estos restos inútiles atestarán tus "
+"caminos hasta ser guardados en algún almacén."
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:342
@@ -858,19 +929,24 @@ msgid ""
 "I recommend to train at least one soldier to the highest level in health, "
 "defense and attack. Until then, the enemy is just too strong for us."
 msgstr ""
+"Recomiendo entrenar al menos a un soldado hasta el nivel más alto de vida, "
+"defensa y ataque. Hasta entonces el enemigo es simplemente demasiado "
+"poderoso para nosotros."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:347
 msgid "Our soldiers are strong"
-msgstr ""
+msgstr "Nuestros soldados son fuertes"
 
 #. TRANSLATORS: Reebaud – attack enemy 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:349
 msgid "We finally have our first fully trained soldier. Let’s attack!"
 msgstr ""
+"Finalmente tenemos a nuestro primer soldado completamente entrenado. "
+"¡Ataquemos!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:353
 msgid "Are our soldiers strong enough?"
-msgstr ""
+msgstr "¿Son suficientemente fuertes nuestros soldados?"
 
 #. TRANSLATORS: Hauke – attack enemy 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:355
@@ -880,10 +956,15 @@ msgid ""
 "send any soldiers into a battle they will likely lose. I’d prefer to wait a "
 "bit longer until we can certainly beat the enemy without losing soldiers."
 msgstr ""
+"¡Con todo respeto, Caudillo, por favor no sea tan apresurado! Los enemigos "
+"son muy fuertes, y aún no estoy convencido de que podamos derrotarlos. Yo "
+"preferiría no enviar soldados a una batalla que probablemente perderán. Me "
+"inclino a esperar un poco más hasta que podamos derrotar al enemigo sin "
+"perder soldados."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:359
 msgid "Our soldiers are strong enough"
-msgstr ""
+msgstr "Nuestros soldados son suficientemente fuertes"
 
 #. TRANSLATORS: Reebaud – attack enemy 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:361
@@ -893,16 +974,20 @@ msgid ""
 " how long to wait until attacking, but don’t take too long, or the enemies "
 "will exploit our weakness."
 msgstr ""
+"Por supuesto que también prefiero mantener con vida a nuestros soldados, "
+"pero no podemos salvar cada vida. Los soldados mueren en batalla, así son "
+"las cosas. Puedes decidir cuánto esperar antes de atacar, pero no te demores"
+" demasiado, o los enemigos aprovecharán nuestra debilidad."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:365
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:371
 msgid "Beware!"
-msgstr ""
+msgstr "¡Cuidado!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:366
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:372
 msgid "Not strong enough"
-msgstr ""
+msgstr "No lo suficientemente fuerte"
 
 #. TRANSLATORS: Hauke – beware of early attacks 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:368
@@ -911,6 +996,9 @@ msgid ""
 "fear we are not strong enough yet to defend ourselves if he attacks first. "
 "You must devise something to hold him off."
 msgstr ""
+"¡Caudillo Reebaud! Nuestros exploradores reportan que el enemigo avanza "
+"rápidamente. Me temo que aún no somos lo suficientemente fuertes para "
+"defendernos si ataca primero. Debes idear algo para mantenerlo a distancia."
 
 #. TRANSLATORS: Reebaud – beware of early attacks 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:374
@@ -920,6 +1008,10 @@ msgid ""
 "possible in one go. The enemy will only be able to see it if they build a "
 "fortress right at the border."
 msgstr ""
+"Los exploradores me han informado que el enemigo no puede construir torres. "
+"Podríamos construir una fortaleza, que es el edificio que empujará la "
+"frontera al este lo más posible. El enemigo sólo podrá verla si construye "
+"una fortaleza junto a la frontera."
 
 #. TRANSLATORS: Reebaud – beware of early attacks 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:377
@@ -929,6 +1021,10 @@ msgid ""
 " of them to make room for it, so we may be safe until we open the battle at "
 "a time of our choosing."
 msgstr ""
+"Podemos prevenir esto, o al menos dificultarlo, ordenando a algunos "
+"silvicultores a plantar árboles en la frontera. El enemigo tendrá que talar "
+"muchos de éstos para abrir espacio para su fortaleza, por lo que podríamos "
+"estar seguros hasta que decidamos dar la batalla."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:380
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:386
@@ -946,6 +1042,8 @@ msgid ""
 "They are defeated! I thank you, all my gods, for granting us victory over "
 "the unbelievers!"
 msgstr ""
+"¡Los hemos derrotado! ¡Les agradezco, todos mis dioses, por concedernos la "
+"victoria sobre los infieles!"
 
 #. TRANSLATORS: Maukor – enemy defeated 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:389
@@ -953,16 +1051,18 @@ msgid ""
 "I pray to God to hear my last words. Let not the false fiend triumph! Punish"
 " them for this ignoble feat!"
 msgstr ""
+"Rezo para que Dios escuche mis últimas palabras. ¡No dejes triunfar a los "
+"falsos demonios! ¡Castígalos por esta innoble hazaña!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:392
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:398
 msgid "Storm Flood"
-msgstr ""
+msgstr "Inundación"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:393
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:399
 msgid "The island is flooding!"
-msgstr ""
+msgstr "¡Las isla se está inundando!"
 
 #. TRANSLATORS: Reebaud – enemy defeated 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:395
@@ -970,6 +1070,8 @@ msgid ""
 "His God has granted his wish! The ocean is rising! The island is almost flat"
 " – we will all drown!"
 msgstr ""
+"¡Su Dios le ha concedido su deseo! ¡El océano está creciendo! La isla es "
+"casi plana – ¡todos nos ahogaremos!"
 
 #. TRANSLATORS: Hauke – rising water
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:401
@@ -979,6 +1081,11 @@ msgid ""
 " build a port on. If we manage to construct a ship, and fill it with all we "
 "need to build a new settlement, we may be able to escape."
 msgstr ""
+"¡No desesperes, divisé una esperanza! La punta más oriental de la isla, así "
+"como el lugar donde estaba el cuartel general del enemigo, parecen muy "
+"adecuados para construir un puerto. Si logramos construir un barco, y lo "
+"cargamos con todo lo necesario para fundar un nuevo asentamiento, es posible"
+" que logremos escapar."
 
 #. TRANSLATORS: Hauke – rising water
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:404
@@ -989,14 +1096,19 @@ msgid ""
 "sails. Then we can launch an expedition from the port. Pray to the gods and "
 "make haste!"
 msgstr ""
+"La tormenta parece venir desde el oeste. ¡Si nos damos prisa lo lograremos! "
+"Sólo necesitamos construir un puerto y un astillero – oh, y un telar para "
+"tejer la tela duradera, hecha de caña y piel, para las velas. Después "
+"podemos iniciar una expedición desde el puerto. ¡Ora a los dioses y date "
+"prisa!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:410
 msgid "Don’t Forget the Soldiers"
-msgstr ""
+msgstr "No Olvides a los Soldados"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:411
 msgid "Soldiers to the port!"
-msgstr ""
+msgstr "¡Soldados, al puerto!"
 
 #. TRANSLATORS: Reebaud – rising water
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:413
@@ -1014,7 +1126,17 @@ msgid_plural ""
 "men to the port when it’s completed, to get ready to embark when we set "
 "sail!"
 msgstr[0] ""
+"Con tanta prisa casi lo olvido – donde sea que desembarquemos, necesitaremos"
+" soldados para expandir y asegurar nuestra nueva colonia. Hay lugar para "
+"hasta %d soldado en nuestro barco, si a nadie le importa ir abarrotado. "
+"¡Enviemos a nuestros mejores hombres al puerto para que se preparen para "
+"embarcar y zarpar!"
 msgstr[1] ""
+"Con tanta prisa casi lo olvido – donde sea que desembarquemos, necesitaremos"
+" soldados para expandir y asegurar nuestra nueva colonia. Hay lugar para "
+"hasta %d soldados en nuestro barco, si a nadie le importa ir abarrotado. "
+"¡Enviemos a nuestros mejores hombres al puerto para que se preparen para "
+"embarcar y zarpar!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:419
 msgid "Victory"
@@ -1022,7 +1144,7 @@ msgstr "Victoria"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:420
 msgid "We escaped!"
-msgstr ""
+msgstr "¡Hemos escapado!"
 
 #. TRANSLATORS: Reebaud – victory
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:422
@@ -1031,6 +1153,9 @@ msgid ""
 "and I am confident we will be able to build a new home again in a more "
 "peaceful corner of this world!"
 msgstr ""
+"Los dioses han contestado a nuestras plegarias. ¡Escaparemos al hundimiento "
+"de la isla, y estoy confiado de que podremos construir un nuevo hogar en "
+"alguna esquina más pacífica de este mundo!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:423
 msgid "Congratulations"
@@ -1042,6 +1167,9 @@ msgid ""
 "You have completed this mission. You may move on to the next scenario now to"
 " help us build a new home, far from the false God’s vengeful reach…"
 msgstr ""
+"Has completado esta misión. Ahora puedes continuar con el siguiente "
+"escenario para ayudarnos a construir un nuevo hogar, lejos del vengativo "
+"alcance del falso Dios..."
 
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format

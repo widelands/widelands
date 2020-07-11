@@ -164,6 +164,17 @@ EconomyOptionsWindow::~EconomyOptionsWindow() {
 	}
 }
 
+std::string EconomyOptionsWindow::localize_profile_name(const std::string& name) {
+	// Translation for the default profile is sourced from the widelands textdomain, and for the
+	// other profiles from the tribes.
+	std::string localized_name = _(name);
+	{
+		i18n::Textdomain td("tribes");
+		localized_name = _(localized_name);
+	}
+	return localized_name;
+}
+
 void EconomyOptionsWindow::on_economy_note(const Widelands::NoteEconomy& note) {
 	Widelands::Serial* serial = note.old_economy == ware_serial_ ?
 	                               &ware_serial_ :
@@ -483,7 +494,7 @@ void EconomyOptionsWindow::update_profiles_needed(const std::string& current_pro
 	dropdown_.clear();
 	last_added_to_dropdown_.clear();
 	for (const auto& pair : predefined_targets_) {
-		dropdown_.add(_(pair.first), pair.first);
+		dropdown_.add(EconomyOptionsWindow::localize_profile_name(pair.first), pair.first);
 		last_added_to_dropdown_.insert(pair.first);
 	}
 	if (current_profile.empty()) {
@@ -537,7 +548,7 @@ void EconomyOptionsWindow::SaveProfileWindow::table_selection_changed() {
 void EconomyOptionsWindow::SaveProfileWindow::update_table() {
 	table_.clear();
 	for (const auto& pair : economy_options_->get_predefined_targets()) {
-		table_.add(pair.first).set_string(0, _(pair.first));
+		table_.add(pair.first).set_string(0, EconomyOptionsWindow::localize_profile_name(pair.first));
 	}
 	layout();
 }

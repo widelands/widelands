@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-05-07 19:38+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"PO-Revision-Date: 2020-06-27 10:24+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -122,7 +122,7 @@ msgstr "Tog port"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:61
 msgid "Build a port in the northern part of your camp"
-msgstr ""
+msgstr "Tog port air ceann a tuath an tuineachaidh agad"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:62
 msgid "You always need a port when you want to transport wares with a ship."
@@ -156,13 +156,13 @@ msgstr "Togamaid longan"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:75
 msgid "Great. While your port is being constructed, let’s build some ships."
-msgstr ""
+msgstr "Glè mhath. Fhad ’s a tha am port agad ’ga thogail, togamaid longan."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:76
 msgid ""
 "Ships are constructed at the coastline near a shipyard by a shipwright. We "
 "have to build one somewhere close to the shore."
-msgstr ""
+msgstr "Thèid longan a thogail aig doca faisg air an oirthir le saor-luinge. Feumaidh sinn fear a thogail àiteigin air an oirthir."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:82
 msgid "Build a shipyard"
@@ -170,11 +170,11 @@ msgstr "Tog doca"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:84
 msgid "Build a shipyard close to the coast"
-msgstr ""
+msgstr "Tog doca air an oirthir"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:85
 msgid "Ships are produced by a shipyard. It is a medium building."
-msgstr ""
+msgstr "Thèid longan a thogail le doca. ’S e togalach meadhanach a th’ ann."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:86
 msgid ""
@@ -212,11 +212,11 @@ msgstr "Bu chòir dhuinn feitheamh gus am bi dà long againn. Foghnaidh sin aig 
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:104
 msgid "Ships"
-msgstr ""
+msgstr "Longan"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:106
 msgid "Construct two ships"
-msgstr ""
+msgstr "Tog dà long"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:107
 msgid ""
@@ -234,15 +234,15 @@ msgstr "Na dìochuimhnich an doca a chur ’na stad nuair a bhios longan gu leò
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:116
 msgid "Shipyard production"
-msgstr ""
+msgstr "Saothrachadh doca"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:118
 msgid "We have enough ships"
-msgstr ""
+msgstr "Tha longan gu leòr againn"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:119
 msgid "Your second ship, \"%1%\", is ready now."
-msgstr ""
+msgstr "Tha an dàrna long agad, \"%1%\", deiseil a-nis."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:120
 msgid ""
@@ -325,11 +325,11 @@ msgstr "Tòisich air triall ann an gin dhe na puirt agad."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:156
 msgid "Expedition"
-msgstr ""
+msgstr "Triall"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:158
 msgid "Start an expedition"
-msgstr ""
+msgstr "Tòisich air triall"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:159
 msgid "Start an expedition."
@@ -379,12 +379,12 @@ msgstr "Lorg eilean sa bheil beinn agus lorg raon puirt ann. Stèidhich tuineach
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:179
 msgid "Explore"
-msgstr ""
+msgstr "Rùraich"
 
 #. TRANSLATORS: "Found" as in "founding", NOT as in "finding"
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:182
 msgid "Found a settlement"
-msgstr ""
+msgstr "Stèidhich tuineachadh"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:183
 msgid "Navigate your ship to an island that could contain iron ore."
@@ -402,11 +402,11 @@ msgstr "Nuair a bhios tu air raon puirt iomchaidh a lorg, tog port ann."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:192
 msgid "New colony"
-msgstr ""
+msgstr "Tuineachadh ùr"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:194
 msgid "Your colony has been founded"
-msgstr ""
+msgstr "Chaidh an tuineachadh agad a stèidheachadh"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:195
 msgid ""
@@ -421,7 +421,7 @@ msgid ""
 "ships and how to send out an expedition. Remember that expeditions are "
 "sometimes the fastest way to reach essential resources – and sometimes the "
 "only one."
-msgstr ""
+msgstr "Gu ruige seo, dh’ionnsaich thu a h-uile rud mun t-seòladaireachd: mar a thogas tu puirt is longan agus mar a chuireas tu triall an toir air talamh ùr. Thoir an aire gur e na triallan a th’ anns an rathad as luaithe gu tric gus stòrasan cudromach a ruigsinn – agus an aon rathad uaireannan."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:197
 msgid ""
@@ -436,42 +436,42 @@ msgid ""
 "On this map, there is no enemy to fear. In other games, you should make "
 "building one or two military fortifications around your new colonies a "
 "priority."
-msgstr ""
+msgstr "Chan eil nàmhaid a’ toirt dùbhlan ort air a’ mhapa seo. Ann an geama àbhaisteach, mholainn-sa gun tog thu daingneachadh no dhà an airm mu na tuineachaidhean ùra agad gun dàil."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:205
 msgid "Our mission"
-msgstr ""
+msgstr "Ar dleastanas"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:207
 msgid "Start mining"
-msgstr ""
+msgstr "Tòisich air mèinnearachd"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:208
 msgid ""
 "It was a long and expensive job to get here. The island has not much to "
 "offer, but there is some iron ore inside its mountain. Our economy needs "
 "iron ore, so we have to build an iron mine."
-msgstr ""
+msgstr "Thug e fada ’s bha e cosgail an t-àite seo a ruigsinn. Chan eil cus feum san eilean seo ach tha clach-iarainn sa bheinn aige. Tha an eaconamaidh againn feumach air clach-iarainn agus feumaidh sinn mèinn iarainn a thogail ri linn sin."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:209
 msgid "Start mining iron ore in the mountain."
-msgstr ""
+msgstr "Tòisich air clach-iarainn a thochladh sa bheinn."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:215
 msgid "Iron Mine"
-msgstr ""
+msgstr "Mèinn iarainn"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:217
 msgid "Build an iron mine on the island"
-msgstr ""
+msgstr "Tog mèinn iarainn san eilean"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:218
 msgid "Our economy lacks resources."
-msgstr ""
+msgstr "Tha stòrasan a dhìth air an eaconamaidh againn."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:219
 msgid "Start mining iron ore in mountains on the island."
-msgstr ""
+msgstr "Tòisich air clach-iarainn a thochladh ann am beanntan an eilein."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:226
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:239
@@ -479,25 +479,25 @@ msgstr ""
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:274
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:285
 msgid "There is more to it…"
-msgstr ""
+msgstr "Tha barrachd ri innse…"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:228
 msgid "Another gold mountain"
-msgstr ""
+msgstr "Beann òir eile"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:229
 msgid ""
 "It will take some time for your shipyard to build some ships. While we’re "
 "waiting for them, there is another way of water-based transport I would like"
 " to teach you."
-msgstr ""
+msgstr "Bheir e ùine gus am bi an doca deiseil le togail nan longan. Fhad ’s a tha sinn a’ feitheamh orra, tha modh giùlain thar uisge eile ann a bu toigh leam ionnsachadh dhut."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:230
 msgid ""
 "Ships have the advantage that they can carry large quantities of wares and "
 "workers at a time, but unfortunately their destinations are limited to a "
 "handful of spaces suited for a port."
-msgstr ""
+msgstr "Tha longan math on a bheir iad tòrr mòr bhatharan is luchd-obrach leotha aig an aon àm ach gu mì-fhortanach, tha na cinn-uidhe aca cuingichte air corra àite a bhios freagarrach do phort."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:231
 msgid ""
@@ -506,53 +506,53 @@ msgid ""
 "seperating it from our main colony are too wide to build bridges and too "
 "narrow for ships to pass them. Our roads would have to take long curves, "
 "which slows down ware transport a lot."
-msgstr ""
+msgstr "Seall air a’ gleann seo ceann deas. Lorg sinn beinn le òr innte ann agus bu toigh leinn clach-òir a thochladh uaipe cuideachd. Gidheadh, tha na sruthan a tha ’ga sgaradh on phrìomh-thuineachadh againn ro leathan airson drochaidean a thogail agus ro chaol ach an rachadh long tromhpa. Tha lùban mòra sna rathaidean againn a nì giùlan a’ bhathair uabhasach slaodach."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:241
 msgid "Rowboats & Ferry Yards"
-msgstr ""
+msgstr "Bàtaichean ⁊ taighean-aiseig"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:243
 msgid ""
 "This is where ferries come in. Ferries are small rowboats that can carry "
 "only one ware at a time, and no workers (other than the one who rows it and "
 "who never leaves his boat)."
-msgstr ""
+msgstr "Seo as adhbhar gun cleachd sinn bàtaichean-aiseig. ’S e bàtaichean beaga a th’ annta nach doir ach aon bhathar leotha aig an aon àm agus chan aisig iad luchd-obrach idir (seach am fear a dh’iomaireas e ’s nach fhàg am bàta idir)."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:244
 msgid ""
 " Ferries are built in ferry yards, one rowboat costs two logs and one piece "
 "of cloth and is quickly constructed. A ferry yard is a medium-sized building"
 " that needs to be built close to the shore."
-msgstr ""
+msgstr " Togaidh tu bàtaichean-aiseig ann an taighean-aiseig ’s cosgaidh bàta dà grunn fhiodha agus aon rùsgan clòtha agus thèid a thogail gu luath. ’S e togalach meadhanach a th’ anns an taigh-aiseig a dh’fheumas tu togail faisg air an oirthir."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:245
 msgid "Let’s build a ferry yard close to the shore before we will continue."
-msgstr ""
+msgstr "Togamaid taigh-aiseig air an oirthir mus lean mi air adhart."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:251
 msgid "Build a ferry yard"
-msgstr ""
+msgstr "Tog taigh-aiseig"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:253
 msgid "Build a ferry yard close to the shore"
-msgstr ""
+msgstr "Tog taigh-aiseig faisg air an oirthir"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:254
 msgid "Ferries are constructed by a ferry yard."
-msgstr ""
+msgstr "Thèid bàtaichean-aiseig a thogail le taigh-aiseig."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:255
 msgid ""
 "You need to build the ferry yard close to the shore, otherwise it won’t be "
 "able to build ferries there."
-msgstr ""
+msgstr "Feumaidh tu an taigh-aiseig a thogail faisg air an oirthir ach an urrainn dha bàtaichean-aiseig a chur dhan uisge."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:263
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:276
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:295
 msgid "Waterways"
-msgstr ""
+msgstr "Slighean aiseig"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:264
 msgid ""
@@ -560,7 +560,7 @@ msgid ""
 "fixed transport routes called waterways. A waterway is built just like a "
 "road: You click on a flag near the shore, choose ‘Build a waterway’, and "
 "select the path for the waterway just as you would do for a road."
-msgstr ""
+msgstr "Eucoltach ri longan a shiubhlas gu port sam bith far am bi feum orra, bi bàtaichean-aiseig ceangailte ri slighe aiseig stèidhichte. Togaidh tu slighe aiseig mar a thogas tu rathad: Briog air bratach air an oirthir, tagh “Tog slighe aiseig” agus tagh an t-slighe aice mar a nì thu le rathad."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:265
 msgid ""
@@ -568,64 +568,64 @@ msgid ""
 "the water is too shallow for big ships. The only rule is that the two "
 "triangles directly adjacent to each segment of the waterway have to be "
 "water, and the entire path needs to be within your territory."
-msgstr ""
+msgstr "Gabhaidh slighean aiseig togail air a’ chuan cho ma ri faisg air an oirthir far a bhios an t-uisge ro thana airson longan. ’S e an aon riaghailt gum feum dà thriantan de dh’uisge a bhith ri taobh gach pàirt dhen t-slighe aiseig agus gum bi an t-slighe gu lèir san ranntair agad."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:266
 msgid ""
 "Also note that waterways, unlike roads, may not be built quite as long as "
 "you want them to. Every map has a length restriction for waterways. On this "
 "map, this is 5 tiles."
-msgstr ""
+msgstr "Thoir an aire cuideachd nach urrainn dhut slighean aiseag a dhèanamh cho fada ’s a thogras tu mar a nì thu le rathad. Tha cuingeachadh fa leth aig gach mapa air dè cho fada ’s a dh’fhaodas tu an dèanamh. Air a’ mhapa seo, ’s e 5 leacagan a th’ anns a’ chrìoch."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:267
 msgid ""
 "Always keep in mind that ferries do not transport workers. You can use them "
 "to speed up ware transport, but they can never entirely replace roads."
-msgstr ""
+msgstr "Cùm d’ aire nach aisig bàtaichean-aiseig luchd-obrach. ’S urrainn dhut an cleachdadh airson do bhathar a ghiùlan nas luaithe ach bidh thu feumach air rathaidean fhathast."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:277
 msgid "Allow me to show you how to build a waterway…"
-msgstr ""
+msgstr "Seallam dhut mar a thogas tu slighe aiseig a-nis…"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:287
 msgid "Golden waves"
-msgstr ""
+msgstr "Tuinn òrach"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:288
 msgid ""
 "As you can see, it is not that hard. When you build a waterway, the closest "
 "idle ferry will assign itself to it."
-msgstr ""
+msgstr "Mar a chunnaic thu, chan eil e cho doirbh sin. Nuair a thogas tu slighe aiseig, thig am bàta-aiseig ’na tàmh as fhaisge a dh’obair oirre."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:289
 msgid ""
 "Now it’s your turn: Build a gold mine on the mountain in the south and "
 "connect it to the main land by building waterways over the streams."
-msgstr ""
+msgstr "Siuthad is feuch e a-nis: Tog mèinn òir sa bheinn ceann a deas agus ceangail i ris an tìr-mhòr le slighe aiseig thar nan sruthan."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:297
 msgid "Build a gold mine and waterways"
-msgstr ""
+msgstr "Tog mèinn òir agus slighean aiseig"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:298
 msgid ""
 "Build a gold mine on the mountain in the south, and connect it to the "
 "mainland by building waterways over the streams."
-msgstr ""
+msgstr "Tog mèinn òir sa bheinn ceann a deas agus ceangail i ris an tìr-mhòr ’s tu a’ togail slighean aiseig thar nan sruthan."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:299
 msgid ""
 "A waterway is built just like a road: You click on a flag near the shore, "
 "choose ‘Build a waterway’, and select the path for the waterway just as you "
 "would do for a road."
-msgstr ""
+msgstr "Togaidh tu slighe aiseig mar a thogas tu rathad: Briog air bratach air an oirthir, tagh “Tog slighe aiseig” agus tagh an t-slighe aice mar a nì thu le rathad."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:300
 msgid ""
 "The only rule for waterway placement is that the two triangles directly "
 "adjacent to each segment of the waterway have to be water, and the entire "
 "path needs to be within your territory."
-msgstr ""
+msgstr "’S e an aon riaghailt do thogail shlighean aiseig gum feum dà thriantan de dh’uisge a bhith ri taobh gach pàirt dhen t-slighe aiseig agus gum bi an t-slighe gu lèir san ranntair agad."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:306
 msgid "Conclusion"
@@ -633,13 +633,13 @@ msgstr "Co-dhùnadh"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:308
 msgid "About Ferries"
-msgstr ""
+msgstr "Mu bhàtaichean-aiseig"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:309
 msgid ""
 "Now there are only a few more things I would like you to keep in mind "
 "whenever using ferries."
-msgstr ""
+msgstr "Tha rud no dà ann a bu chòir dhut a chur an aire nuair a chleachdas tu bàtaichean-aiseig."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:310
 msgid ""
@@ -648,7 +648,7 @@ msgid ""
 "not to claim regions you can reach neither by road nor by ship. Never cut "
 "all your roads between two places connected by waterways unless you are "
 "certain no worker will ever have to walk there."
-msgstr ""
+msgstr "Na dìochuimhnich gu bheil na bàtaichean ro bheag airson luchd-obrach aiseag. ’S urrainn dhut an cleachdadh airson bathar a thoirt am badeigin eile am broinn an ranntair agad nas luaithe ach cha ghabh an cleachdadh airson tìr ùr a thuineachadh nach urrainn dhut ruigsinn le rathad no long. Na geàrr a h-uile rathad eadar dà àite a bhios ceangailte ri chèile le slighean aiseig ach ma tha thu cinnteach nach fheum neach-obrach a choiseachd ann idir."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:311
 msgid ""
@@ -660,22 +660,22 @@ msgid ""
 "of waterways becoming severe bottlenecks in your economy. Try to build "
 "several of them in parallel to distribute the strain. If this is not "
 "possible, it is in some cases even more efficient not to use waterways."
-msgstr ""
+msgstr "Agus ma bhios na slighean aiseig agad mòran nas giorra na na rathaidean agad, cuiridh an eaconamaidh tòrr bhatharan tromhpa. Air sgàth ’s nach eil ach aon bhàta-aiseig aig gach slighe aiseig – eucoltach ri rathaidean aig a bheil dithis ma tha iad glè thrang – agus on a bhios iad a’ sìneadh nas fhaide eadar nam bratach na bhios rathaidean mar as trice, tha cunnart ann gun dèid slighe aiseig ’na bhealach cumhang dhan eaconamaidh agad. Feuch an tog thu grunn dhiubh ri taobh càch a chèile airson an t-eallach a chom-pàirteachadh. Mura gabh sin a dhèanamh, dh’fhaodte gum bi e nas èifeachdaiche gun a bhith a’ cleachdadh slighe aiseig."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:318
 msgid "Ferry yard production"
-msgstr ""
+msgstr "Cinneasachadh taighe-aiseig"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:320
 msgid "More ferries needed?"
-msgstr ""
+msgstr "A bheil feum air barrachd bhàtaichean-aiseig?"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:321
 msgid ""
 "Do remember to stop your ferry yard when you don’t need any new ferries to "
 "be produced. As long as a ferry services a waterway, its lifetime is "
 "unlimited, but unemployed ferries will rot away and eventually sink."
-msgstr ""
+msgstr "Na dìochuimhnich gun cuir thu an taigh-aiseig agad ’na stad mur eil thu feumach air bàtaichean-aiseig ùra. Mairidh bàta-aiseig gu buan fhad ’s a bhios e ag obair air slighe aiseig ach mur eil dreuch aige, thèid e a dholaidh agus fodha."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:329
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:331
@@ -684,22 +684,22 @@ msgstr "Meal do naidheachd"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:332
 msgid "You have learnt all there is to learn about ships and ferries!"
-msgstr ""
+msgstr "Tha mi air gach rud ionnsachadh dhut mu longan is bàtaichean-aiseig!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:333
 msgid ""
 "There is also another island where you can build a port if you wish to try "
 "launching another expedition."
-msgstr ""
+msgstr "Tha eilean eile ann far an urrainn dhut port a thogail ma tha thu airson feuchainn ri triall eile."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:334
 msgid ""
 "As always, you can continue playing and practice a bit more on this map if "
 "you like, or get your captain’s license ready and try out your new skills in"
 " a real game…"
-msgstr ""
+msgstr "Mar as àbhaist, ’s urrainn dhut cumail a’ cluiche ’s a’ cleachdadh air a’ mhapa seo ma thogras tu no faigh an cead sgiobair agad is cuir na sgilean ùra agad fo dheuchainn ann an geama ceart…"
 
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
