@@ -83,10 +83,6 @@ public:
 	void schedule_act(Bob&);
 
 	void load_finish_game(Game& g);
-
-	// TODO(Nordfriese): This is one exceedingly ugly hack for savegame compatibiliy.
-	Serial get_economy_savegame_compatibility(Serial ware_economy) const;
-
 private:
 	using ReverseMapObjectMap = std::map<Serial, MapObject*>;
 

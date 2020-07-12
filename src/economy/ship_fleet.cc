@@ -718,11 +718,7 @@ void ShipFleet::Loader::load(FileRead& fr) {
 	}
 
 	fleet.act_pending_ = fr.unsigned_8();
-
-	// TODO(Nordfriese): Savegame compatibility
-	if (packet_version_ >= 5) {
-		fleet.schedule_.load(fr);
-	}
+	fleet.schedule_.load(fr);
 }
 
 void ShipFleet::Loader::load_pointers() {
@@ -749,10 +745,7 @@ void ShipFleet::Loader::load_pointers() {
 
 	fleet.act_pending_ = save_act_pending;
 
-	// TODO(Nordfriese): Savegame compatibility
-	if (packet_version_ >= 5) {
-		fleet.schedule_.load_pointers(map_object_loader);
-	}
+	fleet.schedule_.load_pointers(map_object_loader);
 }
 
 void ShipFleet::Loader::load_finish() {
@@ -768,11 +761,6 @@ void ShipFleet::Loader::load_finish() {
 		fleet.set_economy(fleet.ports_[0]->get_economy(wwWARE), wwWARE);
 		fleet.set_economy(fleet.ports_[0]->get_economy(wwWORKER), wwWORKER);
 	}
-
-	// TODO(Nordfriese): Savegame compatibility
-	if (packet_version_ < 5) {
-		fleet.schedule_.load_finish(egbase());
-	}
 }
 
 MapObject::Loader* ShipFleet::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr) {
@@ -781,8 +769,7 @@ MapObject::Loader* ShipFleet::load(EditorGameBase& egbase, MapObjectLoader& mol,
 	try {
 		// The header has been peeled away by the caller
 		const uint8_t packet_version = fr.unsigned_8();
-		// TODO(Nordfriese): Savegame compatibility
-		if (packet_version <= kCurrentPacketVersion && packet_version >= 4) {
+		if (packet_version == kCurrentPacketVersion) {
 			PlayerNumber owner_number = fr.unsigned_8();
 			if (!owner_number || owner_number > egbase.map().get_nrplayers())
 				throw GameDataError("owner number is %u but there are only %u players", owner_number,
@@ -792,7 +779,6 @@ MapObject::Loader* ShipFleet::load(EditorGameBase& egbase, MapObjectLoader& mol,
 			if (!owner) {
 				throw GameDataError("owning player %u does not exist", owner_number);
 			}
-			loader->packet_version_ = packet_version;
 			loader->init(egbase, mol, *(new ShipFleet(owner)));
 			loader->load(fr);
 		} else {
