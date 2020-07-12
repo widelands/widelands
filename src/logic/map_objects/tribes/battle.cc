@@ -316,7 +316,7 @@ void Battle::calculate_round(Game& game) {
 	first_strikes_ = !first_strikes_;
 
 	uint32_t const hit = game.logic_rand() % 100;
-	if (hit > defender->get_evade()) {
+	if (hit >= defender->get_evade()) {
 		// Attacker hits!
 		last_attack_hits_ = true;
 

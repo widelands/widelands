@@ -127,6 +127,9 @@ private:
 		std::map<Widelands::DescriptionIndex, Widelands::Quantity> infinity_substitutes_;
 	};
 
+	/// Translation for the default profile is sourced from the widelands textdomain, and for the
+	/// other profiles from the tribes.
+	static std::string localize_profile_name(const std::string& name);
 	/// Actions performed when a NoteEconomyWindow is received.
 	void on_economy_note(const Widelands::NoteEconomy& note);
 

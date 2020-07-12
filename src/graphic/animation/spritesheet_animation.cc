@@ -230,10 +230,10 @@ const Image* SpriteSheetAnimation::representative_image(const RGBColor* clr) con
 	Rectf rect(Vector2f::zero(), w, h);
 	if (mipmap.has_playercolor_masks && clr) {
 		rv->fill_rect(rect, RGBAColor(0, 0, 0, 0));
-		rv->blit_blended(Rectf(column * w, row * h, w, h), *mipmap.sheet,
-		                 *mipmap.playercolor_mask_sheet, rect, *clr);
+		rv->blit_blended(rect, *mipmap.sheet, *mipmap.playercolor_mask_sheet,
+		                 Rectf(column * w, row * h, w, h), *clr);
 	} else {
-		rv->blit(Rectf(column * w, row * h, w, h), *mipmap.sheet, rect, 1., BlendMode::Copy);
+		rv->blit(rect, *mipmap.sheet, Rectf(column * w, row * h, w, h), 1., BlendMode::Copy);
 	}
 	return rv;
 }

@@ -381,10 +381,11 @@ struct ScoredShip {
 
 	static inline uint64_t calc_score(uint64_t capacity, uint64_t eta, uint64_t detour) {
 		// This needs to use uint64_t because the intermediate results will overflow uint32_t
-		return eta > kHorriblyLongDuration ? 0 : capacity * kMinScoreForImmediateAcceptFactor *
-		                                            kHorriblyLongDuration * kHorriblyLongDuration /
-		                                            (std::max(eta, kWonderfullyShortDuration) *
-		                                             std::max(detour, kWonderfullyShortDuration));
+		return eta > kHorriblyLongDuration ? 0 :
+		                                     capacity * kMinScoreForImmediateAcceptFactor *
+		                                        kHorriblyLongDuration * kHorriblyLongDuration /
+		                                        (std::max(eta, kWonderfullyShortDuration) *
+		                                         std::max(detour, kWonderfullyShortDuration));
 	}
 
 	ScoredShip(Ship* s, uint32_t c, Duration e, Duration d)
@@ -1733,4 +1734,4 @@ void ShippingSchedule::load_finish(EditorGameBase& egbase) {
 		}
 	}
 }
-}
+}  // namespace Widelands

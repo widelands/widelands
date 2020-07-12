@@ -1057,13 +1057,12 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
 	Bob::log_general_info(egbase);
 
 	molog("Ship belongs to fleet %u\nlastdock: %s\n", fleet_ ? fleet_->serial() : 0,
-	      (lastdock_.is_set()) ?
-	         (boost::format("%u (%d x %d)") % lastdock_.serial() %
-	          lastdock_.get(egbase)->get_positions(egbase)[0].x %
-	          lastdock_.get(egbase)->get_positions(egbase)[0].y)
-	            .str()
-	            .c_str() :
-	         "-");
+	      (lastdock_.is_set()) ? (boost::format("%u (%d x %d)") % lastdock_.serial() %
+	                              lastdock_.get(egbase)->get_positions(egbase)[0].x %
+	                              lastdock_.get(egbase)->get_positions(egbase)[0].y)
+	                                .str()
+	                                .c_str() :
+	                             "-");
 	if (destination_) {
 		molog("Has destination %u (%3dx%3d)\n", destination_->serial(),
 		      destination_->get_positions(egbase)[0].x, destination_->get_positions(egbase)[0].y);
@@ -1151,10 +1150,11 @@ void Ship::Loader::load(FileRead& fr, uint8_t pw) {
 	// Economy
 	// TODO(Nordfriese): Savegame compatibility
 	ware_economy_serial_ = fr.unsigned_32();
-	worker_economy_serial_ =
-	   packet_version_ >= 10 ? fr.unsigned_32() : ware_economy_serial_ == kInvalidSerial ?
-	                           kInvalidSerial :
-	                           mol().get_economy_savegame_compatibility(ware_economy_serial_);
+	worker_economy_serial_ = packet_version_ >= 10 ?
+	                            fr.unsigned_32() :
+	                            ware_economy_serial_ == kInvalidSerial ?
+	                            kInvalidSerial :
+	                            mol().get_economy_savegame_compatibility(ware_economy_serial_);
 
 	// The state the ship is in
 	ship_state_ = static_cast<ShipStates>(fr.unsigned_8());

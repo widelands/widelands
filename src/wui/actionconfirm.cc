@@ -340,7 +340,7 @@ void EnhanceConfirm::ok() {
 		upcast(Widelands::ConstructionSite, cs, object_.get(game));
 		if (cs && iaplayer().can_act(cs->owner().player_number())) {
 			game.send_player_enhance_building(
-			   *cs, Widelands::INVALID_INDEX, checkbox_ && checkbox_->get_state());
+			   *cs, cs->building().enhancement(), checkbox_ && checkbox_->get_state());
 		}
 	} else {
 		upcast(Widelands::Building, building, object_.get(game));

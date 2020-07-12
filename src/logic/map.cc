@@ -2190,10 +2190,10 @@ int32_t Map::findpath(Coords instart,
 			}
 
 			// Check passability
-			if (!checkstep.allowed(
-			       *this, cur, neighb, *direction, neighb == end ? CheckStep::stepLast : cur == start ?
-			                                                       CheckStep::stepFirst :
-			                                                       CheckStep::stepNormal)) {
+			if (!checkstep.allowed(*this, cur, neighb, *direction,
+			                       neighb == end ?
+			                          CheckStep::stepLast :
+			                          cur == start ? CheckStep::stepFirst : CheckStep::stepNormal)) {
 				continue;
 			}
 
