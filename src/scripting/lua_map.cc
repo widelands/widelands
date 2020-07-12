@@ -6158,7 +6158,8 @@ int LuaShip::make_expedition(lua_State* L) {
 	ship->add_item(*game, Widelands::ShippingItem(
 	                         tribe.get_worker_descr(tribe.builder())
 	                            ->create(*game, ship->get_owner(), nullptr, ship->get_position())));
-	std::map<Widelands::DescriptionIndex, uint32_t> workers_to_create;  // Lua table sorting order is not deterministic and may cause desyncs
+	std::map<Widelands::DescriptionIndex, uint32_t>
+	   workers_to_create;  // Lua table sorting order is not deterministic and may cause desyncs
 	if (lua_gettop(L) > 1) {
 		luaL_checktype(L, 2, LUA_TTABLE);
 		lua_pushnil(L);
@@ -6188,9 +6189,9 @@ int LuaShip::make_expedition(lua_State* L) {
 
 	for (auto& pair : workers_to_create) {
 		for (; pair.second; --pair.second) {
-			ship->add_item(
-			   *game, Widelands::ShippingItem(tribe.get_worker_descr(pair.first)->create(
-				         *game, ship->get_owner(), nullptr, ship->get_position())));
+			ship->add_item(*game, Widelands::ShippingItem(tribe.get_worker_descr(pair.first)
+			                                                 ->create(*game, ship->get_owner(),
+			                                                          nullptr, ship->get_position())));
 		}
 	}
 
