@@ -65,5 +65,5 @@ function launch_expeditions(player, items)
       ship:make_expedition(items[i])
    end
 
-   sleep_then_goto(player, 1000, fields[1]) end
+   sleep_then_goto(player, 1000, fields[1])
 end
