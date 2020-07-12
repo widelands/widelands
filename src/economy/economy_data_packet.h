@@ -31,8 +31,7 @@ class MapObjectLoader;
 
 class EconomyDataPacket {
 public:
-	explicit EconomyDataPacket(Economy* e)
-	   : eco_(e) {
+	explicit EconomyDataPacket(Economy* e) : eco_(e) {
 		assert(eco_);
 	}
 

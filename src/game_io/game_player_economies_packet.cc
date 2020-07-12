@@ -74,32 +74,31 @@ void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader
 				const size_t num_economies = fr.unsigned_32();
 				for (uint32_t i = 0; i < num_economies; ++i) {
 					const WareWorker type = fr.unsigned_8() ? wwWORKER : wwWARE;
-                    const uint32_t serial = fr.unsigned_32();
-                    const MapObject& mo = mol->get<MapObject>(serial);
-                    if (upcast(const Flag, flag, &mo)) {
-                        try {
-                            assert(flag->owner().player_number() == player->player_number());
-                            assert(flag->get_economy(type));
-                            EconomyDataPacket d(flag->get_economy(type));
-                            d.read(fr);
-                        } catch (const GameDataError& e) {
-                            throw GameDataError(
-                               "Error reading economy data for flag %u: %s", serial, e.what());
-                        }
-                    } else if (upcast(const Ship, ship, &mo)) {
-                        try {
-                            assert(ship->owner().player_number() == player->player_number());
-                            assert(ship->get_economy(type));
-                            EconomyDataPacket d(ship->get_economy(type));
-                            d.read(fr);
-                        } catch (const GameDataError& e) {
-                            throw GameDataError("Error reading economy data for ship %u '%s': %s",
-                                                serial, ship->get_shipname().c_str(), e.what());
-                        }
-                    } else {
-                        throw GameDataError(
-                           "Serial %u refers neither to a flag nor to a ship", serial);
-                    }
+					const uint32_t serial = fr.unsigned_32();
+					const MapObject& mo = mol->get<MapObject>(serial);
+					if (upcast(const Flag, flag, &mo)) {
+						try {
+							assert(flag->owner().player_number() == player->player_number());
+							assert(flag->get_economy(type));
+							EconomyDataPacket d(flag->get_economy(type));
+							d.read(fr);
+						} catch (const GameDataError& e) {
+							throw GameDataError(
+							   "Error reading economy data for flag %u: %s", serial, e.what());
+						}
+					} else if (upcast(const Ship, ship, &mo)) {
+						try {
+							assert(ship->owner().player_number() == player->player_number());
+							assert(ship->get_economy(type));
+							EconomyDataPacket d(ship->get_economy(type));
+							d.read(fr);
+						} catch (const GameDataError& e) {
+							throw GameDataError("Error reading economy data for ship %u '%s': %s", serial,
+							                    ship->get_shipname().c_str(), e.what());
+						}
+					} else {
+						throw GameDataError("Serial %u refers neither to a flag nor to a ship", serial);
+					}
 				}
 			} catch (const WException& e) {
 				throw GameDataError("player %u: %s", p, e.what());

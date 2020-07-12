@@ -757,35 +757,35 @@ void MapBuildingdataPacket::read_productionsite(
 				}
 			}
 
-            nr_queues = fr.unsigned_16();
-            for (uint16_t i = 0; i < nr_queues; ++i) {
-                WorkersQueue* wq = new WorkersQueue(productionsite, INVALID_INDEX, 0);
-                wq->read(fr, game, mol, tribes_lookup_table);
+			nr_queues = fr.unsigned_16();
+			for (uint16_t i = 0; i < nr_queues; ++i) {
+				WorkersQueue* wq = new WorkersQueue(productionsite, INVALID_INDEX, 0);
+				wq->read(fr, game, mol, tribes_lookup_table);
 
-                if (!game.tribes().worker_exists(wq->get_index())) {
-                    delete wq;
-                } else {
-                    productionsite.input_queues_.push_back(wq);
-                }
-            }
+				if (!game.tribes().worker_exists(wq->get_index())) {
+					delete wq;
+				} else {
+					productionsite.input_queues_.push_back(wq);
+				}
+			}
 
 			productionsite.actual_percent_ = fr.unsigned_32();
 			productionsite.statistics_string_on_changed_statistics_ = fr.c_string();
 			productionsite.production_result_ = fr.c_string();
-            productionsite.main_worker_ = -1;
+			productionsite.main_worker_ = -1;
 
-            if (fr.unsigned_8()) {
-                const Worker& worker = mol.get<Worker>(fr.unsigned_32());
-                int32_t i = 0;
-                // Determine main worker's index as this may change during saveloading (#3891)
-                for (const auto* wp = productionsite.working_positions();; ++wp) {
-                    if (wp->worker == &worker) {
-                        productionsite.main_worker_ = i;
-                        break;
-                    }
-                    ++i;
-                }
-            }
+			if (fr.unsigned_8()) {
+				const Worker& worker = mol.get<Worker>(fr.unsigned_32());
+				int32_t i = 0;
+				// Determine main worker's index as this may change during saveloading (#3891)
+				for (const auto* wp = productionsite.working_positions();; ++wp) {
+					if (wp->worker == &worker) {
+						productionsite.main_worker_ = i;
+						break;
+					}
+					++i;
+				}
+			}
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Productionsite", packet_version,
 			                            kCurrentPacketVersionProductionsite);
@@ -865,17 +865,17 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 				   std::make_pair(trainstall, spresence);
 			}
 
-            trainingsite.highest_trainee_level_seen_ = fr.unsigned_8();
-            trainingsite.latest_trainee_kickout_level_ = fr.unsigned_8();
-            trainingsite.trainee_general_lower_bound_ = fr.unsigned_8();
-            uint8_t somebits = fr.unsigned_8();
-            trainingsite.latest_trainee_was_kickout_ = 0 < (somebits & 1);
-            trainingsite.requesting_weak_trainees_ = 0 < (somebits & 2);
-            trainingsite.repeated_layoff_inc_ = 0 < (somebits & 4);
-            trainingsite.recent_capacity_increase_ = 0 < (somebits & 8);
-            assert(16 > somebits);
-            trainingsite.repeated_layoff_ctr_ = fr.unsigned_8();
-            trainingsite.request_open_since_ = fr.unsigned_32();
+			trainingsite.highest_trainee_level_seen_ = fr.unsigned_8();
+			trainingsite.latest_trainee_kickout_level_ = fr.unsigned_8();
+			trainingsite.trainee_general_lower_bound_ = fr.unsigned_8();
+			uint8_t somebits = fr.unsigned_8();
+			trainingsite.latest_trainee_was_kickout_ = 0 < (somebits & 1);
+			trainingsite.requesting_weak_trainees_ = 0 < (somebits & 2);
+			trainingsite.repeated_layoff_inc_ = 0 < (somebits & 4);
+			trainingsite.recent_capacity_increase_ = 0 < (somebits & 8);
+			assert(16 > somebits);
+			trainingsite.repeated_layoff_ctr_ = fr.unsigned_8();
+			trainingsite.request_open_since_ = fr.unsigned_32();
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Trainingsite", packet_version,
 			                            kCurrentPacketVersionTrainingsite);

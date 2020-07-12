@@ -1628,8 +1628,8 @@ void ShippingSchedule::save(const EditorGameBase& egbase,
 
 		// TODO(Nordfriese): Replace with at() when we break savegame compatibility
 		// (can only be not-present in compatibility cases)
-        // NOCOM I'm not entirely sure what you intended here,
-        // could you please take care of this one?
+		// NOCOM I'm not entirely sure what you intended here,
+		// could you please take care of this one?
 		auto it = last_actual_duration_recalculation_.find(pair.first);
 		fw.unsigned_32(it == last_actual_duration_recalculation_.end() ? 0 : it->second);
 

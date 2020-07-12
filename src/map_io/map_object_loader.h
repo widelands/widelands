@@ -83,6 +83,7 @@ public:
 	void schedule_act(Bob&);
 
 	void load_finish_game(Game& g);
+
 private:
 	using ReverseMapObjectMap = std::map<Serial, MapObject*>;
 

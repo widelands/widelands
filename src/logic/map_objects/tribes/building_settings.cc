@@ -243,8 +243,8 @@ void ProductionsiteSettings::read(const Game& game,
 			const uint32_t nr_workers = fr.unsigned_32();
 			for (uint32_t i = 0; i < nr_wares; ++i) {
 				DescriptionIndex di = Widelands::INVALID_INDEX;
-                const std::string name(fr.c_string());
-                di = tribe_.safe_ware_index(tribes_lookup_table.lookup_ware(name));
+				const std::string name(fr.c_string());
+				di = tribe_.safe_ware_index(tribes_lookup_table.lookup_ware(name));
 				const uint32_t fill = fr.unsigned_32();
 				const int32_t priority = fr.signed_32();
 				// Set the fill and priority if the queue exists.
@@ -259,8 +259,8 @@ void ProductionsiteSettings::read(const Game& game,
 			}
 			for (uint32_t i = 0; i < nr_workers; ++i) {
 				DescriptionIndex di = Widelands::INVALID_INDEX;
-                const std::string name(fr.c_string());
-                di = tribe_.safe_worker_index(tribes_lookup_table.lookup_worker(name));
+				const std::string name(fr.c_string());
+				di = tribe_.safe_worker_index(tribes_lookup_table.lookup_worker(name));
 				const uint32_t fill = fr.unsigned_32();
 				const int32_t priority = fr.signed_32();
 				// Set the fill and priority if the queue exists.
@@ -336,8 +336,8 @@ void WarehouseSettings::read(const Game& game,
 			const uint32_t nr_workers = fr.unsigned_32();
 			for (uint32_t i = 0; i < nr_wares; ++i) {
 				DescriptionIndex di = Widelands::INVALID_INDEX;
-                const std::string name(fr.c_string());
-                di = tribe_.safe_ware_index(tribes_lookup_table.lookup_ware(name));
+				const std::string name(fr.c_string());
+				di = tribe_.safe_ware_index(tribes_lookup_table.lookup_ware(name));
 				const uint8_t pref = fr.unsigned_8();
 				// Condition protects against changes in the tribe's roster
 				if (tribe_.has_ware(di)) {
@@ -346,8 +346,8 @@ void WarehouseSettings::read(const Game& game,
 			}
 			for (uint32_t i = 0; i < nr_workers; ++i) {
 				DescriptionIndex di = Widelands::INVALID_INDEX;
-                const std::string name(fr.c_string());
-                di = tribe_.safe_worker_index(tribes_lookup_table.lookup_worker(name));
+				const std::string name(fr.c_string());
+				di = tribe_.safe_worker_index(tribes_lookup_table.lookup_worker(name));
 				const uint8_t pref = fr.unsigned_8();
 				// Condition protects against changes in the tribe's roster
 				if (tribe_.has_worker(di)) {
