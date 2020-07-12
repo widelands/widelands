@@ -37,7 +37,7 @@
 ;Appveyor environment
 #define BuildFolder GetEnv("APPVEYOR_BUILD_FOLDER")
 #define DLLFolder GetEnv("MINGWPATH")
-#define Version "Build21-RC1-" + GetEnv("PLATFORM")
+#define Version "Build21-" + GetEnv("PLATFORM")
 
 [Setup]
 AppName={#Name}

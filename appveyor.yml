@@ -51,11 +51,11 @@ build_script:
   - cmd: "cmake --build ."
 on_success:
   - cmd: strip -sv %APPVEYOR_BUILD_FOLDER%\build\src\widelands.exe
-  - cmd: ISCC /q /o%APPVEYOR_BUILD_FOLDER% /fWidelands-Build21-RC1-%PLATFORM% c:\projects\widelands\utils\win32\innosetup\Widelands.iss
-  - appveyor PushArtifact %APPVEYOR_BUILD_FOLDER%\Widelands-Build21-RC1-%PLATFORM%.exe
+  - cmd: ISCC /q /o%APPVEYOR_BUILD_FOLDER% /fWidelands-Build21-%PLATFORM% c:\projects\widelands\utils\win32\innosetup\Widelands.iss
+  - appveyor PushArtifact %APPVEYOR_BUILD_FOLDER%\Widelands-Build21-%PLATFORM%.exe
 
 artifacts:
-  - path: Widelands-Build21-RC1-$(PLATFORM).exe
+  - path: Widelands-Build21-$(PLATFORM).exe
     name: Widelands Setup
 
 platform:
