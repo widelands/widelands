@@ -147,7 +147,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 		   if (save_profile_dialog_) {
 			   save_profile_dialog_->update_table();
 		   }
-		});
+	   });
 
 	read_targets();
 }
@@ -332,13 +332,12 @@ void EconomyOptionsWindow::EconomyOptionsPanel::toggle_infinite() {
 				if (it == infinity_substitutes_.end()) {
 					// The window was opended with the target set to infinite,
 					// so we just use the default value
-					new_quantity = is_wares ?
-					                  economy_options_window_->get_predefined_targets()
-					                     .at(kDefaultEconomyProfile)
-					                     .wares.at(index) :
-					                  economy_options_window_->get_predefined_targets()
-					                     .at(kDefaultEconomyProfile)
-					                     .workers.at(index);
+					new_quantity = is_wares ? economy_options_window_->get_predefined_targets()
+					                             .at(kDefaultEconomyProfile)
+					                             .wares.at(index) :
+					                          economy_options_window_->get_predefined_targets()
+					                             .at(kDefaultEconomyProfile)
+					                             .workers.at(index);
 				} else {
 					// Restore saved old value
 					new_quantity = it->second;

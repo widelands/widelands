@@ -342,7 +342,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	   [&egbase](FileSystem& fs) {
 		   Widelands::MapSaver wms(fs, egbase);
 		   wms.save();
-		},
+	   },
 	   complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR);
 	GenericSaveHandler::Error error = gsh.save();
 
