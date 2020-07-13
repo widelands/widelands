@@ -209,18 +209,10 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		}
 	}
 
-	// Verify that any map resource collected is valid
-	if (!hints().collects_ware_from_map().empty()) {
-		if (!(tribes.ware_exists(hints().collects_ware_from_map()))) {
-			throw GameDataError("ai_hints for building %s collects nonexistent ware %s from map",
-			                    name().c_str(), hints().collects_ware_from_map().c_str());
-		}
-		const DescriptionIndex collects_index =
-		   tribes.safe_ware_index(hints().collects_ware_from_map());
-		if (!is_output_ware_type(collects_index)) {
-			throw GameDataError("ai_hints for building %s collects ware %s from map, but it's not "
-			                    "listed in the building's output",
-			                    name().c_str(), hints().collects_ware_from_map().c_str());
+	// Get collected map resources for AI
+	if (input_wares_.empty() && input_workers().empty()) {
+		for (const DescriptionIndex& output_ware : output_ware_types_) {
+			hints_.add_collects_ware_from_map(tribes.get_ware_descr(output_ware)->name());
 		}
 	}
 }

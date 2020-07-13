@@ -25,9 +25,7 @@ tribes:new_productionsite_type {
       },
    },
 
-   aihints = {
-      collects_ware_from_map = "log",
-   },
+   aihints = {},
 
    working_positions = {
       atlanteans_woodcutter = 1

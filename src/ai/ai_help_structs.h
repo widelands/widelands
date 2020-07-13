@@ -448,9 +448,8 @@ struct BuildingObserver {
 	void unset_is(BuildingAttribute);
 
 	// Building collects a ware from the map
-	bool has_collected_map_resource() const;
-	void set_collected_map_resource(const TribeDescr& tribe, const std::string& ware_name);
-	DescriptionIndex get_collected_map_resource() const;
+	void add_collected_map_resource(const TribeDescr& tribe, const std::string& ware_name);
+	const std::set<DescriptionIndex>& get_collected_map_resources() const;
 
 	char const* name;
 	Widelands::DescriptionIndex id;
@@ -515,7 +514,7 @@ struct BuildingObserver {
 	bool build_material_shortage;
 
 private:
-	DescriptionIndex collected_map_resource;
+	std::set<DescriptionIndex> collected_map_resources;
 	std::set<BuildingAttribute> is_what;
 };
 

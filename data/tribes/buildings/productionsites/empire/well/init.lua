@@ -30,9 +30,7 @@ tribes:new_productionsite_type {
       },
    },
 
-   aihints = {
-      collects_ware_from_map = "water"
-   },
+   aihints = {},
 
    working_positions = {
       empire_carrier = 1

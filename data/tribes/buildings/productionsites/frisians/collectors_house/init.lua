@@ -44,7 +44,6 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      collects_ware_from_map = "fruit",
       prohibited_till = 470,
       requires_supporters = true
    },

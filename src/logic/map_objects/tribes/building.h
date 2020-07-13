@@ -171,6 +171,7 @@ protected:
 	virtual Building& create_object() const = 0;
 	Building& create_constructionsite() const;
 
+	BuildingHints hints_;     // hints (knowledge) for computer players
 private:
 	const Tribes& tribes_;
 	const bool buildable_;          // the player can build this himself
@@ -190,10 +191,9 @@ private:
 	DescriptionIndex
 	   enhanced_from_;        // The building this building was enhanced from, or INVALID_INDEX
 	bool enhanced_building_;  // if it is one, it is bulldozable
-	BuildingHints hints_;     // hints (knowledge) for computer players
+
 	DescriptionIndex built_over_immovable_;  // can be built only on nodes where an immovable with
 	                                         // this attribute stands
-
 	// for migration, 0 is the default, meaning get_conquers() + 4
 	uint32_t vision_range_;
 	DISALLOW_COPY_AND_ASSIGN(BuildingDescr);
