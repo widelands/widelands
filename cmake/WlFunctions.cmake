@@ -200,7 +200,7 @@ macro(_common_compile_tasks)
     if (OPTION_BUILD_WINSTATIC)
       target_link_libraries(${NAME} ICU::uc ICU::dt)
     else()
-      target_link_libraries(${NAME})
+      target_link_libraries(${NAME} ${ICU_LIBRARIES})
     endif()
   endif()
 
