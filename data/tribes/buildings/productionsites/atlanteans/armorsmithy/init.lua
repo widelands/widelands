@@ -144,10 +144,6 @@ tribes:new_productionsite_type {
       { name = "iron", amount = 8 },
       { name = "gold", amount = 8 }
    },
-   outputs = {
-      "shield_advanced",
-      "shield_steel"
-   },
 
    programs = {
       work = {

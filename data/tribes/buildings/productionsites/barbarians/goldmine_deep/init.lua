@@ -51,9 +51,6 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "snack", amount = 6 }
    },
-   outputs = {
-      "gold_ore"
-   },
 
    indicate_workarea_overlaps = {
       barbarians_goldmine = false,

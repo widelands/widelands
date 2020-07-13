@@ -48,9 +48,6 @@ tribes:new_productionsite_type {
       { name = "trident_light", amount = 8 },
       { name = "atlanteans_recruit", amount = 8 }
    },
-   outputs = {
-      "atlanteans_soldier",
-   },
 
    programs = {
       work = {

@@ -50,10 +50,6 @@ tribes:new_productionsite_type {
       barbarians_gamekeepers_hut = true,
    },
 
-   outputs = {
-      "meat"
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...

@@ -60,9 +60,6 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "fur", amount = 8 },
    },
-   outputs = {
-      "fur_garment"
-   },
 
    programs = {
       work = {

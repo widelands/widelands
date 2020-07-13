@@ -49,9 +49,6 @@ tribes:new_productionsite_type {
       { name = "spear_wooden", amount = 8 },
       { name = "empire_recruit", amount = 8 }
    },
-   outputs = {
-      "empire_soldier",
-   },
 
    programs = {
       work = {
