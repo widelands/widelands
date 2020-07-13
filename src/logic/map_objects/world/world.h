@@ -54,6 +54,7 @@ public:
 	DescriptionIndex get_critter(char const* const l) const;
 	CritterDescr const* get_critter_descr(DescriptionIndex index) const;
 	CritterDescr const* get_critter_descr(const std::string& name) const;
+	DescriptionIndex get_nr_critters() const;
 
 	const DescriptionMaintainer<ImmovableDescr>& immovables() const;
 	DescriptionIndex get_immovable_index(const std::string& name) const;
