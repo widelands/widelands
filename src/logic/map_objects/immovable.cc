@@ -308,7 +308,8 @@ Immovable::Immovable(const ImmovableDescr& imm_descr,
      program_ptr_(0),
      anim_construction_total_(0),
      anim_construction_done_(0),
-     program_step_(0) {
+     program_step_(0),
+     growth_delay_(0) {
 }
 
 Immovable::~Immovable() {
@@ -494,8 +495,8 @@ Load/save support
 // Widelands, so we have a dynamic version number - it is only set higher than
 // kCurrentPacketVersionImmovableNoFormerBuildings during saving if we have an immovable with
 // a former building assigned to it.
-constexpr uint8_t kCurrentPacketVersionImmovableNoFormerBuildings = 7;
-constexpr uint8_t kCurrentPacketVersionImmovable = 8;
+constexpr uint8_t kCurrentPacketVersionImmovableNoFormerBuildings = 8;
+constexpr uint8_t kCurrentPacketVersionImmovable = 9;
 
 // Supporting older versions for map loading
 void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
@@ -579,6 +580,10 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 	} else {
 		imm.program_step_ = fr.signed_32();
 	}
+	imm.growth_delay_ =
+	   packet_version >= (packet_version > kCurrentPacketVersionImmovableNoFormerBuildings ? 9 : 8) ?
+	      fr.unsigned_32() :
+	      0;
 
 	if (packet_version >= 3 && packet_version <= 5) {
 		imm.reserved_by_worker_ = fr.unsigned_8();
@@ -649,6 +654,7 @@ void Immovable::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 
 	fw.unsigned_32(program_ptr_);
 	fw.unsigned_32(program_step_);
+	fw.unsigned_32(growth_delay_);
 
 	if (action_data_) {
 		fw.c_string(action_data_->name());
@@ -722,6 +728,15 @@ bool Immovable::construct_remaining_buildcost(Game& /* game */, Buildcost* build
 			(*buildcost)[it->first] = it->second - delivered;
 	}
 
+	return true;
+}
+
+bool Immovable::apply_growth_delay(Game& game) {
+	if (growth_delay_ == 0) {
+		return false;
+	}
+	schedule_act(game, growth_delay_);
+	growth_delay_ = 0;
 	return true;
 }
 
