@@ -55,11 +55,12 @@ BaseImmovable::PositionList RoadBase::get_positions(const EditorGameBase& egbase
 	PositionList rv;
 	const Path::StepVector::size_type nr_steps = path_.get_nsteps();
 	for (Path::StepVector::size_type steps = 0; steps < nr_steps + 1; ++steps) {
-		if (steps > 0 && steps < path_.get_nsteps())
+		if (steps > 0 && steps < path_.get_nsteps()) {
 			rv.push_back(curf);
-
-		if (steps < path_.get_nsteps())
+		}
+		if (steps < path_.get_nsteps()) {
 			map.get_neighbour(curf, path_[steps], &curf);
+		}
 	}
 	return rv;
 }
@@ -121,8 +122,9 @@ void RoadBase::mark_map(EditorGameBase& egbase) {
 
 	const Path::StepVector::size_type nr_steps = path_.get_nsteps();
 	for (Path::StepVector::size_type steps = 0; steps < nr_steps + 1; ++steps) {
-		if (steps > 0 && steps < path_.get_nsteps())
+		if (steps > 0 && steps < path_.get_nsteps()) {
 			set_position(egbase, curf);
+		}
 
 		// mark the road that leads up to this field
 		if (steps > 0) {
@@ -147,8 +149,9 @@ void RoadBase::unmark_map(EditorGameBase& egbase) {
 
 	const Path::StepVector::size_type nr_steps = path_.get_nsteps();
 	for (Path::StepVector::size_type steps = 0; steps < nr_steps + 1; ++steps) {
-		if (steps > 0 && steps < path_.get_nsteps())
+		if (steps > 0 && steps < path_.get_nsteps()) {
 			unset_position(egbase, curf);
+		}
 
 		// mark the road that leads up to this field
 		if (steps > 0) {
@@ -170,8 +173,9 @@ void RoadBase::unmark_map(EditorGameBase& egbase) {
 bool RoadBase::init(EditorGameBase& egbase) {
 	PlayerImmovable::init(egbase);
 
-	if (2 <= path_.get_nsteps())
+	if (2 <= path_.get_nsteps()) {
 		link_into_flags(egbase);
+	}
 	return true;
 }
 

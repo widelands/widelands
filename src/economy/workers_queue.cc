@@ -40,8 +40,9 @@ WorkersQueue::WorkersQueue(PlayerImmovable& init_owner,
                            DescriptionIndex const init_ware,
                            uint8_t const init_max_size)
    : InputQueue(init_owner, init_ware, init_max_size, wwWORKER), workers_() {
-	if (index_ != INVALID_INDEX)
+	if (index_ != INVALID_INDEX) {
 		update();
+	}
 }
 
 /**
@@ -118,8 +119,9 @@ void WorkersQueue::set_filled(Quantity filled) {
 	if (filled > max_size_) {
 		filled = max_size_;
 	}
-	if (filled == get_filled())
+	if (filled == get_filled()) {
 		return;
+	}
 
 	// Now adjust them
 	const TribeDescr& tribe = owner().tribe();
