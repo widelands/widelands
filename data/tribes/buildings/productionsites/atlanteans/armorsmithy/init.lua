@@ -45,7 +45,7 @@ dirname = path.dirname(__file__)
 --            },
 --
 --    **outputs**
---        *Optional*. The wares/workers produced by this building, e.g.::
+--        *DEPRECATED*. The wares/workers produced by this building, e.g.::
 --
 --            outputs = { "shield_advanced", "shield_steel" },
 --

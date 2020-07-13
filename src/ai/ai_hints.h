@@ -82,6 +82,7 @@ struct BuildingHints {
 	}
 
 	const std::string& collects_ware_from_map() const {
+        // NOCOM deduce this: empty inputs?
 		return collects_ware_from_map_;
 	}
 
