@@ -298,6 +298,7 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 			act->iparam1 = read_positive(item.second);
 		} else if (item.first == "attrib") {
 			act->iparam2 = MapObjectDescr::get_attribute_id(item.second);
+			collected_attribs_.insert(std::make_pair(act->sparam1, item.second));
 		} else if (item.first == "type") {
 			act->sparam1 = item.second;
 		} else {
@@ -306,7 +307,6 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 	}
 
 	workarea_info_[act->iparam1].insert(" findobject");
-	collected_attribs_.insert(std::make_pair(act->sparam1, act->iparam2));
 }
 
 /* RST
@@ -422,10 +422,16 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 				act->iparam2 = sizenames.at(item.second);
 			} else if (item.first == "breed") {
 				act->iparam4 = 1;
+				// We don't collect when we breed
+				collected_resources_.clear();
 			} else if (item.first == "terraform") {
 				act->iparam7 = 1;
 			} else if (item.first == "resource") {
 				act->sparam1 = item.second;
+				// We only collect when we don't breed
+				if (act->iparam4 != 1) {
+					collected_resources_.insert(item.second);
+				}
 			} else if (item.first == "space") {
 				act->iparam3 = 1;
 			} else if (item.first == "avoid") {

@@ -103,6 +103,13 @@ public:
 	const Output& output_worker_types() const {
 		return output_worker_types_;
 	}
+	const std::set<std::pair<std::string, std::string>>& collected_attribs() const {
+		return collected_attribs_;
+	}
+	const std::set<std::string>& collected_resources() const {
+		return collected_resources_;
+	}
+
 	const ProductionProgram* get_program(const std::string&) const;
 	using Programs = std::map<std::string, std::unique_ptr<ProductionProgram>>;
 	const Programs& programs() const {
@@ -143,6 +150,14 @@ public:
 		return highlight_overlapping_workarea_for_;
 	}
 
+protected:
+	void add_collected_attrib(const std::string& object_type, const std::string& resource) {
+		collected_attribs_.insert(std::make_pair(object_type, resource));
+	}
+	void add_collected_resource(const std::string& resource) {
+		collected_resources_.insert(resource);
+	}
+
 private:
 	std::unique_ptr<std::set<DescriptionIndex>> ware_demand_checks_;
 	std::unique_ptr<std::set<DescriptionIndex>> worker_demand_checks_;
@@ -151,6 +166,10 @@ private:
 	BillOfMaterials input_workers_;
 	Output output_ware_types_;
 	Output output_worker_types_;
+	// <"bob"|"immovable", attribute_name>
+	std::set<std::pair<std::string, std::string>> collected_attribs_;
+	// e.g. "fish"
+	std::set<std::string> collected_resources_;
 	Programs programs_;
 	std::string out_of_resource_title_;
 	std::string out_of_resource_heading_;

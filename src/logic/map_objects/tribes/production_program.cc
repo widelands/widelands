@@ -658,10 +658,12 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 		}
 	}
 
-	// NOCOM const std::set<std::pair<std::string, int32_t>>& collected_attribs();
-	// NOCOM check Frisian fisher - only counts if createware is also called?
 	for (const auto& attribinfo : worker_program->collected_attribs()) {
-		log("NOCOM %s collects %s - %d\n", descr->name().c_str(), attribinfo.first.c_str(), attribinfo.second);
+		// NOCOM make the pair the argument?
+		descr->add_collected_attrib(attribinfo.first, attribinfo.second);
+	}
+	for (const std::string& resourceinfo : worker_program->collected_resources()) {
+		descr->add_collected_resource(resourceinfo);
 	}
 }
 

@@ -244,6 +244,15 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 			                    name().c_str(), hints().collects_ware_from_map().c_str());
 		}
 	}
+
+	// NOCOM check Frisian fisher - only counts if createware is also called?
+	for (const auto& attribinfo : collected_attribs()) {
+		// NOCOM make the pair the argument?
+		log("NOCOM %s collects %s - %s\n", name().c_str(), attribinfo.first.c_str(), attribinfo.second.c_str());
+	}
+	for (const std::string& resourceinfo : collected_resources()) {
+		log("NOCOM %s collects resource - %s\n", name().c_str(), resourceinfo.c_str());
+	}
 }
 
 ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
