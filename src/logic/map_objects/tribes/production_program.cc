@@ -662,8 +662,14 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 		// NOCOM make the pair the argument?
 		descr->add_collected_attrib(attribinfo.first, attribinfo.second);
 	}
+	for (const auto& attribinfo : worker_program->created_attribs()) {
+		descr->add_created_attrib(attribinfo.first, attribinfo.second);
+	}
 	for (const std::string& resourceinfo : worker_program->collected_resources()) {
 		descr->add_collected_resource(resourceinfo);
+	}
+	for (const std::string& resourceinfo : worker_program->created_resources()) {
+		descr->add_created_resource(resourceinfo);
 	}
 }
 

@@ -402,6 +402,9 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 	act->iparam7 = 0;
 	act->sparam1 = "";
 
+	std::string resource = "";
+	bool breeds = false;
+
 	// Parse predicates
 	for (const std::string& argument : cmd) {
 		try {
@@ -422,16 +425,14 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 				act->iparam2 = sizenames.at(item.second);
 			} else if (item.first == "breed") {
 				act->iparam4 = 1;
-				// We don't collect when we breed
-				collected_resources_.clear();
+				// For registering collected/created resources
+				breeds = true;
 			} else if (item.first == "terraform") {
 				act->iparam7 = 1;
 			} else if (item.first == "resource") {
 				act->sparam1 = item.second;
-				// We only collect when we don't breed
-				if (act->iparam4 != 1) {
-					collected_resources_.insert(item.second);
-				}
+				// For registering collected/created resources
+				resource = item.second;
 			} else if (item.first == "space") {
 				act->iparam3 = 1;
 			} else if (item.first == "avoid") {
@@ -453,6 +454,14 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 		throw GameDataError("findspace: must specify size");
 	}
 	workarea_info_[act->iparam1].insert(" findspace");
+
+	if (!resource.empty()) {
+		if (breeds) {
+			created_resources_.insert(resource);
+		} else {
+			collected_resources_.insert(resource);
+		}
+	}
 }
 
 /* RST
@@ -688,6 +697,7 @@ void WorkerProgram::parse_plant(Worker::Action* act, const std::vector<std::stri
 		// This will throw a GameDataError if the attribute doesn't exist.
 		ImmovableDescr::get_attribute_id(attrib_name);
 		act->sparamv.push_back(attrib_name);
+		created_attribs_.insert(std::make_pair("immovable", attrib_name));
 	}
 }
 
@@ -719,6 +729,8 @@ void WorkerProgram::parse_createbob(Worker::Action* act, const std::vector<std::
 
 	act->function = &Worker::run_createbob;
 	act->sparamv = std::move(cmd);
+	// We only support creating critters, and they are eatable.
+	created_attribs_.insert(std::make_pair("bob", "eatable"));
 }
 
 /* RST

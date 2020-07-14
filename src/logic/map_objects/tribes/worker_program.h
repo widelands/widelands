@@ -58,16 +58,24 @@ struct WorkerProgram : public MapObjectProgram {
 	const std::set<std::pair<std::string, std::string>>& collected_attribs() const {
 		return collected_attribs_;
 	}
+	const std::set<std::pair<std::string, std::string>>& created_attribs() const {
+		return created_attribs_;
+	}
 	const std::set<std::string>& collected_resources() const {
 		return collected_resources_;
+	}
+	const std::set<std::string>& created_resources() const {
+		return created_resources_;
 	}
 
 private:
 	WorkareaInfo workarea_info_;
 	// <"bob"|"immovable", attribute_name>
 	std::set<std::pair<std::string, std::string>> collected_attribs_;
+	std::set<std::pair<std::string, std::string>> created_attribs_;
 	// e.g. "fish"
 	std::set<std::string> collected_resources_;
+	std::set<std::string> created_resources_;
 
 	struct ParseMap {
 		const char* name;

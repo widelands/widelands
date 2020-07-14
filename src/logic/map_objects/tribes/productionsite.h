@@ -106,8 +106,14 @@ public:
 	const std::set<std::pair<std::string, std::string>>& collected_attribs() const {
 		return collected_attribs_;
 	}
+	const std::set<std::pair<std::string, std::string>>& created_attribs() const {
+		return created_attribs_;
+	}
 	const std::set<std::string>& collected_resources() const {
 		return collected_resources_;
+	}
+	const std::set<std::string>& created_resources() const {
+		return created_resources_;
 	}
 
 	const ProductionProgram* get_program(const std::string&) const;
@@ -154,8 +160,14 @@ protected:
 	void add_collected_attrib(const std::string& object_type, const std::string& resource) {
 		collected_attribs_.insert(std::make_pair(object_type, resource));
 	}
+	void add_created_attrib(const std::string& object_type, const std::string& resource) {
+		created_attribs_.insert(std::make_pair(object_type, resource));
+	}
 	void add_collected_resource(const std::string& resource) {
 		collected_resources_.insert(resource);
+	}
+	void add_created_resource(const std::string& resource) {
+		created_resources_.insert(resource);
 	}
 
 private:
@@ -168,8 +180,10 @@ private:
 	Output output_worker_types_;
 	// <"bob"|"immovable", attribute_name>
 	std::set<std::pair<std::string, std::string>> collected_attribs_;
+	std::set<std::pair<std::string, std::string>> created_attribs_;
 	// e.g. "fish"
 	std::set<std::string> collected_resources_;
+	std::set<std::string> created_resources_;
 	Programs programs_;
 	std::string out_of_resource_title_;
 	std::string out_of_resource_heading_;

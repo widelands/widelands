@@ -250,8 +250,15 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		// NOCOM make the pair the argument?
 		log("NOCOM %s collects %s - %s\n", name().c_str(), attribinfo.first.c_str(), attribinfo.second.c_str());
 	}
+	for (const auto& attribinfo : created_attribs()) {
+		// NOCOM make the pair the argument?
+		log("NOCOM %s creates %s - %s\n", name().c_str(), attribinfo.first.c_str(), attribinfo.second.c_str());
+	}
 	for (const std::string& resourceinfo : collected_resources()) {
 		log("NOCOM %s collects resource - %s\n", name().c_str(), resourceinfo.c_str());
+	}
+	for (const std::string& resourceinfo : created_resources()) {
+		log("NOCOM %s creates resource - %s\n", name().c_str(), resourceinfo.c_str());
 	}
 }
 
