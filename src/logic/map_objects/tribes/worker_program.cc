@@ -306,6 +306,7 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 	}
 
 	workarea_info_[act->iparam1].insert(" findobject");
+	collected_attribs_.insert(std::make_pair(act->sparam1, act->iparam2));
 }
 
 /* RST

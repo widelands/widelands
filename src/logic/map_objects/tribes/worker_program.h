@@ -55,9 +55,15 @@ struct WorkerProgram : public MapObjectProgram {
 	const WorkareaInfo& get_workarea_info() const {
 		return workarea_info_;
 	}
+	const std::set<std::pair<std::string, int32_t>>& collected_attribs() const {
+		return collected_attribs_;
+	}
 
 private:
 	WorkareaInfo workarea_info_;
+	// <"bob"|"immovable", attribute_index>
+	std::set<std::pair<std::string, int32_t>> collected_attribs_;
+
 	struct ParseMap {
 		const char* name;
 		ParseWorkerProgramFn function;

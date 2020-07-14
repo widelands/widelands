@@ -637,10 +637,12 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 	const WorkerDescr& main_worker_descr =
 	   *tribes.get_worker_descr(descr->working_positions().front().first);
 
+	const WorkerProgram* worker_program = main_worker_descr.get_program(program_);
+
 	//  This will fail unless the main worker has a program with the given
 	//  name, so it also validates the parameter.
 	const WorkareaInfo& worker_workarea_info =
-	   main_worker_descr.get_program(program_)->get_workarea_info();
+	   worker_program->get_workarea_info();
 
 	for (const auto& area_info : worker_workarea_info) {
 		std::set<std::string>& building_radius_infos = descr->workarea_info_[area_info.first];
@@ -654,6 +656,12 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 			description += worker_name;
 			building_radius_infos.insert(description);
 		}
+	}
+
+	// NOCOM const std::set<std::pair<std::string, int32_t>>& collected_attribs();
+	// NOCOM check Frisian fisher - only counts if createware is also called?
+	for (const auto& attribinfo : worker_program->collected_attribs()) {
+		log("NOCOM %s collects %s - %d\n", descr->name().c_str(), attribinfo.first.c_str(), attribinfo.second);
 	}
 }
 
