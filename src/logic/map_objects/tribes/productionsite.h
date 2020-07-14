@@ -243,6 +243,11 @@ protected:
 		created_resources_.insert(resource);
 	}
 
+	/// Set AI hints for mined world resource
+	void set_mines(Widelands::DescriptionIndex world_resource, uint8_t mines_percent) {
+		hints_.set_mines(world_resource, mines_percent);
+	}
+
 private:
 	std::unique_ptr<std::set<DescriptionIndex>> ware_demand_checks_;
 	std::unique_ptr<std::set<DescriptionIndex>> worker_demand_checks_;

@@ -159,12 +159,12 @@ Production Sites
     ``water`` (well).
 
 **mines**
-    The building will mine to obtain the given ware, e.g.::
+    **DEPRECATED** The building will mine to obtain the given ware, e.g.::
 
         mines = "resource_gold",
 
 **mines_percent**
-    The percentage that a mine will mine of its resource before it needs enhancing, e.g.::
+    **DEPRECATED** The percentage that a mine will mine of its resource before it needs enhancing, e.g.::
 
         mines_percent = 60,
 
@@ -231,7 +231,7 @@ Production Sites
 */
 
 BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
-   : mines_(table->has_key("mines") ? table->get_string("mines") : ""),
+   : mines_(Widelands::INVALID_INDEX),
      needs_water_(table->has_key("needs_water") ? table->get_bool("needs_water") : false),
      space_consumer_(table->has_key("space_consumer") ? table->get_bool("space_consumer") : false),
      expansion_(table->has_key("expansion") ? table->get_bool("expansion") : false),
@@ -248,7 +248,6 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
      basic_amount_(table->has_key("basic_amount") ? table->get_int("basic_amount") : 0),
      // 10 days default
      forced_after_(table->has_key("forced_after") ? table->get_int("forced_after") : 864000),
-     mines_percent_(table->has_key("mines_percent") ? table->get_int("mines_percent") : 100),
      very_weak_ai_limit_(
         table->has_key("very_weak_ai_limit") ? table->get_int("very_weak_ai_limit") : -1),
      weak_ai_limit_(table->has_key("weak_ai_limit") ? table->get_int("weak_ai_limit") : -1),
@@ -263,6 +262,13 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
 		     table->get_table("supports_production_of")->array_entries<std::string>()) {
 			supported_production_.insert(ware_name);
 		}
+	}
+
+	if (table->has_key("mines")) {
+		log_warn("The 'mines' key in 'ai_hints' is no longer used\n");
+	}
+	if (table->has_key("mines_percent")) {
+		log_warn("The 'mines_percent' key in 'ai_hints' is no longer used\n");
 	}
 }
 

@@ -760,10 +760,7 @@ void DefaultAI::late_initialization() {
 
 			if (bo.type == BuildingObserver::Type::kMine) {
 				// get the resource needed by the mine
-				if (bh.get_mines()) {
-					bo.mines = game().descriptions().resource_index(bh.get_mines());
-				}
-
+				bo.mines = bh.get_mines();
 				bo.mines_percent = bh.get_mines_percent();
 
 				// populating mines_per_type map

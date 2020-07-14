@@ -1504,6 +1504,9 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 		}
 	}
 
+	// NOCOM partial duplicate with add_collected_resource
+	descr->set_mines(resource_, max_resources_);
+
 	const std::string description = descr->name() + " " + production_program_name + " mine " +
 	                                descriptions.get_resource_descr(resource_)->name();
 	descr->workarea_info_[workarea_].insert(description);
