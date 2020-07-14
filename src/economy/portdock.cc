@@ -233,8 +233,9 @@ void PortDock::cleanup(EditorGameBase& egbase) {
  * Add the flags of all ports that can be reached via this dock.
  */
 void PortDock::add_neighbours(std::vector<RoutingNodeNeighbour>& neighbours) {
-	if (fleet_ && fleet_->active())
+	if (fleet_ && fleet_->active()) {
 		fleet_->add_neighbours(*this, neighbours);
+	}
 }
 
 /**
@@ -522,13 +523,15 @@ void PortDock::Loader::load_finish() {
 
 	if (pd.warehouse_->get_portdock() != &pd) {
 		log("Inconsistent PortDock <> Warehouse link\n");
-		if (upcast(Game, game, &egbase()))
+		if (upcast(Game, game, &egbase())) {
 			pd.schedule_destroy(*game);
+		}
 	}
 
 	// This shouldn't be necessary, but let's check just in case
-	if (!pd.fleet_)
+	if (!pd.fleet_) {
 		pd.init_fleet(egbase());
+	}
 }
 
 MapObject::Loader* PortDock::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr) {

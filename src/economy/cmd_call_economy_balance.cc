@@ -46,8 +46,9 @@ CmdCallEconomyBalance::CmdCallEconomyBalance(uint32_t const starttime,
  * Call economy functions to balance supply and request.
  */
 void CmdCallEconomyBalance::execute(Game& game) {
-	if (Flag* const flag = flag_.get(game))
+	if (Flag* const flag = flag_.get(game)) {
 		flag->get_economy(type_)->balance(timerid_);
+	}
 }
 
 constexpr uint16_t kCurrentPacketVersion = 4;
@@ -79,10 +80,11 @@ void CmdCallEconomyBalance::write(FileWrite& fw, EditorGameBase& egbase, MapObje
 
 	// Write Base Commands
 	GameLogicCommand::write(fw, egbase, mos);
-	if (Flag* const flag = flag_.get(egbase))
+	if (Flag* const flag = flag_.get(egbase)) {
 		fw.unsigned_32(mos.get_object_file_index(*flag));
-	else
+	} else {
 		fw.unsigned_32(0);
+	}
 	fw.unsigned_32(timerid_);
 	fw.unsigned_8(type_);
 }
