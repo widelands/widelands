@@ -729,9 +729,11 @@ void WorkerProgram::parse_createbob(Worker::Action* act, const std::vector<std::
 
 	act->function = &Worker::run_createbob;
 	act->sparamv = std::move(cmd);
-	// We only support creating critters, and they are eatable.
-	// NOCOM create a list instead for accuracy?
-	created_attribs_.insert(std::make_pair("bob", "eatable"));
+
+	// Register created bobs
+	for (const std::string& bobname : act->sparamv) {
+		created_bobs_.insert(bobname);
+	}
 }
 
 /* RST

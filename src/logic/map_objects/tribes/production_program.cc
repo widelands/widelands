@@ -671,6 +671,9 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 	for (const std::string& resourceinfo : worker_program->created_resources()) {
 		descr->add_created_resource(resourceinfo);
 	}
+	for (const std::string& bobname : worker_program->created_bobs()) {
+		descr->add_created_bob(bobname);
+	}
 }
 
 void ProductionProgram::ActCallWorker::execute(Game& game, ProductionSite& ps) const {

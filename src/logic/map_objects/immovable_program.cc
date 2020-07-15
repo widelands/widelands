@@ -134,7 +134,11 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 			throw GameDataError("illegal transformation to the same type");
 		}
 		// Register target at ImmovableDescr
-		descr.becomes_.insert(type_name);
+		if (bob) {
+			descr.becomes_.insert(std::make_pair("bob", type_name));
+		} else {
+			descr.becomes_.insert(std::make_pair("immovable", type_name));
+		}
 	} catch (const WException& e) {
 		throw GameDataError("transform: %s", e.what());
 	}
@@ -175,7 +179,7 @@ ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments,
 	// order. Maybe in postload() one day.
 	type_name = arguments.front();
 	// Register target at ImmovableDescr
-	descr.becomes_.insert(type_name);
+	descr.becomes_.insert(std::make_pair("immovable", type_name));
 }
 
 void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const {

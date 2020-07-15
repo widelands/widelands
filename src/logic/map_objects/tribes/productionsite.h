@@ -115,6 +115,9 @@ public:
 	const std::set<std::string>& created_resources() const {
 		return created_resources_;
 	}
+	const std::set<std::string>& created_bobs() const {
+		return created_bobs_;
+	}
 
 	const ProductionProgram* get_program(const std::string&) const;
 	using Programs = std::map<std::string, std::unique_ptr<ProductionProgram>>;
@@ -169,6 +172,9 @@ protected:
 	void add_created_resource(const std::string& resource) {
 		created_resources_.insert(resource);
 	}
+	void add_created_bob(const std::string& bobname) {
+		created_bobs_.insert(bobname);
+	}
 
 private:
 	std::unique_ptr<std::set<DescriptionIndex>> ware_demand_checks_;
@@ -184,6 +190,7 @@ private:
 	// e.g. "fish"
 	std::set<std::string> collected_resources_;
 	std::set<std::string> created_resources_;
+	std::set<std::string> created_bobs_;
 	Programs programs_;
 	std::string out_of_resource_title_;
 	std::string out_of_resource_heading_;

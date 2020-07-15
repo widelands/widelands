@@ -197,10 +197,6 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 	}
 
 	make_sure_default_program_is_there();
-
-	for (const std::string& test : becomes()) {
-		log("NOCOM %s -> %s\n", name().c_str(), test.c_str());
-	}
 }
 
 /**

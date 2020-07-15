@@ -85,11 +85,15 @@ void walk_world_immovables(const DescriptionIndex& index, const World& world, st
 	}
 
 	// Check immovables that this immovable can turn into
-	for (const std::string& imm_becomes : immovable_descr->becomes()) {
-		// NOCOM log("      ---> %s\n", imm_becomes.c_str());
-		const DescriptionIndex becomes_index = world.get_immovable_index(imm_becomes);
-		assert(becomes_index != Widelands::INVALID_INDEX);
-		walk_world_immovables(becomes_index, world, walked_immovables, deduced_immovable_attribs);
+	for (const auto& imm_becomes : immovable_descr->becomes()) {
+		if (imm_becomes.first == "bob") {
+			log("NOCOM ---> bob %s\n", imm_becomes.second.c_str());
+		} else {
+			// NOCOM log("      ---> %s\n", imm_becomes.c_str());
+			const DescriptionIndex becomes_index = world.get_immovable_index(imm_becomes.second);
+			assert(becomes_index != Widelands::INVALID_INDEX);
+			walk_world_immovables(becomes_index, world, walked_immovables, deduced_immovable_attribs);
+		}
 	}
 }
 
@@ -317,6 +321,20 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 	}
 	for (const std::string& resourceinfo : created_resources()) {
 		log("NOCOM %s creates resource - %s\n", name().c_str(), resourceinfo.c_str());
+	}
+	for (const std::string& bobname : created_bobs()) {
+		log("NOCOM %s creates bob - %s\n", name().c_str(), bobname.c_str());
+		const CritterDescr* critter = world.get_critter_descr(bobname);
+		if (critter != nullptr) {
+			for (const std::string& critter_attribute : critter->attribute_names()) {
+				add_created_attrib("bob", critter_attribute);
+				log("  --> %s - %s\n", "bob", critter_attribute.c_str());
+			}
+		} else {
+			throw GameDataError("Productionsite '%s' has unknown critter '%s' in production or worker program",
+								name().c_str(), bobname.c_str());
+		}
+		// NOCOM See if we need elseif for ships.
 	}
 }
 

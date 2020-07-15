@@ -67,6 +67,9 @@ struct WorkerProgram : public MapObjectProgram {
 	const std::set<std::string>& created_resources() const {
 		return created_resources_;
 	}
+	const std::set<std::string>& created_bobs() const {
+		return created_bobs_;
+	}
 
 private:
 	WorkareaInfo workarea_info_;
@@ -76,6 +79,7 @@ private:
 	// e.g. "fish"
 	std::set<std::string> collected_resources_;
 	std::set<std::string> created_resources_;
+	std::set<std::string> created_bobs_;
 
 	struct ParseMap {
 		const char* name;
