@@ -136,13 +136,12 @@ struct MapObjectDescr {
 	const std::string& icon_filename() const;
 
 	bool has_attribute(uint32_t) const;
+	bool has_attribute(const std::string& attribute_name) const;
 	static uint32_t get_attribute_id(const std::string& name, bool add_if_not_exists = false);
 
 protected:
-	// Add all the special attributes to the attribute list. Only the 'allowed_special'
-	// attributes are allowed to appear - i.e. resi are fine for immovables.
-	void add_attributes(const std::vector<std::string>& attributes,
-	                    const std::set<uint32_t>& allowed_special);
+	// Add attributes to the attribute list
+	void add_attributes(const std::vector<std::string>& attributes);
 	void add_attribute(uint32_t attr);
 
 	/// Sets the directional animations in 'anims' with the animations
@@ -221,18 +220,6 @@ class MapObject {
 	MO_DESCR(MapObjectDescr)
 
 public:
-	/// Some default, globally valid, attributes.
-	/// Other attributes (such as "harvestable corn") could be
-	/// allocated dynamically (?)
-	enum Attribute {
-		CONSTRUCTIONSITE = 1,  ///< assume BUILDING
-		WORKER,                ///< assume BOB
-		SOLDIER,               ///<  assume WORKER
-		RESI,                  ///<  resource indicator, assume IMMOVABLE
-
-		HIGHEST_FIXED_ATTRIBUTE
-	};
-
 	struct LogSink {
 		virtual void log(const std::string& str) = 0;
 		virtual ~LogSink() {

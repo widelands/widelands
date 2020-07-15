@@ -2635,6 +2635,8 @@ void Worker::start_task_geologist(Game& game,
 }
 
 void Worker::geologist_update(Game& game, State& state) {
+	const uint32_t resource_indicator_attribute = MapObjectDescr::get_attribute_id("resi", false);
+
 	std::string signal = get_signal();
 
 	if (signal == "fail") {
@@ -2656,7 +2658,7 @@ void Worker::geologist_update(Game& game, State& state) {
 		// Check to see if we're on suitable terrain
 		BaseImmovable* const imm = map.get_immovable(get_position());
 
-		if (!imm || (imm->get_size() == BaseImmovable::NONE && !imm->has_attribute(RESI))) {
+		if (!imm || (imm->get_size() == BaseImmovable::NONE && !imm->has_attribute(resource_indicator_attribute))) {
 			--state.ivar1;
 			return start_task_program(game, state.svar1);
 		}
@@ -2667,7 +2669,7 @@ void Worker::geologist_update(Game& game, State& state) {
 		FindNodeAnd ffa;
 
 		ffa.add(FindNodeImmovableSize(FindNodeImmovableSize::sizeNone), false);
-		ffa.add(FindNodeImmovableAttribute(RESI), true);
+		ffa.add(FindNodeImmovableAttribute(resource_indicator_attribute), true);
 
 		if (map.find_reachable_fields(game, owner_area, &list, cstep, ffa)) {
 			FCoords target;

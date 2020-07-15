@@ -121,7 +121,6 @@ ConstructionSiteDescr::ConstructionSiteDescr(const std::string& init_descname,
    : BuildingDescr(init_descname, MapObjectType::CONSTRUCTIONSITE, table, tribes),
      creation_fx_(
         SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")) {
-	add_attribute(MapObject::CONSTRUCTIONSITE);
 }
 
 Building& ConstructionSiteDescr::create_object() const {
