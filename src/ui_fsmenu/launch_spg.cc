@@ -40,8 +40,11 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 
 	ok_.set_enabled(settings_->can_launch());
 
-	subscriber_ =
-	   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings&) { update(); });
+	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& s) {
+		if (s.action == NoteGameSettings::Action::kMap) {
+			update();
+		}
+	});
 }
 
 /**
@@ -103,16 +106,9 @@ void FullscreenMenuLaunchSPG::update() {
 
 	peaceful_.set_state(settings_->is_peaceful_mode());
 
-	if (settings_->settings().scenario) {
-		enforce_player_names_and_tribes(map);
-	}
+	enforce_player_names_and_tribes(map);
 }
 
-/**
- * if map was selected to be loaded as scenario, set all values like
- * player names and player tribes and take care about visibility
- * and usability of all the parts of the UI.
- */
 void FullscreenMenuLaunchSPG::enforce_player_names_and_tribes(Widelands::Map& map) {
 	if (settings_->settings().mapfilename.empty()) {
 		throw wexception("settings()->scenario was set to true, but no map is available");
@@ -130,6 +126,7 @@ void FullscreenMenuLaunchSPG::enforce_player_names_and_tribes(Widelands::Map& ma
 			settings_->set_player_tribe(i, playertribe);
 		}
 	}
+	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer));
 }
 
 /**
