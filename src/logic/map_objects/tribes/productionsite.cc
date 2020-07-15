@@ -38,7 +38,9 @@
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warelist.h"
+#include "logic/map_objects/world/critter.h" // NOCOM
 #include "logic/map_objects/world/world.h"
+#include "logic/map_objects/immovable.h" // NOCOM
 #include "logic/player.h"
 
 namespace Widelands {
@@ -65,6 +67,29 @@ void parse_working_positions(const Tribes& tribes,
 		} catch (const WException& e) {
 			throw wexception("%s=\"%d\": %s", worker_name.c_str(), amount, e.what());
 		}
+	}
+}
+
+// Recursively get attributes for world immovable growth cycle
+void walk_world_immovables(const DescriptionIndex& index, const World& world, std::set<DescriptionIndex>* walked_immovables, std::set<std::string>* deduced_immovable_attribs) {
+	// Protect against endless recursion
+	if (walked_immovables->count(index) == 1) {
+		return;
+	}
+	walked_immovables->insert(index);
+
+	// Insert this immovable's attributes
+	const ImmovableDescr* immovable_descr = world.get_immovable_descr(index);
+	for (const std::string& attribute_name : immovable_descr->attribute_names()) {
+		deduced_immovable_attribs->insert(attribute_name);
+	}
+
+	// Check immovables that this immovable can turn into
+	for (const std::string& imm_becomes : immovable_descr->becomes()) {
+		// NOCOM log("      ---> %s\n", imm_becomes.c_str());
+		const DescriptionIndex becomes_index = world.get_immovable_index(imm_becomes);
+		assert(becomes_index != Widelands::INVALID_INDEX);
+		walk_world_immovables(becomes_index, world, walked_immovables, deduced_immovable_attribs);
 	}
 }
 
@@ -245,15 +270,48 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		}
 	}
 
-	// NOCOM check Frisian fisher - only counts if createware is also called?
 	for (const auto& attribinfo : collected_attribs()) {
 		// NOCOM make the pair the argument?
 		log("NOCOM %s collects %s - %s\n", name().c_str(), attribinfo.first.c_str(), attribinfo.second.c_str());
 	}
+
+	const DescriptionMaintainer<ImmovableDescr>& world_immovables = world.immovables();
+	const DescriptionMaintainer<CritterDescr>& world_critters = world.critters();
+
+	std::set<std::string> deduced_immovable_attribs;
+	std::set<DescriptionIndex> walked_world_immovables;
+
 	for (const auto& attribinfo : created_attribs()) {
 		// NOCOM make the pair the argument?
-		log("NOCOM %s creates %s - %s\n", name().c_str(), attribinfo.first.c_str(), attribinfo.second.c_str());
+		// NOCOM shift attrib parsing to TribeDescr to ensure that everything has been loaded. We also need to know which ship etc.
+		const std::string& mapobjecttype = attribinfo.first;
+		const std::string& attrib_name = attribinfo.second;
+		log("NOCOM %s creates %s - %s\n", name().c_str(), mapobjecttype.c_str(), attrib_name.c_str());
+		if (mapobjecttype == "immovable") {
+			for (DescriptionIndex i = 0; i < world_immovables.size(); ++i) {
+				const ImmovableDescr& immovable_descr = world_immovables.get(i);
+				if (immovable_descr.has_attribute(attrib_name)) {
+					// NOCOM log("  imm -> %s\n", immovable_descr.name().c_str());
+					walk_world_immovables(i, world, &walked_world_immovables, &deduced_immovable_attribs);
+				}
+			}
+			// NOCOM do tribe immovables
+		} else if (mapobjecttype == "bob") {
+			for (DescriptionIndex i = 0; i < world_critters.size(); ++i) {
+				const CritterDescr& critter_descr = world_critters.get(i);
+				if (critter_descr.has_attribute(attrib_name)) {
+					log("  bob -> %s\n", critter_descr.name().c_str());
+				}
+			}
+		}
 	}
+	for (const std::string& attribute_name : deduced_immovable_attribs) {
+		created_attribs_.insert(std::make_pair("immovable", attribute_name));
+	}
+	for (const auto& attribinfo : created_attribs()) {
+		log("  --> %s - %s\n", attribinfo.first.c_str(), attribinfo.second.c_str());
+	}
+
 	for (const std::string& resourceinfo : collected_resources()) {
 		log("NOCOM %s collects resource - %s\n", name().c_str(), resourceinfo.c_str());
 	}

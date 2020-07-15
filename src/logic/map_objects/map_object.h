@@ -137,6 +137,7 @@ struct MapObjectDescr {
 
 	bool has_attribute(uint32_t) const;
 	bool has_attribute(const std::string& attribute_name) const;
+	std::set<std::string> attribute_names() const;
 	static uint32_t get_attribute_id(const std::string& name, bool add_if_not_exists = false);
 
 protected:
