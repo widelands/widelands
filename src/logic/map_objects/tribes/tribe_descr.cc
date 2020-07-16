@@ -62,7 +62,7 @@ void walk_world_immovables(Widelands::DescriptionIndex index, const Widelands::W
 	// Check immovables that this immovable can turn into
 	for (const auto& imm_becomes : immovable_descr->becomes()) {
 		if (imm_becomes.first == "bob") {
-			log("NOCOM ---> bob %s\n", imm_becomes.second.c_str());
+			log("NOCOM walk ---> bob %s\n", imm_becomes.second.c_str());
 		} else {
 			// NOCOM log("      ---> %s\n", imm_becomes.second.c_str());
 			const Widelands::DescriptionIndex becomes_index = world.get_immovable_index(imm_becomes.second);
@@ -624,14 +624,12 @@ void TribeDescr::process_productionsites(const World& world) {
 	for (ProductionSiteDescr* prod : productionsites) {
 		for (const auto& attribinfo : prod->collected_attribs()) {
 			// NOCOM make the pair the argument?
-			log("NOCOM %s collects %s - %s\n", prod->name().c_str(), attribinfo.first.c_str(), attribinfo.second.c_str());
 			needed_attributes.insert(attribinfo.second);
 		}
 	}
 
 	for (ProductionSiteDescr* prod : productionsites) {
 		const DescriptionMaintainer<ImmovableDescr>& world_immovables = world.immovables();
-		const DescriptionMaintainer<CritterDescr>& world_critters = world.critters();
 
 		std::set<std::string> deduced_immovable_attribs;
 		std::set<DescriptionIndex> walked_world_immovables;
@@ -642,7 +640,7 @@ void TribeDescr::process_productionsites(const World& world) {
 			// NOCOM bobs & ships
 			const std::string& mapobjecttype = attribinfo.first;
 			const std::string& attribute_name = attribinfo.second;
-			log("NOCOM %s creates %s - %s\n", prod->name().c_str(), mapobjecttype.c_str(), attribute_name.c_str());
+			// log("NOCOM %s creates %s - %s\n", prod->name().c_str(), mapobjecttype.c_str(), attribute_name.c_str());
 			if (mapobjecttype == "immovable") {
 				for (DescriptionIndex i = 0; i < world_immovables.size(); ++i) {
 					const ImmovableDescr& immovable_descr = world_immovables.get(i);
@@ -657,13 +655,6 @@ void TribeDescr::process_productionsites(const World& world) {
 						walk_tribe_immovables(i, *this, &walked_tribe_immovables, &deduced_immovable_attribs);
 					}
 				}
-			} else if (mapobjecttype == "bob") {
-				for (DescriptionIndex i = 0; i < world_critters.size(); ++i) {
-					const CritterDescr& critter_descr = world_critters.get(i);
-					if (critter_descr.has_attribute(attribute_name)) {
-						log("  bob -> %s\n", critter_descr.name().c_str());
-					}
-				}
 			}
 			if (needed_attributes.count(attribute_name) != 1) {
 				prod->remove_created_attrib(attribinfo);
@@ -674,30 +665,41 @@ void TribeDescr::process_productionsites(const World& world) {
 				prod->add_created_attrib("immovable", attribute_name);
 			}
 		}
-		for (const auto& attribinfo : prod->created_attribs()) {
-			log("  --> %s - %s\n", attribinfo.first.c_str(), attribinfo.second.c_str());
-		}
 
-		for (const std::string& resourceinfo : prod->collected_resources()) {
-			log("NOCOM %s collects resource - %s\n", prod->name().c_str(), resourceinfo.c_str());
-		}
-		for (const std::string& resourceinfo : prod->created_resources()) {
-			log("NOCOM %s creates resource - %s\n",prod-> name().c_str(), resourceinfo.c_str());
-		}
 		for (const std::string& bobname : prod->created_bobs()) {
-			log("NOCOM %s creates bob - %s\n", prod->name().c_str(), bobname.c_str());
 			const CritterDescr* critter = world.get_critter_descr(bobname);
 			if (critter != nullptr) {
 				for (const std::string& critter_attribute : critter->attribute_names()) {
-					prod->add_created_attrib("bob", critter_attribute);
-					log("  --> %s - %s\n", "bob", critter_attribute.c_str());
+					if (needed_attributes.count(critter_attribute) == 1) {
+						prod->add_created_attrib("bob", critter_attribute);
+						//log("NOCOM %s creates bob - %s\n", prod->name().c_str(), critter_attribute.c_str());
+					}
 				}
 			} else {
 				throw GameDataError("Productionsite '%s' has unknown critter '%s' in production or worker program",
 									prod->name().c_str(), bobname.c_str());
 			}
 			// NOCOM See if we need elseif for ships.
+			// log("NOCOM %s creates bob - %s\n", prod->name().c_str(), bobname.c_str());
 		}
+
+
+		if (!prod->created_attribs().empty() || !prod->collected_resources().empty() || !prod->created_resources().empty() || !prod->collected_attribs().empty()) {
+			log("NOCOM %s\n", prod->name().c_str());
+		}
+		for (const auto& attribinfo : prod->created_attribs()) {
+			log("  --> %s - %s\n", attribinfo.first.c_str(), attribinfo.second.c_str());
+		}
+		for (const std::string& resourceinfo : prod->created_resources()) {
+			log("  --> resource - %s\n", resourceinfo.c_str());
+		}
+		for (const auto& attribinfo : prod->collected_attribs()) {
+			log("  <-- %s - %s\n", attribinfo.first.c_str(), attribinfo.second.c_str());
+		}
+		for (const std::string& resourceinfo : prod->collected_resources()) {
+			log("  <-- resource - %s\n", resourceinfo.c_str());
+		}
+
 	}
 }
 }  // namespace Widelands
