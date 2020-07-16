@@ -255,6 +255,18 @@ function building_help_general_string(tribe, building_description)
    return result
 end
 
+-- NOCOM document
+function dependencies_collects(icons, buildingdescr, output)
+   local text = ""
+   local images = img(icons[1])
+   for k,v in ipairs({table.unpack(icons,2)}) do
+      images = images .. img(v)
+   end
+   images = images .. img("images/richtext/arrow-right.png") .. img(buildingdescr.icon_name)
+   images = images .. img("images/richtext/arrow-right.png") .. img(output.icon_name)
+
+   return p(images .. output.descname)
+end
 
 -- RST
 -- .. function:: building_help_dependencies_production(tribe, building_description)
@@ -269,30 +281,6 @@ end
 function building_help_dependencies_production(tribe, building_description)
    local result = ""
    local hasinput = false
-
-   result = result .. h1("testing " .. building_description.name)
-
-   -- NOCOM
-   for i, bob in ipairs(building_description.collected_bobs) do
-      result = result .. p("collects bob: " .. bob.name)
-   end
-   for i, immovable in ipairs(building_description.collected_immovables) do
-      result = result .. p("collects immovable: " .. immovable.name)
-   end
-   for i, resource in ipairs(building_description.collected_resources) do
-      result = result .. p("collects resource: " .. resource.name)
-   end
-   for i, immovable in ipairs(building_description.created_immovables) do
-      result = result .. p("creates immovable: " .. immovable.name)
-   end
-   for i, bob in ipairs(building_description.created_bobs) do
-      result = result .. p("creates bob: " .. bob.name)
-   end
-   for i, resource in ipairs(building_description.created_resources) do
-      result = result .. p("creates resource: " .. resource.name)
-   end
-
-   result = result .. h1("/testing " .. building_description.name)
 
    for i, ware_description in ipairs(building_description.inputs) do
     hasinput = true
@@ -310,35 +298,81 @@ function building_help_dependencies_production(tribe, building_description)
 
    if ((not hasinput) and building_description.output_ware_types[1]) then
       result = result .. h3(_"Collects:")
+      -- NOCOM fix quarry & hunter. Decide how to handle lots of trees etc.
+
+      local collected_icons = {}
+      for i, bob in ipairs(building_description.collected_bobs) do
+         if bob.icon_name ~= nil and bob.icon_name ~= "" then
+            table.insert(collected_icons, bob.icon_name)
+         else
+            print("WARNING: help bob item without icon_name: " .. bob.name)
+            table.insert(collected_icons, bob.representative_image)
+         end
+      end
+      for i, immovable in ipairs(building_description.collected_immovables) do
+         if immovable.icon_name ~= nil and immovable.icon_name ~= "" then
+            table.insert(collected_icons, immovable.icon_name)
+         else
+            print("WARNING: help immovable item without icon_name: " .. immovable.name)
+            table.insert(collected_icons, immovable.representative_image)
+         end
+      end
+      for i, resource in ipairs(building_description.collected_resources) do
+         local resi = nil
+         local am = 0
+         local resource_indicators = tribe.resource_indicators[resource.name]
+         if resource_indicators ~= nil then
+            for amount, name in pairs(tribe.resource_indicators[resource.name]) do
+               if amount > am then
+                  resi = name
+                  am = amount
+               end
+            end
+         end
+         if resi ~= nil then
+            table.insert(collected_icons, wl.Game():get_immovable_description(resi).icon_name)
+         elseif resource.icon_name ~= nil and resource.icon_name ~= "" then
+            table.insert(collected_icons, resource.icon_name)
+         else
+            print("WARNING: help resource item without icon_name: " .. resource.name)
+            table.insert(collected_icons, resource.representative_image)
+         end
+      end
+
       for i, ware_description in ipairs(building_description.output_ware_types) do
-         result = result ..
-            dependencies({building_description, ware_description}, ware_description.descname)
+         if collected_icons[1] ~= nil then
+            result = result ..
+               dependencies_collects(collected_icons, building_description, ware_description)
+         else
+            print("NO collected resource for: " .. building_description.name)
+            result = result ..
+               dependencies({building_description, ware_description}, ware_description.descname)
+         end
       end
       for i, worker_description in ipairs(building_description.output_worker_types) do
-         result = result ..
-            dependencies({building_description, worker_description}, worker_description.descname)
+         if collected_icons[1] ~= nil then
+            result = result ..
+               dependencies_collects(collected_icons, building_description, worker_description)
+         else
+            print("NO collected resource for: " .. building_description.name)
+            result = result ..
+               dependencies({building_description, worker_description}, worker_description.descname)
+         end
       end
 
    elseif (building_description.is_mine) then
       -- TRANSLATORS: This is a verb (The miner mines)
       result = result .. h3(_"Mines:")
       for i, ware_description in ipairs(building_description.output_ware_types) do
-
-         -- Need to hack this, because resource != produced ware.
-         local resi_name = ware_description.name
-         if(resi_name == "iron_ore") then resi_name = "iron"
-         elseif(resi_name == "granite") then resi_name = "stones"
-         elseif(resi_name == "diamond") then resi_name = "stones"
-         elseif(resi_name == "quartz") then resi_name = "stones"
-         elseif(resi_name == "marble") then resi_name = "stones"
-         elseif(resi_name == "gold_ore") then resi_name = "gold" end
-         result = result .. dependencies_resi(tribe.name,
-            resi_name,
-            {building_description, ware_description},
-            ware_description.descname
-         )
+         -- Mines only take 1 resource, so we hard-code to the first one
+         if (building_description.collected_resources[1] ~= nil) then
+            result = result .. dependencies_resi(tribe.name,
+               building_description.collected_resources[1].name,
+               {building_description, ware_description},
+               ware_description.descname
+            )
+         end
       end
-
    else
       if(building_description.output_ware_types[1] or building_description.output_worker_types[1]) then
          result = result .. h3(_"Produces:")
@@ -739,7 +773,32 @@ function building_help(tribe, building_description)
    include(building_description.helptext_script)
 
    if (building_description.type_name == "productionsite") then
-      return building_help_general_string(tribe, building_description) ..
+
+      -- NOCOM
+      local result = h1("testing " .. building_description.name)
+
+      for i, bob in ipairs(building_description.collected_bobs) do
+         result = result .. p("collects bob: " .. bob.name)
+      end
+      for i, immovable in ipairs(building_description.collected_immovables) do
+         result = result .. p("collects immovable: " .. immovable.name)
+      end
+      for i, resource in ipairs(building_description.collected_resources) do
+         result = result .. p("collects resource: " .. resource.name)
+      end
+      for i, immovable in ipairs(building_description.created_immovables) do
+         result = result .. p("creates immovable: " .. immovable.name)
+      end
+      for i, bob in ipairs(building_description.created_bobs) do
+         result = result .. p("creates bob: " .. bob.name)
+      end
+      for i, resource in ipairs(building_description.created_resources) do
+         result = result .. p("creates resource: " .. resource.name)
+      end
+
+      result = result .. h1("/testing " .. building_description.name)
+
+      return building_help_general_string(tribe, building_description) .. result .. -- NOCOM
          building_help_dependencies_production(tribe, building_description) ..
          building_help_crew_string(tribe, building_description) ..
          building_help_building_section(building_description) ..
