@@ -109,6 +109,9 @@ public:
 	const std::set<std::pair<std::string, std::string>>& created_attribs() const {
 		return created_attribs_;
 	}
+	void add_created_attrib(const std::string& object_type, const std::string& resource) {
+		created_attribs_.insert(std::make_pair(object_type, resource));
+	}
 	const std::set<std::string>& collected_resources() const {
 		return collected_resources_;
 	}
@@ -162,9 +165,6 @@ public:
 protected:
 	void add_collected_attrib(const std::string& object_type, const std::string& resource) {
 		collected_attribs_.insert(std::make_pair(object_type, resource));
-	}
-	void add_created_attrib(const std::string& object_type, const std::string& resource) {
-		created_attribs_.insert(std::make_pair(object_type, resource));
 	}
 	void add_collected_resource(const std::string& resource) {
 		collected_resources_.insert(resource);

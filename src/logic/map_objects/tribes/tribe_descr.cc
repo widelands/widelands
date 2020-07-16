@@ -38,9 +38,40 @@
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/map_objects/tribes/worker.h"
+#include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
 #include "scripting/lua_table.h"
+
+namespace {
+
+// Recursively get attributes for world immovable growth cycle
+void walk_world_immovables(Widelands::DescriptionIndex index, const Widelands::World& world, std::set<Widelands::DescriptionIndex>* walked_immovables, std::set<std::string>* deduced_immovable_attribs) {
+	// Protect against endless recursion
+	if (walked_immovables->count(index) == 1) {
+		return;
+	}
+	walked_immovables->insert(index);
+
+	// Insert this immovable's attributes
+	const Widelands::ImmovableDescr* immovable_descr = world.get_immovable_descr(index);
+	for (const std::string& attribute_name : immovable_descr->attribute_names()) {
+		deduced_immovable_attribs->insert(attribute_name);
+	}
+
+	// Check immovables that this immovable can turn into
+	for (const auto& imm_becomes : immovable_descr->becomes()) {
+		if (imm_becomes.first == "bob") {
+			log("NOCOM ---> bob %s\n", imm_becomes.second.c_str());
+		} else {
+			// NOCOM log("      ---> %s\n", imm_becomes.c_str());
+			const Widelands::DescriptionIndex becomes_index = world.get_immovable_index(imm_becomes.second);
+			assert(becomes_index != Widelands::INVALID_INDEX);
+			walk_world_immovables(becomes_index, world, walked_immovables, deduced_immovable_attribs);
+		}
+	}
+}
+} // namespace
 
 namespace Widelands {
 
@@ -50,6 +81,7 @@ namespace Widelands {
  */
 TribeDescr::TribeDescr(const LuaTable& table,
                        const Widelands::TribeBasicInfo& info,
+                       const World& world,
                        const Tribes& init_tribes)
    : name_(table.get_string("name")),
      descname_(info.descname),
@@ -228,6 +260,8 @@ TribeDescr::TribeDescr(const LuaTable& table,
 	} catch (const GameDataError& e) {
 		throw GameDataError("tribe %s: %s", name_.c_str(), e.what());
 	}
+
+	process_productionsites(world);
 }
 
 /**
@@ -544,6 +578,84 @@ DescriptionIndex TribeDescr::add_special_ware(const std::string& warename) {
 		return ware;
 	} catch (const WException& e) {
 		throw GameDataError("Failed adding special ware '%s': %s", warename.c_str(), e.what());
+	}
+}
+
+void TribeDescr::process_productionsites(const World& world) {
+	// Get a list of productionsites - we will need to iterate them more than once
+	std::set<ProductionSiteDescr*> productionsites;
+	for (const DescriptionIndex index : buildings()) {
+		BuildingDescr* building = tribes_.get_mutable_building_descr(index);
+		ProductionSiteDescr* productionsite = dynamic_cast<ProductionSiteDescr*>(building);
+		if (productionsite != nullptr) {
+			productionsites.insert(productionsite);
+		}
+	}
+
+	for (ProductionSiteDescr* prod : productionsites) {
+
+		for (const auto& attribinfo : prod->collected_attribs()) {
+			// NOCOM make the pair the argument?
+			log("NOCOM %s collects %s - %s\n", prod->name().c_str(), attribinfo.first.c_str(), attribinfo.second.c_str());
+		}
+
+		const DescriptionMaintainer<ImmovableDescr>& world_immovables = world.immovables();
+		const DescriptionMaintainer<CritterDescr>& world_critters = world.critters();
+
+		std::set<std::string> deduced_immovable_attribs;
+		std::set<DescriptionIndex> walked_world_immovables;
+
+		for (const auto& attribinfo : prod->created_attribs()) {
+			// NOCOM make the pair the argument?
+			// NOCOM shift attrib parsing to TribeDescr to ensure that everything has been loaded. We also need to know which ship etc.
+			const std::string& mapobjecttype = attribinfo.first;
+			const std::string& attrib_name = attribinfo.second;
+			log("NOCOM %s creates %s - %s\n", prod->name().c_str(), mapobjecttype.c_str(), attrib_name.c_str());
+			if (mapobjecttype == "immovable") {
+				for (DescriptionIndex i = 0; i < world_immovables.size(); ++i) {
+					const ImmovableDescr& immovable_descr = world_immovables.get(i);
+					if (immovable_descr.has_attribute(attrib_name)) {
+						// NOCOM log("  imm -> %s\n", immovable_descr.name().c_str());
+						walk_world_immovables(i, world, &walked_world_immovables, &deduced_immovable_attribs);
+					}
+				}
+				// NOCOM do tribe immovables
+			} else if (mapobjecttype == "bob") {
+				for (DescriptionIndex i = 0; i < world_critters.size(); ++i) {
+					const CritterDescr& critter_descr = world_critters.get(i);
+					if (critter_descr.has_attribute(attrib_name)) {
+						log("  bob -> %s\n", critter_descr.name().c_str());
+					}
+				}
+			}
+		}
+		for (const std::string& attribute_name : deduced_immovable_attribs) {
+			prod->add_created_attrib("immovable", attribute_name);
+		}
+		for (const auto& attribinfo : prod->created_attribs()) {
+			log("  --> %s - %s\n", attribinfo.first.c_str(), attribinfo.second.c_str());
+		}
+
+		for (const std::string& resourceinfo : prod->collected_resources()) {
+			log("NOCOM %s collects resource - %s\n", prod->name().c_str(), resourceinfo.c_str());
+		}
+		for (const std::string& resourceinfo : prod->created_resources()) {
+			log("NOCOM %s creates resource - %s\n",prod-> name().c_str(), resourceinfo.c_str());
+		}
+		for (const std::string& bobname : prod->created_bobs()) {
+			log("NOCOM %s creates bob - %s\n", prod->name().c_str(), bobname.c_str());
+			const CritterDescr* critter = world.get_critter_descr(bobname);
+			if (critter != nullptr) {
+				for (const std::string& critter_attribute : critter->attribute_names()) {
+					prod->add_created_attrib("bob", critter_attribute);
+					log("  --> %s - %s\n", "bob", critter_attribute.c_str());
+				}
+			} else {
+				throw GameDataError("Productionsite '%s' has unknown critter '%s' in production or worker program",
+									prod->name().c_str(), bobname.c_str());
+			}
+			// NOCOM See if we need elseif for ships.
+		}
 	}
 }
 }  // namespace Widelands
