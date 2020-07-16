@@ -29,9 +29,9 @@
 #include "map_io/map_loader.h"
 
 #define AI_NAME_PREFIX "ai" AI_NAME_SEPARATOR
-#define HUMAN_PLAYER "human_player"
 #define RANDOM "random"
-#define CLOSED "closed"
+constexpr const char* const kClosed = "closed";
+constexpr const char* const kHuman_player = "human_player";
 
 SinglePlayerTribeDropdown::SinglePlayerTribeDropdown(UI::Panel* parent,
                                                      const std::string& name,
@@ -177,12 +177,12 @@ void SinglePlayerPlayerTypeDropdown::fill() {
 	              g_gr->images().get("images/ai/ai_random.png"), false, _("Random AI"));
 	dropdown_.add(
 	   /** TRANSLATORS: This is the "name" of the single player */
-	   _("You"), HUMAN_PLAYER, g_gr->images().get("images/wui/stats/genstats_nrworkers.png"));
+	   _("You"), kHuman_player, g_gr->images().get("images/wui/stats/genstats_nrworkers.png"));
 
 	// Do not close a player in savegames or scenarios
 	if (!settings.uncloseable(id_)) {
 		dropdown_.add(
-		   _("Closed"), CLOSED, g_gr->images().get("images/ui_basic/stop.png"), false, _("Closed"));
+		   _("Closed"), kClosed, g_gr->images().get("images/ui_basic/stop.png"), false, _("Closed"));
 	}
 }
 
@@ -194,7 +194,7 @@ void SinglePlayerPlayerTypeDropdown::select_entry() {
 		dropdown_.set_tooltip((boost::format(_("%1%: %2%")) % _("Type") % _("Human")).str());
 		dropdown_.set_enabled(false);
 	} else if (player_setting.state == PlayerSettings::State::kClosed) {
-		dropdown_.select(CLOSED);
+		dropdown_.select(kClosed);
 	} else {
 		if (player_setting.state == PlayerSettings::State::kComputer) {
 			if (player_setting.random_ai) {
@@ -217,9 +217,9 @@ void SinglePlayerPlayerTypeDropdown::selection_action() {
 	if (dropdown_.has_selection()) {
 		const std::string& selected = dropdown_.get_selected();
 		PlayerSettings::State state = PlayerSettings::State::kComputer;
-		if (selected == CLOSED) {
+		if (selected == kClosed) {
 			state = PlayerSettings::State::kClosed;
-		} else if (selected == HUMAN_PLAYER) {
+		} else if (selected == kHuman_player) {
 			settings_->set_player_number(id_);
 			state = PlayerSettings::State::kHuman;
 			dropdown_.set_enabled(false);
