@@ -658,12 +658,12 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 		}
 	}
 
-	for (const auto& attribinfo : worker_program->collected_attribs()) {
+	for (const auto& attribinfo : worker_program->collected_attributes()) {
 		// NOCOM make the pair the argument?
-		descr->add_collected_attrib(attribinfo.first, attribinfo.second);
+		descr->add_collected_attribute(attribinfo.first, attribinfo.second);
 	}
-	for (const auto& attribinfo : worker_program->created_attribs()) {
-		descr->add_created_attrib(attribinfo.first, attribinfo.second);
+	for (const auto& attribinfo : worker_program->created_attributes()) {
+		descr->add_created_attribute(attribinfo.first, attribinfo.second);
 	}
 	for (const std::string& resourceinfo : worker_program->collected_resources()) {
 		descr->add_collected_resource(resourceinfo);
@@ -970,6 +970,8 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 	const std::string description = descr->name() + " " + production_program_name + " mine " +
 	                                world.get_resource(resource_)->name();
 	descr->workarea_info_[distance_].insert(description);
+
+	descr->add_collected_resource(arguments.front());
 }
 
 void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
@@ -1245,8 +1247,8 @@ ProductionProgram::ActConstruct::ActConstruct(const std::vector<std::string>& ar
 	// Register created immovable with productionsite
 	const WorkerDescr& main_worker_descr =
 	   *tribes.get_worker_descr(descr->working_positions().front().first);
-	for (const auto& attribinfo : main_worker_descr.get_program(workerprogram)->created_attribs()) {
-		descr->add_created_attrib(attribinfo.first, attribinfo.second);
+	for (const auto& attribinfo : main_worker_descr.get_program(workerprogram)->created_attributes()) {
+		descr->add_created_attribute(attribinfo.first, attribinfo.second);
 	}
 }
 

@@ -254,11 +254,11 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
         init_descname, msgctxt, MapObjectType::PRODUCTIONSITE, table, tribes, world) {
 }
 
-void ProductionSiteDescr::remove_created_attrib(const std::pair<std::string, std::string> attribute_info) {
+void ProductionSiteDescr::remove_created_attribute(const std::pair<std::string, std::string> attribute_info) {
 	auto it =
-	   std::find(created_attribs_.begin(), created_attribs_.end(), attribute_info);
-	if (it != created_attribs_.end()) {
-		created_attribs_.erase(it);
+	   std::find(created_attributes_.begin(), created_attributes_.end(), attribute_info);
+	if (it != created_attributes_.end()) {
+		created_attributes_.erase(it);
 	}
 }
 

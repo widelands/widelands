@@ -180,6 +180,10 @@ size_t Tribes::nrbuildings() const {
 	return buildings_->size();
 }
 
+size_t Tribes::nrimmovables() const {
+	return immovables_->size();
+}
+
 size_t Tribes::nrtribes() const {
 	return tribes_->size();
 }

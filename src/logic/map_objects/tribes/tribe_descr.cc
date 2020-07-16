@@ -626,7 +626,7 @@ void TribeDescr::process_productionsites(const World& world) {
 	// Find all attributes that we need to collect from map
 	std::set<std::string> needed_attributes;
 	for (ProductionSiteDescr* prod : productionsites) {
-		for (const auto& attribinfo : prod->collected_attribs()) {
+		for (const auto& attribinfo : prod->collected_attributes()) {
 			// NOCOM make the pair the argument?
 			needed_attributes.insert(attribinfo.second);
 		}
@@ -640,7 +640,7 @@ void TribeDescr::process_productionsites(const World& world) {
 			if (critter != nullptr) {
 				for (const std::string& critter_attribute : critter->attribute_names()) {
 					if (needed_attributes.count(critter_attribute) == 1) {
-						prod->add_created_attrib("bob", critter_attribute);
+						prod->add_created_attribute("bob", critter_attribute);
 						//log("NOCOM %s creates bob - %s\n", prod->name().c_str(), critter_attribute.c_str());
 					}
 				}
@@ -659,7 +659,7 @@ void TribeDescr::process_productionsites(const World& world) {
 		std::set<DescriptionIndex> walked_world_immovables;
 		std::set<DescriptionIndex> walked_tribe_immovables;
 
-		for (const auto& attribinfo : prod->created_attribs()) {
+		for (const auto& attribinfo : prod->created_attributes()) {
 			// NOCOM make the pair the argument?
 			// NOCOM ferries
 			const std::string& mapobjecttype = attribinfo.first;
@@ -681,14 +681,14 @@ void TribeDescr::process_productionsites(const World& world) {
 				}
 			}
 			if (needed_attributes.count(attribute_name) != 1) {
-				prod->remove_created_attrib(attribinfo);
+				prod->remove_created_attribute(attribinfo);
 			}
 		}
 
 		// Add deduced entities
 		for (const std::string& attribute_name : deduced_immovable_attribs) {
 			if (needed_attributes.count(attribute_name) == 1) {
-				prod->add_created_attrib("immovable", attribute_name);
+				prod->add_created_attribute("immovable", attribute_name);
 			}
 		}
 		for (const std::string& bob_name : deduced_bobs) {
@@ -696,24 +696,25 @@ void TribeDescr::process_productionsites(const World& world) {
 		}
 
 		// Debug log
-		if (!prod->created_attribs().empty() || !prod->collected_resources().empty() || !prod->created_resources().empty() || !prod->collected_attribs().empty() || !prod->created_bobs().empty()) {
+		if (!prod->created_attributes().empty() || !prod->collected_resources().empty() || !prod->created_resources().empty() || !prod->collected_attributes().empty() || !prod->created_bobs().empty()) {
 			log("NOCOM %s\n", prod->name().c_str());
 		}
-		for (const auto& attribinfo : prod->created_attribs()) {
+		for (const auto& attribinfo : prod->created_attributes()) {
 			log("  --> attr:%s - %s\n", attribinfo.first.c_str(), attribinfo.second.c_str());
 		}
+		/*
 		for (const std::string& resourceinfo : prod->created_resources()) {
 			log("  --> resource - %s\n", resourceinfo.c_str());
 		}
 		for (const std::string& bobname : prod->created_bobs()) {
 			log("  --> bob - %s\n", bobname.c_str());
 		}
-		for (const auto& attribinfo : prod->collected_attribs()) {
+		for (const auto& attribinfo : prod->collected_attributes()) {
 			log("  <-- attr:%s - %s\n", attribinfo.first.c_str(), attribinfo.second.c_str());
 		}
 		for (const std::string& resourceinfo : prod->collected_resources()) {
 			log("  <-- resource - %s\n", resourceinfo.c_str());
-		}
+		} */
 	}
 }
 }  // namespace Widelands

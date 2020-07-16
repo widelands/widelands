@@ -34,6 +34,7 @@
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/warelist.h"
+#include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/editor_category.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/terrain_description.h"
@@ -138,6 +139,35 @@ int food_list_to_lua(lua_State* L, const std::vector<std::vector<std::string>>& 
 			lua_settable(L, -3);
 		}
 		lua_settable(L, -3);
+	}
+	return 1;
+}
+
+// NOCOM document
+int immovables_from_attributes_to_lua(lua_State* L, const std::set<std::pair<std::string, std::string>>& attributes) {
+	lua_newtable(L);
+	int index = 1;
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	// NOCOM Frisians farm, reed farm list too many
+	for (const auto& attribute_info : attributes) {
+		if (attribute_info.first == "immovable") {
+			for (DescriptionIndex i = 0; i < egbase.world().get_nr_immovables(); ++i) {
+				const ImmovableDescr* immovable = egbase.world().get_immovable_descr(i);
+				if (immovable->attribute_names().count(attribute_info.second) == 1) {
+					lua_pushint32(L, index++);
+					to_lua<LuaImmovableDescription>(L, new LuaImmovableDescription(immovable));
+					lua_rawset(L, -3);
+				}
+			}
+			for (DescriptionIndex i = 0; i < egbase.tribes().nrimmovables(); ++i) {
+				const ImmovableDescr* immovable = egbase.tribes().get_immovable_descr(i);
+				if (immovable->attribute_names().count(attribute_info.second) == 1) {
+					lua_pushint32(L, index++);
+					to_lua<LuaImmovableDescription>(L, new LuaImmovableDescription(immovable));
+					lua_rawset(L, -3);
+				}
+			}
+		}
 	}
 	return 1;
 }
@@ -2571,6 +2601,12 @@ const MethodType<LuaProductionSiteDescription> LuaProductionSiteDescription::Met
 };
 const PropertyType<LuaProductionSiteDescription> LuaProductionSiteDescription::Properties[] = {
    PROP_RO(LuaProductionSiteDescription, inputs),
+   PROP_RO(LuaProductionSiteDescription, collected_bobs),
+   PROP_RO(LuaProductionSiteDescription, collected_immovables),
+   PROP_RO(LuaProductionSiteDescription, collected_resources),
+   PROP_RO(LuaProductionSiteDescription, created_bobs),
+   PROP_RO(LuaProductionSiteDescription, created_immovables),
+   PROP_RO(LuaProductionSiteDescription, created_resources),
    PROP_RO(LuaProductionSiteDescription, output_ware_types),
    PROP_RO(LuaProductionSiteDescription, output_worker_types),
    PROP_RO(LuaProductionSiteDescription, production_programs),
@@ -2598,6 +2634,84 @@ int LuaProductionSiteDescription::get_inputs(lua_State* L) {
 		const WareDescr* descr = get_egbase(L).tribes().get_ware_descr(input_ware.first);
 		to_lua<LuaWareDescription>(L, new LuaWareDescription(descr));
 		lua_settable(L, -3);
+	}
+	return 1;
+}
+
+// NOCOM document that we only support critters here for efficiency reasons
+int LuaProductionSiteDescription::get_collected_bobs(lua_State* L) {
+	lua_newtable(L);
+	int index = 1;
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	for (const auto& attribute_info : get()->collected_attributes()) {
+		if (attribute_info.first == "bob") {
+			for (DescriptionIndex i = 0; i < egbase.world().get_nr_critters(); ++i) {
+				const CritterDescr* critter = egbase.world().get_critter_descr(i);
+				if (critter->attribute_names().count(attribute_info.second) == 1) {
+					lua_pushint32(L, index++);
+					to_lua<LuaMapObjectDescription>(L, new LuaMapObjectDescription(critter));
+					lua_rawset(L, -3);
+				}
+			}
+		}
+	}
+	return 1;
+}
+int LuaProductionSiteDescription::get_collected_immovables(lua_State* L) {
+	return immovables_from_attributes_to_lua(L, get()->collected_attributes());
+}
+int LuaProductionSiteDescription::get_collected_resources(lua_State* L) {
+	lua_newtable(L);
+	int index = 1;
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	for (const std::string& resource_name : get()->collected_resources()) {
+		lua_pushint32(L, index++);
+		const ResourceDescription* resource = egbase.world().get_resource(egbase.world().resource_index(resource_name.c_str()));
+		assert(resource != nullptr);
+		to_lua<LuaResourceDescription>(L, new LuaResourceDescription(resource));
+		lua_rawset(L, -3);
+	}
+	return 1;
+}
+int LuaProductionSiteDescription::get_created_immovables(lua_State* L) {
+	return immovables_from_attributes_to_lua(L, get()->created_attributes());
+}
+int LuaProductionSiteDescription::get_created_bobs(lua_State* L) {
+	lua_newtable(L);
+	int index = 1;
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	for (const std::string& bobname : get()->created_bobs()) {
+		lua_pushint32(L, index++);
+		const CritterDescr* critter = egbase.world().get_critter_descr(bobname);
+		if (critter != nullptr) {
+			to_lua<LuaMapObjectDescription>(L, new LuaMapObjectDescription(dynamic_cast<const MapObjectDescr*>(critter)));
+		} else {
+			const ShipDescr* ship = egbase.tribes().get_ship_descr(egbase.tribes().ship_index(bobname));
+			if (ship != nullptr) {
+				to_lua<LuaMapObjectDescription>(L, new LuaMapObjectDescription(dynamic_cast<const MapObjectDescr*>(ship)));
+			} else {
+				const WorkerDescr* worker = egbase.tribes().get_worker_descr(egbase.tribes().worker_index(bobname));
+				if (worker != nullptr) {
+					to_lua<LuaWorkerDescription>(L, new LuaWorkerDescription(worker));
+				} else {
+					report_error(L, "Unknown bob type %s", bobname.c_str());
+				}
+			}
+		}
+		lua_rawset(L, -3);
+	}
+	return 1;
+}
+int LuaProductionSiteDescription::get_created_resources(lua_State* L) {
+	lua_newtable(L);
+	int index = 1;
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	for (const std::string& resource_name : get()->created_resources()) {
+		lua_pushint32(L, index++);
+		const ResourceDescription* resource = egbase.world().get_resource(egbase.world().resource_index(resource_name.c_str()));
+		assert(resource != nullptr);
+		to_lua<LuaResourceDescription>(L, new LuaResourceDescription(resource));
+		lua_rawset(L, -3);
 	}
 	return 1;
 }

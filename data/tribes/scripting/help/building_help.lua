@@ -270,6 +270,28 @@ function building_help_dependencies_production(tribe, building_description)
    local result = ""
    local hasinput = false
 
+   result = result .. h1("testing " .. building_description.name)
+
+   -- NOCOM
+   for i, bob in ipairs(building_description.collected_bobs) do
+      result = result .. p("collects bob: " .. bob.name)
+   end
+   for i, immovable in ipairs(building_description.collected_immovables) do
+      result = result .. p("collects immovable: " .. immovable.name)
+   end
+   for i, resource in ipairs(building_description.collected_resources) do
+      result = result .. p("collects resource: " .. resource.name)
+   end
+   for i, immovable in ipairs(building_description.created_immovables) do
+      result = result .. p("creates immovable: " .. immovable.name)
+   end
+   for i, bob in ipairs(building_description.created_bobs) do
+      result = result .. p("creates bob: " .. bob.name)
+   end
+   for i, resource in ipairs(building_description.created_resources) do
+      result = result .. p("creates resource: " .. resource.name)
+   end
+
    for i, ware_description in ipairs(building_description.inputs) do
     hasinput = true
       for j, producer in ipairs(ware_description:producers(tribe.name)) do
