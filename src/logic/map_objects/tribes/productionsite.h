@@ -109,9 +109,11 @@ public:
 	const std::set<std::pair<std::string, std::string>>& created_attribs() const {
 		return created_attribs_;
 	}
-	void add_created_attrib(const std::string& object_type, const std::string& resource) {
-		created_attribs_.insert(std::make_pair(object_type, resource));
+	void add_created_attrib(const std::string& object_type, const std::string& attribute) {
+		created_attribs_.insert(std::make_pair(object_type, attribute));
 	}
+	/// Remove created attribute that we're not interested in
+	void remove_created_attrib(const std::pair<std::string, std::string> attribute_info);
 	const std::set<std::string>& collected_resources() const {
 		return collected_resources_;
 	}

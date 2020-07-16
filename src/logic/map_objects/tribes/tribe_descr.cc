@@ -592,13 +592,17 @@ void TribeDescr::process_productionsites(const World& world) {
 		}
 	}
 
+	// Find all attributes that we need to collect from map
+	std::set<std::string> needed_attributes;
 	for (ProductionSiteDescr* prod : productionsites) {
-
 		for (const auto& attribinfo : prod->collected_attribs()) {
 			// NOCOM make the pair the argument?
 			log("NOCOM %s collects %s - %s\n", prod->name().c_str(), attribinfo.first.c_str(), attribinfo.second.c_str());
+			needed_attributes.insert(attribinfo.second);
 		}
+	}
 
+	for (ProductionSiteDescr* prod : productionsites) {
 		const DescriptionMaintainer<ImmovableDescr>& world_immovables = world.immovables();
 		const DescriptionMaintainer<CritterDescr>& world_critters = world.critters();
 
@@ -609,12 +613,12 @@ void TribeDescr::process_productionsites(const World& world) {
 			// NOCOM make the pair the argument?
 			// NOCOM shift attrib parsing to TribeDescr to ensure that everything has been loaded. We also need to know which ship etc.
 			const std::string& mapobjecttype = attribinfo.first;
-			const std::string& attrib_name = attribinfo.second;
-			log("NOCOM %s creates %s - %s\n", prod->name().c_str(), mapobjecttype.c_str(), attrib_name.c_str());
+			const std::string& attribute_name = attribinfo.second;
+			log("NOCOM %s creates %s - %s\n", prod->name().c_str(), mapobjecttype.c_str(), attribute_name.c_str());
 			if (mapobjecttype == "immovable") {
 				for (DescriptionIndex i = 0; i < world_immovables.size(); ++i) {
 					const ImmovableDescr& immovable_descr = world_immovables.get(i);
-					if (immovable_descr.has_attribute(attrib_name)) {
+					if (immovable_descr.has_attribute(attribute_name)) {
 						// NOCOM log("  imm -> %s\n", immovable_descr.name().c_str());
 						walk_world_immovables(i, world, &walked_world_immovables, &deduced_immovable_attribs);
 					}
@@ -623,14 +627,19 @@ void TribeDescr::process_productionsites(const World& world) {
 			} else if (mapobjecttype == "bob") {
 				for (DescriptionIndex i = 0; i < world_critters.size(); ++i) {
 					const CritterDescr& critter_descr = world_critters.get(i);
-					if (critter_descr.has_attribute(attrib_name)) {
+					if (critter_descr.has_attribute(attribute_name)) {
 						log("  bob -> %s\n", critter_descr.name().c_str());
 					}
 				}
 			}
+			if (needed_attributes.count(attribute_name) != 1) {
+				prod->remove_created_attrib(attribinfo);
+			}
 		}
 		for (const std::string& attribute_name : deduced_immovable_attribs) {
-			prod->add_created_attrib("immovable", attribute_name);
+			if (needed_attributes.count(attribute_name) == 1) {
+				prod->add_created_attrib("immovable", attribute_name);
+			}
 		}
 		for (const auto& attribinfo : prod->created_attribs()) {
 			log("  --> %s - %s\n", attribinfo.first.c_str(), attribinfo.second.c_str());
