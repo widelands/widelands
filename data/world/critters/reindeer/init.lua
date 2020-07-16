@@ -6,6 +6,12 @@ animations = {
       hotspot = { 23, 21 },
       fps = 20,
    },
+   eating = {
+      directory = dirname,
+      basename = "idle", -- TODO(Nordfriese): Make animation
+      hotspot = { 23, 21 },
+      fps = 20,
+   }
 }
 
 add_directional_animation(animations, "walk", dirname, "walk", {25, 30}, 20)
@@ -20,4 +26,8 @@ world:new_critter_type{
       remove = { "remove" },
    },
    animations = animations,
+   size = 4,
+   reproduction_rate = 60,
+   appetite = 60,
+   herbivore = {"field"},
 }

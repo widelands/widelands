@@ -3,15 +3,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# GunChleoc, 2019
+# GunChleoc, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"POT-Creation-Date: 2020-07-09 08:33+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: GunChleoc, 2019\n"
+"Last-Translator: GunChleoc, 2020\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -102,12 +102,12 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:58
 msgid "Decide whether you want to cooperate with the Empire"
-msgstr "Cuir romhad an obraich thu còmhla ris an Impireachd gus nach obraich"
+msgstr "Cuir romhad an obraich thu còmhla ris an Ìmpireachd gus nach obraich"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:60
 msgid "Gather Wares as a Gift or Destroy the Empire’s Warehouse"
 msgstr ""
-"Cruinnich batharan ’nan tìodhlac no mill taigh-stòrais na h-Impireachd"
+"Cruinnich batharan ’nan tìodhlac no mill taigh-stòrais na h-Ìmpireachd"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:61
 msgid ""
@@ -183,14 +183,14 @@ msgstr "Dèan brathadh air Murilius"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:82
 msgid "Send a Scout to Spy on the Empire"
-msgstr "Cuir rabhadair a-null a nì brathadh air an Impireachd"
+msgstr "Cuir rabhadair a-null a nì brathadh air an Ìmpireachd"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:83
 msgid ""
 "Build a scout’s house near the border to discover the Empire’s secrets."
 msgstr ""
 "Tog taigh-rabhadair faisg air a’ chrìoch ach an lorg thu rùintean-dìomhair "
-"na h-Impireachd."
+"na h-Ìmpireachd."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:88
 msgid "Decipher the poem"
@@ -198,7 +198,7 @@ msgstr "Dì-chòdaich an dàn"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:90
 msgid "Understand the Poem the Scout has Found in the Empire"
-msgstr "Tuig an dàn a lorg an rabhadair san Impireachd"
+msgstr "Tuig an dàn a lorg an rabhadair san Ìmpireachd"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:91
@@ -236,7 +236,7 @@ msgstr "Cuir ruaig air na Tùsanaich"
 msgid "Defeat the hostile tribe living northwest of the Empire’s outpost!"
 msgstr ""
 "Cuir ruaig air an treubh nàimhdeil a tha a’ còmhnaidh gu iar-thuath air "
-"gearastan na h-Impireachd!"
+"gearastan na h-Ìmpireachd!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:107
 msgid "Defeat Murilius!"
@@ -244,7 +244,7 @@ msgstr "Cuir ruaig air Murilius!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:109
 msgid "Defeat the Arrogant Outpost of the Empire"
-msgstr "Cuir ruaig air gearastan àrdanach na h-Impireachd"
+msgstr "Cuir ruaig air gearastan àrdanach na h-Ìmpireachd"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:110
 msgid ""
@@ -252,7 +252,7 @@ msgid ""
 " destroy this outpost once and for all. Conquer its entire land."
 msgstr ""
 "A chùm ar saorsa a ghlèidheadh, chan eil dol às ann ach gearastan na "
-"h-Impireachd a mhilleadh gu bràth tuilleadh. Ceannsaich an dùthaich gu lèir "
+"h-Ìmpireachd a mhilleadh gu bràth tuilleadh. Ceannsaich an dùthaich gu lèir "
 "a th’ aige."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:111
@@ -265,14 +265,14 @@ msgstr "Cuir ruaig air Murilius ’s air na Tùsanaich!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:118
 msgid "Defeat the Barbarians and the Empire Colony"
-msgstr "Cuir ruaig air na Tùsanaich ’s air tuineachadh na h-Impireachd"
+msgstr "Cuir ruaig air na Tùsanaich ’s air tuineachadh na h-Ìmpireachd"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:119
 msgid ""
 "The Barbarians and the Empire are too dangerous to allow them to live near "
 "us. We must defeat them both."
 msgstr ""
-"Tha na Tùsanaich ’s an Impireachd ro chunnartach ach am faod sinn am fulang "
+"Tha na Tùsanaich ’s an Ìmpireachd ro chunnartach ach am faod sinn am fulang "
 "faisg oirnn. Feumaidh sinn ruaig a chur air an dà chuid dhiubh."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:128
@@ -682,7 +682,7 @@ msgstr "…a bheil duine a’ tuigsinn na cainnt aigesan?"
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:267
 msgid "Do they not even speak the noble language of the Empire?"
 msgstr ""
-"Nach eil iad fiù comasach air cànan uasal na h-Impireachd a bhruidhinn?"
+"Nach eil iad fiù comasach air cànan uasal na h-Ìmpireachd a bhruidhinn?"
 
 #. TRANSLATORS: Murilius – Supply Murilius 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:270
@@ -692,7 +692,7 @@ msgid ""
 "lands!"
 msgstr ""
 "A choigrich! Tha mise, Murilius, Proconsul nan Tìrean Tuathach, mòr-roinn na"
-" h-Impireachd, ag iarraidh oirbh gun innis sibh dhomh cò sibhse is dè tha "
+" h-Ìmpireachd, ag iarraidh oirbh gun innis sibh dhomh cò sibhse is dè tha "
 "sibh ris san dùthaich seo!"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 4. "Peace" is the traditional
@@ -703,7 +703,7 @@ msgid ""
 "tribe. All we want is to settle down here, build our home and live our lives"
 " in peace. We do not seek trouble, but we aren’t afraid to fight, either."
 msgstr ""
-"Sìth leibh, a riochdaire na h-Impireachd! Is mise Reebaud, ceannard an "
+"Sìth leibh, a riochdaire na h-Ìmpireachd! Is mise Reebaud, ceannard an "
 "treubha seo. Chan eil fainear dhuinn ach tuineachadh an-seo, ar dachaigh a "
 "thogail agus beatha sìtheil a leantainn. Chan eil sinn ag iarraidh trioblaid"
 " ach cha chuir sabaid an t-eagal oirnn nas motha."
@@ -718,7 +718,7 @@ msgid ""
 msgstr ""
 "Mas e sin mar a tha cùisean leibh, a Reebauid, feumaidh mi innse dhut gu "
 "bheil treubh mosach nàimhdeil de Thùsanaich a’ fuireach faisg air iomall na "
-"h-Impireachd seo."
+"h-Ìmpireachd seo."
 
 #. TRANSLATORS: Murilius – Supply Murilius 5
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:285
@@ -729,7 +729,7 @@ msgid ""
 msgstr ""
 "Ma tha thu a’ guidhe gu bheil sibh a’ sireadh beatha sìtheil, chan eil "
 "roghainn eile agaibh ach am fuadach-san – tha sibh fo dhleastanas taic a "
-"chur ris an Impireachd ach am faigheamaid cuidhteas dhiubh."
+"chur ris an Ìmpireachd ach am faigheamaid cuidhteas dhiubh."
 
 #. TRANSLATORS: Murilius – Supply Murilius 6
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:291
@@ -740,7 +740,7 @@ msgid ""
 "to give us these wares:"
 msgstr ""
 "Cuideachd, mar fhianais air ur deagh-rùn, tha sinn ag iarraidh tìodhlac "
-"càirdeis don Impireachd uaibh. Mar a mhothaich thu gun teagamh, thug mi "
+"càirdeis don Ìmpireachd uaibh. Mar a mhothaich thu gun teagamh, thug mi "
 "taigh-stòrais ùr dhuibh. Lìonaibh dhomh e leis na dh’iarras mi oirbh. "
 "Leigidh mi leibh na batharan seo a thoirt dhuinn:"
 
@@ -763,7 +763,7 @@ msgid ""
 "afford to spare that many wares to aid him. I propose that we destroy that "
 "ugly warehouse and let him fight his own battles."
 msgstr ""
-"A cheannaird Reebauid – tha iarrtasan Proconsul àrdanach na h-Impireachd "
+"A cheannaird Reebauid – tha iarrtasan Proconsul àrdanach na h-Ìmpireachd "
 "tàmailteach. Tha e a’ dèanamh rinn mar shearbhantan. Agus chan eil an uiread"
 " a bhathair againn a tha e ag iarraidh uainn mar cuideachadh. Mholainn gum "
 "mill sinn an taigh-stòrais grànnda ud is gun dèanadh esan an t-sabaid aige "
@@ -777,11 +777,11 @@ msgid ""
 "expand your territory from this moment on until you have given us your gift."
 " Fail to obey, and the Empire shall treat you like enemies."
 msgstr ""
-"Mura doir sibh na batharan seo dhuinn, làimhsichidh an Impireachd sibh mar "
+"Mura doir sibh na batharan seo dhuinn, làimhsichidh an Ìmpireachd sibh mar "
 "nàimhdean. Agus a chùm nach dèan sibh caitheamh air a’ mheatailt phrìseil "
 "agaibh, tha mi a’ toirmeasg gun leudaicheadh sibh ur ranntair o seo a-mach "
 "gus am bi sinn air tìodhlac fhaighinn uaibh. Mura doir sibh ùmhlachd dhuinn,"
-" làimhsichidh an Impireachd sibh mar nàimhdean."
+" làimhsichidh an Ìmpireachd sibh mar nàimhdean."
 
 #. TRANSLATORS: Murilius – Supply Murilius 8
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:309
@@ -794,8 +794,8 @@ msgid ""
 msgstr ""
 "Feumaidh sibh sabaid an aghaidh an t-sluaigh bhuirb ud co-dhiù ma tha sibh "
 "airson fuireach san sgìre; bu chòir thu tuigsinn gum biodh e na b’ fhasa "
-"sabaid ’nan aghaidh còmhla ris an Impireachd na ’nur n-aonar. Agus chan eil "
-"thu ag iarraidh an Impireachd ’na nàmhaid dhuibh. Ged nach e ach daoine "
+"sabaid ’nan aghaidh còmhla ris an Ìmpireachd na ’nur n-aonar. Agus chan eil "
+"thu ag iarraidh an Ìmpireachd ’na nàmhaid dhuibh. Ged nach e ach daoine "
 "borba a th’ annaibh, cha chreid mi nach tuig sibh gu bheil an fhìrinn agam "
 "ma nì sibh cnuasadh air."
 
@@ -867,7 +867,7 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:350
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:360
 msgid "The Empire is Angry"
-msgstr "Tha an Impireachd feargach"
+msgstr "Tha an Ìmpireachd feargach"
 
 #. TRANSLATORS: "You are enemies of the Empire!". DO NOT TRANSLATE. Reebaud
 #. doesn’t understand Latin. You can transliterate into non-Latin scripts
@@ -891,7 +891,7 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:366
 msgid "You are enemies of the Empire, and I shall treat you as such!"
 msgstr ""
-"’S e nàimhdean na h-Impireachd a th’ annaibh is làimhsichidh sinn dha rèir "
+"’S e nàimhdean na h-Ìmpireachd a th’ annaibh is làimhsichidh sinn dha rèir "
 "sibh!"
 
 #. TRANSLATORS: Murilius – enemy of the Empire: player built forbidden
@@ -936,7 +936,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:379
 msgid "The Empire is Grateful"
-msgstr "Tha an Impireachd taingeil"
+msgstr "Tha an Ìmpireachd taingeil"
 
 #. TRANSLATORS: "Greetings, friends of the Empire!". DO NOT TRANSLATE. Reebaud
 #. doesn’t understand Latin. You can transliterate into non-Latin scripts
@@ -951,8 +951,8 @@ msgid ""
 "Strangers! I see you have kept your word. The Empire rewards its friends, "
 "therefore I shall reward you with the friendship of the Empire!"
 msgstr ""
-"A choigrichibh! Mhothaich mi gum b’ fhiach ur facal. Bheir an Impireachd "
-"duais do a caraidean agus le sin bheir mi càirdeas na h-Impireachd mar "
+"A choigrichibh! Mhothaich mi gum b’ fhiach ur facal. Bheir an Ìmpireachd "
+"duais do a caraidean agus le sin bheir mi càirdeas na h-Ìmpireachd mar "
 "dhuais dhuibh!"
 
 #. TRANSLATORS: Murilius – Supplied Murilius. Murilius’s plan is to use the
@@ -988,7 +988,7 @@ msgid ""
 "rewarded with the friendship of the Empire!"
 msgstr ""
 "’S ann math a rinn sibh, a choigrichibh! Mar a gheall mi dhuibh cheana, "
-"gheibh sibh càirdeas na h-Impireachd mar dhuais!"
+"gheibh sibh càirdeas na h-Ìmpireachd mar dhuais!"
 
 #. TRANSLATORS: Murilius – defeat Murilius 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:397
@@ -1011,7 +1011,7 @@ msgstr "Nàmhaid eile"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:401
 msgid "Defeat the Empire!"
-msgstr "Cuir ruaig air an Impireachd!"
+msgstr "Cuir ruaig air an Ìmpireachd!"
 
 #. TRANSLATORS: Reebaud – defeat Murilius 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:403
@@ -1023,7 +1023,7 @@ msgid ""
 msgstr ""
 "B’ àill leibh? Às dèidh a h-uile càil a rinn sinn às a leth agus tuilleadh "
 "’s a chòrr de na saighdearan agam ’nan sìneadh air a’ bhlàr dhasan, ’s ann "
-"gu bheil e ag iarraidh gun rachadh sinn ’nar searbhantan dhan Impireachd a "
+"gu bheil e ag iarraidh gun rachadh sinn ’nar searbhantan dhan Ìmpireachd a "
 "tha seo ’s esan airson mo rìoghachd a thoirt uam? Agus ghabh an cealgair air"
 " gur e duais a bhiodh ann!"
 
@@ -1064,4 +1064,4 @@ msgstr "Meal do naidheachd"
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"

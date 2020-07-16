@@ -73,7 +73,7 @@ constexpr int16_t kNearbyDockMaxDistanceFactor = 8 * 1800;
 
 #define sslog(...)                                                                                 \
 	if (g_verbose)                                                                                  \
-		log(__VA_ARGS__);
+	log(__VA_ARGS__)
 
 ShippingSchedule::ShippingSchedule(ShipFleet& f) : fleet_(f), last_updated_(0), loader_(nullptr) {
 	assert(!fleet_.active());
@@ -381,10 +381,11 @@ struct ScoredShip {
 
 	static inline uint64_t calc_score(uint64_t capacity, uint64_t eta, uint64_t detour) {
 		// This needs to use uint64_t because the intermediate results will overflow uint32_t
-		return eta > kHorriblyLongDuration ? 0 : capacity * kMinScoreForImmediateAcceptFactor *
-		                                            kHorriblyLongDuration * kHorriblyLongDuration /
-		                                            (std::max(eta, kWonderfullyShortDuration) *
-		                                             std::max(detour, kWonderfullyShortDuration));
+		return eta > kHorriblyLongDuration ? 0 :
+		                                     capacity * kMinScoreForImmediateAcceptFactor *
+		                                        kHorriblyLongDuration * kHorriblyLongDuration /
+		                                        (std::max(eta, kWonderfullyShortDuration) *
+		                                         std::max(detour, kWonderfullyShortDuration));
 	}
 
 	ScoredShip(Ship* s, uint32_t c, Duration e, Duration d)
@@ -955,6 +956,13 @@ Duration ShippingSchedule::update(Game& game) {
 				previt = it;
 				++it;
 			}
+		}
+		if (plans_[ship].empty()) {
+			sslog("No orders left, setting to idle\n");
+			ship->set_destination(game, nullptr);
+		} else if (plans_[ship].front().dock != ship->get_destination()) {
+			ship->set_destination(game, plans_[ship].front().dock.get(game));
+			sslog("Rerouted to %u\n", ship->get_destination()->serial());
 		}
 	}
 
@@ -1726,4 +1734,4 @@ void ShippingSchedule::load_finish(EditorGameBase& egbase) {
 		}
 	}
 }
-}
+}  // namespace Widelands

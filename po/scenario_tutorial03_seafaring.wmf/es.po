@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-06-10 18:21+0000\n"
+"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"PO-Revision-Date: 2020-06-11 15:49+0000\n"
 "Last-Translator: Walter Benkel <tromaster@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,7 @@ msgstr "Navegación"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:14
 msgid "Seafaring Tutorial"
-msgstr "Tutorial marítimo"
+msgstr "Tutorial Marítimo"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:15
 msgid ""
@@ -43,7 +43,7 @@ msgstr "Pero deja que primero te haga un resumen de tu territorio: aquí en el s
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:24
 msgid "The Northern Part"
-msgstr "La parte Norte"
+msgstr "La Parte Norte"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:26
 msgid ""
@@ -650,7 +650,7 @@ msgid ""
 "not to claim regions you can reach neither by road nor by ship. Never cut "
 "all your roads between two places connected by waterways unless you are "
 "certain no worker will ever have to walk there."
-msgstr ""
+msgstr "Nunca olvides que estos botes de remos son demasiado pequeños para transportar trabajadores. Puedes usarlos como atajos para transportar mercancías en partes de tu territorio, pero no para reclamar regiones que no puedes alcanzar con caminos o barcos. Nunca interrumpas todos tus caminos entre dos lugares conectados por vías acuáticas, a menos que estés seguro que nunca tendrá que caminar un trabajador por ahí."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:311
 msgid ""
@@ -662,22 +662,22 @@ msgid ""
 "of waterways becoming severe bottlenecks in your economy. Try to build "
 "several of them in parallel to distribute the strain. If this is not "
 "possible, it is in some cases even more efficient not to use waterways."
-msgstr ""
+msgstr "Y si tus vías acuáticas representan un atajo significativo respecto a tu red de caminos, tu economía tenderá a enviar muchas mercancías por ellas. Como una vía acuática sólo puede tener un transbordador – a diferencia de los caminos, que reciben un segundo transportista cuando están muy ocupados –, y como suelen ser más largas que los dos o tres campos recomendados para los caminos, siempre existe el riesgo de que se conviertan en atochamientos para tu economía. Intenta construir varias en paralelo para distribuir la carga. Si esto no es posible, es incluso a veces más eficiente no usarlas."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:318
 msgid "Ferry yard production"
-msgstr ""
+msgstr "Producción del astillero de transbordadores"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:320
 msgid "More ferries needed?"
-msgstr ""
+msgstr "¿Se necesitan más transbordadores?"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:321
 msgid ""
 "Do remember to stop your ferry yard when you don’t need any new ferries to "
 "be produced. As long as a ferry services a waterway, its lifetime is "
 "unlimited, but unemployed ferries will rot away and eventually sink."
-msgstr ""
+msgstr "Recuerda detener la producción de transbordadores en tu astillero cuando no necesites más. Mientras un transbordador esté trabajando en una vía acuática su vida útil es ilimitada, pero si está desocupado se pudrirá y eventualmente se hundirá."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:329
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:331
@@ -686,20 +686,20 @@ msgstr "Felicidades"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:332
 msgid "You have learnt all there is to learn about ships and ferries!"
-msgstr ""
+msgstr "¡Haz aprendido todo lo que hay que saber acerca de barcos y transbordadores!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:333
 msgid ""
 "There is also another island where you can build a port if you wish to try "
 "launching another expedition."
-msgstr ""
+msgstr "También hay otra isla donde puedes construir un puerto si es que quieres emprender otra expedición."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:334
 msgid ""
 "As always, you can continue playing and practice a bit more on this map if "
 "you like, or get your captain’s license ready and try out your new skills in"
 " a real game…"
-msgstr ""
+msgstr "Como siempre, si quieres puedes seguir jugando y practicar un poco en este mapa, o tomar tu licencia de capitán y aplicar tus nuevas habilidades en una partida real..."
 
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format

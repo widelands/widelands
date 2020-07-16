@@ -88,7 +88,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 			   case NoteGameSettings::Action::kPlayer:
 				   break;
 			   }
-			});
+		   });
 	}
 
 	void force_new_dimensions(float, uint32_t standard_element_height) {
@@ -276,7 +276,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					   update();
 				   }
 			   }
-			});
+		   });
 
 		// Init dropdowns
 		update();

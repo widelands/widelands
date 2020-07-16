@@ -3,15 +3,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# GunChleoc, 2019
+# GunChleoc, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-22 17:14+0000\n"
+"POT-Creation-Date: 2020-07-09 08:33+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: GunChleoc, 2019\n"
+"Last-Translator: GunChleoc, 2020\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -162,8 +162,9 @@ msgid ""
 "Decide: Either collect 35 sheaves of wheat and 15 amphoras of wine for the "
 "goddess in your headquarters or conquer the monastery."
 msgstr ""
-"Dèan co-dhùnadh: cruinnich 35 sguab arbhair agus 15 amforaichean de dh’fhìon"
-" sa phrìomh-àras agad airson na ban-dia air neo ceannsaich a’ mhanachainn."
+"Dèan co-dhùnadh: cruinnich 35 raoid cruithneachd agus 15 amforaichean de "
+"dh’fhìon sa phrìomh-àras agad airson na ban-dia air neo ceannsaich a’ "
+"mhanachainn."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:125
 msgid "Train at least 3 heroes"
@@ -554,6 +555,13 @@ msgid ""
 "of the lumberjacks’ houses and the wells seem also to be inefficient or worn"
 " out."
 msgstr ""
+"Nise, feumaidh sinn stuthan-togail an toiseach feuch an càirich sinn na "
+"mearachdan a rinn an rùnaire droch-chliùiteach. Saoilidh mi gum bu chòir "
+"dhuinn na togalaichean beaga gun saothrachadh a thoirt às an cèile ach am "
+"faigh sinn cuid a stuthan-togail uapa ’s gun cruinnich sinn sa phrìomh-àras "
+"iad. Mhothaich mi gu ruige seo nach eil stòras sam bith faisg air na "
+"taighean-iasgair no cuaraidhean. Tha coltas cuideachd gu bheil na taighean "
+"coillteir is tobraichean uile neo-èifeachdach no ro shean."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:312
@@ -562,6 +570,10 @@ msgid ""
 "need to closely monitor them when we are able to supply them. Until then we "
 "shouldn't do anything with them."
 msgstr ""
+"Chan eil fhios againn fhathast a bheil na togalaichean eile ag obair mar bu "
+"chòir gus nach eil. Feumaidh sinn sùil gheur a chumail orra nuair a bhios "
+"stòras againn dhaibh. Cha gu chòir dhuinn dad a dhèanamh leotha san eadar-"
+"àm."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:315
@@ -571,6 +583,10 @@ msgid ""
 "production in all bigger buildings and get the workers some rest until we "
 "have produced some of their input wares."
 msgstr ""
+"Gidheadh, bu chòir dhuinn tomhas ion-chuir nan taighean a ghabhas ri "
+"stuthan-togail a chur gu neoni. Air neo gun cuireamaid an saothrachadh ’na "
+"stad aig gach togalach nas motha ach am faigh an luchd-obrach beagan fois "
+"gus an saothraich sinn cuid a bhatharan ion-chuir dhaibh."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:322
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:582
@@ -648,6 +664,9 @@ msgid ""
 "least three lumberjacks’ houses and two quarries. Be sure to have "
 "dismanteled all of the unproductive buildings though."
 msgstr ""
+"Feumaidh sinn barrachd stuthan-togail an toiseach. Mar sin, bu chòir dhuinn "
+"co-dhiù trì taighean coillteir is dà chuaraidh a thogail. Dèan cinnteach gun"
+" doir thu gach togalach nach eil tarbhach às a chèile."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:350
@@ -955,7 +974,7 @@ msgid ""
 "an Empire goddess on our souls."
 msgstr ""
 "A bharrachd air sin, ’s ann air ar n-anman-ne a tha an cionta a-nis gun do "
-"mhill sinn teampall ban-dia na h-Impireachd."
+"mhill sinn teampall ban-dia na h-Ìmpireachd."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:475
 msgid "Amalea is Very Content"
@@ -1227,7 +1246,7 @@ msgid ""
 msgstr ""
 "Ochan ò, a Lutius, chan eil fios agam mar a thachair ’s gun do chreach na "
 "Tùsanaich am prìomh-àras againn. Leis a sin, chaill sinn am blàr ’s ar "
-"n-Impireachd!"
+"n-Ìmpireachd!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:583
 msgid "Amalea reports our headquarters lost…"
@@ -1262,7 +1281,7 @@ msgid ""
 msgstr ""
 "Ochan ò, a Lutius, chan eil fios agam mar a thachair ’s gun do mhill na "
 "Tùsanaich an taigh-stòrais mu dheireadh againn. Leis a sin, chaill sinn am "
-"blàr ’s ar n-Impireachd!"
+"blàr ’s ar n-Ìmpireachd!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:604
 msgid "Saledus looks very relaxed…"
@@ -1432,7 +1451,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:677
 msgid "Praise The Army of The Empire"
-msgstr "Gum molamaid feachd na h-Impireachd"
+msgstr "Gum molamaid feachd na h-Ìmpireachd"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:678
 msgid "Saledus is happy…"
@@ -1591,9 +1610,9 @@ msgid ""
 " to prepare a worthy sacrifice for her."
 msgstr ""
 "Ave, a Lutius! Ma tha sibh a’ sireadh taic uainne, feumaidh sibh ùrnaigh a "
-"dhèanamh dha ’r ban-dia Vesta. Mar sin, gun cuireadh sibh 35 sguab arbhair "
-"agus 15 amforaichean de dh’fhìon thugainn ach an ullaicheamaid ìobairt "
-"luachmhor."
+"dhèanamh dha ’r ban-dia Vesta. Mar sin, gun cuireadh sibh 35 raoid "
+"cruithneachd agus 15 amforaichean de dh’fhìon thugainn ach an ullaicheamaid "
+"ìobairt luachmhor."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:749
 msgid "May The Gods Bless You"
@@ -1639,4 +1658,4 @@ msgstr ""
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"

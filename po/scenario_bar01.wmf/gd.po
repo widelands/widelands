@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-04-23 19:21+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"PO-Revision-Date: 2020-06-27 10:29+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -77,7 +77,7 @@ msgstr "Gus seo a dhèanamh, tog bratach air sliabh na beinne gu ear (air cruth-
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
 msgid "some coal"
-msgstr ""
+msgstr "beagan guail"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "a lot of coal"
@@ -85,7 +85,7 @@ msgstr "mòran guail"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:46
 msgid "some iron"
-msgstr ""
+msgstr "beagan iarainn"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:47
 msgid "a lot of iron"
@@ -93,7 +93,7 @@ msgstr "mòran iarainn"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:48
 msgid "some gold"
-msgstr ""
+msgstr "beagan òir"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:49
 msgid "a lot of gold"
@@ -101,7 +101,7 @@ msgstr "mòran òir"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:50
 msgid "some granite"
-msgstr ""
+msgstr "beagan gaireil"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:51
 msgid "a lot of granite"
@@ -161,7 +161,7 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well. For the "
 "best productivity, build it on a spot where your geologists have found a "
 "water source."
-msgstr ""
+msgstr "’S e na h-iasgairean agus na tuathanasan a th’ anns na dòighean eile gus biadh a dhèanamh – seòrsaichean bìdh eadar-dhealaichte. Feumaidh tu a’ chruithneachd aig na tuathanasan a ghiullachd le uisge ann an taigh-fuine mus gabh i ithe. Gheibh thu uisge o thobar. Airson cinneasachadh as fheàrr, tog e air àite far an do lorg clach-eòlaiche uisge."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Refine your mined resources"
@@ -1034,4 +1034,4 @@ msgstr "Ach tha eagal orra gun cuir an cogadh mu Al’tùnran crìoch air an dò
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"

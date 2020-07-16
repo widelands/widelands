@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-05-22 17:14+0000\n"
-"PO-Revision-Date: 2020-06-01 04:41+0000\n"
+"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"PO-Revision-Date: 2020-06-26 12:11+0000\n"
 "Last-Translator: Niektóry <niektory@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -55,7 +55,7 @@ msgstr "Przeciwnik pokonał żołnierzy przy twoim zamku."
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:96
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:44
 msgid "Your soldiers defeated the enemy at the castle."
-msgstr "Twoi żołnierze odparli atak na twój zamek."
+msgstr "Twoi żołnierze zdobyli zamek wroga."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:7
@@ -81,7 +81,7 @@ msgstr "Przeciwnik pokonał żołnierzy przy twojej warowni."
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:45
 msgid "Your soldiers defeated the enemy at the guardhall."
-msgstr "Twoi żołnierze odparli atak na twoją warownię."
+msgstr "Twoi żołnierze zdobyli warownię wroga."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:7
@@ -107,7 +107,7 @@ msgstr "Przeciwnik pokonał żołnierzy przy twojej wartowni."
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:43
 msgid "Your soldiers defeated the enemy at the guardhouse."
-msgstr "Twoi żołnierze odparli atak na twoją wartownię."
+msgstr "Twoi żołnierze zdobyli wartownię wroga."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:7
@@ -148,7 +148,7 @@ msgstr "Przeciwnik pokonał żołnierzy przy twojej wieży."
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:51
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:62
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr "Twoi żołnierze odparli atak na twoją wieżę."
+msgstr "Twoi żołnierze zdobyli wieżę wroga."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:7
@@ -174,7 +174,7 @@ msgstr "Przeciwnik pokonał żołnierzy przy twojej wysokiej wieży."
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:41
 msgid "Your soldiers defeated the enemy at the high tower."
-msgstr "Twoi żołnierze odparli atak na twoją wysoką wieżę."
+msgstr "Twoi żołnierze zdobyli wysoką wieżę wroga."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:7
@@ -200,7 +200,7 @@ msgstr "Przeciwnik pokonał żołnierzy przy twojej małej wieży."
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:44
 msgid "Your soldiers defeated the enemy at the small tower."
-msgstr "Twoi żołnierze odparli atak na twoją małą wieżę."
+msgstr "Twoi żołnierze zdobyli małą wieżę wroga."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:7
@@ -231,7 +231,7 @@ msgstr "Przeciwnik pokonał żołnierzy przy twojej barierze."
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:49
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:55
 msgid "Your soldiers defeated the enemy at the barrier."
-msgstr "Twoi żołnierze odparli atak na twoją barierę."
+msgstr "Twoi żołnierze zdobyli barierę wroga."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:7
@@ -257,7 +257,7 @@ msgstr "Przeciwnik pokonał żołnierzy przy twojej cytadeli."
 
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:53
 msgid "Your soldiers defeated the enemy at the citadel."
-msgstr "Twoi żołnierze odparli atak na twoją cytadelę."
+msgstr "Twoi żołnierze zdobyli cytadelę wroga."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:7
@@ -293,7 +293,7 @@ msgstr "Przeciwnik pokonał żołnierzy przy twojej fortecy."
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:56
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:61
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr "Twoi żołnierze odparli atak na twoją fortecę."
+msgstr "Twoi żołnierze zdobyli fortecę wroga."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:7
@@ -324,7 +324,7 @@ msgstr "Przeciwnik pokonał żołnierzy przy twojej strażnicy."
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:51
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:52
 msgid "Your soldiers defeated the enemy at the sentry."
-msgstr "Twoi żołnierze odparli atak na twoją strażnicę."
+msgstr "Twoi żołnierze zdobyli strażnicę wroga."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:7
@@ -362,7 +362,7 @@ msgstr "Przeciwnik pokonał żołnierzy przy twoim ostrogu."
 
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:40
 msgid "Your soldiers defeated the enemy at the blockhouse."
-msgstr "Twoi żołnierze odparli atak na twój ostróg."
+msgstr "Twoi żołnierze zdobyli ostróg wroga."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:7
@@ -405,7 +405,7 @@ msgstr "Przeciwnik pokonał żołnierzy przy twojej placówce."
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:46
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:59
 msgid "Your soldiers defeated the enemy at the outpost."
-msgstr "Twoi żołnierze odparli atak na twoją placówkę."
+msgstr "Twoi żołnierze zdobyli placówkę wroga."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:7
@@ -542,7 +542,6 @@ msgstr "Pracownia płatnerza"
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:58
 #: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:52
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:56
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:68
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:83
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:56
@@ -560,7 +559,6 @@ msgstr "Pracownia płatnerza"
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:68
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:58
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:77
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:53
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:50
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:56
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:71
@@ -592,7 +590,6 @@ msgstr "Pracownia płatnerza"
 #: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:73
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:71
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:60
 #: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:87
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:69
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:74
@@ -1097,28 +1094,28 @@ msgid "Quarry"
 msgstr "Kamieniołom"
 
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:55
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:62
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:46
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:53
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:60
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:69
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:60
 msgid "quarrying granite"
 msgstr "wycinanie kamienia"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:66
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:73
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:81
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:80
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:55
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:62
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:77
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:69
 msgid "No Rocks"
 msgstr "Brak skał"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:67
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:74
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:82
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:81
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:56
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:63
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:78
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:70
 msgid "Out of Rocks"
 msgstr "Nie ma już skał"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:68
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:57
 msgctxt "atlanteans_building"
 msgid ""
 "The stonecutter working at this quarry can’t find any rocks in his work "
@@ -1836,7 +1833,7 @@ msgctxt "barbarians_building"
 msgid "Quarry"
 msgstr "Kamieniołom"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:75
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:64
 msgctxt "barbarians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
@@ -1852,7 +1849,7 @@ msgstr "Leśniczówka"
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:7
 msgctxt "barbarians_building"
 msgid "Reed Yard"
-msgstr "Paprociarnia"
+msgstr "Plantacja trzciny"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:58
@@ -1871,7 +1868,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The gardener working at this reed yard has no cleared soil to plant his "
 "seeds."
-msgstr "Ogrodnik pracujący w paprociarni nie ma terenu, na którym mógłby sadzić trzcinę."
+msgstr "Ogrodnik pracujący w tej plantacji trzciny nie ma terenu, na którym mógłby sadzić trzcinę."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:7
@@ -2255,11 +2252,11 @@ msgid "Quarry"
 msgstr "Kamieniołom"
 
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying marble because ...
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:70
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:68
 msgid "quarrying marble"
 msgstr "wycinanie marmuru"
 
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:83
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:79
 msgctxt "empire_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
@@ -2855,7 +2852,7 @@ msgctxt "frisians_building"
 msgid "Quarry"
 msgstr "Kamieniołom"
 
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:82
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:71
 msgctxt "frisians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
