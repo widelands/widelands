@@ -309,8 +309,9 @@ void Road::postsplit(EditorGameBase& egbase, Flag& flag) {
 				if (dynamic_cast<Building const*>(map.get_immovable(w->get_position()))) {
 					Coords pos;
 					map.get_brn(w->get_position(), &pos);
-					if (pos == path.get_start())
+					if (pos == path.get_start()) {
 						idx = 0;
+					}
 				}
 			}
 

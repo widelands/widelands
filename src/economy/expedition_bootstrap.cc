@@ -245,8 +245,9 @@ size_t ExpeditionBootstrap::count_additional_queues() const {
 }
 
 void ExpeditionBootstrap::set_economy(Economy* new_economy, WareWorker type) {
-	if (new_economy == (type == wwWARE ? ware_economy_ : worker_economy_))
+	if (new_economy == (type == wwWARE ? ware_economy_ : worker_economy_)) {
 		return;
+	}
 
 	// Transfer the wares and workers.
 	for (auto& iq : queues_) {

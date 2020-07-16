@@ -399,8 +399,9 @@ bool Flag::is_dead_end() const {
 			Flag& start = road->get_flag(RoadBase::FlagStart);
 			Flag& other = this == &start ? road->get_flag(RoadBase::FlagEnd) : start;
 			if (first_other_flag) {
-				if (&other != first_other_flag)
+				if (&other != first_other_flag) {
 					return false;
+				}
 			} else {
 				first_other_flag = &other;
 			}
@@ -432,8 +433,9 @@ void Flag::wait_for_capacity(Game&, Worker& bob) {
 void Flag::skip_wait_for_capacity(Game&, Worker& w) {
 	CapacityWaitQueue::iterator const it =
 	   std::find(capacity_wait_.begin(), capacity_wait_.end(), &w);
-	if (it != capacity_wait_.end())
+	if (it != capacity_wait_.end()) {
 		capacity_wait_.erase(it);
+	}
 }
 
 void Flag::add_ware(EditorGameBase& egbase, WareInstance& ware) {

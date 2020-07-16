@@ -105,8 +105,9 @@ void ShippingItem::end_shipping(Game& game) {
 		ware->update(game);
 		ware->schedule_act(game, 10);
 	}
-	if (worker)
+	if (worker) {
 		worker->end_shipping(game);
+	}
 }
 
 const PortDock* ShippingItem::get_destination(Game& game) const {
@@ -120,8 +121,9 @@ void ShippingItem::update_destination(Game& game, PortDock& pd) {
 
 	PlayerImmovable* next = nullptr;
 
-	if (ware)
+	if (ware) {
 		next = ware->get_next_move_step(game);
+	}
 	if (worker) {
 		Transfer* transfer = worker->get_transfer();
 		if (transfer) {
