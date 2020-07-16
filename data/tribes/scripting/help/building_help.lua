@@ -292,6 +292,8 @@ function building_help_dependencies_production(tribe, building_description)
       result = result .. p("creates resource: " .. resource.name)
    end
 
+   result = result .. h1("/testing " .. building_description.name)
+
    for i, ware_description in ipairs(building_description.inputs) do
     hasinput = true
       for j, producer in ipairs(ware_description:producers(tribe.name)) do

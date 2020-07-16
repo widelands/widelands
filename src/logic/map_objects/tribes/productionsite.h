@@ -120,11 +120,29 @@ public:
 	const std::set<std::string>& created_resources() const {
 		return created_resources_;
 	}
+	const std::set<std::string>& collected_bobs() const {
+		return collected_bobs_;
+	}
+	void add_collected_bob(const std::string& bobname) {
+		collected_bobs_.insert(bobname);
+	}
 	const std::set<std::string>& created_bobs() const {
 		return created_bobs_;
 	}
 	void add_created_bob(const std::string& bobname) {
 		created_bobs_.insert(bobname);
+	}
+	const std::set<std::string>& collected_immovables() const {
+		return collected_immovables_;
+	}
+	void add_collected_immovable(const std::string& immovablename) {
+		collected_immovables_.insert(immovablename);
+	}
+	const std::set<std::string>& created_immovables() const {
+		return created_immovables_;
+	}
+	void add_created_immovable(const std::string& immovablename) {
+		created_immovables_.insert(immovablename);
 	}
 
 	const ProductionProgram* get_program(const std::string&) const;
@@ -192,7 +210,10 @@ private:
 	// e.g. "fish"
 	std::set<std::string> collected_resources_;
 	std::set<std::string> created_resources_;
+	std::set<std::string> collected_bobs_;
 	std::set<std::string> created_bobs_;
+	std::set<std::string> collected_immovables_;
+	std::set<std::string> created_immovables_;
 	Programs programs_;
 	std::string out_of_resource_title_;
 	std::string out_of_resource_heading_;

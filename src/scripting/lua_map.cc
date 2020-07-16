@@ -143,35 +143,6 @@ int food_list_to_lua(lua_State* L, const std::vector<std::vector<std::string>>& 
 	return 1;
 }
 
-// NOCOM document
-int immovables_from_attributes_to_lua(lua_State* L, const std::set<std::pair<std::string, std::string>>& attributes) {
-	lua_newtable(L);
-	int index = 1;
-	Widelands::EditorGameBase& egbase = get_egbase(L);
-	// NOCOM Frisians farm, reed farm list too many
-	for (const auto& attribute_info : attributes) {
-		if (attribute_info.first == "immovable") {
-			for (DescriptionIndex i = 0; i < egbase.world().get_nr_immovables(); ++i) {
-				const ImmovableDescr* immovable = egbase.world().get_immovable_descr(i);
-				if (immovable->attribute_names().count(attribute_info.second) == 1) {
-					lua_pushint32(L, index++);
-					to_lua<LuaImmovableDescription>(L, new LuaImmovableDescription(immovable));
-					lua_rawset(L, -3);
-				}
-			}
-			for (DescriptionIndex i = 0; i < egbase.tribes().nrimmovables(); ++i) {
-				const ImmovableDescr* immovable = egbase.tribes().get_immovable_descr(i);
-				if (immovable->attribute_names().count(attribute_info.second) == 1) {
-					lua_pushint32(L, index++);
-					to_lua<LuaImmovableDescription>(L, new LuaImmovableDescription(immovable));
-					lua_rawset(L, -3);
-				}
-			}
-		}
-	}
-	return 1;
-}
-
 struct SoldierMapDescr {
 	SoldierMapDescr(uint8_t init_health,
 	                uint8_t init_attack,
@@ -2643,22 +2614,30 @@ int LuaProductionSiteDescription::get_collected_bobs(lua_State* L) {
 	lua_newtable(L);
 	int index = 1;
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	for (const auto& attribute_info : get()->collected_attributes()) {
-		if (attribute_info.first == "bob") {
-			for (DescriptionIndex i = 0; i < egbase.world().get_nr_critters(); ++i) {
-				const CritterDescr* critter = egbase.world().get_critter_descr(i);
-				if (critter->attribute_names().count(attribute_info.second) == 1) {
-					lua_pushint32(L, index++);
-					to_lua<LuaMapObjectDescription>(L, new LuaMapObjectDescription(critter));
-					lua_rawset(L, -3);
-				}
-			}
-		}
+	for (const std::string& critter_name : get()->collected_bobs()) {
+		lua_pushint32(L, index++);
+		const CritterDescr* critter = egbase.world().get_critter_descr(critter_name);
+		assert(critter != nullptr);
+		to_lua<LuaMapObjectDescription>(L, new LuaMapObjectDescription(critter));
+		lua_rawset(L, -3);
 	}
 	return 1;
 }
 int LuaProductionSiteDescription::get_collected_immovables(lua_State* L) {
-	return immovables_from_attributes_to_lua(L, get()->collected_attributes());
+	lua_newtable(L);
+	int index = 1;
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	for (const std::string& immovable_name : get()->collected_immovables()) {
+		lua_pushint32(L, index++);
+		const ImmovableDescr* immovable = egbase.world().get_immovable_descr(egbase.world().get_immovable_index(immovable_name));
+		if (immovable == nullptr) {
+			immovable = egbase.tribes().get_immovable_descr(egbase.tribes().immovable_index(immovable_name));
+		}
+		assert(immovable != nullptr);
+		to_lua<LuaImmovableDescription>(L, new LuaImmovableDescription(immovable));
+		lua_rawset(L, -3);
+	}
+	return 1;
 }
 int LuaProductionSiteDescription::get_collected_resources(lua_State* L) {
 	lua_newtable(L);
@@ -2674,7 +2653,20 @@ int LuaProductionSiteDescription::get_collected_resources(lua_State* L) {
 	return 1;
 }
 int LuaProductionSiteDescription::get_created_immovables(lua_State* L) {
-	return immovables_from_attributes_to_lua(L, get()->created_attributes());
+	lua_newtable(L);
+	int index = 1;
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	for (const std::string& immovable_name : get()->created_immovables()) {
+		lua_pushint32(L, index++);
+		const ImmovableDescr* immovable = egbase.world().get_immovable_descr(egbase.world().get_immovable_index(immovable_name));
+		if (immovable == nullptr) {
+			immovable = egbase.tribes().get_immovable_descr(egbase.tribes().immovable_index(immovable_name));
+		}
+		assert(immovable != nullptr);
+		to_lua<LuaImmovableDescription>(L, new LuaImmovableDescription(immovable));
+		lua_rawset(L, -3);
+	}
+	return 1;
 }
 int LuaProductionSiteDescription::get_created_bobs(lua_State* L) {
 	lua_newtable(L);
