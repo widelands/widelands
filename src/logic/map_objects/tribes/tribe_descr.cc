@@ -64,10 +64,37 @@ void walk_world_immovables(Widelands::DescriptionIndex index, const Widelands::W
 		if (imm_becomes.first == "bob") {
 			log("NOCOM ---> bob %s\n", imm_becomes.second.c_str());
 		} else {
-			// NOCOM log("      ---> %s\n", imm_becomes.c_str());
+			// NOCOM log("      ---> %s\n", imm_becomes.second.c_str());
 			const Widelands::DescriptionIndex becomes_index = world.get_immovable_index(imm_becomes.second);
 			assert(becomes_index != Widelands::INVALID_INDEX);
 			walk_world_immovables(becomes_index, world, walked_immovables, deduced_immovable_attribs);
+		}
+	}
+}
+
+// Recursively get attributes for world immovable growth cycle
+void walk_tribe_immovables(Widelands::DescriptionIndex index, const Widelands::TribeDescr& tribe, std::set<Widelands::DescriptionIndex>* walked_immovables, std::set<std::string>* deduced_immovable_attribs) {
+	// Protect against endless recursion
+	if (walked_immovables->count(index) == 1) {
+		return;
+	}
+	walked_immovables->insert(index);
+
+	// Insert this immovable's attributes
+	const Widelands::ImmovableDescr* immovable_descr = tribe.get_immovable_descr(index);
+	for (const std::string& attribute_name : immovable_descr->attribute_names()) {
+		deduced_immovable_attribs->insert(attribute_name);
+	}
+
+	// Check immovables that this immovable can turn into
+	for (const auto& imm_becomes : immovable_descr->becomes()) {
+		if (imm_becomes.first == "bob") {
+			log("NOCOM ---> bob %s\n", imm_becomes.second.c_str());
+		} else {
+			// NOCOM log("      ---> %s\n", imm_becomes.second.c_str());
+			const Widelands::DescriptionIndex becomes_index = tribe.immovable_index(imm_becomes.second);
+			assert(becomes_index != Widelands::INVALID_INDEX);
+			walk_tribe_immovables(becomes_index, tribe, walked_immovables, deduced_immovable_attribs);
 		}
 	}
 }
@@ -608,10 +635,11 @@ void TribeDescr::process_productionsites(const World& world) {
 
 		std::set<std::string> deduced_immovable_attribs;
 		std::set<DescriptionIndex> walked_world_immovables;
+		std::set<DescriptionIndex> walked_tribe_immovables;
 
 		for (const auto& attribinfo : prod->created_attribs()) {
 			// NOCOM make the pair the argument?
-			// NOCOM shift attrib parsing to TribeDescr to ensure that everything has been loaded. We also need to know which ship etc.
+			// NOCOM bobs & ships
 			const std::string& mapobjecttype = attribinfo.first;
 			const std::string& attribute_name = attribinfo.second;
 			log("NOCOM %s creates %s - %s\n", prod->name().c_str(), mapobjecttype.c_str(), attribute_name.c_str());
@@ -619,11 +647,16 @@ void TribeDescr::process_productionsites(const World& world) {
 				for (DescriptionIndex i = 0; i < world_immovables.size(); ++i) {
 					const ImmovableDescr& immovable_descr = world_immovables.get(i);
 					if (immovable_descr.has_attribute(attribute_name)) {
-						// NOCOM log("  imm -> %s\n", immovable_descr.name().c_str());
 						walk_world_immovables(i, world, &walked_world_immovables, &deduced_immovable_attribs);
 					}
 				}
-				// NOCOM do tribe immovables
+				for (const DescriptionIndex i : immovables()) {
+					const ImmovableDescr& immovable_descr = *get_immovable_descr(i);
+					if (immovable_descr.has_attribute(attribute_name)) {
+						// NOCOM log("  imm -> %s\n", immovable_descr.name().c_str());
+						walk_tribe_immovables(i, *this, &walked_tribe_immovables, &deduced_immovable_attribs);
+					}
+				}
 			} else if (mapobjecttype == "bob") {
 				for (DescriptionIndex i = 0; i < world_critters.size(); ++i) {
 					const CritterDescr& critter_descr = world_critters.get(i);
