@@ -287,13 +287,13 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 				if (!wares.empty()) {
 					UI::Button* dismantlebtn =
 					   new UI::Button(capsbuttons, "dismantle", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-							  g_gr->images().get(pic_dismantle),
-							  std::string(_("Dismantle")) + "<br>" +
-							     g_gr->styles()
-								.ware_info_style(UI::WareInfoStyle::kNormal)
-								.header_font()
-								.as_font_tag(_("Returns:")) +
-							     "<br>" + waremap_to_richtext(owner.tribe(), wares));
+					                  g_gr->images().get(pic_dismantle),
+					                  std::string(_("Dismantle")) + "<br>" +
+					                     g_gr->styles()
+					                        .ware_info_style(UI::WareInfoStyle::kNormal)
+					                        .header_font()
+					                        .as_font_tag(_("Returns:")) +
+					                     "<br>" + waremap_to_richtext(owner.tribe(), wares));
 					dismantlebtn->sigclicked.connect([this]() { act_dismantle(); });
 					capsbuttons->add(dismantlebtn);
 					requires_destruction_separator = true;
