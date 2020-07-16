@@ -1229,7 +1229,8 @@ void ProductionProgram::ActPlaySound::execute(Game& game, ProductionSite& ps) co
 
 ProductionProgram::ActConstruct::ActConstruct(const std::vector<std::string>& arguments,
                                               const std::string& production_program_name,
-                                              ProductionSiteDescr* descr) {
+                                              ProductionSiteDescr* descr,
+                                              const Tribes& tribes) {
 	if (arguments.size() != 3) {
 		throw GameDataError("Usage: construct=<object name> <worker program> <workarea radius>");
 	}
@@ -1240,6 +1241,13 @@ ProductionProgram::ActConstruct::ActConstruct(const std::vector<std::string>& ar
 	const std::string description =
 	   descr->name() + ' ' + production_program_name + " construct " + objectname;
 	descr->workarea_info_[radius].insert(description);
+
+	// Register created immovable with productionsite
+	const WorkerDescr& main_worker_descr =
+	   *tribes.get_worker_descr(descr->working_positions().front().first);
+	for (const auto& attribinfo : main_worker_descr.get_program(workerprogram)->created_attribs()) {
+		descr->add_created_attrib(attribinfo.first, attribinfo.second);
+	}
 }
 
 const ImmovableDescr&
@@ -1436,7 +1444,7 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				   std::unique_ptr<ProductionProgram::Action>(new ActPlaySound(parseinput.arguments)));
 			} else if (parseinput.name == "construct") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActConstruct(parseinput.arguments, name(), building)));
+				   new ActConstruct(parseinput.arguments, name(), building, tribes)));
 			} else {
 				throw GameDataError(
 				   "Unknown command '%s' in line '%s'", parseinput.name.c_str(), line.c_str());

@@ -123,6 +123,9 @@ public:
 	const std::set<std::string>& created_bobs() const {
 		return created_bobs_;
 	}
+	void add_created_bob(const std::string& bobname) {
+		created_bobs_.insert(bobname);
+	}
 
 	const ProductionProgram* get_program(const std::string&) const;
 	using Programs = std::map<std::string, std::unique_ptr<ProductionProgram>>;
@@ -173,9 +176,6 @@ protected:
 	}
 	void add_created_resource(const std::string& resource) {
 		created_resources_.insert(resource);
-	}
-	void add_created_bob(const std::string& bobname) {
-		created_bobs_.insert(bobname);
 	}
 
 private:

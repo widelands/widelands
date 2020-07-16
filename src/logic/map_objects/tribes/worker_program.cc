@@ -756,6 +756,7 @@ void WorkerProgram::parse_buildferry(Worker::Action* act, const std::vector<std:
 	if (cmd.size() > 1) {
 		throw wexception("buildferry takes no arguments");
 	}
+	// NOCOM we need to register the ferry somehow
 	act->function = &Worker::run_buildferry;
 }
 

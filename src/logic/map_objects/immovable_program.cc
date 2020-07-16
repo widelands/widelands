@@ -135,7 +135,6 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 		}
 		// Register target at ImmovableDescr
 		if (bob) {
-			log("NOCOM ***** transform to bob %s\n", type_name.c_str());
 			descr.becomes_.insert(std::make_pair("bob", type_name));
 		} else {
 			descr.becomes_.insert(std::make_pair("immovable", type_name));
