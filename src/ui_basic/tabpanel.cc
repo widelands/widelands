@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2019 by the Widelands Development Team
+ * Copyright (C) 2003-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,6 +18,8 @@
  */
 
 #include "ui_basic/tabpanel.h"
+
+#include <SDL_mouse.h>
 
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
@@ -202,10 +204,12 @@ uint32_t TabPanel::add_tab(const std::string& name,
  * Make a different tab the currently active tab.
  */
 void TabPanel::activate(uint32_t idx) {
-	if (active_ < tabs_.size())
+	if (active_ < tabs_.size()) {
 		tabs_[active_]->panel->set_visible(false);
-	if (idx < tabs_.size())
+	}
+	if (idx < tabs_.size()) {
 		tabs_[idx]->panel->set_visible(true);
+	}
 
 	active_ = idx;
 
@@ -214,9 +218,11 @@ void TabPanel::activate(uint32_t idx) {
 }
 
 void TabPanel::activate(const std::string& name) {
-	for (uint32_t t = 0; t < tabs_.size(); ++t)
-		if (tabs_[t]->get_name() == name)
+	for (uint32_t t = 0; t < tabs_.size(); ++t) {
+		if (tabs_[t]->get_name() == name) {
 			activate(t);
+		}
+	}
 }
 
 /**
@@ -304,10 +310,10 @@ void TabPanel::draw(RenderTarget& dst) {
 		dst.fill_rect(Recti(x + tab_width - 1, 1, 1, kTabPanelButtonHeight - 3), black);
 
 		// Draw bottom part
-		if (active_ != idx)
+		if (active_ != idx) {
 			dst.brighten_rect(
 			   Recti(x, kTabPanelButtonHeight - 2, tab_width, 2), 2 * BUTTON_EDGE_BRIGHT_FACTOR);
-		else {
+		} else {
 			dst.brighten_rect(Recti(x, kTabPanelButtonHeight - 2, 2, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 
 			dst.brighten_rect(Recti(x + tab_width - 2, kTabPanelButtonHeight - 2, 2, 2),

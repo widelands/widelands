@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,9 +50,10 @@ GameObjectivesMenu::GameObjectivesMenu(UI::Panel* parent, UI::UniqueWindow::Regi
                    "",
                    UI::Align::kLeft,
                    UI::MultilineTextarea::ScrollMode::kScrollNormalForced) {
-	list.selected.connect(boost::bind(&GameObjectivesMenu::selected, this, _1));
-	if (get_usedefaultpos())
+	list.selected.connect([this](uint32_t a) { selected(a); });
+	if (get_usedefaultpos()) {
 		center_to_parent();
+	}
 }
 
 void GameObjectivesMenu::think() {

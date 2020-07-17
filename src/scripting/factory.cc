@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,8 +35,9 @@ Factory& get_factory(lua_State* const L) {
 	Factory* fac = static_cast<Factory*>(lua_touserdata(L, -1));
 	lua_pop(L, 1);  // pop this userdata
 
-	if (!fac)
+	if (!fac) {
 		throw LuaError("\"factory\" field was nil, which should be impossible!");
+	}
 
 	return *fac;
 }

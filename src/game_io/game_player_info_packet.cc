@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,9 +49,10 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 					bool const see_all = fr.unsigned_8();
 
 					int32_t const plnum = fr.unsigned_8();
-					if (plnum < 1 || kMaxPlayers < plnum)
+					if (plnum < 1 || kMaxPlayers < plnum) {
 						throw GameDataError(
 						   "player number (%i) is out of range (1 .. %u)", plnum, kMaxPlayers);
+					}
 
 					Widelands::TeamNumber team = fr.unsigned_8();
 					char const* const tribe_name = fr.c_string();

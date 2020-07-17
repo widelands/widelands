@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,8 @@
 #include "ui_basic/messagebox.h"
 
 #include <memory>
+
+#include <SDL_mouse.h>
 
 #include "base/i18n.h"
 #include "graphic/font_handler.h"
@@ -89,14 +91,13 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 	                               (width - button_w) / 2 :
 	                               UI::g_fh->fontset()->is_rtl() ? left_button_x : right_button_x,
 	                            button_y, button_w, 0, UI::ButtonStyle::kWuiPrimary, _("OK")));
-	ok_button_->sigclicked.connect(boost::bind(&WLMessageBox::clicked_ok, boost::ref(*this)));
+	ok_button_->sigclicked.connect([this]() { clicked_ok(); });
 
 	if (type_ == MBoxType::kOkCancel) {
 		cancel_button_.reset(
 		   new Button(this, "cancel", UI::g_fh->fontset()->is_rtl() ? right_button_x : left_button_x,
 		              button_y, button_w, 0, UI::ButtonStyle::kWuiSecondary, _("Cancel")));
-		cancel_button_->sigclicked.connect(
-		   boost::bind(&WLMessageBox::clicked_back, boost::ref(*this)));
+		cancel_button_->sigclicked.connect([this]() { clicked_back(); });
 	}
 
 	set_inner_size(width, button_y + ok_button_->get_h() + margin);
@@ -153,15 +154,17 @@ void WLMessageBox::clicked_ok() {
 		cancel_button_->set_enabled(false);
 	}
 	ok();
-	if (is_modal())
+	if (is_modal()) {
 		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
+	}
 }
 
 void WLMessageBox::clicked_back() {
 	ok_button_->set_enabled(false);
 	cancel_button_->set_enabled(false);
 	cancel();
-	if (is_modal())
+	if (is_modal()) {
 		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
+	}
 }
 }  // namespace UI

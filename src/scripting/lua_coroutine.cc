@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -154,8 +154,9 @@ void LuaCoroutine::write(FileWrite& fw) const {
 void LuaCoroutine::read(lua_State* parent, FileRead& fr) {
 	uint8_t version = fr.unsigned_8();
 
-	if (version != kCoroutineDataPacketVersion)
+	if (version != kCoroutineDataPacketVersion) {
 		throw wexception("Unhandled data packet version: %i\n", version);
+	}
 
 	ninput_args_ = fr.unsigned_32();
 	nreturn_values_ = fr.unsigned_32();

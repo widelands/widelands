@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2019 by the Widelands Development Team
+ * Copyright (C) 2008-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,6 +18,8 @@
  */
 
 #include "wui/game_chat_panel.h"
+
+#include <SDL_mouse.h>
 
 #include "sound/sound_handler.h"
 #include "wui/chat_msg_layout.h"
@@ -52,8 +54,8 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
 	box_.add_space(4);
 	box_.add(&editbox, UI::Box::Resizing::kFullSize);
 
-	editbox.ok.connect(boost::bind(&GameChatPanel::key_enter, this));
-	editbox.cancel.connect(boost::bind(&GameChatPanel::key_escape, this));
+	editbox.ok.connect([this]() { key_enter(); });
+	editbox.cancel.connect([this]() { key_escape(); });
 	editbox.activate_history(true);
 
 	set_handle_mouse(true);

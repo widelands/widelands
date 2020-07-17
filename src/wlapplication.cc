@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,7 @@
 #include <iostream>
 #include <memory>
 
-#include <SDL_image.h>
+#include <SDL.h>
 #include <SDL_ttf.h>
 #include <boost/regex.hpp>
 #ifdef __APPLE__
@@ -47,6 +47,7 @@
 #include "editor/editorinteractive.h"
 #include "graphic/default_resolution.h"
 #include "graphic/font_handler.h"
+#include "graphic/mouse_cursor.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
 #include "io/filesystem/disk_filesystem.h"
@@ -358,6 +359,12 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	cleanup_temp_files();
 	cleanup_temp_backups();
 
+#if SDL_BYTEORDER == SDL_LIL_ENDIAN
+	log("Byte order: little-endian\n");
+#else
+	log("Byte order: big-endian\n");
+#endif
+
 	// Start the SDL core
 	if (SDL_Init(SDL_INIT_VIDEO) == -1) {
 		// We sometimes run into a missing video driver in our CI environment, so we exit 0 to prevent
@@ -366,7 +373,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		exit(2);
 	}
 
-	SDL_ShowCursor(SDL_DISABLE);
 	g_gr = new Graphic();
 
 	if (TTF_Init() == -1) {
@@ -381,6 +387,9 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	   get_config_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
 	   get_config_int("xres", DEFAULT_RESOLUTION_W), get_config_int("yres", DEFAULT_RESOLUTION_H),
 	   get_config_bool("fullscreen", false));
+
+	g_mouse_cursor = new MouseCursor();
+	g_mouse_cursor->initialize(get_config_bool("sdl_cursor", true));
 
 	g_sh = new SoundHandler();
 
@@ -419,8 +428,9 @@ WLApplication::~WLApplication() {
 
 	TTF_Quit();  // TODO(unknown): not here
 
-	assert(g_fs);
-	delete g_fs;
+	if (g_fs) {
+		delete g_fs;
+	}
 	g_fs = nullptr;
 
 	if (redirected_stdio_) {
@@ -549,13 +559,6 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, int modifi
 	if (down) {
 		const bool ctrl = (modifiers & KMOD_LCTRL) || (modifiers & KMOD_RCTRL);
 		switch (keycode) {
-		case SDLK_F10:
-			// exits the game.
-			if (ctrl) {
-				should_die_ = true;
-			}
-			return true;
-
 		case SDLK_F11:
 			// Takes a screenshot.
 			if (ctrl) {
@@ -757,6 +760,16 @@ void WLApplication::set_input_grab(bool grab) {
 	}
 }
 
+void WLApplication::set_mouse_lock(const bool locked) {
+	mouse_locked_ = locked;
+
+	// If we use the SDL cursor then it needs to be hidden when locked
+	// otherwise it'll jerk around which looks ugly
+	if (g_mouse_cursor->is_using_sdl()) {
+		g_mouse_cursor->set_visible(!mouse_locked_);
+	}
+}
+
 void WLApplication::refresh_graphics() {
 	g_gr->change_resolution(
 	   get_config_int("xres", DEFAULT_RESOLUTION_W), get_config_int("yres", DEFAULT_RESOLUTION_H));
@@ -791,6 +804,7 @@ bool WLApplication::init_settings() {
 	get_config_bool("auto_speed", false);
 	get_config_bool("dock_windows_to_edges", false);
 	get_config_bool("fullscreen", false);
+	get_config_bool("sdl_cursor", true);
 	get_config_bool("snap_windows_only_when_overlapping", false);
 	get_config_bool("animate_map_panning", false);
 	get_config_bool("write_syncstreams", false);
@@ -864,10 +878,26 @@ bool WLApplication::init_settings() {
  * Initialize language settings
  */
 void WLApplication::init_language() {
+	// Set the locale dir
+	i18n::set_localedir(g_fs->canonicalize_name(datadir_ + "/locale"));
+
+	// If locale dir is not a directory, barf. We can handle it not being there tough.
+	if (g_fs->file_exists(i18n::get_localedir()) && !g_fs->is_directory(i18n::get_localedir())) {
+		SDL_ShowSimpleMessageBox(
+		   SDL_MESSAGEBOX_ERROR, "'locale' directory not valid",
+		   std::string(i18n::get_localedir() + "\nis not a directory. Please fix this.").c_str(),
+		   NULL);
+		log("ERROR: %s is not a directory. Please fix this.\n", i18n::get_localedir().c_str());
+		exit(1);
+	}
+
+	if (!g_fs->is_directory(i18n::get_localedir()) ||
+	    g_fs->list_directory(i18n::get_localedir()).empty()) {
+		log("WARNING: No locale translations found in %s\n", i18n::get_localedir().c_str());
+	}
+
 	// Initialize locale and grab "widelands" textdomain
 	i18n::init_locale();
-
-	i18n::set_localedir(datadir_ + "/locale");
 	i18n::grab_textdomain("widelands");
 
 	// Set locale corresponding to selected language
@@ -885,6 +915,9 @@ void WLApplication::shutdown_settings() {
 }
 
 void WLApplication::shutdown_hardware() {
+	delete g_mouse_cursor;
+	g_mouse_cursor = nullptr;
+
 	delete g_gr;
 	g_gr = nullptr;
 
@@ -1427,6 +1460,7 @@ bool WLApplication::campaign_game() {
 		if (select_campaignmap.run<FullscreenMenuBase::MenuTarget>() ==
 		    FullscreenMenuBase::MenuTarget::kOk) {
 			filename = select_campaignmap.get_map();
+			game.set_scenario_difficulty(select_campaignmap.get_difficulty());
 			break;
 		}
 	}

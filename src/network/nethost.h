@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2019 by the Widelands Development Team
+ * Copyright (C) 2008-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -70,19 +70,16 @@ private:
 	// Feel free to make this method public if you need it
 	bool is_listening() const;
 
-/**
- * Starts an asynchronous accept on the given acceptor.
- * If someone wants to connect, establish a connection
- * and add the connection to accept_queue_ and continue waiting.
- * @param acceptor The acceptor we should be listening on.
- */
-#if BOOST_VERSION >= 106600
-	void start_accepting(boost::asio::ip::tcp::acceptor& acceptor);
-#else
+	/**
+	 * Starts an asynchronous accept on the given acceptor.
+	 * If someone wants to connect, establish a connection
+	 * and add the connection to accept_queue_ and continue waiting.
+	 * @param acceptor The acceptor we should be listening on.
+	 * @param pair A pair of the BufferedConnection for the new client and its socket.
+	 */
 	void start_accepting(
 	   boost::asio::ip::tcp::acceptor& acceptor,
 	   std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*>& pair);
-#endif
 
 	/**
 	 * Tries to listen on the given port.
@@ -113,12 +110,10 @@ private:
 	/// The acceptor we get IPv6 connection requests to.
 	boost::asio::ip::tcp::acceptor acceptor_v6_;
 
-#if BOOST_VERSION < 106600
 	/// Socket and unconnected BuffereConnection that will be used for accepting IPv4 connections
 	std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*> accept_pair_v4_;
 	/// Socket and unconnected BuffereConnection that will be used for accepting IPv6 connections
 	std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*> accept_pair_v6_;
-#endif
 
 	/// A thread used to wait for connections on the acceptor.
 	std::thread asio_thread_;

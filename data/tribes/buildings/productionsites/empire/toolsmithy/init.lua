@@ -75,7 +75,6 @@ tribes:new_productionsite_type {
             "call=produce_saw",
             "call=produce_scythe",
             "call=produce_shovel",
-            "return=no_stats"
          }
       },
       produce_felling_ax = {

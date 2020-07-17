@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -119,7 +119,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 
 			UI::Checkbox* cb = create_checkbox(horizontal, descriptions_.get(i));
 			cb->set_state(tool_->is_enabled(i));
-			cb->changedto.connect(boost::bind(&CategorizedItemSelectionMenu::selected, this, i, _1));
+			cb->changedto.connect([this, i](bool b) { selected(i, b); });
 			checkboxes_[i] = cb;
 			horizontal->add(cb);
 			horizontal->add_space(kSpacing);
@@ -128,7 +128,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 		tab_panel_.add(category.name(), category.picture(), vertical, category.descname());
 	}
 	add(&current_selection_names_, UI::Box::Resizing::kFullSize);
-	tab_panel_.sigclicked.connect(boost::bind(&CategorizedItemSelectionMenu::update_label, this));
+	tab_panel_.sigclicked.connect([this]() { update_label(); });
 	update_label();
 }
 

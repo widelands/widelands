@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -89,9 +89,10 @@ const uint32_t rng_sbox[256] = {
 
 void RNG::read_state(StreamRead& sr) {
 	uint32_t const magic = sr.unsigned_32();
-	if (magic != RNG_SAVE_MAGIC)
+	if (magic != RNG_SAVE_MAGIC) {
 		throw wexception(
 		   "Different RNG version (magic = %08x, expected %08x)", magic, RNG_SAVE_MAGIC);
+	}
 
 	state0 = sr.unsigned_32();
 	state1 = sr.unsigned_32();

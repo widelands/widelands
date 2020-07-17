@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -282,8 +282,9 @@ void set_locale(const std::string& name) {
 				// log("locale is not working: %s\n", try_locale.c_str());
 			}
 		}
-		if (leave_while)
+		if (leave_while) {
 			break;
+		}
 
 		found = alt_str.find(',', 0);
 	}

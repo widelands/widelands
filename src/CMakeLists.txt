@@ -43,7 +43,6 @@ if (WIN32)
     SRCS
       main.cc
       ${WIN32_ICON_O}
-    USES_SDL2
     DEPENDS
       base_exceptions
       widelands_ball_of_mud
@@ -53,7 +52,6 @@ else()
   wl_binary(widelands
     SRCS
       main.cc
-    USES_SDL2
     DEPENDS
       base_exceptions
       widelands_ball_of_mud
@@ -93,7 +91,6 @@ wl_library(widelands_ball_of_mud
     wlapplication_messages.h
   USES_BOOST_REGEX
   USES_SDL2
-  USES_SDL2_IMAGE
   USES_SDL2_TTF
   DEPENDS
     base_exceptions
@@ -106,6 +103,7 @@ wl_library(widelands_ball_of_mud
     editor
     graphic
     graphic_fonthandler
+    graphic_mouse_cursor
     graphic_text
     graphic_text_layout
     io_filesystem
@@ -135,25 +133,11 @@ wl_library(widelands_options
   SRCS
     wlapplication_options.cc
     wlapplication_options.h
-  USES_SDL2
-  USES_SDL2_IMAGE
-  USES_SDL2_TTF
   DEPENDS
     base_log
     io_filesystem
     io_profile
     logic_filesystem_constants
-)
-
-
-# TODO(sirver): Split into libs with useful names.
-wl_library(helper
-  SRCS
-    helper.cc
-    helper.h
-  USES_SDL2
-  DEPENDS
-    base_exceptions
 )
 
 if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
