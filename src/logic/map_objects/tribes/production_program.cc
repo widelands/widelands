@@ -294,8 +294,9 @@ bool ProductionProgram::ActReturn::SiteHas::evaluate(const ProductionSite& ps) c
 			if (input_type.first == ip_queue->get_index() &&
 			    input_type.second == ip_queue->get_type()) {
 				uint8_t const filled = ip_queue->get_filled();
-				if (count <= filled)
+				if (count <= filled) {
 					return true;
+				}
 				count -= filled;
 				break;
 			}
@@ -353,9 +354,11 @@ ProductionProgram::ActReturn::SiteHas::description_negation(const Tribes& tribes
 
 bool ProductionProgram::ActReturn::WorkersNeedExperience::evaluate(const ProductionSite& ps) const {
 	ProductionSite::WorkingPosition const* const wp = ps.working_positions_;
-	for (uint32_t i = ps.descr().nr_working_positions(); i;)
-		if (wp[--i].worker->needs_experience())
+	for (uint32_t i = ps.descr().nr_working_positions(); i;) {
+		if (wp[--i].worker->needs_experience()) {
 			return true;
+		}
+	}
 	return false;
 }
 std::string ProductionProgram::ActReturn::WorkersNeedExperience::description(const Tribes&) const {
@@ -755,8 +758,9 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 				}
 			}
 			// group does not request ware
-			if (!found)
+			if (!found) {
 				++it;
+			}
 		}
 	}
 
@@ -981,28 +985,32 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 			// Add penalty for fields that are running out
 			// Except for totally depleted fields or wrong ressource fields
 			// if we already know there is no ressource (left) we won't mine there
-			if (amount == 0)
+			if (amount == 0) {
 				totalchance += 0;
-			else if (amount <= 2)
+			} else if (amount <= 2) {
 				totalchance += 6;
-			else if (amount <= 4)
+			} else if (amount <= 4) {
 				totalchance += 4;
-			else if (amount <= 6)
+			} else if (amount <= 6) {
 				totalchance += 2;
+			}
 		} while (mr.advance(*map));
 	}
 
 	//  how much is digged
 	int32_t digged_percentage = 100;
-	if (totalstart)
+	if (totalstart) {
 		digged_percentage = (totalstart - totalres) * 100 / totalstart;
-	if (!totalres)
+	}
+	if (!totalres) {
 		digged_percentage = 100;
+	}
 
 	if (digged_percentage < max_) {
 		//  mine can produce normally
-		if (totalres == 0)
+		if (totalres == 0) {
 			return ps.program_end(game, ProgramResult::kFailed);
+		}
 
 		//  second pass through nodes
 		assert(totalchance);
@@ -1015,8 +1023,9 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 				DescriptionIndex fres = mr.location().field->get_resources();
 				ResourceAmount amount = mr.location().field->get_resources_amount();
 
-				if (fres != resource_)
+				if (fres != resource_) {
 					amount = 0;
+				}
 
 				pick -= 8 * amount;
 				if (pick < 0) {
@@ -1226,8 +1235,9 @@ ProductionProgram::ActConstruct::ActConstruct(const std::vector<std::string>& ar
 const ImmovableDescr&
 ProductionProgram::ActConstruct::get_construction_descr(const Tribes& tribes) const {
 	const ImmovableDescr* descr = tribes.get_immovable_descr(tribes.immovable_index(objectname));
-	if (!descr)
+	if (!descr) {
 		throw wexception("ActConstruct: immovable '%s' does not exist", objectname.c_str());
+	}
 
 	return *descr;
 }
