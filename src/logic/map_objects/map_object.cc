@@ -54,8 +54,9 @@ void CmdDestroyMapObject::execute(Game& game) {
 	game.syncstream().unsigned_8(SyncEntry::kDestroyObject);
 	game.syncstream().unsigned_32(obj_serial);
 
-	if (MapObject* obj = game.objects().get_object(obj_serial))
+	if (MapObject* obj = game.objects().get_object(obj_serial)) {
 		obj->destroy(game);
+	}
 }
 
 constexpr uint16_t kCurrentPacketVersionDestroyMapObject = 1;
@@ -65,14 +66,15 @@ void CmdDestroyMapObject::read(FileRead& fr, EditorGameBase& egbase, MapObjectLo
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersionDestroyMapObject) {
 			GameLogicCommand::read(fr, egbase, mol);
-			if (Serial const serial = fr.unsigned_32())
+			if (Serial const serial = fr.unsigned_32()) {
 				try {
 					obj_serial = mol.get<MapObject>(serial).serial();
 				} catch (const WException& e) {
 					throw GameDataError("%u: %s", serial, e.what());
 				}
-			else
+			} else {
 				obj_serial = 0;
+			}
 		} else {
 			throw UnhandledVersionError(
 			   "CmdDestroyMapObject", packet_version, kCurrentPacketVersionDestroyMapObject);
@@ -116,14 +118,15 @@ void CmdAct::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersionCmdAct) {
 			GameLogicCommand::read(fr, egbase, mol);
-			if (Serial const object_serial = fr.unsigned_32())
+			if (Serial const object_serial = fr.unsigned_32()) {
 				try {
 					obj_serial = mol.get<MapObject>(object_serial).serial();
 				} catch (const WException& e) {
 					throw GameDataError("object %u: %s", object_serial, e.what());
 				}
-			else
+			} else {
 				obj_serial = 0;
+			}
 			arg = fr.unsigned_32();
 		} else {
 			throw UnhandledVersionError("CmdAct", packet_version, kCurrentPacketVersionCmdAct);
@@ -148,8 +151,9 @@ void CmdAct::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
 
 ObjectManager::~ObjectManager() {
 	// better not throw an exception in a destructor...
-	if (!objects_.empty())
+	if (!objects_.empty()) {
 		log("ObjectManager: ouch! remaining objects\n");
+	}
 
 	log("lastserial: %i\n", lastserial_);
 }
@@ -169,8 +173,9 @@ void ObjectManager::cleanup(EditorGameBase& egbase) {
 	for (auto moi : killusfirst) {
 		while (!objects_.empty()) {
 			MapObjectMap::iterator it = objects_.begin();
-			while (it != objects_.end() && (moi) != it->second->descr_->type())
+			while (it != objects_.end() && (moi) != it->second->descr_->type()) {
 				it++;
+			}
 			if (it == objects_.end()) {
 				break;
 			} else {
@@ -219,11 +224,13 @@ std::vector<Serial> ObjectManager::all_object_serials_ordered() const {
 }
 
 MapObject* ObjectPointer::get(const EditorGameBase& egbase) {
-	if (!serial_)
+	if (!serial_) {
 		return nullptr;
+	}
 	MapObject* const obj = egbase.objects().get_object(serial_);
-	if (!obj)
+	if (!obj) {
 		serial_ = 0;
+	}
 	return obj;
 }
 
@@ -433,8 +440,9 @@ bool MapObjectDescr::has_attribute(uint32_t const attr) const {
  * Add an attribute to the attribute list if it's not already there
  */
 void MapObjectDescr::add_attribute(uint32_t const attr) {
-	if (!has_attribute(attr))
+	if (!has_attribute(attr)) {
 		attributes_.push_back(attr);
+	}
 }
 
 void MapObjectDescr::add_attributes(const std::vector<std::string>& attributes,
@@ -613,8 +621,9 @@ uint32_t MapObject::schedule_act(Game& game, uint32_t const tdelta, uint32_t con
 		game.cmdqueue().enqueue(new CmdAct(time, *this, data));
 
 		return time;
-	} else
+	} else {
 		return never();
+	}
 }
 
 /**
@@ -637,8 +646,9 @@ void MapObject::log_general_info(const EditorGameBase&) const {
  * Prints a log message prepended by the object's serial number.
  */
 void MapObject::molog(char const* fmt, ...) const {
-	if (!g_verbose && !logsink_)
+	if (!g_verbose && !logsink_) {
 		return;
+	}
 
 	va_list va;
 	char buffer[2048];
@@ -647,8 +657,9 @@ void MapObject::molog(char const* fmt, ...) const {
 	vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
 
-	if (logsink_)
+	if (logsink_) {
 		logsink_->log(buffer);
+	}
 
 	log("MO(%u,%s): %s", serial_, descr().name().c_str(), buffer);
 }
@@ -675,8 +686,9 @@ constexpr uint8_t kCurrentPacketVersionMapObject = 2;
 void MapObject::Loader::load(FileRead& fr) {
 	try {
 		uint8_t const header = fr.unsigned_8();
-		if (header != HeaderMapObject)
+		if (header != HeaderMapObject) {
 			throw wexception("header is %u, expected %u", header, HeaderMapObject);
+		}
 
 		uint8_t const packet_version = fr.unsigned_8();
 		// Supporting older versions for map loading
