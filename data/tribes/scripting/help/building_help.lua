@@ -230,7 +230,6 @@ function dependencies_collects(items, buildingdescr, output)
    for k,item in ipairs(items) do
       local icon = item.icon_name
       if icon ~= nil and icon ~= "" then
-         print("ICON: " .. icon)
          images = images .. img(icon)
       else
          print("WARNING: help item without icon_name: " .. item.name)
@@ -282,7 +281,7 @@ function building_help_dependencies_production(tribe, building_description)
    local hasinput = false
 
    for i, ware_description in ipairs(building_description.inputs) do
-    hasinput = true
+      hasinput = true
       for j, producer in ipairs(ware_description:producers(tribe.name)) do
          result = result .. dependencies(
             {producer, ware_description},
@@ -295,8 +294,8 @@ function building_help_dependencies_production(tribe, building_description)
       result =  h3(_"Incoming:") .. result
    end
 
-   if ((not hasinput) and building_description.output_ware_types[1]) then
-      result = result .. h3(_"Collects:")
+   if (building_description.output_ware_types[1] or building_description.output_worker_types[1]) then
+
       -- NOCOM Decide how to handle lots of trees etc.
 
       local collected_items = {}
@@ -311,46 +310,31 @@ function building_help_dependencies_production(tribe, building_description)
          table.insert(collected_items, resource)
       end
 
-      for i, ware_description in ipairs(building_description.output_ware_types) do
-         if collected_items[1] ~= nil then
+      if collected_items[1] ~= nil then
+         if (building_description.is_mine) then
+            -- TRANSLATORS: This is a verb (The miner mines)
+            result = result .. h3(_"Mines:")
+         else
+            result = result .. h3(_"Collects:")
+         end
+         for i, ware_description in ipairs(building_description.output_ware_types) do
             result = result ..
                dependencies_collects(collected_items, building_description, ware_description)
-         else
-            print("NO collected resource for: " .. building_description.name)
+         end
+         for i, worker_description in ipairs(building_description.output_worker_types) do
+            result = result ..
+               dependencies_collects(collected_items, building_description, worker_description)
+         end
+      else
+         result = result .. h3(_"Produces:")
+         for i, ware_description in ipairs(building_description.output_ware_types) do
             result = result ..
                dependencies({building_description, ware_description}, ware_description.descname)
          end
-      end
-      for i, worker_description in ipairs(building_description.output_worker_types) do
-         if collected_items[1] ~= nil then
-            result = result ..
-               dependencies_collects(collected_items, building_description, worker_description)
-         else
-            print("NO collected resource for: " .. building_description.name)
+         for i, worker_description in ipairs(building_description.output_worker_types) do
             result = result ..
                dependencies({building_description, worker_description}, worker_description.descname)
          end
-      end
-
-   elseif (building_description.is_mine) then
-      -- TRANSLATORS: This is a verb (The miner mines)
-      result = result .. h3(_"Mines:")
-      for i, ware_description in ipairs(building_description.output_ware_types) do
-         local resources = find_resource_indicators(tribe, building_description.collected_resources)
-         result = result ..
-               dependencies_collects(resources, building_description, ware_description)
-      end
-   else
-      if(building_description.output_ware_types[1] or building_description.output_worker_types[1]) then
-         result = result .. h3(_"Produces:")
-      end
-      for i, ware_description in ipairs(building_description.output_ware_types) do
-         result = result ..
-            dependencies({building_description, ware_description}, ware_description.descname)
-      end
-      for i, worker_description in ipairs(building_description.output_worker_types) do
-         result = result ..
-            dependencies({building_description, worker_description}, worker_description.descname)
       end
    end
 
@@ -743,16 +727,6 @@ function building_help(tribe, building_description)
 
       -- NOCOM
       local result = h1("testing " .. building_description.name)
-
-      for i, bob in ipairs(building_description.collected_bobs) do
-         result = result .. p("collects bob: " .. bob.name)
-      end
-      for i, immovable in ipairs(building_description.collected_immovables) do
-         result = result .. p("collects immovable: " .. immovable.name)
-      end
-      for i, resource in ipairs(building_description.collected_resources) do
-         result = result .. p("collects resource: " .. resource.name)
-      end
       for i, immovable in ipairs(building_description.created_immovables) do
          result = result .. p("creates immovable: " .. immovable.name)
       end
