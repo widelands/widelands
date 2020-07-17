@@ -34,38 +34,6 @@ function dependencies_basic(images, text)
    return p(imgstring .. text)
 end
 
-
--- RST
--- .. function:: dependencies_resi(resource, items[, text = nil])
---
---    Creates a dependencies line of any length for resources (that don't have menu.png files).
---
---    :arg resource: name of the geological resource.
---    :arg items: ware/building descriptions in the correct order from left to right as table (set in {}).
---    :arg text: comment of the image.
---    :returns: a row of pictures connected by arrows.
---
-function dependencies_resi(tribename, resource, items, text)
-   if not text then
-      text = ""
-   end
-   local tribe_descr = wl.Game():get_tribe_description(tribename)
-   local resi
-   local am = 0
-   for amount,name in pairs(tribe_descr.resource_indicators[resource]) do
-      if amount > am then
-         resi = name
-         am = amount
-      end
-   end
-   local items_with_resource = { wl.Game():get_immovable_description(resi).icon_name }
-   for count, item in pairs(items) do
-      table.insert(items_with_resource, item.icon_name)
-   end
-   return dependencies_basic(items_with_resource, text)
-end
-
-
 --  =======================================================
 --  *************** Dependencies functions ****************
 --  =======================================================
@@ -255,17 +223,48 @@ function building_help_general_string(tribe, building_description)
    return result
 end
 
--- NOCOM document
-function dependencies_collects(icons, buildingdescr, output)
+-- NOCOM document + shift up
+function dependencies_collects(items, buildingdescr, output)
    local text = ""
-   local images = img(icons[1])
-   for k,v in ipairs({table.unpack(icons,2)}) do
-      images = images .. img(v)
+   local images = ""
+   for k,item in ipairs(items) do
+      local icon = item.icon_name
+      if icon ~= nil and icon ~= "" then
+         print("ICON: " .. icon)
+         images = images .. img(icon)
+      else
+         print("WARNING: help item without icon_name: " .. item.name)
+         images = images .. img_object(item.name, "width=10")
+      end
    end
    images = images .. img("images/richtext/arrow-right.png") .. img(buildingdescr.icon_name)
    images = images .. img("images/richtext/arrow-right.png") .. img(output.icon_name)
 
    return p(images .. output.descname)
+end
+
+-- NOCOM document + shift up
+function find_resource_indicators(tribe, collected_resources)
+   local result = {}
+   for i, resource in ipairs(collected_resources) do
+      local resi = nil
+      local am = 0
+      local resource_indicators = tribe.resource_indicators[resource.name]
+      if resource_indicators ~= nil then
+         for amount, name in pairs(tribe.resource_indicators[resource.name]) do
+            if amount > am then
+               resi = name
+               am = amount
+            end
+         end
+      end
+      if resi ~= nil then
+         table.insert(result, wl.Game():get_immovable_description(resi))
+      else
+         table.insert(result, resource)
+      end
+   end
+   return result
 end
 
 -- RST
@@ -298,51 +297,24 @@ function building_help_dependencies_production(tribe, building_description)
 
    if ((not hasinput) and building_description.output_ware_types[1]) then
       result = result .. h3(_"Collects:")
-      -- NOCOM fix quarry & hunter. Decide how to handle lots of trees etc.
+      -- NOCOM Decide how to handle lots of trees etc.
 
-      local collected_icons = {}
+      local collected_items = {}
       for i, bob in ipairs(building_description.collected_bobs) do
-         if bob.icon_name ~= nil and bob.icon_name ~= "" then
-            table.insert(collected_icons, bob.icon_name)
-         else
-            print("WARNING: help bob item without icon_name: " .. bob.name)
-            table.insert(collected_icons, bob.representative_image)
-         end
+         table.insert(collected_items, bob)
       end
       for i, immovable in ipairs(building_description.collected_immovables) do
-         if immovable.icon_name ~= nil and immovable.icon_name ~= "" then
-            table.insert(collected_icons, immovable.icon_name)
-         else
-            print("WARNING: help immovable item without icon_name: " .. immovable.name)
-            table.insert(collected_icons, immovable.representative_image)
-         end
+         table.insert(collected_items, immovable)
       end
-      for i, resource in ipairs(building_description.collected_resources) do
-         local resi = nil
-         local am = 0
-         local resource_indicators = tribe.resource_indicators[resource.name]
-         if resource_indicators ~= nil then
-            for amount, name in pairs(tribe.resource_indicators[resource.name]) do
-               if amount > am then
-                  resi = name
-                  am = amount
-               end
-            end
-         end
-         if resi ~= nil then
-            table.insert(collected_icons, wl.Game():get_immovable_description(resi).icon_name)
-         elseif resource.icon_name ~= nil and resource.icon_name ~= "" then
-            table.insert(collected_icons, resource.icon_name)
-         else
-            print("WARNING: help resource item without icon_name: " .. resource.name)
-            table.insert(collected_icons, resource.representative_image)
-         end
+
+      for i, resource in ipairs(find_resource_indicators(tribe, building_description.collected_resources)) do
+         table.insert(collected_items, resource)
       end
 
       for i, ware_description in ipairs(building_description.output_ware_types) do
-         if collected_icons[1] ~= nil then
+         if collected_items[1] ~= nil then
             result = result ..
-               dependencies_collects(collected_icons, building_description, ware_description)
+               dependencies_collects(collected_items, building_description, ware_description)
          else
             print("NO collected resource for: " .. building_description.name)
             result = result ..
@@ -350,9 +322,9 @@ function building_help_dependencies_production(tribe, building_description)
          end
       end
       for i, worker_description in ipairs(building_description.output_worker_types) do
-         if collected_icons[1] ~= nil then
+         if collected_items[1] ~= nil then
             result = result ..
-               dependencies_collects(collected_icons, building_description, worker_description)
+               dependencies_collects(collected_items, building_description, worker_description)
          else
             print("NO collected resource for: " .. building_description.name)
             result = result ..
@@ -364,14 +336,9 @@ function building_help_dependencies_production(tribe, building_description)
       -- TRANSLATORS: This is a verb (The miner mines)
       result = result .. h3(_"Mines:")
       for i, ware_description in ipairs(building_description.output_ware_types) do
-         -- Mines only take 1 resource, so we hard-code to the first one
-         if (building_description.collected_resources[1] ~= nil) then
-            result = result .. dependencies_resi(tribe.name,
-               building_description.collected_resources[1].name,
-               {building_description, ware_description},
-               ware_description.descname
-            )
-         end
+         local resources = find_resource_indicators(tribe, building_description.collected_resources)
+         result = result ..
+               dependencies_collects(resources, building_description, ware_description)
       end
    else
       if(building_description.output_ware_types[1] or building_description.output_worker_types[1]) then
