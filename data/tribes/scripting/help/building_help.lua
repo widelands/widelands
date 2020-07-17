@@ -224,7 +224,7 @@ function building_help_general_string(tribe, building_description)
 end
 
 -- NOCOM document + shift up
-function dependencies_collects(items, buildingdescr, output)
+function dependencies_collects(items, building_description)
    local text = ""
    local images = ""
    for k,item in ipairs(items) do
@@ -236,10 +236,25 @@ function dependencies_collects(items, buildingdescr, output)
          images = images .. img_object(item.name, "width=10")
       end
    end
-   images = images .. img("images/richtext/arrow-right.png") .. img(buildingdescr.icon_name)
-   images = images .. img("images/richtext/arrow-right.png") .. img(output.icon_name)
+   images = images .. img("images/richtext/arrow-right.png") .. img(building_description.icon_name)
 
-   return p(images .. output.descname)
+   return p(images)
+end
+
+-- NOCOM document + shift up
+function dependencies_creates(items, building_description)
+   local text = ""
+   local images = img(building_description.icon_name) .. img("images/richtext/arrow-right.png")
+   for k,item in ipairs(items) do
+      local icon = item.icon_name
+      if icon ~= nil and icon ~= "" then
+         images = images .. img(icon)
+      else
+         print("WARNING: help item without icon_name: " .. item.name)
+         images = images .. img_object(item.name, "width=10")
+      end
+   end
+   return p(images)
 end
 
 -- NOCOM document + shift up
@@ -278,8 +293,9 @@ end
 --
 function building_help_dependencies_production(tribe, building_description)
    local result = ""
-   local hasinput = false
 
+   -- Providers
+   local hasinput = false
    for i, ware_description in ipairs(building_description.inputs) do
       hasinput = true
       for j, producer in ipairs(ware_description:producers(tribe.name)) do
@@ -294,50 +310,66 @@ function building_help_dependencies_production(tribe, building_description)
       result =  h3(_"Incoming:") .. result
    end
 
-   if (building_description.output_ware_types[1] or building_description.output_worker_types[1]) then
+   -- NOCOM Decide how to handle lots of trees etc.
+   -- NOCOM add building chain for collect/create
+   -- NOCOM add created icon to purpose text
+   -- Collected items
+   local collected_items = {}
+   for i, bob in ipairs(building_description.collected_bobs) do
+      table.insert(collected_items, bob)
+   end
+   for i, immovable in ipairs(building_description.collected_immovables) do
+      table.insert(collected_items, immovable)
+   end
 
-      -- NOCOM Decide how to handle lots of trees etc.
-
-      local collected_items = {}
-      for i, bob in ipairs(building_description.collected_bobs) do
-         table.insert(collected_items, bob)
-      end
-      for i, immovable in ipairs(building_description.collected_immovables) do
-         table.insert(collected_items, immovable)
-      end
-
-      for i, resource in ipairs(find_resource_indicators(tribe, building_description.collected_resources)) do
-         table.insert(collected_items, resource)
-      end
-
-      if collected_items[1] ~= nil then
-         if (building_description.is_mine) then
-            -- TRANSLATORS: This is a verb (The miner mines)
-            result = result .. h3(_"Mines:")
-         else
-            result = result .. h3(_"Collects:")
-         end
-         for i, ware_description in ipairs(building_description.output_ware_types) do
-            result = result ..
-               dependencies_collects(collected_items, building_description, ware_description)
-         end
-         for i, worker_description in ipairs(building_description.output_worker_types) do
-            result = result ..
-               dependencies_collects(collected_items, building_description, worker_description)
-         end
+   for i, resource in ipairs(find_resource_indicators(tribe, building_description.collected_resources)) do
+      table.insert(collected_items, resource)
+   end
+   if collected_items[1] then
+      if (building_description.is_mine) then
+         -- TRANSLATORS: This is a verb (The miner mines)
+         result = result .. h3(_"Mines:")
       else
-         result = result .. h3(_"Produces:")
-         for i, ware_description in ipairs(building_description.output_ware_types) do
-            result = result ..
-               dependencies({building_description, ware_description}, ware_description.descname)
-         end
-         for i, worker_description in ipairs(building_description.output_worker_types) do
-            result = result ..
-               dependencies({building_description, worker_description}, worker_description.descname)
-         end
+         result = result .. h3(_"Collects:")
+      end
+      result = result ..
+         dependencies_collects(collected_items, building_description)
+   end
+
+   -- Created items
+   local created_items = {}
+   for i, bob in ipairs(building_description.created_bobs) do
+         table.insert(created_items, bob)
+   end
+   for i, immovable in ipairs(building_description.created_immovables) do
+      table.insert(created_items, immovable)
+   end
+
+   for i, resource in ipairs(find_resource_indicators(tribe, building_description.created_resources)) do
+      table.insert(created_items, resource)
+   end
+   for i, test in ipairs(created_items) do
+         print(test.name)
+   end
+   if created_items[1] then
+      result = result .. h3(_"Creates:")
+      result = result .. dependencies_creates(created_items, building_description)
+   end
+
+   -- Produced items
+   if (building_description.output_ware_types[1] or building_description.output_worker_types[1]) then
+      result = result .. h3(_"Produces:")
+      for i, ware_description in ipairs(building_description.output_ware_types) do
+         result = result ..
+            dependencies({building_description, ware_description}, ware_description.descname)
+      end
+      for i, worker_description in ipairs(building_description.output_worker_types) do
+         result = result ..
+            dependencies({building_description, worker_description}, worker_description.descname)
       end
    end
 
+   -- Consumers
    local outgoing = ""
    for i, ware_description in ipairs(building_description.output_ware_types) do
 
@@ -724,22 +756,7 @@ function building_help(tribe, building_description)
    include(building_description.helptext_script)
 
    if (building_description.type_name == "productionsite") then
-
-      -- NOCOM
-      local result = h1("testing " .. building_description.name)
-      for i, immovable in ipairs(building_description.created_immovables) do
-         result = result .. p("creates immovable: " .. immovable.name)
-      end
-      for i, bob in ipairs(building_description.created_bobs) do
-         result = result .. p("creates bob: " .. bob.name)
-      end
-      for i, resource in ipairs(building_description.created_resources) do
-         result = result .. p("creates resource: " .. resource.name)
-      end
-
-      result = result .. h1("/testing " .. building_description.name)
-
-      return building_help_general_string(tribe, building_description) .. result .. -- NOCOM
+      return building_help_general_string(tribe, building_description) ..
          building_help_dependencies_production(tribe, building_description) ..
          building_help_crew_string(tribe, building_description) ..
          building_help_building_section(building_description) ..
