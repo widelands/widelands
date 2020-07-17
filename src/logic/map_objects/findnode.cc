@@ -49,19 +49,21 @@ bool FindNodeAnd::accept(const EditorGameBase& egbase, const FCoords& coord) con
 bool FindNodeCaps::accept(const EditorGameBase&, const FCoords& coord) const {
 	NodeCaps nodecaps = coord.field->nodecaps();
 
-	if ((nodecaps & BUILDCAPS_SIZEMASK) < (mincaps & BUILDCAPS_SIZEMASK))
+	if ((nodecaps & BUILDCAPS_SIZEMASK) < (mincaps & BUILDCAPS_SIZEMASK)) {
 		return false;
-
-	if ((mincaps & ~BUILDCAPS_SIZEMASK) & ~(nodecaps & ~BUILDCAPS_SIZEMASK))
+	}
+	if ((mincaps & ~BUILDCAPS_SIZEMASK) & ~(nodecaps & ~BUILDCAPS_SIZEMASK)) {
 		return false;
-
+	}
 	return true;
 }
 
 bool FindNodeSize::accept(const EditorGameBase& egbase, const FCoords& coord) const {
-	if (BaseImmovable const* const immovable = coord.field->get_immovable())
-		if (immovable->get_size() > BaseImmovable::NONE)
+	if (BaseImmovable const* const immovable = coord.field->get_immovable()) {
+		if (immovable->get_size() > BaseImmovable::NONE) {
 			return false;
+		}
+	}
 	NodeCaps const nodecaps = coord.field->nodecaps();
 	const Map& map = egbase.map();
 
@@ -100,8 +102,9 @@ bool FindNodeTerraform::accept(const EditorGameBase& egbase, const FCoords& coor
 bool FindNodeImmovableSize::accept(const EditorGameBase&, const FCoords& coord) const {
 	int32_t size = BaseImmovable::NONE;
 
-	if (BaseImmovable* const imm = coord.field->get_immovable())
+	if (BaseImmovable* const imm = coord.field->get_immovable()) {
 		size = imm->get_size();
+	}
 
 	switch (size) {
 	case BaseImmovable::NONE:
@@ -118,8 +121,9 @@ bool FindNodeImmovableSize::accept(const EditorGameBase&, const FCoords& coord) 
 }
 
 bool FindNodeImmovableAttribute::accept(const EditorGameBase&, const FCoords& coord) const {
-	if (BaseImmovable* const imm = coord.field->get_immovable())
+	if (BaseImmovable* const imm = coord.field->get_immovable()) {
 		return imm->has_attribute(attribute);
+	}
 	return false;
 }
 
@@ -168,8 +172,9 @@ bool FindNodeResourceBreedable::accept(const EditorGameBase& egbase, const FCoor
 }
 
 bool FindNodeShore::accept(const EditorGameBase& egbase, const FCoords& coords) const {
-	if (!(coords.field->nodecaps() & MOVECAPS_WALK))
+	if (!(coords.field->nodecaps() & MOVECAPS_WALK)) {
 		return false;
+	}
 
 	// Vector of fields whose neighbours are to be checked, starting with current one
 	std::vector<FCoords> nodes_to_process = {coords};
