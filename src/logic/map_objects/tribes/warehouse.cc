@@ -95,27 +95,31 @@ bool Warehouse::AttackTarget::can_be_attacked() const {
 }
 
 void Warehouse::AttackTarget::enemy_soldier_approaches(const Soldier& enemy) const {
-	if (!warehouse_->descr().get_conquers())
+	if (!warehouse_->descr().get_conquers()) {
 		return;
+	}
 
 	Player* owner = warehouse_->get_owner();
 	Game& game = dynamic_cast<Game&>(owner->egbase());
 	const Map& map = game.map();
 	if (enemy.get_owner() == owner || enemy.get_battle() ||
 	    warehouse_->descr().get_conquers() <=
-	       map.calc_distance(enemy.get_position(), warehouse_->get_position()))
+	       map.calc_distance(enemy.get_position(), warehouse_->get_position())) {
 		return;
+	}
 
 	if (map.find_bobs(game,
 	                  Area<FCoords>(map.get_fcoords(warehouse_->base_flag().get_position()), 2),
-	                  nullptr, FindBobEnemySoldier(owner)))
+	                  nullptr, FindBobEnemySoldier(owner))) {
 		return;
+	}
 
 	DescriptionIndex const soldier_index = owner->tribe().soldier();
 	Requirements noreq;
 
-	if (!warehouse_->count_workers(game, soldier_index, noreq, Match::kCompatible))
+	if (!warehouse_->count_workers(game, soldier_index, noreq, Match::kCompatible)) {
 		return;
+	}
 
 	Soldier& defender =
 	   dynamic_cast<Soldier&>(warehouse_->launch_worker(game, soldier_index, noreq));
@@ -175,8 +179,9 @@ void WarehouseSupply::set_nrworkers(DescriptionIndex const i) {
 
 /// Add and remove our wares and the Supply to the economies as necessary.
 void WarehouseSupply::set_economy(Economy* const e, WareWorker type) {
-	if (e == (type == wwWARE ? ware_economy_ : worker_economy_))
+	if (e == (type == wwWARE ? ware_economy_ : worker_economy_)) {
 		return;
+	}
 
 	if (Economy* ec = (type == wwWARE ? ware_economy_ : worker_economy_)) {
 		ec->remove_supply(*this);
@@ -223,8 +228,9 @@ void WarehouseSupply::set_economy(Economy* const e, WareWorker type) {
 
 /// Add wares and update the economy.
 void WarehouseSupply::add_wares(DescriptionIndex const id, Quantity const count) {
-	if (!count)
+	if (!count) {
 		return;
+	}
 
 	if (ware_economy_) {  // No economies in the editor
 		ware_economy_->add_wares_or_workers(id, count, worker_economy_);
@@ -234,8 +240,9 @@ void WarehouseSupply::add_wares(DescriptionIndex const id, Quantity const count)
 
 /// Remove wares and update the economy.
 void WarehouseSupply::remove_wares(DescriptionIndex const id, uint32_t const count) {
-	if (!count)
+	if (!count) {
 		return;
+	}
 
 	wares_.remove(id, count);
 	if (ware_economy_) {  // No economies in the editor
@@ -245,8 +252,9 @@ void WarehouseSupply::remove_wares(DescriptionIndex const id, uint32_t const cou
 
 /// Add workers and update the economy.
 void WarehouseSupply::add_workers(DescriptionIndex const id, uint32_t const count) {
-	if (!count)
+	if (!count) {
 		return;
+	}
 
 	if (worker_economy_) {  // No economies in the editor
 		worker_economy_->add_wares_or_workers(id, count, ware_economy_);
@@ -259,8 +267,9 @@ void WarehouseSupply::add_workers(DescriptionIndex const id, uint32_t const coun
  * Comments see add_workers
  */
 void WarehouseSupply::remove_workers(DescriptionIndex const id, uint32_t const count) {
-	if (!count)
+	if (!count) {
 		return;
+	}
 
 	workers_.remove(id, count);
 	if (worker_economy_) {  // No economies in the editor
@@ -311,17 +320,20 @@ uint32_t WarehouseSupply::nr_supplies(const Game& game, const Request& req) cons
 	int32_t const y = x + (req.get_priority(0) / 100) -
 	                  (warehouse_->get_priority(wwWARE, req.get_index()) / 100) - 1;
 	// But the number should never be higher than the number of wares available
-	if (y > x)
+	if (y > x) {
 		return x;
+	}
 	return (x > 0) ? x : 0;
 }
 
 /// Launch a ware.
 WareInstance& WarehouseSupply::launch_ware(Game& game, const Request& req) {
-	if (req.get_type() != wwWARE)
+	if (req.get_type() != wwWARE) {
 		throw wexception("WarehouseSupply::launch_ware: called for non-ware request");
-	if (!wares_.stock(req.get_index()))
+	}
+	if (!wares_.stock(req.get_index())) {
 		throw wexception("WarehouseSupply::launch_ware: called for non-existing ware");
+	}
 
 	return warehouse_->launch_ware(game, req.get_index());
 }
@@ -403,8 +415,9 @@ int Warehouse::SoldierControl::outcorporate_soldier(Soldier& soldier) {
 		warehouse_->supply_->remove_workers(soldier_index, 1);
 	}
 #ifndef NDEBUG
-	else
+	else {
 		throw wexception("outcorporate_soldier: soldier not in this warehouse!");
+	}
 #endif
 	return 0;
 }
@@ -471,13 +484,15 @@ bool Warehouse::load_finish_planned_worker(PlannedWorkers& pw) {
 		}
 
 		if (idx < pw.requests.size()) {
-			if (pw.requests[idx]->get_type() == type && pw.requests[idx]->get_index() == wareindex)
+			if (pw.requests[idx]->get_type() == type && pw.requests[idx]->get_index() == wareindex) {
 				continue;
+			}
 
 			std::vector<Request*>::iterator req_it = pw.requests.begin() + idx + 1;
 			while (req_it != pw.requests.end()) {
-				if ((*req_it)->get_type() == type && (*req_it)->get_index() == wareindex)
+				if ((*req_it)->get_type() == type && (*req_it)->get_index() == wareindex) {
 					break;
+				}
 				++req_it;
 			}
 
@@ -725,11 +740,12 @@ void Warehouse::cleanup(EditorGameBase& egbase) {
 	}
 
 	const Map& map = egbase.map();
-	if (const uint32_t conquer_radius = descr().get_conquers())
+	if (const uint32_t conquer_radius = descr().get_conquers()) {
 		egbase.unconquer_area(
 		   PlayerArea<Area<FCoords>>(owner().player_number(),
 		                             Area<FCoords>(map.get_fcoords(get_position()), conquer_radius)),
 		   defeating_player_);
+	}
 
 	// Unsee the area that we started seeing in init()
 	get_owner()->unsee_area(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
@@ -749,7 +765,7 @@ void Warehouse::act(Game& game, uint32_t const data) {
 	{
 		const std::vector<DescriptionIndex>& worker_types_without_cost =
 		   owner().tribe().worker_types_without_cost();
-		for (size_t i = worker_types_without_cost.size(); i;)
+		for (size_t i = worker_types_without_cost.size(); i;) {
 			if (next_worker_without_cost_spawn_[--i] <= gametime) {
 				DescriptionIndex const id = worker_types_without_cost.at(i);
 				if (owner().is_worker_type_allowed(id)) {
@@ -761,15 +777,18 @@ void Warehouse::act(Game& game, uint32_t const data) {
 						insert_workers(id, 1);
 					} else if (stock > 100) {
 						tdelta -= 4 * (stock - 100);
-						if (tdelta < 10)
+						if (tdelta < 10) {
 							tdelta = 10;
+						}
 						remove_workers(id, 1);
 					}
 
 					next_worker_without_cost_spawn_[i] = schedule_act(game, tdelta);
-				} else
+				} else {
 					next_worker_without_cost_spawn_[i] = never();
+				}
 			}
+		}
 	}
 
 	//  Military stuff: Kill the soldiers that are dead.
@@ -822,11 +841,13 @@ void Warehouse::act(Game& game, uint32_t const data) {
 void Warehouse::set_economy(Economy* const e, WareWorker type) {
 	Economy* const old = get_economy(type);
 
-	if (old == e)
+	if (old == e) {
 		return;
+	}
 
-	if (old)
+	if (old) {
 		old->remove_warehouse(*this);
+	}
 
 	if (portdock_) {
 		portdock_->set_economy(e, type);
@@ -842,8 +863,9 @@ void Warehouse::set_economy(Economy* const e, WareWorker type) {
 		}
 	}
 
-	if (e)
+	if (e) {
 		e->add_warehouse(*this);
+	}
 }
 
 const WareList& Warehouse::get_wares() const {
@@ -991,8 +1013,9 @@ void Warehouse::incorporate_worker(EditorGameBase& egbase, Worker* w) {
 	assert(w != nullptr);
 	assert(w->get_owner() == get_owner());
 
-	if (WareInstance* ware = w->fetch_carried_ware(egbase))
+	if (WareInstance* ware = w->fetch_carried_ware(egbase)) {
 		incorporate_ware(egbase, ware);
+	}
 
 	DescriptionIndex worker_index = owner().tribe().worker_index(w->descr().name().c_str());
 
@@ -1012,8 +1035,9 @@ void Warehouse::incorporate_worker(EditorGameBase& egbase, Worker* w) {
 	}
 
 	// Incorporate the worker
-	if (!incorporated_workers_.count(worker_index))
+	if (!incorporated_workers_.count(worker_index)) {
 		incorporated_workers_[worker_index] = std::vector<Worker*>();
+	}
 	incorporated_workers_[worker_index].push_back(w);
 
 	w->set_location(nullptr);  //  no longer in an economy
@@ -1101,9 +1125,10 @@ Building& WarehouseDescr::create_object() const {
 bool Warehouse::can_create_worker(Game&, DescriptionIndex const worker) const {
 	assert(owner().tribe().has_worker(worker));
 
-	if (!(worker < supply_->get_workers().get_nrwareids()))
+	if (!(worker < supply_->get_workers().get_nrwareids())) {
 		throw wexception("worker type %d does not exists (max is %d)", worker,
 		                 supply_->get_workers().get_nrwareids());
+	}
 
 	const WorkerDescr& w_desc = *owner().tribe().get_worker_descr(worker);
 	assert(&w_desc);
@@ -1125,11 +1150,12 @@ bool Warehouse::can_create_worker(Game&, DescriptionIndex const worker) const {
 				if (supply_->stock_workers(id_w) < buildcost.second) {
 					return false;
 				}
-			} else
+			} else {
 				throw wexception("worker type %s needs \"%s\" to be built but that is neither "
 				                 "a ware type nor a worker type defined in the tribe %s",
 				                 w_desc.name().c_str(), input_name.c_str(),
 				                 owner().tribe().name().c_str());
+			}
 		}
 	}
 	return true;
@@ -1147,8 +1173,9 @@ void Warehouse::create_worker(Game& game, DescriptionIndex const worker) {
 			remove_wares(id_ware, buildcost.second);
 			// Update statistics accordingly
 			get_owner()->ware_consumed(id_ware, buildcost.second);
-		} else
+		} else {
 			remove_workers(owner().tribe().safe_worker_index(input), buildcost.second);
+		}
 	}
 
 	incorporate_worker(game, &w_desc.create(game, get_owner(), this, position_));
@@ -1158,8 +1185,9 @@ void Warehouse::create_worker(Game& game, DescriptionIndex const worker) {
 	// Do not update anything else about PlannedWorkers here, because this
 	// function is called by update_planned_workers, so avoid recursion
 	for (PlannedWorkers& planned_worker : planned_workers_) {
-		if (planned_worker.index == worker && planned_worker.amount)
+		if (planned_worker.index == worker && planned_worker.amount) {
 			planned_worker.amount--;
+		}
 	}
 }
 
@@ -1169,8 +1197,9 @@ void Warehouse::create_worker(Game& game, DescriptionIndex const worker) {
  */
 Quantity Warehouse::get_planned_workers(Game& /* game */, DescriptionIndex index) const {
 	for (const PlannedWorkers& pw : planned_workers_) {
-		if (pw.index == index)
+		if (pw.index == index) {
 			return pw.amount;
+		}
 	}
 	return 0;
 }
@@ -1195,9 +1224,10 @@ std::vector<Quantity> Warehouse::calc_available_for_worker(Game& /* game */,
 			id_w = owner().tribe().worker_index(input_name);
 			if (owner().tribe().has_worker(id_w)) {
 				available.push_back(get_workers().stock(id_w));
-			} else
+			} else {
 				throw wexception("Economy::create_requested_worker: buildcost inconsistency '%s'",
 				                 input_name.c_str());
+			}
 		}
 	}
 
@@ -1229,8 +1259,9 @@ void Warehouse::plan_workers(Game& game, DescriptionIndex index, Quantity amount
 	}
 
 	if (!pw) {
-		if (!amount)
+		if (!amount) {
 			return;
+		}
 
 		planned_workers_.push_back(PlannedWorkers());
 		pw = &planned_workers_.back();
@@ -1248,8 +1279,9 @@ void Warehouse::plan_workers(Game& game, DescriptionIndex index, Quantity amount
 				id_w = owner().tribe().worker_index(input_name);
 				if (owner().tribe().has_worker(id_w)) {
 					pw->requests.push_back(new Request(*this, id_w, &Warehouse::request_cb, wwWORKER));
-				} else
+				} else {
 					throw wexception("plan_workers: bad buildcost '%s'", input_name.c_str());
+				}
 			}
 		}
 	}
@@ -1282,13 +1314,15 @@ void Warehouse::update_planned_workers(Game& game, Warehouse::PlannedWorkers& pw
 			id_w = owner().tribe().worker_index(input_name);
 			if (owner().tribe().has_worker(id_w)) {
 				supply = supply_->stock_workers(id_w);
-			} else
+			} else {
 				throw wexception("update_planned_workers: bad buildcost '%s'", input_name.c_str());
+			}
 		}
-		if (supply >= pw.amount * buildcost.second)
+		if (supply >= pw.amount * buildcost.second) {
 			pw.requests[idx]->set_count(0);
-		else
+		} else {
 			pw.requests[idx]->set_count(pw.amount * buildcost.second - supply);
+		}
 		++idx;
 	}
 
@@ -1342,10 +1376,11 @@ StockPolicy Warehouse::get_worker_policy(DescriptionIndex ware) const {
 }
 
 StockPolicy Warehouse::get_stock_policy(WareWorker waretype, DescriptionIndex wareindex) const {
-	if (waretype == wwWORKER)
+	if (waretype == wwWORKER) {
 		return get_worker_policy(wareindex);
-	else
+	} else {
 		return get_ware_policy(wareindex);
+	}
 }
 
 void Warehouse::set_ware_policy(DescriptionIndex ware, StockPolicy policy) {
@@ -1366,8 +1401,9 @@ void Warehouse::check_remove_stock(Game& game) {
 	if (base_flag().current_wares() < base_flag().total_capacity() / 2) {
 		for (DescriptionIndex ware = 0; ware < static_cast<DescriptionIndex>(ware_policy_.size());
 		     ++ware) {
-			if (get_ware_policy(ware) != StockPolicy::kRemove || !get_wares().stock(ware))
+			if (get_ware_policy(ware) != StockPolicy::kRemove || !get_wares().stock(ware)) {
 				continue;
+			}
 
 			launch_ware(game, ware);
 			break;
@@ -1376,8 +1412,9 @@ void Warehouse::check_remove_stock(Game& game) {
 
 	for (DescriptionIndex widx = 0; widx < static_cast<DescriptionIndex>(worker_policy_.size());
 	     ++widx) {
-		if (get_worker_policy(widx) != StockPolicy::kRemove || !get_workers().stock(widx))
+		if (get_worker_policy(widx) != StockPolicy::kRemove || !get_workers().stock(widx)) {
 			continue;
+		}
 
 		Worker& worker = launch_worker(game, widx, Requirements());
 		worker.start_task_leavebuilding(game, true);

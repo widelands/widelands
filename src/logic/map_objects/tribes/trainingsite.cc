@@ -284,15 +284,17 @@ void TrainingSite::SoldierControl::drop_soldier(Soldier& soldier) {
 
 int TrainingSite::SoldierControl::incorporate_soldier(EditorGameBase& egbase, Soldier& s) {
 	if (s.get_location(egbase) != training_site_) {
-		if (stationed_soldiers().size() + 1 > training_site_->descr().get_max_number_of_soldiers())
+		if (stationed_soldiers().size() + 1 > training_site_->descr().get_max_number_of_soldiers()) {
 			return -1;
+		}
 
 		s.set_location(training_site_);
 	}
 
 	// Bind the worker into this house, hide him on the map
-	if (upcast(Game, game, &egbase))
+	if (upcast(Game, game, &egbase)) {
 		s.start_task_idle(*game, 0, -1);
+	}
 
 	// Make sure the request count is reduced or the request is deleted.
 
@@ -335,19 +337,24 @@ TrainingSite::TrainingSite(const TrainingSiteDescr& d)
 	repeated_layoff_inc_ = false;
 	recent_capacity_increase_ = false;
 
-	if (d.get_train_health())
+	if (d.get_train_health()) {
 		init_kick_state(TrainingAttribute::kHealth, d);
-	if (d.get_train_attack())
+	}
+	if (d.get_train_attack()) {
 		init_kick_state(TrainingAttribute::kAttack, d);
-	if (d.get_train_defense())
+	}
+	if (d.get_train_defense()) {
 		init_kick_state(TrainingAttribute::kDefense, d);
-	if (d.get_train_evade())
+	}
+	if (d.get_train_evade()) {
 		init_kick_state(TrainingAttribute::kEvade, d);
+	}
 }
 void TrainingSite::init_kick_state(const TrainingAttribute& art, const TrainingSiteDescr& d) {
 	// Now with kick-out state saving implemented, initializing is an overkill
-	for (int t = d.get_min_level(art); t <= d.get_max_level(art); t++)
+	for (int t = d.get_min_level(art); t <= d.get_max_level(art); t++) {
 		training_attempted(art, t);
+	}
 }
 
 /**
@@ -379,8 +386,9 @@ bool TrainingSite::init(EditorGameBase& egbase) {
 void TrainingSite::set_economy(Economy* e, WareWorker type) {
 	ProductionSite::set_economy(e, type);
 
-	if (soldier_request_ && type == soldier_request_->get_type())
+	if (soldier_request_ && type == soldier_request_->get_type()) {
 		soldier_request_->set_economy(e);
+	}
 }
 
 /**
@@ -401,11 +409,13 @@ void TrainingSite::add_worker(Worker& w) {
 	if (upcast(Soldier, soldier, &w)) {
 		// Note that the given Soldier might already be in the array
 		// for loadgames.
-		if (std::find(soldiers_.begin(), soldiers_.end(), soldier) == soldiers_.end())
+		if (std::find(soldiers_.begin(), soldiers_.end(), soldier) == soldiers_.end()) {
 			soldiers_.push_back(soldier);
+		}
 
-		if (upcast(Game, game, &get_owner()->egbase()))
+		if (upcast(Game, game, &get_owner()->egbase())) {
 			schedule_act(*game, 100);
+		}
 	}
 }
 
@@ -418,8 +428,9 @@ void TrainingSite::remove_worker(Worker& w) {
 		if (it != soldiers_.end()) {
 			soldiers_.erase(it);
 
-			if (game)
+			if (game) {
 				schedule_act(*game, 100);
+			}
 		}
 	}
 
@@ -676,12 +687,14 @@ void TrainingSite::drop_unupgradable_soldiers(Game&) {
 		std::vector<Upgrade>::iterator it = upgrades_.begin();
 		for (; it != upgrades_.end(); ++it) {
 			int32_t level = soldiers_[i]->get_level(it->attribute);
-			if (level >= it->min && level <= it->max)
+			if (level >= it->min && level <= it->max) {
 				break;
+			}
 		}
 
-		if (it == upgrades_.end())
+		if (it == upgrades_.end()) {
 			droplist.push_back(soldiers_[i]);
+		}
 	}
 
 	// Drop soldiers only now, so that changes in the soldiers array don't
@@ -852,10 +865,12 @@ void TrainingSite::find_and_start_next_program(Game& game) {
 				return start_upgrade(game, upgrade);
 			}
 
-			if (maxprio < upgrade.prio)
+			if (maxprio < upgrade.prio) {
 				maxprio = upgrade.prio;
-			if (maxcredit < upgrade.credit)
+			}
+			if (maxcredit < upgrade.credit) {
 				maxcredit = upgrade.credit;
+			}
 		}
 
 		if (maxprio == 0) {
@@ -881,38 +896,45 @@ void TrainingSite::start_upgrade(Game& game, Upgrade& upgrade) {
 	for (Soldier* soldier : soldiers_) {
 		int32_t const level = soldier->get_level(upgrade.attribute);
 
-		if (level > upgrade.max || level < upgrade.min)
+		if (level > upgrade.max || level < upgrade.min) {
 			continue;
-		if (level < minlevel)
+		}
+		if (level < minlevel) {
 			minlevel = level;
-		if (level > maxlevel)
+		}
+		if (level > maxlevel) {
 			maxlevel = level;
+		}
 	}
 
-	if (minlevel > maxlevel)
+	if (minlevel > maxlevel) {
 		return program_start(game, "sleep");
+	}
 
 	int32_t level;
 
 	if (upgrade.lastsuccess || upgrade.lastattempt < 0) {
 		// Start greedily on the first ever attempt, and restart greedily
 		// after a sucessful upgrade
-		if (build_heroes_)
+		if (build_heroes_) {
 			level = maxlevel;
-		else
+		} else {
 			level = minlevel;
+		}
 	} else {
 		// The last attempt wasn't successful;
 		// This happens e.g. when lots of low-level soldiers are present,
 		// but the prerequisites for improving them aren't.
 		if (build_heroes_) {
 			level = upgrade.lastattempt - 1;
-			if (level < minlevel)
+			if (level < minlevel) {
 				level = maxlevel;
+			}
 		} else {
 			level = upgrade.lastattempt + 1;
-			if (level > maxlevel)
+			if (level > maxlevel) {
 				level = minlevel;
+			}
 		}
 	}
 
@@ -948,8 +970,9 @@ int32_t TrainingSite::get_pri(TrainingAttribute atr) {
  * Sets the priority of given attribute
  */
 void TrainingSite::set_pri(TrainingAttribute atr, int32_t prio) {
-	if (prio < 0)
+	if (prio < 0) {
 		prio = 0;
+	}
 
 	for (Upgrade& upgrade : upgrades_) {
 		if (upgrade.attribute == atr) {
@@ -984,22 +1007,27 @@ void TrainingSite::calc_upgrades() {
 
 	//  TODO(unknown): This is currently hardcoded for "soldier" but it should allow any
 	//  soldier type name.
-	if (descr().get_train_health())
+	if (descr().get_train_health()) {
 		add_upgrade(TrainingAttribute::kHealth, "upgrade_soldier_health_");
-	if (descr().get_train_attack())
+	}
+	if (descr().get_train_attack()) {
 		add_upgrade(TrainingAttribute::kAttack, "upgrade_soldier_attack_");
-	if (descr().get_train_defense())
+	}
+	if (descr().get_train_defense()) {
 		add_upgrade(TrainingAttribute::kDefense, "upgrade_soldier_defense_");
-	if (descr().get_train_evade())
+	}
+	if (descr().get_train_evade()) {
 		add_upgrade(TrainingAttribute::kEvade, "upgrade_soldier_evade_");
+	}
 }
 
 void TrainingSite::training_attempted(TrainingAttribute type, uint32_t level) {
 	TypeAndLevel key(type, level);
-	if (training_failure_count_.find(key) == training_failure_count_.end())
+	if (training_failure_count_.find(key) == training_failure_count_.end()) {
 		training_failure_count_[key] = std::make_pair(training_state_multiplier_, 0);
-	else
+	} else {
 		training_failure_count_[key].first += training_state_multiplier_;
+	}
 }
 
 /**
