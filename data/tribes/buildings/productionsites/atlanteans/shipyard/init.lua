@@ -58,10 +58,6 @@ tribes:new_productionsite_type {
       { name = "spidercloth", amount = 4 }
    },
 
-   indicate_workarea_overlaps = {
-      atlanteans_shipyard = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

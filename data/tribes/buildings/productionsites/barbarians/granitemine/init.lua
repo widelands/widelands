@@ -46,10 +46,6 @@ tribes:new_productionsite_type {
       barbarians_miner = 1
    },
 
-   indicate_workarea_overlaps = {
-      barbarians_granitemine = false,
-   },
-
    inputs = {
       { name = "ration", amount = 8 }
    },

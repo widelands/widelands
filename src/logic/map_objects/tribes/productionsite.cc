@@ -208,25 +208,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 	}
 
 	if (table.has_key("indicate_workarea_overlaps")) {
-		items_table = table.get_table("indicate_workarea_overlaps");
-		for (const std::string& s : items_table->keys<std::string>()) {
-			if (highlight_overlapping_workarea_for_.find(s) !=
-			    highlight_overlapping_workarea_for_.end()) {
-				throw wexception("indicate_workarea_overlaps has duplicate entry");
-			}
-			highlight_overlapping_workarea_for_.emplace(s, items_table->get_bool(s));
-		}
-	}
-	if (workarea_info().empty() ^ highlight_overlapping_workarea_for_.empty()) {
-		if (highlight_overlapping_workarea_for_.empty()) {
-			log("WARNING: Productionsite %s has a workarea but does not inform about any conflicting "
-			    "buildings\n",
-			    name().c_str());
-		} else {
-			throw GameDataError(
-			   "Productionsite %s without a workarea must not inform about conflicting buildings",
-			   name().c_str());
-		}
+		log("WARNING: The \"indicate_workarea_overlaps\" table in %s has been deprecated and can be removed.\n", name().c_str());
 	}
 
 	// Verify that any map resource collected is valid
@@ -270,6 +252,15 @@ const ProductionProgram* ProductionSiteDescr::get_program(const std::string& pro
 	if (it == programs_.end())
 		throw wexception("%s has no program '%s'", name().c_str(), program_name.c_str());
 	return it->second.get();
+}
+
+void ProductionSiteDescr::set_highlight_overlapping_workarea_for(const std::string& productionsite, bool en_or_discourage) {
+#ifndef NDEBUG
+	if (highlight_overlapping_workarea_for_.count(productionsite) == 1) {
+		assert(highlight_overlapping_workarea_for_.at(productionsite) == en_or_discourage);
+	}
+#endif
+	highlight_overlapping_workarea_for_[productionsite] = en_or_discourage;
 }
 
 /**

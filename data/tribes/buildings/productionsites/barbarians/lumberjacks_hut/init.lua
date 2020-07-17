@@ -44,11 +44,6 @@ tribes:new_productionsite_type {
       "log"
    },
 
-   indicate_workarea_overlaps = {
-      barbarians_rangers_hut = true,
-      barbarians_lumberjacks_hut = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start felling trees because ...

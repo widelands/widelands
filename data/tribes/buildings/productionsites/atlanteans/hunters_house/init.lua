@@ -38,10 +38,6 @@ tribes:new_productionsite_type {
       "meat"
    },
 
-   indicate_workarea_overlaps = {
-      atlanteans_hunters_house = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...

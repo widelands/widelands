@@ -666,23 +666,43 @@ void TribeDescr::process_productionsites(const World& world) {
 		}
 	}
 
-	// Find entities that are created
+	// Register who creates which entities
+	std::map<std::string, std::set<ProductionSiteDescr*>> creators;
+	auto add_creator = [&creators](const std::string& item, ProductionSiteDescr* productionsite) {
+		if (creators.count(item) != 1) {
+			creators[item] = {productionsite};
+		} else {
+			creators[item].insert(productionsite);
+		}
+	};
+
+	// Register who collects which entities
+	std::map<std::string, std::set<ProductionSiteDescr*>> collectors;
+	auto add_collector = [&collectors](const std::string& item, ProductionSiteDescr* productionsite) {
+		if (collectors.count(item) != 1) {
+			collectors[item] = {productionsite};
+		} else {
+			collectors[item].insert(productionsite);
+		}
+	};
+
+
 	for (ProductionSiteDescr* prod : productionsites) {
+
 		// Add attributes for bobs that are created directly
 		for (const std::string& bobname : prod->created_bobs()) {
+			add_creator(bobname, prod);
 			const CritterDescr* critter = world.get_critter_descr(bobname);
 			if (critter != nullptr) {
 				for (const std::string& critter_attribute : critter->attribute_names()) {
 					if (needed_attributes.count(critter_attribute) == 1) {
 						prod->add_created_attribute("bob", critter_attribute);
-						//log("NOCOM %s creates bob - %s\n", prod->name().c_str(), critter_attribute.c_str());
 					}
 				}
 			} else {
 				throw GameDataError("Productionsite '%s' has unknown critter '%s' in production or worker program",
 									prod->name().c_str(), bobname.c_str());
 			}
-			// log("NOCOM %s creates bob - %s\n", prod->name().c_str(), bobname.c_str());
 		}
 
 		// Get attributes and bobs from transformations
@@ -698,7 +718,6 @@ void TribeDescr::process_productionsites(const World& world) {
 			// NOCOM ferries
 			const std::string& mapobjecttype = attribinfo.first;
 			const std::string& attribute_name = attribinfo.second;
-			//log("NOCOM %s creates %s - %s\n", prod->name().c_str(), mapobjecttype.c_str(), attribute_name.c_str());
 			if (mapobjecttype == "immovable") {
 				for (DescriptionIndex i = 0; i < world_immovables.size(); ++i) {
 					const ImmovableDescr& immovable_descr = world_immovables.get(i);
@@ -706,16 +725,17 @@ void TribeDescr::process_productionsites(const World& world) {
 						walk_world_immovables(i, world, &walked_world_immovables, needed_attributes, &deduced_immovable_attribs, &deduced_immovables, &deduced_bobs);
 						if (needed_attributes.count(attribute_name) == 1) {
 							prod->add_created_immovable(immovable_descr.name());
+							add_creator(immovable_descr.name(), prod);
 						}
 					}
 				}
 				for (const DescriptionIndex i : immovables()) {
 					const ImmovableDescr& immovable_descr = *get_immovable_descr(i);
 					if (immovable_descr.has_attribute(attribute_name)) {
-						// NOCOM log("  imm -> %s\n", immovable_descr.name().c_str());
 						walk_tribe_immovables(i, *this, &walked_tribe_immovables, needed_attributes, &deduced_immovable_attribs, &deduced_immovables, &deduced_bobs);
 						if (needed_attributes.count(attribute_name) == 1) {
 							prod->add_created_immovable(immovable_descr.name());
+							add_creator(immovable_descr.name(), prod);
 						}
 					}
 				}
@@ -733,31 +753,109 @@ void TribeDescr::process_productionsites(const World& world) {
 		}
 		for (const std::string& bob_name : deduced_bobs) {
 			prod->add_created_bob(bob_name);
+			add_creator(bob_name, prod);
 		}
 		for (const std::string& immovable_name : deduced_immovables) {
 			prod->add_created_immovable(immovable_name);
+			add_creator(immovable_name, prod);
 		}
 
-		// Debug log
-		if (!prod->created_attributes().empty() || !prod->collected_resources().empty() || !prod->created_resources().empty() || !prod->collected_attributes().empty() || !prod->created_bobs().empty()) {
-			log("NOCOM %s\n", prod->name().c_str());
+		// Register remaining creators and collectors
+		for (const std::string& resource : prod->created_resources()) {
+			add_creator(resource, prod);
 		}
-		for (const auto& attribinfo : prod->created_attributes()) {
-			log("  --> attr:%s - %s\n", attribinfo.first.c_str(), attribinfo.second.c_str());
+		for (const std::string& resource : prod->collected_resources()) {
+			add_collector(resource, prod);
 		}
-		/*
-		for (const std::string& resourceinfo : prod->created_resources()) {
-			log("  --> resource - %s\n", resourceinfo.c_str());
+		for (const std::string& bob : prod->collected_bobs()) {
+			add_collector(bob, prod);
 		}
-		for (const std::string& bobname : prod->created_bobs()) {
-			log("  --> bob - %s\n", bobname.c_str());
+		for (const std::string& immovable : prod->collected_immovables()) {
+			add_collector(immovable, prod);
 		}
-		for (const auto& attribinfo : prod->collected_attributes()) {
-			log("  <-- attr:%s - %s\n", attribinfo.first.c_str(), attribinfo.second.c_str());
+	}
+
+	// Calculate workarea overlaps
+	// NOCOM ferries broken, needs the worker program refactoring first
+	for (ProductionSiteDescr* prod : productionsites) {
+		// Sites that create any immovables should not overlap each other
+		if (!prod->created_immovables().empty()) {
+			for (const ProductionSiteDescr* other_prod : productionsites) {
+				if (!other_prod->created_immovables().empty()) {
+					prod->set_highlight_overlapping_workarea_for(other_prod->name(), false);
+				}
+			}
 		}
-		for (const std::string& resourceinfo : prod->collected_resources()) {
-			log("  <-- resource - %s\n", resourceinfo.c_str());
-		} */
+		// Sites that create any resources should not overlap each other
+		if (!prod->created_resources().empty()) {
+			for (const ProductionSiteDescr* other_prod : productionsites) {
+				if (!other_prod->created_resources().empty()) {
+					prod->set_highlight_overlapping_workarea_for(other_prod->name(), false);
+				}
+			}
+		}
+
+		// Sites that create a bob should not overlap sites that create the same bob
+		for (const auto& item : prod->created_bobs()) {
+			if (creators.count(item)) {
+				for (ProductionSiteDescr* creator : creators.at(item)) {
+					prod->set_highlight_overlapping_workarea_for(creator->name(), false);
+					creator->set_highlight_overlapping_workarea_for(prod->name(), false);
+				}
+			}
+		}
+
+		for (const auto& item : prod->collected_immovables()) {
+			// Sites that collect immovables and sites of other types that create immovables for them should overlap each other
+			if (creators.count(item)) {
+				for (ProductionSiteDescr* creator: creators.at(item)) {
+					if (creator != prod) {
+						prod->set_highlight_overlapping_workarea_for(creator->name(), true);
+						creator->set_highlight_overlapping_workarea_for(prod->name(), true);
+					}
+				}
+			}
+			// Sites that collect immovables should not overlap sites that collect the same immovable
+			if (collectors.count(item)) {
+				for (const ProductionSiteDescr* collector: collectors.at(item)) {
+					prod->set_highlight_overlapping_workarea_for(collector->name(), false);
+				}
+			}
+		}
+		for (const auto& item : prod->collected_bobs()) {
+			// Sites that collect bobs and sites of other types that create bobs for them should overlap each other
+			if (creators.count(item)) {
+				for (ProductionSiteDescr* creator: creators.at(item)) {
+					if (creator != prod) {
+						prod->set_highlight_overlapping_workarea_for(creator->name(), true);
+						creator->set_highlight_overlapping_workarea_for(prod->name(), true);
+					}
+				}
+			}
+			// Sites that collect bobs should not overlap sites that collect the same bob
+			if (collectors.count(item)) {
+				for (const ProductionSiteDescr* collector: collectors.at(item)) {
+					prod->set_highlight_overlapping_workarea_for(collector->name(), true);
+				}
+			}
+		}
+		for (const auto& item : prod->collected_resources()) {
+			// Sites that collect resources and sites of other types that create resources for them should overlap each other
+			if (creators.count(item)) {
+				for (ProductionSiteDescr* creator: creators.at(item)) {
+					if (creator != prod) {
+						prod->set_highlight_overlapping_workarea_for(creator->name(), true);
+						creator->set_highlight_overlapping_workarea_for(prod->name(), true);
+					}
+				}
+			}
+			// Sites that collect resources should not overlap sites that collect the same resource
+			if (collectors.count(item)) {
+				for (const ProductionSiteDescr* collector: collectors.at(item)) {
+					prod->set_highlight_overlapping_workarea_for(collector->name(), true);
+				}
+			}
+		}
 	}
 }
 }  // namespace Widelands

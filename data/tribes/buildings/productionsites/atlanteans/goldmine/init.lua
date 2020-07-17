@@ -52,10 +52,6 @@ tribes:new_productionsite_type {
       "gold_ore"
    },
 
-   indicate_workarea_overlaps = {
-      atlanteans_goldmine = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining gold because ...

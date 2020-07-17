@@ -54,10 +54,6 @@ tribes:new_productionsite_type {
       "granite"
    },
 
-   indicate_workarea_overlaps = {
-      atlanteans_crystalmine = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

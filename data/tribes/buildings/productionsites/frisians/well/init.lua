@@ -51,10 +51,6 @@ tribes:new_productionsite_type {
       "water"
    },
 
-   indicate_workarea_overlaps = {
-      frisians_well = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

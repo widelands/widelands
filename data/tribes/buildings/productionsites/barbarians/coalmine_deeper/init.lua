@@ -47,12 +47,6 @@ tribes:new_productionsite_type {
       barbarians_miner_master = 1,
    },
 
-   indicate_workarea_overlaps = {
-      barbarians_coalmine = false,
-      barbarians_coalmine_deep = false,
-      barbarians_coalmine_deeper = false,
-   },
-
    inputs = {
       { name = "meal", amount = 6 }
    },

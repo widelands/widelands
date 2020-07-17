@@ -50,11 +50,6 @@ tribes:new_productionsite_type {
       "log"
    },
 
-   indicate_workarea_overlaps = {
-      frisians_foresters_house = true,
-      frisians_woodcutters_house = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start felling trees because ...

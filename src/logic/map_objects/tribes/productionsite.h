@@ -171,8 +171,8 @@ public:
 		return out_of_resource_productivity_threshold_;
 	}
 
-	bool highlight_overlapping_workarea_for(const std::string& n, bool* positive) const {
-		const auto it = highlight_overlapping_workarea_for_.find(n);
+	bool highlight_overlapping_workarea_for(const std::string& name, bool* positive) const {
+		const auto it = highlight_overlapping_workarea_for_.find(name);
 		if (it == highlight_overlapping_workarea_for_.end()) {
 			return false;
 		} else {
@@ -181,9 +181,7 @@ public:
 		}
 	}
 
-	const std::map<std::string, bool>& get_highlight_overlapping_workarea_for() const {
-		return highlight_overlapping_workarea_for_;
-	}
+	void set_highlight_overlapping_workarea_for(const std::string& productionsite, bool en_or_discourage);
 
 protected:
 	void add_collected_attribute(const std::string& object_type, const std::string& resource) {

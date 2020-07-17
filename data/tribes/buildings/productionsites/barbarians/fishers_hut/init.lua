@@ -47,10 +47,6 @@ tribes:new_productionsite_type {
       "fish"
    },
 
-   indicate_workarea_overlaps = {
-      barbarians_fishers_hut = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start fishing because ...

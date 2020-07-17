@@ -54,12 +54,6 @@ tribes:new_productionsite_type {
       "gold_ore"
    },
 
-   indicate_workarea_overlaps = {
-      barbarians_goldmine = false,
-      barbarians_goldmine_deep = false,
-      barbarians_goldmine_deeper = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
