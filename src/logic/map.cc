@@ -1581,7 +1581,8 @@ NodeCaps Map::calc_nodecaps_pass2(const EditorGameBase& egbase,
 			} while (mr.advance(*this));
 		}
 
-		if ((buildsize == BaseImmovable::BIG) && is_port_space(f) && !find_portdock(f, false).empty()) {
+		if ((buildsize == BaseImmovable::BIG) && is_port_space(f) &&
+		    !find_portdock(f, false).empty()) {
 			caps |= BUILDCAPS_PORT;
 		}
 
@@ -1716,7 +1717,8 @@ std::vector<Coords> Map::find_portdock(const Coords& c, bool force) const {
 				return {f};
 			}
 		} else {
-			bool is_good_water = (f.field->get_caps() & (MOVECAPS_SWIM | MOVECAPS_WALK)) == MOVECAPS_SWIM;
+			bool is_good_water =
+			   (f.field->get_caps() & (MOVECAPS_SWIM | MOVECAPS_WALK)) == MOVECAPS_SWIM;
 
 			// Any immovable here? (especially another portdock)
 			if (is_good_water && f.field->get_immovable()) {

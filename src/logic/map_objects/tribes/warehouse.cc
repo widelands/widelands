@@ -627,7 +627,8 @@ void Warehouse::init_portdock(EditorGameBase& egbase) {
 		dock = egbase.map().find_portdock(get_position(), true);
 		if (dock.empty()) {
 			// Better to throw an exception than to risk a segfault…
-			throw wexception("Attempting to create a port dock around %3dx%3d without any water nearby",
+			throw wexception(
+			   "Attempting to create a port dock around %3dx%3d without any water nearby",
 			   get_position().x, get_position().y);
 		}
 
@@ -638,8 +639,7 @@ void Warehouse::init_portdock(EditorGameBase& egbase) {
 			log("Conquering territory at %3dx%3d for portdock\n", dock.back().x, dock.back().y);
 			egbase.conquer_area(
 			   PlayerArea<Area<FCoords>>(
-				  owner().player_number(),
-				  Area<FCoords>(egbase.map().get_fcoords(dock.back()), 1)),
+			      owner().player_number(), Area<FCoords>(egbase.map().get_fcoords(dock.back()), 1)),
 			   true);
 		}
 
@@ -649,8 +649,10 @@ void Warehouse::init_portdock(EditorGameBase& egbase) {
 			// currently only waterways and portdocks can be built on water
 			assert(field.get_immovable()->descr().type() == MapObjectType::WATERWAY);
 			if (upcast(Game, game, &egbase)) {
-				send_message(*game, Message::Type::kSeafaring, descr().descname(), descr().icon_filename(),
-			             descr().descname(), _("A waterway had to be destroyed to make room for your new port dock."), true);
+				send_message(*game, Message::Type::kSeafaring, descr().descname(),
+				             descr().icon_filename(), descr().descname(),
+				             _("A waterway had to be destroyed to make room for your new port dock."),
+				             true);
 			}
 			field.get_immovable()->remove(egbase);
 		}
