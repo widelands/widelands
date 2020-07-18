@@ -1581,8 +1581,9 @@ NodeCaps Map::calc_nodecaps_pass2(const EditorGameBase& egbase,
 			} while (mr.advance(*this));
 		}
 
-		if ((buildsize == BaseImmovable::BIG) && is_port_space(f) && !find_portdock(f).empty())
+		if ((buildsize == BaseImmovable::BIG) && is_port_space(f) && !find_portdock(f, false).empty()) {
 			caps |= BUILDCAPS_PORT;
+		}
 
 		caps |= buildsize;
 	}
@@ -1752,7 +1753,7 @@ std::vector<Coords> Map::find_portdock(const Coords& c, bool force) const {
 
 bool Map::is_port_space_allowed(const EditorGameBase& egbase, const FCoords& fc) const {
 	return (get_max_nodecaps(egbase, fc) & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG &&
-	       !find_portdock(fc).empty();
+	       !find_portdock(fc, false).empty();
 }
 
 /// \returns true, if Coordinates are in port space list
@@ -2455,7 +2456,7 @@ void Map::recalculate_allows_seafaring() {
 		FCoords fc = get_fcoords(c);
 
 		// Get portdock slots for this port
-		for (const Coords& portdock : find_portdock(fc)) {
+		for (const Coords& portdock : find_portdock(fc, false)) {
 			reachable_from_current_port.insert(portdock);
 			positions_to_check.push(portdock);
 		}
