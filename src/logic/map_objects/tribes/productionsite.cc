@@ -254,7 +254,17 @@ const ProductionProgram* ProductionSiteDescr::get_program(const std::string& pro
 	return it->second.get();
 }
 
-void ProductionSiteDescr::set_highlight_overlapping_workarea_for(const std::string& productionsite, bool en_or_discourage) {
+// We use MapObjectDescr instead of ProductionSiteDescr as a parameter to avoid dynamic casts in fieldaction. We only care about the identity anyway.
+bool ProductionSiteDescr::highlight_overlapping_workarea_for(const MapObjectDescr* productionsite, bool* positive) const {
+	const auto it = highlight_overlapping_workarea_for_.find(productionsite);
+	if (it == highlight_overlapping_workarea_for_.end()) {
+		return false;
+	} else {
+		*positive = it->second;
+		return true;
+	}
+}
+void ProductionSiteDescr::set_highlight_overlapping_workarea_for(const MapObjectDescr* productionsite, bool en_or_discourage) {
 #ifndef NDEBUG
 	if (highlight_overlapping_workarea_for_.count(productionsite) == 1) {
 		assert(highlight_overlapping_workarea_for_.at(productionsite) == en_or_discourage);
