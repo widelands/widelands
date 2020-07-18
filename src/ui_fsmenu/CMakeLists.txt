@@ -99,14 +99,14 @@ wl_library(ui_fsmenu_gameloading
     loadgame.h
     mapdetailsbox.cc
     mapdetailsbox.h
-	multiplayersetupgroup.cc
-	multiplayersetupgroup.h
+    multiplayersetupgroup.cc
+    multiplayersetupgroup.h
     singleplayerdropdown.cc
     singleplayerdropdown.h
     singleplayersetupbox.cc
     singleplayersetupbox.h
   DEPENDS
-	ai
+    ai
     base_exceptions
     base_i18n
     graphic
@@ -121,7 +121,7 @@ wl_library(ui_fsmenu_gameloading
     logic_map_objects
     logic_tribe_basic_info
     map_io_map_loader
-	network
+    network
     scripting_lua_interface
     scripting_lua_table
     ui_basic
