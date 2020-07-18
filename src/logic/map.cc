@@ -1701,7 +1701,7 @@ bool Map::is_cycle_connected(const FCoords& start, uint32_t length, const Walkin
 /**
  * Returns a list of portdock fields (if any) that a port built at \p c should have.
  */
-std::vector<Coords> Map::find_portdock(const Coords& c) const {
+std::vector<Coords> Map::find_portdock(const Coords& c, bool force) const {
 	static const WalkingDir cycledirs[16] = {WALK_NE, WALK_NE, WALK_NE, WALK_NW, WALK_NW, WALK_W,
 	                                         WALK_W,  WALK_W,  WALK_SW, WALK_SW, WALK_SW, WALK_SE,
 	                                         WALK_SE, WALK_E,  WALK_E,  WALK_E};
@@ -1710,34 +1710,41 @@ std::vector<Coords> Map::find_portdock(const Coords& c) const {
 	FCoords f = start;
 	std::vector<Coords> portdock;
 	for (uint32_t i = 0; i < 16; ++i) {
-		bool is_good_water = (f.field->get_caps() & (MOVECAPS_SWIM | MOVECAPS_WALK)) == MOVECAPS_SWIM;
+		if (force) {
+			if (f.field->maxcaps() & MOVECAPS_SWIM) {
+				return {f};
+			}
+		} else {
+			bool is_good_water = (f.field->get_caps() & (MOVECAPS_SWIM | MOVECAPS_WALK)) == MOVECAPS_SWIM;
 
-		// Any immovable here? (especially another portdock)
-		if (is_good_water && f.field->get_immovable()) {
-			is_good_water = false;
-		}
+			// Any immovable here? (especially another portdock)
+			if (is_good_water && f.field->get_immovable()) {
+				is_good_water = false;
+			}
 
-		// If starting point is owned we make sure this field has the same owner
-		if (is_good_water && owner != neutral() && f.field->get_owned_by() != owner) {
-			is_good_water = false;
-		}
+			// If starting point is owned we make sure this field has the same owner
+			if (is_good_water && owner != neutral() && f.field->get_owned_by() != owner) {
+				is_good_water = false;
+			}
 
-		// ... and is not on a border
-		if (is_good_water && owner != neutral() && f.field->is_border()) {
-			is_good_water = false;
-		}
+			// ... and is not on a border
+			if (is_good_water && owner != neutral() && f.field->is_border()) {
+				is_good_water = false;
+			}
 
-		if (is_good_water) {
-			portdock.push_back(f);
-			// Occupy 2 fields maximum in order not to block space for other ports that
-			// might be built in the vicinity.
-			if (portdock.size() == 2) {
-				return portdock;
+			if (is_good_water) {
+				portdock.push_back(f);
+				// Occupy 2 fields maximum in order not to block space for other ports that
+				// might be built in the vicinity.
+				if (portdock.size() == 2) {
+					return portdock;
+				}
 			}
 		}
 
-		if (i < 15)
+		if (i < 15) {
 			f = get_neighbour(f, cycledirs[i]);
+		}
 	}
 
 	return portdock;

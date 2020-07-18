@@ -604,11 +604,41 @@ void Warehouse::init_containers(const Player& player) {
 void Warehouse::init_portdock(EditorGameBase& egbase) {
 	molog("Setting up port dock fields\n");
 
-	std::vector<Coords> dock = egbase.map().find_portdock(get_position());
+	std::vector<Coords> dock = egbase.map().find_portdock(get_position(), false);
 	if (dock.empty()) {
-		log("Attempting to setup port without neighboring water (coords: %3dx%3d).\n",
+		log("No suitable portdock space around %3dx%3d found! Attempting to force the portdock…\n",
 		    get_position().x, get_position().y);
-		return;
+
+		dock = egbase.map().find_portdock(get_position(), true);
+		if (dock.empty()) {
+			// Better to throw an exception than to risk a segfault…
+			throw wexception("Attempting to create a port dock around %3dx%3d without water nearby",
+			   get_position().x, get_position().y);
+		}
+
+		assert(dock.size() == 1);
+		Field& field = egbase.map()[dock.back()];
+
+		if (field.get_owned_by() != owner().player_number()) {
+			log("Conquering territory at %3dx%3d for portdock\n", dock.back().x, dock.back().y);
+			egbase.conquer_area(
+			   PlayerArea<Area<FCoords>>(
+				  owner().player_number(),
+				  Area<FCoords>(egbase.map().get_fcoords(dock.back()), 1)),
+			   true);
+		}
+
+		if (field.get_immovable()) {
+			log("Clearing immovable %s at %3dx%3d for portdock\n",
+			    field.get_immovable->descr().name().c_str(), dock.back().x, dock.back().y);
+			// currently only waterways and portdocks can be built on water
+			assert(field.get_immovable()->descr().type() == MapObjectType::WATERWAY);
+			if (upcast(Game, game, &egbase)) {
+				send_message(*game, Message::Type::kSeafaring, descr().descname(), descr().icon_filename(),
+			             descr().descname(), _("A waterway had to be destroyed to make room for your new port dock."), true);
+			}
+			field.get_immovable->remove(egbase);
+		}
 	}
 
 	molog("Found %" PRIuS " fields for the dock\n", dock.size());
