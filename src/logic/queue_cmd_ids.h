@@ -62,7 +62,7 @@ enum class QueueCommandTypes : uint8_t {
 	kSetWarePriority,
 	kSetWareTargetQuantity,
 	// 14 removed post Build 21
-	kSetWorkerTargetQuantity,  // 15
+	kSetWorkerTargetQuantity = 15,
 	// 16 removed post Build 21
 
 	// 17 was a command related to old events. removed
