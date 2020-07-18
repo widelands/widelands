@@ -401,9 +401,12 @@ struct BuildableField {
 
 	std::vector<uint8_t> consumers_nearby;
 	std::vector<uint8_t> producers_nearby;
+	// NOCOM collecting_producers_nearby
 	std::vector<uint8_t> collecting_producers_nearby;
 	// and for rangers, fishbreeders:
 	std::vector<uint8_t> supporters_nearby;
+	// NOCOM supporters_nearby
+	std::map<const Widelands::MapObjectDescr*, uint8_t> supporters_nearby_new;
 };
 
 struct MineableField {
@@ -488,9 +491,10 @@ struct BuildingObserver {
 	std::unordered_set<Widelands::DescriptionIndex> substitute_inputs;
 	int32_t substitutes_count;
 
+	// NOCOM get rid of production_hints?
 	std::set<DescriptionIndex> production_hints;
 
-	bool requires_supporters;
+	bool requires_supporters = false;
 
 	// information needed for decision on new building construction
 	int16_t initial_preciousness;

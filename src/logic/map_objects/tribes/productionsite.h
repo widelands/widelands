@@ -178,6 +178,12 @@ public:
 	bool competes_with_productionsite(const MapObjectDescr* productionsite) const;
 	bool supports_productionsite(const MapObjectDescr* productionsite) const;
 	bool is_supported_by_productionsite(const MapObjectDescr* productionsite) const;
+	std::set<const MapObjectDescr*> supported_productionsites() const {
+		return supported_productionsites_;
+	}
+	bool needs_supporters() const {
+		return !supported_by_productionsites_.empty();
+	}
 
 protected:
 	void add_collected_attribute(const std::string& object_type, const std::string& resource) {

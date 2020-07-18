@@ -377,6 +377,7 @@ void BuildingObserver::unset_is(const BuildingAttribute attribute) {
 bool BuildingObserver::has_collected_map_resource() const {
 	return collected_map_resource != INVALID_INDEX;
 }
+// NOCOM replace set_collected_map_resource?
 void BuildingObserver::set_collected_map_resource(const Widelands::TribeDescr& tribe,
                                                   const std::string& ware_name) {
 	if (!ware_name.empty()) {
@@ -385,6 +386,7 @@ void BuildingObserver::set_collected_map_resource(const Widelands::TribeDescr& t
 		collected_map_resource = Widelands::INVALID_INDEX;
 	}
 }
+// NOCOM replace get_collected_map_resource?
 DescriptionIndex BuildingObserver::get_collected_map_resource() const {
 	if (has_collected_map_resource()) {
 		return collected_map_resource;
