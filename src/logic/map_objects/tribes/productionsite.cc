@@ -256,21 +256,37 @@ const ProductionProgram* ProductionSiteDescr::get_program(const std::string& pro
 
 // We use MapObjectDescr instead of ProductionSiteDescr as a parameter to avoid dynamic casts in fieldaction. We only care about the identity anyway.
 bool ProductionSiteDescr::highlight_overlapping_workarea_for(const MapObjectDescr* productionsite, bool* positive) const {
-	const auto it = highlight_overlapping_workarea_for_.find(productionsite);
-	if (it == highlight_overlapping_workarea_for_.end()) {
-		return false;
-	} else {
-		*positive = it->second;
+	if (competes_with_productionsite(productionsite)) {
+		*positive = false;
 		return true;
 	}
-}
-void ProductionSiteDescr::set_highlight_overlapping_workarea_for(const MapObjectDescr* productionsite, bool en_or_discourage) {
-#ifndef NDEBUG
-	if (highlight_overlapping_workarea_for_.count(productionsite) == 1) {
-		assert(highlight_overlapping_workarea_for_.at(productionsite) == en_or_discourage);
+	if (supports_productionsite(productionsite) || is_supported_by_productionsite(productionsite)) {
+		*positive = true;
+		return true;
 	}
-#endif
-	highlight_overlapping_workarea_for_[productionsite] = en_or_discourage;
+	return false;
+}
+// NOCOM document
+void ProductionSiteDescr::add_competing_productionsite(const MapObjectDescr* productionsite) {
+	assert(productionsite->type() == MapObjectType::PRODUCTIONSITE);
+	competing_productionsites_.insert(productionsite);
+}
+void ProductionSiteDescr::add_supports_productionsite(const MapObjectDescr* productionsite) {
+	assert(productionsite->type() == MapObjectType::PRODUCTIONSITE);
+	supported_productionsites_.insert(productionsite);
+}
+void ProductionSiteDescr::add_supported_by_productionsite(const MapObjectDescr* productionsite) {
+	assert(productionsite->type() == MapObjectType::PRODUCTIONSITE);
+	supported_by_productionsites_.insert(productionsite);
+}
+bool ProductionSiteDescr::competes_with_productionsite(const MapObjectDescr* productionsite) const {
+	return competing_productionsites_.count(productionsite) == 1;
+}
+bool ProductionSiteDescr::supports_productionsite(const MapObjectDescr* productionsite) const {
+	return supported_productionsites_.count(productionsite) == 1;
+}
+bool ProductionSiteDescr::is_supported_by_productionsite(const MapObjectDescr* productionsite) const {
+	return supported_by_productionsites_.count(productionsite) == 1;
 }
 
 /**

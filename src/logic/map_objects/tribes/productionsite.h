@@ -172,7 +172,12 @@ public:
 	}
 
 	bool highlight_overlapping_workarea_for(const MapObjectDescr* productionsite, bool* positive) const;
-	void set_highlight_overlapping_workarea_for(const MapObjectDescr* productionsite, bool en_or_discourage);
+	void add_competing_productionsite(const MapObjectDescr* productionsite);
+	void add_supports_productionsite(const MapObjectDescr* productionsite);
+	void add_supported_by_productionsite(const MapObjectDescr* productionsite);
+	bool competes_with_productionsite(const MapObjectDescr* productionsite) const;
+	bool supports_productionsite(const MapObjectDescr* productionsite) const;
+	bool is_supported_by_productionsite(const MapObjectDescr* productionsite) const;
 
 protected:
 	void add_collected_attribute(const std::string& object_type, const std::string& resource) {
@@ -209,7 +214,9 @@ private:
 	std::string out_of_resource_message_;
 	std::string resource_not_needed_message_;
 	int out_of_resource_productivity_threshold_;
-	std::map<const MapObjectDescr*, bool> highlight_overlapping_workarea_for_;
+	std::set<const MapObjectDescr*> competing_productionsites_;
+	std::set<const MapObjectDescr*> supported_productionsites_;
+	std::set<const MapObjectDescr*> supported_by_productionsites_;
 
 	DISALLOW_COPY_AND_ASSIGN(ProductionSiteDescr);
 };

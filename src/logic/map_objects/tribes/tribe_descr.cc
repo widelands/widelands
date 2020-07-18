@@ -782,7 +782,7 @@ void TribeDescr::process_productionsites(const World& world) {
 		if (!prod->created_immovables().empty()) {
 			for (const ProductionSiteDescr* other_prod : productionsites) {
 				if (!other_prod->created_immovables().empty()) {
-					prod->set_highlight_overlapping_workarea_for(other_prod, false);
+					prod->add_competing_productionsite(other_prod);
 				}
 			}
 		}
@@ -790,7 +790,7 @@ void TribeDescr::process_productionsites(const World& world) {
 		if (!prod->created_resources().empty()) {
 			for (const ProductionSiteDescr* other_prod : productionsites) {
 				if (!other_prod->created_resources().empty()) {
-					prod->set_highlight_overlapping_workarea_for(other_prod, false);
+					prod->add_competing_productionsite(other_prod);
 				}
 			}
 		}
@@ -799,8 +799,8 @@ void TribeDescr::process_productionsites(const World& world) {
 		for (const auto& item : prod->created_bobs()) {
 			if (creators.count(item)) {
 				for (ProductionSiteDescr* creator : creators.at(item)) {
-					prod->set_highlight_overlapping_workarea_for(creator, false);
-					creator->set_highlight_overlapping_workarea_for(prod, false);
+					prod->add_competing_productionsite(creator);
+					creator->add_competing_productionsite(prod);
 				}
 			}
 		}
@@ -810,15 +810,15 @@ void TribeDescr::process_productionsites(const World& world) {
 			if (creators.count(item)) {
 				for (ProductionSiteDescr* creator: creators.at(item)) {
 					if (creator != prod) {
-						prod->set_highlight_overlapping_workarea_for(creator, true);
-						creator->set_highlight_overlapping_workarea_for(prod, true);
+						prod->add_supported_by_productionsite(creator);
+						creator->add_supports_productionsite(prod);
 					}
 				}
 			}
 			// Sites that collect immovables should not overlap sites that collect the same immovable
 			if (collectors.count(item)) {
 				for (const ProductionSiteDescr* collector: collectors.at(item)) {
-					prod->set_highlight_overlapping_workarea_for(collector, false);
+					prod->add_competing_productionsite(collector);
 				}
 			}
 		}
@@ -827,15 +827,15 @@ void TribeDescr::process_productionsites(const World& world) {
 			if (creators.count(item)) {
 				for (ProductionSiteDescr* creator: creators.at(item)) {
 					if (creator != prod) {
-						prod->set_highlight_overlapping_workarea_for(creator, true);
-						creator->set_highlight_overlapping_workarea_for(prod, true);
+						prod->add_supported_by_productionsite(creator);
+						creator->add_supports_productionsite(prod);
 					}
 				}
 			}
 			// Sites that collect bobs should not overlap sites that collect the same bob
 			if (collectors.count(item)) {
 				for (const ProductionSiteDescr* collector: collectors.at(item)) {
-					prod->set_highlight_overlapping_workarea_for(collector, true);
+					prod->add_competing_productionsite(collector);
 				}
 			}
 		}
@@ -844,15 +844,15 @@ void TribeDescr::process_productionsites(const World& world) {
 			if (creators.count(item)) {
 				for (ProductionSiteDescr* creator: creators.at(item)) {
 					if (creator != prod) {
-						prod->set_highlight_overlapping_workarea_for(creator, true);
-						creator->set_highlight_overlapping_workarea_for(prod, true);
+						prod->add_supported_by_productionsite(creator);
+						creator->add_supports_productionsite(prod);
 					}
 				}
 			}
 			// Sites that collect resources should not overlap sites that collect the same resource
 			if (collectors.count(item)) {
 				for (const ProductionSiteDescr* collector: collectors.at(item)) {
-					prod->set_highlight_overlapping_workarea_for(collector, true);
+					prod->add_competing_productionsite(collector);
 				}
 			}
 		}
