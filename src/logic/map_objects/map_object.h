@@ -88,6 +88,8 @@ std::string to_string(MapObjectType type);
  */
 class MapObjectDescr {
 public:
+	using AttributeIndex = uint32_t;
+
 	enum class OwnerType { kWorld, kTribe };
 
 	MapObjectDescr(const MapObjectType init_type,
@@ -135,15 +137,15 @@ public:
 	/// Returns the image fileneme for the menu image if the MapObject has one, is empty otherwise
 	const std::string& icon_filename() const;
 
-	bool has_attribute(uint32_t) const;
+	bool has_attribute(const AttributeIndex) const;
 	bool has_attribute(const std::string& attribute_name) const;
 	std::set<std::string> attribute_names() const;
-	static uint32_t get_attribute_id(const std::string& name, bool add_if_not_exists = false);
+	static AttributeIndex get_attribute_id(const std::string& name, bool add_if_not_exists = false);
 
 protected:
 	// Add attributes to the attribute list
 	void add_attributes(const std::vector<std::string>& attributes);
-	void add_attribute(uint32_t attr);
+	void add_attribute(const AttributeIndex attr);
 
 	/// Sets the directional animations in 'anims' with the animations
 	/// '&lt;basename&gt;_(ne|e|se|sw|w|nw)'.
@@ -158,8 +160,10 @@ private:
 	void check_representative_image();
 
 	using Anims = std::map<std::string, uint32_t>;
-	using AttribMap = std::map<std::string, uint32_t>;
-	using Attributes = std::vector<uint32_t>;
+	using Attributes = std::vector<AttributeIndex>;
+
+	static std::map<std::string, AttributeIndex> attribute_names_;
+	Attributes attributes_;
 
 	const MapObjectType type_;    /// Subclasses pick from the enum above
 	std::string const name_;      /// The name for internal reference
@@ -167,10 +171,7 @@ private:
 	/// The path and filename to the helptext script. Can be empty, but some subtypes like buildings,
 	/// wares and workers require it.
 	const std::string helptext_script_;
-	Attributes attributes_;
 	Anims anims_;
-	static uint32_t dyn_attribhigh_;  ///< highest attribute ID used
-	static AttribMap dyn_attribs_;
 	std::string icon_filename_;  // Filename for the menu icon
 
 	DISALLOW_COPY_AND_ASSIGN(MapObjectDescr);
