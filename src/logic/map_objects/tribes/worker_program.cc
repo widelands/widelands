@@ -301,12 +301,17 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 			act->iparam1 = read_positive(item.second);
 		} else if (item.first == "attrib") {
 			act->iparam2 = MapObjectDescr::get_attribute_id(item.second);
-			collected_attributes_.insert(std::make_pair(MapObjectType::IMMOVABLE, act->iparam2));
 		} else if (item.first == "type") {
 			act->sparam1 = item.second;
 		} else {
 			throw GameDataError("Unknown findobject predicate %s", argument.c_str());
 		}
+	}
+
+	if (act->iparam2 >= 0) {
+		collected_attributes_.insert(std::make_pair(
+		                             act->sparam1 == "immovable" ? MapObjectType::IMMOVABLE : MapObjectType::BOB,
+		                             act->iparam2));
 	}
 
 	workarea_info_[act->iparam1].insert(" findobject");

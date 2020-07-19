@@ -663,7 +663,6 @@ void TribeDescr::process_productionsites(const World& world) {
 				// We only support critters here, because no other bobs are collected so far
 				for (DescriptionIndex i = 0; i < world.get_nr_critters(); ++i) {
 					const CritterDescr* critter = world.get_critter_descr(i);
-					// NOCOM hunter's hut collected bobs missing
 					if (critter->has_attribute(attribute_id)) {
 						prod->add_collected_bob(critter->name());
 					}
@@ -697,24 +696,13 @@ void TribeDescr::process_productionsites(const World& world) {
 
 
 	for (ProductionSiteDescr* prod : productionsites) {
-		// Add bobs that are created directly and their attributes
+		// Add bobs that are created directly
 		for (const std::string& bobname : prod->created_bobs()) {
 			const CritterDescr* critter = world.get_critter_descr(bobname);
 			if (critter == nullptr) {
 				throw GameDataError("Productionsite '%s' has unknown critter '%s' in production or worker program",
 									prod->name().c_str(), bobname.c_str());
 			}
-			/* NOCOM hunter help is broken
-			for (const MapObjectDescr::AttributeIndex critter_id : critter->attributes()) {
-				if (needed_attributes.count(critter_id) == 1) {
-					prod->add_created_attribute(MapObjectType::BOB, critter_id);
-				}
-			}
-			for (const auto& attribute_info : prod->collected_attributes()) {
-				if (critter->has_attribute(attribute_info.second)) {
-					add_collector(bobname, prod);
-				}
-			} */
 			add_creator(bobname, prod);
 		}
 
@@ -758,7 +746,7 @@ void TribeDescr::process_productionsites(const World& world) {
 			prod->clear_attributes();
 		}
 
-		// Add deduced entities
+		// Add deduced bobs & immovables
 		for (const std::string& bob_name : deduced_bobs) {
 			prod->add_created_bob(bob_name);
 			add_creator(bob_name, prod);

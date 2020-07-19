@@ -348,9 +348,6 @@ function building_help_dependencies_production(tribe, building_description)
    for i, resource in ipairs(find_resource_indicators(tribe, building_description.created_resources)) do
       table.insert(created_items, resource)
    end
-   for i, test in ipairs(created_items) do
-         print(test.name)
-   end
    if created_items[1] then
       result = result .. h3(_"Creates:")
       result = result .. dependencies_creates(created_items, building_description)
