@@ -649,18 +649,17 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 		}
 	}
 
-	for (const auto& attribinfo : workerprogram->collected_attributes()) {
-		// NOCOM make the pair the argument?
-		descr->add_collected_attribute(attribinfo.first, attribinfo.second);
+	for (const auto& attribute_info : workerprogram->collected_attributes()) {
+		descr->add_collected_attribute(attribute_info);
 	}
-	for (const auto& attribinfo : workerprogram->created_attributes()) {
-		descr->add_created_attribute(attribinfo.first, attribinfo.second);
+	for (const auto& attribute_info : workerprogram->created_attributes()) {
+		descr->add_created_attribute(attribute_info);
 	}
-	for (const std::string& resourceinfo : workerprogram->collected_resources()) {
-		descr->add_collected_resource(resourceinfo);
+	for (const std::string& resourcename : workerprogram->collected_resources()) {
+		descr->add_collected_resource(resourcename);
 	}
-	for (const std::string& resourceinfo : workerprogram->created_resources()) {
-		descr->add_created_resource(resourceinfo);
+	for (const std::string& resourcename : workerprogram->created_resources()) {
+		descr->add_created_resource(resourcename);
 	}
 	for (const std::string& bobname : workerprogram->created_bobs()) {
 		descr->add_created_bob(bobname);
@@ -1254,8 +1253,8 @@ ProductionProgram::ActConstruct::ActConstruct(const std::vector<std::string>& ar
 	// Register created immovable with productionsite
 	const WorkerDescr& main_worker_descr =
 	   *tribes.get_worker_descr(descr->working_positions().front().first);
-	for (const auto& attribinfo : main_worker_descr.get_program(workerprogram)->created_attributes()) {
-		descr->add_created_attribute(attribinfo.first, attribinfo.second);
+	for (const auto& attribute_info : main_worker_descr.get_program(workerprogram)->created_attributes()) {
+		descr->add_created_attribute(attribute_info);
 	}
 }
 

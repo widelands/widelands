@@ -714,7 +714,6 @@ void TribeDescr::process_productionsites(const World& world) {
 		std::set<DescriptionIndex> walked_tribe_immovables;
 
 		for (const auto& attribinfo : prod->created_attributes()) {
-			// NOCOM make the pair the argument?
 			// NOCOM ferries
 			const MapObjectType mapobjecttype = attribinfo.first;
 			const MapObjectDescr::AttributeIndex attribute_id = attribinfo.second;
@@ -742,7 +741,7 @@ void TribeDescr::process_productionsites(const World& world) {
 				}
 			}
 
-			// We're done with this site's attrbutes, let's get some memory back
+			// We're done with this site's attributes, let's get some memory back
 			prod->clear_attributes();
 		}
 

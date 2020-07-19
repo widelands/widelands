@@ -109,9 +109,7 @@ public:
 	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>& created_attributes() const {
 		return created_attributes_;
 	}
-	void add_created_attribute(MapObjectType object_type, MapObjectDescr::AttributeIndex attribute) {
-		created_attributes_.insert(std::make_pair(object_type, attribute));
-	}
+
 	/// We only need the attributes during tribes initialization
 	void clear_attributes();
 
@@ -187,8 +185,11 @@ public:
 	}
 
 protected:
-	void add_collected_attribute(MapObjectType object_type, MapObjectDescr::AttributeIndex attribute) {
-		collected_attributes_.insert(std::make_pair(object_type, attribute));
+	void add_collected_attribute(std::pair<MapObjectType, MapObjectDescr::AttributeIndex> attribute_info) {
+		collected_attributes_.insert(attribute_info);
+	}
+	void add_created_attribute(std::pair<MapObjectType, MapObjectDescr::AttributeIndex> attribute_info) {
+		created_attributes_.insert(attribute_info);
 	}
 	void add_collected_resource(const std::string& resource) {
 		collected_resources_.insert(resource);
