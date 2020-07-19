@@ -716,7 +716,6 @@ void MultiPlayerSetupGroup::update() {
 	}
 
 	const int number_of_players = settings.players.size();
-	scrollable_playerbox.set_scrolling(number_of_players * buth_ > scrollable_playerbox.get_h());
 
 	// Keep track of which player slots are visible
 	for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {
@@ -725,6 +724,7 @@ void MultiPlayerSetupGroup::update() {
 			multi_player_player_groups.at(i)->set_visible(should_be_visible);
 		}
 	}
+	scrollable_playerbox.set_scrolling(number_of_players * buth_ > scrollable_playerbox.get_h());
 }
 
 void MultiPlayerSetupGroup::draw(RenderTarget& dst) {

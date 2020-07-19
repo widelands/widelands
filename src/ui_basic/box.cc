@@ -55,9 +55,9 @@ Box::Box(Panel* const parent,
  * only a vertical scrollbar may be added.
  */
 void Box::set_scrolling(bool scroll) {
-	if (scroll == scrolling_) {
-		return;
-	}
+	//	if (scroll == scrolling_) {
+	//		return;
+	//	}
 
 	scrolling_ = scroll;
 	update_desired_size();
@@ -341,6 +341,11 @@ void Box::get_item_desired_size(uint32_t const idx, int* depth, int* breadth) {
 
 	switch (it.type) {
 	case Item::ItemPanel:
+		if (!it.u.panel.panel->is_visible()) {
+			*depth = 0;
+			*breadth = 0;
+			return;
+		}
 		if (orientation_ == Horizontal) {
 			it.u.panel.panel->get_desired_size(depth, breadth);
 		} else {
