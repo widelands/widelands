@@ -62,10 +62,6 @@ tribes:new_productionsite_type {
       { name = "iron", amount = 8 },
       { name = "gold", amount = 4 },
    },
-   outputs = {
-      "fur_garment_studded",
-      "fur_garment_golden"
-   },
 
    programs = {
       work = {

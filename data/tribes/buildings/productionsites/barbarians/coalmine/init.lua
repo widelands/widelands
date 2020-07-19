@@ -51,9 +51,6 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "ration", amount = 6 }
    },
-   outputs = {
-      "coal"
-   },
 
    indicate_workarea_overlaps = {
       barbarians_coalmine = false,

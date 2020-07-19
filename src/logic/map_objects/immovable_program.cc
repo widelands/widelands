@@ -139,6 +139,9 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 }
 
 void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) const {
+	if (immovable.apply_growth_delay(game)) {
+		return;
+	}
 	if (probability == 0 || game.logic_rand() % 256 < probability) {
 		Player* player = immovable.get_owner();
 		Coords const c = immovable.get_position();
@@ -172,6 +175,10 @@ ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments,
 }
 
 void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const {
+	if (immovable.apply_growth_delay(game)) {
+		return;
+	}
+
 	const Map& map = game.map();
 	FCoords const f = map.get_fcoords(immovable.get_position());
 	const ImmovableDescr& descr = immovable.descr();

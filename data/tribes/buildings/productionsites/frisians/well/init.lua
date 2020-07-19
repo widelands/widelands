@@ -47,10 +47,6 @@ tribes:new_productionsite_type {
       frisians_carrier = 1
    },
 
-   outputs = {
-      "water"
-   },
-
    indicate_workarea_overlaps = {
       frisians_well = false,
    },

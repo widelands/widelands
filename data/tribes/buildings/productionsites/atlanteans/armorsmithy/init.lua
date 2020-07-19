@@ -45,7 +45,7 @@ dirname = path.dirname(__file__)
 --            },
 --
 --    **outputs**
---        *Optional*. The wares/workers produced by this building, e.g.::
+--        *DEPRECATED*. The wares/workers produced by this building, e.g.::
 --
 --            outputs = { "shield_advanced", "shield_steel" },
 --
@@ -143,10 +143,6 @@ tribes:new_productionsite_type {
       { name = "coal", amount = 8 },
       { name = "iron", amount = 8 },
       { name = "gold", amount = 8 }
-   },
-   outputs = {
-      "shield_advanced",
-      "shield_steel"
    },
 
    programs = {

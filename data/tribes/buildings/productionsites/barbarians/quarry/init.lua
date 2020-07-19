@@ -39,10 +39,6 @@ tribes:new_productionsite_type {
       barbarians_stonemason = 1
    },
 
-   outputs = {
-      "granite"
-   },
-
    indicate_workarea_overlaps = {
       barbarians_quarry = false,
    },

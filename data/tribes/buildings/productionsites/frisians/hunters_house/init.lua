@@ -51,11 +51,6 @@ tribes:new_productionsite_type {
       frisians_hunter = 1
    },
 
-   outputs = {
-      "meat",
-      "fur"
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...

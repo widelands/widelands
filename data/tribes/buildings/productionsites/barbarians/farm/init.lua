@@ -50,10 +50,6 @@ tribes:new_productionsite_type {
       barbarians_farmer = 1
    },
 
-   outputs = {
-      "wheat"
-   },
-
    indicate_workarea_overlaps = {
       barbarians_rangers_hut = false,
       barbarians_farm = false,

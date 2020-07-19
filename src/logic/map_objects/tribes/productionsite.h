@@ -49,7 +49,7 @@ enum class FailNotificationType { kDefault, kFull };
  */
 class ProductionSiteDescr : public BuildingDescr {
 public:
-	friend struct ProductionProgram;  // To add animations
+	friend struct ProductionProgram;  // To add animations, outputs etc.
 
 	ProductionSiteDescr(const std::string& init_descname,
 	                    const std::string& msgctxt,
@@ -141,6 +141,14 @@ public:
 
 	const std::map<std::string, bool>& get_highlight_overlapping_workarea_for() const {
 		return highlight_overlapping_workarea_for_;
+	}
+
+protected:
+	void add_output_ware_type(DescriptionIndex index) {
+		output_ware_types_.insert(index);
+	}
+	void add_output_worker_type(DescriptionIndex index) {
+		output_worker_types_.insert(index);
 	}
 
 private:

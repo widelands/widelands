@@ -155,6 +155,10 @@ DescriptionIndex World::get_nr_terrains() const {
 	return terrains_->size();
 }
 
+DescriptionIndex World::get_nr_critters() const {
+	return critters_->size();
+}
+
 DescriptionIndex World::get_critter(char const* const l) const {
 	return critters_->get_index(l);
 }
