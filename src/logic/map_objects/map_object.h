@@ -140,7 +140,6 @@ public:
 
 	bool has_attribute(const AttributeIndex) const;
 	bool has_attribute(const std::string& attribute_name) const;
-	std::set<std::string> attribute_names() const;
 	const MapObjectDescr::Attributes& attributes() const;
 	static AttributeIndex get_attribute_id(const std::string& name, bool add_if_not_exists = false);
 

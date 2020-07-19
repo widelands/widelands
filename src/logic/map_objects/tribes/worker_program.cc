@@ -410,9 +410,6 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 	act->iparam7 = 0;
 	act->sparam1 = "";
 
-	std::string resource = "";
-	bool breeds = false;
-
 	// Parse predicates
 	for (const std::string& argument : cmd) {
 		try {
@@ -433,14 +430,10 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 				act->iparam2 = sizenames.at(item.second);
 			} else if (item.first == "breed") {
 				act->iparam4 = 1;
-				// For registering collected/created resources
-				breeds = true;
 			} else if (item.first == "terraform") {
 				act->iparam7 = 1;
 			} else if (item.first == "resource") {
 				act->sparam1 = item.second;
-				// For registering collected/created resources
-				resource = item.second;
 			} else if (item.first == "space") {
 				act->iparam3 = 1;
 			} else if (item.first == "avoid") {
@@ -463,11 +456,12 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 	}
 	workarea_info_[act->iparam1].insert(" findspace");
 
-	if (!resource.empty()) {
-		if (breeds) {
-			created_resources_.insert(resource);
+	if (!act->sparam1.empty()) {
+		if (act->iparam4 == 1) {
+			// breeds
+			created_resources_.insert(act->sparam1);
 		} else {
-			collected_resources_.insert(resource);
+			collected_resources_.insert(act->sparam1);
 		}
 	}
 }

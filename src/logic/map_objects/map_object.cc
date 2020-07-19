@@ -458,16 +458,6 @@ void MapObjectDescr::add_attributes(const std::vector<std::string>& attributes) 
 	}
 }
 
-// NOCOM we might not need this if we switch from human readable atributes to internal ones
-std::set<std::string> MapObjectDescr::attribute_names() const {
-	std::set<std::string> result;
-	for (const auto& dyn_attrib : attribute_names_) {
-		if (has_attribute(dyn_attrib.first)) {
-			result.insert(dyn_attrib.first);
-		}
-	}
-	return result;
-}
 const MapObjectDescr::Attributes& MapObjectDescr::attributes() const {
 	return attributes_;
 }
