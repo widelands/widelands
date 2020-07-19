@@ -431,6 +431,7 @@ ProductionProgram::ActReturn::ActReturn(const std::vector<std::string>& argument
 				throw GameDataError(
 				   "Expected: [%s] <condition> after '%s'", separator.c_str(), (it - 1)->c_str());
 			}
+
 			conditions_.push_back(create_condition(args, it, end, descr, tribes));
 			match_and_skip(args, end, separator);
 			it = end;
