@@ -53,10 +53,6 @@ tribes:new_productionsite_type {
       { name = "fruit", amount = 2 },
    },
 
-   outputs = {
-      "fish"
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

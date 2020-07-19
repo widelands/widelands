@@ -39,10 +39,6 @@ tribes:new_productionsite_type {
       atlanteans_carrier = 1
    },
 
-   outputs = {
-      "water"
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

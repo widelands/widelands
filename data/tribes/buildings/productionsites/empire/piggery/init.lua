@@ -44,9 +44,6 @@ tribes:new_productionsite_type {
       { name = "water", amount = 7 },
       { name = "wheat", amount = 7 }
    },
-   outputs = {
-      "meat"
-   },
 
    programs = {
       work = {

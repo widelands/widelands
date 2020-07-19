@@ -40,10 +40,6 @@ tribes:new_productionsite_type {
       empire_vinefarmer = 1
    },
 
-   outputs = {
-      "grape"
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

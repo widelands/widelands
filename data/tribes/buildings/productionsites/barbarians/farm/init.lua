@@ -50,10 +50,6 @@ tribes:new_productionsite_type {
       barbarians_farmer = 1
    },
 
-   outputs = {
-      "wheat"
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

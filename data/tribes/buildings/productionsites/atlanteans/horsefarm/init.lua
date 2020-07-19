@@ -42,9 +42,6 @@ tribes:new_productionsite_type {
       { name = "water", amount = 8 },
       { name = "corn", amount = 8 }
    },
-   outputs = {
-      "atlanteans_horse"
-   },
 
    programs = {
       work = {

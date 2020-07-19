@@ -174,13 +174,13 @@ function building_help_general_string(tribe, building_description)
 -- TODO(GunChleoc) "carrier" for headquarters, "ship" for ports, "scout" for scouts_hut, "shipwright" for shipyard?
 -- TODO(GunChleoc) use aihints for gamekeeper, forester?
    local representative_resource = nil
-   if (building_description.type_name == "productionsite" or
-       building_description.type_name == "trainingsite") then
+   if (building_description.type_name == "productionsite") then
       representative_resource = building_description.output_ware_types[1]
       if(not representative_resource) then
          representative_resource = building_description.output_worker_types[1]
       end
-   elseif (building_description.type_name == "militarysite") then
+   elseif (building_description.type_name == "militarysite" or
+       building_description.type_name == "trainingsite") then
       representative_resource = wl.Game():get_worker_description(tribe.soldier)
 -- TODO(GunChleoc) need a bob_descr for the ship -> port and shipyard
 -- TODO(GunChleoc) create descr objects for flag, portdock, ...

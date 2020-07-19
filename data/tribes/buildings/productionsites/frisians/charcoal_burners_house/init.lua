@@ -54,10 +54,6 @@ tribes:new_productionsite_type {
       { name = "log", amount = 6 },
    },
 
-   outputs = {
-      "coal"
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

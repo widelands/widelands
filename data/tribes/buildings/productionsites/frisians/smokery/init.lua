@@ -65,10 +65,6 @@ tribes:new_productionsite_type {
       { name = "fish", amount = 6 },
       { name = "log", amount = 6 },
    },
-   outputs = {
-      "smoked_meat",
-      "smoked_fish",
-   },
 
    programs = {
       work = {

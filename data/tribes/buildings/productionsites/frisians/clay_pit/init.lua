@@ -60,9 +60,6 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "water", amount = 4 },
    },
-   outputs = {
-      "clay"
-   },
 
    programs = {
       work = {

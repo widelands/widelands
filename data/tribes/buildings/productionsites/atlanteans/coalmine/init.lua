@@ -48,9 +48,6 @@ tribes:new_productionsite_type {
       { name = "smoked_meat", amount = 6 },
       { name = "atlanteans_bread", amount = 10 }
    },
-   outputs = {
-      "coal"
-   },
 
    programs = {
       work = {

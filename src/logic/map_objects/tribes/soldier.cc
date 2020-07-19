@@ -477,10 +477,11 @@ void Soldier::damage(const uint32_t value) {
 	assert(current_health_ > 0);
 
 	molog("[soldier] damage %d(-%d)/%d\n", current_health_, value, get_max_health());
-	if (current_health_ < value)
+	if (current_health_ < value) {
 		current_health_ = 0;
-	else
+	} else {
 		current_health_ -= value;
+	}
 }
 
 /// Calculates the actual position to draw on from the base node position.
@@ -697,10 +698,11 @@ void Soldier::calc_info_icon_size(const TribeDescr& tribe, int& w, int& h) {
 }
 
 void Soldier::pop_task_or_fight(Game& game) {
-	if (battle_)
+	if (battle_) {
 		start_task_battle(game);
-	else
+	} else {
 		pop_task(game);
+	}
 }
 
 /**
@@ -894,15 +896,16 @@ void Soldier::attack_update(Game& game, State& state) {
 				return start_task_leavebuilding(game, false);
 			}
 			// Head to home
-			if (state.ivar3 > kBockCountIsStuck)
+			if (state.ivar3 > kBockCountIsStuck) {
 				molog("[attack] soldier is stuck, blocked nodes will be ignored\n");
+			}
 
 			if (start_task_movepath(game, baseflag.get_position(),
 			                        4,  // use larger persist when returning home
 			                        descr().get_right_walk_anims(does_carry_ware(), this), false, -1,
-			                        state.ivar3 > kBockCountIsStuck))
+			                        state.ivar3 > kBockCountIsStuck)) {
 				return;
-			else {
+			} else {
 				molog("[attack] failed to return home\n");
 				return pop_task(game);
 			}
@@ -944,17 +947,18 @@ void Soldier::attack_update(Game& game, State& state) {
 			}
 			if (start_task_movepath(game, target,
 			                        4,  // use larger persist when returning home
-			                        descr().get_right_walk_anims(does_carry_ware(), this)))
+			                        descr().get_right_walk_anims(does_carry_ware(), this))) {
 				return;
-			else {
+			} else {
 				molog("[attack] failed to return to own land\n");
 				return pop_task(game);
 			}
 		}
 	}
 
-	if (battle_)
+	if (battle_) {
 		return start_task_battle(game);
+	}
 
 	if (signal == "blocked") {
 		// Wait before we try again. Note that this must come *after*
@@ -1023,9 +1027,9 @@ void Soldier::attack_update(Game& game, State& state) {
 	// and that we're outside in the plains.
 	if (get_position() != enemy->base_flag().get_position()) {
 		if (start_task_movepath(game, enemy->base_flag().get_position(), 3,
-		                        descr().get_right_walk_anims(does_carry_ware(), this)))
+		                        descr().get_right_walk_anims(does_carry_ware(), this))) {
 			return;
-		else {
+		} else {
 			molog("[attack] failed to move towards building flag, cancel attack "
 			      "and return home!\n");
 			state.coords = Coords::null();
@@ -1046,8 +1050,9 @@ void Soldier::attack_update(Game& game, State& state) {
 }
 
 void Soldier::attack_pop(Game& game, State&) {
-	if (battle_)
+	if (battle_) {
 		battle_->cancel(game, *this);
+	}
 }
 
 /**
@@ -1145,20 +1150,23 @@ void Soldier::defense_update(Game& game, State& state) {
 	 * Attempt to fix a crash when player bulldozes a building being defended
 	 * by soldiers.
 	 */
-	if (!location)
+	if (!location) {
 		return pop_task(game);
+	}
 
 	Flag& baseflag = location->base_flag();
 
-	if (battle_)
+	if (battle_) {
 		return start_task_battle(game);
+	}
 
-	if (signal == "blocked")
+	if (signal == "blocked") {
 		// Wait before we try again. Note that this must come *after*
 		// we check for a battle
 		// Note that we *should* be woken via send_space_signals,
 		// so the timeout is just an additional safety net.
 		return start_task_idle(game, descr().get_animation("idle", this), 5000);
+	}
 
 	// If we only are defending our home ...
 	if (state.ivar1 & CF_DEFEND_STAYHOME) {
@@ -1171,8 +1179,9 @@ void Soldier::defense_update(Game& game, State& state) {
 			state.ivar2 = 1;
 			assert(state.ivar2 == 1);
 
-			if (battle_)
+			if (battle_) {
 				return start_task_battle(game);
+			}
 
 			// Check if any attacker is waiting us to fight
 			std::vector<Bob*> soldiers;
@@ -1211,8 +1220,9 @@ void Soldier::defense_update(Game& game, State& state) {
 
 		if (get_current_health() < get_retreat_health()) {
 			molog("[defense] I am heavily injured (%d)!\n", get_current_health());
-		} else
+		} else {
 			molog("[defense] no enemy soldiers found, ending task\n");
+		}
 
 		// If no enemy was found, return home
 		if (!location) {
@@ -1234,8 +1244,9 @@ void Soldier::defense_update(Game& game, State& state) {
 		molog("[defense] return home\n");
 		if (start_task_movepath(game, baseflag.get_position(),
 		                        4,  // use larger persist when returning home
-		                        descr().get_right_walk_anims(does_carry_ware(), this)))
+		                        descr().get_right_walk_anims(does_carry_ware(), this))) {
 			return;
+		}
 
 		molog("[defense] could not find way home\n");
 		return pop_task(game);
@@ -1290,8 +1301,9 @@ void Soldier::defense_update(Game& game, State& state) {
 }
 
 void Soldier::defense_pop(Game& game, State&) {
-	if (battle_)
+	if (battle_) {
 		battle_->cancel(game, *this);
+	}
 }
 
 Bob::Task const Soldier::taskMoveInBattle = {
@@ -1347,10 +1359,11 @@ void Soldier::move_in_battle_update(Game& game, State&) {
 			break;
 		}
 		return pop_task(game);
-	} else
+	} else {
 		//  Only end the task once we've actually completed the step
 		// Ignore signals until then
 		return schedule_act(game, combat_walkend_ - game.get_gametime());
+	}
 }
 
 /**
@@ -1358,8 +1371,9 @@ void Soldier::move_in_battle_update(Game& game, State&) {
  * his home flag.
  */
 bool Soldier::stay_home() {
-	if (State const* const state = get_state(taskDefense))
+	if (State const* const state = get_state(taskDefense)) {
 		return state->ivar1 & CF_DEFEND_STAYHOME;
+	}
 	return false;
 }
 
@@ -1386,9 +1400,9 @@ void Soldier::battle_update(Game& game, State&) {
 		if (signal == "blocked") {
 			signal_handled();
 			return start_task_idle(game, descr().get_animation("idle", this), 5000);
-		} else if (signal == "location" || signal == "battle" || signal == "wakeup")
+		} else if (signal == "location" || signal == "battle" || signal == "wakeup") {
 			signal_handled();
-		else {
+		} else {
 			molog("[battle] interrupted by unexpected signal '%s'\n", signal.c_str());
 			return pop_task(game);
 		}
@@ -1443,8 +1457,9 @@ void Soldier::battle_update(Game& game, State&) {
 		if (opponent.get_position() != get_position()) {
 			Coords dest = opponent.get_position();
 
-			if (upcast(Building, building, map[dest].get_immovable()))
+			if (upcast(Building, building, map[dest].get_immovable())) {
 				dest = building->base_flag().get_position();
+			}
 
 			uint32_t const dist = map.calc_distance(get_position(), dest);
 
@@ -1524,8 +1539,9 @@ void Soldier::battle_update(Game& game, State&) {
 }
 
 void Soldier::battle_pop(Game& game, State&) {
-	if (battle_)
+	if (battle_) {
 		battle_->cancel(game, *this);
+	}
 }
 
 Bob::Task const Soldier::taskDie = {"die", static_cast<Bob::Ptr>(&Soldier::die_update), nullptr,
@@ -1552,8 +1568,9 @@ void Soldier::die_update(Game& game, State& state) {
 		signal_handled();
 	}
 
-	if ((state.ivar1 >= 0) && (static_cast<uint32_t>(state.ivar1) > game.get_gametime()))
+	if ((state.ivar1 >= 0) && (static_cast<uint32_t>(state.ivar1) > game.get_gametime())) {
 		return schedule_act(game, state.ivar1 - game.get_gametime());
+	}
 
 	// When task updated, dead is near!
 	return pop_task(game);
@@ -1571,8 +1588,9 @@ void Soldier::die_pop(Game& game, State&) {
  */
 struct FindBobSoldierOnBattlefield : public FindBob {
 	bool accept(Bob* const bob) const override {
-		if (upcast(Soldier, soldier, bob))
+		if (upcast(Soldier, soldier, bob)) {
 			return soldier->is_on_battlefield() && soldier->get_current_health();
+		}
 		return false;
 	}
 };
@@ -1585,8 +1603,9 @@ struct FindBobSoldierOnBattlefield : public FindBob {
 bool Soldier::check_node_blocked(Game& game, const FCoords& field, bool const commit) {
 	State* attackdefense = get_state(taskAttack);
 
-	if (!attackdefense)
+	if (!attackdefense) {
 		attackdefense = get_state(taskDefense);
+	}
 
 	if (!attackdefense || ((attackdefense->ivar1 & CF_RETREAT_WHEN_INJURED) &&
 	                       get_retreat_health() > get_current_health())) {
@@ -1595,8 +1614,9 @@ bool Soldier::check_node_blocked(Game& game, const FCoords& field, bool const co
 	}
 
 	if (field.field->get_immovable() && field.field->get_immovable() == get_location(game)) {
-		if (commit)
+		if (commit) {
 			send_space_signals(game);
+		}
 		return false;  // we can always walk home
 	}
 
@@ -1607,8 +1627,9 @@ bool Soldier::check_node_blocked(Game& game, const FCoords& field, bool const co
 
 	for (Bob* bob = field.field->get_first_bob(); bob; bob = bob->get_next_on_field()) {
 		if (upcast(Soldier, soldier, bob)) {
-			if (!soldier->is_on_battlefield() || !soldier->get_current_health())
+			if (!soldier->is_on_battlefield() || !soldier->get_current_health()) {
 				continue;
+			}
 
 			if (!foundsoldier) {
 				foundsoldier = soldier;
@@ -1619,8 +1640,9 @@ bool Soldier::check_node_blocked(Game& game, const FCoords& field, bool const co
 			if (soldier->get_battle()) {
 				foundbattle = true;
 
-				if (battle_ && battle_->opponent(*this) == soldier)
+				if (battle_ && battle_->opponent(*this) == soldier) {
 					foundopponent = true;
+				}
 			}
 		}
 	}
@@ -1635,8 +1657,9 @@ bool Soldier::check_node_blocked(Game& game, const FCoords& field, bool const co
 
 		return true;
 	} else {
-		if (commit)
+		if (commit) {
 			send_space_signals(game);
+		}
 		return false;
 	}
 }
@@ -1739,11 +1762,12 @@ void Soldier::Loader::load(FileRead& fr) {
 			   std::min(fr.unsigned_32(), soldier.descr().get_max_defense_level());
 			soldier.evade_level_ = std::min(fr.unsigned_32(), soldier.descr().get_max_evade_level());
 
-			if (soldier.current_health_ > soldier.get_max_health())
+			if (soldier.current_health_ > soldier.get_max_health()) {
 				soldier.current_health_ = soldier.get_max_health();
-
-			if (soldier.retreat_health_ > soldier.get_max_health())
+			}
+			if (soldier.retreat_health_ > soldier.get_max_health()) {
 				soldier.retreat_health_ = soldier.get_max_health();
+			}
 
 			soldier.combat_walking_ = static_cast<CombatWalkingDir>(fr.unsigned_8());
 			if (soldier.combat_walking_ != CD_NONE) {
@@ -1765,21 +1789,27 @@ void Soldier::Loader::load_pointers() {
 
 	Soldier& soldier = get<Soldier>();
 
-	if (battle_)
+	if (battle_) {
 		soldier.battle_ = &mol().get<Battle>(battle_);
+	}
 }
 
 const Bob::Task* Soldier::Loader::get_task(const std::string& name) {
-	if (name == "attack")
+	if (name == "attack") {
 		return &taskAttack;
-	if (name == "defense")
+	}
+	if (name == "defense") {
 		return &taskDefense;
-	if (name == "battle")
+	}
+	if (name == "battle") {
 		return &taskBattle;
-	if (name == "moveInBattle")
+	}
+	if (name == "moveInBattle") {
 		return &taskMoveInBattle;
-	if (name == "die")
+	}
+	if (name == "die") {
 		return &taskDie;
+	}
 	return Worker::Loader::get_task(name);
 }
 

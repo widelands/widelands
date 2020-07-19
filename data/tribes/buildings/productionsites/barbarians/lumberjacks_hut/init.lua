@@ -40,10 +40,6 @@ tribes:new_productionsite_type {
       barbarians_lumberjack = 1
    },
 
-   outputs = {
-      "log"
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start felling trees because ...

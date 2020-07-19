@@ -49,9 +49,6 @@ tribes:new_productionsite_type {
       { name = "ration", amount = 6 },
       { name = "beer", amount = 6 }
    },
-   outputs = {
-      "coal"
-   },
 
    programs = {
       work = {

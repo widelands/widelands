@@ -46,10 +46,6 @@ tribes:new_productionsite_type {
       frisians_woodcutter = 1
    },
 
-   outputs = {
-      "log"
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start felling trees because ...

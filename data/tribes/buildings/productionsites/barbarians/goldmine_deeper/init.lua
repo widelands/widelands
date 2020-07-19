@@ -50,9 +50,6 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "meal", amount = 6 }
    },
-   outputs = {
-      "gold_ore"
-   },
 
    programs = {
       work = {

@@ -51,9 +51,6 @@ tribes:new_trainingsite_type {
       { name = "shield_steel", amount = 4 },
       { name = "shield_advanced", amount = 4 },
    },
-   outputs = {
-      "atlanteans_soldier",
-   },
 
    ["soldier defense"] = {
       min_level = 0,

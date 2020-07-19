@@ -46,10 +46,6 @@ tribes:new_productionsite_type {
       frisians_stonemason = 1
    },
 
-   outputs = {
-      "granite"
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...

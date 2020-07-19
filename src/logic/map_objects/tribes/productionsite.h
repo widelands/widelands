@@ -49,7 +49,7 @@ enum class FailNotificationType { kDefault, kFull };
  */
 class ProductionSiteDescr : public BuildingDescr {
 public:
-	friend struct ProductionProgram;  // To add animations
+	friend struct ProductionProgram;  // To add animations, outputs etc.
 
 	ProductionSiteDescr(const std::string& init_descname,
 	                    const std::string& msgctxt,
@@ -194,6 +194,14 @@ protected:
 	}
 	void add_created_resource(const std::string& resource) {
 		created_resources_.insert(resource);
+	}
+
+protected:
+	void add_output_ware_type(DescriptionIndex index) {
+		output_ware_types_.insert(index);
+	}
+	void add_output_worker_type(DescriptionIndex index) {
+		output_worker_types_.insert(index);
 	}
 
 private:

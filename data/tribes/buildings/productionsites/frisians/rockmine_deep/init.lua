@@ -70,9 +70,6 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "meal", amount = 8 }
    },
-   outputs = {
-      "granite"
-   },
 
    programs = {
       work = {

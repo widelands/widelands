@@ -32,11 +32,6 @@ tribes:new_productionsite_type {
       empire_stonemason = 1
    },
 
-   outputs = {
-      "granite",
-      "marble"
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

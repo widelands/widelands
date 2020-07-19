@@ -42,10 +42,6 @@ tribes:new_productionsite_type {
       atlanteans_farmer = 1
    },
 
-   outputs = {
-      "corn"
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

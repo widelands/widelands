@@ -99,7 +99,6 @@ struct ProductionProgram : public MapObjectProgram {
 	/// match. Example: "fish:2".
 	static BillOfMaterials parse_bill_of_materials(const std::vector<std::string>& arguments,
 	                                               WareWorker ww,
-	                                               const ProductionSiteDescr& descr,
 	                                               const Tribes& tribes);
 
 	/// Returns from the program.
@@ -413,7 +412,7 @@ struct ProductionProgram : public MapObjectProgram {
 	/// wares are handled is defined by the productionsite.
 	struct ActProduce : public Action {
 		ActProduce(const std::vector<std::string>& arguments,
-		           const ProductionSiteDescr&,
+		           ProductionSiteDescr&,
 		           const Tribes& tribes);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
@@ -436,7 +435,7 @@ struct ProductionProgram : public MapObjectProgram {
 	/// recruited workers are handled is defined by the productionsite.
 	struct ActRecruit : public Action {
 		ActRecruit(const std::vector<std::string>& arguments,
-		           const ProductionSiteDescr&,
+		           ProductionSiteDescr&,
 		           const Tribes& tribes);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;

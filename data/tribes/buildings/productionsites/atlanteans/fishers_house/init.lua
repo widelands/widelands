@@ -37,10 +37,6 @@ tribes:new_productionsite_type {
       atlanteans_fisher = 1
    },
 
-   outputs = {
-      "fish"
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start fishing because ...

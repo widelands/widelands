@@ -68,10 +68,6 @@ tribes:new_productionsite_type {
       frisians_farmer = 1
    },
 
-   outputs = {
-      "barley"
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

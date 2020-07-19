@@ -71,6 +71,11 @@ struct WorkerProgram : public MapObjectProgram {
 		return created_bobs_;
 	}
 
+	/// Set of ware types produced by this program
+	const std::set<DescriptionIndex>& produced_ware_types() const {
+		return produced_ware_types_;
+	}
+
 private:
 	WorkareaInfo workarea_info_;
 	// <"bob"|"immovable", attribute_name>
@@ -110,6 +115,7 @@ private:
 	const Tribes& tribes_;
 	Actions actions_;
 	static ParseMap const parsemap_[];
+	std::set<DescriptionIndex> produced_ware_types_;
 	DISALLOW_COPY_AND_ASSIGN(WorkerProgram);
 };
 }  // namespace Widelands

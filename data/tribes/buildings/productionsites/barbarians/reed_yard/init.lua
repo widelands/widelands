@@ -34,10 +34,6 @@ tribes:new_productionsite_type {
       barbarians_gardener = 1
    },
 
-   outputs = {
-      "reed"
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

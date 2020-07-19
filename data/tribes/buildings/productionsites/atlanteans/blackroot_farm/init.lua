@@ -38,10 +38,6 @@ tribes:new_productionsite_type {
       atlanteans_blackroot_farmer = 1
    },
 
-   outputs = {
-      "blackroot"
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

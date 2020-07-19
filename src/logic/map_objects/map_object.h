@@ -86,8 +86,8 @@ std::string to_string(MapObjectType type);
  * Base class for descriptions of worker, files and so on. This must just
  * link them together
  */
-struct MapObjectDescr {
-
+class MapObjectDescr {
+public:
 	enum class OwnerType { kWorld, kTribe };
 
 	MapObjectDescr(const MapObjectType init_type,

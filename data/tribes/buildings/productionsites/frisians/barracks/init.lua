@@ -65,9 +65,6 @@ tribes:new_productionsite_type {
       { name = "fur_garment", amount = 8 },
       { name = "frisians_carrier", amount = 8 }
    },
-   outputs = {
-      "frisians_soldier",
-   },
 
    programs = {
       work = {

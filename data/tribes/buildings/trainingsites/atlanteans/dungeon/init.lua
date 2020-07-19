@@ -131,9 +131,6 @@ tribes:new_trainingsite_type {
       { name = "trident_double", amount = 4 },
       { name = "trident_heavy_double", amount = 4 }
    },
-   outputs = {
-      "atlanteans_soldier",
-   },
 
    ["soldier attack"] = {
       min_level = 0,

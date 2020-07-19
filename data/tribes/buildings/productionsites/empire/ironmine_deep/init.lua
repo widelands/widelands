@@ -47,9 +47,6 @@ tribes:new_productionsite_type {
       { name = "meal", amount = 6 },
       { name = "beer", amount = 6 }
    },
-   outputs = {
-      "iron_ore"
-   },
 
    programs = {
       work = {

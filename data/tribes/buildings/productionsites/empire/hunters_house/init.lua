@@ -34,10 +34,6 @@ tribes:new_productionsite_type {
       empire_hunter = 1
    },
 
-   outputs = {
-      "meat"
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...

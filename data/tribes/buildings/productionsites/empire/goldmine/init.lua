@@ -49,9 +49,6 @@ tribes:new_productionsite_type {
       { name = "ration", amount = 6 },
       { name = "wine", amount = 6 }
    },
-   outputs = {
-      "gold_ore"
-   },
 
    programs = {
       work = {
