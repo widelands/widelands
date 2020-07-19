@@ -994,6 +994,7 @@ Finally build the road
 */
 void InteractiveBase::finish_build_road() {
 	assert(road_building_mode_);
+
 	if (road_building_mode_->type == RoadBuildingType::kWaterway) {
 		assert(road_building_mode_->work_area);
 		hide_workarea(road_building_mode_->path.get_start(), true);
