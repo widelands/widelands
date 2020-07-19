@@ -56,11 +56,6 @@ tribes:new_productionsite_type {
       { name = "iron", amount = 8 },
       { name = "gold", amount = 8 }
    },
-   outputs = {
-      "helmet",
-      "helmet_mask",
-      "helmet_warhelm"
-   },
 
    programs = {
       work = {

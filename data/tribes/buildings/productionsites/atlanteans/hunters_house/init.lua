@@ -34,10 +34,6 @@ tribes:new_productionsite_type {
       atlanteans_hunter = 1
    },
 
-   outputs = {
-      "meat"
-   },
-
    indicate_workarea_overlaps = {
       atlanteans_hunters_house = false,
    },

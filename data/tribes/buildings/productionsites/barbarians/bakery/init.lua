@@ -48,9 +48,6 @@ tribes:new_productionsite_type {
       { name = "water", amount = 6 },
       { name = "wheat", amount = 6 }
    },
-   outputs = {
-      "barbarians_bread"
-   },
 
    programs = {
       work = {

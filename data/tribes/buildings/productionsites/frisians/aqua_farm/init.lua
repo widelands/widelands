@@ -53,10 +53,6 @@ tribes:new_productionsite_type {
       { name = "fruit", amount = 2 },
    },
 
-   outputs = {
-      "fish"
-   },
-
    indicate_workarea_overlaps = {
       frisians_aqua_farm = false,
       frisians_charcoal_burners_house = false,
