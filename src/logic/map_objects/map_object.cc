@@ -468,6 +468,9 @@ std::set<std::string> MapObjectDescr::attribute_names() const {
 	}
 	return result;
 }
+const MapObjectDescr::Attributes& MapObjectDescr::attributes() const {
+	return attributes_;
+}
 
 /**
  * Lookup an attribute by name. If the attribute name hasn't been encountered

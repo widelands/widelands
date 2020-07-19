@@ -135,9 +135,9 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 		}
 		// Register target at ImmovableDescr
 		if (bob) {
-			descr.becomes_.insert(std::make_pair("bob", type_name));
+			descr.becomes_.insert(std::make_pair(MapObjectType::BOB, type_name));
 		} else {
-			descr.becomes_.insert(std::make_pair("immovable", type_name));
+			descr.becomes_.insert(std::make_pair(MapObjectType::IMMOVABLE, type_name));
 		}
 	} catch (const WException& e) {
 		throw GameDataError("transform: %s", e.what());
@@ -179,7 +179,7 @@ ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments,
 	// order. Maybe in postload() one day.
 	type_name = arguments.front();
 	// Register target at ImmovableDescr
-	descr.becomes_.insert(std::make_pair("immovable", type_name));
+	descr.becomes_.insert(std::make_pair(MapObjectType::IMMOVABLE, type_name));
 }
 
 void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const {

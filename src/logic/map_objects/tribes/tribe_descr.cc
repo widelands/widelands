@@ -46,7 +46,7 @@
 namespace {
 
 // Recursively get attributes for world immovable growth cycle
-void walk_world_immovables(Widelands::DescriptionIndex index, const Widelands::World& world, std::set<Widelands::DescriptionIndex>* walked_immovables, const std::set<std::string>& needed_attributes, std::set<std::string>* deduced_immovable_attribs, std::set<std::string>* deduced_immovables, std::set<std::string>* deduced_bobs) {
+void walk_world_immovables(Widelands::DescriptionIndex index, const Widelands::World& world, std::set<Widelands::DescriptionIndex>* walked_immovables, const std::set<Widelands::MapObjectDescr::AttributeIndex>& needed_attributes, std::set<std::string>* deduced_immovables, std::set<std::string>* deduced_bobs) {
 	// Protect against endless recursion
 	if (walked_immovables->count(index) == 1) {
 		return;
@@ -55,30 +55,32 @@ void walk_world_immovables(Widelands::DescriptionIndex index, const Widelands::W
 
 	// Insert this immovable's attributes
 	const Widelands::ImmovableDescr* immovable_descr = world.get_immovable_descr(index);
-	for (const std::string& attribute_name : immovable_descr->attribute_names()) {
-		if (needed_attributes.count(attribute_name) == 1) {
-			deduced_immovable_attribs->insert(attribute_name);
+	for (const Widelands::MapObjectDescr::AttributeIndex id : immovable_descr->attributes()) {
+		if (needed_attributes.count(id) == 1) {
 			deduced_immovables->insert(immovable_descr->name());
 		}
 	}
 
 	// Check immovables that this immovable can turn into
 	for (const auto& imm_becomes : immovable_descr->becomes()) {
-		if (imm_becomes.first == "bob") {
+		switch (imm_becomes.first) {
+		case Widelands::MapObjectType::BOB:
 			deduced_bobs->insert(imm_becomes.second);
 			// Bobs don't transform further
 			return;
-		} else {
-			// NOCOM log("      ---> %s\n", imm_becomes.second.c_str());
+		case Widelands::MapObjectType::IMMOVABLE: {
 			const Widelands::DescriptionIndex becomes_index = world.get_immovable_index(imm_becomes.second);
 			assert(becomes_index != Widelands::INVALID_INDEX);
-			walk_world_immovables(becomes_index, world, walked_immovables, needed_attributes, deduced_immovable_attribs, deduced_immovables, deduced_bobs);
+			walk_world_immovables(becomes_index, world, walked_immovables, needed_attributes, deduced_immovables, deduced_bobs);
+		} break;
+		default:
+			NEVER_HERE();
 		}
 	}
 }
 
 // Recursively get attributes for world immovable growth cycle
-void walk_tribe_immovables(Widelands::DescriptionIndex index, const Widelands::TribeDescr& tribe, std::set<Widelands::DescriptionIndex>* walked_immovables, const std::set<std::string>& needed_attributes, std::set<std::string>* deduced_immovable_attribs, std::set<std::string>* deduced_immovables, std::set<std::string>* deduced_bobs) {
+void walk_tribe_immovables(Widelands::DescriptionIndex index, const Widelands::TribeDescr& tribe, std::set<Widelands::DescriptionIndex>* walked_immovables, const std::set<Widelands::MapObjectDescr::AttributeIndex>& needed_attributes, std::set<std::string>* deduced_immovables, std::set<std::string>* deduced_bobs) {
 	// Protect against endless recursion
 	if (walked_immovables->count(index) == 1) {
 		return;
@@ -87,24 +89,26 @@ void walk_tribe_immovables(Widelands::DescriptionIndex index, const Widelands::T
 
 	// Insert this immovable's attributes
 	const Widelands::ImmovableDescr* immovable_descr = tribe.get_immovable_descr(index);
-	for (const std::string& attribute_name : immovable_descr->attribute_names()) {
-		if (needed_attributes.count(attribute_name) == 1) {
-			deduced_immovable_attribs->insert(attribute_name);
+	for (const Widelands::MapObjectDescr::AttributeIndex id : immovable_descr->attributes()) {
+		if (needed_attributes.count(id) == 1) {
 			deduced_immovables->insert(immovable_descr->name());
 		}
 	}
 
 	// Check immovables that this immovable can turn into
 	for (const auto& imm_becomes : immovable_descr->becomes()) {
-		if (imm_becomes.first == "bob") {
+		switch (imm_becomes.first) {
+		case Widelands::MapObjectType::BOB:
 			deduced_bobs->insert(imm_becomes.second);
 			// Bobs don't transform further
 			return;
-		} else {
-			// NOCOM log("      ---> %s\n", imm_becomes.second.c_str());
+		case Widelands::MapObjectType::IMMOVABLE: {
 			const Widelands::DescriptionIndex becomes_index = tribe.immovable_index(imm_becomes.second);
 			assert(becomes_index != Widelands::INVALID_INDEX);
-			walk_tribe_immovables(becomes_index, tribe, walked_immovables, needed_attributes, deduced_immovable_attribs, deduced_immovables, deduced_bobs);
+			walk_tribe_immovables(becomes_index, tribe, walked_immovables, needed_attributes, deduced_immovables, deduced_bobs);
+		} break;
+		default:
+			NEVER_HERE();
 		}
 	}
 }
@@ -632,36 +636,41 @@ void TribeDescr::process_productionsites(const World& world) {
 	const DescriptionMaintainer<ImmovableDescr>& world_immovables = world.immovables();
 
 	// Find all attributes that we need to collect from map
-	std::set<std::string> needed_attributes;
+	std::set<MapObjectDescr::AttributeIndex> needed_attributes;
 	for (ProductionSiteDescr* prod : productionsites) {
 		for (const auto& attribinfo : prod->collected_attributes()) {
-			const std::string& mapobjecttype = attribinfo.first;
-			const std::string& attribute_name = attribinfo.second;
-			// NOCOM make the pair the argument?
-			needed_attributes.insert(attribinfo.second);
+			const MapObjectType mapobjecttype = attribinfo.first;
+			const MapObjectDescr::AttributeIndex attribute_id = attribinfo.second;
+			needed_attributes.insert(attribute_id);
 
 			// Add collected entities
-			if (mapobjecttype == "immovable") {
+			switch(mapobjecttype) {
+			case MapObjectType::IMMOVABLE: {
 				for (DescriptionIndex i = 0; i < world_immovables.size(); ++i) {
 					const ImmovableDescr& immovable_descr = world_immovables.get(i);
-					if (immovable_descr.has_attribute(attribute_name)) {
+					if (immovable_descr.has_attribute(attribute_id)) {
 						prod->add_collected_immovable(immovable_descr.name());
 					}
 				}
 				for (const DescriptionIndex i : immovables()) {
 					const ImmovableDescr& immovable_descr = *get_immovable_descr(i);
-					if (immovable_descr.has_attribute(attribute_name)) {
+					if (immovable_descr.has_attribute(attribute_id)) {
 						prod->add_collected_immovable(immovable_descr.name());
 					}
 				}
-			} else if (mapobjecttype == "bob") {
+			} break;
+			case MapObjectType::BOB: {
 				// We only support critters here, because no other bobs are collected so far
 				for (DescriptionIndex i = 0; i < world.get_nr_critters(); ++i) {
 					const CritterDescr* critter = world.get_critter_descr(i);
-					if (critter->has_attribute(attribute_name)) {
+					// NOCOM hunter's hut collected bobs missing
+					if (critter->has_attribute(attribute_id)) {
 						prod->add_collected_bob(critter->name());
 					}
 				}
+			} break;
+			default:
+				NEVER_HERE();
 			}
 		}
 	}
@@ -688,25 +697,28 @@ void TribeDescr::process_productionsites(const World& world) {
 
 
 	for (ProductionSiteDescr* prod : productionsites) {
-
-		// Add attributes for bobs that are created directly
+		// Add bobs that are created directly and their attributes
 		for (const std::string& bobname : prod->created_bobs()) {
-			add_creator(bobname, prod);
 			const CritterDescr* critter = world.get_critter_descr(bobname);
-			if (critter != nullptr) {
-				for (const std::string& critter_attribute : critter->attribute_names()) {
-					if (needed_attributes.count(critter_attribute) == 1) {
-						prod->add_created_attribute("bob", critter_attribute);
-					}
-				}
-			} else {
+			if (critter == nullptr) {
 				throw GameDataError("Productionsite '%s' has unknown critter '%s' in production or worker program",
 									prod->name().c_str(), bobname.c_str());
 			}
+			/* NOCOM hunter help is broken
+			for (const MapObjectDescr::AttributeIndex critter_id : critter->attributes()) {
+				if (needed_attributes.count(critter_id) == 1) {
+					prod->add_created_attribute(MapObjectType::BOB, critter_id);
+				}
+			}
+			for (const auto& attribute_info : prod->collected_attributes()) {
+				if (critter->has_attribute(attribute_info.second)) {
+					add_collector(bobname, prod);
+				}
+			} */
+			add_creator(bobname, prod);
 		}
 
 		// Get attributes and bobs from transformations
-		std::set<std::string> deduced_immovable_attribs;
 		std::set<std::string> deduced_bobs;
 		std::set<std::string> deduced_immovables;
 		// Remember where we walked in case of circular dependencies
@@ -716,41 +728,37 @@ void TribeDescr::process_productionsites(const World& world) {
 		for (const auto& attribinfo : prod->created_attributes()) {
 			// NOCOM make the pair the argument?
 			// NOCOM ferries
-			const std::string& mapobjecttype = attribinfo.first;
-			const std::string& attribute_name = attribinfo.second;
-			if (mapobjecttype == "immovable") {
-				for (DescriptionIndex i = 0; i < world_immovables.size(); ++i) {
-					const ImmovableDescr& immovable_descr = world_immovables.get(i);
-					if (immovable_descr.has_attribute(attribute_name)) {
-						walk_world_immovables(i, world, &walked_world_immovables, needed_attributes, &deduced_immovable_attribs, &deduced_immovables, &deduced_bobs);
-						if (needed_attributes.count(attribute_name) == 1) {
-							prod->add_created_immovable(immovable_descr.name());
-							add_creator(immovable_descr.name(), prod);
-						}
-					}
-				}
-				for (const DescriptionIndex i : immovables()) {
-					const ImmovableDescr& immovable_descr = *get_immovable_descr(i);
-					if (immovable_descr.has_attribute(attribute_name)) {
-						walk_tribe_immovables(i, *this, &walked_tribe_immovables, needed_attributes, &deduced_immovable_attribs, &deduced_immovables, &deduced_bobs);
-						if (needed_attributes.count(attribute_name) == 1) {
-							prod->add_created_immovable(immovable_descr.name());
-							add_creator(immovable_descr.name(), prod);
-						}
+			const MapObjectType mapobjecttype = attribinfo.first;
+			const MapObjectDescr::AttributeIndex attribute_id = attribinfo.second;
+			if (mapobjecttype != MapObjectType::IMMOVABLE) {
+				continue;
+			}
+			for (DescriptionIndex i = 0; i < world_immovables.size(); ++i) {
+				const ImmovableDescr& immovable_descr = world_immovables.get(i);
+				if (immovable_descr.has_attribute(attribute_id)) {
+					walk_world_immovables(i, world, &walked_world_immovables, needed_attributes, &deduced_immovables, &deduced_bobs);
+					if (needed_attributes.count(attribute_id) == 1) {
+						prod->add_created_immovable(immovable_descr.name());
+						add_creator(immovable_descr.name(), prod);
 					}
 				}
 			}
-			if (needed_attributes.count(attribute_name) != 1) {
-				prod->remove_created_attribute(attribinfo);
+			for (const DescriptionIndex i : immovables()) {
+				const ImmovableDescr& immovable_descr = *get_immovable_descr(i);
+				if (immovable_descr.has_attribute(attribute_id)) {
+					walk_tribe_immovables(i, *this, &walked_tribe_immovables, needed_attributes, &deduced_immovables, &deduced_bobs);
+					if (needed_attributes.count(attribute_id) == 1) {
+						prod->add_created_immovable(immovable_descr.name());
+						add_creator(immovable_descr.name(), prod);
+					}
+				}
 			}
+
+			// We're done with this site's attrbutes, let's get some memory back
+			prod->clear_attributes();
 		}
 
 		// Add deduced entities
-		for (const std::string& attribute_name : deduced_immovable_attribs) {
-			if (needed_attributes.count(attribute_name) == 1) {
-				prod->add_created_attribute("immovable", attribute_name);
-			}
-		}
 		for (const std::string& bob_name : deduced_bobs) {
 			prod->add_created_bob(bob_name);
 			add_creator(bob_name, prod);
@@ -775,7 +783,7 @@ void TribeDescr::process_productionsites(const World& world) {
 		}
 	}
 
-	// Calculate workarea overlaps
+	// Calculate workarea overlaps + AI info
 	// NOCOM ferries broken, needs the worker program refactoring first
 	for (ProductionSiteDescr* prod : productionsites) {
 		// Sites that create any immovables should not overlap each other
@@ -796,7 +804,7 @@ void TribeDescr::process_productionsites(const World& world) {
 		}
 
 		// Sites that create a bob should not overlap sites that create the same bob
-		for (const auto& item : prod->created_bobs()) {
+		for (const std::string& item : prod->created_bobs()) {
 			if (creators.count(item)) {
 				for (ProductionSiteDescr* creator : creators.at(item)) {
 					prod->add_competing_productionsite(creator);
@@ -805,7 +813,7 @@ void TribeDescr::process_productionsites(const World& world) {
 			}
 		}
 
-		for (const auto& item : prod->collected_immovables()) {
+		for (const std::string& item : prod->collected_immovables()) {
 			// Sites that collect immovables and sites of other types that create immovables for them should overlap each other
 			if (creators.count(item)) {
 				for (ProductionSiteDescr* creator: creators.at(item)) {
@@ -822,7 +830,7 @@ void TribeDescr::process_productionsites(const World& world) {
 				}
 			}
 		}
-		for (const auto& item : prod->collected_bobs()) {
+		for (const std::string& item : prod->collected_bobs()) {
 			// Sites that collect bobs and sites of other types that create bobs for them should overlap each other
 			if (creators.count(item)) {
 				for (ProductionSiteDescr* creator: creators.at(item)) {
@@ -839,7 +847,7 @@ void TribeDescr::process_productionsites(const World& world) {
 				}
 			}
 		}
-		for (const auto& item : prod->collected_resources()) {
+		for (const std::string& item : prod->collected_resources()) {
 			// Sites that collect resources and sites of other types that create resources for them should overlap each other
 			if (creators.count(item)) {
 				for (ProductionSiteDescr* creator: creators.at(item)) {

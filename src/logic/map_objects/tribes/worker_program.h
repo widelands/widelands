@@ -55,10 +55,10 @@ struct WorkerProgram : public MapObjectProgram {
 	const WorkareaInfo& get_workarea_info() const {
 		return workarea_info_;
 	}
-	const std::set<std::pair<std::string, std::string>>& collected_attributes() const {
+	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>& collected_attributes() const {
 		return collected_attributes_;
 	}
-	const std::set<std::pair<std::string, std::string>>& created_attributes() const {
+	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>& created_attributes() const {
 		return created_attributes_;
 	}
 	const std::set<std::string>& collected_resources() const {
@@ -78,9 +78,8 @@ struct WorkerProgram : public MapObjectProgram {
 
 private:
 	WorkareaInfo workarea_info_;
-	// <"bob"|"immovable", attribute_name>
-	std::set<std::pair<std::string, std::string>> collected_attributes_;
-	std::set<std::pair<std::string, std::string>> created_attributes_;
+	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> collected_attributes_;
+	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> created_attributes_;
 	// e.g. "fish"
 	std::set<std::string> collected_resources_;
 	std::set<std::string> created_resources_;

@@ -89,6 +89,7 @@ std::string to_string(MapObjectType type);
 class MapObjectDescr {
 public:
 	using AttributeIndex = uint32_t;
+	using Attributes = std::vector<AttributeIndex>;
 
 	enum class OwnerType { kWorld, kTribe };
 
@@ -140,6 +141,7 @@ public:
 	bool has_attribute(const AttributeIndex) const;
 	bool has_attribute(const std::string& attribute_name) const;
 	std::set<std::string> attribute_names() const;
+	const MapObjectDescr::Attributes& attributes() const;
 	static AttributeIndex get_attribute_id(const std::string& name, bool add_if_not_exists = false);
 
 protected:
@@ -160,7 +162,6 @@ private:
 	void check_representative_image();
 
 	using Anims = std::map<std::string, uint32_t>;
-	using Attributes = std::vector<AttributeIndex>;
 
 	static std::map<std::string, AttributeIndex> attribute_names_;
 	Attributes attributes_;

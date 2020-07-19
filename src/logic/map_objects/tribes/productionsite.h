@@ -103,17 +103,18 @@ public:
 	const Output& output_worker_types() const {
 		return output_worker_types_;
 	}
-	const std::set<std::pair<std::string, std::string>>& collected_attributes() const {
+	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>& collected_attributes() const {
 		return collected_attributes_;
 	}
-	const std::set<std::pair<std::string, std::string>>& created_attributes() const {
+	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>& created_attributes() const {
 		return created_attributes_;
 	}
-	void add_created_attribute(const std::string& object_type, const std::string& attribute) {
+	void add_created_attribute(MapObjectType object_type, MapObjectDescr::AttributeIndex attribute) {
 		created_attributes_.insert(std::make_pair(object_type, attribute));
 	}
-	/// Remove created attribute that we're not interested in
-	void remove_created_attribute(const std::pair<std::string, std::string> attribute_info);
+	/// We only need the attributes during tribes initialization
+	void clear_attributes();
+
 	const std::set<std::string>& collected_resources() const {
 		return collected_resources_;
 	}
@@ -186,8 +187,8 @@ public:
 	}
 
 protected:
-	void add_collected_attribute(const std::string& object_type, const std::string& resource) {
-		collected_attributes_.insert(std::make_pair(object_type, resource));
+	void add_collected_attribute(MapObjectType object_type, MapObjectDescr::AttributeIndex attribute) {
+		collected_attributes_.insert(std::make_pair(object_type, attribute));
 	}
 	void add_collected_resource(const std::string& resource) {
 		collected_resources_.insert(resource);
@@ -212,9 +213,8 @@ private:
 	BillOfMaterials input_workers_;
 	Output output_ware_types_;
 	Output output_worker_types_;
-	// <"bob"|"immovable", attribute_name>
-	std::set<std::pair<std::string, std::string>> collected_attributes_;
-	std::set<std::pair<std::string, std::string>> created_attributes_;
+	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> collected_attributes_;
+	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> created_attributes_;
 	// e.g. "fish"
 	std::set<std::string> collected_resources_;
 	std::set<std::string> created_resources_;

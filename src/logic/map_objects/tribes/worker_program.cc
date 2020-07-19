@@ -301,7 +301,7 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 			act->iparam1 = read_positive(item.second);
 		} else if (item.first == "attrib") {
 			act->iparam2 = MapObjectDescr::get_attribute_id(item.second);
-			collected_attributes_.insert(std::make_pair(act->sparam1, item.second));
+			collected_attributes_.insert(std::make_pair(MapObjectType::IMMOVABLE, act->iparam2));
 		} else if (item.first == "type") {
 			act->sparam1 = item.second;
 		} else {
@@ -698,9 +698,9 @@ void WorkerProgram::parse_plant(Worker::Action* act, const std::vector<std::stri
 		const std::string attrib_name = read_key_value_pair(cmd[i], ':', "", "attrib").second;
 
 		// This will throw a GameDataError if the attribute doesn't exist.
-		ImmovableDescr::get_attribute_id(attrib_name);
+		MapObjectDescr::AttributeIndex id = ImmovableDescr::get_attribute_id(attrib_name);
 		act->sparamv.push_back(attrib_name);
-		created_attributes_.insert(std::make_pair("immovable", attrib_name));
+		created_attributes_.insert(std::make_pair(MapObjectType::IMMOVABLE, id));
 	}
 }
 

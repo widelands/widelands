@@ -170,7 +170,7 @@ public:
 	const TerrainAffinity& terrain_affinity() const;
 
 	// Map object names that the immovable can transform/grow into
-	const std::set<std::pair<std::string, std::string>>& becomes() const {
+	const std::set<std::pair<MapObjectType, std::string>>& becomes() const {
 		return becomes_;
 	}
 
@@ -186,7 +186,7 @@ protected:
 	Buildcost buildcost_;
 
 	std::string species_;
-	std::set<std::pair<std::string, std::string>> becomes_;
+	std::set<std::pair<MapObjectType, std::string>> becomes_;
 
 private:
 	// Common constructor functions for tribes and world.
