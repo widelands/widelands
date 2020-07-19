@@ -48,11 +48,6 @@ tribes:new_productionsite_type {
       { name = "smoked_meat", amount = 6 },
       { name = "atlanteans_bread", amount = 10 }
    },
-   outputs = {
-      "diamond",
-      "quartz",
-      "granite"
-   },
 
    indicate_workarea_overlaps = {
       atlanteans_crystalmine = false,

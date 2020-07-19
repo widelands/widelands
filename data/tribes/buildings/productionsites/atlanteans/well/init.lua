@@ -39,10 +39,6 @@ tribes:new_productionsite_type {
       atlanteans_carrier = 1
    },
 
-   outputs = {
-      "water"
-   },
-
    indicate_workarea_overlaps = {
       atlanteans_well = false,
    },

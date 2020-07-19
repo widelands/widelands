@@ -50,10 +50,6 @@ tribes:new_productionsite_type {
       frisians_reed_farmer = 1
    },
 
-   outputs = {
-      "reed"
-   },
-
    indicate_workarea_overlaps = {
       frisians_clay_pit = false,
       frisians_berry_farm = false,

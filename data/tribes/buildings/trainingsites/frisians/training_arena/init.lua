@@ -74,12 +74,6 @@ tribes:new_trainingsite_type {
       { name = "helmet_golden", amount = 2 },
       { name = "fur_garment_golden", amount = 2 },
    },
-   outputs = {
-      "frisians_soldier",
-      "scrap_iron",
-      "scrap_metal_mixed",
-      "fur_garment_old",
-   },
 
    ["soldier attack"] = {
       min_level = 3,

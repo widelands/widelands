@@ -75,11 +75,6 @@ tribes:new_productionsite_type {
       { name = "scrap_metal_mixed", amount = 8 },
       { name = "fur_garment_old", amount = 8 },
    },
-   outputs = {
-      "iron",
-      "gold",
-      "fur"
-   },
 
    programs = {
       work = {

@@ -43,20 +43,6 @@ tribes:new_productionsite_type {
       { name = "spidercloth", amount = 4 },
       { name = "iron", amount = 6 }
    },
-   outputs = {
-      "bread_paddle",
-      "buckets",
-      "fire_tongs",
-      "fishing_net",
-      "hammer",
-      "hook_pole",
-      "hunting_bow",
-      "milking_tongs",
-      "pick",
-      "saw",
-      "scythe",
-      "shovel"
-   },
 
    programs = {
       work = {
