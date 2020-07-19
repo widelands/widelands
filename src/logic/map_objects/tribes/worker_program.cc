@@ -695,8 +695,8 @@ createbob
    :arg string bob_name: The bob type to add to the selection. Specify as many bob
       types as you want.
 
-   Adds a bob (usually an animal) to the map at the worker's current location.
-   Randomly select from the list of ``bob_name``. Example::
+   Adds a bob (an animal or a worker, e.g. a deer or a ferry) to the map at the worker's current location.
+   Randomly select from the list of ``bob_name``. Examples::
 
       release = {
          "findspace=size:any radius:3",
@@ -704,6 +704,14 @@ createbob
          "animate=releasein 2000",
          "createbob=wildboar stag sheep", -- Release a wildboar, stag or sheep into the wild
          "animate=releaseout 2000",
+         "return"
+      },
+
+      buildferry = {
+         "findspace=size:swim radius:5",
+         "walk=coords",
+         "animate=work 10000",
+         "createbob=frisians_ferry",
          "return"
       }
 */
@@ -722,7 +730,7 @@ buildferry
 ^^^^^^^^^^
 .. function:: buildferry
 
-   Adds a new instance of this tribe's ferry to the map at the worker's current location. Example::
+   **DEPRECATED** Adds a new instance of this tribe's ferry to the map at the worker's current location. Example::
 
       construct = {
          "findspace=size:swim radius:4",

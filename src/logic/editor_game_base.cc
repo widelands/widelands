@@ -542,9 +542,12 @@ Bob& EditorGameBase::create_ship(const Coords& c, const std::string& name, Playe
 	}
 }
 
-Bob& EditorGameBase::create_ferry(const Coords& c, Player* owner) {
+Bob& EditorGameBase::create_worker(const Coords& c, const DescriptionIndex worker, Player* owner) {
+	if (!owner->tribe().has_worker(worker)) {
+		throw GameDataError("Tribe %s does not have worker with index %d", owner->tribe().name().c_str(), worker);
+	}
 	const BobDescr* descr =
-	   dynamic_cast<const BobDescr*>(tribes().get_worker_descr(owner->tribe().ferry()));
+	   dynamic_cast<const BobDescr*>(tribes().get_worker_descr(worker));
 	return create_bob(c, *descr, owner);
 }
 
