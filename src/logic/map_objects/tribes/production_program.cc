@@ -168,10 +168,8 @@ ProductionProgram::parse_ware_type_groups(std::vector<std::string>::const_iterat
 	return result;
 }
 
-BillOfMaterials
-ProductionProgram::parse_bill_of_materials(const std::vector<std::string>& arguments,
-                                           WareWorker ww,
-                                           const Tribes& tribes) {
+BillOfMaterials ProductionProgram::parse_bill_of_materials(
+   const std::vector<std::string>& arguments, WareWorker ww, const Tribes& tribes) {
 	BillOfMaterials result;
 	for (const std::string& argument : arguments) {
 		const std::pair<std::string, std::string> produceme = read_key_value_pair(argument, ':', "1");
@@ -627,8 +625,7 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 
 	//  This will fail unless the main worker has a program with the given
 	//  name, so it also validates the parameter.
-	const WorkareaInfo& worker_workarea_info =
-	   workerprogram->get_workarea_info();
+	const WorkareaInfo& worker_workarea_info = workerprogram->get_workarea_info();
 
 	// Add to building outputs for help and AI
 	for (const DescriptionIndex produced_ware : workerprogram->produced_ware_types()) {
