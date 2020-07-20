@@ -111,7 +111,8 @@ obj_make_ships = {
 }
 
 function shipyard_production(shipname)
-   return {
+   push_textdomain("scenario_tutorial03_seafaring.wmf")
+   local r = {
       position = "topright",
       title = _"Shipyard production",
       body = (
@@ -122,6 +123,8 @@ function shipyard_production(shipname)
       ),
       h = 250
    }
+   pop_textdomain()
+   return r
 end
 
 expedition1 = {

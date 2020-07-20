@@ -1,6 +1,6 @@
 include "scripting/richtext.lua"
 
-set_textdomain("texts")
+push_textdomain("texts")
 tips = {
    {
       text = _"The building process will only start after a road is built to the construction site.",
@@ -89,4 +89,5 @@ tips = {
    },
 
 }
+pop_textdomain()
 return tips

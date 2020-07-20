@@ -2,7 +2,7 @@
 --                       Barbarians Campaign Mission 2
 -- =======================================================================
 
-set_textdomain("scenario_bar02.wmf")
+push_textdomain("scenario_bar02.wmf")
 
 include "scripting/coroutine.lua"
 include "scripting/field_animations.lua"

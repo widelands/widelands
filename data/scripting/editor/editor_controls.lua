@@ -5,9 +5,9 @@ local toggle_minimap_hotkey = help_toggle_minimap_hotkey()
 local toggle_building_spaces_hotkey = help_toggle_building_spaces_hotkey()
 local toggle_fullscreen_hotkey = help_toggle_fullscreen_hotkey()
 
-set_textdomain("widelands_editor")
+push_textdomain("widelands_editor")
 
-return {
+local r = {
    title = _"Controls",
    text =
       h2(_"Keyboard Shortcuts") ..
@@ -47,3 +47,5 @@ return {
          dl(help_format_hotkey(pgettext("hotkey", "Ctrl + Click")), _"Set map elements to the value selected by ‘Set Value’")
       )
 }
+pop_textdomain()
+return r
