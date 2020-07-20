@@ -41,9 +41,6 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "gold", amount = 5 }
    },
-   outputs = {
-      "gold_thread"
-   },
 
    programs = {
       work = {

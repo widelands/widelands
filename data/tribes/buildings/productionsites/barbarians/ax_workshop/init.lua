@@ -55,11 +55,6 @@ tribes:new_productionsite_type {
       { name = "coal", amount = 8 },
       { name = "iron", amount = 8 }
    },
-   outputs = {
-      "ax",
-      "ax_sharp",
-      "ax_broad"
-   },
 
    programs = {
       work = {

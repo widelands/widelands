@@ -38,10 +38,6 @@ tribes:new_productionsite_type {
       empire_carrier = 1
    },
 
-   outputs = {
-      "water"
-   },
-
    indicate_workarea_overlaps = {
       empire_well = false,
    },

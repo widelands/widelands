@@ -214,8 +214,9 @@ void Ship::wakeup_neighbours(Game& game) {
 	game.map().find_bobs(game, area, &ships, FindBobShip());
 
 	for (std::vector<Bob*>::const_iterator it = ships.begin(); it != ships.end(); ++it) {
-		if (*it == this)
+		if (*it == this) {
 			continue;
+		}
 
 		static_cast<Ship*>(*it)->ship_wakeup(game);
 	}
@@ -237,8 +238,9 @@ void Ship::start_task_ship(Game& game) {
 }
 
 void Ship::ship_wakeup(Game& game) {
-	if (get_state(taskShip))
+	if (get_state(taskShip)) {
 		send_signal(game, "wakeup");
+	}
 }
 
 void Ship::ship_update(Game& game, Bob::State& state) {
@@ -266,8 +268,9 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 
 	switch (ship_state_) {
 	case ShipStates::kTransport:
-		if (ship_update_transport(game, state))
+		if (ship_update_transport(game, state)) {
 			return;
+		}
 		break;
 	case ShipStates::kExpeditionPortspaceFound:
 	case ShipStates::kExpeditionScouting:
@@ -357,17 +360,20 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 					closest_idx = idx;
 				}
 
-				if (idx == closest_idx + closest_dist)
+				if (idx == closest_idx + closest_dist) {
 					closest_target = cur;
+				}
 
-				if (idx < path.get_nsteps())
+				if (idx < path.get_nsteps()) {
 					map.get_neighbour(cur, path[idx], &cur);
+				}
 			}
 
 			if (closest_target) {
 				molog("Closest target en route is (%i,%i)\n", closest_target.x, closest_target.y);
-				if (start_task_movepath(game, closest_target, 0, descr().get_sail_anims()))
+				if (start_task_movepath(game, closest_target, 0, descr().get_sail_anims())) {
 					return true;
+				}
 
 				molog("  Failed to find path!!! Retry full search\n");
 			}
@@ -467,8 +473,9 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			map.find_bobs(game, area, &ships, FindBobShip());
 
 			for (std::vector<Bob*>::const_iterator it = ships.begin(); it != ships.end(); ++it) {
-				if (*it == this)
+				if (*it == this) {
 					continue;
+				}
 
 				dirs[dir] += 3;
 			}
@@ -581,7 +588,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 				FCoords position = get_position();
 				for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 					FCoords neighbour = map.get_neighbour(position, dir);
-					for (uint8_t sur = FIRST_DIRECTION; sur <= LAST_DIRECTION; ++sur)
+					for (uint8_t sur = FIRST_DIRECTION; sur <= LAST_DIRECTION; ++sur) {
 						if (!(map.get_neighbour(neighbour, sur).field->nodecaps() & MOVECAPS_SWIM)) {
 							// Okay we found the next coast, so now the ship should go there.
 							// However, we do neither save the position as starting position, nor do we
@@ -590,6 +597,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 							state.ivar1 = 1;
 							return start_task_move(game, dir, descr().get_sail_anims(), false);
 						}
+					}
 				}
 				// if we are here, it seems something really strange happend.
 				log("WARNING: ship %s was not able to start exploration. Entering WAIT mode.",
@@ -929,8 +937,9 @@ void Ship::exp_cancel(Game& game) {
 	// Running colonization has the highest priority before cancelation
 	// + cancelation only works if an expedition is actually running
 
-	if ((ship_state_ == ShipStates::kExpeditionColonizing) || !state_is_expedition())
+	if ((ship_state_ == ShipStates::kExpeditionColonizing) || !state_is_expedition()) {
 		return;
+	}
 
 	// The workers were hold in an idle state so that they did not try
 	// to become fugitive or run to the next warehouse. But now, we
@@ -1128,8 +1137,9 @@ Load / Save implementation
 constexpr uint8_t kCurrentPacketVersion = 12;
 
 const Bob::Task* Ship::Loader::get_task(const std::string& name) {
-	if (name == "shipidle" || name == "ship")
+	if (name == "shipidle" || name == "ship") {
 		return &taskShip;
+	}
 	return Bob::Loader::get_task(name);
 }
 
@@ -1158,11 +1168,13 @@ void Ship::Loader::load(FileRead& fr, uint8_t pw) {
 		// Currently seen port build spaces
 		expedition_->seen_port_buildspaces.clear();
 		uint8_t numofports = fr.unsigned_8();
-		for (uint8_t i = 0; i < numofports; ++i)
+		for (uint8_t i = 0; i < numofports; ++i) {
 			expedition_->seen_port_buildspaces.push_back(read_coords_32(&fr));
+		}
 		// Swimability of the directions
-		for (uint8_t i = 0; i < LAST_DIRECTION; ++i)
+		for (uint8_t i = 0; i < LAST_DIRECTION; ++i) {
 			expedition_->swimmable[i] = (fr.unsigned_8() == 1);
+		}
 		// whether scouting or exploring
 		expedition_->island_exploration = fr.unsigned_8() == 1;
 		// current direction
@@ -1256,8 +1268,9 @@ void Ship::Loader::load_finish() {
 		ship.expedition_.swap(expedition_);
 		ship.expedition_->ware_economy = ship.ware_economy_;
 		ship.expedition_->worker_economy = ship.worker_economy_;
-	} else
+	} else {
 		assert(ship_state_ == ShipStates::kTransport);
+	}
 
 	// Workers load code set their economy to the economy of their location
 	// (which is a PlayerImmovable), that means that workers on ships do not get
@@ -1320,8 +1333,9 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 			write_coords_32(&fw, coords);
 		}
 		// swimability of the directions
-		for (uint8_t i = 0; i < LAST_DIRECTION; ++i)
+		for (uint8_t i = 0; i < LAST_DIRECTION; ++i) {
 			fw.unsigned_8(expedition_->swimmable[i] ? 1 : 0);
+		}
 		// whether scouting or exploring
 		fw.unsigned_8(expedition_->island_exploration ? 1 : 0);
 		// current direction
