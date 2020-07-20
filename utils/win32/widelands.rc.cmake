@@ -21,12 +21,13 @@
 
 A ICON MOVEABLE PURE LOADONCALL DISCARDABLE "@CMAKE_CURRENT_SOURCE_DIR@/../utils/win32/WL.ico"
 
-//
-// TO CHANGE VERSION INFORMATION, EDIT  OPTIONS BELOW...
-//
+// To change version information, edit FILEVERSION and PRODUCTVERSION. Keep these two identical.
+// Version "A,B,C,D" translates to version "0x0000000A0000000B.0x0000000C0000000D",
+// e.g. for version "1.2" we need "0,1,0,2".
+// https://docs.microsoft.com/en-us/windows/win32/menurc/versioninfo-resource
 1 VERSIONINFO
-FILEVERSION 0,21,0,1
-PRODUCTVERSION 0,21,0,1
+FILEVERSION 0,1,0,0
+PRODUCTVERSION 0,1,0,0
 FILETYPE VFT_APP
 {
   BLOCK "StringFileInfo"
