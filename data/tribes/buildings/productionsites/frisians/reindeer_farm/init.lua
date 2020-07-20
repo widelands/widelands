@@ -62,11 +62,6 @@ tribes:new_productionsite_type {
       { name = "barley", amount = 8 },
       { name = "water", amount = 8 }
    },
-   outputs = {
-      "frisians_reindeer",
-      "fur",
-      "meat",
-   },
 
    programs = {
       work = {

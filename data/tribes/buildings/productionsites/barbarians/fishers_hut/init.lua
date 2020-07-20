@@ -43,10 +43,6 @@ tribes:new_productionsite_type {
       barbarians_fisher = 1
    },
 
-   outputs = {
-      "fish"
-   },
-
    indicate_workarea_overlaps = {
       barbarians_fishers_hut = false,
    },

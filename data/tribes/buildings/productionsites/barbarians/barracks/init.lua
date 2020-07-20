@@ -50,9 +50,6 @@ tribes:new_productionsite_type {
       { name = "ax", amount = 8 },
       { name = "barbarians_recruit", amount = 8 }
    },
-   outputs = {
-      "barbarians_soldier",
-   },
 
    programs = {
       work = {

@@ -55,10 +55,6 @@ tribes:new_productionsite_type {
       frisians_beekeeper = 1
    },
 
-   outputs = {
-      "honey"
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

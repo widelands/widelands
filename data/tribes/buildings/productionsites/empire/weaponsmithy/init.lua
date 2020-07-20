@@ -52,13 +52,6 @@ tribes:new_productionsite_type {
       { name = "iron", amount = 8 },
       { name = "gold", amount = 8 }
    },
-   outputs = {
-      "spear_wooden",
-      "spear",
-      "spear_advanced",
-      "spear_heavy",
-      "spear_war"
-   },
 
    programs = {
       work = {

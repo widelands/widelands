@@ -50,9 +50,6 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "wool", amount = 6 }
    },
-   outputs = {
-      "cloth"
-   },
 
    programs = {
       work = {

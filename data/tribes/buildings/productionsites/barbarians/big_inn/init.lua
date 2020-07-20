@@ -48,11 +48,6 @@ tribes:new_productionsite_type {
       { name = "beer", amount = 4 },
       { name = "beer_strong", amount = 4 }
    },
-   outputs = {
-      "ration",
-      "snack",
-      "meal"
-   },
 
    programs = {
       work = {

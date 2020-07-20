@@ -46,9 +46,6 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "grape", amount = 8 }
    },
-   outputs = {
-      "wine"
-   },
 
    programs = {
       work = {
