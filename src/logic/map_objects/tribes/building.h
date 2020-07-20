@@ -171,7 +171,7 @@ protected:
 	virtual Building& create_object() const = 0;
 	Building& create_constructionsite() const;
 
-	BuildingHints hints_;     // hints (knowledge) for computer players
+	BuildingHints hints_;  // hints (knowledge) for computer players
 private:
 	const Tribes& tribes_;
 	const bool buildable_;          // the player can build this himself

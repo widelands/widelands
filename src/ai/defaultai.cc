@@ -2802,8 +2802,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 					// to prevent to many quarries on one spot
 					for (const DescriptionIndex& resource : bo.get_collected_map_resources()) {
-						prio =
-						   prio - 50 * bf->collecting_producers_nearby.at(resource);
+						prio = prio - 50 * bf->collecting_producers_nearby.at(resource);
 					}
 
 				} else if (bo.is(BuildingAttribute::kHunter)) {

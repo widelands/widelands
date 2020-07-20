@@ -374,7 +374,8 @@ void BuildingObserver::unset_is(const BuildingAttribute attribute) {
 	assert(!is(attribute));
 }
 
-void BuildingObserver::add_collected_map_resource(const TribeDescr& tribe, const std::string& ware_name) {
+void BuildingObserver::add_collected_map_resource(const TribeDescr& tribe,
+                                                  const std::string& ware_name) {
 	collected_map_resources.insert(tribe.safe_ware_index(ware_name));
 }
 
