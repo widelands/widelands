@@ -411,9 +411,7 @@ struct ProductionProgram : public MapObjectProgram {
 	/// produced wares are of the type specified in the group. How the produced
 	/// wares are handled is defined by the productionsite.
 	struct ActProduce : public Action {
-		ActProduce(const std::vector<std::string>& arguments,
-		           ProductionSiteDescr&,
-		           Tribes& tribes);
+		ActProduce(const std::vector<std::string>& arguments, ProductionSiteDescr&, Tribes& tribes);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
 	};
@@ -434,9 +432,7 @@ struct ProductionProgram : public MapObjectProgram {
 	/// The recruited workers are of the type specified in the group. How the
 	/// recruited workers are handled is defined by the productionsite.
 	struct ActRecruit : public Action {
-		ActRecruit(const std::vector<std::string>& arguments,
-		           ProductionSiteDescr&,
-		           Tribes& tribes);
+		ActRecruit(const std::vector<std::string>& arguments, ProductionSiteDescr&, Tribes& tribes);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
 	};
