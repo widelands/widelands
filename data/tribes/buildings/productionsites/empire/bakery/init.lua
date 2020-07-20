@@ -50,9 +50,6 @@ tribes:new_productionsite_type {
       { name = "water", amount = 6 },
       { name = "flour", amount = 6 }
    },
-   outputs = {
-      "empire_bread"
-   },
 
    programs = {
       work = {

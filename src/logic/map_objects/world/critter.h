@@ -38,7 +38,8 @@ class World;
 //
 // Description
 //
-struct CritterDescr : BobDescr {
+class CritterDescr : public BobDescr {
+public:
 	CritterDescr(const std::string& init_descname, const LuaTable&, const Widelands::World& world);
 	~CritterDescr() override;
 

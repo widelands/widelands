@@ -63,9 +63,6 @@ tribes:new_productionsite_type {
       { name = "fur", amount = 6 },
       { name = "reed", amount = 6 },
    },
-   outputs = {
-      "cloth",
-   },
 
    programs = {
       work = {

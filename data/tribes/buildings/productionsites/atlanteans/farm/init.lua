@@ -42,10 +42,6 @@ tribes:new_productionsite_type {
       atlanteans_farmer = 1
    },
 
-   outputs = {
-      "corn"
-   },
-
    indicate_workarea_overlaps = {
       atlanteans_blackroot_farm = false,
       atlanteans_farm = false,

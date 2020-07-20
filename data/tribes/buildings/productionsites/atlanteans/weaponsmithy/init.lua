@@ -47,13 +47,6 @@ tribes:new_productionsite_type {
       { name = "iron", amount = 8 },
       { name = "gold", amount = 8 }
    },
-   outputs = {
-      "trident_light",
-      "trident_long",
-      "trident_steel",
-      "trident_double",
-      "trident_heavy_double"
-   },
 
    programs = {
       work = {

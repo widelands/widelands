@@ -49,8 +49,9 @@ namespace {
 // so the commands will never do anything when executed.
 template <typename T>
 Serial get_object_serial_or_zero(uint32_t object_index, MapObjectLoader& mol) {
-	if (!object_index)
+	if (!object_index) {
 		return 0;
+	}
 	return mol.get<T>(object_index).serial();
 }
 
@@ -178,8 +179,9 @@ void PlayerCommand::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& 
 		if (packet_version == kCurrentPacketVersionPlayerCommand) {
 			GameLogicCommand::read(fr, egbase, mol);
 			sender_ = fr.unsigned_8();
-			if (!egbase.get_player(sender_))
+			if (!egbase.get_player(sender_)) {
 				throw GameDataError("player %u does not exist", sender_);
+			}
 			cmdserial_ = fr.unsigned_32();
 		} else {
 			throw UnhandledVersionError(
@@ -197,8 +199,9 @@ CmdBulldoze::CmdBulldoze(StreamRead& des)
 }
 
 void CmdBulldoze::execute(Game& game) {
-	if (upcast(PlayerImmovable, pimm, game.objects().get_object(serial)))
+	if (upcast(PlayerImmovable, pimm, game.objects().get_object(serial))) {
 		game.get_player(sender())->bulldoze(*pimm, recurse);
+	}
 }
 
 void CmdBulldoze::serialize(StreamWrite& ser) {
@@ -349,8 +352,9 @@ void CmdBuildRoad::execute(Game& game) {
 		assert(steps);
 
 		path.reset(new Path(start));
-		for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
+		for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 			path->append(game.map(), steps[i]);
+		}
 	}
 
 	game.get_player(sender())->build_road(*path);
@@ -363,8 +367,9 @@ void CmdBuildRoad::serialize(StreamWrite& ser) {
 
 	assert(path || steps);
 
-	for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
+	for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 		ser.unsigned_8(path ? (*path)[i] : steps[i]);
+	}
 }
 
 constexpr uint16_t kCurrentPacketVersionCmdBuildRoad = 1;
@@ -378,8 +383,9 @@ void CmdBuildRoad::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& m
 			nsteps = fr.unsigned_16();
 			path.reset(nullptr);
 			steps.reset(new uint8_t[nsteps]);
-			for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
+			for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 				steps[i] = fr.unsigned_8();
+			}
 		} else {
 			throw UnhandledVersionError(
 			   "CmdBuildRoad", packet_version, kCurrentPacketVersionCmdBuildRoad);
@@ -492,9 +498,11 @@ CmdFlagAction::CmdFlagAction(StreamRead& des) : PlayerCommand(0, des.unsigned_8(
 
 void CmdFlagAction::execute(Game& game) {
 	Player* player = game.get_player(sender());
-	if (upcast(Flag, flag, game.objects().get_object(serial)))
-		if (flag->get_owner() == player)
+	if (upcast(Flag, flag, game.objects().get_object(serial))) {
+		if (flag->get_owner() == player) {
 			player->flagaction(*flag);
+		}
+	}
 }
 
 void CmdFlagAction::serialize(StreamWrite& ser) {
@@ -1412,8 +1420,9 @@ void CmdSetWareTargetQuantity::read(FileRead& fr, EditorGameBase& egbase, MapObj
 
 CmdSetWareTargetQuantity::CmdSetWareTargetQuantity(StreamRead& des)
    : CmdChangeTargetQuantity(des), permanent_(des.unsigned_32()) {
-	if (cmdserial() == 1)
+	if (cmdserial() == 1) {
 		des.unsigned_32();
+	}
 }
 
 void CmdSetWareTargetQuantity::serialize(StreamWrite& ser) {
@@ -1463,8 +1472,9 @@ void CmdSetWorkerTargetQuantity::read(FileRead& fr, EditorGameBase& egbase, MapO
 
 CmdSetWorkerTargetQuantity::CmdSetWorkerTargetQuantity(StreamRead& des)
    : CmdChangeTargetQuantity(des), permanent_(des.unsigned_32()) {
-	if (cmdserial() == 1)
+	if (cmdserial() == 1) {
 		des.unsigned_32();
+	}
 }
 
 void CmdSetWorkerTargetQuantity::serialize(StreamWrite& ser) {
@@ -1482,8 +1492,9 @@ CmdChangeTrainingOptions::CmdChangeTrainingOptions(StreamRead& des)
 }
 
 void CmdChangeTrainingOptions::execute(Game& game) {
-	if (upcast(TrainingSite, trainingsite, game.objects().get_object(serial)))
+	if (upcast(TrainingSite, trainingsite, game.objects().get_object(serial))) {
 		game.get_player(sender())->change_training_options(*trainingsite, attribute, value);
+	}
 }
 
 void CmdChangeTrainingOptions::serialize(StreamWrite& ser) {
@@ -1533,9 +1544,11 @@ CmdDropSoldier::CmdDropSoldier(StreamRead& des) : PlayerCommand(0, des.unsigned_
 }
 
 void CmdDropSoldier::execute(Game& game) {
-	if (upcast(PlayerImmovable, player_imm, game.objects().get_object(serial)))
-		if (upcast(Soldier, s, game.objects().get_object(soldier)))
+	if (upcast(PlayerImmovable, player_imm, game.objects().get_object(serial))) {
+		if (upcast(Soldier, s, game.objects().get_object(soldier))) {
 			game.get_player(sender())->drop_soldier(*player_imm, *s);
+		}
+	}
 }
 
 void CmdDropSoldier::serialize(StreamWrite& ser) {
@@ -1769,8 +1782,9 @@ void PlayerMessageCommand::read(FileRead& fr, EditorGameBase& egbase, MapObjectL
 		if (packet_version == kCurrentPacketVersionPlayerMessageCommand) {
 			PlayerCommand::read(fr, egbase, mol);
 			message_id_ = MessageId(fr.unsigned_32());
-			if (!message_id_)
+			if (!message_id_) {
 				throw GameDataError("(player %u): message id is null", sender());
+			}
 		} else {
 			throw UnhandledVersionError(
 			   "PlayerMessageCommand", packet_version, kCurrentPacketVersionPlayerMessageCommand);

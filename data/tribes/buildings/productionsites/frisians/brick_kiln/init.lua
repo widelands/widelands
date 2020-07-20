@@ -64,9 +64,6 @@ tribes:new_productionsite_type {
       { name = "clay", amount = 6 },
       { name = "coal", amount = 3 },
    },
-   outputs = {
-      "brick"
-   },
 
    programs = {
       work = {
