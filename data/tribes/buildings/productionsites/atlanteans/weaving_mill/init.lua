@@ -46,11 +46,6 @@ tribes:new_productionsite_type {
       { name = "spider_silk", amount = 8 },
       { name = "gold_thread", amount = 4 }
    },
-   outputs = {
-      "spidercloth",
-      "tabard",
-      "tabard_golden"
-   },
 
    programs = {
       work = {

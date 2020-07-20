@@ -45,9 +45,6 @@ tribes:new_productionsite_type {
       { name = "water", amount = 6 },
       { name = "coal", amount = 3 }
    },
-   outputs = {
-      "grout"
-   },
 
    programs = {
       work = {

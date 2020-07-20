@@ -117,29 +117,8 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 	}
 
 	if (table.has_key("outputs")) {
-		for (const std::string& output : table.get_table("outputs")->array_entries<std::string>()) {
-			try {
-				DescriptionIndex idx = tribes.ware_index(output);
-				if (tribes.ware_exists(idx)) {
-					if (output_ware_types_.count(idx)) {
-						throw wexception("this ware type has already been declared as an output");
-					}
-					output_ware_types_.insert(idx);
-				} else {
-					idx = tribes.worker_index(output);
-					if (tribes.worker_exists(idx)) {
-						if (output_worker_types_.count(idx)) {
-							throw wexception("this worker type has already been declared as an output");
-						}
-						output_worker_types_.insert(idx);
-					} else {
-						throw wexception("tribes do not define a ware or worker type with this name");
-					}
-				}
-			} catch (const WException& e) {
-				throw wexception("output \"%s\": %s", output.c_str(), e.what());
-			}
-		}
+		log("WARNING: The \"outputs\" table is no longer needed; you can remove it from %s\n",
+		    name().c_str());
 	}
 
 	if (table.has_key("inputs")) {

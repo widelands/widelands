@@ -206,8 +206,9 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 		for (;;) {  // The other buildhelp overlays.
 			++buildhelp_overlay;
 			++filename;
-			if (buildhelp_overlay == buildhelp_overlays_end)
+			if (buildhelp_overlay == buildhelp_overlays_end) {
 				break;
+			}
 			buildhelp_overlay->pic = g_gr->images().get(*filename);
 			buildhelp_overlay->hotspot =
 			   Vector2i(buildhelp_overlay->pic->width() / 2, buildhelp_overlay->pic->height() / 2);
@@ -902,8 +903,9 @@ bool InteractiveBase::get_display_flag(uint32_t const flag) {
 void InteractiveBase::set_display_flag(uint32_t const flag, bool const on) {
 	display_flags_ &= ~flag;
 
-	if (on)
+	if (on) {
 		display_flags_ |= flag;
+	}
 }
 
 /*
@@ -975,8 +977,9 @@ void InteractiveBase::abort_build_road() {
 		hide_workarea(road_building_mode_->path.get_start(), true);
 	}
 #ifndef NDEBUG
-	else
+	else {
 		assert(!road_building_mode_->work_area);
+	}
 #endif
 
 	road_building_remove_overlay();
@@ -997,8 +1000,9 @@ void InteractiveBase::finish_build_road() {
 		hide_workarea(road_building_mode_->path.get_start(), true);
 	}
 #ifndef NDEBUG
-	else
+	else {
 		assert(!road_building_mode_->work_area);
+	}
 #endif
 
 	road_building_remove_overlay();

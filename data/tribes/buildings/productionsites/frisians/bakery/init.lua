@@ -63,9 +63,6 @@ tribes:new_productionsite_type {
       { name = "barley", amount = 7 },
       { name = "water", amount = 7 },
    },
-   outputs = {
-      "bread_frisians"
-   },
 
    programs = {
       work = {

@@ -36,11 +36,6 @@ tribes:new_productionsite_type {
       empire_quarry = false,
    },
 
-   outputs = {
-      "granite",
-      "marble"
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

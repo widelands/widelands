@@ -62,9 +62,6 @@ tribes:new_trainingsite_type {
       { name = "barbarians_bread", amount = 8 },
       { name = "beer_strong", amount = 8 }
    },
-   outputs = {
-      "barbarians_soldier",
-   },
 
    ["soldier evade"] = {
       min_level = 0,

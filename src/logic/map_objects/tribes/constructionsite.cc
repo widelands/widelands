@@ -513,8 +513,7 @@ bool ConstructionSite::burn_on_destroy() {
 	if (work_completed_ >= work_steps_) {
 		return false;  // completed, so don't burn
 	}
-
-	return work_completed_ || !old_buildings_.empty();
+	return work_completed_ || info_.intermediates.size() < old_buildings_.size();
 }
 
 void ConstructionSite::add_additional_ware(DescriptionIndex di) {

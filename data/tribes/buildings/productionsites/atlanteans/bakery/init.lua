@@ -45,9 +45,6 @@ tribes:new_productionsite_type {
       { name = "cornmeal", amount = 4 },
       { name = "blackroot_flour", amount = 4 }
    },
-   outputs = {
-      "atlanteans_bread"
-   },
 
    programs = {
       work = {

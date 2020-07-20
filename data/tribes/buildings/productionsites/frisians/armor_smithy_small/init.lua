@@ -62,11 +62,6 @@ tribes:new_productionsite_type {
       { name = "coal", amount = 8 },
       { name = "iron", amount = 8 },
    },
-   outputs = {
-      "sword_short",
-      "sword_long",
-      "helmet",
-   },
 
    programs = {
       work = {

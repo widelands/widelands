@@ -65,20 +65,6 @@ tribes:new_productionsite_type {
       { name = "log", amount = 7 },
       { name = "reed", amount = 4 }
    },
-   outputs = {
-      "felling_ax",
-      "pick",
-      "scythe",
-      "shovel",
-      "basket",
-      "hunting_spear",
-      "fishing_net",
-      "bread_paddle",
-      "kitchen_tools",
-      "hammer",
-      "fire_tongs",
-      "needles",
-   },
 
    programs = {
       work = {
