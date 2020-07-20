@@ -19,7 +19,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 20000",
-         "grow=berry_bush_raspberry_small",
+         "transform=berry_bush_raspberry_small",
       },
    },
    spritesheets = {
@@ -46,7 +46,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 20000",
-         "grow=berry_bush_raspberry_medium",
+         "transform=berry_bush_raspberry_medium",
       },
    },
    spritesheets = {
@@ -73,7 +73,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 40000",
-         "grow=berry_bush_raspberry_ripe",
+         "transform=berry_bush_raspberry_ripe",
       },
    },
    spritesheets = {

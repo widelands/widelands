@@ -74,12 +74,10 @@ struct ImmovableProgram : public MapObjectProgram {
 	///    probability: (defaults to 0 -- i.e. always)
 	///       The probability (out of 255) for replacing the immovable with
 	///       a new one; if the probability is 0 (i.e. the default), then the
-	///       transformation always happens
+	///       transformation always happens.
+	///       For immovables that have terrain affinity, the probability is taken from there.
 	///    bob|immovable: (defaults to immovable)
 	///       whether we'll be replaced by a bob or by an immovable
-	///    world|tribe:
-	///       whether the other object is taken from the world or from
-	///       the owner's tribe
 	///    name:
 	///       name of the replacement object
 	struct ActTransform : public Action {
@@ -90,15 +88,6 @@ struct ImmovableProgram : public MapObjectProgram {
 		std::string type_name;
 		bool bob;
 		uint8_t probability;
-	};
-
-	/// Like ActTransform but the probability is determined by the suitability.
-	struct ActGrow : public Action {
-		ActGrow(std::vector<std::string>& arguments, const ImmovableDescr&);
-		void execute(Game&, Immovable&) const override;
-
-	private:
-		std::string type_name;
 	};
 
 	struct ActRemove : public Action {

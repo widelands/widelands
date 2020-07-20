@@ -18,7 +18,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 55000",
          "remove=42",
-         "grow=palm_coconut_desert_pole",
+         "transform=palm_coconut_desert_pole",
       },
    },
    spritesheets = {
@@ -45,7 +45,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 55000",
          "remove=33",
-         "grow=palm_coconut_desert_mature",
+         "transform=palm_coconut_desert_mature",
       },
    },
    spritesheets = {
@@ -72,7 +72,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 60000",
          "remove=23",
-         "grow=palm_coconut_desert_old",
+         "transform=palm_coconut_desert_old",
       },
    },
    spritesheets = {

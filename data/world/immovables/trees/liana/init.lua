@@ -19,7 +19,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 60000",
          "remove=40",
-         "grow=liana_wasteland_pole",
+         "transform=liana_wasteland_pole",
       },
    },
    spritesheets = {
@@ -47,7 +47,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 55000",
          "remove=30",
-         "grow=liana_wasteland_mature",
+         "transform=liana_wasteland_mature",
       },
    },
    spritesheets = {
@@ -78,7 +78,7 @@ world:new_immovable_type{
          "seed=liana_wasteland_sapling 30",
          "animate=idle 30000",
          "remove=10",
-         "grow=liana_wasteland_old",
+         "transform=liana_wasteland_old",
       },
    },
    spritesheets = {

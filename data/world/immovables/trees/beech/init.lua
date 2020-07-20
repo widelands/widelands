@@ -18,7 +18,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 55000",
          "remove=35",
-         "grow=beech_summer_pole",
+         "transform=beech_summer_pole",
       },
    },
    spritesheets = {
@@ -45,7 +45,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 65000",
          "remove=24",
-         "grow=beech_summer_mature",
+         "transform=beech_summer_mature",
       },
    },
    spritesheets = {
@@ -72,7 +72,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 72000",
          "remove=19",
-         "grow=beech_summer_old",
+         "transform=beech_summer_old",
       },
    },
    spritesheets = {

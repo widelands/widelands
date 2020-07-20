@@ -18,7 +18,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 38000",
          "remove=50",
-         "grow=aspen_summer_pole",
+         "transform=aspen_summer_pole",
       },
    },
    spritesheets = {
@@ -45,7 +45,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 38000",
          "remove=47",
-         "grow=aspen_summer_mature",
+         "transform=aspen_summer_mature",
       },
    },
    spritesheets = {
@@ -75,7 +75,7 @@ world:new_immovable_type{
          "seed=aspen_summer_sapling 60",
          "animate=idle 20000",
          "remove=20",
-         "grow=aspen_summer_old",
+         "transform=aspen_summer_old",
       },
    },
    spritesheets = {

@@ -19,7 +19,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 55000",
          "remove=35",
-         "grow=mushroom_green_wasteland_pole",
+         "transform=mushroom_green_wasteland_pole",
       },
    },
    spritesheets = {
@@ -47,7 +47,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 65000",
          "remove=24",
-         "grow=mushroom_green_wasteland_mature",
+         "transform=mushroom_green_wasteland_mature",
       },
    },
    spritesheets = {
@@ -75,7 +75,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 72000",
          "remove=19",
-         "grow=mushroom_green_wasteland_old",
+         "transform=mushroom_green_wasteland_old",
       },
    },
    spritesheets = {

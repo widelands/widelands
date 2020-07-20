@@ -91,8 +91,10 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 				actions_.push_back(
 				   std::unique_ptr<Action>(new ActTransform(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "grow") {
+				// TODO(GunChleoc): Savegame compatibility, remove after Build 22.
+				log("WARNING: %s: 'grow' is deprecated, use 'transform' instead.\n", immovable.name().c_str());
 				actions_.push_back(
-				   std::unique_ptr<Action>(new ActGrow(parseinput.arguments, immovable)));
+				   std::unique_ptr<Action>(new ActTransform(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "remove") {
 				actions_.push_back(std::unique_ptr<Action>(new ActRemove(parseinput.arguments)));
 			} else if (parseinput.name == "seed") {
@@ -200,7 +202,7 @@ Parameter semantics:
 ``name``
     The name of the immovable to turn into. If the ``bob`` flag is given, this refers to any kind of bob; otherwise to an immovable.
 ``chance``
-    A natural integer in [1,254] defining the chance that the transformation succeeds. The game will generate a random number between 0 and 255 and the program step succeeds if and only if this number is less than ``chance``. Otherwise, the next program step is triggered. If ``chance`` is omitted, the transformation will always succeed.
+    A natural integer in [1,254] defining the chance that the transformation succeeds. The game will generate a random number between 0 and 255 and the program step succeeds if and only if this number is less than ``chance``. Otherwise, the next program step is triggered. If ``chance`` is omitted, the transformation will calculate the probability from the terrain affinity if available; otherwise, it will always succeed.
 
 Deletes the immovable (preventing subsequent program steps from being called) and replaces it with an immovable or bob of the given name. The chance that this program step succeeds can be specified (by default, the step will always succeed).
 */
@@ -236,18 +238,23 @@ void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) c
 	if (immovable.apply_growth_delay(game)) {
 		return;
 	}
-	if (probability == 0 || game.logic_rand() % 256 < probability) {
-		Player* player = immovable.get_owner();
-		Coords const c = immovable.get_position();
-		MapObjectDescr::OwnerType owner_type = immovable.descr().owner_type();
-		immovable.remove(game);  //  Now immovable is a dangling reference!
 
-		if (bob) {
-			game.create_ship(c, type_name, player);
-		} else {
-			game.create_immovable_with_name(
-			   c, type_name, owner_type, player, nullptr /* former_building_descr */);
-		}
+	const Map& map = game.map();
+	const ImmovableDescr& descr = immovable.descr();
+	Player* player = immovable.get_owner();
+	FCoords const f = map.get_fcoords(immovable.get_position());
+	MapObjectDescr::OwnerType owner_type = immovable.descr().owner_type();
+
+	const bool will_transform =
+			descr.has_terrain_affinity() && probability == 0 ?
+				(game.logic_rand() % TerrainAffinity::kPrecisionFactor) <
+						  probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains()) :
+				probability == 0 || game.logic_rand() % 256 < probability;
+
+	if (will_transform) {
+		immovable.remove(game);  //  Now immovable is a dangling reference!
+		game.create_immovable_with_name(
+		   f, type_name, owner_type, player, nullptr /* former_building_descr */);
 	} else {
 		immovable.program_step(game);
 	}
@@ -257,54 +264,8 @@ void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) c
 
 grow
 ----
-Delete this immovable and instantly replace it with a different immovable with a chance depending on terrain affinity.
-
-Parameter syntax::
-
-  parameters ::= name
-
-Parameter semantics:
-
-``name``
-    The name of the immovable to turn into.
-
-Deletes the immovable (preventing subsequent program steps from being called) and replaces it with an immovable of the given name. The chance that this program step succeeds depends on how well this immovable's terrain affinity matches the terrains it grows on. If the growth fails, the next program step is triggered. This command may be used only for immovables with a terrain affinity.
+** DEPRECATED** Use ``transform=<immovable_name>`` instead.
 */
-ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments,
-                                   const ImmovableDescr& descr) {
-	if (arguments.size() != 1) {
-		throw GameDataError("Usage: grow=<immovable name>");
-	}
-	if (!descr.has_terrain_affinity()) {
-		throw GameDataError(
-		   "Immovable %s can 'grow', but has no terrain_affinity entry.", descr.name().c_str());
-	}
-
-	// TODO(GunChleoc): If would be nice to check if target exists, but we can't guarantee the load
-	// order. Maybe in postload() one day.
-	type_name = arguments.front();
-}
-
-void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const {
-	if (immovable.apply_growth_delay(game)) {
-		return;
-	}
-
-	const Map& map = game.map();
-	FCoords const f = map.get_fcoords(immovable.get_position());
-	const ImmovableDescr& descr = immovable.descr();
-
-	if ((game.logic_rand() % TerrainAffinity::kPrecisionFactor) <
-	    probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains())) {
-		MapObjectDescr::OwnerType owner_type = descr.owner_type();
-		Player* owner = immovable.get_owner();
-		immovable.remove(game);  //  Now immovable is a dangling reference!
-		game.create_immovable_with_name(
-		   f, type_name, owner_type, owner, nullptr /* former_building_descr */);
-	} else {
-		immovable.program_step(game);
-	}
-}
 
 /* RST
 

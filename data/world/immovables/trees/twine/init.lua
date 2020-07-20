@@ -19,7 +19,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 55000",
          "remove=42",
-         "grow=twine_wasteland_pole",
+         "transform=twine_wasteland_pole",
       },
    },
    spritesheets = {
@@ -47,7 +47,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 55000",
          "remove=33",
-         "grow=twine_wasteland_mature",
+         "transform=twine_wasteland_mature",
       },
    },
    spritesheets = {
@@ -75,7 +75,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 60000",
          "remove=23",
-         "grow=twine_wasteland_old",
+         "transform=twine_wasteland_old",
       },
    },
    spritesheets = {

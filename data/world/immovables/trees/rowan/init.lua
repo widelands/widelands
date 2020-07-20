@@ -18,7 +18,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 60000",
          "remove=40",
-         "grow=rowan_summer_pole",
+         "transform=rowan_summer_pole",
       },
    },
    spritesheets = {
@@ -45,7 +45,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 55000",
          "remove=30",
-         "grow=rowan_summer_mature",
+         "transform=rowan_summer_mature",
       },
    },
    spritesheets = {
@@ -75,7 +75,7 @@ world:new_immovable_type{
          "seed=rowan_summer_sapling 40",
          "animate=idle 30000",
          "remove=10",
-         "grow=rowan_summer_old",
+         "transform=rowan_summer_old",
       },
    },
    spritesheets = {

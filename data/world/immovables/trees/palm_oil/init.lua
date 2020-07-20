@@ -18,7 +18,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 42000",
          "remove=32",
-         "grow=palm_oil_desert_pole",
+         "transform=palm_oil_desert_pole",
       },
    },
    spritesheets = {
@@ -45,7 +45,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 40000",
          "remove=25",
-         "grow=palm_oil_desert_mature",
+         "transform=palm_oil_desert_mature",
       },
    },
    spritesheets = {
@@ -75,7 +75,7 @@ world:new_immovable_type{
          "seed=palm_oil_desert_sapling 80",
          "animate=idle 30000",
          "remove=10",
-         "grow=palm_oil_desert_old",
+         "transform=palm_oil_desert_old",
 
       },
    },

@@ -26,7 +26,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 57500",
          "remove=21",
-         "grow=alder_summer_pole",
+         "transform=alder_summer_pole",
       },
    },
    spritesheets = {
@@ -53,7 +53,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 52500",
          "remove=19",
-         "grow=alder_summer_mature",
+         "transform=alder_summer_mature",
       },
    },
    spritesheets = {
@@ -80,7 +80,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 50000",
          "remove=18",
-         "grow=alder_summer_old",
+         "transform=alder_summer_old",
       },
    },
    spritesheets = {

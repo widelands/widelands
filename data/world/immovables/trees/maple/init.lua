@@ -18,7 +18,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 57500",
          "remove=21",
-         "grow=maple_winter_pole",
+         "transform=maple_winter_pole",
       },
    },
    spritesheets = {
@@ -45,7 +45,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 52500",
          "remove=19",
-         "grow=maple_winter_mature",
+         "transform=maple_winter_mature",
       },
    },
    spritesheets = {
@@ -72,7 +72,7 @@ world:new_immovable_type{
       program = {
          "animate=idle 50000",
          "remove=18",
-         "grow=maple_winter_old",
+         "transform=maple_winter_old",
       },
    },
    spritesheets = {

@@ -19,7 +19,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 14000",
-         "grow=berry_bush_sea_buckthorn_small",
+         "transform=berry_bush_sea_buckthorn_small",
       },
    },
    spritesheets = {
@@ -46,7 +46,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 18000",
-         "grow=berry_bush_sea_buckthorn_medium",
+         "transform=berry_bush_sea_buckthorn_medium",
       },
    },
    spritesheets = {
@@ -73,7 +73,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 26000",
-         "grow=berry_bush_sea_buckthorn_ripe",
+         "transform=berry_bush_sea_buckthorn_ripe",
       },
    },
    spritesheets = {
