@@ -344,7 +344,7 @@ amalea_3 = {
       _([[Lutius, now we are getting somewhere. As we have gained some construction materials, we can start to rebuild our economy.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[First of all, we need more construction materials. So, we should build at least three lumberjacks’ houses and two quarries. Be sure to have dismanteled all of the unproductive buildings though.]])
+      _([[First of all, we need more construction materials. So, we should build at least three lumberjacks’ houses and two quarries. Be sure to have dismantled all of the unproductive buildings though.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[Oh, before I forget, there is another task to accomplish. While our builders are doing their job, somebody should clear up our road network. They are leaving us no space to place the buildings that we need.]]))
