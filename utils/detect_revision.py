@@ -11,12 +11,6 @@ import subprocess
 import re
 import string
 
-# The name of the next stable release. We use semantic version strings in the form
-# "1.0~..." where "1.0" is the next release. Update this string after every release,
-# and also if we have to rename the next target during the release cycle.
-# See https://github.com/widelands/widelands/issues/3979 for a full discussion.
-next_stable_version = "1.0"
-
 # Support for bzr local branches
 try:
     from bzrlib.branch import Branch
@@ -28,6 +22,7 @@ except ImportError:
 
 base_path = p.abspath(p.join(p.dirname(__file__), p.pardir))
 
+next_stable_version = open(p.join(base_path, 'NEXT_STABLE_VERSION')).read().strip()
 
 def _communicate_utf8(cmd, **kwargs):
     """Runs the 'cmd' with 'kwargs' and returns its output which is assumed to
