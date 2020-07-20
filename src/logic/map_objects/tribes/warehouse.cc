@@ -649,8 +649,9 @@ void Warehouse::init_portdock(EditorGameBase& egbase) {
 			// currently only waterways and portdocks can be built on water
 			assert(field.get_immovable()->descr().type() == MapObjectType::WATERWAY);
 			if (upcast(Game, game, &egbase)) {
-				send_message(*game, Message::Type::kSeafaring, _("Waterway Destroyed"),
-				             descr().icon_filename(), _("Waterway Destroyed"),
+				/** TRANSLATORS: Message header, short for "Waterway Destroyed" (not much space available) */
+				send_message(*game, Message::Type::kSeafaring, _("Waterway"),
+				             descr().icon_filename(), _("Waterway destroyed"),
 				             _("A waterway had to be destroyed to make room for your new port dock."),
 				             false);
 			}
