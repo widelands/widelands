@@ -1401,7 +1401,8 @@ CmdSetWareTargetQuantity::CmdSetWareTargetQuantity(const uint32_t init_duetime,
 void CmdSetWareTargetQuantity::execute(Game& game) {
 	Player* player = game.get_player(sender());
 	if (player->has_economy(economy()) && game.tribes().ware_exists(ware_type())) {
-		player->get_economy(economy())->set_target_quantity(wwWARE, ware_type(), permanent_, duetime());
+		player->get_economy(economy())->set_target_quantity(
+		   wwWARE, ware_type(), permanent_, duetime());
 	}
 }
 
@@ -1499,7 +1500,8 @@ CmdSetWorkerTargetQuantity::CmdSetWorkerTargetQuantity(const uint32_t init_dueti
 void CmdSetWorkerTargetQuantity::execute(Game& game) {
 	Player* player = game.get_player(sender());
 	if (player->has_economy(economy()) && game.tribes().worker_exists(ware_type())) {
-		player->get_economy(economy())->set_target_quantity(wwWORKER, ware_type(), permanent_, duetime());
+		player->get_economy(economy())->set_target_quantity(
+		   wwWORKER, ware_type(), permanent_, duetime());
 	}
 }
 

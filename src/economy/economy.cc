@@ -329,7 +329,8 @@ void Economy::reset_all_pathfinding_cycles() {
  *
  * This is called from Cmd_ResetTargetQuantity and Cmd_SetTargetQuantity
  */
-void Economy::set_target_quantity(WareWorker economy_type, DescriptionIndex const ware_or_worker_type,
+void Economy::set_target_quantity(WareWorker economy_type,
+                                  DescriptionIndex const ware_or_worker_type,
                                   Quantity const permanent,
                                   Time const mod_time) {
 	assert(economy_type == type_);
