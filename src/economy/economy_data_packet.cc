@@ -33,7 +33,7 @@ namespace Widelands {
 void EconomyDataPacket::read(FileRead& fr) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version <= kCurrentPacketVersion && packet_version >= 4) {
+		if (packet_version == kCurrentPacketVersion) {
 			const Serial saved_serial = fr.unsigned_32();
 			if (eco_->serial_ != saved_serial) {
 				throw GameDataError(
