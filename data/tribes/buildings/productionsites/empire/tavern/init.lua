@@ -46,9 +46,6 @@ tribes:new_productionsite_type {
       { name = "meat", amount = 5 },
       { name = "empire_bread", amount = 5 }
    },
-   outputs = {
-      "ration"
-   },
 
    programs = {
       work = {

@@ -68,10 +68,6 @@ tribes:new_productionsite_type {
       frisians_farmer = 1
    },
 
-   outputs = {
-      "barley"
-   },
-
    indicate_workarea_overlaps = {
       frisians_clay_pit = false,
       frisians_berry_farm = false,

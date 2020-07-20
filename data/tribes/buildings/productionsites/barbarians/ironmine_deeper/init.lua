@@ -56,9 +56,6 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "meal", amount = 6 }
    },
-   outputs = {
-      "iron_ore"
-   },
 
    programs = {
       work = {

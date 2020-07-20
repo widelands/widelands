@@ -62,11 +62,6 @@ tribes:new_productionsite_type {
       { name = "iron", amount = 8 },
       { name = "gold", amount = 8 },
    },
-   outputs = {
-      "sword_broad",
-      "sword_double",
-      "helmet_golden",
-   },
 
    programs = {
       work = {

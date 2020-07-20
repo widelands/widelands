@@ -74,10 +74,6 @@ tribes:new_productionsite_type {
       { name = "iron_ore", amount = 8 },
       { name = "gold_ore", amount = 8 },
    },
-   outputs = {
-      "iron",
-      "gold"
-   },
 
    programs = {
       work = {

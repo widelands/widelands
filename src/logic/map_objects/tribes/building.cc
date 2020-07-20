@@ -127,8 +127,9 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 			const BuildingDescr* tmp_enhancement = tribes_.get_building_descr(en_i);
 			for (auto area : tmp_enhancement->workarea_info_) {
 				std::set<std::string>& strs = workarea_info_[area.first];
-				for (std::string str : area.second)
+				for (std::string str : area.second) {
 					strs.insert(str);
+				}
 			}
 		} else {
 			throw wexception(
@@ -434,8 +435,9 @@ bool Building::init(EditorGameBase& egbase) {
 	map.get_brn(position_, &neighb);
 	{
 		Flag* flag = dynamic_cast<Flag*>(map.get_immovable(neighb));
-		if (!flag)
+		if (!flag) {
 			flag = new Flag(egbase, get_owner(), neighb);
+		}
 		flag_ = flag;
 		flag->attach_building(egbase, *this);
 	}
@@ -636,8 +638,9 @@ bool Building::leave_check_and_wait(Game& game, Worker& w) {
 void Building::leave_skip(Game&, Worker& w) {
 	LeaveQueue::iterator const it = std::find(leave_queue_.begin(), leave_queue_.end(), &w);
 
-	if (it != leave_queue_.end())
+	if (it != leave_queue_.end()) {
 		leave_queue_.erase(it);
+	}
 }
 
 /*
@@ -668,11 +671,12 @@ void Building::act(Game& game, uint32_t const data) {
 			}
 		}
 
-		if (!leave_queue_.empty())
+		if (!leave_queue_.empty()) {
 			schedule_act(game, leave_time_ - time);
-
-		if (!wakeup)
+		}
+		if (!wakeup) {
 			leave_time_ = time;  // make sure leave_time doesn't get too far behind
+		}
 	}
 
 	PlayerImmovable::act(game, data);
@@ -737,8 +741,9 @@ Building::get_priority(WareWorker type, DescriptionIndex const ware_index, bool 
 		// if priority is defined for specific ware,
 		// combine base priority and ware priority
 		std::map<DescriptionIndex, int32_t>::const_iterator it = ware_priorities_.find(ware_index);
-		if (it != ware_priorities_.end())
+		if (it != ware_priorities_.end()) {
 			priority = adjust ? (priority * it->second / kPriorityNormal) : it->second;
+		}
 	}
 
 	return priority;
@@ -749,13 +754,15 @@ Building::get_priority(WareWorker type, DescriptionIndex const ware_index, bool 
  * priorities are identified by ware type and index
  */
 void Building::collect_priorities(std::map<int32_t, std::map<DescriptionIndex, int32_t>>& p) const {
-	if (ware_priorities_.empty())
+	if (ware_priorities_.empty()) {
 		return;
+	}
 	std::map<DescriptionIndex, int32_t>& ware_priorities = p[wwWARE];
 	std::map<DescriptionIndex, int32_t>::const_iterator it;
 	for (it = ware_priorities_.begin(); it != ware_priorities_.end(); ++it) {
-		if (it->second == kPriorityNormal)
+		if (it->second == kPriorityNormal) {
 			continue;
+		}
 		ware_priorities[it->first] = it->second;
 	}
 }
@@ -803,8 +810,9 @@ void Building::add_worker(Worker& worker) {
 
 void Building::remove_worker(Worker& worker) {
 	PlayerImmovable::remove_worker(worker);
-	if (!get_workers().size())
+	if (!get_workers().size()) {
 		set_seeing(false);
+	}
 	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kWorkersChanged));
 }
 
@@ -825,8 +833,9 @@ void Building::set_soldier_control(SoldierControl* new_soldier_control) {
  * \note Warehouses always see their surroundings; this is handled separately.
  */
 void Building::set_seeing(bool see) {
-	if (see == seeing_)
+	if (see == seeing_) {
 		return;
+	}
 
 	Player* player = get_owner();
 	const Map& map = player->egbase().map();

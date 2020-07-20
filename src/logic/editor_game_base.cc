@@ -74,8 +74,9 @@ EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
      loader_ui_(nullptr),
      game_tips_(nullptr),
      tmp_fs_(nullptr) {
-	if (!lua_)  // TODO(SirVer): this is sooo ugly, I can't say
+	if (!lua_) {  // TODO(SirVer): this is sooo ugly, I can't say
 		lua_.reset(new LuaEditorInterface(this));
+	}
 }
 
 EditorGameBase::~EditorGameBase() {
@@ -96,8 +97,9 @@ void EditorGameBase::delete_tempfile() {
 
 	std::string fs_filename = tmp_fs_->get_basename();
 	std::string mapfs_filename = map_.filesystem()->get_basename();
-	if (mapfs_filename == fs_filename)
+	if (mapfs_filename == fs_filename) {
 		map_.reset_filesystem();
+	}
 	tmp_fs_.reset();
 	try {
 		g_fs->fs_unlink(fs_filename);
@@ -130,8 +132,9 @@ void EditorGameBase::create_tempfile_and_save_mapdata(FileSystem::Type const typ
 			int suffix;
 			for (suffix = 0; suffix <= 9; suffix++) {
 				complete_filename = filename + "-" + std::to_string(suffix) + kTempFileExtension;
-				if (!g_fs->file_exists(complete_filename))
+				if (!g_fs->file_exists(complete_filename)) {
 					break;
+				}
 			}
 			if (suffix > 9) {
 				throw wexception(
@@ -271,13 +274,14 @@ void EditorGameBase::inform_players_about_ownership(MapIndex const i,
 }
 void EditorGameBase::inform_players_about_immovable(MapIndex const i,
                                                     MapObjectDescr const* const descr) {
-	if (!Road::is_road_descr(descr) && !Waterway::is_waterway_descr(descr))
+	if (!Road::is_road_descr(descr) && !Waterway::is_waterway_descr(descr)) {
 		iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
 			Player::Field& player_field = p->fields_[i];
 			if (1 < player_field.vision) {
 				player_field.map_object_descr = descr;
 			}
 		}
+	}
 }
 
 void EditorGameBase::allocate_player_maps() {
@@ -451,9 +455,10 @@ Bob& EditorGameBase::create_critter(const Coords& c,
 
 Bob& EditorGameBase::create_critter(const Coords& c, const std::string& name, Player* owner) {
 	const BobDescr* descr = dynamic_cast<const BobDescr*>(world().get_critter_descr(name));
-	if (descr == nullptr)
+	if (descr == nullptr) {
 		throw GameDataError("create_critter(%i,%i,%s,%s): critter not found", c.x, c.y, name.c_str(),
 		                    owner->get_name().c_str());
+	}
 	return create_bob(c, *descr, owner);
 }
 
@@ -748,8 +753,9 @@ void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 			//  adds the influence
 			MilitaryInfluence new_influence_modified = conquering_player->military_influence(index) +=
 			   influence;
-			if (owner && !conquer_guarded_location_by_superior_influence)
+			if (owner && !conquer_guarded_location_by_superior_influence) {
 				new_influence_modified = 1;
+			}
 			if (!owner || player(owner).military_influence(index) < new_influence_modified) {
 				change_field_owner(mr.location(), player_area.player_number);
 			}
@@ -759,9 +765,9 @@ void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 			//  owned. Now we must see if some other player has influence and if
 			//  so, transfer the ownership to that player.
 			PlayerNumber best_player;
-			if (preferred_player && player(preferred_player).military_influence(index))
+			if (preferred_player && player(preferred_player).military_influence(index)) {
 				best_player = preferred_player;
-			else {
+			} else {
 				best_player = neutral_when_no_influence ? 0 : player_area.player_number;
 				MilitaryInfluence highest_military_influence = 0;
 				PlayerNumber const nr_players = map().get_nrplayers();
@@ -819,15 +825,18 @@ void EditorGameBase::cleanup_playerimmovables_area(PlayerArea<Area<FCoords>> con
 	//  fix all immovables
 	upcast(Game, game, this);
 	for (PlayerImmovable* temp_imm : burnlist) {
-		if (upcast(Building, building, temp_imm))
+		if (upcast(Building, building, temp_imm)) {
 			building->set_defeating_player(area.player_number);
-		else if (upcast(Flag, flag, temp_imm))
-			if (Building* const flag_building = flag->get_building())
+		} else if (upcast(Flag, flag, temp_imm)) {
+			if (Building* const flag_building = flag->get_building()) {
 				flag_building->set_defeating_player(area.player_number);
-		if (game)
+			}
+		}
+		if (game) {
 			temp_imm->schedule_destroy(*game);
-		else
+		} else {
 			temp_imm->remove(*this);
+		}
 	}
 }
 }  // namespace Widelands
