@@ -10,4 +10,4 @@ table. Map objects that can have programs are:
 
    Production Sites <productionsite_program>
    Workers <autogen_tribes_worker_programs>
-   Immovables <immovable_program>
+   Immovables <autogen_immovable_programs>

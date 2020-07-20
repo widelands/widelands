@@ -74,7 +74,7 @@ dirname = path.dirname(__file__)
 --               "grow=alder_summer_old",
 --            },
 --
---       See :doc:`immovable_program`.
+--       See :ref:`immovable_programs`.
 --
 --    **terrain_affinity**
 --        *Mandatory for trees*. If your immovable is a tree (c.f. `Trees`_), you will need to specify its

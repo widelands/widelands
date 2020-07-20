@@ -594,7 +594,7 @@ callobject
          "return"
       }
 
-   See also :doc:`immovable_program`.
+   See also :ref:`immovable_programs`.
 */
 /**
  * sparam1 = callobject command name
