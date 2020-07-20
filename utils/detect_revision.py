@@ -22,7 +22,9 @@ except ImportError:
 
 base_path = p.abspath(p.join(p.dirname(__file__), p.pardir))
 
-next_stable_version = open(p.join(base_path, 'NEXT_STABLE_VERSION')).read().strip()
+next_stable_version = open(
+    p.join(base_path, 'NEXT_STABLE_VERSION')).read().strip()
+
 
 def _communicate_utf8(cmd, **kwargs):
     """Runs the 'cmd' with 'kwargs' and returns its output which is assumed to
