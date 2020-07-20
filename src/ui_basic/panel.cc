@@ -452,6 +452,7 @@ void Panel::set_visible(bool const on) {
 	if (on) {
 		flags_ |= pf_visible;
 	}
+	Notifications::publish(NotePanel(on));
 }
 
 /**

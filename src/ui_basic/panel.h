@@ -28,11 +28,22 @@
 #include "base/rect.h"
 #include "base/vector.h"
 #include "graphic/styles/panel_styles.h"
+#include "notifications/note_ids.h"
+#include "notifications/notifications.h"
 #include "sound/constants.h"
 
 class RenderTarget;
 
 namespace UI {
+// We use this to make sure that only 1 dropdown is open at the same time.
+struct NotePanel {
+	CAN_BE_SENT_AS_NOTE(NoteId::Panel)
+
+	bool visible;
+
+	explicit NotePanel(bool init_visible) : visible(init_visible) {
+	}
+};
 
 /**
  * Panel is a basic rectangular UI element.

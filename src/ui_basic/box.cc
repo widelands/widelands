@@ -44,6 +44,10 @@ Box::Box(Panel* const parent,
      orientation_(orientation),
      mindesiredbreadth_(0),
      inner_spacing_(inner_spacing) {
+
+	panel_subscriber_ = Notifications::subscribe<NotePanel>([this](const NotePanel&) {
+		update_desired_size();
+	});
 }
 
 /**
@@ -55,9 +59,9 @@ Box::Box(Panel* const parent,
  * only a vertical scrollbar may be added.
  */
 void Box::set_scrolling(bool scroll) {
-	//	if (scroll == scrolling_) {
-	//		return;
-	//	}
+	if (scroll == scrolling_) {
+		return;
+	}
 
 	scrolling_ = scroll;
 	update_desired_size();

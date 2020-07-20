@@ -113,6 +113,7 @@ private:
 	uint32_t inner_spacing_;
 
 	std::vector<Item> items_;
+	std::unique_ptr<Notifications::Subscriber<NotePanel>> panel_subscriber_;
 };
 }  // namespace UI
 
