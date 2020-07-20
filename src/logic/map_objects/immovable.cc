@@ -39,14 +39,18 @@ BaseImmovable::BaseImmovable(const MapObjectDescr& mo_descr) : MapObject(&mo_des
 }
 
 int32_t BaseImmovable::string_to_size(const std::string& size) {
-	if (size == "none")
+	if (size == "none") {
 		return BaseImmovable::NONE;
-	if (size == "small")
+	}
+	if (size == "small") {
 		return BaseImmovable::SMALL;
-	if (size == "medium")
+	}
+	if (size == "medium") {
 		return BaseImmovable::MEDIUM;
-	if (size == "big")
+	}
+	if (size == "big") {
 		return BaseImmovable::BIG;
+	}
 	throw GameDataError("Unknown size %s.", size.c_str());
 }
 
@@ -79,8 +83,9 @@ void BaseImmovable::set_position(EditorGameBase& egbase, const Coords& c) {
 
 	Map* map = egbase.mutable_map();
 	FCoords f = map->get_fcoords(c);
-	if (f.field->immovable && f.field->immovable != this)
+	if (f.field->immovable && f.field->immovable != this) {
 		f.field->immovable->remove(egbase);
+	}
 
 	f.field->immovable = this;
 
@@ -263,9 +268,10 @@ ImmovableDescr::~ImmovableDescr() {
 ImmovableProgram const* ImmovableDescr::get_program(const std::string& program_name) const {
 	Programs::const_iterator const it = programs_.find(program_name);
 
-	if (it == programs_.end())
+	if (it == programs_.end()) {
 		throw GameDataError(
 		   "immovable %s has no program \"%s\"", name().c_str(), program_name.c_str());
+	}
 
 	return it->second;
 }
@@ -302,7 +308,8 @@ Immovable::Immovable(const ImmovableDescr& imm_descr,
      program_ptr_(0),
      anim_construction_total_(0),
      anim_construction_done_(0),
-     program_step_(0) {
+     program_step_(0),
+     growth_delay_(0) {
 }
 
 Immovable::~Immovable() {
@@ -424,9 +431,10 @@ void Immovable::draw_construction(const uint32_t gametime,
                                   const float scale,
                                   RenderTarget* dst) {
 	const ImmovableProgram::ActConstruct* constructionact = nullptr;
-	if (program_ptr_ < program_->size())
+	if (program_ptr_ < program_->size()) {
 		constructionact =
 		   dynamic_cast<const ImmovableProgram::ActConstruct*>(&(*program_)[program_ptr_]);
+	}
 
 	const uint32_t steptime = constructionact ? constructionact->buildtime() : 5000;
 
@@ -437,8 +445,9 @@ void Immovable::draw_construction(const uint32_t gametime,
 	}
 
 	uint32_t total = anim_construction_total_ * steptime;
-	if (done > total)
+	if (done > total) {
 		done = total;
+	}
 
 	const Animation& anim = g_gr->animations().get_animation(anim_);
 	const size_t nr_frames = anim.nr_frames();
@@ -488,8 +497,8 @@ Load/save support
 // Widelands, so we have a dynamic version number - it is only set higher than
 // kCurrentPacketVersionImmovableNoFormerBuildings during saving if we have an immovable with
 // a former building assigned to it.
-constexpr uint8_t kCurrentPacketVersionImmovableNoFormerBuildings = 7;
-constexpr uint8_t kCurrentPacketVersionImmovable = 8;
+constexpr uint8_t kCurrentPacketVersionImmovableNoFormerBuildings = 8;
+constexpr uint8_t kCurrentPacketVersionImmovable = 9;
 
 // Supporting older versions for map loading
 void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
@@ -502,8 +511,9 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 		PlayerNumber pn = fr.unsigned_8();
 		if (pn && pn <= kMaxPlayers) {
 			Player* plr = egbase().get_player(pn);
-			if (!plr)
+			if (!plr) {
 				throw GameDataError("Immovable::load: player %u does not exist", pn);
+			}
 			imm.set_owner(plr);
 		}
 	}
@@ -535,8 +545,9 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 	imm.animstart_ = fr.signed_32();
 	if (packet_version >= 4) {
 		imm.anim_construction_total_ = fr.unsigned_32();
-		if (imm.anim_construction_total_)
+		if (imm.anim_construction_total_) {
 			imm.anim_construction_done_ = fr.unsigned_32();
+		}
 	}
 
 	{  //  program
@@ -546,8 +557,9 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 			std::transform(program_name.begin(), program_name.end(), program_name.begin(), tolower);
 		} else {
 			program_name = fr.c_string();
-			if (program_name.empty())
+			if (program_name.empty()) {
 				program_name = "program";
+			}
 		}
 		imm.program_ = imm.descr().get_program(program_name);
 	}
@@ -573,6 +585,10 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 	} else {
 		imm.program_step_ = fr.signed_32();
 	}
+	imm.growth_delay_ =
+	   packet_version >= (packet_version > kCurrentPacketVersionImmovableNoFormerBuildings ? 9 : 8) ?
+	      fr.unsigned_32() :
+	      0;
 
 	if (packet_version >= 3 && packet_version <= 5) {
 		imm.reserved_by_worker_ = fr.unsigned_8();
@@ -593,8 +609,9 @@ void Immovable::Loader::load_finish() {
 	BaseImmovable::Loader::load_finish();
 
 	Immovable& imm = dynamic_cast<Immovable&>(*get_object());
-	if (upcast(Game, game, &egbase()))
+	if (upcast(Game, game, &egbase())) {
 		imm.schedule_act(*game, 1);
+	}
 
 	egbase().inform_players_about_immovable(
 	   Map::get_index(imm.position_, egbase().map().get_width()), &imm.descr());
@@ -610,8 +627,9 @@ void Immovable::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 	fw.unsigned_8(packet_version);
 
 	if (descr().owner_type() == MapObjectDescr::OwnerType::kTribe) {
-		if (get_owner() == nullptr)
+		if (get_owner() == nullptr) {
 			log(" Tribe immovable '%s' has no owner!! ", descr().name().c_str());
+		}
 		fw.c_string("tribes");
 	} else {
 		fw.c_string("world");
@@ -635,14 +653,16 @@ void Immovable::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 	fw.string(descr().get_animation_name(anim_));
 	fw.signed_32(animstart_);
 	fw.unsigned_32(anim_construction_total_);
-	if (anim_construction_total_)
+	if (anim_construction_total_) {
 		fw.unsigned_32(anim_construction_done_);
+	}
 
 	// Program Stuff
 	fw.string(program_ ? program_->name() : "");
 
 	fw.unsigned_32(program_ptr_);
 	fw.unsigned_32(program_step_);
+	fw.unsigned_32(growth_delay_);
 
 	if (action_data_) {
 		fw.c_string(action_data_->name());
@@ -709,16 +729,27 @@ MapObject::Loader* Immovable::load(EditorGameBase& egbase,
  */
 bool Immovable::construct_remaining_buildcost(Game& /* game */, Buildcost* buildcost) {
 	ActConstructData* d = get_action_data<ActConstructData>();
-	if (!d)
+	if (!d) {
 		return false;
+	}
 
 	const Buildcost& total = descr().buildcost();
 	for (Buildcost::const_iterator it = total.begin(); it != total.end(); ++it) {
 		uint32_t delivered = d->delivered[it->first];
-		if (delivered < it->second)
+		if (delivered < it->second) {
 			(*buildcost)[it->first] = it->second - delivered;
+		}
 	}
 
+	return true;
+}
+
+bool Immovable::apply_growth_delay(Game& game) {
+	if (growth_delay_ == 0) {
+		return false;
+	}
+	schedule_act(game, growth_delay_);
+	growth_delay_ = 0;
 	return true;
 }
 
@@ -730,16 +761,18 @@ bool Immovable::construct_remaining_buildcost(Game& /* game */, Buildcost* build
  */
 bool Immovable::construct_ware(Game& game, DescriptionIndex index) {
 	ActConstructData* d = get_action_data<ActConstructData>();
-	if (!d)
+	if (!d) {
 		return false;
+	}
 
 	molog("construct_ware: index %u", index);
 
 	Buildcost::iterator it = d->delivered.find(index);
-	if (it != d->delivered.end())
+	if (it != d->delivered.end()) {
 		it->second++;
-	else
+	} else {
 		d->delivered[index] = 1;
+	}
 
 	anim_construction_done_ = d->delivered.total();
 	animstart_ = game.get_gametime();
@@ -782,8 +815,9 @@ PlayerImmovable::PlayerImmovable(const MapObjectDescr& mo_descr)
  * Cleanup
  */
 PlayerImmovable::~PlayerImmovable() {
-	if (workers_.size())
+	if (workers_.size()) {
 		log("PlayerImmovable::~PlayerImmovable: %" PRIuS " workers left!\n", workers_.size());
+	}
 }
 
 /**
@@ -819,19 +853,21 @@ void PlayerImmovable::add_worker(Worker& w) {
  */
 void PlayerImmovable::remove_worker(Worker& w) {
 	for (Workers::iterator worker_iter = workers_.begin(); worker_iter != workers_.end();
-	     ++worker_iter)
+	     ++worker_iter) {
 		if (*worker_iter == &w) {
 			*worker_iter = *(workers_.end() - 1);
 			return workers_.pop_back();
 		}
+	}
 
 	throw wexception("PlayerImmovable::remove_worker: not in list");
 }
 
 void Immovable::set_former_building(const BuildingDescr& building) {
-	if (descr().owner_type() == MapObjectDescr::OwnerType::kTribe && get_owner() == nullptr)
+	if (descr().owner_type() == MapObjectDescr::OwnerType::kTribe && get_owner() == nullptr) {
 		throw wexception("Set '%s' as former building for Tribe immovable '%s', but it has no owner.",
 		                 building.name().c_str(), descr().name().c_str());
+	}
 	former_building_descr_ = &building;
 }
 
@@ -855,8 +891,9 @@ bool PlayerImmovable::init(EditorGameBase& egbase) {
  * Release workers
  */
 void PlayerImmovable::cleanup(EditorGameBase& egbase) {
-	while (!workers_.empty())
+	while (!workers_.empty()) {
 		workers_[0]->set_location(nullptr);
+	}
 
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::LOST));
 
@@ -913,13 +950,15 @@ void PlayerImmovable::Loader::load(FileRead& fr) {
 		if (packet_version == kCurrentPacketVersionPlayerImmovable) {
 			PlayerNumber owner_number = fr.unsigned_8();
 
-			if (!owner_number || owner_number > egbase().map().get_nrplayers())
+			if (!owner_number || owner_number > egbase().map().get_nrplayers()) {
 				throw GameDataError("owner number is %u but there are only %u players", owner_number,
 				                    egbase().map().get_nrplayers());
+			}
 
 			Player* owner = egbase().get_player(owner_number);
-			if (!owner)
+			if (!owner) {
 				throw GameDataError("owning player %u does not exist", owner_number);
+			}
 
 			imm.owner_ = owner;
 		} else {

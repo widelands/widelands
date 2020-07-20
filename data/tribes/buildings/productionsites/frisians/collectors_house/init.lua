@@ -53,10 +53,6 @@ tribes:new_productionsite_type {
       frisians_fruit_collector = 1
    },
 
-   outputs = {
-      "fruit"
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start gathering berries because ...

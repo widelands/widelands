@@ -57,9 +57,6 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "snack", amount = 6 }
    },
-   outputs = {
-      "coal"
-   },
 
    programs = {
       work = {

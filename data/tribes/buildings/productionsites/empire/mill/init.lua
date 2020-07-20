@@ -43,9 +43,6 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "wheat", amount = 6 }
    },
-   outputs = {
-      "flour"
-   },
 
    programs = {
       work = {

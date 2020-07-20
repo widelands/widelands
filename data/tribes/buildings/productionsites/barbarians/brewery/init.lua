@@ -41,9 +41,6 @@ tribes:new_productionsite_type {
       { name = "water", amount = 8 },
       { name = "wheat", amount = 8 }
    },
-   outputs = {
-      "beer_strong"
-   },
 
    programs = {
       work = {

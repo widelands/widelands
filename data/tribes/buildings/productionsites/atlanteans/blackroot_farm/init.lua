@@ -38,10 +38,6 @@ tribes:new_productionsite_type {
       atlanteans_blackroot_farmer = 1
    },
 
-   outputs = {
-      "blackroot"
-   },
-
    indicate_workarea_overlaps = {
       atlanteans_blackroot_farm = false,
       atlanteans_farm = false,

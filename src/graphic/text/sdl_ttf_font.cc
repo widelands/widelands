@@ -53,7 +53,7 @@ void SdlTtfFont::dimensions(const std::string& txt, int style, uint16_t* gw, uin
 	// Getting height from TTF_SizeUTF8() was sometimes causing misaligned text,
 	// so use TTF_FontHeight() to get it instead
 	int w, h;
-	TTF_SizeUTF8(font_, txt.c_str(), &w, NULL);
+	TTF_SizeUTF8(font_, txt.c_str(), &w, nullptr);
 	h = TTF_FontHeight(font_);
 
 	if (style & SHADOW) {

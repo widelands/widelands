@@ -40,10 +40,6 @@ tribes:new_productionsite_type {
       barbarians_carrier = 1
    },
 
-   outputs = {
-      "water"
-   },
-
    indicate_workarea_overlaps = {
       barbarians_well = false,
    },

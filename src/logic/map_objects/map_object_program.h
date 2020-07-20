@@ -29,7 +29,7 @@
 
 namespace Widelands {
 
-struct MapObjectDescr;
+class MapObjectDescr;
 
 /// Superclass for Worker, Immovable and Productionsite programs. Includes a program name and
 /// diverse parsing convenience functions. The creation and execution of program actions is left to

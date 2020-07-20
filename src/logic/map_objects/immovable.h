@@ -253,6 +253,11 @@ public:
 		return nullptr;
 	}
 
+	void delay_growth(uint32_t ms) {
+		growth_delay_ += ms;
+	}
+	bool apply_growth_delay(Game&);
+
 protected:
 	// The building type that created this immovable, if any.
 	const BuildingDescr* former_building_descr_;
@@ -291,6 +296,9 @@ protected:
 	 * \warning Use get_action_data to access this.
 	 */
 	std::unique_ptr<ImmovableActionData> action_data_;
+
+private:
+	uint32_t growth_delay_;
 
 	// Load/save support
 protected:
