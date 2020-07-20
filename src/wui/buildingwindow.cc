@@ -284,20 +284,24 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			if (building->descr().can_be_dismantled()) {
 				const Widelands::Buildcost wares =
 				   Widelands::DismantleSite::count_returned_wares(building);
-				if (!wares.empty()) {
-					UI::Button* dismantlebtn =
-					   new UI::Button(capsbuttons, "dismantle", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-					                  g_gr->images().get(pic_dismantle),
-					                  std::string(_("Dismantle")) + "<br>" +
-					                     g_gr->styles()
-					                        .ware_info_style(UI::WareInfoStyle::kNormal)
-					                        .header_font()
-					                        .as_font_tag(_("Returns:")) +
-					                     "<br>" + waremap_to_richtext(owner.tribe(), wares));
-					dismantlebtn->sigclicked.connect([this]() { act_dismantle(); });
-					capsbuttons->add(dismantlebtn);
-					requires_destruction_separator = true;
-				}
+
+				const std::string dismantle_text =
+				   (wares.empty() ? _("Dismantle") :
+				                    std::string(_("Dismantle")) + "<br><font size=11>" + _("Returns:") +
+				                       "</font><br>" + waremap_to_richtext(owner.tribe(), wares));
+
+				UI::Button* dismantlebtn =
+				   new UI::Button(capsbuttons, "dismantle", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+				                  g_gr->images().get(pic_dismantle),
+				                  std::string(_("Dismantle")) + "<br>" +
+				                     g_gr->styles()
+				                        .ware_info_style(UI::WareInfoStyle::kNormal)
+				                        .header_font()
+				                        .as_font_tag(_("Returns:")) +
+				                     "<br>" + waremap_to_richtext(owner.tribe(), wares));
+				dismantlebtn->sigclicked.connect([this]() { act_dismantle(); });
+				capsbuttons->add(dismantlebtn);
+				requires_destruction_separator = true;
 			}
 		}
 
