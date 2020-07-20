@@ -109,8 +109,8 @@ void GameDetails::show(const std::vector<SavegameData>& gamedata) {
 
 	std::string combined_header = as_richtext(as_heading_with_content(
 	   /** TRANSLATORS: %1% = number of selected directories, %2% = number of selected files*/
-	   (boost::format(ngettext("Selected %1% directory and %2%:", "Selected %1% directories and %2%:",
-	                           number_of_directories)) %
+	   (boost::format(ngettext("Selected %1% directory and %2%:",
+	                           "Selected %1% directories and %2%:", number_of_directories)) %
 	    number_of_directories % header_second_part)
 	      .str(),
 	   "", style_, true));
