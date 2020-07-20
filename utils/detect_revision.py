@@ -15,7 +15,7 @@ import string
 # "1.0~..." where "1.0" is the next release. Update this string after every release,
 # and also if we have to rename the next target during the release cycle.
 # See https://github.com/widelands/widelands/issues/3979 for a full discussion.
-next_stable_version = "1.0"
+next_stable_version = '1.0'
 
 # Support for bzr local branches
 try:
