@@ -45,9 +45,8 @@ Box::Box(Panel* const parent,
      mindesiredbreadth_(0),
      inner_spacing_(inner_spacing) {
 
-	panel_subscriber_ = Notifications::subscribe<NotePanel>([this](const NotePanel&) {
-		update_desired_size();
-	});
+	panel_subscriber_ =
+	   Notifications::subscribe<NotePanel>([this](const NotePanel&) { update_desired_size(); });
 }
 
 /**
