@@ -6733,6 +6733,11 @@ void DefaultAI::review_wares_targets(uint32_t const gametime) {
 	const uint16_t multiplier = std::max<uint16_t>((productionsites.size() + num_ports * 5) / 5, 10);
 
 	for (EconomyObserver* observer : economies) {
+		if (observer->economy.type() != wwWARE) {
+			// Don't set ware target quantities for worker economies
+			continue;
+		}
+
 		DescriptionIndex nritems = player_->egbase().tribes().nrwares();
 		for (Widelands::DescriptionIndex id = 0; id < nritems; ++id) {
 
