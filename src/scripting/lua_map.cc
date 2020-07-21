@@ -3962,7 +3962,7 @@ int LuaEconomy::set_target_quantity(lua_State* L) {
 			if (quantity < 0) {
 				report_error(L, "Target ware quantity needs to be >= 0 but was '%d'.", quantity);
 			}
-			get()->set_target_quantity(index, quantity, get_egbase(L).get_gametime());
+			get()->set_target_quantity(get()->type(), index, quantity, get_egbase(L).get_gametime());
 		} else {
 			report_error(L, "There is no ware '%s'.", wname.c_str());
 		}
@@ -3975,7 +3975,7 @@ int LuaEconomy::set_target_quantity(lua_State* L) {
 			if (quantity < 0) {
 				report_error(L, "Target worker quantity needs to be >= 0 but was '%d'.", quantity);
 			}
-			get()->set_target_quantity(index, quantity, get_egbase(L).get_gametime());
+			get()->set_target_quantity(get()->type(), index, quantity, get_egbase(L).get_gametime());
 		} else {
 			report_error(L, "There is no worker '%s'.", wname.c_str());
 		}
