@@ -696,7 +696,7 @@ createbob
       types as you want.
 
    Adds a bob (an animal or a worker, e.g. a deer or a ferry) to the map at the worker's current
-location. Randomly select from the list of ``bob_name``. Examples::
+   location. Randomly select from the list of ``bob_name``. Examples::
 
       release = {
          "findspace=size:any radius:3",
