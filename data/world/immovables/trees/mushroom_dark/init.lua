@@ -18,8 +18,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 72500",
-         "remove=80",
-         "transform=mushroom_dark_wasteland_pole",
+         "transform=mushroom_dark_wasteland_pole remove:80",
       },
    },
    spritesheets = {
@@ -46,8 +45,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 72500",
-         "remove=70",
-         "transform=mushroom_dark_wasteland_mature",
+         "transform=mushroom_dark_wasteland_mature remove:70",
       },
    },
    spritesheets = {
@@ -74,8 +72,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 75000",
-         "remove=40",
-         "transform=mushroom_dark_wasteland_old",
+         "transform=mushroom_dark_wasteland_old remove:40",
       },
    },
    spritesheets = {
@@ -105,11 +102,11 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 1050000",
-         "transform=deadtree2 25",
+         "transform=deadtree2 success:25",
          "seed=mushroom_dark_wasteland_sapling 200",
       },
       fall = {
-         "remove=",
+         "transform=",
       },
    },
    spritesheets = {

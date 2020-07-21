@@ -17,8 +17,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 55000",
-         "remove=42",
-         "transform=spruce_summer_pole",
+         "transform=spruce_summer_pole remove:42",
       },
    },
    spritesheets = {
@@ -44,8 +43,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 55000",
-         "remove=33",
-         "transform=spruce_summer_mature",
+         "transform=spruce_summer_mature remove:33",
       },
    },
    spritesheets = {
@@ -71,8 +69,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 60000",
-         "remove=23",
-         "transform=spruce_summer_old",
+         "transform=spruce_summer_old remove:23",
       },
    },
    spritesheets = {
@@ -100,11 +97,11 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 1550000",
-         "transform=deadtree3 24",
+         "transform=deadtree3 success:24",
          "seed=spruce_summer_sapling 200",
       },
       fall = {
-         "remove=",
+         "transform=",
       },
    },
    spritesheets = {

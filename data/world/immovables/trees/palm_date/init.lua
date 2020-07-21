@@ -17,8 +17,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 38000",
-         "remove=50",
-         "transform=palm_date_desert_pole",
+         "transform=palm_date_desert_pole remove:50",
       },
    },
    spritesheets = {
@@ -44,8 +43,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 38000",
-         "remove=47",
-         "transform=palm_date_desert_mature",
+         "transform=palm_date_desert_mature remove:47",
       },
    },
    spritesheets = {
@@ -71,11 +69,10 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 20000",
-         "remove=30",
+         "transform=remove:30",
          "seed=palm_date_desert_sapling 20",
          "animate=idle 20000",
-         "remove=20",
-         "transform=palm_date_desert_old",
+         "transform=palm_date_desert_old remove:20",
       },
    },
    spritesheets = {
@@ -103,11 +100,11 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 1050000",
-         "transform=deadtree5 32",
+         "transform=deadtree5 success:32",
          "seed=palm_date_desert_sapling 200",
       },
       fall = {
-         "remove=",
+         "transform=",
       },
    },
    spritesheets = {

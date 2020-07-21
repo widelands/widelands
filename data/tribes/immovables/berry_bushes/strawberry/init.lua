@@ -100,10 +100,10 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 450000",
-         "remove=",
+         "transform=",
       },
       harvest = {
-         "remove=",
+         "transform=",
       }
    },
    spritesheets = {

@@ -50,11 +50,11 @@ Programs are defined as Lua tables. Each program must be declared as a subtable 
    programs = {
       program = {
          "animate=idle 1550000",
-         "transform=deadtree4 5",
+         "transform=deadtree4 success:5",
          "seed=alder_summer_sapling 180",
       },
       fall = {
-         "remove=",
+         "transform=",
       },
    },
 
@@ -96,6 +96,7 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 				actions_.push_back(
 				   std::unique_ptr<Action>(new ActTransform(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "remove") {
+				log("WARNING: %s: 'remove' is deprecated, use 'transform=' instead.\n", immovable.name().c_str());
 				actions_.push_back(std::unique_ptr<Action>(new ActRemove(parseinput.arguments)));
 			} else if (parseinput.name == "seed") {
 				actions_.push_back(
@@ -191,43 +192,71 @@ void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) c
 
 transform
 ---------
-Delete this immovable and instantly replace it with a different immovable.
+Delete this immovable and instantly replace it with a different immovable or a bob. If no parameters are given, the immovable is removed and no other transformation will take place.
 
 Parameter syntax::
 
-  parameters ::= [bob] name [chance]
+  parameters ::= [[bob:]<name>] [remove:<chance>] [success:<chance>]
 
 Parameter semantics:
 
-``name``
-    The name of the immovable to turn into. If the ``bob`` flag is given, this refers to any kind of bob; otherwise to an immovable.
-``chance``
-    A natural integer in [1,254] defining the chance that the transformation succeeds. The game will generate a random number between 0 and 255 and the program step succeeds if and only if this number is less than ``chance``. Otherwise, the next program step is triggered. If ``chance`` is omitted, the transformation will calculate the probability from the terrain affinity if available; otherwise, it will always succeed.
-
-Deletes the immovable (preventing subsequent program steps from being called) and replaces it with an immovable or bob of the given name. The chance that this program step succeeds can be specified (by default, the step will always succeed).
+``[bob:]<name>``
+    The name of the immovable to turn into. If the ``bob`` flag is given, the transformation target is a bob; otherwise it is an immovable. Currently, only ships are supported as bobs.
+``remove:<chance>``
+    A natural integer in [1,254] defining the chance that this immovable will be removed from the map. If the removal is performed, no other transformation will take place.
+``success:<chance>``
+    A natural integer in [1,254] defining the chance that the transformation will be performed. The game will generate a random number between 0 and 255 and the program step succeeds if and only if this number is less than ``chance``. Otherwise, the next program step is triggered. If ``success:<chance>`` is omitted, the transformation will calculate the probability from the terrain affinity if available; otherwise, it will always succeed.
 */
 ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments,
                                              const ImmovableDescr& descr) {
-	if (arguments.empty()) {
-		throw GameDataError("Usage: transform=[bob] <name> [<probability>]");
+	if (arguments.size() > 3) {
+		throw GameDataError("Usage: [[bob:]name] [remove:chance] [success:chance]");
 	}
 	try {
 		bob = false;
-		probability = 0;
+		removal_wanted = false;
+		transform_probability = 0;
+		removal_probability = 0;
+
+		if (arguments.empty()) {
+			removal_wanted = true;
+		}
 
 		for (const std::string& argument : arguments) {
-			if (argument == "bob") {
+			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
+			if (!item.second.empty()) {
+				if (item.first == "bob") {
+					bob = true;
+					// TODO(GunChleoc): If would be nice to check if target exists, but we can't guarantee
+					// the load order. Maybe in postload() one day.
+					type_name = item.second;
+				} else if (item.first == "remove") {
+					removal_wanted = true;
+					removal_probability = read_positive(item.second, 254);
+				} else if (item.first == "success") {
+					transform_probability = read_positive(item.second, 254);
+				} else {
+					throw GameDataError("Unknown argument '%s'. Usage: [[bob:]name] [remove:chance] [success:chance]", argument.c_str());
+				}
+			} else if (item.first == "bob") {
+				// TODO(GunChleoc): Savegame compatibility, remove this argument option after Build 22
 				bob = true;
-			} else if (argument[0] >= '0' && argument[0] <= '9') {
-				probability = read_positive(argument, 254);
+				log("WARNING: %s: Deprecated 'bob' in 'transform' program, use 'bob:<name>' instead.\n", descr.name().c_str());
+			} else if (item.first[0] >= '0' && item.first[0] <= '9') {
+				// TODO(GunChleoc): Savegame compatibility, remove this argument option after Build 22
+				log("WARNING: %s: Deprecated chance in 'transform' program, use 'success:<number>' instead.\n", descr.name().c_str());
+				transform_probability = read_positive(item.first, 254);
 			} else {
 				// TODO(GunChleoc): If would be nice to check if target exists, but we can't guarantee
 				// the load order. Maybe in postload() one day.
-				type_name = argument;
+				type_name = item.first;
+			}
+			if (type_name == descr.name()) {
+				throw GameDataError("illegal transformation to the same type");
 			}
 		}
-		if (type_name == descr.name()) {
-			throw GameDataError("illegal transformation to the same type");
+		if (transform_probability > 0 && type_name.empty()) {
+			throw GameDataError("'success' parameter without immovable/bob name");
 		}
 	} catch (const WException& e) {
 		throw GameDataError("transform: %s", e.what());
@@ -235,10 +264,23 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 }
 
 void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) const {
+	assert(removal_wanted || !type_name.empty());
+
+	// Check whether we want to remove
+	if (removal_wanted && (removal_probability == 0 || game.logic_rand() % 256 < removal_probability)) {
+		immovable.remove(game);  //  Now immovable is a dangling reference!
+		return;
+	}
+	// For removal with chance but no transformation to new object
+	if (type_name.empty()) {
+		return;
+	}
+
 	if (immovable.apply_growth_delay(game)) {
 		return;
 	}
 
+	// Transform according to success if this was specified, and using any available terrain affinity if not.
 	const Map& map = game.map();
 	const ImmovableDescr& descr = immovable.descr();
 	Player* player = immovable.get_owner();
@@ -246,15 +288,19 @@ void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) c
 	MapObjectDescr::OwnerType owner_type = immovable.descr().owner_type();
 
 	const bool will_transform =
-			descr.has_terrain_affinity() && probability == 0 ?
+			descr.has_terrain_affinity() && transform_probability == 0 ?
 				(game.logic_rand() % TerrainAffinity::kPrecisionFactor) <
 						  probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains()) :
-				probability == 0 || game.logic_rand() % 256 < probability;
+				transform_probability == 0 || game.logic_rand() % 256 < transform_probability;
 
 	if (will_transform) {
-		immovable.remove(game);  //  Now immovable is a dangling reference!
-		game.create_immovable_with_name(
-		   f, type_name, owner_type, player, nullptr /* former_building_descr */);
+		if (bob) {
+			game.create_ship(f, type_name, player);
+		} else {
+			immovable.remove(game);  //  Now immovable is a dangling reference!
+			game.create_immovable_with_name(
+			   f, type_name, owner_type, player, nullptr /* former_building_descr */);
+		}
 	} else {
 		immovable.program_step(game);
 	}
@@ -271,19 +317,9 @@ grow
 
 remove
 ------
-Delete this immovable.
-
-Parameter syntax::
-
-  parameters ::= [chance]
-
-Parameter semantics:
-
-``chance``
-    A natural integer in [1,254] defining the chance that removing succeeds. The game will generate a random number between 0 and 255 and the program step succeeds if and only if this number is less than ``chance``. Otherwise, the next program step is triggered. If ``chance`` is omitted, the removal will always succeed.
-
-Deletes the immovable (preventing subsequent program steps from being called). The chance that this program step succeeds can be specified (by default, the step will always succeed).
+** DEPRECATED** Use ``transform=remove:[<chance>]`` or ``transform=`` instead.
 */
+// TODO(GunChleoc): Savegame compatibility, remove after Build 22
 ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments) {
 	if (arguments.size() > 1) {
 		throw GameDataError("Usage: remove=[<probability>]");

@@ -66,20 +66,8 @@ struct ImmovableProgram : public MapObjectProgram {
 		AnimationParameters parameters;
 	};
 
-	/// Transforms the immovable into another immovable or into a bob
-	///
-	/// Parameter syntax
-	///    parameters ::= {probability} {bob|immovable} world|tribe:name
-	/// Parameter semantics:
-	///    probability: (defaults to 0 -- i.e. always)
-	///       The probability (out of 255) for replacing the immovable with
-	///       a new one; if the probability is 0 (i.e. the default), then the
-	///       transformation always happens.
-	///       For immovables that have terrain affinity, the probability is taken from there.
-	///    bob|immovable: (defaults to immovable)
-	///       whether we'll be replaced by a bob or by an immovable
-	///    name:
-	///       name of the replacement object
+	/// Transforms the immovable into another immovable or into a bob, or removes the immovable.
+	/// For parameters, see scripting documentation.
 	struct ActTransform : public Action {
 		ActTransform(std::vector<std::string>& arguments, const ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
@@ -87,7 +75,9 @@ struct ImmovableProgram : public MapObjectProgram {
 	private:
 		std::string type_name;
 		bool bob;
-		uint8_t probability;
+		bool removal_wanted;
+		uint8_t transform_probability;
+		uint8_t removal_probability;
 	};
 
 	struct ActRemove : public Action {

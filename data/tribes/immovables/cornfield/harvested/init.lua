@@ -11,7 +11,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 50000",
-         "remove=",
+         "transform=",
       }
    },
 

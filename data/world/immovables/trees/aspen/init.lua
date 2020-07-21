@@ -17,8 +17,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 38000",
-         "remove=50",
-         "transform=aspen_summer_pole",
+         "transform=aspen_summer_pole remove:50",
       },
    },
    spritesheets = {
@@ -44,8 +43,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 38000",
-         "remove=47",
-         "transform=aspen_summer_mature",
+         "transform=aspen_summer_mature remove:47",
       },
    },
    spritesheets = {
@@ -71,11 +69,10 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 20000",
-         "remove=30",
+         "transform=remove:30",
          "seed=aspen_summer_sapling 60",
          "animate=idle 20000",
-         "remove=20",
-         "transform=aspen_summer_old",
+         "transform=aspen_summer_old remove:20",
       },
    },
    spritesheets = {
@@ -103,7 +100,7 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 1050000",
-         "transform=deadtree2 15",
+         "transform=deadtree2 success:15",
          "seed=aspen_summer_sapling 100",
       },
       fall = {

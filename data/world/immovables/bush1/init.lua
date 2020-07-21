@@ -70,8 +70,7 @@ dirname = path.dirname(__file__)
 --
 --            program = {
 --               "animate=idle 50000",
---               "remove=18",
---               "transform=alder_summer_old",
+--               "transform=alder_summer_old remove:18",
 --            },
 --
 --       See :ref:`immovable_programs`.

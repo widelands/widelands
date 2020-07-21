@@ -12,7 +12,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 400000",
-         "remove=",
+         "transform=",
       },
       with_fish = {
          "transform=pond_growing",
