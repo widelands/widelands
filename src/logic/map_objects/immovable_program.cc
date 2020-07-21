@@ -96,6 +96,7 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 				actions_.push_back(
 				   std::unique_ptr<Action>(new ActTransform(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "remove") {
+				// TODO(GunChleoc): Savegame compatibility, remove after Build 22.
 				log("WARNING: %s: 'remove' is deprecated, use 'transform=' instead.\n", immovable.name().c_str());
 				actions_.push_back(std::unique_ptr<Action>(new ActRemove(parseinput.arguments)));
 			} else if (parseinput.name == "seed") {
@@ -251,9 +252,9 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 				// the load order. Maybe in postload() one day.
 				type_name = item.first;
 			}
-			if (type_name == descr.name()) {
-				throw GameDataError("illegal transformation to the same type");
-			}
+		}
+		if (type_name == descr.name()) {
+			throw GameDataError("illegal transformation to the same type");
 		}
 		if (transform_probability > 0 && type_name.empty()) {
 			throw GameDataError("'success' parameter without immovable/bob name");

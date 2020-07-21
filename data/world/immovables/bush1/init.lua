@@ -144,7 +144,7 @@ world:new_immovable_type{
 -- "trees_coniferous", "trees_deciduous", "trees_palm", or "trees_wasteland".
 -- Because they will grow with time, this growth is represented by transforming one
 -- tree into the next through the ``transform`` command in their program,
--- which will detect the terrain affinity to determine the probability of the tree growing or dying.
+-- which will detect the terrain affinity to determine the probability of the tree growing.
 -- They also all need to define a species name and their terrain affinity (see above).
 -- Trees will grow in 4 stages:
 --
