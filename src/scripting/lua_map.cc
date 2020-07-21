@@ -1427,7 +1427,7 @@ int LuaMap::find_ocean_fields(lua_State* L) {
 		bool success = false;
 		if (map[field].maxcaps() & Widelands::MOVECAPS_SWIM) {
 			for (Widelands::Coords port : map.get_port_spaces()) {
-				for (const Widelands::Coords& c : map.find_portdock(port)) {
+				for (const Widelands::Coords& c : map.find_portdock(port, false)) {
 					Widelands::Path p;
 					if (map.findpath(field, c, 0, p, CheckStepDefault(MOVECAPS_SWIM)) >= 0) {
 						success = true;
@@ -1604,7 +1604,7 @@ int LuaMap::sea_route_exists(lua_State* L) {
 	const Widelands::Map& map = get_egbase(L).map();
 	const Widelands::FCoords f_start = (*get_user_class<LuaMaps::LuaField>(L, 2))->fcoords(L);
 	const Widelands::FCoords f_port = (*get_user_class<LuaMaps::LuaField>(L, 3))->fcoords(L);
-	for (const Widelands::Coords& c : map.find_portdock(f_port)) {
+	for (const Widelands::Coords& c : map.find_portdock(f_port, false)) {
 		Widelands::Path p;
 		if (map.findpath(f_start, c, 0, p, CheckStepDefault(MOVECAPS_SWIM)) >= 0) {
 			lua_pushboolean(L, true);
