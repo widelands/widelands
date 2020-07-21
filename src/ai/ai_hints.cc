@@ -137,8 +137,8 @@ Production Sites
 
 **collects_ware_from_map**
     **DEPRECATED** The building will generate this ware from the map, e.g. a well mining the
-``water`` ware, or the hunter returning from the hunt with the ``meat`` ware. The same ware needs
-also to be listed as the first one of the building's outputs, e.g.::
+    ``water`` ware, or the hunter returning from the hunt with the ``meat`` ware. The same
+    ware needs also to be listed as the first one of the building's outputs, e.g.::
 
         aihints = {
             collects_ware_from_map = "meat"
