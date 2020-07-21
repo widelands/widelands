@@ -73,11 +73,11 @@ struct ImmovableProgram : public MapObjectProgram {
 		void execute(Game&, Immovable&) const override;
 
 	private:
-		std::string type_name;
-		bool bob;
-		bool removal_wanted;
-		uint8_t transform_probability;
-		uint8_t removal_probability;
+		std::string type_name_;
+		bool bob_;
+		bool removal_wanted_;
+		uint8_t transform_probability_;
+		uint8_t removal_probability_;
 	};
 
 	struct ActRemove : public Action {

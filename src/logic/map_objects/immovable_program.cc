@@ -91,12 +91,12 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 				actions_.push_back(
 				   std::unique_ptr<Action>(new ActTransform(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "grow") {
-				// TODO(GunChleoc): Savegame compatibility, remove after Build 22.
+				// TODO(GunChleoc): Savegame compatibility, remove after v1.0.
 				log("WARNING: %s: 'grow' is deprecated, use 'transform' instead.\n", immovable.name().c_str());
 				actions_.push_back(
 				   std::unique_ptr<Action>(new ActTransform(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "remove") {
-				// TODO(GunChleoc): Savegame compatibility, remove after Build 22.
+				// TODO(GunChleoc): Savegame compatibility, remove after v1.0.
 				log("WARNING: %s: 'remove' is deprecated, use 'transform=' instead.\n", immovable.name().c_str());
 				actions_.push_back(std::unique_ptr<Action>(new ActRemove(parseinput.arguments)));
 			} else if (parseinput.name == "seed") {
@@ -214,49 +214,49 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 		throw GameDataError("Usage: [[bob:]name] [remove:chance] [success:chance]");
 	}
 	try {
-		bob = false;
-		removal_wanted = false;
-		transform_probability = 0;
-		removal_probability = 0;
+		bob_ = false;
+		removal_wanted_ = false;
+		transform_probability_ = 0;
+		removal_probability_ = 0;
 
 		if (arguments.empty()) {
-			removal_wanted = true;
+			removal_wanted_ = true;
 		}
 
 		for (const std::string& argument : arguments) {
 			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
 			if (!item.second.empty()) {
 				if (item.first == "bob") {
-					bob = true;
+					bob_ = true;
 					// TODO(GunChleoc): If would be nice to check if target exists, but we can't guarantee
 					// the load order. Maybe in postload() one day.
-					type_name = item.second;
+					type_name_ = item.second;
 				} else if (item.first == "remove") {
-					removal_wanted = true;
-					removal_probability = read_positive(item.second, 254);
+					removal_wanted_ = true;
+					removal_probability_ = read_positive(item.second, 254);
 				} else if (item.first == "success") {
-					transform_probability = read_positive(item.second, 254);
+					transform_probability_ = read_positive(item.second, 254);
 				} else {
 					throw GameDataError("Unknown argument '%s'. Usage: [[bob:]name] [remove:chance] [success:chance]", argument.c_str());
 				}
 			} else if (item.first == "bob") {
 				// TODO(GunChleoc): Savegame compatibility, remove this argument option after Build 22
-				bob = true;
+				bob_ = true;
 				log("WARNING: %s: Deprecated 'bob' in 'transform' program, use 'bob:<name>' instead.\n", descr.name().c_str());
 			} else if (item.first[0] >= '0' && item.first[0] <= '9') {
 				// TODO(GunChleoc): Savegame compatibility, remove this argument option after Build 22
 				log("WARNING: %s: Deprecated chance in 'transform' program, use 'success:<number>' instead.\n", descr.name().c_str());
-				transform_probability = read_positive(item.first, 254);
+				transform_probability_ = read_positive(item.first, 254);
 			} else {
 				// TODO(GunChleoc): If would be nice to check if target exists, but we can't guarantee
 				// the load order. Maybe in postload() one day.
-				type_name = item.first;
+				type_name_ = item.first;
 			}
 		}
-		if (type_name == descr.name()) {
+		if (type_name_ == descr.name()) {
 			throw GameDataError("illegal transformation to the same type");
 		}
-		if (transform_probability > 0 && type_name.empty()) {
+		if (transform_probability_ > 0 && type_name_.empty()) {
 			throw GameDataError("'success' parameter without immovable/bob name");
 		}
 	} catch (const WException& e) {
@@ -265,15 +265,15 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 }
 
 void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) const {
-	assert(removal_wanted || !type_name.empty());
+	assert(removal_wanted_ || !type_name_.empty());
 
 	// Check whether we want to remove
-	if (removal_wanted && (removal_probability == 0 || game.logic_rand() % 256 < removal_probability)) {
+	if (removal_wanted_ && (removal_probability_ == 0 || game.logic_rand() % 256 < removal_probability_)) {
 		immovable.remove(game);  //  Now immovable is a dangling reference!
 		return;
 	}
 	// For removal with chance but no transformation to new object
-	if (type_name.empty()) {
+	if (type_name_.empty()) {
 		return;
 	}
 
@@ -289,18 +289,18 @@ void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) c
 	MapObjectDescr::OwnerType owner_type = immovable.descr().owner_type();
 
 	const bool will_transform =
-			descr.has_terrain_affinity() && transform_probability == 0 ?
+			descr.has_terrain_affinity() && transform_probability_ == 0 ?
 				(game.logic_rand() % TerrainAffinity::kPrecisionFactor) <
 						  probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains()) :
-				transform_probability == 0 || game.logic_rand() % 256 < transform_probability;
+				transform_probability_ == 0 || game.logic_rand() % 256 < transform_probability_;
 
 	if (will_transform) {
-		if (bob) {
-			game.create_ship(f, type_name, player);
+		immovable.remove(game);  //  Now immovable is a dangling reference!
+		if (bob_) {
+			game.create_ship(f, type_name_, player);
 		} else {
-			immovable.remove(game);  //  Now immovable is a dangling reference!
 			game.create_immovable_with_name(
-			   f, type_name, owner_type, player, nullptr /* former_building_descr */);
+			   f, type_name_, owner_type, player, nullptr /* former_building_descr */);
 		}
 	} else {
 		immovable.program_step(game);
@@ -320,7 +320,7 @@ remove
 ------
 ** DEPRECATED** Use ``transform=remove:[<chance>]`` or ``transform=`` instead.
 */
-// TODO(GunChleoc): Savegame compatibility, remove after Build 22
+// TODO(GunChleoc): Savegame compatibility, remove after v1.0
 ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments) {
 	if (arguments.size() > 1) {
 		throw GameDataError("Usage: remove=[<probability>]");
