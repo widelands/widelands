@@ -46,7 +46,7 @@ tribes:new_worker_type {
          "findspace=size:swim radius:5",
          "walk=coords",
          "animate=idle 10000",
-         "buildferry",
+         "createbob=atlanteans_ferry",
          "return"
       },
    },
