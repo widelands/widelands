@@ -21,6 +21,9 @@
 
 #include "base/i18n.h"
 #include "build_info.h"
+#include "logic/game.h"
+#include "logic/filesystem_constants.h"
+#include "wui/savegameloader.h"
 
 FullscreenMenuMain::FullscreenMenuMain()
    : FullscreenMenuMainMenu(),
@@ -44,6 +47,14 @@ FullscreenMenuMain::FullscreenMenuMain()
                   buth_,
                   UI::ButtonStyle::kFsMenuMenu,
                   _("Single Player")),
+     continue_lastsave(this,
+                  "continue_lastsave",
+                  0,
+                  0,
+                  buth_,
+                  buth_,
+                  UI::ButtonStyle::kFsMenuMenu,
+                  g_gr->images().get("images/ui_basic/continue.png")),
      multiplayer(
         &vbox_, "multi_player", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Multiplayer")),
      replay(&vbox_, "replay", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Watch Replay")),
@@ -78,6 +89,9 @@ FullscreenMenuMain::FullscreenMenuMain()
 	singleplayer.sigclicked.connect([this]() {
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kSinglePlayer);
 	});
+	continue_lastsave.sigclicked.connect([this]() {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kContinueLastsave);
+	});
 	multiplayer.sigclicked.connect([this]() {
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kMultiplayer);
 	});
@@ -111,6 +125,23 @@ FullscreenMenuMain::FullscreenMenuMain()
 	vbox_.add_inf_space();
 	vbox_.add(&exit, UI::Box::Resizing::kFullSize);
 
+	Widelands::Game game;
+	SinglePlayerLoader loader(game);
+	std::vector<SavegameData> games = loader.load_files(kSaveDir);
+	SavegameData* newest_singleplayer = nullptr;
+	for (SavegameData& data : games) {
+		if (data.is_singleplayer() && (newest_singleplayer == nullptr || newest_singleplayer->compare_save_time(data))) {
+			newest_singleplayer = &data;
+		}
+	}
+	if (newest_singleplayer) {
+		filename_for_continue_ = newest_singleplayer->filename;
+		continue_lastsave.set_tooltip((boost::format(_("Continue last saved game (%s)")) %
+				filename_for_continue_.substr(kSaveDir.length() + 1 /* strip leading "save/" */ )).str());
+	} else {
+		continue_lastsave.set_enabled(false);
+	}
+
 	layout();
 }
 
@@ -141,4 +172,7 @@ void FullscreenMenuMain::layout() {
 	vbox_.set_pos(Vector2i(box_x_, box_y_));
 	vbox_.set_inner_spacing(padding_);
 	vbox_.set_size(butw_, get_h() - vbox_.get_y() - 5 * padding_);
+
+	continue_lastsave.set_desired_size(buth_, buth_);
+	continue_lastsave.set_pos(Vector2i(vbox_.get_x() + singleplayer.get_w() + padding_, vbox_.get_y() + singleplayer.get_y()));
 }
