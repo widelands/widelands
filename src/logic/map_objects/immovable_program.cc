@@ -205,8 +205,7 @@ void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) c
 
 transform
 ---------
-Delete this immovable and instantly replace it with a different immovable or a bob. If no parameters
-are given, the immovable is removed and no other transformation will take place.
+Replace this immovable with something else or remove it.
 
 Parameter syntax::
 
@@ -216,16 +215,21 @@ Parameter semantics:
 
 ``[bob:]<name>``
     The name of the immovable to turn into. If the ``bob`` flag is given, the transformation target
-is a bob; otherwise it is an immovable. Currently, only ships are supported as bobs.
+    is a bob; otherwise it is an immovable. Currently, only ships are supported as bobs.
 ``remove:<chance>``
     A natural integer in [1,254] defining the chance that this immovable will be removed from the
-map. If the removal is performed, no other transformation will take place.
+    map. If the removal is performed, no other transformation will take place.
 ``success:<chance>``
     A natural integer in [1,254] defining the chance that the transformation will be performed. The
-game will generate a random number between 0 and 255 and the program step succeeds if and only if
-this number is less than ``chance``. Otherwise, the next program step is triggered. If
-``success:<chance>`` is omitted, the transformation will calculate the probability from the terrain
-affinity if available; otherwise, it will always succeed.
+    game will generate a random number between 0 and 255 and the program step succeeds if and only
+    if this number is less than ``chance``. Otherwise, the next program step is triggered. If
+    ``success:<chance>`` is omitted, the transformation will calculate the probability from the
+    terrain affinity if available; otherwise, it will always succeed.
+
+Deletes this immovable and instantly replaces it with a different immovable or a bob. If no parameters
+are given, the immovable is removed and no other transformation will take place. If the immovable has
+terrain affinity, or ``success`` is specified, there's a probability that the transformation will be
+skipped.
 */
 ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments,
                                              const ImmovableDescr& descr) {
@@ -378,8 +382,8 @@ Parameter semantics:
     The name of the immovable to create.
 ``factor``
     A natural integer in [1,254]. The radius within which the immovable will seed is not limited and
-is determined by repeatedly generating a random number between 0 and 255 and comparing it with
-``factor`` until the comparison fails.
+    is determined by repeatedly generating a random number between 0 and 255 and comparing it with
+    ``factor`` until the comparison fails.
 
 Finds a random location nearby and creates a new immovable with the given name there with a chance
 depending on *this* immovable's terrain affinity. The chance that such a location will be searched
@@ -457,10 +461,10 @@ Parameter semantics:
     The animation to display while the immovable is being constructed.
 ``build``
     The duration of each construction step in milliseconds for visualising the construction
-progress. Used only in drawing code.
+    progress. Used only in drawing code.
 ``decay``
     When no construction material has been delivered for this many milliseconds, the construction
-progress starts to gradually reverse.
+    progress starts to gradually reverse.
 
 Blocks execution of subsequent programs until enough wares have been delivered to this immovable by
 a worker. The wares to deliver are specified in the immovable's ``buildcost`` table which is
