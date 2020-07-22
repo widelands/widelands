@@ -123,7 +123,7 @@ static std::map<const lua_State*, std::vector<std::string>> textdomains;
    .. function:: push_textdomain(domain)
 
       Sets the textdomain for all further calls to :func:`_` until it is reset
-      to the previous value using :func:`pop_textdomain()`.
+      to the previous value using :func:`pop_textdomain`.
 
       :arg domain: The textdomain
       :type domain: :class:`string`
@@ -148,7 +148,7 @@ static int L_pop_textdomain(lua_State* L) {
 /* RST
    .. function:: set_textdomain(domain)
 
-      DEPRECATED. Use `push_textdomain(domain) instead.`
+      DEPRECATED. Use `push_textdomain(domain)` instead.
 */
 // TODO(Nordfriese): Delete after v1.0
 static int L_set_textdomain(lua_State* L) {

@@ -193,8 +193,6 @@ static const char* kPersistentGlobals[] = {"_VERSION",
                                            "string",
                                            "_",
                                            "set_textdomain",
-                                           "push_textdomain",
-                                           "pop_textdomain",
                                            "get_build_id",
                                            "coroutine.yield",
                                            "ngettext",
@@ -202,6 +200,8 @@ static const char* kPersistentGlobals[] = {"_VERSION",
                                            "path",
                                            "pgettext",
                                            "ticks",
+                                           "push_textdomain",
+                                           "pop_textdomain",
                                            nullptr};
 
 /**
