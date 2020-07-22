@@ -586,6 +586,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		}
 
 		const PlayerSettings& player_setting = settings.players[id_];
+		player.set_tooltip(player_setting.name.empty() ? "" : player_setting.name);
 		rebuild_type_dropdown(settings);
 		set_visible(true);
 
@@ -689,8 +690,11 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 	playerbox.add_space(0);
 	playerbox.add(&scrollable_playerbox, Resizing::kExpandBoth);
 
-	subscriber_ =
-	   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings&) { update(); });
+	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& s) {
+		if (s.action == NoteGameSettings::Action::kMap) {
+			update();
+		}
+	});
 	update();
 }
 

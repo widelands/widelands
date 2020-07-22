@@ -148,6 +148,7 @@ void SinglePlayerActivePlayerGroup::update() {
 	set_visible(true);
 
 	const PlayerSettings& player_setting = settings.players[id_];
+	player_.set_tooltip(player_setting.name.empty() ? "" : player_setting.name);
 	if (player_setting.state == PlayerSettings::State::kClosed ||
 	    player_setting.state == PlayerSettings::State::kOpen) {
 
