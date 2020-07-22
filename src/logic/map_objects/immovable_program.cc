@@ -226,10 +226,10 @@ Parameter semantics:
     ``success:<chance>`` is omitted, the transformation will calculate the probability from the
     terrain affinity if available; otherwise, it will always succeed.
 
-Deletes this immovable and instantly replaces it with a different immovable or a bob. If no parameters
-are given, the immovable is removed and no other transformation will take place. If the immovable has
-terrain affinity, or ``success`` is specified, there's a probability that the transformation will be
-skipped.
+Deletes this immovable and instantly replaces it with a different immovable or a bob. If no
+parameters are given, the immovable is removed and no other transformation will take place. If the
+immovable has terrain affinity, or ``success`` is specified, there's a probability that the
+transformation will be skipped.
 */
 ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments,
                                              const ImmovableDescr& descr) {
