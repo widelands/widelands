@@ -130,8 +130,7 @@ FullscreenMenuMain::FullscreenMenuMain()
 	std::vector<SavegameData> games = loader.load_files(kSaveDir);
 	SavegameData* newest_singleplayer = nullptr;
 	for (SavegameData& data : games) {
-		if (!data.is_directory() &&
-		    data.is_singleplayer() &&
+		if (!data.is_directory() && data.is_singleplayer() &&
 		    (newest_singleplayer == nullptr || newest_singleplayer->compare_save_time(data))) {
 			newest_singleplayer = &data;
 		}
