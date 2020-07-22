@@ -297,7 +297,7 @@ obj_waterways = {
    body = objective_text(_"Build a gold mine and waterways",
       p(_[[Build a gold mine on the mountain in the south, and connect it to the mainland by building waterways over the streams.]]) ..
       li_arrow(_[[A waterway is built just like a road: You click on a flag near the shore, choose ‘Build a waterway’, and select the path for the waterway just as you would do for a road.]]) ..
-      li_arrow(_[[The two rules for waterway placement are only that the two triangles directly adjacent to each segment of the waterway have to be water, and the entire path needs to be within your territory.]])
+      li_arrow(_[[However, each segment of the waterway needs two water triangles next to it.]])
    )
 }
 
