@@ -180,5 +180,4 @@ void FullscreenMenuMain::layout() {
 	vbox_.set_pos(Vector2i(box_x_, box_y_));
 	vbox_.set_inner_spacing(padding_);
 	vbox_.set_size(butw_, get_h() - vbox_.get_y() - 5 * padding_);
-
 }
