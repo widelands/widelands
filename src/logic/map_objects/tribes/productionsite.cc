@@ -116,7 +116,8 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 	}
 
 	if (table.has_key("outputs")) {
-		log("WARNING: The \"outputs\" table is no longer needed; you can remove it from %s\n", name().c_str());
+		log("WARNING: The \"outputs\" table is no longer needed; you can remove it from %s\n",
+		    name().c_str());
 	}
 
 	if (table.has_key("inputs")) {

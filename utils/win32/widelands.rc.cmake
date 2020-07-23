@@ -21,9 +21,10 @@
 
 A ICON MOVEABLE PURE LOADONCALL DISCARDABLE "@CMAKE_CURRENT_SOURCE_DIR@/../utils/win32/WL.ico"
 
-//
-// TO CHANGE VERSION INFORMATION, EDIT  OPTIONS BELOW...
-//
+// To change version information, edit FILEVERSION and PRODUCTVERSION. Keep these two identical.
+// Version "A,B,C,D" translates to version "A.B.C.D",
+// e.g. for version "1.2" we need "1,2,0,0".
+// https://docs.microsoft.com/en-us/windows/win32/menurc/versioninfo-resource
 1 VERSIONINFO
 FILEVERSION 0,21,0,1
 PRODUCTVERSION 0,21,0,1
