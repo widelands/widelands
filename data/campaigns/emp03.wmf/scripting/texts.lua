@@ -27,8 +27,8 @@ end
 function holy_shrine(text, image)
    return
       div("width=100%",
-         div("width=50%", p(text)) ..
-         div("width=*", p("align=right", img(image)))
+         div("width=60%", p(text)) ..
+         div("width=*", p("align=left", img(image)))
       )
 end
 
