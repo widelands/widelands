@@ -50,7 +50,7 @@ tribes:new_worker_type {
          "findspace=size:swim radius:5",
          "walk=coords",
          "animate=work 10000",
-         "buildferry",
+         "createbob=empire_ferry",
          "return"
       },
    },

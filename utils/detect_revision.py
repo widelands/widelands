@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Tries to find out the repository revision of the current working directory
-# using bzr or debian/changelog
+# using WL_RELEASE, git, bzr, or debian/changelog
 
 import os
 import sys
@@ -21,6 +21,9 @@ except ImportError:
     __has_bzrlib = False
 
 base_path = p.abspath(p.join(p.dirname(__file__), p.pardir))
+
+next_stable_version = open(
+    p.join(base_path, 'NEXT_STABLE_VERSION')).read().strip()
 
 
 def _communicate_utf8(cmd, **kwargs):
@@ -46,7 +49,7 @@ def detect_debian_version():
     m = pattern.search(version)
     if m == None:
         return None
-    version = version[m.start():m.end()]
+    version = '%s~%s' % (next_stable_version, version[m.start():m.end()])
     return version
 
 
@@ -62,7 +65,8 @@ def detect_git_revision():
             ['git', 'rev-parse', '--abbrev-ref', 'HEAD'], cwd=base_path)
         git_abbrev = stdout.rstrip()
         if git_count and git_revnum and git_abbrev:
-            return 'r%s[%s@%s]' % (git_count, git_revnum, git_abbrev)
+            # 1.0~git34567[abc0123@master]
+            return '%s~git%s[%s@%s]' % (next_stable_version, git_count, git_revnum, git_abbrev)
     except Exception as e:
         pass
     return None
@@ -97,8 +101,9 @@ def detect_bzr_revision():
             commit_message = b.repository.get_revision(
                 b.last_revision()).message
             git_hash = extract_git_hash(commit_message)
-            return 'bzr{revno}[{git_hash}@{nick}]'.format(
-                revno=revno, git_hash=git_hash, nick=nick)
+            # 1.0~bzr9876[abc0123@trunk]
+            return '{nsv}~bzr{revno}[{git_hash}@{nick}]'.format(
+                nsv=next_stable_version, revno=revno, git_hash=git_hash, nick=nick)
         except:
             return None
     else:
@@ -111,8 +116,9 @@ def detect_bzr_revision():
             nick = run_bzr(['nick'])
             commit_message = run_bzr(['log', '--limit=1', '--short'])
             git_hash = extract_git_hash(commit_message)
-            return 'bzr{revno}[{git_hash}@{nick}]'.format(
-                revno=revno, git_hash=git_hash, nick=nick)
+            # 1.0~bzr9876[abc0123@trunk]
+            return '{nsv}~bzr{revno}[{git_hash}@{nick}]'.format(
+                nsv=next_stable_version, revno=revno, git_hash=git_hash, nick=nick)
         except (OSError, subprocess.CalledProcessError):
             return None
     return None
@@ -128,7 +134,7 @@ def detect_revision():
         if rv:
             return rv
 
-    return 'REVDETECT-BROKEN-PLEASE-REPORT-THIS'
+    return '%s~error-REVDETECT-BROKEN-PLEASE-REPORT-THIS' % next_stable_version
 
 
 if __name__ == '__main__':
