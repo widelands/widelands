@@ -343,7 +343,7 @@ struct HostChatProvider : public ChatProvider {
 			// Acknowledge kick
 			else if (cmd == "ack_kick") {
 				if (arg1.empty()) {
-					c.msg = _("kick acknowledgement cancelled: No name given!");
+					c.msg = _("Kick acknowledgement cancelled: No name given!");
 				} else if (arg2.size()) {
 					c.msg = _("Wrong use, should be: /ack_kick <name>");
 				} else {
@@ -351,7 +351,7 @@ struct HostChatProvider : public ChatProvider {
 						h->kick_user(kickClient, kickReason);
 						return;
 					} else {
-						c.msg = _("kick acknowledgement cancelled: Wrong name given!");
+						c.msg = _("Kick acknowledgement cancelled: Wrong name given!");
 					}
 				}
 				kickUser = "";
