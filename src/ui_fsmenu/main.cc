@@ -54,7 +54,7 @@ FullscreenMenuMain::FullscreenMenuMain()
                        butw_,
                        buth_,
                        UI::ButtonStyle::kFsMenuMenu,
-                       _("No last saved game to continue")),
+                       _("Continue Playing")),
      multiplayer(
         &vbox_, "multi_player", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Multiplayer")),
      replay(&vbox_, "replay", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Watch Replay")),
@@ -82,9 +82,7 @@ FullscreenMenuMain::FullscreenMenuMain()
                (boost::format(_("(C) %1%-%2% by the Widelands Development Team")) %
                 kWidelandsCopyrightStart % kWidelandsCopyrightEnd)
                   .str()),
-     gpl(this, 0, 0, 0, 0, _("Licensed under the GNU General Public License V2.0")),
-     graphic_resolution_changed_subscriber_(Notifications::subscribe<GraphicResolutionChanged>(
-        [this](const GraphicResolutionChanged&) { layout(); })) {
+     gpl(this, 0, 0, 0, 0, _("Licensed under the GNU General Public License V2.0")) {
 	playtutorial.sigclicked.connect([this]() {
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kTutorial);
 	});
@@ -140,11 +138,19 @@ FullscreenMenuMain::FullscreenMenuMain()
 	}
 	if (newest_singleplayer) {
 		filename_for_continue_ = newest_singleplayer->filename;
-		continue_lastsave.set_title(
-		   /** TRANSLATORS: Continue the last saved game which is called '%s' */
-		   (boost::format(_("Continue ‘%s’")) %
-		    filename_for_continue_.substr(kSaveDir.length() + 1 /* strip leading "save/" */))
-		      .str());
+		continue_lastsave.set_tooltip(
+		   (boost::format("<p>%s%s<br>%s</p>") %
+		    g_gr->styles().font_style(UI::FontStyle::kTooltipHeader).as_font_tag(
+		       /* strip leading "save/" and trailing ".wgf" */
+		       filename_for_continue_.substr(kSaveDir.length() + 1,
+		          filename_for_continue_.length() - kSaveDir.length() - kSavegameExtension.length() - 1)) %
+		    g_gr->styles().font_style(UI::FontStyle::kTooltip).as_font_tag(
+		       newest_singleplayer->mapname
+		    ) %
+		    g_gr->styles().font_style(UI::FontStyle::kTooltip).as_font_tag(
+		       newest_singleplayer->savedonstring
+		    )
+		    ).str());
 	} else {
 		continue_lastsave.set_enabled(false);
 	}
