@@ -56,8 +56,9 @@ EditorActionArgs::~EditorActionArgs() {
 // === EditorHistory === //
 
 uint32_t EditorHistory::undo_action() {
-	if (undo_stack_.empty())
+	if (undo_stack_.empty()) {
 		return 0;
+	}
 
 	EditorToolAction uac = undo_stack_.front();
 	undo_stack_.pop_front();
@@ -71,8 +72,9 @@ uint32_t EditorHistory::undo_action() {
 }
 
 uint32_t EditorHistory::redo_action() {
-	if (redo_stack_.empty())
+	if (redo_stack_.empty()) {
 		return 0;
+	}
 
 	EditorToolAction rac = redo_stack_.front();
 	redo_stack_.pop_front();

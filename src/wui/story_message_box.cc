@@ -85,8 +85,9 @@ void StoryMessageBox::clicked_ok() {
 }
 
 bool StoryMessageBox::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my) {
-	if (btn == SDL_BUTTON_RIGHT)
+	if (btn == SDL_BUTTON_RIGHT) {
 		return true;
+	}
 
 	return UI::Window::handle_mousepress(btn, mx, my);
 }

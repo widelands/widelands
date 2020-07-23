@@ -33,16 +33,18 @@ Vector2f MapviewPixelFunctions::calc_pix_difference(const Map& map, Vector2f a, 
 	Vector2f diff = a - b;
 
 	int32_t map_end_screen_x = get_map_end_screen_x(map);
-	if (diff.x > map_end_screen_x / 2.f)
+	if (diff.x > map_end_screen_x / 2.f) {
 		diff.x -= map_end_screen_x;
-	else if (diff.x < -map_end_screen_x / 2.f)
+	} else if (diff.x < -map_end_screen_x / 2.f) {
 		diff.x += map_end_screen_x;
+	}
 
 	int32_t map_end_screen_y = get_map_end_screen_y(map);
-	if (diff.y > map_end_screen_y / 2.f)
+	if (diff.y > map_end_screen_y / 2.f) {
 		diff.y -= map_end_screen_y;
-	else if (diff.y < -map_end_screen_y / 2.f)
+	} else if (diff.y < -map_end_screen_y / 2.f) {
 		diff.y += map_end_screen_y;
+	}
 
 	return diff;
 }
@@ -57,13 +59,15 @@ float MapviewPixelFunctions::calc_pix_distance(const Map& map, Vector2f a, Vecto
 	uint32_t dx = std::abs(a.x - b.x), dy = std::abs(a.y - b.y);
 	{
 		const uint32_t map_end_screen_x = get_map_end_screen_x(map);
-		if (dx > map_end_screen_x / 2)
+		if (dx > map_end_screen_x / 2) {
 			dx = -(dx - map_end_screen_x);
+		}
 	}
 	{
 		const uint32_t map_end_screen_y = get_map_end_screen_y(map);
-		if (dy > map_end_screen_y / 2)
+		if (dy > map_end_screen_y / 2) {
 			dy = -(dy - map_end_screen_y);
+		}
 	}
 	return dx + dy;
 }
@@ -74,10 +78,12 @@ MapviewPixelFunctions::calc_node_and_triangle(const Map& map, uint32_t x, uint32
 	const uint16_t mapheight = map.get_height();
 	const uint32_t map_end_screen_x = get_map_end_screen_x(map);
 	const uint32_t map_end_screen_y = get_map_end_screen_y(map);
-	while (x >= map_end_screen_x)
+	while (x >= map_end_screen_x) {
 		x -= map_end_screen_x;
-	while (y >= map_end_screen_y)
+	}
+	while (y >= map_end_screen_y) {
 		y -= map_end_screen_y;
+	}
 	Coords result_node;
 
 	const uint16_t col_number = x / (kTriangleWidth / 2);
@@ -85,8 +91,9 @@ MapviewPixelFunctions::calc_node_and_triangle(const Map& map, uint32_t x, uint32
 	assert(row_number < mapheight);
 	const uint32_t left_col = col_number / 2;
 	uint16_t right_col = (col_number + 1) / 2;
-	if (right_col == mapwidth)
+	if (right_col == mapwidth) {
 		right_col = 0;
+	}
 	bool slash = (col_number + row_number) & 1;
 
 	//  Find out which two nodes the mouse is between in the y-dimension, taking
@@ -103,8 +110,9 @@ MapviewPixelFunctions::calc_node_and_triangle(const Map& map, uint32_t x, uint32
 	for (;;) {
 		screen_y_base += kTriangleHeight;
 		next_row_number = row_number + 1;
-		if (next_row_number == mapheight)
+		if (next_row_number == mapheight) {
 			next_row_number = 0;
+		}
 		upper_screen_dy = lower_screen_dy;
 		lower_screen_dy =
 		   screen_y_base -
@@ -113,8 +121,9 @@ MapviewPixelFunctions::calc_node_and_triangle(const Map& map, uint32_t x, uint32
 		if (lower_screen_dy < 0) {
 			row_number = next_row_number;
 			slash = !slash;
-		} else
+		} else {
 			break;
+		}
 	}
 
 	{  //  Calculate which of the 2 nodes (x, y) is closest to.
@@ -131,10 +140,11 @@ MapviewPixelFunctions::calc_node_and_triangle(const Map& map, uint32_t x, uint32
 			lower_screen_dx = (kTriangleWidth / 2) - upper_screen_dx;
 		}
 		if (upper_screen_dx * upper_screen_dx + upper_screen_dy * upper_screen_dy <
-		    lower_screen_dx * lower_screen_dx + lower_screen_dy * lower_screen_dy)
+		    lower_screen_dx * lower_screen_dx + lower_screen_dy * lower_screen_dy) {
 			result_node = Coords(upper_x, row_number);
-		else
+		} else {
 			result_node = Coords(lower_x, next_row_number);
+		}
 	}
 
 	// This will be overwritten in all cases below.

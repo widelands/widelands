@@ -101,8 +101,8 @@ void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem
 				}
 			}
 			// Produces workers
-			if (productionsite->output_worker_types().size() > 0
-				|| productionsite->type() == Widelands::MapObjectType::TRAININGSITE) {
+			if (productionsite->output_worker_types().size() > 0 ||
+			    productionsite->type() == Widelands::MapObjectType::TRAININGSITE) {
 				JSON::Array* json_workers_array = json_building->add_array("produced_workers");
 				for (DescriptionIndex worker_index : productionsite->output_worker_types()) {
 					json_workers_array->add_empty(tribe.get_worker_descr(worker_index)->name());
