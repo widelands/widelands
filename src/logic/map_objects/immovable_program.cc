@@ -165,8 +165,7 @@ void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) c
 	}
 }
 
-ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments,
-                                   ImmovableDescr& descr) {
+ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments, ImmovableDescr& descr) {
 	if (arguments.size() != 1) {
 		throw GameDataError("Usage: grow=<immovable name>");
 	}

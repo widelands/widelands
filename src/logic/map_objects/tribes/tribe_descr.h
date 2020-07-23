@@ -61,7 +61,8 @@ Two players can choose the same tribe.
 class TribeDescr {
 public:
 	TribeDescr(const LuaTable& table,
-	           const Widelands::TribeBasicInfo& info, const World& world,
+	           const Widelands::TribeBasicInfo& info,
+	           const World& world,
 	           const Tribes& init_tribes);
 
 	const std::string& name() const;

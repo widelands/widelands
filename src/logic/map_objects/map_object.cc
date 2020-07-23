@@ -466,7 +466,8 @@ const MapObjectDescr::Attributes& MapObjectDescr::attributes() const {
  * Lookup an attribute by name. If the attribute name hasn't been encountered
  * before and add_if_not_exists = true, we add it to the map. Else, throws exception.
  */
-MapObjectDescr::AttributeIndex MapObjectDescr::get_attribute_id(const std::string& name, bool add_if_not_exists) {
+MapObjectDescr::AttributeIndex MapObjectDescr::get_attribute_id(const std::string& name,
+                                                                bool add_if_not_exists) {
 	auto it = attribute_names_.find(name);
 
 	if (it != attribute_names_.end()) {

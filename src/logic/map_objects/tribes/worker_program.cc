@@ -309,9 +309,9 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 	}
 
 	if (act->iparam2 >= 0) {
-		collected_attributes_.insert(std::make_pair(
-		                             act->sparam1 == "immovable" ? MapObjectType::IMMOVABLE : MapObjectType::BOB,
-		                             act->iparam2));
+		collected_attributes_.insert(
+		   std::make_pair(act->sparam1 == "immovable" ? MapObjectType::IMMOVABLE : MapObjectType::BOB,
+		                  act->iparam2));
 	}
 
 	workarea_info_[act->iparam1].insert(" findobject");

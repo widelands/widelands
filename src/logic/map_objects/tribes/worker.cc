@@ -2725,7 +2725,8 @@ void Worker::geologist_update(Game& game, State& state) {
 		// Check to see if we're on suitable terrain
 		BaseImmovable* const imm = map.get_immovable(get_position());
 
-		if (!imm || (imm->get_size() == BaseImmovable::NONE && !imm->has_attribute(resource_indicator_attribute))) {
+		if (!imm || (imm->get_size() == BaseImmovable::NONE &&
+		             !imm->has_attribute(resource_indicator_attribute))) {
 			--state.ivar1;
 			return start_task_program(game, state.svar1);
 		}

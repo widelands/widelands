@@ -51,7 +51,6 @@ struct ImmovableActionData;
 struct ImmovableProgram;
 struct PlayerImmovable;
 
-
 struct NoteImmovable {
 	CAN_BE_SENT_AS_NOTE(NoteId::Immovable)
 

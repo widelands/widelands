@@ -1250,7 +1250,8 @@ ProductionProgram::ActConstruct::ActConstruct(const std::vector<std::string>& ar
 	// Register created immovable with productionsite
 	const WorkerDescr& main_worker_descr =
 	   *tribes.get_worker_descr(descr->working_positions().front().first);
-	for (const auto& attribute_info : main_worker_descr.get_program(workerprogram)->created_attributes()) {
+	for (const auto& attribute_info :
+	     main_worker_descr.get_program(workerprogram)->created_attributes()) {
 		descr->add_created_attribute(attribute_info);
 	}
 }

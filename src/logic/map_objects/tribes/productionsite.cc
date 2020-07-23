@@ -187,7 +187,9 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 	}
 
 	if (table.has_key("indicate_workarea_overlaps")) {
-		log("WARNING: The \"indicate_workarea_overlaps\" table in %s has been deprecated and can be removed.\n", name().c_str());
+		log("WARNING: The \"indicate_workarea_overlaps\" table in %s has been deprecated and can be "
+		    "removed.\n",
+		    name().c_str());
 	}
 
 	// Verify that any map resource collected is valid
@@ -231,8 +233,10 @@ const ProductionProgram* ProductionSiteDescr::get_program(const std::string& pro
 	return it->second.get();
 }
 
-// We use MapObjectDescr instead of ProductionSiteDescr as a parameter to avoid dynamic casts in fieldaction. We only care about the identity anyway.
-bool ProductionSiteDescr::highlight_overlapping_workarea_for(const MapObjectDescr* productionsite, bool* positive) const {
+// We use MapObjectDescr instead of ProductionSiteDescr as a parameter to avoid dynamic casts in
+// fieldaction. We only care about the identity anyway.
+bool ProductionSiteDescr::highlight_overlapping_workarea_for(const MapObjectDescr* productionsite,
+                                                             bool* positive) const {
 	if (competes_with_productionsite(productionsite)) {
 		*positive = false;
 		return true;
@@ -262,7 +266,8 @@ bool ProductionSiteDescr::competes_with_productionsite(const MapObjectDescr* pro
 bool ProductionSiteDescr::supports_productionsite(const MapObjectDescr* productionsite) const {
 	return supported_productionsites_.count(productionsite) == 1;
 }
-bool ProductionSiteDescr::is_supported_by_productionsite(const MapObjectDescr* productionsite) const {
+bool ProductionSiteDescr::is_supported_by_productionsite(
+   const MapObjectDescr* productionsite) const {
 	return supported_by_productionsites_.count(productionsite) == 1;
 }
 

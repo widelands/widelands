@@ -105,8 +105,7 @@ CritterDescr::CritterDescr(const std::string& init_descname,
      reproduction_rate_(table.get_int("reproduction_rate")) {
 	assign_directional_animation(&walk_anims_, "walk");
 
-	add_attributes(
-	   table.get_table("attributes")->array_entries<std::string>());
+	add_attributes(table.get_table("attributes")->array_entries<std::string>());
 
 	if (size_ < 1 || size_ > 10) {
 		throw GameDataError(

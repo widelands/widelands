@@ -708,7 +708,8 @@ void DefaultAI::late_initialization() {
 				bo.set_is(BuildingAttribute::kSupportingProducer);
 			}
 
-			// NOCOM this adds woodcutters/lumberjacks, Barbarian Hunter, Atlantean Fisher to the 'requires_supporters' list
+			// NOCOM this adds woodcutters/lumberjacks, Barbarian Hunter, Atlantean Fisher to the
+			// 'requires_supporters' list
 			bo.requires_supporters = prod.needs_supporters();
 
 			iron_resource_id = game().world().resource_index("iron");
@@ -3100,8 +3101,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					}
 					// This considers supporters nearby
 					prio += management_data.neuron_pool[52].get_result_safe(
-							   count_supporters_nearby * 5, kAbsValue) /
-							2;
+					           count_supporters_nearby * 5, kAbsValue) /
+					        2;
 
 					if (prio <= 0) {
 						continue;

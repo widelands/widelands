@@ -2629,9 +2629,11 @@ int LuaProductionSiteDescription::get_collected_immovables(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	for (const std::string& immovable_name : get()->collected_immovables()) {
 		lua_pushint32(L, index++);
-		const ImmovableDescr* immovable = egbase.world().get_immovable_descr(egbase.world().get_immovable_index(immovable_name));
+		const ImmovableDescr* immovable =
+		   egbase.world().get_immovable_descr(egbase.world().get_immovable_index(immovable_name));
 		if (immovable == nullptr) {
-			immovable = egbase.tribes().get_immovable_descr(egbase.tribes().immovable_index(immovable_name));
+			immovable =
+			   egbase.tribes().get_immovable_descr(egbase.tribes().immovable_index(immovable_name));
 		}
 		assert(immovable != nullptr);
 		to_lua<LuaImmovableDescription>(L, new LuaImmovableDescription(immovable));
@@ -2645,7 +2647,8 @@ int LuaProductionSiteDescription::get_collected_resources(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	for (const std::string& resource_name : get()->collected_resources()) {
 		lua_pushint32(L, index++);
-		const ResourceDescription* resource = egbase.world().get_resource(egbase.world().resource_index(resource_name.c_str()));
+		const ResourceDescription* resource =
+		   egbase.world().get_resource(egbase.world().resource_index(resource_name.c_str()));
 		assert(resource != nullptr);
 		to_lua<LuaResourceDescription>(L, new LuaResourceDescription(resource));
 		lua_rawset(L, -3);
@@ -2658,9 +2661,11 @@ int LuaProductionSiteDescription::get_created_immovables(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	for (const std::string& immovable_name : get()->created_immovables()) {
 		lua_pushint32(L, index++);
-		const ImmovableDescr* immovable = egbase.world().get_immovable_descr(egbase.world().get_immovable_index(immovable_name));
+		const ImmovableDescr* immovable =
+		   egbase.world().get_immovable_descr(egbase.world().get_immovable_index(immovable_name));
 		if (immovable == nullptr) {
-			immovable = egbase.tribes().get_immovable_descr(egbase.tribes().immovable_index(immovable_name));
+			immovable =
+			   egbase.tribes().get_immovable_descr(egbase.tribes().immovable_index(immovable_name));
 		}
 		assert(immovable != nullptr);
 		to_lua<LuaImmovableDescription>(L, new LuaImmovableDescription(immovable));
@@ -2676,13 +2681,17 @@ int LuaProductionSiteDescription::get_created_bobs(lua_State* L) {
 		lua_pushint32(L, index++);
 		const CritterDescr* critter = egbase.world().get_critter_descr(bobname);
 		if (critter != nullptr) {
-			to_lua<LuaMapObjectDescription>(L, new LuaMapObjectDescription(dynamic_cast<const MapObjectDescr*>(critter)));
+			to_lua<LuaMapObjectDescription>(
+			   L, new LuaMapObjectDescription(dynamic_cast<const MapObjectDescr*>(critter)));
 		} else {
-			const ShipDescr* ship = egbase.tribes().get_ship_descr(egbase.tribes().ship_index(bobname));
+			const ShipDescr* ship =
+			   egbase.tribes().get_ship_descr(egbase.tribes().ship_index(bobname));
 			if (ship != nullptr) {
-				to_lua<LuaMapObjectDescription>(L, new LuaMapObjectDescription(dynamic_cast<const MapObjectDescr*>(ship)));
+				to_lua<LuaMapObjectDescription>(
+				   L, new LuaMapObjectDescription(dynamic_cast<const MapObjectDescr*>(ship)));
 			} else {
-				const WorkerDescr* worker = egbase.tribes().get_worker_descr(egbase.tribes().worker_index(bobname));
+				const WorkerDescr* worker =
+				   egbase.tribes().get_worker_descr(egbase.tribes().worker_index(bobname));
 				if (worker != nullptr) {
 					to_lua<LuaWorkerDescription>(L, new LuaWorkerDescription(worker));
 				} else {
@@ -2700,7 +2709,8 @@ int LuaProductionSiteDescription::get_created_resources(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	for (const std::string& resource_name : get()->created_resources()) {
 		lua_pushint32(L, index++);
-		const ResourceDescription* resource = egbase.world().get_resource(egbase.world().resource_index(resource_name.c_str()));
+		const ResourceDescription* resource =
+		   egbase.world().get_resource(egbase.world().resource_index(resource_name.c_str()));
 		assert(resource != nullptr);
 		to_lua<LuaResourceDescription>(L, new LuaResourceDescription(resource));
 		lua_rawset(L, -3);

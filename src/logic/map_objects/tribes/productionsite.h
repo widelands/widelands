@@ -104,11 +104,13 @@ public:
 		return output_worker_types_;
 	}
 	/// Map objects that are collected from the map by this production site according to attribute
-	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>& collected_attributes() const {
+	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
+	collected_attributes() const {
 		return collected_attributes_;
 	}
 	/// Map objects that are placed on the map by this production site according to attribute
-	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>& created_attributes() const {
+	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
+	created_attributes() const {
 		return created_attributes_;
 	}
 
@@ -182,25 +184,34 @@ public:
 		return out_of_resource_productivity_threshold_;
 	}
 
-	/// Returns 'true' if an overlap highlighting relationship has been set. Whether an overlap is wanted or not is written into 'positive'.
-	bool highlight_overlapping_workarea_for(const MapObjectDescr* productionsite, bool* positive) const;
+	/// Returns 'true' if an overlap highlighting relationship has been set. Whether an overlap is
+	/// wanted or not is written into 'positive'.
+	bool highlight_overlapping_workarea_for(const MapObjectDescr* productionsite,
+	                                        bool* positive) const;
 	/// Set that this production site competes with the given 'productionsite' for map resources.
 	void add_competing_productionsite(const MapObjectDescr* productionsite);
-	/// Set that this production site creates map resources or objects that the given 'productionsite' needs.
+	/// Set that this production site creates map resources or objects that the given
+	/// 'productionsite' needs.
 	void add_supports_productionsite(const MapObjectDescr* productionsite);
-	/// Set that the given 'productionsite' creates map resources or objects that this production site needs.
+	/// Set that the given 'productionsite' creates map resources or objects that this production
+	/// site needs.
 	void add_supported_by_productionsite(const MapObjectDescr* productionsite);
-	/// Returns whether this production site competes with the given 'productionsite' for map resources.
+	/// Returns whether this production site competes with the given 'productionsite' for map
+	/// resources.
 	bool competes_with_productionsite(const MapObjectDescr* productionsite) const;
-	/// Returns whether this production site creates map resources or objects that the given 'productionsite' needs.
+	/// Returns whether this production site creates map resources or objects that the given
+	/// 'productionsite' needs.
 	bool supports_productionsite(const MapObjectDescr* productionsite) const;
-	/// Returns whether the given 'productionsite' creates map resources or objects that this production site needs.
+	/// Returns whether the given 'productionsite' creates map resources or objects that this
+	/// production site needs.
 	bool is_supported_by_productionsite(const MapObjectDescr* productionsite) const;
-	/// Returns the production sites that need a map resource or object that this production site will place on the map.
+	/// Returns the production sites that need a map resource or object that this production site
+	/// will place on the map.
 	std::set<const MapObjectDescr*> supported_productionsites() const {
 		return supported_productionsites_;
 	}
-	/// Returns whether this production site needs map resources or objects that are created by a different production site.
+	/// Returns whether this production site needs map resources or objects that are created by a
+	/// different production site.
 	bool needs_supporters() const {
 		return !supported_by_productionsites_.empty();
 	}
@@ -213,12 +224,15 @@ protected:
 		output_worker_types_.insert(index);
 	}
 
-	/// Set that this production site needs to collect map objects with the given attribute from the map
-	void add_collected_attribute(std::pair<MapObjectType, MapObjectDescr::AttributeIndex> attribute_info) {
+	/// Set that this production site needs to collect map objects with the given attribute from the
+	/// map
+	void add_collected_attribute(
+	   std::pair<MapObjectType, MapObjectDescr::AttributeIndex> attribute_info) {
 		collected_attributes_.insert(attribute_info);
 	}
 	/// Set that this production site will place map objects with the given attribute on the map
-	void add_created_attribute(std::pair<MapObjectType, MapObjectDescr::AttributeIndex> attribute_info) {
+	void
+	add_created_attribute(std::pair<MapObjectType, MapObjectDescr::AttributeIndex> attribute_info) {
 		created_attributes_.insert(attribute_info);
 	}
 	/// Set that this production site needs to collect the given resource from the map

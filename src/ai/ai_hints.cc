@@ -259,7 +259,8 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table, const std::string&
 	}
 
 	if (table->has_key("requires_supporters")) {
-		log("WARNING: %s: The 'requires_supporters' key in 'ai_hints' is no longer used\n", building_name.c_str());
+		log("WARNING: %s: The 'requires_supporters' key in 'ai_hints' is no longer used\n",
+		    building_name.c_str());
 	}
 }
 

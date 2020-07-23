@@ -55,10 +55,12 @@ struct WorkerProgram : public MapObjectProgram {
 	const WorkareaInfo& get_workarea_info() const {
 		return workarea_info_;
 	}
-	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>& collected_attributes() const {
+	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
+	collected_attributes() const {
 		return collected_attributes_;
 	}
-	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>& created_attributes() const {
+	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
+	created_attributes() const {
 		return created_attributes_;
 	}
 	const std::set<std::string>& collected_resources() const {
