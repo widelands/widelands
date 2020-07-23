@@ -21,6 +21,7 @@
 
 #include "base/i18n.h"
 #include "build_info.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "wui/savegameloader.h"
@@ -139,7 +140,7 @@ FullscreenMenuMain::FullscreenMenuMain()
 	if (newest_singleplayer) {
 		filename_for_continue_ = newest_singleplayer->filename;
 		continue_lastsave.set_tooltip(
-		   (boost::format("%s<br>%s<br>%s") %
+		   (boost::format("%s<br>%s<br>%s<br>%s<br>%s<br>%s") %
 		    g_gr->styles()
 		       .font_style(UI::FontStyle::kTooltipHeader)
 		       .as_font_tag(
@@ -147,12 +148,21 @@ FullscreenMenuMain::FullscreenMenuMain()
 		          filename_for_continue_.substr(
 		             kSaveDir.length() + 1, filename_for_continue_.length() - kSaveDir.length() -
 		                                       kSavegameExtension.length() - 1)) %
-		    g_gr->styles()
+		    (boost::format(_("Map: %s")) % g_gr->styles()
 		       .font_style(UI::FontStyle::kTooltip)
-		       .as_font_tag(newest_singleplayer->mapname) %
-		    g_gr->styles()
+		       .as_font_tag(newest_singleplayer->mapname)).str() %
+		    (boost::format(_("Win Condition: %s")) % g_gr->styles()
 		       .font_style(UI::FontStyle::kTooltip)
-		       .as_font_tag(newest_singleplayer->savedonstring))
+		       .as_font_tag(newest_singleplayer->wincondition)).str() %
+		    (boost::format(_("Players: %s")) % g_gr->styles()
+		       .font_style(UI::FontStyle::kTooltip)
+		       .as_font_tag(newest_singleplayer->nrplayers)).str() %
+		    (boost::format(_("Gametime: %s")) % g_gr->styles()
+		       .font_style(UI::FontStyle::kTooltip)
+		       .as_font_tag(newest_singleplayer->gametime)).str() %
+		    (boost::format(_("Saved on: %s")) % g_gr->styles()
+		       .font_style(UI::FontStyle::kTooltip)
+		       .as_font_tag(newest_singleplayer->savedatestring)).str())
 		      .str());
 	} else {
 		continue_lastsave.set_enabled(false);
