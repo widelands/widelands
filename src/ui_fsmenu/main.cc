@@ -139,7 +139,7 @@ FullscreenMenuMain::FullscreenMenuMain()
 	if (newest_singleplayer) {
 		filename_for_continue_ = newest_singleplayer->filename;
 		continue_lastsave.set_tooltip(
-		   (boost::format("<p>%s%s<br>%s</p>") %
+		   (boost::format("%s<br>%s<br>%s") %
 		    g_gr->styles()
 		       .font_style(UI::FontStyle::kTooltipHeader)
 		       .as_font_tag(
