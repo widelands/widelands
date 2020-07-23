@@ -700,8 +700,10 @@ void TribeDescr::process_productionsites(const World& world) {
 		for (const std::string& bobname : prod->created_bobs()) {
 			const CritterDescr* critter = world.get_critter_descr(bobname);
 			if (critter == nullptr) {
-				throw GameDataError("Productionsite '%s' has unknown critter '%s' in production or worker program",
-									prod->name().c_str(), bobname.c_str());
+				if (worker_index(bobname) == Widelands::INVALID_INDEX) {
+					throw GameDataError("Productionsite '%s' has unknown bob '%s' in production or worker program",
+										prod->name().c_str(), bobname.c_str());
+				}
 			}
 			add_creator(bobname, prod);
 		}
@@ -714,7 +716,6 @@ void TribeDescr::process_productionsites(const World& world) {
 		std::set<DescriptionIndex> walked_tribe_immovables;
 
 		for (const auto& attribinfo : prod->created_attributes()) {
-			// NOCOM ferries
 			const MapObjectType mapobjecttype = attribinfo.first;
 			const MapObjectDescr::AttributeIndex attribute_id = attribinfo.second;
 			if (mapobjecttype != MapObjectType::IMMOVABLE) {
@@ -771,7 +772,6 @@ void TribeDescr::process_productionsites(const World& world) {
 	}
 
 	// Calculate workarea overlaps + AI info
-	// NOCOM ferries broken, needs the worker program refactoring first
 	for (ProductionSiteDescr* prod : productionsites) {
 		// Sites that create any immovables should not overlap each other
 		if (!prod->created_immovables().empty()) {
