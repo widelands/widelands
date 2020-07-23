@@ -58,6 +58,9 @@ private:
 	UI::Textarea gpl;
 
 	std::string filename_for_continue_;
+
+	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
+	   graphic_resolution_changed_subscriber_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_MAIN_H

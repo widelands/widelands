@@ -82,7 +82,9 @@ FullscreenMenuMain::FullscreenMenuMain()
                (boost::format(_("(C) %1%-%2% by the Widelands Development Team")) %
                 kWidelandsCopyrightStart % kWidelandsCopyrightEnd)
                   .str()),
-     gpl(this, 0, 0, 0, 0, _("Licensed under the GNU General Public License V2.0")) {
+     gpl(this, 0, 0, 0, 0, _("Licensed under the GNU General Public License V2.0")),
+     graphic_resolution_changed_subscriber_(Notifications::subscribe<GraphicResolutionChanged>(
+	   [this](const GraphicResolutionChanged&) { layout(); })) {
 	playtutorial.sigclicked.connect([this]() {
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kTutorial);
 	});
@@ -112,7 +114,7 @@ FullscreenMenuMain::FullscreenMenuMain()
 	});
 
 	vbox_.add(&playtutorial, UI::Box::Resizing::kFullSize);
-	vbox_.add(&singleplayer, UI::Box::Resizing::kFullSize);
+	vbox_.add(&singleplayer, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	vbox_.add(&multiplayer, UI::Box::Resizing::kFullSize);
 	vbox_.add_inf_space();
 	vbox_.add(&replay, UI::Box::Resizing::kFullSize);
@@ -164,7 +166,7 @@ void FullscreenMenuMain::layout() {
 	gpl.set_pos(Vector2i(0, get_h() - text_height));
 
 	playtutorial.set_desired_size(butw_, buth_);
-	singleplayer.set_desired_size(butw_, buth_);
+	singleplayer.set_desired_size(butw_ - buth_ - padding_, buth_);
 	multiplayer.set_desired_size(butw_, buth_);
 	replay.set_desired_size(butw_, buth_);
 	editor.set_desired_size(butw_, buth_);
@@ -176,7 +178,7 @@ void FullscreenMenuMain::layout() {
 	vbox_.set_inner_spacing(padding_);
 	vbox_.set_size(butw_, get_h() - vbox_.get_y() - 5 * padding_);
 
-	continue_lastsave.set_desired_size(buth_, buth_);
+	continue_lastsave.set_size(buth_, buth_);
 	continue_lastsave.set_pos(Vector2i(
 	   vbox_.get_x() + singleplayer.get_w() + padding_, vbox_.get_y() + singleplayer.get_y()));
 }
