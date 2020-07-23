@@ -140,17 +140,20 @@ FullscreenMenuMain::FullscreenMenuMain()
 		filename_for_continue_ = newest_singleplayer->filename;
 		continue_lastsave.set_tooltip(
 		   (boost::format("<p>%s%s<br>%s</p>") %
-		    g_gr->styles().font_style(UI::FontStyle::kTooltipHeader).as_font_tag(
-		       /* strip leading "save/" and trailing ".wgf" */
-		       filename_for_continue_.substr(kSaveDir.length() + 1,
-		          filename_for_continue_.length() - kSaveDir.length() - kSavegameExtension.length() - 1)) %
-		    g_gr->styles().font_style(UI::FontStyle::kTooltip).as_font_tag(
-		       newest_singleplayer->mapname
-		    ) %
-		    g_gr->styles().font_style(UI::FontStyle::kTooltip).as_font_tag(
-		       newest_singleplayer->savedonstring
-		    )
-		    ).str());
+		    g_gr->styles()
+		       .font_style(UI::FontStyle::kTooltipHeader)
+		       .as_font_tag(
+		          /* strip leading "save/" and trailing ".wgf" */
+		          filename_for_continue_.substr(
+		             kSaveDir.length() + 1, filename_for_continue_.length() - kSaveDir.length() -
+		                                       kSavegameExtension.length() - 1)) %
+		    g_gr->styles()
+		       .font_style(UI::FontStyle::kTooltip)
+		       .as_font_tag(newest_singleplayer->mapname) %
+		    g_gr->styles()
+		       .font_style(UI::FontStyle::kTooltip)
+		       .as_font_tag(newest_singleplayer->savedonstring))
+		      .str());
 	} else {
 		continue_lastsave.set_enabled(false);
 	}
