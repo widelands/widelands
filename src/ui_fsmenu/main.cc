@@ -84,7 +84,7 @@ FullscreenMenuMain::FullscreenMenuMain()
                   .str()),
      gpl(this, 0, 0, 0, 0, _("Licensed under the GNU General Public License V2.0")),
      graphic_resolution_changed_subscriber_(Notifications::subscribe<GraphicResolutionChanged>(
-	   [this](const GraphicResolutionChanged&) { layout(); })) {
+        [this](const GraphicResolutionChanged&) { layout(); })) {
 	playtutorial.sigclicked.connect([this]() {
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kTutorial);
 	});
