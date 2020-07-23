@@ -139,7 +139,6 @@ public:
 	const std::string& icon_filename() const;
 
 	bool has_attribute(AttributeIndex) const;
-	bool has_attribute(const std::string& attribute_name) const;
 	const MapObjectDescr::Attributes& attributes() const;
 	static AttributeIndex get_attribute_id(const std::string& name, bool add_if_not_exists = false);
 

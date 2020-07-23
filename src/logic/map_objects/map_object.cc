@@ -435,13 +435,6 @@ bool MapObjectDescr::has_attribute(AttributeIndex attr) const {
 	return false;
 }
 
-bool MapObjectDescr::has_attribute(const std::string& attribute_name) const {
-	if (attribute_names_.count(attribute_name) == 1) {
-		return has_attribute(attribute_names_.at(attribute_name));
-	}
-	return false;
-}
-
 /**
  * Add an attribute to the attribute list if it's not already there
  */
