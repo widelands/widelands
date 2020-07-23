@@ -45,11 +45,6 @@ tribes:new_productionsite_type {
       barbarians_hunter = 1
    },
 
-   indicate_workarea_overlaps = {
-      barbarians_hunters_hut = false,
-      barbarians_gamekeepers_hut = true,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...

@@ -43,7 +43,6 @@ DismantleSiteDescr::DismantleSiteDescr(const std::string& init_descname,
    : BuildingDescr(init_descname, MapObjectType::DISMANTLESITE, table, tribes),
      creation_fx_(
         SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")) {
-	add_attribute(MapObject::Attribute::CONSTRUCTIONSITE);  // Yep, this is correct.
 }
 
 Building& DismantleSiteDescr::create_object() const {

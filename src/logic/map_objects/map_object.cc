@@ -299,8 +299,7 @@ MapObjectDescr::~MapObjectDescr() {
 	anims_.clear();
 }
 
-uint32_t MapObjectDescr::dyn_attribhigh_ = MapObject::HIGHEST_FIXED_ATTRIBUTE;
-MapObjectDescr::AttribMap MapObjectDescr::dyn_attribs_;
+std::map<std::string, MapObjectDescr::AttributeIndex> MapObjectDescr::attribute_names_;
 
 bool MapObjectDescr::is_animation_known(const std::string& animname) const {
 	return (anims_.count(animname) == 1);
@@ -427,7 +426,7 @@ const std::string& MapObjectDescr::icon_filename() const {
 /**
  * Search for the attribute in the attribute list
  */
-bool MapObjectDescr::has_attribute(uint32_t const attr) const {
+bool MapObjectDescr::has_attribute(AttributeIndex attr) const {
 	for (const uint32_t& attrib : attributes_) {
 		if (attrib == attr) {
 			return true;
@@ -436,54 +435,52 @@ bool MapObjectDescr::has_attribute(uint32_t const attr) const {
 	return false;
 }
 
+bool MapObjectDescr::has_attribute(const std::string& attribute_name) const {
+	if (attribute_names_.count(attribute_name) == 1) {
+		return has_attribute(attribute_names_.at(attribute_name));
+	}
+	return false;
+}
+
 /**
  * Add an attribute to the attribute list if it's not already there
  */
-void MapObjectDescr::add_attribute(uint32_t const attr) {
+void MapObjectDescr::add_attribute(AttributeIndex attr) {
 	if (!has_attribute(attr)) {
 		attributes_.push_back(attr);
 	}
 }
 
-void MapObjectDescr::add_attributes(const std::vector<std::string>& attributes,
-                                    const std::set<uint32_t>& allowed_special) {
+void MapObjectDescr::add_attributes(const std::vector<std::string>& attributes) {
 	for (const std::string& attribute : attributes) {
 		uint32_t const attrib = get_attribute_id(attribute, true);
-		if (attrib < MapObject::HIGHEST_FIXED_ATTRIBUTE) {
-			if (!allowed_special.count(attrib)) {
-				throw GameDataError("bad attribute \"%s\"", attribute.c_str());
-			}
-		}
 		add_attribute(attrib);
 	}
+}
+
+const MapObjectDescr::Attributes& MapObjectDescr::attributes() const {
+	return attributes_;
 }
 
 /**
  * Lookup an attribute by name. If the attribute name hasn't been encountered
  * before and add_if_not_exists = true, we add it to the map. Else, throws exception.
  */
-uint32_t MapObjectDescr::get_attribute_id(const std::string& name, bool add_if_not_exists) {
-	AttribMap::iterator it = dyn_attribs_.find(name);
+MapObjectDescr::AttributeIndex MapObjectDescr::get_attribute_id(const std::string& name,
+                                                                bool add_if_not_exists) {
+	auto it = attribute_names_.find(name);
 
-	if (it != dyn_attribs_.end()) {
+	if (it != attribute_names_.end()) {
 		return it->second;
-	}
-
-	if (name == "worker") {
-		return MapObject::WORKER;
-	} else if (name == "resi") {
-		return MapObject::RESI;
 	}
 
 	if (!add_if_not_exists) {
 		throw GameDataError("get_attribute_id: attribute '%s' not found!\n", name.c_str());
 	} else {
-		++dyn_attribhigh_;
-		dyn_attribs_[name] = dyn_attribhigh_;
+		AttributeIndex attribute_id = attribute_names_.size();
+		attribute_names_[name] = attribute_id;
+		return attribute_id;
 	}
-	assert(dyn_attribhigh_ != 0);  // wrap around seems *highly* unlikely ;)
-
-	return dyn_attribhigh_;
 }
 
 /*

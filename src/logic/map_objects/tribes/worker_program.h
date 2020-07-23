@@ -55,6 +55,23 @@ struct WorkerProgram : public MapObjectProgram {
 	const WorkareaInfo& get_workarea_info() const {
 		return workarea_info_;
 	}
+	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
+	collected_attributes() const {
+		return collected_attributes_;
+	}
+	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
+	created_attributes() const {
+		return created_attributes_;
+	}
+	const std::set<std::string>& collected_resources() const {
+		return collected_resources_;
+	}
+	const std::set<std::string>& created_resources() const {
+		return created_resources_;
+	}
+	const std::set<std::string>& created_bobs() const {
+		return created_bobs_;
+	}
 
 	/// Set of ware types produced by this program
 	const std::set<DescriptionIndex>& produced_ware_types() const {
@@ -63,6 +80,13 @@ struct WorkerProgram : public MapObjectProgram {
 
 private:
 	WorkareaInfo workarea_info_;
+	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> collected_attributes_;
+	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> created_attributes_;
+	// e.g. "fish"
+	std::set<std::string> collected_resources_;
+	std::set<std::string> created_resources_;
+	std::set<std::string> created_bobs_;
+
 	struct ParseMap {
 		const char* name;
 		ParseWorkerProgramFn function;

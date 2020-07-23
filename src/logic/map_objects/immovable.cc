@@ -156,7 +156,7 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 	if (table.has_key("attributes")) {
 		std::vector<std::string> attributes =
 		   table.get_table("attributes")->array_entries<std::string>();
-		add_attributes(attributes, {MapObject::Attribute::RESI});
+		add_attributes(attributes);
 
 		// All resource indicators must have a menu icon
 		for (const std::string& attribute : attributes) {

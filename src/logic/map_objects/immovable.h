@@ -40,11 +40,15 @@ namespace Widelands {
 class Building;
 class BuildingDescr;
 class Economy;
+class Immovable;
 class Map;
 class TerrainAffinity;
 class Worker;
 class World;
 struct Flag;
+struct ImmovableAction;
+struct ImmovableActionData;
+struct ImmovableProgram;
 struct PlayerImmovable;
 
 struct NoteImmovable {
@@ -71,6 +75,7 @@ struct NoteImmovable {
  * For more information, see the Map::recalc_* functions.
  */
 struct BaseImmovable : public MapObject {
+
 	enum Size {
 		NONE = 0,  ///< not robust (i.e. removable by building something over it)
 		SMALL,     ///< small building or robust map element, including trees
@@ -114,15 +119,12 @@ protected:
 	void unset_position(EditorGameBase&, const Coords&);
 };
 
-class Immovable;
-struct ImmovableProgram;
-struct ImmovableAction;
-struct ImmovableActionData;
-
 /**
  * Immovable represents a standard immovable such as trees or rocks.
  */
 class ImmovableDescr : public MapObjectDescr {
+	friend struct ImmovableProgram;
+
 public:
 	using Programs = std::map<std::string, ImmovableProgram*>;
 
@@ -166,6 +168,11 @@ public:
 	// an undefined value.
 	const TerrainAffinity& terrain_affinity() const;
 
+	// Map object names that the immovable can transform/grow into
+	const std::set<std::pair<MapObjectType, std::string>>& becomes() const {
+		return becomes_;
+	}
+
 protected:
 	int32_t size_;
 	Programs programs_;
@@ -178,6 +185,7 @@ protected:
 	Buildcost buildcost_;
 
 	std::string species_;
+	std::set<std::pair<MapObjectType, std::string>> becomes_;
 
 private:
 	// Common constructor functions for tribes and world.
