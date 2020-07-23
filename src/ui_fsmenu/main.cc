@@ -149,20 +149,26 @@ FullscreenMenuMain::FullscreenMenuMain()
 		             kSaveDir.length() + 1, filename_for_continue_.length() - kSaveDir.length() -
 		                                       kSavegameExtension.length() - 1)) %
 		    (boost::format(_("Map: %s")) % g_gr->styles()
-		       .font_style(UI::FontStyle::kTooltip)
-		       .as_font_tag(newest_singleplayer->mapname)).str() %
-		    (boost::format(_("Win Condition: %s")) % g_gr->styles()
-		       .font_style(UI::FontStyle::kTooltip)
-		       .as_font_tag(newest_singleplayer->wincondition)).str() %
+		                                      .font_style(UI::FontStyle::kTooltip)
+		                                      .as_font_tag(newest_singleplayer->mapname))
+		       .str() %
+		    (boost::format(_("Win Condition: %s")) %
+		     g_gr->styles()
+		        .font_style(UI::FontStyle::kTooltip)
+		        .as_font_tag(newest_singleplayer->wincondition))
+		       .str() %
 		    (boost::format(_("Players: %s")) % g_gr->styles()
-		       .font_style(UI::FontStyle::kTooltip)
-		       .as_font_tag(newest_singleplayer->nrplayers)).str() %
+		                                          .font_style(UI::FontStyle::kTooltip)
+		                                          .as_font_tag(newest_singleplayer->nrplayers))
+		       .str() %
 		    (boost::format(_("Gametime: %s")) % g_gr->styles()
-		       .font_style(UI::FontStyle::kTooltip)
-		       .as_font_tag(newest_singleplayer->gametime)).str() %
+		                                           .font_style(UI::FontStyle::kTooltip)
+		                                           .as_font_tag(newest_singleplayer->gametime))
+		       .str() %
 		    (boost::format(_("Saved on: %s")) % g_gr->styles()
-		       .font_style(UI::FontStyle::kTooltip)
-		       .as_font_tag(newest_singleplayer->savedatestring)).str())
+		                                           .font_style(UI::FontStyle::kTooltip)
+		                                           .as_font_tag(newest_singleplayer->savedatestring))
+		       .str())
 		      .str());
 	} else {
 		continue_lastsave.set_enabled(false);
