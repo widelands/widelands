@@ -94,7 +94,9 @@ public:
 			      kWareMenuPicHeight, _("Additional item"), UI::DropdownType::kPictorial,
 			      UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
 			d.add(_("(Empty)"), kEmptySlot, g_gr->images().get(kNoWare), true, _("(Empty)"));
-			std::set<std::tuple<std::string, Widelands::WareWorker, Widelands::DescriptionIndex, const Image*>> sorted;
+			std::set<std::tuple<std::string, Widelands::WareWorker, Widelands::DescriptionIndex,
+			                    const Image*>>
+			   sorted;
 			for (Widelands::DescriptionIndex i : pd.owner().tribe().wares()) {
 				const Widelands::WareDescr& w = *pd.owner().tribe().get_ware_descr(i);
 				sorted.insert(std::make_tuple(w.descname(), Widelands::wwWARE, i, w.icon()));
@@ -106,7 +108,8 @@ public:
 				}
 			}
 			for (const auto& t : sorted) {
-				d.add(std::get<0>(t), std::make_pair(std::get<1>(t), std::get<2>(t)), std::get<3>(t), false, std::get<0>(t));
+				d.add(std::get<0>(t), std::make_pair(std::get<1>(t), std::get<2>(t)), std::get<3>(t),
+				      false, std::get<0>(t));
 			}
 			d.set_enabled(can_act);
 			d.selected.connect([this, c]() { select(c); });
