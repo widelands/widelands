@@ -125,7 +125,7 @@ public:
 	const std::set<std::string>& created_resources() const {
 		return created_resources_;
 	}
-	/// The bobs that this production site needs to collect from the map
+	/// The bobs (critters) that this production site needs to collect from the map
 	const std::set<std::string>& collected_bobs() const {
 		return collected_bobs_;
 	}
@@ -254,7 +254,6 @@ private:
 	Output output_worker_types_;
 	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> collected_attributes_;
 	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> created_attributes_;
-	// e.g. "fish"
 	std::set<std::string> collected_resources_;
 	std::set<std::string> created_resources_;
 	std::set<std::string> collected_bobs_;

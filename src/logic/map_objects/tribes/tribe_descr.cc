@@ -87,7 +87,7 @@ void walk_world_immovables(
 	}
 }
 
-// Recursively get attributes for world immovable growth cycle
+// Recursively get attributes for tribe immovable growth cycle
 void walk_tribe_immovables(
    Widelands::DescriptionIndex index,
    const Widelands::TribeDescr& tribe,

@@ -82,7 +82,6 @@ private:
 	WorkareaInfo workarea_info_;
 	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> collected_attributes_;
 	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> created_attributes_;
-	// e.g. "fish"
 	std::set<std::string> collected_resources_;
 	std::set<std::string> created_resources_;
 	std::set<std::string> created_bobs_;

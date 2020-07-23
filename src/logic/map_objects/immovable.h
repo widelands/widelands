@@ -75,7 +75,6 @@ struct NoteImmovable {
  * For more information, see the Map::recalc_* functions.
  */
 struct BaseImmovable : public MapObject {
-
 	enum Size {
 		NONE = 0,  ///< not robust (i.e. removable by building something over it)
 		SMALL,     ///< small building or robust map element, including trees

@@ -426,7 +426,7 @@ const std::string& MapObjectDescr::icon_filename() const {
 /**
  * Search for the attribute in the attribute list
  */
-bool MapObjectDescr::has_attribute(AttributeIndex const attr) const {
+bool MapObjectDescr::has_attribute(AttributeIndex attr) const {
 	for (const uint32_t& attrib : attributes_) {
 		if (attrib == attr) {
 			return true;
@@ -435,17 +435,10 @@ bool MapObjectDescr::has_attribute(AttributeIndex const attr) const {
 	return false;
 }
 
-bool MapObjectDescr::has_attribute(const std::string& attribute_name) const {
-	if (attribute_names_.count(attribute_name) == 1) {
-		return has_attribute(attribute_names_.at(attribute_name));
-	}
-	return false;
-}
-
 /**
  * Add an attribute to the attribute list if it's not already there
  */
-void MapObjectDescr::add_attribute(AttributeIndex const attr) {
+void MapObjectDescr::add_attribute(AttributeIndex attr) {
 	if (!has_attribute(attr)) {
 		attributes_.push_back(attr);
 	}

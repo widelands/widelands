@@ -695,11 +695,9 @@ void WorkerProgram::parse_plant(Worker::Action* act, const std::vector<std::stri
 		}
 
 		const std::string attrib_name = read_key_value_pair(cmd[i], ':', "", "attrib").second;
-
-		// This will throw a GameDataError if the attribute doesn't exist.
-		MapObjectDescr::AttributeIndex id = ImmovableDescr::get_attribute_id(attrib_name);
 		act->sparamv.push_back(attrib_name);
-		created_attributes_.insert(std::make_pair(MapObjectType::IMMOVABLE, id));
+		// get_attribute_id will throw a GameDataError if the attribute doesn't exist.
+		created_attributes_.insert(std::make_pair(MapObjectType::IMMOVABLE, ImmovableDescr::get_attribute_id(attrib_name)));
 	}
 }
 

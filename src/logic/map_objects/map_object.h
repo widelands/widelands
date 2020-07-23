@@ -138,15 +138,14 @@ public:
 	/// Returns the image fileneme for the menu image if the MapObject has one, is empty otherwise
 	const std::string& icon_filename() const;
 
-	bool has_attribute(const AttributeIndex) const;
-	bool has_attribute(const std::string& attribute_name) const;
+	bool has_attribute(AttributeIndex) const;
 	const MapObjectDescr::Attributes& attributes() const;
 	static AttributeIndex get_attribute_id(const std::string& name, bool add_if_not_exists = false);
 
 protected:
 	// Add attributes to the attribute list
 	void add_attributes(const std::vector<std::string>& attributes);
-	void add_attribute(const AttributeIndex attr);
+	void add_attribute(AttributeIndex attr);
 
 	/// Sets the directional animations in 'anims' with the animations
 	/// '&lt;basename&gt;_(ne|e|se|sw|w|nw)'.

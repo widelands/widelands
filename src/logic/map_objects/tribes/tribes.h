@@ -90,7 +90,6 @@ public:
 	void add_custom_worker(const LuaTable& table);
 
 	size_t nrbuildings() const;
-	size_t nrimmovables() const;
 	size_t nrtribes() const;
 	size_t nrwares() const;
 	size_t nrworkers() const;
