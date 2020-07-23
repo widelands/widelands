@@ -47,14 +47,14 @@ FullscreenMenuMain::FullscreenMenuMain()
                   buth_,
                   UI::ButtonStyle::kFsMenuMenu,
                   _("Single Player")),
-     continue_lastsave(this,
+     continue_lastsave(&vbox_,
                        "continue_lastsave",
                        0,
                        0,
-                       buth_,
+                       butw_,
                        buth_,
                        UI::ButtonStyle::kFsMenuMenu,
-                       g_gr->images().get("images/ui_basic/continue.png")),
+                       _("No last saved game to continue")),
      multiplayer(
         &vbox_, "multi_player", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Multiplayer")),
      replay(&vbox_, "replay", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Watch Replay")),
@@ -114,8 +114,9 @@ FullscreenMenuMain::FullscreenMenuMain()
 	});
 
 	vbox_.add(&playtutorial, UI::Box::Resizing::kFullSize);
-	vbox_.add(&singleplayer, UI::Box::Resizing::kAlign, UI::Align::kLeft);
+	vbox_.add(&singleplayer, UI::Box::Resizing::kFullSize);
 	vbox_.add(&multiplayer, UI::Box::Resizing::kFullSize);
+	vbox_.add(&continue_lastsave, UI::Box::Resizing::kFullSize);
 	vbox_.add_inf_space();
 	vbox_.add(&replay, UI::Box::Resizing::kFullSize);
 	vbox_.add_inf_space();
@@ -139,8 +140,9 @@ FullscreenMenuMain::FullscreenMenuMain()
 	}
 	if (newest_singleplayer) {
 		filename_for_continue_ = newest_singleplayer->filename;
-		continue_lastsave.set_tooltip(
-		   (boost::format(_("Continue last saved game (%s)")) %
+		continue_lastsave.set_title(
+		   /** TRANSLATORS: Continue the last saved game which is called '%s' */
+		   (boost::format(_("Continue ‘%s’")) %
 		    filename_for_continue_.substr(kSaveDir.length() + 1 /* strip leading "save/" */))
 		      .str());
 	} else {
@@ -166,7 +168,8 @@ void FullscreenMenuMain::layout() {
 	gpl.set_pos(Vector2i(0, get_h() - text_height));
 
 	playtutorial.set_desired_size(butw_, buth_);
-	singleplayer.set_desired_size(butw_ - buth_ - padding_, buth_);
+	singleplayer.set_desired_size(butw_, buth_);
+	continue_lastsave.set_desired_size(butw_, buth_);
 	multiplayer.set_desired_size(butw_, buth_);
 	replay.set_desired_size(butw_, buth_);
 	editor.set_desired_size(butw_, buth_);
@@ -178,7 +181,4 @@ void FullscreenMenuMain::layout() {
 	vbox_.set_inner_spacing(padding_);
 	vbox_.set_size(butw_, get_h() - vbox_.get_y() - 5 * padding_);
 
-	continue_lastsave.set_size(buth_, buth_);
-	continue_lastsave.set_pos(Vector2i(
-	   vbox_.get_x() + singleplayer.get_w() + padding_, vbox_.get_y() + singleplayer.get_y()));
 }
