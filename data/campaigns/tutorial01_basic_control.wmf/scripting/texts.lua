@@ -501,7 +501,7 @@ census_and_statistics_01 = {
    body = (
       li_image("images/wui/menus/toggle_statistics.png",
          p(_[[Now, wouldn’t it be nice to check on our quarries’ progress without having to open their windows?]]) ..
-         p(_[[In addition to the buildings’ census, you can also activate statictics labels on them. This will display information about the productivity of buildings or the progress of construction sites.]]))
+         p(_[[In addition to the buildings’ census, you can also activate statistics labels on them. This will display information about the productivity of buildings or the progress of construction sites.]]))
    ),
    position = "topright",
    h = 400,
