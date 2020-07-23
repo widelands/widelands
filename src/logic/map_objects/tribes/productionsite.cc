@@ -243,7 +243,7 @@ bool ProductionSiteDescr::highlight_overlapping_workarea_for(const MapObjectDesc
 	}
 	return false;
 }
-// NOCOM document
+
 void ProductionSiteDescr::add_competing_productionsite(const MapObjectDescr* productionsite) {
 	assert(productionsite->type() == MapObjectType::PRODUCTIONSITE);
 	competing_productionsites_.insert(productionsite);
