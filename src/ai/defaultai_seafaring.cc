@@ -456,7 +456,7 @@ void DefaultAI::gain_ship(Ship& ship, NewShip type) {
 }
 
 Widelands::IslandExploreDirection DefaultAI::randomExploreDirection() {
-	return std::rand() % 20 < 10 ? Widelands::IslandExploreDirection::kClockwise :
+	return std::rand() % 20 < 10 ? Widelands::IslandExploreDirection::kClockwise : // NOLINT
 	                               Widelands::IslandExploreDirection::kCounterClockwise;
 }
 
@@ -487,7 +487,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		    spot_score);
 
 		// we make a decision based on the score value and random
-		if (std::rand() % 8 < spot_score) {
+		if (std::rand() % 8 < spot_score) { // NOLINT
 			// we build a port here
 			game().send_player_ship_construct_port(*so.ship, so.ship->exp_port_spaces().front());
 			so.last_command_time = gametime;
@@ -580,15 +580,15 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 	assert(possible_directions.size() >= new_teritory_directions.size());
 
 	// If only open sea (no unexplored sea) is found, we don't always divert the ship
-	if (new_teritory_directions.empty() && std::rand() % 100 < 80) {
+	if (new_teritory_directions.empty() && std::rand() % 100 < 80) { // NOLINT
 		return false;
 	}
 
 	if (!possible_directions.empty() || !new_teritory_directions.empty()) {
 		const Direction direction =
 		   !new_teritory_directions.empty() ?
-		      new_teritory_directions.at(std::rand() % new_teritory_directions.size()) :
-		      possible_directions.at(std::rand() % possible_directions.size());
+		      new_teritory_directions.at(std::rand() % new_teritory_directions.size()) : // NOLINT
+		      possible_directions.at(std::rand() % possible_directions.size()); // NOLINT
 		game().send_player_ship_scouting_direction(*so.ship, static_cast<WalkingDir>(direction));
 
 		log("%d: %s: exploration - breaking for %s sea, dir=%u\n", pn,
