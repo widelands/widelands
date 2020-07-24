@@ -348,7 +348,7 @@ std::vector<Soldier*> Warehouse::SoldierControl::present_soldiers() const {
 	if (sidx != warehouse_->incorporated_workers_.end()) {
 		const WorkerList& soldiers = sidx->second;
 		for (Worker* temp_soldier : soldiers) {
-			rv.push_back(static_cast<Soldier*>(temp_soldier));
+			rv.push_back(dynamic_cast<Soldier*>(temp_soldier));
 		}
 	}
 	return rv;
@@ -811,7 +811,7 @@ void Warehouse::act(Game& game, uint32_t const data) {
 			for (WorkerList::iterator it = soldiers.begin(); it != soldiers.end(); ++it) {
 				// This is a safe cast: we know only soldiers can land in this
 				// slot in the incorporated array
-				Soldier* soldier = static_cast<Soldier*>(*it);
+				Soldier* soldier = dynamic_cast<Soldier*>(*it);
 
 				//  Soldier dead ...
 				if (!soldier || soldier->get_current_health() == 0) {

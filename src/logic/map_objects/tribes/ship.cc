@@ -218,7 +218,7 @@ void Ship::wakeup_neighbours(Game& game) {
 			continue;
 		}
 
-		static_cast<Ship*>(*it)->ship_wakeup(game);
+		dynamic_cast<Ship*>(*it)->ship_wakeup(game);
 	}
 }
 

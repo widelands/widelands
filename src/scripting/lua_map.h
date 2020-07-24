@@ -1041,7 +1041,7 @@ public:
 	 * C Methods
 	 */
 	CASTED_GET(RoadBase)
-	static int create_new_worker(Widelands::PlayerImmovable&,
+	static int create_new_worker(Widelands::RoadBase& r,
 	                             Widelands::EditorGameBase&,
 	                             const Widelands::WorkerDescr*);
 };
@@ -1174,7 +1174,7 @@ public:
 	 * C Methods
 	 */
 	CASTED_GET(ProductionSite)
-	static int create_new_worker(Widelands::PlayerImmovable&,
+	static int create_new_worker(Widelands::ProductionSite& ps,
 	                             Widelands::EditorGameBase&,
 	                             const Widelands::WorkerDescr*);
 };
