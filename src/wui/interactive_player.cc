@@ -114,6 +114,7 @@ void draw_bobs_for_visible_field(const Widelands::EditorGameBase& egbase,
 }
 
 void draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field& field,
+                                               const InfoToDraw info_to_draw,
                                                const Widelands::Player::Field& player_field,
                                                const float scale,
                                                RenderTarget* dst) {
@@ -124,13 +125,18 @@ void draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field& field,
 	if (player_field.constructionsite.becomes) {
 		assert(field.owner != nullptr);
 		player_field.constructionsite.draw(
-		   field.rendertarget_pixel, field.fcoords, scale, field.owner->get_playercolor(), dst);
+		   field.rendertarget_pixel, field.fcoords, scale, (info_to_draw & InfoToDraw::kShowBuildings), field.owner->get_playercolor(), dst);
 
 	} else if (upcast(const Widelands::BuildingDescr, building, player_field.map_object_descr)) {
 		assert(field.owner != nullptr);
 		// this is a building therefore we either draw unoccupied or idle animation
-		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
-		                    building->get_unoccupied_animation(), 0, &field.owner->get_playercolor());
+		if (info_to_draw & InfoToDraw::kShowBuildings) {
+			dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
+				                building->get_unoccupied_animation(), 0, &field.owner->get_playercolor());
+		} else {
+			dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
+				                building->get_unoccupied_animation(), 0, nullptr, Widelands::kBuildingSilhouetteOpacity);
+		}
 	} else if (player_field.map_object_descr->type() == Widelands::MapObjectType::FLAG) {
 		assert(field.owner != nullptr);
 		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
@@ -405,13 +411,13 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			draw_border_markers(*f, scale, *fields_to_draw, dst);
 
 			// Render stuff that belongs to the node.
+			const auto info_to_draw = get_info_to_draw(!given_map_view->is_animating());
 			if (f->vision > 1) {
-				const auto info_to_draw = get_info_to_draw(!given_map_view->is_animating());
 				draw_immovables_for_visible_field(gbase, *f, scale, info_to_draw, plr, dst);
 				draw_bobs_for_visible_field(gbase, *f, scale, info_to_draw, plr, dst);
 			} else if (f->vision == 1) {
 				// We never show census or statistics for objects in the fog.
-				draw_immovable_for_formerly_visible_field(*f, player_field, scale, dst);
+				draw_immovable_for_formerly_visible_field(*f, info_to_draw, player_field, scale, dst);
 			}
 		}
 

@@ -705,12 +705,22 @@ void Building::draw(uint32_t gametime,
                     const float scale,
                     RenderTarget* dst) {
 	if (was_immovable_) {
-		dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(),
-		                    gametime - animstart_, &get_owner()->get_playercolor());
+		if (info_to_draw & InfoToDraw::kShowBuildings) {
+			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(),
+				                gametime - animstart_, &get_owner()->get_playercolor());
+		} else {
+			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(),
+				                gametime - animstart_, nullptr, kBuildingSilhouetteOpacity);
+		}
 	}
 
-	dst->blit_animation(
-	   point_on_dst, coords, scale, anim_, gametime - animstart_, &get_owner()->get_playercolor());
+	if (info_to_draw & InfoToDraw::kShowBuildings) {
+		dst->blit_animation(
+		   point_on_dst, coords, scale, anim_, gametime - animstart_, &get_owner()->get_playercolor());
+	} else {
+		dst->blit_animation(
+		   point_on_dst, coords, scale, anim_, gametime - animstart_, nullptr, kBuildingSilhouetteOpacity);
+	}
 
 	//  door animation?
 

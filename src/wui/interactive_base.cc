@@ -177,9 +177,9 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      workareas_cache_(nullptr),
      egbase_(the_egbase),
 #ifndef NDEBUG  //  not in releases
-     display_flags_(dfDebug | kSoldierLevels),
+     display_flags_(dfDebug | dfShowSoldierLevels | dfShowBuildings),
 #else
-     display_flags_(kSoldierLevels),
+     display_flags_(dfShowSoldierLevels | dfShowBuildings),
 #endif
      lastframe_(SDL_GetTicks()),
      frametime_(0),
@@ -403,6 +403,9 @@ InfoToDraw InteractiveBase::get_info_to_draw(bool show) const {
 	}
 	if (display_flags & InteractiveBase::dfShowSoldierLevels) {
 		info_to_draw = info_to_draw | InfoToDraw::kSoldierLevels;
+	}
+	if (display_flags & InteractiveBase::dfShowBuildings) {
+		info_to_draw = info_to_draw | InfoToDraw::kShowBuildings;
 	}
 	return info_to_draw;
 }

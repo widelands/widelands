@@ -304,6 +304,7 @@ void RenderTarget::blit_animation(const Vector2f& dst,
                                   uint32_t animation_id,
                                   uint32_t time,
                                   const RGBColor* player_color,
+	                              const float opacity,
                                   const int percent_from_bottom) {
 	const Animation& animation = g_gr->animations().get_animation(animation_id);
 	assert(percent_from_bottom <= 100);
@@ -312,7 +313,7 @@ void RenderTarget::blit_animation(const Vector2f& dst,
 		Rectf srcrc = animation.source_rectangle(percent_from_bottom, scale);
 		Rectf dstrc = animation.destination_rectangle(dst, srcrc, scale);
 		if (to_surface_geometry(&dstrc, &srcrc)) {
-			animation.blit(time, coords, srcrc, dstrc, player_color, surface_, scale);
+			animation.blit(time, coords, srcrc, dstrc, player_color, surface_, scale, opacity);
 		}
 	}
 }
