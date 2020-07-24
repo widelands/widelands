@@ -14,7 +14,6 @@ SUPPRESSED_CHECKS = {
     '[bugprone-integer-division]',
     '[cert-dcl50-cpp]', # We need this for our logger
     '[cert-err58-cpp]',
-    '[cert-msc30-c]',
     '[clang-analyzer-core.CallAndMessage]',
     '[clang-analyzer-core.DivideZero]',
     '[clang-analyzer-core.NonNullParamChecker]',
