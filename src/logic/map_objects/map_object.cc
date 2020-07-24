@@ -444,10 +444,10 @@ void MapObjectDescr::add_attribute(AttributeIndex attr) {
 	}
 }
 
-void MapObjectDescr::add_attributes(const std::vector<std::string>& attributes) {
-	for (const std::string& attribute : attributes) {
-		uint32_t const attrib = get_attribute_id(attribute, true);
-		add_attribute(attrib);
+void MapObjectDescr::add_attributes(const std::vector<std::string>& attribs) {
+	for (const std::string& attrib : attribs) {
+		uint32_t const attrib_id = get_attribute_id(attrib, true);
+		add_attribute(attrib_id);
 	}
 }
 

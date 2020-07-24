@@ -144,7 +144,7 @@ public:
 
 protected:
 	// Add attributes to the attribute list
-	void add_attributes(const std::vector<std::string>& attributes);
+	void add_attributes(const std::vector<std::string>& attribs);
 	void add_attribute(AttributeIndex attr);
 
 	/// Sets the directional animations in 'anims' with the animations
