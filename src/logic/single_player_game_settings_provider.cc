@@ -230,8 +230,13 @@ void SinglePlayerGameSettingsProvider::set_player_number(uint8_t const number) {
 	if (number < settings().players.size() && (position.state == PlayerSettings::State::kOpen ||
 	                                           position.state == PlayerSettings::State::kClosed ||
 	                                           position.state == PlayerSettings::State::kComputer)) {
+
+		// swap player but keep player name
 		set_player(number, player);
+		set_player_name(number, position.name);
+
 		set_player(settings().playernum, position);
+		set_player_name(settings().playernum, player.name);
 		s.playernum = number;
 	}
 }
