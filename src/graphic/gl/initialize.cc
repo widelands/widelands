@@ -235,9 +235,9 @@ SDL_GLContext initialize(
 		// The shading language version has been detected properly. Exit if the shading language
 		// version is too old.
 		const int major_shading_language_version =
-		   atoi(shading_language_version_vector.front().c_str());
+		   boost::lexical_cast<int>(shading_language_version_vector.front());
 		const int minor_shading_language_version =
-		   atoi(shading_language_version_vector.at(1).c_str());
+		   boost::lexical_cast<int>(shading_language_version_vector.at(1));
 		if (major_shading_language_version < 1 ||
 		    (major_shading_language_version == 1 && minor_shading_language_version < 20)) {
 			show_opengl_error_and_exit(
@@ -257,7 +257,7 @@ SDL_GLContext initialize(
 		// conversion
 		boost::regex re("\\d+");
 		if (boost::regex_match(shading_language_version_string, re)) {
-			const int major_shading_language_version = atoi(shading_language_version_string);
+			const int major_shading_language_version = boost::lexical_cast<int>(shading_language_version_string);
 			if (major_shading_language_version < 2) {
 				show_opengl_error_and_exit(
 				   "Widelands won’t work because your graphics driver is too old.\n"

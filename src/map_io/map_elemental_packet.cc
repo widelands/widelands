@@ -84,7 +84,7 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 					boost::split(players_string, team_string, boost::is_any_of(","));
 
 					for (const std::string& player : players_string) {
-						PlayerNumber player_number = static_cast<PlayerNumber>(atoi(player.c_str()));
+						PlayerNumber player_number = static_cast<PlayerNumber>(boost::lexical_cast<unsigned int>(player.c_str()));
 						assert(player_number < kMaxPlayers);
 						team.push_back(player_number);
 					}
