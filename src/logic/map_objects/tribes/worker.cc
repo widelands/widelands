@@ -885,7 +885,8 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 		total_weight += weight;
 	}
 
-	int choice = game.logic_rand() % total_weight;
+	// Avoid division by 0
+	int choice = game.logic_rand() % std::max(1, total_weight);
 	for (const auto& bsii : best_suited_immovables_index) {
 		const int weight = std::get<0>(bsii);
 		state.ivar2 = std::get<1>(bsii);
