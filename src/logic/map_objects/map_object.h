@@ -162,7 +162,7 @@ private:
 	using Anims = std::map<std::string, uint32_t>;
 
 	static std::map<std::string, AttributeIndex> attribute_names_;
-	Attributes attributes_;
+	Attributes attribute_ids_;
 
 	const MapObjectType type_;    /// Subclasses pick from the enum above
 	std::string const name_;      /// The name for internal reference
