@@ -1495,7 +1495,7 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 
 	// We expect to always have a location at this point,
 	// but this assumption may fail when loading a corrupted savegame.
-	if (!location) {
+	if (location == nullptr) {
 		send_signal(game, "location");
 		return pop_task(game);
 	}
@@ -1651,10 +1651,8 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 			   "MO(%u): [transfer]: from road to bad nextstep %u", serial(), nextstep->serial());
 		}
 	} else {
-		// Scan-build reports Called C++ object pointer is null here.
-		// This is a false positive.
-		// See https://bugs.launchpad.net/widelands/+bug/1198918
-		throw wexception("MO(%u): location %u has bad type", serial(), location->serial());
+		// Check location to make clang-tidy happy
+		throw wexception("MO(%u): location %u has bad type", serial(), location ? location->serial() : 0);
 	}
 }
 

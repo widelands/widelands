@@ -288,10 +288,7 @@ public:
 		return owner_;
 	}
 
-	const Player& owner() const {
-		assert(get_owner());
-		return *owner_;
-	}
+	const Player& owner() const;
 
 	// Header bytes to distinguish between data packages for the different
 	// MapObject classes. Be careful in changing those, since they are written
