@@ -58,6 +58,7 @@ jobs:
       script: ./.travis.sh includes
       cache: false
     - name: "Clang-tidy"
+      compiler: clang
       script: ./.travis.sh clang-tidy
       cache: false
       addons:
