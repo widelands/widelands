@@ -164,7 +164,8 @@ FullscreenMenuMain::FullscreenMenuMain()
 		                                           .font_style(UI::FontStyle::kTooltip)
 		                                           .as_font_tag(newest_singleplayer->gametime))
 		       .str() %
-		    (boost::format(_("Saved on: %s")) % g_gr->styles()
+                    /** TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today, 10:30' */
+		    (boost::format(_("Saved: %s")) % g_gr->styles()
 		                                           .font_style(UI::FontStyle::kTooltip)
 		                                           .as_font_tag(newest_singleplayer->savedatestring))
 		       .str())
