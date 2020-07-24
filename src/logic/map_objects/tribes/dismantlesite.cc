@@ -287,8 +287,8 @@ void DismantleSite::draw(uint32_t gametime,
 			dst->blit_animation(
 			   point_on_dst, coords, scale, was_immovable_->main_animation(), tanim, &player_color);
 		} else {
-			dst->blit_animation(
-			   point_on_dst, coords, scale, was_immovable_->main_animation(), tanim, nullptr, kBuildingSilhouetteOpacity);
+			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(), tanim,
+			                    nullptr, kBuildingSilhouetteOpacity);
 		}
 	} else {
 		// Draw the construction site marker
@@ -296,18 +296,19 @@ void DismantleSite::draw(uint32_t gametime,
 			dst->blit_animation(
 			   point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, &player_color);
 		} else {
-			dst->blit_animation(
-			   point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, nullptr, kBuildingSilhouetteOpacity);
+			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, nullptr,
+			                    kBuildingSilhouetteOpacity);
 		}
 	}
 
 	// Blit bottom part of the animation according to dismantle progress
 	if (info_to_draw & InfoToDraw::kShowBuildings) {
 		dst->blit_animation(point_on_dst, coords, scale, building_->get_unoccupied_animation(), tanim,
-			                &player_color, 1.f, 100 - ((get_built_per64k() * 100) >> 16));
+		                    &player_color, 1.f, 100 - ((get_built_per64k() * 100) >> 16));
 	} else {
 		dst->blit_animation(point_on_dst, coords, scale, building_->get_unoccupied_animation(), tanim,
-			                nullptr, kBuildingSilhouetteOpacity, 100 - ((get_built_per64k() * 100) >> 16));
+		                    nullptr, kBuildingSilhouetteOpacity,
+		                    100 - ((get_built_per64k() * 100) >> 16));
 	}
 
 	// Draw help strings

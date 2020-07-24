@@ -115,7 +115,7 @@ void NonPackedAnimation::NonPackedMipMapEntry::blit(uint32_t idx,
                                                     const Rectf& destination_rect,
                                                     const RGBColor* clr,
                                                     Surface* target,
-		                                            float opacity) const {
+                                                    float opacity) const {
 	assert(!frames.empty());
 	assert(target);
 	assert(idx < frames.size());

@@ -84,12 +84,12 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 		// Not the first pic within this animation – draw the previous one
 		if (visible) {
 			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale,
-				                animations[animation_index].first, anim_time - kFrameLength,
-				                &player_color);
+			                    animations[animation_index].first, anim_time - kFrameLength,
+			                    &player_color);
 		} else {
 			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale,
-				                animations[animation_index].first, anim_time - kFrameLength,
-				                nullptr, kBuildingSilhouetteOpacity);
+			                    animations[animation_index].first, anim_time - kFrameLength, nullptr,
+			                    kBuildingSilhouetteOpacity);
 		}
 	} else if (animation_index > 0) {
 		// The first pic, but not the first series of animations – draw the last pic of the previous
@@ -99,22 +99,25 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 			   point_on_dst, Widelands::Coords::null(), scale, animations[animation_index - 1].first,
 			   kFrameLength * (animations[animation_index - 1].second - 1), &player_color);
 		} else {
-			dst->blit_animation(
-			   point_on_dst, Widelands::Coords::null(), scale, animations[animation_index - 1].first,
-			   kFrameLength * (animations[animation_index - 1].second - 1), nullptr, kBuildingSilhouetteOpacity);
+			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale,
+			                    animations[animation_index - 1].first,
+			                    kFrameLength * (animations[animation_index - 1].second - 1), nullptr,
+			                    kBuildingSilhouetteOpacity);
 		}
 	} else if (was) {
 		//  First pic in first series, but there was another building here before –
 		//  get its most fitting picture and draw it instead
 		const uint32_t unocc = was->get_unoccupied_animation();
 		if (visible) {
-			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, unocc,
-				                kFrameLength * (g_gr->animations().get_animation(unocc).nr_frames() - 1),
-				                &player_color);
+			dst->blit_animation(
+			   point_on_dst, Widelands::Coords::null(), scale, unocc,
+			   kFrameLength * (g_gr->animations().get_animation(unocc).nr_frames() - 1),
+			   &player_color);
 		} else {
-			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, unocc,
-				                kFrameLength * (g_gr->animations().get_animation(unocc).nr_frames() - 1),
-				                nullptr, kBuildingSilhouetteOpacity);
+			dst->blit_animation(
+			   point_on_dst, Widelands::Coords::null(), scale, unocc,
+			   kFrameLength * (g_gr->animations().get_animation(unocc).nr_frames() - 1), nullptr,
+			   kBuildingSilhouetteOpacity);
 		}
 	}
 	// Now blit a segment of the current construction phase from the bottom.
@@ -128,10 +131,10 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 	}
 	if (visible) {
 		dst->blit_animation(point_on_dst, coords, scale, animations[animation_index].first, anim_time,
-			                &player_color, 1.f, percent);
+		                    &player_color, 1.f, percent);
 	} else {
 		dst->blit_animation(point_on_dst, coords, scale, animations[animation_index].first, anim_time,
-			                nullptr, kBuildingSilhouetteOpacity, percent);
+		                    nullptr, kBuildingSilhouetteOpacity, percent);
 	}
 }
 
@@ -716,8 +719,8 @@ void ConstructionSite::draw(uint32_t gametime,
 			dst->blit_animation(
 			   point_on_dst, coords, scale, was_immovable_->main_animation(), tanim, &player_color);
 		} else {
-			dst->blit_animation(
-			   point_on_dst, coords, scale, was_immovable_->main_animation(), tanim, nullptr, kBuildingSilhouetteOpacity);
+			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(), tanim,
+			                    nullptr, kBuildingSilhouetteOpacity);
 		}
 	} else {
 		// Draw the construction site marker
@@ -725,8 +728,8 @@ void ConstructionSite::draw(uint32_t gametime,
 			dst->blit_animation(
 			   point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, &player_color);
 		} else {
-			dst->blit_animation(
-			   point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, nullptr, kBuildingSilhouetteOpacity);
+			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, nullptr,
+			                    kBuildingSilhouetteOpacity);
 		}
 	}
 
@@ -742,7 +745,8 @@ void ConstructionSite::draw(uint32_t gametime,
 		info_.completedtime += CONSTRUCTIONSITE_STEP_TIME + gametime - work_steptime_;
 	}
 
-	info_.draw(point_on_dst, coords, scale, (info_to_draw & InfoToDraw::kShowBuildings), player_color, dst);
+	info_.draw(
+	   point_on_dst, coords, scale, (info_to_draw & InfoToDraw::kShowBuildings), player_color, dst);
 
 	// Draw help strings
 	draw_info(info_to_draw, point_on_dst, scale, dst);
