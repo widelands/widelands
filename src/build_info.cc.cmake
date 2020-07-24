@@ -1,8 +1,8 @@
 #include "build_info.h"
 #include <string>
 
-constexpr const char* const wl_bid = "@WL_VERSION@";
-constexpr const char* const wl_bt  = "@CMAKE_BUILD_TYPE@";
+static const std::string wl_bid = "@WL_VERSION@";
+static const std::string wl_bt  = "@CMAKE_BUILD_TYPE@";
 
 const std::string & build_id()
 {
