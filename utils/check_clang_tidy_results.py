@@ -30,7 +30,7 @@ SUPPRESSED_CHECKS = {
     '[cppcoreguidelines-pro-type-reinterpret-cast]',
     '[cppcoreguidelines-pro-type-static-cast-downcast]',
     '[cppcoreguidelines-pro-type-union-access]',
-    '[cppcoreguidelines-pro-type-vararg]', # We need this for our logger
+    '[cppcoreguidelines-pro-type-vararg]',  # We need this for our logger
     '[cppcoreguidelines-slicing]',
     '[cppcoreguidelines-special-member-functions]',
     '[fuchsia-default-arguments]',
@@ -101,6 +101,7 @@ SUPPRESSED_CHECKS = {
 }
 
 CHECK_REGEX = re.compile('.*\[([A-Za-z0-9.-]+)\]$')
+
 
 def main():
     """Checks whether clang-tidy warnings that were previously cleaned have
