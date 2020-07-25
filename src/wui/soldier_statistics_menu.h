@@ -20,7 +20,6 @@
 #ifndef WL_WUI_SOLDIER_STATISTICS_MENU_H
 #define WL_WUI_SOLDIER_STATISTICS_MENU_H
 
-#include "ui_basic/box.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"

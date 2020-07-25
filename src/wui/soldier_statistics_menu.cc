@@ -20,6 +20,7 @@
 #include "wui/soldier_statistics_menu.h"
 
 #include "logic/map_objects/tribes/soldier.h"
+#include "ui_basic/box.h"
 
 SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
                                              UI::UniqueWindow::Registry& registry)
