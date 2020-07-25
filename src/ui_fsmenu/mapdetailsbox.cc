@@ -1,4 +1,5 @@
 #include "ui_fsmenu/mapdetailsbox.h"
+#include <io/profile.h>
 
 #include "logic/game_settings.h"
 #include "map_io/map_loader.h"
@@ -49,6 +50,59 @@ MapDetailsBox::MapDetailsBox(
 	add(&map_description_, UI::Box::Resizing::kExpandBoth);
 }
 MapDetailsBox::~MapDetailsBox() {
+}
+
+void MapDetailsBox::update_from_savegame(GameSettingsProvider* settings) {
+	const GameSettings& game_settings = settings->settings();
+
+	std::string infotext = _("Saved players are:");
+
+	for (uint8_t i = 0; i < game_settings.players.size(); ++i) {
+		const PlayerSettings& current_player = game_settings.players.at(i);
+		infotext += "\n* ";
+		infotext += (boost::format(_("Player %u")) % static_cast<unsigned int>(i)).str();
+		if (current_player.state == PlayerSettings::State::kClosed) {
+			infotext += ":\n    ";
+			infotext += (boost::format("<%s>") % _("closed")).str();
+			;
+			continue;
+		}
+
+		// get translated tribename
+		for (const Widelands::TribeBasicInfo& tribeinfo : game_settings.tribes) {
+			if (tribeinfo.name == current_player.tribe) {
+				i18n::Textdomain td("tribes");  // for translated initialisation
+				infotext += " (";
+				infotext += _(tribeinfo.descname);
+				infotext += "):\n    ";
+				break;
+			}
+		}
+
+		// Check if this is a list of names, or just one name:
+		if (current_player.name.compare(0, 1, " "))
+			infotext += current_player.name;
+		else {
+			std::string temp = current_player.name;
+			bool firstrun = true;
+			while (temp.find(' ', 1) < temp.size()) {
+				if (firstrun)
+					firstrun = false;
+				else
+					infotext += "\n    ";
+				uint32_t x = temp.find(' ', 1);
+				infotext += temp.substr(1, x);
+				temp = temp.substr(x + 1, temp.size());
+			}
+		}
+	}
+	set_map_description_text(infotext);
+	{
+		// Translate the map's name
+		const char* nomap = _("(no map)");
+		i18n::Textdomain td("maps");
+		map_name_.set_text(game_settings.mapname.size() != 0 ? _(game_settings.mapname) : nomap);
+	}
 }
 
 void MapDetailsBox::update(GameSettingsProvider* settings, Widelands::Map& map) {

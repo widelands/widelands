@@ -19,6 +19,7 @@ public:
 	~MapDetailsBox();
 
 	void update(GameSettingsProvider* settings, Widelands::Map& map);
+	void update_from_savegame(GameSettingsProvider* settings);
 
 	/// passed callback is called when the select map button is clicked
 	void set_select_map_action(std::function<void()> action);

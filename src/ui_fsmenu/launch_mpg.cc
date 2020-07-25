@@ -126,7 +126,6 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	if (settings_->can_change_map()) {
 		map_details.set_map_description_text(_("Please select a map or saved game."));
 	} else {
-		// change_map_or_save_.set_enabled(settings_->can_change_map());
 		map_details.set_map_description_text(_("The host has not yet selected a map or saved game."));
 	}
 
@@ -262,6 +261,7 @@ void FullscreenMenuLaunchMPG::select_saved_game() {
 		nr_players_ = s.get_safe_int("nr_players");
 
 		settings_->set_map(mapname, filename, nr_players_, true);
+		log("nr_players_: %d, players.size=%d\n", nr_players_, settings_->settings().players.size());
 
 		// Check for sendability
 		if (g_fs->is_directory(filename)) {
@@ -420,16 +420,17 @@ void FullscreenMenuLaunchMPG::set_scenario_values() {
  * load all playerdata from savegame and update UI accordingly
  */
 void FullscreenMenuLaunchMPG::load_previous_playerdata() {
+
 	std::unique_ptr<FileSystem> l_fs(
 	   g_fs->make_sub_file_system(settings_->settings().mapfilename.c_str()));
 	Profile prof;
 	prof.read("map/player_names", nullptr, *l_fs);
-	std::string infotext = _("Saved players are:");
+
 	std::string player_save_name[kMaxPlayers];
 	std::string player_save_tribe[kMaxPlayers];
 	std::string player_save_ai[kMaxPlayers];
 
-	for (uint8_t i = 1; i <= nr_players_; ++i) {
+	for (uint8_t i = 1; i <= settings_->settings().players.size(); ++i) {
 		Section* s =
 		   prof.get_section((boost::format("player_%u") % static_cast<unsigned int>(i)).str());
 		if (s == nullptr) {
@@ -441,12 +442,7 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata() {
 		player_save_tribe[i - 1] = s->get_string("tribe");
 		player_save_ai[i - 1] = s->get_string("ai");
 
-		infotext += "\n* ";
-		infotext += (boost::format(_("Player %u")) % static_cast<unsigned int>(i)).str();
 		if (player_save_tribe[i - 1].empty()) {
-			std::string closed_string = (boost::format("<%s>") % _("closed")).str();
-			infotext += ":\n    ";
-			infotext += closed_string;
 			// Close the player
 			settings_->set_player_state(i - 1, PlayerSettings::State::kClosed);
 			continue;  // if tribe is empty, the player does not exist
@@ -465,38 +461,11 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata() {
 			settings_->set_player_ai(i - 1, player_save_ai[i - 1]);
 		}
 
-		// Set player's tribe
 		settings_->set_player_tribe(i - 1, player_save_tribe[i - 1]);
-
-		// get translated tribename
-		for (const Widelands::TribeBasicInfo& tribeinfo : settings_->settings().tribes) {
-			if (tribeinfo.name == player_save_tribe[i - 1]) {
-				i18n::Textdomain td("tribes");  // for translated initialisation
-				player_save_tribe[i - 1] = _(tribeinfo.descname);
-				break;
-			}
-		}
-
-		infotext += " (";
-		infotext += player_save_tribe[i - 1];
-		infotext += "):\n    ";
-		// Check if this is a list of names, or just one name:
-		if (player_save_name[i - 1].compare(0, 1, " "))
-			infotext += player_save_name[i - 1];
-		else {
-			std::string temp = player_save_name[i - 1];
-			bool firstrun = true;
-			while (temp.find(' ', 1) < temp.size()) {
-				if (firstrun)
-					firstrun = false;
-				else
-					infotext += "\n    ";
-				uint32_t x = temp.find(' ', 1);
-				infotext += temp.substr(1, x);
-				temp = temp.substr(x + 1, temp.size());
-			}
-		}
+		settings_->set_player_name(i - 1, player_save_name[i - 1]);
 	}
+
+	map_details.update_from_savegame(settings_);
 	filename_proof_ = settings_->settings().mapfilename;
 }
 
