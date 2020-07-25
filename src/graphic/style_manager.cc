@@ -130,10 +130,10 @@ void StyleManager::init() {
 	// Tabpanels
 	element_table = table->get_table("tabpanels");
 	style_table = element_table->get_table("fsmenu");
-	add_tabpanel_style(UI::TabPanelStyle::kFsMenu, *style_table->get_table("menu").get());
+	add_tabpanel_style(UI::TabPanelStyle::kFsMenu, *style_table->get_table("menu"));
 	style_table = element_table->get_table("wui");
-	add_tabpanel_style(UI::TabPanelStyle::kWuiLight, *style_table->get_table("light").get());
-	add_tabpanel_style(UI::TabPanelStyle::kWuiDark, *style_table->get_table("dark").get());
+	add_tabpanel_style(UI::TabPanelStyle::kWuiLight, *style_table->get_table("light"));
+	add_tabpanel_style(UI::TabPanelStyle::kWuiDark, *style_table->get_table("dark"));
 	check_completeness(
 	   "tabpanels", tabpanelstyles_.size(), static_cast<size_t>(UI::TabPanelStyle::kWuiDark));
 
@@ -147,18 +147,18 @@ void StyleManager::init() {
 	// Dropdowns
 	element_table = table->get_table("dropdowns");
 	style_table = element_table->get_table("fsmenu");
-	add_style(UI::PanelStyle::kFsMenu, *style_table->get_table("menu").get(), &dropdownstyles_);
+	add_style(UI::PanelStyle::kFsMenu, *style_table->get_table("menu"), &dropdownstyles_);
 	style_table = element_table->get_table("wui");
-	add_style(UI::PanelStyle::kWui, *style_table->get_table("menu").get(), &dropdownstyles_);
+	add_style(UI::PanelStyle::kWui, *style_table->get_table("menu"), &dropdownstyles_);
 	check_completeness(
 	   "dropdowns", dropdownstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
 	// Scrollbars
 	element_table = table->get_table("scrollbars");
 	style_table = element_table->get_table("fsmenu");
-	add_style(UI::PanelStyle::kFsMenu, *style_table->get_table("menu").get(), &scrollbarstyles_);
+	add_style(UI::PanelStyle::kFsMenu, *style_table->get_table("menu"), &scrollbarstyles_);
 	style_table = element_table->get_table("wui");
-	add_style(UI::PanelStyle::kWui, *style_table->get_table("menu").get(), &scrollbarstyles_);
+	add_style(UI::PanelStyle::kWui, *style_table->get_table("menu"), &scrollbarstyles_);
 	check_completeness(
 	   "scrollbars", scrollbarstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 

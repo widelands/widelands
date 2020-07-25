@@ -85,7 +85,7 @@ void Statebox::layout() {
 		      nullptr :
 		      UI::g_fh->render(as_richtext_paragraph(label_text_, UI::FontStyle::kLabel),
 		                       text_width(get_w(), pic_width));
-		if (rendered_text_.get()) {
+		if (rendered_text_) {
 			w = std::max(rendered_text_->width() + kPadding + pic_width, w);
 			h = std::max(rendered_text_->height(), h);
 		}
@@ -149,7 +149,7 @@ void Statebox::draw(RenderTarget& dst) {
 		Vector2i image_anchor = Vector2i::zero();
 		Vector2i text_anchor(kStateboxSize + kPadding, 0);
 
-		if (rendered_text_.get()) {
+		if (rendered_text_) {
 			if (UI::g_fh->fontset()->is_rtl()) {
 				text_anchor.x = 0;
 				image_anchor.x = rendered_text_->width() + kPadding;
