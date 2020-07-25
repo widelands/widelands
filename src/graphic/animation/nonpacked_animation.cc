@@ -184,7 +184,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table,
 
 		// Frames
 		const NonPackedMipMapEntry& first =
-		   dynamic_cast<const NonPackedMipMapEntry&>(*mipmaps_.begin()->second.get());
+		   dynamic_cast<const NonPackedMipMapEntry&>(*mipmaps_.begin()->second);
 		nr_frames_ = first.image_files.size();
 		if (table.has_key("fps") && nr_frames_ == 1) {
 			throw Widelands::GameDataError(
