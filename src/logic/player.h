@@ -613,6 +613,10 @@ public:
 
 	const std::string pick_shipname();
 
+	void add_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
+	void remove_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
+	uint32_t count_soldiers(unsigned h, unsigned a, unsigned d, unsigned e) const;
+
 private:
 	BuildingStatsVector* get_mutable_building_statistics(const DescriptionIndex& i);
 	void update_building_statistics(Building&, NoteImmovable::Ownership ownership);
@@ -691,6 +695,8 @@ private:
 	std::set<PlayerNumber> forbid_attack_;
 
 	PlayerBuildingStats building_stats_;
+
+	std::map<std::tuple<unsigned, unsigned, unsigned, unsigned>, uint32_t> soldier_stats_;
 
 	FxId message_fx_;
 	FxId attack_fx_;

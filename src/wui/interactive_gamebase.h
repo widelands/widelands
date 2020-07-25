@@ -120,6 +120,7 @@ protected:
 		UI::UniqueWindow::Registry stats_wares;
 		UI::UniqueWindow::Registry stats_stock;
 		UI::UniqueWindow::Registry stats_buildings;
+		UI::UniqueWindow::Registry stats_soldiers;
 		UI::UniqueWindow::Registry stats_seafaring;
 
 		UI::UniqueWindow::Registry help;

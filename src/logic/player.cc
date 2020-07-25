@@ -1540,6 +1540,18 @@ bool Player::is_attack_forbidden(PlayerNumber who) const {
 	return forbid_attack_.find(who) != forbid_attack_.end();
 }
 
+void Player::add_soldier(unsigned h, unsigned a, unsigned d, unsigned e) {
+	++soldier_stats_[std::make_tuple(h, a, d, e)];
+}
+void Player::remove_soldier(unsigned h, unsigned a, unsigned d, unsigned e) {
+	assert(count_soldiers(h, a, d, e));
+	--soldier_stats_[std::make_tuple(h, a, d, e)];
+}
+uint32_t Player::count_soldiers(unsigned h, unsigned a, unsigned d, unsigned e) const {
+	const auto it = soldier_stats_.find(std::make_tuple(h, a, d, e));
+	return it == soldier_stats_.end() ? 0 : it->second;
+}
+
 void Player::set_attack_forbidden(PlayerNumber who, bool forbid) {
 	const auto it = forbid_attack_.find(who);
 	if (forbid ^ (it == forbid_attack_.end())) {
