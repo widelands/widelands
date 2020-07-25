@@ -35,7 +35,6 @@ SUPPRESSED_CHECKS = {
     '[fuchsia-overloaded-operator]',
     '[google-build-using-namespace]',
     '[google-default-arguments]',
-    '[google-explicit-constructor]',
     '[google-readability-function-size]',
     '[google-readability-redundant-smartptr-get]',
     '[google-runtime-int]',

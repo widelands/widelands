@@ -84,7 +84,7 @@ bool FerryFleet::init(EditorGameBase& egbase) {
 }
 
 struct StepEvalFindFerryFleet {
-	StepEvalFindFerryFleet(const EditorGameBase& egbase) : checkstep_(new CheckStepFerry(egbase)) {
+	explicit StepEvalFindFerryFleet(const EditorGameBase& egbase) : checkstep_(new CheckStepFerry(egbase)) {
 	}
 
 	int32_t estimate(Map& /* map */, FCoords /* pos */) const {
