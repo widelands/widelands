@@ -1775,7 +1775,8 @@ void Soldier::Loader::load(FileRead& fr) {
 			soldier.evade_level_ = std::min(fr.unsigned_32(), soldier.descr().get_max_evade_level());
 
 			// During saveloading init() is not called so we were not registered in the statistics yet
-			soldier.get_owner()->add_soldier(soldier.health_level_, soldier.attack_level_, soldier.defense_level_, soldier.evade_level_);
+			soldier.get_owner()->add_soldier(soldier.health_level_, soldier.attack_level_,
+			                                 soldier.defense_level_, soldier.evade_level_);
 
 			if (soldier.current_health_ > soldier.get_max_health()) {
 				soldier.current_health_ = soldier.get_max_health();

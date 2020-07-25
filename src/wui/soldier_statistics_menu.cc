@@ -24,15 +24,14 @@
 
 SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
                                              UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(
-        &parent, "soldier_statistics", &registry, 100, 100, _("Soldier Statistics")),
+   : UI::UniqueWindow(&parent, "soldier_statistics", &registry, 100, 100, _("Soldier Statistics")),
      player_(parent.player()) {
 	UI::Box* vbox = new UI::Box(this, 0, 0, UI::Box::Vertical);
 
 	// To optimize the layout, we arrange Attack and Evade level gradients horizontally
 	// and Health and Defense level gradients vertically
 	const Widelands::SoldierDescr& soldier = dynamic_cast<const Widelands::SoldierDescr&>(
-			*player_.tribe().get_worker_descr(player_.tribe().soldier()));
+	   *player_.tribe().get_worker_descr(player_.tribe().soldier()));
 	ma_ = soldier.get_max_attack_level();
 	md_ = soldier.get_max_defense_level();
 	mh_ = soldier.get_max_health_level();
@@ -89,9 +88,9 @@ void SoldierStatisticsMenu::think() {
 void SoldierStatisticsMenu::update() {
 	unsigned index = 0;
 	for (unsigned h = 0; h <= mh_; ++h) {
-	for (unsigned d = 0; d <= md_; ++d) {
-	for (unsigned a = 0; a <= ma_; ++a) {
-	for (unsigned e = 0; e <= me_; ++e) {
+		for (unsigned d = 0; d <= md_; ++d) {
+			for (unsigned a = 0; a <= ma_; ++a) {
+				for (unsigned e = 0; e <= me_; ++e) {
 					const uint32_t nr = player_.count_soldiers(h, a, d, e);
 					labels_[index]->set_text(std::to_string(nr));
 					for (uint8_t i = 0; i < 4; ++i) {

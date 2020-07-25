@@ -67,11 +67,13 @@ void Icon::draw(RenderTarget& dst) {
 		const int x = (available_width - width) / 2;
 		const int y = (available_height - height) / 2;
 		if (grey_out_) {
-			dst.blitrect_scale_monochrome(Rectf(draw_frame_ ? x + 1 : x, draw_frame_ ? y + 1 : y, width, height),
-				               pic_, Recti(0, 0, pic_->width(), pic_->height()), RGBAColor(191, 191, 191, 191));
+			dst.blitrect_scale_monochrome(
+			   Rectf(draw_frame_ ? x + 1 : x, draw_frame_ ? y + 1 : y, width, height), pic_,
+			   Recti(0, 0, pic_->width(), pic_->height()), RGBAColor(191, 191, 191, 191));
 		} else {
 			dst.blitrect_scale(Rectf(draw_frame_ ? x + 1 : x, draw_frame_ ? y + 1 : y, width, height),
-				               pic_, Recti(0, 0, pic_->width(), pic_->height()), 1., BlendMode::UseAlpha);
+			                   pic_, Recti(0, 0, pic_->width(), pic_->height()), 1.,
+			                   BlendMode::UseAlpha);
 		}
 		if (draw_frame_) {
 			dst.draw_rect(Recti(x, y, width + 2, height + 2), framecolor_);
