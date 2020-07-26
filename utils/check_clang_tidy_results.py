@@ -50,7 +50,6 @@ SUPPRESSED_CHECKS = {
     '[hicpp-use-nullptr]',
     '[hicpp-use-override]',
     '[hicpp-vararg]',
-    '[llvm-namespace-comment]',
     '[misc-macro-parentheses]',
     '[misc-misplaced-widening-cast]',
     '[misc-redundant-expression]',
