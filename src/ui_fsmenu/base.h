@@ -40,6 +40,7 @@ public:
 		// Main menu
 		kTutorial,
 		kSinglePlayer,
+		kContinueLastsave,
 		kMultiplayer,
 		kReplay,
 		kEditor,
