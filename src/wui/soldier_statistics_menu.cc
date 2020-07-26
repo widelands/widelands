@@ -21,12 +21,15 @@
 
 #include "logic/map_objects/tribes/soldier.h"
 #include "ui_basic/box.h"
+#include "ui_basic/tabpanel.h"
 
 SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
                                              UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(&parent, "soldier_statistics", &registry, 100, 100, _("Soldier Statistics")),
      player_(parent.player()) {
-	UI::Box* vbox = new UI::Box(this, 0, 0, UI::Box::Vertical);
+	UI::TabPanel* tabs = new UI::TabPanel(this, UI::TabPanelStyle::kWuiDark);
+
+	UI::Box* vbox = new UI::Box(tabs, 0, 0, UI::Box::Vertical);
 
 	// To optimize the layout, we arrange Attack and Evade level gradients horizontally
 	// and Health and Defense level gradients vertically
@@ -60,11 +63,11 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 					hbox2->add(icon3, UI::Box::Resizing::kAlign);
 					hbox2->add(icon4, UI::Box::Resizing::kAlign);
 					hbox3->add(txt, UI::Box::Resizing::kAlign);
-					icons_.push_back(icon1);
-					icons_.push_back(icon2);
-					icons_.push_back(icon3);
-					icons_.push_back(icon4);
-					labels_.push_back(txt);
+					icons_all_.push_back(icon1);
+					icons_all_.push_back(icon2);
+					icons_all_.push_back(icon3);
+					icons_all_.push_back(icon4);
+					labels_all_.push_back(txt);
 				}
 			}
 			if (health || defense) {
@@ -76,7 +79,59 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 		}
 	}
 
-	set_center_panel(vbox);
+	tabs->add("all", _("Overview"), vbox);
+
+	vbox = new UI::Box(tabs, 0, 0, UI::Box::Vertical);
+
+	UI::Box* hbox1 = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
+	UI::Box* hbox2 = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
+	UI::Box* hbox3 = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
+	UI::Box* hbox4 = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
+
+	for (unsigned h = 0; h <= mh_; ++h) {
+		UI::Icon* i = new UI::Icon(hbox1, soldier.get_health_level_pic(h));
+		UI::Textarea* txt = new UI::Textarea(hbox1, "", UI::Align::kLeft);
+		txt->set_fixed_width(8 * i->get_w());
+		hbox1->add(i, UI::Box::Resizing::kAlign);
+		hbox1->add(txt, UI::Box::Resizing::kAlign);
+		icons_detail_.push_back(i);
+		labels_detail_.push_back(txt);
+	}
+	for (unsigned a = 0; a <= ma_; ++a) {
+		UI::Icon* i = new UI::Icon(hbox2, soldier.get_attack_level_pic(a));
+		UI::Textarea* txt = new UI::Textarea(hbox2, "", UI::Align::kLeft);
+		txt->set_fixed_width(8 * i->get_w());
+		hbox2->add(i, UI::Box::Resizing::kAlign);
+		hbox2->add(txt, UI::Box::Resizing::kAlign);
+		icons_detail_.push_back(i);
+		labels_detail_.push_back(txt);
+	}
+	for (unsigned d = 0; d <= md_; ++d) {
+		UI::Icon* i = new UI::Icon(hbox3, soldier.get_defense_level_pic(d));
+		UI::Textarea* txt = new UI::Textarea(hbox3, "", UI::Align::kLeft);
+		txt->set_fixed_width(8 * i->get_w());
+		hbox3->add(i, UI::Box::Resizing::kAlign);
+		hbox3->add(txt, UI::Box::Resizing::kAlign);
+		icons_detail_.push_back(i);
+		labels_detail_.push_back(txt);
+	}
+	for (unsigned e = 0; e <= me_; ++e) {
+		UI::Icon* i = new UI::Icon(hbox4, soldier.get_evade_level_pic(e));
+		UI::Textarea* txt = new UI::Textarea(hbox4, "", UI::Align::kLeft);
+		txt->set_fixed_width(8 * i->get_w());
+		hbox4->add(i, UI::Box::Resizing::kAlign);
+		hbox4->add(txt, UI::Box::Resizing::kAlign);
+		icons_detail_.push_back(i);
+		labels_detail_.push_back(txt);
+	}
+
+	vbox->add(hbox1, UI::Box::Resizing::kFullSize);
+	vbox->add(hbox2, UI::Box::Resizing::kFullSize);
+	vbox->add(hbox3, UI::Box::Resizing::kFullSize);
+	vbox->add(hbox4, UI::Box::Resizing::kFullSize);
+	tabs->add("detail", _("By Level"), vbox);
+
+	set_center_panel(tabs);
 	update();
 }
 
@@ -92,13 +147,39 @@ void SoldierStatisticsMenu::update() {
 			for (unsigned a = 0; a <= ma_; ++a) {
 				for (unsigned e = 0; e <= me_; ++e) {
 					const uint32_t nr = player_.count_soldiers(h, a, d, e);
-					labels_[index]->set_text(std::to_string(nr));
+					labels_all_[index]->set_text(std::to_string(nr));
 					for (uint8_t i = 0; i < 4; ++i) {
-						icons_[index * 4 + i]->set_grey_out(nr == 0);
+						icons_all_[index * 4 + i]->set_grey_out(nr == 0);
 					}
 					++index;
 				}
 			}
 		}
+	}
+
+	index = 0;
+	for (unsigned h = 0; h <= mh_; ++h) {
+		const uint32_t nr = player_.count_soldiers_h(h);
+		icons_detail_[index]->set_grey_out(nr == 0);
+		labels_detail_[index]->set_text((boost::format(_("×%u")) % nr).str());
+		++index;
+	}
+	for (unsigned a = 0; a <= ma_; ++a) {
+		const uint32_t nr = player_.count_soldiers_a(a);
+		icons_detail_[index]->set_grey_out(nr == 0);
+		labels_detail_[index]->set_text((boost::format(_("×%u")) % nr).str());
+		++index;
+	}
+	for (unsigned d = 0; d <= md_; ++d) {
+		const uint32_t nr = player_.count_soldiers_d(d);
+		icons_detail_[index]->set_grey_out(nr == 0);
+		labels_detail_[index]->set_text((boost::format(_("×%u")) % nr).str());
+		++index;
+	}
+	for (unsigned e = 0; e <= me_; ++e) {
+		const uint32_t nr = player_.count_soldiers_e(e);
+		icons_detail_[index]->set_grey_out(nr == 0);
+		labels_detail_[index]->set_text((boost::format(_("×%u")) % nr).str());
+		++index;
 	}
 }

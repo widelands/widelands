@@ -1551,6 +1551,42 @@ uint32_t Player::count_soldiers(unsigned h, unsigned a, unsigned d, unsigned e) 
 	const auto it = soldier_stats_.find(std::make_tuple(h, a, d, e));
 	return it == soldier_stats_.end() ? 0 : it->second;
 }
+uint32_t Player::count_soldiers_h(unsigned value) const {
+	uint32_t s = 0;
+	for (const auto& pair : soldier_stats_) {
+		if (std::get<0>(pair.first) == value) {
+			s += pair.second;
+		}
+	}
+	return s;
+}
+uint32_t Player::count_soldiers_a(unsigned value) const {
+	uint32_t s = 0;
+	for (const auto& pair : soldier_stats_) {
+		if (std::get<1>(pair.first) == value) {
+			s += pair.second;
+		}
+	}
+	return s;
+}
+uint32_t Player::count_soldiers_d(unsigned value) const {
+	uint32_t s = 0;
+	for (const auto& pair : soldier_stats_) {
+		if (std::get<2>(pair.first) == value) {
+			s += pair.second;
+		}
+	}
+	return s;
+}
+uint32_t Player::count_soldiers_e(unsigned value) const {
+	uint32_t s = 0;
+	for (const auto& pair : soldier_stats_) {
+		if (std::get<3>(pair.first) == value) {
+			s += pair.second;
+		}
+	}
+	return s;
+}
 
 void Player::set_attack_forbidden(PlayerNumber who, bool forbid) {
 	const auto it = forbid_attack_.find(who);

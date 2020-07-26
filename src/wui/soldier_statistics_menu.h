@@ -39,8 +39,10 @@ private:
 
 	unsigned ma_, md_, mh_, me_;
 
-	std::vector<UI::Icon*> icons_;
-	std::vector<UI::Textarea*> labels_;
+	std::vector<UI::Icon*> icons_all_;
+	std::vector<UI::Textarea*> labels_all_;
+	std::vector<UI::Icon*> icons_detail_;
+	std::vector<UI::Textarea*> labels_detail_;
 };
 
 #endif  // end of include guard: WL_WUI_SOLDIER_STATISTICS_MENU_H
