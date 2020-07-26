@@ -50,7 +50,6 @@ SUPPRESSED_CHECKS = {
     '[hicpp-use-equals-default]',
     '[hicpp-vararg]',
     '[misc-macro-parentheses]',
-    '[misc-misplaced-widening-cast]',
     '[misc-redundant-expression]',
     '[misc-string-integer-assignment]',
     '[misc-suspicious-enum-usage]',

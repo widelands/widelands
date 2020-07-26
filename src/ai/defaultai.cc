@@ -5196,7 +5196,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		}
 		const uint16_t min_roads_count =
 		   40 + std::abs(management_data.get_military_number_at(33)) / 2;
-		if (roads.size() < static_cast<size_t>(min_roads_count * (1 + bo.total_count()))) {
+		if (static_cast<int>(roads.size()) < min_roads_count * (1 + bo.total_count())) {
 			return BuildingNecessity::kForbidden;
 		}
 		bo.primary_priority += (roads.size() - min_roads_count * (1 + bo.total_count())) *
