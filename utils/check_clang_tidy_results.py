@@ -36,7 +36,6 @@ SUPPRESSED_CHECKS = {
     '[google-build-using-namespace]',
     '[google-default-arguments]',
     '[google-readability-function-size]',
-    '[google-runtime-int]',
     '[google-runtime-references]',
     '[hicpp-member-init]',
     '[hicpp-move-const-arg]',

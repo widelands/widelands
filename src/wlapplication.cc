@@ -174,7 +174,7 @@ void changedir_on_mac() {
 
 // Extracts a long from 'text' into 'val' returning true if all of the string
 // was valid. If not, the content of 'val' is undefined.
-bool to_long(const std::string& text, long* val) {
+int64_t to_long(const std::string& text, long* val) {
 	const char* start = text.c_str();
 	char* end;
 	*val = strtol(start, &end, 10);
@@ -187,7 +187,7 @@ bool extract_creation_day(const std::string& path, tm* tfile) {
 	const std::string filename = FileSystem::fs_filename(path.c_str());
 	memset(tfile, 0, sizeof(tm));
 
-	long day, month, year;
+	int64_t day, month, year;
 	if (!to_long(filename.substr(8, 2), &day)) {
 		return false;
 	}
@@ -860,7 +860,7 @@ bool WLApplication::init_settings() {
 	get_config_int("sound", "volume_ui", 128);
 	// KLUDGE!
 
-	long int last_start = get_config_int("last_start", 0);
+	int64_t last_start = get_config_int("last_start", 0);
 	if (last_start + 12 * 60 * 60 < time(nullptr) || !get_config_string("uuid", "").empty()) {
 		// First start of the game or not started for 12 hours. Create a (new) UUID.
 		// For the use of the UUID, see network/internet_gaming_protocol.h

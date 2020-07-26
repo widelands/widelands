@@ -121,9 +121,9 @@ unsigned int
 MapObjectProgram::read_int(const std::string& input, int min_value, int64_t max_value) {
 	unsigned int result = 0U;
 	char* endp;
-	long int const value = strtol(input.c_str(), &endp, 0);
+	int64_t const value = strtol(input.c_str(), &endp, 0);
 	result = value;
-	if (*endp || static_cast<long>(result) != value) {
+	if (*endp || static_cast<int64_t>(result) != value) {
 		throw GameDataError("Expected a number but found \"%s\"", input.c_str());
 	}
 	if (value < min_value) {
