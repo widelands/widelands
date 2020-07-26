@@ -1183,6 +1183,10 @@ void WLApplication::mainmenu() {
 				ff.run<FullscreenMenuBase::MenuTarget>();
 				break;
 			}
+			case FullscreenMenuBase::MenuTarget::kContinueLastsave: {
+				load_game(mm.get_filename_for_continue());
+				break;
+			}
 			case FullscreenMenuBase::MenuTarget::kEditor:
 				EditorInteractive::run_editor(filename_, script_to_run_);
 				break;
@@ -1425,18 +1429,19 @@ bool WLApplication::new_game() {
  * \return @c true if a game was loaded, @c false if the player pressed Back
  * or aborted the game setup via some other means.
  */
-bool WLApplication::load_game() {
+bool WLApplication::load_game(std::string filename) {
 	Widelands::Game game;
-	std::string filename;
 
 	game.set_ai_training_mode(get_config_bool("ai_training", false));
 	SinglePlayerGameSettingsProvider sp;
 	FullscreenMenuLoadGame ssg(game, &sp);
 
-	if (ssg.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kOk) {
-		filename = ssg.filename();
-	} else {
-		return false;
+	if (filename.empty()) {
+		if (ssg.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kOk) {
+			filename = ssg.filename();
+		} else {
+			return false;
+		}
 	}
 
 	try {
