@@ -49,7 +49,6 @@ SuggestedTeamsBox::SuggestedTeamsBox(Panel* parent,
 	add(suggested_teams_box_label_);
 }
 SuggestedTeamsBox::~SuggestedTeamsBox() {
-	SuggestedTeamsBox::hide();
 }
 
 void SuggestedTeamsBox::hide() {
