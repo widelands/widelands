@@ -26,4 +26,4 @@ CMakeLists.txt.user*
 
 # Validation checks
 po_validation
-/clang-tidy.log
+clang-tidy.log

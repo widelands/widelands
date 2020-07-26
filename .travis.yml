@@ -57,6 +57,8 @@ jobs:
       language: python
       script: ./.travis.sh includes
       cache: false
+
+    - stage: compiler
     - name: "Clang-tidy"
       compiler: clang
       script: ./.travis.sh clang-tidy
@@ -79,8 +81,6 @@ jobs:
             - libsdl2-mixer-dev
             - libsdl2-ttf-dev
             - zlib1g-dev
-
-    - stage: compiler
       # Run this stage to test whether there are any error during compiling.
       # We use macOS, since it is the fastest to build (but also the most susceptible to transient errors…)
       name: "DEBUG: macOS 10.14 with Xcode 11.3"
