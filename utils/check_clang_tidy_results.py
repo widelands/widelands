@@ -52,7 +52,6 @@ SUPPRESSED_CHECKS = {
     '[misc-macro-parentheses]',
     '[misc-redundant-expression]',
     '[misc-suspicious-string-compare]',
-    '[misc-unused-using-decls]',
     '[modernize-loop-convert]',
     '[modernize-make-shared]',
     '[modernize-make-unique]',
