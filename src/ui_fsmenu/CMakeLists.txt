@@ -53,8 +53,11 @@ wl_library(ui_fsmenu_main
   DEPENDS
     base_i18n
     build_info
+    logic
+    logic_filesystem_constants
     ui_basic
     ui_fsmenu_main_menu
+    wui_common_gamedetails
 )
 
 wl_library(ui_fsmenu_main_menu
