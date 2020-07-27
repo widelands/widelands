@@ -16,7 +16,7 @@ include "map:scripting/water_rising.lua"
 -- ===================
 -- Constants & Config
 -- ===================
-set_textdomain("scenario_atl01.wmf")
+push_textdomain("scenario_atl01.wmf")
 
 game = wl.Game()
 map = game.map

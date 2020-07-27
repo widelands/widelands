@@ -1,4 +1,4 @@
-set_textdomain("tribes")
+push_textdomain("tribes")
 
 dirname = path.dirname (__file__)
 
@@ -119,3 +119,4 @@ tribes:new_immovable_type {
       }
    }
 }
+pop_textdomain()
