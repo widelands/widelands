@@ -390,11 +390,17 @@ void InteractiveBase::set_sel_picture(const Image* image) {
 }
 
 InfoToDraw InteractiveBase::get_info_to_draw(bool show) const {
+	const auto display_flags = get_display_flags();
 	InfoToDraw info_to_draw = InfoToDraw::kNone;
+
+	if (display_flags & InteractiveBase::dfShowBuildings) {
+		info_to_draw = info_to_draw | InfoToDraw::kShowBuildings;
+	}
+
 	if (!show) {
 		return info_to_draw;
 	}
-	auto display_flags = get_display_flags();
+
 	if (display_flags & InteractiveBase::dfShowCensus) {
 		info_to_draw = info_to_draw | InfoToDraw::kCensus;
 	}
@@ -404,9 +410,7 @@ InfoToDraw InteractiveBase::get_info_to_draw(bool show) const {
 	if (display_flags & InteractiveBase::dfShowSoldierLevels) {
 		info_to_draw = info_to_draw | InfoToDraw::kSoldierLevels;
 	}
-	if (display_flags & InteractiveBase::dfShowBuildings) {
-		info_to_draw = info_to_draw | InfoToDraw::kShowBuildings;
-	}
+
 	return info_to_draw;
 }
 

@@ -40,7 +40,7 @@ constexpr int32_t kPriorityLow = 2;
 constexpr int32_t kPriorityNormal = 4;
 constexpr int32_t kPriorityHigh = 8;
 
-constexpr float kBuildingSilhouetteOpacity = 0.4f;
+constexpr float kBuildingSilhouetteOpacity = 0.3f;
 
 /* The value "" means that the DescriptionIndex is a normal building, as happens e.g. when enhancing
  * a building. The value "tribe"/"world" means that the DescriptionIndex refers to an immovable of
