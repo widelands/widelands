@@ -89,7 +89,7 @@ function dependencies_training_food(foods)
          food_warenames[countfood] = ware_description.descname
          food_images[countfood] = ware_description.icon_name
       end
-      local text = localize_list(food_warenames, "or", "tribes_encyclopedia")
+      local text = localize_list(food_warenames, "or")
       if (countlist > 1) then
          text = _"%s and":bformat(text)
       end
@@ -752,14 +752,16 @@ end
 -- The main function call
 return {
    func = function(tribename, buildingname)
-      set_textdomain("tribes_encyclopedia")
+      push_textdomain("tribes_encyclopedia")
       local tribe = wl.Game():get_tribe_description(tribename)
       -- We need to get the building description again, because it will
       -- give us a cast to the appropriate subclass.
       local building_description = wl.Game():get_building_description(buildingname)
-      return {
+      local r = {
          title = building_description.descname,
          text = building_help(tribe, building_description)
       }
+      pop_textdomain()
+      return r
    end
 }

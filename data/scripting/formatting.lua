@@ -1,8 +1,8 @@
 -- TODO(GunChleoc): This is for the legacy font renderer. Remove when we remove the old renderer and break savegame compatibility.
 
 -- Same algorithm as in src/base/i18n
-function localize_list(items, listtype, former_textdomain)
-   set_textdomain("widelands")
+function localize_list(items, listtype)
+   push_textdomain("widelands")
    local result = ""
    for i, item in pairs(items) do
       if (i == 1) then
@@ -21,7 +21,7 @@ function localize_list(items, listtype, former_textdomain)
          result = _"%1$s, %2$s":bformat(result, item)
       end
    end
-   set_textdomain(former_textdomain)
+   pop_textdomain()
    return result
 end
 

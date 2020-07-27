@@ -1,10 +1,12 @@
 tribes = wl.Tribes()
 include "scripting/mapobjects.lua"
 
+push_textdomain("scenario_emp04.wmf")
+
 -- ===================================
 --    Campaign Specific Data
 -- ===================================
-print_loading_message("Loading campaign-specific tribe units", function()
+print_loading_message(_("Loading campaign-specific tribe units"), function()
    -- ===================================
    --    Empire Mission 4
    -- ===================================
@@ -75,3 +77,5 @@ tribes:add_custom_building {
    tribename = "empire",
    buildingname = "empire_temple_of_vesta",
 }
+
+pop_textdomain()

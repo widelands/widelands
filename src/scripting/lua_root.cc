@@ -216,6 +216,7 @@ int LuaGame::get_type(lua_State* L) {
 
 /* RST
    .. attribute:: scenario_difficulty
+
       (RO) The difficulty level of the current scenario. Values range from 1 to the number
       of levels specified in the campaign's configuration in campaigns.lua. By convention
       higher values mean more difficult. Throws an error if used outside of a scenario.

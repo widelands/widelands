@@ -1,7 +1,7 @@
 -- =======================================================================
 --                         Frisian Campaign Mission 2
 -- =======================================================================
-set_textdomain("scenario_fri02.wmf")
+push_textdomain("scenario_fri02.wmf")
 
 include "scripting/coroutine.lua"
 include "scripting/field_animations.lua"
