@@ -91,8 +91,6 @@ const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
    METHOD(LuaPlayer, add_objective),
    METHOD(LuaPlayer, reveal_fields),
    METHOD(LuaPlayer, hide_fields),
-   METHOD(LuaPlayer, reveal_scenario),
-   METHOD(LuaPlayer, reveal_campaign),
    METHOD(LuaPlayer, mark_scenario_as_solved),
    METHOD(LuaPlayer, get_ships),
    METHOD(LuaPlayer, get_buildings),
@@ -637,35 +635,6 @@ int LuaPlayer::hide_fields(lua_State* L) {
 		lua_pop(L, 1);
 	}
 
-	return 0;
-}
-
-// TODO(GunChleoc): Savegame compatibility - remove after Build 21.
-int LuaPlayer::reveal_scenario(lua_State* L) {
-	if (get_game(L).get_ipl()->player_number() != player_number())
-		report_error(L, "Can only be called for interactive player!");
-
-	std::string scenario_name = luaL_checkstring(L, 2);
-
-	std::map<std::string, std::string> legacy_map{
-	   {"frisians02", "fri02.wmf"},    {"frisians01", "fri01.wmf"},
-	   {"atlanteans01", "atl01.wmf"},  {"empiretut04", "emp04.wmf"},
-	   {"empiretut03", "emp03.wmf"},   {"empiretut02", "emp02.wmf"},
-	   {"empiretut01", "emp01.wmf"},   {"barbariantut02", "bar02.wmf"},
-	   {"barbariantut01", "bar01.wmf"}};
-
-	if (legacy_map.count(scenario_name)) {
-		Profile campvis(kCampVisFile.c_str());
-		campvis.pull_section("scenarios").set_bool(legacy_map[scenario_name].c_str(), true);
-		campvis.write(kCampVisFile.c_str(), false);
-	}
-
-	return 0;
-}
-
-// TODO(GunChleoc): Savegame compatibility - remove after Build 21.
-int LuaPlayer::reveal_campaign(lua_State*) {
-	// Do nothing
 	return 0;
 }
 

@@ -66,12 +66,14 @@ end
 
 return {
    func = function(tribename, immovablename)
-      set_textdomain("tribes_encyclopedia")
+      push_textdomain("tribes_encyclopedia")
       local tribe = wl.Game():get_tribe_description(tribename)
       local immovable_description = wl.Game():get_immovable_description(immovablename)
-      return {
+      local r = {
          title = immovable_description.descname,
          text = immovable_help_string(tribe, immovable_description)
       }
+      pop_textdomain()
+      return r
    end
 }

@@ -1143,18 +1143,11 @@ const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	return Bob::Loader::get_task(name);
 }
 
-void Ship::Loader::load(FileRead& fr, uint8_t pw) {
+void Ship::Loader::load(FileRead& fr, uint8_t /* packet_version */) {
 	Bob::Loader::load(fr);
-	packet_version_ = pw;
-
 	// Economy
-	// TODO(Nordfriese): Savegame compatibility
 	ware_economy_serial_ = fr.unsigned_32();
-	worker_economy_serial_ = packet_version_ >= 10 ?
-	                            fr.unsigned_32() :
-	                            ware_economy_serial_ == kInvalidSerial ?
-	                            kInvalidSerial :
-	                            mol().get_economy_savegame_compatibility(ware_economy_serial_);
+	worker_economy_serial_ = fr.unsigned_32();
 
 	// The state the ship is in
 	ship_state_ = static_cast<ShipStates>(fr.unsigned_8());
@@ -1188,28 +1181,9 @@ void Ship::Loader::load(FileRead& fr, uint8_t pw) {
 	}
 
 	shipname_ = fr.c_string();
-
-	// TODO(Nordfriese): Savegame compatibility
-	capacity_ = packet_version_ >= 11 ? fr.unsigned_32() : std::numeric_limits<uint32_t>::max();
-
+	capacity_ = fr.unsigned_32();
 	lastdock_ = fr.unsigned_32();
-
-	if (packet_version_ >= 12 || packet_version_ < 9) {
-		// This is how we do it now, and how we did it in build20 as well
-		destination_ = fr.unsigned_32();
-	} else {
-		// …and this is how we did it for some months between b20 and b21.
-		// TODO(Nordfriese): Remove when we break savegame compatibility
-		const uint32_t nr_dest = fr.unsigned_32();
-		destination_ = 0;
-		for (uint32_t i = 0; i < nr_dest; ++i) {
-			const uint32_t s = fr.unsigned_32();
-			fr.unsigned_32();
-			if (i == 0) {
-				destination_ = s;
-			}
-		}
-	}
+	destination_ = fr.unsigned_32();
 
 	items_.resize(fr.unsigned_32());
 	for (ShippingItem::Loader& item_loader : items_) {
@@ -1258,10 +1232,7 @@ void Ship::Loader::load_finish() {
 	// restore the  ship id and name
 	ship.shipname_ = shipname_;
 
-	// TODO(Nordfriese): Savegame compatibility
-	ship.capacity_ = capacity_ == std::numeric_limits<uint32_t>::max() ?
-	                    ship.descr().get_default_capacity() :
-	                    capacity_;
+	ship.capacity_ = capacity_;
 
 	// if the ship is on an expedition, restore the expedition specific data
 	if (expedition_) {
@@ -1288,8 +1259,7 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 	try {
 		// The header has been peeled away by the caller
 		uint8_t const packet_version = fr.unsigned_8();
-		// TODO(Nordfriese): Savegame compatibility
-		if (packet_version >= 8 && packet_version <= kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersion) {
 			try {
 				const ShipDescr* descr = nullptr;
 				// Removing this will break the test suite

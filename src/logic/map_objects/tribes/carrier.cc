@@ -555,11 +555,9 @@ void Carrier::Loader::load(FileRead& fr) {
 
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
-		// TODO(GunChleoc): Remove savegame compatibility after Build 21.
-		if (packet_version <= kCurrentPacketVersion && packet_version >= 1) {
+		if (packet_version == kCurrentPacketVersion) {
 			Carrier& carrier = get<Carrier>();
-			// TODO(GunChleoc): std::max is for savegame compatibility. Remove after Build 21.
-			carrier.promised_pickup_to_ = std::max(-1, fr.signed_32());
+			carrier.promised_pickup_to_ = fr.signed_32();
 		} else {
 			throw UnhandledVersionError("Carrier", packet_version, kCurrentPacketVersion);
 		}

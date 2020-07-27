@@ -6,9 +6,9 @@
 -- needed before a game is loaded or the editor has been started.
 
 dirname = path.dirname(__file__)
-set_textdomain("tribes")
+push_textdomain("tribes")
 
-return {
+local r = {
    -- Basic information for the Barbarian tribe
    {
       name = "barbarians",
@@ -93,3 +93,5 @@ return {
       }
    }
 }
+pop_textdomain()
+return r
