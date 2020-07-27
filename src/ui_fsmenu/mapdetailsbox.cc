@@ -1,7 +1,5 @@
 #include "ui_fsmenu/mapdetailsbox.h"
-#include <io/profile.h>
 
-#include "logic/game_settings.h"
 #include "map_io/map_loader.h"
 
 MapDetailsBox::MapDetailsBox(
@@ -55,6 +53,13 @@ MapDetailsBox::~MapDetailsBox() {
 void MapDetailsBox::update_from_savegame(GameSettingsProvider* settings) {
 	const GameSettings& game_settings = settings->settings();
 
+	select_map_.set_visible(settings->can_change_map());
+	select_map_.set_enabled(settings->can_change_map());
+
+	show_map_description_savegame(game_settings);
+	show_map_name(game_settings);
+}
+void MapDetailsBox::show_map_description_savegame(const GameSettings& game_settings) {
 	std::string infotext = _("Saved players are:");
 
 	for (uint8_t i = 0; i < game_settings.players.size(); ++i) {
@@ -64,7 +69,6 @@ void MapDetailsBox::update_from_savegame(GameSettingsProvider* settings) {
 		if (current_player.state == PlayerSettings::State::kClosed) {
 			infotext += ":\n    ";
 			infotext += (boost::format("<%s>") % _("closed")).str();
-			;
 			continue;
 		}
 
@@ -96,45 +100,23 @@ void MapDetailsBox::update_from_savegame(GameSettingsProvider* settings) {
 			}
 		}
 	}
-	set_map_description_text(infotext);
-	{
-		// Translate the map's name
-		const char* nomap = _("(no map)");
-		i18n::Textdomain td("maps");
-		map_name_.set_text(game_settings.mapname.size() != 0 ? _(game_settings.mapname) : nomap);
-	}
+	map_description_.set_text(infotext);
 }
 
 void MapDetailsBox::update(GameSettingsProvider* settings, Widelands::Map& map) {
 	const GameSettings& game_settings = settings->settings();
-	{
-		// Translate the map's name
-		const char* nomap = _("(no map)");
-		i18n::Textdomain td("maps");
-		map_name_.set_text(game_settings.mapname.size() != 0 ? _(game_settings.mapname) : nomap);
-	}
 
 	select_map_.set_visible(settings->can_change_map());
 	select_map_.set_enabled(settings->can_change_map());
 
+	show_map_name(game_settings);
 	show_map_description(map, settings);
 }
-
-void MapDetailsBox::set_select_map_action(std::function<void()> action) {
-	select_map_.sigclicked.connect(action);
-}
-void MapDetailsBox::force_new_dimensions(float scale,
-                                         uint32_t standard_element_width,
-                                         uint32_t standard_element_height) {
-	title_.set_font_scale(scale);
-	map_name_.set_font_scale(scale);
-	map_name_.set_fixed_width(standard_element_width - standard_element_height);
-	select_map_.set_desired_size(standard_element_height, standard_element_height);
-	map_description_.set_desired_size(0, 4 * standard_element_height);
-	UI::Box::layout();
-}
-void MapDetailsBox::set_map_description_text(const std::string& text) {
-	map_description_.set_text(text);
+void MapDetailsBox::show_map_name(const GameSettings& game_settings) {
+	// Translate the map's name
+	const char* nomap = _("(no map)");
+	i18n::Textdomain td("maps");
+	map_name_.set_text(game_settings.mapname.size() != 0 ? _(game_settings.mapname) : nomap);
 }
 void MapDetailsBox::show_map_description(Widelands::Map& map, GameSettingsProvider* settings) {
 	const GameSettings& game_settings = settings->settings();
@@ -156,4 +138,21 @@ void MapDetailsBox::show_map_description(Widelands::Map& map, GameSettingsProvid
 	infotext += map.get_hint();
 
 	map_description_.set_text(infotext);
+}
+
+void MapDetailsBox::set_select_map_action(std::function<void()> action) {
+	select_map_.sigclicked.connect(action);
+}
+void MapDetailsBox::force_new_dimensions(float scale,
+                                         uint32_t standard_element_width,
+                                         uint32_t standard_element_height) {
+	title_.set_font_scale(scale);
+	map_name_.set_font_scale(scale);
+	map_name_.set_fixed_width(standard_element_width - standard_element_height);
+	select_map_.set_desired_size(standard_element_height, standard_element_height);
+	map_description_.set_desired_size(0, 4 * standard_element_height);
+	UI::Box::layout();
+}
+void MapDetailsBox::set_map_description_text(const std::string& text) {
+	map_description_.set_text(text);
 }

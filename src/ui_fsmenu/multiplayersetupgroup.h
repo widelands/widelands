@@ -49,7 +49,10 @@ struct MultiPlayerSetupGroup : public UI::Box {
 	                      uint32_t padding);
 	~MultiPlayerSetupGroup() override;
 
-	void force_new_dimensions(float scale, uint32_t max_width, uint32_t standard_element_height);
+	void force_new_dimensions(float scale,
+	                          uint32_t max_width,
+	                          uint32_t max_height,
+	                          uint32_t standard_element_height);
 
 private:
 	void update();
@@ -64,6 +67,8 @@ private:
 	UI::Box clientbox, playerbox, scrollable_playerbox;
 	UI::Textarea clients_, players_;
 	int32_t buth_;
+
+	bool needs_scrolling_;
 
 	std::map<std::string, const Image*> tribepics_;
 	std::map<std::string, std::string> tribenames_;

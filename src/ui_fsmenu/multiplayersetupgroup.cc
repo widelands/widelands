@@ -244,13 +244,11 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		init_dropdown_.selected.connect([this]() { set_init(); });
 		team_dropdown_.selected.connect([this]() { set_team(); });
 
-		add_space(0);
 		add(&player);
 		add(&type_dropdown_);
 		add(&tribes_dropdown_);
 		add(&init_dropdown_);
 		add(&team_dropdown_);
-		add_space(0);
 
 		subscriber_ =
 		   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& note) {
@@ -674,9 +672,10 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 	clientbox.set_scrolling(true);
 
 	add(&clientbox);
-	add_inf_space();
-	add(&playerbox);
-
+	add_space(8 * padding);
+	//	add_inf_space();
+	add(&playerbox, Resizing::kFillSpace);
+	//	add_inf_space();
 	playerbox.add(&players_, Resizing::kAlign, UI::Align::kCenter);
 	playerbox.add_space(padding);
 
@@ -685,9 +684,9 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
 		multi_player_player_groups.at(i) =
 		   new MultiPlayerPlayerGroup(&scrollable_playerbox, playerbox.get_w() - UI::Scrollbar::kSize,
 		                              buth_, i, settings, npsb.get());
-		scrollable_playerbox.add(multi_player_player_groups.at(i));
+		scrollable_playerbox.add(multi_player_player_groups.at(i), Resizing::kFillSpace);
 	}
-	playerbox.add_space(0);
+
 	playerbox.add(&scrollable_playerbox, Resizing::kExpandBoth);
 
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& s) {
@@ -728,11 +727,13 @@ void MultiPlayerSetupGroup::update() {
 			multi_player_player_groups.at(i)->set_visible(should_be_visible);
 		}
 	}
-	scrollable_playerbox.set_scrolling(number_of_players * buth_ > scrollable_playerbox.get_h());
+	needs_scrolling_ = number_of_players * buth_ > scrollable_playerbox.get_h();
+	scrollable_playerbox.set_scrolling(needs_scrolling_);
 }
 
 void MultiPlayerSetupGroup::draw(RenderTarget& dst) {
-	int32_t H = scrollable_playerbox.get_y() + scrollable_playerbox.get_h();
+	const int32_t H = scrollable_playerbox.get_y() + scrollable_playerbox.get_h();
+	//	log("scrollable box w: %d\n", scrollable_playerbox.get_w());
 	for (MultiPlayerPlayerGroup* player_group : multi_player_player_groups) {
 		if (player_group->is_visible()) {
 			if (player_group->get_y() < 0 && player_group->get_y() > -player_group->get_h()) {
@@ -754,14 +755,20 @@ void MultiPlayerSetupGroup::draw(RenderTarget& dst) {
 
 void MultiPlayerSetupGroup::force_new_dimensions(float scale,
                                                  uint32_t max_width,
+                                                 uint32_t max_height,
                                                  uint32_t standard_element_height) {
 	players_.set_font_scale(scale);
 	clients_.set_font_scale(scale);
 	for (auto& multiPlayerClientGroup : multi_player_client_groups) {
 		multiPlayerClientGroup->force_new_dimensions(scale, standard_element_height);
 	}
+	playerbox.set_max_size(max_width - clientbox.get_w(), max_height);
+
 	for (auto& multiPlayerPlayerGroup : multi_player_player_groups) {
 		multiPlayerPlayerGroup->force_new_dimensions(
-		   scale, max_width - clientbox.get_w(), standard_element_height);
+		   scale,
+		   needs_scrolling_ ? scrollable_playerbox.get_w() - UI::Scrollbar::kSize :
+		                      scrollable_playerbox.get_w() /*max_width - clientbox.get_w()*/,
+		   standard_element_height);
 	}
 }

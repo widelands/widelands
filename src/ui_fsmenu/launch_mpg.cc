@@ -155,7 +155,9 @@ void FullscreenMenuLaunchMPG::layout() {
 	   Vector2i(get_w() - 10 * padding_ - standard_element_height_, 10 * padding_));
 
 	mpsg_.set_max_size(0, get_h() / 2);
-	mpsg_.force_new_dimensions(scale_factor(), get_w() * 1 / 2, standard_element_height_);
+	log("max_width: %d\n", get_w() * 1 / 2);
+	mpsg_.force_new_dimensions(
+	   scale_factor(), get_w() * 1 / 2, get_h() / 2, standard_element_height_);
 	chat_.force_new_dimensions(scale_factor(), get_w() * 1 / 2, get_h() / 4);
 
 	FullscreenMenuLaunchGame::layout();
@@ -261,7 +263,6 @@ void FullscreenMenuLaunchMPG::select_saved_game() {
 		nr_players_ = s.get_safe_int("nr_players");
 
 		settings_->set_map(mapname, filename, nr_players_, true);
-		log("nr_players_: %d, players.size=%d\n", nr_players_, settings_->settings().players.size());
 
 		// Check for sendability
 		if (g_fs->is_directory(filename)) {

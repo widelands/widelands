@@ -1,6 +1,7 @@
 #ifndef WL_UI_FSMENU_MAPDETAILSBOX_H
 #define WL_UI_FSMENU_MAPDETAILSBOX_H
 
+#include "logic/game_settings.h"
 #include "logic/map.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
@@ -37,6 +38,8 @@ private:
 	UI::MultilineTextarea map_description_;
 
 	void show_map_description(Widelands::Map& map, GameSettingsProvider* settings);
+	void show_map_description_savegame(const GameSettings& game_settings);
+	void show_map_name(const GameSettings& game_settings);
 };
 
 #endif  // WL_UI_FSMENU_MAPDETAILSBOX_H
