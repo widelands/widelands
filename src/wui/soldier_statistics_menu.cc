@@ -165,7 +165,7 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 	vbox->add(hbox2, UI::Box::Resizing::kFullSize);
 	vbox->add(hbox3, UI::Box::Resizing::kFullSize);
 	vbox->add(hbox4, UI::Box::Resizing::kFullSize);
-	tabs->add("detail", _("By Level"), vbox);
+	tabs->add("detail", _("By Attribute"), vbox);
 
 	set_center_panel(tabs);
 	update();
