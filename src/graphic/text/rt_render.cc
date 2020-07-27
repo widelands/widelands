@@ -1732,7 +1732,7 @@ public:
 	// Handle attributes that are in rt, but not in div.
 	void handle_unique_attributes() override {
 		const AttrMap& a = tag_.attrs();
-		WordSpacerNode::show_spaces(a.has("db_show_spaces") ? a["db_show_spaces"].get_bool() : 0);
+		WordSpacerNode::show_spaces(a.has("db_show_spaces") ? a["db_show_spaces"].get_bool() : false);
 		trim_spaces_ = (a.has("keep_spaces") ? !a["keep_spaces"].get_bool() : true);
 		shrink_to_fit_ = shrink_to_fit_ && trim_spaces_;
 	}

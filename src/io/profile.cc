@@ -667,7 +667,7 @@ void Profile::read(char const* const filename, char const* const global_section,
 		char* p = nullptr;
 		Section* s = nullptr;
 
-		bool reading_multiline = 0;
+		bool reading_multiline = false;
 		std::string data;
 		char* key = nullptr;
 		bool translate_line = false;

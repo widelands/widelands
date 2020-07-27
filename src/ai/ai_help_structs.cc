@@ -332,7 +332,7 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
    : coords(fc),
      field_info_expiration(20000),
      preferred(false),
-     enemy_nearby(0),
+     enemy_nearby(false),
      enemy_accessible_(false),
      enemy_wh_nearby(false),
      unowned_land_nearby(0),
