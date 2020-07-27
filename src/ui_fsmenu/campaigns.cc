@@ -124,10 +124,10 @@ Campaigns::Campaigns() {
 			scenario_data->playable = scenario_data->path != "dummy.wmf";
 			scenario_data->visible = false;
 			campaign_data->scenarios.push_back(
-			   std::unique_ptr<ScenarioData>(std::move(scenario_data)));
+			   std::unique_ptr<ScenarioData>(scenario_data));
 		}
 
-		campaigns_.push_back(std::unique_ptr<CampaignData>(std::move(campaign_data)));
+		campaigns_.push_back(std::unique_ptr<CampaignData>(campaign_data));
 	}
 
 	// Finally, calculate the visibility

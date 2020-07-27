@@ -498,7 +498,7 @@ uint16_t Layout::fit_line(const uint16_t w_max,  // Maximum width of line
 			if (rv->back()->halign() == UI::Align::kCenter) {
 				remaining_space /= 2;  // Otherwise, we align right
 			}
-			for (std::shared_ptr<RenderNode> node : *rv) {
+			for (const auto& node : *rv) {
 				node->set_x(node->x() + remaining_space);
 			}
 		}
@@ -506,7 +506,7 @@ uint16_t Layout::fit_line(const uint16_t w_max,  // Maximum width of line
 
 	// Find the biggest hotspot of the truly remaining non-floating items.
 	uint16_t cur_line_hotspot = 0;
-	for (std::shared_ptr<RenderNode> node : *rv) {
+	for (const auto& node : *rv) {
 		if (node->get_floating() != RenderNode::Floating::kNone) {
 			continue;
 		}
@@ -538,7 +538,7 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
 		int line_height = 0;
 		int line_start = INFINITE_WIDTH;
 		// Compute real line height and width, taking into account alignment
-		for (std::shared_ptr<RenderNode> n : nodes_in_line) {
+		for (const auto& n : nodes_in_line) {
 			if (n->get_floating() == RenderNode::Floating::kNone) {
 				line_height = std::max(line_height, biggest_hotspot - n->hotspot_y() + n->height());
 				n->set_y(h_ + biggest_hotspot - n->hotspot_y());
@@ -550,7 +550,7 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
 		}
 
 		// Go over again and adjust position for VALIGN
-		for (std::shared_ptr<RenderNode> n : nodes_in_line) {
+		for (const auto& n : nodes_in_line) {
 			int space = line_height - n->height();
 			if (!space || n->valign() == UI::Align::kBottom) {
 				continue;
@@ -898,7 +898,7 @@ public:
 			   new UI::RenderedRect(Recti(margin_.left, margin_.top, w_, h_), background_color_);
 			// Size is automatically adjusted in RenderedText while blitting, so no need to call
 			// check_size() here.
-			rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(std::move(bg_rect)));
+			rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(bg_rect));
 		}
 
 		// Draw background image (tiling)
@@ -906,10 +906,10 @@ public:
 			UI::RenderedRect* bg_rect =
 			   new UI::RenderedRect(Recti(margin_.left, margin_.top, w_, h_), background_image_);
 			check_size(bg_rect->width(), bg_rect->height());
-			rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(std::move(bg_rect)));
+			rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(bg_rect));
 		}
 
-		for (std::shared_ptr<RenderNode> n : nodes_to_render_) {
+		for (const auto& n : nodes_to_render_) {
 			const auto& renderme = n->render(texture_cache);
 			for (auto& rendered_rect : renderme->rects) {
 				if (rendered_rect->was_visited()) {
@@ -1121,7 +1121,7 @@ void TagHandler::make_text_nodes(const std::string& txt,
 				bool word_is_bidi = i18n::has_rtl_character(word.c_str());
 				word = i18n::make_ligatures(word.c_str());
 				if (word_is_bidi || i18n::has_rtl_character(previous_word.c_str())) {
-					for (std::shared_ptr<RenderNode> spacer : spacer_nodes) {
+					for (const auto& spacer : spacer_nodes) {
 						it = text_nodes.insert(text_nodes.begin(), spacer);
 					}
 					if (word_is_bidi) {
@@ -1133,7 +1133,7 @@ void TagHandler::make_text_nodes(const std::string& txt,
 					if (it < text_nodes.end()) {
 						++it;
 					}
-					for (std::shared_ptr<RenderNode> spacer : spacer_nodes) {
+					for (const auto& spacer : spacer_nodes) {
 						it = text_nodes.insert(it, spacer);
 						if (it < text_nodes.end()) {
 							++it;
@@ -1146,7 +1146,7 @@ void TagHandler::make_text_nodes(const std::string& txt,
 			previous_word = word;
 		}
 		// Add the nodes to the end of the previously existing nodes.
-		for (std::shared_ptr<RenderNode> node : text_nodes) {
+		for (const auto& node : text_nodes) {
 			nodes.push_back(node);
 		}
 
@@ -1519,7 +1519,7 @@ public:
 		// Determine the required width by the width of the widest subnode
 		uint16_t width_first_subnode = INFINITE_WIDTH;
 		uint16_t widest_subnode = 0;
-		for (std::shared_ptr<RenderNode> n : subnodes) {
+		for (const auto& n : subnodes) {
 			if (n->width() >= INFINITE_WIDTH) {
 				continue;
 			}
@@ -1577,7 +1577,7 @@ public:
 		}
 
 		// Collect all tags from children
-		for (std::shared_ptr<RenderNode> rn : nodes_to_render) {
+		for (const auto& rn : nodes_to_render) {
 			for (const Reference& r : rn->get_references()) {
 				render_node_->add_reference(
 				   rn->x() + r.dim.x, rn->y() + r.dim.y, r.dim.w, r.dim.h, r.ref);

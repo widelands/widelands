@@ -729,8 +729,8 @@ int LuaPlayer::get_buildings(lua_State* L) {
 			cidx = 1;
 		}
 
-		for (uint32_t l = 0; l < vec.size(); ++l) {
-			if (vec[l].is_constructionsite) {
+		for (const auto& stats: vec) {
+			if (stats.is_constructionsite) {
 				continue;
 			}
 

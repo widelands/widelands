@@ -60,8 +60,8 @@ public:
 
 		// destructor would be empty
 
-		Value& operator=(Value);
-		Value& operator=(Value&& other);
+		Value& operator=(Value) noexcept;
+		Value& operator=(Value&& other) noexcept;
 
 		char const* get_name() const {
 			return name_.c_str();

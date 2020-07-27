@@ -91,7 +91,7 @@ inline void from_item(const RenderQueue::Item& item, BlitProgram::Arguments* arg
 }
 
 inline void from_item(const RenderQueue::Item& item, DrawLineProgram::Arguments* args) {
-	args->vertices = std::move(item.line_arguments.vertices);
+	args->vertices = item.line_arguments.vertices;
 }
 
 // Batches up as many items from 'items' that have the same 'program_id'.

@@ -72,13 +72,13 @@ Section::Value::Value(Section::Value&& o) : Value() {
 	swap(*this, o);
 }
 
-Section::Value& Section::Value::operator=(Section::Value other) {
+Section::Value& Section::Value::operator=(Section::Value other) noexcept {
 	using std::swap;
 	swap(*this, other);
 	return *this;
 }
 
-Section::Value& Section::Value::operator=(Section::Value&& other) {
+Section::Value& Section::Value::operator=(Section::Value&& other) noexcept {
 	using std::swap;
 	swap(*this, other);
 	return *this;
