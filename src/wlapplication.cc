@@ -294,8 +294,9 @@ WLApplication* WLApplication::the_singleton = nullptr;
  */
 // TODO(unknown): Return a reference - the return value is always valid anyway
 WLApplication* WLApplication::get(int const argc, char const** argv) {
-	if (the_singleton == nullptr)
+	if (the_singleton == nullptr) {
 		the_singleton = new WLApplication(argc, argv);
+	}
 	return the_singleton;
 }
 
@@ -644,9 +645,10 @@ void WLApplication::handle_input(InputCallback const* cb) {
 		case SDL_MOUSEMOTION:
 			mouse_position_ = Vector2i(ev.motion.x, ev.motion.y);
 
-			if ((ev.motion.xrel || ev.motion.yrel) && cb && cb->mouse_move)
+			if ((ev.motion.xrel || ev.motion.yrel) && cb && cb->mouse_move) {
 				cb->mouse_move(
 				   ev.motion.state, ev.motion.x, ev.motion.y, ev.motion.xrel, ev.motion.yrel);
+			}
 			break;
 		case SDL_QUIT:
 			should_die_ = true;
@@ -700,9 +702,9 @@ void WLApplication::handle_mousebutton(SDL_Event& ev, InputCallback const* cb) {
 	}
 #endif
 
-	if (ev.type == SDL_MOUSEBUTTONDOWN && cb && cb->mouse_press)
+	if (ev.type == SDL_MOUSEBUTTONDOWN && cb && cb->mouse_press) {
 		cb->mouse_press(ev.button.button, ev.button.x, ev.button.y);
-	else if (ev.type == SDL_MOUSEBUTTONUP) {
+	} else if (ev.type == SDL_MOUSEBUTTONUP) {
 		if (cb && cb->mouse_release) {
 			if (ev.button.button == SDL_BUTTON_MIDDLE && faking_middle_mouse_button_) {
 				cb->mouse_release(SDL_BUTTON_LEFT, ev.button.x, ev.button.y);
@@ -959,10 +961,11 @@ void WLApplication::parse_commandline(int const argc, char const* const* const a
 		}
 
 		// Are we looking at an option at all?
-		if (opt.compare(0, 2, "--"))
+		if (opt.compare(0, 2, "--")) {
 			throw ParameterError();
-		else
+		} else {
 			opt.erase(0, 2);  //  yes. remove the leading "--", just for cosmetics
+		}
 
 		// Look if this option has a value
 		std::string::size_type const pos = opt.find('=');
@@ -1038,51 +1041,62 @@ void WLApplication::handle_commandline_parameters() {
 
 	if (commandline_.count("editor")) {
 		filename_ = commandline_["editor"];
-		if (filename_.size() && *filename_.rbegin() == '/')
+		if (filename_.size() && *filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
+		}
 		game_type_ = EDITOR;
 		commandline_.erase("editor");
 	}
 
 	if (commandline_.count("replay")) {
-		if (game_type_ != NONE)
+		if (game_type_ != NONE) {
 			throw wexception("replay can not be combined with other actions");
+		}
 		filename_ = commandline_["replay"];
-		if (filename_.size() && *filename_.rbegin() == '/')
+		if (filename_.size() && *filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
+		}
 		game_type_ = REPLAY;
 		commandline_.erase("replay");
 	}
 
 	if (commandline_.count("loadgame")) {
-		if (game_type_ != NONE)
+		if (game_type_ != NONE) {
 			throw wexception("loadgame can not be combined with other actions");
+		}
 		filename_ = commandline_["loadgame"];
-		if (filename_.empty())
+		if (filename_.empty()) {
 			throw wexception("empty value of command line parameter --loadgame");
-		if (*filename_.rbegin() == '/')
+		}
+		if (*filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
+		}
 		game_type_ = LOADGAME;
 		commandline_.erase("loadgame");
 	}
 
 	if (commandline_.count("scenario")) {
-		if (game_type_ != NONE)
+		if (game_type_ != NONE) {
 			throw wexception("scenario can not be combined with other actions");
+		}
 		filename_ = commandline_["scenario"];
-		if (filename_.empty())
+		if (filename_.empty()) {
 			throw wexception("empty value of command line parameter --scenario");
-		if (*filename_.rbegin() == '/')
+		}
+		if (*filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
+		}
 		game_type_ = SCENARIO;
 		commandline_.erase("scenario");
 	}
 	if (commandline_.count("script")) {
 		script_to_run_ = commandline_["script"];
-		if (script_to_run_.empty())
+		if (script_to_run_.empty()) {
 			throw wexception("empty value of command line parameter --script");
-		if (*script_to_run_.rbegin() == '/')
+		}
+		if (*script_to_run_.rbegin() == '/') {
 			script_to_run_.erase(script_to_run_.size() - 1);
+		}
 		commandline_.erase("script");
 	}
 
@@ -1224,8 +1238,9 @@ void WLApplication::mainmenu_tutorial() {
 	}
 	try {
 		// Load selected tutorial-map-file
-		if (filename.size())
+		if (filename.size()) {
 			game.run_splayer_scenario_direct(filename.c_str(), "");
+		}
 	} catch (const std::exception& e) {
 		log("Fatal exception: %s\n", e.what());
 		emergency_save(game);
@@ -1249,16 +1264,19 @@ void WLApplication::mainmenu_singleplayer() {
 		case FullscreenMenuBase::MenuTarget::kBack:
 			return;
 		case FullscreenMenuBase::MenuTarget::kNewGame:
-			if (new_game())
+			if (new_game()) {
 				return;
+			}
 			break;
 		case FullscreenMenuBase::MenuTarget::kLoadGame:
-			if (load_game())
+			if (load_game()) {
 				return;
+			}
 			break;
 		case FullscreenMenuBase::MenuTarget::kCampaign:
-			if (campaign_game())
+			if (campaign_game()) {
 				return;
+			}
 			break;
 		default:
 			NEVER_HERE();
@@ -1304,12 +1322,13 @@ void WLApplication::mainmenu_multiplayer() {
 			FullscreenMenuInternetLobby ns(playername.c_str(), password.c_str(), registered);
 			ns.run<FullscreenMenuBase::MenuTarget>();
 
-			if (InternetGaming::ref().logged_in())
+			if (InternetGaming::ref().logged_in()) {
 				// logout of the metaserver
 				InternetGaming::ref().logout();
-			else
+			} else {
 				// Reset InternetGaming for clean login
 				InternetGaming::ref().reset();
+			}
 		} else {
 			// reinitalise in every run, else graphics look strange
 			FullscreenMenuNetSetupLAN ns;
@@ -1473,8 +1492,9 @@ bool WLApplication::campaign_game() {
 	}
 	try {
 		// Load selected campaign-map-file
-		if (filename.size())
+		if (filename.size()) {
 			return game.run_splayer_scenario_direct(filename.c_str(), "");
+		}
 	} catch (const std::exception& e) {
 		log("Fatal exception: %s\n", e.what());
 		emergency_save(game);
@@ -1491,8 +1511,9 @@ void WLApplication::replay() {
 	if (filename_.empty()) {
 		SinglePlayerGameSettingsProvider sp;
 		FullscreenMenuLoadGame rm(game, &sp, true);
-		if (rm.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kBack)
+		if (rm.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kBack) {
 			return;
+		}
 
 		filename_ = rm.filename();
 	}
@@ -1640,8 +1661,9 @@ bool WLApplication::redirect_output(std::string path) {
 		GetModuleFileName(nullptr, module_name, MAX_PATH);
 		path = module_name;
 		size_t pos = path.find_last_of("/\\");
-		if (pos == std::string::npos)
+		if (pos == std::string::npos) {
 			return false;
+		}
 		path.resize(pos);
 #else
 		path = ".";
@@ -1650,13 +1672,15 @@ bool WLApplication::redirect_output(std::string path) {
 	std::string stdoutfile = path + "/stdout.txt";
 	/* Redirect standard output */
 	FILE* newfp = freopen(stdoutfile.c_str(), "w", stdout);
-	if (!newfp)
+	if (!newfp) {
 		return false;
+	}
 	/* Redirect standard error */
 	std::string stderrfile = path + "/stderr.txt";
 	newfp = freopen(stderrfile.c_str(), "w", stderr);
-	if (!newfp)
+	if (!newfp) {
 		return false;
+	}
 
 	/* Line buffered */
 	setvbuf(stdout, nullptr, _IOLBF, BUFSIZ);
