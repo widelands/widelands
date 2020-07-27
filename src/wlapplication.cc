@@ -910,7 +910,7 @@ void WLApplication::init_language() {
 		SDL_ShowSimpleMessageBox(
 		   SDL_MESSAGEBOX_ERROR, "'locale' directory not valid",
 		   std::string(i18n::get_localedir() + "\nis not a directory. Please fix this.").c_str(),
-		   NULL);
+		   nullptr);
 		log_err("%s is not a directory. Please fix this.\n", i18n::get_localedir().c_str());
 		exit(1);
 	}
