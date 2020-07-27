@@ -68,12 +68,12 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 					icons_all_.push_back(icon3);
 					icons_all_.push_back(icon4);
 					labels_all_.push_back(txt);
-					const std::string tooltip = (boost::format("%s<br>%s<br>%s<br>%s")
-						% (boost::format(_("Health: %u")) % health).str()
-						% (boost::format(_("Attack: %u")) % attack).str()
-						% (boost::format(_("Defense: %u")) % defense).str()
-						% (boost::format(_("Evade: %u")) % evade).str()
-					).str();
+					const std::string tooltip = (boost::format("%s<br>%s<br>%s<br>%s") %
+					                             (boost::format(_("Health: %u")) % health).str() %
+					                             (boost::format(_("Attack: %u")) % attack).str() %
+					                             (boost::format(_("Defense: %u")) % defense).str() %
+					                             (boost::format(_("Evade: %u")) % evade).str())
+					                               .str();
 					txt->set_tooltip(tooltip);
 					txt->set_handle_mouse(true);
 					icon1->set_tooltip(tooltip);
