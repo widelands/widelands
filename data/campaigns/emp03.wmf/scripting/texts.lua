@@ -626,7 +626,7 @@ diary_page_5 = {
 }
 
 function diary_page_6(first_message, missing)
-   set_textdomain("scenario_emp03.wmf")
+   push_textdomain("scenario_emp03.wmf")
    local text = ""
    if first_message then
    -- TRANSLATORS: Lutius - Diary
@@ -643,10 +643,12 @@ function diary_page_6(first_message, missing)
    -- TRANSLATORS: Lutius - Diary
       text = _([[Finally, we have discovered the last piece of our shrine. Now we can reassemble it to worship our god. Praise Neptune!]])
    end
-   return {
+   local r = {
       title=_"Artifact Found",
       body= lutius(_"Diary of Lutius", text),
       posy=1,
       w=550,
    }
+   pop_textdomain()
+   return r
 end

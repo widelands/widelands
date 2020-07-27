@@ -10,7 +10,7 @@ include "scripting/set.lua"
 -- ==========
 -- Constants
 -- ==========
-set_textdomain("mp_scenario_smugglers.wmf")
+push_textdomain("mp_scenario_smugglers.wmf")
 
 game = wl.Game()
 map = game.map

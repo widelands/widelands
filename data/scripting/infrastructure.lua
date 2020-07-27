@@ -151,7 +151,7 @@ end
 --    :returns: The building created
 
 function place_building_in_region(plr, building, fields, gargs)
-   set_textdomain("widelands")
+   push_textdomain("widelands")
    local idx
    local f
    local args = gargs or {}
@@ -174,6 +174,7 @@ function place_building_in_region(plr, building, fields, gargs)
       p(_([[Some of your starting buildings didn’t have enough room and weren’t built. You are at a disadvantage with this; consider restarting this map with a fair starting condition.]])),
       {popup=true, heading=_"Not enough space"}
    )
+   pop_textdomain()
 end
 
 
