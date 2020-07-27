@@ -90,19 +90,4 @@ void MapObjectLoader::load_finish_game(Game& g) {
 	}
 }
 
-constexpr Serial kEconomySavegameCompatibilityPrefix = std::numeric_limits<Serial>::max() / 2;
-Serial MapObjectLoader::get_economy_savegame_compatibility(Serial ware_economy) const {
-	if (ware_economy >= kEconomySavegameCompatibilityPrefix) {
-		throw GameDataError(
-		   "We are sorry, but this savegame is not compatible with the current Widelands "
-		   "version any more because it contains an economy with the unbelievably high serial %u",
-		   ware_economy);
-	}
-	const Serial worker_economy = kEconomySavegameCompatibilityPrefix + ware_economy;
-	log("Savegame compatibility: Splitting worker economy %u off from old-style economy %u\n",
-	    worker_economy, ware_economy);
-	assert(worker_economy > ware_economy);
-	return worker_economy;
-}
-
 }  // namespace Widelands

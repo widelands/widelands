@@ -60,12 +60,8 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 		return *new CmdSetWarePriority();
 	case QueueCommandTypes::kSetWareTargetQuantity:
 		return *new CmdSetWareTargetQuantity();
-	case QueueCommandTypes::kResetWareTargetQuantity:
-		return *new CmdResetWareTargetQuantity();
 	case QueueCommandTypes::kSetWorkerTargetQuantity:
 		return *new CmdSetWorkerTargetQuantity();
-	case QueueCommandTypes::kResetWorkerTargetQuantity:
-		return *new CmdResetWorkerTargetQuantity();
 	case QueueCommandTypes::kSetInputMaxFill:
 		return *new CmdSetInputMaxFill();
 	case QueueCommandTypes::kMessageSetStatusRead:
