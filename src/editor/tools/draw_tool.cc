@@ -34,10 +34,9 @@ EditorDrawTool::handle_click_impl(const Widelands::NodeAndTriangle<Widelands::Co
                                   EditorActionArgs* args,
                                   Widelands::Map* /* map */) {
 
-	for (std::list<EditorToolAction*>::iterator i = args->draw_actions.begin();
-	     i != args->draw_actions.end(); ++i) {
-		(*i)->tool.handle_click(static_cast<EditorTool::ToolIndex>((*i)->i), (*i)->center,
-		                        (*i)->parent, (*i)->args, &((*i)->map));
+	for (EditorToolAction* action : args->draw_actions) {
+		action->tool.handle_click(static_cast<EditorTool::ToolIndex>(action->i), action->center,
+		                        action->parent, action->args, &action->map);
 	}
 	return args->draw_actions.size();
 }

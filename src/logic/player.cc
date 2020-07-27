@@ -352,17 +352,17 @@ void Player::AiPersistentState::initialize() {
 	assert(neuron_functs.size() == Widelands::Player::AiPersistentState::kNeuronPoolSize);
 	assert(f_neurons.size() == Widelands::Player::AiPersistentState::kFNeuronPoolSize);
 	assert(magic_numbers.size() == Widelands::Player::AiPersistentState::kMagicNumbersSize);
-	for (size_t i = 0; i < neuron_weights.size(); ++i) {
-		neuron_weights.at(i) = 0;
+	for (int8_t& weight : neuron_weights) {
+		weight = 0;
 	}
-	for (size_t i = 0; i < neuron_functs.size(); ++i) {
-		neuron_functs.at(i) = 0;
+	for (int8_t& funct : neuron_functs) {
+		funct = 0;
 	}
-	for (size_t i = 0; i < f_neurons.size(); ++i) {
-		f_neurons.at(i) = 0;
+	for (uint32_t& neuron : f_neurons) {
+		neuron = 0;
 	}
-	for (size_t i = 0; i < magic_numbers.size(); ++i) {
-		magic_numbers.at(i) = 0;
+	for (int16_t& number : magic_numbers) {
+		number = 0;
 	}
 	remaining_basic_buildings.clear();
 

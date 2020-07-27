@@ -327,9 +327,7 @@ void Bob::signal_handled() {
 void Bob::send_signal(Game& game, char const* const sig) {
 	assert(*sig);  //  use set_signal() for signal removal
 
-	for (uint32_t i = 0; i < stack_.size(); ++i) {
-		State& state = stack_[i];
-
+	for (auto& state : stack_) {
 		if (state.task->signal_immediate) {
 			(this->*state.task->signal_immediate)(game, state, sig);
 		}
@@ -1087,12 +1085,12 @@ void Bob::Loader::load(FileRead& fr) {
 
 				if (fr.unsigned_8()) {
 					uint32_t anims[6];
-					for (int j = 0; j < 6; ++j) {
+					for (uint32_t& anim : anims) {
 						std::string dir_animname = fr.c_string();
 						if (bob.descr().is_animation_known(dir_animname)) {
-							anims[j] = bob.descr().get_animation(dir_animname, &bob);
+							anim = bob.descr().get_animation(dir_animname, &bob);
 						} else {
-							anims[j] = bob.descr().main_animation();
+							anim = bob.descr().main_animation();
 							log_warn(
 							   "Unknown directional animation '%s' for bob '%s', using main animation "
 							   "instead.\n",
@@ -1198,9 +1196,7 @@ void Bob::save(EditorGameBase& eg, MapObjectSaver& mos, FileWrite& fw) {
 	fw.c_string(signal_);
 
 	fw.unsigned_32(stack_.size());
-	for (unsigned int i = 0; i < stack_.size(); ++i) {
-		const State& state = stack_[i];
-
+	for (const auto& state : stack_) {
 		fw.c_string(state.task->name);
 		fw.signed_32(state.ivar1);
 		fw.signed_32(state.ivar2);

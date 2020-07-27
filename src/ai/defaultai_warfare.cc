@@ -69,9 +69,9 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		map.find_immovables(game(), Area<FCoords>(f, (vision + 3 < 13) ? 13 : vision + 3),
 		                    &immovables, FindImmovableAttackTarget());
 
-		for (uint32_t j = 0; j < immovables.size(); ++j) {
-			if (upcast(MilitarySite const, bld, immovables.at(j).object)) {
-				const PlayerNumber opn = bld->owner().player_number();
+		for (const auto& imm_found : immovables) {
+			if (upcast(Widelands::MilitarySite const, bld, imm_found.object)) {
+				const Widelands::PlayerNumber opn = bld->owner().player_number();
 				if (player_statistics.get_is_enemy(opn)) {
 					assert(opn != pn);
 					player_statistics.set_last_time_seen(gametime, opn);
@@ -83,8 +83,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				}
 			}
 			// TODO(hessenfarmer): we should only include attackable warehouses in the list
-			if (upcast(Warehouse const, wh, immovables.at(j).object)) {
-				const PlayerNumber opn = wh->owner().player_number();
+			if (upcast(Widelands::Warehouse const, wh, imm_found.object)) {
+				const Widelands::PlayerNumber opn = wh->owner().player_number();
 				if (player_statistics.get_is_enemy(opn)) {
 					assert(opn != pn);
 					player_statistics.set_last_time_seen(gametime, opn);
@@ -129,10 +129,9 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	const bool strong_enough = player_statistics.strong_enough(pn);
 
 	// removing sites we saw too long ago
-	for (std::map<uint32_t, EnemySiteObserver>::iterator site = enemy_sites.begin();
-	     site != enemy_sites.end(); ++site) {
-		if (site->second.last_time_seen + 20 * 60 * 1000 < gametime) {
-			disappeared_sites.push_back(site->first);
+	for (const auto& observer : enemy_sites) {
+		if (observer.second.last_time_seen + 20 * 60 * 1000 < gametime) {
+			disappeared_sites.push_back(observer.first);
 		}
 	}
 	while (!disappeared_sites.empty()) {
@@ -140,24 +139,22 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		disappeared_sites.pop_back();
 	}
 
-	for (std::map<uint32_t, EnemySiteObserver>::iterator site = enemy_sites.begin();
-	     site != enemy_sites.end(); ++site) {
-
-		assert(site->second.last_time_attacked <= gametime);
+	for (auto& observer : enemy_sites) {
+		assert(observer.second.last_time_attacked <= gametime);
 		// Do not attack too soon
-		if (std::min<uint32_t>(site->second.attack_counter, 10) * 20 * 1000 >
-		    (gametime - site->second.last_time_attacked)) {
+		if (std::min<uint32_t>(observer.second.attack_counter, 10) * 20 * 1000 >
+		    (gametime - observer.second.last_time_attacked)) {
 			continue;
 		}
 
 		++count;
 		// we test max 12 sites and prefer ones tested more then 1 min ago
-		if (((site->second.last_tested + (enemysites_check_delay_ * 1000)) > gametime && count > 4) ||
+		if (((observer.second.last_tested + (enemysites_check_delay_ * 1000)) > gametime && count > 4) ||
 		    count > 12) {
 			continue;
 		}
 
-		site->second.last_tested = gametime;
+		observer.second.last_tested = gametime;
 		// resetting some values
 		uint16_t enemy_military_presence_in_region_ = 0;
 		uint16_t enemy_military_sites_in_region_ = 0;
@@ -166,12 +163,12 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		bool is_attackable = false;
 		// we cannot attack unvisible site and there is no other way to find out
 		const bool is_visible =
-		   player_->is_seeing(Map::get_index(Coords::unhash(site->first), map.get_width()));
+		   player_->is_seeing(Widelands::Map::get_index(Widelands::Coords::unhash(observer.first), map.get_width()));
 		uint16_t owner_number = 100;
 
 		// testing if we can attack the building - result is a flag
 		// if we dont get a flag, we remove the building from observers list
-		FCoords f = map.get_fcoords(Coords::unhash(site->first));
+		Widelands::FCoords f = map.get_fcoords(Widelands::Coords::unhash(observer.first));
 
 		Flag* flag = nullptr;
 
@@ -209,54 +206,54 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 			// Site is still there but not visible for us
 			if (!is_visible) {
-				if (site->second.last_time_seen + 20 * 60 * 1000 < gametime) {
+				if (observer.second.last_time_seen + 20 * 60 * 1000 < gametime) {
 					log_dbg_time(
-					   gametime, "site %d not visible for more than 20 minutes\n", site->first);
-					disappeared_sites.push_back(site->first);
+					   gametime, "site %d not visible for more than 20 minutes\n", observer.first);
+					disappeared_sites.push_back(observer.first);
 				}
 				continue;
 			}
 
 			// updating some info
 			// updating info on mines nearby if needed
-			if (site->second.mines_nearby == ExtendedBool::kUnset) {
+			if (observer.second.mines_nearby == ExtendedBool::kUnset) {
 				FindNodeMineable find_mines_spots_nearby(game(), f.field->get_resources());
 				const int32_t minescount =
 				   map.find_fields(game(), Area<FCoords>(f, 6), nullptr, find_mines_spots_nearby);
 				if (minescount > 0) {
-					site->second.mines_nearby = ExtendedBool::kTrue;
+					observer.second.mines_nearby = ExtendedBool::kTrue;
 				} else {
-					site->second.mines_nearby = ExtendedBool::kFalse;
+					observer.second.mines_nearby = ExtendedBool::kFalse;
 				}
 			}
 
-			site->second.is_warehouse = is_warehouse;
+			observer.second.is_warehouse = is_warehouse;
 
 			// can we attack (only sites that conquer are attackable):
 			if (is_attackable) {
 				std::vector<Soldier*> attackers;
 				player_->find_attack_soldiers(*flag, &attackers);
 				if (attackers.empty()) {
-					site->second.attack_soldiers_strength = 0;
+					observer.second.attack_soldiers_strength = 0;
 				} else {
 					int32_t strength = calculate_strength(attackers);
-					site->second.attack_soldiers_strength = strength;
+					observer.second.attack_soldiers_strength = strength;
 					assert(!attackers.empty());
-					site->second.attack_soldiers_competency = strength * 10 / attackers.size();
+					observer.second.attack_soldiers_competency = strength * 10 / attackers.size();
 				}
 			} else {
-				site->second.attack_soldiers_strength = 0;
+				observer.second.attack_soldiers_strength = 0;
 			}
 
-			site->second.defenders_strength = defenders_strength;
+			observer.second.defenders_strength = defenders_strength;
 
-			site->second.score = 0;
+			observer.second.score = 0;
 			const uint16_t enemys_power = player_statistics.get_modified_player_power(owner_number);
 			uint16_t my_to_enemy_power_ratio = 100;
 			if (enemys_power) {
 				my_to_enemy_power_ratio = my_power * 100 / enemys_power;
 			}
-			if (site->second.attack_soldiers_strength > 0 &&
+			if (observer.second.attack_soldiers_strength > 0 &&
 			    !player_statistics.players_in_same_team(pn, owner_number) &&
 			    (my_to_enemy_power_ratio > treshold_ratio)) {
 				uint16_t enemys_power_growth = 10;
@@ -277,10 +274,10 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				unique_serials.clear();
 				// find militarysites near our target (radius 10) to check enemies power in region
 				map.find_immovables(game(),
-				                    Area<FCoords>(map.get_fcoords(Coords::unhash(site->first)), 10),
+				                    Widelands::Area<Widelands::FCoords>(map.get_fcoords(Widelands::Coords::unhash(observer.first)), 10),
 				                    &immovables);
-				for (uint32_t k = 0; k < immovables.size(); ++k) {
-					const BaseImmovable& base_immovable = *immovables.at(k).object;
+				for (const auto& im_found : immovables) {
+					const Widelands::BaseImmovable& base_immovable = *im_found.object;
 
 					if (!unique_serials.insert(base_immovable.serial()).second) {
 						continue;  // serial was not inserted in the set, so this is duplicate
@@ -309,28 +306,28 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 						}
 					}
 				}
-				site->second.enemy_military_presence_in_region = enemy_military_presence_in_region_;
-				site->second.enemy_military_sites_in_region = enemy_military_sites_in_region_;
+				observer.second.enemy_military_presence_in_region = enemy_military_presence_in_region_;
+				observer.second.enemy_military_sites_in_region = enemy_military_sites_in_region_;
 
 				static int16_t inputs[4 * kFNeuronBitSize] = {0};
-				// Reseting values as the variable is static
-				for (int j = 0; j < 4 * kFNeuronBitSize; j++) {
-					inputs[j] = 0;
+				// Resetting values as the variable is static
+				for (int16_t& input : inputs) {
+					input = 0;
 				}
-				inputs[0] = (site->second.attack_soldiers_strength - site->second.defenders_strength) *
+				inputs[0] = (observer.second.attack_soldiers_strength - observer.second.defenders_strength) *
 				            std::abs(management_data.get_military_number_at(114)) / 10;
-				inputs[1] = (site->second.attack_soldiers_strength - site->second.defenders_strength) *
+				inputs[1] = (observer.second.attack_soldiers_strength - observer.second.defenders_strength) *
 				            std::abs(management_data.get_military_number_at(115)) / 10;
 				inputs[2] = (is_warehouse) ? 4 : 0;
 				inputs[3] = (is_warehouse) ? 2 : 0;
-				inputs[4] = (site->second.attack_soldiers_competency > 15) ? 2 : 0;
-				inputs[5] = (site->second.attack_soldiers_competency > 25) ? 4 : 0;
+				inputs[4] = (observer.second.attack_soldiers_competency > 15) ? 2 : 0;
+				inputs[5] = (observer.second.attack_soldiers_competency > 25) ? 4 : 0;
 				inputs[6] =
-				   (2 * site->second.defenders_strength > 3 * site->second.attack_soldiers_strength) ?
+				   (2 * observer.second.defenders_strength > 3 * observer.second.attack_soldiers_strength) ?
 				      -6 :
 				      0;
 				inputs[7] =
-				   (3 * site->second.defenders_strength > 2 * site->second.attack_soldiers_strength) ?
+				   (3 * observer.second.defenders_strength > 2 * observer.second.attack_soldiers_strength) ?
 				      -3 :
 				      0;
 				inputs[8] = (soldier_status_ == SoldiersStatus::kBadShortage ||
@@ -342,8 +339,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				             soldier_status_ == SoldiersStatus::kShortage) ?
 				               -3 :
 				               0;
-				inputs[10] = (site->second.mines_nearby == ExtendedBool::kTrue) ? 3 : -1;
-				inputs[11] = (site->second.mines_nearby == ExtendedBool::kTrue) ? 0 : 0;
+				inputs[10] = (observer.second.mines_nearby == ExtendedBool::kTrue) ? 3 : -1;
+				inputs[11] = (observer.second.mines_nearby == ExtendedBool::kTrue) ? 0 : 0;
 				inputs[12] = (owner_number == persistent_data->last_attacked_player) ? 2 : -2;
 				inputs[13] = (owner_number == persistent_data->last_attacked_player) ? 4 : -4;
 				inputs[14] = (strong_enough) ? 1 : -1;
@@ -398,14 +395,14 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				inputs[39] = (gametime < 30 * 60 * 1000) ? -1 : 0;
 				inputs[40] = (gametime < 35 * 60 * 1000) ? -1 : 0;
 				inputs[41] = (gametime < 40 * 60 * 1000) ? -1 : 0;
-				inputs[42] = (site->second.last_time_attacked + 1 * 60 * 1000 > gametime) ? -3 : 0;
-				inputs[43] = (site->second.last_time_attacked + 30 * 1000 > gametime) ? -1 : 0;
-				inputs[44] = (site->second.last_time_attacked + 2 * 60 * 1000 > gametime) ? -2 : 0;
-				inputs[45] = (site->second.last_time_attacked + 40 * 1000 > gametime) ? -1 : 0;
-				inputs[46] = (site->second.last_time_attacked + 3 * 60 * 1000 > gametime) ? -1 : 0;
-				inputs[47] = (site->second.last_time_attacked + 30 * 1000 > gametime) ? -1 : 0;
-				inputs[48] = (site->second.last_time_attacked + 90 * 1000 > gametime) ? -1 : 0;
-				inputs[49] = (site->second.last_time_attacked + 2 * 60 * 1000 > gametime) ? -1 : 0;
+				inputs[42] = (observer.second.last_time_attacked + 1 * 60 * 1000 > gametime) ? -3 : 0;
+				inputs[43] = (observer.second.last_time_attacked + 30 * 1000 > gametime) ? -1 : 0;
+				inputs[44] = (observer.second.last_time_attacked + 2 * 60 * 1000 > gametime) ? -2 : 0;
+				inputs[45] = (observer.second.last_time_attacked + 40 * 1000 > gametime) ? -1 : 0;
+				inputs[46] = (observer.second.last_time_attacked + 3 * 60 * 1000 > gametime) ? -1 : 0;
+				inputs[47] = (observer.second.last_time_attacked + 30 * 1000 > gametime) ? -1 : 0;
+				inputs[48] = (observer.second.last_time_attacked + 90 * 1000 > gametime) ? -1 : 0;
+				inputs[49] = (observer.second.last_time_attacked + 2 * 60 * 1000 > gametime) ? -1 : 0;
 				inputs[50] = soldier_trained_log.count(gametime);
 				inputs[51] = soldier_trained_log.count(gametime) / 2;
 				inputs[52] = (my_to_enemy_power_ratio - 100) / 50;
@@ -454,90 +451,89 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				              soldier_status_ == SoldiersStatus::kShortage) ?
 				                -2 :
 				                1;
-				inputs[88] = (site->second.attack_soldiers_strength < 2) ? -3 : 0;
-				inputs[89] = (site->second.attack_soldiers_strength < 4) ? -2 : 0;
-				inputs[90] = (site->second.attack_soldiers_strength < 5) ? -3 : 0;
-				inputs[91] = (site->second.attack_soldiers_strength < 7) ? -3 : 0;
-				inputs[92] = (site->second.attack_soldiers_competency < 15) ? -4 : 0;
-				inputs[93] = (site->second.attack_soldiers_competency < 20) ? -2 : 0;
+				inputs[88] = (observer.second.attack_soldiers_strength < 2) ? -3 : 0;
+				inputs[89] = (observer.second.attack_soldiers_strength < 4) ? -2 : 0;
+				inputs[90] = (observer.second.attack_soldiers_strength < 5) ? -3 : 0;
+				inputs[91] = (observer.second.attack_soldiers_strength < 7) ? -3 : 0;
+				inputs[92] = (observer.second.attack_soldiers_competency < 15) ? -4 : 0;
+				inputs[93] = (observer.second.attack_soldiers_competency < 20) ? -2 : 0;
 				inputs[94] = ((gametime - last_attack_time_) < kCampaignDuration) ? +2 : -2;
 				inputs[95] = ((gametime - last_attack_time_) < kCampaignDuration) ? +2 : -2;
 				inputs[98] = -player_statistics.enemies_seen_lately_count(gametime);
-				inputs[99] = (site->second.enemy_military_sites_in_region > 2) ? 2 : 6;
-				inputs[100] = (site->second.enemy_military_sites_in_region > 4) ? 1 : 3;
-				inputs[101] = (site->second.enemy_military_sites_in_region > 5) ? -3 : 0;
-				inputs[102] = (site->second.enemy_military_sites_in_region > 7) ? -6 : -4;
-				inputs[103] = (site->second.enemy_military_presence_in_region > 5) ? 2 : 6;
-				inputs[104] = (site->second.enemy_military_presence_in_region > 10) ? -1 : 1;
-				inputs[105] = (site->second.enemy_military_presence_in_region > 15) ? -6 : -2;
-				inputs[106] = (site->second.attack_soldiers_strength >
-				               2 * site->second.enemy_military_presence_in_region) ?
+				inputs[99] = (observer.second.enemy_military_sites_in_region > 2) ? 2 : 6;
+				inputs[100] = (observer.second.enemy_military_sites_in_region > 4) ? 1 : 3;
+				inputs[101] = (observer.second.enemy_military_sites_in_region > 5) ? -3 : 0;
+				inputs[102] = (observer.second.enemy_military_sites_in_region > 7) ? -6 : -4;
+				inputs[103] = (observer.second.enemy_military_presence_in_region > 5) ? 2 : 6;
+				inputs[104] = (observer.second.enemy_military_presence_in_region > 10) ? -1 : 1;
+				inputs[105] = (observer.second.enemy_military_presence_in_region > 15) ? -6 : -2;
+				inputs[106] = (observer.second.attack_soldiers_strength >
+				               2 * observer.second.enemy_military_presence_in_region) ?
 				                 1 :
 				                 -1;
-				inputs[107] = (site->second.attack_soldiers_strength >
-				               3 * site->second.enemy_military_presence_in_region) ?
+				inputs[107] = (observer.second.attack_soldiers_strength >
+				               3 * observer.second.enemy_military_presence_in_region) ?
 				                 3 :
 				                 0;
-				inputs[108] = (site->second.attack_soldiers_strength >
-				               4 * site->second.enemy_military_presence_in_region) ?
+				inputs[108] = (observer.second.attack_soldiers_strength >
+				               4 * observer.second.enemy_military_presence_in_region) ?
 				                 6 :
 				                 0;
 				inputs[109] =
-				   (site->second.attack_soldiers_strength - site->second.defenders_strength) *
+				   (observer.second.attack_soldiers_strength - observer.second.defenders_strength) *
 				   std::abs(management_data.get_military_number_at(116)) / 15;
 				inputs[110] =
-				   (site->second.attack_soldiers_strength - site->second.defenders_strength) *
+				   (observer.second.attack_soldiers_strength - observer.second.defenders_strength) *
 				   std::abs(management_data.get_military_number_at(30)) / 20;
 
 				// add up all scores according to neuronvalues
-				site->second.score = 0;
+				observer.second.score = 0;
 				for (uint8_t j = 0; j < kFNeuronBitSize; ++j) {
 					if (management_data.f_neuron_pool[47].get_position(j)) {
-						site->second.score += inputs[j];
+						observer.second.score += inputs[j];
 						if (inputs[j] < -10 || inputs[j] > 10) {
 							log_dbg_time(gametime, " pos: %d - value %d\n", j, inputs[j]);
 						}
 					}
 					if (management_data.f_neuron_pool[0].get_position(j)) {
-						site->second.score += inputs[j + kFNeuronBitSize];
+						observer.second.score += inputs[j + kFNeuronBitSize];
 						if (inputs[j + kFNeuronBitSize] < -10 || inputs[j + kFNeuronBitSize] > 10) {
-							log_dbg_time(gametime, " pos: %d - value %d\n", j + kFNeuronBitSize,
-							             inputs[j + kFNeuronBitSize]);
+							log_dbg_time(gametime, " pos: %d - value %d\n", j + kFNeuronBitSize, inputs[j + Widelands::kFNeuronBitSize]);
 						}
 					}
 					if (management_data.f_neuron_pool[16].get_position(j)) {
-						site->second.score += inputs[j + 2 * kFNeuronBitSize];
+						observer.second.score += inputs[j + 2 * kFNeuronBitSize];
 						if (inputs[j + 2 * kFNeuronBitSize] < -10 ||
 						    inputs[j + 2 * kFNeuronBitSize] > 10) {
 							log_dbg_time(gametime, " pos: %d - value %d\n", j + 2 * kFNeuronBitSize,
-							             inputs[j + 2 * kFNeuronBitSize]);
+							    inputs[j + 2 * kFNeuronBitSize]);
 						}
 					}
 					if (management_data.f_neuron_pool[18].get_position(j)) {
-						site->second.score += inputs[j + 3 * kFNeuronBitSize];
+						observer.second.score += inputs[j + 3 * kFNeuronBitSize];
 						if (inputs[j + 3 * kFNeuronBitSize] < -10 ||
 						    inputs[j + 3 * kFNeuronBitSize] > 10) {
 							log_dbg_time(gametime, " pos: %d - value %d\n", j + 3 * kFNeuronBitSize,
-							             inputs[j + 3 * kFNeuronBitSize]);
+							    inputs[j + 3 * kFNeuronBitSize]);
 						}
 					}
 				}
-				site->second.score += (management_data.get_military_number_at(138) +
+				observer.second.score += (management_data.get_military_number_at(138) +
 				                       management_data.get_military_number_at(159)) /
 				                      8;
 			}
 
-			if (site->second.score > 0) {
+			if (observer.second.score > 0) {
 				assert(is_visible);
-				if (site->second.score > best_score) {
-					best_score = site->second.score;
-					best_target = site->first;
+				if (observer.second.score > best_score) {
+					best_score = observer.second.score;
+					best_target = observer.first;
 				}
 			}
 
 		} else {  // we don't have a flag = site does not exist anymore, let's remove the site from
 			       // our observer list
-			disappeared_sites.push_back(site->first);
+			disappeared_sites.push_back(observer.first);
 		}
 	}
 
@@ -894,10 +890,8 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	}
 
 	ts_without_trainers_ = 0;  // zeroing
-	for (std::deque<TrainingSiteObserver>::iterator site = trainingsites.begin();
-	     site != trainingsites.end(); ++site) {
-
-		if (!site->site->can_start_working()) {
+	for (const auto& observer : trainingsites) {
+		if (!observer.site->can_start_working()) {
 			++ts_without_trainers_;
 		}
 	}
@@ -1110,9 +1104,9 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	const uint16_t total_score = scores[0] + scores[1] + scores[2];
 
 	static int32_t inputs[4 * kFNeuronBitSize] = {0};
-	// Reseting values as the variable is static
-	for (int i = 0; i < 4 * kFNeuronBitSize; i++) {
-		inputs[i] = 0;
+	// Resetting values as the variable is static
+	for (int32_t& input : inputs) {
+		input = 0;
 	}
 	inputs[0] = (msites_total < 1) ? 1 : 0;
 	inputs[1] = (msites_total < 2) ? 1 : 0;

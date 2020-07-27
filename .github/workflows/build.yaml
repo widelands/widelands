@@ -24,7 +24,7 @@ jobs:
         mkdir build
         pushd build
         cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
-        python ../utils/run-clang-tidy.py -checks=-*,*braces*,cert*,clang-analyzer*,cppcoreguidelines-pro-type-static-cast-downcast,google*,hicpp-use*,llvm-namespace-comment,performance* > ../clang-tidy.log
+        python ../utils/run-clang-tidy.py -checks=-*,*braces*,cert*,clang-analyzer*,cppcoreguidelines-pro-type-static-cast-downcast,google*,hicpp-use*,llvm-namespace-comment,modernize*,performance* > ../clang-tidy.log
         popd
     - name: Report
       run: utils/check_clang_tidy_results.py clang-tidy.log

@@ -125,13 +125,13 @@ uint32_t Section::Value::get_positive() const {
 }
 
 bool Section::Value::get_bool() const {
-	for (int32_t i = 0; i < TRUE_WORDS; ++i) {
-		if (boost::iequals(value_.get(), trueWords[i])) {
+	for (char const* word : trueWords) {
+		if (boost::iequals(value_.get(), word)) {
 			return true;
 		}
 	}
-	for (int32_t i = 0; i < FALSE_WORDS; ++i) {
-		if (boost::iequals(value_.get(), falseWords[i])) {
+	for (char const* word : falseWords) {
+		if (boost::iequals(value_.get(), word)) {
 			return false;
 		}
 	}

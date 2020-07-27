@@ -366,8 +366,8 @@ uint32_t* MapGenerator::generate_random_value_map(uint32_t const w, uint32_t con
 
 		uint32_t histo[1024];
 
-		for (uint32_t x = 0; x < 1024; ++x) {
-			histo[x] = 0;
+		for (uint32_t& hist : histo) {
+			hist = 0;
 		}
 
 		for (uint32_t x = 0; x < w; ++x) {
@@ -794,11 +794,11 @@ void MapGenerator::create_random_map() {
 		// Take the nearest ones
 		uint32_t min_distance = std::numeric_limits<uint32_t>::max();
 		Coords coords2;
-		for (uint16_t i = 0; i < coords.size(); ++i) {
-			uint32_t test = map_.calc_distance(coords[i], playerstart);
+		for (const auto& c : coords) {
+			uint32_t test = map_.calc_distance(c, playerstart);
 			if (test < min_distance) {
 				min_distance = test;
-				coords2 = coords[i];
+				coords2 = c;
 			}
 		}
 
@@ -1048,8 +1048,8 @@ void UniqueRandomMapInfo::generate_id_string(std::string& mapIdsString_out,
 
 	mapIdsString_out = "";
 	int32_t nums[kMapIdDigits];
-	for (uint32_t ix = 0; ix < kMapIdDigits; ++ix) {
-		nums[ix] = 0;
+	for (int32_t& ix : nums) {
+		ix = 0;
 	}
 
 	// Generate world name hash
@@ -1102,8 +1102,8 @@ void UniqueRandomMapInfo::generate_id_string(std::string& mapIdsString_out,
 	//  Every change in a digit will result in a complete id change
 
 	int32_t xorr = 0x0a;
-	for (uint32_t ix = 0; ix < kMapIdDigits; ++ix) {
-		xorr = xorr ^ nums[ix];
+	for (int32_t ix : nums) {
+		xorr = xorr ^ ix;
 	}
 
 	for (int32_t ix = kMapIdDigits - 1; ix >= 0; --ix) {
@@ -1130,8 +1130,8 @@ uint16_t Widelands::UniqueRandomMapInfo::generate_world_name_hash(const std::str
 	uint16_t hash = 0xa5a5;
 	int32_t posInHash = 0;
 
-	for (size_t idx = 0; idx < name.size(); idx++) {
-		hash ^= static_cast<uint8_t>(name[idx] & 0xff) << posInHash;
+	for (const char& ch : name) {
+		hash ^= static_cast<uint8_t>(ch & 0xff) << posInHash;
 		posInHash ^= 8;
 	}
 

@@ -264,8 +264,8 @@ bool WordWrap::line_fits(const std::string& text, uint32_t safety_margin) const 
 uint32_t WordWrap::width() const {
 	uint32_t calculated_width = 0;
 
-	for (uint32_t line = 0; line < lines_.size(); ++line) {
-		uint32_t linewidth = text_width(lines_[line].text, fontsize_);
+	for (const auto& line : lines_) {
+		uint32_t linewidth = text_width(line.text, fontsize_);
 		if (linewidth > calculated_width) {
 			calculated_width = linewidth;
 		}

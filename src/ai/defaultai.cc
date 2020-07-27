@@ -189,10 +189,10 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, Widelands::AiType cons
 			}
 			break;
 
-		case NoteShip::Action::kWaitingForCommand:
-			for (std::deque<ShipObserver>::iterator i = allships.begin(); i != allships.end(); ++i) {
-				if (i->ship == note.ship) {
-					i->waiting_for_command_ = true;
+		case Widelands::NoteShip::Action::kWaitingForCommand:
+			for (auto& observer :allships) {
+				if (observer.ship == note.ship) {
+					observer.waiting_for_command_ = true;
 					break;
 				}
 			}
@@ -313,9 +313,9 @@ void DefaultAI::think() {
 	std::sort(current_task_queue.begin(), current_task_queue.end());
 
 	// Performing tasks from temporary queue one by one
-	for (uint8_t i = 0; i < current_task_queue.size(); ++i) {
+	for (const auto& task : current_task_queue) {
 
-		due_task = current_task_queue[i].id;
+		due_task = task.id;
 
 		++sched_stat_[static_cast<uint32_t>(due_task)];
 
@@ -1657,8 +1657,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	static std::set<uint32_t> unique_serials;
 	unique_serials.clear();
 
-	for (uint32_t i = 0; i < immovables.size(); ++i) {
-		const BaseImmovable& base_immovable = *immovables.at(i).object;
+	for (const auto& imm_found : immovables) {
+		const Widelands::BaseImmovable& base_immovable = *imm_found.object;
 		if (!unique_serials.insert(base_immovable.serial()).second) {
 			continue;  // serial was not inserted in the set, so this is a duplicate
 		}
@@ -1672,13 +1672,13 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			}
 			// here we identify the buiding (including expected building if constructionsite)
 			// and calculate some statistics about nearby buildings
-			if (player_immovable->descr().type() == MapObjectType::PRODUCTIONSITE) {
+			if (player_immovable->descr().type() == Widelands::MapObjectType::PRODUCTIONSITE) {
 				BuildingObserver& bo = get_building_observer(player_immovable->descr().name().c_str());
-				consider_productionsite_influence(field, immovables.at(i).coords, bo);
-			} else if (upcast(ConstructionSite const, constructionsite, player_immovable)) {
-				const BuildingDescr& target_descr = constructionsite->building();
+				consider_productionsite_influence(field, imm_found.coords, bo);
+			} else if (upcast(Widelands::ConstructionSite const, constructionsite, player_immovable)) {
+				const Widelands::BuildingDescr& target_descr = constructionsite->building();
 				BuildingObserver& bo = get_building_observer(target_descr.name().c_str());
-				consider_productionsite_influence(field, immovables.at(i).coords, bo);
+				consider_productionsite_influence(field, imm_found.coords, bo);
 			}
 		}
 	}
@@ -1694,8 +1694,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	any_unconnected_imm = false;
 	unique_serials.clear();
 
-	for (uint32_t i = 0; i < immovables.size(); ++i) {
-		const BaseImmovable& base_immovable = *immovables.at(i).object;
+	for (const auto& imm_found : immovables) {
+		const Widelands::BaseImmovable& base_immovable = *imm_found.object;
 
 		if (!unique_serials.insert(base_immovable.serial()).second) {
 			continue;  // serial was not inserted in the set, so this is duplicate
@@ -1752,13 +1752,13 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			if (upcast(ConstructionSite const, constructionsite, building)) {
 				const BuildingDescr& target_descr = constructionsite->building();
 
-				if (upcast(MilitarySiteDescr const, target_ms_d, &target_descr)) {
-					const int32_t dist = map.calc_distance(field.coords, immovables.at(i).coords);
+				if (upcast(Widelands::MilitarySiteDescr const, target_ms_d, &target_descr)) {
+					const int32_t dist = map.calc_distance(field.coords, imm_found.coords);
 					const int32_t radius = target_ms_d->get_conquers() + 4;
 
 					if (radius > dist) {
 						field.area_military_capacity += target_ms_d->get_max_number_of_soldiers() / 2 + 1;
-						if (field.coords != immovables.at(i).coords) {
+						if (field.coords != imm_found.coords) {
 							field.military_loneliness *= static_cast<double_t>(dist) / radius;
 						}
 						++field.military_in_constr_nearby;
@@ -1769,8 +1769,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 				any_unconnected_imm = true;
 			}
 
-			if (upcast(MilitarySite const, militarysite, building)) {
-				const int32_t dist = map.calc_distance(field.coords, immovables.at(i).coords);
+			if (upcast(Widelands::MilitarySite const, militarysite, building)) {
+				const int32_t dist = map.calc_distance(field.coords, imm_found.coords);
 				const int32_t radius = militarysite->descr().get_conquers() + 4;
 
 				if (radius > dist) {
@@ -1785,7 +1785,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 						++field.military_stationed;
 					}
 
-					if (field.coords != immovables.at(i).coords) {
+					if (field.coords != imm_found.coords) {
 						field.military_loneliness *= static_cast<double_t>(dist) / radius;
 					}
 				}
@@ -2011,16 +2011,16 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	      -std::abs(management_data.get_military_number_at(159)) :
 	      0;
 
-	for (uint16_t i = 0; i < score_parts_size; i++) {
-		field.military_score_ += score_parts[i];
+	for (const int32_t& part : score_parts) {
+		field.military_score_ += part;
 	}
 
 	if (ai_training_mode_) {
 		if (field.military_score_ < -5000 || field.military_score_ > 2000) {
 			log_dbg_time(
 			   gametime, "Warning field.military_score_ %5d, compounds: ", field.military_score_);
-			for (uint16_t i = 0; i < score_parts_size; i++) {
-				log_dbg_time(gametime, "%d, ", score_parts[i]);
+			for (const int32_t& part : score_parts) {
+				log_dbg_time(gametime, "%d, ", part);
 			}
 			log_dbg_time(gametime, "\n");
 		}
@@ -2091,10 +2091,10 @@ void DefaultAI::update_mineable_field(MineableField& field) {
 void DefaultAI::update_productionsite_stats() {
 
 	// Reset statistics for all buildings
-	for (uint32_t i = 0; i < buildings_.size(); ++i) {
-		buildings_.at(i).current_stats = 0;
-		buildings_.at(i).unoccupied_count = 0;
-		buildings_.at(i).unconnected_count = 0;
+	for (auto& bo : buildings_) {
+		bo.current_stats = 0;
+		bo.unoccupied_count = 0;
+		bo.unconnected_count = 0;
 	}
 
 	// Check all available productionsites
@@ -2151,10 +2151,9 @@ void DefaultAI::update_productionsite_stats() {
 	}
 
 	// Scale statistics down
-	for (uint32_t i = 0; i < buildings_.size(); ++i) {
-		if ((buildings_.at(i).cnt_built - buildings_.at(i).unconnected_count) > 0) {
-			buildings_.at(i).current_stats /=
-			   (buildings_.at(i).cnt_built - buildings_.at(i).unconnected_count);
+	for (auto& bo : buildings_) {
+		if (bo.cnt_built - bo.unconnected_count > 0) {
+			bo.current_stats /= bo.cnt_built - bo.unconnected_count;
 		}
 	}
 }
@@ -2197,12 +2196,11 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 	// We calculate owned buildable spots, of course ignoring ones that are blocked
 	// for now
-	for (std::deque<BuildableField*>::iterator i = buildable_fields.begin();
-	     i != buildable_fields.end(); ++i) {
-		if (blocked_fields.is_blocked((*i)->coords)) {
+	for (const BuildableField* bf : buildable_fields) {
+		if (blocked_fields.is_blocked(bf->coords)) {
 			continue;
 		}
-		++spots_avail.at((*i)->coords.field->nodecaps() & BUILDCAPS_SIZEMASK);
+		++spots_avail.at(bf->coords.field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK);
 	}
 
 	spots_ = spots_avail.at(BUILDCAPS_SMALL);
@@ -2260,8 +2258,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 	// Genetic algorithm is used here
 	static bool inputs[2 * kFNeuronBitSize] = {0};
-	for (int i = 0; i < 2 * kFNeuronBitSize; i++) {
-		inputs[i] = 0;
+	for (bool& input : inputs) {
+		input = 0;
 	}
 	inputs[0] = (pow(msites_in_constr(), 2) > militarysites.size() + 2);
 	inputs[1] = !(pow(msites_in_constr(), 2) > militarysites.size() + 2);
@@ -2531,10 +2529,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		}
 	}
 
-	// Calculating actual needness
-	for (uint32_t j = 0; j < buildings_.size(); ++j) {
-		BuildingObserver& bo = buildings_.at(j);
-
+	// Calculating actual neededness
+	for (BuildingObserver& bo : buildings_) {
 		// we check if a previously not buildable Building of the basic economy is buildable again
 		// If so and we don't have basic economy achieved we add readd it to basic buildings list
 		// This should only happen in scenarios via scripting
@@ -2656,10 +2652,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	}
 
 	// first scan all buildable fields for regular buildings
-	for (std::deque<BuildableField*>::iterator i = buildable_fields.begin();
-	     i != buildable_fields.end(); ++i) {
-		BuildableField* const bf = *i;
-
+	for (BuildableField* const bf : buildable_fields) {
 		if (bf->field_info_expiration < gametime) {
 			continue;
 		}
@@ -3149,8 +3142,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					// +1 if any consumers_ are nearby
 					consumers_nearby_count = 0;
 
-					for (size_t k = 0; k < bo.ware_outputs.size(); ++k) {
-						consumers_nearby_count += bf->consumers_nearby.at(bo.ware_outputs.at(k));
+					for (const auto& output : bo.ware_outputs) {
+						consumers_nearby_count += bf->consumers_nearby.at(output);
 					}
 
 					if (consumers_nearby_count > 0) {
@@ -3345,11 +3338,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				}
 
 				// iterating over fields
-				for (std::deque<MineableField*>::iterator j = mineable_fields.begin();
-				     j != mineable_fields.end(); ++j) {
-
-					MineableField* const mf = *j;
-
+				for (MineableField* const mf : mineable_fields) {
 					if (mf->field_info_expiration <= gametime) {
 						continue;
 					}
@@ -5344,9 +5333,9 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			}
 
 			static int16_t inputs[kFNeuronBitSize] = {0};
-			// Reseting values as the variable is static
-			for (int i = 0; i < kFNeuronBitSize; i++) {
-				inputs[i] = 0;
+			// Resetting values as the variable is static
+			for (int16_t& input : inputs) {
+				input = 0;
 			}
 			inputs[0] = (bo.max_needed_preciousness == 0) ? -1 : 0;
 			inputs[1] = (bo.max_needed_preciousness > 0) ? 2 : 0;
@@ -5437,9 +5426,9 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			static int16_t tmp_target = 2;
 			tmp_target = 2;
 			static int16_t inputs[2 * kFNeuronBitSize] = {0};
-			// Reseting values as the variable is static
-			for (int i = 0; i < 2 * kFNeuronBitSize; i++) {
-				inputs[i] = 0;
+			// Resetting values as the variable is static
+			for (int16_t& input : inputs) {
+				input = 0;
 			}
 
 			inputs[0] = (persistent_data->trees_around_cutters < 10) * 2;
@@ -5669,8 +5658,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 			static int16_t inputs[kFNeuronBitSize] = {0};
 			// Reseting values as the variable is static
-			for (int i = 0; i < kFNeuronBitSize; i++) {
-				inputs[i] = 0;
+			for (int16_t& input : inputs) {
+				input = 0;
 			}
 			inputs[0] = (gametime < 15 * 60 * 1000) ? -2 : 0;
 			inputs[1] = (gametime < 30 * 60 * 1000) ? -2 : 0;
@@ -5735,9 +5724,9 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		} else if (bo.max_needed_preciousness > 0) {
 
 			static int16_t inputs[4 * kFNeuronBitSize] = {0};
-			// Reseting values as the variable is static
-			for (int i = 0; i < 4 * kFNeuronBitSize; i++) {
-				inputs[i] = 0;
+			// Resetting values as the variable is static
+			for (int16_t& input : inputs) {
+				input = 0;
 			}
 			inputs[0] = (bo.total_count() <= 1) ?
 			               std::abs(management_data.get_military_number_at(110)) / 10 :
@@ -6155,12 +6144,12 @@ void DefaultAI::consider_productionsite_influence(BuildableField& field,
 		++field.space_consumers_nearby;
 	}
 
-	for (size_t i = 0; i < bo.inputs.size(); ++i) {
-		++field.consumers_nearby.at(bo.inputs.at(i));
+	for (const Widelands::DescriptionIndex& i : bo.inputs) {
+		++field.consumers_nearby.at(i);
 	}
 
-	for (size_t i = 0; i < bo.ware_outputs.size(); ++i) {
-		++field.producers_nearby.at(bo.ware_outputs.at(i));
+	for (const Widelands::DescriptionIndex& i : bo.ware_outputs) {
+		++field.producers_nearby.at(i);
 	}
 	if (bo.has_collected_map_resource()) {
 		++field.collecting_producers_nearby.at(bo.get_collected_map_resource());
@@ -6178,10 +6167,10 @@ void DefaultAI::consider_productionsite_influence(BuildableField& field,
 }
 
 /// \returns the economy observer containing \arg economy
-EconomyObserver* DefaultAI::get_economy_observer(Economy& economy) {
-	for (std::deque<EconomyObserver*>::iterator i = economies.begin(); i != economies.end(); ++i) {
-		if (&(*i)->economy == &economy) {
-			return *i;
+EconomyObserver* DefaultAI::get_economy_observer(Widelands::Economy& economy) {
+	for (EconomyObserver* eco : economies) {
+		if (&eco->economy == &economy) {
+			return eco;
 		}
 	}
 
@@ -6336,11 +6325,11 @@ void DefaultAI::out_of_resources_site(const ProductionSite& site) {
 
 	const uint32_t gametime = game().get_gametime();
 
-	// we must identify which mine matches the productionsite a note reffers to
-	for (std::deque<ProductionSiteObserver>::iterator i = mines_.begin(); i != mines_.end(); ++i) {
-		if (i->site == &site) {
-			if (i->no_resources_since > gametime) {
-				i->no_resources_since = gametime;
+	// we must identify which mine matches the productionsite a note refers to
+	for (auto& mine : mines_) {
+		if (mine.site == &site) {
+			if (mine.no_resources_since > gametime) {
+				mine.no_resources_since = gametime;
 			}
 			break;
 		}
@@ -6924,8 +6913,7 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 		             "Buildings", "work.", "const.", "unocc.", "uncon.", "needed", "prec.", "pprio",
 		             "stock", "targ.");
 	}
-	for (uint32_t j = 0; j < buildings_.size(); ++j) {
-		BuildingObserver& bo = buildings_.at(j);
+	for (BuildingObserver& bo : buildings_) {
 		if ((bo.total_count() > 0 || bo.new_building == BuildingNecessity::kNeeded ||
 		     bo.new_building == BuildingNecessity::kForced ||
 		     bo.new_building == BuildingNecessity::kNeededPending ||

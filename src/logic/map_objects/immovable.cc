@@ -773,10 +773,10 @@ bool Immovable::construct_remaining_buildcost(Game& /* game */, Buildcost* build
 	}
 
 	const Buildcost& total = descr().buildcost();
-	for (Buildcost::const_iterator it = total.begin(); it != total.end(); ++it) {
-		uint32_t delivered = d->delivered[it->first];
-		if (delivered < it->second) {
-			(*buildcost)[it->first] = it->second - delivered;
+	for (const auto& item : total) {
+		uint32_t delivered = d->delivered[item.first];
+		if (delivered < item.second) {
+			(*buildcost)[item.first] = item.second - delivered;
 		}
 	}
 
@@ -869,8 +869,8 @@ void PlayerImmovable::set_economy(Economy* const e, WareWorker type) {
 
 	(type == wwWARE ? ware_economy_ : worker_economy_) = e;
 
-	for (uint32_t i = 0; i < workers_.size(); ++i) {
-		workers_[i]->set_economy(e, type);
+	for (Worker* worker : workers_) {
+		worker->set_economy(e, type);
 	}
 }
 

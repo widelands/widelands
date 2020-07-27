@@ -251,8 +251,8 @@ void FullscreenMenuLaunchSPG::update(bool map_was_changed) {
 	}
 
 	// update the player description groups
-	for (uint32_t i = 0; i < kMaxPlayers; ++i) {
-		players_[i]->update();
+	for (PlayerDescriptionGroup* player : players_) {
+		player->update();
 	}
 }
 
