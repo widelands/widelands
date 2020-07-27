@@ -74,7 +74,9 @@ struct Box : public Panel {
 		items_.clear();
 	}
 
-	Scrollbar* get_scrollbar() { return scrollbar_.get(); }
+	Scrollbar* get_scrollbar() {
+		return scrollbar_.get();
+	}
 	void set_scrollbar_style(UI::PanelStyle);
 
 protected:

@@ -84,7 +84,11 @@ private:
 };
 
 struct SuggestedTeamsEntry : public UI::Panel {
-	SuggestedTeamsEntry(MainMenuMapOptions*, UI::Panel*, const Widelands::Map&, unsigned w, Widelands::SuggestedTeamLineup);
+	SuggestedTeamsEntry(MainMenuMapOptions*,
+	                    UI::Panel*,
+	                    const Widelands::Map&,
+	                    unsigned w,
+	                    Widelands::SuggestedTeamLineup);
 	~SuggestedTeamsEntry() override {
 	}
 
@@ -92,8 +96,12 @@ struct SuggestedTeamsEntry : public UI::Panel {
 	void draw(RenderTarget&) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 
-	const Widelands::SuggestedTeamLineup& team() const { return team_; }
-	Widelands::SuggestedTeamLineup& team() { return team_; }
+	const Widelands::SuggestedTeamLineup& team() const {
+		return team_;
+	}
+	Widelands::SuggestedTeamLineup& team() {
+		return team_;
+	}
 
 private:
 	const Widelands::Map& map_;

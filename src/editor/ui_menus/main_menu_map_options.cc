@@ -38,39 +38,40 @@ inline EditorInteractive& MainMenuMapOptions::eia() {
 
 constexpr unsigned kSuggestedTeamsUnitSize = 24;
 
-SuggestedTeamsEntry::SuggestedTeamsEntry(MainMenuMapOptions* mmmo, UI::Panel* parent, const Widelands::Map& map, unsigned w, Widelands::SuggestedTeamLineup t)
-: UI::Panel(parent, 0, 0, w, kSuggestedTeamsUnitSize, _("Click player to remove")),
-map_(map),
-team_(t),
-delete_(this, "delete", 0, 0, kSuggestedTeamsUnitSize, kSuggestedTeamsUnitSize,
-	    UI::ButtonStyle::kWuiSecondary,
-	    _("Delete"),
-	    _("Delete this suggested team lineup")) {
+SuggestedTeamsEntry::SuggestedTeamsEntry(MainMenuMapOptions* mmmo,
+                                         UI::Panel* parent,
+                                         const Widelands::Map& map,
+                                         unsigned w,
+                                         Widelands::SuggestedTeamLineup t)
+   : UI::Panel(parent, 0, 0, w, kSuggestedTeamsUnitSize, _("Click player to remove")),
+     map_(map),
+     team_(t),
+     delete_(this,
+             "delete",
+             0,
+             0,
+             kSuggestedTeamsUnitSize,
+             kSuggestedTeamsUnitSize,
+             UI::ButtonStyle::kWuiSecondary,
+             _("Delete"),
+             _("Delete this suggested team lineup")) {
 	for (size_t index = 0; index < team_.size(); ++index) {
 		dropdowns_.push_back(create_dropdown(index));
 	}
 
-	delete_.sigclicked.connect([this, mmmo]() {
-		mmmo->delete_suggested_team(this);
-	});
+	delete_.sigclicked.connect([this, mmmo]() { mmmo->delete_suggested_team(this); });
 
 	update();
 }
 
 UI::Dropdown<Widelands::PlayerNumber>* SuggestedTeamsEntry::create_dropdown(size_t index) {
-	UI::Dropdown<Widelands::PlayerNumber>* dd = new UI::Dropdown<Widelands::PlayerNumber>(this, std::to_string(index),
-	         0,
-	         index * kSuggestedTeamsUnitSize,
-	         kSuggestedTeamsUnitSize,
-	         8,
-	         0,
-	         _("+"),
-	         UI::DropdownType::kPictorialMenu,
-	         UI::PanelStyle::kWui,
-	         UI::ButtonStyle::kWuiSecondary);
+	UI::Dropdown<Widelands::PlayerNumber>* dd = new UI::Dropdown<Widelands::PlayerNumber>(
+	   this, std::to_string(index), 0, index * kSuggestedTeamsUnitSize, kSuggestedTeamsUnitSize, 8,
+	   0, _("+"), UI::DropdownType::kPictorialMenu, UI::PanelStyle::kWui,
+	   UI::ButtonStyle::kWuiSecondary);
 	for (size_t i = 0; i < map_.get_nrplayers(); ++i) {
 		dd->add(map_.get_scenario_player_name(i + 1), i,
-	         playercolor_image(i, "images/players/player_position_menu.png"));
+		        playercolor_image(i, "images/players/player_position_menu.png"));
 	}
 	dd->set_tooltip(_("Add a player to this team"));
 	dd->selected.connect([this, dd]() {
@@ -170,7 +171,7 @@ void SuggestedTeamsEntry::draw(RenderTarget& r) {
 	for (size_t row = 0; row < team_.size(); ++row) {
 		for (size_t col = 0; col < team_[row].size(); ++col) {
 			r.blit(Vector2i((col + 1) * kSuggestedTeamsUnitSize, row * kSuggestedTeamsUnitSize),
-					playercolor_image(team_[row][col], "images/players/player_position_menu.png"));
+			       playercolor_image(team_[row][col], "images/players/player_position_menu.png"));
 		}
 	}
 }
@@ -227,10 +228,15 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
                          UI::DropdownType::kTextual,
                          UI::PanelStyle::kWui,
                          UI::ButtonStyle::kWuiSecondary),
-     new_suggested_team_(&teams_box_, "new_suggested_team", 0, 0, max_w_, kSuggestedTeamsUnitSize,
-	    UI::ButtonStyle::kWuiSecondary,
-	    _("Add lineup"),
-	    _("Add another suggested team lineup")),
+     new_suggested_team_(&teams_box_,
+                         "new_suggested_team",
+                         0,
+                         0,
+                         max_w_,
+                         kSuggestedTeamsUnitSize,
+                         UI::ButtonStyle::kWuiSecondary,
+                         _("Add lineup"),
+                         _("Add another suggested team lineup")),
      registry_(registry) {
 
 	tab_box_.set_size(max_w_, get_inner_h() - labelh_ - 2 * padding_);
@@ -302,7 +308,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	inner_teams_box_.set_force_scrolling(true);
 	inner_teams_box_.set_scrollbar_style(UI::PanelStyle::kWui);
 	for (const Widelands::SuggestedTeamLineup& team : parent.egbase().map().get_suggested_teams()) {
-		SuggestedTeamsEntry* ste = new SuggestedTeamsEntry(this, &inner_teams_box_, parent.egbase().map(), max_w_ - UI::Scrollbar::kSize, team);
+		SuggestedTeamsEntry* ste = new SuggestedTeamsEntry(
+		   this, &inner_teams_box_, parent.egbase().map(), max_w_ - UI::Scrollbar::kSize, team);
 		inner_teams_box_.add(ste);
 		inner_teams_box_.add_space(kSuggestedTeamsUnitSize);
 		suggested_teams_entries_.push_back(ste);
@@ -316,7 +323,9 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	   (boost::format(ngettext("%u Player", "%u Players", nr_players)) % nr_players).str();
 	teams_box_.add(new UI::Textarea(&teams_box_, 0, 0, max_w_, labelh_, players));
 	new_suggested_team_.sigclicked.connect([this]() {
-		SuggestedTeamsEntry* ste = new SuggestedTeamsEntry(this, &inner_teams_box_, eia().egbase().map(), max_w_ - UI::Scrollbar::kSize, Widelands::SuggestedTeamLineup());
+		SuggestedTeamsEntry* ste =
+		   new SuggestedTeamsEntry(this, &inner_teams_box_, eia().egbase().map(),
+		                           max_w_ - UI::Scrollbar::kSize, Widelands::SuggestedTeamLineup());
 		inner_teams_box_.add(ste);
 		inner_teams_box_.add_space(kSuggestedTeamsUnitSize);
 		suggested_teams_entries_.push_back(ste);
