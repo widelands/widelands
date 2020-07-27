@@ -25,20 +25,10 @@ TribesLegacyLookupTable::TribesLegacyLookupTable()
      workers_{},
      // Wares
      wares_{
-        {"thatch_reed", "reed"},
+        // {"old_name", "new_name"},
      },
      // Immovables
-     immovables_{
-        {"field_medium", "wheatfield_medium"},
-        {"field_small", "wheatfield_small"},
-        {"field_tiny", "wheatfield_tiny"},
-        {"field_ripe", "wheatfield_ripe"},
-        {"field_harvested", "wheatfield_harvested"},
-        {"reed_medium", "reedfield_medium"},
-        {"reed_small", "reedfield_small"},
-        {"reed_tiny", "reedfield_tiny"},
-        {"reed_ripe", "reedfield_ripe"},
-     },
+     immovables_{},
      // Buildings
      buildings_{},
      // Ships

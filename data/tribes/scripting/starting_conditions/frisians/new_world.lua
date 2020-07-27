@@ -4,7 +4,7 @@
 
 include "scripting/starting_conditions.lua"
 
-set_textdomain("tribes")
+push_textdomain("tribes")
 
 init = {
    -- TRANSLATORS: This is the name of a starting condition
@@ -84,4 +84,5 @@ init = {
 end
 }
 
+pop_textdomain()
 return init

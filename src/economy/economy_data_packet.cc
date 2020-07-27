@@ -33,23 +33,14 @@ namespace Widelands {
 void EconomyDataPacket::read(FileRead& fr) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version <= kCurrentPacketVersion && packet_version >= 4) {
+		if (packet_version == kCurrentPacketVersion) {
 			const Serial saved_serial = fr.unsigned_32();
 			if (eco_->serial_ != saved_serial) {
 				throw GameDataError(
 				   "Representative flag/ship has economy serial %d, but the data packet has %d",
 				   eco_->serial_, saved_serial);
 			}
-			// TODO(Nordfriese): Savegame compatibility
-			assert((packet_version == kCurrentPacketVersion) ^ (mol_ != nullptr));
 			Economy* other_eco = nullptr;
-			if (mol_) {
-				assert(eco_->type() == wwWARE);
-				const Serial serial = mol_->get_economy_savegame_compatibility(eco_->serial_);
-				other_eco = eco_->owner().get_economy(serial);
-				assert(other_eco);
-				assert(other_eco->type() == wwWORKER);
-			}
 			assert(Economy::last_economy_serial_ >= (other_eco ? other_eco->serial_ : eco_->serial_));
 			try {
 				const TribeDescr& tribe = eco_->owner().tribe();
@@ -145,7 +136,6 @@ void EconomyDataPacket::read(FileRead& fr) {
 }
 
 void EconomyDataPacket::write(FileWrite& fw) {
-	assert(!mol_);
 	fw.unsigned_16(kCurrentPacketVersion);
 
 	// We save the serial number for sanity checks

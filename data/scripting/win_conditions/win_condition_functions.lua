@@ -288,7 +288,7 @@ function format_remaining_time(remaining_time)
    local h = 0
    local m = 60
    local time = ""
-   set_textdomain("win_conditions")
+   push_textdomain("win_conditions")
 
    if (remaining_time ~= 60) then
       h = math.floor(remaining_time / 60)
@@ -308,7 +308,9 @@ function format_remaining_time(remaining_time)
       time = (ngettext("%1% hour", "%1% hours", h)):bformat(h)
    end
    -- TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-   return p(_"The game will end in %s."):bformat(time)
+   local result = p(_"The game will end in %s."):bformat(time)
+   pop_textdomain()
+   return result
 end
 
 -- RST
