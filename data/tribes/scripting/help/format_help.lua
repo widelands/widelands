@@ -227,7 +227,7 @@ function help_consumed_wares_workers(tribe, building, program_name)
          count = count + 1
          consumed_items_counter = consumed_items_counter + amount
       end
-      local text = localize_list(consumed_itemnames, "or", "tribes_encyclopedia")
+      local text = localize_list(consumed_itemnames, "or")
       if (countlist > 1) then
          text = _"%s and":bformat(text)
       end

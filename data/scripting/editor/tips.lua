@@ -10,8 +10,10 @@ for index, contents in pairs(get_editor_tips()) do
    text = text .. li(contents["text"])
 end
 
-set_textdomain("widelands_editor")
-return {
+push_textdomain("widelands_editor")
+local r = {
   title = _"Tips",
   text = text
 }
+pop_textdomain()
+return r

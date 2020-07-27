@@ -16,6 +16,8 @@ install:
   - cmd: "set PATH=%MINGWPATH%;C:\\msys64\\usr\\bin;C:\\Program Files (x86)\\Inno Setup 5;%PATH%"
   - cmd: "set CC=%MINGWPATH%\\gcc.exe"
   - cmd: "set CXX=%MINGWPATH%\\g++.exe"
+  # Update keyring
+  - cmd: "bash --login -c \"pacman --noconfirm -U http://repo.msys2.org/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz\""
   # Update mirrors
   - cmd: "bash --login -c \"pacman --noconfirm -Sy pacman pacman-mirrors\""
   # deleting broken repo from mirrorlist
@@ -41,7 +43,6 @@ branches:
     - amazons
 
 build_script:
-  # copy modified libintl.h to solve an issue with boost
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
   - cmd: md build
   - cmd: cd build

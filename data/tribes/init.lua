@@ -14,6 +14,8 @@
 -- Also, enhanced/upgraded units need to come before their basic units.
 --
 
+push_textdomain("tribes")
+
 if wl.Game then egbase = wl.Game() else egbase = wl.Editor() end
 function set_loading_message(str, i)
    egbase:set_loading_message(_("Loading tribes: %1$s (%2$d/%3$d)"):bformat(str, i, 17))
@@ -757,3 +759,4 @@ print_loading_message("┗━ took", function()
 
 
 end)
+pop_textdomain()

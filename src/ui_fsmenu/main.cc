@@ -21,6 +21,9 @@
 
 #include "base/i18n.h"
 #include "build_info.h"
+#include "logic/filesystem_constants.h"
+#include "logic/game.h"
+#include "wui/savegameloader.h"
 
 FullscreenMenuMain::FullscreenMenuMain()
    : FullscreenMenuMainMenu(),
@@ -44,6 +47,14 @@ FullscreenMenuMain::FullscreenMenuMain()
                   buth_,
                   UI::ButtonStyle::kFsMenuMenu,
                   _("Single Player")),
+     continue_lastsave(&vbox_,
+                       "continue_lastsave",
+                       0,
+                       0,
+                       butw_,
+                       buth_,
+                       UI::ButtonStyle::kFsMenuMenu,
+                       _("Continue Playing")),
      multiplayer(
         &vbox_, "multi_player", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Multiplayer")),
      replay(&vbox_, "replay", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Watch Replay")),
@@ -78,6 +89,9 @@ FullscreenMenuMain::FullscreenMenuMain()
 	singleplayer.sigclicked.connect([this]() {
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kSinglePlayer);
 	});
+	continue_lastsave.sigclicked.connect([this]() {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kContinueLastsave);
+	});
 	multiplayer.sigclicked.connect([this]() {
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kMultiplayer);
 	});
@@ -100,6 +114,7 @@ FullscreenMenuMain::FullscreenMenuMain()
 	vbox_.add(&playtutorial, UI::Box::Resizing::kFullSize);
 	vbox_.add(&singleplayer, UI::Box::Resizing::kFullSize);
 	vbox_.add(&multiplayer, UI::Box::Resizing::kFullSize);
+	vbox_.add(&continue_lastsave, UI::Box::Resizing::kFullSize);
 	vbox_.add_inf_space();
 	vbox_.add(&replay, UI::Box::Resizing::kFullSize);
 	vbox_.add_inf_space();
@@ -110,6 +125,54 @@ FullscreenMenuMain::FullscreenMenuMain()
 	vbox_.add(&about, UI::Box::Resizing::kFullSize);
 	vbox_.add_inf_space();
 	vbox_.add(&exit, UI::Box::Resizing::kFullSize);
+
+	Widelands::Game game;
+	SinglePlayerLoader loader(game);
+	std::vector<SavegameData> games = loader.load_files(kSaveDir);
+	SavegameData* newest_singleplayer = nullptr;
+	for (SavegameData& data : games) {
+		if (!data.is_directory() && data.is_singleplayer() &&
+		    (newest_singleplayer == nullptr || newest_singleplayer->compare_save_time(data))) {
+			newest_singleplayer = &data;
+		}
+	}
+	if (newest_singleplayer) {
+		filename_for_continue_ = newest_singleplayer->filename;
+		continue_lastsave.set_tooltip(
+		   (boost::format("%s<br>%s<br>%s<br>%s<br>%s<br>%s") %
+		    g_gr->styles()
+		       .font_style(UI::FontStyle::kTooltipHeader)
+		       .as_font_tag(
+		          /* strip leading "save/" and trailing ".wgf" */
+		          filename_for_continue_.substr(
+		             kSaveDir.length() + 1, filename_for_continue_.length() - kSaveDir.length() -
+		                                       kSavegameExtension.length() - 1)) %
+		    (boost::format(_("Map: %s")) % g_gr->styles()
+		                                      .font_style(UI::FontStyle::kTooltip)
+		                                      .as_font_tag(newest_singleplayer->mapname))
+		       .str() %
+		    (boost::format(_("Win Condition: %s")) %
+		     g_gr->styles()
+		        .font_style(UI::FontStyle::kTooltip)
+		        .as_font_tag(newest_singleplayer->wincondition))
+		       .str() %
+		    (boost::format(_("Players: %s")) % g_gr->styles()
+		                                          .font_style(UI::FontStyle::kTooltip)
+		                                          .as_font_tag(newest_singleplayer->nrplayers))
+		       .str() %
+		    (boost::format(_("Gametime: %s")) % g_gr->styles()
+		                                           .font_style(UI::FontStyle::kTooltip)
+		                                           .as_font_tag(newest_singleplayer->gametime))
+		       .str() %
+		    /** TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today, 10:30' */
+		    (boost::format(_("Saved: %s")) % g_gr->styles()
+		                                        .font_style(UI::FontStyle::kTooltip)
+		                                        .as_font_tag(newest_singleplayer->savedatestring))
+		       .str())
+		      .str());
+	} else {
+		continue_lastsave.set_enabled(false);
+	}
 
 	layout();
 }
@@ -131,6 +194,7 @@ void FullscreenMenuMain::layout() {
 
 	playtutorial.set_desired_size(butw_, buth_);
 	singleplayer.set_desired_size(butw_, buth_);
+	continue_lastsave.set_desired_size(butw_, buth_);
 	multiplayer.set_desired_size(butw_, buth_);
 	replay.set_desired_size(butw_, buth_);
 	editor.set_desired_size(butw_, buth_);

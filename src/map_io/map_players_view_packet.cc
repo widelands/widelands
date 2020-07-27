@@ -812,11 +812,6 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 				player->hidden_fields_.insert(
 				   std::make_pair(hidden_file.unsigned_32(), hidden_file.unsigned_16()));
 			}
-		} else if (hidden_file_version < 0) {
-			// TODO(GunChleoc): Savegame compatibility - remove after Build 20
-			log("MapPlayersViewPacket - No hidden fields to read for Player %d - probably an old save "
-			    "file\n",
-			    static_cast<unsigned int>(plnum));
 		} else {
 			throw UnhandledVersionError("MapPlayersViewPacket - Hidden fields file",
 			                            hidden_file_version, kCurrentPacketVersionHidden);

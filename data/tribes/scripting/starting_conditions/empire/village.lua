@@ -4,9 +4,9 @@
 
 include "scripting/infrastructure.lua"
 
-set_textdomain("tribes")
+push_textdomain("tribes")
 
-return {
+local r = {
    -- TRANSLATORS: This is the name of a starting condition
    descname = _ "Village",
    -- TRANSLATORS: This is the tooltip for the "Village" starting condition
@@ -92,3 +92,5 @@ prefilled_buildings(plr, { "empire_headquarters", sf.x, sf.y,
    })
    end
 }
+pop_textdomain()
+return r
