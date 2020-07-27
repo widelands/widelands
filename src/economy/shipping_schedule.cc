@@ -1626,10 +1626,7 @@ void ShippingSchedule::save(const EditorGameBase& egbase,
 	for (const auto& pair : plans_) {
 		fw.unsigned_32(mos.get_object_file_index(*pair.first.get(egbase)));
 
-		// TODO(Nordfriese): Replace with at() when we break savegame compatibility
-		// (can only be not-present in compatibility cases)
-		auto it = last_actual_duration_recalculation_.find(pair.first);
-		fw.unsigned_32(it == last_actual_duration_recalculation_.end() ? 0 : it->second);
+		fw.unsigned_32(last_actual_duration_recalculation_.at(pair.first));
 
 		fw.unsigned_32(pair.second.size());
 		for (const SchedulingState& ss : pair.second) {
@@ -1699,39 +1696,4 @@ void ShippingSchedule::load_pointers(MapObjectLoader& mol) {
 	loader_.reset(nullptr);
 }
 
-// TODO(Nordfriese): DELETE this function when we break savegame compatibility
-void ShippingSchedule::load_finish(EditorGameBase& egbase) {
-	log("Initializing ShippingSchedule from legacy game state. Pray to Lutas that your ships will "
-	    "sail more or less where you want them to go to.\n");
-	assert(!loader_);
-	assert(empty());
-	for (Ship* ship : fleet_.get_ships()) {
-		last_actual_duration_recalculation_[ship] = egbase.get_gametime();
-		ShipPlan& sp = plans_[ship];
-		assert(sp.empty());
-		std::set<Serial> pushed;
-		if (PortDock* pd = ship->get_destination()) {
-			Path path;
-			int32_t d = -1;
-			ship->calculate_sea_route(egbase, *pd, &path);
-			egbase.map().calc_cost(path, &d, nullptr);
-			assert(d >= 0);
-			sp.push_back(SchedulingState(pd, false, d));
-			pushed.insert(pd->serial());
-		}
-		for (const ShippingItem& si : ship->items_) {
-			if (!pushed.count(si.destination_dock_.serial())) {
-				if (PortDock* pd = si.destination_dock_.get(egbase)) {
-					Path path;
-					int32_t d = -1;
-					fleet_.get_path(*sp.back().dock.get(egbase), *pd, path);
-					egbase.map().calc_cost(path, &d, nullptr);
-					assert(d >= 0);
-					sp.push_back(SchedulingState(pd, false, d));
-					pushed.insert(pd->serial());
-				}
-			}
-		}
-	}
-}
 }  // namespace Widelands

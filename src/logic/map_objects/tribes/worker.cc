@@ -997,7 +997,7 @@ bool Worker::run_terraform(Game& game, State& state, const Action&) {
  * tribe uses and adds it to the appropriate fleet.
  *
  */
-// TODO(GunChleoc): Savegame compatibility, remove after Build 22.
+// TODO(GunChleoc): Savegame compatibility, remove after v1.0.
 bool Worker::run_buildferry(Game& game, State& state, const Action&) {
 	game.create_worker(get_position(), owner_->tribe().ferry(), owner_);
 	++state.ivar1;
@@ -3349,13 +3349,9 @@ MapObject::Loader* Worker::load(EditorGameBase& egbase,
                                 MapObjectLoader& mol,
                                 FileRead& fr,
                                 const TribesLegacyLookupTable& lookup_table,
-                                uint8_t packet_version) {
+                                uint8_t /* packet_version */) {
 	try {
 		// header has already been read by caller
-		// Some maps contain worker info, so we need compatibility here.
-		if (packet_version == 1) {
-			fr.c_string();  // Consume tribe name
-		}
 		const std::string name = lookup_table.lookup_worker(fr.c_string());
 
 		const WorkerDescr* descr =

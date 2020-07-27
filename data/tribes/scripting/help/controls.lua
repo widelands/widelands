@@ -1,4 +1,4 @@
-set_textdomain("tribes_encyclopedia")
+push_textdomain("tribes_encyclopedia")
 
 include "scripting/richtext.lua"
 include "txts/help/common_helptexts.lua"
@@ -7,9 +7,7 @@ local toggle_minimap_hotkey = help_toggle_minimap_hotkey()
 local toggle_building_spaces_hotkey = help_toggle_building_spaces_hotkey()
 local toggle_fullscreen_hotkey = help_toggle_fullscreen_hotkey()
 
-set_textdomain("tribes_encyclopedia")
-
-return {
+local r = {
    title = _"Controls",
    text =
          h2(_"Window Control") ..
@@ -148,3 +146,5 @@ return {
                dl(help_format_hotkey("W"), _"Watch the selected ship")
          )
 }
+pop_textdomain()
+return r

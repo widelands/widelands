@@ -603,11 +603,7 @@ MapObject::Loader* WareInstance::load(EditorGameBase& egbase,
 	try {
 		uint8_t packet_version = fr.unsigned_8();
 
-		// Some maps may contain ware info, so we need compatibility here.
-		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
-			if (packet_version == 1) {
-				fr.c_string();  // Consume tribe name
-			}
+		if (packet_version == kCurrentPacketVersion) {
 			const std::string warename = lookup_table.lookup_ware(fr.c_string());
 
 			DescriptionIndex wareindex = egbase.tribes().ware_index(warename);
