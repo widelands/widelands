@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-06-30 14:48+0000\n"
-"PO-Revision-Date: 2020-06-28 16:40+0000\n"
+"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"PO-Revision-Date: 2020-07-02 14:06+0000\n"
 "Last-Translator: Walter Benkel <tromaster@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -232,7 +232,7 @@ msgstr "En su camino a casa para defender el Imperio, el equipo de Lucio fue sor
 
 #: ../../data/campaigns/emp04.wmf/elemental:8
 msgid "Surprise, Surprise!"
-msgstr "¡Qué Sorpresa!"
+msgstr "¡Sorpresa, Sorpresa!"
 
 #: ../../data/campaigns/emp04.wmf/elemental:10
 msgid ""
@@ -516,7 +516,7 @@ msgstr "Estas son las bellas tierras finlandesas de lagos, ríos, bosques antigu
 msgid ""
 "Yellow player has a much easier starting position than the other two; this "
 "map is suited for 1v2."
-msgstr "El jugador amarillo tiene una posición de partido mucho más fácil que los otros dos; este mapa es adecuado para jugar 1 contra 2."
+msgstr "El jugador amarillo tiene una posición inicial mucho más fácil que los otros dos; este mapa es adecuado para jugar 1 contra 2."
 
 #: ../../data/maps/Firegames.wmf/elemental:8
 msgid "Firegames"
@@ -1011,4 +1011,4 @@ msgid ""
 " 4 players’ map, with a black AI to add a complication to the expansion of "
 "the other players, or you can play as a challenge with the black player "
 "against the other 4 (VERY difficult)."
-msgstr "El jugador negro está rodeado en el centro sin recursos, por lo que hay tres maneras diferentes de utilizar este mapa: sin el jugador negro para un partido normal de 4 jugadores, con una IA negra para añadir una complicación a la expansión de los otros jugadores , o se puede jugar como un desafío con el jugador negro contra los otros 4 (muy difícil)."
+msgstr "El jugador negro está rodeado en el centro sin recursos, por lo que hay tres maneras diferentes de utilizar este mapa: sin el jugador negro para un mapa normal de 4 jugadores, con una IA negra para añadir una complicación a la expansión de los otros jugadores, o lo puedes jugar como un desafío con el jugador negro contra los otros 4 (MUY difícil)."

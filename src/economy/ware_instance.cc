@@ -87,10 +87,12 @@ IdleWareSupply::~IdleWareSupply() {
  */
 void IdleWareSupply::set_economy(Economy* const e) {
 	if (economy_ != e) {
-		if (economy_)
+		if (economy_) {
 			economy_->remove_supply(*this);
-		if ((economy_ = e))
+		}
+		if ((economy_ = e)) {
 			economy_->add_supply(*this);
+		}
 	}
 }
 
@@ -100,11 +102,13 @@ void IdleWareSupply::set_economy(Economy* const e) {
 PlayerImmovable* IdleWareSupply::get_position(Game& game) {
 	MapObject* const loc = ware_.get_location(game);
 
-	if (upcast(PlayerImmovable, playerimmovable, loc))
+	if (upcast(PlayerImmovable, playerimmovable, loc)) {
 		return playerimmovable;
+	}
 
-	if (upcast(Worker, worker, loc))
+	if (upcast(Worker, worker, loc)) {
 		return worker->get_location(game);
+	}
 
 	if (upcast(Ship, ship, loc)) {
 		if (PortDock* pd = ship->get_destination()) {
@@ -143,9 +147,9 @@ void IdleWareSupply::get_ware_type(WareWorker& type, DescriptionIndex& ware) con
 }
 
 uint32_t IdleWareSupply::nr_supplies(const Game&, const Request& req) const {
-	if (req.get_type() == wwWARE && req.get_index() == ware_.descr_index())
+	if (req.get_type() == wwWARE && req.get_index() == ware_.descr_index()) {
 		return 1;
-
+	}
 	return 0;
 }
 
@@ -153,11 +157,13 @@ uint32_t IdleWareSupply::nr_supplies(const Game&, const Request& req) const {
  * The ware is already "launched", so we only need to return it.
  */
 WareInstance& IdleWareSupply::launch_ware(Game&, const Request& req) {
-	if (req.get_type() != wwWARE)
+	if (req.get_type() != wwWARE) {
 		throw wexception("IdleWareSupply::launch_ware : called for non-ware request");
-	if (req.get_index() != ware_.descr_index())
+	}
+	if (req.get_index() != ware_.descr_index()) {
 		throw wexception("IdleWareSupply: ware(%u) (type = %i) requested for %i", ware_.serial(),
 		                 ware_.descr_index(), req.get_index());
+	}
 
 	return ware_;
 }
@@ -200,8 +206,9 @@ bool WareInstance::init(EditorGameBase& egbase) {
 
 void WareInstance::cleanup(EditorGameBase& egbase) {
 	// Unlink from our current location, if necessary
-	if (upcast(Flag, flag, location_.get(egbase)))
+	if (upcast(Flag, flag, location_.get(egbase))) {
 		flag->remove_ware(egbase, this);
+	}
 
 	delete supply_;
 	supply_ = nullptr;
@@ -217,18 +224,22 @@ void WareInstance::cleanup(EditorGameBase& egbase) {
  */
 void WareInstance::set_economy(Economy* const e) {
 	assert(!e || e->type() == wwWARE);
-	if (descr_index_ == INVALID_INDEX || economy_ == e)
+	if (descr_index_ == INVALID_INDEX || economy_ == e) {
 		return;
+	}
 
-	if (economy_)
+	if (economy_) {
 		economy_->remove_wares_or_workers(descr_index_, 1);
+	}
 
 	economy_ = e;
-	if (supply_)
+	if (supply_) {
 		supply_->set_economy(e);
+	}
 
-	if (economy_)
+	if (economy_) {
 		economy_->add_wares_or_workers(descr_index_, 1);
+	}
 }
 
 /**
@@ -239,28 +250,31 @@ void WareInstance::set_economy(Economy* const e) {
 void WareInstance::set_location(EditorGameBase& egbase, MapObject* const location) {
 	MapObject* const oldlocation = location_.get(egbase);
 
-	if (oldlocation == location)
+	if (oldlocation == location) {
 		return;
+	}
 
 	location_ = location;
 
 	if (location) {
 		Economy* eco = nullptr;
 
-		if (upcast(Flag const, flag, location))
+		if (upcast(Flag const, flag, location)) {
 			eco = flag->get_economy(wwWARE);
-		else if (upcast(Worker const, worker, location))
+		} else if (upcast(Worker const, worker, location)) {
 			eco = worker->get_economy(wwWARE);
-		else if (upcast(PortDock const, portdock, location))
+		} else if (upcast(PortDock const, portdock, location)) {
 			eco = portdock->get_economy(wwWARE);
-		else if (upcast(Ship const, ship, location))
+		} else if (upcast(Ship const, ship, location)) {
 			eco = ship->get_economy(wwWARE);
-		else
+		} else {
 			throw wexception("WareInstance delivered to bad location %u", location->serial());
+		}
 
 		if (oldlocation && get_economy()) {
-			if (get_economy() != eco)
+			if (get_economy() != eco) {
 				throw wexception("WareInstance::set_location() implies change of economy");
+			}
 		} else {
 			set_economy(eco);
 		}
@@ -289,8 +303,9 @@ void WareInstance::act(Game& game, uint32_t) {
  *       \ref update().
  */
 void WareInstance::update(Game& game) {
-	if (!descr_)  // Upsy, we're not even initialized. Happens on load
+	if (!descr_) {  // Upsy, we're not even initialized. Happens on load
 		return;
+	}
 
 	MapObject* const loc = location_.get(game);
 
@@ -331,8 +346,9 @@ void WareInstance::update(Game& game) {
 		transfer_nextstep_ = nextstep;
 
 		if (!nextstep) {
-			if (upcast(Flag, flag, location))
+			if (upcast(Flag, flag, location)) {
 				flag->call_carrier(game, *this, nullptr);
+			}
 
 			Transfer* const t = transfer_;
 
@@ -352,10 +368,11 @@ void WareInstance::update(Game& game) {
 		}
 
 		if (upcast(Flag, flag, location)) {
-			flag->call_carrier(game, *this, dynamic_cast<Building const*>(nextstep) &&
-			                                      &nextstep->base_flag() != location ?
-			                                   &nextstep->base_flag() :
-			                                   nextstep);
+			flag->call_carrier(
+			   game, *this,
+			   dynamic_cast<Building const*>(nextstep) && &nextstep->base_flag() != location ?
+			      &nextstep->base_flag() :
+			      nextstep);
 		} else if (upcast(PortDock, pd, location)) {
 			pd->update_shippingitem(game, *this);
 		} else {
@@ -540,12 +557,15 @@ void WareInstance::Loader::load_pointers() {
 	// There is a race condition where a ware may lose its location and be scheduled
 	// for removal via the update callback, but the game is saved just before the
 	// removal. This is why we allow a null location on load.
-	if (location_)
+	if (location_) {
 		ware.set_location(egbase(), &mol().get<MapObject>(location_));
-	if (transfer_nextstep_)
+	}
+	if (transfer_nextstep_) {
 		ware.transfer_nextstep_ = &mol().get<MapObject>(transfer_nextstep_);
-	if (ware.transfer_)
+	}
+	if (ware.transfer_) {
 		ware.transfer_->read_pointers(mol(), transfer_);
+	}
 }
 
 void WareInstance::Loader::load_finish() {
@@ -553,8 +573,9 @@ void WareInstance::Loader::load_finish() {
 
 	WareInstance& ware = get<WareInstance>();
 	if (!ware.transfer_ || !ware.transfer_->get_request()) {
-		if (!ware.supply_)
+		if (!ware.supply_) {
 			ware.supply_ = new IdleWareSupply(ware);
+		}
 	}
 }
 
@@ -582,11 +603,7 @@ MapObject::Loader* WareInstance::load(EditorGameBase& egbase,
 	try {
 		uint8_t packet_version = fr.unsigned_8();
 
-		// Some maps may contain ware info, so we need compatibility here.
-		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
-			if (packet_version == 1) {
-				fr.c_string();  // Consume tribe name
-			}
+		if (packet_version == kCurrentPacketVersion) {
 			const std::string warename = lookup_table.lookup_ware(fr.c_string());
 
 			DescriptionIndex wareindex = egbase.tribes().ware_index(warename);

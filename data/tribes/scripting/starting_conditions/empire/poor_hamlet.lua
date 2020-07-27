@@ -4,9 +4,9 @@
 
 include "scripting/infrastructure.lua"
 
-set_textdomain("tribes")
+push_textdomain("tribes")
 
-return {
+local r = {
    -- TRANSLATORS: This is the name of a starting condition
    descname = _ "Poor Hamlet",
    -- TRANSLATORS: This is the tooltip for the "Poor Hamlet" (minimum) starting condition
@@ -46,3 +46,5 @@ return {
       check_trees_rocks_poor_hamlet(player, sf, "empire_warehouse", {granite = 1}, {log = 1, planks = 1, granite = 1})
    end
 }
+pop_textdomain()
+return r

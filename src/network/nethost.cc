@@ -163,7 +163,7 @@ void NetHost::start_accepting(
 		   }
 		   // Wait for the next client
 		   start_accepting(acceptor, pair);
-		});
+	   });
 }
 
 NetHost::NetHost(const uint16_t port)

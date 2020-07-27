@@ -155,25 +155,25 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Sh
 	   Notifications::subscribe<Widelands::NoteShip>([this](const Widelands::NoteShip& note) {
 		   if (note.ship->serial() == ship_.serial()) {
 			   switch (note.action) {
-			   // Unable to cancel the expedition
+				// Unable to cancel the expedition
 			   case Widelands::NoteShip::Action::kNoPortLeft:
 				   no_port_error_message();
 				   break;
-			   // The ship is no more
+				// The ship is no more
 			   case Widelands::NoteShip::Action::kLost:
 				   // Stop this from thinking to avoid segfaults
 				   set_thinks(false);
 				   die();
 				   break;
-			   // If the ship state has changed, e.g. expedition started or scouting direction changed,
-			   // think() will take care of it.
+				// If the ship state has changed, e.g. expedition started or scouting direction changed,
+				// think() will take care of it.
 			   case Widelands::NoteShip::Action::kDestinationChanged:
 			   case Widelands::NoteShip::Action::kWaitingForCommand:
 			   case Widelands::NoteShip::Action::kGained:
 				   break;
 			   }
 		   }
-		});
+	   });
 
 	// Init button visibility
 	navigation_box_height_ = navigation_box_.get_h();
@@ -209,8 +209,9 @@ void ShipWindow::no_port_error_message() {
 			UI::WLMessageBox messagebox(
 			   get_parent(),
 			   /** TRANSLATORS: Window label when an expedition can't be canceled */
-			   _("Cancel Expedition"), _("This expedition can’t be canceled, because the "
-			                             "ship has no port to return to."),
+			   _("Cancel Expedition"),
+			   _("This expedition can’t be canceled, because the "
+			     "ship has no port to return to."),
 			   UI::WLMessageBox::MBoxType::kOk);
 			messagebox.run<UI::Panel::Returncodes>();
 		}
@@ -351,8 +352,9 @@ void ShipWindow::act_scout_towards(WalkingDir direction) {
 		return;
 	}
 	// ignore request if the direction is not swimmable at all
-	if (!ship->exp_dir_swimmable(static_cast<Direction>(direction)))
+	if (!ship->exp_dir_swimmable(static_cast<Direction>(direction))) {
 		return;
+	}
 	igbase_.game().send_player_ship_scouting_direction(*ship, direction);
 }
 
@@ -362,8 +364,9 @@ void ShipWindow::act_construct_port() {
 	if (ship == nullptr) {
 		return;
 	}
-	if (ship->exp_port_spaces().empty())
+	if (ship->exp_port_spaces().empty()) {
 		return;
+	}
 	igbase_.game().send_player_ship_construct_port(*ship, ship->exp_port_spaces().front());
 }
 
@@ -376,12 +379,14 @@ void ShipWindow::act_explore_island(IslandExploreDirection direction) {
 	bool coast_nearby = false;
 	bool moveable = false;
 	for (Direction dir = 1; (dir <= LAST_DIRECTION) && (!coast_nearby || !moveable); ++dir) {
-		if (!ship->exp_dir_swimmable(dir))
+		if (!ship->exp_dir_swimmable(dir)) {
 			coast_nearby = true;
-		else
+		} else {
 			moveable = true;
+		}
 	}
-	if (!coast_nearby || !moveable)
+	if (!coast_nearby || !moveable) {
 		return;
+	}
 	igbase_.game().send_player_ship_explore_island(*ship, direction);
 }

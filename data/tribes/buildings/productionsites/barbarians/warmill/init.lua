@@ -56,14 +56,6 @@ tribes:new_productionsite_type {
       { name = "iron", amount = 8 },
       { name = "gold", amount = 8 }
    },
-   outputs = {
-      "ax",
-      "ax_sharp",
-      "ax_broad",
-      "ax_bronze",
-      "ax_battle",
-      "ax_warriors"
-   },
 
    programs = {
       work = {

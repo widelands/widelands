@@ -88,8 +88,6 @@ constexpr Quantity kEconomyTargetInfinity = std::numeric_limits<Quantity>::max()
 class Economy {
 public:
 	friend class EconomyDataPacket;
-	// TODO(Nordfriese): This friend is for savegame compatibility
-	friend struct CmdCallEconomyBalance;
 
 	// Initialize the global serial on game start
 	static void initialize_serial();
@@ -147,7 +145,7 @@ public:
 	// (i.e. an Expedition ship).
 	Flag* get_arbitrary_flag();
 
-	void set_target_quantity(DescriptionIndex, Quantity, Time);
+	void set_target_quantity(WareWorker economy_type, DescriptionIndex, Quantity, Time);
 
 	void
 	add_wares_or_workers(DescriptionIndex, Quantity count = 1, Economy* other_economy = nullptr);

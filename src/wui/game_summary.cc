@@ -120,8 +120,9 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 
 bool GameSummaryScreen::handle_mousepress(uint8_t btn, int32_t mx, int32_t my) {
 	// Prevent closing with right click
-	if (btn == SDL_BUTTON_RIGHT)
+	if (btn == SDL_BUTTON_RIGHT) {
 		return true;
+	}
 
 	return UI::Window::handle_mousepress(btn, mx, my);
 }

@@ -46,10 +46,6 @@ tribes:new_productionsite_type {
       frisians_woodcutter = 1
    },
 
-   outputs = {
-      "log"
-   },
-
    indicate_workarea_overlaps = {
       frisians_foresters_house = true,
       frisians_woodcutters_house = false,

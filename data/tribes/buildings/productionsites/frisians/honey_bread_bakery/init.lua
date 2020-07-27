@@ -62,10 +62,6 @@ tribes:new_productionsite_type {
       { name = "water", amount = 8 },
       { name = "honey", amount = 6 },
    },
-   outputs = {
-      "honey_bread",
-      "bread_frisians"
-   },
 
    programs = {
       work = {

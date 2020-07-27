@@ -71,8 +71,9 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	std::unique_ptr<LuaTable> hook = game.lua().get_hook("custom_statistic");
 	std::string cs_name, cs_pic;
 	if (hook) {
+		i18n::Textdomain td("win_conditions");
 		hook->do_not_warn_about_unaccessed_keys();
-		cs_name = hook->get_string("name");
+		cs_name = _(hook->get_string("name"));
 		cs_pic = hook->get_string("pic");
 		ndatasets_++;
 	}
@@ -93,8 +94,9 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 		if (hook) {
 			plot_.register_plot_data(i * ndatasets_ + 11, &genstats[i].custom_statistic, color);
 		}
-		if (game.get_player(i + 1))  // Show area plot
+		if (game.get_player(i + 1)) {  // Show area plot
 			plot_.show_plot(i * ndatasets_ + selected_information_, my_registry_->selected_players[i]);
+		}
 	}
 
 	plot_.set_time(my_registry_->time);
@@ -229,11 +231,12 @@ void GeneralStatisticsMenu::cb_changed_to(int32_t const id) {
 void GeneralStatisticsMenu::radiogroup_changed(int32_t const id) {
 	size_t const statistics_size =
 	   dynamic_cast<InteractiveGameBase&>(*get_parent()).game().get_general_statistics().size();
-	for (uint32_t i = 0; i < statistics_size; ++i)
+	for (uint32_t i = 0; i < statistics_size; ++i) {
 		if (cbs_[i]) {
 			plot_.show_plot(
 			   i * ndatasets_ + id, cbs_[i]->style() == UI::Button::VisualState::kPermpressed);
 			plot_.show_plot(i * ndatasets_ + selected_information_, false);
 		}
+	}
 	selected_information_ = id;
 }

@@ -1427,7 +1427,7 @@ int LuaMap::find_ocean_fields(lua_State* L) {
 		bool success = false;
 		if (map[field].maxcaps() & Widelands::MOVECAPS_SWIM) {
 			for (Widelands::Coords port : map.get_port_spaces()) {
-				for (const Widelands::Coords& c : map.find_portdock(port)) {
+				for (const Widelands::Coords& c : map.find_portdock(port, false)) {
 					Widelands::Path p;
 					if (map.findpath(field, c, 0, p, CheckStepDefault(MOVECAPS_SWIM)) >= 0) {
 						success = true;
@@ -1604,7 +1604,7 @@ int LuaMap::sea_route_exists(lua_State* L) {
 	const Widelands::Map& map = get_egbase(L).map();
 	const Widelands::FCoords f_start = (*get_user_class<LuaMaps::LuaField>(L, 2))->fcoords(L);
 	const Widelands::FCoords f_port = (*get_user_class<LuaMaps::LuaField>(L, 3))->fcoords(L);
-	for (const Widelands::Coords& c : map.find_portdock(f_port)) {
+	for (const Widelands::Coords& c : map.find_portdock(f_port, false)) {
 		Widelands::Path p;
 		if (map.findpath(f_start, c, 0, p, CheckStepDefault(MOVECAPS_SWIM)) >= 0) {
 			lua_pushboolean(L, true);
@@ -3104,7 +3104,8 @@ const MethodType<LuaWarehouseDescription> LuaWarehouseDescription::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaWarehouseDescription> LuaWarehouseDescription::Properties[] = {
-   PROP_RO(LuaWarehouseDescription, heal_per_second), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaWarehouseDescription, heal_per_second),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -3564,7 +3565,8 @@ ResourceDescription
 */
 const char LuaResourceDescription::className[] = "ResourceDescription";
 const MethodType<LuaResourceDescription> LuaResourceDescription::Methods[] = {
-   METHOD(LuaResourceDescription, editor_image), {nullptr, nullptr},
+   METHOD(LuaResourceDescription, editor_image),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaResourceDescription> LuaResourceDescription::Properties[] = {
    PROP_RO(LuaResourceDescription, name),
@@ -3868,7 +3870,9 @@ Economy
 */
 const char LuaEconomy::className[] = "Economy";
 const MethodType<LuaEconomy> LuaEconomy::Methods[] = {
-   METHOD(LuaEconomy, target_quantity), METHOD(LuaEconomy, set_target_quantity), {nullptr, nullptr},
+   METHOD(LuaEconomy, target_quantity),
+   METHOD(LuaEconomy, set_target_quantity),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaEconomy> LuaEconomy::Properties[] = {
    {nullptr, nullptr, nullptr},
@@ -3958,7 +3962,7 @@ int LuaEconomy::set_target_quantity(lua_State* L) {
 			if (quantity < 0) {
 				report_error(L, "Target ware quantity needs to be >= 0 but was '%d'.", quantity);
 			}
-			get()->set_target_quantity(index, quantity, get_egbase(L).get_gametime());
+			get()->set_target_quantity(get()->type(), index, quantity, get_egbase(L).get_gametime());
 		} else {
 			report_error(L, "There is no ware '%s'.", wname.c_str());
 		}
@@ -3971,7 +3975,7 @@ int LuaEconomy::set_target_quantity(lua_State* L) {
 			if (quantity < 0) {
 				report_error(L, "Target worker quantity needs to be >= 0 but was '%d'.", quantity);
 			}
-			get()->set_target_quantity(index, quantity, get_egbase(L).get_gametime());
+			get()->set_target_quantity(get()->type(), index, quantity, get_egbase(L).get_gametime());
 		} else {
 			report_error(L, "There is no worker '%s'.", wname.c_str());
 		}
@@ -4231,7 +4235,8 @@ const MethodType<LuaBaseImmovable> LuaBaseImmovable::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaBaseImmovable> LuaBaseImmovable::Properties[] = {
-   PROP_RO(LuaBaseImmovable, fields), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaBaseImmovable, fields),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -4351,7 +4356,9 @@ Flag
 */
 const char LuaFlag::className[] = "Flag";
 const MethodType<LuaFlag> LuaFlag::Methods[] = {
-   METHOD(LuaFlag, set_wares), METHOD(LuaFlag, get_wares), {nullptr, nullptr},
+   METHOD(LuaFlag, set_wares),
+   METHOD(LuaFlag, get_wares),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaFlag> LuaFlag::Properties[] = {
    PROP_RO(LuaFlag, ware_economy), PROP_RO(LuaFlag, worker_economy), PROP_RO(LuaFlag, roads),
@@ -4581,7 +4588,9 @@ Road
 */
 const char LuaRoad::className[] = "Road";
 const MethodType<LuaRoad> LuaRoad::Methods[] = {
-   METHOD(LuaRoad, get_workers), METHOD(LuaRoad, set_workers), {nullptr, nullptr},
+   METHOD(LuaRoad, get_workers),
+   METHOD(LuaRoad, set_workers),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaRoad> LuaRoad::Properties[] = {
    PROP_RO(LuaRoad, length),        PROP_RO(LuaRoad, start_flag), PROP_RO(LuaRoad, end_flag),
@@ -4760,7 +4769,8 @@ const MethodType<LuaBuilding> LuaBuilding::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaBuilding> LuaBuilding::Properties[] = {
-   PROP_RO(LuaBuilding, flag), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaBuilding, flag),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -4811,7 +4821,8 @@ const MethodType<LuaConstructionSite> LuaConstructionSite::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaConstructionSite> LuaConstructionSite::Properties[] = {
-   PROP_RO(LuaConstructionSite, building), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaConstructionSite, building),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -5594,10 +5605,13 @@ MilitarySite
 */
 const char LuaMilitarySite::className[] = "MilitarySite";
 const MethodType<LuaMilitarySite> LuaMilitarySite::Methods[] = {
-   METHOD(LuaMilitarySite, get_soldiers), METHOD(LuaMilitarySite, set_soldiers), {nullptr, nullptr},
+   METHOD(LuaMilitarySite, get_soldiers),
+   METHOD(LuaMilitarySite, set_soldiers),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaMilitarySite> LuaMilitarySite::Properties[] = {
-   PROP_RO(LuaMilitarySite, max_soldiers), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaMilitarySite, max_soldiers),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -5651,10 +5665,13 @@ TrainingSite
 */
 const char LuaTrainingSite::className[] = "TrainingSite";
 const MethodType<LuaTrainingSite> LuaTrainingSite::Methods[] = {
-   METHOD(LuaTrainingSite, get_soldiers), METHOD(LuaTrainingSite, set_soldiers), {nullptr, nullptr},
+   METHOD(LuaTrainingSite, get_soldiers),
+   METHOD(LuaTrainingSite, set_soldiers),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaTrainingSite> LuaTrainingSite::Properties[] = {
-   PROP_RO(LuaTrainingSite, max_soldiers), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaTrainingSite, max_soldiers),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -5708,10 +5725,12 @@ Bob
 */
 const char LuaBob::className[] = "Bob";
 const MethodType<LuaBob> LuaBob::Methods[] = {
-   METHOD(LuaBob, has_caps), {nullptr, nullptr},
+   METHOD(LuaBob, has_caps),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaBob> LuaBob::Properties[] = {
-   PROP_RO(LuaBob, field), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaBob, field),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -6006,9 +6025,11 @@ int LuaShip::get_shipname(lua_State* L) {
 /* RST
    .. attribute:: capacity
 
-   The ship's current capacity. Defaults to the capacity defined in the tribe's singleton ship description.
+   The ship's current capacity. Defaults to the capacity defined in the tribe's singleton ship
+   description.
 
-   Do not change this value if the ship is currently shipping more items than the new capacity allows.
+   Do not change this value if the ship is currently shipping more items than the new capacity
+   allows.
 
       (RW) returns the current capacity of this ship
 
@@ -6137,6 +6158,8 @@ int LuaShip::make_expedition(lua_State* L) {
 	ship->add_item(*game, Widelands::ShippingItem(
 	                         tribe.get_worker_descr(tribe.builder())
 	                            ->create(*game, ship->get_owner(), nullptr, ship->get_position())));
+	std::map<Widelands::DescriptionIndex, uint32_t>
+	   workers_to_create;  // Lua table sorting order is not deterministic and may cause desyncs
 	if (lua_gettop(L) > 1) {
 		luaL_checktype(L, 2, LUA_TTABLE);
 		lua_pushnil(L);
@@ -6156,18 +6179,22 @@ int LuaShip::make_expedition(lua_State* L) {
 			} else {
 				index = tribe.worker_index(what);
 				if (tribe.has_worker(index)) {
-					while (amount > 0) {
-						ship->add_item(
-						   *game, Widelands::ShippingItem(tribe.get_worker_descr(index)->create(
-						             *game, ship->get_owner(), nullptr, ship->get_position())));
-						--amount;
-					}
+					workers_to_create[index] = amount;
 				} else {
 					report_error(L, "Invalid ware or worker: %s", what.c_str());
 				}
 			}
 		}
 	}
+
+	for (auto& pair : workers_to_create) {
+		for (; pair.second; --pair.second) {
+			ship->add_item(*game, Widelands::ShippingItem(tribe.get_worker_descr(pair.first)
+			                                                 ->create(*game, ship->get_owner(),
+			                                                          nullptr, ship->get_position())));
+		}
+	}
+
 	ship->set_destination(*game, nullptr);
 	ship->start_task_expedition(*game);
 
@@ -6199,7 +6226,9 @@ const MethodType<LuaWorker> LuaWorker::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaWorker> LuaWorker::Properties[] = {
-   PROP_RO(LuaWorker, owner), PROP_RO(LuaWorker, location), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaWorker, owner),
+   PROP_RO(LuaWorker, location),
+   {nullptr, nullptr, nullptr},
 };
 
 /*

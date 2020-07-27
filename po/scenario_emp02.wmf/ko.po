@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-06-30 14:48+0000\n"
-"PO-Revision-Date: 2020-06-22 04:28+0000\n"
+"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"PO-Revision-Date: 2020-07-23 03:16+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -333,7 +333,7 @@ msgstr "더 먼 산들"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:196
 msgid "Saledus is excited"
-msgstr "살레두스가 흥분했다"
+msgstr "살레두스는 흥분되었다"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:198
@@ -512,7 +512,7 @@ msgstr "그 소식은 프레밀로 돌아올 것을 독촉하기 위해 나에�
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr "이 미션을 완료하셨습니다. 원하신다면 더 플레이하시거나, 다음 미션으로 이동할 수 있습니다."
+msgstr "이 임무를 완수했습니다. 원한다면 계속 할 수 있고, 그렇지 않으면 다음 임무로 이동하십시오."
 
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format

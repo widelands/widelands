@@ -32,10 +32,6 @@ tribes:new_productionsite_type {
       atlanteans_stonecutter = 1
    },
 
-   outputs = {
-      "granite"
-   },
-
    indicate_workarea_overlaps = {
       atlanteans_quarry = false,
    },

@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# ks k, 2020
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-06-30 14:48+0000\n"
+"POT-Creation-Date: 2020-07-09 08:33+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
+"Last-Translator: ks k, 2020\n"
 "Language-Team: Korean (https://www.transifex.com/widelands/teams/35159/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,21 +22,21 @@ msgstr ""
 #. TRANSLATORS: Name of a backup autosave
 #: ../../data/campaigns/fri01.wmf/scripting/mission_thread.lua:129
 msgid "The Great Stormflood (Backup Autosave)"
-msgstr ""
+msgstr "거대한 비바람 홍수 (백업 자동 저장)"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:25
 msgid "Build a wood economy and a reed farm"
-msgstr ""
+msgstr "목재 경제와 갈대 농장을 짓기"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:27
 msgid "Wood Economy"
-msgstr ""
+msgstr "목재 경제"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:28
 msgid ""
 "Build at least one woodcutter’s house and two forester’s houses to start "
 "producing logs, and a reed farm to start growing reed."
-msgstr ""
+msgstr "통나무 생산을 시작하기 위해 최소한 1 채의 나무꾼 집과 2 채의 숲꾼 집을 짓고 갈대 농장에서 갈대를 기르기 시작하십시오."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:33
 msgid "Start producing bricks"
@@ -71,15 +75,15 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:47
 msgid "10 × Clay"
-msgstr ""
+msgstr "진흙 ×  10 점"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:48
 msgid "40 × Brick"
-msgstr ""
+msgstr "벽돌 × 40 장"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:49
 msgid "20 × Coal"
-msgstr ""
+msgstr "석탄 × 20 개"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:50
 msgid "30 × Reed"
@@ -181,35 +185,35 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:104
 msgid "Defeat the enemy!"
-msgstr ""
+msgstr "적을 물리치십시오!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:106
 msgid "Defeat the Enemy!"
-msgstr ""
+msgstr "적을 물리치십시오!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:107
 msgid "Destroy the enemy tribe’s headquarters."
-msgstr ""
+msgstr "적 부족의 본부를 파괴하십시오."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:112
 msgid "Escape from the floods"
-msgstr ""
+msgstr "홍수로부터 탈출"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:114
 msgid "Flee from the Floods"
-msgstr ""
+msgstr "홍수를 피해 도망"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:115
 msgid ""
 "Build a port, a weaving mill and a shipyard, then start an expedition to "
 "flee before the storm flood drowns the island."
-msgstr ""
+msgstr "항구와 방직 공장, 조선소를 지은 다음 폭풍 홍수로 섬이 가라 앉기 전에 탈출하기 위한 탐험을 시작하십시오."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:116
 msgid ""
 "You can build the port either on the easternmost tip of the island or in the"
 " place where the enemy’s headquarters stood."
-msgstr ""
+msgstr "섬의 가장 동쪽 끝이나 적의 본부가 세워져 있는 곳에 항구를 지을 수 있습니다."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:117
 msgid ""
@@ -217,6 +221,8 @@ msgid ""
 " reload the scenario from the backup savegame automatically created for you "
 "shortly before you reached the enemy’s headquarters."
 msgstr ""
+"이 도전 과제를 제 시간에 완수하기에 충분하지 않은 경우 적의 본부에 도착하기 직전에 자동으로 생성된 백업 저장 놀이에서 시나리오를 다시"
+" 불러올 수 있습니다."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:126
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:135
@@ -224,18 +230,18 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:160
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:176
 msgid "Introduction"
-msgstr ""
+msgstr "소개"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:127
 msgid "Welcome!"
-msgstr ""
+msgstr "환영합니다!"
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:129
 msgid ""
 "Welcome to the beautiful isle of Langeness! I am Reebaud, the chieftain of "
 "this pristine island."
-msgstr ""
+msgstr "아름다운 랭귀티 섬에 오신 것을 환영합니다! 저는 이 깨끗한 섬의 족장 리보입니다."
 
 #. TRANSLATORS: Reebaud – Introduction 1. Schauenburg and Holstein are
 #. dukedoms
@@ -246,10 +252,12 @@ msgid ""
 "South… So I decided to lead my tribe away to start a quiet, peaceful life on"
 " this untouched island."
 msgstr ""
+"우리 부족과 저는 방금 본토에서 도착했습니다. 북쪽에있는 덴마크 인들과 동부와 남부에있는 샤우 엔 부르거 족과 홀스타인족과의 싸움이 "
+"있었습니다. 그래서 저는 이 부족한 섬에서 조용하고 평화로운 삶을 시작하기 위해 부족을 이끌기로 결정했습니다."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:136
 msgid "A new home"
-msgstr ""
+msgstr "새로운 고향"
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:138
@@ -257,17 +265,19 @@ msgid ""
 "This is as good a place as any to start building our new home. First of all,"
 " we must ensure a stable supply of basic building materials."
 msgstr ""
+"이곳은 우리의 새로운 고향을 짓기 위한 그 어느 곳보다도 좋은 장소입니다. 우선, 우리는 기초 건축 자재의 안정적인 공급을 보장해야 "
+"합니다."
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:141
 msgid ""
 "I have asked Hauke, one of my advisors, to oversee the construction of our "
 "settlement."
-msgstr ""
+msgstr "저는 제 조언자 중 한 명인 하우케에게 우리의 정착촌 짓기에 감독할 것을 요청했습니다."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:145
 msgid "The first buildings"
-msgstr ""
+msgstr "첫번째 건물"
 
 #. TRANSLATORS: Hauke – Introduction 3. "Peace" is the traditional frisian
 #. greeting
@@ -275,7 +285,7 @@ msgstr ""
 msgid ""
 "Peace, Chieftain Reebaud! I will start with the colonization of the island "
 "straight away."
-msgstr ""
+msgstr "평화여, 리바우드 족장! 저는 바로 섬의 식민지화부터 시작하겠습니다."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:150
@@ -284,6 +294,8 @@ msgid ""
 "by adding some logs and granite. The roofs are thatched with reed, "
 "naturally. Nothing is better suited to keep the rain out."
 msgstr ""
+"모든 프리지아족들처럼 우리는 주로 벽돌로 집을 짓습니다. 우리는 약간의 통나무와 화강암을 추가하여 그것들을 향상시킵니다. 지붕은 "
+"자연스럽게 갈대로 깔려 있습니다.  비를 막는 데 이보다 더 적합한 것은 없습니다."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:153

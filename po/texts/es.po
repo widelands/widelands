@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-06-30 14:48+0000\n"
-"PO-Revision-Date: 2020-06-28 17:01+0000\n"
+"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"PO-Revision-Date: 2020-07-02 14:43+0000\n"
 "Last-Translator: Walter Benkel <tromaster@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -461,7 +461,7 @@ msgstr "El jugador con el color de la bandera. Si mas de un cliente selecciona e
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr "Modo espectador, podrás verlo todo, pero no controlarás a ningún jugador"
+msgstr "Modo espectador, significa que podrás verlo todo, pero no controlarás a ningún jugador"
 
 #: ../../data/txts/help/multiplayer_help.lua:15
 msgid "Player settings"
@@ -516,7 +516,7 @@ msgid ""
 " side. A button next to the map name allows the host to change to a "
 "different map. Furthermore, the host is able to set a specific win "
 "condition, and finally can start the game as soon as all players are set up."
-msgstr "Puedes ver información sobre el mapa o partido guardado seleccionados en el lado derecho. Un botón junto al nombre del mapa permite al anfitrión cambiar a un mapa diferente. Adicionalmente, el anfitrión puede marcar una condición de victoria específica y finalmente iniciar el partido en cuanto todos los jugadores estén listos."
+msgstr "En el lado derecho puedes ver información acerca del mapa o partida guardada seleccionados. Un botón junto al nombre del mapa permite al anfitrión cambiar a un mapa diferente. Adicionalmente, el anfitrión puede establecer una condición de victoria específica, y finalmente iniciar la partida en cuanto todos los jugadores estén preparados."
 
 #: ../../data/txts/tips/atlanteans.lua:4
 msgid ""
@@ -839,7 +839,7 @@ msgstr "Usa \"@name\" al principio de un mensaje de chat para enviarlo solo a es
 msgid ""
 "If the game should crash, don't worry! The game will be saved automatically "
 "so that you can reload it afterwards."
-msgstr "Si el juego se cierra inesperadamente, no te preocupes! El partido se guardará automáticamente para que puedas cargarla."
+msgstr "Si el juego se cierra inesperadamente, ¡no te preocupes! La partida se guardará automáticamente para que puedas cargarla después."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/singleplayer.lua:7

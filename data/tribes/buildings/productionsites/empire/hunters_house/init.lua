@@ -34,10 +34,6 @@ tribes:new_productionsite_type {
       empire_hunter = 1
    },
 
-   outputs = {
-      "meat"
-   },
-
    indicate_workarea_overlaps = {
       empire_hunters_house = false,
    },

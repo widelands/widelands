@@ -52,9 +52,6 @@ tribes:new_trainingsite_type {
       { name = "meat", amount = 6 },
       { name = "empire_bread", amount = 10 }
    },
-   outputs = {
-      "empire_soldier",
-   },
 
    ["soldier evade"] = {
       min_level = 0,

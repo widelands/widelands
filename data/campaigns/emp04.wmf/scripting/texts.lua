@@ -344,7 +344,7 @@ amalea_3 = {
       _([[Lutius, now we are getting somewhere. As we have gained some construction materials, we can start to rebuild our economy.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[First of all, we need more construction materials. So, we should build at least three lumberjacks’ houses and two quarries. Be sure to have dismanteled all of the unproductive buildings though.]])
+      _([[First of all, we need more construction materials. So, we should build at least three lumberjacks’ houses and two quarries. Be sure to have dismantled all of the unproductive buildings though.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[Oh, before I forget, there is another task to accomplish. While our builders are doing their job, somebody should clear up our road network. They are leaving us no space to place the buildings that we need.]]))
@@ -415,7 +415,7 @@ amalea_7 = {
       _([[And guess what? They are very old. Their houses and tools are worn and their seed is degenerated. For this reason, they need much more time than usual for planting trees.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[The only solution is to build two new forester’s houses near our lumberjacks. Be sure to first build a new forester’s house and then eventually destroy the old one or at least expel the forester to change houses. Dismantling them is also possible but will not return any wares because they are so torn.]]))
+      _([[The only solution is to build two new forester’s houses near our lumberjacks. Be sure to first build a new forester’s house and then eventually destroy the old one or at least expel the forester to change houses.]]))
       .. new_objectives(obj_replace_foresters),
    posy=1,
    h=500,

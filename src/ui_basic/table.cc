@@ -126,7 +126,7 @@ void Table<void*>::add_column(uint32_t const width,
 		c.width = width;
 		c.alignment = alignment;
 		c.compare = [this, col_index](
-		   uint32_t a, uint32_t b) { return default_compare_string(col_index, a, b); };
+		               uint32_t a, uint32_t b) { return default_compare_string(col_index, a, b); };
 		columns_.push_back(c);
 		if (column_type == TableColumnType::kFlexible) {
 			assert(flexible_column_ == std::numeric_limits<size_t>::max());
@@ -311,10 +311,11 @@ void Table<void*>::draw(RenderTarget& dst) {
 				continue;
 			}
 
-			const UI::FontStyleInfo& font_style =
-			   er.font_style() != nullptr ? *er.font_style() : er.is_disabled() ?
-			                                g_gr->styles().table_style(style_).disabled() :
-			                                g_gr->styles().table_style(style_).enabled();
+			const UI::FontStyleInfo& font_style = er.font_style() != nullptr ?
+			                                         *er.font_style() :
+			                                         er.is_disabled() ?
+			                                         g_gr->styles().table_style(style_).disabled() :
+			                                         g_gr->styles().table_style(style_).enabled();
 			std::shared_ptr<const UI::RenderedText> rendered_text =
 			   UI::g_fh->render(as_richtext_paragraph(richtext_escape(entry_string), font_style));
 

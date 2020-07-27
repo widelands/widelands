@@ -343,7 +343,7 @@ struct HostChatProvider : public ChatProvider {
 			// Acknowledge kick
 			else if (cmd == "ack_kick") {
 				if (arg1.empty()) {
-					c.msg = _("kick acknowledgement cancelled: No name given!");
+					c.msg = _("Kick acknowledgement cancelled: No name given!");
 				} else if (arg2.size()) {
 					c.msg = _("Wrong use, should be: /ack_kick <name>");
 				} else {
@@ -351,7 +351,7 @@ struct HostChatProvider : public ChatProvider {
 						h->kick_user(kickClient, kickReason);
 						return;
 					} else {
-						c.msg = _("kick acknowledgement cancelled: Wrong name given!");
+						c.msg = _("Kick acknowledgement cancelled: Wrong name given!");
 					}
 				}
 				kickUser = "";
@@ -705,9 +705,9 @@ void GameHost::run() {
 		// wait mode when there are no clients
 		check_hung_clients();
 		init_computer_players();
-		game.run(d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
-		                                Widelands::Game::NewMPScenario :
-		                                Widelands::Game::NewNonScenario,
+		game.run(d->settings.savegame ? Widelands::Game::Loaded :
+		                                d->settings.scenario ? Widelands::Game::NewMPScenario :
+		                                                       Widelands::Game::NewNonScenario,
 		         "", false, "nethost");
 
 		// if this is an internet game, tell the metaserver that the game is done.

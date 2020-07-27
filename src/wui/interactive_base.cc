@@ -206,8 +206,9 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 		for (;;) {  // The other buildhelp overlays.
 			++buildhelp_overlay;
 			++filename;
-			if (buildhelp_overlay == buildhelp_overlays_end)
+			if (buildhelp_overlay == buildhelp_overlays_end) {
 				break;
+			}
 			buildhelp_overlay->pic = g_gr->images().get(*filename);
 			buildhelp_overlay->hotspot =
 			   Vector2i(buildhelp_overlay->pic->width() / 2, buildhelp_overlay->pic->height() / 2);
@@ -223,16 +224,17 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 		   resize_chat_overlay();
 		   finalize_toolbar();
 		   mainview_move();
-		});
+	   });
 	sound_subscriber_ = Notifications::subscribe<NoteSound>(
 	   [this](const NoteSound& note) { play_sound_effect(note); });
-	shipnotes_subscriber_ = Notifications::subscribe<Widelands::NoteShip>([this](
-	   const Widelands::NoteShip& note) {
-		if (note.action == Widelands::NoteShip::Action::kWaitingForCommand &&
-		    note.ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
-			expedition_port_spaces_.emplace(note.ship, note.ship->exp_port_spaces().front());
-		}
-	});
+	shipnotes_subscriber_ =
+	   Notifications::subscribe<Widelands::NoteShip>([this](const Widelands::NoteShip& note) {
+		   if (note.action == Widelands::NoteShip::Action::kWaitingForCommand &&
+		       note.ship->get_ship_state() ==
+		          Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
+			   expedition_port_spaces_.emplace(note.ship, note.ship->exp_port_spaces().front());
+		   }
+	   });
 
 	toolbar_.set_layout_toplevel(true);
 	map_view_.changeview.connect([this] { mainview_move(); });
@@ -901,8 +903,9 @@ bool InteractiveBase::get_display_flag(uint32_t const flag) {
 void InteractiveBase::set_display_flag(uint32_t const flag, bool const on) {
 	display_flags_ &= ~flag;
 
-	if (on)
+	if (on) {
 		display_flags_ |= flag;
+	}
 }
 
 /*
@@ -974,8 +977,9 @@ void InteractiveBase::abort_build_road() {
 		hide_workarea(road_building_mode_->path.get_start(), true);
 	}
 #ifndef NDEBUG
-	else
+	else {
 		assert(!road_building_mode_->work_area);
+	}
 #endif
 
 	road_building_remove_overlay();
@@ -996,8 +1000,9 @@ void InteractiveBase::finish_build_road() {
 		hide_workarea(road_building_mode_->path.get_start(), true);
 	}
 #ifndef NDEBUG
-	else
+	else {
 		assert(!road_building_mode_->work_area);
+	}
 #endif
 
 	road_building_remove_overlay();
