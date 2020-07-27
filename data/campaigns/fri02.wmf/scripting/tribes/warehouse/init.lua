@@ -1,5 +1,7 @@
 dirname = "tribes/buildings/warehouses/empire/warehouse/"
 
+push_textdomain("scenario_fri02.wmf")
+
 tribes:new_warehouse_type {
    msgctxt = "frisians_building",
    name = "frisians_warehouse_empire",
@@ -17,3 +19,4 @@ tribes:new_warehouse_type {
    aihints = {},
    heal_per_second = 170,
 }
+pop_textdomain()

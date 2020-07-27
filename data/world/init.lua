@@ -17,7 +17,7 @@ function set_loading_message(str, i)
    egbase:set_loading_message(_("Loading world: %1$s (%2$d/%3$d)"):bformat(str, i, 4))
 end
 
-set_textdomain("world")
+push_textdomain("world")
 
 include "scripting/mapobjects.lua"
 
@@ -352,3 +352,5 @@ end)
 --        *Mandatory*. How many items will be displayed in each row by the tool, e.g.::
 --
 --            items_per_row = 6,
+
+pop_textdomain()

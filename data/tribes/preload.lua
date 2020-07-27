@@ -1,10 +1,14 @@
+-- RST
+-- preload.lua
+-- -----------
+--
 -- This file contains the basic information for all tribes that is
 -- needed before a game is loaded or the editor has been started.
 
 dirname = path.dirname(__file__)
 push_textdomain("tribes")
 
-result = {
+local r = {
    -- Basic information for the Barbarian tribe
    {
       name = "barbarians",
@@ -13,7 +17,6 @@ result = {
       descname = _"Barbarians",
       tooltip = _"The mighty tribes of the east-lands.",
       icon = dirname .. "images/barbarians/icon.png",
-      script = dirname .. "barbarians.lua",
 
       starting_conditions = {
          dirname .. "scripting/starting_conditions/barbarians/headquarters.lua";
@@ -35,7 +38,6 @@ result = {
       descname = _"Empire",
       tooltip = _"This is the culture of the Roman Empire.",
       icon = dirname .. "images/empire/icon.png",
-      script = dirname .. "empire.lua",
 
       starting_conditions = {
          dirname .. "scripting/starting_conditions/empire/headquarters.lua";
@@ -57,7 +59,6 @@ result = {
       descname = _"Atlanteans",
       tooltip = _"This tribe is known from the oldest tales. The sons and daughters of Atlantis.",
       icon = dirname .. "images/atlanteans/icon.png",
-      script = dirname .. "atlanteans.lua",
 
       starting_conditions = {
          dirname .. "scripting/starting_conditions/atlanteans/headquarters.lua";
@@ -79,7 +80,6 @@ result = {
       descname = _"Frisians",
       tooltip = _("The inhabitants of the rough North Sea shore."),
       icon = dirname .. "images/frisians/icon.png",
-      script = dirname .. "frisians.lua",
 
       starting_conditions = {
          dirname .. "scripting/starting_conditions/frisians/headquarters.lua";
@@ -93,7 +93,5 @@ result = {
       }
    }
 }
-
 pop_textdomain()
-
-return result
+return r

@@ -264,9 +264,9 @@ diary_page_10 = {
       _([[Today is a proud day. We have fought for our new home and risen victorious.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Lutius - Diary
-      _([[There are still a few Barbarians hiding on our island, but I am sure that we will find them soon. Every Barbarian who doesn’t attack us will be put in a boat with the other peaceful ones, and sent back to their country.]]))
-      .. objective_text(_"Victory",
-      _[[You have established a working economy, trained new soldiers and driven the Barbarians from the island.]])
+      _([[There are still a few Barbarians hiding on our island, but I am sure that we will find them soon. Every Barbarian who doesn’t attack us will be put in a boat with the other peaceful ones, and sent back to their country.]])
+      .. paragraphdivider() ..
+      _[[We have established a working economy, trained new soldiers and driven the Barbarians from the island. Now we can think about our next steps.]])
 }
 
 seven_days_later = {
@@ -284,7 +284,7 @@ diary_page_11 = {
       _([[Today a pigeon landed on our island. It brought a message which fills me with dark thoughts and brings back my fears.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Lutius - Diary
-      _([[The message was addressed to me, begging me to come back to Fremil. It says that the Empire is at war with the Barbarians. They were attacked from the north by the tribe that I was forbidden to attack. It is clear to me what I must do…]])
-      .. paragraphdivider() ..
+      _([[The message was addressed to me, begging me to come back to Fremil. It says that the Empire is at war with the Barbarians. They were attacked from the north by the tribe that I was forbidden to attack. It is clear to me what I must do…]]))
+      .. objective_text(_"Victory",
       _([[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]]))
 }

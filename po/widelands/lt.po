@@ -4,14 +4,15 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 # Mantas Kriaučiūnas Baltix <mantas@akl.lt>, 2020
-# Tachionas Neonas <tachionexas@gmail.com>, 2020
+# Tachionas <tachionexas@gmail.com>, 2020
+# Tachionas <tachionexas@gmail.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-07-09 16:55+0000\n"
-"Last-Translator: Tachionas Neonas <tachionexas@gmail.com>\n"
+"PO-Revision-Date: 2020-07-22 18:57+0000\n"
+"Last-Translator: Tachionas <tachionexas@gmail.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/widelands/widelands/language/lt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -401,12 +402,12 @@ msgstr "Pakeisti žemėlapio reljefą"
 #: ../../src/editor/editorinteractive.cc:275
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:47
 msgid "Immovables"
-msgstr ""
+msgstr "Nekilnojami objektai"
 
 #. * TRANSLATORS: Tooltip for the immovables tool in the editor
 #: ../../src/editor/editorinteractive.cc:278
 msgid "Add or remove immovables"
-msgstr ""
+msgstr "Pridėti ar pašalinti nekilnojamus objektus"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:284
@@ -484,7 +485,7 @@ msgstr "Informacija"
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
 #: ../../src/editor/editorinteractive.cc:334
 msgid "Click on a field to show information about it"
-msgstr "Paspauskite ant laukelio, kad būtų rodoma informacija apie jį"
+msgstr "Paspausk ant laukelio, kad būtų rodoma informacija apie jį"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
@@ -523,11 +524,11 @@ msgstr "Rodyti tinklelį"
 #. * rocks etc.) are shown
 #: ../../src/editor/editorinteractive.cc:404
 msgid "Hide Immovables"
-msgstr ""
+msgstr "Slėpti nekilnojamus objektus"
 
 #: ../../src/editor/editorinteractive.cc:404
 msgid "Show Immovables"
-msgstr ""
+msgstr "Rodyti nekilnojamus objektus"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. animals are shown
@@ -697,12 +698,12 @@ msgstr ""
 #. * TRANSLATORS: Heading for immovables and animals in editor info tool
 #: ../../src/editor/tools/info_tool.cc:142
 msgid "Objects"
-msgstr ""
+msgstr "Objektai"
 
 #: ../../src/editor/tools/info_tool.cc:145
 #, c-format
 msgid "Immovable: %s"
-msgstr ""
+msgstr "Nekilnojamas objektas: %s"
 
 #: ../../src/editor/tools/info_tool.cc:175
 #, c-format
@@ -771,7 +772,7 @@ msgstr "Dabartinis: %s ..."
 #. * TRANSLATORS: Help text in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:187
 msgid "Click to select an item. Use the Ctrl key to select multiple items."
-msgstr "Norėdami pažymėti spustelėkite elementą. Naudokite Ctrl mygtuką norėdami pažymėti keletą elementų. "
+msgstr "Norėdamas pažymėti spustelėk elementą. Naudok Ctrl klavišą norėdamas pažymėti keletą elementų. "
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:190
@@ -885,10 +886,10 @@ msgstr ""
 #, c-format
 msgid "%u Player"
 msgid_plural "%u Players"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%u žaidėjas"
+msgstr[1] "%u žaidėjai"
+msgstr[2] "%u žaidėjai"
+msgstr[3] "%u žaidėjai"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:175
 msgid "Main Options"
@@ -914,7 +915,7 @@ msgstr "Sukurti žemėlapį"
 
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:73
 msgid "Terrain:"
-msgstr ""
+msgstr "Reljefas:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:70
 #: ../../src/wui/gamedetails.cc:166
@@ -993,7 +994,7 @@ msgstr "%i %%"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:167
 msgid "Island mode"
-msgstr ""
+msgstr "Salos režimas"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:170
 msgid "Random number:"
@@ -1001,7 +1002,7 @@ msgstr "Atsitiktinis skaičius:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:177
 msgid "Map ID:"
-msgstr ""
+msgstr "Žemėlapio ID:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:189
 msgid "Generate Map"
@@ -1060,13 +1061,13 @@ msgstr "Klaida kuriant katalogą!"
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:184
 #, c-format
 msgid "Error while creating directory ‘%s’."
-msgstr ""
+msgstr "Klaida kuriant katalogą  ‘%s’."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:306
 #: ../../src/wui/game_main_menu_save_game.cc:234
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
-msgstr ""
+msgstr "Failas ‘%s’ pavadinimu jau egzistuoja. Ar perrašyti?"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:309
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:362
@@ -1185,13 +1186,13 @@ msgstr "Nustatyti aukštį lygu:"
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease terrain "
 "height"
-msgstr ""
+msgstr "Norėdamas padidinti reljefo aukštį spustelėk ant žemėlapio. Norėdamas sumažinti reljefo aukštį paspausk Shift klavišą ir spustelėk ant žemėlapio.  "
 
 #. * TRANSLATORS: Editor set height access key. *
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:64
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:82
 msgid "Ctrl + Click on the map to set terrain height"
-msgstr ""
+msgstr "Norėdamas nustatyti reljefo aukštį paspausk Ctrl klavišą ir spustelėk ant žemėlapio. "
 
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:54
 msgid "Increase/Decrease amount by:"
@@ -1206,7 +1207,7 @@ msgstr ""
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease the "
 "amount of the selected resource"
-msgstr ""
+msgstr "Norėdamas padidinti pažymėtų išteklių kiekį spustelėk ant žemėlapio. Norėdamas sumažinti pažymėtų išteklių kiekį paspausk Shift klavišą ir spustelėk ant žemėlapio"
 
 #. * TRANSLATORS: Editor set rseources access key. *
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:78
@@ -1241,7 +1242,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/tool_resize_options_menu.cc:35
 msgid "Resize"
-msgstr ""
+msgstr "Pakeisti dydį"
 
 #: ../../src/editor/ui_menus/tool_resize_options_menu.cc:50
 msgid ""
@@ -1259,7 +1260,7 @@ msgstr ""
 #: ../../src/ui_basic/dropdown.cc:368 ../../src/ui_basic/dropdown.cc:376
 #: ../../src/wui/multiplayersetupgroup.cc:382
 msgid "%1%: %2%"
-msgstr ""
+msgstr "%1%: %2%"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:36
 msgid "Tool Size"
@@ -1268,7 +1269,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/toolsize_menu.cc:74
 #, c-format
 msgid "Current Size: %u"
-msgstr ""
+msgstr "Dabartinis dydis: %u"
 
 #: ../../src/game_io/game_loader.cc:69
 #, c-format
@@ -1371,7 +1372,7 @@ msgstr ""
 #, c-format
 msgctxt "illegal_filename_characters"
 msgid "%s at the start of the filename"
-msgstr ""
+msgstr "%s failo pavadinimo pradžioje"
 
 #. * TRANSLATORS: Tooltip entry for characters in illegal filenames.
 #. * %s is a list of illegal characters
@@ -1379,7 +1380,7 @@ msgstr ""
 #, c-format
 msgctxt "illegal_filename_characters"
 msgid "%s anywhere in the filename"
-msgstr ""
+msgstr "%s bet kurioje failo pavadinimo vietoje"
 
 #. * TRANSLATORS: Tooltip header for characters in illegal filenames.
 #. * This is followed by a list of bullet points
@@ -1517,12 +1518,12 @@ msgstr "Šis žaidimas buvo išsaugotas naudojant senesnę Widelands versiją ir
 #: ../../src/logic/generic_save_handler.cc:236
 #: ../../src/logic/generic_save_handler.cc:240
 msgid "File successfully saved!"
-msgstr ""
+msgstr "Failas sėkmingai išsaugotas!"
 
 #: ../../src/logic/generic_save_handler.cc:241
 #, c-format
 msgid "Backup file ‘%s’ could not be deleted."
-msgstr ""
+msgstr "Atsarginės failo ‘%s’ kopijos nepavyko ištrinti. "
 
 #: ../../src/logic/generic_save_handler.cc:245
 #, c-format
@@ -1532,7 +1533,7 @@ msgstr ""
 #: ../../src/logic/generic_save_handler.cc:249
 #, c-format
 msgid "File ‘%s’ could not be removed!"
-msgstr ""
+msgstr "Failo ‘%s’  nepavyko pašalinti!"
 
 #: ../../src/logic/generic_save_handler.cc:251
 msgid "Try saving under a different name!"
@@ -1541,26 +1542,26 @@ msgstr ""
 #: ../../src/logic/generic_save_handler.cc:257
 #, c-format
 msgid "Error writing data to file ‘%s’!"
-msgstr ""
+msgstr "Klaida įrašant duomenis į failą ‘%s’!"
 
 #: ../../src/logic/generic_save_handler.cc:264
 msgid "Saved file may be corrupt!"
-msgstr ""
+msgstr "Išsaugotas failas gali būti pažeistas!"
 
 #: ../../src/logic/generic_save_handler.cc:272
 #, c-format
 msgid "File ‘%s’ could not be restored!"
-msgstr ""
+msgstr "Failo ‘%s’ nepavyko atkurti!"
 
 #: ../../src/logic/generic_save_handler.cc:274
 #, c-format
 msgid "Backup file ‘%s’ will be available for some time."
-msgstr ""
+msgstr "Atsarginė failo ‘%s’  kopija bus prieinama kurį laiką. "
 
 #: ../../src/logic/generic_save_handler.cc:285
 #, c-format
 msgid "File ‘%s’ was restored from backup."
-msgstr ""
+msgstr "Failas ‘%s’ buvo atkurtas naudojant atsarginę kopiją."
 
 #: ../../src/logic/generic_save_handler.cc:293
 msgid "An unexpected error occurred:"
@@ -1607,10 +1608,10 @@ msgstr ""
 #: ../../src/logic/map_objects/tribes/militarysite.cc:370
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% kareivis (+%2%)"
+msgstr[1] "%1% kareiviai (+%2%)"
+msgstr[2] "%1% kareiviai (+%2%)"
+msgstr[3] "%1% kareiviai (+%2%)"
 
 #. * TRANSLATORS: Number of soldiers that should attack. Used in Attack box.
 #. * TRANSLATORS: Number of soldiers stationed at a militarysite.
@@ -1620,10 +1621,10 @@ msgstr[3] ""
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%u kareivis"
+msgstr[1] "%u kareiviai"
+msgstr[2] "%u kareiviai"
+msgstr[3] "%u kareiviai"
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2% are currently open soldier slots in the building
@@ -1631,30 +1632,30 @@ msgstr[3] ""
 #: ../../src/logic/map_objects/tribes/militarysite.cc:384
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) kareivis (+%3%)"
+msgstr[1] "%1%(+%2%) kareiviai (+%3%)"
+msgstr[2] "%1%(+%2%) kareiviai (+%3%)"
+msgstr[3] "%1%(+%2%) kareiviai (+%3%)"
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2% are currently open soldier slots in the building
 #: ../../src/logic/map_objects/tribes/militarysite.cc:390
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) kareivis"
+msgstr[1] "%1%(+%2%) kareiviai"
+msgstr[2] "%1%(+%2%) kareiviai"
+msgstr[3] "%1%(+%2%) kareiviai"
 
 #. * TRANSLATORS: Militarysite is being attacked
 #: ../../src/logic/map_objects/tribes/militarysite.cc:873
 msgctxt "building"
 msgid "Attack!"
-msgstr ""
+msgstr "Puolimas!"
 
 #: ../../src/logic/map_objects/tribes/militarysite.cc:873
 msgid "You are under attack"
-msgstr ""
+msgstr "Tu užpultas"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the ware
@@ -1807,12 +1808,12 @@ msgstr[3] ""
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:1084
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Nėra kareivių apmokymams!"
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:1093
 #: ../../src/logic/map_objects/tribes/production_program.cc:1151
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Nėra kareivių šiam apmokymų lygiui!"
 
 #. * TRANSLATORS: Success message of a trainingsite '%s' stands for the
 #. description of the
@@ -2107,7 +2108,7 @@ msgstr ""
 #: ../../src/map_io/map_saver.cc:134
 #: ../../src/map_io/widelands_map_loader.cc:174
 msgid "Terrains"
-msgstr ""
+msgstr "Reljefai"
 
 #: ../../src/map_io/map_saver.cc:142
 #: ../../src/map_io/widelands_map_loader.cc:189
@@ -2759,12 +2760,12 @@ msgstr "%s prisijungė prie žaidimo"
 #: ../../src/network/network_gaming_messages.cc:166
 #, c-format
 msgid "Started to send file %1$s to %2$s!"
-msgstr ""
+msgstr "Failo %1$s siuntimas %2$s pradėtas!"
 
 #: ../../src/network/network_gaming_messages.cc:167
 #, c-format
 msgid "Completed transfer of file %1$s to %2$s"
-msgstr ""
+msgstr "Failo %1$s siuntimas %2$s baigtas "
 
 #: ../../src/network/network_gaming_messages.cc:168
 #, c-format
@@ -3017,7 +3018,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/intro.cc:33
 msgid "Press any key or click to continue…"
-msgstr ""
+msgstr "Norėdamas tęsti paspausk bet kurį klavišą arba spustelėk pelės mygtuką..."
 
 #: ../../src/ui_fsmenu/launch_game.cc:56
 msgid "Peaceful mode"
@@ -3143,7 +3144,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:354 ../../src/ui_fsmenu/launch_spg.cc:193
 msgid "File not found"
-msgstr ""
+msgstr "Failas nerastas"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:355 ../../src/ui_fsmenu/launch_spg.cc:194
 #, c-format
@@ -3695,16 +3696,16 @@ msgstr ""
 
 #: ../../src/wui/attack_box.cc:193
 msgid "Send less soldiers. Hold down Ctrl to send no soldiers"
-msgstr ""
+msgstr "Siųsti mažiau kareivių. Laikyk paspaudęs Ctlr mygtuką, norėdamas nesiųsti kareivių."
 
 #: ../../src/wui/attack_box.cc:202
 msgid "Number of soldiers"
-msgstr ""
+msgstr "Kareivių skaičius"
 
 #: ../../src/wui/attack_box.cc:207
 msgid ""
 "Send more soldiers. Hold down Ctrl to send as many soldiers as possible"
-msgstr ""
+msgstr "Siųsti daugiau kareivių. Laikyk paspaudęs Ctlr mygtuką, norėdamas siųsti visus kareivius, kuriuos galima."
 
 #: ../../src/wui/attack_box.cc:212
 msgid "Start attack"
@@ -3716,16 +3717,16 @@ msgstr ""
 
 #: ../../src/wui/attack_box.cc:233
 msgid "Click on a soldier to remove him from the list of attackers"
-msgstr ""
+msgstr "Spustelėk ant kareivio, norėdamas pašalinti jį iš atakuojančių sąrašo."
 
 #: ../../src/wui/attack_box.cc:235
 msgid "Hold down Ctrl to remove all soldiers from the list"
-msgstr ""
+msgstr "Laikyk paspaudęs Ctlr mygtuką, norėdamas pašalinti visus kareivius iš sąrašo."
 
 #: ../../src/wui/attack_box.cc:236
 msgid ""
 "Hold down Shift to remove all soldiers up to the one you’re pointing at"
-msgstr ""
+msgstr "Laikyk paspaudęs Shift mygtuką, norėdamas pašalinti visus kareivius išskyrus tavo pažymėtą."
 
 #: ../../src/wui/attack_box.cc:244
 msgid "Not attacking:"
@@ -3733,15 +3734,15 @@ msgstr ""
 
 #: ../../src/wui/attack_box.cc:250
 msgid "Click on a soldier to add him to the list of attackers"
-msgstr ""
+msgstr "Spustelėk ant kareivio, norėdamas įtraukti jį į atakuojančių sąrašą."
 
 #: ../../src/wui/attack_box.cc:252
 msgid "Hold down Ctrl to add all soldiers to the list"
-msgstr ""
+msgstr "Laikyk paspaudęs Ctlr mygtuką, norėdamas visus kareivius įtraukti į sąrašą."
 
 #: ../../src/wui/attack_box.cc:253
 msgid "Hold down Shift to add all soldiers up to the one you’re pointing at"
-msgstr ""
+msgstr "Laikyk paspaudęs Shift mygtuką, norėdamas įtraukti visus kareivius išskyrus tavo pažymėtą."
 
 #. * TRANSLATORS: Health, Attack, Defense, Evade
 #: ../../src/wui/attack_box.cc:339 ../../src/wui/soldierlist.cc:394
@@ -3820,7 +3821,7 @@ msgstr ""
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
 #: ../../src/wui/building_statistics_menu.cc:715
 msgid "Lacking Soldiers:"
-msgstr ""
+msgstr "Trūksta kareivių:"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
 #: ../../src/wui/buildingwindow.cc:229
@@ -3930,12 +3931,12 @@ msgstr ""
 #: ../../src/wui/constructionsitewindow.cc:305
 #: ../../src/wui/warehousewindow.cc:147
 msgid "Do not store selected wares here"
-msgstr ""
+msgstr "Nesaugoti čia pažymėtų gaminių"
 
 #: ../../src/wui/constructionsitewindow.cc:309
 #: ../../src/wui/warehousewindow.cc:148
 msgid "Remove selected wares from here"
-msgstr ""
+msgstr "Pašalinti iš čia pažymėtus gaminius"
 
 #: ../../src/wui/constructionsitewindow.cc:328
 msgid "Ware settings to apply after construction"
@@ -3964,7 +3965,7 @@ msgstr "Ekonomikos parinktys"
 #: ../../src/wui/productionsitewindow.cc:86
 #: ../../src/wui/warehousewindow.cc:190
 msgid "Wares"
-msgstr "Prekes"
+msgstr "Gaminiai"
 
 #. * TRANSLATORS: Header in production site window if there is more than 1
 #. worker. If you
@@ -4564,7 +4565,7 @@ msgstr "Žemiausias prioritetas"
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue
 #: ../../src/wui/inputqueuedisplay.cc:342
 msgid "Decrease the number of wares you want to be stored here"
-msgstr ""
+msgstr "Sumažinti gaminių kiekį, kurį norite čia saugoti"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue - option
 #. explanation
@@ -4581,7 +4582,7 @@ msgstr ""
 #. * TRANSLATORS: Button tooltip in a building's wares input queue
 #: ../../src/wui/inputqueuedisplay.cc:369
 msgid "Increase the number of wares you want to be stored here"
-msgstr ""
+msgstr "Padidinti gaminių kiekį, kurį norite čia saugoti"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue - option
 #. explanation
@@ -4684,11 +4685,11 @@ msgstr ""
 #. * level information is shown above soldiers' heads
 #: ../../src/wui/interactive_gamebase.cc:237
 msgid "Hide Soldier Levels"
-msgstr ""
+msgstr "Slėpti kareivio lygius"
 
 #: ../../src/wui/interactive_gamebase.cc:238
 msgid "Show Soldier Levels"
-msgstr ""
+msgstr "Rodyti kareivio lygius"
 
 #: ../../src/wui/interactive_gamebase.cc:276
 msgid "Speed +"
@@ -4808,7 +4809,7 @@ msgstr ""
 #. * TRANSLATORS: Tooltip for the delete button. The user has selected 1 file
 #: ../../src/wui/load_or_save_game.cc:146
 msgid "Delete this game"
-msgstr ""
+msgstr "Ištrinti šį žaidimą"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has
 #. selected multiple files
@@ -4820,11 +4821,11 @@ msgstr ""
 #. selected multiple files
 #: ../../src/wui/load_or_save_game.cc:154
 msgid "Delete these games"
-msgstr ""
+msgstr "Ištrinti šiuos žaidimus"
 
 #: ../../src/wui/login_box.cc:37
 msgid "Nickname:"
-msgstr ""
+msgstr "Slapyvardis:"
 
 #: ../../src/wui/login_box.cc:38
 msgid "Password:"
@@ -4953,7 +4954,7 @@ msgstr ""
 
 #: ../../src/wui/maptable.cc:31 ../../src/wui/maptable.cc:60
 msgid "Filename"
-msgstr ""
+msgstr "Failo pavadimas"
 
 #: ../../src/wui/maptable.cc:31
 msgid "The name of the map or scenario"
@@ -4973,7 +4974,7 @@ msgstr "Žemėlapio pavadinimas"
 
 #: ../../src/wui/militarysitewindow.cc:42
 msgid "Soldiers"
-msgstr "Kariai"
+msgstr "Kareiviai"
 
 #: ../../src/wui/minimap.cc:142
 msgid "Owner"
@@ -5146,11 +5147,11 @@ msgstr ""
 
 #: ../../src/wui/savegamedeleter.cc:34
 msgid "Confirm Deleting File"
-msgstr ""
+msgstr "Patvirtinti trinamą failą"
 
 #: ../../src/wui/savegamedeleter.cc:34
 msgid "Confirm Deleting Files"
-msgstr ""
+msgstr "Patvirtinti trinamus failus"
 
 #: ../../src/wui/savegamedeleter.cc:42
 msgid "Do you really want to delete this game?"
@@ -5532,7 +5533,7 @@ msgstr ""
 #: ../../src/wui/soldierlist.cc:378 ../../src/wui/soldierlist.cc:400
 #: ../../src/wui/soldierlist.cc:458
 msgid "Click soldier to send away"
-msgstr ""
+msgstr "Spustelėk kareivį, kad išsiųstum"
 
 #. * TRANSLATORS: Tooltip for volume slider in sound options
 #: ../../src/wui/sound_options.cc:63
@@ -5593,7 +5594,7 @@ msgstr ""
 
 #: ../../src/wui/trainingsitewindow.cc:47
 msgid "Soldiers in training"
-msgstr ""
+msgstr "Kareiviai apmokymuose"
 
 #: ../../src/wui/ware_statistics_menu.cc:105
 msgid "Ware Statistics"

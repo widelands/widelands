@@ -158,8 +158,6 @@ protected:
 		void load_pointers() override;
 		void load_finish() override;
 
-		uint8_t packet_version_;
-
 	private:
 		std::vector<uint32_t> ships_;
 		std::vector<uint32_t> ports_;

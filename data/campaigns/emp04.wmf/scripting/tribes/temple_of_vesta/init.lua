@@ -1,5 +1,7 @@
 dirname = "tribes/buildings/warehouses/empire/warehouse/"
 
+push_textdomain("scenario_emp04.wmf")
+
 tribes:new_warehouse_type {
    msgctxt = "empire_building",
    name = "empire_temple_of_vesta",
@@ -28,3 +30,4 @@ tribes:new_warehouse_type {
    heal_per_second = 220,
    conquers = 7,
 }
+pop_textdomain()

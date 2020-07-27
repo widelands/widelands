@@ -19,7 +19,7 @@ include "scripting/richtext.lua"
 --    :returns: a richtext-formatted list of terrain images, terrain names and probabilities.
 --
 function terrain_affinity_help(immovable_description)
-   set_textdomain("widelands")
+   push_textdomain("widelands")
    local world = wl.World();
    local result = ""
    terrain_list = {}
@@ -49,5 +49,6 @@ function terrain_affinity_help(immovable_description)
             ) .. vspace(6)
       end
    end
+   pop_textdomain()
    return result
 end

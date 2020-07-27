@@ -644,30 +644,6 @@ private:
 	uint32_t permanent_;
 };
 
-// TODO(Nordfriese): CmdResetWareTargetQuantity can be removed when we next break savegame
-// compatibility
-struct CmdResetWareTargetQuantity : public CmdChangeTargetQuantity {
-	CmdResetWareTargetQuantity() : CmdChangeTargetQuantity() {
-	}
-	CmdResetWareTargetQuantity(uint32_t duetime,
-	                           PlayerNumber sender,
-	                           uint32_t economy,
-	                           DescriptionIndex index);
-
-	//  Write/Read these commands to/from a file (for savegames).
-	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
-	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
-
-	QueueCommandTypes id() const override {
-		return QueueCommandTypes::kResetWareTargetQuantity;
-	}
-
-	explicit CmdResetWareTargetQuantity(StreamRead&);
-
-	void execute(Game&) override;
-	void serialize(StreamWrite&) override;
-};
-
 struct CmdSetWorkerTargetQuantity : public CmdChangeTargetQuantity {
 	CmdSetWorkerTargetQuantity() : CmdChangeTargetQuantity(), permanent_(0) {
 	}
@@ -692,30 +668,6 @@ struct CmdSetWorkerTargetQuantity : public CmdChangeTargetQuantity {
 
 private:
 	uint32_t permanent_;
-};
-
-// TODO(Nordfriese): CmdResetWorkerTargetQuantity can be removed when we next break savegame
-// compatibility
-struct CmdResetWorkerTargetQuantity : public CmdChangeTargetQuantity {
-	CmdResetWorkerTargetQuantity() : CmdChangeTargetQuantity() {
-	}
-	CmdResetWorkerTargetQuantity(uint32_t duetime,
-	                             PlayerNumber sender,
-	                             uint32_t economy,
-	                             DescriptionIndex index);
-
-	//  Write/Read these commands to/from a file (for savegames).
-	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
-	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
-
-	QueueCommandTypes id() const override {
-		return QueueCommandTypes::kResetWorkerTargetQuantity;
-	}
-
-	explicit CmdResetWorkerTargetQuantity(StreamRead&);
-
-	void execute(Game&) override;
-	void serialize(StreamWrite&) override;
 };
 
 struct CmdChangeTrainingOptions : public PlayerCommand {
