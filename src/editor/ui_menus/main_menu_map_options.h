@@ -20,6 +20,7 @@
 #ifndef WL_EDITOR_UI_MENUS_MAIN_MENU_MAP_OPTIONS_H
 #define WL_EDITOR_UI_MENUS_MAIN_MENU_MAP_OPTIONS_H
 
+#include "logic/map.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
@@ -34,6 +35,7 @@
 #include "ui_basic/unique_window.h"
 
 class EditorInteractive;
+struct SuggestedTeamsEntry;
 
 /**
  * This is the Main Options Menu. Here, information
@@ -42,6 +44,8 @@ class EditorInteractive;
  */
 struct MainMenuMapOptions : public UI::UniqueWindow {
 	MainMenuMapOptions(EditorInteractive&, UI::UniqueWindow::Registry& registry);
+
+	void delete_suggested_team(SuggestedTeamsEntry*);
 
 private:
 	EditorInteractive& eia();
@@ -59,7 +63,7 @@ private:
 	UI::TabPanel tabs_;
 	UI::Box main_box_;
 	UI::Box tags_box_;
-	UI::Box teams_box_;
+	UI::Box teams_box_, inner_teams_box_;
 
 	UI::EditBox name_, author_;
 	UI::Textarea size_;
@@ -70,12 +74,37 @@ private:
 	std::map<std::string, UI::Checkbox*> tags_checkboxes_;
 	UI::Dropdown<std::string> balancing_dropdown_;
 
-	UI::Listselect<std::string> teams_list_;
 	UI::SpinBox* waterway_length_box_;
 	UI::Icon* waterway_length_warning_;
 	void update_waterway_length_warning();
 
+	std::vector<SuggestedTeamsEntry*> suggested_teams_entries_;
+	UI::Button new_suggested_team_;
+
 	UI::UniqueWindow::Registry& registry_;
+};
+
+struct SuggestedTeamsEntry : public UI::Panel {
+	SuggestedTeamsEntry(MainMenuMapOptions*, UI::Panel*, const Widelands::Map&, unsigned w, Widelands::SuggestedTeamLineup);
+	~SuggestedTeamsEntry() override {
+	}
+
+	void layout() override;
+	void draw(RenderTarget&) override;
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
+
+	const Widelands::SuggestedTeamLineup& team() const { return team_; }
+	Widelands::SuggestedTeamLineup& team() { return team_; }
+
+private:
+	const Widelands::Map& map_;
+	Widelands::SuggestedTeamLineup team_;
+	UI::Button delete_;
+	std::vector<UI::Dropdown<Widelands::PlayerNumber>*> dropdowns_;
+
+	UI::Dropdown<Widelands::PlayerNumber>* create_dropdown(size_t);
+
+	void update();
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_MAIN_MENU_MAP_OPTIONS_H

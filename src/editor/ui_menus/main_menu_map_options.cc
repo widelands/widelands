@@ -36,6 +36,145 @@ inline EditorInteractive& MainMenuMapOptions::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 
+constexpr unsigned kSuggestedTeamsUnitSize = 24;
+
+SuggestedTeamsEntry::SuggestedTeamsEntry(MainMenuMapOptions* mmmo, UI::Panel* parent, const Widelands::Map& map, unsigned w, Widelands::SuggestedTeamLineup t)
+: UI::Panel(parent, 0, 0, w, kSuggestedTeamsUnitSize, _("Click player to remove")),
+map_(map),
+team_(t),
+delete_(this, "delete", 0, 0, kSuggestedTeamsUnitSize, kSuggestedTeamsUnitSize,
+	    UI::ButtonStyle::kWuiSecondary,
+	    _("Delete"),
+	    _("Delete this suggested team lineup")) {
+	for (size_t index = 0; index < team_.size(); ++index) {
+		dropdowns_.push_back(create_dropdown(index));
+	}
+
+	delete_.sigclicked.connect([this, mmmo]() {
+		mmmo->delete_suggested_team(this);
+	});
+
+	update();
+}
+
+UI::Dropdown<Widelands::PlayerNumber>* SuggestedTeamsEntry::create_dropdown(size_t index) {
+	UI::Dropdown<Widelands::PlayerNumber>* dd = new UI::Dropdown<Widelands::PlayerNumber>(this, std::to_string(index),
+	         0,
+	         index * kSuggestedTeamsUnitSize,
+	         kSuggestedTeamsUnitSize,
+	         8,
+	         0,
+	         _("+"),
+	         UI::DropdownType::kPictorialMenu,
+	         UI::PanelStyle::kWui,
+	         UI::ButtonStyle::kWuiSecondary);
+	for (size_t i = 0; i < map_.get_nrplayers(); ++i) {
+		dd->add(map_.get_scenario_player_name(i + 1), i,
+	         playercolor_image(i, "images/players/player_position_menu.png"));
+	}
+	dd->set_tooltip(_("Add a player to this team"));
+	dd->selected.connect([this, dd]() {
+		const Widelands::PlayerNumber player = dd->get_selected();
+		// add this player to this team and remove him from all other teams in this lineup
+		for (Widelands::SuggestedTeam& t : team_) {
+			for (auto it = t.begin(); it != t.end(); ++it) {
+				if (*it == player) {
+					t.erase(it);
+					break;
+				}
+			}
+		}
+		// determine our index (it may have changed since the creation!)
+		int dd_index = -1;
+		for (size_t i = 0; i < dropdowns_.size(); ++i) {
+			if (dropdowns_[i] == dd) {
+				dd_index = i;
+				break;
+			}
+		}
+		assert(dd_index >= 0);
+		if (static_cast<unsigned>(dd_index) >= team_.size()) {
+			assert(static_cast<unsigned>(dd_index) == team_.size());
+			team_.push_back(Widelands::SuggestedTeam());
+		}
+		team_[dd_index].push_back(player);
+		update();
+	});
+	return dd;
+}
+
+void SuggestedTeamsEntry::layout() {
+	const uint16_t h = kSuggestedTeamsUnitSize * (team_.size() + 1);
+	set_desired_size(get_w(), h);
+	delete_.set_pos(Vector2i(get_w() / 2, h - kSuggestedTeamsUnitSize));
+	delete_.set_size(get_w() / 2, kSuggestedTeamsUnitSize);
+
+	size_t index = 0;
+	for (auto& dd : dropdowns_) {
+		dd->set_size(kSuggestedTeamsUnitSize, kSuggestedTeamsUnitSize);
+		dd->set_pos(Vector2i(0, kSuggestedTeamsUnitSize * (index++)));
+	}
+}
+
+// Delete empty teams, and append an empty team to the end if not present
+void SuggestedTeamsEntry::update() {
+	int nr_teams = team_.size();
+	int nr_dd = dropdowns_.size();
+	for (int i = 0; i < nr_teams;) {
+		if (team_[i].empty()) {
+			dropdowns_[i]->die();
+
+			for (int j = i + 1; j < nr_dd; ++j) {
+				dropdowns_[j - 1] = dropdowns_[j];
+			}
+			dropdowns_.resize(nr_dd - 1);
+			for (int j = i + 1; j < nr_teams; ++j) {
+				team_[j - 1] = team_[j];
+			}
+			team_.resize(nr_teams - 1);
+
+			--nr_teams;
+			--nr_dd;
+		} else {
+			++i;
+		}
+	}
+	assert(nr_teams >= 0);
+	assert(nr_dd >= 0);
+
+	assert((nr_dd == nr_teams) ^ (nr_dd == nr_teams + 1));
+	if (nr_dd <= nr_teams) {
+		dropdowns_.push_back(create_dropdown(nr_teams));
+	}
+
+	layout();
+}
+
+bool SuggestedTeamsEntry::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
+	const int row = y / kSuggestedTeamsUnitSize;
+	const int col = x / kSuggestedTeamsUnitSize;
+	if (row >= 0 && static_cast<unsigned>(row) < team_.size()) {
+		if (col > 0 && static_cast<unsigned>(col) <= team_[row].size()) {
+			team_[row].erase(team_[row].begin() + (col - 1));
+			update();
+			return true;
+		}
+	}
+
+	return UI::Panel::handle_mousepress(btn, x, y);
+}
+
+void SuggestedTeamsEntry::draw(RenderTarget& r) {
+	UI::Panel::draw(r);
+
+	for (size_t row = 0; row < team_.size(); ++row) {
+		for (size_t col = 0; col < team_[row].size(); ++col) {
+			r.blit(Vector2i((col + 1) * kSuggestedTeamsUnitSize, row * kSuggestedTeamsUnitSize),
+					playercolor_image(team_[row][col], "images/players/player_position_menu.png"));
+		}
+	}
+}
+
 constexpr uint16_t kMaxRecommendedWaterwayLengthLimit = 20;
 
 /**
@@ -72,6 +211,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
      main_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
      tags_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
      teams_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
+     inner_teams_box_(&teams_box_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
 
      name_(&main_box_, 0, 0, max_w_, UI::PanelStyle::kWui),
      author_(&main_box_, 0, 0, max_w_, UI::PanelStyle::kWui),
@@ -87,8 +227,10 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
                          UI::DropdownType::kTextual,
                          UI::PanelStyle::kWui,
                          UI::ButtonStyle::kWuiSecondary),
-     teams_list_(
-        &teams_box_, 0, 0, max_w_, 60, UI::PanelStyle::kWui, UI::ListselectLayout::kShowCheck),
+     new_suggested_team_(&teams_box_, "new_suggested_team", 0, 0, max_w_, kSuggestedTeamsUnitSize,
+	    UI::ButtonStyle::kWuiSecondary,
+	    _("Add lineup"),
+	    _("Add another suggested team lineup")),
      registry_(registry) {
 
 	tab_box_.set_size(max_w_, get_inner_h() - labelh_ - 2 * padding_);
@@ -157,18 +299,28 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	tags_box_.add(ww_box, UI::Box::Resizing::kFullSize);
 	tags_box_.add_space(padding_);
 
-	teams_box_.add(new UI::Textarea(&teams_box_, 0, 0, max_w_, labelh_, _("Suggested Teams:")));
-	teams_box_.add(&teams_list_);
-	// TODO(GunChleoc): We need team images in the listselect here,
-	// so map editors will be able to delete entries.
-	// This is waiting for the new RT renderer.
-	// TODO(Notabilis): Add onChanged-code below after this is added
-	teams_list_.add("Not implemented yet.", "", nullptr, false);
+	inner_teams_box_.set_force_scrolling(true);
+	inner_teams_box_.set_scrollbar_style(UI::PanelStyle::kWui);
+	for (const Widelands::SuggestedTeamLineup& team : parent.egbase().map().get_suggested_teams()) {
+		SuggestedTeamsEntry* ste = new SuggestedTeamsEntry(this, &inner_teams_box_, parent.egbase().map(), max_w_ - UI::Scrollbar::kSize, team);
+		inner_teams_box_.add(ste);
+		inner_teams_box_.add_space(kSuggestedTeamsUnitSize);
+		suggested_teams_entries_.push_back(ste);
+	}
 
+	teams_box_.add(new UI::Textarea(&teams_box_, 0, 0, max_w_, labelh_, _("Suggested Teams:")));
+	teams_box_.add(&inner_teams_box_, UI::Box::Resizing::kExpandBoth);
+	teams_box_.add(&new_suggested_team_, UI::Box::Resizing::kFullSize);
 	unsigned int nr_players = static_cast<unsigned int>(eia().egbase().map().get_nrplayers());
 	std::string players =
 	   (boost::format(ngettext("%u Player", "%u Players", nr_players)) % nr_players).str();
 	teams_box_.add(new UI::Textarea(&teams_box_, 0, 0, max_w_, labelh_, players));
+	new_suggested_team_.sigclicked.connect([this]() {
+		SuggestedTeamsEntry* ste = new SuggestedTeamsEntry(this, &inner_teams_box_, eia().egbase().map(), max_w_ - UI::Scrollbar::kSize, Widelands::SuggestedTeamLineup());
+		inner_teams_box_.add(ste);
+		inner_teams_box_.add_space(kSuggestedTeamsUnitSize);
+		suggested_teams_entries_.push_back(ste);
+	});
 
 	tab_box_.add(&tabs_, UI::Box::Resizing::kFullSize);
 	tabs_.add("main_map_options", g_gr->images().get("images/wui/menus/toggle_minimap.png"),
@@ -244,20 +396,26 @@ void MainMenuMapOptions::changed() {
 }
 
 void MainMenuMapOptions::clicked_ok() {
-	eia().egbase().mutable_map()->set_name(name_.text());
-	eia().egbase().mutable_map()->set_author(author_.text());
+	Widelands::Map& map = *eia().egbase().mutable_map();
+	map.set_name(name_.text());
+	map.set_author(author_.text());
 	set_config_string("realname", author_.text());
-	eia().egbase().mutable_map()->set_description(descr_->get_text());
-	eia().egbase().mutable_map()->set_hint(hint_->get_text());
-	eia().egbase().mutable_map()->set_waterway_max_length(waterway_length_box_->get_value());
+	map.set_description(descr_->get_text());
+	map.set_hint(hint_->get_text());
+	map.set_waterway_max_length(waterway_length_box_->get_value());
 
-	eia().egbase().mutable_map()->clear_tags();
+	map.get_suggested_teams().clear();
+	for (SuggestedTeamsEntry* ste : suggested_teams_entries_) {
+		map.get_suggested_teams().push_back(ste->team());
+	}
+
+	map.clear_tags();
 	for (const auto& tag : tags_checkboxes_) {
 		if (tag.second->get_state()) {
-			eia().egbase().mutable_map()->add_tag(tag.first);
+			map.add_tag(tag.first);
 		}
 	}
-	eia().egbase().mutable_map()->add_tag(balancing_dropdown_.get_selected());
+	map.add_tag(balancing_dropdown_.get_selected());
 	Notifications::publish(NoteMapOptions());
 	registry_.destroy();
 }
@@ -279,4 +437,26 @@ void MainMenuMapOptions::add_tag_checkbox(UI::Box* parent,
 	parent->add(box);
 	parent->add_space(padding_);
 	tags_checkboxes_[tag] = cb;
+}
+
+void MainMenuMapOptions::delete_suggested_team(SuggestedTeamsEntry* ste) {
+	inner_teams_box_.set_force_scrolling(false);
+	inner_teams_box_.clear();
+	const size_t nr = suggested_teams_entries_.size();
+	for (size_t i = 0; i < nr; ++i) {
+		if (suggested_teams_entries_[i] == ste) {
+			for (size_t j = i + 1; j < nr; ++j) {
+				inner_teams_box_.add(suggested_teams_entries_[j]);
+				inner_teams_box_.add_space(kSuggestedTeamsUnitSize);
+				suggested_teams_entries_[j - 1] = suggested_teams_entries_[j];
+			}
+			suggested_teams_entries_.resize(nr - 1);
+			inner_teams_box_.set_force_scrolling(true);
+			return ste->die();
+		} else {
+			inner_teams_box_.add(suggested_teams_entries_[i]);
+			inner_teams_box_.add_space(kSuggestedTeamsUnitSize);
+		}
+	}
+	NEVER_HERE();
 }
