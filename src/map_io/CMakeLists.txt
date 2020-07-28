@@ -61,6 +61,7 @@ wl_library(map_io
     map_object_loader.h
     map_object_packet.cc
     map_object_packet.h
+    map_object_packet_version.h
     map_object_saver.cc
     map_object_saver.h
     map_objective_packet.cc

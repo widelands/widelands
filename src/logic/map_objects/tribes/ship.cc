@@ -45,6 +45,7 @@
 #include "logic/player.h"
 #include "logic/widelands_geometry_io.h"
 #include "map_io/map_object_loader.h"
+#include "map_io/map_object_packet_version.h"
 #include "map_io/map_object_saver.h"
 
 namespace Widelands {
@@ -1142,8 +1143,6 @@ const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	}
 	return Bob::Loader::get_task(name);
 }
-
-constexpr uint8_t kCurrentMapObjectPacketVersion = 2;
 
 void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 	if (packet_version != kCurrentMapObjectPacketVersion) {

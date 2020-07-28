@@ -59,6 +59,7 @@
 #include "logic/message_queue.h"
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
+#include "map_io/map_object_packet_version.h"
 #include "map_io/map_object_saver.h"
 #include "map_io/tribes_legacy_lookup_table.h"
 #include "sound/note_sound.h"
@@ -3338,8 +3339,6 @@ const MapObjectProgram* Worker::Loader::get_program(const std::string& name) {
 Worker::Loader* Worker::create_loader() {
 	return new Loader;
 }
-
-constexpr uint8_t kCurrentMapObjectPacketVersion = 2;
 
 /**
  * Load function for all classes derived from \ref Worker
