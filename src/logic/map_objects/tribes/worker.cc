@@ -3353,7 +3353,8 @@ MapObject::Loader* Worker::load(EditorGameBase& egbase,
                                 const TribesLegacyLookupTable& lookup_table,
                                 uint8_t packet_version) {
 	if (packet_version != kCurrentMapObjectPacketVersion) {
-		throw UnhandledVersionError("MapObjectPacket::Worker", packet_version, kCurrentMapObjectPacketVersion);
+		throw UnhandledVersionError(
+		   "MapObjectPacket::Worker", packet_version, kCurrentMapObjectPacketVersion);
 	}
 
 	try {
