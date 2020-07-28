@@ -3339,6 +3339,8 @@ Worker::Loader* Worker::create_loader() {
 	return new Loader;
 }
 
+constexpr uint8_t kCurrentMapObjectPacketVersion = 2;
+
 /**
  * Load function for all classes derived from \ref Worker
  *
@@ -3349,7 +3351,11 @@ MapObject::Loader* Worker::load(EditorGameBase& egbase,
                                 MapObjectLoader& mol,
                                 FileRead& fr,
                                 const TribesLegacyLookupTable& lookup_table,
-                                uint8_t /* packet_version */) {
+                                uint8_t packet_version) {
+	if (packet_version != kCurrentMapObjectPacketVersion) {
+		throw UnhandledVersionError("MapObjectPacket::Worker", packet_version, kCurrentMapObjectPacketVersion);
+	}
+
 	try {
 		// header has already been read by caller
 		const std::string name = lookup_table.lookup_worker(fr.c_string());

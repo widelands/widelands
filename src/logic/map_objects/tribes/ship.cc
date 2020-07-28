@@ -1143,7 +1143,13 @@ const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	return Bob::Loader::get_task(name);
 }
 
-void Ship::Loader::load(FileRead& fr, uint8_t /* packet_version */) {
+constexpr uint8_t kCurrentMapObjectPacketVersion = 2;
+
+void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
+	if (packet_version != kCurrentMapObjectPacketVersion) {
+		throw UnhandledVersionError("MapObjectPacket::Ship", packet_version, kCurrentMapObjectPacketVersion);
+	}
+
 	Bob::Loader::load(fr);
 	// Economy
 	ware_economy_serial_ = fr.unsigned_32();
