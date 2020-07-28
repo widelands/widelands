@@ -59,27 +59,14 @@ constexpr uint16_t kCurrentPacketVersion = 4;
 void CmdCallEconomyBalance::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version <= kCurrentPacketVersion && packet_version >= 3) {
+		if (packet_version == kCurrentPacketVersion) {
 			GameLogicCommand::read(fr, egbase, mol);
 			uint32_t serial = fr.unsigned_32();
 			if (serial) {
 				flag_ = &mol.get<Flag>(serial);
 			}
 			timerid_ = fr.unsigned_32();
-			if (packet_version >= 4) {
-				type_ = fr.unsigned_8() ? wwWORKER : wwWARE;
-			} else {
-				// TODO(Nordfriese): Savegame compatibility
-				type_ = wwWARE;
-				if (serial) {
-					if (upcast(Game, game, &egbase)) {
-						Economy* e = flag_.get(egbase)->get_economy(wwWORKER);
-						assert(e);
-						game->cmdqueue().enqueue(
-						   new CmdCallEconomyBalance(duetime(), e, e->request_timerid_));
-					}
-				}
-			}
+			type_ = fr.unsigned_8() ? wwWORKER : wwWARE;
 		} else {
 			throw UnhandledVersionError(
 			   "CmdCallEconomyBalance", packet_version, kCurrentPacketVersion);

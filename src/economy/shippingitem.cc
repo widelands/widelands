@@ -148,16 +148,9 @@ constexpr uint16_t kCurrentPacketVersion = 2;
 void ShippingItem::Loader::load(FileRead& fr) {
 	try {
 		uint8_t packet_version = fr.unsigned_8();
-		if (packet_version <= kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersion) {
 			serial_ = fr.unsigned_32();
-			if (packet_version >= 2) {
-				destination_serial_ = fr.unsigned_32();
-			} else {
-				// TODO(Nordfriese): Remove when we break savegame compatibility
-				log("WARNING: Loading shippingitem with possible nullptr destination, which may result "
-				    "in bugs later\n");
-				destination_serial_ = 0;
-			}
+			destination_serial_ = fr.unsigned_32();
 		} else {
 			throw UnhandledVersionError("ShippingItem", packet_version, kCurrentPacketVersion);
 		}
