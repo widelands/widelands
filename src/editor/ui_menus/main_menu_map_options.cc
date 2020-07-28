@@ -228,7 +228,7 @@ void MainMenuMapOptions::update() {
 	waterway_length_box_->set_value(map.get_waterway_max_length());
 	update_waterway_length_warning();
 
-	std::set<std::string> tags = map.get_tags();
+	const std::set<std::string>& tags = map.get_tags();
 	for (auto tag : tags_checkboxes_) {
 		tag.second->set_state(tags.count(tag.first) > 0);
 	}

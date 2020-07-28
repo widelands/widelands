@@ -1763,8 +1763,7 @@ int LuaTribeDescription::get_immovables(lua_State* L) {
 int LuaTribeDescription::get_resource_indicators(lua_State* L) {
 	const TribeDescr& tribe = *get();
 	lua_newtable(L);
-	const ResourceIndicatorSet resis = tribe.resource_indicators();
-	for (const auto& resilist : resis) {
+	for (const auto& resilist : tribe.resource_indicators()) {
 		lua_pushstring(L, resilist.first);
 		lua_newtable(L);
 		for (const auto& resi : resilist.second) {
