@@ -56,7 +56,7 @@ public:
 	struct Value {
 		Value(const std::string& name, const char* const value);
 		Value(const Value&);
-		Value(Value&& other);
+		Value(Value&& other) noexcept;
 
 		// destructor would be empty
 
