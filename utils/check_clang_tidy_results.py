@@ -78,7 +78,6 @@ SUPPRESSED_CHECKS = {
     '[modernize-use-equals-default]',
     '[modernize-use-nullptr]',
     '[modernize-use-override]',
-    '[performance-inefficient-vector-operation]',
     '[performance-unnecessary-copy-initialization]',
     '[performance-unnecessary-value-param]',
     '[readability-container-size-empty]',
