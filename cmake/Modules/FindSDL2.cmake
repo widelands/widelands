@@ -171,10 +171,19 @@ find_path(SDL2_INCLUDE_DIR SDL.h
   PATH_SUFFIXES SDL2
                 # path suffixes to search inside ENV{SDL2DIR}
                 include/SDL2 include
-  PATHS ${SDL2_PATH}
+  PATHS
+  ~/Library/Frameworks
+  /Library/Frameworks
+  /usr/local/include/SDL2
+  /usr/include/x86_64-linux-gnu/SDL2 # Ubuntu Focal (?)
+  /sw # Fink
+  /opt/local # DarwinPorts
+  /opt/csw # Blastwave
+  /opt
+  C:/MinGW #Win32
   DOC "Where the SDL2 headers can be found"
 )
-
+message(STATUS "SDL2_INCLUDE_DIR is ${SDL2_INCLUDE_DIR}")
 set(SDL2_INCLUDE_DIRS "${SDL2_INCLUDE_DIR}")
 
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
@@ -190,8 +199,13 @@ find_library(SDL2_LIBRARY
   HINTS
     ENV SDL2DIR
     ${SDL2_NO_DEFAULT_PATH_CMD}
-  PATH_SUFFIXES lib ${VC_LIB_PATH_SUFFIX}
-  PATHS ${SDL2_PATH}
+  PATH_SUFFIXES lib lib64
+  PATHS
+  /sw
+  /opt/local
+  /opt/csw
+  /opt
+  C:/MinGW
   DOC "Where the SDL2 Library can be found"
 )
 
@@ -214,6 +228,7 @@ if(NOT SDL2_BUILDING_LIBRARY)
             /opt/local
             /opt/csw
             /opt
+			c:/MinGW
             "${SDL2MAIN_LIBRARY_PATHS}"
       )
     endif()
@@ -223,7 +238,7 @@ if(NOT SDL2_BUILDING_LIBRARY)
       HINTS
         ENV SDL2DIR
         ${SDL2_NO_DEFAULT_PATH_CMD}
-      PATH_SUFFIXES lib ${VC_LIB_PATH_SUFFIX}
+      PATH_SUFFIXES lib lib64
       PATHS ${SDL2MAIN_LIBRARY_PATHS}
       DOC "Where the SDL2main library can be found"
     )
