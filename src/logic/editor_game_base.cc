@@ -384,7 +384,7 @@ Building& EditorGameBase::warp_building(const Coords& c,
                                         FormerBuildings former_buildings) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
-	return tribe.get_building_descr(idx)->create(*this, plr, c, false, true, former_buildings);
+	return tribe.get_building_descr(idx)->create(*this, plr, c, false, true, std::move(former_buildings));
 }
 
 /**
@@ -401,11 +401,11 @@ EditorGameBase::warp_constructionsite(const Coords& c,
                                       bool loading,
                                       FormerBuildings former_buildings,
                                       const BuildingSettings* settings,
-                                      std::map<DescriptionIndex, Quantity> preserved_wares) {
+                                      const std::map<DescriptionIndex, Quantity>& preserved_wares) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
 	ConstructionSite& b = dynamic_cast<ConstructionSite&>(
-	   tribe.get_building_descr(idx)->create(*this, plr, c, true, loading, former_buildings));
+	   tribe.get_building_descr(idx)->create(*this, plr, c, true, loading, std::move(former_buildings)));
 	if (settings) {
 		b.apply_settings(*settings);
 	}
@@ -422,7 +422,7 @@ Building& EditorGameBase::warp_dismantlesite(const Coords& c,
                                              PlayerNumber const owner,
                                              bool loading,
                                              FormerBuildings former_buildings,
-                                             std::map<DescriptionIndex, Quantity> preserved_wares) {
+                                             const std::map<DescriptionIndex, Quantity>& preserved_wares) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
 

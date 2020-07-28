@@ -78,7 +78,6 @@ SUPPRESSED_CHECKS = {
     '[modernize-use-equals-default]',
     '[modernize-use-nullptr]',
     '[modernize-use-override]',
-    '[performance-unnecessary-value-param]',
     '[readability-container-size-empty]',
     '[readability-delete-null-pointer]',
     '[readability-else-after-return]',

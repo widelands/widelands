@@ -4205,8 +4205,8 @@ int LuaMapObject::has_attribute(lua_State* L) {
  C METHODS
  ==========================================================
  */
-MapObject* LuaMapObject::get(lua_State* L, EditorGameBase& egbase, std::string name) {
-	MapObject* o = get_or_zero(egbase);
+Widelands::MapObject* LuaMapObject::get(lua_State* L, Widelands::EditorGameBase& egbase, const std::string& name) {
+	Widelands::MapObject* o = get_or_zero(egbase);
 	if (!o) {
 		report_error(L, "%s no longer exists!", name.c_str());
 	}

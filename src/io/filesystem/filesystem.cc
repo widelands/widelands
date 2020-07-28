@@ -487,7 +487,7 @@ static void fs_tokenize(const std::string& path, char const filesep, Inserter co
  * Transform any valid, unique pathname into a well-formed absolute path
  */
 // TODO(unknown): Enable non-Unix paths
-std::string FileSystem::canonicalize_name(std::string path) const {
+std::string FileSystem::canonicalize_name(const std::string& path) const {
 	std::list<std::string> components;
 	std::list<std::string>::iterator i;
 

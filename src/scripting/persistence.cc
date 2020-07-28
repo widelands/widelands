@@ -97,7 +97,7 @@ static bool add_object_to_not_persist(lua_State* L, std::string name, uint32_t n
 // Special handling for the upvalues of pairs and ipairs which are iterator
 // functions, but always the same and therefor need not be persisted (in fact
 // they are c functions, so they can't be persisted all the same)
-static void add_iterator_function_to_not_persist(lua_State* L, std::string global, uint32_t idx) {
+static void add_iterator_function_to_not_persist(lua_State* L, const std::string& global, uint32_t idx) {
 	lua_getglobal(L, global.c_str());
 	lua_newtable(L);
 	lua_call(L, 1, 1);  // pairs{}, stack now contains iterator function
@@ -134,7 +134,7 @@ static bool add_object_to_not_unpersist(lua_State* L, std::string name, uint32_t
 	return true;
 }
 
-static void add_iterator_function_to_not_unpersist(lua_State* L, std::string global, uint32_t idx) {
+static void add_iterator_function_to_not_unpersist(lua_State* L, const std::string& global, uint32_t idx) {
 	lua_pushuint32(L, idx);            // S: ... globals idx
 	lua_getglobal(L, global.c_str());  // S: ... globals idx "pairs"
 	lua_newtable(L);                   // S: ... globals idx "pairs" table

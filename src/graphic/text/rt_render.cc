@@ -1062,7 +1062,7 @@ public:
 	           const UI::FontSets& fontsets)
 	   : tag_(tag),
 	     font_cache_(fc),
-	     nodestyle_(ns),
+	     nodestyle_(std::move(ns)),
 	     image_cache_(image_cache),
 	     renderer_style_(renderer_style),
 	     fontsets_(fontsets) {
@@ -1196,7 +1196,7 @@ public:
 	               ImageCache* image_cache,
 	               RendererStyle& init_renderer_style,
 	               const UI::FontSets& fontsets)
-	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets) {
+	   : TagHandler(tag, fc, std::move(ns), image_cache, init_renderer_style, fontsets) {
 	}
 
 	void enter() override {
@@ -1236,7 +1236,7 @@ public:
 	            ImageCache* image_cache,
 	            RendererStyle& init_renderer_style,
 	            const UI::FontSets& fontsets)
-	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets), indent_(0) {
+	   : TagHandler(tag, fc, std::move(ns), image_cache, init_renderer_style, fontsets), indent_(0) {
 	}
 
 	void enter() override {
@@ -1292,7 +1292,7 @@ public:
 	              ImageCache* image_cache,
 	              RendererStyle& init_renderer_style,
 	              const UI::FontSets& fontsets)
-	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets), render_node_(nullptr) {
+	   : TagHandler(tag, fc, std::move(ns), image_cache, init_renderer_style, fontsets), render_node_(nullptr) {
 	}
 
 	void enter() override {
@@ -1346,7 +1346,7 @@ public:
 	                 ImageCache* image_cache,
 	                 RendererStyle& init_renderer_style,
 	                 const UI::FontSets& fontsets)
-	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets), space_(0) {
+	   : TagHandler(tag, fc, std::move(ns), image_cache, init_renderer_style, fontsets), space_(0) {
 	}
 
 	void enter() override {
@@ -1371,7 +1371,7 @@ public:
 	                 ImageCache* image_cache,
 	                 RendererStyle& init_renderer_style,
 	                 const UI::FontSets& fontsets)
-	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets),
+	   : TagHandler(tag, fc, std::move(ns), image_cache, init_renderer_style, fontsets),
 	     background_image_(nullptr),
 	     space_(0) {
 	}
@@ -1434,7 +1434,7 @@ public:
 	             ImageCache* image_cache,
 	             RendererStyle& init_renderer_style,
 	             const UI::FontSets& fontsets)
-	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets) {
+	   : TagHandler(tag, fc, std::move(ns), image_cache, init_renderer_style, fontsets) {
 	}
 
 	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
@@ -1673,7 +1673,7 @@ public:
 	             RendererStyle& init_renderer_style,
 	             const UI::FontSets& fontsets,
 	             uint16_t w)
-	   : DivTagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets, w, true) {
+	   : DivTagHandler(tag, fc, std::move(ns), image_cache, init_renderer_style, fontsets, w, true) {
 	}
 
 	// Handle attributes that are in rt, but not in div.

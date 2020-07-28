@@ -98,7 +98,7 @@ public:
 
 	// basic path/filename manipulation
 	std::string fix_cross_file(const std::string&) const;
-	std::string canonicalize_name(std::string path) const;
+	std::string canonicalize_name(const std::string& path) const;
 	bool is_path_absolute(const std::string& path) const;
 
 	/// Returns true if the filename is legal in all operating systems

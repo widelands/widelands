@@ -64,7 +64,7 @@ private:
 	                                                 uint32_t initial,
 	                                                 char const* hint);
 	UI::Textarea&
-	add_text(UI::Box& parent, std::string str, UI::Align alignment, const UI::FontStyle style);
+	add_text(UI::Box& parent, const std::string& str, UI::Align alignment, const UI::FontStyle style);
 	std::unique_ptr<UI::Button> add_button(UI::Box& parent,
 	                                       const std::string& text,
 	                                       void (AttackBox::*fn)(),

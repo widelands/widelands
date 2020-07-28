@@ -859,7 +859,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	Widelands::MapObject* get(lua_State*, Widelands::EditorGameBase&, std::string = "MapObject");
+	Widelands::MapObject* get(lua_State*, Widelands::EditorGameBase&, const std::string& = "MapObject");
 	Widelands::MapObject* get_or_zero(Widelands::EditorGameBase&);
 };
 
