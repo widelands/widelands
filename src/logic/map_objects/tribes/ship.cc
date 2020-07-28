@@ -1146,7 +1146,8 @@ const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 
 void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 	if (packet_version != kCurrentMapObjectPacketVersion) {
-		throw UnhandledVersionError("MapObjectPacket::Ship", packet_version, kCurrentMapObjectPacketVersion);
+		throw UnhandledVersionError(
+		   "MapObjectPacket::Ship", packet_version, kCurrentMapObjectPacketVersion);
 	}
 
 	Bob::Loader::load(fr);
