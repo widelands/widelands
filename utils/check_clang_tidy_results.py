@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
+"""Checks whether clang-tidy warnings that were previously cleaned have
+regressed."""
+
 import re
 import sys
 
@@ -95,7 +98,7 @@ SUPPRESSED_CHECKS = {
     '[readability-static-definition-in-anonymous-namespace]'
 }
 
-CHECK_REGEX = re.compile('.*\[([A-Za-z0-9.-]+)\]$')
+CHECK_REGEX = re.compile(r'.*\[([A-Za-z0-9.-]+)\]$')
 
 
 def main():
@@ -136,20 +139,21 @@ def main():
         print('########################################################')
         print('########################################################')
         print('###                                                  ###')
-        print('###   Found %s error(s)                               ###' % errors)
+        print('###   Found %s error(s)                               ###'
+              % errors)
         print('###                                                  ###')
         print('########################################################')
         print('########################################################')
         print('Information about the checks can be found on:')
         print('https://clang.llvm.org/extra/clang-tidy/checks/list.html')
         return 1
-    else:
-        print('###                                                  ###')
-        print('###   Check has passed                               ###')
-        print('###                                                  ###')
-        print('########################################################')
-        print('########################################################')
-        return 0
+
+    print('###                                                  ###')
+    print('###   Check has passed                               ###')
+    print('###                                                  ###')
+    print('########################################################')
+    print('########################################################')
+    return 0
 
 
 if __name__ == '__main__':
