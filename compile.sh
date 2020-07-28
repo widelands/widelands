@@ -58,7 +58,7 @@ print_help () {
     echo "                      a debug build will be created."
     echo " "
     if which g++ >/dev/null; then # gcc specific
-    echo "-n or --no-cross-opt  Do not use cross compile unit optimization,"
+    echo "-c or --no-cross-opt  Do not use cross compile unit optimization,"
     echo "                      even if available."
     echo " "
     fi
@@ -141,7 +141,7 @@ do
       BUILD_TRANSLATIONS="OFF"
     shift
     ;;
-    -n|--no-cross-opt)
+    -c|--no-cross-opt)
       USE_FLTO="no"
     shift
     ;;
