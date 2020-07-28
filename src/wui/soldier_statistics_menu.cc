@@ -74,7 +74,6 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 					                             (boost::format(_("Defense: %u")) % defense).str() %
 					                             (boost::format(_("Evade: %u")) % evade).str())
 					                               .str();
-					txt->set_tooltip(tooltip);
 					txt->set_handle_mouse(true);
 					icon1->set_tooltip(tooltip);
 					icon2->set_tooltip(tooltip);
@@ -183,7 +182,8 @@ void SoldierStatisticsMenu::update() {
 			for (unsigned a = 0; a <= ma_; ++a) {
 				for (unsigned e = 0; e <= me_; ++e) {
 					const uint32_t nr = player_.count_soldiers(h, a, d, e);
-					labels_all_[index]->set_text(nr ? std::to_string(nr) : "");
+					labels_all_[index]->set_text(nr >= 1000 ? _("∞") : nr ? std::to_string(nr) : "");
+					labels_all_[index]->set_tooltip(std::to_string(nr));
 					for (uint8_t i = 0; i < 4; ++i) {
 						icons_all_[index * 4 + i]->set_grey_out(nr == 0);
 					}
