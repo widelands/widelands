@@ -45,10 +45,6 @@ tribes:new_productionsite_type {
       { name = "corn", amount = 6 },
       { name = "blackroot", amount = 6 }
    },
-   outputs = {
-      "cornmeal",
-      "blackroot_flour"
-   },
 
    programs = {
       work = {

@@ -10,7 +10,7 @@ include "scripting/richtext_scenarios.lua"
 -- ==========
 -- Constants
 -- ==========
-set_textdomain("mp_scenario_island_hopping.wmf")
+push_textdomain("mp_scenario_island_hopping.wmf")
 
 game = wl.Game()
 map = game.map

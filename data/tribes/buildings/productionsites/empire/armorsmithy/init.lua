@@ -55,12 +55,6 @@ tribes:new_productionsite_type {
       { name = "gold", amount = 8 },
       { name = "cloth", amount = 8 }
    },
-   outputs = {
-      "armor_helmet",
-      "armor",
-      "armor_chain",
-      "armor_gilded"
-   },
 
    programs = {
       work = {

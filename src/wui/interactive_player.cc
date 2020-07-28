@@ -317,7 +317,7 @@ void InteractivePlayer::think() {
 	if (flag_to_connect_) {
 		Widelands::Field& field = egbase().map()[flag_to_connect_];
 		if (upcast(Widelands::Flag const, flag, field.get_immovable())) {
-			if (!flag->has_road() && !in_road_building_mode())
+			if (!flag->has_road() && !in_road_building_mode()) {
 				if (auto_roadbuild_mode_) {
 					//  There might be a fieldaction window open, showing a button
 					//  for roadbuilding. If that dialog remains open so that the
@@ -332,6 +332,7 @@ void InteractivePlayer::think() {
 					   Widelands::TCoords<>(flag_to_connect_, Widelands::TriangleIndex::D)});
 					start_build_road(flag_to_connect_, field.get_owned_by(), RoadBuildingType::kRoad);
 				}
+			}
 			flag_to_connect_ = Widelands::Coords::null();
 		}
 	}
@@ -354,8 +355,9 @@ void InteractivePlayer::think() {
 void InteractivePlayer::draw(RenderTarget& dst) {
 	// Bail out if the game isn't actually loaded.
 	// This fixes a crash with displaying an error dialog during loading.
-	if (!game().is_loaded())
+	if (!game().is_loaded()) {
 		return;
+	}
 
 	draw_map_view(map_view(), &dst);
 }
@@ -549,8 +551,9 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 
 		case SDLK_KP_5:
-			if (code.mod & KMOD_NUM)
+			if (code.mod & KMOD_NUM) {
 				break;
+			}
 			FALLS_THROUGH;
 		case SDLK_HOME:
 			map_view()->scroll_to_field(

@@ -177,9 +177,10 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 		   cur_ware, parent.get_player()->get_ware_consumption_statistics(
 		                Widelands::DescriptionIndex(cur_ware)));
 
-		plot_stock_->register_plot_data(cur_ware, parent.get_player()->get_ware_stock_statistics(
-		                                             Widelands::DescriptionIndex(cur_ware)),
-		                                colors[kInactiveColorIndex]);
+		plot_stock_->register_plot_data(
+		   cur_ware,
+		   parent.get_player()->get_ware_stock_statistics(Widelands::DescriptionIndex(cur_ware)),
+		   colors[kInactiveColorIndex]);
 	}
 
 	display_ = new StatisticWaresDisplay(

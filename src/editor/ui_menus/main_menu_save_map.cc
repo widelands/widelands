@@ -335,14 +335,14 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	}
 
 	egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
-	egbase.step_loader_ui("Saving the map…");
+	egbase.step_loader_ui(_("Saving the map…"));
 
 	// Try saving the map.
 	GenericSaveHandler gsh(
 	   [&egbase](FileSystem& fs) {
 		   Widelands::MapSaver wms(fs, egbase);
 		   wms.save();
-		},
+	   },
 	   complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR);
 	GenericSaveHandler::Error error = gsh.save();
 

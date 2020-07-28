@@ -50,8 +50,10 @@ echo "Working tree is clean, continuing"
 # Print all commands.
 set -x
 
-# Force-pull translations from Transifex
-tx pull -fa
+# Pull translations from Transifex
+tx pull -a
+# We might need to force-pull translations during a release
+# tx pull -fa
 
 # Update authors file
 utils/update_authors.py

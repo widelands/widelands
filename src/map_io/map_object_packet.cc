@@ -56,9 +56,7 @@ void MapObjectPacket::read(FileSystem& fs,
 		fr.open(fs, "binary/mapobjects");
 
 		const uint8_t packet_version = fr.unsigned_8();
-
-		// Some maps contain ware/worker info, so we need compatibility here.
-		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersion) {
 
 			// Initial loading stage
 			for (;;) {

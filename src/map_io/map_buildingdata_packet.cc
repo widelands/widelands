@@ -231,7 +231,7 @@ void MapBuildingdataPacket::read_partially_finished_building(
    const TribesLegacyLookupTable& tribes_lookup_table) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version <= kCurrentPacketPFBuilding && packet_version >= 1) {
+		if (packet_version == kCurrentPacketPFBuilding) {
 			const TribeDescr& tribe = pfb.owner().tribe();
 			pfb.building_ = tribe.get_building_descr(tribe.safe_building_index(fr.c_string()));
 
@@ -261,8 +261,8 @@ void MapBuildingdataPacket::read_partially_finished_building(
 					pfb.consume_wares_[i] = new WaresQueue(pfb, INVALID_INDEX, 0);
 					pfb.consume_wares_[i]->read(fr, game, mol, tribes_lookup_table);
 				}
-				// TODO(Nordfriese): Savegame compatibility
-				size = packet_version >= 2 ? fr.unsigned_16() : 0;
+
+				size = fr.unsigned_16();
 				pfb.dropout_wares_.resize(size);
 				for (uint16_t i = 0; i < pfb.dropout_wares_.size(); ++i) {
 					pfb.dropout_wares_[i] = new WaresQueue(pfb, INVALID_INDEX, 0);
@@ -605,8 +605,7 @@ void MapBuildingdataPacket::read_productionsite(
    const TribesLegacyLookupTable& tribes_lookup_table) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		// TODO(GunChleoc): Savegame compatibility, remove after Build 21.
-		if (packet_version >= 5 && packet_version <= kCurrentPacketVersionProductionsite) {
+		if (packet_version == kCurrentPacketVersionProductionsite) {
 			ProductionSite::WorkingPosition& wp_begin = *productionsite.working_positions_;
 			const ProductionSiteDescr& pr_descr = productionsite.descr();
 			const BillOfMaterials& working_positions = pr_descr.working_positions();
@@ -758,65 +757,39 @@ void MapBuildingdataPacket::read_productionsite(
 				}
 			}
 
-			if (packet_version > 5) {
-				nr_queues = fr.unsigned_16();
-				for (uint16_t i = 0; i < nr_queues; ++i) {
-					WorkersQueue* wq = new WorkersQueue(productionsite, INVALID_INDEX, 0);
-					wq->read(fr, game, mol, tribes_lookup_table);
+			nr_queues = fr.unsigned_16();
+			for (uint16_t i = 0; i < nr_queues; ++i) {
+				WorkersQueue* wq = new WorkersQueue(productionsite, INVALID_INDEX, 0);
+				wq->read(fr, game, mol, tribes_lookup_table);
 
-					if (!game.tribes().worker_exists(wq->get_index())) {
-						delete wq;
-					} else {
-						productionsite.input_queues_.push_back(wq);
-					}
+				if (!game.tribes().worker_exists(wq->get_index())) {
+					delete wq;
+				} else {
+					productionsite.input_queues_.push_back(wq);
 				}
 			}
 
-			// TODO(hessenfarmer): Savegame compatibility, remove after Build 21.
-			if (packet_version >= 8) {
-				productionsite.actual_percent_ = fr.unsigned_32();
-			} else {
-				uint16_t const stats_size = fr.unsigned_16();
-				uint8_t ok = 0;
-				for (uint16_t i = 0; i < stats_size; ++i) {
-					if (fr.unsigned_8()) {
-						ok++;
-					}
-				}
-				productionsite.actual_percent_ = ok * 1000 / stats_size;
-			}
-
+			productionsite.actual_percent_ = fr.unsigned_32();
 			productionsite.statistics_string_on_changed_statistics_ = fr.c_string();
 			productionsite.production_result_ = fr.c_string();
+			productionsite.main_worker_ = -1;
 
-			// TODO(GunChleoc & Nordfriese): Savegame compatibility, remove after Build 21.
-			if (packet_version >= 9) {
-				productionsite.main_worker_ = -1;
-				if (fr.unsigned_8()) {
-					const Worker& worker = mol.get<Worker>(fr.unsigned_32());
-					int32_t i = 0;
-					// Determine main worker's index as this may change during saveloading (#3891)
-					for (const auto* wp = productionsite.working_positions();; ++wp) {
-						if (wp->worker == &worker) {
-							productionsite.main_worker_ = i;
-							break;
-						}
-						++i;
+			if (fr.unsigned_8()) {
+				const Worker& worker = mol.get<Worker>(fr.unsigned_32());
+				int32_t i = 0;
+				// Determine main worker's index as this may change during saveloading (#3891)
+				for (const auto* wp = productionsite.working_positions();; ++wp) {
+					if (wp->worker == &worker) {
+						productionsite.main_worker_ = i;
+						break;
 					}
+					++i;
 				}
-			} else if (packet_version >= 7) {
-				// May be buggy for workers whose type is present in the building
-				// multiple times (issue #3538). Fortunately the packet versions
-				// with this problem are newer than b20 and older than b21.
-				productionsite.main_worker_ = fr.signed_32();
-			} else {
-				productionsite.main_worker_ = productionsite.working_positions_[0].worker ? 0 : -1;
 			}
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Productionsite", packet_version,
 			                            kCurrentPacketVersionProductionsite);
 		}
-
 	} catch (const WException& e) {
 		throw GameDataError(
 		   "productionsite (%s): %s", productionsite.descr().name().c_str(), e.what());
@@ -830,8 +803,7 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
                                               const TribesLegacyLookupTable& tribes_lookup_table) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		// TODO(tppq): remove support for packet version 5 after release 21, to keep code simple.
-		if (packet_version <= kCurrentPacketVersionTrainingsite && packet_version >= 5) {
+		if (packet_version == kCurrentPacketVersionTrainingsite) {
 
 			read_productionsite(trainingsite, fr, game, mol, tribes_lookup_table);
 
@@ -893,24 +865,17 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 				   std::make_pair(trainstall, spresence);
 			}
 
-			// TODO(tppq): Packet version 5 was in build 20. If-statement for savegame compatibility
-			// Could do all this unconditionally after build 21 is out.
-			if (5 < packet_version) {
-				trainingsite.highest_trainee_level_seen_ = fr.unsigned_8();
-				trainingsite.latest_trainee_kickout_level_ = fr.unsigned_8();
-				trainingsite.trainee_general_lower_bound_ = fr.unsigned_8();
-				uint8_t somebits = fr.unsigned_8();
-				trainingsite.latest_trainee_was_kickout_ = 0 < (somebits & 1);
-				trainingsite.requesting_weak_trainees_ = 0 < (somebits & 2);
-				trainingsite.repeated_layoff_inc_ = 0 < (somebits & 4);
-				trainingsite.recent_capacity_increase_ = 0 < (somebits & 8);
-				assert(16 > somebits);
-				trainingsite.repeated_layoff_ctr_ = fr.unsigned_8();
-				trainingsite.request_open_since_ = fr.unsigned_32();
-			} else {
-				log("\nLoaded a trainingsite in build 20 compatibility mode.\n");
-			}
-
+			trainingsite.highest_trainee_level_seen_ = fr.unsigned_8();
+			trainingsite.latest_trainee_kickout_level_ = fr.unsigned_8();
+			trainingsite.trainee_general_lower_bound_ = fr.unsigned_8();
+			uint8_t somebits = fr.unsigned_8();
+			trainingsite.latest_trainee_was_kickout_ = 0 < (somebits & 1);
+			trainingsite.requesting_weak_trainees_ = 0 < (somebits & 2);
+			trainingsite.repeated_layoff_inc_ = 0 < (somebits & 4);
+			trainingsite.recent_capacity_increase_ = 0 < (somebits & 8);
+			assert(16 > somebits);
+			trainingsite.repeated_layoff_ctr_ = fr.unsigned_8();
+			trainingsite.request_open_since_ = fr.unsigned_32();
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Trainingsite", packet_version,
 			                            kCurrentPacketVersionTrainingsite);

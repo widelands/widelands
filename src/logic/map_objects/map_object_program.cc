@@ -119,16 +119,26 @@ MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(
 MapObjectProgram::PlaySoundParameters
 MapObjectProgram::parse_act_play_sound(const std::vector<std::string>& arguments,
                                        uint8_t default_priority) {
-	if (arguments.size() < 1 || arguments.size() > 2) {
-		throw GameDataError("Usage: playsound=<sound_dir/sound_name> [priority]");
-	}
+	std::string filepath = "";
 	PlaySoundParameters result;
-	result.fx = SoundHandler::register_fx(SoundType::kAmbient, arguments.at(0));
 
-	result.priority = arguments.size() == 2 ? read_positive(arguments.at(1)) : default_priority;
+	// TODO(GunChleoc): Savegame compabitility. Remove after Build 21.
+	if (arguments.size() == 3) {
+		filepath = arguments.at(0) + "/" + arguments.at(1);
+		result.priority = read_positive(arguments.at(2));
+	} else {
+		if (arguments.size() < 1 || arguments.size() > 2) {
+			throw GameDataError("Usage: playsound=<sound_dir/sound_name> [priority]");
+		}
+		filepath = arguments.at(0);
+		result.priority = arguments.size() == 2 ? read_positive(arguments.at(1)) : default_priority;
+	}
+
+	result.fx = SoundHandler::register_fx(SoundType::kAmbient, filepath);
+
 	if (result.priority < kFxPriorityLowest) {
 		throw GameDataError("Minmum priority for sounds is %d, but only %d was specified for %s",
-		                    kFxPriorityLowest, result.priority, arguments.at(0).c_str());
+		                    kFxPriorityLowest, result.priority, filepath.c_str());
 	}
 	return result;
 }

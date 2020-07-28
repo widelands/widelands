@@ -40,10 +40,6 @@ tribes:new_productionsite_type {
       barbarians_lumberjack = 1
    },
 
-   outputs = {
-      "log"
-   },
-
    indicate_workarea_overlaps = {
       barbarians_rangers_hut = true,
       barbarians_lumberjacks_hut = false,

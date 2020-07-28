@@ -233,8 +233,9 @@ size_t ExpeditionBootstrap::count_additional_queues() const {
 }
 
 void ExpeditionBootstrap::set_economy(Economy* new_economy, WareWorker type) {
-	if (new_economy == (type == wwWARE ? ware_economy_ : worker_economy_))
+	if (new_economy == (type == wwWARE ? ware_economy_ : worker_economy_)) {
 		return;
+	}
 
 	// Transfer the wares and workers.
 	for (auto& iq : queues_) {
@@ -318,13 +319,12 @@ void ExpeditionBootstrap::load(Warehouse& warehouse,
 	std::vector<WorkersQueue*> wqs;
 	std::vector<InputQueue*> additional_queues;
 	try {
-		// TODO(Nordfriese): Contains savegame compatibility code
-		if (packet_version >= 7 && packet_version <= kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersion) {
 			uint8_t num_queues = fr.unsigned_8();
 			for (uint8_t i = 0; i < num_queues; ++i) {
 				WorkersQueue* wq = new WorkersQueue(warehouse, INVALID_INDEX, 0);
 				wq->read(fr, game, mol, tribes_lookup_table);
-				bool removable = packet_version >= 8 ? fr.unsigned_8() : false;
+				const bool removable = fr.unsigned_8();
 				wq->set_callback(input_callback, this);
 
 				if (wq->get_index() == INVALID_INDEX) {

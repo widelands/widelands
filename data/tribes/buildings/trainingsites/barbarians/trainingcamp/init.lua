@@ -62,9 +62,6 @@ tribes:new_trainingsite_type {
       { name = "helmet_mask", amount = 2 },
       { name = "helmet_warhelm", amount = 2 }
    },
-   outputs = {
-      "barbarians_soldier",
-   },
 
    ["soldier attack"] = {
       min_level = 0,

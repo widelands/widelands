@@ -91,10 +91,9 @@ ImmovableProgram::ActAnimate::ActAnimate(const std::vector<std::string>& argumen
 /// distribution and the configured time as the expected value.
 void ImmovableProgram::ActAnimate::execute(Game& game, Immovable& immovable) const {
 	immovable.start_animation(game, parameters.animation);
-	immovable.program_step(game, parameters.duration ?
-	                                1 + game.logic_rand() % parameters.duration +
-	                                   game.logic_rand() % parameters.duration :
-	                                0);
+	immovable.program_step(game, parameters.duration ? 1 + game.logic_rand() % parameters.duration +
+	                                                      game.logic_rand() % parameters.duration :
+	                                                   0);
 }
 
 ImmovableProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments) {
@@ -140,6 +139,9 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 }
 
 void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) const {
+	if (immovable.apply_growth_delay(game)) {
+		return;
+	}
 	if (probability == 0 || game.logic_rand() % 256 < probability) {
 		Player* player = immovable.get_owner();
 		Coords const c = immovable.get_position();
@@ -152,8 +154,9 @@ void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) c
 			game.create_immovable_with_name(
 			   c, type_name, owner_type, player, nullptr /* former_building_descr */);
 		}
-	} else
+	} else {
 		immovable.program_step(game);
+	}
 }
 
 ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments,
@@ -172,6 +175,10 @@ ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments,
 }
 
 void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const {
+	if (immovable.apply_growth_delay(game)) {
+		return;
+	}
+
 	const Map& map = game.map();
 	FCoords const f = map.get_fcoords(immovable.get_position());
 	const ImmovableDescr& descr = immovable.descr();

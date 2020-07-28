@@ -47,9 +47,6 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "reed", amount = 8 }
    },
-   outputs = {
-      "cloth"
-   },
 
    programs = {
       work = {

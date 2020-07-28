@@ -132,8 +132,9 @@ const DescriptionMaintainer<EditorCategory>& World::editor_immovable_categories(
 DescriptionIndex World::safe_resource_index(const char* const resourcename) const {
 	DescriptionIndex const result = resource_index(resourcename);
 
-	if (result == INVALID_INDEX)
+	if (result == INVALID_INDEX) {
 		throw GameDataError("world does not define resource type \"%s\"", resourcename);
+	}
 	return result;
 }
 
@@ -152,6 +153,10 @@ DescriptionIndex World::get_terrain_index(const std::string& name) const {
 
 DescriptionIndex World::get_nr_terrains() const {
 	return terrains_->size();
+}
+
+DescriptionIndex World::get_nr_critters() const {
+	return critters_->size();
 }
 
 DescriptionIndex World::get_critter(char const* const l) const {

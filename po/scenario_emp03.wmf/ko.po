@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-04 06:10+0000\n"
+"POT-Creation-Date: 2020-07-09 08:33+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: ks k, 2020\n"
 "Language-Team: Korean (https://www.transifex.com/widelands/teams/35159/ko/)\n"
@@ -46,7 +46,7 @@ msgstr "채석장"
 msgid ""
 "Build a quarry close to the abundant rocks to free some building plots and "
 "get some valuable resources."
-msgstr "풍부한 바위 근처에 채석장을 짓고 건물 부지를 없애고 귀중한 자원을 얻을 수 있습니다."
+msgstr "풍부한 바위 근처에 채석장을 짓고 건물 부지를 마련하고 귀중한 자원을 얻을 수 있습니다."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:63
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
@@ -66,17 +66,17 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:72
 msgid "Lower the demand for marble columns to 4"
-msgstr "대리석 기둥에 대한 수요를 4로 낮추십시오"
+msgstr "대리석 기둥에 대한 수요를 4로 줄이십시오"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:74
 msgid "Lower Demand for Marble Columns"
-msgstr "대리석 기둥에 대한 수요가 낮습니다"
+msgstr "대리석 기둥에 대한 수요를 줄이십시오"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:75
 msgid ""
 "Lower the demand for marble columns in the economy settings to four. This "
 "will help to save some marble for buildings."
-msgstr "경제 설정에서 대리석 기둥에 대한 수요를 4 개로 줄입니다. 이것은 건물의 대리석을 절약하는 데 도움이 될 것입니다."
+msgstr "경제 설정에서 대리석 기둥에 대한 수요를 4 개로 줄이십시오. 이것은 건물의 대리석을 절약하는 데 도움이 될 것입니다."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:76
 msgid ""
@@ -136,7 +136,7 @@ msgstr "천 생산"
 msgid ""
 "Now turn all the wheat into at least 50 bales of wool and then use the wool "
 "to weave cloth in order to build a ship."
-msgstr "이제 모든 밀을 적어도 50 개의  양털로 만든 다음 양털을 사용하여 천을 짜서 배를 만드십시오."
+msgstr "이제 모든 밀을 적어도 50 개의  양털로 만든 다음 배를 만들기 위해 천을 짜는데 사용하십시오."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:118
 msgid "Build 2 ports on distant islands"
@@ -226,7 +226,7 @@ msgstr "훈련 기반 시설"
 msgid ""
 "Build a training camp, some barracks and an arena or colosseum to train your"
 " soldiers."
-msgstr "군인들을 훈련시키기 위해 훈련 캠프, 일부 막사 및 경기장 또는 콜로세움을 지으십시오."
+msgstr "군인들을 훈련시키기 위해 훈련소, 몇 곳의 병영, 경기장이나 콜로세움을 지으십시오."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:182
 msgid "The Journey Home"
@@ -403,8 +403,8 @@ msgid ""
 "new ship or even have some basic infrastructure to make our lives more "
 "comfortable?"
 msgstr ""
-"하지만 비록 이 것이 우리가 앞으로 나아간 한 걸음이기는 하지만, 건설할 수 있는 더 넓은 공간이 없다. 섬 전체가 바위로 차 있다. "
-"어떻게 우리가 배를 새로 건조하거나 우리 삶을 편하게 할 기초적인 기반시설을 지을 수 있을까?"
+"하지만 비록 이 것이 우리가 앞으로 나아간 한 걸음이기는 하지만, 건설할 수 있는 더 넓은 공간이 없습니다. 섬 전체가 바위로 차 "
+"있습니다. 어떻게 우리가 배를 새로 건조하거나 우리 삶을 편하게 할 기초적인 기반시설을 지을 수 있을까요?"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:269
 msgid "Amalea’s Plan"
@@ -550,7 +550,7 @@ msgstr "고향에 다다르는 더 가까운 걸음"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:347
 msgid "Saledus looks excited…"
-msgstr "살레두스가 흥분한 것 같다..."
+msgstr "살레두스가 흥분한 것 같았다..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:349
@@ -678,7 +678,7 @@ msgstr "섬들을 탐사해야 한다"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:413
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:456
 msgid "Saledus is excited…"
-msgstr "살레두스가 흥분했다..."
+msgstr "살레두스는 흥분되었다..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:415
@@ -955,7 +955,7 @@ msgstr "승리는 우리 것"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:547
 msgid "Saledus is cheering…"
-msgstr "살레두스가 환호하고 있다..."
+msgstr "살레두스는 환호하고 있었다..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:549
@@ -1095,8 +1095,8 @@ msgid ""
 "limited space available. We need some barracks, a training camp and an arena"
 " or a colosseum."
 msgstr ""
-"그러므로, 우리는 제한된 공간에도 불구하고 충분한 훈련 기반시설을 지어야 합니다. 병영 몇 개와, 훈련소, 그리고 경기장 또는 콜로세움이"
-" 필요합니다."
+"그러므로, 우리는 제한된 공간에도 불구하고 충분한 훈련 기반시설을 지어야 합니다. 몇 곳의 병영, 훈련소, 경기장이나 콜로세움이 "
+"필요합니다."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:618
 msgid "Time to get Home Again"
@@ -1120,7 +1120,7 @@ msgstr "승리"
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr "이 미션을 완료하셨습니다. 원하신다면 더 플레이하시거나, 다음 미션으로 이동할 수 있습니다."
+msgstr "이 임무를 완수했습니다. 원한다면 계속 할 수 있고, 그렇지 않으면 다음 임무로 이동하십시오."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:633

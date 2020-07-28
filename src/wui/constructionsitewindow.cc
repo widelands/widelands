@@ -285,7 +285,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 		case Widelands::MapObjectType::WAREHOUSE: {
 			upcast(Widelands::WarehouseSettings, ws, construction_site->get_settings());
 			auto add_tab = [this, construction_site, can_act](
-			   Widelands::WareWorker ww, FakeWaresDisplay** display) {
+			                  Widelands::WareWorker ww, FakeWaresDisplay** display) {
 				UI::Box& mainbox = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
 				*display = new FakeWaresDisplay(&mainbox, can_act, *construction_site, ww);
 				mainbox.add(*display, UI::Box::Resizing::kFullSize);

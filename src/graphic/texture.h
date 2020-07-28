@@ -52,17 +52,17 @@ public:
 
 	enum UnlockMode {
 		/**
-	    * Update mode will ensure that any changes in the pixel data
-	    * will appear in subsequent operations.
-	    */
+		 * Update mode will ensure that any changes in the pixel data
+		 * will appear in subsequent operations.
+		 */
 		Unlock_Update = 0,
 
 		/**
-	    * NoChange mode indicates that the caller changed no pixel data.
-	    *
-	    * \note If the caller did change pixel data but specifies NoChange
-	    * mode, the results are undefined.
-	    */
+		 * NoChange mode indicates that the caller changed no pixel data.
+		 *
+		 * \note If the caller did change pixel data but specifies NoChange
+		 * mode, the results are undefined.
+		 */
 		Unlock_NoChange
 	};
 

@@ -201,8 +201,9 @@ void BulldozeConfirm::think() {
 	upcast(Widelands::PlayerImmovable, todestroy, todestroy_.get(egbase));
 
 	if (!todestroy || !building || !iaplayer().can_act(building->owner().player_number()) ||
-	    !(building->get_playercaps() & Widelands::Building::PCap_Bulldoze))
+	    !(building->get_playercaps() & Widelands::Building::PCap_Bulldoze)) {
 		die();
+	}
 }
 
 /**
@@ -339,7 +340,7 @@ void EnhanceConfirm::ok() {
 		upcast(Widelands::ConstructionSite, cs, object_.get(game));
 		if (cs && iaplayer().can_act(cs->owner().player_number())) {
 			game.send_player_enhance_building(
-			   *cs, Widelands::INVALID_INDEX, checkbox_ && checkbox_->get_state());
+			   *cs, cs->building().enhancement(), checkbox_ && checkbox_->get_state());
 		}
 	} else {
 		upcast(Widelands::Building, building, object_.get(game));
@@ -371,8 +372,9 @@ void ShipSinkConfirm::think() {
 	const Widelands::EditorGameBase& egbase = iaplayer().egbase();
 	upcast(Widelands::Ship, ship, object_.get(egbase));
 
-	if (!ship || !iaplayer().can_act(ship->get_owner()->player_number()))
+	if (!ship || !iaplayer().can_act(ship->get_owner()->player_number())) {
 		die();
+	}
 }
 
 /**
