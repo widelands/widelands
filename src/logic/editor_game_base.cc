@@ -131,7 +131,7 @@ void EditorGameBase::create_tempfile_and_save_mapdata(FileSystem::Type const typ
 		if (g_fs->file_exists(complete_filename)) {
 			int suffix;
 			for (suffix = 0; suffix <= 9; suffix++) {
-				complete_filename = filename + "-" + std::to_string(suffix) + kTempFileExtension;
+				complete_filename = filename.append("-").append(std::to_string(suffix)).append(kTempFileExtension);
 				if (!g_fs->file_exists(complete_filename)) {
 					break;
 				}
