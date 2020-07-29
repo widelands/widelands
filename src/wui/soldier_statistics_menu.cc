@@ -183,8 +183,7 @@ void SoldierStatisticsMenu::update() {
 			for (unsigned a = 0; a <= ma_; ++a) {
 				for (unsigned e = 0; e <= me_; ++e) {
 					const uint32_t nr = player_.count_soldiers(h, a, d, e);
-					labels_all_[index]->set_text(nr >= 1000 ? get_amount_string(nr, true) :
-					                                          nr ? std::to_string(nr) : "");
+					labels_all_[index]->set_text(nr ? get_amount_string(nr, true) : "");
 					labels_all_[index]->set_tooltip(std::to_string(nr));
 					for (uint8_t i = 0; i < 4; ++i) {
 						icons_all_[index * 4 + i]->set_grey_out(nr == 0);
