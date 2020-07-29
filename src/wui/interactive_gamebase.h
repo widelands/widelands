@@ -93,7 +93,8 @@ protected:
 		kCensus,
 		kStatistics,
 		kSoldierLevels,
-		kWorkareaOverlap
+		kWorkareaOverlap,
+		kBuildings
 	};
 
 	// Adds the mapviewmenu_ to the toolbar

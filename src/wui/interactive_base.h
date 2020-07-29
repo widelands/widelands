@@ -58,8 +58,9 @@ public:
 		dfShowStatistics = 2,     ///< show statistics report on buildings
 		dfShowSoldierLevels = 4,  ///< show level information above soldiers
 		dfShowWorkareaOverlap =
-		   8,         ///< highlight overlapping workareas when placing a constructionsite
-		dfDebug = 16  ///< general debugging info
+		   8,          ///< highlight overlapping workareas when placing a constructionsite
+		dfDebug = 16,  ///< general debugging info
+		dfShowBuildings = 32,
 	};
 
 	/// A build help overlay, i.e. small, big, mine, port ...
