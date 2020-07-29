@@ -131,7 +131,8 @@ void EditorGameBase::create_tempfile_and_save_mapdata(FileSystem::Type const typ
 		if (g_fs->file_exists(complete_filename)) {
 			int suffix;
 			for (suffix = 0; suffix <= 9; suffix++) {
-				complete_filename = filename.append("-").append(std::to_string(suffix)).append(kTempFileExtension);
+				complete_filename =
+				   filename.append("-").append(std::to_string(suffix)).append(kTempFileExtension);
 				if (!g_fs->file_exists(complete_filename)) {
 					break;
 				}
@@ -384,7 +385,8 @@ Building& EditorGameBase::warp_building(const Coords& c,
                                         FormerBuildings former_buildings) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
-	return tribe.get_building_descr(idx)->create(*this, plr, c, false, true, std::move(former_buildings));
+	return tribe.get_building_descr(idx)->create(
+	   *this, plr, c, false, true, std::move(former_buildings));
 }
 
 /**
@@ -404,8 +406,8 @@ EditorGameBase::warp_constructionsite(const Coords& c,
                                       const std::map<DescriptionIndex, Quantity>& preserved_wares) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
-	ConstructionSite& b = dynamic_cast<ConstructionSite&>(
-	   tribe.get_building_descr(idx)->create(*this, plr, c, true, loading, std::move(former_buildings)));
+	ConstructionSite& b = dynamic_cast<ConstructionSite&>(tribe.get_building_descr(idx)->create(
+	   *this, plr, c, true, loading, std::move(former_buildings)));
 	if (settings) {
 		b.apply_settings(*settings);
 	}
@@ -418,11 +420,12 @@ EditorGameBase::warp_constructionsite(const Coords& c,
  * \li former_buildings : the former buildings list. This should not be empty,
  * except during loading.
  */
-Building& EditorGameBase::warp_dismantlesite(const Coords& c,
-                                             PlayerNumber const owner,
-                                             bool loading,
-                                             FormerBuildings former_buildings,
-                                             const std::map<DescriptionIndex, Quantity>& preserved_wares) {
+Building&
+EditorGameBase::warp_dismantlesite(const Coords& c,
+                                   PlayerNumber const owner,
+                                   bool loading,
+                                   FormerBuildings former_buildings,
+                                   const std::map<DescriptionIndex, Quantity>& preserved_wares) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
 

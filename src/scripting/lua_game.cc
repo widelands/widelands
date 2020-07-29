@@ -729,7 +729,7 @@ int LuaPlayer::get_buildings(lua_State* L) {
 			cidx = 1;
 		}
 
-		for (const auto& stats: vec) {
+		for (const auto& stats : vec) {
 			if (stats.is_constructionsite) {
 				continue;
 			}

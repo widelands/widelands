@@ -1292,7 +1292,8 @@ public:
 	              ImageCache* image_cache,
 	              RendererStyle& init_renderer_style,
 	              const UI::FontSets& fontsets)
-	   : TagHandler(tag, fc, std::move(ns), image_cache, init_renderer_style, fontsets), render_node_(nullptr) {
+	   : TagHandler(tag, fc, std::move(ns), image_cache, init_renderer_style, fontsets),
+	     render_node_(nullptr) {
 	}
 
 	void enter() override {

@@ -76,7 +76,8 @@ public:
 	                      const Widelands::TribeDescr& tribe,
 	                      std::function<void(Widelands::DescriptionIndex, bool)> callback_function,
 	                      std::vector<uint8_t>& color_map)
-	   : AbstractWaresDisplay(parent, x, y, tribe, Widelands::wwWARE, true, std::move(callback_function)),
+	   : AbstractWaresDisplay(
+	        parent, x, y, tribe, Widelands::wwWARE, true, std::move(callback_function)),
 	     color_map_(color_map) {
 		int w, h;
 		get_desired_size(&w, &h);

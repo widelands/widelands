@@ -63,8 +63,9 @@ void GenericSaveHandler::make_backup() {
 	if (g_fs->file_exists(backup_filename_)) {
 		int suffix;
 		for (suffix = 0; suffix <= 9; suffix++) {
-			backup_filename_ =
-			   backup_filename_base.append("-").append(std::to_string(suffix)).append(kTempBackupExtension);
+			backup_filename_ = backup_filename_base.append("-")
+			                      .append(std::to_string(suffix))
+			                      .append(kTempBackupExtension);
 			if (!g_fs->file_exists(backup_filename_)) {
 				break;
 			}
