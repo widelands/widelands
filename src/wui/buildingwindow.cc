@@ -247,7 +247,8 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			const Widelands::DescriptionIndex& enhancement =
 			   cs ? cs->get_info().becomes->enhancement() : building->descr().enhancement();
 			const Widelands::TribeDescr& tribe = owner.tribe();
-			if (owner.is_building_type_allowed(enhancement) && owner.tribe().has_building(enhancement)) {
+			if (owner.is_building_type_allowed(enhancement) &&
+			    owner.tribe().has_building(enhancement)) {
 				const Widelands::BuildingDescr& building_descr = *tribe.get_building_descr(enhancement);
 				std::string enhance_tooltip =
 				   (boost::format(_("Enhance to %s")) % building_descr.descname().c_str()).str() +
