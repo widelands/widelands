@@ -33,8 +33,8 @@
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/map_objects/world/critter.h"
 #include "map_io/map_object_loader.h"
-#include "map_io/map_object_packet_version.h"
 #include "map_io/map_object_saver.h"
+#include "map_io/map_packet_versions.h"
 
 namespace Widelands {
 
@@ -137,7 +137,7 @@ void MapObjectPacket::load_finish() {
 void MapObjectPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver& mos) {
 	FileWrite fw;
 
-	fw.unsigned_8(kCurrentMapObjectPacketVersion);
+	fw.unsigned_8(kCurrentPacketVersionMapObject);
 
 	std::vector<Serial> obj_serials = egbase.objects().all_object_serials_ordered();
 	for (std::vector<Serial>::iterator cit = obj_serials.begin(); cit != obj_serials.end(); ++cit) {

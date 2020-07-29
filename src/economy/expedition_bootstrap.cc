@@ -31,6 +31,7 @@
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
+#include "map_io/map_packet_versions.h"
 
 namespace Widelands {
 
@@ -312,14 +313,12 @@ void ExpeditionBootstrap::load(Warehouse& warehouse,
                                const TribesLegacyLookupTable& tribes_lookup_table,
                                uint16_t packet_version) {
 
-	// Keep this synchronized with kCurrentPacketVersionWarehouse in MapBuildingDataPacket!!
-	static const uint16_t kCurrentPacketVersion = 8;
 	assert(queues_.empty());
 	// Load worker queues
 	std::vector<WorkersQueue*> wqs;
 	std::vector<InputQueue*> additional_queues;
 	try {
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersionWarehouseAndExpedition) {
 			uint8_t num_queues = fr.unsigned_8();
 			for (uint8_t i = 0; i < num_queues; ++i) {
 				WorkersQueue* wq = new WorkersQueue(warehouse, INVALID_INDEX, 0);
@@ -336,7 +335,7 @@ void ExpeditionBootstrap::load(Warehouse& warehouse,
 				}
 			}
 		} else {
-			throw UnhandledVersionError("ExpeditionBootstrap", packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("ExpeditionBootstrap", packet_version, kCurrentPacketVersionWarehouseAndExpedition);
 		}
 
 		// Load ware queues

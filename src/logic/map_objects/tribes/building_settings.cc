@@ -145,7 +145,7 @@ constexpr uint8_t kCurrentPacketVersion = 2;
 constexpr uint8_t kCurrentPacketVersionMilitarysite = 1;
 constexpr uint8_t kCurrentPacketVersionProductionsite = 2;
 constexpr uint8_t kCurrentPacketVersionTrainingsite = 1;
-constexpr uint8_t kCurrentPacketVersionWarehouse = 2;
+constexpr uint8_t kCurrentPacketVersionWarehouseAndExpedition = 2;
 
 // static
 BuildingSettings* BuildingSettings::load(const Game& game,
@@ -330,7 +330,7 @@ void WarehouseSettings::read(const Game& game,
 	BuildingSettings::read(game, fr, tribes_lookup_table);
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
-		if (packet_version == kCurrentPacketVersionWarehouse) {
+		if (packet_version == kCurrentPacketVersionWarehouseAndExpedition) {
 			launch_expedition = fr.unsigned_8();
 			const uint32_t nr_wares = fr.unsigned_32();
 			const uint32_t nr_workers = fr.unsigned_32();
@@ -356,7 +356,7 @@ void WarehouseSettings::read(const Game& game,
 			}
 		} else {
 			throw UnhandledVersionError(
-			   "WarehouseSettings", packet_version, kCurrentPacketVersionWarehouse);
+			   "WarehouseSettings", packet_version, kCurrentPacketVersionWarehouseAndExpedition);
 		}
 	} catch (const WException& e) {
 		throw GameDataError("WarehouseSettings: %s", e.what());
@@ -365,7 +365,7 @@ void WarehouseSettings::read(const Game& game,
 
 void WarehouseSettings::save(const Game& game, FileWrite& fw) const {
 	BuildingSettings::save(game, fw);
-	fw.unsigned_8(kCurrentPacketVersionWarehouse);
+	fw.unsigned_8(kCurrentPacketVersionWarehouseAndExpedition);
 
 	fw.unsigned_8(launch_expedition ? 1 : 0);
 	fw.unsigned_32(ware_preferences.size());

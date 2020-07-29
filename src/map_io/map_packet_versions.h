@@ -17,11 +17,13 @@
  *
  */
 
-#ifndef WL_MAP_IO_MAP_OBJECT_PACKET_VERSION_H
-#define WL_MAP_IO_MAP_OBJECT_PACKET_VERSION_H
+#ifndef WL_MAP_IO_MAP_PACKET_VERSIONS_H
+#define WL_MAP_IO_MAP_PACKET_VERSIONS_H
 
 namespace Widelands {
-constexpr uint8_t kCurrentMapObjectPacketVersion = 2;
+constexpr uint8_t kCurrentPacketVersionMapObject = 2;
+// Responsible for warehouses and expedition bootstraps
+constexpr uint16_t kCurrentPacketVersionWarehouseAndExpedition = 8;
 }  // namespace Widelands
 
-#endif  // end of include guard: WL_MAP_IO_MAP_OBJECT_PACKET_VERSION_H
+#endif  // end of include guard: WL_MAP_IO_MAP_PACKET_VERSIONS_H
