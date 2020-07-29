@@ -1156,9 +1156,9 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 
 		// Expedition specific data
 		if (ship_state_ == ShipStates::kExpeditionScouting ||
-			ship_state_ == ShipStates::kExpeditionWaiting ||
-			ship_state_ == ShipStates::kExpeditionPortspaceFound ||
-			ship_state_ == ShipStates::kExpeditionColonizing) {
+		    ship_state_ == ShipStates::kExpeditionWaiting ||
+		    ship_state_ == ShipStates::kExpeditionPortspaceFound ||
+		    ship_state_ == ShipStates::kExpeditionColonizing) {
 			expedition_.reset(new Expedition());
 			// Currently seen port build spaces
 			expedition_->seen_port_buildspaces.clear();
@@ -1177,7 +1177,8 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 			// Start coordinates of an island exploration
 			expedition_->exploration_start = read_coords_32(&fr);
 			// Whether the exploration is done clockwise or counter clockwise
-			expedition_->island_explore_direction = static_cast<IslandExploreDirection>(fr.unsigned_8());
+			expedition_->island_explore_direction =
+			   static_cast<IslandExploreDirection>(fr.unsigned_8());
 		} else {
 			ship_state_ = ShipStates::kTransport;
 		}

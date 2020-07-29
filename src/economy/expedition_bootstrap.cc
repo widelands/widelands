@@ -335,7 +335,8 @@ void ExpeditionBootstrap::load(Warehouse& warehouse,
 				}
 			}
 		} else {
-			throw UnhandledVersionError("ExpeditionBootstrap", packet_version, kCurrentPacketVersionWarehouseAndExpedition);
+			throw UnhandledVersionError(
+			   "ExpeditionBootstrap", packet_version, kCurrentPacketVersionWarehouseAndExpedition);
 		}
 
 		// Load ware queues
