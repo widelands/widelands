@@ -492,21 +492,24 @@ std::string FileSystem::canonicalize_name(const std::string& path) const {
 	std::list<std::string>::iterator i;
 
 #ifdef _WIN32
+	std::string temp_path = path;
 	// replace all slashes with backslashes so following can work.
-	for (uint32_t j = 0; j < path.size(); ++j) {
-		if (path[j] == '/') {
-			path[j] = '\\';
+	for (uint32_t j = 0; j < temp_path.size(); ++j) {
+		if (temp_path[j] == '/') {
+			temp_path[j] = '\\';
 		}
 	}
+#else
+	const std::string& temp_path = path;
 #endif
 
-	fs_tokenize(path, file_separator(), std::inserter(components, components.begin()));
+	fs_tokenize(temp_path, file_separator(), std::inserter(components, components.begin()));
 
 	// Tilde expansion
 	if (!components.empty() && *components.begin() == "~") {
 		components.erase(components.begin());
 		fs_tokenize(get_homedir(), file_separator(), std::inserter(components, components.begin()));
-	} else if (!is_path_absolute(path)) {
+	} else if (!is_path_absolute(temp_path)) {
 		//  make relative paths absolute (so that "../../foo" can work)
 		fs_tokenize(root_.empty() ? get_working_directory() : root_, file_separator(),
 		            std::inserter(components, components.begin()));
@@ -545,7 +548,7 @@ std::string FileSystem::canonicalize_name(const std::string& path) const {
 	}
 
 	std::string canonpath;
-	canonpath.reserve(path.length());
+	canonpath.reserve(temp_path.length());
 #ifndef _WIN32
 	for (i = components.begin(); i != components.end(); ++i) {
 		canonpath.push_back('/');
