@@ -41,6 +41,7 @@ struct ConstructionsiteInformation {
 	void draw(const Vector2f& point_on_dst,
 	          const Coords& coords,
 	          float scale,
+	          bool visible,
 	          const RGBColor& player_color,
 	          RenderTarget* dst) const;
 
