@@ -1733,8 +1733,7 @@ int Map::calc_buildsize(const EditorGameBase& egbase,
 }
 
 /**
- * We call a cycle on the map simply connected
- * if the subgraph of the cycle which can be walked on is connected.
+ * We call a cycle on the map simply 'connected' if it can be walked on.
  *
  * The cycle is described as a \p start point plus
  * a description of the directions in which to walk from the starting point.
@@ -1742,22 +1741,17 @@ int Map::calc_buildsize(const EditorGameBase& egbase,
  * the length of the cycle.
  */
 bool Map::is_cycle_connected(const FCoords& start, uint32_t length, const WalkingDir* dirs) const {
+	if (!(start.field->get_caps() & MOVECAPS_WALK)) {
+		return false;
+	}
 	FCoords f = start;
-	bool prev_walkable = start.field->get_caps() & MOVECAPS_WALK;
-	uint32_t alternations = 0;
-
 	for (uint32_t i = 0; i < length; ++i) {
 		f = get_neighbour(f, dirs[i]);
-		const bool walkable = f.field->get_caps() & MOVECAPS_WALK;
-		alternations += walkable != prev_walkable;
-		if (alternations > 2) {
+		if (!(f.field->get_caps() & MOVECAPS_WALK)) {
 			return false;
 		}
-		prev_walkable = walkable;
 	}
-
 	assert(start == f);
-
 	return true;
 }
 
