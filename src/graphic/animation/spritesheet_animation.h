@@ -58,7 +58,8 @@ private:
 		          const Rectf& source_rect,
 		          const Rectf& destination_rect,
 		          const RGBColor* clr,
-		          Surface* target) const override;
+		          Surface* target,
+		          float opacity) const override;
 
 		int width() const override;
 		int height() const override;
