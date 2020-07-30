@@ -19,7 +19,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 24000",
-         "transform=berry_bush_currant_red_small",
+         "grow=berry_bush_currant_red_small",
       },
    },
    spritesheets = {
@@ -46,7 +46,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 28000",
-         "transform=berry_bush_currant_red_medium",
+         "grow=berry_bush_currant_red_medium",
       },
    },
    spritesheets = {
@@ -73,7 +73,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 26000",
-         "transform=berry_bush_currant_red_ripe",
+         "grow=berry_bush_currant_red_ripe",
       },
    },
    spritesheets = {
@@ -100,10 +100,10 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 250000",
-         "transform=",
+         "remove=",
       },
       harvest = {
-         "transform=",
+         "remove=",
       }
    },
    spritesheets = {

@@ -17,7 +17,8 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 60000",
-         "transform=rowan_summer_pole remove:40",
+         "remove=success:40",
+         "grow=rowan_summer_pole",
       },
    },
    spritesheets = {
@@ -43,7 +44,8 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 55000",
-         "transform=rowan_summer_mature remove:30",
+         "remove=success:30",
+         "grow=rowan_summer_mature",
       },
    },
    spritesheets = {
@@ -69,10 +71,11 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 55000",
-         "transform=remove:7",
+         "remove=success:7",
          "seed=rowan_summer_sapling 40",
          "animate=idle 30000",
-         "transform=rowan_summer_old remove:10",
+         "remove=success:10",
+         "grow=rowan_summer_old",
       },
    },
    spritesheets = {
@@ -104,7 +107,7 @@ world:new_immovable_type{
          "seed=rowan_summer_sapling 180",
       },
       fall = {
-         "transform=",
+         "remove=",
       },
    },
    spritesheets = {

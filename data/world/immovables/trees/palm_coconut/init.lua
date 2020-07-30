@@ -17,7 +17,8 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 55000",
-         "transform=palm_coconut_desert_pole remove:42",
+         "remove=success:42",
+         "grow=palm_coconut_desert_pole",
       },
    },
    spritesheets = {
@@ -43,7 +44,8 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 55000",
-         "transform=palm_coconut_desert_mature remove:33",
+         "remove=success:33",
+         "grow=palm_coconut_desert_mature",
       },
    },
    spritesheets = {
@@ -69,7 +71,8 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 60000",
-         "transform=palm_coconut_desert_old remove:23",
+         "remove=success:23",
+         "grow=palm_coconut_desert_old",
       },
    },
    spritesheets = {
@@ -101,7 +104,7 @@ world:new_immovable_type{
          "seed=palm_coconut_desert_sapling 100",
       },
       fall = {
-         "transform=",
+         "remove=",
       },
    },
    spritesheets = {

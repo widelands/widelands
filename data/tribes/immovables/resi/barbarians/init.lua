@@ -11,7 +11,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 600000",
-         "transform="
+         "remove="
       }
    },
    animations = {
@@ -34,7 +34,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 600000",
-         "transform="
+         "remove="
       }
    },
    animations = {
@@ -57,7 +57,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 600000",
-         "transform="
+         "remove="
       }
    },
    animations = {
@@ -80,7 +80,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 600000",
-         "transform="
+         "remove="
       }
    },
    animations = {
@@ -103,7 +103,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 600000",
-         "transform="
+         "remove="
       }
    },
    animations = {
@@ -126,7 +126,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 600000",
-         "transform="
+         "remove="
       }
    },
    animations = {
@@ -149,7 +149,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 600000",
-         "transform="
+         "remove="
       }
    },
    animations = {
@@ -172,7 +172,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 600000",
-         "transform="
+         "remove="
       }
    },
    animations = {
@@ -195,7 +195,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 600000",
-         "transform="
+         "remove="
       }
    },
    animations = {
@@ -218,7 +218,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 600000",
-         "transform="
+         "remove="
       }
    },
    animations = {

@@ -12,7 +12,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 2500000",
-         "transform=",
+         "remove=",
       },
       harvest = {
          "transform=barleyfield_harvested"

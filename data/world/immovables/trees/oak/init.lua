@@ -17,7 +17,8 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 72500",
-         "transform=oak_summer_pole remove:80",
+         "remove=success:80",
+         "grow=oak_summer_pole",
       },
    },
    spritesheets = {
@@ -43,7 +44,8 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 72500",
-         "transform=oak_summer_mature remove:70",
+         "remove=success:70",
+         "grow=oak_summer_mature",
       },
    },
    spritesheets = {
@@ -69,7 +71,8 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 75000",
-         "transform=oak_summer_old remove:40",
+         "remove=success:40",
+         "grow=oak_summer_old",
       },
    },
    spritesheets = {

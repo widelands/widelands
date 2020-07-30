@@ -15,7 +15,7 @@ world:new_immovable_type{
    attributes = { "rocks" },
    programs = {
       shrink = {
-         "transform="
+         "remove="
       }
    },
    animations = animations

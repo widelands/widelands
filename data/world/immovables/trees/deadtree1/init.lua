@@ -9,7 +9,7 @@ world:new_immovable_type{
    programs = {
       program = {
         "animate=idle 20000",
-        "transform=remove:16"
+       "remove=success:16"
       }
    },
    animations = {

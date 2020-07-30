@@ -17,7 +17,8 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 57500",
-         "transform=palm_roystonea_desert_pole remove:21",
+         "remove=success:21",
+         "grow=palm_roystonea_desert_pole",
       },
    },
    spritesheets = {
@@ -43,7 +44,8 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 52500",
-         "transform=palm_roystonea_desert_mature remove:19",
+         "remove=success:19",
+         "grow=palm_roystonea_desert_mature",
       },
    },
    spritesheets = {
@@ -69,7 +71,8 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 50000",
-         "transform=palm_roystonea_desert_old remove:18",
+         "remove=success:18",
+         "grow=palm_roystonea_desert_old",
       },
    },
    spritesheets = {
@@ -101,7 +104,7 @@ world:new_immovable_type{
          "seed=palm_roystonea_desert_sapling 30",
       },
       fall = {
-         "transform=",
+         "remove=",
       },
    },
    spritesheets = {

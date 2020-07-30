@@ -31,7 +31,7 @@ dirname = path.dirname(__file__)
 --    **helptext_script**:  The full path to the ``helptexts.lua`` script for this immovable.
 --
 --    **programs**: A table with the programs that this immovable will perform,
---    e.g. ``{ "animate=idle 4500",  "transform=" }`` (see :ref:`immovable_programs`)
+--    e.g. ``{ "animate=idle 4500",  "remove=" }`` (see :doc:`immovable_program`)
 --
 --    **animations**: A table containing all animations for this immovable.
 --
@@ -46,7 +46,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 45000",
-         "transform=",
+         "remove=",
       }
    },
 

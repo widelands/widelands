@@ -17,7 +17,8 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 42000",
-         "transform=birch_summer_pole remove:32",
+         "remove=success:32",
+         "grow=birch_summer_pole",
       },
    },
    spritesheets = {
@@ -43,7 +44,8 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 40000",
-         "transform=birch_summer_mature remove:25",
+         "remove=success:25",
+         "grow=birch_summer_mature",
       },
    },
    spritesheets = {
@@ -69,10 +71,11 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 25000",
-         "transform=remove:10",
+         "remove=success:10",
          "seed=birch_summer_sapling 200",
          "animate=idle 30000",
-         "transform=birch_summer_old remove:10",
+         "remove=success:10",
+         "grow=birch_summer_old",
       },
    },
    spritesheets = {
@@ -104,7 +107,7 @@ world:new_immovable_type{
          "seed=birch_summer_sapling 60",
       },
       fall = {
-         "transform=",
+         "remove=",
       },
    },
    spritesheets = {

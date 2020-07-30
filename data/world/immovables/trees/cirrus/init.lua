@@ -18,7 +18,8 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 61000",
-         "transform=cirrus_wasteland_pole remove:44",
+         "remove=success:44",
+         "grow=cirrus_wasteland_pole",
       },
    },
    spritesheets = {
@@ -45,7 +46,8 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 59000",
-         "transform=cirrus_wasteland_mature remove:34",
+         "remove=success:34",
+         "grow=cirrus_wasteland_mature",
       },
    },
    spritesheets = {
@@ -72,7 +74,8 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 55000",
-         "transform=cirrus_wasteland_old remove:24",
+         "remove=success:24",
+         "grow=cirrus_wasteland_old",
       },
    },
    spritesheets = {
@@ -106,7 +109,7 @@ world:new_immovable_type{
          "seed=cirrus_wasteland_sapling 100",
       },
       fall = {
-         "transform=",
+         "remove=",
       },
    },
    spritesheets = {

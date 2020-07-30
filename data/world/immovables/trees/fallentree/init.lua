@@ -16,7 +16,7 @@ world:new_immovable_type{
    programs = {
       program = {
         "animate=idle 30000",
-        "transform="
+       "remove="
       }
    },
    animations = animations,

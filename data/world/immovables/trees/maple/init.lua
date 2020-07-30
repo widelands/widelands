@@ -17,7 +17,8 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 57500",
-         "transform=maple_winter_pole remove:21",
+         "remove=success:21",
+         "grow=maple_winter_pole",
       },
    },
    spritesheets = {
@@ -43,7 +44,8 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 52500",
-         "transform=maple_winter_mature remove:19",
+         "remove=success:19",
+         "grow=maple_winter_mature",
       },
    },
    spritesheets = {
@@ -69,7 +71,8 @@ world:new_immovable_type{
    programs = {
       program = {
          "animate=idle 50000",
-         "transform=maple_winter_old remove:18",
+         "remove=success:18",
+         "grow=maple_winter_old",
       },
    },
    spritesheets = {
@@ -101,7 +104,7 @@ world:new_immovable_type{
          "seed=maple_winter_sapling 240",
       },
       fall = {
-         "transform=",
+         "remove=",
       },
    },
    spritesheets = {

@@ -70,7 +70,8 @@ dirname = path.dirname(__file__)
 --
 --            program = {
 --               "animate=idle 50000",
---               "transform=alder_summer_old remove:18",
+--               "remove=success:18",
+--               "grow=alder_summer_old",
 --            },
 --
 --       See :ref:`immovable_programs`.
@@ -143,8 +144,7 @@ world:new_immovable_type{
 -- Trees are a special type of immovable, and should be placed in the editor_category
 -- "trees_coniferous", "trees_deciduous", "trees_palm", or "trees_wasteland".
 -- Because they will grow with time, this growth is represented by transforming one
--- tree into the next through the ``transform`` command in their program,
--- which will detect the terrain affinity to determine the probability of the tree growing.
+-- tree into the next through the ``grow`` command in their program.
 -- They also all need to define a species name and their terrain affinity (see above).
 -- Trees will grow in 4 stages:
 --

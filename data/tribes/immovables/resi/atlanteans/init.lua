@@ -11,7 +11,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 600000",
-         "transform="
+         "remove="
       }
    },
    spritesheets = {
@@ -37,7 +37,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 600000",
-         "transform="
+         "remove="
       }
    },
    spritesheets = {
@@ -63,7 +63,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 600000",
-         "transform="
+         "remove="
       }
    },
    spritesheets = {
@@ -89,7 +89,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 600000",
-         "transform="
+         "remove="
       }
    },
    spritesheets = {
@@ -115,7 +115,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 600000",
-         "transform="
+         "remove="
       }
    },
    spritesheets = {
@@ -141,7 +141,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 600000",
-         "transform="
+         "remove="
       }
    },
    spritesheets = {
@@ -167,7 +167,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 600000",
-         "transform="
+         "remove="
       }
    },
    spritesheets = {
@@ -193,7 +193,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 600000",
-         "transform="
+         "remove="
       }
    },
    spritesheets = {
@@ -219,7 +219,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 600000",
-         "transform="
+         "remove="
       }
    },
    spritesheets = {
@@ -245,7 +245,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 600000",
-         "transform="
+         "remove="
       }
    },
    spritesheets = {

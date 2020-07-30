@@ -21,7 +21,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 18000",
-         "transform=berry_bush_blueberry_small",
+         "grow=berry_bush_blueberry_small",
       },
    },
    spritesheets = {
@@ -48,7 +48,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 36000",
-         "transform=berry_bush_blueberry_medium",
+         "grow=berry_bush_blueberry_medium",
       },
    },
    spritesheets = {
@@ -75,7 +75,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 24000",
-         "transform=berry_bush_blueberry_ripe",
+         "grow=berry_bush_blueberry_ripe",
       },
    },
    spritesheets = {
@@ -102,10 +102,10 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 600000",
-         "transform=",
+         "remove=",
       },
       harvest = {
-         "transform=",
+         "remove=",
       }
    },
    spritesheets = {
