@@ -46,7 +46,6 @@
 #include "logic/widelands_geometry_io.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "map_io/map_packet_versions.h"
 
 namespace Widelands {
 
@@ -1145,7 +1144,7 @@ const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 }
 
 void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
-	if (packet_version == kCurrentPacketVersionMapObject) {
+	if (packet_version == kCurrentPacketVersion) {
 		Bob::Loader::load(fr);
 		// Economy
 		ware_economy_serial_ = fr.unsigned_32();
@@ -1193,7 +1192,7 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 		}
 	} else {
 		throw UnhandledVersionError(
-		   "MapObjectPacket::Ship", packet_version, kCurrentPacketVersionMapObject);
+		   "MapObjectPacket::Ship", packet_version, kCurrentPacketVersion);
 	}
 }
 
