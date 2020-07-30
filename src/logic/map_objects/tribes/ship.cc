@@ -1196,8 +1196,7 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 			item_loader.load(fr);
 		}
 	} else {
-		throw UnhandledVersionError(
-		   "MapObjectPacket::Ship", packet_version, kCurrentPacketVersion);
+		throw UnhandledVersionError("MapObjectPacket::Ship", packet_version, kCurrentPacketVersion);
 	}
 }
 
