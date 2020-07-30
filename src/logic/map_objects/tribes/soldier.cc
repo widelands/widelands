@@ -1734,9 +1734,6 @@ Load/save support
 */
 
 constexpr uint8_t kCurrentPacketVersion = 3;
-// TODO(TiborB): This is only for map compatibility in regression tests, we should get rid of this
-// ASAP
-constexpr uint8_t kOldPacketVersion = 2;
 
 Soldier::Loader::Loader() : battle_(0) {
 }
@@ -1746,7 +1743,7 @@ void Soldier::Loader::load(FileRead& fr) {
 
 	try {
 		uint8_t packet_version = fr.unsigned_8();
-		if (packet_version == kCurrentPacketVersion || packet_version == kOldPacketVersion) {
+		if (packet_version == kCurrentPacketVersion) {
 
 			Soldier& soldier = get<Soldier>();
 			soldier.current_health_ = fr.unsigned_32();

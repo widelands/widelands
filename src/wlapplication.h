@@ -182,7 +182,7 @@ struct WLApplication {
 	void mainmenu_editor();
 
 	bool new_game();
-	bool load_game();
+	bool load_game(std::string filename = "");
 	bool campaign_game();
 	void replay();
 	static void emergency_save(Widelands::Game&);

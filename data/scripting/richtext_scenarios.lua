@@ -32,8 +32,10 @@ function speech(img, clr, title, text)
       title = h1(clr, title)
    end
 
-   -- Surround the text with translatable ","
-   text = (_'“%s”'):format(text)
+   -- Surround the text with translatable “quotes”
+   push_textdomain("widelands")
+   text = (_("“%s”")):format(text)
+   pop_textdomain()
 
    return title .. li_image(img, p(text))
 end

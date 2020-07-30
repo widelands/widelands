@@ -11,7 +11,7 @@ include "scripting/table.lua"
 include "scripting/win_conditions/win_condition_functions.lua"
 include "scripting/win_conditions/territorial_functions.lua"
 
-set_textdomain("win_conditions")
+push_textdomain("win_conditions")
 
 include "scripting/win_conditions/win_condition_texts.lua"
 
@@ -24,12 +24,12 @@ local wc_desc = _ (
    "Each player or team tries to obtain more than half of the map’s " ..
    "area. The winner will be the player or the team that is able to keep " ..
    "that area for at least 20 minutes, or the one with the most territory " ..
-   "after 4 hours, whichever comes first." ..
+   "after 4 hours, whichever comes first. " ..
    "If the peaceful mode is selected, the game ends if one player has more " ..
    "land than any other player could gain."
 )
 
-return {
+local r = {
    name = wc_name,
    description = wc_desc,
    peaceful_mode_allowed = true,
@@ -47,7 +47,7 @@ return {
       local max_time = 4 * 60
 
       local function _send_state(remaining_time, plrs, show_popup)
-         set_textdomain("win_conditions")
+         push_textdomain("win_conditions")
 
          local remaining_time_minutes = remaining_time // 60
          for idx, player in ipairs(plrs) do
@@ -68,6 +68,7 @@ return {
             msg = msg .. vspace(8) .. game_status.body .. territory_status(fields, "has")
             send_message(player, game_status.title, msg, {popup = show_popup})
          end
+         pop_textdomain()
       end
 
       -- Start a new coroutine that triggers status notifications.
@@ -113,3 +114,5 @@ return {
       territory_game_over(fields, wl.Game().players, wc_descname, wc_version)
    end
 }
+pop_textdomain()
+return r

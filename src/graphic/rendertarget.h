@@ -107,12 +107,14 @@ public:
 	// cropped to 'source_rect'.
 	// Any sound effects are played with stereo position according to 'coords'.
 	// If 'coords' == Widelands::Coords::null(), skip playing any sound effects.
+	// The `opacity` parameter is ignored unless `player_color` is nullptr.
 	void blit_animation(const Vector2f& dst,
 	                    const Widelands::Coords& coords,
 	                    const float scale,
 	                    uint32_t animation_id,
 	                    uint32_t time,
 	                    const RGBColor* player_color = nullptr,
+	                    float opacity = 1.0f,
 	                    const int percent_from_bottom = 100);
 
 	void reset();

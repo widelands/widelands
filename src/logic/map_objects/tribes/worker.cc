@@ -920,16 +920,20 @@ bool Worker::run_createbob(Game& game, State& state, const Action& action) {
 	int32_t const idx = game.logic_rand() % action.sparamv.size();
 
 	const std::string& bob = action.sparamv[idx];
-	const DescriptionIndex critter = game.world().get_critter(bob.c_str());
-
-	if (critter == INVALID_INDEX) {
-		molog("  WARNING: Unknown bob %s\n", bob.c_str());
-		send_signal(game, "fail");
-		pop_task(game);
-		return true;
+	DescriptionIndex index = owner_->tribe().worker_index(bob);
+	if (owner_->tribe().has_worker(index)) {
+		game.create_worker(get_position(), index, owner_);
+	} else {
+		const DescriptionIndex critter = game.world().get_critter(bob.c_str());
+		if (critter == INVALID_INDEX) {
+			molog("  WARNING: Unknown bob %s\n", bob.c_str());
+			send_signal(game, "fail");
+			pop_task(game);
+			return true;
+		}
+		game.create_critter(get_position(), critter);
 	}
 
-	game.create_critter(get_position(), critter);
 	++state.ivar1;
 	schedule_act(game, 10);
 	return true;
@@ -993,8 +997,9 @@ bool Worker::run_terraform(Game& game, State& state, const Action&) {
  * tribe uses and adds it to the appropriate fleet.
  *
  */
+// TODO(GunChleoc): Savegame compatibility, remove after v1.0.
 bool Worker::run_buildferry(Game& game, State& state, const Action&) {
-	game.create_ferry(get_position(), owner_);
+	game.create_worker(get_position(), owner_->tribe().ferry(), owner_);
 	++state.ivar1;
 	schedule_act(game, 10);
 	return true;
@@ -3344,13 +3349,9 @@ MapObject::Loader* Worker::load(EditorGameBase& egbase,
                                 MapObjectLoader& mol,
                                 FileRead& fr,
                                 const TribesLegacyLookupTable& lookup_table,
-                                uint8_t packet_version) {
+                                uint8_t /* packet_version */) {
 	try {
 		// header has already been read by caller
-		// Some maps contain worker info, so we need compatibility here.
-		if (packet_version == 1) {
-			fr.c_string();  // Consume tribe name
-		}
 		const std::string name = lookup_table.lookup_worker(fr.c_string());
 
 		const WorkerDescr* descr =
