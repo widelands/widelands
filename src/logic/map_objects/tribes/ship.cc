@@ -966,6 +966,10 @@ void Ship::exp_cancel(Game& game) {
 		// We lost our last reachable port, so we reset the expedition's state
 		set_ship_state_and_notify(
 		   ShipStates::kExpeditionWaiting, NoteShip::Action::kDestinationChanged);
+		if (fleet_) {
+			fleet_->remove_ship(game, this);
+			assert(fleet_ == nullptr);
+		}
 		set_economy(game, expedition_->ware_economy, wwWARE);
 		set_economy(game, expedition_->worker_economy, wwWORKER);
 
