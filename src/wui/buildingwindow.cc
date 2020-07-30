@@ -183,9 +183,12 @@ void BuildingWindow::think() {
 
 	if (mute_this_ || mute_all_) {
 		assert(mute_this_ && mute_all_);
-		mute_this_->set_pic(g_gr->images().get(building->mute_messages() ? pic_unmute_this : pic_mute_this));
-		mute_this_->set_tooltip(building->mute_messages() ? _("Muted – click to unmute") : _("Mute this building’s messages"));
-		if (building->owner().is_muted(building->owner().tribe().safe_building_index(building->descr().name()))) {
+		mute_this_->set_pic(
+		   g_gr->images().get(building->mute_messages() ? pic_unmute_this : pic_mute_this));
+		mute_this_->set_tooltip(building->mute_messages() ? _("Muted – click to unmute") :
+		                                                    _("Mute this building’s messages"));
+		if (building->owner().is_muted(
+		       building->owner().tribe().safe_building_index(building->descr().name()))) {
 			mute_this_->set_enabled(false);
 			mute_all_->set_pic(g_gr->images().get(pic_unmute_all));
 			mute_all_->set_tooltip(_("All buildings of this type muted – click to unmute"));
@@ -200,7 +203,8 @@ void BuildingWindow::think() {
 }
 
 static bool allow_muting(const Widelands::BuildingDescr& d) {
-	if (d.type() == Widelands::MapObjectType::MILITARYSITE || d.type() == Widelands::MapObjectType::WAREHOUSE) {
+	if (d.type() == Widelands::MapObjectType::MILITARYSITE ||
+	    d.type() == Widelands::MapObjectType::WAREHOUSE) {
 		return true;
 	} else if (upcast(const Widelands::ProductionSiteDescr, p, &d)) {
 		return !p->out_of_resource_message().empty() || !p->resource_not_needed_message().empty();
@@ -343,10 +347,10 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		if (allow_muting(building->descr())) {
 			mute_this_ =
 			   new UI::Button(capsbuttons, "mute_this", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-			                  g_gr->images().get(pic_mute_this), "" /* set by next think() */ );
+			                  g_gr->images().get(pic_mute_this), "" /* set by next think() */);
 			mute_all_ =
 			   new UI::Button(capsbuttons, "mute_all", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-			                  g_gr->images().get(pic_mute_all), "" /* set by next think() */ );
+			                  g_gr->images().get(pic_mute_all), "" /* set by next think() */);
 			mute_all_->sigclicked.connect([this]() { act_mute(true); });
 			mute_this_->sigclicked.connect([this]() { act_mute(false); });
 			capsbuttons->add(mute_this_);

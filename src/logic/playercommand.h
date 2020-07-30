@@ -889,7 +889,9 @@ private:
 };
 
 struct CmdToggleMuteMessages : PlayerCommand {
-	CmdToggleMuteMessages(uint32_t t, PlayerNumber p, const Building& b, bool a) : PlayerCommand(t, p), building_(b.serial()), all_(a) {}
+	CmdToggleMuteMessages(uint32_t t, PlayerNumber p, const Building& b, bool a)
+	   : PlayerCommand(t, p), building_(b.serial()), all_(a) {
+	}
 
 	QueueCommandTypes id() const override {
 		return QueueCommandTypes::kToggleMuteMessages;

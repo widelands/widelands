@@ -881,7 +881,8 @@ void Game::send_player_set_stock_policy(Building& imm,
 }
 
 void Game::send_player_toggle_mute(const Building& b, bool all) {
-	send_player_command(new CmdToggleMuteMessages(get_gametime(), b.owner().player_number(), b, all));
+	send_player_command(
+	   new CmdToggleMuteMessages(get_gametime(), b.owner().player_number(), b, all));
 }
 
 int Game::propose_trade(const Trade& trade) {
