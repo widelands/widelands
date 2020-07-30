@@ -911,7 +911,7 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 						if ((descr.type() == Widelands::MapObjectType::PRODUCTIONSITE &&
 						     (d->type() != Widelands::MapObjectType::PRODUCTIONSITE ||
 						      !dynamic_cast<const Widelands::ProductionSiteDescr&>(descr)
-						          .highlight_overlapping_workarea_for(d, &positive))) ||
+						          .highlight_overlapping_workarea_for(d->name(), &positive))) ||
 						    ((descr.type() == Widelands::MapObjectType::MILITARYSITE ||
 						      descr.type() == Widelands::MapObjectType::WAREHOUSE) &&
 						     d->type() != Widelands::MapObjectType::MILITARYSITE &&
@@ -922,7 +922,7 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 						if (imm_type != Widelands::MapObjectType::PRODUCTIONSITE ||
 						    imm->get_owner() != player_ ||
 						    !dynamic_cast<const Widelands::ProductionSiteDescr&>(descr)
-						        .highlight_overlapping_workarea_for(&imm->descr(), &positive)) {
+						        .highlight_overlapping_workarea_for(imm->descr().name(), &positive)) {
 							continue;
 						}
 					} else if (descr.type() == Widelands::MapObjectType::WAREHOUSE ||
