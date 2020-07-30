@@ -69,17 +69,17 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 					icons_all_.push_back(icon3);
 					icons_all_.push_back(icon4);
 					labels_all_.push_back(txt);
-					const std::string tooltip = (boost::format("%s<br>%s<br>%s<br>%s") %
-					                             (boost::format(_("Health: %u")) % health).str() %
-					                             (boost::format(_("Attack: %u")) % attack).str() %
-					                             (boost::format(_("Defense: %u")) % defense).str() %
-					                             (boost::format(_("Evade: %u")) % evade).str())
-					                               .str();
+					const std::string tt = (boost::format("%s<br>%s<br>%s<br>%s") %
+					                        (boost::format(_("Health: %u")) % health).str() %
+					                        (boost::format(_("Attack: %u")) % attack).str() %
+					                        (boost::format(_("Defense: %u")) % defense).str() %
+					                        (boost::format(_("Evade: %u")) % evade).str())
+					                          .str();
 					txt->set_handle_mouse(true);
-					icon1->set_tooltip(tooltip);
-					icon2->set_tooltip(tooltip);
-					icon3->set_tooltip(tooltip);
-					icon4->set_tooltip(tooltip);
+					icon1->set_tooltip(tt);
+					icon2->set_tooltip(tt);
+					icon3->set_tooltip(tt);
+					icon4->set_tooltip(tt);
 					icon1->set_handle_mouse(true);
 					icon2->set_handle_mouse(true);
 					icon3->set_handle_mouse(true);
@@ -112,11 +112,11 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 		hbox1->add(txt, UI::Box::Resizing::kAlign);
 		icons_detail_.push_back(i);
 		labels_detail_.push_back(txt);
-		const std::string tooltip = (boost::format(_("Health: %u")) % h).str();
+		const std::string tt = (boost::format(_("Health: %u")) % h).str();
 		i->set_handle_mouse(true);
 		txt->set_handle_mouse(true);
-		i->set_tooltip(tooltip);
-		txt->set_tooltip(tooltip);
+		i->set_tooltip(tt);
+		txt->set_tooltip(tt);
 	}
 	for (unsigned a = 0; a <= ma_; ++a) {
 		UI::Icon* i = new UI::Icon(hbox2, soldier.get_attack_level_pic(a));
@@ -126,11 +126,11 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 		hbox2->add(txt, UI::Box::Resizing::kAlign);
 		icons_detail_.push_back(i);
 		labels_detail_.push_back(txt);
-		const std::string tooltip = (boost::format(_("Attack: %u")) % a).str();
+		const std::string tt = (boost::format(_("Attack: %u")) % a).str();
 		i->set_handle_mouse(true);
 		txt->set_handle_mouse(true);
-		i->set_tooltip(tooltip);
-		txt->set_tooltip(tooltip);
+		i->set_tooltip(tt);
+		txt->set_tooltip(tt);
 	}
 	for (unsigned d = 0; d <= md_; ++d) {
 		UI::Icon* i = new UI::Icon(hbox3, soldier.get_defense_level_pic(d));
@@ -140,11 +140,11 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 		hbox3->add(txt, UI::Box::Resizing::kAlign);
 		icons_detail_.push_back(i);
 		labels_detail_.push_back(txt);
-		const std::string tooltip = (boost::format(_("Defense: %u")) % d).str();
+		const std::string tt = (boost::format(_("Defense: %u")) % d).str();
 		i->set_handle_mouse(true);
 		txt->set_handle_mouse(true);
-		i->set_tooltip(tooltip);
-		txt->set_tooltip(tooltip);
+		i->set_tooltip(tt);
+		txt->set_tooltip(tt);
 	}
 	for (unsigned e = 0; e <= me_; ++e) {
 		UI::Icon* i = new UI::Icon(hbox4, soldier.get_evade_level_pic(e));
@@ -154,11 +154,11 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 		hbox4->add(txt, UI::Box::Resizing::kAlign);
 		icons_detail_.push_back(i);
 		labels_detail_.push_back(txt);
-		const std::string tooltip = (boost::format(_("Evade: %u")) % e).str();
+		const std::string tt = (boost::format(_("Evade: %u")) % e).str();
 		i->set_handle_mouse(true);
 		txt->set_handle_mouse(true);
-		i->set_tooltip(tooltip);
-		txt->set_tooltip(tooltip);
+		i->set_tooltip(tt);
+		txt->set_tooltip(tt);
 	}
 
 	vbox->add(hbox1, UI::Box::Resizing::kFullSize);
