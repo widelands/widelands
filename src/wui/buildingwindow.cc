@@ -191,7 +191,7 @@ void BuildingWindow::think() {
 		       building->owner().tribe().safe_building_index(building->descr().name()))) {
 			mute_this_->set_enabled(false);
 			mute_all_->set_pic(g_gr->images().get(pic_unmute_all));
-			mute_all_->set_tooltip(_("All buildings of this type muted – click to unmute"));
+			mute_all_->set_tooltip(_("All buildings of this type are muted – click to unmute"));
 		} else {
 			mute_this_->set_enabled(true);
 			mute_all_->set_pic(g_gr->images().get(pic_mute_all));
