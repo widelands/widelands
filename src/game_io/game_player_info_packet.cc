@@ -83,8 +83,11 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 					player->civil_blds_lost_ = fr.unsigned_32();
 					player->civil_blds_defeated_ = fr.unsigned_32();
 
-					for (size_t j = (packet_version >= 24 ? fr.unsigned_32() : 0); j; --j) {
-						player->muted_building_types_.insert(fr.unsigned_32());
+					// TODO(Nordfriese): Savegame compatibility, remove after v1.0
+					if (packet_version >= 24) {
+						for (size_t j = fr.unsigned_32(); j; --j) {
+							player->muted_building_types_.insert(fr.unsigned_32());
+						}
 					}
 				}
 			}
