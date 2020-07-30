@@ -100,7 +100,8 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 				actions_.push_back(
 				   std::unique_ptr<Action>(new ActGrow(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "remove") {
-				actions_.push_back(std::unique_ptr<Action>(new ActRemove(parseinput.arguments, immovable)));
+				actions_.push_back(
+				   std::unique_ptr<Action>(new ActRemove(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "seed") {
 				actions_.push_back(
 				   std::unique_ptr<Action>(new ActSeed(parseinput.arguments, immovable)));
@@ -217,7 +218,8 @@ Parameter semantics:
     ``success:<chance>`` is omitted, the transformation will always succeed.
 
 Deletes this immovable and instantly replaces it with a different immovable or a bob. If no
-parameters are given, the immovable is removed and no other transformation will take place. If ``success`` is specified, there's a probability that the transformation will be skipped.
+parameters are given, the immovable is removed and no other transformation will take place. If
+``success`` is specified, there's a probability that the transformation will be skipped.
 */
 ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments,
                                              const ImmovableDescr& descr) {
@@ -240,8 +242,7 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 					probability_ = read_positive(item.second, 254);
 				} else {
 					throw GameDataError(
-					   "Unknown argument '%s'. Usage: [bob:]name [success:chance]",
-					   argument.c_str());
+					   "Unknown argument '%s'. Usage: [bob:]name [success:chance]", argument.c_str());
 				}
 			} else if (item.first == "bob") {
 				// TODO(GunChleoc): Savegame compatibility, remove this argument option after v1.0
@@ -296,7 +297,8 @@ void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) c
 
 grow
 ----
-Delete this immovable and instantly replace it with a different immovable with a chance depending on terrain affinity.
+Delete this immovable and instantly replace it with a different immovable with a chance depending on
+terrain affinity.
 
 Parameter syntax::
 
@@ -307,7 +309,10 @@ Parameter semantics:
 ``name``
     The name of the immovable to turn into.
 
-Deletes the immovable (preventing subsequent program steps from being called) and replaces it with an immovable of the given name. The chance that this program step succeeds depends on how well this immovable's terrain affinity matches the terrains it grows on. If the growth fails, the next program step is triggered. This command may be used only for immovables with a terrain affinity.
+Deletes the immovable (preventing subsequent program steps from being called) and replaces it with
+an immovable of the given name. The chance that this program step succeeds depends on how well this
+immovable's terrain affinity matches the terrains it grows on. If the growth fails, the next program
+step is triggered. This command may be used only for immovables with a terrain affinity.
 */
 ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments,
                                    const ImmovableDescr& descr) {
@@ -367,7 +372,7 @@ Parameter semantics:
     ``success:<chance>`` is omitted, the immovable will always be removed.
 */
 ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments,
-									   const ImmovableDescr& descr) {
+                                       const ImmovableDescr& descr) {
 	if (arguments.size() > 1) {
 		throw GameDataError("Usage: remove=[success:<chance>]");
 	}
@@ -379,10 +384,13 @@ ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments,
 			probability_ = read_positive(item.second, 254);
 		} else if (item.first[0] >= '0' && item.first[0] <= '9') {
 			// TODO(GunChleoc): Savegame compatibility, remove this argument option after v1.0
-			log("WARNING: %s: Deprecated chance in 'remove' program, use 'success:<number>' instead.\n", descr.name().c_str());
+			log(
+			   "WARNING: %s: Deprecated chance in 'remove' program, use 'success:<number>' instead.\n",
+			   descr.name().c_str());
 			probability_ = read_positive(item.first, 254);
 		} else {
-			throw GameDataError("Unknown argument '%s'. Usage: [success:chance]", arguments.front().c_str());
+			throw GameDataError(
+			   "Unknown argument '%s'. Usage: [success:chance]", arguments.front().c_str());
 		}
 	}
 }
