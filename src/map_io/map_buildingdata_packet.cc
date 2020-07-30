@@ -500,8 +500,8 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 			   map.get_fcoords(warehouse.get_position()), warehouse.descr().vision_range()));
 			warehouse.next_military_act_ = game.get_gametime();
 		} else {
-			throw UnhandledVersionError(
-			   "MapBuildingdataPacket - Warehouse", packet_version, kCurrentPacketVersionWarehouseAndExpedition);
+			throw UnhandledVersionError("MapBuildingdataPacket - Warehouse", packet_version,
+			                            kCurrentPacketVersionWarehouseAndExpedition);
 		}
 	} catch (const WException& e) {
 		throw GameDataError("warehouse: %s", e.what());
