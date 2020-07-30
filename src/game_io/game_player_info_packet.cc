@@ -33,7 +33,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 23;
+constexpr uint16_t kCurrentPacketVersion = 24;
 
 void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 	try {
@@ -65,7 +65,7 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 
 					player->set_ai(fr.c_string());
 
-					if (packet_version == kCurrentPacketVersion) {
+					if (packet_version >= 23) {
 						player->forbid_attack_.clear();
 						uint8_t size = fr.unsigned_8();
 						for (uint8_t j = 0; j < size; ++j) {
@@ -82,6 +82,10 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 					player->msites_defeated_ = fr.unsigned_32();
 					player->civil_blds_lost_ = fr.unsigned_32();
 					player->civil_blds_defeated_ = fr.unsigned_32();
+
+					for (size_t j = (packet_version >= 24 ? fr.unsigned_32() : 0); j; --j) {
+						player->muted_building_types_.insert(fr.unsigned_32());
+					}
 				}
 			}
 
@@ -145,6 +149,11 @@ void GamePlayerInfoPacket::write(FileSystem& fs, Game& game, MapObjectSaver*) {
 		fw.unsigned_32(plr->msites_defeated());
 		fw.unsigned_32(plr->civil_blds_lost());
 		fw.unsigned_32(plr->civil_blds_defeated());
+
+		fw.unsigned_32(plr->muted_building_types_.size());
+		for (const DescriptionIndex& di : plr->muted_building_types_) {
+			fw.unsigned_32(di);
+		}
 	}
 	else {
 		fw.unsigned_8(0);  //  Player is NOT in game.

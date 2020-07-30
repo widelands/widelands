@@ -333,6 +333,13 @@ public:
 	                  uint32_t throttle_time = 0,
 	                  uint32_t throttle_radius = 0);
 
+	bool mute_messages() const {
+		return mute_messages_;
+	}
+	void set_mute_messages(bool m) {
+		mute_messages_ = m;
+	}
+
 	void start_animation(EditorGameBase&, uint32_t anim);
 
 protected:
@@ -385,6 +392,8 @@ private:
 	std::string statistics_string_;
 	AttackTarget* attack_target_;      // owned by the base classes, set by 'set_attack_target'.
 	SoldierControl* soldier_control_;  // owned by the base classes, set by 'set_soldier_control'.
+
+	bool mute_messages_;
 };
 }  // namespace Widelands
 
