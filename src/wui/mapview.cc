@@ -346,7 +346,7 @@ void MapView::mouse_to_pixel(const Vector2i& pixel, const Transition& transition
 
 FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase,
                                     const Widelands::Player* player,
-                                    Workareas workarea,
+                                    const Workareas& workarea,
                                     bool grid,
                                     RenderTarget* dst) {
 	uint32_t now = SDL_GetTicks();

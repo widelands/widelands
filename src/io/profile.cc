@@ -67,18 +67,18 @@ Section::Value::Value(const Section::Value& o) : used_(o.used_), name_(o.name_) 
 	set_string(o.value_.get());
 }
 
-Section::Value::Value(Section::Value&& o) : Value() {
+Section::Value::Value(Section::Value&& o) noexcept : Value() {
 	using std::swap;
 	swap(*this, o);
 }
 
-Section::Value& Section::Value::operator=(Section::Value other) {
+Section::Value& Section::Value::operator=(Section::Value other) noexcept {
 	using std::swap;
 	swap(*this, other);
 	return *this;
 }
 
-Section::Value& Section::Value::operator=(Section::Value&& other) {
+Section::Value& Section::Value::operator=(Section::Value&& other) noexcept {
 	using std::swap;
 	swap(*this, other);
 	return *this;

@@ -722,7 +722,7 @@ void WorkerProgram::parse_createbob(Worker::Action* act, const std::vector<std::
 	}
 
 	act->function = &Worker::run_createbob;
-	act->sparamv = std::move(cmd);
+	act->sparamv = cmd;
 }
 
 /* RST

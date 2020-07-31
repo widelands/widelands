@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
+"""Checks whether clang-tidy warnings that were previously cleaned have
+regressed."""
+
 import re
 import sys
 
@@ -78,11 +81,6 @@ SUPPRESSED_CHECKS = {
     '[modernize-use-equals-default]',
     '[modernize-use-nullptr]',
     '[modernize-use-override]',
-    '[performance-for-range-copy]',
-    '[performance-inefficient-string-concatenation]',
-    '[performance-inefficient-vector-operation]',
-    '[performance-unnecessary-copy-initialization]',
-    '[performance-unnecessary-value-param]',
     '[readability-container-size-empty]',
     '[readability-delete-null-pointer]',
     '[readability-else-after-return]',
@@ -100,20 +98,20 @@ SUPPRESSED_CHECKS = {
     '[readability-static-definition-in-anonymous-namespace]'
 }
 
-CHECK_REGEX = re.compile('.*\[([A-Za-z0-9.-]+)\]$')
+CHECK_REGEX = re.compile(r'.*\[([A-Za-z0-9.-]+)\]$')
 
 
 def main():
     """Checks whether clang-tidy warnings that were previously cleaned have
     regressed."""
     if len(sys.argv) == 2:
-        print('#######################################')
-        print('#######################################')
-        print('###                                 ###')
-        print('###   Checking clang-tidy results   ###')
-        print('###                                 ###')
-        print('#######################################')
-        print('#######################################')
+        print('########################################################')
+        print('########################################################')
+        print('###                                                  ###')
+        print('###   Checking clang-tidy results                    ###')
+        print('###                                                  ###')
+        print('########################################################')
+        print('########################################################')
     else:
         print(
             'Usage: check_clang_tidy_results.py <log_file>')
@@ -138,23 +136,24 @@ def main():
                 errors = errors + 1
 
     if errors > 0:
-        print('#######################################')
-        print('#######################################')
-        print('###                                 ###')
-        print('###   Found %s error(s)              ###' % errors)
-        print('###                                 ###')
-        print('#######################################')
-        print('#######################################')
+        print('########################################################')
+        print('########################################################')
+        print('###                                                  ###')
+        print('###   Found %s error(s)                               ###'
+              % errors)
+        print('###                                                  ###')
+        print('########################################################')
+        print('########################################################')
+        print('Information about the checks can be found on:')
+        print('https://clang.llvm.org/extra/clang-tidy/checks/list.html')
         return 1
-    else:
-        print('#######################################')
-        print('#######################################')
-        print('###                                 ###')
-        print('###   Check has passed              ###')
-        print('###                                 ###')
-        print('#######################################')
-        print('#######################################')
-        return 0
+
+    print('###                                                  ###')
+    print('###   Check has passed                               ###')
+    print('###                                                  ###')
+    print('########################################################')
+    print('########################################################')
+    return 0
 
 
 if __name__ == '__main__':

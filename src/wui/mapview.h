@@ -188,7 +188,7 @@ public:
 	// visibility, and to correctly draw map objects, overlays and text.
 	FieldsToDraw* draw_terrain(const Widelands::EditorGameBase& egbase,
 	                           const Widelands::Player*,
-	                           Workareas workarea,
+	                           const Workareas& workarea,
 	                           bool grid,
 	                           RenderTarget* dst);
 

@@ -228,7 +228,7 @@ void MainMenuMapOptions::update() {
 	waterway_length_box_->set_value(map.get_waterway_max_length());
 	update_waterway_length_warning();
 
-	std::set<std::string> tags = map.get_tags();
+	const std::set<std::string>& tags = map.get_tags();
 	for (auto tag : tags_checkboxes_) {
 		tag.second->set_state(tags.count(tag.first) > 0);
 	}
@@ -270,8 +270,8 @@ void MainMenuMapOptions::clicked_cancel() {
  * Add a tag to the checkboxes
  */
 void MainMenuMapOptions::add_tag_checkbox(UI::Box* parent,
-                                          std::string tag,
-                                          std::string displ_name) {
+                                          const std::string& tag,
+                                          const std::string& displ_name) {
 	UI::Box* box = new UI::Box(parent, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
 	UI::Checkbox* cb = new UI::Checkbox(box, Vector2i::zero(), displ_name);
 	box->add(cb, UI::Box::Resizing::kFullSize);
