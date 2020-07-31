@@ -1000,7 +1000,7 @@ void InternetGaming::send(const std::string& msg) {
  * \returns the boolean value of a string received from the metaserver.
  * If conversion fails, it throws a \ref warning
  */
-bool InternetGaming::str2bool(std::string str) {
+bool InternetGaming::str2bool(const std::string& str) {
 	if ((str != "true") && (str != "false")) {
 		throw WLWarning(_("Conversion error"),
 		                /** TRANSLATORS: Geeky message from the metaserver */
@@ -1043,7 +1043,7 @@ void InternetGaming::format_and_add_chat(const std::string& from,
 /**
  * Check for vaild username characters.
  */
-bool InternetGaming::valid_username(std::string username) {
+bool InternetGaming::valid_username(const std::string& username) {
 	if (username.empty() ||
 	    username.find_first_not_of("abcdefghijklmnopqrstuvwxyz"
 	                               "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@.+-_") <= username.size()) {
