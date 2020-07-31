@@ -1573,8 +1573,8 @@ NodeCaps Map::calc_nodecaps_pass2(const EditorGameBase& egbase,
 
 	// Reduce building size if it would block connectivity
 	if (buildsize == BaseImmovable::BIG) {
-		if (!is_cycle_connected(br, {
-		   WALK_NE, WALK_NE, WALK_NW, WALK_W, WALK_W, WALK_SW, WALK_SW, WALK_SE, WALK_E, WALK_E})) {
+		if (!is_cycle_connected(br, {WALK_NE, WALK_NE, WALK_NW, WALK_W, WALK_W, WALK_SW, WALK_SW,
+		                             WALK_SE, WALK_E, WALK_E})) {
 			buildsize = BUILDCAPS_MEDIUM;
 		}
 	}
