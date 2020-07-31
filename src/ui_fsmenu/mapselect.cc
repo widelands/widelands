@@ -386,8 +386,9 @@ void FullscreenMenuMapSelect::fill_table() {
 /*
  * Add a tag to the checkboxes
  */
-UI::Checkbox*
-FullscreenMenuMapSelect::add_tag_checkbox(UI::Box* box, std::string tag, std::string displ_name) {
+UI::Checkbox* FullscreenMenuMapSelect::add_tag_checkbox(UI::Box* box,
+                                                        const std::string& tag,
+                                                        const std::string& displ_name) {
 	tags_ordered_.push_back(tag);
 
 	UI::Checkbox* cb = new UI::Checkbox(box, Vector2i::zero(), displ_name);

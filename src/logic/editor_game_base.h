@@ -144,13 +144,13 @@ public:
 	                                bool loading = false,
 	                                FormerBuildings former_buildings = FormerBuildings(),
 	                                const BuildingSettings* settings = nullptr,
-	                                std::map<DescriptionIndex, Quantity> preserved_wares =
+	                                const std::map<DescriptionIndex, Quantity>& preserved_wares =
 	                                   std::map<DescriptionIndex, Quantity>());
 	Building& warp_dismantlesite(const Coords&,
 	                             PlayerNumber,
 	                             bool loading = false,
 	                             FormerBuildings former_buildings = FormerBuildings(),
-	                             std::map<DescriptionIndex, Quantity> preserved_wares =
+	                             const std::map<DescriptionIndex, Quantity>& preserved_wares =
 	                                std::map<DescriptionIndex, Quantity>());
 	Bob& create_critter(const Coords&, DescriptionIndex bob_type_idx, Player* owner = nullptr);
 	Bob& create_critter(const Coords&, const std::string& name, Player* owner = nullptr);

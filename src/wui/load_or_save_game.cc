@@ -105,9 +105,11 @@ const SavegameData& LoadOrSaveGame::get_savegame(uint32_t index) const {
 
 const std::vector<SavegameData> LoadOrSaveGame::get_selected_savegames() const {
 	const std::set<uint32_t> selections = table_->selections();
-	std::vector<SavegameData> savegames;
+	std::vector<SavegameData> savegames(selections.size());
+	size_t i = 0;
 	for (const uint32_t index : selections) {
-		savegames.push_back(get_savegame(index));
+		savegames.at(i) = get_savegame(index);
+		++i;
 	}
 	return savegames;
 }

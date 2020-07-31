@@ -45,7 +45,7 @@ struct EditorDrawTool : public EditorTool {
 		return g_gr->images().get("images/novalue.png");
 	}
 
-	void add_action(EditorToolAction ac, EditorActionArgs& args);
+	void add_action(const EditorToolAction& ac, EditorActionArgs& args);
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_DRAW_TOOL_H
