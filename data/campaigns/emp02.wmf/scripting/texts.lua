@@ -56,6 +56,15 @@ obj_build_marblemine = {
    ),
 }
 
+obj_expand_south = {
+   name = "explore_south",
+   title =_"Continue expansion",
+   number = 1,
+   body = objective_text(_"Continue expansion",
+      li(_[[Expand to the south of marble mountain.]])
+   ),
+}
+
 obj_build_mining_infrastructure = {
    name = "build_mining_infrastructure",
    title =_"Build a stonemason’s house and mining infrastructure",
@@ -176,6 +185,7 @@ saledus_1 = {
 saledus_2 = {
    posx = 1,
    posy = 1,
+   h = 600,
    title =_ "Marble on the Mountain",
    body= saledus(_"Saledus smiles",
       -- TRANSLATORS: Saledus
@@ -185,8 +195,11 @@ saledus_2 = {
       _([[It would be a good source for bolstering our supply of quality marble, beyond the meager quantities available from the quarry. Perhaps you were right when you said that this island was like paradise.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Saledus
-      _([[Please, expand to that mountain and start mining marble.]]))
-      .. new_objectives(obj_build_marblemine)
+      _([[Please, expand to that mountain and start mining marble.]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Saledus
+      _([[When you get there, continue with expansion to the south. That area seems also promising.]]))
+      .. new_objectives(obj_build_marblemine, obj_expand_south)
 }
 
 saledus_3 = {
