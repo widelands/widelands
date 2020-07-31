@@ -53,7 +53,7 @@ void draw_terrain(uint32_t gametime,
                   const Widelands::World& world,
                   const FieldsToDraw& fields_to_draw,
                   const float scale,
-                  Workareas workarea,
+                  const Workareas& workarea,
                   bool grid,
                   RenderTarget* dst) {
 	const Recti& bounding_rect = dst->get_rect();

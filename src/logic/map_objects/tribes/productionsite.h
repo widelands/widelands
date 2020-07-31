@@ -367,7 +367,7 @@ public:
 	                   FailNotificationType type = FailNotificationType::kDefault);
 	void unnotify_player();
 
-	void set_default_anim(std::string);
+	void set_default_anim(const std::string&);
 
 	const BuildingSettings* create_building_settings() const override;
 

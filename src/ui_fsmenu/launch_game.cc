@@ -188,7 +188,7 @@ void FullscreenMenuLaunchGame::load_win_conditions(const std::set<std::string>& 
 
 std::unique_ptr<LuaTable>
 FullscreenMenuLaunchGame::win_condition_if_valid(const std::string& win_condition_script,
-                                                 std::set<std::string> tags) const {
+                                                 const std::set<std::string>& tags) const {
 	bool is_usable = true;
 	std::unique_ptr<LuaTable> t;
 	try {

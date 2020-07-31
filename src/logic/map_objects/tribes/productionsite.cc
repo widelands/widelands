@@ -1127,7 +1127,7 @@ const BuildingSettings* ProductionSite::create_building_settings() const {
 }
 
 /// Changes the default anim string to \li anim
-void ProductionSite::set_default_anim(std::string anim) {
+void ProductionSite::set_default_anim(const std::string& anim) {
 	if (default_anim_ == anim) {
 		return;
 	}
