@@ -1573,15 +1573,13 @@ NodeCaps Map::calc_nodecaps_pass2(const EditorGameBase& egbase,
 
 	// Reduce building size if it would block connectivity
 	if (buildsize == BaseImmovable::BIG) {
-		static const WalkingDir cycledirs[10] = {
-		   WALK_NE, WALK_NE, WALK_NW, WALK_W, WALK_W, WALK_SW, WALK_SW, WALK_SE, WALK_E, WALK_E};
-		if (!is_cycle_connected(br, 10, cycledirs)) {
+		if (!is_cycle_connected(br, {
+		   WALK_NE, WALK_NE, WALK_NW, WALK_W, WALK_W, WALK_SW, WALK_SW, WALK_SE, WALK_E, WALK_E})) {
 			buildsize = BUILDCAPS_MEDIUM;
 		}
 	}
 	if (buildsize < BaseImmovable::BIG) {
-		static const WalkingDir cycledirs[6] = {WALK_NE, WALK_NW, WALK_W, WALK_SW, WALK_SE, WALK_E};
-		if (!is_cycle_connected(br, 6, cycledirs)) {
+		if (!is_cycle_connected(br, {WALK_NE, WALK_NW, WALK_W, WALK_SW, WALK_SE, WALK_E})) {
 			return static_cast<NodeCaps>(caps);
 		}
 	}
@@ -1737,17 +1735,15 @@ int Map::calc_buildsize(const EditorGameBase& egbase,
  *
  * The cycle is described as a \p start point plus
  * a description of the directions in which to walk from the starting point.
- * The array \p dirs must have length \p length, where \p length is
- * the length of the cycle.
  */
-bool Map::is_cycle_connected(const FCoords& start, uint32_t length, const WalkingDir* dirs) const {
-	if (!(start.field->get_caps() & MOVECAPS_WALK)) {
+bool Map::is_cycle_connected(const FCoords& start, const std::vector<WalkingDir>& dirs) const {
+	if (!(start.field->maxcaps() & MOVECAPS_WALK)) {
 		return false;
 	}
 	FCoords f = start;
-	for (uint32_t i = 0; i < length; ++i) {
-		f = get_neighbour(f, dirs[i]);
-		if (!(f.field->get_caps() & MOVECAPS_WALK)) {
+	for (const WalkingDir& dir : dirs) {
+		f = get_neighbour(f, dir);
+		if (!(f.field->maxcaps() & MOVECAPS_WALK)) {
 			return false;
 		}
 	}
