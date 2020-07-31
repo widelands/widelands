@@ -318,8 +318,10 @@ void Critter::roam_update(Game& game, State& state) {
 	const uint32_t reproduction_rate = descr().get_reproduction_rate();
 
 	{  // chance to die
-		const uint32_t nearby_critters1 = game.map().find_bobs(game, Area<FCoords>(get_position(), 2), nullptr, FindCritter());
-		const uint32_t nearby_critters2 = game.map().find_bobs(game, Area<FCoords>(get_position(), 7), nullptr, FindBobByName(descr().name()));
+		const uint32_t nearby_critters1 =
+		   game.map().find_bobs(game, Area<FCoords>(get_position(), 2), nullptr, FindCritter());
+		const uint32_t nearby_critters2 = game.map().find_bobs(
+		   game, Area<FCoords>(get_position(), 7), nullptr, FindBobByName(descr().name()));
 		assert(nearby_critters1);  // at least we are here
 		assert(nearby_critters2);
 		const double r = reproduction_rate * reproduction_rate / 10000000.0;
@@ -331,7 +333,8 @@ void Critter::roam_update(Game& game, State& state) {
 		                                             (kMaxCritterLifetime - kMinCritterLifetime));
 		assert(d >= 0.0);
 		assert(d <= 1.0);
-		if (game.logic_rand() % kMinCritterLifetime < d * kMinCritterLifetime * nearby_critters1 * nearby_critters1 * nearby_critters2) {
+		if (game.logic_rand() % kMinCritterLifetime <
+		    d * kMinCritterLifetime * nearby_critters1 * nearby_critters1 * nearby_critters2) {
 			// :(
 			molog("Goodbye world :(\n");
 			return schedule_destroy(game);
