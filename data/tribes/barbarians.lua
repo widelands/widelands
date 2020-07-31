@@ -285,7 +285,10 @@ tribes:new_tribe {
       pgettext("shipname", "Baldr"),
       pgettext("shipname", "Bear"),
       pgettext("shipname", "Beowulf"),
+      -- TRANSLATORS: This Barbarian ship is named after an in-game character
       pgettext("shipname", "Boldreth"),
+      -- TRANSLATORS: This Barbarian ship is named after an in-game character
+      pgettext("shipname", "Chat’Karuth"),
       pgettext("shipname", "Dellingr"),
       pgettext("shipname", "Fulla"),
       pgettext("shipname", "Gersemi"),
@@ -296,6 +299,7 @@ tribes:new_tribe {
       pgettext("shipname", "Hrothgar"),
       pgettext("shipname", "Ingeld"),
       pgettext("shipname", "Karl Hundason"),
+      -- TRANSLATORS: This Barbarian ship is named after an in-game character
       pgettext("shipname", "Khantrukh"),
       pgettext("shipname", "Lynx"),
       pgettext("shipname", "Mani"),
@@ -306,6 +310,7 @@ tribes:new_tribe {
       pgettext("shipname", "Sigurd"),
       pgettext("shipname", "Snotra"),
       pgettext("shipname", "Thor"),
+      -- TRANSLATORS: This Barbarian ship is named after an in-game character
       pgettext("shipname", "Thron"),
       pgettext("shipname", "Ullr"),
       pgettext("shipname", "Valdar"),
