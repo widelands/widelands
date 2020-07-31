@@ -206,7 +206,7 @@ private:
 	void cleanup_replays();
 	void cleanup_ai_files();
 	void cleanup_temp_files();
-	void cleanup_temp_backups(std::string dir);
+	void cleanup_temp_backups(const std::string& dir);
 	void cleanup_temp_backups();
 
 	bool redirect_output(std::string path = "");

@@ -127,7 +127,7 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 			const BuildingDescr* tmp_enhancement = tribes_.get_building_descr(en_i);
 			for (auto area : tmp_enhancement->workarea_info_) {
 				std::set<std::string>& strs = workarea_info_[area.first];
-				for (std::string str : area.second) {
+				for (const std::string& str : area.second) {
 					strs.insert(str);
 				}
 			}
@@ -705,13 +705,22 @@ void Building::draw(uint32_t gametime,
                     const float scale,
                     RenderTarget* dst) {
 	if (was_immovable_) {
-		dst->blit_animation(point_on_dst, coords, scale,
-		                    was_immovable_->get_animation("idle", nullptr), gametime - animstart_,
-		                    &get_owner()->get_playercolor());
+		if (info_to_draw & InfoToDraw::kShowBuildings) {
+			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(),
+			                    gametime - animstart_, &get_owner()->get_playercolor());
+		} else {
+			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(),
+			                    gametime - animstart_, nullptr, kBuildingSilhouetteOpacity);
+		}
 	}
 
-	dst->blit_animation(
-	   point_on_dst, coords, scale, anim_, gametime - animstart_, &get_owner()->get_playercolor());
+	if (info_to_draw & InfoToDraw::kShowBuildings) {
+		dst->blit_animation(point_on_dst, coords, scale, anim_, gametime - animstart_,
+		                    &get_owner()->get_playercolor());
+	} else {
+		dst->blit_animation(point_on_dst, coords, scale, anim_, gametime - animstart_, nullptr,
+		                    kBuildingSilhouetteOpacity);
+	}
 
 	//  door animation?
 

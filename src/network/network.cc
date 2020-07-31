@@ -84,7 +84,7 @@ bool NetAddress::is_valid() const {
 }
 
 CmdNetCheckSync::CmdNetCheckSync(uint32_t const dt, SyncReportCallback cb)
-   : Command(dt), callback_(cb) {
+   : Command(dt), callback_(std::move(cb)) {
 }
 
 void CmdNetCheckSync::execute(Widelands::Game&) {
