@@ -60,6 +60,7 @@
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
+#include "map_io/map_packet_versions.h"
 #include "map_io/tribes_legacy_lookup_table.h"
 #include "sound/note_sound.h"
 
@@ -3349,21 +3350,26 @@ MapObject::Loader* Worker::load(EditorGameBase& egbase,
                                 MapObjectLoader& mol,
                                 FileRead& fr,
                                 const TribesLegacyLookupTable& lookup_table,
-                                uint8_t /* packet_version */) {
-	try {
-		// header has already been read by caller
-		const std::string name = lookup_table.lookup_worker(fr.c_string());
+                                uint8_t packet_version) {
+	if (packet_version == kCurrentPacketVersionMapObject) {
+		try {
+			// header has already been read by caller
+			const std::string name = lookup_table.lookup_worker(fr.c_string());
 
-		const WorkerDescr* descr =
-		   egbase.tribes().get_worker_descr(egbase.tribes().safe_worker_index(name));
+			const WorkerDescr* descr =
+			   egbase.tribes().get_worker_descr(egbase.tribes().safe_worker_index(name));
 
-		Worker* worker = static_cast<Worker*>(&descr->create_object());
-		std::unique_ptr<Loader> loader(worker->create_loader());
-		loader->init(egbase, mol, *worker);
-		loader->load(fr);
-		return loader.release();
-	} catch (const std::exception& e) {
-		throw wexception("loading worker: %s", e.what());
+			Worker* worker = static_cast<Worker*>(&descr->create_object());
+			std::unique_ptr<Loader> loader(worker->create_loader());
+			loader->init(egbase, mol, *worker);
+			loader->load(fr);
+			return loader.release();
+		} catch (const std::exception& e) {
+			throw wexception("loading worker: %s", e.what());
+		}
+	} else {
+		throw UnhandledVersionError(
+		   "MapObjectPacket::Worker", packet_version, kCurrentPacketVersionMapObject);
 	}
 }
 

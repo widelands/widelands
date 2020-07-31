@@ -655,7 +655,7 @@ void DefaultAI::late_initialization() {
 		bo.max_preciousness = 0;
 		bo.max_needed_preciousness = 0;
 
-		for (auto ph : bh.supported_production()) {
+		for (auto& ph : bh.supported_production()) {
 			bo.production_hints.insert(tribe_->safe_ware_index(ph));
 		}
 		// I just presume cut wood is named "log" in the game
