@@ -1147,51 +1147,56 @@ const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	return Bob::Loader::get_task(name);
 }
 
-void Ship::Loader::load(FileRead& fr, uint8_t /* packet_version */) {
-	Bob::Loader::load(fr);
-	// Economy
-	ware_economy_serial_ = fr.unsigned_32();
-	worker_economy_serial_ = fr.unsigned_32();
+void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
+	if (packet_version == kCurrentPacketVersion) {
+		Bob::Loader::load(fr);
+		// Economy
+		ware_economy_serial_ = fr.unsigned_32();
+		worker_economy_serial_ = fr.unsigned_32();
 
-	// The state the ship is in
-	ship_state_ = static_cast<ShipStates>(fr.unsigned_8());
+		// The state the ship is in
+		ship_state_ = static_cast<ShipStates>(fr.unsigned_8());
 
-	// Expedition specific data
-	if (ship_state_ == ShipStates::kExpeditionScouting ||
-	    ship_state_ == ShipStates::kExpeditionWaiting ||
-	    ship_state_ == ShipStates::kExpeditionPortspaceFound ||
-	    ship_state_ == ShipStates::kExpeditionColonizing) {
-		expedition_.reset(new Expedition());
-		// Currently seen port build spaces
-		expedition_->seen_port_buildspaces.clear();
-		uint8_t numofports = fr.unsigned_8();
-		for (uint8_t i = 0; i < numofports; ++i) {
-			expedition_->seen_port_buildspaces.push_back(read_coords_32(&fr));
+		// Expedition specific data
+		if (ship_state_ == ShipStates::kExpeditionScouting ||
+		    ship_state_ == ShipStates::kExpeditionWaiting ||
+		    ship_state_ == ShipStates::kExpeditionPortspaceFound ||
+		    ship_state_ == ShipStates::kExpeditionColonizing) {
+			expedition_.reset(new Expedition());
+			// Currently seen port build spaces
+			expedition_->seen_port_buildspaces.clear();
+			uint8_t numofports = fr.unsigned_8();
+			for (uint8_t i = 0; i < numofports; ++i) {
+				expedition_->seen_port_buildspaces.push_back(read_coords_32(&fr));
+			}
+			// Swimability of the directions
+			for (uint8_t i = 0; i < LAST_DIRECTION; ++i) {
+				expedition_->swimmable[i] = (fr.unsigned_8() == 1);
+			}
+			// whether scouting or exploring
+			expedition_->island_exploration = fr.unsigned_8() == 1;
+			// current direction
+			expedition_->scouting_direction = static_cast<WalkingDir>(fr.unsigned_8());
+			// Start coordinates of an island exploration
+			expedition_->exploration_start = read_coords_32(&fr);
+			// Whether the exploration is done clockwise or counter clockwise
+			expedition_->island_explore_direction =
+			   static_cast<IslandExploreDirection>(fr.unsigned_8());
+		} else {
+			ship_state_ = ShipStates::kTransport;
 		}
-		// Swimability of the directions
-		for (uint8_t i = 0; i < LAST_DIRECTION; ++i) {
-			expedition_->swimmable[i] = (fr.unsigned_8() == 1);
+
+		shipname_ = fr.c_string();
+		capacity_ = fr.unsigned_32();
+		lastdock_ = fr.unsigned_32();
+		destination_ = fr.unsigned_32();
+
+		items_.resize(fr.unsigned_32());
+		for (ShippingItem::Loader& item_loader : items_) {
+			item_loader.load(fr);
 		}
-		// whether scouting or exploring
-		expedition_->island_exploration = fr.unsigned_8() == 1;
-		// current direction
-		expedition_->scouting_direction = static_cast<WalkingDir>(fr.unsigned_8());
-		// Start coordinates of an island exploration
-		expedition_->exploration_start = read_coords_32(&fr);
-		// Whether the exploration is done clockwise or counter clockwise
-		expedition_->island_explore_direction = static_cast<IslandExploreDirection>(fr.unsigned_8());
 	} else {
-		ship_state_ = ShipStates::kTransport;
-	}
-
-	shipname_ = fr.c_string();
-	capacity_ = fr.unsigned_32();
-	lastdock_ = fr.unsigned_32();
-	destination_ = fr.unsigned_32();
-
-	items_.resize(fr.unsigned_32());
-	for (ShippingItem::Loader& item_loader : items_) {
-		item_loader.load(fr);
+		throw UnhandledVersionError("MapObjectPacket::Ship", packet_version, kCurrentPacketVersion);
 	}
 }
 
