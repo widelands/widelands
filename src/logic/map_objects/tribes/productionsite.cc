@@ -247,15 +247,12 @@ bool ProductionSiteDescr::highlight_overlapping_workarea_for(const std::string& 
 }
 
 void ProductionSiteDescr::add_competing_productionsite(const std::string& productionsite) {
-	assert(productionsite->type() == MapObjectType::PRODUCTIONSITE);
 	competing_productionsites_.insert(productionsite);
 }
 void ProductionSiteDescr::add_supports_productionsite(const std::string& productionsite) {
-	assert(productionsite->type() == MapObjectType::PRODUCTIONSITE);
 	supported_productionsites_.insert(productionsite);
 }
 void ProductionSiteDescr::add_supported_by_productionsite(const std::string& productionsite) {
-	assert(productionsite->type() == MapObjectType::PRODUCTIONSITE);
 	supported_by_productionsites_.insert(productionsite);
 }
 bool ProductionSiteDescr::competes_with_productionsite(const std::string& productionsite) const {
