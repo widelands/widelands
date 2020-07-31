@@ -54,13 +54,13 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                UI::ButtonStyle::kWuiSecondary,
                status_to_image(ShipFilterStatus::kIdle)),
      roaming_btn_(&filter_box_,
-               "filter_ship_roaming",
-               0,
-               0,
-               kButtonSize,
-               kButtonSize,
-               UI::ButtonStyle::kWuiSecondary,
-               status_to_image(ShipFilterStatus::kRoaming)),
+                  "filter_ship_roaming",
+                  0,
+                  0,
+                  kButtonSize,
+                  kButtonSize,
+                  UI::ButtonStyle::kWuiSecondary,
+                  status_to_image(ShipFilterStatus::kRoaming)),
      waiting_btn_(&filter_box_,
                   "filter_ship_waiting",
                   0,
@@ -271,7 +271,9 @@ SeafaringStatisticsMenu::create_shipinfo(const Widelands::Ship& ship) const {
 	switch (state) {
 	case Widelands::Ship::ShipStates::kTransport:
 		status = ship.get_destination() ? ship.get_fleet()->get_schedule().is_busy(ship) ?
-		   ShipFilterStatus::kShipping : ShipFilterStatus::kRoaming : ShipFilterStatus::kIdle;
+		                                  ShipFilterStatus::kShipping :
+		                                  ShipFilterStatus::kRoaming :
+		                                  ShipFilterStatus::kIdle;
 		break;
 	case Widelands::Ship::ShipStates::kExpeditionWaiting:
 		status = ShipFilterStatus::kExpeditionWaiting;
