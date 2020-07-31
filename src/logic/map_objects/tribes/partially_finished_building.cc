@@ -142,7 +142,9 @@ bulldoze them.
 uint32_t PartiallyFinishedBuilding::get_playercaps() const {
 	uint32_t caps = Building::get_playercaps();
 
-	caps |= PCap_Bulldoze;
+	if (!is_indestructible()) {
+		caps |= PCap_Bulldoze;
+	}
 	caps &= ~PCap_Dismantle;
 
 	return caps;

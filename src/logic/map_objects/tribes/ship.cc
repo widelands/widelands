@@ -896,7 +896,7 @@ void Ship::exp_construct_port(Game& game, const Coords& c) {
 		   ShipStates::kExpeditionWaiting, NoteShip::Action::kDestinationChanged);
 		return;
 	}
-	get_owner()->force_csite(c, get_owner()->tribe().port());
+	get_owner()->force_csite(c, get_owner()->tribe().port()).set_indestructible(true);
 
 	// Make sure that we have space to squeeze in a lumberjack
 	std::vector<ImmovableFound> trees_rocks;
