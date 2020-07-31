@@ -49,7 +49,7 @@ private:
 	void update();
 	void clicked_ok();
 	void clicked_cancel();
-	void add_tag_checkbox(UI::Box* box, std::string tag, std::string displ_name);
+	void add_tag_checkbox(UI::Box* box, const std::string& tag, const std::string& displ_name);
 
 	const unsigned int padding_, indent_, labelh_, checkbox_space_, butw_, max_w_;
 

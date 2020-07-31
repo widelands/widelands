@@ -32,7 +32,7 @@ RenderedRect::RenderedRect(const Recti& init_rect,
                            bool is_background_color_set,
                            DrawMode init_mode)
    : rect_(init_rect),
-     transient_image_(init_image),
+     transient_image_(std::move(init_image)),
      permanent_image_(nullptr),
      visited_(visited),
      background_color_(color),
@@ -60,7 +60,7 @@ RenderedRect::RenderedRect(const Recti& init_rect, const Image* init_image)
 RenderedRect::RenderedRect(const Recti& init_rect, const RGBColor& color)
    : RenderedRect(init_rect, nullptr, false, color, true, DrawMode::kTile) {
 }
-RenderedRect::RenderedRect(std::shared_ptr<const Image> init_image)
+RenderedRect::RenderedRect(const std::shared_ptr<const Image>& init_image)
    : RenderedRect(Recti(0, 0, init_image->width(), init_image->height()),
                   init_image,
                   false,

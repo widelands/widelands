@@ -227,8 +227,7 @@ void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame
 	opengames_list_.clear();
 	hostgame_.set_enabled(true);
 	joingame_.set_enabled(false);
-	std::string localservername = edit_servername_.text();
-	std::string localbuildid = build_id();
+	const std::string& localbuildid = build_id();
 
 	if (games != nullptr) {  // If no communication error occurred, fill the list.
 		for (const InternetGame& game : *games) {
