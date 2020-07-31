@@ -185,7 +185,6 @@ saledus_1 = {
 saledus_2 = {
    posx = 1,
    posy = 1,
-   h = 600,
    title =_ "Marble on the Mountain",
    body= saledus(_"Saledus smiles",
       -- TRANSLATORS: Saledus
