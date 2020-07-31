@@ -282,6 +282,7 @@ void Critter::roam_update(Game& game, State& state) {
 	// alternately move and idle
 	Time idle_time_min = 1000;
 	Time idle_time_rnd = kCritterMaxIdleTime;
+
 	if (state.ivar1) {
 		state.ivar1 = 0;
 		// lots of magic numbers for reasonable weighting of various nearby animals
@@ -317,6 +318,9 @@ void Critter::roam_update(Game& game, State& state) {
 	const uint32_t reproduction_rate = descr().get_reproduction_rate();
 
 	{  // chance to die
+		const uint32_t nearby_critters1 = game.map().find_bobs(game, Area<FCoords>(get_position(), 2), nullptr, FindCritter());
+		const uint32_t nearby_critters2 = game.map().find_bobs(game, Area<FCoords>(get_position(), 7), nullptr, FindBobByName(descr().name()));
+		assert(nearby_critters);  // at least we are here
 		const double r = reproduction_rate * reproduction_rate / 10000000.0;
 		const double i1 = r / kMinCritterLifetime;
 		const double i2 = (1 - r) / (kMaxCritterLifetime - kMinCritterLifetime);
@@ -326,7 +330,7 @@ void Critter::roam_update(Game& game, State& state) {
 		                                             (kMaxCritterLifetime - kMinCritterLifetime));
 		assert(d >= 0.0);
 		assert(d <= 1.0);
-		if (game.logic_rand() % kMinCritterLifetime < d * kMinCritterLifetime) {
+		if (game.logic_rand() % kMinCritterLifetime < d * kMinCritterLifetime * nearby_critters1 * nearby_critters1 * nearby_critters2) {
 			// :(
 			molog("Goodbye world :(\n");
 			return schedule_destroy(game);
