@@ -320,7 +320,8 @@ void Critter::roam_update(Game& game, State& state) {
 	{  // chance to die
 		const uint32_t nearby_critters1 = game.map().find_bobs(game, Area<FCoords>(get_position(), 2), nullptr, FindCritter());
 		const uint32_t nearby_critters2 = game.map().find_bobs(game, Area<FCoords>(get_position(), 7), nullptr, FindBobByName(descr().name()));
-		assert(nearby_critters);  // at least we are here
+		assert(nearby_critters1);  // at least we are here
+		assert(nearby_critters2);
 		const double r = reproduction_rate * reproduction_rate / 10000000.0;
 		const double i1 = r / kMinCritterLifetime;
 		const double i2 = (1 - r) / (kMaxCritterLifetime - kMinCritterLifetime);
