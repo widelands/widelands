@@ -239,6 +239,15 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 	                  ShowHideEntry::kSoldierLevels,
 	                  g_gr->images().get("images/wui/menus/toggle_soldier_levels.png"), false, "",
 	                  "L");
+
+	showhidemenu_.add(get_display_flag(dfShowBuildings) ?
+	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+	                      * buildings are greyed out */
+	                     _("Hide Buildings") :
+	                     _("Show Buildings"),
+	                  ShowHideEntry::kBuildings,
+	                  g_gr->images().get("images/wui/stats/genstats_nrbuildings.png"), false, "",
+	                  "U");
 }
 
 void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry) {
@@ -254,6 +263,9 @@ void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry) {
 	} break;
 	case ShowHideEntry::kSoldierLevels: {
 		set_display_flag(dfShowSoldierLevels, !get_display_flag(dfShowSoldierLevels));
+	} break;
+	case ShowHideEntry::kBuildings: {
+		set_display_flag(dfShowBuildings, !get_display_flag(dfShowBuildings));
 	} break;
 	case ShowHideEntry::kWorkareaOverlap: {
 		set_display_flag(dfShowWorkareaOverlap, !get_display_flag(dfShowWorkareaOverlap));
@@ -393,6 +405,10 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 
 		case SDLK_l:
 			set_display_flag(dfShowSoldierLevels, !get_display_flag(dfShowSoldierLevels));
+			return true;
+
+		case SDLK_u:
+			set_display_flag(dfShowBuildings, !get_display_flag(dfShowBuildings));
 			return true;
 
 		case SDLK_s:

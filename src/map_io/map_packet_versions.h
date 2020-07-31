@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,24 +13,17 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
-#ifndef WL_LOGIC_MAP_OBJECTS_INFO_TO_DRAW_H
-#define WL_LOGIC_MAP_OBJECTS_INFO_TO_DRAW_H
+#ifndef WL_MAP_IO_MAP_PACKET_VERSIONS_H
+#define WL_MAP_IO_MAP_PACKET_VERSIONS_H
 
-// This is a bitmask; use powers of 2.
-enum InfoToDraw {
-	kNone = 0,
-	kCensus = 1,
-	kStatistics = 2,
-	kSoldierLevels = 4,
-	kShowBuildings = 8,
-};
+namespace Widelands {
+constexpr uint8_t kCurrentPacketVersionMapObject = 2;
+// Responsible for warehouses and expedition bootstraps
+constexpr uint16_t kCurrentPacketVersionWarehouseAndExpedition = 8;
+}  // namespace Widelands
 
-inline InfoToDraw operator|(InfoToDraw a, InfoToDraw b) {
-	return static_cast<InfoToDraw>(static_cast<int>(a) | static_cast<int>(b));
-}
-
-#endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_INFO_TO_DRAW_H
+#endif  // end of include guard: WL_MAP_IO_MAP_PACKET_VERSIONS_H

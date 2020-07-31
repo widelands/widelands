@@ -49,6 +49,8 @@
 #include "logic/widelands_geometry_io.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
+#include "map_io/map_packet_versions.h"
+
 namespace Widelands {
 
 // Overall package version
@@ -58,8 +60,6 @@ constexpr uint16_t kCurrentPacketVersion = 5;
 constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
 constexpr uint16_t kCurrentPacketVersionConstructionsite = 4;
 constexpr uint16_t kCurrentPacketPFBuilding = 2;
-// Responsible for warehouses and expedition bootstraps
-constexpr uint16_t kCurrentPacketVersionWarehouse = 8;
 constexpr uint16_t kCurrentPacketVersionMilitarysite = 6;
 constexpr uint16_t kCurrentPacketVersionProductionsite = 9;
 constexpr uint16_t kCurrentPacketVersionTrainingsite = 6;
@@ -500,8 +500,8 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 			   map.get_fcoords(warehouse.get_position()), warehouse.descr().vision_range()));
 			warehouse.next_military_act_ = game.get_gametime();
 		} else {
-			throw UnhandledVersionError(
-			   "MapBuildingdataPacket - Warehouse", packet_version, kCurrentPacketVersionWarehouse);
+			throw UnhandledVersionError("MapBuildingdataPacket - Warehouse", packet_version,
+			                            kCurrentPacketVersionWarehouseAndExpedition);
 		}
 	} catch (const WException& e) {
 		throw GameDataError("warehouse: %s", e.what());
@@ -1080,7 +1080,7 @@ void MapBuildingdataPacket::write_warehouse(const Warehouse& warehouse,
                                             FileWrite& fw,
                                             Game& game,
                                             MapObjectSaver& mos) {
-	fw.unsigned_16(kCurrentPacketVersionWarehouse);
+	fw.unsigned_16(kCurrentPacketVersionWarehouseAndExpedition);
 
 	//  supply
 	const TribeDescr& tribe = warehouse.owner().tribe();
