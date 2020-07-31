@@ -24,7 +24,7 @@
 // TODO(unknown): Saving every action in a list isn't very efficient.
 // A long list can take several seconds to undo/redo every action.
 // If someone has a better idea how to do this, implement it!
-void EditorDrawTool::add_action(EditorToolAction ac, EditorActionArgs& args) {
+void EditorDrawTool::add_action(const EditorToolAction& ac, EditorActionArgs& args) {
 	args.draw_actions.push_back(new EditorToolAction(ac));
 }
 
