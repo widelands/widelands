@@ -41,7 +41,7 @@ constexpr int kButtonSize = 34;
 
 SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                                                  UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(&plr, "seafaring_statistics", &registry, 375, 375, _("Seafaring Statistics")),
+   : UI::UniqueWindow(&plr, "seafaring_statistics", &registry, 475, 375, _("Seafaring Statistics")),
      main_box_(this, kPadding, kPadding, UI::Box::Vertical, get_inner_w(), get_inner_h(), kPadding),
      filter_box_(
         &main_box_, 0, 0, UI::Box::Horizontal, get_inner_w() - 2 * kPadding, kButtonSize, kPadding),
@@ -53,6 +53,14 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                kButtonSize,
                UI::ButtonStyle::kWuiSecondary,
                status_to_image(ShipFilterStatus::kIdle)),
+     roaming_btn_(&filter_box_,
+               "filter_ship_roaming",
+               0,
+               0,
+               kButtonSize,
+               kButtonSize,
+               UI::ButtonStyle::kWuiSecondary,
+               status_to_image(ShipFilterStatus::kRoaming)),
      waiting_btn_(&filter_box_,
                   "filter_ship_waiting",
                   0,
@@ -136,6 +144,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 	// Buttons for ship states
 	main_box_.add(&filter_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	filter_box_.add(&idle_btn_);
+	filter_box_.add(&roaming_btn_);
 	filter_box_.add(&shipping_btn_);
 	filter_box_.add(&waiting_btn_);
 	filter_box_.add(&scouting_btn_);
@@ -153,6 +162,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 
 	// Configure actions
 	idle_btn_.sigclicked.connect([this]() { filter_ships(ShipFilterStatus::kIdle); });
+	roaming_btn_.sigclicked.connect([this]() { filter_ships(ShipFilterStatus::kRoaming); });
 	shipping_btn_.sigclicked.connect([this]() { filter_ships(ShipFilterStatus::kShipping); });
 	waiting_btn_.sigclicked.connect(
 	   [this]() { filter_ships(ShipFilterStatus::kExpeditionWaiting); });
@@ -172,7 +182,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 	table_.double_clicked.connect([this](unsigned) { double_clicked(); });
 	table_.add_column(
 	   0, pgettext("ship", "Name"), "", UI::Align::kLeft, UI::TableColumnType::kFlexible);
-	table_.add_column(230, pgettext("ship", "Status"));
+	table_.add_column(240, pgettext("ship", "Status"));
 	table_.set_sort_column(ColName);
 	fill_table();
 
@@ -205,6 +215,8 @@ SeafaringStatisticsMenu::status_to_string(SeafaringStatisticsMenu::ShipFilterSta
 	switch (status) {
 	case SeafaringStatisticsMenu::ShipFilterStatus::kIdle:
 		return pgettext("ship_state", "Idle");
+	case SeafaringStatisticsMenu::ShipFilterStatus::kRoaming:
+		return pgettext("ship_state", "Roaming");
 	case SeafaringStatisticsMenu::ShipFilterStatus::kShipping:
 		return pgettext("ship_state", "Shipping");
 	case SeafaringStatisticsMenu::ShipFilterStatus::kExpeditionWaiting:
@@ -227,6 +239,9 @@ SeafaringStatisticsMenu::status_to_image(SeafaringStatisticsMenu::ShipFilterStat
 	switch (status) {
 	case SeafaringStatisticsMenu::ShipFilterStatus::kIdle:
 		filename = "images/wui/stats/ship_stats_idle.png";
+		break;
+	case SeafaringStatisticsMenu::ShipFilterStatus::kRoaming:
+		filename = "images/wui/stats/ship_stats_roaming.png";
 		break;
 	case SeafaringStatisticsMenu::ShipFilterStatus::kShipping:
 		filename = "images/wui/stats/ship_stats_shipping.png";
@@ -255,11 +270,8 @@ SeafaringStatisticsMenu::create_shipinfo(const Widelands::Ship& ship) const {
 	ShipFilterStatus status = ShipFilterStatus::kAll;
 	switch (state) {
 	case Widelands::Ship::ShipStates::kTransport:
-		if (ship.get_destination()) {
-			status = ShipFilterStatus::kShipping;
-		} else {
-			status = ShipFilterStatus::kIdle;
-		}
+		status = ship.get_destination() ? ship.get_fleet()->get_schedule().is_busy(ship) ?
+		   ShipFilterStatus::kShipping : ShipFilterStatus::kRoaming : ShipFilterStatus::kIdle;
 		break;
 	case Widelands::Ship::ShipStates::kExpeditionWaiting:
 		status = ShipFilterStatus::kExpeditionWaiting;
@@ -399,7 +411,7 @@ bool SeafaringStatisticsMenu::handle_key(bool down, SDL_Keysym code) {
 			FALLS_THROUGH;
 		case SDLK_2:
 			if (code.mod & KMOD_ALT) {
-				filter_ships(ShipFilterStatus::kShipping);
+				filter_ships(ShipFilterStatus::kRoaming);
 				return true;
 			}
 			return false;
@@ -411,7 +423,7 @@ bool SeafaringStatisticsMenu::handle_key(bool down, SDL_Keysym code) {
 			FALLS_THROUGH;
 		case SDLK_3:
 			if (code.mod & KMOD_ALT) {
-				filter_ships(ShipFilterStatus::kExpeditionWaiting);
+				filter_ships(ShipFilterStatus::kShipping);
 				return true;
 			}
 			return false;
@@ -423,7 +435,7 @@ bool SeafaringStatisticsMenu::handle_key(bool down, SDL_Keysym code) {
 			FALLS_THROUGH;
 		case SDLK_4:
 			if (code.mod & KMOD_ALT) {
-				filter_ships(ShipFilterStatus::kExpeditionScouting);
+				filter_ships(ShipFilterStatus::kExpeditionWaiting);
 				return true;
 			}
 			return false;
@@ -434,6 +446,18 @@ bool SeafaringStatisticsMenu::handle_key(bool down, SDL_Keysym code) {
 			}
 			FALLS_THROUGH;
 		case SDLK_5:
+			if (code.mod & KMOD_ALT) {
+				filter_ships(ShipFilterStatus::kExpeditionScouting);
+				return true;
+			}
+			return false;
+
+		case SDLK_KP_6:
+			if (!(code.mod & KMOD_NUM)) {
+				return false;
+			}
+			FALLS_THROUGH;
+		case SDLK_6:
 			if (code.mod & KMOD_ALT) {
 				filter_ships(ShipFilterStatus::kExpeditionPortspaceFound);
 				return true;
@@ -499,6 +523,9 @@ void SeafaringStatisticsMenu::filter_ships(ShipFilterStatus status) {
 	case ShipFilterStatus::kIdle:
 		toggle_filter_ships_button(idle_btn_, status);
 		break;
+	case ShipFilterStatus::kRoaming:
+		toggle_filter_ships_button(roaming_btn_, status);
+		break;
 	case ShipFilterStatus::kAll:
 		set_filter_ships_tooltips();
 		ship_filter_ = ShipFilterStatus::kAll;
@@ -507,6 +534,7 @@ void SeafaringStatisticsMenu::filter_ships(ShipFilterStatus status) {
 		portspace_btn_.set_perm_pressed(false);
 		shipping_btn_.set_perm_pressed(false);
 		idle_btn_.set_perm_pressed(false);
+		roaming_btn_.set_perm_pressed(false);
 		break;
 	}
 	fill_table();
@@ -524,6 +552,7 @@ void SeafaringStatisticsMenu::toggle_filter_ships_button(UI::Button& button,
 		portspace_btn_.set_perm_pressed(false);
 		shipping_btn_.set_perm_pressed(false);
 		idle_btn_.set_perm_pressed(false);
+		roaming_btn_.set_perm_pressed(false);
 		button.set_perm_pressed(true);
 		ship_filter_ = status;
 
@@ -538,19 +567,22 @@ void SeafaringStatisticsMenu::set_filter_ships_tooltips() {
 	idle_btn_.set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the ship statistics window */
 	   _("Show idle ships"), pgettext("hotkey", "Alt+1")));
+	roaming_btn_.set_tooltip(as_tooltip_text_with_hotkey(
+	   /** TRANSLATORS: Tooltip in the ship statistics window */
+	   _("Show roaming ships"), pgettext("hotkey", "Alt+2")));
 	shipping_btn_.set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the ship statistics window */
-	   _("Show ships shipping wares and workers"), pgettext("hotkey", "Alt+2")));
+	   _("Show ships shipping wares and workers"), pgettext("hotkey", "Alt+3")));
 	waiting_btn_.set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the ship statistics window */
-	   _("Show waiting expeditions"), pgettext("hotkey", "Alt+3")));
+	   _("Show waiting expeditions"), pgettext("hotkey", "Alt+4")));
 	scouting_btn_.set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the ship statistics window */
-	   _("Show scouting expeditions"), pgettext("hotkey", "Alt+4")));
+	   _("Show scouting expeditions"), pgettext("hotkey", "Alt+5")));
 	portspace_btn_.set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the ship statistics window */
 	   _("Show expeditions that have found a port space or are founding a colony"),
-	   pgettext("hotkey", "Alt+5")));
+	   pgettext("hotkey", "Alt+6")));
 }
 
 bool SeafaringStatisticsMenu::satisfies_filter(const ShipInfo& info, ShipFilterStatus filter) {

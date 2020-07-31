@@ -1019,14 +1019,15 @@ void Ship::draw(const EditorGameBase& egbase,
 	if (info_to_draw & InfoToDraw::kStatistics) {
 		switch (ship_state_) {
 		case (ShipStates::kTransport):
-			if (destination_) {
+			statistics_string = destination_ ? fleet_->get_schedule().is_busy(*this) ?
 				/** TRANSLATORS: This is a ship state. The ship is currently transporting wares. */
-				statistics_string = pgettext("ship_state", "Shipping");
-			} else {
+				pgettext("ship_state", "Shipping") :
 				/** TRANSLATORS: This is a ship state. The ship is ready to transport wares, but has
-				 * nothing to do. */
-				statistics_string = pgettext("ship_state", "Idle");
-			}
+				 * nothing to do and is just sailing around. */
+				pgettext("ship_state", "Roaming") :
+				/** TRANSLATORS: This is a ship state. The ship is ready to transport wares, but has
+				 * nothing to do and is stationary. */
+				pgettext("ship_state", "Idle");
 			break;
 		case (ShipStates::kExpeditionWaiting):
 			/** TRANSLATORS: This is a ship state. An expedition is waiting for your commands. */

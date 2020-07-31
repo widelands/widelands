@@ -88,6 +88,18 @@ bool ShippingSchedule::empty() const {
 	return true;
 }
 
+bool ShippingSchedule::is_busy(const Ship& ship) const {
+	if (ship.get_nritems()) {
+		return true;
+	}
+	for (const SchedulingState& ss : plans_.at(const_cast<Ship*>(&ship))) {
+		if (ss.expedition || !ss.load_there.empty()) {
+			return true;
+		}
+	}
+	return false;
+}
+
 void ShippingSchedule::start_expedition(Game& game, Ship& ship, PortDock& port) {
 	sslog("Loading expedition\n\n");
 	assert(port.expedition_ready_);
