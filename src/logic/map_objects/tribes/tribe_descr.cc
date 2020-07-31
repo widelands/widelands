@@ -640,6 +640,7 @@ DescriptionIndex TribeDescr::add_special_ware(const std::string& warename) {
 
 void TribeDescr::process_productionsites(const World& world) {
 	// Get a list of productionsites - we will need to iterate them more than once
+	// The temporary use of pointers here is fine, because it doesn't affect the game state.
 	std::set<ProductionSiteDescr*> productionsites;
 	for (const DescriptionIndex index : buildings()) {
 		BuildingDescr* building = tribes_.get_mutable_building_descr(index);
