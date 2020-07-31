@@ -45,7 +45,7 @@ private:
 	                        const std::string& name,
 	                        const std::string& title,
 	                        const std::string& picname,
-	                        std::function<void()> callback);
+	                        const std::function<void()>& callback);
 	void set_button_visibility();
 	void no_port_error_message();
 

@@ -127,7 +127,7 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 			const BuildingDescr* tmp_enhancement = tribes_.get_building_descr(en_i);
 			for (auto area : tmp_enhancement->workarea_info_) {
 				std::set<std::string>& strs = workarea_info_[area.first];
-				for (std::string str : area.second) {
+				for (const std::string& str : area.second) {
 					strs.insert(str);
 				}
 			}

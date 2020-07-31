@@ -729,13 +729,13 @@ int LuaPlayer::get_buildings(lua_State* L) {
 			cidx = 1;
 		}
 
-		for (uint32_t l = 0; l < vec.size(); ++l) {
-			if (vec[l].is_constructionsite) {
+		for (const auto& stats : vec) {
+			if (stats.is_constructionsite) {
 				continue;
 			}
 
 			lua_pushuint32(L, cidx++);
-			upcasted_map_object_to_lua(L, egbase.map()[vec[l].pos].get_immovable());
+			upcasted_map_object_to_lua(L, egbase.map()[stats.pos].get_immovable());
 			lua_rawset(L, -3);
 		}
 

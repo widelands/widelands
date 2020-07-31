@@ -148,7 +148,7 @@ void ChatOverlay::Impl::recompute() {
 			// Chat message is more recent
 			oldest_ = chat_->get_messages()[chat_idx].time;
 			if (now - oldest_ < CHAT_DISPLAY_TIME) {
-				richtext = format_as_richtext(chat_->get_messages()[chat_idx]) + richtext;
+				richtext = format_as_richtext(chat_->get_messages()[chat_idx]).append(richtext);
 			}
 			if (!chat_->sound_off() && sound_played_ < oldest_) {
 				g_sh->play_fx(SoundType::kChat, new_message_);

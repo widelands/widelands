@@ -57,6 +57,11 @@ print_help () {
     echo "-r or --release       Create a release build. If this is not set,"
     echo "                      a debug build will be created."
     echo " "
+    if which g++ >/dev/null; then # gcc specific
+    echo "-c or --no-cross-opt  Do not use cross compile unit optimization,"
+    echo "                      even if available."
+    echo " "
+    fi
     echo "--gcc                 Try to build with GCC rather than the system default."
     echo "                      If you built with Clang before, you will have to clean"
     echo "                      your build directory before switching compilers."
@@ -88,6 +93,7 @@ BUILD_WEBSITE="ON"
 BUILD_TRANSLATIONS="ON"
 BUILD_TESTS="ON"
 BUILD_TYPE="Debug"
+USE_FLTO="yes"
 USE_ASAN="ON"
 COMPILER="default"
 USE_XDG="ON"
@@ -133,6 +139,10 @@ do
     ;;
     -t|--no-translations)
       BUILD_TRANSLATIONS="OFF"
+    shift
+    ;;
+    -c|--no-cross-opt)
+      USE_FLTO="no"
     shift
     ;;
     -s|--skip-tests)
@@ -279,9 +289,9 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
   # Compile Widelands
   compile_widelands () {
     if [ $buildtool = "ninja" ] || [ $buildtool = "ninja-build" ] ; then
-      cmake -G Ninja .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN -DUSE_XDG=$USE_XDG
+      cmake -G Ninja .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN -DUSE_XDG=$USE_XDG -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
     else
-      cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN -DUSE_XDG=$USE_XDG
+      cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN -DUSE_XDG=$USE_XDG -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
     fi
 
     $buildtool -j $CORES
