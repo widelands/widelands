@@ -186,8 +186,7 @@ public:
 
 	/// Returns 'true' if an overlap highlighting relationship has been set. Whether an overlap is
 	/// wanted or not is written into 'positive'.
-	bool highlight_overlapping_workarea_for(const std::string& productionsite,
-	                                        bool* positive) const;
+	bool highlight_overlapping_workarea_for(const std::string& productionsite, bool* positive) const;
 	/// Set that this production site competes with the given 'productionsite' for map resources.
 	void add_competing_productionsite(const std::string& productionsite);
 	/// Set that this production site creates map resources or objects that the given
