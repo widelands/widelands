@@ -335,6 +335,10 @@ public:
 
 	void start_animation(EditorGameBase&, uint32_t anim);
 
+	bool is_seeing() const {
+		return seeing_;
+	}
+
 protected:
 	// Updates 'statistics_string' with the string that should be displayed for
 	// this building right now. Overwritten by child classes.

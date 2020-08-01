@@ -185,7 +185,7 @@ void WatchWindow::think() {
 
 		// Drop the tracking if it leaves our vision range
 		InteractivePlayer* ipl = game().get_ipl();
-		if (ipl && 1 >= ipl->player().vision(map.get_index(bob->get_position(), map.get_width()))) {
+		if (ipl && Widelands::SeeUnseeNode::kUnexplore == ipl->player().get_vision(map.get_index(bob->get_position(), map.get_width()))) {
 			// Not in sight
 			views_[cur_index_].tracking = nullptr;
 		} else {
@@ -255,7 +255,7 @@ void WatchWindow::do_follow() {
 			InteractivePlayer* ipl = game().get_ipl();
 			if ((!closest || closest_dist > dist) &&
 			    (!ipl ||
-			     1 < ipl->player().vision(map.get_index(bob->get_position(), map.get_width())))) {
+			     ipl->player().is_seeing(map.get_index(bob->get_position(), map.get_width())))) {
 				closest = bob;
 				closest_dist = dist;
 			}

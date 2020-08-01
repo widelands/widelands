@@ -44,6 +44,7 @@
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/map_objects/world/world.h"
+#include "logic/mapregion.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 

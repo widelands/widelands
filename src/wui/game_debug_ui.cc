@@ -266,8 +266,8 @@ void FieldDebugWindow::think() {
 		str += (boost::format("Player %u:\n") % static_cast<unsigned int>(plnum)).str();
 		str += (boost::format("  military influence: %u\n") % player_field.military_influence).str();
 
-		Widelands::Vision const vision = player_field.vision;
-		str += (boost::format("  vision: %u\n") % vision).str();
+		const Widelands::SeeUnseeNode vision = player_field.seeing;
+		str += (boost::format("  vision: %s\n") % (vision == Widelands::SeeUnseeNode::kReveal ? "revealed" : vision == Widelands::SeeUnseeNode::kUnsee ? "unseen" : "unexplored")).str();
 		{
 			Widelands::Time const time_last_surveyed =
 			   player_field.time_triangle_last_surveyed[static_cast<int>(Widelands::TriangleIndex::D)];
@@ -295,10 +295,10 @@ void FieldDebugWindow::think() {
 			}
 		}
 		switch (vision) {
-		case 0:
+		case Widelands::SeeUnseeNode::kUnexplore:
 			str += "  never seen\n";
 			break;
-		case 1: {
+		case Widelands::SeeUnseeNode::kUnsee: {
 			std::string animation_name = "(no animation)";
 			if (player_field.map_object_descr) {
 				animation_name = "(seen an animation)";
@@ -313,7 +313,7 @@ void FieldDebugWindow::think() {
 			break;
 		}
 		default:
-			str += (boost::format("  seen %u times\n") % (vision - 1)).str();
+			str += "  visible\n";
 			break;
 		}
 	}
