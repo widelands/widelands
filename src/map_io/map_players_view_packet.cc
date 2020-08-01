@@ -41,7 +41,8 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 	FileRead fr;
 	if (!fr.try_open(fs, "binary/view")) {
 		// TODO(Nordfriese): Savegame compatibility – require this packet after v1.0
-		log("WARNING: New-style view packet not found. There may be strange effects regarding unseen areas.\n");
+		log("WARNING: New-style view packet not found. There may be strange effects regarding unseen "
+		    "areas.\n");
 		return;
 	}
 
@@ -114,13 +115,19 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 						if (descr.empty()) {
 							f.constructionsite.becomes = nullptr;
 						} else {
-							f.constructionsite.becomes = egbase.tribes().get_building_descr(egbase.tribes().safe_building_index(descr));
+							f.constructionsite.becomes = egbase.tribes().get_building_descr(
+							   egbase.tribes().safe_building_index(descr));
 
 							descr = fr.string();
-							f.constructionsite.was = descr.empty() ? nullptr : egbase.tribes().get_building_descr(egbase.tribes().safe_building_index(descr));
+							f.constructionsite.was = descr.empty() ?
+							                            nullptr :
+							                            egbase.tribes().get_building_descr(
+							                               egbase.tribes().safe_building_index(descr));
 
 							for (uint8_t j = fr.unsigned_32(); j; --j) {
-								f.constructionsite.intermediates.push_back(egbase.tribes().get_building_descr(egbase.tribes().safe_building_index(fr.string())));
+								f.constructionsite.intermediates.push_back(
+								   egbase.tribes().get_building_descr(
+								      egbase.tribes().safe_building_index(fr.string())));
 							}
 
 							f.constructionsite.totaltime = fr.unsigned_32();

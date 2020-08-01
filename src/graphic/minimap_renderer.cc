@@ -187,7 +187,9 @@ void do_draw_minimap(Texture* texture,
 			}
 
 			if (vision != Widelands::SeeUnseeNode::kUnexplore) {
-				texture->set_pixel(x, y, calc_minimap_color(egbase, f, layers, owner, vision == Widelands::SeeUnseeNode::kReveal));
+				texture->set_pixel(x, y,
+				                   calc_minimap_color(egbase, f, layers, owner,
+				                                      vision == Widelands::SeeUnseeNode::kReveal));
 			}
 		}
 	}

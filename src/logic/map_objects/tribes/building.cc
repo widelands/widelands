@@ -470,7 +470,8 @@ bool Building::init(EditorGameBase& egbase) {
 }
 
 void Building::cleanup(EditorGameBase& egbase) {
-	owner_->remove_seer(*this, Area<FCoords>(egbase.map().get_fcoords(get_position()), descr().vision_range()));
+	owner_->remove_seer(
+	   *this, Area<FCoords>(egbase.map().get_fcoords(get_position()), descr().vision_range()));
 
 	if (defeating_player_) {
 		Player* defeating_player = egbase.get_player(defeating_player_);
@@ -850,7 +851,9 @@ void Building::set_soldier_control(SoldierControl* new_soldier_control) {
  */
 void Building::set_seeing(bool see) {
 	seeing_ = see;
-	get_owner()->update_vision(Area<FCoords>(owner().egbase().map().get_fcoords(get_position()), descr().vision_range()), see);
+	get_owner()->update_vision(
+	   Area<FCoords>(owner().egbase().map().get_fcoords(get_position()), descr().vision_range()),
+	   see);
 }
 
 /**

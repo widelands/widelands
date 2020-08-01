@@ -185,7 +185,8 @@ void WatchWindow::think() {
 
 		// Drop the tracking if it leaves our vision range
 		InteractivePlayer* ipl = game().get_ipl();
-		if (ipl && Widelands::SeeUnseeNode::kUnexplore == ipl->player().get_vision(map.get_index(bob->get_position(), map.get_width()))) {
+		if (ipl && Widelands::SeeUnseeNode::kUnexplore ==
+		              ipl->player().get_vision(map.get_index(bob->get_position(), map.get_width()))) {
 			// Not in sight
 			views_[cur_index_].tracking = nullptr;
 		} else {

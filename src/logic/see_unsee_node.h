@@ -24,8 +24,8 @@ namespace Widelands {
 // Do not change the order! It is stored in savegames.
 enum class SeeUnseeNode {
 	kUnexplore = 0,  // Never seen yet
-	kUnsee     = 1,  // Previously seen
-	kReveal    = 2   // Visible
+	kUnsee = 1,      // Previously seen
+	kReveal = 2      // Visible
 };
-}
+}  // namespace Widelands
 #endif  // end of include guard: WL_LOGIC_SEE_UNSEE_NODE_H

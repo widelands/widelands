@@ -827,7 +827,7 @@ void Game::send_player_enemyflagaction(const Flag& flag,
                                        PlayerNumber const who_attacks,
                                        const std::vector<Serial>& soldiers) {
 	if (player(who_attacks)
-	           .is_seeing(Map::get_index(flag.get_building()->get_position(), map().get_width()))) {
+	       .is_seeing(Map::get_index(flag.get_building()->get_position(), map().get_width()))) {
 		send_player_command(new CmdEnemyFlagAction(get_gametime(), who_attacks, flag, soldiers));
 	}
 }

@@ -267,7 +267,11 @@ void FieldDebugWindow::think() {
 		str += (boost::format("  military influence: %u\n") % player_field.military_influence).str();
 
 		const Widelands::SeeUnseeNode vision = player_field.seeing;
-		str += (boost::format("  vision: %s\n") % (vision == Widelands::SeeUnseeNode::kReveal ? "revealed" : vision == Widelands::SeeUnseeNode::kUnsee ? "unseen" : "unexplored")).str();
+		str += (boost::format("  vision: %s\n") %
+		        (vision == Widelands::SeeUnseeNode::kReveal ?
+		            "revealed" :
+		            vision == Widelands::SeeUnseeNode::kUnsee ? "unseen" : "unexplored"))
+		          .str();
 		{
 			Widelands::Time const time_last_surveyed =
 			   player_field.time_triangle_last_surveyed[static_cast<int>(Widelands::TriangleIndex::D)];

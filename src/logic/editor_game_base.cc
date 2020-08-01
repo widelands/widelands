@@ -621,7 +621,8 @@ void EditorGameBase::set_road(const FCoords& f,
 	iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
 		Player::Field& first_player_field = *p->fields_.get();
 		Player::Field& player_field = (&first_player_field)[i];
-		if (SeeUnseeNode::kReveal == player_field.seeing || SeeUnseeNode::kReveal == (&first_player_field)[neighbour_i].seeing) {
+		if (SeeUnseeNode::kReveal == player_field.seeing ||
+		    SeeUnseeNode::kReveal == (&first_player_field)[neighbour_i].seeing) {
 			switch (direction) {
 			case WALK_SE:
 				player_field.r_se = roadtype;

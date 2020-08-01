@@ -40,8 +40,9 @@ void draw_border_markers(const FieldsToDraw::Field& field,
 	}
 	for (const auto& nf : {fields_to_draw.at(field.rn_index), fields_to_draw.at(field.bln_index),
 	                       fields_to_draw.at(field.brn_index)}) {
-		if ((field.seeing != Widelands::SeeUnseeNode::kUnexplore || nf.seeing != Widelands::SeeUnseeNode::kUnexplore) && nf.is_border &&
-		    (field.owner == nf.owner || nf.owner == nullptr)) {
+		if ((field.seeing != Widelands::SeeUnseeNode::kUnexplore ||
+		     nf.seeing != Widelands::SeeUnseeNode::kUnexplore) &&
+		    nf.is_border && (field.owner == nf.owner || nf.owner == nullptr)) {
 			dst->blit_animation(middle(field.rendertarget_pixel, nf.rendertarget_pixel),
 			                    Widelands::Coords::null(), scale, anim_idx, 0,
 			                    &field.owner->get_playercolor());

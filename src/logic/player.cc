@@ -1215,11 +1215,11 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 		field.border = f.field->is_border();
 		// draw a border if both nodes are borders belonging to the same player for all we know
 		field.border_r = field.border && r_vision != SeeUnseeNode::kUnexplore &&
-				fields_[r_index].border && fields_[r_index].owner == field.owner;
+		                 fields_[r_index].border && fields_[r_index].owner == field.owner;
 		field.border_br = field.border && br_vision != SeeUnseeNode::kUnexplore &&
-				fields_[br_index].border && fields_[br_index].owner == field.owner;
+		                  fields_[br_index].border && fields_[br_index].owner == field.owner;
 		field.border_bl = field.border && bl_vision != SeeUnseeNode::kUnexplore &&
-				fields_[bl_index].border && fields_[bl_index].owner == field.owner;
+		                  fields_[bl_index].border && fields_[bl_index].owner == field.owner;
 		{
 			const MapObjectDescr* map_object_descr;
 			field.constructionsite.becomes = nullptr;
@@ -1322,7 +1322,8 @@ bool Player::should_see(const FCoords& f) const {
 			if (mo->descr().type() >= MapObjectType::BUILDING) {
 				upcast(const Building, b, mo);
 				assert(b);
-				if (b->is_seeing() && egbase().map().calc_distance(f, b->get_position()) <= b->descr().vision_range()) {
+				if (b->is_seeing() &&
+				    egbase().map().calc_distance(f, b->get_position()) <= b->descr().vision_range()) {
 					return true;
 				}
 			} else {
@@ -1383,8 +1384,7 @@ void Player::update_vision(const Area<FCoords>& area, bool force_visible) {
 	}
 }
 
-void Player::hide_or_reveal_field(const Coords& coords,
-                                  SeeUnseeNode mode) {
+void Player::hide_or_reveal_field(const Coords& coords, SeeUnseeNode mode) {
 	const Map& map = egbase().map();
 	FCoords fcoords = map.get_fcoords(coords);
 	const Widelands::MapIndex index = fcoords.field - &map[0];
