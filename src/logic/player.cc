@@ -1351,6 +1351,7 @@ void Player::update_vision(const FCoords& f, bool force_visible) {
 		}
 	} else if (field.seeing != SeeUnseeNode::kUnexplore) {
 		if (field.seeing == SeeUnseeNode::kReveal) {
+			rediscover_node(egbase().map(), f);  // make sure all info is up to date
 			field.time_node_last_unseen = egbase().get_gametime();
 		}
 		field.seeing = SeeUnseeNode::kUnsee;
