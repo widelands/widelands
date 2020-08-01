@@ -110,7 +110,7 @@ world:new_immovable_type{
       fall = {
          "remove=",
       },
-},
+   },
    spritesheets = {
       idle = {
          directory = dirname,

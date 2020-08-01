@@ -89,11 +89,11 @@ Duration MapObjectProgram::as_ms(Duration number, const std::string& unit) {
 Duration MapObjectProgram::read_duration(const std::string& input) {
 	try {
 		boost::smatch match;
-		boost::regex one_unit("^(\\d+)(ms|s|m)$");
+		boost::regex one_unit("^(\\d+)(s|m|ms)$");
 		if (boost::regex_search(input, match, one_unit)) {
 			return as_ms(read_positive(match[1], endless()), match[2]);
 		}
-		boost::regex two_units("^(\\d+)(s|m)(\\d+)(ms|s)$");
+		boost::regex two_units("^(\\d+)(m|s)(\\d+)(s|ms)$");
 		if (boost::regex_search(input, match, two_units)) {
 			if (match[2] == match[4]) {
 				std::string unit(match[2]);
@@ -171,6 +171,7 @@ MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(
 		if (item.first == "duration") {
 			result.duration = read_duration(item.second);
 		} else if (item.second.empty()) {
+			// TODO(GunChleoc): Deprecate unitless
 			result.duration = read_duration(item.first);
 		} else {
 			throw GameDataError(
