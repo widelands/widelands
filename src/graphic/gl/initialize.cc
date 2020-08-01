@@ -257,7 +257,8 @@ SDL_GLContext initialize(
 		// conversion
 		boost::regex re("\\d+");
 		if (boost::regex_match(shading_language_version_string, re)) {
-			const int major_shading_language_version = boost::lexical_cast<int>(shading_language_version_string);
+			const int major_shading_language_version =
+			   boost::lexical_cast<int>(shading_language_version_string);
 			if (major_shading_language_version < 2) {
 				show_opengl_error_and_exit(
 				   "Widelands won’t work because your graphics driver is too old.\n"

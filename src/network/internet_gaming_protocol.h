@@ -80,8 +80,9 @@ constexpr const char* const INTERNET_CLIENT_IRC = "IRC";
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /// States an online game can be in.
 /// Other values might appear but should be considered as "CLOSED"
-constexpr const char* const INTERNET_GAME_CLOSED = "CLOSED";  // Not yet connectable or not over relay
-constexpr const char* const INTERNET_GAME_SETUP = "SETUP";    // Map selection and so
+constexpr const char* const INTERNET_GAME_CLOSED =
+   "CLOSED";                                                // Not yet connectable or not over relay
+constexpr const char* const INTERNET_GAME_SETUP = "SETUP";  // Map selection and so
 constexpr const char* const INTERNET_GAME_RUNNING = "RUNNING";  // Playing
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *

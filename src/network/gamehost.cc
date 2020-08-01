@@ -1249,7 +1249,7 @@ void GameHost::set_player_tribe(uint8_t const number,
 
 	if (random_tribe) {
 		uint8_t num_tribes = d->settings.tribes.size();
-		uint8_t random = (std::rand() % num_tribes); // NOLINT
+		uint8_t random = (std::rand() % num_tribes);  // NOLINT
 		actual_tribe = d->settings.tribes.at(random).name;
 	}
 
