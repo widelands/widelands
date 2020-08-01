@@ -46,8 +46,10 @@ std::vector<std::string> MapObjectProgram::split_string(const std::string& s,
 	return result;
 }
 
-// Using int64_t in input so we can get the full range of unsigned int in the output while still checking for negative integers.
-unsigned int MapObjectProgram::read_int(const std::string& input, int min_value, int64_t max_value) {
+// Using int64_t in input so we can get the full range of unsigned int in the output while still
+// checking for negative integers.
+unsigned int
+MapObjectProgram::read_int(const std::string& input, int min_value, int64_t max_value) {
 	unsigned int result = 0U;
 	char* endp;
 	long int const value = strtol(input.c_str(), &endp, 0);
@@ -64,7 +66,8 @@ unsigned int MapObjectProgram::read_int(const std::string& input, int min_value,
 	return result;
 }
 
-// Using int64_t in input so we can get the full range of unsigned int in the output while still checking for negative integers.
+// Using int64_t in input so we can get the full range of unsigned int in the output while still
+// checking for negative integers.
 unsigned int MapObjectProgram::read_positive(const std::string& input, int64_t max_value) {
 	return read_int(input, 1, max_value);
 }
@@ -116,9 +119,13 @@ Duration MapObjectProgram::read_duration(const std::string& input) {
 			return read_positive(input, endless());
 		}
 	} catch (const WException& e) {
-		throw GameDataError("Duration '%s' %s. Usage: <numbers>{m|s|ms}[<numbers>{s|ms}][<numbers>ms]", input.c_str(), e.what());
+		throw GameDataError(
+		   "Duration '%s' %s. Usage: <numbers>{m|s|ms}[<numbers>{s|ms}][<numbers>ms]", input.c_str(),
+		   e.what());
 	}
-	throw GameDataError("Illegal duration: %s. Usage: <numbers>{m|s|ms}[<numbers>{s|ms}][<numbers>ms]", input.c_str());
+	throw GameDataError(
+	   "Illegal duration: %s. Usage: <numbers>{m|s|ms}[<numbers>{s|ms}][<numbers>ms]",
+	   input.c_str());
 }
 
 MapObjectProgram::ProgramParseInput
@@ -174,8 +181,8 @@ MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(
 			// TODO(GunChleoc): Deprecate unitless
 			result.duration = read_duration(item.first);
 		} else {
-			throw GameDataError(
-			   "Unknown argument '%s'. Usage: <animation_name> [duration:<duration>]", arguments.at(1).c_str());
+			throw GameDataError("Unknown argument '%s'. Usage: <animation_name> [duration:<duration>]",
+			                    arguments.at(1).c_str());
 		}
 	}
 	return result;

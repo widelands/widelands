@@ -73,7 +73,8 @@ protected:
 
 	/**
 	 * @brief Reads time duration with a unit from a string
-	 * @param A positive integer, optionally followed by 'ms' (milliseconds), 's' (seconds) or 'm' (minutes). This can be repeated to form units like '1m20s500ms'.
+	 * @param A positive integer, optionally followed by 'ms' (milliseconds), 's' (seconds) or 'm'
+	 * (minutes). This can be repeated to form units like '1m20s500ms'.
 	 * @return The duration in SDL ticks (milliseconds)
 	 */
 	static Duration read_duration(const std::string& input);
