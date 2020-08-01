@@ -68,9 +68,14 @@ bool match_and_skip(const std::vector<std::string>& args,
 
 Productionsite Programs
 =======================
-Productionsites can have programs that will be executed by the game engine. Each productionsite must have a program named ``work``, which will be started automatically when the productionsite is created in the game, and then repeated until the productionsite is destroyed.
+Productionsites can have programs that will be executed by the game engine. Each productionsite must
+have a program named ``work``, which will be started automatically when the productionsite is
+created in the game, and then repeated until the productionsite is destroyed.
 
-Programs are defined as Lua tables. Each program must be declared as a subtable in the productionsite's Lua table called ``programs`` and have a unique table key. The entries in a program's subtable are the translatable ``descname`` and the table of ``actions`` to execute, like this::
+Programs are defined as Lua tables. Each program must be declared as a subtable in the
+productionsite's Lua table called ``programs`` and have a unique table key. The entries in a
+program's subtable are the translatable ``descname`` and the table of ``actions`` to execute, like
+this::
 
    programs = {
       work = {
@@ -82,7 +87,9 @@ Programs are defined as Lua tables. Each program must be declared as a subtable 
       },
    },
 
-The translations for ``descname`` can also be fetched by ``pgettext`` to disambiguate. We recommend that you do this whenever workers are referenced, or if your tribes have multiple wares with the same name::
+The translations for ``descname`` can also be fetched by ``pgettext`` to disambiguate. We recommend
+that you do this whenever workers are referenced, or if your tribes have multiple wares with the
+same name::
 
    programs = {
       work = {
@@ -122,7 +129,8 @@ A program can call another program, for example::
       },
    },
 
-A program's actions consist of a sequence of commands. A command is written as ``<type>=<parameters>``::
+A program's actions consist of a sequence of commands. A command is written as
+``<type>=<parameters>``::
 
 
    produce_snack = {
@@ -325,9 +333,11 @@ Parameter semantics:
     productionsite belongs to needs a ware of the specified type. How
     this is determined is defined by the economy.
 
-Aborts the execution of the program and sets a return value. Updates the productionsite's statistics depending on the return value.
+Aborts the execution of the program and sets a return value. Updates the productionsite's statistics
+depending on the return value.
 
-.. note:: If the execution reaches the end of the program, the return value is implicitly set to Completed.
+.. note:: If the execution reaches the end of the program, the return value is implicitly set to
+Completed.
 */
 ProductionProgram::ActReturn::Condition::~Condition() {
 }
@@ -678,7 +688,8 @@ Parameter semantics:
 ``failure_handling_method``
     Specifies how to handle a failure of the called program.
 
-    - If ``failure_handling_method`` is ``fail``, the command fails (with the same effect as executing ``return=failed``).
+    - If ``failure_handling_method`` is ``fail``, the command fails (with the same effect as
+executing ``return=failed``).
     - If ``failure_handling_method`` is ``repeat``, the command is repeated.
     - If ``failure_handling_method`` is ``skip``, the failure is ignored (the program is continued).
 
@@ -905,7 +916,10 @@ Parameter semantics:
     A natural integer. If 0, the result from the most recent command that
     returned a value is used.
 
-Starts the specified animation for the productionsite. Blocks the execution of the program for the specified duration. (The duration does not have to equal the length of the animation. It will loop around. The animation will not be stopped by this command. It will run until another animation is started.)
+Starts the specified animation for the productionsite. Blocks the execution of the program for the
+specified duration. (The duration does not have to equal the length of the animation. It will loop
+around. The animation will not be stopped by this command. It will run until another animation is
+started.)
 */
 ProductionProgram::ActAnimate::ActAnimate(const std::vector<std::string>& arguments,
                                           ProductionSiteDescr* descr) {
@@ -935,15 +949,30 @@ Parameter semantics:
 ``count``
     A positive integer. If omitted, the value 1 is used.
 
-For each group, the number of wares specified in count is consumed. The consumed wares may be of any type in the group.
+For each group, the number of wares specified in count is consumed. The consumed wares may be of any
+type in the group.
 
-If there are not enough wares in the input storages, the command fails (with the same effect as executing ``return=failed``). Then no wares will be consumed.
+If there are not enough wares in the input storages, the command fails (with the same effect as
+executing ``return=failed``). Then no wares will be consumed.
 
-Selecting which ware types to consume for a group so that the whole command succeeds is a constraint satisfaction problem. The implementation does not implement an exhaustive search for a solution to it. It is just a greedy algorithm which gives up instead of backtracking. Therefore the command may fail even if there is a solution.
+Selecting which ware types to consume for a group so that the whole command succeeds is a constraint
+satisfaction problem. The implementation does not implement an exhaustive search for a solution to
+it. It is just a greedy algorithm which gives up instead of backtracking. Therefore the command may
+fail even if there is a solution.
 
-However it may be possible to help the algorithm by ordering the groups carefully. Suppose that the input storage has the wares ``a:1, b:1`` and a consume command has the parameters ``a,b:1 a:1``. The algorithm tries to consume its input wares in order. It starts with the first group and consumes 1 ware of type ``a`` (the group becomes satisfied). Then it proceeds with the second group, but there are no wares of type ``a`` left to consume. Since there is no other ware type that can satisfy the group, the command will fail. If the groups are reordered so that the parameters become ``a:1 a,b:1``, it will work. The algorithm will consume 1 ware of type ``a`` for the first group. When it proceeds with the second group, it will not have any wares of type ``a`` left. Then it will go on and consume 1 ware of type ``b`` for the second group (which becomes satisfied) and the command succeeds.
+However it may be possible to help the algorithm by ordering the groups carefully. Suppose that the
+input storage has the wares ``a:1, b:1`` and a consume command has the parameters ``a,b:1 a:1``. The
+algorithm tries to consume its input wares in order. It starts with the first group and consumes 1
+ware of type ``a`` (the group becomes satisfied). Then it proceeds with the second group, but there
+are no wares of type ``a`` left to consume. Since there is no other ware type that can satisfy the
+group, the command will fail. If the groups are reordered so that the parameters become ``a:1
+a,b:1``, it will work. The algorithm will consume 1 ware of type ``a`` for the first group. When it
+proceeds with the second group, it will not have any wares of type ``a`` left. Then it will go on
+and consume 1 ware of type ``b`` for the second group (which becomes satisfied) and the command
+succeeds.
 
-.. note:: It is not possible to reorder ware types within a group. ``a,b`` is equivalent to ``b,a`` because in the internal representation the ware types of a group are sorted.
+.. note:: It is not possible to reorder ware types within a group. ``a,b`` is equivalent to ``b,a``
+because in the internal representation the ware types of a group are sorted.
 */
 ProductionProgram::ActConsume::ActConsume(const std::vector<std::string>& arguments,
                                           const ProductionSiteDescr& descr,
@@ -1093,7 +1122,8 @@ Parameter semantics:
 ``count``
     A positive integer. If omitted, the value 1 is used.
 
-For each group, the number of wares specified in count is produced. The produced wares are of the type specified in the group. How the produced wares are handled is defined by the productionsite.
+For each group, the number of wares specified in count is produced. The produced wares are of the
+type specified in the group. How the produced wares are handled is defined by the productionsite.
 */
 ProductionProgram::ActProduce::ActProduce(const std::vector<std::string>& arguments,
                                           ProductionSiteDescr& descr,
@@ -1170,7 +1200,9 @@ Parameter semantics:
 ``count``
     A positive integer. If omitted, the value 1 is used.
 
-For each group, the number of workers specified in count is produced. The produced workers are of the type specified in the group. How the produced workers are handled is defined by the productionsite.
+For each group, the number of workers specified in count is produced. The produced workers are of
+the type specified in the group. How the produced workers are handled is defined by the
+productionsite.
 */
 ProductionProgram::ActRecruit::ActRecruit(const std::vector<std::string>& arguments,
                                           ProductionSiteDescr& descr,
@@ -1376,7 +1408,8 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 /* RST
 checksoldier
 ------------
-Returns failure unless there are a specified amount of soldiers with specified level of specified properties. This command type is subject to change.
+Returns failure unless there are a specified amount of soldiers with specified level of specified
+properties. This command type is subject to change.
 */
 ProductionProgram::ActCheckSoldier::ActCheckSoldier(const std::vector<std::string>& arguments) {
 	if (arguments.size() != 3) {
@@ -1533,7 +1566,8 @@ Parameter semantics:
 ``priority``
     An integer. If omitted, 127 is used.
 
-Plays the specified soundFX with the specified priority. Whether the soundFX is actually played is determined by the sound handler.
+Plays the specified soundFX with the specified priority. Whether the soundFX is actually played is
+determined by the sound handler.
 */
 ProductionProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments) {
 	parameters = MapObjectProgram::parse_act_play_sound(arguments, kFxPriorityAllowMultiple - 1);
@@ -1563,7 +1597,8 @@ Parameter semantics:
 ``workarea_radius``
     The radius used by the worker to find a suitable construction spot on the map.
 
-Sends the main worker to look for a suitable spot on the shore and to perform construction work on an immovable.
+Sends the main worker to look for a suitable spot on the shore and to perform construction work on
+an immovable.
 */
 ProductionProgram::ActConstruct::ActConstruct(const std::vector<std::string>& arguments,
                                               const std::string& production_program_name,
