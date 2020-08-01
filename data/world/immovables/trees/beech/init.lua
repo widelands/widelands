@@ -43,7 +43,7 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle duration:65s",
+         "animate=idle duration:1m5s",
          "remove=24",
          "grow=beech_summer_mature",
       },
@@ -70,7 +70,7 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle duration:72s",
+         "animate=idle duration:1m12s",
          "remove=19",
          "grow=beech_summer_old",
       },
@@ -99,7 +99,7 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle duration:1525s",
+         "animate=idle duration:25m25s",
          "transform=deadtree2 20",
          "seed=beech_summer_sapling 250",
       },

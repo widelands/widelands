@@ -73,7 +73,7 @@ protected:
 
 	/**
 	 * @brief Reads time duration with a unit from a string
-	 * @param A positive integer, optionally followed by 'ms' (milliseconds), 's' (seconds) or 'm' (minutes). Default unit is milliseconds.
+	 * @param A positive integer, optionally followed by 'ms' (milliseconds), 's' (seconds) or 'm' (minutes). This can be repeated to form units like '1m20s500ms'.
 	 * @return The duration in SDL ticks (milliseconds)
 	 */
 	static Duration read_duration(const std::string& input);
@@ -114,6 +114,8 @@ protected:
 	                                                uint8_t default_priority);
 
 private:
+	static Widelands::Duration as_ms(Widelands::Duration number, const std::string& unit);
+
 	const std::string name_;
 };
 }  // namespace Widelands

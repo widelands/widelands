@@ -103,14 +103,14 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle duration:800s",
+         "animate=idle duration:13m20s",
          "transform=deadtree5 50",
          "seed=palm_oil_desert_sapling 80",
       },
       fall = {
          "remove=",
       },
-   },
+},
    spritesheets = {
       idle = {
          directory = dirname,

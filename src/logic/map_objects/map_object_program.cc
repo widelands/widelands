@@ -69,23 +69,56 @@ unsigned int MapObjectProgram::read_positive(const std::string& input, int64_t m
 	return read_int(input, 1, max_value);
 }
 
+Duration MapObjectProgram::as_ms(Duration number, const std::string& unit) {
+	if (unit == "s") {
+		return number * 1000;
+	}
+	if (unit == "m") {
+		return number * 60000;
+	}
+	if (unit == "ms") {
+		return number;
+	}
+	if (unit.empty()) {
+		// TODO (GunChleoc): deprecate
+		return number;
+	}
+	throw GameDataError("has unknown unit '%s'", unit.c_str());
+}
+
 Duration MapObjectProgram::read_duration(const std::string& input) {
-	boost::regex with_unit("^(\\d+)(ms|s|m)$");
-	boost::smatch match;
-	if (boost::regex_search(input, match, with_unit)) {
-		Duration result = read_positive(match[1], endless());
-		if (match[2] == 's') {
-			result *= 1000;
-		} else if (match[2] == 'm') {
-			result *= 60000;
+	try {
+		boost::smatch match;
+		boost::regex one_unit("^(\\d+)(ms|s|m)$");
+		if (boost::regex_search(input, match, one_unit)) {
+			return as_ms(read_positive(match[1], endless()), match[2]);
 		}
-		return result;
+		boost::regex two_units("^(\\d+)(s|m)(\\d+)(ms|s)$");
+		if (boost::regex_search(input, match, two_units)) {
+			if (match[2] == match[4]) {
+				std::string unit(match[2]);
+				throw GameDataError("has duplicate unit '%s'", unit.c_str());
+			}
+			const Duration part1 = as_ms(read_positive(match[1], endless()), match[2]);
+			const Duration part2 = as_ms(read_positive(match[3], endless()), match[4]);
+			return part1 + part2;
+		}
+		boost::regex three_units("^(\\d+)(m)(\\d+)(s)(\\d+)(ms)$");
+		if (boost::regex_search(input, match, three_units)) {
+			const Duration part1 = as_ms(read_positive(match[1], endless()), match[2]);
+			const Duration part2 = as_ms(read_positive(match[3], endless()), match[4]);
+			const Duration part3 = as_ms(read_positive(match[5], endless()), match[6]);
+			return part1 + part2 + part3;
+		}
+		// TODO(GunChleoc): Deprecate unitless
+		boost::regex without_unit("^(\\d+)$");
+		if (boost::regex_match(input, without_unit)) {
+			return read_positive(input, endless());
+		}
+	} catch (const WException& e) {
+		throw GameDataError("Duration '%s' %s. Usage: <numbers>{m|s|ms}[<numbers>{s|ms}][<numbers>ms]", input.c_str(), e.what());
 	}
-	boost::regex without_unit("^(\\d+)$");
-	if (boost::regex_match(input, without_unit)) {
-		return read_positive(input, endless());
-	}
-	throw GameDataError("Illegal duration: %s. Usage: numbers{ms|s|m}", input.c_str());
+	throw GameDataError("Illegal duration: %s. Usage: <numbers>{m|s|ms}[<numbers>{s|ms}][<numbers>ms]", input.c_str());
 }
 
 MapObjectProgram::ProgramParseInput
@@ -119,7 +152,7 @@ MapObjectProgram::read_key_value_pair(const std::string& input,
 MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(
    const std::vector<std::string>& arguments, const MapObjectDescr& descr, bool is_idle_allowed) {
 	if (arguments.size() < 1 || arguments.size() > 2) {
-		throw GameDataError("Usage: animate=animation_name [duration:numbers{ms|s|m}]");
+		throw GameDataError("Usage: animate=<animation_name> [duration:<duration>]");
 	}
 
 	AnimationParameters result;
@@ -141,7 +174,7 @@ MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(
 			result.duration = read_duration(item.first);
 		} else {
 			throw GameDataError(
-			   "Unknown argument '%s'. Usage: animation_name [duration:numbers{ms|s|m}]", arguments.at(1).c_str());
+			   "Unknown argument '%s'. Usage: <animation_name> [duration:<duration>]", arguments.at(1).c_str());
 		}
 	}
 	return result;

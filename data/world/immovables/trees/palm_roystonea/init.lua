@@ -16,7 +16,7 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle duration:57500ms",
+         "animate=idle duration:57s500ms",
          "remove=21",
          "grow=palm_roystonea_desert_pole",
       },
@@ -43,7 +43,7 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle duration:52500ms",
+         "animate=idle duration:52s500ms",
          "remove=19",
          "grow=palm_roystonea_desert_mature",
       },
@@ -99,7 +99,7 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle duration:1550s",
+         "animate=idle duration:25m50s",
          "transform=deadtree4 39",
          "seed=palm_roystonea_desert_sapling 30",
       },

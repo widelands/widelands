@@ -17,7 +17,7 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle duration:61s",
+         "animate=idle duration:1m1s",
          "remove=44",
          "grow=cirrus_wasteland_pole",
       },
@@ -104,7 +104,7 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle duration:1455s",
+         "animate=idle duration:24m15s",
          "transform=deadtree3 34",
          "seed=cirrus_wasteland_sapling 100",
       },

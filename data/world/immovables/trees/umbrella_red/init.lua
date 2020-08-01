@@ -107,7 +107,7 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle duration:1050s",
+         "animate=idle duration:17m30s",
          "transform=deadtree2 32",
          "seed=umbrella_red_wasteland_sapling 90",
       },

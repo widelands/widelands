@@ -69,7 +69,7 @@ dirname = path.dirname(__file__)
 --        like this::
 --
 --            program = {
---               "animate=idle duration:50s",
+--               "animate=idle duration:1m20s500ms",
 --               "remove=18",
 --               "grow=alder_summer_old",
 --            },
