@@ -19,6 +19,8 @@
 
 #include "logic/map_objects/map_object_program.h"
 
+#include <boost/regex.hpp>
+
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/map_object.h"
@@ -44,7 +46,8 @@ std::vector<std::string> MapObjectProgram::split_string(const std::string& s,
 	return result;
 }
 
-unsigned int MapObjectProgram::read_int(const std::string& input, int min_value, int max_value) {
+// Using int64_t in input so we can get the full range of unsigned int in the output while still checking for negative integers.
+unsigned int MapObjectProgram::read_int(const std::string& input, int min_value, int64_t max_value) {
 	unsigned int result = 0U;
 	char* endp;
 	long int const value = strtol(input.c_str(), &endp, 0);
@@ -56,13 +59,33 @@ unsigned int MapObjectProgram::read_int(const std::string& input, int min_value,
 		throw GameDataError("Expected a number >= %d but found \"%s\"", min_value, input.c_str());
 	}
 	if (value > max_value) {
-		throw GameDataError("Expected a number <= %d but found \"%s\"", max_value, input.c_str());
+		throw GameDataError("Expected a number <= %ld but found \"%s\"", max_value, input.c_str());
 	}
 	return result;
 }
 
-unsigned int MapObjectProgram::read_positive(const std::string& input, int max_value) {
+// Using int64_t in input so we can get the full range of unsigned int in the output while still checking for negative integers.
+unsigned int MapObjectProgram::read_positive(const std::string& input, int64_t max_value) {
 	return read_int(input, 1, max_value);
+}
+
+Duration MapObjectProgram::read_duration(const std::string& input) {
+	boost::regex with_unit("^(\\d+)(ms|s|m)$");
+	boost::smatch match;
+	if (boost::regex_search(input, match, with_unit)) {
+		Duration result = read_positive(match[1], endless());
+		if (match[2] == 's') {
+			result *= 1000;
+		} else if (match[2] == 'm') {
+			result *= 60000;
+		}
+		return result;
+	}
+	boost::regex without_unit("^(\\d+)$");
+	if (boost::regex_match(input, without_unit)) {
+		return read_positive(input, endless());
+	}
+	throw GameDataError("Illegal duration: %s. Usage: numbers{ms|s|m}", input.c_str());
 }
 
 MapObjectProgram::ProgramParseInput
@@ -96,7 +119,7 @@ MapObjectProgram::read_key_value_pair(const std::string& input,
 MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(
    const std::vector<std::string>& arguments, const MapObjectDescr& descr, bool is_idle_allowed) {
 	if (arguments.size() < 1 || arguments.size() > 2) {
-		throw GameDataError("Usage: animate=<name> [<duration>]");
+		throw GameDataError("Usage: animate=animation_name [duration:numbers{ms|s|m}]");
 	}
 
 	AnimationParameters result;
@@ -111,7 +134,15 @@ MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(
 	result.animation = descr.get_animation(animation_name, nullptr);
 
 	if (arguments.size() == 2) {
-		result.duration = read_positive(arguments.at(1));
+		const std::pair<std::string, std::string> item = read_key_value_pair(arguments.at(1), ':');
+		if (item.first == "duration") {
+			result.duration = read_duration(item.second);
+		} else if (item.second.empty()) {
+			result.duration = read_duration(item.first);
+		} else {
+			throw GameDataError(
+			   "Unknown argument '%s'. Usage: animation_name [duration:numbers{ms|s|m}]", arguments.at(1).c_str());
+		}
 	}
 	return result;
 }

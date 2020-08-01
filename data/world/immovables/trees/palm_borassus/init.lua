@@ -16,7 +16,7 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 70000",
+         "animate=idle duration:70s",
          "remove=80",
          "grow=palm_borassus_desert_pole",
       },
@@ -43,7 +43,7 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 70000",
+         "animate=idle duration:70s",
          "remove=70",
          "grow=palm_borassus_desert_mature",
       },
@@ -70,7 +70,7 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 65000",
+         "animate=idle duration:65s",
          "remove=40",
          "grow=palm_borassus_desert_old",
       },
@@ -99,7 +99,7 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 2000000",
+         "animate=idle duration:2000s",
          "transform=deadtree5 25",
          "seed=palm_borassus_desert_sapling 160",
       },

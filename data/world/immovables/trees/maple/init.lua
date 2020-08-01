@@ -16,7 +16,7 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 57500",
+         "animate=idle duration:57500ms",
          "remove=21",
          "grow=maple_winter_pole",
       },
@@ -43,7 +43,7 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 52500",
+         "animate=idle duration:52500ms",
          "remove=19",
          "grow=maple_winter_mature",
       },
@@ -70,7 +70,7 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 50000",
+         "animate=idle duration:50s",
          "remove=18",
          "grow=maple_winter_old",
       },
@@ -99,7 +99,7 @@ world:new_immovable_type{
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 1550000",
+         "animate=idle duration:1550s",
          "transform=deadtree4 39",
          "seed=maple_winter_sapling 240",
       },
