@@ -592,31 +592,24 @@ bool Panel::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_t) 
 }
 
 bool Panel::handle_key(bool down, SDL_Keysym code) {
-	if (down) {
-		if (focus_) {
-			Panel* p = focus_->next_;
-			if (focus_ == last_child_) {
-				p = first_child_;
-			}
-
-			switch (code.sym) {
-
-			case SDLK_TAB:
-				while (p != focus_) {
-					if (p->get_can_focus()) {
-						p->focus();
-						break;
-					}
-					if (p == last_child_) {
-						p = first_child_;
-					} else {
-						p = p->next_;
-					}
+	if (down && focus_ && code.sym == SDLK_TAB) {
+		if (SDL_GetModState() & KMOD_SHIFT) {
+			Panel* next_focus = (focus_ == last_child_ ? first_child_ : focus_->next_);
+			while (next_focus != focus_) {
+				if (next_focus->get_can_focus()) {
+					next_focus->focus();
+					return true;
 				}
-				return true;
-
-			default:
-				return false;
+				next_focus = (next_focus == last_child_ ? first_child_ : next_focus->next_);
+			}
+		} else {
+			Panel* next_focus = (focus_ == first_child_ ? last_child_ : focus_->prev_);
+			while (next_focus != focus_) {
+				if (next_focus->get_can_focus()) {
+					next_focus->focus();
+					return true;
+				}
+				next_focus = (next_focus == first_child_ ? last_child_ : next_focus->prev_);
 			}
 		}
 	}
