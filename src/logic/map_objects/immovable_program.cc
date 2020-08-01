@@ -263,9 +263,6 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 		if (type_name_ == descr.name()) {
 			throw GameDataError("illegal transformation to the same type");
 		}
-		if (probability_ > 0 && type_name_.empty()) {
-			throw GameDataError("'success' parameter without immovable/bob name");
-		}
 	} catch (const WException& e) {
 		throw GameDataError("transform: %s", e.what());
 	}
@@ -319,7 +316,7 @@ ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments,
 		   "Immovable %s can 'grow', but has no terrain_affinity entry.", descr.name().c_str());
 	}
 	if (type_name_ == descr.name()) {
-		throw GameDataError("illegal transformation to the same type");
+		throw GameDataError("illegal growth to the same type");
 	}
 
 	// TODO(GunChleoc): If would be nice to check if target exists, but we can't guarantee the load
