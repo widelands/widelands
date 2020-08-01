@@ -129,8 +129,9 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 		map_details.set_map_description_text(_("The host has not yet selected a map or saved game."));
 	}
 
-	individual_content_box.add(&mpsg_, UI::Box::Resizing::kFullSize);
-	individual_content_box.add_inf_space();
+	individual_content_box.add(&mpsg_, UI::Box::Resizing::kExpandBoth);
+	//	individual_content_box.add_inf_space();
+	individual_content_box.add_space(10 * padding_);
 	individual_content_box.add(&chat_, UI::Box::Resizing::kExpandBoth);
 	layout();
 	// If we are the host, open the map or save selection menu at startup
@@ -154,8 +155,11 @@ void FullscreenMenuLaunchMPG::layout() {
 	help_button_.set_pos(
 	   Vector2i(get_w() - 10 * padding_ - standard_element_height_, 10 * padding_));
 
-	mpsg_.set_max_size(0, get_h() / 2);
-	log("max_width: %d\n", get_w() * 1 / 2);
+	//	mpsg_.set_max_size(0, get_h() / 2);
+	log("window width/2: %d\n", get_w() * 1 / 2);
+	log("individual box width: %d\n", individual_content_box.get_w());
+	log("total width - map width: %d\n", get_w() - map_box_.get_w());
+
 	mpsg_.force_new_dimensions(
 	   scale_factor(), get_w() * 1 / 2, get_h() / 2, standard_element_height_);
 	chat_.force_new_dimensions(scale_factor(), get_w() * 1 / 2, get_h() / 4);
