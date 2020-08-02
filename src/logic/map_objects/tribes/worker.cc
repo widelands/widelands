@@ -60,6 +60,7 @@
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
+#include "map_io/map_packet_versions.h"
 #include "map_io/tribes_legacy_lookup_table.h"
 #include "sound/note_sound.h"
 
@@ -2702,6 +2703,8 @@ void Worker::start_task_geologist(Game& game,
 }
 
 void Worker::geologist_update(Game& game, State& state) {
+	const uint32_t resource_indicator_attribute = MapObjectDescr::get_attribute_id("resi", false);
+
 	std::string signal = get_signal();
 
 	if (signal == "fail") {
@@ -2723,7 +2726,8 @@ void Worker::geologist_update(Game& game, State& state) {
 		// Check to see if we're on suitable terrain
 		BaseImmovable* const imm = map.get_immovable(get_position());
 
-		if (!imm || (imm->get_size() == BaseImmovable::NONE && !imm->has_attribute(RESI))) {
+		if (!imm || (imm->get_size() == BaseImmovable::NONE &&
+		             !imm->has_attribute(resource_indicator_attribute))) {
 			--state.ivar1;
 			return start_task_program(game, state.svar1);
 		}
@@ -2734,7 +2738,7 @@ void Worker::geologist_update(Game& game, State& state) {
 		FindNodeAnd ffa;
 
 		ffa.add(FindNodeImmovableSize(FindNodeImmovableSize::sizeNone), false);
-		ffa.add(FindNodeImmovableAttribute(RESI), true);
+		ffa.add(FindNodeImmovableAttribute(resource_indicator_attribute), true);
 
 		if (map.find_reachable_fields(game, owner_area, &list, cstep, ffa)) {
 			FCoords target;
@@ -3349,21 +3353,26 @@ MapObject::Loader* Worker::load(EditorGameBase& egbase,
                                 MapObjectLoader& mol,
                                 FileRead& fr,
                                 const TribesLegacyLookupTable& lookup_table,
-                                uint8_t /* packet_version */) {
-	try {
-		// header has already been read by caller
-		const std::string name = lookup_table.lookup_worker(fr.c_string());
+                                uint8_t packet_version) {
+	if (packet_version == kCurrentPacketVersionMapObject) {
+		try {
+			// header has already been read by caller
+			const std::string name = lookup_table.lookup_worker(fr.c_string());
 
-		const WorkerDescr* descr =
-		   egbase.tribes().get_worker_descr(egbase.tribes().safe_worker_index(name));
+			const WorkerDescr* descr =
+			   egbase.tribes().get_worker_descr(egbase.tribes().safe_worker_index(name));
 
-		Worker* worker = static_cast<Worker*>(&descr->create_object());
-		std::unique_ptr<Loader> loader(worker->create_loader());
-		loader->init(egbase, mol, *worker);
-		loader->load(fr);
-		return loader.release();
-	} catch (const std::exception& e) {
-		throw wexception("loading worker: %s", e.what());
+			Worker* worker = static_cast<Worker*>(&descr->create_object());
+			std::unique_ptr<Loader> loader(worker->create_loader());
+			loader->init(egbase, mol, *worker);
+			loader->load(fr);
+			return loader.release();
+		} catch (const std::exception& e) {
+			throw wexception("loading worker: %s", e.what());
+		}
+	} else {
+		throw UnhandledVersionError(
+		   "MapObjectPacket::Worker", packet_version, kCurrentPacketVersionMapObject);
 	}
 }
 

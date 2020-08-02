@@ -52,12 +52,6 @@ tribes:new_productionsite_type {
       { name = "ration", amount = 6 }
    },
 
-   indicate_workarea_overlaps = {
-      barbarians_coalmine = false,
-      barbarians_coalmine_deep = false,
-      barbarians_coalmine_deeper = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining coal because ...

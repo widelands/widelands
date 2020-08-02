@@ -62,6 +62,7 @@ class TribeDescr {
 public:
 	TribeDescr(const LuaTable& table,
 	           const Widelands::TribeBasicInfo& info,
+	           const World& world,
 	           const Tribes& init_tribes);
 
 	const std::string& name() const;
@@ -174,6 +175,8 @@ private:
 	DescriptionIndex add_special_building(const std::string& buildingname);
 	// Helper function to identify special wares across tribes (iron ore etc.)
 	DescriptionIndex add_special_ware(const std::string& warename);
+
+	void process_productionsites(const World& world);
 
 	const std::string name_;
 	const std::string descname_;

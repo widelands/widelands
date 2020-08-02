@@ -100,7 +100,8 @@ public:
 	          const Rectf& destination_rect,
 	          const RGBColor* clr,
 	          Surface* target,
-	          float scale) const;
+	          float scale,
+	          float opacity) const;
 
 	/// We need to expose these for the packed animation,
 	/// so that the create_spritesheet utility can use them.
@@ -136,7 +137,8 @@ protected:
 		                  const Rectf& source_rect,
 		                  const Rectf& destination_rect,
 		                  const RGBColor* clr,
-		                  Surface* target) const = 0;
+		                  Surface* target,
+		                  float opacity) const = 0;
 
 		/// The width of this mipmap entry's textures
 		virtual int width() const = 0;
