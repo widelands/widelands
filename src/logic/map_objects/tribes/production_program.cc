@@ -337,7 +337,7 @@ Aborts the execution of the program and sets a return value. Updates the product
 depending on the return value.
 
 .. note:: If the execution reaches the end of the program, the return value is implicitly set to
-Completed.
+    Completed.
 */
 ProductionProgram::ActReturn::Condition::~Condition() {
 }
@@ -972,7 +972,7 @@ and consume 1 ware of type ``b`` for the second group (which becomes satisfied) 
 succeeds.
 
 .. note:: It is not possible to reorder ware types within a group. ``a,b`` is equivalent to ``b,a``
-because in the internal representation the ware types of a group are sorted.
+    because in the internal representation the ware types of a group are sorted.
 */
 ProductionProgram::ActConsume::ActConsume(const std::vector<std::string>& arguments,
                                           const ProductionSiteDescr& descr,
