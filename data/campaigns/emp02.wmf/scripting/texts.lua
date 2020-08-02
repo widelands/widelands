@@ -61,7 +61,7 @@ obj_expand_south = {
    title =_"Continue expansion",
    number = 1,
    body = objective_text(_"Continue expansion",
-      li(_[[Expand to the south of marble mountain.]])
+      li(_[[Expand farther to the south of the marble mountain.]])
    ),
 }
 
