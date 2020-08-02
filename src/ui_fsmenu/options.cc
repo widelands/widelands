@@ -223,6 +223,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      /** TRANSLATORS: This refers to to zooming with the scrollwheel.*/
      ctrl_zoom_(&box_game_, Vector2i::zero(), _("Zoom only when Ctrl is pressed")),
      game_clock_(&box_game_, Vector2i::zero(), _("Display game time in the top left corner")),
+     numpad_diagonalscrolling_(&box_game_, Vector2i::zero(), _("Allow diagonal scrolling with the numeric keypad")),
      os_(opt) {
 
 	// Buttons
@@ -276,6 +277,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	box_game_.add(&single_watchwin_);
 	box_game_.add(&ctrl_zoom_);
 	box_game_.add(&game_clock_);
+	box_game_.add(&numpad_diagonalscrolling_);
 
 	// Bind actions
 	language_dropdown_.selected.connect([this]() { update_language_stats(false); });
@@ -342,6 +344,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	single_watchwin_.set_state(opt.single_watchwin);
 	ctrl_zoom_.set_state(opt.ctrl_zoom);
 	game_clock_.set_state(opt.game_clock);
+	numpad_diagonalscrolling_.set_state(opt.numpad_diagonalscrolling);
 
 	// Language options
 	add_languages_to_list(opt.language);
@@ -417,6 +420,7 @@ void FullscreenMenuOptions::layout() {
 	single_watchwin_.set_desired_size(tab_panel_width, single_watchwin_.get_h());
 	ctrl_zoom_.set_desired_size(tab_panel_width, ctrl_zoom_.get_h());
 	game_clock_.set_desired_size(tab_panel_width, game_clock_.get_h());
+	numpad_diagonalscrolling_.set_desired_size(tab_panel_width, numpad_diagonalscrolling_.get_h());
 }
 
 void FullscreenMenuOptions::add_languages_to_list(const std::string& current_locale) {
@@ -596,6 +600,7 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	os_.single_watchwin = single_watchwin_.get_state();
 	os_.ctrl_zoom = ctrl_zoom_.get_state();
 	os_.game_clock = game_clock_.get_state();
+	os_.numpad_diagonalscrolling = numpad_diagonalscrolling_.get_state();
 
 	// Last tab for reloading the options menu
 	os_.active_tab = tabs_.active();
@@ -655,6 +660,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.single_watchwin = opt_section_.get_bool("single_watchwin", false);
 	opt.ctrl_zoom = opt_section_.get_bool("ctrl_zoom", false);
 	opt.game_clock = opt_section_.get_bool("game_clock", true);
+	opt.numpad_diagonalscrolling = opt_section_.get_bool("numpad_diagonalscrolling", false);
 
 	// Language options
 	opt.language = opt_section_.get_string("language", "");
@@ -694,6 +700,7 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_bool("single_watchwin", opt.single_watchwin);
 	opt_section_.set_bool("ctrl_zoom", opt.ctrl_zoom);
 	opt_section_.set_bool("game_clock", opt.game_clock);
+	opt_section_.set_bool("numpad_diagonalscrolling", opt.numpad_diagonalscrolling);
 
 	// Language options
 	opt_section_.set_string("language", opt.language);

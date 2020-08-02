@@ -32,6 +32,7 @@
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
 #include "network/gamehost.h"
+#include "wlapplication_options.h"
 #include "wui/constructionsitewindow.h"
 #include "wui/dismantlesitewindow.h"
 #include "wui/game_chat_menu.h"
@@ -375,10 +376,15 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 	if (InteractiveBase::handle_key(down, code)) {
 		return true;
 	}
+	const bool numpad_diagonalscrolling = get_config_bool("numpad_diagonalscrolling", false);
 
 	if (down) {
 		switch (code.sym) {
+		case SDLK_KP_9:
 		case SDLK_PAGEUP:
+			if (code.sym == SDLK_KP_9 && ((code.mod & KMOD_NUM) || numpad_diagonalscrolling)) {
+				break;
+			}
 			increase_gamespeed(
 			   code.mod & KMOD_SHIFT ? kSpeedSlow : code.mod & KMOD_CTRL ? kSpeedFast : kSpeedDefault);
 			return true;
@@ -389,7 +395,11 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 				toggle_game_paused();
 			}
 			return true;
+		case SDLK_KP_3:
 		case SDLK_PAGEDOWN:
+			if (code.sym == SDLK_KP_3 && ((code.mod & KMOD_NUM) || numpad_diagonalscrolling)) {
+				break;
+			}
 			decrease_gamespeed(
 			   code.mod & KMOD_SHIFT ? kSpeedSlow : code.mod & KMOD_CTRL ? kSpeedFast : kSpeedDefault);
 			return true;

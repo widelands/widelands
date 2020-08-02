@@ -598,6 +598,7 @@ Widelands::NodeAndTriangle<> MapView::track_sel(const Vector2i& p) {
 }
 
 bool MapView::scroll_map() {
+	const bool numpad_diagonalscrolling = get_config_bool("numpad_diagonalscrolling", false);
 	// arrow keys
 	const bool kUP = get_key_state(SDL_SCANCODE_UP);
 	const bool kDOWN = get_key_state(SDL_SCANCODE_DOWN);
@@ -610,25 +611,25 @@ bool MapView::scroll_map() {
 	kNP(1) kNP(2) kNP(3) kNP(4) kNP(6) kNP(7) kNP(8) kNP(9)
 #undef kNP
 
-	   // set the scrolling distance
-	   const uint8_t denominator =
-	      ((SDL_GetModState() & KMOD_CTRL) ? 4 : (SDL_GetModState() & KMOD_SHIFT) ? 16 : 8);
+	// set the scrolling distance
+	const uint8_t denominator =
+		((SDL_GetModState() & KMOD_CTRL) ? 4 : (SDL_GetModState() & KMOD_SHIFT) ? 16 : 8);
 	const uint16_t scroll_distance_y = g_gr->get_yres() / denominator;
 	const uint16_t scroll_distance_x = g_gr->get_xres() / denominator;
 	int32_t distance_to_scroll_x = 0;
 	int32_t distance_to_scroll_y = 0;
 
 	// check the directions
-	if (kUP || kNP7 || kNP8 || kNP9) {
+	if (kUP || kNP8 || (numpad_diagonalscrolling && (kNP7 || kNP9))) {
 		distance_to_scroll_y -= scroll_distance_y;
 	}
-	if (kDOWN || kNP1 || kNP2 || kNP3) {
+	if (kDOWN || kNP2 || (numpad_diagonalscrolling && (kNP1 || kNP3))) {
 		distance_to_scroll_y += scroll_distance_y;
 	}
-	if (kLEFT || kNP1 || kNP4 || kNP7) {
+	if (kLEFT ||  kNP4 || (numpad_diagonalscrolling && (kNP1 || kNP7))) {
 		distance_to_scroll_x -= scroll_distance_x;
 	}
-	if (kRIGHT || kNP3 || kNP6 || kNP9) {
+	if (kRIGHT || kNP6 || (numpad_diagonalscrolling && (kNP3 || kNP9))) {
 		distance_to_scroll_x += scroll_distance_x;
 	}
 
