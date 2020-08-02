@@ -19,7 +19,7 @@ tribes:new_worker_type {
          "findspace=size:any radius:3",
          "walk=coords",
          "animate=releasein 2000",
-         "createbob=bunny chamois deer elk reindeer sheep stag wildboar wisent",
+         "createbob=bunny chamois deer moose reindeer sheep stag wildboar wisent",
          "animate=releaseout 2000",
          "return"
       }
