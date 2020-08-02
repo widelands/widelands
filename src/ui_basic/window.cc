@@ -119,15 +119,11 @@ Window::Window(Panel* const parent,
      drag_start_mouse_x_(0),
      drag_start_mouse_y_(0),
      pinned_(false),
-     pic_lborder_(
-        g_gr->images().get(window_image_path(kWindowImageLeft))),
-     pic_rborder_(
-        g_gr->images().get(window_image_path(kWindowImageRight))),
+     pic_lborder_(g_gr->images().get(window_image_path(kWindowImageLeft))),
+     pic_rborder_(g_gr->images().get(window_image_path(kWindowImageRight))),
      pic_top_(g_gr->images().get(window_image_path(kWindowImageTop))),
-     pic_bottom_(
-        g_gr->images().get(window_image_path(kWindowImageBottom))),
-     pic_background_(
-        g_gr->images().get(window_image_path(kWindowImageBackground))),
+     pic_bottom_(g_gr->images().get(window_image_path(kWindowImageBottom))),
+     pic_background_(g_gr->images().get(window_image_path(kWindowImageBackground))),
      center_panel_(nullptr),
      fastclick_panel_(nullptr),
      button_close_(new Button(this,
