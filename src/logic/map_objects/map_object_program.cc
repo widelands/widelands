@@ -83,7 +83,7 @@ Duration MapObjectProgram::as_ms(Duration number, const std::string& unit) {
 		return number;
 	}
 	if (unit.empty()) {
-		// TODO (GunChleoc): deprecate
+		// TODO(GunChleoc): deprecate
 		return number;
 	}
 	throw GameDataError("has unknown unit '%s'", unit.c_str());
