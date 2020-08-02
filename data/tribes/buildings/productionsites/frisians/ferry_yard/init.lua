@@ -44,10 +44,6 @@ tribes:new_productionsite_type {
 
    aihints = {},
 
-   indicate_workarea_overlaps = {
-      frisians_ferry_yard = false,
-   },
-
    working_positions = {
       frisians_shipwright = 1
    },
