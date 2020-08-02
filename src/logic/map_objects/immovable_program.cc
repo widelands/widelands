@@ -38,7 +38,7 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name, std::unique_ptr
 
 ImmovableProgram::ImmovableProgram(const std::string& init_name,
                                    const std::vector<std::string>& lines,
-                                   const ImmovableDescr& immovable)
+                                   ImmovableDescr& immovable)
    : MapObjectProgram(init_name) {
 	for (const std::string& line : lines) {
 		if (line.empty()) {
@@ -111,7 +111,7 @@ void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) c
 }
 
 ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments,
-                                             const ImmovableDescr& descr) {
+                                             ImmovableDescr& descr) {
 	if (arguments.empty()) {
 		throw GameDataError("Usage: transform=[bob] <name> [<probability>]");
 	}
@@ -132,6 +132,12 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 		}
 		if (type_name == descr.name()) {
 			throw GameDataError("illegal transformation to the same type");
+		}
+		// Register target at ImmovableDescr
+		if (bob) {
+			descr.becomes_.insert(std::make_pair(MapObjectType::BOB, type_name));
+		} else {
+			descr.becomes_.insert(std::make_pair(MapObjectType::IMMOVABLE, type_name));
 		}
 	} catch (const WException& e) {
 		throw GameDataError("transform: %s", e.what());
@@ -159,8 +165,7 @@ void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) c
 	}
 }
 
-ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments,
-                                   const ImmovableDescr& descr) {
+ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments, ImmovableDescr& descr) {
 	if (arguments.size() != 1) {
 		throw GameDataError("Usage: grow=<immovable name>");
 	}
@@ -172,6 +177,8 @@ ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments,
 	// TODO(GunChleoc): If would be nice to check if target exists, but we can't guarantee the load
 	// order. Maybe in postload() one day.
 	type_name = arguments.front();
+	// Register target at ImmovableDescr
+	descr.becomes_.insert(std::make_pair(MapObjectType::IMMOVABLE, type_name));
 }
 
 void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const {
