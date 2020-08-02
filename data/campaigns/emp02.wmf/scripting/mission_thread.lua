@@ -74,6 +74,7 @@ function food_thread()
       "empire_tavern",
       "empire_inn",
       "empire_fishers_house",
+      "empire_stonemasons_house",
    }
    local o = add_campaign_objective(obj_build_food_infrastructure)
 
