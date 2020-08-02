@@ -68,11 +68,6 @@ tribes:new_productionsite_type {
       frisians_miner = 1
    },
 
-   indicate_workarea_overlaps = {
-      frisians_coalmine = false,
-      frisians_coalmine_deep = false,
-   },
-
    inputs = {
       { name = "ration", amount = 8 }
    },

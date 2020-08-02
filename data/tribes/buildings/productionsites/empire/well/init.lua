@@ -38,10 +38,6 @@ tribes:new_productionsite_type {
       empire_carrier = 1
    },
 
-   indicate_workarea_overlaps = {
-      empire_well = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
