@@ -40,10 +40,6 @@ tribes:new_productionsite_type {
       barbarians_carrier = 1
    },
 
-   indicate_workarea_overlaps = {
-      barbarians_well = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

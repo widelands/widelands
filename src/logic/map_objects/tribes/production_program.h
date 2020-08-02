@@ -512,7 +512,8 @@ struct ProductionProgram : public MapObjectProgram {
 	struct ActConstruct : public Action {
 		ActConstruct(const std::vector<std::string>& arguments,
 		             const std::string& production_program_name,
-		             ProductionSiteDescr*);
+		             ProductionSiteDescr*,
+		             const Tribes& tribes);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
 		void building_work_failed(Game&, ProductionSite&, Worker&) const override;

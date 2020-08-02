@@ -154,12 +154,12 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 	}
 
 	if (table.has_key("attributes")) {
-		std::vector<std::string> attributes =
+		std::vector<std::string> attribs =
 		   table.get_table("attributes")->array_entries<std::string>();
-		add_attributes(attributes, {MapObject::Attribute::RESI});
+		add_attributes(attribs);
 
 		// All resource indicators must have a menu icon
-		for (const std::string& attribute : attributes) {
+		for (const std::string& attribute : attribs) {
 			if (attribute == "resi") {
 				if (icon_filename().empty()) {
 					throw GameDataError("Resource indicator %s has no menu icon", name().c_str());
@@ -170,7 +170,7 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 
 		// Old trees get an extra species name so we can use it in help lists.
 		bool is_tree = false;
-		for (const std::string& attribute : attributes) {
+		for (const std::string& attribute : attribs) {
 			if (attribute == "tree") {
 				is_tree = true;
 				break;
