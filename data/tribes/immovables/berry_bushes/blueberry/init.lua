@@ -20,7 +20,7 @@ tribes:new_immovable_type {
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 18000",
+         "animate=idle duration:18s",
          "grow=berry_bush_blueberry_small",
       },
    },
@@ -47,7 +47,7 @@ tribes:new_immovable_type {
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 36000",
+         "animate=idle duration:36s",
          "grow=berry_bush_blueberry_medium",
       },
    },
@@ -74,7 +74,7 @@ tribes:new_immovable_type {
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 24000",
+         "animate=idle duration:24s",
          "grow=berry_bush_blueberry_ripe",
       },
    },
@@ -101,7 +101,7 @@ tribes:new_immovable_type {
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
-         "animate=idle 600000",
+         "animate=idle duration:10m",
          "remove=",
       },
       harvest = {
