@@ -261,11 +261,11 @@ public:
 	virtual bool burn_on_destroy();
 	void destroy(EditorGameBase&) override;
 
-	bool is_indestructible() const {
-		return indestructible_;
+	bool is_destruction_blocked() const {
+		return is_destruction_blocked_;
 	}
-	void set_indestructible(bool b) {
-		indestructible_ = b;
+	void set_destruction_blocked(bool b) {
+		is_destruction_blocked_ = b;
 	}
 
 	virtual bool fetch_from_flag(Game&);
@@ -392,7 +392,7 @@ private:
 	std::string statistics_string_;
 	AttackTarget* attack_target_;      // owned by the base classes, set by 'set_attack_target'.
 	SoldierControl* soldier_control_;  // owned by the base classes, set by 'set_soldier_control'.
-	bool indestructible_;
+	bool is_destruction_blocked_;
 };
 }  // namespace Widelands
 
