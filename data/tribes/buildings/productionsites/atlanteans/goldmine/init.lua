@@ -49,10 +49,6 @@ tribes:new_productionsite_type {
       { name = "atlanteans_bread", amount = 10 }
    },
 
-   indicate_workarea_overlaps = {
-      atlanteans_goldmine = false,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining gold because ...

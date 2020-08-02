@@ -101,7 +101,6 @@ SoldierDescr::SoldierDescr(const std::string& init_descname,
      attack_(table.get_table("attack")),
      defense_(table.get_table("defense")),
      evade_(table.get_table("evade")) {
-	add_attribute(MapObject::Attribute::SOLDIER);
 
 	// Battle animations
 	// attack_success_*-> soldier is attacking and hit his opponent

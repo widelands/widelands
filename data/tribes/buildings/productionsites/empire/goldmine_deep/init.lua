@@ -38,11 +38,6 @@ tribes:new_productionsite_type {
       mines = "gold"
    },
 
-   indicate_workarea_overlaps = {
-      empire_goldmine = false,
-      empire_goldmine_deep = false,
-   },
-
    working_positions = {
       empire_miner = 1,
       empire_miner_master = 1
