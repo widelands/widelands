@@ -68,7 +68,7 @@ tribes:new_productionsite_type {
       mine_produce = {
          descname = _"mining gold",
          actions = {
-            "animate=working 9000",
+            "animate=working duration:9s",
             "mine=gold 2 100 10 2",
             "produce=gold_ore",
          }

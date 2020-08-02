@@ -55,7 +55,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs beer or workers need experience",
             "consume=water wheat",
             "sleep=30000",
-            "animate=working 30000",
+            "animate=working duration:30s",
             "produce=beer"
          }
       },

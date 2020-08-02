@@ -66,7 +66,7 @@ tribes:new_productionsite_type {
             "consume=spider_silk",
             "sleep=20000",
             "playsound=sound/mill/weaving 120",
-            "animate=working 20000",
+            "animate=working duration:20s",
             "produce=spidercloth"
          }
       },
@@ -79,7 +79,7 @@ tribes:new_productionsite_type {
             "consume=spider_silk",
             "sleep=20000",
             "playsound=sound/mill/weaving 120",
-            "animate=working 20000",
+            "animate=working duration:20s",
             "produce=tabard"
          }
       },
@@ -92,7 +92,7 @@ tribes:new_productionsite_type {
             "consume=spider_silk gold_thread",
             "sleep=20000",
             "playsound=sound/mill/weaving 120",
-            "animate=working 20000",
+            "animate=working duration:20s",
             "produce=tabard_golden"
          }
       },
