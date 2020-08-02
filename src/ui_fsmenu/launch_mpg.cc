@@ -128,6 +128,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	} else {
 		map_details.set_map_description_text(_("The host has not yet selected a map or saved game."));
 	}
+	ok_.set_enabled(settings_->can_launch());
 
 	individual_content_box.add(&mpsg_, UI::Box::Resizing::kExpandBoth);
 	//	individual_content_box.add_inf_space();
@@ -158,10 +159,11 @@ void FullscreenMenuLaunchMPG::layout() {
 	//	mpsg_.set_max_size(0, get_h() / 2);
 	log("window width/2: %d\n", get_w() * 1 / 2);
 	log("individual box width: %d\n", individual_content_box.get_w());
-	log("total width - map width: %d\n", get_w() - map_box_.get_w());
 
 	mpsg_.force_new_dimensions(
 	   scale_factor(), get_w() * 1 / 2, get_h() / 2, standard_element_height_);
+	//	mpsg_.force_new_dimensions(
+	//	   scale_factor(), individual_content_box.get_w(), get_h() / 2, standard_element_height_);
 	chat_.force_new_dimensions(scale_factor(), get_w() * 1 / 2, get_h() / 4);
 
 	FullscreenMenuLaunchGame::layout();
@@ -358,7 +360,6 @@ void FullscreenMenuLaunchMPG::refresh() {
 	}
 
 	ok_.set_enabled(settings_->can_launch());
-	// change_map_or_save_.set_enabled(settings_->can_change_map());
 
 	update_peaceful_mode();
 	peaceful_.set_state(settings_->is_peaceful_mode());
@@ -425,7 +426,6 @@ void FullscreenMenuLaunchMPG::set_scenario_values() {
  * load all playerdata from savegame and update UI accordingly
  */
 void FullscreenMenuLaunchMPG::load_previous_playerdata() {
-
 	std::unique_ptr<FileSystem> l_fs(
 	   g_fs->make_sub_file_system(settings_->settings().mapfilename.c_str()));
 	Profile prof;
