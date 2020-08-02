@@ -197,7 +197,7 @@ saledus_2 = {
       _([[Please, expand to that mountain and start mining marble.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Saledus
-      _([[When you get there, continue with expansion to the south. That area seems also promising.]]))
+      _([[When you get there, continue with expansion to the south. That area also seems promising.]]))
       .. new_objectives(obj_build_marblemine, obj_expand_south)
 }
 
