@@ -47,10 +47,6 @@ tribes:new_productionsite_type {
       prohibited_till = 1050
    },
 
-   indicate_workarea_overlaps = {
-      empire_shipyard = false,
-   },
-
    working_positions = {
       empire_shipwright = 1
    },

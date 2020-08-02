@@ -72,7 +72,7 @@ struct ImmovableProgram : public MapObjectProgram {
 	/// For parameters, see scripting documentation.
 	class ActTransform : public Action {
 	public:
-		ActTransform(std::vector<std::string>& arguments, const ImmovableDescr&);
+		ActTransform(std::vector<std::string>& arguments, ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 
 	private:
@@ -84,7 +84,7 @@ struct ImmovableProgram : public MapObjectProgram {
 	/// Like ActTransform but the probability is determined by the suitability.
 	class ActGrow : public Action {
 	public:
-		ActGrow(std::vector<std::string>& arguments, const ImmovableDescr&);
+		ActGrow(std::vector<std::string>& arguments, ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 
 	private:
@@ -169,7 +169,7 @@ struct ImmovableProgram : public MapObjectProgram {
 	/// Create an immovable program from a number of lines.
 	ImmovableProgram(const std::string& init_name,
 	                 const std::vector<std::string>& lines,
-	                 const ImmovableDescr& immovable);
+	                 ImmovableDescr& immovable);
 
 	~ImmovableProgram() {
 	}

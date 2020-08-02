@@ -81,7 +81,7 @@ Command Types
 
 ImmovableProgram::ImmovableProgram(const std::string& init_name,
                                    const std::vector<std::string>& lines,
-                                   const ImmovableDescr& immovable)
+                                   ImmovableDescr& immovable)
    : MapObjectProgram(init_name) {
 	for (const std::string& line : lines) {
 		if (line.empty()) {
@@ -222,7 +222,7 @@ parameters are given, the immovable is removed and no other transformation will 
 ``success`` is specified, there's a probability that the transformation will be skipped.
 */
 ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments,
-                                             const ImmovableDescr& descr) {
+                                             ImmovableDescr& descr) {
 	if (arguments.empty() || arguments.size() > 2) {
 		throw GameDataError("Usage: [bob:]name [success:chance]");
 	}
@@ -263,6 +263,12 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 		}
 		if (type_name_ == descr.name()) {
 			throw GameDataError("illegal transformation to the same type");
+		}
+		// Register target at ImmovableDescr
+		if (bob_) {
+			descr.becomes_.insert(std::make_pair(MapObjectType::BOB, type_name_));
+		} else {
+			descr.becomes_.insert(std::make_pair(MapObjectType::IMMOVABLE, type_name_));
 		}
 	} catch (const WException& e) {
 		throw GameDataError("transform: %s", e.what());
@@ -311,8 +317,7 @@ an immovable of the given name. The chance that this program step succeeds depen
 immovable's terrain affinity matches the terrains it grows on. If the growth fails, the next program
 step is triggered. This command may be used only for immovables with a terrain affinity.
 */
-ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments,
-                                   const ImmovableDescr& descr) {
+ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments, ImmovableDescr& descr) {
 	if (arguments.size() != 1) {
 		throw GameDataError("Usage: grow=<immovable name>");
 	}
@@ -327,6 +332,8 @@ ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments,
 	// TODO(GunChleoc): If would be nice to check if target exists, but we can't guarantee the load
 	// order. Maybe in postload() one day.
 	type_name_ = arguments.front();
+	// Register target at ImmovableDescr
+	descr.becomes_.insert(std::make_pair(MapObjectType::IMMOVABLE, type_name_));
 }
 
 void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const {
