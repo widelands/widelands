@@ -223,7 +223,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      /** TRANSLATORS: This refers to to zooming with the scrollwheel.*/
      ctrl_zoom_(&box_game_, Vector2i::zero(), _("Zoom only when Ctrl is pressed")),
      game_clock_(&box_game_, Vector2i::zero(), _("Display game time in the top left corner")),
-     numpad_diagonalscrolling_(&box_game_, Vector2i::zero(), _("Allow diagonal scrolling with the numeric keypad")),
+     numpad_diagonalscrolling_(
+        &box_game_, Vector2i::zero(), _("Allow diagonal scrolling with the numeric keypad")),
      os_(opt) {
 
 	// Buttons
