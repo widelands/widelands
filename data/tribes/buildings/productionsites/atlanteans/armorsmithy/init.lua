@@ -53,10 +53,10 @@ dirname = path.dirname(__file__)
 --        *Mandatory*. The production site programs that define what preconditions
 --        a building needs to fulfil in order to produce its wares and how it's
 --        done, including any animations and sounds played.
---        See :doc:`productionsite_program`.
+--        See :ref:`productionsite_programs`.
 --
 --    **indicate_workarea_overlaps**
---        *Optional*. The names of other productionsites whose workareas should be highlighted
+--        *DEPRECATED*. The names of other productionsites whose workareas should be highlighted
 --        if theirs overlap with this building’s workarea while the player is placing a
 --        building of this type. The overlaps can be shown either as desired (`true`), if the
 --        proximity of these buildings is favourable, or as negative (`false`), if they influence

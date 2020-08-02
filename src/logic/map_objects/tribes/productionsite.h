@@ -103,6 +103,61 @@ public:
 	const Output& output_worker_types() const {
 		return output_worker_types_;
 	}
+	/// Map objects that are collected from the map by this production site according to attribute
+	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
+	collected_attributes() const {
+		return collected_attributes_;
+	}
+	/// Map objects that are placed on the map by this production site according to attribute
+	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
+	created_attributes() const {
+		return created_attributes_;
+	}
+
+	/// We only need the attributes during tribes initialization
+	void clear_attributes();
+
+	/// The resources that this production site needs to collect from the map
+	const std::set<std::string>& collected_resources() const {
+		return collected_resources_;
+	}
+	/// The resources that this production site will place on the map
+	const std::set<std::string>& created_resources() const {
+		return created_resources_;
+	}
+	/// The bobs (critters) that this production site needs to collect from the map
+	const std::set<std::string>& collected_bobs() const {
+		return collected_bobs_;
+	}
+	/// Set that this production site needs to collect the given bob from the map
+	void add_collected_bob(const std::string& bobname) {
+		collected_bobs_.insert(bobname);
+	}
+	/// The bobs (critters or workers) that this production site will place on the map
+	const std::set<std::string>& created_bobs() const {
+		return created_bobs_;
+	}
+	/// Set that this production site will place the given bob on the map
+	void add_created_bob(const std::string& bobname) {
+		created_bobs_.insert(bobname);
+	}
+	/// The immovables that this production site needs to collect from the map
+	const std::set<std::string>& collected_immovables() const {
+		return collected_immovables_;
+	}
+	/// Set that this production site needs to collect the given immovable from the map
+	void add_collected_immovable(const std::string& immovablename) {
+		collected_immovables_.insert(immovablename);
+	}
+	/// The immovables that this production site will place on the map
+	const std::set<std::string>& created_immovables() const {
+		return created_immovables_;
+	}
+	/// Set that this production site will place the given immovable on the map
+	void add_created_immovable(const std::string& immovablename) {
+		created_immovables_.insert(immovablename);
+	}
+
 	const ProductionProgram* get_program(const std::string&) const;
 	using Programs = std::map<std::string, std::unique_ptr<ProductionProgram>>;
 	const Programs& programs() const {
@@ -129,18 +184,35 @@ public:
 		return out_of_resource_productivity_threshold_;
 	}
 
-	bool highlight_overlapping_workarea_for(const std::string& n, bool* positive) const {
-		const auto it = highlight_overlapping_workarea_for_.find(n);
-		if (it == highlight_overlapping_workarea_for_.end()) {
-			return false;
-		} else {
-			*positive = it->second;
-			return true;
-		}
+	/// Returns 'true' if an overlap highlighting relationship has been set. Whether an overlap is
+	/// wanted or not is written into 'positive'.
+	bool highlight_overlapping_workarea_for(const std::string& productionsite, bool* positive) const;
+	/// Set that this production site competes with the given 'productionsite' for map resources.
+	void add_competing_productionsite(const std::string& productionsite);
+	/// Set that this production site creates map resources or objects that the given
+	/// 'productionsite' needs.
+	void add_supports_productionsite(const std::string& productionsite);
+	/// Set that the given 'productionsite' creates map resources or objects that this production
+	/// site needs.
+	void add_supported_by_productionsite(const std::string& productionsite);
+	/// Returns whether this production site competes with the given 'productionsite' for map
+	/// resources.
+	bool competes_with_productionsite(const std::string& productionsite) const;
+	/// Returns whether this production site creates map resources or objects that the given
+	/// 'productionsite' needs.
+	bool supports_productionsite(const std::string& productionsite) const;
+	/// Returns whether the given 'productionsite' creates map resources or objects that this
+	/// production site needs.
+	bool is_supported_by_productionsite(const std::string& productionsite) const;
+	/// Returns the production sites that need a map resource or object that this production site
+	/// will place on the map.
+	std::set<std::string> supported_productionsites() const {
+		return supported_productionsites_;
 	}
-
-	const std::map<std::string, bool>& get_highlight_overlapping_workarea_for() const {
-		return highlight_overlapping_workarea_for_;
+	/// Returns whether this production site needs map resources or objects that are created by a
+	/// different production site.
+	bool needs_supporters() const {
+		return !supported_by_productionsites_.empty();
 	}
 
 protected:
@@ -151,6 +223,26 @@ protected:
 		output_worker_types_.insert(index);
 	}
 
+	/// Set that this production site needs to collect map objects with the given attribute from the
+	/// map
+	void add_collected_attribute(
+	   std::pair<MapObjectType, MapObjectDescr::AttributeIndex> attribute_info) {
+		collected_attributes_.insert(attribute_info);
+	}
+	/// Set that this production site will place map objects with the given attribute on the map
+	void
+	add_created_attribute(std::pair<MapObjectType, MapObjectDescr::AttributeIndex> attribute_info) {
+		created_attributes_.insert(attribute_info);
+	}
+	/// Set that this production site needs to collect the given resource from the map
+	void add_collected_resource(const std::string& resource) {
+		collected_resources_.insert(resource);
+	}
+	/// Set that this production site will place the given resource on the map
+	void add_created_resource(const std::string& resource) {
+		created_resources_.insert(resource);
+	}
+
 private:
 	std::unique_ptr<std::set<DescriptionIndex>> ware_demand_checks_;
 	std::unique_ptr<std::set<DescriptionIndex>> worker_demand_checks_;
@@ -159,13 +251,23 @@ private:
 	BillOfMaterials input_workers_;
 	Output output_ware_types_;
 	Output output_worker_types_;
+	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> collected_attributes_;
+	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> created_attributes_;
+	std::set<std::string> collected_resources_;
+	std::set<std::string> created_resources_;
+	std::set<std::string> collected_bobs_;
+	std::set<std::string> created_bobs_;
+	std::set<std::string> collected_immovables_;
+	std::set<std::string> created_immovables_;
 	Programs programs_;
 	std::string out_of_resource_title_;
 	std::string out_of_resource_heading_;
 	std::string out_of_resource_message_;
 	std::string resource_not_needed_message_;
 	int out_of_resource_productivity_threshold_;
-	std::map<std::string, bool> highlight_overlapping_workarea_for_;
+	std::set<std::string> competing_productionsites_;
+	std::set<std::string> supported_productionsites_;
+	std::set<std::string> supported_by_productionsites_;
 
 	DISALLOW_COPY_AND_ASSIGN(ProductionSiteDescr);
 };
