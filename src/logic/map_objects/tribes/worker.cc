@@ -1653,7 +1653,8 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 		}
 	} else {
 		// Check location to make clang-tidy happy
-		throw wexception("MO(%u): location %u has bad type", serial(), location ? location->serial() : 0);
+		throw wexception(
+		   "MO(%u): location %u has bad type", serial(), location ? location->serial() : 0);
 	}
 }
 

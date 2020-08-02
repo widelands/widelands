@@ -1560,7 +1560,8 @@ Duration ShippingSchedule::update(Game& game) {
 		assert(closest);
 		if (dist < kNearbyDockMaxDistanceFactor) {
 			// Check for closest to make clang-tidy happy
-			sslog("%s is already near %u\n", ship->get_shipname().c_str(), closest ? closest->serial() : 0);
+			sslog("%s is already near %u\n", ship->get_shipname().c_str(),
+			      closest ? closest->serial() : 0);
 		} else {
 			plans_[ship].push_back(SchedulingState(closest, false, dist));
 			ship->set_destination(game, closest);

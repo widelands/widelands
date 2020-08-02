@@ -227,7 +227,8 @@ void Box::layout() {
 		if (items_[idx].fillspace) {
 			assert(infspace_count > 0);
 			// Avoid division by 0
-			items_[idx].assigned_var_depth = std::max(0, (max_depths - totaldepth) / std::max(1, infspace_count));
+			items_[idx].assigned_var_depth =
+			   std::max(0, (max_depths - totaldepth) / std::max(1, infspace_count));
 			totaldepth += items_[idx].assigned_var_depth;
 			infspace_count--;
 		}
