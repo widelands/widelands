@@ -44,10 +44,6 @@ tribes:new_productionsite_type {
       prohibited_till = 490
    },
 
-   indicate_workarea_overlaps = {
-      frisians_fishers_house = false,
-   },
-
    working_positions = {
       frisians_fisher = 1
    },

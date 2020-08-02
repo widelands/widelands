@@ -54,12 +54,6 @@ tribes:new_productionsite_type {
       { name = "log", amount = 6 },
    },
 
-   indicate_workarea_overlaps = {
-      frisians_aqua_farm = false,
-      frisians_charcoal_burners_house = false,
-      frisians_clay_pit = true,
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

@@ -19,10 +19,6 @@ tribes:new_productionsite_type {
       planks = 2
    },
 
-   indicate_workarea_overlaps = {
-      atlanteans_ironmine = false,
-   },
-
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
