@@ -56,7 +56,7 @@ void FileViewPanel::add_tab(const std::string& lua_script) {
 	UI::MultilineTextarea* textarea = new UI::MultilineTextarea(
 	   boxes_.at(index).get(), 0, 0, Scrollbar::kSize, 0, panel_style_, content);
 
-	textviews_.push_back(std::unique_ptr<UI::MultilineTextarea>(std::move(textarea)));
+	textviews_.push_back(std::unique_ptr<UI::MultilineTextarea>(textarea));
 	add((boost::format("about_%" PRIuS) % index).str(), title, boxes_.at(index).get(), "");
 
 	assert(boxes_.size() == textviews_.size());

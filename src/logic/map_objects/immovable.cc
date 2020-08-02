@@ -158,7 +158,7 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 		throw GameDataError("Tribe attributes need to be defined in 'register.lua' now");
 	}
 	if (!attributes.empty()) {
-		add_attributes(attributes, {MapObject::Attribute::RESI});
+		add_attributes(attributes);
 
 		for (const std::string& attribute : attributes) {
 			if (attribute == "resi") {
@@ -166,13 +166,22 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 				if (icon_filename().empty()) {
 					throw GameDataError("Resource indicator %s has no menu icon", name().c_str());
 				}
-			} else if (attribute == "tree") {
-				// Old trees get an extra species name so we can use it in help lists.
-				if (!table.has_key("species")) {
-					throw wexception(
-					   "Immovable '%s' with type 'tree' must define a species", name().c_str());
-				}
-				species_ = table.get_string("species");
+				break;
+			}
+		}
+
+		// Old trees get an extra species name so we can use it in help lists.
+		bool is_tree = false;
+		for (const std::string& attribute : attributes) {
+			if (attribute == "tree") {
+				is_tree = true;
+				break;
+			}
+		}
+		if (is_tree) {
+			if (!table.has_key("species")) {
+				throw wexception(
+				   "Immovable '%s' with type 'tree' must define a species", name().c_str());
 			}
 		}
 	}

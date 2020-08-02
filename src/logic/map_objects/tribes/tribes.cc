@@ -61,9 +61,6 @@ Tribes::Tribes(LuaInterface* lua)
 	description_manager_->register_directory("tribes", g_fs, false);
 }
 
-Tribes::~Tribes() {
-}
-
 size_t Tribes::nrbuildings() const {
 	return buildings_->size();
 }

@@ -736,7 +736,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		}
 
 		// now modifying max_fill of armors and weapons
-		for (std::string pattern : armors_and_weapons) {
+		for (const std::string& pattern : armors_and_weapons) {
 
 			if (tribe_->get_ware_descr(queue->get_index())->name().find(pattern) !=
 			    std::string::npos) {

@@ -61,7 +61,7 @@ AbstractWaresDisplay::AbstractWaresDisplay(
      hgap_(hgap),
      vgap_(vgap),
      selection_anchor_(Widelands::INVALID_INDEX),
-     callback_function_(callback_function),
+     callback_function_(std::move(callback_function)),
      min_free_vertical_space_(290) {
 	for (const Widelands::DescriptionIndex& index : indices_) {
 		selected_.insert(std::make_pair(index, false));

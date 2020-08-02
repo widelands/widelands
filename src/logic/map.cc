@@ -83,6 +83,9 @@ bool FindCarnivores::accept(Bob* b) const {
 	}
 	return false;
 }
+bool FindCritter::accept(Bob* b) const {
+	return is_a(Critter, b);
+}
 bool FindBobByName::accept(Bob* b) const {
 	assert(b);
 	return b->descr().name() == name_;

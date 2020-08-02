@@ -47,11 +47,6 @@ tribes:new_productionsite_type {
       },
    },
 
-   indicate_workarea_overlaps = {
-      atlanteans_fishers_house = true,
-      atlanteans_fishbreeders_house = false,
-   },
-
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
       title = _"No Fish",

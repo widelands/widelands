@@ -1575,7 +1575,7 @@ void GameHost::write_setting_all_users(SendPacket& packet) {
  *
  * \returns true if the data was written, else false
  */
-bool GameHost::write_map_transfer_info(SendPacket& packet, std::string mapfilename) {
+bool GameHost::write_map_transfer_info(SendPacket& packet, const std::string& mapfilename) {
 	// TODO(unknown): not yet able to handle directory type maps / savegames
 	if (g_fs->is_directory(mapfilename)) {
 		log("Map/Save is a directory! No way for making it available a.t.m.!\n");

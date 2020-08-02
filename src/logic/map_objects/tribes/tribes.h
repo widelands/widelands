@@ -40,7 +40,7 @@ namespace Widelands {
 class Tribes {
 public:
 	Tribes(LuaInterface* lua);
-	~Tribes();
+	~Tribes() = default;
 
 	size_t nrbuildings() const;
 	size_t nrtribes() const;
