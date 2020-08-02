@@ -654,8 +654,8 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 	// First setting of military numbers, they go directly to persistent data
 	for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kMagicNumbersSize; ++i) {
 		// Child inherits DNA with probability 1/kSecondParentProbability from main parent
-		DnaParent dna_donor = ((std::rand() % kSecondParentProbability) > 0) ?
-		                         DnaParent::kPrimary :  // NOLINT
+		DnaParent dna_donor = ((std::rand() % kSecondParentProbability) > 0) ?  // NOLINT
+		                         DnaParent::kPrimary :
 		                         DnaParent::kSecondary;
 		if (i == kMutationRatePosition) {  // Overwriting
 			dna_donor = DnaParent::kPrimary;
@@ -759,8 +759,8 @@ void ManagementData::mutate(const uint8_t pn) {
 	}
 
 	// Wildcard for ai trainingmode
-	if (ai_training_mode_ && std::rand() % 8 == 0 &&
-	    ai_type == Widelands::AiType::kNormal) {  // NOLINT
+	if (ai_training_mode_ && std::rand() % 8 == 0 &&  // NOLINT
+	    ai_type == Widelands::AiType::kNormal) {
 		probability /= 3;
 		preferred_numbers_count = 5;
 		wild_card = true;
