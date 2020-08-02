@@ -38,9 +38,6 @@ tribes:new_productionsite_type {
       amazons_liana_cutter = 1
    },
 
-   outputs = {
-      "liana"
-   },
 
    programs = {
       work = {

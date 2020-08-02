@@ -51,9 +51,6 @@ tribes:new_productionsite_type {
       { name = "ration", amount = 3 },
       { name = "water", amount = 10 }
    },
-   outputs = {
-      "gold_dust"
-   },
 
    programs = {
       work = {

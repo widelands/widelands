@@ -32,10 +32,6 @@ tribes:new_productionsite_type {
       amazons_woodcutter = 1
    },
 
-   outputs = {
-      "log"
-   },
-
    indicate_workarea_overlaps = {
       amazons_junglepreservers_hut = true,
       amazons_woodcutters_hut = false,

@@ -36,11 +36,6 @@ tribes:new_productionsite_type {
       amazons_woodcutter_master = 1
    },
 
-   outputs = {
-      "rubber",
-      "balsa",
-   },
-
    indicate_workarea_overlaps = {
       amazons_rare_tree_plantation = true,
    },

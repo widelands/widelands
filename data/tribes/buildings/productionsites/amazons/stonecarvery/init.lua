@@ -53,21 +53,6 @@ tribes:new_productionsite_type {
       { name = "ironwood", amount = 5 },
    },
 
-   outputs = {
-      "shovel",
-      "felling_ax",
-      "pick",
-      "machete",
-      "spear_wooden",
-      "kitchen_tools",
-      "hammer",
-      "chisel",
-      "needles",
-      "stonebowl",
-      "spear_stone_tipped",
-      "spear_hardened",
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

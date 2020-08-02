@@ -63,9 +63,6 @@ tribes:new_trainingsite_type {
       { name = "spear_stone_tipped", amount = 3 },
       { name = "spear_hardened", amount = 3 },
    },
-   outputs = {
-      "amazons_soldier",
-   },
 
    ["soldier attack"] = {
       min_level = 0,

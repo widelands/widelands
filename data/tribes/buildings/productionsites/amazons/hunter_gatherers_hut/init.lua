@@ -40,11 +40,6 @@ tribes:new_productionsite_type {
       amazons_hunter_gatherer = 1
    },
 
-   outputs = {
-      "fish",
-      "meat"
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...

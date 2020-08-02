@@ -47,9 +47,6 @@ tribes:new_productionsite_type {
       { name = "cassavaroot", amount = 4 },
       { name = "water", amount = 8 },
    },
-   outputs = {
-      "amazons_bread",
-   },
 
    programs = {
       work = {

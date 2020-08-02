@@ -34,10 +34,6 @@ tribes:new_productionsite_type {
       amazons_stonecutters_hut = false,
    },
 
-   outputs = {
-      "granite"
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

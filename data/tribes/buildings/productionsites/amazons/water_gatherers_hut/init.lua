@@ -33,10 +33,6 @@ tribes:new_productionsite_type {
       amazons_carrier = 1
    },
 
-   outputs = {
-      "water"
-   },
-
    indicate_workarea_overlaps = {
    },
 

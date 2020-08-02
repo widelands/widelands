@@ -48,9 +48,6 @@ tribes:new_productionsite_type {
       { name = "cocoa_beans", amount = 4 },
       { name = "water", amount = 8 },
    },
-   outputs = {
-      "chocolate"
-   },
 
    programs = {
       work = {

@@ -68,9 +68,6 @@ tribes:new_trainingsite_type {
       { name = "vest_padded", amount = 2 },
       { name = "protector_padded", amount = 2 },
    },
-   outputs = {
-      "amazons_soldier",
-   },
 
    ["soldier evade"] = {
       min_level = 0,

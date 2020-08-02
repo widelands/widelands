@@ -53,9 +53,6 @@ tribes:new_productionsite_type {
       { name = "meat", amount = 3 },
       { name = "amazons_carrier", amount = 8 }
    },
-   outputs = {
-      "amazons_soldier",
-   },
 
    programs = {
       work = {

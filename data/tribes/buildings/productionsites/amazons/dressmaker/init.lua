@@ -51,17 +51,6 @@ tribes:new_productionsite_type {
       { name = "rope", amount = 6 },
       { name = "gold", amount = 3 },
    },
-   outputs = {
-      "tunic",
-      "armor_wooden",
-      "helmet_wooden",
-      "warriors_coat",
-      "boots_sturdy",
-      "boots_swift",
-      "boots_hero",
-      "vest_padded",
-      "protector_padded",
-   },
 
    programs = {
       work = {

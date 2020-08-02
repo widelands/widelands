@@ -49,9 +49,6 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "ration", amount = 8 }
    },
-   outputs = {
-      "granite"
-   },
 
    programs = {
       work = {

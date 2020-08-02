@@ -52,9 +52,6 @@ tribes:new_productionsite_type {
       { name = "charcoal", amount = 8 },
       { name = "gold_dust", amount = 8 },
    },
-   outputs = {
-      "gold"
-   },
 
    programs = {
       work = {

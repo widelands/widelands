@@ -43,9 +43,6 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "log", amount = 8 }
    },
-   outputs = {
-      "charcoal"
-   },
 
    programs = {
       work = {

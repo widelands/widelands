@@ -50,10 +50,6 @@ tribes:new_productionsite_type {
       amazons_cassava_farmer = 1
    },
 
-   outputs = {
-      "cassavaroot"
-   },
-
    indicate_workarea_overlaps = {
       amazons_junglepreservers_hut = false,
       amazons_rare_tree_plantation = false,
