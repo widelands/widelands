@@ -44,7 +44,6 @@ private:
 	 * */
 	enum class ShipFilterStatus {
 		kIdle,
-		kRoaming,
 		kShipping,
 		kExpeditionWaiting,
 		kExpeditionScouting,
@@ -137,7 +136,6 @@ private:
 	// Buttons for ship states
 	UI::Box filter_box_;
 	UI::Button idle_btn_;
-	UI::Button roaming_btn_;
 	UI::Button waiting_btn_;
 	UI::Button scouting_btn_;
 	UI::Button portspace_btn_;
