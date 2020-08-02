@@ -168,7 +168,7 @@ void do_draw_minimap(Texture* texture,
 			Widelands::MapIndex i = Widelands::Map::get_index(f, mapwidth);
 			move_r(mapwidth, f, i);
 
-			Widelands::SeeUnseeNode vision;
+			Widelands::SeeUnseeNode vision = Widelands::SeeUnseeNode::kUnexplore;
 			Widelands::PlayerNumber owner = 0;
 			if (player == nullptr || player->see_all()) {
 				// This player has omnivision - show the field like it is in reality.
