@@ -94,7 +94,7 @@ void StyleManager::init() {
 
 	LuaInterface lua;
 	std::unique_ptr<LuaTable> table(
-	   lua.run_script((boost::format("%s%s") % kTemplateDir % "init.lua").str()));
+	   lua.run_script((boost::format("%1%init.lua") % kTemplateDir).str()));
 
 	// Buttons
 	std::unique_ptr<LuaTable> element_table = table->get_table("buttons");
